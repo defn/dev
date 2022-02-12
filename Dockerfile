@@ -40,4 +40,9 @@ ENV LC_ALL en_US.UTF-8
 
 COPY --chown=ubuntu:ubuntu . .
 
+RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.9.0
+RUN etc/env.sh asdf plugin-add cue
+RUN etc/env.sh asdf plugin-add shellcheck
+RUN etc/env.sh asdf install
+
 USER root
