@@ -13,11 +13,10 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     wget apt-transport-https software-properties-common \
     openssh-server tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip jq xz-utils \
-    sudo git vim less \
-    gpg gpg-agent dirmngr scdaemon pass pass-extension-opt git-crypt oathtool \
+    sudo git vim less tmux screen \
+    gpg gpg-agent dirmngr scdaemon pass pass-extension-opt git-crypt oathtool libusb-1.0-0 \
     build-essential m4 make \
     libssl-dev zlib1g-dev libbz2-dev libsqlite3-dev libncurses5-dev libncursesw5-dev libffi-dev liblzma-dev libreadline-dev \
-    tmux gnupg libusb-1.0-0 \
     && rm -f /usr/bin/gs
 
 RUN echo GatewayPorts clientspecified >> /etc/ssh/sshd_config
