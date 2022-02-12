@@ -42,12 +42,14 @@ ENV LC_ALL en_US.UTF-8
 
 COPY --chown=ubuntu:ubuntu . .
 
-RUN pip install --user pipx
-RUN etc/env.sh pipx install pre-commit
-
 RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.9.0
 RUN etc/env.sh asdf plugin-add cue
 RUN etc/env.sh asdf plugin-add shellcheck
 RUN etc/env.sh asdf install
+
+RUN pip install --user pipx
+RUN etc/env.sh pipx install pre-commit
+RUN etc/env.sh pre-commit install
+RUN etc/env.sh pre-commit run --all
 
 USER root
