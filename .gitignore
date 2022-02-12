@@ -1,1 +1,19 @@
-home
+# external
+.password-store
+.ssh
+.asdf
+tmp
+work
+
+# working files
+.bash_history
+.viminfo
+.vscode
+.python_history
+.local
+.cache
+.npm
+.docker
+.tilt-dev
+.vscode-server
+.wget-hsts
