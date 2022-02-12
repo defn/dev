@@ -8,6 +8,7 @@ work
 # working files
 .bash_history
 .viminfo
+.vim/plugged
 .vscode
 .python_history
 .local
