@@ -2,6 +2,10 @@ Setup ssh key in `home/.ssh/authorized_keys`
 
 Run tilt `tilt up`
 
+Copy ssh, gnupg, and password-store files to volume: `docker-compose cp home/. sshd:/mnt/home/.`
+
+Restart ssh container
+
 Configure ssh:
 
 ```

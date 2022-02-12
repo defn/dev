@@ -6,6 +6,9 @@ services:
     ports:
       - 2222:2222
     volumes:
-      - ./home:/mnt/home
+      - home:/mnt/home
     entrypoint:
       - /home/ubuntu/etc/service
+
+volumes:
+  home:
