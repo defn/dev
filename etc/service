@@ -12,6 +12,8 @@ function main {
   install -m 0600 -o ubuntu -g ubuntu /mnt/home/.gnupg/trustdb.gpg /home/ubuntu/.gnupg/
   install -m 0600 -o ubuntu -g ubuntu /mnt/home/.gnupg/pubring.kbx /home/ubuntu/.gnupg/
 
+  ln -nfs /mnt/home/.password-store /home/ubuntu/
+
   exec /usr/sbin/sshd -D -o UseDNS=no -o UsePAM=yes -o PasswordAuthentication=no -o Port=2222 -e
 }
 
