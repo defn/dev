@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
 function main {
-  set -x
+  set -exfu
 
   install -d -m 0700 -o root -g root /run/sshd
+
+  install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu/.ssh
+  install -m 0600 -o ubuntu -g ubuntu /mnt/home/.ssh/authorized_keys /home/ubuntu/.ssh/authorized_keys
+
   exec /usr/sbin/sshd -D -o UseDNS=no -o UsePAM=yes -o PasswordAuthentication=no -o Port=2222 -e
 }
 

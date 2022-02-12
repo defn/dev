@@ -5,5 +5,7 @@ services:
     image: defn/dev
     ports:
       - 2222:2222
+    volumes:
+      - ./home:/mnt/home
     entrypoint:
       - /home/ubuntu/etc/service
