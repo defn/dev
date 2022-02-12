@@ -42,6 +42,8 @@ ENV LC_ALL en_US.UTF-8
 
 COPY --chown=ubuntu:ubuntu . .
 
+RUN echo yes | vim +PlugInstall +qall
+
 RUN if ! test -d .git; then git clone https://github.com/defn/dev dev; mv dev/.git .; rm -rf dev; fi
 
 RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.9.0
