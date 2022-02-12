@@ -3,6 +3,7 @@
 function main {
   set -x
 
+  install -d -m 0700 -o root -g root /run/sshd
   exec /usr/sbin/sshd -D -o UseDNS=no -o UsePAM=yes -o PasswordAuthentication=no -o Port=2222 -e
 }
 
