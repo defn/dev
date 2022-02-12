@@ -14,11 +14,13 @@ RUN apt-get update \
     wget apt-transport-https software-properties-common \
     openssh-server tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip jq xz-utils \
     sudo git vim less tmux screen \
+    python3-pip python3-venv python-is-python3 \
     gpg gpg-agent dirmngr scdaemon pass pass-extension-otp git-crypt oathtool libusb-1.0-0 \
     && rm -f /usr/bin/gs
 
 RUN echo GatewayPorts clientspecified >> /etc/ssh/sshd_config
 RUN echo StreamLocalBindUnlink yes >> /etc/ssh/sshd_config
+RUN mkdir /run/sshd
 
 RUN ln -sf /usr/share/zoneinfo/UTC /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata \
@@ -39,6 +41,9 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 COPY --chown=ubuntu:ubuntu . .
+
+RUN pip install --user pipx
+RUN etc/env.sh pipx install pre-commit
 
 RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.9.0
 RUN etc/env.sh asdf plugin-add cue

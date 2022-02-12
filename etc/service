@@ -3,8 +3,6 @@
 function main {
   set -exfu
 
-  install -d -m 0700 -o root -g root /run/sshd
-
   if [[ -d /mnt/home/.ssh ]]; then
   install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu/.ssh
   install -m 0600 -o ubuntu -g ubuntu /mnt/home/.ssh/authorized_keys /home/ubuntu/.ssh/
@@ -15,7 +13,6 @@ function main {
   install -m 0600 -o ubuntu -g ubuntu /mnt/home/.gnupg/trustdb.gpg /home/ubuntu/.gnupg/
   install -m 0600 -o ubuntu -g ubuntu /mnt/home/.gnupg/pubring.kbx /home/ubuntu/.gnupg/
   fi
-
 
   ln -nfs /mnt/home/.password-store /home/ubuntu/
 
