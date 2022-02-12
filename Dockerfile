@@ -13,7 +13,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     wget apt-transport-https software-properties-common \
     openssh-server tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip jq xz-utils \
-    sudo git vim less tmux screen \
+    sudo git vim less \
     python3-pip python3-venv python-is-python3 \
     gpg gpg-agent dirmngr scdaemon pass pass-extension-otp git-crypt oathtool libusb-1.0-0 \
     && rm -f /usr/bin/gs
