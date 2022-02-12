@@ -23,3 +23,8 @@ function pca {
 
 # pipx
 PATH="$HOME/.local/bin:$PATH"
+
+# vscode
+if [[ -n "${VSCODE_GIT_IPC_HANDLE=:-}" ]]; then
+	export VISUAL="code --wait"
+fi
