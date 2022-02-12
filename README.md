@@ -17,3 +17,5 @@ Host dev
 ```
 
 ssh to container `ssh dev`
+
+vscode to container `code --remote ssh-remote+dev /home/ubuntu`
