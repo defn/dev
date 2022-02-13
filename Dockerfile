@@ -55,13 +55,13 @@ RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
 RUN pip install --user pipx
 RUN /home/ubuntu/.local/bin/pipx install pre-commit
 
-COPY --chown=ubuntu:ubuntu .git .git
-COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
-RUN /home/ubuntu/.local/bin/pre-commit install
-
 COPY --chown=ubuntu:ubuntu .vim .vim
 COPY --chown=ubuntu:ubuntu .vimrc .
 RUN echo yes | vim +PlugInstall +qall
+
+COPY --chown=ubuntu:ubuntu .git .git
+COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
+RUN /home/ubuntu/.local/bin/pre-commit install
 
 COPY --chown=ubuntu:ubuntu . .
 RUN chmod 0700 .gnupg
