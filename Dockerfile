@@ -58,7 +58,6 @@ RUN /home/ubuntu/.local/bin/pipx install pre-commit
 COPY --chown=ubuntu:ubuntu .git .git
 COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
 RUN /home/ubuntu/.local/bin/pre-commit install
-RUN /home/ubuntu/.local/bin/pre-commit run --all
 
 COPY --chown=ubuntu:ubuntu .vim .vim
 COPY --chown=ubuntu:ubuntu .vimrc .
@@ -67,9 +66,6 @@ RUN echo yes | vim +PlugInstall +qall
 COPY --chown=ubuntu:ubuntu . .
 RUN chmod 0700 .gnupg
 RUN git remote rm origin && git remote add origin https://github.com/defn/dev && git fetch && git branch -u origin/main
-
-RUN /home/ubuntu/.local/bin/pre-commit install
-RUN etc/env.sh pre-commit run --all
 
 RUN mkdir -p ~/.docker && echo '{"credsStore": "pass"}' > ~/.docker/config.json
 
