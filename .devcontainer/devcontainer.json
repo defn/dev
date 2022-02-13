@@ -1,0 +1,7 @@
+{
+  "build": { "dockerfile": "Dockerfile" },
+  "remoteUser": "ubuntu",
+  "mounts": [
+    "source=${localEnv:HOME}/.password-store,target=/home/ubuntu/.password-store,type=bind,consistency=cached"
+  ]
+}

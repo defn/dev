@@ -60,4 +60,6 @@ RUN etc/env.sh pre-commit run --all
 
 RUN echo yes | vim +PlugInstall +qall
 
+RUN chmod 0700 .gnupg
+
 USER root
