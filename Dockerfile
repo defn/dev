@@ -40,26 +40,23 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
-COPY --chown=ubuntu:ubuntu . .
-
 RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
-RUN if ! test -d .git; then \
-    git clone https://github.com/defn/dev dev; mv dev/.git .; rm -rf dev; else \
-    git remote rm origin && git remote add origin https://github.com/defn/dev && git fetch && git branch -u origin/main; fi
-RUN git pull
 
+COPY --chown=ubuntu:ubuntu .tool-versions .
 RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.9.0
-RUN etc/env.sh asdf plugin-add cue
-RUN etc/env.sh asdf plugin-add shellcheck
-RUN etc/env.sh asdf install
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add cue'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shellcheck'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
 
 RUN pip install --user pipx
-RUN etc/env.sh pipx install pre-commit
+RUN /home/ubuntu/.local/bin/pipx install pre-commit
+
+COPY --chown=ubuntu:ubuntu . .
+RUN chmod 0700 .gnupg
+RUN git remote rm origin && git remote add origin https://github.com/defn/dev && git fetch && git branch -u origin/main
 RUN etc/env.sh pre-commit install
 RUN etc/env.sh pre-commit run --all
 
 RUN echo yes | vim +PlugInstall +qall
-
-RUN chmod 0700 .gnupg
 
 USER root
