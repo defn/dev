@@ -1,2 +1,3 @@
 shellcheck 0.8.0
 cue 0.4.2
+kubectl 1.22.6

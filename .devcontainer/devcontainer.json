@@ -2,7 +2,8 @@
   "build": { "dockerfile": "Dockerfile" },
   "remoteUser": "ubuntu",
   "mounts": [
-    "source=${localEnv:HOME}/.password-store,target=/home/ubuntu/.password-store,type=bind,consistency=cached"
+    "source=${localEnv:HOME}/.password-store,target=/home/ubuntu/.password-store,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/.kube,target=/home/ubuntu/.kube,type=bind,consistency=cached"
   ],
   "runArgs": ["-v", "/var/run/docker.sock:/var/run/docker.sock"],
   "postStartCommand": "sudo chgrp ubuntu /var/run/docker.sock; sudo chown 0770 /var/run/docker.sock; cd; pre-commit run --all"

@@ -52,6 +52,7 @@ COPY --chown=ubuntu:ubuntu .tool-versions .
 RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.9.0
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add cue'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shellcheck'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add kubectl'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
 
 RUN pip install --user pipx
