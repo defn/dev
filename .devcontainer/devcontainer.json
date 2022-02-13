@@ -1,5 +1,0 @@
-{
-  "image": "defn/dev",
-  "exstensions": ["ms-python.python"],
-  "forwardPorts": [2222]
-}
