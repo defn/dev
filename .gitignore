@@ -19,3 +19,4 @@ work
 .vscode-server
 .wget-hsts
 .gitconfig
+.kube
