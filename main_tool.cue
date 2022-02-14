@@ -18,12 +18,12 @@ arg9: string @tag(arg9)
 
 command: build: {
 	dockerBuild: exec.Run & {
-		cmd: ["docker", "build", "-t", "defn/dev", "."]
+		cmd: ["docker", "build", "-t", image, "."]
 	}
 }
 
 command: push: {
 	dockerPush: exec.Run & {
-		cmd: ["docker", "push", "defn/dev"]
+		cmd: ["docker", "push", image]
 	}
 }
