@@ -6,5 +6,5 @@
     "source=${localEnv:HOME}/.kube,target=/home/ubuntu/.kube,type=bind,consistency=cached"
   ],
   "runArgs": ["-v", "/var/run/docker.sock:/var/run/docker.sock"],
-  "postStartCommand": "/home/ubuntu/etc/post-start"
+  "postStartCommand": "/home/ubuntu/etc/hook-start"
 }
