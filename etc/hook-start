@@ -3,6 +3,7 @@
 function main {
     sudo chgrp ubuntu /var/run/docker.sock
     sudo chmod 0770 /var/run/docker.sock
+    sudo chown ubuntu:ubuntu /workspace
 
     cd || exit 1
     pre-commit run --all
