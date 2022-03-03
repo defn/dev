@@ -12,7 +12,7 @@ RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
     wget apt-transport-https software-properties-common \
-    openssh-server tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip jq xz-utils \
+    openssh-client tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip jq xz-utils rsync \
     sudo git vim less \
     make docker.io tini \
     python3-pip python3-venv python-is-python3 \
@@ -27,10 +27,6 @@ RUN curl -sSL -o docker-pass.tar.gz https://github.com/docker/docker-credential-
         && tar xvfz docker-pass.tar.gz && rm -f docker-pass.tar.gz && chmod 755 docker-credential-pass && mv docker-credential-pass /usr/local/bin/
 
 RUN echo 20220213 && apt update && apt upgrade -y
-
-RUN echo GatewayPorts clientspecified >> /etc/ssh/sshd_config
-RUN echo StreamLocalBindUnlink yes >> /etc/ssh/sshd_config
-RUN mkdir /run/sshd
 
 RUN ln -sf /usr/share/zoneinfo/UTC /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata \
