@@ -16,6 +16,12 @@ arg7: string @tag(arg7)
 arg8: string @tag(arg8)
 arg9: string @tag(arg9)
 
+command: dev: {
+	dockerBuild: exec.Run & {
+		cmd: ["devcontainer", "open"]
+	}
+}
+
 command: build: {
 	dockerBuild: exec.Run & {
 		cmd: ["docker", "build", "-t", image, "."]
