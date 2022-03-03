@@ -51,6 +51,8 @@ RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shellcheck'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add kubectl'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
 
+RUN sudo curl -sSL -o /usr/local/bin/hof https://github.com/hofstadter-io/hof/releases/download/v0.6.1/hof_0.6.1_Linux_x86_64 && sudo chmod 755 /usr/local/bin/hof
+
 RUN pip install --user pipx
 RUN /home/ubuntu/.local/bin/pipx install pre-commit
 
