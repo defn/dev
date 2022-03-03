@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
 function main {
+    set -x
+
     sudo chgrp ubuntu /var/run/docker.sock
     sudo chmod 0770 /var/run/docker.sock
-    sudo chown ubuntu:ubuntu /workspace
+    sudo chown ubuntu:ubuntu /workspaces
 
     cd || exit 1
     pre-commit run --all
