@@ -1,5 +1,5 @@
 package build
 
-bootConfig: {
+bootDockerConfig: {
 	image: "defn/dev"
 }

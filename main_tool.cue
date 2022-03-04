@@ -19,4 +19,4 @@ bootInput: boot.#BootInput & {
 	arg9: string @tag(arg9)
 }
 
-command: docker.commands & bootConfig & bootInput
+command: docker.commands & bootDockerConfig & bootInput
