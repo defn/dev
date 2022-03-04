@@ -4,6 +4,7 @@
 .asdf
 tmp
 work
+cue.mod/pkg
 
 # working files
 .bash_history

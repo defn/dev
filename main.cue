@@ -1,3 +1,5 @@
 package build
 
-image: "defn/dev"
+bootConfig: {
+	image: "defn/dev"
+}

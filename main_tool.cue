@@ -1,35 +1,21 @@
 package build
 
 import (
-	"tool/exec"
+	"github.com/defn/boot"
 )
 
-cmd:  string @tag(cmd)
-args: string @tag(args)
-arg1: string @tag(arg1)
-arg2: string @tag(arg2)
-arg3: string @tag(arg3)
-arg4: string @tag(arg4)
-arg5: string @tag(arg5)
-arg6: string @tag(arg6)
-arg7: string @tag(arg7)
-arg8: string @tag(arg8)
-arg9: string @tag(arg9)
-
-command: dev: {
-	dockerBuild: exec.Run & {
-		cmd: ["devcontainer", "open"]
-	}
+bootConfig: input: {
+	cmd:  string @tag(cmd)
+	args: string @tag(args)
+	arg1: string @tag(arg1)
+	arg2: string @tag(arg2)
+	arg3: string @tag(arg3)
+	arg4: string @tag(arg4)
+	arg5: string @tag(arg5)
+	arg6: string @tag(arg6)
+	arg7: string @tag(arg7)
+	arg8: string @tag(arg8)
+	arg9: string @tag(arg9)
 }
 
-command: build: {
-	dockerBuild: exec.Run & {
-		cmd: ["docker", "build", "-t", image, "."]
-	}
-}
-
-command: push: {
-	dockerPush: exec.Run & {
-		cmd: ["docker", "push", image]
-	}
-}
+command: boot.c & bootConfig
