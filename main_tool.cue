@@ -2,9 +2,10 @@ package build
 
 import (
 	"github.com/defn/boot"
+	docker "github.com/defn/boot/docker:boot"
 )
 
-bootConfig: input: {
+bootInput: boot.#BootInput & {
 	cmd:  string @tag(cmd)
 	args: string @tag(args)
 	arg1: string @tag(arg1)
@@ -18,4 +19,4 @@ bootConfig: input: {
 	arg9: string @tag(arg9)
 }
 
-command: boot.c & bootConfig
+command: docker.commands & bootConfig & bootInput
