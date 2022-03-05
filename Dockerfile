@@ -46,9 +46,14 @@ RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
 COPY --chown=ubuntu:ubuntu .tool-versions .
 RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.9.0
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add cue'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shellcheck'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add cue'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add kubectl'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add krew'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add k9s'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add kustomize'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add helm'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add k3d'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
 
 RUN sudo curl -sSL -o /usr/local/bin/hof https://github.com/hofstadter-io/hof/releases/download/v0.6.1/hof_0.6.1_Linux_x86_64 && sudo chmod 755 /usr/local/bin/hof
