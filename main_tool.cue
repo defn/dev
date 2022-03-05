@@ -5,7 +5,7 @@ import (
 	"github.com/defn/boot/docker"
 )
 
-#Input: {
+command: {
 	cmd:  string @tag(cmd)
 	args: string @tag(args)
 	arg1: string @tag(arg1)
@@ -17,8 +17,7 @@ import (
 	arg7: string @tag(arg7)
 	arg8: string @tag(arg8)
 	arg9: string @tag(arg9)
-	...
 }
 
-command: #Input & boot.commands & bootContext
-command: #Input & docker.commands & dockerContext
+command: boot.commands & bootContext
+command: docker.commands & dockerContext
