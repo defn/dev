@@ -1,9 +1,5 @@
 package build
 
-import (
-	"github.com/defn/boot/docker"
-)
-
 command: {
 	cmd:  string @tag(cmd)
 	args: string @tag(args)
@@ -18,4 +14,4 @@ command: {
 	arg9: string @tag(arg9)
 }
 
-command: docker.commands & dockerContext
+command: dockerContext
