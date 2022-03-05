@@ -10,6 +10,10 @@ function vi {
 	fi
 }
 
+function k {
+	kubectl "$@"
+}
+
 function pc {
 	pre-commit "$@"
 }
