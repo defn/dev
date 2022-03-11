@@ -2,15 +2,14 @@ package build
 
 import (
 	"github.com/defn/boot/docker"
-	app "github.com/defn/boot/k8s.io/api/apps/v1"
-	core "github.com/defn/boot/k8s.io/api/core/v1"
+	"github.com/defn/boot/k"
 )
 
-a: app.#StatefulSet & {
+a: k.app.#StatefulSet & {
 	metadata: labels: defn: "cool"
 }
 
-n: core.#Namespace & {
+n: k.core.#Namespace & {
 	metadata: labels: defn: "beans"
 }
 
