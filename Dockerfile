@@ -16,7 +16,7 @@ RUN apt-get update \
     sudo git vim less \
     make docker.io tini \
     python3-pip python3-venv python-is-python3 \
-    gpg gpg-agent dirmngr scdaemon pass pass-extension-otp git-crypt oathtool libusb-1.0-0 \
+    gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 \
     && rm -f /usr/bin/gs
 
 RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
@@ -72,7 +72,6 @@ COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
 RUN /home/ubuntu/.local/bin/pre-commit install
 
 COPY --chown=ubuntu:ubuntu . .
-RUN chmod 0700 .gnupg
 RUN git remote rm origin && git remote add origin https://github.com/defn/dev && git fetch && git branch -u origin/main
 
 RUN mkdir -p ~/.docker && echo '{"credsStore": "pass"}' > ~/.docker/config.json
