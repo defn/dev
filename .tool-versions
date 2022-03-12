@@ -1,5 +1,5 @@
 shellcheck 0.8.0
-cue 0.4.1
+cue 0.4.2
 kubectl 1.22.6
 krew 0.4.3
 k9s 0.25.18
