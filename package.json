@@ -1,7 +1,0 @@
-{
-  "devDependencies": {
-    "lint-staged": "^12.3.5",
-    "pre-commit": "^1.2.2"
-  },
-  "precommit.silent": true
-}
