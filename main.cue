@@ -1,18 +1,16 @@
-package build
+package dev
 
 import (
 	"github.com/defn/boot/docker"
-	"github.com/defn/boot/k"
+	"github.com/defn/boot/project"
 )
 
-a: k.app.#StatefulSet & {
-	metadata: labels: defn: "cool"
+#DevContext: {
+	docker.#Docker
+	project.#Project
 }
 
-n: k.core.#Namespace & {
-	metadata: labels: defn: "beans"
-}
-
-dockerContext: docker.#Docker & {
+devContext: #DevContext & {
 	image: "defn/dev"
+	codeowners: ["@jojomomojo", "@amanibhavam"]
 }

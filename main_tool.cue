@@ -1,4 +1,4 @@
-package build
+package dev
 
 command: {
 	cmd:  string @tag(cmd)
@@ -14,4 +14,4 @@ command: {
 	arg9: string @tag(arg9)
 }
 
-command: dockerContext
+command: devContext
