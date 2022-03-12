@@ -80,5 +80,3 @@ RUN mkdir -p ~/.docker && echo '{"credsStore": "pass"}' > ~/.docker/config.json
 COPY etc/c /usr/local/bin/c
 
 RUN cd && etc/env.sh pre-commit run --all
-
-USER root
