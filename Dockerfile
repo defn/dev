@@ -16,8 +16,7 @@ RUN apt-get update \
     sudo git vim less \
     make docker.io tini \
     python3-pip python3-venv python-is-python3 \
-    gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 \
-    && rm -f /usr/bin/gs
+    gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0
 
 RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
 RUN echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu
@@ -32,6 +31,9 @@ RUN ln -sf /usr/share/zoneinfo/UTC /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata \
     && locale-gen en_US.UTF-8 \
     && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+
+RUN rm -f /usr/bin/gs \
+    && ln -nfs /usr/bin/git-crypt /usr/local/bin/
 
 USER ubuntu
 WORKDIR /home/ubuntu
@@ -58,7 +60,6 @@ RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
 
 RUN sudo curl -sSL -o /usr/local/bin/hof https://github.com/hofstadter-io/hof/releases/download/v0.6.1/hof_0.6.1_Linux_x86_64 && sudo chmod 755 /usr/local/bin/hof
 RUN sudo curl -sSL -o /usr/local/bin/powerline https://github.com/justjanne/powerline-go/releases/download/v1.21.0/powerline-go-linux-amd64 && sudo chmod 755 /usr/local/bin/powerline
-
 
 RUN pip install --user pipx
 RUN /home/ubuntu/.local/bin/pipx install pre-commit
