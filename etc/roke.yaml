@@ -1,12 +1,18 @@
-# k3d cluster create --config etc/roke.yaml roke
+# k3d cluster create --config etc/roke.yaml
 apiVersion: k3d.io/v1alpha4
 kind: Simple
+metadata:
+  name: roke
 servers: 1
 agents: 0
 kubeAPI:
   host: roke.defn.ooo
   hostIP: "0.0.0.0"
 image: rancher/k3s:v1.22.6-k3s1
+hostAliases:
+  - ip: 100.101.28.35
+    hostnames:
+      - this
 options:
   k3d:
     wait: true

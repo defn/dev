@@ -1,19 +1,18 @@
-# k3d cluster create --config etc/immanent.yaml immanent
+# k3d cluster create --config etc/immanent.yaml
 apiVersion: k3d.io/v1alpha4
 kind: Simple
+metadata:
+  name: immanent
 servers: 1
 agents: 0
 kubeAPI:
   host: immanent.defn.ooo
   hostIP: "0.0.0.0"
 image: rancher/k3s:v1.22.6-k3s1
-ports:
-  - port: 80:30080
-    nodeFilters:
-      - loadbalancer
-  - port: 443:30443
-    nodeFilters:
-      - loadbalancer
+hostAliases:
+  - ip: 100.101.28.35
+    hostnames:
+      - this
 options:
   k3d:
     wait: true
@@ -33,3 +32,10 @@ options:
   kubeconfig:
     updateDefaultKubeconfig: true
     switchCurrentContext: true
+ports:
+  - port: 80:30080
+    nodeFilters:
+      - loadbalancer
+  - port: 443:30443
+    nodeFilters:
+      - loadbalancer
