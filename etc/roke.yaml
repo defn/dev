@@ -1,0 +1,31 @@
+# k3d cluster create --config etc/roke.yaml roke
+apiVersion: k3d.io/v1alpha4
+kind: Simple
+servers: 1
+agents: 0
+kubeAPI:
+  host: roke.defn.ooo
+  hostIP: "0.0.0.0"
+  hostPort: "6444"
+image: rancher/k3s:v1.22.6-k3s1
+options:
+  k3d:
+    wait: true
+    timeout: "360s"
+    disableLoadbalancer: false
+    disableImageVolume: false
+    disableRollback: false
+  k3s:
+    extraArgs:
+      - arg: --tls-san=100.101.28.35
+        nodeFilters:
+          - "server:0"
+      - arg: --tls-san=roke.defn.ooo
+        nodeFilters:
+          - "server:0"
+      - arg: --disable=traefik
+        nodeFilters:
+          - "server:0"
+  kubeconfig:
+    updateDefaultKubeconfig: true
+    switchCurrentContext: true
