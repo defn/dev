@@ -22,3 +22,4 @@ cue.mod/pkg
 .gitconfig
 .kube
 .swp
+node_modules
