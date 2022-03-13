@@ -30,7 +30,7 @@ options:
         nodeFilters:
           - "server:0"
   kubeconfig:
-    updateDefaultKubeconfig: false
+    updateDefaultKubeconfig: true
     switchCurrentContext: false
 ports:
   - port: 80:30080
