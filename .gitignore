@@ -6,6 +6,7 @@ tmp
 work
 cue.mod/pkg
 .config/htop/htoprc
+.config/hof
 
 # working files
 .bash_history
