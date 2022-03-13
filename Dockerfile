@@ -56,6 +56,7 @@ RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add k9s'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add kustomize'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add helm'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add k3d'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add tilt'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
 
 RUN sudo curl -sSL -o /usr/local/bin/hof https://github.com/hofstadter-io/hof/releases/download/v0.6.1/hof_0.6.1_Linux_x86_64 && sudo chmod 755 /usr/local/bin/hof
@@ -80,6 +81,3 @@ RUN mkdir -p ~/.docker && echo '{"credsStore": "pass"}' > ~/.docker/config.json
 COPY etc/c /usr/local/bin/c
 
 RUN cd && etc/env.sh pre-commit run --all
-
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add tilt'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
