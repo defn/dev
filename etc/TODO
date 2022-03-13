@@ -1,3 +1,4 @@
+k3d registry create registry.localhost --port 5555
 k3d kubeconfig merge -d -s immanent
 k3d kubeconfig merge -d -s roke
 tilt up --context k3d-roke

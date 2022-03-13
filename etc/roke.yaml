@@ -43,7 +43,4 @@ options:
     updateDefaultKubeconfig: true
     switchCurrentContext: false
 registries:
-  create:
-    name: registry.localhost
-    hostPort: "5555"
-ports:
+  use: ["k3d-registry.localhost:5555"]
