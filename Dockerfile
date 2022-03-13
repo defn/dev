@@ -16,7 +16,8 @@ RUN apt-get update \
     sudo git vim less \
     make docker.io tini \
     python3-pip python3-venv python-is-python3 \
-    gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0
+    gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 \
+    xdg-utils
 
 RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
 RUN echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu
