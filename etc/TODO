@@ -1,2 +1,3 @@
+k3d kubeconfig merge -d -s immanent
 k3d kubeconfig merge -d -s roke
-tilt up --context k3d-immanent
+tilt up --context k3d-roke

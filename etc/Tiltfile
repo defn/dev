@@ -1,4 +1,4 @@
-allow_k8s_contexts('k3d-immanent')
+allow_k8s_contexts('k3d-roke')
 k8s_yaml('defm.yaml')
 
 docker_build('defn/defm', '.')
@@ -6,7 +6,7 @@ docker_build('defn/defm', '.')
 load('ext://uibutton', 'cmd_button', 'location', 'text_input')
 
 cmd_button(name='vscode',
-           argv=['code', '--folder-uri', 'vscode-remote://k8s-container+podname=defn+namespace=defm+name=defn+image=defm+context=k3d-immanent+/home/ubuntu'],
+           argv=['code', '--folder-uri', 'vscode-remote://k8s-container+podname=defn+namespace=defm+name=defn+image=defm+context=k3d-roke+/home/ubuntu'],
            text='Launch VSCode',
            location=location.NAV,
            icon_name='waving_hand')
