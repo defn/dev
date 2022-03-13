@@ -10,3 +10,9 @@ cmd_button(name='vscode',
            text='Launch VSCode',
            location=location.NAV,
            icon_name='waving_hand')
+
+cmd_button(name='rebuild base',
+           argv=['bash', '-c', 'cd && c build && c push']
+           text='Rebuild defn/dev base image',
+           location=location.NAV,
+           icon_name='waving_hand')
