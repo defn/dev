@@ -17,6 +17,12 @@ volumes:
   - volume: /var/run/docker.sock:/var/run/docker.sock
     nodeFilters:
       - server:0
+  - volume: k3d-password-store:/mnt/password-store
+    nodeFilters:
+      - server:0
+  - volume: k3d-work:/mnt/work
+    nodeFilters:
+      - server:0
 options:
   k3d:
     wait: true

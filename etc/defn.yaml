@@ -28,10 +28,19 @@ spec:
       image: defn/dev
       tty: true
       volumeMounts:
-        - mountPath: /var/run/docker.sock
-          name: docker-sock
-
+        - name: docker-sock
+          mountPath: /var/run/docker.sock
+        - name: password-store
+          mountPath: /home/ubuntu/.password-store
+        - name: work
+          mountPath: /workspaces
   volumes:
     - name: docker-sock
       hostPath:
         path: /var/run/docker.sock
+    - name: password-store
+      hostPath:
+        path: /mnt/password-store
+    - name: work
+      hostPath:
+        path: /mnt/work
