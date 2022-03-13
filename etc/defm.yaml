@@ -21,7 +21,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   namespace: defm
-  name: defn
+  name: defm
 spec:
   containers:
     - name: defn
