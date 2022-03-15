@@ -4,20 +4,11 @@ function main {
     set -efu
 
     local cmd="$1"; shift
+    local args=""
 
-    exec cue cmd \
-        -t cmd="${cmd}" \
-        -t args="$*" \
-        -t arg1="${1:-}" \
-        -t arg2="${2:-}" \
-        -t arg3="${3:-}" \
-        -t arg4="${4:-}" \
-        -t arg5="${5:-}" \
-        -t arg6="${6:-}" \
-        -t arg7="${7:-}" \
-        -t arg8="${8:-}" \
-        -t arg9="${9:-}" \
-        "${cmd}"
+    for a in "$@"; do args="${args}${args:+ }$(echo -n "${a}" | base64)"; done
+
+    exec cue cmd -t args="${args}" "${cmd}"
 }
 
 main "$@"
