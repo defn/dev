@@ -80,3 +80,5 @@ COPY --chown=ubuntu:ubuntu . .
 RUN git remote rm origin && git remote add origin https://github.com/defn/dev && git fetch && git branch -u origin/main
 
 RUN mkdir -p ~/.docker && echo '{"credsStore": "pass"}' > ~/.docker/config.json
+
+RUN ./etc/env.sh /home/ubuntu/.local/bin/pre-commit run --all
