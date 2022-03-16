@@ -65,19 +65,18 @@ RUN sudo curl -sSL -o /usr/local/bin/powerline https://github.com/justjanne/powe
 
 RUN pip install --user pipx
 RUN /home/ubuntu/.local/bin/pipx install --pip-args "keyring_pass" poetry
+
+RUN git init
 RUN /home/ubuntu/.local/bin/pipx install pre-commit
+COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
+RUN /home/ubuntu/.local/bin/pre-commit install
+RUN /home/ubuntu/.local/bin/pre-commit run --all
 
 COPY --chown=ubuntu:ubuntu .vim .vim
 COPY --chown=ubuntu:ubuntu .vimrc .
 RUN echo yes | vim +PlugInstall +qall
 
-COPY --chown=ubuntu:ubuntu .git .git
-COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
-RUN /home/ubuntu/.local/bin/pre-commit install
-
 COPY --chown=ubuntu:ubuntu . .
 RUN git remote rm origin && git remote add origin https://github.com/defn/dev && git fetch && git branch -u origin/main
 
 RUN mkdir -p ~/.docker && echo '{"credsStore": "pass"}' > ~/.docker/config.json
-
-RUN cd && etc/env.sh pre-commit run --all
