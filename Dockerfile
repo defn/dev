@@ -64,7 +64,7 @@ RUN sudo curl -sSL -o /usr/local/bin/hof https://github.com/hofstadter-io/hof/re
 RUN sudo curl -sSL -o /usr/local/bin/powerline https://github.com/justjanne/powerline-go/releases/download/v1.21.0/powerline-go-linux-amd64 && sudo chmod 755 /usr/local/bin/powerline
 
 RUN pip install --user pipx
-RUN pipx install --pip-args "keyring_pass" poetry
+RUN /home/ubuntu/.local/bin/pipx install --pip-args "keyring_pass" poetry
 RUN /home/ubuntu/.local/bin/pipx install pre-commit
 
 COPY --chown=ubuntu:ubuntu .vim .vim
