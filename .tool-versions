@@ -5,5 +5,5 @@ krew 0.4.3
 k9s 0.25.18
 k3d 5.3.0
 kustomize 4.5.2
-helm 3.8.0
-tilt 0.25.3
+helm 3.8.1
+tilt 0.26.1
