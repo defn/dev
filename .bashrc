@@ -45,7 +45,7 @@ if tty >/dev/null; then
 		echo
 		powerline --colorize-hostname -mode flat -newline \
 			-priority root,cwd,user,host,ssh,perms,git-branch,exit,cwd-path,git-status \
-			-modules host,ssh,cwd,perms,gitlite,load,exit \
+			-modules host,ssh,cwd,perms,gitlite,load,exit,venv \
 			-path-aliases /home/boot=\~,\~/work=work
 	}
 

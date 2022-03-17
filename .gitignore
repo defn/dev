@@ -25,3 +25,4 @@ cue.mod/pkg
 .kube
 .swp
 .gnupg
+.linkerd2
