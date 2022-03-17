@@ -7,4 +7,3 @@ k3d 5.3.0
 kustomize 4.5.2
 helm 3.8.1
 tilt 0.26.1
-linkerd 2.11.1
