@@ -66,7 +66,7 @@ RUN sudo curl -sSL -o /usr/local/bin/powerline https://github.com/justjanne/powe
 
 RUN curl -sSL -o step.deb https://dl.step.sm/gh-release/cli/gh-release-header/v0.18.2/step-cli_0.18.2_amd64.deb && sudo dpkg -i step.deb && rm -f step.deb
 
-RUN curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sudo sh
+RUN curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 
 RUN pip install --user pipx
 RUN /home/ubuntu/.local/bin/pipx install --pip-args "keyring_pass" poetry
