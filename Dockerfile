@@ -58,10 +58,14 @@ RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add kustomize'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add helm'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add k3d'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add tilt'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add linkerd'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
 
 RUN sudo curl -sSL -o /usr/local/bin/hof https://github.com/hofstadter-io/hof/releases/download/v0.6.1/hof_0.6.1_Linux_x86_64 && sudo chmod 755 /usr/local/bin/hof
+
 RUN sudo curl -sSL -o /usr/local/bin/powerline https://github.com/justjanne/powerline-go/releases/download/v1.21.0/powerline-go-linux-amd64 && sudo chmod 755 /usr/local/bin/powerline
+
+RUN curl -sSL -o step.deb https://dl.step.sm/gh-release/cli/gh-release-header/v0.18.2/step-cli_0.18.2_amd64.deb && sudo dpkg -i step.deb && rm -f step.deb
 
 RUN pip install --user pipx
 RUN /home/ubuntu/.local/bin/pipx install --pip-args "keyring_pass" poetry

@@ -31,6 +31,9 @@ PATH="$HOME/.local/bin:$PATH"
 # cue
 PATH="$HOME/bin:$PATH"
 
+# linkerd
+PATH="$HOME/.linkerd2/bin:$PATH"
+
 # vscode
 if [[ -n "${VSCODE_GIT_IPC_HANDLE=:-}" ]]; then
 	export VISUAL="code --wait"
