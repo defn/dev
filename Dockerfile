@@ -47,6 +47,12 @@ ENV LC_ALL en_US.UTF-8
 
 RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
+RUN sudo curl -sSL -o /usr/local/bin/powerline https://github.com/justjanne/powerline-go/releases/download/v1.21.0/powerline-go-linux-amd64 && sudo chmod 755 /usr/local/bin/powerline
+
+RUN sudo curl -sSL -o /usr/local/bin/hof https://github.com/hofstadter-io/hof/releases/download/v0.6.1/hof_0.6.1_Linux_x86_64 && sudo chmod 755 /usr/local/bin/hof
+
+RUN curl -sSL -o step.deb https://dl.step.sm/gh-release/cli/gh-release-header/v0.18.2/step-cli_0.18.2_amd64.deb && sudo dpkg -i step.deb && rm -f step.deb
+
 COPY --chown=ubuntu:ubuntu .tool-versions .
 RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.9.0
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shellcheck'
@@ -58,13 +64,8 @@ RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add kustomize'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add helm'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add k3d'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add tilt'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add golang'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
-
-RUN sudo curl -sSL -o /usr/local/bin/hof https://github.com/hofstadter-io/hof/releases/download/v0.6.1/hof_0.6.1_Linux_x86_64 && sudo chmod 755 /usr/local/bin/hof
-
-RUN sudo curl -sSL -o /usr/local/bin/powerline https://github.com/justjanne/powerline-go/releases/download/v1.21.0/powerline-go-linux-amd64 && sudo chmod 755 /usr/local/bin/powerline
-
-RUN curl -sSL -o step.deb https://dl.step.sm/gh-release/cli/gh-release-header/v0.18.2/step-cli_0.18.2_amd64.deb && sudo dpkg -i step.deb && rm -f step.deb
 
 RUN curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 

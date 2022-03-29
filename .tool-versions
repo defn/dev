@@ -7,3 +7,4 @@ k3d 5.4.1
 kustomize 4.5.4
 helm 3.8.1
 tilt 0.26.3
+golang 1.18
