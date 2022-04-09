@@ -67,7 +67,7 @@ RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add tilt'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add golang'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
 
-RUN curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
+RUN echo edge-22.3.5 && curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 
 RUN pip install --user pipx
 RUN /home/ubuntu/.local/bin/pipx install --pip-args "keyring_pass" poetry
