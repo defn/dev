@@ -72,9 +72,9 @@ RUN curl -L --remote-name-all https://github.com/cilium/cilium-cli/releases/late
     && sudo tar xzvfC cilium-linux-amd64.tar.gz /usr/local/bin \
     && rm cilium-linux-amd64.tar.gz
 
-
 RUN pip install --user pipx
 RUN /home/ubuntu/.local/bin/pipx install --pip-args "keyring_pass" poetry
+RUN /home/ubuntu/.local/bin/pipx install watchmedo
 
 RUN git init
 RUN /home/ubuntu/.local/bin/pipx install pre-commit
