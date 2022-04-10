@@ -74,7 +74,7 @@ RUN curl -L --remote-name-all https://github.com/cilium/cilium-cli/releases/late
 
 RUN pip install --user pipx
 RUN /home/ubuntu/.local/bin/pipx install --pip-args "keyring_pass" poetry
-RUN /home/ubuntu/.local/bin/pipx install watchmedo
+RUN /home/ubuntu/.local/bin/pipx install watchdog
 
 RUN git init
 RUN /home/ubuntu/.local/bin/pipx install pre-commit
