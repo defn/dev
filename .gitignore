@@ -5,8 +5,9 @@
 tmp
 work
 cue.mod/pkg
-.config/htop/htoprc
+.config/htop
 .config/hof
+.config/k9s
 
 # working files
 .bash_history
