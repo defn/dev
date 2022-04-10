@@ -8,6 +8,7 @@ cue.mod/pkg
 .config/htop
 .config/hof
 .config/k9s
+.config/gops
 
 # working files
 .bash_history
