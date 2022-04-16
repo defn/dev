@@ -66,6 +66,7 @@ RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add k3d'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add tilt'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add golang'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add teleport-ent'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add vault'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
 
 RUN echo edge-22.3.5 && curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh

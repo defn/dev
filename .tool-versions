@@ -9,3 +9,4 @@ helm 3.8.2
 tilt 0.27.2
 golang 1.18.1
 teleport-ent 9.0.0
+vault 1.10.0
