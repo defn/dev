@@ -84,6 +84,7 @@ RUN pip install --user pipx
 RUN /home/ubuntu/.local/bin/pipx install --pip-args "keyring_pass" poetry
 RUN /home/ubuntu/.local/bin/pipx install watchdog
 RUN /home/ubuntu/.local/bin/pipx install 'python-dotenv[cli]'
+RUN /home/ubuntu/.local/bin/pipx install yq
 
 RUN git init
 RUN /home/ubuntu/.local/bin/pipx install pre-commit
