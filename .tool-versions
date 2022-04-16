@@ -8,3 +8,4 @@ kustomize 4.5.4
 helm 3.8.1
 tilt 0.27.1
 golang 1.18
+teleport-ent 9.0.0
