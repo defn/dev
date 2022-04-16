@@ -8,7 +8,13 @@ function main {
 
     for a in "$@"; do args="${args}${args:+ }$(echo -n "${a}" | base64)"; done
 
-    exec cue cmd -t args="${args}" "${cmd}"
+    local loader=
+
+    if [[ -e '.env' ]]; then
+        loader='dotenv run'
+    fi
+
+    exec $loader cue cmd -t args="${args}" "${cmd}"
 }
 
 main "$@"
