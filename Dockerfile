@@ -26,7 +26,7 @@ RUN install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
 RUN curl -sSL -o docker-pass.tar.gz https://github.com/docker/docker-credential-helpers/releases/download/v0.6.4/docker-credential-pass-v0.6.4-amd64.tar.gz \
         && tar xvfz docker-pass.tar.gz && rm -f docker-pass.tar.gz && chmod 755 docker-credential-pass && mv docker-credential-pass /usr/local/bin/
 
-RUN echo 20220409 && apt update && apt upgrade -y
+RUN echo 20220416 && apt update && apt upgrade -y
 
 RUN ln -sf /usr/share/zoneinfo/UTC /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata \
@@ -81,6 +81,7 @@ RUN curl -L --remote-name-all https://github.com/cilium/hubble/releases/download
 RUN pip install --user pipx
 RUN /home/ubuntu/.local/bin/pipx install --pip-args "keyring_pass" poetry
 RUN /home/ubuntu/.local/bin/pipx install watchdog
+RUN /home/ubuntu/.local/bin/pipx install 'python-dotenv[cli]'
 
 RUN git init
 RUN /home/ubuntu/.local/bin/pipx install pre-commit
