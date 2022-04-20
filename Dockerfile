@@ -15,6 +15,8 @@ ARG ASDF
 ARG CILIUM
 ARG HUBBLE
 ARG LINKERD
+ARG LOFT
+ARG VCLUSTER
 
 RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm
 
@@ -65,6 +67,12 @@ RUN curl -L --remote-name-all https://github.com/cilium/hubble/releases/download
 
 RUN curl -L -o /usr/local/bin/linkerd https://github.com/linkerd/linkerd2/releases/download/${LINKERD}/linkerd2-cli-${LINKERD}-linux-amd64 \
     && chmod 755 /usr/local/bin/linkerd
+
+RUN curl -L -o /usr/local/bin/vcluster https://github.com/loft-sh/vcluster/releases/download/v${VCLUSTER}/vcluster-linux-amd64 \
+    && chmod 755 /usr/local/bin/vcluster
+
+RUN curl -L -o /usr/local/bin/loft https://github.com/loft-sh/loft/releases/download/v${LOFT}/loft-linux-amd64 \
+    && chmod 755 /usr/local/bin/loft
 
 USER ubuntu
 ENV HOME=/home/ubuntu
