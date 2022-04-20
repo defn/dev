@@ -49,7 +49,7 @@ RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
 RUN sudo curl -sSL -o /usr/local/bin/powerline https://github.com/justjanne/powerline-go/releases/download/v1.21.0/powerline-go-linux-amd64 && sudo chmod 755 /usr/local/bin/powerline
 
-RUN sudo curl -sSL -o /usr/local/bin/hof https://github.com/hofstadter-io/hof/releases/download/v0.6.1/hof_0.6.1_Linux_x86_64 && sudo chmod 755 /usr/local/bin/hof
+RUN sudo curl -sSL -o /usr/local/bin/hof https://github.com/hofstadter-io/hof/releases/download/v0.6.2-beta.1/hof_0.6.2-beta.1_Linux_x86_64 && sudo chmod 755 /usr/local/bin/hof
 
 RUN curl -sSL -o step.deb https://dl.step.sm/gh-release/cli/gh-release-header/v0.18.2/step-cli_0.18.2_amd64.deb && sudo dpkg -i step.deb && rm -f step.deb
 
