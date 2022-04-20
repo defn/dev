@@ -14,7 +14,7 @@ ARG CREDENTIAL_PASS
 ARG ASDF
 ARG CILIUM
 ARG HUBBLE
-ARG LINKERDkj
+ARG LINKERD
 
 RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm
 
