@@ -92,9 +92,9 @@ RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add teleport-ent'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add vault'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
 
-RUN /home/ubuntu/.asdf/shims/kubectl krew install ns
-RUN /home/ubuntu/.asdf/shims/kubectl krew install ctx
-RUN /home/ubuntu/.asdf/shims/kubectl krew install stern
+RUN /home/ubuntu/.asdf/shims/kubectl-krew install ns
+RUN /home/ubuntu/.asdf/shims/kubectl-krew install ctx
+RUN /home/ubuntu/.asdf/shims/kubectl-krew install stern
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf reshim krew'
 
 RUN pip install --user pipx
