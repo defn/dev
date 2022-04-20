@@ -69,9 +69,9 @@ RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add teleport-ent'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add vault'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
 
-RUN echo edge-22.3.5 && curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
+RUN curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | env LINKERD2_VERSION=edge-22.3. sh
 
-RUN curl -L --remote-name-all https://github.com/cilium/cilium-cli/releases/latest/download/cilium-linux-amd64.tar.gz \
+RUN curl -L --remote-name-all https://github.com/cilium/cilium-cli/releases/download/v0.11.1/cilium-linux-amd64.tar.gz \
     && sudo tar xzvfC cilium-linux-amd64.tar.gz /usr/local/bin \
     && rm cilium-linux-amd64.tar.gz
 
