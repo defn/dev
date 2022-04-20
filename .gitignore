@@ -9,6 +9,7 @@ cue.mod/pkg
 .config/hof
 .config/k9s
 .config/gops
+.config/helm
 
 # working files
 .bash_history
