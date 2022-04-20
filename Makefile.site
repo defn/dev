@@ -1,0 +1,2 @@
+build:
+	dotenv run docker build -t defn/dev $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .

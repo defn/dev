@@ -1,10 +1,20 @@
-FROM ubuntu:20.04
+ARG IMAGE
+
+FROM ${IMAGE}
 
 USER root
+ENV DEBIAN_FRONTEND=noninteractive
+ENV container=docker
 
-ARG DEBIAN_FRONTEND=noninteractive
-
-ENV container docker
+ARG APT
+ARG POWERLINE
+ARG HOF
+ARG STEP
+ARG CREDENTIAL_PASS
+ARG ASDF
+ARG CILIUM
+ARG HUBBLE
+ARG LINKERDkj
 
 RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm
 
@@ -23,38 +33,51 @@ RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g u
 RUN echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu
 RUN install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
 
-RUN curl -sSL -o docker-pass.tar.gz https://github.com/docker/docker-credential-helpers/releases/download/v0.6.4/docker-credential-pass-v0.6.4-amd64.tar.gz \
-        && tar xvfz docker-pass.tar.gz && rm -f docker-pass.tar.gz && chmod 755 docker-credential-pass && mv docker-credential-pass /usr/local/bin/
-
-RUN echo 20220420 && apt update && apt upgrade -y
+RUN echo ${APT} && apt update && apt upgrade -y
 
 RUN ln -sf /usr/share/zoneinfo/UTC /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata \
     && locale-gen en_US.UTF-8 \
     && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
-RUN rm -f /usr/bin/gs \
-    && ln -nfs /usr/bin/git-crypt /usr/local/bin/
+RUN rm -f /usr/bin/gs
+RUN ln -nfs /usr/bin/git-crypt /usr/local/bin/
+
+RUN curl -sSL -o docker-pass.tar.gz https://github.com/docker/docker-credential-helpers/releases/download/v${CREDENTIAL_PASS}/docker-credential-pass-v${CREDENTIAL_PASS}-amd64.tar.gz \
+    && tar xvfz docker-pass.tar.gz && rm -f docker-pass.tar.gz && chmod 755 docker-credential-pass && mv docker-credential-pass /usr/local/bin/
+
+RUN curl -sSL -o /usr/local/bin/powerline https://github.com/justjanne/powerline-go/releases/download/v${POWERLINE}/powerline-go-linux-amd64 \
+    && chmod 755 /usr/local/bin/powerline
+
+RUN curl -sSL -o /usr/local/bin/hof https://github.com/hofstadter-io/hof/releases/download/v${HOF}/hof_${HOF}_Linux_x86_64 \
+    && chmod 755 /usr/local/bin/hof
+
+RUN curl -sSL -o step.deb https://dl.step.sm/gh-release/cli/gh-release-header/v${STEP}/step-cli_${STEP}_amd64.deb \
+    && dpkg -i step.deb && rm -f step.deb
+
+RUN curl -L --remote-name-all https://github.com/cilium/cilium-cli/releases/download/v${CILIUM}/cilium-linux-amd64.tar.gz \
+    && tar xzvfC cilium-linux-amd64.tar.gz /usr/local/bin \
+    && rm cilium-linux-amd64.tar.gz
+
+RUN curl -L --remote-name-all https://github.com/cilium/hubble/releases/download/v${HUBBLE}/hubble-linux-amd64.tar.gz \
+    && tar xzvfC hubble-linux-amd64.tar.gz /usr/local/bin \
+    && rm hubble-linux-amd64.tar.gz
+
+RUN curl -L -o /usr/local/bin/linkerd https://github.com/linkerd/linkerd2/releases/download/${LINKERD}/linkerd2-cli-${LINKERD}-linux-amd64 \
+    && chmod 755 /usr/local/bin/linkerd
 
 USER ubuntu
-WORKDIR /home/ubuntu
 ENV HOME=/home/ubuntu
-
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
+WORKDIR /home/ubuntu
 
 RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
-RUN sudo curl -sSL -o /usr/local/bin/powerline https://github.com/justjanne/powerline-go/releases/download/v1.21.0/powerline-go-linux-amd64 && sudo chmod 755 /usr/local/bin/powerline
-
-RUN sudo curl -sSL -o /usr/local/bin/hof https://github.com/hofstadter-io/hof/releases/download/v0.6.2-beta.1/hof_0.6.2-beta.1_Linux_x86_64 && sudo chmod 755 /usr/local/bin/hof
-
-RUN curl -sSL -o step.deb https://dl.step.sm/gh-release/cli/gh-release-header/v0.18.2/step-cli_0.18.2_amd64.deb && sudo dpkg -i step.deb && rm -f step.deb
-
 COPY --chown=ubuntu:ubuntu .tool-versions .
-RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.9.0
+RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${ASDF}
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shellcheck'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add cue'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add kubectl'
@@ -68,17 +91,6 @@ RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add golang'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add teleport-ent'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add vault'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
-
-RUN curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | env LINKERD2_VERSION=edge-22.3. sh
-
-RUN curl -L --remote-name-all https://github.com/cilium/cilium-cli/releases/download/v0.11.1/cilium-linux-amd64.tar.gz \
-    && sudo tar xzvfC cilium-linux-amd64.tar.gz /usr/local/bin \
-    && rm cilium-linux-amd64.tar.gz
-
-RUN curl -L --remote-name-all https://github.com/cilium/hubble/releases/download/v0.9.0/hubble-linux-amd64.tar.gz \
-    && sudo tar xzvfC hubble-linux-amd64.tar.gz /usr/local/bin \
-    && rm hubble-linux-amd64.tar.gz
-
 
 RUN pip install --user pipx
 RUN /home/ubuntu/.local/bin/pipx install --pip-args "keyring_pass" poetry
