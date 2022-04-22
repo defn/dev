@@ -110,7 +110,11 @@ RUN /home/ubuntu/.local/bin/pipx install --pip-args "keyring_pass" poetry
 RUN /home/ubuntu/.local/bin/pipx install watchdog
 RUN /home/ubuntu/.local/bin/pipx install 'python-dotenv[cli]'
 RUN /home/ubuntu/.local/bin/pipx install yq
-#RUN /home/ubuntu/.local/bin/pipx install pantsbuild.pants
+
+RUN sudo add-apt-repository -y ppa:deadsnakes/ppa
+RUN sudo apt install -y python3.9 python3.9-distutils
+RUN python3.9 -m pip install pipx
+RUN python3.9 -m pipx install pantsbuild.pants
 
 RUN git init
 RUN /home/ubuntu/.local/bin/pipx install pre-commit
