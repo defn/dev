@@ -5,11 +5,6 @@
 tmp
 work
 cue.mod/pkg
-.config/htop
-.config/hof
-.config/k9s
-.config/gops
-.config/helm
 
 # working files
 .bash_history
@@ -29,3 +24,9 @@ cue.mod/pkg
 .swp
 .gnupg
 .linkerd2
+.config/htop
+.config/hof
+.config/k9s
+.config/gops
+.config/helm
+.loft
