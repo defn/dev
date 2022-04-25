@@ -19,7 +19,16 @@ repos:
     hooks:
       - id: cue-fmt
         name: cue-fmt
-        entry: bash -c 'cue fmt --simplify'
+        entry: cue fmt --simplify
         language: system
         files: '\.cue$'
+        pass_filenames: true
+
+  - repo: local
+    hooks:
+      - id: sh-fmt
+        name: sh-fmt
+        entry: shfmt -w
+        language: system
+        files: "^(bin|etc)/"
         pass_filenames: true
