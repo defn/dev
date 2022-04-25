@@ -53,6 +53,7 @@ cue 0.4.1-rc.1
 cue 0.4.1-rc.2
 cue 0.4.2
 cue 0.4.2-rc.1
+cue 0.4.3
 cue 0.4.3-beta.1
 cue 0.4.3-beta.2
 golang 1.10
@@ -1119,7 +1120,9 @@ kubectl 1.23.4
 kubectl 1.23.4-rc.0
 kubectl 1.23.5
 kubectl 1.23.5-rc.0
+kubectl 1.23.6
 kubectl 1.23.6-rc.0
+kubectl 1.23.7-rc.0
 kubectl 1.2.3-beta.0
 kubectl 1.2.4
 kubectl 1.24.0-alpha.0
@@ -1467,7 +1470,6 @@ tilt 0.22.12
 tilt 0.22.13
 tilt 0.22.14
 tilt 0.22.15
-tilt 0.22.9
 tilt 0.23.0
 tilt 0.23.1
 tilt 0.23.2
@@ -1491,6 +1493,7 @@ tilt 0.26.3
 tilt 0.27.0
 tilt 0.27.1
 tilt 0.27.2
+tilt 0.27.3
 vault 0.1.0
 vault 0.10.0
 vault 0.10.0-beta1
@@ -1555,6 +1558,9 @@ vault 1.10.0+ent
 vault 1.10.0-rc1
 vault 1.10.0-rc1+ent
 vault 1.10.0-rc1+ent
+vault 1.10.1
+vault 1.10.1+ent
+vault 1.10.1+ent
 vault 1.1.0-beta1
 vault 1.1.0-beta2
 vault 1.1.1
@@ -1760,6 +1766,9 @@ vault 1.8.0-rc2
 vault 1.8.0-rc2+ent
 vault 1.8.0-rc2+ent
 vault 1.8.1
+vault 1.8.10
+vault 1.8.10+ent
+vault 1.8.10+ent
 vault 1.8.1+ent
 vault 1.8.1+ent
 vault 1.8.2
@@ -1804,3 +1813,6 @@ vault 1.9.3+ent
 vault 1.9.4
 vault 1.9.4+ent
 vault 1.9.4+ent
+vault 1.9.5
+vault 1.9.5+ent
+vault 1.9.5+ent

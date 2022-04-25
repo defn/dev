@@ -1,2 +1,5 @@
 build:
 	dotenv run docker build -t defn/dev $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
+
+asdf:
+	cat .tool-versions| awk '{print $$1}' | while read -r a; do asdf list-all "$$a" | sed "s#^#$$a #"; done | sort > .tool-versions-all
