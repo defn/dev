@@ -30,3 +30,4 @@ cue.mod/pkg
 .config/gops
 .config/helm
 .loft
+.lesshst
