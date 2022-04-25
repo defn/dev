@@ -1,4 +1,5 @@
 shellcheck 0.8.0
+shfmt 3.4.3
 cue 0.4.3
 kubectl 1.22.9
 krew 0.4.3

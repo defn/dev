@@ -1,20 +1,21 @@
 #!/usr/bin/env bash
 
 function main {
-    set -efu
+	set -efu
 
-    local cmd="$1"; shift
-    local args=""
+	local cmd="$1"
+	shift
+	local args=""
 
-    for a in "$@"; do args="${args}${args:+ }$(echo -n "${a}" | base64)"; done
+	for a in "$@"; do args="${args}${args:+ }$(echo -n "${a}" | base64)"; done
 
-    local loader=
+	local loader=
 
-    if [[ -e '.env' ]]; then
-        loader='dotenv run'
-    fi
+	if [[ -e '.env' ]]; then
+		loader='dotenv run'
+	fi
 
-    exec $loader cue cmd -t args="${args}" "${cmd}"
+	exec $loader cue cmd -t args="${args}" "${cmd}"
 }
 
 main "$@"

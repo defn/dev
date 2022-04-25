@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 function main {
-    set -x
+	set -x
 
-    sudo chgrp ubuntu /var/run/docker.sock
-    sudo chmod 0770 /var/run/docker.sock
-    sudo chown ubuntu:ubuntu /workspaces
+	sudo chgrp ubuntu /var/run/docker.sock
+	sudo chmod 0770 /var/run/docker.sock
+	sudo chown ubuntu:ubuntu /workspaces
 
-    cd && (git pull || true)
+	cd && (git pull || true)
 }
 
 main "$@"
