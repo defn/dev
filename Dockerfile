@@ -131,4 +131,4 @@ RUN git remote rm origin && git remote add origin https://github.com/defn/dev &&
 
 RUN mkdir -p ~/.docker && echo '{"credsStore": "pass"}' > ~/.docker/config.json
 
-RUN ./etc/env.sh /home/ubuntu/.local/bin/pre-commit run --all
+RUN ./bin/e /home/ubuntu/.local/bin/pre-commit run --all
