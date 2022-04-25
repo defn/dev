@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+function main {
+  awk 'NR == 1 && NF > 0 {} NR > 1 && NF > 0  && blank > 0 { print ""; blank=0 } NR > 1 && NF > 0 { print } NR > 1 && NF == 0 { blank=1 }'
+}
+
+main "$@"
