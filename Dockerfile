@@ -87,6 +87,7 @@ RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 COPY --chown=ubuntu:ubuntu .tool-versions .
 RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${ASDF}
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shellcheck'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shfmt'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add cue'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add kubectl'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add krew'
