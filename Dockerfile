@@ -24,8 +24,8 @@ RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
     wget apt-transport-https software-properties-common \
-    openssh-client tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip jq xz-utils rsync \
-    sudo git vim less fzf \
+    openssh-client tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip xz-utils rsync \
+    sudo git vim less fzf jo gron jq \
     make docker.io tini \
     python3-pip python3-venv python-is-python3 \
     gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 \
@@ -73,6 +73,9 @@ RUN curl -L -o /usr/local/bin/vcluster https://github.com/loft-sh/vcluster/relea
 
 RUN curl -L -o /usr/local/bin/loft https://github.com/loft-sh/loft/releases/download/v${LOFT}/loft-linux-amd64 \
     && chmod 755 /usr/local/bin/loft
+
+ARG STEAMPIPE
+RUN cd /usr/local/bin && (curl -sSL https://github.com/turbot/steampipe/releases/download/v${STEAMPIPE}/steampipe_linux_amd64.tar.gz) | tar xvfz - && chmod 755 steampipe
 
 USER ubuntu
 ENV HOME=/home/ubuntu
