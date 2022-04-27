@@ -80,7 +80,7 @@ RUN cd /usr/local/bin && (curl -sSL https://github.com/turbot/steampipe/releases
     && chmod 755 steampipe
 
 ARG JLESS
-RUN (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${JLESS}/jless-v$PJLESS}-x86_64-unknown-linux-gnu.zip | gunzip -c - > jless) \
+RUN (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${JLESS}/jless-v${JLESS}-x86_64-unknown-linux-gnu.zip | gunzip -c - > jless) \
     && chmod 755 jless
 
 USER ubuntu
