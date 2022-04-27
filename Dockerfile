@@ -29,7 +29,8 @@ RUN apt-get update \
     make docker.io tini \
     python3-pip python3-venv python-is-python3 \
     gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 \
-    xdg-utils
+    xdg-utils \
+    libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev
 
 RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
 RUN echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu
@@ -75,7 +76,12 @@ RUN curl -L -o /usr/local/bin/loft https://github.com/loft-sh/loft/releases/down
     && chmod 755 /usr/local/bin/loft
 
 ARG STEAMPIPE
-RUN cd /usr/local/bin && (curl -sSL https://github.com/turbot/steampipe/releases/download/v${STEAMPIPE}/steampipe_linux_amd64.tar.gz) | tar xvfz - && chmod 755 steampipe
+RUN cd /usr/local/bin && (curl -sSL https://github.com/turbot/steampipe/releases/download/v${STEAMPIPE}/steampipe_linux_amd64.tar.gz) | tar xvfz - \
+    && chmod 755 steampipe
+
+ARG JLESS
+RUN (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${JLESS}/jless-v$PJLESS}-x86_64-unknown-linux-gnu.zip | gunzip -c - > jless) \
+    && chmod 755 jless
 
 USER ubuntu
 ENV HOME=/home/ubuntu
