@@ -88,7 +88,7 @@ RUN (curl -sSL https://github.com/woodpecker-ci/woodpecker/releases/download/v${
     && chmod 755 woodpcker-agent
 
 RUN (curl -sSL https://github.com/woodpecker-ci/woodpecker/releases/download/v${WOODPECKER}/woodpecker-cli_linux_amd64.tar.gz | tar xvfz -) \
-    && chmod 755 woodpcker-cli
+    && chmod 755 woodpecker-cli
 
 USER ubuntu
 ENV HOME=/home/ubuntu
