@@ -91,7 +91,7 @@ RUN cd /usr/local/bin && (curl -sSL https://github.com/woodpecker-ci/woodpecker/
     && chmod 755 woodpecker-cli
 
 ARG CIRRUS
-RUN (curl -sSL https://github.com/cirruslabs/cirrus-cli/releases/download/v${CIRRUS}/cirrus-linux-amd64.tar.gz | tar xvfz - cirrus) \
+RUN cd /usr/local/bin && (curl -sSL https://github.com/cirruslabs/cirrus-cli/releases/download/v${CIRRUS}/cirrus-linux-amd64.tar.gz | tar xvfz - cirrus) \
     && chmod 755 cirrus
 
 
