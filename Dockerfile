@@ -90,6 +90,11 @@ RUN cd /usr/local/bin && (curl -sSL https://github.com/woodpecker-ci/woodpecker/
 RUN cd /usr/local/bin && (curl -sSL https://github.com/woodpecker-ci/woodpecker/releases/download/v${WOODPECKER}/woodpecker-cli_linux_amd64.tar.gz | tar xvfz -) \
     && chmod 755 woodpecker-cli
 
+ARG CIRRUS
+RUN (curl -sSL https://github.com/cirruslabs/cirrus-cli/releases/download/v${CIRRUS}/cirrus-linux-amd64.tar.gz | tar xvfz - cirrus)
+    && chmod 755 cirrus
+
+
 USER ubuntu
 ENV HOME=/home/ubuntu
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
