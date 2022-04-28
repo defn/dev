@@ -85,7 +85,7 @@ RUN (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${
 
 ARG WOODPECKER
 RUN (curl -sSL https://github.com/woodpecker-ci/woodpecker/releases/download/v${WOODPECKER}/woodpecker-agent_linux_amd64.tar.gz | tar xvfz -) \
-    && chmod 755 woodpcker-agent
+    && chmod 755 woodpecker-agent
 
 RUN (curl -sSL https://github.com/woodpecker-ci/woodpecker/releases/download/v${WOODPECKER}/woodpecker-cli_linux_amd64.tar.gz | tar xvfz -) \
     && chmod 755 woodpecker-cli
