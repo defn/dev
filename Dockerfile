@@ -6,18 +6,6 @@ USER root
 ENV DEBIAN_FRONTEND=noninteractive
 ENV container=docker
 
-ARG APT
-ARG POWERLINE
-ARG HOF
-ARG STEP
-ARG CREDENTIAL_PASS
-ARG ASDF
-ARG CILIUM
-ARG HUBBLE
-ARG LINKERD
-ARG LOFT
-ARG VCLUSTER
-
 RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm
 
 RUN apt-get update \
@@ -36,42 +24,50 @@ RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g u
 RUN echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu
 RUN install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
 
+ARG APT
 RUN echo ${APT} && apt update && apt upgrade -y
-
 RUN ln -sf /usr/share/zoneinfo/UTC /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata \
     && locale-gen en_US.UTF-8 \
     && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-
 RUN rm -f /usr/bin/gs
 RUN ln -nfs /usr/bin/git-crypt /usr/local/bin/
 
+ARG CREDENTIAL_PASS
 RUN curl -sSL -o docker-pass.tar.gz https://github.com/docker/docker-credential-helpers/releases/download/v${CREDENTIAL_PASS}/docker-credential-pass-v${CREDENTIAL_PASS}-amd64.tar.gz \
     && tar xvfz docker-pass.tar.gz && rm -f docker-pass.tar.gz && chmod 755 docker-credential-pass && mv docker-credential-pass /usr/local/bin/
 
+ARG POWERLINE
 RUN curl -sSL -o /usr/local/bin/powerline https://github.com/justjanne/powerline-go/releases/download/v${POWERLINE}/powerline-go-linux-amd64 \
     && chmod 755 /usr/local/bin/powerline
 
+ARG HOF
 RUN curl -sSL -o /usr/local/bin/hof https://github.com/hofstadter-io/hof/releases/download/v${HOF}/hof_${HOF}_Linux_x86_64 \
     && chmod 755 /usr/local/bin/hof
 
+ARG STEP
 RUN curl -sSL -o step.deb https://dl.step.sm/gh-release/cli/gh-release-header/v${STEP}/step-cli_${STEP}_amd64.deb \
     && dpkg -i step.deb && rm -f step.deb
 
+ARG CILIUM
 RUN curl -L --remote-name-all https://github.com/cilium/cilium-cli/releases/download/v${CILIUM}/cilium-linux-amd64.tar.gz \
     && tar xzvfC cilium-linux-amd64.tar.gz /usr/local/bin \
     && rm cilium-linux-amd64.tar.gz
 
+ARG HUBBLE
 RUN curl -L --remote-name-all https://github.com/cilium/hubble/releases/download/v${HUBBLE}/hubble-linux-amd64.tar.gz \
     && tar xzvfC hubble-linux-amd64.tar.gz /usr/local/bin \
     && rm hubble-linux-amd64.tar.gz
 
+ARG LINKERD
 RUN curl -L -o /usr/local/bin/linkerd https://github.com/linkerd/linkerd2/releases/download/${LINKERD}/linkerd2-cli-${LINKERD}-linux-amd64 \
     && chmod 755 /usr/local/bin/linkerd
 
+ARG VCLUSTER
 RUN curl -L -o /usr/local/bin/vcluster https://github.com/loft-sh/vcluster/releases/download/v${VCLUSTER}/vcluster-linux-amd64 \
     && chmod 755 /usr/local/bin/vcluster
 
+ARG LOFT
 RUN curl -L -o /usr/local/bin/loft https://github.com/loft-sh/loft/releases/download/v${LOFT}/loft-linux-amd64 \
     && chmod 755 /usr/local/bin/loft
 
@@ -86,14 +82,12 @@ RUN (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${
 ARG WOODPECKER
 RUN cd /usr/local/bin && (curl -sSL https://github.com/woodpecker-ci/woodpecker/releases/download/v${WOODPECKER}/woodpecker-agent_linux_amd64.tar.gz | tar xvfz -) \
     && chmod 755 woodpecker-agent
-
 RUN cd /usr/local/bin && (curl -sSL https://github.com/woodpecker-ci/woodpecker/releases/download/v${WOODPECKER}/woodpecker-cli_linux_amd64.tar.gz | tar xvfz -) \
     && chmod 755 woodpecker-cli
 
 ARG CIRRUS
 RUN cd /usr/local/bin && (curl -sSL https://github.com/cirruslabs/cirrus-cli/releases/download/v${CIRRUS}/cirrus-linux-amd64.tar.gz | tar xvfz - cirrus) \
     && chmod 755 cirrus
-
 
 USER ubuntu
 ENV HOME=/home/ubuntu
@@ -105,6 +99,7 @@ WORKDIR /home/ubuntu
 
 RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
+ARG ASDF
 COPY --chown=ubuntu:ubuntu .tool-versions .
 RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${ASDF}
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shellcheck'
