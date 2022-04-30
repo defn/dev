@@ -2,7 +2,7 @@ lint_task:
   container:
     image: defn/dev
   script: |
-    set -exfu
+    set -efu
     sudo chown -R ubuntu:ubuntu /tmp/cirrus-ci/working-dir
     git config --global --add safe.directory /tmp/cirrus-ci/working-dir
     git checkout -- .dockerignore
