@@ -7,4 +7,5 @@ lint_task:
     git config --global --add safe.directory /tmp/cirrus-ci/working-dir
     git checkout -- .dockerignore
     ./bin/e pre-commit run -a
+    ps axuf
     git diff
