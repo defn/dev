@@ -85,5 +85,6 @@ RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf reshim krew'
 RUN python3.9 -m pipx install pantsbuild.pants
 
 COPY --chown=ubuntu:ubuntu . .
+RUN git clean -ffd
 
 RUN ./bin/e /home/ubuntu/.local/bin/pre-commit run --all
