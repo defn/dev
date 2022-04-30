@@ -8,3 +8,8 @@ precommit_task:
     chown -R ubuntu:ubuntu /tmp/cirrus-ci/working-dir
     git config --global --add safe.directory /tmp/cirrus-ci/working-dir
     sudo -E -u ubuntu ./ci/precommit.sh
+nothing_task:
+  container:
+    image: defn/dev:ci
+  script: |
+    true
