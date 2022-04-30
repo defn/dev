@@ -1,0 +1,4 @@
+lint_task:
+  container:
+    image: defn/dev
+  script: pwd && git config --global --add safe.directory /tmp/cirrus-ci/working-dir && ls -ld . && git ls-files
