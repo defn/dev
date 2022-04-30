@@ -33,61 +33,7 @@ RUN ln -sf /usr/share/zoneinfo/UTC /etc/localtime \
 RUN rm -f /usr/bin/gs
 RUN ln -nfs /usr/bin/git-crypt /usr/local/bin/
 
-ARG CREDENTIAL_PASS
-RUN curl -sSL -o docker-pass.tar.gz https://github.com/docker/docker-credential-helpers/releases/download/v${CREDENTIAL_PASS}/docker-credential-pass-v${CREDENTIAL_PASS}-amd64.tar.gz \
-    && tar xvfz docker-pass.tar.gz && rm -f docker-pass.tar.gz && chmod 755 docker-credential-pass && mv docker-credential-pass /usr/local/bin/
-
-ARG POWERLINE
-RUN curl -sSL -o /usr/local/bin/powerline https://github.com/justjanne/powerline-go/releases/download/v${POWERLINE}/powerline-go-linux-amd64 \
-    && chmod 755 /usr/local/bin/powerline
-
-ARG HOF
-RUN curl -sSL -o /usr/local/bin/hof https://github.com/hofstadter-io/hof/releases/download/v${HOF}/hof_${HOF}_Linux_x86_64 \
-    && chmod 755 /usr/local/bin/hof
-
-ARG STEP
-RUN curl -sSL -o step.deb https://dl.step.sm/gh-release/cli/gh-release-header/v${STEP}/step-cli_${STEP}_amd64.deb \
-    && dpkg -i step.deb && rm -f step.deb
-
-ARG CILIUM
-RUN curl -L --remote-name-all https://github.com/cilium/cilium-cli/releases/download/v${CILIUM}/cilium-linux-amd64.tar.gz \
-    && tar xzvfC cilium-linux-amd64.tar.gz /usr/local/bin \
-    && rm cilium-linux-amd64.tar.gz
-
-ARG HUBBLE
-RUN curl -L --remote-name-all https://github.com/cilium/hubble/releases/download/v${HUBBLE}/hubble-linux-amd64.tar.gz \
-    && tar xzvfC hubble-linux-amd64.tar.gz /usr/local/bin \
-    && rm hubble-linux-amd64.tar.gz
-
-ARG LINKERD
-RUN curl -L -o /usr/local/bin/linkerd https://github.com/linkerd/linkerd2/releases/download/${LINKERD}/linkerd2-cli-${LINKERD}-linux-amd64 \
-    && chmod 755 /usr/local/bin/linkerd
-
-ARG VCLUSTER
-RUN curl -L -o /usr/local/bin/vcluster https://github.com/loft-sh/vcluster/releases/download/v${VCLUSTER}/vcluster-linux-amd64 \
-    && chmod 755 /usr/local/bin/vcluster
-
-ARG LOFT
-RUN curl -L -o /usr/local/bin/loft https://github.com/loft-sh/loft/releases/download/v${LOFT}/loft-linux-amd64 \
-    && chmod 755 /usr/local/bin/loft
-
-ARG STEAMPIPE
-RUN cd /usr/local/bin && (curl -sSL https://github.com/turbot/steampipe/releases/download/v${STEAMPIPE}/steampipe_linux_amd64.tar.gz) | tar xvfz - \
-    && chmod 755 steampipe
-
-ARG JLESS
-RUN (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${JLESS}/jless-v${JLESS}-x86_64-unknown-linux-gnu.zip | gunzip -c - > jless) \
-    && chmod 755 jless
-
-ARG WOODPECKER
-RUN cd /usr/local/bin && (curl -sSL https://github.com/woodpecker-ci/woodpecker/releases/download/v${WOODPECKER}/woodpecker-agent_linux_amd64.tar.gz | tar xvfz -) \
-    && chmod 755 woodpecker-agent
-RUN cd /usr/local/bin && (curl -sSL https://github.com/woodpecker-ci/woodpecker/releases/download/v${WOODPECKER}/woodpecker-cli_linux_amd64.tar.gz | tar xvfz -) \
-    && chmod 755 woodpecker-cli
-
-ARG CIRRUS
-RUN cd /usr/local/bin && (curl -sSL https://github.com/cirruslabs/cirrus-cli/releases/download/v${CIRRUS}/cirrus-linux-amd64.tar.gz | tar xvfz - cirrus) \
-    && chmod 755 cirrus
+RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
 USER ubuntu
 ENV HOME=/home/ubuntu
@@ -96,32 +42,6 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 WORKDIR /home/ubuntu
-
-RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
-
-ARG ASDF
-COPY --chown=ubuntu:ubuntu .tool-versions .
-RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${ASDF}
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shellcheck'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shfmt'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add cue'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add kubectl'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add krew'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add k9s'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add kustomize'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add helm'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add k3d'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add tilt'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add golang'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add teleport-ent'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add vault'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add consul'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
-
-RUN /home/ubuntu/.asdf/shims/kubectl-krew install ns
-RUN /home/ubuntu/.asdf/shims/kubectl-krew install ctx
-RUN /home/ubuntu/.asdf/shims/kubectl-krew install stern
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf reshim krew'
 
 RUN pip install --user pipx
 RUN /home/ubuntu/.local/bin/pipx install --pip-args "keyring_pass" poetry
@@ -148,5 +68,83 @@ COPY --chown=ubuntu:ubuntu . .
 RUN git remote rm origin && git remote add origin https://github.com/defn/dev && git fetch && git branch -u origin/main
 
 RUN mkdir -p ~/.docker && echo '{"credsStore": "pass"}' > ~/.docker/config.json
+
+ARG CREDENTIAL_PASS
+RUN cd /usr/local/bin && curl -sSL https://github.com/docker/docker-credential-helpers/releases/download/v${CREDENTIAL_PASS}/docker-credential-pass-v${CREDENTIAL_PASS}-amd64.tar.gz \
+    | sudo tar xvfz -
+
+ARG POWERLINE
+RUN cd /usr/local/bin && sudo curl -sSL -o powerline https://github.com/justjanne/powerline-go/releases/download/v${POWERLINE}/powerline-go-linux-amd64 \
+    && sudo chmod 755 powerline
+
+ARG HOF
+RUN cd /usr/local/bin && sudo curl -sSL -o hof https://github.com/hofstadter-io/hof/releases/download/v${HOF}/hof_${HOF}_Linux_x86_64 \
+    && sudo chmod 755 hof
+
+ARG STEP
+RUN curl -sSL -o step.deb https://dl.step.sm/gh-release/cli/gh-release-header/v${STEP}/step-cli_${STEP}_amd64.deb \
+    && sudo dpkg -i step.deb && rm -f step.deb
+
+ARG CILIUM
+RUN cd /usr/local/bin && curl -sSL https://github.com/cilium/cilium-cli/releases/download/v${CILIUM}/cilium-linux-amd64.tar.gz \
+    | sudo tar xvfz -
+
+ARG HUBBLE
+RUN cd /usr/local/bin && curl -sSL https://github.com/cilium/hubble/releases/download/v${HUBBLE}/hubble-linux-amd64.tar.gz \
+    | sudo tar xzvf -
+
+ARG LINKERD
+RUN cd /usr/local/bin && sudo curl -sSL -o linkerd https://github.com/linkerd/linkerd2/releases/download/${LINKERD}/linkerd2-cli-${LINKERD}-linux-amd64 \
+    && sudo chmod 755 linkerd
+
+ARG VCLUSTER
+RUN cd /usr/local/bin && sudo curl -sSL -o vcluster https://github.com/loft-sh/vcluster/releases/download/v${VCLUSTER}/vcluster-linux-amd64 \
+    && sudo chmod 755 vcluster
+
+ARG LOFT
+RUN cd /usr/local/bin && sudo curl -sSL -o loft https://github.com/loft-sh/loft/releases/download/v${LOFT}/loft-linux-amd64 \
+    && sudo chmod 755 loft
+
+ARG STEAMPIPE
+RUN cd /usr/local/bin && curl -sSL https://github.com/turbot/steampipe/releases/download/v${STEAMPIPE}/steampipe_linux_amd64.tar.gz \
+    | sudo tar xvfz -
+
+ARG JLESS
+RUN (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${JLESS}/jless-v${JLESS}-x86_64-unknown-linux-gnu.zip | gunzip -c - > jless) \
+    && chmod 755 jless && sudo mv jless /usr/local/bin/
+
+ARG WOODPECKER
+RUN cd /usr/local/bin && curl -sSL https://github.com/woodpecker-ci/woodpecker/releases/download/v${WOODPECKER}/woodpecker-agent_linux_amd64.tar.gz | sudo tar xvfz -
+RUN cd /usr/local/bin && curl -sSL https://github.com/woodpecker-ci/woodpecker/releases/download/v${WOODPECKER}/woodpecker-cli_linux_amd64.tar.gz | sudo  tar xvfz -
+
+ARG CIRRUS
+RUN cd /usr/local/bin && curl -sSL https://github.com/cirruslabs/cirrus-cli/releases/download/v${CIRRUS}/cirrus-linux-amd64.tar.gz | sudo tar xvfz - cirrus
+
+ARG BABASHKA
+RUN cd /usr/local/bin && curl -sSL https://github.com/babashka/babashka/releases/download/v${BABASHKA}/babashka-${BABASHKA}-linux-amd64.tar.gz | sudo tar xvfz -
+
+ARG ASDF
+COPY --chown=ubuntu:ubuntu .tool-versions .
+RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${ASDF}
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shellcheck'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shfmt'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add cue'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add kubectl'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add krew'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add k9s'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add kustomize'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add helm'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add k3d'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add tilt'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add golang'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add teleport-ent'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add vault'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add consul'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
+
+RUN /home/ubuntu/.asdf/shims/kubectl-krew install ns
+RUN /home/ubuntu/.asdf/shims/kubectl-krew install ctx
+RUN /home/ubuntu/.asdf/shims/kubectl-krew install stern
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf reshim krew'
 
 RUN ./bin/e /home/ubuntu/.local/bin/pre-commit run --all
