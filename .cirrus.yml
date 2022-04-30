@@ -5,10 +5,6 @@ precommit_task:
     folder: meh
   script: |
     set -efu
-    sudo chown -R ubuntu:ubuntu /tmp/cirrus-ci/working-dir
+    chown -R ubuntu:ubuntu /tmp/cirrus-ci/working-dir
     git config --global --add safe.directory /tmp/cirrus-ci/working-dir
-    git checkout -- .dockerignore
-    ./bin/e pre-commit run -a
-    mkdir -p meh
-    touch meh/meh-$(date +%s)
-    find meh -ls
+    sudo -E -u ubuntu ./ci/precommit.sh
