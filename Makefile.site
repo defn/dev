@@ -8,5 +8,8 @@ tower:
 	pre-commit run -a
 	dotenv run docker build -f Dockerfile.tower -t defn/dev:tower --build-arg IMAGE=defn/dev:base $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
 
+ci:
+	dotenv run docker build -f Dockerfile.ci -t defn/dev:ci --build-arg IMAGE=defn/dev:tower $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
+
 asdf:
 	cat .tool-versions| awk '{print $$1}' | while read -r a; do asdf list-all "$$a" | sed "s#^#$$a #"; done | sort > .tool-versions-all
