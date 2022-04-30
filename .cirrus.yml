@@ -1,6 +1,6 @@
 lint_task:
   container:
-    image: defn/dev
+    image: defn/dev:tower
   script: |
     set -efu
     sudo chown -R ubuntu:ubuntu /tmp/cirrus-ci/working-dir
@@ -8,4 +8,3 @@ lint_task:
     git checkout -- .dockerignore
     ./bin/e pre-commit run -a
     ps axuf
-    git diff
