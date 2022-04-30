@@ -82,4 +82,8 @@ RUN /home/ubuntu/.asdf/shims/kubectl-krew install ctx
 RUN /home/ubuntu/.asdf/shims/kubectl-krew install stern
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf reshim krew'
 
+RUN python3.9 -m pipx install pantsbuild.pants
+
+COPY --chown=ubuntu:ubuntu . .
+
 RUN ./bin/e /home/ubuntu/.local/bin/pre-commit run --all
