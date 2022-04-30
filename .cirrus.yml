@@ -1,4 +1,9 @@
 lint_task:
   container:
     image: defn/dev
-  script: pwd && git config --global --add safe.directory /tmp/cirrus-ci/working-dir && ls -ld . && git ls-files
+  script: |
+    set -exfu
+    sudo chown -R ubuntu:ubuntu /tmp/cirrus-ci/working-dir
+    git config --global --add safe.directory /tmp/cirrus-ci/working-dir
+    ./bin/e pre-commit run -a
+    git diff
