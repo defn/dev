@@ -49,13 +49,16 @@ RUN (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${
     && chmod 755 jless && sudo mv jless /usr/local/bin/
 
 ARG CIRRUS
-RUN cd /usr/local/bin && curl -sSL https://github.com/cirruslabs/cirrus-cli/releases/download/v${CIRRUS}/cirrus-linux-amd64.tar.gz | sudo tar xvfz - cirrus
+RUN cd /usr/local/bin && curl -sSL https://github.com/cirruslabs/cirrus-cli/releases/download/v${CIRRUS}/cirrus-linux-amd64.tar.gz \
+    | sudo tar xvfz - cirrus
 
 ARG BABASHKA
-RUN cd /usr/local/bin && curl -sSL https://github.com/babashka/babashka/releases/download/v${BABASHKA}/babashka-${BABASHKA}-linux-amd64.tar.gz | sudo tar xvfz -
+RUN cd /usr/local/bin && curl -sSL https://github.com/babashka/babashka/releases/download/v${BABASHKA}/babashka-${BABASHKA}-linux-amd64.tar.gz \
+    | sudo tar xvfz -
 
 ARG GH
-RUN cd /usr/local/bin && curl -sSL https://github.com/cli/cli/releases/download/v${GH}/gh_${GH}_linux_amd64.tar.gz | sudo tar xvfz - --wildcards '*/bin/gh' && mv */bin/gh . && rm -rf gh_*
+RUN cd /usr/local/bin && curl -sSL https://github.com/cli/cli/releases/download/v${GH}/gh_${GH}_linux_amd64.tar.gz \
+    | sudo tar xvfz - --wildcards '*/bin/gh' && sudo mv */bin/gh . && sudo rm -rf gh_*
 
 ARG ASDF
 COPY --chown=ubuntu:ubuntu .tool-versions .
