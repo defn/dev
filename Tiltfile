@@ -5,6 +5,7 @@ docker_build('defn/dev:base', '.', dockerfile='Dockerfile.base',
         'IMAGE': 'ubuntu:22.04',
         'APT': '20220430'
     })
+
 docker_build('defn/dev:tower', '.', dockerfile='Dockerfile.tower',
     build_args={
         'IMAGE': 'defn/dev:base',
@@ -25,12 +26,14 @@ docker_build('defn/dev:tower', '.', dockerfile='Dockerfile.tower',
         'STEP': '0.18.2',
         'VCLUSTER': '0.7.1'
     })
+
 docker_build('defn/dev:ci', '.', dockerfile='Dockerfile.ci',
     build_args={
         'IMAGE': 'defn/dev:tower'
     })
 
 services = {
-    'ci': {'image': 'defn/dev:ci'}
+        'ci': {'image': 'defn/dev:ci'}
     }
+
 docker_compose(encode_yaml({'services': services}))
