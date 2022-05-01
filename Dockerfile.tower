@@ -87,6 +87,7 @@ RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf reshim krew'
 RUN python3.9 -m pipx install pantsbuild.pants
 
 COPY --chown=ubuntu:ubuntu . .
-RUN git clean -ffd
+
+RUN if [[ -d .git ]]; then git clean -ffd; git remote rm origin || true && git remote add origin https://github.com/defn/dev; fi
 
 RUN ./bin/e /home/ubuntu/.local/bin/pre-commit run --all
