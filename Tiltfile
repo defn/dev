@@ -33,7 +33,7 @@ docker_build('defn/dev:ci', '.', dockerfile='Dockerfile.ci',
     })
 
 services = {
-        'ci': {'image': 'defn/dev:ci'}
+        'dev': {'image': 'defn/dev:ci'}
     }
 
 docker_compose(encode_yaml({'services': services}))
