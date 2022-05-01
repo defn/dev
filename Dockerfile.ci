@@ -3,5 +3,3 @@ ARG IMAGE
 FROM ${IMAGE}
 
 USER root
-
-ENTRYPOINT ['sudo', '-u', 'ubuntu', './bin/e', 'make', 'test']
