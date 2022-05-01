@@ -48,10 +48,6 @@ ARG JLESS
 RUN (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${JLESS}/jless-v${JLESS}-x86_64-unknown-linux-gnu.zip | gunzip -c - > jless) \
     && chmod 755 jless && sudo mv jless /usr/local/bin/
 
-ARG WOODPECKER
-RUN cd /usr/local/bin && curl -sSL https://github.com/woodpecker-ci/woodpecker/releases/download/v${WOODPECKER}/woodpecker-agent_linux_amd64.tar.gz | sudo tar xvfz -
-RUN cd /usr/local/bin && curl -sSL https://github.com/woodpecker-ci/woodpecker/releases/download/v${WOODPECKER}/woodpecker-cli_linux_amd64.tar.gz | sudo  tar xvfz -
-
 ARG CIRRUS
 RUN cd /usr/local/bin && curl -sSL https://github.com/cirruslabs/cirrus-cli/releases/download/v${CIRRUS}/cirrus-linux-amd64.tar.gz | sudo tar xvfz - cirrus
 
