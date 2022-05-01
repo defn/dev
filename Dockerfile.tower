@@ -88,6 +88,4 @@ RUN python3.9 -m pipx install pantsbuild.pants
 
 COPY --chown=ubuntu:ubuntu . .
 
-RUN find .git -ls
-
 RUN ./bin/e /home/ubuntu/.local/bin/pre-commit run --all
