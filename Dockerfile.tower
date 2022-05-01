@@ -54,6 +54,9 @@ RUN cd /usr/local/bin && curl -sSL https://github.com/cirruslabs/cirrus-cli/rele
 ARG BABASHKA
 RUN cd /usr/local/bin && curl -sSL https://github.com/babashka/babashka/releases/download/v${BABASHKA}/babashka-${BABASHKA}-linux-amd64.tar.gz | sudo tar xvfz -
 
+ARG GH
+RUN cd /usr/local/bin && curl -sSL https://github.com/cli/cli/releases/download/v${GH}/gh_${GH}_linux_amd64.tar.gz | sudo tar xvfz - --wildcards '*/bin/gh' && mv */bin/gh . && rm -rf gh_*
+
 ARG ASDF
 COPY --chown=ubuntu:ubuntu .tool-versions .
 RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${ASDF}
