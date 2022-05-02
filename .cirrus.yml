@@ -2,8 +2,6 @@ container:
   image: defn/dev:ci
 
 precommit_task:
-  meh_cache:
-    folder: meh
   script: |
     chown -R ubuntu:ubuntu "${CIRRUS_WORKING_DIR}"
     sudo -E -u ubuntu ~ubuntu/bin/e ./ci/precommit.sh
