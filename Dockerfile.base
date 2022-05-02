@@ -11,7 +11,7 @@ RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/ud
 RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
-    wget apt-transport-https software-properties-common \
+    wget apt-transport-https software-properties-common build-essential \
     openssh-client tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip xz-utils rsync \
     sudo git vim less fzf jo gron jq \
     make docker.io tini \
