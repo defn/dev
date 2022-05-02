@@ -23,6 +23,12 @@ RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add vault'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add consul'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
 
+RUN git init
+RUN /home/ubuntu/.local/bin/pipx install pre-commit
+COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
+RUN /home/ubuntu/.local/bin/pre-commit install
+RUN env PATH=$PATH:$HOME/.asdf/shims /home/ubuntu/.local/bin/pre-commit run --all
+
 RUN /home/ubuntu/.asdf/shims/kubectl-krew install ns
 RUN /home/ubuntu/.asdf/shims/kubectl-krew install ctx
 RUN /home/ubuntu/.asdf/shims/kubectl-krew install stern
