@@ -4,6 +4,30 @@ FROM ${IMAGE}
 
 RUN python3.9 -m pipx install pantsbuild.pants
 
+ARG ASDF
+COPY --chown=ubuntu:ubuntu .tool-versions .
+RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${ASDF}
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shellcheck'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shfmt'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add cue'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add kubectl'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add krew'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add k9s'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add kustomize'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add helm'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add k3d'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add tilt'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add golang'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add teleport-ent'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add vault'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add consul'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
+
+RUN /home/ubuntu/.asdf/shims/kubectl-krew install ns
+RUN /home/ubuntu/.asdf/shims/kubectl-krew install ctx
+RUN /home/ubuntu/.asdf/shims/kubectl-krew install stern
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf reshim krew'
+
 ARG CREDENTIAL_PASS
 RUN cd /usr/local/bin && curl -sSL https://github.com/docker/docker-credential-helpers/releases/download/v${CREDENTIAL_PASS}/docker-credential-pass-v${CREDENTIAL_PASS}-amd64.tar.gz \
     | sudo tar xvfz -
@@ -67,32 +91,6 @@ RUN cd /usr/local/bin && curl -sSL https://github.com/goreleaser/goreleaser/rele
 ARG GOLANGCILINT
 RUN cd /usr/local/bin && curl -sSL https://github.com/golangci/golangci-lint/releases/download/v${GOLANGCILINT}/golangci-lint-${GOLANGCILINT}-linux-amd64.tar.gz \
     | sudo tar xvfz - --wildcards '*/golangci-lint' && sudo mv golangci-lint-*/golangci-lint . && sudo rm -rf golangci-lint-*
-
-ARG ASDF
-COPY --chown=ubuntu:ubuntu .tool-versions .
-RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${ASDF}
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shellcheck'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shfmt'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add cue'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add kubectl'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add krew'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add k9s'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add kustomize'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add helm'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add k3d'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add tilt'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add golang'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add teleport-ent'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add vault'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add consul'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
-
-RUN /home/ubuntu/.asdf/shims/kubectl-krew install ns
-RUN /home/ubuntu/.asdf/shims/kubectl-krew install ctx
-RUN /home/ubuntu/.asdf/shims/kubectl-krew install stern
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf reshim krew'
-
-RUN python3.9 -m pipx install pantsbuild.pants
 
 COPY --chown=ubuntu:ubuntu . .
 
