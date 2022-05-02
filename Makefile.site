@@ -10,3 +10,9 @@ base:
 tower:
 	dotenv run docker build -f Dockerfile.tower -t defn/dev:tower --build-arg IMAGE=defn/dev:base $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
 	dotenv run docker build -f Dockerfile.ci -t defn/dev:ci --build-arg IMAGE=defn/dev:tower $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
+
+
+push:
+	docker push defn/dev:base
+	docker push defn/dev:tower
+	docker push defn/dev:ci
