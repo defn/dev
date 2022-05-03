@@ -31,3 +31,4 @@ cue.mod/pkg
 .config/helm
 .loft
 .lesshst
+.fly
