@@ -104,7 +104,7 @@ RUN cd /usr/local/bin && curl -sSL https://github.com/superfly/flyctl/releases/d
     | sudo tar xvfz -
 
 ARG YAEGI
-RUN cd /usr/local/bin && curl -sSL https://github.com/traefik/yaegi/releases/download/v${YAEGI}/yaegi_v${YAEGI}_linux_amd64.tar.gz
+RUN cd /usr/local/bin && curl -sSL https://github.com/traefik/yaegi/releases/download/v${YAEGI}/yaegi_v${YAEGI}_linux_amd64.tar.gz \
     | sudo tar xvfz - yaegi
 
 COPY --chown=ubuntu:ubuntu . .
