@@ -103,6 +103,10 @@ ARG FLYCTL
 RUN cd /usr/local/bin && curl -sSL https://github.com/superfly/flyctl/releases/download/v${FLYCTL}/flyctl_${FLYCTL}_Linux_x86_64.tar.gz \
     | sudo tar xvfz -
 
+ARG YAEGI
+RUN cd /usr/local/bin && curl -sSL https://github.com/traefik/yaegi/releases/download/v${YAEGI}/yaegi_v${YAEGI}_linux_amd64.tar.gz
+    | sudo tar xvfz - yaegi
+
 COPY --chown=ubuntu:ubuntu . .
 
 RUN ./bin/e /home/ubuntu/.local/bin/pre-commit run --all

@@ -27,7 +27,8 @@ docker_build('defn/dev:tower', '.', dockerfile='Dockerfile.tower',
         'POWERLINE': '1.21.0',
         'STEAMPIPE': '0.13.6',
         'STEP': '0.18.2',
-        'VCLUSTER': '0.7.1'
+        'VCLUSTER': '0.7.1',
+        'YAEGI': '0.11.3'
     })
 
 docker_build('defn/dev:ci', '.', dockerfile='Dockerfile.ci',
