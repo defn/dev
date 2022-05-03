@@ -99,6 +99,10 @@ ARG GOLANGCILINT
 RUN cd /usr/local/bin && curl -sSL https://github.com/golangci/golangci-lint/releases/download/v${GOLANGCILINT}/golangci-lint-${GOLANGCILINT}-linux-amd64.tar.gz \
     | sudo tar xvfz - --wildcards '*/golangci-lint' && sudo mv golangci-lint-*/golangci-lint . && sudo rm -rf golangci-lint-*
 
+ARG FLYCTL
+RUN cd /usr/local/bin && curl -sSL https://github.com/superfly/flyctl/releases/download/v${FLYCTL}/flyctl_${FLYCTL}_Linux_x86_64.tar.gz \
+    | sudo tar xvfz -
+
 COPY --chown=ubuntu:ubuntu . .
 
 RUN ./bin/e /home/ubuntu/.local/bin/pre-commit run --all
