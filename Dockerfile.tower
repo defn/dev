@@ -131,7 +131,6 @@ RUN /home/ubuntu/.local/bin/pre-commit install
 RUN env PATH=$PATH:$HOME/.asdf/shims /home/ubuntu/.local/bin/pre-commit run --all
 
 FROM ${IMAGE}
-
 COPY --from=credential_pass --link /usr/local/bin/docker-credential-pass /usr/local/bin/docker-credential-pass
 COPY --from=powerline --link /usr/local/bin/powerline /usr/local/bin/powerline
 COPY --from=hof --link /usr/local/bin/hof /usr/local/bin/hof
