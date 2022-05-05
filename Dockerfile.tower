@@ -1,4 +1,97 @@
+#syntax=docker/dockerfile:1.4
+
 ARG IMAGE
+
+FROM ${IMAGE} AS yaegi
+ARG YAEGI
+RUN cd /usr/local/bin && curl -sSL https://github.com/traefik/yaegi/releases/download/v${YAEGI}/yaegi_v${YAEGI}_linux_amd64.tar.gz \
+    | sudo tar xvfz - yaegi
+
+FROM ${IMAGE} AS credential_pass
+ARG CREDENTIAL_PASS
+RUN cd /usr/local/bin && curl -sSL https://github.com/docker/docker-credential-helpers/releases/download/v${CREDENTIAL_PASS}/docker-credential-pass-v${CREDENTIAL_PASS}-amd64.tar.gz \
+    | sudo tar xvfz -
+
+FROM ${IMAGE} AS powerline
+ARG POWERLINE
+RUN cd /usr/local/bin && sudo curl -sSL -o powerline https://github.com/justjanne/powerline-go/releases/download/v${POWERLINE}/powerline-go-linux-amd64 \
+    && sudo chmod 755 powerline
+
+FROM ${IMAGE} AS hof
+ARG HOF
+RUN cd /usr/local/bin && sudo curl -sSL -o hof https://github.com/hofstadter-io/hof/releases/download/v${HOF}/hof_${HOF}_Linux_x86_64 \
+    && sudo chmod 755 hof
+
+FROM ${IMAGE} AS step
+ARG STEP
+RUN curl -sSL -o step.deb https://dl.step.sm/gh-release/cli/gh-release-header/v${STEP}/step-cli_${STEP}_amd64.deb \
+    && sudo dpkg -i step.deb && rm -f step.deb
+
+FROM ${IMAGE} AS cilium
+ARG CILIUM
+RUN cd /usr/local/bin && curl -sSL https://github.com/cilium/cilium-cli/releases/download/v${CILIUM}/cilium-linux-amd64.tar.gz \
+    | sudo tar xvfz -
+
+FROM ${IMAGE} AS hubble
+ARG HUBBLE
+RUN cd /usr/local/bin && curl -sSL https://github.com/cilium/hubble/releases/download/v${HUBBLE}/hubble-linux-amd64.tar.gz \
+    | sudo tar xzvf -
+
+FROM ${IMAGE} AS linkerd
+ARG LINKERD
+RUN cd /usr/local/bin && sudo curl -sSL -o linkerd https://github.com/linkerd/linkerd2/releases/download/${LINKERD}/linkerd2-cli-${LINKERD}-linux-amd64 \
+    && sudo chmod 755 linkerd
+
+FROM ${IMAGE} AS vcluster
+ARG VCLUSTER
+RUN cd /usr/local/bin && sudo curl -sSL -o vcluster https://github.com/loft-sh/vcluster/releases/download/v${VCLUSTER}/vcluster-linux-amd64 \
+    && sudo chmod 755 vcluster
+
+FROM ${IMAGE} AS loft
+ARG LOFT
+RUN cd /usr/local/bin && sudo curl -sSL -o loft https://github.com/loft-sh/loft/releases/download/v${LOFT}/loft-linux-amd64 \
+    && sudo chmod 755 loft
+
+FROM ${IMAGE} AS steampipe
+ARG STEAMPIPE
+RUN cd /usr/local/bin && curl -sSL https://github.com/turbot/steampipe/releases/download/v${STEAMPIPE}/steampipe_linux_amd64.tar.gz \
+    | sudo tar xvfz -
+
+FROM ${IMAGE} AS jless
+ARG JLESS
+RUN (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${JLESS}/jless-v${JLESS}-x86_64-unknown-linux-gnu.zip | gunzip -c - > jless) \
+    && chmod 755 jless && sudo mv jless /usr/local/bin/
+
+FROM ${IMAGE} AS cirrus
+ARG CIRRUS
+RUN cd /usr/local/bin && curl -sSL https://github.com/cirruslabs/cirrus-cli/releases/download/v${CIRRUS}/cirrus-linux-amd64.tar.gz \
+    | sudo tar xvfz - cirrus
+
+FROM ${IMAGE} AS babashka
+ARG BABASHKA
+RUN cd /usr/local/bin && curl -sSL https://github.com/babashka/babashka/releases/download/v${BABASHKA}/babashka-${BABASHKA}-linux-amd64.tar.gz \
+    | sudo tar xvfz -
+
+FROM ${IMAGE} AS gh
+ARG GH
+RUN cd /usr/local/bin && curl -sSL https://github.com/cli/cli/releases/download/v${GH}/gh_${GH}_linux_amd64.tar.gz \
+    | sudo tar xvfz - --wildcards '*/bin/gh' && sudo mv */bin/gh . && sudo rm -rf gh_*
+
+FROM ${IMAGE} AS goreleaser
+ARG GORELEASER
+RUN cd /usr/local/bin && curl -sSL https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER}/goreleaser_Linux_x86_64.tar.gz \
+    | sudo tar xvfz - goreleaser
+
+FROM ${IMAGE} AS golangcilint
+ARG GOLANGCILINT
+RUN cd /usr/local/bin && curl -sSL https://github.com/golangci/golangci-lint/releases/download/v${GOLANGCILINT}/golangci-lint-${GOLANGCILINT}-linux-amd64.tar.gz \
+    | sudo tar xvfz - --wildcards '*/golangci-lint' && sudo mv golangci-lint-*/golangci-lint . && sudo rm -rf golangci-lint-*
+
+FROM ${IMAGE} AS flyctl
+ARG FLYCTL
+RUN cd /usr/local/bin && curl -sSL https://github.com/superfly/flyctl/releases/download/v${FLYCTL}/flyctl_${FLYCTL}_Linux_x86_64.tar.gz \
+    | sudo tar xvfz -
+
 
 FROM ${IMAGE}
 
@@ -35,78 +128,25 @@ RUN /home/ubuntu/.asdf/shims/kubectl-krew install ctx
 RUN /home/ubuntu/.asdf/shims/kubectl-krew install stern
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf reshim krew'
 
-ARG CREDENTIAL_PASS
-RUN cd /usr/local/bin && curl -sSL https://github.com/docker/docker-credential-helpers/releases/download/v${CREDENTIAL_PASS}/docker-credential-pass-v${CREDENTIAL_PASS}-amd64.tar.gz \
-    | sudo tar xvfz -
+COPY --from=credential_pass --link /usr/local/bin/docker-credential-pass /usr/local/bin/docker-credential-pass
+COPY --from=powerline --link /usr/local/bin/powerline /usr/local/bin/powerline
+COPY --from=hof --link /usr/local/bin/hof /usr/local/bin/hof
+COPY --from=step --link /usr/bin/step* /usr/local/bin/
+COPY --from=cilium --link /usr/local/bin/cilium /usr/local/bin/cilium
+COPY --from=hubble --link /usr/local/bin/hubble /usr/local/bin/hubble
+COPY --from=linkerd --link /usr/local/bin/linkerd /usr/local/bin/linkerd
+COPY --from=vcluster --link /usr/local/bin/vcluster /usr/local/bin/vcluster
+COPY --from=loft --link /usr/local/bin/loft /usr/local/bin/loft
+COPY --from=steampipe --link /usr/local/bin/steampipe /usr/local/bin/steampipe
+COPY --from=jless --link /usr/local/bin/jless /usr/local/bin/jless
+COPY --from=cirrus --link /usr/local/bin/cirrus /usr/local/bin/cirrus
+COPY --from=babashka --link /usr/local/bin/bb /usr/local/bin/bb
+COPY --from=gh --link /usr/local/bin/gh /usr/local/bin/gh
+COPY --from=goreleaser --link /usr/local/bin/goreleaser /usr/local/bin/goreleaser
+COPY --from=golangcilint --link /usr/local/bin/golangci-lint /usr/local/bin/golangci-lint
+COPY --from=flyctl --link /usr/local/bin/flyctl /usr/local/bin/flyctl
+COPY --from=yaegi --link /usr/local/bin/yaegi /usr/local/bin/yaegi
 
-ARG POWERLINE
-RUN cd /usr/local/bin && sudo curl -sSL -o powerline https://github.com/justjanne/powerline-go/releases/download/v${POWERLINE}/powerline-go-linux-amd64 \
-    && sudo chmod 755 powerline
-
-ARG HOF
-RUN cd /usr/local/bin && sudo curl -sSL -o hof https://github.com/hofstadter-io/hof/releases/download/v${HOF}/hof_${HOF}_Linux_x86_64 \
-    && sudo chmod 755 hof
-
-ARG STEP
-RUN curl -sSL -o step.deb https://dl.step.sm/gh-release/cli/gh-release-header/v${STEP}/step-cli_${STEP}_amd64.deb \
-    && sudo dpkg -i step.deb && rm -f step.deb
-
-ARG CILIUM
-RUN cd /usr/local/bin && curl -sSL https://github.com/cilium/cilium-cli/releases/download/v${CILIUM}/cilium-linux-amd64.tar.gz \
-    | sudo tar xvfz -
-
-ARG HUBBLE
-RUN cd /usr/local/bin && curl -sSL https://github.com/cilium/hubble/releases/download/v${HUBBLE}/hubble-linux-amd64.tar.gz \
-    | sudo tar xzvf -
-
-ARG LINKERD
-RUN cd /usr/local/bin && sudo curl -sSL -o linkerd https://github.com/linkerd/linkerd2/releases/download/${LINKERD}/linkerd2-cli-${LINKERD}-linux-amd64 \
-    && sudo chmod 755 linkerd
-
-ARG VCLUSTER
-RUN cd /usr/local/bin && sudo curl -sSL -o vcluster https://github.com/loft-sh/vcluster/releases/download/v${VCLUSTER}/vcluster-linux-amd64 \
-    && sudo chmod 755 vcluster
-
-ARG LOFT
-RUN cd /usr/local/bin && sudo curl -sSL -o loft https://github.com/loft-sh/loft/releases/download/v${LOFT}/loft-linux-amd64 \
-    && sudo chmod 755 loft
-
-ARG STEAMPIPE
-RUN cd /usr/local/bin && curl -sSL https://github.com/turbot/steampipe/releases/download/v${STEAMPIPE}/steampipe_linux_amd64.tar.gz \
-    | sudo tar xvfz -
-
-ARG JLESS
-RUN (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${JLESS}/jless-v${JLESS}-x86_64-unknown-linux-gnu.zip | gunzip -c - > jless) \
-    && chmod 755 jless && sudo mv jless /usr/local/bin/
-
-ARG CIRRUS
-RUN cd /usr/local/bin && curl -sSL https://github.com/cirruslabs/cirrus-cli/releases/download/v${CIRRUS}/cirrus-linux-amd64.tar.gz \
-    | sudo tar xvfz - cirrus
-
-ARG BABASHKA
-RUN cd /usr/local/bin && curl -sSL https://github.com/babashka/babashka/releases/download/v${BABASHKA}/babashka-${BABASHKA}-linux-amd64.tar.gz \
-    | sudo tar xvfz -
-
-ARG GH
-RUN cd /usr/local/bin && curl -sSL https://github.com/cli/cli/releases/download/v${GH}/gh_${GH}_linux_amd64.tar.gz \
-    | sudo tar xvfz - --wildcards '*/bin/gh' && sudo mv */bin/gh . && sudo rm -rf gh_*
-
-ARG GORELEASER
-RUN cd /usr/local/bin && curl -sSL https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER}/goreleaser_Linux_x86_64.tar.gz \
-    | sudo tar xvfz - goreleaser
-
-ARG GOLANGCILINT
-RUN cd /usr/local/bin && curl -sSL https://github.com/golangci/golangci-lint/releases/download/v${GOLANGCILINT}/golangci-lint-${GOLANGCILINT}-linux-amd64.tar.gz \
-    | sudo tar xvfz - --wildcards '*/golangci-lint' && sudo mv golangci-lint-*/golangci-lint . && sudo rm -rf golangci-lint-*
-
-ARG FLYCTL
-RUN cd /usr/local/bin && curl -sSL https://github.com/superfly/flyctl/releases/download/v${FLYCTL}/flyctl_${FLYCTL}_Linux_x86_64.tar.gz \
-    | sudo tar xvfz -
-
-ARG YAEGI
-RUN cd /usr/local/bin && curl -sSL https://github.com/traefik/yaegi/releases/download/v${YAEGI}/yaegi_v${YAEGI}_linux_amd64.tar.gz \
-    | sudo tar xvfz - yaegi
-
-COPY --chown=ubuntu:ubuntu . .
+COPY --link --chown=ubuntu:ubuntu . .
 
 RUN ./bin/e /home/ubuntu/.local/bin/pre-commit run --all
