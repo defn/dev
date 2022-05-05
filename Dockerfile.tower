@@ -116,6 +116,11 @@ RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add consul'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add cloudflared'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
 
+RUN /home/ubuntu/.asdf/shims/kubectl-krew install ns
+RUN /home/ubuntu/.asdf/shims/kubectl-krew install ctx
+RUN /home/ubuntu/.asdf/shims/kubectl-krew install stern
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf reshim krew'
+
 FROM ${IMAGE} as precommit
 COPY --from=asdf --link /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --from=asdf --link /home/ubuntu/.tool-versions /home/ubuntu/.tool-versions
@@ -126,24 +131,6 @@ RUN /home/ubuntu/.local/bin/pre-commit install
 RUN env PATH=$PATH:$HOME/.asdf/shims /home/ubuntu/.local/bin/pre-commit run --all
 
 FROM ${IMAGE}
-
-COPY --from=asdf --link /home/ubuntu/.asdf /home/ubuntu/.asdf
-COPY --from=asdf --link /home/ubuntu/.tool-versions /home/ubuntu/.tool-versions
-
-COPY --from=precommit --link /home/ubuntu/.local/pipx/venvs/pre-commit /home/ubuntu/.local/pipx/venvs/pre-commit
-COPY --from=precommit --link /home/ubuntu/.local/bin/pre-commit* /home/ubuntu/.local/bin/
-COPY --link --chown=ubuntu:ubuntu .pre-commit-config.yaml .
-COPY --from=precommit --link /home/ubuntu/.cache/pre-commit /home/ubuntu/.cache/pre-commit
-RUN git init
-RUN /home/ubuntu/.local/bin/pre-commit install
-
-RUN /home/ubuntu/.asdf/shims/kubectl-krew install ns
-RUN /home/ubuntu/.asdf/shims/kubectl-krew install ctx
-RUN /home/ubuntu/.asdf/shims/kubectl-krew install stern
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf reshim krew'
-
-COPY --from=pants --link /home/ubuntu/.local/pipx/venvs/pantsbuild-pants /home/ubuntu/.local/pipx/venvs/pantsbuild-pants
-COPY --from=pants --link /home/ubuntu/.local/bin/pants /home/ubuntu/.local/bin/pants
 
 COPY --from=credential_pass --link /usr/local/bin/docker-credential-pass /usr/local/bin/docker-credential-pass
 COPY --from=powerline --link /usr/local/bin/powerline /usr/local/bin/powerline
@@ -164,6 +151,17 @@ COPY --from=golangcilint --link /usr/local/bin/golangci-lint /usr/local/bin/gola
 COPY --from=flyctl --link /usr/local/bin/flyctl /usr/local/bin/flyctl
 COPY --from=yaegi --link /usr/local/bin/yaegi /usr/local/bin/yaegi
 
-COPY --link --chown=ubuntu:ubuntu . .
+COPY --from=pants --link /home/ubuntu/.local/pipx/venvs/pantsbuild-pants /home/ubuntu/.local/pipx/venvs/pantsbuild-pants
+COPY --from=pants --link /home/ubuntu/.local/bin/pants /home/ubuntu/.local/bin/pants
 
+COPY --from=asdf --link /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --from=asdf --link /home/ubuntu/.tool-versions /home/ubuntu/.tool-versions
+
+COPY --from=precommit --link /home/ubuntu/.local/pipx/venvs/pre-commit /home/ubuntu/.local/pipx/venvs/pre-commit
+COPY --from=precommit --link /home/ubuntu/.local/bin/pre-commit* /home/ubuntu/.local/bin/
+COPY --link --chown=ubuntu:ubuntu .pre-commit-config.yaml .
+COPY --from=precommit --link /home/ubuntu/.cache/pre-commit /home/ubuntu/.cache/pre-commit
+
+COPY --link --chown=ubuntu:ubuntu . .
+RUN /home/ubuntu/.local/bin/pre-commit install
 RUN ./bin/e /home/ubuntu/.local/bin/pre-commit run --all
