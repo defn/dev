@@ -92,13 +92,12 @@ ARG FLYCTL
 RUN cd /usr/local/bin && curl -sSL https://github.com/superfly/flyctl/releases/download/v${FLYCTL}/flyctl_${FLYCTL}_Linux_x86_64.tar.gz \
     | sudo tar xvfz -
 
-
-FROM ${IMAGE}
-
+FROM ${IMAGE} as pants
 RUN python3.9 -m pipx install pantsbuild.pants
 
+FROM ${IMAGE} as asdf
 ARG ASDF
-COPY --chown=ubuntu:ubuntu .tool-versions .
+COPY --link --chown=ubuntu:ubuntu .tool-versions .
 RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${ASDF}
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shellcheck'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shfmt'
@@ -117,9 +116,14 @@ RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add consul'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add cloudflared'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
 
+FROM ${IMAGE}
+
+COPY --from=asdf --link /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --from=asdf --link /home/ubuntu/.tool-versions /home/ubuntu/.tool-versions
+
 RUN git init
 RUN /home/ubuntu/.local/bin/pipx install pre-commit
-COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
+COPY --link --chown=ubuntu:ubuntu .pre-commit-config.yaml .
 RUN /home/ubuntu/.local/bin/pre-commit install
 RUN env PATH=$PATH:$HOME/.asdf/shims /home/ubuntu/.local/bin/pre-commit run --all
 
@@ -127,6 +131,8 @@ RUN /home/ubuntu/.asdf/shims/kubectl-krew install ns
 RUN /home/ubuntu/.asdf/shims/kubectl-krew install ctx
 RUN /home/ubuntu/.asdf/shims/kubectl-krew install stern
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf reshim krew'
+
+COPY --from=pants --link /home/ubuntu/.local/pipx/venvs/pantsbuild-pants /home/ubuntu/.local/pipx/venvs/pantsbuild-pants
 
 COPY --from=credential_pass --link /usr/local/bin/docker-credential-pass /usr/local/bin/docker-credential-pass
 COPY --from=powerline --link /usr/local/bin/powerline /usr/local/bin/powerline
