@@ -141,6 +141,14 @@ RUN /home/ubuntu/.local/bin/pre-commit install
 RUN env PATH=$PATH:$HOME/.asdf/shims /home/ubuntu/.local/bin/pre-commit run --all
 
 FROM ${IMAGE}
+COPY --from=asdf --link /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --from=asdf --link /home/ubuntu/.tool-versions /home/ubuntu/.tool-versions
+
+COPY --from=precommit --link /home/ubuntu/.local/pipx/venvs/pre-commit /home/ubuntu/.local/pipx/venvs/pre-commit
+COPY --from=precommit --link /home/ubuntu/.local/bin/pre-commit* /home/ubuntu/.local/bin/
+COPY --link --chown=ubuntu:ubuntu .pre-commit-config.yaml .
+COPY --from=precommit --link /home/ubuntu/.cache/pre-commit /home/ubuntu/.cache/pre-commit
+
 COPY --from=credential_pass --link /usr/local/bin/docker-credential-pass /usr/local/bin/docker-credential-pass
 COPY --from=powerline --link /usr/local/bin/powerline /usr/local/bin/powerline
 COPY --from=hof --link /usr/local/bin/hof /usr/local/bin/hof
@@ -164,14 +172,6 @@ COPY --from=earthly --link /usr/local/bin/earthly /usr/local/bin/earthly
 
 COPY --from=pants --link /home/ubuntu/.local/pipx/venvs/pantsbuild-pants /home/ubuntu/.local/pipx/venvs/pantsbuild-pants
 COPY --from=pants --link /home/ubuntu/.local/bin/pants /home/ubuntu/.local/bin/pants
-
-COPY --from=asdf --link /home/ubuntu/.asdf /home/ubuntu/.asdf
-COPY --from=asdf --link /home/ubuntu/.tool-versions /home/ubuntu/.tool-versions
-
-COPY --from=precommit --link /home/ubuntu/.local/pipx/venvs/pre-commit /home/ubuntu/.local/pipx/venvs/pre-commit
-COPY --from=precommit --link /home/ubuntu/.local/bin/pre-commit* /home/ubuntu/.local/bin/
-COPY --link --chown=ubuntu:ubuntu .pre-commit-config.yaml .
-COPY --from=precommit --link /home/ubuntu/.cache/pre-commit /home/ubuntu/.cache/pre-commit
 
 COPY --link --chown=ubuntu:ubuntu . .
 COPY --link --chown=ubuntu:ubuntu etc/authorized_keys .ssh/authorized_keys
