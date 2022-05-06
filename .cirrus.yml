@@ -1,7 +1,0 @@
-container:
-  image: defn/dev:ci
-
-precommit_task:
-  script: |
-    chown -R ubuntu:ubuntu "${CIRRUS_WORKING_DIR}"
-    sudo -E -u ubuntu ~ubuntu/bin/e ./ci/precommit.sh

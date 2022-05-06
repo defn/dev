@@ -57,11 +57,6 @@ ARG JLESS
 RUN (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${JLESS}/jless-v${JLESS}-x86_64-unknown-linux-gnu.zip | gunzip -c - > jless) \
     && chmod 755 jless && sudo mv jless /usr/local/bin/
 
-FROM ${IMAGE} AS cirrus
-ARG CIRRUS
-RUN cd /usr/local/bin && curl -sSL https://github.com/cirruslabs/cirrus-cli/releases/download/v${CIRRUS}/cirrus-linux-amd64.tar.gz \
-    | sudo tar xvfz - cirrus
-
 FROM ${IMAGE} AS babashka
 ARG BABASHKA
 RUN cd /usr/local/bin && curl -sSL https://github.com/babashka/babashka/releases/download/v${BABASHKA}/babashka-${BABASHKA}-linux-amd64.tar.gz \
@@ -91,11 +86,6 @@ FROM ${IMAGE} AS yaegi
 ARG YAEGI
 RUN cd /usr/local/bin && curl -sSL https://github.com/traefik/yaegi/releases/download/v${YAEGI}/yaegi_v${YAEGI}_linux_amd64.tar.gz \
     | sudo tar xvfz - yaegi
-
-FROM ${IMAGE} AS dagger
-ARG DAGGER
-RUN cd /usr/local/bin && curl -sSL https://github.com/dagger/dagger/releases/download/v${DAGGER}/dagger_v${DAGGER}_linux_amd64.tar.gz \
-    | sudo tar xvfz -
 
 FROM ${IMAGE} AS earthly
 ARG EARTHLY
@@ -160,14 +150,12 @@ COPY --from=vcluster --link /usr/local/bin/vcluster /usr/local/bin/vcluster
 COPY --from=loft --link /usr/local/bin/loft /usr/local/bin/loft
 COPY --from=steampipe --link /usr/local/bin/steampipe /usr/local/bin/steampipe
 COPY --from=jless --link /usr/local/bin/jless /usr/local/bin/jless
-COPY --from=cirrus --link /usr/local/bin/cirrus /usr/local/bin/cirrus
 COPY --from=babashka --link /usr/local/bin/bb /usr/local/bin/bb
 COPY --from=gh --link /usr/local/bin/gh /usr/local/bin/gh
 COPY --from=goreleaser --link /usr/local/bin/goreleaser /usr/local/bin/goreleaser
 COPY --from=golangcilint --link /usr/local/bin/golangci-lint /usr/local/bin/golangci-lint
 COPY --from=flyctl --link /usr/local/bin/flyctl /usr/local/bin/flyctl
 COPY --from=yaegi --link /usr/local/bin/yaegi /usr/local/bin/yaegi
-COPY --from=dagger --link /usr/local/bin/dagger /usr/local/bin/dagger
 COPY --from=earthly --link /usr/local/bin/earthly /usr/local/bin/earthly
 
 COPY --from=pants --link /home/ubuntu/.local/pipx/venvs/pantsbuild-pants /home/ubuntu/.local/pipx/venvs/pantsbuild-pants
