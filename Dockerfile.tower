@@ -167,7 +167,7 @@ COPY --from=goreleaser --link /usr/local/bin/goreleaser /usr/local/bin/gorelease
 COPY --from=golangcilint --link /usr/local/bin/golangci-lint /usr/local/bin/golangci-lint
 COPY --from=flyctl --link /usr/local/bin/flyctl /usr/local/bin/flyctl
 COPY --from=yaegi --link /usr/local/bin/yaegi /usr/local/bin/yaegi
-COPY --from=dagger --link /usr/local/bin/dagger /usr/local/bin/dagger
+#COPY --from=dagger --link /usr/local/bin/dagger /usr/local/bin/dagger
 COPY --from=earthly --link /usr/local/bin/earthly /usr/local/bin/earthly
 
 COPY --from=pants --link /home/ubuntu/.local/pipx/venvs/pantsbuild-pants /home/ubuntu/.local/pipx/venvs/pantsbuild-pants
