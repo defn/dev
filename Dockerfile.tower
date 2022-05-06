@@ -97,6 +97,11 @@ ARG DAGGER
 RUN cd /usr/local/bin && curl -sSL https://github.com/dagger/dagger/releases/download/v${DAGGER}/dagger_v${DAGGER}_linux_amd64.tar.gz \
     | sudo tar xvfz -
 
+FROM ${IMAGE} AS earthly
+ARG EARTHLY
+RUN cd /usr/local/bin && sudo curl -sSL -o earthly https://github.com/earthly/earthly/releases/download/v${EARTHLY}/earthly-linux-amd64 \
+    && sudo chmod 755 earthly
+
 FROM ${IMAGE} as pants
 RUN python3.9 -m pipx install pantsbuild.pants
 
@@ -155,6 +160,7 @@ COPY --from=golangcilint --link /usr/local/bin/golangci-lint /usr/local/bin/gola
 COPY --from=flyctl --link /usr/local/bin/flyctl /usr/local/bin/flyctl
 COPY --from=yaegi --link /usr/local/bin/yaegi /usr/local/bin/yaegi
 COPY --from=dagger --link /usr/local/bin/dagger /usr/local/bin/dagger
+COPY --from=earthly --link /usr/local/bin/earthly /usr/local/bin/earthly
 
 COPY --from=pants --link /home/ubuntu/.local/pipx/venvs/pantsbuild-pants /home/ubuntu/.local/pipx/venvs/pantsbuild-pants
 COPY --from=pants --link /home/ubuntu/.local/bin/pants /home/ubuntu/.local/bin/pants
