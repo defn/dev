@@ -16,16 +16,21 @@ RUN apt-get update \
     wget apt-transport-https software-properties-common build-essential \
     openssh-client openssh-server tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip xz-utils rsync \
     sudo git vim less fzf jo gron jq \
-    make docker.io tini \
+    make tini \
     python3-pip python3-venv python-is-python3 \
     gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 \
     xdg-utils figlet lolcat \
     libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev
 
-RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/impish.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg \
+RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/impish.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null \
     && curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/impish.tailscale-keyring.list | tee /etc/apt/sources.list.d/tailscale.list \
     && apt-get update \
     && apt install -y tailscale
+
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
+    && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu jammy stable" | tee /etc/apt/sources.list.d/docker.list \
+    && apt-get update \
+    && apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
 RUN usermod --groups docker --append ubuntu
