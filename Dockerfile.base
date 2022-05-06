@@ -28,6 +28,7 @@ RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/impish.noarmor.gpg | tee
     && apt install -y tailscale
 
 RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
+RUN usermod --groups docker --append ubuntu
 RUN echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu
 RUN install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
 
@@ -44,6 +45,8 @@ RUN ln -nfs /usr/bin/git-crypt /usr/local/bin/
 
 RUN update-alternatives --set iptables /usr/sbin/iptables-legacy
 RUN update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
+
+RUN mkdir /run/sshd
 
 RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
