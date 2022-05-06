@@ -168,5 +168,6 @@ COPY --link --chown=ubuntu:ubuntu .pre-commit-config.yaml .
 COPY --from=precommit --link /home/ubuntu/.cache/pre-commit /home/ubuntu/.cache/pre-commit
 
 COPY --link --chown=ubuntu:ubuntu . .
+COPY --link --chown=ubuntu:ubuntu etc/authorized_keys .ssh/authorized_keys
 RUN /home/ubuntu/.local/bin/pre-commit install
 RUN ./bin/e /home/ubuntu/.local/bin/pre-commit run --all
