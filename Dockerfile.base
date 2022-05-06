@@ -10,17 +10,21 @@ ENV container=docker
 
 RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm
 
+RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/impish.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null
+RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/impish.tailscale-keyring.list | tee /etc/apt/sources.list.d/tailscale.list
+
 RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
     wget apt-transport-https software-properties-common build-essential \
-    openssh-client tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip xz-utils rsync \
+    openssh-client openssh-server tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip xz-utils rsync \
     sudo git vim less fzf jo gron jq \
     make docker.io tini \
     python3-pip python3-venv python-is-python3 \
     gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 \
     xdg-utils figlet lolcat \
-    libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev
+    libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev \
+    tailscale
 
 RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
 RUN echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu
