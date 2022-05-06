@@ -32,8 +32,13 @@ RUN ln -sf /usr/share/zoneinfo/UTC /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata \
     && locale-gen en_US.UTF-8 \
     && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+
 RUN rm -f /usr/bin/gs
+
 RUN ln -nfs /usr/bin/git-crypt /usr/local/bin/
+
+RUN update-alternatives --set iptables /usr/sbin/iptables-legacy
+RUN update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
 
 RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
