@@ -5,7 +5,7 @@ asdf:
 	cat .tool-versions| awk '{print $$1}' | while read -r a; do asdf list-all "$$a" | sed "s#^#$$a #"; done | sort > .tool-versions-all
 
 base:
-	dotenv run docker build -f Dockerfile.base -t defn/dev:base --build-arg IMAGE=ubuntu:22.04 $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
+	dotenv run docker build -f Dockerfile.base -t defn/dev:base --build-arg IMAGE=ubuntu:20.04 $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
 
 tower:
 	dotenv run docker build -f Dockerfile.tower -t defn/dev:tower --build-arg IMAGE=defn/dev:base $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
