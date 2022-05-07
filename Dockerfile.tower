@@ -93,9 +93,9 @@ RUN cd /usr/local/bin && sudo curl -sSL -o earthly https://github.com/earthly/ea
     && sudo chmod 755 earthly
 
 FROM ${IMAGE} AS buildkite
-ARG BUILDKIT
+ARG BUILDKITE
 RUN cd /usr/local/bin && curl -sSL https://github.com/buildkite/agent/releases/download/v${BUILDKITE}/buildkite-agent-linux-amd64-${BUILDKITE}.tar.gz \
-    && sudo tar xvfz - buildkite-agent
+    | sudo tar xvfz -
 
 FROM ${IMAGE} as pants
 RUN python3.9 -m pipx install pantsbuild.pants
