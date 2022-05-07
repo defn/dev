@@ -94,7 +94,7 @@ RUN cd /usr/local/bin && sudo curl -sSL -o earthly https://github.com/earthly/ea
 
 FROM ${IMAGE} AS buildkite
 ARG BUILDKIT
-RUN cd /usr/local/bin && curl -sSL https://github.com/buildkite/agent/releases/download/v3.35.2/buildkite-agent-linux-amd64-3.35.2.tar.gz \
+RUN cd /usr/local/bin && curl -sSL https://github.com/buildkite/agent/releases/download/v${BUILDKITE}/buildkite-agent-linux-amd64-${BUILDKITE}.tar.gz \
     && sudo tar xvfz - buildkite-agent
 
 FROM ${IMAGE} as pants
