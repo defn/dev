@@ -247,5 +247,3 @@ COPY --link --chown=ubuntu:ubuntu --from=pants /home/ubuntu/.local/bin/pants /ho
 
 COPY --link --chown=ubuntu:ubuntu . .
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install && asdf reshim'
-RUN ./bin/e /home/ubuntu/.local/bin/pre-commit install
-RUN ./bin/e /home/ubuntu/.local/bin/pre-commit run --all

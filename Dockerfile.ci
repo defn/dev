@@ -4,4 +4,6 @@ ARG IMAGE
 
 FROM ${IMAGE}
 
+RUN ./bin/e /home/ubuntu/.local/bin/pre-commit run --all
+
 USER root
