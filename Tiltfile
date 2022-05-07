@@ -1,3 +1,3 @@
 #!/usr/bin/env python
 
-local_resource('cicd', cmd='make ci', deps=['.test'])
+local_resource('cicd', cmd='time make ci', deps=['.test'])
