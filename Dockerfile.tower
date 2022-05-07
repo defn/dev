@@ -203,25 +203,6 @@ RUN /home/ubuntu/.local/bin/pre-commit install
 RUN env PATH=$PATH:$HOME/.asdf/shims /home/ubuntu/.local/bin/pre-commit run --all
 
 FROM ${IMAGE}
-COPY --link --chown=ubuntu:ubuntu --from=shell /home/ubuntu/.asdf /home/ubuntu/.asdf
-COPY --link --chown=ubuntu:ubuntu --from=kubernetes /home/ubuntu/.asdf /home/ubuntu/.asdf
-COPY --link --chown=ubuntu:ubuntu --from=cue /home/ubuntu/.asdf /home/ubuntu/.asdf
-COPY --link --chown=ubuntu:ubuntu --from=k9s /home/ubuntu/.asdf /home/ubuntu/.asdf
-COPY --link --chown=ubuntu:ubuntu --from=kustomize /home/ubuntu/.asdf /home/ubuntu/.asdf
-COPY --link --chown=ubuntu:ubuntu --from=helm /home/ubuntu/.asdf /home/ubuntu/.asdf
-COPY --link --chown=ubuntu:ubuntu --from=k3d /home/ubuntu/.asdf /home/ubuntu/.asdf
-COPY --link --chown=ubuntu:ubuntu --from=tilt /home/ubuntu/.asdf /home/ubuntu/.asdf
-COPY --link --chown=ubuntu:ubuntu --from=teleport /home/ubuntu/.asdf /home/ubuntu/.asdf
-COPY --link --chown=ubuntu:ubuntu --from=vault /home/ubuntu/.asdf /home/ubuntu/.asdf
-COPY --link --chown=ubuntu:ubuntu --from=consul /home/ubuntu/.asdf /home/ubuntu/.asdf
-COPY --link --chown=ubuntu:ubuntu --from=cloudflared /home/ubuntu/.asdf /home/ubuntu/.asdf
-COPY --link --chown=ubuntu:ubuntu --from=golang /home/ubuntu/.asdf /home/ubuntu/.asdf
-
-COPY --link --chown=ubuntu:ubuntu --from=precommit /home/ubuntu/.local/pipx/venvs/pre-commit /home/ubuntu/.local/pipx/venvs/pre-commit
-COPY --link --chown=ubuntu:ubuntu --from=precommit /home/ubuntu/.local/bin/pre-commit* /home/ubuntu/.local/bin/
-COPY --link --chown=ubuntu:ubuntu --from=precommit /home/ubuntu/.cache/pre-commit /home/ubuntu/.cache/pre-commit
-COPY --link --chown=ubuntu:ubuntu .pre-commit-config.yaml .
-
 COPY --from=credential_pass --link /usr/local/bin/docker-credential-pass /usr/local/bin/docker-credential-pass
 COPY --from=powerline --link /usr/local/bin/powerline /usr/local/bin/powerline
 COPY --from=hof --link /usr/local/bin/hof /usr/local/bin/hof
@@ -242,8 +223,28 @@ COPY --from=yaegi --link /usr/local/bin/yaegi /usr/local/bin/yaegi
 COPY --from=earthly --link /usr/local/bin/earthly /usr/local/bin/earthly
 COPY --from=buildkite --link /usr/local/bin/buildkite-agent /usr/local/bin/buildkite-agent
 
+COPY --link --chown=ubuntu:ubuntu --from=shell /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=kubernetes /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=cue /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=k9s /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=kustomize /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=helm /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=k3d /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=tilt /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=teleport /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=vault /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=consul /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=cloudflared /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=golang /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu .tool-versions .
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install && asdf reshim'
+
+COPY --link --chown=ubuntu:ubuntu --from=precommit /home/ubuntu/.local/pipx/venvs/pre-commit /home/ubuntu/.local/pipx/venvs/pre-commit
+COPY --link --chown=ubuntu:ubuntu --from=precommit /home/ubuntu/.local/bin/pre-commit* /home/ubuntu/.local/bin/
+COPY --link --chown=ubuntu:ubuntu --from=precommit /home/ubuntu/.cache/pre-commit /home/ubuntu/.cache/pre-commit
+COPY --link --chown=ubuntu:ubuntu .pre-commit-config.yaml .
+
 COPY --link --chown=ubuntu:ubuntu --from=pants /home/ubuntu/.local/pipx/venvs/pantsbuild-pants /home/ubuntu/.local/pipx/venvs/pantsbuild-pants
 COPY --link --chown=ubuntu:ubuntu --from=pants /home/ubuntu/.local/bin/pants /home/ubuntu/.local/bin/pants
 
 COPY --link --chown=ubuntu:ubuntu . .
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install && asdf reshim'
