@@ -102,33 +102,100 @@ RUN python3.9 -m pipx install pantsbuild.pants
 
 FROM ${IMAGE} as asdf
 ARG ASDF
-COPY --link --chown=ubuntu:ubuntu .tool-versions .
 RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${ASDF}
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shellcheck'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shfmt'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add cue'
+
+FROM ${IMAGE} as kubernetes
+COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu .tool-versions .
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add kubectl'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install kubectl'
+
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add krew'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add k9s'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add kustomize'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add helm'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add k3d'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add tilt'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add golang'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add teleport-ent'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add vault'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add consul'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add cloudflared'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install krew'
 
 RUN /home/ubuntu/.asdf/shims/kubectl-krew install ns
 RUN /home/ubuntu/.asdf/shims/kubectl-krew install ctx
 RUN /home/ubuntu/.asdf/shims/kubectl-krew install stern
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf reshim krew'
 
+FROM ${IMAGE} as k9s
+COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu .tool-versions .
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add k9s'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install k9s'
+
+FROM ${IMAGE} as kustomize
+COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu .tool-versions .
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add kustomize'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install kustomize'
+
+FROM ${IMAGE} as helm
+COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu .tool-versions .
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add helm'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install helm'
+
+FROM ${IMAGE} as k3d
+COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu .tool-versions .
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add k3d'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install k3d'
+
+FROM ${IMAGE} as tilt
+COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu .tool-versions .
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add tilt'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install tilt'
+
+FROM ${IMAGE} as teleport
+COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu .tool-versions .
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add teleport-ent'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install teleport-ent'
+
+FROM ${IMAGE} as vault
+COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu .tool-versions .
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add vault'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install vault'
+
+FROM ${IMAGE} as consul
+COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu .tool-versions .
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add consul'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install consul'
+
+FROM ${IMAGE} as cloudflared
+COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu .tool-versions .
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add cloudflared'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install cloudflared '
+
+FROM ${IMAGE} as shell
+COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu .tool-versions .
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shellcheck'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install shellcheck'
+
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add shfmt'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install shfmt'
+
+FROM ${IMAGE} as cue
+COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu .tool-versions .
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add cue'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install cue'
+
+FROM ${IMAGE} as golang
+COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu .tool-versions .
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add golang'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install golang'
+
 FROM ${IMAGE} as precommit
-COPY --from=asdf --link /home/ubuntu/.asdf /home/ubuntu/.asdf
-COPY --from=asdf --link /home/ubuntu/.tool-versions /home/ubuntu/.tool-versions
+COPY --link --chown=ubuntu:ubuntu --from=golang /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu .tool-versions .
 RUN git init
 RUN /home/ubuntu/.local/bin/pipx install pre-commit
 COPY --link --chown=ubuntu:ubuntu .pre-commit-config.yaml .
@@ -136,13 +203,24 @@ RUN /home/ubuntu/.local/bin/pre-commit install
 RUN env PATH=$PATH:$HOME/.asdf/shims /home/ubuntu/.local/bin/pre-commit run --all
 
 FROM ${IMAGE}
-COPY --from=asdf --link /home/ubuntu/.asdf /home/ubuntu/.asdf
-COPY --from=asdf --link /home/ubuntu/.tool-versions /home/ubuntu/.tool-versions
+COPY --link --chown=ubuntu:ubuntu --from=shell /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=kubernetes /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=cue /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=k9s /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=kustomize /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=helm /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=k3d /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=tilt /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=teleport /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=vault /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=consul /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=cloudflared /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=golang /home/ubuntu/.asdf /home/ubuntu/.asdf
 
-COPY --from=precommit --link /home/ubuntu/.local/pipx/venvs/pre-commit /home/ubuntu/.local/pipx/venvs/pre-commit
-COPY --from=precommit --link /home/ubuntu/.local/bin/pre-commit* /home/ubuntu/.local/bin/
+COPY --link --chown=ubuntu:ubuntu --from=precommit /home/ubuntu/.local/pipx/venvs/pre-commit /home/ubuntu/.local/pipx/venvs/pre-commit
+COPY --link --chown=ubuntu:ubuntu --from=precommit /home/ubuntu/.local/bin/pre-commit* /home/ubuntu/.local/bin/
+COPY --link --chown=ubuntu:ubuntu --from=precommit /home/ubuntu/.cache/pre-commit /home/ubuntu/.cache/pre-commit
 COPY --link --chown=ubuntu:ubuntu .pre-commit-config.yaml .
-COPY --from=precommit --link /home/ubuntu/.cache/pre-commit /home/ubuntu/.cache/pre-commit
 
 COPY --from=credential_pass --link /usr/local/bin/docker-credential-pass /usr/local/bin/docker-credential-pass
 COPY --from=powerline --link /usr/local/bin/powerline /usr/local/bin/powerline
@@ -164,10 +242,10 @@ COPY --from=yaegi --link /usr/local/bin/yaegi /usr/local/bin/yaegi
 COPY --from=earthly --link /usr/local/bin/earthly /usr/local/bin/earthly
 COPY --from=buildkite --link /usr/local/bin/buildkite-agent /usr/local/bin/buildkite-agent
 
-COPY --from=pants --link /home/ubuntu/.local/pipx/venvs/pantsbuild-pants /home/ubuntu/.local/pipx/venvs/pantsbuild-pants
-COPY --from=pants --link /home/ubuntu/.local/bin/pants /home/ubuntu/.local/bin/pants
+COPY --link --chown=ubuntu:ubuntu --from=pants /home/ubuntu/.local/pipx/venvs/pantsbuild-pants /home/ubuntu/.local/pipx/venvs/pantsbuild-pants
+COPY --link --chown=ubuntu:ubuntu --from=pants /home/ubuntu/.local/bin/pants /home/ubuntu/.local/bin/pants
 
 COPY --link --chown=ubuntu:ubuntu . .
-COPY --link --chown=ubuntu:ubuntu etc/authorized_keys .ssh/authorized_keys
-RUN /home/ubuntu/.local/bin/pre-commit install
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install && asdf reshim'
+RUN ./bin/e /home/ubuntu/.local/bin/pre-commit install
 RUN ./bin/e /home/ubuntu/.local/bin/pre-commit run --all
