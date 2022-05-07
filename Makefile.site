@@ -1,8 +1,5 @@
 test:
-	rm -f .test
-	git push
-	@figlet success | /usr/games/lolcat
-
+	pre-commit
 
 asdf:
 	cat .tool-versions| awk '{print $$1}' | while read -r a; do asdf list-all "$$a" | sed "s#^#$$a #"; done | sort > .tool-versions-all
@@ -18,3 +15,9 @@ push:
 	docker push defn/dev:base
 	docker push defn/dev:tower
 	docker push defn/dev:ci
+
+ci:
+	$(MAKE) test
+	$(MAKE) tower
+	git push
+	@figlet success | /usr/games/lolcat
