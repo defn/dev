@@ -1,8 +1,8 @@
 login:
-	flyctl auth login
+	if ! flyctl auth whoami; then flyctl auth login; fi
 
 start-docker:
-	cd docker && flyctl deploy --now
+	cd docker && flyctl deploy --now || true
 	cd docker && flyctl scale count 0
 
 proxy:
