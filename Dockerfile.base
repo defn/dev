@@ -57,7 +57,7 @@ RUN update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
 
 RUN mkdir /run/sshd
 
-RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
+RUN chmod u+s /usr/bin/sudo
 
 USER ubuntu
 ENV HOME=/home/ubuntu
@@ -66,6 +66,8 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 WORKDIR /home/ubuntu
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]
 
 RUN pipx install --pip-args "keyring_pass" poetry
 RUN pipx install watchdog
@@ -78,4 +80,6 @@ RUN echo yes | vim +PlugInstall +qall
 
 RUN mkdir -p ~/.docker && echo '{"credsStore": "pass"}' > ~/.docker/config.json
 
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
+
+RUN ls -ltrhd /usr/bin/sudo && sudo uname -a
