@@ -34,3 +34,4 @@ cue.mod/pkg
 .fly
 .test
 .terraform.d
+.buildkite-agent
