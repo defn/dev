@@ -1,6 +1,9 @@
 login:
 	flyctl auth login
 
+proxy:
+	flyctl --app "$(shell flyctl apps list | grep 'fly-builder' | awk '{print $$1}' | head -1)" proxy 2375:2375 
+
 defn:
 	flyctl deploy --remote-only --config $@.toml
 	while sudo ping -c1 defn; do :; done
