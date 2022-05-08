@@ -26,6 +26,7 @@ push:
 	docker push defn/dev:ci
 
 ci:
+	while ! docker ps 2>/dev/null; do date; sleep 5; done
 	$(MAKE) test
 	$(MAKE) tower
 	git push

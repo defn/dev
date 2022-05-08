@@ -2,6 +2,7 @@ login:
 	if ! flyctl auth whoami; then flyctl auth login; fi
 
 start-docker:
+	date > docker/.time
 	cd docker && flyctl deploy --now || true
 	cd docker && flyctl scale count 0
 
