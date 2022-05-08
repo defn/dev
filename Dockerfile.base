@@ -57,6 +57,7 @@ RUN update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
 
 RUN mkdir /run/sshd
 
+RUN chown -R ubuntu:ubuntu /home/ubuntu
 RUN chmod u+s /usr/bin/sudo
 
 USER ubuntu
@@ -82,4 +83,4 @@ RUN mkdir -p ~/.docker && echo '{"credsStore": "pass"}' > ~/.docker/config.json
 
 RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
-RUN ls -ltrhd /usr/bin/sudo && sudo uname -a
+RUN sudo uname -a

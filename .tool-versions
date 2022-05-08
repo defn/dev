@@ -13,3 +13,4 @@ teleport-ent 9.0.0
 vault 1.10.2
 consul 1.12.0
 cloudflared 2022.4.1
+terraform 1.2.0-rc1
