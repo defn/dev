@@ -1,8 +1,12 @@
 login:
 	flyctl auth login
 
+start-docker:
+	cd docker && flyctl deploy --now
+	cd docker && flyctl scale count 0
+
 proxy:
-	flyctl --app "$(shell flyctl apps list | grep 'fly-builder' | awk '{print $$1}' | head -1)" proxy 2375:2375 
+	flyctl --app "$(shell flyctl apps list | grep 'fly-builder' | awk '{print $$1}' | head -1)" proxy 2375:2375
 
 defn:
 	flyctl deploy --remote-only --config $@.toml
