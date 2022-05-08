@@ -33,3 +33,4 @@ cue.mod/pkg
 .lesshst
 .fly
 .test
+.terraform.d

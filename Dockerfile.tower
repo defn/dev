@@ -187,6 +187,12 @@ COPY --link --chown=ubuntu:ubuntu .tool-versions .
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add cue'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install cue'
 
+FROM ${IMAGE} as terraform
+COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu .tool-versions .
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add terraform'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install terraform'
+
 FROM ${IMAGE} as golang
 COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu .tool-versions .
@@ -235,6 +241,7 @@ COPY --link --chown=ubuntu:ubuntu --from=teleport /home/ubuntu/.asdf /home/ubunt
 COPY --link --chown=ubuntu:ubuntu --from=vault /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=consul /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=cloudflared /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=terraform /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=golang /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu .tool-versions .
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install && asdf reshim'
