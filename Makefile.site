@@ -10,6 +10,9 @@ cache:
 	docker push defn/dev:cache-base
 	docker push defn/dev:cache-tower
 
+images:
+	$(MAKE) base tower push
+
 base:
 	dotenv run docker build -f Dockerfile.base -t defn/dev:base --cache-from defn/dev:cache-base --build-arg IMAGE=ubuntu:20.04 $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
 

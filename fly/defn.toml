@@ -10,17 +10,10 @@ strategy = "immediate"
 [env]
 
 [experimental]
-allowed_public_ports = [22]
+allowed_public_ports = []
 auto_rollback = true
 entrypoint = ["/service"]
 cmd = []
-
-[[services]]
-internal_port = 22
-protocol = "tcp"
-
-[[services.ports]]
-port = 22
 
 [mounts]
 source = "defn_data"
