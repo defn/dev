@@ -75,6 +75,7 @@ function main {
 
     if [[ -n "${BUILDKITE_AGENT_TOKEN:-}" ]]; then
         sed -i "s/xxx/${BUILDKITE_AGENT_TOKEN}/g" /etc/buildkite-agent/buildkite-agent.cfg
+        sed -i "s/^name=.*/name=\"${FLY_APP_NAME}-%spawn\"/g" /etc/buildkite-agent/buildkite-agent.cfg
         (exec buildkite-agent start) &
     fi
 
