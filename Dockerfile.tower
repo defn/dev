@@ -97,6 +97,11 @@ ARG BUILDKITE
 RUN cd /usr/local/bin && curl -sSL https://github.com/buildkite/agent/releases/download/v${BUILDKITE}/buildkite-agent-linux-amd64-${BUILDKITE}.tar.gz \
     | sudo tar xvfz -
 
+FROM ${IMAGE} AS hlb
+ARG HLB
+RUN cd /usr/local/bin && sudo curl -sSL -o hlb https://github.com/openllb/hlb/releases/download/v0.4.0/hlb-linux-amd64 \
+    | sudo chmod 755 hlb
+
 FROM ${IMAGE} as pants
 RUN python -m pipx install pantsbuild.pants
 
@@ -228,6 +233,7 @@ COPY --from=flyctl --link /usr/local/bin/flyctl /usr/local/bin/flyctl
 COPY --from=yaegi --link /usr/local/bin/yaegi /usr/local/bin/yaegi
 COPY --from=earthly --link /usr/local/bin/earthly /usr/local/bin/earthly
 COPY --from=buildkite --link /usr/local/bin/buildkite-agent /usr/local/bin/buildkite-agent
+COPY --from=hlb --link /usr/local/bin/hlb /usr/local/bin/hlb
 
 COPY --link --chown=ubuntu:ubuntu --from=shell /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=kubernetes /home/ubuntu/.asdf /home/ubuntu/.asdf
