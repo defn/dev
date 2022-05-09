@@ -38,3 +38,6 @@ up:
 
 down:
 	cd fly && $(MAKE) down
+
+live:
+	env SSH_AUTH_SOCK="$(shell ls -td /tmp/vscode-ssh-auth-sock-* | head -1)" ssh-add -L
