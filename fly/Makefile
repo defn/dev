@@ -1,10 +1,17 @@
 login:
 	if ! flyctl auth whoami; then flyctl auth login; fi
+	flyctl auth docker
 
 start-docker:
 	date > docker/.time
 	cd docker && flyctl deploy --now || true
 	cd docker && flyctl scale count 0
+
+ping-docker:
+	while true; do env DOCKER_HOST=localhost:2375 docker ps || true; sleep 30; done
+
+tunnel-docker:
+	socat tcp-listen:2375,reuseaddr,fork,bind=$(shell tailscale ip -4) tcp:localhost:2375
 
 proxy:
 	flyctl --app "$(shell flyctl apps list | grep 'fly-builder' | awk '{print $$1}' | head -1)" proxy 2375:2375
