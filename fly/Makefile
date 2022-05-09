@@ -4,7 +4,7 @@ login:
 
 start-docker:
 	date > docker/.time
-	cd docker && flyctl deploy --now || true
+	cd docker && flyctl deploy --remote-only || true
 	cd docker && flyctl scale count 0
 
 ping-docker:
