@@ -37,6 +37,10 @@ PATH="$HOME/.linkerd2/bin:$PATH"
 # vscode
 if [[ -n "${VSCODE_GIT_IPC_HANDLE=:-}" ]]; then
 	export VISUAL="code --wait"
+
+	if [[ ! -S "${SSH_AUTH:-}" ]]; then
+		export SSH_AUTH="$(ls -td /tmp/vscode-ssh-auth-sock-* | head -1)"
+	fi
 fi
 
 # docker
