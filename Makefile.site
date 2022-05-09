@@ -34,7 +34,7 @@ ci:
 
 up:
 	cd fly && $(MAKE) login up
-	~/bin/e tilt up
+	~/bin/e tilt up -s
 
 down:
 	pkill [t]ilt
