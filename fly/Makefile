@@ -8,7 +8,7 @@ start-docker:
 	cd docker && flyctl scale count 0
 
 ping-docker:
-	while true; do env DOCKER_HOST=localhost:2375 docker ps || true; sleep 30; done
+	while true; do $(MAKE) start-docker || true; sleep 540; done
 
 tunnel-docker:
 	socat tcp-listen:2375,reuseaddr,fork,bind=$(shell tailscale ip -4) tcp:localhost:2375
