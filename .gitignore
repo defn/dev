@@ -36,3 +36,4 @@ cue.mod/pkg
 .terraform.d
 .buildkite-agent
 .earthly
+.irb_history
