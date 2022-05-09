@@ -100,7 +100,7 @@ RUN cd /usr/local/bin && curl -sSL https://github.com/buildkite/agent/releases/d
 FROM ${IMAGE} AS hlb
 ARG HLB
 RUN cd /usr/local/bin && sudo curl -sSL -o hlb https://github.com/openllb/hlb/releases/download/v0.4.0/hlb-linux-amd64 \
-    | sudo chmod 755 hlb
+    && sudo chmod 755 hlb
 
 FROM ${IMAGE} as pants
 RUN python -m pipx install pantsbuild.pants
