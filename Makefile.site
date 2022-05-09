@@ -37,7 +37,7 @@ up:
 	~/bin/e tilt up --stream
 
 down:
-	pkill [t]ilt
+	pkill [t]ilt || true
 	cd fly && $(MAKE) down
 
 live:
