@@ -33,7 +33,7 @@ ci:
 	@figlet success | /usr/games/lolcat
 
 up:
-	cd fly && (MAKE) up
+	cd fly && $(MAKE) login up
 	tilt up
 
 down:
