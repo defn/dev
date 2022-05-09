@@ -39,6 +39,11 @@ if [[ -n "${VSCODE_GIT_IPC_HANDLE=:-}" ]]; then
 	export VISUAL="code --wait"
 fi
 
+# docker
+if [[ -z "${DOCKER_HOST:-}" ]]; then
+	export DOCKER_HOST=localhost:2375
+fi
+
 if tty >/dev/null; then
   if type -P powerline >/dev/null; then
 	function render_ps1 {
