@@ -43,7 +43,7 @@ live:
 	env SSH_AUTH_SOCK="$(shell ls -td /tmp/vscode-ssh-auth-sock-* | head -1)" ssh-add -L
 
 monitor:
-	rm -f .dead; while true; do if ! $M(AKE) live > /dev/null; then touch .dead; for a in 1 2 3 4 5 6; do if $(MAKE) live; then rm -f .dead; break; fi; echo MAYBE DEAD; sleep 10; done; fi; if test -f .dead; then echo DEAD; pgrep [t]ilt; pkill [t]ilt; break; fi; date; sleep 60; done
+	rm -f .dead; while true; do if ! $(MAKE) live > /dev/null; then touch .dead; for a in 1 2 3 4 5 6; do if $(MAKE) live; then rm -f .dead; break; fi; echo MAYBE DEAD; sleep 10; done; fi; if test -f .dead; then echo DEAD; pgrep [t]ilt; pkill [t]ilt; break; fi; date; sleep 60; done
 
 dev:
 	while true; do if $(MAKE) live; then $(MAKE) up; fi; sleep 5 ; done
