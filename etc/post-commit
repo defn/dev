@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+function main {
+    touch "$(git rev-parse --show-cdup)"/.test
+}
+
+main "$@"

@@ -2,6 +2,7 @@
 
 update_settings(max_parallel_updates = 4)
 
+local_resource('git', cmd='bash -c "rsync -ia etc/post-commit .git/hooks/"', allow_parallel = True)
 local_resource('proxy', cmd='bash -c "cd fly && make login start-docker proxy"', allow_parallel = True)
 local_resource('ping', cmd='bash -c "cd fly && make ping-docker"', allow_parallel = True)
 local_resource('tunnel', cmd='bash -c "cd fly && make tunnel-docker"', allow_parallel = True)

@@ -37,5 +37,5 @@ repos:
         name: sh-fmt
         entry: shfmt -w
         language: system
-        files: "^(bin/|etc/(hook-start|service))"
+        files: "^(bin/|etc/(service|hook-start|post-commit))"
         pass_filenames: true
