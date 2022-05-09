@@ -37,3 +37,4 @@ cue.mod/pkg
 .buildkite-agent
 .earthly
 .irb_history
+.dead
