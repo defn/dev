@@ -19,7 +19,7 @@ RUN apt-get update \
     make tini \
     python3-pip python3-venv python-is-python3 \
     gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 \
-    xdg-utils figlet lolcat \
+    xdg-utils figlet lolcat socat \
     libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev
 
 RUN pip install pipx
