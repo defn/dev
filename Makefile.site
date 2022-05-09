@@ -6,7 +6,7 @@ asdf:
 
 cache:
 	dotenv run docker build -f Dockerfile.base -t registry.fly.io/docker:defn-dev-cache-base --build-arg BUILDKIT_INLINE_CACHE=1 --build-arg IMAGE=ubuntu:20.04 $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
-	dotenv run docker build -f Dockerfile.tower -t registry.fly.io/docker:defn-dev-cache-tower --build-arg BUILDKIT_INLINE_CACHE=1 --build-arg IMAGE=defn/dev:base $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
+	dotenv run docker build -f Dockerfile.tower -t registry.fly.io/docker:defn-dev-cache-tower --build-arg BUILDKIT_INLINE_CACHE=1 --build-arg IMAGE=registry.fly.io/docker:defn-dev-base $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
 	docker push registry.fly.io/docker:defn-dev-cache-base
 	docker push registry.fly.io/docker:defn-dev-cache-tower
 
@@ -14,16 +14,16 @@ images:
 	$(MAKE) base tower push
 
 base:
-	dotenv run docker build -f Dockerfile.base -t defn/dev:base --cache-from registry.fly.io/docker:defn-dev-cache-base --build-arg IMAGE=ubuntu:20.04 $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
+	dotenv run docker build -f Dockerfile.base -t registry.fly.io/docker:defn-dev-base --cache-from registry.fly.io/docker:defn-dev-cache-base --build-arg IMAGE=ubuntu:20.04 $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
 
 tower:
-	dotenv run docker build -f Dockerfile.tower -t defn/dev:tower --cache-from registry.fly.io/docker:defn-dev-cache-tower --build-arg IMAGE=defn/dev:base $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
-	dotenv run docker build -f Dockerfile.ci -t defn/dev:ci --cache-from registry.fly.io/docker:defn-dev-cache-tower --build-arg IMAGE=defn/dev:tower $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
+	dotenv run docker build -f Dockerfile.tower -t registry.fly.io/docker:defn-dev-tower --cache-from registry.fly.io/docker:defn-dev-cache-tower --build-arg IMAGE=registry.fly.io/docker:defn-dev-base $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
+	dotenv run docker build -f Dockerfile.ci -t registry.fly.io/docker:defn-dev-ci --cache-from registry.fly.io/docker:defn-dev-cache-tower --build-arg IMAGE=registry.fly.io/docker:defn-dev-tower $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
 
 push:
-	docker push defn/dev:base
-	docker push defn/dev:tower
-	docker push defn/dev:ci
+	docker push registry.fly.io/docker:defn-dev-base
+	docker push registry.fly.io/docker:defn-dev-tower
+	docker push registry.fly.io/docker:defn-dev-ci
 
 ci:
 	while ! docker ps 2>/dev/null; do date; sleep 5; done

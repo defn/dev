@@ -1,4 +1,4 @@
-FROM defn/dev:tower
+FROM registry.fly.io/docker:defn-dev-tower
 
 USER root
 
