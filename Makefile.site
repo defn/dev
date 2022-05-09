@@ -31,3 +31,10 @@ ci:
 	$(MAKE) tower
 	git push
 	@figlet success | /usr/games/lolcat
+
+up:
+	cd fly && (MAKE) up
+	tilt up
+
+down:
+	cd fly && $(MAKE) down

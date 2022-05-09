@@ -26,6 +26,10 @@ defn:
 defn0:
 	flyctl scale --app defn count 0
 
+up:
+	flyctl scale --app so count 1
+	flyctl scale --app the count 1
+
 down:
 	flyctl scale --app so count 0
 	flyctl scale --app the count 0
