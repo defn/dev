@@ -26,6 +26,10 @@ defn:
 defn0:
 	flyctl scale --app defn count 0
 
+down:
+	flyctl scale --app so count 0
+	flyctl scale --app the count 0
+
 defn1:
 	flyctl scale --app defn count 1
 	until sudo ping -c1 defn; do :; done
