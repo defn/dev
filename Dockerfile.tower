@@ -99,8 +99,13 @@ RUN cd /usr/local/bin && curl -sSL https://github.com/buildkite/agent/releases/d
 
 FROM ${IMAGE} AS hlb
 ARG HLB
-RUN cd /usr/local/bin && sudo curl -sSL -o hlb https://github.com/openllb/hlb/releases/download/v0.4.0/hlb-linux-amd64 \
+RUN cd /usr/local/bin && sudo curl -sSL -o hlb https://github.com/openllb/hlb/releases/download/v${HLB}/hlb-linux-amd64 \
     && sudo chmod 755 hlb
+
+FROM ${IMAGE} AS difft
+ARG DIFFT
+RUN cd /usr/local/bin && curl -sSL https://github.com/Wilfred/difftastic/releases/download/${DIFFT}/difft-x86_64-unknown-linux-gnu.tar.gz \
+    | sudo tar xvfz -
 
 FROM ${IMAGE} as pants
 RUN python -m pipx install pantsbuild.pants
@@ -234,6 +239,7 @@ COPY --from=yaegi --link /usr/local/bin/yaegi /usr/local/bin/yaegi
 COPY --from=earthly --link /usr/local/bin/earthly /usr/local/bin/earthly
 COPY --from=buildkite --link /usr/local/bin/buildkite-agent /usr/local/bin/buildkite-agent
 COPY --from=hlb --link /usr/local/bin/hlb /usr/local/bin/hlb
+COPY --from=difft --link /usr/local/bin/difft /usr/local/bin/difft
 
 COPY --link --chown=ubuntu:ubuntu --from=shell /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=kubernetes /home/ubuntu/.asdf /home/ubuntu/.asdf
