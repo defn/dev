@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-update_settings(max_parallel_updates = 4)
+update_settings(max_parallel_updates = 6)
 
 local_resource('git', cmd='bash -c "install -m 0755 etc/post-commit .git/hooks/post-commit"', allow_parallel = True)
 local_resource('proxy', cmd='bash -c "cd fly && make login start-docker proxy"', allow_parallel = True)
