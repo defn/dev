@@ -70,7 +70,7 @@ function main {
 
     ip6tables -t nat -A POSTROUTING -s 2001:db8:1::/64 ! -o docker0 -j MASQUERADE
 
-    (cd /var/lib/docker && exec dockerd) &
+    #(cd /var/lib/docker && exec dockerd) &
     (cd /var/lib/tailscale && exec tailscaled) &
 
     if [[ -n "${BUILDKITE_AGENT_TOKEN:-}" ]]; then
