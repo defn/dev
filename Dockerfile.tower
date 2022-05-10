@@ -107,6 +107,11 @@ ARG DIFFT
 RUN cd /usr/local/bin && curl -sSL https://github.com/Wilfred/difftastic/releases/download/${DIFFT}/difft-x86_64-unknown-linux-gnu.tar.gz \
     | sudo tar xvfz -
 
+FROM ${IMAGE} AS litestream
+ARG LITESTREAM
+RUN cd /usr/local/bin && curl -sSL https://github.com/benbjohnson/litestream/releases/download/v${LITESTREAM}/litestream-v${LITESTREAM}-linux-amd64.tar.gz \
+    | sudo tar xvfz -
+
 FROM ${IMAGE} as pants
 RUN python -m pipx install pantsbuild.pants
 
@@ -240,6 +245,7 @@ COPY --from=earthly --link /usr/local/bin/earthly /usr/local/bin/earthly
 COPY --from=buildkite --link /usr/local/bin/buildkite-agent /usr/local/bin/buildkite-agent
 COPY --from=hlb --link /usr/local/bin/hlb /usr/local/bin/hlb
 COPY --from=difft --link /usr/local/bin/difft /usr/local/bin/difft
+COPY --from=litestream --link /usr/local/bin/litestream /usr/local/bin/litestream
 
 COPY --link --chown=ubuntu:ubuntu --from=shell /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=kubernetes /home/ubuntu/.asdf /home/ubuntu/.asdf
