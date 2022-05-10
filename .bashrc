@@ -51,6 +51,9 @@ fi
 if tty >/dev/null; then
   if type -P powerline >/dev/null; then
 	function render_ps1 {
+		if [[ ! -S "${SSH_AUTH_SOCK:-}" ]]; then
+			export SSH_AUTH_SOCK="$(ls -td /tmp/vscode-ssh-auth-sock-* 2>/dev/null | head -1)"
+		fi
 		echo
 		powerline --colorize-hostname -mode flat -newline \
 			-priority root,cwd,user,host,ssh,perms,git-branch,exit,cwd-path,git-status \
