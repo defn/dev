@@ -48,5 +48,5 @@ monitor:
 	rm -f .dead; while true; do if ! $(MAKE) live 2>/dev/null >/dev/null; then touch .dead; for a in 1 2 3 4 5 6; do if $(MAKE) live 2>/dev/null >/dev/null; then rm -f .dead; break; fi; echo MAYBE DEAD $$a; sleep 10; done; fi; if test -f .dead; then $(MAKE) down; break; fi; echo "$$(date) live"; sleep 60; done
 
 dev:
-	@ls -td /tmp/vscode-ssh-auth-sock* | tail -n +2 | xargs rm -vf /tmp/meh
+	@ls -td /tmp/vscode-ssh-auth-sock* 2>/dev/null | tail -n +2 | xargs rm -vf /tmp/meh
 	@while true; do if $(MAKE) live 2>/dev/null >/dev/null; then $(MAKE) up; fi; echo "$$(date) zzz"; sleep 5 ; done
