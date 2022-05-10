@@ -10,11 +10,11 @@ start-docker:
 ping-docker:
 	while true; do $(MAKE) start-docker; sleep 540; done
 
-tunnel-docker:
-	socat tcp-listen:2375,reuseaddr,fork,bind=$(shell tailscale ip -4) tcp:localhost:2375
+trigger-docker:
+	socat TCP-LISTEN:2375,reuseaddr,fork EXEC:"'bash -c \"while ! netcat -z localhost 2377; do $(MAKE) start-docker; done; socat - "TCP:localhost:2377\""'",nofork
 
 proxy:
-	flyctl --app "$(shell flyctl apps list | grep 'fly-builder' | awk '{print $$1}' | head -1)" proxy 2375:2375
+	while true; do $(MAKE) start-docker; flyctl --app "$(shell flyctl apps list | grep 'fly-builder' | awk '{print $$1}' | head -1)" proxy 2377:2375; sleep 5; done
 
 defn:
 	flyctl deploy --remote-only --config $@.toml
