@@ -7,4 +7,4 @@ local_resource('proxy', cmd='bash -c "cd fly && make login proxy"', allow_parall
 #local_resource('ping', cmd='bash -c "cd fly && sleep 540 && make ping-docker"', allow_parallel = True)
 local_resource('trigger', cmd='bash -c "cd fly && make trigger-docker"', allow_parallel = True)
 local_resource('monitor', cmd='bash -c "while true; do make monitor; done"', allow_parallel = True)
-local_resource('cicd', cmd='bash -c "time env DOCKER_HOST=localhost:2375 make ci"', deps=['.test'], allow_parallel = True)
+local_resource('cicd', cmd='bash -c "time ~/bin/e make ci"', deps=['.test'], allow_parallel = True)
