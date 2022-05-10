@@ -39,7 +39,7 @@ if [[ -n "${VSCODE_GIT_IPC_HANDLE=:-}" ]]; then
 	export VISUAL="code --wait"
 
 	if [[ ! -S "${SSH_AUTH_SOCK:-}" ]]; then
-		export SSH_AUTH_SOCK="$(ls -td /tmp/vscode-ssh-auth-sock-* | head -1)"
+		export SSH_AUTH_SOCK="$(ls -td /tmp/vscode-ssh-auth-sock-* 2>/dev/null | head -1)"
 	fi
 fi
 
