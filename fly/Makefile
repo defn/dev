@@ -1,6 +1,6 @@
 login:
 	if ! flyctl auth whoami; then flyctl auth login; fi
-	flyctl auth docker
+	#flyctl auth docker
 
 start-docker:
 	date > docker/.time
@@ -11,10 +11,10 @@ ping-docker:
 	while true; do $(MAKE) start-docker; sleep 540; done
 
 trigger-docker:
-	socat TCP-LISTEN:2375,reuseaddr,fork EXEC:"'bash -c \"(while ! netcat -z localhost 2377; do $(MAKE) start-docker; done) 1>/dev/null 2>&1; socat - "TCP:localhost:2377\""'",nofork
+	socat TCP-LISTEN:2375,reuseaddr,fork,max-children=1 EXEC:"'bash -c \"(if ! netcat -z localhost 2377; then $(MAKE) start-docker; sleep 5; fi) 1>/dev/null 2>&1; socat - "TCP:localhost:2377\""'",nofork
 
 proxy:
-	while true; do $(MAKE) start-docker; flyctl --app "$(shell flyctl apps list | grep 'fly-builder' | awk '{print $$1}' | head -1)" proxy 2377:2375; sleep 5; done
+	while true; do flyctl --app "$(shell flyctl apps list | grep 'fly-builder' | awk '{print $$1}' | head -1)" proxy 2377:2375; sleep 1; done
 
 defn:
 	flyctl deploy --remote-only --config $@.toml
