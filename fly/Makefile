@@ -1,6 +1,6 @@
 login:
 	if ! flyctl auth whoami; then flyctl auth login; fi
-	#flyctl auth docker
+	flyctl auth docker
 
 start-docker:
 	date > docker/.time
