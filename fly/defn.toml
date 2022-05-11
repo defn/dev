@@ -1,0 +1,20 @@
+app = "defn"
+
+kill_signal = "SIGINT"
+kill_timeout = 5
+processes = []
+
+[deploy]
+strategy = "immediate"
+
+[env]
+
+[experimental]
+allowed_public_ports = []
+auto_rollback = true
+entrypoint = ["/service"]
+cmd = []
+
+[mounts]
+source = "mnt"
+destination = "/mnt"
