@@ -214,6 +214,12 @@ COPY --link --chown=ubuntu:ubuntu .tool-versions .
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add golang'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install golang'
 
+FROM ${IMAGE} as nodejs
+COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu .tool-versions .
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add nodejs'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install nodejs'
+
 FROM ${IMAGE} as precommit
 COPY --link --chown=ubuntu:ubuntu --from=golang /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu .tool-versions .
@@ -261,6 +267,7 @@ COPY --link --chown=ubuntu:ubuntu --from=consul /home/ubuntu/.asdf /home/ubuntu/
 COPY --link --chown=ubuntu:ubuntu --from=cloudflared /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=terraform /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=golang /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=nodejs /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu .tool-versions .
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install && asdf reshim'
 
