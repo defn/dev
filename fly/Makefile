@@ -8,9 +8,6 @@ start-docker:
 	cd docker && flyctl deploy --remote-only || true
 	cd docker && flyctl scale count 0
 
-ping-docker:
-	while true; do $(MAKE) start-docker; sleep 540; done
-
 trigger-docker:
 	socat \
 		TCP-LISTEN:2375,reuseaddr,fork,max-children=4 \
@@ -25,6 +22,7 @@ proxy:
 	while true; do flyctl --app "$(shell flyctl apps list | grep 'fly-builder' | awk '{print $$1}' | head -1)" proxy 2377:2375; sleep 1; done
 
 up:
+	$(MAKE) start-docker
 	flyctl scale --app so count 1
 	flyctl scale --app the count 1
 
