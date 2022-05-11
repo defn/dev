@@ -37,9 +37,9 @@ up:
 	~/bin/e tilt up --stream
 
 down:
+	~/bin/e bash -c 'rm -vf "$${SSH_AUTH_SOCK}"'
 	cd fly && $(MAKE) down
 	pkill [t]ilt || true
-	~/bin/e bash -c 'rm -vf "$${SSH_AUTH_SOCK}"'
 
 live:
 	@env SSH_AUTH_SOCK="$(shell ls -td /tmp/vscode-ssh-auth-sock-* 2>/dev/null | head -1)" ssh-add -L 2>/dev/null >/dev/null
