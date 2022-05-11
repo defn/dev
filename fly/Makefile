@@ -23,13 +23,6 @@ trigger-devcontainer:
 proxy:
 	while true; do flyctl --app "$(shell flyctl apps list | grep 'fly-builder' | awk '{print $$1}' | head -1)" proxy 2377:2375; sleep 1; done
 
-defnx:
-	flyctl deploy --remote-only --config $@.toml
-	while sudo ping -c1 defn; do :; done
-	sleep 15
-	until sudo ping -c1 defn; do :; done
-	code --folder-uri vscode-remote://ssh-remote+defn/home/ubuntu
-
 up:
 	flyctl scale --app so count 1
 	flyctl scale --app the count 1
@@ -37,6 +30,7 @@ up:
 down:
 	flyctl scale --app so count 0
 	flyctl scale --app the count 0
+	flyctl scale --app docker count 0
 	flyctl scale --app defn count 0
 
 %:
