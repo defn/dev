@@ -1,4 +1,5 @@
 login:
+	cd ~/.password-store && git-crypt unlock
 	if ! flyctl auth whoami; then flyctl auth login; fi
 	unset DOCKER_HOST; flyctl auth docker
 
@@ -28,6 +29,7 @@ up:
 	flyctl scale --app the count 1
 
 down:
+	cd ~/.password-store && git-crypt lock
 	flyctl scale --app so count 0
 	flyctl scale --app the count 0
 	flyctl scale --app docker count 0
