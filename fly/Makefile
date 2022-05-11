@@ -17,7 +17,7 @@ trigger-docker:
 
 trigger-devcontainer:
 	socat \
-		TCP-LISTEN:2222,reuseaddr,fork,max-children=1 \
+		TCP-LISTEN:2222,reuseaddr,fork,max-children=2 \
 		EXEC:"'bash -c \"(flyctl scale --app defn count 1; while ! netcat -z defn 22; do sleep 1; done) 1>/dev/null 2>&1; socat - TCP:defn:22\"'",nofork
 
 proxy:
