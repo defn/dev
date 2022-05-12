@@ -14,3 +14,4 @@ vault 1.10.2
 consul 1.12.0
 cloudflared 2022.5.0
 terraform 1.2.0-rc1
+nodejs 16.15.0
