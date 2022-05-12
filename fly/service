@@ -80,9 +80,9 @@ function main {
     fi
 
     if [[ "$#" -gt 0 ]]; then
-        (cd ~ubuntu; exec "$@") &
+        (if cd ~ubuntu; then exec "$@"; fi) &
     fi
-    
+
     exec /usr/sbin/sshd -D -o UseDNS=no -o UsePAM=yes -o PasswordAuthentication=no -o StreamLocalBindUnlink=yes
 }
 
