@@ -157,6 +157,12 @@ COPY --link --chown=ubuntu:ubuntu .tool-versions .
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add k3d'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install k3d'
 
+FROM ${IMAGE} as k3sup
+COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu .tool-versions .
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add k3sup'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install k3sup'
+
 FROM ${IMAGE} as tilt
 COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu .tool-versions .
@@ -268,6 +274,7 @@ COPY --link --chown=ubuntu:ubuntu --from=k9s /home/ubuntu/.asdf /home/ubuntu/.as
 COPY --link --chown=ubuntu:ubuntu --from=kustomize /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=helm /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=k3d /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=k3sup /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=tilt /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=teleport /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=vault /home/ubuntu/.asdf /home/ubuntu/.asdf
