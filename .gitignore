@@ -39,6 +39,3 @@ node_modules
 .earthly
 .irb_history
  .dead
-
-# temp
-hello
