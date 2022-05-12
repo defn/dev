@@ -52,3 +52,6 @@ monitor_inner:
 dev:
 	@~/bin/e pre-commit run --all
 	@while true; do if ~/bin/e $(MAKE) live 2>/dev/null >/dev/null; then ~/bin/e $(MAKE) up; fi; echo "$$(date) zzz"; sleep 5 ; done
+
+trigger:
+	while true; do (cd fly && ~/bin/e $(MAKE) trigger-devcontainer); sleep 5; done
