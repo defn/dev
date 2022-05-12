@@ -7,6 +7,7 @@ work
 cue.mod/pkg
 
 # working files
+node_modules
 .bash_history
 .viminfo
 .vim/plugged
@@ -37,4 +38,4 @@ cue.mod/pkg
 .buildkite-agent
 .earthly
 .irb_history
-.dead
+ .dead
