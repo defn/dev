@@ -14,7 +14,7 @@ images:
 	$(MAKE) base tower push
 
 base:
-	dotenv run docker build -f Dockerfile.base -t registry.fly.io/docker:defn-dev-base --cache-from registry.fly.io/docker:defn-dev-cache-base --build-arg IMAGE=ubuntu:20.04 $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
+	dotenv run docker build -f Dockerfile.base -t registry.fly.io/docker:defn-dev-base --squash --cache-from registry.fly.io/docker:defn-dev-cache-base --build-arg IMAGE=ubuntu:20.04 $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
 
 tower:
 	dotenv run docker build -f Dockerfile.tower -t registry.fly.io/docker:defn-dev-tower --cache-from registry.fly.io/docker:defn-dev-cache-tower --build-arg IMAGE=registry.fly.io/docker:defn-dev-base $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
