@@ -224,7 +224,7 @@ RUN bash -c 'source $HOME/.asdf/asdf.sh && npm install -g npm@${NPM}'
 
 FROM ${IMAGE} as cdktf
 ARG CDKTF
-COPY --link --chown=ubuntu:ubuntu --from=nodejs/home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=nodejs /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu .tool-versions .
 RUN bash -c 'source $HOME/.asdf/asdf.sh && npm install -g cdktf-cli@${CDKTF}'
 
