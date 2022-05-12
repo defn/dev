@@ -23,14 +23,9 @@ proxy:
 
 up:
 	$(MAKE) start-docker
-	flyctl scale --app so count 1
-	flyctl scale --app the count 1
 
 down:
 	cd ~/.password-store && git-crypt lock
-	flyctl scale --app so count 0
-	flyctl scale --app the count 0
-	flyctl scale --app docker count 0
 	flyctl scale --app defn count 0
 
 %:
