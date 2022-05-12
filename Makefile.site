@@ -36,6 +36,7 @@ up:
 
 down:
 	~/bin/e bash -c 'rm -vf "$${SSH_AUTH_SOCK}"'
+	echo yes | gh auth logout --hostname github.com
 	cd fly && $(MAKE) down
 	pkill [t]ilt || true
 
