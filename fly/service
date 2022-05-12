@@ -79,7 +79,12 @@ function main {
         (exec buildkite-agent start) &
     fi
 
-    exec /usr/sbin/sshd -D -o UseDNS=no -o UsePAM=yes -o PasswordAuthentication=no -o StreamLocalBindUnlink=yes "$@"
+    if [[ "$#" -gt 0 ]]; then
+        cd ~ubuntu
+        exec "$@"
+    else
+        exec /usr/sbin/sshd -D -o UseDNS=no -o UsePAM=yes -o PasswordAuthentication=no -o StreamLocalBindUnlink=yes
+    fi
 }
 
 main "$@"
