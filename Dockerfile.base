@@ -53,8 +53,8 @@ RUN rm -f /usr/bin/gs
 
 RUN ln -nfs /usr/bin/git-crypt /usr/local/bin/
 
-RUN update-alternatives --set iptables /usr/sbin/iptables-legacy
-RUN update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
+#RUN update-alternatives --set iptables /usr/sbin/iptables-legacy
+#RUN update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
 
 RUN mkdir /run/sshd
 
