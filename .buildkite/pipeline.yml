@@ -1,4 +1,4 @@
 steps:
-  - command: "cd ~ubuntu && ~/bin/e make_once"
+  - command: "cd ~ubuntu && ~/bin/e monitor"
     agents:
       queue: "defn"
