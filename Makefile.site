@@ -44,10 +44,10 @@ live:
 	@env SSH_AUTH_SOCK="$(shell ls -td /tmp/vscode-ssh-auth-sock-* 2>/dev/null | head -1)" ssh-add -L 2>/dev/null >/dev/null
 
 monitor:
-	while true; do ~/bin/e $(MAKE) monitor_inner || true; sleep 5; done
+	@while true; do ~/bin/e $(MAKE) monitor_inner || true; sleep 5; done
 
 monitor_inner:
-	rm -f .dead; while true; do if ! $(MAKE) live 2>/dev/null >/dev/null; then touch .dead; for a in 1 2 3 4 5 6; do if $(MAKE) live 2>/dev/null >/dev/null; then rm -f .dead; break; fi; echo MAYBE DEAD $$a; sleep 10; done; fi; if test -f .dead; then $(MAKE) down; break; fi; echo "$$(date) live"; sleep 60; done
+	@rm -f .dead; while true; do if ! $(MAKE) live 2>/dev/null >/dev/null; then touch .dead; for a in 1 2 3 4 5 6; do if $(MAKE) live 2>/dev/null >/dev/null; then rm -f .dead; break; fi; echo MAYBE DEAD $$a; sleep 10; done; fi; if test -f .dead; then $(MAKE) down; break; fi; echo "$$(date) live"; sleep 60; done
 
 dev:
 	@~/bin/e pre-commit run --all
