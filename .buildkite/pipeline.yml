@@ -1,2 +1,4 @@
 steps:
   - command: "cd ~ubuntu && ~/bin/e make_once"
+    agents:
+      queue: "defn"
