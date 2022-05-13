@@ -25,8 +25,8 @@ up:
 	$(MAKE) start-docker
 
 down:
-	cd ~/.password-store && git-crypt lock
-	flyctl scale --app defn count 0
+	-cd ~/.password-store && git-crypt lock
+	-flyctl scale --app defn count 0
 
 %:
 	flyctl deploy --remote-only --config $@.toml
