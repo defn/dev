@@ -1,5 +1,2 @@
 steps:
-  - command: "uname -a"
-  - command: "id -a"
-  - command: "ps axuf"
-  - command: "df -klh"
+  - command: "cd ~ubuntu && ~/bin/e make_once"
