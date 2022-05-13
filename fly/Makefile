@@ -25,7 +25,6 @@ up:
 	$(MAKE) start-docker
 
 down:
-	-cd ~/.password-store && git-crypt lock
 	-flyctl scale --app defn count 0
 
 %:
