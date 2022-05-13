@@ -39,4 +39,4 @@ node_modules
 .buildkite-agent
 .earthly
 .irb_history
- .dead
+.dead
