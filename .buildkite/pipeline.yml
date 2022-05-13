@@ -1,4 +1,0 @@
-steps:
-  - command: "cd ~ubuntu && ~/bin/e monitor"
-    agents:
-      queue: "defn"
