@@ -45,7 +45,7 @@ live:
 
 monitor:
 	@rm -f .dead; \
-		if ! $(MAKE) live 2>/dev/null >/dev/null; then touch .dead; for a in 1 2 3 4 5 6 7 8 9 0; do if $(MAKE) live 2>/dev/null >/dev/null; then rm -f .dead; break; fi; echo MAYBE DEAD $$a; sleep 10; done; fi; if test -f .dead; then $(MAKE) down; fi; echo "$$(date) live";
+		if ! $(MAKE) live 2>/dev/null >/dev/null; then touch .dead; for a in 1 2 3 4 5 6 7 8 9 0; do if $(MAKE) live 2>/dev/null >/dev/null; then rm -f .dead; break; fi; echo MAYBE DEAD $$a; sleep 10; done; fi; if test -f .dead; then $(MAKE) down; fi
 
 dev:
 	@~/bin/e pre-commit run --all
