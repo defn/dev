@@ -97,6 +97,11 @@ ARG BUILDKITE
 RUN cd /usr/local/bin && curl -sSL https://github.com/buildkite/agent/releases/download/v${BUILDKITE}/buildkite-agent-linux-amd64-${BUILDKITE}.tar.gz \
     | sudo tar xvfz -
 
+FROM ${IMAGE} AS bkcli
+ARG BKCLI
+RUN cd /usr/local/bin && sudo curl -sSL -o bk https://github.com/buildkite/cli/releases/download/v${BKCLI}/cli-linux-amd64 \
+    && sudo chmod 755 bk
+
 FROM ${IMAGE} AS hlb
 ARG HLB
 RUN cd /usr/local/bin && sudo curl -sSL -o hlb https://github.com/openllb/hlb/releases/download/v${HLB}/hlb-linux-amd64 \
@@ -263,6 +268,7 @@ COPY --from=flyctl --link /usr/local/bin/flyctl /usr/local/bin/flyctl
 COPY --from=yaegi --link /usr/local/bin/yaegi /usr/local/bin/yaegi
 COPY --from=earthly --link /usr/local/bin/earthly /usr/local/bin/earthly
 COPY --from=buildkite --link /usr/local/bin/buildkite-agent /usr/local/bin/buildkite-agent
+COPY --from=bkcli --link /usr/local/bin/bk /usr/local/bin/bk
 COPY --from=hlb --link /usr/local/bin/hlb /usr/local/bin/hlb
 COPY --from=difft --link /usr/local/bin/difft /usr/local/bin/difft
 COPY --from=litestream --link /usr/local/bin/litestream /usr/local/bin/litestream
