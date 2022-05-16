@@ -16,7 +16,7 @@ trigger-docker:
 trigger-devcontainer:
 	socat \
 		TCP-LISTEN:2222,reuseaddr,fork,max-children=2 \
-		EXEC:"'bash -c \"(flyctl scale --app defn count 1; while ! netcat -z defn 22; do sleep 1; done) 1>/dev/null 2>&1; socat - TCP:defn:22\"'",nofork
+		EXEC:"'bash -c \"(earthly --push --secret FLY_ACCESS_TOKEN +defn1; while ! netcat -z defn 22; do sleep 1; done) 1>/dev/null 2>&1; socat - TCP:defn:22\"'",nofork
 
 proxy:
 	while true; do flyctl --app "$(shell flyctl apps list | grep 'fly-builder' | awk '{print $$1}' | head -1)" proxy 2377:2375; sleep 1; done
@@ -25,7 +25,7 @@ up:
 	$(MAKE) start-docker
 
 down:
-	-flyctl scale --app defn count 0
+	-earthly --push --secret FLY_ACCESS_TOKEN +defn0
 
 %:
 	flyctl deploy --remote-only --config $@.toml
