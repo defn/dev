@@ -27,7 +27,8 @@ push:
 
 ci:
 	$(MAKE) test
-	$(MAKE) tower
+	$(MAKE) cache
+	$(MAKE) images
 	@figlet success | /usr/games/lolcat
 
 up:
