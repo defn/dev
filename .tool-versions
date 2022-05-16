@@ -16,3 +16,4 @@ cloudflared 2022.5.0
 terraform 1.2.0-rc1
 nodejs 16.15.0
 k3sup 0.11.3
+doctl 1.75.0
