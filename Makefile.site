@@ -28,6 +28,7 @@ push:
 ci:
 	$(MAKE) test
 	$(MAKE) cache
+	docker system prune -f
 	$(MAKE) images
 	@figlet success | /usr/games/lolcat
 
