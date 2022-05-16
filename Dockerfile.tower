@@ -245,6 +245,13 @@ COPY --link --chown=ubuntu:ubuntu .tool-versions .
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add doctl'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install doctl'
 
+FROM ${IMAGE} as python
+COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu .tool-versions .
+RUN sudo apt update && sudo apt install -y python3-dev
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add python'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install python'
+
 FROM ${IMAGE} as precommit
 COPY --link --chown=ubuntu:ubuntu --from=golang /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu .tool-versions .
@@ -296,6 +303,7 @@ COPY --link --chown=ubuntu:ubuntu --from=terraform /home/ubuntu/.asdf /home/ubun
 COPY --link --chown=ubuntu:ubuntu --from=golang /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=cdktf /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=doctl /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=python /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu .tool-versions .
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install && asdf reshim'
 
