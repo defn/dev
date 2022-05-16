@@ -1,11 +1,12 @@
 VERSION 0.6
 
-defn0:
+tower:
     FROM registry.fly.io/defn:dev-tower
-    RUN true
+
+defn0:
+    FROM +tower
     RUN --push --secret FLY_ACCESS_TOKEN ~/bin/e flyctl scale --app defn count 0
 
 defn1:
-    FROM registry.fly.io/defn:dev-tower
-    RUN true
+    FROM +tower
     RUN --push --secret FLY_ACCESS_TOKEN ~/bin/e flyctl scale --app defn count 1
