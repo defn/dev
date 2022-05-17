@@ -3,3 +3,4 @@ global:
   local_registry_host: tcp://127.0.0.1:8371
   secret_provider: earthly-secret-provider
   cache_size_pct: 70
+  disable_log_sharing: true
