@@ -28,7 +28,9 @@ push:
 ci:
 	$(MAKE) test
 	$(MAKE) cache
-	docker system prune -f
+	@earthly reset --all
+	@docker system prune -f
+	@docker system prune -f
 	$(MAKE) images
 	@figlet success | /usr/games/lolcat
 
@@ -57,8 +59,6 @@ dev:
 
 dev_inner:
 	@~/bin/e pre-commit run --all
-	@earthly reset --all
-	@docker system prune -f
 	@while true; do if ~/bin/e $(MAKE) live 2>/dev/null >/dev/null; then ~/bin/e $(MAKE) up; fi; echo "$$(date) zzz"; sleep 5 ; done
 
 trigger:
