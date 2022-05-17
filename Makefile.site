@@ -51,6 +51,11 @@ monitor:
 		if ! $(MAKE) live 2>/dev/null >/dev/null; then touch .dead; for a in 1 2 3 4 5 6 7 8 9 0; do if $(MAKE) live 2>/dev/null >/dev/null; then rm -f .dead; break; fi; echo MAYBE DEAD $$a; sleep 10; done; fi; if test -f .dead; then ~/bin/e $(MAKE) down; fi
 
 dev:
+	@git pull
+	@git checkout .
+	$(MAKE) dev_inner
+
+dev_inner:
 	@~/bin/e pre-commit run --all
 	@while true; do if ~/bin/e $(MAKE) live 2>/dev/null >/dev/null; then ~/bin/e $(MAKE) up; fi; echo "$$(date) zzz"; sleep 5 ; done
 
