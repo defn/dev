@@ -57,6 +57,8 @@ dev:
 
 dev_inner:
 	@~/bin/e pre-commit run --all
+	@docker system prune -f
+	@earthly reset --all
 	@while true; do if ~/bin/e $(MAKE) live 2>/dev/null >/dev/null; then ~/bin/e $(MAKE) up; fi; echo "$$(date) zzz"; sleep 5 ; done
 
 trigger:
