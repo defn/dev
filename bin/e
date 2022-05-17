@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
-# shellcheck disable=SC1090
-source ~/.bash_profile
-exec "$@"
+case "${1:-}" in
++*)
+	earthly "$@"
+	;;
+*)
+	# shellcheck disable=SC1090
+	source ~/.bash_profile
+	exec "$@"
+	;;
+esac
