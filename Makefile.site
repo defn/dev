@@ -28,8 +28,7 @@ push:
 ci:
 	$(MAKE) test
 	$(MAKE) cache
-	@earthly reset --all
-	@docker system prune -f
+	@earthly prune --all
 	@docker system prune -f
 	$(MAKE) images
 	@figlet success | /usr/games/lolcat
