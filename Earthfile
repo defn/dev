@@ -5,3 +5,4 @@ IMPORT github.com/katt-org/p/lib:master AS lib
 FROM lib+platform
 
 warm:
+    RUN --no-cache true
