@@ -4,15 +4,15 @@ test:
 asdf:
 	cat .tool-versions| awk '{print $$1}' | while read -r a; do asdf list-all "$$a" | sed "s#^#$$a #"; done | sort > .tool-versions-all
 
+images:
+	$(MAKE) base tower push
+
 cache:
 	dotenv run docker build -f Dockerfile.base -t registry.fly.io/defn:dev-cache-base --build-arg BUILDKIT_INLINE_CACHE=1 --build-arg IMAGE=ubuntu:20.04 $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
 	dotenv run docker build -f Dockerfile.tower -t registry.fly.io/defn:dev-cache-tower --build-arg BUILDKIT_INLINE_CACHE=1 --build-arg IMAGE=registry.fly.io/defn:dev-base $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
 	docker push registry.fly.io/defn:dev-cache-base
 	docker push registry.fly.io/defn:dev-cache-tower
 	earthly +warm
-
-images:
-	$(MAKE) base tower push
 
 base:
 	dotenv run docker build -f Dockerfile.base -t registry.fly.io/defn:dev-base --squash --cache-from registry.fly.io/defn:dev-cache-base --build-arg IMAGE=ubuntu:20.04 $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
@@ -30,8 +30,8 @@ ci:
 	$(MAKE) test
 	@earthly prune --all
 	@docker system prune -f
-	$(MAKE) cache
 	$(MAKE) images
+	$(MAKE) cache
 	@figlet success | /usr/games/lolcat
 
 up:
