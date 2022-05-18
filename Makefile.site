@@ -9,7 +9,7 @@ cache:
 	dotenv run docker build -f Dockerfile.tower -t registry.fly.io/defn:dev-cache-tower --build-arg BUILDKIT_INLINE_CACHE=1 --build-arg IMAGE=registry.fly.io/defn:dev-base $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
 	docker push registry.fly.io/defn:dev-cache-base
 	docker push registry.fly.io/defn:dev-cache-tower
-	eartly +warm
+	earthly +warm
 
 images:
 	$(MAKE) base tower push
