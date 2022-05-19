@@ -29,7 +29,7 @@ push:
 
 clean:
 	earthly prune --all
-	docker system 
+	docker system
 
 ci:
 	$(MAKE) test
