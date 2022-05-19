@@ -57,8 +57,7 @@ if tty >/dev/null; then
 		echo
 		powerline --colorize-hostname -mode flat -newline \
 			-priority root,cwd,user,host,ssh,perms,git-branch,exit,cwd-path,git-status \
-			-modules host,ssh,cwd,perms,gitlite,load,exit,venv \
-			-path-aliases /home/boot=\~,\~/work=work
+			-modules host,ssh,cwd,perms,gitlite,load,exit,venv
 	}
 
 	function update_ps1 {
@@ -66,6 +65,7 @@ if tty >/dev/null; then
 		if [[ ! -S "${SSH_AUTH_SOCK:-}" ]]; then
 			export SSH_AUTH_SOCK="$(ls -td /tmp/vscode-ssh-auth-sock-* 2>/dev/null | head -1)"
 		fi
+		touch ~/.alive
 		PS1="$(render_ps1)"
 	}
 
