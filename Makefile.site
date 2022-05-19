@@ -12,7 +12,6 @@ cache:
 	dotenv run docker build -f Dockerfile.tower -t registry.fly.io/defn:dev-cache-tower --build-arg BUILDKIT_INLINE_CACHE=1 --build-arg IMAGE=registry.fly.io/defn:dev-base $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
 	docker push registry.fly.io/defn:dev-cache-base
 	docker push registry.fly.io/defn:dev-cache-tower
-	earthly prune --all
 	earthly --remote-cache=registry.fly.io/docker:cache-platform --push +warm
 	earthly --remote-cache=registry.fly.io/docker:cache-platform +warm
 
@@ -28,9 +27,12 @@ push:
 	docker push registry.fly.io/defn:dev-tower
 	docker push registry.fly.io/defn:dev-ci
 
+clean:
+	earthly prune --all
+	docker system 
+
 ci:
 	$(MAKE) test
-	@docker system prune -f
 	$(MAKE) images
 	$(MAKE) cache
 	@figlet success | /usr/games/lolcat
