@@ -71,7 +71,7 @@ WORKDIR /home/ubuntu
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]
 
-RUN pipx install --pip-args "keyring_pass" poetry
+RUN pipx install poetry
 RUN pipx install watchdog
 RUN pipx install 'python-dotenv[cli]'
 RUN pipx install yq
