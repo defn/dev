@@ -8,7 +8,7 @@ function main {
 	for f in $(find -type l); do 
 		local dest="$(readlink "$f")"
 		rm -f "$f"
-		rsync -ia "$dest" "$f"
+		rsync -ia "$dest/." "$f/."
 	done
 }
 
