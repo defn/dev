@@ -53,7 +53,7 @@ live:
 	@env SSH_AUTH_SOCK="$(shell ls -td /tmp/vscode-ssh-auth-sock-* 2>/dev/null | head -1)" ssh-add -L 2>/dev/null >/dev/null
 
 monitor:
-	@rm -f ~/.dead; \
+	@set -x; rm -f ~/.dead; \
 		if ! $(MAKE) live 2>/dev/null >/dev/null; then \
 			touch ~/.dead; \
 			for a in 1 2 3 4 5 6 7 8 9 0; do \
@@ -63,6 +63,7 @@ monitor:
 		if test -f ~/.dead; then \
 			~/bin/e $(MAKE) down; \
 		fi; \
+		ls -l ~/.alive || true; \
 		if test -f ~/.alive && test "$(shell find ~/.alive -mmin +30)"; then \
 			~/bin/e $(MAKE) down; \
 		fi
