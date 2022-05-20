@@ -5,8 +5,9 @@ function main {
 
 	cd "$1"
 
-	for f in $(find -type l); do 
-		local dest="$(readlink "$f")"
+	find . -type l | while read -r f; do
+		local dest
+		dest="$(readlink "$f")"
 		rm -f "$f"
 		mkdir -p "$f"
 		rsync -ia "$dest/." "$f/."
