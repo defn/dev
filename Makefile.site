@@ -69,7 +69,6 @@ monitor:
 		fi
 
 dev:
-	@test "$(shell pass hello)" == "world"
 	@git pull
 	@git checkout .
 	$(MAKE) dev_inner
