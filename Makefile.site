@@ -63,7 +63,7 @@ monitor:
 		if test -f ~/.dead; then \
 			~/bin/e $(MAKE) down; \
 		fi; \
-		if test -f ~/.alive && test "$(shell find ~/.alive -mmin +30)"; then
+		if test -f ~/.alive && test "$(shell find ~/.alive -mmin +30)"; then \
 			~/bin/e $(MAKE) down; \
 		fi
 
