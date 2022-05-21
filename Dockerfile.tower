@@ -283,6 +283,7 @@ COPY --link --chown=ubuntu:ubuntu --from=terraform /home/ubuntu/.asdf /home/ubun
 COPY --link --chown=ubuntu:ubuntu --from=cdktf /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=doctl /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=python /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=python /home/ubuntu/.local /home/ubuntu/.local
 COPY --link --chown=ubuntu:ubuntu .tool-versions .
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install && asdf reshim'
 
