@@ -16,6 +16,7 @@ push:
 clean:
 	docker images | grep none | awk '{print $$3}' | runmany 'docker rmi $$1'
 	docker system prune -f
+	docker system df
 
 prune:
 	$(MAKE) clean
