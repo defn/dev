@@ -88,6 +88,51 @@ tower:
 
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
+    COPY +credentialPass/docker-credential-pass /usr/local/bin/
+    COPY +powerline/powerline /usr/local/bin
+    COPY +hof/hof /usr/local/bin/
+    COPY +step/step +step/step-cli /usr/local/bin/
+    COPY +cilium/cilium /usr/local/bin/
+    COPY +hubble/hubble /usr/local/bin/
+    COPY +linkerd/linkerd /usr/local/bin/
+    COPY +vcluster/vcluster /usr/local/bin/
+    COPY +loft/loft /usr/local/bin/
+    COPY +steampipe/steampipe /usr/local/bin/
+    COPY +jless/jless /usr/local/bin/
+    COPY +gh/gh /usr/local/bin/
+    COPY +flyctl/flyctl /usr/local/bin/
+    COPY +earthly/earthly /usr/local/bin/
+    COPY +buildkite/buildkite-agent /usr/local/bin/
+    COPY +bk/bk /usr/local/bin/
+    COPY +hlb/hlb /usr/local/bin/
+    COPY +difft/difft /usr/local/bin/
+    COPY +litestream/litestream /usr/local/bin/
+
+    COPY +shell/.asdf .asdf
+    COPY +kubernetes/.asdf .asdf
+    COPY +cue/.asdf .asdf
+    COPY +k9s k9s/.asdf .asdf
+    COPY +kustomize/.asdf .asdf
+    COPY +helm/.asdf .asdf
+    COPY +k3d/.asdf .asdf
+    COPY +k3sup/.asdf .asdf
+    COPY +tilt/.asdf .asdf
+    COPY +teleport/.asdf .asdf
+    COPY +vault/.asdf .asdf
+    COPY +consul/.asdf .asdf
+    COPY +cloudflared/.asdf .asdf
+    COPY +terraform/.asdf .asdf
+    COPY +cdktf/.asdf .asdf
+    COPY +doctl/.asdf .asdf
+
+    COPY +precommit/.asdf .asdf
+    COPY +precommit/.local .local
+    COPY +precommit/.cache .cache
+
+    COPY --chown=ubuntu:ubuntu .tool-versions .
+    RUN bash -c 'source .asdf/asdf.sh && asdf install && asdf reshim'
+
+    COPY --chown=ubuntu:ubuntu . .
 
 ci:
     FROM +tower
@@ -104,7 +149,7 @@ baseTools:
 
     RUN apt-get update \
         && apt-get install -y --no-install-recommends \
-                wget curl apt-transport-https software-properties-common tzdata locales git
+            apt-transport-https software-properties-common tzdata locales git gpg gpg-agent unzip xz-utils wget curl
 
 baseAsdf:
     FROM +baseTools
@@ -118,44 +163,6 @@ baseAsdf:
 
     RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${ASDF}
     SAVE ARTIFACT .asdf
-
-tools:
-    BUILD +credentialPass
-    BUILD +powerline
-    BUILD +hof
-    BUILD +step
-    BUILD +cilium
-    BUILD +hubble
-    BUILD +linkerd
-    BUILD +vcluster
-    BUILD +loft
-    BUILD +steampipe
-    BUILD +jless
-    BUILD +gh
-    BUILD +flyctl
-    BUILD +earthly
-    BUILD +buildkite
-    BUILD +bk
-    BUILD +hlb
-    BUILD +difft
-    BUILD +litestream
-    BUILD +kubernetes
-    BUILD +k9s
-    BUILD +kustomize
-    BUILD +helm
-    BUILD +k3d
-    BUILD +k3sup
-    BUILD +tilt
-    BUILD +teleport
-    BUILD +vault
-    BUILD +consul
-    BUILD +cloudflared
-    BUILD +shell
-    BUILD +cue
-    BUILD +terraform
-    BUILD +cdktf
-    BUILD +doctl
-    BUILD +precommit
 
 credentialPass:
     FROM +baseTools
@@ -179,8 +186,8 @@ step:
     FROM +baseTools
     ARG STEP
     RUN curl -sSL -o step.deb https://dl.step.sm/gh-release/cli/gh-release-header/v${STEP}/step-cli_${STEP}_amd64.deb && dpkg -i step.deb
-    SAVE ARTIFACT step /usr/local/bin/step
-    SAVE ARTIFACT step-cli /usr/local/bin/step-cli
+    SAVE ARTIFACT step /usr/bin/step
+    SAVE ARTIFACT step-cli /usr/bin/step-cli
 
 cilium:
     FROM +baseTools
@@ -246,7 +253,7 @@ buildkite:
     FROM +baseTools
     ARG BUILDKITE
     RUN curl -sSL https://github.com/buildkite/agent/releases/download/v${BUILDKITE}/buildkite-agent-linux-amd64-${BUILDKITE}.tar.gz | tar xvfz -
-    SAVE ARTIFACT buildkite
+    SAVE ARTIFACT buildkite-agent
 
 bk:
     FROM +baseTools
@@ -375,7 +382,7 @@ shell:
     RUN echo shellcheck ${SHELLCHECK} >> .tool-versions
     RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add shellcheck'
     RUN bash -c 'source .asdf/asdf.sh && asdf install'
-    RUN echo shmt ${SHFMT} >> .tool-versions
+    RUN echo shfmt ${SHFMT} >> .tool-versions
     RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add shfmt'
     RUN bash -c 'source .asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
@@ -440,61 +447,11 @@ python:
 
 precommit:
     FROM +python
-    ARG PRECOMMIT
-    RUN echo precommit ${PRECOMMIT} >> .tool-versions
-    RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add precommit'
-    RUN bash -c 'source .asdf/asdf.sh && asdf install'
-    RUN git init
     RUN bash -c 'source .asdf/asdf.sh && pipx install pre-commit'
+    RUN git init
     COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
     RUN bash -c 'source .asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit install'
     RUN bash -c 'source .asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit run --all'
     SAVE ARTIFACT .asdf
     SAVE ARTIFACT .local
     SAVE ARTIFACT .cache
-
-#FROM ${IMAGE}
-#COPY --from=credential_pass --link /usr/local/bin/docker-credential-pass /usr/local/bin/docker-credential-pass
-#COPY --from=powerline --link /usr/local/bin/powerline /usr/local/bin/powerline
-#COPY --from=hof --link /usr/local/bin/hof /usr/local/bin/hof
-#COPY --from=step --link /usr/bin/step* /usr/local/bin/
-#COPY --from=cilium --link /usr/local/bin/cilium /usr/local/bin/cilium
-#COPY --from=hubble --link /usr/local/bin/hubble /usr/local/bin/hubble
-#COPY --from=linkerd --link /usr/local/bin/linkerd /usr/local/bin/linkerd
-#COPY --from=vcluster --link /usr/local/bin/vcluster /usr/local/bin/vcluster
-#COPY --from=loft --link /usr/local/bin/loft /usr/local/bin/loft
-#COPY --from=steampipe --link /usr/local/bin/steampipe /usr/local/bin/steampipe
-#COPY --from=jless --link /usr/local/bin/jless /usr/local/bin/jless
-#COPY --from=gh --link /usr/local/bin/gh /usr/local/bin/gh
-#COPY --from=flyctl --link /usr/local/bin/flyctl /usr/local/bin/flyctl
-#COPY --from=earthly --link /usr/local/bin/earthly /usr/local/bin/earthly
-#COPY --from=buildkite --link /usr/local/bin/buildkite-agent /usr/local/bin/buildkite-agent
-#COPY --from=bkcli --link /usr/local/bin/bk /usr/local/bin/bk
-#COPY --from=hlb --link /usr/local/bin/hlb /usr/local/bin/hlb
-#COPY --from=difft --link /usr/local/bin/difft /usr/local/bin/difft
-#COPY --from=litestream --link /usr/local/bin/litestream /usr/local/bin/litestream
-#
-#COPY --link --chown=ubuntu:ubuntu --from=shell /home/ubuntu/.asdf /home/ubuntu/.asdf
-#COPY --link --chown=ubuntu:ubuntu --from=kubernetes /home/ubuntu/.asdf /home/ubuntu/.asdf
-#COPY --link --chown=ubuntu:ubuntu --from=cue /home/ubuntu/.asdf /home/ubuntu/.asdf
-#COPY --link --chown=ubuntu:ubuntu --from=k9s /home/ubuntu/.asdf /home/ubuntu/.asdf
-#COPY --link --chown=ubuntu:ubuntu --from=kustomize /home/ubuntu/.asdf /home/ubuntu/.asdf
-#COPY --link --chown=ubuntu:ubuntu --from=helm /home/ubuntu/.asdf /home/ubuntu/.asdf
-#COPY --link --chown=ubuntu:ubuntu --from=k3d /home/ubuntu/.asdf /home/ubuntu/.asdf
-#COPY --link --chown=ubuntu:ubuntu --from=k3sup /home/ubuntu/.asdf /home/ubuntu/.asdf
-#COPY --link --chown=ubuntu:ubuntu --from=tilt /home/ubuntu/.asdf /home/ubuntu/.asdf
-#COPY --link --chown=ubuntu:ubuntu --from=teleport /home/ubuntu/.asdf /home/ubuntu/.asdf
-#COPY --link --chown=ubuntu:ubuntu --from=vault /home/ubuntu/.asdf /home/ubuntu/.asdf
-#COPY --link --chown=ubuntu:ubuntu --from=consul /home/ubuntu/.asdf /home/ubuntu/.asdf
-#COPY --link --chown=ubuntu:ubuntu --from=cloudflared /home/ubuntu/.asdf /home/ubuntu/.asdf
-#COPY --link --chown=ubuntu:ubuntu --from=terraform /home/ubuntu/.asdf /home/ubuntu/.asdf
-#COPY --link --chown=ubuntu:ubuntu --from=cdktf /home/ubuntu/.asdf /home/ubuntu/.asdf
-#COPY --link --chown=ubuntu:ubuntu --from=doctl /home/ubuntu/.asdf /home/ubuntu/.asdf
-#COPY --link --chown=ubuntu:ubuntu --from=python /home/ubuntu/.asdf /home/ubuntu/.asdf
-#COPY --link --chown=ubuntu:ubuntu --from=python /home/ubuntu/.local /home/ubuntu/.local
-#COPY --link --chown=ubuntu:ubuntu --from=python /home/ubuntu/.cache /home/ubuntu/.cache
-#COPY --link --chown=ubuntu:ubuntu .tool-versions .
-#RUN bash -c 'source .asdf/asdf.sh && asdf install && asdf reshim'
-#
-#COPY --link --chown=ubuntu:ubuntu . .
-#
