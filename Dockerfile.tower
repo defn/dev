@@ -239,7 +239,7 @@ FROM ${IMAGE} as precommit
 COPY --link --chown=ubuntu:ubuntu --from=python /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu .tool-versions .
 RUN git init
-RUN pipx install pre-commit
+RUN bash -c 'source $HOME/.asdf/asdf.sh && pipx install pre-commit'
 COPY --link --chown=ubuntu:ubuntu .pre-commit-config.yaml .
 RUN /home/ubuntu/.local/bin/pre-commit install
 RUN env PATH=$PATH:$HOME/.asdf/shims /home/ubuntu/.local/bin/pre-commit run --all
