@@ -23,13 +23,18 @@ push:
 	docker push registry.fly.io/defn:dev-ci
 
 clean:
+	docker images | grep none | awk '{print $$3}' | runmany 'docker rmi $$1'
+
+prune:
 	earthly prune --all
 	docker system prune -f
 
 ci:
+	$(MAKE) clean
 	$(MAKE) test
 	$(MAKE) images
 	$(MAKE) cache
+	$(MAKE) clean
 	@figlet success | /usr/games/lolcat
 
 up:
