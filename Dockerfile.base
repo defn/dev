@@ -23,8 +23,6 @@ RUN apt-get update \
     screen htop \
     libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev
 
-RUN pip install pipx
-
 RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null \
     && curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.tailscale-keyring.list | tee /etc/apt/sources.list.d/tailscale.list \
     && apt-get update \
@@ -70,11 +68,6 @@ ENV LC_ALL en_US.UTF-8
 WORKDIR /home/ubuntu
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]
-
-RUN pipx install poetry
-RUN pipx install watchdog
-RUN pipx install 'python-dotenv[cli]'
-RUN pipx install yq
 
 COPY --chown=ubuntu:ubuntu .vim .vim
 COPY --chown=ubuntu:ubuntu .vimrc .

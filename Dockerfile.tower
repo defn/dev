@@ -67,25 +67,10 @@ ARG GH
 RUN cd /usr/local/bin && curl -sSL https://github.com/cli/cli/releases/download/v${GH}/gh_${GH}_linux_amd64.tar.gz \
     | sudo tar xvfz - --wildcards '*/bin/gh' && sudo mv */bin/gh . && sudo rm -rf gh_*
 
-FROM ${IMAGE} AS goreleaser
-ARG GORELEASER
-RUN cd /usr/local/bin && curl -sSL https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER}/goreleaser_Linux_x86_64.tar.gz \
-    | sudo tar xvfz - goreleaser
-
-FROM ${IMAGE} AS golangcilint
-ARG GOLANGCILINT
-RUN cd /usr/local/bin && curl -sSL https://github.com/golangci/golangci-lint/releases/download/v${GOLANGCILINT}/golangci-lint-${GOLANGCILINT}-linux-amd64.tar.gz \
-    | sudo tar xvfz - --wildcards '*/golangci-lint' && sudo mv golangci-lint-*/golangci-lint . && sudo rm -rf golangci-lint-*
-
 FROM ${IMAGE} AS flyctl
 ARG FLYCTL
 RUN cd /usr/local/bin && curl -sSL https://github.com/superfly/flyctl/releases/download/v${FLYCTL}/flyctl_${FLYCTL}_Linux_x86_64.tar.gz \
     | sudo tar xvfz -
-
-FROM ${IMAGE} AS yaegi
-ARG YAEGI
-RUN cd /usr/local/bin && curl -sSL https://github.com/traefik/yaegi/releases/download/v${YAEGI}/yaegi_v${YAEGI}_linux_amd64.tar.gz \
-    | sudo tar xvfz - yaegi
 
 FROM ${IMAGE} AS earthly
 ARG EARTHLY
@@ -219,12 +204,6 @@ COPY --link --chown=ubuntu:ubuntu .tool-versions .
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add terraform'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install terraform'
 
-FROM ${IMAGE} as golang
-COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
-COPY --link --chown=ubuntu:ubuntu .tool-versions .
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add golang'
-RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install golang'
-
 FROM ${IMAGE} as nodejs
 ARG NPM
 COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
@@ -251,9 +230,15 @@ COPY --link --chown=ubuntu:ubuntu .tool-versions .
 RUN sudo apt update && sudo apt install -y python3-dev libbz2-dev libssl-dev libreadline-dev
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add python'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install python'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && python -m pip install --upgrade pip'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && pip install pipx && asdf reshim'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && pipx install poetry'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && pipx install watchdog'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && pipx install "python-dotenv[cli]"'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && pipx install yq'
 
 FROM ${IMAGE} as precommit
-COPY --link --chown=ubuntu:ubuntu --from=golang /home/ubuntu/.asdf /home/ubuntu/.asdf
+COPY --link --chown=ubuntu:ubuntu --from=python /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu .tool-versions .
 RUN git init
 RUN pipx install pre-commit
@@ -275,10 +260,7 @@ COPY --from=steampipe --link /usr/local/bin/steampipe /usr/local/bin/steampipe
 COPY --from=jless --link /usr/local/bin/jless /usr/local/bin/jless
 COPY --from=babashka --link /usr/local/bin/bb /usr/local/bin/bb
 COPY --from=gh --link /usr/local/bin/gh /usr/local/bin/gh
-COPY --from=goreleaser --link /usr/local/bin/goreleaser /usr/local/bin/goreleaser
-COPY --from=golangcilint --link /usr/local/bin/golangci-lint /usr/local/bin/golangci-lint
 COPY --from=flyctl --link /usr/local/bin/flyctl /usr/local/bin/flyctl
-COPY --from=yaegi --link /usr/local/bin/yaegi /usr/local/bin/yaegi
 COPY --from=earthly --link /usr/local/bin/earthly /usr/local/bin/earthly
 COPY --from=buildkite --link /usr/local/bin/buildkite-agent /usr/local/bin/buildkite-agent
 COPY --from=bkcli --link /usr/local/bin/bk /usr/local/bin/bk
@@ -300,7 +282,6 @@ COPY --link --chown=ubuntu:ubuntu --from=vault /home/ubuntu/.asdf /home/ubuntu/.
 COPY --link --chown=ubuntu:ubuntu --from=consul /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=cloudflared /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=terraform /home/ubuntu/.asdf /home/ubuntu/.asdf
-COPY --link --chown=ubuntu:ubuntu --from=golang /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=cdktf /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=doctl /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=python /home/ubuntu/.asdf /home/ubuntu/.asdf
