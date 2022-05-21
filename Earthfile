@@ -136,6 +136,10 @@ tower:
 
     DO +TOWER
 
+    COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
+    RUN bash -c 'source ~/.asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit install'
+    RUN bash -c 'source ~/.asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit run --all'
+
     COPY --chown=ubuntu:ubuntu .tool-versions .
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add krew'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
