@@ -13,15 +13,13 @@ RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/ud
 RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
-    wget apt-transport-https software-properties-common build-essential \
+    wget apt-transport-https software-properties-common \
     openssh-client openssh-server tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip xz-utils rsync \
     sudo git vim less fzf jo gron jq \
     make tini \
-    python3-pip python3-venv python-is-python3 \
     gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 \
     xdg-utils figlet lolcat socat netcat-openbsd \
-    screen htop \
-    libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev
+    screen htop
 
 RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null \
     && curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.tailscale-keyring.list | tee /etc/apt/sources.list.d/tailscale.list \

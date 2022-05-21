@@ -224,7 +224,7 @@ RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install doctl'
 FROM ${IMAGE} as python
 COPY --link --chown=ubuntu:ubuntu --from=asdf /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu .tool-versions .
-RUN sudo apt update && sudo apt install -y python3-dev libbz2-dev libssl-dev libreadline-dev
+RUN sudo apt update && sudo apt install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf plugin-add python'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install python'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && python -m pip install --upgrade pip'
