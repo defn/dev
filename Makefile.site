@@ -11,16 +11,16 @@ cache:
 	earthly +warm
 
 base:
-	dotenv run docker build -f Dockerfile.base -t registry.fly.io/defn:dev-base --squash --build-arg IMAGE=ubuntu:20.04 $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
+	earthly +baseRoot
 
 tower:
-	dotenv run docker build -f Dockerfile.tower -t registry.fly.io/defn:dev-tower --build-arg IMAGE=registry.fly.io/defn:dev-base $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
-	dotenv run docker build -f Dockerfile.ci -t registry.fly.io/defn:dev-ci --build-arg IMAGE=registry.fly.io/defn:dev-tower $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
+	earthly +tower
+	earthly +ci
 
 push:
-	docker push registry.fly.io/defn:dev-base
-	docker push registry.fly.io/defn:dev-tower
-	docker push registry.fly.io/defn:dev-ci
+	earthly --push +baseRoot
+	earthly --push +tower
+	earthly --push +ci
 
 clean:
 	docker images | grep none | awk '{print $$3}' | runmany 'docker rmi $$1'

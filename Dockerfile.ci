@@ -1,7 +1,0 @@
-#syntax=docker/dockerfile:1.4
-
-ARG IMAGE
-
-FROM ${IMAGE}
-
-USER root
