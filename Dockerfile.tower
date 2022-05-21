@@ -102,9 +102,6 @@ ARG LITESTREAM
 RUN cd /usr/local/bin && curl -sSL https://github.com/benbjohnson/litestream/releases/download/v${LITESTREAM}/litestream-v${LITESTREAM}-linux-amd64.tar.gz \
     | sudo tar xvfz -
 
-FROM ${IMAGE} as pants
-RUN python -m pipx install pantsbuild.pants
-
 FROM ${IMAGE} as asdf
 ARG ASDF
 RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${ASDF}
@@ -292,8 +289,5 @@ COPY --link --chown=ubuntu:ubuntu --from=precommit /home/ubuntu/.local/pipx/venv
 COPY --link --chown=ubuntu:ubuntu --from=precommit /home/ubuntu/.local/bin/pre-commit* /home/ubuntu/.local/bin/
 COPY --link --chown=ubuntu:ubuntu --from=precommit /home/ubuntu/.cache/pre-commit /home/ubuntu/.cache/pre-commit
 COPY --link --chown=ubuntu:ubuntu .pre-commit-config.yaml .
-
-COPY --link --chown=ubuntu:ubuntu --from=pants /home/ubuntu/.local/pipx/venvs/pantsbuild-pants /home/ubuntu/.local/pipx/venvs/pantsbuild-pants
-COPY --link --chown=ubuntu:ubuntu --from=pants /home/ubuntu/.local/bin/pants /home/ubuntu/.local/bin/pants
 
 COPY --link --chown=ubuntu:ubuntu . .
