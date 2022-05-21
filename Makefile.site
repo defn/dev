@@ -11,11 +11,11 @@ cache:
 	earthly +warm
 
 base:
-	dotenv run docker build -f Dockerfile.base -t registry.fly.io/defn:dev-base --squash --cache-from registry.fly.io/defn:dev-cache-base --build-arg IMAGE=ubuntu:20.04 $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
+	dotenv run docker build -f Dockerfile.base -t registry.fly.io/defn:dev-base --squash --build-arg IMAGE=ubuntu:20.04 $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
 
 tower:
-	dotenv run docker build -f Dockerfile.tower -t registry.fly.io/defn:dev-tower --cache-from registry.fly.io/defn:dev-cache-tower --build-arg IMAGE=registry.fly.io/defn:dev-base $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
-	dotenv run docker build -f Dockerfile.ci -t registry.fly.io/defn:dev-ci --cache-from registry.fly.io/defn:dev-cache-tower --build-arg IMAGE=registry.fly.io/defn:dev-tower $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
+	dotenv run docker build -f Dockerfile.tower -t registry.fly.io/defn:dev-tower --build-arg IMAGE=registry.fly.io/defn:dev-base $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
+	dotenv run docker build -f Dockerfile.ci -t registry.fly.io/defn:dev-ci --build-arg IMAGE=registry.fly.io/defn:dev-tower $(shell cat .env | cut -d= -f1 | while read -r a; do echo --build-arg $$a; done) .
 
 push:
 	docker push registry.fly.io/defn:dev-base
