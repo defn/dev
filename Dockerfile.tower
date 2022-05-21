@@ -233,6 +233,7 @@ RUN bash -c 'source $HOME/.asdf/asdf.sh && pipx install poetry'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && pipx install watchdog'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && pipx install "python-dotenv[cli]"'
 RUN bash -c 'source $HOME/.asdf/asdf.sh && pipx install yq'
+RUN bash -c 'source $HOME/.asdf/asdf.sh && pipx install PyInstaller'
 
 FROM ${IMAGE} as precommit
 COPY --link --chown=ubuntu:ubuntu --from=python /home/ubuntu/.asdf /home/ubuntu/.asdf
