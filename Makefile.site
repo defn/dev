@@ -24,10 +24,12 @@ push:
 
 clean:
 	docker images | grep none | awk '{print $$3}' | runmany 'docker rmi $$1'
+	docker system prune -f
 
 prune:
+	$(MAKE) clean
 	earthly prune --all
-	docker system prune -f
+	$(MAKE) clean
 
 ci:
 	$(MAKE) clean

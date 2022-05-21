@@ -111,7 +111,7 @@ tower:
     COPY +shell/.asdf .asdf
     COPY +kubernetes/.asdf .asdf
     COPY +cue/.asdf .asdf
-    COPY +k9s k9s/.asdf .asdf
+    COPY +k9s/.asdf .asdf
     COPY +kustomize/.asdf .asdf
     COPY +helm/.asdf .asdf
     COPY +k3d/.asdf .asdf
@@ -186,8 +186,9 @@ step:
     FROM +baseTools
     ARG STEP
     RUN curl -sSL -o step.deb https://dl.step.sm/gh-release/cli/gh-release-header/v${STEP}/step-cli_${STEP}_amd64.deb && dpkg -i step.deb
-    SAVE ARTIFACT step /usr/bin/step
-    SAVE ARTIFACT step-cli /usr/bin/step-cli
+    RUN cp /usr/bin/step* .
+    SAVE ARTIFACT step
+    SAVE ARTIFACT step-cli
 
 cilium:
     FROM +baseTools
