@@ -140,7 +140,7 @@ tower:
     DO +TOWER
 
     COPY --chown=ubuntu:ubuntu . .
-    RUN bash -c 'source .asdf/asdf.sh && asdf install && asdf reshim'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install && asdf reshim'
 
     SAVE IMAGE registry.fly.io/defn:dev-tower
 
@@ -174,7 +174,7 @@ asdf:
 
 credentialPass:
     FROM +tools
-    RUN --secret CREDENTIAL_PASS curl -sSL https://github.com/docker/docker-credential-helpers/releases/download/v${CREDENTIAL_PASS}/docker-credential-pass-v${CREDENTIAL_PASS}-amd64.tar.gz | tar xvfz -
+    RUN --secret CREDENTIAL_PASS curl -sSL https://github.com/docker/docker-credential-helpers/releases/download/v${CREDENTIAL_PASS}/docker-credential-pass-v${CREDENTIAL_PASS}-amd64.tar.gz | tar xvfz - && chmod 755 docker-credential-pass
     SAVE ARTIFACT docker-credential-pass
 
 powerline:
@@ -272,129 +272,129 @@ litestream:
 kubernetes:
     FROM +asdf
     RUN --secret KUBECTL echo kubectl ${KUBECTL} >> .tool-versions
-    RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add kubectl'
-    RUN bash -c 'source .asdf/asdf.sh && asdf install'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add kubectl'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     RUN --secret KREW echo krew ${KREW} >> .tool-versions
-    RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add krew'
-    RUN bash -c 'source .asdf/asdf.sh && asdf install'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add krew'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     RUN /home/ubuntu/.asdf/shims/kubectl-krew install ns
     RUN /home/ubuntu/.asdf/shims/kubectl-krew install ctx
     RUN /home/ubuntu/.asdf/shims/kubectl-krew install stern
-    RUN bash -c 'source .asdf/asdf.sh && asdf reshim krew'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim krew'
     SAVE ARTIFACT .asdf
 
 k9s:
     FROM +asdf
     RUN --secret K9S echo k9s ${K9S} >> .tool-versions
-    RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add k9s'
-    RUN bash -c 'source .asdf/asdf.sh && asdf install'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add k9s'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 kustomize:
     FROM +asdf
     RUN --secret KUSTOMIZE echo kustomize ${KUSTOMIZE} >> .tool-versions
-    RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add kustomize'
-    RUN bash -c 'source .asdf/asdf.sh && asdf install'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add kustomize'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 helm:
     FROM +asdf
     RUN --secret HELM echo helm ${HELM} >> .tool-versions
-    RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add helm'
-    RUN bash -c 'source .asdf/asdf.sh && asdf install'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add helm'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 k3d:
     FROM +asdf
     RUN --secret K3D echo k3d ${K3D} >> .tool-versions
-    RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add k3d'
-    RUN bash -c 'source .asdf/asdf.sh && asdf install'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add k3d'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 k3sup:
     FROM +asdf
     RUN --secret K3SUP echo k3sup ${K3SUP} >> .tool-versions
-    RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add k3sup'
-    RUN bash -c 'source .asdf/asdf.sh && asdf install'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add k3sup'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 tilt:
     FROM +asdf
     RUN --secret TILT echo tilt ${TILT} >> .tool-versions
-    RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add tilt'
-    RUN bash -c 'source .asdf/asdf.sh && asdf install'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add tilt'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 teleport:
     FROM +asdf
     RUN --secret TELEPORT echo teleport-ent ${TELEPORT} >> .tool-versions
-    RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add teleport-ent'
-    RUN bash -c 'source .asdf/asdf.sh && asdf install'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add teleport-ent'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 vault:
     FROM +asdf
     RUN --secret VAULT echo vault ${VAULT} >> .tool-versions
-    RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add vault'
-    RUN bash -c 'source .asdf/asdf.sh && asdf install'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add vault'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 consul:
     FROM +asdf
     RUN --secret CONSUL echo consul ${CONSUL} >> .tool-versions
-    RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add consul'
-    RUN bash -c 'source .asdf/asdf.sh && asdf install'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add consul'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 cloudflared:
     FROM +asdf
     RUN --secret CLOUDFLARED echo cloudflared ${CLOUDFLARED} >> .tool-versions
-    RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add cloudflared'
-    RUN bash -c 'source .asdf/asdf.sh && asdf install'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add cloudflared'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 shell:
     FROM +asdf
     RUN --secret SHELLCHECK echo shellcheck ${SHELLCHECK} >> .tool-versions
-    RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add shellcheck'
-    RUN bash -c 'source .asdf/asdf.sh && asdf install'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add shellcheck'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     RUN --secret SHFMT echo shfmt ${SHFMT} >> .tool-versions
-    RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add shfmt'
-    RUN bash -c 'source .asdf/asdf.sh && asdf install'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add shfmt'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 cue:
     FROM +asdf
     RUN --secret CUE echo cue ${CUE} >> .tool-versions
-    RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add cue'
-    RUN bash -c 'source .asdf/asdf.sh && asdf install'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add cue'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 terraform:
     FROM +asdf
     RUN --secret TERRAFORM echo terraform ${TERRAFORM} >> .tool-versions
-    RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add terraform'
-    RUN bash -c 'source .asdf/asdf.sh && asdf install'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add terraform'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 nodejs:
     FROM +asdf
     RUN --secret NODEJS echo nodejs ${NODEJS} >> .tool-versions
-    RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add nodejs'
-    RUN bash -c 'source .asdf/asdf.sh && asdf install'
-    RUN --secret NPM bash -c 'source .asdf/asdf.sh && npm install -g npm@${NPM}'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add nodejs'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
+    RUN --secret NPM bash -c 'source ~/.asdf/asdf.sh && npm install -g npm@${NPM}'
     SAVE ARTIFACT .asdf
 
 cdktf:
     FROM +nodejs
-    RUN --secret CDKTF bash -c 'source .asdf/asdf.sh && npm install -g cdktf-cli@${CDKTF}'
+    RUN --secret CDKTF bash -c 'source ~/.asdf/asdf.sh && npm install -g cdktf-cli@${CDKTF}'
     SAVE ARTIFACT .asdf
 
 doctl:
     FROM +asdf
     RUN --secret DOCTL echo doctl ${DOCTL} >> .tool-versions
-    RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add doctl'
-    RUN bash -c 'source .asdf/asdf.sh && asdf install'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add doctl'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 python:
@@ -403,24 +403,24 @@ python:
     RUN apt update && apt install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
     USER ubuntu
     RUN --secret PYTHON echo python ${PYTHON} >> .tool-versions
-    RUN bash -c 'source .asdf/asdf.sh && asdf plugin-add python'
-    RUN bash -c 'source .asdf/asdf.sh && asdf install'
-    RUN bash -c 'source .asdf/asdf.sh && python -m pip install --upgrade pip'
-    RUN bash -c 'source .asdf/asdf.sh && pip install pipx && asdf reshim'
-    RUN bash -c 'source .asdf/asdf.sh && pipx install poetry'
-    RUN bash -c 'source .asdf/asdf.sh && pipx install watchdog'
-    RUN bash -c 'source .asdf/asdf.sh && pipx install "python-dotenv[cli]"'
-    RUN bash -c 'source .asdf/asdf.sh && pipx install yq'
-    RUN bash -c 'source .asdf/asdf.sh && pipx install PyInstaller'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add python'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
+    RUN bash -c 'source ~/.asdf/asdf.sh && python -m pip install --upgrade pip'
+    RUN bash -c 'source ~/.asdf/asdf.sh && pip install pipx && asdf reshim'
+    RUN bash -c 'source ~/.asdf/asdf.sh && pipx install poetry'
+    RUN bash -c 'source ~/.asdf/asdf.sh && pipx install watchdog'
+    RUN bash -c 'source ~/.asdf/asdf.sh && pipx install "python-dotenv[cli]"'
+    RUN bash -c 'source ~/.asdf/asdf.sh && pipx install yq'
+    RUN bash -c 'source ~/.asdf/asdf.sh && pipx install PyInstaller'
     SAVE ARTIFACT .asdf
 
 precommit:
     FROM +python
-    RUN bash -c 'source .asdf/asdf.sh && pipx install pre-commit'
+    RUN bash -c 'source ~/.asdf/asdf.sh && pipx install pre-commit'
     RUN git init
     COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
-    RUN bash -c 'source .asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit install'
-    RUN bash -c 'source .asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit run --all'
+    RUN bash -c 'source ~/.asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit install'
+    RUN bash -c 'source ~/.asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit run --all'
     SAVE ARTIFACT .asdf
     SAVE ARTIFACT .local
     SAVE ARTIFACT .cache
