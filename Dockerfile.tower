@@ -57,11 +57,6 @@ ARG JLESS
 RUN (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${JLESS}/jless-v${JLESS}-x86_64-unknown-linux-gnu.zip | gunzip -c - > jless) \
     && chmod 755 jless && sudo mv jless /usr/local/bin/
 
-FROM ${IMAGE} AS babashka
-ARG BABASHKA
-RUN cd /usr/local/bin && curl -sSL https://github.com/babashka/babashka/releases/download/v${BABASHKA}/babashka-${BABASHKA}-linux-amd64.tar.gz \
-    | sudo tar xvfz -
-
 FROM ${IMAGE} AS gh
 ARG GH
 RUN cd /usr/local/bin && curl -sSL https://github.com/cli/cli/releases/download/v${GH}/gh_${GH}_linux_amd64.tar.gz \
@@ -256,7 +251,6 @@ COPY --from=vcluster --link /usr/local/bin/vcluster /usr/local/bin/vcluster
 COPY --from=loft --link /usr/local/bin/loft /usr/local/bin/loft
 COPY --from=steampipe --link /usr/local/bin/steampipe /usr/local/bin/steampipe
 COPY --from=jless --link /usr/local/bin/jless /usr/local/bin/jless
-COPY --from=babashka --link /usr/local/bin/bb /usr/local/bin/bb
 COPY --from=gh --link /usr/local/bin/gh /usr/local/bin/gh
 COPY --from=flyctl --link /usr/local/bin/flyctl /usr/local/bin/flyctl
 COPY --from=earthly --link /usr/local/bin/earthly /usr/local/bin/earthly
@@ -284,12 +278,8 @@ COPY --link --chown=ubuntu:ubuntu --from=cdktf /home/ubuntu/.asdf /home/ubuntu/.
 COPY --link --chown=ubuntu:ubuntu --from=doctl /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=python /home/ubuntu/.asdf /home/ubuntu/.asdf
 COPY --link --chown=ubuntu:ubuntu --from=python /home/ubuntu/.local /home/ubuntu/.local
+COPY --link --chown=ubuntu:ubuntu --from=python /home/ubuntu/.cache /home/ubuntu/.cache
 COPY --link --chown=ubuntu:ubuntu .tool-versions .
 RUN bash -c 'source $HOME/.asdf/asdf.sh && asdf install && asdf reshim'
-
-COPY --link --chown=ubuntu:ubuntu --from=precommit /home/ubuntu/.local/pipx/venvs/pre-commit /home/ubuntu/.local/pipx/venvs/pre-commit
-COPY --link --chown=ubuntu:ubuntu --from=precommit /home/ubuntu/.local/bin/pre-commit* /home/ubuntu/.local/bin/
-COPY --link --chown=ubuntu:ubuntu --from=precommit /home/ubuntu/.cache/pre-commit /home/ubuntu/.cache/pre-commit
-COPY --link --chown=ubuntu:ubuntu .pre-commit-config.yaml .
 
 COPY --link --chown=ubuntu:ubuntu . .
