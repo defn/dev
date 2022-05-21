@@ -6,7 +6,12 @@ warm:
     FROM lib+platform
     RUN --no-cache --secret hello echo ${hello}
 
-baseRoot:
+images:
+    BUILD +root
+    BUILD +tower
+    BUILD +ci
+
+root:
     FROM ubuntu:20.04
 
     USER root
@@ -68,10 +73,10 @@ baseRoot:
     RUN chown -R ubuntu:ubuntu /home/ubuntu
     RUN chmod u+s /usr/bin/sudo
 
-    SAVE IMAGE registry.fly.io/defn:dev-base
+    SAVE IMAGE registry.fly.io/defn:dev-root
 
 tower:
-    FROM +baseRoot
+    FROM +root
 
     USER ubuntu
     WORKDIR /home/ubuntu
@@ -134,10 +139,14 @@ tower:
 
     COPY --chown=ubuntu:ubuntu . .
 
+    SAVE IMAGE registry.fly.io/defn:dev-tower
+
 ci:
     FROM +tower
 
     USER root
+
+    SAVE IMAGE registry.fly.io/defn:dev-ci
 
 baseTools:
     FROM ubuntu:20.04

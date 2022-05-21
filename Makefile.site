@@ -4,23 +4,14 @@ test:
 asdf:
 	cat .tool-versions| awk '{print $$1}' | while read -r a; do asdf list-all "$$a" | sed "s#^#$$a #"; done | sort > .tool-versions-all
 
-images:
-	$(MAKE) base tower push
-
 cache:
 	earthly +warm
 
-base:
-	earthly +baseRoot
-
-tower:
-	earthly +tower
-	earthly +ci
+images:
+	earthly +images
 
 push:
-	earthly --push +baseRoot
-	earthly --push +tower
-	earthly --push +ci
+	earthly --push +images
 
 clean:
 	docker images | grep none | awk '{print $$3}' | runmany 'docker rmi $$1'
