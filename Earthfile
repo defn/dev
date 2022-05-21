@@ -170,6 +170,7 @@ asdf:
     USER ubuntu
     WORKDIR /home/ubuntu
     RUN --secret ASDF git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${ASDF}
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
     SAVE ARTIFACT .asdf
 
 credentialPass:
@@ -280,7 +281,7 @@ kubernetes:
     RUN /home/ubuntu/.asdf/shims/kubectl-krew install ns
     RUN /home/ubuntu/.asdf/shims/kubectl-krew install ctx
     RUN /home/ubuntu/.asdf/shims/kubectl-krew install stern
-    RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim krew'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
     SAVE ARTIFACT .asdf
 
 k9s:
