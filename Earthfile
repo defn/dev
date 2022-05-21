@@ -78,46 +78,46 @@ root:
 TOWER:
     COMMAND
 
-    COPY +credentialPass/docker-credential-pass /usr/local/bin/
-    COPY +powerline/powerline /usr/local/bin
-    COPY +hof/hof /usr/local/bin/
-    COPY +step/step +step/step-cli /usr/local/bin/
-    COPY +cilium/cilium /usr/local/bin/
-    COPY +hubble/hubble /usr/local/bin/
-    COPY +linkerd/linkerd /usr/local/bin/
-    COPY +vcluster/vcluster /usr/local/bin/
-    COPY +loft/loft /usr/local/bin/
-    COPY +steampipe/steampipe /usr/local/bin/
-    COPY +jless/jless /usr/local/bin/
-    COPY +gh/gh /usr/local/bin/
-    COPY +flyctl/flyctl /usr/local/bin/
-    COPY +earthly/earthly /usr/local/bin/
-    COPY +buildkite/buildkite-agent /usr/local/bin/
-    COPY +bk/bk /usr/local/bin/
-    COPY +hlb/hlb /usr/local/bin/
-    COPY +difft/difft /usr/local/bin/
-    COPY +litestream/litestream /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu +credentialPass/docker-credential-pass /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu +powerline/powerline /usr/local/bin
+    COPY --chown=ubuntu:ubuntu +hof/hof /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu +step/step +step/step-cli /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu +cilium/cilium /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu +hubble/hubble /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu +linkerd/linkerd /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu +vcluster/vcluster /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu +loft/loft /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu +steampipe/steampipe /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu +jless/jless /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu +gh/gh /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu +flyctl/flyctl /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu +earthly/earthly /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu +buildkite/buildkite-agent /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu +bk/bk /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu +hlb/hlb /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu +difft/difft /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu +litestream/litestream /usr/local/bin/
 
-    COPY +shell/.asdf .asdf
-    COPY +kubernetes/.asdf .asdf
-    COPY +cue/.asdf .asdf
-    COPY +k9s/.asdf .asdf
-    COPY +kustomize/.asdf .asdf
-    COPY +helm/.asdf .asdf
-    COPY +k3d/.asdf .asdf
-    COPY +k3sup/.asdf .asdf
-    COPY +tilt/.asdf .asdf
-    COPY +teleport/.asdf .asdf
-    COPY +vault/.asdf .asdf
-    COPY +consul/.asdf .asdf
-    COPY +cloudflared/.asdf .asdf
-    COPY +terraform/.asdf .asdf
-    COPY +cdktf/.asdf .asdf
-    COPY +doctl/.asdf .asdf
+    COPY --chown=ubuntu:ubuntu --dir +shell/.asdf .asdf
+    COPY --chown=ubuntu:ubuntu --dir +kubernetes/.asdf .asdf
+    COPY --chown=ubuntu:ubuntu --dir +cue/.asdf .asdf
+    COPY --chown=ubuntu:ubuntu --dir +k9s/.asdf .asdf
+    COPY --chown=ubuntu:ubuntu --dir +kustomize/.asdf .asdf
+    COPY --chown=ubuntu:ubuntu --dir +helm/.asdf .asdf
+    COPY --chown=ubuntu:ubuntu --dir +k3d/.asdf .asdf
+    COPY --chown=ubuntu:ubuntu --dir +k3sup/.asdf .asdf
+    COPY --chown=ubuntu:ubuntu --dir +tilt/.asdf .asdf
+    COPY --chown=ubuntu:ubuntu --dir +teleport/.asdf .asdf
+    COPY --chown=ubuntu:ubuntu --dir +vault/.asdf .asdf
+    COPY --chown=ubuntu:ubuntu --dir +consul/.asdf .asdf
+    COPY --chown=ubuntu:ubuntu --dir +cloudflared/.asdf .asdf
+    COPY --chown=ubuntu:ubuntu --dir +terraform/.asdf .asdf
+    COPY --chown=ubuntu:ubuntu --dir +cdktf/.asdf .asdf
+    COPY --chown=ubuntu:ubuntu --dir +doctl/.asdf .asdf
 
-    COPY +precommit/.asdf .asdf
-    COPY +precommit/.local .local
-    COPY +precommit/.cache .cache
+    COPY --chown=ubuntu:ubuntu --dir +precommit/.asdf .
+    COPY --chown=ubuntu:ubuntu --dir +precommit/.local .
+    COPY --chown=ubuntu:ubuntu --dir +precommit/.cache .
 
 tower:
     FROM +root
@@ -129,7 +129,7 @@ tower:
 
     RUN sudo uname -a
 
-    COPY --chown=ubuntu:ubuntu .vim .vim
+    COPY --chown=ubuntu:ubuntu --dir .vim .
     COPY --chown=ubuntu:ubuntu .vimrc .
     RUN echo yes | vim +PlugInstall +qall
 
@@ -139,7 +139,7 @@ tower:
 
     DO +TOWER
 
-    COPY --chown=ubuntu:ubuntu . .
+    COPY --dir --chown=ubuntu:ubuntu . .
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install && asdf reshim'
 
     SAVE IMAGE registry.fly.io/defn:dev-tower
