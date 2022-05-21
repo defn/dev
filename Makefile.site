@@ -61,12 +61,6 @@ monitor:
 		fi
 
 dev:
-	@git pull
-	@git checkout .
-	$(MAKE) dev_inner
-
-dev_inner:
-	@~/bin/e pre-commit run --all
 	@while true; do if ~/bin/e $(MAKE) live 2>/dev/null >/dev/null; then ~/bin/e $(MAKE) up; fi; echo "$$(date) zzz"; sleep 5 ; done
 
 trigger:
