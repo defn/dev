@@ -140,19 +140,21 @@ tower:
     COPY --chown=ubuntu:ubuntu .bash_profile .
     COPY --chown=ubuntu:ubuntu .bashrc .
 
-    COPY --chown=ubuntu:ubuntu .tool-versions .
+    COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
+    RUN --secret PYTHON echo python ${PYTHON} >> .tool-versions
+    RUN ~/bin/e pipx install pre-commit
+    RUN git init
+    RUN ~/bin/e pre-commit install
+    RUN ~/bin/e pre-commit run --all
+
+    RUN --secret KUBECTL echo kubectl ${KUBECTL} >> .tool-versions
+    RUN --secret KREW echo krew ${KREW} >> .tool-versions
     RUN ~/bin/e asdf plugin-add krew
     RUN ~/bin/e asdf install
     RUN ~/bin/e kubectl krew install ns
     RUN ~/bin/e kubectl krew install ctx
     RUN ~/bin/e kubectl krew install stern
     RUN ~/bin/e asdf reshim
-
-    COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
-    RUN git init
-    RUN ~/bin/e pipx install pre-commit
-    RUN ~/bin/e pre-commit install
-    RUN ~/bin/e pre-commit run --all
 
     COPY --dir --chown=ubuntu:ubuntu . .
 
