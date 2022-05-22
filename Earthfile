@@ -36,8 +36,7 @@ root:
         make tini \
         gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 \
         xdg-utils figlet lolcat socat netcat-openbsd \
-        screen htop \
-        python3-pip
+        screen htop
 
     RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null \
         && curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.tailscale-keyring.list | tee /etc/apt/sources.list.d/tailscale.list \
@@ -48,11 +47,6 @@ root:
         && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu focal stable" | tee /etc/apt/sources.list.d/docker.list \
         && apt-get update \
         && apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
-
-    RUN curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > /etc/apt/trusted.gpg.d/bazel.gpg \
-        && echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list \
-        && apt-get update \
-        && apt install -y bazel
 
     RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
     RUN usermod --groups docker --append ubuntu
