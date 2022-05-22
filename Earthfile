@@ -48,6 +48,11 @@ root:
         && apt-get update \
         && apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
+    RUN curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > /etc/apt/trusted.gpg.d/bazel.gpg \
+        && echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list \
+        && apt-get update \
+        && apt install -y bazel
+
     RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
     RUN usermod --groups docker --append ubuntu
     RUN echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu
