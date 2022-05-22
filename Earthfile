@@ -36,7 +36,8 @@ root:
         make tini \
         gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 \
         xdg-utils figlet lolcat socat netcat-openbsd \
-        screen htop
+        screen htop \
+        python3-pip
 
     RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null \
         && curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.tailscale-keyring.list | tee /etc/apt/sources.list.d/tailscale.list \
@@ -138,6 +139,8 @@ tower:
     RUN mkdir -p ~/.docker && echo '{"credsStore": "pass"}' > ~/.docker/config.json
 
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
+
+    RUN /usr/bin/pip install pantsbuild.pants
 
     DO +TOWER
 
