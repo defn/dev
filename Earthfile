@@ -136,17 +136,23 @@ tower:
 
     DO +TOWER
 
-    COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
-    RUN bash -c 'source ~/.asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit install'
-    RUN bash -c 'source ~/.asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit run --all'
+    COPY --chown=ubuntu:ubuntu bin/e bin/e
+    COPY --chown=ubuntu:ubuntu .bash_profile .
+    COPY --chown=ubuntu:ubuntu .bashrc .
 
     COPY --chown=ubuntu:ubuntu .tool-versions .
-    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add krew'
-    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
-    RUN /home/ubuntu/.asdf/shims/kubectl-krew install ns
-    RUN /home/ubuntu/.asdf/shims/kubectl-krew install ctx
-    RUN /home/ubuntu/.asdf/shims/kubectl-krew install stern
-    RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
+    RUN ~/bin/e asdf plugin-add krew
+    RUN ~/bin/e asdf install
+    RUN ~/bin/e kubectl krew install ns
+    RUN ~/bin/e kubectl krew install ctx
+    RUN ~/bin/e kubectl krew install stern
+    RUN ~/bin/e asdf reshim
+
+    COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
+    RUN git init
+    RUN ~/bin/e pipx install pre-commit
+    RUN ~/bin/e pre-commit install
+    RUN ~/bin/e pre-commit run --all
 
     COPY --dir --chown=ubuntu:ubuntu . .
 
@@ -430,9 +436,9 @@ python:
 
 precommit:
     FROM +python
-    RUN bash -c 'source ~/.asdf/asdf.sh && pipx install pre-commit'
     RUN git init
     COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
+    RUN bash -c 'source ~/.asdf/asdf.sh && pipx install pre-commit'
     RUN bash -c 'source ~/.asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit install'
     RUN bash -c 'source ~/.asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit run --all'
     SAVE ARTIFACT .asdf
