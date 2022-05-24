@@ -145,6 +145,10 @@ tower:
 
     COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
     RUN --secret PYTHON echo python ${PYTHON} >> .tool-versions
+    RUN ~/bin/e pipx install yq
+    RUN ~/bin/e pipx install poetry
+    RUN ~/bin/e pipx install watchdog
+    RUN ~/bin/e pipx install "python-dotenv[cli]"
     RUN ~/bin/e pipx install pre-commit
     RUN git init
     RUN ~/bin/e pre-commit install
@@ -432,14 +436,7 @@ python:
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     RUN bash -c 'source ~/.asdf/asdf.sh && python -m pip install --upgrade pip'
     RUN bash -c 'source ~/.asdf/asdf.sh && pip install pipx && asdf reshim'
-    RUN bash -c 'source ~/.asdf/asdf.sh && pipx install poetry'
-    RUN bash -c 'source ~/.asdf/asdf.sh && pipx install watchdog'
-    RUN bash -c 'source ~/.asdf/asdf.sh && pipx install "python-dotenv[cli]"'
-    RUN bash -c 'source ~/.asdf/asdf.sh && pipx install yq'
-    RUN bash -c 'source ~/.asdf/asdf.sh && pipx install PyInstaller'
     SAVE ARTIFACT .asdf
-    SAVE ARTIFACT .local
-    SAVE ARTIFACT .cache
 
 precommit:
     FROM +python
