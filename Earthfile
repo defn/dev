@@ -437,6 +437,8 @@ python:
     RUN bash -c 'source ~/.asdf/asdf.sh && pipx install yq'
     RUN bash -c 'source ~/.asdf/asdf.sh && pipx install PyInstaller'
     SAVE ARTIFACT .asdf
+    SAVE ARTIFACT .local
+    SAVE ARTIFACT .cache
 
 precommit:
     FROM +python
