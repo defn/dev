@@ -135,24 +135,20 @@ tower:
 
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
-    RUN /usr/bin/pip install pantsbuild.pants
-
     DO +TOWER
 
     COPY --chown=ubuntu:ubuntu bin/e bin/e
     COPY --chown=ubuntu:ubuntu .bash_profile .
     COPY --chown=ubuntu:ubuntu .bashrc .
 
-    COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
+    RUN /usr/bin/pip install pantsbuild.pants
+
     RUN --secret PYTHON echo python ${PYTHON} >> .tool-versions
     RUN ~/bin/e pipx install yq
     RUN ~/bin/e pipx install poetry
     RUN ~/bin/e pipx install watchdog
     RUN ~/bin/e pipx install "python-dotenv[cli]"
     RUN ~/bin/e pipx install pre-commit
-    RUN git init
-    RUN ~/bin/e pre-commit install
-    RUN ~/bin/e pre-commit run --all
 
     RUN --secret KUBECTL echo kubectl ${KUBECTL} >> .tool-versions
     RUN --secret KREW echo krew ${KREW} >> .tool-versions
