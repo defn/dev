@@ -74,7 +74,7 @@ root:
     RUN chown -R ubuntu:ubuntu /home/ubuntu
     RUN chmod u+s /usr/bin/sudo
 
-    SAVE IMAGE registry.fly.io/defn:dev-root
+    SAVE IMAGE --push registry.fly.io/defn:dev-root
 
 TOWER:
     COMMAND
@@ -161,14 +161,14 @@ tower:
 
     COPY --dir --chown=ubuntu:ubuntu . .
 
-    SAVE IMAGE registry.fly.io/defn:dev-tower
+    SAVE IMAGE --push registry.fly.io/defn:dev-tower
 
 ci:
     FROM +tower
 
     USER root
 
-    SAVE IMAGE registry.fly.io/defn:dev-ci
+    SAVE IMAGE --push registry.fly.io/defn:dev-ci
 
 tools:
     FROM ubuntu:20.04
