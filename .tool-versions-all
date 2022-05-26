@@ -154,6 +154,8 @@ consul 1.10.0-rc2
 consul 1.10.1
 consul 1.10.10
 consul 1.10.10+ent
+consul 1.10.11
+consul 1.10.11+ent
 consul 1.10.1-beta1
 consul 1.10.1+ent
 consul 1.10.1+ent-beta1
@@ -196,10 +198,14 @@ consul 1.11.4
 consul 1.11.4+ent
 consul 1.11.5
 consul 1.11.5+ent
+consul 1.11.6
+consul 1.11.6+ent
 consul 1.12.0
 consul 1.12.0-beta1
 consul 1.12.0-beta1+ent
 consul 1.12.0+ent
+consul 1.12.1
+consul 1.12.1+ent
 consul 1.2.0
 consul 1.2.0+ent
 consul 1.2.1
@@ -459,8 +465,6 @@ cue 0.4.2-rc.1
 cue 0.4.3
 cue 0.4.3-beta.1
 cue 0.4.3-beta.2
-doctl 1.50.0
-doctl 1.51.0
 doctl 1.52.0
 doctl 1.53.0
 doctl 1.54.0
@@ -489,6 +493,8 @@ doctl 1.73.0
 doctl 1.73.1
 doctl 1.74.0
 doctl 1.75.0
+doctl 1.76.0
+doctl 1.76.1
 helm 2.12.0
 helm 2.12.1
 helm 2.12.2
@@ -1437,7 +1443,9 @@ kubectl 1.21.11
 kubectl 1.21.11-rc.0
 kubectl 1.21.12
 kubectl 1.21.12-rc.0
+kubectl 1.21.13
 kubectl 1.21.13-rc.0
+kubectl 1.21.14-rc.0
 kubectl 1.21.1-rc.0
 kubectl 1.21.2
 kubectl 1.21.2-rc.0
@@ -1467,7 +1475,9 @@ kubectl 1.22.0-beta.1
 kubectl 1.22.0-beta.2
 kubectl 1.22.0-rc.0
 kubectl 1.22.1
+kubectl 1.22.10
 kubectl 1.22.10-rc.0
+kubectl 1.22.11-rc.0
 kubectl 1.22.1-rc.0
 kubectl 1.22.2
 kubectl 1.22.2-rc.0
@@ -1508,7 +1518,9 @@ kubectl 1.23.5
 kubectl 1.23.5-rc.0
 kubectl 1.23.6
 kubectl 1.23.6-rc.0
+kubectl 1.23.7
 kubectl 1.23.7-rc.0
+kubectl 1.23.8-rc.0
 kubectl 1.2.3-beta.0
 kubectl 1.2.4
 kubectl 1.24.0
@@ -1520,7 +1532,9 @@ kubectl 1.24.0-alpha.4
 kubectl 1.24.0-beta.0
 kubectl 1.24.0-rc.0
 kubectl 1.24.0-rc.1
+kubectl 1.24.1
 kubectl 1.24.1-rc.0
+kubectl 1.24.2-rc.0
 kubectl 1.2.4-beta.0
 kubectl 1.2.5
 kubectl 1.25.0-alpha.0
@@ -3332,6 +3346,7 @@ terraform 1.2.0-alpha20220413
 terraform 1.2.0-beta1
 terraform 1.2.0-rc1
 terraform 1.2.0-rc2
+terraform 1.2.1
 tilt 0.22.15
 tilt 0.23.0
 tilt 0.23.1
