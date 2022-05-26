@@ -25,9 +25,10 @@ function pca {
 # asdf
 . $HOME/.asdf/asdf.sh
 
-# pipx
+# python
 PATH="$HOME/.local/bin:$PATH"
 
+export PIP_DISABLE_PIP_VERSION_CHECK=1
 # cue
 PATH="$HOME/bin:$PATH"
 
