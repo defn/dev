@@ -257,6 +257,7 @@ gh:
 
 flyctl:
     FROM +tools
+    RUN --secret FLYCTL echo curl -sSL https://github.com/superfly/flyctl/releases/download/v${FLYCTL}/flyctl_${FLYCTL}_Linux_x86_64.tar.gz
     RUN --secret FLYCTL curl -sSL https://github.com/superfly/flyctl/releases/download/v${FLYCTL}/flyctl_${FLYCTL}_Linux_x86_64.tar.gz | tar xvfz -
     SAVE ARTIFACT flyctl
 
