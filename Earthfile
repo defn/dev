@@ -145,9 +145,10 @@ tower:
 
     RUN --secret PYTHON echo python ${PYTHON} >> .tool-versions
     RUN ~/bin/e pipx install yq
-    RUN ~/bin/e pipx install poetry
     RUN ~/bin/e pipx install watchdog
     RUN ~/bin/e pipx install "python-dotenv[cli]"
+    RUN ~/bin/e pipx install poetry
+    RUN ~/bin/e pipx install twine
     RUN ~/bin/e pipx install pre-commit
 
     RUN --secret KUBECTL echo kubectl ${KUBECTL} >> .tool-versions
