@@ -4,15 +4,6 @@ test:
 asdf:
 	cat .tool-versions| awk '{print $$1}' | while read -r a; do asdf list-all "$$a" | sed "s#^#$$a #"; done | sort > .tool-versions-all
 
-cache:
-	earthly +warm
-
-images:
-	earthly +images
-
-push:
-	earthly --push +images
-
 clean:
 	docker images | grep none | awk '{print $$3}' | runmany 'docker rmi $$1'
 	-docker system prune -f
