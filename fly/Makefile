@@ -14,7 +14,7 @@ socat-docker:
 trigger-devcontainer:
 	socat \
 		TCP-LISTEN:2222,reuseaddr,fork,max-children=4 \
-		EXEC:"'bash -c \"(flyctl scale --app defn count 1; while ! netcat -z defn 22; do sleep 1; done) 1>/dev/null 2>&1; socat - TCP:defn:22\"'",nofork
+		EXEC:"'bash -c \"(flyctl scale --app defn count 1) 1>/dev/null 2>&1; socat - TCP:defn:22\"'",nofork
 
 %:
 	flyctl deploy --remote-only --config $@.toml
