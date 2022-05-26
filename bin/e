@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
+source ~/.bash_profile
+
 case "${1:-}" in
 +*)
-	earthly "$@"
+	exec earthly "$@"
 	;;
 *)
 	# shellcheck disable=SC1090
-	source ~/.bash_profile
 	exec "$@"
 	;;
 esac
