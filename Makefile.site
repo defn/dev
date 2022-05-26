@@ -9,7 +9,7 @@ clean:
 	-docker system prune -f
 
 prune:
-	$(MAKE) clean
+	-$(MAKE) clean
 	earthly prune --all
 	$(MAKE) clean
 
