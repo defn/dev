@@ -22,14 +22,14 @@ ci:
 	@figlet success | /usr/games/lolcat
 
 up:
-	cd fly && $(MAKE) login up
+	cd fly && $(MAKE) login
 	~/bin/e tilt up --stream
 
 down:
 	-bash -c 'rm -vf "$${SSH_AUTH_SOCK}"'
 	-echo yes | gh auth logout --hostname github.com
 	-cd ~/.password-store && sudo -u ubuntu git-crypt lock
-	-cd fly && $(MAKE) down
+	-flyctl scale --app=defn count 0
 	-pkill [t]ilt
 
 live:
