@@ -23,6 +23,7 @@ function main {
     mkdir -p ~ubuntu/.ssh
     echo "${SSH_KEY}" | tee ~ubuntu/.ssh/authorized_keys
 
+    touch ~ubuntu/.alive
     chown -R ubuntu:ubuntu ~ubuntu
 
     #(cd /var/lib/docker && exec dockerd) &
