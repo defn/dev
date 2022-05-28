@@ -144,6 +144,7 @@ tower:
     RUN /usr/bin/pip install pantsbuild.pants
 
     RUN --secret PYTHON echo python ${PYTHON} >> .tool-versions
+    RUN ~/bin/e pipx install pycco
     RUN ~/bin/e pipx install yq
     RUN ~/bin/e pipx install watchdog
     RUN ~/bin/e pipx install "python-dotenv[cli]"
