@@ -5,7 +5,7 @@ function main {
 
 	for e in "$@"; do
 		case "$e" in
-			--)
+		--)
 			shift
 			break
 			;;
