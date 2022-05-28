@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	for e in "$@"; do
+		export "$e=$(pass "$e")"
+	done
+
+	env | sort
+}
+
+main "$@"
