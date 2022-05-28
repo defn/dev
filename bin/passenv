@@ -4,10 +4,19 @@ function main {
 	set -efu
 
 	for e in "$@"; do
-		export "$e=$(pass "$e")"
+		case "$e" in
+			--)
+			shift
+			break
+			;;
+		*)
+			export "$e=$(pass "$e")"
+			shift
+			;;
+		esac
 	done
 
-	env | sort
+	exec "$@"
 }
 
 main "$@"
