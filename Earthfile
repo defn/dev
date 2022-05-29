@@ -144,8 +144,6 @@ tower:
 
     RUN /usr/bin/pip install pantsbuild.pants
 
-    RUN ~/bin/e npm install -g live-server
-
     RUN mkdir awstmp \
         && cd awstmp \
         && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
@@ -153,6 +151,9 @@ tower:
         && sudo ./aws/install \
         && cd .. \
         && rm -rf awstmp
+
+    RUN --secret NODEJS echo nodejs ${NODEJS} >> .tool-versions
+    RUN ~/bin/e npm install -g live-server
 
     RUN --secret PYTHON echo python ${PYTHON} >> .tool-versions
     RUN ~/bin/e pipx install pycco

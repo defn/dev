@@ -52,6 +52,10 @@ if [[ -z "${DOCKER_HOST:-}" ]]; then
 	export DOCKER_HOST=localhost:2375
 fi
 
+# aws-vault
+export AWS_VAULT_BACKEND=pass
+export AWS_VAULT_PASS_PREFIX=aws-vault
+
 if tty >/dev/null; then
   if type -P powerline >/dev/null; then
 	function render_ps1 {
