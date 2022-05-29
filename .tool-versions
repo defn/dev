@@ -17,3 +17,4 @@ teleport-ent 9.2.1
 terraform 1.2.1
 tilt 0.30.1
 vault 1.10.3
+aws-vault 6.6.0

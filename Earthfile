@@ -116,6 +116,7 @@ TOWER:
     COPY --chown=ubuntu:ubuntu --dir +doctl/* ./
     COPY --chown=ubuntu:ubuntu --dir +python/* ./
     COPY --chown=ubuntu:ubuntu --dir +kubectl/* ./
+    COPY --chown=ubuntu:ubuntu --dir +awsvault/* ./
 
 tower:
     FROM +root
@@ -299,6 +300,13 @@ litestream:
     FROM +tools
     RUN --secret LITESTREAM curl -sSL https://github.com/benbjohnson/litestream/releases/download/v${LITESTREAM}/litestream-v${LITESTREAM}-linux-amd64.tar.gz | tar xvfz -
     SAVE ARTIFACT litestream
+
+awsvault:
+    FROM +asdf
+    RUN --secret AWSVAULT echo "aws-vault ${AWSVAULT}" >> .tool-versions
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add aws-vault'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
+    SAVE ARTIFACT .asdf
 
 kubectl:
     FROM +asdf
