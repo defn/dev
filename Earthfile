@@ -35,7 +35,7 @@ root:
         sudo git vim less fzf jo gron jq \
         make tini \
         gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 \
-        xdg-utils figlet lolcat socat netcat-openbsd \
+        xdg-utils figlet lolcat socat netcat-openbsd groff \
         screen htop \
         python3-pip
 
@@ -142,6 +142,14 @@ tower:
     COPY --chown=ubuntu:ubuntu .bashrc .
 
     RUN /usr/bin/pip install pantsbuild.pants
+
+    RUN mkdir awstmp \
+        && cd awstmp \
+        && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+        && unzip awscliv2.zip \
+        && sudo ./aws/install \
+        && cd .. \
+        && rm -rf awstmp
 
     RUN --secret PYTHON echo python ${PYTHON} >> .tool-versions
     RUN ~/bin/e pipx install pycco
