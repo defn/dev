@@ -144,6 +144,8 @@ tower:
 
     RUN /usr/bin/pip install pantsbuild.pants
 
+    RUN ~/bin/e npm install -g live-server
+
     RUN mkdir awstmp \
         && cd awstmp \
         && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
