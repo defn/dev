@@ -2,11 +2,12 @@
 
 # env sso_region=us-west-2 region=us-west-2 url=https://.../start name=spiral 
 
-awsenv ${name} aws organizations list-accounts | jq -r '.Accounts[] | "\(.Id) \(.Name) \(.Status)"' | while read -r id account type; do
-    if [[ $account == $name ]]; then
-        account = org
-    fi
-    cat <<EOF
+function main {
+    awsenv ${name} aws organizations list-accounts | jq -r '.Accounts[] | "\(.Id) \(.Name) \(.Status)"' | while read -r id account type; do
+        if [[ "${account}" == "${name}" ]]; then
+            export account='org'
+        fi
+        cat <<EOF
 [profile $name-$account-sso]
 sso_start_url=$url
 sso_region=$sso_region
@@ -19,4 +20,7 @@ credential_process=aws-vault exec $name-$account-sso --json
 region=$region
 
 EOF
-done
+    done
+}
+
+main "$@"
