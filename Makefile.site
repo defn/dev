@@ -39,7 +39,7 @@ monitor:
 	@set -x; rm -f ~/.dead; \
 		if ! $(MAKE) live 2>/dev/null >/dev/null; then \
 			touch ~/.dead; \
-			for a in $(seq 1 50); do \
+			for a in $$(seq 1 50); do \
 				if $(MAKE) live 2>/dev/null >/dev/null; then rm -f ~/.dead; break; fi; \
 				echo MAYBE DEAD $$a; sleep 10; done; \
 		fi; \
@@ -47,7 +47,7 @@ monitor:
 			~/bin/e $(MAKE) down; \
 		fi; \
 		ls -l ~/.alive || true; \
-		if test -f ~/.alive && test "$(shell find ~/.alive -mmin +30)"; then \
+		if test -f ~/.alive && test "$$(find ~/.alive -mmin +30)"; then \
 			~/bin/e $(MAKE) down; \
 		fi
 
