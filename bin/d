@@ -24,7 +24,7 @@ function main {
 					fi
 					;;
 				*)
-					echo "ERROR: aws $1 not supported" 1>&2
+					echo "ERROR: aws${1:+ ${1}} not supported" 1>&2
 					return 1
 					;;
 			esac
