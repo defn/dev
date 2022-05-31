@@ -43,3 +43,4 @@ node_modules
 .dead
 .alive
 .cdktf
+.pex/
