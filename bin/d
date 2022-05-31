@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	case "${1:-}" in
+		aws)
+			shift
+			case "${1:-}" in
+				login)
+					shift
+					if [[ "$#" -gt 0 ]]; then set -- -q "$@"; fi
+					local profile="$(aws-vault list | tail -n +2 | grep -v ^- | awk '{print$1}' | grep 'sso$' | fzf "$*")"
+					if [[ -n "${profile}" ]]; then
+						aws-vault login "${profile}"
+					fi
+					;;
+				bash)
+					shift
+					if [[ "$#" -gt 0 ]]; then set -- -q "$@"; fi
+					local profile="$(aws-vault list | tail -n +2 | grep -v ^- | awk '{print$1}' | grep 'sso$' | fzf "$*")"
+					if [[ -n "${profile}" ]]; then
+						aws-vault exec "${profile}" bash
+					fi
+					;;
+				*)
+					echo "ERROR: aws $1 not supported" 1>&2
+					return 1
+					;;
+			esac
+			;;
+		*)
+			echo "ERROR: $1 not supported" 1>&2
+			return 1
+			;;
+	esac
+}
+
+main "$@"
