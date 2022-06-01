@@ -1,13 +1,19 @@
 #!/usr/bin/env bash
 
-# env sso_region=us-west-2 region=us-west-2 url=https://.../start name=spiral 
+# env region=us-west-2 sso_region=us-west-2 sso_url=https://.../start name=spiral
 
 function main {
-    awsenv ${name} aws organizations list-accounts | jq -r '.Accounts[] | "\(.Id) \(.Name) \(.Status)"' | while read -r id account type; do
-        if [[ "${account}" == "${name}" ]]; then
-            export account='org'
-        fi
-        cat <<EOF
+	cat <<EOF
+[profile $name]
+region=$region
+
+EOF
+
+	aws organizations list-accounts | jq -r '.Accounts[] | "\(.Id) \(.Name) \(.Status)"' | sort | while read -r id account type; do
+		if [[ "${account}" == "${name}" ]]; then
+			export account='org'
+		fi
+		cat <<EOF
 [profile $name-$account-sso]
 sso_start_url=$url
 sso_region=$sso_region
@@ -19,8 +25,17 @@ output=json
 credential_process=aws-vault exec $name-$account-sso --json
 region=$region
 
+[profile $name-$account-org]
+source_profile=$name
+role_arn=arn:aws:iam::$id:role/OrganizationAccountAccessRole
+region=$region
+
+[profile $name-$account-adm]
+credential_process=aws-vault exec $name-$account-org --json
+region=$region
+
 EOF
-    done
+	done
 }
 
 main "$@"
