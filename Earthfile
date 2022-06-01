@@ -33,7 +33,7 @@ root:
         apt-transport-https software-properties-common \
         openssh-client openssh-server tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip xz-utils rsync \
         sudo git vim less fzf jo gron jq \
-        make tini \
+        make tini python3-pip \
         gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 \
         xdg-utils figlet lolcat socat netcat-openbsd groff \
         screen htop
