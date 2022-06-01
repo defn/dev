@@ -15,7 +15,7 @@ EOF
 		fi
 		cat <<EOF
 [profile $name-$account-sso]
-sso_start_url=$url
+sso_start_url=$sso_url
 sso_region=$sso_region
 sso_role_name=Administrator
 sso_account_id=$id
