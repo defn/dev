@@ -23,15 +23,18 @@ output=json
 
 [profile $name-$account]
 credential_process=aws-vault exec $name-$account-sso --json
+output=json
 region=$region
 
 [profile $name-$account-org]
 source_profile=$name
-role_arn=arn:aws:iam::$id:role/OrganizationAccountAccessRole
+output=json
+role_arn=arn:aws:iam::$id:role/$(if [[ "${account}" != "${name}" ]]; then echo OrganizationAccountAccessRole; else echo Administrator; fi)
 region=$region
 
 [profile $name-$account-adm]
 credential_process=aws-vault exec $name-$account-org --json
+output=json
 region=$region
 
 EOF
