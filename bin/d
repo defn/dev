@@ -5,39 +5,39 @@ function main {
 
 	local cmd="${1:-}"
 	case "${1:-}" in
-		aws)
+	aws)
+		shift
+		case "${1:-}" in
+		login)
 			shift
-			case "${1:-}" in
-				login)
-					shift
-					if [[ "$#" -gt 0 ]]; then set -- -q "$*"; fi
-					local profile="$(aws-vault list | tail -n +2 | grep -v ^- | awk '{print$1}' | grep 'sso$' | fzf "$@")"
-					if [[ -n "${profile}" ]]; then
-						aws-vault login "${profile}"
-					fi
-					;;
-				bash)
-					shift
-					if [[ "$#" -gt 0 ]]; then set -- -q "$*"; fi
-					local profile="$(aws-vault list | tail -n +2 | grep -v ^- | awk '{print$1}' | grep 'sso$' | fzf "$@")"
-					if [[ -n "${profile}" ]]; then
-						aws-vault exec "${profile}" bash
-					fi
-					;;
-				*)
-					echo "ERROR: ${cmd}${1:+ ${1}} not supported" 1>&2
-					return 1
-					;;
-			esac
+			if [[ "$#" -gt 0 ]]; then set -- -q "$*"; fi
+			local profile="$(aws-vault list | tail -n +2 | grep -v ^- | awk '{print$1}' | grep 'sso$' | fzf "$@")"
+			if [[ -n "${profile}" ]]; then
+				aws-vault login "${profile}"
+			fi
 			;;
-		"")
-			echo "ERROR: missing command" 1>&2
-			return 1
+		bash)
+			shift
+			if [[ "$#" -gt 0 ]]; then set -- -q "$*"; fi
+			local profile="$(aws-vault list | tail -n +2 | grep -v ^- | awk '{print$1}' | grep 'sso$' | fzf "$@")"
+			if [[ -n "${profile}" ]]; then
+				aws-vault exec "${profile}" bash
+			fi
 			;;
 		*)
-			echo "ERROR: ${cmd} not supported" 1>&2
+			echo "ERROR: ${cmd}${1:+ ${1}} not supported" 1>&2
 			return 1
 			;;
+		esac
+		;;
+	"")
+		echo "ERROR: missing command" 1>&2
+		return 1
+		;;
+	*)
+		echo "ERROR: ${cmd} not supported" 1>&2
+		return 1
+		;;
 	esac
 }
 
