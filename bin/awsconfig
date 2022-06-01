@@ -29,7 +29,7 @@ region=$region
 [profile $name-$account-org]
 source_profile=$name
 output=json
-role_arn=arn:aws:iam::$id:role/$(if [[ "${account}" != "org" ]]; then echo OrganizationAccountAccessRole; else echo Administrator; fi)
+$(if [[ "${account}" == "org" ]]; then echo '#'; fi)role_arn=arn:aws:iam::$id:role/OrganizationAccountAccessRole
 region=$region
 
 [profile $name-$account-adm]
