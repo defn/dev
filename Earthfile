@@ -36,8 +36,7 @@ root:
         make tini \
         gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 \
         xdg-utils figlet lolcat socat netcat-openbsd groff \
-        screen htop \
-        python3-pip
+        screen htop
 
     RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null \
         && curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.tailscale-keyring.list | tee /etc/apt/sources.list.d/tailscale.list \
@@ -141,8 +140,6 @@ tower:
     COPY --chown=ubuntu:ubuntu bin/e bin/e
     COPY --chown=ubuntu:ubuntu .bash_profile .
     COPY --chown=ubuntu:ubuntu .bashrc .
-
-    RUN /usr/bin/pip install pantsbuild.pants
 
     RUN mkdir awstmp \
         && cd awstmp \
