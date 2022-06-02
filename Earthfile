@@ -5,14 +5,7 @@ IMPORT github.com/defn/cloud/lib:master AS lib
 pre-commit:
     FROM registry.fly.io/defn:dev-tower
     ARG workdir
-    WORKDIR ${workdir}
-    RUN git init
-    COPY .pre-commit-config.yaml .
-    RUN --mount=type=cache,target=${workdir}/.cache sudo chown ubuntu:ubuntu ${workdir}/.cache
-    RUN --mount=type=cache,target=${workdir}/.cache ~/bin/e env PRE_COMMIT_HOME=${workdir}/.cache/pre-commit pre-commit install
-    RUN --mount=type=cache,target=${workdir}/.cache ~/bin/e env PRE_COMMIT_HOME=${workdir}/.cache/pre-commit pre-commit run --all
-    RUN --mount=type=cache,target=${workdir}/.cache tar cfz pre-commit.tgz .cache
-    SAVE ARTIFACT pre-commit.tgz AS LOCAL .cache/pre-commit.tgz
+    DO lib+PRECOMMIT --workdir=${workdir}
 
 warm:
     FROM lib+platform
