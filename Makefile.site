@@ -4,7 +4,7 @@ pc:
 	pre-commit run
 
 dev:
-	@if flock -n ~/.dev.lock -c '~/bin/e $(MAKE) dev_inner'; then rm -f ~/.dev.lock; fi
+	@if flock -n ~/.home.lock -c '~/bin/e $(MAKE) dev_inner'; then rm -f ~/.home.lock; fi
 
 dev_inner:
 	@while true; do if ~/bin/e $(MAKE) live 2>/dev/null >/dev/null; then ~/bin/e $(MAKE) up; fi; echo "$$(date) zzz"; sleep 5 ; done
