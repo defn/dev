@@ -109,6 +109,7 @@ TOWER:
     COPY --chown=ubuntu:ubuntu --dir +teleport/* ./
     COPY --chown=ubuntu:ubuntu --dir +vault/* ./
     COPY --chown=ubuntu:ubuntu --dir +consul/* ./
+    COPY --chown=ubuntu:ubuntu --dir +boundary/* ./
     COPY --chown=ubuntu:ubuntu --dir +cloudflared/* ./
     COPY --chown=ubuntu:ubuntu --dir +terraform/* ./
     COPY --chown=ubuntu:ubuntu --dir +cdktf/* ./
@@ -387,6 +388,13 @@ consul:
     FROM +asdf
     RUN --secret CONSUL echo consul ${CONSUL} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add consul'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
+    SAVE ARTIFACT .asdf
+
+boundary:
+    FROM +asdf
+    RUN --secret BOUNDARY echo boundary ${BOUNDARY} >> .tool-versions
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add boundary'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
