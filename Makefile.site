@@ -20,14 +20,6 @@ rebuild:
 	$(MAKE) prune
 	earthly --push +images
 
-ci:
-	$(MAKE) clean
-	$(MAKE) test
-	$(MAKE) images
-	$(MAKE) cache
-	$(MAKE) clean
-	@figlet success | /usr/games/lolcat
-
 up:
 	cd fly && $(MAKE) login
 	~/bin/e tilt up --stream
