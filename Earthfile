@@ -166,6 +166,8 @@ tower:
     RUN ~/bin/e pipx install poetry
     RUN ~/bin/e pipx install twine
     RUN ~/bin/e pipx install pre-commit
+    RUN ~/bin/e pipx install keepercommander
+    RUN ~/bin/e pipx install black
 
     RUN --secret KUBECTL echo kubectl ${KUBECTL} >> .tool-versions
     RUN --secret KREW echo krew ${KREW} >> .tool-versions
