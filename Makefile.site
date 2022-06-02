@@ -13,6 +13,10 @@ prune:
 	earthly prune --all
 	$(MAKE) clean
 
+rebuild:
+	$(MAKE) prune
+	earthly --push +images
+
 ci:
 	$(MAKE) clean
 	$(MAKE) test
