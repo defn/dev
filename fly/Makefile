@@ -11,10 +11,5 @@ socat-docker:
 		TCP-LISTEN:2375,reuseaddr,fork,max-children=8 \
 		EXEC:"'socat - TCP:localhost:2377'",nofork
 
-trigger-devcontainer:
-	socat \
-		TCP-LISTEN:2222,reuseaddr,fork,max-children=4 \
-		EXEC:"'bash -c \"(flyctl scale --app defn count 1) 1>/dev/null 2>&1; socat - TCP:defn:22\"'",nofork
-
 %:
 	flyctl deploy --remote-only --config $@.toml

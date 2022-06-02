@@ -51,4 +51,9 @@ monitor:
 		fi
 
 trigger:
-	while true; do (cd fly && ~/bin/e $(MAKE) trigger-devcontainer); sleep 5; done
+	while true; do ~/bin/e $(MAKE) trigger-devcontainer; sleep 5; done
+
+trigger-devcontainer:
+        socat \
+                TCP-LISTEN:2222,reuseaddr,fork,max-children=4 \
+                EXEC:"'bash -c \"(flyctl scale --app defn count 1) 1>/dev/null 2>&1; socat - TCP:defn:22\"'",nofork
