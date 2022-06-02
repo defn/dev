@@ -44,3 +44,5 @@ node_modules
 .alive
 .cdktf
 .pex/
+.pids
+.pants.d
