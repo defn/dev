@@ -1,8 +1,3 @@
-pc:
-	earthly +pre-commit --workdir=$(shell pwd)
-	tar xfz .cache/pre-commit.tgz
-	pre-commit run
-
 dev:
 	@if flock -n ~/.home.lock -c '~/bin/e $(MAKE) dev_inner'; then rm -f ~/.home.lock; fi
 
