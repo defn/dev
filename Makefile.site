@@ -1,5 +1,13 @@
-test:
-	pre-commit run --all
+pc:
+	earthly +pre-commit --workdir=$(shell pwd)
+	tar xfz .cache/pre-commit.tgz
+	pre-commit run
+
+dev:
+	@if flock -n ~/.dev.lock -c '~/bin/e $(MAKE) dev_inner'; then rm -f ~/.dev.lock; fi
+
+dev_inner:
+	@while true; do if ~/bin/e $(MAKE) live 2>/dev/null >/dev/null; then ~/bin/e $(MAKE) up; fi; echo "$$(date) zzz"; sleep 5 ; done
 
 asdf:
 	cat .tool-versions| awk '{print $$1}' | while read -r a; do asdf list-all "$$a" | sed "s#^#$$a #"; done | sort > .tool-versions-all
@@ -16,11 +24,6 @@ prune:
 rebuild:
 	$(MAKE) prune
 	earthly --push +images
-
-pc:
-	earthly +pre-commit
-	tar xfz .cache/pre-commit.tgz
-	pre-commit run
 
 ci:
 	$(MAKE) clean
@@ -59,12 +62,6 @@ monitor:
 		if test -f ~/.alive && test "$$(find ~/.alive -mmin +30)"; then \
 			~/bin/e $(MAKE) down; \
 		fi
-
-dev:
-	@if flock -n ~/.dev.lock -c '~/bin/e $(MAKE) dev_inner'; then rm -f ~/.dev.lock; fi
-
-dev_inner:
-	@while true; do if ~/bin/e $(MAKE) live 2>/dev/null >/dev/null; then ~/bin/e $(MAKE) up; fi; echo "$$(date) zzz"; sleep 5 ; done
 
 trigger:
 	while true; do (cd fly && ~/bin/e $(MAKE) trigger-devcontainer); sleep 5; done
