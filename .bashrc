@@ -16,9 +16,10 @@ function k {
 
 function pc {
 	if [[ -d .cache/pre-commit ]]; then
-		export PRE_COMMIT_HOME="$(pwd)/.cache/pre-commit"
+		env PRE_COMMIT_HOME="$(pwd)/.cache/pre-commit" pre-commit "$@"
+	else
+		pre-commit "$@"
 	fi
-	pre-commit "$@"
 }
 
 function pca {
