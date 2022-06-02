@@ -19,6 +19,8 @@ rebuild:
 
 pc:
 	earthly +pre-commit
+	tar xfz .cache/pre-commit.tgz
+	pre-commit run
 
 ci:
 	$(MAKE) clean

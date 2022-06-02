@@ -15,8 +15,8 @@ function k {
 }
 
 function pc {
-	if [[ -d .cache/pre-commit ]]; then	
-		export PRE_COMMIT_HOME="$(pwd -P)/.cache/pre-commit"
+	if [[ -d .cache/pre-commit ]]; then
+		export PRE_COMMIT_HOME="$(pwd)/.cache/pre-commit"
 	fi
 	pre-commit "$@"
 }
