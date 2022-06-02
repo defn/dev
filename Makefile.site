@@ -17,6 +17,9 @@ rebuild:
 	$(MAKE) prune
 	earthly --push +images
 
+pc:
+	earthly +pre-commit
+
 ci:
 	$(MAKE) clean
 	$(MAKE) test
