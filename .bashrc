@@ -14,14 +14,6 @@ function k {
 	kubectl "$@"
 }
 
-function pc {
-	if [[ -d .cache/pre-commit ]]; then
-		env PRE_COMMIT_HOME="$(pwd)/.cache/pre-commit" pre-commit "$@"
-	else
-		pre-commit "$@"
-	fi
-}
-
 function pca {
 	pc run --all "$@"
 }

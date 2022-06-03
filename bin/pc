@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+function main {
+	if [[ -d .cache/pre-commit ]]; then
+		env PRE_COMMIT_HOME="$(pwd)/.cache/pre-commit" pre-commit "$@"
+	else
+		pre-commit "$@"
+	fi
+}
+
+main "$@"

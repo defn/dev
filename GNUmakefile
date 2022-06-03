@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
 menu: # This menu
-	@perl -ne 'printf("%10s: %s\n","$$1","$$2") if m{^([\w+-]+):[^#]+#\s(.+)$$}' GNUmakefile
+	@perl -ne 'printf("%10s: %s\n","$$1","$$2") if m{^([\w+-]+):[^#]+#\s(.+)$$}' $(shell ld -d GNUmakefile Makefile.* 2>/dev/null)
 
 -include Makefile.site
 
@@ -13,4 +13,4 @@ update: # Update git repo and cue libraries
 pc: # Install pre-commit via earthly
 	earthly +pre-commit --workdir=$(shell pwd)
 	tar xfz .cache/pre-commit.tgz
-	pre-commit run
+	env PRE_COMMIT_HOME=$(shell pwd)/.cache/pre-commit pre-commit run
