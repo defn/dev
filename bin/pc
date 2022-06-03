@@ -7,7 +7,7 @@ function main {
 				cat <<EOF
 #!/usr/bin/env bash
 
-ARGS=(hook-impl --config=.pre-commit-config.yaml --hook-type=pre-commit)
+ARGS=(hook-impl -f --config=.pre-commit-config.yaml --hook-type=pre-commit)
 HERE="\$(cd "$(dirname "\$0")" && pwd)"
 ARGS+=(--hook-dir "\$HERE" -- "\$@")
 
