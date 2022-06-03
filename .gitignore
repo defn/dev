@@ -46,4 +46,4 @@ node_modules
 .pex/
 .pids
 .pants.d
-.dev.lock
+.*.lock
