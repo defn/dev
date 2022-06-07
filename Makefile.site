@@ -32,7 +32,7 @@ down:
 	-pkill [t]ilt
 
 live:
-	@env SSH_AUTH_SOCK="$(shell ls -td /tmp/vscode-ssh-auth-sock-* 2>/dev/null | head -1)" ssh-add -L 2>/dev/null >/dev/null
+	@env SSH_AUTH_SOCK="$(shell ls -td /tmp/vscode-ssh-auth-* 2>/dev/null | head -1)" ssh-add -L 2>/dev/null >/dev/null
 
 monitor:
 	@set -x; rm -f ~/.dead; \
