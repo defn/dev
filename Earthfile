@@ -2,6 +2,13 @@ VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-ar
 
 IMPORT github.com/defn/cloud/lib:master AS lib
 
+if
+ARG arch=amd64
+ARG arch2=x86_64
+
+ARG arch=arm64
+ARG arch2=arm64
+
 pre-commit:
     FROM registry.fly.io/defn:dev-tower
     ARG workdir
@@ -49,7 +56,7 @@ root:
         && apt install -y tailscale
 
     RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
-        && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu focal stable" | tee /etc/apt/sources.list.d/docker.list \
+        && echo "deb [arch=${arch} signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu focal stable" | tee /etc/apt/sources.list.d/docker.list \
         && apt-get update \
         && apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
@@ -83,10 +90,8 @@ root:
 TOWER:
     COMMAND
 
-    COPY --chown=ubuntu:ubuntu +credentialPass/* /usr/local/bin/
     COPY --chown=ubuntu:ubuntu +powerline/* /usr/local/bin
     COPY --chown=ubuntu:ubuntu +hof/* /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu +step/* /usr/local/bin/
     COPY --chown=ubuntu:ubuntu +cilium/* /usr/local/bin/
     COPY --chown=ubuntu:ubuntu +hubble/* /usr/local/bin/
     COPY --chown=ubuntu:ubuntu +linkerd/* /usr/local/bin/
@@ -102,15 +107,14 @@ TOWER:
     COPY --chown=ubuntu:ubuntu +hlb/* /usr/local/bin/
     COPY --chown=ubuntu:ubuntu +difft/* /usr/local/bin/
     COPY --chown=ubuntu:ubuntu +litestream/* /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu +tilt/* /usr/local/bin/
 
     COPY --chown=ubuntu:ubuntu --dir +shell/* ./
     COPY --chown=ubuntu:ubuntu --dir +cue/* ./
     COPY --chown=ubuntu:ubuntu --dir +k9s/* ./
     COPY --chown=ubuntu:ubuntu --dir +kustomize/* ./
     COPY --chown=ubuntu:ubuntu --dir +helm/* ./
-    COPY --chown=ubuntu:ubuntu --dir +k3d/* ./
     COPY --chown=ubuntu:ubuntu --dir +k3sup/* ./
-    COPY --chown=ubuntu:ubuntu --dir +tilt/* ./
     COPY --chown=ubuntu:ubuntu --dir +teleport/* ./
     COPY --chown=ubuntu:ubuntu --dir +vault/* ./
     COPY --chown=ubuntu:ubuntu --dir +consul/* ./
@@ -122,6 +126,12 @@ TOWER:
     COPY --chown=ubuntu:ubuntu --dir +python/* ./
     COPY --chown=ubuntu:ubuntu --dir +kubectl/* ./
     COPY --chown=ubuntu:ubuntu --dir +awsvault/* ./
+
+    IF [ "${arch}" = "amd64" ]
+        COPY --chown=ubuntu:ubuntu +credentialPass/* /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu +step/* /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu --dir +k3d/* ./
+    END
 
 tower:
     FROM +root
@@ -149,7 +159,7 @@ tower:
 
     RUN mkdir awstmp \
         && cd awstmp \
-        && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+        && curl "https://awscli.amazonaws.com/awscli-exe-linux-${arch2}.zip" -o "awscliv2.zip" \
         && unzip awscliv2.zip \
         && sudo ./aws/install \
         && cd .. \
@@ -211,12 +221,12 @@ asdf:
 
 credentialPass:
     FROM +tools
-    RUN --secret CREDENTIAL_PASS curl -sSL https://github.com/docker/docker-credential-helpers/releases/download/v${CREDENTIAL_PASS}/docker-credential-pass-v${CREDENTIAL_PASS}-amd64.tar.gz | tar xvfz - && chmod 755 docker-credential-pass
+    RUN --secret CREDENTIAL_PASS curl -sSL https://github.com/docker/docker-credential-helpers/releases/download/v${CREDENTIAL_PASS}/docker-credential-pass-v${CREDENTIAL_PASS}-${arch}.tar.gz | tar xvfz - && chmod 755 docker-credential-pass
     SAVE ARTIFACT docker-credential-pass
 
 powerline:
     FROM +tools
-    RUN --secret POWERLINE curl -sSL -o powerline https://github.com/justjanne/powerline-go/releases/download/v${POWERLINE}/powerline-go-linux-amd64 && chmod 755 powerline
+    RUN --secret POWERLINE curl -sSL -o powerline https://github.com/justjanne/powerline-go/releases/download/v${POWERLINE}/powerline-go-linux-${arch} && chmod 755 powerline
     SAVE ARTIFACT powerline
 
 hof:
@@ -226,39 +236,39 @@ hof:
 
 step:
     FROM +tools
-    RUN --secret STEP curl -sSL -o step.deb https://dl.step.sm/gh-release/cli/gh-release-header/v${STEP}/step-cli_${STEP}_amd64.deb && dpkg -i step.deb
+    RUN --secret STEP curl -sSL -o step.deb https://dl.step.sm/gh-release/cli/gh-release-header/v${STEP}/step-cli_${STEP}_${arch}.deb && dpkg -i step.deb
     RUN cp /usr/bin/step* .
     SAVE ARTIFACT step
     SAVE ARTIFACT step-cli
 
 cilium:
     FROM +tools
-    RUN --secret CILIUM curl -sSL https://github.com/cilium/cilium-cli/releases/download/v${CILIUM}/cilium-linux-amd64.tar.gz | tar xvfz -
+    RUN --secret CILIUM curl -sSL https://github.com/cilium/cilium-cli/releases/download/v${CILIUM}/cilium-linux-${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT cilium
 
 hubble:
     FROM +tools
-    RUN --secret HUBBLE curl -sSL https://github.com/cilium/hubble/releases/download/v${HUBBLE}/hubble-linux-amd64.tar.gz | tar xzvf -
+    RUN --secret HUBBLE curl -sSL https://github.com/cilium/hubble/releases/download/v${HUBBLE}/hubble-linux-${arch}.tar.gz | tar xzvf -
     SAVE ARTIFACT hubble
 
 linkerd:
     FROM +tools
-    RUN --secret LINKERD curl -sSL -o linkerd https://github.com/linkerd/linkerd2/releases/download/${LINKERD}/linkerd2-cli-${LINKERD}-linux-amd64 && chmod 755 linkerd
+    RUN --secret LINKERD curl -sSL -o linkerd https://github.com/linkerd/linkerd2/releases/download/${LINKERD}/linkerd2-cli-${LINKERD}-linux-${arch} && chmod 755 linkerd
     SAVE ARTIFACT linkerd
 
 vcluster:
     FROM +tools
-    RUN --secret VCLUSTER curl -sSL -o vcluster https://github.com/loft-sh/vcluster/releases/download/v${VCLUSTER}/vcluster-linux-amd64 && chmod 755 vcluster
+    RUN --secret VCLUSTER curl -sSL -o vcluster https://github.com/loft-sh/vcluster/releases/download/v${VCLUSTER}/vcluster-linux-${arch} && chmod 755 vcluster
     SAVE ARTIFACT vcluster
 
 loft:
     FROM +tools
-    RUN --secret LOFT curl -sSL -o loft https://github.com/loft-sh/loft/releases/download/v${LOFT}/loft-linux-amd64 && chmod 755 loft
+    RUN --secret LOFT curl -sSL -o loft https://github.com/loft-sh/loft/releases/download/v${LOFT}/loft-linux-${arch} && chmod 755 loft
     SAVE ARTIFACT loft
 
 steampipe:
     FROM +tools
-    RUN --secret STEAMPIPE curl -sSL https://github.com/turbot/steampipe/releases/download/v${STEAMPIPE}/steampipe_linux_amd64.tar.gz | tar xvfz -
+    RUN --secret STEAMPIPE curl -sSL https://github.com/turbot/steampipe/releases/download/v${STEAMPIPE}/steampipe_linux_${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT steampipe
 
 jless:
@@ -268,7 +278,7 @@ jless:
 
 gh:
     FROM +tools
-    RUN --secret GH curl -sSL https://github.com/cli/cli/releases/download/v${GH}/gh_${GH}_linux_amd64.tar.gz | tar xvfz - --wildcards '*/bin/gh' && mv */bin/gh .
+    RUN --secret GH curl -sSL https://github.com/cli/cli/releases/download/v${GH}/gh_${GH}_linux_${arch}.tar.gz | tar xvfz - --wildcards '*/bin/gh' && mv */bin/gh .
     SAVE ARTIFACT gh
 
 flyctl:
@@ -279,22 +289,22 @@ flyctl:
 
 earthly:
     FROM +tools
-    RUN --secret EARTHLY curl -sSL -o earthly https://github.com/earthly/earthly/releases/download/v${EARTHLY}/earthly-linux-amd64 && chmod 755 earthly
+    RUN --secret EARTHLY curl -sSL -o earthly https://github.com/earthly/earthly/releases/download/v${EARTHLY}/earthly-linux-${arch} && chmod 755 earthly
     SAVE ARTIFACT earthly
 
 buildkite:
     FROM +tools
-    RUN --secret BUILDKITE curl -sSL https://github.com/buildkite/agent/releases/download/v${BUILDKITE}/buildkite-agent-linux-amd64-${BUILDKITE}.tar.gz | tar xvfz -
+    RUN --secret BUILDKITE curl -sSL https://github.com/buildkite/agent/releases/download/v${BUILDKITE}/buildkite-agent-linux-${arch}-${BUILDKITE}.tar.gz | tar xvfz -
     SAVE ARTIFACT buildkite-agent
 
 bk:
     FROM +tools
-    RUN --secret BKCLI curl -sSL -o bk https://github.com/buildkite/cli/releases/download/v${BKCLI}/cli-linux-amd64 && chmod 755 bk
+    RUN --secret BKCLI curl -sSL -o bk https://github.com/buildkite/cli/releases/download/v${BKCLI}/cli-linux-${arch} && chmod 755 bk
     SAVE ARTIFACT bk
 
 hlb:
     FROM +tools
-    RUN --secret HLB curl -sSL -o hlb https://github.com/openllb/hlb/releases/download/v${HLB}/hlb-linux-amd64 && chmod 755 hlb
+    RUN --secret HLB curl -sSL -o hlb https://github.com/openllb/hlb/releases/download/v${HLB}/hlb-linux-${arch} && chmod 755 hlb
     SAVE ARTIFACT hlb
 
 difft:
@@ -304,7 +314,7 @@ difft:
 
 litestream:
     FROM +tools
-    RUN --secret LITESTREAM curl -sSL https://github.com/benbjohnson/litestream/releases/download/v${LITESTREAM}/litestream-v${LITESTREAM}-linux-amd64.tar.gz | tar xvfz -
+    RUN --secret LITESTREAM curl -sSL https://github.com/benbjohnson/litestream/releases/download/v${LITESTREAM}/litestream-v${LITESTREAM}-linux-${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT litestream
 
 awsvault:
@@ -369,11 +379,9 @@ k3sup:
     SAVE ARTIFACT .asdf
 
 tilt:
-    FROM +asdf
-    RUN --secret TILT echo tilt ${TILT} >> .tool-versions
-    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add tilt'
-    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
-    SAVE ARTIFACT .asdf
+    FROM +tools
+    RUN --secret TILT curl -sSL https://github.com/tilt-dev/tilt/releases/download/v${TILT}/tilt.${TILT}.linux.${arch}.tar.gz | tar xvfz -
+    SAVE ARTIFACT tilt
 
 teleport:
     FROM +asdf
