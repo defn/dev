@@ -4,6 +4,7 @@ IMPORT github.com/defn/cloud/lib:master AS lib
 
 ARG arch=amd64
 ARG arch2=x86_64
+ARG arch3=amd64
 
 pre-commit:
     FROM registry.fly.io/defn:dev-tower
@@ -155,7 +156,7 @@ tower:
 
     RUN mkdir awstmp \
         && cd awstmp \
-        && curl "https://awscli.amazonaws.com/awscli-exe-linux-${arch2}.zip" -o "awscliv2.zip" \
+        && curl "https://awscli.amazonaws.com/awscli-exe-linux-${arch3}.zip" -o "awscliv2.zip" \
         && unzip awscliv2.zip \
         && sudo ./aws/install \
         && cd .. \
@@ -376,7 +377,7 @@ k3sup:
 
 tilt:
     FROM +tools
-    RUN --secret TILT curl -sSL https://github.com/tilt-dev/tilt/releases/download/v${TILT}/tilt.${TILT}.linux.${arch}.tar.gz | tar xvfz -
+    RUN --secret TILT curl -sSL https://github.com/tilt-dev/tilt/releases/download/v${TILT}/tilt.${TILT}.linux.${arch2}.tar.gz | tar xvfz -
     SAVE ARTIFACT tilt
 
 teleport:
