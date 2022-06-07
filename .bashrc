@@ -44,8 +44,10 @@ if [[ -n "${VSCODE_GIT_IPC_HANDLE=:-}" ]]; then
 fi
 
 # docker
-if [[ -z "${DOCKER_HOST:-}" ]]; then
-	export DOCKER_HOST=localhost:2375
+if [[ ! -S /var/run/docker.sock ]]; then
+	if [[ -z "${DOCKER_HOST:-}" ]]; then
+		export DOCKER_HOST=localhost:2375
+	fi
 fi
 
 # aws-vault
