@@ -116,7 +116,6 @@ TOWER:
     COPY --chown=ubuntu:ubuntu --dir +cloudflared/* ./
     COPY --chown=ubuntu:ubuntu --dir +terraform/* ./
     COPY --chown=ubuntu:ubuntu --dir +cdktf/* ./
-    COPY --chown=ubuntu:ubuntu --dir +doctl/* ./
     COPY --chown=ubuntu:ubuntu --dir +python/* ./
     COPY --chown=ubuntu:ubuntu --dir +kubectl/* ./
     COPY --chown=ubuntu:ubuntu --dir +awsvault/* ./
