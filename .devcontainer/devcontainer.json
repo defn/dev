@@ -9,6 +9,5 @@
   "runArgs": [
     "-v",
     "/var/run/docker.sock:/var/run/docker.sock"
-  ],
-  "postStartCommand": "true"
+  ]
 }
