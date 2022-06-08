@@ -21,7 +21,8 @@ rebuild:
 	earthly --push +images
 
 up:
-	if ! docker info; then cd fly && $(MAKE) login; exec ~/bin/e tilt up --stream; else exec tail -f /dev/null; fi
+	sudo chown ubuntu /var/run/docker.sock || true
+	if ! docker info; then (cd fly && $(MAKE) login); exec ~/bin/e tilt up --stream; else exec tail -f /dev/null; fi
 
 down:
 	-bash -c 'rm -vf "$${SSH_AUTH_SOCK}"'
