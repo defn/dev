@@ -2,9 +2,9 @@ VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-ar
 
 IMPORT github.com/defn/cloud/lib:master AS lib
 
-ARG arch
-ARG arch2
-ARG arch3
+ARG arch=amd64
+ARG arch2=x86_64
+ARG arch3=x86_64
 
 pre-commit:
     FROM registry.fly.io/defn:dev-tower
