@@ -3,11 +3,10 @@
     "dockerfile": "Dockerfile"
   },
   "remoteUser": "ubuntu",
-  "mounts": [
-    "source=${localEnv:HOME}/.password-store,target=/home/ubuntu/.password-store,type=bind,consistency=delegated"
-  ],
   "runArgs": [
     "-v",
-    "/var/run/docker.sock:/var/run/docker.sock"
+    "/var/run/docker.sock:/var/run/docker.sock",
+    "-v",
+    "${localEnv:HOME}/.password-store:/home/ubuntu/.password-store"
   ]
 }
