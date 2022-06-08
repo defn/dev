@@ -323,7 +323,7 @@ awsvault:
 
 skaffold:
     FROM +asdf
-    RUN --secret SKAFFOLD echo "skaffold {SKAFFOLD}" >> .tool-versions
+    RUN --secret SKAFFOLD echo "skaffold ${SKAFFOLD}" >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add skaffold'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
