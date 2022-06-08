@@ -2,23 +2,19 @@ VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-ar
 
 IMPORT github.com/defn/cloud/lib:master AS lib
 
+# arm64, arm64, aarch64
 ARG arch=amd64
 ARG arch2=x86_64
 ARG arch3=x86_64
 
 pre-commit:
-    FROM registry.fly.io/defn:dev-tower
+    FROM +tower
     ARG workdir
     DO lib+PRECOMMIT --workdir=${workdir}
-
-warm:
-    FROM lib+platform
-    RUN --no-cache --secret hello echo ${hello}
 
 images:
     BUILD +root
     BUILD +tower
-    BUILD +ci
 
 root:
     FROM ubuntu:20.04
@@ -42,7 +38,7 @@ root:
         apt-transport-https software-properties-common \
         openssh-client openssh-server tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip xz-utils rsync \
         sudo git vim less fzf jo gron jq \
-        make tini python3-pip \
+        build-essential make tini python3-pip \
         gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 \
         xdg-utils figlet lolcat socat netcat-openbsd groff \
         screen htop
@@ -82,7 +78,7 @@ root:
     RUN chown -R ubuntu:ubuntu /home/ubuntu
     RUN chmod u+s /usr/bin/sudo
 
-    SAVE IMAGE --push registry.fly.io/defn:dev-root
+    SAVE IMAGE --push defn:dev-root
 
 TOWER:
     COMMAND
@@ -105,9 +101,10 @@ TOWER:
     COPY --chown=ubuntu:ubuntu +difft/* /usr/local/bin/
     COPY --chown=ubuntu:ubuntu +litestream/* /usr/local/bin/
     COPY --chown=ubuntu:ubuntu +tilt/* /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu +k3d/* /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu +cue/* /usr/local/bin/
 
     COPY --chown=ubuntu:ubuntu --dir +shell/* ./
-    COPY --chown=ubuntu:ubuntu --dir +cue/* ./
     COPY --chown=ubuntu:ubuntu --dir +k9s/* ./
     COPY --chown=ubuntu:ubuntu --dir +kustomize/* ./
     COPY --chown=ubuntu:ubuntu --dir +helm/* ./
@@ -123,11 +120,11 @@ TOWER:
     COPY --chown=ubuntu:ubuntu --dir +python/* ./
     COPY --chown=ubuntu:ubuntu --dir +kubectl/* ./
     COPY --chown=ubuntu:ubuntu --dir +awsvault/* ./
+    COPY --chown=ubuntu:ubuntu --dir +skaffold/* ./
 
     IF [ "${arch}" = "amd64" ]
         COPY --chown=ubuntu:ubuntu +credentialPass/* /usr/local/bin/
         COPY --chown=ubuntu:ubuntu +step/* /usr/local/bin/
-        COPY --chown=ubuntu:ubuntu --dir +k3d/* ./
     END
 
 tower:
@@ -144,7 +141,7 @@ tower:
     COPY --chown=ubuntu:ubuntu .vimrc .
     RUN echo yes | vim +PlugInstall +qall
 
-    RUN mkdir -p ~/.docker && echo '{"credsStore": "pass"}' > ~/.docker/config.json
+    RUN if type -P docker-credential-pass; then mkdir -p ~/.docker && echo '{"credsStore": "pass"}' > ~/.docker/config.json; fi
 
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
@@ -185,14 +182,7 @@ tower:
 
     COPY --dir --chown=ubuntu:ubuntu . .
 
-    SAVE IMAGE --push registry.fly.io/defn:dev-tower
-
-ci:
-    FROM +tower
-
-    USER root
-
-    SAVE IMAGE --push registry.fly.io/defn:dev-ci
+    SAVE IMAGE --push defn:dev-tower
 
 tools:
     FROM ubuntu:20.04
@@ -314,10 +304,27 @@ litestream:
     RUN --secret LITESTREAM curl -sSL https://github.com/benbjohnson/litestream/releases/download/v${LITESTREAM}/litestream-v${LITESTREAM}-linux-${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT litestream
 
+cue:
+    FROM +tools
+    RUN --secret CUE curl -sSL https://github.com/cue-lang/cue/releases/download/v${CUE}/cue_v${CUE}_linux_${arch}.tar.gz | tar xvfz -
+    SAVE ARTIFACT cue
+
+k3d:
+    FROM +tools
+    RUN --secret K3D curl -sSL -o k3d https://github.com/k3d-io/k3d/releases/download/v${K3D}/k3d-linux-${arch} && chmod 755 k3d
+    SAVE ARTIFACT k3d
+
 awsvault:
     FROM +asdf
     RUN --secret AWSVAULT echo "aws-vault ${AWSVAULT}" >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add aws-vault'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
+    SAVE ARTIFACT .asdf
+
+skaffold:
+    FROM +asdf
+    RUN --secret SKAFFOLD echo "skaffold {SKAFFOLD}" >> .tool-versions
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add skaffold'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
@@ -422,13 +429,6 @@ shell:
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     RUN --secret SHFMT echo shfmt ${SHFMT} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add shfmt'
-    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
-    SAVE ARTIFACT .asdf
-
-cue:
-    FROM +asdf
-    RUN --secret CUE echo cue ${CUE} >> .tool-versions
-    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add cue'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 

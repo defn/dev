@@ -13,4 +13,3 @@ repos:
       - id: check-toml
         exclude: ^(provider|cdktf.out)/
       - id: check-shebang-scripts-are-executable
-      - id: check-executables-have-shebangs

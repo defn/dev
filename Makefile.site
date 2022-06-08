@@ -21,8 +21,7 @@ rebuild:
 	earthly --push +images
 
 up:
-	cd fly && $(MAKE) login
-	~/bin/e tilt up --stream
+	if ! docker info; then cd fly && $(MAKE) login; exec ~/bin/e tilt up --stream; else exec tail -f /dev/null; fi
 
 down:
 	-bash -c 'rm -vf "$${SSH_AUTH_SOCK}"'
