@@ -368,13 +368,6 @@ helm:
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
-k3d:
-    FROM +asdf
-    RUN --secret K3D echo k3d ${K3D} >> .tool-versions
-    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add k3d'
-    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
-    SAVE ARTIFACT .asdf
-
 k3sup:
     FROM +asdf
     RUN --secret K3SUP echo k3sup ${K3SUP} >> .tool-versions
