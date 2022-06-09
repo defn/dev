@@ -46,3 +46,4 @@ node_modules
 .pids
 .pants.d
 .*.lock
+.k3d
