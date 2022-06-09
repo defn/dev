@@ -3,9 +3,10 @@ VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-ar
 IMPORT github.com/defn/cloud/lib:master AS lib
 
 # arm64, arm64, aarch64
-ARG arch=amd64
-ARG arch2=x86_64
-ARG arch3=x86_64
+# amd64, x86_64, x86_64
+ARG arch=arm64
+ARG arch2=arm64
+ARG arch3=aarch64
 
 pre-commit:
     FROM +tower
