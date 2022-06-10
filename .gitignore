@@ -20,7 +20,6 @@ node_modules
 .tilt-dev
 .vscode-server
 .wget-hsts
-.gitconfig
 .kube
 .swp
 .gnupg
@@ -47,3 +46,4 @@ node_modules
 .pids
 .pants.d
 .*.lock
+.k3d
