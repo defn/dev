@@ -7,6 +7,8 @@
     "-v",
     "/var/run/docker.sock:/var/run/docker.sock",
     "-v",
-    "${localEnv:HOME}/.password-store:/home/ubuntu/.password-store"
+    "${localEnv:HOME}/.password-store:/home/ubuntu/.password-store",
+    "-v",
+    "${localEnv:HOME}/work:/home/ubuntu/work"
   ]
 }
