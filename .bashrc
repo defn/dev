@@ -34,6 +34,9 @@ PATH="$HOME/.linkerd2/bin:$PATH"
 # terraform
 export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
 
+# awscli
+export PATH="$PATH:/usr/local/aws-cli/bin"
+
 # gcloud
 export PATH="$PATH:/usr/local/gcloud/google-cloud-sdk/bin"
 

@@ -20,6 +20,9 @@ rebuild:
 	$(MAKE) prune
 	earthly --push +images
 
+shell:
+	docker run --rm -ti --entrypoint bash defn:dev-tower
+
 up:
 	sudo chown ubuntu /var/run/docker.sock || true
 	if ! docker info; then (cd fly && $(MAKE) login); exec ~/bin/e tilt up --stream; else exec tail -f /dev/null; fi

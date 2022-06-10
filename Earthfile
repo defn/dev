@@ -9,9 +9,8 @@ ARG arch2=x86_64
 ARG arch3=x86_64
 
 pre-commit:
-    FROM +tower
+    FROM +precommit
     ARG workdir
-    RUN --no-cache true
     DO lib+PRECOMMIT --workdir=${workdir}
 
 images:
@@ -118,16 +117,17 @@ TOWER:
     COPY --chown=ubuntu:ubuntu --dir +cloudflared/* ./
     COPY --chown=ubuntu:ubuntu --dir +terraform/* ./
     COPY --chown=ubuntu:ubuntu --dir +cdktf/* ./
-    COPY --chown=ubuntu:ubuntu --dir +python/* ./
-    COPY --chown=ubuntu:ubuntu --dir +kubectl/* ./
     COPY --chown=ubuntu:ubuntu --dir +skaffold/* ./
     COPY --chown=ubuntu:ubuntu --dir +awsvault/* ./
 
-    COPY --chown=ubuntu:ubuntu --dir +awscli/* ./
-    RUN sudo tar xfz awscli.tar.gz -C / && rm -f awscli.tar.gz
+    COPY --chown=ubuntu:ubuntu --dir +python/* ./
+    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow +pipx/* ./
 
-    COPY --chown=ubuntu:ubuntu --dir +gcloud/* ./
-    RUN sudo tar xfz gcloud.tar.gz -C / &&  rm -f gcloud.tar.gz
+    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow +krew/* ./
+
+    COPY --chown=ubuntu:ubuntu --dir +awscli/aws-cli /usr/local/
+
+    COPY --chown=ubuntu:ubuntu --dir +gcloud/gcloud /usr/local/
 
     IF [ "${arch}" = "amd64" ]
         COPY --chown=ubuntu:ubuntu +credentialPass/* /usr/local/bin/
@@ -153,28 +153,6 @@ tower:
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
     DO +TOWER
-
-    COPY --chown=ubuntu:ubuntu bin/e bin/e
-    COPY --chown=ubuntu:ubuntu .bash_profile .
-    COPY --chown=ubuntu:ubuntu .bashrc .
-
-    RUN --secret PYTHON echo python ${PYTHON} >> .tool-versions
-    RUN ~/bin/e pipx install pycco
-    RUN ~/bin/e pipx install yq
-    RUN ~/bin/e pipx install watchdog
-    RUN ~/bin/e pipx install "python-dotenv[cli]"
-    RUN ~/bin/e pipx install twine
-    RUN ~/bin/e pipx install pre-commit
-    RUN ~/bin/e pipx install black
-
-    RUN --secret KUBECTL echo kubectl ${KUBECTL} >> .tool-versions
-    RUN --secret KREW echo krew ${KREW} >> .tool-versions
-    RUN ~/bin/e asdf plugin-add krew
-    RUN ~/bin/e asdf install
-    RUN ~/bin/e kubectl krew install ns
-    RUN ~/bin/e kubectl krew install ctx
-    RUN ~/bin/e kubectl krew install stern
-    RUN ~/bin/e asdf reshim
 
     COPY --dir --chown=ubuntu:ubuntu . .
 
@@ -316,16 +294,15 @@ gcloud:
     RUN bash install.sh --disable-prompts --install-dir=/usr/local/gcloud
     RUN /usr/local/gcloud/google-cloud-sdk/bin/gcloud --quiet components install beta
     RUN /usr/local/gcloud/google-cloud-sdk/bin/gcloud --quiet components install gke-gcloud-auth-plugin
-    RUN tar cfz gcloud.tar.gz /usr/local/gcloud
-    SAVE ARTIFACT gcloud.tar.gz
+    RUN rm -rf /usr/local/gcloud/google-cloud-sdk/.install
+    SAVE ARTIFACT /usr/local/gcloud
 
 awscli:
     FROM +tools
     RUN curl -sSL "https://awscli.amazonaws.com/awscli-exe-linux-${arch3}.zip" -o "awscliv2.zip"
     RUN unzip awscliv2.zip
-    RUN ./aws/install
-    RUN tar cfz awscli.tar.gz /usr/local/bin/aws* /usr/local/aws-cli
-    SAVE ARTIFACT awscli.tar.gz
+    RUN ./aws/install -i /usr/local/aws-cli -b /usr/local/aws-cli/bin
+    SAVE ARTIFACT /usr/local/aws-cli
 
 awsvault:
     FROM +asdf
@@ -351,14 +328,15 @@ kubectl:
 krew:
     FROM +kubectl
     RUN --secret KREW echo "krew ${KREW}" >> .tool-versions
-    RUN --no-cache cat .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add krew'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     RUN /home/ubuntu/.asdf/shims/kubectl-krew install ns
     RUN /home/ubuntu/.asdf/shims/kubectl-krew install ctx
     RUN /home/ubuntu/.asdf/shims/kubectl-krew install stern
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
-    SAVE ARTIFACT .asdf
+    RUN tar cfz krew.tar.gz .asdf
+    SAVE ARTIFACT krew.tar.gz
+    SAVE ARTIFACT --symlink-no-follow .asdf
 
 k9s:
     FROM +asdf
@@ -477,13 +455,19 @@ python:
     RUN bash -c 'source ~/.asdf/asdf.sh && pip install pipx && asdf reshim'
     SAVE ARTIFACT .asdf
 
-precommit:
+pipx:
     FROM +python
+    RUN ~/.asdf/shims/pipx install pycco
+    RUN ~/.asdf/shims/pipx install yq
+    RUN ~/.asdf/shims/pipx install watchdog
+    RUN ~/.asdf/shims/pipx install "python-dotenv[cli]"
+    RUN ~/.asdf/shims/pipx install twine
+    RUN ~/.asdf/shims/pipx install pre-commit
+    RUN ~/.asdf/shims/pipx install black
     RUN git init
     COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
-    RUN bash -c 'source ~/.asdf/asdf.sh && pipx install pre-commit'
     RUN bash -c 'source ~/.asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit install'
     RUN bash -c 'source ~/.asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit run --all'
-    SAVE ARTIFACT .asdf
-    SAVE ARTIFACT .local
-    SAVE ARTIFACT .cache
+    SAVE ARTIFACT --symlink-no-follow .asdf
+    SAVE ARTIFACT --symlink-no-follow .local
+    SAVE ARTIFACT --symlink-no-follow .cache
