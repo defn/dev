@@ -334,8 +334,6 @@ krew:
     RUN /home/ubuntu/.asdf/shims/kubectl-krew install ctx
     RUN /home/ubuntu/.asdf/shims/kubectl-krew install stern
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
-    RUN tar cfz krew.tar.gz .asdf
-    SAVE ARTIFACT krew.tar.gz
     SAVE ARTIFACT --symlink-no-follow .asdf
 
 k9s:
