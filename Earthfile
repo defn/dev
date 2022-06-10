@@ -124,7 +124,10 @@ TOWER:
     COPY --chown=ubuntu:ubuntu --dir +awsvault/* ./
 
     COPY --chown=ubuntu:ubuntu --dir +awscli/* ./
-    RUN sudo tar xvfz awsinstall.tar.gz -C /
+    RUN sudo tar xfz awscli.tar.gz -C / && rm -f awscli.tar.gz
+
+    COPY --chown=ubuntu:ubuntu --dir +gcloud/* ./
+    RUN sudo tar xfz gcloud.tar.gz -C / &&  rm -f gcloud.tar.gz
 
     IF [ "${arch}" = "amd64" ]
         COPY --chown=ubuntu:ubuntu +credentialPass/* /usr/local/bin/
@@ -155,8 +158,7 @@ tower:
     COPY --chown=ubuntu:ubuntu .bash_profile .
     COPY --chown=ubuntu:ubuntu .bashrc .
 
-    RUN --secret NODEJS echo nodejs ${NODEJS} >> .tool-versions
-    RUN ~/bin/e npm install -g live-server
+    RUN ~/bin/e gcloud version
 
     RUN --secret PYTHON echo python ${PYTHON} >> .tool-versions
     RUN ~/bin/e pipx install pycco
@@ -310,13 +312,22 @@ k3d:
     RUN --secret K3D curl -sSL -o k3d https://github.com/k3d-io/k3d/releases/download/v${K3D}/k3d-linux-${arch} && chmod 755 k3d
     SAVE ARTIFACT k3d
 
+gcloud:
+    FROM +tools
+    RUN curl https://sdk.cloud.google.com > install.sh
+    RUN bash install.sh --disable-prompts --install-dir=/usr/local/gcloud
+    RUN /usr/local/gcloud/google-cloud-sdk/bin/gcloud --quiet components install beta
+    RUN /usr/local/gcloud/google-cloud-sdk/bin/gcloud --quiet components install gke-gcloud-auth-plugin
+    RUN tar cfz gcloud.tar.gz /usr/local/gcloud
+    SAVE ARTIFACT gcloud.tar.gz
+
 awscli:
     FROM +tools
     RUN curl -sSL "https://awscli.amazonaws.com/awscli-exe-linux-${arch3}.zip" -o "awscliv2.zip"
     RUN unzip awscliv2.zip
     RUN ./aws/install
-    RUN tar cvfz awsinstall.tar.gz /usr/local/bin/aws* /usr/local/aws-cli
-    SAVE ARTIFACT awsinstall.tar.gz
+    RUN tar cfz awscli.tar.gz /usr/local/bin/aws* /usr/local/aws-cli
+    SAVE ARTIFACT awscli.tar.gz
 
 awsvault:
     FROM +asdf

@@ -34,6 +34,9 @@ PATH="$HOME/.linkerd2/bin:$PATH"
 # terraform
 export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
 
+# gcloud
+export PATH="$PATH:/usr/local/gcloud/google-cloud-sdk/bin"
+
 # vscode
 if [[ -n "${VSCODE_GIT_IPC_HANDLE=:-}" ]]; then
 	export VISUAL="code --wait"
