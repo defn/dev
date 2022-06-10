@@ -158,8 +158,6 @@ tower:
     COPY --chown=ubuntu:ubuntu .bash_profile .
     COPY --chown=ubuntu:ubuntu .bashrc .
 
-    RUN ~/bin/e gcloud version
-
     RUN --secret PYTHON echo python ${PYTHON} >> .tool-versions
     RUN ~/bin/e pipx install pycco
     RUN ~/bin/e pipx install yq
