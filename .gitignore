@@ -31,6 +31,7 @@ node_modules
 .config/helm
 .config/gh
 .config/pypoetry
+.config/gcloud
 .loft
 .lesshst
 .fly
