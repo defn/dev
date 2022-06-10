@@ -9,7 +9,7 @@ ARG arch2=x86_64
 ARG arch3=x86_64
 
 pre-commit:
-    FROM +tools
+    FROM +tower
     ARG workdir
     DO lib+PRECOMMIT --workdir=${workdir}
 
