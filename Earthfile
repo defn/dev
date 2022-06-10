@@ -4,13 +4,14 @@ IMPORT github.com/defn/cloud/lib:master AS lib
 
 # arm64, arm64, aarch64
 # amd64, x86_64, x86_64
-ARG arch=arm64
-ARG arch2=arm64
-ARG arch3=aarch64
+ARG arch=amd64
+ARG arch2=x86_64
+ARG arch3=x86_64
 
 pre-commit:
     FROM +tower
     ARG workdir
+    RUN --no-cache true
     DO lib+PRECOMMIT --workdir=${workdir}
 
 images:
@@ -119,8 +120,11 @@ TOWER:
     COPY --chown=ubuntu:ubuntu --dir +cdktf/* ./
     COPY --chown=ubuntu:ubuntu --dir +python/* ./
     COPY --chown=ubuntu:ubuntu --dir +kubectl/* ./
-    COPY --chown=ubuntu:ubuntu --dir +awsvault/* ./
     COPY --chown=ubuntu:ubuntu --dir +skaffold/* ./
+    COPY --chown=ubuntu:ubuntu --dir +awsvault/* ./
+
+    COPY --chown=ubuntu:ubuntu --dir +awscli/* ./
+    RUN sudo tar xvfz awsinstall.tar.gz -C /
 
     IF [ "${arch}" = "amd64" ]
         COPY --chown=ubuntu:ubuntu +credentialPass/* /usr/local/bin/
@@ -150,14 +154,6 @@ tower:
     COPY --chown=ubuntu:ubuntu bin/e bin/e
     COPY --chown=ubuntu:ubuntu .bash_profile .
     COPY --chown=ubuntu:ubuntu .bashrc .
-
-    RUN mkdir awstmp \
-        && cd awstmp \
-        && curl "https://awscli.amazonaws.com/awscli-exe-linux-${arch3}.zip" -o "awscliv2.zip" \
-        && unzip awscliv2.zip \
-        && sudo ./aws/install \
-        && cd .. \
-        && rm -rf awstmp
 
     RUN --secret NODEJS echo nodejs ${NODEJS} >> .tool-versions
     RUN ~/bin/e npm install -g live-server
@@ -313,6 +309,14 @@ k3d:
     FROM +tools
     RUN --secret K3D curl -sSL -o k3d https://github.com/k3d-io/k3d/releases/download/v${K3D}/k3d-linux-${arch} && chmod 755 k3d
     SAVE ARTIFACT k3d
+
+awscli:
+    FROM +tools
+    RUN curl -sSL "https://awscli.amazonaws.com/awscli-exe-linux-${arch3}.zip" -o "awscliv2.zip"
+    RUN unzip awscliv2.zip
+    RUN ./aws/install
+    RUN tar cvfz awsinstall.tar.gz /usr/local/bin/aws* /usr/local/aws-cli
+    SAVE ARTIFACT awsinstall.tar.gz
 
 awsvault:
     FROM +asdf
