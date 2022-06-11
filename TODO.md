@@ -15,5 +15,6 @@ vm:
         ServerAliveCountMax 5
     install: pass, git-crypt
     symlink: git-crypt to /usr/local/bin/
+    symlink: .gnupg2 to .gnupg
     gpg-agent: maybe remove from remote
     vscode: code --folder-uri vscode-remote://ssh-remote+defn/home/ubuntu
