@@ -24,7 +24,7 @@ rebuild:
 	earthly --push +images
 
 shell:
-	docker run --rm -ti --entrypoint bash defn/dev:$(arch)
+	docker run --rm -ti --entrypoint bash defn/dev
 
 attach:
 	code --folder-uri vscode-remote://k8s-container+context=k3d-k3s-default+namespace=default+podname=dev-0+name=dev+/home/ubuntu
