@@ -2,22 +2,27 @@ VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-ar
 
 IMPORT github.com/defn/cloud/lib:master AS lib
 
-# arm64, arm64, aarch64
-# amd64, x86_64, x86_64
-ARG arch=amd64
-ARG arch2=x86_64
-ARG arch3=x86_64
+images:
+    BUILD +amd64
+    BUILD +arm64
+
+amd64:
+    BUILD --platform=linux/amd64 +tower --arch=amd64 --arch2=x86_64 --arch3=x86_64
+
+arm64:
+    BUILD --platform=linux/arm64 +tower --arch=arm64 --arch2=arm64 --arch3=aarch64
 
 pre-commit:
-    FROM +tower
+    ARG arch 
+    ARG arch2
+    ARG arch3
+    FROM +tower --arch=${arch}  --arch2=${arch2}  --arch3=${arch3} 
     ARG workdir
     DO lib+PRECOMMIT --workdir=${workdir}
 
-images:
-    BUILD +root
-    BUILD +tower
-
 root:
+    ARG arch
+
     FROM ubuntu:20.04
 
     USER root
@@ -82,58 +87,64 @@ root:
 TOWER:
     COMMAND
 
-    COPY --chown=ubuntu:ubuntu +powerline/* /usr/local/bin
-    COPY --chown=ubuntu:ubuntu +hof/* /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu +cilium/* /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu +hubble/* /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu +linkerd/* /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu +vcluster/* /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu +loft/* /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu +steampipe/* /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu +gh/* /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu +flyctl/* /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu +earthly/* /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu +buildkite/* /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu +bk/* /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu +hlb/* /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu +litestream/* /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu +tilt/* /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu +k3d/* /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu +cue/* /usr/local/bin/
+    ARG arch
+    ARG arch2
+    ARG arch3
 
-    COPY --chown=ubuntu:ubuntu --dir +shell/* ./
-    COPY --chown=ubuntu:ubuntu --dir +k9s/* ./
-    COPY --chown=ubuntu:ubuntu --dir +kustomize/* ./
-    COPY --chown=ubuntu:ubuntu --dir +helm/* ./
-    COPY --chown=ubuntu:ubuntu --dir +k3sup/* ./
-    COPY --chown=ubuntu:ubuntu --dir +teleport/* ./
-    COPY --chown=ubuntu:ubuntu --dir +vault/* ./
-    COPY --chown=ubuntu:ubuntu --dir +consul/* ./
-    COPY --chown=ubuntu:ubuntu --dir +boundary/* ./
-    COPY --chown=ubuntu:ubuntu --dir +cloudflared/* ./
-    COPY --chown=ubuntu:ubuntu --dir +terraform/* ./
-    COPY --chown=ubuntu:ubuntu --dir +cdktf/* ./
-    COPY --chown=ubuntu:ubuntu --dir +skaffold/* ./
-    COPY --chown=ubuntu:ubuntu --dir +awsvault/* ./
+    COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch2}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch2}) /usr/local/bin/
 
-    COPY --chown=ubuntu:ubuntu --dir +python/* ./
-    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow +pipx/* ./
+    COPY --chown=ubuntu:ubuntu (+powerline/* --arch=${arch}) /usr/local/bin
+    COPY --chown=ubuntu:ubuntu (+cilium/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+hubble/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+linkerd/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+vcluster/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+loft/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+steampipe/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+gh/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+earthly/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+buildkite/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+bk/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+hlb/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+litestream/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+k3d/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+cue/* --arch=${arch}) /usr/local/bin/
 
-    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow +krew/* ./
+    COPY --chown=ubuntu:ubuntu --dir (+shell/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+k9s/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+kustomize/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+helm/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+k3sup/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+teleport/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+vault/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+consul/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+boundary/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+cloudflared/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+terraform/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+skaffold/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+awsvault/* --arch=${arch}) ./
 
-    COPY --chown=ubuntu:ubuntu --dir +awscli/aws-cli /usr/local/
+    COPY --chown=ubuntu:ubuntu --dir (+python/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+pipx/* --arch=${arch}) ./
 
-    COPY --chown=ubuntu:ubuntu --dir +gcloud/gcloud /usr/local/
+    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+krew/* --arch=${arch}) ./
+
+    COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch3}) /usr/local/
+
+    COPY --chown=ubuntu:ubuntu --dir (+gcloud/gcloud --arch=${arch}) /usr/local/
 
     IF [ "${arch}" = "amd64" ]
-        COPY --chown=ubuntu:ubuntu +credentialPass/* /usr/local/bin/
-        COPY --chown=ubuntu:ubuntu +step/* /usr/local/bin/
-        COPY --chown=ubuntu:ubuntu +difft/* /usr/local/bin/
-        COPY --chown=ubuntu:ubuntu +jless/* /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=${arch}) /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu (+step/* --arch=${arch}) /usr/local/bin/
     END
 
 tower:
-    FROM +root
+    ARG arch
+    ARG arch2
+    ARG arch3
+
+    FROM +root --arch=${arch}
 
     USER ubuntu
     WORKDIR /home/ubuntu
@@ -150,11 +161,11 @@ tower:
 
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
-    DO +TOWER
+    DO +TOWER --arch=${arch} --arch2=${arch2} --arch3=${arch3}
 
     COPY --dir --chown=ubuntu:ubuntu . .
 
-    SAVE IMAGE --push defn/dev:${arch}
+    SAVE IMAGE --push defn/dev
 
 tools:
     FROM ubuntu:20.04
@@ -178,22 +189,62 @@ asdf:
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
     SAVE ARTIFACT .asdf
 
+# arch3
+awscli:
+    ARG arch
+    FROM +tools
+    RUN curl -sSL "https://awscli.amazonaws.com/awscli-exe-linux-${arch}.zip" -o "awscliv2.zip"
+    RUN unzip awscliv2.zip
+    RUN ./aws/install -i /usr/local/aws-cli -b /usr/local/aws-cli/bin
+    SAVE ARTIFACT /usr/local/aws-cli
+
+# arch2
+hof:
+    ARG arch
+    FROM +tools
+    RUN --secret HOF curl -sSL -o hof https://github.com/hofstadter-io/hof/releases/download/v${HOF}/hof_${HOF}_Linux_${arch} && chmod 755 hof
+    SAVE ARTIFACT hof
+    
+jless:
+    ARG arch
+    FROM +tools
+    RUN --secret JLESS (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${JLESS}/jless-v${JLESS}-${arch}-unknown-linux-gnu.zip | gunzip -c - > jless) && chmod 755 jless
+    SAVE ARTIFACT jless
+
+flyctl:
+    ARG arch
+    FROM +tools
+    RUN --secret FLYCTL curl -sSL https://github.com/superfly/flyctl/releases/download/v${FLYCTL}/flyctl_${FLYCTL}_Linux_${arch}.tar.gz | tar xvfz -
+    SAVE ARTIFACT flyctl
+
+difft:
+    ARG arch
+    FROM +tools
+    RUN --secret DIFFT curl -sSL https://github.com/Wilfred/difftastic/releases/download/${DIFFT}/difft-${arch}-unknown-linux-gnu.tar.gz | tar xvfz -
+    SAVE ARTIFACT difft
+
+tilt:
+    ARG arch
+    FROM +tools
+    RUN --secret TILT curl -sSL https://github.com/tilt-dev/tilt/releases/download/v${TILT}/tilt.${TILT}.linux.${arch}.tar.gz | tar xvfz -
+    SAVE ARTIFACT tilt
+
+# arch
 credentialPass:
+    ARG arch
     FROM +tools
     RUN --secret CREDENTIAL_PASS curl -sSL https://github.com/docker/docker-credential-helpers/releases/download/v${CREDENTIAL_PASS}/docker-credential-pass-v${CREDENTIAL_PASS}-${arch}.tar.gz | tar xvfz - && chmod 755 docker-credential-pass
     SAVE ARTIFACT docker-credential-pass
 
 powerline:
+    ARG arch
     FROM +tools
     RUN --secret POWERLINE curl -sSL -o powerline https://github.com/justjanne/powerline-go/releases/download/v${POWERLINE}/powerline-go-linux-${arch} && chmod 755 powerline
     SAVE ARTIFACT powerline
 
-hof:
-    FROM +tools
-    RUN --secret HOF curl -sSL -o hof https://github.com/hofstadter-io/hof/releases/download/v${HOF}/hof_${HOF}_Linux_${arch2} && chmod 755 hof
-    SAVE ARTIFACT hof
 
 step:
+    ARG arch
     FROM +tools
     RUN --secret STEP curl -sSL -o step.deb https://dl.step.sm/gh-release/cli/gh-release-header/v${STEP}/step-cli_${STEP}_${arch}.deb && dpkg -i step.deb
     RUN cp /usr/bin/step* .
@@ -201,49 +252,45 @@ step:
     SAVE ARTIFACT step-cli
 
 cilium:
+    ARG arch
     FROM +tools
     RUN --secret CILIUM curl -sSL https://github.com/cilium/cilium-cli/releases/download/v${CILIUM}/cilium-linux-${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT cilium
 
 hubble:
+    ARG arch
     FROM +tools
     RUN --secret HUBBLE curl -sSL https://github.com/cilium/hubble/releases/download/v${HUBBLE}/hubble-linux-${arch}.tar.gz | tar xzvf -
     SAVE ARTIFACT hubble
 
 linkerd:
+    ARG arch
     FROM +tools
     RUN --secret LINKERD curl -sSL -o linkerd https://github.com/linkerd/linkerd2/releases/download/${LINKERD}/linkerd2-cli-${LINKERD}-linux-${arch} && chmod 755 linkerd
     SAVE ARTIFACT linkerd
 
 vcluster:
+    ARG arch
     FROM +tools
     RUN --secret VCLUSTER curl -sSL -o vcluster https://github.com/loft-sh/vcluster/releases/download/v${VCLUSTER}/vcluster-linux-${arch} && chmod 755 vcluster
     SAVE ARTIFACT vcluster
 
 loft:
+    ARG arch
     FROM +tools
     RUN --secret LOFT curl -sSL -o loft https://github.com/loft-sh/loft/releases/download/v${LOFT}/loft-linux-${arch} && chmod 755 loft
     SAVE ARTIFACT loft
 
 steampipe:
+    ARG arch
     FROM +tools
     RUN --secret STEAMPIPE curl -sSL https://github.com/turbot/steampipe/releases/download/v${STEAMPIPE}/steampipe_linux_${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT steampipe
-
-jless:
-    FROM +tools
-    RUN --secret JLESS (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${JLESS}/jless-v${JLESS}-${arch2}-unknown-linux-gnu.zip | gunzip -c - > jless) && chmod 755 jless
-    SAVE ARTIFACT jless
 
 gh:
     FROM +tools
     RUN --secret GH curl -sSL https://github.com/cli/cli/releases/download/v${GH}/gh_${GH}_linux_${arch}.tar.gz | tar xvfz - --wildcards '*/bin/gh' && mv */bin/gh .
     SAVE ARTIFACT gh
-
-flyctl:
-    FROM +tools
-    RUN --secret FLYCTL curl -sSL https://github.com/superfly/flyctl/releases/download/v${FLYCTL}/flyctl_${FLYCTL}_Linux_${arch2}.tar.gz | tar xvfz -
-    SAVE ARTIFACT flyctl
 
 earthly:
     FROM +tools
@@ -264,11 +311,6 @@ hlb:
     FROM +tools
     RUN --secret HLB curl -sSL -o hlb https://github.com/openllb/hlb/releases/download/v${HLB}/hlb-linux-${arch} && chmod 755 hlb
     SAVE ARTIFACT hlb
-
-difft:
-    FROM +tools
-    RUN --secret DIFFT curl -sSL https://github.com/Wilfred/difftastic/releases/download/${DIFFT}/difft-${arch2}-unknown-linux-gnu.tar.gz | tar xvfz -
-    SAVE ARTIFACT difft
 
 litestream:
     FROM +tools
@@ -293,13 +335,6 @@ gcloud:
     RUN /usr/local/gcloud/google-cloud-sdk/bin/gcloud --quiet components install gke-gcloud-auth-plugin
     RUN rm -rf /usr/local/gcloud/google-cloud-sdk/.install
     SAVE ARTIFACT /usr/local/gcloud
-
-awscli:
-    FROM +tools
-    RUN curl -sSL "https://awscli.amazonaws.com/awscli-exe-linux-${arch3}.zip" -o "awscliv2.zip"
-    RUN unzip awscliv2.zip
-    RUN ./aws/install -i /usr/local/aws-cli -b /usr/local/aws-cli/bin
-    SAVE ARTIFACT /usr/local/aws-cli
 
 awsvault:
     FROM +asdf
@@ -360,11 +395,6 @@ k3sup:
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add k3sup'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
-
-tilt:
-    FROM +tools
-    RUN --secret TILT curl -sSL https://github.com/tilt-dev/tilt/releases/download/v${TILT}/tilt.${TILT}.linux.${arch2}.tar.gz | tar xvfz -
-    SAVE ARTIFACT tilt
 
 teleport:
     FROM +asdf
