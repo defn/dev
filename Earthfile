@@ -79,8 +79,6 @@ root:
     RUN chown -R ubuntu:ubuntu /home/ubuntu
     RUN chmod u+s /usr/bin/sudo
 
-    SAVE IMAGE --push defn:dev-root
-
 TOWER:
     COMMAND
 
@@ -156,7 +154,7 @@ tower:
 
     COPY --dir --chown=ubuntu:ubuntu . .
 
-    SAVE IMAGE --push defn:dev-tower
+    SAVE IMAGE --push defn/dev:${arch}
 
 tools:
     FROM ubuntu:20.04
