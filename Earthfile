@@ -12,12 +12,6 @@ amd64:
 arm64:
     BUILD --platform=linux/arm64 +tower --arch=arm64
 
-pre-commit:
-    ARG arch 
-    FROM +tower --arch=${arch}
-    ARG workdir
-    DO lib+PRECOMMIT --workdir=${workdir}
-
 root:
     ARG arch
 
