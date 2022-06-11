@@ -7,16 +7,14 @@ images:
     BUILD +arm64
 
 amd64:
-    BUILD --platform=linux/amd64 +tower --arch=amd64 --arch2=x86_64 --arch3=x86_64
+    BUILD --platform=linux/amd64 +tower --arch=amd64
 
 arm64:
-    BUILD --platform=linux/arm64 +tower --arch=arm64 --arch2=arm64 --arch3=aarch64
+    BUILD --platform=linux/arm64 +tower --arch=arm64
 
 pre-commit:
     ARG arch 
-    ARG arch2
-    ARG arch3
-    FROM +tower --arch=${arch}  --arch2=${arch2}  --arch3=${arch3} 
+    FROM +tower --arch=${arch}
     ARG workdir
     DO lib+PRECOMMIT --workdir=${workdir}
 
@@ -88,12 +86,8 @@ TOWER:
     COMMAND
 
     ARG arch
-    ARG arch2
-    ARG arch3
 
-    COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch2}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch2}) /usr/local/bin/
-
+    # arch
     COPY --chown=ubuntu:ubuntu (+powerline/* --arch=${arch}) /usr/local/bin
     COPY --chown=ubuntu:ubuntu (+cilium/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+hubble/* --arch=${arch}) /usr/local/bin/
@@ -130,10 +124,25 @@ TOWER:
 
     COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+krew/* --arch=${arch}) ./
 
-    COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch3}) /usr/local/
-
     COPY --chown=ubuntu:ubuntu --dir (+gcloud/gcloud --arch=${arch}) /usr/local/
 
+    # arch3
+    IF [ ${arch} = "arm64" ]
+        COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch} --arch3=aarch64) /usr/local/
+    ELSE
+        COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch} --arch3=${arch}) /usr/local/
+    END
+
+    # arch2
+    IF [ ${arch} = "arm64" ]
+        COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
+    ELSE
+        COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
+    END
+
+    # amd64
     IF [ "${arch}" = "amd64" ]
         COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=${arch}) /usr/local/bin/
         COPY --chown=ubuntu:ubuntu (+step/* --arch=${arch}) /usr/local/bin/
@@ -141,8 +150,6 @@ TOWER:
 
 tower:
     ARG arch
-    ARG arch2
-    ARG arch3
 
     FROM +root --arch=${arch}
 
@@ -161,7 +168,7 @@ tower:
 
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
-    DO +TOWER --arch=${arch} --arch2=${arch2} --arch3=${arch3}
+    DO +TOWER --arch=${arch}
 
     COPY --dir --chown=ubuntu:ubuntu . .
 
@@ -193,8 +200,9 @@ asdf:
 # arch3
 awscli:
     ARG arch
+    ARG arch3
     FROM +tools --arch=${arch}
-    RUN curl -sSL "https://awscli.amazonaws.com/awscli-exe-linux-${arch}.zip" -o "awscliv2.zip"
+    RUN curl -sSL "https://awscli.amazonaws.com/awscli-exe-linux-${arch3}.zip" -o "awscliv2.zip"
     RUN unzip awscliv2.zip
     RUN ./aws/install -i /usr/local/aws-cli -b /usr/local/aws-cli/bin
     SAVE ARTIFACT /usr/local/aws-cli
@@ -202,32 +210,37 @@ awscli:
 # arch2
 hof:
     ARG arch
+    ARG arch2
     FROM +tools --arch=${arch}
-    RUN --secret HOF curl -sSL -o hof https://github.com/hofstadter-io/hof/releases/download/v${HOF}/hof_${HOF}_Linux_${arch} && chmod 755 hof
+    RUN --secret HOF curl -sSL -o hof https://github.com/hofstadter-io/hof/releases/download/v${HOF}/hof_${HOF}_Linux_${arch2} && chmod 755 hof
     SAVE ARTIFACT hof
     
 jless:
     ARG arch
+    ARG arch2
     FROM +tools --arch=${arch}
-    RUN --secret JLESS (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${JLESS}/jless-v${JLESS}-${arch}-unknown-linux-gnu.zip | gunzip -c - > jless) && chmod 755 jless
+    RUN --secret JLESS (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${JLESS}/jless-v${JLESS}-${arch2}-unknown-linux-gnu.zip | gunzip -c - > jless) && chmod 755 jless
     SAVE ARTIFACT jless
 
 flyctl:
     ARG arch
+    ARG arch2
     FROM +tools --arch=${arch}
-    RUN --secret FLYCTL curl -sSL https://github.com/superfly/flyctl/releases/download/v${FLYCTL}/flyctl_${FLYCTL}_Linux_${arch}.tar.gz | tar xvfz -
+    RUN --secret FLYCTL curl -sSL https://github.com/superfly/flyctl/releases/download/v${FLYCTL}/flyctl_${FLYCTL}_Linux_${arch2}.tar.gz | tar xvfz -
     SAVE ARTIFACT flyctl
 
 difft:
     ARG arch
+    ARG arch2
     FROM +tools --arch=${arch}
-    RUN --secret DIFFT curl -sSL https://github.com/Wilfred/difftastic/releases/download/${DIFFT}/difft-${arch}-unknown-linux-gnu.tar.gz | tar xvfz -
+    RUN --secret DIFFT curl -sSL https://github.com/Wilfred/difftastic/releases/download/${DIFFT}/difft-${arch2}-unknown-linux-gnu.tar.gz | tar xvfz -
     SAVE ARTIFACT difft
 
 tilt:
     ARG arch
+    ARG arch2
     FROM +tools --arch=${arch}
-    RUN --secret TILT curl -sSL https://github.com/tilt-dev/tilt/releases/download/v${TILT}/tilt.${TILT}.linux.${arch}.tar.gz | tar xvfz -
+    RUN --secret TILT curl -sSL https://github.com/tilt-dev/tilt/releases/download/v${TILT}/tilt.${TILT}.linux.${arch2}.tar.gz | tar xvfz -
     SAVE ARTIFACT tilt
 
 # arch
