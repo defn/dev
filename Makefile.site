@@ -1,4 +1,7 @@
 dev:
+	@true
+	
+dev_old:
 	@if flock -n ~/.home.lock -c '~/bin/e $(MAKE) dev_inner'; then rm -f ~/.home.lock; fi
 
 dev_inner:
@@ -22,6 +25,9 @@ rebuild:
 
 shell:
 	docker run --rm -ti --entrypoint bash defn/dev:$(arch)
+
+attach:
+	code --folder-uri vscode-remote://k8s-container+context=k3d-k3s-default+namespace=default+podname=dev-0+name=dev+/home/ubuntu
 
 up:
 	chmod 700 ~/.gnupg ~/.ssh
