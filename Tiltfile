@@ -1,4 +1,7 @@
-update_settings(max_parallel_updates = 6)
+analytics_settings(False)
 
-local_resource('proxy', cmd='exec bash -c "cd fly && exec ~/bin/e make proxy-docker"', allow_parallel = True)
-local_resource('socat', cmd='exec bash -c "cd fly && exec ~/bin/e make socat-docker"', allow_parallel = True)
+load('ext://uibutton', 'cmd_button', 'location')
+
+allow_k8s_contexts('k3d-k3s-default')
+
+k8s_yaml(".devcontainer/devcontainer.yaml")

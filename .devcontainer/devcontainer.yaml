@@ -23,7 +23,7 @@ spec:
               mountPath: /home/ubuntu/work
   volumeClaimTemplates:
     - metadata:
-        name: work
+        name: dev
       spec:
         accessModes: ["ReadWriteOnce"]
         resources:
