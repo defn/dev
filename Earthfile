@@ -180,7 +180,8 @@ tools:
             apt-transport-https software-properties-common tzdata locales git gpg gpg-agent unzip xz-utils wget curl
 
 asdf:
-    FROM +tools
+    ARG arch
+    FROM +tools --arch=${arch}
     RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
     RUN install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
     USER ubuntu
@@ -192,7 +193,7 @@ asdf:
 # arch3
 awscli:
     ARG arch
-    FROM +tools
+    FROM +tools --arch=${arch}
     RUN curl -sSL "https://awscli.amazonaws.com/awscli-exe-linux-${arch}.zip" -o "awscliv2.zip"
     RUN unzip awscliv2.zip
     RUN ./aws/install -i /usr/local/aws-cli -b /usr/local/aws-cli/bin
@@ -201,51 +202,51 @@ awscli:
 # arch2
 hof:
     ARG arch
-    FROM +tools
+    FROM +tools --arch=${arch}
     RUN --secret HOF curl -sSL -o hof https://github.com/hofstadter-io/hof/releases/download/v${HOF}/hof_${HOF}_Linux_${arch} && chmod 755 hof
     SAVE ARTIFACT hof
     
 jless:
     ARG arch
-    FROM +tools
+    FROM +tools --arch=${arch}
     RUN --secret JLESS (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${JLESS}/jless-v${JLESS}-${arch}-unknown-linux-gnu.zip | gunzip -c - > jless) && chmod 755 jless
     SAVE ARTIFACT jless
 
 flyctl:
     ARG arch
-    FROM +tools
+    FROM +tools --arch=${arch}
     RUN --secret FLYCTL curl -sSL https://github.com/superfly/flyctl/releases/download/v${FLYCTL}/flyctl_${FLYCTL}_Linux_${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT flyctl
 
 difft:
     ARG arch
-    FROM +tools
+    FROM +tools --arch=${arch}
     RUN --secret DIFFT curl -sSL https://github.com/Wilfred/difftastic/releases/download/${DIFFT}/difft-${arch}-unknown-linux-gnu.tar.gz | tar xvfz -
     SAVE ARTIFACT difft
 
 tilt:
     ARG arch
-    FROM +tools
+    FROM +tools --arch=${arch}
     RUN --secret TILT curl -sSL https://github.com/tilt-dev/tilt/releases/download/v${TILT}/tilt.${TILT}.linux.${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT tilt
 
 # arch
 credentialPass:
     ARG arch
-    FROM +tools
+    FROM +tools --arch=${arch}
     RUN --secret CREDENTIAL_PASS curl -sSL https://github.com/docker/docker-credential-helpers/releases/download/v${CREDENTIAL_PASS}/docker-credential-pass-v${CREDENTIAL_PASS}-${arch}.tar.gz | tar xvfz - && chmod 755 docker-credential-pass
     SAVE ARTIFACT docker-credential-pass
 
 powerline:
     ARG arch
-    FROM +tools
+    FROM +tools --arch=${arch}
     RUN --secret POWERLINE curl -sSL -o powerline https://github.com/justjanne/powerline-go/releases/download/v${POWERLINE}/powerline-go-linux-${arch} && chmod 755 powerline
     SAVE ARTIFACT powerline
 
 
 step:
     ARG arch
-    FROM +tools
+    FROM +tools --arch=${arch}
     RUN --secret STEP curl -sSL -o step.deb https://dl.step.sm/gh-release/cli/gh-release-header/v${STEP}/step-cli_${STEP}_${arch}.deb && dpkg -i step.deb
     RUN cp /usr/bin/step* .
     SAVE ARTIFACT step
@@ -253,82 +254,91 @@ step:
 
 cilium:
     ARG arch
-    FROM +tools
+    FROM +tools --arch=${arch}
     RUN --secret CILIUM curl -sSL https://github.com/cilium/cilium-cli/releases/download/v${CILIUM}/cilium-linux-${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT cilium
 
 hubble:
     ARG arch
-    FROM +tools
+    FROM +tools --arch=${arch}
     RUN --secret HUBBLE curl -sSL https://github.com/cilium/hubble/releases/download/v${HUBBLE}/hubble-linux-${arch}.tar.gz | tar xzvf -
     SAVE ARTIFACT hubble
 
 linkerd:
     ARG arch
-    FROM +tools
+    FROM +tools --arch=${arch}
     RUN --secret LINKERD curl -sSL -o linkerd https://github.com/linkerd/linkerd2/releases/download/${LINKERD}/linkerd2-cli-${LINKERD}-linux-${arch} && chmod 755 linkerd
     SAVE ARTIFACT linkerd
 
 vcluster:
     ARG arch
-    FROM +tools
+    FROM +tools --arch=${arch}
     RUN --secret VCLUSTER curl -sSL -o vcluster https://github.com/loft-sh/vcluster/releases/download/v${VCLUSTER}/vcluster-linux-${arch} && chmod 755 vcluster
     SAVE ARTIFACT vcluster
 
 loft:
     ARG arch
-    FROM +tools
+    FROM +tools --arch=${arch}
     RUN --secret LOFT curl -sSL -o loft https://github.com/loft-sh/loft/releases/download/v${LOFT}/loft-linux-${arch} && chmod 755 loft
     SAVE ARTIFACT loft
 
 steampipe:
     ARG arch
-    FROM +tools
+    FROM +tools --arch=${arch}
     RUN --secret STEAMPIPE curl -sSL https://github.com/turbot/steampipe/releases/download/v${STEAMPIPE}/steampipe_linux_${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT steampipe
 
 gh:
-    FROM +tools
+    ARG arch
+    FROM +tools --arch=${arch}
     RUN --secret GH curl -sSL https://github.com/cli/cli/releases/download/v${GH}/gh_${GH}_linux_${arch}.tar.gz | tar xvfz - --wildcards '*/bin/gh' && mv */bin/gh .
     SAVE ARTIFACT gh
 
 earthly:
-    FROM +tools
+    ARG arch
+    FROM +tools --arch=${arch}
     RUN --secret EARTHLY curl -sSL -o earthly https://github.com/earthly/earthly/releases/download/v${EARTHLY}/earthly-linux-${arch} && chmod 755 earthly
     SAVE ARTIFACT earthly
 
 buildkite:
-    FROM +tools
+    ARG arch
+    FROM +tools --arch=${arch}
     RUN --secret BUILDKITE curl -sSL https://github.com/buildkite/agent/releases/download/v${BUILDKITE}/buildkite-agent-linux-${arch}-${BUILDKITE}.tar.gz | tar xvfz -
     SAVE ARTIFACT buildkite-agent
 
 bk:
-    FROM +tools
+    ARG arch
+    FROM +tools --arch=${arch}
     RUN --secret BKCLI curl -sSL -o bk https://github.com/buildkite/cli/releases/download/v${BKCLI}/cli-linux-${arch} && chmod 755 bk
     SAVE ARTIFACT bk
 
 hlb:
-    FROM +tools
+    ARG arch
+    FROM +tools --arch=${arch}
     RUN --secret HLB curl -sSL -o hlb https://github.com/openllb/hlb/releases/download/v${HLB}/hlb-linux-${arch} && chmod 755 hlb
     SAVE ARTIFACT hlb
 
 litestream:
-    FROM +tools
+    ARG arch
+    FROM +tools --arch=${arch}
     RUN --secret LITESTREAM curl -sSL https://github.com/benbjohnson/litestream/releases/download/v${LITESTREAM}/litestream-v${LITESTREAM}-linux-${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT litestream
 
 cue:
-    FROM +tools
+    ARG arch
+    FROM +tools --arch=${arch}
     RUN --secret CUE curl -sSL https://github.com/cue-lang/cue/releases/download/v${CUE}/cue_v${CUE}_linux_${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT cue
 
 k3d:
-    FROM +tools
+    ARG arch
+    FROM +tools --arch=${arch}
     RUN --secret K3D curl -sSL -o k3d https://github.com/k3d-io/k3d/releases/download/v${K3D}/k3d-linux-${arch} && chmod 755 k3d
     SAVE ARTIFACT k3d
 
 gcloud:
-    FROM +tools
+    ARG arch
+    FROM +tools --arch=${arch}
     RUN curl https://sdk.cloud.google.com > install.sh
     RUN bash install.sh --disable-prompts --install-dir=/usr/local/gcloud
     RUN /usr/local/gcloud/google-cloud-sdk/bin/gcloud --quiet components install beta
@@ -337,28 +347,32 @@ gcloud:
     SAVE ARTIFACT /usr/local/gcloud
 
 awsvault:
-    FROM +asdf
+    ARG arch
+    FROM +asdf --arch=${arch}
     RUN --secret AWSVAULT echo "aws-vault ${AWSVAULT}" >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add aws-vault'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 skaffold:
-    FROM +asdf
+    ARG arch
+    FROM +asdf --arch=${arch}
     RUN --secret SKAFFOLD echo "skaffold ${SKAFFOLD}" >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add skaffold'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 kubectl:
-    FROM +asdf
+    ARG arch
+    FROM +asdf --arch=${arch}
     RUN --secret KUBECTL echo "kubectl ${KUBECTL}" >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add kubectl'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 krew:
-    FROM +kubectl
+    ARG arch
+    FROM +kubectl --arch=${arch}
     RUN --secret KREW echo "krew ${KREW}" >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add krew'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
@@ -369,70 +383,80 @@ krew:
     SAVE ARTIFACT --symlink-no-follow .asdf
 
 k9s:
-    FROM +asdf
+    ARG arch
+    FROM +asdf --arch=${arch}
     RUN --secret K9S echo k9s ${K9S} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add k9s'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 kustomize:
-    FROM +asdf
+    ARG arch
+    FROM +asdf --arch=${arch}
     RUN --secret KUSTOMIZE echo kustomize ${KUSTOMIZE} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add kustomize'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 helm:
-    FROM +asdf
+    ARG arch
+    FROM +asdf --arch=${arch}
     RUN --secret HELM echo helm ${HELM} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add helm'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 k3sup:
-    FROM +asdf
+    ARG arch
+    FROM +asdf --arch=${arch}
     RUN --secret K3SUP echo k3sup ${K3SUP} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add k3sup'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 teleport:
-    FROM +asdf
+    ARG arch
+    FROM +asdf --arch=${arch}
     RUN --secret TELEPORT echo teleport-ent ${TELEPORT} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add teleport-ent'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 vault:
-    FROM +asdf
+    ARG arch
+    FROM +asdf --arch=${arch}
     RUN --secret VAULT echo vault ${VAULT} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add vault'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 consul:
-    FROM +asdf
+    ARG arch
+    FROM +asdf --arch=${arch}
     RUN --secret CONSUL echo consul ${CONSUL} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add consul'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 boundary:
-    FROM +asdf
+    ARG arch
+    FROM +asdf --arch=${arch}
     RUN --secret BOUNDARY echo boundary ${BOUNDARY} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add boundary'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 cloudflared:
-    FROM +asdf
+    ARG arch
+    FROM +asdf --arch=${arch}
     RUN --secret CLOUDFLARED echo cloudflared ${CLOUDFLARED} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add cloudflared'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 shell:
-    FROM +asdf
+    ARG arch
+    FROM +asdf --arch=${arch}
     RUN --secret SHELLCHECK echo shellcheck ${SHELLCHECK} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add shellcheck'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
@@ -442,14 +466,16 @@ shell:
     SAVE ARTIFACT .asdf
 
 terraform:
-    FROM +asdf
+    ARG arch
+    FROM +asdf --arch=${arch}
     RUN --secret TERRAFORM echo terraform ${TERRAFORM} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add terraform'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 nodejs:
-    FROM +asdf
+    ARG arch
+    FROM +asdf --arch=${arch}
     RUN --secret NODEJS echo nodejs ${NODEJS} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add nodejs'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
@@ -457,19 +483,22 @@ nodejs:
     SAVE ARTIFACT .asdf
 
 cdktf:
-    FROM +nodejs
+    ARG arch
+    FROM +nodejs --arch=${arch}
     RUN --secret CDKTF bash -c 'source ~/.asdf/asdf.sh && npm install -g cdktf-cli@${CDKTF}'
     SAVE ARTIFACT .asdf
 
 doctl:
-    FROM +asdf
+    ARG arch
+    FROM +asdf --arch=${arch}
     RUN --secret DOCTL echo doctl ${DOCTL} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add doctl'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 python:
-    FROM +asdf
+    ARG arch
+    FROM +asdf --arch=${arch}
     USER root
     RUN apt update && apt install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
     USER ubuntu
@@ -481,7 +510,8 @@ python:
     SAVE ARTIFACT .asdf
 
 pipx:
-    FROM +python
+    ARG arch
+    FROM +python --arch=${arch}
     RUN ~/.asdf/shims/pipx install pycco
     RUN ~/.asdf/shims/pipx install yq
     RUN ~/.asdf/shims/pipx install watchdog
