@@ -99,7 +99,6 @@ TOWER:
     COPY --chown=ubuntu:ubuntu +buildkite/* /usr/local/bin/
     COPY --chown=ubuntu:ubuntu +bk/* /usr/local/bin/
     COPY --chown=ubuntu:ubuntu +hlb/* /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu +difft/* /usr/local/bin/
     COPY --chown=ubuntu:ubuntu +litestream/* /usr/local/bin/
     COPY --chown=ubuntu:ubuntu +tilt/* /usr/local/bin/
     COPY --chown=ubuntu:ubuntu +k3d/* /usr/local/bin/
@@ -132,6 +131,7 @@ TOWER:
     IF [ "${arch}" = "amd64" ]
         COPY --chown=ubuntu:ubuntu +credentialPass/* /usr/local/bin/
         COPY --chown=ubuntu:ubuntu +step/* /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu +difft/* /usr/local/bin/
     END
 
 tower:
