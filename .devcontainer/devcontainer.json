@@ -1,7 +1,5 @@
 {
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
+  "image": "defn/dev:${localEnv:arch}"
   "remoteUser": "ubuntu",
   "runArgs": [
     "-v",
