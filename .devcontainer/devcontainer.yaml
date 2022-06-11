@@ -18,6 +18,7 @@ spec:
       containers:
         - name: dev
           image: defn/dev:amd64
+          imagePullPolicy: Always
           volumeMounts:
             - name: dev
               mountPath: /home/ubuntu/work
