@@ -1,4 +1,4 @@
-FROM registry.fly.io/defn:dev-tower
+FROM defn/dev:amd64
 
 USER root
 

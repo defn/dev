@@ -21,7 +21,7 @@ rebuild:
 	earthly --push +images
 
 shell:
-	docker run --rm -ti --entrypoint bash defn:dev-tower
+	docker run --rm -ti --entrypoint bash defn/dev:$(arch)
 
 up:
 	chmod 700 ~/.gnupg ~/.ssh
