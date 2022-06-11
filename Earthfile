@@ -130,7 +130,7 @@ TOWER:
     IF [ ${arch} = "arm64" ]
         COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch} --arch3=aarch64) /usr/local/
     ELSE
-        COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch} --arch3=${arch}) /usr/local/
+        COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch} --arch3=x86_64) /usr/local/
     END
 
     # arch2
