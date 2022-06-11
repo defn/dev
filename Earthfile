@@ -92,7 +92,6 @@ TOWER:
     COPY --chown=ubuntu:ubuntu +vcluster/* /usr/local/bin/
     COPY --chown=ubuntu:ubuntu +loft/* /usr/local/bin/
     COPY --chown=ubuntu:ubuntu +steampipe/* /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu +jless/* /usr/local/bin/
     COPY --chown=ubuntu:ubuntu +gh/* /usr/local/bin/
     COPY --chown=ubuntu:ubuntu +flyctl/* /usr/local/bin/
     COPY --chown=ubuntu:ubuntu +earthly/* /usr/local/bin/
@@ -132,6 +131,7 @@ TOWER:
         COPY --chown=ubuntu:ubuntu +credentialPass/* /usr/local/bin/
         COPY --chown=ubuntu:ubuntu +step/* /usr/local/bin/
         COPY --chown=ubuntu:ubuntu +difft/* /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu +jless/* /usr/local/bin/
     END
 
 tower:
