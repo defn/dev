@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: dev
+spec:
+  selector:
+    matchLabels:
+      app: dev
+  serviceName: dev
+  replicas: 1
+  minReadySeconds: 10
+  template:
+    metadata:
+      labels:
+        app: dev
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: dev
+          image: defn/dev:amd64
+          volumeMounts:
+            - name: dev
+              mountPath: /home/ubuntu/work
+  volumeClaimTemplates:
+    - metadata:
+        name: work
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 10Gi
