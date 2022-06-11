@@ -5,20 +5,25 @@
 tmp
 work
 cue.mod/pkg
+Home
+snap
 
 # working files
 node_modules
+.profile
 .bash_history
+.bash_logout
 .viminfo
 .vim/plugged
-.vscode
 .python_history
 .local
 .cache
 .npm
 .docker
 .tilt-dev
+.vscode
 .vscode-server
+.vscode-remote-containers
 .wget-hsts
 .kube
 .swp
