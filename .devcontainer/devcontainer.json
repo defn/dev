@@ -1,5 +1,5 @@
 {
-  "image": "defn/dev:${localEnv:arch}"
+  "image": "defn/dev:${localEnv:arch}",
   "remoteUser": "ubuntu",
   "runArgs": [
     "-v",
