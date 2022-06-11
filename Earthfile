@@ -103,6 +103,7 @@ TOWER:
     COPY --chown=ubuntu:ubuntu (+litestream/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+k3d/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+cue/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+step/* --arch=${arch}) /usr/local/bin/
 
     COPY --chown=ubuntu:ubuntu --dir (+shell/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+k9s/* --arch=${arch}) ./
@@ -145,7 +146,6 @@ TOWER:
     # amd64
     IF [ "${arch}" = "amd64" ]
         COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=${arch}) /usr/local/bin/
-        COPY --chown=ubuntu:ubuntu (+step/* --arch=${arch}) /usr/local/bin/
     END
 
 tower:
@@ -164,7 +164,7 @@ tower:
     COPY --chown=ubuntu:ubuntu .vimrc .
     RUN echo yes | vim +PlugInstall +qall
 
-    RUN if type -P docker-credential-pass; then mkdir -p ~/.docker && echo '{"credsStore": "pass"}' > ~/.docker/config.json; fi
+    RUN mkdir -p ~/.docker && echo '{"credsStore": "pass"}' > ~/.docker/config.json
 
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
@@ -260,10 +260,8 @@ powerline:
 step:
     ARG arch
     FROM +tools --arch=${arch}
-    RUN --secret STEP curl -sSL -o step.deb https://dl.step.sm/gh-release/cli/gh-release-header/v${STEP}/step-cli_${STEP}_${arch}.deb && dpkg -i step.deb
-    RUN cp /usr/bin/step* .
+    RUN --secret STEP curl -sSL -o step https://github.com/smallstep/cli/releases/download/v${STEP}/step_linux_${STEP}_${arch}.tar.gz && chmod 755 step
     SAVE ARTIFACT step
-    SAVE ARTIFACT step-cli
 
 cilium:
     ARG arch
