@@ -52,7 +52,7 @@ fi
 # docker
 if [[ ! -S /var/run/docker.sock ]]; then
 	if [[ -z "${DOCKER_HOST:-}" ]]; then
-		export DOCKER_HOST=localhost:2375
+		export DOCKER_HOST=ssh://super
 	fi
 fi
 
