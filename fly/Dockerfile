@@ -1,4 +1,4 @@
-FROM defn/dev:amd64
+FROM defn/dev
 
 USER root
 
