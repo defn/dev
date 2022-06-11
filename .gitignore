@@ -52,3 +52,4 @@ node_modules
 .pants.d
 .*.lock
 .k3d
+.sudo_as_admin_successful
