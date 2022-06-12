@@ -1,19 +1,17 @@
+dev:
+	@if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi
+
+dev_inner:
+	@while true; do if ~/bin/e $(MAKE) live 2>/dev/null >/dev/null; then ~/bin/e $(MAKE) up; fi; echo "$$(date) zzz"; sleep 5 ; done
+
 init:
-	git clone git@github.com:jojomomojo/password-store work/password-store
-	git clone git@github.com:defn/dev work/dev
+	-git clone git@github.com:jojomomojo/password-store work/password-store
 	cd .password-store && git crypt unlock
+	git clone git@github.com:defn/dev work/dev
 	$(MAKE) kubeconfig
 	pass hello
 	kubectl --context argocd get all
 
-dev:
-	@true
-
-dev_old:
-	@if flock -n ~/.home.lock -c '~/bin/e $(MAKE) dev_inner'; then rm -f ~/.home.lock; fi
-
-dev_inner:
-	@while true; do if ~/bin/e $(MAKE) live 2>/dev/null >/dev/null; then ~/bin/e $(MAKE) up; fi; echo "$$(date) zzz"; sleep 5 ; done
 
 asdf:
 	cat .tool-versions| awk '{print $$1}' | while read -r a; do asdf list-all "$$a" | sed "s#^#$$a #"; done | sort > .tool-versions-all
