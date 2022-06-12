@@ -29,6 +29,8 @@ attach:
 	code --folder-uri vscode-remote://k8s-container+context=k3d-k3s-default+namespace=default+podname=dev-0+name=dev+/home/ubuntu
 
 kubeconfig:
+	sudo cp /run/secrets/kubernetes.io/serviceaccount/ca.crt /usr/local/share/ca-certificates/
+	sudo update-ca-certificates
 	kubectl config set-cluster pod --server=https://kubernetes.default.svc.cluster.local --embed-certs --certificate-authority=/run/secrets/kubernetes.io/serviceaccount/ca.crt
 	kubectl config set-credentials pod --token="$$(cat /run/secrets/kubernetes.io/serviceaccount/token)"
 	kubectl config set-context pod --cluster=pod --user=pod
