@@ -147,6 +147,9 @@ TOWER:
         COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
     END
 
+    COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch}) ./
+
     # amd64
     IF [ "${arch}" = "amd64" ]
         COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=${arch}) /usr/local/bin/
@@ -515,6 +518,22 @@ doctl:
     FROM +asdf --arch=${arch}
     RUN --secret DOCTL echo doctl ${DOCTL} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add doctl'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
+    SAVE ARTIFACT .asdf
+
+argo:
+    ARG arch
+    FROM +asdf --arch=${arch}
+    RUN --secret ARGO echo argo ${ARGO} >> .tool-versions
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add argo'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
+    SAVE ARTIFACT .asdf
+
+argocd:
+    ARG arch
+    FROM +asdf --arch=${arch}
+    RUN --secret ARGOCD echo argocd ${ARGOCD} >> .tool-versions
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add argocd'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
