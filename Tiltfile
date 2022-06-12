@@ -20,3 +20,8 @@ cmd_button(
     ],
     icon_name="build",
 )
+
+local_resource(
+    name="ui",
+    serve_cmd="kubectl -n argocd port-forward svc/argocd-server -n argocd 8080:443",
+)
