@@ -21,7 +21,18 @@ cmd_button(
     icon_name="build",
 )
 
-local_resource(
+cmd_button(
     name="ui",
-    serve_cmd="kubectl -n argocd port-forward svc/argocd-server -n argocd 8080:443",
+    resource="argocd",
+    argv=[
+        "bash",
+        "-c",
+        "echo password: $(kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d'); xdg-open http://localhost:8881"
+    ],
+    icon_name="web",
+)
+
+local_resource(
+    name="argocd port-forward",
+    serve_cmd="kubectl -n argocd port-forward svc/argocd-server -n argocd 8881:443",
 )
