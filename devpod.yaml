@@ -19,8 +19,8 @@ spec:
         - name: dev
           image: defn/dev
           imagePullPolicy: Always
-          command: ["tail"]
-          args: ["-f", "/dev/null"]
+          command: ["/usr/bin/tini", "--"]
+          args: ["tail", "-f", "/dev/null"]
           volumeMounts:
             - name: dev
               mountPath: /home/ubuntu/work

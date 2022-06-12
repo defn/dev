@@ -154,11 +154,12 @@ TOWER:
     IF [ "${arch}" = "amd64" ]
         COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=${arch}) /usr/local/bin/
     END
+    
+    ENTRYPOINT ["/usr/bin/tini", "--"]
 
 tower-update:
     ARG arch
     FROM defn/dev
-    ENTRYPOINT ["bash"]
     COPY --dir --chown=ubuntu:ubuntu . .
     SAVE IMAGE --push defn/dev
 
