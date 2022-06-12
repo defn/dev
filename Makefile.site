@@ -7,7 +7,7 @@ dev_inner:
 init:
 	-git clone git@github.com:jojomomojo/password-store work/password-store
 	cd .password-store && git crypt unlock
-	git clone git@github.com:defn/dev work/dev
+	-git clone git@github.com:defn/dev work/dev
 	$(MAKE) kubeconfig
 	pass hello
 	kubectl --context argocd get all
