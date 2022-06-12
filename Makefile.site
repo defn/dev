@@ -23,7 +23,7 @@ updates:
 	earthly --push +updates
 
 shell:
-	docker run --rm -ti --entrypoint bash defn/dev
+	docker run --rm -ti defn/dev
 
 attach:
 	code --folder-uri vscode-remote://k8s-container+context=k3d-k3s-default+namespace=default+podname=dev-0+name=dev+/home/ubuntu
