@@ -32,7 +32,7 @@ k3d:
 	-k3d cluster delete
 	k3d cluster create
 	$(MAKE) argocd
-	kubectl apply -f argocd.yaml
+	kubectl apply -f devpod.yaml
 	kubectl rollout status statefulset dev --watch
 
 kubeconfig:
