@@ -1,6 +1,5 @@
 dev:
-	@#if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi
-	@if [[ ! -f ~/.home.lock ]]; then -~/bin/e $(MAKE) init; touch ~/.home.lock; fi
+	@if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi
 
 dev_inner:
 	@while true; do if ~/bin/e $(MAKE) live 2>/dev/null >/dev/null; then ~/bin/e $(MAKE) up; fi; echo "$$(date) zzz"; sleep 5 ; done
@@ -13,8 +12,7 @@ init:
 	pass hello
 	argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')"
 	argocd app create argocd --repo https://github.com/defn/dev --path k/argocd --dest-namespace argocd --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
-	argocd app sync argocd --local k/argocd
-	argocd app list
+	tilt up --context pod --stream
 
 asdf:
 	cat .tool-versions| awk '{print $$1}' | while read -r a; do asdf list-all "$$a" | sed "s#^#$$a #"; done | sort > .tool-versions-all
