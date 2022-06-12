@@ -38,7 +38,7 @@ k3d:
 	-k3d cluster delete
 	k3d cluster create
 	$(MAKE) argocd
-	kubectl apply -f devpod.yaml
+	kubectl apply -f k/devpod/main.yaml
 	kubectl rollout status statefulset dev --watch
 
 kubeconfig:
@@ -54,7 +54,7 @@ kubeconfig:
 
 argocd: argocd.yaml
 	-kubectl create namespace argocd
-	kubectl apply -n argocd -f argocd.yaml
+	kubectl apply -n argocd -f k/argocd/main.yaml
 
 argocd.yaml:
 	curl -sSL -o $@ https://raw.githubusercontent.com/argoproj/argo-cd/v2.4.0/manifests/install.yaml
