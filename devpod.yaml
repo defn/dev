@@ -19,6 +19,8 @@ spec:
         - name: dev
           image: defn/dev
           imagePullPolicy: Always
+          command: ["tail"]
+          args: ["-f", "/dev/null"]
           volumeMounts:
             - name: dev
               mountPath: /home/ubuntu/work
