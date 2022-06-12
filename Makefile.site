@@ -63,7 +63,7 @@ argocd.yaml:
 up:
 	chmod 700 ~/.gnupg ~/.ssh
 	sudo chown ubuntu /var/run/docker.sock || true
-	if ! docker info; then (cd fly && $(MAKE) login); exec ~/bin/e tilt up --stream; else exec tail -f /dev/null; fi
+	if ! docker info; then (cd fly && $(MAKE) login); exec ~/bin/e tilt up; else exec tail -f /dev/null; fi
 
 down:
 	-bash -c 'rm -vf "$${SSH_AUTH_SOCK}"'
