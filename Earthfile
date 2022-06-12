@@ -142,9 +142,11 @@ TOWER:
     IF [ ${arch} = "arm64" ]
         COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
         COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
     ELSE
         COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
         COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
     END
 
     COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch}) ./
@@ -154,7 +156,7 @@ TOWER:
     IF [ "${arch}" = "amd64" ]
         COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=${arch}) /usr/local/bin/
     END
-    
+
     ENTRYPOINT ["/usr/bin/tini", "--"]
 
 tower-update:
