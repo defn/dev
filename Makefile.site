@@ -28,6 +28,13 @@ shell:
 attach:
 	code --folder-uri vscode-remote://k8s-container+context=k3d-k3s-default+namespace=default+podname=dev-0+name=dev+/home/ubuntu
 
+k3d:
+	-k3d cluster delete
+ 	k3d cluster create
+	$(MAKE) argocd
+	kubectl apply -f argocd.yaml
+	kubectl rollout status statefulset dev --watch
+
 kubeconfig:
 	sudo cp /run/secrets/kubernetes.io/serviceaccount/ca.crt /usr/local/share/ca-certificates/
 	sudo update-ca-certificates
@@ -39,9 +46,12 @@ kubeconfig:
 	kubectl config set-credentials argocd --token="$$(cat /run/secrets/kubernetes.io/serviceaccount/token)"
 	kubectl config set-context argocd --cluster=pod --user=argocd --namespace argocd
 
-argocd:
+argocd: argocd.yaml
 	-kubectl create namespace argocd
-	kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.4.0/manifests/install.yaml
+	kubectl apply -n argocd -f argocd.yaml
+
+argocd.yaml:
+	curl -sSL -o $@ https://raw.githubusercontent.com/argoproj/argo-cd/v2.4.0/manifests/install.yaml
 
 up:
 	chmod 700 ~/.gnupg ~/.ssh
