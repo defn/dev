@@ -1,6 +1,6 @@
 dev:
 	@true
-	
+
 dev_old:
 	@if flock -n ~/.home.lock -c '~/bin/e $(MAKE) dev_inner'; then rm -f ~/.home.lock; fi
 
@@ -19,9 +19,8 @@ prune:
 	earthly prune --all
 	$(MAKE) clean
 
-rebuild:
-	$(MAKE) prune
-	earthly --push +images
+updates:
+	earthly --push +updates
 
 shell:
 	docker run --rm -ti --entrypoint bash defn/dev

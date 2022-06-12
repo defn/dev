@@ -6,11 +6,21 @@ images:
     BUILD +amd64
     BUILD +arm64
 
+updates:
+    BUILD +amd64-update
+    BUILD +arm64-update
+
 amd64:
     BUILD --platform=linux/amd64 +tower --arch=amd64
 
 arm64:
     BUILD --platform=linux/arm64 +tower --arch=arm64
+
+amd64-update:
+    BUILD --platform=linux/amd64 +tower-update --arch=amd64
+
+arm64-update:
+    BUILD --platform=linux/arm64 +tower-update --arch=arm64
 
 root:
     ARG arch
@@ -142,6 +152,12 @@ TOWER:
         COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=${arch}) /usr/local/bin/
     END
 
+tower-update:
+    ARG arch
+    FROM defn/dev
+    COPY --dir --chown=ubuntu:ubuntu . .
+    SAVE IMAGE --push defn/dev
+
 tower:
     ARG arch
 
@@ -208,7 +224,7 @@ hof:
     FROM +tools --arch=${arch}
     RUN --secret HOF curl -sSL -o hof https://github.com/hofstadter-io/hof/releases/download/v${HOF}/hof_${HOF}_Linux_${arch2} && chmod 755 hof
     SAVE ARTIFACT hof
-    
+
 jless:
     ARG arch
     ARG arch2
