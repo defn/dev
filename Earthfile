@@ -273,12 +273,11 @@ powerline:
     RUN --secret POWERLINE curl -sSL -o powerline https://github.com/justjanne/powerline-go/releases/download/v${POWERLINE}/powerline-go-linux-${arch} && chmod 755 powerline
     SAVE ARTIFACT powerline
 
-
 step:
     ARG arch
     FROM +tools --arch=${arch}
-    RUN --secret STEP curl -sSL -o step https://github.com/smallstep/cli/releases/download/v${STEP}/step_linux_${STEP}_${arch}.tar.gz && chmod 755 step
-    SAVE ARTIFACT step
+    RUN --secret STEP curl -sSL -https://github.com/smallstep/cli/releases/download/v${STEP}/step_linux_${STEP}_${arch}.tar.gz | tar xvfz -
+    SAVE ARTIFACT */bin/step
 
 cilium:
     ARG arch
