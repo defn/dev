@@ -1,5 +1,6 @@
 dev:
-	@if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi
+	@#if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi
+	@if [[ ! -f ~/.home.lock ]]; then -~/bin/e $(MAKE) init; touch ~/.home.lock; fi
 
 dev_inner:
 	@while true; do if ~/bin/e $(MAKE) live 2>/dev/null >/dev/null; then ~/bin/e $(MAKE) up; fi; echo "$$(date) zzz"; sleep 5 ; done
