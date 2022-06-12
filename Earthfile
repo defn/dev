@@ -162,6 +162,7 @@ TOWER:
 tower-update:
     ARG arch
     FROM defn/dev
+    RUN rm -f argocd.yaml devpod.yaml
     COPY --dir --chown=ubuntu:ubuntu . .
     SAVE IMAGE --push defn/dev
 
