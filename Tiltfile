@@ -11,7 +11,7 @@ local_resource(
 )
 
 cmd_button(
-    name="sync argocd",
+    name="sync",
     resource="argocd",
     argv=[
         "bash",
