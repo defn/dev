@@ -37,7 +37,7 @@ attach:
 
 k3d:
 	-k3d cluster delete
-	k3d cluster create
+	k3d cluster create --config k3d.yaml
 	$(MAKE) argocd
 	kubectl apply -f k/devpod/main.yaml
 	kubectl rollout status statefulset dev --watch
