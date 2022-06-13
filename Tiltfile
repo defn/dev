@@ -26,7 +26,7 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "argocd app sync argocd --local k/argocd --assumeYes; touch k/argocd/main.yaml",
+        "argocd app sync argocd --local k/argocd --assumeYes --prune; touch k/argocd/main.yaml",
     ],
     icon_name="build",
 )
@@ -54,7 +54,7 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "argocd app sync devpod --local k/devpod --assumeYes",
+        "argocd app sync devpod --local k/devpod --assumeYes --prune",
     ],
     icon_name="build",
 )
@@ -71,7 +71,7 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "argocd app sync wip --local k/wip --assumeYes",
+        "argocd app sync wip --local k/wip --assumeYes --prune",
     ],
     icon_name="build",
 )
