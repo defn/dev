@@ -71,7 +71,7 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "argocd app sync wip --local k/devpod --assumeYes",
+        "argocd app sync wip --local k/wip --assumeYes",
     ],
     icon_name="build",
 )
