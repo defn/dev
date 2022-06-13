@@ -3,7 +3,6 @@ kind: Simple
 servers: 1
 agents: 0
 image: rancher/k3s:v1.22.7-k3s1
-network: host
 volumes:
   - volume: /var/run/docker.sock:/var/run/docker.sock
     nodeFilters:
