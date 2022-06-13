@@ -37,9 +37,12 @@ attach:
 
 k3d:
 	-k3d cluster delete
-	k3d cluster create --config k3d.yaml
-	$(MAKE) argocd
+	k3d cluster create --config k3d.yaml --registry-create dev-registry:5555
+	docker pull defn/dev
+	docker tag defn/dev:latest localhost:5555/defn/dev:latest
+	docker push localhost:5555/defn/dev:latest
 	kubectl apply -f k/devpod/main.yaml
+	$(MAKE) argocd
 	kubectl rollout status statefulset dev --watch
 
 kubeconfig:
@@ -53,11 +56,11 @@ kubeconfig:
 	kubectl config set-credentials argocd --token="$$(cat /run/secrets/kubernetes.io/serviceaccount/token)"
 	kubectl config set-context argocd --cluster=pod --user=argocd --namespace argocd
 
-argocd: argocd.yaml
+argocd: k/argocd/main.yaml
 	-kubectl create namespace argocd
 	kubectl apply -n argocd -f k/argocd/main.yaml
 
-argocd.yaml:
+k/argocd/main.yaml:
 	curl -sSL -o $@ https://raw.githubusercontent.com/argoproj/argo-cd/v2.4.0/manifests/install.yaml
 
 up:
