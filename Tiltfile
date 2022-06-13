@@ -58,3 +58,20 @@ cmd_button(
     ],
     icon_name="build",
 )
+
+local_resource(
+    "wip",
+    cmd='echo; argocd app sync wip --local k/wip --preview-changes --dry-run --assumeYes 2>/dev/null | awk "/Previewing/ {flag=1;next} /^TIMESTAMP/ {flag=0} flag"; echo',
+    deps=["k/wip"],
+)
+
+cmd_button(
+    name="sync",
+    resource="wip",
+    argv=[
+        "bash",
+        "-c",
+        "argocd app sync wip --local k/devpod --assumeYes",
+    ],
+    icon_name="build",
+)
