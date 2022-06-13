@@ -5,7 +5,8 @@ dev_inner:
 	@while true; do if ~/bin/e $(MAKE) live 2>/dev/null >/dev/null; then ~/bin/e $(MAKE) up; fi; echo "$$(date) zzz"; sleep 5 ; done
 
 init:
-	-git clone git@github.com:jojomomojo/password-store work/password-store
+	ssh -o StrictHostKeyChecking=no super true	
+	-git clone super:.password-store work/password-store
 	cd .password-store && git crypt unlock
 	-git clone git@github.com:defn/dev work/dev
 	$(MAKE) kubeconfig
