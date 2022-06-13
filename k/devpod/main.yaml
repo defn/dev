@@ -8,7 +8,6 @@ spec:
       app: dev
   serviceName: dev
   replicas: 1
-  minReadySeconds: 10
   template:
     metadata:
       labels:
