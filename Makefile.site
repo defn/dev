@@ -28,6 +28,8 @@ prune:
 
 updates:
 	earthly --push +updates
+	docker tag defn/dev:latest localhost:5555/defn/dev:latest
+	docker push localhost:5555/defn/dev:latest
 
 shell:
 	docker run --rm -ti defn/dev bash -l

@@ -165,7 +165,6 @@ tower-update:
     RUN rm -f argocd.yaml devpod.yaml
     COPY --dir --chown=ubuntu:ubuntu . .
     SAVE IMAGE --push defn/dev
-    SAVE IMAGE --push localhost:5555/defn/dev
 
 tower:
     ARG arch
@@ -192,7 +191,6 @@ tower:
     COPY --dir --chown=ubuntu:ubuntu . .
 
     SAVE IMAGE --push defn/dev
-    SAVE IMAGE --push localhost:5555/defn/dev
 
 tools:
     FROM ubuntu:20.04
