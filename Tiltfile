@@ -21,7 +21,7 @@ local_resource(
 )
 
 cmd_button(
-    name="sync",
+    name="sync argocd",
     resource="argocd",
     argv=[
         "bash",
@@ -49,7 +49,7 @@ local_resource(
 )
 
 cmd_button(
-    name="sync",
+    name="sync devpod",
     resource="devpod",
     argv=[
         "bash",
@@ -66,7 +66,7 @@ local_resource(
 )
 
 cmd_button(
-    name="sync",
+    name="sync wip",
     resource="wip",
     argv=[
         "bash",
