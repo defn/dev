@@ -46,7 +46,7 @@ root:
         apt-transport-https software-properties-common \
         openssh-client openssh-server tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip xz-utils rsync \
         sudo git vim less fzf jo gron jq \
-        build-essential make tini python3-pip \
+        build-essential make tini python3-pip entr \
         gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 \
         xdg-utils figlet lolcat socat netcat-openbsd groff \
         screen htop
@@ -123,6 +123,8 @@ TOWER:
     COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+skaffold/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+awsvault/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch}) ./
 
     COPY --chown=ubuntu:ubuntu --dir (+python/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+pipx/* --arch=${arch}) ./
@@ -149,16 +151,10 @@ TOWER:
         COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
     END
 
-    COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch}) ./
-
     # amd64
     IF [ "${arch}" = "amd64" ]
         COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=${arch}) /usr/local/bin/
     END
-
-    # TODO move to root 
-    RUN sudo apt update && sudo apt install -y entr
 
     ENTRYPOINT ["/usr/bin/tini", "--"]
 
