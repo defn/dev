@@ -281,7 +281,7 @@ step:
     ARG arch
     FROM +tools --arch=${arch}
     RUN echo 1
-    RUN --secret STEP curl -sSL -https://github.com/smallstep/cli/releases/download/v${STEP}/step_linux_${STEP}_${arch}.tar.gz | tar xvfz -
+    RUN --secret STEP curl -sSL https://github.com/smallstep/cli/releases/download/v${STEP}/step_linux_${STEP}_${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT */bin/step
 
 cilium:
