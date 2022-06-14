@@ -157,13 +157,16 @@ TOWER:
         COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=${arch}) /usr/local/bin/
     END
 
+    # TODO move to root 
+    RUN sudo apt update && sudo apt install -y entr
+
     ENTRYPOINT ["/usr/bin/tini", "--"]
 
 tower-update:
     ARG arch
     FROM defn/dev
-    RUN rm -f argocd.yaml devpod.yaml
     COPY --dir --chown=ubuntu:ubuntu . .
+    RUN git clean -ffd
     SAVE IMAGE --push defn/dev
 
 tower:
