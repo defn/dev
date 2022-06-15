@@ -5,6 +5,7 @@ dev_inner:
 	@while true; do if ~/bin/e $(MAKE) live 2>/dev/null >/dev/null; then ~/bin/e $(MAKE) up; fi; echo "$$(date) zzz"; sleep 5 ; done
 
 init:
+	sudo chown ubuntu:ubuntu /var/run/docker.sock work
 	$(MAKE) kubeconfig
 	-git clone super:.password-store work/password-store
 	cd .password-store && git crypt unlock
