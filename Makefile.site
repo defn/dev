@@ -89,6 +89,9 @@ down:
 live:
 	@env SSH_AUTH_SOCK="$(shell ls -td /tmp/vscode-ssh-auth-* 2>/dev/null | head -1)" ssh-add -L 2>/dev/null >/dev/null
 
+monitor-loop:
+	while true; do $(MAKE) monitor; sleep 30; done
+
 monitor:
 	@rm -f ~/.dead; \
 		if ! $(MAKE) live 2>/dev/null >/dev/null; then \

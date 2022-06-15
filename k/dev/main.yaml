@@ -19,7 +19,7 @@ spec:
           image: k3d-registry:5555/defn/dev:latest
           imagePullPolicy: Always
           command: ["/usr/bin/tini", "--"]
-          args: ["tail", "-f", "/dev/null"]
+          args: ["make", "monitor-loop"]
           volumeMounts:
             - name: docker-sock
               mountPath: /var/run/docker.sock
