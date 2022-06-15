@@ -43,18 +43,18 @@ cmd_button(
 )
 
 local_resource(
-    "devpod",
-    cmd='echo; argocd app sync devpod --local k/devpod --preview-changes --dry-run --assumeYes 2>/dev/null | awk "/Previewing/ {flag=1;next} /^TIMESTAMP/ {flag=0} flag"; echo',
-    deps=["k/devpod"],
+    "dev",
+    cmd='echo; argocd app sync dev --local k/dev --preview-changes --dry-run --assumeYes 2>/dev/null | awk "/Previewing/ {flag=1;next} /^TIMESTAMP/ {flag=0} flag"; echo',
+    deps=["k/dev"],
 )
 
 cmd_button(
-    name="sync devpod",
-    resource="devpod",
+    name="sync dev",
+    resource="dev",
     argv=[
         "bash",
         "-c",
-        "argocd app sync devpod --local k/devpod --assumeYes --prune",
+        "argocd app sync dev --local k/dev --assumeYes --prune",
     ],
     icon_name="build",
 )
