@@ -55,3 +55,4 @@ node_modules
 .k3d
 .sudo_as_admin_successful
 .gnupg
+.skaffold
