@@ -59,7 +59,7 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "argocd app sync dev --local k/dev --assumeYes --prune",
+        "argocd app sync dev --local k/dev --assumeYes --prune; touch k/dev/main.yaml",
     ],
     icon_name="build",
 )
@@ -76,7 +76,7 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "argocd app sync wip --local k/wip --assumeYes --prune",
+        "argocd app sync wip --local k/wip --assumeYes --prune; touch k/wip/main.yaml",
     ],
     icon_name="build",
 )
