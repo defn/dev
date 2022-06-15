@@ -6,11 +6,10 @@ dev_inner:
 
 init:
 	sudo chown ubuntu:ubuntu /var/run/docker.sock work
-	$(MAKE) kubeconfig
-	-git clone super:.password-store work/password-store
 	cd .password-store && git crypt unlock
-	-git clone git@github.com:defn/dev work/dev
 	pass hello
+	-git clone git@github.com:defn/dev work/dev
+	$(MAKE) kubeconfig
 	argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')"
 	argocd app create argocd --repo https://github.com/defn/dev --path k/argocd --dest-namespace argocd --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	argocd app create dev --repo https://github.com/defn/dev --path k/dev --dest-namespace default --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
