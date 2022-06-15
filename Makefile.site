@@ -81,10 +81,10 @@ up:
 
 down:
 	-bash -c 'rm -vf "$${SSH_AUTH_SOCK}"'
-	-echo yes | gh auth logout --hostname github.com
 	-cd ~/.password-store && sudo -u ubuntu git-crypt lock
-	-flyctl scale --app=defn count 0
+	-echo yes | gh auth logout --hostname github.com
 	-pkill [t]ilt
+	-docker pause k3d-k3s-default-server-0
 
 live:
 	@env SSH_AUTH_SOCK="$(shell ls -td /tmp/vscode-ssh-auth-* 2>/dev/null | head -1)" ssh-add -L 2>/dev/null >/dev/null
