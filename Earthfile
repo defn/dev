@@ -160,7 +160,7 @@ TOWER:
 
 tower-update:
     ARG arch
-    FROM defn/dev
+    FROM defn/dev:tower
     COPY --dir --chown=ubuntu:ubuntu . .
     RUN git clean -ffd
     SAVE IMAGE --push defn/dev
@@ -189,7 +189,7 @@ tower:
 
     COPY --dir --chown=ubuntu:ubuntu . .
 
-    SAVE IMAGE --push defn/dev
+    SAVE IMAGE --push defn/dev:tower
 
 tools:
     FROM ubuntu:20.04
