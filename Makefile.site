@@ -5,11 +5,10 @@ dev_inner:
 	@while true; do if ~/bin/e $(MAKE) live 2>/dev/null >/dev/null; then ~/bin/e $(MAKE) up; fi; echo "$$(date) zzz"; sleep 5 ; done
 
 init:
-	ssh -o StrictHostKeyChecking=no super true	
+	$(MAKE) kubeconfig
 	-git clone super:.password-store work/password-store
 	cd .password-store && git crypt unlock
 	-git clone git@github.com:defn/dev work/dev
-	$(MAKE) kubeconfig
 	pass hello
 	argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')"
 	argocd app create argocd --repo https://github.com/defn/dev --path k/argocd --dest-namespace argocd --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
