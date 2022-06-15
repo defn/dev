@@ -20,6 +20,11 @@ local_resource(
     serve_cmd="socat TCP-LISTEN:5555,fork TCP:k3d-registry:5555",
 )
 
+local_resource(
+    name="docker tunnel",
+    serve_cmd="bash -c 'while true; do rm -f /home/ubuntu/.local/docker.sock; ssh -L /home/ubuntu/.local/docker.sock:/var/run/docker.sock super tail -f /dev/null; sleep 1; done'",
+)
+
 cmd_button(
     name="sync argocd",
     resource="argocd",
