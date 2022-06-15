@@ -95,7 +95,7 @@ monitor:
 			touch ~/.dead; \
 			for a in $$(seq 1 60); do \
 				if $(MAKE) live 2>/dev/null >/dev/null; then rm -f ~/.dead; break; fi; \
-				echo "MAYBE DEAD $$a $(date)"; sleep 5; done; \
+				echo "MAYBE DEAD $$a $$(date)"; sleep 5; done; \
 		fi; \
 		if test -f ~/.dead; then \
 			~/bin/e $(MAKE) down; \
