@@ -13,7 +13,7 @@ init:
 	pass hello
 	argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')"
 	argocd app create argocd --repo https://github.com/defn/dev --path k/argocd --dest-namespace argocd --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
-	argocd app create devpod --repo https://github.com/defn/dev --path k/devpod --dest-namespace default --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
+	argocd app create dev --repo https://github.com/defn/dev --path k/dev --dest-namespace default --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	argocd app create wip --repo https://github.com/defn/dev --path k/wip --dest-namespace default --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	tilt up --context pod
 
@@ -47,7 +47,7 @@ k3d:
 	docker pull defn/dev
 	docker tag defn/dev:latest localhost:5555/defn/dev:latest
 	docker push localhost:5555/defn/dev:latest
-	kubectl apply -f k/devpod/main.yaml
+	kubectl apply -f k/dev/main.yaml
 	$(MAKE) argocd
 	kubectl rollout status statefulset dev --watch
 
