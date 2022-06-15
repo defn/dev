@@ -16,7 +16,7 @@ local_resource(
 
 local_resource(
     "argocd",
-    cmd='argocd app diff argocd --local k/argocd || true',
+    cmd='if argocd app diff argocd --local k/argocd; then echo No difference; fi',
     deps=["k/argocd"],
 )
 
@@ -44,7 +44,7 @@ cmd_button(
 
 local_resource(
     "dev",
-    cmd='argocd app diff dev --local k/dev || true',
+    cmd='if argocd app diff dev --local k/dev; then echo No difference; fi',
     deps=["k/dev"],
 )
 
@@ -61,7 +61,7 @@ cmd_button(
 
 local_resource(
     "wip",
-    cmd='argocd app diff wip --local k/wip || true',
+    cmd='if argocd app diff wip --local k/wip; then echo No difference; fi',
     deps=["k/wip"],
 )
 
