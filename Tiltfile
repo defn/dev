@@ -37,7 +37,7 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "echo password: $(kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d'); xdg-open http://localhost:8881"
+        "kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d' | ssh super pbcopy; xdg-open http://localhost:8881"
     ],
     icon_name="web",
 )
