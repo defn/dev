@@ -5,9 +5,8 @@ load("ext://uibutton", "cmd_button", "location")
 allow_k8s_contexts("pod")
 
 local_resource(
-    "argocd",
-    cmd='argocd app diff argocd --local k/argocd || true',
-    deps=["k/argocd"],
+    name="registry tunnel",
+    serve_cmd="socat TCP-LISTEN:5555,fork TCP:k3d-registry:5555",
 )
 
 local_resource(
@@ -16,8 +15,9 @@ local_resource(
 )
 
 local_resource(
-    name="registry tunnel",
-    serve_cmd="socat TCP-LISTEN:5555,fork TCP:k3d-registry:5555",
+    "argocd",
+    cmd='argocd app diff argocd --local k/argocd || true',
+    deps=["k/argocd"],
 )
 
 cmd_button(
