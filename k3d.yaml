@@ -7,7 +7,7 @@ volumes:
   - volume: /var/run/docker.sock:/var/run/docker.sock
     nodeFilters:
       - server:0
-  - volume: work:/home/ubuntu/work
+  - volume: work:/mnt/work
     nodeFilters:
       - server:0
 options:

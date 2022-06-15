@@ -21,16 +21,17 @@ spec:
           command: ["/usr/bin/tini", "--"]
           args: ["tail", "-f", "/dev/null"]
           volumeMounts:
-            - name: dev
+            - name: docker-sock
+              mountPath: /var/run/docker.sock
+            - name: work
               mountPath: /home/ubuntu/work
-  volumeClaimTemplates:
-    - metadata:
-        name: dev
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        resources:
-          requests:
-            storage: 10Gi
+      volumes:
+        - name: docker-sock
+          hostPath:
+            path: /var/run/docker.sock
+        - name: work
+          hostPath:
+            path: /mnt/work
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
