@@ -181,7 +181,7 @@ tower:
     COPY --chown=ubuntu:ubuntu .vimrc .
     RUN echo yes | vim +PlugInstall +qall
 
-    RUN mkdir -p ~/.docker && echo '{"credsStore": "pass"}' > ~/.docker/config.json
+    #RUN mkdir -p ~/.docker && echo '{"credsStore": "pass"}' > ~/.docker/config.json
 
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
