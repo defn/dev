@@ -43,7 +43,7 @@ attach:
 k3d:
 	-k3d cluster delete
 	-k3d registry create --port 0.0.0.0:5555
-	k3d cluster create --config k3d.yaml --registry-use k3d-registry:5555
+	k3d cluster create --config k3d.yaml --env 'bar=baz@server:0'
 	docker pull defn/dev
 	docker tag defn/dev:latest localhost:5555/defn/dev:latest
 	docker push localhost:5555/defn/dev:latest

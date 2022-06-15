@@ -7,7 +7,7 @@ volumes:
   - volume: /var/run/docker.sock:/var/run/docker.sock
     nodeFilters:
       - server:0
-  - volume: k3d-work:/home/ubuntu/work
+  - volume: work:/home/ubuntu/work
     nodeFilters:
       - server:0
 options:
