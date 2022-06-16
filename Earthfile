@@ -162,7 +162,6 @@ tower-update:
     ARG arch
     FROM defn/dev:tower
     COPY --dir --chown=ubuntu:ubuntu . .
-    RUN ~/bin/e asdf install
     RUN git clean -ffd
     SAVE IMAGE --push defn/dev
 
