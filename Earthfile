@@ -156,6 +156,8 @@ TOWER:
         COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=${arch}) /usr/local/bin/
     END
 
+    COPY --chown=ubuntu:ubuntu (+kuma/* --arch=${arch}) /usr/local/bin/
+
     ENTRYPOINT ["/usr/bin/tini", "--"]
 
 tower-update:
@@ -186,8 +188,6 @@ tower:
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
     DO +TOWER --arch=${arch}
-
-    COPY --dir --chown=ubuntu:ubuntu . .
 
     SAVE IMAGE --push localhost:5555/defn/dev:tower
 
@@ -357,6 +357,12 @@ cue:
     FROM +tools --arch=${arch}
     RUN --secret CUE curl -sSL https://github.com/cue-lang/cue/releases/download/v${CUE}/cue_v${CUE}_linux_${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT cue
+
+kuma:
+    ARG arch
+    FROM +tools --arch=${arch}
+    RUN --secret KUMA curl -sSL https://download.konghq.com/mesh-alpine/kuma-${KUMA}-ubuntu-${arch}.tar.gz | tar xvfz -
+    SAVE ARTIFACT */bin/*
 
 k3d:
     ARG arch
