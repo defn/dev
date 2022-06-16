@@ -6,12 +6,39 @@ allow_k8s_contexts("pod")
 
 local_resource(
     name="registry tunnel",
-    serve_cmd="exec socat TCP-LISTEN:5555,fork TCP:k3d-registry:5555",
+    serve_cmd="exec socat TCP-LISTEN:5555,fork TCP:k3d-registry:5000",
 )
 
 local_resource(
     name="argocd port-forward",
-    serve_cmd="exec kubectl -n argocd port-forward svc/argocd-server -n argocd 8881:443",
+    serve_cmd="exec kubectl -n argocd port-forward svc/argocd-server 8881:443",
+)
+
+cmd_button(
+    name="ui argocd",
+    resource="argocd port-foward",
+    argv=[
+        "bash",
+        "-c",
+        "kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d' | ssh super pbcopy; xdg-open http://localhost:8881"
+    ],
+    icon_name="web",
+)
+
+local_resource(
+    name="hubble port-forward",
+    serve_cmd="exec kubectl port-forward -n kube-system svc/hubble-ui 12000:80",
+)
+
+cmd_button(
+    name="ui hubble",
+    resource="hubble port-forward",
+    argv=[
+        "bash",
+        "-c",
+        "xdg-open http://localhost:12000"
+    ],
+    icon_name="web",
 )
 
 local_resource(
@@ -29,17 +56,6 @@ cmd_button(
         "argocd app sync argocd --local k/argocd --assumeYes --prune; touch k/argocd/main.yaml",
     ],
     icon_name="build",
-)
-
-cmd_button(
-    name="ui",
-    resource="argocd",
-    argv=[
-        "bash",
-        "-c",
-        "kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d' | ssh super pbcopy; xdg-open http://localhost:8881"
-    ],
-    icon_name="web",
 )
 
 local_resource(
