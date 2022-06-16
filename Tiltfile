@@ -31,6 +31,23 @@ cmd_button(
 )
 
 local_resource(
+    name="kuma port-forward",
+    serve_cmd="exec kubectl port-forward svc/kuma-control-plane -n kuma-system 5681:5681",
+ 
+)
+
+cmd_button(
+    name="ui kuma",
+    resource="kuma port-forward",
+    argv=[
+        "bash",
+        "-c",
+        "xdg-open http://localhost:5681/gui"
+    ],
+    icon_name="web",
+)
+
+local_resource(
     name="argocd port-forward",
     serve_cmd="exec kubectl -n argocd port-forward svc/argocd-server 8881:443",
 )

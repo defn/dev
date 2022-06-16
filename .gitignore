@@ -56,3 +56,4 @@ node_modules
 .sudo_as_admin_successful
 .gnupg
 .skaffold
+.kumactl
