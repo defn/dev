@@ -10,22 +10,6 @@ local_resource(
 )
 
 local_resource(
-    name="argocd port-forward",
-    serve_cmd="exec kubectl -n argocd port-forward svc/argocd-server 8881:443",
-)
-
-cmd_button(
-    name="ui argocd",
-    resource="argocd port-forward",
-    argv=[
-        "bash",
-        "-c",
-        "kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d' | ssh super pbcopy; xdg-open http://localhost:8881"
-    ],
-    icon_name="web",
-)
-
-local_resource(
     name="hubble port-forward",
     serve_cmd="exec kubectl port-forward -n kube-system svc/hubble-ui 12000:80",
 )
@@ -37,6 +21,22 @@ cmd_button(
         "bash",
         "-c",
         "xdg-open http://localhost:12000"
+    ],
+    icon_name="web",
+)
+
+local_resource(
+    name="argocd port-forward",
+    serve_cmd="exec kubectl -n argocd port-forward svc/argocd-server 8881:443",
+)
+
+cmd_button(
+    name="ui argocd",
+    resource="argocd port-forward",
+    argv=[
+        "bash",
+        "-c",
+        "kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d' | ssh super pbcopy; xdg-open http://localhost:8881"
     ],
     icon_name="web",
 )
