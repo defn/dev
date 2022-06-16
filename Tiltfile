@@ -5,8 +5,13 @@ load("ext://uibutton", "cmd_button", "location")
 allow_k8s_contexts("pod")
 
 local_resource(
-    name="registry tunnel",
+    name="registry pod",
     serve_cmd="exec socat TCP-LISTEN:5555,fork,reuseaddr TCP:k3d-registry:5000",
+)
+
+local_resource(
+    name="registry buildkitd",
+    serve_cmd="exec bash -c 'exec docker exec earthly-buildkitd socat TCP-LISTEN:5555,fork,reuseaddr TCP:$(host host.k3d.internal | cut -d\\  -f4):5555'",
 )
 
 local_resource(
