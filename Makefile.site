@@ -28,10 +28,11 @@ prune:
 	earthly prune --all
 	$(MAKE) clean
 
+images:
+	earthly --push +images
+
 updates:
 	earthly --push +updates
-	docker tag defn/dev:latest localhost:5555/defn/dev:latest
-	docker push localhost:5555/defn/dev:latest
 
 amd64-update:
 	earthly --push +amd64-update
@@ -75,8 +76,6 @@ k3d:
 	docker exec k3d-k3s-default-server-0 mount bpffs /sys/fs/bpf -t bpf
 	while true; do if docker exec k3d-k3s-default-server-0 mount --make-shared /sys/fs/bpf; then break; fi; sleep 1; done
 	while true; do if docker exec k3d-k3s-default-server-0 mount --make-shared /run/cilium/cgroupv2; then break; fi; sleep 1; done
-	docker pull defn/dev
-	docker tag defn/dev:latest localhost:5555/defn/dev:latest
 	docker push localhost:5555/defn/dev:latest
 	kubectl -n kube-system rollout status deployment cilium-operator --watch
 	kubectl -n kube-system rollout status deployment hubble-relay --watch
