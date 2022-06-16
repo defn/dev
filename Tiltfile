@@ -6,7 +6,7 @@ allow_k8s_contexts("pod")
 
 local_resource(
     name="registry tunnel",
-    serve_cmd="exec socat TCP-LISTEN:5555,fork TCP:k3d-registry:5000",
+    serve_cmd="exec socat TCP-LISTEN:5555,fork,reuseaddr TCP:k3d-registry:5000",
 )
 
 local_resource(
@@ -16,7 +16,7 @@ local_resource(
 
 cmd_button(
     name="ui argocd",
-    resource="argocd port-foward",
+    resource="argocd port-forward",
     argv=[
         "bash",
         "-c",
