@@ -112,21 +112,24 @@ up:
 
 down:
 	-bash -c 'rm -vf "$${SSH_AUTH_SOCK}"'
-	-echo yes | gh auth logout --hostname github.com
 	-cd ~/.password-store && sudo -u ubuntu git-crypt lock
-	-flyctl scale --app=defn count 0
+	-echo yes | gh auth logout --hostname github.com
 	-pkill [t]ilt
+	-docker pause k3d-k3s-default-server-0
 
 live:
 	@env SSH_AUTH_SOCK="$(shell ls -td /tmp/vscode-ssh-auth-* 2>/dev/null | head -1)" ssh-add -L 2>/dev/null >/dev/null
 
+monitor-loop:
+	while true; do $(MAKE) monitor; sleep 30; done
+
 monitor:
-	@set -x; rm -f ~/.dead; \
+	@rm -f ~/.dead; \
 		if ! $(MAKE) live 2>/dev/null >/dev/null; then \
 			touch ~/.dead; \
-			for a in $$(seq 1 50); do \
+			for a in $$(seq 1 60); do \
 				if $(MAKE) live 2>/dev/null >/dev/null; then rm -f ~/.dead; break; fi; \
-				echo MAYBE DEAD $$a; sleep 10; done; \
+				echo "MAYBE DEAD $$a $$(date)"; sleep 5; done; \
 		fi; \
 		if test -f ~/.dead; then \
 			~/bin/e $(MAKE) down; \

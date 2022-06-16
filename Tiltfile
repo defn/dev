@@ -6,12 +6,12 @@ allow_k8s_contexts("pod")
 
 local_resource(
     name="registry tunnel",
-    serve_cmd="socat TCP-LISTEN:5555,fork TCP:k3d-registry:5555",
+    serve_cmd="exec socat TCP-LISTEN:5555,fork TCP:k3d-registry:5555",
 )
 
 local_resource(
     name="argocd port-forward",
-    serve_cmd="kubectl -n argocd port-forward svc/argocd-server -n argocd 8881:443",
+    serve_cmd="exec kubectl -n argocd port-forward svc/argocd-server -n argocd 8881:443",
 )
 
 local_resource(
