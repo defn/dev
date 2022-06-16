@@ -16,7 +16,7 @@ local_resource(
 
 cmd_button(
     name="ui argocd",
-    resource="argocd port-foward",
+    resource="argocd port-forward",
     argv=[
         "bash",
         "-c",
