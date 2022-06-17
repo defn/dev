@@ -25,13 +25,13 @@ registries:
     mirrors:
       "k3d-registry:5555":
         endpoint:
-          - http://k3d-registry:5000
+          - http://host.k3d.internal:5555
       "k3d-registry:5000":
         endpoint:
-          - http://k3d-registry:5000
+          - http://host.k3d.internal:5555
       "localhost:5555":
         endpoint:
-          - http://k3d-registry:5000
+          - http://host.k3d.internal:5555
       "localhost:5000":
         endpoint:
-          - http://k3d-registry:5000
+          - http://host.k3d.internal:5555
