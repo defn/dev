@@ -66,13 +66,11 @@ k3d:
 	-k3d cluster delete
 	k3d cluster create --config k3d.yaml \
 		--registry-use registry \
-		-p "80:30080@server :0" \
-		-p "443:30443@server :0" \
-		--no-lb \
-		--k3s-arg "--disable=servicelb" \
-		--k3s-arg "--disable=traefik" \
-		--k3s-arg "--disable-network-policy" \
-		--k3s-arg "--flannel-backend=none"
+		-p "80:30080@loadbalancer" \
+		-p "443:30443@loadbalancer" \
+		--k3s-arg "--disable=traefik@all" \
+		--k3s-arg "--disable-network-policy@all" \
+		--k3s-arg "--flannel-backend=none@all"
 	curl -sSL -o bash https://github.com/robxu9/bash-static/releases/download/5.1.016-1.2.3/bash-linux-x86_64
 	chmod 755 bash
 	docker cp bash k3d-k3s-default-server-0:/bin/bash
