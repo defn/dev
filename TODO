@@ -1,0 +1,11 @@
+"features": {
+    "buildkit": true
+  },
+  "registry-mirrors": ["http://1.1.1.1:5555"]
+
+  buildkit_additional_config: |
+    [registry."docker.io"]
+      mirrors = ["1.1.1.1:5555"]
+    [registry."1.1.1.1:5555"]
+      http = true
+      insecure = true
