@@ -141,7 +141,7 @@ monitor:
 			~/bin/e $(MAKE) down; \
 		fi; \
 		ls -l ~/.alive || true; \
-		if test -f ~/.alive && test "$$(find ~/.alive -mmin +30)"; then \
+		if test -f ~/.alive && test "$$(find ~/.alive -mmin +120)"; then \
 			~/bin/e $(MAKE) down; \
 		fi
 
