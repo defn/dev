@@ -5,6 +5,11 @@ load("ext://uibutton", "cmd_button", "location")
 allow_k8s_contexts("pod")
 
 local_resource(
+    name="tailscale cert",
+    serve_cmd="d=$(docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale cert 2>&1 | grep For.domain | cut -d'\"' -f2); docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale cert $d",
+)
+
+local_resource(
     name="registry pod",
     serve_cmd="exec socat TCP-LISTEN:5555,fork,reuseaddr TCP:k3d-registry:5000",
 )
