@@ -45,9 +45,14 @@ shell:
 attach:
 	code --folder-uri vscode-remote://k8s-container+context=k3d-k3s-default+namespace=default+podname=dev-0+name=dev+/home/ubuntu
 
+registry:
+	-k3d registry create --port 0.0.0.0:5555
+	docker pull defn/dev
+	docker tag defn/dev localhost:5555/defn/dev
+	docker push localhost:5555/defn/dev
+
 k3d:
 	-k3d cluster delete
-	-k3d registry create --port 0.0.0.0:5555
 	k3d cluster create --config k3d.yaml \
 		--no-lb \
 		--k3s-arg "--disable=servicelb" \
