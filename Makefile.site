@@ -64,7 +64,10 @@ restart:
 
 k3d:
 	-k3d cluster delete
-	k3d cluster create --config k3d.yaml --registry-use registry \
+	k3d cluster create --config k3d.yaml \
+		--registry-use registry \
+		-p "80:30080@server :0" \
+		-p "443:30443@server :0" \
 		--no-lb \
 		--k3s-arg "--disable=servicelb" \
 		--k3s-arg "--disable=traefik" \
