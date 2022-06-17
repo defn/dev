@@ -53,7 +53,7 @@ registry:
 
 k3d:
 	-k3d cluster delete
-	k3d cluster create --config k3d.yaml \
+	k3d cluster create --config k3d.yaml --registry-use registry \
 		--no-lb \
 		--k3s-arg "--disable=servicelb" \
 		--k3s-arg "--disable=traefik" \
