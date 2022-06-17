@@ -56,6 +56,7 @@ registry:
 
 restart:
 	-k3d cluster delete
+	-docker rm -f ignore
 	-osascript -e 'quit app "Docker"'
 	open -a Docker
 	while ! docker ps; do date; sleep 5; done
