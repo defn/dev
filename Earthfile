@@ -2,6 +2,8 @@ VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-ar
 
 IMPORT github.com/defn/cloud/lib:master AS lib
 
+ARG repo=localhost:5555/
+
 images:
     BUILD +amd64
     BUILD +arm64
@@ -162,10 +164,10 @@ TOWER:
 
 tower-update:
     ARG arch
-    FROM localhost:5555/defn/dev:tower
+    FROM ${repo}defn/dev:tower
     COPY --dir --chown=ubuntu:ubuntu . .
     RUN git clean -ffd
-    SAVE IMAGE --push localhost:5555/defn/dev
+    SAVE IMAGE --push ${repo}defn/dev
 
 tower:
     ARG arch
@@ -189,7 +191,7 @@ tower:
 
     DO +TOWER --arch=${arch}
 
-    SAVE IMAGE --push localhost:5555/defn/dev:tower
+    SAVE IMAGE --push ${repo}defn/dev:tower
 
 tools:
     FROM ubuntu:20.04
