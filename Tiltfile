@@ -116,5 +116,5 @@ cmd_button(
 
 local_resource(
     name="tailscale cert",
-    serve_cmd="d=$(docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale cert 2>&1 | grep For.domain | cut -d'\"' -f2); docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale cert $d",
+    serve_cmd="d=$(docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale cert 2>&1 | grep For.domain | cut -d'\"' -f2); docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale cert $d; echo http://$d",
 )
