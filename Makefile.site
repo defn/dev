@@ -55,11 +55,11 @@ registry:
 	docker push localhost:5555/defn/dev
 
 restart:
-	-k3d cluster stop
-	k3d cluster start
-	docker exec k3d-k3s-default-server-0 mount bpffs /sys/fs/bpf -t bpf
-	while true; do if docker exec k3d-k3s-default-server-0 mount --make-shared /sys/fs/bpf; then break; fi; sleep 1; done
-	while true; do if docker exec k3d-k3s-default-server-0 mount --make-shared /run/cilium/cgroupv2; then break; fi; sleep 1; done
+	-k3d cluster delete
+	-osascript -e 'quit app "Docker"'
+	open -a Docker
+	while ! docker ps; do date; sleep 5; done
+	$(MAKE) k3d
 
 k3d:
 	-k3d cluster delete
