@@ -47,6 +47,9 @@ attach:
 
 registry:
 	-k3d registry create --port 0.0.0.0:5555
+	docker pull defn/dev:tower
+	docker tag defn/dev:tower localhost:5555/defn/dev:tower
+	docker push localhost:5555/defn/dev:tower
 	docker pull defn/dev
 	docker tag defn/dev localhost:5555/defn/dev
 	docker push localhost:5555/defn/dev
