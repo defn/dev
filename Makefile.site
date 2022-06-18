@@ -34,6 +34,12 @@ images:
 updates:
 	earthly --push +updates
 
+rebases:
+	earthly --push +images --repo=
+
+releases:
+	earthly --push +updates --repo=
+
 shell:
 	docker run --rm -ti defn/dev bash -l
 
