@@ -34,11 +34,6 @@ images:
 updates:
 	earthly --push +updates
 
-amd64-update:
-	earthly --push +amd64-update
-	docker tag defn/dev:latest localhost:5555/defn/dev:latest
-	docker push localhost:5555/defn/dev:latest
-
 shell:
 	docker run --rm -ti defn/dev bash -l
 
@@ -120,11 +115,6 @@ argocd: k/argocd/main.yaml
 k/argocd/main.yaml:
 	curl -sSL -o $@ https://raw.githubusercontent.com/argoproj/argo-cd/v2.4.0/manifests/install.yaml
 
-up:
-	chmod 700 ~/.gnupg ~/.ssh
-	sudo chown ubuntu /var/run/docker.sock || true
-	if ! docker info; then (cd fly && $(MAKE) login); exec ~/bin/e tilt up; else exec tail -f /dev/null; fi
-
 down:
 	-bash -c 'rm -vf "$${SSH_AUTH_SOCK}"'
 	-cd ~/.password-store && sudo -u ubuntu git-crypt lock
@@ -153,11 +143,3 @@ monitor:
 		if test -f ~/.alive && test "$$(find ~/.alive -mmin +120)"; then \
 			~/bin/e $(MAKE) down; \
 		fi
-
-trigger:
-	while true; do ~/bin/e $(MAKE) trigger-devcontainer; sleep 5; done
-
-trigger-devcontainer:
-        socat \
-                TCP-LISTEN:2222,reuseaddr,fork,max-children=4 \
-                EXEC:"'bash -c \"(flyctl scale --app defn count 1) 1>/dev/null 2>&1; socat - TCP:defn:22\"'",nofork

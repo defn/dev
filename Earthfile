@@ -2,7 +2,7 @@ VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-ar
 
 IMPORT github.com/defn/cloud/lib:master AS lib
 
-ARG repo=localhost:5555/
+ARG repo=localhost:5000/
 
 images:
     BUILD +amd64

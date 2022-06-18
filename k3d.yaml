@@ -23,13 +23,7 @@ registries:
     name: ignore
   config: |
     mirrors:
-      "k3d-registry:5555":
-        endpoint:
-          - http://k3d-registry:5000
       "k3d-registry:5000":
-        endpoint:
-          - http://k3d-registry:5000
-      "localhost:5555":
         endpoint:
           - http://k3d-registry:5000
       "localhost:5000":

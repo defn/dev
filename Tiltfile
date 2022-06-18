@@ -6,12 +6,12 @@ allow_k8s_contexts("pod")
 
 local_resource(
     name="registry pod",
-    serve_cmd="exec socat TCP-LISTEN:5555,fork,reuseaddr TCP:k3d-registry:5000",
+    serve_cmd="exec socat TCP-LISTEN:5000,fork,reuseaddr TCP:k3d-registry:5000",
 )
 
 local_resource(
     name="registry buildkitd",
-    serve_cmd="exec bash -c 'earthly bootstrap; docker exec earthly-buildkitd apk add socat || true; docker exec earthly-buildkitd pkill socat; exec docker exec earthly-buildkitd socat TCP-LISTEN:5555,fork,reuseaddr TCP:$(host host.k3d.internal | cut -d\\  -f4):5555'",
+    serve_cmd="exec bash -c 'earthly bootstrap; docker exec earthly-buildkitd apk add socat || true; docker exec earthly-buildkitd pkill socat; exec docker exec earthly-buildkitd socat TCP-LISTEN:5000,fork,reuseaddr TCP:$(host host.k3d.internal | cut -d\\  -f4):5555'",
 )
 
 local_resource(
@@ -33,7 +33,7 @@ cmd_button(
 local_resource(
     name="kuma port-forward",
     serve_cmd="exec kubectl port-forward svc/kuma-control-plane -n kuma-system 5681:5681",
- 
+
 )
 
 cmd_button(
