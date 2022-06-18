@@ -33,7 +33,7 @@ cmd_button(
 local_resource(
     name="kuma port-forward",
     serve_cmd="exec kubectl port-forward svc/kuma-control-plane -n kuma-system 5681:5681",
-
+    deps=["k/kuma"],
 )
 
 cmd_button(
@@ -50,7 +50,7 @@ cmd_button(
 local_resource(
     name="traefik port-forward",
     serve_cmd="exec kubectl -n traefik port-forward $(kubectl -n traefik get pod -l app.kubernetes.io/instance=traefik -o name | head -n 1) 9000:9000",
-    deps=["/tmp/restart.txt"]
+    deps=["k/traefik", "/tmp/restart.txt"]
 )
 
 cmd_button(
@@ -99,7 +99,7 @@ cmd_button(
 
 local_resource(
     "traefik",
-    cmd='if argocd app diff argocd --local k/traefik; then echo No difference; fi',
+    cmd='if argocd app diff traefik --local k/traefik; then echo No difference; fi',
     deps=["k/traefik"],
 )
 
@@ -109,7 +109,7 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "argocd app sync traefik--local k/traefik --assumeYes --prune; touch k/traefik/main.yaml",
+        "argocd app sync traefik --local k/traefik --assumeYes --prune; touch k/traefik/main.yaml",
     ],
     icon_name="build",
 )
