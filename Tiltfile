@@ -48,6 +48,23 @@ cmd_button(
 )
 
 local_resource(
+    name="traefik port-forward",
+    serve_cmd="exec kubectl -n traefik port-forward $(kubectl -n traefik get pod -l app.kubernetes.io/instance=traefik -o name | head -n 1) 9000:9000",
+    deps=["/tmp/restart.txt"]
+)
+
+cmd_button(
+    name="ui traefik",
+    resource="traefik port-forward",
+    argv=[
+        "bash",
+        "-c",
+        "xdg-open http://localhost:9000/dashboard/",
+    ],
+    icon_name="web",
+)
+
+local_resource(
     name="argocd port-forward",
     serve_cmd="exec kubectl -n argocd port-forward svc/argocd-server 8881:443",
 )
