@@ -95,8 +95,6 @@ k3d:
 	while true; do if docker exec k3d-k3s-default-server-0 mount --make-shared /sys/fs/bpf; then break; fi; sleep 1; done
 	while true; do if docker exec k3d-k3s-default-server-0 mount --make-shared /run/cilium/cgroupv2; then break; fi; sleep 1; done
 	kubectl -n kube-system rollout status deployment cilium-operator --watch
-	kubectl -n kube-system rollout status deployment hubble-relay --watch
-	kubectl -n kube-system rollout status deployment hubble-ui --watch
 	kubectl -n kube-system rollout status daemonset cilium --watch
 	kubectl apply -f k/dev/main.yaml
 	$(MAKE) argocd
