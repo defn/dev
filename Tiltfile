@@ -98,6 +98,40 @@ cmd_button(
 )
 
 local_resource(
+    "traefik",
+    cmd='if argocd app diff argocd --local k/traefik; then echo No difference; fi',
+    deps=["k/traefik"],
+)
+
+cmd_button(
+    name="sync traefik",
+    resource="traefik",
+    argv=[
+        "bash",
+        "-c",
+        "argocd app sync traefik--local k/traefik --assumeYes --prune; touch k/traefik/main.yaml",
+    ],
+    icon_name="build",
+)
+
+local_resource(
+    "kuma",
+    cmd='if argocd app diff kuma --local k/kuma; then echo No difference; fi',
+    deps=["k/kuma"],
+)
+
+cmd_button(
+    name="sync kuma",
+    resource="kuma",
+    argv=[
+        "bash",
+        "-c",
+        "argocd app sync kuma --local k/kuma --assumeYes --prune; touch k/kuma/main.yaml",
+    ],
+    icon_name="build",
+)
+
+local_resource(
     "dev",
     cmd='if argocd app diff dev --local k/dev; then echo No difference; fi',
     deps=["k/dev"],
