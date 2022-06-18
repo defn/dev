@@ -54,7 +54,7 @@ registry:
 	docker tag defn/dev localhost:5555/defn/dev
 	docker push localhost:5555/defn/dev
 
-reset:
+recreate:
 	-k3d cluster delete
 	-docker rm -f ignore
 	-osascript -e 'quit app "Docker"'
