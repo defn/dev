@@ -405,10 +405,10 @@ gcloud:
     RUN curl https://sdk.cloud.google.com > install.sh
     RUN bash install.sh --disable-prompts --install-dir=/usr/local/gcloud \
         && rm -rf $(find /usr/local/gcloud -regex ".*/__pycache__") \
-        && rm -rf /usr/local/gcloud/google-cloud-sdk/.install
+        && rm -rf /usr/local/gcloud/google-cloud-sdk/.install/.backup
     RUN /usr/local/gcloud/google-cloud-sdk/bin/gcloud --quiet components install beta gke-gcloud-auth-plugin \
         && rm -rf $(find /usr/local/gcloud -regex ".*/__pycache__") \
-        && rm -rf /usr/local/gcloud/google-cloud-sdk/.install
+        && rm -rf /usr/local/gcloud/google-cloud-sdk/.install/.backup
     SAVE ARTIFACT /usr/local/gcloud
     SAVE IMAGE --cache-hint 
 
