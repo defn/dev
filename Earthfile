@@ -172,7 +172,7 @@ tower:
     COPY --chown=ubuntu:ubuntu --dir (+skaffold/* --arch=${arch} --version=${SKAFFOLD}) ./
     COPY --chown=ubuntu:ubuntu --dir (+awsvault/* --arch=${arch} --version=${AWSVAULT}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch} --version=${ARGO}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch} --version=${ARGCD}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch} --version=${ARGOCD}) ./
 
     COPY --chown=ubuntu:ubuntu --dir (+python/* --arch=${arch} --version=${PYTHON}) ./
     COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+pipx/* --arch=${arch} --version_python=${PYTHON}) ./
@@ -292,7 +292,7 @@ step:
     ARG version
     FROM +tools --arch=${arch}
     RUN echo 1
-    RUN curl -sSL https://github.com/smallstep/cli/releases/download/v${version}}/step_linux_${version}_${arch}.tar.gz | tar xvfz -
+    RUN curl -sSL https://github.com/smallstep/cli/releases/download/v${version}/step_linux_${version}_${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT */bin/step
 
 cilium:
