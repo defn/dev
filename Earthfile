@@ -163,21 +163,25 @@ tower:
     COPY --chown=ubuntu:ubuntu --dir (+shell/* --arch=${arch} --version_shellcheck=${SHELLCHECK} --version_shfmt=${SHFMT}) ./
     COPY --chown=ubuntu:ubuntu --dir (+k9s/* --arch=${arch} --version=${K9S}) ./
     COPY --chown=ubuntu:ubuntu --dir (+kustomize/* --arch=${arch} --version=${KUSTOMIZE}) ./
+    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+krew/* --arch=${arch} --version=${KREW}) ./
     COPY --chown=ubuntu:ubuntu --dir (+helm/* --arch=${arch} --version=${HELM}) ./
     COPY --chown=ubuntu:ubuntu --dir (+vault/* --arch=${arch} --version=${VAULT}) ./
     COPY --chown=ubuntu:ubuntu --dir (+consul/* --arch=${arch} --version=${CONSUL}) ./
     COPY --chown=ubuntu:ubuntu --dir (+cloudflared/* --arch=${arch} --version=${CLOUDFLARED}) ./
     COPY --chown=ubuntu:ubuntu --dir (+terraform/* --arch=${arch} --version=${TERRAFORM}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch} --version=${CDKTF} --version_nodejs=${NODEJS} --version_npm=${NPM}) ./
     COPY --chown=ubuntu:ubuntu --dir (+skaffold/* --arch=${arch} --version=${SKAFFOLD}) ./
     COPY --chown=ubuntu:ubuntu --dir (+awsvault/* --arch=${arch} --version=${AWSVAULT}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch} --version=${ARGO}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch} --version=${ARGOCD}) ./
 
+    COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch} --version=${CDKTF} --version_nodejs=${NODEJS}) ./
+
     COPY --chown=ubuntu:ubuntu --dir (+python/* --arch=${arch} --version=${PYTHON}) ./
     COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+pipx/* --arch=${arch} --version_python=${PYTHON}) ./
 
-    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+krew/* --arch=${arch} --version=${KREW}) ./
+    # relies on qemu
+    COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=amd64 --version=${DOCKER_CREDENTIAL_PASS}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
 
     # arch2: hof, tilt
     IF [ ${arch} = "arm64" ]
@@ -280,8 +284,9 @@ tilt:
 # arch
 credentialPass:
     ARG arch
+    ARG version
     FROM +tools --arch=${arch}
-    RUN --secret CREDENTIAL_PASS curl -sSL https://github.com/docker/docker-credential-helpers/releases/download/v${CREDENTIAL_PASS}/docker-credential-pass-v${CREDENTIAL_PASS}-${arch}.tar.gz | tar xvfz - && chmod 755 docker-credential-pass
+    RUN curl -sSL https://github.com/docker/docker-credential-helpers/releases/download/v${version}/docker-credential-pass-v${version}-${arch}.tar.gz | tar xvfz - && chmod 755 docker-credential-pass
     SAVE ARTIFACT docker-credential-pass
 
 powerline:
@@ -555,12 +560,11 @@ terraform:
 nodejs:
     ARG arch
     ARG version
-    ARG version_npm
-    FROM +asdf --arch=${arch}
+    ROM +asdf --arch=${arch}
     RUN echo nodejs ${version} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add nodejs'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
-    RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g npm@${version_npm}'
+    RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g npm@latest'
     SAVE ARTIFACT .asdf
 
 cdktf:
@@ -600,11 +604,12 @@ argocd:
 
 python:
     ARG arch
+    ARG version
     FROM +asdf --arch=${arch}
     USER root
     RUN apt update && apt install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
     USER ubuntu
-    RUN --secret PYTHON echo python ${PYTHON} >> .tool-versions
+    RUN echo python ${version} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add python'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     RUN bash -c 'source ~/.asdf/asdf.sh && python -m pip install --upgrade pip'
