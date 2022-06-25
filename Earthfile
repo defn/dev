@@ -4,11 +4,11 @@ IMPORT github.com/defn/cloud/lib:master AS lib
 
 images:
     BUILD +amd64
-    BUILD +arm64
+    #BUILD +arm64
 
 updates:
     BUILD +amd64-update
-    BUILD +arm64-update
+    #BUILD +arm64-update
 
 amd64:
     BUILD --platform=linux/amd64 +tower --arch=amd64
@@ -82,6 +82,7 @@ root:
 
     RUN chown -R ubuntu:ubuntu /home/ubuntu
     RUN chmod u+s /usr/bin/sudo
+    SAVE IMAGE --cache-hint 
 
 tower-update:
     ARG arch
@@ -233,6 +234,7 @@ awscli:
     RUN unzip awscliv2.zip
     RUN ./aws/install -i /usr/local/aws-cli -b /usr/local/aws-cli/bin
     SAVE ARTIFACT /usr/local/aws-cli
+    SAVE IMAGE --cache-hint 
 
 # arch2
 hof:
@@ -403,6 +405,7 @@ gcloud:
     RUN /usr/local/gcloud/google-cloud-sdk/bin/gcloud --quiet components install gke-gcloud-auth-plugin
     RUN rm -rf /usr/local/gcloud/google-cloud-sdk/.install
     SAVE ARTIFACT /usr/local/gcloud
+    SAVE IMAGE --cache-hint 
 
 awsvault:
     ARG arch
@@ -601,6 +604,7 @@ python:
     RUN bash -c 'source ~/.asdf/asdf.sh && python -m pip install --upgrade pip'
     RUN bash -c 'source ~/.asdf/asdf.sh && pip install pipx && asdf reshim'
     SAVE ARTIFACT .asdf
+    SAVE IMAGE --cache-hint 
 
 pipx:
     ARG arch
@@ -620,3 +624,4 @@ pipx:
     SAVE ARTIFACT --symlink-no-follow .asdf
     SAVE ARTIFACT --symlink-no-follow .local
     SAVE ARTIFACT --symlink-no-follow .cache
+    SAVE IMAGE --cache-hint 
