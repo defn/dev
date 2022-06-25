@@ -88,16 +88,44 @@ root:
     RUN chown -R ubuntu:ubuntu /home/ubuntu
     RUN chmod u+s /usr/bin/sudo
 
-TOWER:
-    COMMAND
-
+tower-update:
     ARG arch
+    FROM ${repo}defn/dev:tower
+    COPY --dir --chown=ubuntu:ubuntu . .
+    RUN git clean -ffd
+    SAVE IMAGE --push ${repo}defn/dev
+
+tower:
+    ARG arch
+    ARG SKAFFOLD
+    ARG LOFT
+    ARG VCLUSTER
+    ARG CDKTF
+    ARG NODEJS
+    ARG NPM
+
+    FROM +root --arch=${arch}
+
+    USER ubuntu
+    WORKDIR /home/ubuntu
+
+    ENV HOME=/home/ubuntu
+
+    RUN sudo uname -a
+
+    COPY --chown=ubuntu:ubuntu --dir .vim .
+    COPY --chown=ubuntu:ubuntu .vimrc .
+    RUN echo yes | vim +PlugInstall +qall
+
+    #RUN mkdir -p ~/.docker && echo '{"credsStore": "pass"}' > ~/.docker/config.json
+
+    RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
     # arch
     COPY --chown=ubuntu:ubuntu (+powerline/* --arch=${arch}) /usr/local/bin
     COPY --chown=ubuntu:ubuntu (+cilium/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+hubble/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+linkerd/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+linkerd/* --arch=${arch}) /usr/local/bin
     COPY --chown=ubuntu:ubuntu (+vcluster/* --arch=${arch} --version=${VCLUSTER}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+loft/* --arch=${arch} --version=${LOFT}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+steampipe/* --arch=${arch}) /usr/local/bin/
@@ -120,7 +148,7 @@ TOWER:
     COPY --chown=ubuntu:ubuntu --dir (+consul/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+cloudflared/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+terraform/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch} --version=${CDKTF} --version_nodejs=${NODEJS} --version_npm=${NPM}) ./
     COPY --chown=ubuntu:ubuntu --dir (+skaffold/* --arch=${arch} --version=${SKAFFOLD}) ./
     COPY --chown=ubuntu:ubuntu --dir (+awsvault/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch}) ./
@@ -159,35 +187,6 @@ TOWER:
     COPY --chown=ubuntu:ubuntu (+kuma/* --arch=${arch}) /usr/local/bin/
 
     ENTRYPOINT ["/usr/bin/tini", "--"]
-
-tower-update:
-    ARG arch
-    FROM ${repo}defn/dev:tower
-    COPY --dir --chown=ubuntu:ubuntu . .
-    RUN git clean -ffd
-    SAVE IMAGE --push ${repo}defn/dev
-
-tower:
-    ARG arch
-
-    FROM +root --arch=${arch}
-
-    USER ubuntu
-    WORKDIR /home/ubuntu
-
-    ENV HOME=/home/ubuntu
-
-    RUN sudo uname -a
-
-    COPY --chown=ubuntu:ubuntu --dir .vim .
-    COPY --chown=ubuntu:ubuntu .vimrc .
-    RUN echo yes | vim +PlugInstall +qall
-
-    #RUN mkdir -p ~/.docker && echo '{"credsStore": "pass"}' > ~/.docker/config.json
-
-    RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
-
-    DO +TOWER --arch=${arch}
 
     SAVE IMAGE --push ${repo}defn/dev:tower
 
@@ -513,17 +512,22 @@ terraform:
 
 nodejs:
     ARG arch
+    ARG version
+    ARG version_npm
     FROM +asdf --arch=${arch}
-    RUN --secret NODEJS echo nodejs ${NODEJS} >> .tool-versions
+    RUN echo nodejs ${version} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add nodejs'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
-    RUN --secret NPM bash -c 'source ~/.asdf/asdf.sh && npm install -g npm@${NPM}'
+    RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g npm@${version_npm}'
     SAVE ARTIFACT .asdf
 
 cdktf:
     ARG arch
-    FROM +nodejs --arch=${arch}
-    RUN --secret CDKTF bash -c 'source ~/.asdf/asdf.sh && npm install -g cdktf-cli@${CDKTF}'
+    ARG version
+    ARG version_nodejs
+    ARG version_npm
+    FROM +nodejs --arch=${arch} --version=${version_nodejs} --version_npm=${version_npm}
+    RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g cdktf-cli@${version}'
     SAVE ARTIFACT .asdf
 
 doctl:
