@@ -217,13 +217,13 @@ tools:
 
 asdf:
     ARG arch
-    ARG version=0.10.1
+    ARG version_asdf=0.10.1
     FROM +tools --arch=${arch}
     RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
     RUN install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
     USER ubuntu
     WORKDIR /home/ubuntu
-    RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${version}
+    RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${version_asdf}
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
     SAVE ARTIFACT .asdf
     SAVE IMAGE --cache-hint 
