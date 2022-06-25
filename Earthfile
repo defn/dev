@@ -462,6 +462,7 @@ krew:
     RUN /home/ubuntu/.asdf/shims/kubectl-krew install stern
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
     SAVE ARTIFACT --symlink-no-follow .asdf
+    SAVE IMAGE --cache-hint
 
 k9s:
     ARG arch
@@ -572,6 +573,7 @@ nodejs:
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g npm@latest'
     SAVE ARTIFACT .asdf
+    SAVE IMAGE --cache-hint
 
 cdktf:
     ARG arch
@@ -581,6 +583,7 @@ cdktf:
     FROM +nodejs --arch=${arch} --version=${version_nodejs} --version_npm=${version_npm}
     RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g cdktf-cli@${version}'
     SAVE ARTIFACT .asdf
+    SAVE IMAGE --cache-hint
 
 doctl:
     ARG arch
@@ -619,6 +622,7 @@ redis:
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add redis'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
+    SAVE IMAGE --cache-hint
 
 python:
     ARG arch
