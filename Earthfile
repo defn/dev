@@ -223,7 +223,7 @@ asdf:
     RUN install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
     USER ubuntu
     WORKDIR /home/ubuntu
-    RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${}
+    RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${version}
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
     SAVE ARTIFACT .asdf
     SAVE IMAGE --cache-hint 
