@@ -1,3 +1,5 @@
+repo := localhost:5000/
+
 dev:
 	@if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi
 
@@ -31,16 +33,10 @@ prune:
 	$(MAKE) clean
 
 images:
-	earthly --push +images
+	earthly --push +images --repo=$(REPO)
 
 updates:
-	earthly --push +updates
-
-rebases:
-	earthly --push +images --repo=
-
-releases:
-	earthly --push +updates --repo=
+	earthly --push +updates --repo=$(REPO)
 
 shell:
 	docker run --rm -ti defn/dev bash -l
@@ -50,6 +46,8 @@ attach:
 
 registry:
 	-k3d registry create --port 0.0.0.0:5000
+
+import:
 	docker pull defn/dev:tower
 	docker tag defn/dev:tower localhost:5000/defn/dev:tower
 	docker push localhost:5000/defn/dev:tower
