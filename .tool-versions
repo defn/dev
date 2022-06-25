@@ -11,7 +11,7 @@ nodejs 16.15.1
 python 3.10.5
 shellcheck 0.8.0
 shfmt 3.5.1
-skaffold 1.39.1
+skaffold 1.38.0
 terraform 1.2.3
 vault 1.11.0
 argo 3.3.8
