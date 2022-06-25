@@ -140,6 +140,8 @@ tower:
     ARG ARGO
     ARG ARGOCD
 
+    ARG CREDENTIAL_PASS
+
     FROM +root --arch=${arch}
 
     USER ubuntu
