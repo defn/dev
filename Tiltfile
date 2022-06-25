@@ -11,7 +11,7 @@ local_resource(
 
 local_resource(
     name="registry buildkitd",
-    serve_cmd="exec bash -c 'earthly bootstrap; docker exec earthly-buildkitd apk add socat || true; docker exec earthly-buildkitd pkill socat; exec docker exec earthly-buildkitd socat TCP-LISTEN:5000,fork,reuseaddr TCP:$(host host.k3d.internal | cut -d\\  -f4):5555'",
+    serve_cmd="exec bash -c 'earthly bootstrap; docker exec earthly-buildkitd apk add socat || true; docker exec earthly-buildkitd pkill socat; exec docker exec earthly-buildkitd socat TCP-LISTEN:5000,fork,reuseaddr TCP:$(host host.k3d.internal | cut -d\\  -f4):5000'",
 )
 
 local_resource(

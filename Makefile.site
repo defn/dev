@@ -1,3 +1,5 @@
+repo ?= localhost:5000/
+
 dev:
 	@if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi
 
@@ -31,16 +33,10 @@ prune:
 	$(MAKE) clean
 
 images:
-	earthly --push +images
+	earthly --push +images --repo=$(repo)
 
 updates:
-	earthly --push +updates
-
-rebases:
-	earthly --push +images --repo=
-
-releases:
-	earthly --push +updates --repo=
+	earthly --push +updates --repo=$(repo)
 
 shell:
 	docker run --rm -ti defn/dev bash -l
@@ -49,15 +45,17 @@ attach:
 	code --folder-uri vscode-remote://k8s-container+context=k3d-k3s-default+namespace=default+podname=dev-0+name=dev+/home/ubuntu
 
 registry:
-	-k3d registry create --port 0.0.0.0:5555
-	docker pull defn/dev:tower
-	docker tag defn/dev:tower localhost:5555/defn/dev:tower
-	docker push localhost:5555/defn/dev:tower
-	docker pull defn/dev
-	docker tag defn/dev localhost:5555/defn/dev
-	docker push localhost:5555/defn/dev
+	-k3d registry create --port 0.0.0.0:5000
 
-recreate:
+import:
+	docker pull defn/dev:tower
+	docker tag defn/dev:tower localhost:5000/defn/dev:tower
+	docker push localhost:5000/defn/dev:tower
+	docker pull defn/dev
+	docker tag defn/dev localhost:5000/defn/dev
+	docker push localhost:5000/defn/dev
+
+reset:
 	-k3d cluster delete
 	-docker rm -f ignore
 	-osascript -e 'quit app "Docker"'
@@ -65,7 +63,7 @@ recreate:
 	while ! docker ps; do date; sleep 5; done
 	$(MAKE) k3d
 
-k3d:
+cluster:
 	-k3d cluster delete
 	k3d cluster create --config k3d.yaml \
 		--registry-use registry \
