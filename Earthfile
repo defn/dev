@@ -116,10 +116,8 @@ TOWER:
     COPY --chown=ubuntu:ubuntu --dir (+kustomize/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+helm/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+k3sup/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+teleport/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+vault/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+consul/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+boundary/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+cloudflared/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+terraform/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch}) ./
