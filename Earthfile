@@ -97,6 +97,7 @@ tower-update:
     RUN echo yes | vim +PlugInstall +qall
 
     COPY --dir --chown=ubuntu:ubuntu . .
+    COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
     RUN git clean -ffd
 
     SAVE IMAGE --push ${repo}defn/dev
@@ -180,8 +181,7 @@ tower:
     COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+pipx/* --arch=${arch} --version_python=${PYTHON}) ./
 
     # relies on qemu
-    COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=amd64 --version=${DOCKER_CREDENTIAL_PASS}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
+    COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=amd64 --version=${CREDENTIAL_PASS}) /usr/local/bin/
 
     # arch2: hof, tilt
     IF [ ${arch} = "arm64" ]
