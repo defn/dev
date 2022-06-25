@@ -213,6 +213,7 @@ tools:
     RUN apt-get update \
         && apt-get install -y --no-install-recommends \
             apt-transport-https software-properties-common tzdata locales git gpg gpg-agent unzip xz-utils wget curl
+    SAVE IMAGE --cache-hint 
 
 asdf:
     ARG arch
@@ -224,6 +225,7 @@ asdf:
     RUN --secret ASDF git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${ASDF}
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
     SAVE ARTIFACT .asdf
+    SAVE IMAGE --cache-hint 
 
 # arch3
 awscli:
