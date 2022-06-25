@@ -91,8 +91,16 @@ root:
 tower-update:
     ARG arch
     FROM ${repo}defn/dev:tower
+
+    RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
+
+    COPY --chown=ubuntu:ubuntu --dir .vim .
+    COPY --chown=ubuntu:ubuntu .vimrc .
+    RUN echo yes | vim +PlugInstall +qall
+
     COPY --dir --chown=ubuntu:ubuntu . .
     RUN git clean -ffd
+
     SAVE IMAGE --push ${repo}defn/dev
 
 tower:
@@ -103,6 +111,10 @@ tower:
     ARG CDKTF
     ARG NODEJS
     ARG NPM
+    ARG KUMA
+    ARG POWERLINE
+    ARG CILIUM
+    ARG HUBBLE
 
     FROM +root --arch=${arch}
 
@@ -111,20 +123,10 @@ tower:
 
     ENV HOME=/home/ubuntu
 
-    RUN sudo uname -a
-
-    COPY --chown=ubuntu:ubuntu --dir .vim .
-    COPY --chown=ubuntu:ubuntu .vimrc .
-    RUN echo yes | vim +PlugInstall +qall
-
-    #RUN mkdir -p ~/.docker && echo '{"credsStore": "pass"}' > ~/.docker/config.json
-
-    RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
-
     # arch
-    COPY --chown=ubuntu:ubuntu (+powerline/* --arch=${arch}) /usr/local/bin
-    COPY --chown=ubuntu:ubuntu (+cilium/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+hubble/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+powerline/* --arch=${arch} --version=${POWERLINE}) /usr/local/bin
+    COPY --chown=ubuntu:ubuntu (+cilium/* --arch=${arch} --version=${CILIUM}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+hubble/* --arch=${arch} --version=${HUBBLE}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+linkerd/* --arch=${arch}) /usr/local/bin
     COPY --chown=ubuntu:ubuntu (+vcluster/* --arch=${arch} --version=${VCLUSTER}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+loft/* --arch=${arch} --version=${LOFT}) /usr/local/bin/
@@ -184,7 +186,7 @@ tower:
         COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=${arch}) /usr/local/bin/
     END
 
-    COPY --chown=ubuntu:ubuntu (+kuma/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+kuma/* --arch=${arch} --version=${KUMA}) /usr/local/bin/
 
     ENTRYPOINT ["/usr/bin/tini", "--"]
 
@@ -268,8 +270,9 @@ credentialPass:
 
 powerline:
     ARG arch
+    ARG version
     FROM +tools --arch=${arch}
-    RUN --secret POWERLINE curl -sSL -o powerline https://github.com/justjanne/powerline-go/releases/download/v${POWERLINE}/powerline-go-linux-${arch} && chmod 755 powerline
+    RUN curl -sSL -o powerline https://github.com/justjanne/powerline-go/releases/download/v${powerline}/powerline-go-linux-${arch} && chmod 755 powerline
     SAVE ARTIFACT powerline
 
 step:
@@ -281,14 +284,16 @@ step:
 
 cilium:
     ARG arch
+    ARG version
     FROM +tools --arch=${arch}
-    RUN --secret CILIUM curl -sSL https://github.com/cilium/cilium-cli/releases/download/v${CILIUM}/cilium-linux-${arch}.tar.gz | tar xvfz -
+    RUN curl -sSL https://github.com/cilium/cilium-cli/releases/download/v${version}/cilium-linux-${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT cilium
 
 hubble:
     ARG arch
+    ARG version
     FROM +tools --arch=${arch}
-    RUN --secret HUBBLE curl -sSL https://github.com/cilium/hubble/releases/download/v${HUBBLE}/hubble-linux-${arch}.tar.gz | tar xzvf -
+    RUN curl -sSL https://github.com/cilium/hubble/releases/download/v${version}/hubble-linux-${arch}.tar.gz | tar xzvf -
     SAVE ARTIFACT hubble
 
 linkerd:
@@ -362,8 +367,9 @@ cue:
 
 kuma:
     ARG arch
+    ARG version
     FROM +tools --arch=${arch}
-    RUN --secret KUMA curl -sSL https://download.konghq.com/mesh-alpine/kuma-${KUMA}-ubuntu-${arch}.tar.gz | tar xvfz -
+    RUN curl -sSL https://download.konghq.com/mesh-alpine/kuma-${version}-ubuntu-${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT */bin/*
 
 k3d:
