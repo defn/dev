@@ -1,4 +1,4 @@
-repo := localhost:5000/
+repo ?= localhost:5000/
 
 dev:
 	@if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi
@@ -33,10 +33,10 @@ prune:
 	$(MAKE) clean
 
 images:
-	earthly --push +images --repo=$(REPO)
+	earthly --push +images --repo=$(repo)
 
 updates:
-	earthly --push +updates --repo=$(REPO)
+	earthly --push +updates --repo=$(repo)
 
 shell:
 	docker run --rm -ti defn/dev bash -l
