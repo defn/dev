@@ -115,6 +115,7 @@ tower:
     ARG POWERLINE
     ARG CILIUM
     ARG HUBBLE
+    ARG LINKERD
 
     FROM +root --arch=${arch}
 
@@ -127,7 +128,7 @@ tower:
     COPY --chown=ubuntu:ubuntu (+powerline/* --arch=${arch} --version=${POWERLINE}) /usr/local/bin
     COPY --chown=ubuntu:ubuntu (+cilium/* --arch=${arch} --version=${CILIUM}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+hubble/* --arch=${arch} --version=${HUBBLE}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+linkerd/* --arch=${arch}) /usr/local/bin
+    COPY --chown=ubuntu:ubuntu (+linkerd/* --arch=${arch} --version=${LINKERD}) /usr/local/bin
     COPY --chown=ubuntu:ubuntu (+vcluster/* --arch=${arch} --version=${VCLUSTER}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+loft/* --arch=${arch} --version=${LOFT}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+steampipe/* --arch=${arch}) /usr/local/bin/
@@ -298,8 +299,9 @@ hubble:
 
 linkerd:
     ARG arch
+    ARG version
     FROM +tools --arch=${arch}
-    RUN --secret LINKERD curl -sSL -o linkerd https://github.com/linkerd/linkerd2/releases/download/${LINKERD}/linkerd2-cli-${LINKERD}-linux-${arch} && chmod 755 linkerd
+    RUN curl -sSL -o linkerd https://github.com/linkerd/linkerd2/releases/download/${version}/linkerd2-cli-${version}-linux-${arch} && chmod 755 linkerd
     SAVE ARTIFACT linkerd
 
 vcluster:
