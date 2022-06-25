@@ -39,7 +39,7 @@ updates:
 	earthly --remote-cache=$(cache)defn/cache:updates $(push) +updates --repo=$(repo)
 
 shell:
-	docker run --rm -ti defn/dev bash -l
+	docker run --rm -ti $(repo)defn/dev bash -l
 
 attach:
 	code --folder-uri vscode-remote://k8s-container+context=k3d-k3s-default+namespace=default+podname=dev-0+name=dev+/home/ubuntu
