@@ -1,5 +1,6 @@
 repo ?= localhost:5000/
 cache ?= $(repo)
+push ?= --push
 
 dev:
 	@if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi
@@ -32,10 +33,10 @@ clean:
 	earthly bootstrap
 
 images:
-	earthly --remote-cache=$(cache)defn/cache:images --push +images --repo=$(repo)
+	earthly --remote-cache=$(cache)defn/cache:images $(push) +images --repo=$(repo)
 
 updates:
-	earthly --remote-cache=$(cache)defn/cache:updates --push +updates --repo=$(repo)
+	earthly --remote-cache=$(cache)defn/cache:updates $(push) +updates --repo=$(repo)
 
 shell:
 	docker run --rm -ti defn/dev bash -l
