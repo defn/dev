@@ -36,10 +36,10 @@ prune:
 
 
 images:
-	earthly --remote-cache=$(cache)cache:images --push +images --repo=$(repo)
+	earthly --remote-cache=$(cache)defn/cache:images --push +images --repo=$(repo)
 
 updates:
-	earthly --remote-cache=$(cache)cache:updates --push +updates --repo=$(repo)
+	earthly --remote-cache=$(cache)defn/cache:updates --push +updates --repo=$(repo)
 
 shell:
 	docker run --rm -ti defn/dev bash -l
