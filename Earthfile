@@ -4,11 +4,11 @@ IMPORT github.com/defn/cloud/lib:master AS lib
 
 images:
     BUILD +amd64
-    #BUILD +arm64
+    BUILD +arm64
 
 updates:
     BUILD +amd64-update
-    #BUILD +arm64-update
+    BUILD +arm64-update
 
 amd64:
     BUILD --platform=linux/amd64 +tower --arch=amd64
