@@ -285,7 +285,7 @@ powerline:
     ARG arch
     ARG version
     FROM +tools --arch=${arch}
-    RUN curl -sSL -o powerline https://github.com/justjanne/powerline-go/releases/download/v${powerline}/powerline-go-linux-${arch} && chmod 755 powerline
+    RUN curl -sSL -o powerline https://github.com/justjanne/powerline-go/releases/download/v${version}/powerline-go-linux-${arch} && chmod 755 powerline
     SAVE ARTIFACT powerline
 
 step:
