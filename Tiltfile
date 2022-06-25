@@ -105,7 +105,7 @@ local_resource(
 
 local_resource(
     "loft",
-    cmd='loft start --email iam@defn.sh',
+    cmd='loft start --context pod --email iam@defn.sh',
 )
 
 cmd_button(
@@ -114,7 +114,7 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "loft login https://localhost:9898 --insecure",
+        "loft login --context pod https://localhost:9898 --insecure",
     ],
     icon_name="build",
 )
