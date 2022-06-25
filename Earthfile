@@ -98,8 +98,8 @@ TOWER:
     COPY --chown=ubuntu:ubuntu (+cilium/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+hubble/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+linkerd/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+vcluster/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+loft/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+vcluster/* --arch=${arch} --version=${VCLUSTER}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+loft/* --arch=${arch} --version=${LOFT}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+steampipe/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+gh/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+earthly/* --arch=${arch}) /usr/local/bin/
@@ -300,14 +300,16 @@ linkerd:
 
 vcluster:
     ARG arch
+    ARG version
     FROM +tools --arch=${arch}
-    RUN --secret VCLUSTER curl -sSL -o vcluster https://github.com/loft-sh/vcluster/releases/download/v${VCLUSTER}/vcluster-linux-${arch} && chmod 755 vcluster
+    RUN curl -sSL -o vcluster https://github.com/loft-sh/vcluster/releases/download/v${vcluster}/vcluster-linux-${arch} && chmod 755 vcluster
     SAVE ARTIFACT vcluster
 
 loft:
     ARG arch
+    ARG version
     FROM +tools --arch=${arch}
-    RUN --secret LOFT curl -sSL -o loft https://github.com/loft-sh/loft/releases/download/v${LOFT}/loft-linux-${arch} && chmod 755 loft
+    RUN curl -sSL -o loft https://github.com/loft-sh/loft/releases/download/v${version}/loft-linux-${arch} && chmod 755 loft
     SAVE ARTIFACT loft
 
 steampipe:
