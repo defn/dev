@@ -121,7 +121,7 @@ TOWER:
     COPY --chown=ubuntu:ubuntu --dir (+cloudflared/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+terraform/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+skaffold/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+skaffold/* --arch=${arch} --version=${SKAFFOLD}) ./
     COPY --chown=ubuntu:ubuntu --dir (+awsvault/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch}) ./
@@ -326,8 +326,9 @@ gh:
 
 earthly:
     ARG arch
+    ARG version
     FROM +tools --arch=${arch}
-    RUN --secret EARTHLY curl -sSL -o earthly https://github.com/earthly/earthly/releases/download/v${EARTHLY}/earthly-linux-${arch} && chmod 755 earthly
+    RUN curl -sSL -o earthly https://github.com/earthly/earthly/releases/download/v${version}/earthly-linux-${arch} && chmod 755 earthly
     SAVE ARTIFACT earthly
 
 buildkite:
