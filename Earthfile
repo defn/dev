@@ -106,8 +106,6 @@ tower-update:
 tower:
     ARG arch
     ARG SKAFFOLD
-    ARG LOFT
-    ARG VCLUSTER
     ARG CDKTF
     ARG NODEJS
     ARG NPM
@@ -116,6 +114,30 @@ tower:
     ARG CILIUM
     ARG HUBBLE
     ARG LINKERD
+    ARG VCLUSTER
+    ARG LOFT
+    ARG GH
+    ARG EARTHLY
+    ARG K3D
+    ARG CUE
+    ARG STEP
+
+    ARG AWSVAULT
+    ARG PYTHON
+    ARG KREW
+    ARG HOF
+    ARG TILT
+    ARG SHELLCHECK
+    ARG SHFMT
+    ARG K9S
+    ARG KUSTOMIZE
+    ARG HELM
+    ARG VAULT
+    ARG CONSUL
+    ARG CLOUDFLARED
+    ARG TERRAFORM
+    ARG ARGO
+    ARG ARGOCD
 
     FROM +root --arch=${arch}
 
@@ -131,63 +153,50 @@ tower:
     COPY --chown=ubuntu:ubuntu (+linkerd/* --arch=${arch} --version=${LINKERD}) /usr/local/bin
     COPY --chown=ubuntu:ubuntu (+vcluster/* --arch=${arch} --version=${VCLUSTER}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+loft/* --arch=${arch} --version=${LOFT}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+steampipe/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+gh/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+earthly/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+buildkite/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+bk/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+hlb/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+litestream/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+k3d/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+cue/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+step/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+gh/* --arch=${arch} --version=${GH}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+earthly/* --arch=${arch} --version=${EARTHLY}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+k3d/* --arch=${arch} --version=${K3D}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+cue/* --arch=${arch} --version=${CUE}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+step/* --arch=${arch} --version=${STEP}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+kuma/* --arch=${arch} --version=${KUMA}) /usr/local/bin/
 
-    COPY --chown=ubuntu:ubuntu --dir (+shell/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+k9s/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+kustomize/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+helm/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+k3sup/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+vault/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+consul/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+cloudflared/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+terraform/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+shell/* --arch=${arch} --version_shellcheck=${SHELLCHECK} --version_shfmt=${SHFMT}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+k9s/* --arch=${arch} --version=${K9S}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+kustomize/* --arch=${arch} --version=${KUSTOMIZE}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+helm/* --arch=${arch} --version=${HELM}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+vault/* --arch=${arch} --version=${VAULT}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+consul/* --arch=${arch} --version=${CONSUL}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+cloudflared/* --arch=${arch} --version=${CLOUDFLARED}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+terraform/* --arch=${arch} --version=${TERRAFORM}) ./
     COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch} --version=${CDKTF} --version_nodejs=${NODEJS} --version_npm=${NPM}) ./
     COPY --chown=ubuntu:ubuntu --dir (+skaffold/* --arch=${arch} --version=${SKAFFOLD}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+awsvault/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+awsvault/* --arch=${arch} --version=${AWSVAULT}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch} --version=${ARGO}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch} --version=${ARGCD}) ./
 
-    COPY --chown=ubuntu:ubuntu --dir (+python/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+pipx/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+python/* --arch=${arch} --version=${PYTHON}) ./
+    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+pipx/* --arch=${arch} --version_python=${PYTHON}) ./
 
-    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+krew/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+krew/* --arch=${arch} --version=${KREW}) ./
 
+    # arch2: hof, tilt
+    IF [ ${arch} = "arm64" ]
+        COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=${arch} --version=${HOF}) /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=${arch} --version=${TILT}) /usr/local/bin/
+    ELSE
+        COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=x86_64 --version=${HOF}) /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=x86_64 --version=${TILT}) /usr/local/bin/
+    END
+
+    # gcloud
     COPY --chown=ubuntu:ubuntu --dir (+gcloud/gcloud --arch=${arch}) /usr/local/
 
-    # arch3
+    # arch3: awscli
     IF [ ${arch} = "arm64" ]
         COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch} --arch3=aarch64) /usr/local/
     ELSE
         COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch} --arch3=x86_64) /usr/local/
     END
-
-    # arch2
-    IF [ ${arch} = "arm64" ]
-        COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
-        COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
-        COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
-    ELSE
-        COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
-        COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
-        COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
-    END
-
-    # amd64
-    IF [ "${arch}" = "amd64" ]
-        COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=${arch}) /usr/local/bin/
-    END
-
-    COPY --chown=ubuntu:ubuntu (+kuma/* --arch=${arch} --version=${KUMA}) /usr/local/bin/
 
     ENTRYPOINT ["/usr/bin/tini", "--"]
 
@@ -230,8 +239,9 @@ awscli:
 hof:
     ARG arch
     ARG arch2
+    ARG version
     FROM +tools --arch=${arch}
-    RUN --secret HOF curl -sSL -o hof https://github.com/hofstadter-io/hof/releases/download/v${HOF}/hof_${HOF}_Linux_${arch2} && chmod 755 hof
+    RUN curl -sSL -o hof https://github.com/hofstadter-io/hof/releases/download/v${version}/hof_${version}_Linux_${arch2} && chmod 755 hof
     SAVE ARTIFACT hof
 
 jless:
@@ -258,8 +268,9 @@ difft:
 tilt:
     ARG arch
     ARG arch2
+    ARG version
     FROM +tools --arch=${arch}
-    RUN --secret TILT curl -sSL https://github.com/tilt-dev/tilt/releases/download/v${TILT}/tilt.${TILT}.linux.${arch2}.tar.gz | tar xvfz -
+    RUN curl -sSL https://github.com/tilt-dev/tilt/releases/download/v${version}/tilt.${version}.linux.${arch2}.tar.gz | tar xvfz -
     SAVE ARTIFACT tilt
 
 # arch
@@ -278,9 +289,10 @@ powerline:
 
 step:
     ARG arch
+    ARG version
     FROM +tools --arch=${arch}
     RUN echo 1
-    RUN --secret STEP curl -sSL https://github.com/smallstep/cli/releases/download/v${STEP}/step_linux_${STEP}_${arch}.tar.gz | tar xvfz -
+    RUN curl -sSL https://github.com/smallstep/cli/releases/download/v${version}}/step_linux_${version}_${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT */bin/step
 
 cilium:
@@ -326,8 +338,9 @@ steampipe:
 
 gh:
     ARG arch
+    ARG version
     FROM +tools --arch=${arch}
-    RUN --secret GH curl -sSL https://github.com/cli/cli/releases/download/v${GH}/gh_${GH}_linux_${arch}.tar.gz | tar xvfz - --wildcards '*/bin/gh' && mv */bin/gh .
+    RUN curl -sSL https://github.com/cli/cli/releases/download/v${version}/gh_${version}_linux_${arch}.tar.gz | tar xvfz - --wildcards '*/bin/gh' && mv */bin/gh .
     SAVE ARTIFACT gh
 
 earthly:
@@ -363,8 +376,9 @@ litestream:
 
 cue:
     ARG arch
+    ARG version
     FROM +tools --arch=${arch}
-    RUN --secret CUE curl -sSL https://github.com/cue-lang/cue/releases/download/v${CUE}/cue_v${CUE}_linux_${arch}.tar.gz | tar xvfz -
+    RUN curl -sSL https://github.com/cue-lang/cue/releases/download/v${version}/cue_v${version}_linux_${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT cue
 
 kuma:
@@ -376,8 +390,9 @@ kuma:
 
 k3d:
     ARG arch
+    ARG version
     FROM +tools --arch=${arch}
-    RUN --secret K3D curl -sSL -o k3d https://github.com/k3d-io/k3d/releases/download/v${K3D}/k3d-linux-${arch} && chmod 755 k3d
+    RUN curl -sSL -o k3d https://github.com/k3d-io/k3d/releases/download/v${version}/k3d-linux-${arch} && chmod 755 k3d
     SAVE ARTIFACT k3d
 
 gcloud:
@@ -392,8 +407,9 @@ gcloud:
 
 awsvault:
     ARG arch
+    ARG version
     FROM +asdf --arch=${arch}
-    RUN --secret AWSVAULT echo "aws-vault ${AWSVAULT}" >> .tool-versions
+    RUN echo "aws-vault ${version}" >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add aws-vault'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
@@ -417,8 +433,9 @@ kubectl:
 
 krew:
     ARG arch
+    ARG version
     FROM +kubectl --arch=${arch}
-    RUN --secret KREW echo "krew ${KREW}" >> .tool-versions
+    RUN echo "krew ${version}" >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add krew'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     RUN /home/ubuntu/.asdf/shims/kubectl-krew install ns
@@ -429,24 +446,27 @@ krew:
 
 k9s:
     ARG arch
+    ARG version
     FROM +asdf --arch=${arch}
-    RUN --secret K9S echo k9s ${K9S} >> .tool-versions
+    RUN echo k9s ${version} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add k9s'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 kustomize:
     ARG arch
+    ARG version
     FROM +asdf --arch=${arch}
-    RUN --secret KUSTOMIZE echo kustomize ${KUSTOMIZE} >> .tool-versions
+    RUN echo kustomize ${version} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add kustomize'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 helm:
     ARG arch
+    ARG version
     FROM +asdf --arch=${arch}
-    RUN --secret HELM echo helm ${HELM} >> .tool-versions
+    RUN echo helm ${version} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add helm'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
@@ -469,16 +489,18 @@ teleport:
 
 vault:
     ARG arch
+    ARG version
     FROM +asdf --arch=${arch}
-    RUN --secret VAULT echo vault ${VAULT} >> .tool-versions
+    RUN echo vault ${version} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add vault'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 consul:
     ARG arch
+    ARG version
     FROM +asdf --arch=${arch}
-    RUN --secret CONSUL echo consul ${CONSUL} >> .tool-versions
+    RUN echo consul ${version} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add consul'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
@@ -493,27 +515,31 @@ boundary:
 
 cloudflared:
     ARG arch
+    ARG version
     FROM +asdf --arch=${arch}
-    RUN --secret CLOUDFLARED echo cloudflared ${CLOUDFLARED} >> .tool-versions
+    RUN echo cloudflared ${version} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add cloudflared'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 shell:
     ARG arch
+    ARG version_shellcheck
+    ARG version_shfmt
     FROM +asdf --arch=${arch}
-    RUN --secret SHELLCHECK echo shellcheck ${SHELLCHECK} >> .tool-versions
+    RUN echo shellcheck ${version_shellcheck} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add shellcheck'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
-    RUN --secret SHFMT echo shfmt ${SHFMT} >> .tool-versions
+    RUN echo shfmt ${version_shfmt} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add shfmt'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 terraform:
     ARG arch
+    ARG version
     FROM +asdf --arch=${arch}
-    RUN --secret TERRAFORM echo terraform ${TERRAFORM} >> .tool-versions
+    RUN echo terraform ${version} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add terraform'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
@@ -548,16 +574,18 @@ doctl:
 
 argo:
     ARG arch
+    ARG version
     FROM +asdf --arch=${arch}
-    RUN --secret ARGO echo argo ${ARGO} >> .tool-versions
+    RUN echo argo ${version} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add argo'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 argocd:
     ARG arch
+    ARG version
     FROM +asdf --arch=${arch}
-    RUN --secret ARGOCD echo argocd ${ARGOCD} >> .tool-versions
+    RUN echo argocd ${version} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add argocd'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
@@ -577,7 +605,8 @@ python:
 
 pipx:
     ARG arch
-    FROM +python --arch=${arch}
+    ARG version_python
+    FROM +python --arch=${arch} --version=${version_python}
     RUN ~/.asdf/shims/pipx install pycco
     RUN ~/.asdf/shims/pipx install yq
     RUN ~/.asdf/shims/pipx install watchdog
