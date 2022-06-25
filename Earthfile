@@ -166,7 +166,7 @@ tower:
     COPY --chown=ubuntu:ubuntu --dir (+shell/* --arch=${arch} --version_shellcheck=${SHELLCHECK} --version_shfmt=${SHFMT}) ./
     COPY --chown=ubuntu:ubuntu --dir (+k9s/* --arch=${arch} --version=${K9S}) ./
     COPY --chown=ubuntu:ubuntu --dir (+kustomize/* --arch=${arch} --version=${KUSTOMIZE}) ./
-    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+krew/* --arch=${arch} --version=${KREW}) ./
+    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+krew/* --arch=${arch} --version=${KREW} --version_kubectl=${KUBECTL}) ./
     COPY --chown=ubuntu:ubuntu --dir (+helm/* --arch=${arch} --version=${HELM}) ./
     COPY --chown=ubuntu:ubuntu --dir (+vault/* --arch=${arch} --version=${VAULT}) ./
     COPY --chown=ubuntu:ubuntu --dir (+consul/* --arch=${arch} --version=${CONSUL}) ./
@@ -449,7 +449,8 @@ kubectl:
 krew:
     ARG arch
     ARG version
-    FROM +kubectl --arch=${arch}
+    ARG version_kubectl
+    FROM +kubectl --arch=${arch} --verion=${version_kubectl}
     RUN echo "krew ${version}" >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add krew'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
