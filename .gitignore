@@ -57,3 +57,4 @@ node_modules
 .gnupg
 .skaffold
 .kumactl
+.rediscli_history
