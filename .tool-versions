@@ -15,3 +15,4 @@ terraform 1.2.3
 vault 1.11.0
 argo 3.3.8
 argocd 2.4.2
+redis 7.0.2
