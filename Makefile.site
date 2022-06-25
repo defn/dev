@@ -45,7 +45,8 @@ attach:
 	code --folder-uri vscode-remote://k8s-container+context=k3d-k3s-default+namespace=default+podname=dev-0+name=dev+/home/ubuntu
 
 registry:
-	-k3d registry create --port 0.0.0.0:5000
+	-k3d registry create registry --port 0.0.0.0:5000
+	-k3d registry create docker-io --proxy-remote-url https://registry-1.docker.io -p 5001
 
 import:
 	docker pull defn/dev:tower
