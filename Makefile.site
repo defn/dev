@@ -49,15 +49,15 @@ attach:
 	code --folder-uri vscode-remote://k8s-container+context=k3d-k3s-default+namespace=default+podname=dev-0+name=dev+/home/ubuntu
 
 registry:
-	-k3d registry create --port 0.0.0.0:5555
+	-k3d registry create --port 0.0.0.0:5000
 	docker pull defn/dev:tower
-	docker tag defn/dev:tower localhost:5555/defn/dev:tower
-	docker push localhost:5555/defn/dev:tower
+	docker tag defn/dev:tower localhost:5000/defn/dev:tower
+	docker push localhost:5000/defn/dev:tower
 	docker pull defn/dev
-	docker tag defn/dev localhost:5555/defn/dev
-	docker push localhost:5555/defn/dev
+	docker tag defn/dev localhost:5000/defn/dev
+	docker push localhost:5000/defn/dev
 
-recreate:
+reset:
 	-k3d cluster delete
 	-docker rm -f ignore
 	-osascript -e 'quit app "Docker"'
