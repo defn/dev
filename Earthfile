@@ -451,7 +451,7 @@ krew:
     ARG arch
     ARG version
     ARG version_kubectl
-    FROM +kubectl --arch=${arch} --verion=${version_kubectl}
+    FROM +kubectl --arch=${arch} --version=${version_kubectl}
     RUN echo "krew ${version}" >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add krew'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
