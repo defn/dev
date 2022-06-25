@@ -103,6 +103,22 @@ local_resource(
     deps=["k/traefik"],
 )
 
+local_resource(
+    "loft",
+    cmd='loft start --email iam@defn.sh',
+)
+
+cmd_button(
+    name="loft login",
+    resource="loft",
+    argv=[
+        "bash",
+        "-c",
+        "loft login https://localhost:9898 --insecure",
+    ],
+    icon_name="build",
+)
+
 cmd_button(
     name="sync traefik",
     resource="traefik",
