@@ -432,8 +432,9 @@ skaffold:
 
 kubectl:
     ARG arch
+    ARG version
     FROM +asdf --arch=${arch}
-    RUN --secret KUBECTL echo "kubectl ${KUBECTL}" >> .tool-versions
+    RUN echo "kubectl ${version}" >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add kubectl'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
