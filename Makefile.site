@@ -33,10 +33,10 @@ prune:
 	$(MAKE) clean
 
 images:
-	earthly --push +images --repo=$(repo)
+	earthly --remote-cache=localhost:5000/cache:images --push +images --repo=$(repo)
 
 updates:
-	earthly --push +updates --repo=$(repo)
+	earthly --remote-cache=localhost:5000/cache:updates --push +updates --repo=$(repo)
 
 shell:
 	docker run --rm -ti defn/dev bash -l
