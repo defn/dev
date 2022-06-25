@@ -25,6 +25,8 @@ spec:
               mountPath: /var/run/docker.sock
             - name: work
               mountPath: /home/ubuntu/work
+        - name: redis
+          image: redis:7.0.2
       volumes:
         - name: docker-sock
           hostPath:
