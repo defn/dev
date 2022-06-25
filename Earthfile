@@ -141,6 +141,7 @@ tower:
     ARG ARGOCD
 
     ARG CREDENTIAL_PASS
+    ARG KUBECTL
 
     FROM +root --arch=${arch}
 
