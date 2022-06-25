@@ -612,6 +612,9 @@ redis:
     ARG arch
     ARG version
     FROM +asdf --arch=${arch}
+    USER root
+    RUN apt update && apt install -y build-essential
+    USER ubuntu
     RUN echo redis ${version} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add redis'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
