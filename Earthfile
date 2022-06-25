@@ -2,8 +2,6 @@ VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-ar
 
 IMPORT github.com/defn/cloud/lib:master AS lib
 
-ARG repo=localhost:5000/
-
 images:
     BUILD +amd64
     BUILD +arm64
@@ -90,6 +88,8 @@ root:
 
 tower-update:
     ARG arch
+    ARG repo=localhost:5000/
+
     FROM ${repo}defn/dev:tower
 
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
@@ -104,6 +104,8 @@ tower-update:
     SAVE IMAGE --push ${repo}defn/dev
 
 tower:
+    ARG repo=localhost:5000/
+
     ARG arch
     ARG SKAFFOLD
     ARG CDKTF
