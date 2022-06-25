@@ -63,7 +63,7 @@ reset:
 	while ! docker ps; do date; sleep 5; done
 	$(MAKE) k3d
 
-k3d:
+cluster:
 	-k3d cluster delete
 	k3d cluster create --config k3d.yaml \
 		--registry-use registry \
