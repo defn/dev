@@ -10,10 +10,6 @@ function vi {
 	fi
 }
 
-function k {
-	kubectl "$@"
-}
-
 function pca {
 	pc run --all "$@"
 }

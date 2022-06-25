@@ -3,9 +3,6 @@
 source ~/.bash_profile
 
 case "${1:-}" in
-+*)
-	exec earthly "$@"
-	;;
 *)
 	# shellcheck disable=SC1090
 	exec "$@"
