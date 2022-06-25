@@ -25,15 +25,11 @@ asdf:
 	cat .tool-versions| awk '{print $$1}' | while read -r a; do asdf list-all "$$a" | sed "s#^#$$a #"; done | sort > .tool-versions-all
 
 clean:
-	docker images | grep none | awk '{print $$3}' | runmany 'docker rmi $$1'
+	-docker images | grep none | awk '{print $$3}' | runmany 'docker rmi $$1'
 	-docker system prune -f
-
-prune:
-	-$(MAKE) clean
-	earthly prune --all
-	$(MAKE) clean
-
-
+	docker rm -f earthly-buildkitd
+	docker volume rm -f earthly-cache
+	earthly bootstrap
 
 images:
 	earthly --remote-cache=$(cache)defn/cache:images --push +images --repo=$(repo)
