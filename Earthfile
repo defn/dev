@@ -560,7 +560,7 @@ terraform:
 nodejs:
     ARG arch
     ARG version
-    ROM +asdf --arch=${arch}
+    FROM +asdf --arch=${arch}
     RUN echo nodejs ${version} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add nodejs'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
