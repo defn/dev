@@ -114,7 +114,7 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "loft login --context pod https://localhost:9898 --insecure",
+        "loft login https://localhost:9898 --insecure",
     ],
     icon_name="build",
 )
