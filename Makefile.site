@@ -23,7 +23,7 @@ init:
 	argocd --kube-context argocd app sync loft --local k/loft --assumeYes --prune
 	argocd --kube-context argocd app create dev --repo https://github.com/defn/dev --path k/dev --dest-namespace default --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	argocd --kube-context argocd app sync dev --local k/dev --assumeYes --prune
-	argocd --kube-context argocd app create vc --repo https://github.com/defn/dev --path k/vc --dest-namespace default --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
+	argocd --kube-context argocd app create vc --repo https://github.com/defn/dev --path k/vc --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	argocd --kube-context argocd app sync vc --local k/vc --assumeYes --prune
 	tilt up --context pod
 
