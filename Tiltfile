@@ -179,7 +179,7 @@ cmd_button(
 
 local_resource(
     "vc",
-    cmd='if argocd --kube-context argocd app diff vc --local k/vc; then loft login https://loft.loft.svc.cluster.local --insecure --access-key admin; for a in 1 2 3 4 5; do vc$a get ns; done; echo No difference; fi',
+    cmd='if argocd --kube-context argocd app diff vc --local k/vc; then loft login https://loft.loft.svc.cluster.local --insecure --access-key admin; for a in 1 2 3 4 5; do vc$a get ns; name=vc$a; ~/bin/e argocd cluster add loft-vcluster_${name}_${name}_loft-cluster --name $name --yes; done; echo No difference; fi',
     deps=["k/vc"],
     allow_parallel=True,
     labels=["deploy"],
