@@ -179,7 +179,7 @@ cmd_button(
 
 local_resource(
     "vc",
-    cmd='if argocd --kube-context argocd app diff vc --local k/vc ; then echo No difference; fi',
+    cmd='if argocd --kube-context argocd app diff vc --local k/vc ; then loft login https://loft.loft.svc.cluster.local --insecure --access-key admin; echo No difference; fi',
     deps=["k/vc"],
     allow_parallel=True,
     labels=["deploy"],
