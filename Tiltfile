@@ -89,17 +89,6 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "xdg-open https://127.0.0.1:8882/login"
-    ],
-    icon_name="web",
-)
-
-cmd_button(
-    name="login loft",
-    resource="loft port-forward",
-    argv=[
-        "bash",
-        "-c",
         "loft login https://localhost:8882 --insecure"
     ],
     icon_name="web",
