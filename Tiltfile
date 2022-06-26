@@ -195,3 +195,22 @@ cmd_button(
     ],
     icon_name="build",
 )
+
+local_resource(
+    "vc1",
+    cmd='if argocd --kube-context argocd app diff vc1 --local k/vc1; then echo No difference; fi',
+    deps=["k/vc1"],
+    allow_parallel=True,
+    labels=["deploy"],
+)
+
+cmd_button(
+    name="sync vc1",
+    resource="vc1",
+    argv=[
+        "bash",
+        "-c",
+        "argocd --kube-context argocd app sync vc1 --local k/vc1 --assumeYes --prune; touch k/vc1/main.yaml",
+    ],
+    icon_name="build",
+)
