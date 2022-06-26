@@ -89,7 +89,7 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "loft login https://localhost:8882 --insecure; cat ~/.loft/config.json | jq -r '.host = \"https://loft.loft.svc.cluster.local\"' > ~/.loft/config.json.tmp && mv ~/.loft/config.json.tmp ~/.loft/config.json"
+        "xdg-open https://localhost:8882/vclusters",
     ],
     icon_name="web",
 )
@@ -141,7 +141,7 @@ cmd_button(
 
 local_resource(
     "loft",
-    cmd='if argocd --kube-context argocd app diff loft --local k/loft; then echo No difference; fi',
+    cmd='if argocd --kube-context argocd app diff loft --local k/loft; then loft login https://loft.loft.svc.cluster.local --insecure --access-key admin; echo No difference; fi',
     deps=["k/loft"],
     allow_parallel=True,
     labels=["deploy"],
