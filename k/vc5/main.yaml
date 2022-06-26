@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: vc5
+spec:
+  selector:
+    matchLabels:
+      app: dev
+  serviceName: dev
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dev
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: dev
+          image: k3d-registry:5000/defn/dev:latest
+          imagePullPolicy: Always
+          command: ["/usr/bin/tini", "--"]
+          args: ["tail", "-f", "/dev/null"]
+          volumeMounts:
+            - name: docker-sock
+              mountPath: /var/run/docker.sock
+            - name: work
+              mountPath: /home/ubuntu/work
+      volumes:
+        - name: docker-sock
+          hostPath:
+            path: /var/run/docker.sock
+        - name: work
+          hostPath:
+            path: /mnt/work
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: dev
+subjects:
+  - kind: ServiceAccount
+    namespace: default
+    name: default
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io

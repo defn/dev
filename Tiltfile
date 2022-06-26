@@ -196,21 +196,23 @@ cmd_button(
     icon_name="build",
 )
 
-local_resource(
-    "vc1",
-    cmd='if argocd --kube-context argocd app diff vc1 --local k/vc1; then echo No difference; fi',
-    deps=["k/vc1"],
-    allow_parallel=True,
-    labels=["deploy"],
-)
+for vid in [1,2,3,4,5]:
+    vname = 'vc' + str(vid)
+    local_resource(
+        vname,
+        cmd='if argocd --kube-context argocd app diff {vname} --local k/{vname}; then echo No difference; fi'.format(vname=vname),
+        deps=["k/" + vname],
+        allow_parallel=True,
+        labels=["deploy"],
+    )
 
-cmd_button(
-    name="sync vc1",
-    resource="vc1",
-    argv=[
-        "bash",
-        "-c",
-        "argocd --kube-context argocd app sync vc1 --local k/vc1 --assumeYes --prune; touch k/vc1/main.yaml",
-    ],
-    icon_name="build",
-)
+    cmd_button(
+        name="sync " + vname,
+        resource=vname,
+        argv=[
+            "bash",
+            "-c",
+            "argocd --kube-context argocd app create {vname} --repo https://github.com/defn/dev --path k/{vname} --dest-namespace argocd --dest-name {vname} --directory-recurse --validate=false; argocd --kube-context argocd app sync {vname} --local k/{vname} --assumeYes --prune; touch k/{vname}/main.yaml".format(vname=vname),
+        ],
+        icon_name="build",
+    )
