@@ -143,7 +143,7 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "argocd app sync loft --local k/traefik --assumeYes --prune; touch k/loft/main.yaml",
+        "argocd app sync loft --local k/loft --assumeYes --prune; touch k/loft/main.yaml",
     ],
     icon_name="build",
 )
