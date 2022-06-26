@@ -89,7 +89,7 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "loft login https://localhost:8882 --insecure"
+        "loft login https://localhost:8882 --insecure; cat ~/.loft/config.json | jq -r '.host = \"https://loft.loft.svc.cluster.local\"' > ~/.loft/config.json.tmp && mv ~/.loft/config.json.tmp ~/.loft/config.json"
     ],
     icon_name="web",
 )
