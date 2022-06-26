@@ -212,7 +212,7 @@ for vid in [1,2,3,4,5]:
         argv=[
             "bash",
             "-c",
-            "argocd --kube-context argocd app create {vname} --repo https://github.com/defn/dev --path k/{vname} --dest-namespace argocd --dest-name {vname} --directory-recurse --validate=false; argocd --kube-context argocd app sync {vname} --local k/{vname} --assumeYes --prune; touch k/{vname}/main.yaml".format(vname=vname),
+            "argocd --kube-context argocd app create {vname} --repo https://github.com/defn/dev --path k/{vname} --dest-namespace default --dest-name {vname} --directory-recurse --validate=false; argocd --kube-context argocd app sync {vname} --local k/{vname} --assumeYes --prune; touch k/{vname}/main.yaml".format(vname=vname),
         ],
         icon_name="build",
     )
