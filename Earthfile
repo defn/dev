@@ -49,7 +49,8 @@ root:
         build-essential make tini python3-pip entr \
         gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 \
         xdg-utils figlet lolcat socat netcat-openbsd groff \
-        screen htop
+        screen htop \
+        redis
 
     RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null \
         && curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.tailscale-keyring.list | tee /etc/apt/sources.list.d/tailscale.list \
@@ -178,7 +179,6 @@ tower:
     COPY --chown=ubuntu:ubuntu --dir (+awsvault/* --arch=${arch} --version=${AWSVAULT}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch} --version=${ARGO}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch} --version=${ARGOCD}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+redis/* --arch=${arch} --version=${REDIS}) ./
 
     COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch} --version=${CDKTF} --version_nodejs=${NODEJS}) ./
 
