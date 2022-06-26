@@ -37,9 +37,7 @@ export PATH="$PATH:/usr/local/aws-cli/bin"
 export PATH="$PATH:/usr/local/gcloud/google-cloud-sdk/bin"
 
 # kubectl
-if [[ -z "${KUBECONFIG:-}" ]]; then
-	export KUBECONFIG="$HOME/.kube/config:$HOME/.kube/vc1.conf:$HOME/.kube/vc2.conf:$HOME/.kube/vc3.conf:$HOME/.kube/vc4.conf:$HOME/.kube/vc5.conf:$HOME/.kube/config"
-fi
+export KUBECONFIG_ALL="$HOME/.kube/config:$HOME/.kube/vc1.conf:$HOME/.kube/vc2.conf:$HOME/.kube/vc3.conf:$HOME/.kube/vc4.conf:$HOME/.kube/vc5.conf:$HOME/.kube/config"
 
 # vscode
 if [[ -n "${VSCODE_GIT_IPC_HANDLE=:-}" ]]; then
