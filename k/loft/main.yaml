@@ -1,0 +1,140 @@
+---
+# Source: loft/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: loft
+  namespace: loft
+  labels:
+    app: loft
+    chart: "loft-2.2.0"
+    release: "loft"
+    heritage: "Helm"
+---
+# Source: loft/templates/rbac/clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: loft-management-admin
+  labels:
+    app: loft
+    chart: "loft-2.2.0"
+    release: "loft"
+    heritage: "Helm"
+subjects:
+- kind: ServiceAccount
+  name: loft
+  namespace: loft
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+---
+# Source: loft/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: loft
+  namespace: loft
+  labels:
+    app: loft
+    loft.sh/service: loft
+    chart: "loft-2.2.0"
+    release: "loft"
+    heritage: "Helm"
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      nodePort:
+      protocol: TCP
+    - name: https
+      port: 443
+      targetPort: 443
+      nodePort:
+      protocol: TCP
+  selector:
+    app: loft
+    release: loft
+---
+# Source: loft/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loft
+  namespace: loft
+  labels:
+    app: loft
+    chart: "loft-2.2.0"
+    release: "loft"
+    heritage: "Helm"
+spec:
+  selector:
+    matchLabels:
+      app: loft
+      release: loft
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: loft
+        release: loft
+    spec:
+      terminationGracePeriodSeconds: 10
+      serviceAccountName: loft
+      volumes:
+      containers:
+      - name: manager
+        image: "loftsh/loft:2.2.0"
+        ports:
+        - name: http
+          containerPort: 80
+        - name: https
+          containerPort: 443
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+          failureThreshold: 20
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+          failureThreshold: 20
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        env:
+        - name: ADMIN_EMAIL
+          value:
+        - name: ADMIN_PASSWORD_HASH
+          value: "6fa2288c361becce3e30ba4c41be7d8ba01e3580566f7acc76a7f99994474c46"
+        - name: APISERVICE_DISABLED
+          value: "true"
+        volumeMounts:
+        resources:
+          limits:
+            cpu: "2"
+            memory: 2Gi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+---
+# Source: loft/templates/secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: loft-config
+  namespace: loft
+  annotations:
+    helm.sh/hook: pre-install
+data:
+  config: YXVkaXQ6CiAgZW5hYmxlZDogdHJ1ZQ==

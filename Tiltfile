@@ -37,19 +37,18 @@ cmd_button(
 )
 
 local_resource(
-    name="kuma port-forward",
-    serve_cmd="exec kubectl port-forward svc/kuma-control-plane -n kuma-system 5681:5681",
-    deps=["k/kuma"],
+    name="argocd port-forward",
+    serve_cmd="exec kubectl -n argocd port-forward svc/argocd-server 8881:443",
     allow_parallel=True,
 )
 
 cmd_button(
-    name="ui kuma",
-    resource="kuma port-forward",
+    name="ui argocd",
+    resource="argocd port-forward",
     argv=[
         "bash",
         "-c",
-        "xdg-open http://localhost:5681/gui"
+        "kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d' | ssh super pbcopy; xdg-open http://localhost:8881"
     ],
     icon_name="web",
 )
@@ -73,20 +72,26 @@ cmd_button(
 )
 
 local_resource(
-    name="argocd port-forward",
-    serve_cmd="exec kubectl -n argocd port-forward svc/argocd-server 8881:443",
+    name="loft port-forward",
+    serve_cmd="exec kubectl -n loft port-forward svc/loft 8882:443",
     allow_parallel=True,
 )
 
 cmd_button(
-    name="ui argocd",
-    resource="argocd port-forward",
+    name="ui loft",
+    resource="loft port-forward",
     argv=[
         "bash",
         "-c",
-        "kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d' | ssh super pbcopy; xdg-open http://localhost:8881"
+        "xdg-open http://localhost:8882"
     ],
     icon_name="web",
+)
+
+local_resource(
+    name="tailscale cert",
+    serve_cmd="set -x; d=$(docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale cert 2>&1 | grep For.domain | cut -d'\"' -f2); while true; do docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale cert $d; docker exec tailscale_docker-extension-desktop-extension-service tar cvfz - $d.crt $d.key > /tmp/$d.tar.gz; kubectl -n traefik delete secret default-certificate; bash -c \"kubectl create -n traefik secret generic default-certificate --from-file tls.crt=<(tar xfz /tmp/$d.tar.gz -O $d.crt) --from-file tls.key=<(tar xfz /tmp/$d.tar.gz -O $d.key)\"; touch /tmp/restart.txt; date; echo http://$d; sleep 36000; done",
+    allow_parallel=True,
 )
 
 local_resource(
@@ -114,23 +119,6 @@ local_resource(
     allow_parallel=True,
 )
 
-local_resource(
-    "loft",
-    cmd='loft start --context pod --email iam@defn.sh',
-    allow_parallel=True,
-)
-
-cmd_button(
-    name="loft login",
-    resource="loft",
-    argv=[
-        "bash",
-        "-c",
-        "loft login https://localhost:9898 --insecure",
-    ],
-    icon_name="build",
-)
-
 cmd_button(
     name="sync traefik",
     resource="traefik",
@@ -143,19 +131,19 @@ cmd_button(
 )
 
 local_resource(
-    "kuma",
-    cmd='if argocd app diff kuma --local k/kuma; then echo No difference; fi',
-    deps=["k/kuma"],
+    "loft",
+    cmd='if argocd app diff loft --local k/loft; then echo No difference; fi',
+    deps=["k/loft"],
     allow_parallel=True,
 )
 
 cmd_button(
-    name="sync kuma",
-    resource="kuma",
+    name="sync loft",
+    resource="loft",
     argv=[
         "bash",
         "-c",
-        "argocd app sync kuma --local k/kuma --assumeYes --prune; touch k/kuma/main.yaml",
+        "argocd app sync loft --local k/traefik --assumeYes --prune; touch k/loft/main.yaml",
     ],
     icon_name="build",
 )
@@ -176,28 +164,4 @@ cmd_button(
         "argocd app sync dev --local k/dev --assumeYes --prune; touch k/dev/main.yaml",
     ],
     icon_name="build",
-)
-
-local_resource(
-    "wip",
-    cmd='if argocd app diff wip --local k/wip; then echo No difference; fi',
-    deps=["k/wip"],
-    allow_parallel=True,
-)
-
-cmd_button(
-    name="sync wip",
-    resource="wip",
-    argv=[
-        "bash",
-        "-c",
-        "argocd app sync wip --local k/wip --assumeYes --prune; touch k/wip/main.yaml",
-    ],
-    icon_name="build",
-)
-
-local_resource(
-    name="tailscale cert",
-    serve_cmd="set -x; d=$(docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale cert 2>&1 | grep For.domain | cut -d'\"' -f2); while true; do docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale cert $d; docker exec tailscale_docker-extension-desktop-extension-service tar cvfz - $d.crt $d.key > /tmp/$d.tar.gz; kubectl -n traefik delete secret default-certificate; bash -c \"kubectl create -n traefik secret generic default-certificate --from-file tls.crt=<(tar xfz /tmp/$d.tar.gz -O $d.crt) --from-file tls.key=<(tar xfz /tmp/$d.tar.gz -O $d.key)\"; touch /tmp/restart.txt; date; echo http://$d; sleep 36000; done",
-    allow_parallel=True,
 )
