@@ -89,7 +89,7 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "xdg-open http://localhost:8882"
+        "xdg-open https://127.0.0.1:8882/login"
     ],
     icon_name="web",
 )
