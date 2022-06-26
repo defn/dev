@@ -15,10 +15,16 @@ init:
 	-git clone git@github.com:defn/dev work/dev
 	$(MAKE) kubeconfig
 	argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')"
-	argocd app create argocd --repo https://github.com/defn/dev --path k/argocd --dest-namespace argocd --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
-	argocd app create traefik --repo https://github.com/defn/dev --path k/traefik --dest-namespace traefik --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
-	argocd app create loft --repo https://github.com/defn/dev --path k/loft --dest-namespace loft --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
-	argocd app create dev --repo https://github.com/defn/dev --path k/dev --dest-namespace default --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
+	argocd --kube-context argocd app create argocd --repo https://github.com/defn/dev --path k/argocd --dest-namespace argocd --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
+	argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune
+	argocd --kube-context argocd app create traefik --repo https://github.com/defn/dev --path k/traefik --dest-namespace traefik --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
+	argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune
+	argocd --kube-context argocd app create loft --repo https://github.com/defn/dev --path k/loft --dest-namespace loft --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
+	argocd --kube-context argocd app sync loft --local k/loft --assumeYes --prune
+	argocd --kube-context argocd app create dev --repo https://github.com/defn/dev --path k/dev --dest-namespace default --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
+	argocd --kube-context argocd app sync dev --local k/dev --assumeYes --prune
+	argocd --kube-context argocd app create vc --repo https://github.com/defn/dev --path k/vc --dest-namespace default --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
+	argocd --kube-context argocd app sync vc --local k/vc --assumeYes --prune
 	tilt up --context pod
 
 asdf:
