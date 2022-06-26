@@ -164,7 +164,7 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "argocd app sync loft --local k/loft --assumeYes --prune; touch k/loft/main.yaml",
+        "kubectl create ns loft || true; argocd app sync loft --local k/loft --assumeYes --prune; touch k/loft/main.yaml",
     ],
     icon_name="build",
 )
