@@ -4,7 +4,15 @@ function main {
 	set -efu
 
 	local ns="${0##*/}"
-	exec kubectl --context pod -n "${ns}" "$@"
+	case "${1:-}" in
+		--)
+			shift
+			exec "$@"
+			;;
+		*)
+			exec kubectl --context pod -n "${ns}" "$@"
+			;;
+	esac
 }
 
 main "$@"

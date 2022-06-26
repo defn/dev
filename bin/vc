@@ -6,7 +6,15 @@ function main {
 	local ns="${0##*/}"
 	loft use vcluster "${ns}" --print > "$HOME/.kube/$ns.conf"
 	export KUBECONFIG="$HOME/.kube/$ns.conf"
-	exec kubectl "$@"
+	case "${1:-}" in
+		--)
+			shift
+			exec "$@"
+			;;
+		*)
+			exec kubectl "$@"
+			;;
+	esac
 }
 
 main "$@"
