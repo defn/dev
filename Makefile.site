@@ -31,7 +31,7 @@ clean:
 	docker rm -f earthly-buildkitd
 	docker volume rm -f earthly-cache
 	earthly bootstrap
-	touch .registry.txt
+	touch ~/.registry.txt
 
 images:
 	earthly --remote-cache=$(cache)defn/cache:images $(push) +images --repo=$(repo)

@@ -16,7 +16,7 @@ local_resource(
     name="registry buildkitd",
     serve_cmd="exec bash -c 'earthly bootstrap; docker exec earthly-buildkitd apk add socat || true; docker exec earthly-buildkitd pkill socat; rm -f .registry.txt; exec docker exec earthly-buildkitd socat TCP-LISTEN:5000,fork,reuseaddr TCP:$(host host.k3d.internal | cut -d\\  -f4):5000'",
     allow_parallel=True,
-    deps=[".registry.txt"]
+    deps=["/home/ubuntu/.registry.txt"]
 )
 
 local_resource(
