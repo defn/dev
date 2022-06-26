@@ -94,6 +94,17 @@ cmd_button(
     icon_name="web",
 )
 
+cmd_button(
+    name="login loft",
+    resource="loft port-forward",
+    argv=[
+        "bash",
+        "-c",
+        "loft login https://localhost:8882 --insecure"
+    ],
+    icon_name="web",
+)
+
 local_resource(
     name="tailscale cert",
     serve_cmd="set -x; d=$(docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale cert 2>&1 | grep For.domain | cut -d'\"' -f2); while true; do docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale cert $d; docker exec tailscale_docker-extension-desktop-extension-service tar cvfz - $d.crt $d.key > /tmp/$d.tar.gz; kubectl -n traefik delete secret default-certificate; bash -c \"kubectl create -n traefik secret generic default-certificate --from-file tls.crt=<(tar xfz /tmp/$d.tar.gz -O $d.crt) --from-file tls.key=<(tar xfz /tmp/$d.tar.gz -O $d.key)\"; touch /tmp/restart.txt; date; echo http://$d; sleep 36000; done",
