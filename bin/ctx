@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	local ns="${0##*/}"
+	exec kubectl --context pod -n "${ns}" "$@"
+}
+
+main "$@"

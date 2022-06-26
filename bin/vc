@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	local ns="${0##*/}"
+	loft use vcluster "${ns}" --print > "$HOME/.kube/$ns.conf"
+	export KUBECONFIG="$HOME/.kube/$ns.conf"
+	exec kubectl "$@"
+}
+
+main "$@"
