@@ -91,13 +91,13 @@ tower-update:
 
     FROM ${repo}defn/dev:tower
 
+    RUN sudo ln -nfs /home/ubuntu/hooks /hooks
+
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
     COPY --chown=ubuntu:ubuntu --dir .vim .
     COPY --chown=ubuntu:ubuntu .vimrc .
     RUN echo yes | vim +PlugInstall +qall
-
-    COPY hooks/* /hooks/
 
     COPY --dir --chown=ubuntu:ubuntu . .
     COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
