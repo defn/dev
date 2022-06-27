@@ -212,7 +212,7 @@ local_resource(
     cmd="""
         for a in hooks/*; do
             echo "$a"
-            default cp -c shell-operator "./$a" dev-0:/hooks/
+            default cp -c shell-operator "./$a" dev-0:/home/ubuntu/hooks/
         done
         default exec dev-0 -c shell-operator -- /restart.sh 
         echo restarted shell-operator

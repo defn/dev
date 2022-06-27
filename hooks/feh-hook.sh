@@ -4,9 +4,21 @@ if [[ $1 == "--config" ]] ; then
   cat <<EOF
 configVersion: v1
 kubernetes:
-- apiVersion: v1
-  kind: Namespace
+- name: tailscale-certificate
+  kind: Secret
   executeHookOnEvent: ["Added"]
+  nameSelector:
+    matchNames:
+    - default-certificate
+  namespace:
+    nameSelector:
+      matchNames:
+      - raefik
+  labelSelector:
+    matchExpressions:
+    - key: "source"
+      operator: "NoIn"
+      values: ["tailscale"]
 EOF
   exit 0
 fi
