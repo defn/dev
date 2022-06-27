@@ -227,6 +227,20 @@ cmd_button(
     icon_name="build",
 )
 
+local_resource(
+    "shell-operator",
+    cmd="""
+        for a in hooks/*; do
+            echo "$a"
+            vc1 cp -c shell-operator "./$a" vc1-0:/hooks/
+        done
+        vc1 exec vc1-0 -c shell-operator -- /restart.sh 
+    """,
+    deps=["hooks/"],
+    allow_parallel=True,
+    labels=["deploy"],
+)
+
 for vid in [1,2,3,4,5]:
     vname = 'vc' + str(vid)
     local_resource(
