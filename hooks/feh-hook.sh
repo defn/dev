@@ -11,10 +11,14 @@ EOF
   exit 0
 fi
 
+
 nsName="$(jq -r .[0].object.metadata.name $BINDING_CONTEXT_PATH)"
 echo "Namespace '${nsName}' added"
 
 cd
+
+cp "$BINDING_CONTEXT_PATH" work/tmp/
+
 source .bashrc
 make kubeconfig
 d="$(docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale cert 2>&1 | grep For.domain | cut -d'"' -f2)"
