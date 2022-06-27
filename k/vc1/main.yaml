@@ -25,6 +25,11 @@ spec:
               mountPath: /var/run/docker.sock
             - name: work
               mountPath: /home/ubuntu/work
+        - name: shell-operator
+          image: k3d-registry:5000/defn/dev:latest
+          imagePullPolicy: Always
+          command: ["/usr/bin/tini", "--"]
+          args: ["/shell-operator"]
       volumes:
         - name: docker-sock
           hostPath:
