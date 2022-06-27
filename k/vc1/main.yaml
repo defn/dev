@@ -30,6 +30,9 @@ spec:
           imagePullPolicy: Always
           command: ["/usr/bin/tini", "--"]
           args: ["/shell-operator"]
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 0
       volumes:
         - name: docker-sock
           hostPath:
