@@ -15,7 +15,14 @@ local_resource(
 
 local_resource(
     name="registry buildkitd",
-    serve_cmd="exec bash -c 'earthly bootstrap; docker exec earthly-buildkitd apk add socat || true; docker exec earthly-buildkitd pkill socat; rm -f /home/ubuntu/.registry.txt; exec docker exec earthly-buildkitd socat TCP-LISTEN:5000,fork,reuseaddr TCP:$(host host.k3d.internal | cut -d\\  -f4):5000'",
+    serve_cmd="""
+        earthly bootstrap; 
+        docker exec earthly-buildkitd apk add socat || true; 
+        docker exec earthly-buildkitd pkill socat; 
+        rm -f /home/ubuntu/.registry.txt; 
+        ip=`host host.k3d.internal | cut -d\\  -f4`;
+        exec docker exec earthly-buildkitd socat TCP-LISTEN:5000,fork,reuseaddr TCP:${ip}:5000
+    """,
     allow_parallel=True,
     deps=["/home/ubuntu/.registry.txt"],
     labels=["tunnels"],
@@ -59,7 +66,9 @@ cmd_button(
 
 local_resource(
     name="traefik port-forward",
-    serve_cmd="exec kubectl --context pod -n traefik port-forward $(kubectl --context pod -n traefik get pod -l app.kubernetes.io/instance=traefik -o name | head -n 1) 9000:9000",
+    serve_cmd="""
+        exec kubectl --context pod -n traefik port-forward $(kubectl --context pod -n traefik get pod -l app.kubernetes.io/instance=traefik -o name | head -n 1) 9000:9000
+    """,
     deps=["k/traefik", "/tmp/restart.txt"],
     allow_parallel=True,
     labels=["tunnels"],
@@ -96,7 +105,20 @@ cmd_button(
 
 local_resource(
     name="tailscale cert",
-    serve_cmd="set -x; d=$(docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale cert 2>&1 | grep For.domain | cut -d'\"' -f2); while true; do docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale cert $d; docker exec tailscale_docker-extension-desktop-extension-service tar cvfz - $d.crt $d.key > /tmp/$d.tar.gz; kubectl --context pod -n traefik delete secret default-certificate; bash -c \"kubectl --context pod create -n traefik secret generic default-certificate --from-file tls.crt=<(tar xfz /tmp/$d.tar.gz -O $d.crt) --from-file tls.key=<(tar xfz /tmp/$d.tar.gz -O $d.key)\"; touch /tmp/restart.txt; date; echo http://$d; sleep 36000; done",
+    serve_cmd="""
+        set -x; 
+        d=$(docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale cert 2>&1 | grep For.domain | cut -d'\"' -f2); 
+        while true; do 
+            docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale cert $d; 
+            docker exec tailscale_docker-extension-desktop-extension-service tar cvfz - $d.crt $d.key > /tmp/$d.tar.gz; 
+            kubectl --context pod -n traefik delete secret default-certificate; 
+            bash -c "kubectl --context pod create -n traefik secret generic default-certificate --from-file tls.crt=<(tar xfz /tmp/$d.tar.gz -O $d.crt) --from-file tls.key=<(tar xfz /tmp/$d.tar.gz -O $d.key)"; 
+            touch /tmp/restart.txt; 
+            date; 
+            echo http://$d; 
+            sleep 36000; 
+        done
+    """,
     allow_parallel=True,
     labels=["secrets"],
 )
@@ -179,7 +201,17 @@ cmd_button(
 
 local_resource(
     "vc",
-    cmd='if argocd --kube-context argocd app diff vc --local k/vc; then loft login https://loft.loft.svc.cluster.local --insecure --access-key admin; for a in 1 2 3 4 5; do vc$a get ns; name=vc$a; ~/bin/e env KUBECONFIG=${KUBECONFIG_ALL} argocd cluster add loft-vcluster_${name}_${name}_loft-cluster --name $name --yes; done; echo No difference; fi',
+    cmd="""
+        if argocd --kube-context argocd app diff vc --local k/vc; then 
+            loft login https://loft.loft.svc.cluster.local --insecure --access-key admin; 
+            for a in 1 2 3 4 5; do 
+                vc$a get ns; 
+                name=vc$a; 
+                ~/bin/e env KUBECONFIG=${KUBECONFIG_ALL} argocd cluster add loft-vcluster_${name}_${name}_loft-cluster --name $name --yes; 
+            done; 
+            echo No difference; 
+        fi
+    """,
     deps=["k/vc"],
     allow_parallel=True,
     labels=["deploy"],
@@ -191,7 +223,11 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "argocd --kube-context argocd app sync vc --local k/vc --assumeYes --prune; loft login https://loft.loft.svc.cluster.local --insecure --access-key admin; touch k/vc/main.yaml",
+        """
+            argocd --kube-context argocd app sync vc --local k/vc --assumeYes --prune; 
+            loft login https://loft.loft.svc.cluster.local --insecure --access-key admin; 
+            touch k/vc/main.yaml
+        """,
     ],
     icon_name="build",
 )
@@ -212,7 +248,10 @@ for vid in [1,2,3,4,5]:
         argv=[
             "bash",
             "-c",
-            "argocd --kube-context argocd app create {vname} --repo https://github.com/defn/dev --path k/{vname} --dest-namespace default --dest-name {vname} --directory-recurse --validate=false; argocd --kube-context argocd app sync {vname} --local k/{vname} --assumeYes --prune; touch k/{vname}/main.yaml".format(vname=vname),
+            """
+                argocd --kube-context argocd app create {vname} --repo https://github.com/defn/dev --path k/{vname} --dest-namespace default --dest-name {vname} --directory-recurse --validate=false; 
+                argocd --kube-context argocd app sync {vname} --local k/{vname} --assumeYes --prune; touch k/{vname}/main.yaml
+            """.format(vname=vname),
         ],
         icon_name="build",
     )
