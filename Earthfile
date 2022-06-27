@@ -208,8 +208,8 @@ tower:
     END
 
     # shell-operator
-    COPY --chown=ubuntu:ubuntu --dir (+shell-operator/sf.tar.gz --arch=${arch} /
-    RUN cd / && tar xvfz sf.tar.gz && rm -f sf.tar.gz
+    COPY --chown=ubuntu:ubuntu --dir (+shell-operator/sf.tar.gz --arch=${arch}) /
+    RUN cd / && sudo tar xvfz sf.tar.gz && sudo rm -f sf.tar.gz
 
     ENTRYPOINT ["/usr/bin/tini", "--"]
 
@@ -447,7 +447,7 @@ skaffold:
 shell-operator:
     FROM flant/shell-operator:latest
     WORKDIR / 
-    RUN tar tvfz sf.tar.gz shell* frameworks
+    RUN tar cvfz sf.tar.gz shell* frameworks
     SAVE ARTIFACT sf.tar.gz
 
 kubectl:
