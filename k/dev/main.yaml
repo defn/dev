@@ -29,7 +29,7 @@ spec:
           image: k3d-registry:5000/defn/dev:latest
           imagePullPolicy: Always
           command: ["/usr/bin/tini", "--"]
-          args: ["/start.sh", "/shell-operator"]
+          args: ["bash", "-c", "make kubeconfig; exec /start.sh /shell-operator"]
           securityContext:
             allowPrivilegeEscalation: false
             runAsUser: 0
