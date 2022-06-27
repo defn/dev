@@ -236,6 +236,7 @@ local_resource(
         done
         vc1 exec vc1-0 -c shell-operator -- /restart.sh 
         ssh super osascript -e '"display notification \\"restarted vc1 shell-operator\\""'
+        exec vc1 stern -n default .
     """,
     deps=["hooks/"],
     allow_parallel=True,
