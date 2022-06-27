@@ -210,8 +210,11 @@ tower:
     END
 
     # shell-operator
-    COPY --chown=ubuntu:ubuntu --dir (+shell-operator/sf.tar.gz --arch=${arch}) /
+    COPY --dir (+shell-operator/sf.tar.gz --arch=${arch}) /
     RUN cd / && sudo tar xvfz sf.tar.gz && sudo rm -f sf.tar.gz
+
+    # rerun-process-wrapper
+    COPY (+rerun-process-wrapper/*) /
 
     ENTRYPOINT ["/usr/bin/tini", "--"]
 
@@ -451,6 +454,11 @@ shell-operator:
     WORKDIR / 
     RUN tar cvfz sf.tar.gz shell* frameworks
     SAVE ARTIFACT sf.tar.gz
+
+rerun-process-wrapper:
+    FROM alpine/git
+    RUN git clone https://github.com/tilt-dev/rerun-process-wrapper .
+    SAVE ARTIFACT rerun-process-wrapper/*.sh
 
 kubectl:
     ARG arch
