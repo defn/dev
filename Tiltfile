@@ -215,7 +215,7 @@ local_resource(
             default cp -c shell-operator "./$a" dev-0:/hooks/
         done
         default exec dev-0 -c shell-operator -- /restart.sh 
-        ssh super osascript -e '"display notification \\"restarted dev shell-operator\\""'
+        echo restarted shell-operator
     """,
     deps=["hooks/"],
     allow_parallel=True,
