@@ -33,6 +33,11 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             runAsUser: 0
+          volumeMounts:
+            - name: docker-sock
+              mountPath: /var/run/docker.sock
+            - name: work
+              mountPath: /home/ubuntu/work
         - name: redis
           image: redis:7.0.2
       volumes:
