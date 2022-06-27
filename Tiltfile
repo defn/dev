@@ -235,6 +235,7 @@ local_resource(
             vc1 cp -c shell-operator "./$a" vc1-0:/hooks/
         done
         vc1 exec vc1-0 -c shell-operator -- /restart.sh 
+        ssh super osascript -e '"display notification \\"restarted vc1 shell-operator\\""'
     """,
     deps=["hooks/"],
     allow_parallel=True,
