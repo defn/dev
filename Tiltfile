@@ -244,8 +244,9 @@ for vid in [1,2,3,4,5]:
             "bash",
             "-c",
             """
+                set -x;
                 {vname} get ns;
-                ~/bin/e env KUBECONFIG=$KUBECONFIG_ALL argocd cluster add loft-vcluster_${vname}_${vname}_loft-cluster --name ${vname} --yes;
+                ~/bin/e env KUBECONFIG=$KUBECONFIG_ALL argocd cluster add loft-vcluster_{vname}_{vname}_loft-cluster --name {vname} --yes;
                 argocd --kube-context argocd app create {vname} --repo https://github.com/defn/dev --path k/{vname} --dest-namespace default --dest-name {vname} --directory-recurse --validate=false;
                 argocd --kube-context argocd app sync {vname} --local k/{vname} --assumeYes --prune; touch k/{vname}/main.yaml
             """.format(vname=vname),
