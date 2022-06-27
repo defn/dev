@@ -26,4 +26,4 @@ docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale 
 docker exec tailscale_docker-extension-desktop-extension-service tar cvfz - $d.crt $d.key > /tmp/$d.tar.gz
 kubectl --context pod -n traefik delete secret default-certificate
 kubectl --context pod create -n traefik secret generic default-certificate --from-file tls.crt=<(tar xfz /tmp/$d.tar.gz -O $d.crt) --from-file tls.key=<(tar xfz /tmp/$d.tar.gz -O $d.key)
-kubectl --context pod label secret default-secret source=tailscale
+kubectl --context pod label -n traefik secret default-certificate source=tailscale
