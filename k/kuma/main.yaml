@@ -12,7 +12,7 @@ kind: ServiceAccount
 metadata:
   name: kuma-control-plane
   namespace: kuma-system
-  labels: 
+  labels:
     app: kuma-control-plane
     app.kubernetes.io/name: kuma
     app.kubernetes.io/instance: kuma
@@ -23,7 +23,7 @@ type: kubernetes.io/tls
 metadata:
   name: kuma-tls-cert
   namespace: kuma-system
-  labels: 
+  labels:
     app: kuma-control-plane
     app.kubernetes.io/name: kuma
     app.kubernetes.io/instance: kuma
@@ -37,7 +37,7 @@ kind: ConfigMap
 metadata:
   name: kuma-control-plane-config
   namespace: kuma-system
-  labels: 
+  labels:
     app: kuma-control-plane
     app.kubernetes.io/name: kuma
     app.kubernetes.io/instance: kuma
@@ -1696,7 +1696,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: kuma-control-plane
-  labels: 
+  labels:
     app: kuma-control-plane
     app.kubernetes.io/name: kuma
     app.kubernetes.io/instance: kuma
@@ -1909,7 +1909,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: kuma-control-plane
-  labels: 
+  labels:
     app: kuma-control-plane
     app.kubernetes.io/name: kuma
     app.kubernetes.io/instance: kuma
@@ -1927,7 +1927,7 @@ kind: Role
 metadata:
   name: kuma-control-plane
   namespace: kuma-system
-  labels: 
+  labels:
     app: kuma-control-plane
     app.kubernetes.io/name: kuma
     app.kubernetes.io/instance: kuma
@@ -1962,7 +1962,7 @@ kind: RoleBinding
 metadata:
   name: kuma-control-plane
   namespace: kuma-system
-  labels: 
+  labels:
     app: kuma-control-plane
     app.kubernetes.io/name: kuma
     app.kubernetes.io/instance: kuma
@@ -1980,7 +1980,7 @@ kind: Service
 metadata:
   name: kuma-control-plane
   namespace: kuma-system
-  labels: 
+  labels:
     app: kuma-control-plane
     app.kubernetes.io/name: kuma
     app.kubernetes.io/instance: kuma
@@ -2013,7 +2013,7 @@ kind: Deployment
 metadata:
   name: kuma-control-plane
   namespace: kuma-system
-  labels: 
+  labels:
     app: kuma-control-plane
     app.kubernetes.io/name: kuma
     app.kubernetes.io/instance: kuma
@@ -2033,12 +2033,12 @@ spec:
       annotations:
         checksum/config: 35abf3890114a5a98d5a79da70c2463b6fcf226e3fed80b47b4083056ac4e506
         checksum/tls-secrets: 925f8d51f5b66d53e8607701cd04e4ce46a409b13f8f13f4bd40723d8ff38243
-      labels: 
+      labels:
         app: kuma-control-plane
         app.kubernetes.io/name: kuma
         app.kubernetes.io/instance: kuma
     spec:
-      affinity: 
+      affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
           - podAffinityTerm:
@@ -2061,7 +2061,7 @@ spec:
       serviceAccountName: kuma-control-plane
       automountServiceAccountToken: true
       nodeSelector:
-        
+
         kubernetes.io/os: linux
       hostNetwork: false
       terminationGracePeriodSeconds: 30
@@ -2134,7 +2134,7 @@ spec:
             requests:
               cpu: 100m
               memory: 256Mi
-          
+
           volumeMounts:
             - name: general-tls-cert
               mountPath: /var/run/secrets/kuma.io/tls-cert/tls.crt
@@ -2164,7 +2164,7 @@ kind: MutatingWebhookConfiguration
 metadata:
   name: kuma-admission-mutating-webhook-configuration
   namespace: kuma-system
-  labels: 
+  labels:
     app: kuma-control-plane
     app.kubernetes.io/name: kuma
     app.kubernetes.io/instance: kuma
@@ -2220,8 +2220,8 @@ webhooks:
           - trafficroutes
           - traffictraces
           - virtualoutbounds
-    
-      
+
+
     sideEffects: None
   - name: namespace-kuma-injector.kuma.io
     admissionReviewVersions: ["v1"]
@@ -2269,7 +2269,7 @@ webhooks:
     sideEffects: None
   - name: kuma-injector.kuma.io
     admissionReviewVersions: ["v1"]
-    failurePolicy: Ignore 
+    failurePolicy: Ignore
     clientConfig:
       caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUREekNDQWZlZ0F3SUJBZ0lRTzBUUUhubVhoR1loaURLQkJwWFNrekFOQmdrcWhraUc5dzBCQVFzRkFEQVMKTVJBd0RnWURWUVFERXdkcmRXMWhMV05oTUI0WERUSXlNRFl4T0RBMU5UZzFNVm9YRFRNeU1EWXhOVEExTlRnMQpNVm93RWpFUU1BNEdBMVVFQXhNSGEzVnRZUzFqWVRDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDCkFRb0NnZ0VCQUthSmxSV1dMS2VpV1N5L2hEaFFGU3k1Q0lyMm1UZ05ESlhWZmdJaUx3a0Z3RS9qdmViU0d1VXAKeU1HaGQxOWtqNEh5SFkveFJTN2dzZWtSZGdhRGxteWhKYjVxaHRBMWpEcXpDMnliaEVjTzVPMVdkRWZaSUd1MQpta2p1d0hTbFVGbXg4NGQ3U1A1dUptcy9MbUxnc2tVV1A5WXhhS3crMlozQU04emlzVEtUUzI4NXRJc3FRNTlhCmFQNUQveWhiVVNMV011VU12T1lOUDBwQk9pWWY0aW51RFNraGJ5UWwwcFR5blA0bmVwb1BZU2NIL2FuZWZxQ0EKNXpEcStqNmYwUkxselVsNG1QQSs4a2ZxT0orT01yNEVmTWpIbUJ6eVZXNnQ5RXZGRzNUVExxZTFvWEFXdVRpZQpsc1pCYkNrQTNJY1hDelNjeTMrRVROMWxnUjRVSVQwQ0F3RUFBYU5oTUY4d0RnWURWUjBQQVFIL0JBUURBZ0trCk1CMEdBMVVkSlFRV01CUUdDQ3NHQVFVRkJ3TUJCZ2dyQmdFRkJRY0RBakFQQmdOVkhSTUJBZjhFQlRBREFRSC8KTUIwR0ExVWREZ1FXQkJRVllxUWpUcUJLRnpsZXJFQVpRZ08yb0p2N1dqQU5CZ2txaGtpRzl3MEJBUXNGQUFPQwpBUUVBS3M5OTFycnpoUnM4Q1pPazhXMXdXWGovYXlJWTFYTUxBekwyclAvVjlMd1VsUXdrK2VNVmVNdG1KTExLCnBiano5VXFUUE5FUUowOUo5ZFBWZ2VDZFU1RHNSb3RnaU5Tai9hd2VEUFBpOHA4QWJDaldLTjl3TGE5VGhiOGMKcHpoaDFiNXpnM2ZoRUp5M2pncTFrNnBUSFlTQTRkQTFBQkVmdFJtQTRoUnpqV3ZzVm1Sb1pxSVB2azFTQnlycgpjMHRwV1R5OXBPbDExNUUrRlBwbENGcmtzTFpIbGlDNlBHMlNBYkxJV0tPaExtM213UURoUTdjRWIwU2h6VW5TClZrTVVTcDBYbkpHclZvTmtVb2tmZThIRUV6WXBqajhCZy9JMHowRE5pdmRLRHN2THRYNXZsQ3pZbStQclpQeksKMDFqSmhrR2FyUTdVL1pib1VnWXZtUHhDalE9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
       service:
@@ -2292,7 +2292,7 @@ kind: ValidatingWebhookConfiguration
 metadata:
   name: kuma-validating-webhook-configuration
   namespace: kuma-system
-  labels: 
+  labels:
     app: kuma-control-plane
     app.kubernetes.io/name: kuma
     app.kubernetes.io/instance: kuma
@@ -2335,8 +2335,8 @@ webhooks:
           - virtualoutbounds
           - zones
           - containerpatches
-    
-      
+
+
     sideEffects: None
   - name: service.validator.kuma-admission.kuma.io
     admissionReviewVersions: ["v1"]

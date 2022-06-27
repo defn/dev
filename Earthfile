@@ -83,7 +83,7 @@ root:
 
     RUN chown -R ubuntu:ubuntu /home/ubuntu
     RUN chmod u+s /usr/bin/sudo
-    SAVE IMAGE --cache-hint 
+    SAVE IMAGE --cache-hint
 
 tower-update:
     ARG arch
@@ -222,7 +222,7 @@ tools:
     RUN apt-get update \
         && apt-get install -y --no-install-recommends \
             apt-transport-https software-properties-common tzdata locales git gpg gpg-agent unzip xz-utils wget curl
-    SAVE IMAGE --cache-hint 
+    SAVE IMAGE --cache-hint
 
 asdf:
     ARG arch
@@ -235,7 +235,7 @@ asdf:
     RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${version_asdf}
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
     SAVE ARTIFACT .asdf
-    SAVE IMAGE --cache-hint 
+    SAVE IMAGE --cache-hint
 
 # arch3
 awscli:
@@ -246,7 +246,7 @@ awscli:
     RUN unzip awscliv2.zip
     RUN ./aws/install -i /usr/local/aws-cli -b /usr/local/aws-cli/bin
     SAVE ARTIFACT /usr/local/aws-cli
-    SAVE IMAGE --cache-hint 
+    SAVE IMAGE --cache-hint
 
 # arch2
 hof:
@@ -420,7 +420,7 @@ gcloud:
         && rm -rf $(find /usr/local/gcloud -regex ".*/__pycache__") \
         && rm -rf /usr/local/gcloud/google-cloud-sdk/.install/.backup
     SAVE ARTIFACT /usr/local/gcloud
-    SAVE IMAGE --cache-hint 
+    SAVE IMAGE --cache-hint
 
 awsvault:
     ARG arch
@@ -637,7 +637,7 @@ python:
     RUN bash -c 'source ~/.asdf/asdf.sh && python -m pip install --upgrade pip'
     RUN bash -c 'source ~/.asdf/asdf.sh && pip install pipx && asdf reshim'
     SAVE ARTIFACT .asdf
-    SAVE IMAGE --cache-hint 
+    SAVE IMAGE --cache-hint
 
 pipx:
     ARG arch
@@ -657,4 +657,4 @@ pipx:
     SAVE ARTIFACT --symlink-no-follow .asdf
     SAVE ARTIFACT --symlink-no-follow .local
     SAVE ARTIFACT --symlink-no-follow .cache
-    SAVE IMAGE --cache-hint 
+    SAVE IMAGE --cache-hint
