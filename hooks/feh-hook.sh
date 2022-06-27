@@ -17,15 +17,15 @@ kubernetes:
   labelSelector:
     matchExpressions:
     - key: "source"
-      operator: "NoIn"
+      operator: "NotIn"
       values: ["tailscale"]
 EOF
   exit 0
 fi
 
-
-nsName="$(jq -r .[0].object.metadata.name $BINDING_CONTEXT_PATH)"
-echo "Namespace '${nsName}' added"
+if [[ "$(cat $BINDING_CONTEXT_PATH | jq -r '[.[].objects][] | length')" == 0 ]]; then
+  exit 0
+fi
 
 cd
 
