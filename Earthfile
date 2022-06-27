@@ -451,13 +451,13 @@ skaffold:
 
 shell-operator:
     FROM flant/shell-operator:latest
-    WORKDIR / 
+    WORKDIR /
     RUN tar cvfz sf.tar.gz shell* frameworks
     SAVE ARTIFACT sf.tar.gz
 
 rerun-process-wrapper:
     FROM alpine/git
-    RUN git clone https://github.com/tilt-dev/rerun-process-wrapper .
+    RUN git clone https://github.com/tilt-dev/rerun-process-wrapper
     SAVE ARTIFACT rerun-process-wrapper/*.sh
 
 kubectl:
