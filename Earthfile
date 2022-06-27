@@ -207,6 +207,10 @@ tower:
         COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch} --arch3=x86_64) /usr/local/
     END
 
+    # shell-operator
+    COPY --chown=ubuntu:ubuntu --dir (+shell-operator/sf.tar.gz --arch=${arch} /
+    RUN cd / && tar xvfz sf.tar.gz && rm -f sf.tar.gz
+
     ENTRYPOINT ["/usr/bin/tini", "--"]
 
     SAVE IMAGE --push ${repo}defn/dev:tower
@@ -439,6 +443,12 @@ skaffold:
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add skaffold'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
+
+shell-operator:
+    FROM flant/shell-operator:latest
+    WORKDIR / 
+    RUN tar tvfz sf.tar.gz shell* frameworks
+    SAVE ARTIFACT sf.tar.gz
 
 kubectl:
     ARG arch
