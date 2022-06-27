@@ -27,11 +27,6 @@ spec:
               mountPath: /home/ubuntu/work
         - name: redis
           image: redis:7.0.2
-        - name: shell-operator
-          image: k3d-registry:5000/defn/dev:latest
-          imagePullPolicy: Always
-          command: ["/usr/bin/tini", "--"]
-          args: ["/shell-operator"]
       volumes:
         - name: docker-sock
           hostPath:
