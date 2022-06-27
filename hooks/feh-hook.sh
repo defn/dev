@@ -13,7 +13,7 @@ kubernetes:
   namespace:
     nameSelector:
       matchNames:
-      - raefik
+      - traefik
   labelSelector:
     matchExpressions:
     - key: "source"
