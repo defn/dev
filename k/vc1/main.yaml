@@ -30,7 +30,6 @@ spec:
           imagePullPolicy: Always
           command: ["/usr/bin/tini", "--"]
           args: ["/start.sh", "/shell-operator"]
-          workingDir: /
           securityContext:
             allowPrivilegeEscalation: false
             runAsUser: 0
