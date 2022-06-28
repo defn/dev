@@ -104,6 +104,41 @@ cmd_button(
 )
 
 local_resource(
+    "dev",
+    cmd='if argocd --kube-context argocd app diff dev --local k/dev; then echo No difference; fi',
+    deps=["k/dev"],
+    allow_parallel=True,
+    labels=["deploy"],
+)
+
+cmd_button(
+    name="sync dev",
+    resource="dev",
+    argv=[
+        "bash",
+        "-c",
+        "argocd --kube-context argocd app sync dev --local k/dev --assumeYes --prune; touch k/dev/main.yaml",
+    ],
+    icon_name="build",
+)
+
+local_resource(
+    "shell-operator",
+    cmd="""
+        for a in hooks/*; do
+            echo "$a"
+            default cp -c shell-operator "./$a" dev-0:/home/ubuntu/hooks/
+        done
+        default exec dev-0 -c shell-operator -- /restart.sh
+        echo restarted shell-operator
+    """,
+    deps=["hooks/"],
+    allow_parallel=True,
+    labels=["deploy"],
+)
+
+
+local_resource(
     "argocd",
     cmd='if argocd --kube-context argocd app diff argocd --local k/argocd; then echo No difference; fi',
     deps=["k/argocd"],
@@ -161,25 +196,6 @@ cmd_button(
 )
 
 local_resource(
-    "dev",
-    cmd='if argocd --kube-context argocd app diff dev --local k/dev; then echo No difference; fi',
-    deps=["k/dev"],
-    allow_parallel=True,
-    labels=["deploy"],
-)
-
-cmd_button(
-    name="sync dev",
-    resource="dev",
-    argv=[
-        "bash",
-        "-c",
-        "argocd --kube-context argocd app sync dev --local k/dev --assumeYes --prune; touch k/dev/main.yaml",
-    ],
-    icon_name="build",
-)
-
-local_resource(
     "vc",
     cmd="""
         if argocd --kube-context argocd app diff vc --local k/vc; then
@@ -205,21 +221,6 @@ cmd_button(
         """,
     ],
     icon_name="build",
-)
-
-local_resource(
-    "shell-operator",
-    cmd="""
-        for a in hooks/*; do
-            echo "$a"
-            default cp -c shell-operator "./$a" dev-0:/home/ubuntu/hooks/
-        done
-        default exec dev-0 -c shell-operator -- /restart.sh
-        echo restarted shell-operator
-    """,
-    deps=["hooks/"],
-    allow_parallel=True,
-    labels=["deploy"],
 )
 
 for vid in [1,2]:
