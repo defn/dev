@@ -214,7 +214,7 @@ local_resource(
             echo "$a"
             default cp -c shell-operator "./$a" dev-0:/home/ubuntu/hooks/
         done
-        default exec dev-0 -c shell-operator -- /restart.sh 
+        default exec dev-0 -c shell-operator -- /restart.sh
         echo restarted shell-operator
     """,
     deps=["hooks/"],
@@ -222,7 +222,7 @@ local_resource(
     labels=["deploy"],
 )
 
-for vid in [1,2,3,4,5]:
+for vid in [1,2]:
     vname = 'vc' + str(vid)
     local_resource(
         vname,

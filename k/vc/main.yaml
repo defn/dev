@@ -7,18 +7,3 @@ kind: Namespace
 apiVersion: v1
 metadata:
   name: vc2
----
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: vc3
----
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: vc4
----
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: vc5
