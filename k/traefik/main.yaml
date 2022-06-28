@@ -1796,6 +1796,36 @@ spec:
         - name: "websecure"
           containerPort: 8443
           protocol: "TCP"
+        - name: "https600"
+          containerPort: 8600
+          protocol: "TCP"
+        - name: "https601"
+          containerPort: 8601
+          protocol: "TCP"
+        - name: "https602"
+          containerPort: 8602
+          protocol: "TCP"
+        - name: "https603"
+          containerPort: 8603
+          protocol: "TCP"
+        - name: "https604"
+          containerPort: 8604
+          protocol: "TCP"
+        - name: "https605"
+          containerPort: 8605
+          protocol: "TCP"
+        - name: "https606"
+          containerPort: 8606
+          protocol: "TCP"
+        - name: "https607"
+          containerPort: 8607
+          protocol: "TCP"
+        - name: "https608"
+          containerPort: 8608
+          protocol: "TCP"
+        - name: "https609"
+          containerPort: 8609
+          protocol: "TCP"
         securityContext:
           capabilities:
             drop:
@@ -1816,6 +1846,16 @@ spec:
           - "--entrypoints.traefik.address=:9000/tcp"
           - "--entrypoints.web.address=:8000/tcp"
           - "--entrypoints.websecure.address=:8443/tcp"
+          - "--entrypoints.https600.address=:8600/tcp"
+          - "--entrypoints.https601.address=:8601/tcp"
+          - "--entrypoints.https602.address=:8602/tcp"
+          - "--entrypoints.https603.address=:8603/tcp"
+          - "--entrypoints.https604.address=:8604/tcp"
+          - "--entrypoints.https605.address=:8605/tcp"
+          - "--entrypoints.https606.address=:8606/tcp"
+          - "--entrypoints.https607.address=:8607/tcp"
+          - "--entrypoints.https608.address=:8608/tcp"
+          - "--entrypoints.https609.address=:8609/tcp"
           - "--api.dashboard=true"
           - "--api.insecure=true"
           - "--ping=true"
@@ -1871,3 +1911,54 @@ items:
         targetPort: "websecure"
         nodePort: 30443
         protocol: TCP
+      - port: 600
+        name: https600
+        targetPort: https600
+        nodePort: 30600
+        protocol: TCP
+      - port: 601
+        name: https601
+        targetPort: https601
+        nodePort: 30601
+        protocol: TCP
+      - port: 602
+        name: https602
+        targetPort: https602
+        nodePort: 30602
+        protocol: TCP
+      - port: 603
+        name: https603
+        targetPort: https603
+        nodePort: 30603
+        protocol: TCP
+      - port: 604
+        name: https604
+        targetPort: https604
+        nodePort: 30604
+        protocol: TCP
+      - port: 605
+        name: https605
+        targetPort: https605
+        nodePort: 30605
+        protocol: TCP
+      - port: 606
+        name: https606
+        targetPort: https606
+        nodePort: 30606
+        protocol: TCP
+      - port: 607
+        name: https607
+        targetPort: https607
+        nodePort: 30607
+        protocol: TCP
+      - port: 608
+        name: https608
+        targetPort: https608
+        nodePort: 30608
+        protocol: TCP
+      - port: 609
+        name: https609
+        targetPort: https609
+        nodePort: 30609
+        protocol: TCP
+
