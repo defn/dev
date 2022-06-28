@@ -80,6 +80,16 @@ cluster:
 		--registry-use registry \
 		-p "80:30080@loadbalancer" \
 		-p "443:30443@loadbalancer" \
+		-p "600:30600@loadbalancer" \
+		-p "601:30601@loadbalancer" \
+		-p "602:30602@loadbalancer" \
+		-p "603:30603@loadbalancer" \
+		-p "604:30604@loadbalancer" \
+		-p "605:30605@loadbalancer" \
+		-p "606:30606@loadbalancer" \
+		-p "607:30607@loadbalancer" \
+		-p "608:30608@loadbalancer" \
+		-p "609:30609@loadbalancer" \
 		--k3s-arg "--disable=traefik@all" \
 		--k3s-arg "--disable-network-policy@all" \
 		--k3s-arg "--flannel-backend=none@all"
