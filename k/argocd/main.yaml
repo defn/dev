@@ -9444,7 +9444,7 @@ metadata:
 data:
   resource.customizations.health.networking.k8s.io_Ingress: |
     hs = {}
-    hs.stats = "Healthy"
+    hs.status = "Healthy"
     return hs
 ---
 apiVersion: v1
