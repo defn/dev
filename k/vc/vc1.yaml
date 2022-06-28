@@ -19,3 +19,33 @@ spec:
       matchLabels:
         app: vcluster
         release: vc1
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: strip-vcluster
+  namespace: vc1
+spec:
+  stripPrefix:
+    prefixes:
+      - /vc1
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vc1
+  namespace: vc1
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: vc1-strip-vcluster@kubernetescrd
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /vc1
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-x-default-x-vc1
+            port:
+              number: 80
