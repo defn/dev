@@ -80,6 +80,24 @@ cluster:
 		--registry-use registry \
 		-p "80:30080@loadbalancer" \
 		-p "443:30443@loadbalancer" \
+		-p "6011:31611@loadbalancer" \
+		-p "6012:31612@loadbalancer" \
+		-p "6013:31613@loadbalancer" \
+		-p "6014:31614@loadbalancer" \
+		-p "6015:31615@loadbalancer" \
+		-p "6016:31616@loadbalancer" \
+		-p "6017:31617@loadbalancer" \
+		-p "6018:31618@loadbalancer" \
+		-p "6019:31629@loadbalancer" \
+		-p "6021:31621@loadbalancer" \
+		-p "6022:31622@loadbalancer" \
+		-p "6023:31623@loadbalancer" \
+		-p "6024:31624@loadbalancer" \
+		-p "6025:31625@loadbalancer" \
+		-p "6026:31626@loadbalancer" \
+		-p "6027:31627@loadbalancer" \
+		-p "6028:31628@loadbalancer" \
+		-p "6029:31629@loadbalancer" \
 		--k3s-arg "--disable=traefik@all" \
 		--k3s-arg "--disable-network-policy@all" \
 		--k3s-arg "--flannel-backend=none@all"
