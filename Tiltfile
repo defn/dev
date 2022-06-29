@@ -121,6 +121,32 @@ cmd_button(
 )
 
 local_resource(
+    "ingress",
+    cmd="""
+        if argocd --kube-context argocd app diff ingress --local k/ingress; then
+            echo No difference;
+        fi
+    """,
+    deps=["k/ingress"],
+    allow_parallel=True,
+    labels=["deploy"],
+)
+
+cmd_button(
+    name="sync ingress",
+    resource="ingress",
+    argv=[
+        "bash",
+        "-c",
+        """
+            argocd --kube-context argocd app sync ingress --local k/ingress --assumeYes --prune;
+            touch k/ingress/main.yaml
+        """,
+    ],
+    icon_name="build",
+)
+
+local_resource(
     "vc",
     cmd="""
         if argocd --kube-context argocd app diff vc --local k/vc; then
