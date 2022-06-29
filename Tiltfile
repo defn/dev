@@ -148,7 +148,7 @@ cmd_button(
     icon_name="build",
 )
 
-for vid in [1,2]:
+for vid in [1,2,3]:
     vname = 'vc' + str(vid)
     local_resource(
         vname,

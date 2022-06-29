@@ -1,6 +1,6 @@
 controlPlane:
   mode: zone
-  zone: vc2
+  zone: vc3
   kdsGlobalAddress: grpcs://10.43.247.237:5685
 ingress:
   enabled: true

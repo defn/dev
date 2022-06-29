@@ -7,3 +7,8 @@ kind: Namespace
 apiVersion: v1
 metadata:
   name: vc2
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: vc3
