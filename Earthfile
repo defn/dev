@@ -99,6 +99,8 @@ tower-update:
     COPY --chown=ubuntu:ubuntu .vimrc .
     RUN echo yes | vim +PlugInstall +qall
 
+    RUN ~/bin/e pipx install locust
+
     COPY --dir --chown=ubuntu:ubuntu . .
     COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
     RUN git clean -ffd
