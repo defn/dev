@@ -1,7 +1,7 @@
 controlPlane:
   mode: zone
   zone: vc2
-  kdsGlobalAddress: grpcs://10.43.247.237:5685
+  kdsGlobalAddress: grpcs://192.168.144.4:5685
 ingress:
   enabled: true
   service:
