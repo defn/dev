@@ -4,3 +4,5 @@ controlPlane:
   kdsGlobalAddress: grpcs://10.43.247.237:5685
 ingress:
   enabled: true
+  service:
+    port: 10003
