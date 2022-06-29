@@ -26,7 +26,7 @@ spec:
           image: "kumahq/kuma-demo"
           env:
             - name: REDIS_HOST
-              value: "redis_kuma-demo_svc_6379"
+              value: "redis_kuma-demo_svc_6379.mesh"
             - name: REDIS_PORT
               value: "80"
             - name: APP_VERSION
