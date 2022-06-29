@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: demo-app
-          image: "kumahq/demo1"
+          image: "kumahq/kuma-demo"
           env:
             - name: REDIS_HOST
               value: "redis_demo1_svc_6379.mesh"
