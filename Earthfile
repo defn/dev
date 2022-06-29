@@ -102,6 +102,9 @@ tower-update:
     COPY --chown=ubuntu:ubuntu --dir bin .
     COPY --chown=ubuntu:ubuntu .bash* .tool-versions .
 
+    RUN helm repo add kuma https://kumahq.github.io/charts
+    RUN helm repo update
+
     COPY --dir --chown=ubuntu:ubuntu . .
     COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
     RUN git clean -ffd
