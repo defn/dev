@@ -3,6 +3,7 @@ cache ?= $(repo)
 push ?= --push
 
 dev:
+	-git pull
 	@if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi
 
 dev_inner:
