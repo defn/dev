@@ -9,7 +9,7 @@ repos:
       - id: check-json
         exclude: ^(provider|cdktf.out)/
       - id: check-yaml
-        args: [--allow-multiple-documents]
+        args: [--allow-multiple-documents, --unsafe]
         exclude: ^(provider|cdktf.out)/
       - id: check-toml
         exclude: ^(provider|cdktf.out)/
