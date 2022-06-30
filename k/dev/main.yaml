@@ -25,21 +25,6 @@ spec:
               mountPath: /var/run/docker.sock
             - name: work
               mountPath: /home/ubuntu/work
-        - name: shell-operator
-          image: k3d-registry:5000/defn/dev:latest
-          imagePullPolicy: Always
-          command: ["/usr/bin/tini", "--"]
-          args: ["bash", "-c", "make kubeconfig; exec /start.sh /shell-operator"]
-          securityContext:
-            allowPrivilegeEscalation: false
-            runAsUser: 0
-          volumeMounts:
-            - name: docker-sock
-              mountPath: /var/run/docker.sock
-            - name: work
-              mountPath: /home/ubuntu/work
-        - name: redis
-          image: redis:7.0.2
       volumes:
         - name: docker-sock
           hostPath:

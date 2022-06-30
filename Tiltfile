@@ -29,6 +29,17 @@ local_resource(
 )
 
 local_resource(
+    name="",
+    serve_cmd="""
+        sudo install -d -m 0700 -o ubuntu -g ubuntu /var/run/shell-operator /tmp/shell-operator
+        exec /shell-operator start --listen-port=9116
+    """,
+    allow_parallel=True,
+    deps=["/home/ubuntu/.registry.txt"],
+    labels=["tunnels"],
+)
+
+local_resource(
     "dev",
     cmd="if argocd --kube-context argocd app diff dev --local k/dev; then echo No difference; fi",
     deps=["k/dev"],
