@@ -34,7 +34,7 @@ sync:
 	argocd --kube-context argocd app wait argocd
 	argocd --kube-context argocd app wait traefik
 	argocd --kube-context argocd app wait loft
-	while true; do if kubectl get crd/virtualclusters.storage.loft.sh; then sleep 30; break; fi; sleep 1; done
+	while true; do if kubectl get crd/virtualclusters.storage.loft.sh; then sleep 5; break; fi; sleep 1; done
 	argocd --kube-context argocd app sync vc --local k/vc --assumeYes --prune
 	argocd --kube-context argocd app wait vc
 

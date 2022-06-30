@@ -23,9 +23,7 @@ if [[ "$(cat $BINDING_CONTEXT_PATH | jq -r '[.[].objects][] | length')" == 0 ]];
   exit 0
 fi
 
-cd
-
-cp "$BINDING_CONTEXT_PATH" work/tmp/
+cd; source .bashrc
 
 d="$(docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale cert 2>&1 | grep For.domain | cut -d'"' -f2)"
 docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale cert $d
