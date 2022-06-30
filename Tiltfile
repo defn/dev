@@ -58,22 +58,6 @@ cmd_button(
 )
 
 local_resource(
-    "shell-operator",
-    cmd="""
-        for a in hooks/*; do
-            echo "$a"
-            default cp -c shell-operator "./$a" dev-0:/home/ubuntu/hooks/
-        done
-        default exec dev-0 -c shell-operator -- /restart.sh
-        echo restarted shell-operator
-    """,
-    deps=["hooks/"],
-    allow_parallel=True,
-    labels=["deploy"],
-)
-
-
-local_resource(
     "argocd",
     cmd="if argocd --kube-context argocd app diff argocd --local k/argocd; then echo No difference; fi",
     deps=["k/argocd"],
