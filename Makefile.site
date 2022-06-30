@@ -21,6 +21,7 @@ init:
 	argocd --kube-context argocd app create traefik --repo https://github.com/defn/dev --path k/traefik --dest-namespace traefik --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	argocd --kube-context argocd app create loft --repo https://github.com/defn/dev --path k/loft --dest-namespace loft --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	argocd --kube-context argocd app create vc --repo https://github.com/defn/dev --path k/vc --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
+	argocd --kube-context argocd app create kuma-demo --repo https://github.com/defn/dev --path k/kuma-demo --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	-$(MAKE) sync
 	tilt up --context pod
 
@@ -33,7 +34,7 @@ sync:
 	argocd --kube-context argocd app wait argocd
 	argocd --kube-context argocd app wait traefik
 	argocd --kube-context argocd app wait loft
-	while true; do if kubectl get crd/virtualclusters.storage.loft.sh; then break; fi; sleep 1; done
+	while true; do if kubectl get crd/virtualclusters.storage.loft.sh; then sleep 30; break; fi; sleep 1; done
 	argocd --kube-context argocd app sync vc --local k/vc --assumeYes --prune
 	argocd --kube-context argocd app wait vc
 
