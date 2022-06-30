@@ -40,6 +40,17 @@ local_resource(
 )
 
 local_resource(
+    name="make updates",
+    serve_cmd="""
+        git push
+        cd work/dev && make updates
+    """,
+    allow_parallel=True,
+    deps=[".git/index"],
+    labels=["automation"],
+)
+
+local_resource(
     "dev",
     cmd="if argocd --kube-context argocd app diff dev --local k/dev; then echo No difference; fi",
     deps=["k/dev"],
