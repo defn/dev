@@ -46,7 +46,6 @@ local_resource(
         cd work/dev && make updates
     """,
     allow_parallel=True,
-    deps=[".git/index"],
     labels=["automation"],
 )
 
