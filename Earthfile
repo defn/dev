@@ -103,6 +103,9 @@ tower-update:
     COPY --chown=ubuntu:ubuntu .bash* .tool-versions .
 
     RUN ~/bin/e helm repo add kuma https://kumahq.github.io/charts
+    RUN ~/bin/e helm repo add helm loft https://charts.loft.sh
+    RUN ~/bin/e helm repo add datadog https://helm.datadoghq.com
+    RUN ~/bin/e helm repo add argo https://argoproj.github.io/argo-helm
     RUN ~/bin/e helm repo update
 
     COPY --dir --chown=ubuntu:ubuntu . .
