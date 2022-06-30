@@ -165,3 +165,22 @@ for vid in [1,2,3]:
         ],
         icon_name="build",
     )
+
+local_resource(
+    "kuma-demo",
+    cmd='if argocd --kube-context argocd app diff kuma-demo --local k/vc; then loft login https://loft.loft.svc.cluster.local --insecure --access-key admin; echo No difference; fi',
+    deps=["k/vc"],
+    allow_parallel=True,
+    labels=["deploy"],
+)
+
+cmd_button(
+    name="sync vc",
+    resource="vc",
+    argv=[
+        "bash",
+        "-c",
+        "argocd --kube-context argocd app sync vc --local k/vc --assumeYes --prune; touch k/vc/main.yaml",
+    ],
+    icon_name="build",
+)
