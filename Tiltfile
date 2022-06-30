@@ -175,12 +175,12 @@ local_resource(
 )
 
 cmd_button(
-    name="sync vc",
-    resource="vc",
+    name="sync kuma-demo",
+    resource="kuma-demo",
     argv=[
         "bash",
         "-c",
-        "argocd --kube-context argocd app sync vc --local k/vc --assumeYes --prune; touch k/vc/main.yaml",
+        "argocd --kube-context argocd app sync kuma-demo --local k/kuma-demo --assumeYes --prune; touch k/kuma-demo/main.yaml",
     ],
     icon_name="build",
 )
