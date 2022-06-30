@@ -1,6 +1,11 @@
 kind: Namespace
 apiVersion: v1
 metadata:
+  name: loft
+---
+kind: Namespace
+apiVersion: v1
+metadata:
   name: vc1
 ---
 kind: Namespace
