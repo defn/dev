@@ -123,6 +123,9 @@ argocd: k/argocd/main.yaml
 	-kubectl create namespace argocd
 	kubectl apply -n argocd -f k/argocd/main.yaml
 
+argocd-admin:
+	@kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d'
+
 k/argocd/main.yaml:
 	curl -sSL -o $@ https://raw.githubusercontent.com/argoproj/argo-cd/v2.4.0/manifests/install.yaml
 
