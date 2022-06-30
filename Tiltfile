@@ -29,13 +29,14 @@ local_resource(
 )
 
 local_resource(
-    name="shell-operator hooks",
+    name="shell-operator",
     serve_cmd="""
         sudo install -d -m 0700 -o ubuntu -g ubuntu /var/run/shell-operator /tmp/shell-operator
         exec /shell-operator start --listen-port=9116
     """,
     allow_parallel=True,
-    deps=["/home/ubuntu/.registry.txt"],
+    deps=["hooks"],
+    labels=["automation"],
 )
 
 local_resource(
