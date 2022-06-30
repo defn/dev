@@ -20,7 +20,7 @@ init:
 	argocd --kube-context argocd app create argocd --repo https://github.com/defn/dev --path k/argocd --dest-namespace argocd --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	argocd --kube-context argocd app create traefik --repo https://github.com/defn/dev --path k/traefik --dest-namespace traefik --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	argocd --kube-context argocd app create loft --repo https://github.com/defn/dev --path k/loft --dest-namespace loft --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
-	argocd --kube-context argocd app create vc --repo https://github.com/defn/dev --path k/vc --dest-namespace loft --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
+	argocd --kube-context argocd app create vc --repo https://github.com/defn/dev --path k/vc --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	-$(MAKE) sync
 	tilt up --context pod
 
