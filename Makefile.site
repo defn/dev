@@ -20,14 +20,21 @@ init:
 	argocd --kube-context argocd app create argocd --repo https://github.com/defn/dev --path k/argocd --dest-namespace argocd --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	argocd --kube-context argocd app create traefik --repo https://github.com/defn/dev --path k/traefik --dest-namespace traefik --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	argocd --kube-context argocd app create loft --repo https://github.com/defn/dev --path k/loft --dest-namespace loft --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
+	argocd --kube-context argocd app create vc --repo https://github.com/defn/dev --path k/vc --dest-namespace loft --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	-$(MAKE) sync
 	tilt up --context pod
 
 sync:
 	argocd --kube-context argocd app sync dev --local k/dev --assumeYes --prune
+	argocd --kube-context argocd app wait dev
 	argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune
+	argocd --kube-context argocd app wait argocd
 	argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune
+	argocd --kube-context argocd app wait traefik
 	argocd --kube-context argocd app sync loft --local k/loft --assumeYes --prune
+	argocd --kube-context argocd app wait loft
+	argocd --kube-context argocd app sync vc --local k/loft --assumeYes --prune
+	argocd --kube-context argocd app wait vc
 
 asdf:
 	cat .tool-versions| awk '{print $$1}' | while read -r a; do asdf list-all "$$a" | sed "s#^#$$a #"; done | sort > .tool-versions-all
