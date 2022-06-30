@@ -166,21 +166,26 @@ for vid in [1,2,3]:
         icon_name="build",
     )
 
-local_resource(
-    "kuma-demo",
-    cmd='if argocd --kube-context argocd app diff kuma-demo --local k/vc; then loft login https://loft.loft.svc.cluster.local --insecure --access-key admin; echo No difference; fi',
-    deps=["k/vc"],
-    allow_parallel=True,
-    labels=["deploy"],
-)
+for a in ["kuma-demo-global", "kuma-demo-vc2", "kuma-demo-vc3"]:
+    local_resource(
+        a,
+        cmd='if argocd --kube-context argocd app diff {a} --local k/{a}; then echo No difference; fi'.format(a=a),
+        deps=["k/" + a],
+        allow_parallel=True,
+        labels=["deploy"],
+    )
 
-cmd_button(
-    name="sync kuma-demo",
-    resource="kuma-demo",
-    argv=[
-        "bash",
-        "-c",
-        "argocd --kube-context argocd app sync kuma-demo --local k/kuma-demo --assumeYes --prune; touch k/kuma-demo/main.yaml",
-    ],
-    icon_name="build",
-)
+    cmd_button(
+        name="sync " + a,
+        resource=a,
+        argv=[
+            "bash",
+            "-c",
+            """
+                set -x;
+                argocd --kube-context argocd app create {a} --repo https://github.com/defn/dev --path k/{a} --dest-namespace default --dest-name {a} --directory-recurse --validate=false;
+                argocd --kube-context argocd app sync {a} --local k/{a} --assumeYes --prune; touch k/{a}/main.yaml
+            """.format(a=a),
+        ],
+        icon_name="build",
+    )
