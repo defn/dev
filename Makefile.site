@@ -44,6 +44,7 @@ images:
 	earthly --remote-cache=$(cache)defn/cache:images $(push) +images --repo=$(repo)
 
 updates:
+	git pull
 	earthly --remote-cache=$(cache)defn/cache:updates $(push) +updates --repo=$(repo)
 
 shell:
