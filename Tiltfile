@@ -120,18 +120,6 @@ cmd_button(
     icon_name="build",
 )
 
-local_resource(
-    "ingress",
-    cmd="""
-        if argocd --kube-context argocd app diff ingress --local k/ingress; then
-            echo No difference;
-        fi
-    """,
-    deps=["k/ingress"],
-    allow_parallel=True,
-    labels=["deploy"],
-)
-
 cmd_button(
     name="sync ingress",
     resource="ingress",
@@ -172,6 +160,18 @@ cmd_button(
         """,
     ],
     icon_name="build",
+)
+
+local_resource(
+    "ingress",
+    cmd="""
+        if argocd --kube-context argocd app diff ingress --local k/ingress; then
+            echo No difference;
+        fi
+    """,
+    deps=["k/ingress"],
+    allow_parallel=True,
+    labels=["deploy"],
 )
 
 for vid in [1,2,3]:
