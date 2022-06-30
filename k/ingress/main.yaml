@@ -1,22 +1,3 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: ts-hubble
-  namespace: kube-system
-  annotations:
-    traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.entrypoints: https600
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: hubble-ui
-            port:
-              number: 80
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -28,15 +9,15 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: https602
 spec:
   rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: loft
-            port:
-              number: 443
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: loft
+                port:
+                  number: 443
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -48,15 +29,15 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: https603
 spec:
   rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: argocd-server
-            port:
-              number: 443
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: argocd-server
+                port:
+                  number: 443
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -65,18 +46,18 @@ metadata:
   namespace: traefik
 spec:
   entryPoints:
-  - https605
+    - https605
   routes:
-  - kind: Rule
-    match: PathPrefix(`/api`)
-    services:
-    - kind: TraefikService
-      name: api@internal
-  - kind: Rule
-    match: PathPrefix(`/`)
-    services:
-    - kind: TraefikService
-      name: dashboard@internal
+    - kind: Rule
+      match: PathPrefix(`/api`)
+      services:
+        - kind: TraefikService
+          name: api@internal
+    - kind: Rule
+      match: PathPrefix(`/`)
+      services:
+        - kind: TraefikService
+          name: dashboard@internal
   tls:
     secretName: default-certificate
 ---
@@ -90,12 +71,12 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: https606
 spec:
   rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: kuma-control-plane-x-default-x-vc1
-            port:
-              number: 5681
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kuma-control-plane-x-default-x-vc1
+                port:
+                  number: 5681

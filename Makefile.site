@@ -75,7 +75,7 @@ reset:
 	-osascript -e 'quit app "Docker"'
 	open -a Docker
 	while ! docker ps; do date; sleep 5; done
-	$(MAKE) k3d
+	$(MAKE) cluster
 
 cluster:
 	-k3d cluster delete
@@ -93,33 +93,18 @@ cluster:
 		-p "607:30607@loadbalancer" \
 		-p "608:30608@loadbalancer" \
 		-p "609:30609@loadbalancer" \
-		--k3s-arg "--disable=traefik@all" \
-		--k3s-arg "--disable-network-policy@all" \
-		--k3s-arg "--flannel-backend=none@all"
-	curl -sSL -o bash https://github.com/robxu9/bash-static/releases/download/5.1.016-1.2.3/bash-linux-x86_64
-	chmod 755 bash
-	docker cp bash k3d-k3s-default-server-0:/bin/bash
-	rm -f bash
-	helm repo add cilium https://helm.cilium.io/
-	helm repo update
-	helm install cilium cilium/cilium --version 1.11.5 \
-		--namespace kube-system \
-		--set kubeProxyReplacement=partial \
-		--set hostServices.enabled=false \
-		--set externalIPs.enabled=true \
-		--set nodePort.enabled=true \
-		--set hostPort.enabled=true \
-		--set bpf.masquerade=false \
-		--set image.pullPolicy=IfNotPresent \
-		--set ipam.mode=kubernetes \
-		--set operator.replicas=1 \
-		--set hubble.relay.enabled=true \
-		--set hubble.ui.enabled=true
-	docker exec k3d-k3s-default-server-0 mount bpffs /sys/fs/bpf -t bpf
-	while true; do if docker exec k3d-k3s-default-server-0 mount --make-shared /sys/fs/bpf; then break; fi; sleep 1; done
-	while true; do if docker exec k3d-k3s-default-server-0 mount --make-shared /run/cilium/cgroupv2; then break; fi; sleep 1; done
-	kubectl -n kube-system rollout status deployment cilium-operator --watch
-	kubectl -n kube-system rollout status daemonset cilium --watch
+		-p "5685:5685@server:0" \
+		-p "10001:10001@server:0" \
+		-p "10002:10002@server:0" \
+		-p "10003:10003@server:0" \
+		-p "10004:10004@server:0" \
+		-p "10005:10005@server:0" \
+		-p "10006:10006@server:0" \
+		-p "10007:10007@server:0" \
+		-p "10008:10008@server:0" \
+		-p "10009:10009@server:0" \
+		--k3s-arg "--disable=traefik@all"
+	docker exec k3d-k3s-default-server-0 touch /etc/passwd
 	kubectl apply -f k/dev/main.yaml
 	$(MAKE) argocd
 	kubectl rollout status statefulset dev --watch
