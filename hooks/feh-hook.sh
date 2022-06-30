@@ -27,8 +27,6 @@ cd
 
 cp "$BINDING_CONTEXT_PATH" work/tmp/
 
-source .bashrc
-make kubeconfig
 d="$(docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale cert 2>&1 | grep For.domain | cut -d'"' -f2)"
 docker exec tailscale_docker-extension-desktop-extension-service /app/tailscale cert $d
 docker exec tailscale_docker-extension-desktop-extension-service tar cvfz - $d.crt $d.key > /tmp/$d.tar.gz
