@@ -155,6 +155,48 @@ local_resource(
     trigger_mode=TRIGGER_MODE_MANUAL,
 )
 
+cmd_button(
+    name="make images",
+    resource="make updates",
+    argv=[
+        "bash",
+        "-c",
+        """
+            git push;
+            cd work/dev && exec make images;
+        """,
+    ],
+    icon_name="build",
+)
+
+cmd_button(
+    name="push images",
+    resource="make updates",
+    argv=[
+        "bash",
+        "-c",
+        """
+            git push;
+            cd work/dev && exec make images repo=;
+        """,
+    ],
+    icon_name="build",
+)
+
+cmd_button(
+    name="push updates",
+    resource="make updates",
+    argv=[
+        "bash",
+        "-c",
+        """
+            git push;
+            cd work/dev && exec make updates repo=;
+        """,
+    ],
+    icon_name="build",
+)
+
 local_resource(
     "dev",
     cmd="if argocd --kube-context argocd app diff dev --local k/dev; then echo No difference; fi",
