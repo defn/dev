@@ -16,7 +16,6 @@ init:
 
 init-dev:
 	argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')"
-	argocd --kube-context argocd app create dev --repo https://github.com/defn/dev --path k/dev --dest-namespace default --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	argocd --kube-context argocd app create argocd --repo https://github.com/defn/dev --path k/argocd --dest-namespace argocd --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	argocd --kube-context argocd app create traefik --repo https://github.com/defn/dev --path k/traefik --dest-namespace traefik --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	argocd --kube-context argocd app create loft --repo https://github.com/defn/dev --path k/loft --dest-namespace loft --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
@@ -35,11 +34,9 @@ kubeconfig:
 	kubectl config use-context pod
 
 sync:
-	argocd --kube-context argocd app sync dev --local k/dev --assumeYes --prune
 	argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune
 	argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune
 	argocd --kube-context argocd app sync loft --local k/loft --assumeYes --prune
-	argocd --kube-context argocd app wait dev
 	argocd --kube-context argocd app wait argocd
 	argocd --kube-context argocd app wait traefik
 	argocd --kube-context argocd app wait loft

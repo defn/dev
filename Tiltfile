@@ -198,29 +198,6 @@ cmd_button(
 )
 
 local_resource(
-    "dev",
-    cmd="if argocd --kube-context argocd app diff dev --local k/dev; then echo No difference; fi",
-    deps=["k/dev"],
-    allow_parallel=True,
-    labels=["deploy"],
-)
-
-cmd_button(
-    name="sync dev",
-    resource="dev",
-    argv=[
-        "bash",
-        "-c",
-        """
-            argocd --kube-context argocd app sync dev --local k/dev --assumeYes --prune; 
-            argocd --kube-context argocd app wait dev;
-            touch k/dev/main.yaml
-        """,
-    ],
-    icon_name="build",
-)
-
-local_resource(
     "argocd",
     cmd="if argocd --kube-context argocd app diff argocd --local k/argocd; then echo No difference; fi",
     deps=["k/argocd"],
