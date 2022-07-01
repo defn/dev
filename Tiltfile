@@ -47,6 +47,7 @@ local_resource(
     """,
     allow_parallel=True,
     labels=["automation"],
+    trigger_mode=TRIGGER_MODE_MANUAL,
 )
 
 local_resource(
