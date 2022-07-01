@@ -1,5 +1,7 @@
 include("Tiltfile.common")
 
+load("ext://uibutton", "cmd_button", "location")
+
 cmd_button(
     name="ui vc2",
     text="vc2",
