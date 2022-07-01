@@ -25,6 +25,7 @@ init:
 	pass hello
 	$(MAKE) kubeconfig
 	$(MAKE) init-dev
+	$(MAKE) init-site
 	tilt up --context pod
 
 init-dev:
