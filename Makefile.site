@@ -1,4 +1,4 @@
-include ~/Makefile.common
+include Makefile.common
 
 init-site:
 	argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')"
