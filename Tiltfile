@@ -1,5 +1,6 @@
 analytics_settings(False)
 
+include('ext://cancel')
 load("ext://uibutton", "cmd_button", "location")
 
 allow_k8s_contexts("pod")
