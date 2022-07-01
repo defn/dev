@@ -7,7 +7,7 @@ dev:
 	@if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi
 
 init:
-	sudo chown ubuntu:ubuntu /var/run/docker.sock work
+	sudo chown ubuntu:ubuntu /var/run/docker.sock ~/work
 	cd ~/.password-store && git crypt unlock
 	pass hello
 	$(MAKE) kubeconfig
