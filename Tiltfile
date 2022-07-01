@@ -147,6 +147,7 @@ local_resource(
 local_resource(
     name="make updates",
     cmd="""
+        cd;
         git push;
         cd work/dev && exec make updates;
     """,
@@ -162,6 +163,7 @@ cmd_button(
         "bash",
         "-c",
         """
+            cd;
             git push;
             cd work/dev && exec make images;
         """,
@@ -176,6 +178,7 @@ cmd_button(
         "bash",
         "-c",
         """
+            cd;
             git push;
             cd work/dev && exec make images repo= cache=localhost:5000/;
         """,
@@ -190,6 +193,7 @@ cmd_button(
         "bash",
         "-c",
         """
+            cd;
             git push;
             cd work/dev && exec make updates repo= cache=localhost:5000/;
         """,
