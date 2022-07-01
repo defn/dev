@@ -24,7 +24,7 @@ init:
 	cd ~/.password-store && git crypt unlock
 	pass hello
 	$(MAKE) kubeconfig
-	$(MAKE) init-dev
+	cd && $(MAKE) init-dev
 	$(MAKE) init-site
 	tilt up --context pod
 

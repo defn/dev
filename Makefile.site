@@ -1,4 +1,4 @@
 include Makefile.common
 
 init-site:
-    @true
+	@true
