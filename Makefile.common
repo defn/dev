@@ -29,7 +29,10 @@ init:
 	tilt up --context pod
 
 init-dev:
-	argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')"
+	-kubectl --kubeconfig pod create namespace argocd
+	kubectl --kubeconfig pod apply -n argocd -f k/argocd/main.yaml
+	kubectl --kube-context pod rollout status statefulset argocd-server --watch
+	argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')"
 	argocd --kube-context argocd app create argocd --repo https://github.com/defn/dev --path k/argocd --dest-namespace argocd --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	argocd --kube-context argocd app create traefik --repo https://github.com/defn/dev --path k/traefik --dest-namespace traefik --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	argocd --kube-context argocd app create loft --repo https://github.com/defn/dev --path k/loft --dest-namespace loft --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
@@ -116,12 +119,7 @@ cluster:
 		--k3s-arg "--disable=traefik@all"
 	docker exec k3d-k3s-default-server-0 touch /etc/passwd
 	kubectl apply -f k/dev/main.yaml
-	$(MAKE) argocd
 	kubectl rollout status statefulset dev --watch
-
-argocd:
-	-kubectl create namespace argocd
-	kubectl apply -n argocd -f k/argocd/main.yaml
 
 argocd-admin:
 	@kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d' | ssh super pbcopy
