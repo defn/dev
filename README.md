@@ -18,3 +18,14 @@ vm:
     symlink: .gnupg2 to .gnupg
     gpg-agent: maybe remove from remote
     vscode: code --folder-uri vscode-remote://ssh-remote+defn/home/ubuntu
+"features": {
+    "buildkit": true
+  },
+  "registry-mirrors": ["http://1.1.1.1:5000"]
+
+  buildkit_additional_config: |
+    [registry."docker.io"]
+      mirrors = ["1.1.1.1:5000"]
+    [registry."1.1.1.1:5000"]
+      http = true
+      insecure = true
