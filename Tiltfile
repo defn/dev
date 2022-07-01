@@ -64,7 +64,10 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "argocd --kube-context argocd app sync dev --local k/dev --assumeYes --prune; touch k/dev/main.yaml",
+        """
+            argocd --kube-context argocd app sync dev --local k/dev --assumeYes --prune; touch k/dev/main.yaml
+            argocd --kube-context argocd app wait dev
+        """,
     ],
     icon_name="build",
 )
@@ -83,7 +86,10 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune; touch k/argocd/main.yaml",
+        """
+            argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune; touch k/argocd/main.yaml
+            argocd --kube-context argocd app wait argocd
+        """,
     ],
     icon_name="build",
 )
@@ -102,7 +108,10 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune; touch k/traefik/main.yaml",
+        """
+            argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune; touch k/traefik/main.yaml
+            argocd --kube-context argocd app wait traefik
+        """,
     ],
     icon_name="build",
 )
@@ -121,7 +130,10 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "argocd --kube-context argocd app sync loft --local k/loft --assumeYes --prune; touch k/loft/main.yaml",
+        """
+            argocd --kube-context argocd app sync loft --local k/loft --assumeYes --prune; touch k/loft/main.yaml
+            argocd --kube-context argocd app wait loft
+        """,
     ],
     icon_name="build",
 )
@@ -144,7 +156,7 @@ cmd_button(
             set -x;
             argocd --kube-context argocd app create vc --repo https://github.com/defn/dev --path k/vc --dest-namespace default --dest-name in-cluster --directory-recurse --validate=false;
             argocd --kube-context argocd app sync vc --local k/vc --assumeYes --prune; touch k/vc/main.yaml;
-        """
+        """,
     ],
     icon_name="build",
 )
@@ -173,6 +185,7 @@ for vid in [1, 2, 3]:
                 ~/bin/e env KUBECONFIG=$KUBECONFIG_ALL argocd cluster add loft-vcluster_{vname}_{vname}_loft-cluster --name {vname} --yes;
                 argocd --kube-context argocd app create {vname} --repo https://github.com/defn/dev --path k/{vname} --dest-namespace default --dest-name {vname} --directory-recurse --validate=false;
                 argocd --kube-context argocd app sync {vname} --local k/{vname} --assumeYes --prune; touch k/{vname}/main.yaml
+                argocd --kube-context argocd app wait {vname}
             """.format(
                 vname=vname
             ),
@@ -205,6 +218,7 @@ for a, dest in [
                 set -x;
                 argocd --kube-context argocd app create {a} --repo https://github.com/defn/dev --path k/{a} --dest-namespace default --dest-name {dest} --directory-recurse --validate=false;
                 argocd --kube-context argocd app sync {a} --local k/{a} --assumeYes --prune; touch k/{a}/main.yaml
+                argocd --kube-context argocd app wait {a}
             """.format(
                 a=a, dest=dest
             ),
