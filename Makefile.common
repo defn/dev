@@ -7,12 +7,20 @@ dev:
 	@if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi
 
 init:
-	sudo chown ubuntu:ubuntu /var/run/docker.sock ~/work
+	sudo chown ubuntu:ubuntu /var/run/docker.sock work
 	cd ~/.password-store && git crypt unlock
 	pass hello
 	$(MAKE) kubeconfig
-	$(MAKE) init-site
+	$(MAKE) init-dev
 	tilt up --context pod
+
+init-dev:
+	argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')"
+	argocd --kube-context argocd app create dev --repo https://github.com/defn/dev --path k/dev --dest-namespace default --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
+	argocd --kube-context argocd app create argocd --repo https://github.com/defn/dev --path k/argocd --dest-namespace argocd --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
+	argocd --kube-context argocd app create traefik --repo https://github.com/defn/dev --path k/traefik --dest-namespace traefik --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
+	argocd --kube-context argocd app create loft --repo https://github.com/defn/dev --path k/loft --dest-namespace loft --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
+	-$(MAKE) sync
 
 kubeconfig:
 	sudo cp /run/secrets/kubernetes.io/serviceaccount/ca.crt /usr/local/share/ca-certificates/
