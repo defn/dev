@@ -177,7 +177,7 @@ cmd_button(
         "-c",
         """
             git push;
-            cd work/dev && exec make images repo=;
+            cd work/dev && exec make images repo= cache=localhost:5000/;
         """,
     ],
     icon_name="build",
@@ -191,7 +191,7 @@ cmd_button(
         "-c",
         """
             git push;
-            cd work/dev && exec make updates repo=;
+            cd work/dev && exec make updates repo= cache=localhost:5000/;
         """,
     ],
     icon_name="build",
