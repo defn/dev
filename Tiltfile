@@ -1,11 +1,115 @@
+ts_domain = "crouching.tiger-mamba.ts.net"
+
 analytics_settings(False)
 
-include('ext://cancel')
+include("ext://cancel")
 load("ext://uibutton", "cmd_button", "location")
 
 allow_k8s_contexts("pod")
 
 update_settings(max_parallel_updates=20)
+
+cmd_button(
+    name="ui argocd",
+    text="argocd",
+    icon_name="stream",
+    resource="argocd",
+    argv=[
+        "bash",
+        "-c",
+        """
+            kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d' | ssh super pbcopy;
+            xdg-open https://{domain}:603;
+        """.format(
+            domain=ts_domain
+        ),
+    ],
+    location="nav",
+)
+
+cmd_button(
+    name="ui traefik",
+    text="traefik",
+    icon_name="traffic",
+    resource="traefik",
+    argv=[
+        "bash",
+        "-c",
+        """
+            xdg-open https://{domain}:605;
+        """.format(
+            domain=ts_domain
+        ),
+    ],
+    location="nav",
+)
+
+cmd_button(
+    name="ui kuma",
+    text="kuma",
+    icon_name="rss_feed",
+    resource="kuma",
+    argv=[
+        "bash",
+        "-c",
+        """
+            xdg-open https://{domain}:606/gui;
+        """.format(
+            domain=ts_domain
+        ),
+    ],
+    location="nav",
+)
+
+cmd_button(
+    name="ui vc2",
+    text="vc2",
+    icon_name="signal_cellular_alt_2_bar",
+    resource="vc2",
+    argv=[
+        "bash",
+        "-c",
+        """
+            xdg-open https://{domain}:607;
+        """.format(
+            domain=ts_domain
+        ),
+    ],
+    location="nav",
+)
+
+cmd_button(
+    name="ui vc3",
+    text="vc3",
+    icon_name="signal_cellular_alt",
+    resource="vc3",
+    argv=[
+        "bash",
+        "-c",
+        """
+            xdg-open https://{domain}:608;
+        """.format(
+            domain=ts_domain
+        ),
+    ],
+    location="nav",
+)
+
+cmd_button(
+    name="ui loft",
+    text="loft",
+    resource="loft",
+    argv=[
+        "bash",
+        "-c",
+        """
+            xdg-open https://{domain}:602;
+        """.format(
+            domain=ts_domain
+        ),
+    ],
+    location="nav",
+)
 
 local_resource(
     name="registry pod",
