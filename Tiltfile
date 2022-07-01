@@ -21,7 +21,7 @@ local_resource(
         docker exec earthly-buildkitd pkill socat;
         rm -f /home/ubuntu/.registry.txt;
         ip=`host host.k3d.internal | cut -d\\  -f4`;
-        exec docker exec earthly-buildkitd socat TCP-LISTEN:5000,fork,reuseaddr TCP:${ip}:5000
+        exec docker exec earthly-buildkitd socat TCP-LISTEN:5000,fork,reuseaddr TCP:${ip}:5000;
     """,
     allow_parallel=True,
     deps=["/home/ubuntu/.registry.txt"],
@@ -31,8 +31,8 @@ local_resource(
 local_resource(
     name="shell-operator",
     serve_cmd="""
-        sudo install -d -m 0700 -o ubuntu -g ubuntu /var/run/shell-operator /tmp/shell-operator
-        exec /shell-operator start --listen-port=9116
+        sudo install -d -m 0700 -o ubuntu -g ubuntu /var/run/shell-operator /tmp/shell-operator;
+        exec /shell-operator start --listen-port=9116;
     """,
     allow_parallel=True,
     deps=["hooks"],
@@ -42,8 +42,8 @@ local_resource(
 local_resource(
     name="make updates",
     cmd="""
-        git push
-        cd work/dev && exec make updates
+        git push;
+        cd work/dev && exec make updates;
     """,
     allow_parallel=True,
     labels=["automation"],
@@ -66,7 +66,7 @@ cmd_button(
         "-c",
         """
             argocd --kube-context argocd app sync dev --local k/dev --assumeYes --prune; 
-            argocd --kube-context argocd app wait dev
+            argocd --kube-context argocd app wait dev;
             touch k/dev/main.yaml
         """,
     ],
@@ -89,7 +89,7 @@ cmd_button(
         "-c",
         """
             argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune; 
-            argocd --kube-context argocd app wait argocd
+            argocd --kube-context argocd app wait argocd;
             touch k/argocd/main.yaml
         """,
     ],
@@ -112,8 +112,8 @@ cmd_button(
         "-c",
         """
             argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune; 
-            argocd --kube-context argocd app wait traefik
-            touch k/traefik/main.yaml
+            argocd --kube-context argocd app wait traefik;
+            touch k/traefik/main.yaml;
         """,
     ],
     icon_name="build",
@@ -135,8 +135,8 @@ cmd_button(
         "-c",
         """
             argocd --kube-context argocd app sync loft --local k/loft --assumeYes --prune; 
-            argocd --kube-context argocd app wait loft
-            touch k/loft/main.yaml
+            argocd --kube-context argocd app wait loft;
+            touch k/loft/main.yaml;
         """,
     ],
     icon_name="build",
@@ -160,7 +160,7 @@ cmd_button(
             set -x;
             argocd --kube-context argocd app create vc --repo https://github.com/defn/dev --path k/vc --dest-namespace default --dest-name in-cluster --directory-recurse --validate=false;
             argocd --kube-context argocd app sync vc --local k/vc --assumeYes --prune; 
-            argocd --kube-context argocd app wait vc
+            argocd --kube-context argocd app wait vc;
             touch k/vc/main.yaml;
         """,
     ],
@@ -191,8 +191,8 @@ for vid in [1, 2, 3]:
                 ~/bin/e env KUBECONFIG=$KUBECONFIG_ALL argocd cluster add loft-vcluster_{vname}_{vname}_loft-cluster --name {vname} --yes;
                 argocd --kube-context argocd app create {vname} --repo https://github.com/defn/dev --path k/{vname} --dest-namespace default --dest-name {vname} --directory-recurse --validate=false;
                 argocd --kube-context argocd app sync {vname} --local k/{vname} --assumeYes --prune; 
-                argocd --kube-context argocd app wait {vname}
-                touch k/{vname}/main.yaml
+                argocd --kube-context argocd app wait {vname};
+                touch k/{vname}/main.yaml;
             """.format(
                 vname=vname
             ),
@@ -224,8 +224,8 @@ for a, dest in [
             """
                 set -x;
                 argocd --kube-context argocd app create {a} --repo https://github.com/defn/dev --path k/{a} --dest-namespace default --dest-name {dest} --directory-recurse --validate=false;
-                argocd --kube-context argocd app sync {a} --local k/{a} --assumeYes --prune
-                argocd --kube-context argocd app wait {a}
+                argocd --kube-context argocd app sync {a} --local k/{a} --assumeYes --prune;
+                argocd --kube-context argocd app wait {a};
                 touch k/{a}/main.yaml 
             """.format(
                 a=a, dest=dest
