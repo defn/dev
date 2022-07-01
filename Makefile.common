@@ -2,6 +2,18 @@ repo ?= localhost:5000/
 repo_from ?= $(repo)
 cache ?= $(repo)
 push ?= --push
+dummy_ip ?= 169.254.32.1
+dummy_host ?= 169.254.32.1
+
+dummy:
+	sudo true
+	docker run --rm -i --privileged --network=host --pid=host alpine nsenter -t 1 -m -u -n -i -- \
+		bash -c "ip link add dummy0 type dummy; ip addr add $(dummy_ip)/32 dev dummy0; ip link set dev dummy0 up"
+	for ip in $(dummy_ip); do sudo ifconfig lo0 alias "$$ip" netmask 255.255.255.255; done
+
+registry:
+	-k3d registry create registry --port 0.0.0.0:5000
+	-k3d registry create docker-io --proxy-remote-url https://registry-1.docker.io --port 0.0.0.0:5001
 
 dev:
 	-git pull
@@ -66,10 +78,6 @@ shell:
 attach:
 	code --folder-uri vscode-remote://k8s-container+context=k3d-k3s-default+namespace=default+podname=dev-0+name=dev+/home/ubuntu
 
-registry:
-	-k3d registry create registry --port 0.0.0.0:5000
-	-k3d registry create docker-io --proxy-remote-url https://registry-1.docker.io -p 5001
-
 reset:
 	-k3d cluster delete
 	-docker rm -f ignore
@@ -116,7 +124,7 @@ argocd:
 
 argocd-admin:
 	@kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d' | ssh super pbcopy
-	@xdg-open https://crouching.tiger-mamba.ts.net:603
+	@xdg-open https://$(dummy_host):603
 
 down:
 	-bash -c 'rm -vf "$${SSH_AUTH_SOCK}"'

@@ -2247,7 +2247,7 @@ spec:
             - name: KUMA_MODE
               value: "zone"
             - name: KUMA_MULTIZONE_ZONE_GLOBAL_ADDRESS
-              value: "grpcs://100.105.101.9:5685"
+              value: "grpcs://169.254.32.1:5685"
             - name: KUMA_MULTIZONE_ZONE_NAME
               value: "vc2"
             - name: KUMA_RUNTIME_KUBERNETES_ADMISSION_SERVER_CERT_DIR

@@ -1,4 +1,5 @@
-ts_domain = "crouching.tiger-mamba.ts.net"
+dummy_host = "crouching.tiger-mamba.ts.net"
+dummy_ip = "169.254.32.1"
 
 analytics_settings(False)
 
@@ -19,9 +20,9 @@ cmd_button(
         "-c",
         """
             kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d' | ssh super pbcopy;
-            xdg-open https://{domain}:603;
+            xdg-open https://{dummy_host}:603;
         """.format(
-            domain=ts_domain
+            domain=dummy_host
         ),
     ],
     location="nav",
@@ -38,7 +39,7 @@ cmd_button(
         """
             xdg-open https://{domain}:605;
         """.format(
-            domain=ts_domain
+            domain=dummy_host
         ),
     ],
     location="nav",
@@ -55,7 +56,7 @@ cmd_button(
         """
             xdg-open https://{domain}:606/gui;
         """.format(
-            domain=ts_domain
+            domain=dummy_host
         ),
     ],
     location="nav",
@@ -72,7 +73,7 @@ cmd_button(
         """
             xdg-open https://{domain}:607;
         """.format(
-            domain=ts_domain
+            domain=dummy_host
         ),
     ],
     location="nav",
@@ -89,7 +90,7 @@ cmd_button(
         """
             xdg-open https://{domain}:608;
         """.format(
-            domain=ts_domain
+            domain=dummy_host
         ),
     ],
     location="nav",
@@ -105,7 +106,7 @@ cmd_button(
         """
             xdg-open https://{domain}:602;
         """.format(
-            domain=ts_domain
+            domain=dummy_host
         ),
     ],
     location="nav",
@@ -113,7 +114,7 @@ cmd_button(
 
 local_resource(
     name="registry pod",
-    serve_cmd="exec socat TCP-LISTEN:5000,fork,reuseaddr TCP:k3d-registry:5000",
+    serve_cmd="exec socat TCP-LISTEN:5000,fork,reuseaddr TCP:{ip}:5000".format(ip=dummy_ip),
     allow_parallel=True,
     labels=["tunnels"],
 )
@@ -125,9 +126,8 @@ local_resource(
         docker exec earthly-buildkitd apk add socat || true;
         docker exec earthly-buildkitd pkill socat;
         rm -f /home/ubuntu/.registry.txt;
-        ip=`host host.k3d.internal | cut -d\\  -f4`;
         exec docker exec earthly-buildkitd socat TCP-LISTEN:5000,fork,reuseaddr TCP:${ip}:5000;
-    """,
+    """.format(ip=dummy_ip),
     allow_parallel=True,
     deps=["/home/ubuntu/.registry.txt"],
     labels=["tunnels"],
