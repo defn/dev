@@ -140,7 +140,11 @@ cmd_button(
     argv=[
         "bash",
         "-c",
-        "argocd --kube-context argocd app sync vc --local k/vc --assumeYes --prune; touch k/vc/main.yaml",
+        """
+            set -x;
+            argocd --kube-context argocd app create vc --repo https://github.com/defn/dev --path k/vc --dest-namespace default --dest-name in-cluster --directory-recurse --validate=false;
+            argocd --kube-context argocd app sync vc --local k/vc --assumeYes --prune; touch k/vc/main.yaml;
+        """
     ],
     icon_name="build",
 )
