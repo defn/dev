@@ -64,14 +64,6 @@ registry:
 	-k3d registry create registry --port 0.0.0.0:5000
 	-k3d registry create docker-io --proxy-remote-url https://registry-1.docker.io -p 5001
 
-import:
-	docker pull defn/dev:tower
-	docker tag defn/dev:tower localhost:5000/defn/dev:tower
-	docker push localhost:5000/defn/dev:tower
-	docker pull defn/dev
-	docker tag defn/dev localhost:5000/defn/dev
-	docker push localhost:5000/defn/dev
-
 reset:
 	-k3d cluster delete
 	-docker rm -f ignore
