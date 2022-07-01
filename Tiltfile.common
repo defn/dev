@@ -151,3 +151,107 @@ local_resource(
     deps=["hooks"],
     labels=["automation"],
 )
+
+local_resource(
+    "dev",
+    cmd="""
+        cd;
+        if argocd --kube-context argocd app diff dev --local k/dev; then echo No difference; fi;
+    """,
+    deps=["k/dev"],
+    allow_parallel=True,
+    labels=["deploy"],
+)
+
+cmd_button(
+    name="sync dev",
+    resource="dev",
+    argv=[
+        "bash",
+        "-c",
+        """
+            cd;
+            argocd --kube-context argocd app sync dev --local k/dev --assumeYes --prune; 
+            touch k/dev/main.yaml;
+        """,
+    ],
+    icon_name="build",
+)
+
+local_resource(
+    "argocd",
+    cmd="""
+        cd;
+        if argocd --kube-context argocd app diff argocd --local k/argocd; then echo No difference; fi;
+    """,
+    deps=["k/argocd"],
+    allow_parallel=True,
+    labels=["deploy"],
+)
+
+cmd_button(
+    name="sync argocd",
+    resource="argocd",
+    argv=[
+        "bash",
+        "-c",
+        """
+            cd;
+            argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune; 
+            touch k/argocd/main.yaml;
+        """,
+    ],
+    icon_name="build",
+)
+
+local_resource(
+    "traefik",
+    cmd="""
+        cd;
+        if argocd --kube-context argocd app diff traefik --local k/traefik; then echo No difference; fi;
+    """,
+    deps=["k/traefik"],
+    allow_parallel=True,
+    labels=["deploy"],
+)
+
+cmd_button(
+    name="sync traefik",
+    resource="traefik",
+    argv=[
+        "bash",
+        "-c",
+        """
+            cd;
+            argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune; 
+            touch k/traefik/main.yaml;
+        """,
+    ],
+    icon_name="build",
+)
+
+local_resource(
+    "loft",
+    cmd="""
+        cd;
+        if argocd --kube-context argocd app diff loft --local k/loft; then echo No difference; fi;
+    """,
+    deps=["k/loft"],
+    allow_parallel=True,
+    labels=["deploy"],
+)
+
+cmd_button(
+    name="sync loft",
+    resource="loft",
+    argv=[
+        "bash",
+        "-c",
+        """
+            cd;
+            argocd --kube-context argocd app sync loft --local k/loft --assumeYes --prune; 
+            touch k/loft/main.yaml;
+        """,
+    ],
+    icon_name="build",
+)
