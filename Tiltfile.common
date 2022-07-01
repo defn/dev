@@ -134,7 +134,7 @@ local_resource(
         docker exec earthly-buildkitd apk add socat || true;
         docker exec earthly-buildkitd pkill socat;
         rm -f /home/ubuntu/.registry.txt;
-        exec docker exec earthly-buildkitd socat TCP-LISTEN:5000,fork,reuseaddr TCP:${ip}:5000;
+        exec docker exec earthly-buildkitd socat TCP-LISTEN:5000,fork,reuseaddr TCP:{ip}:5000;
     """.format(
         ip=dummy_ip
     ),
