@@ -1,4 +1,5 @@
 repo ?= localhost:5000/
+repo_from ?= $(repo)
 cache ?= $(repo)
 push ?= --push
 
@@ -57,7 +58,7 @@ images:
 
 updates:
 	git pull
-	earthly --remote-cache=$(cache)defn/cache:updates $(push) +updates --repo=$(repo)
+	earthly --remote-cache=$(cache)defn/cache:updates $(push) +updates --repo=$(repo) --repo_from=$(repo_from)
 
 shell:
 	docker run --rm -ti $(repo)defn/dev bash -l

@@ -88,6 +88,7 @@ root:
 tower-update:
     ARG arch
     ARG repo=localhost:5000/
+    ARG repo_push=localhost:5000/
 
     FROM ${repo}defn/dev:tower
 
@@ -112,7 +113,7 @@ tower-update:
     COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
     RUN git clean -ffd
 
-    SAVE IMAGE --push ${repo}defn/dev
+    SAVE IMAGE --push ${repo_push}defn/dev
 
 tower:
     ARG repo=localhost:5000/

@@ -195,7 +195,7 @@ cmd_button(
         """
             cd;
             git push;
-            cd work/dev && exec make updates repo= cache=localhost:5000/;
+            cd work/dev && exec make updates repo= repo_from=localhost:5000/ cache=localhost:5000/;
         """,
     ],
     icon_name="build",
