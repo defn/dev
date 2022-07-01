@@ -45,7 +45,7 @@ cmd_button(
 )
 
 cmd_button(
-    name="ui kuma",
+    name="ui vc kuma",
     text="kuma",
     icon_name="rss_feed",
     resource="kuma",
