@@ -47,6 +47,25 @@ cmd_button(
 )
 
 cmd_button(
+    name="ui vault",
+    text="vault",
+    icon_name="key",
+    resource="vault",
+    argv=[
+        "bash",
+        "-c",
+        """
+            cd;
+            pass Initial_Root_Token | ssh super pbcopy;
+            xdg-open https://{domain}:600/ui;
+        """.format(
+            domain=dummy_host
+        ),
+    ],
+    location="nav",
+)
+
+cmd_button(
     name="ui vc kuma",
     text="kuma",
     icon_name="rss_feed",
