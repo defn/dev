@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/defn/dev
+    path: k/argocd
+    targetRevision: master
+    plugin:
+      env: {}
+  destination:
+    namespace: argocd
+    name: in-cluster
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
