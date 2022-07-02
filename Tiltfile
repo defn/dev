@@ -166,6 +166,21 @@ for kname, vname in [
         ],
         icon_name="build",
     )
+    cmd_button(
+        name="delete" + kname,
+        resource=kname,
+        argv=[
+            "bash",
+            "-c",
+            """
+                cd;
+                argocd --kube-context argocd app delete --yes {kname};
+            """.format(
+                vname=vname, kname=kname
+            ),
+        ],
+        icon_name="build",
+    )
 
 # Setup applications
 for kname, vname in [
@@ -198,6 +213,22 @@ for kname, vname in [
                 argocd --kube-context argocd app sync {kname} --local k/{kname} --assumeYes --prune;
                 argocd --kube-context argocd app wait {kname};
                 touch k/{kname}/main.yaml ;
+            """.format(
+                vname=vname, kname=kname
+            ),
+        ],
+        icon_name="build",
+    )
+
+    cmd_button(
+        name="delete" + kname,
+        resource=kname,
+        argv=[
+            "bash",
+            "-c",
+            """
+                cd;
+                argocd --kube-context argocd app delete --yes {kname};
             """.format(
                 vname=vname, kname=kname
             ),
