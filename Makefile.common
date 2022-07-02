@@ -128,13 +128,16 @@ argocd-admin:
 	@kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d' | ssh super pbcopy
 	@xdg-open https://$(dummy_host):603
 
-vault-login:
-	@pass Initial_Root_Token | env VAULT_ADDR=http://vault.vault.svc:8200 vault login -
+vault-restore:
+	(cd ~/.password-store && tar cfz - vault) | kubectl exec -i -n vault vault-0 -- tar xvfz - -C /;
 
 vault-unseal:
 	pass Unseal_Key_1 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://vault.vault.svc:8200/v1/sys/unseal
 	pass Unseal_Key_3 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://vault.vault.svc:8200/v1/sys/unseal
 	pass Unseal_Key_5 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://vault.vault.svc:8200/v1/sys/unseal
+
+vault-login:
+	@pass Initial_Root_Token | env VAULT_ADDR=http://vault.vault.svc:8200 vault login -
 
 down:
 	-bash -c 'rm -vf "$${SSH_AUTH_SOCK}"'
