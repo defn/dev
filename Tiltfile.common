@@ -258,3 +258,51 @@ cmd_button(
     ],
     icon_name="build",
 )
+
+cmd_button(
+    name="init vault",
+    resource="vault",
+    argv=[
+        "bash",
+        "-c",
+        """
+            cd;
+            kubectl exec -n vault -ti vault-0 -- vault operator init
+        """,
+    ],
+    icon_name="build",
+)
+
+cmd_button(
+    name="seal vault",
+    resource="vault",
+    argv=[
+        "bash",
+        "-c",
+        """
+            cd;
+            pass Initial_Root_Token | env VAULT_ADDR=http://vault.vault.svc:8200 vault login - | grep ^policies;
+            env VAULT_ADDR=http://vault.vault.svc:8200 vault operator seal;
+            rm -f ~/.vault-token;
+        """,
+    ],
+    icon_name="build",
+)
+
+cmd_button(
+    name="unseal vault",
+    resource="vault",
+    argv=[
+        "bash",
+        "-c",
+        """
+            cd;
+            kubectl exec -n vault -ti vault-0 -- vault operator unseal -reset;
+            pass Unseal_Key_1 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://vault.vault.svc:8200/v1/sys/unseal;
+            pass Unseal_Key_3 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://vault.vault.svc:8200/v1/sys/unseal;
+            pass Unseal_Key_5 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://vault.vault.svc:8200/v1/sys/unseal;
+            kubectl exec -n vault -ti vault-0 -- vault status;
+        """,
+    ],
+    icon_name="build",
+)
