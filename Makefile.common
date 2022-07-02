@@ -30,10 +30,10 @@ init:
 
 init-dev:
 	-kubectl --context pod create namespace argocd
-	kubectl --context argocd apply -n argocd -f k/argocd/main.yaml
+	kubectl --context argocd apply -f k/argocd-bootstrap.yaml
 	kubectl --context argocd rollout status deployment argocd-server --watch
+	kubectl --context argocd apply -f k/argocd-application.yaml
 	argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')"
-	argocd --kube-context argocd app create argocd --repo https://github.com/defn/dev --path k/argocd --dest-namespace argocd --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	argocd --kube-context argocd app create traefik --repo https://github.com/defn/dev --path k/traefik --dest-namespace traefik --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	argocd --kube-context argocd app create loft --repo https://github.com/defn/dev --path k/loft --dest-namespace loft --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	argocd --kube-context argocd app create vault --repo https://github.com/defn/dev --path k/vault --dest-namespace vault --dest-server https://kubernetes.default.svc --directory-recurse --validate=false

@@ -8,15 +8,10 @@ spec:
   source:
     repoURL: https://github.com/defn/dev
     path: k/argocd
-    targetRevision: master
-    plugin:
-      env: {}
+    targetRevision: main
   destination:
     namespace: argocd
     name: in-cluster
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
     syncOptions:
     - CreateNamespace=true
