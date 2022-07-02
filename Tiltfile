@@ -97,53 +97,58 @@ cmd_button(
     icon_name="build",
 )
 
+# Set up site specific configuration after loft is available
 local_resource(
-    "vc",
+    "site",
     cmd="""
         cd;
-        if argocd --kube-context argocd app diff vc --local k/vc; then loft login https://loft.loft.svc.cluster.local --insecure --access-key admin;
+        if argocd --kube-context argocd app diff site --local k/site; then loft login https://loft.loft.svc.cluster.local --insecure --access-key admin;
         echo No difference; fi
     """,
-    deps=["k/vc"],
+    deps=["k/site"],
     allow_parallel=True,
     labels=["deploy"],
 )
 
 cmd_button(
-    name="sync vc",
-    resource="vc",
+    name="sync site",
+    resource="site",
     argv=[
         "bash",
         "-c",
         """
             cd;
-            argocd --kube-context argocd app create vc --repo https://github.com/defn/dev --path k/vc --dest-namespace default --dest-name in-cluster --directory-recurse --validate=false;
-            argocd --kube-context argocd app sync vc --local k/vc --assumeYes --prune; 
-            argocd --kube-context argocd app wait vc;
-            touch k/vc/main.yaml;
+            argocd --kube-context argocd app create site --repo https://github.com/defn/dev --path k/site --dest-namespace default --dest-name in-cluster --directory-recurse --validate=false;
+            argocd --kube-context argocd app sync site --local k/site --assumeYes --prune; 
+            argocd --kube-context argocd app wait site;
+            touch k/site/main.yaml;
         """,
     ],
     icon_name="build",
 )
 
-for vid in [1, 2, 3]:
-    vname = "vc" + str(vid)
+# Setup kuma
+for kname, vname in [
+    ("vc1-kuma-global", "vc1"),
+    ("vc2-kuma-remote", "vc2"),
+    ("vc3-kuma-remote", "vc3"),
+]:
     local_resource(
-        vname,
+        kname,
         cmd="""
             cd;
-            if argocd --kube-context argocd app diff {vname} --local k/{vname}; then echo No difference; fi
+            if argocd --kube-context argocd app diff {kname} --local k/{kname}; then echo No difference; fi
         """.format(
-            vname=vname
+            vname=vname, kname=kname
         ),
-        deps=["k/" + vname],
+        deps=["k/" + kname],
         allow_parallel=True,
         labels=["deploy"],
     )
 
     cmd_button(
-        name="sync " + vname,
-        resource=vname,
+        name="sync " + kname,
+        resource=kname,
         argv=[
             "bash",
             "-c",
@@ -151,49 +156,50 @@ for vid in [1, 2, 3]:
                 cd;
                 {vname} get ns;
                 ~/bin/e env KUBECONFIG=$KUBECONFIG_ALL argocd cluster add loft-vcluster_{vname}_{vname}_loft-cluster --name {vname} --yes;
-                argocd --kube-context argocd app create {vname} --repo https://github.com/defn/dev --path k/{vname} --dest-namespace default --dest-name {vname} --directory-recurse --validate=false;
-                argocd --kube-context argocd app sync {vname} --local k/{vname} --assumeYes --prune; 
-                argocd --kube-context argocd app wait {vname};
-                touch k/{vname}/main.yaml;
+                argocd --kube-context argocd app create {kname} --repo https://github.com/defn/dev --path k/{kname} --dest-namespace default --dest-name {vname} --directory-recurse --validate=false;
+                argocd --kube-context argocd app sync {kname} --local k/{kname} --assumeYes --prune; 
+                argocd --kube-context argocd app wait {kname};
+                touch k/{kname}/main.yaml;
             """.format(
-                vname=vname
+                vname=vname, kname=kname
             ),
         ],
         icon_name="build",
     )
 
-for a, dest in [
-    ("kuma-demo-global", "vc1"),
-    ("kuma-demo-vc2", "vc2"),
-    ("kuma-demo-vc3", "vc3"),
+# Setup applications
+for kname, vname in [
+    ("vc1-kuma-demo-global", "vc1"),
+    ("vc2-kuma-demo-app", "vc2"),
+    ("vc3-kuma-demo-app", "vc3"),
 ]:
     local_resource(
-        a,
+        kname,
         cmd="""
             cd;
-            if argocd --kube-context argocd app diff {a} --local k/{a}; then echo No difference; fi;
+            if argocd --kube-context argocd app diff {kname} --local k/{kname}; then echo No difference; fi;
         """.format(
-            a=a
+            vname=vname, kname=kname
         ),
-        deps=["k/" + a],
+        deps=["k/" + kname],
         allow_parallel=True,
         labels=["deploy"],
     )
 
     cmd_button(
-        name="sync " + a,
-        resource=a,
+        name="sync " + kname,
+        resource=kname,
         argv=[
             "bash",
             "-c",
             """
                 cd;
-                argocd --kube-context argocd app create {a} --repo https://github.com/defn/dev --path k/{a} --dest-namespace default --dest-name {dest} --directory-recurse --validate=false;
-                argocd --kube-context argocd app sync {a} --local k/{a} --assumeYes --prune;
-                argocd --kube-context argocd app wait {a};
-                touch k/{a}/main.yaml ;
+                argocd --kube-context argocd app create {kname} --repo https://github.com/defn/dev --path k/{kname} --dest-namespace default --dest-name {vname} --directory-recurse --validate=false;
+                argocd --kube-context argocd app sync {kname} --local k/{kname} --assumeYes --prune;
+                argocd --kube-context argocd app wait {kname};
+                touch k/{kname}/main.yaml ;
             """.format(
-                a=a, dest=dest
+                vname=vname, kname=kname
             ),
         ],
         icon_name="build",
