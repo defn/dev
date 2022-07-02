@@ -127,6 +127,38 @@ cmd_button(
     icon_name="build",
 )
 
+for vname in ["vc1", "vc2", "vc3"]:
+    cmd_button(
+        name="sleep " + vname,
+        resource="site",
+        argv=[
+            "bash",
+            "-c",
+            """
+                cd;
+                loft sleep --prevent-wakeup 0 {vname}
+            """.format(
+                vname=vname
+            ),
+        ],
+        icon_name="build",
+    )
+    cmd_button(
+        name="wakeup " + vname,
+        resource="site",
+        argv=[
+            "bash",
+            "-c",
+            """
+                cd;
+                loft wakeup {vname}
+            """.format(
+                vname=vname
+            ),
+        ],
+        icon_name="build",
+    )
+
 # Setup kuma
 for kname, vname in [
     ("vc1-kuma-global", "vc1"),
@@ -167,7 +199,7 @@ for kname, vname in [
         icon_name="build",
     )
     cmd_button(
-        name="delete " + kname,
+        name="delete" + kname,
         resource=kname,
         argv=[
             "bash",
