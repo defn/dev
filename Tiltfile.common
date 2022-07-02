@@ -1,4 +1,4 @@
-dummy_host = "crouching.tiger-mamba.ts.net"
+dummy_host = "169.254.32.1"
 dummy_ip = "169.254.32.1"
 
 analytics_settings(False)
