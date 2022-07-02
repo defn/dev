@@ -302,8 +302,39 @@ cmd_button(
             cd;
             pass Initial_Root_Token | env VAULT_ADDR=http://vault.vault.svc:8200 vault login - | grep ^policies;
             env VAULT_ADDR=http://vault.vault.svc:8200 vault operator seal;
-            kubectl exec -n vault vault-0 -- tar cfz - /vault/data | (cd ~/.password-store && tar xvfz - && git add vault && git add -u vault && git commit -m 'vault backup');
             rm -f ~/.vault-token;
+        """,
+    ],
+    icon_name="build",
+)
+
+cmd_button(
+    name="backup vault",
+    resource="vault",
+    argv=[
+        "bash",
+        "-c",
+        """
+            cd;
+            rm -rf ~/.password-store/vault;
+            kubectl exec -n vault vault-0 -- tar cfz - /vault/data | (cd ~/.password-store && tar xvfz - && git add vault && git add -u vault && git commit -m 'vault backup');
+        """,
+    ],
+    icon_name="build",
+)
+
+cmd_button(
+    name="restore vault",
+    resource="vault",
+    argv=[
+        "bash",
+        "-c",
+        """
+            cd;
+            ts="$(date +%s)";
+            kubectl exec -i -n vault vault-0 -- mkdir -p /vault/data-${ts};
+            kubectl exec -i -n vault vault-0 -- mv /vault/data/{core,logical,sys} /vault/data-${ts}/;
+            (cd ~/.password-store && tar cfz - vault) | kubectl exec -i -n vault vault-0 -- tar xvfz - -C /;
         """,
     ],
     icon_name="build",
