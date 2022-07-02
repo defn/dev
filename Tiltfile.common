@@ -302,6 +302,7 @@ cmd_button(
             cd;
             pass Initial_Root_Token | env VAULT_ADDR=http://vault.vault.svc:8200 vault login - | grep ^policies;
             env VAULT_ADDR=http://vault.vault.svc:8200 vault operator seal;
+            kubectl exec -n vault vault-0 -- tar cfz - /vault/data | (cd ~/.password-store && tar xvfz - && git add vault && git add -u vault);
             rm -f ~/.vault-token;
         """,
     ],
