@@ -120,7 +120,7 @@ cmd_button(
 local_resource(
     name="registry pod",
     serve_cmd="exec socat TCP-LISTEN:5000,fork,reuseaddr TCP:{ip}:5000".format(
-        ip=dummy_ip
+        ip="host.k3d.internal"
     ),
     allow_parallel=True,
     labels=["tunnels"],
@@ -136,7 +136,7 @@ local_resource(
         rm -f /home/ubuntu/.registry.txt;
         exec docker exec earthly-buildkitd socat TCP-LISTEN:5000,fork,reuseaddr TCP:{ip}:5000;
     """.format(
-        ip=dummy_ip
+        ip="host.k3d.internal"
     ),
     allow_parallel=True,
     deps=["/home/ubuntu/.registry.txt"],
