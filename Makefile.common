@@ -128,6 +128,9 @@ argocd-admin:
 	@kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d' | ssh super pbcopy
 	@xdg-open https://$(dummy_host):603
 
+vault-login:
+	@pass Initial_Root_Token | env VAULT_ADDR=http://vault.vault.svc:8200 vault login -
+
 down:
 	-bash -c 'rm -vf "$${SSH_AUTH_SOCK}"'
 	-cd ~/.password-store && sudo -u ubuntu git-crypt lock
