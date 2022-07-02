@@ -131,6 +131,11 @@ argocd-admin:
 vault-login:
 	@pass Initial_Root_Token | env VAULT_ADDR=http://vault.vault.svc:8200 vault login -
 
+vault-unseal:
+	pass Unseal_Key_1 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://vault.vault.svc:8200/v1/sys/unseal
+	pass Unseal_Key_3 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://vault.vault.svc:8200/v1/sys/unseal
+	pass Unseal_Key_5 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://vault.vault.svc:8200/v1/sys/unseal
+
 down:
 	-bash -c 'rm -vf "$${SSH_AUTH_SOCK}"'
 	-cd ~/.password-store && sudo -u ubuntu git-crypt lock
