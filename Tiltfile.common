@@ -120,7 +120,7 @@ cmd_button(
 local_resource(
     name="registry pod",
     serve_cmd="exec socat TCP-LISTEN:5000,fork,reuseaddr TCP:{ip}:5000".format(
-        ip="k3d-registry"
+        ip="host.k3d.internal "
     ),
     allow_parallel=True,
     labels=["tunnels"],
