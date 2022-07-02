@@ -17,10 +17,10 @@ arm64:
     BUILD --platform=linux/arm64 +tower --arch=arm64
 
 amd64-update:
-    BUILD --platform=linux/amd64 +tower-update --arch=amd64
+    BUILD --platform=linux/amd64 +tower-upload --arch=amd64
 
 arm64-update:
-    BUILD --platform=linux/arm64 +tower-update --arch=arm64
+    BUILD --platform=linux/arm64 +tower-upload --arch=arm64
 
 root:
     ARG arch
@@ -87,8 +87,7 @@ root:
 
 tower-update:
     ARG arch
-    ARG repo=localhost:5000/
-    ARG repo_from=localhost:5000/
+    ARG repo_from
 
     FROM ${repo_from}defn/dev:tower
 
@@ -112,6 +111,12 @@ tower-update:
     COPY --dir --chown=ubuntu:ubuntu . .
     COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
     RUN git clean -ffd
+
+tower-upload:
+    ARG repo_from=localhost:5000/
+    ARG repo=localhost:5000/
+
+    FROM +tower-update --arch=${arch} --repo_from=${repo_from}
 
     SAVE IMAGE --push ${repo}defn/dev
 
