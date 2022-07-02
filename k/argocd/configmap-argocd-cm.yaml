@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: argocd-cm
 data:
-  kustomize.buildOptions: --load-restrictor LoadRestrictionsNone
+  kustomize.buildOptions: --enable-helm

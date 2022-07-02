@@ -9101,6 +9101,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-application-controller
+  namespace: argocd
 ---
 apiVersion: v1
 automountServiceAccountToken: null
@@ -9114,6 +9115,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-applicationset-controller
+  namespace: argocd
 ---
 apiVersion: v1
 automountServiceAccountToken: true
@@ -9127,6 +9129,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-dex-server
+  namespace: argocd
 ---
 apiVersion: v1
 automountServiceAccountToken: null
@@ -9140,6 +9143,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-notifications-controller
+  namespace: argocd
 ---
 apiVersion: v1
 automountServiceAccountToken: true
@@ -9153,6 +9157,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-repo-server
+  namespace: argocd
 ---
 apiVersion: v1
 automountServiceAccountToken: true
@@ -9166,6 +9171,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-server
+  namespace: argocd
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -9178,6 +9184,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-application-controller
+  namespace: argocd
 rules:
 - apiGroups:
   - ""
@@ -9220,6 +9227,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-applicationset-controller
+  namespace: argocd
 rules:
 - apiGroups:
   - argoproj.io
@@ -9309,6 +9317,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-dex-server
+  namespace: argocd
 rules:
 - apiGroups:
   - ""
@@ -9331,6 +9340,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-notifications-controller
+  namespace: argocd
 rules:
 - apiGroups:
   - argoproj.io
@@ -9379,6 +9389,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-repo-server
+  namespace: argocd
 rules: null
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -9392,6 +9403,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-server
+  namespace: argocd
 rules:
 - apiGroups:
   - ""
@@ -9495,6 +9507,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-application-controller
+  namespace: argocd
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -9502,7 +9515,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: argocd-application-controller
-  namespace: default
+  namespace: argocd
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -9515,6 +9528,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-applicationset-controller
+  namespace: argocd
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -9522,7 +9536,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: argocd-applicationset-controller
-  namespace: default
+  namespace: argocd
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -9535,6 +9549,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-dex-server
+  namespace: argocd
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -9542,7 +9557,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: argocd-dex-server
-  namespace: default
+  namespace: argocd
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -9555,6 +9570,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-notifications-controller
+  namespace: argocd
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -9562,7 +9578,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: argocd-notifications-controller
-  namespace: default
+  namespace: argocd
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -9575,6 +9591,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-repo-server
+  namespace: argocd
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -9582,7 +9599,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: argocd-repo-server
-  namespace: default
+  namespace: argocd
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -9595,6 +9612,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-server
+  namespace: argocd
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -9602,7 +9620,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: argocd-server
-  namespace: default
+  namespace: argocd
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -9622,7 +9640,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: argocd-application-controller
-  namespace: default
+  namespace: argocd
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -9642,13 +9660,13 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: argocd-server
-  namespace: default
+  namespace: argocd
 ---
 apiVersion: v1
 data:
   application.instanceLabelKey: argocd.argoproj.io/instance
   exec.enabled: "false"
-  kustomize.buildOptions: --load-restrictor LoadRestrictionsNone
+  kustomize.buildOptions: --enable-helm
   server.rbac.log.enforce.enable: "false"
   url: ""
 kind: ConfigMap
@@ -9661,6 +9679,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-cm
+  namespace: argocd
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -9672,6 +9691,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-gpg-keys-cm
+  namespace: argocd
 ---
 apiVersion: v1
 data:
@@ -9687,6 +9707,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-notifications-controller-cm
+  namespace: argocd
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -9699,6 +9720,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-rbac-cm
+  namespace: argocd
 ---
 apiVersion: v1
 data:
@@ -9722,6 +9744,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-ssh-known-hosts-cm
+  namespace: argocd
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -9734,6 +9757,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-tls-certs-cm
+  namespace: argocd
 ---
 apiVersion: v1
 kind: Secret
@@ -9746,6 +9770,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-notifications-controller-secret
+  namespace: argocd
 stringData: null
 type: Opaque
 ---
@@ -9760,6 +9785,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-secret
+  namespace: argocd
 type: Opaque
 ---
 apiVersion: v1
@@ -9773,6 +9799,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-application-controller
+  namespace: argocd
 spec:
   ports:
   - name: https-controller
@@ -9793,6 +9820,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-applicationset-controller
+  namespace: argocd
 spec:
   ports:
   - name: webhook
@@ -9813,6 +9841,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-dex-server
+  namespace: argocd
 spec:
   ports:
   - name: http
@@ -9838,6 +9867,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-redis
+  namespace: argocd
 spec:
   ports:
   - name: redis
@@ -9858,6 +9888,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-repo-server
+  namespace: argocd
 spec:
   ports:
   - name: https-repo-server
@@ -9879,6 +9910,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-server
+  namespace: argocd
 spec:
   ports:
   - name: http
@@ -9906,6 +9938,7 @@ metadata:
     app.kubernetes.io/version: v2.4.2
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-applicationset-controller
+  namespace: argocd
 spec:
   replicas: 1
   selector:
@@ -9989,6 +10022,7 @@ metadata:
     app.kubernetes.io/version: v2.30.2
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-dex-server
+  namespace: argocd
 spec:
   selector:
     matchLabels:
@@ -10060,6 +10094,7 @@ metadata:
     app.kubernetes.io/version: v2.4.2
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-notifications-controller
+  namespace: argocd
 spec:
   selector:
     matchLabels:
@@ -10129,6 +10164,7 @@ metadata:
     app.kubernetes.io/version: 7.0.0-alpine
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-redis
+  namespace: argocd
 spec:
   selector:
     matchLabels:
@@ -10175,6 +10211,7 @@ metadata:
     app.kubernetes.io/version: v2.4.2
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-repo-server
+  namespace: argocd
 spec:
   replicas: 1
   revisionHistoryLimit: 5
@@ -10310,6 +10347,7 @@ metadata:
     app.kubernetes.io/version: v2.4.2
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-server
+  namespace: argocd
 spec:
   replicas: 1
   revisionHistoryLimit: 5
@@ -10416,6 +10454,7 @@ metadata:
     app.kubernetes.io/version: v2.4.2
     helm.sh/chart: argo-cd-4.9.8
   name: argocd-application-controller
+  namespace: argocd
 spec:
   replicas: 1
   revisionHistoryLimit: 5
