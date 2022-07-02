@@ -167,7 +167,7 @@ for kname, vname in [
         icon_name="build",
     )
     cmd_button(
-        name="delete" + kname,
+        name="delete " + kname,
         resource=kname,
         argv=[
             "bash",
@@ -221,7 +221,7 @@ for kname, vname in [
     )
 
     cmd_button(
-        name="delete" + kname,
+        name="delete " + kname,
         resource=kname,
         argv=[
             "bash",
