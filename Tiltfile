@@ -119,7 +119,7 @@ cmd_button(
         """
             cd;
             argocd --kube-context argocd app create site --repo https://github.com/defn/dev --path k/site --dest-namespace default --dest-name in-cluster --directory-recurse --validate=false;
-            argocd --kube-context argocd app sync site --local k/site --assumeYes --prune; 
+            argocd --kube-context argocd app sync site --local k/site --assumeYes --prune;
             argocd --kube-context argocd app wait site;
             touch k/site/main.yaml;
         """,
@@ -189,7 +189,7 @@ for kname, vname in [
                 {vname} get ns;
                 ~/bin/e env KUBECONFIG=$KUBECONFIG_ALL argocd cluster add loft-vcluster_{vname}_{vname}_loft-cluster --name {vname} --yes;
                 argocd --kube-context argocd app create {kname} --repo https://github.com/defn/dev --path k/{kname} --dest-namespace default --dest-name {vname} --directory-recurse --validate=false;
-                argocd --kube-context argocd app sync {kname} --local k/{kname} --assumeYes --prune; 
+                argocd --kube-context argocd app sync {kname} --local k/{kname} --assumeYes --prune;
                 argocd --kube-context argocd app wait {kname};
                 touch k/{kname}/main.yaml;
             """.format(
@@ -216,6 +216,7 @@ for kname, vname in [
 
 # Setup applications
 for kname, vname in [
+    ("vc1-vault", "vc1"),
     ("vc1-kuma-demo-global", "vc1"),
     ("vc2-kuma-demo-app", "vc2"),
     ("vc3-kuma-demo-app", "vc3"),

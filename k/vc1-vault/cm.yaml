@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vault-config
+  namespace: vault
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: vault
+    helm.sh/chart: vault-0.20.1
+data:
+  extraconfig-from-values.hcl: |-
+    disable_mlock = true
+    ui = true
+
+    listener "tcp" {
+      tls_disable = 1
+      address = "[::]:8200"
+      cluster_address = "[::]:8201"
+    }
+    storage "file" {
+      path = "/vault/data"
+    }
+
+    seal "transit" {
+      address = "http://10.43.234.71:8200"
+      token = "hvs.CAESIF-5cIJnj3fCYm-jp11WtXrXqCCBn7P2EKFD4-ahYa95Gh4KHGh2cy51dE9DdjZtam1kczBndlRuWk1HS1hhY1Y"
+      disable_renewal = "false"
+      key_name = "vc1-autounseal"
+      mount_path = "transit/"
+      tls_skip_verify = "true"
+    }
