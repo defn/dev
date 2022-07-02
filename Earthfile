@@ -106,6 +106,7 @@ tower-update:
     RUN ~/bin/e helm repo add loft https://charts.loft.sh
     RUN ~/bin/e helm repo add datadog https://helm.datadoghq.com
     RUN ~/bin/e helm repo add argo https://argoproj.github.io/argo-helm
+    RUN ~/bin/e helm repo add hashicorp https://helm.releases.hashicorp.com
     RUN ~/bin/e helm repo update
 
     COPY --dir --chown=ubuntu:ubuntu . .

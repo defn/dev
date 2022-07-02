@@ -174,7 +174,7 @@ cmd_button(
         "-c",
         """
             cd;
-            argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune; 
+            argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune;
             touch k/argocd/main.yaml;
         """,
     ],
@@ -200,7 +200,7 @@ cmd_button(
         "-c",
         """
             cd;
-            argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune; 
+            argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune;
             touch k/traefik/main.yaml;
         """,
     ],
@@ -226,8 +226,34 @@ cmd_button(
         "-c",
         """
             cd;
-            argocd --kube-context argocd app sync loft --local k/loft --assumeYes --prune; 
+            argocd --kube-context argocd app sync loft --local k/loft --assumeYes --prune;
             touch k/loft/main.yaml;
+        """,
+    ],
+    icon_name="build",
+)
+
+local_resource(
+    "vault",
+    cmd="""
+        cd;
+        if argocd --kube-context argocd app diff vault --local k/vault; then echo No difference; fi;
+    """,
+    deps=["k/vault"],
+    allow_parallel=True,
+    labels=["deploy"],
+)
+
+cmd_button(
+    name="sync vault",
+    resource="vault",
+    argv=[
+        "bash",
+        "-c",
+        """
+            cd;
+            argocd --kube-context argocd app sync vault --local k/vault --assumeYes --prune;
+            touch k/vault/main.yaml;
         """,
     ],
     icon_name="build",
