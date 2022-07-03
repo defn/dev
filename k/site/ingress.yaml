@@ -6,7 +6,7 @@ metadata:
   namespace: vault
   annotations:
     traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.entrypoints: https600
+    traefik.ingress.kubernetes.io/router.entrypoints: https8200
 spec:
   rules:
     - http:
