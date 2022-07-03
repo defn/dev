@@ -1,7 +1,3 @@
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: loft
 ---
 kind: Namespace
 apiVersion: v1
