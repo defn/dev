@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vc1-kuma-global
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/defn/dev
+    path: k/vc1-kuma-global
+    targetRevision: main
+  destination:
+    namespace: default
+    name: vc1
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true

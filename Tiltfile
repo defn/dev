@@ -118,7 +118,7 @@ cmd_button(
         "-c",
         """
             cd;
-            argocd --kube-context argocd app create site --repo https://github.com/defn/dev --path k/site --dest-namespace default --dest-name in-cluster --directory-recurse --validate=false;
+            kubectl --context argocd apply -f k/site;
             argocd --kube-context argocd app sync site --local k/site --assumeYes --prune;
             argocd --kube-context argocd app wait site;
             touch k/site/main.yaml;
@@ -156,7 +156,7 @@ for kname, vname in [
                 cd;
                 {vname} get ns;
                 ~/bin/e env KUBECONFIG=$KUBECONFIG_ALL argocd cluster add loft-vcluster_{vname}_{vname}_loft-cluster --name {vname} --yes;
-                argocd --kube-context argocd app create {kname} --repo https://github.com/defn/dev --path k/{kname} --dest-namespace default --dest-name {vname} --directory-recurse --validate=false;
+                kubectl --context argocd apply -f k/{kname};
                 argocd --kube-context argocd app sync {kname} --local k/{kname} --assumeYes --prune;
                 argocd --kube-context argocd app wait {kname};
                 touch k/{kname}/main.yaml;
@@ -260,7 +260,7 @@ for kname, vname in [
             "-c",
             """
                 cd;
-                argocd --kube-context argocd app create {kname} --repo https://github.com/defn/dev --path k/{kname} --dest-namespace default --dest-name {vname} --directory-recurse --validate=false;
+                kubectl --context argocd apply -f k/{kname};
                 argocd --kube-context argocd app sync {kname} --local k/{kname} --assumeYes --prune;
                 argocd --kube-context argocd app wait {kname};
                 touch k/{kname}/main.yaml ;

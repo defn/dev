@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vc3-kuma-demo
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/defn/dev
+    path: k/vc3-kuma-demo
+    targetRevision: main
+  destination:
+    namespace: demo1
+    name: vc3
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
