@@ -357,3 +357,56 @@ cmd_button(
     ],
     icon_name="build",
 )
+
+for kname, vname in [
+    ("vc1", "vc1"),
+    ("vc2", "vc2"),
+    ("vc3", "vc3"),
+]:
+    local_resource(
+        kname,
+        cmd="""
+            cd;
+            if argocd --kube-context argocd app diff {kname} --local k/{kname}; then echo No difference; fi;
+        """.format(
+            vname=vname, kname=kname
+        ),
+        deps=["k/" + kname],
+        allow_parallel=True,
+        labels=["deploy"],
+    )
+
+    cmd_button(
+        name="sync " + kname,
+        resource=kname,
+        argv=[
+            "bash",
+            "-c",
+            """
+                cd;
+                kubectl --context argocd apply -f k/{kname}-application.yaml;
+                argocd --kube-context argocd app sync {kname} --local k/{kname} --assumeYes --prune;
+                argocd --kube-context argocd app wait {kname};
+                touch k/{kname}/main.yaml ;
+            """.format(
+                vname=vname, kname=kname
+            ),
+        ],
+        icon_name="build",
+    )
+
+    cmd_button(
+        name="delete " + kname,
+        resource=kname,
+        argv=[
+            "bash",
+            "-c",
+            """
+                cd;
+                argocd --kube-context argocd app delete --yes {kname};
+            """.format(
+                vname=vname, kname=kname
+            ),
+        ],
+        icon_name="build",
+    )
