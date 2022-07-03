@@ -64,7 +64,7 @@ sync:
 	-$(MAKE) vault-restore
 	-$(MAKE) vault-unseal
 	argocd --kube-context argocd app wait vault
-	argocd --kube-context argocd app sync site --local k/site--assumeYes --prune
+	argocd --kube-context argocd app sync site --local k/site --assumeYes --prune
 	argocd --kube-context argocd app wait site
 
 asdf:
