@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd
+  name: vault
   namespace: argocd
 spec:
   project: default
@@ -15,3 +15,9 @@ spec:
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
+  ignoreDifferences:
+  - kind: MutatingWebhookConfiguration
+    name: vault-agent-injector-cfg
+    namespace: vault
+    jsonPointers:
+    - /webhooks/0/admissionReviewVersions/clientConfig/caBundle

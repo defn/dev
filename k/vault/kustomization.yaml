@@ -1,23 +1,24 @@
-namespace: vaultj
+namespace: vault
 
 helmCharts:
 - releaseName: vault
   name: vault
+  namespace: vault
   version: 0.20.1
   repo: https://helm.releases.hashicorp.com
   valuesInline:
     server:
       standalone:
         config: |
-          config: |
-            api_addr = "http://POD_IP:8200"
+          disable_mlock = false
+          ui = true
 
-            listener "tcp" {
-              tls_disable = 1
-              address     = "0.0.0.0:8200"
-            }
-
-            storage "file" {
-              path = "/vault/data"
-            }
+          listener "tcp" {
+            tls_disable = 1
+            address = "[::]:8200"
+            cluster_address = "[::]:8201"
+          }
+          storage "file" {
+            path = "/vault/data"
+          }
   includeCRDs: true
