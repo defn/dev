@@ -17,6 +17,7 @@ spec:
     - CreateNamespace=true
   ignoreDifferences:
   - kind: MutatingWebhookConfiguration
+    group: admissionregistration.k8s.io/v1
     name: vault-agent-injector-cfg
     namespace: vault
     jqPathExpressions:
