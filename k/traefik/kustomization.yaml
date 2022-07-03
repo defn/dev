@@ -1,0 +1,154 @@
+namespace: traefik
+
+helmCharts:
+- releaseName: traefik
+  name: traefik
+  version: 10.24.0
+  repo: https://helm.traefik.io/traefik
+  valuesInline:
+  includeCRDs: true
+
+resources:
+- tls.yaml
+
+patchesStrategicMerge:
+- |-
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: traefik
+  spec:
+    template:
+      spec:
+        containers:
+        - name: traefik
+          args:
+          - --global.checknewversion=false
+          - --global.sendanonymoususage=false
+          - --entrypoints.metrics.address=:9100/tcp
+          - --entrypoints.traefik.address=:9000/tcp
+          - --entrypoints.web.address=:8000/tcp
+          - --api.dashboard=true
+          - --api.insecure=true
+          - --ping=true
+          - --metrics.prometheus=true
+          - --metrics.prometheus.entrypoint=metrics
+          - --providers.kubernetescrd
+          - --providers.kubernetesingress
+          - --entrypoints.websecure.address=:8443/tcp
+          - --entrypoints.https600.address=:8600/tcp
+          - --entrypoints.https601.address=:8601/tcp
+          - --entrypoints.https602.address=:8602/tcp
+          - --entrypoints.https603.address=:8603/tcp
+          - --entrypoints.https604.address=:8604/tcp
+          - --entrypoints.https605.address=:8605/tcp
+          - --entrypoints.https606.address=:8606/tcp
+          - --entrypoints.https607.address=:8607/tcp
+          - --entrypoints.https608.address=:8608/tcp
+          - --entrypoints.https609.address=:8609/tcp
+          - --entrypoints.web.http.redirections.entryPoint.to=:443
+          - --entrypoints.web.http.redirections.entryPoint.scheme=https
+          - --providers.kubernetescrd.allowexternalnameservices=true
+          - --providers.kubernetescrd.allowCrossNamespace=false
+          - --serverstransport.insecureskipverify=true
+          - --api.insecure=true
+          - --log.level=DEBUG
+          - --accesslog=true
+          ports:
+          - containerPort: 8600
+            name: https600
+            protocol: TCP
+          - containerPort: 8601
+            name: https601
+            protocol: TCP
+          - containerPort: 8602
+            name: https602
+            protocol: TCP
+          - containerPort: 8603
+            name: https603
+            protocol: TCP
+          - containerPort: 8604
+            name: https604
+            protocol: TCP
+          - containerPort: 8605
+            name: https605
+            protocol: TCP
+          - containerPort: 8606
+            name: https606
+            protocol: TCP
+          - containerPort: 8607
+            name: https607
+            protocol: TCP
+          - containerPort: 8608
+            name: https608
+            protocol: TCP
+          - containerPort: 8609
+            name: https609          
+            protocol: TCP
+- |-
+  apiVersion: v1
+  kind: List
+  metadata:
+    name: traefik
+  items:
+    - apiVersion: v1
+      kind: Service
+      metadata:
+        name: traefik
+      spec:
+        type: NodePort
+        ports:
+        - name: web
+          nodePort: 30080
+        - name: websecure
+          nodePort: 30443
+        - name: https600
+          nodePort: 30600
+          port: 600
+          protocol: TCP
+          targetPort: https600
+        - name: https601
+          nodePort: 30601
+          port: 601
+          protocol: TCP
+          targetPort: https601
+        - name: https602
+          nodePort: 30602
+          port: 602
+          protocol: TCP
+          targetPort: https602
+        - name: https603
+          nodePort: 30603
+          port: 603
+          protocol: TCP
+          targetPort: https603
+        - name: https604
+          nodePort: 30604
+          port: 604
+          protocol: TCP
+          targetPort: https604
+        - name: https605
+          nodePort: 30605
+          port: 605
+          protocol: TCP
+          targetPort: https605
+        - name: https606
+          nodePort: 30606
+          port: 606
+          protocol: TCP
+          targetPort: https606
+        - name: https607
+          nodePort: 30607
+          port: 607
+          protocol: TCP
+          targetPort: https607
+        - name: https608
+          nodePort: 30608
+          port: 608
+          protocol: TCP
+          targetPort: https608
+        - name: https609
+          nodePort: 30609
+          port: 609
+          protocol: TCP
+          targetPort: https609
