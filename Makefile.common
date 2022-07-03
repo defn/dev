@@ -102,6 +102,7 @@ cluster:
 		--registry-use registry \
 		-p "80:30080@loadbalancer" \
 		-p "443:30443@loadbalancer" \
+		-p "8200:30820@loadbalancer" \
 		-p "600:30600@loadbalancer" \
 		-p "601:30601@loadbalancer" \
 		-p "602:30602@loadbalancer" \
