@@ -36,7 +36,7 @@ init-dev:
 	argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')"
 	kubectl --context argocd apply -f k/traefik-application.yaml
 	argocd --kube-context argocd app create loft --repo https://github.com/defn/dev --path k/loft --dest-namespace loft --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
-	argocd --kube-context argocd app create vault --repo https://github.com/defn/dev --path k/vault --dest-namespace vault --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
+	kubectl --context argocd apply -f k/vault-application.yaml
 	-$(MAKE) sync
 	-$(MAKE) vault-restore
 	-$(MAKE) vault-unseal

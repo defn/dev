@@ -21,9 +21,10 @@ data:
       path = "/vault/data"
     }
 
+
     seal "transit" {
       address = "https://169.254.32.1:8200"
-      token = "hvs.CAESIF-5cIJnj3fCYm-jp11WtXrXqCCBn7P2EKFD4-ahYa95Gh4KHGh2cy51dE9DdjZtam1kczBndlRuWk1HS1hhY1Y"
+      token = "hvs.CAESIEo1no_izuueJaS4I3sKUJ04V-LGEux1f59g-dnAs1ckGh4KHGh2cy53MFR4c0dOZmkwOFRWVXhnUmo5cm1HM1Y"
       disable_renewal = "false"
       key_name = "vc1-autounseal"
       mount_path = "transit/"
