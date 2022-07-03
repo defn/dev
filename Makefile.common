@@ -64,7 +64,7 @@ sync:
 	-$(MAKE) vault-restore
 	-$(MAKE) vault-unseal
 	argocd --kube-context argocd app wait vault
-	argocd --kube-context argocd app sync site --local k/site --assumeYes --prune
+	argocd --kube-context argocd app sync site --local /k/site --assumeYes --prune
 	argocd --kube-context argocd app wait site
 
 asdf:
@@ -146,7 +146,12 @@ vault-unseal:
 vault-login:
 	@pass Initial_Root_Token | env VAULT_ADDR=http://vault.vault.svc:8200 vault login -
 
+vault-seal:
+	-env VAULT_ADDR=http://vault.vault.svc:8200 vault operator seal
+	rm -f ~/.vault-token
+
 down:
+	-$(MAKE) vault-seal
 	-bash -c 'rm -vf "$${SSH_AUTH_SOCK}"'
 	-cd ~/.password-store && sudo -u ubuntu git-crypt lock
 	-echo yes | gh auth logout --hostname github.com
