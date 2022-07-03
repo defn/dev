@@ -10,7 +10,7 @@ helmCharts:
     server:
       standalone:
         config: |
-          disable_mlock = false
+          disable_mlock = true
           ui = true
 
           listener "tcp" {
