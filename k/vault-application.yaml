@@ -19,6 +19,5 @@ spec:
   - kind: MutatingWebhookConfiguration
     group: admissionregistration.k8s.io
     name: vault-agent-injector-cfg
-    namespace: vault
-    jqPathExpressions:
-    - '.webhooks[]?.clientConfig.caBundle'
+    jsonPointers:
+      - /webhooks/0/clientConfig/caBundle

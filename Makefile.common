@@ -38,8 +38,6 @@ init-dev:
 	argocd --kube-context argocd app create loft --repo https://github.com/defn/dev --path k/loft --dest-namespace loft --dest-server https://kubernetes.default.svc --directory-recurse --validate=false
 	kubectl --context argocd apply -f k/vault-application.yaml
 	-$(MAKE) sync
-	-$(MAKE) vault-restore
-	-$(MAKE) vault-unseal
 
 kubeconfig:
 	sudo cp /run/secrets/kubernetes.io/serviceaccount/ca.crt /usr/local/share/ca-certificates/
@@ -62,7 +60,9 @@ sync:
 	argocd --kube-context argocd app wait traefik
 	argocd --kube-context argocd app wait loft
 	kubectl --context pod wait -n vault -l statefulset.kubernetes.io/pod-name=vault-0 --for=condition=ContainersReady pod
-	#argocd --kube-context argocd app wait vault
+	-$(MAKE) vault-restore
+	-$(MAKE) vault-unseal
+	argocd --kube-context argocd app wait vault
 
 asdf:
 	cat .tool-versions| awk '{print $$1}' | while read -r a; do asdf list-all "$$a" | sed "s#^#$$a #"; done | sort > .tool-versions-all
