@@ -239,7 +239,7 @@ for kname, vname in [
             "-c",
             """
                 cd;
-                kubectl --context argocd apply -f k/${kname}-application.yaml;
+                kubectl --context argocd apply -f k/{kname}-application.yaml;
                 argocd --kube-context argocd app sync {kname} --local k/{kname} --assumeYes --prune;
                 argocd --kube-context argocd app wait {kname};
                 touch k/{kname}/main.yaml ;

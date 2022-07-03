@@ -25,7 +25,7 @@ helmCharts:
 
           seal "transit" {
             address = "https://169.254.32.1:8200"
-            token = "hvs.CAESIEo1no_izuueJaS4I3sKUJ04V-LGEux1f59g-dnAs1ckGh4KHGh2cy53MFR4c0dOZmkwOFRWVXhnUmo5cm1HM1Y"
+            token = "hvs.CAESIKmHNM-a6flKQQsyW8swoKhPtJd4AQfOb8pNvzKaH-CUGh4KHGh2cy5SSkFtU1NHcWpkaHZ5U0dXM0MxS082OVE"
             disable_renewal = "false"
             key_name = "vc1-autounseal"
             mount_path = "transit/"
