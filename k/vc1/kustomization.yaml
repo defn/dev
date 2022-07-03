@@ -1,0 +1,5 @@
+namespace: vc1
+
+resources:
+- main.yaml
+- ingress.yaml
