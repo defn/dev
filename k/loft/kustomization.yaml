@@ -9,9 +9,6 @@ helmCharts:
   valuesInline:
   includeCRDs: true
 
-resources:
-- ns.yaml
-
 patchesJSON6902:
 - target:
     group: apps
