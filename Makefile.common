@@ -100,6 +100,10 @@ reset:
 	$(MAKE) cluster
 
 cluster:
+	git pull
+	$(MAKE) cluster-inner
+
+cluster-inner:
 	-k3d cluster delete
 	k3d cluster create --config k3d.yaml \
 		--registry-use registry \
