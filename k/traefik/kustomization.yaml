@@ -37,7 +37,8 @@ patchesStrategicMerge:
           - --providers.kubernetescrd
           - --providers.kubernetesingress
           - --entrypoints.websecure.address=:8443/tcp
-          - --entrypoints.https8200.address=:8820/tcp
+          - --entrypoints.https5685.address=:5685/tcp
+          - --entrypoints.https8200.address=:8200/tcp
           - --entrypoints.https600.address=:8600/tcp
           - --entrypoints.https601.address=:8601/tcp
           - --entrypoints.https602.address=:8602/tcp
@@ -57,8 +58,11 @@ patchesStrategicMerge:
           - --log.level=DEBUG
           - --accesslog=true
           ports:
-          - containerPort: 8820
+          - containerPort: 8200
             name: https8200
+            protocol: TCP
+          - containerPort: 5685
+            name: https5685
             protocol: TCP
           - containerPort: 8600
             name: https600
@@ -112,6 +116,11 @@ patchesStrategicMerge:
           port: 8200
           protocol: TCP
           targetPort: https8200
+        - name: https5685
+          nodePort: 30685
+          port: 5685
+          protocol: TCP
+          targetPort: https5685
         - name: https600
           nodePort: 30600
           port: 600
