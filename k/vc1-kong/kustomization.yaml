@@ -25,7 +25,6 @@ patchesStrategicMerge:
     namespace: kong
   spec:
     template:
-      spec:
-        metadata:
-          annotations:
-            kuma.io/mesh: mesh
+      metadata:
+        annotations:
+          kuma.io/mesh: mesh
