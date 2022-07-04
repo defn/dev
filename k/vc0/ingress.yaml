@@ -2,11 +2,11 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ts-vc2-kuma-demo-app
-  namespace: vc2
+  name: ts-vc0-kuma
+  namespace: vc0
   annotations:
     traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.entrypoints: https9607
+    traefik.ingress.kubernetes.io/router.entrypoints: https9606
 spec:
   rules:
   - http:
@@ -15,6 +15,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: demo-app-x-demo2-x-vc2
+            name: kuma-control-plane-x-kuma-x-vc0
             port:
-              number: 5000
+              number: 5681
