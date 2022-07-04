@@ -12,3 +12,6 @@ helmCharts:
     enterprise:
       enabled: true
   includeCRDs: true
+
+resources:
+- ns.yaml
