@@ -38,16 +38,16 @@ patchesStrategicMerge:
           - --entrypoints.web.address=:8000/tcp
           - --entrypoints.websecure.address=:8443/tcp
           - --entrypoints.https8200.address=:8200/tcp
-          - --entrypoints.https600.address=:8600/tcp
-          - --entrypoints.https601.address=:8601/tcp
-          - --entrypoints.https602.address=:8602/tcp
-          - --entrypoints.https603.address=:8603/tcp
-          - --entrypoints.https604.address=:8604/tcp
-          - --entrypoints.https605.address=:8605/tcp
-          - --entrypoints.https606.address=:8606/tcp
-          - --entrypoints.https607.address=:8607/tcp
-          - --entrypoints.https608.address=:8608/tcp
-          - --entrypoints.https609.address=:8609/tcp
+          - --entrypoints.https600.address=:600/tcp
+          - --entrypoints.https601.address=:601/tcp
+          - --entrypoints.https602.address=:602/tcp
+          - --entrypoints.https603.address=:603/tcp
+          - --entrypoints.https604.address=:604/tcp
+          - --entrypoints.https605.address=:605/tcp
+          - --entrypoints.https606.address=:606/tcp
+          - --entrypoints.https607.address=:607/tcp
+          - --entrypoints.https608.address=:608/tcp
+          - --entrypoints.https609.address=:609/tcp
           - --entrypoints.web.http.redirections.entryPoint.to=:443
           - --entrypoints.web.http.redirections.entryPoint.scheme=https
           - --providers.kubernetescrd.allowexternalnameservices=true
@@ -60,34 +60,34 @@ patchesStrategicMerge:
           - containerPort: 8200
             name: https8200
             protocol: TCP
-          - containerPort: 8600
+          - containerPort: 600
             name: https600
             protocol: TCP
-          - containerPort: 8601
+          - containerPort: 601
             name: https601
             protocol: TCP
-          - containerPort: 8602
+          - containerPort: 602
             name: https602
             protocol: TCP
-          - containerPort: 8603
+          - containerPort: 603
             name: https603
             protocol: TCP
-          - containerPort: 8604
+          - containerPort: 604
             name: https604
             protocol: TCP
-          - containerPort: 8605
+          - containerPort: 605
             name: https605
             protocol: TCP
-          - containerPort: 8606
+          - containerPort: 606
             name: https606
             protocol: TCP
-          - containerPort: 8607
+          - containerPort: 607
             name: https607
             protocol: TCP
-          - containerPort: 8608
+          - containerPort: 608
             name: https608
             protocol: TCP
-          - containerPort: 8609
+          - containerPort: 609
             name: https609
             protocol: TCP
 - |-

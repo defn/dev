@@ -116,16 +116,16 @@ cluster-inner:
 		-p "80:8000@server:0" \
 		-p "443:8443@server:0" \
 		-p "8200:8200@server:0" \
-		-p "600:8600@server:0" \
-		-p "601:8601@server:0" \
-		-p "602:8602@server:0" \
-		-p "603:8603@server:0" \
-		-p "604:8604@server:0" \
-		-p "605:8605@server:0" \
-		-p "606:8606@server:0" \
-		-p "607:8607@server:0" \
-		-p "608:8608@server:0" \
-		-p "609:8609@server:0" \
+		-p "600:600@server:0" \
+		-p "601:601@server:0" \
+		-p "602:602@server:0" \
+		-p "603:603@server:0" \
+		-p "604:604@server:0" \
+		-p "605:605@server:0" \
+		-p "606:606@server:0" \
+		-p "607:607@server:0" \
+		-p "608:608@server:0" \
+		-p "609:609@server:0" \
 		-p "5685:5685@server:0" \
 		-p "10001:10001@server:0" \
 		-p "10002:10002@server:0" \
