@@ -60,9 +60,6 @@ patchesStrategicMerge:
           - containerPort: 8200
             name: https8200
             protocol: TCP
-          - containerPort: 5685
-            name: https5685
-            protocol: TCP
           - containerPort: 8600
             name: https600
             protocol: TCP
@@ -115,11 +112,6 @@ patchesStrategicMerge:
           port: 8200
           protocol: TCP
           targetPort: https8200
-        - name: https5685
-          nodePort: 30685
-          port: 5685
-          protocol: TCP
-          targetPort: https5685
         - name: https600
           nodePort: 30600
           port: 600
