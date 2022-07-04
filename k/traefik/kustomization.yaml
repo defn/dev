@@ -101,64 +101,48 @@ patchesStrategicMerge:
       metadata:
         name: traefik
       spec:
-        type: NodePort
         ports:
-        - name: web
-          nodePort: 30080
-        - name: websecure
-          nodePort: 30443
         - name: https8200
-          nodePort: 30820
           port: 8200
           protocol: TCP
           targetPort: https8200
         - name: https600
-          nodePort: 30600
           port: 600
           protocol: TCP
           targetPort: https600
         - name: https601
-          nodePort: 30601
           port: 601
           protocol: TCP
           targetPort: https601
         - name: https602
-          nodePort: 30602
           port: 602
           protocol: TCP
           targetPort: https602
         - name: https603
-          nodePort: 30603
           port: 603
           protocol: TCP
           targetPort: https603
         - name: https604
-          nodePort: 30604
           port: 604
           protocol: TCP
           targetPort: https604
         - name: https605
-          nodePort: 30605
           port: 605
           protocol: TCP
           targetPort: https605
         - name: https606
-          nodePort: 30606
           port: 606
           protocol: TCP
           targetPort: https606
         - name: https607
-          nodePort: 30607
           port: 607
           protocol: TCP
           targetPort: https607
         - name: https608
-          nodePort: 30608
           port: 608
           protocol: TCP
           targetPort: https608
         - name: https609
-          nodePort: 30609
           port: 609
           protocol: TCP
           targetPort: https609
