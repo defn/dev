@@ -22,3 +22,6 @@ helmCharts:
             path = "/vault/data"
           }
   includeCRDs: true
+
+resources:
+- ingress.yaml

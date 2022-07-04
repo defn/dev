@@ -1,0 +1,21 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ts-traefik
+spec:
+  entryPoints:
+    - https605
+  routes:
+    - kind: Rule
+      match: PathPrefix(`/api`)
+      services:
+        - kind: TraefikService
+          name: api@internal
+    - kind: Rule
+      match: PathPrefix(`/`)
+      services:
+        - kind: TraefikService
+          name: dashboard@internal
+  tls:
+    secretName: default-certificate

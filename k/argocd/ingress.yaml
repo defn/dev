@@ -2,11 +2,10 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ts-kuma-global
-  namespace: vc1
+  name: ts-argocd
   annotations:
     traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.entrypoints: https606
+    traefik.ingress.kubernetes.io/router.entrypoints: https603
 spec:
   rules:
     - http:
@@ -15,6 +14,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: kuma-control-plane-x-default-x-vc1
+                name: argocd-server
                 port:
-                  number: 5681
+                  number: 443
