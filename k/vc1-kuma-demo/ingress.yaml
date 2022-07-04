@@ -21,6 +21,8 @@ kind: Service
 metadata:
   name: kuma-demo
   namespace: default
+  annotations:
+    ingress.kubernetes.io/service-upstream: "true"
 spec:
   type: ExternalName
   externalName: demo-app.demo1.svc.5000.mesh
