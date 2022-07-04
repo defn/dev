@@ -28,7 +28,6 @@ patchesStrategicMerge:
           - --global.sendanonymoususage=false
           - --entrypoints.metrics.address=:9100/tcp
           - --entrypoints.traefik.address=:9000/tcp
-          - --entrypoints.web.address=:8000/tcp
           - --api.dashboard=true
           - --api.insecure=true
           - --ping=true
@@ -36,6 +35,7 @@ patchesStrategicMerge:
           - --metrics.prometheus.entrypoint=metrics
           - --providers.kubernetescrd
           - --providers.kubernetesingress
+          - --entrypoints.web.address=:8000/tcp
           - --entrypoints.websecure.address=:8443/tcp
           - --entrypoints.https8200.address=:8200/tcp
           - --entrypoints.https600.address=:8600/tcp
