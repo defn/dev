@@ -67,7 +67,7 @@ spec:
       labels:
         app: redis
       annotations:
-        kuma.io/mesh: demo
+        kuma.io/mesh: demom
     spec:
       containers:
         - name: redis
