@@ -1,0 +1,8 @@
+controlPlane:
+  mode: zone
+  zone: vc1
+  kdsGlobalAddress: grpcs://169.254.32.1:5685
+ingress:
+  enabled: true
+  service:
+    port: 10001
