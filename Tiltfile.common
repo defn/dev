@@ -414,6 +414,8 @@ for kname, vname in [
                 argocd --kube-context argocd app sync {kname} --local k/{kname} --assumeYes --prune;
                 argocd --kube-context argocd app wait {kname};
                 kubectl --context pod wait -n {vname} -l statefulset.kubernetes.io/pod-name={vname}-0 --for=condition=ContainersReady pod || true;
+                {vname} get ns;
+                ~/bin/e env KUBECONFIG=$KUBECONFIG_ALL argocd cluster add loft-vcluster_{vname}_{vname}_loft-cluster --name {vname} --yes;
                 touch k/{kname}/main.yaml ;
             """.format(
                 vname=vname, kname=kname

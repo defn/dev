@@ -10,8 +10,8 @@ spec:
     path: k/vc1-kuma-demo
     targetRevision: main
   destination:
-    namespace: demo1
-    name: vc1
+    namespace: kuma
+    name: in-cluster
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
