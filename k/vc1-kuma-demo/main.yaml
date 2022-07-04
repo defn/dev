@@ -8,7 +8,7 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-app-v2
+  name: demo-app-v1
   namespace: demo2
 spec:
   selector:
