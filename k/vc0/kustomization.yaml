@@ -2,3 +2,4 @@ namespace: vc0
 
 resources:
 - main.yaml
+- ingress.yaml
