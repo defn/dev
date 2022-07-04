@@ -9,6 +9,9 @@ helmCharts:
   valuesInline:
   includeCRDs: true
 
+resources:
+- ingress.yaml
+
 patchesJSON6902:
 - target:
     group: apps

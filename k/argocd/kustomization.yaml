@@ -10,3 +10,6 @@ helmCharts:
 
 patchesStrategicMerge:
 - configmap-argocd-cm.yaml
+
+resources:
+- ingress.yaml

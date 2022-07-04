@@ -129,7 +129,6 @@ cmd_button(
 
 # Setup kuma
 for kname, vname in [
-    ("vc1-kuma-global", "vc1"),
     ("vc2-kuma-remote", "vc2"),
     ("vc3-kuma-remote", "vc3"),
 ]:

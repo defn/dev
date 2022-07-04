@@ -10,6 +10,7 @@ helmCharts:
 
 resources:
 - tls.yaml
+- ingress.yaml
 
 patchesStrategicMerge:
 - |-
@@ -87,7 +88,7 @@ patchesStrategicMerge:
             name: https608
             protocol: TCP
           - containerPort: 8609
-            name: https609          
+            name: https609
             protocol: TCP
 - |-
   apiVersion: v1
