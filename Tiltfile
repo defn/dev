@@ -183,6 +183,7 @@ for kname, vname in [
 
 # Setup applications
 for kname, vname in [
+    ("vc1-kong", "vc1"),
     ("vc1-vault", "vc1"),
 ]:
     local_resource(

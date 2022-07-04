@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kong
+  name: vc1-kong
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/defn/dev
-    path: k/kong
+    path: k/vc1-kong
     targetRevision: main
   destination:
     namespace: kong
-    name: in-cluster
+    name: vc1
   syncPolicy:
     syncOptions:
     - CreateNamespace=true

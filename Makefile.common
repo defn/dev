@@ -35,7 +35,6 @@ init-dev:
 	kubectl --context argocd apply -f k/argocd-application.yaml
 	argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')"
 	kubectl --context argocd apply -f k/kuma-application.yaml
-	kubectl --context argocd apply -f k/kong-application.yaml
 	kubectl --context argocd apply -f k/traefik-application.yaml
 	kubectl --context argocd apply -f k/loft-application.yaml
 	kubectl --context argocd apply -f k/vault-application.yaml
@@ -47,8 +46,6 @@ sync:
 	argocd --kube-context argocd app wait argocd
 	argocd --kube-context argocd app sync kuma --local k/kuma --assumeYes --prune
 	argocd --kube-context argocd app wait kuma
-	argocd --kube-context argocd app sync kong --local k/kong --assumeYes --prune
-	argocd --kube-context argocd app wait kong
 	argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune
 	argocd --kube-context argocd app wait traefik
 	argocd --kube-context argocd app sync loft --local k/loft --assumeYes --prune
