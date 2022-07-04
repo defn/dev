@@ -183,10 +183,10 @@ for kname, vname in [
         icon_name="build",
     )
 
-# Setup applications
 for kname, vname in [
-    ("vc1-kong", "vc1"),
-    ("vc1-vault", "vc1"),
+    ("vc1-kuma-demo", "vc1"),
+    ("vc2-kuma-demo", "vc2"),
+    ("vc3-kuma-demo", "vc3"),
 ]:
     local_resource(
         kname,
@@ -236,10 +236,10 @@ for kname, vname in [
         icon_name="build",
     )
 
+# Setup applications for demo
 for kname, vname in [
-    ("vc1-kuma-demo", "vc1"),
-    ("vc2-kuma-demo", "vc2"),
-    ("vc3-kuma-demo", "vc3"),
+    ("vc1-kong", "vc1"),
+    ("vc1-vault", "vc1"),
 ]:
     local_resource(
         kname,
