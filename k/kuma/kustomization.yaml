@@ -1,0 +1,11 @@
+namespace: kuma
+
+helmCharts:
+- releaseName: kuma
+  name: kuma
+  version: 1.7.0
+  repo: https://kumahq.github.io/charts
+  valuesInline:
+    controlPlane:
+      mode: global
+  includeCRDs: true
