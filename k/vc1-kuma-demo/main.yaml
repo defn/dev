@@ -21,7 +21,7 @@ spec:
         app: demo-app
         version: v1
       annotations:
-        kuma.io/mesh: demo
+        kuma.io/mesh: demom
     spec:
       containers:
         - name: demo-app
