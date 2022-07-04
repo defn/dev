@@ -156,7 +156,7 @@ for kname, vname in [
                 cd;
                 {vname} get ns;
                 ~/bin/e env KUBECONFIG=$KUBECONFIG_ALL argocd cluster add loft-vcluster_{vname}_{vname}_loft-cluster --name {vname} --yes;
-                kubectl --context argocd apply -f k/{kname};
+                kubectl --context argocd apply -f k/{kname}-application.yaml;
                 argocd --kube-context argocd app sync {kname} --local k/{kname} --assumeYes --prune;
                 argocd --kube-context argocd app wait {kname};
                 touch k/{kname}/main.yaml;
@@ -235,9 +235,9 @@ for kname, vname in [
     )
 
 for kname, vname in [
-    ("vc1-kuma-demo-global", "vc1"),
-    ("vc2-kuma-demo-app", "vc2"),
-    ("vc3-kuma-demo-app", "vc3"),
+    ("vc1-kuma-demo", "vc1"),
+    ("vc2-kuma-demo", "vc2"),
+    ("vc3-kuma-demo", "vc3"),
 ]:
     local_resource(
         kname,
@@ -260,7 +260,7 @@ for kname, vname in [
             "-c",
             """
                 cd;
-                kubectl --context argocd apply -f k/{kname};
+                kubectl --context argocd apply -f k/{kname}-application.yaml;
                 argocd --kube-context argocd app sync {kname} --local k/{kname} --assumeYes --prune;
                 argocd --kube-context argocd app wait {kname};
                 touch k/{kname}/main.yaml ;
