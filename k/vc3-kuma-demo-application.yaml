@@ -10,7 +10,7 @@ spec:
     path: k/vc3-kuma-demo
     targetRevision: main
   destination:
-    namespace: demo1
+    namespace: demo2
     name: vc3
   syncPolicy:
     syncOptions:

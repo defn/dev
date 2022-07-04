@@ -11,7 +11,7 @@ spec:
     targetRevision: main
   destination:
     namespace: kuma
-    name: in-cluster
+    name: vc1
   syncPolicy:
     syncOptions:
     - CreateNamespace=true

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: demo1
+  name: demo2
   labels:
     kuma.io/sidecar-injection: enabled
 ---
@@ -9,7 +9,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: demo-app-v2
-  namespace: demo1
+  namespace: demo2
 spec:
   selector:
     matchLabels:
@@ -28,7 +28,7 @@ spec:
           image: "kumahq/kuma-demo"
           env:
             - name: REDIS_HOST
-              value: "redis_demo1_svc_6379.mesh"
+              value: "redis_demo2_svc_6379.mesh"
             - name: REDIS_PORT
               value: "80"
             - name: APP_VERSION
@@ -43,7 +43,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: demo-app
-  namespace: demo1
+  namespace: demo2
 spec:
   selector:
     app: demo-app

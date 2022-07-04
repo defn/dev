@@ -15,6 +15,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: demo-app-x-demo1-x-vc3
+            name: demo-app-x-demo2-x-vc3
             port:
               number: 5000
