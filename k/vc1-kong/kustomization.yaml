@@ -26,5 +26,6 @@ patchesStrategicMerge:
   spec:
     template:
       spec:
-        annotations:
-          kuma.io/mesh: mesh
+        metadata:
+          annotations:
+            kuma.io/mesh: mesh
