@@ -227,32 +227,6 @@ cmd_button(
 )
 
 local_resource(
-    "kuma",
-    cmd="""
-        cd;
-        if argocd --kube-context argocd app diff kuma --local k/kuma; then echo No difference; fi;
-    """,
-    deps=["k/kuma"],
-    allow_parallel=True,
-    labels=["deploy"],
-)
-
-cmd_button(
-    name="sync kuma",
-    resource="kuma",
-    argv=[
-        "bash",
-        "-c",
-        """
-            cd;
-            argocd --kube-context argocd app sync kuma --local k/kuma --assumeYes --prune;
-            touch k/kuma/main.yaml;
-        """,
-    ],
-    icon_name="build",
-)
-
-local_resource(
     "loft",
     cmd="""
         cd;
@@ -385,6 +359,7 @@ cmd_button(
 )
 
 for kname, vname in [
+    ("vc0", "vc0"),
     ("vc1", "vc1"),
     ("vc2", "vc2"),
     ("vc3", "vc3"),

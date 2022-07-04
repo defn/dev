@@ -1,0 +1,21 @@
+apiVersion: cluster.loft.sh/v1
+kind: VirtualCluster
+metadata:
+  name: vc0
+  namespace: vc0
+spec:
+  helmRelease:
+    chart:
+      name: vcluster
+      version: 0.8.0
+    values: |-
+      storage:
+        size: 5Gi
+  kubeConfigRef:
+    secretName: vc-vc0
+    secretNamespace: vc0
+  pod:
+    podSelector:
+      matchLabels:
+        app: vcluster
+        release: vc0
