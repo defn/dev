@@ -387,6 +387,7 @@ for kname, vname in [
                 kubectl --context argocd apply -f k/{kname}-application.yaml;
                 argocd --kube-context argocd app sync {kname} --local k/{kname} --assumeYes --prune;
                 argocd --kube-context argocd app wait {kname};
+                kubectl --context pod wait -n {vname} -l statefulset.kubernetes.io/pod-name={vname}-0 --for=condition=ContainersReady pod || true;
                 touch k/{kname}/main.yaml ;
             """.format(
                 vname=vname, kname=kname
