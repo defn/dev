@@ -20,7 +20,7 @@ cmd_button(
         """
             cd;
             kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d' | ssh super pbcopy;
-            xdg-open https://{domain}:603;
+            xdg-open https://{domain}:9603;
         """.format(
             domain=dummy_host
         ),
@@ -38,7 +38,7 @@ cmd_button(
         "-c",
         """
             cd;
-            xdg-open https://{domain}:605;
+            xdg-open https://{domain}:9605;
         """.format(
             domain=dummy_host
         ),
@@ -75,7 +75,7 @@ cmd_button(
         "-c",
         """
             cd;
-            xdg-open https://{domain}:606/gui;
+            xdg-open https://{domain}:9606/gui;
         """.format(
             domain=dummy_host
         ),
@@ -93,7 +93,7 @@ cmd_button(
         "-c",
         """
             cd;
-            xdg-open https://{domain}:607;
+            xdg-open https://{domain}:9607;
         """.format(
             domain=dummy_host
         ),
@@ -111,7 +111,7 @@ cmd_button(
         "-c",
         """
             cd;
-            xdg-open https://{domain}:608;
+            xdg-open https://{domain}:9608;
         """.format(
             domain=dummy_host
         ),
@@ -128,7 +128,7 @@ cmd_button(
         "-c",
         """
             cd;
-            xdg-open https://{domain}:602;
+            xdg-open https://{domain}:9602;
         """.format(
             domain=dummy_host
         ),

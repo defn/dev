@@ -38,16 +38,16 @@ patchesStrategicMerge:
           - --entrypoints.web.address=:8000/tcp
           - --entrypoints.websecure.address=:8443/tcp
           - --entrypoints.https8200.address=:8200/tcp
-          - --entrypoints.https600.address=:600/tcp
-          - --entrypoints.https601.address=:601/tcp
-          - --entrypoints.https602.address=:602/tcp
-          - --entrypoints.https603.address=:603/tcp
-          - --entrypoints.https604.address=:604/tcp
-          - --entrypoints.https605.address=:605/tcp
-          - --entrypoints.https606.address=:606/tcp
-          - --entrypoints.https607.address=:607/tcp
-          - --entrypoints.https608.address=:608/tcp
-          - --entrypoints.https609.address=:609/tcp
+          - --entrypoints.https9600.address=:9600/tcp
+          - --entrypoints.https9601.address=:9601/tcp
+          - --entrypoints.https9602.address=:9602/tcp
+          - --entrypoints.https9603.address=:9603/tcp
+          - --entrypoints.https9604.address=:9604/tcp
+          - --entrypoints.https9605.address=:9605/tcp
+          - --entrypoints.https9606.address=:9606/tcp
+          - --entrypoints.https9607.address=:9607/tcp
+          - --entrypoints.https9608.address=:9608/tcp
+          - --entrypoints.https9609.address=:9609/tcp
           - --entrypoints.web.http.redirections.entryPoint.to=:443
           - --entrypoints.web.http.redirections.entryPoint.scheme=https
           - --providers.kubernetescrd.allowexternalnameservices=true
@@ -60,35 +60,35 @@ patchesStrategicMerge:
           - containerPort: 8200
             name: https8200
             protocol: TCP
-          - containerPort: 600
-            name: https600
+          - containerPort: 9600
+            name: https9600
             protocol: TCP
-          - containerPort: 601
-            name: https601
+          - containerPort: 9601
+            name: https9601
             protocol: TCP
-          - containerPort: 602
-            name: https602
+          - containerPort: 9602
+            name: https9602
             protocol: TCP
-          - containerPort: 603
-            name: https603
+          - containerPort: 9603
+            name: https9603
             protocol: TCP
-          - containerPort: 604
-            name: https604
+          - containerPort: 9604
+            name: https9604
             protocol: TCP
-          - containerPort: 605
-            name: https605
+          - containerPort: 9605
+            name: https9605
             protocol: TCP
-          - containerPort: 606
-            name: https606
+          - containerPort: 9606
+            name: https9606
             protocol: TCP
-          - containerPort: 607
-            name: https607
+          - containerPort: 9607
+            name: https9607
             protocol: TCP
-          - containerPort: 608
-            name: https608
+          - containerPort: 9608
+            name: https9608
             protocol: TCP
-          - containerPort: 609
-            name: https609
+          - containerPort: 9609
+            name: https9609
             protocol: TCP
 - |-
   apiVersion: v1
@@ -115,43 +115,43 @@ patchesStrategicMerge:
           port: 8200
           protocol: TCP
           targetPort: https8200
-        - name: https600
-          port: 600
+        - name: https9600
+          port: 9600
           protocol: TCP
-          targetPort: https600
-        - name: https601
-          port: 601
+          targetPort: https9600
+        - name: https9601
+          port: 9601
           protocol: TCP
-          targetPort: https601
-        - name: https602
-          port: 602
+          targetPort: https9601
+        - name: https9602
+          port: 9602
           protocol: TCP
-          targetPort: https602
-        - name: https603
-          port: 603
+          targetPort: https9602
+        - name: https9603
+          port: 9603
           protocol: TCP
-          targetPort: https603
-        - name: https604
-          port: 604
+          targetPort: https9603
+        - name: https9604
+          port: 9604
           protocol: TCP
-          targetPort: https604
-        - name: https605
-          port: 605
+          targetPort: https9604
+        - name: https9605
+          port: 9605
           protocol: TCP
-          targetPort: https605
-        - name: https606
-          port: 606
+          targetPort: https9605
+        - name: https9606
+          port: 9606
           protocol: TCP
-          targetPort: https606
-        - name: https607
-          port: 607
+          targetPort: https9606
+        - name: https9607
+          port: 9607
           protocol: TCP
-          targetPort: https607
-        - name: https608
-          port: 608
+          targetPort: https9607
+        - name: https9608
+          port: 9608
           protocol: TCP
-          targetPort: https608
-        - name: https609
-          port: 609
+          targetPort: https9608
+        - name: https9609
+          port: 9609
           protocol: TCP
-          targetPort: https609
+          targetPort: https9609

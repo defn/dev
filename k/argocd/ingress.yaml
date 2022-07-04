@@ -5,7 +5,7 @@ metadata:
   name: ts-argocd
   annotations:
     traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.entrypoints: https603
+    traefik.ingress.kubernetes.io/router.entrypoints: https9603
 spec:
   rules:
     - http:

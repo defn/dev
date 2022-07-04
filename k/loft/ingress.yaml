@@ -5,7 +5,7 @@ metadata:
   name: ts-loft
   annotations:
     traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.entrypoints: https602
+    traefik.ingress.kubernetes.io/router.entrypoints: https9602
 spec:
   rules:
     - http:

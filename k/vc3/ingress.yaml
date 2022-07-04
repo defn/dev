@@ -6,7 +6,7 @@ metadata:
   namespace: vc3
   annotations:
     traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.entrypoints: https608
+    traefik.ingress.kubernetes.io/router.entrypoints: https9608
 spec:
   rules:
   - http:

@@ -5,7 +5,7 @@ metadata:
   name: ts-traefik
 spec:
   entryPoints:
-    - https605
+    - https9605
   routes:
     - kind: Rule
       match: PathPrefix(`/api`)
