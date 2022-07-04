@@ -10,7 +10,7 @@ spec:
     path: k/kuma
     targetRevision: main
   destination:
-    namespace: default
+    namespace: kuma
     name: in-cluster
   syncPolicy:
     syncOptions:
