@@ -10,6 +10,3 @@ helmCharts:
     controlPlane:
       mode: global
   includeCRDs: true
-
-resources:
-- ingress.yaml
