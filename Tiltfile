@@ -14,7 +14,7 @@ cmd_button(
         "-c",
         """
             cd;
-            xdg-open https://{domain}:607;
+            xdg-open https://{domain}:9607;
         """.format(
             domain=dummy_host
         ),
@@ -32,7 +32,7 @@ cmd_button(
         "-c",
         """
             cd;
-            xdg-open https://{domain}:608;
+            xdg-open https://{domain}:9608;
         """.format(
             domain=dummy_host
         ),
