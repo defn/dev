@@ -17,22 +17,3 @@ spec:
                 name: kuma-control-plane
                 port:
                   number: 5681
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: ts-kuma-global-zone-sync
-  annotations:
-    traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.entrypoints: https5685
-spec:
-  rules:
-    - http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: kuma-global-zone-sync
-                port:
-                  number: 5685

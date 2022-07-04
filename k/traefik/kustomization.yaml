@@ -37,7 +37,6 @@ patchesStrategicMerge:
           - --providers.kubernetescrd
           - --providers.kubernetesingress
           - --entrypoints.websecure.address=:8443/tcp
-          - --entrypoints.https5685.address=:5685/tcp
           - --entrypoints.https8200.address=:8200/tcp
           - --entrypoints.https600.address=:8600/tcp
           - --entrypoints.https601.address=:8601/tcp

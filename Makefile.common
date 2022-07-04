@@ -112,7 +112,6 @@ cluster-inner:
 		--registry-use registry \
 		-p "80:30080@loadbalancer" \
 		-p "443:30443@loadbalancer" \
-		-p "5685:30685@loadbalancer" \
 		-p "8200:30820@loadbalancer" \
 		-p "600:30600@loadbalancer" \
 		-p "601:30601@loadbalancer" \
@@ -124,6 +123,7 @@ cluster-inner:
 		-p "607:30607@loadbalancer" \
 		-p "608:30608@loadbalancer" \
 		-p "609:30609@loadbalancer" \
+		-p "5685:5685@loadbalancer" \
 		-p "10001:10001@server:0" \
 		-p "10002:10002@server:0" \
 		-p "10003:10003@server:0" \
