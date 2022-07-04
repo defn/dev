@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vc3-kuma-global
+  name: vc3-kuma-remote
   namespace: argocd
 spec:
   project: default
