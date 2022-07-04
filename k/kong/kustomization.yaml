@@ -1,0 +1,14 @@
+namespace: kong
+
+helmCharts:
+- releaseName: kong
+  name: kong
+  namespace: kong
+  version: 2.10.2
+  repo: https://charts.konghq.com
+  valuesInline:
+    controlPlane:
+      mode: global
+    enterprise:
+      enabled: true
+  includeCRDs: true

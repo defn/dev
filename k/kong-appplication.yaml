@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kong
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/defn/dev
+    path: k/kong
+    targetRevision: main
+  destination:
+    namespace: kong
+    name: in-cluster
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true

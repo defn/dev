@@ -253,6 +253,32 @@ cmd_button(
 )
 
 local_resource(
+    "kong",
+    cmd="""
+        cd;
+        if argocd --kube-context argocd app diff kong --local k/kong; then echo No difference; fi;
+    """,
+    deps=["k/kong"],
+    allow_parallel=True,
+    labels=["deploy"],
+)
+
+cmd_button(
+    name="sync kong",
+    resource="kong",
+    argv=[
+        "bash",
+        "-c",
+        """
+            cd;
+            argocd --kube-context argocd app sync kong --local k/kong --assumeYes --prune;
+            touch k/kong/main.yaml;
+        """,
+    ],
+    icon_name="build",
+)
+
+local_resource(
     "loft",
     cmd="""
         cd;
