@@ -102,6 +102,8 @@ tower-update:
     COPY --chown=ubuntu:ubuntu --dir bin .
     COPY --chown=ubuntu:ubuntu .bash* .tool-versions .
 
+    RUN ~/bin/e asdf install
+
     RUN ~/bin/e helm repo add kuma https://kumahq.github.io/charts
     RUN ~/bin/e helm repo add loft https://charts.loft.sh
     RUN ~/bin/e helm repo add datadog https://helm.datadoghq.com
