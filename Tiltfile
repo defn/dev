@@ -91,6 +91,22 @@ cmd_button(
         """
             cd;
             git push;
+            (cd work/dev && git pull && exec make images);
+            (cd work/dev && git pull && exec make updates);
+        """,
+    ],
+    icon_name="build",
+)
+
+cmd_button(
+    name="yolo",
+    resource="make updates",
+    argv=[
+        "bash",
+        "-c",
+        """
+            cd;
+            git push;
             cd work/dev && git pull && exec make updates repo= repo_from=localhost:5000/ cache=localhost:5000/;
         """,
     ],
