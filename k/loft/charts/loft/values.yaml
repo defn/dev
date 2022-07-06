@@ -63,7 +63,7 @@ tls:
 env: {}
 
 # Additional environment variables in the form of
-# VAR_NAME:
+# VAR_NAME: 
 #   secretKeyRef:
 #     name: mysecret
 #     key: username
@@ -95,7 +95,7 @@ readinessProbe:
 livenessProbe:
   enabled: true
 
-# If an extension api service should be registered for
+# If an extension api service should be registered for 
 # the loft apis in kubernetes
 apiService:
   enabled: false
@@ -126,7 +126,7 @@ certIssuer:
 audit:
   enableSideCar: false
   image: library/alpine:3.13.1
-  persistence:
+  persistence: 
     enabled: false
     size: 10Gi
     # Optional storage class
@@ -146,3 +146,10 @@ serviceMonitor:
 config:
   audit:
     enabled: true
+
+# Enables running loft agent with a security context that:
+# - disables privileged escalation
+# - drops all capabilities
+# - runs as non-root
+securityContext:
+  enabled: true

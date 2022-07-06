@@ -16,7 +16,7 @@ spec:
           class: {{ .Values.certIssuer.httpResolver.ingressClass }}
     {{- end }}
     {{- range .Values.certIssuer.resolvers }}
-    -
+    - 
 {{ toYaml . | indent 6 }}
     {{- end }}
 {{- end }}
