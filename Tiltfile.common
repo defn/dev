@@ -18,7 +18,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d' | ssh super pbcopy;
             xdg-open https://{domain}:9603;
         """.format(
@@ -37,7 +37,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             xdg-open https://{domain}:9605;
         """.format(
             domain=dummy_host
@@ -55,7 +55,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             pass Initial_Root_Token | ssh super pbcopy;
             xdg-open https://{domain}:8200/ui;
         """.format(
@@ -74,7 +74,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             xdg-open https://{domain}:9606/gui;
         """.format(
             domain=dummy_host
@@ -92,7 +92,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             xdg-open https://{domain}:9607;
         """.format(
             domain=dummy_host
@@ -110,7 +110,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             xdg-open https://{domain}:9608;
         """.format(
             domain=dummy_host
@@ -127,7 +127,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             xdg-open https://{domain}:9602;
         """.format(
             domain=dummy_host
@@ -148,7 +148,7 @@ local_resource(
 local_resource(
     name="registry buildkitd",
     serve_cmd="""
-        cd;
+        set -x; cd;
         earthly bootstrap;
         docker exec earthly-buildkitd apk add socat || true;
         docker exec earthly-buildkitd pkill socat;
@@ -165,7 +165,7 @@ local_resource(
 local_resource(
     name="shell-operator",
     serve_cmd="""
-        cd;
+        set -x; cd;
         sudo install -d -m 0700 -o ubuntu -g ubuntu /var/run/shell-operator /tmp/shell-operator;
         exec /shell-operator start --listen-port=9116;
     """,
@@ -177,7 +177,7 @@ local_resource(
 local_resource(
     "argocd",
     cmd="""
-        cd;
+        set -x; cd;
         if argocd --kube-context argocd app diff argocd --local k/argocd; then echo No difference; fi;
     """,
     deps=["k/argocd"],
@@ -192,7 +192,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune;
             touch k/argocd/main.yaml;
         """,
@@ -203,7 +203,7 @@ cmd_button(
 local_resource(
     "traefik",
     cmd="""
-        cd;
+        set -x; cd;
         if argocd --kube-context argocd app diff traefik --local k/traefik; then echo No difference; fi;
     """,
     deps=["k/traefik"],
@@ -218,7 +218,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune;
             touch k/traefik/main.yaml;
         """,
@@ -229,7 +229,7 @@ cmd_button(
 local_resource(
     "loft",
     cmd="""
-        cd;
+        set -x; cd;
         if argocd --kube-context argocd app diff loft --local k/loft; then echo No difference; fi;
     """,
     deps=["k/loft"],
@@ -244,7 +244,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             argocd --kube-context argocd app sync loft --local k/loft --assumeYes --prune;
             touch k/loft/main.yaml;
         """,
@@ -255,7 +255,7 @@ cmd_button(
 local_resource(
     "vault",
     cmd="""
-        cd;
+        set -x; cd;
         if argocd --kube-context argocd app diff vault --local k/vault; then echo No difference; fi;
     """,
     deps=["k/vault"],
@@ -270,7 +270,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             argocd --kube-context argocd app sync vault --local k/vault --assumeYes --prune;
             touch k/vault/main.yaml;
         """,
@@ -285,7 +285,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             kubectl exec -n vault -ti vault-0 -- vault operator init
         """,
     ],
@@ -299,7 +299,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             pass Initial_Root_Token | env VAULT_ADDR=http://vault.vault.svc:8200 vault login - | grep ^policies;
             env VAULT_ADDR=http://vault.vault.svc:8200 vault operator seal;
             rm -f ~/.vault-token;
@@ -315,7 +315,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             rm -rf ~/.password-store/vault;
             kubectl exec -n vault vault-0 -- tar cfz - /vault/data | (cd ~/.password-store && tar xvfz - && git add vault && git add -u vault && git commit -m 'vault backup' && git push);
         """,
@@ -330,7 +330,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             ts="$(date +%s)";
             kubectl exec -i -n vault vault-0 -- mkdir -p /vault/data-${ts};
             kubectl exec -i -n vault vault-0 -- mv /vault/data/{core,logical,sys} /vault/data-${ts}/;
@@ -347,7 +347,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             kubectl exec -n vault -ti vault-0 -- vault operator unseal -reset;
             pass Unseal_Key_1 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://vault.vault.svc:8200/v1/sys/unseal;
             pass Unseal_Key_3 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://vault.vault.svc:8200/v1/sys/unseal;
@@ -367,7 +367,7 @@ for kname, vname in [
     local_resource(
         kname,
         cmd="""
-            cd;
+            set -x; cd;
             if argocd --kube-context argocd app diff {kname} --local k/{kname}; then echo No difference; fi;
         """.format(
             vname=vname, kname=kname
@@ -384,7 +384,7 @@ for kname, vname in [
             "bash",
             "-c",
             """
-                cd;
+                set -x; cd;
                 kubectl --context argocd apply -f k/{kname}-application.yaml;
                 argocd --kube-context argocd app sync {kname} --local k/{kname} --assumeYes --prune;
                 argocd --kube-context argocd app wait {kname};
@@ -406,7 +406,7 @@ for kname, vname in [
             "bash",
             "-c",
             """
-                cd;
+                set -x; cd;
                 argocd --kube-context argocd app delete --yes {kname};
             """.format(
                 vname=vname, kname=kname
@@ -422,7 +422,7 @@ for kname, vname in [
             "bash",
             "-c",
             """
-                cd;
+                set -x; cd;
                 loft sleep --prevent-wakeup 0 {vname}
             """.format(
                 vname=vname
@@ -437,7 +437,7 @@ for kname, vname in [
             "bash",
             "-c",
             """
-                cd;
+                set -x; cd;
                 loft wakeup {vname}
             """.format(
                 vname=vname
