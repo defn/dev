@@ -45,7 +45,7 @@ local_resource(
     cmd="""
         cd;
         git push;
-        cd work/dev && exec make updates;
+        cd work/dev && git pull && exec make updates;
     """,
     allow_parallel=True,
     labels=["automation"],
