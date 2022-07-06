@@ -118,7 +118,7 @@ cmd_button(
         "-c",
         """
             cd;
-            kubectl --context argocd apply -f k/site;
+            kubectl --context argocd apply -f k/site-application.yaml;
             argocd --kube-context argocd app sync site --local k/site --assumeYes --prune;
             argocd --kube-context argocd app wait site;
             touch k/site/main.yaml;
