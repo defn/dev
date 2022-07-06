@@ -13,7 +13,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             xdg-open https://{domain}:9607;
         """.format(
             domain=dummy_host
@@ -31,7 +31,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             xdg-open https://{domain}:9608;
         """.format(
             domain=dummy_host
@@ -43,7 +43,7 @@ cmd_button(
 local_resource(
     name="make updates",
     cmd="""
-        cd;
+        set -x; cd;
         git push;
         cd work/dev && git pull && exec make updates;
     """,
@@ -59,7 +59,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             git push;
             cd work/dev && git pull && exec make images;
         """,
@@ -74,7 +74,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             git push;
             cd work/dev && git pull && exec make images repo= cache=localhost:5000/;
         """,
@@ -89,7 +89,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             git push;
             (cd work/dev && git pull && exec make images);
             (cd work/dev && git pull && exec make updates);
@@ -105,7 +105,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             git push;
             cd work/dev && git pull && exec make updates repo= repo_from=localhost:5000/ cache=localhost:5000/;
         """,
@@ -133,7 +133,7 @@ cmd_button(
         "bash",
         "-c",
         """
-            cd;
+            set -x; cd;
             kubectl --context argocd apply -f k/site-application.yaml;
             argocd --kube-context argocd app sync site --local k/site --assumeYes --prune;
             argocd --kube-context argocd app wait site;
@@ -153,7 +153,7 @@ for kname, vname in [
     local_resource(
         kname,
         cmd="""
-            cd;
+            set -x; cd;
             if argocd --kube-context argocd app diff {kname} --local k/{kname}; then echo No difference; fi
         """.format(
             vname=vname, kname=kname
@@ -170,7 +170,7 @@ for kname, vname in [
             "bash",
             "-c",
             """
-                cd;
+                set -x; cd;
                 {vname} get ns;
                 ~/bin/e env KUBECONFIG=$KUBECONFIG_ALL argocd cluster add loft-vcluster_{vname}_{vname}_loft-cluster --name {vname} --yes;
                 kubectl --context argocd apply -f k/{kname}-application.yaml;
@@ -190,7 +190,7 @@ for kname, vname in [
             "bash",
             "-c",
             """
-                cd;
+                set -x; cd;
                 argocd --kube-context argocd app delete --yes {kname};
             """.format(
                 vname=vname, kname=kname
@@ -207,7 +207,7 @@ for kname, vname in [
     local_resource(
         kname,
         cmd="""
-            cd;
+            set -x; cd;
             if argocd --kube-context argocd app diff {kname} --local k/{kname}; then echo No difference; fi;
         """.format(
             vname=vname, kname=kname
@@ -224,7 +224,7 @@ for kname, vname in [
             "bash",
             "-c",
             """
-                cd;
+                set -x; cd;
                 kubectl --context argocd apply -f k/{kname}-application.yaml;
                 argocd --kube-context argocd app sync {kname} --local k/{kname} --assumeYes --prune;
                 argocd --kube-context argocd app wait {kname};
@@ -243,7 +243,7 @@ for kname, vname in [
             "bash",
             "-c",
             """
-                cd;
+                set -x; cd;
                 argocd --kube-context argocd app delete --yes {kname};
             """.format(
                 vname=vname, kname=kname
@@ -260,7 +260,7 @@ for kname, vname in [
     local_resource(
         kname,
         cmd="""
-            cd;
+            set -x; cd;
             if argocd --kube-context argocd app diff {kname} --local k/{kname}; then echo No difference; fi;
         """.format(
             vname=vname, kname=kname
@@ -277,7 +277,7 @@ for kname, vname in [
             "bash",
             "-c",
             """
-                cd;
+                set -x; cd;
                 kubectl --context argocd apply -f k/{kname}-application.yaml;
                 argocd --kube-context argocd app sync {kname} --local k/{kname} --assumeYes --prune;
                 argocd --kube-context argocd app wait {kname};
@@ -296,7 +296,7 @@ for kname, vname in [
             "bash",
             "-c",
             """
-                cd;
+                set -x; cd;
                 argocd --kube-context argocd app delete --yes {kname};
             """.format(
                 vname=vname, kname=kname
