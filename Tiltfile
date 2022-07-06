@@ -91,8 +91,7 @@ cmd_button(
         """
             set -x; cd;
             git push;
-            (cd work/dev && git pull && exec make images);
-            (cd work/dev && git pull && exec make updates);
+            cd work/dev && git pull && exec make updates repo= repo_from=localhost:5000/ cache=localhost:5000/;
         """,
     ],
     icon_name="build",
@@ -107,7 +106,25 @@ cmd_button(
         """
             set -x; cd;
             git push;
-            cd work/dev && git pull && exec make updates repo= repo_from=localhost:5000/ cache=localhost:5000/;
+            (cd work/dev && git pull && exec make images);
+            (cd work/dev && git pull && exec make updates);
+            kubectl --context pod delete pod/dev-0;
+        """,
+    ],
+    icon_name="build",
+)
+
+cmd_button(
+    name="yolo2",
+    resource="make updates",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            git push;
+            (cd work/dev && git pull && exec make updates);
+            kubectl --context pod delete pod/dev-0;
         """,
     ],
     icon_name="build",
