@@ -7,7 +7,7 @@ spec:
   helmRelease:
     chart:
       name: vcluster
-      version: 0.8.0
+      version: 0.10.2
     values: |-
       storage:
         size: 5Gi
