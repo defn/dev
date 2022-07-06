@@ -1,8 +1,8 @@
 aws-vault 6.6.0
-cloudflared 2022.6.2
+cloudflared 2022.7.0
 consul 1.12.2
 helm 3.9.0
-k9s 0.25.18
+k9s 0.25.21
 krew 0.4.3
 kubectl 1.24.2
 kustomize 4.5.5
@@ -14,4 +14,4 @@ skaffold 1.38.0
 terraform 1.2.3
 vault 1.11.0
 argo 3.3.8
-argocd 2.4.2
+argocd 2.4.3
