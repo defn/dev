@@ -61,7 +61,7 @@ cmd_button(
         """
             cd;
             git push;
-            cd work/dev && exec make images;
+            cd work/dev && git pull && exec make images;
         """,
     ],
     icon_name="build",
@@ -76,7 +76,7 @@ cmd_button(
         """
             cd;
             git push;
-            cd work/dev && exec make images repo= cache=localhost:5000/;
+            cd work/dev && git pull && exec make images repo= cache=localhost:5000/;
         """,
     ],
     icon_name="build",
@@ -91,7 +91,7 @@ cmd_button(
         """
             cd;
             git push;
-            cd work/dev && exec make updates repo= repo_from=localhost:5000/ cache=localhost:5000/;
+            cd work/dev && git pull && exec make updates repo= repo_from=localhost:5000/ cache=localhost:5000/;
         """,
     ],
     icon_name="build",
