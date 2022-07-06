@@ -37,7 +37,6 @@ init-dev:
 	kubectl --context argocd apply -f k/traefik-application.yaml
 	kubectl --context argocd apply -f k/loft-application.yaml
 	kubectl --context argocd apply -f k/vault-application.yaml
-	kubectl --context argocd apply -f k/site-application.yaml
 	-$(MAKE) sync
 
 sync:
@@ -52,8 +51,6 @@ sync:
 	-$(MAKE) vault-restore
 	-$(MAKE) vault-unseal
 	argocd --kube-context argocd app wait vault
-	argocd --kube-context argocd app sync site --local k/site --assumeYes --prune
-	argocd --kube-context argocd app wait site
 
 kubeconfig:
 	sudo cp /run/secrets/kubernetes.io/serviceaccount/ca.crt /usr/local/share/ca-certificates/
