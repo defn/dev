@@ -11,7 +11,7 @@ python 3.10.5
 shellcheck 0.8.0
 shfmt 3.5.1
 skaffold 1.38.0
-terraform 1.2.3
+terraform 1.2.4
 vault 1.11.0
 argo 3.3.8
 argocd 2.4.3
