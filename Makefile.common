@@ -52,7 +52,7 @@ sync:
 	argocd --kube-context argocd app sync vc0 --local k/vc0 --assumeYes --prune
 	while true; do if kubectl --context pod wait -n vc0 -l statefulset.kubernetes.io/pod-name=vc0-0 --for=condition=ContainersReady pod; then break; fi; sleep 1; done
 	argocd --kube-context argocd app wait vc0
-	hen loft login https://loft.loft.svc.cluster.local --insecure --access-key admin	
+	loft login https://loft.loft.svc.cluster.local --insecure --access-key admin	
 	vc0 get ns
 	~/bin/e env KUBECONFIG=$$KUBECONFIG_ALL argocd cluster add loft-vcluster_vc0_vc0_loft-cluster --name vc0 --yes
 	argocd --kube-context argocd app sync vc0-kuma-global --local k/vc0-kuma-global --assumeYes --prune
