@@ -502,7 +502,7 @@ krew:
     RUN /home/ubuntu/.asdf/shims/kubectl-krew install ns
     RUN /home/ubuntu/.asdf/shims/kubectl-krew install ctx
     RUN /home/ubuntu/.asdf/shims/kubectl-krew install stern
-    RUN /home/ubuntu/.asdf/shims/kubectl-krew install tree
+    #RUN /home/ubuntu/.asdf/shims/kubectl-krew install tree
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
     SAVE ARTIFACT --symlink-no-follow .asdf
     SAVE IMAGE --cache-hint
