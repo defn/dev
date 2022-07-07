@@ -135,8 +135,7 @@ local_resource(
     "site",
     cmd="""
         cd;
-        if argocd --kube-context argocd app diff site --local k/site; then loft login https://loft.loft.svc.cluster.local --insecure --access-key admin;
-        echo No difference; fi
+        if argocd --kube-context argocd app diff site --local k/site; then echo No difference; fi
     """,
     deps=["k/site"],
     allow_parallel=True,
