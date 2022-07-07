@@ -35,6 +35,7 @@ export PATH="$PATH:/usr/local/aws-cli/bin"
 
 # gcloud
 export PATH="$PATH:/usr/local/gcloud/google-cloud-sdk/bin"
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 # kubectl
 export KUBECONFIG_ALL="$HOME/.kube/config:$HOME/.kube/vc0.conf:$HOME/.kube/config:$HOME/.kube/vc1.conf:$HOME/.kube/vc2.conf:$HOME/.kube/vc3.conf:$HOME/.kube/vc4.conf:$HOME/.kube/vc5.conf:$HOME/.kube/config"

@@ -185,6 +185,7 @@ tower:
     COPY --chown=ubuntu:ubuntu (+cue/* --arch=${arch} --version=${CUE}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+step/* --arch=${arch} --version=${STEP}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+kuma/* --arch=${arch} --version=${KUMA}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+switch/* --arch=${arch} --version=${SWITCH}) /usr/local/bin/
 
     COPY --chown=ubuntu:ubuntu --dir (+shell/* --arch=${arch} --version_shellcheck=${SHELLCHECK} --version_shfmt=${SHFMT}) ./
     COPY --chown=ubuntu:ubuntu --dir (+k9s/* --arch=${arch} --version=${K9S}) ./
@@ -268,6 +269,7 @@ asdf:
 awscli:
     ARG arch
     ARG arch3
+    ARG version=2.7.13
     FROM +tools --arch=${arch}
     RUN curl -sSL "https://awscli.amazonaws.com/awscli-exe-linux-${arch3}.zip" -o "awscliv2.zip"
     RUN unzip awscliv2.zip
@@ -403,17 +405,18 @@ bk:
     RUN --secret BKCLI curl -sSL -o bk https://github.com/buildkite/cli/releases/download/v${BKCLI}/cli-linux-${arch} && chmod 755 bk
     SAVE ARTIFACT bk
 
-hlb:
-    ARG arch
-    FROM +tools --arch=${arch}
-    RUN --secret HLB curl -sSL -o hlb https://github.com/openllb/hlb/releases/download/v${HLB}/hlb-linux-${arch} && chmod 755 hlb
-    SAVE ARTIFACT hlb
-
 litestream:
     ARG arch
     FROM +tools --arch=${arch}
     RUN --secret LITESTREAM curl -sSL https://github.com/benbjohnson/litestream/releases/download/v${LITESTREAM}/litestream-v${LITESTREAM}-linux-${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT litestream
+
+switch:
+    ARG arch
+    ARG version
+    FROM +tools --arch=${arch}
+    RUN curl -sSL -o switch https://github.com/danielfoehrKn/kubeswitch/releases/download/${version}/switcher_linux_amd64 && chmod 755 switch
+    SAVE ARTIFACT switch
 
 cue:
     ARG arch
@@ -491,6 +494,7 @@ krew:
     ARG arch
     ARG version
     ARG version_kubectl
+    ARG version_switch
     FROM +kubectl --arch=${arch} --version=${version_kubectl}
     RUN echo "krew ${version}" >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add krew'
@@ -498,6 +502,7 @@ krew:
     RUN /home/ubuntu/.asdf/shims/kubectl-krew install ns
     RUN /home/ubuntu/.asdf/shims/kubectl-krew install ctx
     RUN /home/ubuntu/.asdf/shims/kubectl-krew install stern
+    RUN /home/ubuntu/.asdf/shims/kubectl-krew install tree
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
     SAVE ARTIFACT --symlink-no-follow .asdf
     SAVE IMAGE --cache-hint
