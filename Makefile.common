@@ -55,13 +55,13 @@ sync:
 	loft login https://loft.loft.svc.cluster.local --insecure --access-key admin	
 	vc0 get ns
 	~/bin/e env KUBECONFIG=$$KUBECONFIG_ALL argocd cluster add loft-vcluster_vc0_vc0_loft-cluster --name vc0 --yes
-	argocd --kube-context argocd app sync vc0-kuma-global --local k/vc0-kuma-global --assumeYes --prune
-	argocd --kube-context argocd app wait vc0-kuma-global
 	argocd --kube-context argocd app sync vault --local k/vault --assumeYes --prune
 	-kubectl --context pod wait -n vault -l statefulset.kubernetes.io/pod-name=vault-0 --for=condition=ContainersReady pod
 	-$(MAKE) vault-restore
 	-$(MAKE) vault-unseal
 	argocd --kube-context argocd app wait vault
+	argocd --kube-context argocd app sync vc0-kuma-global --local k/vc0-kuma-global --assumeYes --prune
+	argocd --kube-context argocd app wait vc0-kuma-global
 
 kubeconfig:
 	sudo cp /run/secrets/kubernetes.io/serviceaccount/ca.crt /usr/local/share/ca-certificates/
