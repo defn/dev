@@ -363,7 +363,7 @@ vcluster:
     ARG arch
     ARG version
     FROM +tools --arch=${arch}
-    RUN curl -sSL -o vcluster https://github.com/loft-sh/vcluster/releases/download/v${vcluster}/vcluster-linux-${arch} && chmod 755 vcluster
+    RUN curl -sSL -o vcluster https://github.com/loft-sh/vcluster/releases/download/v${version}/vcluster-linux-${arch} && chmod 755 vcluster
     SAVE ARTIFACT vcluster
 
 loft:
