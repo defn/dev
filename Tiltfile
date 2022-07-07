@@ -130,35 +130,6 @@ cmd_button(
     icon_name="build",
 )
 
-# Set up site specific configuration after loft is available
-local_resource(
-    "site",
-    cmd="""
-        cd;
-        if argocd --kube-context argocd app diff site --local k/site; then echo No difference; fi
-    """,
-    deps=["k/site"],
-    allow_parallel=True,
-    labels=["deploy"],
-)
-
-cmd_button(
-    name="sync site",
-    resource="site",
-    argv=[
-        "bash",
-        "-c",
-        """
-            set -x; cd;
-            kubectl --context argocd apply -f k/site-application.yaml;
-            argocd --kube-context argocd app sync site --local k/site --assumeYes --prune;
-            argocd --kube-context argocd app wait site;
-            touch k/site/main.yaml;
-        """,
-    ],
-    icon_name="build",
-)
-
 # Setup kuma
 for kname, vname in [
     ("vc0-kuma-global", "vc0"),
