@@ -18,6 +18,7 @@ vm:
     symlink: .gnupg2 to .gnupg
     gpg-agent: maybe remove from remote
     vscode: code --folder-uri vscode-remote://ssh-remote+defn/home/ubuntu
+
 "features": {
     "buildkit": true
   },
@@ -29,3 +30,12 @@ vm:
     [registry."1.1.1.1:5000"]
       http = true
       insecure = true
+
+https://www.vaultproject.io/docs/secrets/pki/quick-start-root-ca
+
+
+vault secrets enable pki
+vault secrets tune -max-lease-ttl=87600h pki
+vault delete pki/root; vault write pki/root/generate/internal common_name=gyre.defn.dev ttl=87600h -format=json | jq -r '.data.certificate' > root.crt 
+vault write pki/config/urls issuing_certificates="$VAULT_ADDR/v1/pki/ca" crl_distribution_points="$VAULT_ADDR/v1/pki/crl"
+vault write pki/roles/gyre.defn.dev allowed_domains=gyre.defn.dev allow_subdomains=true max_ttl=1h
