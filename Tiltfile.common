@@ -167,7 +167,7 @@ local_resource(
     serve_cmd="""
         set -x; cd;
         sudo install -d -m 0700 -o ubuntu -g ubuntu /var/run/shell-operator /tmp/shell-operator;
-        exec /shell-operator start --listen-port=9116;
+        exec /shell-operator start --listen-port=9116 --kube-context pod;
     """,
     allow_parallel=True,
     deps=["hooks"],
