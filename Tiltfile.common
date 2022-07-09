@@ -311,7 +311,7 @@ cmd_button(
         "-c",
         """
             set -x; cd;
-            $(MAKE) vault-seal;
+            make vault-seal;
         """,
     ],
     icon_name="build",
