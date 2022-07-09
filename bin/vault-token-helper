@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export VAULT_ADDR="${VAULT_ADDR:-http://127.0.0.1:8200}"
+export VAULT_ADDR="${VAULT_ADDR:-http://vault.vault.svc:8200}"
 
 function main {
     case "${1:-}" in
