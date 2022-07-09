@@ -69,7 +69,7 @@ sync:
 		while true; do if kubectl --context pod wait -n "$$v" -l statefulset.kubernetes.io/pod-name="$$v"-0 --for=condition=ContainersReady pod; then break; fi; sleep 1; done; \
 		argocd --kube-context argocd app wait "$$v"; \
 		"$$v" get ns; \
-		~/bin/e env KUBECONFIG=$$KUBECONFIG_ALL argocd cluster add loft-vcluster_"$${v}_$${v}_loft-cluster --name "$$v" --yes; \
+		~/bin/e env KUBECONFIG=$$KUBECONFIG_ALL argocd cluster add "loft-vcluster_$${v}_$${v}_loft-cluster" --name "$$v" --yes; \
 		while true; do if [[ "$$(argocd cluster get "$$v" --output json | jq -r '.name')" == "$$v" ]]; then break; fi; sleep 1; done; \
 	done
 	kubectl --context argocd apply -f k/vc0-kuma-global-application.yaml
