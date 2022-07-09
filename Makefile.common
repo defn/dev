@@ -39,9 +39,7 @@ init-dev:
 	-kubectl --context pod create namespace argocd
 	kustomize build --enable-helm k/argocd | kubectl --context argocd apply -f -
 	kubectl --context argocd rollout status deployment argocd-server --watch
-	kubectl --context argocd apply -f k/argocd-application.yaml
-	kubectl --context argocd apply -f k/argo-events-application.yaml
-	kubectl --context argocd apply -f k/argo-workflows-application.yaml
+	kubectl --context argocd apply -f k/dev-set/main.yaml
 	kubectl --context argocd apply -f k/traefik-application.yaml
 	kubectl --context argocd apply -f k/vault-application.yaml
 	kubectl --context argocd apply -f k/loft-application.yaml
