@@ -175,6 +175,17 @@ local_resource(
 )
 
 local_resource(
+    name="vault-agent",
+    serve_cmd="""
+        set -x; cd;
+        vault agent -config etc/agent.hcl;
+    """,
+    allow_parallel=True,
+    deps=["hooks"],
+    labels=["automation"],
+)
+
+local_resource(
     "argocd",
     cmd="""
         set -x; cd;
@@ -300,9 +311,7 @@ cmd_button(
         "-c",
         """
             set -x; cd;
-            pass Initial_Root_Token | env VAULT_ADDR=http://vault.vault.svc:8200 vault login - | grep ^policies;
-            env VAULT_ADDR=http://vault.vault.svc:8200 vault operator seal;
-            rm -f ~/.vault-token;
+            make vault-seal;
         """,
     ],
     icon_name="build",

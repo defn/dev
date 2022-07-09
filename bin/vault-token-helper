@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+export VAULT_ADDR="${VAULT_ADDR:-http://vault.vault.svc:8200}"
+
+function main {
+    case "${1:-}" in
+        get)
+            if [[ -f /tmp/file-foo ]]; then
+                cat /tmp/file-foo
+            fi
+            ;;
+        store)
+            true
+            ;;
+        erase)
+            rm -f /tmp/file-foo
+            ;;
+        *)
+            false
+            ;;
+    esac
+}
+
+main "$@"
