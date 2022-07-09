@@ -49,9 +49,9 @@ init-dev:
 	kubectl --context argocd apply -f k/vc0-kuma-global-application.yaml
 
 sync:
-	echo kubectl --context argocd patch secret argocd-secret -p \
-		'{"stringData": { "admin.password": "$$2a$$10$$3sQFra.ZmAz88EhVIxtd6uKBgxcLNYjKBR2SoPGV2ifqiG6.oMiqm", "admin.passwordMtime": "2021-08-29T20:01:0" }}'
-	argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')"
+	argocd login --insecure argocd-server.argocd.svc --username admin --password admin \
+		|| argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')" \
+	argocd account update-password --new-password admin
 	argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune
 	argocd --kube-context argocd app wait argocd
 	argocd --kube-context argocd app sync argo-events --local k/argo-events --assumeYes --prune
