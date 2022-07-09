@@ -122,6 +122,33 @@ cmd_button(
     icon_name="build",
 )
 
+# argo-workflows
+local_resource(
+    "argo-workflows",
+    cmd="""
+        set -x; cd;
+        if argocd --kube-context argocd app diff argo-workflows --local k/argo-workflows; then echo No difference; fi;
+    """,
+    deps=["k/argo-workflows"],
+    allow_parallel=True,
+    labels=["deploy"],
+)
+
+cmd_button(
+    name="sync argo-workflows",
+    resource="argo-workflows",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            argocd --kube-context argocd app sync argo-workflows --local k/argo-workflows --assumeYes --prune;
+            touch k/argo-workflows/kustomization.yaml;
+        """,
+    ],
+    icon_name="build",
+)
+
 # traefik
 local_resource(
     "traefik",
