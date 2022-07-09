@@ -44,3 +44,9 @@ spec:
       syncPolicy:
         syncOptions:
         - CreateNamespace=true
+      ignoreDifferences:
+      - kind: MutatingWebhookConfiguration
+        group: admissionregistration.k8s.io
+        name: vault-agent-injector-cfg
+        jsonPointers:
+          - /webhooks/0/clientConfig/caBundle
