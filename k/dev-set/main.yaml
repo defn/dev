@@ -18,7 +18,7 @@ spec:
         cluster: in-cluster
   template:
     metadata:
-      name: {{name}}
+      name: "{{name}}"
       namespace: argocd
     spec:
       project: default
@@ -27,8 +27,8 @@ spec:
         path: k/{{name}}
         targetRevision: main
       destination:
-        namespace: {{namespace}}
-        name: {{cluster}}
+        namespace: "{{namespace}}"
+        name: "{{cluster}}"
       syncPolicy:
         syncOptions:
         - CreateNamespace=true
