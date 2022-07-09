@@ -60,7 +60,7 @@ sync:
 	argocd --kube-context argocd app wait vc0
 	vc0 get ns
 	~/bin/e env KUBECONFIG=$$KUBECONFIG_ALL argocd cluster add loft-vcluster_vc0_vc0_loft-cluster --name vc0 --yes
-	while true; do if [[ "$$(set -o pipefail; argocd cluster get vc0 --output json | jq -r '.name')" == "vc0" ]]; then break; fi; sleep 1; done
+	while true; do if [[ "$$(argocd cluster get vc0 --output json | jq -r '.name')" == "vc0" ]]; then break; fi; sleep 1; done
 	argocd --kube-context argocd app sync vc0-kuma-global --local k/vc0-kuma-global --assumeYes --prune
 	argocd --kube-context argocd app wait vc0-kuma-global
 
