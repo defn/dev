@@ -112,8 +112,7 @@ tower-update:
     RUN ~/bin/e helm repo update
 
     COPY --dir --chown=ubuntu:ubuntu . .
-    RUN if [[ test -d .password-store ]]; then false; fi
-    RUN if [[ test -d work ]]; then false; fi
+    RUN if test -e work; then false; fi
     COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
     RUN git clean -ffd
 
