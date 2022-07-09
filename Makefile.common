@@ -125,6 +125,10 @@ cluster-inner:
 		--registry-use registry \
 		-p "80:8000@server:0" \
 		-p "443:8443@server:0" \
+		-p "9440:9440@server:0" \
+		-p "9441:9441@server:0" \
+		-p "9442:9442@server:0" \
+		-p "9443:9443@server:0" \
 		-p "8200:8200@server:0" \
 		-p "9600:9600@server:0" \
 		-p "9601:9601@server:0" \
