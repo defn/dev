@@ -8,6 +8,8 @@ reboot:
 	$(MAKE) reboot-inner
 
 reboot-inner:
+	$(MAKE) dummy
+	$(MAKE) registry
 	$(MAKE) cluster
 	$(MAKE) attach
 	
