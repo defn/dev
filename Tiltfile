@@ -53,36 +53,6 @@ local_resource(
 )
 
 cmd_button(
-    name="make images",
-    resource="make updates",
-    argv=[
-        "bash",
-        "-c",
-        """
-            set -x; cd;
-            git push;
-            cd work/dev && git pull && exec make images;
-        """,
-    ],
-    icon_name="build",
-)
-
-cmd_button(
-    name="push images",
-    resource="make updates",
-    argv=[
-        "bash",
-        "-c",
-        """
-            set -x; cd;
-            git push;
-            cd work/dev && git pull && exec make images repo= cache=localhost:5000/;
-        """,
-    ],
-    icon_name="build",
-)
-
-cmd_button(
     name="push updates",
     resource="make updates",
     argv=[
