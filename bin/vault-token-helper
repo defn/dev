@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+function main {
+    case "${1:-}" in
+        get)
+            cat /tmp/file-foo
+            ;;
+        store)
+            true
+            ;;
+        erase)
+            rm -f /tmp/file-foo
+            ;;
+        *)
+            false
+            ;;
+    esac
+}
+
+main "$@"

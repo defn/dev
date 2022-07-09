@@ -1,4 +1,4 @@
-pid_file = "./pidfile"
+pid_file = "/tmp/pidfile"
 
 vault {
   address = "http://vault.vault.svc:8200"

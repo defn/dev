@@ -175,6 +175,17 @@ local_resource(
 )
 
 local_resource(
+    name="vault-agent",
+    serve_cmd="""
+        set -x; cd;
+        vault agent -config etc/agent.hcl;
+    """,
+    allow_parallel=True,
+    deps=["hooks"],
+    labels=["automation"],
+)
+
+local_resource(
     "argocd",
     cmd="""
         set -x; cd;
