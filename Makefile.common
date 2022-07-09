@@ -12,6 +12,7 @@ dummy:
 	for ip in $(dummy_ip); do sudo ifconfig lo0 alias "$$ip" netmask 255.255.255.255; done
 
 registry:
+	-docker rm -f k3d-registry k3d-docker-io
 	-k3d registry create registry --port 0.0.0.0:5000
 	-k3d registry create docker-io --proxy-remote-url https://registry-1.docker.io --port 0.0.0.0:5001
 
