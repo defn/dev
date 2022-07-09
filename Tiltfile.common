@@ -95,7 +95,6 @@ cmd_button(
         "-c",
         """
             set -x; cd;
-            kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d' | ssh super pbcopy;
             xdg-open https://{domain}:9603;
         """.format(
             domain=dummy_host

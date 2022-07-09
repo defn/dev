@@ -49,6 +49,8 @@ init-dev:
 	kubectl --context argocd apply -f k/vc0-kuma-global-application.yaml
 
 sync:
+	echo kubectl --context argocd patch secret argocd-secret -p \
+		'{"stringData": { "admin.password": "$$2a$$10$$3sQFra.ZmAz88EhVIxtd6uKBgxcLNYjKBR2SoPGV2ifqiG6.oMiqm", "admin.passwordMtime": "2021-08-29T20:01:0" }}'
 	argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')"
 	argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune
 	argocd --kube-context argocd app wait argocd
@@ -159,10 +161,6 @@ cluster-inner:
 	docker exec k3d-k3s-default-server-0 touch /etc/passwd
 	kubectl apply -f k/dev/main.yaml
 	kubectl rollout status statefulset dev --watch
-
-argocd-admin:
-	@kubectl -n argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d' | ssh super pbcopy
-	@xdg-open https://$(dummy_host):9603
 
 vault-restore:
 	(cd ~/.password-store && tar cfz - vault) | kubectl exec -i -n vault vault-0 -- tar xvfz - -C /;
