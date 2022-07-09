@@ -12,4 +12,3 @@ reboot-inner:
 	$(MAKE) registry
 	$(MAKE) cluster
 	$(MAKE) attach
-	
