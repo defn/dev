@@ -1,3 +1,4 @@
+# argo submit etc/hello-workflow.yaml --watch
 apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
@@ -16,3 +17,6 @@ spec:
       image: docker/whalesay:latest
       command: [cowsay]
       args: ["hello world"]
+  securityContext:
+    runAsNonRoot: false
+    runAsUser: 0
