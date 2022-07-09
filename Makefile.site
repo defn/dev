@@ -7,6 +7,11 @@ reboot:
 	git pull
 	$(MAKE) reboot-inner
 
+recreate:
+	kubectl delete pod/dev-0
+	kubectl rollout status statefulset dev --watch
+	$(MAKE) attach
+
 reboot-inner:
 	$(MAKE) dummy
 	$(MAKE) registry
