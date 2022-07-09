@@ -113,6 +113,7 @@ tower-update:
 
     COPY --dir --chown=ubuntu:ubuntu . .
     RUN if test -e work; then false; fi
+    RUN bash -c 'if test -n "$(git clean -nfdx)"; then false; fi'
     COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
     RUN git clean -ffd
 
