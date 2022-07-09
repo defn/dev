@@ -2,3 +2,12 @@ include Makefile.common
 
 init-site:
 	@true
+
+reboot:
+	git pull
+	$(MAKE) reboot-inner
+
+reboot-inner:
+	$(MAKE) cluster
+	$(MAKE) attach
+	
