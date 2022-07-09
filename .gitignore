@@ -61,3 +61,4 @@ node_modules
 .rediscli_history
 .vault*
 .step
+.dogrc
