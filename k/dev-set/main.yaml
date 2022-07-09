@@ -28,6 +28,9 @@ spec:
       - name: vc0
         namespace: vc0
         cluster: in-cluster
+      - name: vc1
+        namespace: vc1
+        cluster: in-cluster
   template:
     metadata:
       name: "{{name}}"

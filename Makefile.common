@@ -64,15 +64,20 @@ sync:
 	-$(MAKE) vault-unseal
 	argocd --kube-context argocd app wait vault
 	loft login https://loft.loft.svc.cluster.local --insecure --access-key admin
-	argocd --kube-context argocd app sync vc0 --local k/vc0 --assumeYes --prune
-	while true; do if kubectl --context pod wait -n vc0 -l statefulset.kubernetes.io/pod-name=vc0-0 --for=condition=ContainersReady pod; then break; fi; sleep 1; done
-	argocd --kube-context argocd app wait vc0
-	vc0 get ns
-	~/bin/e env KUBECONFIG=$$KUBECONFIG_ALL argocd cluster add loft-vcluster_vc0_vc0_loft-cluster --name vc0 --yes
-	while true; do if [[ "$$(argocd cluster get vc0 --output json | jq -r '.name')" == "vc0" ]]; then break; fi; sleep 1; done
+	for v in vc0 vc1; do \
+		argocd --kube-context argocd app sync "$$v" --local "k/$$v" --assumeYes --prune; \
+		while true; do if kubectl --context pod wait -n "$$v" -l statefulset.kubernetes.io/pod-name="$$v"-0 --for=condition=ContainersReady pod; then break; fi; sleep 1; done; \
+		argocd --kube-context argocd app wait "$$v"; \
+		"$$v" get ns; \
+		~/bin/e env KUBECONFIG=$$KUBECONFIG_ALL argocd cluster add loft-vcluster_"$${v}_$${v}_loft-cluster --name "$$v" --yes; \
+		while true; do if [[ "$$(argocd cluster get "$$v" --output json | jq -r '.name')" == "$$v" ]]; then break; fi; sleep 1; done; \
+	done
 	kubectl --context argocd apply -f k/vc0-kuma-global-application.yaml
 	argocd --kube-context argocd app sync vc0-kuma-global --local k/vc0-kuma-global --assumeYes --prune
 	argocd --kube-context argocd app wait vc0-kuma-global
+	kubectl --context argocd apply -f k/vc1-kuma-remote-application.yaml
+	argocd --kube-context argocd app sync vc1-kuma-remote --local k/vc1-kuma-remote --assumeYes --prune
+	argocd --kube-context argocd app wait vc1-kuma-remote
 
 kubeconfig:
 	sudo cp /run/secrets/kubernetes.io/serviceaccount/ca.crt /usr/local/share/ca-certificates/
