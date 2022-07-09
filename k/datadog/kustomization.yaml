@@ -7,5 +7,10 @@ helmCharts:
   repo: https://helm.datadoghq.com
   includeCRDs: true
   valuesInline:
+    clusterAgent:
+      enabled: "true"
+      metricsProvider:
+        enabled: "true"
     datadog:
+      appKeyExistingSecret: datadog-app-secret
       apiKeyExistingSecret: datadog-api-secret
