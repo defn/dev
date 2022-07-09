@@ -3,6 +3,7 @@ namespace: argocd
 helmCharts:
 - releaseName: argocd
   name: argo-cd
+  namespace: argocd
   version: 4.9.8
   repo: https://argoproj.github.io/argo-helm
   valuesInline:
