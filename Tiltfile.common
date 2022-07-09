@@ -89,7 +89,34 @@ cmd_button(
         """
             set -x; cd;
             argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune;
-            touch k/argocd/main.yaml;
+            touch k/argocd/kustomization.yaml;
+        """,
+    ],
+    icon_name="build",
+)
+
+# argo-events
+local_resource(
+    "argo-events",
+    cmd="""
+        set -x; cd;
+        if argocd --kube-context argocd app diff argo-events --local k/argo-events; then echo No difference; fi;
+    """,
+    deps=["k/argo-events"],
+    allow_parallel=True,
+    labels=["deploy"],
+)
+
+cmd_button(
+    name="sync argo-events",
+    resource="argo-events",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            argocd --kube-context argocd app sync argo-events --local k/argo-events --assumeYes --prune;
+            touch k/argo-events/kustomization.yaml;
         """,
     ],
     icon_name="build",
@@ -134,7 +161,7 @@ cmd_button(
         """
             set -x; cd;
             argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune;
-            touch k/traefik/main.yaml;
+            touch k/traefik/kustomization.yaml;
         """,
     ],
     icon_name="build",
@@ -192,7 +219,7 @@ cmd_button(
         """
             set -x; cd;
             argocd --kube-context argocd app sync vault --local k/vault --assumeYes --prune;
-            touch k/vault/main.yaml;
+            touch k/vault/kustomization.yaml;
         """,
     ],
     icon_name="build",
@@ -314,7 +341,7 @@ cmd_button(
         """
             set -x; cd;
             argocd --kube-context argocd app sync loft --local k/loft --assumeYes --prune;
-            touch k/loft/main.yaml;
+            touch k/loft/kustomization.yaml;
         """,
     ],
     icon_name="build",
@@ -355,7 +382,7 @@ for kname, vname in [
                 {vname} get ns;
                 ~/bin/e env KUBECONFIG=$KUBECONFIG_ALL argocd cluster add loft-vcluster_{vname}_{vname}_loft-cluster --name {vname} --yes;
                 while true; do if [[ "$(argocd cluster get {vname} --output json | jq -r '.name')" == "{vname}" ]]; then break; fi; sleep 1; done
-                touch k/{kname}/main.yaml ;
+                touch k/{kname}/kustomization.yaml ;
             """.format(
                 vname=vname, kname=kname
             ),
@@ -461,7 +488,7 @@ for kname, vname in [
                 kubectl --context argocd apply -f k/{kname}-application.yaml;
                 argocd --kube-context argocd app sync {kname} --local k/{kname} --assumeYes --prune;
                 argocd --kube-context argocd app wait {kname};
-                touch k/{kname}/main.yaml;
+                touch k/{kname}/kustomization.yaml;
             """.format(
                 vname=vname, kname=kname
             ),
