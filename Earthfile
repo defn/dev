@@ -177,13 +177,14 @@ tower:
     COPY --chown=ubuntu:ubuntu (+powerline/* --arch=${arch} --version=${POWERLINE}) /usr/local/bin
     COPY --chown=ubuntu:ubuntu (+cilium/* --arch=${arch} --version=${CILIUM}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+hubble/* --arch=${arch} --version=${HUBBLE}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+linkerd/* --arch=${arch} --version=${LINKERD}) /usr/local/bin
     COPY --chown=ubuntu:ubuntu (+vcluster/* --arch=${arch} --version=${VCLUSTER}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+loft/* --arch=${arch} --version=${LOFT}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+gh/* --arch=${arch} --version=${GH}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+earthly/* --arch=${arch} --version=${EARTHLY}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+k3d/* --arch=${arch} --version=${K3D}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+cue/* --arch=${arch} --version=${CUE}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+difft/* --arch=${arch} --version=${CUE}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+jless/* --arch=${arch} --version=${CUE}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+step/* --arch=${arch} --version=${STEP}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+kuma/* --arch=${arch} --version=${KUMA}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+switch/* --arch=${arch} --version=${SWITCH}) /usr/local/bin/
@@ -194,7 +195,6 @@ tower:
     COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+krew/* --arch=${arch} --version=${KREW} --version_kubectl=${KUBECTL}) ./
     COPY --chown=ubuntu:ubuntu --dir (+helm/* --arch=${arch} --version=${HELM}) ./
     COPY --chown=ubuntu:ubuntu --dir (+vault/* --arch=${arch} --version=${VAULT}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+consul/* --arch=${arch} --version=${CONSUL}) ./
     COPY --chown=ubuntu:ubuntu --dir (+cloudflared/* --arch=${arch} --version=${CLOUDFLARED}) ./
     COPY --chown=ubuntu:ubuntu --dir (+terraform/* --arch=${arch} --version=${TERRAFORM}) ./
     COPY --chown=ubuntu:ubuntu --dir (+skaffold/* --arch=${arch} --version=${SKAFFOLD}) ./
@@ -293,7 +293,7 @@ jless:
     ARG arch
     ARG arch2
     FROM +tools --arch=${arch}
-    RUN --secret JLESS (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${JLESS}/jless-v${JLESS}-${arch2}-unknown-linux-gnu.zip | gunzip -c - > jless) && chmod 755 jless
+    RUN --secret JLESS (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${JLESS}/jless-v${JLESS}-x86_64-unknown-linux-gnu.zip | gunzip -c - > jless) && chmod 755 jless
     SAVE ARTIFACT jless
 
 flyctl:
@@ -307,7 +307,7 @@ difft:
     ARG arch
     ARG arch2
     FROM +tools --arch=${arch}
-    RUN --secret DIFFT curl -sSL https://github.com/Wilfred/difftastic/releases/download/${DIFFT}/difft-${arch2}-unknown-linux-gnu.tar.gz | tar xvfz -
+    RUN --secret DIFFT curl -sSL https://github.com/Wilfred/difftastic/releases/download/${DIFFT}/difft-x86_64-unknown-linux-gnu.tar.gz | tar xvfz -
     SAVE ARTIFACT difft
 
 tilt:
