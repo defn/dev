@@ -12,7 +12,7 @@ update_settings(max_parallel_updates=20)
 # make dev
 local_resource(
     name="make sync",
-    serve_cmd="""
+    cmd="""
         set -x; cd;
         make sync;
     """,
