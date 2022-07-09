@@ -9,6 +9,43 @@ allow_k8s_contexts("pod")
 
 update_settings(max_parallel_updates=20)
 
+# make dev
+local_resource(
+    name="make sync",
+    serve_cmd="""
+        set -x; cd;
+        make sync;
+    """,
+    allow_parallel=True,
+    deps=["hooks"],
+    labels=["automation"],
+)
+
+# vault-agent
+local_resource(
+    name="vault-agent",
+    serve_cmd="""
+        set -x; cd;
+        vault agent -config etc/agent.hcl;
+    """,
+    allow_parallel=True,
+    deps=["hooks"],
+    labels=["automation"],
+)
+
+# shell-operator
+local_resource(
+    name="shell-operator",
+    serve_cmd="""
+        set -x; cd;
+        sudo install -d -m 0700 -o ubuntu -g ubuntu /var/run/shell-operator /tmp/shell-operator;
+        exec /shell-operator start --listen-port=9116 --kube-context pod;
+    """,
+    allow_parallel=True,
+    deps=["hooks"],
+    labels=["automation"],
+)
+
 # registry
 local_resource(
     name="registry pod",
@@ -34,19 +71,6 @@ local_resource(
     allow_parallel=True,
     deps=["/home/ubuntu/.registry.txt"],
     labels=["tunnels"],
-)
-
-# shell-operator
-local_resource(
-    name="shell-operator",
-    serve_cmd="""
-        set -x; cd;
-        sudo install -d -m 0700 -o ubuntu -g ubuntu /var/run/shell-operator /tmp/shell-operator;
-        exec /shell-operator start --listen-port=9116 --kube-context pod;
-    """,
-    allow_parallel=True,
-    deps=["hooks"],
-    labels=["automation"],
 )
 
 # argocd
@@ -192,18 +216,6 @@ cmd_button(
         """,
     ],
     icon_name="build",
-)
-
-# vault-agent
-local_resource(
-    name="vault-agent",
-    serve_cmd="""
-        set -x; cd;
-        vault agent -config etc/agent.hcl;
-    """,
-    allow_parallel=True,
-    deps=["hooks"],
-    labels=["automation"],
 )
 
 # vault

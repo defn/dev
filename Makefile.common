@@ -41,12 +41,12 @@ init-dev:
 	kubectl --context argocd rollout status deployment argocd-server --watch
 	kubectl --context argocd apply -f k/argocd-application.yaml
 	kubectl --context argocd apply -f k/argo-events-application.yaml
+	kubectl --context argocd apply -f k/argo-workflows-application.yaml
 	kubectl --context argocd apply -f k/traefik-application.yaml
 	kubectl --context argocd apply -f k/vault-application.yaml
 	kubectl --context argocd apply -f k/loft-application.yaml
 	kubectl --context argocd apply -f k/vc0-application.yaml
 	kubectl --context argocd apply -f k/vc0-kuma-global-application.yaml
-	-$(MAKE) sync
 
 sync:
 	argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')"
@@ -54,6 +54,8 @@ sync:
 	argocd --kube-context argocd app wait argocd
 	argocd --kube-context argocd app sync argo-events --local k/argo-events --assumeYes --prune
 	argocd --kube-context argocd app wait argo-events
+	argocd --kube-context argocd app sync argo-workflows --local k/argo-workflows --assumeYes --prune
+	argocd --kube-context argocd app wait argo-workflows
 	argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune
 	argocd --kube-context argocd app wait traefik
 	argocd --kube-context argocd app sync loft --local k/loft --assumeYes --prune
