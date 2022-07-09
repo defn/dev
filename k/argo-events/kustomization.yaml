@@ -1,0 +1,9 @@
+namespace: argo-events
+
+helmCharts:
+- releaseName: argo-events
+  name: argo-events
+  version: 2.0.3
+  repo: https://argoproj.github.io/argo-helm
+  includeCRDs: true
+  valuesInline:

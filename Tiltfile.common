@@ -9,133 +9,7 @@ allow_k8s_contexts("pod")
 
 update_settings(max_parallel_updates=20)
 
-cmd_button(
-    name="ui argocd",
-    text="argocd",
-    icon_name="stream",
-    resource="argocd",
-    argv=[
-        "bash",
-        "-c",
-        """
-            set -x; cd;
-            kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d' | ssh super pbcopy;
-            xdg-open https://{domain}:9603;
-        """.format(
-            domain=dummy_host
-        ),
-    ],
-    location="nav",
-)
-
-cmd_button(
-    name="ui traefik",
-    text="traefik",
-    icon_name="traffic",
-    resource="traefik",
-    argv=[
-        "bash",
-        "-c",
-        """
-            set -x; cd;
-            xdg-open https://{domain}:9605;
-        """.format(
-            domain=dummy_host
-        ),
-    ],
-    location="nav",
-)
-
-cmd_button(
-    name="ui vault",
-    text="vault",
-    icon_name="key",
-    resource="vault",
-    argv=[
-        "bash",
-        "-c",
-        """
-            set -x; cd;
-            pass Initial_Root_Token | ssh super pbcopy;
-            xdg-open https://{domain}:8200/ui;
-        """.format(
-            domain=dummy_host
-        ),
-    ],
-    location="nav",
-)
-
-cmd_button(
-    name="ui vc kuma",
-    text="kuma",
-    icon_name="rss_feed",
-    resource="kuma",
-    argv=[
-        "bash",
-        "-c",
-        """
-            set -x; cd;
-            xdg-open https://{domain}:9606/gui;
-        """.format(
-            domain=dummy_host
-        ),
-    ],
-    location="nav",
-)
-
-cmd_button(
-    name="ui vc2",
-    text="vc2",
-    icon_name="signal_cellular_alt_2_bar",
-    resource="vc2",
-    argv=[
-        "bash",
-        "-c",
-        """
-            set -x; cd;
-            xdg-open https://{domain}:9607;
-        """.format(
-            domain=dummy_host
-        ),
-    ],
-    location="nav",
-)
-
-cmd_button(
-    name="ui vc3",
-    text="vc3",
-    icon_name="signal_cellular_alt",
-    resource="vc3",
-    argv=[
-        "bash",
-        "-c",
-        """
-            set -x; cd;
-            xdg-open https://{domain}:9608;
-        """.format(
-            domain=dummy_host
-        ),
-    ],
-    location="nav",
-)
-
-cmd_button(
-    name="ui loft",
-    text="loft",
-    resource="loft",
-    argv=[
-        "bash",
-        "-c",
-        """
-            set -x; cd;
-            xdg-open https://{domain}:9602;
-        """.format(
-            domain=dummy_host
-        ),
-    ],
-    location="nav",
-)
-
+# registry
 local_resource(
     name="registry pod",
     serve_cmd="exec socat -d -d TCP-LISTEN:5000,fork,reuseaddr TCP:{ip}:5000".format(
@@ -162,6 +36,7 @@ local_resource(
     labels=["tunnels"],
 )
 
+# shell-operator
 local_resource(
     name="shell-operator",
     serve_cmd="""
@@ -174,17 +49,7 @@ local_resource(
     labels=["automation"],
 )
 
-local_resource(
-    name="vault-agent",
-    serve_cmd="""
-        set -x; cd;
-        vault agent -config etc/agent.hcl;
-    """,
-    allow_parallel=True,
-    deps=["hooks"],
-    labels=["automation"],
-)
-
+# argocd
 local_resource(
     "argocd",
     cmd="""
@@ -194,6 +59,25 @@ local_resource(
     deps=["k/argocd"],
     allow_parallel=True,
     labels=["deploy"],
+)
+
+cmd_button(
+    name="ui argocd",
+    text="argocd",
+    icon_name="stream",
+    resource="argocd",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d' | ssh super pbcopy;
+            xdg-open https://{domain}:9603;
+        """.format(
+            domain=dummy_host
+        ),
+    ],
+    location="nav",
 )
 
 cmd_button(
@@ -211,6 +95,7 @@ cmd_button(
     icon_name="build",
 )
 
+# traefik
 local_resource(
     "traefik",
     cmd="""
@@ -220,6 +105,24 @@ local_resource(
     deps=["k/traefik"],
     allow_parallel=True,
     labels=["deploy"],
+)
+
+cmd_button(
+    name="ui traefik",
+    text="traefik",
+    icon_name="traffic",
+    resource="traefik",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            xdg-open https://{domain}:9605;
+        """.format(
+            domain=dummy_host
+        ),
+    ],
+    location="nav",
 )
 
 cmd_button(
@@ -237,32 +140,19 @@ cmd_button(
     icon_name="build",
 )
 
+# vault-agent
 local_resource(
-    "loft",
-    cmd="""
+    name="vault-agent",
+    serve_cmd="""
         set -x; cd;
-        if argocd --kube-context argocd app diff loft --local k/loft; then echo No difference; fi;
+        vault agent -config etc/agent.hcl;
     """,
-    deps=["k/loft"],
     allow_parallel=True,
-    labels=["deploy"],
+    deps=["hooks"],
+    labels=["automation"],
 )
 
-cmd_button(
-    name="sync loft",
-    resource="loft",
-    argv=[
-        "bash",
-        "-c",
-        """
-            set -x; cd;
-            argocd --kube-context argocd app sync loft --local k/loft --assumeYes --prune;
-            touch k/loft/main.yaml;
-        """,
-    ],
-    icon_name="build",
-)
-
+# vault
 local_resource(
     "vault",
     cmd="""
@@ -272,6 +162,25 @@ local_resource(
     deps=["k/vault"],
     allow_parallel=True,
     labels=["deploy"],
+)
+
+cmd_button(
+    name="ui vault",
+    text="vault",
+    icon_name="key",
+    resource="vault",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            pass Initial_Root_Token | ssh super pbcopy;
+            xdg-open https://{domain}:8200/ui;
+        """.format(
+            domain=dummy_host
+        ),
+    ],
+    location="nav",
 )
 
 cmd_button(
@@ -367,6 +276,51 @@ cmd_button(
     icon_name="build",
 )
 
+# loft
+local_resource(
+    "loft",
+    cmd="""
+        set -x; cd;
+        if argocd --kube-context argocd app diff loft --local k/loft; then echo No difference; fi;
+    """,
+    deps=["k/loft"],
+    allow_parallel=True,
+    labels=["deploy"],
+)
+
+cmd_button(
+    name="ui loft",
+    text="loft",
+    resource="loft",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            xdg-open https://{domain}:9602;
+        """.format(
+            domain=dummy_host
+        ),
+    ],
+    location="nav",
+)
+
+cmd_button(
+    name="sync loft",
+    resource="loft",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            argocd --kube-context argocd app sync loft --local k/loft --assumeYes --prune;
+            touch k/loft/main.yaml;
+        """,
+    ],
+    icon_name="build",
+)
+
+# vcluster
 for kname, vname in [
     ("vc0", "vc0"),
     ("vc1", "vc1"),
@@ -456,7 +410,25 @@ for kname, vname in [
         icon_name="build",
     )
 
-# Setup kuma
+# kuma
+cmd_button(
+    name="ui vc kuma",
+    text="kuma",
+    icon_name="rss_feed",
+    resource="vc0-kuma-global",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            xdg-open https://{domain}:9606/gui;
+        """.format(
+            domain=dummy_host
+        ),
+    ],
+    location="nav",
+)
+
 for kname, vname in [
     ("vc0-kuma-global", "vc0"),
     ("vc1-kuma-remote", "vc1"),

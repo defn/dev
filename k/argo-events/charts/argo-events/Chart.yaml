@@ -1,0 +1,19 @@
+annotations:
+  artifacthub.io/changes: |
+    - "[Fixed]: Fixed selectorLabel of ServiceMonitor that doesn't match metrics Service"
+apiVersion: v2
+appVersion: v1.7.1
+description: A Helm chart for Argo Events, the event-driven workflow automation framework
+home: https://github.com/argoproj/argo-helm
+icon: https://argoproj.github.io/argo-events/assets/logo.png
+keywords:
+- argoproj
+- argo-events
+maintainers:
+- name: pdrastil
+- name: VaibhavPage
+- name: whynowy
+name: argo-events
+sources:
+- https://github.com/argoproj/argo-events
+version: 2.0.3

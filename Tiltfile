@@ -4,42 +4,7 @@ load("Tiltfile.common", "dummy_ip", "dummy_host")
 
 load("ext://uibutton", "cmd_button", "location")
 
-cmd_button(
-    name="ui vc2",
-    text="vc2",
-    icon_name="signal_cellular_alt_2_bar",
-    resource="vc2",
-    argv=[
-        "bash",
-        "-c",
-        """
-            set -x; cd;
-            xdg-open https://{domain}:9607;
-        """.format(
-            domain=dummy_host
-        ),
-    ],
-    location="nav",
-)
-
-cmd_button(
-    name="ui vc3",
-    text="vc3",
-    icon_name="signal_cellular_alt",
-    resource="vc3",
-    argv=[
-        "bash",
-        "-c",
-        """
-            set -x; cd;
-            xdg-open https://{domain}:9608;
-        """.format(
-            domain=dummy_host
-        ),
-    ],
-    location="nav",
-)
-
+# defn/dev
 local_resource(
     name="make updates",
     cmd="""
@@ -100,6 +65,43 @@ cmd_button(
     icon_name="build",
 )
 
+# demo
+cmd_button(
+    name="ui vc2",
+    text="vc2",
+    icon_name="signal_cellular_alt_2_bar",
+    resource="vc2",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            xdg-open https://{domain}:9607;
+        """.format(
+            domain=dummy_host
+        ),
+    ],
+    location="nav",
+)
+
+cmd_button(
+    name="ui vc3",
+    text="vc3",
+    icon_name="signal_cellular_alt",
+    resource="vc3",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            xdg-open https://{domain}:9608;
+        """.format(
+            domain=dummy_host
+        ),
+    ],
+    location="nav",
+)
+
 for kname, vname in [
     ("vc1-kuma-demo", "vc1"),
     ("vc2-kuma-demo", "vc2"),
@@ -153,7 +155,7 @@ for kname, vname in [
         icon_name="build",
     )
 
-# Setup applications for demo
+# kuma apps
 for kname, vname in [
     ("vc1-kong", "vc1"),
     ("vc1-vault", "vc1"),
