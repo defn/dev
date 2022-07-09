@@ -113,7 +113,7 @@ tower-update:
 
     COPY --dir --chown=ubuntu:ubuntu . .
     RUN if test -e work; then false; fi
-    RUN bash -c 'if test -n "$(git clean -nfdx)"; then false; fi'
+    RUN git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'
     COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
     RUN git clean -ffd
 
@@ -277,9 +277,8 @@ awscli:
     RUN curl -sSL "https://awscli.amazonaws.com/awscli-exe-linux-${arch3}.zip" -o "awscliv2.zip"
     RUN unzip awscliv2.zip
     RUN ./aws/install -i /usr/local/aws-cli -b /usr/local/aws-cli/bin
-    RUN curl -sSL -o aws_signing_helper https://s3.amazonaws.com/roles-anywhere-credential-helper/CredentialHelper/latest/linux_amd64/aws_signing_helper && chmod 755 aws_signing_helper
+    RUN curl -sSL -o /usr/local/aws-cli/bin/aws_signing_helper https://s3.amazonaws.com/roles-anywhere-credential-helper/CredentialHelper/latest/linux_amd64/aws_signing_helper && chmod 755 /usr/local/aws-cli/bin/aws_signing_helper
     SAVE ARTIFACT /usr/local/aws-cli
-    SAVE ARTIFACT aws_signing_helper
     SAVE IMAGE --cache-hint
 
 # arch2
