@@ -1,0 +1,11 @@
+namespace: datadog
+
+helmCharts:
+- releaseName: datadog
+  name: datadog
+  version: 2.36.1
+  repo: https://helm.datadoghq.com
+  includeCRDs: true
+  valuesInline:
+    datadog:
+      apiKeyExistingSecret: datadog-api-secret
