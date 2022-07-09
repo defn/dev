@@ -37,6 +37,7 @@ node_modules
 .config/pypoetry
 .config/gcloud
 .config/argocd
+.config/gomuks
 .loft
 .lesshst
 .fly
