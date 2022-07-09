@@ -690,7 +690,6 @@ pipx:
     ARG arch
     ARG version_python
     FROM +python --arch=${arch} --version=${version_python}
-    RUN ~/.asdf/shims/pipx install locust
     RUN ~/.asdf/shims/pipx install pycco
     RUN ~/.asdf/shims/pipx install yq
     RUN ~/.asdf/shims/pipx install watchdog
