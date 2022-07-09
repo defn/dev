@@ -690,6 +690,7 @@ pipx:
     ARG arch
     ARG version_python
     FROM +python --arch=${arch} --version=${version_python}
+    RUN ~/.asdf/shims/pipx install locust
     RUN ~/.asdf/shims/pipx install pycco
     RUN ~/.asdf/shims/pipx install yq
     RUN ~/.asdf/shims/pipx install watchdog
@@ -697,6 +698,7 @@ pipx:
     RUN ~/.asdf/shims/pipx install twine
     RUN ~/.asdf/shims/pipx install pre-commit
     RUN ~/.asdf/shims/pipx install black
+    RUN ~/.asdf/shims/pipx install datadog
     RUN git init
     COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
     RUN bash -c 'source ~/.asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit install'
