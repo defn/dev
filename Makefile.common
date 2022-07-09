@@ -41,11 +41,6 @@ init-dev:
 	kubectl --context argocd rollout status deployment argocd-server --watch
 	$(MAKE) argocd-login
 	kubectl --context argocd apply -f k/dev-set/main.yaml
-	kubectl --context argocd apply -f k/traefik-application.yaml
-	kubectl --context argocd apply -f k/vault-application.yaml
-	kubectl --context argocd apply -f k/loft-application.yaml
-	kubectl --context argocd apply -f k/vc0-application.yaml
-	kubectl --context argocd apply -f k/vc0-kuma-global-application.yaml
 
 argocd-login:
 	argocd login --insecure argocd-server.argocd.svc --username admin --password adminadmin \
@@ -76,6 +71,7 @@ sync:
 	vc0 get ns
 	~/bin/e env KUBECONFIG=$$KUBECONFIG_ALL argocd cluster add loft-vcluster_vc0_vc0_loft-cluster --name vc0 --yes
 	while true; do if [[ "$$(argocd cluster get vc0 --output json | jq -r '.name')" == "vc0" ]]; then break; fi; sleep 1; done
+	kubectl --context argocd apply -f k/vc0-kuma-global-application.yaml
 	argocd --kube-context argocd app sync vc0-kuma-global --local k/vc0-kuma-global --assumeYes --prune
 	argocd --kube-context argocd app wait vc0-kuma-global
 
