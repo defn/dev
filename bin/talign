@@ -1,77 +1,42 @@
-#!/usr/bin/env bash
+#!/usr/bin/env perl
 
-function main {
-	local cnt_proc="1"
-	local cnt_args="1"
+use strict;
+use Data::Dumper;
 
-	local args_command=()
-	local args_dash=()
-	local fl_args=
-
-	# process args after --
-	while [[ "$#" -gt 0 ]]; do
-		if [[ "$1" == "--" && -z "$fl_args" ]]; then
-			shift
-			fl_args=1
-			continue
-		fi
-
-		if [[ -n "$fl_args" ]]; then
-			args_dash+=("$1")
-		else
-			args_command+=("$1")
-		fi
-		shift
-	done
-
-	set -- "${args_command[@]}"
-
-	# check if number of processess is specified
-	if [[ "${1:-}" =~ ^[1-9][0-9]*$ ]]; then
-		cnt_proc="$1"
-		shift
-		# check if number of args is specified
-		if [[ "${1:-}" =~ ^[1-9][0-9]*$ ]]; then
-			cnt_args="$1"
-			shift
-		fi
-	fi
-
-	if [[ -z "${1:-}" ]]; then
-		echo "ERROR: missing command" 1>&2
-		return 1
-	fi
-
-	local cmd
-	if [[ -n "$fl_args" ]]; then
-		cmd="$*"
-		set --
-	else
-		cmd="$1"
-		shift
-	fi
-
-	if [[ "${#args_dash[@]}" -gt 0 ]]; then
-		set -- "$@" "${args_dash[@]}" # using :- in case of empty array results in empty string quoted
-	fi
-
-	local xopts=
-	case "$(uname -s)" in
-	Linux)
-		xopts="-r"
-		;;
-	esac
-
-	# check if any arguments
-	if [[ "$#" -gt 0 ]]; then
-		while [[ "$#" -gt 0 ]]; do
-			echo "${1// /\\ }"
-			shift
-		done
-	else
-		# otherwise read arguments from stdin
-		cat
-	fi | xargs ${xopts:+$xopts} -n "$cnt_args" -P "$cnt_proc" bash -c "$cmd" ""
+sub max {
+    my ($a, $b) = @_;
+    return $a >= $b ? $a : $b;
 }
 
-main "$@"
+my @lines;
+my %lengths;
+
+my $max_cols = 99;
+if (@ARGV) {
+    $max_cols = int($ARGV[0]);
+}
+
+while (<STDIN>) {
+    my $line = $_;
+    chomp $line;
+    push @lines, $line;
+    my @a = split m{\s+}, $line;
+    my $idx = 0;
+    while (@a) {
+        $lengths{$idx} = max($lengths{$idx}, length($a[0]));
+        shift @a;
+        $idx += 1;
+        last if $idx >= $max_cols;
+    }
+}
+
+for my $line (@lines) {
+    my @a = split m{\s+}, $line;
+    my $idx = 0;
+    while (@a) {
+        printf("%-" . $lengths{$idx} . "s ", $a[0]);
+        shift @a;
+        $idx += 1;
+    }
+    print "\n";
+}
