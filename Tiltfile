@@ -15,7 +15,6 @@ local_resource(
     allow_parallel=True,
     labels=["automation"],
     deps=[".commit"],
-    trigger_mode=TRIGGER_MODE_MANUAL,
 )
 
 cmd_button(
