@@ -2,6 +2,7 @@ apiVersion: legumes.defn.dev/v1
 kind: Bean
 metadata:
   name: pinto
+  namespace: argocd
 spec:
   url: "one"
   sha256: "two"
