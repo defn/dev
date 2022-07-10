@@ -46,7 +46,7 @@ root:
         apt-transport-https software-properties-common \
         openssh-client openssh-server tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip xz-utils rsync \
         sudo git vim less fzf jo gron jq \
-        build-essential make tini python3-pip entr \
+        build-essential make tini python3-pip python3-venv entr \
         gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 \
         xdg-utils figlet lolcat socat netcat-openbsd groff \
         screen htop \
