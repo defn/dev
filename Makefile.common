@@ -64,8 +64,8 @@ sync:
 	-$(MAKE) vault-unseal
 	argocd --kube-context argocd app wait vault
 	loft login https://loft.loft.svc.cluster.local --insecure --access-key admin
-	#$(MAKE) vc0
-	#$(MAKE) vc1
+	$(MAKE) vc0
+	$(MAKE) vc1
 
 vc0 vc1:
 	set -x; for v in "$@"; do \
