@@ -17,3 +17,20 @@ reboot-inner:
 	$(MAKE) registry
 	$(MAKE) cluster
 	$(MAKE) attach
+
+images:
+	git push
+	if [[ -d work/dev ]]; then cd work/dev && git pull && $(MAKE) $@-inner; else $(MAKE) $@-inner; fi
+
+images-inner:
+	earthly --remote-cache=$(cache)defn/cache:images $(push) +images --repo=$(repo)
+
+updates:
+	git push
+	if [[ -d work/dev ]]; then cd work/dev && git pull && $(MAKE) $@-inner; else $(MAKE) $@-inner; fi
+
+updates-inner:
+	earthly --remote-cache=$(cache)defn/cache:updates $(push) +updates --repo=$(repo) --repo_from=$(repo_from)
+
+shell:
+	docker run --rm -ti $(repo)defn/dev bash -l
