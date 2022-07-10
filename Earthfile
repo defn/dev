@@ -132,6 +132,7 @@ tower:
     ARG SKAFFOLD
     ARG CDKTF
     ARG NODEJS
+    ARG GOLANG
     ARG NPM
     ARG KUMA
     ARG POWERLINE
@@ -190,6 +191,7 @@ tower:
     COPY --chown=ubuntu:ubuntu (+step/* --arch=${arch} --version=${STEP}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+kuma/* --arch=${arch} --version=${KUMA}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+switch/* --arch=${arch} --version=${SWITCH}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+cue-gen/* --arch=${arch} --version_go=${GOLANG}) /usr/local/bin/
 
     COPY --chown=ubuntu:ubuntu --dir (+shell/* --arch=${arch} --version_shellcheck=${SHELLCHECK} --version_shfmt=${SHFMT}) ./
     COPY --chown=ubuntu:ubuntu --dir (+k9s/* --arch=${arch} --version=${K9S}) ./
@@ -208,6 +210,8 @@ tower:
 
     COPY --chown=ubuntu:ubuntu --dir (+python/* --arch=${arch} --version=${PYTHON}) ./
     COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+pipx/* --arch=${arch} --version_python=${PYTHON}) ./
+
+    COPY --chown=ubuntu:ubuntu --dir (+golang/* --arch=${arch} --version=${GOLANG} ./
 
     # relies on qemu
     COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=amd64 --version=${CREDENTIAL_PASS}) /usr/local/bin/
@@ -610,6 +614,24 @@ terraform:
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add terraform'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
+
+golang:
+    ARG arch
+    ARG version
+    FROM +asdf --arch=${arch}
+    RUN echo golang ${version} >> .tool-versions
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add golang'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
+    SAVE ARTIFACT .asdf
+    SAVE IMAGE --cache-hint
+
+cue-gen:
+    ARG arch
+    ARG version_go
+    FROM +golang --arch=${arch} --version=${version_go}
+    RUN bash -c 'source ~/.asdf/asdf.sh && go install istio.io/tools/cmd/cue-gen@latest'
+    SAVE ARTIFACT ./.asdf/installs/golang/*/packages/bin/cue-gen
+    SAVE IMAGE --cache-hint
 
 nodejs:
     ARG arch
