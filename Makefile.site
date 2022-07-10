@@ -34,3 +34,6 @@ updates-inner:
 
 shell:
 	docker run --rm -ti $(repo)defn/dev bash -l
+
+buf:
+	buf generate
