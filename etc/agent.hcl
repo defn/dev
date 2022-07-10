@@ -27,6 +27,6 @@ auto_auth {
 }
 
 # vault auth enable kubernetes
-# vault write auth/kubernetes/config kubernetes_host=https://kubernetes.default.svc.cluster.local  
+# vault write auth/kubernetes/config kubernetes_host=https://kubernetes.default.svc.cluster.local
 # vault write auth/kubernetes/role/demo bound_service_account_names=default bound_service_account_namespaces=default policies=default ttl=1h
-# vault agent -config agent.hcl 
+# vault agent -config agent.hcl

@@ -1734,7 +1734,7 @@ kind: ServiceAccount
 metadata:
   name: kuma-control-plane
   namespace: default
-  labels: 
+  labels:
     app: kuma-control-plane
     helm.sh/chart: kuma-1.7.0
     app.kubernetes.io/name: kuma
@@ -1748,7 +1748,7 @@ kind: ServiceAccount
 metadata:
   name: kuma-ingress
   namespace: default
-  labels: 
+  labels:
     app: kuma-ingress
     helm.sh/chart: kuma-1.7.0
     app.kubernetes.io/name: kuma
@@ -1763,7 +1763,7 @@ type: kubernetes.io/tls
 metadata:
   name: kuma-tls-cert
   namespace: default
-  labels: 
+  labels:
     app: kuma-control-plane
     helm.sh/chart: kuma-1.7.0
     app.kubernetes.io/name: kuma
@@ -1781,7 +1781,7 @@ kind: ConfigMap
 metadata:
   name: kuma-control-plane-config
   namespace: default
-  labels: 
+  labels:
     app: kuma-control-plane
     helm.sh/chart: kuma-1.7.0
     app.kubernetes.io/name: kuma
@@ -1799,7 +1799,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: kuma-control-plane
-  labels: 
+  labels:
     app: kuma-control-plane
     helm.sh/chart: kuma-1.7.0
     app.kubernetes.io/name: kuma
@@ -2020,7 +2020,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: kuma-control-plane
-  labels: 
+  labels:
     app: kuma-control-plane
     helm.sh/chart: kuma-1.7.0
     app.kubernetes.io/name: kuma
@@ -2042,7 +2042,7 @@ kind: Role
 metadata:
   name: kuma-control-plane
   namespace: default
-  labels: 
+  labels:
     app: kuma-control-plane
     helm.sh/chart: kuma-1.7.0
     app.kubernetes.io/name: kuma
@@ -2081,7 +2081,7 @@ kind: RoleBinding
 metadata:
   name: kuma-control-plane
   namespace: default
-  labels: 
+  labels:
     app: kuma-control-plane
     helm.sh/chart: kuma-1.7.0
     app.kubernetes.io/name: kuma
@@ -2103,7 +2103,7 @@ kind: Service
 metadata:
   name: kuma-control-plane
   namespace: default
-  labels: 
+  labels:
     app: kuma-control-plane
     helm.sh/chart: kuma-1.7.0
     app.kubernetes.io/name: kuma
@@ -2140,7 +2140,7 @@ kind: Service
 metadata:
   name: kuma-ingress
   namespace: default
-  labels: 
+  labels:
     app: kuma-ingress
     helm.sh/chart: kuma-1.7.0
     app.kubernetes.io/name: kuma
@@ -2165,7 +2165,7 @@ kind: Deployment
 metadata:
   name: kuma-control-plane
   namespace: default
-  labels: 
+  labels:
     app: kuma-control-plane
     helm.sh/chart: kuma-1.7.0
     app.kubernetes.io/name: kuma
@@ -2188,7 +2188,7 @@ spec:
       annotations:
         checksum/config: a003bb631788dbbee1ac2048ce9cc61096fd7cbe6a4bb8b732c20d11be04440f
         checksum/tls-secrets: 69e6744eb29b6c9486d4f87d80420f98a6894075061f5cf9dceac341c85d2bdf
-      labels: 
+      labels:
         app: kuma-control-plane
         helm.sh/chart: kuma-1.7.0
         app.kubernetes.io/name: kuma
@@ -2196,7 +2196,7 @@ spec:
         app.kubernetes.io/version: "1.7.0"
         app.kubernetes.io/managed-by: Helm
     spec:
-      affinity: 
+      affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
           - podAffinityTerm:
@@ -2219,7 +2219,7 @@ spec:
       serviceAccountName: kuma-control-plane
       automountServiceAccountToken: true
       nodeSelector:
-        
+
         kubernetes.io/os: linux
       hostNetwork: false
       terminationGracePeriodSeconds: 30
@@ -2296,7 +2296,7 @@ spec:
             requests:
               cpu: 100m
               memory: 256Mi
-          
+
           volumeMounts:
             - name: general-tls-cert
               mountPath: /var/run/secrets/kuma.io/tls-cert/tls.crt
@@ -2327,7 +2327,7 @@ kind: Deployment
 metadata:
   name: kuma-ingress
   namespace: default
-  labels: 
+  labels:
     app: kuma-ingress
     helm.sh/chart: kuma-1.7.0
     app.kubernetes.io/name: kuma
@@ -2349,7 +2349,7 @@ spec:
     metadata:
       annotations:
         kuma.io/ingress: enabled
-      labels: 
+      labels:
         app: kuma-ingress
         helm.sh/chart: kuma-1.7.0
         app.kubernetes.io/name: kuma
@@ -2359,7 +2359,7 @@ spec:
         app.kubernetes.io/name: kuma
         app.kubernetes.io/instance: kuma
     spec:
-      affinity: 
+      affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
           - podAffinityTerm:
@@ -2381,7 +2381,7 @@ spec:
             weight: 100
       serviceAccountName: kuma-ingress
       nodeSelector:
-      
+
         kubernetes.io/os: linux
       terminationGracePeriodSeconds: 30
       containers:
@@ -2432,14 +2432,14 @@ spec:
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 3
-          resources: 
+          resources:
             limits:
               cpu: 1000m
               memory: 512Mi
             requests:
               cpu: 50m
               memory: 64Mi
-          
+
           volumeMounts:
             - name: kuma-tls-cert
               mountPath: /var/run/secrets/kuma.io/tls-cert
@@ -2455,7 +2455,7 @@ kind: MutatingWebhookConfiguration
 metadata:
   name: kuma-admission-mutating-webhook-configuration
   namespace: default
-  labels: 
+  labels:
     app: kuma-control-plane
     helm.sh/chart: kuma-1.7.0
     app.kubernetes.io/name: kuma
@@ -2514,8 +2514,8 @@ webhooks:
           - trafficroutes
           - traffictraces
           - virtualoutbounds
-    
-      
+
+
     sideEffects: None
   - name: namespace-kuma-injector.kuma.io
     admissionReviewVersions: ["v1"]
@@ -2563,7 +2563,7 @@ webhooks:
     sideEffects: None
   - name: kuma-injector.kuma.io
     admissionReviewVersions: ["v1"]
-    failurePolicy: Ignore 
+    failurePolicy: Ignore
     clientConfig:
       caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURFRENDQWZpZ0F3SUJBZ0lSQUtMMHh2WE56bk1PdDk4RDAwcURsMDh3RFFZSktvWklodmNOQVFFTEJRQXcKRWpFUU1BNEdBMVVFQXhNSGEzVnRZUzFqWVRBZUZ3MHlNakEyTWpreE9URTRNVE5hRncwek1qQTJNall4T1RFNApNVE5hTUJJeEVEQU9CZ05WQkFNVEIydDFiV0V0WTJFd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3CmdnRUtBb0lCQVFETzJ2am9LUEYvZGdtb3lyUUg5ZEpLVmdGTDhJKytuL3R4ZTZQNXdJSFlJTmRzdjNUbGJYYngKa3RDUDd5SkpjZDJwT20yT1RWdTFYN1ZoSk1lZnc4b0dBNkFST1FGUUpCVGtzUmJUZ0lmWVV2anFremxlY05HNwptYnN4Z3k1Q0FybFIwOFVTWkxxRXFjSFBlc1FjMVg0WmZvYkJOQS80ZmsyMm9UK0VJbi8zNzRqaDUvQ0I1d0QvCklwUUFQY1JGeXRyYzBxQ2MwWVFCUzYwNnVzbUdhK1ZWcnRNdS90M3FqRCtqNVBiRjd0VDZodW9mYWw0ZVVNcE4KaXlBR1JBYzVLL0xRaVVTcncwYlRkSUIrNExlNDBZMCtFdzFCOEdUZDJkRVlUdUJzb2pPWTVxRGRFNXJRWmxlZQpGWVZiQ1Nscmpwd3pGb2RMY2tOWmJETC95N0c1QStVQkFnTUJBQUdqWVRCZk1BNEdBMVVkRHdFQi93UUVBd0lDCnBEQWRCZ05WSFNVRUZqQVVCZ2dyQmdFRkJRY0RBUVlJS3dZQkJRVUhBd0l3RHdZRFZSMFRBUUgvQkFVd0F3RUIKL3pBZEJnTlZIUTRFRmdRVU9qWWgwUC9ybFptSG92dytPM3hjZEtEWDdWVXdEUVlKS29aSWh2Y05BUUVMQlFBRApnZ0VCQUpFMWJUZkpUZmlSYytKS1c1VWwzT0Znb0tTWjAvRTNTcitpeVBBOUhxc2FPa3E3VEI0elQ4Vm1lRzBKCklCajE3Q3RPa1hXL0FTTTIySnNjbTFBZnNiY1laNTF0K0N0OGovZW5lM1VhdS92YXZ1K3M0aUVuZXYrZFBYaDIKc3RMUlYxWk43NDJ3VGVQVURJS001TmQ2OUJIZnAwWHllVlVtRnNFK1IvNmRvNERMcHE5b3BOVU03TVJOd2hJdgpLZ2NVS012cmg4WUpUK0Q5bnhFSi8zd2xud1VZamRWajN3WngxV2V0MklEc3RVV3U0QUxSZ2g3Tkc4SkJLS1haCmdtOTcwNVFhbFFqM3ZRSVRTcUNvZTZGZkJJQ3dnenlqYTZRcUVEV0VzeG45OUNjREpRa2hybjhYVGc2a1RxWmQKcEc3S2FqTFZobTFZNlJxK0hrdDFrbThack9NPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
       service:
@@ -2587,7 +2587,7 @@ kind: ValidatingWebhookConfiguration
 metadata:
   name: kuma-validating-webhook-configuration
   namespace: default
-  labels: 
+  labels:
     app: kuma-control-plane
     helm.sh/chart: kuma-1.7.0
     app.kubernetes.io/name: kuma
@@ -2633,8 +2633,8 @@ webhooks:
           - virtualoutbounds
           - zones
           - containerpatches
-    
-      
+
+
     sideEffects: None
   - name: service.validator.kuma-admission.kuma.io
     admissionReviewVersions: ["v1"]
@@ -2963,7 +2963,7 @@ metadata:
   name: kuma-delete-webhook
   namespace: default
   labels:
-  
+
     helm.sh/chart: kuma-1.7.0
     app.kubernetes.io/name: kuma
     app.kubernetes.io/instance: kuma
@@ -2971,7 +2971,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
   annotations:
     "helm.sh/hook": "pre-delete"
-    
+
     "helm.sh/hook-weight": "5"
     "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded,hook-failed"
 spec:
@@ -2979,7 +2979,7 @@ spec:
     metadata:
       name: kuma-delete-webhook
       labels:
-    
+
         helm.sh/chart: kuma-1.7.0
         app.kubernetes.io/name: kuma
         app.kubernetes.io/instance: kuma
@@ -2988,7 +2988,7 @@ spec:
     spec:
       serviceAccountName: kuma-pre-delete-job
       nodeSelector:
-      
+
         kubernetes.io/os: linux
       restartPolicy: OnFailure
       containers:
@@ -3014,7 +3014,7 @@ metadata:
   name: kuma-patch-ns
   namespace: default
   labels:
-  
+
     helm.sh/chart: kuma-1.7.0
     app.kubernetes.io/name: kuma
     app.kubernetes.io/instance: kuma
@@ -3022,7 +3022,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
   annotations:
     "helm.sh/hook": "pre-install"
-    
+
     "helm.sh/hook-weight": "5"
     "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded,hook-failed"
 spec:
@@ -3030,7 +3030,7 @@ spec:
     metadata:
       name: kuma-patch-ns-script
       labels:
-    
+
         helm.sh/chart: kuma-1.7.0
         app.kubernetes.io/name: kuma
         app.kubernetes.io/instance: kuma
@@ -3039,7 +3039,7 @@ spec:
     spec:
       serviceAccountName: kuma-patch-ns-job
       nodeSelector:
-      
+
         kubernetes.io/os: linux
       restartPolicy: OnFailure
       containers:
@@ -3069,7 +3069,7 @@ metadata:
   name: kuma-install-missing-crds
   namespace: default
   labels:
-  
+
     helm.sh/chart: kuma-1.7.0
     app.kubernetes.io/name: kuma
     app.kubernetes.io/instance: kuma
@@ -3083,7 +3083,7 @@ spec:
     metadata:
       name: kuma-install-missing-crds-job
       labels:
-    
+
         helm.sh/chart: kuma-1.7.0
         app.kubernetes.io/name: kuma
         app.kubernetes.io/instance: kuma
@@ -3092,7 +3092,7 @@ spec:
     spec:
       serviceAccountName: kuma-install-missing-crds
       nodeSelector:
-      
+
         kubernetes.io/os: linux
       restartPolicy: OnFailure
       containers:
