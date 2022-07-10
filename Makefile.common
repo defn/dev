@@ -119,7 +119,7 @@ images-inner:
 	earthly --remote-cache=$(cache)defn/cache:images $(push) +images --repo=$(repo)
 
 updates:
-	git pull
+	git push
 	if [[ -d work/dev ]]; then cd work/dev && git pull && $(MAKE) $@-inner; else $(MAKE) $@-inner; fi
 
 updates-inner:

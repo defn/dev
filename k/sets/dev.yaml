@@ -25,9 +25,6 @@ spec:
       - name: loft
         namespace: loft
         cluster: in-cluster
-      - name: datadog
-        namespace: datadog
-        cluster: in-cluster
       - name: vc0
         namespace: vc0
         cluster: in-cluster
