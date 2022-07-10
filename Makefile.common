@@ -39,7 +39,7 @@ init-dev:
 	kustomize build --enable-helm k/argocd | kubectl --context argocd apply -f -
 	kubectl --context argocd rollout status deployment argocd-server --watch
 	$(MAKE) argocd-login
-	kubectl --context argocd apply -f k/dev-set/main.yaml
+	kubectl --context argocd apply -f k/sets/dev.yaml
 
 argocd-login:
 	argocd login --insecure argocd-server.argocd.svc --username admin --password adminadmin \
@@ -75,7 +75,7 @@ vc0 vc1:
 		"$$v" get ns; \
 		~/bin/e env KUBECONFIG=$$KUBECONFIG_ALL argocd cluster add "loft-vcluster_$${v}_$${v}_loft-cluster" --name "$$v" --yes; \
 		while true; do if [[ "$$(argocd cluster get "$$v" --output json | jq -r '.name')" == "$$v" ]]; then break; fi; sleep 1; done; \
-		kubectl --context argocd apply -f "k/$$v-set/main.yaml"; \
+		kubectl --context argocd apply -f "k/sets/$$v.yaml"; \
 		case "$$v" in \
 			vc0) \
 				argocd --kube-context argocd app sync vc0-kuma-global --local k/vc0-kuma-global --assumeYes --prune; \
