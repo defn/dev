@@ -731,6 +731,7 @@ pipx:
     RUN ~/.asdf/shims/pipx install pre-commit
     RUN ~/.asdf/shims/pipx install black
     RUN ~/.asdf/shims/pipx install datadog
+    RUN ~/.asdf/shims/pipx install pip-tools
     RUN git init
     COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
     RUN bash -c 'source ~/.asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit install'
