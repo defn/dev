@@ -9,11 +9,12 @@ local_resource(
     name="make updates",
     cmd="""
         set -x; cd;
-        git push;
-        cd work/dev && git pull && exec make updates;
+        rsync -ia etc/post-commit .git/hooks/;
+        make updates;
     """,
     allow_parallel=True,
     labels=["automation"],
+    deps=[".commit"],
     trigger_mode=TRIGGER_MODE_MANUAL,
 )
 
@@ -40,9 +41,8 @@ cmd_button(
         "-c",
         """
             set -x; cd;
-            git push;
-            (cd work/dev && git pull && exec make images);
-            (cd work/dev && git pull && exec make updates);
+            make images
+            make updates
             kubectl --context pod delete pod/dev-0;
         """,
     ],
@@ -57,8 +57,7 @@ cmd_button(
         "-c",
         """
             set -x; cd;
-            git push;
-            (cd work/dev && git pull && exec make updates);
+            make updates;
             kubectl --context pod delete pod/dev-0;
         """,
     ],
