@@ -115,7 +115,7 @@ images:
 	git push
 	if [[ -d work/dev ]]; then cd work/dev; git pull; $(MAKE) $@-inner; fi
 
-images-inner
+images-inner:
 	earthly --remote-cache=$(cache)defn/cache:images $(push) +images --repo=$(repo)
 
 updates:
