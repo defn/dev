@@ -1,0 +1,4 @@
+module: defn.dev
+
+openapi:
+  fieldFilter: "min.*|max.*"

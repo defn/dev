@@ -1,0 +1,7 @@
+apiVersion: legumes.defn.dev/v1
+kind: Bean
+metadata:
+  name: pinto
+spec:
+  url: "one"
+  sha256: "two"
