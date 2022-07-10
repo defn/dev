@@ -211,7 +211,7 @@ tower:
     COPY --chown=ubuntu:ubuntu --dir (+python/* --arch=${arch} --version=${PYTHON}) ./
     COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+pipx/* --arch=${arch} --version_python=${PYTHON}) ./
 
-    COPY --chown=ubuntu:ubuntu --dir (+golang/* --arch=${arch} --version=${GOLANG} ./
+    COPY --chown=ubuntu:ubuntu --dir (+golang/* --arch=${arch} --version=${GOLANG}) ./
 
     # relies on qemu
     COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=amd64 --version=${CREDENTIAL_PASS}) /usr/local/bin/
