@@ -64,7 +64,12 @@ sync:
 	-$(MAKE) vault-unseal
 	argocd --kube-context argocd app wait vault
 	loft login https://loft.loft.svc.cluster.local --insecure --access-key admin
-	for v in vc0 vc1; do \
+	$(MAKE) vc0
+	$(MAKE) vc1
+	kubectl --context pod apply -f k/mesh.yaml
+
+vc0 vc1:
+	set -x; for v in "$@"; do \
 		argocd --kube-context argocd app sync "$$v" --local "k/$$v" --assumeYes --prune; \
 		while true; do if kubectl --context pod wait -n "$$v" -l statefulset.kubernetes.io/pod-name="$$v"-0 --for=condition=ContainersReady pod; then break; fi; sleep 1; done; \
 		argocd --kube-context argocd app wait "$$v"; \
