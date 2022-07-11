@@ -206,7 +206,6 @@ tower:
     COPY --chown=ubuntu:ubuntu --dir (+awsvault/* --arch=${arch} --version=${AWSVAULT}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch} --version=${ARGO}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch} --version=${ARGOCD}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+protoc/* --arch=${arch} --version=${PROTOC}) ./
     COPY --chown=ubuntu:ubuntu --dir (+buf/* --arch=${arch} --version=${BUF}) ./
 
     COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch} --version=${CDKTF} --version_nodejs=${NODEJS}) ./
@@ -236,6 +235,13 @@ tower:
         COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch} --arch3=aarch64) /usr/local/
     ELSE
         COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch} --arch3=x86_64) /usr/local/
+    END
+
+    # arch4
+    IF [ ${arch} = "arm64" ]
+        COPY --chown=ubuntu:ubuntu (+protoc/* --arch=${arch} --arch4=aarch_86 --version=${PROTOC}) /usr/local/bin/
+    ELSE
+        COPY --chown=ubuntu:ubuntu (+protoc/* --arch=${arch} --arch4=x86_86 --version=${PROTOC}) /usr/local/bin/
     END
 
     # shell-operator
@@ -273,6 +279,17 @@ asdf:
     RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${version_asdf}
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
     SAVE ARTIFACT .asdf
+    SAVE IMAGE --cache-hint
+
+# arch4
+protoc:
+    ARG arch
+    ARG arch4
+    ARG version
+    FROM +tools --arch=${arch}
+    RUN curl -sSL https://github.com/protocolbuffers/protobuf/releases/download/v${version}/protoc-${version}-linux-${arch4}.zip  -o "protoc.zip"
+    RUN unzip protoc.zip
+    SAVE ARTIFACT bin/protoc
     SAVE IMAGE --cache-hint
 
 # arch3
@@ -634,16 +651,6 @@ cue-gen:
     FROM +golang --arch=${arch} --version=${version_go}
     RUN bash -c 'source ~/.asdf/asdf.sh && go install istio.io/tools/cmd/cue-gen@latest'
     SAVE ARTIFACT ./.asdf/installs/golang/*/packages/bin/cue-gen
-    SAVE IMAGE --cache-hint
-
-protoc:
-    ARG arch
-    ARG version
-    FROM +asdf --arch=${arch}
-    RUN echo protoc ${version} >> .tool-versions
-    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add protoc'
-    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
-    SAVE ARTIFACT .asdf
     SAVE IMAGE --cache-hint
 
 buf:
