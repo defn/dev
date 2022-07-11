@@ -39,7 +39,9 @@ init-dev:
 	kustomize build --enable-helm k/argocd | kubectl --context argocd apply -f -
 	kubectl --context argocd rollout status deployment argocd-server --watch
 	$(MAKE) argocd-login
-	kubectl --context argocd apply -f k/sets/dev.yaml
+	kubectl --context argocd apply -f k/sets.yaml
+	argocd --kube-context argocd app sync sets --local k/sets --assumeYes --prune
+	argocd --kube-context argocd app wait sets
 
 argocd-login:
 	argocd login --insecure argocd-server.argocd.svc --username admin --password adminadmin \
