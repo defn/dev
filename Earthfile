@@ -239,9 +239,9 @@ tower:
 
     # arch4
     IF [ ${arch} = "arm64" ]
-        COPY --chown=ubuntu:ubuntu (+protoc/* --arch=${arch} --arch4=aarch_86 --version=${PROTOC}) /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu (+protoc/* --arch=${arch} --arch4=aarch_64 --version=${PROTOC}) /usr/local/bin/
     ELSE
-        COPY --chown=ubuntu:ubuntu (+protoc/* --arch=${arch} --arch4=x86_86 --version=${PROTOC}) /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu (+protoc/* --arch=${arch} --arch4=x86_64 --version=${PROTOC}) /usr/local/bin/
     END
 
     # shell-operator
@@ -287,7 +287,7 @@ protoc:
     ARG arch4
     ARG version
     FROM +tools --arch=${arch}
-    RUN curl -sSL https://github.com/protocolbuffers/protobuf/releases/download/v${version}/protoc-${version}-linux-${arch4}.zip  -o "protoc.zip"
+    RUN curl -sSL https://github.com/protocolbuffers/protobuf/releases/download/v${version}/protoc-${version}-linux-${arch4}.zip -o "protoc.zip"
     RUN unzip protoc.zip
     SAVE ARTIFACT bin/protoc
     SAVE IMAGE --cache-hint
