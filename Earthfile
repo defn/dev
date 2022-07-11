@@ -167,6 +167,7 @@ tower:
     ARG CREDENTIAL_PASS
     ARG KUBECTL
     ARG REDIS
+    ARG PROTOC
     ARG BUF
 
     FROM +root --arch=${arch}
@@ -205,6 +206,7 @@ tower:
     COPY --chown=ubuntu:ubuntu --dir (+awsvault/* --arch=${arch} --version=${AWSVAULT}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch} --version=${ARGO}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch} --version=${ARGOCD}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+protoc/* --arch=${arch} --version=${PROTOC}) ./
     COPY --chown=ubuntu:ubuntu --dir (+buf/* --arch=${arch} --version=${BUF}) ./
 
     COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch} --version=${CDKTF} --version_nodejs=${NODEJS}) ./
@@ -632,6 +634,16 @@ cue-gen:
     FROM +golang --arch=${arch} --version=${version_go}
     RUN bash -c 'source ~/.asdf/asdf.sh && go install istio.io/tools/cmd/cue-gen@latest'
     SAVE ARTIFACT ./.asdf/installs/golang/*/packages/bin/cue-gen
+    SAVE IMAGE --cache-hint
+
+protoc:
+    ARG arch
+    ARG version
+    FROM +asdf --arch=${arch}
+    RUN echo protoc ${version} >> .tool-versions
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add protoc'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
+    SAVE ARTIFACT .asdf
     SAVE IMAGE --cache-hint
 
 buf:
