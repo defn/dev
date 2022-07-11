@@ -39,8 +39,7 @@ init-dev:
 	kustomize build --enable-helm k/argocd | kubectl --context argocd apply -f -
 	kubectl --context argocd rollout status deployment argocd-server --watch
 	$(MAKE) argocd-login
-	kubectl --context argocd apply -f k/sets.yaml
-	argocd --kube-context argocd app sync sets --local k/sets --assumeYes --prune
+	kubectl --context argocd apply -f k/sets/dev.yaml
 
 argocd-login:
 	argocd login --insecure argocd-server.argocd.svc --username admin --password adminadmin \
@@ -67,6 +66,8 @@ sync:
 	loft login https://loft.loft.svc.cluster.local --insecure --access-key admin
 	$(MAKE) vc0
 	$(MAKE) vc1
+	kubectl --context argocd apply -f k/sets.yaml
+	sleep 5
 	argocd --kube-context argocd app sync sets --local k/sets --assumeYes --prune
 	argocd --kube-context argocd app wait sets
 
