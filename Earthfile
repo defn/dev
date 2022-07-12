@@ -169,6 +169,7 @@ tower:
     ARG REDIS
     ARG PROTOC
     ARG BUF
+    ARG GRPCURL
 
     FROM +root --arch=${arch}
 
@@ -207,6 +208,7 @@ tower:
     COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch} --version=${ARGO}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch} --version=${ARGOCD}) ./
     COPY --chown=ubuntu:ubuntu --dir (+buf/* --arch=${arch} --version=${BUF}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+grpcurl/* --arch=${arch} --version=${GRPCURL}) ./
 
     COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch} --version=${CDKTF} --version_nodejs=${NODEJS}) ./
 
@@ -508,6 +510,15 @@ rerun-process-wrapper:
     FROM alpine/git
     RUN git clone https://github.com/tilt-dev/rerun-process-wrapper
     SAVE ARTIFACT rerun-process-wrapper/*.sh
+
+grpcurl:
+    ARG arch
+    ARG version
+    FROM +asdf --arch=${arch}
+    RUN echo "grpcurl ${version}" >> .tool-versions
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add grpcurl'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
+    SAVE ARTIFACT .asdf
 
 kubectl:
     ARG arch
