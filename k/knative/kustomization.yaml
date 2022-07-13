@@ -1,0 +1,12 @@
+namespace: knative-serving
+
+# https://github.com/knative/serving/releases/download/knative-v1.5.0/serving-crds.yaml
+# https://github.com/knative/serving/releases/download/knative-v1.5.0/serving-core.yaml
+# https://github.com/knative/serving/releases/download/knative-v1.5.0/serving-default-domain.yaml
+
+resources:
+- serving-core.yaml
+- serving-default-domain.yaml
+
+patchesStrategicMerge:
+- configmap-config-network.yaml
