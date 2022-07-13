@@ -6,7 +6,6 @@ namespace: knative-serving
 
 resources:
 - serving-core.yaml
-- serving-default-domain.yaml
 
 patchesStrategicMerge:
 - configmap-config-network.yaml
