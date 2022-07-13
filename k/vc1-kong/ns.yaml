@@ -3,4 +3,4 @@ kind: Namespace
 metadata:
   name: kong
   labels:
-    kuma.io/sidecar-injection: "enabled"
+    kuma.io/sidecar-injection: "false"

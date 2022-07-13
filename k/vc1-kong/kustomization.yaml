@@ -27,4 +27,4 @@ patchesStrategicMerge:
     template:
       metadata:
         annotations:
-          kuma.io/mesh: demom
+          kuma.io/xmesh: demom
