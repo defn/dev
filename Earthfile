@@ -170,6 +170,7 @@ tower:
     ARG PROTOC
     ARG BUF
     ARG GRPCURL
+    ARG KN
 
     FROM +root --arch=${arch}
 
@@ -194,6 +195,7 @@ tower:
     COPY --chown=ubuntu:ubuntu (+kuma/* --arch=${arch} --version=${KUMA}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+switch/* --arch=${arch} --version=${SWITCH}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+cue-gen/* --arch=${arch} --version_go=${GOLANG}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+kn/* --arch=${arch} --version=${KN}) /usr/local/bin/
 
     COPY --chown=ubuntu:ubuntu --dir (+shell/* --arch=${arch} --version_shellcheck=${SHELLCHECK} --version_shfmt=${SHFMT}) ./
     COPY --chown=ubuntu:ubuntu --dir (+k9s/* --arch=${arch} --version=${K9S}) ./
@@ -460,6 +462,13 @@ kuma:
     ARG version
     FROM +tools --arch=${arch}
     RUN curl -sSL https://download.konghq.com/mesh-alpine/kuma-${version}-ubuntu-${arch}.tar.gz | tar xvfz -
+    SAVE ARTIFACT */bin/*
+
+kn:
+    ARG arch
+    ARG version
+    FROM +tools --arch=${arch}
+    RUN curl -sSL -o kn https://github.com/knative/client/releases/download/knative-v${version}/kn-linux-${arch} && chmod 755 kn 
     SAVE ARTIFACT */bin/*
 
 k3d:
