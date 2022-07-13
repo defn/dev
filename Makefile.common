@@ -167,7 +167,7 @@ cluster-inner:
 	kubectl rollout status statefulset dev --watch
 
 vault-restore:
-	(cd ~/.password-store && tar cfz - vault) | kubectl exec -i -n vault vault-0 -- tar xvfz - -C /;
+	(cd ~/.password-store && tar cfz - vault) | kubectl --context pod exec -i -n vault vault-0 -- tar xvfz - -C /;
 
 vault-unseal:
 	pass Unseal_Key_1 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://vault.vault.svc:8200/v1/sys/unseal
