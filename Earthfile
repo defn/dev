@@ -124,6 +124,16 @@ tower-upload:
     FROM +tower-update --arch=${arch} --repo_from=${repo_from}
 
     SAVE IMAGE --push ${repo}defn/dev
+    
+hello:
+    ARG repo_from=localhost:5000/
+    ARG repo=
+
+    FROM +tower-update --arch=${arch} --repo_from=${repo_from}
+
+    ENTRYPOINT ["/home/ubuntu/hello.py"]
+
+    SAVE IMAGE --push ${repo}defn/dev:hello
 
 tower:
     ARG repo=localhost:5000/
