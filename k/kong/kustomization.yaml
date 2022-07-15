@@ -19,12 +19,9 @@ resources:
 patchesStrategicMerge:
 - |-
   apiVersion: apps/v1
-  kind: Deployment
+  kind: Service
   metadata:
-    name: kong-kong
+    name: kong-kong-proxy
     namespace: kong
   spec:
-    template:
-      metadata:
-        annotations:
-          kuma.io/xmesh: demom
+    type: ClusterIP
