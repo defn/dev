@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+export VAULT_ADDR="${VAULT_ADDR:-http://vault.vault.svc:8200}"
+
+function main {
+    exec vault "$@"
+}
+
+main "$@"

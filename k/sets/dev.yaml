@@ -21,6 +21,12 @@ spec:
       - name: traefik
         namespace: traefik
         cluster: in-cluster
+      - name: kong
+        namespace: kong
+        cluster: in-cluster
+      - name: knative
+        namespace: knative-serving
+        cluster: in-cluster
       - name: vault
         namespace: vault
         cluster: in-cluster
