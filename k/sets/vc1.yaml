@@ -12,12 +12,6 @@ spec:
       - name: vc1-kuma-remote
         namespace: kuma
         cluster: vc1
-      - name: vc1-kong
-        namespace: kong
-        cluster: vc1
-      - name: vc1-knative
-        namespace: knative-serving
-        cluster: vc1
   template:
     metadata:
       name: "{{name}}"
