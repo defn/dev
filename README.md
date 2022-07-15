@@ -46,3 +46,5 @@ vault write auth/kubernetes/config kubernetes_host=https://kubernetes.default.sv
 vault write auth/kubernetes/role/demo bound_service_account_names=default bound_service_account_namespaces=default policies=gyre.defn.dev ttl=1h
 
 vault agent -config agent.hcl
+
+ kn service create hello --image gcr.io/knative-samples/helloworld-go --port 8080 --env TARGET=World --cluster-local --force
