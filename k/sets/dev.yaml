@@ -24,9 +24,6 @@ spec:
       - name: kong
         namespace: kong
         cluster: in-cluster
-      - name: kourier
-        namespace: null
-        cluster: in-cluster
       - name: knative
         namespace: knative-serving
         cluster: in-cluster
@@ -89,4 +86,29 @@ spec:
         name: kong-kong
         jsonPointers:
           - /spec/template/spec/tolerations
-
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: dev-no-ns
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/instance: sets
+spec:
+  generators:
+  - list:
+      elements:
+      - name: kourier
+        cluster: in-cluster
+  template:
+    metadata:
+      name: "{{name}}"
+      namespace: argocd
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/defn/dev
+        path: k/{{name}}
+        targetRevision: main
+      destination:
+        name: "{{cluster}}"
