@@ -4,4 +4,4 @@ metadata:
   name: config-network
   namespace: knative-serving
 data:
-  ingress-class: kong
+  ingress-class: kourier.ingress.networking.knative.dev
