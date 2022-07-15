@@ -68,8 +68,7 @@ if tty >/dev/null; then
 	function render_ps1 {
 		echo
 		powerline --colorize-hostname -mode flat -newline \
-			-priority root,cwd,user,host,ssh,perms,git-branch,exit,cwd-path,git-status \
-			-modules host,ssh,cwd,perms,gitlite,load,exit,venv
+			-modules host,ssh,cwd,perms,gitlite,load,exit,venv,kube
 	}
 
 	function update_ps1 {
