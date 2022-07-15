@@ -59,7 +59,7 @@ sync:
 	argocd --kube-context argocd app wait loft
 	kubectl --context pod apply -f k/admin.yaml
 	argocd --kube-context argocd app sync vault --local k/vault --assumeYes --prune
-	-while true; do if kubectl --context pod wait -n vault -l statefulset.kubernetes.io/pod-name=vault-0 --for=condition=ContainersReady pod; then break; fi; sleep 1; done
+	-while true; do if kubectl --context pod wait -n vault -l statefulset.kubernetes.io/pod-name=vault-0 --for=condition=Initialized pod; then break; fi; sleep 1; done
 	-$(MAKE) vault-restore
 	-$(MAKE) vault-unseal
 	argocd --kube-context argocd app wait vault
