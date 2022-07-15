@@ -61,3 +61,9 @@ spec:
         name: vault-agent-injector-cfg
         jsonPointers:
           - /webhooks/0/clientConfig/caBundle
+      - kind: Deployment
+        group: apps
+        name: kong-kong
+        jsonPointers:
+          - /spec/tolerations
+
