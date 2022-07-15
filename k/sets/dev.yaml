@@ -25,7 +25,7 @@ spec:
         namespace: kong
         cluster: in-cluster
       - name: kourier
-        namespace: kourier-system
+        namespace: null
         cluster: in-cluster
       - name: knative
         namespace: knative-serving
