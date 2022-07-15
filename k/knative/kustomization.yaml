@@ -8,5 +8,5 @@ resources:
 - serving-core.yaml
 
 patchesStrategicMerge:
-- configmap-config-network.yaml
+- configmap-config-domain.yaml
 - namespace-knative-serving.yaml
