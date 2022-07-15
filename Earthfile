@@ -469,7 +469,7 @@ kn:
     ARG version
     FROM +tools --arch=${arch}
     RUN curl -sSL -o kn https://github.com/knative/client/releases/download/knative-v${version}/kn-linux-${arch} && chmod 755 kn 
-    SAVE ARTIFACT */bin/*
+    SAVE ARTIFACT kn
 
 k3d:
     ARG arch
