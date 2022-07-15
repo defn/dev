@@ -104,13 +104,6 @@ tower-update:
 
     RUN ~/bin/e asdf install
 
-    RUN ~/bin/e helm repo add kuma https://kumahq.github.io/charts
-    RUN ~/bin/e helm repo add loft https://charts.loft.sh
-    RUN ~/bin/e helm repo add datadog https://helm.datadoghq.com
-    RUN ~/bin/e helm repo add argo https://argoproj.github.io/argo-helm
-    RUN ~/bin/e helm repo add hashicorp https://helm.releases.hashicorp.com
-    RUN ~/bin/e helm repo update
-
     COPY --dir --chown=ubuntu:ubuntu . .
     RUN if test -e work; then false; fi
     RUN git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'
@@ -127,7 +120,7 @@ tower-upload:
     
 hello:
     ARG repo_from=localhost:5000/
-    ARG repo=
+    ARG repo=localhost:5000/
 
     FROM +tower-update --arch=${arch} --repo_from=${repo_from}
 
