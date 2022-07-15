@@ -24,6 +24,9 @@ spec:
       - name: kong
         namespace: kong
         cluster: in-cluster
+      - name: kourier
+        namespace: kourier-system
+        cluster: in-cluster
       - name: knative
         namespace: knative-serving
         cluster: in-cluster
