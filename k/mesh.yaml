@@ -8,7 +8,6 @@ spec:
     backends:
       - name: ca-1
         type: builtin
-        mode: PERMISSIVE
         dpCert:
           rotation:
             expiration: 1d
