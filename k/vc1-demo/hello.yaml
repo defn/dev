@@ -4,7 +4,6 @@ metadata:
   labels:
     networking.knative.dev/visibility: cluster-local
   name: hello
-  namespace: default
 spec:
   template:
     spec:

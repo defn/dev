@@ -16,7 +16,7 @@ spec:
         namespace: knative-serving
         cluster: vc1
       - name: vc1-demo
-        namespace: default
+        namespace: demo
         cluster: vc1
   template:
     metadata:
