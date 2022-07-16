@@ -3,4 +3,4 @@ kind: Namespace
 metadata:
   name: knative-serving
   labels:
-    kuma.io/sidecar-injection: "true"
+    kuma.io/sidecar-injection: "false"
