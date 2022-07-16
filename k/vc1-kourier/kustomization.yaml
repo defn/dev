@@ -1,5 +1,5 @@
 bases:
 - ../kourier
 
-resources:
+patchesStrategicMerge:
 - ns.yaml
