@@ -1,2 +1,5 @@
 bases:
 - ../kourier
+
+resources:
+- ns.yaml
