@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: net-kourier-controller
+  namespace: knative-serving
+spec:
+  templates:
+    spec:
+      metadata:
+        labels:
+          kuma.io/sidecar-injection: "true"
+        annotations:
+          kuma.io/mesh: demo
