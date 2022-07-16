@@ -1,7 +1,7 @@
 apiVersion: kuma.io/v1alpha1
 kind: Mesh
 metadata:
-  name: demom
+  name: demo
 spec:
   mtls:
     enabledBackend: ca-1
