@@ -12,8 +12,6 @@ spec:
     metadata:
       labels:
         app: dev
-      annotations:
-        kuma.io/mesh: demo
     spec:
       terminationGracePeriodSeconds: 10
       containers:

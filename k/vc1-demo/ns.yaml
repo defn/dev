@@ -4,3 +4,5 @@ metadata:
   name: demo
   labels:
     kuma.io/sidecar-injection: "true"
+  annotations:
+    kuma.io/mesh: demo
