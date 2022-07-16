@@ -4,7 +4,7 @@ metadata:
   name: net-kourier-controller
   namespace: knative-serving
 spec:
-  templates:
+  template:
     spec:
       metadata:
         labels:
