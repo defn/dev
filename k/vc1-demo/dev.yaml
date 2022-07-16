@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: dev
+  name: vc1
 spec:
   selector:
     matchLabels:
