@@ -7,35 +7,32 @@ metadata:
     argocd.argoproj.io/instance: sets
 spec:
   generators:
-  - list:
-      elements:
-      - name: argocd
-        namespace: argocd
-        cluster: in-cluster
-      - name: argo-events
-        namespace: argo-events
-        cluster: in-cluster
-      - name: argo-workflows
-        namespace: argo-workflows
-        cluster: in-cluster
-      - name: traefik
-        namespace: traefik
-        cluster: in-cluster
-      - name: knative
-        namespace: knative-serving
-        cluster: in-cluster
-      - name: vault
-        namespace: vault
-        cluster: in-cluster
-      - name: loft
-        namespace: loft
-        cluster: in-cluster
-      - name: vc0
-        namespace: vc0
-        cluster: in-cluster
-      - name: vc1
-        namespace: vc1
-        cluster: in-cluster
+    - list:
+        elements:
+          - name: argocd
+            namespace: argocd
+            cluster: in-cluster
+          - name: argo-events
+            namespace: argo-events
+            cluster: in-cluster
+          - name: argo-workflows
+            namespace: argo-workflows
+            cluster: in-cluster
+          - name: traefik
+            namespace: traefik
+            cluster: in-cluster
+          - name: vault
+            namespace: vault
+            cluster: in-cluster
+          - name: loft
+            namespace: loft
+            cluster: in-cluster
+          - name: vc0
+            namespace: vc0
+            cluster: in-cluster
+          - name: vc1
+            namespace: vc1
+            cluster: in-cluster
   template:
     metadata:
       name: "{{name}}"
@@ -51,61 +48,35 @@ spec:
         name: "{{cluster}}"
       syncPolicy:
         syncOptions:
-        - CreateNamespace=true
+          - CreateNamespace=true
       ignoreDifferences:
-      - kind: MutatingWebhookConfiguration
-        group: admissionregistration.k8s.io
-        name: vault-agent-injector-cfg
-        jsonPointers:
-          - /webhooks/0/clientConfig/caBundle
-      - kind: MutatingWebhookConfiguration
-        group: admissionregistration.k8s.io
-        name: webhook.domainmapping.serving.knative.dev
-        jsonPointers:
-          - /webhooks/0/rules
-      - kind: MutatingWebhookConfiguration
-        group: admissionregistration.k8s.io
-        name: webhook.serving.knative.dev
-        jsonPointers:
-          - /webhooks/0/rules
-      - kind: ValidatingWebhookConfiguration
-        group: admissionregistration.k8s.io
-        name: validation.webhook.serving.knative.dev
-        jsonPointers:
-          - /webhooks/0/rules
-      - kind: ValidatingWebhookConfiguration
-        group: admissionregistration.k8s.io
-        name: validation.webhook.domainmapping.serving.knative.dev
-        jsonPointers:
-          - /webhooks/0/rules
-      - kind: Deployment
-        group: apps
-        name: kong-kong
-        jsonPointers:
-          - /spec/template/spec/tolerations
----
-apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
-metadata:
-  name: dev-no-ns
-  namespace: argocd
-  labels:
-    argocd.argoproj.io/instance: sets
-spec:
-  generators:
-  - list:
-      elements:
-      - name: kourier
-        cluster: in-cluster
-  template:
-    metadata:
-      name: "{{name}}"
-      namespace: argocd
-    spec:
-      project: default
-      source:
-        repoURL: https://github.com/defn/dev
-        path: k/{{name}}
-        targetRevision: main
-      destination:
-        name: "{{cluster}}"
+        - kind: MutatingWebhookConfiguration
+          group: admissionregistration.k8s.io
+          name: vault-agent-injector-cfg
+          jsonPointers:
+            - /webhooks/0/clientConfig/caBundle
+        - kind: MutatingWebhookConfiguration
+          group: admissionregistration.k8s.io
+          name: webhook.domainmapping.serving.knative.dev
+          jsonPointers:
+            - /webhooks/0/rules
+        - kind: MutatingWebhookConfiguration
+          group: admissionregistration.k8s.io
+          name: webhook.serving.knative.dev
+          jsonPointers:
+            - /webhooks/0/rules
+        - kind: ValidatingWebhookConfiguration
+          group: admissionregistration.k8s.io
+          name: validation.webhook.serving.knative.dev
+          jsonPointers:
+            - /webhooks/0/rules
+        - kind: ValidatingWebhookConfiguration
+          group: admissionregistration.k8s.io
+          name: validation.webhook.domainmapping.serving.knative.dev
+          jsonPointers:
+            - /webhooks/0/rules
+        - kind: Deployment
+          group: apps
+          name: kong-kong
+          jsonPointers:
+            - /spec/template/spec/tolerations
