@@ -12,6 +12,9 @@ spec:
       - name: vc1-kuma-remote
         namespace: kuma
         cluster: vc1
+      - name: vc1-knative
+        namespace: knative-serving
+        cluster: vc1
   template:
     metadata:
       name: "{{name}}"
@@ -34,3 +37,29 @@ spec:
         name: vault-agent-injector-cfg
         jsonPointers:
           - /webhooks/0/clientConfig/caBundle
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: vc1-no-ns
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/instance: sets
+spec:
+  generators:
+  - list:
+      elements:
+      - name: vc1-kourier
+        cluster: vc1
+  template:
+    metadata:
+      name: "{{name}}"
+      namespace: argocd
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/defn/dev
+        path: k/{{name}}
+        targetRevision: main
+      destination:
+        name: "{{cluster}}"
