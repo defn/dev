@@ -2,5 +2,6 @@ namespace: demo
 
 resources:
 - ns.yaml
+- mesh.yaml
 - hello.yaml
 - dev.yaml
