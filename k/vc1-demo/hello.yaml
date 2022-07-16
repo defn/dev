@@ -9,14 +9,11 @@ spec:
     spec:
       containerConcurrency: 0
       containers:
-      - env:
-        - name: TARGET
-          value: World
-        image: gcr.io/knative-samples/helloworld-go
-        name: hello
+      - name: hello
+        image: defn/bean:latest
         ports:
-        - containerPort: 8080
-          protocol: TCP
+        - name: h2c
+          containerPort: 50551
   traffic:
   - latestRevision: true
     percent: 100
