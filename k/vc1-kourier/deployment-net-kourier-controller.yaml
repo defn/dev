@@ -5,9 +5,8 @@ metadata:
   namespace: knative-serving
 spec:
   template:
-    spec:
-      metadata:
-        labels:
-          kuma.io/sidecar-injection: "true"
-        annotations:
-          kuma.io/mesh: demo
+    metadata:
+      labels:
+        kuma.io/sidecar-injection: "true"
+      annotations:
+        kuma.io/mesh: demo
