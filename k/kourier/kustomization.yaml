@@ -1,2 +1,5 @@
 resources:
 - https://github.com/knative-sandbox/net-kourier/releases/download/knative-v1.6.0/kourier.yaml
+
+patchesStrategicMerge:
+- service-kourier.yaml
