@@ -1,0 +1,23 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  labels:
+    networking.knative.dev/visibility: cluster-local
+  name: hello
+  namespace: default
+spec:
+  template:
+    spec:
+      containerConcurrency: 0
+      containers:
+      - env:
+        - name: TARGET
+          value: World
+        image: gcr.io/knative-samples/helloworld-go
+        name: hello
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+  traffic:
+  - latestRevision: true
+    percent: 100
