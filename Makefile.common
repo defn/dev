@@ -55,10 +55,10 @@ sync:
 	argocd --kube-context argocd app wait argo-workflows
 	argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune
 	argocd --kube-context argocd app wait traefik
-	argocd --kube-context argocd app sync kourier --local k/kourier --assumeYes --prune
-	argocd --kube-context argocd app wait kourier
 	argocd --kube-context argocd app sync knative --local k/knative --assumeYes --prune
 	argocd --kube-context argocd app wait knative
+	argocd --kube-context argocd app sync kourier --local k/kourier --assumeYes --prune
+	argocd --kube-context argocd app wait kourier
 	argocd --kube-context argocd app sync loft --local k/loft --assumeYes --prune
 	argocd --kube-context argocd app wait loft
 	kubectl --context pod apply -f k/admin.yaml
