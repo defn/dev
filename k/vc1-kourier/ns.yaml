@@ -3,4 +3,6 @@ kind: Namespace
 metadata:
   name: kourier-system
   labels:
-    kuma.io/sidecar-injection: "false"
+    kuma.io/sidecar-injection: "true"
+  annotations:
+    kuma.io/mesh: demo
