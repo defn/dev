@@ -55,8 +55,6 @@ sync:
 	argocd --kube-context argocd app wait argo-workflows
 	argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune
 	argocd --kube-context argocd app wait traefik
-	argocd --kube-context argocd app sync kong --local k/kong --assumeYes --prune
-	argocd --kube-context argocd app wait kong
 	argocd --kube-context argocd app sync kourier --local k/kourier --assumeYes --prune
 	argocd --kube-context argocd app wait kourier
 	argocd --kube-context argocd app sync knative --local k/knative --assumeYes --prune
