@@ -32,3 +32,12 @@ registries:
       "docker.io":
         endpoint:
           - http://k3d-docker-io:5001
+      "gcr.io":
+        endpoint:
+          - http://k3d-gcr-io:5002
+      "ghcr.io":
+        endpoint:
+          - http://k3d-ghcr-io:5003
+      "quay.io":
+        endpoint:
+          - http://k3d-quay-io:5004
