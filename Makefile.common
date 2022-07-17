@@ -18,11 +18,11 @@ cache:
 	$(MAKE) registry
 
 registry:
-	-k3d registry create registry --port 0.0.0.0:5000
-	-k3d registry create docker-io --proxy-remote-url https://registry-1.docker.io --port 0.0.0.0:5001
-	-k3d registry create gcr-io --proxy-remote-url https://gcr.io --port 0.0.0.0:5002
-	-k3d registry create ghcr-io --proxy-remote-url https://ghcr.io --port 0.0.0.0:5003
-	-k3d registry create quay-io --proxy-remote-url https://quay.io --port 0.0.0.0:5004
+	-if ! curl -s localhost:5000/v2; then k3d registry create registry --port 0.0.0.0:5000; fi
+	-if ! curl -s localhost:5001/v2; then k3d registry create docker-io --proxy-remote-url https://registry-1.docker.io --port 0.0.0.0:5001; fi
+	-if ! curl -s localhost:5002/v2; then k3d registry create gcr-io --proxy-remote-url https://gcr.io --port 0.0.0.0:5002; fi
+	-if ! curl -s localhost:5003/v2; then k3d registry create ghcr-io --proxy-remote-url https://ghcr.io --port 0.0.0.0:5003; fi
+	-if ! curl -s localhost:5004/v2; then k3d registry create quay-io --proxy-remote-url https://quay.io --port 0.0.0.0:5004; fi
 
 dev:
 	-git pull
