@@ -12,6 +12,9 @@ spec:
       - name: vc0-kuma-global
         namespace: kuma
         cluster: vc0
+      - name: vc0-demo
+        namespace: demo
+        cluster: vc0
   template:
     metadata:
       name: "{{name}}"
