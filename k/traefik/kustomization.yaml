@@ -48,6 +48,8 @@ patchesStrategicMerge:
           - --entrypoints.https9607.address=:9607/tcp
           - --entrypoints.https9608.address=:9608/tcp
           - --entrypoints.https9609.address=:9609/tcp
+          - --entrypoints.https9700.address=:9700/tcp
+          - --entrypoints.https9701.address=:9701/tcp
           - --entrypoints.web.http.redirections.entryPoint.to=:443
           - --entrypoints.web.http.redirections.entryPoint.scheme=https
           - --providers.kubernetescrd.allowexternalnameservices=true
@@ -89,6 +91,12 @@ patchesStrategicMerge:
             protocol: TCP
           - containerPort: 9609
             name: https9609
+            protocol: TCP
+          - containerPort: 9700
+            name: https9700
+            protocol: TCP
+          - containerPort: 9701
+            name: https9701
             protocol: TCP
 - |-
   apiVersion: v1
@@ -155,3 +163,11 @@ patchesStrategicMerge:
           port: 9609
           protocol: TCP
           targetPort: https9609
+        - name: https9700
+          port: 9700
+          protocol: TCP
+          targetPort: https9700
+        - name: https9701
+          port: 9701
+          protocol: TCP
+          targetPort: https9701
