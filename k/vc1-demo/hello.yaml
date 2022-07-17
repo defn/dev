@@ -13,7 +13,7 @@ spec:
         image: defn/bean:latest
         ports:
         - name: h2c
-          containerPort: 50551
+          containerPort: 50051
   traffic:
   - latestRevision: true
     percent: 100
