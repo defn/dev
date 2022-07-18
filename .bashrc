@@ -24,8 +24,9 @@ function pca {
 
 # python
 PATH="$HOME/.local/bin:$PATH"
-
+export PYTHONPATH
 export PIP_DISABLE_PIP_VERSION_CHECK=1
+
 # cue
 PATH="$HOME/bin:$PATH"
 
