@@ -126,10 +126,13 @@ attach:
 reset:
 	-k3d cluster delete
 	-docker rm -f ignore
+	$(MAKE) reboot-docker
+	$(MAKE) cluster
+
+reboot-docker:
 	-osascript -e 'quit app "Docker"'
 	open -a Docker
 	while ! docker ps; do date; sleep 5; done
-	$(MAKE) cluster
 
 cluster:
 	git pull
