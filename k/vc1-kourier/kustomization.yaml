@@ -2,5 +2,5 @@ bases:
 - ../kourier
 
 patchesStrategicMerge:
-- nameserver-kourier-system.yaml
+- namespace-kourier-system.yaml
 - deployment-net-kourier-controller.yaml

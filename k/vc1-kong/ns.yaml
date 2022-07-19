@@ -4,3 +4,5 @@ metadata:
   name: kong
   labels:
     kuma.io/sidecar-injection: "true"
+  annotations:
+    kuma.io/mesh: demo
