@@ -1,0 +1,25 @@
+namespace: kong
+
+helmCharts:
+- releaseName: kong
+  name: kong
+  namespace: kong
+  version: 2.11.0
+  repo: https://charts.konghq.com
+  valuesInline:
+    enterprise:
+      enabled: true
+  includeCRDs: true
+
+resources:
+- ns.yaml
+
+patchesStrategicMerge:
+- |-
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: kong-kong-proxy
+    namespace: kong
+  spec:
+    type: ClusterIP
