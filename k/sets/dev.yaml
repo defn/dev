@@ -33,9 +33,6 @@ spec:
           - name: vc1
             namespace: vc1
             cluster: in-cluster
-          - name: dev-kuma-remote
-            namespace: kuma
-            cluster: in-cluster
   template:
     metadata:
       name: "{{name}}"

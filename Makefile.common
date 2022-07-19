@@ -73,8 +73,6 @@ sync:
 	$(MAKE) vc1
 	kubectl --context argocd apply -f k/sets.yaml
 	sleep 5
-	argocd --kube-context argocd app sync dev-kuma-remote --local k/dev-kuma-remote --assumeYes --prune
-	argocd --kube-context argocd app wait dev-kuma-remote
 	argocd --kube-context argocd app sync sets --local k/sets --assumeYes --prune
 	argocd --kube-context argocd app wait sets
 
