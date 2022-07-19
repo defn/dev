@@ -4,7 +4,7 @@ helmCharts:
 - releaseName: kuma
   name: kuma
   namespace: kuma
-  version: 1.7.0
+  version: 1.7.1
   repo: https://kumahq.github.io/charts
   includeCRDs: true
   valuesInline:
