@@ -28,10 +28,14 @@ dev:
 	-git pull
 	@if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi
 
-init:
-	sudo chown ubuntu:ubuntu /var/run/docker.sock ~/work
+unlock:
 	cd ~/.password-store && git crypt unlock
 	pass hello
+	$(MAKE) vault-unseal
+
+init:
+	sudo chown ubuntu:ubuntu /var/run/docker.sock ~/work
+	cd ~/.password-store && (git crypt unlock || git status)
 	$(MAKE) kubeconfig
 	cd && $(MAKE) init-dev
 	$(MAKE) init-site
@@ -190,6 +194,7 @@ vault-seal:
 	rm -f ~/.vault-token
 
 down:
+	-$(MAKE) vault-seal
 	-bash -c 'rm -vf "$${SSH_AUTH_SOCK}"'
 	-cd ~/.password-store && sudo -u ubuntu git-crypt lock
 	-echo yes | gh auth logout --hostname github.com
