@@ -190,7 +190,6 @@ vault-seal:
 	rm -f ~/.vault-token
 
 down:
-	-$(MAKE) vault-seal
 	-bash -c 'rm -vf "$${SSH_AUTH_SOCK}"'
 	-cd ~/.password-store && sudo -u ubuntu git-crypt lock
 	-echo yes | gh auth logout --hostname github.com
