@@ -3,7 +3,10 @@ repo_from ?= $(repo)
 cache ?= $(repo)
 push ?= --push
 dummy_ip ?= 169.254.32.1
-dummy_host ?= 169.254.32.1
+dummy_host ?= 169-254-32-1.sslip.io
+
+trust-ca:
+	sudo security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-db etc/ca.crt
 
 dummy:
 	docker run --rm -i --privileged --network=host --pid=host alpine nsenter -t 1 -m -u -n -i -- \
