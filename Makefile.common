@@ -25,7 +25,6 @@ registry:
 	-if ! curl -s localhost:5004/v2; then k3d registry create quay-io --proxy-remote-url https://quay.io --port 0.0.0.0:5004; fi
 
 dev:
-	-git pull
 	@if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi
 
 unlock:
@@ -34,6 +33,10 @@ unlock:
 	$(MAKE) vault-unseal
 
 init:
+	-git pull
+	$(MAKE) init-inner
+
+init-inner:
 	sudo chown ubuntu:ubuntu /var/run/docker.sock ~/work
 	cd ~/.password-store && (git crypt unlock || git status)
 	$(MAKE) kubeconfig
