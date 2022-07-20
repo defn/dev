@@ -1,4 +1,4 @@
-dummy_host = "169-254-32-1.sslip.io"
+dummy_host = "remocal.net"
 dummy_ip = "169.254.32.1"
 
 analytics_settings(False)
