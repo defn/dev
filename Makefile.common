@@ -109,6 +109,7 @@ vc0 vc1:
 
 kubeconfig:
 	sudo cp /run/secrets/kubernetes.io/serviceaccount/ca.crt /usr/local/share/ca-certificates/
+	sudo cp ~/etc/ca.crt /usr/local/share/ca-certificates/
 	sudo update-ca-certificates
 	kubectl config set-cluster pod --server=https://kubernetes.default.svc.cluster.local --embed-certs --certificate-authority=/run/secrets/kubernetes.io/serviceaccount/ca.crt
 	kubectl config set-credentials pod --token="$$(cat /run/secrets/kubernetes.io/serviceaccount/token)"
