@@ -27,7 +27,6 @@ spec:
         {{- end }}
         {{- end }}
       labels: {{ include "kuma.ingressLabels" . | nindent 8 }}
-        {{- include "kuma.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.ingress.affinity }}
       affinity: {{ tpl (toYaml . | nindent 8) $ }}
