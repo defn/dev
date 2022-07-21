@@ -184,7 +184,7 @@ cluster-inner:
 		--k3s-arg "--disable=traefik@all"
 	docker exec k3d-k3s-default-server-0 touch /etc/passwd
 	kubectl apply -f k/dev/main.yaml
-	kubectl rollout status statefulset dev --watch
+	while true; do if kubectl rollout status statefulset dev --watch; then break; fi; sleep 5; done
 
 vault-restore:
 	(cd ~/.password-store && tar cfz - vault) | kubectl --context pod exec -i -n vault vault-0 -- tar xvfz - -C /;

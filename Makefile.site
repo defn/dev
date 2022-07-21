@@ -10,12 +10,12 @@ reboot:
 restart:
 	k3d cluster stop
 	k3d cluster start
-	kubectl rollout status statefulset dev --watch
+	while true; do if kubectl rollout status statefulset dev --watch; then break; fi; sleep 5; done
 	$(MAKE) attach
 
 recreate:
 	kubectl delete pod/dev-0
-	kubectl rollout status statefulset dev --watch
+	while true; do if kubectl rollout status statefulset dev --watch; then break; fi; sleep 5; done
 	$(MAKE) attach
 
 reboot-inner:
