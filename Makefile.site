@@ -23,6 +23,8 @@ images:
 	if [[ -d work/dev ]]; then cd work/dev && git pull && $(MAKE) $@-inner; else $(MAKE) $@-inner; fi
 
 images-inner:
+	earthly --remote-cache=$(cache)defn/cache:images $(push) +amd64 --repo=$(repo)
+	earthly --remote-cache=$(cache)defn/cache:images $(push) +arm64 --repo=$(repo)
 	earthly --remote-cache=$(cache)defn/cache:images $(push) +images --repo=$(repo)
 
 updates:
