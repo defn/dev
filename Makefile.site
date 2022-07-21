@@ -40,5 +40,8 @@ updates:
 updates-inner:
 	earthly --remote-cache=$(cache)defn/cache:updates $(push) +updates --repo=$(repo) --repo_from=$(repo_from)
 
+push:
+	$(MAKE) updates repo= repo_from=localhost:5000/ cache=localhost:5000/
+
 shell:
 	docker run --rm -ti $(repo)defn/dev bash -l
