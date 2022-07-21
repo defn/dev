@@ -8,8 +8,8 @@ reboot:
 	$(MAKE) reboot-inner
 
 restart:
-	k3d stop
-	k3d start
+	k3d cluster stop
+	k3d cluster start
 	kubectl rollout status statefulset dev --watch
 	$(MAKE) attach
 
