@@ -119,7 +119,7 @@ kubeconfig:
 	kubectl config set-context argocd --cluster=pod --user=argocd --namespace argocd
 	kubectl config use-context pod
 	skaffold config set --kube-context pod local-cluster true
-	kumactl config control-planes add --overwrite --name pod --address http://kuma-control-plane-x-kuma-x-vc0.vc0.svc:5681
+	#kumactl config control-planes add --overwrite --name pod --address http://kuma-control-plane-x-kuma-x-vc0.vc0.svc:5681
 
 asdf:
 	cat .tool-versions| awk '{print $$1}' | while read -r a; do asdf list-all "$$a" | sed "s#^#$$a #"; done | sort > .tool-versions-all

@@ -64,3 +64,4 @@ node_modules
 .step
 .dogrc
 .commit
+.kuma
