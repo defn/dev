@@ -7,6 +7,12 @@ reboot:
 	git pull
 	$(MAKE) reboot-inner
 
+restart:
+	k3d stop
+	k3d start
+	kubectl rollout status statefulset dev --watch
+	$(MAKE) attach
+
 recreate:
 	kubectl delete pod/dev-0
 	kubectl rollout status statefulset dev --watch
