@@ -1,0 +1,15 @@
+type: Dataplane
+mesh: demo
+name: hello
+networking:
+  address: "{{ address }}"
+  inbound:
+    - port: 8000
+      servicePort: 8888
+      tags:
+        kuma.io/service: hello
+        kuma.io/protocol: http
+  outbound:
+    - port: 9000
+      tags:
+        kuma.io/service: kourier-internal_kourier-system_svc_80
