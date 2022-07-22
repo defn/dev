@@ -25,6 +25,11 @@ spec:
               mountPath: /var/run/docker.sock
             - name: work
               mountPath: /home/ubuntu/work
+        - name: buildkitd
+          image: earthly/buildkitd:v0.6.19 
+          volumeMounts:
+            - name: earthly
+              mountPath: /tmp/earthly
       volumes:
         - name: docker-sock
           hostPath:
@@ -32,6 +37,9 @@ spec:
         - name: work
           hostPath:
             path: /mnt/work
+        - name: earthly
+          hostPath:
+            path: /mnt/earthly
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
