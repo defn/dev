@@ -33,24 +33,6 @@ local_resource(
     labels=["automation"],
 )
 
-# registry
-local_resource(
-    name="registry buildkitd",
-    serve_cmd="""
-        set -x; cd;
-        earthly bootstrap;
-        docker exec earthly-buildkitd apk add socat || true;
-        docker exec earthly-buildkitd pkill socat;
-        rm -f /home/ubuntu/.registry.txt;
-        exec docker exec earthly-buildkitd socat -d -d TCP-LISTEN:5000,fork,reuseaddr TCP:{ip}:5000;
-    """.format(
-        ip="169.254.32.1"
-    ),
-    allow_parallel=True,
-    deps=["/home/ubuntu/.registry.txt"],
-    labels=["tunnels"],
-)
-
 # kuma hybrid
 local_resource(
     name="kuma-cp",
