@@ -38,14 +38,14 @@ local_resource(
     name="kuma-cp",
     serve_cmd="exec make kumacp",
     allow_parallel=True,
-    labels=["tunnels"],
+    labels=["service mesh"],
 )
 
 local_resource(
     name="kuma-dp-hello",
     serve_cmd="while true; do make kumahello; sleep 10; done",
     allow_parallel=True,
-    labels=["tunnels"],
+    labels=["service mesh],
 )
 
 # argocd
