@@ -3,12 +3,16 @@ include Makefile.common
 init-site:
 	@true
 
-reboot:
-	git pull
-	$(MAKE) reboot-inner
-
 restart:
+	git pull
+	$(MAKE) restart-inner
+
+restart-inner:
 	k3d cluster stop
+	reboot-docker:
+	-osascript -e 'quit app "Docker"'
+	open -a Docker
+	while ! docker ps; do date; sleep 5; done
 	k3d cluster start
 	while true; do if kubectl rollout status statefulset dev --watch; then break; fi; sleep 5; done
 	$(MAKE) attach
@@ -16,12 +20,6 @@ restart:
 recreate:
 	kubectl delete pod/dev-0
 	while true; do if kubectl rollout status statefulset dev --watch; then break; fi; sleep 5; done
-	$(MAKE) attach
-
-reboot-inner:
-	$(MAKE) dummy
-	$(MAKE) registry
-	$(MAKE) cluster
 	$(MAKE) attach
 
 images amd arm:
