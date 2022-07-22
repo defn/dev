@@ -30,6 +30,11 @@ spec:
           env:
             - name: BUILDKIT_TCP_TRANSPORT_ENABLED
               value: "true"
+            - name: EARTHLY_ADDITIONAL_BUILDKIT_CONFIG
+              value: |
+                [registry."k3d-registry:5000"]
+                  http = true
+                  insecure = true
           volumeMounts:
             - name: earthly
               mountPath: /tmp/earthly

@@ -1,10 +1,5 @@
 global:
   disable_analytics: true
+  disable_log_sharing: true
   buildkit_host: tcp://dev-0:8372
   secret_provider: earthly-secret-provider
-  cache_size_pct: 90
-  disable_log_sharing: true
-  buildkit_additional_config: |
-    [registry."k3d-registry:5000"]
-      http = true
-      insecure = true
