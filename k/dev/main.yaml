@@ -27,6 +27,9 @@ spec:
               mountPath: /home/ubuntu/work
         - name: buildkitd
           image: earthly/buildkitd:v0.6.19
+          env:
+            - name: BUILDKIT_TCP_TRANSPORT_ENABLED
+              value: "true"
           volumeMounts:
             - name: earthly
               mountPath: /tmp/earthly
