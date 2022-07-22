@@ -33,19 +33,6 @@ local_resource(
     labels=["automation"],
 )
 
-# shell-operator
-local_resource(
-    name="shell-operator",
-    serve_cmd="""
-        set -x; cd;
-        sudo install -d -m 0700 -o ubuntu -g ubuntu /var/run/shell-operator /tmp/shell-operator;
-        exec /shell-operator start --listen-port=9116 --kube-context pod;
-    """,
-    allow_parallel=True,
-    deps=["hooks"],
-    labels=["automation"],
-)
-
 # registry
 local_resource(
     name="registry pod",

@@ -16,3 +16,6 @@ helmCharts:
       enabled: true
       service:
         port: 10001
+
+patchesStrategicMerge:
+- deployment-kuma-ingress.yaml
