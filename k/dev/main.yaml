@@ -30,6 +30,7 @@ spec:
           volumeMounts:
             - name: earthly
               mountPath: /tmp/earthly
+          tty: true
           securityContext:
             privileged: true
       volumes:
