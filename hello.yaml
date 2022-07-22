@@ -10,6 +10,9 @@ networking:
         kuma.io/service: hello
         kuma.io/protocol: http
   outbound:
+    - port: 5000
+      tags:
+        kuma.io/service: registry
     - port: 9000
       tags:
         kuma.io/service: kourier-internal_kourier-system_svc_80

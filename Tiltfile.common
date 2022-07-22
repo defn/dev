@@ -35,15 +35,6 @@ local_resource(
 
 # registry
 local_resource(
-    name="registry pod",
-    serve_cmd="exec socat -d -d TCP-LISTEN:5000,fork,reuseaddr TCP:{ip}:5000".format(
-        ip="host.k3d.internal"
-    ),
-    allow_parallel=True,
-    labels=["tunnels"],
-)
-
-local_resource(
     name="registry buildkitd",
     serve_cmd="""
         set -x; cd;

@@ -1,0 +1,11 @@
+apiVersion: kuma.io/v1alpha1
+kind: ExternalService
+mesh: demo
+metadata:
+  name: registry
+spec:
+  tags:
+    kuma.io/service: registry
+    kuma.io/protocol: http
+  networking:
+    address: "host.k3d.internal:5000"
