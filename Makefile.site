@@ -53,6 +53,8 @@ shell:
 	docker run --rm -ti $(repo)defn/dev bash -l
 
 cert:
+	touch meh.json; chmod 0600 meh.json
+	-k --context pod create -n traefik secret generic default-certificate --from-file=meh.json
 	v write pki/issue/gyre.defn.dev common_name="remocal.net" ip_sans="169.254.32.1" alt_names="hello.demo.svc.cluster.local,169-254-32-1.sslip.io" tl=120h -format=json | jq .data > meh.json
 	k --context pod patch -n traefik secret default-certificate --type='json' -p='[{"op" : "replace" ,"path" : "/data/tls.key" ,"value" : "'$$(cat meh.json | jq -r '.private_key | @base64')'"}]'
 	k --context pod patch -n traefik secret default-certificate --type='json' -p='[{"op" : "replace" ,"path" : "/data/tls.crt" ,"value" : "'$$(cat meh.json | jq -r '.certificate | @base64')'"}]'
