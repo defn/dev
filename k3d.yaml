@@ -10,6 +10,9 @@ volumes:
   - volume: work:/mnt/work
     nodeFilters:
       - server:0
+  - volume: earthly:/mnt/earthly
+    nodeFilters:
+      - server:0
 options:
   k3d:
     wait: true
