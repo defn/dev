@@ -5,6 +5,6 @@ global:
   cache_size_pct: 90
   disable_log_sharing: true
   buildkit_additional_config: |
-    [registry."k3d-registry"]
+    [registry."k3d-registry:5000"]
       http = true
       insecure = true
