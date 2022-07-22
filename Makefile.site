@@ -9,7 +9,6 @@ restart:
 
 restart-inner:
 	k3d cluster stop
-	reboot-docker:
 	-osascript -e 'quit app "Docker"'
 	open -a Docker
 	while ! docker ps; do date; sleep 5; done
