@@ -40,11 +40,6 @@ init:
 	$(MAKE) init-inner
 
 init-inner:
-	sudo chown ubuntu:ubuntu /var/run/docker.sock ~/work
-	cd ~/.password-store && (git crypt unlock || git status)
-	$(MAKE) kubeconfig
-	cd && $(MAKE) init-dev
-	$(MAKE) init-site
 	tilt up --context pod
 
 init-dev:
@@ -60,6 +55,11 @@ argocd-login:
 				&& argocd account update-password --new-password adminadmin --current-password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')")
 
 sync:
+	sudo chown ubuntu:ubuntu /var/run/docker.sock ~/work
+	cd ~/.password-store && (git crypt unlock || git status)
+	$(MAKE) kubeconfig
+	cd && $(MAKE) init-dev
+	$(MAKE) init-site
 	argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune
 	argocd --kube-context argocd app wait argocd
 	argocd --kube-context argocd app sync argo-events --local k/argo-events --assumeYes --prune
