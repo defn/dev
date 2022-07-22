@@ -57,25 +57,3 @@ cert:
 	k --context pod patch -n traefik secret default-certificate --type='json' -p='[{"op" : "replace" ,"path" : "/data/tls.key" ,"value" : "'$$(cat meh.json | jq -r '.private_key | @base64')'"}]'
 	k --context pod patch -n traefik secret default-certificate --type='json' -p='[{"op" : "replace" ,"path" : "/data/tls.crt" ,"value" : "'$$(cat meh.json | jq -r '.certificate | @base64')'"}]'
 	rm -f meh.json
-
-kumacp:
-	env \
-		KUMA_MODE=zone KUMA_MULTIZONE_ZONE_NAME="$$(uname -n)" \
-		KUMA_MULTIZONE_ZONE_GLOBAL_ADDRESS=grpcs://169.254.32.1:5685 \
-		kuma-cp run
-
-kumatoken:
-	kumactl generate dataplane-token \
-		--mesh demo \
-		--name hello \
-		--tag kuma.io/service=hello \
-		--valid-for 720h > /tmp/hello.token
-
-kumahello:
-	$(MAKE) kumatoken
-	kuma-dp run \
-		--cp-address=https://127.0.0.1:5678 \
-		--dataplane-file=hello.yaml \
-		--dataplane-token-file=/tmp/hello.token \
-  		--dataplane-var address=$$(ifconfig eth0 | grep 'inet ' | awk '{print $$2}')
-	rm -f /tmp/hello.token
