@@ -43,7 +43,7 @@ local_resource(
 
 local_resource(
     name="kuma-dp-hello",
-    serve_cmd="exec make kumahello",
+    serve_cmd="while true; do make kumahello; sleep 10; done",
     allow_parallel=True,
     labels=["tunnels"],
 )
