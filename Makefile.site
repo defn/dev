@@ -47,7 +47,7 @@ recreate: # Recreate pod
 stop: # Stop k3d
 	k3d cluster stop
 
-images amd arm:
+images image-amd image-arm:
 	git push
 	if [[ -d work/dev ]]; then cd work/dev && git pull && $(MAKE) $@-inner; else $(MAKE) $@-inner; fi
 
@@ -56,10 +56,10 @@ images-inner:
 	earthly --remote-cache=$(cache)defn/cache:images $(push) +arm64 --repo=$(repo)
 	earthly --remote-cache=$(cache)defn/cache:images $(push) +images --repo=$(repo)
 
-amd-inner:
+image-amd-inner:
 	earthly --remote-cache=$(cache)defn/cache:images $(push) +amd64 --repo=$(repo)
 
-arm-inner:
+image-arm-inner:
 	earthly --remote-cache=$(cache)defn/cache:images $(push) +arm64 --repo=$(repo)
 
 updates:
