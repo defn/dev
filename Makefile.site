@@ -69,8 +69,18 @@ updates:
 updates-inner:
 	earthly --remote-cache=$(cache)defn/cache:updates $(push) +updates --repo=$(repo) --repo_from=$(repo_from)
 
+updates-amd:
+	git push
+	if [[ -d work/dev ]]; then cd work/dev && git pull && $(MAKE) $@-inner; else $(MAKE) $@-inner; fi
+
+updates-amd-inner:
+	earthly --remote-cache=$(cache)defn/cache:updates $(push) +amd64-update --repo=$(repo) --repo_from=$(repo_from)
+
 push:
 	$(MAKE) updates repo= repo_from=k3d-registry:5000/ cache=k3d-registry:5000/
+
+push-amd:
+	$(MAKE) updates-amd repo= repo_from=k3d-registry:5000/ cache=k3d-registry:5000/
 
 shell:
 	docker run --rm -ti $(repo)defn/dev bash -l
