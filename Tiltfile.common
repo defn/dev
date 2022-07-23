@@ -20,3 +20,475 @@ local_resource(
     deps=["hooks"],
     labels=["automation"],
 )
+
+# argocd
+local_resource(
+    "argocd",
+    cmd="""
+        set -x; cd;
+        if argocd --kube-context argocd app diff argocd --local k/argocd; then echo No difference; fi;
+    """,
+    deps=["k/argocd"],
+    allow_parallel=True,
+    labels=["deploy"],
+)
+
+cmd_button(
+    name="ui argocd",
+    text="argocd",
+    icon_name="stream",
+    resource="argocd",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            xdg-open https://{domain}:9603;
+        """.format(
+            domain=dummy_host
+        ),
+    ],
+    location="nav",
+)
+
+cmd_button(
+    name="sync argocd",
+    resource="argocd",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune;
+            touch k/argocd/kustomization.yaml;
+        """,
+    ],
+    icon_name="build",
+)
+
+# argo-events
+local_resource(
+    "argo-events",
+    cmd="""
+        set -x; cd;
+        if argocd --kube-context argocd app diff argo-events --local k/argo-events; then echo No difference; fi;
+    """,
+    deps=["k/argo-events"],
+    allow_parallel=True,
+    labels=["deploy"],
+)
+
+cmd_button(
+    name="sync argo-events",
+    resource="argo-events",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            argocd --kube-context argocd app sync argo-events --local k/argo-events --assumeYes --prune;
+            touch k/argo-events/kustomization.yaml;
+        """,
+    ],
+    icon_name="build",
+)
+
+# argo-workflows
+local_resource(
+    "argo-workflows",
+    cmd="""
+        set -x; cd;
+        if argocd --kube-context argocd app diff argo-workflows --local k/argo-workflows; then echo No difference; fi;
+    """,
+    deps=["k/argo-workflows"],
+    allow_parallel=True,
+    labels=["deploy"],
+)
+
+cmd_button(
+    name="sync argo-workflows",
+    resource="argo-workflows",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            argocd --kube-context argocd app sync argo-workflows --local k/argo-workflows --assumeYes --prune;
+            touch k/argo-workflows/kustomization.yaml;
+        """,
+    ],
+    icon_name="build",
+)
+
+# traefik
+local_resource(
+    "traefik",
+    cmd="""
+        set -x; cd;
+        if argocd --kube-context argocd app diff traefik --local k/traefik; then echo No difference; fi;
+    """,
+    deps=["k/traefik"],
+    allow_parallel=True,
+    labels=["deploy"],
+)
+
+cmd_button(
+    name="ui traefik",
+    text="traefik",
+    icon_name="traffic",
+    resource="traefik",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            xdg-open https://{domain}:9605;
+        """.format(
+            domain=dummy_host
+        ),
+    ],
+    location="nav",
+)
+
+cmd_button(
+    name="sync traefik",
+    resource="traefik",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune;
+            touch k/traefik/kustomization.yaml;
+        """,
+    ],
+    icon_name="build",
+)
+
+# vault
+local_resource(
+    "vault",
+    cmd="""
+        set -x; cd;
+        if argocd --kube-context argocd app diff vault --local k/vault; then echo No difference; fi;
+    """,
+    deps=["k/vault"],
+    allow_parallel=True,
+    labels=["deploy"],
+)
+
+cmd_button(
+    name="ui vault",
+    text="vault",
+    icon_name="key",
+    resource="vault",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            pass Initial_Root_Token | ssh super pbcopy;
+            xdg-open https://{domain}:8200/ui;
+        """.format(
+            domain=dummy_host
+        ),
+    ],
+    location="nav",
+)
+
+cmd_button(
+    name="sync vault",
+    resource="vault",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            argocd --kube-context argocd app sync vault --local k/vault --assumeYes --prune;
+            touch k/vault/kustomization.yaml;
+        """,
+    ],
+    icon_name="build",
+)
+
+cmd_button(
+    name="init vault",
+    resource="vault",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            kubectl exec -n vault -ti vault-0 -- vault operator init
+        """,
+    ],
+    icon_name="build",
+)
+
+cmd_button(
+    name="seal vault",
+    resource="vault",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            make vault-seal;
+        """,
+    ],
+    icon_name="build",
+)
+
+cmd_button(
+    name="backup vault",
+    resource="vault",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            rm -rf ~/.password-store/vault;
+            kubectl exec -n vault vault-0 -- tar cfz - /vault/data | (cd ~/.password-store && tar xvfz - && git add vault && git add -u vault && git commit -m 'vault backup' && git push);
+        """,
+    ],
+    icon_name="build",
+)
+
+cmd_button(
+    name="restore vault",
+    resource="vault",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            ts="$(date +%s)";
+            kubectl exec -i -n vault vault-0 -- mkdir -p /vault/data-${ts};
+            kubectl exec -i -n vault vault-0 -- mv /vault/data/{core,logical,sys} /vault/data-${ts}/;
+            (cd ~/.password-store && tar cfz - vault) | kubectl exec -i -n vault vault-0 -- tar xvfz - -C /;
+        """,
+    ],
+    icon_name="build",
+)
+
+cmd_button(
+    name="unseal vault",
+    resource="vault",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            kubectl exec -n vault -ti vault-0 -- vault operator unseal -reset;
+            pass Unseal_Key_1 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://vault.vault.svc:8200/v1/sys/unseal;
+            pass Unseal_Key_3 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://vault.vault.svc:8200/v1/sys/unseal;
+            pass Unseal_Key_5 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://vault.vault.svc:8200/v1/sys/unseal;
+            kubectl exec -n vault -ti vault-0 -- vault status;
+        """,
+    ],
+    icon_name="build",
+)
+
+# loft
+local_resource(
+    "loft",
+    cmd="""
+        set -x; cd;
+        if argocd --kube-context argocd app diff loft --local k/loft; then echo No difference; fi;
+    """,
+    deps=["k/loft"],
+    allow_parallel=True,
+    labels=["deploy"],
+)
+
+cmd_button(
+    name="ui loft",
+    text="loft",
+    resource="loft",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            xdg-open https://{domain}:9602;
+        """.format(
+            domain=dummy_host
+        ),
+    ],
+    location="nav",
+)
+
+cmd_button(
+    name="sync loft",
+    resource="loft",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            argocd --kube-context argocd app sync loft --local k/loft --assumeYes --prune;
+            touch k/loft/kustomization.yaml;
+        """,
+    ],
+    icon_name="build",
+)
+
+# vcluster
+for kname, vname in [
+    ("vc0", "vc0"),
+    ("vc1", "vc1"),
+]:
+    local_resource(
+        kname,
+        cmd="""
+            set -x; cd;
+            if argocd --kube-context argocd app diff {kname} --local k/{kname}; then echo No difference; fi;
+        """.format(
+            vname=vname, kname=kname
+        ),
+        deps=["k/" + kname],
+        allow_parallel=True,
+        labels=[vname],
+    )
+
+    cmd_button(
+        name="sync " + kname,
+        resource=kname,
+        argv=[
+            "bash",
+            "-c",
+            """
+                set -x; cd;
+                kubectl --context argocd apply -f k/{kname}-application.yaml;
+                argocd --kube-context argocd app sync {kname} --local k/{kname} --assumeYes --prune;
+                argocd --kube-context argocd app wait {kname};
+                while true; do if kubectl --context pod wait -n {vname} -l statefulset.kubernetes.io/pod-name={vname}-0 --for=condition=ContainersReady pod; then break; fi; sleep 1; done;
+                {vname} get ns;
+                ~/bin/e env KUBECONFIG=$KUBECONFIG_ALL argocd cluster add loft-vcluster_{vname}_{vname}_loft-cluster --name {vname} --yes;
+                while true; do if [[ "$(argocd cluster get {vname} --output json | jq -r '.name')" == "{vname}" ]]; then break; fi; sleep 1; done
+                touch k/{kname}/kustomization.yaml ;
+            """.format(
+                vname=vname, kname=kname
+            ),
+        ],
+        icon_name="build",
+    )
+
+    cmd_button(
+        name="delete " + kname,
+        resource=kname,
+        argv=[
+            "bash",
+            "-c",
+            """
+                set -x; cd;
+                argocd --kube-context argocd app delete --yes {kname};
+            """.format(
+                vname=vname, kname=kname
+            ),
+        ],
+        icon_name="build",
+    )
+
+    cmd_button(
+        name="sleep " + vname,
+        resource=vname,
+        argv=[
+            "bash",
+            "-c",
+            """
+                set -x; cd;
+                loft sleep --prevent-wakeup 0 {vname}
+            """.format(
+                vname=vname
+            ),
+        ],
+        icon_name="build",
+    )
+    cmd_button(
+        name="wakeup " + vname,
+        resource=vname,
+        argv=[
+            "bash",
+            "-c",
+            """
+                set -x; cd;
+                loft wakeup {vname}
+            """.format(
+                vname=vname
+            ),
+        ],
+        icon_name="build",
+    )
+
+# kuma
+cmd_button(
+    name="ui vc kuma",
+    text="kuma",
+    icon_name="rss_feed",
+    resource="vc0-kuma-global",
+    argv=[
+        "bash",
+        "-c",
+        """
+            set -x; cd;
+            xdg-open https://{domain}:9606/gui;
+        """.format(
+            domain=dummy_host
+        ),
+    ],
+    location="nav",
+)
+
+for kname, vname in [
+    ("vc0-kuma-global", "vc0"),
+    ("vc1-kuma-remote", "vc1"),
+]:
+    local_resource(
+        kname,
+        cmd="""
+            set -x; cd;
+            if argocd --kube-context argocd app diff {kname} --local k/{kname}; then echo No difference; fi
+        """.format(
+            vname=vname, kname=kname
+        ),
+        deps=["k/" + kname],
+        allow_parallel=True,
+        labels=[vname],
+    )
+
+    cmd_button(
+        name="sync " + kname,
+        resource=kname,
+        argv=[
+            "bash",
+            "-c",
+            """
+                set -x; cd;
+                {vname} get ns;
+                ~/bin/e env KUBECONFIG=$KUBECONFIG_ALL argocd cluster add loft-vcluster_{vname}_{vname}_loft-cluster --name {vname} --yes;
+                kubectl --context argocd apply -f k/{kname}-application.yaml;
+                argocd --kube-context argocd app sync {kname} --local k/{kname} --assumeYes --prune;
+                argocd --kube-context argocd app wait {kname};
+                touch k/{kname}/kustomization.yaml;
+            """.format(
+                vname=vname, kname=kname
+            ),
+        ],
+        icon_name="build",
+    )
+    cmd_button(
+        name="delete " + kname,
+        resource=kname,
+        argv=[
+            "bash",
+            "-c",
+            """
+                set -x; cd;
+                argocd --kube-context argocd app delete --yes {kname};
+            """.format(
+                vname=vname, kname=kname
+            ),
+        ],
+        icon_name="build",
+    )
