@@ -137,6 +137,7 @@ kind: Service
 metadata:
   name: wireguard
 spec:
+  type: LoadBalancer
   selector:
     app: dev
   ports:
