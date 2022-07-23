@@ -25,6 +25,18 @@ spec:
               mountPath: /var/run/docker.sock
             - name: work
               mountPath: /home/ubuntu/work
+        - name: vault-agent
+          image: k3d-registry:5000/defn/dev:latest
+          command: ["/usr/bin/tini", "--"]
+          args: ["vault", "agent", "-config", "etc/agent.hcl"]
+        - name: kuma-cp
+          image: k3d-registry:5000/defn/dev:latest
+          command: ["/usr/bin/tini", "--"]
+          args: ["make", "kumacp"]
+        - name: kuma-dp
+          image: k3d-registry:5000/defn/dev:latest
+          command: ["/usr/bin/tini", "--"]
+          args: ["make", "kumahello"]
         - name: buildkitd
           image: earthly/buildkitd:v0.6.19
           env:

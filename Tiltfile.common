@@ -21,33 +21,6 @@ local_resource(
     labels=["automation"],
 )
 
-# vault-agent
-local_resource(
-    name="vault-agent",
-    serve_cmd="""
-        set -x; cd;
-        vault agent -config etc/agent.hcl;
-    """,
-    allow_parallel=True,
-    deps=["hooks"],
-    labels=["automation"],
-)
-
-# kuma hybrid
-local_resource(
-    name="kuma-cp",
-    serve_cmd="exec make kumacp",
-    allow_parallel=True,
-    labels=["service-mesh"],
-)
-
-local_resource(
-    name="kuma-dp-hello",
-    serve_cmd="while true; do make kumahello; sleep 10; done",
-    allow_parallel=True,
-    labels=["service-mesh"],
-)
-
 # argocd
 local_resource(
     "argocd",
