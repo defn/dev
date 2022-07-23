@@ -4,6 +4,7 @@ cache ?= $(repo)
 push ?= --push
 dummy_ip ?= 169.254.32.1
 dummy_host ?= remocal.net
+workdir ?= /home/ubuntu
 
 trust-ca:
 	sudo security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-db etc/ca.crt
@@ -151,8 +152,8 @@ clean:
 	touch ~/.registry.txt
 
 attach:
-	code --folder-uri vscode-remote://k8s-container+context=k3d-k3s-default+namespace=default+podname=dev-0+name=dev+/home/ubuntu
-
+	code --folder-uri vscode-remote://k8s-container+context=k3d-k3s-default+namespace=default+podname=dev-0+name=dev+$(workdir)
+	-kubectl get events -w
 
 cluster:
 	git pull
