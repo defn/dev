@@ -156,6 +156,8 @@ cluster-inner:
 		--registry-use registry \
 		-p    "80:8000@server:0" \
 		-p   "443:9701@server:0" \
+		-p  "5681:5681@server:0" \
+		-p  "5685:5685@server:0" \
 		-p  "9440:9440@server:0" \
 		-p  "9441:9441@server:0" \
 		-p  "9442:9442@server:0" \
@@ -171,7 +173,6 @@ cluster-inner:
 		-p  "9607:9607@server:0" \
 		-p  "9608:9608@server:0" \
 		-p  "9609:9609@server:0" \
-		-p  "5685:5685@server:0" \
 		-p "10001:10001@server:0" \
 		-p "10002:10002@server:0" \
 		-p "10003:10003@server:0" \
@@ -181,6 +182,7 @@ cluster-inner:
 		-p "10007:10007@server:0" \
 		-p "10008:10008@server:0" \
 		-p "10009:10009@server:0" \
+		-p "51820:51820/udp@server:0" \
 		--k3s-arg "--disable=traefik@all"
 	docker exec k3d-k3s-default-server-0 touch /etc/passwd
 	kubectl apply -f k/dev/main.yaml
