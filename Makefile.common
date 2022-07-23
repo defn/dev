@@ -58,21 +58,17 @@ argocd-login:
 
 sync:
 	sudo chown ubuntu:ubuntu /var/run/docker.sock ~/work
+
 	cd ~/.password-store && (git crypt unlock || git status)
+
 	$(MAKE) kubeconfig
+
 	cd && $(MAKE) init-dev
 	$(MAKE) init-site
+
 	argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune
 	argocd --kube-context argocd app wait argocd
-	argocd --kube-context argocd app sync argo-events --local k/argo-events --assumeYes --prune
-	argocd --kube-context argocd app wait argo-events
-	argocd --kube-context argocd app sync argo-workflows --local k/argo-workflows --assumeYes --prune
-	argocd --kube-context argocd app wait argo-workflows
-	argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune
-	argocd --kube-context argocd app wait traefik
-	argocd --kube-context argocd app sync loft --local k/loft --assumeYes --prune
-	argocd --kube-context argocd app wait loft
-	kubectl --context pod apply -f k/admin.yaml
+
 	argocd --kube-context argocd app sync vault --local k/vault --assumeYes --prune
 	-while true; do if kubectl --context pod wait -n vault -l statefulset.kubernetes.io/pod-name=vault-0 --for=condition=Initialized pod; then break; fi; sleep 1; done
 	-while true; do if curl -s --max-time 5 --connect-timeout 2 http://vault.vault.svc:8200 | grep Redirect; then break; fi; sleep 1; done
@@ -80,9 +76,24 @@ sync:
 	-$(MAKE) vault-unseal
 	-while true; do if kubectl --context pod wait -n vault -l statefulset.kubernetes.io/pod-name=vault-0 --for=condition=Ready pod; then break; fi; sleep 1; done
 	argocd --kube-context argocd app wait vault
+
+	argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune
+	argocd --kube-context argocd app wait traefik
+
+	argocd --kube-context argocd app sync argo-workflows --local k/argo-workflows --assumeYes --prune
+	argocd --kube-context argocd app wait argo-workflows
+	
+	argocd --kube-context argocd app sync argo-events --local k/argo-events --assumeYes --prune
+	argocd --kube-context argocd app wait argo-events
+	
+	argocd --kube-context argocd app sync loft --local k/loft --assumeYes --prune
+	argocd --kube-context argocd app wait loft
+	kubectl --context pod apply -f k/admin.yaml
 	loft login https://loft.loft.svc.cluster.local --insecure --access-key admin
+
 	$(MAKE) vc0
 	$(MAKE) vc1
+
 	kubectl --context argocd apply -f k/sets.yaml
 	sleep 5
 	argocd --kube-context argocd app sync sets --local k/sets --assumeYes --prune
@@ -101,10 +112,15 @@ vc0 vc1:
 			vc0) \
 				argocd --kube-context argocd app sync vc0-kuma-global --local k/vc0-kuma-global --assumeYes --prune; \
 				argocd --kube-context argocd app wait vc0-kuma-global; \
+				argocd --kube-context argocd app wait vc0-demo; \
 				;; \
 			vc1) \
 				argocd --kube-context argocd app sync vc1-kuma-remote --local k/vc1-kuma-remote --assumeYes --prune; \
 				argocd --kube-context argocd app wait vc1-kuma-remote; \
+				argocd --kube-context argocd app wait vc1-knative; \
+				argocd --kube-context argocd app wait vc1-kourier; \
+				argocd --kube-context argocd app wait vc1-kong; \
+				argocd --kube-context argocd app wait vc1-demo; \
 				;; \
 		esac; \
 	done
