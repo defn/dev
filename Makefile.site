@@ -26,6 +26,7 @@ restart-docker: # Restart Docker Desktop
 	-osascript -e 'quit app "Docker"'
 	open -a Docker
 	while ! docker ps; do date; sleep 5; done
+	#$(MAKE) dummy-docker
 
 restart-cluster: # Restart k3d
 	-k3d cluster stop

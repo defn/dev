@@ -9,9 +9,11 @@ trust-ca:
 	sudo security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-db etc/ca.crt
 
 dummy:
+	for ip in $(dummy_ip); do if ! ifconfig lo0 | grep "inet $$ip"; then sudo ifconfig lo0 alias "$$ip" netmask 255.255.255.255; fi; done;
+
+dummy-docker:
 	docker run --rm -i --privileged --network=host --pid=host alpine nsenter -t 1 -m -u -n -i -- \
 		bash -c "ip link add dummy0 type dummy; ip addr add $(dummy_ip)/32 dev dummy0; ip link set dev dummy0 up"
-	for ip in $(dummy_ip); do if ! ifconfig lo0 | grep "inet $$ip"; then sudo ifconfig lo0 alias "$$ip" netmask 255.255.255.255; fi; done;
 
 cache:
 	-docker rm -f earthly-buildkitd
