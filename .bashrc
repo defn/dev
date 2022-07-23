@@ -50,7 +50,7 @@ export DISPLAY=1
 export KUBECONFIG_ALL="$HOME/.kube/config:$HOME/.kube/vc0.conf:$HOME/.kube/config:$HOME/.kube/vc1.conf:$HOME/.kube/vc2.conf:$HOME/.kube/vc3.conf:$HOME/.kube/vc4.conf:$HOME/.kube/vc5.conf:$HOME/.kube/config"
 
 # vscode
-if [[ -n "${VSCODE_GIT_IPC_HANDLE=:-}" ]]; then
+if [[ -n "${VSCODE_GIT_IPC_HANDLE:-}" ]]; then
 	export VISUAL="code --wait"
 
 	if [[ ! -S "${SSH_AUTH_SOCK:-}" ]]; then
