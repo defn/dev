@@ -3,6 +3,11 @@ include Makefile.common
 init-site:
 	@true
 
+import:
+	docker pull defn/dev
+	docker tag defn/dev localhost:5000/defn/dev
+	docker push localhost:5000/defn/dev
+
 reset: # Reset cluster
 	-k3d cluster delete
 	-docker rm -f ignore
