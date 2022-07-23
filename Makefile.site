@@ -68,10 +68,10 @@ update-arm-inner:
 	earthly --remote-cache=$(cache)defn/cache:updates $(push) +arm64-update --repo=$(repo) --repo_from=$(repo_from)
 
 push-amd:
-	$(MAKE) updates-amd repo= repo_from=k3d-registry:5000/ cache=k3d-registry:5000/
+	$(MAKE) update-amd repo= repo_from=k3d-registry:5000/ cache=k3d-registry:5000/
 
 push-arm:
-	$(MAKE) updates-arm repo= repo_from=k3d-registry:5000/ cache=k3d-registry:5000/
+	$(MAKE) update-arm repo= repo_from=k3d-registry:5000/ cache=k3d-registry:5000/
 
 shell:
 	docker run --rm -ti $(repo)defn/dev bash -l
