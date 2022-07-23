@@ -8,7 +8,8 @@ helmCharts:
   repo: https://charts.konghq.com
   valuesInline:
     admin:
-      tls: {}
+      tls:
+        parameters: []
     portalapi:
       enabled: false
     portal:
