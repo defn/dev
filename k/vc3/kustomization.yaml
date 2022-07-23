@@ -1,5 +1,0 @@
-namespace: vc3
-
-resources:
-- main.yaml
-- ingress.yaml

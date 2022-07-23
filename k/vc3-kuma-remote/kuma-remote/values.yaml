@@ -1,8 +1,0 @@
-controlPlane:
-  mode: zone
-  zone: vc3
-  kdsGlobalAddress: grpcs://169.254.32.1:5685
-ingress:
-  enabled: true
-  service:
-    port: 10003
