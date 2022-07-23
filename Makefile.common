@@ -135,16 +135,6 @@ clean:
 attach:
 	code --folder-uri vscode-remote://k8s-container+context=k3d-k3s-default+namespace=default+podname=dev-0+name=dev+/home/ubuntu
 
-reset:
-	-k3d cluster delete
-	-docker rm -f ignore
-	$(MAKE) reboot-docker
-	$(MAKE) cluster
-
-reboot-docker:
-	-osascript -e 'quit app "Docker"'
-	open -a Docker
-	while ! docker ps; do date; sleep 5; done
 
 cluster:
 	git pull

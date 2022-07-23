@@ -3,7 +3,13 @@ include Makefile.common
 init-site:
 	@true
 
-restart:
+reset: # Reset cluster
+	-k3d cluster delete
+	-docker rm -f ignore
+	$(MAKE) restart-docker
+	$(MAKE) cluster
+
+restart: # Restart everything
 	git pull
 	$(MAKE) restart-inner
 
@@ -16,16 +22,24 @@ restart-inner:
 	while true; do if kubectl rollout status statefulset dev --watch; then break; fi; sleep 5; done
 	$(MAKE) attach
 
-restart-cluster:
+restart-docker: # Restart Docker Desktop
+	-osascript -e 'quit app "Docker"'
+	open -a Docker
+	while ! docker ps; do date; sleep 5; done
+
+restart-cluster: # Restart k3d
 	-k3d cluster stop
 	-k3d cluster start
 	while true; do if kubectl rollout status statefulset dev --watch; then break; fi; sleep 5; done
 	$(MAKE) attach
 
-recreate:
+recreate: # Recreate pod
 	kubectl delete pod/dev-0
 	while true; do if kubectl rollout status statefulset dev --watch; then break; fi; sleep 5; done
 	$(MAKE) attach
+
+stop: # Stop k3d
+	k3d cluster stop
 
 images amd arm:
 	git push
