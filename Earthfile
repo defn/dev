@@ -50,7 +50,8 @@ root:
         gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 libolm-dev \
         xdg-utils figlet lolcat socat netcat-openbsd groff \
         screen htop \
-        redis
+        redis \
+        wireguard-tools
 
     RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null \
         && curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.tailscale-keyring.list | tee /etc/apt/sources.list.d/tailscale.list \
