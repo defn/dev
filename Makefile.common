@@ -1,4 +1,4 @@
-repo ?= k3d-registry:5000/
+t put show HEADrepo ?= k3d-registry:5000/
 repo_from ?= $(repo)
 cache ?= $(repo)
 push ?= --push
@@ -187,6 +187,9 @@ cluster-inner:
 	docker exec k3d-k3s-default-server-0 touch /etc/passwd
 	kubectl apply -f k/dev/main.yaml
 	while true; do if kubectl rollout status statefulset dev --watch; then break; fi; sleep 5; done
+
+vault-backup:
+	kubectl exec -n vault vault-0 -- tar cfz - /vault/data | (cd ~/.password-store && tar xvfz - && git add vault && git add -u vault && git commit -m 'vault backup' && git push)
 
 vault-restore:
 	(cd ~/.password-store && tar cfz - vault) | kubectl --context pod exec -i -n vault vault-0 -- tar xvfz - -C /;
