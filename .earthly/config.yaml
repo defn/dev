@@ -2,4 +2,5 @@ global:
   disable_analytics: true
   disable_log_sharing: true
   buildkit_host: tcp://dev-0:8372
+  buildkit_max_parallelism: 1
   secret_provider: earthly-secret-provider
