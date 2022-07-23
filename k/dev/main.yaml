@@ -80,8 +80,8 @@ spec:
             privileged: true
         - name: wireguard
           image: k3d-registry:5000/defn/dev:latest
-          args: ["tail", "-f", "/dev/null"]
           command: ["/usr/bin/tini", "--"]
+          args: ["bash", "-c", "wg-quick up /home/ubuntu/wg0.conf; exec tail -f /dev/null"]
           ports:
           - containerPort: 51820
             hostPort: 51820
