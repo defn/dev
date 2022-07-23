@@ -143,6 +143,7 @@ cluster:
 	$(MAKE) cluster-inner
 
 cluster-inner:
+	$(MAKE) dummy
 	-k3d cluster delete
 	k3d cluster create --config k3d.yaml \
 		--registry-use registry \
