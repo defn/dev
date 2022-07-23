@@ -50,7 +50,6 @@ patchesStrategicMerge:
           - --entrypoints.https9609.address=:9609/tcp
           - --entrypoints.https9700.address=:9700/tcp
           - --entrypoints.https9701.address=:9701/tcp
-          - --entrypoints.wg51820.address=:51820/udp
           - --entrypoints.web.http.redirections.entryPoint.to=:443
           - --entrypoints.web.http.redirections.entryPoint.scheme=https
           - --providers.kubernetescrd.allowexternalnameservices=true
@@ -99,9 +98,6 @@ patchesStrategicMerge:
           - containerPort: 9701
             name: https9701
             protocol: TCP
-          - containerPort: 51820
-            name: wg51820
-            protocol: UDP
 - |-
   apiVersion: v1
   kind: List
@@ -175,7 +171,3 @@ patchesStrategicMerge:
           port: 9701
           protocol: TCP
           targetPort: https9701
-        - name: wg51820
-          port: 51820
-          protocol: UDP
-          targetPort: wg51820
