@@ -175,6 +175,7 @@ tower:
     ARG BUF
     ARG GRPCURL
     ARG KN
+    ARG K3SUP
 
     FROM +root --arch=${arch}
 
@@ -215,6 +216,7 @@ tower:
     COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch} --version=${ARGOCD}) ./
     COPY --chown=ubuntu:ubuntu --dir (+buf/* --arch=${arch} --version=${BUF}) ./
     COPY --chown=ubuntu:ubuntu --dir (+grpcurl/* --arch=${arch} --version=${GRPCURL}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+k3sup/* --arch=${arch} --version=${K3SUP}) ./
 
     COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch} --version=${CDKTF} --version_nodejs=${NODEJS}) ./
 
@@ -588,8 +590,9 @@ helm:
 
 k3sup:
     ARG arch
+    ARG version
     FROM +asdf --arch=${arch}
-    RUN --secret K3SUP echo k3sup ${K3SUP} >> .tool-versions
+    RUN echo k3sup ${version} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add k3sup'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
