@@ -30,15 +30,11 @@ build {
   provisioner "shell" {
     scripts = var.scripts1
   }
-}
-
-provisioner "file" {
-  source = "/home/ubuntu/work/password-store"
-  destination = "/mnt/work"
-}
-
-build {
-  sources = ["source.digitalocean.this"]
+  
+  provisioner "file" {
+    source = "/home/ubuntu/work/password-store"
+    destination = "/mnt/work"
+  }
 
   provisioner "shell" {
     scripts = var.scripts2
