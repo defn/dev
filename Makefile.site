@@ -11,12 +11,6 @@ import:
 	docker rmi defn/dev
 	docker rmi localhost:5000/defn/dev
 
-reset: # Reset cluster
-	-k3d cluster delete $(k3d_name)
-	-docker rm -f ignore
-	$(MAKE) restart-docker
-	$(MAKE) cluster
-
 restart: # Restart everything
 	git pull
 	$(MAKE) restart-inner
@@ -42,7 +36,18 @@ restart-cluster: # Restart k3d
 	while true; do if kubectl rollout status statefulset dev --watch; then break; fi; sleep 5; done
 	$(MAKE) attach
 
-recreate: # Recreate pod
+recreate: # Recreate k3d (restarts Docker)
+	-k3d cluster delete $(k3d_name)
+	-docker rm -f ignore
+	$(MAKE) restart-docker
+	$(MAKE) cluster
+
+recreate-cluster: # Recreate k3d
+	-k3d cluster delete $(k3d_name)
+	-docker rm -f ignore
+	$(MAKE) cluster
+
+recreate-pod: # Recreate pod
 	kubectl delete pod/dev-0
 	while true; do if kubectl rollout status statefulset dev --watch; then break; fi; sleep 5; done
 	$(MAKE) attach
