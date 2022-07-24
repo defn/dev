@@ -187,7 +187,6 @@ cmd_button(
         "-c",
         """
             set -x; cd;
-            pass Initial_Root_Token | ssh super pbcopy;
             xdg-open https://{domain}:8200/ui;
         """.format(
             domain=dummy_host
