@@ -13,6 +13,9 @@ volumes:
   - volume: earthly:/mnt/earthly
     nodeFilters:
       - server:0
+  - volume: tools:/mnt/tools
+    nodeFilters:
+      - server:0
 options:
   k3d:
     wait: true
