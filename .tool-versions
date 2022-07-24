@@ -3,6 +3,7 @@ argocd 2.4.7
 aws-vault 6.6.0
 buf 1.6.0
 cloudflared 2022.7.1
+doctl 1.78.0
 golang 1.18.4
 grpcurl 1.8.6
 helm 3.9.2

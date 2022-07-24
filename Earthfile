@@ -177,6 +177,7 @@ tower:
     ARG KN
     ARG K3SUP
     ARG PACKER
+    ARG DOCTL
 
     FROM +root --arch=${arch}
 
@@ -219,6 +220,7 @@ tower:
     COPY --chown=ubuntu:ubuntu --dir (+grpcurl/* --arch=${arch} --version=${GRPCURL}) ./
     COPY --chown=ubuntu:ubuntu --dir (+k3sup/* --arch=${arch} --version=${K3SUP}) ./
     COPY --chown=ubuntu:ubuntu --dir (+packer/* --arch=${arch} --version=${PACKER}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+doctl/* --arch=${arch} --version=${DOCTL}) ./
 
     COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch} --version=${CDKTF} --version_nodejs=${NODEJS}) ./
 
@@ -724,8 +726,9 @@ cdktf:
 
 doctl:
     ARG arch
+    ARG version
     FROM +asdf --arch=${arch}
-    RUN --secret DOCTL echo doctl ${DOCTL} >> .tool-versions
+    RUN echo doctl ${version} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add doctl'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
