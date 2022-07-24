@@ -30,8 +30,8 @@ function main {
   git commit -m 'digital ocean droplet changes'
   make registry
   make import
-  make cluster
-  k3d delete default
+  k3d cluster create
+  k3d cluster delete
 }
 
 main "$@"
