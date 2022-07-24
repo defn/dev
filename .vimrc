@@ -1,6 +1,5 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 
 call plug#end()
@@ -67,5 +66,3 @@ set noswapfile
 set autowrite
 
 set guioptions=
-
-colorscheme onedark

@@ -65,3 +65,4 @@ node_modules
 .dogrc
 .commit
 .kuma
+.cloud-locale-test.skip
