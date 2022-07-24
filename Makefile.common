@@ -5,6 +5,7 @@ push ?= --push
 dummy_ip ?= 169.254.32.1
 dummy_host ?= remocal.net
 workdir ?= /home/ubuntu
+tilt_port ?= 10350
 
 trust-ca:
 	sudo security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-db etc/ca.crt
@@ -43,7 +44,7 @@ init:
 	$(MAKE) init-inner
 
 init-inner:
-	tilt up --context pod
+	tilt up --context pod --port $(tilt_port)
 
 init-dev:
 	-kubectl --context pod create namespace argocd
