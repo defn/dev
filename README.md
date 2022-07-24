@@ -56,3 +56,5 @@ k --context pod patch -n traefik secret default-certificate --type='json' -p='[{
 
 # digital ocean
 sudo apt install --install-recommends linux-generic-hwe-20.04 docker.io
+sudo apt update
+sudo apt upgrade -y
