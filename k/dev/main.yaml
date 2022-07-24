@@ -53,13 +53,6 @@ spec:
           volumeMounts:
             - name: scratch
               mountPath: /scratch
-        - name: kuma-dp
-          image: k3d-registry:5000/defn/dev:latest
-          command: ["/usr/bin/tini", "--"]
-          args: ["make", "kumahello"]
-          volumeMounts:
-            - name: scratch
-              mountPath: /scratch
         - name: buildkitd
           image: earthly/buildkitd:v0.6.19
           env:
