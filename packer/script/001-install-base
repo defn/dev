@@ -52,6 +52,7 @@ function main {
   groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
   usermod --groups docker --append ubuntu
   install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
+  echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu
 }
 
 main "$@"
