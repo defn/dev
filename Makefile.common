@@ -154,6 +154,9 @@ attach:
 	code --folder-uri vscode-remote://k8s-container+context=k3d-k3s-default+namespace=default+podname=dev-0+name=dev+$(workdir)
 	-kubectl get events -w
 
+attach-remo:
+	code --folder-uri vscode-remote://k8s-container+context=remo+namespace=default+podname=dev-0+name=dev+$(workdir)
+
 cluster:
 	git pull
 	$(MAKE) cluster-inner

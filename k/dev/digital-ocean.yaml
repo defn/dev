@@ -1,0 +1,124 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: dev
+spec:
+  selector:
+    matchLabels:
+      app: dev
+  serviceName: dev
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dev
+    spec:
+      terminationGracePeriodSeconds: 10
+      initContainers:
+        - name: sysctls
+          image: busybox
+          command:
+          - sh
+          - -c
+          - sysctl -w net.ipv4.ip_forward=1 && sysctl -w net.ipv4.conf.all.forwarding=1
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+            privileged: true
+      containers:
+        - name: dev
+          image: defn/dev:latest
+          imagePullPolicy: Always
+          command: ["/usr/bin/tini", "--"]
+          args: ["tail", "-f", "/dev/null"]
+          volumeMounts:
+            - name: scratch
+              mountPath: /scratch
+            - name: docker-sock
+              mountPath: /var/run/docker.sock
+            - name: work
+              mountPath: /home/ubuntu/work
+        - name: vault-agent
+          image: defn/dev:latest
+          command: ["/usr/bin/tini", "--"]
+          args: ["/home/ubuntu/bin/e", "vault", "agent", "-config", "etc/agent.hcl"]
+          volumeMounts:
+            - name: scratch
+              mountPath: /scratch
+        - name: kuma-cp
+          image: defn/dev:latest
+          command: ["/usr/bin/tini", "--"]
+          args: ["make", "kumacp"]
+          volumeMounts:
+            - name: scratch
+              mountPath: /scratch
+        - name: kuma-dp
+          image: defn/dev:latest
+          command: ["/usr/bin/tini", "--"]
+          args: ["make", "kumahello"]
+          volumeMounts:
+            - name: scratch
+              mountPath: /scratch
+        - name: buildkitd
+          image: earthly/buildkitd:v0.6.19
+          env:
+            - name: BUILDKIT_TCP_TRANSPORT_ENABLED
+              value: "true"
+            - name: EARTHLY_ADDITIONAL_BUILDKIT_CONFIG
+              value: |
+                [registry."k3d-registry:5000"]
+                  http = true
+                  insecure = true
+          volumeMounts:
+            - name: scratch
+              mountPath: /scratch
+            - name: earthly
+              mountPath: /tmp/earthly
+          tty: true
+          securityContext:
+            privileged: true
+        - name: wireguard
+          image: defn/dev:latest
+          command: ["/usr/bin/tini", "--"]
+          args: ["bash", "-c", "wg-quick up /home/ubuntu/wg0.conf; exec tail -f /dev/null"]
+          ports:
+          - containerPort: 51820
+            hostPort: 51820
+            protocol: UDP
+            name: wireguard
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+            privileged: true
+          volumeMounts:
+            - name: scratch
+              mountPath: /scratch
+      volumes:
+        - name: docker-sock
+          hostPath:
+            path: /var/run/docker.sock
+        - name: work
+          hostPath:
+            path: /mnt/work
+        - name: earthly
+          hostPath:
+            path: /mnt/earthly
+        - name: scratch
+          hostPath:
+            path: /mnt/scratch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: dev
+subjects:
+  - kind: ServiceAccount
+    namespace: default
+    name: default
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+
