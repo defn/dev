@@ -1,9 +1,15 @@
-variable "scripts" {
+variable "scripts1" {
   type = list(string)
   default = [
     "script/000-install-bare",
     "script/001-install-base",
-    "script/800-disable-resolved",
+    "script/800-disable-resolved"
+  ]
+}
+
+variable "scripts2" {
+  type = list(string)
+  default = [
     "script/990-defn-dev",
     "script/999-update"
   ]
@@ -22,6 +28,19 @@ build {
   sources = ["source.digitalocean.this"]
 
   provisioner "shell" {
-    scripts = var.scripts
+    scripts = var.scripts1
+  }
+}
+
+provisioner "file" {
+  source = "/home/ubuntu/work/password-store"
+  destination = "/mnt/work"
+}
+
+build {
+  sources = ["source.digitalocean.this"]
+
+  provisioner "shell" {
+    scripts = var.scripts2
   }
 }
