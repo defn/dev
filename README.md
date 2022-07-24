@@ -71,3 +71,20 @@ tailscale ip -4
 sudo apt upgrade -y
 
 sudo usermod -a -G docker ubuntu
+
+sudo apt install -y make
+
+git clone git@github.com:defn/dev home
+mv home/.git .
+rm -rf home
+git reset --hard
+git submodule update --init
+source .bashrc
+asdf plugin-add k3d
+echo k3d 5.4.4 >> .tool-versions
+asdf install k3d
+
+rm -f .ssh/authorized_keys
+echo ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDqGiNI0Co9JAKytfce4UVhEJj+HMaoZ7TFiLg8SBeRDxV+OLma9rqDVkVqrxW5rkGMco3/Xhm/uGu+rkODJD/aZD/1fpzEsNUQIKhP9VXlVx98CMYOMCXTrgXZGdNPs0CzIb0TDI3W1tOGAA0VOZL+DGb/pUFiWeADLA9GiA8qnhahQp6yCNf8zpt3ATawSOGDLttB+PQPvwwUGMozihCcn84Kbf2Q0aQEl5J0kPLQTgBTJ1pPjTqBmkBWhP1KKAEDz3ziUmFF2eoZax7B+VXYlI6nPeETqFWkke6/EVLRqOXC4nYXKUbX2HloiEGkv4ifzzuGyS2Tdiysx0dthVcv > .ssh/authorized_keys
+
+make registry
