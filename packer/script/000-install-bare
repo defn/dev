@@ -5,9 +5,12 @@ function main {
 Dpkg::Options {
    "--force-confdef";
    "--force-confold";
-}
+};
+
+DPkg::Lock::Timeout "-1";
 EOF
 
+  apt purge --auto-remove -y unattended-upgrades
 }
 
 main "$@"

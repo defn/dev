@@ -42,8 +42,8 @@ function main {
   mkdir -p /etc/systemd/network
   pushd /etc/systemd/network
   for a in 1; do 
-    (echo [NetDev]; echo Name=dummy$$a; echo Kind=dummy) | tee dummy$$a.netdev
-    (echo [Match]; echo Name=dummy$$a; echo; echo [Network]; echo Address=169.254.32.$$a/32) | tee dummy$$a.network
+    (echo [NetDev]; echo Name=dummy$a; echo Kind=dummy) | tee dummy$a.netdev
+    (echo [Match]; echo Name=dummy$a; echo; echo [Network]; echo Address=169.254.32.$a/32) | tee dummy$a.network
 
   done
   groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu

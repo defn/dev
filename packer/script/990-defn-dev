@@ -13,6 +13,9 @@ function main {
   mv home/.git .
   rm -rf home
   git reset --hard
+  git subodule update --init
+  source .bashrc
+  asdf install
 }
 
 main "$@"
