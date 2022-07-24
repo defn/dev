@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+function main {
+  if ! [[ "$(whoami)" == "ubuntu" ]]; then
+    exec sudo -H -i -u ubuntu "$0" "$@"
+    return $?
+  fi
+
+  set -exfu
+
+  ssh -o StrictHostKeyChecking=no git@github.com true || true
+  git clone https://github.com/defn/dev home
+  mv home/.git .
+  rm -rf home
+  git reset --hard
+}
+
+main "$@"
