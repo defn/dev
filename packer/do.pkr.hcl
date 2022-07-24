@@ -3,7 +3,6 @@ variable "scripts" {
   default = [
     "script/000-install-bare",
     "script/001-install-base",
-    "script/002-install-do-agent",
     "script/201-install-tailscale",
     "script/800-disable-resolved",
     "script/990-defn-dev",
