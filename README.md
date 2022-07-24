@@ -89,4 +89,9 @@ asdf install kubectl
 rm -f .ssh/authorized_keys
 echo ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDqGiNI0Co9JAKytfce4UVhEJj+HMaoZ7TFiLg8SBeRDxV+OLma9rqDVkVqrxW5rkGMco3/Xhm/uGu+rkODJD/aZD/1fpzEsNUQIKhP9VXlVx98CMYOMCXTrgXZGdNPs0CzIb0TDI3W1tOGAA0VOZL+DGb/pUFiWeADLA9GiA8qnhahQp6yCNf8zpt3ATawSOGDLttB+PQPvwwUGMozihCcn84Kbf2Q0aQEl5J0kPLQTgBTJ1pPjTqBmkBWhP1KKAEDz3ziUmFF2eoZax7B+VXYlI6nPeETqFWkke6/EVLRqOXC4nYXKUbX2HloiEGkv4ifzzuGyS2Tdiysx0dthVcv > .ssh/authorized_keys
 
-make registry
+make import
+make cluster name=remo
+
+export DOCKER_HOST=ssh://ubuntu@100.77.35.92
+k3d kubeconfig merge -a -d
+kubectl config set-cluster k3d-k3s-default --insecure-skip-tls-verify
