@@ -3,12 +3,11 @@ function gs {
 }
 
 function vi {
-	if [[ ! -f "${1:-}" ]]; then
-		echo "ERROR: file $1 not found" 1>&2
-		return 1
-	fi
-
 	if [[ -n "${VSCODE_GIT_IPC_HANDLE:-}" ]]; then
+		if [[ ! -f "${1:-}" ]]; then
+			echo "ERROR: file $1 not found" 1>&2
+			return 1
+		fi
 		command code "$@"
 	else
 		command vi "$@"
