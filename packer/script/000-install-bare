@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 function main {
+  set -exfu
+
   cat << EOF | sudo tee /etc/apt/apt.conf.d/local
 Dpkg::Options {
    "--force-confdef";
