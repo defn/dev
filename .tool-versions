@@ -12,6 +12,7 @@ krew 0.4.3
 kubectl 1.24.3
 kustomize 4.5.5
 nodejs 16.16.0
+packer 1.8.2
 python 3.10.5
 shellcheck 0.8.0
 shfmt 3.5.1
