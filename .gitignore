@@ -39,6 +39,7 @@ node_modules
 .config/gcloud
 .config/argocd
 .config/gomuks
+.config/packer
 .loft
 .lesshst
 .fly
