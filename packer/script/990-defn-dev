@@ -8,6 +8,7 @@ function main {
 
   set -exfu
 
+  sudo chown -R ubuntu:ubuntu /mnt
   cd /mnt/work/password-store && git crypt lock
 
   ssh -o StrictHostKeyChecking=no git@github.com true || true
