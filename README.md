@@ -55,6 +55,8 @@ k --context pod patch -n traefik secret default-certificate --type='json' -p='[{
 k --context pod patch -n traefik secret default-certificate --type='json' -p='[{"op" : "replace" ,"path" : "/data/tls.crt" ,"value" : "'$(cat meh.json | jq -r '.certificate | @base64')'"}]'
 
 # digital ocean
+echo ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDqGiNI0Co9JAKytfce4UVhEJj+HMaoZ7TFiLg8SBeRDxV+OLma9rqDVkVqrxW5rkGMco3/Xhm/uGu+rkODJD/aZD/1fpzEsNUQIKhP9VXlVx98CMYOMCXTrgXZGdNPs0CzIb0TDI3W1tOGAA0VOZL+DGb/pUFiWeADLA9GiA8qnhahQp6yCNf8zpt3ATawSOGDLttB+PQPvwwUGMozihCcn84Kbf2Q0aQEl5J0kPLQTgBTJ1pPjTqBmkBWhP1KKAEDz3ziUmFF2eoZax7B+VXYlI6nPeETqFWkke6/EVLRqOXC4nYXKUbX2HloiEGkv4ifzzuGyS2Tdiysx0dthVcv > .ssh/authorized_keys
+
 sudo apt install --install-recommends linux-generic-hwe-20.04 docker.io
 
 curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null
