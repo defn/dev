@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# bin/k3s-cluster 100.114.183.10 100.114.183.10 100.114.183.10 ubuntu remo remo.remocal.net 10.201.0.0/16 10.101.0.0/16
+# bin/k3s-cluster 100.114.183.10 100.114.183.10 100.114.183.10 ubuntu remo 10.201.0.0/16 10.101.0.0/16
 
 function main {
   set -exfu
@@ -10,7 +10,6 @@ function main {
   local server_ip_pub="$1"; shift
   local server_username="$1"; shift
   local server_context="$1"; shift
-  local server_fqdn="$1"; shift
   local cluster_cidr="$1"; shift
   local service_cidr="$1"; shift
 
@@ -19,9 +18,9 @@ function main {
   kubectl config unset contexts.${server_context} || true
 
   k3sup install --k3s-channel v1.24 --cluster --ip ${server_ip_prv} --user ${server_username} --merge --context ${server_context} --local-path ~/.kube/config --k3s-extra-args \
-    "--disable traefik --node-ip=${server_ip_ts} --node-external-ip=${server_ip_ts} --advertise-address=${server_ip_ts} --cluster-cidr ${cluster_cidr} --service-cidr ${service_cidr} --tls-san ${server_fqdn}/" || true
+    "--disable traefik --node-ip=${server_ip_ts} --node-external-ip=${server_ip_ts} --advertise-address=${server_ip_ts} --cluster-cidr ${cluster_cidr} --service-cidr ${service_cidr}" || true
   k3sup install --skip-install --ip ${server_ip_prv} --user ${server_username} --merge --context ${server_context} --local-path ~/.kube/config 
-  #kubectl config set-cluster ${server_context} --server=https://${server_fqdn}:6443
+  k3sup install --skip-install --ip ${server_ip_prv} --user ${server_username} --merge --context ${server_context} --local-path ~/.kube/${server_context}
 }
 
 main "$@"
