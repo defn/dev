@@ -4,6 +4,8 @@ init-site:
 	@true
 
 import:
+	$(MAKE) dummy
+	$(MAKE) registry
 	docker pull defn/dev
 	docker tag defn/dev localhost:5000/defn/dev
 	docker push localhost:5000/defn/dev
