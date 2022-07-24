@@ -200,7 +200,7 @@ cluster-inner:
 		-p "51820:51820/udp@server:0" \
 		--k3s-arg "--disable=traefik@all"
 	docker update --restart=no k3d-k3s-$(k3d_name)-server-0
-	docker exec k3d-k3s-$(k3d_name)-server-0 touch /etc/passwd
+	while true; do if docker exec k3d-k3s-$(k3d_name)-server-0 touch /etc/passwd; then break; fi; sleep 1; done
 	kubectl apply -f k/dev/main.yaml
 	while true; do if kubectl rollout status statefulset dev --watch; then break; fi; sleep 5; done
 
