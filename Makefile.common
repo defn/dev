@@ -93,7 +93,6 @@ sync:
 	loft login https://loft.loft.svc.cluster.local --insecure --access-key admin
 
 	$(MAKE) vc0
-	$(MAKE) vc1
 
 	kubectl --context argocd apply -f k/sets.yaml
 	sleep 5
