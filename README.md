@@ -95,3 +95,4 @@ make cluster name=remo
 export DOCKER_HOST=ssh://ubuntu@100.77.35.92
 k3d kubeconfig merge -a -d
 kubectl config set-cluster k3d-k3s-default --insecure-skip-tls-verify
+# replace 0.0.0.0 with tailscale IP
