@@ -12,7 +12,7 @@ import:
 	docker rmi localhost:5000/defn/dev
 
 reset: # Reset cluster
-	-k3d cluster delete
+	-k3d cluster delete $(k3d_name)
 	-docker rm -f ignore
 	$(MAKE) restart-docker
 	$(MAKE) cluster
@@ -22,11 +22,11 @@ restart: # Restart everything
 	$(MAKE) restart-inner
 
 restart-inner:
-	k3d cluster stop
+	k3d cluster stop $(k3d_name)
 	-osascript -e 'quit app "Docker"'
 	open -a Docker
 	while ! docker ps; do date; sleep 5; done
-	k3d cluster start
+	k3d cluster start $(k3d_name)
 	while true; do if kubectl rollout status statefulset dev --watch; then break; fi; sleep 5; done
 	$(MAKE) attach
 
@@ -37,8 +37,8 @@ restart-docker: # Restart Docker Desktop
 	#$(MAKE) dummy-docker
 
 restart-cluster: # Restart k3d
-	-k3d cluster stop
-	-k3d cluster start
+	-k3d cluster stop $(k3d_name)
+	-k3d cluster start $(k3d_name)
 	while true; do if kubectl rollout status statefulset dev --watch; then break; fi; sleep 5; done
 	$(MAKE) attach
 
@@ -48,7 +48,7 @@ recreate: # Recreate pod
 	$(MAKE) attach
 
 stop: # Stop k3d
-	k3d cluster stop
+	k3d cluster stop $(k3d_name)
 
 image-amd image-arm:
 	git push
