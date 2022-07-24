@@ -46,6 +46,9 @@ function main {
     (echo [Match]; echo Name=dummy$a; echo; echo [Network]; echo Address=169.254.32.$a/32) | tee dummy$a.network
 
   done
+  systemctl restart systemd-networkd
+  ip a
+
   groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
   usermod --groups docker --append ubuntu
   install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu

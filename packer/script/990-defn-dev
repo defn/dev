@@ -13,9 +13,14 @@ function main {
   mv home/.git .
   rm -rf home
   git reset --hard
-  git subodule update --init
+  git submodule update --init
+  set +x
   source .bashrc
-  asdf install
+  echo k3d 5.4.4 >> .tool-versions
+  for a in $(cat .tool-versions | grep -v python | awk '{print $1}' ); do asdf plugin-add $a; asdf install $a; done
+  set -x
+  make registry
+  make import
 }
 
 main "$@"
