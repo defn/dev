@@ -127,7 +127,7 @@ resource "digitalocean_volume_attachment" "dev" {
   droplet_id = digitalocean_droplet.dev[each.key].id
   volume_id  = digitalocean_volume.dev[each.key].id
 
-  provisioner "" {
+  provisioner "file" {
     source = "/home/ubuntu/.password-store/"
     destination = "/mnt/work/password-store"
   }
