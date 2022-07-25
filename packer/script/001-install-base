@@ -19,6 +19,8 @@ function main {
       wireguard-tools \
       linux-generic-hwe-20.04 
 
+  apt-get purge -y nano
+
   curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null \
       && curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.tailscale-keyring.list | tee /etc/apt/sources.list.d/tailscale.list \
       && apt-get update \
