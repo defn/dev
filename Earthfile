@@ -194,7 +194,6 @@ tower:
     COPY --chown=ubuntu:ubuntu (+loft/* --arch=${arch} --version=${LOFT}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+gh/* --arch=${arch} --version=${GH}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+earthly/* --arch=${arch} --version=${EARTHLY}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+k3d/* --arch=${arch} --version=${K3D}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+cue/* --arch=${arch} --version=${CUE}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+difft/* --arch=${arch} --version=${CUE}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+jless/* --arch=${arch} --version=${CUE}) /usr/local/bin/
@@ -221,6 +220,7 @@ tower:
     COPY --chown=ubuntu:ubuntu --dir (+k3sup/* --arch=${arch} --version=${K3SUP}) ./
     COPY --chown=ubuntu:ubuntu --dir (+packer/* --arch=${arch} --version=${PACKER}) ./
     COPY --chown=ubuntu:ubuntu --dir (+doctl/* --arch=${arch} --version=${DOCTL}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+k3d/* --arch=${arch} --version=${K3S}) ./
 
     COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch} --version=${CDKTF} --version_nodejs=${NODEJS}) ./
 
@@ -481,7 +481,7 @@ kn:
     RUN curl -sSL -o kn https://github.com/knative/client/releases/download/knative-v${version}/kn-linux-${arch} && chmod 755 kn 
     SAVE ARTIFACT kn
 
-k3d:
+k3d-download:
     ARG arch
     ARG version
     FROM +tools --arch=${arch}
@@ -607,6 +607,15 @@ packer:
     FROM +asdf --arch=${arch}
     RUN echo packer ${version} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add packer'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
+    SAVE ARTIFACT .asdf
+
+k3d:
+    ARG arch
+    ARG version
+    FROM +asdf --arch=${arch}
+    RUN echo k3d ${version} >> .tool-versions
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add k3d'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
