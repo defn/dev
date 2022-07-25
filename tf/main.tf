@@ -136,7 +136,7 @@ resource "digitalocean_volume_attachment" "dev" {
     }
 
     source      = "${var.home}/.password-store/"
-    destination = "/mnt/work/password-store/"
+    destination = "/mnt/work/password-store"
   }
 
   provisioner "remote-exec" {
