@@ -98,4 +98,5 @@ provision-digital-ocean:
 	@git fetch origin
 	@git branch --set-upstream-to origin/main
 	@sudo apt purge -y nano
+	$(MAKE) cluster
 

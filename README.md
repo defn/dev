@@ -54,46 +54,5 @@ v write pki/issue/gyre.defn.dev common_name="remocal.net" ip_sans="169.254.32.1"
 k --context pod patch -n traefik secret default-certificate --type='json' -p='[{"op" : "replace" ,"path" : "/data/tls.key" ,"value" : "'$(cat meh.json | jq -r '.private_key | @base64')'"}]'
 k --context pod patch -n traefik secret default-certificate --type='json' -p='[{"op" : "replace" ,"path" : "/data/tls.crt" ,"value" : "'$(cat meh.json | jq -r '.certificate | @base64')'"}]'
 
-# digital ocean
-echo ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDqGiNI0Co9JAKytfce4UVhEJj+HMaoZ7TFiLg8SBeRDxV+OLma9rqDVkVqrxW5rkGMco3/Xhm/uGu+rkODJD/aZD/1fpzEsNUQIKhP9VXlVx98CMYOMCXTrgXZGdNPs0CzIb0TDI3W1tOGAA0VOZL+DGb/pUFiWeADLA9GiA8qnhahQp6yCNf8zpt3ATawSOGDLttB+PQPvwwUGMozihCcn84Kbf2Q0aQEl5J0kPLQTgBTJ1pPjTqBmkBWhP1KKAEDz3ziUmFF2eoZax7B+VXYlI6nPeETqFWkke6/EVLRqOXC4nYXKUbX2HloiEGkv4ifzzuGyS2Tdiysx0dthVcv > .ssh/authorized_keys
-
-sudo apt install --install-recommends linux-generic-hwe-20.04 docker.io
-
-curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null
-curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.tailscale-keyring.list | sudo tee /etc/apt/sources.list.d/tailscale.list
-sudo apt-get update
-sudo apt-get install -y tailscale
-
-sudo tailscale up
-
-tailscale ip -4
-
-sudo apt upgrade -y
-
-sudo usermod -a -G docker ubuntu
-
-sudo apt install -y make
-
-git clone git@github.com:defn/dev home
-mv home/.git .
-rm -rf home
-git reset --hard
-git submodule update --init
-source .bashrc
-asdf plugin-add kubectl
-asdf plugin-add k3d
-echo k3d 5.4.4 >> .tool-versions
-asdf install k3d
-asdf install kubectl
-
-rm -f .ssh/authorized_keys
-echo ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDqGiNI0Co9JAKytfce4UVhEJj+HMaoZ7TFiLg8SBeRDxV+OLma9rqDVkVqrxW5rkGMco3/Xhm/uGu+rkODJD/aZD/1fpzEsNUQIKhP9VXlVx98CMYOMCXTrgXZGdNPs0CzIb0TDI3W1tOGAA0VOZL+DGb/pUFiWeADLA9GiA8qnhahQp6yCNf8zpt3ATawSOGDLttB+PQPvwwUGMozihCcn84Kbf2Q0aQEl5J0kPLQTgBTJ1pPjTqBmkBWhP1KKAEDz3ziUmFF2eoZax7B+VXYlI6nPeETqFWkke6/EVLRqOXC4nYXKUbX2HloiEGkv4ifzzuGyS2Tdiysx0dthVcv > .ssh/authorized_keys
-
-# tailscale up: get ip
-# get name
-# get tilt port
 (ip=147.182.232.156; ssh -oStrictHostKeyChecking=no ubuntu@$ip true; env DOCKER_HOST=ssh://ubuntu@$ip k3d kubeconfig merge -a -d)
-kubectl config set-cluster k3d-default --insecure-skip-tls-verify --server https://100.69.36.56:36813
-# ensure /home/ubuntu/work/password-store is directory
-kubectl cp ~/.password-store/ dev-0:work/password-store
 code --folder-uri vscode-remote://k8s-container+context=k3d-default+namespace=default+podname=dev-0+name=dev+/home/ubuntu

@@ -139,4 +139,8 @@ resource "digitalocean_volume_attachment" "dev" {
       "set -x; cd && git fetch && git reset --hard origin/main && make provision-digital-ocean"
     ]
   }
+
+  provisioner "local-exec" {
+    command = "env DOCKER_HOST=ssh://ubuntu@${digitalocean_droplet.defn[each.key].ipv4_address} k3d kubeconfig merge -a -d"
+  }
 }

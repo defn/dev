@@ -9,6 +9,8 @@ locals {
   name   = "remo"
   region = "sfo3"
 
+  tailscale_domain = "tiger-mamba.ts.net"
+
   droplet = {
     "defn" = {
       droplet_size = "s-4vcpu-8gb-amd"
