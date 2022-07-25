@@ -65,8 +65,7 @@ resource "digitalocean_firewall" "dev" {
     port_range = "6443"
     protocol   = "tcp"
     source_addresses = [
-      "0.0.0.0/0",
-      "::/0",
+      "96.78.173.0/24"
     ]
   }
 
