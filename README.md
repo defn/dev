@@ -48,7 +48,7 @@ vault agent -config agent.hcl
 
 kubectl --context pod patch -n vc1 service kourier-internal-x-kourier-system-x-vc1 -p '{"metadata":{"annotations":{"traefik.ingress.kubernetes.io/service.serversscheme":"h2c"}}}'
 
-v write pki/roles/gyre.defn.dev allowed_domains=gyre.defn.dev,demo.svc.cluster.local,sslip.io,net allow_subdomains=true max_ttl=120h
+v write pki/roles/gyre.defn.dev allowed_domains=gyre.defn.dev,demo.svc.cluster.local,sslip.io,net,tiger-mamba.ts.net allow_subdomains=true max_ttl=120h
 
 v write pki/issue/gyre.defn.dev common_name="remocal.net" ip_sans="169.254.32.1" alt_names="hello.demo.svc.cluster.local,169-254-32-1.sslip.io" tl=120h -format=json | jq .data > meh.json
 k --context pod patch -n traefik secret default-certificate --type='json' -p='[{"op" : "replace" ,"path" : "/data/tls.key" ,"value" : "'$(cat meh.json | jq -r '.private_key | @base64')'"}]'
