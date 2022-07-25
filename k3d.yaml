@@ -3,8 +3,8 @@ kind: Simple
 servers: 1
 agents: 0
 kubeAPI:
-  host: "myhost.my.domain"
-  hostIP: "0.0.0.0"
+  host: "${DEFN_DEV_HOST}"
+  hostIP: "${DEFN_DEV_IP}"
   hostPort: "6443"
 image: rancher/k3s:v1.24.3-k3s1
 volumes:
