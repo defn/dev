@@ -91,4 +91,6 @@ echo ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDqGiNI0Co9JAKytfce4UVhEJj+HMaoZ7TFiLg
 
 (ip=147.182.232.156; ssh -oStrictHostKeyChecking=no ubuntu@$ip true; env DOCKER_HOST=ssh://ubuntu@$ip k3d kubeconfig merge -a -d)
 kubectl config set-cluster k3d-default --insecure-skip-tls-verify --server https://100.69.36.56:36813
+# ensure /home/ubuntu/work/password-store is directory
+kubectl cp ~/.password-store/ dev-0:work/password-store
 code --folder-uri vscode-remote://k8s-container+context=k3d-default+namespace=default+podname=dev-0+name=dev+/home/ubuntu
