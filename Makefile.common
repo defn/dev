@@ -94,6 +94,7 @@ sync:
 	loft login https://loft.loft.svc.cluster.local --insecure --access-key admin
 
 	$(MAKE) vc0
+	$(MAKE) vc1
 
 	kubectl --context argocd apply -f k/sets.yaml
 	sleep 5
@@ -102,8 +103,7 @@ sync:
 
 vc0 vc1:
 	set -x; for v in "$@"; do \
-		argocd --kube-context argocd app sync "$$v" --local "k/$$v" --assumeYes --prune; \
-		while true; do if kubectl --context pod wait -n "$$v" -l statefulset.kubernetes.io/pod-name="$$v"-0 --for=condition=Ready pod; then break; fi; sleep 1; done; \
+		while true; do if kubectl --context pod wait -n "$$v" -l statefulset.kubernetes.io/pod-name="$$v"-0 --for=condition=Ready pod; then break; fi; argocd --kube-context argocd app sync "$$v" --local "k/$$v" --assumeYes --prune; sleep 1; done; \
 		argocd --kube-context argocd app wait "$$v"; \
 		"$$v" get ns; \
 		~/bin/e env KUBECONFIG=$$KUBECONFIG_ALL argocd cluster add --upsert "loft-vcluster_$${v}_$${v}_loft-cluster" --name "$$v" --yes; \
@@ -113,14 +113,19 @@ vc0 vc1:
 			vc0) \
 				argocd --kube-context argocd app sync vc0-kuma-global --local k/vc0-kuma-global --assumeYes --prune; \
 				argocd --kube-context argocd app wait vc0-kuma-global; \
+				argocd --kube-context argocd app sync vc0-demo --local k/vc0-demo --assumeYes --prune; \
 				argocd --kube-context argocd app wait vc0-demo; \
 				;; \
 			vc1) \
 				argocd --kube-context argocd app sync vc1-kuma-remote --local k/vc1-kuma-remote --assumeYes --prune; \
 				argocd --kube-context argocd app wait vc1-kuma-remote; \
+				argocd --kube-context argocd app sync vc1-knative --local k/vc1-knative --assumeYes --prune; \
 				argocd --kube-context argocd app wait vc1-knative; \
+				argocd --kube-context argocd app sync vc1-kourier --local k/vc1-kourier --assumeYes --prune; \
 				argocd --kube-context argocd app wait vc1-kourier; \
+				argocd --kube-context argocd app sync vc1-kong --local k/vc1-kong --assumeYes --prune; \
 				argocd --kube-context argocd app wait vc1-kong; \
+				argocd --kube-context argocd app sync vc1-demo --local k/vc1-demo --assumeYes --prune; \
 				argocd --kube-context argocd app wait vc1-demo; \
 				;; \
 		esac; \

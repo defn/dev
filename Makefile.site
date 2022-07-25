@@ -57,7 +57,7 @@ stop: # Stop k3d
 
 image-amd image-arm:
 	git push
-	if [[ -d work/dev ]]; then cd work/dev && git pull && $(MAKE) $@-inner; else $(MAKE) $@-inner; fi
+	if [[ "$(shell pwd)" == "$(HOME)" ]]; then cd work/dev && git pull && $(MAKE) $@-inner; else $(MAKE) $@-inner; fi
 
 image-amd-inner:
 	earthly --remote-cache=$(cache)defn/cache:images $(push) +amd64 --repo=$(repo)
@@ -67,7 +67,7 @@ image-arm-inner:
 
 update-amd update-arm:
 	git push
-	if [[ -d work/dev ]]; then cd work/dev && git pull && $(MAKE) $@-inner; else $(MAKE) $@-inner; fi
+	if [[ "$(shell pwd)" == "$(HOME)" ]]; then cd work/dev && git pull && $(MAKE) $@-inner; else $(MAKE) $@-inner; fi
 
 update-amd-inner:
 	earthly --remote-cache=$(cache)defn/cache:updates $(push) +amd64-update --repo=$(repo) --repo_from=$(repo_from)
@@ -87,7 +87,7 @@ shell:
 cert:
 	touch meh.json; chmod 0600 meh.json
 	-k --context pod create -n traefik secret generic default-certificate --from-file=meh.json
-	v write pki/issue/gyre.defn.dev common_name="remocal.net" ip_sans="169.254.32.1" alt_names="hello.demo.svc.cluster.local,169-254-32-1.sslip.io" tl=120h -format=json | jq .data > meh.json
+	v write pki/issue/gyre.defn.dev common_name="remo-defn.tiger-mamba.ts.net" ip_sans="169.254.32.1" alt_names="hello.demo.svc.cluster.local" tl=120h -format=json | jq .data > meh.json
 	k --context pod patch -n traefik secret default-certificate --type='json' -p='[{"op" : "replace" ,"path" : "/data/tls.key" ,"value" : "'$$(cat meh.json | jq -r '.private_key | @base64')'"}]'
 	k --context pod patch -n traefik secret default-certificate --type='json' -p='[{"op" : "replace" ,"path" : "/data/tls.crt" ,"value" : "'$$(cat meh.json | jq -r '.certificate | @base64')'"}]'
 	rm -f meh.json
@@ -99,4 +99,5 @@ provision-digital-ocean:
 	@git branch --set-upstream-to origin/main
 	@sudo apt purge -y nano
 	$(MAKE) cluster
+	docker cp ~/.password-store/ k3d-$(k3d_name)-server-0:/mnt/work/password-store
 

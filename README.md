@@ -44,15 +44,6 @@ vault auth enable kubernetes
 vault write auth/kubernetes/config kubernetes_host=https://kubernetes.default.svc.cluster.local
 vault write auth/kubernetes/role/demo bound_service_account_names=default bound_service_account_namespaces=default policies=gyre.defn.dev ttl=1h
 
-vault agent -config agent.hcl
-
 kubectl --context pod patch -n vc1 service kourier-internal-x-kourier-system-x-vc1 -p '{"metadata":{"annotations":{"traefik.ingress.kubernetes.io/service.serversscheme":"h2c"}}}'
 
-v write pki/roles/gyre.defn.dev allowed_domains=gyre.defn.dev,demo.svc.cluster.local,sslip.io,net allow_subdomains=true max_ttl=120h
-
-v write pki/issue/gyre.defn.dev common_name="remocal.net" ip_sans="169.254.32.1" alt_names="hello.demo.svc.cluster.local,169-254-32-1.sslip.io" tl=120h -format=json | jq .data > meh.json
-k --context pod patch -n traefik secret default-certificate --type='json' -p='[{"op" : "replace" ,"path" : "/data/tls.key" ,"value" : "'$(cat meh.json | jq -r '.private_key | @base64')'"}]'
-k --context pod patch -n traefik secret default-certificate --type='json' -p='[{"op" : "replace" ,"path" : "/data/tls.crt" ,"value" : "'$(cat meh.json | jq -r '.certificate | @base64')'"}]'
-
-(ip=147.182.232.156; ssh -oStrictHostKeyChecking=no ubuntu@$ip true; env DOCKER_HOST=ssh://ubuntu@$ip k3d kubeconfig merge -a -d)
-code --folder-uri vscode-remote://k8s-container+context=k3d-default+namespace=default+podname=dev-0+name=dev+/home/ubuntu
+v write pki/roles/gyre.defn.dev allowed_domains=demo.svc.cluster.local,tiger-mamba.ts.net allow_subdomains=true max_ttl=120h
