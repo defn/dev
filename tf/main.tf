@@ -120,12 +120,12 @@ resource "digitalocean_volume_attachment" "dev" {
     connection {
       type  = "ssh"
       agent = true
-      user  = "app"
+      user  = "ubuntu"
       host  = digitalocean_droplet.dev[each.key].ipv4_address
     }
 
     inline = [
-      "set -x; cd && git fetch && git reset --hard origin/main"
+      "set -x; cd && git fetch && git reset --hard origin/main && make provision-digital-ocean"
     ]
   }
 

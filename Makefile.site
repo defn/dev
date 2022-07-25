@@ -91,3 +91,6 @@ cert:
 	k --context pod patch -n traefik secret default-certificate --type='json' -p='[{"op" : "replace" ,"path" : "/data/tls.key" ,"value" : "'$$(cat meh.json | jq -r '.private_key | @base64')'"}]'
 	k --context pod patch -n traefik secret default-certificate --type='json' -p='[{"op" : "replace" ,"path" : "/data/tls.crt" ,"value" : "'$$(cat meh.json | jq -r '.certificate | @base64')'"}]'
 	rm -f meh.json
+
+provision-digital-ocean:
+	@true
