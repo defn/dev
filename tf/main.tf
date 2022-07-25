@@ -126,6 +126,19 @@ resource "digitalocean_volume_attachment" "dev" {
   droplet_id = digitalocean_droplet.dev[each.key].id
   volume_id  = digitalocean_volume.dev[each.key].id
 
+  provisioner "remote-exec" {
+    connection {
+      type  = "ssh"
+      agent = true
+      user  = "root"
+      host  = digitalocean_droplet.dev[each.key].ipv4_address
+    }
+
+    inline = [
+      "mkdir -p /mnt/work/password-store"
+    ]
+  }
+
   provisioner "file" {
     connection {
       type  = "ssh"
