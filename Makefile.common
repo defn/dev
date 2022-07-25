@@ -3,7 +3,6 @@ repo_from ?= $(repo)
 cache ?= $(repo)
 push ?= --push
 dummy_ip ?= 169.254.32.1
-dummy_host ?= remocal.net
 workdir ?= /home/ubuntu
 tilt_port ?= 10350
 k3d_name ?= default
@@ -45,8 +44,7 @@ init:
 	$(MAKE) init-inner
 
 init-inner:
-	if [[ -x "$$(type -P tailscale)" ]]; then if tailscale ip 2>&1 | grep NeedsLogin; then sudo tailscale up; fi; fi
-	echo env DEFN_DEV_HOST="$$(uname -n).tiger-mamba.ts.net" DEFN_DEV_IP="$$(tailscale ip -4)" tilt up --context pod --port $(tilt_port)
+	env DEFN_DEV_HOST="remo-defn.tiger-mamba.ts.net" tilt up --context pod --port $(tilt_port)
 
 init-dev:
 	-kubectl --context pod create namespace argocd
@@ -167,7 +165,9 @@ cluster:
 cluster-inner:
 	$(MAKE) registry
 	-k3d cluster delete $(k3d_name)
-	k3d cluster create $(k3d_name) \
+	if [[ -x "$$(type -P tailscale)" ]]; then if tailscale ip 2>&1 | grep NeedsLogin; then sudo tailscale up; fi; fi
+	env DEFN_DEV_HOST="$$(uname -n).tiger-mamba.ts.net" DEFN_DEV_IP="$$(tailscale ip -4)" \
+		k3d cluster create $(k3d_name) \
 		--config k3d.yaml \
 		--registry-use registry \
 		-p    "80:8000@server:0" \
