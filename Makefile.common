@@ -5,7 +5,7 @@ push ?= --push
 dummy_ip ?= 169.254.32.1
 workdir ?= /home/ubuntu
 tilt_port ?= 10350
-k3d_name ?= $(uname -n)
+k3d_name ?= $(shell uname -n)
 
 trust-ca:
 	sudo security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-db etc/ca.crt
@@ -164,10 +164,9 @@ cluster:
 
 cluster-inner:
 	$(MAKE) registry
-	echo $(k3d_name) $(uname -n); sleep 60
 	-k3d cluster delete $(k3d_name)
 	if [[ -x "$$(type -P tailscale)" ]]; then if tailscale ip 2>&1 | grep NeedsLogin; then sudo tailscale up; fi; fi
-	env DEFN_DEV_HOST="$(k3d_name).tiger-mamba.ts.net" DEFN_DEV_IP="$$(tailscale ip -4)" \
+	env DEFN_DEV_HOST="$(k3d_name).tiger-mamba.ts.net" DEFN_DEV_IP="$$(shell tailscale ip -4)" \
 		k3d cluster create $(k3d_name) \
 		--config k3d.yaml \
 		--registry-use registry \
