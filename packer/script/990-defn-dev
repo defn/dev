@@ -17,17 +17,10 @@ function main {
   set +x
   source .bashrc
   ln -nfs /mnt/work .
-  rm .ssh/authorized_keys
-  echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDqGiNI0Co9JAKytfce4UVhEJj+HMaoZ7TFiLg8SBeRDxV+OLma9rqDVkVqrxW5rkGMco3/Xhm/uGu+rkODJD/aZD/1fpzEsNUQIKhP9VXlVx98CMYOMCXTrgXZGdNPs0CzIb0TDI3W1tOGAA0VOZL+DGb/pUFiWeADLA9GiA8qnhahQp6yCNf8zpt3ATawSOGDLttB+PQPvwwUGMozihCcn84Kbf2Q0aQEl5J0kPLQTgBTJ1pPjTqBmkBWhP1KKAEDz3ziUmFF2eoZax7B+VXYlI6nPeETqFWkke6/EVLRqOXC4nYXKUbX2HloiEGkv4ifzzuGyS2Tdiysx0dthVcv cardno:8 624 146
-' > .ssh/authorized_keys
   for a in $(cat .tool-versions | grep -v python | awk '{print $1}' ); do asdf plugin-add $a; asdf install $a; done
   set -x
-  git add -u .
-  git commit -m 'digital ocean droplet changes'
   make registry
   make import
-  make cluster
-  make stop
 }
 
 main "$@"
