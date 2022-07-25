@@ -102,8 +102,7 @@ sync:
 
 vc0 vc1:
 	set -x; for v in "$@"; do \
-		argocd --kube-context argocd app sync "$$v" --local "k/$$v" --assumeYes --prune; \
-		while true; do if kubectl --context pod wait -n "$$v" -l statefulset.kubernetes.io/pod-name="$$v"-0 --for=condition=Ready pod; then break; fi; sleep 1; done; \
+		while true; do if kubectl --context pod wait -n "$$v" -l statefulset.kubernetes.io/pod-name="$$v"-0 --for=condition=Ready pod; then break; fi; argocd --kube-context argocd app sync "$$v" --local "k/$$v" --assumeYes --prune; sleep 1; done; \
 		argocd --kube-context argocd app wait "$$v"; \
 		"$$v" get ns; \
 		~/bin/e env KUBECONFIG=$$KUBECONFIG_ALL argocd cluster add --upsert "loft-vcluster_$${v}_$${v}_loft-cluster" --name "$$v" --yes; \
