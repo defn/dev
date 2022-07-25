@@ -4,10 +4,6 @@ data "digitalocean_ssh_key" "default" {
   name = "yubikey"
 }
 
-data "digitalocean_vpc" "region" {
-  name = "default-${local.region}"
-}
-
 data "digitalocean_droplet_snapshot" "dev" {
   name_regex  = "^defn-dev"
   region      = local.region
@@ -62,29 +58,6 @@ resource "digitalocean_firewall" "dev" {
     ]
   }
 
-  inbound_rule {
-    port_range = "all"
-    protocol   = "tcp"
-    source_addresses = [
-      data.digitalocean_vpc.region.ip_range
-    ]
-  }
-
-  inbound_rule {
-    port_range = "all"
-    protocol   = "udp"
-    source_addresses = [
-      data.digitalocean_vpc.region.ip_range
-    ]
-  }
-
-  inbound_rule {
-    protocol = "icmp"
-    source_addresses = [
-      data.digitalocean_vpc.region.ip_range
-    ]
-  }
-
   outbound_rule {
     destination_addresses = [
       "0.0.0.0/0",
@@ -116,7 +89,7 @@ resource "digitalocean_volume" "dev" {
   for_each = local.volume
 
   region                  = local.region
-  name                    = "${local.name}-${each.key}-01"
+  name                    = "${local.name}-${each.key}"
   size                    = each.value.volume_size
   initial_filesystem_type = "ext4"
 }
@@ -148,12 +121,11 @@ resource "digitalocean_volume_attachment" "dev" {
 resource "digitalocean_droplet" "dev" {
   for_each = local.want == 0 ? {} : local.droplet
 
-  image              = data.digitalocean_droplet_snapshot.dev.id
-  name               = "${each.key}.${local.name}"
-  region             = local.region
-  size               = each.value.droplet_size
-  ipv6               = true
-  private_networking = true
+  image  = data.digitalocean_droplet_snapshot.dev.id
+  name   = "${each.key}.${local.name}"
+  region = local.region
+  size   = each.value.droplet_size
+  ipv6   = true
 
   ssh_keys = [data.digitalocean_ssh_key.default.id]
 
