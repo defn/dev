@@ -112,14 +112,19 @@ vc0 vc1:
 			vc0) \
 				argocd --kube-context argocd app sync vc0-kuma-global --local k/vc0-kuma-global --assumeYes --prune; \
 				argocd --kube-context argocd app wait vc0-kuma-global; \
+				argocd --kube-context argocd app sync vc0-demo --local k/vc0-demo --assumeYes --prune; \
 				argocd --kube-context argocd app wait vc0-demo; \
 				;; \
 			vc1) \
 				argocd --kube-context argocd app sync vc1-kuma-remote --local k/vc1-kuma-remote --assumeYes --prune; \
 				argocd --kube-context argocd app wait vc1-kuma-remote; \
+				argocd --kube-context argocd app sync vc1-knative --local k/vc1-knative --assumeYes --prune; \
 				argocd --kube-context argocd app wait vc1-knative; \
+				argocd --kube-context argocd app sync vc1-kourier --local k/vc1-kourier --assumeYes --prune; \
 				argocd --kube-context argocd app wait vc1-kourier; \
+				argocd --kube-context argocd app sync vc1-kong --local k/vc1-kong --assumeYes --prune; \
 				argocd --kube-context argocd app wait vc1-kong; \
+				argocd --kube-context argocd app sync vc1-demo --local k/vc1-demo --assumeYes --prune; \
 				argocd --kube-context argocd app wait vc1-demo; \
 				;; \
 		esac; \
