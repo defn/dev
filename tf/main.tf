@@ -1,3 +1,13 @@
+terraform {
+  cloud {
+    organization = "defn"
+
+    workspaces {
+      name = "dev"
+    }
+  }
+}
+
 provider "digitalocean" {}
 
 data "digitalocean_ssh_key" "default" {

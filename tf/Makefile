@@ -1,5 +1,8 @@
 SHELL := /bin/bash
 
+# export DIGITALOCEAN_ACCESS_TOKEN="$(pass DIGITALOCEAN_ACCESS_TOKEN)
+# export TF_TOKEN_app_terraform_io="$(pass TF_TOKEN_app_terraform_io)"
+
 test:
 	$(MAKE) fmt
 	$(MAKE) validate
