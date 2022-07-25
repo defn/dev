@@ -57,7 +57,7 @@ stop: # Stop k3d
 
 image-amd image-arm:
 	git push
-	if [[ -d work/dev ]]; then cd work/dev && git pull && $(MAKE) $@-inner; else $(MAKE) $@-inner; fi
+	if [[ "$(shell pwd)" == "$(HOME)" ]]; then cd work/dev && git pull && $(MAKE) $@-inner; else $(MAKE) $@-inner; fi
 
 image-amd-inner:
 	earthly --remote-cache=$(cache)defn/cache:images $(push) +amd64 --repo=$(repo)
@@ -67,7 +67,7 @@ image-arm-inner:
 
 update-amd update-arm:
 	git push
-	if [[ -d work/dev ]]; then cd work/dev && git pull && $(MAKE) $@-inner; else $(MAKE) $@-inner; fi
+	if [[ "$(shell pwd)" == "$(HOME)" ]]; then cd work/dev && git pull && $(MAKE) $@-inner; else $(MAKE) $@-inner; fi
 
 update-amd-inner:
 	earthly --remote-cache=$(cache)defn/cache:updates $(push) +amd64-update --repo=$(repo) --repo_from=$(repo_from)
