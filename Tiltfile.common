@@ -1,5 +1,4 @@
-dummy_host = "remocal.net"
-dummy_ip = "169.254.32.1"
+dummy_host = os.environ.get("DEFN_DEV_HOST", "remocal.net")
 
 analytics_settings(False)
 
