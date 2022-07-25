@@ -25,6 +25,14 @@ options:
     wait: true
     timeout: 360s
     disableLoadbalancer: false
+  k3s:
+    extraArgs:
+      - arg: --tls-san=${DEFN_DEV_HOST}
+        nodeFilters:
+          - server:0
+      - arg: --tls-san=${DEFN_DEV_IP}
+        nodeFilters:
+          - server:0
   kubeconfig:
     updateDefaultKubeconfig: true
     switchCurrentContext: true
