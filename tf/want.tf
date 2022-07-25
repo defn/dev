@@ -3,6 +3,11 @@ variable "want" {
   default = null
 }
 
+variable "home" {
+  type    = string
+  default = null
+}
+
 locals {
   want = coalesce(var.want, 1)
 

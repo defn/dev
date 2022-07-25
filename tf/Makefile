@@ -23,7 +23,7 @@ validate:
 	terraform validate
 
 plan:
-	terraform plan -out=.plan
+	env TF_VAR_home=$(HOME) terraform plan -out=.plan
 
 planned:
 	terraform show .plan

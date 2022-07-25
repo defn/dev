@@ -135,7 +135,7 @@ resource "digitalocean_volume_attachment" "dev" {
       host  = digitalocean_droplet.dev[each.key].ipv4_address
     }
 
-    source = "/home/ubuntu/.password-store/"
+    source      = "${var.home}/.password-store/"
     destination = "/mnt/work/password-store/"
   }
 
