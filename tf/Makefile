@@ -22,6 +22,9 @@ validate:
 plan:
 	terraform plan -out=.plan
 
+planned:
+	terraform show .plan
+
 apply:
 	terraform apply .plan
 	rm -f .plan
@@ -40,6 +43,3 @@ zero:
 
 plan-zero:
 	env TF_VAR_want=0 $(MAKE) plan
-
-apply-zero:
-	$(MAKE) apply
