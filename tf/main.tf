@@ -94,6 +94,22 @@ resource "digitalocean_volume" "dev" {
   initial_filesystem_type = "ext4"
 }
 
+resource "digitalocean_droplet" "dev" {
+  for_each = local.want == 0 ? {} : local.droplet
+
+  image  = data.digitalocean_droplet_snapshot.dev.id
+  name   = "${local.name}-${each.key}"
+  region = local.region
+  size   = each.value.droplet_size
+  ipv6   = true
+
+  ssh_keys = [data.digitalocean_ssh_key.default.id]
+
+  lifecycle {
+    ignore_changes = [image]
+  }
+}
+
 resource "digitalocean_volume_attachment" "dev" {
   for_each = local.want == 0 ? {} : local.droplet
 
@@ -115,21 +131,5 @@ resource "digitalocean_volume_attachment" "dev" {
 
   provisioner "local-exec" {
     command = "ssh -o IdentityFile=/dev/null -o StrictHostKeyChecking=no root@${digitalocean_droplet.dev[each.key].ipv4_address} reboot || true"
-  }
-}
-
-resource "digitalocean_droplet" "dev" {
-  for_each = local.want == 0 ? {} : local.droplet
-
-  image  = data.digitalocean_droplet_snapshot.dev.id
-  name   = "${each.key}.${local.name}"
-  region = local.region
-  size   = each.value.droplet_size
-  ipv6   = true
-
-  ssh_keys = [data.digitalocean_ssh_key.default.id]
-
-  lifecycle {
-    ignore_changes = [image]
   }
 }
