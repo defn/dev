@@ -139,8 +139,4 @@ resource "digitalocean_volume_attachment" "dev" {
       "set -x; cd && git fetch && git reset --hard origin/main && make provision-digital-ocean"
     ]
   }
-
-  provisioner "local-exec" {
-    command = "ssh -o IdentityFile=/dev/null -o StrictHostKeyChecking=no root@${digitalocean_droplet.dev[each.key].ipv4_address} reboot || true"
-  }
 }
