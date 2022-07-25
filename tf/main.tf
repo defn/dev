@@ -147,7 +147,7 @@ resource "digitalocean_volume_attachment" "dev" {
     }
 
     inline = [
-      "set -x; chown -R ubuntu:ubuntu /mnt"
+      "set -x; chown -R ubuntu:ubuntu /mnt; cd /mnt/work/password-store && git crypt lock"
     ]
   }
 
