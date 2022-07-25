@@ -89,6 +89,9 @@ asdf install kubectl
 rm -f .ssh/authorized_keys
 echo ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDqGiNI0Co9JAKytfce4UVhEJj+HMaoZ7TFiLg8SBeRDxV+OLma9rqDVkVqrxW5rkGMco3/Xhm/uGu+rkODJD/aZD/1fpzEsNUQIKhP9VXlVx98CMYOMCXTrgXZGdNPs0CzIb0TDI3W1tOGAA0VOZL+DGb/pUFiWeADLA9GiA8qnhahQp6yCNf8zpt3ATawSOGDLttB+PQPvwwUGMozihCcn84Kbf2Q0aQEl5J0kPLQTgBTJ1pPjTqBmkBWhP1KKAEDz3ziUmFF2eoZax7B+VXYlI6nPeETqFWkke6/EVLRqOXC4nYXKUbX2HloiEGkv4ifzzuGyS2Tdiysx0dthVcv > .ssh/authorized_keys
 
+# tailscale up: get ip
+# get name
+# get tilt port
 (ip=147.182.232.156; ssh -oStrictHostKeyChecking=no ubuntu@$ip true; env DOCKER_HOST=ssh://ubuntu@$ip k3d kubeconfig merge -a -d)
 kubectl config set-cluster k3d-default --insecure-skip-tls-verify --server https://100.69.36.56:36813
 # ensure /home/ubuntu/work/password-store is directory
