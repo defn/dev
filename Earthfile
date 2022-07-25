@@ -220,7 +220,7 @@ tower:
     COPY --chown=ubuntu:ubuntu --dir (+k3sup/* --arch=${arch} --version=${K3SUP}) ./
     COPY --chown=ubuntu:ubuntu --dir (+packer/* --arch=${arch} --version=${PACKER}) ./
     COPY --chown=ubuntu:ubuntu --dir (+doctl/* --arch=${arch} --version=${DOCTL}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+k3d/* --arch=${arch} --version=${K3S}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+k3d/* --arch=${arch} --version=${K3D}) ./
 
     COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch} --version=${CDKTF} --version_nodejs=${NODEJS}) ./
 
