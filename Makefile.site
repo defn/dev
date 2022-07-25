@@ -97,4 +97,5 @@ provision-digital-ocean:
 	@git remote add origin git@github.com:defn/dev
 	@git fetch origin
 	@git branch --set-upstream-to origin/main
+	@sudo apt purge -y nano
 
