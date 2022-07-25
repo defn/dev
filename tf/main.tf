@@ -1,3 +1,13 @@
+terraform {
+  cloud {
+    organization = "defn"
+
+    workspaces {
+      name = "dev"
+    }
+  }
+}
+
 provider "digitalocean" {}
 
 data "digitalocean_ssh_key" "default" {
@@ -55,8 +65,7 @@ resource "digitalocean_firewall" "dev" {
     port_range = "6443"
     protocol   = "tcp"
     source_addresses = [
-      "0.0.0.0/0",
-      "::/0",
+      "96.78.173.0/24"
     ]
   }
 
@@ -129,9 +138,5 @@ resource "digitalocean_volume_attachment" "dev" {
     inline = [
       "set -x; cd && git fetch && git reset --hard origin/main && make provision-digital-ocean"
     ]
-  }
-
-  provisioner "local-exec" {
-    command = "ssh -o IdentityFile=/dev/null -o StrictHostKeyChecking=no root@${digitalocean_droplet.dev[each.key].ipv4_address} reboot || true"
   }
 }
