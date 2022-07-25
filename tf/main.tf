@@ -166,6 +166,10 @@ resource "digitalocean_volume_attachment" "dev" {
   }
 
   provisioner "local-exec" {
+    command = "ssh -o StrictHostKeyChecking=no ubuntu@${digitalocean_droplet.dev[each.key].ipv4_address} true"
+  }
+
+  provisioner "local-exec" {
     command = "env DOCKER_HOST=ssh://ubuntu@${digitalocean_droplet.dev[each.key].ipv4_address} k3d kubeconfig merge -a -d"
   }
 }
