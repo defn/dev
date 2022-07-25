@@ -128,8 +128,15 @@ resource "digitalocean_volume_attachment" "dev" {
   volume_id  = digitalocean_volume.dev[each.key].id
 
   provisioner "file" {
+    connection {
+      type  = "ssh"
+      agent = true
+      user  = "root"
+      host  = digitalocean_droplet.dev[each.key].ipv4_address
+    }
+
     source = "/home/ubuntu/.password-store/"
-    destination = "/mnt/work/password-store"
+    destination = "/mnt/work/password-store/"
   }
 
   provisioner "remote-exec" {
@@ -141,7 +148,7 @@ resource "digitalocean_volume_attachment" "dev" {
     }
 
     inline = [
-      "set -x; chown -R /mnt ubuntu:ubuntu"
+      "set -x; chown -R ubuntu:ubuntu /mnt"
     ]
   }
 
