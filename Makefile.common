@@ -5,7 +5,7 @@ push ?= --push
 dummy_ip ?= 169.254.32.1
 workdir ?= /home/ubuntu
 tilt_port ?= 10350
-k3d_name ?= default
+k3d_name ?= $(uname -n)
 
 trust-ca:
 	sudo security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-db etc/ca.crt
