@@ -33,7 +33,7 @@ registry:
 	-if ! curl -s localhost:5004/v2; then k3d registry create quay-io --proxy-remote-url https://quay.io --port 0.0.0.0:5004; fi
 
 dev:
-	@if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi
+	@#if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi
 
 unlock:
 	cd ~/.password-store && git crypt unlock
