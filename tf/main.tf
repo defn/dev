@@ -267,14 +267,22 @@ resource "kubernetes_stateful_set" "dev" {
         container {
           name              = "dev"
           image             = "defn/dev:latest"
-          command           = ["/usr/bin/tini", "--"]
-          args              = ["tail", "-f", "/dev/null"]
           image_pull_policy = "Always"
+
+          command = ["/usr/bin/tini", "--"]
+          args    = ["tail", "-f", "/dev/null"]
         }
 
         container {
-          name  = "buildkitd"
-          image = "earthly/buildkitd:v0.6.19"
+          name              = "registry"
+          image             = "registry:2"
+          image_pull_policy = "IfNotPresent"
+        }
+
+        container {
+          name              = "buildkitd"
+          image             = "earthly/buildkitd:v0.6.19"
+          image_pull_policy = "IfNotPresent"
 
           env {
             name  = "BUILDKIT_TCP_TRANSPORT_ENABLED"
