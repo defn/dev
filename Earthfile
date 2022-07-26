@@ -112,6 +112,7 @@ tower-update:
     RUN git clean -ffd
 
 tower-upload:
+    ARG arch
     ARG repo_from=localhost:5000/
     ARG repo=localhost:5000/
 
