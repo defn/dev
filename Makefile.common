@@ -6,6 +6,7 @@ dummy_ip ?= 169.254.32.1
 workdir ?= /home/ubuntu
 tilt_port ?= 10350
 k3d_name ?= $(shell uname -n)
+context ?= "k3d-$(k3d_name)"
 
 trust-ca:
 	sudo security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-db etc/ca.crt
@@ -158,7 +159,7 @@ clean:
 	touch ~/.registry.txt
 
 attach:
-	code --folder-uri vscode-remote://k8s-container+context=k3d-$(k3d_name)+namespace=default+podname=dev-0+name=dev+$(workdir)
+	code --folder-uri vscode-remote://k8s-container+context=$(context)+namespace=default+podname=dev-0+name=dev+$(workdir)
 	-kubectl get events -w
 
 attach-remo:
