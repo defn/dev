@@ -112,25 +112,15 @@ tower-update:
     RUN git clean -ffd
 
 tower-upload:
-    ARG repo_from=k3d-registry:5000/
-    ARG repo=k3d-registry:5000/
+    ARG repo_from=localhost:5000/
+    ARG repo=localhost:5000/
 
     FROM +tower-update --arch=${arch} --repo_from=${repo_from}
 
     SAVE IMAGE --push ${repo}defn/dev
     
-hello:
-    ARG repo_from=k3d-registry:5000/
-    ARG repo=k3d-registry:5000/
-
-    FROM +tower-update --arch=${arch} --repo_from=${repo_from}
-
-    ENTRYPOINT ["/home/ubuntu/hello.py"]
-
-    SAVE IMAGE --push ${repo}defn/dev:hello
-
 tower:
-    ARG repo=k3d-registry:5000/
+    ARG repo=localhost:5000/
 
     ARG arch
     ARG SKAFFOLD

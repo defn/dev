@@ -1,4 +1,4 @@
-repo ?= k3d-registry:5000/
+repo ?= localhost:5000/
 repo_from ?= $(repo)
 cache ?= $(repo)
 push ?= --push
