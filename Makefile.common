@@ -60,8 +60,6 @@ argocd-login:
 				&& argocd account update-password --new-password adminadmin --current-password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')")
 
 sync:
-	sudo chown ubuntu:ubuntu /var/run/docker.sock ~/work
-
 	cd ~/.password-store && (git crypt unlock || git status)
 
 	$(MAKE) kubeconfig

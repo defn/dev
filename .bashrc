@@ -57,13 +57,6 @@ if [[ -n "${VSCODE_GIT_IPC_HANDLE:-}" ]]; then
 	fi
 fi
 
-# docker
-if [[ ! -S /var/run/docker.sock ]]; then
-	if [[ -z "${DOCKER_HOST:-}" ]]; then
-		export DOCKER_HOST="unix://$HOME/.local/docker.sock"
-	fi
-fi
-
 # aws-vault
 export AWS_VAULT_BACKEND=pass
 export AWS_VAULT_PASS_PREFIX=aws-vault

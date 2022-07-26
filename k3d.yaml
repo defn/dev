@@ -8,9 +8,6 @@ kubeAPI:
   hostPort: "6443"
 image: rancher/k3s:v1.24.3-k3s1
 volumes:
-  - volume: /var/run/docker.sock:/var/run/docker.sock
-    nodeFilters:
-      - server:0
   - volume: work:/mnt/work
     nodeFilters:
       - server:0

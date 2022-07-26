@@ -35,8 +35,6 @@ spec:
           volumeMounts:
             - name: scratch
               mountPath: /scratch
-            - name: docker-sock
-              mountPath: /var/run/docker.sock
             - name: work
               mountPath: /home/ubuntu/work
         - name: vault-agent
@@ -89,9 +87,6 @@ spec:
             - name: scratch
               mountPath: /scratch
       volumes:
-        - name: docker-sock
-          hostPath:
-            path: /var/run/docker.sock
         - name: work
           hostPath:
             path: /mnt/work
