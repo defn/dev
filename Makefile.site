@@ -55,6 +55,16 @@ recreate-pod: # Recreate pod
 stop: # Stop k3d
 	k3d cluster stop $(k3d_name)
 
+initial-amd initial-arm:
+	git push
+	if [[ "$(shell pwd)" == "$(HOME)" ]]; then cd work/dev && git pull && $(MAKE) $@-inner cache=; else $(MAKE) $@-inner; fi
+
+initial-amd-inner:
+	earthly --remote-cache=$(cache)defn/cache:initials $(push) +amd64 --repo=$(repo)
+
+initial-arm-inner:
+	earthly --remote-cache=$(cache)defn/cache:initials $(push) +arm64 --repo=$(repo)
+
 image-amd image-arm:
 	git push
 	if [[ "$(shell pwd)" == "$(HOME)" ]]; then cd work/dev && git pull && $(MAKE) $@-inner; else $(MAKE) $@-inner; fi
