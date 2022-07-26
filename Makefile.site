@@ -57,7 +57,7 @@ stop: # Stop k3d
 
 initial-amd initial-arm:
 	git push
-	if [[ "$(shell pwd)" == "$(HOME)" ]]; then cd work/dev && git pull && $(MAKE) image-inner cache=; else $(MAKE) image-inner; fi
+	if [[ "$(shell pwd)" == "$(HOME)" ]]; then cd work/dev && git pull && $(MAKE) image-inner; else $(MAKE) image-inner; fi
 
 image-amd image-arm:
 	git push
@@ -80,18 +80,10 @@ update-arm-inner:
 	earthly --remote-cache=$(cache)defn/cache:updates $(push) +arm64-update --repo=$(repo) --repo_from=$(repo_from)
 
 push-amd:
-	$(MAKE) update-amd repo= repo_from=localhost:5000/ cache=
+	$(MAKE) update-amd repo= repo_from=localhost:5000/
 
 push-arm:
-	$(MAKE) update-arm repo= repo_from=localhost:5000/ cache=
-
-push-amd-cache:
-	$(MAKE) image-amd repo= repo_from=localhost:5000/ cache=
-	$(MAKE) update-amd repo= repo_from=localhost:5000/ cache=
-
-push-arm-cache:
-	$(MAKE) image-arm repo= repo_from=localhost:5000/ cache=
-	$(MAKE) update-arm repo= repo_from=localhost:5000/ cache=
+	$(MAKE) update-arm repo= repo_from=localhost:5000/
 
 shell:
 	docker run --rm -ti $(repo)defn/dev bash -l
