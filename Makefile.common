@@ -88,14 +88,6 @@ sync:
 	argocd --kube-context argocd app sync argo-events --local k/argo-events --assumeYes --prune
 	argocd --kube-context argocd app wait argo-events
 
-	argocd --kube-context argocd app sync loft --local k/loft --assumeYes --prune
-	argocd --kube-context argocd app wait loft
-	kubectl --context pod apply -f k/admin.yaml
-	loft login https://loft.loft.svc.cluster.local --insecure --access-key admin
-
-	$(MAKE) vc0
-	$(MAKE) vc1
-
 	kubectl --context argocd apply -f k/sets.yaml
 	sleep 5
 	argocd --kube-context argocd app sync sets --local k/sets --assumeYes --prune
