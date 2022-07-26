@@ -1,6 +1,6 @@
 repo ?= localhost:5000/
 repo_from ?= $(repo)
-cache ?= $(repo)
+cache ?=
 push ?= --push
 dummy_ip ?= 169.254.32.1
 workdir ?= /home/ubuntu
