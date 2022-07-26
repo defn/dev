@@ -60,20 +60,20 @@ initial-amd initial-arm:
 	if [[ "$(shell pwd)" == "$(HOME)" ]]; then cd work/dev && git pull && $(MAKE) $@-inner cache=; else $(MAKE) $@-inner; fi
 
 initial-amd-inner:
-	earthly --remote-cache=$(cache)defn/cache:initials $(push) +amd64 --repo=$(repo)
+	earthly --remote-cache=$(cache)defn/cache:updates $(push) +amd64 --repo=$(repo)
 
 initial-arm-inner:
-	earthly --remote-cache=$(cache)defn/cache:initials $(push) +arm64 --repo=$(repo)
+	earthly --remote-cache=$(cache)defn/cache:updates $(push) +arm64 --repo=$(repo)
 
 image-amd image-arm:
 	git push
 	if [[ "$(shell pwd)" == "$(HOME)" ]]; then cd work/dev && git pull && $(MAKE) $@-inner; else $(MAKE) $@-inner; fi
 
 image-amd-inner:
-	earthly --remote-cache=$(cache)defn/cache:images $(push) +amd64 --repo=$(repo)
+	earthly --remote-cache=$(cache)defn/cache:updates $(push) +amd64 --repo=$(repo)
 
 image-arm-inner:
-	earthly --remote-cache=$(cache)defn/cache:images $(push) +arm64 --repo=$(repo)
+	earthly --remote-cache=$(cache)defn/cache:updates $(push) +arm64 --repo=$(repo)
 
 update-amd update-arm:
 	git push
