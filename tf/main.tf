@@ -110,7 +110,7 @@ resource "digitalocean_container_registry" "dev" {
 }
 
 resource "digitalocean_container_registry_docker_credentials" "dev" {
-  registry_name = local.name
+  registry_name = digitalocean_container_registry.dev.name
 }
 
 resource "digitalocean_volume" "dev" {
