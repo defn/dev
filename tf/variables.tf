@@ -9,7 +9,7 @@ variable "home" {
 }
 
 locals {
-  want = coalesce(var.want, 1)
+  want = coalesce(var.want, 0)
 
   name   = "remo"
   region = "sfo3"
