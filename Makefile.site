@@ -86,9 +86,11 @@ push-arm:
 	$(MAKE) update-arm repo= repo_from=localhost:5000/ cache=localhost:5000/
 
 push-amd-cache:
+	$(MAKE) image-amd repo= repo_from=localhost:5000/ cache=
 	$(MAKE) update-amd repo= repo_from=localhost:5000/ cache=
 
 push-arm-cache:
+	$(MAKE) image-arm repo= repo_from=localhost:5000/ cache=
 	$(MAKE) update-arm repo= repo_from=localhost:5000/ cache=
 
 shell:
