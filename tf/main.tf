@@ -274,12 +274,6 @@ resource "kubernetes_stateful_set" "dev" {
         }
 
         container {
-          name              = "registry"
-          image             = "registry:2"
-          image_pull_policy = "IfNotPresent"
-        }
-
-        container {
           name              = "buildkitd"
           image             = "earthly/buildkitd:v0.6.19"
           image_pull_policy = "IfNotPresent"
@@ -296,7 +290,11 @@ resource "kubernetes_stateful_set" "dev" {
           tty = true
         }
 
-        termination_grace_period_seconds = 10
+        container {
+          name              = "registry"
+          image             = "registry:2"
+          image_pull_policy = "IfNotPresent"
+        }
       }
     }
 
