@@ -230,7 +230,8 @@ provider "kubernetes" {
 
 resource "kubernetes_secret" "registry_default" {
   metadata {
-    name = "registry-${local.name}"
+    name      = "registry-${local.name}"
+    namespace = "default"
   }
 
   data = {
@@ -238,5 +239,78 @@ resource "kubernetes_secret" "registry_default" {
   }
 
   type = "kubernetes.io/dockerconfigjson"
+}
+
+resource "kubernetes_stateful_set" "dev" {
+  metadata {
+    name      = "dev"
+    namespace = "default"
+  }
+
+  spec {
+    replicas = 1
+
+    selector {
+      match_labels = {
+        app = "dev"
+      }
+    }
+
+    template {
+      metadata {
+        labels = {
+          app = "dev"
+        }
+      }
+
+      spec {
+        container {
+          name              = "dev"
+          image             = "defn/dev:latest"
+          command           = ["/usr/bin/tini", "--"]
+          args              = ["tail", "-f", "/dev/null"]
+          image_pull_policy = "Always"
+        }
+
+        container {
+          name  = "buildkitd"
+          image = "earthly/buildkitd:v0.6.19"
+
+          env {
+            name  = "BUILDKIT_TCP_TRANSPORT_ENABLED"
+            value = "true"
+          }
+
+          security_context {
+            privileged = true
+          }
+
+          tty = true
+        }
+
+        termination_grace_period_seconds = 10
+      }
+    }
+
+    service_name = "dev"
+  }
+}
+
+resource "kubernetes_cluster_role_binding" "dev" {
+  metadata {
+    name = "dev"
+  }
+
+  subject {
+    kind      = "ServiceAccount"
+    name      = "default"
+    namespace = "default"
+  }
+
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = "cluster-admin"
+  }
 }
 
