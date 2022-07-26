@@ -39,10 +39,13 @@ console:
 	terraform console
 
 one:
-	$(MAKE) plan apply
+	$(MAKE) plan-one apply
 
 zero:
-	$(MAKE) plan-zero apply-zero
+	$(MAKE) plan-zero apply
+
+plan-one:
+	env TF_VAR_want=1 $(MAKE) plan
 
 plan-zero:
 	env TF_VAR_want=0 $(MAKE) plan
