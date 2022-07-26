@@ -10,6 +10,10 @@ terraform {
 
 provider "digitalocean" {}
 
+data "digitalocean_vpc" "dev" {
+  name = "default-${local.region}"
+}
+
 data "digitalocean_ssh_key" "default" {
   name = "yubikey"
 }
@@ -18,6 +22,10 @@ data "digitalocean_droplet_snapshot" "dev" {
   name_regex  = "^defn-dev"
   region      = local.region
   most_recent = true
+}
+
+data "digitalocean_kubernetes_versions" "dev" {
+  version_prefix = "1.22"
 }
 
 resource "digitalocean_project" "dev" {
@@ -95,6 +103,16 @@ resource "digitalocean_firewall" "dev" {
   }
 }
 
+resource "digitalocean_container_registry" "dev" {
+  name                   = local.name
+  region                 = local.region
+  subscription_tier_slug = "starter"
+}
+
+resource "digitalocean_container_registry_docker_credentials" "dev" {
+  registry_name = local.name
+}
+
 resource "digitalocean_volume" "dev" {
   for_each = local.volume
 
@@ -107,11 +125,12 @@ resource "digitalocean_volume" "dev" {
 resource "digitalocean_droplet" "dev" {
   for_each = local.want == 0 ? {} : local.droplet
 
-  image  = data.digitalocean_droplet_snapshot.dev.id
-  name   = "${local.name}-${each.key}"
-  region = local.region
-  size   = each.value.droplet_size
-  ipv6   = true
+  image    = data.digitalocean_droplet_snapshot.dev.id
+  name     = "${local.name}-${each.key}"
+  region   = local.region
+  size     = each.value.droplet_size
+  ipv6     = true
+  vpc_uuid = data.digitalocean_vpc.dev.id
 
   ssh_keys = [data.digitalocean_ssh_key.default.id]
 
@@ -185,3 +204,39 @@ resource "digitalocean_volume_attachment" "dev" {
     command = "env DOCKER_HOST=ssh://ubuntu@${digitalocean_droplet.dev[each.key].ipv4_address} k3d kubeconfig merge -a -d"
   }
 }
+
+resource "digitalocean_kubernetes_cluster" "dev" {
+  name    = local.name
+  region  = local.region
+  version = data.digitalocean_kubernetes_versions.dev.latest_version
+
+  vpc_uuid = data.digitalocean_vpc.dev.id
+
+  node_pool {
+    name       = local.name
+    size       = "s-1vcpu-2gb"
+    node_count = 1
+
+  }
+}
+
+provider "kubernetes" {
+  host  = digitalocean_kubernetes_cluster.dev.endpoint
+  token = digitalocean_kubernetes_cluster.dev.kube_config[0].token
+  cluster_ca_certificate = base64decode(
+    digitalocean_kubernetes_cluster.dev.kube_config[0].cluster_ca_certificate
+  )
+}
+
+resource "kubernetes_secret" "registry_default" {
+  metadata {
+    name = "registry-${local.name}"
+  }
+
+  data = {
+    ".dockerconfigjson" = digitalocean_container_registry_docker_credentials.dev.docker_credentials
+  }
+
+  type = "kubernetes.io/dockerconfigjson"
+}
+
