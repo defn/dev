@@ -89,17 +89,15 @@ root:
 tower-upload:
     ARG arch
     ARG repo
-    ARG push_to
 
     FROM +tower-update --arch=${arch} --repo=${repo}
 
-    SAVE IMAGE --push ${push_to}defn/dev
+    SAVE IMAGE --push ${repo}defn/dev
     
 tower-update:
     ARG arch
-    ARG repo
 
-    FROM +tower --arch=${arch} --repo=${repo}
+    FROM +tower --arch=${arch}
 
     RUN sudo ln -nfs /home/ubuntu/hooks /hooks
 
@@ -255,8 +253,6 @@ tower:
     COPY (+rerun-process-wrapper/*) /
 
     ENTRYPOINT ["/usr/bin/tini", "--"]
-
-    SAVE IMAGE --push ${repo}defn/dev:tower
 
 tools:
     FROM ubuntu:focal-20220531
