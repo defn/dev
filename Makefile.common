@@ -1,7 +1,7 @@
 repo ?= localhost:5000/
-repo_from ?= $(repo)
 cache ?=
 push ?= --push
+push_to ?= $(repo)
 dummy_ip ?= 169.254.32.1
 workdir ?= /home/ubuntu
 tilt_port ?= 10350

@@ -86,11 +86,20 @@ root:
     RUN chmod u+s /usr/bin/sudo
     SAVE IMAGE --cache-hint
 
+tower-upload:
+    ARG arch
+    ARG repo
+    ARG push_to
+
+    FROM +tower-update --arch=${arch} --repo=${repo}
+
+    SAVE IMAGE --push ${push_to}defn/dev
+    
 tower-update:
     ARG arch
-    ARG repo_from
+    ARG repo
 
-    FROM ${repo_from}defn/dev:tower
+    FROM +tower --arch=${arch} --repo=${repo}
 
     RUN sudo ln -nfs /home/ubuntu/hooks /hooks
 
@@ -111,19 +120,10 @@ tower-update:
     COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
     RUN git clean -ffd
 
-tower-upload:
-    ARG arch
-    ARG repo_from=localhost:5000/
-    ARG repo=localhost:5000/
-
-    FROM +tower-update --arch=${arch} --repo_from=${repo_from}
-
-    SAVE IMAGE --push ${repo}defn/dev
-    
 tower:
-    ARG repo=localhost:5000/
-
     ARG arch
+    ARG repo
+
     ARG SKAFFOLD
     ARG CDKTF
     ARG NODEJS
