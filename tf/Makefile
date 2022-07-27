@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
 workdir ?= /home/ubuntu
-podname ?= $(shell basename $(shell pwd))
+podname ?= $(shell basename $(shell pwd))-0
 context ?= do-sfo3-remo
 
 # export DIGITALOCEAN_ACCESS_TOKEN="$(pass DIGITALOCEAN_ACCESS_TOKEN)"
