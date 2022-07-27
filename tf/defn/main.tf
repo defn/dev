@@ -1,14 +1,26 @@
+data "digitalocean_kubernetes_cluster" "dev" {
+  name = "remo"
+}
+
+
+provider "digitalocean" {}
+
 provider "kubernetes" {
-  host  = digitalocean_kubernetes_cluster.dev.endpoint
-  token = digitalocean_kubernetes_cluster.dev.kube_config[0].token
+  host  = data.digitalocean_kubernetes_cluster.dev.endpoint
+  token = data.digitalocean_kubernetes_cluster.dev.kube_config[0].token
   cluster_ca_certificate = base64decode(
-    digitalocean_kubernetes_cluster.dev.kube_config[0].cluster_ca_certificate
+    data.digitalocean_kubernetes_cluster.dev.kube_config[0].cluster_ca_certificate
   )
 }
 
+resource "digitalocean_container_registry_docker_credentials" "dev" {
+  registry_name = data.digitalocean_kubernetes_cluster.dev.name
+}
+
+
 resource "kubernetes_secret" "registry_default" {
   metadata {
-    name      = "registry-${local.name}"
+    name      = "registry-defn"
     namespace = "default"
   }
 

@@ -109,10 +109,6 @@ resource "digitalocean_container_registry" "dev" {
   subscription_tier_slug = "starter"
 }
 
-resource "digitalocean_container_registry_docker_credentials" "dev" {
-  registry_name = digitalocean_container_registry.dev.name
-}
-
 resource "digitalocean_volume" "dev" {
   for_each = local.volume
 
