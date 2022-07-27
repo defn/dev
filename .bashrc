@@ -38,6 +38,9 @@ export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
 # awscli
 export PATH="$PATH:/usr/local/aws-cli/bin"
 
+# earthly
+export BUILDKIT_HOST="tcp://$(uname -n):8372 "
+
 # gcloud
 export PATH="$PATH:/usr/local/gcloud/google-cloud-sdk/bin"
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
