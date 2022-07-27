@@ -48,6 +48,7 @@ init:
 init-inner:
 	git clone git@github.com:jojomomojo/password-store work/password-store
 	cd work/password-store && git crypt unlock
+	$(MAKE) vault-unseal
 	git clone git@github.com:defn/dev work/dev
 
 tilt:
