@@ -54,6 +54,10 @@ spec:
         - name: buildkitd
           image: earthly/buildkitd:v0.6.19
           env:
+            - name: CACHE_SIZE_PCT
+              value: "90"
+            - name: BUILDKIT_MAX_PARALLELISM
+              value: "4"
             - name: BUILDKIT_TCP_TRANSPORT_ENABLED
               value: "true"
             - name: EARTHLY_ADDITIONAL_BUILDKIT_CONFIG
