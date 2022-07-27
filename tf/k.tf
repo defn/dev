@@ -61,6 +61,16 @@ resource "kubernetes_stateful_set" "dev" {
             value = "true"
           }
 
+          env {
+            name  = "BUILDKIT_MAX_PARALLELISM"
+            value = "4"
+          }
+
+          env {
+            name  = "CACHE_SIZE_PCT"
+            value = "90"
+          }
+
           security_context {
             privileged = true
           }
