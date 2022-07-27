@@ -45,7 +45,7 @@ resource "digitalocean_kubernetes_node_pool" "dev" {
   cluster_id = data.digitalocean_kubernetes_cluster.dev.id
 
   name       = "${local.cluster}-${local.name}"
-  size       = "s-2vcpu-4gb"
+  size       = local.size
   node_count = 1
   tags       = [local.name]
 
