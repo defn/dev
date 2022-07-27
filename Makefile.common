@@ -49,6 +49,7 @@ init-inner:
 	cd work/password-store && git crypt unlock
 	$(MAKE) vault-unseal
 	git clone git@github.com:defn/dev work/dev
+	$(MAKE) kubeconfig
 
 tilt:
 	env tilt up --context pod --port $(tilt_port)
@@ -66,10 +67,6 @@ argocd-login:
 				&& argocd account update-password --new-password adminadmin --current-password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')")
 
 sync:
-	cd ~/.password-store && (git crypt unlock || git status)
-
-	$(MAKE) kubeconfig
-
 	cd && $(MAKE) init-dev
 	$(MAKE) init-site
 
