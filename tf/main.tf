@@ -25,7 +25,7 @@ data "digitalocean_droplet_snapshot" "dev" {
 }
 
 data "digitalocean_kubernetes_versions" "dev" {
-  version_prefix = "1.23"
+  version_prefix = local.version
 }
 
 resource "digitalocean_project" "dev" {
@@ -210,7 +210,7 @@ resource "digitalocean_kubernetes_cluster" "dev" {
 
   node_pool {
     name       = local.name
-    size       = "s-1vcpu-2gb"
+    size       = local.size
     node_count = 1
 
   }

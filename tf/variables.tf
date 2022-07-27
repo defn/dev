@@ -11,8 +11,10 @@ variable "home" {
 locals {
   want = coalesce(var.want, 0)
 
-  name   = "remo"
-  region = "sfo3"
+  name    = "remo"
+  region  = "sfo3"
+  version = "1.23"
+  size    = "s-1vcpu-2gb"
 
   tailscale_domain = "tiger-mamba.ts.net"
 
