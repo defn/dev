@@ -47,6 +47,8 @@ resource "kubernetes_stateful_set" "dev" {
     namespace = "default"
   }
 
+  wait_for_rollout = false
+
   spec {
     replicas = 1
 
