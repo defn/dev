@@ -1,5 +1,5 @@
 data "digitalocean_kubernetes_cluster" "dev" {
-  name = "remo"
+  name = local.cluster
 }
 
 
@@ -20,7 +20,7 @@ resource "digitalocean_container_registry_docker_credentials" "dev" {
 
 resource "kubernetes_secret" "registry_default" {
   metadata {
-    name      = "registry-defn"
+    name      = "registry-${local.name}"
     namespace = "default"
   }
 
@@ -33,7 +33,7 @@ resource "kubernetes_secret" "registry_default" {
 
 resource "kubernetes_stateful_set" "dev" {
   metadata {
-    name      = "dev"
+    name      = local.name
     namespace = "default"
   }
 
