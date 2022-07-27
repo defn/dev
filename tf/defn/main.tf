@@ -49,6 +49,10 @@ resource "digitalocean_kubernetes_node_pool" "dev" {
   node_count = 1
   tags       = [local.name]
 
+  labels = {
+    env = local.name
+  }
+
   taint {
     effect = "NoSchedule"
     key    = "env"
@@ -81,6 +85,7 @@ resource "kubernetes_stateful_set" "dev" {
       }
 
       spec {
+
         affinity {
           node_affinity {
             required_during_scheduling_ignored_during_execution {
@@ -93,6 +98,12 @@ resource "kubernetes_stateful_set" "dev" {
               }
             }
           }
+        }
+
+        toleration {
+          key      = "env"
+          operator = "Equal"
+          value    = local.name
         }
 
         volume {
