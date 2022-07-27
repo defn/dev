@@ -66,4 +66,4 @@ kubeconfig:
 	doctl kubernetes cluster kubeconfig save remo
 
 attach:
-        code --folder-uri vscode-remote://k8s-container+context=$(context)+namespace=default+podname=$(podname)+name=dev+$(workdir)
+	code --folder-uri vscode-remote://k8s-container+context=$(context)+namespace=default+podname=$(podname)+name=dev+$(workdir)
