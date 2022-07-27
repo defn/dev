@@ -196,9 +196,6 @@ vault-unseal:
 	pass Unseal_Key_3 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://localhost:8200/v1/sys/unseal
 	pass Unseal_Key_5 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://localhost:8200/v1/sys/unseal
 
-vault-login:
-	@env VAULT_TOKEN="$$(pass Initial_Root_Token)" VAULT_ADDR=http://localhost:8200 vault login -
-
 vault-seal:
 	-env VAULT_TOKEN="$$(pass Initial_Root_Token)" VAULT_ADDR=http://localhost:8200 vault operator seal
 	rm -f ~/.vault-token
