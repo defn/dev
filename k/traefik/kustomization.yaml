@@ -5,8 +5,10 @@ helmCharts:
   name: traefik
   version: 10.24.0
   repo: https://helm.traefik.io/traefik
-  valuesInline:
   includeCRDs: true
+  valuesInline:
+    service:
+      type: ClusterIP
 
 resources:
 - tls.yaml

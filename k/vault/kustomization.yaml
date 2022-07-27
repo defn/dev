@@ -8,6 +8,8 @@ helmCharts:
   repo: https://helm.releases.hashicorp.com
   valuesInline:
     server:
+      dataStorage:
+        enabled: false
       standalone:
         config: |
           disable_mlock = true
