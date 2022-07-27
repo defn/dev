@@ -25,7 +25,7 @@ data "digitalocean_droplet_snapshot" "dev" {
 }
 
 data "digitalocean_kubernetes_versions" "dev" {
-  version_prefix = "1.22"
+  version_prefix = "1.23"
 }
 
 resource "digitalocean_project" "dev" {
