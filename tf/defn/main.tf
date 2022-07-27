@@ -48,6 +48,12 @@ resource "digitalocean_kubernetes_node_pool" "dev" {
   size       = "s-1vcpu-2gb"
   node_count = 1
   tags       = [local.name]
+
+  taint {
+    effect = "NoSchedule"
+    key    = "env"
+    value  = local.name
+  }
 }
 
 resource "kubernetes_stateful_set" "dev" {
