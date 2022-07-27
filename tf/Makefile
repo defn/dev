@@ -1,5 +1,9 @@
 SHELL := /bin/bash
 
+workdir ?= /home/ubuntu
+podname ?= dev-0
+context ?= do-sfo3-remo
+
 # export DIGITALOCEAN_ACCESS_TOKEN="$(pass DIGITALOCEAN_ACCESS_TOKEN)"
 # export TF_TOKEN_app_terraform_io="$(pass TF_TOKEN_app_terraform_io)"
 
@@ -39,7 +43,6 @@ planned:
 apply:
 	terraform apply .plan
 	rm -f .plan
-	doctl kubernetes cluster kubeconfig save remo
 
 refresh:
 	terraform refresh
@@ -58,3 +61,9 @@ plan-one:
 
 plan-zero:
 	env TF_VAR_want=0 $(MAKE) plan
+
+kubeconfig:
+	doctl kubernetes cluster kubeconfig save remo
+
+attach:
+        code --folder-uri vscode-remote://k8s-container+context=$(context)+namespace=default+podname=$(podname)+name=dev+$(workdir)
