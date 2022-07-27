@@ -76,14 +76,6 @@ sync:
 	argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune
 	argocd --kube-context argocd app wait argocd
 
-	argocd --kube-context argocd app sync vault --local k/vault --assumeYes --prune
-	-while true; do if kubectl --context pod wait -n vault -l statefulset.kubernetes.io/pod-name=vault-0 --for=condition=Initialized pod; then break; fi; sleep 1; done
-	-while true; do if curl -s --max-time 5 --connect-timeout 2 http://vault.vault.svc:8200 | grep Redirect; then break; fi; sleep 1; done
-	-while true; do if $(MAKE) vault-restore; then break; fi; sleep 1; done
-	-$(MAKE) vault-unseal
-	-while true; do if kubectl --context pod wait -n vault -l statefulset.kubernetes.io/pod-name=vault-0 --for=condition=Ready pod; then break; fi; sleep 1; done
-	argocd --kube-context argocd app wait vault
-
 	argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune
 	argocd --kube-context argocd app wait traefik
 	-$(MAKE) cert
@@ -199,22 +191,16 @@ cluster-inner:
 	kubectl apply -f k/dev/main.yaml
 	while true; do if kubectl rollout status statefulset dev --watch; then break; fi; sleep 5; done
 
-vault-backup:
-	kubectl exec -n vault vault-0 -- tar cfz - /vault/data | (cd ~/.password-store && tar xvfz - && git add vault && git add -u vault && git commit -m 'vault backup' && git push)
-
-vault-restore:
-	(cd ~/.password-store && tar cfz - vault) | kubectl --context pod exec -i -n vault vault-0 -- tar xvfz - -C /;
-
 vault-unseal:
-	pass Unseal_Key_1 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://vault.vault.svc:8200/v1/sys/unseal
-	pass Unseal_Key_3 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://vault.vault.svc:8200/v1/sys/unseal
-	pass Unseal_Key_5 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://vault.vault.svc:8200/v1/sys/unseal
+	pass Unseal_Key_1 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://localhost:8200/v1/sys/unseal
+	pass Unseal_Key_3 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://localhost:8200/v1/sys/unseal
+	pass Unseal_Key_5 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://localhost:8200/v1/sys/unseal
 
 vault-login:
-	@env VAULT_TOKEN="$$(pass Initial_Root_Token)" VAULT_ADDR=http://vault.vault.svc:8200 vault login -
+	@env VAULT_TOKEN="$$(pass Initial_Root_Token)" VAULT_ADDR=http://localhost:8200 vault login -
 
 vault-seal:
-	-env VAULT_TOKEN="$$(pass Initial_Root_Token)" VAULT_ADDR=http://vault.vault.svc:8200 vault operator seal
+	-env VAULT_TOKEN="$$(pass Initial_Root_Token)" VAULT_ADDR=http://localhost:8200 vault operator seal
 	rm -f ~/.vault-token
 
 down:
