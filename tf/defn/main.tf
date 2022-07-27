@@ -1,3 +1,13 @@
+terraform {
+  cloud {
+    organization = "defn"
+
+    workspaces {
+      name = "dev-defn"
+    }
+  }
+}
+
 data "digitalocean_kubernetes_cluster" "dev" {
   name = local.cluster
 }
