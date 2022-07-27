@@ -68,6 +68,7 @@ resource "kubernetes_stateful_set" "dev" {
       spec {
         volume {
           name = "work"
+          empty_dir {}
         }
 
         container {
