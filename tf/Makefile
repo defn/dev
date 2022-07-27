@@ -5,6 +5,12 @@ SHELL := /bin/bash
 
 # doctl kubernetes cluster kubeconfig save remo
 
+shell:
+	env \
+		DIGITALOCEAN_ACCESS_TOKEN="$$(pass DIGITALOCEAN_ACCESS_TOKEN)" \
+		TF_TOKEN_app_terraform_io="$$(pass TF_TOKEN_app_terraform_io)" \
+		$(SHELL)
+
 test:
 	$(MAKE) fmt
 	$(MAKE) validate
