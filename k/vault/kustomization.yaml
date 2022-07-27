@@ -9,7 +9,7 @@ helmCharts:
   valuesInline:
     server:
       dataStorage:
-        enabled: false
+        size: 1Gi
       standalone:
         config: |
           disable_mlock = true
