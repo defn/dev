@@ -33,19 +33,24 @@ registry:
 	-if ! curl -s localhost:5003/v2; then k3d registry create ghcr-io --proxy-remote-url https://ghcr.io --port 0.0.0.0:5003; fi
 	-if ! curl -s localhost:5004/v2; then k3d registry create quay-io --proxy-remote-url https://quay.io --port 0.0.0.0:5004; fi
 
-dev:
-	@#if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi
-
 unlock:
 	cd ~/.password-store && git crypt unlock
 	pass hello
 	$(MAKE) vault-unseal
+
+dev:
+	@if [[ ! -d work/password-store ]]; then if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi; fi
 
 init:
 	-git pull
 	$(MAKE) init-inner
 
 init-inner:
+	git clone git@github.com:jojomomojo/password-store work/password-store
+	cd work/password-store && git crypt unlock
+	git clone git@github.com:defn/dev work/dev
+
+tilt:
 	env tilt up --context pod --port $(tilt_port)
 
 init-dev:
