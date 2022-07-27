@@ -48,12 +48,6 @@ resource "digitalocean_kubernetes_node_pool" "dev" {
   size       = "s-1vcpu-2gb"
   node_count = 1
   tags       = [local.name]
-
-  taint {
-    key    = "env"
-    value  = local.name
-    effect = "NoSchedule"
-  }
 }
 
 resource "kubernetes_stateful_set" "dev" {
@@ -81,6 +75,20 @@ resource "kubernetes_stateful_set" "dev" {
       }
 
       spec {
+        affinity {
+          node_affinity {
+            required_during_scheduling_ignored_during_execution {
+              node_selector_term {
+                match_expressions {
+                  key      = "env"
+                  operator = "In"
+                  values   = [local.name]
+                }
+              }
+            }
+          }
+        }
+
         volume {
           name = "work"
           empty_dir {}
