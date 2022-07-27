@@ -25,7 +25,7 @@ arm64-update:
 root:
     ARG arch
 
-    FROM ubuntu:20.04
+    FROM ubuntu:focal-20220531
 
     USER root
     ENTRYPOINT ["tail", "-f", "/dev/null"]
@@ -259,7 +259,7 @@ tower:
     SAVE IMAGE --push ${repo}defn/dev:tower
 
 tools:
-    FROM ubuntu:20.04
+    FROM ubuntu:focal-20220531
 
     ENV DEBIAN_FRONTEND=noninteractive
     ENV container=docker
