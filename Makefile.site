@@ -64,20 +64,20 @@ image-amd image-arm:
 	if [[ "$(shell pwd)" == "$(HOME)" ]]; then cd work/dev && git pull && $(MAKE) $@-inner; else $(MAKE) $@-inner; fi
 
 image-amd-inner:
-	earthly --remote-cache=$(cache)defn/cache:images $(push) +amd64 --repo=$(repo)
+	env PATH="$$HOME/bin/fake:$$PATH" earthly --remote-cache=$(cache)defn/cache:images $(push) +amd64 --repo=$(repo)
 
 image-arm-inner:
-	earthly --remote-cache=$(cache)defn/cache:images $(push) +arm64 --repo=$(repo)
+	env PATH="$$HOME/bin/fake:$$PATH" earthly --remote-cache=$(cache)defn/cache:images $(push) +arm64 --repo=$(repo)
 
 update-amd update-arm:
 	git push
 	if [[ "$(shell pwd)" == "$(HOME)" ]]; then cd work/dev && git pull && $(MAKE) $@-inner; else $(MAKE) $@-inner; fi
 
 update-amd-inner:
-	earthly --remote-cache=$(cache)defn/cache:updates $(push) +amd64-update --repo=$(repo) --repo_from=$(repo_from)
+	env PATH="$$HOME/bin/fake:$$PATH" earthly --remote-cache=$(cache)defn/cache:updates $(push) +amd64-update --repo=$(repo) --repo_from=$(repo_from)
 
 update-arm-inner:
-	earthly --remote-cache=$(cache)defn/cache:updates $(push) +arm64-update --repo=$(repo) --repo_from=$(repo_from)
+	env PATH="$$HOME/bin/fake:$$PATH" earthly --remote-cache=$(cache)defn/cache:updates $(push) +arm64-update --repo=$(repo) --repo_from=$(repo_from)
 
 push-amd:
 	$(MAKE) update-amd repo= repo_from=localhost:5000/
