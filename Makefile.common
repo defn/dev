@@ -45,7 +45,7 @@ init:
 	$(MAKE) init-inner
 
 init-inner:
-	env DEFN_DEV_HOST="remo-defn.tiger-mamba.ts.net" tilt up --context pod --port $(tilt_port)
+	env tilt up --context pod --port $(tilt_port)
 
 init-dev:
 	-kubectl --context pod create namespace argocd
@@ -80,7 +80,7 @@ sync:
 
 	argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune
 	argocd --kube-context argocd app wait traefik
-	$(MAKE) cert
+	-$(MAKE) cert
 
 	argocd --kube-context argocd app sync argo-workflows --local k/argo-workflows --assumeYes --prune
 	argocd --kube-context argocd app wait argo-workflows
