@@ -28,9 +28,9 @@ resource "digitalocean_container_registry_docker_credentials" "dev" {
 }
 
 
-resource "kubernetes_secret" "registry_default" {
+resource "kubernetes_secret" "dev" {
   metadata {
-    name      = "registry-${local.name}"
+    name      = "registry"
     namespace = "default"
   }
 
@@ -39,6 +39,21 @@ resource "kubernetes_secret" "registry_default" {
   }
 
   type = "kubernetes.io/dockerconfigjson"
+}
+
+resource "digitalocean_kubernetes_node_pool" "dev" {
+  cluster_id = data.digitalocean_kubernetes_cluster.dev.id
+
+  name       = "${local.cluster}-${local.name}"
+  size       = "s-1vcpu-2gb"
+  node_count = 1
+  tags       = [local.name]
+
+  taint {
+    key    = "env"
+    value  = local.name
+    effect = "NoSchedule"
+  }
 }
 
 resource "kubernetes_stateful_set" "dev" {
