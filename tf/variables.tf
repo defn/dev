@@ -26,7 +26,7 @@ locals {
 
   volume = {
     "defn" = {
-      volume_size = "10"
+      volume_size = "1"
     }
   }
 }
