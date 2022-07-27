@@ -64,6 +64,10 @@ resource "kubernetes_stateful_set" "dev" {
       }
 
       spec {
+        volume {
+          name = "work"
+        }
+
         container {
           name              = "dev"
           image             = "defn/dev:latest"
@@ -71,6 +75,25 @@ resource "kubernetes_stateful_set" "dev" {
 
           command = ["/usr/bin/tini", "--"]
           args    = ["tail", "-f", "/dev/null"]
+
+          volume_mount {
+            name       = "work"
+            mount_path = "/home/ubuntu/work"
+          }
+        }
+
+        container {
+          name              = "vault"
+          image             = "defn/dev:latest"
+          image_pull_policy = "Always"
+
+          command = ["/usr/bin/tini", "--"]
+          args    = ["bash", "-c", "exec ~/bin/e vault server -config vault.yaml"]
+
+          volume_mount {
+            name       = "work"
+            mount_path = "/home/ubuntu/work"
+          }
         }
 
         container {
