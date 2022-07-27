@@ -39,6 +39,7 @@ planned:
 apply:
 	terraform apply .plan
 	rm -f .plan
+	doctl kubernetes cluster kubeconfig save remo
 
 refresh:
 	terraform refresh
