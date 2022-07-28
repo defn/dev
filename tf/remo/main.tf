@@ -42,27 +42,31 @@ resource "kubernetes_secret" "dev" {
 }
 
 resource "digitalocean_kubernetes_node_pool" "dev" {
+  for_each = local.envs
+
   cluster_id = data.digitalocean_kubernetes_cluster.dev.id
 
-  name       = "${local.cluster}-${local.name}"
-  size       = local.size
+  name       = "${local.cluster}-${each.key}"
+  size       = each.value.size
   node_count = 1
-  tags       = [local.name]
+  tags       = [each.key]
 
   labels = {
-    env = local.name
+    env = each.key
   }
 
   taint {
     effect = "NoSchedule"
     key    = "env"
-    value  = local.name
+    value  = each.key
   }
 }
 
 resource "kubernetes_stateful_set" "dev" {
+  for_each = local.envs
+
   metadata {
-    name      = local.name
+    name      = each.key
     namespace = "default"
   }
 
@@ -93,7 +97,7 @@ resource "kubernetes_stateful_set" "dev" {
                 match_expressions {
                   key      = "env"
                   operator = "In"
-                  values   = [local.name]
+                  values   = [each.key]
                 }
               }
             }
@@ -103,7 +107,7 @@ resource "kubernetes_stateful_set" "dev" {
         toleration {
           key      = "env"
           operator = "Equal"
-          value    = local.name
+          value    = each.key
         }
 
         volume {
