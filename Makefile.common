@@ -43,6 +43,7 @@ dev:
 init:
 	-git pull
 	$(MAKE) init-inner
+	$(MAKE) init-site
 
 init-inner:
 	git clone git@github.com:jojomomojo/password-store work/password-store
@@ -68,7 +69,6 @@ argocd-login:
 
 sync:
 	cd && $(MAKE) init-dev
-	$(MAKE) init-site
 
 	argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune
 	argocd --kube-context argocd app wait argocd
