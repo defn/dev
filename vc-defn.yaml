@@ -1,4 +1,0 @@
-syncer:
-  extraArgs:
-  - --node-selector=env=defn
-  - --enforce-toleration=env=defn:NoSchedule
