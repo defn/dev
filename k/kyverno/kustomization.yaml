@@ -7,3 +7,4 @@ helmCharts:
   repo: https://kyverno.github.io/kyverno
   includeCRDs: true
   valuesInline:
+    replicaCount: 1
