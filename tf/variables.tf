@@ -14,7 +14,7 @@ locals {
   name    = "remo"
   region  = "sfo3"
   version = "1.23"
-  size    = "s-1vcpu-2gb"
+  size    = "s-2vcpu-4gb"
 
   tailscale_domain = "tiger-mamba.ts.net"
 

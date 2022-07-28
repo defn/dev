@@ -213,8 +213,9 @@ resource "digitalocean_kubernetes_cluster" "dev" {
     size       = local.size
     node_count = 1
 
-    min_nodes  = 1
-    max_nodes  = 3
+    labels = {
+      env = "core"
+    }
   }
 }
 
