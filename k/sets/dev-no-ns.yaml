@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: dev
+  name: dev-no-ns
   namespace: argocd
   labels:
     argocd.argoproj.io/instance: sets
@@ -9,23 +9,8 @@ spec:
   generators:
     - list:
         elements:
-          - name: argocd
-            namespace: argocd
-            cluster: in-cluster
-          - name: kyverno
-            namespace: kyverno
-            cluster: in-cluster
-          - name: external-secrets
-            namespace: external-secrets
-            cluster: in-cluster
-          - name: argo-events
-            namespace: argo-events
-            cluster: in-cluster
-          - name: argo-workflows
-            namespace: argo-workflows
-            cluster: in-cluster
-          - name: traefik
-            namespace: traefik
+          - name: cert-manager
+            namespace: cert-manager
             cluster: in-cluster
   template:
     metadata:
@@ -38,7 +23,6 @@ spec:
         path: k/{{name}}
         targetRevision: main
       destination:
-        namespace: "{{namespace}}"
         name: "{{cluster}}"
       syncPolicy:
         syncOptions:

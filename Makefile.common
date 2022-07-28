@@ -66,6 +66,7 @@ sync:
 	kubectl --context argocd rollout status deployment argocd-server --watch
 	sleep 10; $(MAKE) argocd-login
 	kubectl --context argocd apply -f k/sets/dev.yaml
+	kubectl --context argocd apply -f k/sets/dev-no-ns.yaml
 
 	argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune
 	argocd --kube-context argocd app wait argocd
