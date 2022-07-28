@@ -15,6 +15,9 @@ spec:
           - name: kyverno
             namespace: kyverno
             cluster: in-cluster
+          - name: external-secrets
+            namespace: external-secrets
+            cluster: in-cluster
           - name: argo-events
             namespace: argo-events
             cluster: in-cluster
