@@ -7,4 +7,7 @@ helmCharts:
   repo: https://charts.external-secrets.io
   includeCRDs: true
   valuesInline:
-    installCRDs: true
+    webhook: 
+      create: false
+    certController:
+      create: false
