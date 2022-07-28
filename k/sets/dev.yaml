@@ -12,6 +12,9 @@ spec:
           - name: argocd
             namespace: argocd
             cluster: in-cluster
+          - name: kyverno
+            namespace: kyverno
+            cluster: in-cluster
           - name: argo-events
             namespace: argo-events
             cluster: in-cluster

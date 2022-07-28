@@ -70,6 +70,9 @@ sync:
 	argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune
 	argocd --kube-context argocd app wait argocd
 
+	argocd --kube-context kyverno app sync kyverno --local k/kyverno --assumeYes --prune
+	argocd --kube-context kyverno app wait kyverno
+
 	argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune
 	argocd --kube-context argocd app wait traefik
 	-$(MAKE) cert
