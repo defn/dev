@@ -12,6 +12,9 @@ spec:
           - name: argocd
             namespace: argocd
             cluster: in-cluster
+          - name: kyverno
+            namespace: kyverno
+            cluster: in-cluster
           - name: argo-events
             namespace: argo-events
             cluster: in-cluster
@@ -68,3 +71,7 @@ spec:
           name: kong-kong
           jsonPointers:
             - /spec/template/spec/tolerations
+        - group: kyverno.io
+          kind: ClusterPolicy
+          jqPathExpressions:
+            - .spec.rules[] | select(.name|test("autogen-."))
