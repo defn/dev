@@ -71,3 +71,7 @@ spec:
           name: kong-kong
           jsonPointers:
             - /spec/template/spec/tolerations
+        - group: kyverno.io
+          kind: ClusterPolicy
+          jqPathExpressions:
+            - .spec.rules[] | select(.name|test("autogen-."))
