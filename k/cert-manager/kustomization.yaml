@@ -7,7 +7,7 @@ helmCharts:
   repo: https://charts.jetstack.io
   includeCRDs: true
   valuesInline:
-    namespace: certmanager
+    namespace: cert-manager
 
 resources:
 - cert-manager.crds.yaml
