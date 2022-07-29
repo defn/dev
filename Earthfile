@@ -84,19 +84,12 @@ root:
 
     RUN chown -R ubuntu:ubuntu /home/ubuntu
     RUN chmod u+s /usr/bin/sudo
-    
+
     SAVE IMAGE --cache-hint
 
 tower-upload:
     ARG arch
     ARG repo
-
-    FROM +tower-update --arch=${arch} --repo=${repo}
-
-    SAVE IMAGE --push ${repo}defn/dev
-    
-tower-update:
-    ARG arch
 
     FROM +tower --arch=${arch}
 
@@ -119,7 +112,7 @@ tower-update:
     COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
     RUN git clean -ffd
 
-    SAVE IMAGE --cache-hint
+    SAVE IMAGE --push ${repo}defn/dev
 
 tower:
     ARG arch
@@ -464,7 +457,7 @@ kn:
     ARG arch
     ARG version
     FROM +tools --arch=${arch}
-    RUN curl -sSL -o kn https://github.com/knative/client/releases/download/knative-v${version}/kn-linux-${arch} && chmod 755 kn 
+    RUN curl -sSL -o kn https://github.com/knative/client/releases/download/knative-v${version}/kn-linux-${arch} && chmod 755 kn
     SAVE ARTIFACT kn
 
 k3d-download:
