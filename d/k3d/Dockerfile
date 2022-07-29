@@ -4,4 +4,6 @@ RUN mv /bin/k3s /bin/k3s-real
 COPY k3s-wrapper.sh /bin/k3s
 
 COPY */tailscale */tailscaled .
-COPY tailscaled.state .
+RUN mkdir -p /var/lib/tailscale
+COPY tailscaled.state /var/lib/tailscale/
+

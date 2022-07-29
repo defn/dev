@@ -4,9 +4,10 @@ push ?= --push
 dummy_ip ?= 169.254.32.1
 workdir ?= /home/ubuntu
 tilt_port ?= 10350
-k3d_name ?= $(shell uname -n)
+k3d_name ?= $(shell uname -n | cut -d. -f1)
 context ?= "k3d-$(k3d_name)"
 podname ?= "dev-0"
+name ?= "k3d-$(k3d_name)"
 
 trust-ca:
 	sudo security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-db etc/ca.crt
@@ -151,13 +152,16 @@ attach-remo:
 
 cluster:
 	git pull
-	$(MAKE) cluster-inner
+	$(MAKE) cluster-inner name=$(name) ip=$(ip)
 
 cluster-inner:
 	$(MAKE) registry
+	cd d/k3d && $(MAKE) build name=$(name)
 	-k3d cluster delete $(k3d_name)
 	if [[ -x "$$(type -P tailscale)" ]]; then if tailscale ip 2>&1 | grep NeedsLogin; then sudo tailscale up; fi; fi
 	env \
+		env \
+		DEFN_DEV_HOST="$${DEFN_DEV_HOST:-$(k3d_name)}" \
 		k3d cluster create $(k3d_name) \
 		--config k3d.yaml \
 		-p    "80:8000@server:0" \

@@ -4,9 +4,8 @@ servers: 1
 agents: 0
 kubeAPI:
   host: "${DEFN_DEV_HOST}"
-  hostIP: "${DEFN_DEV_IP}"
-  hostPort: "6443"
-image: defn.dev/k3d
+  hostIP: 0.0.0.0
+image: defn.dev/defn/k3d
 volumes:
   - volume: work:/mnt/work
     nodeFilters:
