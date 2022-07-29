@@ -14,21 +14,9 @@ spec:
         app: dev
     spec:
       terminationGracePeriodSeconds: 10
-      initContainers:
-        - name: sysctls
-          image: busybox
-          command:
-          - sh
-          - -c
-          - sysctl -w net.ipv4.ip_forward=1 && sysctl -w net.ipv4.conf.all.forwarding=1
-          securityContext:
-            capabilities:
-              add:
-                - NET_ADMIN
-            privileged: true
       containers:
         - name: dev
-          image: k3d-registry:5000/defn/dev:latest
+          image: defn/dev:latest
           imagePullPolicy: Always
           command: ["/usr/bin/tini", "--"]
           args: ["tail", "-f", "/dev/null"]
@@ -37,20 +25,18 @@ spec:
               mountPath: /scratch
             - name: work
               mountPath: /home/ubuntu/work
-        - name: vault-agent
-          image: k3d-registry:5000/defn/dev:latest
+            - name: certs
+              mountPath: /var/lib/tailscale/certs
+        - name: vault
+          image: defn/dev:latest
+          imagePullPolicy: Always
           command: ["/usr/bin/tini", "--"]
-          args: ["/home/ubuntu/bin/e", "vault", "agent", "-config", "etc/agent.hcl"]
+          args: ["bash", "-c", "exec ~/bin/e vault server -config vault.yaml"]
           volumeMounts:
             - name: scratch
               mountPath: /scratch
-        - name: kuma-cp
-          image: k3d-registry:5000/defn/dev:latest
-          command: ["/usr/bin/tini", "--"]
-          args: ["make", "kumacp"]
-          volumeMounts:
-            - name: scratch
-              mountPath: /scratch
+            - name: work
+              mountPath: /home/ubuntu/work
         - name: buildkitd
           image: earthly/buildkitd:v0.6.19
           env:
@@ -60,11 +46,6 @@ spec:
               value: "4"
             - name: BUILDKIT_TCP_TRANSPORT_ENABLED
               value: "true"
-            - name: EARTHLY_ADDITIONAL_BUILDKIT_CONFIG
-              value: |
-                [registry."k3d-registry:5000"]
-                  http = true
-                  insecure = true
           volumeMounts:
             - name: scratch
               mountPath: /scratch
@@ -73,23 +54,6 @@ spec:
           tty: true
           securityContext:
             privileged: true
-        - name: wireguard
-          image: k3d-registry:5000/defn/dev:latest
-          command: ["/usr/bin/tini", "--"]
-          args: ["bash", "-c", "wg-quick up /home/ubuntu/wg0.conf; exec tail -f /dev/null"]
-          ports:
-          - containerPort: 51820
-            hostPort: 51820
-            protocol: UDP
-            name: wireguard
-          securityContext:
-            capabilities:
-              add:
-                - NET_ADMIN
-            privileged: true
-          volumeMounts:
-            - name: scratch
-              mountPath: /scratch
       volumes:
         - name: work
           hostPath:
@@ -100,6 +64,9 @@ spec:
         - name: scratch
           hostPath:
             path: /mnt/scratch
+        - name: certs
+          hostPath:
+            path: /var/lib/tailscale/certs
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
