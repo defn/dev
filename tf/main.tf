@@ -155,10 +155,6 @@ resource "digitalocean_volume_attachment" "dev" {
     ]
   }
 
-  provisioner "local-exec" {
-    command = "ssh -o StrictHostKeyChecking=no ubuntu@${digitalocean_droplet.dev[each.key].ipv4_address} true"
-  }
-
   provisioner "file" {
     connection {
       type  = "ssh"
@@ -195,6 +191,14 @@ resource "digitalocean_volume_attachment" "dev" {
     inline = [
       "set -x; cd && git fetch && git reset --hard origin/main && env DEFN_DEV_HOST=${each.value.host} DEFN_DEV_IP=${each.value.ip} make provision-digital-ocean"
     ]
+  }
+
+  provisioner "local-exec" {
+    command = "ssh -o StrictHostKeyChecking=no ubuntu@${digitalocean_droplet.dev[each.key].ipv4_address} true"
+  }
+
+  provisioner "local-exec" {
+    command = "env DOCKER_HOST=ssh://ubuntu@${digitalocean_droplet.dev[each.key].ipv4_address} k3d kubeconfig merge -a -d"
   }
 }
 
