@@ -86,7 +86,7 @@ cert:
 	sudo chown ubuntu /var/lib/tailscale/certs/k3d-*
 	-k --context pod create -n traefik secret generic default-certificate \
 		--from-file=tls.key=/var/lib/tailscale/certs/k3d-immanent.tiger-mamba.ts.net.key \
-		--from-file=crt.key=/var/lib/tailscale/certs/k3d-immanent.tiger-mamba.ts.net.crt
+		--from-file=tls.crt=/var/lib/tailscale/certs/k3d-immanent.tiger-mamba.ts.net.crt
 
 cert-vault:
 	touch meh.json; chmod 0600 meh.json
