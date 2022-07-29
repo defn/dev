@@ -33,26 +33,3 @@ options:
   kubeconfig:
     updateDefaultKubeconfig: true
     switchCurrentContext: true
-registries:
-  create:
-    name: ignore
-  config: |
-    mirrors:
-      "k3d-registry:5000":
-        endpoint:
-          - http://k3d-registry:5000
-      "localhost:5000":
-        endpoint:
-          - http://k3d-registry:5000
-      "docker.io":
-        endpoint:
-          - http://k3d-docker-io:5001
-      "gcr.io":
-        endpoint:
-          - http://k3d-gcr-io:5002
-      "ghcr.io":
-        endpoint:
-          - http://k3d-ghcr-io:5003
-      "quay.io":
-        endpoint:
-          - http://k3d-quay-io:5004

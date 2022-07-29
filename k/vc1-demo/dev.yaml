@@ -16,7 +16,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: dev
-          image: k3d-registry:5000/defn/dev:latest
+          image: defn/dev:latest
           imagePullPolicy: Always
           command: ["/usr/bin/tini", "--"]
           args: ["tail", "-f", "/dev/null"]

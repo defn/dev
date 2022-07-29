@@ -4,14 +4,6 @@ init-site:
 	@aws --profile meh sts get-caller-identity
 	@pass hello
 
-import:
-	$(MAKE) registry
-	docker pull defn/dev
-	docker tag defn/dev localhost:5000/defn/dev
-	docker push localhost:5000/defn/dev
-	docker rmi defn/dev
-	docker rmi localhost:5000/defn/dev
-
 restart: # Restart everything
 	git pull
 	$(MAKE) restart-inner
@@ -105,4 +97,3 @@ provision-digital-ocean:
 	@sudo apt purge -y nano
 	$(MAKE) cluster
 	docker cp ~/.password-store/ k3d-$(k3d_name)-server-0:/mnt/work/password-store
-
