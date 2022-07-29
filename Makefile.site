@@ -81,7 +81,7 @@ push-arm:
 shell:
 	docker run --rm -ti $(repo)defn/dev bash -l
 
-cert:
+cert-vault:
 	touch meh.json; chmod 0600 meh.json
 	-k --context pod create -n traefik secret generic default-certificate --from-file=meh.json
 	v write pki/issue/gyre.defn.dev common_name="remo-defn.tiger-mamba.ts.net" ip_sans="169.254.32.1" alt_names="hello.demo.svc.cluster.local" tl=120h -format=json | jq .data > meh.json
