@@ -5,6 +5,7 @@ agents: 0
 kubeAPI:
   host: "${DEFN_DEV_HOST}"
   hostIP: 0.0.0.0
+  hostPort: "6443"
 image: defn.dev/defn/k3d
 volumes:
   - volume: work:/mnt/work
