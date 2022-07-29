@@ -6,7 +6,7 @@ kubeAPI:
   host: "${DEFN_DEV_HOST}"
   hostIP: "${DEFN_DEV_IP}"
   hostPort: "6443"
-image: rancher/k3s:v1.23.9-k3s1
+image: defn.dev/k3d
 volumes:
   - volume: work:/mnt/work
     nodeFilters:
