@@ -161,7 +161,6 @@ cluster-inner:
 	if [[ -x "$$(type -P tailscale)" ]]; then if tailscale ip 2>&1 | grep NeedsLogin; then sudo tailscale up; fi; fi
 	env \
 		env \
-		DEFN_DEV_HOST="$${DEFN_DEV_HOST:-$(k3d_name)}" \
 		k3d cluster create $(k3d_name) \
 		--config k3d.yaml \
 		-p    "80:8000@server:0" \
