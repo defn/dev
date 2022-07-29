@@ -1,0 +1,5 @@
+locals {
+  envs = {
+    "remo-defn" = {}
+  }
+}
