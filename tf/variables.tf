@@ -20,7 +20,7 @@ locals {
 
   droplet = {
     "defn" = {
-      droplet_size = "s-4vcpu-8gb-amd"
+      droplet_size = "s-2vcpu-4gb"
     }
   }
 
