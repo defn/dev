@@ -14,4 +14,10 @@ while true; do
   sleep 1
 done
 
+ domain=`/tailscale cert 2>&1 | grep ' use ' | cut -d'"' -f2`
+while true; do
+   /tailscale cert "${domain}" 
+  sleep 36000
+done &
+
 exec /bin/k3s-real "$@" --node-ip "${container_ip}" --node-external-ip "${ts_ip}"
