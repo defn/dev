@@ -41,6 +41,9 @@ init-inner:
 tilt:
 	env tilt up --context pod --port $(tilt_port)
 
+login:
+	$(MAKE) argocd-login
+
 argocd-login:
 	argocd login --insecure argocd-server.argocd.svc --username admin --password adminadmin \
 		|| (argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')" \
