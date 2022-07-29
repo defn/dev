@@ -189,7 +189,7 @@ resource "digitalocean_volume_attachment" "dev" {
     }
 
     inline = [
-      "set -x; cd && git fetch && git reset --hard origin/main && make provision-digital-ocean"
+      "set -x; cd && git fetch && git reset --hard origin/main && env DEFN_DEV_HOST=${each.value.host} DEFN_DEV_IP=${each.value.ip} make provision-digital-ocean"
     ]
   }
 
