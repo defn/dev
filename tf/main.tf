@@ -147,7 +147,7 @@ resource "digitalocean_volume_attachment" "dev" {
   }
 
   provisioner "local-exec" {
-    command = "pass tailscale_${each.value.host} | base64 -d | ssh ubuntu@${digitalocean_droplet.dev[each.key].ipv4_address} tee d/k3d/tailscaled.state"
+    command = "pass tailscale_${each.value.context} | base64 -d | ssh ubuntu@${digitalocean_droplet.dev[each.key].ipv4_address} tee d/k3d/tailscaled.state"
   }
 
   provisioner "remote-exec" {
