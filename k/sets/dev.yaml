@@ -24,9 +24,6 @@ spec:
           - name: argo-workflows
             namespace: argo-workflows
             cluster: in-cluster
-          - name: traefik
-            namespace: traefik
-            cluster: in-cluster
   template:
     metadata:
       name: "{{name}}"
