@@ -1,6 +1,8 @@
 build:
+	pass tailscale_$(name) | base64 -d > tailscaled.state
 	wget -O- https://pkgs.tailscale.com/stable/tailscale_1.28.0_amd64.tgz | tar xvfz -
 	docker build -t defn.dev/defn/k3d .
+	rm -f tailscaled.state
 
 mint:
 	docker run --rm -ti --privileged --entrypoint sh defn.dev/defn/k3d -c \
