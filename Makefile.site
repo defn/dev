@@ -81,6 +81,13 @@ push-arm:
 shell:
 	docker run --rm -ti $(repo)defn/dev bash -l
 
+cert:
+	sudo chown ubuntu /var/lib/tailscale/certs
+	sudo chown ubuntu /var/lib/tailscale/certs/k3d-*
+	-k --context pod create -n traefik secret generic default-certificate \
+		--from-file=tls.key=/var/lib/tailscale/certs/k3d-immanent.tiger-mamba.ts.net.key \
+		--from-file=crt.key=/var/lib/tailscale/certs/k3d-immanent.tiger-mamba.ts.net.crt
+
 cert-vault:
 	touch meh.json; chmod 0600 meh.json
 	-k --context pod create -n traefik secret generic default-certificate --from-file=meh.json
