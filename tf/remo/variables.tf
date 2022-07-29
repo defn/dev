@@ -4,7 +4,7 @@ locals {
 
   envs = {
     "defn" = {
-      size = "s-4vcpu-8gb"
+      size = "s-2vcpu-4gb"
     }
   }
 }
