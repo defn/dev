@@ -69,10 +69,6 @@ sync:
 	argocd --kube-context external-secrets app sync external-secrets --local k/external-secrets --assumeYes --prune
 	argocd --kube-context external-secrets app wait external-secrets
 
-	argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune
-	argocd --kube-context argocd app wait traefik
-	-$(MAKE) cert
-
 	argocd --kube-context argocd app sync argo-workflows --local k/argo-workflows --assumeYes --prune
 	argocd --kube-context argocd app wait argo-workflows
 
