@@ -142,42 +142,12 @@ resource "digitalocean_volume_attachment" "dev" {
   droplet_id = digitalocean_droplet.dev[each.key].id
   volume_id  = digitalocean_volume.dev[each.key].id
 
-  provisioner "remote-exec" {
-    connection {
-      type  = "ssh"
-      agent = true
-      user  = "root"
-      host  = digitalocean_droplet.dev[each.key].ipv4_address
-    }
-
-    inline = [
-      "mkdir -p /mnt/work/password-store"
-    ]
+  provisioner "local-exec" {
+    command = "ssh -o StrictHostKeyChecking=no ubuntu@${digitalocean_droplet.dev[each.key].ipv4_address} true"
   }
 
-  provisioner "file" {
-    connection {
-      type  = "ssh"
-      agent = true
-      user  = "root"
-      host  = digitalocean_droplet.dev[each.key].ipv4_address
-    }
-
-    source      = "${var.home}/.password-store/"
-    destination = "/mnt/work/password-store"
-  }
-
-  provisioner "remote-exec" {
-    connection {
-      type  = "ssh"
-      agent = true
-      user  = "root"
-      host  = digitalocean_droplet.dev[each.key].ipv4_address
-    }
-
-    inline = [
-      "set -x; chown -R ubuntu:ubuntu /mnt; cd /mnt/work/password-store && chown -R root:root . && git reset --hard && git clean -fdx && git crypt lock && chown -R ubuntu:ubuntu ."
-    ]
+  provisioner "local-exec" {
+    command = "pass tailscale_${each.value.host} | base64 -d | ssh ubuntu@${digitalocean_droplet.dev[each.key].ipv4_address} tee d/k3d/tailscaled.state"
   }
 
   provisioner "remote-exec" {
@@ -191,10 +161,6 @@ resource "digitalocean_volume_attachment" "dev" {
     inline = [
       "set -x; cd && git fetch && git reset --hard origin/main && env DEFN_DEV_HOST=${each.value.host} DEFN_DEV_IP=${each.value.ip} make provision-digital-ocean"
     ]
-  }
-
-  provisioner "local-exec" {
-    command = "ssh -o StrictHostKeyChecking=no ubuntu@${digitalocean_droplet.dev[each.key].ipv4_address} true"
   }
 
   provisioner "local-exec" {
