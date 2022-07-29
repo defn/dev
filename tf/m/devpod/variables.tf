@@ -1,0 +1,3 @@
+variable "envs" {
+  default = {}
+}

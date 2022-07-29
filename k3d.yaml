@@ -30,6 +30,9 @@ options:
       - arg: --tls-san=${DEFN_DEV_IP}
         nodeFilters:
           - server:0
+      - arg: --disable=traefik
+        nodeFilters:
+          - all
   kubeconfig:
     updateDefaultKubeconfig: true
     switchCurrentContext: true
