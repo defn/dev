@@ -79,9 +79,7 @@ sync:
 	argocd --kube-context argocd app sync argo-events --local k/argo-events --assumeYes --prune --retry-limit 10
 	argocd --kube-context argocd app wait argo-events
 
-	argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune --retry-limit 10
-	argocd --kube-context argocd app wait traefik
-	-$(MAKE) cert
+	if argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune --retry-limit 10; then argocd --kube-context argocd app wait traefik; $(MAKE) cert || true; fi
 	
 	kubectl --context argocd apply -f e/$(control).yaml
 	sleep 5
