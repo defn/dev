@@ -63,36 +63,6 @@ argocd-login:
 		|| (argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')" \
 				&& argocd account update-password --new-password adminadmin --current-password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')")
 
-vc0 vc1:
-	set -x; for v in "$@"; do \
-		while true; do if kubectl --context pod wait -n "$$v" -l statefulset.kubernetes.io/pod-name="$$v"-0 --for=condition=Ready pod; then break; fi; argocd --kube-context argocd app sync "$$v" --local "k/$$v" --assumeYes --prune --retry-limit 10; sleep 1; done; \
-		argocd --kube-context argocd app wait "$$v"; \
-		"$$v" get ns; \
-		~/bin/e env KUBECONFIG=$$KUBECONFIG_ALL argocd cluster add --upsert "loft-vcluster_$${v}_$${v}_loft-cluster" --name "$$v" --yes; \
-		while true; do if [[ "$$(argocd cluster get "$$v" --output json | jq -r '.name')" == "$$v" ]]; then break; fi; sleep 1; done; \
-		kubectl --context argocd apply -f "k/sets/$$v.yaml"; \
-		case "$$v" in \
-			vc0) \
-				argocd --kube-context argocd app sync vc0-kuma-global --local k/vc0-kuma-global --assumeYes --prune --retry-limit 10; \
-				argocd --kube-context argocd app wait vc0-kuma-global; \
-				argocd --kube-context argocd app sync vc0-demo --local k/vc0-demo --assumeYes --prune --retry-limit 10; \
-				argocd --kube-context argocd app wait vc0-demo; \
-				;; \
-			vc1) \
-				argocd --kube-context argocd app sync vc1-kuma-remote --local k/vc1-kuma-remote --assumeYes --prune --retry-limit 10; \
-				argocd --kube-context argocd app wait vc1-kuma-remote; \
-				argocd --kube-context argocd app sync vc1-knative --local k/vc1-knative --assumeYes --prune --retry-limit 10; \
-				argocd --kube-context argocd app wait vc1-knative; \
-				argocd --kube-context argocd app sync vc1-kourier --local k/vc1-kourier --assumeYes --prune --retry-limit 10; \
-				argocd --kube-context argocd app wait vc1-kourier; \
-				argocd --kube-context argocd app sync vc1-kong --local k/vc1-kong --assumeYes --prune --retry-limit 10; \
-				argocd --kube-context argocd app wait vc1-kong; \
-				argocd --kube-context argocd app sync vc1-demo --local k/vc1-demo --assumeYes --prune --retry-limit 10; \
-				argocd --kube-context argocd app wait vc1-demo; \
-				;; \
-		esac; \
-	done
-
 kubeconfig:
 	sudo cp /run/secrets/kubernetes.io/serviceaccount/ca.crt /usr/local/share/ca-certificates/
 	sudo cp ~/etc/ca.crt /usr/local/share/ca-certificates/
