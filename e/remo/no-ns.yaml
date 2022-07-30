@@ -12,6 +12,7 @@ spec:
           - name: cert-manager
             namespace: cert-manager
             cluster: in-cluster
+            path: cert-manager
   template:
     metadata:
       name: "{{name}}"
@@ -20,7 +21,7 @@ spec:
       project: default
       source:
         repoURL: https://github.com/defn/dev
-        path: k/{{name}}
+        path: k/{{path}}
         targetRevision: main
       destination:
         name: "{{cluster}}"
