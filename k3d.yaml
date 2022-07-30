@@ -32,7 +32,7 @@ options:
           - server:0
       - arg: --disable=traefik
         nodeFilters:
-          - all
+          - server:0
   kubeconfig:
     updateDefaultKubeconfig: true
     switchCurrentContext: true
