@@ -7,6 +7,8 @@ helmCharts:
   repo: https://helm.traefik.io/traefik
   includeCRDs: true
   valuesInline:
+    service:
+      type: LoadBalancer
 
 resources:
 - tls.yaml
