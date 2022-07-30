@@ -42,7 +42,7 @@ resource "kubernetes_secret" "dev" {
 }
 
 resource "digitalocean_kubernetes_node_pool" "dev" {
-  for_each = local.envs
+  for_each = local.nodes
 
   cluster_id = data.digitalocean_kubernetes_cluster.dev.id
 
