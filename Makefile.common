@@ -81,7 +81,7 @@ sync:
 
 	argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune --retry-limit 10
 	argocd --kube-context argocd app wait traefik
-	$(MAKE) cert
+	-$(MAKE) cert
 	
 	kubectl --context argocd apply -f e/$(control).yaml
 	sleep 5
