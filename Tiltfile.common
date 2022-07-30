@@ -9,17 +9,6 @@ allow_k8s_contexts("pod")
 update_settings(max_parallel_updates=20)
 
 # argocd
-local_resource(
-    "argocd",
-    cmd="""
-        set -x; cd;
-        if argocd --kube-context argocd app diff argocd --local k/argocd; then echo No difference; fi;
-    """,
-    deps=["k/argocd"],
-    allow_parallel=True,
-    labels=["deploy"],
-)
-
 cmd_button(
     name="ui argocd",
     text="argocd",
@@ -38,87 +27,7 @@ cmd_button(
     location="nav",
 )
 
-cmd_button(
-    name="sync argocd",
-    resource="argocd",
-    argv=[
-        "bash",
-        "-c",
-        """
-            set -x; cd;
-            argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune;
-            touch k/argocd/kustomization.yaml;
-        """,
-    ],
-    icon_name="build",
-)
-
-# argo-events
-local_resource(
-    "argo-events",
-    cmd="""
-        set -x; cd;
-        if argocd --kube-context argocd app diff argo-events --local k/argo-events; then echo No difference; fi;
-    """,
-    deps=["k/argo-events"],
-    allow_parallel=True,
-    labels=["deploy"],
-)
-
-cmd_button(
-    name="sync argo-events",
-    resource="argo-events",
-    argv=[
-        "bash",
-        "-c",
-        """
-            set -x; cd;
-            argocd --kube-context argocd app sync argo-events --local k/argo-events --assumeYes --prune;
-            touch k/argo-events/kustomization.yaml;
-        """,
-    ],
-    icon_name="build",
-)
-
-# argo-workflows
-local_resource(
-    "argo-workflows",
-    cmd="""
-        set -x; cd;
-        if argocd --kube-context argocd app diff argo-workflows --local k/argo-workflows; then echo No difference; fi;
-    """,
-    deps=["k/argo-workflows"],
-    allow_parallel=True,
-    labels=["deploy"],
-)
-
-cmd_button(
-    name="sync argo-workflows",
-    resource="argo-workflows",
-    argv=[
-        "bash",
-        "-c",
-        """
-            set -x; cd;
-            argocd --kube-context argocd app sync argo-workflows --local k/argo-workflows --assumeYes --prune;
-            touch k/argo-workflows/kustomization.yaml;
-        """,
-    ],
-    icon_name="build",
-)
-
 # traefik
-local_resource(
-    "traefik",
-    cmd="""
-        set -x; cd;
-        if argocd --kube-context argocd app diff traefik --local k/traefik; then echo No difference; fi;
-    """,
-    deps=["k/traefik"],
-    allow_parallel=True,
-    labels=["deploy"],
-)
-
 cmd_button(
     name="ui traefik",
     text="traefik",
@@ -135,19 +44,4 @@ cmd_button(
         ),
     ],
     location="nav",
-)
-
-cmd_button(
-    name="sync traefik",
-    resource="traefik",
-    argv=[
-        "bash",
-        "-c",
-        """
-            set -x; cd;
-            argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune;
-            touch k/traefik/kustomization.yaml;
-        """,
-    ],
-    icon_name="build",
 )
