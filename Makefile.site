@@ -81,14 +81,14 @@ push-arm:
 shell:
 	docker run --rm -ti $(repo)defn/dev bash -l
 
-cert:
+cert-ts:
 	sudo chown ubuntu /var/lib/tailscale/certs
 	sudo chown ubuntu /var/lib/tailscale/certs/k3d-*
 	-k --context pod create -n traefik secret generic default-certificate \
 		--from-file=tls.key=/var/lib/tailscale/certs/k3d-immanent.tiger-mamba.ts.net.key \
 		--from-file=tls.crt=/var/lib/tailscale/certs/k3d-immanent.tiger-mamba.ts.net.crt
 
-cert-vault:
+cert:
 	touch meh.json; chmod 0600 meh.json
 	-k --context pod create -n traefik secret generic default-certificate --from-file=meh.json
 	v write pki/issue/gyre.defn.dev common_name="remo-defn.tiger-mamba.ts.net" ip_sans="169.254.32.1" alt_names="hello.demo.svc.cluster.local" tl=120h -format=json | jq .data > meh.json
