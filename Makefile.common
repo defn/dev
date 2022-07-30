@@ -42,6 +42,14 @@ init-inner:
 	$(MAKE) vault-unseal
 	$(MAKE) kubeconfig
 
+	-kubectl --context pod create namespace argocd
+	kustomize build --enable-helm k/argocd | kubectl --context argocd apply -f -
+	kubectl --context argocd rollout status deployment argocd-server --watch
+	sleep 10; $(MAKE) argocd-login
+
+deploy:
+	kubectl --context argocd apply -f e/$(control).yaml
+
 tilt:
 	env tilt up --context pod --port $(tilt_port)
 
@@ -52,22 +60,6 @@ argocd-login:
 	argocd login --insecure argocd-server.argocd.svc --username admin --password adminadmin \
 		|| (argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')" \
 				&& argocd account update-password --new-password adminadmin --current-password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')")
-
-sync:
-	-kubectl --context pod create namespace argocd
-	kustomize build --enable-helm k/argocd | kubectl --context argocd apply -f -
-	kubectl --context argocd rollout status deployment argocd-server --watch
-	sleep 10; $(MAKE) argocd-login
-	kubectl --context argocd apply -f e/$(control)/ns.yaml
-	kubectl --context argocd apply -f e/$(control)/no-ns.yaml
-
-	argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune --retry-limit 10
-	argocd --kube-context argocd app wait argocd
-	
-	kubectl --context argocd apply -f e/$(control).yaml
-	sleep 5
-	argocd --kube-context argocd app sync sets-$(control) --local e/$(control) --assumeYes --prune --retry-limit 10
-	argocd --kube-context argocd app wait sets-$(control)
 
 vc0 vc1:
 	set -x; for v in "$@"; do \
