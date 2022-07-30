@@ -45,6 +45,8 @@ init-inner:
 
 	if kubectl --context pod create namespace argocd; then $(MAKE) init-argocd; fi
 
+	$(MAKE) deploy
+
 init-argocd:
 	kustomize build --enable-helm k/argocd | kubectl --context argocd apply -f -
 	kubectl --context argocd rollout status deployment argocd-server --watch

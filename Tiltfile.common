@@ -8,18 +8,6 @@ allow_k8s_contexts("pod")
 
 update_settings(max_parallel_updates=20)
 
-# make dev
-local_resource(
-    name="make deploy",
-    cmd="""
-        set -x; cd;
-        make deploy;
-    """,
-    allow_parallel=True,
-    deps=["hooks"],
-    labels=["automation"],
-)
-
 # argocd
 local_resource(
     "argocd",
