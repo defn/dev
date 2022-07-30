@@ -20,7 +20,10 @@ locals {
 
   droplet = {
     "defn" = {
-      droplet_size = "s-4vcpu-8gb-amd"
+      context = "k3d-remo-defn"
+      host = "k3d-remo-defn.tiger-mamba.ts.net"
+      ip = "100.85.87.36"
+      droplet_size = "s-2vcpu-4gb"
     }
   }
 

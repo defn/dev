@@ -1,8 +1,8 @@
 SHELL := /bin/bash
 
 workdir ?= /home/ubuntu
-podname ?= defn-0
-context ?= do-sfo3-remo
+podname ?= $(shell basename $(shell pwd))-0
+context ?= k3d-$(shell basename $(shell pwd))
 
 # export DIGITALOCEAN_ACCESS_TOKEN="$(pass DIGITALOCEAN_ACCESS_TOKEN)"
 # export TF_TOKEN_app_terraform_io="$(pass TF_TOKEN_app_terraform_io)"

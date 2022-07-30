@@ -19,8 +19,6 @@ function main {
   ln -nfs /mnt/work .
   for a in $(cat .tool-versions | grep -v python | awk '{print $1}' ); do asdf plugin-add $a; asdf install $a; done
   set -x
-  make registry
-  make import
 }
 
 main "$@"

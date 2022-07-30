@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: binfmt
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: binfmt
+          image: tonistiigi/binfmt
+          imagePullPolicy: Always
+          args: ["--install", "arm64"]
+          securityContext:
+            privileged: true

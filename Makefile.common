@@ -44,6 +44,9 @@ init-inner:
 tilt:
 	env tilt up --context pod --port $(tilt_port)
 
+login:
+	$(MAKE) argocd-login
+
 argocd-login:
 	argocd login --insecure argocd-server.argocd.svc --username admin --password adminadmin \
 		|| (argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')" \
@@ -69,16 +72,16 @@ sync:
 	argocd --kube-context external-secrets app sync external-secrets --local k/external-secrets --assumeYes --prune
 	argocd --kube-context external-secrets app wait external-secrets
 
-	argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune
-	argocd --kube-context argocd app wait traefik
-	-$(MAKE) cert
-
 	argocd --kube-context argocd app sync argo-workflows --local k/argo-workflows --assumeYes --prune
 	argocd --kube-context argocd app wait argo-workflows
 
 	argocd --kube-context argocd app sync argo-events --local k/argo-events --assumeYes --prune
 	argocd --kube-context argocd app wait argo-events
 
+	argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune
+	argocd --kube-context argocd app wait traefik
+	$(MAKE) cert
+	
 	kubectl --context argocd apply -f k/sets.yaml
 	sleep 5
 	argocd --kube-context argocd app sync sets --local k/sets --assumeYes --prune
