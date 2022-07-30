@@ -41,6 +41,7 @@ init-inner:
 	-cd work/password-store && git crypt unlock && git pull
 	$(MAKE) vault-unseal
 	$(MAKE) kubeconfig
+	$(MAKE) cert
 
 	if kubectl --context pod create namespace argocd; then $(MAKE) init-argocd; fi
 
@@ -53,6 +54,7 @@ deploy:
 	kubectl --context argocd apply -f e/$(control).yaml
 
 tilt:
+	$(MAKE) init
 	env tilt up --context pod --port $(tilt_port)
 
 login:

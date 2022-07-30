@@ -13,7 +13,6 @@ local_resource(
     name="make deploy",
     cmd="""
         set -x; cd;
-        make init;
         make deploy;
     """,
     allow_parallel=True,
