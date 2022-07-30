@@ -59,6 +59,15 @@ resource "kubernetes_stateful_set" "dev" {
           command = ["/usr/bin/tini", "--"]
           args    = ["tail", "-f", "/dev/null"]
 
+          env {
+            name  = "DEFN_DEV_HOST"
+            value = each.value.host
+          }
+
+          env {
+            name  = "DEFN_DEV_IP"
+            value = each.value.ip
+          }
           volume_mount {
             name       = "work"
             mount_path = "/home/ubuntu/work"
