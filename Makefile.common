@@ -24,6 +24,9 @@ unlock:
 	$(MAKE) vault-unseal
 
 dev:
+	@true
+
+dev-meh:
 	@if [[ ! -d work/password-store ]]; then if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi; fi
 
 init:
