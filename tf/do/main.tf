@@ -196,5 +196,11 @@ resource "digitalocean_kubernetes_cluster" "dev" {
     labels = {
       env = local.name
     }
+
+    taint {
+      key    = "env"
+      value  = local.name
+      effect = "NoSchedule"
+    }
   }
 }
