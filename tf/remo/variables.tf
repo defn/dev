@@ -1,15 +1,22 @@
+variable "want" {
+  type    = number
+  default = null
+}
+
 locals {
+  want = coalesce(var.want, 0)
+
   cluster = "remo"
   region  = "sfo3"
 
-  nodes = {
+  droplets = {
     "defn" = {
       size = "s-2vcpu-4gb"
     }
   }
 
   envs = {
-    "core" = {
+    "remo" = {
       host = "remo.tiger-mamba.ts.net"
       ip   = "169.254.32.1"
     }

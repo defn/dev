@@ -181,8 +181,7 @@ resource "digitalocean_kubernetes_cluster" "dev" {
     node_count = 1
 
     labels = {
-      env = "core"
+      env = local.name
     }
   }
 }
-
