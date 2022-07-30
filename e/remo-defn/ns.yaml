@@ -17,7 +17,7 @@ spec:
             namespace: cert-manager
             cluster: in-cluster
             path: cert-manager
-           - name: kyverno
+          - name: kyverno
             namespace: kyverno
             cluster: in-cluster
             path: kyverno
