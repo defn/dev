@@ -13,6 +13,10 @@ spec:
             namespace: argocd
             cluster: in-cluster
             path: argocd
+          - name: cert-manager
+            namespace: cert-manager
+            cluster: in-cluster
+            path: cert-manager
           - name: kyverno
             namespace: kyverno
             cluster: in-cluster
