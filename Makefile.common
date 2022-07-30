@@ -42,7 +42,9 @@ init-inner:
 	$(MAKE) vault-unseal
 	$(MAKE) kubeconfig
 
-	-kubectl --context pod create namespace argocd
+	if kubectl --context pod create namespace argocd; then $(MAKE) init-argocd; fi
+
+init-argocd:
 	kustomize build --enable-helm k/argocd | kubectl --context argocd apply -f -
 	kubectl --context argocd rollout status deployment argocd-server --watch
 	sleep 10; $(MAKE) argocd-login
