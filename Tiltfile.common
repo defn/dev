@@ -10,10 +10,11 @@ update_settings(max_parallel_updates=20)
 
 # make dev
 local_resource(
-    name="make sync",
+    name="make deploy",
     cmd="""
         set -x; cd;
-        make sync;
+        make init;
+        make deploy;
     """,
     allow_parallel=True,
     deps=["hooks"],
