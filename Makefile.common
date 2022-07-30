@@ -63,23 +63,6 @@ sync:
 
 	argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune --retry-limit 10
 	argocd --kube-context argocd app wait argocd
-
-	argocd --kube-context cert-manager app sync cert-manager --local k/cert-manager --assumeYes --prune --retry-limit 10
-	argocd --kube-context cert-manager app wait cert-manager
-
-	argocd --kube-context kyverno app sync kyverno --local k/kyverno --assumeYes --prune --retry-limit 10
-	argocd --kube-context kyverno app wait kyverno
-
-	argocd --kube-context external-secrets app sync external-secrets --local k/external-secrets --assumeYes --prune --retry-limit 10
-	argocd --kube-context external-secrets app wait external-secrets
-
-	argocd --kube-context argocd app sync argo-workflows --local k/argo-workflows --assumeYes --prune --retry-limit 10
-	argocd --kube-context argocd app wait argo-workflows
-
-	argocd --kube-context argocd app sync argo-events --local k/argo-events --assumeYes --prune --retry-limit 10
-	argocd --kube-context argocd app wait argo-events
-
-	if argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune --retry-limit 10; then argocd --kube-context argocd app wait traefik; $(MAKE) cert || true; fi
 	
 	kubectl --context argocd apply -f e/$(control).yaml
 	sleep 5

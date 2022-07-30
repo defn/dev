@@ -12,18 +12,27 @@ spec:
           - name: argocd
             namespace: argocd
             cluster: in-cluster
+            path: argocd
           - name: kyverno
             namespace: kyverno
             cluster: in-cluster
+            path: kyverno
           - name: external-secrets
             namespace: external-secrets
             cluster: in-cluster
+            path: external-secrets
           - name: argo-events
             namespace: argo-events
             cluster: in-cluster
+            path: argo-events
           - name: argo-workflows
             namespace: argo-workflows
             cluster: in-cluster
+            path: argo-workflows
+          - name: traefik
+            namespace: traefik
+            cluster: in-cluster
+            path: traefik-remo
   template:
     metadata:
       name: "{{name}}"
@@ -32,7 +41,7 @@ spec:
       project: default
       source:
         repoURL: https://github.com/defn/dev
-        path: k/{{name}}
+        path: k/{{path}}
         targetRevision: main
       destination:
         namespace: "{{namespace}}"
@@ -40,6 +49,8 @@ spec:
       syncPolicy:
         syncOptions:
           - CreateNamespace=true
+        automated:
+          prune: true
       ignoreDifferences:
         - kind: MutatingWebhookConfiguration
           group: admissionregistration.k8s.io

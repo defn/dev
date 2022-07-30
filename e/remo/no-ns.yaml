@@ -27,6 +27,8 @@ spec:
       syncPolicy:
         syncOptions:
           - CreateNamespace=true
+        automated:
+          prune: true
       ignoreDifferences:
         - kind: MutatingWebhookConfiguration
           group: admissionregistration.k8s.io

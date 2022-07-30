@@ -1,0 +1,12 @@
+bases:
+- ../traefik
+
+patchesStrategicMerge:
+- |-
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: traefik
+    namespace: traefik
+  spec:
+    type: ClusterIP
