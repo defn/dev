@@ -61,36 +61,36 @@ sync:
 	kubectl --context argocd apply -f e/$(control)/ns.yaml
 	kubectl --context argocd apply -f e/$(control)/no-ns.yaml
 
-	argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune
+	argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune --retry-limit 10
 	argocd --kube-context argocd app wait argocd
 
-	argocd --kube-context cert-manager app sync cert-manager --local k/cert-manager --assumeYes --prune
+	argocd --kube-context cert-manager app sync cert-manager --local k/cert-manager --assumeYes --prune --retry-limit 10
 	argocd --kube-context cert-manager app wait cert-manager
 
-	argocd --kube-context kyverno app sync kyverno --local k/kyverno --assumeYes --prune
+	argocd --kube-context kyverno app sync kyverno --local k/kyverno --assumeYes --prune --retry-limit 10
 	argocd --kube-context kyverno app wait kyverno
 
-	argocd --kube-context external-secrets app sync external-secrets --local k/external-secrets --assumeYes --prune
+	argocd --kube-context external-secrets app sync external-secrets --local k/external-secrets --assumeYes --prune --retry-limit 10
 	argocd --kube-context external-secrets app wait external-secrets
 
-	argocd --kube-context argocd app sync argo-workflows --local k/argo-workflows --assumeYes --prune
+	argocd --kube-context argocd app sync argo-workflows --local k/argo-workflows --assumeYes --prune --retry-limit 10
 	argocd --kube-context argocd app wait argo-workflows
 
-	argocd --kube-context argocd app sync argo-events --local k/argo-events --assumeYes --prune
+	argocd --kube-context argocd app sync argo-events --local k/argo-events --assumeYes --prune --retry-limit 10
 	argocd --kube-context argocd app wait argo-events
 
-	argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune
+	argocd --kube-context argocd app sync traefik --local k/traefik --assumeYes --prune --retry-limit 10
 	argocd --kube-context argocd app wait traefik
 	$(MAKE) cert
 	
 	kubectl --context argocd apply -f e/$(control).yaml
 	sleep 5
-	argocd --kube-context argocd app sync sets-$(control) --local e/$(control) --assumeYes --prune
+	argocd --kube-context argocd app sync sets-$(control) --local e/$(control) --assumeYes --prune --retry-limit 10
 	argocd --kube-context argocd app wait sets-$(control)
 
 vc0 vc1:
 	set -x; for v in "$@"; do \
-		while true; do if kubectl --context pod wait -n "$$v" -l statefulset.kubernetes.io/pod-name="$$v"-0 --for=condition=Ready pod; then break; fi; argocd --kube-context argocd app sync "$$v" --local "k/$$v" --assumeYes --prune; sleep 1; done; \
+		while true; do if kubectl --context pod wait -n "$$v" -l statefulset.kubernetes.io/pod-name="$$v"-0 --for=condition=Ready pod; then break; fi; argocd --kube-context argocd app sync "$$v" --local "k/$$v" --assumeYes --prune --retry-limit 10; sleep 1; done; \
 		argocd --kube-context argocd app wait "$$v"; \
 		"$$v" get ns; \
 		~/bin/e env KUBECONFIG=$$KUBECONFIG_ALL argocd cluster add --upsert "loft-vcluster_$${v}_$${v}_loft-cluster" --name "$$v" --yes; \
@@ -98,21 +98,21 @@ vc0 vc1:
 		kubectl --context argocd apply -f "k/sets/$$v.yaml"; \
 		case "$$v" in \
 			vc0) \
-				argocd --kube-context argocd app sync vc0-kuma-global --local k/vc0-kuma-global --assumeYes --prune; \
+				argocd --kube-context argocd app sync vc0-kuma-global --local k/vc0-kuma-global --assumeYes --prune --retry-limit 10; \
 				argocd --kube-context argocd app wait vc0-kuma-global; \
-				argocd --kube-context argocd app sync vc0-demo --local k/vc0-demo --assumeYes --prune; \
+				argocd --kube-context argocd app sync vc0-demo --local k/vc0-demo --assumeYes --prune --retry-limit 10; \
 				argocd --kube-context argocd app wait vc0-demo; \
 				;; \
 			vc1) \
-				argocd --kube-context argocd app sync vc1-kuma-remote --local k/vc1-kuma-remote --assumeYes --prune; \
+				argocd --kube-context argocd app sync vc1-kuma-remote --local k/vc1-kuma-remote --assumeYes --prune --retry-limit 10; \
 				argocd --kube-context argocd app wait vc1-kuma-remote; \
-				argocd --kube-context argocd app sync vc1-knative --local k/vc1-knative --assumeYes --prune; \
+				argocd --kube-context argocd app sync vc1-knative --local k/vc1-knative --assumeYes --prune --retry-limit 10; \
 				argocd --kube-context argocd app wait vc1-knative; \
-				argocd --kube-context argocd app sync vc1-kourier --local k/vc1-kourier --assumeYes --prune; \
+				argocd --kube-context argocd app sync vc1-kourier --local k/vc1-kourier --assumeYes --prune --retry-limit 10; \
 				argocd --kube-context argocd app wait vc1-kourier; \
-				argocd --kube-context argocd app sync vc1-kong --local k/vc1-kong --assumeYes --prune; \
+				argocd --kube-context argocd app sync vc1-kong --local k/vc1-kong --assumeYes --prune --retry-limit 10; \
 				argocd --kube-context argocd app wait vc1-kong; \
-				argocd --kube-context argocd app sync vc1-demo --local k/vc1-demo --assumeYes --prune; \
+				argocd --kube-context argocd app sync vc1-demo --local k/vc1-demo --assumeYes --prune --retry-limit 10; \
 				argocd --kube-context argocd app wait vc1-demo; \
 				;; \
 		esac; \
