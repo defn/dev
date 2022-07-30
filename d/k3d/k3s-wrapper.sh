@@ -14,7 +14,7 @@ while true; do
   sleep 1
 done
 
- domain=`/tailscale cert 2>&1 | grep ' use ' | cut -d'"' -f2`
+domain=`/tailscale cert 2>&1 | grep ' use ' | cut -d'"' -f2`
 while true; do
    /tailscale cert "${domain}" 
   sleep 36000
