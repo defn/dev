@@ -142,6 +142,19 @@ resource "digitalocean_volume_attachment" "dev" {
   droplet_id = digitalocean_droplet.dev[each.key].id
   volume_id  = digitalocean_volume.dev[each.key].id
 
+  provisioner "remote-exec" {
+    connection {
+      type  = "ssh"
+      agent = true
+      user  = "root"
+      host  = digitalocean_droplet.dev[each.key].ipv4_address
+    }
+
+    inline = [
+      "set -x; install -o ubuntu -g ubuntu .ssh/authorized_keys ~ubuntu/.ssh/"
+    ]
+  }
+
   provisioner "local-exec" {
     command = "ssh -o StrictHostKeyChecking=no ubuntu@${digitalocean_droplet.dev[each.key].ipv4_address} true"
   }
