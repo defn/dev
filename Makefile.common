@@ -54,6 +54,7 @@ init-argocd:
 
 deploy:
 	kubectl --context argocd apply -f e/$(control).yaml
+	argocd app list
 
 tilt:
 	$(MAKE) init
