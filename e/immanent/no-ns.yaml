@@ -1,0 +1,64 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: sets-immanent-no-ns
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/instance: sets
+spec:
+  generators:
+    - list:
+        elements:
+          - name: cert-manager
+            namespace: cert-manager
+            cluster: in-cluster
+  template:
+    metadata:
+      name: "{{name}}"
+      namespace: argocd
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/defn/dev
+        path: k/{{name}}
+        targetRevision: main
+      destination:
+        name: "{{cluster}}"
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+      ignoreDifferences:
+        - kind: MutatingWebhookConfiguration
+          group: admissionregistration.k8s.io
+          name: vault-agent-injector-cfg
+          jsonPointers:
+            - /webhooks/0/clientConfig/caBundle
+        - kind: MutatingWebhookConfiguration
+          group: admissionregistration.k8s.io
+          name: webhook.domainmapping.serving.knative.dev
+          jsonPointers:
+            - /webhooks/0/rules
+        - kind: MutatingWebhookConfiguration
+          group: admissionregistration.k8s.io
+          name: webhook.serving.knative.dev
+          jsonPointers:
+            - /webhooks/0/rules
+        - kind: ValidatingWebhookConfiguration
+          group: admissionregistration.k8s.io
+          name: validation.webhook.serving.knative.dev
+          jsonPointers:
+            - /webhooks/0/rules
+        - kind: ValidatingWebhookConfiguration
+          group: admissionregistration.k8s.io
+          name: validation.webhook.domainmapping.serving.knative.dev
+          jsonPointers:
+            - /webhooks/0/rules
+        - kind: Deployment
+          group: apps
+          name: kong-kong
+          jsonPointers:
+            - /spec/template/spec/tolerations
+        - group: kyverno.io
+          kind: ClusterPolicy
+          jqPathExpressions:
+            - .spec.rules[] | select(.name|test("autogen-."))
