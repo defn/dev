@@ -5,8 +5,9 @@ dummy_ip ?= 169.254.32.1
 workdir ?= /home/ubuntu
 tilt_port ?= 10350
 k3d_name ?= $(shell uname -n | cut -d. -f1)
-context ?= "k3d-$(k3d_name)"
-podname ?= "$(k3d_name)-0"
+context ?= k3d-$(k3d_name)
+podname ?= $(k3d_name)-0
+control ?= $(shell uname -n | sed s/-0//)
 
 trust-ca:
 	sudo security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-db etc/ca.crt
@@ -57,8 +58,8 @@ sync:
 	kustomize build --enable-helm k/argocd | kubectl --context argocd apply -f -
 	kubectl --context argocd rollout status deployment argocd-server --watch
 	sleep 10; $(MAKE) argocd-login
-	kubectl --context argocd apply -f k/sets/dev.yaml
-	kubectl --context argocd apply -f k/sets/dev-no-ns.yaml
+	kubectl --context argocd apply -f e/$(control)/ns.yaml
+	kubectl --context argocd apply -f e/$(control)/no-ns.yaml
 
 	argocd --kube-context argocd app sync argocd --local k/argocd --assumeYes --prune
 	argocd --kube-context argocd app wait argocd
@@ -82,10 +83,10 @@ sync:
 	argocd --kube-context argocd app wait traefik
 	$(MAKE) cert
 	
-	kubectl --context argocd apply -f k/sets.yaml
+	kubectl --context argocd apply -f e/$(control).yaml
 	sleep 5
-	argocd --kube-context argocd app sync sets --local k/sets --assumeYes --prune
-	argocd --kube-context argocd app wait sets
+	argocd --kube-context argocd app sync sets-$(control) --local e/$(control) --assumeYes --prune
+	argocd --kube-context argocd app wait sets-$(control)
 
 vc0 vc1:
 	set -x; for v in "$@"; do \

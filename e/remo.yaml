@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sets
+  name: sets-remo
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/defn/dev
-    path: k/sets
+    path: e/remo
     targetRevision: main
   destination:
     name: in-cluster
