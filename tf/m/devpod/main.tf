@@ -51,6 +51,13 @@ resource "kubernetes_stateful_set" "dev" {
           empty_dir {}
         }
 
+        volume {
+          name = "certs"
+          host_path {
+            path = "/var/lib/tailscale/certs"
+          }
+        }
+
         container {
           name              = "dev"
           image             = "defn/dev:latest"
@@ -71,6 +78,10 @@ resource "kubernetes_stateful_set" "dev" {
           volume_mount {
             name       = "work"
             mount_path = "/home/ubuntu/work"
+          }
+          volume_mount {
+            name       = "certs"
+            mount_path = "/var/lib/tailscale/certs"
           }
         }
 
