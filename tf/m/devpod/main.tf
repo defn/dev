@@ -138,6 +138,25 @@ resource "kubernetes_stateful_set" "dev" {
   }
 }
 
+resource "kubernetes_service" "vault" {
+  metadata {
+    name      = "vault"
+    namespace = "default"
+  }
+  spec {
+    selector = {
+      app = "dev"
+    }
+    session_affinity = "ClientIP"
+    port {
+      port        = 8200
+      target_port = 8200
+    }
+
+    type = "ClusterIP"
+  }
+}
+
 resource "kubernetes_cluster_role_binding" "dev" {
   metadata {
     name = "dev"
