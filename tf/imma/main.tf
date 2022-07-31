@@ -1,6 +1,6 @@
 provider "kubernetes" {
   config_path    = "~/.kube/config"
-  config_context = "k3d-immanent"
+  config_context = "k3d-imma"
 }
 
 module "devpod" {
