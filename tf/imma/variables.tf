@@ -1,8 +1,8 @@
 locals {
   envs = {
-    "immanent" = {
-      host = "k3d-immanent.tiger-mamba.ts.net"
-      ip   = "100.97.109.86"
+    "imma" = {
+      host = "k3d-imma.tiger-mamba.ts.net"
+      ip   = "100.79.73.124"
     }
   }
 }
