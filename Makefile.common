@@ -89,7 +89,7 @@ attach-remo:
 
 cluster:
 	cd d/k3d && $(MAKE) get-state name=$(context)
-	env DEFN_DEV_HOST=${context}.${domain} DEFN_DEV_IP="$$(host k3d-imma.tiger-mamba.ts.net | grep 'has address' | awk '{print $$NF}')" $(MAKE) cluster-inner name=$(context) ip=$(ip)
+	env DEFN_DEV_HOST=${context}.${domain} DEFN_DEV_IP="$$(host ${context}.${domain} | grep 'has address' | awk '{print $$NF}')" $(MAKE) cluster-inner
 
 cluster-inner:
 	cd d/k3d && $(MAKE) build name=$(context)
