@@ -18,4 +18,4 @@ while true; do
   sleep 36000
 done &
 
-exec /bin/k3s-real "$@" --node-ip "${container_ip}" --node-external-ip "${ts_ip}"
+exec /bin/k3s-real "$@" --node-ip "${ts_ip}" --node-external-ip "${ts_ip}"
