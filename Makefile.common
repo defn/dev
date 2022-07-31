@@ -50,6 +50,7 @@ init-argocd:
 
 deploy:
 	kubectl --context argocd apply -f e/$(control).yaml
+	argocd app sync sets-$(control)
 	argocd app list
 
 tilt:
