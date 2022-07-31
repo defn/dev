@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: sets-immanent-ns
+  name: sets-imma-ns
   namespace: argocd
   labels:
     argocd.argoproj.io/instance: sets

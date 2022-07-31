@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sets-immanent
+  name: sets-imma
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/defn/dev
-    path: e/immanent
+    path: e/imma
     targetRevision: main
   destination:
     name: in-cluster
