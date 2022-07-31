@@ -1,0 +1,16 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerSet
+metadata:
+  name: defn
+  namespace: gha
+spec:
+  replicas: 1
+  repository: defn/dev
+  selector:
+    matchLabels:
+      app: defn
+  serviceName: defn
+  template:
+    metadata:
+      labels:
+        app: defn
