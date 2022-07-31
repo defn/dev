@@ -37,6 +37,10 @@ spec:
             namespace: traefik
             cluster: in-cluster
             path: traefik
+          - name: gha
+            namespace: gha
+            cluster: in-cluster
+            path: gha
   template:
     metadata:
       name: "{{name}}"
