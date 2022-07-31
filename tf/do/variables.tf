@@ -9,7 +9,7 @@ variable "home" {
 }
 
 locals {
-  want = coalesce(var.want, 0)
+  want = coalesce(var.want, 1)
 
   name    = "remo"
   region  = "sfo3"
@@ -19,6 +19,13 @@ locals {
   tailscale_domain = "tiger-mamba.ts.net"
 
   droplet = {
+    "global" = {
+      context      = "k3d-remo-global"
+      host         = "k3d-remo-global.tiger-mamba.ts.net"
+      ip           = "100.85.87.36"
+      droplet_size = "s-1vcpu-2gb"
+    }
+
     "defn" = {
       context      = "k3d-remo-defn"
       host         = "k3d-remo-defn.tiger-mamba.ts.net"
@@ -28,6 +35,10 @@ locals {
   }
 
   volume = {
+    "global" = {
+      volume_size = "1"
+    }
+
     "defn" = {
       volume_size = "1"
     }
