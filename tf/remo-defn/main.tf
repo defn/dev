@@ -4,6 +4,6 @@ provider "kubernetes" {
 }
 
 module "devpod" {
-  source = "../../m/devpod"
+  source = "../m/devpod"
   envs   = local.envs
 }
