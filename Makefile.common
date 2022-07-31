@@ -35,8 +35,8 @@ init-inner:
 	$(MAKE) kubeconfig
 	$(MAKE) cert
 
+init-deploy:
 	if kubectl --context pod create namespace argocd; then $(MAKE) init-argocd; fi
-
 	$(MAKE) deploy
 
 init-argocd:
