@@ -49,7 +49,9 @@ stop: # Stop k3d
 	k3d cluster stop $(k3d_name)
 
 amd arm:
-	env PATH="$$HOME/bin/fake:$$PATH" earthly --remote-cache=$(cache)defn/cache:updates-$@ $(push) +"$@"64-update --repo=
+	git pull
+	git push
+	if [[ "$(shell pwd)" == "$(HOME)" ]]; then cd work/dev && git pull && $(MAKE) $@; else env PATH="$$HOME/bin/fake:$$PATH" earthly --remote-cache=$(cache)defn/cache:updates-$@ $(push) +"$@"64-update --repo=; fi
 
 shell:
 	docker run --rm -ti $(repo)defn/dev bash -l
