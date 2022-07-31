@@ -7,6 +7,7 @@ k3d_name ?= $(shell uname -n | cut -d. -f1)
 context ?= k3d-$(k3d_name)
 podname ?= $(k3d_name)-0
 control ?= $(shell uname -n | sed s/-0//)
+domain ?= tiger-mamba.ts.net
 
 trust-ca:
 	sudo security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-db etc/ca.crt
@@ -85,16 +86,16 @@ attach:
 attach-remo:
 	code --folder-uri vscode-remote://k8s-container+context=remo+namespace=default+podname=dev-0+name=dev+$(workdir)
 
-# env DEFN_DEV_HOST=k3d-immanent.tiger-mamba.ts.net DEFN_DEV_IP=100.97.109.86 make cluster
 cluster:
-	$(MAKE) cluster-inner name=$(context) ip=$(ip)
+	cd d/k3d && $(MAKE) get-state name=$(context)
+	env DEFN_DEV_HOST=${context}.${domain} DEFN_DEV_IP="$$(host k3d-imma.tiger-mamba.ts.net | grep 'has address' | awk '{print $$NF}')" $(MAKE) cluster-inner name=$(context) ip=$(ip)
 
 cluster-inner:
 	cd d/k3d && $(MAKE) build name=$(context)
 	-k3d cluster delete $(k3d_name)
 	if [[ -x "$$(type -P tailscale)" ]]; then if tailscale ip 2>&1 | grep NeedsLogin; then sudo tailscale up; fi; fi
 	k3d cluster create $(k3d_name) --config k3d.yaml --k3s-node-label env=$(k3d_name)@server:0
-	#k3d node create $(k3d_name) --role agent --image defn.dev/defn/k3d --token TOKEN --cluster https://k3d-remo-defn.tiger-mamba.ts.net:6443
+	#k3d node create $(k3d_name) --role agent --image defn.dev/defn/k3d --token TOKEN --cluster https://${context}.${domain}:6443
 	docker update --restart=no k3d-$(k3d_name)-server-0
 	docker exec k3d-$(k3d_name)-server-0 touch /etc/passwd
 
