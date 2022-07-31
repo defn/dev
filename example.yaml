@@ -16,3 +16,8 @@ spec:
         - name: ubuntu
           image: ubuntu
           command: ["tail", "-f", "/dev/null"]
+          resources:
+            limits:
+              memory: "10Mi"
+              cpu: "100m"
+# kubectl get pods -o json | jq -r '.items[] | "\(.metadata.name) \(.spec.nodeName)"'
