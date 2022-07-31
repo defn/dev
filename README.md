@@ -47,3 +47,11 @@ vault write auth/kubernetes/role/demo bound_service_account_names=default bound_
 kubectl --context pod patch -n vc1 service kourier-internal-x-kourier-system-x-vc1 -p '{"metadata":{"annotations":{"traefik.ingress.kubernetes.io/service.serversscheme":"h2c"}}}'
 
 v write pki/roles/gyre.defn.dev allowed_domains=demo.svc.cluster.local,tiger-mamba.ts.net allow_subdomains=true max_ttl=120h
+
+v write -f transit/keys/autounseal-remo
+v policy write autounseal-remo etc/vault-autounseal-remo-policy.hcl
+VAULT_TOKEN="$(env VAULT_TOKEN="$(v token create -policy="autounseal-remo" -wrap-ttl=120 -format json | jq -r '.wrap_info.token')" v unwrap -format json | jq -r '.auth.client_token')"
+
+
+
+

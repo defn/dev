@@ -20,8 +20,17 @@ helmCharts:
             address = "[::]:8200"
             cluster_address = "[::]:8201"
           }
+
           storage "file" {
             path = "/vault/data"
+          }
+
+          seal "transit" {
+            address = "http://vault.default.svc:8200"
+            disable_renewal = "false"
+            key_name = "autounseal-remo"
+            mount_path = "transit/"
+            tls_skip_verify = "true"
           }
   includeCRDs: true
 
