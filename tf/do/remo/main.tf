@@ -62,7 +62,3 @@ resource "digitalocean_kubernetes_node_pool" "dev" {
   }
 }
 
-module "devpod" {
-  source = "../m/devpod"
-  envs   = local.envs
-}
