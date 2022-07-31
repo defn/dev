@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: sets-imma-ns
+  name: sets-imma-replace
   namespace: argocd
   labels:
     argocd.argoproj.io/instance: sets
@@ -9,34 +9,10 @@ spec:
   generators:
     - list:
         elements:
-          - name: argocd
-            namespace: argocd
+          - name: gha
+            namespace: gha
             cluster: in-cluster
-            path: argocd
-          - name: cert-manager
-            namespace: cert-manager
-            cluster: in-cluster
-            path: cert-manager
-          - name: kyverno
-            namespace: kyverno
-            cluster: in-cluster
-            path: kyverno
-          - name: external-secrets
-            namespace: external-secrets
-            cluster: in-cluster
-            path: external-secrets
-          - name: argo-events
-            namespace: argo-events
-            cluster: in-cluster
-            path: argo-events
-          - name: argo-workflows
-            namespace: argo-workflows
-            cluster: in-cluster
-            path: argo-workflows
-          - name: traefik
-            namespace: traefik
-            cluster: in-cluster
-            path: traefik
+            path: gha
   template:
     metadata:
       name: "{{name}}"
@@ -53,6 +29,7 @@ spec:
       syncPolicy:
         syncOptions:
           - CreateNamespace=true
+          - Replace=true
         automated:
           prune: true
       ignoreDifferences:
