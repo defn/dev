@@ -112,6 +112,11 @@ vault-seal:
 	-env VAULT_TOKEN="$$(pass Initial_Root_Token)" VAULT_ADDR=http://localhost:8200 vault operator seal
 	rm -f ~/.vault-token
 
+vault-backup:
+	-$(MAKE) vault-seal
+	cd .password-store && git pull && git add vault && git add -u vault && (git commit -m 'vault backup' || true) && git push
+	cd .password-store && git status -sb
+
 down:
 	-$(MAKE) vault-seal
 	-cd ~/.password-store && sudo -u ubuntu git-crypt lock
