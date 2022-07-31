@@ -48,6 +48,11 @@ recreate-pod: # Recreate pod
 stop: # Stop k3d
 	k3d cluster stop $(k3d_name)
 
+platforms:
+	git pull
+	git push
+	if [[ "$(shell pwd)" == "$(HOME)" ]]; then cd work/dev && git pull && $(MAKE) $@; else env PATH="$$HOME/bin/fake:$$PATH" earthly --remote-cache=$(cache)defn/cache:updates-$@ $(push) +images --repo=; fi
+
 amd arm:
 	git pull
 	git push
