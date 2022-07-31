@@ -40,6 +40,7 @@ node_modules
 .config/argocd
 .config/gomuks
 .config/packer
+.config/ggshield
 .loft
 .lesshst
 .fly
