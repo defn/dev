@@ -1,4 +1,4 @@
-dummy_host = os.environ.get("DEFN_DEV_HOST", "169.254.32.1")
+dummy_host = os.environ.get("DEFN_DEV_HOST")
 
 analytics_settings(False)
 

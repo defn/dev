@@ -4,8 +4,6 @@ set -exfu
 
 ./tailscaled --statedir=/var/lib/tailscale &
 
-ip link add dummy0 type dummy; ip addr add 169.254.32.1/32 dev dummy0; ip link set dev dummy0 up
-
 container_ip=`ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | cut -d' ' -f1`
 
 while true; do
