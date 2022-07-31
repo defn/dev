@@ -1,8 +1,8 @@
 locals {
   envs = {
-    "remo-defn" = {
-      host = "k3d-remo-defn.tiger-mamba.ts.net"
-      ip   = "100.85.87.36"
+    "remo-global" = {
+      host = "k3d-remo-global.tiger-mamba.ts.net"
+      ip   = "100.97.109.86"
     }
   }
 }
