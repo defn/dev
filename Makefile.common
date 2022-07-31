@@ -84,6 +84,7 @@ attach:
 attach-remo:
 	code --folder-uri vscode-remote://k8s-container+context=remo+namespace=default+podname=dev-0+name=dev+$(workdir)
 
+# env DEFN_DEV_HOST=k3d-immanent.tiger-mamba.ts.net DEFN_DEV_IP=100.97.109.86 make cluster
 cluster:
 	git pull
 	$(MAKE) cluster-inner name=$(context) ip=$(ip)
