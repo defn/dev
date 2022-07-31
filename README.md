@@ -50,7 +50,7 @@ v write pki/roles/gyre.defn.dev allowed_domains=demo.svc.cluster.local,tiger-mam
 
 v write -f transit/keys/autounseal-remo
 v policy write autounseal-remo etc/vault-autounseal-remo-policy.hcl
-VAULT_TOKEN="$(env VAULT_TOKEN="$(v token create -policy="autounseal-remo" -wrap-ttl=120 -format json | jq -r '.wrap_info.token')" v unwrap -format json | jq -r '.auth.client_token')"
+k create secret -n vault generic vault-unseal --from-literal=VAULT_TOKEN="$(env VAULT_TOKEN="$(v token create -policy="autounseal-remo" -wrap-ttl=120 -format json | jq -r '.wrap_info.token')" v unwrap -format json | jq -r '.auth.client_token')"
 
 
 
