@@ -11,6 +11,8 @@ helmCharts:
       enabled: "true"
       metricsProvider:
         enabled: "true"
+      processAgent:
+        enabled: "true"
     datadog:
       appKeyExistingSecret: datadog-app-secret
       apiKeyExistingSecret: datadog-api-secret
