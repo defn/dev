@@ -51,5 +51,7 @@ v write pki/roles/gyre.defn.dev allowed_domains=demo.svc.cluster.local,tiger-mam
 v write -f transit/keys/autounseal-remo
 v policy write autounseal-remo etc/vault-autounseal-remo-policy.hcl
 
+# https://app.datadoghq.com/organization-settings/api-keys
 n datadog create secret generic datadog-api-secret --from-literal api-key=""
+# https://app.datadoghq.com/organization-settings/application-keys
 n datadog create secret generic datadog-app-secret --from-literal app-key=""
