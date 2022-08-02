@@ -26,7 +26,6 @@ dev-meh:
 	@if [[ ! -d work/password-store ]]; then if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi; fi
 
 init:
-	-git pull
 	$(MAKE) init-inner
 	$(MAKE) init-site
 
