@@ -1,0 +1,14 @@
+namespace: external-dns
+
+helmCharts:
+- releaseName: external-dns
+  name: external-dns
+  version: 6.7.2
+  repo: https://charts.bitnami.com/bitnami
+  includeCRDs: true
+  valuesInline:
+    sources:
+      - crd
+      - service
+      - ingress
+    provider: cloudflare

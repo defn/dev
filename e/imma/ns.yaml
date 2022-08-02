@@ -25,6 +25,10 @@ spec:
             namespace: external-secrets
             cluster: in-cluster
             path: external-secrets
+          - name: external-dns
+            namespace: external-dns
+            cluster: in-cluster
+            path: external-dns
           - name: argo-events
             namespace: argo-events
             cluster: in-cluster
