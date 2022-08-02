@@ -12,3 +12,5 @@ helmCharts:
       - service
       - ingress
     provider: cloudflare
+    crd:
+      create: true
