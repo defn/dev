@@ -67,6 +67,11 @@ resource "kubernetes_stateful_set" "dev" {
           args    = ["tail", "-f", "/dev/null"]
 
           env {
+            name  = "DEFN_DEV_WORKDIR"
+            value = each.value.workdir
+          }
+
+          env {
             name  = "DEFN_DEV_HOST"
             value = each.value.host
           }
