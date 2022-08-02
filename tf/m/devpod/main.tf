@@ -105,6 +105,15 @@ resource "kubernetes_stateful_set" "dev" {
         }
 
         container {
+          name              = "doh"
+          image             = "defn/dev:latest"
+          image_pull_policy = "Always"
+
+          command = ["/usr/bin/tini", "--"]
+          args    = ["bash", "-c", "exec ~/bin/e cloudflared proxy-dns --port 5553"]
+        }
+
+        container {
           name              = "buildkitd"
           image             = "earthly/buildkitd:v0.6.19"
           image_pull_policy = "IfNotPresent"
