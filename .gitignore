@@ -68,3 +68,4 @@ node_modules
 .commit
 .kuma
 .cloud-locale-test.skip
+.cloudflared
