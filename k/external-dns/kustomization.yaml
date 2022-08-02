@@ -8,9 +8,6 @@ helmCharts:
   includeCRDs: true
   valuesInline:
     sources:
-      - crd
       - service
       - ingress
     provider: cloudflare
-    crd:
-      create: true
