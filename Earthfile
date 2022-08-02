@@ -781,6 +781,7 @@ pipx:
     RUN ~/.asdf/shims/pipx install pip-tools
     RUN ~/.asdf/shims/pipx install httpie
     RUN ~/.asdf/shims/pipx install ggshield
+    RUN ~/.asdf/shims/pipx install supervisor
     RUN git init
     COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
     RUN bash -c 'source ~/.asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit install'
