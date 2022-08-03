@@ -260,7 +260,7 @@ resource "kubernetes_ingress_v1" "code_server" {
     namespace = "default"
 
     annotations = {
-      "traefik.ingress.kubernetes.io/router.entrypoints" = "https8888"
+      "traefik.ingress.kubernetes.io/router.entrypoints" = "https"
       "traefik.ingress.kubernetes.io/router.tls"         = "true"
     }
   }
