@@ -37,7 +37,6 @@ patchesStrategicMerge:
           - --metrics.prometheus.entrypoint=metrics
           - --providers.kubernetescrd
           - --providers.kubernetesingress
-          - --entrypoints.https.address=:443/tcp
           - --entrypoints.web.address=:8000/tcp
           - --entrypoints.websecure.address=:8443/tcp
           - --entrypoints.https8200.address=:8200/tcp
@@ -63,9 +62,6 @@ patchesStrategicMerge:
           - --log.level=DEBUG
           - --accesslog=true
           ports:
-          - containerPort: 443
-            name: https
-            protocol: TCP
           - containerPort: 8200
             name: https8200
             protocol: TCP
@@ -121,10 +117,10 @@ patchesStrategicMerge:
       spec:
         ports:
         - $patch: replace
-        - name: https
+        - name: https443
           port: 443
           protocol: TCP
-          targetPort: https
+          targetPort: https8888
         - name: web
           port: 8000
           protocol: TCP
