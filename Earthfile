@@ -246,6 +246,9 @@ tower:
     # rerun-process-wrapper
     COPY (+rerun-process-wrapper/*) /
 
+    # code-server
+    RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local
+
     ENTRYPOINT ["/usr/bin/tini", "--"]
 
 tools:

@@ -70,3 +70,4 @@ node_modules
 .cloud-locale-test.skip
 .cloudflared
 .config/coderv2/
+.config/code-server/
