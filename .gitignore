@@ -69,3 +69,4 @@ node_modules
 .kuma
 .cloud-locale-test.skip
 .cloudflared
+.config/coderv2/
