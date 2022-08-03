@@ -37,6 +37,7 @@ patchesStrategicMerge:
           - --metrics.prometheus.entrypoint=metrics
           - --providers.kubernetescrd
           - --providers.kubernetesingress
+          - --entrypoints.https.address=:443/tcp
           - --entrypoints.web.address=:8000/tcp
           - --entrypoints.websecure.address=:8443/tcp
           - --entrypoints.https8200.address=:8200/tcp
