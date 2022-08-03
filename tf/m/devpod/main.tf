@@ -98,7 +98,7 @@ resource "kubernetes_stateful_set" "dev" {
           image_pull_policy = "Always"
 
           command = ["/usr/bin/tini", "--"]
-          args    = ["bash", "-c", "exec ~/bin/e code-server --bind-addr 127.0.0.1:8888"]
+          args    = ["bash", "-c", "exec ~/bin/e code-server --bind-addr 0.0.0.0:8888"]
 
 
           env {
@@ -194,17 +194,40 @@ resource "kubernetes_service" "vault" {
     name      = "vault"
     namespace = "default"
   }
+
   spec {
     selector = {
       app = "dev"
     }
-    session_affinity = "ClientIP"
+
     port {
       port        = 8200
       target_port = 8200
     }
 
-    type = "ClusterIP"
+    session_affinity = "ClientIP"
+    type             = "ClusterIP"
+  }
+}
+
+resource "kubernetes_service" "code_server" {
+  metadata {
+    name      = "code-server"
+    namespace = "default"
+  }
+
+  spec {
+    selector = {
+      app = "dev"
+    }
+
+    port {
+      port        = 8888
+      target_port = 8888
+    }
+
+    session_affinity = "ClientIP"
+    type             = "ClusterIP"
   }
 }
 
@@ -225,3 +248,37 @@ resource "kubernetes_cluster_role_binding" "dev" {
     name      = "cluster-admin"
   }
 }
+
+resource "kubernetes_ingress_v1" "code_server" {
+  metadata {
+    name      = "code-server"
+    namespace = "default"
+
+    annotations = {
+      "traefik.ingress.kubernetes.io/router.entrypoints" = "https8888"
+      "traefik.ingress.kubernetes.io/router.tls"         = "true"
+    }
+  }
+
+  spec {
+    rule {
+      http {
+        path {
+          path      = "/"
+          path_type = "Prefix"
+
+          backend {
+            service {
+              name = "code-server"
+
+              port {
+                number = 8888
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
