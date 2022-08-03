@@ -62,6 +62,9 @@ patchesStrategicMerge:
           - --log.level=DEBUG
           - --accesslog=true
           ports:
+          - containerPort: 443
+            name: https
+            protocol: TCP
           - containerPort: 8200
             name: https8200
             protocol: TCP
@@ -120,7 +123,7 @@ patchesStrategicMerge:
         - name: https
           port: 443
           protocol: TCP
-          targetPort: https8888
+          targetPort: https
         - name: web
           port: 8000
           protocol: TCP
