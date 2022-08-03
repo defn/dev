@@ -80,10 +80,47 @@ resource "kubernetes_stateful_set" "dev" {
             name  = "DEFN_DEV_IP"
             value = each.value.ip
           }
+
           volume_mount {
             name       = "work"
             mount_path = "/home/ubuntu/work"
           }
+
+          volume_mount {
+            name       = "certs"
+            mount_path = "/var/lib/tailscale/certs"
+          }
+        }
+
+        container {
+          name              = "code-server"
+          image             = "defn/dev:latest"
+          image_pull_policy = "Always"
+
+          command = ["/usr/bin/tini", "--"]
+          args    = ["bash", "-c", "exec ~/bin/e code-server --bind-addr 127.0.0.1:8888"]
+
+
+          env {
+            name  = "DEFN_DEV_WORKDIR"
+            value = each.value.workdir
+          }
+
+          env {
+            name  = "DEFN_DEV_HOST"
+            value = each.value.host
+          }
+
+          env {
+            name  = "DEFN_DEV_IP"
+            value = each.value.ip
+          }
+
+          volume_mount {
+            name       = "work"
+            mount_path = "/home/ubuntu/work"
+          }
+
           volume_mount {
             name       = "certs"
             mount_path = "/var/lib/tailscale/certs"
@@ -102,15 +139,6 @@ resource "kubernetes_stateful_set" "dev" {
             name       = "work"
             mount_path = "/home/ubuntu/work"
           }
-        }
-
-        container {
-          name              = "code-server"
-          image             = "defn/dev:latest"
-          image_pull_policy = "Always"
-
-          command = ["/usr/bin/tini", "--"]
-          args    = ["bash", "-c", "exec ~/bin/e code-server --bind-addr 127.0.0.1:8888"]
         }
 
         container {
