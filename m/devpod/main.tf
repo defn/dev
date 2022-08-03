@@ -98,7 +98,7 @@ resource "kubernetes_stateful_set" "dev" {
           image_pull_policy = "Always"
 
           command = ["/usr/bin/tini", "--"]
-          args    = ["bash", "-c", "exec ~/bin/e code-server --bind-addr 0.0.0.0:8888"]
+          args    = ["bash", "-c", "exec ~/bin/e code-server --bind-addr 0.0.0.0:8888 --auth none"]
 
 
           env {
