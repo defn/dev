@@ -105,6 +105,15 @@ resource "kubernetes_stateful_set" "dev" {
         }
 
         container {
+          name              = "code-server"
+          image             = "defn/dev:latest"
+          image_pull_policy = "Always"
+
+          command = ["/usr/bin/tini", "--"]
+          args    = ["bash", "-c", "exec ~/bin/e code-server --bind-addr 127.0.0.1:8888"]
+        }
+
+        container {
           name              = "doh"
           image             = "defn/dev:latest"
           image_pull_policy = "Always"
