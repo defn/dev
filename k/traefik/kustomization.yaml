@@ -40,6 +40,7 @@ patchesStrategicMerge:
           - --entrypoints.web.address=:8000/tcp
           - --entrypoints.websecure.address=:8443/tcp
           - --entrypoints.https8200.address=:8200/tcp
+          - --entrypoints.https8888.address=:8888/tcp
           - --entrypoints.https9600.address=:9600/tcp
           - --entrypoints.https9601.address=:9601/tcp
           - --entrypoints.https9602.address=:9602/tcp
@@ -63,6 +64,9 @@ patchesStrategicMerge:
           ports:
           - containerPort: 8200
             name: https8200
+            protocol: TCP
+          - containerPort: 8888
+            name: https8888
             protocol: TCP
           - containerPort: 9600
             name: https9600
@@ -125,6 +129,10 @@ patchesStrategicMerge:
           port: 8200
           protocol: TCP
           targetPort: https8200
+        - name: https8888
+          port: 8888
+          protocol: TCP
+          targetPort: https8888
         - name: https9600
           port: 9600
           protocol: TCP
