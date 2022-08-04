@@ -1,6 +1,18 @@
 {
-    "workbench.colorTheme": "Default Dark+",
+    "editor.formatOnSave": true,
+    "editor.minimap.enabled": false,
+    "extensions.ignoreRecommendations": true,
+    "git.confirmSync": false,
     "gitlens.codeLens.enabled": false,
     "gitlens.statusBar.enabled": false,
-    "terminal.integrated.sendKeybindingsToShell": true
+    "redhat.telemetry.enabled": false,
+    "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "terminal.integrated.localEchoEnabled": "on",
+    "terminal.integrated.sendKeybindingsToShell": true,
+    "terminal.integrated.showExitAlert": false,
+    "terraform.languageServer.ignoreSingleFileWarning": true,
+    "workbench.colorTheme": "Default Dark+",
+    "workbench.editor.untitled.hint": "hidden",
+    "workbench.startupEditor": "none"
 }
