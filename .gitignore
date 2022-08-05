@@ -73,3 +73,5 @@ node_modules
 .config/code-server/
 .deps.clj/
 .m2/
+.vscode-cli/
+.vscode-server-insiders/
