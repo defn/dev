@@ -66,6 +66,8 @@ resource "kubernetes_stateful_set" "dev" {
           command = ["/usr/bin/tini", "--"]
           args    = ["tail", "-f", "/dev/null"]
 
+          tty = true
+
           env {
             name  = "DEFN_DEV_WORKDIR"
             value = each.value.workdir
@@ -90,6 +92,10 @@ resource "kubernetes_stateful_set" "dev" {
             name       = "certs"
             mount_path = "/var/lib/tailscale/certs"
           }
+
+          security_context {
+            privileged = true
+          }
         }
 
         container {
@@ -100,6 +106,7 @@ resource "kubernetes_stateful_set" "dev" {
           command = ["/usr/bin/tini", "--"]
           args    = ["bash", "-c", "exec ~/bin/e code-server --bind-addr 0.0.0.0:8888 --disable-telemetry"]
 
+          tty = true
 
           env {
             name  = "DEFN_DEV_WORKDIR"
