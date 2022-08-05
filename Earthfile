@@ -250,7 +250,7 @@ tower:
 
     # code-server
     RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local
-    RUN for a in betterthantomorrow.calva betterthantomorrow.joyride eamodio.gitlens ms-python.python vscodevim.vim; do code-server --install-extension "$a"; done
+    RUN for a in betterthantomorrow.calva betterthantomorrow.joyride eamodio.gitlens ms-python.python vscodevim.vim; do ~/bin/e code-server --install-extension "$a"; done
 
     ENTRYPOINT ["/usr/bin/tini", "--"]
 
