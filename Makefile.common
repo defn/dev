@@ -82,7 +82,6 @@ asdf:
 
 attach:
 	code --folder-uri vscode-remote://k8s-container+context=$(context)+namespace=default+podname=$(podname)+name=dev+$(workdir)
-	-kubectl get events -w
 
 attach-remo:
 	code --folder-uri vscode-remote://k8s-container+context=remo+namespace=default+podname=dev-0+name=dev+$(workdir)
