@@ -57,7 +57,7 @@ export KUBECONFIG_ALL="$HOME/.kube/config:$HOME/.kube/vc0.conf:$HOME/.kube/confi
 
 # vscode
 if [[ -n "${VSCODE_GIT_IPC_HANDLE:-}" ]]; then
-	export VISUAL="code --wait"
+	#export VISUAL="code --wait"
 
 	if [[ ! -S "${SSH_AUTH_SOCK:-}" ]]; then
 		export SSH_AUTH_SOCK="$(ls -td /tmp/vscode-ssh-auth-sock-* 2>/dev/null | head -1)"
