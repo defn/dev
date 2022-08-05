@@ -14,5 +14,12 @@
     "terraform.languageServer.ignoreSingleFileWarning": true,
     "workbench.colorTheme": "Default Dark+",
     "workbench.editor.untitled.hint": "hidden",
-    "workbench.startupEditor": "none"
+    "workbench.startupEditor": "none",
+    "calva.prettyPrintingOptions": {
+        "printEngine": "pprint",
+        "enabled": true,
+        "width": 120,
+        "maxLength": 50
+    },
+    "calva.paredit.defaultKeyMap": "strict"
 }
