@@ -8,7 +8,12 @@ function vi {
 			echo "ERROR: file $1 not found" 1>&2
 			return 1
 		fi
-		command code "$@"
+
+		if type -P code; then
+			command code "$@"
+		else
+			command code-server "$@"
+		fi
 	else
 		command vi "$@"
 	fi
