@@ -1,4 +1,4 @@
-VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-arg --use-copy-link --wait-block 0.6
+VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-arg --use-copy-link 0.6
 
 IMPORT github.com/defn/cloud/lib:master AS lib
 
@@ -108,7 +108,6 @@ tower-upload:
 
 tower:
     ARG arch
-    ARG repo
 
     ARG SKAFFOLD
     ARG CDKTF
@@ -126,7 +125,6 @@ tower:
     ARG EARTHLY
     ARG CUE
     ARG STEP
-
     ARG AWSVAULT
     ARG PYTHON
     ARG KREW
@@ -162,6 +160,29 @@ tower:
 
     ENV HOME=/home/ubuntu
 
+    COPY --chown=ubuntu:ubuntu --dir (+python/* --arch=${arch} --version=${PYTHON}) ./
+    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+pipx/* --arch=${arch} --version_python=${PYTHON}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch} --version=${CDKTF} --version_nodejs=${NODEJS}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+golang/* --arch=${arch} --version=${GOLANG}) ./
+
+    # gcloud
+    COPY --chown=ubuntu:ubuntu --dir (+gcloud/gcloud --arch=${arch}) /usr/local/
+
+    # arch3: awscli
+    IF [ ${arch} = "arm64" ]
+        COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch} --arch3=aarch64) /usr/local/
+    ELSE
+        COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch} --arch3=x86_64) /usr/local/
+    END
+
+    # code-server
+    RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local
+    RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
+    RUN for a in betterthantomorrow.calva betterthantomorrow.joyride eamodio.gitlens ms-python.python vscodevim.vim; do /home/ubuntu/.local/bin/code-server --install-extension "$a"; done
+
+    # vscode-server
+    RUN wget -O- https://aka.ms/install-vscode-server/setup.sh | sudo sh -x; /usr/local/bin/code-server serve-local --accept-server-license-terms --without-connection-token || true & sleep 60
+
     # arch
     COPY --chown=ubuntu:ubuntu (+powerline/* --arch=${arch} --version=${POWERLINE}) /usr/local/bin
     COPY --chown=ubuntu:ubuntu (+cilium/* --arch=${arch} --version=${CILIUM}) /usr/local/bin/
@@ -176,6 +197,7 @@ tower:
     COPY --chown=ubuntu:ubuntu (+switch/* --arch=${arch} --version=${SWITCH}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+cue-gen/* --arch=${arch} --version_go=${GOLANG}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+kn/* --arch=${arch} --version=${KN}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=amd64 --version=${CREDENTIAL_PASS}) /usr/local/bin/
 
     COPY --chown=ubuntu:ubuntu --dir (+shell/* --arch=${arch} --version_shellcheck=${SHELLCHECK} --version_shfmt=${SHFMT}) ./
     COPY --chown=ubuntu:ubuntu --dir (+k9s/* --arch=${arch} --version=${K9S}) ./
@@ -195,33 +217,16 @@ tower:
     COPY --chown=ubuntu:ubuntu --dir (+packer/* --arch=${arch} --version=${PACKER}) ./
     COPY --chown=ubuntu:ubuntu --dir (+doctl/* --arch=${arch} --version=${DOCTL}) ./
 
-    COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch} --version=${CDKTF} --version_nodejs=${NODEJS}) ./
-
-    COPY --chown=ubuntu:ubuntu --dir (+python/* --arch=${arch} --version=${PYTHON}) ./
-    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+pipx/* --arch=${arch} --version_python=${PYTHON}) ./
-
-    COPY --chown=ubuntu:ubuntu --dir (+golang/* --arch=${arch} --version=${GOLANG}) ./
-
-    # relies on qemu
-    COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=amd64 --version=${CREDENTIAL_PASS}) /usr/local/bin/
 
     # arch2: hof, tilt
     IF [ ${arch} = "arm64" ]
         COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=${arch} --version=${HOF}) /usr/local/bin/
         COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=${arch} --version=${TILT}) /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
     ELSE
         COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=x86_64 --version=${HOF}) /usr/local/bin/
         COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=x86_64 --version=${TILT}) /usr/local/bin/
-    END
-
-    # gcloud
-    COPY --chown=ubuntu:ubuntu --dir (+gcloud/gcloud --arch=${arch}) /usr/local/
-
-    # arch3: awscli
-    IF [ ${arch} = "arm64" ]
-        COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch} --arch3=aarch64) /usr/local/
-    ELSE
-        COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch} --arch3=x86_64) /usr/local/
+        COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch} --arch2=x86_64 --version=${FLYCTL}) /usr/local/bin/
     END
 
     # arch4
@@ -237,10 +242,6 @@ tower:
 
     # rerun-process-wrapper
     COPY (+rerun-process-wrapper/*) /
-
-    # code-server
-    RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local
-    RUN for a in betterthantomorrow.calva betterthantomorrow.joyride eamodio.gitlens ms-python.python vscodevim.vim; do /home/ubuntu/.local/bin/code-server --install-extension "$a"; done
 
     ENTRYPOINT ["/usr/bin/tini", "--"]
 
@@ -313,8 +314,9 @@ jless:
 flyctl:
     ARG arch
     ARG arch2
+    ARG FLYCTL
     FROM +tools --arch=${arch}
-    RUN --secret FLYCTL curl -sSL https://github.com/superfly/flyctl/releases/download/v${FLYCTL}/flyctl_${FLYCTL}_Linux_${arch2}.tar.gz | tar xvfz -
+    RUN curl -sSL https://github.com/superfly/flyctl/releases/download/v${FLYCTL}/flyctl_${FLYCTL}_Linux_${arch2}.tar.gz | tar xvfz -
     SAVE ARTIFACT flyctl
 
 difft:
@@ -693,7 +695,8 @@ nodejs:
     RUN echo nodejs ${version} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add nodejs'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
-    RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g npm@latest'
+    RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g npm@8.16.0'
+    RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g nbb@0.7.131'
     SAVE ARTIFACT .asdf
     SAVE IMAGE --cache-hint
 
