@@ -3,23 +3,13 @@ VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-ar
 IMPORT github.com/defn/cloud/lib:master AS lib
 
 images:
-    BUILD +amd64
-    BUILD +arm64
+    BUILD +amd
+    BUILD +arm
 
-updates:
-    BUILD +amd64-update
-    BUILD +arm64-update
-
-amd64:
-    BUILD --platform=linux/amd64 +tower --arch=amd64
-
-arm64:
-    BUILD --platform=linux/arm64 +tower --arch=arm64
-
-amd64-update:
+amd:
     BUILD --platform=linux/amd64 +tower-upload --arch=amd64
 
-arm64-update:
+arm:
     BUILD --platform=linux/arm64 +tower-upload --arch=arm64
 
 root:
