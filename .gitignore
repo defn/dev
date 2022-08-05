@@ -71,3 +71,5 @@ node_modules
 .cloudflared
 .config/coderv2/
 .config/code-server/
+.deps.clj/
+.m2/
