@@ -1,6 +1,7 @@
 include Makefile.common
 
 init-site:
+	cd .password-store && git pull
 	@aws --profile meh sts get-caller-identity
 	@pass hello
 
