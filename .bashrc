@@ -9,7 +9,7 @@ function vi {
 			return 1
 		fi
 
-		if type -P code; then
+		if type -P code >/dev/null; then
 			command code "$@"
 		else
 			command code-server "$@"
