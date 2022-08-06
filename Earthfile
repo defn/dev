@@ -7,7 +7,7 @@ images:
     #BUILD +arm
 
 amd:
-    FROM --platform=linux/amd64 +user --arch=amd64
+    FROM +user --arch=amd64
 
 arm:
     BUILD --platform=linux/arm64 +tower --arch=arm64
@@ -81,8 +81,6 @@ root:
     WORKDIR /home/ubuntu
 
     ENV HOME=/home/ubuntu
-
-    SAVE IMAGE --cache-hint
 
 user:
     ARG arch
@@ -187,8 +185,6 @@ user:
     COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
     RUN git clean -ffd
 
-    SAVE IMAGE --cache-hint
-
 coderServer:
     ARG arch
 
@@ -224,8 +220,6 @@ tools:
         && apt-get install -y --no-install-recommends \
             apt-transport-https software-properties-common tzdata locales git gpg gpg-agent unzip xz-utils wget curl
 
-    SAVE IMAGE --cache-hint
-
 asdf:
     ARG arch
     ARG ASDF
@@ -237,7 +231,6 @@ asdf:
     RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${ASDF}
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
     SAVE ARTIFACT .asdf
-    SAVE IMAGE --cache-hint
 
 # arch4
 protoc:
@@ -248,7 +241,6 @@ protoc:
     RUN curl -sSL https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC}/protoc-${PROTOC}-linux-${arch4}.zip -o "protoc.zip"
     RUN unzip protoc.zip
     SAVE ARTIFACT bin/protoc
-    SAVE IMAGE --cache-hint
 
 # arch3
 awscli:
@@ -261,7 +253,6 @@ awscli:
     RUN ./aws/install -i /usr/local/aws-cli -b /usr/local/aws-cli/bin
     RUN curl -sSL -o /usr/local/aws-cli/bin/aws_signing_helper https://s3.amazonaws.com/roles-anywhere-credential-helper/CredentialHelper/latest/linux_amd64/aws_signing_helper && chmod 755 /usr/local/aws-cli/bin/aws_signing_helper
     SAVE ARTIFACT /usr/local/aws-cli
-    SAVE IMAGE --cache-hint
 
 # arch2
 hof:
@@ -446,7 +437,6 @@ gcloud:
         && rm -rf $(find /usr/local/gcloud -regex ".*/__pycache__") \
         && rm -rf /usr/local/gcloud/google-cloud-sdk/.install/.backup
     SAVE ARTIFACT /usr/local/gcloud
-    SAVE IMAGE --cache-hint
 
 awsvault:
     ARG arch
@@ -507,7 +497,6 @@ krew:
     RUN /home/ubuntu/.asdf/shims/kubectl-krew install stern
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
     SAVE ARTIFACT --symlink-no-follow .asdf
-    SAVE IMAGE --cache-hint
 
 k9s:
     ARG arch
@@ -636,14 +625,12 @@ golang:
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add golang'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
-    SAVE IMAGE --cache-hint
 
 cue-gen:
     ARG arch
     FROM +golang --arch=${arch}
     RUN bash -c 'source ~/.asdf/asdf.sh && go install istio.io/tools/cmd/cue-gen@latest'
     SAVE ARTIFACT ./.asdf/installs/golang/*/packages/bin/cue-gen
-    SAVE IMAGE --cache-hint
 
 buf:
     ARG arch
@@ -653,7 +640,6 @@ buf:
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add buf'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
-    SAVE IMAGE --cache-hint
 
 nodejs:
     ARG arch
@@ -665,7 +651,6 @@ nodejs:
     RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g npm@8.16.0'
     RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g nbb@0.7.131'
     SAVE ARTIFACT .asdf
-    SAVE IMAGE --cache-hint
 
 cdktf:
     ARG arch
@@ -673,7 +658,6 @@ cdktf:
     FROM +nodejs --arch=${arch}
     RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g cdktf-cli@${CDKTF}'
     SAVE ARTIFACT .asdf
-    SAVE IMAGE --cache-hint
 
 doctl:
     ARG arch
@@ -713,7 +697,6 @@ redis:
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add redis'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
-    SAVE IMAGE --cache-hint
 
 python:
     ARG arch
@@ -728,7 +711,6 @@ python:
     RUN bash -c 'source ~/.asdf/asdf.sh && python -m pip install --upgrade pip'
     RUN bash -c 'source ~/.asdf/asdf.sh && pip install pipx && asdf reshim'
     SAVE ARTIFACT .asdf
-    SAVE IMAGE --cache-hint
 
 pipx:
     ARG arch
@@ -752,4 +734,3 @@ pipx:
     SAVE ARTIFACT --symlink-no-follow .asdf
     SAVE ARTIFACT --symlink-no-follow .local
     SAVE ARTIFACT --symlink-no-follow .cache
-    SAVE IMAGE --cache-hint
