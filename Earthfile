@@ -275,7 +275,7 @@ protoc:
     ARG arch4
     ARG PROTOC
     FROM +tools --arch=${arch}
-    RUN curl -sSL https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC}/protoc-${ROTOC}-linux-${arch4}.zip -o "protoc.zip"
+    RUN curl -sSL https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC}/protoc-${PROTOC}-linux-${arch4}.zip -o "protoc.zip"
     RUN unzip protoc.zip
     SAVE ARTIFACT bin/protoc
     SAVE IMAGE --cache-hint
