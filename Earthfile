@@ -109,49 +109,6 @@ tower-upload:
 tower:
     ARG arch
 
-    ARG SKAFFOLD
-    ARG CDKTF
-    ARG NODEJS
-    ARG GOLANG
-    ARG NPM
-    ARG KUMA
-    ARG POWERLINE
-    ARG CILIUM
-    ARG HUBBLE
-    ARG LINKERD
-    ARG VCLUSTER
-    ARG LOFT
-    ARG GH
-    ARG EARTHLY
-    ARG CUE
-    ARG STEP
-    ARG AWSVAULT
-    ARG PYTHON
-    ARG KREW
-    ARG HOF
-    ARG TILT
-    ARG SHELLCHECK
-    ARG SHFMT
-    ARG K9S
-    ARG KUSTOMIZE
-    ARG HELM
-    ARG VAULT
-    ARG CONSUL
-    ARG CLOUDFLARED
-    ARG TERRAFORM
-    ARG ARGO
-    ARG ARGOCD
-    ARG SWITCH
-    ARG CREDENTIAL_PASS
-    ARG KUBECTL
-    ARG REDIS
-    ARG BUF
-    ARG GRPCURL
-    ARG KN
-    ARG K3SUP
-    ARG PACKER
-    ARG DOCTL
-
     FROM +root --arch=${arch}
 
     USER ubuntu
@@ -159,10 +116,10 @@ tower:
 
     ENV HOME=/home/ubuntu
 
-    COPY --chown=ubuntu:ubuntu --dir (+python/* --arch=${arch} --version=${PYTHON}) ./
-    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+pipx/* --arch=${arch} --version_python=${PYTHON}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch} --version=${CDKTF} --version_nodejs=${NODEJS}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+golang/* --arch=${arch} --version=${GOLANG}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+python/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+pipx/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+golang/* --arch=${arch}) ./
 
     # gcloud
     COPY --chown=ubuntu:ubuntu --dir (+gcloud/gcloud --arch=${arch}) /usr/local/
@@ -175,48 +132,48 @@ tower:
     END
 
     # arch
-    COPY --chown=ubuntu:ubuntu (+powerline/* --arch=${arch} --version=${POWERLINE}) /usr/local/bin
-    COPY --chown=ubuntu:ubuntu (+cilium/* --arch=${arch} --version=${CILIUM}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+hubble/* --arch=${arch} --version=${HUBBLE}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+vcluster/* --arch=${arch} --version=${VCLUSTER}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+loft/* --arch=${arch} --version=${LOFT}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+gh/* --arch=${arch} --version=${GH}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+earthly/* --arch=${arch} --version=${EARTHLY}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+cue/* --arch=${arch} --version=${CUE}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+step/* --arch=${arch} --version=${STEP}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+kuma/* --arch=${arch} --version=${KUMA}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+switch/* --arch=${arch} --version=${SWITCH}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+cue-gen/* --arch=${arch} --version_go=${GOLANG}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+kn/* --arch=${arch} --version=${KN}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=amd64 --version=${CREDENTIAL_PASS}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+powerline/* --arch=${arch}) /usr/local/bin
+    COPY --chown=ubuntu:ubuntu (+cilium/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+hubble/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+vcluster/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+loft/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+gh/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+earthly/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+cue/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+step/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+kuma/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+switch/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+cue-gen/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+kn/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=amd64) /usr/local/bin/
 
-    COPY --chown=ubuntu:ubuntu --dir (+shell/* --arch=${arch} --version_shellcheck=${SHELLCHECK} --version_shfmt=${SHFMT}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+k9s/* --arch=${arch} --version=${K9S}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+kustomize/* --arch=${arch} --version=${KUSTOMIZE}) ./
-    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+krew/* --arch=${arch} --version=${KREW} --version_kubectl=${KUBECTL}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+helm/* --arch=${arch} --version=${HELM}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+vault/* --arch=${arch} --version=${VAULT}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+cloudflared/* --arch=${arch} --version=${CLOUDFLARED}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+terraform/* --arch=${arch} --version=${TERRAFORM}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+skaffold/* --arch=${arch} --version=${SKAFFOLD}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+awsvault/* --arch=${arch} --version=${AWSVAULT}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch} --version=${ARGO}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch} --version=${ARGOCD}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+buf/* --arch=${arch} --version=${BUF}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+grpcurl/* --arch=${arch} --version=${GRPCURL}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+k3sup/* --arch=${arch} --version=${K3SUP}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+packer/* --arch=${arch} --version=${PACKER}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+doctl/* --arch=${arch} --version=${DOCTL}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+shell/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+k9s/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+kustomize/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+krew/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+helm/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+vault/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+cloudflared/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+terraform/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+skaffold/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+awsvault/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+buf/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+grpcurl/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+k3sup/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+packer/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+doctl/* --arch=${arch}) ./
 
     # arch2: hof, tilt
     IF [ ${arch} = "arm64" ]
-        COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=${arch} --version=${HOF}) /usr/local/bin/
-        COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=${arch} --version=${TILT}) /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
         COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
     ELSE
-        COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=x86_64 --version=${HOF}) /usr/local/bin/
-        COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=x86_64 --version=${TILT}) /usr/local/bin/
-        COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch} --arch2=x86_64 --version=${FLYCTL}) /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
     END
 
     # arch4
@@ -258,13 +215,13 @@ tools:
 
 asdf:
     ARG arch
-    ARG version_asdf=0.10.1
+    ARG ASDF
     FROM +tools --arch=${arch}
     RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
     RUN install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
     USER ubuntu
     WORKDIR /home/ubuntu
-    RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${version_asdf}
+    RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${ASDF}
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
     SAVE ARTIFACT .asdf
     SAVE IMAGE --cache-hint
@@ -284,7 +241,7 @@ protoc:
 awscli:
     ARG arch
     ARG arch3
-    ARG version=2.7.13
+    ARG AWSCLI
     FROM +tools --arch=${arch}
     RUN curl -sSL "https://awscli.amazonaws.com/awscli-exe-linux-${arch3}.zip" -o "awscliv2.zip"
     RUN unzip awscliv2.zip
@@ -297,14 +254,15 @@ awscli:
 hof:
     ARG arch
     ARG arch2
-    ARG version
+    ARG HOF
     FROM +tools --arch=${arch}
-    RUN curl -sSL -o hof https://github.com/hofstadter-io/hof/releases/download/v${version}/hof_${version}_Linux_${arch2} && chmod 755 hof
+    RUN curl -sSL -o hof https://github.com/hofstadter-io/hof/releases/download/v${HOF}/hof_${HOF}_Linux_${arch2} && chmod 755 hof
     SAVE ARTIFACT hof
 
 jless:
     ARG arch
     ARG arch2
+    ARG JLESS
     FROM +tools --arch=${arch}
     RUN --secret JLESS (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${JLESS}/jless-v${JLESS}-x86_64-unknown-linux-gnu.zip | gunzip -c - > jless) && chmod 755 jless
     SAVE ARTIFACT jless
@@ -320,6 +278,7 @@ flyctl:
 difft:
     ARG arch
     ARG arch2
+    ARG DIFFT
     FROM +tools --arch=${arch}
     RUN --secret DIFFT curl -sSL https://github.com/Wilfred/difftastic/releases/download/${DIFFT}/difft-x86_64-unknown-linux-gnu.tar.gz | tar xvfz -
     SAVE ARTIFACT difft
@@ -327,67 +286,67 @@ difft:
 tilt:
     ARG arch
     ARG arch2
-    ARG version
+    ARG TILT
     FROM +tools --arch=${arch}
-    RUN curl -sSL https://github.com/tilt-dev/tilt/releases/download/v${version}/tilt.${version}.linux.${arch2}.tar.gz | tar xvfz -
+    RUN curl -sSL https://github.com/tilt-dev/tilt/releases/download/v${TILT}/tilt.${TILT}.linux.${arch2}.tar.gz | tar xvfz -
     SAVE ARTIFACT tilt
 
 # arch
 credentialPass:
     ARG arch
-    ARG version
+    ARG CREDENTIALPASS
     FROM +tools --arch=${arch}
-    RUN curl -sSL https://github.com/docker/docker-credential-helpers/releases/download/v${version}/docker-credential-pass-v${version}-${arch}.tar.gz | tar xvfz - && chmod 755 docker-credential-pass
+    RUN curl -sSL https://github.com/docker/docker-credential-helpers/releases/download/v${CREDENTIALPASS}/docker-credential-pass-v${CREDENTIALPASS}-${arch}.tar.gz | tar xvfz - && chmod 755 docker-credential-pass
     SAVE ARTIFACT docker-credential-pass
 
 powerline:
     ARG arch
-    ARG version
+    ARG POWERLINE
     FROM +tools --arch=${arch}
-    RUN curl -sSL -o powerline https://github.com/justjanne/powerline-go/releases/download/v${version}/powerline-go-linux-${arch} && chmod 755 powerline
+    RUN curl -sSL -o powerline https://github.com/justjanne/powerline-go/releases/download/v${POWERLINE}/powerline-go-linux-${arch} && chmod 755 powerline
     SAVE ARTIFACT powerline
 
 step:
     ARG arch
-    ARG version
+    ARG STEP
     FROM +tools --arch=${arch}
     RUN echo 1
-    RUN curl -sSL https://github.com/smallstep/cli/releases/download/v${version}/step_linux_${version}_${arch}.tar.gz | tar xvfz -
+    RUN curl -sSL https://github.com/smallstep/cli/releases/download/v${STEP}/step_linux_${STEP}_${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT */bin/step
 
 cilium:
     ARG arch
-    ARG version
+    ARG CILIUM
     FROM +tools --arch=${arch}
-    RUN curl -sSL https://github.com/cilium/cilium-cli/releases/download/v${version}/cilium-linux-${arch}.tar.gz | tar xvfz -
+    RUN curl -sSL https://github.com/cilium/cilium-cli/releases/download/v${CILIUM}/cilium-linux-${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT cilium
 
 hubble:
     ARG arch
-    ARG version
+    ARG HUBBLE
     FROM +tools --arch=${arch}
-    RUN curl -sSL https://github.com/cilium/hubble/releases/download/v${version}/hubble-linux-${arch}.tar.gz | tar xzvf -
+    RUN curl -sSL https://github.com/cilium/hubble/releases/download/v${HUBBLE}/hubble-linux-${arch}.tar.gz | tar xzvf -
     SAVE ARTIFACT hubble
 
 linkerd:
     ARG arch
-    ARG version
+    ARG LINKERD
     FROM +tools --arch=${arch}
-    RUN curl -sSL -o linkerd https://github.com/linkerd/linkerd2/releases/download/${version}/linkerd2-cli-${version}-linux-${arch} && chmod 755 linkerd
+    RUN curl -sSL -o linkerd https://github.com/linkerd/linkerd2/releases/download/${LINKERD}/linkerd2-cli-${LINKERD}-linux-${arch} && chmod 755 linkerd
     SAVE ARTIFACT linkerd
 
 vcluster:
     ARG arch
-    ARG version
+    ARG VCLUSTER
     FROM +tools --arch=${arch}
-    RUN curl -sSL -o vcluster https://github.com/loft-sh/vcluster/releases/download/v${version}/vcluster-linux-${arch} && chmod 755 vcluster
+    RUN curl -sSL -o vcluster https://github.com/loft-sh/vcluster/releases/download/v${VCLUSTER}/vcluster-linux-${arch} && chmod 755 vcluster
     SAVE ARTIFACT vcluster
 
 loft:
     ARG arch
-    ARG version
+    ARG LOFT
     FROM +tools --arch=${arch}
-    RUN curl -sSL -o loft https://github.com/loft-sh/loft/releases/download/v${version}/loft-linux-${arch} && chmod 755 loft
+    RUN curl -sSL -o loft https://github.com/loft-sh/loft/releases/download/v${OFT}/loft-linux-${arch} && chmod 755 loft
     SAVE ARTIFACT loft
 
 steampipe:
@@ -398,16 +357,16 @@ steampipe:
 
 gh:
     ARG arch
-    ARG version
+    ARG GH
     FROM +tools --arch=${arch}
-    RUN curl -sSL https://github.com/cli/cli/releases/download/v${version}/gh_${version}_linux_${arch}.tar.gz | tar xvfz - --wildcards '*/bin/gh' && mv */bin/gh .
+    RUN curl -sSL https://github.com/cli/cli/releases/download/v${GH}/gh_${GH}_linux_${arch}.tar.gz | tar xvfz - --wildcards '*/bin/gh' && mv */bin/gh .
     SAVE ARTIFACT gh
 
 earthly:
     ARG arch
-    ARG version
+    ARG EARTHLY
     FROM +tools --arch=${arch}
-    RUN curl -sSL -o earthly https://github.com/earthly/earthly/releases/download/v${version}/earthly-linux-${arch} && chmod 755 earthly
+    RUN curl -sSL -o earthly https://github.com/earthly/earthly/releases/download/v${EARTHLY}/earthly-linux-${arch} && chmod 755 earthly
     SAVE ARTIFACT earthly
 
 buildkite:
@@ -430,37 +389,37 @@ litestream:
 
 switch:
     ARG arch
-    ARG version
+    ARG SWITCH
     FROM +tools --arch=${arch}
-    RUN curl -sSL -o switch https://github.com/danielfoehrKn/kubeswitch/releases/download/${version}/switcher_linux_amd64 && chmod 755 switch
+    RUN curl -sSL -o switch https://github.com/danielfoehrKn/kubeswitch/releases/download/${SWITCH}/switcher_linux_amd64 && chmod 755 switch
     SAVE ARTIFACT switch
 
 cue:
     ARG arch
-    ARG version
+    ARG CUE
     FROM +tools --arch=${arch}
-    RUN curl -sSL https://github.com/cue-lang/cue/releases/download/v${version}/cue_v${version}_linux_${arch}.tar.gz | tar xvfz -
+    RUN curl -sSL https://github.com/cue-lang/cue/releases/download/v${CUE}/cue_v${CUE}_linux_${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT cue
 
 kuma:
     ARG arch
-    ARG version
+    ARG KUMA
     FROM +tools --arch=${arch}
-    RUN curl -sSL https://download.konghq.com/mesh-alpine/kuma-${version}-ubuntu-${arch}.tar.gz | tar xvfz -
+    RUN curl -sSL https://download.konghq.com/mesh-alpine/kuma-${KUMA}-ubuntu-${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT */bin/*
 
 kn:
     ARG arch
-    ARG version
+    ARG KN
     FROM +tools --arch=${arch}
-    RUN curl -sSL -o kn https://github.com/knative/client/releases/download/knative-v${version}/kn-linux-${arch} && chmod 755 kn
+    RUN curl -sSL -o kn https://github.com/knative/client/releases/download/knative-v${KN}/kn-linux-${arch} && chmod 755 kn
     SAVE ARTIFACT kn
 
 k3d-download:
     ARG arch
-    ARG version
+    ARG K3D
     FROM +tools --arch=${arch}
-    RUN curl -sSL -o k3d https://github.com/k3d-io/k3d/releases/download/v${version}/k3d-linux-${arch} && chmod 755 k3d
+    RUN curl -sSL -o k3d https://github.com/k3d-io/k3d/releases/download/v${K3D}/k3d-linux-${arch} && chmod 755 k3d
     SAVE ARTIFACT k3d
 
 gcloud:
@@ -478,18 +437,18 @@ gcloud:
 
 awsvault:
     ARG arch
-    ARG version
+    ARG AWSVAULT
     FROM +asdf --arch=${arch}
-    RUN echo "aws-vault ${version}" >> .tool-versions
+    RUN echo "aws-vault ${AWSVAULT}" >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add aws-vault'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 skaffold:
     ARG arch
-    ARG version
+    ARG SKAFFOLD
     FROM +asdf --arch=${arch}
-    RUN echo "skaffold ${version}" >> .tool-versions
+    RUN echo "skaffold ${SKAFFOLD}" >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add skaffold'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
@@ -507,29 +466,27 @@ rerun-process-wrapper:
 
 grpcurl:
     ARG arch
-    ARG version
+    ARG GRPCURL
     FROM +asdf --arch=${arch}
-    RUN echo "grpcurl ${version}" >> .tool-versions
+    RUN echo "grpcurl ${GRPCURL}" >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add grpcurl'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 kubectl:
     ARG arch
-    ARG version
+    ARG KUBECTL
     FROM +asdf --arch=${arch}
-    RUN echo "kubectl ${version}" >> .tool-versions
+    RUN echo "kubectl ${KUBECTL}" >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add kubectl'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 krew:
     ARG arch
-    ARG version
-    ARG version_kubectl
-    ARG version_switch
-    FROM +kubectl --arch=${arch} --version=${version_kubectl}
-    RUN echo "krew ${version}" >> .tool-versions
+    ARG KREW
+    FROM +kubectl --arch=${arch}
+    RUN echo "krew ${KREW}" >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add krew'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     RUN /home/ubuntu/.asdf/shims/kubectl-krew install ns
@@ -541,54 +498,54 @@ krew:
 
 k9s:
     ARG arch
-    ARG version
+    ARG K9S
     FROM +asdf --arch=${arch}
-    RUN echo k9s ${version} >> .tool-versions
+    RUN echo k9s ${K9S} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add k9s'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 kustomize:
     ARG arch
-    ARG version
+    ARG KUSTOMIZE
     FROM +asdf --arch=${arch}
-    RUN echo kustomize ${version} >> .tool-versions
+    RUN echo kustomize ${KUSTOMIZE} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add kustomize'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 helm:
     ARG arch
-    ARG version
+    ARG HELM
     FROM +asdf --arch=${arch}
-    RUN echo helm ${version} >> .tool-versions
+    RUN echo helm ${HELM} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add helm'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 k3sup:
     ARG arch
-    ARG version
+    ARG K3SUP
     FROM +asdf --arch=${arch}
-    RUN echo k3sup ${version} >> .tool-versions
+    RUN echo k3sup ${K3SUP} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add k3sup'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 packer:
     ARG arch
-    ARG version
+    ARG PACKER
     FROM +asdf --arch=${arch}
-    RUN echo packer ${version} >> .tool-versions
+    RUN echo packer ${PACKER} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add packer'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 k3d:
     ARG arch
-    ARG version
+    ARG K3D
     FROM +asdf --arch=${arch}
-    RUN echo k3d ${version} >> .tool-versions
+    RUN echo k3d ${K3D} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add k3d'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
@@ -603,18 +560,18 @@ teleport:
 
 vault:
     ARG arch
-    ARG version
+    ARG VAULT
     FROM +asdf --arch=${arch}
-    RUN echo vault ${version} >> .tool-versions
+    RUN echo vault ${VAULT} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add vault'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 consul:
     ARG arch
-    ARG version
+    ARG CONSUL
     FROM +asdf --arch=${arch}
-    RUN echo consul ${version} >> .tool-versions
+    RUN echo consul ${CONSUL} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add consul'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
@@ -629,40 +586,40 @@ boundary:
 
 cloudflared:
     ARG arch
-    ARG version
+    ARG CLOUDFLARED
     FROM +asdf --arch=${arch}
-    RUN echo cloudflared ${version} >> .tool-versions
+    RUN echo cloudflared ${CLOUDFLARED} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add cloudflared'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 shell:
     ARG arch
-    ARG version_shellcheck
-    ARG version_shfmt
+    ARG SHELLCHECK
+    ARG SHFMT
     FROM +asdf --arch=${arch}
-    RUN echo shellcheck ${version_shellcheck} >> .tool-versions
+    RUN echo shellcheck ${SHELLCHECK} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add shellcheck'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
-    RUN echo shfmt ${version_shfmt} >> .tool-versions
+    RUN echo shfmt ${SHFMT} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add shfmt'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 terraform:
     ARG arch
-    ARG version
+    ARG TERAFORM
     FROM +asdf --arch=${arch}
-    RUN echo terraform ${version} >> .tool-versions
+    RUN echo terraform ${TERRAFORM} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add terraform'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 golang:
     ARG arch
-    ARG version
+    ARG GOLANG
     FROM +asdf --arch=${arch}
-    RUN echo golang ${version} >> .tool-versions
+    RUN echo golang ${GOLANG} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add golang'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
@@ -670,17 +627,16 @@ golang:
 
 cue-gen:
     ARG arch
-    ARG version_go
-    FROM +golang --arch=${arch} --version=${version_go}
+    FROM +golang --arch=${arch}
     RUN bash -c 'source ~/.asdf/asdf.sh && go install istio.io/tools/cmd/cue-gen@latest'
     SAVE ARTIFACT ./.asdf/installs/golang/*/packages/bin/cue-gen
     SAVE IMAGE --cache-hint
 
 buf:
     ARG arch
-    ARG version
+    ARG BUF
     FROM +asdf --arch=${arch}
-    RUN echo buf ${version} >> .tool-versions
+    RUN echo buf ${BUF} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add buf'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
@@ -688,9 +644,9 @@ buf:
 
 nodejs:
     ARG arch
-    ARG version
+    ARG NODEJS
     FROM +asdf --arch=${arch}
-    RUN echo nodejs ${version} >> .tool-versions
+    RUN echo nodejs ${NODEJS} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add nodejs'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g npm@8.16.0'
@@ -700,49 +656,47 @@ nodejs:
 
 cdktf:
     ARG arch
-    ARG version
-    ARG version_nodejs
-    ARG version_npm
-    FROM +nodejs --arch=${arch} --version=${version_nodejs} --version_npm=${version_npm}
-    RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g cdktf-cli@${version}'
+    ARG CDKTF
+    FROM +nodejs --arch=${arch}
+    RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g cdktf-cli@${CDKTF}'
     SAVE ARTIFACT .asdf
     SAVE IMAGE --cache-hint
 
 doctl:
     ARG arch
-    ARG version
+    ARG DOCTL
     FROM +asdf --arch=${arch}
-    RUN echo doctl ${version} >> .tool-versions
+    RUN echo doctl ${DOCTL} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add doctl'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 argo:
     ARG arch
-    ARG version
+    ARG ARGO
     FROM +asdf --arch=${arch}
-    RUN echo argo ${version} >> .tool-versions
+    RUN echo argo ${ARGO} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add argo'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 argocd:
     ARG arch
-    ARG version
+    ARG ARGOCD
     FROM +asdf --arch=${arch}
-    RUN echo argocd ${version} >> .tool-versions
+    RUN echo argocd ${ARGOCD} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add argocd'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
 redis:
     ARG arch
-    ARG version
+    ARG REDIS
     FROM +asdf --arch=${arch}
     USER root
     RUN apt update && apt install -y build-essential
     USER ubuntu
-    RUN echo redis ${version} >> .tool-versions
+    RUN echo redis ${REDIS} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add redis'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
@@ -750,12 +704,12 @@ redis:
 
 python:
     ARG arch
-    ARG version
+    ARG PYTHON
     FROM +asdf --arch=${arch}
     USER root
     RUN apt update && apt install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
     USER ubuntu
-    RUN echo python ${version} >> .tool-versions
+    RUN echo python ${PYTHON} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add python'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     RUN bash -c 'source ~/.asdf/asdf.sh && python -m pip install --upgrade pip'
@@ -765,8 +719,7 @@ python:
 
 pipx:
     ARG arch
-    ARG version_python
-    FROM +python --arch=${arch} --version=${version_python}
+    FROM +python --arch=${arch}
     RUN ~/.asdf/shims/pipx install pycco
     RUN ~/.asdf/shims/pipx install yq
     RUN ~/.asdf/shims/pipx install watchdog
