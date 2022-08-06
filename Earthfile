@@ -4,14 +4,15 @@ IMPORT github.com/defn/cloud/lib:master AS lib
 
 images:
     BUILD +amd
-    #BUILD +arm
+    BUILD +arm
 
 amd:
     FROM --platform=linux/amd64 +user --arch=amd64
     SAVE IMAGE --push quay.io/defn/dev
 
 arm:
-    BUILD --platform=linux/arm64 +user --arch=arm64
+    FROM --platform=linux/arm64 +user --arch=arm64
+    SAVE IMAGE --push quay.io/defn/dev
 
 root:
     ARG arch
