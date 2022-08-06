@@ -106,6 +106,18 @@ tower-upload:
 
     SAVE IMAGE --push ${repo}defn/dev
 
+code:
+    ARG arch
+    ARG repo
+
+    FROM +tower --arch=${arch}
+
+    RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local
+    RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
+    RUN for a in betterthantomorrow.calva betterthantomorrow.joyride eamodio.gitlens ms-python.python vscodevim.vim; do /home/ubuntu/.local/bin/code-server --install-extension "$a"; done
+
+    SAVE ARTIFACT .local/share/code-server
+
 tower:
     ARG arch
 
@@ -183,10 +195,7 @@ tower:
         COPY --chown=ubuntu:ubuntu (+protoc/* --arch=${arch} --arch4=x86_64) /usr/local/bin/
     END
 
-    # code-server
-    RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local
-    RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
-    RUN for a in betterthantomorrow.calva betterthantomorrow.joyride eamodio.gitlens ms-python.python vscodevim.vim; do /home/ubuntu/.local/bin/code-server --install-extension "$a"; done
+    COPY --chown=ubuntu:ubuntu --dir (+codeServer/* --arch=${arch}) ./.local/share/
 
     # vscode-server
     RUN wget -O- https://aka.ms/install-vscode-server/setup.sh | sudo sh -x; /usr/local/bin/code-server serve-local --accept-server-license-terms --without-connection-token || true & sleep 60
