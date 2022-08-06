@@ -608,7 +608,7 @@ shell:
 
 terraform:
     ARG arch
-    ARG TERAFORM
+    ARG TERRAFORM
     FROM +asdf --arch=${arch}
     RUN echo terraform ${TERRAFORM} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add terraform'
