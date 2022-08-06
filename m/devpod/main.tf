@@ -164,7 +164,7 @@ resource "kubernetes_stateful_set" "dev" {
 
         container {
           name              = "buildkitd"
-          image             = "earthly/buildkitd:v0.6.19"
+          image             = "earthly/buildkitd:v0.6.21"
           image_pull_policy = "IfNotPresent"
 
           env {
