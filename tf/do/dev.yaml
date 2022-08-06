@@ -21,7 +21,7 @@ spec:
           command: ["/usr/bin/tini", "--"]
           args: ["tail", "-f", "/dev/null"]
         - name: buildkitd
-          image: earthly/buildkitd:v0.6.19
+          image: earthly/buildkitd:v0.6.21
           env:
             - name: CACHE_SIZE_PCT
               value: "90"
