@@ -7,37 +7,10 @@ images:
     #BUILD +arm
 
 amd:
-    BUILD --platform=linux/amd64 +tower --arch=amd64
+    FROM --platform=linux/amd64 +user --arch=amd64
 
 arm:
     BUILD --platform=linux/arm64 +tower --arch=arm64
-
-tower:
-    ARG arch
-    ARG repo
-
-    FROM +user --arch=${arch}
-
-    RUN sudo ln -nfs /home/ubuntu/hooks /hooks
-
-    RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
-
-    COPY --chown=ubuntu:ubuntu --dir .vim .
-    COPY --chown=ubuntu:ubuntu .vimrc .
-    RUN echo yes | vim +PlugInstall +qall
-
-    COPY --chown=ubuntu:ubuntu --dir bin .
-    COPY --chown=ubuntu:ubuntu .bash* .tool-versions .
-
-    RUN ~/bin/e asdf install
-
-    COPY --dir --chown=ubuntu:ubuntu . .
-    RUN if test -e work; then false; fi
-    RUN git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'
-    COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
-    RUN git clean -ffd
-
-    SAVE IMAGE --push ${repo}defn/dev
 
 root:
     ARG arch
@@ -111,35 +84,12 @@ root:
 
     SAVE IMAGE --cache-hint
 
-coderServer:
-    ARG arch
-    ARG repo
-
-    FROM +root --arch=${arch}
-
-    RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local
-    RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
-    RUN for a in betterthantomorrow.calva betterthantomorrow.joyride eamodio.gitlens ms-python.python vscodevim.vim; do /home/ubuntu/.local/bin/code-server --install-extension "$a"; done
-
-    SAVE ARTIFACT .local/share/code-server
-
-vscodeServer:
-    ARG arch
-    ARG repo
-
-    FROM +root --arch=${arch}
-
-    # vscode-server
-    RUN wget -O- https://aka.ms/install-vscode-server/setup.sh | sudo sh -x; /usr/local/bin/code-server serve-local --accept-server-license-terms --without-connection-token || true & sleep 60
-
-
-    SAVE ARTIFACT .vscode-server
-    SAVE ARTIFACT .vscode-cli
-
 user:
     ARG arch
 
     FROM +root --arch=${arch}
+
+    ENTRYPOINT ["/usr/bin/tini", "--"]
 
     COPY --chown=ubuntu:ubuntu --dir (+python/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+pipx/* --arch=${arch}) ./
@@ -208,8 +158,8 @@ user:
         COPY --chown=ubuntu:ubuntu (+protoc/* --arch=${arch} --arch4=x86_64) /usr/local/bin/
     END
 
-    COPY --chown=ubuntu:ubuntu --dir (+coderServer/* --arch=${arch}) ./.local/share/
-    COPY --chown=ubuntu:ubuntu --dir (+vscodeServer/* --arch=${arch}) ./
+    #COPY --chown=ubuntu:ubuntu --dir (+coderServer/* --arch=${arch}) ./.local/share/
+    #COPY --chown=ubuntu:ubuntu --dir (+vscodeServer/* --arch=${arch}) ./
 
     # shell-operator
     COPY --dir (+shell-operator/sf.tar.gz --arch=${arch}) /
@@ -218,7 +168,49 @@ user:
     # rerun-process-wrapper
     COPY (+rerun-process-wrapper/*) /
 
-    ENTRYPOINT ["/usr/bin/tini", "--"]
+    RUN sudo ln -nfs /home/ubuntu/hooks /hooks
+
+    RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
+
+    COPY --chown=ubuntu:ubuntu --dir .vim .
+    COPY --chown=ubuntu:ubuntu .vimrc .
+    RUN echo yes | vim +PlugInstall +qall
+
+    COPY --chown=ubuntu:ubuntu --dir bin .
+    COPY --chown=ubuntu:ubuntu .bash* .tool-versions .
+
+    RUN ~/bin/e asdf install
+
+    COPY --dir --chown=ubuntu:ubuntu . .
+    RUN if test -e work; then false; fi
+    RUN git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'
+    COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
+    RUN git clean -ffd
+
+    SAVE IMAGE --cache-hint
+
+coderServer:
+    ARG arch
+
+    FROM +root --arch=${arch}
+
+    RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local
+    RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
+    RUN for a in betterthantomorrow.calva betterthantomorrow.joyride eamodio.gitlens ms-python.python vscodevim.vim; do /home/ubuntu/.local/bin/code-server --install-extension "$a"; done
+
+    SAVE ARTIFACT .local/share/code-server
+
+vscodeServer:
+    ARG arch
+
+    FROM +root --arch=${arch}
+
+    # vscode-server
+    RUN wget -O- https://aka.ms/install-vscode-server/setup.sh | sudo sh -x; /usr/local/bin/code-server serve-local --accept-server-license-terms --without-connection-token || true & sleep 60
+
+
+    SAVE ARTIFACT .vscode-server
+    SAVE ARTIFACT .vscode-cli
 
 tools:
     FROM ubuntu:focal-20220531
@@ -231,6 +223,7 @@ tools:
     RUN apt-get update \
         && apt-get install -y --no-install-recommends \
             apt-transport-https software-properties-common tzdata locales git gpg gpg-agent unzip xz-utils wget curl
+
     SAVE IMAGE --cache-hint
 
 asdf:
