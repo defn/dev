@@ -166,7 +166,7 @@ resource "kubernetes_stateful_set" "dev" {
 
           volume_mount {
             name       = "work"
-            mount_path = "/work"
+            mount_path = "/home/ubuntu/work"
           }
         }
 
