@@ -7,10 +7,37 @@ images:
     #BUILD +arm
 
 amd:
-    BUILD --platform=linux/amd64 +tower-upload --arch=amd64
+    BUILD --platform=linux/amd64 +tower --arch=amd64
 
 arm:
-    BUILD --platform=linux/arm64 +tower-upload --arch=arm64
+    BUILD --platform=linux/arm64 +tower --arch=arm64
+
+tower:
+    ARG arch
+    ARG repo
+
+    FROM +base --arch=${arch}
+
+    RUN sudo ln -nfs /home/ubuntu/hooks /hooks
+
+    RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
+
+    COPY --chown=ubuntu:ubuntu --dir .vim .
+    COPY --chown=ubuntu:ubuntu .vimrc .
+    RUN echo yes | vim +PlugInstall +qall
+
+    COPY --chown=ubuntu:ubuntu --dir bin .
+    COPY --chown=ubuntu:ubuntu .bash* .tool-versions .
+
+    RUN ~/bin/e asdf install
+
+    COPY --dir --chown=ubuntu:ubuntu . .
+    RUN if test -e work; then false; fi
+    RUN git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'
+    COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
+    RUN git clean -ffd
+
+    SAVE IMAGE --push ${repo}defn/dev
 
 root:
     ARG arch
@@ -77,40 +104,18 @@ root:
     RUN chown -R ubuntu:ubuntu /home/ubuntu
     RUN chmod u+s /usr/bin/sudo
 
+    USER ubuntu
+    WORKDIR /home/ubuntu
+
+    ENV HOME=/home/ubuntu
+
     SAVE IMAGE --cache-hint
 
-tower-upload:
+coderServer:
     ARG arch
     ARG repo
 
-    FROM +tower --arch=${arch}
-
-    RUN sudo ln -nfs /home/ubuntu/hooks /hooks
-
-    RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
-
-    COPY --chown=ubuntu:ubuntu --dir .vim .
-    COPY --chown=ubuntu:ubuntu .vimrc .
-    RUN echo yes | vim +PlugInstall +qall
-
-    COPY --chown=ubuntu:ubuntu --dir bin .
-    COPY --chown=ubuntu:ubuntu .bash* .tool-versions .
-
-    RUN ~/bin/e asdf install
-
-    COPY --dir --chown=ubuntu:ubuntu . .
-    RUN if test -e work; then false; fi
-    RUN git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'
-    COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
-    RUN git clean -ffd
-
-    SAVE IMAGE --push ${repo}defn/dev
-
-codeServer:
-    ARG arch
-    ARG repo
-
-    FROM +tower --arch=${arch}
+    FROM +root --arch=${arch}
 
     RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local
     RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
@@ -118,15 +123,23 @@ codeServer:
 
     SAVE ARTIFACT .local/share/code-server
 
-tower:
+vscodeServer:
     ARG arch
+    ARG repo
 
     FROM +root --arch=${arch}
 
-    USER ubuntu
-    WORKDIR /home/ubuntu
+    # vscode-server
+    RUN wget -O- https://aka.ms/install-vscode-server/setup.sh | sudo sh -x; /usr/local/bin/code-server serve-local --accept-server-license-terms --without-connection-token || true & sleep 60
 
-    ENV HOME=/home/ubuntu
+
+    SAVE ARTIFACT .vscode-server
+    SAVE ARTIFACT .vscode-cli
+
+base:
+    ARG arch
+
+    FROM +root --arch=${arch}
 
     COPY --chown=ubuntu:ubuntu --dir (+python/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+pipx/* --arch=${arch}) ./
@@ -195,10 +208,8 @@ tower:
         COPY --chown=ubuntu:ubuntu (+protoc/* --arch=${arch} --arch4=x86_64) /usr/local/bin/
     END
 
-    COPY --chown=ubuntu:ubuntu --dir (+codeServer/* --arch=${arch}) ./.local/share/
-
-    # vscode-server
-    RUN wget -O- https://aka.ms/install-vscode-server/setup.sh | sudo sh -x; /usr/local/bin/code-server serve-local --accept-server-license-terms --without-connection-token || true & sleep 60
+    COPY --chown=ubuntu:ubuntu --dir (+coderServer/* --arch=${arch}) ./.local/share/
+    COPY --chown=ubuntu:ubuntu --dir (+vscodeServer/* --arch=${arch}) ./
 
     # shell-operator
     COPY --dir (+shell-operator/sf.tar.gz --arch=${arch}) /
