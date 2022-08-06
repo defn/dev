@@ -208,8 +208,8 @@ user:
         COPY --chown=ubuntu:ubuntu (+protoc/* --arch=${arch} --arch4=x86_64) /usr/local/bin/
     END
 
-    COPY --chown=ubuntu:ubuntu --dir (+coderServer/* --arch=${arch}) ./.local/share/
-    COPY --chown=ubuntu:ubuntu --dir (+vscodeServer/* --arch=${arch}) ./
+    #COPY --chown=ubuntu:ubuntu --dir (+coderServer/* --arch=${arch}) ./.local/share/
+    #COPY --chown=ubuntu:ubuntu --dir (+vscodeServer/* --arch=${arch}) ./
 
     # shell-operator
     COPY --dir (+shell-operator/sf.tar.gz --arch=${arch}) /
