@@ -62,7 +62,7 @@ images:
 amd arm:
 	git pull
 	git push
-	if [[ "$(shell pwd)" == "$(HOME)" ]]; then cd work/dev && git pull && $(MAKE) $@; else env PATH="$$HOME/bin/fake:$$PATH" earthly --remote-cache=$(cache)defn/cache:updates-$@ $(push) +"$@"-only --repo=$(repo); fi
+	if [[ "$(shell pwd)" == "$(HOME)" ]]; then cd work/dev && git pull && $(MAKE) $@; else env PATH="$$HOME/bin/fake:$$PATH" earthly --remote-cache=$(cache)defn/cache:updates-$@ $(push) +"$@" --repo=$(repo); fi
 
 shell:
 	docker run --rm -ti $(repo)defn/dev bash -l
