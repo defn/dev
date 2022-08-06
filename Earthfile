@@ -106,7 +106,7 @@ tower-upload:
 
     SAVE IMAGE --push ${repo}defn/dev
 
-code:
+codeServer:
     ARG arch
     ARG repo
 
