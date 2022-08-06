@@ -16,7 +16,7 @@ tower:
     ARG arch
     ARG repo
 
-    FROM +base --arch=${arch}
+    FROM +user --arch=${arch}
 
     RUN sudo ln -nfs /home/ubuntu/hooks /hooks
 
@@ -136,7 +136,7 @@ vscodeServer:
     SAVE ARTIFACT .vscode-server
     SAVE ARTIFACT .vscode-cli
 
-base:
+user:
     ARG arch
 
     FROM +root --arch=${arch}
