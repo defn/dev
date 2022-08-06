@@ -7,10 +7,16 @@ images:
     #BUILD +arm
 
 amd:
-    BUILD +tower --arch=amd64
+    BUILD --platform=linux/amd64 +tower --arch=amd64
 
 arm:
     BUILD --platform=linux/arm64 +tower --arch=arm64
+
+amd-only:
+    BUILD +tower --arch=amd64
+
+arm-only:
+    BUILD +tower --arch=arm64
 
 tower:
     ARG arch
