@@ -41,10 +41,6 @@ spec:
             namespace: traefik
             cluster: in-cluster
             path: traefik-remo
-          - name: datadog
-            namespace: datadog
-            cluster: in-cluster
-            path: datadog
   template:
     metadata:
       name: "{{name}}"
