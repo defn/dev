@@ -60,7 +60,7 @@ resource "kubernetes_stateful_set" "dev" {
 
         container {
           name              = "dev"
-          image             = "defn/dev:latest"
+          image             = "quay.io/defn/dev:latest"
           image_pull_policy = "Always"
 
           command = ["/usr/bin/tini", "--"]
@@ -100,7 +100,7 @@ resource "kubernetes_stateful_set" "dev" {
 
         container {
           name              = "code-server"
-          image             = "defn/dev:latest"
+          image             = "quay.io/defn/dev:latest"
           image_pull_policy = "Always"
 
           command = ["/usr/bin/tini", "--"]
@@ -141,7 +141,7 @@ resource "kubernetes_stateful_set" "dev" {
 
         container {
           name              = "vault"
-          image             = "defn/dev:latest"
+          image             = "quay.io/defn/dev:latest"
           image_pull_policy = "Always"
 
           command = ["/usr/bin/tini", "--"]
@@ -155,7 +155,7 @@ resource "kubernetes_stateful_set" "dev" {
 
         container {
           name              = "doh"
-          image             = "defn/dev:latest"
+          image             = "quay.io/defn/dev:latest"
           image_pull_policy = "Always"
 
           command = ["/usr/bin/tini", "--"]

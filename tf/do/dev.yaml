@@ -16,7 +16,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: dev
-          image: defn/dev:latest
+          image: quay.io/defn/dev:latest
           imagePullPolicy: Always
           command: ["/usr/bin/tini", "--"]
           args: ["tail", "-f", "/dev/null"]
