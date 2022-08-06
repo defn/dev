@@ -12,6 +12,12 @@ amd:
 arm:
     BUILD --platform=linux/arm64 +tower --arch=arm64
 
+amd-only:
+    BUILD +tower --arch=amd64
+
+arm-only:
+    BUILD +tower --arch=arm64
+
 tower:
     ARG arch
     ARG repo
