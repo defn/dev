@@ -52,6 +52,18 @@ resource "kubernetes_stateful_set" "dev" {
         }
 
         volume {
+          name = "earthly"
+          empty_dir {}
+        }
+
+        volume {
+          name = "docker"
+          host_path {
+            path = "/var/run/docker.sock"
+          }
+        }
+
+        volume {
           name = "certs"
           host_path {
             path = "/var/lib/tailscale/certs"
@@ -84,8 +96,13 @@ resource "kubernetes_stateful_set" "dev" {
           }
 
           volume_mount {
+            name       = "docker"
+            mount_path = "/var/run/docker.sock"
+          }
+
+          volume_mount {
             name       = "work"
-            mount_path = "/home/ubuntu/work"
+            mount_path = "/work"
           }
 
           volume_mount {
@@ -130,7 +147,7 @@ resource "kubernetes_stateful_set" "dev" {
 
           volume_mount {
             name       = "work"
-            mount_path = "/home/ubuntu/work"
+            mount_path = "/work"
           }
 
           volume_mount {
@@ -149,7 +166,7 @@ resource "kubernetes_stateful_set" "dev" {
 
           volume_mount {
             name       = "work"
-            mount_path = "/home/ubuntu/work"
+            mount_path = "/work"
           }
         }
 
@@ -166,6 +183,7 @@ resource "kubernetes_stateful_set" "dev" {
           name              = "buildkitd"
           image             = "earthly/buildkitd:v0.6.21"
           image_pull_policy = "IfNotPresent"
+          tty               = true
 
           env {
             name  = "BUILDKIT_TCP_TRANSPORT_ENABLED"
@@ -182,11 +200,15 @@ resource "kubernetes_stateful_set" "dev" {
             value = "90"
           }
 
+          volume_mount {
+            name       = "earthly"
+            mount_path = "/tmp/earthly"
+          }
+
           security_context {
             privileged = true
           }
 
-          tty = true
         }
 
         container {
