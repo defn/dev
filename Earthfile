@@ -7,10 +7,11 @@ images:
     #BUILD +arm
 
 amd:
-    FROM +user --arch=amd64
+    FROM --platform=linux/amd64 +user --arch=amd64
+    SAVE IMAGE --push quay.io/defn/dev
 
 arm:
-    BUILD --platform=linux/arm64 +tower --arch=arm64
+    BUILD --platform=linux/arm64 +user --arch=arm64
 
 root:
     ARG arch
