@@ -4,7 +4,7 @@ IMPORT github.com/defn/cloud/lib:master AS lib
 
 images:
     BUILD +amd
-    BUILD +arm
+    #BUILD +arm
 
 amd:
     BUILD --platform=linux/amd64 +tower-upload --arch=amd64
