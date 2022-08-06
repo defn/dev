@@ -121,7 +121,7 @@ resource "kubernetes_stateful_set" "dev" {
           image_pull_policy = "Always"
 
           command = ["/usr/bin/tini", "--"]
-          args    = ["bash", "-c", "exec ~/bin/e code-server --bind-addr 0.0.0.0:8888 --disable-telemetry"]
+          args    = ["bash", "-c", "echo exec ~/bin/e code-server --bind-addr 0.0.0.0:8888 --disable-telemetry; exec tail -f /dev/null"]
 
           tty = true
 
