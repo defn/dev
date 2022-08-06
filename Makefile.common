@@ -1,5 +1,5 @@
-repo ?= quay.io
-cache ?= quay.io
+repo ?= quay.io/
+cache ?= quay.io/
 push ?= --push
 workdir ?= /home/ubuntu
 tilt_port ?= 10350
