@@ -57,12 +57,12 @@ stop: # Stop k3d
 images:
 	git pull
 	git push
-	if [[ "$(shell pwd)" == "$(HOME)" ]]; then cd work/dev && git pull && $(MAKE) $@; else env PATH="$$HOME/bin/fake:$$PATH" earthly --remote-cache=$(cache)defn/cache:updates-$@ $(push) +images --repo=quay.io; fi
+	if [[ "$(shell pwd)" == "$(HOME)" ]]; then cd work/dev && git pull && $(MAKE) $@; else env PATH="$$HOME/bin/fake:$$PATH" earthly --remote-cache=$(cache)defn/cache:updates-$@ $(push) +images --repo=$(repo); fi
 
 amd arm:
 	git pull
 	git push
-	if [[ "$(shell pwd)" == "$(HOME)" ]]; then cd work/dev && git pull && $(MAKE) $@; else env PATH="$$HOME/bin/fake:$$PATH" earthly --remote-cache=$(cache)defn/cache:updates-$@ $(push) +"$@" --repo=quay.io; fi
+	if [[ "$(shell pwd)" == "$(HOME)" ]]; then cd work/dev && git pull && $(MAKE) $@; else env PATH="$$HOME/bin/fake:$$PATH" earthly --remote-cache=$(cache)defn/cache:updates-$@ $(push) +"$@" --repo=$(repo); fi
 
 shell:
 	docker run --rm -ti $(repo)defn/dev bash -l
