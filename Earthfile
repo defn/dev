@@ -18,7 +18,7 @@ tower:
 
     FROM +user --arch=${arch}
 
-    RUN sudo ln -nfs /home/ubuntu/hooks /hooks/hooks
+    RUN sudo ln -nfs /home/ubuntu/hooks /hooks
 
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
