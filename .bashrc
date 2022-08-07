@@ -46,7 +46,7 @@ export PATH="$PATH:/usr/local/aws-cli/bin"
 # earthly
 export EARTHLY_BUILDKIT_HOST="${EARTHLY_BUILDKIT_HOST:-tcp://$(uname -n):8372}"
 export DOCKER_HOST="${DOCKER_HOST:-tcp://localhost:2375}"
-export DOCKER_BUILDKIT="${DOCKER_BUILDKIT:-1}
+export DOCKER_BUILDKIT="${DOCKER_BUILDKIT:-1}"
 
 export PATH="$PATH:/usr/local/gcloud/google-cloud-sdk/bin"
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
