@@ -3,16 +3,18 @@ VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-ar
 IMPORT github.com/defn/cloud/lib:master AS lib
 
 images:
-    BUILD +amd
-    BUILD +arm
+    BUILD +amd --repo=quay.io/
+    BUILD +arm --repo=quay.io/
 
 amd:
+    ARG repo
     FROM --platform=linux/amd64 +user --arch=amd64
-    SAVE IMAGE --push quay.io/defn/dev
+    SAVE IMAGE --push $(repo)defn/dev
 
 arm:
+    ARG repo
     FROM --platform=linux/arm64 +user --arch=arm64
-    SAVE IMAGE --push quay.io/defn/dev
+    SAVE IMAGE --push $(repo)defn/dev
 
 root:
     ARG arch
