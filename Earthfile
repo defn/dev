@@ -9,12 +9,12 @@ images:
 amd:
     ARG repo
     FROM --platform=linux/amd64 +user --arch=amd64
-    SAVE IMAGE --push $(repo)defn/dev
+    SAVE IMAGE --push ${repo}defn/dev
 
 arm:
     ARG repo
     FROM --platform=linux/arm64 +user --arch=arm64
-    SAVE IMAGE --push $(repo)defn/dev
+    SAVE IMAGE --push ${repo}defn/dev
 
 root:
     ARG arch
