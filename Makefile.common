@@ -36,6 +36,8 @@ init-inner:
 	-cd work/password-store && git crypt unlock && git pull
 	$(MAKE) vault-unseal
 	$(MAKE) kubeconfig
+	-sudo chgrp docker /var/run/docker.sock
+	-sudo chmod 770 /var/run/docker.sock
 
 init-deploy:
 	if kubectl --context pod create namespace argocd; then $(MAKE) init-argocd; fi

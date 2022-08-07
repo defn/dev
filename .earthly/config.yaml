@@ -2,3 +2,4 @@ global:
   disable_analytics: true
   disable_log_sharing: true
   secret_provider: earthly-secret-provider
+  cache_size_pct: 90
