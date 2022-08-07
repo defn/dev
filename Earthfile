@@ -3,8 +3,9 @@ VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-ar
 IMPORT github.com/defn/cloud/lib:master AS lib
 
 images:
-    BUILD +amd --repo=quay.io/
-    BUILD +arm --repo=quay.io/
+    ARG repo
+    BUILD +amd --repo=${repo}
+    BUILD +arm --repo=${repo}
 
 amd:
     ARG repo

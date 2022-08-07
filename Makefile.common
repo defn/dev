@@ -1,4 +1,4 @@
-repo ?= quay.io/
+repo ?=
 cache ?=
 push ?= --push
 workdir ?= /home/ubuntu
@@ -145,4 +145,3 @@ monitor:
 		if test -f ~/.alive && test "$$(find ~/.alive -mmin +120)"; then \
 			~/bin/e $(MAKE) down; \
 		fi
-
