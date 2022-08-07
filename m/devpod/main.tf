@@ -57,6 +57,11 @@ resource "kubernetes_stateful_set" "dev" {
         }
 
         volume {
+          name = "dind"
+          empty_dir {}
+        }
+
+        volume {
           name = "docker"
           host_path {
             path = "/var/run/docker.sock"
@@ -180,7 +185,7 @@ resource "kubernetes_stateful_set" "dev" {
         }
 
         container {
-          name              = "buildkitd"
+          name              = "buildkit"
           image             = "earthly/buildkitd:v0.6.21"
           image_pull_policy = "IfNotPresent"
           tty               = true
@@ -209,6 +214,23 @@ resource "kubernetes_stateful_set" "dev" {
             privileged = true
           }
 
+        }
+
+        container {
+          name              = "docker"
+          image             = "docker:dind"
+          image_pull_policy = "IfNotPresent"
+
+          command = ["dockerd", "--host", "tcp://127.0.0.1:2375"]
+
+          volume_mount {
+            name       = "dind"
+            mount_path = "/var/lib/docker"
+          }
+
+          security_context {
+            privileged = true
+          }
         }
 
         container {
