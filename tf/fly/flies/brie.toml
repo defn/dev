@@ -16,5 +16,5 @@ entrypoint = ["/service"]
 cmd = ["make", "trigger"]
 
 [mounts]
-source = "mnt"
+source = "data"
 destination = "/mnt"

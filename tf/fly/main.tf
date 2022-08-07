@@ -15,8 +15,9 @@ resource "fly_app" "brie" {
 }
 
 resource "fly_volume" "brie" {
-  name   = "brie"
-  app    = fly_app.brie.name
+  name   = "data"
   size   = 1
   region = "sjc"
+
+  app    = fly_app.brie.name
 }
