@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+function main {
+    exec /usr/sbin/sshd -D -o UseDNS=no -o UsePAM=yes -o PasswordAuthentication=no -o StreamLocalBindUnlink=yes
+}
+
+main "$@"

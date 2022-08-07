@@ -13,6 +13,7 @@ shell:
 	env \
 		DIGITALOCEAN_ACCESS_TOKEN="$$(pass DIGITALOCEAN_ACCESS_TOKEN)" \
 		TF_TOKEN_app_terraform_io="$$(pass TF_TOKEN_app_terraform_io)" \
+		FLY_API_TOKEN="$$(pass FLY_API_TOKEN)" \
 		$(SHELL)
 
 test:
