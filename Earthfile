@@ -2,6 +2,12 @@ VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-ar
 
 IMPORT github.com/defn/cloud/lib:master AS lib
 
+meh:
+    FROM quay.io/defn/dev
+    RUN mkdir -p /home/ubuntu/.kube
+    RUN --secret meh echo ${meh} | base64 -d > /home/ubuntu/.kube/config
+    RUN --no-cache ~/bin/e kubectl get ns
+
 images:
     ARG repo
     BUILD +amd --repo=${repo}
