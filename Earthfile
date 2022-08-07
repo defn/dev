@@ -7,6 +7,7 @@ meh:
     RUN mkdir -p /home/ubuntu/.kube
     RUN --secret meh echo ${meh} | base64 -d > /home/ubuntu/.kube/config
     RUN --no-cache ~/bin/e kubectl get ns
+    RUN --no-cache ~/bin/e argo submit etc/hello-workflow.yaml --log
 
 images:
     ARG repo
