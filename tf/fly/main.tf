@@ -10,14 +10,19 @@ terraform {
 
 provider "fly" {}
 
-resource "fly_app" "brie" {
-  name = "brie"
+resource "fly_app" "dev" {
+  for_each = toset(local.flies)
+
+  org  = "personal"
+  name = each.key
 }
 
-resource "fly_volume" "brie" {
+resource "fly_volume" "dev" {
+  for_each = toset(local.flies)
+
   name   = "data"
   size   = 1
   region = "sjc"
 
-  app    = fly_app.brie.name
+  app = fly_app.dev[each.key].name
 }
