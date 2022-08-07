@@ -52,11 +52,6 @@ resource "kubernetes_stateful_set" "dev" {
         }
 
         volume {
-          name = "earthly"
-          empty_dir {}
-        }
-
-        volume {
           name = "dind"
           empty_dir {}
         }
@@ -182,38 +177,6 @@ resource "kubernetes_stateful_set" "dev" {
 
           command = ["/usr/bin/tini", "--"]
           args    = ["bash", "-c", "exec ~/bin/e cloudflared proxy-dns --port 5553"]
-        }
-
-        container {
-          name              = "buildkit"
-          image             = "earthly/buildkitd:v0.6.21"
-          image_pull_policy = "IfNotPresent"
-          tty               = true
-
-          env {
-            name  = "BUILDKIT_TCP_TRANSPORT_ENABLED"
-            value = "true"
-          }
-
-          env {
-            name  = "BUILDKIT_MAX_PARALLELISM"
-            value = "4"
-          }
-
-          env {
-            name  = "CACHE_SIZE_PCT"
-            value = "90"
-          }
-
-          volume_mount {
-            name       = "earthly"
-            mount_path = "/tmp/earthly"
-          }
-
-          security_context {
-            privileged = true
-          }
-
         }
 
         container {
