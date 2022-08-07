@@ -24,4 +24,4 @@ destination = "/mnt"
   protocol = "tcp"
 
   [[services.ports]]
-    port = "22"
+    port = "2222"
