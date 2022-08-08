@@ -82,6 +82,8 @@ kubeconfig:
 	if vcluster connect vcluster --kube-config ~/.kube/vcluster --kube-config-context-name vcluster --update-current=false --server vcluster.vcluster.svc.cluster.local; then \
 		env KUBECONFIG=~/.kube/config:~/.kube/vcluster kubectl config view --flatten > ~/.kube/config.1; \
 		mv ~/.kube/config.1 ~/.kube/config; \
+		$(MAKE) argocd-login; \
+		argocd cluster add vcluster --yes; \
 		fi
 	k config get-contexts
 
