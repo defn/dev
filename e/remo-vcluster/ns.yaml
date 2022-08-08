@@ -9,7 +9,7 @@ spec:
   generators:
     - list:
         elements:
-          - name: kyverno
+          - name: remo-vcluster-kyverno
             namespace: kyverno
             cluster: in-cluster
             path: kyverno
