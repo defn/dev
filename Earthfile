@@ -4,9 +4,7 @@ IMPORT github.com/defn/cloud/lib:master AS lib
 
 meh:
     FROM quay.io/defn/dev
-    RUN mkdir -p /home/ubuntu/.kube
     RUN --secret meh echo ${meh} | base64 -d > /home/ubuntu/.kube/config
-    RUN --no-cache ~/bin/e kubectl get ns
     RUN --no-cache ~/bin/e argo submit etc/hello-workflow.yaml --log
 
 images:
@@ -181,6 +179,10 @@ user:
     RUN sudo ln -nfs /home/ubuntu/hooks /hooks
 
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
+    
+    RUN mkdir -p .kube .docker
+
+    COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
 
     COPY --chown=ubuntu:ubuntu --dir .vim .
     COPY --chown=ubuntu:ubuntu .vimrc .
@@ -192,10 +194,7 @@ user:
     RUN ~/bin/e asdf install
 
     COPY --dir --chown=ubuntu:ubuntu . .
-    RUN if test -e work; then false; fi
-    RUN git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'
-    COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
-    RUN git clean -ffd
+    RUN set -e; if test -e work; then false; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd
 
 coderServer:
     ARG arch
