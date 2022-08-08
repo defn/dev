@@ -10,7 +10,7 @@ spec:
     path: e/remo-vcluster
     targetRevision: main
   destination:
-    name: vcluster
+    name: in-cluster
   syncPolicy:
     automated:
       prune: true
