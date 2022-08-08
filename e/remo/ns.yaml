@@ -37,6 +37,10 @@ spec:
             namespace: argo-workflows
             cluster: in-cluster
             path: argo-workflows
+          - name: vcluster
+            namespace: vcluster
+            cluster: in-cluster
+            path: vcluster
           - name: traefik
             namespace: traefik
             cluster: in-cluster

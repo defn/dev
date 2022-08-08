@@ -1,0 +1,12 @@
+namespace: vcluster
+
+helmCharts:
+- releaseName: vcluster
+  name: vcluster
+  version: 0.11.0
+  repo: https://charts.loft.sh
+  includeCRDs: true
+  valuesInline:
+    serviceCIDR: 10.245.0.0/16
+    vcluster:
+      image: rancher/k3s:v1.23.6-k3s1
