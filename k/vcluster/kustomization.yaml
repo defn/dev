@@ -15,3 +15,7 @@ helmCharts:
     syncer:
       extraArgs:
         - --tls-san=vcluster.vcluster.svc.cluster.local
+
+# vcluster connect vcluster --kube-config ~/.kube/vcluster --kube-config-context-name vcluster --update-current=false --server vcluster.vcluster.svc.cluster.local
+# env KUBECONFIG=$HOME/.kube/config:$HOME/.kube/vcluster kubectl config view --flatten >
+# kubectl --kubeconfig /home/ubuntu/.kube/vcluster get namespaces
