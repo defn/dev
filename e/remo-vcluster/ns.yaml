@@ -11,7 +11,7 @@ spec:
         elements:
           - name: remo-vcluster-kyverno
             namespace: kyverno
-            cluster: in-cluster
+            cluster: vcluster
             path: kyverno
   template:
     metadata:
