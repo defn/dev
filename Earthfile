@@ -194,7 +194,7 @@ user:
     RUN ~/bin/e asdf install
 
     COPY --dir --chown=ubuntu:ubuntu . .
-    RUN set -e; if test -e work; then false; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd
+    RUN set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd
 
 coderServer:
     ARG arch
