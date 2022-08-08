@@ -84,7 +84,7 @@ asdf:
 	cat .tool-versions| awk '{print $$1}' | while read -r a; do asdf list-all "$$a" | sed "s#^#$$a #"; done | sort > .tool-versions-all
 
 gh:
-	for a in $$(grep curl Earthfile | grep github.com | perl -pe 's{.*github.com/}{}; s{(.*?/.*?)/.*}{$$1}' | sort); do gh release list --repo "$$a" --exclude-drafts | cat | perl -pe 's{[ \t]+}{ }g' | sort | sed "s#^#$$a #"; done > .tool-versions-gh
+	for a in $$(grep curl Earthfile | grep github.com | perl -pe 's{.*github.com/}{}; s{(.*?/.*?)/.*}{$$1}' | sort); do gh release list --repo "$$a" --exclude-drafts | cat | perl -pe 's{[ \t]+}{ }g' | awk '{print $$1,$$(NF-1)}' | sort | sed "s#^#$$a #"; done > .tool-versions-gh
 
 attach:
 	code --folder-uri vscode-remote://k8s-container+context=$(context)+namespace=default+podname=$(podname)+name=dev+$(workdir)
