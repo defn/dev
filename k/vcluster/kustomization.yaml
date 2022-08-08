@@ -12,3 +12,6 @@ helmCharts:
     serviceCIDR: 10.245.0.0/16
     vcluster:
       image: rancher/k3s:v1.23.6-k3s1
+    syncer:
+      extraArgs:
+        - --tls-san=vcluster.vcluster.svc.cluster.local
