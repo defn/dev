@@ -171,7 +171,7 @@ user:
     END
 
     COPY --chown=ubuntu:ubuntu --dir (+coderServer/* --arch=${arch}) ./.local/share/
-    
+
     # shell-operator
     COPY --dir (+shell-operator/sf.tar.gz --arch=${arch}) /
     RUN cd / && sudo tar xvfz sf.tar.gz && sudo rm -f sf.tar.gz
@@ -182,7 +182,7 @@ user:
     RUN sudo ln -nfs /home/ubuntu/hooks /hooks
 
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
-    
+
     RUN mkdir -p .kube .docker
 
     COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json

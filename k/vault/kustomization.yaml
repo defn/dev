@@ -49,8 +49,8 @@ patchesStrategicMerge:
       spec:
         containers:
           - name: vault
-            env: 
-              - 
+            env:
+              -
                 name: VAULT_TOKEN
                 valueFrom:
                   secretKeyRef:

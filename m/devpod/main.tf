@@ -337,4 +337,3 @@ resource "kubernetes_ingress_v1" "code_server" {
     }
   }
 }
-

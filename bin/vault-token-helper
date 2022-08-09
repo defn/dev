@@ -8,7 +8,7 @@ function main {
     case "${1:-}" in
         get)
             if pass "${VAULT_PASS_KEY}" >/dev/null 2>&1; then
-                pass "${VAULT_PASS_KEY}" | perl -pe 's{\s*$}{}' 
+                pass "${VAULT_PASS_KEY}" | perl -pe 's{\s*$}{}'
             fi
             ;;
         store)

@@ -6,4 +6,3 @@ COPY k3s-wrapper.sh /bin/k3s
 COPY */tailscale */tailscaled ./
 RUN mkdir -p /var/lib/tailscale
 COPY tailscaled.state /var/lib/tailscale/
-

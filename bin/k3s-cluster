@@ -19,7 +19,7 @@ function main {
 
   k3sup install --k3s-channel v1.23 --cluster --ip ${server_ip_prv} --user ${server_username} --merge --context ${server_context} --local-path ~/.kube/config --k3s-extra-args \
     "--disable traefik --node-ip=${server_ip_ts} --node-external-ip=${server_ip_ts} --advertise-address=${server_ip_ts} --cluster-cidr ${cluster_cidr} --service-cidr ${service_cidr}" || true
-  k3sup install --skip-install --ip ${server_ip_prv} --user ${server_username} --merge --context ${server_context} --local-path ~/.kube/config 
+  k3sup install --skip-install --ip ${server_ip_prv} --user ${server_username} --merge --context ${server_context} --local-path ~/.kube/config
   k3sup install --skip-install --ip ${server_ip_prv} --user ${server_username} --merge --context ${server_context} --local-path ~/.kube/${server_context}
 }
 

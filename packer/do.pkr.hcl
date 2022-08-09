@@ -30,7 +30,7 @@ build {
   provisioner "shell" {
     scripts = var.scripts1
   }
-  
+
   provisioner "shell" {
     scripts = var.scripts2
   }

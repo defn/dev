@@ -61,4 +61,3 @@ resource "digitalocean_kubernetes_node_pool" "dev" {
     value  = each.key
   }
 }
-
