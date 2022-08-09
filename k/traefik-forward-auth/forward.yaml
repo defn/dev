@@ -19,10 +19,10 @@ spec:
         - containerPort: 4181
         args:
         - --secret=bc989147a1d2ff433933b39b40b9b1d0
-        - --auth-host=localhost # should be sub-domain
-        - --cookie-domain=localhost
+        - --auth-host=auth.remocal.net
+        - --cookie-domain=remocal.net
         - --default-provider=oidc
-        - --providers.oidc.issuer-url=http://localhost:5556
+        - --providers.oidc.issuer-url=https://dex.remocal.net
         - --providers.oidc.client-id=forward-auth
         - --providers.oidc.client-secret=6bbc3f2a6d55a3917e068dff5b07a476 # dex secret
       - name: dex-socat
@@ -50,3 +50,24 @@ spec:
     address: http://forward-auth.traefik:4181
     authResponseHeaders:
     - X-Forwarded-User
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ts-traefik-forward-auth
+  namespace: traefik
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: traefik-forward-auth-dex@kubernetescrd
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: forward-auth
+                port:
+                  number: 4181
