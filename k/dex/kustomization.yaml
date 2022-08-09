@@ -29,3 +29,7 @@ helmCharts:
         secret: 6bbc3f2a6d55a3917e068dff5b07a476
         redirectURIs:
         - https://localhost:4181/_oauth
+
+
+resources:
+- ingress.yaml
