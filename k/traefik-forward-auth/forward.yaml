@@ -22,9 +22,12 @@ spec:
         - --auth-host=localhost # should be sub-domain
         - --cookie-domain=localhost
         - --default-provider=oidc
-        - --providers.oidc.issuer-url=http://dex.dex:5556/
+        - --providers.oidc.issuer-url=http://localhost:5556/
         - --providers.oidc.client-id=forward-auth
         - --providers.oidc.client-secret=6bbc3f2a6d55a3917e068dff5b07a476 # dex secret
+      - name: dex-socat
+        image: alpine/socat:1.0.5
+        args: ["tcp-listen:5556,reuseaddr,fork", "tcp:dex.dex:5556"]
 ---
 apiVersion: v1
 kind: Service
