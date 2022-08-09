@@ -59,7 +59,6 @@ patchesStrategicMerge:
           - --entrypoints.web.http.redirections.entryPoint.to=:443
           - --entrypoints.web.http.redirections.entryPoint.scheme=https
           - --providers.kubernetescrd.allowexternalnameservices=true
-          - --providers.kubernetescrd.allowCrossNamespace=false
           - --serverstransport.insecureskipverify=true
           - --api.insecure=true
           - --log.level=DEBUG
