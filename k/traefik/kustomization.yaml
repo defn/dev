@@ -120,11 +120,11 @@ patchesStrategicMerge:
         ports:
         - $patch: replace
         - name: web
-          port: 80
+          port: 8000
           protocol: TCP
           targetPort: web
         - name: websecure
-          port: 443
+          port: 8443
           protocol: TCP
           targetPort: websecure
         - name: https8200
