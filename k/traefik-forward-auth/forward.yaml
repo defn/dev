@@ -69,7 +69,7 @@ spec:
       services:
         - name: forward-auth
           port: 4181
-      middlewares:
-        - name: traefik-forward-auth-dex@kubernetescrd
+      #middlewares:
+      #  - name: traefik-forward-auth-dex@kubernetescrd
   tls:
     secretName: default-certificate
