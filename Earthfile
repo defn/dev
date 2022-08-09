@@ -129,6 +129,10 @@ user:
     COPY --chown=ubuntu:ubuntu (+cue-gen/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+kn/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=amd64) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+k3d/* --arch=amd64) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+cosign/* --arch=amd64) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+rekor/* --arch=amd64) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+fulcio/* --arch=amd64) /usr/local/bin/
 
     COPY --chown=ubuntu:ubuntu --dir (+shell/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+k9s/* --arch=${arch}) ./
@@ -167,8 +171,7 @@ user:
     END
 
     COPY --chown=ubuntu:ubuntu --dir (+coderServer/* --arch=${arch}) ./.local/share/
-    #COPY --chown=ubuntu:ubuntu --dir (+vscodeServer/* --arch=${arch}) ./
-
+    
     # shell-operator
     COPY --dir (+shell-operator/sf.tar.gz --arch=${arch}) /
     RUN cd / && sudo tar xvfz sf.tar.gz && sudo rm -f sf.tar.gz
@@ -430,12 +433,33 @@ kn:
     RUN curl -sSL -o kn https://github.com/knative/client/releases/download/knative-v${KN}/kn-linux-${arch} && chmod 755 kn
     SAVE ARTIFACT kn
 
-k3d-download:
+k3d:
     ARG arch
     ARG K3D
     FROM +tools --arch=${arch}
     RUN curl -sSL -o k3d https://github.com/k3d-io/k3d/releases/download/v${K3D}/k3d-linux-${arch} && chmod 755 k3d
     SAVE ARTIFACT k3d
+
+fulcio:
+    ARG arch
+    ARG FULCIO
+    FROM +tools --arch=${arch}
+    RUN curl -sSL -o fulcio https://github.com/sigstore/fulcio/releases/download/v${FULCIO}/fulcio-linux-${arch} && chmod 755 fulcio
+    SAVE ARTIFACT fulcio
+
+rekor:
+    ARG arch
+    ARG REKOR
+    FROM +tools --arch=${arch}
+    RUN curl -sSL -o rekor https://github.com/sigstore/rekor/releases/download/v${REKOR}/rekor-cli-linux-${arch} && chmod 755 rekor
+    SAVE ARTIFACT rekor
+
+cosign:
+    ARG arch
+    ARG COSIGN
+    FROM +tools --arch=${arch}
+    RUN curl -sSL -o cosign https://github.com/sigstore/cosign/releases/download/v${COSIGN}/cosign-linux-${arch} && chmod 755 cosign
+    SAVE ARTIFACT cosign
 
 gcloud:
     ARG arch
@@ -554,7 +578,7 @@ packer:
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
-k3d:
+k3d-asdf:
     ARG arch
     ARG K3D
     FROM +asdf --arch=${arch}
@@ -738,6 +762,7 @@ pipx:
     RUN ~/.asdf/shims/pipx install httpie
     RUN ~/.asdf/shims/pipx install ggshield
     RUN ~/.asdf/shims/pipx install supervisor
+    RUN ~/.asdf/shims/pipx install sigstore
     RUN git init
     COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
     RUN bash -c 'source ~/.asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit install'
