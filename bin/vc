@@ -3,18 +3,7 @@
 function main {
 	set -efu
 
-	local ns="${0##*/}"
-	loft use vcluster "${ns}" --print > "$HOME/.kube/$ns.conf"
-	export KUBECONFIG="$HOME/.kube/$ns.conf"
-	case "${1:-}" in
-		--)
-			shift
-			exec "$@"
-			;;
-		*)
-			exec kubectl "$@"
-			;;
-	esac
+	exec kubectl --context vcluster "$@"
 }
 
 main "$@"
