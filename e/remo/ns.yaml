@@ -49,6 +49,10 @@ spec:
             namespace: traefik
             cluster: in-cluster
             path: traefik-remo
+          - name: traefik-forward-auth
+            namespace: traefik
+            cluster: in-cluster
+            path: traefik-forward-auth
   template:
     metadata:
       name: "{{name}}"
