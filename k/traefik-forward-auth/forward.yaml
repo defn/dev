@@ -56,23 +56,20 @@ spec:
     authResponseHeaders:
     - X-Forwarded-User
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
-  name: ts-traefik-forward-auth-websecure
-  namespace: traefik
-  annotations:
-    traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.middlewares: traefik-forward-auth-dex@kubernetescrd
+  name: ts-auth-websecure
 spec:
-  rules:
-    - http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: forward-auth
-                port:
-                  number: 4181
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: HostRegexp(`auth.{dom:.+}`)
+      services:
+        - name: forward-auth
+          port: 4181
+      middlewares:
+        - name: traefik-forward-auth-dex@kubernetescrd
+  tls:
+    secretName: default-certificate
