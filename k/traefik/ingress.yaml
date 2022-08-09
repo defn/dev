@@ -33,10 +33,14 @@ spec:
       services:
         - kind: TraefikService
           name: api@internal
+      middlewares:
+      - name: traefik-forward-auth-dex@kubernetescrd
     - kind: Rule
       match: HostRegexp(`traefik.{dom:.+}`) && PathPrefix(`/`)
       services:
         - kind: TraefikService
           name: dashboard@internal
+      middlewares:
+      - name: traefik-forward-auth-dex@kubernetescrd
   tls:
     secretName: default-certificate
