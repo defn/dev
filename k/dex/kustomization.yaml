@@ -28,4 +28,4 @@ helmCharts:
         id: forward-auth
         secret: 6bbc3f2a6d55a3917e068dff5b07a476
         redirectURIs:
-        - http://localhost:5556/_oauth
+        - https://localhost:4181/_oauth
