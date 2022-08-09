@@ -3,6 +3,7 @@ namespace: traefik
 helmCharts:
 - releaseName: traefik
   name: traefik
+  namespace: traefik
   version: 10.24.0
   repo: https://helm.traefik.io/traefik
   includeCRDs: true
