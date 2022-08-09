@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	exec argocd --kube-context argocd app "$@"
+}
+
+main "$@"
