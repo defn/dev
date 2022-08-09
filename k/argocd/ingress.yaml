@@ -31,5 +31,7 @@ spec:
       services:
         - name: argocd-server
           port: 443
+      middlewares:
+        - name: traefik-forward-auth-dex@kubernetescrd
   tls:
     secretName: default-certificate
