@@ -19,3 +19,24 @@ spec:
           name: dashboard@internal
   tls:
     secretName: default-certificate
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ts-traefik-websecure
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: HostRegexp(`traefik\.{domain:.+}`) && PathPrefix(`/api`)
+      services:
+        - kind: TraefikService
+          name: api@internal
+    - kind: Rule
+      match: HostRegexp(`traefik\.{domain:.+}`) && PathPrefix(`/`)
+      services:
+        - kind: TraefikService
+          name: dashboard@internal
+  tls:
+    secretName: default-certificate
