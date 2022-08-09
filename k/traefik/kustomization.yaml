@@ -37,6 +37,7 @@ patchesStrategicMerge:
           - --metrics.prometheus=true
           - --metrics.prometheus.entrypoint=metrics
           - --providers.kubernetescrd
+          - --providers.kubernetescrd.allowCrossNamespace=true
           - --providers.kubernetesingress
           - --entrypoints.web.address=:8000/tcp
           - --entrypoints.websecure.address=:8443/tcp
