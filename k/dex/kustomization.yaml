@@ -8,7 +8,7 @@ helmCharts:
   includeCRDs: true
   valuesInline:
     config:
-      issuer: http://localhost:5556
+      issuer: https://dex.remocal.net
       storage:
         type: memory
       web:
@@ -28,7 +28,7 @@ helmCharts:
         id: forward-auth
         secret: 6bbc3f2a6d55a3917e068dff5b07a476
         redirectURIs:
-        - https://localhost:4181/_oauth
+        - https://auth.remocal.net/_oauth
 
 
 resources:
