@@ -14,7 +14,7 @@ helmCharts:
         config:
           inCluster: true
       web:
-        https: 0.0.0.0:5556
+        http: 0.0.0.0:5556
       connectors:
       - name: GitHub
         type: github
