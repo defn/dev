@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forward-auth
+  namespace: traefik
+spec:
+  selector:
+    matchLabels:
+      app: forward-auth
+  template:
+    metadata:
+      labels:
+        app: forward-auth
+    spec:
+      containers:
+      - name: forward-auth
+        image: thomseddon/traefik-forward-auth:latest
+        ports:
+        - containerPort: 4181
+        args:
+        - --secret=bc989147a1d2ff433933b39b40b9b1d0
+        - --auth-host=localhost # should be sub-domain
+        - --cookie-domain=localhost
+        - --default-provider=oidc
+        - --providers.oidc.issuer-url=https://dex.dex:5556/
+        - --providers.oidc.client-id=forward-auth
+        - --providers.oidc.client-secret=6bbc3f2a6d55a3917e068dff5b07a476 # dex secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: forward-auth
+  namespace: traefik
+spec:
+  selector:
+    app: forward-auth
+  ports:
+  - port: 4181
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: forward-auth-dex
+  namespace: traefik
+spec:
+  forwardAuth:
+    address: http://forward-auth.traefik:4181
+    authResponseHeaders:
+    - X-Forwarded-User
