@@ -10,9 +10,7 @@ helmCharts:
     config:
       issuer: http://localhost:5556
       storage:
-        type: kubernetes
-        config:
-          inCluster: true
+        type: memory
       web:
         http: 0.0.0.0:5556
       connectors:
@@ -23,10 +21,8 @@ helmCharts:
           clientID: GITHUB_CLIENT_ID
           clientSecret: GITHUB_CLIENT_SECRET
           redirectURI: http://localhost:5556/callback
-
       oauth2:
         skipApprovalScreen: true
-
       staticClients:
       - name: Traefik Forward Auth
         id: forward-auth
