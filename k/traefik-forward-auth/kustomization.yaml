@@ -1,2 +1,9 @@
+namespace: traefik
+
 resources:
 - forward.yaml
+
+secretGenerator:
+- name: remocal
+  files:
+  - remocal.crt
