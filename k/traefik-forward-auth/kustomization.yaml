@@ -4,6 +4,6 @@ resources:
 - forward.yaml
 
 secretGenerator:
-- name: remocal
+- name: remocal-tls
   files:
   - remocal.crt
