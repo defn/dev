@@ -1,0 +1,16 @@
+namespace: dex
+
+helmCharts:
+- releaseName: dex
+  name: dex
+  version: 0.9.0
+  repo: https://charts.dexidp.io
+  includeCRDs: true
+  valuesInline:
+    config:
+      issuer: http://localhost:9999
+
+      storage:
+        type: memory
+
+      enablePasswordDB: true

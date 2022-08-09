@@ -41,6 +41,10 @@ spec:
             namespace: vcluster
             cluster: in-cluster
             path: vcluster
+          - name: dex
+            namespace: dex
+            cluster: in-cluster
+            path: vcluster
           - name: traefik
             namespace: traefik
             cluster: in-cluster
