@@ -39,9 +39,9 @@ init-inner:
 	-sudo chgrp docker /var/run/docker.sock
 	-sudo chmod 770 /var/run/docker.sock
 
-init-deploy:
+deploy:
 	if kubectl --context pod create namespace argocd; then $(MAKE) init-argocd; fi
-	$(MAKE) deploy
+	$(MAKE) init-sets
 	argocd app sync argocd
 
 init-argocd:
@@ -49,13 +49,12 @@ init-argocd:
 	kubectl --context argocd rollout status deployment argocd-server --watch
 	sleep 10; $(MAKE) argocd-login
 
-deploy:
+init-sets:
 	cd "$${DEFN_DEV_WORKDIR:-$${HOME}}" && kubectl --context argocd apply -f e/$(control).yaml
 	argocd app sync sets-$(control)
 	argocd app list
 
 tilt:
-	$(MAKE) init
 	env tilt up --context pod --port $(tilt_port)
 
 login:
