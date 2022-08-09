@@ -48,7 +48,7 @@ spec:
           - name: traefik
             namespace: traefik
             cluster: in-cluster
-            path: traefik-remo
+            path: traefik-clusterip
           - name: traefik-forward-auth
             namespace: traefik
             cluster: in-cluster
