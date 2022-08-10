@@ -53,6 +53,10 @@ spec:
             namespace: vcluster
             cluster: in-cluster
             path: vcluster
+          - name: dev
+            namespace: default
+            cluster: in-cluster
+            path: dev
   template:
     metadata:
       name: "{{name}}"

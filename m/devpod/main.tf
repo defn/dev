@@ -304,36 +304,3 @@ resource "kubernetes_cluster_role_binding" "dev" {
     name      = "cluster-admin"
   }
 }
-
-resource "kubernetes_ingress_v1" "code_server" {
-  metadata {
-    name      = "code-server"
-    namespace = "default"
-
-    annotations = {
-      "traefik.ingress.kubernetes.io/router.entrypoints" = "https8888"
-      "traefik.ingress.kubernetes.io/router.tls"         = "true"
-    }
-  }
-
-  spec {
-    rule {
-      http {
-        path {
-          path      = "/"
-          path_type = "Prefix"
-
-          backend {
-            service {
-              name = "code-server"
-
-              port {
-                number = 8888
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
