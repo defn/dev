@@ -170,7 +170,7 @@ user:
         COPY --chown=ubuntu:ubuntu (+protoc/* --arch=${arch} --arch4=x86_64) /usr/local/bin/
     END
 
-    COPY --chown=ubuntu:ubuntu --dir (+coderServer/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+coderServer/* --arch=${arch}) ./
 
     # shell-operator
     COPY --dir (+shell-operator/sf.tar.gz --arch=${arch}) /
