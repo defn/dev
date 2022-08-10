@@ -170,7 +170,7 @@ user:
         COPY --chown=ubuntu:ubuntu (+protoc/* --arch=${arch} --arch4=x86_64) /usr/local/bin/
     END
 
-    COPY --chown=ubuntu:ubuntu --dir (+coderServer/* --arch=${arch}) ./.local/share/
+    COPY --chown=ubuntu:ubuntu --dir (+coderServer/* --arch=${arch}) ./
 
     # shell-operator
     COPY --dir (+shell-operator/sf.tar.gz --arch=${arch}) /
@@ -208,7 +208,7 @@ coderServer:
     RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
     RUN for a in betterthantomorrow.calva betterthantomorrow.joyride eamodio.gitlens ms-python.python vscodevim.vim; do /home/ubuntu/.local/bin/code-server --install-extension "$a"; done
 
-    SAVE ARTIFACT .local/share/code-server
+    SAVE ARTIFACT .local
 
 vscodeServer:
     ARG arch
