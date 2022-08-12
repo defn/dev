@@ -63,16 +63,18 @@ init-sets:
 tilt:
 	env tilt up --context pod --port $(tilt_port)
 
-logout down:
+logout:
 	-echo yes | gh auth logout --hostname github.com
 	-argocd logout argocd-server.argocd.svc
 	-$(MAKE) vault-seal
+	cd .password-store && git checkout vault && git clean -fd vault && git crypt lock
 
 login:
 	chmod 700 ~/.password-store/home/.gnupg ~/.gnupg
 	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
 	chmod 700 ~/.password-store/home/.gnupg ~/.gnupg
 	cd ~/.password-store && git pull
+	$(MAKE) git-crypt-unlock
 	$(MAKE) vault-unseal
 	if ! gh auth status; then $(MAKE) github-login; fi
 	$(MAKE) argocd-login
@@ -91,9 +93,14 @@ gpg:
 	rsync -ia .password-store/home/.gnupg/. .gnupg/.
 	chmod 700 .gnupg
 	gpg --import .password-store/keys/EBE020A544E04B9C67215280B8B6F42683E6CCEF/private.gpg 
-	gpg -d .password-store/.git-crypt-key > .password-store/key
-	cd .password-store && git crypt unlock key
-	rm -f .password-store/key
+	$(MAKE) git-crypt-unlock
+
+git-crypt-unlock:
+	cd .password-store && if ! git crypt unlock; then \
+		gpg -d .password-store/.git-crypt-key > .password-store/key; \
+		cd .password-store && git crypt unlock key; \
+		rm -f .password-store/key; \
+		fi
 
 kubeconfig:
 	sudo cp /run/secrets/kubernetes.io/serviceaccount/ca.crt /usr/local/share/ca-certificates/
@@ -164,20 +171,9 @@ live:
 	@env SSH_AUTH_SOCK="$(shell ls -td /tmp/vscode-ssh-auth-* 2>/dev/null | head -1)" ssh-add -L 2>/dev/null >/dev/null
 
 monitor-loop:
-	while true; do $(MAKE) monitor; sleep 30; done
+	while true; do $(MAKE) monitor; sleep 60; done
 
 monitor:
-	@rm -f ~/.dead; \
-		if ! $(MAKE) live 2>/dev/null >/dev/null; then \
-			touch ~/.dead; \
-			for a in $$(seq 1 60); do \
-				if $(MAKE) live 2>/dev/null >/dev/null; then rm -f ~/.dead; break; fi; \
-				echo "MAYBE DEAD $$a $$(date)"; sleep 5; done; \
-		fi; \
-		if test -f ~/.dead; then \
-			~/bin/e $(MAKE) down; \
-		fi; \
-		ls -l ~/.alive || true; \
-		if test -f ~/.alive && test "$$(find ~/.alive -mmin +120)"; then \
-			~/bin/e $(MAKE) down; \
-		fi
+	if test -f ~/.local/share/code-server/heartbeat && test "$$(find ~/.local/share/code-server/heartbeat -mmin +120)"; then \
+		~/bin/e $(MAKE) logout; \
+	fi
