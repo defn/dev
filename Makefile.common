@@ -91,7 +91,7 @@ gpg:
 	rsync -ia .password-store/home/.gnupg/. .gnupg/.
 	chmod 700 .gnupg
 	gpg --import .password-store/keys/EBE020A544E04B9C67215280B8B6F42683E6CCEF/private.gpg 
-	gpg -d .git-crypt-key > .password-store/key
+	gpg -d .password-store/.git-crypt-key > .password-store/key
 	cd .password-store && git crypt unlock key
 	rm -f .password-store/key
 
