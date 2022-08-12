@@ -63,9 +63,16 @@ init-sets:
 tilt:
 	env tilt up --context pod --port $(tilt_port)
 
+logout down:
+	-echo yes | gh auth logout --hostname github.com
+	-argocd logout argocd-server.argocd.svc
+	-$(MAKE) vault-seal
+	-cd ~/.password-store && sudo -u ubuntu git-crypt lock
+
 login:
-	cd ~/.password-store && & git pull
-	rsync -ia ~/..password-store/home/.gnupg/. ~/.gnupg/.
+	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
+	cd ~/.password-store && git pull && git crypt unlock
+	$(MAKE) vault-unseal
 	if ! gh auth status; then $(MAKE) github-login; fi
 	$(MAKE) argocd-login
 
@@ -141,11 +148,6 @@ vault-backup:
 	-$(MAKE) vault-seal
 	cd .password-store && git pull && git add vault && git add -u vault && (git commit -m 'vault backup' || true) && git push
 	cd .password-store && git status -sb
-
-down:
-	-$(MAKE) vault-seal
-	-cd ~/.password-store && sudo -u ubuntu git-crypt lock
-	-echo yes | gh auth logout --hostname github.com
 
 live:
 	@env SSH_AUTH_SOCK="$(shell ls -td /tmp/vscode-ssh-auth-* 2>/dev/null | head -1)" ssh-add -L 2>/dev/null >/dev/null
