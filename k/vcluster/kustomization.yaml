@@ -3,7 +3,7 @@ namespace: vcluster
 helmCharts:
 - releaseName: vcluster
   name: vcluster
-  version: 0.11.0
+  version: 0.11.1
   repo: https://charts.loft.sh
   includeCRDs: true
   valuesInline:
