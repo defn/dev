@@ -156,11 +156,9 @@ user:
     IF [ ${arch} = "arm64" ]
         COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
         COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
-        COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
     ELSE
         COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
         COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
-        COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
     END
 
     # arch4
@@ -178,6 +176,13 @@ user:
 
     # rerun-process-wrapper
     COPY (+rerun-process-wrapper/*) /
+
+    # arch2: flyctl
+    IF [ ${arch} = "arm64" ]
+        COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
+    ELSE
+        COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
+    END
 
     RUN sudo ln -nfs /home/ubuntu/hooks /hooks
 
