@@ -85,6 +85,16 @@ argocd-login:
 		|| (argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')" \
 				&& argocd account update-password --new-password adminadmin --current-password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')")
 
+gpg:
+	ln -nfs /work .
+	-git clone https://github.com/jojomomojo/password-store work/password-store
+	rsync -ia .password-store/home/.gnupg/. .gnupg/.
+	chmod 700 .gnupg
+	gpg --import .password-store/keys/EBE020A544E04B9C67215280B8B6F42683E6CCEF/private.gpg 
+	gpg -d .git-crypt-key > .password-store/key
+	cd .password-store && git crypt unlock key
+	rm -f .password-store/key
+
 kubeconfig:
 	sudo cp /run/secrets/kubernetes.io/serviceaccount/ca.crt /usr/local/share/ca-certificates/
 	sudo cp ~/etc/ca.crt /usr/local/share/ca-certificates/
