@@ -64,6 +64,7 @@ tilt:
 	env tilt up --context pod --port $(tilt_port)
 
 login:
+	if ! gh auth status; then $(MAKE) github-login; fi
 	$(MAKE) argocd-login
 
 github-login:
