@@ -33,7 +33,7 @@ resource "kubernetes_stateful_set" "dev" {
                 match_expressions {
                   key      = "env"
                   operator = "In"
-                  values   = [each.key]
+                  values   = [coalesce(each.value.env, each.key)]
                 }
               }
             }
@@ -43,7 +43,7 @@ resource "kubernetes_stateful_set" "dev" {
         toleration {
           key      = "env"
           operator = "Equal"
-          value    = each.key
+          value    = coalesce(each.value.env, each.key)
         }
 
         volume {
