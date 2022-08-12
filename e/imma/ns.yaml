@@ -13,6 +13,10 @@ spec:
             namespace: argocd
             cluster: in-cluster
             path: argocd
+          - name: argocd-ingress
+            namespace: argocd
+            cluster: in-cluster
+            path: argocd-ingress
           - name: cert-manager
             namespace: cert-manager
             cluster: in-cluster
