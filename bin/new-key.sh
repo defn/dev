@@ -5,8 +5,10 @@
 # https://github.com/drduh/YubiKey-Guide/pull/282
 
 # gpg --output /tmp/public.pgp --armor --export EBE020A544E04B9C67215280B8B6F42683E6CCEF
-# gpg --import /tmp/public.pgp 
-# echo -e "5\ny\n" | gpg --command-fd 0 --expert --edit-key EBE020A544E04B9C67215280B8B6F42683E6CCEF  trust
+# gpg --import /tmp/public.pgp
+# echo -e "5\ny\n" | gpg --command-fd 0 --expert --edit-key EBE020A544E04B9C67215280B8B6F42683E6CCEF trust
+
+# gpg -o /tmp/private.gpg --export-options backup --export-secret-keys EBE020A544E04B9C67215280B8B6F42683E6CCEF
 
 # personal-cipher-preferences AES256 AES192 AES
 # personal-digest-preferences SHA512 SHA384 SHA256
