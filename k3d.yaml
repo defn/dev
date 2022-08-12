@@ -33,6 +33,9 @@ options:
       - arg: --tls-san=${DEFN_DEV_IP}
         nodeFilters:
           - server:0
+      - arg: --tls-san=169.254.32.1
+        nodeFilters:
+          - server:0
       - arg: --disable=traefik
         nodeFilters:
           - server:0
