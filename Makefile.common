@@ -64,6 +64,8 @@ tilt:
 	env tilt up --context pod --port $(tilt_port)
 
 login:
+	cd ~/.password-store && & git pull
+	rsync -ia ~/..password-store/home/.gnupg/. ~/.gnupg/.
 	if ! gh auth status; then $(MAKE) github-login; fi
 	$(MAKE) argocd-login
 
