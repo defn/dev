@@ -97,7 +97,8 @@ git-crypt-unlock:
 	cd .password-store && if ! git crypt unlock; then \
 		gpg -d .password-store/.git-crypt-key > .password-store/key; \
 		cd .password-store && git crypt unlock key; \
-		rm -f .password-store/key
+		rm -f .password-store/key; \
+		fi
 
 kubeconfig:
 	sudo cp /run/secrets/kubernetes.io/serviceaccount/ca.crt /usr/local/share/ca-certificates/
