@@ -67,11 +67,10 @@ logout down:
 	-echo yes | gh auth logout --hostname github.com
 	-argocd logout argocd-server.argocd.svc
 	-$(MAKE) vault-seal
-	-cd ~/.password-store && sudo -u ubuntu git-crypt lock
 
 login:
 	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
-	cd ~/.password-store && git pull && git crypt unlock
+	cd ~/.password-store && git pull
 	$(MAKE) vault-unseal
 	if ! gh auth status; then $(MAKE) github-login; fi
 	$(MAKE) argocd-login
