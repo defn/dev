@@ -94,7 +94,6 @@ cilium/hubble v0.8.0 v0.8.0
 cilium/hubble v0.8.1 v0.8.1
 cilium/hubble v0.8.2 v0.8.2
 cilium/hubble v0.9.0 v0.9.0
-cli/cli GitHub v2.0.0
 cli/cli GitHub v2.1.0
 cli/cli GitHub v2.10.0
 cli/cli GitHub v2.10.1
@@ -110,6 +109,7 @@ cli/cli GitHub v2.14.0
 cli/cli GitHub v2.14.1
 cli/cli GitHub v2.14.2
 cli/cli GitHub v2.14.3
+cli/cli GitHub v2.14.4
 cli/cli GitHub v2.2.0
 cli/cli GitHub v2.3.0
 cli/cli GitHub v2.4.0
@@ -339,7 +339,6 @@ knative/client Knative v0.24.0
 knative/client Knative v0.25.0
 knative/client Knative v0.25.1
 knative/client Knative v0.26.0
-linkerd/linkerd2 edge-21.12.2 edge-21.12.2
 linkerd/linkerd2 edge-21.12.3 edge-21.12.3
 linkerd/linkerd2 edge-21.12.4 edge-21.12.4
 linkerd/linkerd2 edge-22.1.1 edge-22.1.1
@@ -366,6 +365,7 @@ linkerd/linkerd2 edge-22.7.1 edge-22.7.1
 linkerd/linkerd2 edge-22.7.2 edge-22.7.2
 linkerd/linkerd2 edge-22.7.3 edge-22.7.3
 linkerd/linkerd2 edge-22.8.1 edge-22.8.1
+linkerd/linkerd2 edge-22.8.2 edge-22.8.2
 linkerd/linkerd2 stable-2.11.2 stable-2.11.2
 linkerd/linkerd2 stable-2.11.3 stable-2.11.3
 linkerd/linkerd2 stable-2.11.4 stable-2.11.4
@@ -410,8 +410,8 @@ loft-sh/vcluster v0.11.0-alpha.0 v0.11.0-alpha.0
 loft-sh/vcluster v0.11.0-beta.0 v0.11.0-beta.0
 loft-sh/vcluster v0.11.0 v0.11.0
 loft-sh/vcluster v0.11.1-beta.0 v0.11.1-beta.0
-loft-sh/vcluster v0.7.1-beta.1 v0.7.1-beta.1
-loft-sh/vcluster v0.7.1 v0.7.1
+loft-sh/vcluster v0.11.1-beta.1 v0.11.1-beta.1
+loft-sh/vcluster v0.11.1 v0.11.1
 loft-sh/vcluster v0.8.0-alpha.0 v0.8.0-alpha.0
 loft-sh/vcluster v0.8.0-alpha.1 v0.8.0-alpha.1
 loft-sh/vcluster v0.8.0-alpha.2 v0.8.0-alpha.2
@@ -440,9 +440,9 @@ protocolbuffers/protobuf Protocol v21.1
 protocolbuffers/protobuf Protocol v21.2
 protocolbuffers/protobuf Protocol v21.3
 protocolbuffers/protobuf Protocol v21.4
+protocolbuffers/protobuf Protocol v21.5
 protocolbuffers/protobuf Protocol v3.16.1
 protocolbuffers/protobuf Protocol v3.17.0
-protocolbuffers/protobuf Protocol v3.17.0-rc2
 protocolbuffers/protobuf Protocol v3.17.1
 protocolbuffers/protobuf Protocol v3.17.2
 protocolbuffers/protobuf Protocol v3.17.3
@@ -545,12 +545,6 @@ smallstep/cli Step v0.19.0
 smallstep/cli Step v0.20.0
 smallstep/cli Step v0.21.0
 smallstep/cli v0.17.3-rc26 v0.17.3-rc26
-superfly/flyctl v0.0.356-pre-1 v0.0.356-pre-1
-superfly/flyctl v0.0.356 v0.0.356
-superfly/flyctl v0.0.357-pre-1 v0.0.357-pre-1
-superfly/flyctl v0.0.357 v0.0.357
-superfly/flyctl v0.0.358-pre-1 v0.0.358-pre-1
-superfly/flyctl v0.0.358 v0.0.358
 superfly/flyctl v0.0.359-pre-1 v0.0.359-pre-1
 superfly/flyctl v0.0.359 v0.0.359
 superfly/flyctl v0.0.360 v0.0.360
@@ -575,6 +569,12 @@ superfly/flyctl v0.0.366-pre-1 v0.0.366-pre-1
 superfly/flyctl v0.0.366 v0.0.366
 superfly/flyctl v0.0.367-pre-1 v0.0.367-pre-1
 superfly/flyctl v0.0.367 v0.0.367
+superfly/flyctl v0.0.368 v0.0.368
+superfly/flyctl v0.0.369-pre-1 v0.0.369-pre-1
+superfly/flyctl v0.0.369 v0.0.369
+superfly/flyctl v0.0.370 v0.0.370
+superfly/flyctl v0.0.371-pre-1 v0.0.371-pre-1
+superfly/flyctl v0.0.371-pre-2 v0.0.371-pre-2
 tilt-dev/tilt v0.23.4 v0.23.4
 tilt-dev/tilt v0.23.5 v0.23.5
 tilt-dev/tilt v0.23.6 v0.23.6
@@ -605,13 +605,8 @@ tilt-dev/tilt v0.30.3 v0.30.3
 tilt-dev/tilt v0.30.4 v0.30.4
 tilt-dev/tilt v0.30.5 v0.30.5
 tilt-dev/tilt v0.30.6 v0.30.6
-turbot/steampipe v0.14.4 v0.14.4
-turbot/steampipe v0.14.5-alpha.0 v0.14.5-alpha.0
-turbot/steampipe v0.14.5-alpha.1 v0.14.5-alpha.1
-turbot/steampipe v0.14.5-alpha.2 v0.14.5-alpha.2
 turbot/steampipe v0.14.5 v0.14.5
 turbot/steampipe v0.14.6 v0.14.6
-turbot/steampipe v0.15.0-alpha.1 v0.15.0-alpha.1
 turbot/steampipe v0.15.0-alpha.2 v0.15.0-alpha.2
 turbot/steampipe v0.15.0-rc.0 v0.15.0-rc.0
 turbot/steampipe v0.15.0-rc.1 v0.15.0-rc.1
@@ -626,6 +621,7 @@ turbot/steampipe v0.15.2 v0.15.2
 turbot/steampipe v0.15.3 v0.15.3
 turbot/steampipe v0.15.4 v0.15.4
 turbot/steampipe v0.16.0-rc.0 v0.16.0-rc.0
+turbot/steampipe v0.16.0-rc.10 v0.16.0-rc.10
 turbot/steampipe v0.16.0-rc.1 v0.16.0-rc.1
 turbot/steampipe v0.16.0-rc.2 v0.16.0-rc.2
 turbot/steampipe v0.16.0-rc.3 v0.16.0-rc.3
@@ -633,8 +629,12 @@ turbot/steampipe v0.16.0-rc.4 v0.16.0-rc.4
 turbot/steampipe v0.16.0-rc.5 v0.16.0-rc.5
 turbot/steampipe v0.16.0-rc.6 v0.16.0-rc.6
 turbot/steampipe v0.16.0-rc.7 v0.16.0-rc.7
+turbot/steampipe v0.16.0-rc.8 v0.16.0-rc.8
+turbot/steampipe v0.16.0-rc.9 v0.16.0-rc.9
 turbot/steampipe v0.17.0-alpha.0 v0.17.0-alpha.0
 turbot/steampipe v0.17.0-alpha.1 v0.17.0-alpha.1
+turbot/steampipe v0.17.0-alpha.2 v0.17.0-alpha.2
+turbot/steampipe v0.17.0-alpha.3 v0.17.0-alpha.3
 Wilfred/difftastic 0.26.1 0.26.1
 Wilfred/difftastic 0.26.2 0.26.2
 Wilfred/difftastic 0.26.3 0.26.3

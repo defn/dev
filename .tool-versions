@@ -1,12 +1,12 @@
-argo 3.3.8
-argocd 2.4.8
+argo 3.3.9
+argocd 2.4.9
 aws-vault 6.6.0
 buf 1.7.0
-cloudflared 2022.7.1
+cloudflared 2022.8.0
 doctl 1.78.0
 golang 1.18.5
-grpcurl 1.8.6
-helm 3.9.2
+grpcurl 1.8.7
+helm 3.9.3
 k3sup 0.12.0
 k9s 0.26.3
 krew 0.4.3
@@ -18,5 +18,5 @@ python 3.10.6
 shellcheck 0.8.0
 shfmt 3.5.1
 skaffold 1.38.0
-terraform 1.2.6
+terraform 1.2.7
 vault 1.11.2
