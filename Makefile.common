@@ -69,7 +69,9 @@ logout down:
 	-$(MAKE) vault-seal
 
 login:
+	chmod 700 ~/.password-store/home/.gnupg ~/.gnupg
 	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
+	chmod 700 ~/.password-store/home/.gnupg ~/.gnupg
 	cd ~/.password-store && git pull
 	$(MAKE) vault-unseal
 	if ! gh auth status; then $(MAKE) github-login; fi
