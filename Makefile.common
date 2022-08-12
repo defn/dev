@@ -73,6 +73,7 @@ login:
 	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
 	chmod 700 ~/.password-store/home/.gnupg ~/.gnupg
 	cd ~/.password-store && git pull
+	$(MAKE) git-crypt-unlock
 	$(MAKE) vault-unseal
 	if ! gh auth status; then $(MAKE) github-login; fi
 	$(MAKE) argocd-login
