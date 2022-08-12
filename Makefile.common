@@ -66,7 +66,7 @@ tilt:
 logout:
 	-echo yes | gh auth logout --hostname github.com
 	-argocd logout argocd-server.argocd.svc
-	cd .password-store && git checkout vault && git clean -fd vault && git crypt lock
+	cd .password-store && git checkout vault && git clean -fd vault && (git crypt lock || true)
 
 login:
 	chmod 700 ~/.password-store/home/.gnupg ~/.gnupg
