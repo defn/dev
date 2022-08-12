@@ -95,9 +95,9 @@ gpg:
 
 git-crypt-unlock:
 	cd .password-store && if ! git crypt unlock; then \
-		gpg -d .password-store/.git-crypt-key > .password-store/key; \
-		cd .password-store && git crypt unlock key; \
-		rm -f .password-store/key; \
+		gpg -d .git-crypt-key > key; \
+		git crypt unlock key; \
+		rm -f key; \
 		fi
 
 kubeconfig:
