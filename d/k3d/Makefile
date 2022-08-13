@@ -8,8 +8,7 @@ get-state:
 
 mint:
 	docker run --rm -ti --privileged --entrypoint sh quay.io/defn/dev -c \
-		"set -x; \
-		sudo mkdir -p /var/lib/tailscale; \
+		"sudo mkdir -p /var/lib/tailscale; \
 		sudo /usr/sbin/tailscaled -statedir /var/lib/tailscale & \
 		sudo /usr/bin/tailscale up -hostname $(name) -authkey $$(pass tailscale_$(key));  \
 		sleep 10; \
