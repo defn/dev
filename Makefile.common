@@ -154,7 +154,7 @@ cluster-inner:
 		-p   "443:8443@server:0"
 	docker update --restart=no $(context)-server-0
 	docker exec $(context)-server-0 touch /etc/passwd
-	cd tf/$(name) && make init plan apply
+	-cd tf/$(name) && make init plan apply
 
 vault-unseal:
 	pass Unseal_Key_1 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://localhost:8200/v1/sys/unseal
