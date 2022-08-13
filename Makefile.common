@@ -44,6 +44,7 @@ init-inner:
 	$(MAKE) kubeconfig
 	-sudo chgrp docker /var/run/docker.sock
 	-sudo chmod 770 /var/run/docker.sock
+	chmod 0700 ~/.gnupg/. ~/.gnupg2/.
 
 deploy:
 	if kubectl --context pod create namespace argocd; then $(MAKE) init-argocd; fi
