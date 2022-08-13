@@ -1,6 +1,6 @@
 provider "kubernetes" {
   config_path    = "~/.kube/config"
-  config_context = "k3d-remo-defn"
+  config_context = "k3d-defn"
 }
 
 module "devpod" {
