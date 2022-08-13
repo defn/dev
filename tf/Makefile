@@ -77,7 +77,7 @@ attach:
 archive:
 	rm -rf tmp
 	mkdir tmp
-	mkdir -p tmp/global/home/ubuntu/d/k3d
-	pass tailscale_k3d-global > tmp/global/home/ubuntu/d/k3d/tailscaled.state
-	echo -n "archive = \"$$(cd tmp/global && tar cvfz - main.tf | base64 -w 0)\"" > terraform.tfvars
+	mkdir -p tmp/$(name)/home/ubuntu/d/k3d
+	pass tailscale_k3d-$(name) > tmp/$(name)/home/ubuntu/d/k3d/tailscaled.state
+	echo -n "archive = \"$$(cd tmp/$(name) && tar cvfz - . | base64 -w 0)\"" > terraform.tfvars
 	rm -rf tmp
