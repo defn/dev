@@ -18,9 +18,7 @@ locals {
 
   tailscale_domain = "tiger-mamba.ts.net"
 
-  droplet = {}
-
-  dropletx = {
+  droplet = {
     "global" = {
       context      = "k3d-remo-global"
       host         = "k3d-remo-global.tiger-mamba.ts.net"
@@ -36,9 +34,7 @@ locals {
     }
   }
 
-  volume = {}
-
-  volumex = {
+  volume = {
     "global" = {
       volume_size = "1"
     }

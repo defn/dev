@@ -120,7 +120,7 @@ resource "digitalocean_volume" "dev" {
 }
 
 resource "digitalocean_droplet" "dev" {
-  for_each = local.want == 0 ? {} : local.droplet
+  for_each = local.droplet
 
   image    = data.digitalocean_droplet_snapshot.dev.id
   name     = "${local.name}-${each.key}"
@@ -137,7 +137,7 @@ resource "digitalocean_droplet" "dev" {
 }
 
 resource "digitalocean_volume_attachment" "dev" {
-  for_each = local.want == 0 ? {} : local.droplet
+  for_each = local.droplet
 
   droplet_id = digitalocean_droplet.dev[each.key].id
   volume_id  = digitalocean_volume.dev[each.key].id
