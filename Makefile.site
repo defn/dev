@@ -87,3 +87,5 @@ provision-digital-ocean:
 	sudo chmod 755 /usr/local/bin/k3d
 	make cluster
 
+debug-host:
+	pod debug "node/$$(pod get nodes -o json | jq -r '.items[0].metadata.name')" --image quay.io/defn/dev -it -- bash 
