@@ -78,6 +78,9 @@ archive:
 	rm -rf tmp
 	mkdir tmp
 	mkdir -p tmp/$(name)/home/ubuntu/d/k3d
+	mkdir -p tmp/$(name)/var/lib/rancher/k3s/server/tls
+	pass k3d-$(name)-client-ca.crt | base64 -d > tmp/$(name)/var/lib/rancher/k3s/server/tls/client-ca.crt
+	pass k3d-$(name)-client-ca.key | base64 -d > tmp/$(name)/var/lib/rancher/k3s/server/tls/client-ca.key
 	pass tailscale_k3d-$(name) | base64 -d > tmp/$(name)/home/ubuntu/d/k3d/tailscaled.state
 	echo -n "archive = \"$$(cd tmp/$(name) && tar cvfz - . | base64 -w 0)\"" > terraform.tfvars
 	rm -rf tmp
