@@ -123,7 +123,7 @@ resource "digitalocean_droplet" "dev" {
   for_each = local.droplet
 
   image    = data.digitalocean_droplet_snapshot.dev.id
-  name     = "${local.name}-${each.key}"
+  name     = each.key
   region   = local.region
   size     = each.value.droplet_size
   ipv6     = true
