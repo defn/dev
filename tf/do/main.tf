@@ -182,6 +182,8 @@ resource "digitalocean_volume_attachment" "dev" {
 }
 
 resource "digitalocean_kubernetes_cluster" "dev" {
+  for_each = local.want == 0 ? toset([]) : toset(["1"])
+
   name    = local.name
   region  = local.region
   version = data.digitalocean_kubernetes_versions.dev.latest_version
