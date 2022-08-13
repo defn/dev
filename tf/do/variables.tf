@@ -8,6 +8,11 @@ variable "home" {
   default = null
 }
 
+variable "archive" {
+  type    = string
+  default = null
+}
+
 locals {
   want = coalesce(var.want, 0)
 
@@ -18,19 +23,21 @@ locals {
 
   tailscale_domain = "tiger-mamba.ts.net"
 
+  dropletx = {
+    "defn" = {
+      context      = "k3d-defn"
+      host         = "k3d-defn.tiger-mamba.ts.net"
+      ip           = "100.70.210.61"
+      droplet_size = "s-2vcpu-4gb"
+    }
+  }
+
   droplet = {
     "global" = {
       context      = "k3d-global"
       host         = "k3d-global.tiger-mamba.ts.net"
       ip           = "100.102.81.21"
       droplet_size = "s-1vcpu-2gb"
-    }
-
-    "defn" = {
-      context      = "k3d-defn"
-      host         = "k3d-defn.tiger-mamba.ts.net"
-      ip           = "100.70.210.61"
-      droplet_size = "s-2vcpu-4gb"
     }
   }
 

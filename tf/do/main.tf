@@ -131,53 +131,14 @@ resource "digitalocean_droplet" "dev" {
 
   ssh_keys = [data.digitalocean_ssh_key.default.id]
 
+  user_data = templatefile("${path.module}/user_data.sh", {
+    archive = var.archive,
+    host    = each.value.host,
+    ip      = each.value.ip
+  })
+
   lifecycle {
     ignore_changes = [image]
-  }
-}
-
-resource "digitalocean_volume_attachment" "dev" {
-  for_each = local.droplet
-
-  droplet_id = digitalocean_droplet.dev[each.key].id
-  volume_id  = digitalocean_volume.dev[each.key].id
-
-  provisioner "remote-exec" {
-    connection {
-      type  = "ssh"
-      agent = true
-      user  = "root"
-      host  = digitalocean_droplet.dev[each.key].ipv4_address
-    }
-
-    inline = [
-      "set -x; install -o ubuntu -g ubuntu .ssh/authorized_keys ~ubuntu/.ssh/"
-    ]
-  }
-
-  provisioner "local-exec" {
-    command = "ssh -o StrictHostKeyChecking=no ubuntu@${digitalocean_droplet.dev[each.key].ipv4_address} true"
-  }
-
-  provisioner "local-exec" {
-    command = "pass tailscale_${each.value.context} | base64 -d | ssh ubuntu@${digitalocean_droplet.dev[each.key].ipv4_address} tee d/k3d/tailscaled.state"
-  }
-
-  provisioner "remote-exec" {
-    connection {
-      type  = "ssh"
-      agent = true
-      user  = "ubuntu"
-      host  = digitalocean_droplet.dev[each.key].ipv4_address
-    }
-
-    inline = [
-      "set -x; cd && git fetch && git reset --hard origin/main && env DEFN_DEV_HOST=${each.value.host} DEFN_DEV_IP=${each.value.ip} make provision-digital-ocean"
-    ]
-  }
-
-  provisioner "local-exec" {
-    command = "env DOCKER_HOST=ssh://ubuntu@${digitalocean_droplet.dev[each.key].ipv4_address} k3d kubeconfig merge -a -d"
   }
 }
 
