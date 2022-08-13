@@ -20,16 +20,16 @@ locals {
 
   droplet = {
     "global" = {
-      context      = "k3d-remo-global"
-      host         = "k3d-remo-global.tiger-mamba.ts.net"
-      ip           = "100.85.87.36"
+      context      = "k3d-global"
+      host         = "k3d-global.tiger-mamba.ts.net"
+      ip           = "100.102.81.21"
       droplet_size = "s-1vcpu-2gb"
     }
 
     "defn" = {
-      context      = "k3d-remo-defn"
-      host         = "k3d-remo-defn.tiger-mamba.ts.net"
-      ip           = "100.85.87.36"
+      context      = "k3d-defn"
+      host         = "k3d-defn.tiger-mamba.ts.net"
+      ip           = "100.70.210.61"
       droplet_size = "s-2vcpu-4gb"
     }
   }
