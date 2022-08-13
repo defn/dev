@@ -45,8 +45,14 @@ export PATH="$PATH:/usr/local/aws-cli/bin"
 
 # earthly
 export EARTHLY_BUILDKIT_HOST="${EARTHLY_BUILDKIT_HOST:-tcp://$(uname -n):8372}"
-export DOCKER_HOST="${DOCKER_HOST:-tcp://localhost:2375}"
 export DOCKER_BUILDKIT="${DOCKER_BUILDKIT:-1}"
+if [[ -z "${DOCKER_HOST:-}" ]]; then
+	if test -S /var/run/docker.sock; then
+		:
+	else
+		export DOCKER_HOST="tcp://localhost:2375"
+	fi
+fi
 
 export PATH="$PATH:/usr/local/gcloud/google-cloud-sdk/bin"
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
