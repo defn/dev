@@ -67,7 +67,6 @@ logout:
 	-echo yes | gh auth logout --hostname github.com
 	-argocd logout argocd-server.argocd.svc
 	cd .password-store && git checkout vault && git clean -fd vault && (git crypt lock || true)
-	-echo RELOADAGENT | gpg-connect-agent
 
 login:
 	chmod 700 ~/.password-store/home/.gnupg ~/.gnupg
@@ -88,8 +87,7 @@ argocd-login:
 				&& argocd account update-password --new-password adminadmin --current-password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')")
 
 gpg:
-	if test -d /work; then ln -nfs /work .; fi
-	if test -d /mnt/lost+found; then sudo install -d -m 0700 -u ubuntu -o ubuntu /mnt/work; ln -nfs /mnt/work .; fi
+	ln -nfs /work .
 	-git clone https://github.com/jojomomojo/password-store work/password-store
 	rsync -ia .password-store/home/.gnupg/. .gnupg/.
 	chmod 700 .gnupg
