@@ -7,7 +7,7 @@ get-state:
 	pass tailscale_$(name) | base64 -d > tailscaled.state
 
 mint:
-	docker run --rm -ti --privileged --entrypoint sh defn.dev/defn/dev -c \
+	docker run --rm -ti --privileged --entrypoint sh defn/dev -c \
 		"mkdir -p /var/lib/tailscale; \
 		/tailscaled -statedir /var/lib/tailscale & \
 		/tailscale up -hostname $(name) -authkey $$(pass tailscale_$(key));  \
