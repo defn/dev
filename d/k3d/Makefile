@@ -8,7 +8,7 @@ get-state:
 
 mint:
 	docker run --rm -ti --privileged --entrypoint sh defn/dev -c \
-		"wget -O- https://pkgs.tailscale.com/stable/tailscale_1.28.0_amd64.tgz | tar xvfz -; cp */tailscale* /; \
+		"wget -O- https://pkgs.tailscale.com/stable/tailscale_1.28.0_amd64.tgz | tar xvfz -; sudo cp */tailscale* /; \
 		sudo mkdir -p /var/lib/tailscale; \
 		sudo /tailscaled -statedir /var/lib/tailscale & \
 		sudo /tailscale up -hostname $(name) -authkey $$(pass tailscale_$(key));  \
