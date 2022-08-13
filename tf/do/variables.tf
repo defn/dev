@@ -27,7 +27,7 @@ locals {
     "defn" = {
       context      = "k3d-defn"
       host         = "k3d-defn.tiger-mamba.ts.net"
-      ip           = "100.70.210.61"
+      ip           = "100.101.82.85"
       droplet_size = "s-2vcpu-4gb"
     }
   }
@@ -36,7 +36,7 @@ locals {
     "global" = {
       context      = "k3d-global"
       host         = "k3d-global.tiger-mamba.ts.net"
-      ip           = "100.102.81.21"
+      ip           = "100.112.92.65"
       droplet_size = "s-1vcpu-2gb"
     }
   }
