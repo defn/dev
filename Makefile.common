@@ -77,6 +77,7 @@ login:
 	$(MAKE) git-crypt-unlock
 	$(MAKE) vault-unseal
 	if ! gh auth status; then $(MAKE) github-login; fi
+	$(MAKE) kubeconfig
 	$(MAKE) argocd-login
 
 github-login:
@@ -93,10 +94,11 @@ gpg:
 	-git clone https://github.com/jojomomojo/password-store work/password-store
 	rsync -ia .password-store/home/.gnupg/. .gnupg/.
 	chmod 700 .gnupg
+	-gpg-agent --daemon
 	gpg --import .password-store/keys/EBE020A544E04B9C67215280B8B6F42683E6CCEF/private.gpg 
 
 git-crypt-unlock:
-	cd .password-store && if ! git crypt unlock; then \
+	cd ~/.password-store && if ! git crypt unlock; then \
 		gpg -d .git-crypt-key > key; \
 		git crypt unlock key; \
 		rm -f key; \
@@ -121,6 +123,7 @@ kubeconfig:
 		$(MAKE) argocd-login; \
 		argocd cluster add vcluster --yes; \
 		fi
+	chmod 0600 ~/.kube/config
 	k config get-contexts
 
 asdf:
