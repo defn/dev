@@ -84,5 +84,6 @@ archive:
 	pass k3d-$(name)-server-ca.crt | base64 -d > tmp/$(name)/var/lib/rancher/k3s/server/tls/server-ca.crt
 	pass k3d-$(name)-server-ca.key | base64 -d > tmp/$(name)/var/lib/rancher/k3s/server/tls/server-ca.key
 	pass tailscale_k3d-$(name) | base64 -d > tmp/$(name)/var/lib/tailscale/tailscaled.state
-	echo -n "archive = \"$$(cd tmp/$(name) && tar cvf - . | base64 -w 0)\"" > terraform.tfvars
+	echo "archive_$(name) = \"$$(cd tmp/$(name) && tar cvf - . | base64 -w 0)\"" >> terraform.tfvars
+	echo >> terraform.tfvars
 	rm -rf tmp

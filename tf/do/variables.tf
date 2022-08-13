@@ -8,7 +8,12 @@ variable "home" {
   default = null
 }
 
-variable "archive" {
+variable "archive_global" {
+  type    = string
+  default = null
+}
+
+variable "archive_defn" {
   type    = string
   default = null
 }
@@ -23,17 +28,21 @@ locals {
 
   tailscale_domain = "tiger-mamba.ts.net"
 
-  dropletx = {
-    "defn" = {
+  archives = {
+    global = var.archive_global
+    defn   = var.archive_defn
+  }
+
+
+  droplet = {
+    defn = {
       context      = "k3d-defn"
       host         = "k3d-defn.tiger-mamba.ts.net"
       ip           = "100.101.82.85"
       droplet_size = "s-2vcpu-4gb"
     }
-  }
 
-  droplet = {
-    "global" = {
+    global = {
       context      = "k3d-global"
       host         = "k3d-global.tiger-mamba.ts.net"
       ip           = "100.112.92.65"
@@ -42,11 +51,11 @@ locals {
   }
 
   volume = {
-    "global" = {
+    global = {
       volume_size = "1"
     }
 
-    "defn" = {
+    defn = {
       volume_size = "1"
     }
   }

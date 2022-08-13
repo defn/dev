@@ -132,7 +132,7 @@ resource "digitalocean_droplet" "dev" {
   ssh_keys = [data.digitalocean_ssh_key.default.id]
 
   user_data = templatefile("${path.module}/user_data.sh", {
-    archive = var.archive,
+    archive = local.archives[each.key],
     host    = each.value.host,
     ip      = each.value.ip
   })
