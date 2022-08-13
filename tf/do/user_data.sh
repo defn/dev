@@ -4,7 +4,7 @@ function main {
     set -exfu
 
     cd /
-    echo "${archive}" | base64 -d | tar xvfz -)
+    echo "${archive}" | base64 -d | tar xvfz -
 
     install -o ubuntu -g ubuntu ~/.ssh/authorized_keys ~ubuntu/.ssh/ 
 
