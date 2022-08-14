@@ -96,7 +96,7 @@ gpg:
 	rsync -ia .password-store/home/.gnupg/. .gnupg/.
 	chmod 700 .gnupg
 	-gpg-agent --daemon
-	gpg --import .password-store/keys/EBE020A544E04B9C67215280B8B6F42683E6CCEF/private.gpg 
+	gpg --import .password-store/keys/EBE020A544E04B9C67215280B8B6F42683E6CCEF/private.gpg
 	$(MAKE) git-crypt-unlock
 
 git-crypt-unlock:
@@ -143,14 +143,6 @@ attach-remo:
 join:
 	cd d/k3d && $(MAKE) build name=$(context)
 	@env DEFN_DEV_HOST=${context}.${domain} DEFN_DEV_IP="$$(host ${context}.${domain} | grep 'has address' | awk '{print $$NF}')" $(MAKE) $@-inner join="$$(kubectl config view -o jsonpath='{.clusters[?(@.name == "$(to)")].cluster.server}')" token="$(shell docker exec $(to)-server-0 cat /var/lib/rancher/k3s/server/node-token)" name=$(name)
-
-imma:
-	rm -rf tmp
-	mkdir tmp
-	mkdir -p tmp/$(name)/var/lib/tailscale
-	pass tailscale_k3d-$(name) | base64 -d > tmp/$(name)/var/lib/tailscale/tailscaled.state
-	env DEFN_DEV_ARCHIVE="$$(cd tmp/$(name) && tar cvf - . | base64 -w 0)" $(MAKE) cluster name=$@
-	cd tf/$@ && make init plan
 
 cluster:
 	cd d/k3d && $(MAKE) build name=$(context)

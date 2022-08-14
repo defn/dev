@@ -3,7 +3,7 @@ kind: Simple
 servers: 1
 agents: 0
 kubeAPI:
-  host: "${DEFN_DEV_HOST}"
+  host: "${DEFN_DEV_HOST_API}"
   hostIP: 0.0.0.0
   hostPort: "6443"
 image: defn.dev/defn/k3d

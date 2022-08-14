@@ -16,7 +16,7 @@ helmCharts:
         - email: iam@defn.sh
           username: admin
           userid: "123456789"
-          hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W" 
+          hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W"
       web:
         http: 0.0.0.0:5556
       connectors:

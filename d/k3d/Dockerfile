@@ -7,4 +7,4 @@ COPY k3s-wrapper.sh /bin/k3s
 
 COPY */tailscale */tailscaled ./
 
-RUN cd / && echo "${DEFN_DEV_ARCHIVE}" | base64 -d | tar xvf - 
+RUN cd / && echo "${DEFN_DEV_ARCHIVE}" | base64 -d | tar xvf -
