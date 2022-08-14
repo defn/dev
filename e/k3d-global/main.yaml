@@ -9,7 +9,7 @@ spec:
         elements:
           - name: kyverno
             namespace: kyverno
-            cluster: k3d-defn
+            cluster: k3d-global
             path: kyverno
   template:
     metadata:
