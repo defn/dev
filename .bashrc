@@ -89,7 +89,6 @@ if tty >/dev/null; then
 		if [[ ! -S "${SSH_AUTH_SOCK:-}" ]]; then
 			export SSH_AUTH_SOCK="$(ls -td /tmp/vscode-ssh-auth-sock-* 2>/dev/null | head -1)"
 		fi
-		touch ~/.alive
 		PS1="$(render_ps1)"
 	}
 
