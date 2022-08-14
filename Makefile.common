@@ -88,7 +88,7 @@ login:
 	cd ~/.password-store && git pull
 	$(MAKE) git-crypt-unlock
 	$(MAKE) vault-unseal
-	if ! gh auth status; then $(MAKE) github-login; fi
+	if ! gh auth status; then $(MAKE) echo github-login; fi
 	$(MAKE) kubeconfig
 	$(MAKE) argocd-login
 
