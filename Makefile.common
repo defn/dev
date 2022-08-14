@@ -122,6 +122,7 @@ kubeconfig:
 		$(MAKE) argocd-login; \
 		argocd cluster add vcluster --yes; \
 		fi
+	touch ~/.kube/config
 	chmod 0600 ~/.kube/config
 	-k3d kubeconfig merge -a -d
 	-kubectl config set-cluster $(context) --server=https://$(context).$(domain):6443
