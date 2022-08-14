@@ -54,7 +54,6 @@ init-inner:
 
 	$(MAKE) git-crypt-unlock
 
-	$(MAKE) vault-unseal
 	$(MAKE) kubeconfig
 	$(MAKE) login
 
