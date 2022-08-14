@@ -4,3 +4,5 @@ global:
   secret_provider: earthly-secret-provider
   cache_size_pct: 90
   local_registry_host: 'tcp://127.0.0.1:5000'
+  buildkit_additional_args:
+    - '--dns=1.1.1.1'
