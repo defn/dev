@@ -45,7 +45,7 @@ init-inner:
 
 	-git clone https://github.com/defn/dev work/dev
 
-	if echo VSCODE_GIT_ASKPASS_NODE | grep /.local/lib/code-server;	then $(MAKE) init-code-server; else $(MAKE) init-vscode; fi
+	if echo $$VSCODE_GIT_ASKPASS_NODE | grep local/lib/code-server; then $(MAKE) init-code-server; else $(MAKE) init-vscode; fi
 
 	$(MAKE) git-crypt-unlock
 

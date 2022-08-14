@@ -1,10 +1,10 @@
 include Makefile.common
 
 init-site:
-	@aws --profile meh sts get-caller-identity
 	@pass hello
 	$(MAKE) vault-unseal
 	$(MAKE) cert
+	@aws --profile meh sts get-caller-identity
 	$(MAKE) vault-seal
 
 restart: # Restart everything
