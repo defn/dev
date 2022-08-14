@@ -58,7 +58,7 @@ init-argocd:
 	sleep 10; $(MAKE) argocd-login
 
 init-sets:
-	cd "$${DEFN_DEV_WORKDIR:-$${HOME}}" && kubectl --context argocd apply -f e/$(control).yaml
+	cd "$${DEFN_DEV_WORKDIR:-$${HOME}}" && kubectl --context argocd apply -f e/k3d-$(control).yaml
 	argocd app sync $(control)
 	argocd app list
 
