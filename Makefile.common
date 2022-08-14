@@ -49,7 +49,7 @@ init-inner:
 deploy:
 	if kubectl --context pod create namespace argocd; then $(MAKE) init-argocd; fi
 	$(MAKE) init-sets
-	argocd app sync $(control)-argocd
+	argocd app sync k3d-$(control)-argocd
 	$(MAKE) deploy-site
 
 init-argocd:
@@ -59,7 +59,7 @@ init-argocd:
 
 init-sets:
 	cd "$${DEFN_DEV_WORKDIR:-$${HOME}}" && kubectl --context argocd apply -f e/k3d-$(control).yaml
-	argocd app sync $(control)
+	argocd app sync k3d-$(control)
 	argocd app list
 
 tilt:
