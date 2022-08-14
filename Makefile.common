@@ -33,6 +33,7 @@ dev-meh:
 	@if [[ ! -d work/password-store ]]; then if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi; fi
 
 init:
+	git pull
 	$(MAKE) init-inner
 	$(MAKE) init-site
 
@@ -40,6 +41,7 @@ init-inner:
 	if ! test -d work/.; then if test -d /work; then ln -nfs /work .; else mkdir -p work; fi; fi
 	-git clone https://github.com/defn/dev work/dev
 	-git clone https://github.com/jojomomojo/password-store work/password-store
+	chmod 0700 ~/.gnupg/. ~/.gnupg2/.
 	-cd work/password-store && git crypt unlock && git pull
 	$(MAKE) vault-unseal
 	$(MAKE) kubeconfig
