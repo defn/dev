@@ -4,6 +4,7 @@ function main {
     mkdir -p /var/lib/tailscale
     echo "${DEFN_DEV_TAILSCALE_STATE}" | base64 -d > /var/lib/tailscale/tailscaled.state
     (setsid /usr/sbin/tailscaled --statedir=/var/lib/tailscale) &
+    (setsid code-server  --bind-addr 0.0.0.0:8888 --disable-telemetry) &
     exec /usr/sbin/sshd -D -o UseDNS=no -o UsePAM=yes -o PasswordAuthentication=no -o StreamLocalBindUnlink=yes
 }
 
