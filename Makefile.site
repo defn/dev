@@ -6,10 +6,6 @@ init-site:
 	@pass hello
 
 deploy-site:
-	-k create ns vault
-	-n vault delete secret vault-unseal
-	n vault create secret generic vault-unseal --from-literal=VAULT_TOKEN="$$(env VAULT_TOKEN="$$(v token create -policy="autounseal-remo" -wrap-ttl=60 -format json | jq -r '.wrap_info.token')" v unwrap -format json | jq -r '.auth.client_token')"
-	-n vault delete pod vault-0
 	$(MAKE) cert
 
 restart: # Restart everything
