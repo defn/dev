@@ -88,9 +88,9 @@ archive:
 	echo "archive_$(name) = \"$$(cd tmp/$(name) && tar cvf - . | base64 -w 0)\"" >> terraform.tfvars
 	echo >> terraform.tfvars
 	step certificate create system:admin tmp/$(name)/var/lib/rancher/k3s/server/tls/client.crt tmp/$(name)/var/lib/rancher/k3s/server/tls/client.key --no-password --ca tmp/$(name)/var/lib/rancher/k3s/server/tls/client-ca.crt --ca-key tmp/$(name)/var/lib/rancher/k3s/server/tls/client-ca.key  --insecure --force --template client.tpl
-	k config set-cluster k3d-$(name) --embed-certs --certificate-authority tmp/$(name)/var/lib/rancher/k3s/server/tls/server-ca.crt --server https://k3d-$(name).tiger-mamba.ts.net:6443 
+	k config set-cluster k3d-$(name) --embed-certs --certificate-authority tmp/$(name)/var/lib/rancher/k3s/server/tls/server-ca.crt --server https://k3d-$(name).tiger-mamba.ts.net:6443
 	k config set-credentials k3d-$(name) --embed-certs --client-certificate tmp/$(name)/var/lib/rancher/k3s/server/tls/client.crt --client-key tmp/$(name)/var/lib/rancher/k3s/server/tls/client.key
 	k config set-context k3d-$(name) --cluster k3d-$(name) --user k3d-$(name)
 	rm -rf tmp
-	argocd cluster add k3d-$(name) --yes
-	k --context argocd apply -f ../../e/k3d-$(name).yaml 
+	argocd cluster add k3d-$(name) --yes --upsert
+	k --context argocd apply -f ../../e/k3d-$(name).yaml
