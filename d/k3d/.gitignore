@@ -1,2 +1,3 @@
 tailscale_*
 tailscaled.state
+argocd.yaml
