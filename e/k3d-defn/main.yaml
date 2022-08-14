@@ -13,7 +13,7 @@ spec:
             path: kyverno
   template:
     metadata:
-      name: "{{name}}"
+      name: "k3d-defn-{{name}}"
       namespace: argocd
     spec:
       project: default
