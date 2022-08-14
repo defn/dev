@@ -75,6 +75,7 @@ attach:
 	code --folder-uri vscode-remote://k8s-container+context=$(context)+namespace=default+podname=$(podname)+name=dev+$(workdir)
 
 archive:
+	pass hello
 	rm -rf tmp
 	mkdir tmp
 	mkdir -p tmp/$(name)/var/lib/tailscale
@@ -86,4 +87,8 @@ archive:
 	pass tailscale_k3d-$(name) | base64 -d > tmp/$(name)/var/lib/tailscale/tailscaled.state
 	echo "archive_$(name) = \"$$(cd tmp/$(name) && tar cvf - . | base64 -w 0)\"" >> terraform.tfvars
 	echo >> terraform.tfvars
+	step certificate create system:admin tmp/$(name)/var/lib/rancher/k3s/server/tls/client.crt tmp/$(name)/var/lib/rancher/k3s/server/tls/client.key --no-password --ca tmp/$(name)/var/lib/rancher/k3s/server/tls/client-ca.crt --ca-key tmp/$(name)/var/lib/rancher/k3s/server/tls/client-ca.key  --insecure --force --template client.tpl
+	k config set-cluster k3d-$(name) --embed-certs --certificate-authority tmp/$(name)/var/lib/rancher/k3s/server/tls/server-ca.crt --server https://k3d-$(name).tiger-mamba.ts.net:6443 
+	k config set-credentials k3d-$(name) --embed-certs --client-certificate tmp/$(name)/var/lib/rancher/k3s/server/tls/client.crt --client-key tmp/$(name)/var/lib/rancher/k3s/server/tls/client.key
+	k config set-context k3d-$(name) --cluster k3d-$(name) --user k3d-$(name)
 	rm -rf tmp
