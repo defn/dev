@@ -3,6 +3,7 @@ include Makefile.common
 init-site:
 	@aws --profile meh sts get-caller-identity
 	@pass hello
+	$(MAKE) cert
 
 restart: # Restart everything
 	git pull
