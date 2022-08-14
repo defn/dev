@@ -3,7 +3,9 @@ include Makefile.common
 init-site:
 	@aws --profile meh sts get-caller-identity
 	@pass hello
+	$(MAKE) vault-unseal
 	$(MAKE) cert
+	$(MAKE) vault-seal
 
 restart: # Restart everything
 	git pull
