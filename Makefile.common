@@ -30,7 +30,7 @@ dev-meh:
 init:
 	git pull
 	$(MAKE) init-inner
-	$(MAKE) init-site
+	-$(MAKE) init-site
 
 init-inner:
 	-if test -d work; then rmdir work; fi
