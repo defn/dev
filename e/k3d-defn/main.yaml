@@ -9,8 +9,8 @@ spec:
         elements:
           - name: kyverno
             namespace: kyverno
-            cluster: k3d-defn
             path: kyverno
+            cluster: k3d-defn
   template:
     metadata:
       name: "k3d-defn-{{name}}"
