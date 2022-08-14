@@ -18,10 +18,3 @@ cmd = []
 [mounts]
 source = "data"
 destination = "/mnt"
-
-[[services]]
-  internal_port = 22
-  protocol = "tcp"
-
-  [[services.ports]]
-    port = "22"
