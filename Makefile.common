@@ -3,7 +3,7 @@ cache ?=
 push ?= --push
 workdir ?= /home/ubuntu
 tilt_port ?= 10350
-name ?= $(shell uname -n | cut -d. -f1 | tr A-Z a-z)
+name ?= $(shell uname -n | cut -d. -f1 | tr A-Z a-z | perl -pe 's{-\d+$$}{}')
 k3d_name ?= $(name)
 context ?= k3d-$(name)
 podname ?= $(name)-0
@@ -127,6 +127,8 @@ kubeconfig:
 		argocd cluster add vcluster --yes; \
 		fi
 	chmod 0600 ~/.kube/config
+	-k3d kubeconfig merge -a -d
+	-kubectl config set-cluster $(context) --server=https://$(context).$(domain):6443
 	k config get-contexts
 
 asdf:
