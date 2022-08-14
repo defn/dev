@@ -91,4 +91,5 @@ archive:
 	k config set-cluster k3d-$(name) --embed-certs --certificate-authority tmp/$(name)/var/lib/rancher/k3s/server/tls/server-ca.crt --server https://k3d-$(name).tiger-mamba.ts.net:6443 
 	k config set-credentials k3d-$(name) --embed-certs --client-certificate tmp/$(name)/var/lib/rancher/k3s/server/tls/client.crt --client-key tmp/$(name)/var/lib/rancher/k3s/server/tls/client.key
 	k config set-context k3d-$(name) --cluster k3d-$(name) --user k3d-$(name)
+	argocd cluster add k3d-$(name) --yes
 	rm -rf tmp
