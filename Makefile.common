@@ -41,6 +41,7 @@ init-inner:
 	if ! test -d work/.; then if test -d /work; then ln -nfs /work .; else mkdir -p work; fi; fi
 	-git clone https://github.com/defn/dev work/dev
 	-git clone https://github.com/jojomomojo/password-store work/password-store
+	cd work/password-store && git pull
 	chmod 0700 ~/.gnupg/. ~/.gnupg2/.
 	-cd work/password-store && git crypt unlock && git pull
 	$(MAKE) vault-unseal
@@ -48,13 +49,7 @@ init-inner:
 	-sudo chgrp docker /var/run/docker.sock
 	-sudo chmod 770 /var/run/docker.sock
 	chmod 0700 ~/.gnupg/. ~/.gnupg2/.
-
-deploy:
-	$(MAKE) argocd-login
-	argocd cluster add k3d-$(control) --yes --upsert
-	$(MAKE) init-sets
-	argocd app sync k3d-$(control)-argocd
-	$(MAKE) deploy-site
+	$(MAKE) login
 
 init-sets:
 	cd "$${DEFN_DEV_WORKDIR:-$${HOME}}" && kubectl --context argocd apply -f e/k3d-$(control).yaml

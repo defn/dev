@@ -1,12 +1,8 @@
 include Makefile.common
 
 init-site:
-	cd .password-store && git pull
 	@aws --profile meh sts get-caller-identity
 	@pass hello
-
-deploy-site:
-	$(MAKE) cert
 
 restart: # Restart everything
 	git pull
