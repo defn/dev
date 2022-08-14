@@ -28,6 +28,7 @@ node_modules
 .kube
 .swp
 .linkerd2
+.config/caddy
 .config/kn
 .config/htop
 .config/hof
