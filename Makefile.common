@@ -73,7 +73,7 @@ tilt:
 logout:
 	-echo yes | gh auth logout --hostname github.com
 	-argocd logout argocd-server.argocd.svc
-	cd .password-store && git checkout vault && git clean -fd vault && (git crypt lock || true)
+	cd .password-store && git add vault && git add -u vault && (git stash || true) && (git crypt lock || true)
 	-echo RELOADAGENT | gpg-connect-agent
 
 login:
@@ -167,6 +167,7 @@ vault-unseal:
 vault-seal:
 	-env VAULT_TOKEN="$$(pass Initial_Root_Token)" VAULT_ADDR=http://localhost:8200 vault operator seal
 	rm -f ~/.vault-token
+	cd ~/.password-store && git add vault && git add -u vault && git stash
 
 vault-backup:
 	-$(MAKE) vault-seal
