@@ -1,5 +1,5 @@
 %:
-	-flyctl secrets set -a $@ --detach DEFN_DEV_TAILSCALE_STATE="$$(pass tailscale_$@)" 
+	-flyctl secrets set -a $@ --detach DEFN_DEV_TAILSCALE_STATE="$$(pass tailscale_$@)"  DEFN_DEV_HOST="k3d-$@.tiger-mamba.ts.net"
 	flyctl deploy -a $@ --remote-only --config app.toml
 
 password:
