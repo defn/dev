@@ -96,3 +96,4 @@ imma:
 	env DEFN_DEV_ARCHIVE="$$(cd tmp/$@ && tar cvf - . | base64)" DEFN_DEV_HOST=k3d-$@.${domain} DEFN_DEV_HOST_API=127.0.0.1 DEFN_DEV_IP="$$(host k3d-$@.$(domain) | grep 'has address' | awk '{print $$NF}')" $(MAKE) cluster name=$@
 	kubectl rollout -n argocd status deployment argocd-server --watch
 	kubectl rollout -n default status statefulset $@ --watch
+	$(MAKE) attach name=$@
