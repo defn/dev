@@ -97,6 +97,7 @@ gpg:
 	chmod 700 .gnupg
 	-gpg-agent --daemon
 	gpg --import .password-store/keys/EBE020A544E04B9C67215280B8B6F42683E6CCEF/private.gpg 
+	$(MAKE) git-crypt-unlock
 
 git-crypt-unlock:
 	cd ~/.password-store && if ! git crypt unlock; then \
