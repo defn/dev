@@ -1,4 +1,4 @@
-apiVersion: argoproj.io/v1alpha1
+apiVersion argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: imma
@@ -29,10 +29,6 @@ spec:
             namespace: external-secrets
             cluster: in-cluster
             path: external-secrets
-          - name: external-dns
-            namespace: external-dns
-            cluster: in-cluster
-            path: external-dns
           - name: argo-events
             namespace: argo-events
             cluster: in-cluster
