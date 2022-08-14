@@ -62,6 +62,13 @@ resource "kubernetes_stateful_set" "dev" {
         }
 
         volume {
+          name = "docker"
+          host_path {
+            path = "/var/run/docker.sock"
+          }
+        }
+
+        volume {
           name = "certs"
           host_path {
             path = "/var/lib/tailscale/certs"
@@ -91,6 +98,11 @@ resource "kubernetes_stateful_set" "dev" {
           env {
             name  = "DEFN_DEV_IP"
             value = each.value.ip
+          }
+
+          volume_mount {
+            name       = "docker"
+            mount_path = "/var/run/docker.sock"
           }
 
           volume_mount {
