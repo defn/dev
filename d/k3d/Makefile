@@ -1,7 +1,7 @@
 build:
 	wget -O- https://pkgs.tailscale.com/stable/tailscale_1.28.0_amd64.tgz | tar xvfz -
 	kustomize build --enable-helm ../../k/argocd > argocd.yaml
-	cp ../../e/k3d-$(shell uname -s | perl -pe 's{-\d+$$}{}').yaml argocd-appset.yaml
+	cp ../../e/$(context).yaml argocd-appset.yaml
 	docker build -t defn.dev/defn/k3d --build-arg DEFN_DEV_ARCHIVE=${DEFN_DEV_ARCHIVE} .
 
 mint:
