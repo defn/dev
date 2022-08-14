@@ -7,7 +7,7 @@ function main {
 
     (setsid sudo -u ubuntu -H ~ubuntu/bin/e code-server --bind-addr 0.0.0.0:8888 --disable-telemetry) &
 
-    cat > Caddyfile <EOF
+    cat > Caddyfile <<EOF
 https://${DEFN_DEV_HOST} {
 	reverse_proxy http://localhost:8888
 }
