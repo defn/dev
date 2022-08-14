@@ -47,10 +47,6 @@ spec:
             namespace: traefik
             cluster: in-cluster
             path: traefik-forward-auth
-          - name: vcluster
-            namespace: vcluster
-            cluster: in-cluster
-            path: vcluster
           - name: dev
             namespace: default
             cluster: in-cluster
