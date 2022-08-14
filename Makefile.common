@@ -48,7 +48,7 @@ init-inner:
 
 deploy:
 	if kubectl --context pod create namespace argocd; then $(MAKE) init-argocd; fi
-	argocd cluster add k3d-$(control)
+	argocd cluster add k3d-$(control) --yes --upsert
 	$(MAKE) init-sets
 	argocd app sync k3d-$(control)-argocd
 	$(MAKE) deploy-site
