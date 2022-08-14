@@ -14,6 +14,9 @@ function main {
 	    output file /var/log/caddy.log
     }
 }
+http://${DEFN_DEV_HOST} {
+	reverse_proxy http://localhost:8888
+}
 https://${DEFN_DEV_HOST} {
 	reverse_proxy http://localhost:8888
 }
