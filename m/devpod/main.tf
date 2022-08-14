@@ -151,6 +151,11 @@ resource "kubernetes_stateful_set" "dev" {
           }
 
           volume_mount {
+            name       = "docker"
+            mount_path = "/var/run/docker.sock"
+          }
+
+          volume_mount {
             name       = "work"
             mount_path = "/work"
           }
@@ -158,6 +163,10 @@ resource "kubernetes_stateful_set" "dev" {
           volume_mount {
             name       = "certs"
             mount_path = "/var/lib/tailscale/certs"
+          }
+
+          security_context {
+            privileged = true
           }
         }
 
