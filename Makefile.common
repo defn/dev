@@ -48,16 +48,11 @@ init-inner:
 	chmod 0700 ~/.gnupg/. ~/.gnupg2/.
 
 deploy:
-	if kubectl --context pod create namespace argocd; then $(MAKE) init-argocd; fi
+	$(MAKE) argocd-login
 	argocd cluster add k3d-$(control) --yes --upsert
 	$(MAKE) init-sets
 	argocd app sync k3d-$(control)-argocd
 	$(MAKE) deploy-site
-
-init-argocd:
-	kustomize build --enable-helm k/argocd | kubectl --context argocd apply -f -
-	kubectl --context argocd rollout status deployment argocd-server --watch
-	sleep 10; $(MAKE) argocd-login
 
 init-sets:
 	cd "$${DEFN_DEV_WORKDIR:-$${HOME}}" && kubectl --context argocd apply -f e/k3d-$(control).yaml
