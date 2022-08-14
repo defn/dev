@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: sets-imma-ns
+  name: imma
   namespace: argocd
   labels:
     argocd.argoproj.io/instance: sets
@@ -63,7 +63,7 @@ spec:
             path: dev
   template:
     metadata:
-      name: "{{name}}"
+      name: "imma-{{name}}"
       namespace: argocd
     spec:
       project: default

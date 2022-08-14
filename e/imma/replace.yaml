@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: sets-imma-replace
+  name: imma-replace
   namespace: argocd
   labels:
     argocd.argoproj.io/instance: sets
@@ -15,7 +15,7 @@ spec:
             path: gha
   template:
     metadata:
-      name: "{{name}}"
+      name: "imma-{{name}}"
       namespace: argocd
     spec:
       project: default
