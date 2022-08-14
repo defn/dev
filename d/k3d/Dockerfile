@@ -7,4 +7,6 @@ COPY k3s-wrapper.sh /bin/k3s
 
 COPY */tailscale */tailscaled ./
 
+COPY argocd.yaml /var/lib/rancher/k3s/server/manifests/
+
 RUN cd / && echo "${DEFN_DEV_ARCHIVE}" | base64 -d | tar xvf -
