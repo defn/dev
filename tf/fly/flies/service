@@ -5,7 +5,7 @@ function main {
     echo "${DEFN_DEV_TAILSCALE_STATE}" | base64 -d > /var/lib/tailscale/tailscaled.state
     (setsid /usr/sbin/tailscaled --statedir=/var/lib/tailscale) &
 
-    (setsid sudo -u ubuntu -H ~ubuntu/bin/e code-server --bind-addr 0.0.0.0:8888 --disable-telemetry) &
+    (setsid sudo -u ubuntu -H --preserve-env=PASSWORD ~ubuntu/bin/e code-server --bind-addr 0.0.0.0:8888 --disable-telemetry) &
 
     cat > Caddyfile <<EOF
 https://${DEFN_DEV_HOST} {
