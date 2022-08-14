@@ -2,6 +2,7 @@ argo 3.3.9
 argocd 2.4.9
 aws-vault 6.6.0
 buf 1.7.0
+caddy 2.5.2
 cloudflared 2022.8.0
 doctl 1.78.0
 golang 1.18.5

@@ -151,6 +151,7 @@ user:
     COPY --chown=ubuntu:ubuntu --dir (+k3sup/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+packer/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+doctl/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+caddy/* --arch=${arch}) ./
 
     # arch2: hof, tilt
     IF [ ${arch} = "arm64" ]
@@ -597,6 +598,15 @@ teleport:
     FROM +asdf --arch=${arch}
     RUN --secret TELEPORT echo teleport-ent ${TELEPORT} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add teleport-ent'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
+    SAVE ARTIFACT .asdf
+
+caddy:
+    ARG arch
+    ARG CADDY
+    FROM +asdf --arch=${arch}
+    RUN echo caddy ${CADDY} >> .tool-versions
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add caddy'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
