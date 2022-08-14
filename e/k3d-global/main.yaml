@@ -1,21 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: sets-remo-global-ns
+  name: k3d-global
   namespace: argocd
-  labels:
-    argocd.argoproj.io/instance: sets
 spec:
   generators:
     - list:
         elements:
-          - name: argocd
-            namespace: argocd
-            cluster: in-cluster
-            path: argocd
+          - name: kyverno
+            namespace: kyverno
+            cluster: k3d-defn
+            path: kyverno
   template:
     metadata:
-      name: "{{name}}"
+      name: "k3d-global-{{name}}"
       namespace: argocd
     spec:
       project: default
