@@ -6,6 +6,7 @@ init-site:
 	$(MAKE) cert
 	@aws --profile meh sts get-caller-identity
 	$(MAKE) vault-seal
+	cd tf/do && $(MAKE) archive name=defn && $(MAKE) archive name=global
 
 restart: # Restart everything
 	git pull
