@@ -38,32 +38,35 @@ init:
 	$(MAKE) init-site
 
 init-inner:
-	if echo VSCODE_GIT_ASKPASS_NODE | grep /.local/lib/code-server;	then $(MAKE) init-code-server; else $(MAKE) init-vscode; fi
-	$(MAKE) login
-
-init-code-server:
 	-if test -d work; then rmdir work; fi
 	if test -d /work; then ln -nfs /work .; fi
 	if test -d /mnt/lost+found; then sudo install -d -m 0700 -o ubuntu -g ubuntu /mnt/work; ln -nfs /mnt/work .; fi
-	-git clone https://github.com/jojomomojo/password-store work/password-store
-	rsync -ia .password-store/home/.gnupg/. .gnupg/.
-	chmod 700 .gnupg
-	-gpg-agent --daemon
-	gpg --import .password-store/keys/EBE020A544E04B9C67215280B8B6F42683E6CCEF/private.gpg
-	$(MAKE) git-crypt-unlock
+	if ! test -d work/.; then mkdir -p work; fi
 
-init-vscode:
-	if ! test -d work/.; then if test -d /work; then ln -nfs /work .; else mkdir -p work; fi; fi
-	-git clone https://github.com/defn/dev work/dev
 	-git clone https://github.com/jojomomojo/password-store work/password-store
 	cd work/password-store && git pull
+	rsync -ia .password-store/home/.gnupg/. .gnupg/.
 	chmod 0700 ~/.gnupg/. ~/.gnupg2/.
-	-cd work/password-store && git crypt unlock && git pull
+
+	-git clone https://github.com/defn/dev work/dev
+
+	if echo VSCODE_GIT_ASKPASS_NODE | grep /.local/lib/code-server;	then $(MAKE) init-code-server; else $(MAKE) init-vscode; fi
+
+	$(MAKE) git-crypt-unlock
+
 	$(MAKE) vault-unseal
 	$(MAKE) kubeconfig
+	$(MAKE) login
+
 	-sudo chgrp docker /var/run/docker.sock
 	-sudo chmod 770 /var/run/docker.sock
-	chmod 0700 ~/.gnupg/. ~/.gnupg2/.
+
+init-code-server:
+	-gpg-agent --daemon
+	gpg --import .password-store/keys/EBE020A544E04B9C67215280B8B6F42683E6CCEF/private.gpg
+
+init-vscode:
+	@true
 
 init-sets:
 	cd "$${DEFN_DEV_WORKDIR:-$${HOME}}" && kubectl --context argocd apply -f e/k3d-$(control).yaml
