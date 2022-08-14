@@ -10,46 +10,46 @@ spec:
           - name: kyverno
             namespace: kyverno
             path: kyverno
-            cluster: k3d-imma
+            cluster: in-cluster
           - name: argocd
             namespace: argocd
-            cluster: k3d-imma
+            cluster: in-cluster
             path: argocd
           - name: argocd-ingress
             namespace: argocd
-            cluster: k3d-imma
+            cluster: in-cluster
             path: argocd-ingress
           - name: cert-manager
             namespace: cert-manager
-            cluster: k3d-imma
+            cluster: in-cluster
             path: cert-manager
           - name: external-secrets
             namespace: external-secrets
-            cluster: k3d-imma
+            cluster: in-cluster
             path: external-secrets
           - name: argo-events
             namespace: argo-events
-            cluster: k3d-imma
+            cluster: in-cluster
             path: argo-events
           - name: argo-workflows
             namespace: argo-workflows
-            cluster: k3d-imma
+            cluster: in-cluster
             path: argo-workflows
           - name: dex
             namespace: dex
-            cluster: k3d-imma
+            cluster: in-cluster
             path: dex
           - name: traefik
             namespace: traefik
-            cluster: k3d-imma
+            cluster: in-cluster
             path: traefik
           - name: traefik-forward-auth
             namespace: traefik
-            cluster: k3d-imma
+            cluster: in-cluster
             path: traefik-forward-auth
           - name: dev
             namespace: default
-            cluster: k3d-imma
+            cluster: in-cluster
             path: dev
   template:
     metadata:
