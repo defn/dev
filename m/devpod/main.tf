@@ -17,6 +17,20 @@ resource "kubernetes_stateful_set" "dev" {
       }
     }
 
+    volume_claim_template {
+      metadata {
+        name = "work"
+      }
+      spec {
+        access_modes = ["ReadWriteOnce"]
+        resources {
+          requests = {
+            storage = "1G"
+          }
+        }
+      }
+    }
+
     template {
       metadata {
         labels = {
@@ -47,11 +61,6 @@ resource "kubernetes_stateful_set" "dev" {
         }
 
         volume {
-          name = "work"
-          empty_dir {}
-        }
-
-        volume {
           name = "earthly"
           empty_dir {}
         }
@@ -59,6 +68,13 @@ resource "kubernetes_stateful_set" "dev" {
         volume {
           name = "dind"
           empty_dir {}
+        }
+
+        volume {
+          name = "docker"
+          host_path {
+            path = "/var/run/docker.sock"
+          }
         }
 
         volume {
@@ -91,6 +107,11 @@ resource "kubernetes_stateful_set" "dev" {
           env {
             name  = "DEFN_DEV_IP"
             value = each.value.ip
+          }
+
+          volume_mount {
+            name       = "docker"
+            mount_path = "/var/run/docker.sock"
           }
 
           volume_mount {
@@ -139,6 +160,11 @@ resource "kubernetes_stateful_set" "dev" {
           }
 
           volume_mount {
+            name       = "docker"
+            mount_path = "/var/run/docker.sock"
+          }
+
+          volume_mount {
             name       = "work"
             mount_path = "/work"
           }
@@ -146,6 +172,10 @@ resource "kubernetes_stateful_set" "dev" {
           volume_mount {
             name       = "certs"
             mount_path = "/var/lib/tailscale/certs"
+          }
+
+          security_context {
+            privileged = true
           }
         }
 

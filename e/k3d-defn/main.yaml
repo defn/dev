@@ -1,61 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: sets-remo-ns
+  name: k3d-defn
   namespace: argocd
-  labels:
-    argocd.argoproj.io/instance: sets
 spec:
   generators:
     - list:
         elements:
-          - name: argocd
-            namespace: argocd
-            cluster: in-cluster
-            path: argocd
-          - name: cert-manager
-            namespace: cert-manager
-            cluster: in-cluster
-            path: cert-manager
-          - name: vault
-            namespace: vault
-            cluster: in-cluster
-            path: vault
           - name: kyverno
             namespace: kyverno
-            cluster: in-cluster
+            cluster: k3d-defn
             path: kyverno
-          - name: external-secrets
-            namespace: external-secrets
-            cluster: in-cluster
-            path: external-secrets
-          - name: argo-events
-            namespace: argo-events
-            cluster: in-cluster
-            path: argo-events
-          - name: argo-workflows
-            namespace: argo-workflows
-            cluster: in-cluster
-            path: argo-workflows
-          - name: vcluster
-            namespace: vcluster
-            cluster: in-cluster
-            path: vcluster
-          - name: dex
-            namespace: dex
-            cluster: in-cluster
-            path: dex
-          - name: traefik
-            namespace: traefik
-            cluster: in-cluster
-            path: traefik-clusterip
-          - name: traefik-forward-auth
-            namespace: traefik
-            cluster: in-cluster
-            path: traefik-forward-auth
   template:
     metadata:
-      name: "{{name}}"
+      name: "k3d-defn-{{name}}"
       namespace: argocd
     spec:
       project: default

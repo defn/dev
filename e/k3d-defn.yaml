@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sets-remo-defn
+  name: k3d-defn
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/defn/dev
-    path: e/remo-defn
+    path: e/k3d-defn
     targetRevision: main
   destination:
     name: in-cluster
