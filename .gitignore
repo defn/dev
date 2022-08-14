@@ -75,3 +75,4 @@ node_modules
 .vscode-cli/
 .vscode-server-insiders/
 /fly
+Caddyfile
