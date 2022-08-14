@@ -16,9 +16,10 @@ dummy_ip ?= 169.254.32.1
 trust-ca:
 	sudo security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-db etc/ca.crt
 
-dummy-macos:
+macos:
 	for ip in $(dummy_ip); do if ! ifconfig lo0 | grep "inet $$ip"; then sudo ifconfig lo0 alias "$$ip" netmask 255.255.255.255; fi; done;
 	ifconfig lo0
+	defaults write -g ApplePressAndHoldEnabled -bool false
 
 unlock:
 	cd ~/.password-store && git crypt unlock
