@@ -209,7 +209,7 @@ user:
 toolVersions:
     ARG ARGO
     ARG ARGOCD
-    ARG AWS-VAULT
+    ARG AWSVAULT
     ARG BUF
     ARG CADDY
     ARG CLOUDFLARED
@@ -232,7 +232,7 @@ toolVersions:
     ARG VAULT
     RUN echo argo ${ARGO} >> .tool-versions
     RUN echo argocd ${ARGOCD} >> .tool-versions
-    RUN echo aws-vault ${AWS-VAULT} >> .tool-versions
+    RUN echo aws-vault ${AWSVAULT} >> .tool-versions
     RUN echo buf ${BUF} >> .tool-versions
     RUN echo caddy ${CADDY} >> .tool-versions
     RUN echo cloudflared ${CLOUDFLARED} >> .tool-versions
