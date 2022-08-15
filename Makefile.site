@@ -7,6 +7,7 @@ init-site:
 	@aws --profile meh sts get-caller-identity
 	$(MAKE) vault-seal
 	cd tf/do && $(MAKE) archive name=defn && $(MAKE) archive name=global
+	-git clone https://github.com/cue-sh/vscode-cue ~/.local/share/code-server/extensions/vscode-cue
 
 restart: # Restart everything
 	git pull
