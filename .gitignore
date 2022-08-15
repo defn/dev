@@ -77,3 +77,4 @@ node_modules
 .vscode-server-insiders/
 /fly
 Caddyfile
+.tool-versions

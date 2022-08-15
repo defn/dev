@@ -198,12 +198,63 @@ user:
     RUN echo yes | vim +PlugInstall +qall
 
     COPY --chown=ubuntu:ubuntu --dir bin .
-    COPY --chown=ubuntu:ubuntu .bash* .tool-versions .
+    COPY --chown=ubuntu:ubuntu .bash* .
 
+    COPY --chown=ubuntu:ubuntu +toolVersions/* .
     RUN ~/bin/e asdf install
 
     COPY --dir --chown=ubuntu:ubuntu . .
     RUN set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd
+
+toolVersions:
+    ARG ARGO
+    ARG ARGOCD
+    ARG AWS-VAULT
+    ARG BUF
+    ARG CADDY
+    ARG CLOUDFLARED
+    ARG DOCTL
+    ARG GOLANG
+    ARG GRPCURL
+    ARG HELM
+    ARG K3SUP
+    ARG K9S
+    ARG KREW
+    ARG KUBECTL
+    ARG KUSTOMIZE
+    ARG NODEJS
+    ARG PACKER
+    ARG PYTHON
+    ARG SHELLCHECK
+    ARG SHFMT
+    ARG SKAFFOLD
+    ARG TERRAFORM
+    ARG VAULT
+    RUN echo argo ${ARGO} >> .tool-versions
+    RUN echo argocd ${ARGOCD} >> .tool-versions
+    RUN echo aws-vault ${AWS-VAULT} >> .tool-versions
+    RUN echo buf ${BUF} >> .tool-versions
+    RUN echo caddy ${CADDY} >> .tool-versions
+    RUN echo cloudflared ${CLOUDFLARED} >> .tool-versions
+    RUN echo doctl ${DOCTL} >> .tool-versions
+    RUN echo golang ${GOLANG} >> .tool-versions
+    RUN echo grpcurl ${GRPCURL} >> .tool-versions
+    RUN echo helm ${HELM} >> .tool-versions
+    RUN echo k3sup ${K3SUP} >> .tool-versions
+    RUN echo k9s ${K9S} >> .tool-versions
+    RUN echo krew ${KREW} >> .tool-versions
+    RUN echo kubectl ${KUBECTL} >> .tool-versions
+    RUN echo kustomize ${KUSTOMIZE} >> .tool-versions
+    RUN echo nodejs ${NODEJS} >> .tool-versions
+    RUN echo packer ${PACKER} >> .tool-versions
+    RUN echo python ${PYTHON} >> .tool-versions
+    RUN echo shellcheck ${SHELLCHECK} >> .tool-versions
+    RUN echo shfmt ${SHFMT} >> .tool-versions
+    RUN echo skaffold ${SKAFFOLD} >> .tool-versions
+    RUN echo terraform ${TERRAFORM} >> .tool-versions
+    RUN echo vault ${VAULT} >> .tool-versions
+    RUN echo argo ${ARGO} >> .tool-versions
+    SAVE ARTIFACT .tool-versions
 
 coderServer:
     ARG arch
