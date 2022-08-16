@@ -14,7 +14,7 @@ https://${DEFN_DEV_HOST} {
 EOF
     (setsid "$(~ubuntu/bin/e asdf which caddy)" run) &
 
-    tailscale up --ssh
+    tailscale up --ssh --hostname "$(echo "${DEFN_DEV_HOST}" | cut -d. -f1)"
 
     exec /usr/sbin/sshd -D -o UseDNS=no -o UsePAM=yes -o PasswordAuthentication=no -o StreamLocalBindUnlink=yes
 }
