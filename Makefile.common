@@ -34,12 +34,19 @@ init:
 
 init-inner:
 	-if test -d work; then rmdir work; fi
-	if test -d /work; then ln -nfs /work .; fi
+	if test -d /work; then sudo install -d -m 0700 -o ubuntu -g ubuntu /work; ln -nfs /work .; fi
 	if test -d /mnt/lost+found; then sudo install -d -m 0700 -o ubuntu -g ubuntu /mnt/work; ln -nfs /mnt/work .; fi
 	if ! test -d work/.; then mkdir -p work; fi
 
 	$(MAKE) github-login
-	-git clone https://github.com/jojomomojo/password-store work/password-store
+	if [[ ! -f .gitconfig ]]; then \
+		rm -f .gitconfig; \
+		(echo '[credential "https://github.com"]'; echo 'helper = !/usr/local/bin/gh auth git-credential') > .gitconfig; \
+		gh repo clone amanibhavam/password-store work/password-store; \
+		rm -f .gitconfig; \
+		git checkout -- .gitconfig; \
+		fi
+
 	cd work/password-store && git pull
 	rsync -ia .password-store/home/.gnupg/. .gnupg/.
 	chmod 0700 ~/.gnupg/. ~/.gnupg2/.
@@ -88,7 +95,7 @@ login:
 	-$(MAKE) argocd-login
 
 github-login:
-	if ! gh auth status; then gh auth login -p https -h github.com -w; fi
+	if ! gh auth status; then echo Y | gh auth login -p https -h github.com -w; fi
 
 argocd-login:
 	argocd login --insecure argocd-server.argocd.svc --username admin --password adminadmin \
