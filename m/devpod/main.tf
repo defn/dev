@@ -192,13 +192,14 @@ resource "kubernetes_stateful_set" "dev" {
             privileged = true
           }
         }
+
         container {
           name              = "tailscale"
           image             = "quay.io/defn/dev:latest"
           image_pull_policy = "Always"
 
           command = ["/usr/bin/tini", "--"]
-          args    = ["tailscaled", "--statedir", "/var/lib/tailscale"]
+          args    = ["sudo", "tailscaled", "--statedir", "/var/lib/tailscale"]
 
           volume_mount {
             name       = "tailscale"
