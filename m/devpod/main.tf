@@ -92,10 +92,8 @@ resource "kubernetes_stateful_set" "dev" {
         }
 
         volume {
-          name = "certs"
-          host_path {
-            path = "/var/lib/tailscale/certs"
-          }
+          name = "tsrun"
+          empty_dir {}
         }
 
         container {
@@ -131,6 +129,11 @@ resource "kubernetes_stateful_set" "dev" {
           volume_mount {
             name       = "work"
             mount_path = "/work"
+          }
+
+          volume_mount {
+            name       = "tsrun"
+            mount_path = "/var/run/tailscale"
           }
 
           volume_mount {
@@ -184,8 +187,13 @@ resource "kubernetes_stateful_set" "dev" {
           }
 
           volume_mount {
-            name       = "certs"
-            mount_path = "/var/lib/tailscale/certs"
+            name       = "tsrun"
+            mount_path = "/var/run/tailscale"
+          }
+
+          volume_mount {
+            name       = "tailscale"
+            mount_path = "/var/lib/tailscale"
           }
 
           security_context {
@@ -202,6 +210,11 @@ resource "kubernetes_stateful_set" "dev" {
           args    = ["sudo", "tailscaled", "--statedir", "/var/lib/tailscale"]
 
           volume_mount {
+            name       = "tsrun"
+            mount_path = "/var/run/tailscale"
+          }
+
+          volume_mount {
             name       = "tailscale"
             mount_path = "/var/lib/tailscale"
           }
@@ -212,7 +225,6 @@ resource "kubernetes_stateful_set" "dev" {
         }
 
         container {
-
           name              = "vault"
           image             = "quay.io/defn/dev:latest"
           image_pull_policy = "Always"

@@ -15,9 +15,4 @@ done
 domain=`/tailscale cert 2>&1 | grep ' use ' | cut -d'"' -f2`
 /tailscale up --ssh --hostname `echo ${domain} | cut -d. -f1`
 
-while true; do
-   /tailscale cert "${domain}"
-  sleep 36000
-done &
-
 exec /bin/k3s-real "$@" --node-ip "${ts_ip}" --node-external-ip "${ts_ip}"
