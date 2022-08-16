@@ -31,6 +31,20 @@ resource "kubernetes_stateful_set" "dev" {
       }
     }
 
+    volume_claim_template {
+      metadata {
+        name = "tailscale"
+      }
+      spec {
+        access_modes = ["ReadWriteOnce"]
+        resources {
+          requests = {
+            storage = "1G"
+          }
+        }
+      }
+    }
+
     template {
       metadata {
         labels = {
@@ -178,8 +192,26 @@ resource "kubernetes_stateful_set" "dev" {
             privileged = true
           }
         }
+        container {
+          name              = "tailscale"
+          image             = "quay.io/defn/dev:latest"
+          image_pull_policy = "Always"
+
+          command = ["/usr/bin/tini", "--"]
+          args    = ["tailscaled", "--statedir", "/var/lib/tailscale"]
+
+          volume_mount {
+            name       = "tailscale"
+            mount_path = "/var/lib/tailscale"
+          }
+
+          security_context {
+            privileged = true
+          }
+        }
 
         container {
+
           name              = "vault"
           image             = "quay.io/defn/dev:latest"
           image_pull_policy = "Always"
