@@ -8,20 +8,13 @@ function main {
     (setsid sudo -u ubuntu -H --preserve-env=PASSWORD ~ubuntu/bin/e code-server --bind-addr 0.0.0.0:8888 --disable-telemetry) &
 
     cat > Caddyfile <<EOF
-{
-    auto_https disable_redirects
-    log {
-	    output file /var/log/caddy.log
-    }
-}
-http://${DEFN_DEV_HOST} {
-	reverse_proxy http://localhost:8888
-}
 https://${DEFN_DEV_HOST} {
 	reverse_proxy http://localhost:8888
 }
 EOF
     (setsid "$(~ubuntu/bin/e asdf which caddy)" run) &
+
+    tailscale up --ssh
 
     exec /usr/sbin/sshd -D -o UseDNS=no -o UsePAM=yes -o PasswordAuthentication=no -o StreamLocalBindUnlink=yes
 }
