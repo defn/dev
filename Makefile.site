@@ -81,7 +81,7 @@ cert:
 	rm -f meh.json
 
 provision-digital-ocean:
-	-git clone git@github.com:jojomomojo/password-store work/password-store
+	-git clone https://github.com/jojomomojo/password-store work/password-store
 	sudo curl -sSL -o /usr/local/bin/k3d https://github.com/k3d-io/k3d/releases/download/v5.4.4/k3d-linux-amd64
 	sudo chmod 755 /usr/local/bin/k3d
 	make cluster
