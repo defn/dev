@@ -136,11 +136,6 @@ resource "kubernetes_stateful_set" "dev" {
             mount_path = "/var/run/tailscale"
           }
 
-          volume_mount {
-            name       = "tailscale"
-            mount_path = "/var/lib/tailscale"
-          }
-
           security_context {
             privileged = true
           }
@@ -191,11 +186,6 @@ resource "kubernetes_stateful_set" "dev" {
             mount_path = "/var/run/tailscale"
           }
 
-          volume_mount {
-            name       = "tailscale"
-            mount_path = "/var/lib/tailscale"
-          }
-
           security_context {
             privileged = true
           }
@@ -221,6 +211,20 @@ resource "kubernetes_stateful_set" "dev" {
 
           security_context {
             privileged = true
+          }
+        }
+
+        container {
+          name              = "caddy"
+          image             = "quay.io/defn/dev:latest"
+          image_pull_policy = "Always"
+
+          command = ["/usr/bin/tini", "--"]
+          args    = ["bash", "-c", "domain=`tailscale cert 2>&1 | grep ' use ' | cut -d'\"' -f2`; (echo \"$${domain} {\"; echo 'reverse_proxy http://localhost:8888'; echo '}') > Caddyfile; exec sudo `~ubuntu/bin/e asdf which caddy` run"]
+
+          volume_mount {
+            name       = "tsrun"
+            mount_path = "/var/run/tailscale"
           }
         }
 
