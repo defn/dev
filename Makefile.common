@@ -3,7 +3,7 @@ cache ?=
 push ?= --push
 workdir ?= /home/ubuntu
 tilt_port ?= 10350
-name ?= $(shell uname -n | cut -d. -f1 | tr A-Z a-z | perl -pe 's{-\d+$$}{}')
+name ?= $(shell uname -n | cut -d. -f1 | tr A-Z a-z | perl -pe 's{-\d$$}{}')
 k3d_name ?= $(name)
 context ?= k3d-$(name)
 podname ?= $(name)-0
@@ -34,26 +34,35 @@ init:
 
 init-inner:
 	-if test -d work; then rmdir work; fi
-	if test -d /work; then ln -nfs /work .; fi
+	if test -d /work; then sudo install -d -m 0700 -o ubuntu -g ubuntu /work; ln -nfs /work .; fi
 	if test -d /mnt/lost+found; then sudo install -d -m 0700 -o ubuntu -g ubuntu /mnt/work; ln -nfs /mnt/work .; fi
 	if ! test -d work/.; then mkdir -p work; fi
 
-	-git clone https://github.com/jojomomojo/password-store work/password-store
-	cd work/password-store && git pull
-	rsync -ia .password-store/home/.gnupg/. .gnupg/.
-	chmod 0700 ~/.gnupg/. ~/.gnupg2/.
+	-sudo chgrp docker /var/run/docker.sock
+	-sudo chmod 770 /var/run/docker.sock
+
+	$(MAKE) github-login
+	if [[ ! -f .gitconfig ]]; then \
+		rm -f .gitconfig; \
+		(echo '[credential "https://github.com"]'; echo 'helper = !/usr/local/bin/gh auth git-credential') > .gitconfig; \
+		gh repo clone amanibhavam/password-store work/password-store; \
+		rm -f .gitconfig; \
+		git checkout -- .gitconfig; \
+		fi
+
+	cd ~/.password-store && git pull
+	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
+	chmod 0700 ~/.gnupg/. ~/.gnupg2/. ~/.password-store/home/.gnupg
+	$(MAKE) git-crypt-unlock
+
+	$(MAKE) kubeconfig
+	-$(MAKE) argocd-login
+
+	sudo tailscale up --ssh --accept-dns=false
 
 	-git clone https://github.com/defn/dev work/dev
 
 	if echo $$VSCODE_GIT_ASKPASS_NODE | grep local/lib/code-server; then $(MAKE) init-code-server; else $(MAKE) init-vscode; fi
-
-	$(MAKE) git-crypt-unlock
-
-	$(MAKE) kubeconfig
-	$(MAKE) login
-
-	-sudo chgrp docker /var/run/docker.sock
-	-sudo chmod 770 /var/run/docker.sock
 
 init-code-server:
 	-gpg-agent --daemon
@@ -80,14 +89,14 @@ login:
 	chmod 700 ~/.password-store/home/.gnupg ~/.gnupg
 	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
 	chmod 700 ~/.password-store/home/.gnupg ~/.gnupg
+	$(MAKE) github-login
 	cd ~/.password-store && git pull
 	$(MAKE) git-crypt-unlock
-	if ! gh auth status; then echo $(MAKE) github-login; fi
 	$(MAKE) kubeconfig
 	-$(MAKE) argocd-login
 
 github-login:
-	gh auth login -p https -h github.com -w
+	if ! gh auth status; then echo Y | gh auth login -p https -h github.com -w; fi
 
 argocd-login:
 	argocd login --insecure argocd-server.argocd.svc --username admin --password adminadmin \
@@ -116,17 +125,18 @@ kubeconfig:
 		skaffold config set --kube-context pod local-cluster true; \
 		fi
 	#kumactl config control-planes add --overwrite --name pod --address http://kuma-control-plane-x-kuma-x-vc0.vc0.svc:5681
-	if vcluster connect vcluster --kube-config ~/.kube/vcluster --kube-config-context-name vcluster --update-current=false --server vcluster.vcluster.svc.cluster.local; then \
-		env KUBECONFIG=~/.kube/config:~/.kube/vcluster kubectl config view --flatten > ~/.kube/config.1; \
-		mv ~/.kube/config.1 ~/.kube/config; \
-		$(MAKE) argocd-login; \
-		argocd cluster add vcluster --yes; \
-		fi
 	touch ~/.kube/config
 	chmod 0600 ~/.kube/config
 	-k3d kubeconfig merge -a -d
 	-kubectl config set-cluster $(context) --server=https://$(context).$(domain):6443
 	k config get-contexts
+
+vclusterconfig:
+	if vcluster connect vcluster --kube-config ~/.kube/vcluster --kube-config-context-name vcluster --update-current=false --server vcluster.vcluster.svc.cluster.local; then \
+		env KUBECONFIG=~/.kube/config:~/.kube/vcluster kubectl config view --flatten > ~/.kube/config.1; \
+		mv ~/.kube/config.1 ~/.kube/config; \
+		argocd cluster add vcluster --yes; \
+		fi
 
 asdf:
 	cat .tool-versions| awk '{print $$1}' | while read -r a; do asdf list-all "$$a" | sed "s#^#$$a #"; done | sort > .tool-versions-all
@@ -154,12 +164,10 @@ join-inner:
 
 cluster-inner:
 	-k3d cluster delete $(name)
-	if [[ -x "$$(type -P tailscale)" ]]; then if tailscale ip 2>&1 | grep NeedsLogin; then sudo tailscale up; fi; fi
 	k3d cluster create $(name) --config k3d.yaml --k3s-node-label env=$(name)@server:0 \
 		-p    "80:8000@server:0" \
 		-p   "443:8443@server:0"
 	docker update --restart=no $(context)-server-0
-	docker exec $(context)-server-0 touch /etc/passwd
 	-cd tf/$(name) && make init plan apply
 
 vault-unseal:

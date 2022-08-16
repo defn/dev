@@ -31,6 +31,20 @@ resource "kubernetes_stateful_set" "dev" {
       }
     }
 
+    volume_claim_template {
+      metadata {
+        name = "tailscale"
+      }
+      spec {
+        access_modes = ["ReadWriteOnce"]
+        resources {
+          requests = {
+            storage = "1G"
+          }
+        }
+      }
+    }
+
     template {
       metadata {
         labels = {
@@ -78,10 +92,8 @@ resource "kubernetes_stateful_set" "dev" {
         }
 
         volume {
-          name = "certs"
-          host_path {
-            path = "/var/lib/tailscale/certs"
-          }
+          name = "tsrun"
+          empty_dir {}
         }
 
         container {
@@ -120,8 +132,8 @@ resource "kubernetes_stateful_set" "dev" {
           }
 
           volume_mount {
-            name       = "certs"
-            mount_path = "/var/lib/tailscale/certs"
+            name       = "tsrun"
+            mount_path = "/var/run/tailscale"
           }
 
           security_context {
@@ -170,12 +182,49 @@ resource "kubernetes_stateful_set" "dev" {
           }
 
           volume_mount {
-            name       = "certs"
-            mount_path = "/var/lib/tailscale/certs"
+            name       = "tsrun"
+            mount_path = "/var/run/tailscale"
           }
 
           security_context {
             privileged = true
+          }
+        }
+
+        container {
+          name              = "tailscale"
+          image             = "quay.io/defn/dev:latest"
+          image_pull_policy = "Always"
+
+          command = ["/usr/bin/tini", "--"]
+          args    = ["sudo", "tailscaled", "--statedir", "/var/lib/tailscale"]
+
+          volume_mount {
+            name       = "tsrun"
+            mount_path = "/var/run/tailscale"
+          }
+
+          volume_mount {
+            name       = "tailscale"
+            mount_path = "/var/lib/tailscale"
+          }
+
+          security_context {
+            privileged = true
+          }
+        }
+
+        container {
+          name              = "caddy"
+          image             = "quay.io/defn/dev:latest"
+          image_pull_policy = "Always"
+
+          command = ["/usr/bin/tini", "--"]
+          args    = ["bash", "-c", "(echo \"https://${each.key}-0.${each.value.domain} {\"; echo 'reverse_proxy http://localhost:8888'; echo '}') > Caddyfile; exec sudo `~ubuntu/bin/e asdf which caddy` run"]
+
+          volume_mount {
+            name       = "tsrun"
+            mount_path = "/var/run/tailscale"
           }
         }
 
