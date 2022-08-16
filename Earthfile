@@ -259,6 +259,7 @@ toolVersions:
 
 coderServer:
     ARG arch
+    ARG CODESERVER
 
     FROM +root --arch=${arch}
 
