@@ -220,7 +220,7 @@ resource "kubernetes_stateful_set" "dev" {
           image_pull_policy = "Always"
 
           command = ["/usr/bin/tini", "--"]
-          args    = ["bash", "-c", "(echo \"https://${each.key}.${each.value.domain} {\"; echo 'reverse_proxy http://localhost:8888'; echo '}') > Caddyfile; exec sudo `~ubuntu/bin/e asdf which caddy` run"]
+          args    = ["bash", "-c", "(echo \"https://${each.key}-0.${each.value.domain} {\"; echo 'reverse_proxy http://localhost:8888'; echo '}') > Caddyfile; exec sudo `~ubuntu/bin/e asdf which caddy` run"]
 
           volume_mount {
             name       = "tsrun"
