@@ -50,19 +50,19 @@ init-inner:
 		git checkout -- .gitconfig; \
 		fi
 
-	cd work/password-store && git pull
-	rsync -ia .password-store/home/.gnupg/. .gnupg/.
-	chmod 0700 ~/.gnupg/. ~/.gnupg2/.
+	cd ~/.password-store && git pull
+	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
+	chmod 0700 ~/.gnupg/. ~/.gnupg2/. ~/.password-store/home/.gnupg
+	$(MAKE) git-crypt-unlock
+
+	$(MAKE) kubeconfig
+	-$(MAKE) argocd-login
+
+	sudo tailscale up --ssh --accept-dns=false
 
 	-git clone https://github.com/defn/dev work/dev
 
 	if echo $$VSCODE_GIT_ASKPASS_NODE | grep local/lib/code-server; then $(MAKE) init-code-server; else $(MAKE) init-vscode; fi
-
-	$(MAKE) git-crypt-unlock
-	$(MAKE) kubeconfig
-	$(MAKE) login
-
-	sudo tailscale up --ssh --accept-dns=false
 
 init-code-server:
 	-gpg-agent --daemon
@@ -125,17 +125,18 @@ kubeconfig:
 		skaffold config set --kube-context pod local-cluster true; \
 		fi
 	#kumactl config control-planes add --overwrite --name pod --address http://kuma-control-plane-x-kuma-x-vc0.vc0.svc:5681
-	if vcluster connect vcluster --kube-config ~/.kube/vcluster --kube-config-context-name vcluster --update-current=false --server vcluster.vcluster.svc.cluster.local; then \
-		env KUBECONFIG=~/.kube/config:~/.kube/vcluster kubectl config view --flatten > ~/.kube/config.1; \
-		mv ~/.kube/config.1 ~/.kube/config; \
-		$(MAKE) argocd-login; \
-		argocd cluster add vcluster --yes; \
-		fi
 	touch ~/.kube/config
 	chmod 0600 ~/.kube/config
 	-k3d kubeconfig merge -a -d
 	-kubectl config set-cluster $(context) --server=https://$(context).$(domain):6443
 	k config get-contexts
+
+vclusterconfig:
+	if vcluster connect vcluster --kube-config ~/.kube/vcluster --kube-config-context-name vcluster --update-current=false --server vcluster.vcluster.svc.cluster.local; then \
+		env KUBECONFIG=~/.kube/config:~/.kube/vcluster kubectl config view --flatten > ~/.kube/config.1; \
+		mv ~/.kube/config.1 ~/.kube/config; \
+		argocd cluster add vcluster --yes; \
+		fi
 
 asdf:
 	cat .tool-versions| awk '{print $$1}' | while read -r a; do asdf list-all "$$a" | sed "s#^#$$a #"; done | sort > .tool-versions-all
