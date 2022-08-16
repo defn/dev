@@ -38,6 +38,7 @@ init-inner:
 	if test -d /mnt/lost+found; then sudo install -d -m 0700 -o ubuntu -g ubuntu /mnt/work; ln -nfs /mnt/work .; fi
 	if ! test -d work/.; then mkdir -p work; fi
 
+	$(MAKE) github-login
 	-git clone https://github.com/jojomomojo/password-store work/password-store
 	cd work/password-store && git pull
 	rsync -ia .password-store/home/.gnupg/. .gnupg/.
@@ -80,14 +81,14 @@ login:
 	chmod 700 ~/.password-store/home/.gnupg ~/.gnupg
 	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
 	chmod 700 ~/.password-store/home/.gnupg ~/.gnupg
+	$(MAKE) github-login
 	cd ~/.password-store && git pull
 	$(MAKE) git-crypt-unlock
-	if ! gh auth status; then echo $(MAKE) github-login; fi
 	$(MAKE) kubeconfig
 	-$(MAKE) argocd-login
 
 github-login:
-	gh auth login -p https -h github.com -w
+	if ! gh auth status; then gh auth login -p https -h github.com -w; fi
 
 argocd-login:
 	argocd login --insecure argocd-server.argocd.svc --username admin --password adminadmin \
