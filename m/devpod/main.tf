@@ -134,8 +134,8 @@ resource "kubernetes_stateful_set" "dev" {
           }
 
           volume_mount {
-            name       = "certs"
-            mount_path = "/var/lib/tailscale/certs"
+            name       = "tailscale"
+            mount_path = "/var/lib/tailscale"
           }
 
           security_context {
