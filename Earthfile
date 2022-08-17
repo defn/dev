@@ -70,8 +70,6 @@ root:
     RUN echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu
     RUN install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
 
-    COPY etc/daemon.json /etc/docker/daemon.json
-
     RUN apt update && apt upgrade -y
     RUN ln -sf /usr/share/zoneinfo/UTC /etc/localtime \
         && dpkg-reconfigure -f noninteractive tzdata \
@@ -86,6 +84,8 @@ root:
 
     RUN chown -R ubuntu:ubuntu /home/ubuntu
     RUN chmod u+s /usr/bin/sudo
+
+    COPY etc/daemon.json /etc/docker/daemon.json
 
     USER ubuntu
     WORKDIR /home/ubuntu
@@ -839,3 +839,13 @@ pipx:
     SAVE ARTIFACT --symlink-no-follow .asdf
     SAVE ARTIFACT --symlink-no-follow .local
     SAVE ARTIFACT --symlink-no-follow .cache
+
+test:
+    ARG arch
+
+    FROM +root --arch=${arch}
+
+    COPY docker-compose.yml ./ 
+    WITH DOCKER --compose docker-compose.yml
+        RUN docker compose ps
+    END
