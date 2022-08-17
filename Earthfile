@@ -7,6 +7,16 @@ meh:
     RUN --secret meh echo ${meh} | base64 -d > /home/ubuntu/.kube/config
     RUN --no-cache ~/bin/e argo submit etc/hello-workflow.yaml --log
 
+test:
+    ARG arch=amd64
+
+    FROM --platform=linux/amd64 +user --arch=${arch}
+
+    COPY docker-compose.yml ./ 
+    WITH DOCKER --compose docker-compose.yml
+        RUN docker compose ps
+    END
+
 images:
     ARG repo
     BUILD +amd --repo=${repo}
@@ -839,13 +849,3 @@ pipx:
     SAVE ARTIFACT --symlink-no-follow .asdf
     SAVE ARTIFACT --symlink-no-follow .local
     SAVE ARTIFACT --symlink-no-follow .cache
-
-test:
-    ARG arch
-
-    FROM +root --arch=${arch}
-
-    COPY docker-compose.yml ./ 
-    WITH DOCKER --compose docker-compose.yml
-        RUN docker compose ps
-    END

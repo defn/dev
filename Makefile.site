@@ -51,6 +51,10 @@ recreate-pod: # Recreate pod
 stop: # Stop k3d
 	k3d cluster stop $(k3d_name)
 
+test:
+	pass hello
+	earthly --remote-cache=$(cache)defn/cache:updates-$@ --no-output +test --repo=$${repo:-quay.io/}
+
 images:
 	pass hello
 	if [[ "$(shell pwd)" == "$(HOME)" ]]; then git pull; git push; cd work/dev && git pull && $(MAKE) $@; else repo=$(repo); earthly --remote-cache=$(cache)defn/cache:updates-$@ --no-output $(push) +images --repo=$${repo:-quay.io/}; fi
