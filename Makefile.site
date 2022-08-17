@@ -92,6 +92,7 @@ this:
 	mkdir tmp
 	mkdir -p tmp/$(name)/var/lib/tailscale
 	pass tailscale_k3d-$(name) | base64 -d > tmp/$(name)/var/lib/tailscale/tailscaled.state
+	pass tailscale_$(name)-0 | base64 -d > tmp/$(name)/var/lib/tailscale-pod/tailscaled.state
 	env DEFN_DEV_ARCHIVE="$$(cd tmp/$(name) && tar cvf - . | base64)" DEFN_DEV_HOST=k3d-$(name).${domain} DEFN_DEV_HOST_API=127.0.0.1 DEFN_DEV_IP="$$(host k3d-$(name).$(domain) | grep 'has address' | awk '{print $$NF}')" $(MAKE) cluster name=$(name)
 	kubectl rollout -n argocd status deployment argocd-server --watch
 	kubectl rollout -n default status statefulset $(name) --watch

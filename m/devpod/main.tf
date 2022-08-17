@@ -31,20 +31,6 @@ resource "kubernetes_stateful_set" "dev" {
       }
     }
 
-    volume_claim_template {
-      metadata {
-        name = "tailscale"
-      }
-      spec {
-        access_modes = ["ReadWriteOnce"]
-        resources {
-          requests = {
-            storage = "1G"
-          }
-        }
-      }
-    }
-
     template {
       metadata {
         labels = {
@@ -88,6 +74,13 @@ resource "kubernetes_stateful_set" "dev" {
           name = "docker"
           host_path {
             path = "/var/run/docker.sock"
+          }
+        }
+
+        volume {
+          name = "tailscale"
+          host_path {
+            path = "/var/lib/tailscale-pod"
           }
         }
 
