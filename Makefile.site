@@ -53,7 +53,7 @@ stop: # Stop k3d
 
 test:
 	pass hello
-	earthly --remote-cache=$(cache)defn/cache:updates-$@ --no-output +test --repo=$${repo:-quay.io/}
+	earthly --remote-cache=$(cache)defn/cache:updates-images --no-output +test --repo=$${repo:-quay.io/}
 
 images:
 	pass hello
