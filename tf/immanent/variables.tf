@@ -1,9 +1,9 @@
 locals {
   envs = {
     "imma" = {
-      host    = "k3d-imma.tiger-mamba.ts.net"
+      host    = "k3d-immanent.tiger-mamba.ts.net"
       domain  = "tiger-mamba.ts.net"
-      ip      = "100.79.73.124"
+      ip      = "100.112.131.116"
       workdir = "/home/ubuntu"
     }
   }
