@@ -8,12 +8,12 @@ meh:
     RUN --no-cache ~/bin/e argo submit etc/hello-workflow.yaml --log
 
 test:
-    FROM quay.io/defn/dev
+    FROM earthly/dind 
 
     COPY docker-compose.yml ./ 
 
     WITH DOCKER --compose docker-compose.yml
-        RUN docker compose ps
+        RUN --no-cache docker-compose ps
     END
 
 images:
