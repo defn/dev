@@ -274,7 +274,7 @@ coderServer:
 
     RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local
     RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
-    RUN for a in betterthantomorrow.calva betterthantomorrow.joyride eamodio.gitlens ms-python.python vscodevim.vim; do /home/ubuntu/.local/bin/code-server --install-extension "$a"; done
+    RUN for a in betterthantomorrow.calva betterthantomorrow.joyride ms-python.python vscodevim.vim; do /home/ubuntu/.local/bin/code-server --install-extension "$a"; done
     RUN git clone https://github.com/cue-sh/vscode-cue /home/ubuntu/.local/share/code-server/extensions/vscode-cue
 
     SAVE ARTIFACT .local
