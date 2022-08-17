@@ -8,11 +8,10 @@ meh:
     RUN --no-cache ~/bin/e argo submit etc/hello-workflow.yaml --log
 
 test:
-    ARG arch=amd64
-
-    FROM --platform=linux/amd64 +user --arch=${arch}
+    FROM quay.io/defn/dev
 
     COPY docker-compose.yml ./ 
+
     WITH DOCKER --compose docker-compose.yml
         RUN docker compose ps
     END
