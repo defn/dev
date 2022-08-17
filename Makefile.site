@@ -86,13 +86,13 @@ provision-digital-ocean:
 debug-host:
 	pod debug "node/$$(pod get nodes -o json | jq -r '.items[0].metadata.name')" --image quay.io/defn/dev -it -- bash
 
-imma:
+this:
 	$(MAKE) macos
 	rm -rf tmp
 	mkdir tmp
-	mkdir -p tmp/$@/var/lib/tailscale
-	pass tailscale_k3d-$@ | base64 -d > tmp/$@/var/lib/tailscale/tailscaled.state
-	env DEFN_DEV_ARCHIVE="$$(cd tmp/$@ && tar cvf - . | base64)" DEFN_DEV_HOST=k3d-$@.${domain} DEFN_DEV_HOST_API=127.0.0.1 DEFN_DEV_IP="$$(host k3d-$@.$(domain) | grep 'has address' | awk '{print $$NF}')" $(MAKE) cluster name=$@
+	mkdir -p tmp/$(name)/var/lib/tailscale
+	pass tailscale_k3d-$(name) | base64 -d > tmp/$(name)/var/lib/tailscale/tailscaled.state
+	env DEFN_DEV_ARCHIVE="$$(cd tmp/$(name) && tar cvf - . | base64)" DEFN_DEV_HOST=k3d-$(name).${domain} DEFN_DEV_HOST_API=127.0.0.1 DEFN_DEV_IP="$$(host k3d-$(name).$(domain) | grep 'has address' | awk '{print $$NF}')" $(MAKE) cluster name=$(name)
 	kubectl rollout -n argocd status deployment argocd-server --watch
-	kubectl rollout -n default status statefulset $@ --watch
-	$(MAKE) attach name=$@
+	kubectl rollout -n default status statefulset $(name) --watch
+	$(MAKE) attach name=$name)
