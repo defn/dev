@@ -55,10 +55,10 @@ init-inner:
 	chmod 0700 ~/.gnupg/. ~/.gnupg2/. ~/.password-store/home/.gnupg
 	$(MAKE) git-crypt-unlock
 
+	sudo tailscale up --accept-dns=false --ssh --hostname=$(name)-0
+
 	$(MAKE) kubeconfig
 	-$(MAKE) argocd-login
-
-	sudo tailscale up --ssh --accept-dns=false
 
 	-git clone https://github.com/defn/dev work/dev
 
