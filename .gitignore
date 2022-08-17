@@ -79,3 +79,4 @@ node_modules
 /fly
 Caddyfile
 .tool-versions
+.steampipe

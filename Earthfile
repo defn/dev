@@ -187,6 +187,10 @@ user:
     # rerun-process-wrapper
     COPY (+rerun-process-wrapper/*) /
 
+    # steampipe
+    COPY --chown=ubuntu:ubuntu (+steampipe/* --arch=${arch}) /usr/local/bin/
+    RUN steampipe plugin install kubernetes
+
     # arch2: flyctl
     IF [ ${arch} = "arm64" ]
         COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
@@ -438,8 +442,9 @@ loft:
 
 steampipe:
     ARG arch
+    ARG STEAMPIPE
     FROM +tools --arch=${arch}
-    RUN --secret STEAMPIPE curl -sSL https://github.com/turbot/steampipe/releases/download/v${STEAMPIPE}/steampipe_linux_${arch}.tar.gz | tar xvfz -
+    RUN curl -sSL https://github.com/turbot/steampipe/releases/download/v${STEAMPIPE}/steampipe_linux_${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT steampipe
 
 gh:
