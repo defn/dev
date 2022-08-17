@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: k3d-imma
+  name: k3d-immanent
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/defn/dev
-    path: e/k3d-imma
+    path: e/k3d-immanent
     targetRevision: main
   destination:
     name: in-cluster

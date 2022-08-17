@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: k3d-imma
+  name: k3d-immanent
   namespace: argocd
 spec:
   generators:
@@ -53,7 +53,7 @@ spec:
             path: dev
   template:
     metadata:
-      name: "k3d-imma-{{name}}"
+      name: "k3d-immanent-{{name}}"
       namespace: argocd
     spec:
       project: default
