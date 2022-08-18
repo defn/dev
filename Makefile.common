@@ -33,8 +33,6 @@ init:
 	-$(MAKE) init-site
 
 init-inner:
-	sudo tailscale up --accept-dns=false --ssh --hostname=$(name)-0
-
 	-if test -d work; then rmdir work; fi
 	if test -d /work; then sudo install -d -m 0700 -o ubuntu -g ubuntu /work; ln -nfs /work .; fi
 	if test -d /mnt/lost+found; then sudo install -d -m 0700 -o ubuntu -g ubuntu /mnt/work; ln -nfs /mnt/work .; fi
