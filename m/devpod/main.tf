@@ -82,7 +82,7 @@ resource "kubernetes_stateful_set" "dev" {
         volume {
           name = "tailscale"
           host_path {
-            path = "/var/lib/tailscale-pod"
+            path = "/var/lib/tailscale/pod/var/lib/tailscale"
           }
         }
 
