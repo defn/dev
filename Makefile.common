@@ -55,14 +55,13 @@ init-inner:
 	cd ~/.password-store && git pull
 	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
 	chmod 0700 ~/.gnupg/. ~/.gnupg2/. ~/.password-store/home/.gnupg
+
+	if echo $$VSCODE_GIT_ASKPASS_NODE | grep local/lib/code-server; then $(MAKE) init-code-server; else $(MAKE) init-vscode; fi
+
 	$(MAKE) git-crypt-unlock
 
 	$(MAKE) kubeconfig
 	-$(MAKE) argocd-login
-
-	-git clone https://github.com/defn/dev work/dev
-
-	if echo $$VSCODE_GIT_ASKPASS_NODE | grep local/lib/code-server; then $(MAKE) init-code-server; else $(MAKE) init-vscode; fi
 
 init-code-server:
 	-gpg-agent --daemon
