@@ -53,19 +53,16 @@ init-inner:
 	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
 	chmod 0700 ~/.gnupg/. ~/.gnupg2/. ~/.password-store/home/.gnupg
 
-	if echo $$VSCODE_GIT_ASKPASS_NODE | grep local/lib/code-server; then $(MAKE) init-code-server; else $(MAKE) init-vscode; fi
+	if echo $$VSCODE_GIT_ASKPASS_NODE | grep local/lib/code-server; then $(MAKE) init-gpg; fi
+	if test -z "$$VSCODE_GIT_ASKPASS_NODE"; then $(MAKE) init-gpg; fi
 
 	$(MAKE) git-crypt-unlock
 
-	$(MAKE) kubeconfig
-	-$(MAKE) argocd-login
+	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then $(MAKE) kubeconfig; $(MAKE) argocd-login || true; fi
 
-init-code-server:
+init-gpg:
 	-gpg-agent --daemon
 	gpg --import .password-store/keys/EBE020A544E04B9C67215280B8B6F42683E6CCEF/private.gpg
-
-init-vscode:
-	@true
 
 tilt:
 	env tilt up --context pod --port $(tilt_port)
