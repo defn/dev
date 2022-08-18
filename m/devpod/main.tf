@@ -102,11 +102,6 @@ resource "kubernetes_stateful_set" "dev" {
           tty = true
 
           env {
-            name  = "DEFN_DEV_WORKDIR"
-            value = each.value.workdir
-          }
-
-          env {
             name  = "DEFN_DEV_HOST"
             value = each.value.host
           }
@@ -140,11 +135,6 @@ resource "kubernetes_stateful_set" "dev" {
           args    = ["bash", "-c", "while true; do if test -S /var/run/tailscale/tailscaled.sock; then break; fi; sleep 1; done; sudo tailscale up --ssh --accept-dns=false --hostname=${each.key}-0; exec ~/bin/e code-server --bind-addr 0.0.0.0:8888 --disable-telemetry"]
 
           tty = true
-
-          env {
-            name  = "DEFN_DEV_WORKDIR"
-            value = each.value.workdir
-          }
 
           env {
             name  = "DEFN_DEV_HOST"
