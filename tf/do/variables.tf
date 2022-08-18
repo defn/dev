@@ -26,8 +26,6 @@ locals {
   version = "1.23"
   size    = "s-2vcpu-4gb"
 
-  tailscale_domain = "tiger-mamba.ts.net"
-
   archives = {
     global = var.archive_global
     defn   = var.archive_defn
@@ -36,16 +34,14 @@ locals {
 
   droplet = {
     defn = {
-      context      = "k3d-defn"
-      host         = "k3d-defn.tiger-mamba.ts.net"
-      ip           = "100.101.82.85"
+      host         = "k3d-defn"
+      domain       = "tiger-mamba.ts.net"
       droplet_size = "s-2vcpu-4gb"
     }
 
     global = {
-      context      = "k3d-global"
-      host         = "k3d-global.tiger-mamba.ts.net"
-      ip           = "100.112.92.65"
+      host         = "k3d-global"
+      domain       = "tiger-mamba.ts.net"
       droplet_size = "s-1vcpu-2gb"
     }
   }

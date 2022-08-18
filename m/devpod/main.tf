@@ -61,11 +61,6 @@ resource "kubernetes_stateful_set" "dev" {
         }
 
         volume {
-          name = "earthly"
-          empty_dir {}
-        }
-
-        volume {
           name = "dind"
           empty_dir {}
         }
@@ -109,11 +104,6 @@ resource "kubernetes_stateful_set" "dev" {
             value = each.value.host
           }
 
-          env {
-            name  = "DEFN_DEV_IP"
-            value = each.value.ip
-          }
-
           volume_mount {
             name       = "docker"
             mount_path = "/var/run/docker.sock"
@@ -152,11 +142,6 @@ resource "kubernetes_stateful_set" "dev" {
           env {
             name  = "DEFN_DEV_HOST"
             value = each.value.host
-          }
-
-          env {
-            name  = "DEFN_DEV_IP"
-            value = each.value.ip
           }
 
           env {
@@ -200,6 +185,11 @@ resource "kubernetes_stateful_set" "dev" {
           volume_mount {
             name       = "tailscale"
             mount_path = "/var/lib/tailscale"
+          }
+
+          volume_mount {
+            name       = "earthly"
+            mount_path = "/mnt/earthly"
           }
 
           security_context {
@@ -265,20 +255,14 @@ resource "kubernetes_stateful_set" "dev" {
             value = "90"
           }
 
-          volume_mount {
-            name       = "earthly"
-            mount_path = "/tmp/earthly"
-          }
-
           security_context {
             privileged = true
           }
-
         }
 
         container {
           name              = "docker"
-          image             = "docker:dind"
+          image             = " earthly/dind:alpine"
           image_pull_policy = "IfNotPresent"
 
           command = ["dockerd", "--host", "tcp://127.0.0.1:2375"]

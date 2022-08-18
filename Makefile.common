@@ -152,7 +152,7 @@ attach-remo:
 
 join:
 	cd d/k3d && $(MAKE) build name=$(context)
-	@env DEFN_DEV_HOST=${context}.${domain} DEFN_DEV_IP="$$(host ${context}.${domain} | grep 'has address' | awk '{print $$NF}')" $(MAKE) $@-inner join="$$(kubectl config view -o jsonpath='{.clusters[?(@.name == "$(to)")].cluster.server}')" token="$(shell docker exec $(to)-server-0 cat /var/lib/rancher/k3s/server/node-token)" name=$(name)
+	@env DEFN_DEV_HOST=${context}.${domain} $(MAKE) $@-inner join="$$(kubectl config view -o jsonpath='{.clusters[?(@.name == "$(to)")].cluster.server}')" token="$(shell docker exec $(to)-server-0 cat /var/lib/rancher/k3s/server/node-token)" name=$(name)
 
 cluster:
 	cd d/k3d && $(MAKE) build name=$(context)

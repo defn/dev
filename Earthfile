@@ -1,4 +1,4 @@
-VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-arg --use-copy-link 0.6
+VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-arg --use-copy-link --use-registry-for-with-docker 0.6
 
 IMPORT github.com/defn/cloud/lib:master AS lib
 
@@ -7,13 +7,16 @@ meh:
     RUN --secret meh echo ${meh} | base64 -d > /home/ubuntu/.kube/config
     RUN --no-cache ~/bin/e argo submit etc/hello-workflow.yaml --log
 
+test-redis:
+    FROM redis:alpine
+
 test:
-    FROM earthly/dind 
+    FROM earthly/dind:alpine
 
     COPY docker-compose.yml ./ 
 
-    WITH DOCKER --compose docker-compose.yml
-        RUN --no-cache docker-compose ps
+    WITH DOCKER --allow-privileged --pull redis:alpine --load defn/redis=+test-redis --compose docker-compose.yml
+        RUN --no-cache echo; echo; echo; docker-compose ps; echo; echo; echo
     END
 
 images:

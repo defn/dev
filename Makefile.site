@@ -66,13 +66,6 @@ amd arm:
 shell:
 	docker run --rm -ti $(repo)defn/dev bash -l
 
-cert-ts:
-	sudo chown ubuntu /var/lib/tailscale/certs
-	sudo chown ubuntu /var/lib/tailscale/certs/k3d-*
-	-k --context pod create -n traefik secret generic default-certificate \
-		--from-file=tls.key=/var/lib/tailscale/certs/k3d-immanent.tiger-mamba.ts.net.key \
-		--from-file=tls.crt=/var/lib/tailscale/certs/k3d-immanent.tiger-mamba.ts.net.crt
-
 cert:
 	-k --context pod create ns traefik
 	touch meh.json; chmod 0600 meh.json
@@ -98,7 +91,7 @@ this:
 	mkdir -p tmp/$(name)/var/lib/tailscale-pod
 	pass tailscale_k3d-$(name) | base64 -d > tmp/$(name)/var/lib/tailscale/tailscaled.state
 	pass tailscale_$(name)-0 | base64 -d > tmp/$(name)/var/lib/tailscale-pod/tailscaled.state
-	env DEFN_DEV_ARCHIVE="$$(cd tmp/$(name) && tar cvf - . | base64)" DEFN_DEV_HOST=k3d-$(name).${domain} DEFN_DEV_HOST_API=127.0.0.1 DEFN_DEV_IP="$$(host k3d-$(name).$(domain) | grep 'has address' | awk '{print $$NF}')" $(MAKE) cluster name=$(name)
+	env DEFN_DEV_ARCHIVE="$$(cd tmp/$(name) && tar cvf - . | base64)" DEFN_DEV_HOST=k3d-$(name).${domain} DEFN_DEV_HOST_API=127.0.0.1 k3d-$(name).$(domain) $(MAKE) cluster name=$(name)
 	kubectl rollout -n argocd status deployment argocd-server --watch
 	kubectl rollout -n default status statefulset $(name) --watch
 	$(MAKE) attach name=$(name)
