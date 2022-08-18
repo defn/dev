@@ -66,6 +66,13 @@ resource "kubernetes_stateful_set" "dev" {
         }
 
         volume {
+          name = "earthly"
+          host_path {
+            path = "/mnt/earthly
+          }
+        }
+
+        volume {
           name = "docker"
           host_path {
             path = "/var/run/docker.sock"
@@ -187,11 +194,6 @@ resource "kubernetes_stateful_set" "dev" {
             mount_path = "/var/lib/tailscale"
           }
 
-          volume_mount {
-            name       = "earthly"
-            mount_path = "/mnt/earthly"
-          }
-
           security_context {
             privileged = true
           }
@@ -255,6 +257,11 @@ resource "kubernetes_stateful_set" "dev" {
             value = "90"
           }
 
+          volume_mount {
+            name       = "earthly"
+            mount_path = "/tmp/earthly"
+          }
+
           security_context {
             privileged = true
           }
@@ -262,7 +269,7 @@ resource "kubernetes_stateful_set" "dev" {
 
         container {
           name              = "docker"
-          image             = " earthly/dind:alpine"
+          image             = "earthly/dind:alpine"
           image_pull_policy = "IfNotPresent"
 
           command = ["dockerd", "--host", "tcp://127.0.0.1:2375"]
