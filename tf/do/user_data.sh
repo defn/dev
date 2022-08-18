@@ -9,7 +9,7 @@ function main {
     cd ~ubuntu
     sudo -u ubuntu -H git fetch
     sudo -u ubuntu -H git reset --hard origin/main
-    sudo -u ubuntu -H bin/e env DEFN_DEV_HOST=${host} DEFN_DEV_HOST_API=${host} DEFN_DEV_ARCHIVE=${archive} make provision-digital-ocean
+    sudo -u ubuntu -H bin/e env DEFN_DEV_HOST=${host}.${domain} DEFN_DEV_HOST_API=${host}.${domain} DEFN_DEV_ARCHIVE=${archive} make provision-digital-ocean
 }
 
 main "$@"
