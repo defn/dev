@@ -185,6 +185,11 @@ resource "kubernetes_stateful_set" "dev" {
           args    = ["sudo", "tailscaled", "--statedir", "/var/lib/tailscale"]
 
           volume_mount {
+            name       = "work"
+            mount_path = "/work"
+          }
+
+          volume_mount {
             name       = "tsrun"
             mount_path = "/var/run/tailscale"
           }
