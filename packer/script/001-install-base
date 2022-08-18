@@ -52,7 +52,6 @@ function main {
   echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu
 
   install -m 0700 -d -o ubuntu -g ubuntu /mnt/work
-  install -m 0700 -d -o ubuntu -g ubuntu /mnt/tools
   install -m 0700 -d -o ubuntu -g ubuntu /mnt/earthly
 }
 

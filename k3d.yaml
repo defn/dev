@@ -14,9 +14,6 @@ volumes:
   - volume: earthly:/mnt/earthly
     nodeFilters:
       - server:0
-  - volume: tools:/mnt/tools
-    nodeFilters:
-      - server:0
   - volume: /var/run/docker.sock:/var/run/docker.sock
     nodeFilters:
       - server:0
