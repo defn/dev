@@ -43,14 +43,14 @@ init-inner:
 	-sudo chgrp docker /var/run/docker.sock
 	-sudo chmod 770 /var/run/docker.sock
 
-	$(MAKE) github-login
-	if [[ ! -f .gitconfig ]]; then \
-		rm -f .gitconfig; \
-		(echo '[credential "https://github.com"]'; echo 'helper = !/usr/local/bin/gh auth git-credential') > .gitconfig; \
-		gh repo clone amanibhavam/password-store work/password-store; \
-		rm -f .gitconfig; \
-		git checkout -- .gitconfig; \
-		fi
+#	$(MAKE) github-login
+#	if [[ ! -f .gitconfig ]]; then \
+#		rm -f .gitconfig; \
+#		(echo '[credential "https://github.com"]'; echo 'helper = !/usr/local/bin/gh auth git-credential') > .gitconfig; \
+#		gh repo clone amanibhavam/password-store work/password-store; \
+#		rm -f .gitconfig; \
+#		git checkout -- .gitconfig; \
+#		fi
 
 	cd ~/.password-store && git pull
 	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
@@ -88,7 +88,7 @@ login:
 	chmod 700 ~/.password-store/home/.gnupg ~/.gnupg
 	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
 	chmod 700 ~/.password-store/home/.gnupg ~/.gnupg
-	$(MAKE) github-login
+	#$(MAKE) github-login
 	cd ~/.password-store && git pull
 	$(MAKE) git-crypt-unlock
 	$(MAKE) kubeconfig
