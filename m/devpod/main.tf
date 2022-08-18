@@ -68,7 +68,7 @@ resource "kubernetes_stateful_set" "dev" {
         volume {
           name = "earthly"
           host_path {
-            path = "/mnt/earthly
+            path = "/mnt/earthly"
           }
         }
 
