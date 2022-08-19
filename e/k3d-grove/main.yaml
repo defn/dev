@@ -43,6 +43,10 @@ spec:
             namespace: default
             cluster: in-cluster
             path: dev
+          - name: kuma-remote
+            namespace: kuma
+            cluster: in-cluster
+            path: kuma-remote
   template:
     metadata:
       name: "k3d-grove-{{name}}"
