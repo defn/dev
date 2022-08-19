@@ -1,4 +1,0 @@
-namespace: demo
-
-resources:
-- mesh.yaml

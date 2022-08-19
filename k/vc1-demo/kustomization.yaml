@@ -1,6 +1,0 @@
-namespace: demo
-
-resources:
-- ns.yaml
-- hello.yaml
-- dev.yaml
