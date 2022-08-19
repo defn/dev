@@ -219,7 +219,6 @@ earthly/earthly v0.6.6 v0.6.6
 earthly/earthly v0.6.7 v0.6.7
 earthly/earthly v0.6.8 v0.6.8
 earthly/earthly v0.6.9 v0.6.9
-hofstadter-io/hof v0.5.14 v0.5.14
 hofstadter-io/hof v0.5.15 v0.5.15
 hofstadter-io/hof v0.5.16 v0.5.16
 hofstadter-io/hof v0.5.17 v0.5.17
@@ -249,6 +248,7 @@ hofstadter-io/hof v0.6.5-beta.4 v0.6.5-beta.4
 hofstadter-io/hof v0.6.5-rc.1 v0.6.5-rc.1
 hofstadter-io/hof v0.6.5-rc.2 v0.6.5-rc.2
 hofstadter-io/hof v0.6.5 v0.6.5
+hofstadter-io/hof v0.6.6 v0.6.6
 justjanne/powerline-go Added v1.7.0
 justjanne/powerline-go Add v1.8.0
 justjanne/powerline-go Fixed v1.3.2
@@ -318,11 +318,11 @@ knative/client Knative knative-v1.4.0
 knative/client Knative knative-v1.4.1
 knative/client Knative knative-v1.5.0
 knative/client Knative knative-v1.6.0
+knative/client Knative knative-v1.6.1
 knative/client Knative v0.17.1
 knative/client Knative v0.17.2
 knative/client Knative v0.17.3
 knative/client Knative v0.17.4
-knative/client Knative v0.18.0
 knative/client Knative v0.18.1
 knative/client Knative v0.18.2
 knative/client Knative v0.18.3
@@ -412,7 +412,7 @@ loft-sh/vcluster v0.11.0 v0.11.0
 loft-sh/vcluster v0.11.1-beta.0 v0.11.1-beta.0
 loft-sh/vcluster v0.11.1-beta.1 v0.11.1-beta.1
 loft-sh/vcluster v0.11.1 v0.11.1
-loft-sh/vcluster v0.8.0-alpha.0 v0.8.0-alpha.0
+loft-sh/vcluster v0.11.2-alpha.0 v0.11.2-alpha.0
 loft-sh/vcluster v0.8.0-alpha.1 v0.8.0-alpha.1
 loft-sh/vcluster v0.8.0-alpha.2 v0.8.0-alpha.2
 loft-sh/vcluster v0.8.0-alpha.3 v0.8.0-alpha.3
@@ -478,6 +478,7 @@ sigstore/cosign v1.10.0-rc.1 v1.10.0-rc.1
 sigstore/cosign v1.10.0 v1.10.0
 sigstore/cosign v1.10.1 v1.10.1
 sigstore/cosign v1.1.0 v1.1.0
+sigstore/cosign v1.11.0 v1.11.0
 sigstore/cosign v1.2.0 v1.2.0
 sigstore/cosign v1.2.1 v1.2.1
 sigstore/cosign v1.3.0 v1.3.0
@@ -545,11 +546,6 @@ smallstep/cli Step v0.19.0
 smallstep/cli Step v0.20.0
 smallstep/cli Step v0.21.0
 smallstep/cli v0.17.3-rc26 v0.17.3-rc26
-superfly/flyctl v0.0.360 v0.0.360
-superfly/flyctl v0.0.361-pre-1 v0.0.361-pre-1
-superfly/flyctl v0.0.361-pre-2 v0.0.361-pre-2
-superfly/flyctl v0.0.361 v0.0.361
-superfly/flyctl v0.0.362-pre-1 v0.0.362-pre-1
 superfly/flyctl v0.0.362 v0.0.362
 superfly/flyctl v0.0.363-pre-1 v0.0.363-pre-1
 superfly/flyctl v0.0.363-pre-2 v0.0.363-pre-2
@@ -575,6 +571,11 @@ superfly/flyctl v0.0.371-pre-1 v0.0.371-pre-1
 superfly/flyctl v0.0.371-pre-2 v0.0.371-pre-2
 superfly/flyctl v0.0.371 v0.0.371
 superfly/flyctl v0.0.372 v0.0.372
+superfly/flyctl v0.0.373 v0.0.373
+superfly/flyctl v0.0.374 v0.0.374
+superfly/flyctl v0.0.375-pre-1 v0.0.375-pre-1
+superfly/flyctl v0.0.375 v0.0.375
+superfly/flyctl v0.0.376 v0.0.376
 tilt-dev/tilt v0.23.5 v0.23.5
 tilt-dev/tilt v0.23.6 v0.23.6
 tilt-dev/tilt v0.23.7 v0.23.7
@@ -605,10 +606,6 @@ tilt-dev/tilt v0.30.4 v0.30.4
 tilt-dev/tilt v0.30.5 v0.30.5
 tilt-dev/tilt v0.30.6 v0.30.6
 tilt-dev/tilt v0.30.7 v0.30.7
-turbot/steampipe v0.14.5 v0.14.5
-turbot/steampipe v0.14.6 v0.14.6
-turbot/steampipe v0.15.0-alpha.2 v0.15.0-alpha.2
-turbot/steampipe v0.15.0-rc.0 v0.15.0-rc.0
 turbot/steampipe v0.15.0-rc.1 v0.15.0-rc.1
 turbot/steampipe v0.15.0-rc.2 v0.15.0-rc.2
 turbot/steampipe v0.15.0-rc.3 v0.15.0-rc.3
@@ -622,6 +619,7 @@ turbot/steampipe v0.15.3 v0.15.3
 turbot/steampipe v0.15.4 v0.15.4
 turbot/steampipe v0.16.0-rc.0 v0.16.0-rc.0
 turbot/steampipe v0.16.0-rc.10 v0.16.0-rc.10
+turbot/steampipe v0.16.0-rc.11 v0.16.0-rc.11
 turbot/steampipe v0.16.0-rc.1 v0.16.0-rc.1
 turbot/steampipe v0.16.0-rc.2 v0.16.0-rc.2
 turbot/steampipe v0.16.0-rc.3 v0.16.0-rc.3
@@ -635,6 +633,9 @@ turbot/steampipe v0.17.0-alpha.0 v0.17.0-alpha.0
 turbot/steampipe v0.17.0-alpha.1 v0.17.0-alpha.1
 turbot/steampipe v0.17.0-alpha.2 v0.17.0-alpha.2
 turbot/steampipe v0.17.0-alpha.3 v0.17.0-alpha.3
+turbot/steampipe v0.17.0-alpha.4 v0.17.0-alpha.4
+turbot/steampipe v0.17.0-alpha.5 v0.17.0-alpha.5
+turbot/steampipe v0.17.0-alpha.6 v0.17.0-alpha.6
 Wilfred/difftastic 0.26.1 0.26.1
 Wilfred/difftastic 0.26.2 0.26.2
 Wilfred/difftastic 0.26.3 0.26.3
