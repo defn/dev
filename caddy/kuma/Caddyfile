@@ -1,0 +1,3 @@
+https://grove-0.tiger-mamba.ts.net:5681 {
+	reverse_proxy http://k3d-immanent.tiger-mamba.ts.net:5681
+}
