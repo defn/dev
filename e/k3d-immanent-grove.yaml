@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: k3d-immanent-grove
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/defn/dev
+    path: e/k3d-immanent-grove
+    targetRevision: main
+  destination:
+    name: in-cluster
+  syncPolicy:
+    automated:
+      prune: true
