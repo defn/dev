@@ -7,10 +7,6 @@ spec:
   generators:
     - list:
         elements:
-          - name: kyverno
-            namespace: kyverno
-            path: kyverno
-            cluster: in-cluster
           - name: argocd
             namespace: argocd
             cluster: in-cluster
