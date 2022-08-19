@@ -35,10 +35,6 @@ spec:
             namespace: dex
             cluster: in-cluster
             path: dex
-          - name: dev
-            namespace: default
-            cluster: in-cluster
-            path: dev
           - name: kuma-remote
             namespace: kuma
             cluster: in-cluster
