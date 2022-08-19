@@ -11,6 +11,10 @@ spec:
             namespace: kyverno
             path: kyverno
             cluster: k3d-immanent
+          - name: kuma-global
+            namespace: kuma
+            path: kuma-global
+            cluster: k3d-immanent
   template:
     metadata:
       name: "k3d-immanent-grove-{{name}}"
