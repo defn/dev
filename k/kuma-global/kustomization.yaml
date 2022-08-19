@@ -10,3 +10,5 @@ helmCharts:
   valuesInline:
     controlPlane:
       mode: global
+      service:
+        type: LoadBalancer
