@@ -99,6 +99,7 @@ this:
 		DEFN_DEV_HOST_PORT="$${DEFN_DEV_HOST_PORT:-6443}" \
 		$(MAKE) cluster name=$(name)
 	kubectl rollout -n argocd status deployment argocd-server --watch
-	kubectl rollout -n default status statefulset $(name) --watch
-	rsync -ia ~/.password-store/ ubuntu@$(name)-0:/work/password-store --progress --delete
+	if kubectl rollout -n default status statefulset $(name) --watch; then \
+		rsync -ia ~/.password-store/ ubuntu@$(name)-0:/work/password-store --progress --delete;
+		fi
 
