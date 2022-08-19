@@ -85,14 +85,18 @@ debug-host:
 	pod debug "node/$$(pod get nodes -o json | jq -r '.items[0].metadata.name')" --image quay.io/defn/dev -it -- bash
 
 this:
-	$(MAKE) macos
+	-$(MAKE) macos
 	rm -rf tmp
 	mkdir tmp
 	mkdir -p tmp/$(name)/var/lib/tailscale
 	mkdir -p tmp/$(name)/var/lib/tailscale/pod
 	(cd tmp/$(name) && pass tailscale_k3d-$(name) | base64 -d | tar xvf -)
 	(cd tmp/$(name)/var/lib/tailscale/pod && pass tailscale_$(name)-0 | base64 -d | tar xvf -)
-	env DEFN_DEV_ARCHIVE="$$(cd tmp/$(name) && tar cvf - . | base64)" DEFN_DEV_HOST=k3d-$(name).${domain} DEFN_DEV_HOST_API=127.0.0.1 $(MAKE) cluster name=$(name)
+	env DEFN_DEV_ARCHIVE="$$(cd tmp/$(name) && tar cvf - . | base64 | xargs | sed 's# ##g')" \
+		DEFN_DEV_HOST=k3d-$(name).${domain} \
+		DEFN_DEV_HOST_API=127.0.0.1 \
+		DEFN_DEV_HOST_PORT="$${DEFN_DEV_HOST_PORT:-6443}" \
+		$(MAKE) cluster name=$(name)
 	kubectl rollout -n argocd status deployment argocd-server --watch
 	kubectl rollout -n default status statefulset $(name) --watch
 	rsync -ia ~/.password-store/ ubuntu@$(name)-0:/work/password-store --progress --delete

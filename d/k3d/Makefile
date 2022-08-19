@@ -2,7 +2,7 @@ build:
 	wget -O- https://pkgs.tailscale.com/stable/tailscale_1.28.0_amd64.tgz | tar xvfz -
 	kustomize build --enable-helm ../../k/argocd > argocd.yaml
 	cp ../../e/$(name).yaml argocd-appset.yaml
-	docker build -t defn.dev/defn/k3d --build-arg DEFN_DEV_ARCHIVE=${DEFN_DEV_ARCHIVE} .
+	docker build -t defn.dev/defn/k3d --build-arg DEFN_DEV_ARCHIVE="${DEFN_DEV_ARCHIVE}" .
 
 mint:
 	docker run --rm -ti --privileged --entrypoint sh quay.io/defn/dev -c \
