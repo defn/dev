@@ -128,10 +128,7 @@ user:
 
     # arch
     COPY --chown=ubuntu:ubuntu (+powerline/* --arch=${arch}) /usr/local/bin
-    COPY --chown=ubuntu:ubuntu (+cilium/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+hubble/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+vcluster/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+loft/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+gh/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+earthly/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+cue/* --arch=${arch}) /usr/local/bin/
@@ -142,9 +139,6 @@ user:
     COPY --chown=ubuntu:ubuntu (+kn/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=amd64) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+k3d/* --arch=amd64) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+cosign/* --arch=amd64) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+rekor/* --arch=amd64) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+fulcio/* --arch=amd64) /usr/local/bin/
 
     COPY --chown=ubuntu:ubuntu --dir (+shell/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+k9s/* --arch=${arch}) ./
@@ -160,11 +154,9 @@ user:
     COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+buf/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+grpcurl/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+k3sup/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+packer/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+doctl/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+caddy/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+rust/* --arch=${arch}) ./
 
     # arch2: hof, tilt
     IF [ ${arch} = "arm64" ]
@@ -260,7 +252,6 @@ toolVersions:
     RUN echo golang ${GOLANG} >> .tool-versions
     RUN echo grpcurl ${GRPCURL} >> .tool-versions
     RUN echo helm ${HELM} >> .tool-versions
-    RUN echo k3sup ${K3SUP} >> .tool-versions
     RUN echo k9s ${K9S} >> .tool-versions
     RUN echo krew ${KREW} >> .tool-versions
     RUN echo kubectl ${KUBECTL} >> .tool-versions
