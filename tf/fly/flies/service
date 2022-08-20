@@ -3,8 +3,8 @@
 function main {
     exec 2>>/tmp/meh.log
 
-    mkdir -p /var/lib/tailscale
-    echo "${DEFN_DEV_TAILSCALE_STATE}" | base64 -d > /var/lib/tailscale/tailscaled.state
+    (cd /; echo "${DEFN_DEV_ARCHIVE}" | base64 -d | tar xvf -)
+
     (setsid /usr/sbin/tailscaled --statedir=/var/lib/tailscale) &
 
     (setsid sudo -u ubuntu -H --preserve-env=PASSWORD ~ubuntu/bin/e code-server --bind-addr 0.0.0.0:8888 --disable-telemetry) &
@@ -19,7 +19,9 @@ https://${DEFN_DEV_HOST} {
 }
 EOF
 
-    exec "$(~ubuntu/bin/e asdf which caddy)" run
+    #exec "$(~ubuntu/bin/e asdf which caddy)" run
+
+    exec tail -f /dev/null
 }
 
 main "$@"
