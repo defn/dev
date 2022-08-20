@@ -1,0 +1,66 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: k3d-roke
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - name: argocd
+            namespace: argocd
+            cluster: in-cluster
+            path: argocd
+  template:
+    metadata:
+      name: "k3d-roke-{{name}}"
+      namespace: argocd
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/defn/dev
+        path: k/{{path}}
+        targetRevision: main
+      destination:
+        namespace: "{{namespace}}"
+        name: "{{cluster}}"
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+        automated:
+          prune: true
+      ignoreDifferences:
+        - kind: MutatingWebhookConfiguration
+          group: admissionregistration.k8s.io
+          name: vault-agent-injector-cfg
+          jsonPointers:
+            - /webhooks/0/clientConfig/caBundle
+        - kind: MutatingWebhookConfiguration
+          group: admissionregistration.k8s.io
+          name: webhook.domainmapping.serving.knative.dev
+          jsonPointers:
+            - /webhooks/0/rules
+        - kind: MutatingWebhookConfiguration
+          group: admissionregistration.k8s.io
+          name: webhook.serving.knative.dev
+          jsonPointers:
+            - /webhooks/0/rules
+        - kind: ValidatingWebhookConfiguration
+          group: admissionregistration.k8s.io
+          name: validation.webhook.serving.knative.dev
+          jsonPointers:
+            - /webhooks/0/rules
+        - kind: ValidatingWebhookConfiguration
+          group: admissionregistration.k8s.io
+          name: validation.webhook.domainmapping.serving.knative.dev
+          jsonPointers:
+            - /webhooks/0/rules
+        - kind: Deployment
+          group: apps
+          name: kong-kong
+          jsonPointers:
+            - /spec/template/spec/tolerations
+        - group: kyverno.io
+          kind: ClusterPolicy
+          jqPathExpressions:
+            - .spec.rules[] | select(.name|test("autogen-."))
