@@ -164,6 +164,7 @@ user:
     COPY --chown=ubuntu:ubuntu --dir (+packer/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+doctl/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+caddy/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+rust/* --arch=${arch}) ./
 
     # arch2: hof, tilt
     IF [ ${arch} = "arm64" ]
