@@ -1,0 +1,16 @@
+# kumactl generate dataplane-token > /tmp/immanent-token
+# kuma-dp run --cp-address=https://100.115.182.58:5678 --dataplane-token-file=/tmp/immanent-token --dataplane-file=immanent-dp.yaml
+type: Dataplane
+mesh: default
+name: immanent
+networking:
+  address: 100.121.162.1
+  inbound:
+    - port: 5001
+      servicePort: 5000
+      tags:
+        kuma.io/service: registry
+  outbound:
+    - port: 6001
+      tags:
+        kuma.io/service: nginx_default_svc_80
