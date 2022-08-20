@@ -10,3 +10,7 @@ networking:
       servicePort: 5000
       tags:
         kuma.io/service: registry
+  outbound:
+    - port: 6001
+      tags:
+        kuma.io/service: nginx_default_svc_80
