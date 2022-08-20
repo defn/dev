@@ -240,7 +240,6 @@ toolVersions:
     ARG SKAFFOLD
     ARG TERRAFORM
     ARG VAULT
-    ARG RUST
 
     RUN echo argo ${ARGO} >> .tool-versions
     RUN echo argocd ${ARGOCD} >> .tool-versions
@@ -265,7 +264,6 @@ toolVersions:
     RUN echo terraform ${TERRAFORM} >> .tool-versions
     RUN echo vault ${VAULT} >> .tool-versions
     RUN echo argo ${ARGO} >> .tool-versions
-    RUN echo rust ${RUST} >> .tool-versions
     SAVE ARTIFACT .tool-versions
 
 coderServer:
