@@ -9,7 +9,7 @@ networking:
     - port: 5001
       servicePort: 8888
       tags:
-        kuma.io/service: nginx
+        kuma.io/service: grove
   outbound:
     - port: 6001
       tags:

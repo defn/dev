@@ -1,4 +1,4 @@
-# k --context k3d-immanent  apply -f mesh.yaml
+# k --context k3d-immanent apply -f mesh.yaml
 apiVersion: kuma.io/v1alpha1
 kind: Mesh
 metadata:

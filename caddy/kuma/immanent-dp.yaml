@@ -9,7 +9,7 @@ networking:
     - port: 5001
       servicePort: 4999
       tags:
-        kuma.io/service: nginx
+        kuma.io/service: immanent
   outbound:
     - port: 6001
       tags:
