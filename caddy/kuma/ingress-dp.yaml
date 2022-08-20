@@ -1,5 +1,5 @@
 # kumactl generate zone-ingress-token --zone=grove-0 > /tmp/ingress-token
-# kuma-dp run --proxy-type=ingress --cp-address=https://127.0.0.1:5678 --dataplane-token-file=/tmp/ingress-token --dataplane-file=ingress-dp.yaml
+# kuma-dp run --proxy-type=ingress --admin-port=9902 --cp-address=https://127.0.0.1:5678 --dataplane-token-file=/tmp/ingress-token --dataplane-file=ingress-dp.yaml
 type: ZoneIngress
 name: ingress
 networking:
