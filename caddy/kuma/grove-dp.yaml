@@ -7,9 +7,9 @@ networking:
   address: 100.115.182.58
   inbound:
     - port: 5001
-      servicePort: 5000
+      servicePort: 4999
       tags:
-        kuma.io/service: registry
+        kuma.io/service: nginx
   outbound:
     - port: 6001
       tags:

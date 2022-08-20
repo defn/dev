@@ -1,0 +1,7 @@
+services:
+    nginx:
+        ports:
+            - 4999:80
+        image: nginx:alpine
+        restart: always
+ 
