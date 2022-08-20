@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: k3d-immanent-grove
+  name: k3d-roke-grove
   namespace: argocd
 spec:
   generators:
@@ -10,14 +10,14 @@ spec:
           - name: kyverno
             namespace: kyverno
             path: kyverno
-            cluster: k3d-immanent
+            cluster: k3d-roke
           - name: kuma-global
             namespace: kuma
             path: kuma-global
-            cluster: k3d-immanent
+            cluster: k3d-roke
   template:
     metadata:
-      name: "k3d-immanent-{{name}}"
+      name: "k3d-roke-{{name}}"
       namespace: argocd
     spec:
       project: default
