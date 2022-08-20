@@ -247,6 +247,8 @@ toolVersions:
     ARG SKAFFOLD
     ARG TERRAFORM
     ARG VAULT
+    ARG RUST
+
     RUN echo argo ${ARGO} >> .tool-versions
     RUN echo argocd ${ARGOCD} >> .tool-versions
     RUN echo aws-vault ${AWSVAULT} >> .tool-versions
@@ -271,6 +273,7 @@ toolVersions:
     RUN echo terraform ${TERRAFORM} >> .tool-versions
     RUN echo vault ${VAULT} >> .tool-versions
     RUN echo argo ${ARGO} >> .tool-versions
+    RUN echo rust ${RUST} >> .tool-versions
     SAVE ARTIFACT .tool-versions
 
 coderServer:
@@ -585,6 +588,15 @@ grpcurl:
     FROM +asdf --arch=${arch}
     RUN echo "grpcurl ${GRPCURL}" >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add grpcurl'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
+    SAVE ARTIFACT .asdf
+
+rust:
+    ARG arch
+    ARG RUST
+    FROM +asdf --arch=${arch}
+    RUN echo "rust ${RUST}" >> .tool-versions
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add rust'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
