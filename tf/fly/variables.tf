@@ -1,3 +1,3 @@
 locals {
-  flies = ["brie", "the", "so"]
+  flies = ["brie", "the", "so", "defn"]
 }
