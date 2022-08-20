@@ -235,7 +235,7 @@ resource "kubernetes_stateful_set" "dev" {
           name              = "buildkit"
           image             = "earthly/buildkitd:v0.6.21"
           image_pull_policy = "IfNotPresent"
-          command           = ["bash", "-c"]
+          command           = ["sh", "-c"]
           args              = ["awk '/if.*rm.*data_root.*then/ {print \"rm -rf $data_root || true; data_root=/tmp/meh;i\" }; {print}' /var/earthly/dockerd-wrapper.sh; exec /usr/bin/entrypoint.sh buildkitd --config=/etc/buildkitd.toml"]
           tty               = true
 
