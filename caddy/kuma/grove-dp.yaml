@@ -1,5 +1,5 @@
 # kumactl generate dataplane-token > /tmp/grove-token
-# kuma-dp run --cp-address=https://127.0.0.1:5678 --dataplane-token-file=/tmp/grove-token --dataplane-file=grove-dp.yaml
+# kuma-dp run --cp-address=https://100.115.182.58:5678 --dataplane-token-file=/tmp/grove-token --dataplane-file=grove-dp.yaml
 type: Dataplane
 mesh: default
 name: grove

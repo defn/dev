@@ -22,6 +22,9 @@ spec:
         image: nginx
         ports:
         - containerPort: 80
+      - name: dev
+        image: quay.io/defn/dev
+        command: ["tail", "-f", "/dev/null"]
 ---
 apiVersion: v1
 kind: Service
