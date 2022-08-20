@@ -31,10 +31,6 @@ spec:
             namespace: argo-workflows
             cluster: in-cluster
             path: argo-workflows
-          - name: dex
-            namespace: dex
-            cluster: in-cluster
-            path: dex
           - name: kuma-remote
             namespace: kuma
             cluster: in-cluster
