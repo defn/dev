@@ -4,9 +4,7 @@ domain ?= tiger-mamba.ts.net
 	rm -rf tmp
 	mkdir tmp
 	mkdir -p tmp/$@/var/lib/tailscale
-	mkdir -p tmp/$@/var/lib/tailscale/pod
-	(cd tmp/$@ && pass tailscale_k3d-$@ | base64 -d | tar xvf -)
-	(cd tmp/$@/var/lib/tailscale/pod && pass tailscale_$@-0 | base64 -d | tar xvf -)
+	(cd tmp/$@ && pass tailscale_$@ | base64 -d | tar xvf -)
 	-flyctl secrets set -a $@ --detach \
 		DEFN_DEV_ARCHIVE="$$(cd tmp/$@ && tar cvf - . | base64 | xargs | sed 's# ##g')" \
 		DEFN_DEV_HOST="$@.$(domain)" \
