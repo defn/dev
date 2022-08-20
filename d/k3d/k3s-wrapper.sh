@@ -12,7 +12,12 @@ while true; do
   sleep 1
 done
 
+domain=
+while test -z "${domain}"; do
 domain=`/tailscale cert 2>&1 | grep ' use ' | cut -d'"' -f2`
+sleep 1
+done
+
 /tailscale up --ssh --hostname `echo ${domain} | cut -d. -f1`
 
 exec /bin/k3s-real "$@" --node-ip "${ts_ip}" --node-external-ip "${ts_ip}"
