@@ -11,10 +11,6 @@ spec:
             namespace: kyverno
             path: kyverno
             cluster: k3d-roke
-          - name: kuma-global
-            namespace: kuma
-            path: kuma-global
-            cluster: k3d-roke
   template:
     metadata:
       name: "k3d-roke-{{name}}"
