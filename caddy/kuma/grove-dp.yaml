@@ -14,3 +14,6 @@ networking:
     - port: 6001
       tags:
         kuma.io/service: nginx_default_svc_80
+    - port: 6002
+      tags:
+        kuma.io/service: immanent
