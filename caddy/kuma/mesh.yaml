@@ -1,0 +1,19 @@
+# k --context k3d-immanent  apply -f mesh.yaml
+apiVersion: kuma.io/v1alpha1
+kind: Mesh
+metadata:
+  name: default
+spec:
+  mtls:
+    enabledBackend: ca-1
+    backends:
+      - name: ca-1
+        type: builtin
+        mode: PERMISSIVE
+        dpCert:
+          rotation:
+            expiration: 1d
+        conf:
+          caCert:
+            RSAbits: 2048
+            expiration: 10y

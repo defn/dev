@@ -1,0 +1,12 @@
+# kumactl generate dataplane-token > /tmp/dev-token
+# kuma-dp run --cp-address=https://127.0.0.1:5678 --dataplane-token-file=/tmp/dev-token --dataplane-file=dev-dp.yaml
+type: Dataplane
+mesh: default
+name: registry
+networking:
+  address: 100.115.182.58
+  inbound:
+    - port: 5001
+      servicePort: 5000
+      tags:
+        kuma.io/service: registry
