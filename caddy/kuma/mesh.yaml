@@ -1,3 +1,4 @@
+# env KUMA_MODE=zone KUMA_MULTIZONE_ZONE_NAME=grove-0 KUMA_MULTIZONE_ZONE_GLOBAL_ADDRESS=grpcs://100.103.92.51:5685 kuma-cp run 
 # k --context k3d-immanent apply -f mesh.yaml
 apiVersion: kuma.io/v1alpha1
 kind: Mesh
