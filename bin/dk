@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+function main {
+	export DOCKER_HOST=tcp://localhost:2375
+
+	exec docker "$@"
+}
+
+main "$@"
