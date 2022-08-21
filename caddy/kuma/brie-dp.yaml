@@ -7,7 +7,7 @@ networking:
   address: 100.119.63.4
   inbound:
     - port: 5001
-      servicePort: 4999
+      servicePort: 8888
       tags:
         kuma.io/service: brie
   outbound:
