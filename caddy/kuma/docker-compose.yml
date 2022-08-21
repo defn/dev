@@ -1,7 +1,6 @@
 services:
-    nginx:
+    whoami:
         ports:
             - 4999:80
         image: traefik/whoami
         restart: always
- 
