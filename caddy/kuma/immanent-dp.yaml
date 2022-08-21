@@ -17,3 +17,12 @@ networking:
     - port: 6002
       tags:
         kuma.io/service: grove
+    - port: 6004
+      tags:
+        kuma.io/service: so
+    - port: 6005
+      tags:
+        kuma.io/service: the
+    - port: 6006
+      tags:
+        kuma.io/service: brie
