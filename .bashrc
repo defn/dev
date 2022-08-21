@@ -50,7 +50,8 @@ if [[ -z "${DOCKER_HOST:-}" ]]; then
 	if test -S /var/run/docker.sock; then
 		:
 	else
-		export DOCKER_HOST="tcp://localhost:2375"
+		# export DOCKER_HOST="tcp://localhost:2375"
+		true
 	fi
 fi
 

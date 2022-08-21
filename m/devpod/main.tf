@@ -265,23 +265,6 @@ resource "kubernetes_stateful_set" "dev" {
         }
 
         container {
-          name              = "docker"
-          image             = "earthly/dind:alpine"
-          image_pull_policy = "IfNotPresent"
-
-          command = ["dockerd", "--host", "tcp://127.0.0.1:2375"]
-
-          volume_mount {
-            name       = "dind"
-            mount_path = "/var/lib/docker"
-          }
-
-          security_context {
-            privileged = true
-          }
-        }
-
-        container {
           name              = "registry"
           image             = "registry:2"
           image_pull_policy = "IfNotPresent"
