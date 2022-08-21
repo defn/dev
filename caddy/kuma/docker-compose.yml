@@ -2,6 +2,6 @@ services:
     nginx:
         ports:
             - 4999:80
-        image: nginx:alpine
+        image: traefik/whoami
         restart: always
  
