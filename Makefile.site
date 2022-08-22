@@ -62,7 +62,7 @@ images:
 
 amd arm:
 	pass hello
-	if [[ "$(shell pwd)" == "$(HOME)" ]]; then git pull; git push; cd work/dev && git pull && $(MAKE) $@; else repo=$(repo) earthly --remote-cache=$(cache)defn/cache:updates-$@ --no-output $(push) +"$@" --repo=$${repo:-}; fi
+	if [[ "$(shell pwd)" == "$(HOME)" ]]; then git pull; git push; cd work/dev && git pull && $(MAKE) $@; else repo=$(repo) earthly --cache-from=$(cache)defn/cache:updates-images --remote-cache=$(cache)defn/cache:updates-$@ --no-output $(push) +"$@" --repo=$${repo:-}; fi
 
 shell:
 	docker run --rm -ti $(repo)defn/dev bash -l
