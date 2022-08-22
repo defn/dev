@@ -1,9 +1,0 @@
-namespace: traefik
-
-resources:
-- forward.yaml
-
-secretGenerator:
-- name: remocal-tls
-  files:
-  - remocal.crt

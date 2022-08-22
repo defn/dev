@@ -1,6 +1,0 @@
-bases:
-- ../kourier
-
-patchesStrategicMerge:
-- namespace-kourier-system.yaml
-- deployment-net-kourier-controller.yaml

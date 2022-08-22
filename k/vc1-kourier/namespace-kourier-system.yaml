@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: kourier-system
-  labels:
-    kuma.io/sidecar-injection: "true"
-  annotations:
-    kuma.io/mesh: demo

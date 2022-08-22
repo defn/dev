@@ -1,4 +1,0 @@
-namespace: default
-
-resources:
-- ingress.yaml
