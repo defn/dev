@@ -138,11 +138,11 @@ attach-remo:
 	code --folder-uri vscode-remote://k8s-container+context=remo+namespace=default+podname=dev-0+name=dev+/home/ubuntu
 
 join:
-	cd d/k3d && $(MAKE) build name=$(context)
+	cd d/k3d && $(MAKE) build name=$(context) app=$(app)
 	@env DEFN_DEV_HOST=${context}.${domain} $(MAKE) $@-inner join="$$(kubectl config view -o jsonpath='{.clusters[?(@.name == "$(to)")].cluster.server}')" token="$(shell docker exec $(to)-server-0 cat /var/lib/rancher/k3s/server/node-token)" name=$(name)
 
 cluster:
-	cd d/k3d && $(MAKE) build name=$(context)
+	cd d/k3d && $(MAKE) build name=$(context) app=$(app)
 	@$(MAKE) $@-inner name=$(name)
 
 join-inner:
