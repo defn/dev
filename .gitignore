@@ -80,3 +80,4 @@ node_modules
 /Caddyfile
 .tool-versions
 .steampipe
+/app

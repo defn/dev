@@ -9,6 +9,7 @@ podname ?= $(name)-0
 control ?= $(shell echo $(name) | sed s/-0//)
 domain ?= $(shell tailscale cert 2>&1 | grep 'For domain' | cut -d'"' -f2 | cut -d. -f2-)
 image ?= defn.dev/defn/k3d
+app ?= $(pwd)/app
 
 dummy_ip ?= 169.254.32.1
 
