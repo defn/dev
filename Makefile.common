@@ -153,7 +153,7 @@ cluster-inner:
 	-k3d cluster delete $(name)
 	k3d cluster create $(name) --config k3d.yaml --k3s-node-label env=$(name)@server:0 $(shell if test -z "$${DEFN_DEV_HEADLESS:-}"; then -p "80:8000@server:0" -p "443:8443@server:0"; fi)
 	docker update --restart=no $(context)-server-0
-	-cd tf/$(name) && make init plan apply
+	-cd $(app)/tf/$(name) && make init plan apply
 
 vault-unseal:
 	pass Unseal_Key_1 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://localhost:8200/v1/sys/unseal
