@@ -1,5 +1,3 @@
--include app/Makefile.site
-
 init-site-default:
 
 init-gpg-default:
@@ -7,3 +5,5 @@ init-gpg-default:
 login-site-default:
 
 %: %default-
+
+-include app/Makefile.site
