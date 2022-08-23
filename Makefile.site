@@ -110,7 +110,8 @@ this:
 	if test -z "$(DEFN_DEV_HEADLESS)"; then \
 		if kubectl rollout -n default status statefulset $(name) --watch; then \
 			rsync -ia ~/.password-store/ ubuntu@$(name)-0:/work/password-store --progress --delete; \
-			rsync -ia $(app)/ ubuntu@$(name)-0:app --progress --delete; \
+			rsync -ia $(app)/ ubuntu@$(name)-0:/work/app --progress --delete; \
 		fi; \
 		kubectl rollout -n argocd status deployment argocd-server --watch; \
 	fi
+
