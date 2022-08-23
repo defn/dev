@@ -48,18 +48,14 @@ init:
 	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
 	chmod 0700 ~/.gnupg/. ~/.gnupg2/. ~/.password-store/home/.gnupg
 
-	if echo $$VSCODE_GIT_ASKPASS_NODE | grep local/lib/code-server; then $(MAKE) init-gpg; fi
+	if echo $$VSCODE_GIT_ASKPASS_NODE | grep local/lib/code-server; then $(MAKE) -f app/Makefile.site init-gpg; fi
 	if test -z "$$VSCODE_GIT_ASKPASS_NODE"; then $(MAKE) init-gpg; fi
 
 	$(MAKE) git-crypt-unlock
 
 	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then $(MAKE) kubeconfig; $(MAKE) argocd-login || true; fi
 
-	-$(MAKE) init-site
-
-init-gpg:
-	-gpg-agent --daemon
-	gpg --import .password-store/keys/EBE020A544E04B9C67215280B8B6F42683E6CCEF/private.gpg
+	$(MAKE) -f app/Makefile.site init-site
 
 tilt:
 	env tilt up --context pod --port $(tilt_port)
@@ -181,4 +177,113 @@ monitor:
 	fi
 
 ignore:
-	 git clean -nfx | awk '{print $$NF}' | sort > .dockerignore
+	 git clean -nfx | awk '{print $$NF}' | sort > .dockerignoreinclude Makefile.common
+
+restart: # Restart everything
+	git pull
+	$(MAKE) restart-inner
+
+restart-inner:
+	k3d cluster stop $(k3d_name)
+	-osascript -e 'quit app "Docker"'
+	open -a Docker
+	while ! docker ps; do date; sleep 5; done
+	k3d cluster start $(k3d_name)
+	while true; do if kubectl rollout status statefulset dev --watch; then break; fi; sleep 5; done
+	$(MAKE) attach
+
+restart-docker: # Restart Docker Desktop
+	-osascript -e 'quit app "Docker"'
+	open -a Docker
+	while ! docker ps; do date; sleep 5; done
+	#$(MAKE) dummy-docker
+
+restart-cluster: # Restart k3d
+	-k3d cluster stop $(k3d_name)
+	-k3d cluster start $(k3d_name)
+	while true; do if kubectl rollout status statefulset dev --watch; then break; fi; sleep 5; done
+	$(MAKE) attach
+
+recreate: # Recreate k3d (restarts Docker)
+	-k3d cluster delete $(k3d_name)
+	-docker rm -f ignore
+	$(MAKE) restart-docker
+	$(MAKE) cluster
+
+recreate-cluster: # Recreate k3d
+	-k3d cluster delete $(k3d_name)
+	-docker rm -f ignore
+	$(MAKE) cluster
+
+recreate-pod: # Recreate pod
+	kubectl delete pod/dev-0
+	while true; do if kubectl rollout status statefulset dev --watch; then break; fi; sleep 5; done
+	$(MAKE) attach
+
+stop: # Stop k3d
+	k3d cluster stop $(k3d_name)
+
+test:
+	pass hello
+	earthly --allow-privileged --remote-cache=$(cache)defn/cache:updates-images --no-output +test --repo=$${repo:-quay.io/}
+
+images:
+	pass hello
+	if [[ "$(shell pwd)" == "$(HOME)" ]]; then git pull; git push; if ! test -d work/dev/.; then git clone https://github.com/defn/dev work/dev; fi; cd work/dev && git pull && $(MAKE) $@; else repo=$(repo); earthly --remote-cache=$(cache)defn/cache:updates-$@ --no-output $(push) +images --repo=$${repo:-quay.io/}; fi
+
+amd arm:
+	pass hello
+	if [[ "$(shell pwd)" == "$(HOME)" ]]; then git pull; git push; cd work/dev && git pull && $(MAKE) $@; else repo=$(repo) earthly --cache-from=$(cache)defn/cache:updates-images --remote-cache=$(cache)defn/cache:updates-$@ --no-output $(push) +"$@" --repo=$${repo:-}; fi
+
+shell:
+	docker run --rm -ti $(repo)defn/dev bash -l
+
+cert:
+	-k --context pod create ns traefik
+	touch meh.json; chmod 0600 meh.json
+	-k --context pod create -n traefik secret generic default-certificate --from-file=meh.json
+	v write pki/issue/gyre.defn.dev common_name="$(DEFN_DEV_HOST)" alt_names="hello.demo.svc.cluster.local,*.remocal.net" ip_sans="169.254.32.1" ttl=120h -format=json | jq .data > meh.json
+	k --context pod patch -n traefik secret default-certificate --type='json' -p='[{"op" : "replace" ,"path" : "/data/tls.key" ,"value" : "'$$(cat meh.json | jq -r '.private_key | @base64')'"}]'
+	k --context pod patch -n traefik secret default-certificate --type='json' -p='[{"op" : "replace" ,"path" : "/data/tls.crt" ,"value" : "'$$(cat meh.json | jq -r '.certificate | @base64')'"}]'
+	rm -f meh.json
+
+provision-digital-ocean:
+	echo k3d 5.4.4 >> .tool-versions
+	bin/e asdf install nk3d
+	bin/e make cluster
+
+debug-host:
+	pod debug "node/$$(pod get nodes -o json | jq -r '.items[0].metadata.name')" --image quay.io/defn/dev -it -- bash
+
+immanent:
+	env DEFN_DEV_HEADLESS=1 DEFN_DEV_HOST_PORT=6444 DEFN_DEV_HOST_API=host.k3d.internal make this name=immanent app=$(shell pwd)/app
+
+grove:
+	$(MAKE) this name=grove app=$(shell pwd)/app
+	
+this:
+	git pull
+	cd app && git pull
+	cd ~/.password-store && git pull
+	-$(MAKE) macos
+	rm -rf tmp
+	mkdir tmp
+	mkdir -p tmp/$(name)/var/lib/tailscale
+	mkdir -p tmp/$(name)/var/lib/tailscale/pod
+	(cd tmp/$(name) && pass tailscale_k3d-$(name) | base64 -d | tar xvf -)
+	(cd tmp/$(name)/var/lib/tailscale/pod && pass tailscale_$(name)-0 | base64 -d | tar xvf -)
+	env DEFN_DEV_ARCHIVE="$$(cd tmp/$(name) && tar cvf - . | base64 | xargs | sed 's# ##g')" \
+		DEFN_DEV_HOST=k3d-$(name).${domain} \
+		DEFN_DEV_HOST_API="$${DEFN_DEV_HOST_API:-127.0.0.1}" \
+		DEFN_DEV_HOST_PORT="$${DEFN_DEV_HOST_PORT:-6443}" \
+		$(MAKE) cluster name=$(name)
+	docker run -it --rm --privileged --pid=host alpine:edge nsenter -t 1 -m -u -n -i iptables -t filter -F DOCKER-ISOLATION-STAGE-2
+	if test -n "$(DEFN_DEV_HEADLESS)"; then argocd cluster add --yes --upsert k3d-$(name); pod apply -f $(app)/e/k3d-$(name).yaml; fi
+	if test -z "$(DEFN_DEV_HEADLESS)"; then \
+		if kubectl rollout -n default status statefulset $(name) --watch; then \
+			rsync -ia ~/.password-store/ ubuntu@$(name)-0:/work/password-store --progress --delete; \
+			rsync -ia $(app)/ ubuntu@$(name)-0:/work/app --progress --delete; \
+		fi; \
+		kubectl rollout -n argocd status deployment argocd-server --watch; \
+	fi
+
