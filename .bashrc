@@ -96,3 +96,5 @@ if tty >/dev/null; then
     PROMPT_COMMAND="update_ps1"
   fi
 fi
+
+if [[ -f ~/app/.bashrc ]]; then source ~/app/.bashrc; fi
