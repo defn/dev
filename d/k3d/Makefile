@@ -1,7 +1,6 @@
 build:
 	wget -O- https://pkgs.tailscale.com/stable/tailscale_1.28.0_amd64.tgz | tar xvfz -
-	kustomize build --enable-helm $(app)/k/argocd > argocd.yaml
-	cp $(app)/e/$(name).yaml argocd-appset.yaml
+	if test -d $(app)/bootstrap/$(name); then kustomize build --enable-helm $(app)/bootstrap/$(name) > defn-dev-bootstrap.yaml; else echo > defn-dev-bootstrap.yaml; fi
 	docker build -t defn.dev/defn/k3d --build-arg DEFN_DEV_ARCHIVE="${DEFN_DEV_ARCHIVE}" .
 
 mint:
