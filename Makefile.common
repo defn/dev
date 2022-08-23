@@ -28,11 +28,6 @@ dev-meh:
 	@if [[ ! -d work/password-store ]]; then if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi; fi
 
 init:
-	git pull
-	$(MAKE) init-inner
-	-$(MAKE) init-site
-
-init-inner:
 	if test -d /work; then sudo install -d -m 0700 -o ubuntu -g ubuntu /work; ln -nfs /work .; fi
 	if test -d /mnt/lost+found; then sudo install -d -m 0700 -o ubuntu -g ubuntu /mnt/work; ln -nfs /mnt/work .; fi
 	if ! test -d work/.; then mkdir -p work; fi
@@ -58,6 +53,8 @@ init-inner:
 	$(MAKE) git-crypt-unlock
 
 	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then $(MAKE) kubeconfig; $(MAKE) argocd-login || true; fi
+
+	-$(MAKE) init-site
 
 init-gpg:
 	-gpg-agent --daemon
