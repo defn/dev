@@ -179,3 +179,6 @@ monitor:
 	if test -f ~/.local/share/code-server/heartbeat && test "$$(find ~/.local/share/code-server/heartbeat -mmin +120)"; then \
 		~/bin/e $(MAKE) logout; \
 	fi
+
+ignore:
+	 git clean -nfx | awk '{print $$NF}' | sort > .dockerignore
