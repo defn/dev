@@ -76,6 +76,8 @@ login:
 	$(MAKE) kubeconfig
 	-$(MAKE) argocd-login
 
+	$(MAKE) login-site
+
 github-login:
 	if ! gh auth status; then echo Y | gh auth login -p https -h github.com -w; fi
 
