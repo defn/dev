@@ -1,4 +1,3 @@
 tailscale_*
 tailscaled.state
-argocd.yaml
-argocd-appset.yaml
+defn-dev-bootstrap.yaml
