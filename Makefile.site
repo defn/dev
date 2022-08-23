@@ -1,1 +1,7 @@
 -include app/Makefile.site
+
+init-site-default:
+
+init-gpg-default:
+
+%: %default-
