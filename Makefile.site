@@ -83,7 +83,9 @@ provision-digital-ocean:
 debug-host:
 	pod debug "node/$$(pod get nodes -o json | jq -r '.items[0].metadata.name')" --image quay.io/defn/dev -it -- bash
 
-# env DEFN_DEV_HEADLESS=1 DEFN_DEV_HOST_PORT=6444 DEFN_DEV_HOST_API=host.k3d.internal make this name=immanent app=$HOME/app
+immanent:
+	env DEFN_DEV_HEADLESS=1 DEFN_DEV_HOST_PORT=6444 DEFN_DEV_HOST_API=host.k3d.internal make this name=immanent app=$(HOME)/app
+	
 this:
 	-$(MAKE) macos
 	rm -rf tmp
@@ -99,4 +101,3 @@ this:
 		$(MAKE) cluster name=$(name)
 	docker run -it --rm --privileged --pid=host alpine:edge nsenter -t 1 -m -u -n -i iptables -t filter -F DOCKER-ISOLATION-STAGE-2
 	if test -n "$(DEFN_DEV_HEADLESS)"; then argocd cluster add --yes --upsert k3d-$(name); pod apply -f $(app)/e/k3d-$(name).yaml; fi
-	
