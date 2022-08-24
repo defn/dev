@@ -94,7 +94,6 @@ cilium/hubble v0.8.0 v0.8.0
 cilium/hubble v0.8.1 v0.8.1
 cilium/hubble v0.8.2 v0.8.2
 cilium/hubble v0.9.0 v0.9.0
-cli/cli GitHub v2.1.0
 cli/cli GitHub v2.10.0
 cli/cli GitHub v2.10.1
 cli/cli GitHub v2.11.0
@@ -110,7 +109,8 @@ cli/cli GitHub v2.14.1
 cli/cli GitHub v2.14.2
 cli/cli GitHub v2.14.3
 cli/cli GitHub v2.14.4
-cli/cli GitHub v2.2.0
+cli/cli GitHub v2.14.5
+cli/cli GitHub v2.14.6
 cli/cli GitHub v2.3.0
 cli/cli GitHub v2.4.0
 cli/cli GitHub v2.5.0
@@ -319,7 +319,7 @@ knative/client Knative knative-v1.4.1
 knative/client Knative knative-v1.5.0
 knative/client Knative knative-v1.6.0
 knative/client Knative knative-v1.6.1
-knative/client Knative v0.17.1
+knative/client Knative knative-v1.7.0
 knative/client Knative v0.17.2
 knative/client Knative v0.17.3
 knative/client Knative v0.17.4
@@ -339,7 +339,6 @@ knative/client Knative v0.24.0
 knative/client Knative v0.25.0
 knative/client Knative v0.25.1
 knative/client Knative v0.26.0
-linkerd/linkerd2 edge-21.12.4 edge-21.12.4
 linkerd/linkerd2 edge-22.1.1 edge-22.1.1
 linkerd/linkerd2 edge-22.1.2 edge-22.1.2
 linkerd/linkerd2 edge-22.1.3 edge-22.1.3
@@ -369,6 +368,7 @@ linkerd/linkerd2 stable-2.11.2 stable-2.11.2
 linkerd/linkerd2 stable-2.11.3 stable-2.11.3
 linkerd/linkerd2 stable-2.11.4 stable-2.11.4
 linkerd/linkerd2 stable-2.12.0-rc2 stable-2.12.0-rc2
+linkerd/linkerd2 stable-2.12.0 stable-2.12.0
 loft-sh/loft v2.0.3-beta.15 v2.0.3-beta.15
 loft-sh/loft v2.0.3 v2.0.3
 loft-sh/loft v2.0.4-beta.0 v2.0.4-beta.0
@@ -466,7 +466,6 @@ protocolbuffers/protobuf Protocol v3.20.1-rc1
 sigstore/cosign cosigned-v0.0.1-dev cosigned-v0.0.1-dev
 sigstore/cosign cosigned-v0.0.2-dev cosigned-v0.0.2-dev
 sigstore/cosign cosigned-v0.0.3-dev cosigned-v0.0.3-dev
-sigstore/cosign v0.1.0 v0.1.0
 sigstore/cosign v0.2.0 v0.2.0
 sigstore/cosign v0.3.0 v0.3.0
 sigstore/cosign v0.3.1 v0.3.1
@@ -479,6 +478,7 @@ sigstore/cosign v1.10.0 v1.10.0
 sigstore/cosign v1.10.1 v1.10.1
 sigstore/cosign v1.1.0 v1.1.0
 sigstore/cosign v1.11.0 v1.11.0
+sigstore/cosign v1.11.1 v1.11.1
 sigstore/cosign v1.2.0 v1.2.0
 sigstore/cosign v1.2.1 v1.2.1
 sigstore/cosign v1.3.0 v1.3.0
@@ -502,6 +502,7 @@ sigstore/fulcio v0.4.1 v0.4.1
 sigstore/fulcio v0.5.0 v0.5.0
 sigstore/fulcio v0.5.1 v0.5.1
 sigstore/fulcio v0.5.2 v0.5.2
+sigstore/fulcio v0.5.3 v0.5.3
 sigstore/rekor rekor v0.1.0
 sigstore/rekor Rekor v0.3.0
 sigstore/rekor v0.10.0 v0.10.0
@@ -547,10 +548,6 @@ smallstep/cli Step v0.19.0
 smallstep/cli Step v0.20.0
 smallstep/cli Step v0.21.0
 smallstep/cli v0.17.3-rc26 v0.17.3-rc26
-superfly/flyctl v0.0.363-pre-2 v0.0.363-pre-2
-superfly/flyctl v0.0.363 v0.0.363
-superfly/flyctl v0.0.364-pre-1 v0.0.364-pre-1
-superfly/flyctl v0.0.364-pre-2 v0.0.364-pre-2
 superfly/flyctl v0.0.364-pre-3 v0.0.364-pre-3
 superfly/flyctl v0.0.364-pre-6 v0.0.364-pre-6
 superfly/flyctl v0.0.364-pre-7 v0.0.364-pre-7
@@ -577,6 +574,10 @@ superfly/flyctl v0.0.375 v0.0.375
 superfly/flyctl v0.0.376 v0.0.376
 superfly/flyctl v0.0.377 v0.0.377
 superfly/flyctl v0.0.378 v0.0.378
+superfly/flyctl v0.0.379-pre-1 v0.0.379-pre-1
+superfly/flyctl v0.0.379 v0.0.379
+superfly/flyctl v0.0.380 v0.0.380
+superfly/flyctl v0.0.381 v0.0.381
 tilt-dev/tilt v0.23.5 v0.23.5
 tilt-dev/tilt v0.23.6 v0.23.6
 tilt-dev/tilt v0.23.7 v0.23.7
@@ -607,11 +608,6 @@ tilt-dev/tilt v0.30.4 v0.30.4
 tilt-dev/tilt v0.30.5 v0.30.5
 tilt-dev/tilt v0.30.6 v0.30.6
 tilt-dev/tilt v0.30.7 v0.30.7
-turbot/steampipe v0.15.0-rc.1 v0.15.0-rc.1
-turbot/steampipe v0.15.0-rc.2 v0.15.0-rc.2
-turbot/steampipe v0.15.0-rc.3 v0.15.0-rc.3
-turbot/steampipe v0.15.0-rc.4 v0.15.0-rc.4
-turbot/steampipe v0.15.0-rc.5 v0.15.0-rc.5
 turbot/steampipe v0.15.0 v0.15.0
 turbot/steampipe v0.15.1-rc.0 v0.15.1-rc.0
 turbot/steampipe v0.15.1 v0.15.1
@@ -621,6 +617,8 @@ turbot/steampipe v0.15.4 v0.15.4
 turbot/steampipe v0.16.0-rc.0 v0.16.0-rc.0
 turbot/steampipe v0.16.0-rc.10 v0.16.0-rc.10
 turbot/steampipe v0.16.0-rc.11 v0.16.0-rc.11
+turbot/steampipe v0.16.0-rc.12 v0.16.0-rc.12
+turbot/steampipe v0.16.0-rc.13 v0.16.0-rc.13
 turbot/steampipe v0.16.0-rc.1 v0.16.0-rc.1
 turbot/steampipe v0.16.0-rc.2 v0.16.0-rc.2
 turbot/steampipe v0.16.0-rc.3 v0.16.0-rc.3
@@ -630,6 +628,7 @@ turbot/steampipe v0.16.0-rc.6 v0.16.0-rc.6
 turbot/steampipe v0.16.0-rc.7 v0.16.0-rc.7
 turbot/steampipe v0.16.0-rc.8 v0.16.0-rc.8
 turbot/steampipe v0.16.0-rc.9 v0.16.0-rc.9
+turbot/steampipe v0.16.0 v0.16.0
 turbot/steampipe v0.17.0-alpha.0 v0.17.0-alpha.0
 turbot/steampipe v0.17.0-alpha.1 v0.17.0-alpha.1
 turbot/steampipe v0.17.0-alpha.2 v0.17.0-alpha.2
@@ -637,6 +636,8 @@ turbot/steampipe v0.17.0-alpha.3 v0.17.0-alpha.3
 turbot/steampipe v0.17.0-alpha.4 v0.17.0-alpha.4
 turbot/steampipe v0.17.0-alpha.5 v0.17.0-alpha.5
 turbot/steampipe v0.17.0-alpha.6 v0.17.0-alpha.6
+turbot/steampipe v0.17.0-alpha.7 v0.17.0-alpha.7
+turbot/steampipe v0.17.0-alpha.8 v0.17.0-alpha.8
 Wilfred/difftastic 0.26.1 0.26.1
 Wilfred/difftastic 0.26.2 0.26.2
 Wilfred/difftastic 0.26.3 0.26.3
@@ -647,3 +648,4 @@ Wilfred/difftastic 0.29.1 0.29.1
 Wilfred/difftastic 0.30.0 0.30.0
 Wilfred/difftastic 0.31.0 0.31.0
 Wilfred/difftastic 0.32.0 0.32.0
+Wilfred/difftastic 0.33.0 0.33.0
