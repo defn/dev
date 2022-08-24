@@ -2,6 +2,7 @@
 
 m="$1"; shift
 
+echo
 case "${m}" in
 	--)
 		shift
@@ -12,3 +13,4 @@ case "${m}" in
 		echo -e "$*"'\x1b]1337;SetMark\x07'
 		;;
 esac
+echo
