@@ -194,8 +194,6 @@ user:
         COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
     END
 
-    RUN sudo ln -nfs /home/ubuntu/hooks /hooks
-
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
     RUN mkdir -p .kube .docker
