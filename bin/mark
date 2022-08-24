@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+m="$1"; shift
+
+case "${m}" in
+	--)
+		shift
+		echo -e "$*"'\x1b]1337;SetMark\x07'
+		;;
+	*)	
+		shift
+		echo -e "$*"'\x1b]1337;SetMark\x07'
+		;;
+esac
