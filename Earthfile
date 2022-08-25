@@ -194,6 +194,9 @@ user:
         COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
     END
 
+    # new, unorganized
+    COPY --chown=ubuntu:ubuntu --dir (+nomad/* --arch=${arch}) ./
+
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
     RUN mkdir -p .kube .docker
@@ -680,6 +683,15 @@ caddy:
     FROM +asdf --arch=${arch}
     RUN echo caddy ${CADDY} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add caddy'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
+    SAVE ARTIFACT .asdf
+
+nomad:
+    ARG arch
+    ARG NOMAD
+    FROM +asdf --arch=${arch}
+    RUN echo nomad ${NOMAD} >> .tool-versions
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add nomad'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
