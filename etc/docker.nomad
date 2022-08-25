@@ -10,7 +10,7 @@ job "docker" {
 
         args = [
           "sleep",
-          "86400"
+          "86401"
         ]
       }
 
