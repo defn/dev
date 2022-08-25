@@ -231,6 +231,7 @@ toolVersions:
     ARG KUBECTL
     ARG KUSTOMIZE
     ARG NODEJS
+    ARG NOMAD
     ARG PACKER
     ARG PYTHON
     ARG SHELLCHECK
@@ -254,6 +255,7 @@ toolVersions:
     RUN echo kubectl ${KUBECTL} >> .tool-versions
     RUN echo kustomize ${KUSTOMIZE} >> .tool-versions
     RUN echo nodejs ${NODEJS} >> .tool-versions
+    RUN echo nomad ${NOMAD} >> .tool-versions
     RUN echo packer ${PACKER} >> .tool-versions
     RUN echo python ${PYTHON} >> .tool-versions
     RUN echo shellcheck ${SHELLCHECK} >> .tool-versions
