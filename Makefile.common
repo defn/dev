@@ -50,12 +50,14 @@ perms:
 	-chmod 0600 ~/.kube/config
 
 init:
+	$(MAKE) symlinks perms
+
 	mark -- configure password-store
 	cd ~/.password-store && git pull
 
 	mark -- configure gpg
+	$(MAKE) perms
 	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
-	chmod 0700 ~/.gnupg/. ~/.gnupg2/. ~/.password-store/home/.gnupg
 	if echo $$VSCODE_GIT_ASKPASS_NODE | grep local/lib/code-server; then $(MAKE) init-gpg; fi
 	if test -z "$$VSCODE_GIT_ASKPASS_NODE"; then $(MAKE) init-gpg; fi
 
@@ -78,9 +80,8 @@ logout:
 	-echo RELOADAGENT | gpg-connect-agent
 
 login:
-	chmod 700 ~/.password-store/home/.gnupg ~/.gnupg
+	$(MAKE) perms
 	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
-	chmod 700 ~/.password-store/home/.gnupg ~/.gnupg
 	#$(MAKE) github-login
 	cd ~/.password-store && git pull
 	$(MAKE) git-crypt-unlock
@@ -120,7 +121,7 @@ kubeconfig:
 		fi
 	#kumactl config control-planes add --overwrite --name pod --address http://kuma-control-plane-x-kuma-x-vc0.vc0.svc:5681
 	touch ~/.kube/config
-	chmod 0600 ~/.kube/config
+	$(MAKE) perms
 	-k3d kubeconfig merge -a -d
 	-kubectl config set-cluster $(context) --server=https://$(context).$(domain):6443
 	k config get-contexts
