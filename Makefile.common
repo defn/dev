@@ -27,16 +27,6 @@ dev:
 dev-meh:
 	@if [[ ! -d work/password-store ]]; then if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi; fi
 
-init:
-	mark -- configure symlinks
-	if test -d /work; then sudo install -d -m 0700 -o ubuntu -g ubuntu /work; ln -nfs /work .; fi
-	if test -d /mnt/lost+found; then sudo install -d -m 0700 -o ubuntu -g ubuntu /mnt/work; ln -nfs /mnt/work .; fi
-	if ! test -d work/.; then mkdir -p work; fi
-	if ! test -d app/.; then if test -d work/app/.; then ln -nfs work/app .; fi; fi
-
-	mark -- configure permissions
-	if test -S /var/run/docker.sock; then sudo chgrp docker /var/run/docker.sock; sudo chmod 770 /var/run/docker.sock; fi
-
 #	$(MAKE) github-login
 #	if [[ ! -f .gitconfig ]]; then \
 #		rm -f .gitconfig; \
@@ -46,6 +36,20 @@ init:
 #		git checkout -- .gitconfig; \
 #		fi
 
+symlinks:
+	mark -- configure symlinks
+	if test -d /work; then sudo install -d -m 0700 -o ubuntu -g ubuntu /work; ln -nfs /work .; fi
+	if test -d /mnt/lost+found; then sudo install -d -m 0700 -o ubuntu -g ubuntu /mnt/work; ln -nfs /mnt/work .; fi
+	if ! test -d work/.; then mkdir -p work; fi
+	if ! test -d app/.; then if test -d work/app/.; then ln -nfs work/app .; fi; fi
+
+perms:
+	mark -- configure permissions
+	if test -S /var/run/docker.sock; then sudo chgrp docker /var/run/docker.sock; sudo chmod 770 /var/run/docker.sock; fi
+	-chmod 0700 ~/.gnupg/. ~/.gnupg2/. ~/.password-store/home/.gnupg
+	-chmod 0600 ~/.kube/config
+
+init:
 	mark -- configure password-store
 	cd ~/.password-store && git pull
 
