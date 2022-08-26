@@ -277,7 +277,7 @@ immanent:
 	env DEFN_DEV_HOST_PORT=6444 DEFN_DEV_HOST_API=host.k3d.internal $(MAKE) this name=immanent
 
 grove:
-	env DEFN_DEV_HOST_PORT=6443 DEFN_DEV_HOST_API=127.0.0.1 $(MAKE) this name=grove
+	env DEFN_DEV_MACOS=1 DEFN_DEV_HOST_PORT=6443 DEFN_DEV_HOST_API=127.0.0.1 $(MAKE) this name=grove
 	
 this:
 	git pull
@@ -293,8 +293,8 @@ this:
 	env DEFN_DEV_ARCHIVE="$$(cd tmp/$(name) && tar cvf - . | base64 | xargs | sed 's# ##g')" \
 		$(MAKE) cluster name=$(name)
 	docker run -it --rm --privileged --pid=host alpine:edge nsenter -t 1 -m -u -n -i iptables -t filter -F DOCKER-ISOLATION-STAGE-2
-	if test -n "$(DEFN_DEV_HEADLESS)"; then argocd cluster add --yes --upsert k3d-$(name); pod apply -f $(app)/e/k3d-$(name).yaml; fi
-	if test -z "$(DEFN_DEV_HEADLESS)"; then \
+	if test -z "$(DEFN_DEV_MACOS)"; then argocd cluster add --yes --upsert k3d-$(name); pod apply -f $(app)/e/k3d-$(name).yaml; fi
+	if test -n "$(DEFN_DEV_MACOS)"; then \
 		if kubectl rollout -n default status statefulset $(name) --watch; then \
 			rsync -ia ~/.password-store/ ubuntu@$(name)-0:/work/password-store --progress --delete; \
 			rsync -ia $(app)/ ubuntu@$(name)-0:/work/app --progress --delete --exclude .terraform; \
