@@ -71,7 +71,7 @@ init:
 	$(MAKE) init-site
 
 tilt:
-	env tilt up --context pod --port $(tilt_port)
+	env tilt up --context pod --port $(tilt_port) --host "$(shell tailscale ip -4)"
 
 logout:
 	-echo yes | gh auth logout --hostname github.com
