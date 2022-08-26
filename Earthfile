@@ -13,7 +13,7 @@ test-redis:
 test:
     FROM earthly/dind:alpine
 
-    COPY docker-compose.yml ./ 
+    COPY docker-compose.yml ./
 
     WITH DOCKER --allow-privileged --pull redis:alpine --load defn/redis=+test-redis --compose docker-compose.yml
         RUN --no-cache echo; echo; echo; docker-compose ps; echo; echo; echo
@@ -188,7 +188,7 @@ user:
     RUN steampipe plugin install kubernetes
     RUN steampipe plugin install docker
     RUN steampipe plugin install aws
-    RUN steampipe plugin install digitalocean
+    RUN steampipe plugin install digitalocea
 
     # arch2: flyctl
     IF [ ${arch} = "arm64" ]
