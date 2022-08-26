@@ -1,4 +1,5 @@
 {
   "remote.SSH.defaultExtensions": [],
-  "remote.SSH.allowLocalServerDownload": "false"
+  "remote.SSH.allowLocalServerDownload": "false",
+  "python.languageServer": "Pylance"
 }
