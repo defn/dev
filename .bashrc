@@ -58,6 +58,9 @@ fi
 export PATH="$PATH:/usr/local/gcloud/google-cloud-sdk/bin"
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
+# hof
+export HOF_TELEMETRY_DISABLED=1
+
 # fake xdisply
 export DISPLAY=1
 
