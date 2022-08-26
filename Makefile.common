@@ -63,6 +63,7 @@ init:
 	$(MAKE) perms
 	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
 	if echo $$VSCODE_GIT_ASKPASS_NODE | grep local/lib/code-server; then $(MAKE) init-gpg; fi
+	if echo $$VSCODE_GIT_ASKPASS_NODE | grep scode-server/server-stable-web; then $(MAKE) init-gpg; fi
 	if test -z "$$VSCODE_GIT_ASKPASS_NODE"; then $(MAKE) init-gpg; fi
 
 	mark -- configure git crypt
