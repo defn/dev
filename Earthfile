@@ -175,6 +175,7 @@ user:
     END
 
     COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+coderServer/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+vscodeServer/* --arch=${arch}) /usr/local/bin/
 
     # shell-operator
     COPY --dir (+shell-operator/sf.tar.gz --arch=${arch}) /
@@ -291,11 +292,9 @@ vscodeServer:
     FROM +root --arch=${arch}
 
     # vscode-server
-    RUN wget -O- https://aka.ms/install-vscode-server/setup.sh | sudo sh -x; /usr/local/bin/code-server serve-local --accept-server-license-terms --without-connection-token || true & sleep 60
+    RUN wget -O- https://aka.ms/install-vscode-server/setup.sh | sudo sh -x
 
-
-    SAVE ARTIFACT .vscode-server
-    SAVE ARTIFACT .vscode-cli
+    SAVE ARTIFACT /usr/local/bin/code-server
 
 tools:
     FROM ubuntu:focal-20220531
