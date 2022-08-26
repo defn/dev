@@ -1,5 +1,5 @@
 storage "file" {
-  path = "/home/ubuntu/.password-store/vault/data"
+  path = "/work/password-store/vault/data"
 }
 
 disable_mlock = true
