@@ -279,6 +279,7 @@ immanent:
 	env DEFN_DEV_HOST_PORT=6444 DEFN_DEV_HOST_API=host.k3d.internal $(MAKE) this name=immanent
 
 grove:
+	$(MAKE) macos
 	env DEFN_DEV_MACOS=1 DEFN_DEV_HOST_PORT=6443 DEFN_DEV_HOST_API=127.0.0.1 $(MAKE) this name=grove
 	
 this:
