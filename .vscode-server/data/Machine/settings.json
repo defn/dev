@@ -1,4 +1,8 @@
 {
   "remote.SSH.defaultExtensions": [],
-  "remote.SSH.allowLocalServerDownload": "false"
+  "remote.SSH.allowLocalServerDownload": "false",
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "python.venvFolders": [
+    ".venv"
+  ]
 }
