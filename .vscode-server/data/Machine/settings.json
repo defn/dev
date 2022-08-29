@@ -4,5 +4,6 @@
   "python.terminal.activateEnvInCurrentTerminal": true,
   "python.venvFolders": [
     ".venv"
-  ]
+  ],
+  "python.defaultInterpreterPath": "/home/ubuntu/.venv/bin/python"
 }

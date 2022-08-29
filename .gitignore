@@ -81,3 +81,4 @@ node_modules
 .tool-versions
 .steampipe
 /app
+.venv
