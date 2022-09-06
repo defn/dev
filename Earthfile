@@ -290,10 +290,12 @@ coderServer:
 
 vscodeServer:
     ARG arch
+    ARG CODESERVER
 
     FROM +root --arch=${arch}
 
     # vscode-server
+    RUN echo ${CODESERVER}
     RUN wget -O- https://aka.ms/install-vscode-server/setup.sh | sudo sh -x
 
     SAVE ARTIFACT /usr/local/bin/code-server
