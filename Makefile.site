@@ -2,6 +2,8 @@ init-site-default:
 
 init-gpg-default:
 
+install-site-default:
+
 login-site-default:
 
 %: %-default
