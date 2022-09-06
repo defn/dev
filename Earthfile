@@ -104,6 +104,8 @@ root:
 
     ENV HOME=/home/ubuntu
 
+    SAVE IMAGE --cache-hint
+
 user:
     ARG arch
 
@@ -307,6 +309,8 @@ tools:
     RUN apt-get update \
         && apt-get install -y --no-install-recommends \
             apt-transport-https software-properties-common tzdata locales git gpg gpg-agent unzip xz-utils wget curl
+
+    SAVE IMAGE --cache-hint
 
 asdf:
     ARG arch
