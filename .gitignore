@@ -29,6 +29,7 @@ node_modules
 .swp
 .linkerd2
 .irssi
+.config/temporalio
 .config/caddy
 .config/kn
 .config/htop
