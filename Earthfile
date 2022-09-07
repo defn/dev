@@ -202,6 +202,8 @@ user:
 
     # new, unorganized
     COPY --chown=ubuntu:ubuntu --dir (+nomad/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+tctl/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu --dir (+temporalite/* --arch=${arch}) /usr/local/bin/
 
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
@@ -403,6 +405,20 @@ powerline:
     FROM +tools --arch=${arch}
     RUN curl -sSL -o powerline https://github.com/justjanne/powerline-go/releases/download/v${POWERLINE}/powerline-go-linux-${arch} && chmod 755 powerline
     SAVE ARTIFACT powerline
+
+tctl:
+    ARG arch
+    ARG TEMPORAL
+    FROM --platform=${arch} temporalio/admin-tools:${TEMPORAL}
+    SAVE ARTIFACT /usr/local/bin/tctl
+
+temporal:
+    ARG arch
+    ARG TEMPORAL
+    ARG TEMPORALITE
+    FROM +tools --arch=${arch}
+    RUN curl -sSL https://github.com/temporalio/temporalite/releases/download/v${TEMPORALITE}/temporalite_${TEMPORALITE}_linux_${arch}.tar.gz | tar xvfz -
+    SAVE ARTIFACT temporalite
 
 step:
     ARG arch
