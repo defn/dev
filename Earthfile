@@ -412,7 +412,7 @@ tctl:
     FROM --platform=${arch} temporalio/admin-tools:${TEMPORAL}
     SAVE ARTIFACT /usr/local/bin/tctl
 
-temporal:
+temporalite:
     ARG arch
     ARG TEMPORAL
     ARG TEMPORALITE
