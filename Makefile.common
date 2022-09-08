@@ -170,7 +170,7 @@ join-inner:
 
 cluster-inner:
 	-k3d cluster delete $(name)
-	k3d cluster create $(name) --config k3d.yaml --k3s-node-label env=$(name)@server:0 --registry-use 192.168.65.2:5000
+	k3d cluster create $(name) --config k3d.yaml --k3s-node-label env=$(name)@server:0 --registry-config etc/registries.yaml
 	docker update --restart=no $(context)-server-0
 	-cd $(app)/tf/$(name) && make init plan apply
 
