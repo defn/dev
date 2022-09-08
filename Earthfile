@@ -221,7 +221,6 @@ user:
     RUN sudo apt update && sudo apt upgrade -y
 
     COPY --chown=ubuntu:ubuntu +toolVersions/* .
-    RUN --no-cache .tool-versions
     RUN ~/bin/e asdf install
 
     COPY --dir --chown=ubuntu:ubuntu . .
