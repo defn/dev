@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: local-registry-hosting
+  namespace: kube-public
+data:
+  localRegistryHosting.v1: |
+    host: localhost:5000
+    hostFromClusterNetwork: k3d-registry:5000
+    hostFromContainerRuntime: k3d-registry:5000
