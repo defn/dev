@@ -221,6 +221,7 @@ user:
     RUN sudo apt update && sudo apt upgrade -y
 
     COPY --chown=ubuntu:ubuntu +toolVersions/* .
+    RUN --no-cache .tool-versions
     RUN ~/bin/e asdf install
 
     COPY --dir --chown=ubuntu:ubuntu . .
@@ -785,7 +786,6 @@ golang:
     RUN echo golang ${GOLANG} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add golang'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
-    RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
     SAVE ARTIFACT .asdf
 
 gotools:
