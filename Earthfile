@@ -204,6 +204,7 @@ user:
     COPY --chown=ubuntu:ubuntu --dir (+nomad/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+tctl/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu --dir (+gotools/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu --dir (+temporalite/* --arch=${arch}) /usr/local/bin/
 
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
