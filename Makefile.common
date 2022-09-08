@@ -312,3 +312,5 @@ this:
 		kubectl rollout -n argocd status deployment argocd-server --watch; \
 	fi
 
+registry:
+	k3d registry create registry --port 0.0.0.0:5000
