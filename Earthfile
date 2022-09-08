@@ -203,7 +203,7 @@ user:
     # new, unorganized
     COPY --chown=ubuntu:ubuntu --dir (+nomad/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+tctl/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu --dir (+temporalite/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu --dir (+gotools/* --arch=${arch}) /usr/local/bin/
 
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
@@ -286,7 +286,7 @@ coderServer:
     RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local
     RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
     RUN git clone https://github.com/cue-sh/vscode-cue /home/ubuntu/.local/share/code-server/extensions/vscode-cue
-    RUN for a in betterthantomorrow.calva betterthantomorrow.joyride ms-python.python vscodevim.vim; do /home/ubuntu/.local/bin/code-server --install-extension "$a"; done
+    RUN for a in betterthantomorrow.calva betterthantomorrow.joyride ms-python.python golang.Go vscodevim.vim; do /home/ubuntu/.local/bin/code-server --install-extension "$a"; done
 
     SAVE ARTIFACT .local
 
@@ -783,7 +783,16 @@ golang:
     RUN echo golang ${GOLANG} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add golang'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
     SAVE ARTIFACT .asdf
+
+gotools:
+    FROM +golang --arch=${arch}
+    ARG GOLANG
+    RUN bash -c 'source ~/.asdf/asdf.sh && go install github.com/go-delve/delve/cmd/dlv@latest'
+    RUN bash -c 'source ~/.asdf/asdf.sh && go install golang.org/x/tools/gopls@latest'
+    RUN bash -c 'source ~/.asdf/asdf.sh && go install honnef.co/go/tools/cmd/staticcheck@latest'
+    SAVE ARTIFACT .asdf/installs/golang/${GOLANG}/packages/bin/*
 
 cue-gen:
     ARG arch

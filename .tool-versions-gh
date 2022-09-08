@@ -94,7 +94,6 @@ cilium/hubble v0.8.0 v0.8.0
 cilium/hubble v0.8.1 v0.8.1
 cilium/hubble v0.8.2 v0.8.2
 cilium/hubble v0.9.0 v0.9.0
-cli/cli GitHub v1.14.0
 cli/cli GitHub v2.0.0
 cli/cli GitHub v2.1.0
 cli/cli GitHub v2.10.0
@@ -114,6 +113,7 @@ cli/cli GitHub v2.14.4
 cli/cli GitHub v2.14.5
 cli/cli GitHub v2.14.6
 cli/cli GitHub v2.14.7
+cli/cli GitHub v2.15.0
 cli/cli GitHub v2.2.0
 cli/cli GitHub v2.3.0
 cli/cli GitHub v2.4.0
@@ -190,7 +190,6 @@ docker/docker-credential-helpers v0.6.2 v0.6.2
 docker/docker-credential-helpers v0.6.3 v0.6.3
 docker/docker-credential-helpers v0.6.4 v0.6.4
 docker/docker-credential-helpers v0.7.0-beta.1 v0.7.0-beta.1
-earthly/earthly v0.5.20 v0.5.20
 earthly/earthly v0.5.22 v0.5.22
 earthly/earthly v0.5.23 v0.5.23
 earthly/earthly v0.5.24 v0.5.24
@@ -212,6 +211,7 @@ earthly/earthly v0.6.1 v0.6.1
 earthly/earthly v0.6.20 v0.6.20
 earthly/earthly v0.6.21 v0.6.21
 earthly/earthly v0.6.22 v0.6.22
+earthly/earthly v0.6.23 v0.6.23
 earthly/earthly v0.6.2 v0.6.2
 earthly/earthly v0.6.3 v0.6.3
 earthly/earthly v0.6.4 v0.6.4
@@ -220,7 +220,6 @@ earthly/earthly v0.6.6 v0.6.6
 earthly/earthly v0.6.7 v0.6.7
 earthly/earthly v0.6.8 v0.6.8
 earthly/earthly v0.6.9 v0.6.9
-hofstadter-io/hof v0.5.15 v0.5.15
 hofstadter-io/hof v0.5.16 v0.5.16
 hofstadter-io/hof v0.5.17 v0.5.17
 hofstadter-io/hof v0.6.0 v0.6.0
@@ -250,6 +249,7 @@ hofstadter-io/hof v0.6.5-rc.1 v0.6.5-rc.1
 hofstadter-io/hof v0.6.5-rc.2 v0.6.5-rc.2
 hofstadter-io/hof v0.6.5 v0.6.5
 hofstadter-io/hof v0.6.6 v0.6.6
+hofstadter-io/hof v0.6.7-alpha.3 v0.6.7-alpha.3
 justjanne/powerline-go Added v1.7.0
 justjanne/powerline-go Add v1.8.0
 justjanne/powerline-go Fixed v1.3.2
@@ -549,7 +549,6 @@ smallstep/cli Step v0.19.0
 smallstep/cli Step v0.20.0
 smallstep/cli Step v0.21.0
 smallstep/cli Step v0.22.0
-superfly/flyctl v0.0.367-pre-1 v0.0.367-pre-1
 superfly/flyctl v0.0.367 v0.0.367
 superfly/flyctl v0.0.368 v0.0.368
 superfly/flyctl v0.0.369-pre-1 v0.0.369-pre-1
@@ -579,6 +578,9 @@ superfly/flyctl v0.0.386 v0.0.386
 superfly/flyctl v0.0.387-pre-1 v0.0.387-pre-1
 superfly/flyctl v0.0.387 v0.0.387
 superfly/flyctl v0.0.388-pre-1 v0.0.388-pre-1
+superfly/flyctl v0.0.388 v0.0.388
+temporalio/temporalite v0.1.0 v0.1.0
+temporalio/temporalite v0.1.1 v0.1.1
 tilt-dev/tilt v0.23.5 v0.23.5
 tilt-dev/tilt v0.23.6 v0.23.6
 tilt-dev/tilt v0.23.7 v0.23.7
@@ -624,12 +626,12 @@ turbot/steampipe v0.16.1-rc.1 v0.16.1-rc.1
 turbot/steampipe v0.16.1-rc.2 v0.16.1-rc.2
 turbot/steampipe v0.16.1-rc.3 v0.16.1-rc.3
 turbot/steampipe v0.16.1 v0.16.1
-turbot/steampipe v0.17.0-alpha.0 v0.17.0-alpha.0
 turbot/steampipe v0.17.0-alpha.10 v0.17.0-alpha.10
 turbot/steampipe v0.17.0-alpha.11 v0.17.0-alpha.11
 turbot/steampipe v0.17.0-alpha.12 v0.17.0-alpha.12
 turbot/steampipe v0.17.0-alpha.13 v0.17.0-alpha.13
 turbot/steampipe v0.17.0-alpha.14 v0.17.0-alpha.14
+turbot/steampipe v0.17.0-alpha.15 v0.17.0-alpha.15
 turbot/steampipe v0.17.0-alpha.1 v0.17.0-alpha.1
 turbot/steampipe v0.17.0-alpha.2 v0.17.0-alpha.2
 turbot/steampipe v0.17.0-alpha.3 v0.17.0-alpha.3

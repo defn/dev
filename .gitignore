@@ -44,6 +44,7 @@ node_modules
 .config/gomuks
 .config/packer
 .config/ggshield
+.config/dlv
 .loft
 .lesshst
 .fly

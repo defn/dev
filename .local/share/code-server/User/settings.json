@@ -21,5 +21,14 @@
         "width": 120,
         "maxLength": 50
     },
-    "calva.paredit.defaultKeyMap": "strict"
+    "calva.paredit.defaultKeyMap": "strict",
+    "go.inlayHints.assignVariableTypes": true,
+    "go.inlayHints.compositeLiteralFields": true,
+    "go.inlayHints.compositeLiteralTypes": true,
+    "go.inlayHints.constantValues": true,
+    "go.inlayHints.functionTypeParameters": true,
+    "go.inlayHints.parameterNames": true,
+    "go.inlayHints.rangeVariableTypes": true,
+    "go.survey.prompt": false,
+    "go.toolsManagement.checkForUpdates": "off"
 }
