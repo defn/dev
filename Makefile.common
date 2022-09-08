@@ -251,6 +251,9 @@ test:
 	pass hello
 	earthly --allow-privileged --remote-cache=$(cache)defn/cache:updates-images --no-output +test --repo=$${repo:-quay.io/}
 
+local:
+	$(MAKE) images repo=localhost:5000/
+
 images:
 	pass hello
 	if [[ "$(shell pwd)" == "$(HOME)" ]]; then git pull; git push; if ! test -d work/dev/.; then git clone https://github.com/defn/dev work/dev; fi; cd work/dev && git pull && $(MAKE) $@; else repo=$(repo); earthly --remote-cache=$(cache)defn/cache:updates-$@ --no-output $(push) +images --repo=$${repo:-quay.io/}; fi
