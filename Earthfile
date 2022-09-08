@@ -786,6 +786,7 @@ golang:
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add golang'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
+    SAVE IMAGE --cache-hint
 
 gotools:
     FROM +golang --arch=${arch}
@@ -794,6 +795,7 @@ gotools:
     RUN bash -c 'source ~/.asdf/asdf.sh && go install golang.org/x/tools/gopls@latest'
     RUN bash -c 'source ~/.asdf/asdf.sh && go install honnef.co/go/tools/cmd/staticcheck@latest'
     SAVE ARTIFACT .asdf/installs/golang/${GOLANG}/packages/bin/*
+    SAVE IMAGE --cache-hint
 
 cue-gen:
     ARG arch
