@@ -224,6 +224,8 @@ user:
     COPY --dir --chown=ubuntu:ubuntu . .
     RUN set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd
 
+    RUN sudo apt update && sudo apt upgrade -y
+
 toolVersions:
     FROM ubuntu:focal-20220531
     ARG ARGO
