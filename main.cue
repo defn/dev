@@ -4,10 +4,10 @@ import (
 	"github.com/defn/boot/project"
 )
 
-#DevContext: {
+#BootContext: {
 	project.#Project
 }
 
-devContext: #DevContext & {
+bootContext: #BootContext & {
 	codeowners: ["@jojomomojo", "@amanibhavam"]
 }
