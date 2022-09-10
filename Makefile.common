@@ -324,4 +324,5 @@ global: # Provision global server from control plane
 control: # Provision control plane from macOS
 	$(MAKE) pull-repos
 	$(MAKE) macos
+	-k3d cluster delete global
 	env DEFN_DEV_MACOS=1 DEFN_DEV_HOST_PORT=6443 DEFN_DEV_HOST_API=127.0.0.1 $(MAKE) this name=$@
