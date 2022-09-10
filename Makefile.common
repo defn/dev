@@ -313,9 +313,16 @@ registry:
 	-k3d registry create registry --port 0.0.0.0:5000
 	#pod apply -f etc/local-registry-hosting.yaml
 
+pull-repos: # Pull dev, home, and password-store repos
+	git pull
+	cd && git pull
+	cd && cd .password-store && git pull
+
 global: # Provision global server from control plane
+	$(MAKE) pull-repos
 	env DEFN_DEV_HOST_PORT=6444 DEFN_DEV_HOST_API=host.k3d.internal $(MAKE) this name=$@
 
 control: # Provision control plane from macOS
+	$(MAKE) pull-repos
 	$(MAKE) macos
 	env DEFN_DEV_MACOS=1 DEFN_DEV_HOST_PORT=6443 DEFN_DEV_HOST_API=127.0.0.1 $(MAKE) this name=$@
