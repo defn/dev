@@ -313,8 +313,9 @@ registry:
 	-k3d registry create registry --port 0.0.0.0:5000
 	#pod apply -f etc/local-registry-hosting.yaml
 
-pull-repos: # Pull dev, home, and password-store repos
+pull-repos: # Pull dev, app, home, and password-store repos
 	git pull
+	cd app && git pull
 	cd && git pull
 	cd && cd .password-store && git pull
 

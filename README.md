@@ -97,7 +97,7 @@ registries: # define how registries should be created or used
           - http://my.company.registry:5000
 hostAliases: # /etc/hosts style entries to be injected into /etc/hosts in the node containers and in the NodeHosts section in CoreDNS
   - ip: 1.2.3.4
-    hostnames: 
+    hostnames:
       - my.host.local
       - that.other.local
   - ip: 1.1.1.1
