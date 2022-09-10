@@ -84,3 +84,4 @@ node_modules
 .steampipe
 /app
 .venv
+.home.*

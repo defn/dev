@@ -26,12 +26,6 @@ macos:
 	ifconfig lo0
 	defaults write -g ApplePressAndHoldEnabled -bool false
 
-dev:
-	@true
-
-dev-meh:
-	@if [[ ! -d work/password-store ]]; then if flock -n ~/.home.lock -c '~/bin/e $(MAKE) init'; then true; fi; fi
-
 #	$(MAKE) github-login
 #	if [[ ! -f .gitconfig ]]; then \
 #		rm -f .gitconfig; \
