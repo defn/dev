@@ -143,10 +143,14 @@ vclusterconfig:
 		argocd cluster add vcluster --yes; \
 		fi
 
-asdf:
+pending: # Generate pending version updates
+	$(MAKE) pending-gh
+	$(MAKE) pending-asdf
+
+pending-asdf:
 	cat .tool-versions| awk '{print $$1}' | while read -r a; do asdf list-all "$$a" | sed "s#^#$$a #"; done | sort > .tool-versions-all
 
-gh:
+pending-gh:
 	$(MAKE) github-login
 	for a in $$(grep curl Earthfile | grep github.com | perl -pe 's{.*github.com/}{}; s{(.*?/.*?)/.*}{$$1}' | sort); do gh release list --repo "$$a" --exclude-drafts | cat | perl -pe 's{[ \t]+}{ }g' | awk '{print $$1,$$(NF-1)}' | sort | sed "s#^#$$a #"; done > .tool-versions-gh
 
@@ -281,13 +285,6 @@ provision-digital-ocean:
 
 debug-host:
 	pod debug "node/$$(pod get nodes -o json | jq -r '.items[0].metadata.name')" --image quay.io/defn/dev -it -- bash
-
-immanent:
-	env DEFN_DEV_HOST_PORT=6444 DEFN_DEV_HOST_API=host.k3d.internal $(MAKE) this name=immanent
-
-grove:
-	$(MAKE) macos
-	env DEFN_DEV_MACOS=1 DEFN_DEV_HOST_PORT=6443 DEFN_DEV_HOST_API=127.0.0.1 $(MAKE) this name=grove
 
 this:
 	git pull
