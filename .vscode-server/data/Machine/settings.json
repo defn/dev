@@ -2,6 +2,7 @@
   "remote.SSH.defaultExtensions": [],
   "remote.SSH.allowLocalServerDownload": "false",
   "python.terminal.activateEnvInCurrentTerminal": true,
+  "terminal.integrated.localEchoEnabled": "off",
   "python.venvFolders": [
     ".venv"
   ],

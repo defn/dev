@@ -8,7 +8,7 @@
     "redhat.telemetry.enabled": false,
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.enableMultiLinePasteWarning": false,
-    "terminal.integrated.localEchoEnabled": "on",
+    "terminal.integrated.localEchoEnabled": "off",
     "terminal.integrated.sendKeybindingsToShell": true,
     "terminal.integrated.showExitAlert": false,
     "terraform.languageServer.ignoreSingleFileWarning": true,
