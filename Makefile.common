@@ -51,6 +51,10 @@ perms:
 install:
 	$(MAKE) init
 	$(MAKE) install-site
+	$(MAKE) install-global
+
+install-global:
+	if ! k3d cluster list global -o json | jq -e -r '.[].nodes | map(select(.State.Status == "running")) | length' | grep ^3; then $(MAKE) global; fi
 
 init:
 	$(MAKE) symlinks perms
