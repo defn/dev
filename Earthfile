@@ -108,7 +108,6 @@ root:
 
 user:
     ARG arch
-    ARG BUMP
 
     FROM +root --arch=${arch}
 
@@ -222,8 +221,6 @@ user:
 
     COPY --chown=ubuntu:ubuntu +toolVersions/* .
     RUN ~/bin/e asdf install
-
-    RUN echo "${BUMP}" && sudo apt update && sudo apt upgrade -y
 
     COPY --dir --chown=ubuntu:ubuntu . .
     RUN set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd
