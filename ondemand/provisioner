@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+if [[ -f .done ]]; then
+    exec socat - TCP:localhost:8888
+else
+    echo HTTP/1.1 200
+    echo
+    cat index.html
+
+    # provision infra for user
+    if flock -n .doing -c 'echo making some infra'; then
+        sleep 5
+        touch .done
+        rm -f .doing
+    fi
+fi
