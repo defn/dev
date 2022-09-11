@@ -12,5 +12,7 @@ else
         sleep 5
         touch .done
         rm -f .doing
+        sleep 60
+        rm -f .done
     fi
 fi
