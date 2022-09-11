@@ -219,8 +219,6 @@ user:
     COPY --chown=ubuntu:ubuntu --dir bin .
     COPY --chown=ubuntu:ubuntu .bash* .
 
-    RUN sudo apt update && sudo apt upgrade -y
-
     COPY --chown=ubuntu:ubuntu +toolVersions/* .
     RUN ~/bin/e asdf install
 
