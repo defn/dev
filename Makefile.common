@@ -90,6 +90,8 @@ login:
 	mark -- configure kubeconfig, argocd
 	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then $(MAKE) kubeconfig; $(MAKE) argocd-login || true; fi
 
+	# sync clusters with argocd
+
 	$(MAKE) github-login
 
 	#cd ~/.password-store && git pull
