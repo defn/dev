@@ -72,8 +72,7 @@ init:
 	mark -- configure git crypt
 	$(MAKE) git-crypt-unlock
 
-	mark -- configure kubeconfig, argocd
-	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then $(MAKE) kubeconfig; $(MAKE) argocd-login || true; fi
+	$(MAKE) login
 
 	mark -- configure site
 	$(MAKE) init-site
@@ -88,13 +87,13 @@ logout:
 	-echo RELOADAGENT | gpg-connect-agent
 
 login:
-	$(MAKE) perms
-	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
-	#$(MAKE) github-login
-	cd ~/.password-store && git pull
-	$(MAKE) git-crypt-unlock
-	$(MAKE) kubeconfig
-	-$(MAKE) argocd-login
+	mark -- configure kubeconfig, argocd
+	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then $(MAKE) kubeconfig; $(MAKE) argocd-login || true; fi
+
+	$(MAKE) github-login
+
+	#cd ~/.password-store && git pull
+	#$(MAKE) git-crypt-unlock
 
 	$(MAKE) login-site
 
