@@ -150,7 +150,8 @@ pending: # Generate pending version updates
 pending-images:
 	pod get pods --all-namespaces -o json | gron | grep '\.image ='  | cut -d'"' -f2 | sort -u | grep -v :5000/ > .image-versions.txt
 
-sync-images:
+sync-images: # Sync images to local cache
+	skopeo copy docker://quay.io/defn/dev:latest docker://127.0.0.1:5000/defn/dev:latest --multi-arch all --dest-tls-verify=false
 	for a in $$(cat .image-versions.txt); do skopeo copy docker://$$a docker://127.0.0.1:5000/$${a#*/} --multi-arch all --dest-tls-verify=false; done
 
 pending-asdf:
@@ -324,7 +325,6 @@ pull-repos: # Pull dev, app, home, and password-store repos
 	cd app && git pull
 	cd && git pull
 	cd && cd .password-store && git pull
-	skopeo copy docker://quay.io/defn/dev:latest docker://127.0.0.1:5000/defn/dev:latest --multi-arch all --dest-tls-verify=false
 
 global: # Provision global server from control plane
 	$(MAKE) pull-repos
