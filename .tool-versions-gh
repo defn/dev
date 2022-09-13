@@ -549,7 +549,6 @@ smallstep/cli Step v0.19.0
 smallstep/cli Step v0.20.0
 smallstep/cli Step v0.21.0
 smallstep/cli Step v0.22.0
-superfly/flyctl v0.0.367 v0.0.367
 superfly/flyctl v0.0.368 v0.0.368
 superfly/flyctl v0.0.369-pre-1 v0.0.369-pre-1
 superfly/flyctl v0.0.369 v0.0.369
@@ -579,6 +578,7 @@ superfly/flyctl v0.0.387-pre-1 v0.0.387-pre-1
 superfly/flyctl v0.0.387 v0.0.387
 superfly/flyctl v0.0.388-pre-1 v0.0.388-pre-1
 superfly/flyctl v0.0.388 v0.0.388
+superfly/flyctl v0.0.389 v0.0.389
 temporalio/temporalite v0.1.0 v0.1.0
 temporalio/temporalite v0.1.1 v0.1.1
 tilt-dev/tilt v0.23.5 v0.23.5
