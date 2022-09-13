@@ -34,78 +34,6 @@ arm:
     FROM --platform=linux/arm64 +user --arch=arm64
     SAVE IMAGE --push ${repo}defn/dev
 
-root:
-    ARG arch
-
-    FROM ubuntu:focal-20220531
-
-    USER root
-    ENTRYPOINT ["tail", "-f", "/dev/null"]
-
-    ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-    ENV LANG en_US.UTF-8
-    ENV LANGUAGE en_US:en
-    ENV LC_ALL en_US.UTF-8
-
-    ENV DEBIAN_FRONTEND=noninteractive
-    ENV container=docker
-
-    RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm
-
-    RUN apt-get update \
-        && apt-get upgrade -y \
-        && apt-get install -y --no-install-recommends \
-        apt-transport-https software-properties-common \
-        openssh-client openssh-server tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip xz-utils rsync \
-        sudo git vim less fzf jo gron jq \
-        build-essential default-jdk make tini python3-pip python3-venv entr \
-        gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 libolm-dev \
-        xdg-utils figlet lolcat socat netcat-openbsd groff \
-        screen htop \
-        redis \
-        wireguard-tools
-
-	RUN apt purge -y nano
-
-    RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null \
-        && curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.tailscale-keyring.list | tee /etc/apt/sources.list.d/tailscale.list \
-        && apt-get update \
-        && apt install -y tailscale
-
-    RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
-        && echo "deb [arch=${arch} signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu focal stable" | tee /etc/apt/sources.list.d/docker.list \
-        && apt-get update \
-        && apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
-
-    RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
-    RUN usermod --groups docker --append ubuntu
-    RUN echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu
-    RUN install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
-
-    RUN apt update && apt upgrade -y
-    RUN ln -sf /usr/share/zoneinfo/UTC /etc/localtime \
-        && dpkg-reconfigure -f noninteractive tzdata \
-        && locale-gen en_US.UTF-8 \
-        && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-
-    RUN rm -f /usr/bin/gs
-
-    RUN ln -nfs /usr/bin/git-crypt /usr/local/bin/
-
-    RUN mkdir /run/sshd
-
-    RUN chown -R ubuntu:ubuntu /home/ubuntu
-    RUN chmod u+s /usr/bin/sudo
-
-    COPY etc/daemon.json /etc/docker/daemon.json
-
-    USER ubuntu
-    WORKDIR /home/ubuntu
-
-    ENV HOME=/home/ubuntu
-
-    SAVE IMAGE --cache-hint
-
 user:
     ARG arch
 
@@ -205,6 +133,7 @@ user:
     COPY --chown=ubuntu:ubuntu --dir (+tctl/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu --dir (+gotools/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu --dir (+temporalite/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu --dir (+oras/* --arch=${arch}) /usr/local/bin/
 
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
@@ -224,6 +153,79 @@ user:
 
     COPY --dir --chown=ubuntu:ubuntu . .
     RUN set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd
+
+
+root:
+    ARG arch
+
+    FROM ubuntu:focal-20220531
+
+    USER root
+    ENTRYPOINT ["tail", "-f", "/dev/null"]
+
+    ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    ENV LANG en_US.UTF-8
+    ENV LANGUAGE en_US:en
+    ENV LC_ALL en_US.UTF-8
+
+    ENV DEBIAN_FRONTEND=noninteractive
+    ENV container=docker
+
+    RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm
+
+    RUN apt-get update \
+        && apt-get upgrade -y \
+        && apt-get install -y --no-install-recommends \
+        apt-transport-https software-properties-common \
+        openssh-client openssh-server tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip xz-utils rsync \
+        sudo git vim less fzf jo gron jq \
+        build-essential default-jdk make tini python3-pip python3-venv entr \
+        gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 libolm-dev \
+        xdg-utils figlet lolcat socat netcat-openbsd groff \
+        screen htop \
+        redis \
+        wireguard-tools
+
+	RUN apt purge -y nano
+
+    RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null \
+        && curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.tailscale-keyring.list | tee /etc/apt/sources.list.d/tailscale.list \
+        && apt-get update \
+        && apt install -y tailscale
+
+    RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
+        && echo "deb [arch=${arch} signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu focal stable" | tee /etc/apt/sources.list.d/docker.list \
+        && apt-get update \
+        && apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+    RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
+    RUN usermod --groups docker --append ubuntu
+    RUN echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu
+    RUN install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
+
+    RUN apt update && apt upgrade -y
+    RUN ln -sf /usr/share/zoneinfo/UTC /etc/localtime \
+        && dpkg-reconfigure -f noninteractive tzdata \
+        && locale-gen en_US.UTF-8 \
+        && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+
+    RUN rm -f /usr/bin/gs
+
+    RUN ln -nfs /usr/bin/git-crypt /usr/local/bin/
+
+    RUN mkdir /run/sshd
+
+    RUN chown -R ubuntu:ubuntu /home/ubuntu
+    RUN chmod u+s /usr/bin/sudo
+
+    COPY etc/daemon.json /etc/docker/daemon.json
+
+    USER ubuntu
+    WORKDIR /home/ubuntu
+
+    ENV HOME=/home/ubuntu
+
+    SAVE IMAGE --cache-hint
 
 toolVersions:
     FROM ubuntu:focal-20220531
@@ -368,13 +370,20 @@ jless:
     RUN --secret JLESS (curl -sSL https://github.com/PaulJuliusMartinez/jless/releases/download/v${JLESS}/jless-v${JLESS}-x86_64-unknown-linux-gnu.zip | gunzip -c - > jless) && chmod 755 jless
     SAVE ARTIFACT jless
 
+oras:
+    ARG arch
+    ARG ORAS
+    FROM +tools --arch=${arch}
+    RUN curl -sSL https://github.com/oras-project/oras/releases/download/v${ORAS}/oras_${ORAS}_linux_${arch}.tar.gz
+    SAVE ARTIFACT flyctl
+
 flyctl:
     ARG arch
     ARG arch2
     ARG FLYCTL
     FROM +tools --arch=${arch}
     RUN curl -sSL https://github.com/superfly/flyctl/releases/download/v${FLYCTL}/flyctl_${FLYCTL}_Linux_${arch2}.tar.gz | tar xvfz -
-    SAVE ARTIFACT flyctl
+    SAVE ARTIFACT oras
 
 difft:
     ARG arch
