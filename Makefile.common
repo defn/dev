@@ -317,6 +317,7 @@ pull-repos: # Pull dev, app, home, and password-store repos
 	cd app && git pull
 	cd && git pull
 	cd && cd .password-store && git pull
+	skopeo copy docker://quay.io/defn/dev:latest docker://127.0.0.1:5000/defn/dev:latest --multi-arch all --dest-tls-verify=false
 
 global: # Provision global server from control plane
 	$(MAKE) pull-repos
