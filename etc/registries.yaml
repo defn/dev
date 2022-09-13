@@ -2,3 +2,15 @@ mirrors:
   "192.168.65.2:5000":
     endpoint:
       - http://192.168.65.2:5000
+  "docker.io":
+    endpoint:
+      - http://192.168.65.2:5000
+  "ghcr.io":
+    endpoint:
+      - http://192.168.65.2:5000
+  "public.ecr.aws":
+    endpoint:
+      - http://192.168.65.2:5000
+  "quay.io":
+    endpoint:
+      - http://192.168.65.2:5000
