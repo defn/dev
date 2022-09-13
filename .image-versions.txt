@@ -4,6 +4,8 @@ docker.io/rancher/local-path-provisioner:v0.0.21
 docker.io/rancher/mirrored-coredns-coredns:1.9.1
 docker.io/rancher/mirrored-metrics-server:v0.5.2
 earthly/buildkitd:v0.6.23
+gcr.io/datadoghq/agent:7.39.0
+gcr.io/datadoghq/cluster-agent:7.39.0
 ghcr.io/dexidp/dex:v2.30.2
 ghcr.io/external-secrets/external-secrets:v0.5.8
 ghcr.io/kedacore/keda:2.8.1
