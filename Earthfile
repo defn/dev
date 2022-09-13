@@ -383,7 +383,7 @@ flyctl:
     ARG FLYCTL
     FROM +tools --arch=${arch}
     RUN curl -sSL https://github.com/superfly/flyctl/releases/download/v${FLYCTL}/flyctl_${FLYCTL}_Linux_${arch2}.tar.gz | tar xvfz -
-    SAVE ARTIFACT oras
+    SAVE ARTIFACT flyctl
 
 difft:
     ARG arch
