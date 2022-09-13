@@ -374,8 +374,8 @@ oras:
     ARG arch
     ARG ORAS
     FROM +tools --arch=${arch}
-    RUN curl -sSL https://github.com/oras-project/oras/releases/download/v${ORAS}/oras_${ORAS}_linux_${arch}.tar.gz
-    SAVE ARTIFACT flyctl
+    RUN curl -sSL https://github.com/oras-project/oras/releases/download/v${ORAS}/oras_${ORAS}_linux_${arch}.tar.gz | tar xvfz -
+    SAVE ARTIFACT oras
 
 flyctl:
     ARG arch
