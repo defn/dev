@@ -341,3 +341,6 @@ control: # Provision control plane from macOS
 	env DEFN_DEV_HOST_PORT=6443 DEFN_DEV_HOST_API=127.0.0.1 \
 		DEFN_DEV_MACOS=1 \
 		$(MAKE) this name=$@
+
+bin/pants: # Get the latest pants script
+	curl -sSL -o $@ https://raw.githubusercontent.com/pantsbuild/setup/gh-pages/pants
