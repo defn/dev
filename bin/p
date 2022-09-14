@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ -x pants ]]; then
-	exec ./pants "$@"
+	exec ./pants --golang-go-search-paths="$(dirname "$(asdf which go)")" "$@"
 else
 	exec pants "$@"
 fi
