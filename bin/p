@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-if [[ -z "${_OLD_VIRTUAL_PATH:-}" ]]; then
-	if [[ -f .venv/bin/activate ]]; then
-		source .venv/bin/activate
-	fi
-fi
-
 if [[ -x pants ]]; then
 	exec ./pants --golang-go-search-paths="$(dirname "$(asdf which go)")" "$@"
 else
