@@ -23,5 +23,8 @@
     },
     "calva.paredit.defaultKeyMap": "strict",
     "go.survey.prompt": false,
-    "go.toolsManagement.checkForUpdates": "off"
+    "go.toolsManagement.checkForUpdates": "off",
+    "gopls": {
+        "ui.semanticTokens": true
+    }
 }
