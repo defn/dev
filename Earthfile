@@ -134,6 +134,7 @@ user:
     END
 
     # new, unorganized
+    COPY --chown=ubuntu:ubuntu (+nerdctl/* --arch=${arch}) /usr/local/bin/
 
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
@@ -384,6 +385,13 @@ flyctl:
     FROM +tools --arch=${arch}
     RUN curl -sSL https://github.com/superfly/flyctl/releases/download/v${FLYCTL}/flyctl_${FLYCTL}_Linux_${arch2}.tar.gz | tar xvfz -
     SAVE ARTIFACT flyctl
+
+nerdctl:
+    ARG arch
+    ARG NERDCTL
+    FROM +tools --arch=${arch}
+    RUN curl -sSL https://github.com/containerd/nerdctl/releases/download/v${NERDCTL}/nerdctl-${NERDCTL}-linux-${arch}.tar.gz | tar xvfz - 
+    SAVE ARTIFACT nerdctl
 
 difft:
     ARG arch
