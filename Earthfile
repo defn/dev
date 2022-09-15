@@ -69,6 +69,10 @@ user:
     COPY --chown=ubuntu:ubuntu (+kn/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=amd64) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+k3d/* --arch=amd64) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+tctl/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+gotools/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+temporalite/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+oras/* --arch=${arch}) /usr/local/bin/
 
     COPY --chown=ubuntu:ubuntu --dir (+shell/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+k9s/* --arch=${arch}) ./
@@ -87,6 +91,7 @@ user:
     COPY --chown=ubuntu:ubuntu --dir (+packer/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+doctl/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+caddy/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+nomad/* --arch=${arch}) ./
 
     # arch2: hof, tilt
     IF [ ${arch} = "arm64" ]
@@ -129,11 +134,6 @@ user:
     END
 
     # new, unorganized
-    COPY --chown=ubuntu:ubuntu --dir (+nomad/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+tctl/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu --dir (+gotools/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu --dir (+temporalite/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu --dir (+oras/* --arch=${arch}) /usr/local/bin/
 
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
