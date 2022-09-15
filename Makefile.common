@@ -55,6 +55,8 @@ install:
 
 install-global:
 	if ! k3d cluster list global -o json | jq -e -r '.[].nodes | map(select(.State.Status == "running")) | length' | grep ^3; then $(MAKE) global; fi
+	argocd cluster add --yes --upsert k3d-global
+	pod apply -f app/e/k3d-global.yaml;
 
 init:
 	$(MAKE) symlinks perms
