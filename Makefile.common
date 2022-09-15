@@ -92,8 +92,6 @@ login:
 
 	# sync clusters with argocd
 
-	$(MAKE) github-login
-
 	#cd ~/.password-store && git pull
 	#$(MAKE) git-crypt-unlock
 
