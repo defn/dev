@@ -189,9 +189,7 @@ cluster-inner:
 	k3d cluster create $(name) \
 		--k3s-node-label env=$(name)@server:0 \
 		--config k3d.yaml \
-		--registry-config etc/registries.yaml \
-		-p 443:443@server:0 \
-		-p 80:80@server:0
+		--registry-config etc/registries.yaml $DEFN_DEV_HOST_PORTMAPS
 	docker update --restart=no $(context)-server-0
 	-cd $(app)/tf/$(name) && make init plan apply
 
@@ -348,4 +346,5 @@ control: # Provision control plane from macOS
 	env DEFN_DEV_HOST_PORT=6443 DEFN_DEV_HOST_API=127.0.0.1 \
 		DEFN_DEV_NAME=k3d-$@ \
 		DEFN_DEV_MACOS=1 \
+		DEFN_DEV_HOST_PORTMAPS="-p 443:443@server:0 -p 80:80@server:0" \
 		$(MAKE) this name=$@
