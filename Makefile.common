@@ -63,9 +63,9 @@ init:
 
 	mark -- configure password-store
 	mkdir -p ~/work/password-store
-	cd ~/.password-store && oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:password-store && git reset --hard
+	cd ~/.password-store && rm -rf .git && oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:password-store && git reset --hard
 	mkdir -p ~/work/app
-	cd ~/work/app && oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:app && git reset --hard
+	cd ~/work/app && rm -rf .git && oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:app && git reset --hard
 
 	mark -- configure gpg
 	$(MAKE) perms
