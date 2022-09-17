@@ -317,11 +317,10 @@ this:
 	docker run -it --rm --privileged --pid=host alpine:edge nsenter -t 1 -m -u -n -i iptables -t filter -F DOCKER-ISOLATION-STAGE-2
 	if test -z "$(DEFN_DEV_MACOS)"; then argocd cluster add --yes --upsert k3d-$(name); pod apply -f $(app)/e/k3d-$(name).yaml; fi
 	if test -n "$(DEFN_DEV_MACOS)"; then \
+		oras push localhost:5000/defn/bootstrap:k3d-$(name)-password-store ~/.password-store/.git:+tar; \
+		oras push localhost:5000/defn/bootstrap:k3d-$(name)-app app/.git:+tar; \
 		kubectl rollout -n argocd status deployment argocd-server --watch; \
-		if kubectl rollout -n default status statefulset $(name) --watch; then \
-			oras push localhost:5000/defn/bootstrap:k3d-$(name)-password-store ~/.password-store/.git:+tar; \
-			oras push localhost:5000/defn/bootstrap:k3d-$(name)-app app/.git:+tar; \
-		fi; \
+		kubectl rollout -n default status statefulset $(name) --watch; \
 	fi
 
 registry:
