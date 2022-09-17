@@ -13,7 +13,7 @@ COPY config.toml  var/lib/rancher/k3s/agent/etc/containerd/config.toml
 
 ARG DEFN_DEV_IMAGE=""
 
-RUN if test -n "${DEFN_DEV_IMAGE}"; then containerd -c /var/lib/rancher/k3s/agent/etc/containerd/config.toml -a /run/k3s/containerd/containerd.sock --state /run/k3s/containerd --root /var/lib/rancher/k3s/agent/containerd & set -x; sleep 5; ctr -n k8s.io i pull --plain-http "${DEFN_DEV_IMAGE}"; ctr -n k8s.io i list; kill %1; wait; fi
+RUN if test -n "${DEFN_DEV_IMAGE}"; then containerd -c /var/lib/rancher/k3s/agent/etc/containerd/config.toml -a /run/k3s/containerd/containerd.sock --state /run/k3s/containerd --root /var/lib/rancher/k3s/agent/containerd & set -x; sleep 5; for a in ${DEFN_DEV_IMAGE}; do echo $a; ctr -n k8s.io i pull --plain-http --snapshotter overlayfs2 $a >/dev/null; done; ctr -n k8s.io i list; kill %1; wait; fi
 
 COPY */tailscale */tailscaled ./
 
