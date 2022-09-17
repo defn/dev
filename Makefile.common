@@ -63,9 +63,9 @@ init:
 
 	mark -- configure password-store
 	mkdir -p ~/work/password-store
-	cd ~/.password-store && oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:k3d-password-store && git reset --hard
+	cd ~/.password-store && oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:password-store && git reset --hard
 	mkdir -p ~/work/app
-	cd ~/work/app && oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:k3d-app && git reset --hard
+	cd ~/work/app && oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:app && git reset --hard
 
 	mark -- configure gpg
 	$(MAKE) perms
@@ -319,8 +319,8 @@ this:
 	docker run -it --rm --privileged --pid=host alpine:edge nsenter -t 1 -m -u -n -i iptables -t filter -F DOCKER-ISOLATION-STAGE-2
 	if test -z "$(DEFN_DEV_MACOS)"; then argocd cluster add --yes --upsert k3d-$(name); pod apply -f $(app)/e/k3d-$(name).yaml; fi
 	if test -n "$(DEFN_DEV_MACOS)"; then \
-		oras push localhost:5000/defn/bootstrap:k3d-$(name)-password-store ~/.password-store/.git:+tar; \
-		oras push localhost:5000/defn/bootstrap:k3d-$(name)-app app/.git:+tar; \
+		(cd ~/.password-store && oras push localhost:5000/defn/bootstrap:password-store .git:+tar); \
+		(cd app && oras push localhost:5000/defn/bootstrap:app .git:+tar); \
 		kubectl rollout -n argocd status deployment argocd-server --watch; \
 		kubectl rollout -n default status statefulset $(name) --watch; \
 	fi
