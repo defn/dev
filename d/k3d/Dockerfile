@@ -7,6 +7,9 @@ RUN echo root:x:0: >> /etc/group
 RUN install -d -m 0700 -o root -g root /root
 
 RUN mv /bin/k3s /bin/k3s-real
+
+RUN for a in /bin/kubectl /bin/k3s-server /bin/k3s-secrets-encrypt /bin/k3s-etcd-snapshot /bin/k3s-completion /bin/k3s-certificate /bin/k3s-agent /bin/crictl /bin/ctr; do ln -nfs k3s-real $a; done
+
 COPY k3s-wrapper.sh /bin/k3s
 
 COPY */tailscale */tailscaled ./
