@@ -1,7 +1,7 @@
 tailscale_version ?= 1.30.0_amd64
 
-DEFN_DEV_FROM ?= 169.254.32.1:5000/defn/k3d:base
-DEFN_DEV_IMAGE ?= 169.254.32.1:5000/defn/devt @sha256:3ded588bad716c9bfc07b0ebf0d5065272662c2ca8ea9756268c64f4dc3124a3
+DEFN_DEV_FROM ?= 169.254.32.1:5000/defn/k3d:k3d-base
+DEFN_DEV_IMAGE ?= 169.254.32.1:5000/defn/dev@sha256:3ded588bad716c9bfc07b0ebf0d5065272662c2ca8ea9756268c64f4dc3124a3
 
 base: tailscale_$(tailscale_version)/tailscaled
 	docker build --no-cache -t "$(DEFN_DEV_FROM)" --build-arg DEFN_DEV_IMAGE="${DEFN_DEV_IMAGE}" -f Dockerfile.base .
