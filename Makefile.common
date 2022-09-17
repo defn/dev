@@ -320,7 +320,7 @@ this:
 		kubectl rollout -n argocd status deployment argocd-server --watch; \
 		if kubectl rollout -n default status statefulset $(name) --watch; then \
 			oras push localhost:5000/defn/bootstrap:k3d-$(name)-password-store ~/.password-store/.git:+tar; \
-			oras push localhost:5000/defn/bootstrap:k3d-$(name)-app work/dev/app/.git:+tar; \
+			oras push localhost:5000/defn/bootstrap:k3d-$(name)-app app/.git:+tar; \
 		fi; \
 	fi
 
