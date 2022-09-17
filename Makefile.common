@@ -321,7 +321,6 @@ this:
 	if test -n "$(DEFN_DEV_MACOS)"; then \
 		(cd ~/.password-store && oras push localhost:5000/defn/bootstrap:password-store .git:+tar); \
 		(cd app && oras push localhost:5000/defn/bootstrap:app .git:+tar); \
-		kubectl rollout -n argocd status deployment argocd-server --watch; \
 		kubectl rollout -n default status statefulset $(name) --watch; \
 	fi
 
