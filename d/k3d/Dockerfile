@@ -1,4 +1,4 @@
-FROM rancher/k3s:v1.23.9-k3s1
+FROM rancher/k3s:v1.23.10-k3s1
 
 ARG DEFN_DEV_ARCHIVE
 
