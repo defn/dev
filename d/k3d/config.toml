@@ -22,4 +22,3 @@
 
 [plugins.cri.containerd.runtimes.runc.options]
 	SystemdCgroup = false
-

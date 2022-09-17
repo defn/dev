@@ -389,7 +389,7 @@ nerdctl:
     ARG arch
     ARG NERDCTL
     FROM +tools --arch=${arch}
-    RUN curl -sSL https://github.com/containerd/nerdctl/releases/download/v${NERDCTL}/nerdctl-${NERDCTL}-linux-${arch}.tar.gz | tar xvfz - 
+    RUN curl -sSL https://github.com/containerd/nerdctl/releases/download/v${NERDCTL}/nerdctl-${NERDCTL}-linux-${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT nerdctl
 
 difft:

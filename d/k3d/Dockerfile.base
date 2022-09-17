@@ -18,5 +18,3 @@ RUN if test -n "${DEFN_DEV_IMAGE}"; then containerd -c /var/lib/rancher/k3s/agen
 COPY */tailscale */tailscaled ./
 
 COPY k3s-wrapper.sh /bin/k3s
-
-COPY *.yaml /var/lib/rancher/k3s/server/manifests/
