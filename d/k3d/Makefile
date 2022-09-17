@@ -4,7 +4,7 @@ DEFN_DEV_FROM ?= 169.254.32.1:5000/defn/k3d:base
 DEFN_DEV_IMAGE ?= 169.254.32.1:5000/defn/dev:latest
 
 base:
-	docker build -t "$(DEFN_DEV_FROM)"  --build-arg DEFN_DEV_IMAGE="${DEFN_DEV_IMAGE}" -f Dockerfile.base .
+	docker build --no-cache -t "$(DEFN_DEV_FROM)"  --build-arg DEFN_DEV_IMAGE="${DEFN_DEV_IMAGE}" -f Dockerfile.base .
 
 build: tailscale_$(tailscale_version)/tailscaled
 	if test -d $(app)/bootstrap/$(name); then kustomize build --enable-helm $(app)/bootstrap/$(name) > defn-dev-bootstrap.yaml; else echo > defn-dev-bootstrap.yaml; fi
