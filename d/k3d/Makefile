@@ -3,10 +3,10 @@ tailscale_version ?= 1.30.0_amd64
 DEFN_DEV_FROM ?= 169.254.32.1:5000/defn/k3d:base
 DEFN_DEV_IMAGE ?= 169.254.32.1:5000/defn/dev:latest
 
-base:
+base: tailscale_$(tailscale_version)/tailscaled
 	docker build --no-cache -t "$(DEFN_DEV_FROM)"  --build-arg DEFN_DEV_IMAGE="${DEFN_DEV_IMAGE}" -f Dockerfile.base .
 
-build: tailscale_$(tailscale_version)/tailscaled
+build:
 	if test -d $(app)/bootstrap/$(name); then kustomize build --enable-helm $(app)/bootstrap/$(name) > defn-dev-bootstrap.yaml; else echo > defn-dev-bootstrap.yaml; fi
 	if test -d $(app)/bootstrap/$(name); then cp $(app)/e/$(name).yaml defn-dev-argocd-appset.yaml; fi
 	docker build -t 169.254.32.1:5000/defn/k3d:$(name) --build-arg DEFN_DEV_ARCHIVE="$(DEFN_DEV_ARCHIVE)" --build-arg DEFN_DEV_FROM="$(DEFN_DEV_FROM)" .
