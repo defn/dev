@@ -1,8 +1,12 @@
-build:
-	wget -O- https://pkgs.tailscale.com/stable/tailscale_1.30.0_amd64.tgz | tar xvfz -
+tailscale_version ?= 1.30.0_amd64
+
+build: tailscale_$(tailscale_version)/tailscaled
 	if test -d $(app)/bootstrap/$(name); then kustomize build --enable-helm $(app)/bootstrap/$(name) > defn-dev-bootstrap.yaml; else echo > defn-dev-bootstrap.yaml; fi
 	if test -d $(app)/bootstrap/$(name); then cp $(app)/e/$(name).yaml defn-dev-argocd-appset.yaml; fi
 	docker build -t 169.254.32.1:5000/defn/k3d:$(name) --build-arg DEFN_DEV_ARCHIVE="${DEFN_DEV_ARCHIVE}" .
+
+tailscale_$(tailscale_version)/tailscaled:
+	wget -O- https://pkgs.tailscale.com/stable/tailscale_$(tailscale_version).tgz | tar xvfz -
 
 mint:
 	docker run --rm -ti --privileged --entrypoint sh quay.io/defn/dev -c \
