@@ -134,7 +134,6 @@ user:
     END
 
     # new, unorganized
-    COPY --chown=ubuntu:ubuntu (+nerdctl/* --arch=${arch}) /usr/local/bin/
 
     RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
 
