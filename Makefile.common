@@ -17,6 +17,9 @@ DEFN_DEV_HOST      ?= "k3d-$(name).${domain}"
 DEFN_DEV_HOST_API  ?= "$${DEFN_DEV_HOST_API:-127.0.0.1}"
 DEFN_DEV_HOST_PORT ?= "$${DEFN_DEV_HOST_PORT:-6443}"
 
+first = $(word 1, $(subst -, ,$@))
+second = $(word 2, $(subst -, ,$@))
+
 trust-ca:
 	sudo security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-db etc/ca.crt
 
@@ -134,11 +137,11 @@ kubeconfig:
 	-kubectl config set-cluster $(context) --server=https://$(context).$(domain):6443
 	k config get-contexts
 
-vclusterconfig:
-	if vcluster connect vcluster --kube-config ~/.kube/vcluster --kube-config-context-name vcluster --update-current=false --server vcluster.vcluster.svc.cluster.local; then \
-		env KUBECONFIG=~/.kube/config:~/.kube/vcluster kubectl config view --flatten > ~/.kube/config.1; \
+config-%:
+	if vcluster connect $(second) --kube-config ~/.kube/$(second) --kube-config-context-name $(second) --update-current=false --server vcluster.$(second).svc.cluster.local; then \
+		env KUBECONFIG=~/.kube/config:~/.kube/$(second) kubectl config view --flatten > ~/.kube/config.1; \
 		mv ~/.kube/config.1 ~/.kube/config; \
-		argocd cluster add vcluster --yes; \
+		argocd cluster add $(second) --yes; \
 		fi
 
 pending: # Generate pending version updates
