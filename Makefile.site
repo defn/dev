@@ -9,4 +9,5 @@ login-site-default:
 %: %-default
 	@true
 
+-include .password-store/Makefile.site
 -include app/Makefile.site
