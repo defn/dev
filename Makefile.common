@@ -137,8 +137,8 @@ kubeconfig:
 	-kubectl config set-cluster $(context) --server=https://$(context).$(domain):6443
 	k config get-contexts
 
-config-%:
-	if vcluster connect $(second) --kube-config ~/.kube/$(second) --kube-config-context-name $(second) --update-current=false --server vcluster.$(second).svc.cluster.local; then \
+connect-%:
+	if vcluster connect vcluster --context pod --namespace $(second) --kube-config ~/.kube/$(second) --kube-config-context-name $(second) --update-current=false --server vcluster.$(second).svc.cluster.local; then \
 		env KUBECONFIG=~/.kube/config:~/.kube/$(second) kubectl config view --flatten > ~/.kube/config.1; \
 		mv ~/.kube/config.1 ~/.kube/config; \
 		argocd cluster add $(second) --yes; \
