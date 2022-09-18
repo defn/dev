@@ -1,6 +1,7 @@
 coredns/coredns:1.8.6
 docker.io/coredns/coredns:1.8.6
 docker.io/earthly/buildkitd:v0.6.23
+docker.io/library/alpine:3.13.1
 docker.io/library/registry:2
 docker.io/loftsh/vcluster:0.12.0
 docker.io/rancher/k3s:v1.23.10-k3s1
@@ -15,6 +16,7 @@ ghcr.io/kedacore/keda:2.8.1
 ghcr.io/kedacore/keda-metrics-apiserver:2.8.1
 ghcr.io/kyverno/kyvernopre:v1.7.2
 ghcr.io/kyverno/kyverno:v1.7.2
+library/alpine:3.13.1
 loftsh/vcluster:0.12.0
 public.ecr.aws/docker/library/redis:7.0.4-alpine
 quay.io/argoproj/argocd:v2.4.12
