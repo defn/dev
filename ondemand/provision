@@ -14,7 +14,7 @@ else
         exec 1>&2
         app sync k3d-control-${vc}
         app wait k3d-control-${vc}
-        make ${vc}
+        (cd && make ${vc})
         app sync ${vc}
         app wait ${vc}
         app sync ${vc}-dev
