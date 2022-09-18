@@ -11,6 +11,11 @@ else
 
     # provision infra for user
     if flock -n .doing.${vc} -c "echo making some infra for ${vc}"; then
+        exec 1>&2
+        app sync ${vc}
+        app wait ${vc}
+        app sync ${vc}-dev
+        app wait ${vc}-dev
         touch .done.${vc}
         rm -f .doing.${vc}
     fi
