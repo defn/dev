@@ -32,3 +32,4 @@ rancher/local-path-provisioner:v0.0.21
 rancher/mirrored-coredns-coredns:1.9.1
 rancher/mirrored-metrics-server:v0.5.2
 registry:2
+quay.io/defn/dev:latest
