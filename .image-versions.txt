@@ -11,14 +11,16 @@ ghcr.io/kedacore/keda:2.8.1
 ghcr.io/kedacore/keda-metrics-apiserver:2.8.1
 ghcr.io/kyverno/kyvernopre:v1.7.2
 ghcr.io/kyverno/kyverno:v1.7.2
+loftsh/vcluster:0.12.0
 public.ecr.aws/docker/library/redis:7.0.4-alpine
-quay.io/argoproj/argocd:v2.4.11
+quay.io/argoproj/argocd:v2.4.12
 quay.io/argoproj/argocli:v3.3.9
 quay.io/argoproj/argo-events:v1.7.1
 quay.io/argoproj/workflow-controller:v3.3.9
 quay.io/jetstack/cert-manager-cainjector:v1.9.1
 quay.io/jetstack/cert-manager-controller:v1.9.1
 quay.io/jetstack/cert-manager-webhook:v1.9.1
+rancher/k3s:v1.23.10-k3s1
 rancher/klipper-lb:v0.3.5
 rancher/local-path-provisioner:v0.0.21
 rancher/mirrored-coredns-coredns:1.9.1
