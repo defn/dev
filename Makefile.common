@@ -140,7 +140,7 @@ kubeconfig:
 vc%:
 	$(MAKE) connect-$@
 	argocd cluster add $@ --yes --upsert
-	argocd apply -f app/e/$@.yaml
+	pod --context argocd apply -f app/e/$@.yaml
 
 connect-%:
 	if vcluster connect vcluster --context pod --namespace $(second) --kube-config ~/.kube/$(second) --kube-config-context-name $(second) --update-current=false --server vcluster.$(second).svc.cluster.local; then \
