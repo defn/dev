@@ -77,7 +77,8 @@ init:
 
 	mark -- configure repos
 	cd ~/.password-store && git pull
-	cd ~/work/app && git pull
+	mkdir -p ~/work/app
+	cd ~/work/app && rm -rf .git && oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:app && git reset --hard && git pull
 
 	$(MAKE) login
 
