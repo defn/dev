@@ -10,7 +10,7 @@ else
     cat index.html
 
     # provision infra for user
-    if flock -n .doing.${vc} -c "echo making some infra for ${vc}"; then
+    if flock -n .doing.${vc} -c "true"; then
         exec 1>&2
         app sync ${vc}
         app wait ${vc}
