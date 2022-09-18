@@ -124,7 +124,7 @@ kubeconfig:
 		kubectl config set-cluster pod --server=https://kubernetes.default.svc.cluster.local --embed-certs --certificate-authority=/run/secrets/kubernetes.io/serviceaccount/ca.crt; \
 		kubectl config set-credentials pod --token="$$(cat /run/secrets/kubernetes.io/serviceaccount/token)"; \
 		kubectl config set-context pod --cluster=pod --user=pod; \
-		if pod get ns argocd; then ]
+		if pod get ns argocd; then \
 			kubectl config set-cluster argocd --server=https://kubernetes.default.svc.cluster.local --embed-certs --certificate-authority=/run/secrets/kubernetes.io/serviceaccount/ca.crt; \
 			kubectl config set-credentials argocd --token="$$(cat /run/secrets/kubernetes.io/serviceaccount/token)"; \
 			kubectl config set-context argocd --cluster=pod --user=argocd --namespace argocd; \
