@@ -133,7 +133,7 @@ kubeconfig:
 		fi
 	touch ~/.kube/config
 	$(MAKE) perms
-	-k3d kubeconfig merge -a -d
+	if docker ps 2>/dev/null; then k3d kubeconfig merge -a -d; fi
 	-kubectl config use-context pod
 	k config get-contexts
 
