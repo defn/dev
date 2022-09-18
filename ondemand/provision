@@ -2,7 +2,7 @@
 
 vc="$1"; shift
 
-if [[ -f .done ]]; then
+if [[ -f .done.${vc} ]]; then
     exec socat - TCP:dev-x-default-x-vcluster.${vc}:80
 else
     echo HTTP/1.1 200
@@ -10,11 +10,8 @@ else
     cat index.html
 
     # provision infra for user
-    if flock -n .doing -c 'echo making some infra'; then
-        sleep 5
-        touch .done
-        rm -f .doing
-        sleep 60
-        rm -f .done
+    if flock -n .doing.${vc} -c "echo making some infra for ${vc}"; then
+        touch .done.${vc}
+        rm -f .doing.${vc}
     fi
 fi
