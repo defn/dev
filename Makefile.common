@@ -66,9 +66,7 @@ init:
 
 	mark -- configure password-store
 	mkdir -p ~/work/password-store
-	cd ~/.password-store && rm -rf .git && oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:password-store && (git reset --hard origin/master || git reset --hard origin/main)
-	mkdir -p ~/work/app
-	cd ~/work/app && rm -rf .git && oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:app && (git reset --hard origin/master || git reset --hard origin/main)
+	cd ~/.password-store && rm -rf .git && oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:password-store && git reset --hard
 
 	mark -- configure gpg
 	$(MAKE) perms
@@ -97,10 +95,6 @@ logout:
 login:
 	mark -- configure kubeconfig, argocd
 	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then $(MAKE) kubeconfig; $(MAKE) argocd-login || true; fi
-
-	# sync clusters with argocd
-
-	#cd ~/.password-store && git pull
 
 	$(MAKE) login-site
 
