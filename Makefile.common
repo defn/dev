@@ -103,9 +103,11 @@ github-login:
 	if ! gh auth status; then echo Y | gh auth login -p https -h github.com -w; fi
 
 argocd-login:
-	argocd login --insecure argocd-server.argocd.svc --username admin --password adminadmin \
-		|| (argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')" \
-				&& argocd account update-password --new-password adminadmin --current-password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')")
+	if pod get ns argocd; then \
+		argocd login --insecure argocd-server.argocd.svc --username admin --password adminadmin \
+			|| (argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')" \
+					&& argocd account update-password --new-password adminadmin --current-password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')"); \
+		fi
 
 git-crypt-unlock:
 	cd ~/.password-store && if ! git crypt unlock; then \
@@ -122,17 +124,17 @@ kubeconfig:
 		kubectl config set-cluster pod --server=https://kubernetes.default.svc.cluster.local --embed-certs --certificate-authority=/run/secrets/kubernetes.io/serviceaccount/ca.crt; \
 		kubectl config set-credentials pod --token="$$(cat /run/secrets/kubernetes.io/serviceaccount/token)"; \
 		kubectl config set-context pod --cluster=pod --user=pod; \
-		kubectl config set-cluster argocd --server=https://kubernetes.default.svc.cluster.local --embed-certs --certificate-authority=/run/secrets/kubernetes.io/serviceaccount/ca.crt; \
-		kubectl config set-credentials argocd --token="$$(cat /run/secrets/kubernetes.io/serviceaccount/token)"; \
-		kubectl config set-context argocd --cluster=pod --user=argocd --namespace argocd; \
-		kubectl config use-context pod; \
+		if pod get ns argocd; then ]
+			kubectl config set-cluster argocd --server=https://kubernetes.default.svc.cluster.local --embed-certs --certificate-authority=/run/secrets/kubernetes.io/serviceaccount/ca.crt; \
+			kubectl config set-credentials argocd --token="$$(cat /run/secrets/kubernetes.io/serviceaccount/token)"; \
+			kubectl config set-context argocd --cluster=pod --user=argocd --namespace argocd; \
+			fi; \
 		skaffold config set --kube-context pod local-cluster true; \
 		fi
-	#kumactl config control-planes add --overwrite --name pod --address http://kuma-control-plane-x-kuma-x-vc0.vc0.svc:5681
 	touch ~/.kube/config
 	$(MAKE) perms
 	-k3d kubeconfig merge -a -d
-	-kubectl config set-cluster $(context) --server=https://$(context).$(domain):6443
+	-kubectl config use-context pod
 	k config get-contexts
 
 vc%:
