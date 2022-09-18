@@ -74,9 +74,6 @@ init:
 	if echo $$VSCODE_GIT_ASKPASS_NODE | grep scode-server/server-stable-web; then $(MAKE) init-gpg; fi
 	if test -z "$$VSCODE_GIT_ASKPASS_NODE"; then $(MAKE) init-gpg; fi
 
-	mark -- configure git crypt
-	$(MAKE) git-crypt-unlock
-
 	$(MAKE) login
 
 	mark -- configure site
@@ -88,7 +85,6 @@ tilt:
 logout:
 	-echo yes | gh auth logout --hostname github.com
 	-argocd logout argocd-server.argocd.svc
-	cd .password-store && git add vault && git add -u vault && (git stash || true) && (git crypt lock || true)
 	-echo RELOADAGENT | gpg-connect-agent
 
 login:
@@ -98,7 +94,6 @@ login:
 	# sync clusters with argocd
 
 	#cd ~/.password-store && git pull
-	#$(MAKE) git-crypt-unlock
 
 	$(MAKE) login-site
 
