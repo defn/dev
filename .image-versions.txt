@@ -1,5 +1,9 @@
+coredns/coredns:1.8.6
+docker.io/coredns/coredns:1.8.6
 docker.io/earthly/buildkitd:v0.6.23
 docker.io/library/registry:2
+docker.io/loftsh/vcluster:0.12.0
+docker.io/rancher/k3s:v1.23.10-k3s1
 docker.io/rancher/klipper-lb:v0.3.5
 docker.io/rancher/local-path-provisioner:v0.0.21
 docker.io/rancher/mirrored-coredns-coredns:1.9.1
