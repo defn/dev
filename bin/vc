@@ -3,7 +3,7 @@
 function main {
 	set -efu
 
-	exec kubectl --context vcluster "$@"
+	exec kubectl --context "${0##*/}" "$@"
 }
 
 main "$@"
