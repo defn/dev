@@ -137,11 +137,15 @@ kubeconfig:
 	-kubectl config set-cluster $(context) --server=https://$(context).$(domain):6443
 	k config get-contexts
 
+vc%:
+	$(MAKE) connect-$@
+	argocd cluster add $@ --yes --upsert
+	$@ apply -f app/e/$@.yaml
+
 connect-%:
 	if vcluster connect vcluster --context pod --namespace $(second) --kube-config ~/.kube/$(second) --kube-config-context-name $(second) --update-current=false --server vcluster.$(second).svc.cluster.local; then \
 		env KUBECONFIG=~/.kube/config:~/.kube/$(second) kubectl config view --flatten > ~/.kube/config.1; \
 		mv ~/.kube/config.1 ~/.kube/config; \
-		argocd cluster add $(second) --yes; \
 		fi
 
 pending: # Generate pending version updates
