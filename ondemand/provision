@@ -2,7 +2,7 @@
 
 vc="$1"; shift
 
-if [[ -f .done.${vc} ]]; then
+if (exec 1>&2; curl -sSL -M 1 dev-x-default-x-vcluster.${vc} | grep /login); then
     exec socat - TCP:dev-x-default-x-vcluster.${vc}:80
 else
     echo HTTP/1.1 200
@@ -19,7 +19,6 @@ else
         app wait ${vc}
         app sync ${vc}-dev
         app wait ${vc}-dev
-        touch .done.${vc}
         rm -f .doing.${vc}
     fi
 fi
