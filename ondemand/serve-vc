@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+vc="${0##*/}"
+port=$((8000 + ${vc#vc} ))
+
+exec socat -d -d TCP-LISTEN:${port},reuseaddr,fork,max-children=8 EXEC:"./handler-socat ${vc}",nofork

@@ -10,7 +10,7 @@ else
     cat index.html
 
     # provision infra for user
-    if flock -n .doing.${vc} -c "./vcluster ${vc}"; then
+    if flock -n .doing.${vc} -c "./provision-vcluster ${vc}"; then
         true
     fi
 fi
