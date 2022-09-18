@@ -142,8 +142,9 @@ vc%:
 
 connect-%:
 	if vcluster connect vcluster --context pod --namespace $(second) --kube-config ~/.kube/$(second) --kube-config-context-name $(second) --update-current=false --server vcluster.$(second).svc.cluster.local; then \
-		env KUBECONFIG=~/.kube/config:~/.kube/$(second) kubectl config view --flatten > ~/.kube/config.1; \
-		mv ~/.kube/config.1 ~/.kube/config; \
+		set -x; \
+		env KUBECONFIG=~/.kube/co$(second)nfig:~/.kube/$(second) kubectl config view --flatten > ~/.kube/config.$(second); \
+		mv ~/.kube/config.$(second) ~/.kube/config; \
 		fi
 
 pending: # Generate pending version updates

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+vc="$1"; shift
+
+exec 1>&2
+app sync k3d-control-${vc}
+app wait k3d-control-${vc}
+(cd && make ${vc})
+app sync ${vc}
+app wait ${vc}
+app sync ${vc}-dev
+app wait ${vc}-dev
+rm -f .doing.${vc}

@@ -2,7 +2,7 @@
 
 vc="$1"; shift
 
-if ! (exec 1>&2; curl -sSL -M 1 dev-x-default-x-vcluster.${vc} | grep /login); then
+if curl -sSL -M 1 dev-x-default-x-vcluster.${vc} | grep -s /login; then
     exec socat - TCP:dev-x-default-x-vcluster.${vc}:80
 else
     echo HTTP/1.1 200
@@ -10,15 +10,7 @@ else
     cat index.html
 
     # provision infra for user
-    if flock -n .doing.${vc} -c "true"; then
-        exec 1>&2
-        app sync k3d-control-${vc}
-        app wait k3d-control-${vc}
-        (cd && make ${vc})
-        app sync ${vc}
-        app wait ${vc}
-        app sync ${vc}-dev
-        app wait ${vc}-dev
-        rm -f .doing.${vc}
+    if flock -n .doing.${vc} -c "./vcluster ${vc}"; then
+        true
     fi
 fi
