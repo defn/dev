@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-exec socat -d -d  TCP-LISTEN:8000,reuseaddr,fork,max-children=8 EXEC:"./provisioner",nofork

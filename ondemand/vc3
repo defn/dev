@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+vc="${0##*/}"
+
+exec socat -d -d TCP-LISTEN:8003,reuseaddr,fork,max-children=8 EXEC:"./provision ${vc}",nofork

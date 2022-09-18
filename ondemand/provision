@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+vc="$1"; shift
+
 if [[ -f .done ]]; then
-    exec socat - TCP:localhost:8888
+    exec socat - TCP:dev-x-default-x-vcluster.${vc}:80
 else
     echo HTTP/1.1 200
     echo
