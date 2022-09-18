@@ -12,6 +12,9 @@ else
     # provision infra for user
     if flock -n .doing.${vc} -c "true"; then
         exec 1>&2
+        app sync k3d-control-${vc}
+        app wait k3d-control-${vc}
+        make ${vc}
         app sync ${vc}
         app wait ${vc}
         app sync ${vc}-dev
