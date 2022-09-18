@@ -2,4 +2,4 @@
 
 vc="${0##*/}"
 
-exec socat -d -d TCP-LISTEN:8004,reuseaddr,fork,max-children=8 EXEC:"./provision ${vc}",nofork
+exec socat TCP-LISTEN:8004,reuseaddr,fork,max-children=8 EXEC:"./provision ${vc}",nofork
