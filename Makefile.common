@@ -55,7 +55,6 @@ perms:
 install:
 	$(MAKE) init
 	$(MAKE) install-site
-	$(MAKE) install-global
 
 install-global:
 	if ! k3d cluster list global -o json | jq -e -r '.[].nodes | map(select(.State.Status == "running")) | length' | grep ^3; then $(MAKE) global; fi
@@ -353,3 +352,6 @@ control: # Provision control plane from macOS
 		DEFN_DEV_HOST_PORTMAPS="-p 443:443@server:0 -p 80:80@server:0" \
 		$(MAKE) this name=$@
 	docker system prune -f
+
+manual:
+	$(MAKE) install-global
