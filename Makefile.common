@@ -77,6 +77,10 @@ init:
 	if echo $$VSCODE_GIT_ASKPASS_NODE | grep scode-server/server-stable-web; then $(MAKE) init-gpg; fi
 	if test -z "$$VSCODE_GIT_ASKPASS_NODE"; then $(MAKE) init-gpg; fi
 
+	mark -- configure repos
+	cd ~/.password-store && git pull
+	cd ~/work/app && git pull
+
 	$(MAKE) login
 
 	mark -- configure site
