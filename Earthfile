@@ -113,11 +113,11 @@ user:
     #COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+vscodeServer/* --arch=${arch}) /usr/local/bin/
 
     # shell-operator
-    COPY --dir (+shell-operator/sf.tar.gz --arch=${arch}) /
-    RUN cd / && sudo tar xvfz sf.tar.gz && sudo rm -f sf.tar.gz
+    # COPY --dir (+shell-operator/sf.tar.gz --arch=${arch}) /
+    # RUN cd / && sudo tar xvfz sf.tar.gz && sudo rm -f sf.tar.gz
 
     # rerun-process-wrapper
-    COPY (+rerun-process-wrapper/*) /
+    # COPY (+rerun-process-wrapper/*) /
 
     # steampipe
     COPY --chown=ubuntu:ubuntu (+steampipe/* --arch=${arch}) /usr/local/bin/
