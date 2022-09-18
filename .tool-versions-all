@@ -202,7 +202,6 @@ buf 1.6.0
 buf 1.7.0
 buf 1.8.0
 caddy 2.0.0
-caddy 2.0.0-rc.2
 caddy 2.0.0-rc.3
 caddy 2.1.0
 caddy 2.1.0-beta.1
@@ -231,6 +230,7 @@ caddy 2.5.0-rc.1
 caddy 2.5.1
 caddy 2.5.2
 caddy 2.6.0-beta.3
+caddy 2.6.0-beta.5
 cloudflared 2020.5.0
 cloudflared 2020.5.1
 cloudflared 2020.6.0
