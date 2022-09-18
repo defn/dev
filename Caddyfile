@@ -1,0 +1,23 @@
+https://control-0.tiger-mamba.ts.net {
+	handle_path /dev/* {
+		reverse_proxy http://localhost:8888
+	}
+
+	handle_path /vc1/* {
+		reverse_proxy http://dev-x-default-x-vcluster.vc1
+	}
+
+	handle_path /vc2/* {
+		reverse_proxy http://dev-x-default-x-vcluster.vc2
+	}
+
+	handle_path /vc3/* {
+		reverse_proxy http://dev-x-default-x-vcluster.vc3
+	}
+    
+	handle_path /vc4/* {
+		reverse_proxy http://dev-x-default-x-vcluster.vc4
+	}
+
+	reverse_proxy http://localhost:10350
+}
