@@ -25,6 +25,7 @@ macos:
 	for ip in $(dummy_ip); do if ! ifconfig lo0 | grep "inet $$ip"; then sudo ifconfig lo0 alias "$$ip" netmask 255.255.255.255; fi; done;
 	ifconfig lo0
 	defaults write -g ApplePressAndHoldEnabled -bool false
+	-$(MAKE) registry
 
 #	$(MAKE) github-login
 #	if [[ ! -f .gitconfig ]]; then \
@@ -334,6 +335,7 @@ global: # Provision global server from control plane
 	env DEFN_DEV_HOST_PORT=6444 DEFN_DEV_HOST_API=host.k3d.internal \
 		DEFN_DEV_NAME=k3d-$@ \
 		$(MAKE) this name=$@
+	docker system prune -f
 
 control: # Provision control plane from macOS
 	$(MAKE) pull-repos
@@ -343,3 +345,4 @@ control: # Provision control plane from macOS
 		DEFN_DEV_MACOS=1 \
 		DEFN_DEV_HOST_PORTMAPS="-p 443:443@server:0 -p 80:80@server:0" \
 		$(MAKE) this name=$@
+	docker system prune -f
