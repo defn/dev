@@ -2,7 +2,7 @@
 
 vc="$1"; shift
 
-if (exec 1>&2; curl -sSL -M 1 dev-x-default-x-vcluster.${vc} | grep /login); then
+if ! (exec 1>&2; curl -sSL -M 1 dev-x-default-x-vcluster.${vc} | grep /login); then
     exec socat - TCP:dev-x-default-x-vcluster.${vc}:80
 else
     echo HTTP/1.1 200
