@@ -154,14 +154,14 @@ pending: # Generate pending version updates
 
 pending-images:
 	pod get pods --all-namespaces -o json | gron | grep '\.image ='  | cut -d'"' -f2 | sort -u | grep -v :5000/ > .image-versions.txt
+	echo quay.io/defn/dev:latest >> .image-versions.txt
 
 sync: # Sync all the things for installing control, global
 	-$(MAKE) registry
 	$(MAKE) sync-images
 
 sync-images: # Sync images to local cache
-	skopeo copy docker://quay.io/defn/dev:latest docker://127.0.0.1:5000/defn/dev:latest --multi-arch all --dest-tls-verify=false
-	for a in $$(cat .image-versions.txt); do skopeo copy docker://$$a docker://127.0.0.1:5000/$${a#*/} --multi-arch all --dest-tls-verify=false; done
+	cat .image-versions.txt | bin/runmany 4 'skopeo copy docker://$$1 docker://127.0.0.1:5000/$${1#*/} --multi-arch all --dest-tls-verify=false'
 
 pending-asdf:
 	cat .tool-versions| awk '{print $$1}' | while read -r a; do asdf list-all "$$a" | sed "s#^#$$a #"; done | sort > .tool-versions-all
