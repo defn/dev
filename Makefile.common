@@ -160,6 +160,7 @@ pending-images:
 sync: # Sync all the things for installing control, global
 	-$(MAKE) registry
 	$(MAKE) sync-images
+	$(MAKE) pull-repos
 
 sync-images: # Sync images to local cache
 	cat .image-versions.txt | bin/runmany 4 'skopeo copy docker://$$1 docker://127.0.0.1:5000/$${1#*/} --multi-arch all --dest-tls-verify=false'
