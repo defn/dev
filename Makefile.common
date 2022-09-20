@@ -155,6 +155,10 @@ pending-images:
 	echo quay.io/defn/dev:latest >> .image-versions.txt
 
 sync: # Sync all the things for installing control, global
+	git pull
+	$(MAKE) sync-inner
+
+sync-inner:
 	-$(MAKE) registry
 	$(MAKE) sync-images
 	$(MAKE) pull-repos
