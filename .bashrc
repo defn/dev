@@ -39,6 +39,7 @@ PATH="$HOME/.linkerd2/bin:$PATH"
 
 # terraform
 export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
+export DISABLE_VERSION_CHECK=1
 
 # awscli
 export PATH="$PATH:/usr/local/aws-cli/bin"
