@@ -99,7 +99,7 @@ github-login:
 	if ! gh auth status; then echo Y | gh auth login -p https -h github.com -w; fi
 
 argocd-login:
-	if pod get ns argocd; then \
+	if pod get ns argocd 2>/dev/null; then \
 		argocd login --insecure argocd-server.argocd.svc --username admin --password adminadmin 2>/dev/null \
 			|| (argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')" \
 					&& argocd account update-password --new-password adminadmin --current-password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')"); \
