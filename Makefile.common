@@ -64,12 +64,9 @@ install-global:
 init:
 	$(MAKE) symlinks perms
 
-	mark -- configure password-store
+	mark -- configure password-store, gpg
 	mkdir -p ~/work/password-store
-	cd ~/.password-store && rm -rf .git && oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:password-store && git reset --hard origin/master
-	cd ~/.password-store && (git push 2>dev/null || true) && git pull
-
-	mark -- configure gpg
+	cd ~/.password-store && rm -rf .git && oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:password-store && git reset --hard && git clean -fd
 	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
 	$(MAKE) perms
 	$(MAKE) init-gpg
