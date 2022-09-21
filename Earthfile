@@ -19,13 +19,16 @@ test:
         RUN --no-cache echo; echo; echo; docker-compose ps; echo; echo; echo
     END
 
-tests:
+build:
     FROM --platform=linux/amd64 +user --arch=amd64
+
+tests:
+    FROM +build
 
     RUN ~/bin/e asdf list
 
-build:
-    FROM --platform=linux/amd64 +user --arch=amd64
+publish:
+    FROM +build
 
     ARG tag=latest
 
