@@ -21,6 +21,7 @@ test:
 
 build:
     FROM --platform=linux/amd64 +user --arch=amd64
+    SAVE IMAGE --push ghcr.io/defn/dev
 
 images:
     ARG repo
