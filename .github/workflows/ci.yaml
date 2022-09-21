@@ -48,6 +48,13 @@ jobs:
         && 
         chmod +x /usr/local/bin/earthly
         '
+    - name: Run tests
+      run: >-
+        set -x;
+        earthly --ci
+        --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main 
+        --remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH} 
+        +tests
     - name: Run build
       if: env.BUILD == '1'
       run: >-

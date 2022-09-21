@@ -19,9 +19,16 @@ test:
         RUN --no-cache echo; echo; echo; docker-compose ps; echo; echo; echo
     END
 
-build:
-    ARG tag=latest
+tests:
     FROM --platform=linux/amd64 +user --arch=amd64
+
+    RUN ~/bin/e asdf list
+
+build:
+    FROM --platform=linux/amd64 +user --arch=amd64
+
+    ARG tag=latest
+
     SAVE IMAGE --push ghcr.io/defn/dev:${tag}
 
 images:
