@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    tags:
+      - 'v**'
   pull_request:
 
 jobs:
@@ -19,11 +21,18 @@ jobs:
         if [ -n "$GITHUB_HEAD_REF" ]; then
           branch="$GITHUB_HEAD_REF"
           echo "BRANCH=PR-${{github.event.pull_request.number}}" >> $GITHUB_ENV
+          echo "BUILD=1" >> $GITHUB_ENV
         else
-          branch="${GITHUB_REF##*/}"
+          branch="${GITHUB_REF_NAME}"
           echo "BRANCH=${branch}" >> $GITHUB_ENV
         fi
+
         git checkout -b "$branch" || true
+
+        if [ "$GITHUB_REF_TYPE" = "tag" ]; then
+          echo "BRANCH=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+          echo "BUILD=1" >> $GITHUB_ENV
+        fi
     - name: Login to Packages Container registry
       uses: docker/login-action@v1 
       with:
@@ -39,11 +48,23 @@ jobs:
         && 
         chmod +x /usr/local/bin/earthly
         '
-    - name: Run build
+    - name: Build targets
       run: >-
-        set -x;
-        earthly --ci --push 
+        earthly --strict --push --no-output
         --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main 
         --remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH} 
         +build
+    - name: Run tests
+      run: >-
+        earthly --strict --push --no-output
+        --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main 
+        --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH} 
+        +tests
+    - name: Publish image
+      if: env.BUILD == '1'
+      run: >-
+        earthly --strict --push --no-output
+        --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main 
+        --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH} 
+        +publish
         --tag=${BRANCH}

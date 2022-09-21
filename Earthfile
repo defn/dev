@@ -20,8 +20,18 @@ test:
     END
 
 build:
-    ARG tag=latest
     FROM --platform=linux/amd64 +user --arch=amd64
+
+tests:
+    FROM +build
+
+    RUN ~/bin/e asdf list
+
+publish:
+    FROM +build
+
+    ARG tag=latest
+
     SAVE IMAGE --push ghcr.io/defn/dev:${tag}
 
 images:
