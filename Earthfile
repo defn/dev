@@ -20,9 +20,7 @@ test:
     END
 
 build:
-    FROM ubuntu
-
-    RUN uname -a
+    BUILD +amd --repo=ghcr.io//
 
 images:
     ARG repo
