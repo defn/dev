@@ -20,7 +20,7 @@ test:
     END
 
 build:
-    BUILD +amd --repo=ghcr.io//
+    FROM --platform=linux/amd64 +user --arch=amd64
 
 images:
     ARG repo

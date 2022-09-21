@@ -33,4 +33,4 @@ jobs:
     - name: Earthly version
       run: earthly --version
     - name: Run build
-      run: echo earthly --ci --push +build --repo=ghcr.io/
+      run: earthly --ci --push --remote-cache ghcr.io/defn/dev-cache +build
