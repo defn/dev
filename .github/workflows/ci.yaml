@@ -49,7 +49,7 @@ jobs:
         chmod +x /usr/local/bin/earthly
         '
     - name: Run build
-      if: env.BUILD == "1"
+      if: env.BUILD == '1'
       run: >-
         set -x;
         earthly --ci --push 
