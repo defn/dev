@@ -19,6 +19,11 @@ test:
         RUN --no-cache echo; echo; echo; docker-compose ps; echo; echo; echo
     END
 
+build:
+    FROM ubuntu
+
+    RUN uname -a
+
 images:
     ARG repo
     BUILD +amd --repo=${repo}
