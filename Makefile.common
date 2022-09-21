@@ -52,16 +52,10 @@ perms:
 	-chmod 0700 ~/.gnupg/. ~/.gnupg2/. ~/.password-store/home/.gnupg
 	-chmod 0600 ~/.kube/config
 
+build:
+	$(MAKE) build-site
+
 install:
-	$(MAKE) init
-	$(MAKE) install-site
-
-install-global:
-	if ! k3d cluster list global -o json | jq -e -r '.[].nodes | map(select(.State.Status == "running")) | length' | grep ^3; then $(MAKE) global; fi
-	argocd cluster add --yes --upsert k3d-global
-	pod apply -f app/e/k3d-global.yaml;
-
-init:
 	$(MAKE) symlinks perms
 
 	mark -- configure password-store, gpg
@@ -79,7 +73,12 @@ init:
 	$(MAKE) login
 
 	mark -- configure site
-	$(MAKE) init-site
+	$(MAKE) install-site
+
+install-global:
+	if ! k3d cluster list global -o json | jq -e -r '.[].nodes | map(select(.State.Status == "running")) | length' | grep ^3; then $(MAKE) global; fi
+	argocd cluster add --yes --upsert k3d-global
+	pod apply -f app/e/k3d-global.yaml;
 
 tilt:
 	env tilt up --context pod --port $(tilt_port) --host 127.0.0.1 --stream
@@ -351,6 +350,7 @@ global: # Provision global server from control plane
 control: # Provision control plane from macOS
 	$(MAKE) pull-repos
 	$(MAKE) macos
+	$(MAKE) build
 	env DEFN_DEV_HOST_PORT=6443 DEFN_DEV_HOST_API=127.0.0.1 \
 		DEFN_DEV_NAME=k3d-$@ \
 		DEFN_DEV_MACOS=1 \
@@ -360,4 +360,3 @@ control: # Provision control plane from macOS
 
 manual:
 	$(MAKE) install-global
-	

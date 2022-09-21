@@ -1,8 +1,8 @@
-init-site-default:
-
-init-gpg-default:
+build-site-default:
 
 install-site-default:
+
+init-gpg-default:
 
 login-site-default:
 
