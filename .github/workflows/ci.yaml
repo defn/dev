@@ -28,7 +28,7 @@ jobs:
         registry: ghcr.io
         username: not-used
         password: ${{ secrets.GITHUB_TOKEN }}
-     name: Download latest earthly
+      name: Download latest earthly
       run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.6.23/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
     - name: Run build
       run: earthly --ci --push --cache-from ghcr.io/${{ github.repository }}-cache --remove-cache ghcr.io/${{ github/repository }}-cache:${{ env.GITHUB_REF_NAME }} +build
