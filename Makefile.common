@@ -284,7 +284,8 @@ amd arm:
 	if [[ "$(shell pwd)" == "$(HOME)" ]]; then git pull; git push; cd work/dev && git pull && $(MAKE) $@; else repo=$(repo) earthly --cache-from=$(cache)defn/cache:updates-images --remote-cache=$(cache)defn/cache:updates-$@ --no-output $(push) +"$@" --repo=$${repo:-}; fi
 
 local:
-	if [[ "$(shell pwd)" == "$(HOME)" ]]; then git pull; git push; if ! test -d work/dev/.; then git clone https://github.com/defn/dev work/dev; fi; cd work/dev && git pull && $(MAKE) $@; else earthly --cache-from=$(cache)defn/cache:updates-images --no-output --push +images --repo=169.254.32.1:5000/; ctr -n k8s.io i pull quay.io/defn/dev:latest; fi
+	$(MAKE) build
+	ctr -n k8s.io i pull --plain-http 169.254.32.1:5000/workspace:latest
 
 shell:
 	docker run --rm -ti $(repo)defn/dev bash -l
