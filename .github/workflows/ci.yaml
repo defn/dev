@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    tags:
+      - 'v**'
   pull_request:
 
 jobs:
@@ -20,10 +22,15 @@ jobs:
           branch="$GITHUB_HEAD_REF"
           echo "BRANCH=PR-${{github.event.pull_request.number}}" >> $GITHUB_ENV
         else
-          branch="${GITHUB_REF##*/}"
+          branch="${GITHUB_REF_NAME}"
           echo "BRANCH=${branch}" >> $GITHUB_ENV
         fi
+
         git checkout -b "$branch" || true
+
+        if [ "$GITHUB_REF_TYPE" = "tag" ]; then
+          echo "BRANCH=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+        fi
     - name: Login to Packages Container registry
       uses: docker/login-action@v1 
       with:
@@ -40,6 +47,7 @@ jobs:
         chmod +x /usr/local/bin/earthly
         '
     - name: Run build
+      if: env.GITHUB_REF_TYPE == "tag" || env.GITHUB_HEAD_REF
       run: >-
         set -x;
         earthly --ci --push 
