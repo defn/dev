@@ -41,4 +41,4 @@ jobs:
         --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main 
         --remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${GITHUB_REF_NAME} 
         +build
-        --tag=${env.GITHUB_REPOSITORY}
+        --tag=${GITHUB_REPOSITORY}
