@@ -35,6 +35,13 @@ jobs:
         && 
         chmod +x /usr/local/bin/earthly
         '
+    - name: Echo build
+      run: >-
+        echo earthly --ci --push 
+        --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main 
+        --remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${GITHUB_REF_NAME} 
+        +build
+        --tag=${GITHUB_REF_NAME}
     - name: Run build
       run: >-
         earthly --ci --push 
