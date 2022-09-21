@@ -73,6 +73,7 @@ user:
     COPY --chown=ubuntu:ubuntu (+gotools/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+temporalite/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+oras/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+caddy/* --arch=${arch}) /usr/local/bin/
 
     COPY --chown=ubuntu:ubuntu --dir (+shell/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+k9s/* --arch=${arch}) ./
@@ -90,7 +91,6 @@ user:
     COPY --chown=ubuntu:ubuntu --dir (+grpcurl/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+packer/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+doctl/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+caddy/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+nomad/* --arch=${arch}) ./
 
     # arch2: hof, tilt
@@ -235,7 +235,6 @@ toolVersions:
     ARG ARGOCD
     ARG AWSVAULT
     ARG BUF
-    ARG CADDY
     ARG CLOUDFLARED
     ARG DOCTL
     ARG GOLANG
@@ -260,7 +259,6 @@ toolVersions:
     RUN echo argocd ${ARGOCD} >> .tool-versions
     RUN echo aws-vault ${AWSVAULT} >> .tool-versions
     RUN echo buf ${BUF} >> .tool-versions
-    RUN echo caddy ${CADDY} >> .tool-versions
     RUN echo cloudflared ${CLOUDFLARED} >> .tool-versions
     RUN echo doctl ${DOCTL} >> .tool-versions
     RUN echo golang ${GOLANG} >> .tool-versions
@@ -378,6 +376,13 @@ oras:
     FROM +tools --arch=${arch}
     RUN curl -sSL https://github.com/oras-project/oras/releases/download/v${ORAS}/oras_${ORAS}_linux_${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT oras
+
+caddy:
+    ARG arch
+    ARG CADDY
+    FROM +tools --arch=${arch}
+    RUN curl -sSL https://github.com/caddyserver/caddy/releases/download/v${CADDY}/caddy_${CADDY}_linux_${arch}.tar.gz | tar xvfz -
+    SAVE ARTIFACT caddy
 
 flyctl:
     ARG arch
@@ -725,15 +730,6 @@ teleport:
     FROM +asdf --arch=${arch}
     RUN --secret TELEPORT echo teleport-ent ${TELEPORT} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add teleport-ent'
-    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
-    SAVE ARTIFACT .asdf
-
-caddy:
-    ARG arch
-    ARG CADDY
-    FROM +asdf --arch=${arch}
-    RUN echo caddy ${CADDY} >> .tool-versions
-    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add caddy'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
