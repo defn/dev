@@ -68,3 +68,11 @@ jobs:
         --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH} 
         +publish
         --tag=${BRANCH}
+    - name: Publish latest image
+      if: env.BUILD != '1'
+      run: >-
+        earthly --strict --push --no-output
+        --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main 
+        --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH} 
+        +publish
+        --tag=latest
