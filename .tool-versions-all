@@ -202,7 +202,6 @@ buf 1.6.0
 buf 1.7.0
 buf 1.8.0
 caddy 2.0.0
-caddy 2.0.0-rc.3
 caddy 2.1.0
 caddy 2.1.0-beta.1
 caddy 2.1.1
@@ -229,6 +228,7 @@ caddy 2.5.0-beta.1
 caddy 2.5.0-rc.1
 caddy 2.5.1
 caddy 2.5.2
+caddy 2.6.0
 caddy 2.6.0-beta.3
 caddy 2.6.0-beta.5
 cloudflared 2020.5.0
@@ -334,8 +334,6 @@ cloudflared 2022.8.1
 cloudflared 2022.8.2
 cloudflared 2022.8.4
 cloudflared 2022.9.0
-doctl 1.55.0
-doctl 1.56.0
 doctl 1.57.0
 doctl 1.58.0
 doctl 1.59.0
@@ -364,6 +362,8 @@ doctl 1.76.2
 doctl 1.77.0
 doctl 1.78.0
 doctl 1.79.0
+doctl 1.80.0
+doctl 1.81.0
 golang 1.10
 golang 1.10.1
 golang 1.10.2
@@ -1452,6 +1452,7 @@ kubectl 1.25.2-rc.0
 kubectl 1.2.5-beta.0
 kubectl 1.2.6
 kubectl 1.26.0-alpha.0
+kubectl 1.26.0-alpha.1
 kubectl 1.2.6-beta.0
 kubectl 1.2.7
 kubectl 1.2.7-beta.0

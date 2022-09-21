@@ -97,9 +97,11 @@ user:
     IF [ ${arch} = "arm64" ]
         COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
         COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu (+goreleaser/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
     ELSE
         COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
         COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
+        COPY --chown=ubuntu:ubuntu (+goreleaser/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
     END
 
     # arch4
@@ -407,6 +409,14 @@ tilt:
     FROM +tools --arch=${arch}
     RUN curl -sSL https://github.com/tilt-dev/tilt/releases/download/v${TILT}/tilt.${TILT}.linux.${arch2}.tar.gz | tar xvfz -
     SAVE ARTIFACT tilt
+
+goreleaser:
+    ARG arch
+    ARG arch2
+    ARG GORELEASER
+    FROM +tools --arch=${arch}
+    RUN curl -sSL https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER}/goreleaser_Linux_${arch2}.tar.gz | tar xvfz -
+    SAVE ARTIFACT goreleaser
 
 # arch
 credentialPass:

@@ -20,9 +20,9 @@ library/alpine:3.13.1
 loftsh/vcluster:0.12.0
 public.ecr.aws/docker/library/redis:7.0.4-alpine
 quay.io/argoproj/argocd:v2.4.12
-quay.io/argoproj/argocli:v3.3.9
+quay.io/argoproj/argocli:v3.4.0
 quay.io/argoproj/argo-events:v1.7.1
-quay.io/argoproj/workflow-controller:v3.3.9
+quay.io/argoproj/workflow-controller:v3.4.0
 quay.io/defn/dev:latest
 quay.io/jetstack/cert-manager-cainjector:v1.9.1
 quay.io/jetstack/cert-manager-controller:v1.9.1
