@@ -18,11 +18,12 @@ jobs:
         branch=""
         if [ -n "$GITHUB_HEAD_REF" ]; then
           branch="$GITHUB_HEAD_REF"
+          echo "BRANCH=${branch}" >> $GITHUB_ENV
         else
           branch="${GITHUB_REF##*/}"
+          echo "BRANCH=${{github.event.pull_request.number}}" >> $GITHUB_ENV
         fi
         git checkout -b "$branch" || true
-        echo "BRANCH=${branch}" >> $GITHUB_ENV
     - name: Login to Packages Container registry
       uses: docker/login-action@v1 
       with:
@@ -38,15 +39,9 @@ jobs:
         && 
         chmod +x /usr/local/bin/earthly
         '
-    - name: Echo build
-      run: >-
-        echo earthly --ci --push 
-        --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main 
-        --remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${GITHUB_REF_NAME} 
-        +build
-        --tag=${GITHUB_REF_NAME}
     - name: Run build
       run: >-
+        set -x;
         earthly --ci --push 
         --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main 
         --remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH} 
