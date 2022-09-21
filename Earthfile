@@ -20,8 +20,9 @@ test:
     END
 
 build:
+    ARG tag=latest
     FROM --platform=linux/amd64 +user --arch=amd64
-    SAVE IMAGE --push ghcr.io/defn/dev
+    SAVE IMAGE --push ghcr.io/defn/dev:${tag}
 
 images:
     ARG repo

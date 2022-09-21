@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
 
 jobs:
   build:
@@ -18,8 +18,10 @@ jobs:
         branch=""
         if [ -n "$GITHUB_HEAD_REF" ]; then
           branch="$GITHUB_HEAD_REF"
+          echo "BRANCH=PR-${{github.event.pull_request.number}}" >> $GITHUB_ENV
         else
           branch="${GITHUB_REF##*/}"
+          echo "BRANCH=${branch}" >> $GITHUB_ENV
         fi
         git checkout -b "$branch" || true
     - name: Login to Packages Container registry
@@ -29,6 +31,19 @@ jobs:
         username: not-used
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: Download latest earthly
-      run: "sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.23/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
+      run: >-
+        sudo /bin/sh -c '
+        wget 
+        -q https://github.com/earthly/earthly/releases/download/v0.6.23/earthly-linux-amd64 
+        -O /usr/local/bin/earthly 
+        && 
+        chmod +x /usr/local/bin/earthly
+        '
     - name: Run build
-      run: earthly --ci --push --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main --remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${GITHUB_REF_NAME} +build
+      run: >-
+        set -x;
+        earthly --ci --push 
+        --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main 
+        --remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH} 
+        +build
+        --tag=${BRANCH}
