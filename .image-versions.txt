@@ -10,6 +10,7 @@ docker.io/rancher/local-path-provisioner:v0.0.21
 docker.io/rancher/mirrored-coredns-coredns:1.9.1
 docker.io/rancher/mirrored-metrics-server:v0.5.2
 earthly/buildkitd:v0.6.23
+ghcr.io/defn/dev:latest
 ghcr.io/dexidp/dex:v2.30.2
 ghcr.io/external-secrets/external-secrets:v0.5.8
 ghcr.io/kedacore/keda:2.8.1
@@ -33,4 +34,3 @@ rancher/local-path-provisioner:v0.0.21
 rancher/mirrored-coredns-coredns:1.9.1
 rancher/mirrored-metrics-server:v0.5.2
 registry:2
-quay.io/defn/dev:latest
