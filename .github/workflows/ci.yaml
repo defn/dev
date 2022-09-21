@@ -51,7 +51,7 @@ jobs:
     - name: Run tests
       run: >-
         set -x;
-        earthly --ci
+        earthly --strict --push --no-output
         --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main 
         --remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH} 
         +tests
@@ -59,7 +59,7 @@ jobs:
       if: env.BUILD == '1'
       run: >-
         set -x;
-        earthly --ci --push 
+        earthly --strict --push --no-output
         --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main 
         --remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH} 
         +build
