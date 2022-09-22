@@ -2,55 +2,29 @@ VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-ar
 
 IMPORT github.com/defn/cloud/lib:master AS lib
 
-meh:
-    FROM ghcr.io/defn/dev
-    RUN --secret meh echo ${meh} | base64 -d > /home/ubuntu/.kube/config
-    RUN --no-cache ~/bin/e argo submit etc/hello-workflow.yaml --log
-
-test-redis:
-    FROM redis:alpine
-
-test:
-    FROM earthly/dind:alpine
-
-    COPY docker-compose.yml ./
-
-    WITH DOCKER --allow-privileged --pull redis:alpine --load defn/redis=+test-redis --compose docker-compose.yml
-        RUN --no-cache echo; echo; echo; docker-compose ps; echo; echo; echo
-    END
-
 build-amd:
     FROM --platform=linux/amd64 +user --arch=amd64
 
 build-arm:
     FROM --platform=linux/arm64 +user --arch=arm64
 
-tests:
-    FROM +build
-
-    RUN ~/bin/e asdf list
-
-publish:
-    FROM +build
-
-    ARG tag=latest
-
-    SAVE IMAGE --push ghcr.io/defn/dev:${tag}
-
 images:
     ARG repo
-    BUILD +amd --repo=${repo}
-    BUILD +arm --repo=${repo}
+    ARG tag
+    BUILD +image-amd --repo=${repo} --tag=${tag}
+    BUILD +image-arm --repo=${repo} --tag=${tag}
 
-amd:
+image-amd:
     ARG repo
+    ARG tag
     FROM --platform=linux/amd64 +user --arch=amd64
-    SAVE IMAGE --push ${repo}defn/dev
+    SAVE IMAGE --push ${repo}defn/dev:${tag}
 
-arm:
+image-arm:
     ARG repo
+    ARG tag
     FROM --platform=linux/arm64 +user --arch=arm64
-    SAVE IMAGE --push ${repo}defn/dev
+    SAVE IMAGE --push ${repo}defn/dev:${tag}
 
 user:
     ARG arch
