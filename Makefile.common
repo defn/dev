@@ -196,7 +196,7 @@ cluster-inner:
 		--config k3d.yaml \
 		--registry-config etc/registries.yaml $(DEFN_DEV_HOST_PORTMAPS)
 	docker update --restart=no $(context)-server-0
-	-cd $(app)/tf/$(name) && make init plan apply
+	-cd $(app)/tf/$(name) && make init get plan apply
 
 vault-unseal:
 	pass Unseal_Key_1 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://localhost:8200/v1/sys/unseal
