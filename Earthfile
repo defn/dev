@@ -19,10 +19,6 @@ test:
         RUN --no-cache echo; echo; echo; docker-compose ps; echo; echo; echo
     END
 
-build:
-    BUILD +build-amd
-    BUILD +build-arm
-
 build-amd:
     FROM --platform=linux/amd64 +user --arch=amd64
 

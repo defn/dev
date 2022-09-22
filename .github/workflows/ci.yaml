@@ -55,22 +55,15 @@ jobs:
       with:
         image: tonistiigi/binfmt:latest
         platforms: all
-    - name: Build targets
+    - name: Build amd target
       run: >-
         earthly --strict --push --no-output
-        --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main 
-        --remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH} 
-        +build
-    - name: Run tests
+        --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd
+        --remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd
+        +build-amd
+    - name: Build arm target
       run: >-
         earthly --strict --push --no-output
-        --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main 
-        --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH} 
-        +tests
-    - name: Publish image
-      run: >-
-        earthly --strict --push --no-output
-        --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main 
-        --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH} 
-        +publish
-        --tag=${TAG}
+        --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm
+        --remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm
+        +build-arm
