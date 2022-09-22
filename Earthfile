@@ -20,13 +20,13 @@ test:
     END
 
 build:
-    BUILD +build_amd
-    BUILD +build_arm
+    BUILD +build-amd
+    BUILD +build-arm
 
-build_amd:
+build-amd:
     FROM --platform=linux/amd64 +user --arch=amd64
 
-build_arm:
+build-arm:
     FROM --platform=linux/arm64 +user --arch=arm64
 
 tests:
