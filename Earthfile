@@ -21,7 +21,7 @@ test:
 
 build:
     BUILD +build_amd
-    BUILD build_+arm
+    BUILD +build_arm
 
 build_amd:
     FROM --platform=linux/amd64 +user --arch=amd64
