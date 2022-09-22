@@ -67,3 +67,12 @@ jobs:
         --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm
         --remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm
         +build-arm
+    - name: Publish images
+      run: >-
+        earthly --strict --push --no-output
+        --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd
+        --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm
+        --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd
+        --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm
+        +images
+        --tag=${TAG}
