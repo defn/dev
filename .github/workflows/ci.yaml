@@ -75,4 +75,5 @@ jobs:
         --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd
         --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm
         +images
+        --repo=ghcr.io/
         --tag=${TAG}
