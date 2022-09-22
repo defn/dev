@@ -3,7 +3,7 @@ VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-ar
 IMPORT github.com/defn/cloud/lib:master AS lib
 
 meh:
-    FROM quay.io/defn/dev
+    FROM ghcr.io/defn/dev
     RUN --secret meh echo ${meh} | base64 -d > /home/ubuntu/.kube/config
     RUN --no-cache ~/bin/e argo submit etc/hello-workflow.yaml --log
 

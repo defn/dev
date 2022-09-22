@@ -305,7 +305,7 @@ provision-digital-ocean:
 	bin/e make cluster
 
 debug-host:
-	pod debug "node/$$(pod get nodes -o json | jq -r '.items[0].metadata.name')" --image quay.io/defn/dev -it -- bash
+	pod debug "node/$$(pod get nodes -o json | jq -r '.items[0].metadata.name')" --image 169.254.32.1:5000/workspace -it -- bash
 
 this:
 	git pull
