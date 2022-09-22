@@ -803,6 +803,7 @@ golang:
     SAVE IMAGE --cache-hint
 
 gotools:
+    ARG arch
     FROM +golang --arch=${arch}
     ARG GOLANG
     RUN bash -c 'source ~/.asdf/asdf.sh && go install github.com/go-delve/delve/cmd/dlv@latest'
