@@ -18,22 +18,22 @@ on: pull_request: {}
 }, {
 	name: "Put back the git branch into git (Earthly uses it for tagging)"
 	run: """
-		branch=\"\"
-		if [ -n \"$GITHUB_HEAD_REF\" ]; then
-		  branch=\"$GITHUB_HEAD_REF\"
-		  echo \"BRANCH=PR-${{github.event.pull_request.number}}\" >> $GITHUB_ENV
-		  echo \"TAG=PR-${{github.event.pull_request.number}}\" >> $GITHUB_ENV
+		branch=""
+		if [ -n "$GITHUB_HEAD_REF" ]; then
+		  branch="$GITHUB_HEAD_REF"
+		  echo "BRANCH=PR-${{github.event.pull_request.number}}" >> $GITHUB_ENV
+		  echo "TAG=PR-${{github.event.pull_request.number}}" >> $GITHUB_ENV
 		else
-		  branch=\"${GITHUB_REF_NAME}\"
-		  echo \"BRANCH=${branch}\" >> $GITHUB_ENV
-		  echo \"TAG=latest\" >> $GITHUB_ENV
+		  branch="${GITHUB_REF_NAME}"
+		  echo "BRANCH=${branch}" >> $GITHUB_ENV
+		  echo "TAG=latest" >> $GITHUB_ENV
 		fi
 
-		git checkout -b \"$branch\" || true
+		git checkout -b "$branch" || true
 
-		if [ \"$GITHUB_REF_TYPE\" = \"tag\" ]; then
-		  echo \"BRANCH=${GITHUB_REF_NAME}\" >> $GITHUB_ENV
-		  echo \"TAG=${GITHUB_REF_NAME}\" >> $GITHUB_ENV
+		if [ "$GITHUB_REF_TYPE" = "tag" ]; then
+		  echo "BRANCH=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+		  echo "TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
 		fi
 
 		"""
