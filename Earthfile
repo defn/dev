@@ -59,7 +59,7 @@ user:
     COPY --chown=ubuntu:ubuntu (+switch/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+cue-gen/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+kn/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=amd64) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+k3d/* --arch=amd64) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+tctl/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+gotools/* --arch=${arch}) /usr/local/bin/
@@ -417,7 +417,7 @@ credentialPass:
     ARG arch
     ARG CREDENTIALPASS
     FROM +tools --arch=${arch}
-    RUN curl -sSL https://github.com/docker/docker-credential-helpers/releases/download/v${CREDENTIALPASS}/docker-credential-pass-v${CREDENTIALPASS}-${arch}.tar.gz | tar xvfz - && chmod 755 docker-credential-pass
+    RUN curl -sSL https://github.com/docker/docker-credential-helpers/releases/download/v${CREDENTIALPASS}/docker-credential-pass-v${CREDENTIALPASS}.linux-${arch} > docker-credential-pass && chmod 755 docker-credential-pass
     SAVE ARTIFACT docker-credential-pass
 
 powerline:

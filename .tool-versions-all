@@ -304,6 +304,7 @@ cloudflared 2022.8.1
 cloudflared 2022.8.2
 cloudflared 2022.8.4
 cloudflared 2022.9.0
+cloudflared 2022.9.1
 doctl 1.57.0
 doctl 1.58.0
 doctl 1.59.0
@@ -688,7 +689,6 @@ helm 3.9.1
 helm 3.9.2
 helm 3.9.3
 helm 3.9.4
-k9s 0.24.11
 k9s 0.24.12
 k9s 0.24.13
 k9s 0.24.14
@@ -718,6 +718,7 @@ k9s 0.26.1
 k9s 0.26.2
 k9s 0.26.3
 k9s 0.26.4
+k9s 0.26.5
 krew 0.1.0-alpha.1
 krew 0.1.1
 krew 0.2.0
@@ -2732,14 +2733,9 @@ packer 1.8.0
 packer 1.8.1
 packer 1.8.2
 packer 1.8.3
-python 2
-python 2.1
 python 2.1.3
-python 2.2
 python 2.2.3
-python 2.3
 python 2.3.7
-python 2.4
 python 2.4.0
 python 2.4.1
 python 2.4.2
@@ -2747,7 +2743,6 @@ python 2.4.3
 python 2.4.4
 python 2.4.5
 python 2.4.6
-python 2.5
 python 2.5.0
 python 2.5.1
 python 2.5.2
@@ -2755,7 +2750,6 @@ python 2.5.3
 python 2.5.4
 python 2.5.5
 python 2.5.6
-python 2.6
 python 2.6.0
 python 2.6.1
 python 2.6.2
@@ -2766,7 +2760,6 @@ python 2.6.6
 python 2.6.7
 python 2.6.8
 python 2.6.9
-python 2.7
 python 2.7.0
 python 2.7.1
 python 2.7.10
@@ -2787,12 +2780,8 @@ python 2.7.7
 python 2.7.8
 python 2.7.9
 python 2.7-dev
-python 3
-python 3.0
 python 3.0.1
-python 3.1
 python 3.1.0
-python 3.10
 python 3.10.0
 python 3.10.1
 python 3.10.2
@@ -2810,7 +2799,6 @@ python 3.12-dev
 python 3.1.3
 python 3.1.4
 python 3.1.5
-python 3.2
 python 3.2.0
 python 3.2.1
 python 3.2.2
@@ -2818,7 +2806,6 @@ python 3.2.3
 python 3.2.4
 python 3.2.5
 python 3.2.6
-python 3.3
 python 3.3.0
 python 3.3.1
 python 3.3.2
@@ -2827,7 +2814,6 @@ python 3.3.4
 python 3.3.5
 python 3.3.6
 python 3.3.7
-python 3.4
 python 3.4.0
 python 3.4.1
 python 3.4.10
@@ -2840,7 +2826,6 @@ python 3.4.7
 python 3.4.8
 python 3.4.9
 python 3.4-dev
-python 3.5
 python 3.5.0
 python 3.5.1
 python 3.5.10
@@ -2853,7 +2838,6 @@ python 3.5.7
 python 3.5.8
 python 3.5.9
 python 3.5-dev
-python 3.6
 python 3.6.0
 python 3.6.1
 python 3.6.10
@@ -2871,7 +2855,6 @@ python 3.6.7
 python 3.6.8
 python 3.6.9
 python 3.6-dev
-python 3.7
 python 3.7.0
 python 3.7.1
 python 3.7.10
@@ -2888,7 +2871,6 @@ python 3.7.7
 python 3.7.8
 python 3.7.9
 python 3.7-dev
-python 3.8
 python 3.8.0
 python 3.8.1
 python 3.8.10
@@ -2905,7 +2887,6 @@ python 3.8.7
 python 3.8.8
 python 3.8.9
 python 3.8-dev
-python 3.9
 python 3.9.0
 python 3.9.1
 python 3.9.10
