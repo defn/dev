@@ -275,7 +275,7 @@ test:
 	pass hello
 	earthly --allow-privileged --remote-cache=$(cache)defn/cache:updates-images --no-output +test --repo=$${repo:-quay.io/}
 
-local:
+rebuild:
 	$(MAKE) build
 	ctr -n k8s.io i pull --plain-http 169.254.32.1:5000/workspace:latest
 
