@@ -91,11 +91,11 @@ jobs:
         run: earthly --strict --push --no-output --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm --remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm +build-arm
   publish:
     runs-on: ubuntu-latest
+    env:
+      FORCE_COLOR: 1
     needs:
       - build-amd
       - build-arm
-    env:
-      FORCE_COLOR: 1
     steps:
       - uses: actions/checkout@v3
       - name: Put back the git branch into git (Earthly uses it for tagging)
