@@ -47,7 +47,7 @@ on: pull_request: {}
 	}
 }, {
 	name: "Download latest earthly"
-	run:  "sudo /bin/sh -c ' wget  -q https://github.com/earthly/earthly/releases/download/v0.6.23/earthly-linux-amd64  -O /usr/local/bin/earthly  &&  chmod +x /usr/local/bin/earthly '"
+	run:  "sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.23/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
 }, {
 	name: "Set up QEMU"
 	id:   "qemu"
@@ -65,7 +65,7 @@ on: pull_request: {}
 
 	steps: [...{...}]
 
-	needs?: [...string]
+	needs?: [...string] | string
 }
 
 jobs: [string]: #EarthlyJob & {}
