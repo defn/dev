@@ -13,6 +13,7 @@ on: push: tags: [
 on: pull_request: {}
 
 #EarthlySteps: [{
+	name: "Checkout code"
 	uses: "actions/checkout@v3"
 }, {
 	name: "Put back the git branch into git (Earthly uses it for tagging)"
