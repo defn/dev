@@ -35,7 +35,6 @@ on: pull_request: {}
 		  echo "BRANCH=${GITHUB_REF_NAME}" >> $GITHUB_ENV
 		  echo "TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
 		fi
-
 		"""
 }, {
 	name: "Login to Packages Container registry"
@@ -47,7 +46,9 @@ on: pull_request: {}
 	}
 }, {
 	name: "Download latest earthly"
-	run:  "sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.23/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
+	run: """
+		sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.23/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
+		"""
 }, {
 	name: "Set up QEMU"
 	id:   "qemu"
@@ -68,31 +69,37 @@ on: pull_request: {}
 	needs?: [...string] | string
 }
 
-jobs: [string]: #EarthlyJob & {}
+jobs: [string]: #EarthlyJob
 
 jobs: {
-	"build-amd": {
+	buildAmd: {
 		steps: #EarthlySteps + [{
 			name: "Build amd target"
-			run:  "earthly --strict --push --no-output --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd --remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd +build-amd"
+			run: """
+				earthly --strict --push --no-output --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd --remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd +build-amd
+				"""
 		}]
 	}
 
-	"build-arm": {
+	buildArm: {
 		steps: #EarthlySteps + [{
 			name: "Build arm target"
-			run:  "earthly --strict --push --no-output --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm --remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm +build-arm"
+			run: """
+				earthly --strict --push --no-output --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm --remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm +build-arm
+				"""
 		}]
 	}
 
 	publish: {
 		needs: [
-			"build-amd",
-			"build-arm",
+			"buildAmd",
+			"buildArm",
 		]
 		steps: #EarthlySteps + [{
 			name: "Publish images"
-			run:  "earthly --strict --push --no-output --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm +images --repo=ghcr.io/ --tag=${TAG}"
+			run: """
+				earthly --strict --push --no-output --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd --cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm +images --repo=ghcr.io/ --tag=${TAG}
+				"""
 		}]
 	}
 }
