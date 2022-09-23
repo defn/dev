@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Put back the git branch into git (Earthly uses it for tagging)
         run: |-
           branch=""
@@ -56,6 +58,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Put back the git branch into git (Earthly uses it for tagging)
         run: |-
           branch=""
@@ -101,6 +105,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Put back the git branch into git (Earthly uses it for tagging)
         run: |-
           branch=""
