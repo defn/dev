@@ -81,6 +81,7 @@ install-global:
 	pod apply -f app/e/k3d-global.yaml;
 
 tilt:
+	pass hello
 	env tilt up --context pod --port $(tilt_port) --host 127.0.0.1 --stream
 
 logout:
