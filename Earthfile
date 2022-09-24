@@ -243,7 +243,6 @@ toolVersions:
     ARG PACKER
     ARG SHELLCHECK
     ARG SHFMT
-    ARG SKAFFOLD
     ARG TERRAFORM
     ARG VAULT
 
@@ -266,7 +265,6 @@ toolVersions:
     RUN echo python ${PYTHON} >> .tool-versions
     RUN echo shellcheck ${SHELLCHECK} >> .tool-versions
     RUN echo shfmt ${SHFMT} >> .tool-versions
-    RUN echo skaffold ${SKAFFOLD} >> .tool-versions
     RUN echo terraform ${TERRAFORM} >> .tool-versions
     RUN echo vault ${VAULT} >> .tool-versions
     RUN echo argo ${ARGO} >> .tool-versions
