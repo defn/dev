@@ -151,7 +151,7 @@ user:
     RUN set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd
 
 ubuntu:
-    FROM +ubuntu
+    FROM ubuntu:focal-20220826
 
     SAVE IMAGE --cache-hint
 
