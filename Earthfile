@@ -892,8 +892,7 @@ python:
     ARG PYTHON
     FROM +asdf --arch=${arch}
     USER root
-    RUN apt update && apt install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
-    RUN apt update && apt install -y python3-pip python3-venv python-is-python3 entr
+    RUN apt update && apt install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl python3-pip python3-venv python-is-python3 entr
     USER ubuntu
     RUN echo python ${PYTHON} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add python'
