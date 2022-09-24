@@ -75,7 +75,6 @@ user:
     COPY --chown=ubuntu:ubuntu --dir (+vault/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+cloudflared/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+terraform/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+skaffold/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+awsvault/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch}) ./
