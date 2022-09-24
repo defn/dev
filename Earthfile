@@ -306,7 +306,7 @@ tools:
         && apt-get install -y --no-install-recommends \
             apt-transport-https software-properties-common tzdata locales git gpg gpg-agent unzip xz-utils wget curl
 
-    SAVE IMAGE --cache-artifact
+    SAVE IMAGE --cache-hint
 
 asdf:
     ARG arch
@@ -320,7 +320,7 @@ asdf:
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
 
     SAVE ARTIFACT .asdf
-    SAVE IMAGE --cache-artifact
+    SAVE IMAGE --cache-hint
 
 # arch4
 protoc:
@@ -798,7 +798,7 @@ golang:
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add golang'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
-    SAVE IMAGE --cache-artifact
+    SAVE IMAGE --cache-hint
 
 gotools:
     ARG arch
@@ -836,7 +836,7 @@ nodejs:
     RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g npm@${NPM}'
     RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g nbb@${NBB}'
     SAVE ARTIFACT .asdf
-    SAVE IMAGE --cache-artifact
+    SAVE IMAGE --cache-hint
 
 cdktf:
     ARG arch
