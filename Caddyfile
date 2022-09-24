@@ -19,8 +19,8 @@ https://control-0.tiger-mamba.ts.net {
 		reverse_proxy http://localhost:8004
 	}
 
-	handle_path /dist/ {
-		root * /home/ubuntu/dist
+	handle_path /dist/* {
+		root * /work/dist
 		file_server
 	}
 
