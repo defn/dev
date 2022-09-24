@@ -214,8 +214,6 @@ root:
     RUN chown -R ubuntu:ubuntu /home/ubuntu
     RUN chmod u+s /usr/bin/sudo
 
-    COPY etc/daemon.json /etc/docker/daemon.json
-
     USER ubuntu
     WORKDIR /home/ubuntu
 
