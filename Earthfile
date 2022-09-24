@@ -899,21 +899,21 @@ python:
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     RUN bash -c 'source ~/.asdf/asdf.sh && python -m pip install --upgrade pip'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
-    RUN bash -c 'source ~/.asdf/asdf.sh && pip install pipx && asdf reshim'
+    RUN bash -c 'source ~/.asdf/asdf.sh && pip install pipx'
     SAVE ARTIFACT .asdf
     SAVE IMAGE --cache-hint
 
 pipx:
     ARG arch
     FROM +python --arch=${arch}
-    RUN ~/.asdf/shims/pipx install yq
-    RUN ~/.asdf/shims/pipx install pre-commit
-    RUN ~/.asdf/shims/pipx install datadog
-    RUN ~/.asdf/shims/pipx install httpie
-    RUN ~/.asdf/shims/pipx install ggshield
-    RUN ~/.asdf/shims/pipx install supervisor
-    RUN ~/.asdf/shims/pipx install sigstore
-    RUN ~/.asdf/shims/pipx install morgan
+    RUN ~/.local/bin/pipx install yq
+    RUN ~/.local/bin/pipx install pre-commit
+    RUN ~/.local/bin/pipx install datadog
+    RUN ~/.local/bin/pipx install httpie
+    RUN ~/.local/bin/pipx install ggshield
+    RUN ~/.local/bin/pipx install supervisor
+    RUN ~/.local/bin/pipx install sigstore
+    RUN ~/.local/bin/pipx install morgan
     RUN git init
     COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
     RUN bash -c 'source ~/.asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit install'
