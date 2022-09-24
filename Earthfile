@@ -18,12 +18,14 @@ image-amd:
     ARG repo
     ARG tag
     FROM --platform=linux/amd64 +user --arch=amd64
+
     SAVE IMAGE --push ${repo}defn/dev:${tag}
 
 image-arm:
     ARG repo
     ARG tag
     FROM --platform=linux/arm64 +user --arch=arm64
+
     SAVE IMAGE --push ${repo}defn/dev:${tag}
 
 user:
@@ -281,7 +283,6 @@ coderServer:
     RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
     RUN git clone https://github.com/cue-sh/vscode-cue /home/ubuntu/.local/share/code-server/extensions/vscode-cue
     RUN for a in betterthantomorrow.calva betterthantomorrow.joyride ms-python.python golang.Go vscodevim.vim; do /home/ubuntu/.local/bin/code-server --install-extension "$a"; done
-
     SAVE ARTIFACT .local
 
 vscodeServer:
@@ -293,7 +294,6 @@ vscodeServer:
     # vscode-server
     RUN echo ${CODESERVER}
     RUN wget -O- https://aka.ms/install-vscode-server/setup.sh | sudo sh -x
-
     SAVE ARTIFACT /usr/local/bin/code-server
 
 tools:
@@ -308,6 +308,8 @@ tools:
         && apt-get install -y --no-install-recommends \
             apt-transport-https software-properties-common tzdata locales git gpg gpg-agent unzip xz-utils wget curl
 
+    SAVE IMAGE --cache-artifact
+
 asdf:
     ARG arch
     ARG ASDF
@@ -318,7 +320,9 @@ asdf:
     WORKDIR /home/ubuntu
     RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v${ASDF}
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
+
     SAVE ARTIFACT .asdf
+    SAVE IMAGE --cache-artifact
 
 # arch4
 protoc:
@@ -796,6 +800,7 @@ golang:
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add golang'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
+    SAVE IMAGE --cache-artifact
 
 gotools:
     ARG arch
@@ -833,6 +838,7 @@ nodejs:
     RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g npm@${NPM}'
     RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g nbb@${NBB}'
     SAVE ARTIFACT .asdf
+    SAVE IMAGE --cache-artifact
 
 cdktf:
     ARG arch
