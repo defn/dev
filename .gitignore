@@ -86,3 +86,5 @@ node_modules
 .home.*
 /go
 /sdk
+*.swp
+
