@@ -2113,6 +2113,7 @@ nodejs 14.19.2
 nodejs 14.19.3
 nodejs 14.2.0
 nodejs 14.20.0
+nodejs 14.20.1
 nodejs 14.3.0
 nodejs 14.4.0
 nodejs 14.5.0
@@ -2154,6 +2155,7 @@ nodejs 16.15.0
 nodejs 16.15.1
 nodejs 16.16.0
 nodejs 16.17.0
+nodejs 16.17.1
 nodejs 16.2.0
 nodejs 16.3.0
 nodejs 16.4.0
@@ -2192,6 +2194,7 @@ nodejs 18.6.0
 nodejs 18.7.0
 nodejs 18.8.0
 nodejs 18.9.0
+nodejs 18.9.1
 nodejs 4.0.0
 nodejs 4.1.0
 nodejs 4.1.1
