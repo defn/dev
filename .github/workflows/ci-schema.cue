@@ -34,6 +34,8 @@ package workflows
 		  echo "BRANCH=${GITHUB_REF_NAME}" >> $GITHUB_ENV
 		  echo "TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
 		fi
+
+		git config --unset http.https://github.com/.extraheader
 		"""
 }, {
 	name: "Login to Packages Container registry"
