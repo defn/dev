@@ -179,7 +179,7 @@ root:
         apt-transport-https software-properties-common \
         openssh-client openssh-server tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip xz-utils rsync \
         sudo git vim less fzf jo gron jq \
-        build-essential default-jdk make tini python3-pip python3-venv python-is-python3 entr \
+        build-essential default-jdk make tini python3-openssl python3-pip python3-venv python-is-python3 entr \
         gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 libolm-dev \
         xdg-utils figlet lolcat socat netcat-openbsd groff \
         screen htop \
@@ -892,7 +892,7 @@ python:
     ARG PYTHON
     FROM +asdf --arch=${arch}
     USER root
-    RUN apt update && apt install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl python3-pip python3-venv python-is-python3 entr
+    RUN apt update && apt install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl python3-pip python3-venv python-is-python3 entr
     USER ubuntu
     RUN echo python ${PYTHON} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add python'
