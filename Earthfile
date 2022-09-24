@@ -893,6 +893,7 @@ python:
     RUN bash -c 'source ~/.asdf/asdf.sh && python -m pip install --upgrade pip'
     RUN bash -c 'source ~/.asdf/asdf.sh && pip install pipx && asdf reshim'
     SAVE ARTIFACT .asdf
+    SAVE IMAGE --cache-hint
 
 pipx:
     ARG arch
