@@ -145,7 +145,6 @@ connect-%:
 		fi
 
 pending: # Generate pending version updates
-	$(MAKE) pending-images
 	$(MAKE) pending-gh
 	$(MAKE) pending-asdf
 
