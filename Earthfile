@@ -35,7 +35,6 @@ user:
 
     ENTRYPOINT ["/usr/bin/tini", "--"]
 
-    COPY --chown=ubuntu:ubuntu --dir (+python/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+pipx/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+golang/* --arch=${arch}) ./
@@ -241,7 +240,6 @@ toolVersions:
     ARG NODEJS
     ARG NOMAD
     ARG PACKER
-    ARG PYTHON
     ARG SHELLCHECK
     ARG SHFMT
     ARG SKAFFOLD
@@ -891,7 +889,7 @@ python:
     ARG PYTHON
     FROM +asdf --arch=${arch}
     USER root
-    RUN apt update && apt install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
+    RUN echo apt update && apt install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
     USER ubuntu
     RUN echo python ${PYTHON} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add python'
@@ -904,15 +902,9 @@ python:
 pipx:
     ARG arch
     FROM +python --arch=${arch}
-    RUN ~/.asdf/shims/pipx install pycco
     RUN ~/.asdf/shims/pipx install yq
-    RUN ~/.asdf/shims/pipx install watchdog
-    RUN ~/.asdf/shims/pipx install "python-dotenv[cli]"
-    RUN ~/.asdf/shims/pipx install twine
     RUN ~/.asdf/shims/pipx install pre-commit
-    RUN ~/.asdf/shims/pipx install black
     RUN ~/.asdf/shims/pipx install datadog
-    RUN ~/.asdf/shims/pipx install pip-tools
     RUN ~/.asdf/shims/pipx install httpie
     RUN ~/.asdf/shims/pipx install ggshield
     RUN ~/.asdf/shims/pipx install supervisor
@@ -922,6 +914,6 @@ pipx:
     COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
     RUN bash -c 'source ~/.asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit install'
     RUN bash -c 'source ~/.asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit run --all'
-    SAVE ARTIFACT --symlink-no-follow .asdf
     SAVE ARTIFACT --symlink-no-follow .local
     SAVE ARTIFACT --symlink-no-follow .cache
+    SAVE ARTIFACT --symlink-no-follow .asdf
