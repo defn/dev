@@ -892,7 +892,7 @@ python:
     RUN echo python ${PYTHON} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add python'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
-    RUN bash -c 'source ~/.asdf/asdf.sh && python -m pip install --upgrade pip'
+    RUN bash -c 'source ~/.asdf/asdf.sh && python3 -m pip install --upgrade pip'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
     RUN bash -c 'source ~/.asdf/asdf.sh && pip install pipx && asdf reshim'
     SAVE ARTIFACT .asdf
