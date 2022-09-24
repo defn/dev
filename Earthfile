@@ -150,11 +150,15 @@ user:
     RUN git clean -nfd || true
     RUN set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd
 
+ubuntu:
+    FROM +ubuntu
+
+    SAVE IMAGE --cache-hint
 
 root:
     ARG arch
 
-    FROM ubuntu:focal-20220531
+    FROM +ubuntu
 
     USER root
     ENTRYPOINT ["tail", "-f", "/dev/null"]
@@ -220,7 +224,8 @@ root:
     ENV HOME=/home/ubuntu
 
 toolVersions:
-    FROM ubuntu:focal-20220531
+    FROM +ubuntu
+
     ARG ARGO
     ARG ARGOCD
     ARG AWSVAULT
@@ -293,7 +298,7 @@ vscodeServer:
     SAVE ARTIFACT /usr/local/bin/code-server
 
 tools:
-    FROM ubuntu:focal-20220531
+    FROM +ubuntu
 
     ENV DEBIAN_FRONTEND=noninteractive
     ENV container=docker
@@ -887,12 +892,13 @@ python:
     ARG PYTHON
     FROM +asdf --arch=${arch}
     USER root
-    RUN echo apt update && apt install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
+    RUN apt update && apt install -y build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
+    RUN apt update && apt install -y python3-pip python3-venv python-is-python3 entr
     USER ubuntu
     RUN echo python ${PYTHON} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add python'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
-    RUN bash -c 'source ~/.asdf/asdf.sh && python3 -m pip install --upgrade pip'
+    RUN bash -c 'source ~/.asdf/asdf.sh && python -m pip install --upgrade pip'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf reshim'
     RUN bash -c 'source ~/.asdf/asdf.sh && pip install pipx && asdf reshim'
     SAVE ARTIFACT .asdf
