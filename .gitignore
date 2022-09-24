@@ -45,6 +45,7 @@ node_modules
 .config/packer
 .config/ggshield
 .config/dlv
+.config/astro
 .loft
 .lesshst
 .fly
