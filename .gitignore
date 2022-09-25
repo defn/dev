@@ -88,4 +88,5 @@ node_modules
 /go
 /sdk
 *.swp
-
+.degit/
+.ts_node_repl_history
