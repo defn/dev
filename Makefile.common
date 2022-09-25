@@ -53,6 +53,7 @@ perms:
 	-chmod 0600 ~/.kube/config
 
 build:
+	$(MAKE) pull-repos
 	$(MAKE) build-site
 
 install:
