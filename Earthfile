@@ -279,7 +279,7 @@ coderServer:
     RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local
     RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
     RUN git clone https://github.com/cue-sh/vscode-cue /home/ubuntu/.local/share/code-server/extensions/vscode-cue
-    RUN for a in betterthantomorrow.calva betterthantomorrow.joyride golang.Go vscodevim.vim; do /home/ubuntu/.local/bin/code-server --install-extension "$a"; done
+    RUN for a in betterthantomorrow.calva betterthantomorrow.joyride golang.Go vscodevim.vim hashicorp.terraform; do /home/ubuntu/.local/bin/code-server --install-extension "$a"; done
     SAVE ARTIFACT .local
 
 vscodeServer:
