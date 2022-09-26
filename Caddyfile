@@ -1,6 +1,5 @@
-https: //control-0.tiger-mamba.ts.net {
-handle_path /dev
-/* {
+https://control-0.tiger-mamba.ts.net {
+	handle_path /dev/* {
 		reverse_proxy http://localhost:8888
 	}
 
