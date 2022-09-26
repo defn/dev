@@ -20,12 +20,16 @@ https://control-0.tiger-mamba.ts.net {
 	}
 
 	handle_path /api/* {
-		reverse_proxy http://localhost:3000
+		reverse_proxy http://defm
 	}
 
 	reverse_proxy http://localhost:8000
 }
 
 http://pod {
-	reverse_proxy http://defm
+	handle_path /api/* {
+		reverse_proxy http://defm
+	}
+
+	reverse_proxy http://localhost:8000
 }
