@@ -828,12 +828,14 @@ nodejs:
     ARG NODEJS
     ARG NPM
     ARG NBB
+    ARG PNPM
     FROM +asdf --arch=${arch}
     RUN echo nodejs ${NODEJS} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add nodejs'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g npm@${NPM}'
     RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g nbb@${NBB}'
+    RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g pnpm@${PNPM}'
     SAVE ARTIFACT .asdf
     SAVE IMAGE --cache-hint
 
