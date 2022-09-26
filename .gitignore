@@ -46,6 +46,7 @@ node_modules
 .config/ggshield
 .config/dlv
 .config/astro
+.config/nextjs-nodejs/
 .loft
 .lesshst
 .fly
