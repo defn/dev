@@ -61,11 +61,10 @@ user:
     COPY --chown=ubuntu:ubuntu (+kn/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+k3d/* --arch=amd64) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+tctl/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+gotools/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+temporalite/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+oras/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+caddy/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+coredns/* --arch=${arch}) /usr/local/bin/
 
     COPY --chown=ubuntu:ubuntu --dir (+shell/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+k9s/* --arch=${arch}) ./
@@ -373,6 +372,13 @@ caddy:
     FROM +tools --arch=${arch}
     RUN curl -sSL https://github.com/caddyserver/caddy/releases/download/v${CADDY}/caddy_${CADDY}_linux_${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT caddy
+
+coredns:
+    ARG arch
+    ARG COREDNS
+    FROM +tools --arch=${arch}
+    RUN curl -sSL https://github.com/coredns/coredns/releases/download/v{COREDNS}/coredns_${COREDNS}_linux_${arch}.tgz | tar xvfz -
+    SAVE ARTIFACT coredns
 
 flyctl:
     ARG arch

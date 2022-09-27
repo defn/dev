@@ -1,0 +1,11 @@
+.:5555 {
+    log
+    errors
+    forward . 10.43.0.10
+}
+
+ts.net:5555 {
+    log
+    errors
+    forward . 100.100.100.100
+}
