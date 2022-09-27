@@ -4,13 +4,13 @@
     forward . 127.0.0.1:5553
 }
 
-.local:53 {
+local:53 {
     log
     errors
     forward . 10.43.0.10
 }
 
-.ts.net:53 {
+ts.net:53 {
     log
     errors
     forward . 100.100.100.100
