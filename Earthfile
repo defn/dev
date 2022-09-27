@@ -377,7 +377,7 @@ coredns:
     ARG arch
     ARG COREDNS
     FROM +tools --arch=${arch}
-    RUN curl -sSL https://github.com/coredns/coredns/releases/download/v{COREDNS}/coredns_${COREDNS}_linux_${arch}.tgz | tar xvfz -
+    RUN curl -sSL https://github.com/coredns/coredns/releases/download/v${COREDNS}/coredns_${COREDNS}_linux_${arch}.tgz | tar xvfz -
     SAVE ARTIFACT coredns
 
 flyctl:
