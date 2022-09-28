@@ -845,6 +845,7 @@ nodejs:
     RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g nbb@${NBB}'
     RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g pnpm@${PNPM}'
     RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g create-turbo@${TURBOREPO}'
+    RUN bash -c 'source ~/.asdf/asdf.sh && npm install -g turbo@${TURBOREPO}'
     SAVE ARTIFACT .asdf
     SAVE IMAGE --cache-hint
 
