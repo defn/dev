@@ -143,6 +143,8 @@ user:
     COPY --chown=ubuntu:ubuntu +toolVersions/* .
     RUN ~/bin/e asdf install
 
+    RUN install -d -m 070 -o ubuntu -g ubuntu /run/user/1000
+
     COPY --dir --chown=ubuntu:ubuntu . .
     RUN git clean -nfd || true
     RUN set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd
