@@ -143,7 +143,7 @@ user:
     COPY --chown=ubuntu:ubuntu +toolVersions/* .
     RUN ~/bin/e asdf install
 
-    RUN install -d -m 070 -o ubuntu -g ubuntu /run/user/1000
+    RUN sudo install -d -m 0755 -o root -g root /run/user && sudo install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000
 
     COPY --dir --chown=ubuntu:ubuntu . .
     RUN git clean -nfd || true
