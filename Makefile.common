@@ -101,10 +101,11 @@ github-login:
 
 argocd-login:
 	if pod get ns argocd 2>/dev/null; then \
+	if ! argocd app list 2>/dev/null >/dev/null; then \
 		argocd login --insecure argocd-server.argocd.svc --username admin --password adminadmin 2>/dev/null \
 			|| (argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')" \
 					&& argocd account update-password --new-password adminadmin --current-password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')"); \
-		fi
+		fi; fi
 
 git-crypt-unlock:
 	cd ~/.password-store && if ! git crypt unlock; then \
