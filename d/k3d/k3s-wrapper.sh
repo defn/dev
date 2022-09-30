@@ -6,6 +6,10 @@ set -exfu
 
 container_ip=`ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | cut -d' ' -f1`
 
+if [[ -n "${DEFN_DEV_TSKEY:-}" ]]; then
+  tailscale up --authkey="${DEFN_DEV_TSKEY}"
+fi
+
 while true; do
   ts_ip=`/tailscale ip -4 || true`
   if test -n "${ts_ip}"; then break; fi
