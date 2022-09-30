@@ -1,4 +1,4 @@
-tailscale_version ?= 1.30.0_amd64
+tailscale_version ?= 1.30.2_amd64
 
 DEFN_DEV_FROM ?= 169.254.32.1:5000/defn/k3d:k3d-base
 DEFN_DEV_IMAGE ?= 
