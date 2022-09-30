@@ -195,7 +195,7 @@ cluster-inner:
 	-k3d cluster delete $(name)
 	k3d cluster create $(name) \
 		--k3s-node-label env=$(name)@server:0 \
-		--config k3d.yaml \
+		--config etc/k3d.yaml \
 		--registry-config etc/registries.yaml $(DEFN_DEV_HOST_PORTMAPS)
 	docker update --restart=no $(context)-server-0
 	-cd $(app)/tf/$(name) && make init get plan apply
