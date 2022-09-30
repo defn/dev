@@ -196,7 +196,8 @@ cluster-inner:
 	k3d cluster create $(name) \
 		--k3s-node-label env=$(name)@server:0 \
 		--config etc/k3d.yaml \
-		--registry-config etc/registries.yaml $(DEFN_DEV_HOST_PORTMAPS)
+		--registry-config etc/registries.yaml $(DEFN_DEV_HOST_PORTMAPS) \
+		--env bar=baz@server:0
 	docker update --restart=no $(context)-server-0
 	-cd $(app)/tf/$(name) && make init get plan apply
 
