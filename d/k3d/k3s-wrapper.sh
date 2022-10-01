@@ -26,4 +26,8 @@ if [[ -z "${DEFN_DEV_TSKEY:-}" ]]; then
   /tailscale up --ssh --accept-dns=false --hostname `echo ${domain} | cut -d. -f1`
 fi
 
-exec /bin/k3s-real "$@" --node-ip "${ts_ip}" --node-external-ip "${ts_ip}"
+if [[ -n "${DEFN_DEV_TSKEY:-}" ]]; then
+  exec /bin/k3s-real "$@" --node-ip "${ts_ip}"
+else
+  exec /bin/k3s-real "$@" --node-ip "${ts_ip}" --node-external-ip "${ts_ip}"
+fi
