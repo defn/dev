@@ -65,6 +65,8 @@ user:
     COPY --chown=ubuntu:ubuntu (+oras/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+caddy/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+coredns/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+tctl/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+temporalite/* --arch=${arch}) /usr/local/bin/
 
     COPY --chown=ubuntu:ubuntu --dir (+shell/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+k9s/* --arch=${arch}) ./
