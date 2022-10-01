@@ -10,6 +10,7 @@ control ?= $(shell echo $(name) | sed s/-0//)
 domain ?= $(shell tailscale cert 2>&1 | grep 'For domain' | cut -d'"' -f2 | cut -d. -f2-)
 image ?= defn.dev/defn/k3d
 app ?= $(shell pwd)/app
+node ?= k3d-control-server-0
 
 dummy_ip ?= 169.254.32.1
 
