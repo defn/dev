@@ -67,6 +67,7 @@ user:
     COPY --chown=ubuntu:ubuntu (+coredns/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+tctl/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+temporalite/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+kubebuilder/* --arch=${arch}) /usr/local/bin/
 
     COPY --chown=ubuntu:ubuntu --dir (+shell/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+k9s/* --arch=${arch}) ./
@@ -446,11 +447,17 @@ tctl:
 
 temporalite:
     ARG arch
-    ARG TEMPORAL
     ARG TEMPORALITE
     FROM +tools --arch=${arch}
     RUN curl -sSL https://github.com/temporalio/temporalite/releases/download/v${TEMPORALITE}/temporalite_${TEMPORALITE}_linux_${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT temporalite
+
+kubebuilder:
+    ARG arch
+    ARG KUBEBUILDER
+    FROM +tools --arch=${arch}
+    RUN curl -sSL https://github.com/kubernetes-sigs/kubebuilder/releases/download/v${KUBEBUILDER/kubebuilder_linux_${arch} > kubebuilder && chmod 755 kubebuilder
+    SAVE ARTIFACT kubebuilder
 
 step:
     ARG arch
