@@ -366,7 +366,7 @@ droplet:
 dropoff:
 	-pod delete -n kube-system secret meh.node-password.k3s
 	-pod delete node meh
-	env DIGITALOCEAN_ACCESS_TOKEN="$$(pass DIGITALOCEAN_ACCESS_TOKEN)" \
+	-env DIGITALOCEAN_ACCESS_TOKEN="$$(pass DIGITALOCEAN_ACCESS_TOKEN)" \
 		doctl compute droplet delete meh -f
 
 debug:
