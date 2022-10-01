@@ -1,3 +1,5 @@
+include Makefile.common
+
 build-site-default:
 
 install-site-default:

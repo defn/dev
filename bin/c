@@ -12,7 +12,7 @@ function main {
 	local loader=
 
 	if [[ -e '.env' ]]; then
-		loader='dotenv run'
+		source .env
 	fi
 
 	exec $loader cue cmd -t args="${args}" "${cmd}"
