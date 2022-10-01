@@ -358,6 +358,8 @@ manual:
 droplet:
 	-pod delete -n kube-system secret meh.node-password.k3s
 	env DIGITALOCEAN_ACCESS_TOKEN="$$(pass DIGITALOCEAN_ACCESS_TOKEN)" \
+		doctl compute droplet delete meh -f
+	env DIGITALOCEAN_ACCESS_TOKEN="$$(pass DIGITALOCEAN_ACCESS_TOKEN)" \
 		doctl compute droplet create meh --region sfo3 --image 118009548 --size s-1vcpu-2gb --wait \
 		--user-data-file <(cat etc/droplet-user-data.template \
 			| sed 's#_TSKEY_#'$$(pass k3d-control-tskey)'#' \
