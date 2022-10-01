@@ -456,7 +456,7 @@ kubebuilder:
     ARG arch
     ARG KUBEBUILDER
     FROM +tools --arch=${arch}
-    RUN curl -sSL https://github.com/kubernetes-sigs/kubebuilder/releases/download/v${KUBEBUILDER/kubebuilder_linux_${arch} > kubebuilder && chmod 755 kubebuilder
+    RUN curl -sSL https://github.com/kubernetes-sigs/kubebuilder/releases/download/v${KUBEBUILDER}/kubebuilder_linux_${arch} > kubebuilder && chmod 755 kubebuilder
     SAVE ARTIFACT kubebuilder
 
 step:
