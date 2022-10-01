@@ -358,16 +358,16 @@ manual:
 droplet:
 	$(MAKE) dropoff
 	env DIGITALOCEAN_ACCESS_TOKEN="$$(pass DIGITALOCEAN_ACCESS_TOKEN)" \
-		doctl compute droplet create meh --region sfo3 --image 118015339 --size s-1vcpu-1gb-amd --wait \
+		doctl compute droplet create k3d-control-droplet --region sfo3 --image 118015339 --size s-1vcpu-1gb-amd --wait \
 		--user-data-file <(cat etc/droplet-user-data.template \
 			| sed 's#_TSKEY_#'$$(pass k3d-control-tskey)'#' \
 			| sed 's#_K3STOKEN_#'$$(docker exec k3d-control-server-0 cat /var/lib/rancher/k3s/server/node-token)'#')
 
 dropoff:
-	-pod delete -n kube-system secret meh.node-password.k3s
-	-pod delete node meh
+	-pod delete -n kube-system secret k3d-control-droplet.node-password.k3s
+	-pod delete node k3d-control-droplet
 	-env DIGITALOCEAN_ACCESS_TOKEN="$$(pass DIGITALOCEAN_ACCESS_TOKEN)" \
-		doctl compute droplet delete meh -f
+		doctl compute droplet delete k3d-control-droplet -f
 
 debug:
 	pod debug node/$(node) -it --image=quay.io/defn/dev:latest -- bash -il

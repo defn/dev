@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -exfu
+set -efu
 mkdir ~/tmp
 cd ~/tmp
 
@@ -14,4 +14,4 @@ docker build -t k3d-control .
 rm -f Dockerfile
 
 chown 165536:165536 /dev/net/tun
-k3d node create meh --role agent --image k3d-control --cluster https://100.106.117.83:6443 --token _K3STOKEN_
+k3d node create k3d-control-droplet --role agent --image k3d-control --cluster https://100.106.117.83:6443 --token _K3STOKEN_
