@@ -193,10 +193,11 @@ join-inner:
 
 cluster-inner:
 	-k3d cluster delete $(name)
-	k3d cluster create $(name) \
+	@k3d cluster create $(name) \
 		--k3s-node-label env=$(name)@server:0 \
 		--config etc/k3d.yaml \
 		--registry-config etc/registries.yaml $(DEFN_DEV_HOST_PORTMAPS) \
+		--token "$$(oass k3d-control-k3s-token)" \
 		--env bar=baz@server:0
 	docker update --restart=no $(context)-server-0
 	-cd $(app)/tf/$(name) && make init get plan apply
