@@ -353,3 +353,10 @@ control: # Provision control plane from macOS
 
 manual:
 	$(MAKE) install-global
+
+droplet:
+	env DIGITALOCEAN_ACCESS_TOKEN="$$(pass DIGITALOCEAN_ACCESS_TOKEN)" \
+		doctl compute droplet create meh --region sfo3 --image 117989094 --size s-1vcpu-2gb --wait \
+		--user-data-file <(cat etc/droplet-user-data.template \
+			| sed 's#_TSKEY_#'$$(pass k3d-control-tskey)'#' \
+			| sed 's#_K3STOKEN_#'$$(docker exec k3d-control-server-0 cat /var/lib/rancher/k3s/server/node-token)'#')

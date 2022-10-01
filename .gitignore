@@ -91,3 +91,4 @@ node_modules
 *.swp
 .degit/
 .ts_node_repl_history
+.user-data*
