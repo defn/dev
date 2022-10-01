@@ -1,7 +1,7 @@
 tailscale_version ?= 1.30.2_amd64
 
 DEFN_DEV_FROM ?= quay.io/defn/dev:k3d
-DEFN_DEV_IMAGE ?= 
+DEFN_DEV_IMAGE ?=
 
 base: tailscale_$(tailscale_version)/tailscaled
 	docker build -t "${DEFN_DEV_FROM}"  --build-arg DEFN_DEV_IMAGE="${DEFN_DEV_IMAGE}" -f Dockerfile.base .
