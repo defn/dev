@@ -27,6 +27,26 @@ https://control-0.tiger-mamba.ts.net {
 }
 
 http://pod {
+	handle_path /dev/* {
+		reverse_proxy http://localhost:8888
+	}
+
+	handle_path /vc1/* {
+		reverse_proxy http://localhost:8001
+	}
+
+	handle_path /vc2/* {
+		reverse_proxy http://localhost:8002
+	}
+
+	handle_path /vc3/* {
+		reverse_proxy http://localhost:8003
+	}
+
+	handle_path /vc4/* {
+		reverse_proxy http://localhost:8004
+	}
+
 	handle_path /api/* {
 		reverse_proxy http://defm
 	}
