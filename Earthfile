@@ -146,19 +146,20 @@ user:
     COPY --chown=ubuntu:ubuntu +toolVersions/* .
     RUN ~/bin/e asdf install
 
-    RUN sudo install -d -m 0755 -o root -g root /run/user && sudo install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000
-
     COPY --dir --chown=ubuntu:ubuntu . .
     RUN git clean -nfd || true
     RUN set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd
 
 ubuntu:
-    FROM ubuntu:focal-20220826
+    ARG UBUNTU
+    FROM ${UBUNTU}
 
     SAVE IMAGE --cache-hint
 
 root:
     ARG arch
+    ARG TAILSCALE
+    ARG DOCKER
 
     FROM +ubuntu
 
@@ -190,18 +191,7 @@ root:
 
 	RUN apt purge -y nano
 
-    RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null \
-        && curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.tailscale-keyring.list | tee /etc/apt/sources.list.d/tailscale.list \
-        && apt-get update \
-        && apt install -y tailscale
-
-    RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
-        && echo "deb [arch=${arch} signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu focal stable" | tee /etc/apt/sources.list.d/docker.list \
-        && apt-get update \
-        && apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
-
     RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
-    RUN usermod --groups docker --append ubuntu
     RUN echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu
     RUN install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
 
@@ -216,9 +206,24 @@ root:
     RUN ln -nfs /usr/bin/git-crypt /usr/local/bin/
 
     RUN mkdir /run/sshd
+    RUN install -d -m 0755 -o root -g root /run/user && install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000
 
     RUN chown -R ubuntu:ubuntu /home/ubuntu
     RUN chmod u+s /usr/bin/sudo
+
+    RUN echo ${TAILSCALE}
+    RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null \
+        && curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.tailscale-keyring.list | tee /etc/apt/sources.list.d/tailscale.list \
+        && apt-get update \
+        && apt install -y tailscale
+
+    RUN echo ${DOCKER}
+    RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
+        && echo "deb [arch=${arch} signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu focal stable" | tee /etc/apt/sources.list.d/docker.list \
+        && apt-get update \
+        && apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+    RUN usermod --groups docker --append ubuntu
 
     USER ubuntu
     WORKDIR /home/ubuntu
