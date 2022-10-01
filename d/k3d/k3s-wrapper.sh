@@ -7,6 +7,8 @@ set -exfu
 container_ip=`ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | cut -d' ' -f1`
 
 if [[ -n "${DEFN_DEV_TSKEY:-}" ]]; then
+  mkdir -p /dev/net
+  mknod /dev/net/tun c 10 200
   /tailscale up --authkey="${DEFN_DEV_TSKEY}" --accept-dns=false --ssh
 fi
 
