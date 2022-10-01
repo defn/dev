@@ -356,8 +356,9 @@ manual:
 	$(MAKE) install-global
 
 droplet:
+	-pod delete -n kube-system secret meh.node-password.k3s
 	env DIGITALOCEAN_ACCESS_TOKEN="$$(pass DIGITALOCEAN_ACCESS_TOKEN)" \
-		doctl compute droplet create meh --region sfo3 --image 117989094 --size s-1vcpu-2gb --wait \
+		doctl compute droplet create feh --region sfo3 --image 118001179 --size s-1vcpu-2gb --wait \
 		--user-data-file <(cat etc/droplet-user-data.template \
 			| sed 's#_TSKEY_#'$$(pass k3d-control-tskey)'#' \
 			| sed 's#_K3STOKEN_#'$$(docker exec k3d-control-server-0 cat /var/lib/rancher/k3s/server/node-token)'#')
