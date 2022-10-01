@@ -360,3 +360,6 @@ droplet:
 		--user-data-file <(cat etc/droplet-user-data.template \
 			| sed 's#_TSKEY_#'$$(pass k3d-control-tskey)'#' \
 			| sed 's#_K3STOKEN_#'$$(docker exec k3d-control-server-0 cat /var/lib/rancher/k3s/server/node-token)'#')
+
+debug:
+	pod debug node/$(node) -it --image=quay.io/defn/dev:latest -- bash -il
