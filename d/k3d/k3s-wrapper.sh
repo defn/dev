@@ -22,6 +22,8 @@ domain=`/tailscale cert 2>&1 | grep ' use ' | cut -d'"' -f2`
 sleep 1
 done
 
-/tailscale up --ssh --accept-dns=false --hostname `echo ${domain} | cut -d. -f1`
+if [[ -z "${DEFN_DEV_TSKEY:-}" ]]; then
+  /tailscale up --ssh --accept-dns=false --hostname `echo ${domain} | cut -d. -f1`
+fi
 
 exec /bin/k3s-real "$@" --node-ip "${ts_ip}" --node-external-ip "${ts_ip}"
