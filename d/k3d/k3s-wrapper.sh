@@ -27,7 +27,7 @@ if [[ -z "${DEFN_DEV_TSKEY:-}" ]]; then
 fi
 
 if [[ -n "${DEFN_DEV_TSKEY:-}" ]]; then
-  exec /bin/k3s-real "$@" --node-ip "${ts_ip}"
+  exec /bin/k3s-real "$@" --node-ip "${ts_ip}" --flannel-backend=vxlan
 else
-  exec /bin/k3s-real "$@" --node-ip "${ts_ip}" --node-external-ip "${ts_ip}"
+  exec /bin/k3s-real "$@" --node-ip "${ts_ip}" --node-external-ip "${ts_ip}" --flannel-backend=vxlan
 fi
