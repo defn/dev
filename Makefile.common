@@ -51,6 +51,7 @@ perms:
 	if test -S /var/run/docker.sock; then sudo chgrp docker /var/run/docker.sock; sudo chmod 770 /var/run/docker.sock; fi
 	if test -S /run/containerd/containerd.sock; then sudo chgrp docker /run/containerd/containerd.sock; sudo chmod 770 /run/containerd/containerd.sock; fi
 	-chmod 0700 ~/.gnupg/. ~/.gnupg2/. ~/.password-store/home/.gnupg
+	-if ! test -f ~/.kube/config; then touch ~/.kube/config; fi
 	-chmod 0600 ~/.kube/config
 
 build:
@@ -128,7 +129,6 @@ kubeconfig:
 			kubectl config set-credentials argocd --token="$$(cat /run/secrets/kubernetes.io/serviceaccount/token)"; \
 			kubectl config set-context argocd --cluster=pod --user=argocd --namespace argocd; \
 			fi; \
-		skaffold config set --kube-context pod local-cluster true; \
 		fi
 	touch ~/.kube/config
 	$(MAKE) perms
