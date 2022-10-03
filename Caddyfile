@@ -23,6 +23,12 @@ https://control-0.tiger-mamba.ts.net {
 		reverse_proxy http://defm
 	}
 
+	handle_path /hello/* {
+		reverse_proxy http://hello.default.svc.cluster.local {
+			header_up Host "hello.default.svc.cluster.local"
+		}
+	}
+
 	reverse_proxy http://localhost:8000
 }
 
@@ -51,6 +57,12 @@ http://control-0 {
 		reverse_proxy http://defm
 	}
 
+	handle_path /hello/* {
+		reverse_proxy http://hello.default.svc.cluster.local {
+			header_up Host "hello.default.svc.cluster.local"
+		}
+	}
+
 	reverse_proxy http://localhost:8000
 }
 
@@ -77,6 +89,12 @@ http://localhost {
 
 	handle_path /api/* {
 		reverse_proxy http://defm
+	}
+
+	handle_path /hello/* {
+		reverse_proxy http://hello.default.svc.cluster.local {
+			header_up Host "hello.default.svc.cluster.local"
+		}
 	}
 
 	reverse_proxy http://localhost:8000
