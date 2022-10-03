@@ -371,3 +371,6 @@ dropoff:
 
 debug:
 	pod debug node/$(node) -it --image=quay.io/defn/dev:latest -- bash -il
+
+debug-docker:
+	docker run -it --rm --privileged --pid=host alpine:edge nsenter -t 1 -m -u -n -i 
