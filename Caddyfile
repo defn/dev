@@ -1,4 +1,4 @@
-https://control-0.tiger-mamba.ts.net,
+https://*.*.ts.net,
 http://control-0,
 http://localhost {
 	handle_path /dev/* {
