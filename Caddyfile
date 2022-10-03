@@ -31,5 +31,11 @@ http://localhost {
 		}
 	}
 
+	handle_path /hi/* {
+		reverse_proxy http://hi.default.svc.cluster.local {
+			header_up Host "hi.default.svc.cluster.local"
+		}
+	}
+
 	reverse_proxy http://localhost:8000
 }
