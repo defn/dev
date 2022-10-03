@@ -358,7 +358,7 @@ manual:
 droplet:
 	$(MAKE) dropoff
 	env DIGITALOCEAN_ACCESS_TOKEN="$$(pass DIGITALOCEAN_ACCESS_TOKEN)" \
-		doctl compute droplet create k3d-control-droplet --region sfo3 --image 118023753 --size s-1vcpu-512mb-10gb --tag-name k3d --wait \
+		doctl compute droplet create k3d-control-droplet --region sfo3 --image 118023753 --size s-1vcpu-1gb --tag-name k3d --wait \
 		--user-data-file <(cat etc/droplet-user-data.template \
 			| sed 's#_TSKEY_#'$$(pass k3d-control-tskey)'#' \
 			| sed 's#_K3STOKEN_#'$$(docker exec k3d-control-server-0 cat /var/lib/rancher/k3s/server/node-token)'#')
