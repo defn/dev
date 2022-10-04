@@ -92,3 +92,4 @@ node_modules
 .degit/
 .ts_node_repl_history
 .user-data*
+etc/tailscale_*

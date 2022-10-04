@@ -13,3 +13,15 @@ login-site-default:
 
 -include .password-store/Makefile.site
 -include app/Makefile.site
+
+tailscale_version ?= 1.30.2_amd64
+
+DEFN_DEV_FROM ?= quay.io/defn/dev:k3d
+
+k3d-base: etc/tailscale_$(tailscale_version)/tailscaled
+	pass hello
+	docker build -t "${DEFN_DEV_FROM}" -f Dockerfile.base .
+	docker push "${DEFN_DEV_FROM}"
+
+etc/tailscale_$(tailscale_version)/tailscaled:
+	wget -O- https://pkgs.tailscale.com/stable/tailscale_$(tailscale_version).tgz | (cd etc && tar xvfz -)
