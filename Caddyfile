@@ -37,5 +37,26 @@ http://localhost {
 		}
 	}
 
+	handle_path /vault/* {
+		redir {scheme}://{host}:20000/ui/
+	}
+
+	handle_path /argocd/* {
+		redir {scheme}://{host}:20001/
+	}
+
 	reverse_proxy http://localhost:8000
+}
+
+https://*.*.ts.net:20000 {
+	reverse_proxy http://localhost:8200
+}
+
+https://*.*.ts.net:20001 {
+	reverse_proxy https://argocd-server.argocd.svc.cluster.local {
+		transport http {
+			tls
+			tls_insecure_skip_verify
+		}
+	}
 }
