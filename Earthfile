@@ -18,11 +18,15 @@ images:
     ARG repo
     ARG tag
 
-    BUILD +image-amd-k3d-base --repo=${repo} --tag=${tag}-k3d-base
-    BUILD +image-arm-k3d-base --repo=${repo} --tag=${tag}-k3d-base
-
     BUILD +image-amd --repo=${repo} --tag=${tag}
     BUILD +image-arm --repo=${repo} --tag=${tag}
+
+imagesK3DBase:
+    ARG repo
+    ARG tag
+
+    BUILD +image-amd-k3d-base --repo=${repo} --tag=${tag}-k3d-base
+    BUILD +image-arm-k3d-base --repo=${repo} --tag=${tag}-k3d-base
 
 image-amd:
     ARG repo
