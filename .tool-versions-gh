@@ -144,8 +144,8 @@ cli/cli GitHub v2.14.7
 cli/cli GitHub v2.15.0
 cli/cli GitHub v2.16.0
 cli/cli GitHub v2.16.1
-cli/cli GitHub v2.2.0
-cli/cli GitHub v2.3.0
+cli/cli GitHub v2.17.0
+cli/cli GitHub v2.17.0-pre0
 cli/cli GitHub v2.4.0
 cli/cli GitHub v2.5.0
 cli/cli GitHub v2.5.1
@@ -283,7 +283,6 @@ docker/docker-credential-helpers v0.6.4 v0.6.4
 docker/docker-credential-helpers v0.7.0-beta.1 v0.7.0-beta.1
 docker/docker-credential-helpers v0.7.0-beta.2 v0.7.0-beta.2
 docker/docker-credential-helpers v0.7.0 v0.7.0
-earthly/earthly v0.5.23 v0.5.23
 earthly/earthly v0.5.24 v0.5.24
 earthly/earthly v0.6.0-rc1 v0.6.0-rc1
 earthly/earthly v0.6.0-rc2 v0.6.0-rc2
@@ -305,6 +304,7 @@ earthly/earthly v0.6.21 v0.6.21
 earthly/earthly v0.6.22 v0.6.22
 earthly/earthly v0.6.23 v0.6.23
 earthly/earthly v0.6.24 v0.6.24
+earthly/earthly v0.6.25 v0.6.25
 earthly/earthly v0.6.2 v0.6.2
 earthly/earthly v0.6.3 v0.6.3
 earthly/earthly v0.6.4 v0.6.4
@@ -322,7 +322,7 @@ goreleaser/goreleaser v1.11.1 v1.11.1
 goreleaser/goreleaser v1.11.2 v1.11.2
 goreleaser/goreleaser v1.11.3 v1.11.3
 goreleaser/goreleaser v1.11.4 v1.11.4
-goreleaser/goreleaser v1.2.2 v1.2.2
+goreleaser/goreleaser v1.11.5 v1.11.5
 goreleaser/goreleaser v1.2.3 v1.2.3
 goreleaser/goreleaser v1.2.4 v1.2.4
 goreleaser/goreleaser v1.2.5 v1.2.5
@@ -493,7 +493,7 @@ kubernetes-sigs/kubebuilder v3.2.0 v3.2.0
 kubernetes-sigs/kubebuilder v3.3.0 v3.3.0
 kubernetes-sigs/kubebuilder v3.5.0 v3.5.0
 kubernetes-sigs/kubebuilder v3.7.0 v3.7.0
-linkerd/linkerd2 edge-22.2.1 edge-22.2.1
+linkerd/linkerd2 edge-22.10.1 edge-22.10.1
 linkerd/linkerd2 edge-22.2.2 edge-22.2.2
 linkerd/linkerd2 edge-22.2.3 edge-22.2.3
 linkerd/linkerd2 edge-22.2.4 edge-22.2.4
