@@ -56,7 +56,7 @@ image-arm-k3d-base:
     ARG repo
     ARG tag
 
-    FROM --platform=linux/amd64 +k3d-base --arch=amd64
+    FROM --platform=linux/arm64 +k3d-base --arch=arm64
 
     SAVE IMAGE --push ${repo}defn/dev:${tag}
 
