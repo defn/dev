@@ -2,21 +2,20 @@ VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-ar
 
 IMPORT github.com/defn/cloud/lib:master AS lib
 
-build-amd:
-    FROM --platform=linux/amd64 +user --arch=amd64
-
-build-arm:
-    FROM --platform=linux/arm64 +user --arch=arm64
-
 images:
     ARG repo
     ARG tag
+
+    BUILD +image-amd-k3d-base --repo=${repo} --tag=k3d
+    BUILD +image-arm-k3d-base --repo=${repo} --tag=k3d
+
     BUILD +image-amd --repo=${repo} --tag=${tag}
     BUILD +image-arm --repo=${repo} --tag=${tag}
 
 image-amd:
     ARG repo
     ARG tag
+
     FROM --platform=linux/amd64 +user --arch=amd64
 
     SAVE IMAGE --push ${repo}defn/dev:${tag}
@@ -24,7 +23,24 @@ image-amd:
 image-arm:
     ARG repo
     ARG tag
+
     FROM --platform=linux/arm64 +user --arch=arm64
+
+    SAVE IMAGE --push ${repo}defn/dev:${tag}
+
+image-amd-k3d-base:
+    ARG repo
+    ARG tag
+
+    FROM --platform=linux/amd64 +k3d-base --arch=amd64
+
+    SAVE IMAGE --push ${repo}defn/dev:${tag}
+
+image-arm-k3d-base:
+    ARG repo
+    ARG tag
+
+    FROM --platform=linux/amd64 +k3d-base --arch=amd64
 
     SAVE IMAGE --push ${repo}defn/dev:${tag}
 
@@ -943,3 +959,37 @@ pipx:
     SAVE ARTIFACT --symlink-no-follow .local
     SAVE ARTIFACT --symlink-no-follow .cache
     SAVE ARTIFACT --symlink-no-follow .asdf
+
+tailscale-binaries:
+    ARG TAILSCALE
+
+    ARG arch
+
+    FROM +tools --arch=${arch}
+
+	wget -O- https://pkgs.tailscale.com/stable/tailscale_$(TAILSCALE)_${arch}.tgz | (cd etc && tar xvfz -)
+
+    SAVE ARTIFACT tailscale*
+
+k3d-base:
+    ARG K3S
+
+    ARG arch
+
+    FROM rancher/k3s:v${K3S}
+
+    RUN echo root:x:0:0:root:/root:/bin/sh >> /etc/passwd
+    RUN echo root:x:0: >> /etc/group
+    RUN install -d -m 0700 -o root -g root /root
+
+    RUN mv /bin/k3s /bin/k3s-real
+
+    RUN for a in /bin/kubectl /bin/k3s-server /bin/k3s-secrets-encrypt /bin/k3s-etcd-snapshot /bin/k3s-completion /bin/k3s-certificate /bin/k3s-agent /bin/crictl /bin/ctr; do ln -nfs k3s-real $a; done
+
+    RUN mkdir -p /var/lib/rancher/k3s/agent/etc/containerd
+    COPY etc/k3d-config.toml var/lib/rancher/k3s/agent/etc/containerd/config.toml
+
+    COPY etc/k3s-wrapper.sh /bin/k3s
+
+    COPY (+tailscale-binaries/* --arch=${arch}) /
+
