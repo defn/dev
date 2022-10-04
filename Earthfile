@@ -985,7 +985,8 @@ tailscale-binaries:
 
 	RUN wget -O- https://pkgs.tailscale.com/stable/tailscale_${TAILSCALE}_${arch}.tgz | tar xvfz -
 
-    SAVE ARTIFACT */tailscale */tailscaled
+    SAVE ARTIFACT */tailscale
+    SAVE ARTIFACT */tailscaled
 
 k3d-base:
     ARG K3S

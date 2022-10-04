@@ -1,4 +1,4 @@
-DEFN_DEV_FROM ?= quay.io/defn/dev:k3d
+DEFN_DEV_FROM ?= ghcr.io/defn/dev:latest-k3d-base
 
 build:
 	if test -d $(app)/bootstrap/$(name); then kustomize build --enable-helm $(app)/bootstrap/$(name) > defn-dev-bootstrap.yaml; else echo > defn-dev-bootstrap.yaml; fi

@@ -8,7 +8,7 @@ echo ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDqGiNI0Co9JAKytfce4UVhEJj+HMaoZ7TFiLg
 install -m 0600 -o ubuntu -g ubuntu authorized_keys ~ubuntu/.ssh/authorized_keys
 rm -f authorized_keys
 
-echo FROM quay.io/defn/dev:k3d > Dockerfile
+echo FROM ghcr.io/defn/dev:latest-k3d-base> Dockerfile
 echo ENV DEFN_DEV_TSKEY=_TSKEY_ >> Dockerfile
 docker build -t k3d-control .
 rm -f Dockerfile

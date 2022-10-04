@@ -275,10 +275,6 @@ recreate-pod: # Recreate pod
 stop: # Stop k3d
 	k3d cluster stop $(k3d_name)
 
-test:
-	pass hello
-	earthly --allow-privileged --remote-cache=$(cache)defn/cache:updates-images --no-output +test --repo=$${repo:-quay.io/}
-
 rebuild:
 	$(MAKE) build
 	ctr -n k8s.io i pull --plain-http 169.254.32.1:5000/workspace:latest
@@ -370,7 +366,7 @@ dropoff:
 		doctl compute droplet delete k3d-control-droplet -f
 
 debug:
-	pod debug node/$(node) -it --image=quay.io/defn/dev:latest -- bash -il
+	pod debug node/$(node) -it --image=ghcr.io/defn/dev:latest -- bash -il
 
 debug-docker:
 	docker run -it --rm --privileged --pid=host alpine:edge nsenter -t 1 -m -u -n -i
