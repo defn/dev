@@ -2,12 +2,24 @@ VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-ar
 
 IMPORT github.com/defn/cloud/lib:master AS lib
 
+build-amd:
+    FROM --platform=linux/amd64 +user --arch=amd64
+
+build-arm:
+    FROM --platform=linux/arm64 +user --arch=arm64
+
+build-amd-k3d-base:
+    FROM --platform=linux/amd64 +k3d-base --arch=amd64
+
+build-arm-k3d-base:
+    FROM --platform=linux/arm64 +k3d-base --arch=arm64
+
 images:
     ARG repo
     ARG tag
 
-    BUILD +image-amd-k3d-base --repo=${repo} --tag=k3d
-    BUILD +image-arm-k3d-base --repo=${repo} --tag=k3d
+    BUILD +image-amd-k3d-base --repo=${repo} --tag=${tag}-k3d-base
+    BUILD +image-arm-k3d-base --repo=${repo} --tag=${tag}-k3d-base
 
     BUILD +image-amd --repo=${repo} --tag=${tag}
     BUILD +image-arm --repo=${repo} --tag=${tag}
