@@ -67,7 +67,7 @@ jobs: {
 		needs: [
 			"buildAmd",
 			"buildArm",
-			"buildArmK3DBase",
+			"buildAmdK3DBase",
 			"buildArmK3DBase",
 		]
 		steps: #EarthlySteps + [{
