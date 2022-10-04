@@ -967,7 +967,7 @@ tailscale-binaries:
 
     FROM +tools --arch=${arch}
 
-	wget -O- https://pkgs.tailscale.com/stable/tailscale_$(TAILSCALE)_${arch}.tgz | (cd etc && tar xvfz -)
+	RUN wget -O- https://pkgs.tailscale.com/stable/tailscale_$(TAILSCALE)_${arch}.tgz | (cd etc && tar xvfz -)
 
     SAVE ARTIFACT tailscale*
 
