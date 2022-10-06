@@ -8,7 +8,7 @@ name: CI
   pull_request: {}
 jobs:
   buildAmd:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     env:
       FORCE_COLOR: 1
     steps:
@@ -58,7 +58,7 @@ jobs:
           	--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd \
           	+build-amd
   buildArm:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     env:
       FORCE_COLOR: 1
     steps:
@@ -108,7 +108,7 @@ jobs:
           	--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm \
           	+build-arm
   buildAmdK3DBase:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     env:
       FORCE_COLOR: 1
     steps:
@@ -158,7 +158,7 @@ jobs:
           	--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd-k3d-base \
           	+build-amd-k3d-base
   buildArmK3DBase:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     env:
       FORCE_COLOR: 1
     steps:
@@ -208,7 +208,7 @@ jobs:
           	--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm-k3d-base \
           	+build-arm-k3d-base
   publish:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     env:
       FORCE_COLOR: 1
     needs:
@@ -263,7 +263,7 @@ jobs:
           	--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm \
           	+images --repo=ghcr.io/ --tag=${TAG}
   publishK3DBase:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     env:
       FORCE_COLOR: 1
     needs:

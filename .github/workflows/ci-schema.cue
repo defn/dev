@@ -1,7 +1,7 @@
 package workflows
 
 #EarthlyJob: {
-	"runs-on": "ubuntu-latest"
+	"runs-on": "self-hosted"
 
 	env: FORCE_COLOR: 1
 
