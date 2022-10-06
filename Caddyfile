@@ -49,8 +49,12 @@ http://localhost {
 		redir {scheme}://{host}:20002/gui/
 	}
 
+	handle_path /kuma/* {
+		redir {scheme}://{host}:20003/gui/
+	}
+
 	handle_path /demo/* {
-		redir {scheme}://{host}:20100/
+		redir {scheme}://{host}:20100/ui/
 	}
 
 	reverse_proxy http://localhost:8000
@@ -71,6 +75,10 @@ https://*.*.ts.net:20001 {
 
 https://*.*.ts.net:20002 {
 	reverse_proxy http://k3d-global.tiger-mamba.ts.net:5681
+}
+
+https://*.*.ts.net:20003 {
+	reverse_proxy http://localhost:4646
 }
 
 https://*.*.ts.net:20100 {
