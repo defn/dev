@@ -17,6 +17,9 @@ volumes:
   - volume: dind:/mnt/dind
     nodeFilters:
       - server:0
+  - volume: containerd:/var/lib/rancher/k3s/agent/containerd/io.containerd.content.v1.content
+    nodeFilters:
+      - server:0
   - volume: /var/run/docker.sock:/var/run/docker.sock
     nodeFilters:
       - server:0
