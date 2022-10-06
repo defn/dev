@@ -700,6 +700,7 @@ sigstore/rekor v0.8.1 v0.8.1
 sigstore/rekor v0.8.2 v0.8.2
 sigstore/rekor v0.9.0 v0.9.0
 sigstore/rekor v0.9.1 v0.9.1
+sigstore/rekor v1.0-rc v1.0-rc
 smallstep/cli Release v0.17.3-rc29
 smallstep/cli Release v0.18.1-rc7
 smallstep/cli Release v0.18.3-rc1
@@ -730,7 +731,6 @@ smallstep/cli Step v0.21.0
 smallstep/cli Step v0.22.0
 smallstep/cli Step v0.22.1-rc2
 smallstep/cli Step v0.23.0-rc.1
-superfly/flyctl v0.0.382 v0.0.382
 superfly/flyctl v0.0.383 v0.0.383
 superfly/flyctl v0.0.384 v0.0.384
 superfly/flyctl v0.0.385-pre-1 v0.0.385-pre-1
@@ -760,6 +760,7 @@ superfly/flyctl v0.0.401 v0.0.401
 superfly/flyctl v0.0.402-pre-1 v0.0.402-pre-1
 superfly/flyctl v0.0.402 v0.0.402
 superfly/flyctl v0.0.403 v0.0.403
+superfly/flyctl v0.0.404 v0.0.404
 temporalio/temporalite v0.1.0 v0.1.0
 temporalio/temporalite v0.1.1 v0.1.1
 temporalio/temporalite v0.2.0 v0.2.0
