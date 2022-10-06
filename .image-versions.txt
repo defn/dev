@@ -16,12 +16,13 @@ gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler
 gcr.io/knative-releases/knative.dev/serving/cmd/controller
 gcr.io/knative-releases/knative.dev/serving/cmd/domain-mapping
 gcr.io/knative-releases/knative.dev/serving/cmd/domain-mapping-webhook
+gcr.io/knative-releases/knative.dev/serving/cmd/queue
 gcr.io/knative-releases/knative.dev/serving/cmd/webhook
-ghcr.io/dexidp/dex:v2.32.0
 ghcr.io/dexidp/dex:v2.35.0-distroless
 ghcr.io/external-secrets/external-secrets:v0.5.8
 ghcr.io/kyverno/kyvernopre:v1.7.2
 ghcr.io/kyverno/kyverno:v1.7.2
+index.docker.io/containous/whoami
 public.ecr.aws/docker/library/redis:7.0.4-alpine
 public.ecr.aws/karpenter/controller:v0.16.3
 public.ecr.aws/karpenter/webhook:v0.16.3
