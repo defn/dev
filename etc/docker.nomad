@@ -1,5 +1,5 @@
 job "docker" {
-  datacenters = ["grove"]
+  datacenters = ["dev"]
 
   group "shell" {
     task "server" {

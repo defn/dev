@@ -1,5 +1,5 @@
 job "raw_exec" {
-  datacenters = ["grove"]
+  datacenters = ["dev"]
 
   group "shell" {
     task "server" {
