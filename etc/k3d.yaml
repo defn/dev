@@ -40,5 +40,5 @@ options:
         nodeFilters:
           - server:0
   kubeconfig:
-    updateDefaultKubeconfig: false
-    switchCurrentContext: false
+    updateDefaultKubeconfig: true
+    switchCurrentContext: true
