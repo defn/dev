@@ -11,13 +11,13 @@ volumes:
   - volume: work:/mnt/work
     nodeFilters:
       - server:0
-  - volume: earthly:/mnt/earthly
+  - volume: earthly-${DEFN_DEV_NAME}:/mnt/earthly
     nodeFilters:
       - server:0
-  - volume: dind:/mnt/dind
+  - volume: dind-${DEFN_DEV_NAME}:/mnt/dind
     nodeFilters:
       - server:0
-  - volume: containerd:/var/lib/rancher/k3s/agent/containerd/io.containerd.content.v1.content
+  - volume: containerd-${DEFN_DEV_NAME}:/var/lib/rancher/k3s/agent/containerd/io.containerd.content.v1.content
     nodeFilters:
       - server:0
   - volume: /var/run/docker.sock:/var/run/docker.sock
@@ -40,5 +40,5 @@ options:
         nodeFilters:
           - server:0
   kubeconfig:
-    updateDefaultKubeconfig: true
-    switchCurrentContext: true
+    updateDefaultKubeconfig: false
+    switchCurrentContext: false
