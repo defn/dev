@@ -6,7 +6,7 @@ build:
 	docker build -t 169.254.32.1:5000/defn/k3d:$(name) --build-arg DEFN_DEV_ARCHIVE="$(DEFN_DEV_ARCHIVE)" --build-arg DEFN_DEV_FROM="$(DEFN_DEV_FROM)" .
 
 mint:
-	docker run --rm -ti --privileged --entrypoint sh 169.154.32.1:5000/workspace -c \
+	docker run --rm -ti --privileged --entrypoint sh 169.254.32.1:5000/workspace -c \
 		"sudo mkdir -p /var/lib/tailscale; \
 		sudo /usr/sbin/tailscaled -statedir /var/lib/tailscale & \
 		sudo /usr/bin/tailscale up -hostname $(name) -authkey $$(pass tailscale_$(key)); \
