@@ -3,7 +3,7 @@
 function main {
 	set -efu
 
-	exec kubectl --context k3d-global "$@"
+	exec kubectl --context k3d-circus "$@"
 }
 
 main "$@"

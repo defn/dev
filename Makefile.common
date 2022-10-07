@@ -78,10 +78,10 @@ install:
 	mark -- configure site
 	$(MAKE) install-site
 
-install-global:
-	if ! k3d cluster list global -o json | jq -e -r '.[].nodes | map(select(.State.Status == "running")) | length' | grep ^3; then $(MAKE) global; fi
-	argocd cluster add --yes --upsert k3d-global
-	pod apply -f app/e/k3d-global.yaml;
+install-circus:
+	if ! k3d cluster list circus -o json | jq -e -r '.[].nodes | map(select(.State.Status == "running")) | length' | grep ^3; then $(MAKE) circus; fi
+	argocd cluster add --yes --upsert k3d-circus
+	pod apply -f app/e/k3d-circus.yaml;
 
 tilt:
 	pass hello
@@ -155,7 +155,7 @@ pending: # Generate pending version updates
 pending-images:
 	(pod get pods --all-namespaces -o json | gron | grep '\.image ='  | cut -d'"' -f2 | grep -v 169.2543.32.1:5000/ | grep -v /defn/dev: | grep -v /workspace:latest) | sed 's#@.*##' | grep -v ^sha256 | sort -u > .image-versions.txt
 
-sync: # Sync all the things for installing control, global
+sync: # Sync all the artifacts
 	git pull
 	$(MAKE) sync-inner
 
@@ -330,7 +330,7 @@ pull-repos: # Pull dev, app, home, and password-store repos
 	cd && git pull
 	cd && cd .password-store && git pull
 
-global: # Provision global server from control plane
+circus: # Provision circus server from control plane
 	$(MAKE) pull-repos
 	env DEFN_DEV_HOST_PORT=6444 DEFN_DEV_HOST_API=host.k3d.internal \
 		DEFN_DEV_NAME=k3d-$@ \
@@ -347,9 +347,6 @@ control: # Provision control plane from macOS
 		DEFN_DEV_HOST_PORTMAPS="-p 443:443@server:0 -p 80:80@server:0" \
 		$(MAKE) this name=$@
 	docker system prune -f
-
-manual:
-	$(MAKE) install-global
 
 droplet:
 	$(MAKE) dropoff
