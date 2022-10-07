@@ -41,4 +41,4 @@ options:
           - server:0
   kubeconfig:
     updateDefaultKubeconfig: true
-    switchCurrentContext: true
+    switchCurrentContext: false

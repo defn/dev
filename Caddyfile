@@ -74,7 +74,7 @@ https://*.*.ts.net:20001 {
 }
 
 https://*.*.ts.net:20002 {
-	reverse_proxy http://k3d-global.tiger-mamba.ts.net:5681
+	reverse_proxy http://k3d-circus.tiger-mamba.ts.net:5681
 }
 
 https://*.*.ts.net:20003 {

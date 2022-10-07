@@ -31,15 +31,6 @@ macos:
 	defaults write -g ApplePressAndHoldEnabled -bool false
 	-$(MAKE) registry
 
-#	$(MAKE) github-login
-#	if [[ ! -f .gitconfig ]]; then \
-#		rm -f .gitconfig; \
-#		(echo '[credential "https://github.com"]'; echo 'helper = !/usr/local/bin/gh auth git-credential') > .gitconfig; \
-#		gh repo clone amanibhavam/password-store work/password-store; \
-#		rm -f .gitconfig; \
-#		git checkout -- .gitconfig; \
-#		fi
-
 symlinks:
 	mark -- configure symlinks
 	sudo install -d -m 0700 -o ubuntu -g ubuntu /work
@@ -174,23 +165,9 @@ pending-gh:
 	$(MAKE) github-login
 	for a in $$(grep curl Earthfile | grep github.com | perl -pe 's{.*github.com/}{}; s{(.*?/.*?)/.*}{$$1}' | sort); do gh release list --repo "$$a" --exclude-drafts | cat | perl -pe 's{[ \t]+}{ }g' | awk '{print $$1,$$(NF-1)}' | sort | sed "s#^#$$a #"; done > .tool-versions-gh
 
-attach:
-	code --folder-uri vscode-remote://k8s-container+context=$(context)+namespace=default+podname=$(podname)+name=dev+/home/ubuntu
-
-attach-remo:
-	code --folder-uri vscode-remote://k8s-container+context=remo+namespace=default+podname=dev-0+name=dev+/home/ubuntu
-
-join:
-	cd d/k3d && $(MAKE) build name=$(context) app=$(app)
-	@env DEFN_DEV_HOST=${context}.${domain} $(MAKE) $@-inner join="$$(kubectl config view -o jsonpath='{.clusters[?(@.name == "$(to)")].cluster.server}')" token="$(shell docker exec $(to)-server-0 cat /var/lib/rancher/k3s/server/node-token)" name=$(name)
-
 cluster:
 	cd d/k3d && $(MAKE) build name=$(context) app=$(app)
 	@$(MAKE) $@-inner name=$(name)
-
-join-inner:
-	-k3d cluster delete "$(join)"
-	-k3d node create $(name) --role agent --image $(image) --token "$(token)" --cluster "$(join)"
 
 cluster-inner:
 	-k3d cluster delete $(name)
@@ -217,84 +194,12 @@ vault-backup:
 	cd .password-store && git pull && git add vault && git add -u vault && (git commit -m 'vault backup' || true) && git push
 	cd .password-store && git status -sb
 
-live:
-	@env SSH_AUTH_SOCK="$(shell ls -td /tmp/vscode-ssh-auth-* 2>/dev/null | head -1)" ssh-add -L 2>/dev/null >/dev/null
-
-monitor-loop:
-	while true; do $(MAKE) monitor; sleep 60; done
-
-monitor:
-	if test -f ~/.local/share/code-server/heartbeat && test "$$(find ~/.local/share/code-server/heartbeat -mmin +120)"; then \
-		~/bin/e $(MAKE) logout; \
-	fi
-
-ignore:
-	 git clean -nfx | awk '{print $$NF}' | sort > .dockerignoreinclude Makefile.common
-
-restart: # Restart everything
-	git pull
-	$(MAKE) restart-inner
-
-restart-inner:
-	k3d cluster stop $(k3d_name)
-	-osascript -e 'quit app "Docker"'
-	open -a Docker
-	while ! docker ps; do date; sleep 5; done
-	k3d cluster start $(k3d_name)
-	while true; do if kubectl rollout status statefulset dev --watch; then break; fi; sleep 5; done
-	$(MAKE) attach
-
-restart-docker: # Restart Docker Desktop
-	-osascript -e 'quit app "Docker"'
-	open -a Docker
-	while ! docker ps; do date; sleep 5; done
-	#$(MAKE) dummy-docker
-
-restart-cluster: # Restart k3d
-	-k3d cluster stop $(k3d_name)
-	-k3d cluster start $(k3d_name)
-	while true; do if kubectl rollout status statefulset dev --watch; then break; fi; sleep 5; done
-	$(MAKE) attach
-
-recreate: # Recreate k3d (restarts Docker)
-	-k3d cluster delete $(k3d_name)
-	-docker rm -f ignore
-	$(MAKE) restart-docker
-	$(MAKE) cluster
-
-recreate-cluster: # Recreate k3d
-	-k3d cluster delete $(k3d_name)
-	-docker rm -f ignore
-	$(MAKE) cluster
-
-recreate-pod: # Recreate pod
-	kubectl delete pod/dev-0
-	while true; do if kubectl rollout status statefulset dev --watch; then break; fi; sleep 5; done
-	$(MAKE) attach
-
-stop: # Stop k3d
-	k3d cluster stop $(k3d_name)
-
 rebuild:
 	$(MAKE) build
 	ctr -n k8s.io i pull --plain-http 169.254.32.1:5000/workspace:latest
 
 shell:
 	docker run --rm -ti $(repo)defn/dev bash -l
-
-cert:
-	-k --context pod create ns traefik
-	touch meh.json; chmod 0600 meh.json
-	-k --context pod create -n traefik secret generic default-certificate --from-file=meh.json
-	v write pki/issue/gyre.defn.dev common_name="$(DEFN_DEV_HOST)" alt_names="hello.demo.svc.cluster.local,*.remocal.net" ip_sans="169.254.32.1" ttl=120h -format=json | jq .data > meh.json
-	k --context pod patch -n traefik secret default-certificate --type='json' -p='[{"op" : "replace" ,"path" : "/data/tls.key" ,"value" : "'$$(cat meh.json | jq -r '.private_key | @base64')'"}]'
-	k --context pod patch -n traefik secret default-certificate --type='json' -p='[{"op" : "replace" ,"path" : "/data/tls.crt" ,"value" : "'$$(cat meh.json | jq -r '.certificate | @base64')'"}]'
-	rm -f meh.json
-
-provision-digital-ocean:
-	echo k3d 5.4.4 >> .tool-versions
-	bin/e asdf install k3d
-	bin/e make cluster
 
 debug-host:
 	pod debug "node/$$(pod get nodes -o json | jq -r '.items[0].metadata.name')" --image 169.254.32.1:5000/workspace -it -- bash
