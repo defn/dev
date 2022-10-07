@@ -17,6 +17,9 @@ volumes:
   - volume: dind-${DEFN_DEV_NAME}:/mnt/dind
     nodeFilters:
       - server:0
+  - volume: registry-${DEFN_DEV_NAME}:/mnt/registry
+    nodeFilters:
+      - server:0
   - volume: containerd-${DEFN_DEV_NAME}:/var/lib/rancher/k3s/agent/containerd/io.containerd.content.v1.content
     nodeFilters:
       - server:0
