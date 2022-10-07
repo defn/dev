@@ -69,11 +69,6 @@ install:
 	mark -- configure site
 	$(MAKE) install-site
 
-install-%:
-	if ! k3d cluster list $(second) -o json | jq -e -r '.[].nodes | map(select(.State.Status == "running")) | length' | grep ^3; then $(MAKE) $(second); fi
-	argocd cluster add --yes --upsert k3d-$(second)
-	pod apply -f app/e/k3d-$(second).yaml;
-
 tilt:
 	pass hello
 	env tilt up --context pod --port $(tilt_port) --host 127.0.0.1 --stream
