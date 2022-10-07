@@ -208,7 +208,6 @@ this:
 	git pull
 	cd app && git pull
 	cd ~/.password-store && git pull
-	-$(MAKE) macos
 	rm -rf tmp
 	mkdir tmp
 	mkdir -p tmp/$(name)/var/lib/tailscale
