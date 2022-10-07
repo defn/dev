@@ -216,7 +216,7 @@ this:
 	if test -n "$(DEFN_DEV_MACOS)"; then \
 		(cd ~/.password-store && oras push localhost:5000/defn/bootstrap:password-store .git:+tar); \
 		(cd app && oras push localhost:5000/defn/bootstrap:app .git:+tar); \
-		kubectl rollout -n default status statefulset $(name) --watch; \
+		kubectl --context k3d-$(name) rollout -n default status statefulset $(name) --watch; \
 	fi
 
 registry:
