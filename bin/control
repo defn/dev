@@ -3,7 +3,7 @@
 function main {
 	set -efu
 
-	exec kubectl --context k3d-control "$@"
+	exec kubectl --context pod "$@"
 }
 
 main "$@"
