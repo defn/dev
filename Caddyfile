@@ -49,8 +49,8 @@ http://localhost {
 		redir {scheme}://{host}:20002/gui/
 	}
 
-	handle_path /kuma/* {
-		redir {scheme}://{host}:20003/gui/
+	handle_path /nomad/* {
+		redir {scheme}://{host}:20003/ui/
 	}
 
 	handle_path /demo/* {
