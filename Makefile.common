@@ -255,6 +255,11 @@ control: # Provision control plane from macOS
 		$(MAKE) this name=$@
 	docker system prune -f
 
+meh:
+	env DIGITALOCEAN_ACCESS_TOKEN="$$(pass DIGITALOCEAN_ACCESS_TOKEN)" \
+		doctl compute droplet create meh --region sfo3 --image 118023753 --size s-1vcpu-1gb --tag-name k3d --wait \
+		--user-data-file <(cat etc/droplet-user-data-minimal.template)
+
 droplet:
 	$(MAKE) dropoff
 	env DIGITALOCEAN_ACCESS_TOKEN="$$(pass DIGITALOCEAN_ACCESS_TOKEN)" \
