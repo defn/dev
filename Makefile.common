@@ -46,7 +46,6 @@ perms:
 	-chmod 0600 ~/.kube/config
 
 build:
-	$(MAKE) pull-repos
 	$(MAKE) build-site
 
 install:
@@ -60,7 +59,6 @@ install:
 	$(MAKE) init-gpg
 
 	mark -- configure repos
-	cd ~/.password-store && git pull
 	mkdir -p ~/work/app
 	(set -x; cd ~/work/app && rm -rf .git && oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:app && git fetch && git reset --hard origin/master)
 
@@ -142,13 +140,9 @@ pending-images:
 	(pod get pods --all-namespaces -o json | gron | grep '\.image ='  | cut -d'"' -f2 | grep -v 169.2543.32.1:5000/ | grep -v /defn/dev: | grep -v /workspace:latest) | sed 's#@.*##' | grep -v ^sha256 | sort -u > .image-versions.txt
 
 sync: # Sync all the artifacts
-	git pull
-	$(MAKE) sync-inner
-
-sync-inner:
+	$(MAKE) pull-repos
 	-$(MAKE) registry
 	$(MAKE) sync-images
-	$(MAKE) pull-repos
 
 sync-images: # Sync images to local cache
 	cat .image-versions.txt | bin/runmany 4 'skopeo copy docker://$$1 docker://127.0.0.1:5000/$${1#*/} --multi-arch all --dest-tls-verify=false'
@@ -200,9 +194,6 @@ debug-host:
 	pod debug "node/$$(pod get nodes -o json | jq -r '.items[0].metadata.name')" --image 169.254.32.1:5000/workspace -it -- bash
 
 this:
-	git pull
-	cd app && git pull
-	cd ~/.password-store && git pull
 	rm -rf tmp
 	mkdir tmp
 	mkdir -p tmp/$(name)/var/lib/tailscale
@@ -224,13 +215,11 @@ registry:
 	#pod apply -f etc/local-registry-hosting.yaml
 
 pull-repos: # Pull dev, app, home, and password-store repos
-	git pull
-	cd app && git pull
 	cd && git pull
+	cd app && git pull
 	cd && cd .password-store && git pull
 
 circus global: # Provision circus from control plane
-	$(MAKE) pull-repos
 	env DEFN_DEV_HOST_PORT=6444 DEFN_DEV_HOST_API=host.k3d.internal \
 		DEFN_DEV_NAME=k3d-$@ \
 		DOCKER_CONTEXT=host \
@@ -238,15 +227,12 @@ circus global: # Provision circus from control plane
 	docker system prune -f
 
 smiley: # Provision smiley from control plane
-	$(MAKE) pull-repos
 	env DEFN_DEV_HOST_PORT=6445 DEFN_DEV_HOST_API=host.k3d.internal \
 		DEFN_DEV_NAME=k3d-$@ \
 		$(MAKE) this name=$@
 	docker system prune -f
 
-control: # Provision control plane from macOS
-	$(MAKE) pull-repos
-	$(MAKE) macos
+control: # Provision control plane
 	$(MAKE) build
 	env DEFN_DEV_HOST_PORT=6443 DEFN_DEV_HOST_API=127.0.0.1 \
 		DEFN_DEV_NAME=k3d-$@ \
