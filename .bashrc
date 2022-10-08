@@ -66,7 +66,7 @@ export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 export HOF_TELEMETRY_DISABLED=1
 
 # fake xdisply
-export DISPLAY=1
+#export DISPLAY=1
 
 # kubectl
 export KUBECONFIG_ALL="$HOME/.kube/config"
