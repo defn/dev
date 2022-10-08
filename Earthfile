@@ -169,6 +169,7 @@ user:
     COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
     RUN docker context create pod --docker host=tcp://localhost:2375
     RUN docker context create host --docker host=unix:///var/run/docker.sock
+    RUN docker context use pod
 
     COPY --chown=ubuntu:ubuntu --dir .vim .
     COPY --chown=ubuntu:ubuntu .vimrc .
