@@ -12,3 +12,5 @@ rm -f authorized_keys
 sudo apt update
 sudo apt install -y pinentry-tty
 sudo ln -nfs /usr/bin/pinentry /usr/local/bin/
+
+(cd /usr/local/bin && sudo curl -sSL -o earthly https://github.com/earthly/earthly/releases/download/v0.6.25/earthly-linux-amd64 && sudo chmod 755 earthly)
