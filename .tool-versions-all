@@ -306,7 +306,6 @@ cloudflared 2022.8.2
 cloudflared 2022.8.4
 cloudflared 2022.9.0
 cloudflared 2022.9.1
-doctl 1.60.0
 doctl 1.61.0
 doctl 1.62.0
 doctl 1.63.0
@@ -336,6 +335,7 @@ doctl 1.81.0
 doctl 1.82.0
 doctl 1.82.1
 doctl 1.82.2
+doctl 1.83.0
 golang 1.10
 golang 1.10.1
 golang 1.10.2
