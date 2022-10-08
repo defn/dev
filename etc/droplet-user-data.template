@@ -9,9 +9,10 @@ install -m 0600 -o ubuntu -g ubuntu authorized_keys ~ubuntu/.ssh/authorized_keys
 rm -f authorized_keys
 
 echo FROM ghcr.io/defn/dev:latest-k3d-base> Dockerfile
-echo ENV DEFN_DEV_TSKEY=_TSKEY_ >> Dockerfile
-docker build -t k3d-control .
+echo ARG TSKEY >> Dockerfile
+echo ENV DEFN_DEV_TSKEY='$TSKEY' >> Dockerfile
+docker build -t k3d-control --build-arg TSKEY=_TSKEY_ .
 rm -f Dockerfile
 
 #chown 165536:165536 /dev/net/tun
-env DEFN_DEV_PRIVILEGED=true k3d node create k3d-control-droplet --role agent --image k3d-control --cluster https://100.106.117.83:6443 --token _K3STOKEN_
+env DEFN_DEV_PRIVILEGED=true k3d node create "$(uname -n)" --role agent --image k3d-control --cluster https://100.106.117.83:6443 --token _K3STOKEN_
