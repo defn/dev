@@ -125,6 +125,7 @@ vc%:
 	argocd cluster add $@ --yes --upsert
 
 connect-%:
+	# pod -n vc1 get secrets vc-vcluster -o json | jq -r '.data.config | @base64d' | yq '.clusters[].cluster.server |= "https://vcluster.vc1.svc.cluster.local"' -y > ~/.kube/vc1
 	if vcluster connect vcluster --context pod --namespace $(second) --kube-config ~/.kube/$(second) --kube-config-context-name $(second) --update-current=false --server vcluster.$(second).svc.cluster.local; then \
 		set -x; \
 		env KUBECONFIG=~/.kube/$(second):~/.kube/config kubectl config view --flatten > ~/.kube/config.$(second); \
