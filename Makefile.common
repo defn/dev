@@ -215,6 +215,7 @@ registry:
 	#pod apply -f etc/local-registry-hosting.yaml
 
 pull-repos: # Pull dev, app, home, and password-store repos
+	git pull
 	cd && git pull
 	cd app && git pull
 	cd && cd .password-store && git pull
