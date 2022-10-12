@@ -444,7 +444,7 @@ knative/client Knative knative-v1.5.0
 knative/client Knative knative-v1.6.0
 knative/client Knative knative-v1.6.1
 knative/client Knative knative-v1.7.0
-knative/client Knative v0.17.2
+knative/client Knative knative-v1.7.1
 knative/client Knative v0.17.3
 knative/client Knative v0.17.4
 knative/client Knative v0.18.1
@@ -523,7 +523,6 @@ linkerd/linkerd2 stable-2.11.5 stable-2.11.5
 linkerd/linkerd2 stable-2.12.0-rc2 stable-2.12.0-rc2
 linkerd/linkerd2 stable-2.12.0 stable-2.12.0
 linkerd/linkerd2 stable-2.12.1 stable-2.12.1
-loft-sh/loft v2.0.4-beta.0 v2.0.4-beta.0
 loft-sh/loft v2.0.4 v2.0.4
 loft-sh/loft v2.1.0-beta.3 v2.1.0-beta.3
 loft-sh/loft v2.1.0-beta.5 v2.1.0-beta.5
@@ -553,6 +552,7 @@ loft-sh/loft v2.2.2-beta.0 v2.2.2-beta.0
 loft-sh/loft v2.2.2 v2.2.2
 loft-sh/loft v2.3.0-beta.0 v2.3.0-beta.0
 loft-sh/loft v2.3.0 v2.3.0
+loft-sh/loft v2.3.1-beta.0 v2.3.1-beta.0
 loft-sh/vcluster v0.10.0-alpha.0 v0.10.0-alpha.0
 loft-sh/vcluster v0.10.0-beta.0 v0.10.0-beta.0
 loft-sh/vcluster v0.10.0 v0.10.0
@@ -733,7 +733,6 @@ smallstep/cli Step v0.21.0
 smallstep/cli Step v0.22.0
 smallstep/cli Step v0.22.1-rc2
 smallstep/cli Step v0.23.0-rc.1
-superfly/flyctl v0.0.387-pre-1 v0.0.387-pre-1
 superfly/flyctl v0.0.387 v0.0.387
 superfly/flyctl v0.0.388-pre-1 v0.0.388-pre-1
 superfly/flyctl v0.0.388 v0.0.388
@@ -763,6 +762,7 @@ superfly/flyctl v0.0.406 v0.0.406
 superfly/flyctl v0.0.407 v0.0.407
 superfly/flyctl v0.0.408 v0.0.408
 superfly/flyctl v0.0.409 v0.0.409
+superfly/flyctl v0.0.410 v0.0.410
 temporalio/temporalite v0.1.0 v0.1.0
 temporalio/temporalite v0.1.1 v0.1.1
 temporalio/temporalite v0.2.0 v0.2.0
@@ -796,7 +796,6 @@ tilt-dev/tilt v0.30.6 v0.30.6
 tilt-dev/tilt v0.30.7 v0.30.7
 tilt-dev/tilt v0.30.8 v0.30.8
 tilt-dev/tilt v0.30.9 v0.30.9
-turbot/steampipe v0.16.0-rc.10 v0.16.0-rc.10
 turbot/steampipe v0.16.0-rc.11 v0.16.0-rc.11
 turbot/steampipe v0.16.0-rc.12 v0.16.0-rc.12
 turbot/steampipe v0.16.0-rc.13 v0.16.0-rc.13
@@ -818,7 +817,8 @@ turbot/steampipe v0.17.0-alpha.15 v0.17.0-alpha.15
 turbot/steampipe v0.17.0-alpha.16 v0.17.0-alpha.16
 turbot/steampipe v0.17.0-alpha.18 v0.17.0-alpha.18
 turbot/steampipe v0.17.0-alpha.19 v0.17.0-alpha.19
-turbot/steampipe v0.17.0-alpha.2 v0.17.0-alpha.2
+turbot/steampipe v0.17.0-alpha.21 v0.17.0-alpha.21
+turbot/steampipe v0.17.0-alpha.22 v0.17.0-alpha.22
 turbot/steampipe v0.17.0-alpha.3 v0.17.0-alpha.3
 turbot/steampipe v0.17.0-alpha.4 v0.17.0-alpha.4
 turbot/steampipe v0.17.0-alpha.5 v0.17.0-alpha.5

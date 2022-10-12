@@ -70,7 +70,6 @@ argocd 2.3.7
 argocd 2.3.8
 argocd 2.3.9
 argocd 2.4.0
-argocd 2.4.0-rc3
 argocd 2.4.0-rc4
 argocd 2.4.0-rc5
 argocd 2.4.1
@@ -88,6 +87,7 @@ argocd 2.4.7
 argocd 2.4.8
 argocd 2.4.9
 argocd 2.5.0-rc1
+argocd 2.5.0-rc2
 aws-vault 1.0.0
 aws-vault 2.0.0
 aws-vault 2.0.1
@@ -1435,6 +1435,7 @@ kubectl 1.2.5-beta.0
 kubectl 1.2.6
 kubectl 1.26.0-alpha.0
 kubectl 1.26.0-alpha.1
+kubectl 1.26.0-alpha.2
 kubectl 1.2.6-beta.0
 kubectl 1.2.7
 kubectl 1.2.7-beta.0
