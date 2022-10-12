@@ -233,6 +233,7 @@ smiley: # Provision smiley from control plane
 	docker system prune -f
 
 control: # Provision control plane
+	$(MAKE) pull-repos
 	$(MAKE) build
 	env DEFN_DEV_HOST_PORT=6443 DEFN_DEV_HOST_API=127.0.0.1 \
 		DEFN_DEV_NAME=k3d-$@ \
