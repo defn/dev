@@ -109,6 +109,7 @@ user:
     COPY --chown=ubuntu:ubuntu --dir (+vault/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+cloudflared/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+terraform/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+terragrunt/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+awsvault/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch}) ./
@@ -288,6 +289,7 @@ toolVersions:
     ARG SHELLCHECK
     ARG SHFMT
     ARG TERRAFORM
+    ARG TERRAGRUNT
     ARG VAULT
 
     RUN echo argo ${ARGO} >> .tool-versions
@@ -310,6 +312,7 @@ toolVersions:
     RUN echo shellcheck ${SHELLCHECK} >> .tool-versions
     RUN echo shfmt ${SHFMT} >> .tool-versions
     RUN echo terraform ${TERRAFORM} >> .tool-versions
+    RUN echo terragrunt ${TERRAGRUNT} >> .tool-versions
     RUN echo vault ${VAULT} >> .tool-versions
     RUN echo argo ${ARGO} >> .tool-versions
     SAVE ARTIFACT .tool-versions
@@ -843,6 +846,15 @@ terraform:
     FROM +asdf --arch=${arch}
     RUN echo terraform ${TERRAFORM} >> .tool-versions
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add terraform'
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
+    SAVE ARTIFACT .asdf
+
+terragrunt:
+    ARG arch
+    ARG TERRAGRUNT
+    FROM +asdf --arch=${arch}
+    RUN echo terragrunt ${TERRAGRUNT} >> .tool-versions
+    RUN bash -c 'source ~/.asdf/asdf.sh && asdf plugin-add terragrunt'
     RUN bash -c 'source ~/.asdf/asdf.sh && asdf install'
     SAVE ARTIFACT .asdf
 
