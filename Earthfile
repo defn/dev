@@ -96,7 +96,6 @@ user:
     COPY --chown=ubuntu:ubuntu (+gotools/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+oras/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+caddy/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+coredns/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+tctl/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+temporalite/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+kubebuilder/* --arch=${arch}) /usr/local/bin/
