@@ -320,9 +320,11 @@ toolVersions:
 coderServer:
     ARG arch
     ARG CODESERVER
+    ARG CODESERVER_BUMP
 
     FROM +root --arch=${arch}
 
+    RUN echo ${CODESERVER_BUMP}
     RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local
     RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
     RUN git clone https://github.com/cue-sh/vscode-cue /home/ubuntu/.local/share/code-server/extensions/vscode-cue
