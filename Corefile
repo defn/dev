@@ -21,3 +21,9 @@ ts.net:53 {
     errors
     forward . 100.100.100.100
 }
+
+mesh:53 {
+    log
+    errors
+    forward . 127.0.0.1:15053
+}
