@@ -116,7 +116,7 @@ kubeconfig:
 		fi
 	touch ~/.kube/config
 	$(MAKE) perms
-	if docker ps 2>/dev/null; then k3d kubeconfig merge -a -d; fi
+	if env DOCKER_CONTEXT=host docker ps 2>/dev/null; then env DOCKER_CONTEXT=host k3d kubeconfig merge -a -d; fi
 	-kubectl config use-context pod
 	k config get-contexts
 
