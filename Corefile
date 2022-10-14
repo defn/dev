@@ -25,5 +25,5 @@ ts.net:53 {
 mesh:53 {
     log
     errors
-    forward . 127.0.0.1:15053
+    forward . 127.0.0.1:15054
 }
