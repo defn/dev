@@ -3,10 +3,12 @@
 function main {
 	set -efu
 
-	exec env KUMA_MODE=zone KUMA_MULTIZONE_ZONE_NAME=pod 
-		KUMA_MULTIZONE_ZONE_GLOBAL_ADDRESS=grpcs://100.64.110.16:5685 \
-		KUMA_MULTIZONE_ZONE_KDS_ROOT_CA_FILE=$$HOME/app/k/k3d-circus-secrets/kuma-global-ca.crt \
-		kuma-cp run
+	exec sudo -u kuma \
+		env \
+			KUMA_MODE=zone KUMA_MULTIZONE_ZONE_NAME=pod 
+			KUMA_MULTIZONE_ZONE_GLOBAL_ADDRESS=grpcs://100.64.110.16:5685 \
+			KUMA_MULTIZONE_ZONE_KDS_ROOT_CA_FILE=$$HOME/app/k/k3d-circus-secrets/kuma-global-ca.crt \
+				kuma-cp run
 }
 
 main "$@"
