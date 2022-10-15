@@ -209,9 +209,8 @@ root:
     ENV DEBIAN_FRONTEND=noninteractive
     ENV container=docker
 
-    RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm
-
-    RUN apt-get update \
+    RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm \
+        && apt-get update \
         && apt-get upgrade -y \
         && apt-get install -y --no-install-recommends \
         apt-transport-https software-properties-common \
@@ -222,13 +221,15 @@ root:
         xdg-utils figlet lolcat socat netcat-openbsd groff \
         screen htop \
         redis \
-        wireguard-tools
+        wireguard-tools \
+        && apt purge -y nano
 
-	RUN apt purge -y nano
+    RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu \
+        && echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu \
+        && install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
 
-    RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
-    RUN echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu
-    RUN install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
+    RUN groupadd -g 1001 kuma && useradd -u 1001 -d /home/kuma -s /bin/bash -g kuma -M kuma \
+        && install -d -m 0700 -o kuma -g kuma /home/kuma
 
     RUN apt update && apt upgrade -y
     RUN ln -sf /usr/share/zoneinfo/UTC /etc/localtime \
@@ -236,29 +237,28 @@ root:
         && locale-gen en_US.UTF-8 \
         && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
-    RUN rm -f /usr/bin/gs
+    RUN rm -f /usr/bin/gs \
+        && ln -nfs /usr/bin/git-crypt /usr/local/bin/ \
+        && mkdir /run/sshd \
+        && install -d -m 0755 -o root -g root /run/user \
+        && install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 \
+        && install -d -m 0700 -o kuma -g kuma /run/user/1001 \
 
-    RUN ln -nfs /usr/bin/git-crypt /usr/local/bin/
+    RUN chown -R ubuntu:ubuntu /home/ubuntu \
+        && chmod u+s /usr/bin/sudo
 
-    RUN mkdir /run/sshd
-    RUN install -d -m 0755 -o root -g root /run/user && install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000
-
-    RUN chown -R ubuntu:ubuntu /home/ubuntu
-    RUN chmod u+s /usr/bin/sudo
-
-    RUN echo ${TAILSCALE}
-    RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null \
+    RUN echo ${TAILSCALE} \
+        && curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null \
         && curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.tailscale-keyring.list | tee /etc/apt/sources.list.d/tailscale.list \
         && apt-get update \
         && apt install -y tailscale
 
-    RUN echo ${DOCKER}
-    RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
+    RUN echo ${DOCKER} \
+        && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
         && echo "deb [arch=${arch} signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu focal stable" | tee /etc/apt/sources.list.d/docker.list \
         && apt-get update \
-        && apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
-
-    RUN usermod --groups docker --append ubuntu
+        && apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin \
+        && usermod --groups docker --append ubuntu
 
     USER ubuntu
     WORKDIR /home/ubuntu
@@ -347,9 +347,8 @@ tools:
     ENV DEBIAN_FRONTEND=noninteractive
     ENV container=docker
 
-    RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm
-
-    RUN apt-get update \
+    RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm \
+        && apt-get update \
         && apt-get install -y --no-install-recommends \
             apt-transport-https software-properties-common tzdata locales git gpg gpg-agent unzip xz-utils wget curl
 
