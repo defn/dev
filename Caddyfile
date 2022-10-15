@@ -1,4 +1,5 @@
 https://*.*.ts.net,
+http://*.mesh,
 http://control-0,
 http://localhost {
 	handle_path /dev/* {
