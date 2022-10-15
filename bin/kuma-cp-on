@@ -3,7 +3,7 @@
 function main {
 	set -efu
 
-	cp ~/app/k/k3d-circus-secrets/kuma-global-ca.crt /tmp/
+	cp ~/etc/kuma-global-ca.crt /tmp/
 	exec sudo -u kuma \
 		env \
 			KUMA_MODE=zone KUMA_MULTIZONE_ZONE_NAME=pod \
