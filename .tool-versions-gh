@@ -13,7 +13,6 @@ benbjohnson/litestream v0.3.8 v0.3.8
 benbjohnson/litestream v0.3.9 v0.3.9
 benbjohnson/litestream v0.4.0-alpha.3 v0.4.0-alpha.3
 benbjohnson/litestream v0.4.0-beta.2 v0.4.0-beta.2
-buildkite/agent v3.22.0 v3.22.0
 buildkite/agent v3.22.1 v3.22.1
 buildkite/agent v3.23.0 v3.23.0
 buildkite/agent v3.23.1 v3.23.1
@@ -43,6 +42,7 @@ buildkite/agent v3.36.1 v3.36.1
 buildkite/agent v3.37.0 v3.37.0
 buildkite/agent v3.38.0 v3.38.0
 buildkite/agent v3.39.0 v3.39.0
+buildkite/agent v3.39.1 v3.39.1
 buildkite/cli Block v0.4.0
 buildkite/cli Branch v0.5.0
 buildkite/cli Hello v0.2.0
@@ -841,3 +841,4 @@ Wilfred/difftastic 0.34.0 0.34.0
 Wilfred/difftastic 0.35.0 0.35.0
 Wilfred/difftastic 0.36.0 0.36.0
 Wilfred/difftastic 0.36.1 0.36.1
+Wilfred/difftastic 0.37.0 0.37.0
