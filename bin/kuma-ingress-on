@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	sudo rm -f /tmp/ingress-token
+	kumactl generate zone-ingress-token --zone=pod > /tmp/ingress-token
+
+	exec kuma-dp run --proxy-type=ingress \
+		--dataplane-token-file=/tmp/ingress-token --dataplane-file=ingress-dp.yaml \
+		--cp-address=https://100.103.25.109:5678 
+}
+
+main "$@"

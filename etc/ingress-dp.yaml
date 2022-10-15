@@ -1,0 +1,7 @@
+type: ZoneIngress
+name: ingress
+networking:
+  address: 100.103.25.109
+  port: 10000
+  advertisedAddress: 100.103.25.109
+  advertisedPort: 10000
