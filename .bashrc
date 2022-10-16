@@ -112,4 +112,13 @@ if [[ -n "${VSCODE_GIT_IPC_HANDLE:-}" ]]; then
 			touch ~/.home.done
 		fi
 	fi
+
+	if [[ -n "${VSCODE_PROXY_URI:-}" ]]; then
+		if [[ -f .todo ]]; then
+			if [[ "./.todo" == "$(find . -mindepth 1 -maxdepth 1)" ]]; then
+				rm -f .todo
+				git clone "https://$(echo $VSCODE_PROXY_URI | cut -d/ -f5- | perl -pe 's{/proxy/..port..}{}')" .
+			fi
+		fi
+	fi
 fi
