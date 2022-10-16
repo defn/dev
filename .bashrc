@@ -113,7 +113,7 @@ if [[ -n "${VSCODE_GIT_IPC_HANDLE:-}" ]]; then
 		fi
 	fi
 
-	if [[ -n "${$VSCODE_PROXY_URI:-}" ]]; then
+	if [[ -n "${VSCODE_PROXY_URI:-}" ]]; then
 		if [[ -f .todo ]]; then
 			if [[ "./.todo" == "$(find . -mindepth 1 -maxdepth 1)" ]]; then
 				rm -f .todo
