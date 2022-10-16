@@ -3,10 +3,12 @@
 function main {
 	set -efu
 
+	local zone="${1:-pod}"
+
 	cp ~/etc/kuma-global-ca.crt /tmp/
 	exec sudo -u kuma \
 		env \
-			KUMA_MODE=zone KUMA_MULTIZONE_ZONE_NAME=pod \
+			KUMA_MODE=zone KUMA_MULTIZONE_ZONE_NAME="$zone" \
 			KUMA_MULTIZONE_ZONE_GLOBAL_ADDRESS=grpcs://100.64.110.16:5685 \
 			KUMA_MULTIZONE_ZONE_KDS_ROOT_CA_FILE=/tmp/kuma-global-ca.crt \
 				kuma-cp run
