@@ -8,8 +8,12 @@ networking:
       servicePort: 80
       tags:
         kuma.io/service: dev
+  outbound:
+    - port: 40000
+      tags:
+        kuma.io/service: frontend_kuma-demo_svc_8080
+    - port: 40001
+      tags:
+        kuma.io/service: redis_kuma-demo_svc_6379
   admin:
     port: 19001
-  transparentProxying:
-    redirectPortInbound: 15006
-    redirectPortOutbound: 15001

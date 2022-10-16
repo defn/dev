@@ -1,0 +1,15 @@
+type: Dataplane
+mesh: default
+name: dev
+networking:
+  address: {{ tsip }}
+  inbound:
+    - port: 30000
+      servicePort: 80
+      tags:
+        kuma.io/service: dev
+  admin:
+    port: 19001
+  transparentProxying:
+    redirectPortInbound: 15006
+    redirectPortOutbound: 15001

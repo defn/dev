@@ -7,8 +7,6 @@ function main {
 
 	cp ~/etc/kuma-global-ca.crt /tmp/
 
-	while ! tailscale ip -4; do sleep 1; done
-
 	exec sudo -u kuma \
 		env \
 			KUMA_MODE=zone KUMA_MULTIZONE_ZONE_NAME="$zone" \
