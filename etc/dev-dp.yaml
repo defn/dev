@@ -1,17 +1,21 @@
 type: Dataplane
 mesh: default
-name: dev
+name: {{ hostname }}
 networking:
   address: {{ tsip }}
   inbound:
     - port: 30000
       servicePort: 80
       tags:
-        kuma.io/service: dev
+        kuma.io/service: {{ hostname }}
     - port: 30001
       servicePort: 7777
       tags:
         kuma.io/service: whoami
+    - port: 30002
+      servicePort: 2375
+      tags:
+        kuma.io/service: docker-{{ hostname }}
   outbound:
     - port: 40000
       tags:
