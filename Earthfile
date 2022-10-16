@@ -171,7 +171,7 @@ user:
         && docker context create so --docker host=tcp://docker-so.mesh:80 \
         && docker context create the --docker host=tcp://docker-the.mesh:80 \
         && docker context create brie --docker host=tcp://docker-brie.mesh:80 \
-        && docker context use host \
+        && docker context use host
 
     COPY --chown=ubuntu:ubuntu --dir .vim .
     COPY --chown=ubuntu:ubuntu .vimrc .
@@ -1026,4 +1026,3 @@ k3d-base:
     COPY etc/k3s-wrapper.sh /bin/k3s
 
     COPY (+tailscale-binaries/* --arch=${arch}) /
-

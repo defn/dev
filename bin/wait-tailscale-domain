@@ -6,7 +6,7 @@ function main {
 	while ! tailscale ip -4 >/dev/null 2>&1; do
 		sleep 1
 	done
-	
+
 	tailscale cert 2>&1 | grep 'For domain'  | cut -d'"' -f2
 }
 
