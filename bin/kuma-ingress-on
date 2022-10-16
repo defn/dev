@@ -7,13 +7,14 @@ function main {
 
 	local pth_dp="${1:-$HOME/etc/ingress-dp.yaml}"
 
-	cp "$pth_dp" /tmp/
+	cp "$pth_dp" /tmp/ingress-dp.yaml
 
 	while ! kumactl generate zone-ingress-token --zone="$zone" | sudo sudo -u kuma tee /tmp/ingress-token >/dev/null; do sleep 1; done
 
 	exec sudo -u kuma \
 		kuma-dp run \
-			--dataplane-token-file=/tmp/ingress-token --dataplane-file=/tmp/ingress-dp.yaml \
+			--dataplane-token-file=/tmp/ingress-token \
+			--dataplane-file=/tmp/ingress-dp.yaml \
       		--proxy-type=ingress \
 			--dataplane-var tsip=$(tailscale ip -4)
 }

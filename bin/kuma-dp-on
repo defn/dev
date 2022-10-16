@@ -5,7 +5,7 @@ function main {
 
 	local pth_dp="${1:-$HOME/etc/dev-dp.yaml}"
 
-	cp "$pth_dp" /tmp/
+	cp "$pth_dp" /tmp/dev-dp.yaml
 
 	kumactl generate dataplane-token | sudo sudo -u kuma tee /tmp/dev-token >/dev/null
 
