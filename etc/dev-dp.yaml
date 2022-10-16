@@ -2,7 +2,7 @@ type: Dataplane
 mesh: default
 name: dev
 networking:
-  address: 100.103.25.109
+  address: {{ tsip }}
   inbound:
     - port: 30000
       servicePort: 80

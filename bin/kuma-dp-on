@@ -10,8 +10,10 @@ function main {
 
 	exec sudo -u kuma \
 		kuma-dp run \
-			--dataplane-token-file=/tmp/dev-token --dataplane-file=/tmp/dev-dp.yaml
-			--cp-address=https://100.103.25.109:5678
+			--dataplane-token-file=/tmp/dev-token \
+			--dataplane-file=/tmp/dev-dp.yaml \
+			--dataplane-var tsip=$(tailscale ip -4) \
+			--cp-address=https://$(tailscale ip -4):5678
 }
 
 main "$@"
