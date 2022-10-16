@@ -68,9 +68,13 @@ install:
 	mark -- configure site
 	$(MAKE) install-site
 
-tilt:
+tilt up:
 	pass hello
-	env tilt up --context pod --port $(tilt_port) --host 127.0.0.1 --stream
+	tilt up --context pod --port $(tilt_port) --host 127.0.0.1 --stream
+
+down:
+	kuma-tp-off
+	tilt down --context pod	
 
 logout:
 	-echo yes | gh auth logout --hostname github.com
