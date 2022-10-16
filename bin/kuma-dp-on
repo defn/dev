@@ -5,9 +5,9 @@ function main {
 
 	local pth_dp="${1:-$HOME/etc/dev-dp.yaml}"
 
-	kumactl generate dataplane-token | sudo sudo -u kuma tee /tmp/dev-token >/dev/null
-
 	cp "$pth_dp" /tmp/
+
+	kumactl generate dataplane-token | sudo sudo -u kuma tee /tmp/dev-token >/dev/null
 
 	exec sudo -u kuma \
 		kuma-dp run \
