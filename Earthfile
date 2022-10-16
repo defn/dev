@@ -168,9 +168,9 @@ user:
     COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
     RUN docker context create host --docker host=unix:///var/run/docker.sock \
         && docker context create pod --docker host=tcp://localhost:2375 \
-        && docker context create so --docker host=tcp://docker-so.mesh \
-        && docker context create the --docker host=tcp://docker-the.mesh \
-        && docker context create brie --docker host=tcp://docker-brie.mesh \
+        && docker context create so --docker host=tcp://docker-so.mesh:80 \
+        && docker context create the --docker host=tcp://docker-the.mesh:80 \
+        && docker context create brie --docker host=tcp://docker-brie.mesh:80 \
         && docker context use host \
 
     COPY --chown=ubuntu:ubuntu --dir .vim .
