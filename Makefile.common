@@ -245,6 +245,7 @@ control: # Provision control plane
 		DEFN_DEV_NAME=k3d-$@ \
 		DEFN_DEV_MACOS=1 \
 		DEFN_DEV_HOST_PORTMAPS="-p 443:443@server:0 -p 80:80@server:0" \
+		PATH="$$PATH:$(shell pwd)/bin" \
 		$(MAKE) this name=$@
 	docker --context=host system prune -f
 
