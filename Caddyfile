@@ -6,9 +6,7 @@ http://localhost {
 		reverse_proxy http://localhost:8888
 	}
 
-	handle_path /dev/github.com/defn/app/* {
-		reverse_proxy http://localhost:8888
-	}
+	import .caddy.workspaces/*
 
 	handle_path /vc1/* {
 		reverse_proxy http://localhost:8001
@@ -89,3 +87,5 @@ https://*.*.ts.net:20003 {
 https://*.*.ts.net:20100 {
 	reverse_proxy http://localhost:8080
 }
+
+import .caddy.d/*

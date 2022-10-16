@@ -1,0 +1,3 @@
+handle_path /dev/github.com/defn/app/* {
+	reverse_proxy http://localhost:8888
+}
