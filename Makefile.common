@@ -75,6 +75,7 @@ tilt up:
 down:
 	kuma-tp-off
 	tilt down --context pod	
+	sudo pkill kuma-dp
 
 logout:
 	-echo yes | gh auth logout --hostname github.com
