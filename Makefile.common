@@ -30,6 +30,7 @@ macos:
 	ifconfig lo0
 	defaults write -g ApplePressAndHoldEnabled -bool false
 	-$(MAKE) registry
+	-docker context create host --docker host=unix:///var/run/docker.sock
 
 symlinks:
 	mark -- configure symlinks
