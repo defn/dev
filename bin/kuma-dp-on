@@ -12,8 +12,7 @@ function main {
 		kuma-dp run \
 			--dataplane-token-file=/tmp/dev-token \
 			--dataplane-file=/tmp/dev-dp.yaml \
-			--dataplane-var tsip=$(tailscale ip -4) \
-			--cp-address=https://$(tailscale ip -4):5678
+			--dataplane-var tsip=$(tailscale ip -4)
 }
 
 main "$@"
