@@ -3,7 +3,7 @@
 function main {
 	set -efu
 
-	local zone="${1:-pod}"
+	local zone="${1:-$(wait-tailscale-domain)}"
 
 	cp ~/etc/kuma-global-ca.crt /tmp/
 

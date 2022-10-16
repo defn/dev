@@ -1,7 +1,7 @@
 type: ZoneIngress
 name: ingress
 networking:
-  address: 100.103.25.109
+  address: {{ tsip }}
   port: 10000
-  advertisedAddress: 100.103.25.109
+  advertisedAddress: {{ tsip }}
   advertisedPort: 10000

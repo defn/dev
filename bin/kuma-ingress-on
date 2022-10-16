@@ -3,14 +3,19 @@
 function main {
 	set -efu
 
-	sudo rm -f /tmp/ingress-token
-	kumactl generate zone-ingress-token --zone=pod > /tmp/ingress-token
+	local zone="${1:-$(wait-tailscale-domain)}"
 
-	cp ~/etc/ingress-dp.yaml /tmp/
+	local pth_dp="${1:-$HOME/etc/ingress-dp.yaml}"
+
+	kumactl generate zone-ingress-token --zone="$zone" | sudo sudo -u kuma tee /tmp/ingress-token >/dev/null
+
+	cp "$pth_dp" /tmp/
+
 	exec sudo -u kuma \
-		kuma-dp run --proxy-type=ingress \
+		kuma-dp run 
 			--dataplane-token-file=/tmp/ingress-token --dataplane-file=/tmp/ingress-dp.yaml \
-			--cp-address=https://100.103.25.109:5678 
+      --proxy-type=ingress \
+			--dataplane-var tsip=$(tailscale ip -4)
 }
 
 main "$@"
