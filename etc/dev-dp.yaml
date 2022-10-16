@@ -8,6 +8,10 @@ networking:
       servicePort: 80
       tags:
         kuma.io/service: dev
+    - port: 30001
+      servicePort: 7777
+      tags:
+        kuma.io/service: whoami
   outbound:
     - port: 40000
       tags:
