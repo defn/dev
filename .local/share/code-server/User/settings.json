@@ -26,5 +26,11 @@
     "go.toolsManagement.checkForUpdates": "off",
     "gopls": {
         "ui.semanticTokens": true
+    },
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true,
+        "/home/ubuntu/work/**": true
     }
 }
