@@ -3,7 +3,7 @@
 function main {
 	set -efu
 
-	local zone="${1:-$(wait-tailscale-domain)}"
+	local zone="${1:-$(~ubuntu/bin/e wait-tailscale-domain)}"
 
 	local pth_dp="${1:-$HOME/etc/ingress-dp.yaml}"
 
