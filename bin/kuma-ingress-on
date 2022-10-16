@@ -15,7 +15,7 @@ function main {
 		kuma-dp run \
 			--dataplane-token-file=/tmp/ingress-token \
 			--dataplane-file=/tmp/ingress-dp.yaml \
-      		--proxy-type=ingress \
+			--proxy-type=ingress \
 			--dataplane-var tsip=$(tailscale ip -4)
 }
 
