@@ -148,10 +148,10 @@ user:
 
     # steampipe
     COPY --chown=ubuntu:ubuntu (+steampipe/* --arch=${arch}) /usr/local/bin/
-    RUN steampipe plugin install kubernetes
-    RUN steampipe plugin install docker
-    RUN steampipe plugin install aws
-    RUN steampipe plugin install digitalocea
+    RUN steampipe plugin install kubernetes \
+        && steampipe plugin install docker \
+        && steampipe plugin install aws \
+        && steampipe plugin install digitalocea
 
     # arch2: flyctl
     IF [ ${arch} = "arm64" ]
@@ -162,14 +162,16 @@ user:
 
     # new, unorganized
 
-    RUN ssh -o StrictHostKeyChecking=no git@github.com true || true
-
-    RUN mkdir -p .kube .docker
+    RUN (ssh -o StrictHostKeyChecking=no git@github.com true || true) \
+        && mkdir -p .kube .docker
 
     COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
-    RUN docker context create pod --docker host=tcp://localhost:2375
-    RUN docker context create host --docker host=unix:///var/run/docker.sock
-    RUN docker context use pod
+    RUN docker context create host --docker host=unix:///var/run/docker.sock \
+        && docker context create pod --docker host=tcp://localhost:2375 \
+        && docker context create so --docker host=tcp://docker-so.mesh \
+        && docker context create the --docker host=tcp://docker-the.mesh \
+        && docker context create brie --docker host=tcp://docker-brie.mesh \
+        && docker context use host \
 
     COPY --chown=ubuntu:ubuntu --dir .vim .
     COPY --chown=ubuntu:ubuntu .vimrc .
@@ -182,8 +184,8 @@ user:
     RUN ~/bin/e asdf install
 
     COPY --dir --chown=ubuntu:ubuntu . .
-    RUN git clean -nfd || true
-    RUN set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd
+    RUN (git clean -nfd || true) \
+        && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
 
 ubuntu:
     ARG UBUNTU
