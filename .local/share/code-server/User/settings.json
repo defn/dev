@@ -31,6 +31,9 @@
         "**/.git/objects/**": true,
         "**/.git/subtree-cache/**": true,
         "**/node_modules/*/**": true,
+        "/home/ubuntu/.local/**": true,
+        "/home/ubuntu/.cache/**": true,
+        "/home/ubuntu/.kube/cache/**": true,
         "/home/ubuntu/work/**": true
     }
 }
