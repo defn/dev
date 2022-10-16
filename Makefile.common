@@ -50,6 +50,9 @@ build:
 	$(MAKE) build-site
 
 install:
+	cd && $(MAKE) install-inner
+
+install-inner:
 	$(MAKE) symlinks perms
 
 	mark -- configure password-store, gpg
