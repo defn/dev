@@ -202,9 +202,12 @@ this:
 	(cd tmp/$(name)/var/lib/tailscale/pod && pass tailscale_$(name)-0 | base64 -d | tar xvf -)
 	env DEFN_DEV_ARCHIVE="$$(cd tmp/$(name) && tar cvf - . | base64 | xargs | sed 's# ##g')" \
 		$(MAKE) cluster name=$(name)
-	docker run -it --rm --privileged --pid=host alpine:edge nsenter -t 1 -m -u -n -i iptables -t filter -F DOCKER-ISOLATION-STAGE-2
-	if test -z "$(DEFN_DEV_MACOS)"; then argocd cluster add --yes --upsert k3d-$(name); pod apply -f $(app)/e/k3d-$(name).yaml; fi
-	if test -n "$(DEFN_DEV_MACOS)"; then \
+	doocker run -it --rm --privileged --pid=host alpine:edge nsenter -t 1 -m -u -n -i iptables -t filter -F DOCKER-ISOLATION-STAGE-2
+	cd app/k3d-$(name)-secrets && make secrets context=k3d-$(name)
+	if test -z "$(DEFN_DEV_MACOS)"; then \
+		argocd cluster add --yes --upsert k3d-$(name); \
+		pod apply -f $(app)/e/k3d-$(name).yaml; \
+	else \
 		(cd ~/.password-store && oras push localhost:5000/defn/bootstrap:password-store .git:+tar); \
 		(cd app && oras push localhost:5000/defn/bootstrap:app .git:+tar); \
 		kubectl --context k3d-$(name) rollout -n default status statefulset $(name) --watch; \
