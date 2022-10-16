@@ -6,6 +6,10 @@ http://localhost {
 		reverse_proxy http://localhost:8888
 	}
 
+	handle_path /dev/github.com/defn/app/* {
+		reverse_proxy http://localhost:8888
+	}
+
 	handle_path /vc1/* {
 		reverse_proxy http://localhost:8001
 	}
