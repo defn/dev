@@ -35,8 +35,8 @@ macos:
 symlinks:
 	mark -- configure symlinks
 	sudo install -d -m 0700 -o ubuntu -g ubuntu /work
-	ln -nfs /work .
-	ln -nfs work/app .
+	ln -nfs /work ~
+	ln -nfs work/app ~
 
 perms:
 	mark -- configure permissions
