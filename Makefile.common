@@ -62,7 +62,7 @@ install-inner:
 			&& rm -rf .git \
 			&& oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:password-store \
 			&& git reset --hard \
-			&& git clean -fd \
+			&& git clean -fd; \
 		fi
 	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
 	$(MAKE) perms
@@ -74,7 +74,7 @@ install-inner:
 		&& cd ~/work/app \
 		&& rm -rf .git \
 		&& oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:app \
-		&& git fetch && git reset --hard origin/master \
+		&& git fetch && git reset --hard origin/master; \
 		fi
 	$(MAKE) login
 
