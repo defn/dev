@@ -93,3 +93,4 @@ node_modules
 .ts_node_repl_history
 .user-data*
 etc/tailscale_*
+.caddy.d
