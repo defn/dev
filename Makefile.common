@@ -8,9 +8,9 @@ context ?= k3d-$(name)
 podname ?= $(name)-0
 control ?= $(shell echo $(name) | sed s/-0//)
 domain ?= $(shell tailscale cert 2>&1 | grep 'For domain' | cut -d'"' -f2 | cut -d. -f2-)
-image ?= defn.dev/defn/k3d
 app ?= $(shell pwd)/app
 node ?= k3d-control-server-0
+n ?=
 
 dummy_ip ?= 169.254.32.1
 
@@ -265,8 +265,9 @@ meh:
 droplet:
 	$(MAKE) dropoff
 	env DIGITALOCEAN_ACCESS_TOKEN="$$(pass DIGITALOCEAN_ACCESS_TOKEN)" \
-		doctl compute droplet create k3d-control-droplet$(n) --region sfo3 --image 118023753 --size s-1vcpu-1gb --tag-name k3d --wait \
-		--user-data-file <(cat etc/droplet-user-data.template \
+		doctl compute droplet create \
+			k3d-control-droplet$(n) --region sfo3 --image 118023753 --size s-1vcpu-1gb --tag-name k3d \
+			--wait --user-data-file <(cat etc/droplet-user-data.template \
 			| sed 's#_TSKEY_#'$$(pass k3d-control-tskey)'#' \
 			| sed 's#_K3STOKEN_#'$$(docker --context host exec k3d-control-server-0 cat /var/lib/rancher/k3s/server/node-token)'#')
 
