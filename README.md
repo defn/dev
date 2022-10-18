@@ -27,9 +27,9 @@ https://www.vaultproject.io/docs/secrets/pki/quick-start-root-ca
 
     vault auth enable -path k3d-global kubernetes
 
-    vault write auth/k3d-global /config \
+    vault write auth/k3d-global/config \
         kubernetes_host=https://host.k3d.internal:6444 \
-        kubernetes_ca_cert=@ca.crt
+        kubernetes_ca_cert=@k3d-global.ca
 
     vault write auth/k3d-global/role/default \
         bound_service_account_names=dev \
