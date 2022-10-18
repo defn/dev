@@ -7,7 +7,11 @@ networking:
     - port: 30000
       servicePort: 2375
       tags:
-        kuma.io/service: docker-control
+        kuma.io/service: docker-control-0
+    - port: 30001
+      servicePort: 80
+      tags:
+        kuma.io/service: control-0
   admin:
     port: 19001
   transparentProxying:
