@@ -38,8 +38,6 @@ https://www.vaultproject.io/docs/secrets/pki/quick-start-root-ca
 
     vault policy write dev default.hcl
 
-    global apply -f default.yaml 
-
     env VAULT_ADDR=http://100.103.25.109:8200 \
         vault write -field=token \
             auth/k3d-global/login \
