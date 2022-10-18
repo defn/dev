@@ -5,9 +5,9 @@ networking:
   address: {{ tsip }}
   inbound:
     - port: 30000
-      servicePort: 7777
+      servicePort: 2375
       tags:
-        kuma.io/service: pod
+        kuma.io/service: docker-control
   admin:
     port: 19001
   transparentProxying:
