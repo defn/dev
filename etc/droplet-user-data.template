@@ -25,7 +25,7 @@ env DEFN_DEV_PRIVILEGED=true \
         --image k3d-control \
         --token _K3STOKEN_ \
         --role agent \
-        --cluster https://100.106.117.83:6443
+        --cluster https://_CONTROLIP_:6443
 
 curl -sSL -o /usr/local/bin/k3d-real \
     https://github.com/k3d-io/k3d/releases/download/v5.4.6/k3d-linux-amd64
