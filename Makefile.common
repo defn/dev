@@ -76,6 +76,7 @@ install-inner:
 		&& oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:app \
 		&& git fetch && git reset --hard origin/master; \
 		fi
+
 	$(MAKE) login
 
 	mark -- configure site
@@ -100,6 +101,17 @@ login:
 	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then $(MAKE) kubeconfig; $(MAKE) argocd-login || true; fi
 
 	$(MAKE) login-site
+
+manage:
+	mark -- manage clusters
+	for a in $$(env DOCKER_CONTEXT=host k3d cluster list | tail -n +2 | awk '{print $$1}'); do \
+		if [[ "$$a" != "control" ]]; then \
+			argocd cluster add -y --upsert "k3d-$$a"; \
+			pod apply -f "app/e/k3d-$$a.yaml"; \
+		fi; \
+		done
+
+	$(MAKE) manage-site
 
 github-login:
 	if ! gh auth status; then echo Y | gh auth login -p https -h github.com -w; fi

@@ -8,6 +8,8 @@ init-gpg-default:
 
 login-site-default:
 
+manage-site-default:
+
 %: %-default
 	@true
 
