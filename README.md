@@ -37,3 +37,9 @@ https://www.vaultproject.io/docs/secrets/pki/quick-start-root-ca
         policies=default ttl=1h
 
     global apply -f default.yaml 
+
+    env VAULT_ADDR=http://100.103.25.109:8200 \
+        vault write -field=token \
+            auth/k3d-global/login \
+                role=default \
+                jwt=$(cat /run/secrets/kubernetes.io/serviceaccount/token)
