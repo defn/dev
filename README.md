@@ -34,7 +34,9 @@ https://www.vaultproject.io/docs/secrets/pki/quick-start-root-ca
     vault write auth/k3d-global/role/default \
         bound_service_account_names=dev \
         bound_service_account_namespaces=default \
-        policies=default ttl=1h
+        policies=dev ttl=1h
+
+    vault policy write dev default.hcl
 
     global apply -f default.yaml 
 
