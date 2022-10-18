@@ -32,7 +32,7 @@ https://www.vaultproject.io/docs/secrets/pki/quick-start-root-ca
         kubernetes_ca_cert=@k3d-global.ca
 
     vault write auth/k3d-global/role/default \
-        bound_service_account_names=dev \
+        bound_service_account_names=default \
         bound_service_account_namespaces=default \
         policies=dev ttl=1h
 
