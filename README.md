@@ -20,13 +20,20 @@ https://www.vaultproject.io/docs/secrets/pki/quick-start-root-ca
     vault write pki/config/urls issuing_certificates="$VAULT_ADDR/v1/pki/ca" crl_distribution_points="$VAULT_ADDR/v1/pki/crl"
     vault write sys/policy/gyre.defn.dev policy=@etc/policy-gyre.defn.dev.hcl
 
-    vault auth enable kubernetes
-    vault write auth/kubernetes/config kubernetes_host=https://kubernetes.default.svc.cluster.local
-    vault write auth/kubernetes/role/demo bound_service_account_names=default bound_service_account_namespaces=default policies=gyre.defn.dev ttl=1h
-
-    kubectl --context pod patch -n vc1 service kourier-internal-x-kourier-system-x-vc1 -p '{"metadata":{"annotations":{"traefik.ingress.kubernetes.io/service.serversscheme":"h2c"}}}'
-
     v write pki/roles/gyre.defn.dev allowed_domains=demo.svc.cluster.local,${domain} allow_subdomains=true max_ttl=120h
 
     v write -f transit/keys/autounseal-remo
     v policy write autounseal-remo etc/vault-autounseal-remo-policy.hcl
+
+    vault auth enable -path k3d-global kubernetes
+
+    vault write auth/k3d-global /config \
+        kubernetes_host=https://host.k3d.internal:6444 \
+        kubernetes_ca_cert=@ca.crt
+
+    vault write auth/k3d-global/role/default \
+        bound_service_account_names=default \
+        bound_service_account_namespaces=default \
+        policies=default ttl=1h
+
+    global apply -f default.yaml 
