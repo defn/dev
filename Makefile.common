@@ -78,6 +78,7 @@ install-inner:
 		fi
 
 	$(MAKE) login
+	$(MAKE) manage
 
 	mark -- configure site
 	$(MAKE) install-site
