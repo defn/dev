@@ -5,12 +5,14 @@ function main {
 
 	local zone="${1:-$(~ubuntu/bin/e wait-tailscale-domain)}"
 
+	local globalip="$(host k3d-global.$(wait-tailscale-domain | cut -d. -f2-) | awk '{print $NF}')"
+
 	cp ~/etc/kuma-global-ca.crt /tmp/
 
 	exec sudo -u kuma \
 		env \
 			KUMA_MODE=zone KUMA_MULTIZONE_ZONE_NAME="$zone" \
-			KUMA_MULTIZONE_ZONE_GLOBAL_ADDRESS=grpcs://100.64.110.16:5685 \
+			KUMA_MULTIZONE_ZONE_GLOBAL_ADDRESS=grpcs://${globalip}:5685 \
 			KUMA_MULTIZONE_ZONE_KDS_ROOT_CA_FILE=/tmp/kuma-global-ca.crt \
 				kuma-cp run
 }
