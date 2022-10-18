@@ -146,7 +146,7 @@ cli/cli GitHub v2.16.0
 cli/cli GitHub v2.16.1
 cli/cli GitHub v2.17.0
 cli/cli GitHub v2.17.0-pre0
-cli/cli GitHub v2.4.0
+cli/cli GitHub v2.18.0
 cli/cli GitHub v2.5.0
 cli/cli GitHub v2.5.1
 cli/cli GitHub v2.5.2
@@ -323,8 +323,8 @@ goreleaser/goreleaser v1.11.2 v1.11.2
 goreleaser/goreleaser v1.11.3 v1.11.3
 goreleaser/goreleaser v1.11.4 v1.11.4
 goreleaser/goreleaser v1.11.5 v1.11.5
-goreleaser/goreleaser v1.2.3 v1.2.3
-goreleaser/goreleaser v1.2.4 v1.2.4
+goreleaser/goreleaser v1.12.0 v1.12.0
+goreleaser/goreleaser v1.12.1 v1.12.1
 goreleaser/goreleaser v1.2.5 v1.2.5
 goreleaser/goreleaser v1.3.0 v1.3.0
 goreleaser/goreleaser v1.3.1 v1.3.1
