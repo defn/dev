@@ -7,7 +7,7 @@ function main {
 
 	local globalip="$(host k3d-global.$(wait-tailscale-domain | cut -d. -f2-) | awk '{print $NF}')"
 
-	cp ~/etc/kuma-global-ca.crt /tmp/
+	cp ~/app/k/k3d-global-secrets/kuma-global-ca.crt /tmp/
 
 	exec sudo -u kuma \
 		env \
