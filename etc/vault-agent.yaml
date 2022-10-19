@@ -1,0 +1,38 @@
+# vault agent -config etc/vault-agent.yaml 
+
+pid_file = "/tmp/vault-agent.pid"
+
+vault {
+  address = "http://localhost:8200"
+  retry {
+    num_retries = 5
+  }
+}
+
+auto_auth {
+  method "kubernetes" {
+    mount_path = "auth/pod"
+    config = {
+      role = "default"
+    }
+  }
+
+  sink "file" {
+    config = {
+      path = "/tmp/vault-agent-token"
+    }
+  }
+}
+
+cache {
+  use_auto_auth_token = true
+}
+
+listener "unix" {
+  address = "/tmp/vault-agent.sock"
+  tls_disable = true
+
+  agent_api {
+    enable_quit = true
+  }
+}
