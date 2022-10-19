@@ -29,7 +29,8 @@ https://www.vaultproject.io/docs/secrets/pki/quick-start-root-ca
 
     vault write auth/k3d-global/config \
         kubernetes_host="$(kubectl config view -o jsonpath='{.clusters[?(@.name == "k3d-global")]}' --raw | jq -r '.cluster.server')" \
-        kubernetes_ca_cert="$(kubectl config view -o jsonpath='{.clusters[?(@.name == "k3d-global")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d')"
+        kubernetes_ca_cert=@<(kubectl config view -o jsonpath='{.clusters[?(@.name == "k3d-global")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d') \
+        disable_local_ca_jwt=true
 
     vault policy write dev default.hcl
 
@@ -38,6 +39,7 @@ https://www.vaultproject.io/docs/secrets/pki/quick-start-root-ca
         bound_service_account_namespaces=default \
         policies=dev ttl=1h
 
+    global exec -ti -c code-server dev-0 -- bash
 
     env VAULT_ADDR=http://100.103.25.109:8200 \
         vault write -field=token \
