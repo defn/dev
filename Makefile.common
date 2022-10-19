@@ -213,8 +213,8 @@ vault-seal:
 
 vault-backup:
 	-$(MAKE) vault-seal
-	cd .password-store && git pull && git add vault && git add -u vault && (git commit -m 'vault backup' || true) && git push
-	cd .password-store && git status -sb
+	cd .password-store && git stash apply && git add vault && git add -u vault && git commit -m "backup vault"
+	cd .password-store && git push && git status -sb
 
 vault-trust:
 	-vault auth enable -path "$(k)" kubernetes
