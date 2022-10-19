@@ -72,7 +72,7 @@ if [[ -n "${VSCODE_GIT_IPC_HANDLE:-}" ]]; then
 fi
 
 # vault
-export VAULT_ADDR="${VAULT_ADDR:-http://localhost:8200}"
+export VAULT_ADDR="${VAULT_ADDR:-unix:///work/vault-agent/vault-agent.sock:8200}"
 
 # aws-vault
 export AWS_VAULT_BACKEND=pass
