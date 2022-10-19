@@ -28,15 +28,16 @@ https://www.vaultproject.io/docs/secrets/pki/quick-start-root-ca
     vault auth enable -path k3d-global kubernetes
 
     vault write auth/k3d-global/config \
-        kubernetes_host=https://host.k3d.internal:6444 \
-        kubernetes_ca_cert=@k3d-global.ca
+        kubernetes_host="$(kubectl config view -o jsonpath='{.clusters[?(@.name == "k3d-global")]}' --raw | jq -r '.cluster.server')" \
+        kubernetes_ca_cert="$(kubectl config view -o jsonpath='{.clusters[?(@.name == "k3d-global")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d')"
+
+    vault policy write dev default.hcl
 
     vault write auth/k3d-global/role/default \
         bound_service_account_names=default \
         bound_service_account_namespaces=default \
         policies=dev ttl=1h
 
-    vault policy write dev default.hcl
 
     env VAULT_ADDR=http://100.103.25.109:8200 \
         vault write -field=token \
