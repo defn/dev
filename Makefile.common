@@ -232,7 +232,7 @@ vault-trust:
 		policies=dev ttl=1h
 
 vault-test:
-	@"$(context)" exec -ti -c code-server $(pod) -- bash -c 'env VAULT_ADDR=http://100.103.25.109:8200 ~/bin/e vault write -field=token "auth/$(k)/login" role=default jwt=$$(cat /run/secrets/kubernetes.io/serviceaccount/token)'
+	@"$(context)" exec -ti -c code-server $(pod) -- bash -c 'env VAULT_ADDR=http://$(tailscale ip -4):8200 ~/bin/e vault write -field=token "auth/$(k)/login" role=default jwt=$$(cat /run/secrets/kubernetes.io/serviceaccount/token)'
 
 vault-login:
 	@vault login token="$$(vault write -field=token "auth/pod/login" role=default jwt=$$(cat /run/secrets/kubernetes.io/serviceaccount/token))"
