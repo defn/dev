@@ -234,6 +234,9 @@ vault-trust:
 vault-test:
 	@"$(context)" exec -ti -c code-server $(pod) -- bash -c 'env VAULT_ADDR=http://100.103.25.109:8200 ~/bin/e vault write -field=token "auth/$(k)/login" role=default jwt=$$(cat /run/secrets/kubernetes.io/serviceaccount/token)'
 
+vault-login:
+	@vault login token="$$(vault write -field=token "auth/pod/login" role=default jwt=$$(cat /run/secrets/kubernetes.io/serviceaccount/token))"
+
 rebuild:
 	$(MAKE) build
 	ctr -n k8s.io i pull --plain-http 169.254.32.1:5000/workspace:latest
