@@ -1,6 +1,4 @@
-# vault agent -config etc/vault-agent.yaml 
-
-pid_file = "/tmp/vault-agent.pid"
+pid_file = "/vault-agent/vault-agent.pid"
 
 vault {
   address = "http://localhost:8200"
@@ -19,7 +17,7 @@ auto_auth {
 
   sink "file" {
     config = {
-      path = "/tmp/vault-agent-token"
+      path = "/vault-agent/vault-agent-token"
     }
   }
 }
@@ -29,7 +27,7 @@ cache {
 }
 
 listener "unix" {
-  address = "/tmp/vault-agent.sock"
+  address = "/vault-agent/vault-agent.sock"
   tls_disable = true
 
   agent_api {
