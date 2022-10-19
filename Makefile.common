@@ -11,6 +11,7 @@ domain ?= $(shell tailscale cert 2>&1 | grep 'For domain' | cut -d'"' -f2 | cut 
 app ?= $(shell pwd)/app
 node ?= k3d-control-server-0
 n ?=
+k ?=
 
 dummy_ip ?= 169.254.32.1
 
@@ -214,6 +215,24 @@ vault-backup:
 	-$(MAKE) vault-seal
 	cd .password-store && git pull && git add vault && git add -u vault && (git commit -m 'vault backup' || true) && git push
 	cd .password-store && git status -sb
+
+vault-trust:
+	-vault auth enable -path "$(k)" kubernetes
+
+	vault write "auth/$(k)/config" \
+		kubernetes_host="$$(kubectl config view -o jsonpath='{.clusters[?(@.name == "$(k)")]}' --raw | jq -r '.cluster.server')" \
+		kubernetes_ca_cert=@<(kubectl config view -o jsonpath='{.clusters[?(@.name == "$(k)")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d') \
+		disable_local_ca_jwt=true
+
+	vault policy write dev default.hcl
+
+	vault write "auth/$(k)/role/default" \
+		bound_service_account_names=default \
+		bound_service_account_namespaces=default \
+		policies=dev ttl=1h
+
+vault-test:
+	@"$(context)" exec -ti -c code-server dev-0 -- bash -c 'env VAULT_ADDR=http://100.103.25.109:8200 ~/bin/e vault write -field=token "auth/$(k)/login" role=default jwt=$$(cat /run/secrets/kubernetes.io/serviceaccount/token)'
 
 rebuild:
 	$(MAKE) build

@@ -24,25 +24,3 @@ https://www.vaultproject.io/docs/secrets/pki/quick-start-root-ca
 
     v write -f transit/keys/autounseal-remo
     v policy write autounseal-remo etc/vault-autounseal-remo-policy.hcl
-
-    vault auth enable -path k3d-global kubernetes
-
-    vault write auth/k3d-global/config \
-        kubernetes_host="$(kubectl config view -o jsonpath='{.clusters[?(@.name == "k3d-global")]}' --raw | jq -r '.cluster.server')" \
-        kubernetes_ca_cert=@<(kubectl config view -o jsonpath='{.clusters[?(@.name == "k3d-global")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d') \
-        disable_local_ca_jwt=true
-
-    vault policy write dev default.hcl
-
-    vault write auth/k3d-global/role/default \
-        bound_service_account_names=default \
-        bound_service_account_namespaces=default \
-        policies=dev ttl=1h
-
-    global exec -ti -c code-server dev-0 -- bash
-
-    env VAULT_ADDR=http://100.103.25.109:8200 \
-        vault write -field=token \
-            auth/k3d-global/login \
-                role=default \
-                jwt=$(cat /run/secrets/kubernetes.io/serviceaccount/token)
