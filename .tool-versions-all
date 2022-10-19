@@ -58,12 +58,12 @@ argo 3.4.0-rc4
 argo 3.4.0-rc4
 argo 3.4.1
 argo 3.4.1
-argocd 2.1.16
 argocd 2.2.10
 argocd 2.2.11
 argocd 2.2.12
 argocd 2.2.13
 argocd 2.2.14
+argocd 2.2.15
 argocd 2.3.10
 argocd 2.3.5
 argocd 2.3.6
@@ -307,7 +307,6 @@ cloudflared 2022.8.2
 cloudflared 2022.8.4
 cloudflared 2022.9.0
 cloudflared 2022.9.1
-doctl 1.61.0
 doctl 1.62.0
 doctl 1.63.0
 doctl 1.63.1
@@ -337,6 +336,7 @@ doctl 1.82.0
 doctl 1.82.1
 doctl 1.82.2
 doctl 1.83.0
+doctl 1.84.0
 golang 1.10
 golang 1.10.1
 golang 1.10.2
