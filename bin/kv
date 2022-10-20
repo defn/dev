@@ -15,6 +15,20 @@ function main {
 					;;
 			esac
 			;;
+		2)
+			case "$2" in
+				@*)
+					version="$(echo "$2" | cut -d@ -f2-)"
+					vault kv get -mount=kv -format=json -version="${version}" "kv/$1" | jq .data.data
+					;;
+				-)
+					vault kv put -mount=kv "$@"
+					;;
+				*)
+					vault kv patch -mount=kv "$@"
+					;;
+			esac
+			;;
 		*)
 			vault kv patch -mount=kv "$@"
 			;;
