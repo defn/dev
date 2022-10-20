@@ -183,7 +183,6 @@ aws-vault 6.6.0-pre-standalone-ecs-server-for-roles-0
 aws-vault 6.6.0-pre-standalone-ecs-server-for-roles-1
 aws-vault 6.6.0-pre-standalone-ecs-server-for-roles-2
 aws-vault experimental
-buf 0.52.0
 buf 0.53.0
 buf 0.54.0
 buf 0.54.1
@@ -201,6 +200,7 @@ buf 1.5.0
 buf 1.6.0
 buf 1.7.0
 buf 1.8.0
+buf 1.9.0
 cloudflared 2020.5.0
 cloudflared 2020.5.1
 cloudflared 2020.6.0
