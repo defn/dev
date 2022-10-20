@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+function main {
+	if [[ "$#" == 1 ]]; then
+		vault kv get -mount=kv -format=json "$@" | jq .data.data
+	else
+		vault kv put -mount=kv "$@"
+	fi
+}
+
+main "$@"
