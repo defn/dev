@@ -16,7 +16,7 @@ function main {
 			esac
 			;;
 		*)
-			vault kv put -mount=kv "$@"
+			vault kv patch -mount=kv "$@"
 			;;
 	esac
 }

@@ -3,7 +3,7 @@ path "kv/*" {
 }
 
 path "kv/data/dev/*" {
-  capabilities = ["create", "update", "read"]
+  capabilities = ["create", "update", "patch", "read"]
 }
 
 path "pki/issue/gyre.defn.dev" {
