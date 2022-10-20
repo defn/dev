@@ -1,37 +1,62 @@
 #!/usr/bin/env bash
 
 function main {
-	case "$#" in
-		0)
-			vault kv list kv
-			;;
-		1)
-			case "$1" in
-				*/)
-					vault kv list "kv/$1"
-					;;
-				*)
-					vault kv get -mount=kv -format=json "$@" | jq .data.data
-					;;
-			esac
-			;;
-		2)
-			case "$2" in
-				@*)
-					version="$(echo "$2" | cut -d@ -f2-)"
-					vault kv get -mount=kv -format=json -version="${version}" "kv/$1" | jq .data.data
-					;;
-				-)
-					vault kv put -mount=kv "$@"
-					;;
-				*)
-					vault kv patch -mount=kv "$@"
-					;;
-			esac
+	case "${1:-}" in
+		issue)
+			shift
+			local cn="$1"; shift
+			local ttl="$1"; shift
+
+			local issue="${cn#*.}"
+
+			if [[ -n "${1:-}" ]]; then
+				local tmp="$1"; shift
+
+				local cert="cert"
+
+				kv issue admin.gyre.defn.dev 1m > "$tmp/$cert.json"
+				cat "$tmp/$cert.json" | jq -r '.data.certificate' > "$tmp/$cert.crt"
+				cat "$tmp/$cert.json" | jq -r '.data.private_key' > "$tmp/$cert.key"
+				rm -f "$tmp/$cert.json"
+				echo "$tmp/$cert.crt $tmp/$cert.key"
+			else
+				vault write "pki/issue/$issue" common_name="$cn" ttl="$ttl" -format=json 
+			fi
 			;;
 		*)
-			vault kv patch -mount=kv "$@"
-			;;
+		case "$#" in
+			0)
+				vault kv list kv
+				;;
+			1)
+				case "$1" in
+					*/)
+						vault kv list "kv/$1"
+						;;
+					*)
+						vault kv get -mount=kv -format=json "$@" | jq .data.data
+						;;
+				esac
+				;;
+			2)
+				case "$2" in
+					@*)
+						version="$(echo "$2" | cut -d@ -f2-)"
+						vault kv get -mount=kv -format=json -version="${version}" "kv/$1" | jq .data.data
+						;;
+					-)
+						vault kv put -mount=kv "$@"
+						;;
+					*)
+						vault kv patch -mount=kv "$@"
+						;;
+				esac
+				;;
+			*)
+				vault kv patch -mount=kv "$@"
+				;;
+		esac
+		;;
 	esac
 }
 
