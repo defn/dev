@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-export VAULT_ADDR="${VAULT_ADDR:-http://vault.vault.svc:8200}"
-
 export VAULT_PASS_KEY="vault-token-helper/$(echo "$VAULT_ADDR" | base64 -w 0)"
 
 function main {

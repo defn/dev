@@ -226,7 +226,6 @@ cue-lang/cue More v0.3.0-beta.6
 cue-lang/cue Performance v0.3.0-beta.1
 cue-lang/cue Performance v0.3.0-beta.4
 cue-lang/cue Prototext v0.4.0-alpha.1
-cue-lang/cue v0.3.0-alpha3 v0.3.0-alpha3
 cue-lang/cue v0.3.0-beta.2 v0.3.0-beta.2
 cue-lang/cue v0.3.0-beta.3 v0.3.0-beta.3
 cue-lang/cue v0.3.0-beta.5 v0.3.0-beta.5
@@ -243,6 +242,7 @@ cue-lang/cue v0.4.2 v0.4.2
 cue-lang/cue v0.4.3-beta.1 v0.4.3-beta.1
 cue-lang/cue v0.4.3-beta.2 v0.4.3-beta.2
 cue-lang/cue v0.4.3 v0.4.3
+cue-lang/cue v0.5.0-alpha.1 v0.5.0-alpha.1
 cue-lang/cue Various v0.4.0-beta.2
 danielfoehrKn/kubeswitch 0.0.3 0.0.3
 danielfoehrKn/kubeswitch 0.1.0 0.1.0
@@ -325,7 +325,7 @@ goreleaser/goreleaser v1.11.4 v1.11.4
 goreleaser/goreleaser v1.11.5 v1.11.5
 goreleaser/goreleaser v1.12.0 v1.12.0
 goreleaser/goreleaser v1.12.1 v1.12.1
-goreleaser/goreleaser v1.2.5 v1.2.5
+goreleaser/goreleaser v1.12.2 v1.12.2
 goreleaser/goreleaser v1.3.0 v1.3.0
 goreleaser/goreleaser v1.3.1 v1.3.1
 goreleaser/goreleaser v1.4.0 v1.4.0
@@ -445,9 +445,9 @@ knative/client Knative knative-v1.6.0
 knative/client Knative knative-v1.6.1
 knative/client Knative knative-v1.7.0
 knative/client Knative knative-v1.7.1
+knative/client Knative knative-v1.8.0
 knative/client Knative v0.17.3
 knative/client Knative v0.17.4
-knative/client Knative v0.18.1
 knative/client Knative v0.18.2
 knative/client Knative v0.18.3
 knative/client Knative v0.18.4
@@ -495,7 +495,6 @@ kubernetes-sigs/kubebuilder v3.5.0 v3.5.0
 kubernetes-sigs/kubebuilder v3.7.0 v3.7.0
 linkerd/linkerd2 edge-22.10.1 edge-22.10.1
 linkerd/linkerd2 edge-22.10.2 edge-22.10.2
-linkerd/linkerd2 edge-22.2.3 edge-22.2.3
 linkerd/linkerd2 edge-22.2.4 edge-22.2.4
 linkerd/linkerd2 edge-22.3.1 edge-22.3.1
 linkerd/linkerd2 edge-22.3.2 edge-22.3.2
@@ -523,6 +522,7 @@ linkerd/linkerd2 stable-2.11.5 stable-2.11.5
 linkerd/linkerd2 stable-2.12.0-rc2 stable-2.12.0-rc2
 linkerd/linkerd2 stable-2.12.0 stable-2.12.0
 linkerd/linkerd2 stable-2.12.1 stable-2.12.1
+linkerd/linkerd2 stable-2.12.2 stable-2.12.2
 loft-sh/loft v2.1.0-beta.3 v2.1.0-beta.3
 loft-sh/loft v2.1.0-beta.5 v2.1.0-beta.5
 loft-sh/loft v2.1.0 v2.1.0
@@ -823,7 +823,7 @@ turbot/steampipe v0.17.0-alpha.21 v0.17.0-alpha.21
 turbot/steampipe v0.17.0-alpha.22 v0.17.0-alpha.22
 turbot/steampipe v0.17.0-alpha.23 v0.17.0-alpha.23
 turbot/steampipe v0.17.0-alpha.25 v0.17.0-alpha.25
-turbot/steampipe v0.17.0-alpha.4 v0.17.0-alpha.4
+turbot/steampipe v0.17.0-alpha.26 v0.17.0-alpha.26
 turbot/steampipe v0.17.0-alpha.5 v0.17.0-alpha.5
 turbot/steampipe v0.17.0-alpha.6 v0.17.0-alpha.6
 turbot/steampipe v0.17.0-alpha.7 v0.17.0-alpha.7
