@@ -2,6 +2,42 @@
 
 function main {
 	case "${1:-}" in
+		role)
+			shift
+			local role="$1"; shift
+			set $(kv issue admin.gyre.defn.dev 1m "$(mktemp -d -t XXXXXX)") "$@"
+
+			# TODO ensure cert, key are certificates
+			local cert="$1"; shift
+			local key="$1"; shift
+
+			if [[ "$#" == 0 ]]; then
+				aws_signing_helper credential-process \
+					--certificate "$cert" --private-key "$key" \
+					--trust-anchor-arn arn:aws:rolesanywhere:us-east-1:319951235442:trust-anchor/bcfd2f6f-388e-4cf8-a753-75238af6ada6 \
+					--profile-arn arn:aws:rolesanywhere:us-east-1:319951235442:profile/f903c6fc-931e-4163-bc62-6e44252526ac \
+					--role-arn "$role"
+				rm -f "$cert" "$key"
+			else
+				local tmp="$(mktemp -d -t XXXXXX)"
+
+				aws_signing_helper credential-process \
+					--certificate "$cert" --private-key "$key" \
+					--trust-anchor-arn arn:aws:rolesanywhere:us-east-1:319951235442:trust-anchor/bcfd2f6f-388e-4cf8-a753-75238af6ada6 \
+					--profile-arn arn:aws:rolesanywhere:us-east-1:319951235442:profile/f903c6fc-931e-4163-bc62-6e44252526ac \
+					--role-arn "$role" > "$tmp/creds.json"
+				rm -f "$cert" "$key"
+
+				export AWS_ACCESS_KEY_ID="$(cat "$tmp/creds.json" | jq -r .AccessKeyId)"
+				export AWS_SECRET_ACCESS_KEY="$(cat "$tmp/creds.json" | jq -r .SecretAccessKey)"
+				export AWS_SESSION_TOKEN="$(cat "$tmp/creds.json" | jq -r .SessionToken)"
+				export AWS_EXPIRATION="$(cat "$tmp/creds.json" | jq -r .Expiration)"
+				rm -f "$tmp/creds.json"
+
+				exec "$@"
+			fi
+
+			;;
 		issue)
 			shift
 			local cn="$1"; shift
