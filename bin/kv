@@ -6,7 +6,7 @@ function main {
 			vault kv list kv
 			;;
 		1)
-			case "$1" in 
+			case "$1" in
 				*/)
 					vault kv list "kv/$1"
 					;;
