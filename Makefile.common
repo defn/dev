@@ -58,25 +58,32 @@ install-inner:
 
 	mark -- configure password-store, gpg
 	mkdir -p ~/work/password-store
+
+	if ! is-fly; then \
 	if [[ ! -d ~/.password-store/.git ]]; then \
 		cd ~/.password-store \
 			&& rm -rf .git \
 			&& oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:password-store \
 			&& git reset --hard \
 			&& git clean -fd; \
-		fi
+		fi; \
+	fi
+
 	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
 	$(MAKE) perms
 	env GPG_TTY=$$(tty) $(MAKE) init-gpg
 
 	mark -- configure repos
+
+	if ! is-fly; then \
 	if [[ ! -d ~/app/.git ]]; then \
 		mkdir -p ~/work/app \
 		&& cd ~/work/app \
 		&& rm -rf .git \
 		&& oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:app \
 		&& git fetch && git reset --hard origin/master; \
-		fi
+		fi; \
+	fi
 
 	$(MAKE) login
 	if nc -z -v localhost 8200 2>/dev/null; then \
