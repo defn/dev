@@ -69,8 +69,8 @@ install-inner:
 	$(MAKE) perms
 	env GPG_TTY=$$(tty) $(MAKE) init-gpg
 
-	if nc -z -v localhost 8200 2>/dev/null; then $(MAKE) \
-		vault-unseal; vault-trust-pod; \
+	if nc -z -v localhost 8200 2>/dev/null; then \
+		$(MAKE) vault-unseal; $(MAKE) vault-trust-pod; \
 		fi
 
 	mark -- configure repos
