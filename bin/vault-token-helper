@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export VAULT_PASS_KEY="vault-token-helper/$(echo "$VAULT_ADDR" | base64 -w 0)/$(uname -n)"
+export VAULT_PASS_KEY="vault-token-helper/$(echo "$VAULT_ADDR" | base64 -w 0)/$(echo "$VSCODE_PROXY_URI" | base64 -w 0)"
 
 function main {
     case "${1:-}" in
