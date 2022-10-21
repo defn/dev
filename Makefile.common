@@ -223,8 +223,6 @@ vault-backup:
 	$(MAKE) vault-unseal
 
 vault-trust:
-	vault policy write dev default.hcl
-
 	-vault auth enable -path "$(k)" kubernetes
 
 	vault write "auth/$(k)/config" \
