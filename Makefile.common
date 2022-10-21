@@ -223,14 +223,14 @@ vault-backup:
 	$(MAKE) vault-unseal
 
 vault-trust:
+	vault policy write dev default.hcl
+
 	-vault auth enable -path "$(k)" kubernetes
 
 	vault write "auth/$(k)/config" \
 		kubernetes_host="$$(kubectl config view -o jsonpath='{.clusters[?(@.name == "$(k)")]}' --raw | jq -r '.cluster.server')" \
 		kubernetes_ca_cert=@<(kubectl config view -o jsonpath='{.clusters[?(@.name == "$(k)")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d') \
 		disable_local_ca_jwt=true
-
-	vault policy write dev default.hcl
 
 	vault write "auth/$(k)/role/default" \
 		bound_service_account_names=default \
