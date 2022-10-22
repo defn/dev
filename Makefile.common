@@ -86,11 +86,6 @@ install-inner:
 	fi
 
 	$(MAKE) login
-	if nc -z -v localhost 8200 2>/dev/null; then \
-		$(MAKE) vault-unseal; \
-		$(MAKE) vault-trust-pod; \
-		pod rollout restart deployment -n external-secrets external-secrets || true; \
-		fi
 
 	$(MAKE) manage
 
@@ -119,11 +114,23 @@ login:
 
 manage:
 	mark -- manage clusters
+	if nc -z -v localhost 8200 2>/dev/null; then \
+		$(MAKE) vault-unseal; \
+		fi
+
 	for a in $$(env DOCKER_CONTEXT=host k3d cluster list | tail -n +2 | awk '{print $$1}'); do \
 		if [[ "$$a" != "control" ]]; then \
 			argocd cluster add -y --upsert "k3d-$$a"; \
 			pod apply -f "app/e/k3d-$$a.yaml"; \
-		fi; \
+			fi; \
+		if nc -z -v localhost 8200 2>/dev/null; then \
+			if [[ "$$a" != "control" ]]; then \
+				$(MAKE) vault-trust "k=$$a"; \
+				"$$a" rollout restart deployment -n external-secrets external-secrets || true; \
+			else \
+				$(MAKE) vault-trust k=pod; \
+				pod rollout restart deployment -n external-secrets external-secrets || true; \
+				fi; \
 		done
 
 	$(MAKE) manage-site
