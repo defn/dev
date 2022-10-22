@@ -1,0 +1,20 @@
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: "hello"
+  namespace: default
+spec:
+  target:
+    name: hello
+    template:
+      data:
+          config.yml: |
+            - https://{{ .user }}:{{ .password }}@api.exmaple.com
+  dataFrom:
+    - extract:
+        key: /dev/meh
+
+  refreshInterval: "15s"
+  secretStoreRef:
+    name: dev
+    kind: ClusterSecretStore
