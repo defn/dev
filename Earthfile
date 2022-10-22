@@ -984,6 +984,7 @@ pipx:
     RUN ~/.local/bin/pipx install supervisor
     RUN ~/.local/bin/pipx install sigstore
     RUN ~/.local/bin/pipx install morgan
+    RUN ~/.local/bin/pipx install aws-sso-util
     RUN git init
     COPY --chown=ubuntu:ubuntu .pre-commit-config.yaml .
     RUN bash -c 'source ~/.asdf/asdf.sh && /home/ubuntu/.local/bin/pre-commit install'
