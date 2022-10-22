@@ -127,7 +127,7 @@ manage:
 		if nc -z -v localhost 8200 2>/dev/null; then \
 			if [[ "$$a" != "control" ]]; then \
 				$(MAKE) vault-trust "k=k3d-$$a"; \
-				"k3d-$$a" rollout restart deployment -n external-secrets external-secrets || true; \
+				"$$a" rollout restart deployment -n external-secrets external-secrets || true; \
 			else \
 				$(MAKE) vault-trust k=pod; \
 				pod rollout restart deployment -n external-secrets external-secrets || true; \
