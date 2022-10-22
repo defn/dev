@@ -89,6 +89,7 @@ install-inner:
 	if nc -z -v localhost 8200 2>/dev/null; then \
 		$(MAKE) vault-unseal; \
 		$(MAKE) vault-trust-pod; \
+		pod rollout restart deployment -n external-secrets external-secrets || true; \
 		fi
 
 	$(MAKE) manage
