@@ -11,7 +11,7 @@ auto_auth {
   method "kubernetes" {
     mount_path = "auth/pod"
     config = {
-      role = "default"
+      role = "dev"
     }
   }
 

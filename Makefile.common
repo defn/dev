@@ -237,7 +237,7 @@ vault-trust:
 		kubernetes_ca_cert=@<(kubectl config view -o jsonpath='{.clusters[?(@.name == "$(k)")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d') \
 		disable_local_ca_jwt=true
 
-	vault write "auth/$(k)/role/default" \
+	vault write "auth/$(k)/role/dev" \
 		bound_service_account_names=default \
 		bound_service_account_namespaces=default \
 		policies=dev ttl=1h
