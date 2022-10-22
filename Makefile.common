@@ -85,6 +85,10 @@ install-inner:
 		fi; \
 	fi
 
+	if nc -z -v localhost 8200 2>/dev/null; then \
+		$(MAKE) vault-unseal; \
+		fi
+
 	$(MAKE) login
 
 	$(MAKE) manage
@@ -114,9 +118,6 @@ login:
 
 manage:
 	mark -- manage clusters
-	if nc -z -v localhost 8200 2>/dev/null; then \
-		$(MAKE) vault-unseal; \
-		fi
 
 	for a in $$(env DOCKER_CONTEXT=host k3d cluster list | tail -n +2 | awk '{print $$1}'); do \
 		if [[ "$$a" != "control" ]]; then \
@@ -125,12 +126,13 @@ manage:
 			fi; \
 		if nc -z -v localhost 8200 2>/dev/null; then \
 			if [[ "$$a" != "control" ]]; then \
-				$(MAKE) vault-trust "k=$$a"; \
-				"$$a" rollout restart deployment -n external-secrets external-secrets || true; \
+				$(MAKE) vault-trust "k=k3d-$$a"; \
+				"k3d-$$a" rollout restart deployment -n external-secrets external-secrets || true; \
 			else \
 				$(MAKE) vault-trust k=pod; \
 				pod rollout restart deployment -n external-secrets external-secrets || true; \
 				fi; \
+			fi; \
 		done
 
 	$(MAKE) manage-site
