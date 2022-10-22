@@ -270,6 +270,9 @@ shell:
 debug-host:
 	pod debug "node/$$(pod get nodes -o json | jq -r '.items[0].metadata.name')" --image 169.254.32.1:5000/workspace -it -- bash
 
+debug:
+	pod debug -n "$(n)" "$(pod)" --image 169.254.32.1:5000/workspace -it -- bash
+
 this:
 	rm -rf tmp
 	mkdir tmp
@@ -346,7 +349,7 @@ dropoff:
 	-env DIGITALOCEAN_ACCESS_TOKEN="$$(pass DIGITALOCEAN_ACCESS_TOKEN)" \
 		doctl compute droplet delete k3d-control-droplet$(n) -f
 
-debug:
+debug-node:
 	pod debug node/$(node) -it --image=ghcr.io/defn/dev:latest -- bash -il
 
 debug-docker:
