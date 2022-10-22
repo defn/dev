@@ -237,10 +237,15 @@ vault-trust:
 		kubernetes_ca_cert=@<(kubectl config view -o jsonpath='{.clusters[?(@.name == "$(k)")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d') \
 		disable_local_ca_jwt=true
 
-	vault write "auth/$(k)/role/default" \
+	vault write "auth/$(k)/role/dev" \
 		bound_service_account_names=default \
 		bound_service_account_namespaces=default \
 		policies=dev ttl=1h
+
+	vault write "auth/$(k)/role/external-secrets" \
+		bound_service_account_names=external-secrets \
+		bound_service_account_namespaces=external-secrets \
+		policies=external-secrets ttl=1h
 
 vault-shell:
 	@env VAULT_ADDR="http://localhost:8200" VAULT_TOKEN="$$(pass Initial_Root_Token)" bash
