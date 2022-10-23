@@ -1,4 +1,4 @@
 connection "k" {
   plugin         = "kubernetes"
-  config_context = "pod"
+  config_context = "k3d-control"
 }
