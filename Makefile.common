@@ -282,7 +282,6 @@ this:
 	env DEFN_DEV_ARCHIVE="$$(cd tmp/$(name) && tar cvf - . | base64 | xargs | sed 's# ##g')" \
 		$(MAKE) cluster name=$(name)
 	docker --context=host run -it --rm --privileged --pid=host alpine:edge nsenter -t 1 -m -u -n -i iptables -t filter -F DOCKER-ISOLATION-STAGE-2
-	cd app/k/k3d-$(name)-secrets && make secrets context=k3d-$(name)
 	if test -z "$(DEFN_DEV_MACOS)"; then \
 		env VAULT_ADDR="http://localhost:8200" VAULT_TOKEN="$$(pass Initial_Root_Token)" $(MAKE) vault-trust k=k3d-$(name); \
 		argocd cluster add --yes --upsert k3d-$(name); \
