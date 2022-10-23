@@ -120,10 +120,8 @@ manage:
 	mark -- manage clusters
 
 	for a in $$(env DOCKER_CONTEXT=host k3d cluster list | tail -n +2 | awk '{print $$1}'); do \
-		if [[ "$$a" != "control" ]]; then \
-			argocd cluster add -y --upsert "k3d-$$a"; \
-			control apply -f "app/e/k3d-$$a.yaml"; \
-			fi; \
+		argocd cluster add -y --upsert "k3d-$$a"; \
+		control apply -f "app/e/k3d-$$a.yaml"; \
 		if nc -z -v localhost 8200 2>/dev/null; then \
 			$(MAKE) vault-trust "k=k3d-$$a"; \
 			"$$a" rollout restart deployment -n external-secrets external-secrets || true; \
