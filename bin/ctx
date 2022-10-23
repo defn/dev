@@ -10,7 +10,7 @@ function main {
 			exec "$@"
 			;;
 		*)
-			exec kubectl --context pod -n "${ns}" "$@"
+			exec kubectl --context k3d-control -n "${ns}" "$@"
 			;;
 	esac
 }
