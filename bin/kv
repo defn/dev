@@ -59,6 +59,12 @@ function main {
 				vault write "pki/issue/$issue" common_name="$cn" ttl="$ttl" -format=json 
 			fi
 			;;
+		delete)
+			shift
+			vault kv delete -mount=kv "$1"
+			vault kv metadata delete -mount=kv "$1"
+			$0 "$1"
+			;;
 		*)
 		case "$#" in
 			0)
