@@ -298,6 +298,7 @@ this:
 		env VAULT_ADDR="http://localhost:8200" VAULT_TOKEN="$$(pass Initial_Root_Token)" $(MAKE) vault-trust k=k3d-$(name); \
 		argocd cluster add --yes --upsert k3d-$(name); \
 		pod apply -f $(app)/e/k3d-$(name).yaml; \
+		app sync k3d-$(name); \
 	else \
 		(cd ~/.password-store && oras push localhost:5000/defn/bootstrap:password-store .git:+tar); \
 		(cd app && oras push localhost:5000/defn/bootstrap:app .git:+tar); \
@@ -319,14 +320,12 @@ global: # Provision global from control plane
 		DEFN_DEV_NAME=k3d-$@ \
 		DOCKER_CONTEXT=host \
 		$(MAKE) this name=$@
-	docker --context=host system prune -f
 
 smiley: # Provision smiley from control plane
 	env DEFN_DEV_HOST_PORT=6445 DEFN_DEV_HOST_API=host.k3d.internal \
 		DEFN_DEV_NAME=k3d-$@ \
 		DOCKER_CONTEXT=host \
 		$(MAKE) this name=$@
-	docker --context=host system prune -f
 
 control: # Provision control plane
 	$(MAKE) pull-repos
