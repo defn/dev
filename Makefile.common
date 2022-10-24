@@ -280,7 +280,7 @@ this:
 	mkdir -p tmp/$(name)/var/lib/rancher/k3s/server/tls
 	(cd tmp/$(name) && pass tailscale_k3d-$(name) | base64 -d | tar xvf -)
 	(cd tmp/$(name)/var/lib/tailscale/pod && pass tailscale_$(name)-0 | base64 -d | tar xvf -)
-	for a in sa-signer.key sa-signer.key.pub sa-signer-pkcs8.pub; do (cd tmp/$(name)/var/lib/rancher/k3s/server/tls && pass piw-$(name)-$$a | base64 -d | tar xvf -); done
+	for a in sa-signer.key sa-signer.key.pub sa-signer-pkcs8.pub; do (cd tmp/$(name)/var/lib/rancher/k3s/server/tls && pass piw-$(name)-$$a | base64 -d > $$a); done
 	env DEFN_DEV_ARCHIVE="$$(cd tmp/$(name) && tar cvf - . | base64 | xargs | sed 's# ##g')" \
 		$(MAKE) cluster name=$(name)
 	docker --context=host run -it --rm --privileged --pid=host alpine:edge nsenter -t 1 -m -u -n -i iptables -t filter -F DOCKER-ISOLATION-STAGE-2
