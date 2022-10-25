@@ -173,12 +173,9 @@ vc%:
 	argocd cluster add $@ --yes --upsert
 
 connect-%:
-	# control -n vc1 get secrets vc-vcluster -o json | jq -r '.data.config | @base64d' | yq '.clusters[].cluster.server |= "https://vcluster.vc1.svc.cluster.local"' -y > ~/.kube/vc1
-	if vcluster connect vcluster --context k3d-control --namespace $(second) --kube-config ~/.kube/$(second) --kube-config-context-name $(second) --update-current=false --server vcluster.$(second).svc.cluster.local; then \
-		set -x; \
-		env KUBECONFIG=~/.kube/$(second):~/.kube/config kubectl config view --flatten > ~/.kube/config.$(second); \
-		mv ~/.kube/config.$(second) ~/.kube/config; \
-		fi
+	control -n $(second) get secrets vc-vcluster -o json | jq -r '.data.config | @base64d' | yq '.clusters[].cluster.server |= "https://vcluster.$(second).svc.cluster.local" | del(.["current-context"])' -y | sed 's#my-vcluster#$(second)#' > ~/.kube/$(second)
+	env KUBECONFIG=~/.kube/$(second):~/.kube/config kubectl config view --flatten > ~/.kube/config.$(second)
+	mv ~/.kube/config.$(second) ~/.kube/config 
 
 pending: # Generate pending version updates
 	$(MAKE) pending-gh
