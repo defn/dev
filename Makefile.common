@@ -169,7 +169,10 @@ kubeconfig:
 	k config get-contexts
 
 vc%:
+	kustomize build --enable-helm ~/app/k/$@ | control apply -f -
+	while ! control -n $@ get secrets vc-vcluster >/dev/null; do sleep 10; done
 	$(MAKE) connect-$@
+	while ! $@ get -n kube-system pods >/dev/null; do sleep 1; done
 	argocd cluster add $@ --yes --upsert
 
 connect-%:
