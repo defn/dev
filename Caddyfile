@@ -1,3 +1,7 @@
+http://localhost:18085 {
+	reverse_proxy http://localhost:8085
+}
+
 https://*.*.ts.net,
 http://*.mesh,
 http://control-0,
