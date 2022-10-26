@@ -7,6 +7,7 @@ function main {
 		login)
 			shift
 			local account="$(grep '^\[profile ' ~/.aws/config | grep \\-sso | awk '{print $2}' | cut -d']' -f1 | sort | fzf --query="${1:-}" --select-1)"
+			b logout
 			aws-vault login "$account"
 			;;
 		logout)
