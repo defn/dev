@@ -328,7 +328,6 @@ coderServer:
     RUN echo ${CODESERVER_BUMP}
     RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local --version=${CODESERVER}
     RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
-    RUN git clone https://github.com/cue-sh/vscode-cue /home/ubuntu/.local/share/code-server/extensions/vscode-cue
     SAVE ARTIFACT .local
 
 vscodeServer:
