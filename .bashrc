@@ -32,7 +32,7 @@ export PYTHONPATH
 export PIP_DISABLE_PIP_VERSION_CHECK=1
 
 # cue
-PATH="$HOME/bin:$PATH"
+PATH="$HOME/bin/$(uname -s):$HOME/bin:$PATH"
 
 # linkerd
 PATH="$HOME/.linkerd2/bin:$PATH"
