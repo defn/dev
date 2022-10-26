@@ -343,7 +343,6 @@ goreleaser/goreleaser v1.8.3 v1.8.3
 goreleaser/goreleaser v1.9.0 v1.9.0
 goreleaser/goreleaser v1.9.1 v1.9.1
 goreleaser/goreleaser v1.9.2 v1.9.2
-hofstadter-io/hof v0.6.1-beta2 v0.6.1-beta2
 hofstadter-io/hof v0.6.1 v0.6.1
 hofstadter-io/hof v0.6.2-beta.1 v0.6.2-beta.1
 hofstadter-io/hof v0.6.2 v0.6.2
@@ -373,6 +372,7 @@ hofstadter-io/hof v0.6.7-beta.1 v0.6.7-beta.1
 hofstadter-io/hof v0.6.7-beta.2 v0.6.7-beta.2
 hofstadter-io/hof v0.6.7-rc.1 v0.6.7-rc.1
 hofstadter-io/hof v0.6.7-rc.2 v0.6.7-rc.2
+hofstadter-io/hof v0.6.7 v0.6.7
 justjanne/powerline-go Added v1.7.0
 justjanne/powerline-go Add v1.8.0
 justjanne/powerline-go Fixed v1.3.2
@@ -706,12 +706,10 @@ sigstore/rekor v0.9.1 v0.9.1
 sigstore/rekor v1.0.0-rc.1 v1.0.0-rc.1
 sigstore/rekor v1.0.0 v1.0.0
 sigstore/rekor v1.0-rc v1.0-rc
-smallstep/cli Release v0.17.3-rc29
 smallstep/cli Release v0.18.1-rc7
 smallstep/cli Release v0.18.3-rc1
+smallstep/cli Release v0.22.1-rc3
 smallstep/cli Step v0.17.3
-smallstep/cli Step v0.17.3-rc30
-smallstep/cli Step v0.17.3-rc31
 smallstep/cli Step v0.17.4
 smallstep/cli Step v0.17.5
 smallstep/cli Step v0.17.5-rc1
@@ -735,8 +733,9 @@ smallstep/cli Step v0.20.0
 smallstep/cli Step v0.21.0
 smallstep/cli Step v0.22.0
 smallstep/cli Step v0.22.1-rc2
+smallstep/cli Step v0.22.1-rc4
+smallstep/cli Step v0.22.1-rc5
 smallstep/cli Step v0.23.0-rc.1
-superfly/flyctl v0.0.394 v0.0.394
 superfly/flyctl v0.0.395 v0.0.395
 superfly/flyctl v0.0.396 v0.0.396
 superfly/flyctl v0.0.397-pre-1 v0.0.397-pre-1
@@ -766,10 +765,10 @@ superfly/flyctl v0.0.416 v0.0.416
 superfly/flyctl v0.0.417 v0.0.417
 superfly/flyctl v0.0.418 v0.0.418
 superfly/flyctl v0.0.419 v0.0.419
+superfly/flyctl v0.0.420 v0.0.420
 temporalio/temporalite v0.1.0 v0.1.0
 temporalio/temporalite v0.1.1 v0.1.1
 temporalio/temporalite v0.2.0 v0.2.0
-tilt-dev/tilt v0.23.7 v0.23.7
 tilt-dev/tilt v0.23.8 v0.23.8
 tilt-dev/tilt v0.23.9 v0.23.9
 tilt-dev/tilt v0.24.0 v0.24.0
@@ -790,6 +789,7 @@ tilt-dev/tilt v0.28.0 v0.28.0
 tilt-dev/tilt v0.28.1 v0.28.1
 tilt-dev/tilt v0.29.0 v0.29.0
 tilt-dev/tilt v0.30.0 v0.30.0
+tilt-dev/tilt v0.30.10 v0.30.10
 tilt-dev/tilt v0.30.1 v0.30.1
 tilt-dev/tilt v0.30.2 v0.30.2
 tilt-dev/tilt v0.30.3 v0.30.3
@@ -799,7 +799,6 @@ tilt-dev/tilt v0.30.6 v0.30.6
 tilt-dev/tilt v0.30.7 v0.30.7
 tilt-dev/tilt v0.30.8 v0.30.8
 tilt-dev/tilt v0.30.9 v0.30.9
-turbot/steampipe v0.16.0-rc.13 v0.16.0-rc.13
 turbot/steampipe v0.16.0 v0.16.0
 turbot/steampipe v0.16.1-rc.0 v0.16.1-rc.0
 turbot/steampipe v0.16.1-rc.1 v0.16.1-rc.1
@@ -827,6 +826,7 @@ turbot/steampipe v0.17.0-alpha.26 v0.17.0-alpha.26
 turbot/steampipe v0.17.0-alpha.27 v0.17.0-alpha.27
 turbot/steampipe v0.17.0-alpha.28 v0.17.0-alpha.28
 turbot/steampipe v0.17.0-alpha.29 v0.17.0-alpha.29
+turbot/steampipe v0.17.0-alpha.30 v0.17.0-alpha.30
 turbot/steampipe v0.17.0-alpha.8 v0.17.0-alpha.8
 turbot/steampipe v0.17.0-alpha.9 v0.17.0-alpha.9
 Wilfred/difftastic 0.26.1 0.26.1

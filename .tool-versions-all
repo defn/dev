@@ -58,7 +58,6 @@ argo 3.4.1
 argo 3.4.1
 argo 3.4.2
 argo 3.4.2
-argocd 2.2.10
 argocd 2.2.11
 argocd 2.2.12
 argocd 2.2.13
@@ -85,6 +84,7 @@ argocd 2.4.6
 argocd 2.4.7
 argocd 2.4.8
 argocd 2.4.9
+argocd 2.5.0
 argocd 2.5.0-rc1
 argocd 2.5.0-rc2
 argocd 2.5.0-rc3

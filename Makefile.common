@@ -169,6 +169,7 @@ kubeconfig:
 	k config get-contexts
 
 vc%:
+	$(MAKE) ec2
 	kustomize build --enable-helm ~/app/k/$@ | control apply -f -
 	while ! control -n $@ get secrets vc-vcluster >/dev/null; do sleep 10; done
 	$(MAKE) connect-$@
@@ -338,6 +339,7 @@ droplet:
 			| sed 's#_TSKEY_#'$$(pass k3d-control-tskey)'#' \
 			| sed 's#_K3STOKEN_#'$$(docker --context host exec k3d-control-server-0 cat /var/lib/rancher/k3s/server/node-token)'#')
 ec2:
+	pass hello
 	@cat etc/ec2-user-data.template \
 		| sed 's#_CONTROLIP_#'$$(host k3d-control.$$(wait-tailscale-domain | cut -d. -f2-) | awk '{print $$NF}')'#' \
 		| sed 's#_TSKEY_#'$$(pass k3d-control-tskey)'#' \
