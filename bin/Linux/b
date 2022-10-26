@@ -3,7 +3,25 @@
 function main {
 	set -efu
 
-	exec open "https://$(wait-tailscale-domain)/$*/"
+	case "${1:-}" in
+		login)
+			shift
+			local account="$(grep '^\[profile ' ~/.aws/config | grep \\-sso | awk '{print $2}' | cut -d']' -f1 | sort | fzf --query="${1:-}" --select-1)"
+			aws-vault login "$account"
+			;;
+		logout)
+			open https://signin.aws.amazon.com/oauth?Action=logout&redirect_uri=https://aws.amazon.com
+			;;
+		exec)
+			shift
+			local account="$(grep '^\[profile ' ~/.aws/config | grep \\-sso | awk '{print $2}' | cut -d']' -f1 | sort | fzf --query="${1:-}" --select-1)"
+			shift
+			aws-vault exec "$account" -- "$@"
+			;;
+		*)
+			exec open "https://$(wait-tailscale-domain)/$*/"
+			;;
+	esac
 }
 
 main "$@"
