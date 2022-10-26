@@ -64,6 +64,7 @@ export KUBECONFIG_ALL="$HOME/.kube/config"
 
 # vscode
 if [[ -n "${VSCODE_GIT_IPC_HANDLE:-}" ]]; then
+	export BROWSER="$(set +f; ls -d /home/ubuntu/.local/lib/code-server-*/lib/vscode/bin/helpers/browser.sh)"
 	#export VISUAL="code --wait"
 
 	if [[ ! -S "${SSH_AUTH_SOCK:-}" ]]; then
