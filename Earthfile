@@ -197,6 +197,7 @@ root:
     ARG arch
     ARG TAILSCALE
     ARG DOCKER
+    ARG BUMP
 
     FROM +ubuntu
 
@@ -210,6 +211,8 @@ root:
 
     ENV DEBIAN_FRONTEND=noninteractive
     ENV container=docker
+
+    RUN echo ${BUMP}
 
     RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm \
         && apt-get update \
