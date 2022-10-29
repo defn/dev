@@ -1,9 +1,16 @@
 DEFN_DEV_FROM ?= ghcr.io/defn/dev:latest-k3d-base
 
 build:
-	if test -d $(app)/bootstrap/$(name); then kustomize build --enable-helm $(app)/bootstrap/$(name) > defn-dev-bootstrap.yaml; else echo > defn-dev-bootstrap.yaml; fi
-	if test -d $(app)/bootstrap/$(name); then cp $(app)/e/$(name).yaml defn-dev-argocd-appset.yaml; fi
+	rm -f defn-dev-*.yaml
+	defn-dev-bootstrap.yaml
+	if test -d $(app)/bootstrap/$(name); then \
+		kustomize build --enable-helm $(app)/bootstrap/$(name) > defn-dev-bootstrap.yaml; \
+		fi
+	if test -f $(app)/e/$(name).yaml; then
+		cp $(app)/e/$(name).yaml defn-dev-egg.yaml; \
+		fi
 	docker build -t 169.254.32.1:5000/defn/k3d:$(name) --build-arg DEFN_DEV_ARCHIVE="$(DEFN_DEV_ARCHIVE)" --build-arg DEFN_DEV_FROM="$(DEFN_DEV_FROM)" .
+	rm -f defn-dev-*.yaml
 
 mint:
 	docker run --rm -ti --privileged --entrypoint sh ghcr.io/defn/dev -c \
