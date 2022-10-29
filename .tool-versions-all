@@ -2396,6 +2396,7 @@ nodejs lts-dubnium
 nodejs lts-erbium
 nodejs lts-fermium
 nodejs lts-gallium
+nodejs lts-hydrogen
 nomad 0.1.0
 nomad 0.10.0
 nomad 0.10.0-beta1
@@ -2617,6 +2618,8 @@ nomad 1.2.12
 nomad 1.2.12+ent
 nomad 1.2.13
 nomad 1.2.13+ent
+nomad 1.2.14
+nomad 1.2.14+ent
 nomad 1.2.1+ent
 nomad 1.2.2
 nomad 1.2.2+ent
@@ -2652,6 +2655,8 @@ nomad 1.3.5
 nomad 1.3.5+ent
 nomad 1.3.6
 nomad 1.3.6+ent
+nomad 1.3.7
+nomad 1.3.7+ent
 nomad 1.4.0
 nomad 1.4.0-beta
 nomad 1.4.0-beta
@@ -2660,6 +2665,8 @@ nomad 1.4.0-rc
 nomad 1.4.0-rc
 nomad 1.4.1
 nomad 1.4.1+ent
+nomad 1.4.2
+nomad 1.4.2+ent
 packer 0.1.0
 packer 0.10.0
 packer 0.10.1
@@ -2764,6 +2771,7 @@ packer 1.8.0
 packer 1.8.1
 packer 1.8.2
 packer 1.8.3
+packer 1.8.4
 python 2.1.3
 python 2.2.3
 python 2.3.7
