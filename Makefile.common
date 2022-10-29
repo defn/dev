@@ -269,7 +269,7 @@ shell:
 	docker run --rm -ti $(repo)defn/dev bash -l
 
 debug-host:
-	control debug "node/$$(control get nodes -o json | jq -r '.items[0].metadata.name')" --image ghcr.io/defn/dev -it -- bash
+	control debug "node/$$(control get nodes --no-headers | awk '{print $$1}' | fzf)" --image ghcr.io/defn/dev -it -- bash
 
 debug:
 	control debug -n "$(n)" "$(pod)" --image ghcr.io/defn/dev -it -- bash
