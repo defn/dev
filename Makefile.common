@@ -98,6 +98,10 @@ install-inner:
 
 tilt up:
 	pass hello
+	if test -f Tiltfile; then $(MAKE) tilt-inner; \
+		else if test -d app/.; then cd app && $(MAKE) tilt-inner; fi; fi
+
+tilt-inner:
 	tilt up --context k3d-control --port $(tilt_port) --host 127.0.0.1 --stream
 
 down:
