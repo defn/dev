@@ -2,7 +2,7 @@ DEFN_DEV_FROM ?= ghcr.io/defn/dev:latest-k3d-base
 
 build:
 	rm -f defn-dev-*.yaml
-	defn-dev-bootstrap.yaml
+	touch defn-dev-bootstrap.yaml
 	if test -d $(app)/bootstrap/$(name); then \
 		kustomize build --enable-helm $(app)/bootstrap/$(name) > defn-dev-bootstrap.yaml; \
 		fi
