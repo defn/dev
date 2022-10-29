@@ -6,7 +6,7 @@ build:
 	if test -d $(app)/bootstrap/$(name); then \
 		kustomize build --enable-helm $(app)/bootstrap/$(name) > defn-dev-bootstrap.yaml; \
 		fi
-	if test -f $(app)/e/$(name).yaml; then
+	if test -f $(app)/e/$(name).yaml; then \
 		cp $(app)/e/$(name).yaml defn-dev-egg.yaml; \
 		fi
 	docker build -t 169.254.32.1:5000/defn/k3d:$(name) --build-arg DEFN_DEV_ARCHIVE="$(DEFN_DEV_ARCHIVE)" --build-arg DEFN_DEV_FROM="$(DEFN_DEV_FROM)" .
