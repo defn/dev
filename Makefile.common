@@ -262,16 +262,17 @@ vault-login:
 
 rebuild:
 	$(MAKE) build
+	ctr -n k8s.io i pull --plain-http ghcr.io/defn/dev:latest
 	ctr -n k8s.io i pull --plain-http 169.254.32.1:5000/workspace:latest
 
 shell:
 	docker run --rm -ti $(repo)defn/dev bash -l
 
 debug-host:
-	control debug "node/$$(control get nodes -o json | jq -r '.items[0].metadata.name')" --image 169.254.32.1:5000/workspace -it -- bash
+	control debug "node/$$(control get nodes -o json | jq -r '.items[0].metadata.name')" --image ghcr.io/defn/dev -it -- bash
 
 debug:
-	control debug -n "$(n)" "$(pod)" --image 169.254.32.1:5000/workspace -it -- bash
+	control debug -n "$(n)" "$(pod)" --image ghcr.io/defn/dev -it -- bash
 
 this:
 	rm -rf tmp
