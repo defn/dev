@@ -32,6 +32,10 @@ http://localhost {
 		reverse_proxy http://localhost:8104
 	}
 
+	handle_path /tilt/* {
+		reverse_proxy http://localhost:7999
+	}
+
 	handle_path /api/* {
 		reverse_proxy http://defm
 	}
