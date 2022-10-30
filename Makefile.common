@@ -330,15 +330,6 @@ control: # Provision control plane
 		$(MAKE) this name=$@
 	docker --context=host system prune -f
 
-droplet:
-	$(MAKE) dropoff
-	env DIGITALOCEAN_ACCESS_TOKEN="$$(pass DIGITALOCEAN_ACCESS_TOKEN)" \
-		doctl compute droplet create \
-			k3d-control-droplet$(n) --region sfo3 --image 118023753 --size s-1vcpu-1gb --tag-name k3d \
-			--wait --user-data-file <(cat etc/droplet-user-data.template \
-			| sed 's#_CONTROLIP_#'$$(host k3d-control.$$(wait-tailscale-domain | cut -d. -f2-) | awk '{print $$NF}')'#' \
-			| sed 's#_TSKEY_#'$$(pass k3d-control-tskey)'#' \
-			| sed 's#_K3STOKEN_#'$$(docker --context host exec k3d-control-server-0 cat /var/lib/rancher/k3s/server/node-token)'#')
 ec2:
 	pass hello
 	@cat etc/ec2-user-data.template \
@@ -346,12 +337,6 @@ ec2:
 		| sed 's#_TSKEY_#'$$(pass k3d-control-tskey)'#' \
 		| sed 's#_K3STOKEN_#'$$(docker --context host exec k3d-control-server-0 cat /var/lib/rancher/k3s/server/node-token)'#' \
 		| control apply -f -
-
-dropoff:
-	-control delete -n kube-system secret k3d-control-droplet$(n).node-password.k3s
-	-control delete node k3d-control-droplet$(n)
-	-env DIGITALOCEAN_ACCESS_TOKEN="$$(pass DIGITALOCEAN_ACCESS_TOKEN)" \
-		doctl compute droplet delete k3d-control-droplet$(n) -f
 
 debug-node:
 	control debug node/$(node) -it --image=ghcr.io/defn/dev:latest -- bash -il

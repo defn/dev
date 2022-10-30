@@ -115,7 +115,6 @@ user:
     COPY --chown=ubuntu:ubuntu --dir (+buf/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+grpcurl/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+packer/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+doctl/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+nomad/* --arch=${arch}) ./
 
     # arch2: hof, tilt
@@ -278,7 +277,6 @@ toolVersions:
     ARG AWSVAULT
     ARG BUF
     ARG CLOUDFLARED
-    ARG DOCTL
     ARG GOLANG
     ARG GRPCURL
     ARG HELM
@@ -301,7 +299,6 @@ toolVersions:
     RUN echo aws-vault ${AWSVAULT} >> .tool-versions
     RUN echo buf ${BUF} >> .tool-versions
     RUN echo cloudflared ${CLOUDFLARED} >> .tool-versions
-    RUN echo doctl ${DOCTL} >> .tool-versions
     RUN echo golang ${GOLANG} >> .tool-versions
     RUN echo grpcurl ${GRPCURL} >> .tool-versions
     RUN echo helm ${HELM} >> .tool-versions
