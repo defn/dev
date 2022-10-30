@@ -95,6 +95,7 @@ install-inner:
 
 	mark -- configure site
 	$(MAKE) install-site
+	if ! is-fly; then if ! nc -z -v localhost 7999 2>/dev/null; then $(MAKE) up; fi; fi
 
 tilt up:
 	pass hello
