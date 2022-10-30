@@ -60,6 +60,10 @@ http://localhost {
 		redir {scheme}://{host}:20003/ui/
 	}
 
+	handle_path /temporal/* {
+		redir {scheme}://{host}:20004/
+	}
+
 	handle_path /demo/* {
 		redir {scheme}://{host}:20100/ui/
 	}
@@ -82,6 +86,10 @@ https://*.*.ts.net:20001 {
 
 https://*.*.ts.net:20003 {
 	reverse_proxy http://localhost:4646
+}
+
+https://*.*.ts.net:20004 {
+	reverse_proxy http://localhost:8233
 }
 
 https://*.*.ts.net:20100 {
