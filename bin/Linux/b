@@ -19,6 +19,10 @@ function main {
 			shift
 			aws-vault exec "$account" -- "$@"
 			;;
+		tilt)
+			shift
+			open 'http://localhost/r/(all)/overview'
+			;;
 		*)
 			exec open "https://$(wait-tailscale-domain)/$*/"
 			;;

@@ -2,15 +2,22 @@ http://localhost:18085 {
 	reverse_proxy http://localhost:8085
 }
 
-https://*.*.ts.net,
-http://*.mesh,
-http://control-0,
 http://localhost {
 	handle_path /dev/* {
 		reverse_proxy http://localhost:8888
 	}
 
+	reverse_proxy http://localhost:7999
+}
+
+https://*.*.ts.net,
+http://*.mesh,
+http://control-0 {
 	import .caddy.workspaces/*
+
+	handle_path /dev/* {
+		reverse_proxy http://localhost:8888
+	}
 
 	handle_path /vc0/* {
 		reverse_proxy http://localhost:8100
@@ -30,10 +37,6 @@ http://localhost {
 
 	handle_path /vc4/* {
 		reverse_proxy http://localhost:8104
-	}
-
-	handle_path /tilt/* {
-		reverse_proxy http://localhost:7999
 	}
 
 	handle_path /api/* {
