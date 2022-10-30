@@ -35,5 +35,6 @@
         "/home/ubuntu/.cache/**": true,
         "/home/ubuntu/.kube/cache/**": true,
         "/home/ubuntu/work/**": true
-    }
+    },
+    "terraform-ls.terraformExecPath": "/home/ubuntu/.asdf/shims/terraform"
 }
