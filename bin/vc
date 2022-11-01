@@ -3,7 +3,14 @@
 function main {
 	set -efu
 
-	exec kubectl --context "${0##*/}" "$@"
+	local context="${0##*/}"
+
+	case "${context}" in
+		vc*)
+			context="control-${context}"
+			;;
+	esac
+	exec kubectl --context "${context}" "$@"
 }
 
 main "$@"
