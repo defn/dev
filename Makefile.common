@@ -360,8 +360,8 @@ nix-shell:
 	env LC_ALL=C.UTF-8 nix-shell -p $(p) --run "$(r)"
 
 nix-build:
-	nix-build --out-link /tmp/results
+	@docker run -t "$$(docker load -q < $$(nix-build --out-link /tmp/results) | awk '{print $$3}')"
+	@rm -f /tmp/results
 
 nix-gc:
 	nix-store --gc
-	
