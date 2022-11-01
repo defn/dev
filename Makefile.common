@@ -326,10 +326,10 @@ control-%:
 	$(MAKE) connect_$@
 	while ! $@ get -n kube-system pods >/dev/null; do sleep 1; done
 	argocd cluster add vcluster-$@ --yes --upsert
-	$(first) apply -f app/e/vcluster-$@
+	$(first) apply -f app/e/vcluster-$@.yaml
 
 connect_%:
-	control -n $(second_) get secrets vc-vcluster -o json | jq -r '.data.config | @base64d' | yq '.clusters[].cluster.server |= "https://vcluster.$(second_).svc.cluster.local" | del(.["current-context"])' -y | sed 's#my-vcluster#$(second_)#' > ~/.kube/$(second_)
+	control -n $(second_) get secrets vc-vcluster -o json | jq -r '.data.config | @base64d' | yq '.clusters[].cluster.server |= "https://vcluster.$(second_).svc.cluster.local" | del(.["current-context"])' -y | sed 's#my-vcluster#vcluster-$(second_)#' > ~/.kube/$(second_)
 	env KUBECONFIG=~/.kube/$(second_):~/.kube/config kubectl config view --flatten > ~/.kube/config.$(second_)
 	mv ~/.kube/config.$(second_) ~/.kube/config 
 
