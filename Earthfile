@@ -215,14 +215,12 @@ root:
         && apt-get upgrade -y \
         && apt-get install -y --no-install-recommends \
         apt-transport-https software-properties-common \
-        openssh-client openssh-server tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip xz-utils rsync \
-        sudo git vim less fzf jo gron jq \
-        build-essential default-jdk make tini python3-openssl python3-pip python3-venv python-is-python3 entr \
-        gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 libolm-dev \
-        xdg-utils figlet lolcat socat netcat-openbsd groff \
-        screen htop \
-        redis \
-        wireguard-tools \
+        tzdata locales iputils-ping iproute2 net-tools dnsutils xz-utils \
+        curl unzip rsync pass git socat \
+        sudo \
+        build-essential make tini python3-openssl python3-pip python3-venv python-is-python3 \
+        gpg git-crypt oathtool libusb-1.0-0 libolm-dev \
+        xdg-utils netcat-openbsd groff \
         && apt purge -y nano
 
     RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu \

@@ -12,7 +12,7 @@ app ?= $(shell pwd)/app
 node ?= k3d-control-server-0
 n ?=
 k ?=
-p ?= python311 python311Packages.pip python311Packages.virtualenv glibcLocales irssi k9s bash difftastic powerline-go grpcurl
+p ?= python311 python311Packages.pip python311Packages.virtualenv glibcLocales irssi k9s bash difftastic powerline-go grpcurl figlet lolcat htop screen jo vim entr wireguard-tools gron fzf jq git less wget rsync curl unzip pass socat
 r ?= bash
 
 dummy_ip ?= 169.254.32.1
