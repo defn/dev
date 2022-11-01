@@ -107,12 +107,10 @@ user:
     COPY --chown=ubuntu:ubuntu --dir (+vault/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+cloudflared/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+terraform/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+terragrunt/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+awsvault/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+buf/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+grpcurl/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+packer/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+nomad/* --arch=${arch}) ./
 
@@ -277,7 +275,6 @@ toolVersions:
     ARG BUF
     ARG CLOUDFLARED
     ARG GOLANG
-    ARG GRPCURL
     ARG HELM
     ARG K3SUP
     ARG K9S
@@ -290,7 +287,6 @@ toolVersions:
     ARG SHELLCHECK
     ARG SHFMT
     ARG TERRAFORM
-    ARG TERRAGRUNT
     ARG VAULT
 
     RUN echo argo ${ARGO} >> .tool-versions
@@ -299,7 +295,6 @@ toolVersions:
     RUN echo buf ${BUF} >> .tool-versions
     RUN echo cloudflared ${CLOUDFLARED} >> .tool-versions
     RUN echo golang ${GOLANG} >> .tool-versions
-    RUN echo grpcurl ${GRPCURL} >> .tool-versions
     RUN echo helm ${HELM} >> .tool-versions
     RUN echo krew ${KREW} >> .tool-versions
     RUN echo kubectl ${KUBECTL} >> .tool-versions
@@ -311,7 +306,6 @@ toolVersions:
     RUN echo shellcheck ${SHELLCHECK} >> .tool-versions
     RUN echo shfmt ${SHFMT} >> .tool-versions
     RUN echo terraform ${TERRAFORM} >> .tool-versions
-    RUN echo terragrunt ${TERRAGRUNT} >> .tool-versions
     RUN echo vault ${VAULT} >> .tool-versions
     RUN echo argo ${ARGO} >> .tool-versions
     SAVE ARTIFACT .tool-versions
