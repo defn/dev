@@ -361,3 +361,7 @@ nix-shell:
 
 nix-build:
 	nix-build --out-link /tmp/results
+
+nix-gc:
+	nix-store --gc
+	
