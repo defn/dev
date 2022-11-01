@@ -319,6 +319,9 @@ control: # Provision control plane
 		$(MAKE) this name=$@
 	docker --context=host system prune -f
 
+vc%:
+	$(MAKE) control-$@
+
 control-%:
 	$(MAKE) ec2
 	kustomize build --enable-helm ~/app/k/$@ | control apply -f -
