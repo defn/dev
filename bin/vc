@@ -10,6 +10,12 @@ function main {
 			context="control-${context}"
 			;;
 	esac
+
+	case "${context}" in
+		*-vc*)
+			context="vcluster-${context}"
+			;;
+	esac
 	exec kubectl --context "${context}" "$@"
 }
 
