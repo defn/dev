@@ -24,18 +24,18 @@ function pca {
 }
 
 # asdf
-. $HOME/.asdf/asdf.sh
+if [[ -z "${IN_NIX_SHELL:-}" ]]; then . $HOME/.asdf/asdf.sh; fi
 
 # python
-PATH="$HOME/.local/bin:$PATH"
+if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$HOME/.local/bin:$PATH"; fi
 export PYTHONPATH
 export PIP_DISABLE_PIP_VERSION_CHECK=1
 
 # cue
-PATH="$HOME/bin/$(uname -s):$HOME/bin:$PATH"
+if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$HOME/bin/$(uname -s):$HOME/bin:$PATH"; fi
 
 # linkerd
-PATH="$HOME/.linkerd2/bin:$PATH"
+if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$HOME/.linkerd2/bin:$PATH"; fi
 
 # terraform
 export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
@@ -45,12 +45,12 @@ export DISABLE_VERSION_CHECK=1
 export NEXT_TELEMETRY_DISABLED=1
 
 # awscli
-export PATH="$PATH:/usr/local/aws-cli/bin"
+if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$PATH:/usr/local/aws-cli/bin"; fi
 
 # earthly
 export EARTHLY_BUILDKIT_HOST="${EARTHLY_BUILDKIT_HOST:-tcp://$(uname -n):8372}"
 export DOCKER_BUILDKIT="${DOCKER_BUILDKIT:-1}"
-export PATH="$PATH:/usr/local/gcloud/google-cloud-sdk/bin"
+if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$PATH:/usr/local/gcloud/google-cloud-sdk/bin"; fi
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 # hof
@@ -84,7 +84,7 @@ if tty >/dev/null; then
 	function render_ps1 {
 		echo
 		powerline --colorize-hostname -mode flat -newline \
-			-modules host,ssh,cwd,perms,gitlite,load,exit,venv,kube
+			-modules host,ssh,cwd,perms,gitlite,load,exit,venv,kube,nix-shell
 	}
 
 	function update_ps1 {
@@ -122,4 +122,8 @@ fi
 
 export USER=ubuntu
 
-if [ -e /home/ubuntu/.nix-profile/etc/profile.d/nix.sh ]; then . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh; fi
+if [[ -z "${IN_NIX_SHELL:-}" ]]; then 
+	if [ -e /home/ubuntu/.nix-profile/etc/profile.d/nix.sh ]; then 
+		. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh
+	fi
+fi
