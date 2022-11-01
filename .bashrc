@@ -117,3 +117,9 @@ if [[ -n "${VSCODE_GIT_IPC_HANDLE:-}" ]]; then
 		fi
 	fi
 fi
+
+# sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile
+
+export USER=ubuntu
+
+if [ -e /home/ubuntu/.nix-profile/etc/profile.d/nix.sh ]; then . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh; fi
