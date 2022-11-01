@@ -12,8 +12,8 @@ app ?= $(shell pwd)/app
 node ?= k3d-control-server-0
 n ?=
 k ?=
-p ?= python311 python311Packages.pip python311Packages.virtualenv glibcLocales irssi
-r ?= irssi -n defn -c irc.efnet.org
+p ?= python311 python311Packages.pip python311Packages.virtualenv glibcLocales irssi k9s bash
+r ?= bash --noprofile --norc
 
 dummy_ip ?= 169.254.32.1
 
