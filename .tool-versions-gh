@@ -576,8 +576,8 @@ loft-sh/vcluster v0.12.0 v0.12.0
 loft-sh/vcluster v0.12.1-beta.0 v0.12.1-beta.0
 loft-sh/vcluster v0.12.1 v0.12.1
 loft-sh/vcluster v0.12.2 v0.12.2
+loft-sh/vcluster v0.12.3-beta.0 v0.12.3-beta.0
 loft-sh/vcluster v0.13.0-alpha.0 v0.13.0-alpha.0
-loft-sh/vcluster v0.9.0-beta.0 v0.9.0-beta.0
 loft-sh/vcluster v0.9.0-beta.1 v0.9.0-beta.1
 loft-sh/vcluster v0.9.0 v0.9.0
 loft-sh/vcluster v0.9.1-alpha.0 v0.9.1-alpha.0
@@ -799,8 +799,6 @@ tilt-dev/tilt v0.30.6 v0.30.6
 tilt-dev/tilt v0.30.7 v0.30.7
 tilt-dev/tilt v0.30.8 v0.30.8
 tilt-dev/tilt v0.30.9 v0.30.9
-turbot/steampipe v0.16.1-rc.0 v0.16.1-rc.0
-turbot/steampipe v0.16.1-rc.1 v0.16.1-rc.1
 turbot/steampipe v0.16.1-rc.2 v0.16.1-rc.2
 turbot/steampipe v0.16.1-rc.3 v0.16.1-rc.3
 turbot/steampipe v0.16.1 v0.16.1
@@ -808,7 +806,6 @@ turbot/steampipe v0.16.2 v0.16.2
 turbot/steampipe v0.16.3 v0.16.3
 turbot/steampipe v0.16.4 v0.16.4
 turbot/steampipe v0.16.5-diag.0 v0.16.5-diag.0
-turbot/steampipe v0.17.0-alpha.10 v0.17.0-alpha.10
 turbot/steampipe v0.17.0-alpha.11 v0.17.0-alpha.11
 turbot/steampipe v0.17.0-alpha.12 v0.17.0-alpha.12
 turbot/steampipe v0.17.0-alpha.13 v0.17.0-alpha.13
@@ -829,6 +826,9 @@ turbot/steampipe v0.17.0-alpha.30 v0.17.0-alpha.30
 turbot/steampipe v0.17.0-alpha.31 v0.17.0-alpha.31
 turbot/steampipe v0.17.0-alpha.32 v0.17.0-alpha.32
 turbot/steampipe v0.17.0-rc.0 v0.17.0-rc.0
+turbot/steampipe v0.17.0-rc.1 v0.17.0-rc.1
+turbot/steampipe v0.17.0-rc.2 v0.17.0-rc.2
+turbot/steampipe v0.17.0-test.0 v0.17.0-test.0
 Wilfred/difftastic 0.26.1 0.26.1
 Wilfred/difftastic 0.26.2 0.26.2
 Wilfred/difftastic 0.26.3 0.26.3
