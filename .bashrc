@@ -1,3 +1,5 @@
+export USER=ubuntu
+
 function gs {
 	git status -sb "$@"
 }
@@ -82,7 +84,6 @@ export AWS_VAULT_PASS_PREFIX=aws-vault
 if tty >/dev/null; then
   if type -P powerline >/dev/null; then
 	function render_ps1 {
-		echo
 		powerline --colorize-hostname -mode flat -newline \
 			-modules host,ssh,cwd,perms,gitlite,load,exit,venv,kube,nix-shell
 	}
@@ -120,10 +121,10 @@ fi
 
 # sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile # --no-channel-add
 
-export USER=ubuntu
-
 if [[ -z "${IN_NIX_SHELL:-}" ]]; then 
 	if [ -e /home/ubuntu/.nix-profile/etc/profile.d/nix.sh ]; then 
 		. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh
 	fi
 fi
+
+PATH=/bin:$PATH

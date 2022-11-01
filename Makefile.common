@@ -55,10 +55,12 @@ build:
 	$(MAKE) build-site
 
 install:
-	cd && $(MAKE) nix-shell r="$(MAKE) install-inner"
+	$(MAKE) nix
+	cd && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh && $(MAKE) install-inner
 
 install-inner:
 	$(MAKE) symlinks perms
+
 
 	mark -- configure password-store, gpg
 	mkdir -p ~/work/password-store
@@ -352,8 +354,11 @@ debug-node:
 debug-docker:
 	docker run -it --rm --privileged --pid=host alpine:edge nsenter -t 1 -m -u -n -i
 
-nix-install:
+nix-bootstrap:
 	sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile
+
+nix-install:
+	for a in $(p); do n profile install "nixpkgs#$$a"; done
 
 # make nix-shell p="..." r="..."
 nix-shell:
@@ -365,3 +370,7 @@ nix-build:
 
 nix-gc:
 	nix-store --gc
+
+nix:
+	export LC_ALL=C.UTF-8 && if ! type -P nix; then $(MAKE) nix-bootstrap; fi
+	export LC_ALL=C.UTF-8 && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh && $(MAKE) nix-install	
