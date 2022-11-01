@@ -170,7 +170,7 @@ user:
 
     COPY --chown=ubuntu:ubuntu --dir .vim .
     COPY --chown=ubuntu:ubuntu .vimrc .
-    RUN echo yes | vim +PlugInstall +qall
+    #RUN echo yes | vim +PlugInstall +qall
 
     COPY --chown=ubuntu:ubuntu --dir bin .
     COPY --chown=ubuntu:ubuntu .bash* .
