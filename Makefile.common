@@ -350,7 +350,7 @@ debug-node:
 debug-docker:
 	docker run -it --rm --privileged --pid=host alpine:edge nsenter -t 1 -m -u -n -i
 
-nix:
+nix-install:
 	sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile
 
 # make nix-shell p="python311 python311Packages.pip python311Packages.virtualenv glibcLocales"
