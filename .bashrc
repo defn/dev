@@ -118,7 +118,7 @@ if [[ -n "${VSCODE_GIT_IPC_HANDLE:-}" ]]; then
 	fi
 fi
 
-# sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile
+# sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile # --no-channel-add
 
 export USER=ubuntu
 
