@@ -55,7 +55,7 @@ build:
 	$(MAKE) build-site
 
 install:
-	cd && $(MAKE) install-inner
+	cd && $(MAKE) nix-shell r="$(MAKE) install-inner"
 
 install-inner:
 	$(MAKE) symlinks perms
