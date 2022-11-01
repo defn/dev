@@ -12,6 +12,7 @@ app ?= $(shell pwd)/app
 node ?= k3d-control-server-0
 n ?=
 k ?=
+p ?= python311 python311Packages.pip python311Packages.virtualenv glibcLocales
 
 dummy_ip ?= 169.254.32.1
 
@@ -353,6 +354,6 @@ debug-docker:
 nix-install:
 	sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile
 
-# make nix-shell p="python311 python311Packages.pip python311Packages.virtualenv glibcLocales"
+# make nix-shell p="..."
 nix-shell:
 	env LC_ALL=C.UTF-8 nix-shell -p $(p)
