@@ -146,8 +146,7 @@ user:
     COPY --chown=ubuntu:ubuntu (+steampipe/* --arch=${arch}) /usr/local/bin/
     RUN steampipe plugin install kubernetes \
         && steampipe plugin install docker \
-        && steampipe plugin install aws \
-        && steampipe plugin install digitalocea
+        && steampipe plugin install aws
 
     # arch2: flyctl
     IF [ ${arch} = "arm64" ]
