@@ -325,7 +325,7 @@ control-%:
 	while ! control -n $@ get secrets vc-vcluster >/dev/null; do sleep 10; done
 	$(MAKE) connect_$@
 	while ! $@ get -n kube-system pods >/dev/null; do sleep 1; done
-	argocd cluster add $@ --yes --upsert
+	argocd cluster add vcluster-$@ --yes --upsert
 	$(first) apply -f app/e/vcluster-$@
 
 connect_%:
