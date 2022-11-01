@@ -1,4 +1,5 @@
 export USER=ubuntu
+export LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
 
 function gs {
 	git status -sb "$@"
@@ -126,5 +127,3 @@ if [[ -z "${IN_NIX_SHELL:-}" ]]; then
 		. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh
 	fi
 fi
-
-PATH=/bin:$PATH

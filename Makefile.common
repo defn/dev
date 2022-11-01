@@ -61,7 +61,6 @@ install:
 install-inner:
 	$(MAKE) symlinks perms
 
-
 	mark -- configure password-store, gpg
 	mkdir -p ~/work/password-store
 
