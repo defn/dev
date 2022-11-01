@@ -101,7 +101,6 @@ user:
     COPY --chown=ubuntu:ubuntu (+kubebuilder/* --arch=${arch}) /usr/local/bin/
 
     COPY --chown=ubuntu:ubuntu --dir (+shell/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+k9s/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+kustomize/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+krew/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+helm/* --arch=${arch}) ./
@@ -302,7 +301,6 @@ toolVersions:
     RUN echo golang ${GOLANG} >> .tool-versions
     RUN echo grpcurl ${GRPCURL} >> .tool-versions
     RUN echo helm ${HELM} >> .tool-versions
-    RUN echo k9s ${K9S} >> .tool-versions
     RUN echo krew ${KREW} >> .tool-versions
     RUN echo kubectl ${KUBECTL} >> .tool-versions
     RUN echo kustomize ${KUSTOMIZE} >> .tool-versions
