@@ -358,3 +358,6 @@ nix-install:
 # make nix-shell p="..." r="..."
 nix-shell:
 	env LC_ALL=C.UTF-8 nix-shell -p $(p) --run "$(r)"
+
+nix-build:
+	nix-build --out-link /tmp/results
