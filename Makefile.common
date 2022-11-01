@@ -352,3 +352,7 @@ debug-docker:
 
 nix:
 	sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile
+
+# make nix-shell p="python311 python311Packages.pip python311Packages.virtualenv glibcLocales"
+nix-shell:
+	env LC_ALL=C.UTF-8 nix-shell -p $(p)
