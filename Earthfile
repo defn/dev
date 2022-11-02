@@ -198,9 +198,8 @@ root:
         && apt-get update \
         && apt-get upgrade -y \
         && apt-get install -y --no-install-recommends \
-        apt-transport-https software-properties-common \
+        apt-transport-https software-properties-common curl \
         tzdata locales iputils-ping iproute2 net-tools dnsutils xz-utils \
-        curl unzip rsync pass git socat \
         sudo \
         build-essential make tini python3-openssl python3-pip python3-venv python-is-python3 \
         gpg git-crypt oathtool libusb-1.0-0 libolm-dev \
