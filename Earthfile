@@ -67,7 +67,6 @@ user:
 
     ENTRYPOINT ["/usr/bin/tini", "--"]
 
-    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+pipx/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+golang/* --arch=${arch}) ./
 
@@ -199,9 +198,8 @@ root:
         && apt-get upgrade -y \
         && apt-get install -y --no-install-recommends \
             apt-transport-https software-properties-common curl git \
-            tzdata locales iputils-ping iproute2 net-tools \
-            sudo \
-            build-essential tini python3-openssl python3-pip python3-venv python-is-python3 \
+            tzdata locales iproute2 net-tools \
+            sudo tini \
         && apt purge -y nano
 
     RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu \
@@ -262,7 +260,6 @@ toolVersions:
     RUN echo kubectl ${KUBECTL} >> .tool-versions
     RUN echo kustomize ${KUSTOMIZE} >> .tool-versions
     RUN echo nodejs ${NODEJS} >> .tool-versions
-    RUN echo python ${PYTHON} >> .tool-versions
     RUN echo argo ${ARGO} >> .tool-versions
     SAVE ARTIFACT .tool-versions
 
