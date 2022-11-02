@@ -84,9 +84,9 @@ export AWS_VAULT_BACKEND=pass
 export AWS_VAULT_PASS_PREFIX=aws-vault
 
 if tty >/dev/null; then
-  if type -P powerline >/dev/null; then
+  if type -P powerline-go >/dev/null; then
 	function render_ps1 {
-		powerline --colorize-hostname -mode flat -newline \
+		powerline-go --colorize-hostname -mode flat -newline \
 			-modules host,ssh,cwd,perms,gitlite,load,exit,venv,kube,nix-shell
 	}
 
