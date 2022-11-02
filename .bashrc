@@ -2,6 +2,12 @@ export USER=ubuntu
 export LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
 export LC_ALL=C.UTF-8
 
+if [[ -z "${IN_NIX_SHELL:-}" ]]; then 
+	if [ -e /home/ubuntu/.nix-profile/etc/profile.d/nix.sh ]; then 
+		. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh
+	fi
+fi
+
 function gs {
 	git status -sb "$@"
 }
@@ -118,13 +124,5 @@ if [[ -n "${VSCODE_GIT_IPC_HANDLE:-}" ]]; then
 				git clone "https://$(echo $VSCODE_PROXY_URI | cut -d/ -f5- | perl -pe 's{/proxy/..port..}{}')" .
 			fi
 		fi
-	fi
-fi
-
-# sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile # --no-channel-add
-
-if [[ -z "${IN_NIX_SHELL:-}" ]]; then 
-	if [ -e /home/ubuntu/.nix-profile/etc/profile.d/nix.sh ]; then 
-		. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh
 	fi
 fi
