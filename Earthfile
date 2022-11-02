@@ -194,6 +194,7 @@ root:
 
     RUN echo ${BUMP}
 
+    # oathtool libusb-1.0-0 libolm-dev
     RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm \
         && apt-get update \
         && apt-get upgrade -y \
@@ -202,7 +203,7 @@ root:
         tzdata locales iputils-ping iproute2 net-tools dnsutils xz-utils \
         sudo \
         build-essential make tini python3-openssl python3-pip python3-venv python-is-python3 \
-        gpg git-crypt oathtool libusb-1.0-0 libolm-dev \
+        gpg \
         && apt purge -y nano
 
     RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu \
