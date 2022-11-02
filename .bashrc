@@ -1,5 +1,6 @@
 export USER=ubuntu
 export LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
+export LC_ALL=C.UTF-8
 
 function gs {
 	git status -sb "$@"
