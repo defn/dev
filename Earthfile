@@ -198,7 +198,7 @@ root:
         && apt-get update \
         && apt-get upgrade -y \
         && apt-get install -y --no-install-recommends \
-            apt-transport-https software-properties-common curl git \
+            apt-transport-https software-properties-common curl git gpg-agent libnpth0 \
             tzdata locales iputils-ping iproute2 net-tools \
             sudo \
             build-essential tini python3-openssl python3-pip python3-venv python-is-python3 \
