@@ -56,7 +56,7 @@ function main {
 				rm -f "$tmp/$cert.json"
 				echo "$tmp/$cert.crt $tmp/$cert.key"
 			else
-				vault write "pki/issue/$issue" common_name="$cn" ttl="$ttl" -format=json 
+				vault write "pki/issue/$issue" common_name="$cn" ttl="$ttl" -format=json
 			fi
 			;;
 		delete)
