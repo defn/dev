@@ -101,9 +101,7 @@ user:
     COPY --chown=ubuntu:ubuntu --dir (+kustomize/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+krew/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+helm/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+vault/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+cloudflared/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+awsvault/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+buf/* --arch=${arch}) ./
@@ -213,7 +211,7 @@ root:
         sudo \
         build-essential make tini python3-openssl python3-pip python3-venv python-is-python3 \
         gpg git-crypt oathtool libusb-1.0-0 libolm-dev \
-        xdg-utils netcat-openbsd groff \
+        xdg-utils netcat-openbsd \
         && apt purge -y nano
 
     RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu \
@@ -245,13 +243,6 @@ root:
         && apt-get update \
         && apt install -y tailscale
 
-    RUN echo ${DOCKER} \
-        && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
-        && echo "deb [arch=${arch} signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu focal stable" | tee /etc/apt/sources.list.d/docker.list \
-        && apt-get update \
-        && apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin \
-        && usermod --groups docker --append ubuntu
-
     USER ubuntu
     WORKDIR /home/ubuntu
 
@@ -262,7 +253,6 @@ toolVersions:
 
     ARG ARGO
     ARG ARGOCD
-    ARG AWSVAULT
     ARG BUF
     ARG CLOUDFLARED
     ARG GOLANG
@@ -273,11 +263,9 @@ toolVersions:
     ARG KUBECTL
     ARG KUSTOMIZE
     ARG NODEJS
-    ARG VAULT
 
     RUN echo argo ${ARGO} >> .tool-versions
     RUN echo argocd ${ARGOCD} >> .tool-versions
-    RUN echo aws-vault ${AWSVAULT} >> .tool-versions
     RUN echo buf ${BUF} >> .tool-versions
     RUN echo cloudflared ${CLOUDFLARED} >> .tool-versions
     RUN echo golang ${GOLANG} >> .tool-versions
@@ -287,7 +275,6 @@ toolVersions:
     RUN echo kustomize ${KUSTOMIZE} >> .tool-versions
     RUN echo nodejs ${NODEJS} >> .tool-versions
     RUN echo python ${PYTHON} >> .tool-versions
-    RUN echo vault ${VAULT} >> .tool-versions
     RUN echo argo ${ARGO} >> .tool-versions
     SAVE ARTIFACT .tool-versions
 
