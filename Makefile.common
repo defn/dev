@@ -55,7 +55,7 @@ build:
 	$(MAKE) build-site
 
 install:
-	if test -f /home/ubuntu/.nix-profile/etc/profile.d/nix.sh; then . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh; fi && $(MAKE) nix
+	nix
 	cd && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh && $(MAKE) install-inner
 
 install-inner:
@@ -378,5 +378,5 @@ nix-gc:
 	nix-store --gc
 
 nix:
-	export LC_ALL=C.UTF-8 && if ! type -P nix; then $(MAKE) nix-bootstrap; fi
+	export LC_ALL=C.UTF-8 && if ! test -x /home/ubuntu/.nix-profile/bin/nix; then $(MAKE) nix-bootstrap; fi
 	export LC_ALL=C.UTF-8 && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh && $(MAKE) nix-install	
