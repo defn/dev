@@ -211,11 +211,10 @@ root:
         sudo \
         build-essential make tini python3-openssl python3-pip python3-venv python-is-python3 \
         gpg git-crypt oathtool libusb-1.0-0 libolm-dev \
-        xdg-utils netcat-openbsd \
         && apt purge -y nano
 
     RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu \
-        && echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu \
+        &ke& echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu \
         && install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
 
     RUN groupadd -g 1001 kuma && useradd -u 1001 -d /home/kuma -s /bin/bash -g kuma -M kuma \
