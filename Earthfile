@@ -201,7 +201,7 @@ root:
             apt-transport-https software-properties-common curl git \
             tzdata locales iputils-ping iproute2 net-tools \
             sudo \
-            build-essential make tini python3-openssl python3-pip python3-venv python-is-python3 \
+            build-essential tini python3-openssl python3-pip python3-venv python-is-python3 \
             gpg libnpth0 \
         && apt purge -y nano
 
