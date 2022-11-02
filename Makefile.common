@@ -78,6 +78,13 @@ install-inner:
 	$(MAKE) perms
 	env GPG_TTY=$$(tty) $(MAKE) init-gpg
 
+	docker context create host --docker host=unix:///var/run/docker.sock \
+        && docker context create pod --docker host=tcp://localhost:2375 \
+        && docker context create so --docker host=tcp://docker-so.mesh:80 \
+        && docker context create the --docker host=tcp://docker-the.mesh:80 \
+        && docker context create brie --docker host=tcp://docker-brie.mesh:80 \
+        && docker context use host
+
 	mark -- configure repos
 
 	if ! is-fly; then \
