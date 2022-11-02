@@ -199,11 +199,11 @@ root:
         && apt-get update \
         && apt-get upgrade -y \
         && apt-get install -y --no-install-recommends \
-        apt-transport-https software-properties-common curl \
-        tzdata locales iputils-ping iproute2 net-tools dnsutils xz-utils \
-        sudo \
-        build-essential make tini python3-openssl python3-pip python3-venv python-is-python3 \
-        gpg \
+            apt-transport-https software-properties-common curl \
+            tzdata locales iputils-ping iproute2 net-tools \
+            sudo \
+            build-essential make tini python3-openssl python3-pip python3-venv python-is-python3 \
+            gpg \
         && apt purge -y nano
 
     RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu \
