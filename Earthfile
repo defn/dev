@@ -72,14 +72,14 @@ user:
     COPY --chown=ubuntu:ubuntu --dir (+golang/* --arch=${arch}) ./
 
     # gcloud
-    COPY --chown=ubuntu:ubuntu --dir (+gcloud/gcloud --arch=${arch}) /usr/local/
+    #COPY --chown=ubuntu:ubuntu --dir (+gcloud/gcloud --arch=${arch}) /usr/local/
 
     # arch3: awscli
-    IF [ ${arch} = "arm64" ]
-        COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch} --arch3=aarch64) /usr/local/
-    ELSE
-        COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch} --arch3=x86_64) /usr/local/
-    END
+    #IF [ ${arch} = "arm64" ]
+    #    COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch} --arch3=aarch64) /usr/local/
+    #ELSE
+    #    COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch} --arch3=x86_64) /usr/local/
+    #END
 
     # arch
     COPY --chown=ubuntu:ubuntu (+vcluster/* --arch=${arch}) /usr/local/bin/
