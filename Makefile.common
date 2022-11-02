@@ -55,7 +55,7 @@ build:
 	$(MAKE) build-site
 
 install:
-	nix
+	$(MAKE) nix
 	cd && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh && $(MAKE) install-inner
 
 install-inner:
