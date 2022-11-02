@@ -202,7 +202,6 @@ root:
             tzdata locales iputils-ping iproute2 net-tools \
             sudo \
             build-essential tini python3-openssl python3-pip python3-venv python-is-python3 \
-            gpg libnpth0 \
         && apt purge -y nano
 
     RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu \
