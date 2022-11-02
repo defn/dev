@@ -82,7 +82,6 @@ user:
     END
 
     # arch
-    COPY --chown=ubuntu:ubuntu (+powerline/* --arch=${arch}) /usr/local/bin
     COPY --chown=ubuntu:ubuntu (+vcluster/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+gh/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+earthly/* --arch=${arch}) /usr/local/bin/
@@ -90,11 +89,9 @@ user:
     COPY --chown=ubuntu:ubuntu (+step/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+kuma/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+switch/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+kn/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+k3d/* --arch=amd64) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+gotools/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+oras/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+caddy/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+tctl/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+temporalite/* --arch=${arch}) /usr/local/bin/
@@ -106,13 +103,10 @@ user:
     COPY --chown=ubuntu:ubuntu --dir (+helm/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+vault/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+cloudflared/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+terraform/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+awsvault/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+buf/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+packer/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+nomad/* --arch=${arch}) ./
 
     # arch2: hof, tilt
     IF [ ${arch} = "arm64" ]
@@ -279,11 +273,6 @@ toolVersions:
     ARG KUBECTL
     ARG KUSTOMIZE
     ARG NODEJS
-    ARG NOMAD
-    ARG PACKER
-    ARG SHELLCHECK
-    ARG SHFMT
-    ARG TERRAFORM
     ARG VAULT
 
     RUN echo argo ${ARGO} >> .tool-versions
@@ -297,12 +286,7 @@ toolVersions:
     RUN echo kubectl ${KUBECTL} >> .tool-versions
     RUN echo kustomize ${KUSTOMIZE} >> .tool-versions
     RUN echo nodejs ${NODEJS} >> .tool-versions
-    RUN echo nomad ${NOMAD} >> .tool-versions
-    RUN echo packer ${PACKER} >> .tool-versions
     RUN echo python ${PYTHON} >> .tool-versions
-    RUN echo shellcheck ${SHELLCHECK} >> .tool-versions
-    RUN echo shfmt ${SHFMT} >> .tool-versions
-    RUN echo terraform ${TERRAFORM} >> .tool-versions
     RUN echo vault ${VAULT} >> .tool-versions
     RUN echo argo ${ARGO} >> .tool-versions
     SAVE ARTIFACT .tool-versions
