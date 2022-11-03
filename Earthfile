@@ -67,8 +67,8 @@ user:
 
     ENTRYPOINT ["/usr/bin/tini", "--"]
 
-    COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+golang/* --arch=${arch}) ./
+    #COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch}) ./
+    #COPY --chown=ubuntu:ubuntu --dir (+golang/* --arch=${arch}) ./
 
     # gcloud
     #COPY --chown=ubuntu:ubuntu --dir (+gcloud/gcloud --arch=${arch}) /usr/local/
@@ -89,29 +89,29 @@ user:
     COPY --chown=ubuntu:ubuntu (+kuma/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+switch/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+k3d/* --arch=amd64) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+gotools/* --arch=${arch}) /usr/local/bin/
+    #COPY --chown=ubuntu:ubuntu (+gotools/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+caddy/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+tctl/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+temporalite/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+kubebuilder/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+steampipe/* --arch=${arch}) /usr/local/bin/
+    #COPY --chown=ubuntu:ubuntu (+kubebuilder/* --arch=${arch}) /usr/local/bin/
+    #COPY --chown=ubuntu:ubuntu (+steampipe/* --arch=${arch}) /usr/local/bin/
 
     COPY --chown=ubuntu:ubuntu --dir (+kustomize/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+krew/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+helm/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+cloudflared/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch}) ./
+    #COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch}) ./
 
     # arch2: hof, tilt
     IF [ ${arch} = "arm64" ]
         COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
         COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
-        COPY --chown=ubuntu:ubuntu (+goreleaser/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
+        #COPY --chown=ubuntu:ubuntu (+goreleaser/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
     ELSE
         COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
         COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
-        COPY --chown=ubuntu:ubuntu (+goreleaser/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
+        #COPY --chown=ubuntu:ubuntu (+goreleaser/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
     END
 
     # arch4
@@ -543,8 +543,8 @@ kuma:
     ARG arch
     ARG KUMA
     FROM +tools --arch=${arch}
-    RUN curl -sSL https://download.konghq.com/mesh-alpine/kuma-${KUMA}-ubuntu-${arch}.tar.gz | tar xvfz -
-    SAVE ARTIFACT */bin/*
+    RUN mkdir meh && cd meh && curl -sSL https://download.konghq.com/mesh-alpine/kuma-${KUMA}-ubuntu-${arch}.tar.gz | tar xvfz -
+    SAVE ARTIFACT meh/bin/*
 
 kn:
     ARG arch
