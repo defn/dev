@@ -235,28 +235,19 @@ root:
 toolVersions:
     FROM +ubuntu
 
-    ARG ARGO
     ARG ARGOCD
     ARG CLOUDFLARED
-    ARG GOLANG
     ARG HELM
-    ARG K3SUP
-    ARG K9S
     ARG KREW
     ARG KUBECTL
     ARG KUSTOMIZE
-    ARG NODEJS
 
-    RUN echo argo ${ARGO} >> .tool-versions
     RUN echo argocd ${ARGOCD} >> .tool-versions
     RUN echo cloudflared ${CLOUDFLARED} >> .tool-versions
-    RUN echo golang ${GOLANG} >> .tool-versions
     RUN echo helm ${HELM} >> .tool-versions
     RUN echo krew ${KREW} >> .tool-versions
     RUN echo kubectl ${KUBECTL} >> .tool-versions
     RUN echo kustomize ${KUSTOMIZE} >> .tool-versions
-    RUN echo nodejs ${NODEJS} >> .tool-versions
-    RUN echo argo ${ARGO} >> .tool-versions
     SAVE ARTIFACT .tool-versions
 
 coderServer:
