@@ -274,6 +274,8 @@ vscodeServer:
     SAVE ARTIFACT /usr/local/bin/code-server
 
 tools:
+    ARG arch
+
     FROM +ubuntu
 
     ENV DEBIAN_FRONTEND=noninteractive
@@ -289,7 +291,9 @@ tools:
 asdf:
     ARG arch
     ARG ASDF
+
     FROM +tools --arch=${arch}
+
     RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
     RUN install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
     USER ubuntu
