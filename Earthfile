@@ -535,7 +535,7 @@ kuma:
     ARG KUMA
     FROM +tools --arch=${arch}
     RUN mkdir meh && cd meh && curl -sSL https://download.konghq.com/mesh-alpine/kuma-${KUMA}-ubuntu-${arch}.tar.gz | tar xvfz -
-    SAVE ARTIFACT meh/bin/*
+    SAVE ARTIFACT meh/*/bin/*
 
 kn:
     ARG arch
