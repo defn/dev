@@ -1,2 +1,2 @@
-%:
-	nix-build $@.nix --no-out-link
+build:
+	nix-build --no-out-link

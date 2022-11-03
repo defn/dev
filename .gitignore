@@ -47,6 +47,7 @@ node_modules
 .config/dlv
 .config/astro
 .config/nextjs-nodejs/
+.config/nix
 .loft
 .lesshst
 .fly
