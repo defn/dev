@@ -288,6 +288,8 @@ tools:
         && apt-get install -y --no-install-recommends \
             apt-transport-https software-properties-common tzdata locales git unzip xz-utils wget curl
 
+    RUN echo arch=${arch}
+
     SAVE IMAGE --cache-hint
 
 asdf:
