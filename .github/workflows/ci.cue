@@ -15,7 +15,7 @@ on: pull_request: {}
 jobs: [string]: #EarthlyJob
 
 jobs: {
-	buildAmd: {
+	build_amd: {
 		steps: #EarthlySteps + [{
 			name: "Build amd target"
 			run: """
@@ -27,7 +27,7 @@ jobs: {
 		}]
 	}
 
-	buildArm: {
+	build_arm: {
 		steps: #EarthlySteps + [{
 			name: "Build arm target"
 			run: """
@@ -39,34 +39,10 @@ jobs: {
 		}]
 	}
 
-	buildAmdK3DBase: {
-		steps: #EarthlySteps + [{
-			name: "Build amd k3d-base target"
-			run: """
-				earthly --strict --push --no-output \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-k3d-base \\
-					--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd-k3d-base \\
-					+build-amd-k3d-base
-				"""
-		}]
-	}
-
-	buildArmK3DBase: {
-		steps: #EarthlySteps + [{
-			name: "Build arm k3d-base target"
-			run: """
-				earthly --strict --push --no-output \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d-base \\
-					--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm-k3d-base \\
-					+build-arm-k3d-base
-				"""
-		}]
-	}
-
 	publish: {
 		needs: [
-			"buildAmd",
-			"buildArm",
+			"build_amd",
+			"build_arm",
 		]
 		steps: #EarthlySteps + [{
 			name: "Publish images"
@@ -81,19 +57,43 @@ jobs: {
 		}]
 	}
 
-	publishK3DBase: {
+	build_k3d_amd: {
+		steps: #EarthlySteps + [{
+			name: "Build amd k3d-base target"
+			run: """
+				earthly --strict --push --no-output \\
+					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-k3d-amd \\
+					--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-k3d-amd \\
+					+build-amd-k3d-base
+				"""
+		}]
+	}
+
+	build_k3d_arm: {
+		steps: #EarthlySteps + [{
+			name: "Build arm k3d-base target"
+			run: """
+				earthly --strict --push --no-output \\
+					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-k3d-arm \\
+					--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-k3d-arm \\
+					+build-arm-k3d-base
+				"""
+		}]
+	}
+
+	publish_k3d: {
 		needs: [
-			"buildAmdK3DBase",
-			"buildArmK3DBase",
+			"build_k3d_amd",
+			"build_k3d_arm",
 		]
 		steps: #EarthlySteps + [{
 			name: "Publish images"
 			run: """
 				earthly --strict --push --no-output \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-k3d-base \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d-base \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd-k3d-base \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm-k3d-base \\
+					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-k3d-amd \\
+					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-k3d-arm \\
+					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-k3d-amd \\
+					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-k3d-arm \\
 					+imagesK3DBase --repo=ghcr.io/ --tag=${TAG}
 				"""
 		}]
