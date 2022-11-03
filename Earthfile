@@ -94,6 +94,7 @@ user:
     COPY --chown=ubuntu:ubuntu (+tctl/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+temporalite/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+kubebuilder/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+steampipe/* --arch=${arch}) /usr/local/bin/
 
     COPY --chown=ubuntu:ubuntu --dir (+kustomize/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+krew/* --arch=${arch}) ./
@@ -131,10 +132,6 @@ user:
     # COPY (+rerun-process-wrapper/*) /
 
     # steampipe
-    COPY --chown=ubuntu:ubuntu (+steampipe/* --arch=${arch}) /usr/local/bin/
-    RUN steampipe plugin install kubernetes \
-        && steampipe plugin install docker \
-        && steampipe plugin install aws
 
     # arch2: flyctl
     IF [ ${arch} = "arm64" ]
