@@ -142,8 +142,7 @@ user:
 
     # new, unorganized
 
-    RUN (ssh -o StrictHostKeyChecking=no git@github.com true || true) \
-        && mkdir -p .kube .docker
+    RUN mkdir -p .kube .docker
 
     COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
 
