@@ -282,7 +282,7 @@ tools:
     RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm \
         && apt-get update \
         && apt-get install -y --no-install-recommends \
-            apt-transport-https software-properties-common tzdata locales git gpg gpg-agent unzip xz-utils wget curl
+            apt-transport-https software-properties-common tzdata locales git unzip xz-utils wget curl
 
     SAVE IMAGE --cache-hint
 
