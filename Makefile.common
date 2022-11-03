@@ -12,7 +12,7 @@ app ?= $(shell pwd)/app
 node ?= k3d-control-server-0
 n ?=
 k ?=
-p ?= glibcLocales irssi k9s difftastic powerline-go grpcurl figlet lolcat htop screen jo vim entr wireguard-tools gron fzf jq git less wget rsync curl unzip pass socat terraform nomad vault packer shfmt shellcheck oras kn docker containerd man groff aws-vault netcat-openbsd xdg-utils xz bind gnumake gnupg google-cloud-sdk awscli2 iputils yq pre-commit httpie
+p ?= glibcLocales irssi k9s difftastic powerline-go grpcurl figlet lolcat htop screen jo vim entr wireguard-tools gron fzf jq git less wget rsync curl unzip pass socat terraform nomad vault packer shfmt shellcheck oras kn docker containerd man groff aws-vault netcat-openbsd xdg-utils xz bind gnumake gnupg google-cloud-sdk awscli2 iputils yq pre-commit httpie docker-credential-helpers
 r ?= bash
 
 dummy_ip ?= 169.254.32.1

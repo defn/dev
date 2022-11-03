@@ -88,7 +88,6 @@ user:
     COPY --chown=ubuntu:ubuntu (+step/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+kuma/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+switch/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+credentialPass/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+k3d/* --arch=amd64) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+gotools/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+caddy/* --arch=${arch}) /usr/local/bin/
