@@ -1,2 +1,5 @@
 build:
-	nix-build --no-out-link
+	nix-build
+
+refs:
+	nix-store --query --references ./result/
