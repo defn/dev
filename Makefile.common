@@ -111,7 +111,7 @@ install-inner:
 
 tilt up:
 	pass hello
-	tilt up --context k3d-control --port $(tilt_port) --host 127.0.0.1 --stream
+	n develop --command tilt up --context k3d-control --port $(tilt_port) --host 127.0.0.1 --stream
 
 down:
 	kuma-tp-off
