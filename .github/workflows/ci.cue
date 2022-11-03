@@ -40,18 +40,14 @@ jobs: {
 	}
 
 	publish: {
-		needs: [
-			"build_amd",
-			"build_arm",
-		]
 		steps: #EarthlySteps + [{
 			name: "Publish images"
 			run: """
 				earthly --strict --push --no-output \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm \\
+					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-all \\
+					--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-all \\
 					+images --repo=ghcr.io/ --tag=${TAG}
 				"""
 		}]
