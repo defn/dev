@@ -162,7 +162,9 @@ user:
         && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
 
 ubuntu:
+    ARG arch
     ARG UBUNTU
+
     FROM ${UBUNTU}
 
     SAVE IMAGE --cache-hint
@@ -173,7 +175,7 @@ root:
     ARG DOCKER
     ARG BUMP
 
-    FROM +ubuntu
+    FROM +ubuntu --arch=${arch}
 
     USER root
     ENTRYPOINT ["tail", "-f", "/dev/null"]
@@ -233,7 +235,7 @@ root:
     ENV HOME=/home/ubuntu
 
 toolVersions:
-    FROM +ubuntu
+    FROM +ubuntu --arch=${arch}
 
     ARG ARGOCD
     ARG CLOUDFLARED
@@ -276,7 +278,7 @@ vscodeServer:
 tools:
     ARG arch
 
-    FROM +ubuntu
+    FROM +ubuntu --arch=${arch}
 
     ENV DEBIAN_FRONTEND=noninteractive
     ENV container=docker
