@@ -106,7 +106,11 @@ install-inner:
 	@env VAULT_ADDR="http://localhost:8200" VAULT_TOKEN="$$(pass Initial_Root_Token)" $(MAKE) manage
 
 	mark -- configure site
+	npm install
+
 	$(MAKE) install-site
+	
+	make -- tilt
 	if ! is-fly; then if ! nc -z -v localhost 7999 2>/dev/null; then $(MAKE) up; fi; fi
 
 tilt up:
