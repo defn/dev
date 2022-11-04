@@ -41,6 +41,9 @@ if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$HOME/.local/bin:$PATH"; fi
 export PYTHONPATH
 export PIP_DISABLE_PIP_VERSION_CHECK=1
 
+# nodejs
+if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$HOME/node_modules/.bin:$PATH"; fi
+
 # cue
 if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$HOME/bin/$(uname -s):$HOME/bin:$PATH"; fi
 
