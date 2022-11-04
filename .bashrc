@@ -129,3 +129,5 @@ if [[ -n "${VSCODE_GIT_IPC_HANDLE:-}" ]]; then
 		fi
 	fi
 fi
+
+PATH="/bin:$PATH"
