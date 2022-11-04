@@ -13,10 +13,12 @@
           buildInputs = [
             pkgs.go
             pkgs.gotools
+            pkgs.go-tools
             pkgs.golangci-lint
             pkgs.gopls
             pkgs.go-outline
             pkgs.gopkgs
+            pkgs.delve
             pkgs.nodejs-18_x
           ];
         };
