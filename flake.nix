@@ -17,6 +17,7 @@
             pkgs.gopls
             pkgs.go-outline
             pkgs.gopkgs
+            pkgs.nodejs-18_x
           ];
         };
       });
