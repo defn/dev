@@ -13,7 +13,6 @@
       in {
         defaultPackage =
           with import nixpkgs { inherit system; };
-
           stdenv.mkDerivation rec {
             name = "sup-${version}";
 
