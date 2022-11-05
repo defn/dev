@@ -148,6 +148,8 @@ user:
     # nix
     RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh
 
+    RUN find /nix
+
     RUN mkdir -p .kube .docker
 
     COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
