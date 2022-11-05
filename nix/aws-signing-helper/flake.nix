@@ -28,7 +28,7 @@
 
           installPhase = ''
             mkdir -p $out/bin
-            install -m 0755 -D $src $out/bin/
+            install -m 0755 -D $src $out/bin/aws_signing_helper
           '';
 
           meta = with lib; {
