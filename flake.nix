@@ -7,10 +7,11 @@
 
   outputs = { self, nixpkgs, flake-utils, aws-signing-helper-pkg }:
     flake-utils.lib.eachDefaultSystem (system:
-      let 
+      let
         pkgs = import nixpkgs { inherit system; };
         aws-signing-helper = aws-signing-helper-pkg.defaultPackage.${system};
-      in {
+      in
+      {
         devShell = pkgs.mkShell {
           buildInputs = [
             pkgs.go

@@ -24,7 +24,7 @@
 
           sourceRoot = ".";
 
-          phases = ["installPhase"];
+          phases = [ "installPhase" ];
 
           installPhase = ''
             mkdir -p $out/bin
