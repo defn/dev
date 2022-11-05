@@ -1,4 +1,4 @@
-with (import <nixpkgs> {});
+with (import <nixpkgs> { });
 derivation {
   inherit coreutils findutils gnutar gzip;
   name = "simple";

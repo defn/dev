@@ -5,11 +5,11 @@
 
   outputs = { self, nixpkgs }: {
 
-  with import <nixpkgs> {};
-  stdenv.mkDerivation rec {
+    with import <nixpkgs> {};
+    stdenv.mkDerivation rec {
     pname = "complex";
     version = "0.0.1";
-    buildInputs = [];
+    buildInputs = [ ];
     builder = ./complex.sh;
     setSourceRoot = "sourceRoot=`pwd`";
     src = fetchurl {
@@ -17,4 +17,4 @@
       sha256 = "67133d806f900eef0a36665b39b8c9ef7d70eacb0f4876ede3ce627049aaa6cf";
     };
   }
-}
+    }
