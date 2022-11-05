@@ -146,7 +146,7 @@ user:
         && sudo chmod 755 /usr/local/bin/aws_signing_helper
 
     # nix
-    RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh
+    RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh && find /nix
 
     RUN find /nix
 
