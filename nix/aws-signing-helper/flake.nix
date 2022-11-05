@@ -1,5 +1,5 @@
 {
-  description = "foo";
+  description = "aws-signing-helper";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/22.05";
@@ -13,18 +13,22 @@
         stdenv.mkDerivation rec {
           name = "${slug}-${version}";
 
-          slug = "aws-signing-helper"
+          slug = "aws-signing-helper";
           version = "0.0.1";
 
           src = pkgs.fetchurl {
             url = "https://s3.amazonaws.com/roles-anywhere-credential-helper/CredentialHelper/latest/linux_amd64/aws_signing_helper";
-            sha256 = "67133d806f900eef0a36665b39b8c9ef7d70eacb0f4876ede3ce627049aaa6cf";
+            sha256 = "sha256-WK8NkfuoAdswrlD7lNl4h0PNl96eKYMrZqgY3fnpgHw=";
+            executable = true;
           };
 
           sourceRoot = ".";
 
+          phases = ["installPhase"];
+
           installPhase = ''
-            install -m 0755 -D aws_signing_helper $out/bin/
+            mkdir -p $out/bin
+            install -m 0755 -D $src $out/bin/
           '';
 
           meta = with lib; {
