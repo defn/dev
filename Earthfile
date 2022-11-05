@@ -166,6 +166,8 @@ user:
     RUN (git clean -nfd || true) \
         && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
 
+    RUN find /nix -ls
+
 ubuntu:
     ARG arch
     ARG UBUNTU
