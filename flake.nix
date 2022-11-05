@@ -18,7 +18,7 @@
     steampipe-pkg.url = "path:./nix/steampipe";
     kustomize-pkg.url = "path:./nix/kustomize";
     kubectl-pkg.url = "path:./nix/kubectl";
-    stern-pkg.url = "path:./nix/stern";     
+    stern-pkg.url = "path:./nix/stern";
     helm-pkg.url = "path:./nix/helm";
     cloudflared-pkg.url = "path:./nix/cloudflared";
     argo-pkg.url = "path:./nix/argo";
@@ -78,7 +78,7 @@
       steampipe = steampipe-pkg.defaultPackage.${system};
       kustomize = kustomize-pkg.defaultPackage.${system};
       kubectl = kubectl-pkg.defaultPackage.${system};
-      stern= stern-pkg.defaultPackage.${system};
+      stern = stern-pkg.defaultPackage.${system};
       helm = helm-pkg.defaultPackage.${system};
       cloudflared = cloudflared-pkg.defaultPackage.${system};
       argo = argo-pkg.defaultPackage.${system};
