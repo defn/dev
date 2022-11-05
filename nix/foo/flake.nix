@@ -1,5 +1,5 @@
 {
-  description = "sup foo";
+  description = "foo";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/22.05";
