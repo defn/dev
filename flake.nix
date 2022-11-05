@@ -17,6 +17,7 @@
     kubebuilder-pkg = "path:./nix/kubebuilder";
     steampipe-pkg = "path:./nix/steampipe";
     kustomize-pkg = "path:./nix/kustomize";
+    kubectl-pkg = "path:./nix/kubectl";
     krew-pkg = "path:./nix/krew";
     helm-pkg = "path:./nix/helm";
     cloudflared-pkg = "path:./nix/cloudflared";
@@ -49,6 +50,7 @@
     , kubebuilder-pkg
     , steampipe-pkg
     , kustomize-pkg
+    , kubectl-pkg
     , krew-pkg
     , helm-pkg
     , cloudflared-pkg
@@ -79,6 +81,7 @@
       kubebuilder = kubebuilder-pkg.default.${system};
       steampipe = steampipe-pkg.default.${system};
       kustomize = kustomize-pkg.default.${system};
+      kubectl = kubectl-pkg.default.${system};
       krew = krew-pkg.default.${system};
       helm = helm-pkg.default.${system};
       cloudflared = cloudflared-pkg.default.${system};
@@ -118,6 +121,7 @@
           kubebuilder
           steampipe
           kustomize
+          kubectl
           krew
           helm
           cloudflared
