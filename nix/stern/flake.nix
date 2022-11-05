@@ -1,5 +1,5 @@
 {
-  description = "krew";
+  description = "stern";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/22.05";
@@ -13,13 +13,13 @@
         stdenv.mkDerivation rec {
           name = "${slug}-${version}";
 
-          slug = "krew";
-          version = "0.4.3";
+          slug = "stern";
+          version = "1.22.0";
           arch = "amd64"; # arm64
 
           src = pkgs.fetchurl {
-            url = "https://github.com/kubernetes-sigs/krew/releases/download/v${version}/krew-linux_${arch}.tar.gz";
-            sha256 = "sha256-XfMuqg6IiiVmQ5xMyy7zo+bolSLy8hJgMBceJYVYXk8=";
+            url = "https://github.com/stern/stern/releases/download/v${version}/stern_${version}_linux_${arch}.tar.gz";
+            sha256 = "sha256-bv8CjRBLU8ilPDr3UqUikt2yAktGnOWrBa7i8JVL3nI=";
           };
 
           sourceRoot = ".";
@@ -27,7 +27,7 @@
           installPhase = ''
             mkdir -p $out/bin
             find .
-            install -m 0755 krew-linux_${arch} $out/bin/kubectl-krew
+            install -m 0755 stern $out/bin/stern
           '';
 
           meta = with lib; {
