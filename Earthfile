@@ -145,7 +145,8 @@ user:
     RUN sudo curl -sSL -o /usr/local/bin/aws_signing_helper https://s3.amazonaws.com/roles-anywhere-credential-helper/CredentialHelper/latest/linux_amd64/aws_signing_helper \
         && sudo chmod 755 /usr/local/bin/aws_signing_helper
 
-    # new, unorganized
+    # nix
+    RUN sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile
 
     RUN mkdir -p .kube .docker
 
