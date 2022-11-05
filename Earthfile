@@ -133,15 +133,6 @@ user:
     # rerun-process-wrapper
     # COPY (+rerun-process-wrapper/*) /
 
-    # steampipe
-
-    # arch2: flyctl
-    IF [ ${arch} = "arm64" ]
-        COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
-    ELSE
-        COPY --chown=ubuntu:ubuntu (+flyctl/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
-    END
-
     # nix
     RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh && find /nix
 
@@ -371,14 +362,6 @@ coredns:
     FROM +tools --arch=${arch}
     RUN curl -sSL https://github.com/coredns/coredns/releases/download/v${COREDNS}/coredns_${COREDNS}_linux_${arch}.tgz | tar xvfz -
     SAVE ARTIFACT coredns
-
-flyctl:
-    ARG arch
-    ARG arch2
-    ARG FLYCTL
-    FROM +tools --arch=${arch}
-    RUN curl -sSL https://github.com/superfly/flyctl/releases/download/v${FLYCTL}/flyctl_${FLYCTL}_Linux_${arch2}.tar.gz | tar xvfz -
-    SAVE ARTIFACT flyctl
 
 nerdctl:
     ARG arch

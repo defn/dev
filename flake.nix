@@ -3,13 +3,15 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     aws-signing-helper-pkg.url = "path:./nix/aws-signing-helper";
+    flyctl-pkg.url = "path:./nix/flyctl";
   };
 
-  outputs = { self, nixpkgs, flake-utils, aws-signing-helper-pkg }:
+  outputs = { self, nixpkgs, flake-utils, aws-signing-helper-pkg, flyctl-pkg }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
         aws-signing-helper = aws-signing-helper-pkg.defaultPackage.${system};
+        flyctl = flyctl-pkg.defaultPackage.${system};
       in
       {
         devShell = pkgs.mkShell {
@@ -24,6 +26,7 @@
             pkgs.delve
             pkgs.nodejs-18_x
             aws-signing-helper
+            flyctl
           ];
         };
       }
