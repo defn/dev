@@ -24,7 +24,7 @@
 
           sourceRoot = ".";
 
-          phases = [ "installPhase" ];
+          dontUnpack = true;
 
           installPhase = ''
             mkdir -p $out/bin
