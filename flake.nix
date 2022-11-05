@@ -13,7 +13,6 @@
     switch-pkg = "path:./nix/switch";
     k3d-pkg = "path:./nix/k3d";
     caddy-pkg = "path:./nix/caddy";
-    tctl-pkg = "path:./nix/tctl";
     temporalite-pkg = "path:./nix/temporalite";
     kubebuilder-pkg = "path:./nix/kubebuilder";
     steampipe-pkg = "path:./nix/steampipe";
@@ -46,7 +45,6 @@
     , switch-pkg
     , k3d-pkg
     , caddy-pkg
-    , tctl-pkg
     , temporalite-pkg
     , kubebuilder-pkg
     , steampipe-pkg
@@ -77,7 +75,6 @@
       switch = switch-pkg.default.${system};
       k3d = k3d-pkg.default.${system};
       caddy = caddy-pkg.default.${system};
-      tctl = tctl-pkg.default.${system};
       temporalite = temporalite-pkg.default.${system};
       kubebuilder = kubebuilder-pkg.default.${system};
       steampipe = steampipe-pkg.default.${system};
@@ -117,7 +114,6 @@
           switch
           k3d
           caddy
-          tctl
           temporalite
           kubebuilder
           steampipe
