@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/22.05";
   };
 
-  outputs = {self, nixpkgs}: {
+  outputs = { self, nixpkgs }: {
     defaultPackage.x86_64-linux =
       with import nixpkgs { system = "x86_64-linux"; };
 

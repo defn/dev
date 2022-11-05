@@ -2,9 +2,9 @@
   description = "sup";
 
   inputs = {
-     nixpkgs.url = "github:NixOS/nixpkgs/22.05";
-     foopkg.url = "path:../foo";
-     flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:NixOS/nixpkgs/22.05";
+    flake-utils.url = "github:numtide/flake-utils";
+    foopkg.url = "path:../foo";
   };
 
   outputs = { self, nixpkgs, foopkg, flake-utils }:
