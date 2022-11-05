@@ -24,8 +24,12 @@
 
           sourceRoot = ".";
 
+          dontUnpack = true;
+
           installPhase = ''
             mkdir -p $out/bin
+            cat $src | gunzip > argo
+            chmod 755 argo
             install -m 0755 argo $out/bin/argo
           '';
 
