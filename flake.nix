@@ -18,7 +18,7 @@
     steampipe-pkg.url = "path:./nix/steampipe";
     kustomize-pkg.url = "path:./nix/kustomize";
     kubectl-pkg.url = "path:./nix/kubectl";
-    krew-pkg.url = "path:./nix/krew";     
+    stern-pkg.url = "path:./nix/stern";     
     helm-pkg.url = "path:./nix/helm";
     cloudflared-pkg.url = "path:./nix/cloudflared";
     argo-pkg.url = "path:./nix/argo";
@@ -27,7 +27,6 @@
     tilt-pkg.url = "path:./nix/tilt";
     goreleaser-pkg.url = "path:./nix/goreleaser";
     teller-pkg.url = "path:./nix/teller";
-    buf-pkg.url = "path:./nix/buf";
   };
 
   outputs =
@@ -50,7 +49,7 @@
     , steampipe-pkg
     , kustomize-pkg
     , kubectl-pkg
-    , krew-pkg
+    , stern-pkg
     , helm-pkg
     , cloudflared-pkg
     , argo-pkg
@@ -59,7 +58,6 @@
     , tilt-pkg
     , goreleaser-pkg
     , teller-pkg
-    , buf-pkg
     }:
     flake-utils.lib.eachDefaultSystem (system:
     let
@@ -80,7 +78,7 @@
       steampipe = steampipe-pkg.defaultPackage.${system};
       kustomize = kustomize-pkg.defaultPackage.${system};
       kubectl = kubectl-pkg.defaultPackage.${system};
-      krew = krew-pkg.defaultPackage.${system};
+      stern= stern-pkg.defaultPackage.${system};
       helm = helm-pkg.defaultPackage.${system};
       cloudflared = cloudflared-pkg.defaultPackage.${system};
       argo = argo-pkg.defaultPackage.${system};
@@ -89,7 +87,6 @@
       tilt = tilt-pkg.defaultPackage.${system};
       goreleaser = goreleaser-pkg.defaultPackage.${system};
       teller = teller-pkg.defaultPackage.${system};
-      buf = buf-pkg.defaultPackage.${system};
     in
     {
       devShell = pkgs.mkShell {
@@ -119,7 +116,7 @@
           steampipe
           kustomize
           kubectl
-          krew
+          stern
           helm
           cloudflared
           argo
@@ -128,7 +125,6 @@
           tilt
           goreleaser
           teller
-          buf
         ];
       };
     }
