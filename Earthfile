@@ -148,8 +148,6 @@ user:
     # nix
     RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh && find /nix
 
-    RUN find /nix
-
     RUN mkdir -p .kube .docker
 
     COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
@@ -168,7 +166,7 @@ user:
     RUN (git clean -nfd || true) \
         && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
 
-    RUN find /nix -ls
+    RUN find /nix | wc -l
 
 ubuntu:
     ARG arch
