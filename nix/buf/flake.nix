@@ -26,7 +26,8 @@
 
           installPhase = ''
             mkdir -p $out/bin
-            install -m 0755 buf $out/bin/buf
+            find .
+            install -m 0755 */bin/buf $out/bin/buf
           '';
 
           meta = with lib; {
