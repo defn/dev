@@ -146,7 +146,7 @@ user:
         && sudo chmod 755 /usr/local/bin/aws_signing_helper
 
     # nix
-    RUN sudo apt update && sudo apt install -y xz-utils && curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh
+    RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh
 
     RUN mkdir -p .kube .docker
 
@@ -200,7 +200,7 @@ root:
         && apt-get update \
         && apt-get upgrade -y \
         && apt-get install -y --no-install-recommends \
-            apt-transport-https software-properties-common curl git \
+            apt-transport-https software-properties-common curl git make xz-utils \
             tzdata locales iproute2 net-tools \
             sudo tini \
         && apt purge -y nano
