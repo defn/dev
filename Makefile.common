@@ -185,10 +185,6 @@ kubeconfig:
 	-kubectl config use-context k3d-control
 	k config get-contexts
 
-pending: # Generate pending version updates
-	$(MAKE) pending-gh
-	$(MAKE) pending-asdf
-
 pending-images:
 	(control get pods --all-namespaces -o json | gron | grep '\.image ='  | cut -d'"' -f2 | grep -v 169.2543.32.1:5000/ | grep -v /defn/dev: | grep -v /workspace:latest) | sed 's#@.*##' | grep -v ^sha256 | sort -u > .image-versions.txt
 
@@ -199,13 +195,6 @@ sync: # Sync all the artifacts
 
 sync-images: # Sync images to local cache
 	cat .image-versions.txt | bin/runmany 4 'skopeo copy docker://$$1 docker://127.0.0.1:5000/$${1#*/} --multi-arch all --dest-tls-verify=false'
-
-pending-asdf:
-	cat .tool-versions| awk '{print $$1}' | while read -r a; do asdf list-all "$$a" | sed "s#^#$$a #"; done | sort > .tool-versions-all
-
-pending-gh:
-	$(MAKE) github-login
-	for a in $$(grep curl Earthfile | grep github.com | perl -pe 's{.*github.com/}{}; s{(.*?/.*?)/.*}{$$1}' | sort); do gh release list --repo "$$a" --exclude-drafts | cat | perl -pe 's{[ \t]+}{ }g' | awk '{print $$1,$$(NF-1)}' | sort | sed "s#^#$$a #"; done > .tool-versions-gh
 
 cluster:
 	cd d/k3d && $(MAKE) build name=$(context) app=$(app)

@@ -67,20 +67,27 @@ user:
 
     ENTRYPOINT ["/usr/bin/tini", "--"]
 
-    #COPY --chown=ubuntu:ubuntu --dir (+cdktf/* --arch=${arch}) ./
-    #COPY --chown=ubuntu:ubuntu --dir (+golang/* --arch=${arch}) ./
+    # code-server
+    COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+coderServer/* --arch=${arch}) ./
 
-    # gcloud
-    #COPY --chown=ubuntu:ubuntu --dir (+gcloud/gcloud --arch=${arch}) /usr/local/
+    # nix
+    RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh && find /nix
 
-    # arch3: awscli
-    #IF [ ${arch} = "arm64" ]
-    #    COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch} --arch3=aarch64) /usr/local/
-    #ELSE
-    #    COPY --chown=ubuntu:ubuntu --dir (+awscli/aws-cli --arch=${arch} --arch3=x86_64) /usr/local/
-    #END
+    # weird configs
+    RUN mkdir -p .kube .docker
 
-    # arch
+    COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
+    COPY --chown=ubuntu:ubuntu --dir .vim .
+    COPY --chown=ubuntu:ubuntu .vimrc .
+    #RUN echo yes | vim +PlugInstall +qall
+
+    # defn/dev
+    COPY --dir --chown=ubuntu:ubuntu . .
+    RUN (git clean -nfd || true) \
+        && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
+
+meh:
+    # arch: amd64, arm64
     COPY --chown=ubuntu:ubuntu (+vcluster/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+gh/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+earthly/* --arch=${arch}) /usr/local/bin/
@@ -89,72 +96,27 @@ user:
     COPY --chown=ubuntu:ubuntu (+kuma/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+switch/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+k3d/* --arch=amd64) /usr/local/bin/
-    #COPY --chown=ubuntu:ubuntu (+gotools/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+caddy/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+tctl/* --arch=${arch}) /usr/local/bin/
     COPY --chown=ubuntu:ubuntu (+temporalite/* --arch=${arch}) /usr/local/bin/
-    #COPY --chown=ubuntu:ubuntu (+kubebuilder/* --arch=${arch}) /usr/local/bin/
-    #COPY --chown=ubuntu:ubuntu (+steampipe/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+kubebuilder/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+steampipe/* --arch=${arch}) /usr/local/bin/
 
     COPY --chown=ubuntu:ubuntu --dir (+kustomize/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+krew/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+helm/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+cloudflared/* --arch=${arch}) ./
-    #COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch}) ./
     COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch}) ./
 
-    # arch2: hof, tilt
-    IF [ ${arch} = "arm64" ]
-        COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
-        COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
-        #COPY --chown=ubuntu:ubuntu (+goreleaser/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
-        COPY --chown=ubuntu:ubuntu (+teller/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
-    ELSE
-        COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
-        COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
-        #COPY --chown=ubuntu:ubuntu (+goreleaser/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
-        COPY --chown=ubuntu:ubuntu (+teller/* --arch=${arch} --arch2=x86_64) /usr/local/bin/
-    END
+    # arch2: x86_64, arm64
+    COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+goreleaser/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+teller/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
 
-    # arch4
-    #IF [ ${arch} = "arm64" ]
-    #    COPY --chown=ubuntu:ubuntu (+protoc/* --arch=${arch} --arch4=aarch_64) /usr/local/bin/
-    #ELSE
-    #    COPY --chown=ubuntu:ubuntu (+protoc/* --arch=${arch} --arch4=x86_64) /usr/local/bin/
-    #END
-
-    COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+coderServer/* --arch=${arch}) ./
-    #COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+vscodeServer/* --arch=${arch}) /usr/local/bin/
-
-    # shell-operator
-    # COPY --dir (+shell-operator/sf.tar.gz --arch=${arch}) /
-    # RUN cd / && sudo tar xvfz sf.tar.gz && sudo rm -f sf.tar.gz
-
-    # rerun-process-wrapper
-    # COPY (+rerun-process-wrapper/*) /
-
-    # nix
-    RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh && find /nix
-
-    RUN mkdir -p .kube .docker
-
-    COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
-
-    COPY --chown=ubuntu:ubuntu --dir .vim .
-    COPY --chown=ubuntu:ubuntu .vimrc .
-    #RUN echo yes | vim +PlugInstall +qall
-
-    COPY --chown=ubuntu:ubuntu --dir bin .
-    COPY --chown=ubuntu:ubuntu .bash* .
-
-    COPY --chown=ubuntu:ubuntu +toolVersions/* .
-    RUN ~/bin/e asdf install
-
-    COPY --dir --chown=ubuntu:ubuntu . .
-    RUN (git clean -nfd || true) \
-        && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
-
-    RUN find /nix | wc -l
+    # arch4: x86_64, aarch_64
+    COPY --chown=ubuntu:ubuntu (+protoc/* --arch=${arch} --arch4=aarch_64) /usr/local/bin/
 
 ubuntu:
     ARG arch
@@ -282,8 +244,6 @@ tools:
         && apt-get update \
         && apt-get install -y --no-install-recommends \
             apt-transport-https software-properties-common tzdata locales git unzip xz-utils wget curl
-
-    RUN echo arch=${arch}
 
     SAVE IMAGE --cache-hint
 

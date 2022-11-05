@@ -33,9 +33,6 @@ function pca {
 	pc run --all "$@"
 }
 
-# asdf
-if [[ -z "${IN_NIX_SHELL:-}" ]]; then . $HOME/.asdf/asdf.sh; fi
-
 # python
 if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$HOME/.local/bin:$PATH"; fi
 export PYTHONPATH
