@@ -25,6 +25,8 @@
 
           sourceRoot = ".";
 
+          dontUnpack = true;
+
           installPhase = ''
             mkdir -p $out/bin
             install -m 0755 $src $out/bin/kubebuilder

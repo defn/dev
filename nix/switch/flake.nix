@@ -19,14 +19,17 @@
 
           src = pkgs.fetchurl {
             url = "https://github.com/danielfoehrKn/kubeswitch/releases/download/${version}/switcher_linux_amd64";
-            sha256 = "sha256-UpmI5zvgu+Yz9P057GO/x2RUIOsHRi7k+1Ng/BE7fhI=";
+            sha256 = "sha256-ivFUE23fVENRzvc586gIglVRWMnk7I5CQbloBgSr1Aw=";
+            executable = true;
           };
 
           sourceRoot = ".";
 
+          dontUnpack = true;
+
           installPhase = ''
             mkdir -p $out/bin
-            install -m 0755 switch $out/bin/switch
+            install -m 0755 $src $out/bin/switch
           '';
 
           meta = with lib; {

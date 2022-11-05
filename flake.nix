@@ -27,7 +27,6 @@
     tilt-pkg.url = "path:./nix/tilt";
     goreleaser-pkg.url = "path:./nix/goreleaser";
     teller-pkg.url = "path:./nix/teller";
-    protoc-pkg.url = "path:./nix/protoc";
     buf-pkg.url = "path:./nix/buf";
   };
 
@@ -60,7 +59,6 @@
     , tilt-pkg
     , goreleaser-pkg
     , teller-pkg
-    , protoc-pkg
     , buf-pkg
     }:
     flake-utils.lib.eachDefaultSystem (system:
@@ -91,7 +89,6 @@
       tilt = tilt-pkg.defaultPackage.${system};
       goreleaser = goreleaser-pkg.defaultPackage.${system};
       teller = teller-pkg.defaultPackage.${system};
-      protoc = protoc-pkg.defaultPackage.${system};
       buf = buf-pkg.defaultPackage.${system};
     in
     {
@@ -131,7 +128,6 @@
           tilt
           goreleaser
           teller
-          protoc
           buf
         ];
       };

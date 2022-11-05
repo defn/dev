@@ -26,7 +26,7 @@
 
           installPhase = ''
             mkdir -p $out/bin
-            install -m 0755 helm $out/bin/helm
+            install -m 0755 */helm $out/bin/helm
           '';
 
           meta = with lib; {
