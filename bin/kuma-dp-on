@@ -9,12 +9,14 @@ function main {
 
 	kumactl generate dataplane-token | sudo sudo -u kuma tee /tmp/dev-token >/dev/null
 
-	exec sudo -E -u kuma \
-		kuma-dp run \
-			--dataplane-token-file=/tmp/dev-token \
-			--dataplane-file=/tmp/dev-dp.yaml \
-			--dataplane-var hostname=$(~/bin/e wait-tailscale-domain | cut -d. -f1 ) \
-			--dataplane-var tsip=$(tailscale ip -4)
+	exec sudo -u kuma \
+		env \
+			PATH=$PATH \
+				kuma-dp run \
+					--dataplane-token-file=/tmp/dev-token \
+					--dataplane-file=/tmp/dev-dp.yaml \
+					--dataplane-var hostname=$(~/bin/e wait-tailscale-domain | cut -d. -f1 ) \
+					--dataplane-var tsip=$(tailscale ip -4)
 }
 
 main "$@"
