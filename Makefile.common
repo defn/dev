@@ -374,3 +374,12 @@ nix-gc:
 nix:
 	export LC_ALL=C.UTF-8 && if ! test -x /home/ubuntu/.nix-profile/bin/nix; then $(MAKE) nix-bootstrap; fi
 	export LC_ALL=C.UTF-8 && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh && $(MAKE) nix-install
+
+platform ?= linux/amd64
+arch ?= amd64
+
+docker-nix:
+	bash -c 'source .env && docker build --platform $(platform) --target nix --build-arg arch=$(arch) --build-arg TAILSCALE=$${TAILSCALE} .'
+
+docker-k3d:
+	bash -c 'source .env && docker build --platform $(platform) --target k3d --build-arg arch=$(arch) .'
