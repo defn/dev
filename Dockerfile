@@ -72,6 +72,8 @@ FROM defn-nix AS defn-caddy
 ARG arch
 ARG CADDY
 
+WORKDIR /mnt
+
 RUN curl -sSL https://github.com/caddyserver/caddy/releases/download/v${CADDY}/caddy_${CADDY}_linux_${arch}.tar.gz | tar xvfz -
 
 # coredns
@@ -79,6 +81,8 @@ FROM defn-nix AS defn-coredns
 
 ARG arch
 ARG COREDNS
+
+WORKDIR /mnt
 
 RUN curl -sSL https://github.com/coredns/coredns/releases/download/v${COREDNS}/coredns_${COREDNS}_linux_${arch}.tgz | tar xvfz -
 
@@ -88,7 +92,9 @@ FROM defn-nix AS defn-kuma
 ARG arch
 ARG KUMA
 
-RUN mkdir meh && cd meh && curl -sSL https://download.konghq.com/mesh-alpine/kuma-${KUMA}-ubuntu-${arch}.tar.gz | tar xvfz -
+WORKDIR /mnt
+
+RUN curl -sSL https://download.konghq.com/mesh-alpine/kuma-${KUMA}-ubuntu-${arch}.tar.gz | tar xvfz -
 
 # tailscale
 FROM defn-nix AS defn-tailscale
@@ -96,7 +102,19 @@ FROM defn-nix AS defn-tailscale
 ARG arch
 ARG TAILSCALE
 
+WORKDIR /mnt
+
 RUN wget -O- https://pkgs.tailscale.com/stable/tailscale_${TAILSCALE}_${arch}.tgz | tar xvfz -
+
+# cloudflared
+FROM defn-nix AS defn-cloudflared
+
+ARG arch
+ARG CLOUDFLARED
+
+WORKDIR /mnt
+
+RUN curl -sSL https://github.com/cloudflare/cloudflared/releases/download/${CLOUDFLARED}/cloudflared-linux-${arch} > cloudflared && chmod 755 cloudflared
 
 # code server
 FROM defn-nix AS defn-code-server
@@ -106,15 +124,6 @@ ARG CODESERVER
 
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local --version=${CODESERVER}
 RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
-
-# cloudflared
-FROM defn-nix AS defn-cloudflared
-
-ARG arch
-ARG CLOUDFLARED
-
-WORKDIR /mnt
-RUN curl -sSL https://github.com/cloudflare/cloudflared/releases/download/${CLOUDFLARED}/cloudflared-linux-${arch} > cloudflared && chmod 755 cloudflared
 
 # k3d
 FROM rancher/k3s:v1.23.13-k3s1 AS defn-k3d
@@ -141,25 +150,25 @@ FROM defn-nix AS defn-dev
 
 ARG arch
 
-# code-server
-#COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+coderServer/* --arch=${arch}) ./
-
 # coredns
-#COPY --chown=ubuntu:ubuntu (+coredns/* --arch=${arch}) /usr/local/bin/
+COPY --link --chown=ubuntu:ubuntu --from=defn-coredns /mnt/* /usr/local/bin/
 
 # kuma
-#COPY --chown=ubuntu:ubuntu (+kuma/* --arch=${arch}) /usr/local/bin/
+COPY --link --chown=ubuntu:ubuntu --from=defn-kuma /mnt/* /usr/local/bin/
 
 # caddy
-#COPY --chown=ubuntu:ubuntu (+caddy/* --arch=${arch}) /usr/local/bin/
+COPY --link --chown=ubuntu:ubuntu --from=defn-caddy /mnt/* /usr/local/bin/
 
 # cloudflared
-COPY --chown=ubuntu:ubuntu --from=defn-cloudflared /mnt/* /usr/local/bin/
+COPY --link --chown=ubuntu:ubuntu --from=defn-cloudflared /mnt/* /usr/local/bin/
 
 # weird configs
 RUN mkdir -p .kube .docker
 
-COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
+COPY --link --chown=ubuntu:ubuntu etc/config.json .docker/config.json
+
+# code-server
+#COPY --link --chown=ubuntu:ubuntu --from=defn-code-server ./
 
 # defn/dev
 COPY --chown=ubuntu:ubuntu . .
