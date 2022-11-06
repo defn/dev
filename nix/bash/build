@@ -5,8 +5,7 @@ set -exu
 n build
 mkdir -p nix/store
 time for a in $(nix-store -qR ./result); do rsync -ia $a nix/store/; done
-(echo '# syntax=docker/dockerfile:1'; echo FROM ubuntu; for a in nix/store/*/; do echo COPY --link $a /$a/; done; echo ENTRYPOINT [ '"/bin/bash"' ]) > Dockerfile
+(echo '# syntax=docker/dockerfile:1'; echo FROM alpine; for a in nix/store/*/; do echo COPY --link $a /$a/; done; echo ENTRYPOINT [ '"/bin/sh"' ]) > Dockerfile
 echo "ENV PATH $(for a in nix/store/*/; do echo -n "/$a/bin:"; done)/bin" >> Dockerfile
-pass hello
 time env DOCKER_BUILDKIT=1 docker build -t meh .
 docker run -ti --rm meh
