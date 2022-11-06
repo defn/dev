@@ -6,14 +6,19 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-QgcYbGp0X6NV2DSoo2XrM201WKRAqiOLnX+dQ4Ah+hc=",
-        "path": "/home/ubuntu/nix/argo",
-        "type": "path"
+        "dir": "argo",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/argo",
-        "type": "path"
+        "dir": "argo",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "argocd-pkg": {
@@ -22,14 +27,19 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-b9v2OhfxVTkAwn7lHLkhlqH9QIgMUz6Uy/iHy6Uyw/8=",
-        "path": "/home/ubuntu/nix/argocd",
-        "type": "path"
+        "dir": "argocd",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/argocd",
-        "type": "path"
+        "dir": "argocd",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "aws-signing-helper-pkg": {
@@ -38,14 +48,19 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-2ligutJB4nYrTibsoaeKbpsBvIbg81QcAokw9WLFZ90=",
-        "path": "/home/ubuntu/nix/aws-signing-helper",
-        "type": "path"
+        "dir": "aws-signing-helper",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/aws-signing-helper",
-        "type": "path"
+        "dir": "aws-signing-helper",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "caddy-pkg": {
@@ -54,14 +69,19 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-bWt8HXy9ZCtY1gf30sGTOzgsjZGpjDF6QU1WSwUfvns=",
-        "path": "/home/ubuntu/nix/caddy",
-        "type": "path"
+        "dir": "caddy",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/caddy",
-        "type": "path"
+        "dir": "caddy",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "cloudflared-pkg": {
@@ -70,14 +90,19 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-ESniapNrx2rL2UkIdlqTiUadcuX8DhDNnYyBCxPPuTk=",
-        "path": "/home/ubuntu/nix/cloudflared",
-        "type": "path"
+        "dir": "cloudflared",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/cloudflared",
-        "type": "path"
+        "dir": "cloudflared",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "cue-pkg": {
@@ -86,14 +111,19 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-JWGUJD2DBxblErR7A+6ecNk2Jhzk5HuiaA5pnTR4NtQ=",
-        "path": "/home/ubuntu/nix/cue",
-        "type": "path"
+        "dir": "cue",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/cue",
-        "type": "path"
+        "dir": "cue",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "earthly-pkg": {
@@ -102,14 +132,19 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-5Izm+MfL/vVTXue/T3DJzTUN6W3khcpkv9vUe/0HsN0=",
-        "path": "/home/ubuntu/nix/earthly",
-        "type": "path"
+        "dir": "earthly",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/earthly",
-        "type": "path"
+        "dir": "earthly",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "flake-utils": {
@@ -508,14 +543,19 @@
         "nixpkgs": "nixpkgs_8"
       },
       "locked": {
-        "lastModified": 1667702450,
-        "narHash": "sha256-3sRwViqr6HG7vE9kWzupqhWUL59DhMv6QhMRONGYH80=",
-        "path": "/home/ubuntu/nix/flyctl",
-        "type": "path"
+        "dir": "flyctl",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/flyctl",
-        "type": "path"
+        "dir": "flyctl",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "gh-pkg": {
@@ -524,14 +564,19 @@
         "nixpkgs": "nixpkgs_9"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-pfJniDw79qlm2c14ganj+T58WMN5E+XanXiQuBr9sik=",
-        "path": "/home/ubuntu/nix/gh",
-        "type": "path"
+        "dir": "gh",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/gh",
-        "type": "path"
+        "dir": "gh",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "goreleaser-pkg": {
@@ -540,14 +585,19 @@
         "nixpkgs": "nixpkgs_10"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-COuv9TUjTijtNwfCDinbHgJlj5d1ZnUTfcWNFYPkStk=",
-        "path": "/home/ubuntu/nix/goreleaser",
-        "type": "path"
+        "dir": "goreleaser",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/goreleaser",
-        "type": "path"
+        "dir": "goreleaser",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "helm-pkg": {
@@ -556,14 +606,19 @@
         "nixpkgs": "nixpkgs_11"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-IEjxdR7NiBmuaRtfGmhvm8uJ6K9Om37hFcsf3irT1/0=",
-        "path": "/home/ubuntu/nix/helm",
-        "type": "path"
+        "dir": "helm",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/helm",
-        "type": "path"
+        "dir": "helm",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "hof-pkg": {
@@ -572,14 +627,19 @@
         "nixpkgs": "nixpkgs_12"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-Ar8+jzSurSr/83Fa7Xx3sGxCaC1CpiCrP4Jgr24NALY=",
-        "path": "/home/ubuntu/nix/hof",
-        "type": "path"
+        "dir": "hof",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/hof",
-        "type": "path"
+        "dir": "hof",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "k3d-pkg": {
@@ -588,14 +648,19 @@
         "nixpkgs": "nixpkgs_13"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-irhsH48EWWIsGA0o2ivgz1JETm+8HbkXBkln08+Afyc=",
-        "path": "/home/ubuntu/nix/k3d",
-        "type": "path"
+        "dir": "k3d",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/k3d",
-        "type": "path"
+        "dir": "k3d",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "kubebuilder-pkg": {
@@ -604,14 +669,19 @@
         "nixpkgs": "nixpkgs_14"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-fqrcTR7NEI1+PUQxq9kJrrX7j2QasGKfOzNoINrwYBE=",
-        "path": "/home/ubuntu/nix/kubebuilder",
-        "type": "path"
+        "dir": "kubebuilder",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/kubebuilder",
-        "type": "path"
+        "dir": "kubebuilder",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "kubectl-pkg": {
@@ -620,14 +690,19 @@
         "nixpkgs": "nixpkgs_15"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-7/RDq1HO4jjSKnERXWGEsXsAwuUszu+olv39Svd/IyU=",
-        "path": "/home/ubuntu/nix/kubectl",
-        "type": "path"
+        "dir": "kubectl",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/kubectl",
-        "type": "path"
+        "dir": "kubectl",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "kuma-pkg": {
@@ -636,14 +711,19 @@
         "nixpkgs": "nixpkgs_16"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-aj58McCguvp18hocVXywexs2v7lDPF3S6Ic4lbLjzh4=",
-        "path": "/home/ubuntu/nix/kuma",
-        "type": "path"
+        "dir": "kuma",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/kuma",
-        "type": "path"
+        "dir": "kuma",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "kustomize-pkg": {
@@ -652,14 +732,19 @@
         "nixpkgs": "nixpkgs_17"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-IN7PeBAAA8rDhMPv5B+AnvUO5d98WFu40UgZEcyFs8Q=",
-        "path": "/home/ubuntu/nix/kustomize",
-        "type": "path"
+        "dir": "kustomize",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/kustomize",
-        "type": "path"
+        "dir": "kustomize",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "nixpkgs": {
@@ -1115,14 +1200,19 @@
         "nixpkgs": "nixpkgs_19"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-NAwn9+L2w8L1iJKZvvWq18+z3NvFJ8kgZ9+Fhp5mQ50=",
-        "path": "/home/ubuntu/nix/steampipe",
-        "type": "path"
+        "dir": "steampipe",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/steampipe",
-        "type": "path"
+        "dir": "steampipe",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "step-pkg": {
@@ -1131,14 +1221,19 @@
         "nixpkgs": "nixpkgs_20"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-yaXETQ6oX10dS6R6MT2/dFhIj8jN20qi7jK9quTtlZE=",
-        "path": "/home/ubuntu/nix/step",
-        "type": "path"
+        "dir": "step",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/step",
-        "type": "path"
+        "dir": "step",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "stern-pkg": {
@@ -1147,14 +1242,19 @@
         "nixpkgs": "nixpkgs_21"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-1uJSdo6F1IvchuWTIhp2S8vX+dTYTxPHgxKQG1ryRNc=",
-        "path": "/home/ubuntu/nix/stern",
-        "type": "path"
+        "dir": "stern",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/stern",
-        "type": "path"
+        "dir": "stern",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "switch-pkg": {
@@ -1163,14 +1263,19 @@
         "nixpkgs": "nixpkgs_22"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-5jrT9nH4UNre5TgtUBEwv9Gqs6D3dC2ZoUOvex0IA98=",
-        "path": "/home/ubuntu/nix/switch",
-        "type": "path"
+        "dir": "switch",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/switch",
-        "type": "path"
+        "dir": "switch",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "teller-pkg": {
@@ -1179,14 +1284,19 @@
         "nixpkgs": "nixpkgs_23"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-NxnZ7+EjY1hcw0Ps0SzTAXYvPNFzHm5szwIxcRDKXVs=",
-        "path": "/home/ubuntu/nix/teller",
-        "type": "path"
+        "dir": "teller",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/teller",
-        "type": "path"
+        "dir": "teller",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "temporalite-pkg": {
@@ -1195,14 +1305,19 @@
         "nixpkgs": "nixpkgs_24"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-ZXQyjg2EG0pp+UXlpmficjpErhZBJryo4sbTFFtaf0U=",
-        "path": "/home/ubuntu/nix/temporalite",
-        "type": "path"
+        "dir": "temporalite",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/temporalite",
-        "type": "path"
+        "dir": "temporalite",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "tilt-pkg": {
@@ -1211,14 +1326,19 @@
         "nixpkgs": "nixpkgs_25"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-Glpbxm/dfpvwdlVtL4IrWyZCjKIgccJ/B4a9hvjNqWU=",
-        "path": "/home/ubuntu/nix/tilt",
-        "type": "path"
+        "dir": "tilt",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/tilt",
-        "type": "path"
+        "dir": "tilt",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "vcluster-pkg": {
@@ -1227,14 +1347,19 @@
         "nixpkgs": "nixpkgs_26"
       },
       "locked": {
-        "lastModified": 1667701065,
-        "narHash": "sha256-LcrDAuhPJWzT02Ll9NgnKdNhJD1holnUN/BNk2k6rF4=",
-        "path": "/home/ubuntu/nix/vcluster",
-        "type": "path"
+        "dir": "vcluster",
+        "lastModified": 1667708592,
+        "narHash": "sha256-t+s11jH+ipKfcg4TchMdqyCAQHYi/Fpzo6m927ZjT0A=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "4bcf9c6f2bdafc606bce1362822b9f2e2391e901",
+        "type": "github"
       },
       "original": {
-        "path": "/home/ubuntu/nix/vcluster",
-        "type": "path"
+        "dir": "vcluster",
+        "owner": "defn",
+        "repo": "pkg",
+        "type": "github"
       }
     }
   },
