@@ -73,11 +73,14 @@ user:
     # code-server
     COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+coderServer/* --arch=${arch}) ./
 
-    # cloudflared
-    COPY --chown=ubuntu:ubuntu (+cloudflared/* --arch=${arch}) /usr/local/bin/
-
     # coredns
     COPY --chown=ubuntu:ubuntu (+coredns/* --arch=${arch}) /usr/local/bin/
+
+    # caddy
+    COPY --chown=ubuntu:ubuntu (+caddy/* --arch=${arch}) /usr/local/bin/
+
+    # cloudflared
+    COPY --chown=ubuntu:ubuntu (+cloudflared/* --arch=${arch}) /usr/local/bin/
 
     # weird configs
     RUN mkdir -p .kube .docker
@@ -236,6 +239,13 @@ cloudflared:
     ARG CLOUDFLARED
     FROM +tools --arch=${arch}
     RUN curl -sSL https://github.com/cloudflare/cloudflared/releases/download/${CLOUDFLARED}/cloudflared-linux-${arch} > cloudflared && chmod 755 cloudflared
+    SAVE ARTIFACT cloudflared
+
+caddy:
+    ARG arch
+    ARG CADDY
+    FROM +tools --arch=${arch}
+    RUN curl -sSL https://github.com/caddyserver/caddy/releases/download/v${CADDY}/caddy_${CADDY}_linux_${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT cloudflared
 
 coredns:
