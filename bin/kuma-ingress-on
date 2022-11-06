@@ -11,7 +11,7 @@ function main {
 
 	while ! kumactl generate zone-ingress-token --zone="$zone" | sudo sudo -u kuma tee /tmp/ingress-token >/dev/null; do sleep 1; done
 
-	exec sudo -u kuma \
+	exec sudo -E -u kuma \
 		kuma-dp run \
 			--dataplane-token-file=/tmp/ingress-token \
 			--dataplane-file=/tmp/ingress-dp.yaml \

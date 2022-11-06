@@ -9,7 +9,7 @@ function main {
 
 	cp ~/app/etc/kuma-global-ca.crt /tmp/
 
-	exec sudo -u kuma \
+	exec sudo -E -u kuma \
 		env \
 			KUMA_MODE=zone KUMA_MULTIZONE_ZONE_NAME="$zone" \
 			KUMA_MULTIZONE_ZONE_GLOBAL_ADDRESS=grpcs://${globalip}:5685 \

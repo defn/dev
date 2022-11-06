@@ -3,7 +3,7 @@
 function main {
  	set -efu
 
-	sudo kumactl uninstall transparent-proxy
+	sudo -E kumactl uninstall transparent-proxy
 }
 
 main "$@"
