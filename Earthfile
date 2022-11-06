@@ -3,10 +3,10 @@ VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-ar
 IMPORT github.com/defn/cloud/lib:master AS lib
 
 build-amd:
-    FROM --platform=linux/amd64 +user --arch=amd64 --arch2=amd64
+    FROM --platform=linux/amd64 +user --arch=amd64
 
 build-arm:
-    FROM --platform=linux/arm64 +user --arch=arm64 --arch2=aarch_64
+    FROM --platform=linux/arm64 +user --arch=arm64
 
 build-amd-k3d-base:
     FROM --platform=linux/amd64 +k3d-base --arch=amd64
@@ -62,7 +62,6 @@ image-arm-k3d-base:
 
 user:
     ARG arch
-    ARG arch2
 
     FROM +root --arch=${arch}
 
@@ -72,10 +71,10 @@ user:
     COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+coderServer/* --arch=${arch}) ./
 
     # cloudflared
-    COPY --chown=ubuntu:ubuntu --dir (+cloudflared/* --arch=${arch} --arch2=${arch2}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+cloudflared/* --arch=${arch}) /usr/local/bin/
 
     # coredns
-    COPY --chown=ubuntu:ubuntu --dir (+coredns/* --arch=${arch}) /usr/local/bin/
+    COPY --chown=ubuntu:ubuntu (+coredns/* --arch=${arch}) /usr/local/bin/
 
     # nix
     RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh && find /nix
@@ -92,38 +91,6 @@ user:
     COPY --dir --chown=ubuntu:ubuntu . .
     RUN (git clean -nfd || true) \
         && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
-
-meh:
-    # arch: amd64, arm64
-    COPY --chown=ubuntu:ubuntu (+vcluster/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+gh/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+earthly/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+cue/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+step/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+kuma/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+switch/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+k3d/* --arch=amd64) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+caddy/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+tctl/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+temporalite/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+kubebuilder/* --arch=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+steampipe/* --arch=${arch}) /usr/local/bin/
-
-    COPY --chown=ubuntu:ubuntu --dir (+kustomize/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir --symlink-no-follow (+krew/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+helm/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+cloudflared/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+argo/* --arch=${arch}) ./
-    COPY --chown=ubuntu:ubuntu --dir (+argocd/* --arch=${arch}) ./
-
-    # arch2: x86_64, arm64
-    COPY --chown=ubuntu:ubuntu (+hof/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+tilt/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+goreleaser/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
-    COPY --chown=ubuntu:ubuntu (+teller/* --arch=${arch} --arch2=${arch}) /usr/local/bin/
-
-    # arch4: x86_64, aarch_64
-    COPY --chown=ubuntu:ubuntu (+protoc/* --arch=${arch} --arch4=aarch_64) /usr/local/bin/
 
 ubuntu:
     ARG arch
@@ -269,10 +236,9 @@ oras:
 
 cloudflared:
     ARG arch
-    ARG arch2
     ARG CLOUDFLARED
     FROM +tools --arch=${arch}
-    RUN curl -sSL https://github.com/cloudflare/cloudflared/releases/download/${CLOUDFLARED}/cloudflared-linux-${arch2} > cloudflared && chmod 755 cloudflared
+    RUN curl -sSL https://github.com/cloudflare/cloudflared/releases/download/${CLOUDFLARED}/cloudflared-linux-${arch} > cloudflared && chmod 755 cloudflared
     SAVE ARTIFACT cloudflared
 
 coredns:
