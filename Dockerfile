@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # nix
-FROM ubuntu:22.04 AS nix
+FROM ubuntu:22.04 AS defn-nix
 
 ARG arch
 
@@ -63,39 +63,43 @@ ENV HOME=/home/ubuntu
 # nix
 RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh && chmod 0755 /nix && sudo rm -f /bin/man
 
-FROM nix as dev
-
-ARG arch
-
-# code-server
-#COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+coderServer/* --arch=${arch}) ./
-
-# coredns
-#COPY --chown=ubuntu:ubuntu (+coredns/* --arch=${arch}) /usr/local/bin/
-
-# kuma
-#COPY --chown=ubuntu:ubuntu (+kuma/* --arch=${arch}) /usr/local/bin/
+# mnt
+RUN sudo chown ubuntu:ubuntu /mnt
 
 # caddy
-#COPY --chown=ubuntu:ubuntu (+caddy/* --arch=${arch}) /usr/local/bin/
+FROM defn-nix AS defn-caddy
 
-# cloudflared
-#COPY --chown=ubuntu:ubuntu (+cloudflared/* --arch=${arch}) /usr/local/bin/
+ARG arch
+ARG CADDY
 
-# weird configs
-RUN mkdir -p .kube .docker
+RUN curl -sSL https://github.com/caddyserver/caddy/releases/download/v${CADDY}/caddy_${CADDY}_linux_${arch}.tar.gz | tar xvfz -
 
-COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
+# coredns
+FROM defn-nix AS defn-coredns
 
-# defn/dev
-COPY --chown=ubuntu:ubuntu . .
-RUN (git clean -nfd || true) \
-    && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
+ARG arch
+ARG COREDNS
 
-ENTRYPOINT ["/usr/bin/tini", "--"]
+RUN curl -sSL https://github.com/coredns/coredns/releases/download/v${COREDNS}/coredns_${COREDNS}_linux_${arch}.tgz | tar xvfz -
+
+# kuma
+FROM defn-nix AS defn-kuma
+
+ARG arch
+ARG KUMA
+
+RUN mkdir meh && cd meh && curl -sSL https://download.konghq.com/mesh-alpine/kuma-${KUMA}-ubuntu-${arch}.tar.gz | tar xvfz -
+
+# tailscale
+FROM defn-nix AS defn-tailscale
+
+ARG arch
+ARG TAILSCALE
+
+RUN wget -O- https://pkgs.tailscale.com/stable/tailscale_${TAILSCALE}_${arch}.tgz | tar xvfz -
 
 # code server
-FROM nix as codeServer
+FROM defn-nix AS defn-code-server
 
 ARG arch
 ARG CODESERVER
@@ -104,47 +108,16 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone
 RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
 
 # cloudflared
-FROM nix as cloudflared
+FROM defn-nix AS defn-cloudflared
 
 ARG arch
 ARG CLOUDFLARED
 
+WORKDIR /mnt
 RUN curl -sSL https://github.com/cloudflare/cloudflared/releases/download/${CLOUDFLARED}/cloudflared-linux-${arch} > cloudflared && chmod 755 cloudflared
 
-# caddy
-FROM nix as caddy
-
-ARG arch
-ARG CADDY
-
-RUN curl -sSL https://github.com/caddyserver/caddy/releases/download/v${CADDY}/caddy_${CADDY}_linux_${arch}.tar.gz | tar xvfz -
-
-# coredns
-FROM nix as coredns
-
-ARG arch
-ARG COREDNS
-
-RUN curl -sSL https://github.com/coredns/coredns/releases/download/v${COREDNS}/coredns_${COREDNS}_linux_${arch}.tgz | tar xvfz -
-
-# kuma
-FROM nix as kuma
-
-ARG arch
-ARG KUMA
-
-RUN mkdir meh && cd meh && curl -sSL https://download.konghq.com/mesh-alpine/kuma-${KUMA}-ubuntu-${arch}.tar.gz | tar xvfz -
-
-# tailscale
-FROM nix as tailscale
-
-ARG arch
-ARG TAILSCALE
-
-RUN wget -O- https://pkgs.tailscale.com/stable/tailscale_${TAILSCALE}_${arch}.tgz | tar xvfz -
-
 # k3d
-FROM rancher/k3s:v1.23.13-k3s1 as k3d
+FROM rancher/k3s:v1.23.13-k3s1 AS defn-k3d
 
 ARG arch
 
@@ -162,3 +135,35 @@ COPY etc/k3d-config.toml var/lib/rancher/k3s/agent/etc/containerd/config.toml
 COPY etc/k3s-wrapper.sh /bin/k3s
 
 COPY --from=tailscale /tailscale* /
+
+# dev
+FROM defn-nix AS defn-dev
+
+ARG arch
+
+# code-server
+#COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+coderServer/* --arch=${arch}) ./
+
+# coredns
+#COPY --chown=ubuntu:ubuntu (+coredns/* --arch=${arch}) /usr/local/bin/
+
+# kuma
+#COPY --chown=ubuntu:ubuntu (+kuma/* --arch=${arch}) /usr/local/bin/
+
+# caddy
+#COPY --chown=ubuntu:ubuntu (+caddy/* --arch=${arch}) /usr/local/bin/
+
+# cloudflared
+COPY --chown=ubuntu:ubuntu --from=defn-cloudflared /mnt/* /usr/local/bin/
+
+# weird configs
+RUN mkdir -p .kube .docker
+
+COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
+
+# defn/dev
+COPY --chown=ubuntu:ubuntu . .
+RUN (git clean -nfd || true) \
+    && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
+
+ENTRYPOINT ["/usr/bin/tini", "--"]

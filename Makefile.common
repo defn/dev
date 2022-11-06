@@ -379,8 +379,9 @@ platform ?= linux/amd64
 arch ?= amd64
 
 docker-%:
-	bash -c ' \
-		source .env && docker build --platform $(platform) --target $(second) \
+	pass hello
+	cd d && bash -c ' \
+		source ../.env && docker build --platform $(platform) --target defn-$(second) \
 		--build-arg arch=$(arch) \
 		--build-arg TAILSCALE=$${TAILSCALE} \
 		--build-arg CLOUDFLARED=$${CLOUDFLARED} \
