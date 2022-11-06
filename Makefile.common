@@ -380,8 +380,8 @@ arch ?= amd64
 
 docker-%:
 	pass hello
-	cd d && bash -c ' \
-		source ../.env && docker build --platform $(platform) --target defn-$(second) \
+	bash -c ' \
+		source .env && docker build --platform $(platform) --target defn-$(second) \
 		--build-arg arch=$(arch) \
 		--build-arg TAILSCALE=$${TAILSCALE} \
 		--build-arg CLOUDFLARED=$${CLOUDFLARED} \
