@@ -246,7 +246,7 @@ caddy:
     ARG CADDY
     FROM +tools --arch=${arch}
     RUN curl -sSL https://github.com/caddyserver/caddy/releases/download/v${CADDY}/caddy_${CADDY}_linux_${arch}.tar.gz | tar xvfz -
-    SAVE ARTIFACT cloudflared
+    SAVE ARTIFACT caddy
 
 coredns:
     ARG arch
