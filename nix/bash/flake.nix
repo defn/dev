@@ -34,7 +34,7 @@
 
             dontUnpack = true;
 
-            inherit cue;
+            propagatedBuildInputs = [ cue wget ];
 
             installPhase = ''
               install -m 0755 -D $src $out/bin/c
