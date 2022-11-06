@@ -354,6 +354,7 @@ debug-docker:
 	docker run -it --rm --privileged --pid=host alpine:edge nsenter -t 1 -m -u -n -i
 
 nix-bootstrap:
+	rm -rf /nix/var/nix/profiles/per-user/ubuntu/profile
 	sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile
 
 nix-install:
