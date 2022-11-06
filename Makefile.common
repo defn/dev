@@ -383,6 +383,7 @@ docker-%:
 		source .env && docker build --platform $(platform) --target $(second) \
 		--build-arg arch=$(arch) \
 		--build-arg TAILSCALE=$${TAILSCALE} \
+		--build-arg CLOUDFLARED=$${CLOUDFLARED} \
 		--build-arg KUMA=$${KUMA} \
 		--build-arg COREDNS=$${COREDNS} \
 		--build-arg CADDY=$${CADDY} \

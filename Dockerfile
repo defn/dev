@@ -103,6 +103,14 @@ ARG CODESERVER
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local --version=${CODESERVER}
 RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
 
+# cloudflared
+FROM nix as cloudflared
+
+ARG arch
+ARG CLOUDFLARED
+
+RUN curl -sSL https://github.com/cloudflare/cloudflared/releases/download/${CLOUDFLARED}/cloudflared-linux-${arch} > cloudflared && chmod 755 cloudflared
+
 # caddy
 FROM nix as caddy
 
