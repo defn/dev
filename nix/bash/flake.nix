@@ -18,7 +18,6 @@
           pkgs.mkShell rec {
             buildInputs = with pkgs; [
               cue
-              bash
               self.defaultPackage.${system}
             ];
           };
@@ -34,7 +33,7 @@
 
             dontUnpack = true;
 
-            propagatedBuildInputs = [ cue wget ];
+            buildInputs = [ cue wget ];
 
             installPhase = ''
               install -m 0755 -D $src $out/bin/c
