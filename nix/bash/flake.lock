@@ -1,12 +1,12 @@
 {
   "nodes": {
-    "caddyPkg": {
+    "cuePkg": {
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "dir": "caddy",
+        "dir": "cue",
         "lastModified": 1667708905,
         "narHash": "sha256-hksKLv/aATme3ES9xTHhC7V9AECSxRGQLxjwJFkjhTA=",
         "owner": "defn",
@@ -15,7 +15,7 @@
         "type": "github"
       },
       "original": {
-        "dir": "caddy",
+        "dir": "cue",
         "owner": "defn",
         "repo": "pkg",
         "type": "github"
@@ -84,7 +84,7 @@
     },
     "root": {
       "inputs": {
-        "caddyPkg": "caddyPkg",
+        "cuePkg": "cuePkg",
         "flake-utils": "flake-utils_2",
         "nixpkgs": "nixpkgs_2"
       }

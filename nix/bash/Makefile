@@ -1,3 +1,2 @@
 all:
-	pass hello
-	./build
+	./build.sh
