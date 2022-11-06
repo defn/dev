@@ -6,13 +6,13 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-QgcYbGp0X6NV2DSoo2XrM201WKRAqiOLnX+dQ4Ah+hc=",
-        "path": "./nix/argo",
+        "path": "/home/ubuntu/nix/argo",
         "type": "path"
       },
       "original": {
-        "path": "./nix/argo",
+        "path": "/home/ubuntu/nix/argo",
         "type": "path"
       }
     },
@@ -22,13 +22,13 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-b9v2OhfxVTkAwn7lHLkhlqH9QIgMUz6Uy/iHy6Uyw/8=",
-        "path": "./nix/argocd",
+        "path": "/home/ubuntu/nix/argocd",
         "type": "path"
       },
       "original": {
-        "path": "./nix/argocd",
+        "path": "/home/ubuntu/nix/argocd",
         "type": "path"
       }
     },
@@ -38,13 +38,13 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-2ligutJB4nYrTibsoaeKbpsBvIbg81QcAokw9WLFZ90=",
-        "path": "./nix/aws-signing-helper",
+        "path": "/home/ubuntu/nix/aws-signing-helper",
         "type": "path"
       },
       "original": {
-        "path": "./nix/aws-signing-helper",
+        "path": "/home/ubuntu/nix/aws-signing-helper",
         "type": "path"
       }
     },
@@ -54,13 +54,13 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-bWt8HXy9ZCtY1gf30sGTOzgsjZGpjDF6QU1WSwUfvns=",
-        "path": "./nix/caddy",
+        "path": "/home/ubuntu/nix/caddy",
         "type": "path"
       },
       "original": {
-        "path": "./nix/caddy",
+        "path": "/home/ubuntu/nix/caddy",
         "type": "path"
       }
     },
@@ -70,13 +70,13 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-ESniapNrx2rL2UkIdlqTiUadcuX8DhDNnYyBCxPPuTk=",
-        "path": "./nix/cloudflared",
+        "path": "/home/ubuntu/nix/cloudflared",
         "type": "path"
       },
       "original": {
-        "path": "./nix/cloudflared",
+        "path": "/home/ubuntu/nix/cloudflared",
         "type": "path"
       }
     },
@@ -86,13 +86,13 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-JWGUJD2DBxblErR7A+6ecNk2Jhzk5HuiaA5pnTR4NtQ=",
-        "path": "./nix/cue",
+        "path": "/home/ubuntu/nix/cue",
         "type": "path"
       },
       "original": {
-        "path": "./nix/cue",
+        "path": "/home/ubuntu/nix/cue",
         "type": "path"
       }
     },
@@ -102,13 +102,13 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-5Izm+MfL/vVTXue/T3DJzTUN6W3khcpkv9vUe/0HsN0=",
-        "path": "./nix/earthly",
+        "path": "/home/ubuntu/nix/earthly",
         "type": "path"
       },
       "original": {
-        "path": "./nix/earthly",
+        "path": "/home/ubuntu/nix/earthly",
         "type": "path"
       }
     },
@@ -508,13 +508,13 @@
         "nixpkgs": "nixpkgs_8"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-kwSd9uoiqvYHFC9JPnc2xtmVmKOR7c8Qg0jzA51D/2Q=",
-        "path": "./nix/flyctl",
+        "path": "/home/ubuntu/nix/flyctl",
         "type": "path"
       },
       "original": {
-        "path": "./nix/flyctl",
+        "path": "/home/ubuntu/nix/flyctl",
         "type": "path"
       }
     },
@@ -524,13 +524,13 @@
         "nixpkgs": "nixpkgs_9"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-pfJniDw79qlm2c14ganj+T58WMN5E+XanXiQuBr9sik=",
-        "path": "./nix/gh",
+        "path": "/home/ubuntu/nix/gh",
         "type": "path"
       },
       "original": {
-        "path": "./nix/gh",
+        "path": "/home/ubuntu/nix/gh",
         "type": "path"
       }
     },
@@ -540,13 +540,13 @@
         "nixpkgs": "nixpkgs_10"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-COuv9TUjTijtNwfCDinbHgJlj5d1ZnUTfcWNFYPkStk=",
-        "path": "./nix/goreleaser",
+        "path": "/home/ubuntu/nix/goreleaser",
         "type": "path"
       },
       "original": {
-        "path": "./nix/goreleaser",
+        "path": "/home/ubuntu/nix/goreleaser",
         "type": "path"
       }
     },
@@ -556,13 +556,13 @@
         "nixpkgs": "nixpkgs_11"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-IEjxdR7NiBmuaRtfGmhvm8uJ6K9Om37hFcsf3irT1/0=",
-        "path": "./nix/helm",
+        "path": "/home/ubuntu/nix/helm",
         "type": "path"
       },
       "original": {
-        "path": "./nix/helm",
+        "path": "/home/ubuntu/nix/helm",
         "type": "path"
       }
     },
@@ -572,13 +572,13 @@
         "nixpkgs": "nixpkgs_12"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-Ar8+jzSurSr/83Fa7Xx3sGxCaC1CpiCrP4Jgr24NALY=",
-        "path": "./nix/hof",
+        "path": "/home/ubuntu/nix/hof",
         "type": "path"
       },
       "original": {
-        "path": "./nix/hof",
+        "path": "/home/ubuntu/nix/hof",
         "type": "path"
       }
     },
@@ -588,13 +588,13 @@
         "nixpkgs": "nixpkgs_13"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-irhsH48EWWIsGA0o2ivgz1JETm+8HbkXBkln08+Afyc=",
-        "path": "./nix/k3d",
+        "path": "/home/ubuntu/nix/k3d",
         "type": "path"
       },
       "original": {
-        "path": "./nix/k3d",
+        "path": "/home/ubuntu/nix/k3d",
         "type": "path"
       }
     },
@@ -604,13 +604,13 @@
         "nixpkgs": "nixpkgs_14"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-fqrcTR7NEI1+PUQxq9kJrrX7j2QasGKfOzNoINrwYBE=",
-        "path": "./nix/kubebuilder",
+        "path": "/home/ubuntu/nix/kubebuilder",
         "type": "path"
       },
       "original": {
-        "path": "./nix/kubebuilder",
+        "path": "/home/ubuntu/nix/kubebuilder",
         "type": "path"
       }
     },
@@ -620,13 +620,13 @@
         "nixpkgs": "nixpkgs_15"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-7/RDq1HO4jjSKnERXWGEsXsAwuUszu+olv39Svd/IyU=",
-        "path": "./nix/kubectl",
+        "path": "/home/ubuntu/nix/kubectl",
         "type": "path"
       },
       "original": {
-        "path": "./nix/kubectl",
+        "path": "/home/ubuntu/nix/kubectl",
         "type": "path"
       }
     },
@@ -636,13 +636,13 @@
         "nixpkgs": "nixpkgs_16"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-aj58McCguvp18hocVXywexs2v7lDPF3S6Ic4lbLjzh4=",
-        "path": "./nix/kuma",
+        "path": "/home/ubuntu/nix/kuma",
         "type": "path"
       },
       "original": {
-        "path": "./nix/kuma",
+        "path": "/home/ubuntu/nix/kuma",
         "type": "path"
       }
     },
@@ -652,13 +652,13 @@
         "nixpkgs": "nixpkgs_17"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-IN7PeBAAA8rDhMPv5B+AnvUO5d98WFu40UgZEcyFs8Q=",
-        "path": "./nix/kustomize",
+        "path": "/home/ubuntu/nix/kustomize",
         "type": "path"
       },
       "original": {
-        "path": "./nix/kustomize",
+        "path": "/home/ubuntu/nix/kustomize",
         "type": "path"
       }
     },
@@ -1115,13 +1115,13 @@
         "nixpkgs": "nixpkgs_19"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-NAwn9+L2w8L1iJKZvvWq18+z3NvFJ8kgZ9+Fhp5mQ50=",
-        "path": "./nix/steampipe",
+        "path": "/home/ubuntu/nix/steampipe",
         "type": "path"
       },
       "original": {
-        "path": "./nix/steampipe",
+        "path": "/home/ubuntu/nix/steampipe",
         "type": "path"
       }
     },
@@ -1131,13 +1131,13 @@
         "nixpkgs": "nixpkgs_20"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-yaXETQ6oX10dS6R6MT2/dFhIj8jN20qi7jK9quTtlZE=",
-        "path": "./nix/step",
+        "path": "/home/ubuntu/nix/step",
         "type": "path"
       },
       "original": {
-        "path": "./nix/step",
+        "path": "/home/ubuntu/nix/step",
         "type": "path"
       }
     },
@@ -1147,13 +1147,13 @@
         "nixpkgs": "nixpkgs_21"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-1uJSdo6F1IvchuWTIhp2S8vX+dTYTxPHgxKQG1ryRNc=",
-        "path": "./nix/stern",
+        "path": "/home/ubuntu/nix/stern",
         "type": "path"
       },
       "original": {
-        "path": "./nix/stern",
+        "path": "/home/ubuntu/nix/stern",
         "type": "path"
       }
     },
@@ -1163,13 +1163,13 @@
         "nixpkgs": "nixpkgs_22"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-5jrT9nH4UNre5TgtUBEwv9Gqs6D3dC2ZoUOvex0IA98=",
-        "path": "./nix/switch",
+        "path": "/home/ubuntu/nix/switch",
         "type": "path"
       },
       "original": {
-        "path": "./nix/switch",
+        "path": "/home/ubuntu/nix/switch",
         "type": "path"
       }
     },
@@ -1179,13 +1179,13 @@
         "nixpkgs": "nixpkgs_23"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-NxnZ7+EjY1hcw0Ps0SzTAXYvPNFzHm5szwIxcRDKXVs=",
-        "path": "./nix/teller",
+        "path": "/home/ubuntu/nix/teller",
         "type": "path"
       },
       "original": {
-        "path": "./nix/teller",
+        "path": "/home/ubuntu/nix/teller",
         "type": "path"
       }
     },
@@ -1195,13 +1195,13 @@
         "nixpkgs": "nixpkgs_24"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-ZXQyjg2EG0pp+UXlpmficjpErhZBJryo4sbTFFtaf0U=",
-        "path": "./nix/temporalite",
+        "path": "/home/ubuntu/nix/temporalite",
         "type": "path"
       },
       "original": {
-        "path": "./nix/temporalite",
+        "path": "/home/ubuntu/nix/temporalite",
         "type": "path"
       }
     },
@@ -1211,13 +1211,13 @@
         "nixpkgs": "nixpkgs_25"
       },
       "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-Xh5jPMVjh8xQ61IHgpSbhLvs33/tsbQWQrHglWNInzc=",
-        "path": "./nix/tilt",
+        "lastModified": 1667697937,
+        "narHash": "sha256-Glpbxm/dfpvwdlVtL4IrWyZCjKIgccJ/B4a9hvjNqWU=",
+        "path": "/home/ubuntu/nix/tilt",
         "type": "path"
       },
       "original": {
-        "path": "./nix/tilt",
+        "path": "/home/ubuntu/nix/tilt",
         "type": "path"
       }
     },
@@ -1227,13 +1227,13 @@
         "nixpkgs": "nixpkgs_26"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1587038400,
         "narHash": "sha256-LcrDAuhPJWzT02Ll9NgnKdNhJD1holnUN/BNk2k6rF4=",
-        "path": "./nix/vcluster",
+        "path": "/home/ubuntu/nix/vcluster",
         "type": "path"
       },
       "original": {
-        "path": "./nix/vcluster",
+        "path": "/home/ubuntu/nix/vcluster",
         "type": "path"
       }
     }
