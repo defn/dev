@@ -8,6 +8,9 @@ image:
 	pass hello
 	../build.sh
 
+run:
+	n run
+
 %:
 	go build -o dist/cmd.$@/bin cmd/$@/$@.go
 	git add --intent-to-add dist/cmd.$@/bin
