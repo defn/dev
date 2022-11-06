@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+exec n run github:defn/pkg?dir=$@
