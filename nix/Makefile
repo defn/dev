@@ -1,5 +1,15 @@
+build:
+	n build
+
 develop:
 	n develop
 
 image:
-	./build.sh
+	pass hello
+	../build.sh
+
+%:
+	go build -o dist/cmd.$@/bin cmd/$@/$@.go
+	git add --intent-to-add dist/cmd.$@/bin
+	git update-index --assume-unchanged dist/cmd.$@/bin
+	$(MAKE) image
