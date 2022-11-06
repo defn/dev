@@ -99,9 +99,7 @@ FROM nix as codeServer
 
 ARG arch
 ARG CODESERVER
-ARG CODESERVER_BUMP
 
-RUN echo ${CODESERVER_BUMP}
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local --version=${CODESERVER}
 RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
 

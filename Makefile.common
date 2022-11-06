@@ -378,11 +378,13 @@ nix:
 platform ?= linux/amd64
 arch ?= amd64
 
-docker-nix:
-	bash -c 'source .env && docker build --platform $(platform) --target $(second) --build-arg arch=$(arch) --build-arg TAILSCALE=$${TAILSCALE} .'
-
-docker-tailscale:
-	bash -c 'source .env && docker build --platform $(platform) --target $(second) --build-arg arch=$(arch) --build-arg TAILSCALE=$${TAILSCALE} .'
-
-docker-k3d:
-	bash -c 'source .env && docker build --platform $(platform) --target $(second) --build-arg arch=$(arch) --build-arg TAILSCALE=$${TAILSCALE} .'
+docker-%:
+	bash -c ' \
+		source .env && docker build --platform $(platform) --target $(second) \
+		--build-arg arch=$(arch) \
+		--build-arg TAILSCALE=$${TAILSCALE} \
+		--build-arg KUMA=$${KUMA} \
+		--build-arg COREDNS=$${COREDNS} \
+		--build-arg CADDY=$${CADDY} \
+		--build-arg CODESERVER=$${CODESERVER} \
+		.'
