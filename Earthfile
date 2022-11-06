@@ -272,7 +272,7 @@ cloudflared:
     ARG arch2
     ARG CLOUDFLARED
     FROM +tools --arch=${arch}
-    RUN curl -sSL https://github.com/cloudflare/cloudflared/releases/download/${CLOUDFLARED}/cloudflared-linux-${arch2}"
+    RUN curl -sSL https://github.com/cloudflare/cloudflared/releases/download/${CLOUDFLARED}/cloudflared-linux-${arch2} > cloudflared && chmod 755 cloudflared
     SAVE ARTIFACT cloudflared
 
 coredns:
