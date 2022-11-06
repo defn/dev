@@ -76,6 +76,9 @@ user:
     # coredns
     COPY --chown=ubuntu:ubuntu (+coredns/* --arch=${arch}) /usr/local/bin/
 
+    # kuma
+    COPY --chown=ubuntu:ubuntu (+kuma/* --arch=${arch}) /usr/local/bin/
+
     # caddy
     COPY --chown=ubuntu:ubuntu (+caddy/* --arch=${arch}) /usr/local/bin/
 
@@ -254,6 +257,13 @@ coredns:
     FROM +tools --arch=${arch}
     RUN curl -sSL https://github.com/coredns/coredns/releases/download/v${COREDNS}/coredns_${COREDNS}_linux_${arch}.tgz | tar xvfz -
     SAVE ARTIFACT coredns
+
+kuma:
+    ARG arch
+    ARG KUMA
+    FROM +tools --arch=${arch}
+    RUN mkdir meh && cd meh && curl -sSL https://download.konghq.com/mesh-alpine/kuma-${KUMA}-ubuntu-${arch}.tar.gz | tar xvfz -
+    SAVE ARTIFACT meh/*/bin/*
 
 nerdctl:
     ARG arch
