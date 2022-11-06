@@ -67,6 +67,9 @@ user:
 
     ENTRYPOINT ["/usr/bin/tini", "--"]
 
+    # nix
+    RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh && find /nix
+
     # code-server
     COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+coderServer/* --arch=${arch}) ./
 
@@ -76,16 +79,10 @@ user:
     # coredns
     COPY --chown=ubuntu:ubuntu (+coredns/* --arch=${arch}) /usr/local/bin/
 
-    # nix
-    RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh && find /nix
-
     # weird configs
     RUN mkdir -p .kube .docker
 
     COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
-    COPY --chown=ubuntu:ubuntu --dir .vim .
-    COPY --chown=ubuntu:ubuntu .vimrc .
-    #RUN echo yes | vim +PlugInstall +qall
 
     # defn/dev
     COPY --dir --chown=ubuntu:ubuntu . .
