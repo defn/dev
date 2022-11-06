@@ -2,8 +2,11 @@
 
 set -exu
 
-time for a in $(nix-store -qR /nix/store/y0g1mvsr6vygr61f9znljik9kl0x0inc-bash-5.1-p16/bin/bash $(type -P find)); do rsync -ia $a nix/store/; done
+n build
+mkdir -p nix/store
+time for a in $(nix-store -qR ./result); do rsync -ia $a nix/store/; done
 (echo '# syntax=docker/dockerfile:1'; echo FROM ubuntu; for a in nix/store/*/; do echo COPY --link $a /$a/; done; echo ENTRYPOINT [ '"/bin/bash"' ]) > Dockerfile
 echo "ENV PATH $(for a in nix/store/*/; do echo -n "/$a/bin:"; done)/bin" >> Dockerfile
+pass hello
 time env DOCKER_BUILDKIT=1 docker build -t meh .
-docker run -ti --rm --entrypoint true meh
+docker run -ti --rm meh
