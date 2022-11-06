@@ -3,10 +3,10 @@ VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-ar
 IMPORT github.com/defn/cloud/lib:master AS lib
 
 build-amd:
-    FROM --platform=linux/amd64 +user --arch=amd64
+    FROM --platform=linux/amd64 +user --arch=amd64 --arch2=amd64
 
 build-arm:
-    FROM --platform=linux/arm64 +user --arch=arm64
+    FROM --platform=linux/arm64 +user --arch=arm64 --arch2=aarch_64
 
 build-amd-k3d-base:
     FROM --platform=linux/amd64 +k3d-base --arch=amd64
@@ -62,6 +62,7 @@ image-arm-k3d-base:
 
 user:
     ARG arch
+    ARG arch2
 
     FROM +root --arch=${arch}
 
@@ -69,6 +70,12 @@ user:
 
     # code-server
     COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+coderServer/* --arch=${arch}) ./
+
+    # cloudflared
+    COPY --chown=ubuntu:ubuntu --dir (+cloudflared/* --arch=${arch} --arch2=${arch2}) /usr/local/bin/
+
+    # coredns
+    COPY --chown=ubuntu:ubuntu --dir (+coredns/* --arch=${arch}) /usr/local/bin/
 
     # nix
     RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh && find /nix
@@ -259,6 +266,14 @@ oras:
     FROM +tools --arch=${arch}
     RUN curl -sSL https://github.com/oras-project/oras/releases/download/v${ORAS}/oras_${ORAS}_linux_${arch}.tar.gz | tar xvfz -
     SAVE ARTIFACT oras
+
+cloudflared:
+    ARG arch
+    ARG arch2
+    ARG CLOUDFLARED
+    FROM +tools --arch=${arch}
+    RUN curl -sSL https://github.com/cloudflare/cloudflared/releases/download/${CLOUDFLARED}/cloudflared-linux-${arch2}"
+    SAVE ARTIFACT cloudflared
 
 coredns:
     ARG arch
