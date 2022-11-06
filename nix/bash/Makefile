@@ -1,2 +1,1 @@
-all:
-	./build.sh
+../Makefile
