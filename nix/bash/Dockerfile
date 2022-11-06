@@ -1,5 +1,6 @@
 # syntax=docker/dockerfile:1
-FROM ubuntu
+FROM alpine
+RUN apk add bash
 COPY --link nix/store/1s3ifgirxw3x89b64a6sg6pxydgz8cr1-findutils-4.9.0/ /nix/store/1s3ifgirxw3x89b64a6sg6pxydgz8cr1-findutils-4.9.0//
 COPY --link nix/store/2hmdbfccrmh7a390k8ypqgivp4rjcnc4-libidn2-2.3.2/ /nix/store/2hmdbfccrmh7a390k8ypqgivp4rjcnc4-libidn2-2.3.2//
 COPY --link nix/store/5a3k6k06abh6wzpgll6hadvsnxd9gc5z-attr-2.5.1/ /nix/store/5a3k6k06abh6wzpgll6hadvsnxd9gc5z-attr-2.5.1//
