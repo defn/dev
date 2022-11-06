@@ -18,7 +18,7 @@ RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/ud
     && apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
-        apt-transport-https software-properties-common curl git make xz-utils \
+        apt-transport-https software-properties-common curl git make xz-utils wget \
         tzdata locales \
         sudo tini \
     && apt purge -y nano
@@ -155,4 +155,4 @@ COPY etc/k3d-config.toml var/lib/rancher/k3s/agent/etc/containerd/config.toml
 
 COPY etc/k3s-wrapper.sh /bin/k3s
 
-#COPY (+tailscale-binaries/* --arch=${arch}) /
+COPY --from=tailscale /tailscale* /
