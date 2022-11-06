@@ -14,12 +14,12 @@
           name = "${slug}-${version}";
 
           slug = "flyctl";
-          version = "0.0.427";
+          version = "0.0.429";
           arch2 = "x86_64"; # arm64
 
           src = pkgs.fetchurl {
             url = "https://github.com/superfly/flyctl/releases/download/v${version}/flyctl_${version}_Linux_${arch2}.tar.gz";
-            sha256 = "sha256-UpmI5zvgu+Yz9P057GO/x2RUIOsHRi7k+1Ng/BE7fhI=";
+            sha256 = "sha256-RaYJVcy/iGidcwZEjHCQF1wqdkr1DFDJJI4XgR6kdik=";
           };
 
           sourceRoot = ".";
