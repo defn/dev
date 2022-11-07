@@ -111,6 +111,18 @@ coredns:
     RUN curl -sSL https://github.com/coredns/coredns/releases/download/v${COREDNS}/coredns_${COREDNS}_linux_${arch}.tgz | tar xvfz -
     SAVE ARTIFACT coredns
 
+coderServer:
+    ARG arch
+    ARG CODESERVER
+    ARG CODESERVER_BUMP
+
+    FROM +root --arch=${arch}
+
+    RUN echo ${CODESERVER_BUMP}
+    RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local --version=${CODESERVER}
+    RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
+    SAVE ARTIFACT .local
+
 k3d-base:
     ARG K3S
 
@@ -131,8 +143,8 @@ k3d-base:
 
     COPY etc/k3s-wrapper.sh /bin/k3s
 
-    COPY (+root/bin/tailscale --arch=${arch}) /
-    COPY (+root/usr/sbin/tailscaled --arch=${arch}) /
+    COPY (+root/tailscale --arch=${arch}) /
+    COPY (+root/tailscaled --arch=${arch}) /
 
 ubuntu:
     ARG arch
@@ -207,14 +219,4 @@ root:
 
     ENV HOME=/home/ubuntu
 
-coderServer:
-    ARG arch
-    ARG CODESERVER
-    ARG CODESERVER_BUMP
-
-    FROM +root --arch=${arch}
-
-    RUN echo ${CODESERVER_BUMP}
-    RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local --version=${CODESERVER}
-    RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
-    SAVE ARTIFACT .local
+    SAVE ARTIFACT /bin/tailscale /usr/sbin/tailscaled
