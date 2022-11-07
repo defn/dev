@@ -132,6 +132,6 @@ jobs:
           make docker-k3d \
           	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d \
           	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d \
-          	platform=linux/amd64 \
-          	arch=amd64
+          	platform=linux/arm/v7 \
+          	arch=arm64
           docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d
