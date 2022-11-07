@@ -38,7 +38,7 @@ jobs: {
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-dev \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-dev \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-\(n) \\
-					--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-\(n)' \\
+					--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-\(n) \\
 					+build-\(n) --image ghcr.io/${GITHUB_REPOSITORY}:${TAG}-\(n)
 				"""
 			}]

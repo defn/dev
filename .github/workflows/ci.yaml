@@ -157,7 +157,7 @@ jobs:
           	--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-dev \
           	--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-dev \
           	--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-dev \
-          	--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-dev' \
+          	--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-dev \
           	+build-dev --image ghcr.io/${GITHUB_REPOSITORY}:${TAG}-dev
   publish_k3d:
     runs-on: ubuntu-latest
@@ -209,7 +209,7 @@ jobs:
           	--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-dev \
           	--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-dev \
           	--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-k3d \
-          	--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-k3d' \
+          	--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-k3d \
           	+build-k3d --image ghcr.io/${GITHUB_REPOSITORY}:${TAG}-k3d
   publish_caddy:
     runs-on: ubuntu-latest
@@ -261,5 +261,5 @@ jobs:
           	--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-dev \
           	--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-dev \
           	--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-caddy \
-          	--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-caddy' \
+          	--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-caddy \
           	+build-caddy --image ghcr.io/${GITHUB_REPOSITORY}:${TAG}-caddy
