@@ -7,10 +7,76 @@ name: CI
       - v**
   pull_request: {}
 jobs:
+  build_nix_amd:
+    runs-on: ubuntu-latest
+    env:
+      FORCE_COLOR: 1
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Login to Packages Container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: not-used
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set up QEMU
+        id: qemu
+        uses: docker/setup-qemu-action@v1
+        with:
+          image: tonistiigi/binfmt:latest
+          platforms: all
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Build nix amd target
+        run: |-
+          make docker-nix \
+          	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-nix \
+          	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-nix \
+          	platform=linux/amd64 \
+          	arch=amd64
+          docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-nix
+  build_nix_arm:
+    runs-on: ubuntu-latest
+    env:
+      FORCE_COLOR: 1
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Login to Packages Container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: not-used
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set up QEMU
+        id: qemu
+        uses: docker/setup-qemu-action@v1
+        with:
+          image: tonistiigi/binfmt:latest
+          platforms: all
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Build nix arm target
+        run: |-
+          make docker-nix \
+          	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix \
+          	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix \
+          	platform=linux/arm/v7 \
+          	arch=arm64
+          docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix
   build_amd:
     runs-on: ubuntu-latest
     env:
       FORCE_COLOR: 1
+    needs:
+      - build_nix_amd
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -34,6 +100,7 @@ jobs:
       - name: Build amd target
         run: |-
           make docker-dev \
+          	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-nix \
           	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd \
           	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd \
           	platform=linux/amd64 \
@@ -43,6 +110,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FORCE_COLOR: 1
+    needs:
+      - build_nix_arm
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -66,6 +135,7 @@ jobs:
       - name: Build arm target
         run: |-
           make docker-dev \
+          	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix \
           	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm \
           	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm \
           	platform=linux/arm/v7 \
@@ -75,6 +145,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FORCE_COLOR: 1
+    needs:
+      - build_nix_amd
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -98,6 +170,7 @@ jobs:
       - name: Build amd k3d-base target
         run: |-
           make docker-k3d \
+          	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-nix \
           	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-k3d \
           	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-k3d \
           	platform=linux/amd64 \
@@ -107,6 +180,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FORCE_COLOR: 1
+    needs:
+      - build_nix_arm
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -130,6 +205,7 @@ jobs:
       - name: Build arm k3d-base target
         run: |-
           make docker-k3d \
+          	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix \
           	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d \
           	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d \
           	platform=linux/arm/v7 \
