@@ -40,21 +40,8 @@ build-arm-k3d:
 
 build-caddy:
     ARG image
-    BUILD --platform=linux/amd64 +nix-caddy --image=${image} --arch=amd64
-    BUILD --platform=linux/arm64 +nix-caddy --image=${image} --arch=arm64
-
-nix-caddy:
-    ARG image
-    ARG arch
-
-    FROM +nix --arch=${arch}
-
-    RUN . .nix-profile/etc/profile.d/nix.sh && nix --extra-experimental-features nix-command --extra-experimental-features flakes \
-        profile install github:defn/pkg?dir=caddy
-
-    IF [ "$image" != "" ]
-        SAVE IMAGE --push ${image}
-    END
+    BUILD --platform=linux/amd64 +nix-single --image=${image} --arch=amd64 --dir=caddy
+    BUILD --platform=linux/arm64 +nix-single --image=${image} --arch=arm64 --dir=caddy
 
 dev:
     ARG arch
@@ -224,3 +211,17 @@ nix:
 
     # nix
     RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh && chmod 0755 /nix && sudo rm -f /bin/man
+
+nix-single
+    ARG image
+    ARG arch
+    ARG dir
+
+    FROM +nix --arch=${arch}
+
+    RUN . .nix-profile/etc/profile.d/nix.sh && nix --extra-experimental-features nix-command --extra-experimental-features flakes \
+        profile install github:defn/pkg?dir=${dir}
+
+    IF [ "$image" != "" ]
+        SAVE IMAGE --push ${image}
+    END
