@@ -30,27 +30,6 @@ build-vault:
     BUILD --platform=linux/amd64 +nix-pkg --image=${image} --arch=amd64 --pkg=vault
     BUILD --platform=linux/arm64 +nix-pkg --image=${image} --arch=arm64 --pkg=vault
 
-cloudflared:
-    ARG arch
-    ARG CLOUDFLARED
-    FROM +root --arch=${arch}
-    RUN curl -sSL https://github.com/cloudflare/cloudflared/releases/download/${CLOUDFLARED}/cloudflared-linux-${arch} > cloudflared && chmod 755 cloudflared
-    SAVE ARTIFACT cloudflared
-
-caddy:
-    ARG arch
-    ARG CADDY
-    FROM +root --arch=${arch}
-    RUN curl -sSL https://github.com/caddyserver/caddy/releases/download/v${CADDY}/caddy_${CADDY}_linux_${arch}.tar.gz | tar xvfz -
-    SAVE ARTIFACT caddy
-
-coredns:
-    ARG arch
-    ARG COREDNS
-    FROM +root --arch=${arch}
-    RUN curl -sSL https://github.com/coredns/coredns/releases/download/v${COREDNS}/coredns_${COREDNS}_linux_${arch}.tgz | tar xvfz -
-    SAVE ARTIFACT coredns
-
 coder-server:
     ARG arch
     ARG CODESERVER
@@ -228,19 +207,16 @@ dev:
     COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+coder-server/* --arch=${arch}) ./
 
     # coredns
-    COPY --chown=ubuntu:ubuntu (+coredns/* --arch=${arch}) /usr/local/bin/
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
                 profile install github:defn/pkg?dir=coredns
 
     # caddy
-    COPY --chown=ubuntu:ubuntu (+caddy/* --arch=${arch}) /usr/local/bin/
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
                 profile install github:defn/pkg?dir=caddy
 
     # cloudflared
-    COPY --chown=ubuntu:ubuntu (+cloudflared/* --arch=${arch}) /usr/local/bin/
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
                 profile install github:defn/pkg?dir=cloudflared
