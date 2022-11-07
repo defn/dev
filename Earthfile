@@ -218,7 +218,7 @@ nix:
     
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
-                profile install "nixpkgs#bash"
+                profile install github:defn/pkg?dir=cue
 
 nix-single:
     ARG image
