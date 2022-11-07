@@ -150,24 +150,24 @@ FROM defn-nix AS defn-dev
 ARG arch
 
 # coredns
-COPY --link --chown=ubuntu:ubuntu --from=defn-coredns /mnt/* /usr/local/bin/
+COPY --chown=ubuntu:ubuntu --from=defn-coredns /mnt/* /usr/local/bin/
 
 # kuma
-COPY --link --chown=ubuntu:ubuntu --from=defn-kuma /mnt/* /usr/local/bin/
+COPY --chown=ubuntu:ubuntu --from=defn-kuma /mnt/* /usr/local/bin/
 
 # caddy
-COPY --link --chown=ubuntu:ubuntu --from=defn-caddy /mnt/* /usr/local/bin/
+COPY --chown=ubuntu:ubuntu --from=defn-caddy /mnt/* /usr/local/bin/
 
 # cloudflared
-COPY --link --chown=ubuntu:ubuntu --from=defn-cloudflared /mnt/* /usr/local/bin/
+COPY --chown=ubuntu:ubuntu --from=defn-cloudflared /mnt/* /usr/local/bin/
 
 # weird configs
 RUN mkdir -p .kube .docker
 
-COPY --link --chown=ubuntu:ubuntu etc/config.json .docker/config.json
+COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
 
 # code-server
-COPY --link --chown=ubuntu:ubuntu --from=defn-code-server /home/ubuntu/.local ./.local/
+COPY --chown=ubuntu:ubuntu --from=defn-code-server /home/ubuntu/.local ./.local/
 RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
 
 # defn/dev
