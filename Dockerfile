@@ -142,33 +142,33 @@ COPY etc/k3d-config.toml var/lib/rancher/k3s/agent/etc/containerd/config.toml
 
 COPY etc/k3s-wrapper.sh /bin/k3s
 
-COPY --from=defn-tailscale /mnt/* /
+COPY --link --from=defn-tailscale /mnt/* /
 
 # dev
 FROM defn-nix AS defn-dev
 
 ARG arch
 
-# coredns
-COPY --chown=ubuntu:ubuntu --from=defn-coredns /mnt/* /usr/local/bin/
-
-# kuma
-COPY --chown=ubuntu:ubuntu --from=defn-kuma /mnt/* /usr/local/bin/
-
-# caddy
-COPY --chown=ubuntu:ubuntu --from=defn-caddy /mnt/* /usr/local/bin/
-
-# cloudflared
-COPY --chown=ubuntu:ubuntu --from=defn-cloudflared /mnt/* /usr/local/bin/
-
-# weird configs
 RUN mkdir -p .kube .docker
 
-COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
+# coredns
+COPY --link --chown=ubuntu:ubuntu --from=defn-coredns /mnt/* /usr/local/bin/
+
+# kuma
+COPY --link --chown=ubuntu:ubuntu --from=defn-kuma /mnt/* /usr/local/bin/
+
+# caddy
+COPY --link --chown=ubuntu:ubuntu --from=defn-caddy /mnt/* /usr/local/bin/
+
+# cloudflared
+COPY --link --chown=ubuntu:ubuntu --from=defn-cloudflared /mnt/* /usr/local/bin/
 
 # code-server
-COPY --chown=ubuntu:ubuntu --from=defn-code-server /home/ubuntu/.local ./.local/
+COPY --link --chown=ubuntu:ubuntu --from=defn-code-server /home/ubuntu/.local ./.local/
+
+# weird configs
 RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
+COPY --link --chown=ubuntu:ubuntu etc/config.json .docker/config.json
 
 # defn/dev
 COPY --chown=ubuntu:ubuntu . .
