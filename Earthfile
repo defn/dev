@@ -219,8 +219,11 @@ nix-single
 
     FROM +nix --arch=${arch}
 
-    RUN export USER=ubuntu LOCAL_ARCHIVE=/usr/lib/locale/locale-archive LC_ALL=C.UTF-8 \
-        . ~/.nix-profile/etc/profile.d/nix.sh \
+    ENV USER=ubuntu
+    ENV LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
+    ENV LC_ALL=C.UTF-8
+    
+    RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
                 profile install github:defn/pkg?dir=${dir}
 
