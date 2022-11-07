@@ -56,7 +56,8 @@ jobs:
           earthly --strict --push --no-output \
           	--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-dev \
           	--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd-dev \
-          	+build-amd-dev
+          	--platform linux/amd64 \
+          	+dev --arch=amd64
   build_arm_dev:
     runs-on: ubuntu-latest
     env:
@@ -106,7 +107,8 @@ jobs:
           earthly --strict --push --no-output \
           	--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-dev \
           	--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm-dev \
-          	+build-arm-dev
+          	--platform linux/arm64 \
+          	+dev --arch=arm64
   publish_dev:
     runs-on: ubuntu-latest
     env:

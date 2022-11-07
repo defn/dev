@@ -23,7 +23,8 @@ jobs: {
 				earthly --strict --push --no-output \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-\(a)-dev \\
 					--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-\(a)-dev \\
-					+build-\(a)-dev
+					--platform linux/\(a)64 \\
+					+dev --arch=\(a)64
 				"""
 			}]
 		}
