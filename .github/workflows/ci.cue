@@ -40,11 +40,7 @@ jobs: {
 	}
 
 	publish_dev: {
-		needs: [
-			"build_amd_dev",
-			"build_arm_dev",
-		]
-		steps: #DockerLoginSteps + [{
+		steps: #EarthlySteps + [{
 			name: "Publish images"
 			run: """
 				earthly --strict --push --no-output \\
@@ -82,11 +78,7 @@ jobs: {
 	}
 
 	publish_k3d: {
-		needs: [
-			"build_amd_k3d",
-			"build_arm_k3d",
-		]
-		steps: #DockerLoginSteps + [{
+		steps: #EarthlySteps + [{
 			name: "Publish images"
 			run: """
 				earthly --strict --push --no-output \\

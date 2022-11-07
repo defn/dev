@@ -111,9 +111,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FORCE_COLOR: 1
-    needs:
-      - build_amd_dev
-      - build_arm_dev
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -146,6 +143,14 @@ jobs:
           registry: ghcr.io
           username: not-used
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Download latest earthly
+        run: sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.28/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
+      - name: Set up QEMU
+        id: qemu
+        uses: docker/setup-qemu-action@v1
+        with:
+          image: tonistiigi/binfmt:latest
+          platforms: all
       - name: Publish images
         run: |-
           earthly --strict --push --no-output \
@@ -258,9 +263,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FORCE_COLOR: 1
-    needs:
-      - build_amd_k3d
-      - build_arm_k3d
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -293,6 +295,14 @@ jobs:
           registry: ghcr.io
           username: not-used
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Download latest earthly
+        run: sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.28/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
+      - name: Set up QEMU
+        id: qemu
+        uses: docker/setup-qemu-action@v1
+        with:
+          image: tonistiigi/binfmt:latest
+          platforms: all
       - name: Publish images
         run: |-
           earthly --strict --push --no-output \
