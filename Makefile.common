@@ -381,7 +381,7 @@ tag ?= meh
 
 docker-%:
 	bash -c ' \
-		source .env && docker build --platform $(platform) --target defn-$(second) \
+		source .env && env DOCKER_BUILDKIT=1 docker build --platform $(platform) --target defn-$(second) \
 		--cache-from $(cache) -t $(tag) \
 		--build-arg arch=$(arch) \
 		--build-arg TAILSCALE=$${TAILSCALE} \
