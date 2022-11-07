@@ -254,17 +254,17 @@ vault-login:
 
 rebuild:
 	$(MAKE) build
-	ctr -n k8s.io i pull --plain-http ghcr.io/defn/dev:latest
+	ctr -n k8s.io i pull --plain-http ghcr.io/defn/dev:latest-dev
 	ctr -n k8s.io i pull --plain-http 169.254.32.1:5000/workspace:latest
 
 shell:
-	docker run --rm -ti $(repo)defn/dev bash -l
+	docker run --rm -ti $(repo)defn/dev:latest-dev bash -l
 
 debug-host:
-	control debug "node/$$(control get nodes --no-headers | awk '{print $$1}' | fzf)" --image ghcr.io/defn/dev -it -- bash
+	control debug "node/$$(control get nodes --no-headers | awk '{print $$1}' | fzf)" --image ghcr.io/defn/dev:latest-dev -it -- bash
 
 debug:
-	control debug -n "$(n)" "$(pod)" --image ghcr.io/defn/dev -it -- bash
+	control debug -n "$(n)" "$(pod)" --image ghcr.io/defn/dev:latest-dev -it -- bash
 
 this:
 	rm -rf tmp
@@ -347,7 +347,7 @@ ec2:
 		| control apply -f -
 
 debug-node:
-	control debug node/$(node) -it --image=ghcr.io/defn/dev:latest -- bash -il
+	control debug node/$(node) -it --image=ghcr.io/defn/dev:latest-dev -- bash -il
 
 debug-docker:
 	docker run -it --rm --privileged --pid=host alpine:edge nsenter -t 1 -m -u -n -i
@@ -381,7 +381,7 @@ tag ?= meh
 
 docker-%:
 	bash -c ' \
-		source .env && docker buildx build --push --platform $(platform) --target defn-$(second) -t $(tag) $(cache) \
+		source .env && env DOCKER_BUILDKIT=1 docker buildx build --push --platform $(platform) --target defn-$(second) -t $(tag) $(cache) \
 		--build-arg arch=$(arch) \
 		--build-arg TAILSCALE=$${TAILSCALE} \
 		--build-arg CLOUDFLARED=$${CLOUDFLARED} \

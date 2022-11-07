@@ -1,4 +1,4 @@
-DEFN_DEV_FROM ?= ghcr.io/defn/dev:latest-k3d-base
+DEFN_DEV_FROM ?= ghcr.io/defn/dev:latest-k3d
 
 build:
 	rm -f defn-dev-*.yaml
@@ -13,7 +13,7 @@ build:
 	rm -f defn-dev-*.yaml
 
 mint:
-	docker run --rm -ti --privileged --entrypoint sh ghcr.io/defn/dev -c \
+	docker run --rm -ti --privileged --entrypoint sh ghcr.io/defn/dev:latest-dev -c \
 		"sudo mkdir -p /var/lib/tailscale; \
 		sudo /usr/sbin/tailscaled -statedir /var/lib/tailscale & \
 		sudo /usr/bin/tailscale up -hostname $(name) -authkey $$(pass tailscale_$(key)); \
@@ -21,7 +21,7 @@ mint:
 		while true; do if sudo test -f /var/lib/tailscale/tailscaled.state; then domain=\`tailscale cert 2>&1 | grep ' use ' | cut -d'\"' -f2\`; sudo tailscale cert \$$domain; sudo tar cf - /var/lib/tailscale/tailscaled.state /var/lib/tailscale/certs | base64 -w 0; break; fi; sleep 1; done;" | tail -1 | pass insert -e -f tailscale_$(name)
 
 min:
-	docker run --rm -ti --privileged --entrypoint sh ghcr.io/defn/dev -c \
+	docker run --rm -ti --privileged --entrypoint sh ghcr.io/defn/dev:latest-dev -c \
 		"sudo mkdir -p /var/lib/tailscale; \
 		sudo /usr/sbin/tailscaled -statedir /var/lib/tailscale & \
 		sudo /usr/bin/tailscale up -hostname $(name) -authkey $$(pass tailscale_$(key)); \
