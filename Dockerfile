@@ -142,7 +142,7 @@ COPY etc/k3d-config.toml var/lib/rancher/k3s/agent/etc/containerd/config.toml
 
 COPY etc/k3s-wrapper.sh /bin/k3s
 
-COPY --from=tailscale /tailscale* /
+COPY --from=defn-tailscale /mnt/* /
 
 # dev
 FROM defn-nix AS defn-dev
