@@ -212,7 +212,7 @@ nix:
     # nix
     RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh && chmod 0755 /nix && sudo rm -f /bin/man
 
-nix-single
+nix-single:
     ARG image
     ARG arch
     ARG dir
