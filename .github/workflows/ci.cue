@@ -40,6 +40,10 @@ jobs: {
 	}
 
 	publish: {
+		needs: [
+			"build_amd",
+			"build_arm",
+		]
 		steps: #DockerLoginSteps + [{
 			name: "Publish images"
 			run: """

@@ -100,11 +100,19 @@ k3d:
     COPY (+root/tailscale --arch=${arch}) /
     COPY (+root/tailscaled --arch=${arch}) /
 
-ubuntu:
+ubuntu-amd:
     ARG arch
     ARG UBUNTU
 
-    FROM ${UBUNTU}
+    FROM --platform=linux/amd64 ${UBUNTU}
+
+    SAVE IMAGE --cache-hint
+
+ubuntu-arm:
+    ARG arch
+    ARG UBUNTU
+
+    FROM --platform=linux/arm64 ${UBUNTU}
 
     SAVE IMAGE --cache-hint
 
@@ -114,7 +122,12 @@ root:
     ARG DOCKER
     ARG BUMP
 
-    FROM +ubuntu --arch=${arch}
+    FROM ubuntu
+    IF [ "$arch" = "amd64" ]
+        FROM +ubuntu-amd --arch=${arch}
+    ELSE
+        FROM +ubuntu-arm --arch=${arch}
+    END
 
     USER root
     ENTRYPOINT ["tail", "-f", "/dev/null"]

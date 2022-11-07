@@ -111,6 +111,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FORCE_COLOR: 1
+    needs:
+      - build_amd
+      - build_arm
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
