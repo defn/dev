@@ -209,8 +209,16 @@ nix:
 
     FROM +root --arch=${arch}
 
+    ENV USER=ubuntu
+    ENV LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
+    ENV LC_ALL=C.UTF-8
+
     # nix
     RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh && chmod 0755 /nix && sudo rm -f /bin/man
+    
+    RUN . ~/.nix-profile/etc/profile.d/nix.sh \
+            && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
+                profile install "nixpkgs#bash"
 
 nix-single:
     ARG image
@@ -219,10 +227,6 @@ nix-single:
 
     FROM +nix --arch=${arch}
 
-    ENV USER=ubuntu
-    ENV LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
-    ENV LC_ALL=C.UTF-8
-    
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
                 profile install github:defn/pkg?dir=${dir}
