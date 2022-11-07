@@ -390,3 +390,6 @@ docker-%:
 		--build-arg CADDY=$${CADDY} \
 		--build-arg CODESERVER=$${CODESERVER} \
 		.'
+
+prune:
+	docker images | grep :5000/ | grep -E 'weeks|days' | awk '{print $$1 ":" $$2}' | runmany 'docker rmi $$1'
