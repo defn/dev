@@ -36,7 +36,7 @@ jobs: {
 				make docker-nix \\
 					cache=--cache-from=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix \\
 					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix \\
-					platform=linux/arm/v7 \\
+					platform=linux/arm64 \\
 					arch=arm64
 				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix
 				"""
@@ -66,7 +66,7 @@ jobs: {
 				make docker-dev \\
 					cache="--cache-from=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix --cache-from=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm" \\
 					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm \\
-					platform=linux/arm/v7 \\
+					platform=linux/arm64 \\
 					arch=arm64
 				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm
 				"""
@@ -96,7 +96,7 @@ jobs: {
 				make docker-k3d \\
 					cache="--cache-from=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix --cache-from=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d" \\
 					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d \\
-					platform=linux/arm/v7 \\
+					platform=linux/arm64 \\
 					arch=arm64
 				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d
 				"""
