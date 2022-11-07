@@ -30,4 +30,8 @@ package workflows
 		image:     "tonistiigi/binfmt:latest"
 		platforms: "all"
 	}
+}, {
+	name: "Set up Docker Buildx"
+	id:   "buildx"
+	uses: "docker/setup-buildx-action@v2"
 }]
