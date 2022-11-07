@@ -21,10 +21,10 @@ jobs: {
 			run: """
 				make docker-dev \\
 					cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd \\
-					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd \\
+					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd \\
 					platform=linux/amd64 \\
 					arch=amd64
-				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd
+				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd
 				"""
 		}]
 	}
@@ -35,10 +35,10 @@ jobs: {
 			run: """
 				make docker-dev \\
 					cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm \\
-					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm \\
+					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm \\
 					platform=linux/arm/v7 \\
 					arch=arm64
-				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm
+				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm
 				"""
 		}]
 	}
@@ -51,7 +51,7 @@ jobs: {
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-all \\
-					--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-all \\
+					--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:main-all \\
 					+images --repo=ghcr.io/ --tag=${TAG}
 				"""
 		}]
@@ -63,10 +63,10 @@ jobs: {
 			run: """
 				make docker-k3d \\
 					cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-k3d \\
-					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd-k3d \\
+					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-k3d \\
 					platform=linux/amd64 \\
 					arch=amd64
-				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd-k3d
+				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-k3d
 				"""
 		}]
 	}
@@ -77,10 +77,10 @@ jobs: {
 			run: """
 				make docker-k3d \\
 					cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d \\
-					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm-k3d \\
+					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d \\
 					platform=linux/amd64 \\
 					arch=amd64
-				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm-k3d
+				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d
 				"""
 		}]
 	}
@@ -96,8 +96,6 @@ jobs: {
 				earthly --strict --push --no-output \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-k3d-amd \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-k3d-arm \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-k3d-amd \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-k3d-arm \\
 					+imagesK3DBase --repo=ghcr.io/ --tag=${TAG}
 				"""
 		}]
