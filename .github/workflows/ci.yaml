@@ -33,14 +33,11 @@ jobs:
         uses: docker/setup-buildx-action@v2
       - name: Build nix amd target
         run: |-
-          set -x
           make docker-nix \
           	cache="--cache-from=type=type=gha --cache-to=type=gha" \
           	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-nix \
           	platform=linux/amd64 \
           	arch=amd64
-          docker images
-          docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-nix
   build_nix_arm:
     runs-on: ubuntu-latest
     env:
@@ -67,14 +64,11 @@ jobs:
         uses: docker/setup-buildx-action@v2
       - name: Build nix arm target
         run: |-
-          set -x
           make docker-nix \
           	cache="--cache-from=type=type=gha --cache-to=type=gha" \
           	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix \
           	platform=linux/arm64 \
           	arch=arm64
-          docker images
-          docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix
   build_amd:
     runs-on: ubuntu-latest
     env:
@@ -108,7 +102,6 @@ jobs:
           	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd \
           	platform=linux/amd64 \
           	arch=amd64
-          docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd
   build_arm:
     runs-on: ubuntu-latest
     env:
@@ -142,7 +135,6 @@ jobs:
           	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm \
           	platform=linux/arm64 \
           	arch=arm64
-          docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm
   build_k3d_amd:
     runs-on: ubuntu-latest
     env:
@@ -177,7 +169,6 @@ jobs:
           	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-k3d \
           	platform=linux/amd64 \
           	arch=amd64
-          docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-k3d
   build_k3d_arm:
     runs-on: ubuntu-latest
     env:
@@ -213,4 +204,3 @@ jobs:
           	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d \
           	platform=linux/arm64 \
           	arch=arm64
-          docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d

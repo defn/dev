@@ -19,14 +19,11 @@ jobs: {
 		steps: #DockerSteps + [{
 			name: "Build nix amd target"
 			run: """
-				set -x
 				make docker-nix \\
 					cache="--cache-from=type=type=gha --cache-to=type=gha" \\
 					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-nix \\
 					platform=linux/amd64 \\
 					arch=amd64
-				docker images
-				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-nix
 				"""
 		}]
 	}
@@ -35,14 +32,11 @@ jobs: {
 		steps: #DockerSteps + [{
 			name: "Build nix arm target"
 			run: """
-				set -x
 				make docker-nix \\
 					cache="--cache-from=type=type=gha --cache-to=type=gha" \\
 					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix \\
 					platform=linux/arm64 \\
 					arch=arm64
-				docker images
-				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix
 				"""
 		}]
 	}
@@ -57,7 +51,6 @@ jobs: {
 					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd \\
 					platform=linux/amd64 \\
 					arch=amd64
-				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd
 				"""
 		}]
 	}
@@ -72,7 +65,6 @@ jobs: {
 					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm \\
 					platform=linux/arm64 \\
 					arch=arm64
-				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm
 				"""
 		}]
 	}
@@ -88,7 +80,6 @@ jobs: {
 					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-k3d \\
 					platform=linux/amd64 \\
 					arch=amd64
-				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-k3d
 				"""
 		}]
 	}
@@ -105,7 +96,6 @@ jobs: {
 					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d \\
 					platform=linux/arm64 \\
 					arch=arm64
-				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d
 				"""
 		}]
 	}
