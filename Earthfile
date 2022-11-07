@@ -141,6 +141,7 @@ root:
 
 nix:
     ARG arch
+    ARG NIXBUMP
 
     FROM +root --arch=${arch}
 
@@ -151,7 +152,7 @@ nix:
     # nix
     RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh && chmod 0755 /nix && sudo rm -f /bin/man
     
-    RUN . ~/.nix-profile/etc/profile.d/nix.sh \
+    RUN echo ${NIXBUMP} && . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
                 profile install github:defn/pkg?dir=cue
 
@@ -243,6 +244,11 @@ dev:
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
                 profile install github:defn/pkg?dir=cloudflared
+
+    # vault
+    RUN . ~/.nix-profile/etc/profile.d/nix.sh \
+            && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
+                profile install "nixpkgs#vault"
 
     # weird configs
     RUN mkdir -p .kube .docker
