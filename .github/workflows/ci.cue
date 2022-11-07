@@ -51,26 +51,26 @@ jobs: {
 
 	build_k3d_amd: {
 		steps: #EarthlySteps + [{
-			name: "Build amd k3d-base target"
+			name: "Build amd k3d target"
 			run: """
 				earthly --strict --push --no-output \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-k3d-amd \\
 					--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-k3d-amd \\
-					+build-amd-k3d-base
+					+build-amd-k3d
 				"""
 		}]
 	}
 
 	build_k3d_arm: {
 		steps: #EarthlySteps + [{
-			name: "Build arm k3d-base target"
+			name: "Build arm k3d target"
 			run: """
 				earthly --strict --push --no-output \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-k3d-arm \\
 					--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-k3d-arm \\
-					+build-arm-k3d-base
+					+build-arm-k3d
 				"""
 		}]
 	}
