@@ -47,7 +47,7 @@ jobs: {
 		steps: #DockerLoginSteps + [{
 			name: "Publish images"
 			run: """
-				docker manifest create ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm
+				docker manifest create ghcr.io/${GITHUB_REPOSITORY}:${TAG} ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm
 				docker manifest push ghcr.io/${GITHUB_REPOSITORY}:${TAG}
 				"""
 		}]
@@ -87,7 +87,7 @@ jobs: {
 		steps: #DockerLoginSteps + [{
 			name: "Publish images"
 			run: """
-				docker manifest create ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-k3d-amd ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-k3d-arm
+				docker manifest create ghcr.io/${GITHUB_REPOSITORY}:${TAG} ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-k3d-amd ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-k3d-arm
 				docker manifest push ghcr.io/${GITHUB_REPOSITORY}:${TAG}
 				"""
 		}]
