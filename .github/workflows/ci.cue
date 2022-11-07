@@ -19,11 +19,13 @@ jobs: {
 		steps: #DockerSteps + [{
 			name: "Build nix amd target"
 			run: """
+				set -x
 				make docker-nix \\
 					cache="--cache-from=type=type=gha --cache-to=type=gha" \\
 					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-nix \\
 					platform=linux/amd64 \\
 					arch=amd64
+				docker images
 				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-nix
 				"""
 		}]
@@ -33,11 +35,13 @@ jobs: {
 		steps: #DockerSteps + [{
 			name: "Build nix arm target"
 			run: """
+				set -x
 				make docker-nix \\
 					cache="--cache-from=type=type=gha --cache-to=type=gha" \\
 					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix \\
 					platform=linux/arm64 \\
 					arch=arm64
+				docker images
 				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix
 				"""
 		}]
