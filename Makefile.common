@@ -380,7 +380,6 @@ cache ?= meh
 tag ?= meh
 
 docker-%:
-	pass hello
 	bash -c ' \
 		source .env && docker build --platform $(platform) --target defn-$(second) \
 		--cache-from $(cache) -t $(tag) \
