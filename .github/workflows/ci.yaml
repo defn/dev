@@ -34,7 +34,7 @@ jobs:
       - name: Build nix amd target
         run: |-
           make docker-nix \
-          	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-nix \
+          	cache=--cache-from=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-nix \
           	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-nix \
           	platform=linux/amd64 \
           	arch=amd64
@@ -66,7 +66,7 @@ jobs:
       - name: Build nix arm target
         run: |-
           make docker-nix \
-          	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix \
+          	cache=--cache-from=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix \
           	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix \
           	platform=linux/arm/v7 \
           	arch=arm64
@@ -100,8 +100,7 @@ jobs:
       - name: Build amd target
         run: |-
           make docker-dev \
-          	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-nix \
-          	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd \
+          	cache="--cache-from=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-nix --cache-from=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd" \
           	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd \
           	platform=linux/amd64 \
           	arch=amd64
@@ -135,8 +134,7 @@ jobs:
       - name: Build arm target
         run: |-
           make docker-dev \
-          	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix \
-          	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm \
+          	cache="--cache-from=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix --cache-from=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm" \
           	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm \
           	platform=linux/arm/v7 \
           	arch=arm64
@@ -170,8 +168,7 @@ jobs:
       - name: Build amd k3d-base target
         run: |-
           make docker-k3d \
-          	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-nix \
-          	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-k3d \
+          	cache="--cache-from=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-nix --cache-from=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-k3d" \
           	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-k3d \
           	platform=linux/amd64 \
           	arch=amd64
@@ -205,8 +202,7 @@ jobs:
       - name: Build arm k3d-base target
         run: |-
           make docker-k3d \
-          	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix \
-          	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d \
+          	cache="--cache-from=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix --cache-from=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d" \
           	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d \
           	platform=linux/arm/v7 \
           	arch=arm64
