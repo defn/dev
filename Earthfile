@@ -1,5 +1,10 @@
 VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-arg --use-copy-link --use-registry-for-with-docker 0.6
 
+build-dev:
+    ARG image
+    BUILD +build-amd-dev --image=${image}
+    BUILD +build-arm-dev --image=${image}
+
 build-amd-dev:
     ARG image
     FROM --platform=linux/amd64 +dev --arch=amd64
@@ -13,6 +18,11 @@ build-arm-dev:
     IF [ "$image" != "" ]
         SAVE IMAGE --push ${image}
     END
+
+build-k3d:
+    ARG image
+    BUILD +build-amd-k3d --image=${image}
+    BUILD +build-arm-k3d --image=${image}
 
 build-amd-k3d:
     ARG image

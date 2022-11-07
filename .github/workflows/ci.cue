@@ -46,7 +46,7 @@ jobs: {
 				earthly --strict --push --no-output \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-dev \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-dev \\
-					+build-amd-dev +build-arm-dev --image ghcr.io/${GITHUB_REPOSITORY}:${TAG}-dev
+					+build-dev --image ghcr.io/${GITHUB_REPOSITORY}:${TAG}-dev
 				"""
 		}]
 	}
@@ -86,7 +86,7 @@ jobs: {
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-k3d \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-dev \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d \\
-					+build-amd-k3d +build-arm-k3d --image ghcr.io/${GITHUB_REPOSITORY}:${TAG}-k3d
+					+build-k3d --image ghcr.io/${GITHUB_REPOSITORY}:${TAG}-k3d
 				"""
 		}]
 	}
