@@ -148,8 +148,8 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish images
         run: |-
-          docker manifest create ghcr.io/${GITHUB_REPOSITORY}:${TAG} ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm
-          docker manifest push ghcr.io/${GITHUB_REPOSITORY}:${TAG}
+          docker manifest inspect ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd
+          docker manifest inspect ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm
   build_k3d_amd:
     runs-on: ubuntu-latest
     env:

@@ -47,8 +47,8 @@ jobs: {
 		steps: #DockerLoginSteps + [{
 			name: "Publish images"
 			run: """
-				docker manifest create ghcr.io/${GITHUB_REPOSITORY}:${TAG} ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm
-				docker manifest push ghcr.io/${GITHUB_REPOSITORY}:${TAG}
+				docker manifest inspect ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd
+				docker manifest inspect ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm
 				"""
 		}]
 	}
