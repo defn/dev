@@ -30,7 +30,7 @@ jobs: {
 		}
 	}
 
-	for n in ["dev", "k3d", "caddy"] {
+	for n in ["dev", "k3d", "caddy", "coredns", "cloudflared", "vault"] {
 		"publish_\(n)": {
 			steps: #EarthlySteps + [{
 				name: "Publish images"

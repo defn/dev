@@ -12,8 +12,23 @@ build-k3d:
 
 build-caddy:
     ARG image
-    BUILD --platform=linux/amd64 +nix-single --image=${image} --arch=amd64 --dir=caddy
-    BUILD --platform=linux/arm64 +nix-single --image=${image} --arch=arm64 --dir=caddy
+    BUILD --platform=linux/amd64 +nix-dir --image=${image} --arch=amd64 --dir=caddy
+    BUILD --platform=linux/arm64 +nix-dir --image=${image} --arch=arm64 --dir=caddy
+
+build-cloudflared:
+    ARG image
+    BUILD --platform=linux/amd64 +nix-dir --image=${image} --arch=amd64 --dir=cloudflared
+    BUILD --platform=linux/arm64 +nix-dir --image=${image} --arch=arm64 --dir=cloudflared
+
+build-coredns:
+    ARG image
+    BUILD --platform=linux/amd64 +nix-dir --image=${image} --arch=amd64 --dir=coredns
+    BUILD --platform=linux/arm64 +nix-dir --image=${image} --arch=arm64 --dir=coredns
+
+build-vault:
+    ARG image
+    BUILD --platform=linux/amd64 +nix-pkg --image=${image} --arch=amd64 --pkg=vault
+    BUILD --platform=linux/arm64 +nix-pkg --image=${image} --arch=arm64 --pkg=vault
 
 cloudflared:
     ARG arch
@@ -142,7 +157,7 @@ nix:
 
     RUN echo "source ~/.bashrc" > .bash_profile && echo "source ~/.nix-profile/etc/profile.d/nix.sh" > .bashrc
 
-nix-single:
+nix-dir:
     ARG image
     ARG arch
     ARG dir
@@ -152,6 +167,21 @@ nix-single:
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
                 profile install github:defn/pkg?dir=${dir}
+
+    IF [ "$image" != "" ]
+        SAVE IMAGE --push ${image}
+    END
+
+nix-pkg:
+    ARG image
+    ARG arch
+    ARG pkg
+
+    FROM +nix --arch=${arch}
+
+    RUN . ~/.nix-profile/etc/profile.d/nix.sh \
+            && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
+                profile install "nixpkgs#${pkg}"
 
     IF [ "$image" != "" ]
         SAVE IMAGE --push ${image}
