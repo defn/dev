@@ -78,6 +78,7 @@ jobs: {
 		steps: #DockerSteps + [{
 			name: "Build amd k3d-base target"
 			run: """
+				set -x
 				make docker-k3d \\
 					cache="--cache-from=type=type=gha --cache-to=type=gha" \\
 					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-k3d \\
@@ -93,6 +94,7 @@ jobs: {
 		steps: #DockerSteps + [{
 			name: "Build arm k3d-base target"
 			run: """
+				set -x
 				make docker-k3d \\
 					cache="--cache-from=type=type=gha --cache-to=type=gha" \\
 					cache="--cache-from=registry,ref=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix --cache-from=registry,ref=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d --cache-to=registry,ref=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d" \\
