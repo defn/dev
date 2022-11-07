@@ -1,9 +1,16 @@
 VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-arg --use-copy-link --use-registry-for-with-docker 0.6
 
-build-amd:
+publish-dev:
+    ARG image
+
+    BUILD +build-amd-dev
+    BUILD +build-amd-dev
+    SAVE IMAGE --push ${image}
+
+build-amd-dev:
     FROM --platform=linux/amd64 +dev --arch=amd64
 
-build-arm:
+build-arm-dev:
     FROM --platform=linux/arm64 +dev --arch=arm64
 
 build-amd-k3d:
@@ -11,6 +18,13 @@ build-amd-k3d:
 
 build-arm-k3d:
     FROM --platform=linux/arm64 +k3d --arch=arm64
+
+publish-k3d:
+    ARG image
+
+    BUILD +build-amd-k3d
+    BUILD +build-amd-k3d
+    SAVE IMAGE --push ${image}
 
 dev:
     ARG arch
@@ -100,19 +114,11 @@ k3d:
     COPY (+root/tailscale --arch=${arch}) /
     COPY (+root/tailscaled --arch=${arch}) /
 
-ubuntu-amd:
+ubuntu:
     ARG arch
     ARG UBUNTU
 
-    FROM --platform=linux/amd64 ${UBUNTU}
-
-    SAVE IMAGE --cache-hint
-
-ubuntu-arm:
-    ARG arch
-    ARG UBUNTU
-
-    FROM --platform=linux/arm64 ${UBUNTU}
+    FROM ${UBUNTU}
 
     SAVE IMAGE --cache-hint
 
@@ -122,12 +128,7 @@ root:
     ARG DOCKER
     ARG BUMP
 
-    FROM ubuntu
-    IF [ "$arch" = "amd64" ]
-        FROM +ubuntu-amd --arch=${arch}
-    ELSE
-        FROM +ubuntu-arm --arch=${arch}
-    END
+    FROM +ubuntu --arch=${arch}
 
     USER root
     ENTRYPOINT ["tail", "-f", "/dev/null"]
