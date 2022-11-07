@@ -16,35 +16,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Put back the git branch into git (Earthly uses it for tagging)
-        run: |-
-          branch=""
-          if [ -n "$GITHUB_HEAD_REF" ]; then
-            branch="$GITHUB_HEAD_REF"
-            echo "BRANCH=PR-${{github.event.pull_request.number}}" >> $GITHUB_ENV
-            echo "TAG=PR-${{github.event.pull_request.number}}" >> $GITHUB_ENV
-          else
-            branch="${GITHUB_REF_NAME}"
-            echo "BRANCH=${branch}" >> $GITHUB_ENV
-            echo "TAG=latest" >> $GITHUB_ENV
-          fi
-
-          git checkout -b "$branch" || true
-
-          if [ "$GITHUB_REF_TYPE" = "tag" ]; then
-            echo "BRANCH=${GITHUB_REF_NAME}" >> $GITHUB_ENV
-            echo "TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
-          fi
-
-          git config --unset http.https://github.com/.extraheader
       - name: Login to Packages Container registry
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: not-used
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Download latest earthly
-        run: sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.23/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
       - name: Set up QEMU
         id: qemu
         uses: docker/setup-qemu-action@v1
@@ -53,10 +30,12 @@ jobs:
           platforms: all
       - name: Build amd target
         run: |-
-          earthly --strict --push --no-output \
-          	--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd \
-          	--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd \
-          	+build-amd
+          make docker-dev \
+          	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd \
+          	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd \
+          	platform=linux/amd64 \
+          	arch=amd64
+          docker push ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd
   build_arm:
     runs-on: ubuntu-latest
     env:
@@ -66,35 +45,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Put back the git branch into git (Earthly uses it for tagging)
-        run: |-
-          branch=""
-          if [ -n "$GITHUB_HEAD_REF" ]; then
-            branch="$GITHUB_HEAD_REF"
-            echo "BRANCH=PR-${{github.event.pull_request.number}}" >> $GITHUB_ENV
-            echo "TAG=PR-${{github.event.pull_request.number}}" >> $GITHUB_ENV
-          else
-            branch="${GITHUB_REF_NAME}"
-            echo "BRANCH=${branch}" >> $GITHUB_ENV
-            echo "TAG=latest" >> $GITHUB_ENV
-          fi
-
-          git checkout -b "$branch" || true
-
-          if [ "$GITHUB_REF_TYPE" = "tag" ]; then
-            echo "BRANCH=${GITHUB_REF_NAME}" >> $GITHUB_ENV
-            echo "TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
-          fi
-
-          git config --unset http.https://github.com/.extraheader
       - name: Login to Packages Container registry
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: not-used
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Download latest earthly
-        run: sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.23/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
       - name: Set up QEMU
         id: qemu
         uses: docker/setup-qemu-action@v1
@@ -103,10 +59,12 @@ jobs:
           platforms: all
       - name: Build arm target
         run: |-
-          earthly --strict --push --no-output \
-          	--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm \
-          	--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm \
-          	+build-arm
+          make docker-dev \
+          	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm \
+          	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm \
+          	platform=linux/arm/v7 \
+          	arch=arm64
+          docker push ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm
   publish:
     runs-on: ubuntu-latest
     env:
@@ -116,35 +74,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Put back the git branch into git (Earthly uses it for tagging)
-        run: |-
-          branch=""
-          if [ -n "$GITHUB_HEAD_REF" ]; then
-            branch="$GITHUB_HEAD_REF"
-            echo "BRANCH=PR-${{github.event.pull_request.number}}" >> $GITHUB_ENV
-            echo "TAG=PR-${{github.event.pull_request.number}}" >> $GITHUB_ENV
-          else
-            branch="${GITHUB_REF_NAME}"
-            echo "BRANCH=${branch}" >> $GITHUB_ENV
-            echo "TAG=latest" >> $GITHUB_ENV
-          fi
-
-          git checkout -b "$branch" || true
-
-          if [ "$GITHUB_REF_TYPE" = "tag" ]; then
-            echo "BRANCH=${GITHUB_REF_NAME}" >> $GITHUB_ENV
-            echo "TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
-          fi
-
-          git config --unset http.https://github.com/.extraheader
       - name: Login to Packages Container registry
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: not-used
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Download latest earthly
-        run: sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.23/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
       - name: Set up QEMU
         id: qemu
         uses: docker/setup-qemu-action@v1
@@ -168,35 +103,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Put back the git branch into git (Earthly uses it for tagging)
-        run: |-
-          branch=""
-          if [ -n "$GITHUB_HEAD_REF" ]; then
-            branch="$GITHUB_HEAD_REF"
-            echo "BRANCH=PR-${{github.event.pull_request.number}}" >> $GITHUB_ENV
-            echo "TAG=PR-${{github.event.pull_request.number}}" >> $GITHUB_ENV
-          else
-            branch="${GITHUB_REF_NAME}"
-            echo "BRANCH=${branch}" >> $GITHUB_ENV
-            echo "TAG=latest" >> $GITHUB_ENV
-          fi
-
-          git checkout -b "$branch" || true
-
-          if [ "$GITHUB_REF_TYPE" = "tag" ]; then
-            echo "BRANCH=${GITHUB_REF_NAME}" >> $GITHUB_ENV
-            echo "TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
-          fi
-
-          git config --unset http.https://github.com/.extraheader
       - name: Login to Packages Container registry
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: not-used
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Download latest earthly
-        run: sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.23/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
       - name: Set up QEMU
         id: qemu
         uses: docker/setup-qemu-action@v1
@@ -205,10 +117,12 @@ jobs:
           platforms: all
       - name: Build amd k3d-base target
         run: |-
-          earthly --strict --push --no-output \
-          	--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-k3d-amd \
-          	--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-k3d-amd \
-          	+build-amd-k3d-base
+          make docker-k3d \
+          	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-k3d \
+          	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd-k3d \
+          	platform=linux/amd64 \
+          	arch=amd64
+          docker push ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd-k3d
   build_k3d_arm:
     runs-on: ubuntu-latest
     env:
@@ -218,35 +132,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Put back the git branch into git (Earthly uses it for tagging)
-        run: |-
-          branch=""
-          if [ -n "$GITHUB_HEAD_REF" ]; then
-            branch="$GITHUB_HEAD_REF"
-            echo "BRANCH=PR-${{github.event.pull_request.number}}" >> $GITHUB_ENV
-            echo "TAG=PR-${{github.event.pull_request.number}}" >> $GITHUB_ENV
-          else
-            branch="${GITHUB_REF_NAME}"
-            echo "BRANCH=${branch}" >> $GITHUB_ENV
-            echo "TAG=latest" >> $GITHUB_ENV
-          fi
-
-          git checkout -b "$branch" || true
-
-          if [ "$GITHUB_REF_TYPE" = "tag" ]; then
-            echo "BRANCH=${GITHUB_REF_NAME}" >> $GITHUB_ENV
-            echo "TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
-          fi
-
-          git config --unset http.https://github.com/.extraheader
       - name: Login to Packages Container registry
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: not-used
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Download latest earthly
-        run: sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.23/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
       - name: Set up QEMU
         id: qemu
         uses: docker/setup-qemu-action@v1
@@ -255,10 +146,12 @@ jobs:
           platforms: all
       - name: Build arm k3d-base target
         run: |-
-          earthly --strict --push --no-output \
-          	--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-k3d-arm \
-          	--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-k3d-arm \
-          	+build-arm-k3d-base
+          make docker-k3d \
+          	cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d \
+          	tag=ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm-k3d \
+          	platform=linux/amd64 \
+          	arch=amd64
+          docker push ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm-k3d
   publish_k3d:
     runs-on: ubuntu-latest
     env:
@@ -271,35 +164,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Put back the git branch into git (Earthly uses it for tagging)
-        run: |-
-          branch=""
-          if [ -n "$GITHUB_HEAD_REF" ]; then
-            branch="$GITHUB_HEAD_REF"
-            echo "BRANCH=PR-${{github.event.pull_request.number}}" >> $GITHUB_ENV
-            echo "TAG=PR-${{github.event.pull_request.number}}" >> $GITHUB_ENV
-          else
-            branch="${GITHUB_REF_NAME}"
-            echo "BRANCH=${branch}" >> $GITHUB_ENV
-            echo "TAG=latest" >> $GITHUB_ENV
-          fi
-
-          git checkout -b "$branch" || true
-
-          if [ "$GITHUB_REF_TYPE" = "tag" ]; then
-            echo "BRANCH=${GITHUB_REF_NAME}" >> $GITHUB_ENV
-            echo "TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
-          fi
-
-          git config --unset http.https://github.com/.extraheader
       - name: Login to Packages Container registry
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: not-used
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Download latest earthly
-        run: sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.23/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
       - name: Set up QEMU
         id: qemu
         uses: docker/setup-qemu-action@v1

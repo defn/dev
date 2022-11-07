@@ -12,35 +12,39 @@ on: push: tags: [
 
 on: pull_request: {}
 
-jobs: [string]: #EarthlyJob
+jobs: [string]: #DockerJob
 
 jobs: {
 	build_amd: {
-		steps: #EarthlySteps + [{
+		steps: #DockerSteps + [{
 			name: "Build amd target"
 			run: """
-				earthly --strict --push --no-output \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd \\
-					--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd \\
-					+build-amd
+				make docker-dev \\
+					cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd \\
+					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd \\
+					platform=linux/amd64 \\
+					arch=amd64
+				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd
 				"""
 		}]
 	}
 
 	build_arm: {
-		steps: #EarthlySteps + [{
+		steps: #DockerSteps + [{
 			name: "Build arm target"
 			run: """
-				earthly --strict --push --no-output \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm \\
-					--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm \\
-					+build-arm
+				make docker-dev \\
+					cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm \\
+					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm \\
+					platform=linux/arm/v7 \\
+					arch=arm64
+				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm
 				"""
 		}]
 	}
 
 	publish: {
-		steps: #EarthlySteps + [{
+		steps: #DockerSteps + [{
 			name: "Publish images"
 			run: """
 				earthly --strict --push --no-output \\
@@ -54,25 +58,29 @@ jobs: {
 	}
 
 	build_k3d_amd: {
-		steps: #EarthlySteps + [{
+		steps: #DockerSteps + [{
 			name: "Build amd k3d-base target"
 			run: """
-				earthly --strict --push --no-output \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-k3d-amd \\
-					--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-k3d-amd \\
-					+build-amd-k3d-base
+				make docker-k3d \\
+					cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-k3d \\
+					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd-k3d \\
+					platform=linux/amd64 \\
+					arch=amd64
+				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-amd-k3d
 				"""
 		}]
 	}
 
 	build_k3d_arm: {
-		steps: #EarthlySteps + [{
+		steps: #DockerSteps + [{
 			name: "Build arm k3d-base target"
 			run: """
-				earthly --strict --push --no-output \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-k3d-arm \\
-					--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-k3d-arm \\
-					+build-arm-k3d-base
+				make docker-k3d \\
+					cache=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d \\
+					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm-k3d \\
+					platform=linux/amd64 \\
+					arch=amd64
+				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-arm-k3d
 				"""
 		}]
 	}
@@ -82,7 +90,7 @@ jobs: {
 			"build_k3d_amd",
 			"build_k3d_arm",
 		]
-		steps: #EarthlySteps + [{
+		steps: #DockerSteps + [{
 			name: "Publish images"
 			run: """
 				earthly --strict --push --no-output \\

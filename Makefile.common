@@ -1,5 +1,4 @@
 repo ?=
-cache ?=
 push ?= --push
 tilt_port ?= 7999
 name ?= $(shell uname -n | cut -d. -f1 | tr A-Z a-z | perl -pe 's{-\d$$}{}')
@@ -377,11 +376,14 @@ nix:
 
 platform ?= linux/amd64
 arch ?= amd64
+cache ?= meh
+tag ?= meh
 
 docker-%:
 	pass hello
 	bash -c ' \
 		source .env && docker build --platform $(platform) --target defn-$(second) \
+		--cache-from $(cache) -t $(tag) \
 		--build-arg arch=$(arch) \
 		--build-arg TAILSCALE=$${TAILSCALE} \
 		--build-arg CLOUDFLARED=$${CLOUDFLARED} \
