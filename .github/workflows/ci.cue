@@ -43,20 +43,6 @@ jobs: {
 		}]
 	}
 
-	publish: {
-		steps: #DockerSteps + [{
-			name: "Publish images"
-			run: """
-				earthly --strict --push --no-output \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-all \\
-					--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:main-all \\
-					+images --repo=ghcr.io/ --tag=${TAG}
-				"""
-		}]
-	}
-
 	build_k3d_amd: {
 		steps: #DockerSteps + [{
 			name: "Build amd k3d-base target"
@@ -81,22 +67,6 @@ jobs: {
 					platform=linux/amd64 \\
 					arch=amd64
 				docker push ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d
-				"""
-		}]
-	}
-
-	publish_k3d: {
-		needs: [
-			"build_k3d_amd",
-			"build_k3d_arm",
-		]
-		steps: #DockerSteps + [{
-			name: "Publish images"
-			run: """
-				earthly --strict --push --no-output \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-k3d-amd \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-k3d-arm \\
-					+imagesK3DBase --repo=ghcr.io/ --tag=${TAG}
 				"""
 		}]
 	}
