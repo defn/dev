@@ -23,7 +23,7 @@ user:
     RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh && chmod 0755 /nix && sudo rm -f /bin/man
 
     # code-server
-    COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+coderServer/* --arch=${arch}) ./
+    COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+coder-server/* --arch=${arch}) ./
 
     # coredns
     COPY --chown=ubuntu:ubuntu (+coredns/* --arch=${arch}) /usr/local/bin/
@@ -65,7 +65,7 @@ coredns:
     RUN curl -sSL https://github.com/coredns/coredns/releases/download/v${COREDNS}/coredns_${COREDNS}_linux_${arch}.tgz | tar xvfz -
     SAVE ARTIFACT coredns
 
-coderServer:
+coder-server:
     ARG arch
     ARG CODESERVER
     ARG CODESERVER_BUMP
