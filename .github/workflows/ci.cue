@@ -58,6 +58,7 @@ jobs: {
 			name: "Build amd k3d-base target"
 			run: """
 				earthly --strict --push --no-output \\
+					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-k3d-amd \\
 					--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-k3d-amd \\
 					+build-amd-k3d-base
@@ -70,6 +71,7 @@ jobs: {
 			name: "Build arm k3d-base target"
 			run: """
 				earthly --strict --push --no-output \\
+					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-k3d-arm \\
 					--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-k3d-arm \\
 					+build-arm-k3d-base
@@ -86,6 +88,8 @@ jobs: {
 			name: "Publish images"
 			run: """
 				earthly --strict --push --no-output \\
+					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd \\
+					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-k3d-amd \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-k3d-arm \\
 					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:${BRANCH}-k3d-amd \\
