@@ -90,6 +90,50 @@ user:
     RUN (git clean -nfd || true) \
         && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
 
+cloudflared:
+    ARG arch
+    ARG CLOUDFLARED
+    FROM +root --arch=${arch}
+    RUN curl -sSL https://github.com/cloudflare/cloudflared/releases/download/${CLOUDFLARED}/cloudflared-linux-${arch} > cloudflared && chmod 755 cloudflared
+    SAVE ARTIFACT cloudflared
+
+caddy:
+    ARG arch
+    ARG CADDY
+    FROM +root --arch=${arch}
+    RUN curl -sSL https://github.com/caddyserver/caddy/releases/download/v${CADDY}/caddy_${CADDY}_linux_${arch}.tar.gz | tar xvfz -
+    SAVE ARTIFACT caddy
+
+coredns:
+    ARG arch
+    ARG COREDNS
+    FROM +root --arch=${arch}
+    RUN curl -sSL https://github.com/coredns/coredns/releases/download/v${COREDNS}/coredns_${COREDNS}_linux_${arch}.tgz | tar xvfz -
+    SAVE ARTIFACT coredns
+
+k3d-base:
+    ARG K3S
+
+    ARG arch
+
+    FROM rancher/k3s:v${K3S}
+
+    RUN echo root:x:0:0:root:/root:/bin/sh >> /etc/passwd
+    RUN echo root:x:0: >> /etc/group
+    RUN install -d -m 0700 -o root -g root /root
+
+    RUN mv /bin/k3s /bin/k3s-real
+
+    RUN for a in /bin/kubectl /bin/k3s-server /bin/k3s-secrets-encrypt /bin/k3s-etcd-snapshot /bin/k3s-completion /bin/k3s-certificate /bin/k3s-agent /bin/crictl /bin/ctr; do ln -nfs k3s-real $a; done
+
+    RUN mkdir -p /var/lib/rancher/k3s/agent/etc/containerd
+    COPY etc/k3d-config.toml var/lib/rancher/k3s/agent/etc/containerd/config.toml
+
+    COPY etc/k3s-wrapper.sh /bin/k3s
+
+    COPY (+root/bin/tailscale --arch=${arch}) /
+    COPY (+root/usr/sbin/tailscaled --arch=${arch}) /
+
 ubuntu:
     ARG arch
     ARG UBUNTU
@@ -124,7 +168,7 @@ root:
         && apt-get update \
         && apt-get upgrade -y \
         && apt-get install -y --no-install-recommends \
-            apt-transport-https software-properties-common curl git make xz-utils \
+            apt-transport-https software-properties-common curl git make xz-utils wget \
             tzdata locales iproute2 net-tools \
             sudo tini \
         && apt purge -y nano
@@ -174,62 +218,3 @@ coderServer:
     RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local --version=${CODESERVER}
     RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
     SAVE ARTIFACT .local
-
-tools:
-    ARG arch
-
-    FROM +ubuntu --arch=${arch}
-
-    ENV DEBIAN_FRONTEND=noninteractive
-    ENV container=docker
-
-    RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm \
-        && apt-get update \
-        && apt-get install -y --no-install-recommends \
-            apt-transport-https software-properties-common tzdata locales git unzip xz-utils wget curl
-
-    SAVE IMAGE --cache-hint
-
-cloudflared:
-    ARG arch
-    ARG CLOUDFLARED
-    FROM +tools --arch=${arch}
-    RUN curl -sSL https://github.com/cloudflare/cloudflared/releases/download/${CLOUDFLARED}/cloudflared-linux-${arch} > cloudflared && chmod 755 cloudflared
-    SAVE ARTIFACT cloudflared
-
-caddy:
-    ARG arch
-    ARG CADDY
-    FROM +tools --arch=${arch}
-    RUN curl -sSL https://github.com/caddyserver/caddy/releases/download/v${CADDY}/caddy_${CADDY}_linux_${arch}.tar.gz | tar xvfz -
-    SAVE ARTIFACT caddy
-
-coredns:
-    ARG arch
-    ARG COREDNS
-    FROM +tools --arch=${arch}
-    RUN curl -sSL https://github.com/coredns/coredns/releases/download/v${COREDNS}/coredns_${COREDNS}_linux_${arch}.tgz | tar xvfz -
-    SAVE ARTIFACT coredns
-
-k3d-base:
-    ARG K3S
-
-    ARG arch
-
-    FROM rancher/k3s:v${K3S}
-
-    RUN echo root:x:0:0:root:/root:/bin/sh >> /etc/passwd
-    RUN echo root:x:0: >> /etc/group
-    RUN install -d -m 0700 -o root -g root /root
-
-    RUN mv /bin/k3s /bin/k3s-real
-
-    RUN for a in /bin/kubectl /bin/k3s-server /bin/k3s-secrets-encrypt /bin/k3s-etcd-snapshot /bin/k3s-completion /bin/k3s-certificate /bin/k3s-agent /bin/crictl /bin/ctr; do ln -nfs k3s-real $a; done
-
-    RUN mkdir -p /var/lib/rancher/k3s/agent/etc/containerd
-    COPY etc/k3d-config.toml var/lib/rancher/k3s/agent/etc/containerd/config.toml
-
-    COPY etc/k3s-wrapper.sh /bin/k3s
-
-    COPY (+root/bin/tailscale --arch=${arch}) /
-    COPY (+root/usr/sbin/tailscaled --arch=${arch}) /
