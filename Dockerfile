@@ -155,7 +155,7 @@ RUN mkdir -p .kube .docker
 COPY --link --chown=ubuntu:ubuntu --from=defn-coredns /mnt/* /usr/local/bin/
 
 # kuma
-COPY --link --chown=ubuntu:ubuntu --from=defn-kuma /mnt/* /usr/local/bin/
+# COPY --link --chown=ubuntu:ubuntu --from=defn-kuma /mnt/* /usr/local/bin/
 
 # caddy
 COPY --link --chown=ubuntu:ubuntu --from=defn-caddy /mnt/* /usr/local/bin/
