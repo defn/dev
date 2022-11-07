@@ -38,6 +38,23 @@ build-arm-k3d:
         SAVE IMAGE --push ${image}
     END
 
+build-caddy:
+    ARG image
+    BUILD --platform=linux/amd64 +nix-caddy --image=${image} --arch=amd64
+    BUILD --platform=linux/arm64 +nix-caddy --image=${image} --arch=arm64
+
+nix-caddy:
+    ARG image
+    ARG arch
+
+    FROM +root --arch=${arch}
+
+    RUN ./bin/e n profile install github:defn/pkg?dir=caddy
+
+    IF [ "$image" != "" ]
+        SAVE IMAGE --push ${image}
+    END
+
 dev:
     ARG arch
 
