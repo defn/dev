@@ -219,4 +219,5 @@ root:
 
     ENV HOME=/home/ubuntu
 
-    SAVE ARTIFACT /bin/tailscale /usr/sbin/tailscaled
+    SAVE ARTIFACT /bin/tailscale
+    SAVE ARTIFACT /usr/sbin/tailscaled
