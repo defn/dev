@@ -140,6 +140,8 @@ nix:
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
                 profile install github:defn/pkg?dir=cue
 
+    RUN echo "source ~/.bashrc" > .bash_profile && echo "source ~/.nix-profile/etc/profile.d/nix.sh" > .bashrc
+
 nix-single:
     ARG image
     ARG arch
