@@ -1,18 +1,18 @@
 VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-arg --use-copy-link --use-registry-for-with-docker 0.6
 
 build-amd:
-    FROM --platform=linux/amd64 +user --arch=amd64
+    FROM --platform=linux/amd64 +dev --arch=amd64
 
 build-arm:
-    FROM --platform=linux/arm64 +user --arch=arm64
+    FROM --platform=linux/arm64 +dev --arch=arm64
 
-build-amd-k3d-base:
-    FROM --platform=linux/amd64 +k3d-base --arch=amd64
+build-amd-k3d:
+    FROM --platform=linux/amd64 +k3d --arch=amd64
 
-build-arm-k3d-base:
-    FROM --platform=linux/arm64 +k3d-base --arch=arm64
+build-arm-k3d:
+    FROM --platform=linux/arm64 +k3d --arch=arm64
 
-user:
+dev:
     ARG arch
 
     FROM +root --arch=${arch}
@@ -77,7 +77,7 @@ coder-server:
     RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
     SAVE ARTIFACT .local
 
-k3d-base:
+k3d:
     ARG K3S
 
     ARG arch
