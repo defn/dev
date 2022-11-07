@@ -12,52 +12,6 @@ build-amd-k3d-base:
 build-arm-k3d-base:
     FROM --platform=linux/arm64 +k3d-base --arch=arm64
 
-images:
-    ARG repo
-    ARG tag
-
-    BUILD +image-amd --repo=${repo} --tag=${tag}
-    BUILD +image-arm --repo=${repo} --tag=${tag}
-
-imagesK3DBase:
-    ARG repo
-    ARG tag
-
-    BUILD +image-amd-k3d-base --repo=${repo} --tag=${tag}-k3d-base
-    BUILD +image-arm-k3d-base --repo=${repo} --tag=${tag}-k3d-base
-
-image-amd:
-    ARG repo
-    ARG tag
-
-    FROM --platform=linux/amd64 +user --arch=amd64
-
-    SAVE IMAGE --push ${repo}defn/dev:${tag}
-
-image-arm:
-    ARG repo
-    ARG tag
-
-    FROM --platform=linux/arm64 +user --arch=arm64
-
-    SAVE IMAGE --push ${repo}defn/dev:${tag}
-
-image-amd-k3d-base:
-    ARG repo
-    ARG tag
-
-    FROM --platform=linux/amd64 +k3d-base --arch=amd64
-
-    SAVE IMAGE --push ${repo}defn/dev:${tag}
-
-image-arm-k3d-base:
-    ARG repo
-    ARG tag
-
-    FROM --platform=linux/arm64 +k3d-base --arch=arm64
-
-    SAVE IMAGE --push ${repo}defn/dev:${tag}
-
 user:
     ARG arch
 
