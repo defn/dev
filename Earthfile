@@ -47,9 +47,10 @@ nix-caddy:
     ARG image
     ARG arch
 
-    FROM +root --arch=${arch}
+    FROM +nix --arch=${arch}
 
-    RUN ./bin/e n profile install github:defn/pkg?dir=caddy
+    RUN . .nix-profile/etc/profile.d/nix.sh && nix --extra-experimental-features nix-command --extra-experimental-features flakes \
+        profile install github:defn/pkg?dir=caddy
 
     IF [ "$image" != "" ]
         SAVE IMAGE --push ${image}
@@ -58,12 +59,9 @@ nix-caddy:
 dev:
     ARG arch
 
-    FROM +root --arch=${arch}
+    FROM +nix --arch=${arch}
 
     ENTRYPOINT ["/usr/bin/tini", "--"]
-
-    # nix
-    RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh && chmod 0755 /nix && sudo rm -f /bin/man
 
     # code-server
     COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+coder-server/* --arch=${arch}) ./
@@ -218,3 +216,11 @@ root:
 
     SAVE ARTIFACT /bin/tailscale
     SAVE ARTIFACT /usr/sbin/tailscaled
+
+nix:
+    ARG arch
+
+    FROM +root --arch=${arch}
+
+    # nix
+    RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh && chmod 0755 /nix && sudo rm -f /bin/man
