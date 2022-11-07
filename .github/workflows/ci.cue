@@ -20,7 +20,7 @@ jobs: {
 			name: "Build nix amd target"
 			run: """
 				make docker-nix \\
-					cache="--cache-from=type=gha --cache-to=gha" \\
+					cache="--cache-from=type=type=gha --cache-to=type=gha" \\
 					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-nix \\
 					platform=linux/amd64 \\
 					arch=amd64
@@ -34,7 +34,7 @@ jobs: {
 			name: "Build nix arm target"
 			run: """
 				make docker-nix \\
-					cache="--cache-from=type=gha --cache-to=gha" \\
+					cache="--cache-from=type=type=gha --cache-to=type=gha" \\
 					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix \\
 					platform=linux/arm64 \\
 					arch=arm64
@@ -49,7 +49,7 @@ jobs: {
 			name: "Build amd target"
 			run: """
 				make docker-dev \\
-					cache="--cache-from=type=gha --cache-to=gha" \\
+					cache="--cache-from=type=type=gha --cache-to=type=gha" \\
 					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd \\
 					platform=linux/amd64 \\
 					arch=amd64
@@ -64,7 +64,7 @@ jobs: {
 			name: "Build arm target"
 			run: """
 				make docker-dev \\
-					cache="--cache-from=type=gha --cache-to=gha" \\
+					cache="--cache-from=type=type=gha --cache-to=type=gha" \\
 					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm \\
 					platform=linux/arm64 \\
 					arch=arm64
@@ -79,7 +79,7 @@ jobs: {
 			name: "Build amd k3d-base target"
 			run: """
 				make docker-k3d \\
-					cache="--cache-from=type=gha --cache-to=gha" \\
+					cache="--cache-from=type=type=gha --cache-to=type=gha" \\
 					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-k3d \\
 					platform=linux/amd64 \\
 					arch=amd64
@@ -94,7 +94,8 @@ jobs: {
 			name: "Build arm k3d-base target"
 			run: """
 				make docker-k3d \\
-					cache="--cache-from=type=gha --cache-to=gha" \\
+					cache="--cache-from=type=type=gha --cache-to=type=gha" \\
+					cache="--cache-from=registry,ref=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-nix --cache-from=registry,ref=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d --cache-to=registry,ref=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d" \\
 					tag=ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-k3d \\
 					platform=linux/arm64 \\
 					arch=arm64
