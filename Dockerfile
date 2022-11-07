@@ -123,7 +123,6 @@ ARG arch
 ARG CODESERVER
 
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local --version=${CODESERVER}
-RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
 
 # k3d
 FROM rancher/k3s:v1.23.13-k3s1 AS defn-k3d
@@ -168,7 +167,8 @@ RUN mkdir -p .kube .docker
 COPY --link --chown=ubuntu:ubuntu etc/config.json .docker/config.json
 
 # code-server
-#COPY --link --chown=ubuntu:ubuntu --from=defn-code-server ./
+COPY --link --chown=ubuntu:ubuntu --from=defn-code-server /home/ubuntu/.local ./.local/
+RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
 
 # defn/dev
 COPY --chown=ubuntu:ubuntu . .
