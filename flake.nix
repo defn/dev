@@ -25,7 +25,7 @@
           pkgs.gopkgs
           pkgs.delve
           pkgs.nodejs-18_x
-          pkgs.nixpkgs-fmt 
+          pkgs.nixpkgs-fmt
         ];
       };
     });
