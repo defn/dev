@@ -360,14 +360,6 @@ nix-install:
 	n profile install nixpkgs\#{glibcLocales,powerline-go,rsync,gnupg,pinentry,pass,git-crypt,docker,docker-credential-helpers,vault}
 	n profile install github:defn/pkg?{dir=tilt\&ref=v0.0.1,dir=caddy\&ref=v0.0.1,dir=temporalite\&ref=v0.0.1,dir=kubectl\&ref=v0.0.1}
 
-# make nix-shell p="..." r="..."
-nix-shell:
-	env LC_ALL=C.UTF-8 nix-shell -p $(p) --run "$(r)"
-
-nix-build:
-	@docker run -t "$$(docker load -q < $$(nix-build --out-link /tmp/results) | awk '{print $$3}')"
-	@rm -f /tmp/results
-
 nix-gc:
 	nix-store --gc
 
