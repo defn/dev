@@ -2,16 +2,31 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    tilt-pkg.url = github:defn/pkg?dir=tilt&ref=v0.0.2;
+    caddy-pkg.url = github:defn/pkg?dir=caddy&ref=v0.0.1;
+    temporalite-pkg.url = github:defn/pkg?dir=temporalite&ref=v0.0.1;
+    kubectl-pkg.url = github:defn/pkg?dir=kubectl&ref=v0.0.1;
+    cue-pkg.url = github:defn/pkg?dir=cue&ref=v0.0.2;
   };
 
   outputs =
     { self
     , nixpkgs
     , flake-utils
+    , tilt-pkg
+    , caddy-pkg
+    , temporalite-pkg
+    , kubectl-pkg
+    , cue-pkg
     }:
     flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = import nixpkgs { inherit system; };
+      tilt = tilt-pkg.defaultPackage.${system};
+      caddy = tilt-pkg.defaultPackage.${system};
+      temporalite = tilt-pkg.defaultPackage.${system};
+      kubectl = tilt-pkg.defaultPackage.${system};
+      cue = tilt-pkg.defaultPackage.${system};
     in
     {
       devShell = pkgs.mkShell {
@@ -26,11 +41,14 @@
           pkgs.delve
           pkgs.nodejs-18_x
           pkgs.nixpkgs-fmt
-          github:defn/pkg?dir=tilt&ref=v0.0.2
-          github:defn/pkg?dir=caddy&ref=v0.0.1
-          github:defn/pkg?dir=temporalite&ref=v0.0.1
-          github:defn/pkg?dir=kubectl&ref=v0.0.1
-          github:defn/pkg?dir=cue&ref=v0.0.2
+          pkgs.kubectl
+          pkgs.kubernetes-helm
+          pkgs.kube3d
+          tilt
+          caddy
+          temporalite
+          kubectl
+          cue
         ];
       };
     });
