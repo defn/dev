@@ -154,7 +154,7 @@ nix-dir:
 
     FROM +root --arch=${arch}
 
-    RUN (echo '#!/usr/bin/env bash'; echo 'source ~/.bashrc; cd; exec "$@"') | sudo tee /entrypoint && sudo chmod 755 /entrypoint
+    RUN (echo '#!/usr/bin/env bash'; echo 'source ~ubuntu/.bashrc; cd; exec "$@"') | sudo tee /entrypoint && sudo chmod 755 /entrypoint
     ENTRYPOINT ["/entrypoint"]
 
     COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+nix-install/* --arch=${arch} --install="github:defn/pkg?dir=${dir}") /nix/
@@ -171,7 +171,7 @@ nix-pkg:
 
     FROM +root --arch=${arch}
 
-    RUN (echo '#!/usr/bin/env bash'; echo 'source ~/.bashrc; cd; exec "$@"') | sudo tee /entrypoint && sudo chmod 755 /entrypoint
+    RUN (echo '#!/usr/bin/env bash'; echo 'source ~ubuntu/.bashrc; cd; exec "$@"') | sudo tee /entrypoint && sudo chmod 755 /entrypoint
     ENTRYPOINT ["/entrypoint"]
 
     COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+nix-install/* --arch=${arch} --install="nixpkgs#${pkg}") /nix/
