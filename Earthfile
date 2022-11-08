@@ -145,7 +145,7 @@ nix-install:
 
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
-            build ${install} && sudo mv `/home/ubuntu/.nix-profile/bin/nix-store -q -R ./result` store/
+                build ${install} && mkdir store && sudo mv `/home/ubuntu/.nix-profile/bin/nix-store -q -R ./result` store/
 
     SAVE ARTIFACT store
 
