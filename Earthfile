@@ -76,7 +76,7 @@ root:
         && apt-get update \
         && apt-get upgrade -y \
         && apt-get install -y --no-install-recommends \
-            apt-transport-https software-properties-common curl git make xz-utils wget \
+            apt-transport-https software-properties-common curl git make xz-utils wget rsync \
             tzdata locales iproute2 net-tools \
             sudo tini \
         && apt purge -y nano
@@ -147,7 +147,7 @@ nix-install:
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
                 profile install ${install}
 
-    RUN rsync -ia `nix-store -q -R ./result` store/
+    RUN rsync -ia `/home/ubuntu/.nix-profile/bin/nix-store -q -R ./result` store/
 
     SAVE ARTIFACT store
 
