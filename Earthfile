@@ -137,16 +137,28 @@ nix:
 
     RUN echo "source ~/.bashrc" > .bash_profile && echo "source ~/.nix-profile/etc/profile.d/nix.sh" > .bashrc
 
-nix-dir:
-    ARG image
+nix-install:
     ARG arch
-    ARG dir
+    ARG install
 
     FROM +nix --arch=${arch}
 
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
-                profile install github:defn/pkg?dir=${dir}
+                profile install ${install}
+
+    RUN rsync -ia `nix-store -q -R ./result` store/
+
+    SAVE ARTIFACT store
+
+nix-dir:
+    ARG image
+    ARG arch
+    ARG dir
+
+    FROM +root --arch=${arch}
+
+    COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+nix-install/* --arch=${arch} --install="github:defn/pkg?dir=${dir}") /nix/store/
 
     IF [ "$image" != "" ]
         SAVE IMAGE --push ${image}
@@ -157,11 +169,9 @@ nix-pkg:
     ARG arch
     ARG pkg
 
-    FROM +nix --arch=${arch}
+    FROM +root --arch=${arch}
 
-    RUN . ~/.nix-profile/etc/profile.d/nix.sh \
-            && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
-                profile install "nixpkgs#${pkg}"
+    COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+nix-install/* --arch=${arch} --install="nixpkgs#${pkg}") /nix/store/
 
     IF [ "$image" != "" ]
         SAVE IMAGE --push ${image}
