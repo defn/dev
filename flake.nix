@@ -26,6 +26,11 @@
           pkgs.delve
           pkgs.nodejs-18_x
           pkgs.nixpkgs-fmt
+          github:defn/pkg?dir=tilt&ref=v0.0.2
+          github:defn/pkg?dir=caddy&ref=v0.0.1
+          github:defn/pkg?dir=temporalite&ref=v0.0.1
+          github:defn/pkg?dir=kubectl&ref=v0.0.1
+          github:defn/pkg?dir=cue&ref=v0.0.2
         ];
       };
     });
