@@ -127,6 +127,6 @@ if [[ -n "${VSCODE_GIT_IPC_HANDLE:-}" ]]; then
 	fi
 fi
 
-if test -f $HOME/.nix-profile/share/nix-direnv/direnvrc; then source $HOME/.nix-profile/share/nix-direnv/direnvrc; fi
-
 PATH="/bin:$PATH"
+
+if test -s ~/.nix-profile/bin/direnv; then eval $(~/.nix-profile/bin/direnv hook bash); fi
