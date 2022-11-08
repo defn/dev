@@ -95,3 +95,4 @@ node_modules
 etc/tailscale_*
 .caddy.d
 .node_repl_history
+.direnv
