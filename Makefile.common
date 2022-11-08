@@ -367,23 +367,6 @@ nix:
 	export LC_ALL=C.UTF-8 && if ! test -x /home/ubuntu/.nix-profile/bin/nix; then $(MAKE) nix-bootstrap; fi
 	export LC_ALL=C.UTF-8 && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh && $(MAKE) nix-install
 
-platform ?= linux/amd64
-arch ?= amd64
-cache ?= meh
-tag ?= meh
-
-docker-%:
-	bash -c ' \
-		source .env && env DOCKER_BUILDKIT=1 docker buildx build --push --platform $(platform) --target defn-$(second) -t $(tag) $(cache) \
-		--build-arg arch=$(arch) \
-		--build-arg TAILSCALE=$${TAILSCALE} \
-		--build-arg CLOUDFLARED=$${CLOUDFLARED} \
-		--build-arg KUMA=$${KUMA} \
-		--build-arg COREDNS=$${COREDNS} \
-		--build-arg CADDY=$${CADDY} \
-		--build-arg CODESERVER=$${CODESERVER} \
-		.'
-
 prune:
 	docker images | grep :5000/ | grep -E 'weeks|days' | awk '{print $$1 ":" $$2}' | runmany 'docker rmi $$1'
 	docker system prune -f
