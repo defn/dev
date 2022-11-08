@@ -156,7 +156,7 @@ nix-dir:
 
     FROM +root --arch=${arch}
 
-    COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+nix-install/* --arch=${arch} --install="github:defn/pkg?dir=${dir}") /nix/store/
+    COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+nix-install/* --arch=${arch} --install="github:defn/pkg?dir=${dir}") /nix/
 
     IF [ "$image" != "" ]
         SAVE IMAGE --push ${image}
@@ -169,7 +169,7 @@ nix-pkg:
 
     FROM +root --arch=${arch}
 
-    COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+nix-install/* --arch=${arch} --install="nixpkgs#${pkg}") /nix/store/
+    COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+nix-install/* --arch=${arch} --install="nixpkgs#${pkg}") /nix/
 
     IF [ "$image" != "" ]
         SAVE IMAGE --push ${image}
