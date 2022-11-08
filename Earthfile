@@ -135,8 +135,6 @@ nix:
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
                 profile install github:defn/pkg?dir=cue
 
-    RUN echo "source ~/.bashrc" > .bash_profile && echo "source ~/.nix-profile/etc/profile.d/nix.sh" > .bashrc
-
 nix-install:
     ARG arch
     ARG install
@@ -156,6 +154,9 @@ nix-dir:
 
     FROM +root --arch=${arch}
 
+    RUN (echo '#!/usr/bin/env bash'; echo 'source ~/.bashrc; cd; exec "$@"') | sudo tee /entrypoint && sudo chmod 755 /entrypoint
+    ENTRYPOINT ["/entrypoint"]
+
     COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+nix-install/* --arch=${arch} --install="github:defn/pkg?dir=${dir}") /nix/
     RUN (echo; echo export PATH=/bin`for a in /nix/store/*/bin; do echo -n ":$a"; done`; echo) >> .bashrc
 
@@ -169,6 +170,9 @@ nix-pkg:
     ARG pkg
 
     FROM +root --arch=${arch}
+
+    RUN (echo '#!/usr/bin/env bash'; echo 'source ~/.bashrc; cd; exec "$@"') | sudo tee /entrypoint && sudo chmod 755 /entrypoint
+    ENTRYPOINT ["/entrypoint"]
 
     COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+nix-install/* --arch=${arch} --install="nixpkgs#${pkg}") /nix/
     RUN (echo; echo export PATH=/bin`for a in /nix/store/*/bin; do echo -n ":$a"; done`; echo) >> .bashrc
