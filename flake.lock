@@ -1,9 +1,31 @@
 {
   "nodes": {
-    "caddy-pkg": {
+    "argocd-pkg": {
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "dir": "argocd",
+        "lastModified": 1667882176,
+        "narHash": "sha256-3tfJ0JlYZxXSpWw3VtjWr5V5L0Jsk8iAV+ejarUSSvs=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "fd531c5b5098993967c53a73539b0793e7614b82",
+        "type": "github"
+      },
+      "original": {
+        "dir": "argocd",
+        "owner": "defn",
+        "ref": "v0.0.2",
+        "repo": "pkg",
+        "type": "github"
+      }
+    },
+    "caddy-pkg": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "dir": "caddy",
@@ -24,8 +46,8 @@
     },
     "cue-pkg": {
       "inputs": {
-        "flake-utils": "flake-utils_2",
-        "nixpkgs": "nixpkgs_2"
+        "flake-utils": "flake-utils_3",
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "dir": "cue",
@@ -134,10 +156,25 @@
         "type": "github"
       }
     },
+    "flake-utils_7": {
+      "locked": {
+        "lastModified": 1667395993,
+        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "kubectl-pkg": {
       "inputs": {
-        "flake-utils": "flake-utils_4",
-        "nixpkgs": "nixpkgs_3"
+        "flake-utils": "flake-utils_5",
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "dir": "kubectl",
@@ -206,22 +243,6 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1667909632,
-        "narHash": "sha256-p9ZTU29fRA0KNQVGIFTA06IcVeoCqYNRvegRdxGZd8k=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "bc5ad970780580ec272b3a6bc5f9bddf4e250d3c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_5": {
-      "locked": {
         "lastModified": 1653936696,
         "narHash": "sha256-M6bJShji9AIDZ7Kh7CPwPBPb/T7RiVev2PAcOi4fxDQ=",
         "owner": "NixOS",
@@ -232,6 +253,22 @@
       "original": {
         "owner": "NixOS",
         "ref": "22.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_5": {
+      "locked": {
+        "lastModified": 1667909632,
+        "narHash": "sha256-p9ZTU29fRA0KNQVGIFTA06IcVeoCqYNRvegRdxGZd8k=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "bc5ad970780580ec272b3a6bc5f9bddf4e250d3c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -252,21 +289,38 @@
         "type": "github"
       }
     },
+    "nixpkgs_7": {
+      "locked": {
+        "lastModified": 1653936696,
+        "narHash": "sha256-M6bJShji9AIDZ7Kh7CPwPBPb/T7RiVev2PAcOi4fxDQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ce6aa13369b667ac2542593170993504932eb836",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "22.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "argocd-pkg": "argocd-pkg",
         "caddy-pkg": "caddy-pkg",
         "cue-pkg": "cue-pkg",
-        "flake-utils": "flake-utils_3",
+        "flake-utils": "flake-utils_4",
         "kubectl-pkg": "kubectl-pkg",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_5",
         "temporalite-pkg": "temporalite-pkg",
         "tilt-pkg": "tilt-pkg"
       }
     },
     "temporalite-pkg": {
       "inputs": {
-        "flake-utils": "flake-utils_5",
-        "nixpkgs": "nixpkgs_5"
+        "flake-utils": "flake-utils_6",
+        "nixpkgs": "nixpkgs_6"
       },
       "locked": {
         "dir": "temporalite",
@@ -287,8 +341,8 @@
     },
     "tilt-pkg": {
       "inputs": {
-        "flake-utils": "flake-utils_6",
-        "nixpkgs": "nixpkgs_6"
+        "flake-utils": "flake-utils_7",
+        "nixpkgs": "nixpkgs_7"
       },
       "locked": {
         "dir": "tilt",

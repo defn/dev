@@ -7,6 +7,7 @@
     temporalite-pkg.url = github:defn/pkg?dir=temporalite&ref=v0.0.1;
     kubectl-pkg.url = github:defn/pkg?dir=kubectl&ref=v0.0.1;
     cue-pkg.url = github:defn/pkg?dir=cue&ref=v0.0.2;
+    argocd-pkg.url = github:defn/pkg?dir=argocd&ref=v0.0.2;
   };
 
   outputs =
@@ -18,6 +19,7 @@
     , temporalite-pkg
     , kubectl-pkg
     , cue-pkg
+    , argocd-pkg
     }:
     flake-utils.lib.eachDefaultSystem (system:
     let
@@ -27,10 +29,12 @@
       temporalite = tilt-pkg.defaultPackage.${system};
       kubectl = tilt-pkg.defaultPackage.${system};
       cue = tilt-pkg.defaultPackage.${system};
+      argocd = tilt-pkg.defaultPackage.${system};
     in
     {
       devShell = pkgs.mkShell {
         buildInputs = [
+          pkgs.jq
           pkgs.go
           pkgs.gotools
           pkgs.go-tools
@@ -49,6 +53,7 @@
           temporalite
           kubectl
           cue
+          argocd
         ];
       };
     });
