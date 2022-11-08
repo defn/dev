@@ -11,7 +11,8 @@ app ?= $(shell pwd)/app
 node ?= k3d-control-server-0
 n ?=
 k ?=
-p ?= glibcLocales k9s powerline-go htop screen jo vim entr gron fzf jq git less wget rsync curl unzip pass socat vault shfmt shellcheck oras docker containerd man groff aws-vault netcat-openbsd xdg-utils xz bind gnumake gnupg pinentry google-cloud-sdk awscli2 iputils yq pre-commit httpie docker-credential-helpers nixpkgs-fmt coreutils findutils diffutils
+p ?= glibcLocales powerline-go 
+pp ?= glibcLocales k9s powerline-go htop screen jo vim entr gron fzf jq git less wget rsync curl unzip pass socat vault shfmt shellcheck oras docker containerd man groff aws-vault netcat-openbsd xdg-utils xz bind gnumake gnupg pinentry google-cloud-sdk awscli2 iputils yq pre-commit httpie docker-credential-helpers nixpkgs-fmt coreutils findutils diffutils
 r ?= bash
 
 dummy_ip ?= 169.254.32.1
