@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+chdir="$1"; shift
+cd "$chdir"
+eval "$(~/.nix-profile/bin/direnv hook bash)"
+_direnv_hook
+exec "$@"

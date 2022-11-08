@@ -54,7 +54,8 @@ build:
 	$(MAKE) build-site
 
 install:
-	cd && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh && $(MAKE) install-inner
+	-$(MAKE) nix
+	cd && . ~/.nix-profile/etc/profile.d/nix.sh && ~/bin/de ~ $(MAKE) install-inner
 
 install-inner:
 	$(MAKE) symlinks perms
