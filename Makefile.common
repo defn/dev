@@ -359,6 +359,7 @@ nix-bootstrap:
 nix-install:
 	n profile install nixpkgs\#{glibcLocales,powerline-go,rsync,gnupg,pinentry,pass,git-crypt,docker,docker-credential-helpers,vault,nix-direnv,direnv}
 	n profile install github:defn/pkg?{dir=tilt\&ref=v0.0.2,dir=caddy\&ref=v0.0.1,dir=temporalite\&ref=v0.0.1,dir=kubectl\&ref=v0.0.1,dir=cue\&ref=v0.0.2}
+	n profile install nixpkgs\#{pkgs.nixpkgs-fmt,nodejs-18_x,go,gotools,go-tools,golangci-lint,gopls,go-outline,gopkgs,delve}
 
 nix-gc:
 	nix-store --gc
