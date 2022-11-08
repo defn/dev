@@ -54,7 +54,6 @@ build:
 	$(MAKE) build-site
 
 install:
-	$(MAKE) nix
 	cd && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh && $(MAKE) install-inner
 
 install-inner:
@@ -114,7 +113,7 @@ install-inner:
 
 tilt up:
 	pass hello
-	n develop --command tilt up --context k3d-control --port $(tilt_port) --host 127.0.0.1 --stream
+	tilt up --context k3d-control --port $(tilt_port) --host 127.0.0.1 --stream
 
 down:
 	kuma-tp-off

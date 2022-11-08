@@ -129,4 +129,4 @@ fi
 
 PATH="/bin:$PATH"
 
-if test -s ~/.nix-profile/bin/direnv; then eval $(~/.nix-profile/bin/direnv hook bash); fi
+if test -s ~/.nix-profile/bin/direnv; then eval "$(~/.nix-profile/bin/direnv hook bash)"; fi
