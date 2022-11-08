@@ -11,7 +11,7 @@ app ?= $(shell pwd)/app
 node ?= k3d-control-server-0
 n ?=
 k ?=
-p ?= glibcLocales powerline-go 
+p ?= nixpkgs\#glibcLocales nixpkgs\#powerline-go github:defn/pkg?dir=tilt
 pp ?= glibcLocales k9s powerline-go htop screen jo vim entr gron fzf jq git less wget rsync curl unzip pass socat vault shfmt shellcheck oras docker containerd man groff aws-vault netcat-openbsd xdg-utils xz bind gnumake gnupg pinentry google-cloud-sdk awscli2 iputils yq pre-commit httpie docker-credential-helpers nixpkgs-fmt coreutils findutils diffutils
 r ?= bash
 
@@ -358,7 +358,7 @@ nix-bootstrap:
 	sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile
 
 nix-install:
-	for a in $(p); do n profile install "nixpkgs#$$a"; done
+	for a in $(p); do n profile install "$$a"; done
 
 # make nix-shell p="..." r="..."
 nix-shell:
