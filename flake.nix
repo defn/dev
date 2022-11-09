@@ -3,9 +3,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     home.url = "path:/home/ubuntu/dev";
-    tilt-pkg.url = github:defn/pkg?dir=tilt&ref=v0.0.2;
     caddy-pkg.url = github:defn/pkg?dir=caddy&ref=v0.0.1;
-    temporalite-pkg.url = github:defn/pkg?dir=temporalite&ref=v0.0.1;
     kubectl-pkg.url = github:defn/pkg?dir=kubectl&ref=v0.0.1;
     argocd-pkg.url = github:defn/pkg?dir=argocd&ref=v0.0.2;
   };
@@ -15,18 +13,14 @@
     , nixpkgs
     , flake-utils
     , home
-    , tilt-pkg
     , caddy-pkg
-    , temporalite-pkg
     , kubectl-pkg
     , argocd-pkg
     }:
     flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = import nixpkgs { inherit system; };
-      tilt = tilt-pkg.defaultPackage.${system};
       caddy = caddy-pkg.defaultPackage.${system};
-      temporalite = temporalite-pkg.defaultPackage.${system};
       kubectl = kubectl-pkg.defaultPackage.${system};
       argocd = argocd-pkg.defaultPackage.${system};
     in
@@ -53,9 +47,7 @@
           pkgs.docker
           pkgs.docker-credential-helpers
           pkgs.vault
-          tilt
           caddy
-          temporalite
           kubectl
           argocd
         ];
