@@ -12,8 +12,8 @@ build-k3d:
 
 build-caddy:
     ARG image
-    BUILD --platform=linux/amd64 +nix-dir --image=${image} --arch=amd64 --dir=caddy
-    BUILD --platform=linux/arm64 +nix-dir --image=${image} --arch=arm64 --dir=caddy
+    BUILD --platform=linux/amd64 +alpine-nix-dir --image=${image} --arch=amd64 --dir=caddy
+    BUILD --platform=linux/arm64 +alpine-nix-dir --image=${image} --arch=arm64 --dir=caddy
 
 build-cloudflared:
     ARG image
@@ -159,6 +159,25 @@ nix-dir:
     ENTRYPOINT ["/entrypoint"]
 
     COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+nix-install/* --arch=${arch} --install="github:defn/pkg?dir=${dir}") /nix/
+    RUN (echo; echo export PATH=/bin`for a in /nix/store/*/bin; do echo -n ":$a"; done`; echo) >> .bashrc
+
+    IF [ "$image" != "" ]
+        SAVE IMAGE --push ${image}
+    END
+
+alpine-nix-dir:
+    ARG image
+    ARG arch
+    ARG dir
+
+    FROM alpine
+
+    RUN apk add bash
+
+    RUN (echo '#!/usr/bin/env bash'; echo 'source ~ubuntu/.bashrc; exec "$@"') | sudo tee /entrypoint && sudo chmod 755 /entrypoint
+    ENTRYPOINT ["/entrypoint"]
+
+    COPY --symlink-no-follow --dir (+nix-install/* --arch=${arch} --install="github:defn/pkg?dir=${dir}") /nix/
     RUN (echo; echo export PATH=/bin`for a in /nix/store/*/bin; do echo -n ":$a"; done`; echo) >> .bashrc
 
     IF [ "$image" != "" ]
