@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 
+set -efu
+
 case "${1:-}" in
     fmt)
         shift
         exec nixpkgs-fmt "$@"
+        ;;
+    build)
+        nix --extra-experimental-features nix-command --extra-experimental-features flakes "$@"
+        nix-store -q -R result
         ;;
     *)
         exec nix --extra-experimental-features nix-command --extra-experimental-features flakes "$@"
