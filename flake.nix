@@ -45,7 +45,6 @@
           pkgs.delve
           pkgs.nodejs-18_x
           pkgs.nixpkgs-fmt
-          pkgs.kubectl
           pkgs.kubernetes-helm
           pkgs.kube3d
           pkgs.rsync
