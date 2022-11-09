@@ -14,7 +14,11 @@ if [[ -n "${1:-}" ]]; then
     _direnv_hook
     exec "$@"
 else
+    if [[ ! -f flake.nix ]]; then cp ~/etc/flake.nix.template flake.nix; fi
     if [[ ! -f .envrc ]]; then echo use flake > .envrc; fi
+    mkdir -p .direnv
+    touch .direnv/.ignore
+    if test "?? .direnv/" == "$(git status -sb .direnv | tail +2)"; then echo .direnv >> .gitignore; fi
     direnv allow
     code-server .
 fi
