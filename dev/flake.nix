@@ -31,6 +31,7 @@
 
           propagatedBuildInputs = [
             cue
+            pkgs.vim
           ];
 
           meta = with lib;
