@@ -17,18 +17,18 @@ build-caddy:
 
 build-cloudflared:
     ARG image
-    BUILD --platform=linux/amd64 +nix-dir --image=${image} --arch=amd64 --dir=cloudflared
-    BUILD --platform=linux/arm64 +nix-dir --image=${image} --arch=arm64 --dir=cloudflared
+    BUILD --platform=linux/amd64 +alpine-nix-dir --image=${image} --arch=amd64 --dir=cloudflared
+    BUILD --platform=linux/arm64 +alpine-nix-dir --image=${image} --arch=arm64 --dir=cloudflared
 
 build-coredns:
     ARG image
-    BUILD --platform=linux/amd64 +nix-dir --image=${image} --arch=amd64 --dir=coredns
-    BUILD --platform=linux/arm64 +nix-dir --image=${image} --arch=arm64 --dir=coredns
+    BUILD --platform=linux/amd64 +alpine-nix-dir --image=${image} --arch=amd64 --dir=coredns
+    BUILD --platform=linux/arm64 +alpine-nix-dir --image=${image} --arch=arm64 --dir=coredns
 
 build-vault:
     ARG image
-    BUILD --platform=linux/amd64 +nix-pkg --image=${image} --arch=amd64 --pkg=vault
-    BUILD --platform=linux/arm64 +nix-pkg --image=${image} --arch=arm64 --pkg=vault
+    BUILD --platform=linux/amd64 +alpine-nix-pkg --image=${image} --arch=amd64 --pkg=vault
+    BUILD --platform=linux/arm64 +alpine-nix-pkg --image=${image} --arch=arm64 --pkg=vault
 
 coder-server:
     ARG arch
@@ -192,6 +192,23 @@ nix-pkg:
     FROM +root --arch=${arch}
 
     RUN (echo '#!/usr/bin/env bash'; echo 'source ~ubuntu/.bashrc; exec "$@"') | sudo tee /entrypoint && sudo chmod 755 /entrypoint
+    ENTRYPOINT ["/entrypoint"]
+
+    COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+nix-install/* --arch=${arch} --install="nixpkgs#${pkg}") /nix/
+    RUN (echo; echo export PATH=/bin`for a in /nix/store/*/bin; do echo -n ":$a"; done`; echo) >> .bashrc
+
+    IF [ "$image" != "" ]
+        SAVE IMAGE --push ${image}
+    END
+
+alpine-nix-pkg:
+    ARG image
+    ARG arch
+    ARG pkg
+
+    FROM alpine
+
+    RUN (echo '#!/usr/bin/env bash'; echo 'source /.bashrc; exec "$@"') | tee /entrypoint && chmod 755 /entrypoint
     ENTRYPOINT ["/entrypoint"]
 
     COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+nix-install/* --arch=${arch} --install="nixpkgs#${pkg}") /nix/
