@@ -30,7 +30,6 @@
           installPhase = "mkdir -p $out";
 
           propagatedBuildInputs = [
-            pkgs.vim
             pkgs.jq
             cue
           ];
