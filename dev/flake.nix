@@ -31,6 +31,7 @@
 
           propagatedBuildInputs = [
             cue
+            pkgs.jq
             pkgs.vim
           ];
 
