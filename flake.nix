@@ -62,5 +62,29 @@
           argocd
         ];
       };
+
+      defaultPackage =
+        with import nixpkgs { inherit system; };
+        stdenv.mkDerivation rec {
+          name = "${slug}-${version}";
+
+          slug = "home";
+          version = "0.0.1";
+
+          dontUnpack = true;
+
+          installPhase = "mkdir -p $out";
+
+          propagatedBuildInputs = [
+            cue
+          ];
+
+          meta = with lib;
+            {
+              homepage = "https://defn.sh/${slug}";
+              description = "packaging binaries with flake";
+              platforms = platforms.linux;
+            };
+        };
     });
 }
