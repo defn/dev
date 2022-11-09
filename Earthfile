@@ -174,7 +174,7 @@ alpine-nix-dir:
 
     RUN apk add bash
 
-    RUN (echo '#!/usr/bin/env bash'; echo 'source ~ubuntu/.bashrc; exec "$@"') | tee /entrypoint && chmod 755 /entrypoint
+    RUN (echo '#!/usr/bin/env bash'; echo 'source ~/.bashrc; exec "$@"') | tee /entrypoint && chmod 755 /entrypoint
     ENTRYPOINT ["/entrypoint"]
 
     COPY --symlink-no-follow --dir (+nix-install/* --arch=${arch} --install="github:defn/pkg?dir=${dir}") /nix/
