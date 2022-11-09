@@ -4,7 +4,6 @@ set -efu
 
 if [[ -n "${1:-}" ]]; then
     chdir="$1"; shift
-    ;;
 else
     exec def 
 fi
