@@ -30,9 +30,9 @@
           installPhase = "mkdir -p $out";
 
           propagatedBuildInputs = [
-            cue
-            pkgs.jq
             pkgs.vim
+            pkgs.jq
+            cue
           ];
 
           meta = with lib;
