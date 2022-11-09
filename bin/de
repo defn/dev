@@ -3,7 +3,14 @@
 set -efu
 
 if [[ -n "${1:-}" ]]; then
-    chdir="$1"; shift
+    case "${1}" in
+        /*)
+            exec def "${1#/}"
+            ;; 
+        *)
+            chdir="$1"; shift
+            ;;
+    esac
 else
     exec def 
 fi
