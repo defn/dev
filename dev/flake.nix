@@ -3,6 +3,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     cue-pkg.url = github:defn/pkg?dir=cue&ref=v0.0.2;
+    tilt-pkg.url = github:defn/pkg?dir=cue&ref=v0.0.4;
   };
 
   outputs =
@@ -10,11 +11,13 @@
     , nixpkgs
     , flake-utils
     , cue-pkg
+    , tilt-pkg
     }:
     flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = import nixpkgs { inherit system; };
       cue = cue-pkg.defaultPackage.${system};
+      tilt = tilt-pkg.defaultPackage.${system};
     in
     {
       defaultPackage =
@@ -32,6 +35,7 @@
           propagatedBuildInputs = [
             pkgs.jq
             cue
+            tilt
           ];
 
           meta = with lib;
