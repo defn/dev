@@ -135,7 +135,7 @@ nix:
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
                 profile install \
                     github:defn/pkg?dir=prelude\&ref=v0.0.3 \
-                    nixpkgs\#{nix-direnv,direnv}
+                    nixpkgs#nix-direnv nixpkgs#direnv
 
 nix-install:
     ARG arch
