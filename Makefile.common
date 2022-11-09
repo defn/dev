@@ -357,7 +357,7 @@ nix-bootstrap:
 	sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile
 
 nix-install:
-	n profile install nixpkgs\#{powerline-go,nix-direnv,direnv,pinentry}
+	. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh && nix --extra-experimental-features nix-command --extra-experimental-features flakes profile install nixpkgs\#{powerline-go,nix-direnv,direnv,pinentry}
 
 nix-gc:
 	nix-store --gc

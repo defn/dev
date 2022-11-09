@@ -76,8 +76,8 @@ root:
         && apt-get update \
         && apt-get upgrade -y \
         && apt-get install -y --no-install-recommends \
-            apt-transport-https software-properties-common curl git make xz-utils wget \
-            tzdata locales iproute2 net-tools \
+            apt-transport-https software-properties-common wget curl git xz-utils make \
+            tzdata locales \
             sudo tini \
         && apt purge -y nano
 
@@ -135,7 +135,7 @@ nix:
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
                 profile install github:defn/pkg?dir=cue
 
-    RUN ./bin/e make nix-install
+    RUN make nix-install
 
 nix-install:
     ARG arch
