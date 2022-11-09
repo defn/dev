@@ -36,6 +36,7 @@
             pkgs.jq
             cue
             tilt
+            fzf
           ];
 
           meta = with lib;
