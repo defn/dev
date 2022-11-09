@@ -7,12 +7,14 @@ else
 fi
 
 cd "$chdir"
-direnv allow
 
 if [[ -n "${1:-}" ]]; then
     eval "$(~/.nix-profile/bin/direnv hook bash)"
+    direnv allow
     _direnv_hook
     exec "$@"
 else
+    if [[ ! -f .envrc ]]; then echo use flake > .envrc; fi
+    direnv allow
     code-server .
 fi
