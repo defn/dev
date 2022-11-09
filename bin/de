@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 
 chdir="$1"; shift
+
 cd "$chdir"
-eval "$(~/.nix-profile/bin/direnv hook bash)"
 direnv allow
-_direnv_hook
-exec "$@"
+
+if [[ -n "${1:-}" ]]; then
+    eval "$(~/.nix-profile/bin/direnv hook bash)"
+    _direnv_hook
+    exec "$@"
+else
+    code-server .
+fi
