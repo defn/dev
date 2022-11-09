@@ -357,7 +357,7 @@ nix-bootstrap:
 	sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile
 
 nix-install:
-	n profile install nixpkgs\#{glibcLocales,powerline-go,rsync,gnupg,pinentry,pass,git-crypt,docker,docker-credential-helpers,nix-direnv,direnv,vault}
+	n profile install nixpkgs\#{powerline-go,nix-direnv,direnv,pinentry}
 
 nix-gc:
 	nix-store --gc

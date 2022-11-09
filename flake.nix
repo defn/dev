@@ -25,11 +25,11 @@
     let
       pkgs = import nixpkgs { inherit system; };
       tilt = tilt-pkg.defaultPackage.${system};
-      caddy = tilt-pkg.defaultPackage.${system};
-      temporalite = tilt-pkg.defaultPackage.${system};
-      kubectl = tilt-pkg.defaultPackage.${system};
-      cue = tilt-pkg.defaultPackage.${system};
-      argocd = tilt-pkg.defaultPackage.${system};
+      caddy = caddy-pkg.defaultPackage.${system};
+      temporalite = temporalite-pkg.defaultPackage.${system};
+      kubectl = kubectl-pkg.defaultPackage.${system};
+      cue = cue-pkg.defaultPackage.${system};
+      argocd = argocd-pkg.defaultPackage.${system};
     in
     {
       devShell = pkgs.mkShell {
@@ -48,6 +48,13 @@
           pkgs.kubectl
           pkgs.kubernetes-helm
           pkgs.kube3d
+          pkgs.rsync
+          pkgs.gnupg
+          pkgs.pass
+          pkgs.git-crypt
+          pkgs.docker
+          pkgs.docker-credential-helpers
+          pkgs.vault
           tilt
           caddy
           temporalite
