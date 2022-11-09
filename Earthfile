@@ -130,10 +130,12 @@ nix:
 
     # nix
     RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile && rm -f nix-install.sh && chmod 0755 /nix && sudo rm -f /bin/man
-    
+
     RUN echo ${NIXBUMP} && . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
                 profile install github:defn/pkg?dir=cue
+
+    RUN ./bin/e make nix-install
 
 nix-install:
     ARG arch
