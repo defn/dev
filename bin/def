@@ -3,7 +3,7 @@
 set -efu
 
 function main {
-    local project="$(find ~/work/ -type d -path /home/ubuntu/work/nix/store -prune -o -name .envrc -print | fzf --query="${1:-}" --select-1)"
+    local project="$(find . ./work/ -type d -path ./work/nix/store -prune -o -path . -prune -o -name .envrc -print | fzf --query="${1:-}" --select-1)"
 
     if [[ -n "${project}" ]]; then
         de "$(dirname "${project}")"
