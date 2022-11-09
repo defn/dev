@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-chdir="$1"; shift
+if [[ -n "${1:-}" ]]; then
+    chdir="$1"; shift
+else
+    chdir=.
+fi
 
 cd "$chdir"
 direnv allow
