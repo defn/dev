@@ -129,7 +129,7 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "dir": "cue",
+        "dir": "tilt",
         "lastModified": 1667956668,
         "narHash": "sha256-caJPSl//yBdAD55ZODnruFSq4bghDTfirmrSCSqiV2M=",
         "owner": "defn",
@@ -138,7 +138,7 @@
         "type": "github"
       },
       "original": {
-        "dir": "cue",
+        "dir": "tilt",
         "owner": "defn",
         "ref": "v0.0.4",
         "repo": "pkg",

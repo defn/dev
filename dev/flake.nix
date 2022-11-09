@@ -3,7 +3,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     cue-pkg.url = github:defn/pkg?dir=cue&ref=v0.0.2;
-    tilt-pkg.url = github:defn/pkg?dir=cue&ref=v0.0.4;
+    tilt-pkg.url = github:defn/pkg?dir=tilt&ref=v0.0.4;
   };
 
   outputs =
