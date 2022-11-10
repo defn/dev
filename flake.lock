@@ -46,8 +46,8 @@
     },
     "cue-pkg": {
       "inputs": {
-        "flake-utils": "flake-utils_4",
-        "nixpkgs": "nixpkgs_3"
+        "flake-utils": "flake-utils_5",
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "dir": "cue",
@@ -60,6 +60,28 @@
       },
       "original": {
         "dir": "cue",
+        "owner": "defn",
+        "ref": "v0.0.2",
+        "repo": "pkg",
+        "type": "github"
+      }
+    },
+    "earthly-pkg": {
+      "inputs": {
+        "flake-utils": "flake-utils_3",
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "dir": "earthly",
+        "lastModified": 1667882176,
+        "narHash": "sha256-3tfJ0JlYZxXSpWw3VtjWr5V5L0Jsk8iAV+ejarUSSvs=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "fd531c5b5098993967c53a73539b0793e7614b82",
+        "type": "github"
+      },
+      "original": {
+        "dir": "earthly",
         "owner": "defn",
         "ref": "v0.0.2",
         "repo": "pkg",
@@ -171,11 +193,26 @@
         "type": "github"
       }
     },
+    "flake-utils_8": {
+      "locked": {
+        "lastModified": 1667395993,
+        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "home": {
       "inputs": {
         "cue-pkg": "cue-pkg",
-        "flake-utils": "flake-utils_5",
-        "nixpkgs": "nixpkgs_4",
+        "flake-utils": "flake-utils_6",
+        "nixpkgs": "nixpkgs_5",
         "tilt-pkg": "tilt-pkg"
       },
       "locked": {
@@ -197,8 +234,8 @@
     },
     "kubectl-pkg": {
       "inputs": {
-        "flake-utils": "flake-utils_7",
-        "nixpkgs": "nixpkgs_6"
+        "flake-utils": "flake-utils_8",
+        "nixpkgs": "nixpkgs_7"
       },
       "locked": {
         "dir": "kubectl",
@@ -267,22 +304,6 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1667939680,
-        "narHash": "sha256-nu3zSaTsdhjSs0F8WTzFBlJ9Q2tNaw7A1EIPRhniqnw=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "9f1f990aee8ca8bc847bf41feabe0d91d8a59dc4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_5": {
-      "locked": {
         "lastModified": 1653936696,
         "narHash": "sha256-M6bJShji9AIDZ7Kh7CPwPBPb/T7RiVev2PAcOi4fxDQ=",
         "owner": "NixOS",
@@ -293,6 +314,22 @@
       "original": {
         "owner": "NixOS",
         "ref": "22.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_5": {
+      "locked": {
+        "lastModified": 1667939680,
+        "narHash": "sha256-nu3zSaTsdhjSs0F8WTzFBlJ9Q2tNaw7A1EIPRhniqnw=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "9f1f990aee8ca8bc847bf41feabe0d91d8a59dc4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -315,6 +352,22 @@
     },
     "nixpkgs_7": {
       "locked": {
+        "lastModified": 1653936696,
+        "narHash": "sha256-M6bJShji9AIDZ7Kh7CPwPBPb/T7RiVev2PAcOi4fxDQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ce6aa13369b667ac2542593170993504932eb836",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "22.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_8": {
+      "locked": {
         "lastModified": 1667969101,
         "narHash": "sha256-GL53T705HO7Q/KVfbb5STx8AxFs8YgaGY8pvAZC+O7U=",
         "owner": "NixOS",
@@ -333,16 +386,17 @@
       "inputs": {
         "argocd-pkg": "argocd-pkg",
         "caddy-pkg": "caddy-pkg",
-        "flake-utils": "flake-utils_3",
+        "earthly-pkg": "earthly-pkg",
+        "flake-utils": "flake-utils_4",
         "home": "home",
         "kubectl-pkg": "kubectl-pkg",
-        "nixpkgs": "nixpkgs_7"
+        "nixpkgs": "nixpkgs_8"
       }
     },
     "tilt-pkg": {
       "inputs": {
-        "flake-utils": "flake-utils_6",
-        "nixpkgs": "nixpkgs_5"
+        "flake-utils": "flake-utils_7",
+        "nixpkgs": "nixpkgs_6"
       },
       "locked": {
         "dir": "tilt",

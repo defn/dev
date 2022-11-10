@@ -6,6 +6,7 @@
     caddy-pkg.url = github:defn/pkg?dir=caddy&ref=v0.0.1;
     kubectl-pkg.url = github:defn/pkg?dir=kubectl&ref=v0.0.1;
     argocd-pkg.url = github:defn/pkg?dir=argocd&ref=v0.0.2;
+    earthly-pkg.url = github:defn/pkg?dir=earthly&ref=v0.0.2;
   };
 
   outputs =
@@ -16,6 +17,7 @@
     , caddy-pkg
     , kubectl-pkg
     , argocd-pkg
+    , earthly-pkg
     }:
     flake-utils.lib.eachDefaultSystem (system:
     let
@@ -23,34 +25,60 @@
       caddy = caddy-pkg.defaultPackage.${system};
       kubectl = kubectl-pkg.defaultPackage.${system};
       argocd = argocd-pkg.defaultPackage.${system};
+      earthly = earthly-pkg.defaultPackage.${system};
     in
     {
-      devShell = pkgs.mkShell {
-        buildInputs = [
-          home.defaultPackage.${system}
-          pkgs.go
-          pkgs.gotools
-          pkgs.go-tools
-          pkgs.golangci-lint
-          pkgs.gopls
-          pkgs.go-outline
-          pkgs.gopkgs
-          pkgs.delve
-          pkgs.nodejs-18_x
-          pkgs.nixpkgs-fmt
-          pkgs.kubernetes-helm
-          pkgs.kube3d
-          pkgs.rsync
-          pkgs.gnupg
-          pkgs.pass
-          pkgs.git-crypt
-          pkgs.docker
-          pkgs.docker-credential-helpers
-          pkgs.vault
-          caddy
-          kubectl
-          argocd
-        ];
-      };
+      devShell =
+        pkgs.mkShell rec {
+          buildInputs = with pkgs; [
+            home.defaultPackage.${system}
+            go
+            gotools
+            go-tools
+            golangci-lint
+            gopls
+            go-outline
+            gopkgs
+            delve
+            nodejs-18_x
+            nixpkgs-fmt
+            kubernetes-helm
+            kube3d
+            rsync
+            gnupg
+            pass
+            git-crypt
+            docker
+            docker-credential-helpers
+            vault
+            caddy
+            kubectl
+            argocd
+            earthly
+          ];
+        };
+
+      defaultPackage =
+        with import nixpkgs { inherit system; };
+        stdenv.mkDerivation rec {
+          name = "${slug}-${version}";
+
+          slug = "defn-dev";
+          version = "0.0.1";
+
+          dontUnpack = true;
+
+          installPhase = "mkdir -p $out";
+
+          propagatedBuildInputs = [
+          ];
+
+          meta = with lib;
+            {
+              homepage = "https://defn.sh/${slug}";
+              description = "dev environment home directory";
+              platforms = platforms.linux;
+            };
+        };
     });
 }
