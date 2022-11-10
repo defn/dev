@@ -43,7 +43,6 @@
             kubernetes-helm
             kube3d
             rsync
-            gnupg
             vault
             caddy
             argocd
