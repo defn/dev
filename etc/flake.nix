@@ -15,11 +15,12 @@
     let
       pkgs = import nixpkgs { inherit system; };
     in
-    {
+    rec {
       devShell =
         pkgs.mkShell rec {
           buildInputs = with pkgs; [
             home.defaultPackage.${system}
+            defaultPackage
           ];
         };
 

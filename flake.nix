@@ -27,11 +27,12 @@
       argocd = argocd-pkg.defaultPackage.${system};
       earthly = earthly-pkg.defaultPackage.${system};
     in
-    {
+    rec {
       devShell =
         pkgs.mkShell rec {
           buildInputs = with pkgs; [
             home.defaultPackage.${system}
+            defaultPackage
             go
             gotools
             go-tools
