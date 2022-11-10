@@ -9,83 +9,83 @@ http://localhost {
 	}
 
 	handle_path /dev/proxy/10350/ {
-		redir {scheme}://dev-10350.127.0.0.1.sslip.io
+		redir {scheme}://tilt-10350.127.0.0.1.sslip.io
 	}
 
 	handle_path /dev/proxy/10351/ {
-		redir {scheme}://dev-10351.127.0.0.1.sslip.io
+		redir {scheme}://tilt-10351.127.0.0.1.sslip.io
 	}
 
 	handle_path /dev/proxy/10352/ {
-		redir {scheme}://dev-10352.127.0.0.1.sslip.io
+		redir {scheme}://tilt-10352.127.0.0.1.sslip.io
 	}
 
 	handle_path /dev/proxy/10353/ {
-		redir {scheme}://dev-10353.127.0.0.1.sslip.io
+		redir {scheme}://tilt-10353.127.0.0.1.sslip.io
 	}
 
 	handle_path /dev/proxy/10354/ {
-		redir {scheme}://dev-10354.127.0.0.1.sslip.io
+		redir {scheme}://tilt-10354.127.0.0.1.sslip.io
 	}
 
 	handle_path /dev/proxy/10355/ {
-		redir {scheme}://dev-10355.127.0.0.1.sslip.io
+		redir {scheme}://tilt-10355.127.0.0.1.sslip.io
 	}
 
 	handle_path /dev/proxy/10356/ {
-		redir {scheme}://dev-10356.127.0.0.1.sslip.io
+		redir {scheme}://tilt-10356.127.0.0.1.sslip.io
 	}
 
 	handle_path /dev/proxy/10357/ {
-		redir {scheme}://dev-10357.127.0.0.1.sslip.io
+		redir {scheme}://tilt-10357.127.0.0.1.sslip.io
 	}
 
 	handle_path /dev/proxy/10358/ {
-		redir {scheme}://dev-10358.127.0.0.1.sslip.io
+		redir {scheme}://tilt-10358.127.0.0.1.sslip.io
 	}
 
 	handle_path /dev/proxy/10359/ {
-		redir {scheme}://dev-10359.127.0.0.1.sslip.io
+		redir {scheme}://tilt-10359.127.0.0.1.sslip.io
 	}
 }
 
-http://dev-10350.127.0.0.1.sslip.io {
+http://tilt-10350.127.0.0.1.sslip.io {
 	reverse_proxy http://localhost:10350
 }
 
-http://dev-10351.127.0.0.1.sslip.io {
+http://tilt-10351.127.0.0.1.sslip.io {
 	reverse_proxy http://localhost:10351
 }
 
-http://dev-10352.127.0.0.1.sslip.io {
+http://tilt-10352.127.0.0.1.sslip.io {
 	reverse_proxy http://localhost:10352
 }
 
-http://dev-10353.127.0.0.1.sslip.io {
+http://tilt-10353.127.0.0.1.sslip.io {
 	reverse_proxy http://localhost:10353
 }
 
-http://dev-10354.127.0.0.1.sslip.io {
+http://tilt-10354.127.0.0.1.sslip.io {
 	reverse_proxy http://localhost:10354
 }
 
-http://dev-10355.127.0.0.1.sslip.io {
+http://tilt-10355.127.0.0.1.sslip.io {
 	reverse_proxy http://localhost:10355
 }
 
-http://dev-10356.127.0.0.1.sslip.io {
+http://tilt-10356.127.0.0.1.sslip.io {
 	reverse_proxy http://localhost:10356
 }
 
-http://dev-10357.127.0.0.1.sslip.io {
+http://tilt-10357.127.0.0.1.sslip.io {
 	reverse_proxy http://localhost:10357
 }
 
-http://dev-10358.127.0.0.1.sslip.io {
+http://tilt-10358.127.0.0.1.sslip.io {
 	reverse_proxy http://localhost:10358
 }
 
-http://dev-10359.127.0.0.1.sslip.io {
+http://tilt-10359.127.0.0.1.sslip.io {
 	reverse_proxy http://localhost:10359
 }
 
