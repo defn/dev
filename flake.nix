@@ -6,7 +6,7 @@
     caddy-pkg.url = github:defn/pkg?dir=caddy&ref=v0.0.1;
     kubectl-pkg.url = github:defn/pkg?dir=kubectl&ref=v0.0.1;
     argocd-pkg.url = github:defn/pkg?dir=argocd&ref=v0.0.2;
-    earthly-pkg.url = github:defn/pkg?dir=earthly&ref=v0.0.2;
+    earthly-pkg.url = github:defn/pkg?dir=earthly&ref=v0.0.5;
   };
 
   outputs =

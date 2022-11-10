@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/22.05"; # nixpkgs-unstable
     flake-utils.url = "github:numtide/flake-utils";
     home.url = "github:defn/dev?dir=dev&ref=v0.0.2";
   };
@@ -30,10 +30,22 @@
 
           slug = "TODO";
           version = "0.0.1";
+          arch = if system == "x86_64-linux" then "amd64" else "arm64";
+
+          src = pkgs.fetchurl {
+            url = "https://github.com/earthly/earthly/releases/download/v${version}/earthly-linux-${arch}";
+            sha256 = if arch == "amd64" then "sha256-uiYZekPpUs3qe+RjeRkR06N0N+Ek7mzPIITkiJiqNOU=" else "sha256-0hN6hggSD3q0tQptAiYfiOQsnk7X9lZCq7Jej9U3Qzk=";
+            executable = true;
+          };
+
+          sourceRoot = ".";
 
           dontUnpack = true;
 
-          installPhase = "mkdir -p $out";
+          installPhase = ''
+            mkdir -p $out/bin
+            install -m 0755 $src $out/bin/earthly
+          '';
 
           propagatedBuildInputs = [
           ];
@@ -41,7 +53,7 @@
           meta = with lib;
             {
               homepage = "https://defn.sh/${slug}";
-              description = "TODO";
+              description = "${slug}";
               platforms = platforms.linux;
             };
         };
