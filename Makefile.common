@@ -1,6 +1,5 @@
 repo ?=
 push ?= --push
-tilt_port ?= 7999
 name ?= $(shell uname -n | cut -d. -f1 | tr A-Z a-z | perl -pe 's{-\d$$}{}')
 k3d_name ?= $(name)
 context ?= k3d-$(name)
@@ -111,7 +110,7 @@ install-inner:
 
 tilt up:
 	pass hello
-	tilt up --context k3d-control --port $(tilt_port) --host 127.0.0.1 --stream
+	tilt up --context k3d-control --port $(shell comm -23 <(seq 10350 10359 | sort) <(ss -Htan | awk '{print $$4}' | cut -d':' -f2 | sort -u) | shuf | head -n 1) --host 127.0.0.1 --stream
 
 down:
 	kuma-tp-off
