@@ -20,7 +20,6 @@
         pkgs.mkShell rec {
           buildInputs = with pkgs; [
             home.defaultPackage.${system}
-            vim
           ];
         };
 
@@ -36,12 +35,13 @@
 
           installPhase = "mkdir -p $out";
 
-          propagatedBuildInputs = [ ];
+          propagatedBuildInputs = [
+          ];
 
           meta = with lib;
             {
               homepage = "https://defn.sh/${slug}";
-              description = "nix golang / tilt integration";
+              description = "TODO";
               platforms = platforms.linux;
             };
         };
