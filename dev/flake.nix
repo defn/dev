@@ -41,6 +41,8 @@
             docker
             docker-credential-helpers
             pass
+            kubectl
+            k9s
             cue
             tilt
             earthly

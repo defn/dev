@@ -6,7 +6,6 @@
     caddy-pkg.url = github:defn/pkg?dir=caddy&ref=v0.0.1;
     kubectl-pkg.url = github:defn/pkg?dir=kubectl&ref=v0.0.1;
     argocd-pkg.url = github:defn/pkg?dir=argocd&ref=v0.0.2;
-    earthly-pkg.url = github:defn/pkg?dir=earthly&ref=v0.0.5;
   };
 
   outputs =
@@ -17,7 +16,6 @@
     , caddy-pkg
     , kubectl-pkg
     , argocd-pkg
-    , earthly-pkg
     }:
     flake-utils.lib.eachDefaultSystem (system:
     let
@@ -25,7 +23,6 @@
       caddy = caddy-pkg.defaultPackage.${system};
       kubectl = kubectl-pkg.defaultPackage.${system};
       argocd = argocd-pkg.defaultPackage.${system};
-      earthly = earthly-pkg.defaultPackage.${system};
     in
     rec {
       devShell =
@@ -47,15 +44,9 @@
             kube3d
             rsync
             gnupg
-            pass
-            git-crypt
-            docker
-            docker-credential-helpers
             vault
             caddy
-            kubectl
             argocd
-            earthly
           ];
         };
 
