@@ -12,26 +12,6 @@ build-k3d:
     BUILD --platform=linux/amd64 +k3d --image=${image} --arch=amd64
     BUILD --platform=linux/arm64 +k3d --image=${image} --arch=arm64
 
-build-caddy:
-    ARG image
-    BUILD --platform=linux/amd64 pkg+alpine-nix-dir --image=${image} --arch=amd64 --dir=caddy
-    BUILD --platform=linux/arm64 pkg+alpine-nix-dir --image=${image} --arch=arm64 --dir=caddy
-
-build-cloudflared:
-    ARG image
-    BUILD --platform=linux/amd64 pkg+alpine-nix-dir --image=${image} --arch=amd64 --dir=cloudflared
-    BUILD --platform=linux/arm64 pkg+alpine-nix-dir --image=${image} --arch=arm64 --dir=cloudflared
-
-build-coredns:
-    ARG image
-    BUILD --platform=linux/amd64 pkg+alpine-nix-dir --image=${image} --arch=amd64 --dir=coredns
-    BUILD --platform=linux/arm64 pkg+alpine-nix-dir --image=${image} --arch=arm64 --dir=coredns
-
-build-vault:
-    ARG image
-    BUILD --platform=linux/amd64 pkg+alpine-nix-pkg --image=${image} --arch=amd64 --pkg=vault
-    BUILD --platform=linux/arm64 pkg+alpine-nix-pkg --image=${image} --arch=arm64 --pkg=vault
-
 coder-server:
     ARG arch
     ARG CODESERVER
