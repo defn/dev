@@ -2,7 +2,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    home.url = "path:/home/ubuntu/dev";
+    home.url = "github:defn/dev?dir=dev&ref=v0.0.2";
   };
 
   outputs =
