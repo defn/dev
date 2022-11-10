@@ -16,11 +16,34 @@
       pkgs = import nixpkgs { inherit system; };
     in
     {
-      devShell = pkgs.mkShell {
-        buildInputs = [
-          home.defaultPackage.${system}
-          pkgs.vim
-        ];
-      };
+      devShell =
+        pkgs.mkShell rec {
+          buildInputs = with pkgs; [
+            home.defaultPackage.${system}
+            vim
+          ];
+        };
+
+      defaultPackage =
+        with import nixpkgs { inherit system; };
+        stdenv.mkDerivation rec {
+          name = "${slug}-${version}";
+
+          slug = "TODO";
+          version = "0.0.1";
+
+          dontUnpack = true;
+
+          installPhase = "mkdir -p $out";
+
+          propagatedBuildInputs = [ ];
+
+          meta = with lib;
+            {
+              homepage = "https://defn.sh/${slug}";
+              description = "nix golang / tilt integration";
+              platforms = platforms.linux;
+            };
+        };
     });
 }
