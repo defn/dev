@@ -1,11 +1,11 @@
 
 project: ubuntu
 
-carry_env: true 
+carry_env: true
 
 opts:
   machine: k3d-control
-  override: demo-alt  
+  override: demo-alt
 
 providers:
   hashicorp_vault:
@@ -15,4 +15,3 @@ providers:
       MEH:
         path: kv/data/dev/{{machine}}/{{override}}
         field: hello
-
