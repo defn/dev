@@ -4,6 +4,7 @@
     flake-utils.url = "github:numtide/flake-utils";
     cue-pkg.url = github:defn/pkg?dir=cue&ref=v0.0.2;
     tilt-pkg.url = github:defn/pkg?dir=tilt&ref=v0.0.4;
+    earthly-pkg.url = github:defn/pkg?dir=earthly&ref=v0.0.5;
   };
 
   outputs =
@@ -12,12 +13,14 @@
     , flake-utils
     , cue-pkg
     , tilt-pkg
+    , earthly-pkg
     }:
     flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = import nixpkgs { inherit system; };
       cue = cue-pkg.defaultPackage.${system};
       tilt = tilt-pkg.defaultPackage.${system};
+      earthly = earthly-pkg.defaultPackage.${system};
     in
     {
       defaultPackage =
@@ -32,11 +35,15 @@
 
           installPhase = "mkdir -p $out";
 
-          propagatedBuildInputs = [
-            pkgs.jq
+          propagatedBuildInputs = with pkgs; [
+            jq
+            fzf
+            docker
+            docker-credential-helpers
+            pass
             cue
             tilt
-            fzf
+            earthly
           ];
 
           meta = with lib;
