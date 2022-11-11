@@ -26,21 +26,22 @@
     in
     rec {
       devShell =
+        let
+          inputsList = (nixpkgs.lib.attrsets.mapAttrsToList (name: value: value) inputs);
+          inputsDefaultPackages = (item: acc:
+            acc ++
+            (
+              if item ? ${"defaultPackage"}
+              then [ item.defaultPackage.${system} ]
+              else [ ]
+            ));
+        in
         pkgs.mkShell
           rec {
             buildInputs =
               values.buildInputs
               ++ [ defaultPackage ]
-              ++ nixpkgs.lib.lists.foldr
-                (item: acc:
-                  acc ++
-                  (
-                    if item ? ${"defaultPackage"}
-                    then [ item.defaultPackage.${system} ]
-                    else [ ]
-                  ))
-                [ ]
-                (nixpkgs.lib.attrsets.mapAttrsToList (name: value: value) inputs);
+              ++ nixpkgs.lib.lists.foldr inputsDefaultPackages [ ] inputsList;
           };
 
       defaultPackage =
