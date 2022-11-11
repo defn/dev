@@ -23,7 +23,7 @@
       caddy = caddy-pkg.defaultPackage.${system};
       kubectl = kubectl-pkg.defaultPackage.${system};
       argocd = argocd-pkg.defaultPackage.${system};
-      values = import ./values.nix { inherit pkgs; };
+      values = import ./values.nix { inherit pkgs; inherit system; };
     in
     rec {
       devShell =

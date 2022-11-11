@@ -1,4 +1,4 @@
-{ pkgs }: rec {
+{ pkgs, system }: rec {
   buildInputs = [
     pkgs.go
     pkgs.gotools
