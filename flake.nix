@@ -2,7 +2,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    home.url = "github:defn/dev?dir=dev&ref=v0.0.6";
+    home.url = "github:defn/dev?dir=dev&ref=v0.0.7";
     caddy-pkg.url = github:defn/pkg?dir=caddy&ref=v0.0.1;
     kubectl-pkg.url = github:defn/pkg?dir=kubectl&ref=v0.0.1;
     argocd-pkg.url = github:defn/pkg?dir=argocd&ref=v0.0.2;
