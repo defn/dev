@@ -93,7 +93,7 @@ if tty >/dev/null; then
   if type -P powerline-go >/dev/null; then
 	function render_ps1 {
 		powerline-go --colorize-hostname -mode flat -newline \
-			-modules host,ssh,cwd,perms,gitlite,load,exit,venv,kube,nix-shell
+			-modules host,ssh,cwd,perms,gitlite,load,exit,venv,kube
 	}
 
 	function update_ps1 {
