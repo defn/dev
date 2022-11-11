@@ -2,7 +2,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/22.05";
     flake-utils.url = "github:numtide/flake-utils";
-    cue-pkg.url = github:defn/pkg?dir=cue&ref=v0.0.2;
+    c-pkg.url = github:defn/pkg?dir=c&ref=v0.0.6;
     tilt-pkg.url = github:defn/pkg?dir=tilt&ref=v0.0.4;
     earthly-pkg.url = github:defn/pkg?dir=earthly&ref=v0.0.5;
   };
@@ -11,18 +11,25 @@
     { self
     , nixpkgs
     , flake-utils
-    , cue-pkg
+    , c-pkg
     , tilt-pkg
     , earthly-pkg
     }:
     flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = import nixpkgs { inherit system; };
-      cue = cue-pkg.defaultPackage.${system};
+      c = c-pkg.defaultPackage.${system};
       tilt = tilt-pkg.defaultPackage.${system};
       earthly = earthly-pkg.defaultPackage.${system};
     in
-    {
+    rec {
+      devShell =
+        pkgs.mkShell rec {
+          buildInputs = with pkgs; [
+            defaultPackage
+          ];
+        };
+
       defaultPackage =
         with import nixpkgs { inherit system; };
         stdenv.mkDerivation rec {
@@ -42,17 +49,16 @@
             docker-credential-helpers
             kubectl
             k9s
-            cue
+            c
             tilt
             earthly
           ];
 
-          meta = with lib;
-            {
-              homepage = "https://defn.sh/${slug}";
-              description = "packaging binaries with flake";
-              platforms = platforms.linux;
-            };
+          meta = with lib; {
+            homepage = "https://defn.sh/${slug}";
+            description = "common home dev tools";
+            platforms = platforms.linux;
+          };
         };
     });
 }

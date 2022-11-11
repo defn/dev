@@ -2,7 +2,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/22.05"; # nixpkgs-unstable
     flake-utils.url = "github:numtide/flake-utils";
-    home.url = "github:defn/dev?dir=dev&ref=v0.0.5";
+    home.url = "github:defn/dev?dir=dev&ref=v0.0.6";
   };
 
   outputs =
@@ -19,8 +19,8 @@
       devShell =
         pkgs.mkShell rec {
           buildInputs = with pkgs; [
-            home.defaultPackage.${system}
             defaultPackage
+            home.defaultPackage.${system}
           ];
         };
 
@@ -48,15 +48,14 @@
             install -m 0755 $src $out/bin/earthly
           '';
 
-          propagatedBuildInputs = [
+          propagatedBuildInputs = with pkgs; [
           ];
 
-          meta = with lib;
-            {
-              homepage = "https://defn.sh/${slug}";
-              description = "${slug}";
-              platforms = platforms.linux;
-            };
+          meta = with lib; {
+            homepage = "https://defn.sh/${slug}";
+            description = "${slug}";
+            platforms = platforms.linux;
+          };
         };
     });
 }
