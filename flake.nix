@@ -31,30 +31,10 @@
           rec {
             buildInputs =
               values.buildInputs
-              ++ [ defaultPackage ]
+              ++ [ inputs.self.defaultPackage.${system} ]
               ++ inputs.nixpkgs.lib.lists.foldr hasDefaultPackage [ ] inputsList;
           };
 
-      defaultPackage =
-        with import inputs.nixpkgs { inherit system; };
-        stdenv.mkDerivation rec {
-          name = "${slug}-${version}";
-
-          slug = "defn-dev";
-          version = "0.0.1";
-
-          dontUnpack = true;
-
-          installPhase = "mkdir -p $out";
-
-          propagatedBuildInputs = with pkgs; [
-          ];
-
-          meta = with lib; {
-            homepage = "https://defn.sh/${slug}";
-            description = "dev environment home directory";
-            platforms = platforms.linux;
-          };
-        };
+      defaultPackage = values.defaultPackage;
     });
 }

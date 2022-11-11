@@ -15,4 +15,25 @@
     pkgs.rsync
     pkgs.vault
   ];
+
+  defaultPackage =
+    pkgs.stdenv.mkDerivation rec {
+      name = "${slug}-${version}";
+
+      slug = "defn-dev";
+      version = "0.0.1";
+
+      dontUnpack = true;
+
+      installPhase = "mkdir -p $out";
+
+      propagatedBuildInputs = with pkgs; [
+      ];
+
+      meta = with pkgs.lib; {
+        homepage = "https://defn.sh/${slug}";
+        description = "dev environment home directory";
+        platforms = platforms.linux;
+      };
+    };
 }
