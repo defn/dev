@@ -27,7 +27,7 @@
 
       installPhase = "mkdir -p $out";
 
-      propagatedBuildInputs = with pkgs; [
+      propagatedBuildInputs = [
       ];
 
       meta = with pkgs.lib; {
