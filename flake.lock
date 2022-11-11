@@ -1,6 +1,6 @@
 {
   "nodes": {
-    "argocd-pkg": {
+    "argocd": {
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs"
@@ -70,7 +70,7 @@
         "type": "github"
       }
     },
-    "caddy-pkg": {
+    "caddy": {
       "inputs": {
         "flake-utils": "flake-utils_2",
         "nixpkgs": "nixpkgs_2"
@@ -714,7 +714,7 @@
         "type": "github"
       }
     },
-    "kubectl-pkg": {
+    "kubectl": {
       "inputs": {
         "flake-utils": "flake-utils_23",
         "nixpkgs": "nixpkgs_22"
@@ -1106,11 +1106,11 @@
     },
     "root": {
       "inputs": {
-        "argocd-pkg": "argocd-pkg",
-        "caddy-pkg": "caddy-pkg",
+        "argocd": "argocd",
+        "caddy": "caddy",
         "dev": "dev",
         "flake-utils": "flake-utils_22",
-        "kubectl-pkg": "kubectl-pkg",
+        "kubectl": "kubectl",
         "nixpkgs": "nixpkgs_23"
       }
     },

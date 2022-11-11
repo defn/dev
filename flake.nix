@@ -2,21 +2,22 @@
   inputs = {
     nixpkgs.url = github:NixOS/nixpkgs/nixpkgs-unstable;
     flake-utils.url = github:numtide/flake-utils;
-    dev.url = github:defn/pkg?dir=dev&ref=v0.0.14;
 
-    caddy-pkg.url = github:defn/pkg?dir=caddy&ref=v0.0.1;
-    kubectl-pkg.url = github:defn/pkg?dir=kubectl&ref=v0.0.1;
-    argocd-pkg.url = github:defn/pkg?dir=argocd&ref=v0.0.2;
+    dev.url = github:defn/pkg?dir=dev&ref=v0.0.14;
+    caddy.url = github:defn/pkg?dir=caddy&ref=v0.0.1;
+    kubectl.url = github:defn/pkg?dir=kubectl&ref=v0.0.1;
+    argocd.url = github:defn/pkg?dir=argocd&ref=v0.0.2;
   };
 
   outputs =
-    { self
+    inputs@{ self
     , nixpkgs
     , flake-utils
+
     , dev
-    , caddy-pkg
-    , kubectl-pkg
-    , argocd-pkg
+    , caddy
+    , kubectl
+    , argocd
     }:
     flake-utils.lib.eachDefaultSystem (system:
     let
@@ -25,12 +26,22 @@
     in
     rec {
       devShell =
-        pkgs.mkShell rec {
-          buildInputs =
-            values.buildInputs
-            ++ [ dev.defaultPackage.${system} defaultPackage ]
-            ++ nixpkgs.lib.lists.forEach [ caddy-pkg kubectl-pkg argocd-pkg ] (f: f.defaultPackage.${system});
-        };
+        pkgs.mkShell
+          rec {
+            buildInputs =
+              values.buildInputs
+              ++ [ defaultPackage ]
+              ++ nixpkgs.lib.lists.foldr
+                (item: acc:
+                  acc ++
+                  (
+                    if item ? ${"defaultPackage"}
+                    then [ item.defaultPackage.${system} ]
+                    else [ ]
+                  ))
+                [ ]
+                (nixpkgs.lib.attrsets.mapAttrsToList (name: value: value) inputs);
+          };
 
       defaultPackage =
         with import nixpkgs { inherit system; };
