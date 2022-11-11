@@ -9,25 +9,16 @@
     argocd.url = github:defn/pkg?dir=argocd&ref=v0.0.2;
   };
 
-  outputs =
-    inputs@{ self
-    , nixpkgs
-    , flake-utils
-
-    , dev
-    , caddy
-    , kubectl
-    , argocd
-    }:
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs = inputs:
+    inputs.flake-utils.lib.eachDefaultSystem (system:
     let
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import inputs.nixpkgs { inherit system; };
       values = import ./values.nix { inherit pkgs; inherit system; };
     in
     rec {
       devShell =
         let
-          inputsList = (nixpkgs.lib.attrsets.mapAttrsToList (name: value: value) inputs);
+          inputsList = (inputs.nixpkgs.lib.attrsets.mapAttrsToList (name: value: value) inputs);
           hasDefaultPackage = (item: acc:
             acc ++
             (
@@ -41,11 +32,11 @@
             buildInputs =
               values.buildInputs
               ++ [ defaultPackage ]
-              ++ nixpkgs.lib.lists.foldr hasDefaultPackage [ ] inputsList;
+              ++ inputs.nixpkgs.lib.lists.foldr hasDefaultPackage [ ] inputsList;
           };
 
       defaultPackage =
-        with import nixpkgs { inherit system; };
+        with import inputs.nixpkgs { inherit system; };
         stdenv.mkDerivation rec {
           name = "${slug}-${version}";
 
