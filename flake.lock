@@ -25,23 +25,23 @@
     "c-pkg": {
       "inputs": {
         "cue-pkg": "cue-pkg",
-        "flake-utils": "flake-utils_5",
+        "flake-utils": "flake-utils_4",
         "hof-pkg": "hof-pkg",
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
         "dir": "c",
-        "lastModified": 1668137848,
-        "narHash": "sha256-sHAh4Z4vGKSmuTwcdD8spRagUnvsIcir80ep2IuhJTc=",
+        "lastModified": 1668138708,
+        "narHash": "sha256-bR7sHUnrqbffDylOb+hDG/2voQ45aI7Qw2oTyYDQXRk=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "d3c0a608da1b0066e0b90c6929e6456cc217aeed",
+        "rev": "6f9846232252fcc85a9a9c43016bb681a7f12b30",
         "type": "github"
       },
       "original": {
         "dir": "c",
         "owner": "defn",
-        "ref": "v0.0.9",
+        "ref": "v0.0.10",
         "repo": "pkg",
         "type": "github"
       }
@@ -70,7 +70,7 @@
     },
     "cue-pkg": {
       "inputs": {
-        "flake-utils": "flake-utils_4",
+        "flake-utils": "flake-utils_3",
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
@@ -92,7 +92,7 @@
     },
     "cue-pkg_2": {
       "inputs": {
-        "flake-utils": "flake-utils_8",
+        "flake-utils": "flake-utils_7",
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
@@ -112,10 +112,35 @@
         "type": "github"
       }
     },
+    "dev": {
+      "inputs": {
+        "c-pkg": "c-pkg",
+        "earthly-pkg": "earthly-pkg",
+        "flake-utils": "flake-utils_10",
+        "nixpkgs": "nixpkgs_10",
+        "tilt-pkg": "tilt-pkg_2"
+      },
+      "locked": {
+        "dir": "dev",
+        "lastModified": 1668138893,
+        "narHash": "sha256-nbvA2yuFxso00Sc0VqAngQ5/fSPfn9eP0wLLQJ0VbXM=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "44399c1f7de1a016afb75dbcb0bbc57042a3d04c",
+        "type": "github"
+      },
+      "original": {
+        "dir": "dev",
+        "owner": "defn",
+        "ref": "v0.0.11",
+        "repo": "pkg",
+        "type": "github"
+      }
+    },
     "earthly-pkg": {
       "inputs": {
-        "flake-utils": "flake-utils_7",
-        "home": "home_2",
+        "flake-utils": "flake-utils_6",
+        "home": "home",
         "nixpkgs": "nixpkgs_9"
       },
       "locked": {
@@ -332,7 +357,7 @@
     },
     "hof-pkg": {
       "inputs": {
-        "flake-utils": "flake-utils_6",
+        "flake-utils": "flake-utils_5",
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
@@ -354,33 +379,8 @@
     },
     "home": {
       "inputs": {
-        "c-pkg": "c-pkg",
-        "earthly-pkg": "earthly-pkg",
-        "flake-utils": "flake-utils_11",
-        "nixpkgs": "nixpkgs_10",
-        "tilt-pkg": "tilt-pkg_2"
-      },
-      "locked": {
-        "dir": "dev",
-        "lastModified": 1668137898,
-        "narHash": "sha256-mAzvNfErutO31syF7IHe5CzuZObJcccfdiVYR/mY5Xw=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "2988677b4f5694d443b829db1a9d1500dbfcbfe5",
-        "type": "github"
-      },
-      "original": {
-        "dir": "dev",
-        "owner": "defn",
-        "ref": "v0.0.9",
-        "repo": "dev",
-        "type": "github"
-      }
-    },
-    "home_2": {
-      "inputs": {
         "cue-pkg": "cue-pkg_2",
-        "flake-utils": "flake-utils_9",
+        "flake-utils": "flake-utils_8",
         "nixpkgs": "nixpkgs_7",
         "tilt-pkg": "tilt-pkg"
       },
@@ -635,15 +635,15 @@
       "inputs": {
         "argocd-pkg": "argocd-pkg",
         "caddy-pkg": "caddy-pkg",
-        "flake-utils": "flake-utils_3",
-        "home": "home",
+        "dev": "dev",
+        "flake-utils": "flake-utils_12",
         "kubectl-pkg": "kubectl-pkg",
         "nixpkgs": "nixpkgs_13"
       }
     },
     "tilt-pkg": {
       "inputs": {
-        "flake-utils": "flake-utils_10",
+        "flake-utils": "flake-utils_9",
         "nixpkgs": "nixpkgs_8"
       },
       "locked": {
@@ -665,7 +665,7 @@
     },
     "tilt-pkg_2": {
       "inputs": {
-        "flake-utils": "flake-utils_12",
+        "flake-utils": "flake-utils_11",
         "nixpkgs": "nixpkgs_11"
       },
       "locked": {
