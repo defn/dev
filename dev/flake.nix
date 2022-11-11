@@ -2,7 +2,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/22.05";
     flake-utils.url = "github:numtide/flake-utils";
-    c-pkg.url = github:defn/pkg?dir=c&ref=v0.0.8;
+    c-pkg.url = github:defn/pkg?dir=c&ref=v0.0.9;
     tilt-pkg.url = github:defn/pkg?dir=tilt&ref=v0.0.4;
     earthly-pkg.url = github:defn/pkg?dir=earthly&ref=v0.0.5;
   };
