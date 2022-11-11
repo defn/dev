@@ -622,6 +622,18 @@
         "type": "github"
       }
     },
+    "hello": {
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-i/OTnSUMKz2Ii9qIQYFtLfeORet711Nz8+7+NqKqlQY=",
+        "path": "./dev",
+        "type": "path"
+      },
+      "original": {
+        "path": "./dev",
+        "type": "path"
+      }
+    },
     "hof-pkg": {
       "inputs": {
         "flake-utils": "flake-utils_5",
@@ -978,11 +990,11 @@
     },
     "nixpkgs_23": {
       "locked": {
-        "lastModified": 1667969101,
-        "narHash": "sha256-GL53T705HO7Q/KVfbb5STx8AxFs8YgaGY8pvAZC+O7U=",
+        "lastModified": 1668086072,
+        "narHash": "sha256-msFoXI5ThCmhTTqgl27hpCXWhaeqxphBaleJAgD8JYM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "bbf77421ac51a7c93f5f0f760da99e4dbce614fa",
+        "rev": "72d8853228c9758820c39b8659415b6d89279493",
         "type": "github"
       },
       "original": {
@@ -1110,6 +1122,7 @@
         "caddy": "caddy",
         "dev": "dev",
         "flake-utils": "flake-utils_22",
+        "hello": "hello",
         "kubectl": "kubectl",
         "nixpkgs": "nixpkgs_23"
       }

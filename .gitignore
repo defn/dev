@@ -96,3 +96,4 @@ etc/tailscale_*
 .caddy.d
 .node_repl_history
 .direnv
+result

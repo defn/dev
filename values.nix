@@ -25,7 +25,11 @@
 
       dontUnpack = true;
 
-      installPhase = "mkdir -p $out";
+      installPhase = ''
+        mkdir -p $out/bin
+        touch $out/bin/meh
+        chmod 755 $out/bin/meh
+      '';
 
       propagatedBuildInputs = [
       ];
