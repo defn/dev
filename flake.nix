@@ -1,8 +1,8 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
-    dev.url = "github:defn/pkg?dir=dev&ref=v0.0.14";
+    nixpkgs.url = github:NixOS/nixpkgs/nixpkgs-unstable;
+    flake-utils.url = github:numtide/flake-utils;
+    dev.url = github:defn/pkg?dir=dev&ref=v0.0.14;
     caddy-pkg.url = github:defn/pkg?dir=caddy&ref=v0.0.1;
     kubectl-pkg.url = github:defn/pkg?dir=kubectl&ref=v0.0.1;
     argocd-pkg.url = github:defn/pkg?dir=argocd&ref=v0.0.2;
@@ -23,28 +23,16 @@
       caddy = caddy-pkg.defaultPackage.${system};
       kubectl = kubectl-pkg.defaultPackage.${system};
       argocd = argocd-pkg.defaultPackage.${system};
+      values = import ./values.nix { inherit pkgs; };
     in
     rec {
       devShell =
         pkgs.mkShell rec {
-          buildInputs = with pkgs; [
+          buildInputs = values.buildInputs ++ [
             dev.defaultPackage.${system}
             defaultPackage
-            go
-            gotools
-            go-tools
-            golangci-lint
-            gopls
-            go-outline
-            gopkgs
-            delve
-            nodejs-18_x
-            nixpkgs-fmt
-            kubernetes-helm
-            kube3d
-            rsync
-            vault
             caddy
+            kubectl
             argocd
           ];
         };
