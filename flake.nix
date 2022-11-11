@@ -61,15 +61,14 @@
 
           installPhase = "mkdir -p $out";
 
-          propagatedBuildInputs = [
+          propagatedBuildInputs = with pkgs; [
           ];
 
-          meta = with lib;
-            {
-              homepage = "https://defn.sh/${slug}";
-              description = "dev environment home directory";
-              platforms = platforms.linux;
-            };
+          meta = with lib; {
+            homepage = "https://defn.sh/${slug}";
+            description = "dev environment home directory";
+            platforms = platforms.linux;
+          };
         };
     });
 }

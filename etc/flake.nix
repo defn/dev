@@ -19,8 +19,8 @@
       devShell =
         pkgs.mkShell rec {
           buildInputs = with pkgs; [
-            defaultPackage
             home.defaultPackage.${system}
+            defaultPackage
           ];
         };
 
