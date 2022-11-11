@@ -1216,7 +1216,7 @@
       "original": {
         "dir": "wrapper",
         "owner": "defn",
-        "ref": "v0.0.16-rc3",
+        "ref": "v0.0.16",
         "repo": "pkg",
         "type": "github"
       }
