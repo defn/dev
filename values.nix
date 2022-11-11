@@ -1,4 +1,7 @@
 { pkgs, system }: rec {
+  slug = "defn-dev";
+  version = "0.0.1";
+
   buildInputs = [
     pkgs.go
     pkgs.gotools
@@ -19,9 +22,6 @@
   defaultPackage =
     pkgs.stdenv.mkDerivation rec {
       name = "${slug}-${version}";
-
-      slug = "defn-dev";
-      version = "0.0.1";
 
       dontUnpack = true;
 
