@@ -1,0 +1,11 @@
+[global]
+
+bash_path = "/bin/bash"
+
+disable_stdin = true
+
+load_dotenv = true
+
+strict_env = false
+
+warn_timeout = "60s"
