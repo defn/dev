@@ -20,7 +20,7 @@
             name = "${slug}-${version}";
 
             src = with downloads.${system}; pkgs.fetchurl {
-              inherit url;
+              url = site.url_template downloads.${system};
               inherit sha256;
             };
 
