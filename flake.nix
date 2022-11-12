@@ -47,7 +47,6 @@
             meta = with pkgs.lib; with site; {
               inherit homepage;
               inherit description;
-              platforms = platforms.linux;
             };
           };
       }
