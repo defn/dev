@@ -1,7 +1,6 @@
 {
   inputs = {
-    dev.url = github:defn/pkg?dir=dev&ref=v0.0.22;
-    caddy.url = github:defn/pkg?dir=caddy&ref=v0.0.1;
+    dev.url = github:defn/pkg?dir=dev&ref=v0.0.26;
   };
 
   outputs = inputs:
@@ -10,7 +9,6 @@
         pkgs = import inputs.dev.wrapper.nixpkgs { inherit system; };
         wrap = inputs.dev.wrapper.wrap { other = inputs; inherit system; };
         buildInputs = [
-          pkgs.rsync
         ];
         site = import ./config.nix;
       in
@@ -21,11 +19,17 @@
           rec {
             name = "${slug}-${version}";
 
-            dontUnpack = true;
+            src = with downloads.${system}; pkgs.fetchurl {
+              inherit url;
+              inherit sha256;
+            };
 
-            installPhase = "mkdir -p $out";
+            sourceRoot = ".";
 
-            propagatedBuildInputs = buildInputs;
+            installPhase = ''
+              install -m 0755 -d $out/bin
+              install -m 0755 gum $out/bin/gum
+            '';
 
             meta = with pkgs.lib; with site; {
               inherit homepage;
