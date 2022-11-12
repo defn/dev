@@ -1,18 +1,14 @@
 {
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs/22.05; # nixpkgs-unstable;
-    flake-utils.url = github:numtide/flake-utils;
-    wrapper.url = github:defn/pkg?dir=wrapper&ref=v0.0.16;
-
-    dev.url = github:defn/pkg?dir=dev&ref=v0.0.17;
+    dev.url = github:defn/pkg?dir=dev&ref=v0.0.22;
     caddy.url = github:defn/pkg?dir=caddy&ref=v0.0.1;
   };
 
   outputs = inputs:
-    inputs.flake-utils.lib.eachDefaultSystem (system:
+    inputs.dev.wrapper.flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = import inputs.nixpkgs { inherit system; };
-        wrap = inputs.wrapper.wrap { other = inputs; inherit system; inherit pkgs; };
+        pkgs = import inputs.dev.wrapper.nixpkgs { inherit system; };
+        wrap = inputs.dev.wrapper.wrap { other = inputs; inherit system; };
         slug = "min";
         version = "0.0.1";
         buildInputs = [
