@@ -2,9 +2,9 @@
   inputs = {
     nixpkgs.url = github:NixOS/nixpkgs/22.05; # nixpkgs-unstable;
     flake-utils.url = github:numtide/flake-utils;
-    dev.url = github:defn/pkg?dir=dev&ref=v0.0.16;
     wrapper.url = github:defn/pkg?dir=wrapper&ref=v0.0.16;
 
+    dev.url = github:defn/pkg?dir=dev&ref=v0.0.17;
     caddy.url = github:defn/pkg?dir=caddy&ref=v0.0.1;
   };
 

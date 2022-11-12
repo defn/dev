@@ -1,6 +1,6 @@
 {
   "nodes": {
-    "c-pkg": {
+    "c": {
       "inputs": {
         "cue-pkg": "cue-pkg",
         "flake-utils": "flake-utils_3",
@@ -24,7 +24,7 @@
         "type": "github"
       }
     },
-    "c-pkg_2": {
+    "c-pkg": {
       "inputs": {
         "cue-pkg": "cue-pkg_3",
         "flake-utils": "flake-utils_12",
@@ -160,37 +160,38 @@
     },
     "dev": {
       "inputs": {
-        "c-pkg": "c-pkg",
-        "earthly-pkg": "earthly-pkg",
+        "c": "c",
+        "earthly": "earthly",
         "flake-utils": "flake-utils_9",
         "nixpkgs": "nixpkgs_9",
-        "tilt-pkg": "tilt-pkg_2",
-        "yaegi-pkg": "yaegi-pkg"
+        "tilt": "tilt",
+        "wrapper": "wrapper",
+        "yaegi": "yaegi"
       },
       "locked": {
         "dir": "dev",
-        "lastModified": 1668186527,
-        "narHash": "sha256-a0qRPDaf4yDV0gnwPMlQ0cuYHrJvCfYzDnWxSkntOVc=",
+        "lastModified": 1668218907,
+        "narHash": "sha256-HwsMcTgSEf8f7bMrJD+wFYxIxf/5WwwID/f4vN6WmEY=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "479906cbc5649b84907d450e5343fae71d3635e2",
+        "rev": "e3ced25093df8b2f5beed95fa91d5226bee24fcd",
         "type": "github"
       },
       "original": {
         "dir": "dev",
         "owner": "defn",
-        "ref": "v0.0.16",
+        "ref": "v0.0.17",
         "repo": "pkg",
         "type": "github"
       }
     },
     "dev_2": {
       "inputs": {
-        "c-pkg": "c-pkg_2",
-        "earthly-pkg": "earthly-pkg_2",
+        "c-pkg": "c-pkg",
+        "earthly-pkg": "earthly-pkg",
         "flake-utils": "flake-utils_18",
         "nixpkgs": "nixpkgs_18",
-        "tilt-pkg": "tilt-pkg_4"
+        "tilt-pkg": "tilt-pkg_3"
       },
       "locked": {
         "dir": "dev",
@@ -209,7 +210,7 @@
         "type": "github"
       }
     },
-    "earthly-pkg": {
+    "earthly": {
       "inputs": {
         "flake-utils": "flake-utils_5",
         "home": "home",
@@ -232,7 +233,7 @@
         "type": "github"
       }
     },
-    "earthly-pkg_2": {
+    "earthly-pkg": {
       "inputs": {
         "flake-utils": "flake-utils_14",
         "home": "home_2",
@@ -643,7 +644,7 @@
         "cue-pkg": "cue-pkg_4",
         "flake-utils": "flake-utils_16",
         "nixpkgs": "nixpkgs_15",
-        "tilt-pkg": "tilt-pkg_3"
+        "tilt-pkg": "tilt-pkg_2"
       },
       "locked": {
         "dir": "dev",
@@ -1004,7 +1005,29 @@
         "dev": "dev",
         "flake-utils": "flake-utils_21",
         "nixpkgs": "nixpkgs_21",
-        "wrapper": "wrapper"
+        "wrapper": "wrapper_2"
+      }
+    },
+    "tilt": {
+      "inputs": {
+        "flake-utils": "flake-utils_10",
+        "nixpkgs": "nixpkgs_10"
+      },
+      "locked": {
+        "dir": "tilt",
+        "lastModified": 1667956668,
+        "narHash": "sha256-caJPSl//yBdAD55ZODnruFSq4bghDTfirmrSCSqiV2M=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "03416cfa4c95ff38920362769785d11b7254fee0",
+        "type": "github"
+      },
+      "original": {
+        "dir": "tilt",
+        "owner": "defn",
+        "ref": "v0.0.4",
+        "repo": "pkg",
+        "type": "github"
       }
     },
     "tilt-pkg": {
@@ -1031,28 +1054,6 @@
     },
     "tilt-pkg_2": {
       "inputs": {
-        "flake-utils": "flake-utils_10",
-        "nixpkgs": "nixpkgs_10"
-      },
-      "locked": {
-        "dir": "tilt",
-        "lastModified": 1667956668,
-        "narHash": "sha256-caJPSl//yBdAD55ZODnruFSq4bghDTfirmrSCSqiV2M=",
-        "owner": "defn",
-        "repo": "pkg",
-        "rev": "03416cfa4c95ff38920362769785d11b7254fee0",
-        "type": "github"
-      },
-      "original": {
-        "dir": "tilt",
-        "owner": "defn",
-        "ref": "v0.0.4",
-        "repo": "pkg",
-        "type": "github"
-      }
-    },
-    "tilt-pkg_3": {
-      "inputs": {
         "flake-utils": "flake-utils_17",
         "nixpkgs": "nixpkgs_16"
       },
@@ -1073,7 +1074,7 @@
         "type": "github"
       }
     },
-    "tilt-pkg_4": {
+    "tilt-pkg_3": {
       "inputs": {
         "flake-utils": "flake-utils_19",
         "nixpkgs": "nixpkgs_19"
@@ -1113,7 +1114,25 @@
         "type": "github"
       }
     },
-    "yaegi-pkg": {
+    "wrapper_2": {
+      "locked": {
+        "dir": "wrapper",
+        "lastModified": 1668186527,
+        "narHash": "sha256-a0qRPDaf4yDV0gnwPMlQ0cuYHrJvCfYzDnWxSkntOVc=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "479906cbc5649b84907d450e5343fae71d3635e2",
+        "type": "github"
+      },
+      "original": {
+        "dir": "wrapper",
+        "owner": "defn",
+        "ref": "v0.0.16",
+        "repo": "pkg",
+        "type": "github"
+      }
+    },
+    "yaegi": {
       "inputs": {
         "dev": "dev_2",
         "flake-utils": "flake-utils_20",
