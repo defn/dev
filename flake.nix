@@ -13,21 +13,21 @@
         latest = import inputs.nixpkgs { inherit system; };
         pkgs = import inputs.dev.wrapper.nixpkgs { inherit system; };
         wrap = inputs.dev.wrapper.wrap { other = inputs; inherit system; };
-        buildInputs = [
-          latest.rsync
-          latest.go
-          latest.gotools
-          latest.go-tools
-          latest.golangci-lint
-          latest.gopls
-          latest.go-outline
-          latest.gopkgs
-          latest.delve
-          latest.nodejs-18_x
-          latest.nixpkgs-fmt
-          latest.kubernetes-helm
-          latest.kube3d
-          latest.vault
+        buildInputs = with latest; [
+          rsync
+          go
+          gotools
+          go-tools
+          golangci-lint
+          gopls
+          go-outline
+          gopkgs
+          delve
+          nodejs-18_x
+          nixpkgs-fmt
+          kubernetes-helm
+          kube3d
+          vault
         ];
         site = import ./config.nix;
       in
