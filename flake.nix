@@ -10,9 +10,9 @@
   outputs = inputs:
     inputs.dev.wrapper.flake-utils.lib.eachDefaultSystem (system:
       let
-        latest = import inputs.nixpkgs { inherit system; };
         pkgs = import inputs.dev.wrapper.nixpkgs { inherit system; };
         wrap = inputs.dev.wrapper.wrap { other = inputs; inherit system; };
+        latest = import inputs.nixpkgs { inherit system; };
         buildInputs = with latest; [
           rsync
           go
