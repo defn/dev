@@ -1,7 +1,6 @@
 {
   inputs = {
     dev.url = github:defn/pkg?dir=dev&ref=v0.0.54;
-    latest.url = github:NixOS/nixpkgs/nixpkgs-unstable; # TODO latest
   };
 
   outputs = inputs:
@@ -50,21 +49,11 @@
       };
 
       handler = { pkgs, wrap, system }:
-        let
-          latest = import inputs.latest { inherit system; }; # TODO latest
-        in
         rec {
           devShell = wrap.devShell;
-          # TODO defaultPackage = wrap.nullBuilder {};
+          defaultPackage = wrap.nullBuilder {};
+          # TODO defaultPackage = wrap.bashBuilder {};
           # TODO defaultPackage = wrap.downloadBuilder;
-          defaultPackage = wrap.bashBuilder {
-            src = ./.;
-            installPhase = "mkdir -p $out";
-
-            propagatedBuildInputs = with latest; [
-              rsync
-            ];
-          };
         };
     };
 }
