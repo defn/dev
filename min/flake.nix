@@ -1,7 +1,7 @@
 {
   inputs = {
     dev.url = github:defn/pkg?dir=dev&ref=v0.0.53;
-    nixpkgs.url = github:NixOS/nixpkgs/nixpkgs-unstable; # TODO latest
+    latest.url = github:NixOS/nixpkgs/nixpkgs-unstable; # TODO latest
   };
 
   outputs = inputs:
@@ -51,7 +51,7 @@
 
       handler = { pkgs, wrap, system }:
         let
-          latest = import inputs.nixpkgs { inherit system; }; # TODO latest
+          latest = import inputs.latest { inherit system; }; # TODO latest
         in
         rec {
           devShell = wrap.devShell;
@@ -62,7 +62,6 @@
             installPhase = "mkdir -p $out";
 
             propagatedBuildInputs = with latest; [
-              # TODO latest
               rsync
             ];
           };
