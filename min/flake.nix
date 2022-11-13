@@ -1,11 +1,11 @@
 {
   inputs = {
-    dev.url = github:defn/pkg?dir=dev&ref=v0.0.47;
+    dev.url = github:defn/pkg?dir=dev&ref=v0.0.48;
     nixpkgs.url = github:NixOS/nixpkgs/nixpkgs-unstable; # TODO latest
   };
 
   outputs = inputs:
-    inputs.dev.wrapper.flake-utils.lib.eachDefaultSystem (system:
+    inputs.dev.eachDefaultSystem (system:
       let
         site = import ./config.nix;
         pkgs = import inputs.dev.wrapper.nixpkgs { inherit system; };
