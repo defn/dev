@@ -147,6 +147,22 @@
         "type": "github"
       }
     },
+    "latest": {
+      "locked": {
+        "lastModified": 1668231603,
+        "narHash": "sha256-/4br947zgRqABb52iLF4DCHgD49Fw5aQ6/IdTwaM95E=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d8f2c4d846a2e65ad3f5a5e842b672f0b81588a2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1653936696,
@@ -211,29 +227,13 @@
         "type": "github"
       }
     },
-    "nixpkgs_5": {
-      "locked": {
-        "lastModified": 1668231603,
-        "narHash": "sha256-/4br947zgRqABb52iLF4DCHgD49Fw5aQ6/IdTwaM95E=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "d8f2c4d846a2e65ad3f5a5e842b672f0b81588a2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "argocd": "argocd",
         "caddy": "caddy",
         "dev": "dev",
         "kubectl": "kubectl",
-        "nixpkgs": "nixpkgs_5"
+        "latest": "latest"
       }
     },
     "wrapper": {
