@@ -1,6 +1,6 @@
 {
   inputs = {
-    dev.url = github:defn/pkg?dir=dev&ref=v0.0.47;
+    dev.url = github:defn/pkg?dir=dev&ref=v0.0.50;
     caddy.url = github:defn/pkg?dir=caddy&ref=v0.0.1;
     kubectl.url = github:defn/pkg?dir=kubectl&ref=v0.0.1;
     argocd.url = github:defn/pkg?dir=argocd&ref=v0.0.2;
@@ -8,7 +8,7 @@
   };
 
   outputs = inputs:
-    inputs.dev.wrapper.flake-utils.lib.eachDefaultSystem (system:
+    inputs.dev.eachDefaultSystem (system:
       let
         site = import ./config.nix;
         pkgs = import inputs.dev.wrapper.nixpkgs { inherit system; };
@@ -17,10 +17,7 @@
       in
       rec {
         devShell = wrap.devShell;
-        defaultPackage = wrap.bashBuilder {
-          src = ./.;
-          installPhase = "mkdir -p $out";
-
+        defaultPackage = wrap.nullBuilder {
           propagatedBuildInputs = with latest; [
             rsync
             go

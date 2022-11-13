@@ -1,6 +1,6 @@
 {
   inputs = {
-    dev.url = github:defn/pkg?dir=dev&ref=v0.0.48;
+    dev.url = github:defn/pkg?dir=dev&ref=v0.0.50;
     nixpkgs.url = github:NixOS/nixpkgs/nixpkgs-unstable; # TODO latest
   };
 
@@ -14,6 +14,7 @@
       in
       rec {
         devShell = wrap.devShell;
+        # TODO defaultPackage = wrap.nullBuilder {};
         # TODO defaultPackage = wrap.downloadBuilder;
         defaultPackage = wrap.bashBuilder {
           src = ./.;
