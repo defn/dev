@@ -1,6 +1,6 @@
 {
   inputs = {
-    dev.url = github:defn/pkg?dir=dev&ref=v0.0.53;
+    dev.url = github:defn/pkg?dir=dev&ref=v0.0.54;
     latest.url = github:NixOS/nixpkgs/nixpkgs-unstable; # TODO latest
   };
 
