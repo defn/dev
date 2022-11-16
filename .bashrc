@@ -1,11 +1,3 @@
-if [[ -n "${VSCODE_IPC_HOOK_CLI:-}" ]]; then
-	if [[ ! -f "/tmp/${VSCODE_IPC_HOOK_CLI}.txt" ]]; then
-		if flock -n "${VSCODE_IPC_HOOK_CLI}.txt" -c "mkdir -p /tmp/tmp; pwd > /tmp/${VSCODE_IPC_HOOK_CLI}.txt"; then
-			true
-		fi
-	fi
-fi
-
 export USER=ubuntu
 export LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
 export LC_ALL=C.UTF-8
