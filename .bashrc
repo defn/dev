@@ -1,3 +1,11 @@
+if [[ -n "${VSCODE_IPC_HOOK_CLI:-}" ]]; then
+	if [[ ! -f "/tmp/${VSCODE_IPC_HOOK_CLI}.txt" ]]; then
+		if flock -n "${VSCODE_IPC_HOOK_CLI}.txt" -c "mkdir -p /tmp/tmp; pwd > /tmp/${VSCODE_IPC_HOOK_CLI}.txt"; then
+			true
+		fi
+	fi
+fi
+
 export USER=ubuntu
 export LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
 export LC_ALL=C.UTF-8
@@ -114,15 +122,6 @@ if [[ -n "${VSCODE_GIT_IPC_HANDLE:-}" ]]; then
 	if ! [[ -f ~/.home.done ]]; then
 		if flock -n ~/.home.lock -c 'cd && ~/bin/e make install'; then
 			touch ~/.home.done
-		fi
-	fi
-
-	if [[ -n "${VSCODE_PROXY_URI:-}" ]]; then
-		if [[ -f .todo ]]; then
-			if [[ "./.todo" == "$(find . -mindepth 1 -maxdepth 1)" ]]; then
-				rm -f .todo
-				git clone "https://$(echo $VSCODE_PROXY_URI | cut -d/ -f5- | perl -pe 's{/proxy/..port..}{}')" .
-			fi
 		fi
 	fi
 fi
