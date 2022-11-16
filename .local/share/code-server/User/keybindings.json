@@ -2,5 +2,21 @@
     {
         "key": "ctrl+w",
         "command": "workbench.action.closeActiveEditor"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "workbench.action.terminal.newWithProfile",
+        "args":{
+            "profileName": "dev"
+        },
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+f",
+        "command": "workbench.action.terminal.newWithProfile",
+        "args":{
+            "profileName": "dev"
+        },
+        "when": "terminalFocus"
     }
 ]

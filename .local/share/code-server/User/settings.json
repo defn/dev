@@ -36,5 +36,14 @@
         "/home/ubuntu/.kube/cache/**": true,
         "/home/ubuntu/work/**": true
     },
-    "terraform-ls.terraformExecPath": "/usr/local/bin/terraform"
+    "terminal.integrated.defaultProfile.linux": "dev",
+    "terminal.integrated.profiles.linux": {
+        "dev": {
+            "path": "/bin/bash",
+            "args": [
+                "--init-file",
+                ".bashrc"
+            ]
+        },
+    }
 }
