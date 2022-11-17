@@ -11,6 +11,18 @@
     "terminal.integrated.localEchoEnabled": "off",
     "terminal.integrated.sendKeybindingsToShell": true,
     "terminal.integrated.showExitAlert": false,
+    "terminal.integrated.defaultProfile.linux": "dev",
+    "terminal.integrated.profiles.linux": {
+        "dev": {
+            "path": "/bin/bash",
+            "args": [
+                "--init-file",
+                "~/.bash_entrypoint",
+                "-s",
+                "${workspaceFolder}"
+            ]
+        },
+    },
     "terraform.languageServer.ignoreSingleFileWarning": true,
     "workbench.colorTheme": "Default Dark+",
     "workbench.editor.untitled.hint": "hidden",
@@ -35,15 +47,5 @@
         "/home/ubuntu/.cache/**": true,
         "/home/ubuntu/.kube/cache/**": true,
         "/home/ubuntu/work/**": true
-    },
-    "terminal.integrated.defaultProfile.linux": "dev",
-    "terminal.integrated.profiles.linux": {
-        "dev": {
-            "path": "/bin/bash",
-            "args": [
-                "--init-file",
-                ".bashrc"
-            ]
-        },
     }
 }

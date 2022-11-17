@@ -108,8 +108,6 @@ if tty >/dev/null; then
   fi
 fi
 
-if [[ -f ~/app/.bashrc ]]; then source ~/app/.bashrc; fi
-
 if [[ -n "${VSCODE_GIT_IPC_HANDLE:-}" ]]; then
 	if ! [[ -f ~/.home.done ]]; then
 		if flock -n ~/.home.lock -c 'cd && ~/bin/e make install'; then

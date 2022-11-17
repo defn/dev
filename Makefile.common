@@ -84,16 +84,6 @@ install-inner:
 
 	mark -- configure repos
 
-	if ! is-fly; then \
-	if [[ ! -d ~/app/.git ]]; then \
-		mkdir -p ~/work/app \
-		&& cd ~/work/app \
-		&& rm -rf .git \
-		&& oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:app \
-		&& git fetch && git reset --hard origin/master; \
-		fi; \
-	fi
-
 	if nc -z -v localhost 8200 2>/dev/null; then \
 		$(MAKE) vault-unseal; \
 		fi
