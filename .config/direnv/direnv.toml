@@ -11,7 +11,7 @@ strict_env = false
 warn_timeout = "60s"
 
 [whitelist]
-prefix = [ 
+prefix = [
     "/home/ubuntu/work/pkg",
     "/home/ubuntu/work/lib",
     "/home/ubuntu/pkg",
