@@ -346,7 +346,7 @@ nix-install:
 	. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh && nix --extra-experimental-features nix-command --extra-experimental-features flakes profile install github:defn/pkg?dir={c,gum,glow}&ref=v0.0.34
 
 nix-reinstall:
-	nix profile list | tail +2 | awk '{print $$NF}' | xargs nix profile remove
+	. ~/.nix-profile/etc/profile.d/nix.sh && nix profile list | tail +2 | awk '{print $$NF}' | xargs nix profile remove
 	$(MAKE) nix
 
 nix-gc:
