@@ -42,6 +42,7 @@
               kubernetes-helm
               kube3d
               vault
+              nomad
             ];
           };
         };
