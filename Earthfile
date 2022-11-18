@@ -12,6 +12,11 @@ build-k3d:
     BUILD --platform=linux/amd64 +k3d --image=${image} --arch=amd64
     BUILD --platform=linux/arm64 +k3d --image=${image} --arch=arm64
 
+build-nomad:
+    ARG image
+    BUILD --platform=linux/amd64 +nomad --image=${image} --arch=amd64
+    BUILD --platform=linux/arm64 +nomad --image=${image} --arch=arm64
+
 coder-server:
     ARG arch
     ARG CODESERVER
@@ -87,6 +92,37 @@ dev:
     RUN mkdir -p .kube .docker
 
     COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
+
+    # defn/dev
+    COPY --dir --chown=ubuntu:ubuntu . .
+    RUN (git clean -nfd || true) \
+        && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
+
+    IF [ "$image" != "" ]
+        SAVE IMAGE --push ${image}
+    END
+
+nomad:
+    ARG image
+    ARG arch
+
+    FROM pkg+nix --arch=${arch}
+
+    ENTRYPOINT ["/usr/bin/tini", "--"]
+
+    # docker
+    RUN sudo apt update \
+        && sudo apt install -y docker.io net-tools
+
+    # nomad
+    RUN . ~/.nix-profile/etc/profile.d/nix.sh \
+            && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
+                profile install "nixpkgs#nomad"
+
+    # vault
+    RUN . ~/.nix-profile/etc/profile.d/nix.sh \
+            && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
+                profile install "nixpkgs#vault"
 
     # defn/dev
     COPY --dir --chown=ubuntu:ubuntu . .

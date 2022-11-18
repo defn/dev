@@ -30,19 +30,9 @@ jobs: {
 		}
 	}
 
-	for n in ["dev", "k3d"] {
-		"publish_\(n)": {
-			steps: #EarthlySteps + [{
-				name: "Publish images"
-				run:  """
-				earthly --strict --push --no-output \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-dev \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-dev \\
-					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-\(n) \\
-					--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-\(n) \\
-					+build-\(n) --image ghcr.io/${GITHUB_REPOSITORY}:${TAG}-\(n)
-				"""
-			}]
+	for n in ["dev", "k3d", "nomad"] {
+		"publish_\(n)": #PublishBuild & {
+			_n: n
 		}
 	}
 }

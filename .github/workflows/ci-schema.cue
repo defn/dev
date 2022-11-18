@@ -61,3 +61,19 @@ package workflows
 		password: "${{ secrets.GITHUB_TOKEN }}"
 	}
 }]
+
+#PublishBuild: #EarthlyJob & {
+	_n: string
+
+	steps: #EarthlySteps + [{
+		name: "Publish images"
+		run:  """
+				earthly --strict --push --no-output \\
+					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-amd-dev \\
+					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-arm-dev \\
+					--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-\(_n) \\
+					--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-\(_n) \\
+					+build-\(_n) --image ghcr.io/${GITHUB_REPOSITORY}:${TAG}-\(_n)
+				"""
+	}]
+}

@@ -4,6 +4,7 @@
     caddy.url = github:defn/pkg?dir=caddy&ref=v0.0.1;
     kubectl.url = github:defn/pkg?dir=kubectl&ref=v0.0.1;
     argocd.url = github:defn/pkg?dir=argocd&ref=v0.0.2;
+    cue.url = github:defn/pkg?dir=cue&ref=v0.0.54;
     latest.url = github:NixOS/nixpkgs/nixpkgs-unstable;
   };
 

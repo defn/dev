@@ -44,6 +44,28 @@
         "type": "github"
       }
     },
+    "cue": {
+      "inputs": {
+        "flake-utils": "flake-utils_3",
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "dir": "cue",
+        "lastModified": 1668312783,
+        "narHash": "sha256-ghhLDgubYGU8nctENpUuTlhPSOw/5Z9yWADAMExyKUU=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "b44e10404cb4310a53c7a3c5ffc5e51407331e5f",
+        "type": "github"
+      },
+      "original": {
+        "dir": "cue",
+        "owner": "defn",
+        "ref": "v0.0.54",
+        "repo": "pkg",
+        "type": "github"
+      }
+    },
     "dev": {
       "inputs": {
         "wrapper": "wrapper"
@@ -125,10 +147,25 @@
         "type": "github"
       }
     },
+    "flake-utils_5": {
+      "locked": {
+        "lastModified": 1667395993,
+        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "kubectl": {
       "inputs": {
-        "flake-utils": "flake-utils_4",
-        "nixpkgs": "nixpkgs_4"
+        "flake-utils": "flake-utils_5",
+        "nixpkgs": "nixpkgs_5"
       },
       "locked": {
         "dir": "kubectl",
@@ -227,10 +264,27 @@
         "type": "github"
       }
     },
+    "nixpkgs_5": {
+      "locked": {
+        "lastModified": 1653936696,
+        "narHash": "sha256-M6bJShji9AIDZ7Kh7CPwPBPb/T7RiVev2PAcOi4fxDQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ce6aa13369b667ac2542593170993504932eb836",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "22.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "argocd": "argocd",
         "caddy": "caddy",
+        "cue": "cue",
         "dev": "dev",
         "kubectl": "kubectl",
         "latest": "latest"
@@ -238,8 +292,8 @@
     },
     "wrapper": {
       "inputs": {
-        "flake-utils": "flake-utils_3",
-        "nixpkgs": "nixpkgs_3"
+        "flake-utils": "flake-utils_4",
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "dir": "wrapper",
