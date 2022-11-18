@@ -5,6 +5,10 @@ job "raw_exec" {
     task "server" {
       driver = "raw_exec"
 
+      resources {
+        memory = 100
+      }
+
       config {
         command = "sleep"
         args = [

@@ -5,6 +5,10 @@ job "docker" {
     task "server" {
       driver = "docker"
 
+      resources {
+        memory = 100
+      }
+
       config {
         image = "ubuntu"
 
