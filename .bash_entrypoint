@@ -1,4 +1,4 @@
-export WORKDIR="${1:-}"
+export WORKDIR="${1:-${HOME:-}}"
 
 cd >/dev/null
 if test -f .bash_profile; then source .bash_profile; fi
