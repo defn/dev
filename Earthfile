@@ -17,6 +17,11 @@ build-nomad:
     BUILD --platform=linux/amd64 +nomad --image=${image} --arch=amd64
     BUILD --platform=linux/arm64 +nomad --image=${image} --arch=arm64
 
+build-caddy:
+    ARG image
+    BUILD --platform=linux/amd64 +caddy --image=${image} --arch=amd64
+    BUILD --platform=linux/arm64 +caddy --image=${image} --arch=arm64
+
 coder-server:
     ARG arch
     ARG CODESERVER
