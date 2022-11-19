@@ -119,10 +119,31 @@ nomad:
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
                 profile install "nixpkgs#nomad"
 
-    # vault
+    # defn/dev
+    COPY --dir --chown=ubuntu:ubuntu . .
+    RUN (git clean -nfd || true) \
+        && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
+
+    IF [ "$image" != "" ]
+        SAVE IMAGE --push ${image}
+    END
+
+caddy:
+    ARG image
+    ARG arch
+
+    FROM pkg+nix --arch=${arch}
+
+    ENTRYPOINT ["/usr/bin/tini", "--"]
+
+    # docker
+    RUN sudo apt update \
+        && sudo apt install -y docker.io net-tools
+
+    # caddy
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
-                profile install "nixpkgs#vault"
+                profile install "nixpkgs#caddy"
 
     # defn/dev
     COPY --dir --chown=ubuntu:ubuntu . .
