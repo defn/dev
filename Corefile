@@ -27,3 +27,9 @@ mesh:53 {
     errors
     forward . 127.0.0.1:15054
 }
+
+internal:53 {
+    log
+    errors
+    forward . fdaa:0:6099::3
+}
