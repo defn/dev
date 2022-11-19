@@ -10,11 +10,11 @@ local:53 {
     forward . 10.43.0.10
 }
 
-#internal:53 {
-#    log
-#    errors
-#    forward . 10.43.0.10
-#}
+k3d.internal:53 {
+    log
+    errors
+    forward . 10.43.0.10
+}
 
 ts.net:53 {
     log
