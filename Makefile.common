@@ -95,6 +95,7 @@ install-inner:
 	@env VAULT_ADDR="http://localhost:8200" VAULT_TOKEN="$$(pass Initial_Root_Token)" $(MAKE) manage
 
 	mark -- configure site
+	npm install npm@latest
 	npm install
 
 	$(MAKE) install-site
