@@ -30,7 +30,7 @@ jobs: {
 		}
 	}
 
-	for n in ["dev", "k3d", "nomad"] {
+	for n in ["dev", "k3d", "nomad", "caddy"] {
 		"publish_\(n)": #PublishBuild & {
 			_n: n
 		}
