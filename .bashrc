@@ -110,7 +110,6 @@ if tty >/dev/null; then
 fi
 
 if [[ -n "${VSCODE_GIT_IPC_HANDLE:-}" ]]; then
-	VSCODE_GIT_IPC_HANDLE="$(ls -thd /tmp/vscode-git-*.sock | head -1)"
 	if ! [[ -f ~/.home.done ]]; then
 		if flock -n ~/.home.lock -c 'cd && ~/bin/e make install'; then
 			touch ~/.home.done
