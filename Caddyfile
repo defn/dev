@@ -8,6 +8,10 @@ http://localhost {
 		reverse_proxy http://localhost:8888
 	}
 
+	handle_path /defn/* {
+		reverse_proxy http://defn.internal:8888
+	}
+
 	handle_path /dev/proxy/10350/ {
 		redir {scheme}://tilt-10350.127.0.0.1.sslip.io
 	}
