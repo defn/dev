@@ -41,7 +41,6 @@
               nixpkgs-fmt
               kubernetes-helm
               kube3d
-              vault
               nomad
             ];
           };
