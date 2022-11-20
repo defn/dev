@@ -119,7 +119,7 @@ http://control-0 {
 	}
 
 	handle_path /api/* {
-		reverse_proxy http://defm
+		reverse_proxy http://localhost:3000
 	}
 
 	handle_path /hello/* {
