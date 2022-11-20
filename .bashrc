@@ -1,6 +1,8 @@
 export USER=ubuntu
 export LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
 export LC_ALL=C.UTF-8
+export TMPDIR="${TMPDIR:-/tmp}"
+export TEMPDIR="${TEMPDIR:-/tmp}"
 
 if [[ -z "${IN_NIX_SHELL:-}" ]]; then
 	if [ -e /home/ubuntu/.nix-profile/etc/profile.d/nix.sh ]; then
