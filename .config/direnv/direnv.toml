@@ -18,6 +18,9 @@ prefix = [
     "/home/ubuntu/pkg",
     "/home/ubuntu/lib",
     "/home/ubuntu/app",
+    "/nix/work/pkg",
+    "/nix/work/lib",
+    "/nix/work/app",
     "/work/pkg",
     "/work/lib",
     "/work/app" 
