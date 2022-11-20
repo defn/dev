@@ -280,10 +280,7 @@ registry:
 	#control apply -f etc/local-registry-hosting.yaml
 
 pull-repos: # Pull dev, app, home, and password-store repos
-	git pull
-	cd && git pull
-	cd app && git pull
-	cd && cd .password-store && git pull
+	for a in . app lib pkg .password-store; do (echo; echo "$$a"; cd "$$a" && git pull) || true; done
 
 global: # Provision global from control plane
 	env DEFN_DEV_HOST_PORT=6444 DEFN_DEV_HOST_API=host.k3d.internal \
