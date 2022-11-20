@@ -15,7 +15,7 @@ function gs {
 }
 
 function vi {
-	if [[ -n "${VSCODE_GIT_IPC_HANDLE:-}" ]]; then
+	if [[ -n "${VSCODE_IPC_HOOK_CLI:-}" ]]; then
 		if [[ ! -f "${1:-}" ]]; then
 			echo "ERROR: file $1 not found" 1>&2
 			return 1
@@ -77,7 +77,7 @@ export KUBECONFIG_ALL="$HOME/.kube/config"
 
 # vscode
 export EDITOR=vim
-if [[ -n "${VSCODE_GIT_IPC_HANDLE:-}" ]]; then
+if [[ -n "${VSCODE_IPC_HOOK_CLI:-}" ]]; then
 	export BROWSER="$(set +f; ls -d /home/ubuntu/.local/lib/code-server-*/lib/vscode/bin/helpers/browser.sh)"
 
 	if [[ ! -S "${SSH_AUTH_SOCK:-}" ]]; then
@@ -111,8 +111,8 @@ if tty >/dev/null; then
   fi
 fi
 
-if [[ -n "${VSCODE_GIT_IPC_HANDLE:-}" ]]; then
-	VSCODE_GIT_IPC_HANDLE="$(ls -thd ${TMPDIR}/vscode-git-*.sock 2>/dev/null | head -1)"
+if [[ -n "${VSCODE_IPC_HOOK_CLI:-}" ]]; then
+  export VSCODE_GIT_IPC_HANDLE="$(ls -thd ${TMPDIR}/vscode-git-*.sock 2>/dev/null | head -1)"
 	if ! [[ -f ~/.home.done ]]; then
 		if flock -n ~/.home.lock -c 'cd && ~/bin/e make install'; then
 			touch ~/.home.done
