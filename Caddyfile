@@ -162,6 +162,46 @@ http://control-0 {
 		redir {scheme}://{host}:20100/ui/
 	}
 
+	handle_path /dev/proxy/10350/ {
+		redir http://{host}:10350
+	}
+
+	handle_path /dev/proxy/10351/ {
+		redir http://{host}:10351
+	}
+
+	handle_path /dev/proxy/10352/ {
+		redir http://{host}:10352
+	}
+
+	handle_path /dev/proxy/10353/ {
+		redir http://{host}:10353
+	}
+
+	handle_path /dev/proxy/10354/ {
+		redir http://{host}:10354
+	}
+
+	handle_path /dev/proxy/10355/ {
+		redir http://{host}:10355
+	}
+
+	handle_path /dev/proxy/10356/ {
+		redir http://{host}:10356
+	}
+
+	handle_path /dev/proxy/10357/ {
+		redir http://{host}:10357
+	}
+
+	handle_path /dev/proxy/10358/ {
+		redir http://{host}:10358
+	}
+
+	handle_path /dev/proxy/10359/ {
+		redir http://{host}:10359
+	}
+
 	reverse_proxy http://localhost:8000
 }
 
