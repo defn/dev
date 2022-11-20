@@ -58,7 +58,8 @@ export NEXT_TELEMETRY_DISABLED=1
 if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$PATH:/usr/local/aws-cli/bin"; fi
 
 # earthly
-export EARTHLY_BUILDKIT_HOST="${EARTHLY_BUILDKIT_HOST:-tcp://$(uname -n):8372}"
+#export EARTHLY_BUILDKIT_HOST="${EARTHLY_BUILDKIT_HOST:-tcp://$(uname -n):8372}"
+unset EARTHLY_BUILDKIT_HOST
 export DOCKER_BUILDKIT="${DOCKER_BUILDKIT:-1}"
 if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$PATH:/usr/local/gcloud/google-cloud-sdk/bin"; fi
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
