@@ -37,9 +37,6 @@ macos:
 symlinks:
 	mark -- configure symlinks
 	ln -nfs /work ~
-	ln -nfs work/app ~
-	ln -nfs work/pkg ~
-	ln -nfs work/lib ~
 
 perms:
 	mark -- configure permissions
