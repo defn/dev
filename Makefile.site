@@ -14,4 +14,4 @@ manage-site-default:
 	@true
 
 -include .password-store/Makefile.site
--include app/Makefile.site
+-include work/app/Makefile.site

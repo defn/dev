@@ -6,7 +6,7 @@ context ?= k3d-$(name)
 podname ?= $(name)-0
 control ?= $(shell echo $(name) | sed s/-0//)
 domain ?= $(shell tailscale cert 2>&1 | grep 'For domain' | cut -d'"' -f2 | cut -d. -f2-)
-app ?= $(shell pwd)/app
+app ?= $(shell pwd)/work/app
 node ?= k3d-control-server-0
 n ?=
 k ?=
@@ -277,7 +277,7 @@ registry:
 	#control apply -f etc/local-registry-hosting.yaml
 
 pull-repos: # Pull dev, app, home, and password-store repos
-	for a in . app lib pkg .password-store; do (echo; echo "$$a"; cd "$$a" && git pull) || true; done
+	for a in . work/app work/lib work/pkg .password-store; do (echo; echo "$$a"; cd "$$a" && git pull) || true; done
 
 global: # Provision global from control plane
 	env DEFN_DEV_HOST_PORT=6444 DEFN_DEV_HOST_API=host.k3d.internal \
@@ -307,7 +307,7 @@ vc%:
 
 control-%:
 	$(MAKE) ec2
-	kustomize build --enable-helm ~/app/k/$@ | $(first) apply -f -
+	kustomize build --enable-helm ~/work/app/k/$@ | $(first) apply -f -
 	while ! $(first) -n $@ get secrets vc-vcluster >/dev/null; do sleep 10; done
 	$(MAKE) connect_$@
 	while ! $@ get -n kube-system pods >/dev/null; do sleep 1; done
