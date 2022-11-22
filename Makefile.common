@@ -96,14 +96,8 @@ install-inner:
 
 	$(MAKE) install-site
 
-tilt up:
-	pass hello
-	tilt up --context k3d-control --port $(shell comm -23 <(seq 10350 10359 | sort) <(ss -Htan | awk '{print $$4}' | cut -d':' -f2 | sort -u) | shuf | head -n 1) --host 127.0.0.1 --stream
-
 down:
-	kuma-tp-off
-	tilt down --context k3d-control
-	sudo pkill kuma-dp
+	touch .local/share/code-server/exit
 
 logout:
 	-echo yes | gh auth logout --hostname github.com
