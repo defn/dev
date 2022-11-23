@@ -354,6 +354,9 @@ prune:
 wg-up:
 	pass wg_client | base64 -d | sudo tee /etc/wireguard/wg0.conf > /dev/null
 	sudo wg-quick up wg0
+	(MAKE) wg-up-inner
+	
+wg-up-inner:
 	dig @$(shell sudo cat /etc/wireguard/wg0.conf | grep AllowedIPs | awk '{print $$3}' | cut -d/ -f1)3 +noall +answer _apps.internal txt
 
 wg-down:
