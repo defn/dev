@@ -1,14 +1,14 @@
-# gcloud local auth http: //localhost:18085 {
-reverse_proxy http: //localhost:8085
+# gcloud local auth
+http://localhost:18085 {
+	reverse_proxy http://localhost:8085
 }
 
-http: //*.fly.dev {
-	respond "hi"
+http://*.fly.dev {
+	reverse_proxy http://localhost:8888
 }
 
-http: //localhost {
-handle_path /dev
-/* {
+http://localhost {
+	handle_path /dev/* {
 		reverse_proxy http://localhost:8888
 	}
 
