@@ -50,6 +50,7 @@ node_modules
 .loft
 .lesshst
 .fly
+.ctl
 .test
 .terraform.d
 .buildkite-agent
