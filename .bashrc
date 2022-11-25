@@ -122,5 +122,10 @@ fi
 
 PATH="/bin:$PATH"
 
-if test -s ~/.nix-profile/bin/direnv; then eval "$(~/.nix-profile/bin/direnv hook bash)"; fi
 export DIRENV_LOG_FORMAT=
+
+if type -P direnv >/dev/null; then
+	eval "$(direnv hook bash)"
+	_direnv_hook
+	cd - >/dev/null
+fi

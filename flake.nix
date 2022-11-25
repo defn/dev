@@ -5,6 +5,7 @@
     kubectl.url = github:defn/pkg?dir=kubectl&ref=v0.0.1;
     argocd.url = github:defn/pkg?dir=argocd&ref=v0.0.2;
     cue.url = github:defn/pkg?dir=cue&ref=v0.0.54;
+    c.url = github:defn/pkg?dir=c&ref=v0.0.56;
     latest.url = github:NixOS/nixpkgs/nixpkgs-unstable;
   };
 
@@ -28,6 +29,13 @@
 
           defaultPackage = wrap.nullBuilder {
             propagatedBuildInputs = with latest; [
+              pinentry
+              pass
+              gnupg
+              powerline-go
+              vim
+              git-crypt
+              vault
               rsync
               go
               gotools
