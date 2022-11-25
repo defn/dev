@@ -44,7 +44,7 @@ jobs:
           username: not-used
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Download latest earthly
-        run: sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.28/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
+        run: sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.30/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
       - name: Set up QEMU
         id: qemu
         uses: docker/setup-qemu-action@v1
@@ -95,7 +95,7 @@ jobs:
           username: not-used
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Download latest earthly
-        run: sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.28/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
+        run: sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.30/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
       - name: Set up QEMU
         id: qemu
         uses: docker/setup-qemu-action@v1
@@ -146,7 +146,7 @@ jobs:
           username: not-used
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Download latest earthly
-        run: sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.28/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
+        run: sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.30/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
       - name: Set up QEMU
         id: qemu
         uses: docker/setup-qemu-action@v1
@@ -198,7 +198,7 @@ jobs:
           username: not-used
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Download latest earthly
-        run: sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.28/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
+        run: sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.30/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
       - name: Set up QEMU
         id: qemu
         uses: docker/setup-qemu-action@v1
@@ -250,7 +250,7 @@ jobs:
           username: not-used
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Download latest earthly
-        run: sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.28/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
+        run: sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.30/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
       - name: Set up QEMU
         id: qemu
         uses: docker/setup-qemu-action@v1
@@ -302,7 +302,7 @@ jobs:
           username: not-used
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Download latest earthly
-        run: sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.28/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
+        run: sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.30/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
       - name: Set up QEMU
         id: qemu
         uses: docker/setup-qemu-action@v1

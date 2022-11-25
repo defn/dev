@@ -13,7 +13,7 @@ package workflows
 #EarthlySteps: #DockerLoginSteps + [{
 	name: "Download latest earthly"
 	run: """
-		sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.28/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
+		sudo /bin/sh -c 'wget -q https://github.com/earthly/earthly/releases/download/v0.6.30/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'
 		"""
 }, {
 	name: "Set up QEMU"
