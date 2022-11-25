@@ -127,5 +127,6 @@ export DIRENV_LOG_FORMAT=
 if type -P direnv >/dev/null; then
 	eval "$(direnv hook bash)"
 	_direnv_hook
+	unset DIRENV_DIFF DIRENV_WATCHES
 	cd - >/dev/null
 fi
