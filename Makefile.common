@@ -333,7 +333,7 @@ nix-bootstrap:
 
 nix-install:
 	. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh && nix --extra-experimental-features nix-command --extra-experimental-features flakes profile \
-		install nixpkgs\#{nix-direnv,direnv}
+		install nixpkgs\#{nix-direnv,direnv,pinentry}
 
 nix-reinstall:
 	. ~/.nix-profile/etc/profile.d/nix.sh && nix profile list | tail +2 | awk '{print $$NF}' | xargs nix profile remove
