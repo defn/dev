@@ -344,7 +344,7 @@ nix-gc:
 
 nix:
 	export LC_ALL=C.UTF-8 && if ! test -x /home/ubuntu/.nix-profile/bin/nix; then $(MAKE) nix-bootstrap; fi
-	export LC_ALL=C.UTF-8 && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh && $(MAKE) nix-install
+	if test "$(which direnv pinentry | wc -l)" == "2"; then export LC_ALL=C.UTF-8 && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh && $(MAKE) nix-install; fi
 
 prune:
 	-docker images | grep :5000/ | grep -E 'weeks|days' | awk '{print $$1 ":" $$2}' | runmany 'docker rmi $$1'

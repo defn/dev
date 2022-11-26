@@ -29,7 +29,6 @@
 
           defaultPackage = wrap.nullBuilder {
             propagatedBuildInputs = with latest; [
-              pinentry
               pass
               gnupg
               powerline-go
