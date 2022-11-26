@@ -45,6 +45,9 @@
               git-crypt
               vault
               rsync
+              gnumake
+              dnsutils
+              openssh
 
               go
               gotools
@@ -59,6 +62,8 @@
               nomad
               terraform
               aws-vault
+              pre-commit
+              vim
             ];
           };
         };
