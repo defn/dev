@@ -4,7 +4,9 @@ http://localhost:18085 {
 }
 
 http://*.fly.dev {
-	respond "hi"
+	handle_path / {
+		reverse_proxy http://localhost:8888
+	}
 }
 
 http://localhost {
