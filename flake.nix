@@ -1,11 +1,19 @@
 {
   inputs = {
-    dev.url = github:defn/pkg?dir=dev&ref=v0.0.54;
-    caddy.url = github:defn/pkg?dir=caddy&ref=v0.0.1;
-    kubectl.url = github:defn/pkg?dir=kubectl&ref=v0.0.1;
-    argocd.url = github:defn/pkg?dir=argocd&ref=v0.0.2;
-    cue.url = github:defn/pkg?dir=cue&ref=v0.0.54;
-    c.url = github:defn/pkg?dir=c&ref=v0.0.56;
+    dev.url = github:defn/pkg?dir=dev&ref=v0.0.63;
+    caddy.url = github:defn/pkg?dir=caddy&ref=v0.0.63;
+    kubectl.url = github:defn/pkg?dir=kubectl&ref=v0.0.63;
+    argocd.url = github:defn/pkg?dir=argocd&ref=v0.0.63;
+    earthly.url = github:defn/pkg?dir=earthly&ref=v0.0.63;
+    helm.url = github:defn/pkg?dir=helm&ref=v0.0.63;
+    kustomize.url = github:defn/pkg?dir=kustomize&ref=v0.0.63;
+    k3d.url = github:defn/pkg?dir=k3d&ref=v0.0.63;
+    c.url = github:defn/pkg?dir=c&ref=v0.0.63;
+    tf.url = github:defn/pkg?dir=tf&ref=v0.0.63;
+    f.url = github:defn/pkg?dir=f&ref=v0.0.63;
+    flyctl.url = github:defn/pkg?dir=flyctl&ref=v0.0.63;
+    yaegi.url = github:defn/pkg?dir=yaegi&ref=v0.0.63;
+    tilt.url = github:defn/pkg?dir=tilt&ref=v0.0.63;
     latest.url = github:NixOS/nixpkgs/nixpkgs-unstable;
   };
 
@@ -36,6 +44,7 @@
               git-crypt
               vault
               rsync
+
               go
               gotools
               go-tools
@@ -46,8 +55,6 @@
               delve
               nodejs-18_x
               nixpkgs-fmt
-              kubernetes-helm
-              kube3d
               nomad
             ];
           };
