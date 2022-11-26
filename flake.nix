@@ -48,6 +48,9 @@
               gnumake
               dnsutils
               openssh
+              pre-commit
+              vim
+              aws-vault
 
               go
               gotools
@@ -61,9 +64,6 @@
               nixpkgs-fmt
               nomad
               terraform
-              aws-vault
-              pre-commit
-              vim
             ];
           };
         };
