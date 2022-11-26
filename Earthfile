@@ -110,6 +110,11 @@ fly:
 
     ENTRYPOINT ["/usr/bin/tini", "--"]
 
+    # nix
+    RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile \
+        && rm -f nix-install.sh && chmod 0755 /nix && sudo rm -f /bin/man \
+        && sudo mv /nix /nix-install
+
     # code-server
     COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+coder-server/* --arch=${arch}) ./
 
