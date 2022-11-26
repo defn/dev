@@ -7,20 +7,15 @@ build-dev:
     BUILD --platform=linux/amd64 +dev --image=${image} --arch=amd64
     BUILD --platform=linux/arm64 +dev --image=${image} --arch=arm64
 
+build-fly:
+    ARG image
+    BUILD --platform=linux/amd64 +fly --image=${image} --arch=amd64
+    BUILD --platform=linux/arm64 +fly --image=${image} --arch=arm64
+
 build-k3d:
     ARG image
     BUILD --platform=linux/amd64 +k3d --image=${image} --arch=amd64
     BUILD --platform=linux/arm64 +k3d --image=${image} --arch=arm64
-
-build-nomad:
-    ARG image
-    BUILD --platform=linux/amd64 +nomad --image=${image} --arch=amd64
-    BUILD --platform=linux/arm64 +nomad --image=${image} --arch=arm64
-
-build-caddy:
-    ARG image
-    BUILD --platform=linux/amd64 +caddy --image=${image} --arch=amd64
-    BUILD --platform=linux/arm64 +caddy --image=${image} --arch=arm64
 
 coder-server:
     ARG arch
@@ -107,48 +102,21 @@ dev:
         SAVE IMAGE --push ${image}
     END
 
-nomad:
+fly:
     ARG image
     ARG arch
 
-    FROM pkg+nix --arch=${arch}
+    FROM pkg+root --arch=${arch}
 
     ENTRYPOINT ["/usr/bin/tini", "--"]
 
-    # docker
-    RUN sudo apt update \
-        && sudo apt install -y docker.io net-tools
+    # code-server
+    COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+coder-server/* --arch=${arch}) ./
 
-    # nomad
-    RUN . ~/.nix-profile/etc/profile.d/nix.sh \
-            && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
-                profile install "nixpkgs#nomad"
+    # weird configs
+    RUN mkdir -p .kube .docker
 
-    # defn/dev
-    COPY --dir --chown=ubuntu:ubuntu . .
-    RUN (git clean -nfd || true) \
-        && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
-
-    IF [ "$image" != "" ]
-        SAVE IMAGE --push ${image}
-    END
-
-caddy:
-    ARG image
-    ARG arch
-
-    FROM pkg+nix --arch=${arch}
-
-    ENTRYPOINT ["/usr/bin/tini", "--"]
-
-    # docker
-    RUN sudo apt update \
-        && sudo apt install -y docker.io net-tools
-
-    # caddy
-    RUN . ~/.nix-profile/etc/profile.d/nix.sh \
-            && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
-                profile install "nixpkgs#caddy"
+    COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
 
     # defn/dev
     COPY --dir --chown=ubuntu:ubuntu . .
