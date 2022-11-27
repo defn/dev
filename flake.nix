@@ -82,8 +82,6 @@
               nomad
               terraform
               vault
-
-              inputs.caddy.defaultPackage.${system}
             ];
           };
         };
