@@ -35,12 +35,25 @@
       handler = { pkgs, wrap, system }:
         let
           latest = import inputs.latest { inherit system; };
+
+          inputsList = (pkgs.lib.attrsets.mapAttrsToList (name: value: value) {
+            caddy = inputs.caddy;
+          });
+          flakeInputs = pkgs.lib.lists.foldr hasDefaultPackage [ ] inputsList;
+
+          hasDefaultPackage = (item: acc:
+            acc ++
+            (
+              if item ? ${"defaultPackage"}
+              then [ item.defaultPackage.${system} ]
+              else [ ]
+            ));
         in
         rec {
           devShell = wrap.devShell;
 
           defaultPackage = wrap.nullBuilder {
-            propagatedBuildInputs = with latest; [
+            propagatedBuildInputs = with latest; flakeInputs ++ [
               pass
               gnupg
               powerline-go
