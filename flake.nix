@@ -1,9 +1,9 @@
 {
   inputs = {
-    dev.url = github:defn/pkg?dir=dev&ref=v0.0.63;
+    dev.url = github:defn/pkg?dir=dev&ref=dev-0.0.1;
     caddy.url = github:defn/pkg?dir=caddy&ref=v0.0.63;
     argocd.url = github:defn/pkg?dir=argocd&ref=v0.0.63;
-    earthly.url = github:defn/pkg?dir=earthly&ref=v0.0.63;
+    earthly.url = github:defn/pkg?dir=earthly&ref=earthly-0.6.30-1;
     helm.url = github:defn/pkg?dir=helm&ref=v0.0.63;
     kustomize.url = github:defn/pkg?dir=kustomize&ref=v0.0.63;
     kubectl.url = github:defn/pkg?dir=kubectl&ref=v0.0.63;
