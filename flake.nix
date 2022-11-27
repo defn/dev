@@ -1,6 +1,6 @@
 {
   inputs = {
-    dev.url = github:defn/pkg?dir=dev&ref=dev-0.0.1;
+    dev.url = github:defn/pkg?dir=dev&ref=dev-0.0.2-rc6;
 
     caddy.url = github:defn/pkg?dir=caddy&ref=caddy-2.6.2;
     argocd.url = github:defn/pkg?dir=argocd&ref=argocd-2.5.2;
@@ -22,7 +22,7 @@
   };
 
   outputs = inputs:
-    inputs.dev.main {
+    inputs.dev.main rec {
       inherit inputs;
 
       config = rec {
@@ -35,43 +35,14 @@
       handler = { pkgs, wrap, system }:
         let
           latest = import inputs.latest { inherit system; };
-
-          inputsList = (pkgs.lib.attrsets.mapAttrsToList (name: value: value) {
-            dev = inputs.dev;
-
-            caddy = inputs.caddy;
-            argocd = inputs.argocd;
-            earthly = inputs.earthly;
-            helm = inputs.helm;
-            kustomize = inputs.kustomize;
-            kubectl = inputs.kubectl;
-            stern = inputs.stern;
-            tilt = inputs.tilt;
-            k3d = inputs.k3d;
-            flyctl = inputs.flyctl;
-            yaegi = inputs.yaegi;
-
-            c = inputs.c;
-            tf = inputs.tf;
-            f = inputs.f;
-
-            latest = github:NixOS/nixpkgs/nixpkgs-unstable;
-          });
-          flakeInputs = pkgs.lib.lists.foldr hasDefaultPackage [ ] inputsList;
-
-          hasDefaultPackage = (item: acc:
-            acc ++
-            (
-              if item ? ${"defaultPackage"}
-              then [ item.defaultPackage.${system} ]
-              else [ ]
-            ));
         in
         rec {
+          slug = config.slug;
+
           devShell = wrap.devShell;
 
           defaultPackage = wrap.nullBuilder {
-            propagatedBuildInputs = with latest; flakeInputs ++ [
+            propagatedBuildInputs = with latest; wrap.flakeInputs ++ [
               pass
               gnupg
               powerline-go
@@ -85,6 +56,8 @@
               vim
               aws-vault
               nixpkgs-fmt
+              jq
+              fzf
 
               go
               gotools
