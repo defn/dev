@@ -46,7 +46,6 @@
               powerline-go
               vim
               git-crypt
-              vault
               rsync
               gnumake
               dnsutils
@@ -54,6 +53,7 @@
               pre-commit
               vim
               aws-vault
+              nixpkgs-fmt
 
               go
               gotools
@@ -63,10 +63,14 @@
               go-outline
               gopkgs
               delve
+
               nodejs-18_x
-              nixpkgs-fmt
+
               nomad
               terraform
+              vault
+
+              inputs.caddy.defaultPackage.${system}
             ];
           };
         };
