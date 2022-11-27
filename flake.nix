@@ -59,6 +59,9 @@
               jq
               fzf
 
+              docker
+              docker-credential-helpers
+
               go
               gotools
               go-tools
