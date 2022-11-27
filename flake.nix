@@ -11,9 +11,8 @@
     stern.url = github:defn/pkg?dir=stern&ref=stern-1.22.0;
     tilt.url = github:defn/pkg?dir=tilt&ref=tilt-0.30.12;
     k3d.url = github:defn/pkg?dir=k3d&ref=k3d-5.4.6;
-
     flyctl.url = github:defn/pkg?dir=flyctl&ref=flyctl-0.0.435;
-    yaegi.url = github:defn/pkg?dir=yaegi&ref=v0.0.63;
+    yaegi.url = github:defn/pkg?dir=yaegi&ref=yaegi-0.14.3;
 
     c.url = github:defn/pkg?dir=c&ref=v0.0.63;
     tf.url = github:defn/pkg?dir=tf&ref=v0.0.63;
