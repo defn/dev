@@ -8,6 +8,7 @@
     kustomize.url = github:defn/pkg?dir=kustomize&ref=kustomize-4.5.7;
     kubectl.url = github:defn/pkg?dir=kubectl&ref=kubectl-1.24.8-1;
     stern.url = github:defn/pkg?dir=stern&ref=stern-1.22.0;
+    tilt.url = github:defn/pkg?dir=tilt&ref=tilt-0.30.12;
 
     k3d.url = github:defn/pkg?dir=k3d&ref=v0.0.63;
     c.url = github:defn/pkg?dir=c&ref=v0.0.63;
@@ -15,7 +16,6 @@
     f.url = github:defn/pkg?dir=f&ref=v0.0.63;
     flyctl.url = github:defn/pkg?dir=flyctl&ref=v0.0.63;
     yaegi.url = github:defn/pkg?dir=yaegi&ref=v0.0.63;
-    tilt.url = github:defn/pkg?dir=tilt&ref=v0.0.63;
 
     latest.url = github:NixOS/nixpkgs/nixpkgs-unstable;
   };
