@@ -4,7 +4,8 @@
     caddy.url = github:defn/pkg?dir=caddy&ref=caddy-2.6.2;
     argocd.url = github:defn/pkg?dir=argocd&ref=argocd-2.5.2;
     earthly.url = github:defn/pkg?dir=earthly&ref=earthly-0.6.30-1;
-    helm.url = github:defn/pkg?dir=helm&ref=v0.0.63;
+    helm.url = github:defn/pkg?dir=helm&ref=helm-3.10.2;
+
     kustomize.url = github:defn/pkg?dir=kustomize&ref=v0.0.63;
     kubectl.url = github:defn/pkg?dir=kubectl&ref=v0.0.63;
     stern.url = github:defn/pkg?dir=stern&ref=v0.0.56;
@@ -15,6 +16,7 @@
     flyctl.url = github:defn/pkg?dir=flyctl&ref=v0.0.63;
     yaegi.url = github:defn/pkg?dir=yaegi&ref=v0.0.63;
     tilt.url = github:defn/pkg?dir=tilt&ref=v0.0.63;
+
     latest.url = github:NixOS/nixpkgs/nixpkgs-unstable;
   };
 
