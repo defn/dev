@@ -9,8 +9,8 @@
     kubectl.url = github:defn/pkg?dir=kubectl&ref=kubectl-1.24.8-1;
     stern.url = github:defn/pkg?dir=stern&ref=stern-1.22.0;
     tilt.url = github:defn/pkg?dir=tilt&ref=tilt-0.30.12;
+    k3d.url = github:defn/pkg?dir=k3d&ref=k3d-5.4.6;
 
-    k3d.url = github:defn/pkg?dir=k3d&ref=v0.0.63;
     c.url = github:defn/pkg?dir=c&ref=v0.0.63;
     tf.url = github:defn/pkg?dir=tf&ref=v0.0.63;
     f.url = github:defn/pkg?dir=f&ref=v0.0.63;
