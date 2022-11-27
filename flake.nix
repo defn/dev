@@ -1,6 +1,6 @@
 {
   inputs = {
-    dev.url = github:defn/pkg?dir=dev&ref=dev-0.0.2-rc6;
+    dev.url = github:defn/pkg?dir=dev&ref=dev-0.0.2;
 
     caddy.url = github:defn/pkg?dir=caddy&ref=caddy-2.6.2;
     argocd.url = github:defn/pkg?dir=argocd&ref=argocd-2.5.2;
