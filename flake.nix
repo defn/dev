@@ -37,7 +37,25 @@
           latest = import inputs.latest { inherit system; };
 
           inputsList = (pkgs.lib.attrsets.mapAttrsToList (name: value: value) {
+            dev = inputs.dev;
+
             caddy = inputs.caddy;
+            argocd = inputs.argocd;
+            earthly = inputs.earthly;
+            helm = inputs.helm;
+            kustomize = inputs.kustomize;
+            kubectl = inputs.kubectl;
+            stern = inputs.stern;
+            tilt = inputs.tilt;
+            k3d = inputs.k3d;
+            flyctl = inputs.flyctl;
+            yaegi = inputs.yaegi;
+
+            c = inputs.c;
+            tf = inputs.tf;
+            f = inputs.f;
+
+            latest = github:NixOS/nixpkgs/nixpkgs-unstable;
           });
           flakeInputs = pkgs.lib.lists.foldr hasDefaultPackage [ ] inputsList;
 
