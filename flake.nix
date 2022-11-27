@@ -6,8 +6,8 @@
     earthly.url = github:defn/pkg?dir=earthly&ref=earthly-0.6.30-1;
     helm.url = github:defn/pkg?dir=helm&ref=helm-3.10.2;
     kustomize.url = github:defn/pkg?dir=kustomize&ref=kustomize-4.5.7;
+    kubectl.url = github:defn/pkg?dir=kubectl&ref=kubectl-1.24.8;
 
-    kubectl.url = github:defn/pkg?dir=kubectl&ref=v0.0.63;
     stern.url = github:defn/pkg?dir=stern&ref=v0.0.56;
     k3d.url = github:defn/pkg?dir=k3d&ref=v0.0.63;
     c.url = github:defn/pkg?dir=c&ref=v0.0.63;
