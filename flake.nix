@@ -1,6 +1,7 @@
 {
   inputs = {
     dev.url = github:defn/pkg?dir=dev&ref=dev-0.0.1;
+
     caddy.url = github:defn/pkg?dir=caddy&ref=caddy-2.6.2;
     argocd.url = github:defn/pkg?dir=argocd&ref=argocd-2.5.2;
     earthly.url = github:defn/pkg?dir=earthly&ref=earthly-0.6.30-1;
@@ -11,11 +12,12 @@
     tilt.url = github:defn/pkg?dir=tilt&ref=tilt-0.30.12;
     k3d.url = github:defn/pkg?dir=k3d&ref=k3d-5.4.6;
 
+    flyctl.url = github:defn/pkg?dir=flyctl&ref=flyctl-0.0.435;
+    yaegi.url = github:defn/pkg?dir=yaegi&ref=v0.0.63;
+
     c.url = github:defn/pkg?dir=c&ref=v0.0.63;
     tf.url = github:defn/pkg?dir=tf&ref=v0.0.63;
     f.url = github:defn/pkg?dir=f&ref=v0.0.63;
-    flyctl.url = github:defn/pkg?dir=flyctl&ref=v0.0.63;
-    yaegi.url = github:defn/pkg?dir=yaegi&ref=v0.0.63;
 
     latest.url = github:NixOS/nixpkgs/nixpkgs-unstable;
   };
