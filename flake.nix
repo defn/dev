@@ -1,6 +1,6 @@
 {
   inputs = {
-    dev.url = github:defn/pkg/dev-0.0.2?dir=dev;
+    dev.url = github:defn/pkg/dev-0.0.3?dir=dev;
 
     caddy.url = github:defn/pkg/caddy-2.6.2?dir=caddy;
     argocd.url = github:defn/pkg/argocd-2.5.2?dir=argocd;
@@ -17,8 +17,6 @@
     c.url = github:defn/pkg/v0.0.63?dir=c;
     tf.url = github:defn/pkg/v0.0.63?dir=tf;
     f.url = github:defn/pkg/v0.0.63?dir=f;
-
-    latest.url = github:NixOS/nixpkgs/nixpkgs-unstable;
   };
 
   outputs = inputs:
@@ -33,16 +31,13 @@
       };
 
       handler = { pkgs, wrap, system }:
-        let
-          latest = import inputs.latest { inherit system; };
-        in
         rec {
           slug = config.slug;
 
           devShell = wrap.devShell;
 
           defaultPackage = wrap.nullBuilder {
-            propagatedBuildInputs = with latest; wrap.flakeInputs ++ [
+            propagatedBuildInputs = with pkgs; wrap.flakeInputs ++ [
               pass
               gnupg
               powerline-go
