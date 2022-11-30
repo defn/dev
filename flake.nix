@@ -1,22 +1,22 @@
 {
   inputs = {
-    dev.url = github:defn/pkg?dir=dev&ref=dev-0.0.2;
+    dev.url = github:defn/pkg/dev-0.0.2?dir=dev;
 
-    caddy.url = github:defn/pkg?dir=caddy&ref=caddy-2.6.2;
-    argocd.url = github:defn/pkg?dir=argocd&ref=argocd-2.5.2;
-    earthly.url = github:defn/pkg?dir=earthly&ref=earthly-0.6.30-1;
-    helm.url = github:defn/pkg?dir=helm&ref=helm-3.10.2;
-    kustomize.url = github:defn/pkg?dir=kustomize&ref=kustomize-4.5.7;
-    kubectl.url = github:defn/pkg?dir=kubectl&ref=kubectl-1.24.8-1;
-    stern.url = github:defn/pkg?dir=stern&ref=stern-1.22.0;
-    tilt.url = github:defn/pkg?dir=tilt&ref=tilt-0.30.12;
-    k3d.url = github:defn/pkg?dir=k3d&ref=k3d-5.4.6;
-    flyctl.url = github:defn/pkg?dir=flyctl&ref=flyctl-0.0.435;
-    yaegi.url = github:defn/pkg?dir=yaegi&ref=yaegi-0.14.3;
+    caddy.url = github:defn/pkg/caddy-2.6.2?dir=caddy;
+    argocd.url = github:defn/pkg/argocd-2.5.2?dir=argocd;
+    earthly.url = github:defn/pkg/earthly-0.6.30-1?dir=earthly;
+    helm.url = github:defn/pkg/helm-3.10.2?dir=helm;
+    kustomize.url = github:defn/pkg/kustomize-4.5.7?dir=kustomize;
+    kubectl.url = github:defn/pkg/kubectl-1.24.8-1?dir=kubectl;
+    stern.url = github:defn/pkg/stern-1.22.0?dir=stern;
+    tilt.url = github:defn/pkg/tilt-0.30.12?dir=tilt;
+    k3d.url = github:defn/pkg/k3d-5.4.6?dir=k3d;
+    flyctl.url = github:defn/pkg/flyctl-0.0.435?dir=flyctl;
+    yaegi.url = github:defn/pkg/yaegi-0.14.3?dir=yaegi;
 
-    c.url = github:defn/pkg?dir=c&ref=v0.0.63;
-    tf.url = github:defn/pkg?dir=tf&ref=v0.0.63;
-    f.url = github:defn/pkg?dir=f&ref=v0.0.63;
+    c.url = github:defn/pkg/v0.0.63?dir=c;
+    tf.url = github:defn/pkg/v0.0.63?dir=tf;
+    f.url = github:defn/pkg/v0.0.63?dir=f;
 
     latest.url = github:NixOS/nixpkgs/nixpkgs-unstable;
   };
