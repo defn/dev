@@ -92,11 +92,13 @@ export VAULT_ADDR="${VAULT_ADDR:-unix:///work/vault-agent/vault-agent.sock}"
 export AWS_VAULT_BACKEND=pass
 export AWS_VAULT_PASS_PREFIX=aws-vault
 
+export EXTRA="${EXTRA:- }"
 if tty >/dev/null; then
   if type -P powerline-go >/dev/null; then
 	function render_ps1 {
 		powerline-go --colorize-hostname -mode flat -newline \
-			-modules host,ssh,cwd,perms,gitlite,load,exit,venv,kube
+			-modules host,ssh,cwd,perms,gitlite,load,exit,venv,kube,shell-var \
+			-shell-var EXTRA
 	}
 
 	function update_ps1 {
@@ -104,6 +106,22 @@ if tty >/dev/null; then
 		if [[ ! -S "${SSH_AUTH_SOCK:-}" ]]; then
 			export SSH_AUTH_SOCK="$(ls -td /tmp/vscode-ssh-auth-sock-* 2>/dev/null | head -1)"
 		fi
+		EXTRA=""
+		if [[ -f VERSION ]]; then
+			if [[ -f VENDOR ]]; then
+				local vendor="$(cat VENDOR)"
+				EXTRA="/ ${vendor}"	
+			fi
+
+			local version="$(cat VERSION)"
+			EXTRA="${version} ${EXTRA}"
+			
+			local tag="$(git describe --tags --abbrev=0 $(git log . | head -1 | awk '{print $2}'))"
+			if [[ "${tag}" != "${version}" ]]; then
+				EXTRA="!${EXTRA}"
+			fi
+		fi
+		EXTRA="${EXTRA:- }"
 		PS1="$(render_ps1)"
 	}
 
