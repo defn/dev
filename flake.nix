@@ -14,9 +14,9 @@
     flyctl.url = github:defn/pkg/flyctl-0.0.435?dir=flyctl;
     yaegi.url = github:defn/pkg/yaegi-0.14.3?dir=yaegi;
 
-    c.url = github:defn/pkg/v0.0.63?dir=c;
-    tf.url = github:defn/pkg/v0.0.63?dir=tf;
-    f.url = github:defn/pkg/v0.0.63?dir=f;
+    c.url = github:defn/pkg/c-0.0.1?dir=c;
+    tf.url = github:defn/pkg/tf-0.0.1?dir=tf;
+    f.url = github:defn/pkg/f-0.0.1?dir=f;
   };
 
   outputs = inputs:
