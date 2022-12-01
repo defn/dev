@@ -17,6 +17,10 @@
     c.url = github:defn/pkg/c-0.0.1?dir=c;
     tf.url = github:defn/pkg/tf-0.0.1?dir=tf;
     f.url = github:defn/pkg/f-0.0.1?dir=f;
+
+    terraform.url = github:defn/pkg/terraform-1.3.6?dir=terraform;
+    vault.url = github:defn/pkg/vault-1.12.2?dir=vault;
+    nomad.url = github:defn/pkg/nomad-1.4.3?dir=nomad;
   };
 
   outputs = inputs:
@@ -64,10 +68,6 @@
               delve
 
               nodejs-18_x
-
-              nomad
-              terraform
-              vault
             ];
           };
         };
