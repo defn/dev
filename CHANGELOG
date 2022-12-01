@@ -1,15 +1,15 @@
-changelog-0.0.27
+0.0.27
 
 powerline show VERSION, VENDOR, and latest git tag
 
 
-changelog-0.0.26
+0.0.26
 
-nix switch to defn/pkg terraform, vault, nomad
+nix switch to defn/pkg terraform, vault, nomad flakes
 
 
-changelog-0.0.25
+0.0.25
 
 earthly opt into --ci-arg
 nix config is pure again
-nix upgrade to latest c, f, tf flakes
+nix upgrade to latest defn/pkg c, f, tf flakes
