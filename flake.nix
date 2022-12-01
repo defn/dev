@@ -1,6 +1,6 @@
 {
   inputs = {
-    dev.url = github:defn/pkg/dev-0.0.3?dir=dev;
+    dev.url = github:defn/pkg/dev-0.0.4?dir=dev;
 
     caddy.url = github:defn/pkg/caddy-2.6.2?dir=caddy;
     argocd.url = github:defn/pkg/argocd-2.5.2?dir=argocd;
@@ -25,15 +25,12 @@
 
       config = rec {
         slug = "defn-dev";
-        version = "0.0.1";
-        homepage = "https://defn.sh/${slug}";
-        description = "dev environment home directory";
+        version_src = ./VERSION;
+        version = builtins.readFile version_src;
       };
 
       handler = { pkgs, wrap, system }:
         rec {
-          slug = config.slug;
-
           devShell = wrap.devShell;
 
           defaultPackage = wrap.nullBuilder {

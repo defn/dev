@@ -5,7 +5,7 @@ repos:
       - id: trailing-whitespace
         exclude: ^(provider|cdktf.out|.local)/|\.lock|charts
       - id: end-of-file-fixer
-        exclude: ^(provider|cdktf.out|.local)/|\.lock|charts
+        exclude: ^(provider|cdktf.out|.local)/|\.lock|charts|VERSION
       - id: check-json
         exclude: ^(provider|cdktf.out|.local)/
       - id: check-yaml
