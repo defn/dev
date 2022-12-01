@@ -1,0 +1,15 @@
+changelog-0.0.27
+
+powerline show VERSION, VENDOR, and latest git tag
+
+
+changelog-0.0.26
+
+nix switch to defn/pkg terraform, vault, nomad
+
+
+changelog-0.0.25
+
+earthly opt into --ci-arg
+nix config is pure again
+nix upgrade to latest c, f, tf flakes
