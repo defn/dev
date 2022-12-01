@@ -114,7 +114,7 @@ if tty >/dev/null; then
 			fi
 
 			local version="$(cat VERSION)"
-			EXTRA="${version} ${EXTRA}"
+			EXTRA="${version}${EXTRA:+ ${EXTRA}}"
 			
 			local tag="$(git describe --tags --abbrev=0 $(git log . | head -1 | awk '{print $2}'))"
 			if [[ "${tag}" != "${version}" ]]; then
