@@ -25,7 +25,7 @@
   };
 
   outputs = inputs:
-    inputs.dev.main rec {
+    { main = inputs.dev.main; } // inputs.dev.main rec {
       inherit inputs;
 
       config = rec {
@@ -37,8 +37,6 @@
       handler = { pkgs, wrap, system }:
         rec {
           devShell = wrap.devShell;
-
-          main = inputs.dev.main;
 
           defaultPackage = wrap.bashBuilder {
             src = ./.;
