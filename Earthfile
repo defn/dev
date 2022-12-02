@@ -71,7 +71,7 @@ dev:
     # cloudflared
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
-                profile install "github:defn/pkg?dir=cloudflaredi&ref=master"
+                profile install "github:defn/pkg?dir=cloudflared&ref=master"
 
     # vault
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
