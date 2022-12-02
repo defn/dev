@@ -100,3 +100,4 @@ etc/tailscale_*
 .node_repl_history
 .direnv
 result
+nix-support

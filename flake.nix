@@ -38,7 +38,13 @@
         rec {
           devShell = wrap.devShell;
 
-          defaultPackage = wrap.nullBuilder {
+          defaultPackage = wrap.bashBuilder {
+            src = ./.;
+            installPhase = ''
+              mkdir --p $out
+              rsync -ia $src/. $out/.
+            '';
+
             propagatedBuildInputs = with pkgs; wrap.flakeInputs ++ [
               bashInteractive
               pass
