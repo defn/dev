@@ -38,6 +38,8 @@
         rec {
           devShell = wrap.devShell;
 
+          main = inputs.dev.main;
+
           defaultPackage = wrap.bashBuilder {
             src = ./.;
             installPhase = ''
