@@ -105,11 +105,6 @@ fly:
         && rm -f nix-install.sh && chmod 0755 /nix && sudo rm -f /bin/man \
         && sudo mv /nix /nix-install
 
-    # code-server
-    RUN . ~/.nix-profile/etc/profile.d/nix.sh \
-            && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
-                profile install "github:defn/pkg?dir=codeserver&ref=codeserver-4.8.3"
-
     # weird configs
     RUN mkdir -p .kube .docker
 
