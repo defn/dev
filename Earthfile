@@ -17,18 +17,6 @@ build-k3d:
     BUILD --platform=linux/amd64 +k3d --image=${image} --arch=amd64
     BUILD --platform=linux/arm64 +k3d --image=${image} --arch=arm64
 
-coder-server:
-    ARG arch
-    ARG CODESERVER
-    ARG CODESERVER_BUMP
-
-    FROM pkg+root --arch=${arch}
-
-    RUN echo ${CODESERVER_BUMP}
-    RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method standalone --prefix=/home/ubuntu/.local --version=${CODESERVER}
-    RUN mkdir -p .config/code-server && touch .config/code-server/config.yaml
-    SAVE ARTIFACT .local
-
 k3d:
     ARG K3S
 
@@ -66,27 +54,29 @@ dev:
     ENTRYPOINT ["/usr/bin/tini", "--"]
 
     # code-server
-    COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+coder-server/* --arch=${arch}) ./
+    RUN . ~/.nix-profile/etc/profile.d/nix.sh \
+            && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
+                profile install "github:defn/pkg?dir=codeserver&ref=codeserver-4.8.3"
 
     # coredns
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
-                profile install github:defn/pkg?dir=coredns
+                profile install "github:defn/pkg?dir=coredns&ref=master"
 
     # caddy
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
-                profile install github:defn/pkg?dir=caddy
+                profile install "github:defn/pkg?dir=caddy&ref=caddy-2.6.2-1"
 
     # cloudflared
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
-                profile install github:defn/pkg?dir=cloudflared
+                profile install "github:defn/pkg?dir=cloudflaredi&ref=master"
 
     # vault
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
-                profile install "nixpkgs#vault"
+                profile install "github:defn/pkg?dir=vault&ref=master"
 
     # weird configs
     RUN mkdir -p .kube .docker
@@ -116,7 +106,9 @@ fly:
         && sudo mv /nix /nix-install
 
     # code-server
-    COPY --chown=ubuntu:ubuntu --symlink-no-follow --dir (+coder-server/* --arch=${arch}) ./
+    RUN . ~/.nix-profile/etc/profile.d/nix.sh \
+            && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
+                profile install "github:defn/pkg?dir=codeserver&ref=codeserver-4.8.3"
 
     # weird configs
     RUN mkdir -p .kube .docker
