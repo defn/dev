@@ -39,6 +39,7 @@
 
           defaultPackage = wrap.nullBuilder {
             propagatedBuildInputs = with pkgs; wrap.flakeInputs ++ [
+              bashInteractive
               pass
               gnupg
               powerline-go
