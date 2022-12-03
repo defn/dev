@@ -1,6 +1,9 @@
-export USER=ubuntu
-export LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
-export LC_ALL=C.UTF-8
+if [[ "Linux" == "$(uname -s)" ]]; then
+	export USER=ubuntu
+	export LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
+	export LC_ALL=C.UTF-8
+fi
+
 export TMPDIR="${TMPDIR:-/tmp}"
 export TEMPDIR="${TEMPDIR:-/tmp}"
 
@@ -21,14 +24,18 @@ function vi {
 			return 1
 		fi
 
-		if type -P code >/dev/null; then
-			command code "$@"
-		else
+		if type -P code-server >/dev/null; then
 			command code-server "$@"
+		else
+			command vi "$@"
 		fi
 	else
 		command vi "$@"
 	fi
+}
+
+function pc {
+	pre-commit "$@"
 }
 
 function pca {
@@ -40,14 +47,21 @@ if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$HOME/.local/bin:$PATH"; fi
 export PYTHONPATH
 export PIP_DISABLE_PIP_VERSION_CHECK=1
 
+# gpg-agent ssh socket
+# TODO how does this get set in Linux
+SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh; export SSH_AUTH_SOCK
+
+# homebrew
+PATH="$PATH:/opt/homebrew/bin"
+
+# bash
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 # nodejs
 if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$HOME/node_modules/.bin:$PATH"; fi
 
 # cue
 if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$HOME/bin/$(uname -s):$HOME/bin:$PATH"; fi
-
-# linkerd
-if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$HOME/.linkerd2/bin:$PATH"; fi
 
 # terraform
 export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
@@ -92,6 +106,7 @@ export VAULT_ADDR="${VAULT_ADDR:-unix:///work/vault-agent/vault-agent.sock}"
 export AWS_VAULT_BACKEND=pass
 export AWS_VAULT_PASS_PREFIX=aws-vault
 
+# powerline-go
 export EXTRA="${EXTRA:- }"
 if tty >/dev/null; then
   if type -P powerline-go >/dev/null; then
@@ -129,6 +144,14 @@ if tty >/dev/null; then
   fi
 fi
 
+export DIRENV_LOG_FORMAT=
+
+if type -P direnv >/dev/null; then
+	eval "$(direnv hook bash)"
+	_direnv_hook
+	unset DIRENV_DIFF DIRENV_WATCHES
+fi
+
 if [[ -n "${VSCODE_IPC_HOOK_CLI:-}" ]]; then
   export VSCODE_GIT_IPC_HANDLE="$(ls -thd ${TMPDIR}/vscode-git-*.sock 2>/dev/null | head -1)"
 	if ! [[ -f ~/.home.done ]]; then
@@ -138,12 +161,3 @@ if [[ -n "${VSCODE_IPC_HOOK_CLI:-}" ]]; then
 	fi
 fi
 
-PATH="/bin:$PATH"
-
-export DIRENV_LOG_FORMAT=
-
-if type -P direnv >/dev/null; then
-	eval "$(direnv hook bash)"
-	_direnv_hook
-	unset DIRENV_DIFF DIRENV_WATCHES
-fi

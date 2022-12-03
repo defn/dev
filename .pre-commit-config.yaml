@@ -3,11 +3,11 @@ repos:
     rev: v4.3.0
     hooks:
       - id: trailing-whitespace
-        exclude: ^(provider|cdktf.out|.local)/|\.lock|charts
+        exclude: ^(provider|cdktf.out|.local)/|\.lock|charts|Library
       - id: end-of-file-fixer
-        exclude: ^(provider|cdktf.out|.local)/|\.lock|charts|VERSION
+        exclude: ^(provider|cdktf.out|.local)/|\.lock|charts|Library|VERSION
       - id: check-json
-        exclude: ^(provider|cdktf.out|.local)/
+        exclude: ^(provider|cdktf.out|.local)/|Library
       - id: check-yaml
         args: [--allow-multiple-documents, --unsafe]
         exclude: ^(provider|cdktf.out|.local)/|charts

@@ -1,0 +1,48 @@
+{
+  "workbench.colorTheme": "Default Dark+",
+  "workbench.startupEditor": "none",
+  "git.confirmSync": false,
+  "editor.formatOnSave": true,
+  "remote.SSH.localServerDownload": "off",
+  "remote.SSH.enableRemoteCommand": true,
+  "remote.SSH.useLocalServer": true,
+  "remote.containers.cacheVolume": true,
+  "remote.SSH.lockfilesInTmp": true,
+  "remote.containers.dockerComposePath": "docker compose",
+  "remote.containers.copyGitConfig": false,
+  "remote.containers.gitCredentialHelperConfigLocation": "none",
+  "python.formatting.provider": "black",
+  "python.analysis.typeCheckingMode": "basic",
+  "python.poetryPath": "/home/ubuntu/.local/bin/poetry",
+  "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true,
+      "source.organizeImports.python": true
+    }
+  },
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.localEchoEnabled": "off",
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "terminal.integrated.shellArgs.linux": [
+    "-c",
+    "~/bin/e make dev 2>/dev/null; exec bash -l"
+  ],
+  "workbench.editor.untitled.hint": "hidden",
+  "redhat.telemetry.enabled": false,
+  "files.associations": {
+    "BUILD": "python",
+    "Earthfile": "plaintext"
+  },
+  "extensions.ignoreRecommendations": true,
+  "editor.minimap.enabled": false,
+  "remote.portsAttributes": {
+    "5000": {
+      "label": "docker registry",
+      "onAutoForward": "ignore"
+    }
+  },
+  "terraform.languageServer.ignoreSingleFileWarning": true,
+  "terminal.integrated.showExitAlert": false,
+  "gitlens.codeLens.enabled": false,
+  "gitlens.statusBar.enabled": false
+}

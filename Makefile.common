@@ -346,6 +346,9 @@ nix:
 	export LC_ALL=C.UTF-8 && if ! test -x /home/ubuntu/.nix-profile/bin/nix; then $(MAKE) nix-bootstrap; fi
 	if test "$(shell which direnv pinentry | wc -l)" != "2"; then export LC_ALL=C.UTF-8 && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh && $(MAKE) nix-install; fi
 
+nix-macos:
+	sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume --daemon
+
 prune:
 	-docker images | grep :5000/ | grep -E 'weeks|days' | awk '{print $$1 ":" $$2}' | runmany 'docker rmi $$1'
 	-docker system prune -f
@@ -360,4 +363,4 @@ wg-up-inner:
 	dig @$(shell sudo cat /etc/wireguard/wg0.conf | grep AllowedIPs | awk '{print $$3}' | cut -d/ -f1)3 +noall +answer _apps.internal txt
 
 wg-down:
-	sudo wg-quick down wg0
+	sudo wg-quick down wg0nix-bootstrap:

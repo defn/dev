@@ -1,0 +1,12 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+  {
+    "key": "cmd+0",
+    "command": "remote-containers.rebuildAndReopenInContainer"
+  },
+  {
+    "key": "ctrl+up",
+    "command": "git.stage",
+    "when": "workbench.scm.active"
+  }
+]
