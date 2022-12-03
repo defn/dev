@@ -106,6 +106,15 @@ export VAULT_ADDR="${VAULT_ADDR:-unix:///work/vault-agent/vault-agent.sock}"
 export AWS_VAULT_BACKEND=pass
 export AWS_VAULT_PASS_PREFIX=aws-vault
 
+# direnv
+export DIRENV_LOG_FORMAT=
+
+if type -P direnv >/dev/null; then
+	eval "$(direnv hook bash)"
+	_direnv_hook
+	unset DIRENV_DIFF DIRENV_WATCHES
+fi
+
 # powerline-go
 export EXTRA="${EXTRA:- }"
 if tty >/dev/null; then
@@ -144,14 +153,11 @@ if tty >/dev/null; then
   fi
 fi
 
-export DIRENV_LOG_FORMAT=
-
 if type -P direnv >/dev/null; then
 	eval "$(direnv hook bash)"
-	_direnv_hook
-	unset DIRENV_DIFF DIRENV_WATCHES
 fi
 
+# install
 if [[ -n "${VSCODE_IPC_HOOK_CLI:-}" ]]; then
   	export VSCODE_GIT_IPC_HANDLE="$(ls -thd ${TMPDIR}/vscode-git-*.sock 2>/dev/null | head -1)"
 	if [[ "Linux" == "$(uname -s)" ]]; then
