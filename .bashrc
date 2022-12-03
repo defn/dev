@@ -92,7 +92,7 @@ export KUBECONFIG_ALL="$HOME/.kube/config"
 # vscode
 export EDITOR=vim
 if [[ -n "${VSCODE_IPC_HOOK_CLI:-}" ]]; then
-	export BROWSER="$(set +f; $(dirname $(which code-server))/../lib/vscode/bin/helpers/browser.sh)"
+	export BROWSER="$(set +f; echo $(dirname $(which code-server))/../lib/code-server-*/lib/vscode/bin/helpers/browser.sh)"
 
 	if [[ ! -S "${SSH_AUTH_SOCK:-}" ]]; then
 		export SSH_AUTH_SOCK="$(ls -td /tmp/vscode-ssh-auth-sock-* 2>/dev/null | head -1)"
