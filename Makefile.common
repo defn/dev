@@ -349,6 +349,10 @@ nix:
 nix-macos:
 	sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume --daemon
 
+nix-macos-profile:
+	nix profile install nixpkgs\#{nix-direnv,direnv}
+	sudo ln -nfs $(shell which pinentry-mac) .nix-profile/bin/pinentry
+
 prune:
 	-docker images | grep :5000/ | grep -E 'weeks|days' | awk '{print $$1 ":" $$2}' | runmany 'docker rmi $$1'
 	-docker system prune -f

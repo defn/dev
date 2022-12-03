@@ -162,3 +162,5 @@ Brewfile.lock.json
 .direnv
 result
 
+.nix-profile
+.nix-defexpr/channels
