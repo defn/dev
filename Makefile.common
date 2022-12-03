@@ -50,7 +50,7 @@ build:
 	$(MAKE) build-site
 
 install:
-	-$(MAKE) nix
+	-$(MAKE) nix-$(shell uname -s)
 	cd && . ~/.nix-profile/etc/profile.d/nix.sh && ~/bin/de ~ $(MAKE) install-inner
 
 install-inner:
@@ -327,13 +327,14 @@ debug-node:
 debug-docker:
 	docker run -it --rm --privileged --pid=host alpine:edge nsenter -t 1 -m -u -n -i
 
-nix-bootstrap:
-	rm -rf /nix/var/nix/profiles/per-user/ubuntu/profile
-	sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile
+nix:
+	$(MAKE) nix-$(shell uname -s)
 
-nix-install:
-	. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh && nix --extra-experimental-features nix-command --extra-experimental-features flakes profile \
-		install nixpkgs\#{nix-direnv,direnv,pinentry}
+nix-Linux-bootstrap:
+	sh <(curl -L https://nixos.org/nix/install) --no-daemon
+
+nix-Darwin-bootstrap:
+	sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume --daemon
 
 nix-reinstall:
 	. ~/.nix-profile/etc/profile.d/nix.sh && nix profile list | tail +2 | awk '{print $$NF}' | xargs nix profile remove
@@ -342,16 +343,13 @@ nix-reinstall:
 nix-gc:
 	nix-store --gc
 
-nix:
-	export LC_ALL=C.UTF-8 && if ! test -x /home/ubuntu/.nix-profile/bin/nix; then $(MAKE) nix-bootstrap; fi
-	if test "$(shell which direnv pinentry | wc -l)" != "2"; then export LC_ALL=C.UTF-8 && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh && $(MAKE) nix-install; fi
+nix-Linux:
+	export LC_ALL=C.UTF-8 && if ! test -x ~/.nix-profile/bin/nix; then $(MAKE) nix-Linux-bootstrap; fi
+	if test "$(shell which direnv pinentry | wc -l)" != "2"; then export LC_ALL=C.UTF-8 && . ~/.nix-profile/etc/profile.d/nix.sh && nix install nixpkgs\#{nix-direnv,direnv,pinentry}; fi
 
-nix-macos:
-	sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume --daemon
-
-nix-macos-profile:
-	nix profile install nixpkgs\#{nix-direnv,direnv}
-	sudo ln -nfs $(shell which pinentry-mac) .nix-profile/bin/pinentry
+nix-Darwin:
+	if test "$(shell which direnv | wc -l)" != "1"; then export LC_ALL=C.UTF-8 && . ~/.nix-profile/etc/profile.d/nix.sh && nix install nixpkgs\#{nix-direnv,direnv}; fi
+	if ! test -L .nix-profile/bin/pinentry; then sudo ln -nfs $(shell which pinentry-mac) .nix-profile/bin/pinentry; fi
 
 prune:
 	-docker images | grep :5000/ | grep -E 'weeks|days' | awk '{print $$1 ":" $$2}' | runmany 'docker rmi $$1'
