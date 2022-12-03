@@ -97,7 +97,7 @@ install-inner:
 	$(MAKE) install-site
 
 down:
-	touch .local/share/code-server/exit
+	touch .local/share/code-server/idle
 
 logout:
 	-echo yes | gh auth logout --hostname github.com
