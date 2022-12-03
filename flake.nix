@@ -19,9 +19,9 @@
     tf.url = github:defn/pkg/tf-0.0.1?dir=tf;
     f.url = github:defn/pkg/f-0.0.1?dir=f;
 
-    terraform.url = github:defn/pkg/terraform-1.3.6?dir=terraform;
-    vault.url = github:defn/pkg/vault-1.12.2?dir=vault;
-    nomad.url = github:defn/pkg/nomad-1.4.3?dir=nomad;
+    terraform.url = github:defn/pkg/terraform-1.3.6-1?dir=terraform;
+    vault.url = github:defn/pkg/vault-1.12.2-1?dir=vault;
+    nomad.url = github:defn/pkg/nomad-1.4.3-1?dir=nomad;
   };
 
   outputs = inputs:
