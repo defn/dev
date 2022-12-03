@@ -22,6 +22,8 @@
     terraform.url = github:defn/pkg/terraform-1.3.6-1?dir=terraform;
     vault.url = github:defn/pkg/vault-1.12.2-1?dir=vault;
     nomad.url = github:defn/pkg/nomad-1.4.3-1?dir=nomad;
+
+    tailscale.url = github:defn/pkg/tailscale-1.32.3-3?dir=tailscale;
   };
 
   outputs = inputs:
@@ -42,7 +44,7 @@
             src = ./.;
             installPhase = ''
               mkdir --p $out
-              rsync -ia $src/. $out/.
+              #rsync -ia $src/. $out/.
             '';
 
             propagatedBuildInputs = with pkgs; wrap.flakeInputs ++ [

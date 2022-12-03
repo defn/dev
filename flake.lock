@@ -281,27 +281,6 @@
       },
       "locked": {
         "dir": "dev",
-        "lastModified": 1670049380,
-        "narHash": "sha256-l1XG4aGSL6A0ZtYi4zVZZDxrDmkf2mZo9n8pTyuxcV0=",
-        "owner": "defn",
-        "repo": "pkg",
-        "rev": "ac2a66dd709f9a557c3c492325226ed970c946b9",
-        "type": "github"
-      },
-      "original": {
-        "dir": "dev",
-        "owner": "defn",
-        "ref": "dev-0.0.5",
-        "repo": "pkg",
-        "type": "github"
-      }
-    },
-    "dev_18": {
-      "inputs": {
-        "wrapper": "wrapper_18"
-      },
-      "locked": {
-        "dir": "dev",
         "lastModified": 1669860195,
         "narHash": "sha256-TsfWyj7wJJzq1vbLmCNByqdMbQPvlYukb8BFJeH5ZO8=",
         "owner": "defn",
@@ -317,23 +296,44 @@
         "type": "github"
       }
     },
+    "dev_18": {
+      "inputs": {
+        "wrapper": "wrapper_18"
+      },
+      "locked": {
+        "dir": "dev",
+        "lastModified": 1670049380,
+        "narHash": "sha256-l1XG4aGSL6A0ZtYi4zVZZDxrDmkf2mZo9n8pTyuxcV0=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "ac2a66dd709f9a557c3c492325226ed970c946b9",
+        "type": "github"
+      },
+      "original": {
+        "dir": "dev",
+        "owner": "defn",
+        "ref": "dev-0.0.5",
+        "repo": "pkg",
+        "type": "github"
+      }
+    },
     "dev_19": {
       "inputs": {
         "wrapper": "wrapper_19"
       },
       "locked": {
         "dir": "dev",
-        "lastModified": 1669509822,
-        "narHash": "sha256-YmxhVcJX7q8cJbWeD0akwRYn2JeXDGIEJPsMIt7eFMo=",
+        "lastModified": 1669860195,
+        "narHash": "sha256-TsfWyj7wJJzq1vbLmCNByqdMbQPvlYukb8BFJeH5ZO8=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "f8d8f30ac0eda62eac306f72165feab153bac712",
+        "rev": "037b4c5bfcaae87922457bb4308989bf02a9c8a8",
         "type": "github"
       },
       "original": {
         "dir": "dev",
         "owner": "defn",
-        "ref": "dev-0.0.1",
+        "ref": "dev-0.0.4",
         "repo": "pkg",
         "type": "github"
       }
@@ -365,6 +365,27 @@
       },
       "locked": {
         "dir": "dev",
+        "lastModified": 1669509822,
+        "narHash": "sha256-YmxhVcJX7q8cJbWeD0akwRYn2JeXDGIEJPsMIt7eFMo=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "f8d8f30ac0eda62eac306f72165feab153bac712",
+        "type": "github"
+      },
+      "original": {
+        "dir": "dev",
+        "owner": "defn",
+        "ref": "dev-0.0.1",
+        "repo": "pkg",
+        "type": "github"
+      }
+    },
+    "dev_21": {
+      "inputs": {
+        "wrapper": "wrapper_21"
+      },
+      "locked": {
+        "dir": "dev",
         "lastModified": 1670049380,
         "narHash": "sha256-l1XG4aGSL6A0ZtYi4zVZZDxrDmkf2mZo9n8pTyuxcV0=",
         "owner": "defn",
@@ -380,9 +401,9 @@
         "type": "github"
       }
     },
-    "dev_21": {
+    "dev_22": {
       "inputs": {
-        "wrapper": "wrapper_21"
+        "wrapper": "wrapper_22"
       },
       "locked": {
         "dir": "dev",
@@ -800,6 +821,21 @@
         "type": "github"
       }
     },
+    "flake-utils_22": {
+      "locked": {
+        "lastModified": 1667395993,
+        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "flake-utils_3": {
       "locked": {
         "lastModified": 1667395993,
@@ -1193,16 +1229,16 @@
     },
     "nixpkgs_19": {
       "locked": {
-        "lastModified": 1653936696,
-        "narHash": "sha256-M6bJShji9AIDZ7Kh7CPwPBPb/T7RiVev2PAcOi4fxDQ=",
+        "lastModified": 1669833724,
+        "narHash": "sha256-/HEZNyGbnQecrgJnfE8d0WC5c1xuPSD2LUpB6YXlg4c=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ce6aa13369b667ac2542593170993504932eb836",
+        "rev": "4d2b37a84fad1091b9de401eb450aae66f1a741e",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "22.05",
+        "ref": "22.11",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -1225,6 +1261,22 @@
     },
     "nixpkgs_20": {
       "locked": {
+        "lastModified": 1653936696,
+        "narHash": "sha256-M6bJShji9AIDZ7Kh7CPwPBPb/T7RiVev2PAcOi4fxDQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ce6aa13369b667ac2542593170993504932eb836",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "22.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_21": {
+      "locked": {
         "lastModified": 1669833724,
         "narHash": "sha256-/HEZNyGbnQecrgJnfE8d0WC5c1xuPSD2LUpB6YXlg4c=",
         "owner": "NixOS",
@@ -1239,7 +1291,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_21": {
+    "nixpkgs_22": {
       "locked": {
         "lastModified": 1653936696,
         "narHash": "sha256-M6bJShji9AIDZ7Kh7CPwPBPb/T7RiVev2PAcOi4fxDQ=",
@@ -1404,6 +1456,7 @@
         "kustomize": "kustomize",
         "nomad": "nomad",
         "stern": "stern",
+        "tailscale": "tailscale",
         "terraform": "terraform",
         "tf": "tf",
         "tilt": "tilt",
@@ -1432,9 +1485,30 @@
         "type": "github"
       }
     },
-    "terraform": {
+    "tailscale": {
       "inputs": {
         "dev": "dev_17"
+      },
+      "locked": {
+        "dir": "tailscale",
+        "lastModified": 1670097897,
+        "narHash": "sha256-npCT3waQzX2LiWm1KLDVWHGUse328Wyzq1EKHOgwRjg=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "7facd7b1b81652a6464968e8483fd9737ba79c0a",
+        "type": "github"
+      },
+      "original": {
+        "dir": "tailscale",
+        "owner": "defn",
+        "ref": "tailscale-1.32.3-3",
+        "repo": "pkg",
+        "type": "github"
+      }
+    },
+    "terraform": {
+      "inputs": {
+        "dev": "dev_18"
       },
       "locked": {
         "dir": "terraform",
@@ -1455,7 +1529,7 @@
     },
     "tf": {
       "inputs": {
-        "dev": "dev_18"
+        "dev": "dev_19"
       },
       "locked": {
         "dir": "tf",
@@ -1476,7 +1550,7 @@
     },
     "tilt": {
       "inputs": {
-        "dev": "dev_19"
+        "dev": "dev_20"
       },
       "locked": {
         "dir": "tilt",
@@ -1497,7 +1571,7 @@
     },
     "vault": {
       "inputs": {
-        "dev": "dev_20"
+        "dev": "dev_21"
       },
       "locked": {
         "dir": "vault",
@@ -1699,28 +1773,6 @@
       },
       "locked": {
         "dir": "wrapper",
-        "lastModified": 1670049316,
-        "narHash": "sha256-rXTiyGau7UdOOdlZC1XdMKWUtReNpxC2LcMslcxsY1s=",
-        "owner": "defn",
-        "repo": "pkg",
-        "rev": "859895d8adaa4ebe1471eac9b170ae119b8cbb9e",
-        "type": "github"
-      },
-      "original": {
-        "dir": "wrapper",
-        "owner": "defn",
-        "ref": "wrapper-0.0.6",
-        "repo": "pkg",
-        "type": "github"
-      }
-    },
-    "wrapper_18": {
-      "inputs": {
-        "flake-utils": "flake-utils_18",
-        "nixpkgs": "nixpkgs_18"
-      },
-      "locked": {
-        "dir": "wrapper",
         "lastModified": 1669860123,
         "narHash": "sha256-KEimXnQ/VyLNrCHjdrOPEChNsVF2OMPcGI//m8TaDPc=",
         "owner": "defn",
@@ -1736,6 +1788,28 @@
         "type": "github"
       }
     },
+    "wrapper_18": {
+      "inputs": {
+        "flake-utils": "flake-utils_18",
+        "nixpkgs": "nixpkgs_18"
+      },
+      "locked": {
+        "dir": "wrapper",
+        "lastModified": 1670049316,
+        "narHash": "sha256-rXTiyGau7UdOOdlZC1XdMKWUtReNpxC2LcMslcxsY1s=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "859895d8adaa4ebe1471eac9b170ae119b8cbb9e",
+        "type": "github"
+      },
+      "original": {
+        "dir": "wrapper",
+        "owner": "defn",
+        "ref": "wrapper-0.0.6",
+        "repo": "pkg",
+        "type": "github"
+      }
+    },
     "wrapper_19": {
       "inputs": {
         "flake-utils": "flake-utils_19",
@@ -1743,17 +1817,17 @@
       },
       "locked": {
         "dir": "wrapper",
-        "lastModified": 1669509491,
-        "narHash": "sha256-6xSgyaMC8uXrI07JGQkD1T0DC4jd7TKf0RT8KexN1ig=",
+        "lastModified": 1669860123,
+        "narHash": "sha256-KEimXnQ/VyLNrCHjdrOPEChNsVF2OMPcGI//m8TaDPc=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "b450c22d555ac70e832330bec264d79ff109c7e6",
+        "rev": "560192eda38549b2024285e4d2ed83090d81ffc4",
         "type": "github"
       },
       "original": {
         "dir": "wrapper",
         "owner": "defn",
-        "ref": "wrapper-0.0.1",
+        "ref": "wrapper-0.0.5",
         "repo": "pkg",
         "type": "github"
       }
@@ -1787,6 +1861,28 @@
       },
       "locked": {
         "dir": "wrapper",
+        "lastModified": 1669509491,
+        "narHash": "sha256-6xSgyaMC8uXrI07JGQkD1T0DC4jd7TKf0RT8KexN1ig=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "b450c22d555ac70e832330bec264d79ff109c7e6",
+        "type": "github"
+      },
+      "original": {
+        "dir": "wrapper",
+        "owner": "defn",
+        "ref": "wrapper-0.0.1",
+        "repo": "pkg",
+        "type": "github"
+      }
+    },
+    "wrapper_21": {
+      "inputs": {
+        "flake-utils": "flake-utils_21",
+        "nixpkgs": "nixpkgs_21"
+      },
+      "locked": {
+        "dir": "wrapper",
         "lastModified": 1670049316,
         "narHash": "sha256-rXTiyGau7UdOOdlZC1XdMKWUtReNpxC2LcMslcxsY1s=",
         "owner": "defn",
@@ -1802,10 +1898,10 @@
         "type": "github"
       }
     },
-    "wrapper_21": {
+    "wrapper_22": {
       "inputs": {
-        "flake-utils": "flake-utils_21",
-        "nixpkgs": "nixpkgs_21"
+        "flake-utils": "flake-utils_22",
+        "nixpkgs": "nixpkgs_22"
       },
       "locked": {
         "dir": "wrapper",
@@ -1980,7 +2076,7 @@
     },
     "yaegi": {
       "inputs": {
-        "dev": "dev_21"
+        "dev": "dev_22"
       },
       "locked": {
         "dir": "yaegi",
