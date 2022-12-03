@@ -328,7 +328,7 @@ debug-docker:
 	docker run -it --rm --privileged --pid=host alpine:edge nsenter -t 1 -m -u -n -i
 
 nix:
-	$(MAKE) nix-$(shell uname -s)
+	if ! type -P nix; then . ~/.nix-profile/etc/profile.d/nix.sh; fi && $(MAKE) nix-$(shell uname -s)
 
 nix-Linux-bootstrap:
 	sh <(curl -L https://nixos.org/nix/install) --no-daemon
