@@ -1,7 +1,5 @@
 [global]
 
-bash_path = "/bin/bash"
-
 disable_stdin = true
 
 load_dotenv = true
@@ -23,9 +21,7 @@ prefix = [
     "/nix/work/app",
     "/work/pkg",
     "/work/lib",
-    "/work/app" 
+    "/work/app",
 ]
 
-exact = [
-    "/home/ubuntu"
-]
+exact = ["/home/ubuntu"]

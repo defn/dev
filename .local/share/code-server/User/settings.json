@@ -14,7 +14,7 @@
     "terminal.integrated.defaultProfile.linux": "dev",
     "terminal.integrated.profiles.linux": {
         "dev": {
-            "path": "/bin/bash",
+            "path": "bash",
             "args": [
                 "--init-file",
                 "~/.bash_entrypoint",

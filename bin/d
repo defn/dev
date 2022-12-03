@@ -21,7 +21,7 @@ function main {
 			if [[ "$#" -gt 0 ]]; then set -- -q "$*"; fi
 			local profile="$(aws-vault list | tail -n +2 | grep -v ^- | awk '{print $1}' | grep 'sso$' | fzf "$@")"
 			if [[ -n "${profile}" ]]; then
-				aws-vault exec "${profile}" /bin/bash
+				aws-vault exec "${profile}" bash
 			fi
 			;;
 		*)
