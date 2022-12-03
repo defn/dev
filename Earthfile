@@ -38,8 +38,7 @@ k3d:
 
     COPY etc/k3s-wrapper.sh /bin/k3s
 
-    COPY (pkg+root/tailscale --arch=${arch}) /
-    COPY (pkg+root/tailscaled --arch=${arch}) /
+    # TODO get nix in here and install tailscale
 
     IF [ "$image" != "" ]
         SAVE IMAGE --push ${image}
