@@ -92,7 +92,7 @@ export KUBECONFIG_ALL="$HOME/.kube/config"
 # vscode
 export EDITOR=vim
 if [[ -n "${VSCODE_IPC_HOOK_CLI:-}" ]]; then
-	export BROWSER="$(set +f; ls -d /home/ubuntu/.local/lib/code-server-*/lib/vscode/bin/helpers/browser.sh)"
+	export BROWSER="$(set +f; $(dirname $(which code-server))/../lib/vscode/bin/helpers/browser.sh)"
 
 	if [[ ! -S "${SSH_AUTH_SOCK:-}" ]]; then
 		export SSH_AUTH_SOCK="$(ls -td /tmp/vscode-ssh-auth-sock-* 2>/dev/null | head -1)"
@@ -125,12 +125,12 @@ if tty >/dev/null; then
 		if [[ -f VERSION ]]; then
 			if [[ -f VENDOR ]]; then
 				local vendor="$(cat VENDOR)"
-				EXTRA="/ ${vendor}"	
+				EXTRA="/ ${vendor}"
 			fi
 
 			local version="$(cat VERSION)"
 			EXTRA="${version}${EXTRA:+ ${EXTRA}}"
-			
+
 			local tag="$(git describe --tags --abbrev=0 $(git log . | head -1 | awk '{print $2}'))"
 			if [[ "${tag}" != "${version}" ]]; then
 				EXTRA="!${EXTRA}"
@@ -153,11 +153,12 @@ if type -P direnv >/dev/null; then
 fi
 
 if [[ -n "${VSCODE_IPC_HOOK_CLI:-}" ]]; then
-  export VSCODE_GIT_IPC_HANDLE="$(ls -thd ${TMPDIR}/vscode-git-*.sock 2>/dev/null | head -1)"
-	if ! [[ -f ~/.home.done ]]; then
-		if flock -n ~/.home.lock -c 'cd && ~/bin/e make install'; then
-			touch ~/.home.done
+  	export VSCODE_GIT_IPC_HANDLE="$(ls -thd ${TMPDIR}/vscode-git-*.sock 2>/dev/null | head -1)"
+	if [[ "Linux" == "$(uname -s)" ]]; then
+		if ! [[ -f ~/.home.done ]]; then
+			if flock -n ~/.home.lock -c 'cd && ~/bin/e make install'; then
+				touch ~/.home.done
+			fi
 		fi
 	fi
 fi
-
