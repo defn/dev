@@ -59,25 +59,12 @@ install-inner:
 	mark -- configure password-store, gpg
 	mkdir -p ~/work/password-store
 
-	if ! is-fly; then \
-	if [[ ! -d ~/.password-store/.git ]]; then \
-		cd ~/.password-store \
-			&& rm -rf .git \
-			&& oras pull --plain-http --allow-path-traversal 169.254.32.1:5000/defn/bootstrap:password-store \
-			&& git reset --hard \
-			&& git clean -fd; \
-		fi; \
-	fi
-
 	rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.
 	$(MAKE) perms
 	env GPG_TTY=$$(tty) $(MAKE) init-gpg
 
-	docker context create host --docker host=unix:///var/run/docker.sock || true \
-        && docker context create pod --docker host=tcp://localhost:2375 || true \
-        && docker context create so --docker host=tcp://docker-so.mesh:80 || true \
-        && docker context create the --docker host=tcp://docker-the.mesh:80 || true \
-        && docker context create brie --docker host=tcp://docker-brie.mesh:80 || true \
+	docker docker context create pod --docker host=tcp://localhost:2375 || true \
+		&& context create host --docker host=unix:///var/run/docker.sock || true \
         && docker context use host
 
 	mark -- configure repos
