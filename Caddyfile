@@ -7,6 +7,10 @@ http://*.fly.dev {
 	handle_path / {
 		reverse_proxy http://localhost:8888
 	}
+
+	handle_path /dev/* {
+		reverse_proxy http://localhost:8888
+	}
 }
 
 http://localhost {
