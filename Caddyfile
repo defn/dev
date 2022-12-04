@@ -12,7 +12,11 @@ http://*.fly.dev {
 		reverse_proxy http://localhost:8888
 	}
 
-	handle_path /defn-dev-*/* {
+	handle_path /defn-dev-demo/* {
+		reverse_proxy http://localhost:8888
+	}
+
+	handle_path /defn-dev-dgwyn/* {
 		reverse_proxy http://localhost:8888
 	}
 }
