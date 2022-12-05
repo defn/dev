@@ -54,6 +54,9 @@ SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh; export SSH_AUTH_SOCK
 # homebrew
 PATH="$PATH:/opt/homebrew/bin"
 
+# home
+PATH="$PATH:$HOME/bin"
+
 # bash
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
