@@ -4,7 +4,7 @@
 
     codeserver.url = github:defn/pkg/codeserver-4.8.3?dir=codeserver;
     caddy.url = github:defn/pkg/caddy-2.6.2?dir=caddy;
-    argocd.url = github:defn/pkg/argocd-2.5.2?dir=argocd;
+    argocd.url = github:defn/pkg/argocd-2.5.3-1?dir=argocd;
     earthly.url = github:defn/pkg/earthly-0.6.30-1?dir=earthly;
     helm.url = github:defn/pkg/helm-3.10.2?dir=helm;
     kustomize.url = github:defn/pkg/kustomize-4.5.7?dir=kustomize;
