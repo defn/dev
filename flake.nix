@@ -37,7 +37,13 @@
       };
 
       handler = { pkgs, wrap, system }: rec {
+        devShell = wrap.devShell { };
+
         defaultPackage = wrap.bashBuilder {
+          buildInputs = with pkgs; [
+            perl
+          ];
+
           src = ./.;
           installPhase = ''
             mkdir --p $out
