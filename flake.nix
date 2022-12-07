@@ -1,6 +1,6 @@
 {
   inputs = {
-    dev.url = github:defn/pkg/dev-0.0.4?dir=dev;
+    dev.url = github:defn/pkg/dev-0.0.8?dir=dev;
 
     codeserver.url = github:defn/pkg/codeserver-4.8.3?dir=codeserver;
     caddy.url = github:defn/pkg/caddy-2.6.2?dir=caddy;
@@ -14,6 +14,7 @@
     k3d.url = github:defn/pkg/k3d-5.4.6?dir=k3d;
     flyctl.url = github:defn/pkg/flyctl-0.0.435?dir=flyctl;
     yaegi.url = github:defn/pkg/yaegi-0.14.3?dir=yaegi;
+    step.url = github:defn/pkg/step-0.23.0?dir=step;
 
     c.url = github:defn/pkg/c-0.0.1?dir=c;
     tf.url = github:defn/pkg/tf-0.0.1?dir=tf;
@@ -32,54 +33,50 @@
 
       config = rec {
         slug = "defn-dev";
-        version_src = ./VERSION;
-        version = builtins.readFile version_src;
+        version = builtins.readFile ./VERSION;
       };
 
-      handler = { pkgs, wrap, system }:
-        rec {
-          devShell = wrap.devShell;
+      handler = { pkgs, wrap, system }: rec {
+        defaultPackage = wrap.bashBuilder {
+          src = ./.;
+          installPhase = ''
+            mkdir --p $out
+            #rsync -ia $src/. $out/.
+          '';
 
-          defaultPackage = wrap.bashBuilder {
-            src = ./.;
-            installPhase = ''
-              mkdir --p $out
-              #rsync -ia $src/. $out/.
-            '';
+          propagatedBuildInputs = with pkgs; wrap.flakeInputs ++ [
+            bashInteractive
+            pass
+            gnupg
+            powerline-go
+            vim
+            git-crypt
+            rsync
+            gnumake
+            dnsutils
+            openssh
+            pre-commit
+            vim
+            aws-vault
+            nixpkgs-fmt
+            jq
+            fzf
 
-            propagatedBuildInputs = with pkgs; wrap.flakeInputs ++ [
-              bashInteractive
-              pass
-              gnupg
-              powerline-go
-              vim
-              git-crypt
-              rsync
-              gnumake
-              dnsutils
-              openssh
-              pre-commit
-              vim
-              aws-vault
-              nixpkgs-fmt
-              jq
-              fzf
+            docker
+            docker-credential-helpers
 
-              docker
-              docker-credential-helpers
+            go
+            gotools
+            go-tools
+            golangci-lint
+            gopls
+            go-outline
+            gopkgs
+            delve
 
-              go
-              gotools
-              go-tools
-              golangci-lint
-              gopls
-              go-outline
-              gopkgs
-              delve
-
-              nodejs-18_x
-            ];
-          };
+            nodejs-18_x
+          ];
         };
+      };
     };
 }
