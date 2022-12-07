@@ -165,3 +165,5 @@ result
 .nix-profile
 .nix-defexpr/channels
 package-lock.json
+.acme.sh
+.m1-terraform**
