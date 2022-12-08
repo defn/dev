@@ -12,7 +12,7 @@
     stern.url = github:defn/pkg/stern-1.22.0?dir=stern;
     tilt.url = github:defn/pkg/tilt-0.30.12?dir=tilt;
     k3d.url = github:defn/pkg/k3d-5.4.6?dir=k3d;
-    flyctl.url = github:defn/pkg/flyctl-0.0.435?dir=flyctl;
+    flyctl.url = github:defn/pkg/flyctl-0.0.437?dir=flyctl;
     yaegi.url = github:defn/pkg/yaegi-0.14.3?dir=yaegi;
     step.url = github:defn/pkg/step-0.23.0?dir=step;
 
