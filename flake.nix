@@ -14,7 +14,6 @@
     tilt.url = github:defn/pkg/tilt-0.30.13-1?dir=tilt;
     k3d.url = github:defn/pkg/k3d-5.4.6-1?dir=k3d;
     flyctl.url = github:defn/pkg/flyctl-0.0.437-1?dir=flyctl;
-    yaegi.url = github:defn/pkg/yaegi-0.14.3-1?dir=yaegi;
     step.url = github:defn/pkg/step-0.23.0-1?dir=step;
 
     c.url = github:defn/pkg/c-0.0.1-3?dir=c;
