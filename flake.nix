@@ -2,7 +2,7 @@
   inputs = {
     dev.url = github:defn/pkg/dev-0.0.10?dir=dev;
 
-    codeserver.url = github:defn/pkg/codeserver-4.8.3?dir=codeserver;
+    codeserver.url = github:defn/pkg/codeserver-4.9.0?dir=codeserver;
 
     caddy.url = github:defn/pkg/caddy-2.6.2-2?dir=caddy;
     argocd.url = github:defn/pkg/argocd-2.5.4-2?dir=argocd;
@@ -17,7 +17,7 @@
     yaegi.url = github:defn/pkg/yaegi-0.14.3-1?dir=yaegi;
     step.url = github:defn/pkg/step-0.23.0-1?dir=step;
 
-    c.url = github:defn/pkg/c-0.0.1-2?dir=c;
+    c.url = github:defn/pkg/c-0.0.1-3?dir=c;
     tf.url = github:defn/pkg/tf-0.0.1-1?dir=tf;
     f.url = github:defn/pkg/f-0.0.1-1?dir=f;
 
