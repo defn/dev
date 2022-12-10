@@ -355,4 +355,4 @@ wg-down:
 	sudo wg-quick down wg0nix-bootstrap:
 
 release:
-         git tag $$(cat VERSION ); git push origin $$(cat VERSION )
+	git tag $$(cat VERSION ); git push origin $$(cat VERSION )
