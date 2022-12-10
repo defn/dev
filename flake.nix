@@ -1,6 +1,6 @@
 {
   inputs = {
-    dev.url = github:defn/pkg/dev-0.0.10?dir=dev;
+    dev.url = github:defn/pkg/dev-0.0.11-rc6?dir=dev;
 
     codeserver.url = github:defn/pkg/codeserver-4.9.0-3?dir=codeserver;
 
@@ -16,6 +16,7 @@
     flyctl.url = github:defn/pkg/flyctl-0.0.437-1?dir=flyctl;
     step.url = github:defn/pkg/step-0.23.0-1?dir=step;
 
+    yaegi.url = github:defn/pkg/yaegi-0.14.3-1?dir=yaegi;
     c.url = github:defn/pkg/c-0.0.1-3?dir=c;
     tf.url = github:defn/pkg/tf-0.0.1-1?dir=tf;
     f.url = github:defn/pkg/f-0.0.1-1?dir=f;
@@ -31,26 +32,25 @@
     { main = inputs.dev.main; } // inputs.dev.main rec {
       inherit inputs;
 
+      src = ./.;
+
       config = rec {
         slug = "defn-dev";
         version = builtins.readFile ./VERSION;
       };
 
-      handler = { pkgs, wrap, system }: rec {
-        devShell = wrap.devShell { };
-
+      handler = { pkgs, wrap, system, builders }: rec {
         defaultPackage = wrap.bashBuilder {
-          buildInputs = with pkgs; [
-            perl
-          ];
-
           src = ./.;
+
           installPhase = ''
             mkdir --p $out
             #rsync -ia $src/. $out/.
           '';
 
           propagatedBuildInputs = with pkgs; wrap.flakeInputs ++ [
+            builders.yaegi
+
             bashInteractive
             pass
             gnupg
