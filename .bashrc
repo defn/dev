@@ -73,6 +73,9 @@ export DISABLE_VERSION_CHECK=1
 # nextjs
 export NEXT_TELEMETRY_DISABLED=1
 
+# go
+export GOCACHE="$HOME/.cache/go-build"
+
 # awscli
 if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$PATH:/usr/local/aws-cli/bin"; fi
 
