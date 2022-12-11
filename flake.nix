@@ -63,8 +63,6 @@
             gnumake
             dnsutils
             nettools
-            iproute2
-            iputils
             openssh
             pre-commit
             vim
