@@ -62,6 +62,8 @@
             rsync
             gnumake
             dnsutils
+            nettools
+            iproute2
             openssh
             pre-commit
             vim
@@ -69,6 +71,7 @@
             nixpkgs-fmt
             jq
             fzf
+            git
 
             docker
             docker-credential-helpers
