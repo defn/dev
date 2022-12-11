@@ -1,8 +1,8 @@
 {
   inputs = {
-    dev.url = github:defn/pkg/dev-0.0.11-rc7?dir=dev;
+    dev.url = github:defn/pkg/dev-0.0.12?dir=dev;
 
-    codeserver.url = github:defn/pkg/codeserver-4.9.0-3?dir=codeserver;
+    codeserver.url = github:defn/pkg/codeserver-4.9.0-4?dir=codeserver;
 
     caddy.url = github:defn/pkg/caddy-2.6.2-2?dir=caddy;
     argocd.url = github:defn/pkg/argocd-2.5.4-2?dir=argocd;
