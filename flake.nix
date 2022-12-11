@@ -64,6 +64,7 @@
             dnsutils
             nettools
             iproute2
+            iputils
             openssh
             pre-commit
             vim
@@ -72,6 +73,10 @@
             jq
             fzf
             git
+            wget
+            curl
+            xz
+            procps
 
             docker
             docker-credential-helpers
