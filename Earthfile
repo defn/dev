@@ -65,7 +65,7 @@ dev:
     # caddy
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
-                profile install "github:defn/pkg/!caddy-2.6.2-2?dir=caddy"
+                profile install "github:defn/pkg/caddy-2.6.2-2?dir=caddy"
 
     # cloudflared
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
