@@ -75,6 +75,7 @@
             curl
             xz
             procps
+            less
 
             docker
             docker-credential-helpers
