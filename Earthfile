@@ -55,27 +55,27 @@ dev:
     # code-server
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
-                profile install "github:defn/pkg?dir=codeserver&ref=codeserver-4.8.3"
+                profile install "github:defn/pkg/codeserver-4.9.0-4?dir=codeserver"
 
     # coredns
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
-                profile install "github:defn/pkg?dir=coredns&ref=master"
+                profile install "github:defn/pkg/coredns-1.10.0-2?dir=coredns"
 
     # caddy
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
-                profile install "github:defn/pkg?dir=caddy&ref=caddy-2.6.2-1"
+                profile install "github:defn/pkg/!caddy-2.6.2-2?dir=caddy"
 
     # cloudflared
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
-                profile install "github:defn/pkg?dir=cloudflared&ref=master"
+                profile install "github:defn/pkg/cloudflared-2022.11.1-1?dir=cloudflared"
 
     # vault
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
-                profile install "github:defn/pkg?dir=vault&ref=master"
+                profile install "github:defn/pkg/vault-1.12.2-2?dir=vault"
 
     # weird configs
     RUN mkdir -p .kube .docker
