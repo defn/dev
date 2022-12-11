@@ -75,6 +75,7 @@ export NEXT_TELEMETRY_DISABLED=1
 
 # go
 export GOCACHE="$HOME/.cache/go-build"
+export GOMODCACHE="$HOME/.cache/go-mod"
 
 # awscli
 if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$PATH:/usr/local/aws-cli/bin"; fi
