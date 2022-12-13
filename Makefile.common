@@ -60,7 +60,7 @@ install-inner:
 	mark -- configure password-store, gpg
 	mkdir -p ~/work/password-store
 
-	if test -d ~/.password-store/home/.gnupg; then rƒsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.; fi
+	if test -d ~/.password-store/home/.gnupg; then rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.; fi
 	$(MAKE) perms
 	env GPG_TTY=$$(tty) $(MAKE) init-gpg
 
