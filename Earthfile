@@ -117,3 +117,24 @@ fly:
     IF [ "$image" != "" ]
         SAVE IMAGE --push ${image}
     END
+
+devcontainer:
+    ARG image
+    ARG arch
+
+    FROM pkg+root --arch=${arch}
+
+    ENTRYPOINT ["/usr/bin/tini", "--"]
+
+    # nix
+    RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile \
+        && rm -f nix-install.sh && chmod 0755 /nix && sudo rm -f /bin/man
+
+    # defn/dev
+    COPY --dir --chown=ubuntu:ubuntu . .
+    RUN (git clean -nfd || true) \
+        && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
+
+    IF [ "$image" != "" ]
+        SAVE IMAGE --push ${image}
+    END
