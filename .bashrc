@@ -97,6 +97,7 @@ export HOF_TELEMETRY_DISABLED=1
 export KUBECONFIG_ALL="$HOME/.kube/config"
 
 # vscode
+export CODER_TELEMETRY=false
 export EDITOR=vim
 if [[ -n "${VSCODE_IPC_HOOK_CLI:-}" ]]; then
 	export BROWSER="$(which browser.sh)"
