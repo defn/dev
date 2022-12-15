@@ -24,14 +24,14 @@ function vi {
 			return 1
 		fi
 
-    case "${VSCODE_GIT_ASKPASS_NODE}" in
-      */code-server*)
-			  command code-server "$@"
-        ;;
-      *)
-			  command code "$@"
-        ;;
-    esac
+		case "${VSCODE_GIT_ASKPASS_NODE}" in
+			*/code-server*)
+				command code-server "$@"
+				;;
+			*)
+				command code "$@"
+				;;
+		esac
 	else
 		command vi "$@"
 	fi
@@ -102,8 +102,15 @@ export KUBECONFIG_ALL="$HOME/.kube/config"
 # vscode
 export CODER_TELEMETRY=false
 export EDITOR=vim
-if [[ -n "${VSCODE_IPC_HOOK_CLI:-}" ]]; then
-	export BROWSER="$(which browser.sh)"
+if [[ -n "${VSCODE_GIT_ASKPASS_NODE:-}" ]]; then
+	case "${VSCODE_GIT_ASKPASS_NODE}" in
+		*/code-server*)
+			export BROWSER="$(which browser.sh)"
+			;;
+		*)
+			export BROWSER="open"
+			;;
+	esac
 
 	if [[ ! -S "${SSH_AUTH_SOCK:-}" ]]; then
 		export SSH_AUTH_SOCK="$(ls -td /tmp/vscode-ssh-auth-sock-* 2>/dev/null | head -1)"
@@ -169,7 +176,7 @@ if type -P direnv >/dev/null; then
 fi
 
 # install
-if [[ -n "${VSCODE_IPC_HOOK_CLI:-}" ]]; then
+if [[ -n "${VSCODE_GIT_ASKPASS_NODE:-}" ]]; then
   	export VSCODE_GIT_IPC_HANDLE="$(ls -thd ${TMPDIR}/vscode-git-*.sock 2>/dev/null | head -1)"
 	if [[ "Linux" == "$(uname -s)" ]]; then
 		if ! [[ -f ~/.home.done ]]; then
