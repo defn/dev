@@ -1,9 +1,10 @@
 {
   inputs = {
-    dev.url = github:defn/pkg/dev-0.0.13-rc3?dir=dev;
+    dev.url = github:defn/pkg/dev-0.0.13?dir=dev;
 
     codeserver.url = github:defn/pkg/codeserver-4.9.0-4?dir=codeserver;
-    coder.url = github:defn/pkg/coder-0.13.2?dir=coder;
+    coder.url = github:defn/pkg/coder-0.13.3?dir=coder;
+    tailscale.url = github:defn/pkg/tailscale-1.34.0-1?dir=tailscale;
 
     caddy.url = github:defn/pkg/caddy-2.6.2-2?dir=caddy;
     argocd.url = github:defn/pkg/argocd-2.5.4-2?dir=argocd;
@@ -26,8 +27,6 @@
     terraform.url = github:defn/pkg/terraform-1.3.6-2?dir=terraform;
     vault.url = github:defn/pkg/vault-1.12.2-2?dir=vault;
     nomad.url = github:defn/pkg/nomad-1.4.3-2?dir=nomad;
-
-    tailscale.url = github:defn/pkg/tailscale-1.34.0-1?dir=tailscale;
   };
 
   outputs = inputs:
