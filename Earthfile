@@ -132,7 +132,8 @@ devcontainer:
     ENTRYPOINT ["/usr/bin/tini", "--"]
 
     # nix
-    RUN make nix
+    RUN sh <(curl -L https://nixos.org/nix/install) --no-daemon
+    RUN . ~/.nix-profile/etc/profile.d/nix.sh; && nix profile install nixpkgs#{nix-direnv,direnv,pinentry}
 
     # defn/dev
     COPY --dir --chown=ubuntu:ubuntu . .
