@@ -18,17 +18,20 @@ function gs {
 }
 
 function vi {
-	if [[ -n "${VSCODE_IPC_HOOK_CLI:-}" ]]; then
+	if [[ -n "${VSCODE_GIT_ASKPASS_NODE:-}" ]]; then
 		if [[ ! -f "${1:-}" ]]; then
 			echo "ERROR: file $1 not found" 1>&2
 			return 1
 		fi
 
-		if type -P code-server >/dev/null; then
-			command code-server "$@"
-		else
-			command vi "$@"
-		fi
+    case "${VSCODE_GIT_ASKPASS_NODE}" in
+      */code-server*)
+			  command code-server "$@"
+        ;;
+      *)
+			  command code "$@"
+        ;;
+    esac
 	else
 		command vi "$@"
 	fi
