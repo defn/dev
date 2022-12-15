@@ -18,7 +18,6 @@
     flyctl.url = github:defn/pkg/flyctl-0.0.437-1?dir=flyctl;
     step.url = github:defn/pkg/step-0.23.0-1?dir=step;
 
-    yaegi.url = github:defn/pkg/yaegi-0.14.3-1?dir=yaegi;
     bb.url = github:defn/pkg/bb-1.0.168?dir=bb;
     c.url = github:defn/pkg/c-0.0.1-3?dir=c;
     tf.url = github:defn/pkg/tf-0.0.1-1?dir=tf;
