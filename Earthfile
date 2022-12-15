@@ -7,6 +7,11 @@ build-dev:
     BUILD --platform=linux/amd64 +dev --image=${image} --arch=amd64
     BUILD --platform=linux/arm64 +dev --image=${image} --arch=arm64
 
+build-devcontainer:
+    ARG image
+    BUILD --platform=linux/amd64 +devcontainer --image=${image} --arch=amd64
+    BUILD --platform=linux/arm64 +devcontainer --image=${image} --arch=arm64
+
 build-fly:
     ARG image
     BUILD --platform=linux/amd64 +fly --image=${image} --arch=amd64
