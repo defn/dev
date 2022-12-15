@@ -2,7 +2,7 @@
   inputs = {
     dev.url = github:defn/pkg/dev-0.0.13?dir=dev;
 
-    codeserver.url = github:defn/pkg/codeserver-4.9.0-4?dir=codeserver;
+    codeserver.url = github:defn/pkg/codeserver-4.9.1-rc.1?dir=codeserver;
     coder.url = github:defn/pkg/coder-0.13.3?dir=coder;
     tailscale.url = github:defn/pkg/tailscale-1.34.0-1?dir=tailscale;
 
