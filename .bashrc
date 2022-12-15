@@ -177,7 +177,6 @@ fi
 
 # install
 if [[ -n "${VSCODE_GIT_ASKPASS_NODE:-}" ]]; then
-  	export VSCODE_GIT_IPC_HANDLE="$(ls -thd ${TMPDIR}/vscode-git-*.sock 2>/dev/null | head -1)"
 	if [[ "Linux" == "$(uname -s)" ]]; then
 		if ! [[ -f ~/.home.done ]]; then
 			if flock -n ~/.home.lock -c 'cd && ~/bin/e make install'; then
