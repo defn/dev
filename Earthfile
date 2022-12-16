@@ -65,7 +65,7 @@ devcontainer:
 
     # nix
     RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile '
-    RUN bash -c '~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes profile install nixpkgs#{nix-direnv,direnv,pinentry}'
+    RUN bash -c '~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes profile install nixpkgs#{nix-direnv,direnv,pinentry,nixpkgs-fmt}'
     COPY flake.* VERSION .
     RUN bash -c '~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes build'
 
