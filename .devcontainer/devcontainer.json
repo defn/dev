@@ -6,5 +6,9 @@
 				"vscodevim.vim"
 			]
 		}
-	}
+	},
+  "mounts": [
+    "source=${localEnv:HOME}/work/password-store,target=/workspaces/password-store,type=bind,consistency=delegated",
+    "source=${localEnv:HOME}/work/.codespaces,target=/workspaces/.codespaces,type=bind,consistency=delegated"
+  ]
 }
