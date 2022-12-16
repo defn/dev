@@ -6,7 +6,6 @@ context ?= k3d-$(name)
 podname ?= $(name)-0
 control ?= $(shell echo $(name) | sed s/-0//)
 domain ?= $(shell tailscale cert 2>&1 | grep 'For domain' | cut -d'"' -f2 | cut -d. -f2-)
-app ?= $(shell pwd)/work/app
 node ?= k3d-control-server-0
 n ?=
 k ?=
@@ -82,8 +81,6 @@ install-inner:
 	mark -- configure site
 	npm install npm@latest
 	npm install
-
-	$(MAKE) install-site
 
 down:
 	touch .local/share/code-server/idle
