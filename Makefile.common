@@ -36,7 +36,8 @@ macos:
 
 symlinks:
 	mark -- configure symlinks
-	if [[ "Linux" == "$(shell uname -s)" ]]; then ln -nfs /work ~; fi
+	if [[ "Linux" == "$(shell uname -s)" ]]; then \
+		if test -d /workspaces; then ln -nfs /workspaces work; else ln -nfs /work ~; fi; fi
 
 perms:
 	mark -- configure permissions

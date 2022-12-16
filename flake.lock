@@ -661,17 +661,17 @@
       },
       "locked": {
         "dir": "dev",
-        "lastModified": 1671070431,
-        "narHash": "sha256-TzItMAr9tEfR5wTwAayZmMgFJokAtOj//yve6hpcwg0=",
+        "lastModified": 1671152063,
+        "narHash": "sha256-mbj2/ZR2Ox2jXQFu2i7+RWKCR2LO2NBo8FcW+cvyz+o=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "254d823a9e8a15e26c0fe986e9a5465f122c695d",
+        "rev": "ba5705142dfefb9e14a5ddacc5ce2789eeba3aea",
         "type": "github"
       },
       "original": {
         "dir": "dev",
         "owner": "defn",
-        "ref": "dev-0.0.13",
+        "ref": "dev-0.0.14",
         "repo": "pkg",
         "type": "github"
       }
@@ -1120,16 +1120,16 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1662095654,
-        "narHash": "sha256-v2WMKnkpkz5YLYTBwh0NVgi3Xl4En249LCdrKTA4Nek=",
-        "owner": "nix-community",
+        "lastModified": 1671151954,
+        "narHash": "sha256-G3ch419qyxkgPfbs/xhUMBT28+PA3lNuPtsWoU62RQY=",
+        "owner": "defn",
         "repo": "gomod2nix",
-        "rev": "cc75990c60d01d9eedcf32ff4bf0055dd49c3ea1",
+        "rev": "3e86443fea92cfef7f0de1697f90075c4b244120",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
-        "ref": "v1.5.0",
+        "owner": "defn",
+        "ref": "1.5.0-1",
         "repo": "gomod2nix",
         "type": "github"
       }
