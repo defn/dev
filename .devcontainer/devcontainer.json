@@ -10,6 +10,6 @@
   "mounts": [
     "source=${localEnv:HOME}/work,target=/workspaces,type=bind,consistency=delegated",
     "source=work,target=/work",
-    "source=nix,target=/workspaces"
+    "source=nix,target=/nix"
   ]
 }
