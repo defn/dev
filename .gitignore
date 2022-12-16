@@ -20,9 +20,7 @@ node_modules
 .npm
 .docker
 .tilt-dev
-.vscode
-.vscode-server
-.vscode-remote-containers
+.vscode*
 .wget-hsts
 .kube
 .swp
