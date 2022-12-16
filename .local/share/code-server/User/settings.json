@@ -49,5 +49,5 @@
         "/home/ubuntu/.kube/cache/**": true,
         "/home/ubuntu/work/**": true
     },
-    "nix.formatterPath": "~/.nix-profile/bin/nixpkgs-fmt"
+    "nix.formatterPath": "/home/ubuntu/.nix-profile/bin/nixpkgs-fmt"
 }
