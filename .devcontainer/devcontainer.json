@@ -1,3 +1,10 @@
 {
-    "image": "ghcr.io/defn/dev:latest-devcontainer"
+	"image": "ghcr.io/defn/dev:latest-devcontainer",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"vscodevim.vim"
+			]
+		}
+	}
 }
