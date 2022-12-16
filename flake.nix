@@ -75,6 +75,7 @@
             xz
             procps
             less
+            htop
 
             docker
             docker-credential-helpers
