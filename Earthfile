@@ -133,7 +133,7 @@ devcontainer:
 
     # nix
     RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon'
-    RUN . ~/.nix-profile/etc/profile.d/nix.sh && nix profile install nixpkgs#{nix-direnv,direnv,pinentry}
+    RUN bash -c '~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes profile install nixpkgs#{nix-direnv,direnv,pinentry}'
 
     # defn/dev
     COPY --dir --chown=ubuntu:ubuntu . .
