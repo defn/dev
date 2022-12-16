@@ -5,6 +5,7 @@ IMPORT github.com/defn/pkg:0.0.83
 build-devcontainer:
     ARG image
     BUILD --platform=linux/amd64 +devcontainer --image=${image} --arch=amd64
+    BUILD --platform=linux/arm64 +devcontainer --image=${image} --arch=arm64
 
 build-fly:
     ARG image
