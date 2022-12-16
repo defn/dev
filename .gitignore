@@ -99,6 +99,8 @@ etc/tailscale_*
 .direnv
 result
 nix-support
+.nix-channels
+.nix-defexpr
 
 # external
 .password-store
