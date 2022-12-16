@@ -104,6 +104,9 @@ export CODER_TELEMETRY=false
 export EDITOR=vim
 if [[ -n "${VSCODE_GIT_ASKPASS_NODE:-}" ]]; then
 	case "${VSCODE_GIT_ASKPASS_NODE}" in
+		/vscode/*)
+			export BROWSER=${VSCODE_GIT_ASKPASS_NODE%/node}/bin/helpers/browser.sh
+			;;
 		*/code-server*)
 			export BROWSER="$(which browser.sh)"
 			;;
