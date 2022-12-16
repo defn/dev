@@ -2,9 +2,9 @@
   inputs = {
     dev.url = github:defn/pkg/dev-0.0.14?dir=dev;
 
-    codeserver.url = github:defn/pkg/codeserver-4.9.1-rc.1?dir=codeserver;
+    codeserver.url = github:defn/pkg/codeserver-4.9.1?dir=codeserver;
     coder.url = github:defn/pkg/coder-0.13.3?dir=coder;
-    tailscale.url = github:defn/pkg/tailscale-1.34.0-1?dir=tailscale;
+    tailscale.url = github:defn/pkg/tailscale-1.34.1?dir=tailscale;
 
     caddy.url = github:defn/pkg/caddy-2.6.2-2?dir=caddy;
     argocd.url = github:defn/pkg/argocd-2.5.4-2?dir=argocd;
