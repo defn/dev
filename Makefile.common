@@ -360,4 +360,4 @@ release:
 	git tag $$(cat VERSION ); git push origin $$(cat VERSION )
 
 dev:
-	code --folder-uri "vscode-remote://dev-container+$$(pwd | xxd -p)/home/ubuntu"
+	code --folder-uri "vscode-remote://dev-container+$$(pwd | perl -pe 's{\s+}{}g' | xxd -p)/home/ubuntu"
