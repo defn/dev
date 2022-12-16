@@ -358,3 +358,6 @@ wg-down:
 
 release:
 	git tag $$(cat VERSION ); git push origin $$(cat VERSION )
+
+dev:
+	code --folder-uri "vscode-remote://dev-container+$$(pwd | xxd -p)/home/ubuntu"
