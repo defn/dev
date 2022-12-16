@@ -2,11 +2,6 @@ VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-ar
 
 IMPORT github.com/defn/pkg:0.0.83
 
-build-dev:
-    ARG image
-    BUILD --platform=linux/amd64 +dev --image=${image} --arch=amd64
-    BUILD --platform=linux/arm64 +dev --image=${image} --arch=arm64
-
 build-devcontainer:
     ARG image
     BUILD --platform=linux/amd64 +devcontainer --image=${image} --arch=amd64
