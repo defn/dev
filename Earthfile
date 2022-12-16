@@ -82,11 +82,6 @@ dev:
             && ~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes \
                 profile install "github:defn/pkg/vault-1.12.2-2?dir=vault"
 
-    # weird configs
-    RUN mkdir -p .kube .docker
-
-    COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
-
     # defn/dev
     COPY --dir --chown=ubuntu:ubuntu . .
     RUN (git clean -nfd || true) \
@@ -101,18 +96,6 @@ fly:
     ARG arch
 
     FROM pkg+root --arch=${arch}
-
-    ENTRYPOINT ["/usr/bin/tini", "--"]
-
-    # nix
-    RUN curl -L https://nixos.org/nix/install > nix-install.sh && sh nix-install.sh --no-daemon --no-modify-profile \
-        && rm -f nix-install.sh && chmod 0755 /nix && sudo rm -f /bin/man \
-        && sudo mv /nix /nix-install
-
-    # weird configs
-    RUN mkdir -p .kube .docker
-
-    COPY --chown=ubuntu:ubuntu etc/config.json .docker/config.json
 
     # defn/dev
     COPY --dir --chown=ubuntu:ubuntu . .
@@ -129,11 +112,11 @@ devcontainer:
 
     FROM pkg+root --arch=${arch}
 
-    ENTRYPOINT ["/usr/bin/tini", "--"]
-
     # nix
-    RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon'
+    RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile '
     RUN bash -c '~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes profile install nixpkgs#{nix-direnv,direnv,pinentry}'
+    COPY flake.* VERSION .
+    RUN bash -c '~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes build'
 
     # defn/dev
     COPY --dir --chown=ubuntu:ubuntu . .
