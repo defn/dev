@@ -41,7 +41,7 @@ resource "coder_app" "code-server" {
   slug         = "code-server"
   display_name = "code-server"
 
-  subdomain = true
+  subdomain = false
   share     = "owner"
 
   healthcheck {
