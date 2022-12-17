@@ -8,7 +8,7 @@
 		}
 	},
   "mounts": [
-    "source=work,target=/work",
+    "source=work,target=/workspaces",
     "source=nix,target=/nix"
   ]
 }
