@@ -40,6 +40,10 @@
       };
 
       handler = { pkgs, wrap, system, builders }: rec {
+        packages.pass = pkgs.writeShellScriptBin "pass" ''
+          { ${pkgs.pass}/bin/pass "$@" 2>&1 1>&3 3>&- | grep -v 'problem with fast path key listing'; } 3>&1 1>&2 | cat
+        '';
+
         defaultPackage = wrap.bashBuilder {
           src = ./.;
 
@@ -52,8 +56,9 @@
             builders.yaegi
             builders.bb
 
+            packages.pass
+
             bashInteractive
-            pass
             gnupg
             powerline-go
             vim

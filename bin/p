@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-if [[ -x pants ]]; then
-	exec ./pants "$@"
-else
-	exec pants "$@"
-fi
