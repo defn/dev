@@ -360,4 +360,5 @@ release:
 	git tag $$(cat VERSION ); git push origin $$(cat VERSION )
 
 dev:
+	git pull ghcr.io/defn/dev:latest-devcontainer
 	code --folder-uri "vscode-remote://dev-container+$$(pwd | perl -pe 's{\s+}{}g' | xxd -p)/home/ubuntu"
