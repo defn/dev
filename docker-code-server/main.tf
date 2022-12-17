@@ -12,24 +12,24 @@ terraform {
   }
 }
 
-data "coder_provisioner" "me" {}
+data "coder_provisioner" "this" {}
 
 provider "docker" {}
 
-data "coder_workspace" "me" {}
+data "coder_workspace" "this" {}
 
 resource "coder_agent" "main" {
-  arch = data.coder_provisioner.me.arch
+  arch = data.coder_provisioner.this.arch
   os   = "linux"
 
-  startup_script = "/home/ubuntu/.nix-profile/bin/nix run github:defn/pkg/codeserver-4.9.1-1?dir=codeserver -- --auth none"
-
   env = {
-    GIT_AUTHOR_NAME     = "${data.coder_workspace.me.owner}"
-    GIT_COMMITTER_NAME  = "${data.coder_workspace.me.owner}"
-    GIT_AUTHOR_EMAIL    = "${data.coder_workspace.me.owner_email}"
-    GIT_COMMITTER_EMAIL = "${data.coder_workspace.me.owner_email}"
+    GIT_AUTHOR_NAME     = "${data.coder_workspace.this.owner}"
+    GIT_COMMITTER_NAME  = "${data.coder_workspace.this.owner}"
+    GIT_AUTHOR_EMAIL    = "${data.coder_workspace.this.owner_email}"
+    GIT_COMMITTER_EMAIL = "${data.coder_workspace.this.owner_email}"
   }
+
+  startup_script = "/home/ubuntu/.nix-profile/bin/nix run github:defn/pkg/codeserver-4.9.1-1?dir=codeserver -- --auth none"
 }
 
 resource "coder_app" "code-server" {
@@ -41,7 +41,7 @@ resource "coder_app" "code-server" {
   slug         = "code-server"
   display_name = "code-server"
 
-  subdomain = false
+  subdomain = true
   share     = "owner"
 
   healthcheck {
@@ -52,7 +52,7 @@ resource "coder_app" "code-server" {
 }
 
 resource "docker_volume" "home_volume" {
-  name = "coder-${data.coder_workspace.me.id}-home"
+  name = "coder-${data.coder_workspace.this.id}-home"
 
   lifecycle {
     ignore_changes = all
@@ -60,33 +60,32 @@ resource "docker_volume" "home_volume" {
 
   labels {
     label = "coder.owner"
-    value = data.coder_workspace.me.owner
+    value = data.coder_workspace.this.owner
   }
 
   labels {
     label = "coder.owner_id"
-    value = data.coder_workspace.me.owner_id
+    value = data.coder_workspace.this.owner_id
   }
 
   labels {
     label = "coder.workspace_id"
-    value = data.coder_workspace.me.id
+    value = data.coder_workspace.this.id
   }
 
   labels {
     label = "coder.workspace_name_at_creation"
-    value = data.coder_workspace.me.name
+    value = data.coder_workspace.this.name
   }
 }
 
 resource "docker_container" "workspace" {
-  count = data.coder_workspace.me.start_count
+  count = data.coder_workspace.this.start_count
 
-  name     = "coder-${data.coder_workspace.me.owner}-${lower(data.coder_workspace.me.name)}"
-  hostname = data.coder_workspace.me.name
+  name     = "coder-${data.coder_workspace.this.owner}-${lower(data.coder_workspace.this.name)}"
+  hostname = data.coder_workspace.this.name
 
-  image      = "ghcr.io/defn/dev:latest-devcontainer"
-  entrypoint = ["sh", "-c", replace(coder_agent.main.init_script, "/localhost|127\\.0\\.0\\.1/", "host.docker.internal")]
+  image = "ghcr.io/defn/dev:latest-devcontainer"
 
   env = ["CODER_AGENT_TOKEN=${coder_agent.main.token}"]
 
@@ -96,28 +95,34 @@ resource "docker_container" "workspace" {
   }
 
   volumes {
-    container_path = "/home/coder/"
+    container_path = "/nix"
+    volume_name    = docker_volume.home_volume.name
+    read_only      = false
+  }
+
+  volumes {
+    container_path = "/work"
     volume_name    = docker_volume.home_volume.name
     read_only      = false
   }
 
   labels {
     label = "coder.owner"
-    value = data.coder_workspace.me.owner
+    value = data.coder_workspace.this.owner
   }
 
   labels {
     label = "coder.owner_id"
-    value = data.coder_workspace.me.owner_id
+    value = data.coder_workspace.this.owner_id
   }
 
   labels {
     label = "coder.workspace_id"
-    value = data.coder_workspace.me.id
+    value = data.coder_workspace.this.id
   }
 
   labels {
     label = "coder.workspace_name"
-    value = data.coder_workspace.me.name
+    value = data.coder_workspace.this.name
   }
 }
