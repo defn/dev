@@ -51,8 +51,36 @@ resource "coder_app" "code-server" {
   }
 }
 
-resource "docker_volume" "home_volume" {
-  name = "coder-${data.coder_workspace.this.id}-home"
+resource "docker_volume" "nix_volume" {
+  name = "coder-${data.coder_workspace.this.id}-nix"
+
+  lifecycle {
+    ignore_changes = all
+  }
+
+  labels {
+    label = "coder.owner"
+    value = data.coder_workspace.this.owner
+  }
+
+  labels {
+    label = "coder.owner_id"
+    value = data.coder_workspace.this.owner_id
+  }
+
+  labels {
+    label = "coder.workspace_id"
+    value = data.coder_workspace.this.id
+  }
+
+  labels {
+    label = "coder.workspace_name_at_creation"
+    value = data.coder_workspace.this.name
+  }
+}
+
+resource "docker_volume" "work_volume" {
+  name = "coder-${data.coder_workspace.this.id}-work"
 
   lifecycle {
     ignore_changes = all
@@ -96,13 +124,13 @@ resource "docker_container" "workspace" {
 
   volumes {
     container_path = "/nix"
-    volume_name    = docker_volume.home_volume.name
+    volume_name    = docker_volume.nix_volume.name
     read_only      = false
   }
 
   volumes {
     container_path = "/work"
-    volume_name    = docker_volume.home_volume.name
+    volume_name    = docker_volume.work_volume.name
     read_only      = false
   }
 
