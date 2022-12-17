@@ -8,7 +8,6 @@
 		}
 	},
   "mounts": [
-    "source=${localEnv:HOME}/work,target=/workspaces,type=bind,consistency=delegated",
     "source=work,target=/work",
     "source=nix,target=/nix"
   ]
