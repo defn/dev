@@ -115,7 +115,14 @@ resource "docker_container" "workspace" {
 
   image = "ghcr.io/defn/dev:latest-devcontainer"
 
-  env = ["CODER_AGENT_TOKEN=${coder_agent.main.token}"]
+  env = [
+    "CODER_AGENT_TOKEN=${coder_agent.main.token}"
+  ]
+
+  entrypoint = [
+    "sh", "-c",
+    replace(coder_agent.main.init_script, "/localhost|127\\.0\\.0\\.1/", "host.docker.internal")
+  ]
 
   host {
     host = "host.docker.internal"
