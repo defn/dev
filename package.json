@@ -1,9 +1,5 @@
 {
   "dependencies": {
-    "@devcontainers/cli": "^0.26.0",
-    "cdktf": "^0.13.3",
-    "npm": "^9.2.0",
-    "pnpm": "^7.14.2",
-    "turbo": "^1.6.3"
+    "npm": "^9.2.0"
   }
 }
