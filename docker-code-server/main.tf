@@ -129,6 +129,12 @@ resource "docker_container" "workspace" {
     ip   = "host-gateway"
   }
 
+  mounts {
+    type   = "bind"
+    source = "/var/run/docker.sock"
+    target = "/var/run/docker.sock"
+  }
+
   volumes {
     container_path = "/nix"
     volume_name    = docker_volume.nix_volume.name
