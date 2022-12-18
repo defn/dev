@@ -4,7 +4,7 @@
 
     earthly.url = github:defn/pkg/earthly-0.6.30-1?dir=earthly;
     tilt.url = github:defn/pkg/tilt-0.30.13-1?dir=tilt;
-    flyctl.url = github:defn/pkg/flyctl-0.0.437-1?dir=flyctl;
+    flyctl.url = github:defn/pkg/flyctl-0.0.441?dir=flyctl;
 
     c.url = github:defn/pkg/c-0.0.1-3?dir=c;
     tf.url = github:defn/pkg/tf-0.0.1-1?dir=tf;
