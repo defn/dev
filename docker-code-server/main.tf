@@ -120,8 +120,8 @@ resource "docker_container" "workspace" {
   ]
 
   entrypoint = [
-    "sh", "-c",
-    "export CODER_AGENT_AUTH=token; export CODER_AGENT_URL=http://host.docker.internal:3000/; exec /home/ubuntu/.nix-profile/bin/nix run github:defn/pkg/coder-0.13.4-1?dir=coder -- agent"
+    "bash", "-c",
+    "set -exfu; cd; bin/git pull; bash -x bin/persist-cache; export CODER_AGENT_AUTH=token; export CODER_AGENT_URL=http://host.docker.internal:3000/; exec /home/ubuntu/.nix-profile/bin/nix run github:defn/pkg/coder-0.13.4-1?dir=coder -- agent"
   ]
 
   host {
