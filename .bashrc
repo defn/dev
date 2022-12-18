@@ -108,7 +108,7 @@ if [[ -n "${VSCODE_GIT_ASKPASS_NODE:-}" ]]; then
 			export BROWSER=${VSCODE_GIT_ASKPASS_NODE%/node}/bin/helpers/browser.sh
 			;;
 		*/code-server*)
-			export BROWSER="$(which browser.sh)"
+			export BROWSER=${VSCODE_GIT_ASKPASS_NODE%/node}/vscode/bin/helpers/browser.sh
 			;;
 		*)
 			export BROWSER="open"

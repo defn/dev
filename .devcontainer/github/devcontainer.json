@@ -6,9 +6,5 @@
 				"vscodevim.vim"
 			]
 		}
-	},
-  "mounts": [
-    "source=work,target=/workspaces",
-    "source=nix,target=/nix"
-  ]
+	}
 }
