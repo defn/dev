@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+set -efu
+
+function persist {
+    set +x
+    local s="$1"; shift
+    local d="$1"; shift
+
+    if test -d "$d"; then
+        rm -rf "$d"
+    fi
+
+    mkdir -p "$s"
+    mkdir -p "$(dirname "$d")"
+    ln -nfs "$s" "$d"
+    set -x
+}
+
+function cache {
+  persist ~/work/config-gh ~/.config/gh
+
+  persist ~/work/config-gcloud ~/.config/gcloud
+
+  persist ~/work/config-precommit ~/.cache/pre-commit
+
+  persist ~/work/config-fly ~/.fly
+
+  persist ~/work/config-temporalite ~/.config/temporalite
+
+  persist ~/work/terraform-d ~/.terraform.d
+  mkdir -p ~/.terraform.d/plugin-cache
+
+  persist ~/work/go-build ~/.cache/go-build
+  persist ~/work/go-mod ~/.cache/go-mod
+
+  persist ~/work/code-server-cache/extensions ~/.local/share/code-server/extensions
+  persist ~/work/direnv-allow ~/.local/share/direnv
+
+  persist ~/work/code-server-cache/CachedExtensionVSIXs ~/.local/share/code-server/CachedExtensionVSIXs
+
+  persist ~/work/direnv-home ~/.direnv
+}
+
+cache "$@"
