@@ -1,6 +1,6 @@
 {
   inputs = {
-    dev.url = github:defn/pkg/dev-0.0.14?dir=dev;
+    dev.url = github:defn/pkg/dev-0.0.16?dir=dev;
 
     earthly.url = github:defn/pkg/earthly-0.6.30-1?dir=earthly;
     tilt.url = github:defn/pkg/tilt-0.30.13-1?dir=tilt;
@@ -15,10 +15,10 @@
     { main = inputs.dev.main; } // inputs.dev.main rec {
       inherit inputs;
 
-      src = ./.;
+      src = builtins.path { path = ./.; name = config.slug; };
 
       config = rec {
-        slug = "defn-dev";
+        slug = builtins.readFile ./SLUG;
         version = builtins.readFile ./VERSION;
       };
 
@@ -28,7 +28,7 @@
         '';
 
         defaultPackage = wrap.bashBuilder {
-          src = ./.;
+          inherit src;
 
           installPhase = ''
             mkdir --p $out
