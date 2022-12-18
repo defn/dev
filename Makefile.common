@@ -36,7 +36,9 @@ macos:
 symlinks:
 	mark -- configure symlinks
 	if [[ "Linux" == "$(shell uname -s)" ]]; then \
-		if test -d /workspaces; then ln -nfs /workspaces work; sudo install -d -m 0755 -o ubuntu -g ubuntu /workspaces; else ln -nfs /work ~; fi; fi
+		if test -d /workspaces; then ln -nfs /workspaces work; sudo install -d -m 0755 -o ubuntu -g ubuntu /workspaces; else ln -nfs /work work; fi; i\
+		sudo chown ubuntu:ubuntu work/.; fi
+	mkdir -p work/.codespaces/.persistedshare
 
 perms:
 	mark -- configure permissions
