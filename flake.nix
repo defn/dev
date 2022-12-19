@@ -1,6 +1,6 @@
 {
   inputs = {
-    dev.url = github:defn/pkg/dev-0.0.17?dir=dev;
+    dev.url = github:defn/pkg/dev-0.0.18?dir=dev;
     c.url = github:defn/pkg/c-0.0.1-6?dir=c;
     earthly.url = github:defn/pkg/earthly-0.6.30-3?dir=earthly;
     tilt.url = github:defn/pkg/tilt-0.30.13-3?dir=tilt;
