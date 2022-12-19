@@ -137,8 +137,8 @@ resource "docker_container" "workspace" {
 
   mounts {
     type   = "bind"
-    source = "/tmp/docker/nix"
-    target = "/tmp/docker/nix"
+    source = "/tmp/cache/nix"
+    target = "/tmp/cache/nix"
   }
 
   volumes {
