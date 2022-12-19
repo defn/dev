@@ -1,14 +1,9 @@
 {
   inputs = {
-    dev.url = github:defn/pkg/dev-0.0.16?dir=dev;
-
-    earthly.url = github:defn/pkg/earthly-0.6.30-2?dir=earthly;
-    tilt.url = github:defn/pkg/tilt-0.30.13-2?dir=tilt;
-    flyctl.url = github:defn/pkg/flyctl-0.0.441-1?dir=flyctl;
-
-    c.url = github:defn/pkg/c-0.0.1-5?dir=c;
-    tf.url = github:defn/pkg/tf-0.0.1-2?dir=tf;
-    f.url = github:defn/pkg/f-0.0.1-2?dir=f;
+    dev.url = github:defn/pkg/dev-0.0.17?dir=dev;
+    c.url = github:defn/pkg/c-0.0.1-6?dir=c;
+    earthly.url = github:defn/pkg/earthly-0.6.30-3?dir=earthly;
+    tilt.url = github:defn/pkg/tilt-0.30.13-3?dir=tilt;
   };
 
   outputs = inputs:
