@@ -18,6 +18,17 @@ function persist {
 }
 
 function cache {
+  if [[ "Linux" == "$(uname -s)" ]]; then
+	  if test -d /workspaces; then 
+      sudo install -d -m 0755 -o ubuntu -g ubuntu /workspaces
+      ln -nfs /workspaces ~/work
+    else
+      sudo install -d -m 0755 -o ubuntu -g ubuntu /work
+      ln -nfs /work ~/work
+    fi
+		sudo chown ubuntu:ubuntu ~/work/.
+  fi
+
   persist ~/work/config-gh ~/.config/gh
 
   persist ~/work/config-gcloud ~/.config/gcloud
