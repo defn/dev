@@ -378,10 +378,10 @@ version ver:
 	if test -f VENDOR; then echo -n $(version) > VENDOR; fi
 
 cache-input:
-	nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)' | cachix push defn
+	nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)' | xargs nix copy --to file:///tmp/cache/nix
 
 cache-build:
-	nix build --json | jq -r '.[].outputs | to_entries[].value' | cachix push defn
+	nix build --json | jq -r '.[].outputs | to_entries[].value' | xargs nix copy --to file:///tmp/cache/nix
 
 cache:
 	$(MAKE) cache-input cache-build
