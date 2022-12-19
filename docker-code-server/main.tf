@@ -29,7 +29,7 @@ resource "coder_agent" "main" {
     GIT_COMMITTER_EMAIL = "${data.coder_workspace.this.owner_email}"
   }
 
-  startup_script = "/home/ubuntu/.nix-profile/bin/nix run github:defn/pkg/codeserver-4.9.1-1?dir=codeserver -- --auth none"
+  startup_script = "cd ~/coder && exec ~/.nix-profile/bin/nix run .#codeserver -- --auth none"
 }
 
 resource "coder_app" "code-server" {
@@ -121,7 +121,7 @@ resource "docker_container" "workspace" {
 
   entrypoint = [
     "bash", "-c",
-    "set -xfu; cd; git pull; bash -x bin/persist-cache; export CODER_AGENT_AUTH=token; export CODER_AGENT_URL=http://host.docker.internal:3000/; exec /home/ubuntu/.nix-profile/bin/nix run github:defn/pkg/coder-0.13.4-1?dir=coder -- agent"
+    "set -xfu; cd; git pull; bash -x bin/persist-cache; export CODER_AGENT_AUTH=token; export CODER_AGENT_URL=http://host.docker.internal:3000/; cd ~/coder && exec ~/.nix-profile/bin/nix run .#coder -- agent"
   ]
 
   host {
