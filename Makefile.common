@@ -36,9 +36,8 @@ macos:
 symlinks:
 	mark -- configure symlinks
 	if [[ "Linux" == "$(shell uname -s)" ]]; then \
-		if test -d /workspaces; then ln -nfs /workspaces work; sudo install -d -m 0755 -o ubuntu -g ubuntu /workspaces; else ln -nfs /work work; fi; \
-		sudo chown ubuntu:ubuntu work/.; fi
-	mkdir -p work/.codespaces/.persistedshare
+		if test -d /workspaces; then ln -nfs /workspaces ~/work; sudo install -d -m 0755 -o ubuntu -g ubuntu /workspaces; else sudo install -d -m 0755 -o ubuntu -g ubuntu /work; ln -nfs /work ~/work; fi; \
+		sudo chown ubuntu:ubuntu ~/work/.; fi
 	bash -x bin/persist-cache
 
 perms:
@@ -60,9 +59,19 @@ install:
 install-inner:
 	$(MAKE) symlinks perms
 
-	mark -- configure password-store, gpg
+	mark -- configure dotfiles, password-store
+	mkdir -p ~/work/.codespaces/.persistedshare/dotfiles
 	mkdir -p ~/work/password-store
+	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
+		if ! test -d ~/work/.codespaces/.persistedshare/dotfiles/.git/.; then \
+			git clone https://github.com/$${GIT_AUTHOR_NAME}/dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
+		fi; \
+		if ! test -d ~/work/password-store/.git/.; then \
+			git clone https://github.com/$${GIT_AUTHOR_NAME}/password-store ~/work/password-store; \
+		fi; \
+	fi
 
+	mark -- configure gpg
 	if test -d ~/.password-store/home/.gnupg; then rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.; fi
 	$(MAKE) perms
 	env GPG_TTY=$$(tty) $(MAKE) init-gpg
@@ -378,10 +387,10 @@ version ver:
 	if test -f VENDOR; then echo -n $(version) > VENDOR; fi
 
 cache-input:
-	nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)' | xargs nix copy --to file:///tmp/cache/nix
+	nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)' | xargs nix copy --to 'file:///tmp/cache/nix?compression-level=0&parallel-compression=true'
 
 cache-build:
-	nix build --json | jq -r '.[].outputs | to_entries[].value' | xargs nix copy --to file:///tmp/cache/nix
+	nix build --json | jq -r '.[].outputs | to_entries[].value' | xargs nix copy --to 'file:///tmp/cache/nix?compression-level=0&parallel-compression=true'
 
 cache:
 	$(MAKE) cache-input cache-build
