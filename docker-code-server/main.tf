@@ -135,6 +135,12 @@ resource "docker_container" "workspace" {
     target = "/var/run/docker.sock"
   }
 
+  mounts {
+    type   = "bind"
+    source = "/tmp/docker/nix"
+    target = "/tmp/docker/nix"
+  }
+
   volumes {
     container_path = "/nix"
     volume_name    = docker_volume.nix_volume.name
