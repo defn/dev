@@ -18,7 +18,18 @@
 
       handler = { pkgs, wrap, system, builders }: rec {
         defaultPackage = wrap.nullBuilder {
-          propagatedBuildInputs = wrap.flakeInputs;
+          propagatedBuildInputs = wrap.flakeInputs ++ (with pkgs; [
+            go
+            gotools
+            go-tools
+            golangci-lint
+            gopls
+            go-outline
+            gopkgs
+            delve
+
+            nodejs-18_x
+          ]);
         };
 
         apps = {

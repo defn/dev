@@ -62,17 +62,6 @@
 
             docker
             docker-credential-helpers
-
-            go
-            gotools
-            go-tools
-            golangci-lint
-            gopls
-            go-outline
-            gopkgs
-            delve
-
-            nodejs-18_x
           ];
         };
       };
