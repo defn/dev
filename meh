@@ -9,5 +9,4 @@ after=$1; shift
 
 git log $before..$after
 
-echo "${payload:-}"
-echo "${binary:-}"
+echo "$1" | jq .
