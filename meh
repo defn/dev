@@ -9,4 +9,4 @@ after=$1; shift
 
 git log $before..$after
 
-echo "$1" | jq .
+make cache
