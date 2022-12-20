@@ -6,6 +6,10 @@
             {
                 "source": "payload",
                 "name": "repository.name"
+            },
+            {
+                "source": "payload",
+                "name": "ref"
             }
         ]
     }
