@@ -19,7 +19,7 @@
         "pass-file-to-command": [
             {
                 "source": "payload",
-                "name": "binary",
+                "name": ".",
                 "envname": "payload",
                 "base64decode": true
             }
