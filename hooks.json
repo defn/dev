@@ -1,6 +1,6 @@
 [
     {
-        "id": "simple-pull",
+        "id": "meh",
         "execute-command": "./meh",
         "pass-arguments-to-command": [
             {
