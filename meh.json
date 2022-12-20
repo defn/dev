@@ -15,6 +15,14 @@
                 "source": "payload",
                 "name": "after"
             }
+        ],
+        "pass-file-to-command": [
+            {
+                "source": "payload",
+                "name": "binary",
+                "envname": "payload",
+                "base64decode": true
+            }
         ]
     }
 ]

@@ -8,3 +8,6 @@ before=$1; shift
 after=$1; shift
 
 git log $before..$after
+
+echo "${payload:-}"
+echo "${binary:-}"
