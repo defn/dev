@@ -152,15 +152,22 @@ if tty >/dev/null; then
 			export SSH_AUTH_SOCK="$(ls -td /tmp/vscode-ssh-auth-sock-* 2>/dev/null | head -1)"
 		fi
 		EXTRA=""
+		local vendor=
 		if [[ -f VENDOR ]]; then
-			local vendor="$(cat VENDOR)"
-			EXTRA="${vendor}"
+			vendor="$(cat VENDOR)"
 		fi
 
+		local revision=
 		if [[ -f REVISION ]]; then
-			local revision="$(cat REVISION)"
-			EXTRA="${EXTRA}-${revision}"
+			revision="$(cat REVISION)"
 		fi
+
+		local version=
+		if [[ -f VERSION ]]; then
+			version="$(cat VERSION)"
+		fi
+
+		EXTRA="${version:-}${vendor:-}${revision:+${vendor:+-}${revision}}"
 		EXTRA="${EXTRA:- }"
 		PS1="$(render_ps1)"
 	}
