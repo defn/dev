@@ -7,10 +7,10 @@ fi
 export TMPDIR="${TMPDIR:-/tmp}"
 export TEMPDIR="${TEMPDIR:-/tmp}"
 
-if [[ -z "${IN_NIX_SHELL:-}" ]]; then
-	if [ -e /home/ubuntu/.nix-profile/etc/profile.d/nix.sh ]; then
-		. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh
-	fi
+if [ -e /home/ubuntu/.nix-profile/etc/profile.d/nix.sh ]; then
+	. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh
+else
+	PATH="/nix/var/nix/profiles/default/bin:$PATH"
 fi
 
 function gs {
