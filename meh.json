@@ -14,14 +14,9 @@
             {
                 "source": "payload",
                 "name": "after"
-            }
-        ],
-        "pass-file-to-command": [
+            },
             {
-                "source": "payload",
-                "name": ".",
-                "envname": "payload",
-                "base64decode": true
+                "source": "entite-payload"
             }
         ]
     }
