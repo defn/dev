@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
 set -x
-echo "$@"
-cat $1
+git fetch
+
+name=$1; shift
+before=$1; shift
+after=$1; shift
+
+git log $before..$after

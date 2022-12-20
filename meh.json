@@ -9,7 +9,11 @@
             },
             {
                 "source": "payload",
-                "name": "ref"
+                "name": "before"
+            },
+            {
+                "source": "payload",
+                "name": "after"
             }
         ]
     }
