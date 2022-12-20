@@ -170,13 +170,10 @@ if tty >/dev/null; then
 		PS1="$(render_ps1)"
 	}
 
-    PROMPT_COMMAND="update_ps1"
+	PROMPT_COMMAND="_direnv_hook;update_ps1"
   fi
 fi
 
-if type -P direnv >/dev/null; then
-	eval "$(direnv hook bash)"
-fi
 
 # install
 if [[ -n "${VSCODE_GIT_ASKPASS_NODE:-}" ]]; then
