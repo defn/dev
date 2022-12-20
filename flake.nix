@@ -5,6 +5,7 @@
     earthly.url = github:defn/pkg/earthly-0.6.30-3?dir=earthly;
     tilt.url = github:defn/pkg/tilt-0.30.13-3?dir=tilt;
     gh.url = github:defn/pkg/gh-2.20.2-3?dir=gh;
+    dev-env.url = path:./coder;
   };
 
   outputs = inputs:
