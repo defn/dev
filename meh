@@ -4,4 +4,4 @@ exec 2>&1
 exec >>/tmp/meh.log
 env 
 echo "$@"
-echo hello
+echo hello 1
