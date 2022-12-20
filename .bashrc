@@ -152,19 +152,14 @@ if tty >/dev/null; then
 			export SSH_AUTH_SOCK="$(ls -td /tmp/vscode-ssh-auth-sock-* 2>/dev/null | head -1)"
 		fi
 		EXTRA=""
-		if [[ -f VERSION ]]; then
-			if [[ -f VENDOR ]]; then
-				local vendor="$(cat VENDOR)"
-				EXTRA="/ ${vendor}"
-			fi
+		if [[ -f VENDOR ]]; then
+			local vendor="$(cat VENDOR)"
+			EXTRA="${vendor}"
+		fi
 
-			local version="$(cat VERSION)"
-			EXTRA="${version}${EXTRA:+ ${EXTRA}}"
-
-			local tag="$(git describe --tags --abbrev=0 $(git log . | head -1 | awk '{print $2}'))"
-			if [[ "${tag}" != "${version}" ]]; then
-				EXTRA="!${EXTRA}"
-			fi
+		if [[ -f REVISION ]]; then
+			local revision="$(cat REVISION)"
+			EXTRA="${EXTRA}-${revision}"
 		fi
 		EXTRA="${EXTRA:- }"
 		PS1="$(render_ps1)"
