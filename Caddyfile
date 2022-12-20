@@ -140,10 +140,6 @@ http://control-0 {
 		redir {scheme}://{host}:20001/
 	}
 
-	handle_path /kuma/* {
-		redir {scheme}://{host}:20002/gui/
-	}
-
 	handle_path /nomad/* {
 		redir {scheme}://{host}:20003/ui/
 	}

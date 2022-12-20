@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-function main {
- 	set -efu
-
-	sudo -E kumactl uninstall transparent-proxy
-}
-
-main "$@"
