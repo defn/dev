@@ -1,0 +1,12 @@
+[
+    {
+        "id": "simple-pull",
+        "execute-command": "./meh",
+        "pass-arguments-to-command": [
+            {
+                "source": "payload",
+                "name": "repository.name"
+            }
+        ]
+    }
+]
