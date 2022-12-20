@@ -19,6 +19,8 @@
       handler = { pkgs, wrap, system, builders }: rec {
         defaultPackage = wrap.nullBuilder {
           propagatedBuildInputs = wrap.flakeInputs ++ (with pkgs; [
+            bashInteractive
+
             go
             gotools
             go-tools
