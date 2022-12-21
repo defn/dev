@@ -4,8 +4,8 @@ coder server --access-url http://localhost:5555 --http-address localhost:5555 --
 
 coder login --first-user-email $(pass coder_admin_email) --first-user-password $(pass coder_admin_password) --first-user-username $(pass coder_admin_username) --first-user-trial=false http://localhost:5555
 
-coder scaletest cleanup
-
+cd docker-code-server
+coder template create --yes
 
     ssh: on remote: gpgconf  --list-dirs
         Host
