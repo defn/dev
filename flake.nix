@@ -29,11 +29,11 @@
           rm -rf ~/Library/Application\ Support/coderv2/postgres
         '';
 
-        packages.coder-server-orgs = pkgs.writeShellScriptBin "this-coder-server-orgs" ''
+        packages.coder-server-for-orgs = pkgs.writeShellScriptBin "this-coder-server-for-orgs" ''
           coder server --access-url http://localhost:5555 --http-address localhost:5555 --oauth2-github-allow-signups=true --oauth2-github-client-id=$(pass coder_github_client_id) --oauth2-github-client-secret=$(pass coder_github_client_secret) --oauth2-github-allow-signups --oauth2-github-allowed-orgs=$(pass coder_github_allowed_orgs)
         '';
 
-        packages.coder-server-everyone = pkgs.writeShellScriptBin "this-coder-server-everyone" ''
+        packages.coder-server-for-everyone = pkgs.writeShellScriptBin "this-coder-server-for-everyone" ''
           coder server --access-url http://localhost:5555 --http-address localhost:5555 --oauth2-github-allow-signups=true --oauth2-github-client-id=$(pass coder_github_client_id) --oauth2-github-client-secret=$(pass coder_github_client_secret) --oauth2-github-allow-signups --oauth2-github-allow-everyone
         '';
 
@@ -47,14 +47,38 @@
           coder template create --yes
         '';
 
+        packages.coder-server-wait-for-alive = pkgs.writeShellScriptBin "this-coder-server-wait-for-alive" ''
+          while [[ "000" == "$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 1 -m 1 http://localhost:5555)" ]]; do sleep 1; done
+        '';
+
+        packages.coder-server-wait-for-dead = pkgs.writeShellScriptBin "this-coder-server-wait-for-dead" ''
+          while [[ "000" != "$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 1 -m 1 http://localhost:5555)" ]]; do sleep 1; done
+        '';
+
+        packages.coder-init = pkgs.writeShellScriptBin "this-coder-init" ''
+          pkill -f /coder
+          pkill -f /this-coder
+          this-coder-server-wait-for-dead
+          this-coder-delete-database
+          (
+            this-coder-server-wait-for-alive
+            this-coder-initial-user
+            this-coder-template-docker
+          ) &
+            this-coder-server-for-orgs
+        '';
+
         devShell = wrap.devShell {
           devInputs = [
             pkgs.gomod2nix
             packages.coder-delete-database
-            packages.coder-server-orgs
-            packages.coder-server-everyone
+            packages.coder-server-for-orgs
+            packages.coder-server-for-everyone
+            packages.coder-server-wait-for-alive
+            packages.coder-server-wait-for-dead
             packages.coder-initial-user
             packages.coder-template-docker
+            packages.coder-init
           ];
         };
 
