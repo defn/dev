@@ -55,10 +55,14 @@
           while [[ "000" != "$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 1 -m 1 http://localhost:5555)" ]]; do sleep 1; done
         '';
 
-        packages.coder-init = pkgs.writeShellScriptBin "this-coder-init" ''
+        packages.coder-server-kill = pkgs.writeShellScriptBin "this-coder-server-kill" ''
           pkill -f /coder
           pkill -f /this-coder
           this-coder-server-wait-for-dead
+        '';
+
+        packages.coder-init = pkgs.writeShellScriptBin "this-coder-init" ''
+          this-coder-server-kill
 
           bundler
 
@@ -80,6 +84,7 @@
             packages.coder-server-for-everyone
             packages.coder-server-wait-for-alive
             packages.coder-server-wait-for-dead
+            packages.coder-server-kill
             packages.coder-initial-user
             packages.coder-template-docker
             packages.coder-init
