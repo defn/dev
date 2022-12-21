@@ -168,3 +168,5 @@ package-lock.json
 .acme.sh
 .m1-terraform**
 .devcontainer/.*CommandMarker
+
+.bundle
