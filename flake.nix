@@ -57,8 +57,8 @@
 
         packages.coder-server-kill = pkgs.writeShellScriptBin "this-coder-server-kill" ''
           pkill -f /coder
-          pkill -f /this-coder
           this-coder-server-wait-for-dead
+          pkill -f /this-coder
         '';
 
         packages.coder-init = pkgs.writeShellScriptBin "this-coder-init" ''
