@@ -74,7 +74,7 @@
           };
           codeserver = {
             type = "app";
-            program = "${inputs.localdev.inputs.coderserver.defaultPackage.${system}}/bin/code-server";
+            program = "${inputs.localdev.inputs.codeserver.defaultPackage.${system}}/bin/code-server";
           };
         };
       };
