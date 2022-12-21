@@ -25,6 +25,39 @@
           { ${pkgs.pass}/bin/pass "$@" 2>&1 1>&3 3>&- | grep -v 'problem with fast path key listing'; } 3>&1 1>&2 | cat
         '';
 
+        packages.coder-delete-database = pkgs.writeShellScriptBin "this-coder-delete-database" ''
+          rm -rf ~/Library/Application\ Support/coderv2/postgres
+        '';
+
+        packages.coder-server-orgs = pkgs.writeShellScriptBin "this-coder-server-orgs" ''
+          coder server --access-url http://localhost:5555 --http-address localhost:5555 --oauth2-github-allow-signups=true --oauth2-github-client-id=$(pass coder_github_client_id) --oauth2-github-client-secret=$(pass coder_github_client_secret) --oauth2-github-allow-signups --oauth2-github-allowed-orgs=$(pass coder_github_allowed_orgs)
+        '';
+
+        packages.coder-server-everyone = pkgs.writeShellScriptBin "this-coder-server-everyone" ''
+          coder server --access-url http://localhost:5555 --http-address localhost:5555 --oauth2-github-allow-signups=true --oauth2-github-client-id=$(pass coder_github_client_id) --oauth2-github-client-secret=$(pass coder_github_client_secret) --oauth2-github-allow-signups --oauth2-github-allow-everyone
+        '';
+
+        packages.coder-initial-user = pkgs.writeShellScriptBin "this-coder-initial-user" ''
+          coder login --first-user-email $(pass coder_admin_email) --first-user-password $(pass coder_admin_password) --first-user-username $(pass coder_admin_username) --first-user-trial=false http://localhost:5555
+        '';
+
+        packages.coder-template-docker = pkgs.writeShellScriptBin "this-coder-template-docker" ''
+          cd
+          cd docker-code-server
+          coder template create --yes
+        '';
+
+        devShell = wrap.devShell {
+          devInputs = [
+            pkgs.gomod2nix
+            packages.coder-delete-database
+            packages.coder-server-orgs
+            packages.coder-server-everyone
+            packages.coder-initial-user
+            packages.coder-template-docker
+          ];
+        };
+
         defaultPackage = wrap.bashBuilder {
           inherit src;
 
