@@ -121,7 +121,7 @@ resource "docker_container" "workspace" {
 
   entrypoint = [
     "bash", "-c",
-    "set -xfu; cd; git pull; bash -x bin/persist-cache; export CODER_AGENT_AUTH=token; export CODER_AGENT_URL=http://host.docker.internal:3000/; exec ~/.nix-profile/bin/nix run .#coder -- agent"
+    "set -xfu; cd; git pull; bash -x bin/persist-cache; export CODER_AGENT_AUTH=token; export CODER_AGENT_URL=http://host.docker.internal:5555/; exec ~/.nix-profile/bin/nix run .#coder -- agent"
   ]
 
   host {

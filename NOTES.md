@@ -1,6 +1,8 @@
 rm -rf ~/Library/Application\ Support/coderv2/postgres
 
-coder server --access-url http://localhost:5555 --http-address localhost:5555 --oauth2-github-allow-signups=true --oauth2-github-client-id=$(pass coder_github_client_id) --oauth2-github-client-secret=$(pass coder_github_client_secret) --oauth2-github-allow-signups --oauth2-github-allowed-orgs=$(pass coder_github_allowed_orgs)
+coder server --access-url http://localhost:5555 --http-address localhost:5555 --oauth2-github-allow-signups=true --oauth2-github-client-id=$(pass coder_github_client_id) --oauth2-github-client-secret=$(pass coder_github_client_secret) --oauth2-github-allow-signups --oauth2-github-allow-everyone
+
+this is buggy: --oauth2-github-allowed-orgs=$(pass coder_github_allowed_orgs)
 
 coder login --first-user-email $(pass coder_admin_email) --first-user-password $(pass coder_admin_password) --first-user-username $(pass coder_admin_username) --first-user-trial=false http://localhost:5555
 
