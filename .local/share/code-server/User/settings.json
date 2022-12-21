@@ -1,5 +1,5 @@
 {
-    "files.autoSave": "on",
+    "files.autoSave": "afterDelay",
     "editor.formatOnSave": true,
     "editor.minimap.enabled": false,
     "extensions.ignoreRecommendations": true,
