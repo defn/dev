@@ -82,14 +82,7 @@
           ];
         };
 
-        defaultPackage = wrap.bashBuilder {
-          inherit src;
-
-          installPhase = ''
-            mkdir --p $out
-            #rsync -ia $src/. $out/.
-          '';
-
+        defaultPackage = wrap.nullBuilder {
           propagatedBuildInputs = with pkgs; wrap.flakeInputs ++ [
             builders.yaegi
 
