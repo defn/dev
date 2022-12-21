@@ -66,6 +66,17 @@
             docker-credential-helpers
           ];
         };
+
+        apps = {
+          coder = {
+            type = "app";
+            program = "${inputs.localdev.inputs.coder.defaultPackage.${system}}/bin/coder";
+          };
+          codeserver = {
+            type = "app";
+            program = "${inputs.localdev.inputs.coderserver.defaultPackage.${system}}/bin/code-server";
+          };
+        };
       };
     };
 }
