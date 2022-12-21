@@ -64,7 +64,7 @@
         packages.coder-init = pkgs.writeShellScriptBin "this-coder-init" ''
           this-coder-server-kill
 
-          bundler
+          bundler install
 
           this-coder-delete-database
           (
