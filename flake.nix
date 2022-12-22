@@ -69,16 +69,17 @@
         '';
 
         packages.coder-init = pkgs.writeShellScriptBin "this-coder-init" ''
-          this-coder-server-kill
+           this-coder-server-kill
 
-          this-coder-delete-database
-          (
-            this-coder-server-wait-for-alive
-            this-coder-initial-user
-            this-coder-template-docker
-            ${BROWSER:-open} http://localhost:555
-          ) &
-            this-coder-server-for-orgs
+           this-coder-delete-database
+           (
+             this-coder-server-wait-for-alive
+             this-coder-initial-user
+             this-coder-template-docker
+             ''${BROWSER:-open} http://localhost:5555
+           ) &
+
+          this-coder-server-for-orgs
         '';
 
         devShell = wrap.devShell {
