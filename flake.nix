@@ -52,6 +52,9 @@
           cd
           cd docker-code-server
           coder template create --yes
+          coder template push --yes
+          # https://github.com/coder/coder/tree/main/site/static/icon
+          coder template edit docker-code-server --icon "/icon/code.svg"
         '';
 
         packages.coder-server-wait-for-alive = pkgs.writeShellScriptBin "this-coder-server-wait-for-alive" ''
