@@ -126,6 +126,7 @@
             procps
             less
             htop
+            s6
 
             docker
             docker-credential-helpers
