@@ -88,7 +88,7 @@ install-inner:
 		mkdir -p ~/.config/coderv2/dotfiles; \
 		rm -rf ~/work/.codespaces/.persistedshare/dotfiles; \
 		ln -nfs ~/.config/coderv2/dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
-		coder dotfiles --yes https://github.com/amanibhavam/dotfiles; \
+		coder dotfiles --yes https://github.com/$${GIT_AUTHOR_NAME}/dotfiles; \
 	fi
 
 down:
