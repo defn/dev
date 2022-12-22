@@ -23,9 +23,12 @@ k3d:
 
     FROM rancher/k3s:v${K3S}
 
-    RUN echo root:x:0:0:root:/root:/bin/sh >> /etc/passwd
-    RUN echo root:x:0: >> /etc/group
-    RUN install -d -m 0700 -o root -g root /root
+    RUN echo root:x:0: >> /etc/group \
+        && echo ubuntu:x:1000: >> /etc/group \
+        && echo root:x:0:0:root:/root:/bin/sh >> /etc/passwd \
+        && echo ubuntu:x:1000:1000:root:/home/ubuntu:/bin/sh >> /etc/passwd \
+        && install -d -m 0700 -o root -g root /root \
+        && mkdir -p /home && install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
 
     RUN mv /bin/k3s /bin/k3s-real
 
@@ -36,7 +39,16 @@ k3d:
 
     COPY etc/k3s-wrapper.sh /bin/k3s
 
-    COPY +devcontainer/* /nix
+    USER ubuntu
+    COPY --dir --chown=ubuntu:ubuntu +devcontainer/nix /nix
+    RUN ln -nfs /nix/var/nix/profiles/per-user/ubuntu/profile /home/ubuntu/.nix-profile \
+        && mkdir -p /home/ubuntu/.config /home/ubuntu/.config/nix \
+        && echo experimental-features = nix-command flakes > /home/ubuntu/.config/nix/nix.conf \
+        && echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh > .bashrc
+
+    RUN false
+
+    USER root
 
     IF [ "$image" != "" ]
         SAVE IMAGE --push ${image}
@@ -72,7 +84,7 @@ devcontainer:
     RUN (git clean -nfd || true) \
         && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
 
-    SAVE ARTIFACT /nix .
+    SAVE ARTIFACT /nix nix
 
     IF [ "$image" != "" ]
         SAVE IMAGE --push ${image}
