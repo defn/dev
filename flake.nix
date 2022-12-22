@@ -56,7 +56,7 @@
           coder template edit docker-code-server --icon "/icon/code.svg"
         '';
 
-        packages.coder-template-k3s = pkgs.writeShellScriptBin "this-coder-template-k3d" ''
+        packages.coder-template-k3d = pkgs.writeShellScriptBin "this-coder-template-k3d" ''
           cd ~/coder/k3d-code-server
           coder template create --yes
           coder template push --yes
@@ -90,6 +90,7 @@
              this-coder-server-wait-for-alive
              this-coder-initial-user | cat
              this-coder-template-docker
+             this-coder-template-k3d
              ''${BROWSER:-open} http://localhost:5555
            ) &
 
@@ -108,6 +109,7 @@
             packages.coder-server-kill
             packages.coder-initial-user
             packages.coder-template-docker
+            packages.coder-template-k3d
             packages.coder-init
           ];
         };
