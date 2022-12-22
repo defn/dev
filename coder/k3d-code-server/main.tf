@@ -36,7 +36,7 @@ resource "coder_app" "code-server" {
   agent_id = coder_agent.main.id
 
   url  = "http://localhost:8080/?folder=/home/ubuntu"
-  icon = "/icon/kubernetes.png"
+  icon = "/icon/code.svg"
 
   slug         = "code-server"
   display_name = "code-server"
