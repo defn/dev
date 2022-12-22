@@ -13,12 +13,11 @@ build-fly:
 
 build-k3d:
     ARG image
-    BUILD --platform=linux/amd64 +k3d --image=${image} --arch=amd64
-    BUILD --platform=linux/arm64 +k3d --image=${image} --arch=arm64
+    BUILD --platform=linux/amd64 +k3d --image=${image}
+    BUILD --platform=linux/arm64 +k3d --image=${image}
 
 k3d:
     ARG K3S
-
     ARG image
     ARG arch
 
@@ -37,7 +36,7 @@ k3d:
 
     COPY etc/k3s-wrapper.sh /bin/k3s
 
-    # TODO get nix in here and install tailscale
+    COPY +devcontainer/* /nix
 
     IF [ "$image" != "" ]
         SAVE IMAGE --push ${image}
@@ -67,13 +66,13 @@ devcontainer:
     # nix
     RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile '
     RUN bash -c '~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes profile install nixpkgs#{nix-direnv,direnv,pinentry,nixpkgs-fmt}'
-    #COPY flake.* VERSION .
-    #RUN bash -c '~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes build'
 
     # defn/dev
     COPY --dir --chown=ubuntu:ubuntu . .
     RUN (git clean -nfd || true) \
         && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
+
+    SAVE ARTIFACT /nix .
 
     IF [ "$image" != "" ]
         SAVE IMAGE --push ${image}
