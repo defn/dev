@@ -7,6 +7,7 @@
     gh.url = github:defn/pkg/gh-2.20.2-3?dir=gh;
     webhook.url = github:defn/pkg/webhook-2.8.0?dir=webhook;
     k3d.url = github:defn/pkg/k3d-5.4.6-3?dir=k3d;
+    kubectl.url = github:defn/pkg/kubectl-1.24.9-3?dir=kubectl;
     localdev.url = github:defn/pkg/localdev-0.0.1?dir=localdev;
   };
 
