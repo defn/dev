@@ -76,6 +76,7 @@
             this-coder-server-wait-for-alive
             this-coder-initial-user
             this-coder-template-docker
+            ${BROWSER:-open} http://localhost:555
           ) &
             this-coder-server-for-orgs
         '';
