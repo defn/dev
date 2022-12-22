@@ -30,11 +30,11 @@
         '';
 
         packages.coder-server-for-orgs = pkgs.writeShellScriptBin "this-coder-server-for-orgs" ''
-          coder server --access-url http://localhost:5555 --http-address localhost:5555 --oauth2-github-allow-signups=true --oauth2-github-client-id=$(pass coder_github_client_id) --oauth2-github-client-secret=$(pass coder_github_client_secret) --oauth2-github-allow-signups --oauth2-github-allowed-orgs=$(pass coder_github_allowed_orgs)
+          coder server --no-feature-warning --access-url http://localhost:5555 --http-address localhost:5555 --oauth2-github-allow-signups=true --oauth2-github-client-id=$(pass coder_github_client_id) --oauth2-github-client-secret=$(pass coder_github_client_secret) --oauth2-github-allow-signups --oauth2-github-allowed-orgs=$(pass coder_github_allowed_orgs)
         '';
 
         packages.coder-server-for-everyone = pkgs.writeShellScriptBin "this-coder-server-for-everyone" ''
-          coder server --access-url http://localhost:5555 --http-address localhost:5555 --oauth2-github-allow-signups=true --oauth2-github-client-id=$(pass coder_github_client_id) --oauth2-github-client-secret=$(pass coder_github_client_secret) --oauth2-github-allow-signups --oauth2-github-allow-everyone
+          coder server --no-feature-warning --access-url http://localhost:5555 --http-address localhost:5555 --oauth2-github-allow-signups=true --oauth2-github-client-id=$(pass coder_github_client_id) --oauth2-github-client-secret=$(pass coder_github_client_secret) --oauth2-github-allow-signups --oauth2-github-allow-everyone
         '';
 
         packages.coder-initial-user = pkgs.writeShellScriptBin "this-coder-initial-user" ''
@@ -71,7 +71,7 @@
         packages.coder-init = pkgs.writeShellScriptBin "this-coder-init" ''
            (
              this-coder-server-wait-for-alive
-             this-coder-initial-user
+             this-coder-initial-user | cat
              this-coder-template-docker
              ''${BROWSER:-open} http://localhost:5555
            ) &
