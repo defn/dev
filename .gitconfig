@@ -17,6 +17,3 @@
 
 [pull]
   rebase = false
-
-[credential]
-  helper = pass
