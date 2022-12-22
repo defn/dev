@@ -40,15 +40,20 @@ k3d:
     COPY etc/k3s-wrapper.sh /bin/k3s
 
     USER ubuntu
+    WORKDIR /home/ubuntu
     COPY --dir --chown=ubuntu:ubuntu +devcontainer/nix /nix
     RUN ln -nfs /nix/var/nix/profiles/per-user/ubuntu/profile /home/ubuntu/.nix-profile \
         && mkdir -p /home/ubuntu/.config /home/ubuntu/.config/nix \
         && echo experimental-features = nix-command flakes > /home/ubuntu/.config/nix/nix.conf \
-        && echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh > .bashrc
+        && (echo export USER=ubuntu; echo export HOME=/home/ubuntu; echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh) > /home/ubuntu/.profile
 
-    RUN false
+    RUN ~/.nix-profile/bin/nix profile install nixpkgs#bashInteractive
 
     USER root
+    WORKDIR /
+
+    RUN ln -nfs $(ls -trhd /nix/store/*bash-interactive*/bin/bash | head -1) /bin/bash \
+        && sed 's#/bin/sh#/bin/bash#' -i /etc/passwd
 
     IF [ "$image" != "" ]
         SAVE IMAGE --push ${image}
