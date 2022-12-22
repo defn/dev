@@ -6,7 +6,7 @@ local_resource("coder",
     serve_cmd=[
         "bash", "-c",
         """
-            this-coder-kill
+            this-coder-server-kill
             this-coder-init
         """
     ]
