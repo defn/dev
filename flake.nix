@@ -126,7 +126,6 @@
             gnupg
             powerline-go
             vim
-            git-crypt
             rsync
             gnumake
             dnsutils
