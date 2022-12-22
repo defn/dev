@@ -63,7 +63,7 @@
           coder template create --yes
           coder template push --yes
           # https://github.com/coder/coder/tree/main/site/static/icon
-          coder template edit docker-code-server --icon "/icon/k8s.svg"
+          coder template edit k3d-code-server --icon "/icon/k8s.png"
         '';
 
         packages.coder-server-wait-for-alive = pkgs.writeShellScriptBin "this-coder-server-wait-for-alive" ''
