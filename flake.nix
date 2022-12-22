@@ -49,6 +49,7 @@
         '';
 
         packages.coder-template-docker = pkgs.writeShellScriptBin "this-coder-template-docker" ''
+          set -exfu
           cd ~/coder/docker-code-server
           coder template create --yes
           coder template push --yes
@@ -57,6 +58,7 @@
         '';
 
         packages.coder-template-k3d = pkgs.writeShellScriptBin "this-coder-template-k3d" ''
+          set -exfu
           cd ~/coder/k3d-code-server
           coder template create --yes
           coder template push --yes
