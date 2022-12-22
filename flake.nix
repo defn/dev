@@ -71,7 +71,6 @@
         packages.coder-init = pkgs.writeShellScriptBin "this-coder-init" ''
            this-coder-server-kill
 
-           this-coder-delete-database
            (
              this-coder-server-wait-for-alive
              this-coder-initial-user
