@@ -47,7 +47,10 @@ k3d:
         && echo experimental-features = nix-command flakes > /home/ubuntu/.config/nix/nix.conf \
         && (echo export USER=ubuntu; echo export HOME=/home/ubuntu; echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh) > /home/ubuntu/.profile
 
-    RUN ~/.nix-profile/bin/nix profile install nixpkgs#bashInteractive
+    RUN for a in bashInteractive rsync dnsutils nettools wget curl procps less htop; do \
+            ~/.nix-profile/bin/nix profile install nixpkgs#$a; \
+            done \
+        && ~/.nix-profile/bin/nix profile install github:defn/pkg/tailscale-1.34.1-2?dir=tailscale
 
     USER root
     WORKDIR /
