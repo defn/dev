@@ -1,49 +1,19 @@
+# tmp
+export TMPDIR="${TMPDIR:-/tmp}"
+export TEMPDIR="${TEMPDIR:-/tmp}"
+
+# nix
 if [[ "Linux" == "$(uname -s)" ]]; then
 	export USER=ubuntu
 	export LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
 	export LC_ALL=C.UTF-8
 fi
 
-export TMPDIR="${TMPDIR:-/tmp}"
-export TEMPDIR="${TEMPDIR:-/tmp}"
-
 if [ -e /home/ubuntu/.nix-profile/etc/profile.d/nix.sh ]; then
 	. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh
 else
 	PATH="/nix/var/nix/profiles/default/bin:$PATH"
 fi
-
-function gs {
-	git status -sb "$@"
-}
-
-function vi {
-	if [[ -n "${VSCODE_GIT_ASKPASS_NODE:-}" ]]; then
-		if [[ ! -f "${1:-}" ]]; then
-			echo "ERROR: file $1 not found" 1>&2
-			return 1
-		fi
-
-		case "${VSCODE_GIT_ASKPASS_NODE}" in
-			*/code-server*)
-				command code-server "$@"
-				;;
-			*)
-				command code "$@"
-				;;
-		esac
-	else
-		command vi "$@"
-	fi
-}
-
-function pc {
-	pre-commit "$@"
-}
-
-function pca {
-	pc run --all "$@"
-}
 
 # python
 if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$HOME/.local/bin:$PATH"; fi
@@ -80,14 +50,12 @@ export NEXT_TELEMETRY_DISABLED=1
 export GOCACHE="$HOME/.cache/go-build"
 export GOMODCACHE="$HOME/.cache/go-mod"
 
-# awscli
-if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$PATH:/usr/local/aws-cli/bin"; fi
-
 # earthly
 #export EARTHLY_BUILDKIT_HOST="${EARTHLY_BUILDKIT_HOST:-tcp://$(uname -n):8372}"
 unset EARTHLY_BUILDKIT_HOST
 export DOCKER_BUILDKIT="${DOCKER_BUILDKIT:-1}"
-if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$PATH:/usr/local/gcloud/google-cloud-sdk/bin"; fi
+
+# gcloud
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 # hof
@@ -99,7 +67,7 @@ export HOF_TELEMETRY_DISABLED=1
 # kubectl
 export KUBECONFIG_ALL="$HOME/.kube/config"
 
-# vscode
+# editor
 export CODER_TELEMETRY=false
 export EDITOR=vim
 if [[ -n "${VSCODE_GIT_ASKPASS_NODE:-}" ]]; then
@@ -186,7 +154,6 @@ if tty >/dev/null; then
   fi
 fi
 
-
 # install
 if [[ -n "${VSCODE_GIT_ASKPASS_NODE:-}" ]]; then
 	if [[ "Linux" == "$(uname -s)" ]]; then
@@ -197,3 +164,36 @@ if [[ -n "${VSCODE_GIT_ASKPASS_NODE:-}" ]]; then
 		fi
 	fi
 fi
+
+# aliases
+function gs {
+	git status -sb "$@"
+}
+
+function vi {
+	if [[ -n "${VSCODE_GIT_ASKPASS_NODE:-}" ]]; then
+		if [[ ! -f "${1:-}" ]]; then
+			echo "ERROR: file $1 not found" 1>&2
+			return 1
+		fi
+
+		case "${VSCODE_GIT_ASKPASS_NODE}" in
+			*/code-server*)
+				command code-server "$@"
+				;;
+			*)
+				command code "$@"
+				;;
+		esac
+	else
+		command vi "$@"
+	fi
+}
+
+function pc {
+	pre-commit "$@"
+}
+
+function pca {
+	pc run --all "$@"
+}
