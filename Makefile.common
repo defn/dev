@@ -56,13 +56,9 @@ install:
 install-inner:
 	$(MAKE) symlinks perms
 
-	mark -- configure dotfiles, password-store
-	mkdir -p ~/work/.codespaces/.persistedshare/dotfiles
+	mark -- configure password-store
 	mkdir -p ~/work/password-store
 	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
-		if ! test -d ~/work/.codespaces/.persistedshare/dotfiles/.git/.; then \
-			git clone https://github.com/$${GIT_AUTHOR_NAME}/dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
-		fi; \
 		if ! test -d ~/work/password-store/.git/.; then \
 			git clone https://github.com/$${GIT_AUTHOR_NAME}/password-store ~/work/password-store; \
 		fi; \
@@ -88,7 +84,12 @@ install-inner:
 	@env VAULT_ADDR="http://localhost:8200" VAULT_TOKEN="$$(pass Initial_Root_Token)" $(MAKE) manage
 
 	mark -- dotfiles
-	if test -x work/.codespaces/.persistedshare/dotfiles/script/bootstrap; then work/.codespaces/.persistedshare/dotfiles/script/bootstrap; fi
+	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
+		mkdir -p ~/.config/coderv2/dotfiles; \
+		rm -rf ~/work/.codespaces/.persistedshare/dotfiles; \
+		ln -nfs ~/.config/coderv2/dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
+		coder dotfiles --yes https://github.com/amanibhavam/dotfiles; \
+	fi
 
 down:
 	touch .local/share/code-server/idle
