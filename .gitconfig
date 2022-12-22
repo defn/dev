@@ -1,1 +1,21 @@
-.password-store/config/git-config
+#GIT_AUTHOR_EMAIL=iam@defn.sh
+#GIT_COMMITTER_EMAIL=iam@defn.sh
+#GIT_AUTHOR_NAME=amanibhavam
+#GIT_COMMITTER_NAME=amanibhavam
+
+[push]
+  default = simple
+
+[core]
+  quotepath = false
+
+[url "https://github.com/"]
+  insteadOf = git@github.com:
+  insteadOf = git://github.com/
+  insteadOf = ssh://git@github.com/
+
+[pull]
+  rebase = false
+  
+[credential]
+  helper = pass
