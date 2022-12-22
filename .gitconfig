@@ -1,7 +1,8 @@
-#GIT_AUTHOR_EMAIL=iam@defn.sh
-#GIT_COMMITTER_EMAIL=iam@defn.sh
-#GIT_AUTHOR_NAME=amanibhavam
-#GIT_COMMITTER_NAME=amanibhavam
+# https://git-scm.com/book/en/v2/Git-Internals-Environment-Variables
+# export GIT_AUTHOR_EMAIL=iam@defn.sh
+# export GIT_COMMITTER_EMAIL=iam@defn.sh
+# export GIT_AUTHOR_NAME=amanibhavam
+# export GIT_COMMITTER_NAME=amanibhavam
 
 [push]
   default = simple
@@ -16,6 +17,6 @@
 
 [pull]
   rebase = false
-  
+
 [credential]
   helper = pass
