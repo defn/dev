@@ -132,7 +132,6 @@
             nettools
             openssh
             pre-commit
-            vim
             aws-vault
             nixpkgs-fmt
             jq
