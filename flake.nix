@@ -56,6 +56,13 @@
         '';
 
         packages.coder-server-kill = pkgs.writeShellScriptBin "this-coder-server-kill" ''
+          pkill -9 -f /coder
+          pkill -f postgres
+          this-coder-server-wait-for-dead
+          pkill -f /this-coder
+        '';
+
+        packages.coder-server-stop = pkgs.writeShellScriptBin "this-coder-server-stop" ''
           pkill -f /coder
           this-coder-server-wait-for-dead
           pkill -f /this-coder
@@ -81,6 +88,7 @@
             packages.coder-server-for-everyone
             packages.coder-server-wait-for-alive
             packages.coder-server-wait-for-dead
+            packages.coder-server-stop
             packages.coder-server-kill
             packages.coder-initial-user
             packages.coder-template-docker
