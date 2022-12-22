@@ -64,8 +64,6 @@
         packages.coder-init = pkgs.writeShellScriptBin "this-coder-init" ''
           this-coder-server-kill
 
-          bundler install
-
           this-coder-delete-database
           (
             this-coder-server-wait-for-alive
@@ -78,7 +76,6 @@
         devShell = wrap.devShell {
           devInputs = [
             pkgs.gomod2nix
-            pkgs.ruby
             packages.coder-delete-database
             packages.coder-server-for-orgs
             packages.coder-server-for-everyone
