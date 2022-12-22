@@ -49,12 +49,19 @@
         '';
 
         packages.coder-template-docker = pkgs.writeShellScriptBin "this-coder-template-docker" ''
-          cd
-          cd docker-code-server
+          cd ~/coder/docker-code-server
           coder template create --yes
           coder template push --yes
           # https://github.com/coder/coder/tree/main/site/static/icon
           coder template edit docker-code-server --icon "/icon/code.svg"
+        '';
+
+        packages.coder-template-k3s = pkgs.writeShellScriptBin "this-coder-template-k3d" ''
+          cd ~/coder/k3d-code-server
+          coder template create --yes
+          coder template push --yes
+          # https://github.com/coder/coder/tree/main/site/static/icon
+          coder template edit docker-code-server --icon "/icon/k8s.svg"
         '';
 
         packages.coder-server-wait-for-alive = pkgs.writeShellScriptBin "this-coder-server-wait-for-alive" ''
