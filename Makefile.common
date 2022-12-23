@@ -270,19 +270,18 @@ pull-repos: # Pull dev, app, home, and password-store repos
 	for a in . .dotfiles .password-store; do (echo; echo "$$a"; cd "$$a" && git pull) || true; done
 
 global: # Provision global from control plane
-	env DEFN_DEV_HOST_PORT=6444 DEFN_DEV_HOST_API=host.k3d.internal \
+	env DEFN_DEV_HOST_PORT=6444 DEFN_DEV_HOST_API=host.docker.internal \
 		DEFN_DEV_NAME=k3d-$@ \
 		DOCKER_CONTEXT=host \
 		$(MAKE) this name=$@
 
 smiley: # Provision smiley from control plane
-	env DEFN_DEV_HOST_PORT=6445 DEFN_DEV_HOST_API=host.k3d.internal \
+	env DEFN_DEV_HOST_PORT=6445 DEFN_DEV_HOST_API=host.docker.internal \
 		DEFN_DEV_NAME=k3d-$@ \
 		DOCKER_CONTEXT=host \
 		$(MAKE) this name=$@
 
 control: # Provision control plane
-	$(MAKE) pull-repos
 	$(MAKE) build
 	env DEFN_DEV_HOST_PORT=6443 DEFN_DEV_HOST_API=127.0.0.1 \
 		DEFN_DEV_NAME=k3d-$@ \
