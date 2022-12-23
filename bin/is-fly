@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-function main {
-  [[ "$(cat /proc/1/cmdline | perl -pe 's{.$}{}')" == "/fly/init" ]]
-}
-
-main "$@"

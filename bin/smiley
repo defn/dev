@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-function main {
-	set -efu
-
-	exec kubectl --context k3d-smiley "$@"
-}
-
-main "$@"
