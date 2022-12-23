@@ -1,0 +1,16 @@
+mirrors:
+  "169.254.32.1:5000":
+    endpoint:
+      - http://host.docker.internal:5000
+  "docker.io":
+    endpoint:
+      - http://host.docker.internal:5000
+  "ghcr.io":
+    endpoint:
+      - http://host.docker.internal:5000
+  "public.ecr.aws":
+    endpoint:
+      - http://host.docker.internal:5000
+  "quay.io":
+    endpoint:
+      - http://host.docker.internal:5000
