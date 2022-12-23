@@ -135,7 +135,6 @@
             openssh
             pre-commit
             aws-vault
-            nixpkgs-fmt
             jq
             fzf
             git
@@ -149,6 +148,9 @@
 
             docker
             docker-credential-helpers
+
+            nixpkgs-fmt
+            cachix
           ];
         };
 
