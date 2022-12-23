@@ -178,7 +178,6 @@ cluster-inner:
 		--registry-config etc/k3d-registries.yaml $(DEFN_DEV_HOST_PORTMAPS) \
 		--env bar=baz@server:0
 	docker --context=host update --restart=no $(context)-server-0
-	-cd $(app)/tf/$(name) && make init get plan apply
 
 vault-unseal:
 	pass Unseal_Key_1 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') http://localhost:8200/v1/sys/unseal
@@ -248,16 +247,6 @@ this:
 	for a in sa-signer.key sa-signer.key.pub sa-signer-pkcs8.pub; do (cd tmp/$(name)/var/lib/rancher/k3s/server/tls && pass piw-$(name)-$$a | base64 -d > $$a); done
 	env DEFN_DEV_ARCHIVE="$$(cd tmp/$(name) && tar cvf - . | base64 | xargs | sed 's# ##g')" \
 		$(MAKE) cluster name=$(name)
-	if test -z "$(DEFN_DEV_MACOS)"; then \
-		env VAULT_ADDR="http://localhost:8200" VAULT_TOKEN="$$(pass Initial_Root_Token)" $(MAKE) vault-trust k=k3d-$(name); \
-		argocd cluster add --yes --upsert k3d-$(name); \
-		control apply -f $(app)/e/k3d-$(name).yaml; \
-		app sync k3d-$(name); \
-	else \
-		(cd ~/.password-store && oras push localhost:5000/defn/bootstrap:password-store .git:+tar); \
-		(cd app && oras push localhost:5000/defn/bootstrap:app .git:+tar); \
-		kubectl --context k3d-$(name) rollout -n default status statefulset $(name) --watch; \
-		fi
 
 registry:
 	-k3d registry create registry --port 0.0.0.0:5000
