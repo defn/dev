@@ -8,7 +8,7 @@
     webhook.url = github:defn/pkg/webhook-2.8.0?dir=webhook;
     k3d.url = github:defn/pkg/k3d-5.4.6-3?dir=k3d;
     kubectl.url = github:defn/pkg/kubectl-1.24.9-3?dir=kubectl;
-    localdev.url = github:defn/pkg/localdev-0.0.1?dir=localdev;
+    localdev.url = github:defn/pkg/localdev-0.0.2?dir=localdev;
   };
 
   outputs = inputs:

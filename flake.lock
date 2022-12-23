@@ -2072,26 +2072,43 @@
         "type": "github"
       }
     },
+    "latest": {
+      "locked": {
+        "lastModified": 1671043181,
+        "narHash": "sha256-AnXU81L8qX5GR7eo+xReYGjJW279rV1GEdvfWeS9rk0=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4938e72add339f76d795284cb5a3aae85d02ee53",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4938e72add339f76d795284cb5a3aae85d02ee53",
+        "type": "github"
+      }
+    },
     "localdev": {
       "inputs": {
         "coder": "coder",
         "codeserver": "codeserver",
         "dev": "dev_18",
+        "latest": "latest",
         "terraform": "terraform"
       },
       "locked": {
         "dir": "localdev",
-        "lastModified": 1671610532,
-        "narHash": "sha256-r1dCp8/8ETiBNPxv1C7y0RQBWh+oqSF+sKcsk0Xeuwc=",
+        "lastModified": 1671780697,
+        "narHash": "sha256-IajRDTEMPt/Vaq1w5rgKwBqwAKeaBVIpFLM8H30E20g=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "23f6fb763a293010f587f177c83bfecec1b5e886",
+        "rev": "bb9b817f5e672930d24f55f5d6c3e687d01802cd",
         "type": "github"
       },
       "original": {
         "dir": "localdev",
         "owner": "defn",
-        "ref": "localdev-0.0.1",
+        "ref": "localdev-0.0.2",
         "repo": "pkg",
         "type": "github"
       }
