@@ -1,7 +1,0 @@
-type: ZoneIngress
-name: ingress
-networking:
-  address: {{ tsip }}
-  port: 10000
-  advertisedAddress: {{ tsip }}
-  advertisedPort: 10000
