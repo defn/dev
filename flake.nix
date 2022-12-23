@@ -102,19 +102,19 @@
         '';
 
         devShell = wrap.devShell {
-          devInputs = [
+          devInputs = with packages; [
             pkgs.gomod2nix
-            packages.coder-delete-database
-            packages.coder-server-for-orgs
-            packages.coder-server-for-everyone
-            packages.coder-server-wait-for-alive
-            packages.coder-server-wait-for-dead
-            packages.coder-server-stop
-            packages.coder-server-kill
-            packages.coder-initial-user
-            packages.coder-template-docker
-            packages.coder-template-k3d
-            packages.coder-init
+            coder-delete-database
+            coder-server-for-orgs
+            coder-server-for-everyone
+            coder-server-wait-for-alive
+            coder-server-wait-for-dead
+            coder-server-stop
+            coder-server-kill
+            coder-initial-user
+            coder-template-docker
+            coder-template-k3d
+            coder-init
           ];
         };
 
