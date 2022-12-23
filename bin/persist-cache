@@ -39,6 +39,8 @@ function cache {
 
   persist ~/work/config-temporalite ~/.config/temporalite
 
+  persist ~/work/config-kube ~/.kube
+
   persist ~/work/local-gh ~/.local/share/gh
 
   persist ~/work/terraform-d ~/.terraform.d
