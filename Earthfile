@@ -88,7 +88,7 @@ devcontainer:
     COPY .config/nix/nix.conf  .config/nix/nix.conf
 
     # nix profile
-    RUN bash -c '~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes profile install nixpkgs#{nix-direnv,direnv,pinentry,nixpkgs-fmt}'
+    RUN bash -c '~/.nix-profile/bin/nix profile install nixpkgs#{nix-direnv,direnv,pinentry,nixpkgs-fmt}'
 
     # defn/dev
     COPY --dir --chown=ubuntu:ubuntu . .
