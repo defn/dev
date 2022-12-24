@@ -100,3 +100,33 @@ devcontainer:
     IF [ "$image" != "" ]
         SAVE IMAGE --push ${image}
     END
+
+dev:
+    ARG image
+    ARG arch
+
+    FROM pkg+root --arch=${arch}
+
+    # nix
+    RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile ' \
+        && mkdir -p .config/nix
+    COPY .config/nix/nix.conf  .config/nix/nix.conf
+
+    # nix profile
+    RUN bash -c '~/.nix-profile/bin/nix profile install nixpkgs#{nix-direnv,direnv,pinentry,nixpkgs-fmt}'
+
+    # defn/dev flake
+    COPY flake.* SLUG VERSION .
+    RUN ~/.nix-profile/bin/nix build && rm -f result
+
+    # defn/dev
+    COPY --dir --chown=ubuntu:ubuntu . .
+    RUN (git clean -nfd || true) \
+        && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
+    RUN ~/.nix-profile/bin/nix build && rm -f result
+
+    SAVE ARTIFACT /nix nix
+
+    IF [ "$image" != "" ]
+        SAVE IMAGE --push ${image}
+    END
