@@ -134,8 +134,8 @@ dev:
     RUN --no-cache true
     RUN --mount=type=cache,target=/tmp/cache/nix --secret CACHIX_AUTH_TOKEN --secret CACHIX_SIGNING_KEY \
         sudo install -d -m 0755 -o ubuntu -g ubuntu /tmp/cache/nix \
-        && (~/.nix-profile/bin/nix path-info --all | ~/bin/e n cache || true) \
-        && (~/.nix-profile/bin/nix path-info --all | ~/bin/e n cache defn || true) \
+        && (~/.nix-profile/bin/nix path-info --all | ~/bin/e n cache-local || true) \
+        && (~/.nix-profile/bin/nix path-info --all | ~/bin/e n cache-remote defn || true) \
         && rm -f result
     RUN (git clean -nfd || true) \
         && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd) \
