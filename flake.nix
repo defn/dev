@@ -8,6 +8,8 @@
     webhook.url = github:defn/pkg/webhook-2.8.0?dir=webhook;
     k3d.url = github:defn/pkg/k3d-5.4.6-3?dir=k3d;
     kubectl.url = github:defn/pkg/kubectl-1.25.5-0?dir=kubectl;
+    kustomize.url = github:defn/pkg/kustomize-4.5.7-3?dir=kustomize;
+    helm.url = github:defn/pkg/helm-3.10.2-3?dir=helm;
     localdev.url = github:defn/pkg/localdev-0.0.2?dir=localdev;
   };
 
