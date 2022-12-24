@@ -6,11 +6,15 @@ local_resource("coder",
     serve_cmd=[
         "bash", "-c",
         """
-            eval "$(direnv hook bash)"
-	        direnv reload
-	        _direnv_hook
-            this-coder-server-kill
-            this-coder-init
+            if [[ "Darwin" == "$(uname -s)" ]]; then
+                eval "$(direnv hook bash)"
+                direnv reload
+                _direnv_hook
+                this-coder-server-kill
+                this-coder-init
+            else
+                sleep infinity
+            fi
         """
     ]
 )
