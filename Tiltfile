@@ -14,3 +14,26 @@ local_resource("coder",
         """
     ]
 )
+
+# Starts the docker builder, proxies at localhost:2375.  Configures docker
+# client with creds to publish to fly registry.
+local_resource("proxy-docker",
+    serve_cmd=[
+        "bash", "-c",
+        """
+	        flyctl auth docker
+            flyctl machine start "$(flyctl machine list -a $(flyctl apps list | grep '^fly-builder' | awk '{print $1}') --json | jq -r '.[].id')"
+            exec flyctl proxy 2375:2375 -a "$(flyctl apps list | grep 'fly-builder' | awk '{print $1}' | head -1)"
+        """
+    ],
+)
+
+# Starts the machine api-proxy.
+local_resource("proxy-machine-api",
+    serve_cmd=[
+        "bash", "-c",
+        """
+            exec flyctl machine api-proxy
+        """
+    ],
+)
