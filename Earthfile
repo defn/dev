@@ -133,8 +133,8 @@ dev:
     COPY --dir --chown=ubuntu:ubuntu . .
     RUN --mount=type=cache,target=/tmp/cache/nix --secret CACHIX_AUTH_TOKEN --secret CACHIX_SIGNING_KEY \
         sudo install -d -m 0755 -o ubuntu -g ubuntu /tmp/cache/nix \
-        && ~/bin/e n cache defn \
-        && ~/bin/e n cache \
+        && (~/.nix-profile/bin/nix path-info --all | ~/bin/e n cache) \
+        && (~/.nix-profile/bin/nix path-info --all | ~/bin/e n cache defn) \
         && rm -f result
     RUN (git clean -nfd || true) \
         && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd) \
