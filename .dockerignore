@@ -19,3 +19,4 @@ d/k3d/defn-dev-bootstrap.yaml
 .viminfo
 .wget-hsts
 work
+.direnv
