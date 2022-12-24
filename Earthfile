@@ -128,10 +128,10 @@ dev:
     # defn/dev
     COPY --dir --chown=ubuntu:ubuntu . .
     RUN --secret CACHIX_AUTH_TOKEN --secret CACHIX_SIGNING_KEY ~/bin/e n cache defn \
-        && rm -f result \
-        && rm work
+        && rm -f result
     RUN (git clean -nfd || true) \
-        && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
+        && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd) \
+        && rm -f work
 
     SAVE ARTIFACT /nix nix
 
