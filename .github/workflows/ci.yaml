@@ -61,6 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FORCE_COLOR: 1
+    needs: publish_fly
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -107,11 +108,11 @@ jobs:
           	--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-devcontainer \
           	--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-devcontainer \
           	+build-devcontainer --image ghcr.io/${GITHUB_REPOSITORY}:${TAG}-devcontainer
-    needs: publish_fly
   publish_k3d:
     runs-on: ubuntu-latest
     env:
       FORCE_COLOR: 1
+    needs: publish_devcontainer
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -158,4 +159,3 @@ jobs:
           	--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-k3d \
           	--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-k3d \
           	+build-k3d --image ghcr.io/${GITHUB_REPOSITORY}:${TAG}-k3d
-    needs: publish_devcontainer

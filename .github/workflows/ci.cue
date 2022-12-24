@@ -1,28 +1,32 @@
 package workflows
 
+import (
+	"strings"
+)
+
 name: "CI"
 
-on: push: {
-	branches: [ "main"]
-	tags: [ "v**"]
-}
-
-on: pull_request: {}
-
-jobs: [string]: #EarthlyJob
-
-jobs: {
-	"publish_fly": #PublishBuild & {
-		_n: "fly"
+on: {
+	push: {
+		branches: [ "main"]
+		tags: [ "v**"]
 	}
 
-	"publish_devcontainer": #PublishBuild & {
-		_n:    "devcontainer"
+	pull_request: {}
+}
+
+jobs: [N=string]: #PublishBuild & {
+	_n: strings.Split(N, "_")[1]
+}
+
+jobs: {
+	"publish_fly": {}
+
+	"publish_devcontainer": {
 		needs: "publish_fly"
 	}
 
-	"publish_k3d": #PublishBuild & {
-		_n:    "k3d"
+	"publish_k3d": {
 		needs: "publish_devcontainer"
 	}
 }
