@@ -153,6 +153,11 @@
 
             nixpkgs-fmt
             cachix
+
+            pinentry
+            direnv
+            nix-direnv
+            nixpkgs-fmt
           ];
         };
 

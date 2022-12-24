@@ -119,15 +119,22 @@ dev:
     COPY .config/nix/nix.conf  .config/nix/nix.conf
 
     # nix profile
-    RUN bash -c '~/.nix-profile/bin/nix profile install nixpkgs#{nix-direnv,direnv,pinentry,nixpkgs-fmt}'
+    RUN --mount=type=cache,target=/tmp/cache/nix \
+        sudo install -d -m 0755 -o ubuntu -g ubuntu /tmp/cache/nix \
+        && bash -c '~/.nix-profile/bin/nix profile install nixpkgs#{nix-direnv,direnv,pinentry,nixpkgs-fmt}'
 
     # defn/dev flake
     COPY flake.* SLUG VERSION .
-    RUN ~/.nix-profile/bin/nix build && rm -f result
+    RUN --mount=type=cache,target=/tmp/cache/nix \
+        sudo install -d -m 0755 -o ubuntu -g ubuntu /tmp/cache/nix \
+         && ~/.nix-profile/bin/nix build && rm -f result
 
     # defn/dev
     COPY --dir --chown=ubuntu:ubuntu . .
-    RUN --secret CACHIX_AUTH_TOKEN --secret CACHIX_SIGNING_KEY ~/bin/e n cache defn \
+    RUN --mount=type=cache,target=/tmp/cache/nix --secret CACHIX_AUTH_TOKEN --secret CACHIX_SIGNING_KEY \
+        sudo install -d -m 0755 -o ubuntu -g ubuntu /tmp/cache/nix \
+        && ~/bin/e n cache defn \
+        && ~/bin/e n cache \
         && rm -f result
     RUN (git clean -nfd || true) \
         && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd) \
