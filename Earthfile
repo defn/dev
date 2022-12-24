@@ -42,14 +42,13 @@ k3d:
     USER ubuntu
     WORKDIR /home/ubuntu
     COPY --dir --chown=ubuntu:ubuntu +devcontainer/nix /nix
+    RUN mkdir -p /home/ubuntu/.config/nix
+    COPY .config/nix/nix.conf  /home/ubuntu/.config/nix/nix.conf
     RUN ln -nfs /nix/var/nix/profiles/per-user/ubuntu/profile /home/ubuntu/.nix-profile \
-        && mkdir -p /home/ubuntu/.config /home/ubuntu/.config/nix \
-        && echo experimental-features = nix-command flakes > /home/ubuntu/.config/nix/nix.conf \
         && (echo export USER=ubuntu; echo export HOME=/home/ubuntu; echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh) > /home/ubuntu/.profile
 
     RUN for a in bashInteractive rsync dnsutils nettools wget curl procps less htop; do \
-            ~/.nix-profile/bin/nix profile install nixpkgs#$a; \
-            done \
+            ~/.nix-profile/bin/nix profile install nixpkgs#$a; done \
         && ~/.nix-profile/bin/nix profile install github:defn/pkg/tailscale-1.34.1-2?dir=tailscale
 
     USER root
@@ -84,7 +83,11 @@ devcontainer:
     FROM pkg+root --arch=${arch}
 
     # nix
-    RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile '
+    RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile ' \
+        && mkdir -p .config/nix
+    COPY .config/nix/nix.conf  .config/nix/nix.conf
+
+    # nix profile
     RUN bash -c '~/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes profile install nixpkgs#{nix-direnv,direnv,pinentry,nixpkgs-fmt}'
 
     # defn/dev
