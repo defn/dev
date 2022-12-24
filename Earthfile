@@ -107,6 +107,12 @@ dev:
 
     FROM pkg+root --arch=${arch}
 
+    # work
+    COPY bin/persist-cache /tmp/
+    RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /work \
+        && ln -nfs /work .
+    RUN /tmp/persist-cache
+
     # nix
     RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile ' \
         && mkdir -p .config/nix
@@ -121,9 +127,11 @@ dev:
 
     # defn/dev
     COPY --dir --chown=ubuntu:ubuntu . .
+    RUN --secret CACHIX_AUTH_TOKEN --secret CACHIX_SIGNING_KEY ~/bin/e n cache defn \
+        && rm -f result \
+        && rm work
     RUN (git clean -nfd || true) \
         && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
-    RUN ~/.nix-profile/bin/nix build && rm -f result
 
     SAVE ARTIFACT /nix nix
 
