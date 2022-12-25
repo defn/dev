@@ -228,6 +228,7 @@ global: # Provision global zone from control plane
 		DEFN_DEV_NAME=k3d-$@ \
 		DOCKER_CONTEXT=host \
 		$(MAKE) cluster name=$@
+	kubectl config set-context k3d-global --cluster=k3d-global --user=admin@k3d-global --namespace argocd
 
 cluster:
 	-k3d cluster delete $(name)
