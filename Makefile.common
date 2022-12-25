@@ -232,19 +232,12 @@ global: # Provision global zone from control plane
 cluster:
 	-k3d cluster delete $(name)
 	for a in tailscale irsa; do \
-		docker volume rm $(name)-tailscale || true; \
 		docker volume create $(name)-tailscale; \
-		done
-	for a in tailscale irsa; do \
 		(pass $${a}_$(name) | base64 -d) | docker run --rm -i \
 			-v $(name)-tailscale:/var/lib/tailscale \
 			-v $(name)-irsa:/var/lib/rancher/k3s/server/tls \
 			ubuntu bash -c 'cd / & tar xvf -'; \
 		done
-	docker run --rm -i \
-		-v $(name)-tailscale:/var/lib/tailscale \
-		-v $(name)-irsa:/var/lib/rancher/k3s/server/tls \
-		ubuntu bash -c 'find /var/lib/tailscale /var/lib/rancher -ls'
 	@k3d cluster create $(name) \
 		--config etc/k3d.yaml \
 		--registry-config etc/k3d-registries.yaml $(DEFN_DEV_HOST_PORTMAPS) \
