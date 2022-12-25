@@ -68,9 +68,13 @@ function main {
 		*)
 		case "$#" in
 			0)
+				# kv
 				vault kv list kv
 				;;
 			1)
+				# kv dev/
+				# kv dev/k3d-global/
+				# kv dev/k3d-global/meh
 				case "$1" in
 					*/)
 						vault kv list "kv/$1"
@@ -87,14 +91,17 @@ function main {
 						vault kv get -mount=kv -format=json -version="${version}" "kv/$1" | jq .data.data
 						;;
 					-)
+						# jq -n '{}' | kv dev/k3d-global/meh -
 						vault kv put -mount=kv "$@"
 						;;
 					*)
+						# kv dev/k3d-global/meh hello=world
 						vault kv patch -mount=kv "$@"
 						;;
 				esac
 				;;
 			*)
+				# kv dev/k3d-global/meh hello=world hi=there
 				vault kv patch -mount=kv "$@"
 				;;
 		esac
