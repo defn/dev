@@ -63,15 +63,6 @@
           coder template edit docker-code-server --icon "/icon/code.svg"
         '';
 
-        packages.coder-template-k3d = pkgs.writeShellScriptBin "this-coder-template-k3d" ''
-          set -exfu
-          cd ~/coder/k3d-code-server
-          coder template create --yes || true
-          coder template push --yes
-          # https://github.com/coder/coder/tree/main/site/static/icon
-          coder template edit k3d-code-server --icon "/icon/k8s.png"
-        '';
-
         packages.coder-server-wait-for-alive = pkgs.writeShellScriptBin "this-coder-server-wait-for-alive" ''
           while [[ "000" == "$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 1 -m 1 http://localhost:5555)" ]]; do sleep 1; done
         '';
@@ -98,7 +89,6 @@
              this-coder-server-wait-for-alive
              this-coder-initial-user | cat
              this-coder-template-docker
-             this-coder-template-k3d
              ''${BROWSER:-open} http://localhost:5555
            ) &
 
