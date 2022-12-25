@@ -241,12 +241,17 @@ cluster:
 			-v $(name)-irsa:/var/lib/rancher/k3s/server/tls \
 			ubuntu bash -c 'cd / & tar xvf -'; \
 		done
+	docker run --rm -i \
+		-v $(name)-tailscale:/var/lib/tailscale \
+		-v $(name)-irsa:/var/lib/rancher/k3s/server/tls \
+		ubuntu bash -c 'find /var/lib/tailscale /var/lib/rancher -ls'
 	@k3d cluster create $(name) \
 		--config etc/k3d.yaml \
 		--registry-config etc/k3d-registries.yaml $(DEFN_DEV_HOST_PORTMAPS) \
 		--volume $(name)-tailscale:/var/lib/tailscale@server:0 \
 		--volume $(name)-irsa:/var/lib/rancher/k3s/server/tls2@server:0 \
-		--k3s-node-label env=$(name)@server:0
+		--k3s-node-label env=$(name)@server:0 \
+		--no-rollback
 	docker --context=host update --restart=no $(context)-server-0
 
 registry:
