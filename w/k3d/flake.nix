@@ -34,6 +34,7 @@
           name=$1; shift
 
           export DEFN_DEV_HOST_PORT=6443 DEFN_DEV_NAME=k3d-$name DOCKER_CONTEXT=host
+          export DEFN_DEV_HOST=k3d-$name
 
           this-k3d-create $name
 

@@ -1,21 +1,4 @@
-repo ?=
-push ?= --push
-name ?= $(shell uname -n | cut -d. -f1 | tr A-Z a-z | perl -pe 's{-\d$$}{}')
-k3d_name ?= $(name)
-context ?= k3d-$(name)
-podname ?= $(name)-0
-control ?= $(shell echo $(name) | sed s/-0//)
-domain ?= $(shell tailscale cert 2>&1 | grep 'For domain' | cut -d'"' -f2 | cut -d. -f2-)
-node ?= k3d-control-server-0
-n ?=
-k ?=
-r ?= bash
-
 dummy_ip ?= 169.254.32.1
-
-DEFN_DEV_HOST      ?= "k3d-$(name).${domain}"
-DEFN_DEV_HOST_API  ?= "$${DEFN_DEV_HOST_API:-127.0.0.1}"
-DEFN_DEV_HOST_PORT ?= "$${DEFN_DEV_HOST_PORT:-6443}"
 
 first = $(word 1, $(subst -, ,$@))
 second = $(word 2, $(subst -, ,$@))
@@ -94,66 +77,14 @@ down:
 
 logout:
 	-echo yes | gh auth logout --hostname github.com
-	-argocd logout argocd-server.argocd.svc
 	-echo RELOADAGENT | gpg-connect-agent
 
 login:
 	mark -- configure kubeconfig, argocd
 	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then $(MAKE) kubeconfig; $(MAKE) argocd-login || true; fi
 
-	$(MAKE) login-site
-
-manage:
-	mark -- manage clusters
-
-	for a in $$(env DOCKER_CONTEXT=host k3d cluster list 2>/dev/null | tail -n +2 | awk '{print $$1}'); do \
-		argocd cluster add -y --upsert "k3d-$$a"; \
-		control apply -f "app/e/k3d-$$a.yaml"; \
-		if nc -z -v localhost 8200 2>/dev/null; then \
-			env VAULT_ADDR="http://localhost:8200" VAULT_TOKEN="$$(pass Initial_Root_Token)" $(MAKE) vault-trust "k=k3d-$$a"; \
-			"$$a" rollout restart deployment -n external-secrets external-secrets 2>/dev/null || true; \
-			fi; \
-		done
-
-	$(MAKE) manage-site
-
 github-login:
 	if ! gh auth status; then echo Y | gh auth login -p https -h github.com -w; fi
-
-argocd-login:
-	if control get ns argocd 2>/dev/null; then \
-	if ! argocd app list 2>/dev/null >/dev/null; then \
-		argocd login --insecure argocd-server.argocd.svc --username admin --password adminadmin 2>/dev/null \
-			|| (argocd login --insecure argocd-server.argocd.svc --username admin --password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')" \
-					&& argocd account update-password --new-password adminadmin --current-password "$$(kubectl --context argocd get -o json secret argocd-initial-admin-secret | jq -r '.data.password | @base64d')"); \
-		fi; fi
-
-git-crypt-unlock:
-	cd ~/.password-store && if ! git crypt unlock; then \
-		gpg -d .git-crypt-key > key; \
-		git crypt unlock key; \
-		rm -f key; \
-		fi
-
-kubeconfig:
-	-sudo cp /run/secrets/kubernetes.io/serviceaccount/ca.crt /usr/local/share/ca-certificates/
-	sudo cp ~/etc/ca.crt /usr/local/share/ca-certificates/
-	sudo update-ca-certificates
-	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then \
-		kubectl config set-cluster k3d-control --server=https://kubernetes.default.svc.cluster.local --embed-certs --certificate-authority=/run/secrets/kubernetes.io/serviceaccount/ca.crt; \
-		kubectl config set-credentials k3d-control --token="$$(cat /run/secrets/kubernetes.io/serviceaccount/token)"; \
-		kubectl config set-context k3d-control --cluster=k3d-control --user=k3d-control; \
-		if control get ns argocd; then \
-			kubectl config set-cluster argocd --server=https://kubernetes.default.svc.cluster.local --embed-certs --certificate-authority=/run/secrets/kubernetes.io/serviceaccount/ca.crt; \
-			kubectl config set-credentials argocd --token="$$(cat /run/secrets/kubernetes.io/serviceaccount/token)"; \
-			kubectl config set-context argocd --cluster=k3d-control --user=argocd --namespace argocd; \
-			fi; \
-		fi
-	touch ~/.kube/config
-	$(MAKE) perms
-	if docker --context=host ps 2>/dev/null; then env DOCKER_CONTEXT=host k3d kubeconfig merge -d $$(k3d cluster list --no-headers | grep -v ^control | awk '{print $$1}'); fi
-	-kubectl config use-context k3d-control
-	k config get-contexts
 
 pending-images:
 	(control get pods --all-namespaces -o json | gron | grep '\.image ='  | cut -d'"' -f2 | grep -v 169.2543.32.1:5000/ | grep -v /defn/dev: | grep -v /workspace:latest) | sed 's#@.*##' | grep -v ^sha256 | sort -u > .image-versions.txt
@@ -165,47 +96,6 @@ sync: # Sync all the artifacts
 
 sync-images: # Sync images to local cache
 	cat .image-versions.txt | bin/runmany 4 'skopeo copy docker://$$1 docker://127.0.0.1:5000/$${1#*/} --multi-arch all --dest-tls-verify=false'
-
-vault-trust:
-	#-vault auth enable -path "$(k)" kubernetes
-
-	vault write "auth/$(k)/config" \
-		kubernetes_host="$$(kubectl config view -o jsonpath='{.clusters[?(@.name == "$(k)")]}' --raw | jq -r '.cluster.server')" \
-		kubernetes_ca_cert=@<(kubectl config view -o jsonpath='{.clusters[?(@.name == "$(k)")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d') \
-		disable_local_ca_jwt=true
-
-	vault write "auth/$(k)/role/dev" \
-		bound_service_account_names=default \
-		bound_service_account_namespaces=default \
-		policies=dev ttl=1h
-
-	vault write "auth/$(k)/role/external-secrets" \
-		bound_service_account_names=external-secrets \
-		bound_service_account_namespaces=external-secrets \
-		policies=external-secrets ttl=1h
-
-vault-shell:
-	@env VAULT_ADDR="http://localhost:8200" VAULT_TOKEN="$$(pass Initial_Root_Token)" bash
-
-vault-test:
-	@"$(context)" exec -ti -c code-server $(pod) -- bash -c 'env VAULT_ADDR=http://$(tailscale ip -4):8200 ~/bin/e vault write -field=token "auth/$(k)/login" role=default jwt=$$(cat /run/secrets/kubernetes.io/serviceaccount/token)'
-
-vault-login:
-	@vault login token="$$(vault write -field=token "auth/k3d-control/login" role=default jwt=$$(cat /run/secrets/kubernetes.io/serviceaccount/token))"
-
-rebuild:
-	$(MAKE) build
-	ctr -n k8s.io i pull --plain-http ghcr.io/defn/dev:latest-dev
-	ctr -n k8s.io i pull --plain-http 169.254.32.1:5000/workspace:latest
-
-shell:
-	docker run --rm -ti $(repo)defn/dev:latest-dev bash -l
-
-debug-host:
-	control debug "node/$$(control get nodes --no-headers | awk '{print $$1}' | fzf)" --image ghcr.io/defn/dev:latest-dev -it -- bash
-
-debug:
-	control debug -n "$(n)" "$(pod)" --image ghcr.io/defn/dev:latest-dev -it -- bash
 
 registry:
 	-k3d registry create registry --port 0.0.0.0:5000
@@ -221,12 +111,6 @@ ec2:
 		| sed 's#_TSKEY_#'$$(pass k3d-control-tskey)'#' \
 		| sed 's#_K3STOKEN_#'$$(docker --context host exec k3d-control-server-0 cat /var/lib/rancher/k3s/server/node-token)'#' \
 		| control apply -f -
-
-debug-node:
-	control debug node/$(node) -it --image=ghcr.io/defn/dev:latest-dev -- bash -il
-
-debug-docker:
-	docker run -it --rm --privileged --pid=host alpine:edge nsenter -t 1 -m -u -n -i
 
 nix:
 	if ! type -P nix; then . ~/.nix-profile/etc/profile.d/nix.sh; fi && $(MAKE) nix-$(shell uname -s)
