@@ -17,73 +17,86 @@
       config = rec {
         slug = builtins.readFile ./SLUG;
         version = builtins.readFile ./VERSION;
+
+        clusters = {
+          global = {
+            host-ip = "100.64.110.16";
+          };
+          control = {
+            host-ip = "100.106.117.83";
+          };
+          smiley = {
+            host-ip = "100.83.33.86";
+          };
+        };
       };
 
       handler = { pkgs, wrap, system, builders }: rec {
-        packages.global = pkgs.writeShellScriptBin "global" ''
-          set -exfu
+        packages = (pkgs.lib.mapAttrs
+          (name: value: pkgs.writeShellScriptBin name ''
+            set -exfu
 
-          export DEFN_DEV_HOST_API=100.64.110.16
+            export DEFN_DEV_HOST_API=${value.${"host-ip"}}
 
-          this-k3d-provision global
-        '';
+            this-k3d-provision ${name}
+          '')
+          config.clusters) // {
+          k3d-provision = pkgs.writeShellScriptBin "this-k3d-provision" ''
+            set -exfu
 
-        packages.k3d-provision = pkgs.writeShellScriptBin "this-k3d-provision" ''
-          set -exfu
+            name=$1; shift
 
-          name=$1; shift
+            export DEFN_DEV_HOST_PORT=6443 DEFN_DEV_NAME=k3d-$name DOCKER_CONTEXT=host
+            export DEFN_DEV_HOST=k3d-$name
 
-          export DEFN_DEV_HOST_PORT=6443 DEFN_DEV_NAME=k3d-$name DOCKER_CONTEXT=host
-          export DEFN_DEV_HOST=k3d-$name
+            this-k3d-create $name
 
-          this-k3d-create $name
+            kubectl config set-context k3d-$name --cluster=k3d-$name --user=admin@k3d-$name --namespace argocd
+            kubectl config use-context k3d-$name
+            while ! argocd --core app list 2>/dev/null; do date; sleep 5; done
+            argocd cluster add --core --yes --upsert k3d-$name
+            kubectl --context k3d-$name apply -f ~/.dotfiles/e/k3d-$name.yaml
+            while ! app sync argocd/k3d-$name; do sleep 1; done
+          '';
 
-          kubectl config set-context k3d-$name --cluster=k3d-$name --user=admin@k3d-$name --namespace argocd
-          kubectl config use-context k3d-$name
-          while ! argocd --core app list 2>/dev/null; do date; sleep 5; done
-          argocd cluster add --core --yes --upsert k3d-$name
-          kubectl --context k3d-$name apply -f ~/.dotfiles/e/k3d-$name.yaml
-          while ! app sync argocd/k3d-$name; do sleep 1; done
-        '';
+          k3d-create = pkgs.writeShellScriptBin "this-k3d-create" ''
+            set -exfu
 
-        packages.k3d-create = pkgs.writeShellScriptBin "this-k3d-create" ''
-          set -exfu
+            name=$1; shift
 
-          name=$1; shift
+            k3d cluster delete $name || true
 
-          k3d cluster delete $name || true
+            for a in tailscale irsa; do
+              docker volume create $name-$a || true
+              (pass $name-$a | base64 -d) | docker run --rm -i \
+                -v $name-tailscale:/var/lib/tailscale \
+                -v $name-irsa:/var/lib/rancher/k3s/server/tls \
+                -v $name-manifest:/var/lib/rancher/k3s/server/manifests \
+                ubuntu bash -c 'cd / & tar xvf -'
+            done
 
-          for a in tailscale irsa; do
-            docker volume create $name-$a || true
-            (pass $name-$a | base64 -d) | docker run --rm -i \
-              -v $name-tailscale:/var/lib/tailscale \
-              -v $name-irsa:/var/lib/rancher/k3s/server/tls \
+            docker volume create $name-manifest || true
+            kustomize build --enable-helm ~/.dotfiles/k/argo-cd | docker run --rm -i \
               -v $name-manifest:/var/lib/rancher/k3s/server/manifests \
-              ubuntu bash -c 'cd / & tar xvf -'
-          done
+              ubuntu bash -c 'tee /var/lib/rancher/k3s/server/manifests/defn-dev-argo-cd.yaml | wc -l'
 
-          docker volume create $name-manifest || true
-          kustomize build --enable-helm ~/.dotfiles/k/argo-cd | docker run --rm -i \
-            -v $name-manifest:/var/lib/rancher/k3s/server/manifests \
-            ubuntu bash -c 'tee /var/lib/rancher/k3s/server/manifests/defn-dev-argo-cd.yaml | wc -l'
+            k3d cluster create $name \
+              --config k3d.yaml \
+              --registry-config k3d-registries.yaml \
+              --k3s-node-label env=$name@server:0 \
+              --volume $name-tailscale:/var/lib/tailscale@server:0 \
+              --volume $name-irsa:/var/lib/rancher/k3s/server/tls2@server:0 \
+              --volume $name-manifest:/var/lib/rancher/k3s/server/manifests2@server:0
 
-          k3d cluster create $name \
-            --config k3d.yaml \
-            --registry-config k3d-registries.yaml \
-            --k3s-node-label env=$name@server:0 \
-            --volume $name-tailscale:/var/lib/tailscale@server:0 \
-            --volume $name-irsa:/var/lib/rancher/k3s/server/tls2@server:0 \
-            --volume $name-manifest:/var/lib/rancher/k3s/server/manifests2@server:0
-
-          docker --context=host update --restart=no k3d-$name-server-0
-        '';
+            docker --context=host update --restart=no k3d-$name-server-0
+          '';
+        };
 
         devShell = wrap.devShell {
-          devInputs = with packages; [
-            global
+          devInputs = (with packages; [
             k3d-provision
             k3d-create
-          ];
+          ]) ++ (pkgs.lib.mapAttrsToList (name: value: packages.${name}) config.clusters);
         };
 
         defaultPackage = wrap.nullBuilder {
