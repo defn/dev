@@ -2,6 +2,7 @@ analytics_settings(False)
 
 load("ext://uibutton", "cmd_button", "location")
 
+# Starts Coder on macOS
 local_resource("coder",
     serve_cmd=[
         "bash", "-c",
@@ -19,6 +20,20 @@ local_resource("coder",
     ]
 )
 
+# Starts Vault server on Linux
+local_resource("vault-server",
+    serve_cmd=[
+        "bash", "-c",
+        """
+            if [[ "Linux" == "$(uname -s)" ]]; then
+                eval "$(direnv hook bash)"
+                direnv reload
+                _direnv_hook
+                exec vault server -config etc/vault.yaml
+            fi
+        """
+    ],
+)
 # Starts the docker builder, proxies at localhost:2375.  Configures docker
 # client with creds to publish to fly registry.
 local_resource("proxy-docker",
