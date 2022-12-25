@@ -28,8 +28,10 @@ if [[ -z "${DEFN_DEV_TSKEY:-}" ]]; then
   tailscale up --ssh --accept-dns=false --hostname `echo ${domain} | cut -d. -f1`
 fi
 
-mkdir -p /var/lib/rancher/k3s/server/tls
-(set +f; cp /var/lib/rancher/k3s/server/tls2/* /var/lib/rancher/k3s/server/tls/)
+for a in /var/lib/rancher/k3s/server/tls /var/lib/rancher/k3s/server/manifests; do
+  mkdir -p "$a"
+  (set +f; cp ${a}2/* ${a}/)
+done
 
 if [[ -n "${DEFN_DEV_TSKEY:-}" ]]; then
   exec /bin/k3s-real "$@" --node-ip "${ts_ip}" --flannel-iface=tailscale0
