@@ -20,13 +20,16 @@
 
         clusters = {
           global = {
-            host-ip = "100.64.110.16";
+            host-api = "100.64.110.16";
+            host-port = "6444";
           };
           control = {
-            host-ip = "100.106.117.83";
+            host-api = "100.106.117.83";
+            host-port = "6445";
           };
           smiley = {
-            host-ip = "100.83.33.86";
+            host-api = "100.83.33.86";
+            host-port = "6446";
           };
         };
       };
@@ -36,7 +39,8 @@
           (name: value: pkgs.writeShellScriptBin name ''
             set -exfu
 
-            export DEFN_DEV_HOST_API=${value.${"host-ip"}}
+            export DEFN_DEV_HOST_API=${value.${"host-api"}}
+            export DEFN_DEV_HOST_IP="127.0.0.1"
 
             this-k3d-provision ${name}
           '')
@@ -46,16 +50,19 @@
 
             name=$1; shift
 
-            export DEFN_DEV_HOST_PORT=6443 DEFN_DEV_NAME=k3d-$name DOCKER_CONTEXT=host
+            export DOCKER_CONTEXT=host
+            export DEFN_DEV_NAME=k3d-$name 
             export DEFN_DEV_HOST=k3d-$name
 
             this-k3d-create $name
 
             kubectl config set-context k3d-$name --cluster=k3d-$name --user=admin@k3d-$name --namespace argocd
-            kubectl config use-context k3d-$name
+            perl -pe 's{(https://'$DEFN_DEV_HOST_API'):\d+}{$1:6443}' -i  ~/.kube/config  
+            
+            kubectl config use-context k3d-global
             while ! argocd --core app list 2>/dev/null; do date; sleep 5; done
             argocd cluster add --core --yes --upsert k3d-$name
-            kubectl --context k3d-$name apply -f ~/.dotfiles/e/k3d-$name.yaml
+            kubectl --context k3d-global apply -f ~/.dotfiles/e/k3d-$name.yaml
             while ! app sync argocd/k3d-$name; do sleep 1; done
           '';
 

@@ -4,23 +4,23 @@ servers: 1
 agents: 0
 kubeAPI:
   host: "${DEFN_DEV_HOST_API}"
-  hostIP: 0.0.0.0
-  hostPort: "${DEFN_DEV_HOST_PORT}"
+  hostIP: "${DEFN_DEV_HOST_IP}"
+  #hostPort: "${DEFN_DEV_HOST_PORT}"
 image: ghcr.io/defn/dev:latest-k3d
 volumes:
   - volume: work:/mnt/work
     nodeFilters:
       - server:0
-  - volume: earthly-${DEFN_DEV_NAME}:/mnt/earthly
+  - volume: ${DEFN_DEV_NAME}-earthly:/mnt/earthly
     nodeFilters:
       - server:0
-  - volume: dind-${DEFN_DEV_NAME}:/mnt/dind
+  - volume: ${DEFN_DEV_NAME}-dind:/mnt/dind
     nodeFilters:
       - server:0
-  - volume: registry-${DEFN_DEV_NAME}:/mnt/registry
+  - volume: ${DEFN_DEV_NAME}-registry:/mnt/registry
     nodeFilters:
       - server:0
-  - volume: containerd-${DEFN_DEV_NAME}:/var/lib/rancher/k3s/agent/containerd/io.containerd.content.v1.content
+  - volume: ${DEFN_DEV_NAME}-containerd:/var/lib/rancher/k3s/agent/containerd/io.containerd.content.v1.content
     nodeFilters:
       - server:0
   - volume: /var/run/docker.sock:/var/run/docker.sock
