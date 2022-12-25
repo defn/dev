@@ -3,7 +3,7 @@
 function main {
 	set -efu
 
-	exec argocd --kube-context argocd app "$@"
+	exec argocd --core app "$@"
 }
 
 main "$@"
