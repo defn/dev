@@ -107,7 +107,6 @@
             coder-server-kill
             coder-initial-user
             coder-template-docker
-            coder-template-k3d
             coder-init
           ];
         };
