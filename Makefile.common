@@ -230,18 +230,23 @@ global: # Provision global zone from control plane
 		$(MAKE) cluster name=$@
 	kubectl config set-context k3d-global --cluster=k3d-global --user=admin@k3d-global --namespace argocd
 	kubectl config use-context k3d-global
+	while ! app list; do sleep 5; done
 	argocd cluster add --core --yes --upsert k3d-global
 
 cluster:
 	-k3d cluster delete $(name)
-	for a in tailscale irsa manifest; do \
-		docker volume create $(name)-tailscale; \
+	for a in tailscale irsa; do \
+		docker volume create $(name)-$${a} || true; \
 		(pass $(name)-$${a} | base64 -d) | docker run --rm -i \
 			-v $(name)-tailscale:/var/lib/tailscale \
 			-v $(name)-irsa:/var/lib/rancher/k3s/server/tls \
 			-v $(name)-manifest:/var/lib/rancher/k3s/server/manifests \
 			ubuntu bash -c 'cd / & tar xvf -'; \
 		done
+	docker volume create $(name)-manifest || true
+	kustomize build --enable-helm ~/.dotfiles/k/argo-cd | docker run --rm -i \
+		-v $(name)-manifest:/var/lib/rancher/k3s/server/manifests \
+		ubuntu bash -c 'tee /var/lib/rancher/k3s/server/manifests/defn-dev-argo-cd.yaml | wc -l'
 	@k3d cluster create $(name) \
 		--config etc/k3d.yaml \
 		--registry-config etc/k3d-registries.yaml $(DEFN_DEV_HOST_PORTMAPS) \
