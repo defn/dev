@@ -97,12 +97,37 @@
 
             docker --context=host update --restart=no k3d-$name-server-0
           '';
+
+          k3d-registry = pkgs.writeShellScriptBin "this-k3d-registry" ''
+            k3d registry create registry --port 0.0.0.0:5000
+          '';
+
+          k3d-list-images = pkgs.writeShellScriptBin "this-k3d-list-images" ''
+            set -efu
+
+            name=$1; shift
+
+            (kubectl --context k3d-$name get pods --all-namespaces -o json | gron | grep '\.image ='  | cut -d'"' -f2 | grep -v 169.254.32.1:5000/ | grep -v /defn/dev: | grep -v /workspace:latest) | sed 's#@.*##' | grep -v ^sha256 | sort -u
+          '';
+
+          k3d-save-images = pkgs.writeShellScriptBin "this-k3d-save-images" ''
+            set -exfu
+
+            name=$1; shift
+
+            this-k3d-list-images $name | runmany 4 'skopeo copy docker://$1 docker://169.254.32.1:5000/''${1#*/} --multi-arch all --dest-tls-verify=false --insecure-policy'
+          '';
         };
 
         devShell = wrap.devShell {
           devInputs = (with packages; [
             k3d-provision
             k3d-create
+            k3d-registry
+            k3d-list-images
+            k3d-save-images
+            pkgs.skopeo
+            pkgs.gron
           ]) ++ (pkgs.lib.mapAttrsToList (name: value: packages.${name}) config.clusters);
         };
 
