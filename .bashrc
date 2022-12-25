@@ -88,9 +88,6 @@ if [[ -n "${VSCODE_GIT_ASKPASS_NODE:-}" ]]; then
 	fi
 fi
 
-# vault
-export VAULT_ADDR="${VAULT_ADDR:-unix:///work/vault-agent/vault-agent.sock}"
-
 # aws-vault
 export AWS_VAULT_BACKEND=pass
 export AWS_VAULT_PASS_PREFIX=aws-vault
@@ -101,7 +98,6 @@ export DIRENV_LOG_FORMAT=
 if type -P direnv >/dev/null; then
 	eval "$(direnv hook bash)"
 	_direnv_hook
-	unset DIRENV_DIFF DIRENV_WATCHES
 fi
 
 # powerline-go
@@ -200,3 +196,5 @@ function pca {
 
 # dotfiles
 if [[ -f ~/.dotfiles/dot/bashrc ]]; then source ~/.dotfiles/dot/bashrc; fi
+
+unset DIRENV_DIFF DIRENV_WATCHES
