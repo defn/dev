@@ -244,7 +244,7 @@ cluster:
 		--registry-config etc/k3d-registries.yaml $(DEFN_DEV_HOST_PORTMAPS) \
 		--volume $(name)-tailscale:/var/lib/tailscale@server:0 \
 		--volume $(name)-irsa:/var/lib/rancher/k3s/server/tls2@server:0 \
-		--volume $(name)-manifest:/var/lib/rancher/k3s/server/manifest2s@server:0 \
+		--volume $(name)-manifest:/var/lib/rancher/k3s/server/manifests2@server:0 \
 		--k3s-node-label env=$(name)@server:0 \
 		--no-rollback
 	docker --context=host update --restart=no $(context)-server-0
