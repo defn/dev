@@ -6,7 +6,7 @@ kubeAPI:
   host: "${DEFN_DEV_HOST_API}"
   hostIP: 0.0.0.0
   hostPort: "${DEFN_DEV_HOST_PORT}"
-image: "169.254.32.1:5000/defn/k3d:${DEFN_DEV_NAME}"
+image: ghcr.io/defn/dev:latest-k3d
 volumes:
   - volume: work:/mnt/work
     nodeFilters:
