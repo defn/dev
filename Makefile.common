@@ -13,7 +13,6 @@ macos:
 	for ip in $(dummy_ip); do if ! ifconfig lo0 | grep "inet $$ip"; then sudo ifconfig lo0 alias "$$ip" netmask 255.255.255.255; fi; done;
 	ifconfig lo0
 	defaults write -g ApplePressAndHoldEnabled -bool false
-	-$(MAKE) registry
 	-docker context create host --docker host=unix:///var/run/docker.sock
 
 symlinks:
@@ -85,21 +84,6 @@ login:
 
 github-login:
 	if ! gh auth status; then echo Y | gh auth login -p https -h github.com -w; fi
-
-pending-images:
-	(control get pods --all-namespaces -o json | gron | grep '\.image ='  | cut -d'"' -f2 | grep -v 169.2543.32.1:5000/ | grep -v /defn/dev: | grep -v /workspace:latest) | sed 's#@.*##' | grep -v ^sha256 | sort -u > .image-versions.txt
-
-sync: # Sync all the artifacts
-	$(MAKE) pull-repos
-	-$(MAKE) registry
-	$(MAKE) sync-images
-
-sync-images: # Sync images to local cache
-	cat .image-versions.txt | bin/runmany 4 'skopeo copy docker://$$1 docker://127.0.0.1:5000/$${1#*/} --multi-arch all --dest-tls-verify=false'
-
-registry:
-	-k3d registry create registry --port 0.0.0.0:5000
-	#control apply -f etc/local-registry-hosting.yaml
 
 pull-repos: # Pull dev, app, home, and password-store repos
 	for a in . .dotfiles .password-store; do (echo; echo "$$a"; cd "$$a" && git pull) || true; done
