@@ -48,7 +48,6 @@
 
         devShell = wrap.devShell {
           devInputs = with packages; [
-            pkgs.gomod2nix
             vault-unseal
             vault-seal
             vault-backup
