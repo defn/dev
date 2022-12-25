@@ -79,6 +79,7 @@ fly:
 devcontainer:
     ARG image
     ARG arch
+    ARG GITHUB_TOKEN
 
     FROM pkg+root --arch=${arch}
 

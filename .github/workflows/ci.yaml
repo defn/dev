@@ -56,7 +56,11 @@ jobs:
           earthly --strict --push --no-output \
           	--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-fly \
           	--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-fly \
-          	+build-fly --image ghcr.io/${GITHUB_REPOSITORY}:${TAG}-fly
+          	+build-fly \
+          		--image ghcr.io/${GITHUB_REPOSITORY}:${TAG}-fly \
+          		--GITHUB_TOKEN ${GITHUB_TOKEN}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
   publish_devcontainer:
     runs-on: ubuntu-latest
     env:
@@ -107,7 +111,11 @@ jobs:
           earthly --strict --push --no-output \
           	--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-devcontainer \
           	--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-devcontainer \
-          	+build-devcontainer --image ghcr.io/${GITHUB_REPOSITORY}:${TAG}-devcontainer
+          	+build-devcontainer \
+          		--image ghcr.io/${GITHUB_REPOSITORY}:${TAG}-devcontainer \
+          		--GITHUB_TOKEN ${GITHUB_TOKEN}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
   publish_k3d:
     runs-on: ubuntu-latest
     env:
@@ -158,4 +166,8 @@ jobs:
           earthly --strict --push --no-output \
           	--cache-from ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-k3d \
           	--remote-cache ghcr.io/${GITHUB_REPOSITORY}-cache:main-all-k3d \
-          	+build-k3d --image ghcr.io/${GITHUB_REPOSITORY}:${TAG}-k3d
+          	+build-k3d \
+          		--image ghcr.io/${GITHUB_REPOSITORY}:${TAG}-k3d \
+          		--GITHUB_TOKEN ${GITHUB_TOKEN}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
