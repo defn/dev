@@ -28,6 +28,7 @@ if [[ -z "${DEFN_DEV_TSKEY:-}" ]]; then
   tailscale up --ssh --accept-dns=false --hostname `echo ${domain} | cut -d. -f1`
 fi
 
+mkdir -p /var/lib/rancher/k3s/server/tls
 (set +f; cp /var/lib/rancher/k3s/server/tls2/* /var/lib/rancher/k3s/server/tls/)
 
 if [[ -n "${DEFN_DEV_TSKEY:-}" ]]; then
