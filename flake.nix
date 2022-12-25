@@ -12,6 +12,7 @@
     helm.url = github:defn/pkg/helm-3.10.2-3?dir=helm;
     argocd.url = github:defn/pkg/argocd-2.5.4-4?dir=argocd;
     flyctl.url = github:defn/pkg/flyctl-0.0.441-2?dir=flyctl;
+    vault.url = github:defn/pkg/vault-1.12.2-4?dir=vault;
     localdev.url = github:defn/pkg/localdev-0.0.2?dir=localdev;
   };
 
