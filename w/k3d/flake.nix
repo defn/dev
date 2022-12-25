@@ -43,6 +43,7 @@
           while ! argocd --core app list 2>/dev/null; do date; sleep 5; done
           argocd cluster add --core --yes --upsert k3d-$name
           kubectl --context k3d-$name apply -f ~/.dotfiles/e/k3d-$name.yaml
+          while ! app sync argocd/k3d-$name; do sleep 1; done
         '';
 
         packages.k3d-create = pkgs.writeShellScriptBin "this-k3d-create" ''
