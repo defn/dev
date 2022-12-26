@@ -97,7 +97,10 @@
               argocd cluster add --core --yes --upsert k3d-$nme
   
               kubectl --context k3d-global apply -f ~/.dotfiles/e/k3d-$nme.yaml
-              while ! app sync argocd/k3d-$nme; do sleep 1; done
+              while ! app wait argocd/k3d-$nme --timeout 30; do 
+                app sync argocd/k3d-$nme || true
+                sleep 1
+              done
             fi
           '';
 
