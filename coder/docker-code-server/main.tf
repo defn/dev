@@ -110,10 +110,12 @@ resource "docker_volume" "work_volume" {
 resource "docker_container" "workspace" {
   count = data.coder_workspace.this.start_count
 
+  image = "ghcr.io/defn/dev:latest-devcontainer"
+
   name     = "coder-${data.coder_workspace.this.owner}-${lower(data.coder_workspace.this.name)}"
   hostname = data.coder_workspace.this.name
 
-  image = "ghcr.io/defn/dev:latest-devcontainer"
+  privileged = true
 
   env = [
     "CODER_AGENT_TOKEN=${coder_agent.main.token}"
