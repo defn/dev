@@ -16,7 +16,24 @@
       };
 
       handler = { pkgs, wrap, system, builders }: rec {
-        devShell = wrap.devShell { };
+        packages.tailscale-start = pkgs.writeShellScriptBin "this-tailscale-start" ''
+          set -exfu
+
+          sudo ${inputs.tailscale.defaultPackage.${system}}/bin/tailscaled "$@"
+        '';
+
+        packages.tailscale-up = pkgs.writeShellScriptBin "this-tailscale-up" ''
+          set -exfu
+
+          sudo ${inputs.tailscale.defaultPackage.${system}}/bin/tailscale up "$@"
+        '';
+
+        devShell = wrap.devShell {
+          devInputs = with packages; [
+            tailscale-up
+            tailscale-start
+          ];
+        };
 
         defaultPackage = wrap.nullBuilder {
           propagatedBuildInputs = with pkgs; wrap.flakeInputs;

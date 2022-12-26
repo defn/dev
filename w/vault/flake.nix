@@ -16,6 +16,12 @@
       };
 
       handler = { pkgs, wrap, system, builders }: rec {
+        packages.vault-start = pkgs.writeShellScriptBin "this-vault-start" ''
+          set -exfu
+
+          vault server -config vault.yaml
+        '';
+
         packages.vault-unseal = pkgs.writeShellScriptBin "this-vault-unseal" ''
           set -exfu
 
@@ -48,6 +54,7 @@
 
         devShell = wrap.devShell {
           devInputs = with packages; [
+            vault-start
             vault-unseal
             vault-seal
             vault-backup
