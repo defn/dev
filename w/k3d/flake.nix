@@ -37,6 +37,9 @@
             set -efu
 
             case "''${1:-}" in
+              build)
+                earthly +k3d
+                ;;
               create)
                 export DEFN_DEV_HOST_API=${value.${"host-api"}}
                 this-k3d-provision ${name}
