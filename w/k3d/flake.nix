@@ -63,6 +63,12 @@
               use)
                 kubectl config use-context k3d-${nme}
                 ;;
+              server)
+                kubectl --context k3d-${nme} config view -o jsonpath='{.clusters[?(@.name == "k3d-amanibhavam-global")]}' --raw | jq -r '.cluster.server'
+                ;;
+              ca)
+                kubectl --context k3d-${nme} config view -o jsonpath='{.clusters[?(@.name == "k3d-amanibhavam-global")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d'
+                ;;
               *)
                 kubectl --context k3d-${nme} "$@"
                 ;;
