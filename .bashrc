@@ -1,6 +1,3 @@
-# path
-PATH="${PATH:-/bin:/usr/bin}"
-
 # tmp
 export TMPDIR="${TMPDIR:-/tmp}"
 export TEMPDIR="${TEMPDIR:-/tmp}"
