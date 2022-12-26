@@ -57,7 +57,7 @@ k3d:
         && make nix \
         && nix profile install github:defn/pkg/tailscale-1.34.1-2?dir=tailscale 
 
-    RUN --no-cache git pull
+    RUN --no-cache . /home/ubuntu/.profile && git pull
 
     USER root
     WORKDIR /
