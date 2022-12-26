@@ -60,8 +60,6 @@ install-inner:
 
 	$(MAKE) login
 
-	@env VAULT_ADDR="http://localhost:8200" VAULT_TOKEN="$$(pass Initial_Root_Token)" $(MAKE) manage
-
 	mark -- dotfiles
 	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
 		mkdir -p ~/.config/coderv2/dotfiles; \
