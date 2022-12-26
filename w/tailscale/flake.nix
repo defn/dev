@@ -28,10 +28,24 @@
           sudo ${inputs.tailscale.defaultPackage.${system}}/bin/tailscale up "$@"
         '';
 
+        packages.tailscale-save = pkgs.writeShellScriptBin "this-tailscale-save" ''
+          set -exfu
+
+          sudo tar cvf - /var/lib/tailscale/tailscaled.state /var/lib/tailscale/certs | base64 -w 0 | pass insert -e -f $GIT_AUTHOR_NAME-tailscale
+        '';
+
+        packages.tailscale-restore = pkgs.writeShellScriptBin "this-tailscale-restore" ''
+          set -exfu
+
+          pass $GIT_AUTHOR_NAME-tailscale | base64 -d | (cd / && sudo tar xvf -)
+        '';
+
         devShell = wrap.devShell {
           devInputs = with packages; [
             tailscale-up
             tailscale-start
+            tailscale-save
+            tailscale-restore
           ];
         };
 
