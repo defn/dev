@@ -52,7 +52,7 @@
                 k3d cluster start $name
                 ;;
               delete)
-                k3d cluster stop $name
+                k3d cluster delete $name
                 ;;
               "")
                 k3d cluster list $name
@@ -123,6 +123,11 @@
                 kustomize build --enable-helm ~/.dotfiles/k/argo-cd | docker run --rm -i \
                   -v $name-manifest:/var/lib/rancher/k3s/server/manifests \
                   ubuntu bash -c 'tee /var/lib/rancher/k3s/server/manifests/defn-dev-argo-cd.yaml | wc -l'
+                ;;
+              *)
+                docker run --rm \
+                  -v $name-manifest:/var/lib/rancher/k3s/server/manifests \
+                  ubuntu bash -c 'touch /var/lib/rancher/k3s/server/manifests/nothing.yaml'
                 ;;
             esac 
 
