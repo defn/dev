@@ -41,7 +41,7 @@ k3d:
         && (echo export USER=ubuntu; echo export HOME=/home/ubuntu; echo export PATH="/bin:/usr/bin"; echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh) > /home/ubuntu/.profile
 
     RUN . /home/ubuntu/.profile \
-        && for a in bashInteractive git gnumake; do \
+        && for a in bashInteractive git gnumake nix-direnv direnv; do \
             nix profile install nixpkgs#$a; done
     
     USER root
@@ -72,8 +72,5 @@ nix:
     # nix
     RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile' && mkdir -p .config/nix
     COPY nix.conf  .config/nix/nix.conf
-
-    # nix profile
-    RUN bash -c '~/.nix-profile/bin/nix profile install nixpkgs#{nix-direnv,direnv,pinentry,nixpkgs-fmt}'
 
     SAVE ARTIFACT /nix nix
