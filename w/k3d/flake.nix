@@ -56,6 +56,9 @@
               delete)
                 k3d cluster stop ${name}
                 ;;
+              "")
+                k3d cluster list ${name}
+                ;;
               *)
                 echo "ERROR: unsupported command: $1" 1>&2
                 ;;
