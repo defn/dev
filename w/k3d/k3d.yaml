@@ -26,6 +26,9 @@ volumes:
   - volume: /var/run/docker.sock:/var/run/docker.sock
     nodeFilters:
       - server:0
+  - volume: /tmp/cache/nix:/tmp/cache/nix
+    nodeFilters:
+      - server:0
 options:
   k3d:
     wait: true
