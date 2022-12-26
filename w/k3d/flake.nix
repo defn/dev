@@ -59,6 +59,9 @@
               "")
                 k3d cluster list ${name}
                 ;;
+              cache)
+                (this-k3d-list-images ${name}; ssh root@${value.${"host-api"}} /bin/ctr -n k8s.io images list  | awk '{print $1}' | grep -v sha256 | grep -v ^REF) | sort -u | this-k3d-save-images
+                ;;
               *)
                 echo "ERROR: unsupported command: $1" 1>&2
                 ;;
@@ -137,9 +140,7 @@
           k3d-save-images = pkgs.writeShellScriptBin "this-k3d-save-images" ''
             set -exfu
 
-            name=$1; shift
-
-            this-k3d-list-images $name | runmany 4 'skopeo copy docker://$1 docker://169.254.32.1:5000/''${1#*/} --multi-arch all --dest-tls-verify=false --insecure-policy'
+            runmany 4 'skopeo copy docker://$1 docker://169.254.32.1:5000/''${1#*/} --multi-arch all --dest-tls-verify=false --insecure-policy'
           '';
         };
 
