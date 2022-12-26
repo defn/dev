@@ -6,6 +6,7 @@
     kustomize.url = github:defn/pkg/kustomize-4.5.7-3?dir=kustomize;
     helm.url = github:defn/pkg/helm-3.10.2-3?dir=helm;
     argocd.url = github:defn/pkg/argocd-2.5.4-4?dir=argocd;
+    vault.url = github:defn/pkg/vault-1.12.2-4?dir=vault;
   };
 
   outputs = inputs:
@@ -68,6 +69,20 @@
                 ;;
               ca)
                 kubectl --context k3d-${nme} config view -o jsonpath='{.clusters[?(@.name == "k3d-amanibhavam-global")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d'
+                ;;
+              vault-policy)
+                vault write sys/policy/$name-hello policy=@policy-hello.hcl
+                ;;
+              vault-enable)
+                vault auth enable -path "$name" kubernetes || true
+                vault write "auth/$name/config" \
+                  kubernetes_host="$(${nme} server)" \
+                  kubernetes_ca_cert=@<(${nme} ca) \
+                  disable_local_ca_jwt=true
+                vault write "auth/$name/role/hello" \
+                  bound_service_account_names=default \
+                  bound_service_account_namespaces=default \
+                  policies=$name-hello ttl=1h
                 ;;
               *)
                 kubectl --context k3d-${nme} "$@"
