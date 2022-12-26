@@ -35,9 +35,9 @@ k3d:
     RUN for a in /bin/kubectl /bin/k3s-server /bin/k3s-secrets-encrypt /bin/k3s-etcd-snapshot /bin/k3s-completion /bin/k3s-certificate /bin/k3s-agent /bin/crictl /bin/ctr; do ln -nfs k3s-real $a; done
 
     RUN mkdir -p /var/lib/rancher/k3s/agent/etc/containerd
-    COPY etc/k3d-config.toml var/lib/rancher/k3s/agent/etc/containerd/config.toml
+    COPY w/k3d/k3d-config.toml var/lib/rancher/k3s/agent/etc/containerd/config.toml
 
-    COPY etc/k3s-wrapper.sh /bin/k3s
+    COPY w/k3d/k3s-wrapper.sh /bin/k3s
 
     USER ubuntu
     WORKDIR /home/ubuntu
@@ -45,11 +45,16 @@ k3d:
     RUN mkdir -p /home/ubuntu/.config/nix
     COPY .config/nix/nix.conf  /home/ubuntu/.config/nix/nix.conf
     RUN ln -nfs /nix/var/nix/profiles/per-user/ubuntu/profile /home/ubuntu/.nix-profile \
-        && (echo export USER=ubuntu; echo export HOME=/home/ubuntu; echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh) > /home/ubuntu/.profile
+        && (echo export USER=ubuntu; echo export HOME=/home/ubuntu; echo export PATH="/bin:/usr/bin"; echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh) > /home/ubuntu/.profile
 
-    RUN for a in bashInteractive rsync dnsutils nettools wget curl procps less htop; do \
-            ~/.nix-profile/bin/nix profile install nixpkgs#$a; done \
-        && ~/.nix-profile/bin/nix profile install github:defn/pkg/tailscale-1.34.1-2?dir=tailscale
+    RUN for a in bashInteractive git gnumake; do \
+        ~/.nix-profile/bin/nix profile install nixpkgs#$a; done \
+        && ~/.nix-profile/bin/git clone https://github.com/defn/dev dev \
+        && mv dev/.git . \
+        && rm -rf dev \
+        && ~/.nix-profile/bin/git reset --hard \     
+        && ~/.nix-profile/bin/make nix \
+        && ~/.nix-profile/bin/nix profile install github:defn/pkg/tailscale-1.34.1-2?dir=tailscale \
 
     USER root
     WORKDIR /
