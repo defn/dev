@@ -36,9 +36,27 @@
           (name: value: pkgs.writeShellScriptBin name ''
             set -exfu
 
-            export DEFN_DEV_HOST_API=${value.${"host-api"}}
-
-            this-k3d-provision ${name}
+            case "''${1:-}" in
+              create)
+                export DEFN_DEV_HOST_API=${value.${"host-api"}}
+                this-k3d-provision ${name}
+                ;;
+              ssh)
+                ssh ${value.${"host-api"}}
+                ;;
+              stop)
+                k3d cluster stop ${name}
+                ;;
+              start)
+                k3d cluster stop ${name}
+                ;;
+              delete)
+                k3d cluster stop ${name}
+                ;;
+              *)
+                echo "ERROR: unsupported command: $1" 1>&2
+                ;;
+            esac
           '')
           config.clusters) // {
           k3d-provision = pkgs.writeShellScriptBin "this-k3d-provision" ''
