@@ -18,16 +18,11 @@
         slug = builtins.readFile ./SLUG;
         version = builtins.readFile ./VERSION;
 
+        ts-domain = "tail3884f.ts.net";
         clusters = {
-          global = {
-            host-api = "100.64.110.16";
-          };
-          control = {
-            host-api = "100.106.117.83";
-          };
-          smiley = {
-            host-api = "100.83.33.86";
-          };
+          global = { };
+          control = { };
+          smiley = { };
         };
       };
 
@@ -43,11 +38,11 @@
                 earthly +k3d
                 ;;
               create)
-                export DEFN_DEV_HOST_API=${value.${"host-api"}}
+                export DEFN_DEV_HOST_API="$(host k3d-$name.${config.${"ts-domain"}} | grep 'has address' | awk '{print $NF}')"
                 this-k3d-provision $name
                 ;;
               ssh)
-                ssh ${value.${"host-api"}}
+                ssh k3d-$name.${config.${"ts-domain"}}
                 ;;
               stop)
                 k3d cluster stop $name
@@ -62,7 +57,7 @@
                 k3d cluster list $name
                 ;;
               cache)
-                (this-k3d-list-images $name; ssh root@${value.${"host-api"}} /bin/ctr -n k8s.io images list  | awk '{print $1}' | grep -v sha256 | grep -v ^REF) | sort -u | this-k3d-save-images
+                (this-k3d-list-images $name; ssh root@k3d-$name.${config.${"ts-domain"}} /bin/ctr -n k8s.io images list  | awk '{print $1}' | grep -v sha256 | grep -v ^REF) | sort -u | this-k3d-save-images
                 ;;
               *)
                 echo "ERROR: unsupported command: $1" 1>&2
@@ -83,13 +78,13 @@
             this-k3d-create $name
 
             kubectl config set-context k3d-$name --cluster=k3d-$name --user=admin@k3d-$name --namespace argocd
-            perl -pe 's{(https://'$DEFN_DEV_HOST_API'):\d+}{$1:6443}' -i  ~/.kube/config  
+            perl -pe 's{(https://'$DEFN_DEV_HOST_API'):\d+}{$1:6443}' -i ~/.kube/config  
             
-            kubectl config use-context k3d-$GIT_AUTHOR_NAME-global
-            while ! argocd --core app list 2>/dev/null; do date; sleep 5; done
-            argocd cluster add --core --yes --upsert k3d-$name
-  
             if test -f ~/.dotfiles/e/k3d-$name.yaml; then
+              kubectl config use-context k3d-$GIT_AUTHOR_NAME-global
+              while ! argocd --core app list 2>/dev/null; do date; sleep 5; done
+              argocd cluster add --core --yes --upsert k3d-$name
+  
               kubectl --context k3d-$GIT_AUTHOR_NAME-global apply -f ~/.dotfiles/e/k3d-$name.yaml
               while ! app sync argocd/k3d-$name; do sleep 1; done
             fi
