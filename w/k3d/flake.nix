@@ -70,11 +70,11 @@
               ca)
                 kubectl --context k3d-${nme} config view -o jsonpath='{.clusters[?(@.name == "k3d-amanibhavam-global")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d'
                 ;;
-              vault-policy)
+              vault-init)
                 vault write sys/policy/$name-hello policy=@policy-hello.hcl
+                vault auth enable -path "$name" kubernetes || true
                 ;;
-              vault-enable)
-                vault auth enable -path "$name" kubernetes 2>/dev/null || true
+              vault-config)
                 vault write "auth/$name/config" \
                   kubernetes_host="$(${nme} server)" \
                   kubernetes_ca_cert=@<(${nme} ca) \
