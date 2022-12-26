@@ -32,17 +32,18 @@
             set -efu
 
             name="$GIT_AUTHOR_NAME-${nme}"
+            host=k3d-$name.${config.${"ts-domain"}}
 
             case "''${1:-}" in
               build)
                 earthly +k3d
                 ;;
               create)
-                export DEFN_DEV_HOST_API="$(host k3d-$name.${config.${"ts-domain"}} | grep 'has address' | awk '{print $NF}')"
+                export DEFN_DEV_HOST_API="$(host $host | grep 'has address' | awk '{print $NF}')"
                 this-k3d-provision $name
                 ;;
               ssh)
-                ssh k3d-$name.${config.${"ts-domain"}}
+                ssh $host
                 ;;
               stop)
                 k3d cluster stop $name
@@ -57,7 +58,7 @@
                 k3d cluster list $name
                 ;;
               cache)
-                (this-k3d-list-images $name; ssh root@k3d-$name.${config.${"ts-domain"}} /bin/ctr -n k8s.io images list  | awk '{print $1}' | grep -v sha256 | grep -v ^REF) | sort -u | this-k3d-save-images
+                (this-k3d-list-images $name; ssh root@$host /bin/ctr -n k8s.io images list  | awk '{print $1}' | grep -v sha256 | grep -v ^REF) | sort -u | this-k3d-save-images
                 ;;
               *)
                 echo "ERROR: unsupported command: $1" 1>&2
@@ -77,7 +78,14 @@
 
             this-k3d-create $name
 
-            kubectl config set-context k3d-$name --cluster=k3d-$name --user=admin@k3d-$name --namespace argocd
+            case "$name" in
+              *-global)
+                kubectl config set-context k3d-$name --cluster=k3d-$name --user=admin@k3d-$name --namespace argocd
+                ;;
+              *)
+                kubectl config set-context k3d-$name --cluster=k3d-$name --user=admin@k3d-$name
+                ;;
+            esac 
             perl -pe 's{(https://'$DEFN_DEV_HOST_API'):\d+}{$1:6443}' -i ~/.kube/config  
             
             if test -f ~/.dotfiles/e/k3d-$name.yaml; then
