@@ -53,7 +53,7 @@
                 k3d cluster stop $name
                 ;;
               start)
-                k3d cluster stop $name
+                k3d cluster start $name
                 ;;
               delete)
                 k3d cluster stop $name
