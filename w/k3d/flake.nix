@@ -34,7 +34,7 @@
       handler = { pkgs, wrap, system, builders }: rec {
         packages = (pkgs.lib.mapAttrs
           (name: value: pkgs.writeShellScriptBin name ''
-            set -exfu
+            set -efu
 
             case "''${1:-}" in
               create)
