@@ -112,9 +112,13 @@
             done
 
             docker volume create $name-manifest || true
-            kustomize build --enable-helm ~/.dotfiles/k/argo-cd | docker run --rm -i \
-              -v $name-manifest:/var/lib/rancher/k3s/server/manifests \
-              ubuntu bash -c 'tee /var/lib/rancher/k3s/server/manifests/defn-dev-argo-cd.yaml | wc -l'
+            case "$name" in
+              *-global)
+                kustomize build --enable-helm ~/.dotfiles/k/argo-cd | docker run --rm -i \
+                  -v $name-manifest:/var/lib/rancher/k3s/server/manifests \
+                  ubuntu bash -c 'tee /var/lib/rancher/k3s/server/manifests/defn-dev-argo-cd.yaml | wc -l'
+                ;;
+            esac 
 
             k3d cluster create $name \
               --config k3d.yaml \
