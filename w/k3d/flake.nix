@@ -74,7 +74,7 @@
             name=$1; shift
 
             export DOCKER_CONTEXT=host
-            export DEFN_DEV_NAME=k3d-$name 
+            export DEFN_DEV_NAME=$name 
             export DEFN_DEV_HOST=k3d-$name
             export DEFN_DEV_HOST_IP="127.0.0.1"
 
