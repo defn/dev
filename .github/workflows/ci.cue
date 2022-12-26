@@ -25,8 +25,4 @@ jobs: {
 	"publish_devcontainer": {
 		needs: "publish_fly"
 	}
-
-	"publish_k3d": {
-		needs: "publish_devcontainer"
-	}
 }

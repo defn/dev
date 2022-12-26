@@ -11,69 +11,6 @@ build-fly:
     ARG image
     BUILD --platform=linux/amd64 +fly --image=${image} --arch=amd64
 
-build-k3d:
-    ARG image
-    BUILD --platform=linux/amd64 +k3d --image=${image}
-    BUILD --platform=linux/arm64 +k3d --image=${image}
-
-k3d:
-    ARG K3S
-    ARG image
-    ARG arch
-
-    FROM rancher/k3s:v${K3S}
-
-    RUN echo root:x:0: >> /etc/group \
-        && echo ubuntu:x:1000: >> /etc/group \
-        && echo root:x:0:0:root:/root:/bin/sh >> /etc/passwd \
-        && echo ubuntu:x:1000:1000:root:/home/ubuntu:/bin/sh >> /etc/passwd \
-        && install -d -m 0700 -o root -g root /root \
-        && mkdir -p /home && install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
-
-    RUN mv /bin/k3s /bin/k3s-real
-
-    RUN for a in /bin/kubectl /bin/k3s-server /bin/k3s-secrets-encrypt /bin/k3s-etcd-snapshot /bin/k3s-completion /bin/k3s-certificate /bin/k3s-agent /bin/crictl /bin/ctr; do ln -nfs k3s-real $a; done
-
-    RUN mkdir -p /var/lib/rancher/k3s/agent/etc/containerd
-    COPY w/k3d/k3d-config.toml var/lib/rancher/k3s/agent/etc/containerd/config.toml
-
-    COPY w/k3d/k3s-wrapper.sh /bin/k3s
-
-    USER ubuntu
-    WORKDIR /home/ubuntu
-
-    COPY --dir --chown=ubuntu:ubuntu +devcontainer/nix /nix
-    RUN mkdir -p /home/ubuntu/.config/nix
-    COPY .config/nix/nix.conf  /home/ubuntu/.config/nix/nix.conf
-
-    RUN ln -nfs /nix/var/nix/profiles/per-user/ubuntu/profile /home/ubuntu/.nix-profile \
-        && (echo export USER=ubuntu; echo export HOME=/home/ubuntu; echo export PATH="/bin:/usr/bin"; echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh) > /home/ubuntu/.profile
-
-    RUN . /home/ubuntu/.profile \
-        && for a in bashInteractive git gnumake; do \
-            nix profile install nixpkgs#$a; done
-    
-    USER root
-    RUN ln -nfs $(ls -trhd /nix/store/*bash-interactive*/bin/bash | head -1) /bin/bash
-
-    USER ubuntu
-    RUN . /home/ubuntu/.profile \
-        && git clone https://github.com/defn/dev dev \
-        && mv dev/.git . \
-        && rm -rf dev \
-        && git reset --hard \     
-        && make nix \
-        && nix profile install github:defn/pkg/tailscale-1.34.1-2?dir=tailscale 
-
-    USER root
-    WORKDIR /
-
-    RUN sed 's#/bin/sh#/bin/bash#' -i /etc/passwd
-
-    IF [ "$image" != "" ]
-        SAVE IMAGE --push ${image}
-    END
-
 fly:
     ARG image
     ARG arch
