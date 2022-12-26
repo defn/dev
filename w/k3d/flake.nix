@@ -74,7 +74,7 @@
                 vault write sys/policy/$name-hello policy=@policy-hello.hcl
                 ;;
               vault-enable)
-                vault auth enable -path "$name" kubernetes || true
+                vault auth enable -path "$name" kubernetes 2>/dev/null || true
                 vault write "auth/$name/config" \
                   kubernetes_host="$(${nme} server)" \
                   kubernetes_ca_cert=@<(${nme} ca) \
