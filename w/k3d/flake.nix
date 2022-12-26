@@ -60,6 +60,9 @@
               cache)
                 (this-k3d-list-images ${nme}; ssh root@$host /bin/ctr -n k8s.io images list  | awk '{print $1}' | grep -v sha256 | grep -v ^REF) | sort -u | this-k3d-save-images
                 ;;
+              use)
+                kubectl config use-context k3d-${nme}
+                ;;
               *)
                 kubectl --context k3d-${nme} "$@"
                 ;;
