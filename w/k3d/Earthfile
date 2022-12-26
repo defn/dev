@@ -46,6 +46,7 @@ k3d:
     
     USER root
     RUN ln -nfs $(ls -trhd /nix/store/*bash-interactive*/bin/bash | head -1) /bin/bash
+    RUN sed 's#/bin/sh#/bin/bash#' -i /etc/passwd
 
     USER ubuntu
     RUN . /home/ubuntu/.profile \
@@ -56,10 +57,10 @@ k3d:
         && make nix \
         && nix profile install github:defn/pkg/tailscale-1.34.1-2?dir=tailscale 
 
+    RUN --no-cache git pull
+
     USER root
     WORKDIR /
-
-    RUN sed 's#/bin/sh#/bin/bash#' -i /etc/passwd
 
     IF [ "$image" != "" ]
         SAVE IMAGE --push ${image}
