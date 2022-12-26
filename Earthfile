@@ -41,26 +41,34 @@ k3d:
 
     USER ubuntu
     WORKDIR /home/ubuntu
+
     COPY --dir --chown=ubuntu:ubuntu +devcontainer/nix /nix
     RUN mkdir -p /home/ubuntu/.config/nix
     COPY .config/nix/nix.conf  /home/ubuntu/.config/nix/nix.conf
+
     RUN ln -nfs /nix/var/nix/profiles/per-user/ubuntu/profile /home/ubuntu/.nix-profile \
         && (echo export USER=ubuntu; echo export HOME=/home/ubuntu; echo export PATH="/bin:/usr/bin"; echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh) > /home/ubuntu/.profile
 
-    RUN for a in bashInteractive git gnumake; do \
-        ~/.nix-profile/bin/nix profile install nixpkgs#$a; done \
-        && ~/.nix-profile/bin/git clone https://github.com/defn/dev dev \
+    RUN . /home/ubuntu/.profile \
+        && for a in bashInteractive git gnumake; do \
+            nix profile install nixpkgs#$a; done
+    
+    USER root
+    RUN ln -nfs $(ls -trhd /nix/store/*bash-interactive*/bin/bash | head -1) /bin/bash
+
+    USER ubuntu
+    RUN . /home/ubuntu/.profile \
+        && git clone https://github.com/defn/dev dev \
         && mv dev/.git . \
         && rm -rf dev \
-        && ~/.nix-profile/bin/git reset --hard \     
-        && ~/.nix-profile/bin/make nix \
-        && ~/.nix-profile/bin/nix profile install github:defn/pkg/tailscale-1.34.1-2?dir=tailscale \
+        && git reset --hard \     
+        && make nix \
+        && nix profile install github:defn/pkg/tailscale-1.34.1-2?dir=tailscale 
 
     USER root
     WORKDIR /
 
-    RUN ln -nfs $(ls -trhd /nix/store/*bash-interactive*/bin/bash | head -1) /bin/bash \
-        && sed 's#/bin/sh#/bin/bash#' -i /etc/passwd
+    RUN sed 's#/bin/sh#/bin/bash#' -i /etc/passwd
 
     IF [ "$image" != "" ]
         SAVE IMAGE --push ${image}
