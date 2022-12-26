@@ -40,7 +40,7 @@
                 ;;
               create)
                 export DEFN_DEV_HOST_API="$(host $host | grep 'has address' | awk '{print $NF}')"
-                this-k3d-provision $name
+                this-k3d-provision ${nme} $name
                 ;;
               ssh)
                 ssh $host
@@ -58,7 +58,7 @@
                 k3d cluster list $name
                 ;;
               cache)
-                (this-k3d-list-images $name; ssh root@$host /bin/ctr -n k8s.io images list  | awk '{print $1}' | grep -v sha256 | grep -v ^REF) | sort -u | this-k3d-save-images
+                (this-k3d-list-images ${nme}; ssh root@$host /bin/ctr -n k8s.io images list  | awk '{print $1}' | grep -v sha256 | grep -v ^REF) | sort -u | this-k3d-save-images
                 ;;
               *)
                 echo "ERROR: unsupported command: $1" 1>&2
@@ -69,6 +69,7 @@
           k3d-provision = pkgs.writeShellScriptBin "this-k3d-provision" ''
             set -exfu
 
+            nme=$1; shift
             name=$1; shift
 
             export DOCKER_CONTEXT=host
@@ -78,23 +79,25 @@
 
             this-k3d-create $name
 
+            kubectl config delete-context k3d-$nme || true
+            kubectl config rename-context k3d-$name k3d-$nme
             case "$name" in
               *-global)
-                kubectl config set-context k3d-$name --cluster=k3d-$name --user=admin@k3d-$name --namespace argocd
+                kubectl config set-context k3d-$nme --cluster=k3d-$name --user=admin@k3d-$name --namespace argocd
                 ;;
               *)
-                kubectl config set-context k3d-$name --cluster=k3d-$name --user=admin@k3d-$name
+                kubectl config set-context k3d-$nme --cluster=k3d-$name --user=admin@k3d-$name
                 ;;
             esac 
             perl -pe 's{(https://'$DEFN_DEV_HOST_API'):\d+}{$1:6443}' -i ~/.kube/config  
             
-            if test -f ~/.dotfiles/e/k3d-$name.yaml; then
-              kubectl config use-context k3d-$GIT_AUTHOR_NAME-global
+            if test -f ~/.dotfiles/e/k3d-$nme.yaml; then
+              kubectl config use-context k3d-global
               while ! argocd --core app list 2>/dev/null; do date; sleep 5; done
-              argocd cluster add --core --yes --upsert k3d-$name
+              argocd cluster add --core --yes --upsert k3d-$nme
   
-              kubectl --context k3d-$GIT_AUTHOR_NAME-global apply -f ~/.dotfiles/e/k3d-$name.yaml
-              while ! app sync argocd/k3d-$name; do sleep 1; done
+              kubectl --context k3d-global apply -f ~/.dotfiles/e/k3d-$nme.yaml
+              while ! app sync argocd/k3d-$nme; do sleep 1; done
             fi
           '';
 
