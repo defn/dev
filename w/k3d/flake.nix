@@ -114,6 +114,9 @@
                 ;;
             esac 
             perl -pe 's{(https://'$DEFN_DEV_HOST_API'):\d+}{$1:6443}' -i ~/.kube/config  
+
+            $nme vault-init
+            $nme vault-config
             
             if test -f ~/.dotfiles/e/k3d-$nme.yaml; then
               kubectl config use-context k3d-global
