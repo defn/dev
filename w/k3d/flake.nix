@@ -71,7 +71,7 @@
                 kubectl --context k3d-${nme} config view -o jsonpath='{.clusters[?(@.name == "k3d-'$name'")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d'
                 ;;
               vault-init)
-                vault write sys/policy/k3d-${nme}-hello policy=@policy-hello.hcl
+                vault write sys/policy/k3d-${nme}-external-secrets policy=@policy-external-secrets.hcl
                 vault auth enable -path "k3d-${nme}" kubernetes || true
                 ;;
               vault-config)
@@ -79,14 +79,10 @@
                   kubernetes_host="$(${nme} server)" \
                   kubernetes_ca_cert=@<(${nme} ca) \
                   disable_local_ca_jwt=true
-                vault write "auth/k3d-${nme}/role/hello" \
-                  bound_service_account_names=default \
-                  bound_service_account_namespaces=default \
-                  policies=k3d-${nme}-hello ttl=1h
                 vault write "auth/k3d-${nme}/role/external-secrets" \
                   bound_service_account_names=external-secrets \
                   bound_service_account_namespaces=external-secrets \
-                  policies=k3d-${nme}-hello ttl=1h
+                  policies=k3d-${nme}-external-secrets ttl=1h
                 ;;
               *)
                 kubectl --context k3d-${nme} "$@"
