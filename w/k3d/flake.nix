@@ -83,6 +83,10 @@
                   bound_service_account_names=default \
                   bound_service_account_namespaces=default \
                   policies=k3d-${nme}-hello ttl=1h
+                vault write "auth/k3d-${nme}/role/external-secrets" \
+                  bound_service_account_names=external-secrets \
+                  bound_service_account_namespaces=external-secrets \
+                  policies=k3d-${nme}-hello ttl=1h
                 ;;
               *)
                 kubectl --context k3d-${nme} "$@"
