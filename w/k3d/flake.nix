@@ -65,24 +65,24 @@
                 kubectl config use-context k3d-${nme}
                 ;;
               server)
-                kubectl --context k3d-${nme} config view -o jsonpath='{.clusters[?(@.name == "k3d-${nme}")]}' --raw | jq -r '.cluster.server'
+                kubectl --context k3d-${nme} config view -o jsonpath='{.clusters[?(@.name == "k3d-'$name'")]}' --raw | jq -r '.cluster.server'
                 ;;
               ca)
-                kubectl --context k3d-${nme} config view -o jsonpath='{.clusters[?(@.name == "k3d-${nme}")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d'
+                kubectl --context k3d-${nme} config view -o jsonpath='{.clusters[?(@.name == "k3d-'$name'")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d'
                 ;;
               vault-init)
-                vault write sys/policy/$name-hello policy=@policy-hello.hcl
-                vault auth enable -path "$name" kubernetes || true
+                vault write sys/policy/k3d-${nme}-hello policy=@policy-hello.hcl
+                vault auth enable -path "k3d-${nme}" kubernetes || true
                 ;;
               vault-config)
-                vault write "auth/$name/config" \
+                vault write "auth/k3d-${nme}/config" \
                   kubernetes_host="$(${nme} server)" \
                   kubernetes_ca_cert=@<(${nme} ca) \
                   disable_local_ca_jwt=true
-                vault write "auth/$name/role/hello" \
+                vault write "auth/k3d-${nme}/role/hello" \
                   bound_service_account_names=default \
                   bound_service_account_namespaces=default \
-                  policies=$name-hello ttl=1h
+                  policies=k3d-${nme}-hello ttl=1h
                 ;;
               *)
                 kubectl --context k3d-${nme} "$@"
