@@ -20,6 +20,42 @@ local_resource("coder",
     ]
 )
 
+# Starts Tailscale on Linux
+local_resource("tailscale",
+    serve_cmd=[
+        "bash", "-c",
+        """
+            if [[ "Linux" == "$(uname -s)" ]]; then
+                cd w/tailscale
+                eval "$(direnv hook bash)"
+                direnv reload
+                _direnv_hook
+                this-tailscale-start
+            else
+                sleep infinity
+            fi
+        """
+    ]
+)
+
+# Starts Vault on Linux
+local_resource("vault",
+    serve_cmd=[
+        "bash", "-c",
+        """
+            if [[ "Linux" == "$(uname -s)" ]]; then
+                cd w/vault
+                eval "$(direnv hook bash)"
+                direnv reload
+                _direnv_hook
+                this-vault-start
+            else
+                sleep infinity
+            fi
+        """
+    ]
+)
+
 # Starts the docker builder, proxies at localhost:2375.  Configures docker
 # client with creds to publish to fly registry.
 local_resource("proxy-docker",
