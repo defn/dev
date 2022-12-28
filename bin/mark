@@ -7,14 +7,17 @@ else
 	gm="echo"
 fi
 
+m="$*"
+m="${m// /\\ }"
+
 echo
 case "${1:-}" in
 	--)
 		shift
-		eval $gm "$*"
+		eval $gm "$m"
 		;;
 	*)
-		eval $gm "$*"
+		eval $gm "$m"
 		;;
 esac
 echo
