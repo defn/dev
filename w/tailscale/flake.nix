@@ -44,8 +44,8 @@
           devInputs = with packages; [
             tailscale-up
             tailscale-start
-            tailscale-save
             tailscale-restore
+            tailscale-save
           ];
         };
 
