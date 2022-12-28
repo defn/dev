@@ -139,7 +139,6 @@
             docker
             docker-credential-helpers
 
-            nixpkgs-fmt
             cachix
 
             pinentry
