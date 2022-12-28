@@ -1,16 +1,20 @@
 #!/usr/bin/env bash
 
-m="$1"; shift
+gm="$(type -P gum)"
+if [[ -x "${gm}" ]]; then
+	gm="gum style --width 40 --border normal --margin 1 --padding \"1 2\" --border-foreground 212"
+else
+	gm="echo"
+fi
 
 echo
-case "${m}" in
+case "${1:-}" in
 	--)
 		shift
-		echo -e "$*"'\x1b]1337;SetMark\x07'
+		eval $gm "$*"
 		;;
 	*)
-		shift
-		echo -e "$*"'\x1b]1337;SetMark\x07'
+		eval $gm "$*"
 		;;
 esac
 echo
