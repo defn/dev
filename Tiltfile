@@ -62,7 +62,7 @@ local_resource("gh-webhook-forward",
                 eval "$(direnv hook bash)"
                 _direnv_hook
 
-                exec gh webhook forward --repo defn/dev --events=push --url=http://localhost:9000/hooks/gh
+                exec gh webhook forward --repo "$(git remote get-url origin | perl -pe 's{https://github.com/}{}')" --events=push --url=http://localhost:9000/hooks/gh
             else
                 exec sleep infinity
             fi
@@ -78,6 +78,7 @@ local_resource("webhook-cli",
                 eval "$(direnv hook bash)"
                 _direnv_hook
 
+                export WH_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
                 export WH_SECRET="$(pass WH_SECRET)"
                 touch /tmp/cache-priv-key.pem
                 chmod 600 /tmp/cache-priv-key.pem

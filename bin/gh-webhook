@@ -12,6 +12,11 @@ function main {
     local commit=$1; shift
 
     local branch="${ref##refs/heads/}"
+
+    if [[ "${branch}" != "${WH_BRANCH:-}" ]]; then
+        echo "ERROR: payload branch ${branch} does not match working branch ${WH_BRANCH:-}" 1>&2
+        return 1
+    fi
     
     mkdir -p /tmp/meh
     cd /tmp/meh
