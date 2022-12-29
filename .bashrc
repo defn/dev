@@ -111,7 +111,7 @@ if tty >/dev/null; then
 	}
 
 	function update_ps1 {
-		ls -td /tmp/vscode-ssh-auth-sock* 2>/dev/null | tail -n +2 | xargs rm -f /tmp/meh;
+		ls -td /tmp/vscode-ssh-auth-sock* 2>/dev/null | tail -n +2 | xargs rm -f /tmp/.meh;
 		if [[ ! -S "${SSH_AUTH_SOCK:-}" ]]; then
 			export SSH_AUTH_SOCK="$(ls -td /tmp/vscode-ssh-auth-sock-* 2>/dev/null | head -1)"
 		fi
