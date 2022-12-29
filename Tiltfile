@@ -91,6 +91,20 @@ local_resource("webhook-cli",
     ]
 )
 
+local_resource("webhook-log",
+    serve_cmd=[
+        "bash", "-c",
+        """
+            if [[ "Linux" == "$(uname -s)" ]]; then
+                touch /tmp/wh.log
+                exec tail -f /tmp/wh.log 
+            else
+                exec sleep infinity
+            fi
+        """
+    ]
+)
+
 # Starts the docker builder, proxies at localhost:2375.  Configures docker
 # client with creds to publish to fly registry.
 local_resource("proxy-docker",
