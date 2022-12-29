@@ -1,0 +1,44 @@
+[
+    {
+        "id": "gh",
+        "execute-command": "gh-webhook",
+        "pass-arguments-to-command": [
+            {
+                "source": "header",
+                "name": "X-GitHub-Event"
+            },
+            {
+                "source": "payload",
+                "name": "repository.clone_url"
+            },
+            {
+                "source": "payload",
+                "name": "after"
+            }
+        ],
+        "trigger-rule": {
+            "and": [
+                {
+                    "match": {
+                        "type": "payload-hmac-sha256",
+                        "secret": "{{ getenv "WH_SECRET" | js }}",
+                        "parameter": {
+                            "source": "header",
+                            "name": "X-Hub-Signature-256"
+                        }
+                    }
+                },
+                {
+                    "match": {
+                        "type": "value",
+                        "value": "push",
+                        "parameter": {
+                            "source": "header",
+                            "name": "X-GitHub-Event"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+]

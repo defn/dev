@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+function main {
+    set -exfu
+
+    exec 1>>/tmp/wh.log 2>&1
+
+    local event=$1; shift
+    local repo=$1; shift
+    local commit=$1; shift
+    
+    mkdir -p /tmp/meh
+    cd /tmp/meh
+    git clone $repo $commit || true
+    cd $commit
+    git fetch
+    git reset --hard $commit
+
+    time (
+        nix build
+        (
+            nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)'
+            nix build --json | jq -r '.[].outputs | to_entries[].value'
+        ) | xargs nix copy --verbose --to 'file:///nix/cache/nix?compression-level=0&parallel-compression=true&secret-key=/tmp/cache-priv-key.pem'
+    )
+
+    sync
+    echo "done: $commit"
+}
+
+main "$@"

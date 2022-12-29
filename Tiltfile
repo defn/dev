@@ -65,7 +65,27 @@ local_resource("gh-webhook-forward",
                 eval "$(direnv hook bash)"
                 direnv reload
                 _direnv_hook
-                gh webhook forward --repo defn/dev --events=push --url=http://localhost://localhost:9000 --secret "$(pass GH_WEBHOOK_SECRET)"
+                gh webhook forward --repo defn/dev --events=push --url=http://localhost://localhost:9000 --secret "$(pass WH_SECRET)"
+            else
+                sleep infinity
+            fi
+        """
+    ]
+)
+
+local_resource("webhook-cli",
+    serve_cmd=[
+        "bash", "-c",
+        """
+            if [[ "Linux" == "$(uname -s)" ]]; then
+                eval "$(direnv hook bash)"
+                direnv reload
+                _direnv_hook
+                export WH_SECRET="$(pass WH_SECRET)"
+                touch /tmp/cache-priv-key.pem
+                chmod 600 /tmp/cache-priv-key.pem
+                pass nix-serve-cache-priv-key.pem > /tmp/cache-priv-key.pem
+                webhook --hooks gh.json --template --verbose
             else
                 sleep infinity
             fi
