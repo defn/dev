@@ -12,10 +12,6 @@ m="${m// /\\ }"
 
 echo
 case "${1:-}" in
-	--)
-		shift
-		eval $gm "$m"
-		;;
 	*)
 		eval $gm "$m"
 		;;

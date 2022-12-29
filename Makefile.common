@@ -16,11 +16,11 @@ macos:
 	-docker context create host --docker host=unix:///var/run/docker.sock
 
 symlinks:
-	mark -- configure symlinks
+	mark configure symlinks
 	bash -x bin/persist-cache
 
 perms:
-	mark -- configure permissions
+	mark configure permissions
 	if [[ "Linux" == "$(shell uname -s)" ]]; then if test -S /var/run/docker.sock; then sudo chgrp ubuntu /var/run/docker.sock; sudo chmod 770 /var/run/docker.sock; fi; fi
 	if test -S /run/containerd/containerd.sock; then sudo chgrp ubuntu /run/containerd/containerd.sock; sudo chmod 770 /run/containerd/containerd.sock; fi
 	-chmod 0700 ~/.gnupg/. ~/.gnupg2/.
@@ -35,7 +35,7 @@ install:
 install-inner:
 	$(MAKE) symlinks perms
 
-	mark -- configure password-store
+	mark configure password-store
 	mkdir -p ~/work/password-store
 	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
 		if ! test -d ~/work/password-store/.git/.; then \
@@ -43,7 +43,7 @@ install-inner:
 		fi; \
 	fi
 
-	mark -- configure gpg
+	mark configure gpg
 	if test -d ~/.password-store/home/.gnupg; then rsync -ia ~/.password-store/home/.gnupg/. ~/.gnupg/.; fi
 	$(MAKE) perms
 	env GPG_TTY=$$(tty) $(MAKE) init-gpg
@@ -52,7 +52,7 @@ install-inner:
 		&& docker context create host --docker host=unix:///var/run/docker.sock || true \
         && docker context use host
 
-	mark -- configure repos
+	mark configure repos
 
 	if nc -z -v localhost 8200 2>/dev/null; then \
 		$(MAKE) vault-unseal; \
@@ -60,7 +60,7 @@ install-inner:
 
 	$(MAKE) login
 
-	mark -- dotfiles
+	mark dotfiles
 	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
 		mkdir -p ~/.config/coderv2/dotfiles; \
 		mkdir -p /home/ubuntu/work/.codespaces/.persistedshare; \
@@ -77,7 +77,7 @@ logout:
 	-echo RELOADAGENT | gpg-connect-agent
 
 login:
-	mark -- configure kubeconfig, argocd
+	mark configure kubeconfig, argocd
 	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then $(MAKE) kubeconfig; $(MAKE) argocd-login || true; fi
 
 github-login:
