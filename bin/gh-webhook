@@ -8,14 +8,17 @@ function main {
 
     local event=$1; shift
     local repo=$1; shift
+    local ref=$1; shift
     local commit=$1; shift
+
+    local branch="${ref##refs/heads/}"
     
     mkdir -p /tmp/meh
     cd /tmp/meh
-    git clone $repo $commit || true
-    cd $commit
+    git clone -b "$branch" --depth 1 "$repo" "$commit" || true
+    cd "$commit"
     git fetch
-    git reset --hard $commit
+    git reset --hard "$commit"
 
     time (
         nix build
