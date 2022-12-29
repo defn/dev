@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
+set -exfu
+
+exec 1>>/tmp/wh.log 2>&1
 
 function main {
-    set -exfu
-
-    exec 1>>/tmp/wh.log 2>&1
 
     local event=$1; shift
     local repo=$1; shift
