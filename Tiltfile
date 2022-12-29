@@ -9,7 +9,6 @@ local_resource("coder",
         """
             if [[ "Darwin" == "$(uname -s)" ]]; then
                 eval "$(direnv hook bash)"
-                direnv reload
                 _direnv_hook
                 this-coder-server-kill
                 this-coder-init
@@ -28,7 +27,6 @@ local_resource("tailscale",
             if [[ "Linux" == "$(uname -s)" ]]; then
                 cd w/tailscale
                 eval "$(direnv hook bash)"
-                direnv reload
                 _direnv_hook
                 this-tailscale-start
             else
@@ -46,7 +44,6 @@ local_resource("vault",
             if [[ "Linux" == "$(uname -s)" ]]; then
                 cd w/vault
                 eval "$(direnv hook bash)"
-                direnv reload
                 _direnv_hook
                 this-vault-start
             else
@@ -63,7 +60,6 @@ local_resource("gh-webhook-forward",
         """
             if [[ "Linux" == "$(uname -s)" ]]; then
                 eval "$(direnv hook bash)"
-                direnv reload
                 _direnv_hook
                 gh webhook forward --repo defn/dev --events=push --url=http://localhost:9000 --secret "$(pass WH_SECRET)"
             else
@@ -79,13 +75,12 @@ local_resource("webhook-cli",
         """
             if [[ "Linux" == "$(uname -s)" ]]; then
                 eval "$(direnv hook bash)"
-                direnv reload
                 _direnv_hook
                 export WH_SECRET="$(pass WH_SECRET)"
                 touch /tmp/cache-priv-key.pem
                 chmod 600 /tmp/cache-priv-key.pem
                 pass nix-serve-cache-priv-key.pem > /tmp/cache-priv-key.pem
-                webhook --hooks gh.json --template --verbose
+                webhook --hooks gh.json --reload --template --verbose
             else
                 sleep infinity
             fi

@@ -1,7 +1,7 @@
 [
     {
         "id": "gh",
-        "execute-command": "gh-webhook",
+        "execute-command": "bin/gh-webhook",
         "pass-arguments-to-command": [
             {
                 "source": "header",
