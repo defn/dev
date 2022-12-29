@@ -56,6 +56,23 @@ local_resource("vault",
     ]
 )
 
+# Starts gh webhook forward on Linux
+local_resource("gh-webhook-forward",
+    serve_cmd=[
+        "bash", "-c",
+        """
+            if [[ "Linux" == "$(uname -s)" ]]; then
+                eval "$(direnv hook bash)"
+                direnv reload
+                _direnv_hook
+                gh webhook forward --repo defn/dev --events=push --url=http://localhost://localhost:9000 --secret "$(pass GH_WEBHOOK_SECRET)"
+            else
+                sleep infinity
+            fi
+        """
+    ]
+)
+
 # Starts the docker builder, proxies at localhost:2375.  Configures docker
 # client with creds to publish to fly registry.
 local_resource("proxy-docker",
