@@ -62,7 +62,7 @@ local_resource("gh-webhook-forward",
                 eval "$(direnv hook bash)"
                 _direnv_hook
 
-                exec gh webhook forward --repo defn/dev --events=push --url=http://localhost:9000
+                exec gh webhook forward --repo defn/dev --events=push --url=http://localhost:9000/hooks/gh
             else
                 exec sleep infinity
             fi

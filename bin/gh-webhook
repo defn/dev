@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 set -exfu
 
 exec 1>>/tmp/wh.log 2>&1
