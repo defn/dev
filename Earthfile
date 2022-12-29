@@ -1,6 +1,6 @@
 VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-arg --use-copy-link --use-registry-for-with-docker --ci-arg 0.6
 
-IMPORT github.com/defn/pkg:0.0.100
+IMPORT github.com/defn/pkg:0.0.112
 
 build-devcontainer:
     ARG image
