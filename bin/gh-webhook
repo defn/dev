@@ -37,6 +37,8 @@ function main {
         ) | xargs nix copy --verbose --to 'file:///tmp/cache/nix?compression-level=0&parallel-compression=true'
     )
 
+    set +x
+
     sync
     echo "done: $commit"
 }

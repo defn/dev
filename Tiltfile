@@ -70,7 +70,7 @@ local_resource("gh-webhook-forward",
     ]
 )
 
-local_resource("webhook-cli",
+local_resource("webhook-gh",
     serve_cmd=[
         "bash", "-c",
         """
