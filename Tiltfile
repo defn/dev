@@ -65,7 +65,7 @@ local_resource("gh-webhook-forward",
                 eval "$(direnv hook bash)"
                 direnv reload
                 _direnv_hook
-                gh webhook forward --repo defn/dev --events=push --url=http://localhost://localhost:9000 --secret "$(pass WH_SECRET)"
+                gh webhook forward --repo defn/dev --events=push --url=http://localhost:9000 --secret "$(pass WH_SECRET)"
             else
                 sleep infinity
             fi
