@@ -11,9 +11,9 @@ local_resource("coder",
                 eval "$(direnv hook bash)"
                 _direnv_hook
                 this-coder-server-kill
-                this-coder-init
+                exec this-coder-init
             else
-                sleep infinity
+                exec sleep infinity
             fi
         """
     ]
@@ -28,9 +28,9 @@ local_resource("tailscale",
                 cd w/tailscale
                 eval "$(direnv hook bash)"
                 _direnv_hook
-                this-tailscale-start
+                exec this-tailscale-start
             else
-                sleep infinity
+                exec sleep infinity
             fi
         """
     ]
@@ -45,9 +45,9 @@ local_resource("vault",
                 cd w/vault
                 eval "$(direnv hook bash)"
                 _direnv_hook
-                this-vault-start
+                exec this-vault-start
             else
-                sleep infinity
+                exec sleep infinity
             fi
         """
     ]
@@ -61,10 +61,10 @@ local_resource("gh-webhook-forward",
             if [[ "Linux" == "$(uname -s)" ]]; then
                 eval "$(direnv hook bash)"
                 _direnv_hook
-                
-                gh webhook forward --repo defn/dev --events=push --url=http://localhost:9000 --secret "$(pass WH_SECRET)"
+
+                exec gh webhook forward --repo defn/dev --events=push --url=http://localhost:9000
             else
-                sleep infinity
+                exec sleep infinity
             fi
         """
     ]
@@ -82,9 +82,9 @@ local_resource("webhook-cli",
                 touch /tmp/cache-priv-key.pem
                 chmod 600 /tmp/cache-priv-key.pem
                 pass nix-serve-cache-priv-key.pem > /tmp/cache-priv-key.pem
-                webhook --hooks gh.json --hotreload --template --verbose
+                exec webhook --hooks gh.json --hotreload --template --verbose
             else
-                sleep infinity
+                exec sleep infinity
             fi
         """
     ]
