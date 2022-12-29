@@ -8,7 +8,7 @@
     webhook.url = github:defn/pkg/webhook-2.8.0?dir=webhook;
     flyctl.url = github:defn/pkg/flyctl-0.0.441-2?dir=flyctl;
     vault.url = github:defn/pkg/vault-1.12.2-4?dir=vault;
-    localdev.url = github:defn/pkg/localdev-0.0.2?dir=localdev;
+    localdev.url = github:defn/pkg/localdev-0.0.3?dir=localdev;
   };
 
   outputs = inputs:
