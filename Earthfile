@@ -8,11 +8,11 @@ build-nix:
     BUILD --platform=linux/arm64 +image-nix --image=${image} --arch=arm64
 
 build-fly:
-    ARG image
+    ARG image=ghcr.io/defn/dev:latest-fly
     BUILD --platform=linux/amd64 +image-fly --image=${image} --arch=amd64
 
 build-devcontainer:
-    ARG image
+    ARG image=ghcr.io/defn/dev:latest-devcontainer
     BUILD --platform=linux/amd64 +image-devcontainer --image=${image} --arch=amd64
     BUILD --platform=linux/arm64 +image-devcontainer --image=${image} --arch=arm64
 
