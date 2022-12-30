@@ -58,7 +58,7 @@ nix:
 
 nix-install:
     ARG arch
-    FROM pkg+root --arch=${arch}
+    FROM pkg+nix-ubuntu --arch=${arch}
 
     # /nix-install
     USER root
