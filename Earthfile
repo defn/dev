@@ -7,6 +7,11 @@ build-nix:
     BUILD --platform=linux/amd64 +image-nix --image=${image} --arch=amd64
     BUILD --platform=linux/arm64 +image-nix --image=${image} --arch=arm64
 
+build-nix-install:
+    ARG image=ghcr.io/defn/dev:latest-nix
+    BUILD --platform=linux/amd64 +image-nix-install --image=${image} --arch=amd64
+    BUILD --platform=linux/arm64 +image-nix-install --image=${image} --arch=arm64
+
 build-fly:
     ARG image=ghcr.io/defn/dev:latest-fly
     BUILD --platform=linux/amd64 +image-fly --image=${image} --arch=amd64
@@ -20,6 +25,12 @@ image-nix:
     ARG arch
     ARG image
     FROM +nix --arch=${arch}
+    SAVE IMAGE --push ${image}
+
+image-nix-install:
+    ARG arch
+    ARG image
+    FROM +nix-install --arch=${arch}
     SAVE IMAGE --push ${image}
 
 image-fly:
@@ -44,6 +55,18 @@ nix:
 
     # nix profile
     RUN bash -c '~/.nix-profile/bin/nix profile install nixpkgs#{nix-direnv,direnv,pinentry,nixpkgs-fmt}'
+
+nix-install:
+    ARG arch
+    FROM pkg+root --arch=${arch}
+
+    # /nix-install
+    USER root
+    RUN install -d -m 0755 -o ubuntu -g ubuntu /nix && install -d -m 0755 -o ubuntu -g ubuntu /nix-install
+
+    # nix
+    USER ubuntu
+    RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' && mv /nix/var /nix/store /nix-install/
 
 fly:
     ARG arch
