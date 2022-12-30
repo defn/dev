@@ -27,6 +27,7 @@ local_resource("tailscale",
             if [[ "Linux" == "$(uname -s)" ]]; then
                 cd w/tailscale
                 eval "$(direnv hook bash)"
+                direnv allow
                 _direnv_hook
                 exec this-tailscale-start
             else
@@ -44,6 +45,7 @@ local_resource("vault",
             if [[ "Linux" == "$(uname -s)" ]]; then
                 cd w/vault
                 eval "$(direnv hook bash)"
+                direnv allow
                 _direnv_hook
                 exec this-vault-start
             else

@@ -144,8 +144,8 @@ resource "docker_container" "workspace" {
   }
 
   volumes {
-    container_path = "/nix"
-    volume_name    = docker_volume.nix_volume.name
+    container_path = "/cache"
+    volume_name    = "nix-cache"
     read_only      = false
   }
 

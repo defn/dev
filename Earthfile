@@ -43,7 +43,7 @@ devcontainer:
 
     # defn/dev
     COPY --dir --chown=ubuntu:ubuntu . .
-    RUN (git clean -nfd || true) \
+    RUN (git clean -nfdx || true) \
         && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
 
     SAVE ARTIFACT /nix nix
@@ -88,7 +88,7 @@ dev:
         && (~/bin/e n cache || true) \
         && (~/bin/e n cache defn || true) \
         && rm -f result
-    RUN (git clean -nfd || true) \
+    RUN (git clean -nfdx || true) \
         && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd) \
         && rm -f work
 
