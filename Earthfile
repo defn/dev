@@ -97,7 +97,7 @@ flake-root:
 
     # nix config
     RUN mkdir -p ~/.config/nix
-    COPY nix.conf /home/ubuntu/.config/nix/nix.conf
+    COPY .config/nix/nix-flake.conf /home/ubuntu/.config/nix/nix.conf
     COPY .direnvrc /home/ubuntu/.direnvrc
 
     # build prep
