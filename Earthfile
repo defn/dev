@@ -12,6 +12,11 @@ build-nix-root:
     BUILD --platform=linux/amd64 +image-nix-root --image=${image} --arch=amd64
     BUILD --platform=linux/arm64 +image-nix-root --image=${image} --arch=arm64
 
+build-flake-root:
+    ARG image=ghcr.io/defn/dev:latest-nix-root
+    BUILD --platform=linux/amd64 +image-nix-root --image=${image} --arch=amd64
+    BUILD --platform=linux/arm64 +image-nix-root --image=${image} --arch=arm64
+
 build-nix:
     ARG image=ghcr.io/defn/dev:latest-nix
     BUILD --platform=linux/amd64 +image-nix --image=${image}
@@ -43,6 +48,12 @@ image-nix-root:
     FROM +nix-root --arch=${arch}
     SAVE IMAGE --push ${image}
 
+image-flake-root:
+    ARG arch
+    ARG image
+    FROM +flake-root --arch=${arch}
+    SAVE IMAGE --push ${image}
+
 image-nix:
     ARG image
     FROM +nix
@@ -70,6 +81,10 @@ root:
 nix-root:
     ARG arch
     FROM pkg+nix-ubuntu --arch=${arch}
+
+flake-root:
+    ARG arch
+    FROM pkg+nix-root --arch=${arch}
 
 fly:
     FROM ghcr.io/defn/dev:latest-root

@@ -33,6 +33,7 @@ function main {
 
     time earthly --no-output --push +build-root
     time earthly --no-output --push +build-nix-root
+    time earthly --no-output --push +build-flake-root
 
     time earthly --no-output --push +build-nix
     time earthly --no-output --push +build-nix-install
