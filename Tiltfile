@@ -56,7 +56,7 @@ local_resource("vault",
 )
 
 # Starts gh webhook forward on Linux
-local_resource("gh-webhook-forward",
+local_resource("webhook-forward",
     serve_cmd=[
         "bash", "-c",
         """
