@@ -85,6 +85,7 @@ login:
 github-login:
 	if ! gh auth status; then echo Y | gh auth login -p https -h github.com -w; fi
 	-gh extension install cli/gh-webhook
+	pass GHCR_TOKEN | docker login ghcr.io -u $$GIT_AUTHOR_NAME --password-stdin
 
 pull-repos: # Pull dev, app, home, and password-store repos
 	for a in . .dotfiles .password-store; do (echo; echo "$$a"; cd "$$a" && git pull) || true; done

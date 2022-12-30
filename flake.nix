@@ -125,6 +125,7 @@
             pre-commit
             aws-vault
             jq
+            yq
             gron
             fzf
             git
