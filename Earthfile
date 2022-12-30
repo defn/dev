@@ -4,13 +4,13 @@ IMPORT github.com/defn/pkg:0.0.112
 
 build-root:
     ARG image=ghcr.io/defn/dev:latest-root
-    BUILD --platform=linux/amd64 +image-root--image=${image} --arch=amd64
+    BUILD --platform=linux/amd64 +image-root --image=${image} --arch=amd64
     BUILD --platform=linux/arm64 +image-root --image=${image} --arch=arm64
 
-build-nix-ubuntu:
-    ARG image=ghcr.io/defn/dev:latest-nix-ubuntu
-    BUILD --platform=linux/amd64 +image-nix-ubuntu --image=${image} --arch=amd64
-    BUILD --platform=linux/arm64 +image-nix-ubuntu --image=${image} --arch=arm64
+build-nix-root:
+    ARG image=ghcr.io/defn/dev:latest-nix-root
+    BUILD --platform=linux/amd64 +image-nix-root --image=${image} --arch=amd64
+    BUILD --platform=linux/arm64 +image-nix-root --image=${image} --arch=arm64
 
 build-nix:
     ARG image=ghcr.io/defn/dev:latest-nix
@@ -37,41 +37,37 @@ image-root:
     FROM +root --arch=${arch}
     SAVE IMAGE --push ${image}
 
-image-nix-ubuntu:
+image-nix-root:
     ARG arch
     ARG image
     FROM +nix-ubuntu --arch=${arch}
     SAVE IMAGE --push ${image}
 
 image-nix:
-    ARG arch
     ARG image
-    FROM +nix --arch=${arch}
+    FROM +nix
     SAVE IMAGE --push ${image}
 
 image-nix-install:
-    ARG arch
     ARG image
-    FROM +nix-install --arch=${arch}
+    FROM +nix-install
     SAVE IMAGE --push ${image}
 
 image-fly:
-    ARG arch
     ARG image
-    FROM +fly --arch=${arch}
+    FROM +fly
     SAVE IMAGE --push ${image}
 
 image-devcontainer:
-    ARG arch
     ARG image
-    FROM +devcontainer --arch=${arch}
+    FROM +devcontainer
     SAVE IMAGE --push ${image}
 
 root:
     ARG arch
     FROM pkg+root --arch=${arch}
 
-nix-ubuntu:
+nix-root:
     ARG arch
     FROM pkg+nix-ubuntu --arch=${arch}
 
