@@ -155,6 +155,12 @@ resource "docker_container" "workspace" {
     read_only      = false
   }
 
+  volumes {
+    container_path = "/nix"
+    volume_name    = docker_volume.nix_volume.name
+    read_only      = false
+  }
+
   labels {
     label = "coder.owner"
     value = data.coder_workspace.this.owner
