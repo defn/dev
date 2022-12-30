@@ -40,7 +40,7 @@ image-root:
 image-nix-root:
     ARG arch
     ARG image
-    FROM +nix-ubuntu --arch=${arch}
+    FROM +nix-root --arch=${arch}
     SAVE IMAGE --push ${image}
 
 image-nix:
