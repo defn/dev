@@ -34,7 +34,6 @@ function main {
     time earthly --no-output --push +build-nix
     time earthly --no-output --push +build-fly
     time earthly --no-output --push +build-devcontainer
-    time earthly --no-output --push +dev
 
     set +x
 
