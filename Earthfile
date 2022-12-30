@@ -71,6 +71,14 @@ nix-root:
     ARG arch
     FROM pkg+nix-ubuntu --arch=${arch}
 
+fly:
+    FROM ghcr.io/defn/dev:latest-root
+
+    # defn/dev
+    COPY --dir --chown=ubuntu:ubuntu . .
+    RUN (git clean -nfd || true) \
+        && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
+
 nix:
     FROM ghcr.io/defn/dev:latest-root
 
@@ -91,14 +99,6 @@ nix-install:
     # nix
     USER ubuntu
     RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' && mv /nix/var /nix/store /nix-install/
-
-fly:
-    FROM ghcr.io/defn/dev:latest-root
-
-    # defn/dev
-    COPY --dir --chown=ubuntu:ubuntu . .
-    RUN (git clean -nfd || true) \
-        && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
 
 devcontainer:
     FROM ghcr.io/defn/dev:latest-nix
