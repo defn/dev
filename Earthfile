@@ -96,7 +96,7 @@ nix-install:
     # nix (moved to /nix-install)
     RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix-install
     RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' \
-        && nix profile install nixpkgs#nix-direnv nixpkgs#direnv \
+        && ~/.nix-profile/bin/nix profile install nixpkgs#nix-direnv nixpkgs#direnv \
         && mv /nix/var /nix/store /nix-install/
 
     COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
