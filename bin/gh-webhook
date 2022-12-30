@@ -31,6 +31,9 @@ function main {
         nix path-info --all | grep -v '\.drv$' | xargs nix copy --verbose --to 'file:///tmp/cache/nix?compression-level=0&parallel-compression=true'
     )
 
+    time earthly --no-output --push +build-root
+    time earthly --no-output --push +build-nix-ubuntu
+
     time earthly --no-output --push +build-nix
     time earthly --no-output --push +build-nix-install
     time earthly --no-output --push +build-fly

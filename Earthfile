@@ -2,24 +2,46 @@ VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-ar
 
 IMPORT github.com/defn/pkg:0.0.112
 
+build-root:
+    ARG image=ghcr.io/defn/dev:latest-root
+    BUILD --platform=linux/amd64 +image-root--image=${image} --arch=amd64
+    BUILD --platform=linux/arm64 +image-root --image=${image} --arch=arm64
+
+build-nix-ubuntu:
+    ARG image=ghcr.io/defn/dev:latest-nix-ubuntu
+    BUILD --platform=linux/amd64 +image-nix-ubuntu --image=${image} --arch=amd64
+    BUILD --platform=linux/arm64 +image-nix-ubuntu --image=${image} --arch=arm64
+
 build-nix:
     ARG image=ghcr.io/defn/dev:latest-nix
-    BUILD --platform=linux/amd64 +image-nix --image=${image} --arch=amd64
-    BUILD --platform=linux/arm64 +image-nix --image=${image} --arch=arm64
+    BUILD --platform=linux/amd64 +image-nix --image=${image}
+    BUILD --platform=linux/arm64 +image-nix --image=${image}
 
 build-nix-install:
     ARG image=ghcr.io/defn/dev:latest-nix-install
-    BUILD --platform=linux/amd64 +image-nix-install --image=${image} --arch=amd64
-    BUILD --platform=linux/arm64 +image-nix-install --image=${image} --arch=arm64
+    BUILD --platform=linux/amd64 +image-nix-install --image=${image}
+    BUILD --platform=linux/arm64 +image-nix-install --image=${image}
 
 build-fly:
     ARG image=ghcr.io/defn/dev:latest-fly
-    BUILD --platform=linux/amd64 +image-fly --image=${image} --arch=amd64
+    BUILD --platform=linux/amd64 +image-fly --image=${image}
 
 build-devcontainer:
     ARG image=ghcr.io/defn/dev:latest-devcontainer
-    BUILD --platform=linux/amd64 +image-devcontainer --image=${image} --arch=amd64
-    BUILD --platform=linux/arm64 +image-devcontainer --image=${image} --arch=arm64
+    BUILD --platform=linux/amd64 +image-devcontainer --image=${image}
+    BUILD --platform=linux/arm64 +image-devcontainer --image=${image}
+
+image-root:
+    ARG arch
+    ARG image
+    FROM +root --arch=${arch}
+    SAVE IMAGE --push ${image}
+
+image-nix-ubuntu:
+    ARG arch
+    ARG image
+    FROM +nix-ubuntu --arch=${arch}
+    SAVE IMAGE --push ${image}
 
 image-nix:
     ARG arch
@@ -45,9 +67,16 @@ image-devcontainer:
     FROM +devcontainer --arch=${arch}
     SAVE IMAGE --push ${image}
 
-nix:
+root:
     ARG arch
     FROM pkg+root --arch=${arch}
+
+nix-ubuntu:
+    ARG arch
+    FROM pkg+nix-ubuntu --arch=${arch}
+
+nix:
+    FROM ghcr.io/defn/dev:latest-root
 
     # nix
     RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile' && mkdir -p .config/nix
@@ -57,8 +86,7 @@ nix:
     RUN bash -c '~/.nix-profile/bin/nix profile install nixpkgs#{nix-direnv,direnv,pinentry,nixpkgs-fmt}'
 
 nix-install:
-    ARG arch
-    FROM pkg+nix-ubuntu --arch=${arch}
+    FROM ghcr.io/defn/dev:latest-nix
 
     # /nix-install
     USER root
@@ -69,8 +97,7 @@ nix-install:
     RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' && mv /nix/var /nix/store /nix-install/
 
 fly:
-    ARG arch
-    FROM pkg+root --arch=${arch}
+    FROM ghcr.io/defn/dev:latest-root
 
     # defn/dev
     COPY --dir --chown=ubuntu:ubuntu . .
@@ -78,7 +105,6 @@ fly:
         && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
 
 devcontainer:
-    ARG arch
     FROM ghcr.io/defn/dev:latest-nix
 
     # defn/dev
@@ -89,7 +115,6 @@ devcontainer:
     SAVE ARTIFACT /nix nix
 
 dev:
-    ARG arch
     FROM ghcr.io/defn/dev:latest-nix
 
     # work
