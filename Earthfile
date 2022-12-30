@@ -69,6 +69,6 @@ dev:
     # nix profile
     RUN bash -c '~/.nix-profile/bin/nix profile install nixpkgs#{nix-direnv,direnv,pinentry,nixpkgs-fmt}'
 
-    # defn/dev flake
-    COPY flake.* SLUG VERSION .
+    # defn/dev
+    COPY --dir --chown=ubuntu:ubuntu . .
     RUN ~/.nix-profile/bin/nix build
