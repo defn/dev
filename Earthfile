@@ -72,7 +72,6 @@ nix-root:
     RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix
     RUN mkdir -p /home/ubuntu/.config/nix
     COPY --chown=ubuntu:ubuntu .config/nix/nix-flake.conf /home/ubuntu/.config/nix/nix.conf
-    COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
 
 # nix applications where /nix is not a data volume
 nix-installed:
@@ -81,6 +80,10 @@ nix-installed:
 
     # nix
     RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon'
+
+    # direnv
+    nix profile install nixpkgs#nix-direnv nixpkgs#direnv
+    COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
 
     # nix config
     RUN echo 'use flake' > .envrc
@@ -92,7 +95,11 @@ nix-install:
 
     # nix (moved to /nix-install)
     RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix-install
-    RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' && mv /nix/var /nix/store /nix-install/
+    RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' \
+        && nix profile install nixpkgs#nix-direnv nixpkgs#direnv \
+        && mv /nix/var /nix/store /nix-install/
+
+    COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
 
     # nix config
     RUN echo 'use flake' > .envrc
@@ -130,7 +137,7 @@ devcontainer:
 
     # nix profile
     COPY .config/nix/nix-earthly.conf /home/ubuntu/.config/nix/nix.conf
-    RUN ~/.nix-profile/bin/nix profile install nixpkgs#nix-direnv nixpkgs#direnv nixpkgs#pinentry nixpkgs#nixpkgs-fmt
+    RUN ~/.nix-profile/bin/nix profile install nixpkgs#pinentry nixpkgs#nixpkgs-fmt
 
     # defn/dev
     COPY --chown=ubuntu:ubuntu --dir . .
@@ -139,7 +146,7 @@ devcontainer:
 
 # fly workspace container
 fly:
-    FROM ghcr.io/defn/dev:latest-nix-installed
+    FROM ghcr.io/defn/dev:latest-nix-install
     WORKDIR /home/ubuntu
 
     # defn/dev
