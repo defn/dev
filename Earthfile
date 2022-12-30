@@ -90,7 +90,7 @@ nix:
     RUN bash -c '~/.nix-profile/bin/nix profile install nixpkgs#{nix-direnv,direnv,pinentry,nixpkgs-fmt}'
 
 nix-install:
-    FROM ghcr.io/defn/dev:latest-nix
+    FROM ghcr.io/defn/dev:latest-root
 
     # /nix-install
     USER root
