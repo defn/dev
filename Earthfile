@@ -71,6 +71,7 @@ nix-root:
 # nix applications where /nix is not a data volume
 nix-installed:
     FROM ghcr.io/defn/dev:latest-nix-root
+    WORKDIR /app
 
     # nix
     RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix
@@ -78,10 +79,12 @@ nix-installed:
 
     # nix config
     COPY .direnvrc /home/ubuntu/.direnvrc
+    RUN echo 'use flake' > .envrc
 
 # nix applications where /nix is a data volume
 nix-install:
     FROM ghcr.io/defn/dev:latest-nix-root
+    WORKDIR /app
 
     # nix but moved to /nix-install
     RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix
@@ -89,11 +92,14 @@ nix-install:
     RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' && mv /nix/var /nix/store /nix-install/
 
     # nix config
-    COPY .direnvrc /home/ubuntu/.direnvrc
+    COPY --chown=ubuntu:ubuntu .config/nix/nix-flake.conf /home/ubuntu/.config/nix/nix.conf
+    COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
+    RUN echo 'use flake' > .envrc
 
 # for building flakes and saving thier nix artifacts
 flake-root:
     FROM ghcr.io/defn/dev:latest-nix-installed
+    WORKDIR /app
 
     # nix config
     RUN mkdir -p ~/.config/nix
@@ -109,6 +115,7 @@ flake-root:
 # testing defn/dev build
 dev:
     FROM ghcr.io/defn/dev:latest-nix-installed
+    WORKDIR /home/ubuntu
 
     # work
     COPY bin/persist-cache /tmp/
@@ -123,6 +130,7 @@ dev:
 # coder workspace container
 devcontainer:
     FROM ghcr.io/defn/dev:latest-nix-installed
+    WORKDIR /home/ubuntu
 
     # nix profile
     RUN mkdir -p .config/nix
@@ -137,6 +145,7 @@ devcontainer:
 # fly workspace container
 fly:
     FROM ghcr.io/defn/dev:latest-nix-installed
+    WORKDIR /home/ubuntu
 
     # defn/dev
     COPY --dir --chown=ubuntu:ubuntu . .
