@@ -8,7 +8,7 @@ build-nix:
     BUILD --platform=linux/arm64 +image-nix --image=${image} --arch=arm64
 
 build-nix-install:
-    ARG image=ghcr.io/defn/dev:latest-nix
+    ARG image=ghcr.io/defn/dev:latest-nix-install
     BUILD --platform=linux/amd64 +image-nix-install --image=${image} --arch=amd64
     BUILD --platform=linux/arm64 +image-nix-install --image=${image} --arch=arm64
 
