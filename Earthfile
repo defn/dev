@@ -34,7 +34,7 @@ devcontainer:
     FROM pkg+root --arch=${arch}
 
     # nix
-    RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile ' && mkdir -p .config/nix
+    RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon --no-modify-profile' && mkdir -p .config/nix
     COPY .config/nix/nix-earthly.conf .config/nix/nix.conf
 
     # nix profile
