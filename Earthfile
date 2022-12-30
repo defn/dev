@@ -1,6 +1,6 @@
 VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-arg --use-copy-link --use-registry-for-with-docker --ci-arg 0.6
 
-IMPORT github.com/defn/pkg:0.0.114
+IMPORT github.com/defn/pkg:0.0.115
 
 build-root:
     ARG image=ghcr.io/defn/dev:latest-root
@@ -14,8 +14,8 @@ build-nix-root:
 
 build-flake-root:
     ARG image=ghcr.io/defn/dev:latest-flake-root
-    BUILD --platform=linux/amd64 +image-flake-root --image=${image} --arch=amd64
-    BUILD --platform=linux/arm64 +image-flake-root --image=${image} --arch=arm64
+    BUILD --platform=linux/amd64 +image-flake-root --image=${image}
+    BUILD --platform=linux/arm64 +image-flake-root --image=${image}
 
 build-nix:
     ARG image=ghcr.io/defn/dev:latest-nix
@@ -132,33 +132,41 @@ dev:
     RUN ~/.nix-profile/bin/nix build
 
 ###############################################
-flake-root:
-    ARG arch
-    FROM pkg+flake-root --arch=${arch}
-
-###############################################
 nix-root:
     ARG arch
-    FROM pkg+nix-root --arch=${arch}
+    FROM pkg+root --arch=${arch}
 
 nix-installed:
     FROM ghcr.io/defn/dev:latest-nix-root
 
-    # /nix-install
-    USER root
-    RUN install -d -m 0755 -o ubuntu -g ubuntu /nix
-
     # nix
-    USER ubuntu
+    RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix
     RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon'
+
+    # nix config
+    COPY .direnvrc /home/ubuntu/.direnvrc
 
 nix-install:
     FROM ghcr.io/defn/dev:latest-nix-root
 
-    # /nix-install
-    USER root
-    RUN install -d -m 0755 -o ubuntu -g ubuntu /nix && install -d -m 0755 -o ubuntu -g ubuntu /nix-install
-
-    # nix
-    USER ubuntu
+    # nix but moved to /nix-install
+    RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix
+    RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix-install
     RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' && mv /nix/var /nix/store /nix-install/
+
+    # nix config
+    COPY .direnvrc /home/ubuntu/.direnvrc
+
+flake-root:
+    FROM ghcr.io/defn/dev:latest-nix-installed
+
+    # nix config
+    RUN mkdir -p ~/.config/nix
+    COPY nix.conf /home/ubuntu/.config/nix/nix.conf
+    COPY .direnvrc /home/ubuntu/.direnvrc
+
+    # build prep
+    RUN mkdir build && cd build && git init
+
+    # store
+    RUN mkdir store

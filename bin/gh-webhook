@@ -33,15 +33,13 @@ function main {
 
     time earthly --no-output --push +build-root
     time earthly --no-output --push +build-fly
-
     time earthly --no-output --push +build-nix
     time earthly --no-output --push +build-devcontainer
-
-    time earthly --no-output --push +build-flake-root
 
     time earthly --no-output --push +build-nix-root
     time earthly --no-output --push +build-nix-installed
     time earthly --no-output --push +build-nix-install
+    time earthly --no-output --push +build-flake-root
 
     set +x
 
