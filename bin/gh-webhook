@@ -30,7 +30,7 @@ function main {
         (
             nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)'
             nix build --json | jq -r '.[].outputs | to_entries[].value'
-        ) | xargs nix copy --verbose --to 'file:///nix/cache/nix?compression-level=0&parallel-compression=true&secret-key=/tmp/cache-priv-key.pem'
+        ) | xargs nix copy --verbose --to 'file:///cache/nix?compression-level=0&parallel-compression=true&secret-key=/tmp/cache-priv-key.pem'
         (
             nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)'
             nix build --json | jq -r '.[].outputs | to_entries[].value'
