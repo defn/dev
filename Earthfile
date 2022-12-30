@@ -14,8 +14,8 @@ build-nix-root:
 
 build-flake-root:
     ARG image=ghcr.io/defn/dev:latest-flake-root
-    BUILD --platform=linux/amd64 +image-nix-root --image=${image} --arch=amd64
-    BUILD --platform=linux/arm64 +image-nix-root --image=${image} --arch=arm64
+    BUILD --platform=linux/amd64 +image-flake-root --image=${image} --arch=amd64
+    BUILD --platform=linux/arm64 +image-flake-root --image=${image} --arch=arm64
 
 build-nix:
     ARG image=ghcr.io/defn/dev:latest-nix
