@@ -27,6 +27,11 @@ build-nix-install:
     BUILD --platform=linux/amd64 +image-nix-install --image=${image}
     BUILD --platform=linux/arm64 +image-nix-install --image=${image}
 
+build-nix-installed:
+    ARG image=ghcr.io/defn/dev:latest-nix-installed
+    BUILD --platform=linux/amd64 +image-nix-installed --image=${image}
+    BUILD --platform=linux/arm64 +image-nix-installed --image=${image}
+
 build-fly:
     ARG image=ghcr.io/defn/dev:latest-fly
     BUILD --platform=linux/amd64 +image-fly --image=${image}
@@ -57,6 +62,11 @@ image-flake-root:
 image-nix:
     ARG image
     FROM +nix
+    SAVE IMAGE --push ${image}
+
+image-nix-installed:
+    ARG image
+    FROM +nix-installed
     SAVE IMAGE --push ${image}
 
 image-nix-install:
@@ -103,6 +113,17 @@ nix:
 
     # nix profile
     RUN bash -c '~/.nix-profile/bin/nix profile install nixpkgs#{nix-direnv,direnv,pinentry,nixpkgs-fmt}'
+
+nix-installed:
+    FROM ghcr.io/defn/dev:latest-nix-root
+
+    # /nix-install
+    USER root
+    RUN install -d -m 0755 -o ubuntu -g ubuntu /nix
+
+    # nix
+    USER ubuntu
+    RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon'
 
 nix-install:
     FROM ghcr.io/defn/dev:latest-nix-root
