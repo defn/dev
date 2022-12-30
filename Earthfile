@@ -71,4 +71,5 @@ dev:
 
     # defn/dev
     COPY --dir --chown=ubuntu:ubuntu . .
+    COPY .config/nix/nix-earthly.conf .config/nix/nix.conf
     RUN ~/.nix-profile/bin/nix build
