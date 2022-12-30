@@ -1,6 +1,6 @@
 VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-arg --use-copy-link --use-registry-for-with-docker --ci-arg 0.6
 
-IMPORT github.com/defn/pkg:0.0.112
+IMPORT github.com/defn/pkg:0.0.114
 
 build-root:
     ARG image=ghcr.io/defn/dev:latest-root
@@ -134,12 +134,12 @@ dev:
 ###############################################
 flake-root:
     ARG arch
-    FROM pkg+nix-root --arch=${arch}
+    FROM pkg+flake-root --arch=${arch}
 
 ###############################################
 nix-root:
     ARG arch
-    FROM pkg+nix-ubuntu --arch=${arch}
+    FROM pkg+nix-root --arch=${arch}
 
 nix-installed:
     FROM ghcr.io/defn/dev:latest-nix-root
