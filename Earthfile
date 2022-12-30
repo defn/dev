@@ -68,17 +68,21 @@ nix-root:
     ARG arch
     FROM pkg+root --arch=${arch}
 
+    # nix config
+    RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix
+    RUN mkdir -p /home/ubuntu/.config/nix
+    COPY --chown=ubuntu:ubuntu .config/nix/nix-flake.conf /home/ubuntu/.config/nix/nix.conf
+    COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
+
 # nix applications where /nix is not a data volume
 nix-installed:
     FROM ghcr.io/defn/dev:latest-nix-root
     WORKDIR /app
 
     # nix
-    RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix
     RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon'
 
     # nix config
-    COPY .direnvrc /home/ubuntu/.direnvrc
     RUN echo 'use flake' > .envrc
 
 # nix applications where /nix is a data volume
@@ -86,25 +90,17 @@ nix-install:
     FROM ghcr.io/defn/dev:latest-nix-root
     WORKDIR /app
 
-    # nix but moved to /nix-install
-    RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix
+    # nix (moved to /nix-install)
     RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix-install
     RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' && mv /nix/var /nix/store /nix-install/
 
     # nix config
-    COPY --chown=ubuntu:ubuntu .config/nix/nix-flake.conf /home/ubuntu/.config/nix/nix.conf
-    COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
     RUN echo 'use flake' > .envrc
 
 # for building flakes and saving thier nix artifacts
 flake-root:
     FROM ghcr.io/defn/dev:latest-nix-installed
     WORKDIR /app
-
-    # nix config
-    RUN mkdir -p ~/.config/nix
-    COPY .config/nix/nix-flake.conf /home/ubuntu/.config/nix/nix.conf
-    COPY .direnvrc /home/ubuntu/.direnvrc
 
     # build prep
     RUN mkdir build && cd build && git init
@@ -123,8 +119,8 @@ dev:
     RUN /tmp/persist-cache && rm -f /tmp/persist-cache
 
     # defn/dev
-    COPY --dir --chown=ubuntu:ubuntu . .
-    COPY .config/nix/nix-earthly.conf .config/nix/nix.conf
+    COPY --chown=ubuntu:ubuntu --dir . .
+    COPY --chown=ubuntu:ubuntu .config/nix/nix-earthly.conf /home/ubuntu/.config/nix/nix.conf
     RUN ~/.nix-profile/bin/nix build
 
 # coder workspace container
@@ -133,12 +129,11 @@ devcontainer:
     WORKDIR /home/ubuntu
 
     # nix profile
-    RUN mkdir -p .config/nix
-    COPY .config/nix/nix-earthly.conf .config/nix/nix.conf
-    RUN bash -c '~/.nix-profile/bin/nix profile install nixpkgs#{nix-direnv,direnv,pinentry,nixpkgs-fmt}'
+    COPY .config/nix/nix-earthly.conf /home/ubuntu/.config/nix/nix.conf
+    RUN ~/.nix-profile/bin/nix profile install nixpkgs#nix-direnv nixpkgs#direnv nixpkgs#pinentry nixpkgs#nixpkgs-fmt
 
     # defn/dev
-    COPY --dir --chown=ubuntu:ubuntu . .
+    COPY --chown=ubuntu:ubuntu --dir . .
     RUN (git clean -nfd || true) \
         && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
 
@@ -148,6 +143,6 @@ fly:
     WORKDIR /home/ubuntu
 
     # defn/dev
-    COPY --dir --chown=ubuntu:ubuntu . .
+    COPY --chown=ubuntu:ubuntu --dir . .
     RUN (git clean -nfd || true) \
         && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
