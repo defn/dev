@@ -82,7 +82,7 @@ nix-installed:
     RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon'
 
     # direnv
-    nix profile install nixpkgs#nix-direnv nixpkgs#direnv
+    RUN ~/.nix-profile/bin/nix profile install nixpkgs#nix-direnv nixpkgs#direnv
     COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
 
     # nix config
