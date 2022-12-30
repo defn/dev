@@ -84,17 +84,10 @@ image-devcontainer:
     FROM +devcontainer
     SAVE IMAGE --push ${image}
 
+###############################################
 root:
     ARG arch
     FROM pkg+root --arch=${arch}
-
-nix-root:
-    ARG arch
-    FROM pkg+nix-ubuntu --arch=${arch}
-
-flake-root:
-    ARG arch
-    FROM pkg+nix-root --arch=${arch}
 
 fly:
     FROM ghcr.io/defn/dev:latest-root
@@ -104,6 +97,7 @@ fly:
     RUN (git clean -nfd || true) \
         && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
 
+#----------------------------------------------
 nix:
     FROM ghcr.io/defn/dev:latest-root
 
@@ -113,28 +107,6 @@ nix:
 
     # nix profile
     RUN bash -c '~/.nix-profile/bin/nix profile install nixpkgs#{nix-direnv,direnv,pinentry,nixpkgs-fmt}'
-
-nix-installed:
-    FROM ghcr.io/defn/dev:latest-nix-root
-
-    # /nix-install
-    USER root
-    RUN install -d -m 0755 -o ubuntu -g ubuntu /nix
-
-    # nix
-    USER ubuntu
-    RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon'
-
-nix-install:
-    FROM ghcr.io/defn/dev:latest-nix-root
-
-    # /nix-install
-    USER root
-    RUN install -d -m 0755 -o ubuntu -g ubuntu /nix && install -d -m 0755 -o ubuntu -g ubuntu /nix-install
-
-    # nix
-    USER ubuntu
-    RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' && mv /nix/var /nix/store /nix-install/
 
 devcontainer:
     FROM ghcr.io/defn/dev:latest-nix
@@ -158,3 +130,35 @@ dev:
     COPY --dir --chown=ubuntu:ubuntu . .
     COPY .config/nix/nix-earthly.conf .config/nix/nix.conf
     RUN ~/.nix-profile/bin/nix build
+
+###############################################
+flake-root:
+    ARG arch
+    FROM pkg+nix-root --arch=${arch}
+
+###############################################
+nix-root:
+    ARG arch
+    FROM pkg+nix-ubuntu --arch=${arch}
+
+nix-installed:
+    FROM ghcr.io/defn/dev:latest-nix-root
+
+    # /nix-install
+    USER root
+    RUN install -d -m 0755 -o ubuntu -g ubuntu /nix
+
+    # nix
+    USER ubuntu
+    RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon'
+
+nix-install:
+    FROM ghcr.io/defn/dev:latest-nix-root
+
+    # /nix-install
+    USER root
+    RUN install -d -m 0755 -o ubuntu -g ubuntu /nix && install -d -m 0755 -o ubuntu -g ubuntu /nix-install
+
+    # nix
+    USER ubuntu
+    RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' && mv /nix/var /nix/store /nix-install/
