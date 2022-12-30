@@ -60,7 +60,7 @@ devcontainer:
 
     # defn/dev
     COPY --dir --chown=ubuntu:ubuntu . .
-    RUN (git clean -nfdx || true) \
+    RUN (git clean -nfd || true) \
         && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
 
     SAVE ARTIFACT /nix nix
