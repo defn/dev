@@ -10,6 +10,7 @@ local_resource("coder",
             if [[ "Darwin" == "$(uname -s)" ]]; then
                 eval "$(direnv hook bash)"
                 _direnv_hook
+                docker pull ghcr.io/defn/dev:latest-devcontainer
                 this-coder-server-kill
                 exec this-coder-init
             else
