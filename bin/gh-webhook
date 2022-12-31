@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-echo see /tmp/wh.log
-exec 1>>/tmp/wh.log 2>&1
+if [[ -z "${WH_LOG_STDOUT:-}" ]]; then
+    echo see /tmp/wh.log
+    exec 1>>/tmp/wh.log 2>&1
+fi
 
 set -exfu
 
