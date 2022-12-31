@@ -131,9 +131,7 @@ dev:
     COPY --chown=ubuntu:ubuntu --dir . .
     COPY --chown=ubuntu:ubuntu .config/nix/nix-earthly.conf /home/ubuntu/.config/nix/nix.conf
     RUN . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh \
-        && nix build \
-        && nix profile wipe-history \
-        && nix-store --gc
+        && nix build
 
 # coder workspace container
 devcontainer:
