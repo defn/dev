@@ -107,6 +107,9 @@
           env WH_BRANCH="$branch" bin/gh-webhook push "$repo" "refs/heads/$branch" "$commit"
 
           kill %1
+
+          wait
+          echo
         '';
 
         devShell = wrap.devShell {
