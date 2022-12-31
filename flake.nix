@@ -1,6 +1,6 @@
 {
   inputs = {
-    dev.url = github:defn/pkg/dev-0.0.19?dir=dev;
+    dev.url = github:defn/pkg/dev-0.0.21?dir=dev;
     az.url = github:defn/pkg/az-0.0.8?dir=az;
     earthly.url = github:defn/pkg/earthly-0.6.30-3?dir=earthly;
     tilt.url = github:defn/pkg/tilt-0.30.13-3?dir=tilt;
@@ -111,7 +111,6 @@
 
         devShell = wrap.devShell {
           devInputs = with packages; [
-            pkgs.gomod2nix
             coder-delete-database
             coder-server-for-orgs
             coder-server-for-everyone
