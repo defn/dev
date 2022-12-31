@@ -103,7 +103,7 @@
 
           env WH_BRANCH="$branch" WH_LOG_STDOUT=1 bin/gh-webhook push "$repo" "refs/heads/$branch" "$commit"
 
-          kill %1
+          kill %1 2>/dev/null || true
 
           wait
           echo
