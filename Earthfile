@@ -207,7 +207,7 @@ flake-root:
     RUN mkdir build && cd build && git init
 
     # store
-    RUN sudo mkdir /store
+    RUN sudo install -d -o ubuntu -g ubuntu /store
 
 NIX_DIRENV:
     COMMAND
