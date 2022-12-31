@@ -3,32 +3,32 @@ VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-ar
 build-nix-root:
     ARG image=ghcr.io/defn/dev:latest-nix-root
     BUILD --platform=linux/amd64 +image-nix-root --image=${image} --arch=amd64
-    BUILD --platform=linux/arm64 +image-nix-root --image=${image} --arch=arm64
+    #BUILD --platform=linux/arm64 +image-nix-root --image=${image} --arch=arm64
 
 build-nix-empty:
     ARG image=ghcr.io/defn/dev:latest-nix-empty
     BUILD --platform=linux/amd64 +image-nix-empty --image=${image}
-    BUILD --platform=linux/arm64 +image-nix-empty --image=${image}
+    #BUILD --platform=linux/arm64 +image-nix-empty --image=${image}
 
 build-nix-installed:
     ARG image=ghcr.io/defn/dev:latest-nix-installed
     BUILD --platform=linux/amd64 +image-nix-installed --image=${image}
-    BUILD --platform=linux/arm64 +image-nix-installed --image=${image}
+    #BUILD --platform=linux/arm64 +image-nix-installed --image=${image}
 
 build-nix-install:
     ARG image=ghcr.io/defn/dev:latest-nix-install
     BUILD --platform=linux/amd64 +image-nix-install --image=${image}
-    BUILD --platform=linux/arm64 +image-nix-install --image=${image}
+    #BUILD --platform=linux/arm64 +image-nix-install --image=${image}
 
 build-flake-root:
     ARG image=ghcr.io/defn/dev:latest-flake-root
     BUILD --platform=linux/amd64 +image-flake-root --image=${image}
-    BUILD --platform=linux/arm64 +image-flake-root --image=${image}
+    #BUILD --platform=linux/arm64 +image-flake-root --image=${image}
 
 build-devcontainer:
     ARG image=ghcr.io/defn/dev:latest-devcontainer
     BUILD --platform=linux/amd64 +image-devcontainer --image=${image}
-    BUILD --platform=linux/arm64 +image-devcontainer --image=${image}
+    #BUILD --platform=linux/arm64 +image-devcontainer --image=${image}
 
 build-fly:
     ARG image=ghcr.io/defn/dev:latest-fly
