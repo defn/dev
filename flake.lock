@@ -291,17 +291,17 @@
       },
       "locked": {
         "dir": "dev",
-        "lastModified": 1671409152,
-        "narHash": "sha256-T84AknA7y4RxmyppL7iTHKEDoC5IOvfULZCtxO5opck=",
+        "lastModified": 1671670799,
+        "narHash": "sha256-tUDvtAa27mpSZ/aPw2t1B7uaQ/lkEyzBY4JmWYOeypo=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "0384878167403e1b4acbc5943cc41b92fbe39a14",
+        "rev": "064956b950672ebe45a8f4331c30994ae71441d7",
         "type": "github"
       },
       "original": {
         "dir": "dev",
         "owner": "defn",
-        "ref": "dev-0.0.17",
+        "ref": "dev-0.0.19",
         "repo": "pkg",
         "type": "github"
       }
@@ -1437,17 +1437,17 @@
       },
       "locked": {
         "dir": "flyctl",
-        "lastModified": 1671410858,
-        "narHash": "sha256-eY0n/T1Bmt+0zW8EQDbF2dqBCPs5o9IgpxY6ipGECWo=",
+        "lastModified": 1672459817,
+        "narHash": "sha256-o0eBuncPMBPUp6WHYm/7y2d/3SAUNR0p9QcpwfWev0I=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "90250267376b22db59e76effb860c38a9b287a49",
+        "rev": "5193d4ed77f38267a806bf1cae2f69bbbd213bd4",
         "type": "github"
       },
       "original": {
         "dir": "flyctl",
         "owner": "defn",
-        "ref": "flyctl-0.0.441-2",
+        "ref": "flyctl-0.0.442-0",
         "repo": "pkg",
         "type": "github"
       }
@@ -3667,11 +3667,6 @@
     },
     "wrapper_27": {
       "inputs": {
-        "flake-utils": [
-          "flyctl",
-          "dev",
-          "flake-utils"
-        ],
         "nixpkgs": [
           "flyctl",
           "dev",
@@ -3680,17 +3675,17 @@
       },
       "locked": {
         "dir": "wrapper",
-        "lastModified": 1671399461,
-        "narHash": "sha256-0LmUd1ACOzVz5GprvEvb3tkKnvZPA8/66OzPWPjDHjo=",
+        "lastModified": 1671670707,
+        "narHash": "sha256-qCz6rarec1O25n/di9fl7FRjKy0Iz1TF8AGllQCdeI8=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "77790964128ceb36a9d8aa504e99fe6e8214988a",
+        "rev": "5d8b29d822b3f05de0e65f6449c16db0769e9dfa",
         "type": "github"
       },
       "original": {
         "dir": "wrapper",
         "owner": "defn",
-        "ref": "wrapper-0.0.12",
+        "ref": "wrapper-0.0.13",
         "repo": "pkg",
         "type": "github"
       }
