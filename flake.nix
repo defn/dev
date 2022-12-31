@@ -83,8 +83,8 @@
       packages.coder-init = pkgs.writeShellScriptBin "this-coder-init" ''
          (
            this-coder-server-wait-for-alive
-           this-coder-initial-user | cat
-           this-coder-template-docker
+           if ! coder users show me | grep Organizations: | grep admin; then this-coder-initial-user | cat; fi
+           if ! coder template list | grep docker-code-server; then this-coder-template-docker; fi
            ''${BROWSER:-open} http://localhost:5555
          ) &
 
