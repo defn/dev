@@ -19,6 +19,20 @@ local_resource("coder",
     ]
 )
 
+# Starts nix-cache on macOS
+local_resource("nix-cache",
+    serve_cmd=[
+        "bash", "-c",
+        """
+            if [[ "Darwin" == "$(uname -s)" ]]; then
+                docker run --rm -v nix-cache:/usr/share/nginx/html:ro -p 5001:80 nginx
+            else
+                exec sleep infinity
+            fi
+        """
+    ]
+)
+
 # Starts Tailscale on Linux
 local_resource("tailscale",
     serve_cmd=[
