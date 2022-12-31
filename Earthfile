@@ -5,6 +5,11 @@ build-nix-root:
     BUILD --platform=linux/amd64 +image-nix-root --image=${image} --arch=amd64
     BUILD --platform=linux/arm64 +image-nix-root --image=${image} --arch=arm64
 
+build-nix-empty:
+    ARG image=ghcr.io/defn/dev:latest-nix-empty
+    BUILD --platform=linux/amd64 +image-nix-empty --image=${image}
+    BUILD --platform=linux/arm64 +image-nix-empty --image=${image}
+
 build-nix-installed:
     ARG image=ghcr.io/defn/dev:latest-nix-installed
     BUILD --platform=linux/amd64 +image-nix-installed --image=${image}
@@ -33,6 +38,11 @@ image-nix-root:
     ARG arch
     ARG image
     FROM +nix-root --arch=${arch}
+    SAVE IMAGE --push ${image}
+
+image-nix-empty:
+    ARG image
+    FROM +nix-empty
     SAVE IMAGE --push ${image}
 
 image-nix-installed:
@@ -133,6 +143,26 @@ nix-root:
     RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix \
         && mkdir -p /home/ubuntu/.config/nix
     COPY --chown=ubuntu:ubuntu .config/nix/nix-flake.conf /home/ubuntu/.config/nix/nix.conf
+
+# nix applications where /nix/store is emptied
+nix-empty:
+    FROM ghcr.io/defn/dev:latest-nix-root
+    WORKDIR /app
+
+    # nix
+    RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' \
+        && ln -nfs /nix/var/nix/profiles/per-user/ubuntu/profile /home/ubuntu/.nix-profile \
+        && echo . ~/.bashrc > /home/ubuntu/.bash_profile \
+        && echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh > /home/ubuntu/.bashrc \
+        && echo 'eval "$(direnv hook bash)"' >> /home/ubuntu/.bashrc \
+        && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh \
+        && nix profile install nixpkgs#nix-direnv nixpkgs#direnv \
+        && echo 'use flake' > .envrc \
+        && nix profile wipe-history \
+        && nix-store --gc \
+        && rm -rf /nix/store \
+        && mkdir /nix/store
+    COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
 
 # nix applications where /nix is not a data volume
 nix-installed:
