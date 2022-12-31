@@ -99,7 +99,7 @@ local_resource("webhook-log",
         """
             if [[ "Linux" == "$(uname -s)" ]]; then
                 touch /tmp/wh.log
-                exec tail -f /tmp/wh.log 
+                exec tail -f /tmp/wh.log
             else
                 exec sleep infinity
             fi

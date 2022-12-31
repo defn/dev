@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
-set -exfu
+if [[ -z "${WH_LOG_STDOUT:-}" ]]; then
+    echo see /tmp/wh.log
+    exec 1>>/tmp/wh.log 2>&1
+fi
 
-exec 1>>/tmp/wh.log 2>&1
+set -exfu
 
 function main {
 
@@ -37,6 +40,8 @@ function main {
     time earthly --no-output --push +build-flake-root
     time earthly --no-output --push +build-devcontainer
     time earthly --no-output --push +build-fly
+
+    echo ghcr.io/defn/dev:latest-{nix-{root,installed,install},flake-root,devcontainer,fly} | runmany 4 'skopeo copy docker://$1 docker://169.254.32.1:5000/''${1#*/} --multi-arch all --dest-tls-verify=false --insecure-policy'
 
     set +x
 

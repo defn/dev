@@ -91,6 +91,24 @@
           this-coder-server-for-orgs
         '';
 
+        packages.build = pkgs.writeShellScriptBin "this-build" ''
+          repo="$(git remote get-url origin)"
+          branch="$(git rev-parse --abbrev-ref HEAD)"
+
+          if test -n "''${1:-}"; then
+            commit="$1"; shift
+          else
+            commit="$(git rev-parse HEAD)"
+          fi
+
+          env WH_BRANCH="$branch" WH_LOG_STDOUT=1 bin/gh-webhook push "$repo" "refs/heads/$branch" "$commit"
+
+          kill %1 2>/dev/null || true
+
+          wait
+          echo
+        '';
+
         devShell = wrap.devShell {
           devInputs = with packages; [
             pkgs.gomod2nix
@@ -104,6 +122,7 @@
             coder-initial-user
             coder-template-docker
             coder-init
+            build
           ];
         };
 
@@ -139,8 +158,7 @@
 
             docker
             docker-credential-helpers
-
-            cachix
+            skopeo
 
             pinentry
             direnv
