@@ -105,6 +105,8 @@
           tail -f /tmp/wh.log &
 
           env WH_BRANCH="$branch" bin/gh-webhook push "$repo" "refs/heads/$branch" "$commit"
+
+          kill %1
         '';
 
         devShell = wrap.devShell {
