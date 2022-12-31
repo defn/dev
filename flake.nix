@@ -4,7 +4,7 @@
     az.url = github:defn/pkg/az-0.0.8?dir=az;
     earthly.url = github:defn/pkg/earthly-0.6.30-3?dir=earthly;
     tilt.url = github:defn/pkg/tilt-0.30.13-3?dir=tilt;
-    gh.url = github:defn/pkg/gh-2.20.2-3?dir=gh;
+    gh.url = github:defn/pkg/gh-2.21.1-0?dir=gh;
     webhook.url = github:defn/pkg/webhook-2.8.0?dir=webhook;
     flyctl.url = github:defn/pkg/flyctl-0.0.442-0?dir=flyctl;
     vault.url = github:defn/pkg/vault-1.12.2-4?dir=vault;
