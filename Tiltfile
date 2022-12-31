@@ -19,6 +19,39 @@ local_resource("coder",
     ]
 )
 
+# Starts nix-cache on macOS
+local_resource("nix-cache",
+    serve_cmd=[
+        "bash", "-c",
+        """
+            if [[ "Darwin" == "$(uname -s)" ]]; then
+                docker run --rm -v nix-cache:/usr/share/nginx/html:ro -p 5001:80 nginx
+            else
+                exec sleep infinity
+            fi
+        """
+    ]
+)
+
+# Starts registry on macOS
+local_resource("registry",
+    serve_cmd=[
+        "bash", "-c",
+        """
+            if [[ "Darwin" == "$(uname -s)" ]]; then
+                cd w/k3d
+                eval "$(direnv hook bash)"
+                direnv allow
+                _direnv_hook
+                this-k3d-registry || true
+                exec docker logs -f k3d-registry
+            else
+                exec sleep infinity
+            fi
+        """
+    ]
+)
+
 # Starts Tailscale on Linux
 local_resource("tailscale",
     serve_cmd=[
