@@ -30,10 +30,6 @@ build-devcontainer:
     BUILD --platform=linux/amd64 +image-devcontainer --image=${image}
     #BUILD --platform=linux/arm64 +image-devcontainer --image=${image}
 
-build-fly:
-    ARG image=ghcr.io/defn/dev:latest-fly
-    BUILD --platform=linux/amd64 +image-fly --image=${image}
-
 image-nix-root:
     ARG arch
     ARG image
@@ -64,11 +60,6 @@ image-flake-root:
 image-devcontainer:
     ARG image
     FROM +devcontainer
-    SAVE IMAGE --push ${image}
-
-image-fly:
-    ARG image
-    FROM +fly
     SAVE IMAGE --push ${image}
 
 ###############################################
@@ -243,16 +234,6 @@ devcontainer:
         && nix profile install nixpkgs#pinentry nixpkgs#nixpkgs-fmt \
         && nix profile wipe-history \
         && nix-store --gc
-
-    # defn/dev
-    COPY --chown=ubuntu:ubuntu --dir . .
-    RUN (git clean -nfd || true) \
-        && (set -e; if test -e work; then false; fi; git clean -nfd; bash -c 'if test -n "$(git clean -nfd)"; then false; fi'; git clean -ffd)
-
-# fly workspace container
-fly:
-    FROM ghcr.io/defn/dev:latest-nix-install
-    WORKDIR /home/ubuntu
 
     # defn/dev
     COPY --chown=ubuntu:ubuntu --dir . .
