@@ -38,7 +38,7 @@ resource "coder_app" "code-server-dev" {
   url  = "http://localhost:8080/?folder=/work/dev"
   icon = "/icon/code.svg"
 
-  slug         = "code-server"
+  slug         = "defn-dev"
   display_name = "defn/dev"
 
   subdomain = false
