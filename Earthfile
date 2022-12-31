@@ -69,8 +69,8 @@ nix-root:
     FROM pkg+root --arch=${arch}
 
     # nix config
-    RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix
-    RUN mkdir -p /home/ubuntu/.config/nix
+    RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix \
+        && mkdir -p /home/ubuntu/.config/nix
     COPY --chown=ubuntu:ubuntu .config/nix/nix-flake.conf /home/ubuntu/.config/nix/nix.conf
 
 # nix applications where /nix is not a data volume
@@ -81,14 +81,12 @@ nix-installed:
     # nix
     RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' \
         && echo . ~/.bashrc > /home/ubuntu/.bash_profile \
-        && echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh > /home/ubuntu/.bashrc
-
-    # direnv
-    RUN ~/.nix-profile/bin/nix profile install nixpkgs#nix-direnv nixpkgs#direnv
+        && echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh > /home/ubuntu/.bashrc \
+        && ~/.nix-profile/bin/nix profile install nixpkgs#nix-direnv nixpkgs#direnv \
+        && echo 'use flake' > .envrc \
+        && nix profile wipe-history \
+        && nix-store --gc
     COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
-
-    # nix config
-    RUN echo 'use flake' > .envrc
 
 # nix applications where /nix is a data volume
 nix-install:
@@ -96,14 +94,14 @@ nix-install:
     WORKDIR /app
 
     # nix (moved to /nix-install)
-    RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix-install
-    RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' \
+    RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix-install \
+        && bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' \
         && ~/.nix-profile/bin/nix profile install nixpkgs#nix-direnv nixpkgs#direnv \
-        && mv /nix/var /nix/store /nix-install/
+        && mv /nix/var /nix/store /nix-install/ \
+        && echo 'use flake' > .envrc \
+        && nix profile wipe-history \
+        && nix-store --gc
     COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
-
-    # nix config
-    RUN echo 'use flake' > .envrc
 
 # for building flakes and saving thier nix artifacts
 flake-root:
@@ -122,14 +120,16 @@ dev:
     WORKDIR /home/ubuntu
 
     # work
-    COPY bin/persist-cache /tmp/
-    RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /work && ln -nfs /work .
-    RUN /tmp/persist-cache && rm -f /tmp/persist-cache
+    COPY --chown=ubuntu:ubuntu bin/persist-cache /tmp/
+    RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /work && ln -nfs /work . \
+        && /tmp/persist-cache && rm -f /tmp/persist-cache
 
     # defn/dev
     COPY --chown=ubuntu:ubuntu --dir . .
     COPY --chown=ubuntu:ubuntu .config/nix/nix-earthly.conf /home/ubuntu/.config/nix/nix.conf
-    RUN ~/.nix-profile/bin/nix build
+    RUN ~/.nix-profile/bin/nix build \
+        && nix profile wipe-history \
+        && nix-store --gc
 
 # coder workspace container
 devcontainer:
@@ -137,8 +137,10 @@ devcontainer:
     WORKDIR /home/ubuntu
 
     # nix profile
-    COPY .config/nix/nix-earthly.conf /home/ubuntu/.config/nix/nix.conf
-    RUN ~/.nix-profile/bin/nix profile install nixpkgs#pinentry nixpkgs#nixpkgs-fmt
+    COPY --chown=ubuntu:ubuntu .config/nix/nix-earthly.conf /home/ubuntu/.config/nix/nix.conf
+    RUN ~/.nix-profile/bin/nix profile install nixpkgs#pinentry nixpkgs#nixpkgs-fmt \
+        && nix profile wipe-history \
+        && nix-store --gc
 
     # defn/dev
     COPY --chown=ubuntu:ubuntu --dir . .
