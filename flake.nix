@@ -109,7 +109,7 @@
       '';
 
       devShell = wrap.devShell {
-        devInputs = with packages; [
+        devInputs = wrap.flakeInputs ++ (with packages; [
           coder-delete-database
           coder-server-for-orgs
           coder-server-for-everyone
@@ -121,7 +121,7 @@
           coder-template-docker
           coder-init
           build
-        ];
+        ]);
       };
 
       defaultPackage = wrap.nullBuilder {
