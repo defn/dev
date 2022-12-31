@@ -41,6 +41,8 @@ function main {
     time earthly --no-output --push +build-devcontainer
     time earthly --no-output --push +build-fly
 
+    echo ghcr.io/defn/dev:latest-{nix-{root,installed,install},flake-root,devcontainer,fly} | runmany 4 'skopeo copy docker://$1 docker://169.254.32.1:5000/''${1#*/} --multi-arch all --dest-tls-verify=false --insecure-policy'
+
     set +x
 
     sync

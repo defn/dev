@@ -158,8 +158,7 @@
 
             docker
             docker-credential-helpers
-
-            cachix
+            skopeo
 
             pinentry
             direnv
