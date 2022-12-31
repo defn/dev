@@ -175,6 +175,11 @@ nix-empty:
     # nix
     COPY --chown=ubuntu:ubuntu +nix-empty-var/var /nix/var
     COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
+    RUN ln -nfs /nix/var/nix/profiles/per-user/ubuntu/profile /home/ubuntu/.nix-profile \
+        && echo . ~/.bashrc > /home/ubuntu/.bash_profile \
+        && echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh > /home/ubuntu/.bashrc \
+        && echo 'eval "$(direnv hook bash)"' >> /home/ubuntu/.bashrc \
+        && echo 'use flake' > .envrc
 
 # nix applications where /nix is a data volume
 nix-install:
@@ -210,20 +215,8 @@ NIX_DIRENV:
     FROM ghcr.io/defn/dev:latest-nix-installed
     COPY --chown=ubuntu:ubuntu --dir . .
     RUN bash -c '. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh; eval "$(direnv hook bash)"; direnv allow; _direnv_hook; nix profile wipe-history; nix-store --gc'
-
-FLAKE_PRE:
-    COMMAND
-
-    FROM ghcr.io/defn/dev:latest-flake-root
-
-FLAKE_POST:
-    COMMAND
-
-    # flake build
-    RUN . ~/.nix-profile/etc/profile.d/nix.sh && cd build && git add . && nix build
-        
-    # flake store
-    RUN rsync -ia `/home/ubuntu/.nix-profile/bin/nix-store -q -R ./build/result` store/ >/dev/null
+    RUN mkdir -p store
+    RUN rsync -ia `/home/ubuntu/.nix-profile/bin/nix-store -qR $(ls -d .direnv/flake-profile-* | grep -v 'rc$') ~/.nix-profile` store/
 
 # testing defn/dev build
 dev:
