@@ -101,6 +101,9 @@
             commit="$(git rev-parse HEAD)"
           fi
 
+          touch /tmp/wh.log
+          tail -f /tmp/wh.log &
+
           env WH_BRANCH="$branch" bin/gh-webhook push "$repo" "refs/heads/$branch" "$commit"
         '';
 
