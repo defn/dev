@@ -26,7 +26,8 @@ local_resource("nix-cache",
         "bash", "-c",
         """
             if [[ "Darwin" == "$(uname -s)" ]]; then
-                docker run --rm -v nix-cache:/usr/share/nginx/html:ro -p 5001:80 nginx
+                docker rm -f nix-cache || true
+                exec docker run --name nix-cache --rm -v nix-cache:/usr/share/nginx/html:ro -p 5001:80 nginx
             else
                 exec sleep infinity
             fi
