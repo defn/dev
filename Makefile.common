@@ -30,7 +30,7 @@ perms:
 
 install:
 	-$(MAKE) nix-$(shell uname -s)
-	~/bin/de ~ $(MAKE) install-inner
+	$(MAKE) install-inner
 
 install-inner:
 	$(MAKE) symlinks perms
@@ -68,6 +68,9 @@ install-inner:
 		ln -nfs ~/.config/coderv2/dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
 		coder dotfiles --yes https://github.com/$${GIT_AUTHOR_NAME}/dotfiles; \
 	fi
+
+	mark tilt
+	$(MAKE) up
 
 down:
 	touch .local/share/code-server/idle
@@ -143,4 +146,4 @@ dev:
 	code --folder-uri "vscode-remote://dev-container+$$(pwd | perl -pe 's{\s+}{}g' | xxd -p)/home/ubuntu"
 
 up:
-	screen -DRR tilt -m tilt up
+	screen -DRR tilt -m bash -il -c ". .bashrc; PATH=$PATH:/usr/bin:/bin; $(which tilt) up"
