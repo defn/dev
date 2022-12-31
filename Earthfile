@@ -82,7 +82,8 @@ nix-installed:
     RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' \
         && echo . ~/.bashrc > /home/ubuntu/.bash_profile \
         && echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh > /home/ubuntu/.bashrc \
-        && ~/.nix-profile/bin/nix profile install nixpkgs#nix-direnv nixpkgs#direnv \
+        && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh \
+        && nix profile install nixpkgs#nix-direnv nixpkgs#direnv \
         && echo 'use flake' > .envrc \
         && nix profile wipe-history \
         && nix-store --gc
@@ -96,8 +97,10 @@ nix-install:
     # nix (moved to /nix-install)
     RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix-install \
         && bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' \
-        && ~/.nix-profile/bin/nix profile install nixpkgs#nix-direnv nixpkgs#direnv \
+        && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh \
+        && nix profile install nixpkgs#nix-direnv nixpkgs#direnv \
         && mv /nix/var /nix/store /nix-install/ \
+        && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh \
         && echo 'use flake' > .envrc \
         && nix profile wipe-history \
         && nix-store --gc
@@ -127,7 +130,8 @@ dev:
     # defn/dev
     COPY --chown=ubuntu:ubuntu --dir . .
     COPY --chown=ubuntu:ubuntu .config/nix/nix-earthly.conf /home/ubuntu/.config/nix/nix.conf
-    RUN ~/.nix-profile/bin/nix build \
+    RUN . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh \
+        && nix build \
         && nix profile wipe-history \
         && nix-store --gc
 
@@ -138,7 +142,8 @@ devcontainer:
 
     # nix profile
     COPY --chown=ubuntu:ubuntu .config/nix/nix-earthly.conf /home/ubuntu/.config/nix/nix.conf
-    RUN ~/.nix-profile/bin/nix profile install nixpkgs#pinentry nixpkgs#nixpkgs-fmt \
+    RUN . . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh \
+        && nix profile install nixpkgs#pinentry nixpkgs#nixpkgs-fmt \
         && nix profile wipe-history \
         && nix-store --gc
 
