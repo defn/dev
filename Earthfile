@@ -83,6 +83,7 @@ nix-installed:
         && ln -nfs /nix/var/nix/profiles/per-user/ubuntu/profile /home/ubuntu/.nix-profile \
         && echo . ~/.bashrc > /home/ubuntu/.bash_profile \
         && echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh > /home/ubuntu/.bashrc \
+        && echo 'eval "$(direnv hook bash)"' >> /home/ubuntu/.bashrc \
         && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh \
         && nix profile install nixpkgs#nix-direnv nixpkgs#direnv \
         && echo 'use flake' > .envrc \
