@@ -127,7 +127,7 @@ root:
 ###############################################
 nix-root:
     ARG arch
-    FROM root --arch=${arch}
+    FROM +root --arch=${arch}
 
     # nix config
     RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix \
