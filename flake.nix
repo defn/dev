@@ -154,6 +154,7 @@
           less
           htop
           s6
+          screen
 
           docker
           docker-credential-helpers
