@@ -32,6 +32,25 @@ resource "coder_agent" "main" {
   startup_script = "exec ~/.nix-profile/bin/nix run .#codeserver -- --auth none"
 }
 
+resource "coder_app" "code-server-dev" {
+  agent_id = coder_agent.main.id
+
+  url  = "http://localhost:8080/?folder=/work/dev"
+  icon = "/icon/code.svg"
+
+  slug         = "defn-dev"
+  display_name = "defn/dev"
+
+  subdomain = false
+  share     = "owner"
+
+  healthcheck {
+    url       = "http://localhost:8080/healthz"
+    interval  = 3
+    threshold = 10
+  }
+}
+
 resource "coder_app" "code-server" {
   agent_id = coder_agent.main.id
 

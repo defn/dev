@@ -10,6 +10,7 @@ local_resource("coder",
             if [[ "Darwin" == "$(uname -s)" ]]; then
                 eval "$(direnv hook bash)"
                 _direnv_hook
+                docker pull ghcr.io/defn/dev:latest-devcontainer
                 this-coder-server-kill
                 exec this-coder-init
             else
@@ -25,7 +26,8 @@ local_resource("nix-cache",
         "bash", "-c",
         """
             if [[ "Darwin" == "$(uname -s)" ]]; then
-                docker run --rm -v nix-cache:/usr/share/nginx/html:ro -p 5001:80 nginx
+                docker rm -f nix-cache || true
+                exec docker run --name nix-cache --rm -v nix-cache:/usr/share/nginx/html:ro -p 5001:80 nginx
             else
                 exec sleep infinity
             fi

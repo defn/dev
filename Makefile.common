@@ -141,3 +141,6 @@ wg-down:
 dev:
 	docker pull ghcr.io/defn/dev:latest-devcontainer
 	code --folder-uri "vscode-remote://dev-container+$$(pwd | perl -pe 's{\s+}{}g' | xxd -p)/home/ubuntu"
+
+up:
+	screen -DRR tilt -m tilt up
