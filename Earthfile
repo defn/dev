@@ -144,26 +144,6 @@ nix-root:
         && mkdir -p /home/ubuntu/.config/nix
     COPY --chown=ubuntu:ubuntu .config/nix/nix-flake.conf /home/ubuntu/.config/nix/nix.conf
 
-# nix applications where /nix/store is emptied
-nix-empty:
-    FROM ghcr.io/defn/dev:latest-nix-root
-    WORKDIR /app
-
-    # nix
-    RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' \
-        && ln -nfs /nix/var/nix/profiles/per-user/ubuntu/profile /home/ubuntu/.nix-profile \
-        && echo . ~/.bashrc > /home/ubuntu/.bash_profile \
-        && echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh > /home/ubuntu/.bashrc \
-        && echo 'eval "$(direnv hook bash)"' >> /home/ubuntu/.bashrc \
-        && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh \
-        && nix profile install nixpkgs#nix-direnv nixpkgs#direnv \
-        && echo 'use flake' > .envrc \
-        && nix profile wipe-history \
-        && nix-store --gc \
-        && rm -rf /nix/store \
-        && mkdir /nix/store
-    COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
-
 # nix applications where /nix is not a data volume
 nix-installed:
     FROM ghcr.io/defn/dev:latest-nix-root
@@ -180,6 +160,20 @@ nix-installed:
         && echo 'use flake' > .envrc \
         && nix profile wipe-history \
         && nix-store --gc
+    COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
+
+# nix applications where /nix/store is emptied
+nix-empty-var:
+    FROM ghcr.io/defn/dev:latest-nix-installed
+
+    SAVE ARTIFACT /nix/var var
+
+nix-empty:
+    FROM ghcr.io/defn/dev:latest-nix-root
+    WORKDIR /app
+
+    # nix
+    COPY --chown=ubuntu:ubuntu +nix-empty-var/var /nix/var
     COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
 
 # nix applications where /nix is a data volume
