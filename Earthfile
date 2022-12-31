@@ -80,6 +80,7 @@ nix-installed:
 
     # nix
     RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' \
+        && ln -nfs /nix/var/nix/profiles/per-user/ubuntu/profile /home/ubuntu/.nix-profile \
         && echo . ~/.bashrc > /home/ubuntu/.bash_profile \
         && echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh > /home/ubuntu/.bashrc \
         && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh \
@@ -97,10 +98,10 @@ nix-install:
     # nix (moved to /nix-install)
     RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix-install \
         && bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' \
+        && ln -nfs /nix/var/nix/profiles/per-user/ubuntu/profile /home/ubuntu/.nix-profile \
         && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh \
         && nix profile install nixpkgs#nix-direnv nixpkgs#direnv \
         && mv /nix/var /nix/store /nix-install/ \
-        && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh \
         && echo 'use flake' > .envrc \
         && nix profile wipe-history \
         && nix-store --gc
