@@ -101,10 +101,10 @@ nix-install:
         && ln -nfs /nix/var/nix/profiles/per-user/ubuntu/profile /home/ubuntu/.nix-profile \
         && . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh \
         && nix profile install nixpkgs#nix-direnv nixpkgs#direnv \
-        && mv /nix/var /nix/store /nix-install/ \
         && echo 'use flake' > .envrc \
         && nix profile wipe-history \
-        && nix-store --gc
+        && nix-store --gc \
+        && mv /nix/var /nix/store /nix-install/
     COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
 
 # for building flakes and saving thier nix artifacts
