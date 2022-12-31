@@ -207,7 +207,7 @@ flake-root:
     RUN mkdir build && cd build && git init
 
     # store
-    RUN mkdir store
+    RUN sudo mkdir /store
 
 NIX_DIRENV:
     COMMAND
@@ -215,8 +215,7 @@ NIX_DIRENV:
     FROM ghcr.io/defn/dev:latest-nix-installed
     COPY --chown=ubuntu:ubuntu --dir . .
     RUN bash -c '. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh; eval "$(direnv hook bash)"; direnv allow; _direnv_hook; nix profile wipe-history; nix-store --gc'
-    RUN mkdir -p store
-    RUN rsync -ia `/home/ubuntu/.nix-profile/bin/nix-store -qR $(ls -d .direnv/flake-profile-* | grep -v 'rc$') ~/.nix-profile` store/
+    RUN rsync -ia `/home/ubuntu/.nix-profile/bin/nix-store -qR $(ls -d .direnv/flake-profile-* | grep -v 'rc$') ~/.nix-profile` /store/
 
 # testing defn/dev build
 dev:
