@@ -167,9 +167,7 @@ nix-empty-installed:
     FROM ghcr.io/defn/dev:latest-nix-installed
 
     RUN sudo install -d -o ubuntu -g ubuntu /store
-    RUN rsync -ia `/home/ubuntu/.nix-profile/bin/nix-store -qR ~/.nix-profile` /store/
     SAVE ARTIFACT /nix/var var
-    SAVE ARTIFACT /nix/store store
 
 nix-empty:
     FROM ghcr.io/defn/dev:latest-nix-root
@@ -177,7 +175,6 @@ nix-empty:
 
     # nix
     COPY --chown=ubuntu:ubuntu +nix-empty-installed/var /nix/var
-    COPY --chown=ubuntu:ubuntu +nix-empty-installed/store /nix/store
     COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
     RUN ln -nfs /nix/var/nix/profiles/per-user/ubuntu/profile /home/ubuntu/.nix-profile \
         && echo . ~/.bashrc > /home/ubuntu/.bash_profile \
@@ -217,7 +214,7 @@ NIX_DIRENV:
     COPY --chown=ubuntu:ubuntu --dir . .
     RUN bash -c '. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh; eval "$(direnv hook bash)"; direnv allow; _direnv_hook; nix profile wipe-history; nix-store --gc'
     RUN sudo install -d -o ubuntu -g ubuntu /store
-    RUN rsync -ia `/home/ubuntu/.nix-profile/bin/nix-store -qR $(ls -d .direnv/flake-profile-* | grep -v 'rc$')` /store/
+    RUN rsync -ia `/home/ubuntu/.nix-profile/bin/nix-store -qR ~/.nix-profile $(ls -d .direnv/flake-profile-* | grep -v 'rc$')` /store/
 
 # testing defn/dev build
 dev:
