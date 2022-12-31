@@ -79,7 +79,9 @@ nix-installed:
     WORKDIR /app
 
     # nix
-    RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon'
+    RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' \
+        && echo . ~/.bashrc > /home/ubuntu/.bash_profile \
+        && echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh > /home/ubuntu/.bashrc
 
     # direnv
     RUN ~/.nix-profile/bin/nix profile install nixpkgs#nix-direnv nixpkgs#direnv
@@ -98,7 +100,6 @@ nix-install:
     RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' \
         && ~/.nix-profile/bin/nix profile install nixpkgs#nix-direnv nixpkgs#direnv \
         && mv /nix/var /nix/store /nix-install/
-
     COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
 
     # nix config
