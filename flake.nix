@@ -150,10 +150,12 @@
           wget
           curl
           xz
+          unzip
           procps
           less
           htop
           s6
+          screen
 
           docker
           docker-credential-helpers
