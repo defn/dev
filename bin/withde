@@ -6,7 +6,7 @@ chdir="$1"; shift
 
 cd "$chdir"
 
-eval "$(~/.nix-profile/bin/direnv hook bash)"
+eval "$(direnv hook bash)"
 direnv allow
 _direnv_hook
 

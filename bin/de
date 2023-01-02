@@ -11,7 +11,7 @@ fi
 cd "$chdir"
 
 if [[ -n "${1:-}" ]]; then
-    eval "$(~/.nix-profile/bin/direnv hook bash)"
+    eval "$(direnv hook bash)"
     direnv allow
     _direnv_hook
     exec "$@"
