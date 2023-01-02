@@ -2,6 +2,7 @@ brew "direnv"
 brew "pass"
 brew "pinentry-mac"
 brew "pstree"
+brew "ykman"
 
 cask "divvy"
 cask "iterm2"
