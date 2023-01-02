@@ -145,4 +145,7 @@ dev:
 	code --folder-uri "vscode-remote://dev-container+$$(pwd | perl -pe 's{\s+}{}g' | xxd -p)/home/ubuntu"
 
 up:
-	screen -DRR tilt -m bash -il -c ". .bashrc; PATH=$PATH:/usr/bin:/bin; $(which tilt) up"
+	sudo touch /var/run/utmp
+	pass hello || gpg-agent --daemon
+	pass hello
+	screen -DRR tilt -m bash -il -c "~/bin/withde ~ $$(which tilt) up"

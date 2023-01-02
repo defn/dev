@@ -150,6 +150,7 @@
           wget
           curl
           xz
+          unzip
           procps
           less
           htop
