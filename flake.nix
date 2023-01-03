@@ -156,6 +156,7 @@
           htop
           s6
           screen
+          groff
 
           docker
           docker-credential-helpers
