@@ -20,10 +20,6 @@ if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$HOME/.local/bin:$PATH"; fi
 export PYTHONPATH
 export PIP_DISABLE_PIP_VERSION_CHECK=1
 
-# gpg-agent ssh socket
-# TODO how does this get set in Linux
-SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh; export SSH_AUTH_SOCK
-
 # homebrew
 PATH="$PATH:/opt/homebrew/bin"
 
@@ -82,10 +78,6 @@ if [[ -n "${VSCODE_GIT_ASKPASS_NODE:-}" ]]; then
 			export BROWSER="open"
 			;;
 	esac
-
-	if [[ ! -S "${SSH_AUTH_SOCK:-}" ]]; then
-		export SSH_AUTH_SOCK="$(ls -td /tmp/vscode-ssh-auth-sock-* 2>/dev/null | head -1)"
-	fi
 fi
 
 # aws-vault
@@ -112,9 +104,6 @@ if tty >/dev/null; then
 
 	function update_ps1 {
 		ls -td /tmp/vscode-ssh-auth-sock* 2>/dev/null | tail -n +2 | xargs rm -f /tmp/.meh;
-		if [[ ! -S "${SSH_AUTH_SOCK:-}" ]]; then
-			export SSH_AUTH_SOCK="$(ls -td /tmp/vscode-ssh-auth-sock-* 2>/dev/null | head -1)"
-		fi
 		EXTRA=""
 
 		local slug=
