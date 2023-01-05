@@ -48,7 +48,11 @@ install-inner:
 		mkdir -p /home/ubuntu/work/.codespaces/.persistedshare; \
 		rm -rf ~/work/.codespaces/.persistedshare/dotfiles; \
 		ln -nfs ~/.config/coderv2/dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
-		nix run .#coder -- dotfiles --yes https://github.com/$${GIT_AUTHOR_NAME}/dotfiles; \
+		if ! test -d ~/.dotfiles/.git/.; then \
+			nix run .#coder -- dotfiles --yes https://github.com/$${GIT_AUTHOR_NAME}/dotfiles; \
+		else \
+			(cd ~.dotfiles && ./bootstrap); \
+		fi; \
 	fi
 
 	mark configure gpg
@@ -67,9 +71,6 @@ install-inner:
 		fi
 
 	$(MAKE) login
-
-	mark tilt
-	$(MAKE) up
 
 down:
 	touch .local/share/code-server/idle
