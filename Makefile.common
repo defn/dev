@@ -42,6 +42,15 @@ install-inner:
 		fi; \
 	fi
 
+	mark dotfiles
+	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
+		mkdir -p ~/.config/coderv2/dotfiles; \
+		mkdir -p /home/ubuntu/work/.codespaces/.persistedshare; \
+		rm -rf ~/work/.codespaces/.persistedshare/dotfiles; \
+		ln -nfs ~/.config/coderv2/dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
+		nix run .#coder -- dotfiles --yes https://github.com/$${GIT_AUTHOR_NAME}/dotfiles; \
+	fi
+
 	mark configure gpg
 	if test -d ~/.password-store/home/.gnupg; then rsync -ia ~/.password-store/config/gnupg-config/. ~/.gnupg/.; fi
 	$(MAKE) perms
@@ -58,15 +67,6 @@ install-inner:
 		fi
 
 	$(MAKE) login
-
-	mark dotfiles
-	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
-		mkdir -p ~/.config/coderv2/dotfiles; \
-		mkdir -p /home/ubuntu/work/.codespaces/.persistedshare; \
-		rm -rf ~/work/.codespaces/.persistedshare/dotfiles; \
-		ln -nfs ~/.config/coderv2/dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
-		coder dotfiles --yes https://github.com/$${GIT_AUTHOR_NAME}/dotfiles; \
-	fi
 
 	mark tilt
 	$(MAKE) up
@@ -87,7 +87,7 @@ login:
 github-login:
 	if ! gh auth status; then echo Y | gh auth login -p https -h github.com -w; fi
 	-gh extension install cli/gh-webhook
-	pass GHCR_TOKEN | docker login ghcr.io -u $$GIT_AUTHOR_NAME --password-stdin
+	if test -n "$${GIT_AUTHOR_NAME:-}"; then pass GHCR_TOKEN | docker login ghcr.io -u $$GIT_AUTHOR_NAME --password-stdin; fi
 
 pull-repos: # Pull dev, app, home, and password-store repos
 	for a in . .dotfiles .password-store; do (echo; echo "$$a"; cd "$$a" && git pull) || true; done
