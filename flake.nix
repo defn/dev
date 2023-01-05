@@ -4,6 +4,7 @@
     localdev.url = github:defn/pkg/localdev-0.0.3?dir=localdev;
     caddy.url = github:defn/pkg/caddy-2.6.2-5?dir=caddy;
     az.url = github:defn/pkg/az-0.0.8?dir=az;
+    awscli.url = github:defn/pkg/awscli-2.0.30-2?dir=awscli;
     earthly.url = github:defn/pkg/earthly-0.6.30-3?dir=earthly;
     tilt.url = github:defn/pkg/tilt-0.30.13-3?dir=tilt;
     gh.url = github:defn/pkg/gh-2.21.2-1?dir=gh;
