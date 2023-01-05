@@ -51,7 +51,7 @@ install-inner:
 		if ! test -d ~/.dotfiles/.git/.; then \
 			nix run .#coder -- dotfiles --yes https://github.com/$${GIT_AUTHOR_NAME}/dotfiles; \
 		else \
-			(cd ~.dotfiles && ./bootstrap); \
+			(cd ~/.dotfiles && ./bootstrap); \
 		fi; \
 	fi
 
