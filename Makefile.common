@@ -150,3 +150,6 @@ up:
 	pass hello || gpg-agent --daemon
 	pass hello
 	screen -DRR tilt -m bash -il -c "~/bin/withde ~ $$(which tilt) up"
+
+http:
+	echo "rdr pass inet proto tcp from any to any port 80 -> 127.0.0.1 port 5555" | sudo pfctl -ef -
