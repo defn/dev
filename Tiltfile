@@ -20,6 +20,24 @@ local_resource("coder",
     ]
 )
 
+# Starts Vault on macOS
+local_resource("vault",
+    serve_cmd=[
+        "bash", "-c",
+        """
+            if [[ "Darwin" == "$(uname -s)" ]]; then
+                cd w/vault
+                eval "$(direnv hook bash)"
+                direnv allow
+                _direnv_hook
+                exec this-vault-start
+            else
+                exec sleep infinity
+            fi
+        """
+    ]
+)
+
 # Starts nix-cache on macOS
 local_resource("nix-cache",
     serve_cmd=[
@@ -65,24 +83,6 @@ local_resource("tailscale",
                 direnv allow
                 _direnv_hook
                 exec this-tailscale-start
-            else
-                exec sleep infinity
-            fi
-        """
-    ]
-)
-
-# Starts Vault on Linux
-local_resource("vault",
-    serve_cmd=[
-        "bash", "-c",
-        """
-            if [[ "Linux" == "$(uname -s)" ]]; then
-                cd w/vault
-                eval "$(direnv hook bash)"
-                direnv allow
-                _direnv_hook
-                exec this-vault-start
             else
                 exec sleep infinity
             fi
