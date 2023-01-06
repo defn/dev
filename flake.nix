@@ -41,21 +41,21 @@
 
       packages.coder-server-for-orgs = pkgs.writeShellScriptBin "this-coder-server-for-orgs" ''
         coder server --no-feature-warning --cache-dir ~/.cache/coder --global-config ~/.config/coderv2 \
-          --access-url=http://localhost:5555 --http-address=localhost:5555 \
+          --access-url=http://localhost --http-address=localhost:5555 \
           --oauth2-github-allow-signups --oauth2-github-client-id=$(pass coder_github_client_id) --oauth2-github-client-secret=$(pass coder_github_client_secret) \
           --oauth2-github-allowed-orgs=$(pass coder_github_allowed_orgs)
       '';
 
       packages.coder-server-for-everyone = pkgs.writeShellScriptBin "this-coder-server-for-everyone" ''
         coder server --no-feature-warning --cache-dir ~/.cache/coder --global-config ~/.config/coderv2 \
-        --access-url=http://localhost:5555 --http-address=localhost:5555 \
+        --access-url=http://localhost --http-address=localhost:5555 \
         --oauth2-github-allow-signups --oauth2-github-client-id=$(pass coder_github_client_id) --oauth2-github-client-secret=$(pass coder_github_client_secret) \
         --oauth2-github-allow-everyone
       '';
 
       packages.coder-initial-user = pkgs.writeShellScriptBin "this-coder-initial-user" ''
         coder login --first-user-email=$(pass coder_admin_email) --first-user-password=$(pass coder_admin_password) --first-user-username=$(pass coder_admin_username) \
-          --first-user-trial=false http://localhost:5555
+          --first-user-trial=false http://localhost
       '';
 
       packages.coder-template-docker = pkgs.writeShellScriptBin "this-coder-template-docker" ''
@@ -68,11 +68,11 @@
       '';
 
       packages.coder-server-wait-for-alive = pkgs.writeShellScriptBin "this-coder-server-wait-for-alive" ''
-        while [[ "000" == "$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 1 -m 1 http://localhost:5555)" ]]; do sleep 1; done
+        while [[ "000" == "$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 1 -m 1 http://localhost)" ]]; do sleep 1; done
       '';
 
       packages.coder-server-wait-for-dead = pkgs.writeShellScriptBin "this-coder-server-wait-for-dead" ''
-        while [[ "000" != "$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 1 -m 1 http://localhost:5555)" ]]; do sleep 1; done
+        while [[ "000" != "$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 1 -m 1 http://localhost)" ]]; do sleep 1; done
       '';
 
       packages.coder-server-kill = pkgs.writeShellScriptBin "this-coder-server-kill" ''
@@ -93,7 +93,7 @@
            this-coder-server-wait-for-alive
            if ! coder users show me | grep Organizations: | grep admin; then this-coder-initial-user | cat; fi
            if ! coder template list | grep docker-code-server; then this-coder-template-docker; fi
-           ''${BROWSER:-open} http://defn.run:5555
+           ''${BROWSER:-open} http://defn.run
          ) &
 
          for="''${1:-orgs}"
