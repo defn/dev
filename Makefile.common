@@ -149,7 +149,7 @@ up:
 	if ! test -e /var/run/utmp; then sudo touch /var/run/utmp; fi
 	pass hello || gpg-agent --daemon
 	pass hello
-	screen -DRR tilt -m bash -il -c "~/bin/withde ~ $$(which tilt) up"
+	screen -DRR tilt -m bash -il -c "~/bin/withde ~ $$(which tilt) up --stream"
 
 http:
 	echo "rdr pass inet proto tcp from any to any port 80 -> 127.0.0.1 port 5555" | sudo pfctl -ef -
