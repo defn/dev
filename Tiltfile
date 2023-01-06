@@ -12,7 +12,7 @@ local_resource("coder",
                 _direnv_hook
                 docker pull ghcr.io/defn/dev:latest-devcontainer
                 this-coder-server-kill
-                exec this-coder-init
+                exec this-coder-init orgs-wildcard
             else
                 exec sleep infinity
             fi
@@ -164,7 +164,7 @@ local_resource("proxy-machine-api",
         """
             eval "$(direnv hook bash)"
             _direnv_hook
-            exec flyctl machine api-proxy
+            exec flyctl machine api-proxy --org personal
         """
     ],
 )

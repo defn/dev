@@ -32,6 +32,13 @@
         rm -rf ~/.config/coderv2/postgres
       '';
 
+      packages.coder-server-for-orgs-wildcard = pkgs.writeShellScriptBin "this-coder-server-for-orgs-wildcard" ''
+        coder server --no-feature-warning --cache-dir ~/.cache/coder --global-config ~/.config/coderv2 \
+          --access-url=$(pass coder_access_url) --wildcard-access-url="$(pass coder_wildcard_access_url)" --http-address=localhost:5555 \
+          --oauth2-github-allow-signups --oauth2-github-client-id=$(pass coder_github_client_id) --oauth2-github-client-secret=$(pass coder_github_client_secret) \
+          --oauth2-github-allowed-orgs=$(pass coder_github_allowed_orgs)
+      '';
+
       packages.coder-server-for-orgs = pkgs.writeShellScriptBin "this-coder-server-for-orgs" ''
         coder server --no-feature-warning --cache-dir ~/.cache/coder --global-config ~/.config/coderv2 \
           --access-url=http://localhost:5555 --http-address=localhost:5555 \
@@ -86,10 +93,12 @@
            this-coder-server-wait-for-alive
            if ! coder users show me | grep Organizations: | grep admin; then this-coder-initial-user | cat; fi
            if ! coder template list | grep docker-code-server; then this-coder-template-docker; fi
-           ''${BROWSER:-open} http://localhost:5555
+           ''${BROWSER:-open} http://defn.run:5555
          ) &
 
-        this-coder-server-for-orgs
+         for="''${1:-orgs}"
+
+        "this-coder-server-for-$for"
       '';
 
       packages.build = pkgs.writeShellScriptBin "this-build" ''
@@ -113,6 +122,7 @@
       devShell = wrap.devShell {
         devInputs = wrap.flakeInputs ++ (with packages; [
           coder-delete-database
+          coder-server-for-orgs-wildcard
           coder-server-for-orgs
           coder-server-for-everyone
           coder-server-wait-for-alive
