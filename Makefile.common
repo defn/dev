@@ -14,6 +14,7 @@ macos:
 	ifconfig lo0
 	defaults write -g ApplePressAndHoldEnabled -bool false
 	-docker context create host --docker host=unix:///var/run/docker.sock
+	echo "rdr pass inet proto tcp from any to any port 80 -> 127.0.0.1 port 5555" | sudo pfctl -ef -
 
 symlinks:
 	mark configure symlinks
@@ -150,6 +151,3 @@ up:
 	pass hello || gpg-agent --daemon
 	pass hello
 	screen -DRR tilt -m bash -il -c "~/bin/withde ~ $$(which tilt) up --stream"
-
-http:
-	echo "rdr pass inet proto tcp from any to any port 80 -> 127.0.0.1 port 5555" | sudo pfctl -ef -
