@@ -1,5 +1,5 @@
 storage "file" {
-  path = "/work/password-store/vault/data"
+  path = "/Users/defn/work/password-store/vault/data"
 }
 
 disable_mlock = true
