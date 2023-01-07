@@ -12,7 +12,7 @@ local_resource("coder",
                 _direnv_hook
                 docker pull ghcr.io/defn/dev:latest-devcontainer
                 this-coder-server-kill
-                exec this-coder-init orgs-wildcard
+                exec this-coder-init orgs-wildcard-tls
             else
                 exec sleep infinity
             fi
