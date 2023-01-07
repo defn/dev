@@ -39,8 +39,8 @@
           --tls-address=localhost:5556 \
           --tls-enable \
           --tls-min-version tls13 \
-          --tls-cert-file PATH \
-          --tls-key-file PATH \
+          --tls-cert-file "/Users/defn/.acme.sh/*.defn.run/fullchain.cer" \
+          --tls-key-file "/Users/defn/.acme.sh/*.defn.run/*.defn.run.key" \
           --oauth2-github-allow-signups --oauth2-github-client-id=$(pass coder_github_client_id) --oauth2-github-client-secret=$(pass coder_github_client_secret) \
           --oauth2-github-allowed-orgs=$(pass coder_github_allowed_orgs)
       '';
