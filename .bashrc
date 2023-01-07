@@ -85,7 +85,14 @@ export AWS_VAULT_BACKEND=pass
 export AWS_VAULT_PASS_PREFIX=aws-vault
 
 # vault
-export VAULT_ADDR="${VAULT_ADDR:-http://host.docker.internal:8200}"
+case "$(uname -s)" in
+  Darwin)
+    export VAULT_ADDR="http://localhost:8200"
+    ;;
+  *)
+    export VAULT_ADDR="${VAULT_ADDR:-http://host.docker.internal:8200}"
+    ;;
+esac
 
 # direnv
 export DIRENV_LOG_FORMAT=
