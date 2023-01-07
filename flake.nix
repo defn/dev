@@ -135,6 +135,45 @@
         echo
       '';
 
+      packages.trust-ca = pkgs.writeShellScriptBin "this-trust-ca" ''
+        sudo security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-db etc/ca.crt
+      '';
+
+      packages.down = pkgs.writeShellScriptBin "this-down" ''
+        touch .local/share/code-server/idle
+      '';
+
+      packages.logout = pkgs.writeShellScriptBin "this-logout" ''
+        echo yes | gh auth logout --hostname github.com
+        echo RELOADAGENT | gpg-connect-agent
+      '';
+
+      packages.login = pkgs.writeShellScriptBin "this-login" ''
+        mark vault
+        if nc -z -v localhost 8200 2>/dev/null; then \
+          $(MAKE) vault-unseal; fi
+        mark kubeconfig, argocd
+        if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then $(MAKE) kubeconfig; $(MAKE) argocd-login || true; fi
+        mark github
+        $(MAKE) github-login
+      '';
+
+      packages.github-login = pkgs.writeShellScriptBin "this-github-login" ''
+        if ! gh auth status; then echo Y | gh auth login -p https -h github.com -w; fi
+        -gh extension install cli/gh-webhook
+        if test -n "$${GIT_AUTHOR_NAME:-}"; then pass GHCR_TOKEN | docker login ghcr.io -u $$GIT_AUTHOR_NAME --password-stdin; fi
+        -vault login -method=github token="$$(cat ~/.config/gh/hosts.yml  | yq -r '.["github.com"].oauth_token')"
+      '';
+
+      packages.home-repos = pkgs.writeShellScriptBin "this-home-repos" ''
+        for a in ~ ~/.dotfiles ~/.password-store; do (echo; echo "$$a"; cd "$$a" && git pull) || true; done
+      '';
+
+      packages.all-repos = pkgs.writeShellScriptBin "this-all-repos" ''
+        $(MAKE) home-repos
+        git pull
+      '';
+
       devShell = wrap.devShell {
         devInputs = wrap.flakeInputs ++ (with packages; [
           coder-delete-database
