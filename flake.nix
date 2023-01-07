@@ -37,7 +37,7 @@
           --access-url=$(pass coder_access_url) --wildcard-access-url="$(pass coder_wildcard_access_url)" \
           --http-address=localhost:5555 \
           --tls-address=localhost:5556 \
-          --tls-enable \
+          --tls-enable --tls-redirect-http-to-https=false \
           --tls-min-version tls13 \
           --tls-cert-file "/Users/defn/.acme.sh/*.defn.run/fullchain.cer" \
           --tls-key-file "/Users/defn/.acme.sh/*.defn.run/*.defn.run.key" \
