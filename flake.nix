@@ -32,7 +32,7 @@
         rm -rf ~/.config/coderv2/postgres
       '';
 
-      packages.coder-server-for-orgs-wildcard-tls = pkgs.writeShellScriptBin "this-coder-server-for-orgs-wildcard=tls" ''
+      packages.coder-server-for-orgs-wildcard-tls = pkgs.writeShellScriptBin "this-coder-server-for-orgs-wildcard-tls" ''
         coder server --no-feature-warning --cache-dir ~/.cache/coder --global-config ~/.config/coderv2 \
           --access-url=$(pass coder_access_url) --wildcard-access-url="$(pass coder_wildcard_access_url)" \
           --http-address=localhost:5555 \
@@ -109,7 +109,7 @@
            this-coder-server-wait-for-alive
            if ! coder users show me | grep Organizations: | grep admin; then this-coder-initial-user | cat; fi
            if ! coder template list | grep docker-code-server; then this-coder-template-docker; fi
-           ''${BROWSER:-open} http://defn.run
+           ''${BROWSER:-open} "$(pass coder_access_url)"
          ) &
 
          for="''${1:-orgs}"
