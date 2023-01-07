@@ -29,9 +29,14 @@ function main {
     git reset --hard "$commit"
 
     time (
-        nix build
-        nix path-info --all | grep -v '\.drv$' | xargs nix copy --verbose --to 'file:///cache/nix?compression-level=0&parallel-compression=true&secret-key=/tmp/cache-priv-key.pem'
-        nix path-info --all | grep -v '\.drv$' | xargs nix copy --verbose --to 'file:///tmp/cache/nix?compression-level=0&parallel-compression=true'
+        for a in . w/vault w/tailscale; do 
+            (
+                cd $a
+                nix build
+                nix path-info --all | grep -v '\.drv$' | xargs nix copy --verbose --to 'file:///cache/nix?compression-level=0&parallel-compression=true&secret-key=/tmp/cache-priv-key.pem'
+                nix path-info --all | grep -v '\.drv$' | xargs nix copy --verbose --to 'file:///tmp/cache/nix?compression-level=0&parallel-compression=true'
+            )
+        done
     )
 
     for a in {nix-{root,installed,empty},flake-root,devcontainer}; do
