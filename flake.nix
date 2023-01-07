@@ -24,6 +24,66 @@
     };
 
     handler = { pkgs, wrap, system, builders }: rec {
+      apps = {
+        coder = {
+          type = "app";
+          program = "${inputs.localdev.inputs.coder.defaultPackage.${system}}/bin/coder";
+        };
+
+        codeserver = {
+          type = "app";
+          program = "${inputs.localdev.inputs.codeserver.defaultPackage.${system}}/bin/code-server";
+        };
+      };
+
+      devShell = wrap.devShell {
+        devInputs = wrap.flakeInputs ++ (pkgs.lib.attrsets.mapAttrsToList (name: value: value) commands);
+      };
+
+      defaultPackage = wrap.nullBuilder {
+        propagatedBuildInputs = with pkgs; wrap.flakeInputs ++ [
+          builders.yaegi
+
+          commands.pass
+
+          bashInteractive
+          gnupg
+          powerline-go
+          vim
+          rsync
+          gnumake
+          dnsutils
+          nettools
+          openssh
+          pre-commit
+          aws-vault
+          jq
+          yq
+          gron
+          fzf
+          git
+          wget
+          curl
+          xz
+          unzip
+          procps
+          less
+          htop
+          s6
+          screen
+          groff
+
+          docker
+          docker-credential-helpers
+          skopeo
+
+          pinentry
+          direnv
+          nix-direnv
+          nixpkgs-fmt
+        ];
+      };
+
       commands = {
         pass = pkgs.writeShellScriptBin "pass" ''
           { ${pkgs.pass}/bin/pass "$@" 2>&1 1>&3 3>&- | grep -v 'problem with fast path key listing'; } 3>&1 1>&2 | cat
@@ -176,65 +236,6 @@
         '';
       };
 
-      devShell = wrap.devShell {
-        devInputs = wrap.flakeInputs ++ (pkgs.lib.attrsets.mapAttrsToList (name: value: value) commands);
-      };
-
-      defaultPackage = wrap.nullBuilder {
-        propagatedBuildInputs = with pkgs; wrap.flakeInputs ++ [
-          builders.yaegi
-
-          commands.pass
-
-          bashInteractive
-          gnupg
-          powerline-go
-          vim
-          rsync
-          gnumake
-          dnsutils
-          nettools
-          openssh
-          pre-commit
-          aws-vault
-          jq
-          yq
-          gron
-          fzf
-          git
-          wget
-          curl
-          xz
-          unzip
-          procps
-          less
-          htop
-          s6
-          screen
-          groff
-
-          docker
-          docker-credential-helpers
-          skopeo
-
-          pinentry
-          direnv
-          nix-direnv
-          nixpkgs-fmt
-        ];
-      };
-
-      apps = {
-        coder = {
-          type = "app";
-          program = "${inputs.localdev.inputs.coder.defaultPackage.${system}}/bin/coder";
-        };
-
-        codeserver = {
-          type = "app";
-          program = "${inputs.localdev.inputs.codeserver.defaultPackage.${system}}/bin/code-server";
-        };
-      };
     };
   };
 }
