@@ -177,7 +177,7 @@
       };
 
       devShell = wrap.devShell {
-        devInputs = wrap.flakeInputs // commands;
+        devInputs = wrap.flakeInputs ++ (pkgs.lib.attrsets.mapAttrsToList (name: value: value) commands);
       };
 
       defaultPackage = wrap.nullBuilder {
