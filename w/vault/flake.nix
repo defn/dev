@@ -2,6 +2,7 @@
   inputs = {
     dev.url = github:defn/pkg/dev-0.0.19?dir=dev;
     vault.url = github:defn/pkg/vault-1.12.2-4?dir=vault;
+    acme.url = github:defn/pkg/acme-3.0.5-3?dir=acme;
   };
 
   outputs = inputs:
