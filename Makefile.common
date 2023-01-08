@@ -86,8 +86,6 @@ nix-reinstall:
 	nix profile list | tail -n +2 | awk '{print $$NF}' | xargs nix profile remove
 	$(MAKE) nix
 
-nix-gc:
-	nix-store --gc
 
 nix-Linux:
 	export LC_ALL=C.UTF-8 && if ! test -x ~/.nix-profile/bin/nix; then $(MAKE) nix-Linux-bootstrap; fi
