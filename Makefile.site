@@ -13,4 +13,4 @@ manage-site-default:
 %: %-default
 	@true
 
--include .password-store/Makefile
+-include ~/.password-store/Makefile

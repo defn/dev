@@ -38,12 +38,15 @@
 
       devShell = wrap.devShell {
         devInputs = (wrap.flakeInputs ++
+          [ defaultPackage ] ++
           pkgs.lib.attrsets.mapAttrsToList (name: value: value) commands);
       };
 
       defaultPackage = wrap.nullBuilder {
         propagatedBuildInputs = with pkgs; wrap.flakeInputs ++ [
           builders.yaegi
+
+          packages.pass
 
           bashInteractive
           powerline-go
@@ -83,15 +86,15 @@
         ];
       };
 
+      packages.pass = pkgs.writeShellScriptBin "pass" ''
+        { ${pkgs.pass}/bin/pass "$@" 2>&1 1>&3 3>&- | grep -v 'problem with fast path key listing'; } 3>&1 1>&2 | cat
+      '';
+
       commands = pkgs.lib.attrsets.mapAttrs
         (name: value: (pkgs.writeShellScriptBin "this-${name}" value))
         scripts;
 
       scripts = {
-        pass = ''
-          { ${pkgs.pass}/bin/pass "$@" 2>&1 1>&3 3>&- | grep -v 'problem with fast path key listing'; } 3>&1 1>&2 | cat
-        '';
-
         coder-delete-database = ''
           rm -rf ~/.config/coderv2/postgres
         '';
