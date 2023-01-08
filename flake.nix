@@ -46,37 +46,37 @@
           builders.yaegi
 
           bashInteractive
-          gnupg
           powerline-go
           vim
+          gnupg
+          pinentry
           rsync
           gnumake
+          git
+          xz
+          unzip
           dnsutils
           nettools
           openssh
+          htop
           pre-commit
           aws-vault
           jq
           yq
           gron
           fzf
-          git
+          groff
           wget
           curl
-          xz
-          unzip
           procps
           less
-          htop
           s6
           screen
-          groff
 
           docker
           docker-credential-helpers
           skopeo
 
-          pinentry
           direnv
           nix-direnv
           nixpkgs-fmt
@@ -240,6 +240,46 @@
 
         nix-gc = ''
           nix-store --gc
+        '';
+
+        ec2 = ''
+          pass hello
+          cat etc/ec2-user-data.template \
+            | sed 's#_CONTROLIP_#'$(host k3d-control.$(wait-tailscale-domain | cut -d. -f2-) | awk '{print $NF}')'#' \
+            | sed 's#_TSKEY_#'$(pass k3d-control-tskey)'#' \
+            | sed 's#_K3STOKEN_#'$(docker --context host exec k3d-control-server-0 cat /var/lib/rancher/k3s/server/node-token)'#' \
+            | control apply -f -
+        '';
+        prune = ''
+          	-docker images | grep :5000/ | grep -E 'weeks|days' | awk '{print $1 ":" $2}' | runmany 'docker rmi $1'
+          	-docker system prune -f
+          	-earthly prune
+        '';
+
+        wg-up = ''
+          	pass wg_client | base64 -d | sudo tee /etc/wireguard/wg0.conf > /dev/null
+          	sudo wg-quick up wg0
+          	this-wg-up-inner
+        '';
+
+        wg-up-inner = ''
+          	dig @$(shell sudo cat /etc/wireguard/wg0.conf | grep AllowedIPs | awk '{print $3}' | cut -d/ -f1)3 +noall +answer _apps.internal txt
+        '';
+
+        wg-down = ''
+          	sudo wg-quick down wg0nix-bootstrap:
+        '';
+
+        dev = ''
+          docker pull ghcr.io/defn/dev:latest-devcontainer
+          code --folder-uri "vscode-remote://dev-container+$(pwd | perl -pe 's{\s+}{}g' | xxd -p)/home/ubuntu"
+        '';
+
+        up = ''
+          if ! test -e /var/run/utmp; then sudo touch /var/run/utmp; fi
+          pass hello || gpg-agent --daemon
+          pass hello
+          screen -DRR tilt -m bash -il -c "~/bin/withde ~ $(which tilt) up --stream"
         '';
       };
     };
