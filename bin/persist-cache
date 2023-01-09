@@ -8,13 +8,13 @@ function persist {
     local d="$1"; shift
 
     if test -d "$d"; then
-        rm -rf "$d" || sudo rm -rf "$d"
+        rm -rf "$d" 2>/dev/null || sudo rm -rf "$d"
     fi
 
     # TODO DRY up sudo
-    mkdir -p "$s" || sudo mkdir -p "$s"
-    mkdir -p "$(dirname "$d")" || sudo mkdir -p "$(dirname "$d")"
-    ln -nfs "$s" "$d" | sudo ln -nfs "$s" "$d" |
+    mkdir -p "$s" 2>/dev/null || sudo mkdir -p "$s"
+    mkdir -p "$(dirname "$d")" 2>/dev/null || sudo mkdir -p "$(dirname "$d")"
+    ln -nfs "$s" "$d" 2>/dev/null | sudo ln -nfs "$s" "$d"
     set -x
 }
 
@@ -53,7 +53,7 @@ function cache {
 
   persist ~/work/code-server-cache/CachedExtensionVSIXs ~/.local/share/code-server/CachedExtensionVSIXs
   persist ~/work/code-server-cache/extensions ~/.local/share/code-server/extensions
-  persist ~/work/confif-coder ~/.config/coderv2
+  persist ~/work/config-coder ~/.config/coderv2
 
   persist ~/work/direnv-allow ~/.local/share/direnv
   persist ~/work/direnv-home ~/.direnv
