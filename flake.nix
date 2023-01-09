@@ -227,9 +227,9 @@
 
         github-login = ''
           if ! gh auth status; then echo Y | gh auth login -p https -h github.com -w; fi
-          -gh extension install cli/gh-webhook
+          gh extension install cli/gh-webhook || true
           if test -n "''${GIT_AUTHOR_NAME:-}"; then pass GHCR_TOKEN | docker login ghcr.io -u $GIT_AUTHOR_NAME --password-stdin; fi
-          -vault login -method=github token="$(cat ~/.config/gh/hosts.yml  | yq -r '.["github.com"].oauth_token')"
+          vault login -method=github token="$(cat ~/.config/gh/hosts.yml  | yq -r '.["github.com"].oauth_token')" || true
         '';
 
         home-repos = ''
