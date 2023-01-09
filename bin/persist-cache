@@ -49,12 +49,13 @@ function cache {
 
   persist ~/work/go-build ~/.cache/go-build
   persist ~/work/go-mod ~/.cache/go-mod
-
-  persist ~/work/code-server-cache/extensions ~/.local/share/code-server/extensions
-  persist ~/work/direnv-allow ~/.local/share/direnv
+  persist ~/work/go ~/go
 
   persist ~/work/code-server-cache/CachedExtensionVSIXs ~/.local/share/code-server/CachedExtensionVSIXs
+  persist ~/work/code-server-cache/extensions ~/.local/share/code-server/extensions
+  persist ~/work/confif-coder ~/.config/coderv2
 
+  persist ~/work/direnv-allow ~/.local/share/direnv
   persist ~/work/direnv-home ~/.direnv
 
   persist ~/work/tailscale-state /var/lib/tailscale

@@ -63,8 +63,6 @@ install-inner:
 		&& docker context create host --docker host=unix:///var/run/docker.sock || true \
         && docker context use host
 
-	$(MAKE) login
-
 nix:
 	if ! type -P nix; then . ~/.nix-profile/etc/profile.d/nix.sh; fi && $(MAKE) nix-$(shell uname -s)
 
