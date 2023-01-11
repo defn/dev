@@ -23,6 +23,11 @@
           acme.sh --issue --dns dns_cf --ocsp-must-staple --keylength ec-384 -d "*.$domain"
         '';
 
+        packages.acme-renew = pkgs.writeShellScriptBin "this-acme-renew" ''
+          domain="$1"; shift
+          acme.sh --renew --ecc -d "*.$domain"
+        '';
+
         packages.vault-start = pkgs.writeShellScriptBin "this-vault-start" ''
           set -exfu
 
@@ -66,6 +71,7 @@
             vault-seal
             vault-backup
             acme-issue
+            acme-renew
           ];
         };
 
