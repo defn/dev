@@ -2,7 +2,7 @@
   inputs = {
     dev.url = github:defn/pkg/dev-0.0.19?dir=dev;
     vault.url = github:defn/pkg/vault-1.12.2-4?dir=vault;
-    acme.url = github:defn/pkg/acme-3.0.5-3?dir=acme;
+    acme.url = github:defn/pkg/acme-3.0.5-4?dir=acme;
   };
 
   outputs = inputs:
@@ -17,6 +17,12 @@
       };
 
       handler = { pkgs, wrap, system, builders }: rec {
+        packages.acme-issue = pkgs.writeShellScriptBin "this-acme-issue" ''
+          domain="$1"; shift
+          export CF_Token="$(pass cloudflare_$domain)"
+          acme.sh --issue --dns dns_cf --ocsp-must-staple --keylength ec-384 -d "*.$domain"
+        '';
+
         packages.vault-start = pkgs.writeShellScriptBin "this-vault-start" ''
           set -exfu
 
@@ -59,6 +65,7 @@
             vault-unseal
             vault-seal
             vault-backup
+            acme-issue
           ];
         };
 
