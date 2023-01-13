@@ -280,9 +280,9 @@
 
         up = ''
           if ! test -e /var/run/utmp; then sudo touch /var/run/utmp; fi
-          pass hello || gpg-agent --daemon
+          if [[ -z "$(pass hello)" ]]; then gpg-agent --daemon --pinentry-program $(which pinentry-mac); fi
           pass hello
-          screen -DRR tilt -m bash -il -c "~/bin/withde ~ $(which tilt) up --stream"
+          screen -DRR tilt -m bash -il -c "~/bin/withde ~ $(which tilt) up"
         '';
       };
     };
