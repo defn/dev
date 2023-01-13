@@ -20,6 +20,22 @@ local_resource("coder",
     ]
 )
 
+# Starts code-server on macOS
+local_resource("code-server",
+    serve_cmd=[
+        "bash", "-c",
+        """
+            if [[ "Darwin" == "$(uname -s)" ]]; then
+                eval "$(direnv hook bash)"
+                _direnv_hook
+                exec env CODER_AGENT_AUTH=token CODER_AGENT_URL=https://coder.defn.run CODER_CONFIG_DIR=$HOME/.config/coderv2 CODER_AGENT_TOKEN="$(cat ~/.config/coderv2/coder-agent-token)" nix run .#coder -- agent
+            else
+                exec sleep infinity
+            fi
+        """
+    ]
+)
+
 # Starts Vault on macOS
 local_resource("vault",
     serve_cmd=[
