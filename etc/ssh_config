@@ -1,0 +1,14 @@
+# coder port-forward amanibhavam/defn --tcp 2222:2222
+# gpgconf  --list-dirs
+
+Host dev
+	User ubuntu
+	HostName 127.0.0.1
+	Port 2222
+	StrictHostKeyChecking=no
+	UserKnownHostsFile=/dev/null
+    ServerAliveInterval 60
+    ServerAliveCountMax 5
+    StreamLocalBindUnlink yes
+    RemoteForward /run/user/1000/gnupg/S.gpg-agent /Users/defn/.gnupg/S.gpg-agent.extra
+    RemoteForward /run/user/1000/gnupg/S.gpg-agent.extra /Users/defn/.gnupg/S.gpg-agent.extra
