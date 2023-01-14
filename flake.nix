@@ -133,11 +133,20 @@
           coder template create --yes || true
           coder template push --yes
           # https://github.com/coder/coder/tree/main/site/static/icon
+          coder template edit docker-code-server --icon "/icon/docker.png"
+        '';
+
+        coder-template-macos= ''
+          set -exfu
+          cd ~/coder/macos-code-server
+          coder template create --yes || true
+          coder template push --yes
+          # https://github.com/coder/coder/tree/main/site/static/icon
           coder template edit docker-code-server --icon "/icon/code.svg"
         '';
 
         coder-server-wait-for-alive = ''
-          while [[ "000" == "$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 1 -m 1 http://localhost)" ]]; do sleep 1; done
+          while [[ "000" == "$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 1 -m 1 http://localhost 2>&- )" ]]; do sleep 1; done
         '';
 
         coder-server-wait-for-dead = ''
@@ -160,9 +169,10 @@
         coder-init = ''
            (
              this-coder-server-wait-for-alive
+             pass coder_access_url > .config/coderv2/url
              if ! coder users show me | grep Organizations: | grep admin; then this-coder-initial-user | cat; fi
              if ! coder template list | grep docker-code-server; then this-coder-template-docker; fi
-             ''${BROWSER:-open} "$(pass coder_access_url)"
+             if ! coder template list | grep macos-code-server; then this-coder-template-macos; fi
            ) &
 
            for="''${1:-orgs}"
@@ -268,7 +278,7 @@
         up = ''
           eval "$(direnv hook bash)"
           _direnv_hook
-          if [[ "$(uname -s)" == "Darwin" ]]; then $(MAKE) macos; fi
+          if [[ "$(uname -s)" == "Darwin" ]]; then make macos; fi
           if ! test -e /var/run/utmp; then sudo touch /var/run/utmp; fi
           if [[ -z "$(pass hello)" ]]; then gpg-agent --daemon --pinentry-program $(which pinentry-mac); fi
           pass hello

@@ -21,7 +21,7 @@ local_resource("coder",
 )
 
 # Starts code-server on macOS
-local_resource("code-server",
+local_resource("coder-agent",
     deps=[os.getenv("HOME") + "/.config/coderv2/coder-agent-token"],
     serve_cmd=[
         "bash", "-c",
@@ -29,7 +29,7 @@ local_resource("code-server",
             if [[ "Darwin" == "$(uname -s)" ]]; then
                 eval "$(direnv hook bash)"
                 _direnv_hook
-                exec env CODER_AGENT_AUTH=token CODER_AGENT_URL=https://coder.defn.run CODER_CONFIG_DIR=$HOME/.config/coderv2 CODER_AGENT_TOKEN="$(cat ~/.config/coderv2/coder-agent-token)" nix run .#coder -- agent
+                exec env CODER_AGENT_AUTH=token CODER_AGENT_URL="$(pass coder_access_url)" CODER_CONFIG_DIR=$HOME/.config/coderv2 CODER_AGENT_TOKEN="$(cat ~/.config/coderv2/coder-agent-token)" nix run .#coder -- agent
             else
                 exec sleep infinity
             fi
@@ -47,8 +47,8 @@ local_resource("coder-port-forward",
                 eval "$(direnv hook bash)"
                 _direnv_hook
                 while true; do
-                    if coder list | grep ^amanibhavam/defn; then
-                        exec coder port-forward amanibhavam/defn --tcp 2222:2222
+                    if coder list | grep ^"$(pass coder_docker_workspace)"; then
+                        exec coder port-forward "$(pass coder_docker_workspace)" --tcp 2222:2222
                     fi
                     sleep 5
                 done
