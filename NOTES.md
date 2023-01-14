@@ -1,17 +1,3 @@
-    ssh: on remote: gpgconf  --list-dirs
-        Host
-        Hostname
-        User ubuntu
-        Port 2222
-        ForwardAgent true
-        StreamLocalBindUnlink yes
-        RemoteForward /home/ubuntu/.gnupg/S.gpg-agent /Users/defn/.gnupg/S.gpg-agent.extra
-        RemoteForward /home/ubuntu/.gnupg/S.gpg-agent.extra /Users/defn/.gnupg/S.gpg-agent.extra
-        StrictHostKeyChecking no
-        UserKnownHostsFile=/dev/null
-        ServerAliveInterval 60
-        ServerAliveCountMax 5
-
 https://www.vaultproject.io/docs/secrets/pki/quick-start-root-ca
 
     vault secrets enable pki
