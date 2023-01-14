@@ -22,6 +22,7 @@ local_resource("coder",
 
 # Starts code-server on macOS
 local_resource("code-server",
+    deps=[os.getenv("HOME") + "/.config/coderv2/coder-agent-token"],
     serve_cmd=[
         "bash", "-c",
         """
@@ -38,13 +39,19 @@ local_resource("code-server",
 
 # Starts coder port forward on macOS
 local_resource("coder-port-forward",
+    deps=[os.getenv("HOME") + "/.config/coderv2/coder-agent-token"],
     serve_cmd=[
         "bash", "-c",
         """
             if [[ "Darwin" == "$(uname -s)" ]]; then
                 eval "$(direnv hook bash)"
                 _direnv_hook
-                exec coder port-forward amanibhavam/defn --tcp 2222:2222
+                while true; do
+                    if coder list | grep ^amanibhavam/defn; then
+                        exec coder port-forward amanibhavam/defn --tcp 2222:2222
+                    fi
+                    sleep 5
+                done
             else
                 exec sleep infinity
             fi
@@ -54,6 +61,7 @@ local_resource("coder-port-forward",
 
 # Starts gpg forward on macOS
 local_resource("gpg-socket-forward",
+    deps=[os.getenv("HOME") + "/.config/coderv2/coder-agent-token"],
     serve_cmd=[
         "bash", "-c",
         """
@@ -62,7 +70,12 @@ local_resource("gpg-socket-forward",
                 _direnv_hook
                 source .bashrc
                 ssh-add -L
-                exec ssh -v dev sleep infinity
+                while true; do
+                    if ssh -v dev true; then
+                        exec ssh -v dev sleep infinity
+                    fi
+                    sleep 5
+                done
             else
                 exec sleep infinity
             fi
