@@ -41,7 +41,7 @@ resource "coder_app" "code-server-dev" {
   slug         = "defn-dev"
   display_name = "defn/dev"
 
-  subdomain = false
+  subdomain = true
   share     = "owner"
 
   healthcheck {
