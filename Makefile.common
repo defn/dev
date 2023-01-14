@@ -44,7 +44,6 @@ install-inner:
 	mark configure gpg
 	if test -d ~/.password-store/config/gnupg-config/.; then rsync -ia ~/.password-store/config/gnupg-config/. ~/.gnupg/.; fi
 	$(MAKE) perms
-	env GPG_TTY=$$(tty) $(MAKE) init-gpg
 
 	mark dotfiles
 	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
