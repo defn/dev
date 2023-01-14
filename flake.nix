@@ -292,6 +292,7 @@
           if ! test -e /var/run/utmp; then sudo touch /var/run/utmp; fi
           if [[ -z "$(pass hello)" ]]; then gpg-agent --daemon --pinentry-program $(which pinentry-mac); fi
           pass hello
+          docker pull ghcr.io/defn/dev:latest-devcontainer
           screen -DRR tilt -m bash -il -c "~/bin/withde ~ $(which tilt) up"
         '';
       };
