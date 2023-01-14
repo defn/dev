@@ -36,6 +36,40 @@ local_resource("code-server",
     ]
 )
 
+# Starts coder port forward on macOS
+local_resource("coder-port-forward",
+    serve_cmd=[
+        "bash", "-c",
+        """
+            if [[ "Darwin" == "$(uname -s)" ]]; then
+                eval "$(direnv hook bash)"
+                _direnv_hook
+                exec coder port-forward amanibhavam/defn --tcp 2222:2222
+            else
+                exec sleep infinity
+            fi
+        """
+    ]
+)
+
+# Starts gpg forward on macOS
+local_resource("gpg-socket-forward",
+    serve_cmd=[
+        "bash", "-c",
+        """
+            if [[ "Darwin" == "$(uname -s)" ]]; then
+                eval "$(direnv hook bash)"
+                _direnv_hook
+                source .bashrc
+                ssh-add -L
+                exec ssh -v dev sleep infinity
+            else
+                exec sleep infinity
+            fi
+        """
+    ]
+)
+
 # Starts Vault on macOS
 local_resource("vault",
     serve_cmd=[
