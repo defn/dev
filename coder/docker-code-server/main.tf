@@ -142,7 +142,7 @@ resource "docker_container" "workspace" {
 
   entrypoint = [
     "bash", "-c",
-    "set -xfu; cd; git pull; bash -x bin/persist-cache; export CODER_AGENT_AUTH=token; export CODER_AGENT_URL=http://host.docker.internal/; exec ~/.nix-profile/bin/nix run .#coder -- agent"
+    "set -xfu; cd; git pull; bash -x bin/persist-cache; mkdir -p /tmp/etc/ssh; if ! test -f /tmp/etc/ssh/ssh_host_rsa_key; then ssh-keygen -A -f /tmp; fi; ~/.nix-profile/bin/nix run .#sshd -- -f ~/etc/sshd_config; export CODER_AGENT_AUTH=token; export CODER_AGENT_URL=http://host.docker.internal/; exec ~/.nix-profile/bin/nix run .#coder -- agent"
   ]
 
   host {

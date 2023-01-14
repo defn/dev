@@ -34,6 +34,11 @@
           type = "app";
           program = "${inputs.localdev.inputs.codeserver.defaultPackage.${system}}/bin/code-server";
         };
+
+        sshd = {
+          type = "app";
+          program = "${pkgs.openssh}/bin/sshd";
+        };
       };
 
       devShell = wrap.devShell {
