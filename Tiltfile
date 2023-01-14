@@ -69,8 +69,9 @@ local_resource("gpg-socket-forward",
                 eval "$(direnv hook bash)"
                 _direnv_hook
                 source .bashrc
-                ssh-add -L
                 while true; do
+                    coder config-ssh --yes
+                    ssh-add -L | ssh coder.defn tee .ssh/authorized_keys
                     if ssh -v dev true; then
                         exec ssh -v dev sleep infinity
                     fi
