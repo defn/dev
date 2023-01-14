@@ -207,6 +207,9 @@ devcontainer:
         && nix profile wipe-history \
         && nix-store --gc
 
+    # run dir
+    RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg 
+
     # defn/dev
     COPY --chown=ubuntu:ubuntu --dir . .
     RUN (git clean -nfd || true) \

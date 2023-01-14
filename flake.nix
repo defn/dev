@@ -122,30 +122,6 @@
             --oauth2-github-allowed-orgs=$(pass coder_github_allowed_orgs)
         '';
 
-        coder-server-for-orgs-wildcard = ''
-          coder server --no-feature-warning --cache-dir ~/.cache/coder --global-config ~/.config/coderv2 \
-            --access-url=$(pass coder_access_url) --wildcard-access-url="$(pass coder_wildcard_access_url)" \
-            --http-address=localhost:5555 \
-            --oauth2-github-allow-signups --oauth2-github-client-id=$(pass coder_github_client_id) --oauth2-github-client-secret=$(pass coder_github_client_secret) \
-            --oauth2-github-allowed-orgs=$(pass coder_github_allowed_orgs)
-        '';
-
-        coder-server-for-orgs = ''
-          coder server --no-feature-warning --cache-dir ~/.cache/coder --global-config ~/.config/coderv2 \
-            --access-url=http://localhost \
-            --http-address=localhost:5555 \
-            --oauth2-github-allow-signups --oauth2-github-client-id=$(pass coder_github_client_id) --oauth2-github-client-secret=$(pass coder_github_client_secret) \
-            --oauth2-github-allowed-orgs=$(pass coder_github_allowed_orgs)
-        '';
-
-        coder-server-for-everyone = ''
-          coder server --no-feature-warning --cache-dir ~/.cache/coder --global-config ~/.config/coderv2 \
-          --access-url=http://localhost \
-          --http-address=localhost:5555 \
-          --oauth2-github-allow-signups --oauth2-github-client-id=$(pass coder_github_client_id) --oauth2-github-client-secret=$(pass coder_github_client_secret) \
-          --oauth2-github-allow-everyone
-        '';
-
         coder-initial-user = ''
           coder login --first-user-email=$(pass coder_admin_email) --first-user-password=$(pass coder_admin_password) --first-user-username=$(pass coder_admin_username) \
             --first-user-trial=false http://localhost
@@ -263,6 +239,7 @@
             | sed 's#_K3STOKEN_#'$(docker --context host exec k3d-control-server-0 cat /var/lib/rancher/k3s/server/node-token)'#' \
             | control apply -f -
         '';
+
         prune = ''
           	-docker images | grep :5000/ | grep -E 'weeks|days' | awk '{print $1 ":" $2}' | runmany 'docker rmi $1'
           	-docker system prune -f
@@ -289,6 +266,9 @@
         '';
 
         up = ''
+          eval "$(direnv hook bash)"
+          _direnv_hook
+          if [[ "$(uname -s)" == "Darwin" ]]; then $(MAKE) macos; fi
           if ! test -e /var/run/utmp; then sudo touch /var/run/utmp; fi
           if [[ -z "$(pass hello)" ]]; then gpg-agent --daemon --pinentry-program $(which pinentry-mac); fi
           pass hello
