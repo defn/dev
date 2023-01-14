@@ -98,7 +98,6 @@ root:
 
     RUN install -d -m 0755 -o root -g root /run/user \
         && install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 \
-        && ln -nfs /home/ubuntu/.nix-profile/bin/pinentry /usr/local/bin/pinentry \
         && install -d -m 0700 -o ubuntu -g ubuntu /app
 
     RUN chown -R ubuntu:ubuntu /home/ubuntu && chmod u+s /usr/bin/sudo
@@ -204,7 +203,7 @@ devcontainer:
     # nix profile
     COPY --chown=ubuntu:ubuntu .config/nix/nix-earthly.conf /home/ubuntu/.config/nix/nix.conf
     RUN . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh \
-        && nix profile install nixpkgs#pinentry nixpkgs#nixpkgs-fmt \
+        && nix profile install nixpkgs#nixpkgs-fmt \
         && nix profile wipe-history \
         && nix-store --gc
 

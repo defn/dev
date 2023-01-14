@@ -76,11 +76,9 @@ nix-reinstall:
 	nix profile list | tail -n +2 | awk '{print $$NF}' | xargs nix profile remove
 	$(MAKE) nix
 
-
 nix-Linux:
 	export LC_ALL=C.UTF-8 && if ! test -x ~/.nix-profile/bin/nix; then $(MAKE) nix-Linux-bootstrap; fi
-	if test "$(shell which direnv pinentry nixpkgs-fmt | wc -l)" != "3"; then export LC_ALL=C.UTF-8 && nix profile install nixpkgs\#{nix-direnv,pinentry,nixpkgs-fmt}; fi
+	if test "$(shell which direnv nixpkgs-fmt | wc -l)" != "2"; then export LC_ALL=C.UTF-8 && nix profile install nixpkgs\#{nix-direnv,nixpkgs-fmt}; fi
 
 nix-Darwin:
-	if test "$(shell which direnv pinentry nixpkgs-fmt | wc -l)" != "3"; then export LC_ALL=C.UTF-8 && nix profile install nixpkgs\#{nix-direnv,pinentry,nixpkgs-fmt}; fi
-	sudo ln -nfs $(shell which pinentry-mac) .nix-profile/bin/pinentry
+	if test "$(shell which direnv nixpkgs-fmt | wc -l)" != "2"; then export LC_ALL=C.UTF-8 && nix profile install nixpkgs\#{nix-direnv,nixpkgs-fmt}; fi
