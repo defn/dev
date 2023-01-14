@@ -66,19 +66,22 @@ export KUBECONFIG_ALL="$HOME/.kube/config"
 # editor
 export CODER_TELEMETRY=false
 export EDITOR=vim
-if [[ -n "${VSCODE_GIT_ASKPASS_NODE:-}" ]]; then
-	case "${VSCODE_GIT_ASKPASS_NODE}" in
+if [[ -n "${VSCODE_GIT_ASKPASS_MAIN:-}" ]]; then
+	case "${VSCODE_GIT_ASKPASS_MAIN}" in
 		/vscode/*)
-			export BROWSER=${VSCODE_GIT_ASKPASS_NODE%/node}/bin/helpers/browser.sh
+			export BROWSER=${VSCODE_GIT_ASKPASS_MAIN%/node}/bin/helpers/browser.sh
 			;;
 		*/code-server*)
-			export BROWSER=${VSCODE_GIT_ASKPASS_NODE%/node}/vscode/bin/helpers/browser.sh
+			export BROWSER=${VSCODE_GIT_ASKPASS_MAIN/extensions\/git\/dist\/askpass-main.js}bin/helpers/browser.sh
 			;;
 		*)
 			export BROWSER="open"
 			;;
 	esac
 fi
+
+# ssh-agent
+SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh; export SSH_AUTH_SOCK
 
 # aws-vault
 export AWS_VAULT_BACKEND=pass
@@ -150,7 +153,7 @@ if tty >/dev/null; then
 fi
 
 # install
-if [[ -n "${VSCODE_GIT_ASKPASS_NODE:-}" ]]; then
+if [[ -n "${VSCODE_GIT_ASKPASS_MAIN:-}" ]]; then
 	if [[ "Linux" == "$(uname -s)" ]]; then
 		if ! [[ -f ~/.home.done ]]; then
 			if flock -n ~/.home.lock -c 'cd && ~/bin/e make install'; then
@@ -166,13 +169,13 @@ function gs {
 }
 
 function vi {
-	if [[ -n "${VSCODE_GIT_ASKPASS_NODE:-}" ]]; then
+	if [[ -n "${VSCODE_GIT_ASKPASS_MAIN:-}" ]]; then
 		if [[ ! -f "${1:-}" ]]; then
 			echo "ERROR: file $1 not found" 1>&2
 			return 1
 		fi
 
-		case "${VSCODE_GIT_ASKPASS_NODE}" in
+		case "${VSCODE_GIT_ASKPASS_MAIN}" in
 			*/code-server*)
 				command code-server "$@"
 				;;
