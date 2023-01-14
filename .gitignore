@@ -1,6 +1,5 @@
 # external
 .password-store
-.ssh
 tmp
 work
 cue.mod/pkg
