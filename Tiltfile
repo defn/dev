@@ -69,11 +69,23 @@ local_resource("gpg-socket-forward",
                 eval "$(direnv hook bash)"
                 _direnv_hook
                 source .bashrc
+                ssh_host="coder.$(pass coder_docker_workspace | cut -d/ -f2)"
                 while true; do
                     coder config-ssh --yes
-                    ssh-add -L | ssh coder.defn tee .ssh/authorized_keys
+                    ssh-add -L | ssh "$ssh_host" tee .ssh/authorized_keys
+                    gpg --armor --export | ssh "$ssh_host" gpg --import
+                    gpg --export-ownertrust | ssh "$ssh_host" gpg --import-ownertrust
                     if ssh -v dev true; then
-                        exec ssh -v dev sleep infinity
+                        exec ssh \
+                        -o Port=2222 \
+                        -o StrictHostKeyChecking=no \
+                        -o UserKnownHostsFile=/dev/null \
+                        -o ServerAliveInterval=60 \
+                        -o ServerAliveCountMax=5 \
+                        -o StreamLocalBindUnlink=yes \
+                        -o RemoteForward="/run/user/1000/gnupg/S.gpg-agent /Users/defn/.gnupg/S.gpg-agent.extra" \
+                        -o RemoteForward="/run/user/1000/gnupg/S.gpg-agent.extra /Users/defn/.gnupg/S.gpg-agent.extra" \
+                        -v ubuntu@127.0.0.1 sleep infinity
                     fi
                     sleep 5
                 done
