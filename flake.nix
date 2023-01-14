@@ -39,6 +39,11 @@
           type = "app";
           program = "${pkgs.openssh}/bin/sshd";
         };
+
+        ssh-keygen = {
+          type = "app";
+          program = "${pkgs.openssh}/bin/ssh-keygen";
+        };
       };
 
       devShell = wrap.devShell {
