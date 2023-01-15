@@ -9,7 +9,7 @@
     tilt.url = github:defn/pkg/tilt-0.30.13-3?dir=tilt;
     gh.url = github:defn/pkg/gh-2.21.2-1?dir=gh;
     webhook.url = github:defn/pkg/webhook-2.8.0?dir=webhook;
-    flyctl.url = github:defn/pkg/flyctl-0.0.442-0?dir=flyctl;
+    flyctl.url = github:defn/pkg/flyctl-0.0.450-1?dir=flyctl;
     vault.url = github:defn/pkg/vault-1.12.2-4?dir=vault;
   };
 
@@ -214,16 +214,26 @@
         login = ''
           if [[ ! "false" == "$(vault status | grep Sealed | awk '{print $NF}')" ]]; then mark vault; (cd w/vault; eval "$(direnv hook bash)"; _direnv_hook; this-vault-unseal); fi
           if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then mark kubernetes; this-kubeconfig; this-argocd-login || true; fi
-          mark github; this-github-login
+          this-github-login
+          this-fly-login
+          echo
         '';
 
         github-login = ''
+          mark github; 
           if ! gh auth status; then 
             echo Y | gh auth login -p https -h github.com -w
             vault login -method=github token="$(cat ~/.config/gh/hosts.yml  | yq -r '.["github.com"].oauth_token')" | egrep -v '^(token_accessor|token) ' || true
           fi
           set -x
           if test -n "''${GIT_AUTHOR_NAME:-}"; then pass GHCR_TOKEN | docker login ghcr.io -u $GIT_AUTHOR_NAME --password-stdin; fi
+        '';
+
+        fly-login = ''
+          mark fly; 
+          if ! flyctl auth whoami; then 
+            flyctl auth login
+          fi
         '';
 
         home-repos = ''
