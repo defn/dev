@@ -5,10 +5,11 @@ if [[ -z "${WH_LOG_STDOUT:-}" ]]; then
     exec 1>>/tmp/wh.log 2>&1
 fi
 
+unset SSH_AUTH_SOCK 
+
 set -exfu
 
 function main {
-
     local event=$1; shift
     local repo=$1; shift
     local ref=$1; shift
