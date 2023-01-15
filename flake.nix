@@ -212,20 +212,18 @@
         '';
 
         login = ''
-          mark vault
-          if nc -z -v localhost 8200 2>/dev/null; then \
-            this-vault-unseal; fi
-          mark kubeconfig, argocd
-          if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then this-kubeconfig; this-argocd-login || true; fi
-          mark github
-          this-github-login
+          if [[ ! "false" == "$(vault status | grep Sealed | awk '{print $NF}')" ]]; then mark vault; (cd w/vault; eval "$(direnv hook bash)"; _direnv_hook; this-vault-unseal); fi
+          if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then mark kubernetes; this-kubeconfig; this-argocd-login || true; fi
+          mark github; this-github-login
         '';
 
         github-login = ''
-          if ! gh auth status; then echo Y | gh auth login -p https -h github.com -w; fi
-          gh extension install cli/gh-webhook || true
+          if ! gh auth status; then 
+            echo Y | gh auth login -p https -h github.com -w
+            vault login -method=github token="$(cat ~/.config/gh/hosts.yml  | yq -r '.["github.com"].oauth_token')" | egrep -v '^(token_accessor|token) ' || true
+          fi
+          set -x
           if test -n "''${GIT_AUTHOR_NAME:-}"; then pass GHCR_TOKEN | docker login ghcr.io -u $GIT_AUTHOR_NAME --password-stdin; fi
-          vault login -method=github token="$(cat ~/.config/gh/hosts.yml  | yq -r '.["github.com"].oauth_token')" || true
         '';
 
         home-repos = ''

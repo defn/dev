@@ -18,7 +18,7 @@ symlinks:
 	mark configure symlinks
 	bash -x bin/persist-cache
 	ln -nfs ~/.nix-profile /tmp/
-	which vault-token-helper > ~/.vault
+	echo "token_helper=\"$(which vault-token-helper)\"" > ~/.vault
 
 perms:
 	mark configure permissions
@@ -64,6 +64,9 @@ install-inner:
 	docker context create pod --docker host=tcp://localhost:2375 || true \
 		&& docker context create host --docker host=unix:///var/run/docker.sock || true \
         && docker context use host
+
+	mark login
+	this-login
 
 nix:
 	if ! type -P nix; then . ~/.nix-profile/etc/profile.d/nix.sh; fi && $(MAKE) nix-$(shell uname -s)
