@@ -70,12 +70,13 @@ local_resource("gpg-socket-forward",
                 _direnv_hook
                 source .bashrc
                 ssh_host="coder.$(pass coder_docker_workspace | cut -d/ -f2)"
+                set -x
                 while true; do
                     coder config-ssh --yes
                     ssh-add -L | ssh "$ssh_host" tee .ssh/authorized_keys
                     gpg --armor --export | ssh "$ssh_host" gpg --import
                     gpg --export-ownertrust | ssh "$ssh_host" gpg --import-ownertrust
-                    if ssh -v dev true; then
+                    if ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/nulli ubuntu@127.0.0.1 true; then
                         exec ssh \
                         -o Port=2222 \
                         -o StrictHostKeyChecking=no \
