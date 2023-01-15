@@ -32,9 +32,6 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 # nodejs
 if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$HOME/node_modules/.bin:$PATH"; fi
 
-# cue
-if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$HOME/bin/$(uname -s):$HOME/bin:$PATH"; fi
-
 # terraform
 export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
 export DISABLE_VERSION_CHECK=1
