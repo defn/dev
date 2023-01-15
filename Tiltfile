@@ -48,7 +48,7 @@ local_resource("coder-port-forward",
                 _direnv_hook
                 while true; do
                     if coder list | grep ^"$(pass coder_docker_workspace)"; then
-                        exec coder port-forward "$(pass coder_docker_workspace)" --tcp 2222:2222
+                        coder port-forward "$(pass coder_docker_workspace)" --tcp 2222:2222
                     fi
                     sleep 5
                 done
@@ -77,7 +77,7 @@ local_resource("gpg-socket-forward",
                     gpg --armor --export | ssh "$ssh_host" gpg --import
                     gpg --export-ownertrust | ssh "$ssh_host" gpg --import-ownertrust
                     if ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/nulli ubuntu@127.0.0.1 true; then
-                        exec ssh \
+                        ssh \
                         -o Port=2222 \
                         -o StrictHostKeyChecking=no \
                         -o UserKnownHostsFile=/dev/null \
