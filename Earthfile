@@ -98,7 +98,8 @@ root:
 
     RUN install -d -m 0755 -o root -g root /run/user \
         && install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 \
-        && install -d -m 0700 -o ubuntu -g ubuntu /app
+        && install -d -m 0700 -o ubuntu -g ubuntu /app \
+        && install -d -m 0700 -o ubuntu -g ubuntu /cache
 
     RUN chown -R ubuntu:ubuntu /home/ubuntu && chmod u+s /usr/bin/sudo
 
@@ -208,7 +209,7 @@ devcontainer:
         && nix-store --gc
 
     # run dir
-    RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg 
+    RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
 
     # defn/dev
     COPY --chown=ubuntu:ubuntu --dir . .
