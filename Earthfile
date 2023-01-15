@@ -77,7 +77,7 @@ root:
     ENV DEBIAN_FRONTEND=noninteractive
     ENV container=docker
 
-    RUN  (echo Update-Manager::Never-Include-Phased-Updates; echo APT::Get::Never-Include-Phased-Updates: True) > /etc/apt/apt.conf.d/99-Phased-Updates
+    RUN  (echo "Update-Manager::Never-Include-Phased-Updates;"; echo "APT::Get::Never-Include-Phased-Updates: True;") > /etc/apt/apt.conf.d/99-Phased-Updates
 
     RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm \
         && apt-get update && apt-get upgrade -y \
