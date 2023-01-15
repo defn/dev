@@ -147,7 +147,7 @@ else:
                 eval "$(direnv hook bash)"
                 _direnv_hook
                 gh extension install cli/gh-webhook || true
-                while true; do 
+                while true; do
                     gh webhook forward --repo "$(git remote get-url origin | perl -pe 's{https://github.com/}{}')" --events=push --url=http://localhost:9000/hooks/gh
                 done
             """
@@ -181,29 +181,29 @@ else:
         ]
     )
 
-# Starts the docker builder, proxies at localhost:2375.  Configures docker
-# client with creds to publish to fly registry.
-local_resource("proxy-docker",
-    serve_cmd=[
-        "bash", "-c",
-        """
-            eval "$(direnv hook bash)"
-            _direnv_hook
-            flyctl auth docker
-            flyctl machine start "$(flyctl machine list -a $(flyctl apps list | grep '^fly-builder' | awk '{print $1}') --json | jq -r '.[].id')"
-            exec flyctl proxy 2375:2375 -a "$(flyctl apps list | grep 'fly-builder' | awk '{print $1}' | head -1)"
-        """
-    ],
-)
+    # Starts the docker builder, proxies at localhost:2375.  Configures docker
+    # client with creds to publish to fly registry.
+    local_resource("proxy-docker",
+        serve_cmd=[
+            "bash", "-c",
+            """
+                eval "$(direnv hook bash)"
+                _direnv_hook
+                flyctl auth docker
+                flyctl machine start "$(flyctl machine list -a $(flyctl apps list | grep '^fly-builder' | awk '{print $1}') --json | jq -r '.[].id')"
+                exec flyctl proxy 2375:2375 -a "$(flyctl apps list | grep 'fly-builder' | awk '{print $1}' | head -1)"
+            """
+        ],
+    )
 
-# Starts the machine api-proxy.
-local_resource("proxy-machine-api",
-    serve_cmd=[
-        "bash", "-c",
-        """
-            eval "$(direnv hook bash)"
-            _direnv_hook
-            exec flyctl machine api-proxy --org personal
-        """
-    ],
-)
+    # Starts the machine api-proxy.
+    local_resource("proxy-machine-api",
+        serve_cmd=[
+            "bash", "-c",
+            """
+                eval "$(direnv hook bash)"
+                _direnv_hook
+                exec flyctl machine api-proxy --org personal
+            """
+        ],
+    )
