@@ -39,7 +39,6 @@ local_resource("coder-agent",
 
 # Starts coder port forward on macOS
 local_resource("coder-port-forward",
-    deps=["/tmp/coder-agent-token"],
     serve_cmd=[
         "bash", "-c",
         """
@@ -61,14 +60,18 @@ local_resource("coder-port-forward",
 
 # Starts gpg forward on macOS
 local_resource("gpg-socket-forward",
-    deps=["/tmp/coder-agent-token"],
     serve_cmd=[
         "bash", "-c",
         """
             if [[ "Darwin" == "$(uname -s)" ]]; then
                 eval "$(direnv hook bash)"
                 _direnv_hook
-                source .bashrc
+                while true; do
+                    if coder list | grep ^"$(pass coder_docker_workspace)"; then
+                        break
+                    fi
+                    sleep 5
+                done
                 ssh_host="coder.$(pass coder_docker_workspace | cut -d/ -f2)"
                 set -x
                 while true; do
@@ -84,8 +87,8 @@ local_resource("gpg-socket-forward",
                         -o ServerAliveInterval=60 \
                         -o ServerAliveCountMax=5 \
                         -o StreamLocalBindUnlink=yes \
-                        -o RemoteForward="/run/user/1000/gnupg/S.gpg-agent {home}/.gnupg/S.gpg-agent.extra" \
-                        -o RemoteForward="/run/user/1000/gnupg/S.gpg-agent.extra {home}/.gnupg/S.gpg-agent.extra" \
+                        -o RemoteForward="/home/ubuntu/.gnupg/S.gpg-agent {home}/.gnupg/S.gpg-agent.extra" \
+                        -o RemoteForward="/home/ubuntu/.gnupg/S.gpg-agent.extra {home}/.gnupg/S.gpg-agent.extra" \
                         -v ubuntu@127.0.0.1 sleep infinity
                     fi
                     sleep 5
