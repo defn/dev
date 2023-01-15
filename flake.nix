@@ -136,7 +136,7 @@
           coder template edit docker-code-server --icon "/icon/docker.png"
         '';
 
-        coder-template-macos= ''
+        coder-template-macos = ''
           set -exfu
           cd ~/coder/macos-code-server
           coder template create --yes || true
