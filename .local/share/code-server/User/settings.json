@@ -49,7 +49,7 @@
         "/home/ubuntu/.kube/cache/**": true,
         "/home/ubuntu/work/**": true
     },
-    "nix.formatterPath": "/home/ubuntu/.nix-profile/bin/nixpkgs-fmt",
+    "nix.formatterPath": "/tmp/.nix-profile/bin/nixpkgs-fmt",
     "terraform.languageServer.enable": false,
     "git.ignoreLimitWarning": true
 }
