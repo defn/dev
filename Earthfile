@@ -1,5 +1,6 @@
 VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-arg --use-copy-link --use-registry-for-with-docker --ci-arg 0.6
 
+
 build-nix-root:
     ARG image=ghcr.io/defn/dev:latest-nix-root
     BUILD --platform=linux/amd64 +image-nix-root --image=${image} --arch=amd64
@@ -76,17 +77,17 @@ root:
     ENV DEBIAN_FRONTEND=noninteractive
     ENV container=docker
 
+    RUN  (echo "Update-Manager::Never-Include-Phased-Updates;"; echo "APT::Get::Never-Include-Phased-Updates: True;") > /etc/apt/apt.conf.d/99-Phased-Updates
+
     RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm \
-        && apt-get update \
-        && apt-get upgrade -y \
+        && apt-get update && apt-get upgrade -y \
         && apt-get install -y --no-install-recommends tzdata locales ca-certificates wget curl xz-utils rsync make git direnv \
             sudo tini procps iptables net-tools iputils-ping iproute2 dnsutils \
-        && apt-get clean \
-        && apt purge -y nano \
-        && rm -f /usr/bin/gs \
-        && mkdir /run/sshd
+        && apt-get clean && apt purge -y nano \
+        && rm -f /usr/bin/gs
 
     RUN apt update && apt upgrade -y
+
     RUN ln -sf /usr/share/zoneinfo/UTC /etc/localtime \
         && dpkg-reconfigure -f noninteractive tzdata \
         && locale-gen en_US.UTF-8 \
@@ -97,6 +98,7 @@ root:
         && install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
 
     RUN install -d -m 0755 -o root -g root /run/user \
+        && install -d -m 0700 -o root -g root /run/sshd \
         && install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 \
         && install -d -m 0700 -o ubuntu -g ubuntu /app \
         && install -d -m 0700 -o ubuntu -g ubuntu /cache
@@ -121,8 +123,7 @@ nix-root:
     FROM +root --arch=${arch}
 
     # nix config
-    RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix \
-        && mkdir -p /home/ubuntu/.config/nix
+    RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix && mkdir -p /home/ubuntu/.config/nix
     COPY --chown=ubuntu:ubuntu .config/nix/nix-flake.conf /home/ubuntu/.config/nix/nix.conf
 
 # nix applications where /nix is not a data volume
