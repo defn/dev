@@ -147,7 +147,9 @@ else:
                 eval "$(direnv hook bash)"
                 _direnv_hook
                 gh extension install cli/gh-webhook || true
-                exec gh webhook forward --repo "$(git remote get-url origin | perl -pe 's{https://github.com/}{}')" --events=push --url=http://localhost:9000/hooks/gh
+                while true; do 
+                    gh webhook forward --repo "$(git remote get-url origin | perl -pe 's{https://github.com/}{}')" --events=push --url=http://localhost:9000/hooks/gh
+                done
             """
         ]
     )
