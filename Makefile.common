@@ -65,7 +65,6 @@ install-inner:
 		&& docker context create host --docker host=unix:///var/run/docker.sock || true \
         && docker context use host
 
-	mark login
 	this-login
 
 nix:
