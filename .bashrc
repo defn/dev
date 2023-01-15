@@ -81,7 +81,7 @@ if [[ -n "${VSCODE_GIT_ASKPASS_MAIN:-}" ]]; then
 fi
 
 # ssh-agent
-if [[ "Darwin" == "$(uname -s)"]]; then SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh; export SSH_AUTH_SOCK; fi
+if [[ "Darwin" == "$(uname -s)" ]]; then SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh; export SSH_AUTH_SOCK; fi
 
 # aws-vault
 export AWS_VAULT_BACKEND=pass
