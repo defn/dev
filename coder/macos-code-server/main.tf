@@ -28,7 +28,7 @@ resource "coder_agent" "main" {
 resource "coder_app" "code-server" {
   agent_id = coder_agent.main.id
 
-  url  = "http://localhost:8080/?folder=/Users/defn"
+  url  = "http://localhost:8080/"
   icon = "/icon/code.svg"
 
   slug         = "code-server"
@@ -45,6 +45,6 @@ resource "coder_app" "code-server" {
 }
 
 resource "local_file" "token" {
-  filename = "/Users/defn/.config/coderv2/coder-agent-token"
+  filename = "/tmp/coder-agent-token"
   content  = coder_agent.main.token
 }

@@ -22,14 +22,14 @@ local_resource("coder",
 
 # Starts code-server on macOS
 local_resource("coder-agent",
-    deps=[os.getenv("HOME") + "/.config/coderv2/coder-agent-token"],
+    deps=["/tmp/coder-agent-token"],
     serve_cmd=[
         "bash", "-c",
         """
             if [[ "Darwin" == "$(uname -s)" ]]; then
                 eval "$(direnv hook bash)"
                 _direnv_hook
-                exec env CODER_AGENT_AUTH=token CODER_AGENT_URL="$(pass coder_access_url)" CODER_CONFIG_DIR=$HOME/.config/coderv2 CODER_AGENT_TOKEN="$(cat ~/.config/coderv2/coder-agent-token)" nix run .#coder -- agent
+                exec env CODER_AGENT_AUTH=token CODER_AGENT_URL="$(pass coder_access_url)" CODER_CONFIG_DIR=$HOME/.config/coderv2 CODER_AGENT_TOKEN="$(cat /tmp/coder-agent-token)" nix run .#coder -- agent
             else
                 exec sleep infinity
             fi
@@ -39,7 +39,7 @@ local_resource("coder-agent",
 
 # Starts coder port forward on macOS
 local_resource("coder-port-forward",
-    deps=[os.getenv("HOME") + "/.config/coderv2/coder-agent-token"],
+    deps=["/tmp/coder-agent-token"],
     serve_cmd=[
         "bash", "-c",
         """
@@ -61,7 +61,7 @@ local_resource("coder-port-forward",
 
 # Starts gpg forward on macOS
 local_resource("gpg-socket-forward",
-    deps=[os.getenv("HOME") + "/.config/coderv2/coder-agent-token"],
+    deps=["/tmp/coder-agent-token"],
     serve_cmd=[
         "bash", "-c",
         """
@@ -83,8 +83,8 @@ local_resource("gpg-socket-forward",
                         -o ServerAliveInterval=60 \
                         -o ServerAliveCountMax=5 \
                         -o StreamLocalBindUnlink=yes \
-                        -o RemoteForward="/run/user/1000/gnupg/S.gpg-agent /Users/defn/.gnupg/S.gpg-agent.extra" \
-                        -o RemoteForward="/run/user/1000/gnupg/S.gpg-agent.extra /Users/defn/.gnupg/S.gpg-agent.extra" \
+                        -o RemoteForward="/run/user/1000/gnupg/S.gpg-agent {home}/.gnupg/S.gpg-agent.extra" \
+                        -o RemoteForward="/run/user/1000/gnupg/S.gpg-agent.extra {home}/.gnupg/S.gpg-agent.extra" \
                         -v ubuntu@127.0.0.1 sleep infinity
                     fi
                     sleep 5
@@ -92,7 +92,7 @@ local_resource("gpg-socket-forward",
             else
                 exec sleep infinity
             fi
-        """
+        """.format(home=os.getenv("HOME"))
     ]
 )
 
