@@ -64,9 +64,12 @@ if "-darwin" in os.getenv("system"):
                 set -x
                 while true; do
                     coder config-ssh --yes
-                    ssh-add -L | ssh "$ssh_host" tee .ssh/authorized_keys
-                    gpg --armor --export | ssh "$ssh_host" gpg --import
-                    gpg --export-ownertrust | ssh "$ssh_host" gpg --import-ownertrust
+                    ssh-add -L | ssh "$ssh_host" tee .ssh/authorized_keys &
+                    (
+                        gpg --armor --export | ssh "$ssh_host" gpg --import
+                        gpg --export-ownertrust | ssh "$ssh_host" gpg --import-ownertrust
+                    ) &
+                    wait
                     if ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/nulli ubuntu@127.0.0.1 true; then
                         ssh \
                         -o Port=2222 \

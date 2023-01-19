@@ -67,6 +67,11 @@ install-inner:
 
 	this-login
 
+	mark doctor
+	set -x
+	pass hello
+	ssh-add -L
+
 nix:
 	if ! type -P nix; then . ~/.nix-profile/etc/profile.d/nix.sh; fi && $(MAKE) nix-$(shell uname -s)
 
