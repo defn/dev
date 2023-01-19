@@ -2,7 +2,7 @@ analytics_settings(False)
 
 load("ext://uibutton", "cmd_button", "location")
 
-if os.getenv("system") == "x86_64-darwin":
+if "-darwin" in os.getenv("system"):
     # Starts Coder on macOS
     local_resource("coder",
         serve_cmd=[
