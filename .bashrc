@@ -78,7 +78,6 @@ if [[ -n "${VSCODE_GIT_ASKPASS_MAIN:-}" ]]; then
 fi
 
 # ssh-agent
-if [[ "Darwin" == "$(uname -s)" ]]; then
 case "$(uname -s)" in
 	Darwin)
 		export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
