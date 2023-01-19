@@ -84,8 +84,9 @@ case "$(uname -s)" in
 		export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
 		;;
 	Linux)
-		# TODO transition from ssh-agent forward to symlink
-		true
+		if [[ -z "${SSH_AUTH_SOCK:-}" ]]; then
+			export SSH_AUTH_SOCK=$HOME/.ssh/S.ssh-agent
+		fi
 		;;
 esac
 
