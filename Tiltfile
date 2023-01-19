@@ -25,9 +25,15 @@ if "-darwin" in os.getenv("system"):
             """
                 eval "$(direnv hook bash)"
                 _direnv_hook
-                coder stop --yes $(pass coder_macos_workspace) || true
-                coder start --yes $(pass coder_macos_workspace)
-                exec env CODER_AGENT_AUTH=token CODER_AGENT_URL="$(pass coder_access_url)" CODER_CONFIG_DIR=$HOME/.config/coderv2 CODER_AGENT_TOKEN="$(cat /tmp/coder-agent-token)" nix run .#coder -- agent
+                while true; do
+                  macos_workspace="$(coder list --search='owner:me template:macos-code-server' | tail -1 | awk '{print $1}')"
+                  if [[ -n "${macos_workspace}" ]]; then
+                    coder stop --yes "${macos_workspace}" || true
+                    coder start --yes "${macos_workspace}"
+                    exec env CODER_AGENT_AUTH=token CODER_AGENT_URL="$(pass coder_access_url)" CODER_CONFIG_DIR=$HOME/.config/coderv2 CODER_AGENT_TOKEN="$(cat /tmp/coder-agent-token)" nix run .#coder -- agent
+                  fi
+                  sleep 5
+                done
             """
         ]
     )
@@ -40,8 +46,9 @@ if "-darwin" in os.getenv("system"):
                 eval "$(direnv hook bash)"
                 _direnv_hook
                 while true; do
-                    if coder list | grep ^"$(pass coder_docker_workspace)"; then
-                        coder port-forward "$(pass coder_docker_workspace)" --tcp 2222:2222
+                    docker_workspace="$(coder list --search='owner:me template:docker-code-server' | tail -1 | awk '{print $1}')"
+                    if [[ -n "${docker_workspace}" ]]; then
+                        coder port-forward "${docker_workspace}" --tcp 2222:2222
                     fi
                     sleep 5
                 done
@@ -57,12 +64,13 @@ if "-darwin" in os.getenv("system"):
                 eval "$(direnv hook bash)"
                 _direnv_hook
                 while true; do
-                    if coder list | grep ^"$(pass coder_docker_workspace)"; then
+                    docker_workspace="$(coder list --search='owner:me template:docker-code-server' | tail -1 | awk '{print $1}')"
+                    if [[ -n "${docker_workspace}" ]]; then
                         break
                     fi
                     sleep 5
                 done
-                ssh_host="coder.$(pass coder_docker_workspace | cut -d/ -f2)"
+                ssh_host="coder.${docker_workspace} | cut -d/ -f2)"
                 set -x
                 while true; do
                     tilt trigger coder-port-forward
