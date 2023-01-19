@@ -77,7 +77,7 @@ if "-darwin" in os.getenv("system"):
                         -o StreamLocalBindUnlink=yes \
                         -o RemoteForward="/home/ubuntu/.gnupg/S.gpg-agent {home}/.gnupg/S.gpg-agent.extra" \
                         -o RemoteForward="/home/ubuntu/.gnupg/S.gpg-agent.extra {home}/.gnupg/S.gpg-agent.extra" \
-                        -A -v ubuntu@127.0.0.1 sleep infinity
+                        -A -v ubuntu@127.0.0.1 bash -c '"ln -nfs $SSH_AUTH_SOCK $HOME/.ssh/S.ssh-agent; date; exec sleep infinity"'
                     fi
                     sleep 5
                 done
