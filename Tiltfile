@@ -70,7 +70,7 @@ if "-darwin" in os.getenv("system"):
                     fi
                     sleep 5
                 done
-                ssh_host="coder.$docker_workspace | cut -d/ -f2)"
+                ssh_host="coder.$(echo $docker_workspace | cut -d/ -f2)"
                 set -x
                 while true; do
                     tilt trigger coder-port-forward
