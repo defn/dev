@@ -63,6 +63,7 @@ if "-darwin" in os.getenv("system"):
                 ssh_host="coder.$(pass coder_docker_workspace | cut -d/ -f2)"
                 set -x
                 while true; do
+                    tilt trigger coder-port-forward
                     coder config-ssh --yes
                     ssh-add -L | ssh "$ssh_host" tee .ssh/authorized_keys &
                     (
@@ -70,7 +71,7 @@ if "-darwin" in os.getenv("system"):
                         gpg --export-ownertrust | ssh "$ssh_host" gpg --import-ownertrust
                     ) &
                     wait
-                    if ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ServerAliveInterval=1 -o ServerAliveCountMax=10 ubuntu@127.0.0.1 true; then
+                    if ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@127.0.0.1 true; then
                         ssh \
                         -o Port=2222 \
                         -o StrictHostKeyChecking=no \
