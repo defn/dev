@@ -64,13 +64,13 @@ if "-darwin" in os.getenv("system"):
                 eval "$(direnv hook bash)"
                 _direnv_hook
                 while true; do
-                    docker_workspace="$(coder list --search='owner:me template:docker-code-server' | tail -1 | awk '{print $1}')"
-                    if [[ -n "${docker_workspace}" ]]; then
+                    docker_workspace="$(coder list --search='owner:me template:docker-code-server' | tail -1 | awk '{{print $1}}')"
+                    if [[ -n "$docker_workspace" ]]; then
                         break
                     fi
                     sleep 5
                 done
-                ssh_host="coder.${docker_workspace} | cut -d/ -f2)"
+                ssh_host="coder.$docker_workspace | cut -d/ -f2)"
                 set -x
                 while true; do
                     tilt trigger coder-port-forward
