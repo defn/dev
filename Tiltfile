@@ -48,7 +48,7 @@ if "-darwin" in os.getenv("system"):
     )
 
     # Starts gpg forward on macOS
-    local_resource("gpg-socket-forward",
+    local_resource("ssh-gpg-agent-forward",
         serve_cmd=[
             "bash", "-c",
             """
