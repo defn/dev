@@ -15,13 +15,13 @@ macos:
 	mkdir -p /tmp/cache/nix
 
 symlinks:
-	mark configure symlinks
+	@mark configure symlinks
 	bash -x bin/persist-cache
 	ln -nfs ~/.nix-profile /tmp/
 	echo "token_helper=\"$(which vault-token-helper)\"" > ~/.vault
 
 perms:
-	mark configure permissions
+	@mark configure permissions
 	if [[ "Linux" == "$(shell uname -s)" ]]; then if test -S /var/run/docker.sock; then sudo chgrp ubuntu /var/run/docker.sock; sudo chmod 770 /var/run/docker.sock; fi; fi
 	if test -S /run/containerd/containerd.sock; then sudo chgrp ubuntu /run/containerd/containerd.sock; sudo chmod 770 /run/containerd/containerd.sock; fi
 	-chmod 0700 ~/.gnupg/. ~/.gnupg2/.
@@ -35,7 +35,7 @@ install:
 install-inner:
 	$(MAKE) symlinks perms
 
-	mark configure password-store
+	@mark configure password-store
 	mkdir -p ~/work/password-store
 	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
 		if ! test -d ~/work/password-store/.git/.; then \
@@ -43,11 +43,11 @@ install-inner:
 		fi; \
 	fi
 
-	mark configure gpg
+	@mark configure gpg
 	if test -d ~/.password-store/config/gnupg-config/.; then rsync -ia ~/.password-store/config/gnupg-config/. ~/.gnupg/.; fi
 	$(MAKE) perms
 
-	mark dotfiles
+	@mark dotfiles
 	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
 		mkdir -p ~/.config/coderv2/dotfiles; \
 		mkdir -p /home/ubuntu/work/.codespaces/.persistedshare; \
@@ -60,17 +60,16 @@ install-inner:
 		fi; \
 	fi
 
-	mark docker
+	@mark docker
 	docker context create pod --docker host=tcp://localhost:2375 || true \
 		&& docker context create host --docker host=unix:///var/run/docker.sock || true \
         && docker context use host
 
 	this-login
 
-	mark doctor
-	set -x
-	pass hello
-	ssh-add -L
+	@mark doctor
+	pass hello; echo; echo
+	ssh-add -L; echo; echo
 
 nix:
 	if ! type -P nix; then . ~/.nix-profile/etc/profile.d/nix.sh; fi && $(MAKE) nix-$(shell uname -s)
