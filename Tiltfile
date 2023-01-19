@@ -12,6 +12,7 @@ if "-darwin" in os.getenv("system"):
                 _direnv_hook
                 docker pull ghcr.io/defn/dev:latest-devcontainer
                 this-coder-server-kill
+                tilt trigger coder-agent
                 exec this-coder-init orgs-wildcard-tls
             """
         ]
@@ -19,12 +20,13 @@ if "-darwin" in os.getenv("system"):
 
     # Starts code-server on macOS
     local_resource("coder-agent",
-        deps=["/tmp/coder-agent-token"],
         serve_cmd=[
             "bash", "-c",
             """
                 eval "$(direnv hook bash)"
                 _direnv_hook
+                coder stop --yes $(pass coder_macos_workspace) || true
+                coder start --yes $(pass coder_macos_workspace)
                 exec env CODER_AGENT_AUTH=token CODER_AGENT_URL="$(pass coder_access_url)" CODER_CONFIG_DIR=$HOME/.config/coderv2 CODER_AGENT_TOKEN="$(cat /tmp/coder-agent-token)" nix run .#coder -- agent
             """
         ]
