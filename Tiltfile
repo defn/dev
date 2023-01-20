@@ -83,6 +83,7 @@ if "-darwin" in os.getenv("system"):
                         -p 2222 \
                         -o StrictHostKeyChecking=no \
                         -o UserKnownHostsFile=/dev/null \
+                        -o ServerAliveInterval=1 \
                         -o ConnectTimeout=1 \
                         -o ConnectionAttempts=5 \
                         ubuntu@127.0.0.1 true; then
