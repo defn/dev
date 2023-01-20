@@ -1,7 +1,7 @@
 {
   inputs = {
     dev.url = github:defn/pkg/dev-0.0.22?dir=dev;
-    localdev.url = github:defn/pkg/localdev-0.0.4?dir=localdev;
+    localdev.url = github:defn/pkg/localdev-0.0.5?dir=localdev;
     caddy.url = github:defn/pkg/caddy-2.6.2-5?dir=caddy;
     az.url = github:defn/pkg/az-0.0.8?dir=az;
     awscli.url = github:defn/pkg/awscli-2.0.30-2?dir=awscli;
@@ -220,8 +220,8 @@
         '';
 
         github-login = ''
-          mark github; 
-          if ! gh auth status; then 
+          mark github;
+          if ! gh auth status; then
             echo Y | gh auth login -p https -h github.com -w
             vault login -method=github token="$(cat ~/.config/gh/hosts.yml  | yq -r '.["github.com"].oauth_token')" | egrep -v '^(token_accessor|token) ' || true
           fi
@@ -230,8 +230,8 @@
         '';
 
         fly-login = ''
-          mark fly; 
-          if ! flyctl auth whoami; then 
+          mark fly;
+          if ! flyctl auth whoami; then
             flyctl auth login
           fi
         '';
