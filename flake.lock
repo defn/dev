@@ -3250,17 +3250,17 @@
       },
       "locked": {
         "dir": "tilt",
-        "lastModified": 1674191569,
-        "narHash": "sha256-nfXyHRLZSpuyPmjne+M9hCVmvs31MKuOrjy/YqqlwZE=",
+        "lastModified": 1674192252,
+        "narHash": "sha256-CIHiiPiRM/MHhHwJdivCKyo34wkZe6Oic/11ME5JieA=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "41a34e6d1c15223770340580636c245e2617cb16",
+        "rev": "2a83d84924fe2a8e996a123ffd8c8fae418d6204",
         "type": "github"
       },
       "original": {
         "dir": "tilt",
         "owner": "defn",
-        "ref": "tilt-0.31.1-0",
+        "ref": "tilt-0.31.1-1",
         "repo": "pkg",
         "type": "github"
       }
