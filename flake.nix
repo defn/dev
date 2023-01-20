@@ -133,7 +133,7 @@
           coder template create --yes || true
           coder template push --yes
           # https://github.com/coder/coder/tree/main/site/static/icon
-          coder template edit docker-code-server --icon "https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png"
+          coder template edit docker-code-server --icon "https://cdn-icons-png.flaticon.com/512/919/919853.png"
         '';
 
         coder-template-macos = ''
@@ -142,7 +142,7 @@
           coder template create --yes || true
           coder template push --yes
           # https://github.com/coder/coder/tree/main/site/static/icon
-          coder template edit docker-code-server --icon "/icon/code.svg"
+          coder template edit macos-code-server --icon "https://upload.wikimedia.org/wikipedia/commons/c/c9/Finder_Icon_macOS_Big_Sur.png"
         '';
 
         coder-server-wait-for-alive = ''
