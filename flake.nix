@@ -133,7 +133,7 @@
           coder template create --yes || true
           coder template push --yes
           # https://github.com/coder/coder/tree/main/site/static/icon
-          coder template edit docker-code-server --icon "/icon/docker.png"
+          coder template edit docker-code-server --icon "https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png"
         '';
 
         coder-template-macos = ''

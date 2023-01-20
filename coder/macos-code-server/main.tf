@@ -2,7 +2,7 @@ terraform {
   required_providers {
     coder = {
       source  = "coder/coder"
-      version = "0.6.0"
+      version = "0.6.6"
     }
   }
 }
@@ -11,9 +11,9 @@ data "coder_provisioner" "this" {}
 
 data "coder_workspace" "this" {}
 
-resource "coder_agent" "main" {
+resource "coder_agent" "macos" {
   arch = data.coder_provisioner.this.arch
-  os   = "linux"
+  os   = "darwin"
 
   env = {
     GIT_AUTHOR_NAME     = "${data.coder_workspace.this.owner}"
@@ -26,12 +26,12 @@ resource "coder_agent" "main" {
 }
 
 resource "coder_app" "code-server" {
-  agent_id = coder_agent.main.id
+  agent_id = coder_agent.macos.id
 
   url  = "http://localhost:8080/"
   icon = "/icon/code.svg"
 
-  slug         = "code-server"
+  slug         = "dev"
   display_name = "code-server"
 
   subdomain = true
@@ -44,9 +44,28 @@ resource "coder_app" "code-server" {
   }
 }
 
-resource "local_file" "token" {
+resource "coder_app" "tilt" {
+  agent_id = coder_agent.macos.id
+
+  url  = "http://localhost:10350/"
+  icon = "https://avatars.githubusercontent.com/u/26349925?s=200&v=4"
+
+  slug         = "tilt"
+  display_name = "tilt"
+
+  subdomain = true
+  share     = "owner"
+
+  healthcheck {
+    url       = "http://localhost:10350"
+    interval  = 3
+    threshold = 10
+  }
+}
+
+resource "local_file" "coder-agent-token" {
   filename = "/tmp/coder-agent-token"
-  content  = coder_agent.main.token
+  content  = coder_agent.macos.token
 
   provisioner "local-exec" {
     command = "cd && tilt trigger coder-agent"

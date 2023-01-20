@@ -2,23 +2,23 @@ terraform {
   required_providers {
     coder = {
       source  = "coder/coder"
-      version = "0.6.0"
+      version = "0.6.6"
     }
 
     docker = {
       source  = "kreuzwerker/docker"
-      version = "~> 2.20.2"
+      version = "~> 3.0.1"
     }
   }
 }
 
-data "coder_provisioner" "this" {}
-
 provider "docker" {}
+
+data "coder_provisioner" "this" {}
 
 data "coder_workspace" "this" {}
 
-resource "coder_agent" "main" {
+resource "coder_agent" "docker" {
   arch = data.coder_provisioner.this.arch
   os   = "linux"
 
@@ -33,12 +33,12 @@ resource "coder_agent" "main" {
 }
 
 resource "coder_app" "code-server" {
-  agent_id = coder_agent.main.id
+  agent_id = coder_agent.docker.id
 
   url  = "http://localhost:8080/?folder=/home/ubuntu"
   icon = "/icon/code.svg"
 
-  slug         = "code-server"
+  slug         = "dev"
   display_name = "code-server"
 
   subdomain = true
@@ -46,6 +46,25 @@ resource "coder_app" "code-server" {
 
   healthcheck {
     url       = "http://localhost:8080/healthz"
+    interval  = 3
+    threshold = 10
+  }
+}
+
+resource "coder_app" "tilt" {
+  agent_id = coder_agent.docker.id
+
+  url  = "http://localhost:10350/"
+  icon = "https://avatars.githubusercontent.com/u/26349925?s=200&v=4"
+
+  slug         = "tilt"
+  display_name = "tilt"
+
+  subdomain = true
+  share     = "owner"
+
+  healthcheck {
+    url       = "http://localhost:10350"
     interval  = 3
     threshold = 10
   }
@@ -118,7 +137,7 @@ resource "docker_container" "workspace" {
   privileged = true
 
   env = [
-    "CODER_AGENT_TOKEN=${coder_agent.main.token}"
+    "CODER_AGENT_TOKEN=${coder_agent.docker.token}"
   ]
 
   entrypoint = [
