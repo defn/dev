@@ -28,8 +28,6 @@ if "-darwin" in os.getenv("system"):
                 while true; do
                   macos_workspace="$(coder list --search='owner:me template:macos-code-server' | tail -1 | awk '{print $1}')"
                   if [[ -n "${macos_workspace}" ]]; then
-                    coder stop --yes "${macos_workspace}" || true
-                    coder start --yes "${macos_workspace}"
                     exec env CODER_AGENT_AUTH=token CODER_AGENT_URL="$(pass coder_access_url)" CODER_CONFIG_DIR=$HOME/.config/coderv2 CODER_AGENT_TOKEN="$(cat /tmp/coder-agent-token)" nix run .#coder -- agent
                   fi
                   sleep 5
