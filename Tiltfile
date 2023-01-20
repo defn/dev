@@ -80,13 +80,13 @@ if "-darwin" in os.getenv("system"):
                     ) &
                     wait
                     if ssh \
-                        -p 2222 \
+                        -o Port=2222 \
                         -o StrictHostKeyChecking=no \
                         -o UserKnownHostsFile=/dev/null \
                         -o ServerAliveInterval=1 \
                         -o ConnectTimeout=1 \
                         -o ConnectionAttempts=5 \
-                        ubuntu@127.0.0.1 true; then
+                        -v ubuntu@127.0.0.1 true; then
                         ssh \
                         -o Port=2222 \
                         -o StrictHostKeyChecking=no \
@@ -98,7 +98,7 @@ if "-darwin" in os.getenv("system"):
                         -o StreamLocalBindUnlink=yes \
                         -o RemoteForward="/home/ubuntu/.gnupg/S.gpg-agent {home}/.gnupg/S.gpg-agent.extra" \
                         -o RemoteForward="/home/ubuntu/.gnupg/S.gpg-agent.extra {home}/.gnupg/S.gpg-agent.extra" \
-                        -A -v ubuntu@127.0.0.1 bash -c '"ln -nfs $SSH_AUTH_SOCK $HOME/.ssh/S.ssh-agent; date; exec sleep infinity"'
+                        -A ubuntu@127.0.0.1 bash -c '"ln -nfs $SSH_AUTH_SOCK $HOME/.ssh/S.ssh-agent; date; exec sleep infinity"'
                     fi
                     sleep 5
                 done
