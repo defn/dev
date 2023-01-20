@@ -79,13 +79,21 @@ if "-darwin" in os.getenv("system"):
                         gpg --export-ownertrust | ssh "$ssh_host" gpg --import-ownertrust
                     ) &
                     wait
-                    if ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@127.0.0.1 true; then
+                    if ssh \
+                        -p 2222 \
+                        -o StrictHostKeyChecking=no \
+                        -o UserKnownHostsFile=/dev/null \
+                        -o ConnectTimeout=1 \
+                        -o ConnectionAttempts=5 \
+                        ubuntu@127.0.0.1 true; then
                         ssh \
                         -o Port=2222 \
                         -o StrictHostKeyChecking=no \
                         -o UserKnownHostsFile=/dev/null \
                         -o ServerAliveInterval=1 \
                         -o ServerAliveCountMax=10 \
+                        -o ConnectTimeout=1 \
+                        -o ConnectionAttempts=5 \
                         -o StreamLocalBindUnlink=yes \
                         -o RemoteForward="/home/ubuntu/.gnupg/S.gpg-agent {home}/.gnupg/S.gpg-agent.extra" \
                         -o RemoteForward="/home/ubuntu/.gnupg/S.gpg-agent.extra {home}/.gnupg/S.gpg-agent.extra" \
