@@ -47,4 +47,8 @@ resource "coder_app" "code-server" {
 resource "local_file" "token" {
   filename = "/tmp/coder-agent-token"
   content  = coder_agent.main.token
+
+  provisioner "local-exec" {
+    command = "cd && tilt trigger coder-agent"
+  }
 }
