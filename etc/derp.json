@@ -1,0 +1,17 @@
+{
+    "Regions": {
+        "1": {
+            "RegionID": 1,
+            "RegionCode": "defn",
+            "RegionName": "defn",
+            "Nodes": [
+                {
+                    "Name": "1",
+                    "RegionID": 1,
+                    "ForceHTTP": true,
+                    "HostName": "192.168.0.34:3340"
+                }
+            ]
+        }
+    }
+}

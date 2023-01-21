@@ -3,6 +3,19 @@ analytics_settings(False)
 load("ext://uibutton", "cmd_button", "location")
 
 if "-darwin" in os.getenv("system"):
+    # Starts DERP on macOS
+    local_resource("derp",
+        serve_cmd=[
+            "bash", "-c",
+            """
+                eval "$(direnv hook bash)"
+                _direnv_hook
+                go install tailscale.com/cmd/derper@main
+                exec go/bin/derper -dev
+            """
+        ]
+    )
+
     # Starts Coder on macOS
     local_resource("coder",
         serve_cmd=[

@@ -111,6 +111,7 @@
 
         coder-server-for-orgs-wildcard-tls = ''
           coder server --no-feature-warning --cache-dir ~/.cache/coder --global-config ~/.config/coderv2 \
+            --derp-config-path ~/etc/derp.json \
             --access-url=$(pass coder_access_url) --wildcard-access-url="$(pass coder_wildcard_access_url)" \
             --http-address=localhost:5555 \
             --tls-address=localhost:5556 \
