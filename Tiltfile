@@ -32,14 +32,14 @@ if "-darwin" in os.getenv("system"):
                 _direnv_hook
                 docker pull ghcr.io/defn/dev:latest-devcontainer
                 this-coder-server-kill
-                tilt trigger coder-agent
+                tilt trigger macos-workspace
                 exec this-coder-init orgs-wildcard-tls
             """
         ]
     )
 
     # Starts code-server on macOS
-    local_resource("coder-agent",
+    local_resource("macos-workspace",
         serve_cmd=[
             "bash", "-c",
             """
@@ -59,12 +59,12 @@ if "-darwin" in os.getenv("system"):
     cmd_button("macos-workspace",
                 argv=['bash', '-c', """
                   url="$(pass coder_access_url)"
-                  dw="$(coder list --search='owner:me template:macos-code-server' | tail -1 | awk '{print $1}')"
-                  open https://dev--macos--$(echo $dw | cut -d/ -f2)--$(echo $dw | cut -d/ -f1).$(echo $url | cut -d. -f2-)
+                  cw="$(coder list --search='owner:me template:macos-code-server' | tail -1 | awk '{print $1}')"
+                  open https://dev--macos--$(echo $cw | cut -d/ -f2)--$(echo $cw | cut -d/ -f1).$(echo $url | cut -d. -f2-)
                   """
                 ],
                 icon_name='cloud_download',
-                resource='coder-agent',
+                resource='macos-workspace',
                 text='code-server'
     )
 
@@ -89,8 +89,8 @@ if "-darwin" in os.getenv("system"):
     cmd_button("docker-workspace",
                 argv=['bash', '-c', """
                   url="$(pass coder_access_url)"
-                  dw="$(coder list --search='owner:me template:docker-code-server' | tail -1 | awk '{print $1}')"
-                  open https://dev--docker--$(echo $dw | cut -d/ -f2)--$(echo $dw | cut -d/ -f1).$(echo $url | cut -d. -f2-)
+                  cw="$(coder list --search='owner:me template:docker-code-server' | tail -1 | awk '{print $1}')"
+                  open https://dev--docker--$(echo $cw | cut -d/ -f2)--$(echo $cw | cut -d/ -f1).$(echo $url | cut -d. -f2-)
                   """
                 ],
                 icon_name='cloud_download',
