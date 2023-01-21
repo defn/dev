@@ -49,6 +49,24 @@ if "-darwin" in os.getenv("system"):
         ]
     )
 
+    # Manages docker workspace  on macOS
+    local_resource("docker-workspace",
+        serve_cmd=[
+            "bash", "-c",
+            """
+                eval "$(direnv hook bash)"
+                _direnv_hook
+                while true; do
+                    docker_workspace="$(coder list --search='owner:me template:docker-code-server' | tail -1 | awk '{print $1}')"
+                    docker pull ghcr.io/defn/dev:latest-devcontainer
+                    coder restart "$docker_workspace" --yes
+                    tilt trigger ssh-gpg-agent-forward
+                    docker logs -f coder-${docker_workspace/\\//-}
+                done
+            """
+        ]
+    )
+
     # Starts coder port forward on macOS
     local_resource("coder-port-forward",
         serve_cmd=[
