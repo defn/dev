@@ -74,6 +74,19 @@ if "-darwin" in os.getenv("system"):
         ]
     )
 
+    cmd_button("workspace",
+                argv=['bash', '-c', """
+                  url="$(pass coder_access_url)"
+                  dw="$(coder list --search='owner:me template:docker-code-server' | tail -1 | awk '{print $1}')"
+                  open https://dev--docker--$(echo $dw | cut -d/ -f2)--$(echo $dw | cut -d/ -f1).$(echo $url | cut -d. -f2-)
+                  """
+                ],
+                icon_name='cloud_download',
+                resource='docker-workspace',
+                text='code-server'
+    )
+
+
     # Starts coder port forward on macOS
     local_resource("coder-port-forward",
         serve_cmd=[
