@@ -221,7 +221,7 @@
         '';
 
         vault-login = ''
-          if ! kv; then
+          if ! kv >/dev/null; then
             mark vault
             vault login -method=github token="$(cat ~/.config/gh/hosts.yml  | yq -r '.["github.com"].oauth_token')" | egrep -v '^(token_accessor|token) '
             kv
@@ -233,9 +233,8 @@
           if ! gh auth status; then
             echo Y | gh auth login -p https -h github.com -w
           fi
-          vault login -method=github token="$(cat ~/.config/gh/hosts.yml  | yq -r '.["github.com"].oauth_token')" | egrep -v '^(token_accessor|token) ' || true
           set -x
-          if test -n "''${GIT_AUTHOR_NAME:-}"; then pass GHCR_TOKEN | docker login ghcr.io -u $GIT_AUTHOR_NAME --password-stdin; fi
+          if test -n "''${GIT_AUTHOR_NAME:-}"; then pass GHCR_TOKEN | docker login ghcr.io -u $GIT_AUTHOR_NAME --password-stdin; echo; fi
         '';
 
         fly-login = ''
