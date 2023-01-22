@@ -110,9 +110,7 @@
         '';
 
         coder-server-for-orgs-wildcard-tls = ''
-          jq -n --arg ip "$(ifconfig en0 | egrep '[[:space:]]inet[[:space:]]' | head -1 | awk '{print $2}')" '{Regions: {"1": {RegionID: 1, RegionCode: "defn", RegionName: "defn", Nodes: [{Name: "1", RegionID: 1, ForceHTTP: true, HostName: "\($ip):3340"}]}}}' > etc/derp.json
           coder server --no-feature-warning --cache-dir ~/.cache/coder --global-config ~/.config/coderv2 \
-            --derp-config-path ~/etc/derp.json \
             --access-url=$(pass coder_access_url) --wildcard-access-url="$(pass coder_wildcard_access_url)" \
             --http-address=localhost:5555 \
             --tls-address=localhost:5556 \

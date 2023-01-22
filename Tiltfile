@@ -10,19 +10,6 @@ if "-darwin" in os.getenv("system"):
                 text='Coder'
     )
 
-    # Starts DERP on macOS
-    local_resource("derp",
-        serve_cmd=[
-            "bash", "-c",
-            """
-                eval "$(direnv hook bash)"
-                _direnv_hook
-                go install tailscale.com/cmd/derper@main
-                exec go/bin/derper -dev
-            """
-        ]
-    )
-
     # Starts Coder on macOS
     local_resource("coder",
         serve_cmd=[
