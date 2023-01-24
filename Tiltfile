@@ -67,7 +67,7 @@ if "-darwin" in os.getenv("system"):
                 while true; do
                     cw="$(coder list --search='owner:me template:docker-code-server' | tail -1 | awk '{print $1}')"
                     docker pull ghcr.io/defn/dev:latest-devcontainer
-                    coder restart "$cd" --yes
+                    coder restart "$cw" --yes
                     tilt trigger ssh-gpg-agent-forward
                     url="$(pass coder_access_url)"
                     workspace="https://dev--docker--$(echo $cw | cut -d/ -f2)--$(echo $cw | cut -d/ -f1).$(echo $url | cut -d. -f2-)"
