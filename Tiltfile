@@ -33,9 +33,11 @@ if "-darwin" in os.getenv("system"):
                 eval "$(direnv hook bash)"
                 _direnv_hook
                 while true; do
-                  macos_workspace="$(coder list --search='owner:me template:macos-code-server' | tail -1 | awk '{print $1}')"
-                  if [[ -n "${macos_workspace}" ]]; then
-                    exec env CODER_AGENT_AUTH=token CODER_AGENT_URL="$(pass coder_access_url)" CODER_CONFIG_DIR=$HOME/.config/coderv2 CODER_AGENT_TOKEN="$(cat /tmp/coder-agent-token)" nix run .#coder -- agent
+                  cw="$(coder list --search='owner:me template:macos-code-server' | tail -1 | awk '{print $1}')"
+                  if [[ -n "${cw}" ]]; then
+                    url="$(pass coder_access_url)"
+                    workspace="https://dev--macos--$(echo $cw | cut -d/ -f2)--$(echo $cw | cut -d/ -f1).$(echo $url | cut -d. -f2-)"
+                    exec env CODER_AGENT_AUTH=token CODER_AGENT_URL="$url" CODER_CONFIG_DIR=$HOME/.config/coderv2 CODER_AGENT_TOKEN="$(cat /tmp/coder-agent-token)" nix run .#coder -- agent
                   fi
                   sleep 5
                 done
