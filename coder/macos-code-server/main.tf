@@ -66,8 +66,4 @@ resource "coder_app" "tilt" {
 resource "local_file" "coder-agent-token" {
   filename = "/tmp/coder-agent-token"
   content  = coder_agent.macos.token
-
-  provisioner "local-exec" {
-    command = "cd && tilt trigger macos-workspace"
-  }
 }
