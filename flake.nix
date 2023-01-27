@@ -131,7 +131,7 @@
           set -exfu
           cd ~/coder/docker-code-server
           coder template create --yes || true
-          coder template push --yes
+          coder template push --yes --name "$(git log . | head -1 | awk '{print $2}' | cut -b1-8)"
           # https://github.com/coder/coder/tree/main/site/static/icon
           coder template edit docker-code-server --icon "https://cdn-icons-png.flaticon.com/512/919/919853.png"
         '';
@@ -140,7 +140,7 @@
           set -exfu
           cd ~/coder/macos-code-server
           coder template create --yes || true
-          coder template push --yes
+          coder template push --yes --name "$(git log . | head -1 | awk '{print $2}' | cut -b1-8)"
           # https://github.com/coder/coder/tree/main/site/static/icon
           coder template edit macos-code-server --icon "https://upload.wikimedia.org/wikipedia/commons/c/c9/Finder_Icon_macOS_Big_Sur.png"
         '';
