@@ -23,10 +23,12 @@ resource "coder_agent" "docker" {
   os   = "linux"
 
   env = {
-    GIT_AUTHOR_NAME     = "${data.coder_workspace.this.owner}"
-    GIT_COMMITTER_NAME  = "${data.coder_workspace.this.owner}"
-    GIT_AUTHOR_EMAIL    = "${data.coder_workspace.this.owner_email}"
-    GIT_COMMITTER_EMAIL = "${data.coder_workspace.this.owner_email}"
+    GIT_AUTHOR_NAME          = "${data.coder_workspace.this.owner}"
+    GIT_COMMITTER_NAME       = "${data.coder_workspace.this.owner}"
+    GIT_AUTHOR_EMAIL         = "${data.coder_workspace.this.owner_email}"
+    GIT_COMMITTER_EMAIL      = "${data.coder_workspace.this.owner_email}"
+    CODER_DERP_SERVER_ENABLE = "false"
+    CODER_DERP_CONFIG_URL    = "https://controlplane.tailscale.com/derpmap/default"
   }
 
   startup_script = "exec ~/.nix-profile/bin/nix run .#codeserver -- --auth none"
