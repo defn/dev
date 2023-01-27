@@ -155,6 +155,7 @@ if "-darwin" in os.getenv("system"):
                         -o ServerAliveInterval=1 \
                         -o ConnectTimeout=1 \
                         -o ConnectionAttempts=5 \
+                        -o PasswordAuthentication=no \
                         -v ubuntu@127.0.0.1 true; then
                         ssh \
                         -o Port=2222 \
@@ -164,6 +165,7 @@ if "-darwin" in os.getenv("system"):
                         -o ServerAliveCountMax=10 \
                         -o ConnectTimeout=1 \
                         -o ConnectionAttempts=5 \
+                        -o PasswordAuthentication=no \
                         -o StreamLocalBindUnlink=yes \
                         -o RemoteForward="/home/ubuntu/.gnupg/S.gpg-agent {home}/.gnupg/S.gpg-agent.extra" \
                         -o RemoteForward="/home/ubuntu/.gnupg/S.gpg-agent.extra {home}/.gnupg/S.gpg-agent.extra" \
