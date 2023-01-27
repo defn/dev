@@ -20,6 +20,7 @@ if "-darwin" in os.getenv("system"):
                 docker pull ghcr.io/defn/dev:latest-devcontainer
                 this-coder-server-kill
                 tilt trigger macos-workspace
+                export CODER_DERP_SERVER_ENABLE=false CODER_DERP_CONFIG_URL=https://controlplane.tailscale.com/derpmap/default
                 exec this-coder-init orgs-wildcard-tls
             """
         ]
