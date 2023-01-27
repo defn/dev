@@ -69,16 +69,24 @@ if "-darwin" in os.getenv("system"):
             """
                 eval "$(direnv hook bash)"
                 _direnv_hook
+                set -x
                 while true; do
                     cw="$(coder list --search='owner:me template:docker-code-server' | tail -1 | awk '{print $1}')"
                     docker pull ghcr.io/defn/dev:latest-devcontainer
                     coder restart "$cw" --yes
                     tilt trigger ssh-gpg-agent-forward
-                    url="$(pass coder_access_url)"
-                    workspace="https://dev--docker--$(echo $cw | cut -d/ -f2)--$(echo $cw | cut -d/ -f1).$(echo $url | cut -d. -f2-)"
-                    while [[ "307" != "$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 1 -m 1 "$workspace" 2>&- )" ]]; do echo "$(date): waiting for workspace $workspace"; sleep 1; done
-                    open "$workspace"
-                    docker logs -f coder-${cw/\\//-}
+                    while true; do
+                      url="$(pass coder_access_url)"
+                      workspace="https://dev--docker--$(echo $cw | cut -d/ -f2)--$(echo $cw | cut -d/ -f1).$(echo $url | cut -d. -f2-)"
+                      if [[ "307" == "$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 1 -m 1 "$workspace" 2>&- )" ]]; then
+                        open "$workspace"
+                        docker logs -f coder-${cw/\\//-}
+                        break
+                      else
+                        echo "$(date): waiting for workspace $workspace"
+                        sleep 5
+                      fi
+                    done
                 done
             """
         ]
