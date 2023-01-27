@@ -35,7 +35,7 @@ if "-darwin" in os.getenv("system"):
                 while true; do
                   cw="$(coder list --search='owner:me template:macos-code-server' | tail -1 | awk '{print $1}')"
                   if [[ -n "${cw}" ]]; then
-                    coder restart "$cw" --yes
+                    if coder update "$cw" | grep 'Workspace isn.t outdated'; then coder restart "$cw" --yes; fi
                     url="$(pass coder_access_url)"
                     (
                       workspace="https://dev--macos--$(echo $cw | cut -d/ -f2)--$(echo $cw | cut -d/ -f1).$(echo $url | cut -d. -f2-)"
@@ -73,7 +73,7 @@ if "-darwin" in os.getenv("system"):
                 while true; do
                     cw="$(coder list --search='owner:me template:docker-code-server' | tail -1 | awk '{print $1}')"
                     docker pull ghcr.io/defn/dev:latest-devcontainer
-                    coder restart "$cw" --yes
+                    if coder update "$cw" | grep 'Workspace isn.t outdated'; then coder restart "$cw" --yes; fi
                     tilt trigger ssh-gpg-agent-forward
                     while true; do
                       url="$(pass coder_access_url)"
