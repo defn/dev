@@ -1,7 +1,7 @@
 {
   inputs = {
     dev.url = github:defn/pkg/dev-0.0.22?dir=dev;
-    tailscale.url = github:defn/pkg/tailscale-1.34.2-0?dir=tailscale;
+    tailscale.url = github:defn/pkg/tailscale-1.36.0-0?dir=tailscale;
   };
 
   outputs = inputs:
