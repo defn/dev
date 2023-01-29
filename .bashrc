@@ -29,6 +29,9 @@ PATH="$PATH:$HOME/bin"
 # bash
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
+# sudo
+export SUDO_ASKPASS="$HOME/bin/askpass"
+
 # nodejs
 if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$HOME/node_modules/.bin:$PATH"; fi
 
