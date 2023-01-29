@@ -299,7 +299,7 @@
           if [[ -z "$(pass hello)" ]]; then gpg-agent --daemon --pinentry-program $(which pinentry-mac); fi
           pass hello
           screen -S tilt -d -m bash -il -c "~/bin/withde ~ $(which tilt) up" || true
-          open http://localhost:10350
+          open 'http://localhost:10350/r/(all)/overview'
         '';
       };
     };
