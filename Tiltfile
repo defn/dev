@@ -17,9 +17,7 @@ if "-darwin" in os.getenv("system"):
             """
                 eval "$(direnv hook bash)"
                 _direnv_hook
-                docker pull ghcr.io/defn/dev:latest-devcontainer
                 this-coder-server-kill
-                tilt trigger macos-workspace
                 export CODER_DERP_SERVER_ENABLE=false CODER_DERP_CONFIG_URL=https://controlplane.tailscale.com/derpmap/default
                 exec this-coder-init orgs-wildcard-tls
             """
@@ -33,19 +31,31 @@ if "-darwin" in os.getenv("system"):
             """
                 eval "$(direnv hook bash)"
                 _direnv_hook
+                set -x
                 while true; do
-                  cw="$(coder list --search='owner:me template:macos-code-server' | tail -1 | awk '{print $1}')"
-                  if [[ -n "${cw}" ]]; then
+                    cw="$(coder list --search='owner:me template:macos-code-server' | tail -1 | awk '{print $1}')"
+                    if [[ -z "$cw" ]]; then sleep 5; continue; fi
+
                     if coder update "$cw" | grep 'Workspace isn.t outdated'; then coder restart "$cw" --yes; fi
-                    url="$(pass coder_access_url)"
-                    (
+
+                    while true; do
+                      url="$(pass coder_access_url)"
                       workspace="https://dev--macos--$(echo $cw | cut -d/ -f2)--$(echo $cw | cut -d/ -f1).$(echo $url | cut -d. -f2-)"
-                      while [[ "307" != "$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 1 -m 1 "$workspace" 2>&- )" ]]; do echo "$(date): waiting for workspace $workspace"; sleep 1; done
-                      open "$workspace"
-                    ) &
-                    exec env CODER_AGENT_AUTH=token CODER_AGENT_URL="$url" CODER_CONFIG_DIR=$HOME/.config/coderv2 CODER_AGENT_TOKEN="$(cat /tmp/coder-agent-token)" nix run .#coder -- agent
-                  fi
-                  sleep 5
+
+                      (
+                        if [[ "307" == "$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 1 -m 1 "$workspace" 2>&- )" ]]; then
+                          open "$workspace"
+                          break
+                        else
+                          echo "$(date): waiting for workspace $workspace"
+                          sleep 5
+                        fi
+                      ) &
+
+                      env CODER_AGENT_AUTH=token CODER_AGENT_URL="$url" CODER_CONFIG_DIR=$HOME/.config/coderv2 CODER_AGENT_TOKEN="$(cat /tmp/coder-agent-token)" nix run .#coder -- agent || true
+
+                      wait
+                    done
                 done
             """
         ]
@@ -73,9 +83,12 @@ if "-darwin" in os.getenv("system"):
                 set -x
                 while true; do
                     cw="$(coder list --search='owner:me template:docker-code-server' | tail -1 | awk '{print $1}')"
+                    if [[ -z "$cw" ]]; then sleep 5; continue; fi
+
                     docker pull ghcr.io/defn/dev:latest-devcontainer
                     if coder update "$cw" | grep 'Workspace isn.t outdated'; then coder restart "$cw" --yes; fi
                     tilt trigger ssh-gpg-agent-forward
+
                     while true; do
                       url="$(pass coder_access_url)"
                       workspace="https://dev--docker--$(echo $cw | cut -d/ -f2)--$(echo $cw | cut -d/ -f1).$(echo $url | cut -d. -f2-)"
