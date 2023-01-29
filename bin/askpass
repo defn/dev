@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -efu
+
+pass macos_$(uname -n)
