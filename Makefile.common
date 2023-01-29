@@ -7,11 +7,11 @@ second_ = $(word 2, $(subst _, ,$@))
 
 macos:
 	-$(shell which gpg-agent) --daemon --pinentry-program $$(which pinentry-mac)
-	for ip in $(dummy_ip); do if ! ifconfig lo0 | grep "inet $$ip"; then sudo ifconfig lo0 alias "$$ip" netmask 255.255.255.255; fi; done;
+	for ip in $(dummy_ip); do if ! ifconfig lo0 | grep "inet $$ip"; then sudo -A ifconfig lo0 alias "$$ip" netmask 255.255.255.255; fi; done;
 	ifconfig lo0
 	defaults write -g ApplePressAndHoldEnabled -bool false
 	-docker context create host --docker host=unix:///var/run/docker.sock
-	(echo "rdr pass inet proto tcp from any to any port 80 -> 127.0.0.1 port 5555"; echo "rdr pass inet proto tcp from any to any port 443 -> 127.0.0.1 port 5556") | sudo pfctl -ef -
+	(echo "rdr pass inet proto tcp from any to any port 80 -> 127.0.0.1 port 5555"; echo "rdr pass inet proto tcp from any to any port 443 -> 127.0.0.1 port 5556") | sudo -A pfctl -ef -
 	mkdir -p /tmp/cache/nix
 
 symlinks:
