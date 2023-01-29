@@ -3,11 +3,11 @@
     dev.url = github:defn/pkg/dev-0.0.22?dir=dev;
     localdev.url = github:defn/pkg/localdev-0.0.8?dir=localdev;
     caddy.url = github:defn/pkg/caddy-2.6.2-5?dir=caddy;
-    az.url = github:defn/pkg/az-0.0.8?dir=az;
+    az.url = github:defn/pkg/az-0.0.9?dir=az;
     awscli.url = github:defn/pkg/awscli-2.0.30-2?dir=awscli;
     earthly.url = github:defn/pkg/earthly-0.7.0-rc1-0?dir=earthly;
     tilt.url = github:defn/pkg/tilt-0.31.1-1?dir=tilt;
-    gh.url = github:defn/pkg/gh-2.21.2-1?dir=gh;
+    gh.url = github:defn/pkg/gh-2.22.1-0?dir=gh;
     webhook.url = github:defn/pkg/webhook-2.8.0?dir=webhook;
     flyctl.url = github:defn/pkg/flyctl-0.0.450-1?dir=flyctl;
     vault.url = github:defn/pkg/vault-1.12.2-4?dir=vault;
