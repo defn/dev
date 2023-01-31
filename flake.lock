@@ -120,17 +120,17 @@
       },
       "locked": {
         "dir": "coder",
-        "lastModified": 1674711549,
-        "narHash": "sha256-vfhT44P6rOSYV8l2o/8WAKh+oZtx/8uff7aOoeky3Xo=",
+        "lastModified": 1675136976,
+        "narHash": "sha256-lVRz1icu61ff6dd8Idc/BSx2IfgM4ZWak7Io9lNtQwo=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "c58904b40aef52782d6625932148cf499eff6d68",
+        "rev": "f4a3b2d57f8ba905dd53519b5fd78fa1f6525d3d",
         "type": "github"
       },
       "original": {
         "dir": "coder",
         "owner": "defn",
-        "ref": "coder-0.15.2-1",
+        "ref": "coder-0.15.3-0",
         "repo": "pkg",
         "type": "github"
       }
@@ -2398,17 +2398,17 @@
       },
       "locked": {
         "dir": "localdev",
-        "lastModified": 1674711816,
-        "narHash": "sha256-zVDyT/CSMgQxecwn0i/TtsuVzdKjiXlYzuFfdzznNAU=",
+        "lastModified": 1675137196,
+        "narHash": "sha256-3A2lWEBKxiFk0ZvUNEi4SsNh96D0XuieKHSFv4zh5pI=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "06e5187386c67bdbd08c38f0a133f7c7f8500840",
+        "rev": "691a969f5821ff943a377ebe7b8eccc8e0ff9832",
         "type": "github"
       },
       "original": {
         "dir": "localdev",
         "owner": "defn",
-        "ref": "localdev-0.0.8",
+        "ref": "localdev-0.0.9",
         "repo": "pkg",
         "type": "github"
       }
