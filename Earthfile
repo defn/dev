@@ -1,4 +1,5 @@
-VERSION --use-registry-for-with-docker --ci-arg 0.7
+VERSION --shell-out-anywhere --use-chmod --use-host-command --earthly-version-arg --use-copy-link --use-registry-for-with-docker --ci-arg 0.6
+
 
 build-nix-root:
     ARG image=ghcr.io/defn/dev:latest-nix-root
