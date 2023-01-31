@@ -4,6 +4,7 @@ brew "pinentry-mac"
 brew "pstree"
 brew "ykman"
 brew "code-server"
+brew "git"
 
 cask "divvy"
 cask "iterm2"
