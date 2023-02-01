@@ -1,6 +1,6 @@
 {
   inputs = {
-    dev.url = github:defn/pkg/dev-0.0.23-rc4?dir=dev;
+    dev.url = github:defn/pkg/dev-0.0.23-rc5?dir=dev;
     localdev.url = github:defn/pkg/localdev-0.0.9?dir=localdev;
     caddy.url = github:defn/pkg/caddy-2.6.2-5?dir=caddy;
     az.url = github:defn/pkg/az-0.0.9?dir=az;
@@ -16,12 +16,7 @@
   outputs = inputs: { main = inputs.dev.main; } // inputs.dev.main rec {
     inherit inputs;
 
-    src = builtins.path { path = ./.; name = config.slug; };
-
-    config = rec {
-      slug = builtins.readFile ./SLUG;
-      version = builtins.readFile ./VERSION;
-    };
+    src = builtins.path { path = ./.; name = builtins.readFile ./SLUG; };
 
     handler = { pkgs, wrap, system, builders, commands }: rec {
       apps = {

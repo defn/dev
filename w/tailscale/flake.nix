@@ -1,6 +1,6 @@
 {
   inputs = {
-    dev.url = github:defn/pkg/dev-0.0.23-rc4?dir=dev;
+    dev.url = github:defn/pkg/dev-0.0.23-rc5?dir=dev;
     tailscale.url = github:defn/pkg/tailscale-1.36.0-0?dir=tailscale;
   };
 
@@ -8,16 +8,11 @@
     inputs.dev.main rec {
       inherit inputs;
 
-      src = builtins.path { path = ./.; name = config.slug; };
-
-      config = rec {
-        slug = builtins.readFile ./SLUG;
-        version = builtins.readFile ./VERSION;
-      };
+      src = builtins.path { path = ./.; name = builtins.readFile ./SLUG; };
 
       handler = { pkgs, wrap, system, builders, commands }: rec {
         defaultPackage = wrap.nullBuilder {
-          propagatedBuildInputs = with pkgs; wrap.flakeInputs;
+          propagatedBuildInputs = wrap.flakeInputs;
         };
       };
 
