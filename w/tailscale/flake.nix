@@ -16,10 +16,6 @@
       };
 
       handler = { pkgs, wrap, system, builders, commands }: rec {
-        devShell = wrap.devShell {
-          devInputs = commands;
-        };
-
         defaultPackage = wrap.nullBuilder {
           propagatedBuildInputs = with pkgs; wrap.flakeInputs;
         };
