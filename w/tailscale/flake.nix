@@ -5,7 +5,7 @@
   };
 
   outputs = inputs:
-    { main = inputs.dev.main; } // inputs.dev.main rec {
+    inputs.dev.main rec {
       inherit inputs;
 
       src = builtins.path { path = ./.; name = config.slug; };

@@ -1,12 +1,12 @@
 {
   inputs = {
-    dev.url = github:defn/pkg/dev-0.0.23-rc2?dir=dev;
+    dev.url = github:defn/pkg/dev-0.0.23-rc4?dir=dev;
     vault.url = github:defn/pkg/vault-1.12.2-4?dir=vault;
     acme.url = github:defn/pkg/acme-3.0.5-4?dir=acme;
   };
 
   outputs = inputs:
-    { main = inputs.dev.main; } // inputs.dev.main rec {
+    inputs.dev.main rec {
       inherit inputs;
 
       src = builtins.path { path = ./.; name = config.slug; };
@@ -26,7 +26,7 @@
         };
       };
 
-      scripts = {
+      scripts = { system }: {
         "acme-issue" = ''
           domain="$1"; shift
           export CF_Token="$(pass cloudflare_$(echo $domain | perl -pe 's{^.*?([^\.]+\.[^\.]+)$}{$1}'))"
