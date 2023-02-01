@@ -1,6 +1,6 @@
 {
   inputs = {
-    dev.url = github:defn/pkg/dev-0.0.23-rc5?dir=dev;
+    dev.url = github:defn/pkg/dev-0.0.23-rc6?dir=dev;
     localdev.url = github:defn/pkg/localdev-0.0.9?dir=localdev;
     caddy.url = github:defn/pkg/caddy-2.6.2-5?dir=caddy;
     az.url = github:defn/pkg/az-0.0.9?dir=az;
