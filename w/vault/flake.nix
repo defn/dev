@@ -1,6 +1,6 @@
 {
   inputs = {
-    dev.url = github:defn/pkg/dev-0.0.19?dir=dev;
+    dev.url = github:defn/pkg/dev-0.0.23-rc2?dir=dev;
     vault.url = github:defn/pkg/vault-1.12.2-4?dir=vault;
     acme.url = github:defn/pkg/acme-3.0.5-4?dir=acme;
   };
@@ -16,25 +16,35 @@
         version = builtins.readFile ./VERSION;
       };
 
-      handler = { pkgs, wrap, system, builders }: rec {
-        packages.acme-issue = pkgs.writeShellScriptBin "this-acme-issue" ''
+      handler = { pkgs, wrap, system, builders, commands }: rec {
+        devShell = wrap.devShell {
+          devInputs = commands;
+        };
+
+        defaultPackage = wrap.nullBuilder {
+          propagatedBuildInputs = with pkgs; wrap.flakeInputs;
+        };
+      };
+
+      scripts = {
+        "acme-issue" = ''
           domain="$1"; shift
           export CF_Token="$(pass cloudflare_$(echo $domain | perl -pe 's{^.*?([^\.]+\.[^\.]+)$}{$1}'))"
           acme.sh --issue --dns dns_cf --ocsp-must-staple --keylength ec-384 -d "$domain"
         '';
 
-        packages.acme-renew = pkgs.writeShellScriptBin "this-acme-renew" ''
+        "acme-renew" = ''
           domain="$1"; shift
           acme.sh --renew --ecc -d "$domain"
         '';
 
-        packages.vault-start = pkgs.writeShellScriptBin "this-vault-start" ''
+        "vault-start" = ''
           set -exfu
 
           vault server -config vault.yaml
         '';
 
-        packages.vault-unseal = pkgs.writeShellScriptBin "this-vault-unseal" ''
+        "vault-unseal" = ''
           set -exfu
 
           pass Unseal_Key_1 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') $VAULT_ADDR/v1/sys/unseal
@@ -42,7 +52,7 @@
           pass Unseal_Key_5 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') $VAULT_ADDR/v1/sys/unseal
         '';
 
-        packages.vault-seal = pkgs.writeShellScriptBin "this-vault-seal" ''
+        "vault-seal" = ''
           set -exfu
 
           vault operator seal
@@ -50,7 +60,7 @@
           cd ~/.password-store && git add vault && git add -u vault && git stash
         '';
 
-        packages.vault-backup = pkgs.writeShellScriptBin "this-vault-backup" ''
+        "vault-backup" = ''
           set -exfu
 
           this-vault-seal
@@ -63,21 +73,6 @@
           git status -sb
           this-vault-unseal
         '';
-
-        devShell = wrap.devShell {
-          devInputs = with packages; [
-            vault-start
-            vault-unseal
-            vault-seal
-            vault-backup
-            acme-issue
-            acme-renew
-          ];
-        };
-
-        defaultPackage = wrap.nullBuilder {
-          propagatedBuildInputs = with pkgs; wrap.flakeInputs;
-        };
       };
     };
 }
