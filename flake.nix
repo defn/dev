@@ -47,9 +47,11 @@
       };
 
       devShell = wrap.devShell {
-        devInputs = (wrap.flakeInputs ++
-          [ defaultPackage ] ++
-          pkgs.lib.attrsets.mapAttrsToList (name: value: value) commands);
+        devInputs = (
+          wrap.flakeInputs ++
+            [ defaultPackage ] ++
+            commands
+        );
       };
 
       defaultPackage = wrap.nullBuilder {
@@ -100,9 +102,14 @@
         { ${pkgs.pass}/bin/pass "$@" 2>&1 1>&3 3>&- | grep -v 'problem with fast path key listing'; } 3>&1 1>&2 | cat
       '';
 
-      commands = pkgs.lib.attrsets.mapAttrs
-        (name: value: (pkgs.writeShellScriptBin "this-${name}" value))
-        scripts;
+      commands = pkgs.lib.attrsets.mapAttrsToList
+        (name: value: value)
+        (
+          pkgs.lib.attrsets.mapAttrs
+            (name: value:
+              (pkgs.writeShellScriptBin "this-${name}" value))
+            scripts
+        );
 
       scripts = {
         coder-delete-database = ''
