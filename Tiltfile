@@ -221,7 +221,7 @@ if "-darwin" in os.getenv("system"):
         serve_cmd=[
             "bash", "-c",
             """
-                cd w/k3d
+                cd .dotfiles/w/k3d
                 eval "$(direnv hook bash)"
                 direnv allow
                 _direnv_hook
