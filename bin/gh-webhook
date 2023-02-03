@@ -34,6 +34,7 @@ function main {
             (
                 cd $a
                 nix build
+                this-nix-gc
                 case "$(uname -s)" in
                     Linux)
                         nix path-info --all | grep -v '\.drv$' | xargs nix copy --verbose --to 'file:///cache/nix?compression-level=0&parallel-compression=true&secret-key=/tmp/cache-priv-key.pem'
