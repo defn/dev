@@ -1,6 +1,6 @@
 {
   inputs = {
-    dev.url = github:defn/pkg/dev-0.0.23-rc5?dir=dev;
+    dev.url = github:defn/pkg/dev-0.0.23-rc9?dir=dev;
     vault.url = github:defn/pkg/vault-1.12.2-4?dir=vault;
     acme.url = github:defn/pkg/acme-3.0.5-4?dir=acme;
   };
@@ -11,7 +11,7 @@
 
       src = builtins.path { path = ./.; name = builtins.readFile ./SLUG; };
 
-      handler = { pkgs, wrap, system, builders, commands }: rec {
+      handler = { pkgs, wrap, system, builders, commands, config }: rec {
         defaultPackage = wrap.nullBuilder {
           propagatedBuildInputs = wrap.flakeInputs;
         };
