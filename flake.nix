@@ -1,7 +1,7 @@
 {
   inputs = {
     dev.url = github:defn/pkg/dev-0.0.23-rc9?dir=dev;
-    localdev.url = github:defn/pkg/localdev-0.0.10?dir=localdev;
+    localdev.url = github:defn/pkg/localdev-0.0.11?dir=localdev;
     caddy.url = github:defn/pkg/caddy-2.6.2-5?dir=caddy;
     az.url = github:defn/pkg/az-0.0.10?dir=az;
     awscli.url = github:defn/pkg/awscli-2.0.30-2?dir=awscli;
