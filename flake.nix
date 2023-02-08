@@ -79,6 +79,7 @@
             less
             s6
             screen
+            openvpn
 
             docker
             docker-credential-helpers
