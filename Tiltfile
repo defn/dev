@@ -32,7 +32,6 @@ if "-darwin" in os.getenv("system"):
                 eval "$(direnv hook bash)"
                 _direnv_hook
                 this-coder-server-kill
-                export CODER_DERP_SERVER_ENABLE=false CODER_DERP_CONFIG_URL=https://controlplane.tailscale.com/derpmap/default
                 tilt trigger macos-workspace
                 exec this-coder-init orgs-wildcard-tls
             """
