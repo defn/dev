@@ -24,7 +24,6 @@
             ]
         },
     },
-    "terraform.languageServer.ignoreSingleFileWarning": true,
     "workbench.colorTheme": "Default Dark+",
     "workbench.editor.untitled.hint": "hidden",
     "workbench.startupEditor": "none",
@@ -50,6 +49,8 @@
         "/home/ubuntu/work/**": true
     },
     "nix.formatterPath": "/tmp/.nix-profile/bin/nixpkgs-fmt",
+    "terraform.languageServer.ignoreSingleFileWarning": true,
     "terraform.languageServer.enable": false,
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "diffEditor.ignoreTrimWhitespace": false
 }
