@@ -10,6 +10,18 @@ if "-darwin" in os.getenv("system"):
                 text='Coder'
     )
 
+    # Starts openvpn on macOS
+    local_resource("openvpn",
+        serve_cmd=[
+            "bash", "-c",
+            """
+                eval "$(direnv hook bash)"
+                _direnv_hook
+                exec sudo -A $(which openvpn) etc/openvpn/server.conf
+            """
+        ]
+    )
+
     # Starts Coder on macOS
     local_resource("coder",
         serve_cmd=[
