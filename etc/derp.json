@@ -7,9 +7,9 @@
       "Nodes": [
         {
           "Name": "macos",
-          "RegionID": 1,
+          "RegionID": 6789,
           "DERPPort": 3340,
-          "Hostname": "derp.defn.run"
+          "Hostname": "derp2.defn.run"
         }
       ]
     }

@@ -10,6 +10,18 @@ if "-darwin" in os.getenv("system"):
                 text='Coder'
     )
 
+    # Starts derper on macOS
+    local_resource("derper",
+        serve_cmd=[
+            "bash", "-c",
+            """
+                eval "$(direnv hook bash)"
+                _direnv_hook
+                exec go/bin/derper --hostname=derp2.defn.run --certmode=manual --certdir=/Users/defn/.acme.sh/\\*.defn.run -a=:3340 --stun=true --http-port=8080 --verify-clients=false -c=$HOME/etc/derper.conf
+            """
+        ]
+    )
+
     # Starts Coder on macOS
     local_resource("coder",
         serve_cmd=[
@@ -18,7 +30,7 @@ if "-darwin" in os.getenv("system"):
                 eval "$(direnv hook bash)"
                 _direnv_hook
                 this-coder-server-kill
-                export CODER_DERP_SERVER_ENABLE=false CODER_DERP_CONFIG_URL=https://controlplane.tailscale.com/derpmap/default
+                export CODER_DERP_SERVER_ENABLE=false CODER_DERP_CONFIG_URL=https://raw.githubusercontent.com/defn/dev/main/etc/derp.json
                 tilt trigger macos-workspace
                 exec this-coder-init orgs-wildcard-tls
             """
