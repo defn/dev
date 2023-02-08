@@ -28,7 +28,7 @@ resource "coder_agent" "docker" {
     GIT_AUTHOR_EMAIL         = "${data.coder_workspace.this.owner_email}"
     GIT_COMMITTER_EMAIL      = "${data.coder_workspace.this.owner_email}"
     CODER_DERP_SERVER_ENABLE = "false"
-    CODER_DERP_CONFIG_URL    = "https://raw.githubusercontent.com/defn/dev/main/etc/derp.json"
+    CODER_DERP_CONFIG_URL    = "https://controlplane.tailscale.com/derpmap/default"
   }
 
   startup_script = "exec ~/.nix-profile/bin/nix run .#codeserver -- --auth none"
