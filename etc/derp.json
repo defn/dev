@@ -1,0 +1,17 @@
+{
+  "Regions": {
+    "1": {
+      "RegionID": 1,
+      "RegionCode": "defn",
+      "RegionName": "defn",
+      "Nodes": [
+        {
+          "Name": "macos",
+          "RegionID": 1,
+          "DERPPort": 3340,
+          "Hostname": "derp.defn.run"
+        }
+      ]
+    }
+  }
+}
