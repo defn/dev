@@ -79,6 +79,8 @@
             less
             s6
             screen
+
+            easyrsa
             openvpn
 
             docker

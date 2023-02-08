@@ -20,3 +20,9 @@ ln -nfs the.crt derp.defn.run.crt
 ln -nfs the.key derp.defn.run.key
 
 go/bin/derper --hostname=derp.defn.run --certmode=manual --certdir=/Users/defn/.acme.sh/\*.defn.run -a=:3340 --stun=true --http-port=8080 --verify-clients=false -c=$HOME/etc/derper.conf
+
+easyrsa init-pki
+easyrsa build-ca
+easyrsa build-server-full server
+openssl rsa -in etc/openvpn/pki/private/server.key  -out etc/openvpn/pki/private/server2.key
+openvpn etc/openvpn/server.conf
