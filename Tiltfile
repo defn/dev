@@ -17,8 +17,8 @@ if "-darwin" in os.getenv("system"):
             """
                 eval "$(direnv hook bash)"
                 _direnv_hook
-                sudo pkill openvpn || true
-                sleep 2; sudo pkill -9 openvpn || true
+                sudo -A pkill -f bin/openvp[n] || true
+                sleep 2; sudo -A pkill -9 -f bin/openvp[n] || true
                 exec sudo -A $(which openvpn) etc/openvpn/server.conf
             """
         ]
