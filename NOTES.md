@@ -11,3 +11,12 @@ https://www.vaultproject.io/docs/secrets/pki/quick-start-root-ca
 
     v write -f transit/keys/autounseal-remo
     v policy write autounseal-remo etc/vault-autounseal-remo-policy.hcl
+
+rm -f go/bin/derper
+go install tailscale.com/cmd/derper@latest
+
+cd .acme.sh/dir
+ln -nfs the.crt derp.defn.run.crt
+ln -nfs the.key derp.defn.run.key
+
+go/bin/derper --hostname=derp.defn.run --certmode=manual --certdir=/Users/defn/.acme.sh/\*.defn.run -a=:3340 --stun=true --http-port=8080 --verify-clients=false -c=$HOME/etc/derper.conf

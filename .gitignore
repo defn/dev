@@ -93,6 +93,7 @@ node_modules
 .ts_node_repl_history
 .user-data*
 etc/tailscale_*
+etc/derper.conf
 .caddy.d
 .node_repl_history
 .direnv
