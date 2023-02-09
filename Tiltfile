@@ -244,6 +244,19 @@ if "-darwin" in os.getenv("system"):
         ]
     )
 else:
+    # Starts openvpn on Linux
+    local_resource("openvpn",
+        serve_cmd=[
+            "bash", "-c",
+            """
+                eval "$(direnv hook bash)"
+                _direnv_hook
+                sudo pkill -f bin/openvp[n] || true
+                sleep 2; sudo pkill -9 -f bin/openvp[n] || true
+                exec sudo -A $(which openvpn) etc/openvpn/client.conf
+            """
+        ]
+    )
     # Starts Tailscale on Linux
     local_resource("tailscale",
         serve_cmd=[
