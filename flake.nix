@@ -82,6 +82,8 @@
 
             easyrsa
             openvpn
+            wireguard-tools
+            wireguard-go
 
             docker
             docker-credential-helpers
@@ -267,17 +269,18 @@
         '';
 
         wg-up = ''
-          	pass wg_client | base64 -d | sudo tee /etc/wireguard/wg0.conf > /dev/null
-          	sudo wg-quick up wg0
-          	this-wg-up-inner
+          sudo -A mkdir -p /etc/wireguard
+          pass wg_client | base64 -d | sudo -A tee /etc/wireguard/wg0.conf > /dev/null
+          sudo -A wg-quick up wg0
+          this-wg-up-inner
         '';
 
         wg-up-inner = ''
-          	dig @$(shell sudo cat /etc/wireguard/wg0.conf | grep AllowedIPs | awk '{print $3}' | cut -d/ -f1)3 +noall +answer _apps.internal txt
+          dig @$(sudo -A cat /etc/wireguard/wg0.conf | grep AllowedIPs | awk '{print $3}' | cut -d/ -f1)3 +noall +answer _apps.internal txt
         '';
 
         wg-down = ''
-          	sudo wg-quick down wg0nix-bootstrap:
+          sudo -A wg-quick down wg0nix-bootstrap:
         '';
 
         dev = ''
