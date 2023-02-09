@@ -272,15 +272,11 @@
           sudo -A mkdir -p /etc/wireguard
           pass wg_client | base64 -d | sudo -A tee /etc/wireguard/wg0.conf > /dev/null
           sudo -A wg-quick up wg0
-          this-wg-up-inner
-        '';
-
-        wg-up-inner = ''
-          this-wg-dig _apps.internal txt
+          this-wg-dig +noall +answer txt _apps.internal
         '';
 
         wg-dig = ''
-          dig @$(sudo -A cat /etc/wireguard/wg0.conf | grep AllowedIPs | awk '{print $3}' | cut -d/ -f1)3 +noall +answer "$@"
+          dig @$(sudo -A cat /etc/wireguard/wg0.conf | grep AllowedIPs | awk '{print $3}' | cut -d/ -f1)3 "$@"
         '';
 
         wg-down = ''
