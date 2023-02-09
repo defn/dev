@@ -276,7 +276,11 @@
         '';
 
         wg-up-inner = ''
-          dig @$(sudo -A cat /etc/wireguard/wg0.conf | grep AllowedIPs | awk '{print $3}' | cut -d/ -f1)3 +noall +answer _apps.internal txt
+          this-wg-dig _apps.internal txt
+        '';
+
+        wg-dig = ''
+          dig @$(sudo -A cat /etc/wireguard/wg0.conf | grep AllowedIPs | awk '{print $3}' | cut -d/ -f1)3 +noall +answer "$@"
         '';
 
         wg-down = ''
