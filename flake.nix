@@ -1,7 +1,7 @@
 {
   inputs = {
-    dev.url = github:defn/pkg/dev-0.0.23-rc10?dir=dev;
-    localdev.url = github:defn/pkg/localdev-0.0.15?dir=localdev;
+    dev.url = github:defn/pkg/dev-0.0.23?dir=dev;
+    localdev.url = github:defn/pkg/localdev-0.0.16?dir=localdev;
     vault.url = github:defn/pkg/vault-1.12.2-4?dir=vault;
     kubernetes.url = github:defn/pkg/kubernetes-0.0.5?dir=kubernetes;
     cloud.url = github:defn/pkg/cloud-0.0.1?dir=cloud;
