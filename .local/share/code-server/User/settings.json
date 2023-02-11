@@ -52,5 +52,6 @@
     "terraform.languageServer.ignoreSingleFileWarning": true,
     "terraform.languageServer.enable": false,
     "git.ignoreLimitWarning": true,
-    "diffEditor.ignoreTrimWhitespace": false
+    "diffEditor.ignoreTrimWhitespace": false,
+    "git.openRepositoryInParentFolders": "always"
 }
