@@ -1,16 +1,12 @@
 {
   inputs = {
     dev.url = github:defn/pkg/dev-0.0.23-rc10?dir=dev;
-    localdev.url = github:defn/pkg/localdev-0.0.13?dir=localdev;
+    localdev.url = github:defn/pkg/localdev-0.0.15?dir=localdev;
     az.url = github:defn/pkg/az-0.0.10?dir=az;
-    earthly.url = github:defn/pkg/earthly-0.7.0-rc2-0?dir=earthly;
-    tilt.url = github:defn/pkg/tilt-0.31.2-0?dir=tilt;
-    gh.url = github:defn/pkg/gh-2.23.0-0?dir=gh;
-    webhook.url = github:defn/pkg/webhook-2.8.0?dir=webhook;
     awscli.url = github:defn/pkg/awscli-2.0.30-2?dir=awscli;
     flyctl.url = github:defn/pkg/flyctl-0.0.456-0?dir=flyctl;
-    caddy.url = github:defn/pkg/caddy-2.6.2-5?dir=caddy;
     vault.url = github:defn/pkg/vault-1.12.2-4?dir=vault;
+    k3d.url = github:defn/pkg/k3d-5.4.7-0?dir=k3d;
     kubernetes.url = github:defn/pkg/kubernetes-0.0.4?dir=kubernetes;
   };
 
