@@ -2,12 +2,10 @@
   inputs = {
     dev.url = github:defn/pkg/dev-0.0.23-rc10?dir=dev;
     localdev.url = github:defn/pkg/localdev-0.0.15?dir=localdev;
-    az.url = github:defn/pkg/az-0.0.10?dir=az;
-    awscli.url = github:defn/pkg/awscli-2.0.30-2?dir=awscli;
-    flyctl.url = github:defn/pkg/flyctl-0.0.456-0?dir=flyctl;
     vault.url = github:defn/pkg/vault-1.12.2-4?dir=vault;
-    k3d.url = github:defn/pkg/k3d-5.4.7-0?dir=k3d;
-    kubernetes.url = github:defn/pkg/kubernetes-0.0.4?dir=kubernetes;
+    kubernetes.url = github:defn/pkg/kubernetes-0.0.5?dir=kubernetes;
+    cloud.url = github:defn/pkg/cloud-0.0.1?dir=cloud;
+    az.url = github:defn/pkg/az-0.0.10?dir=az;
   };
 
   outputs = inputs: inputs.dev.main rec {
