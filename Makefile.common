@@ -71,6 +71,9 @@ install-inner:
 	pass hello; echo; echo
 	ssh-add -L; echo; echo
 
+	@mark up
+	this-up
+
 nix:
 	if ! type -P nix; then . ~/.nix-profile/etc/profile.d/nix.sh; fi && ($(MAKE) nix-$(shell uname -s) || true)
 
