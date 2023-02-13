@@ -3,7 +3,7 @@
     dev.url = github:defn/pkg/dev-0.0.23?dir=dev;
     localdev.url = github:defn/pkg/localdev-0.0.16?dir=localdev;
     vault.url = github:defn/pkg/vault-1.12.2-4?dir=vault;
-    kubernetes.url = github:defn/pkg/kubernetes-0.0.5?dir=kubernetes;
+    kubernetes.url = github:defn/pkg/kubernetes-0.0.6?dir=kubernetes;
     cloud.url = github:defn/pkg/cloud-0.0.1?dir=cloud;
     az.url = github:defn/pkg/az-0.0.10?dir=az;
   };

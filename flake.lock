@@ -48,17 +48,17 @@
       },
       "locked": {
         "dir": "argorollouts",
-        "lastModified": 1676088171,
-        "narHash": "sha256-9vFpnRwYYwWfjDjaBnNqfkfo1E5NJJO9xF7xHNz8rk8=",
+        "lastModified": 1676313359,
+        "narHash": "sha256-qrPmEfbjPrjK5ELYAHTwU8KElJg+g67XLyjR6QiCjz8=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "38c2926be8e9eae2ee9e3a18ab62033f8bc19617",
+        "rev": "562723d28f7a4f661835d9cf270bbd7931399d00",
         "type": "github"
       },
       "original": {
         "dir": "argorollouts",
         "owner": "defn",
-        "ref": "argorollouts-1.4.0-2",
+        "ref": "argorollouts-1.4.0-3",
         "repo": "pkg",
         "type": "github"
       }
@@ -3436,17 +3436,17 @@
       },
       "locked": {
         "dir": "kubernetes",
-        "lastModified": 1676136170,
-        "narHash": "sha256-t9P1pQrRtgg62s/+BOoOmqvQFin1HwaKupwD9C6J8Ss=",
+        "lastModified": 1676313503,
+        "narHash": "sha256-VK3k0OulIU/UInWSCC/NHM0EifEvYcUzgiOHdGWc6AQ=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "7f38f722ce9bf554c118d5ca34e8db567997b891",
+        "rev": "b2093f4e2293b34e38b0433d33fbff661104e238",
         "type": "github"
       },
       "original": {
         "dir": "kubernetes",
         "owner": "defn",
-        "ref": "kubernetes-0.0.5",
+        "ref": "kubernetes-0.0.6",
         "repo": "pkg",
         "type": "github"
       }
