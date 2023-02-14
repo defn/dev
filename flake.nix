@@ -180,6 +180,10 @@
           commit="$(git rev-parse HEAD)"
         fi
 
+        touch /tmp/cache-priv-key.pem
+        chmod 600 /tmp/cache-priv-key.pem
+        pass nix-serve-cache-priv-key.pem > /tmp/cache-priv-key.pem
+
         env WH_BRANCH="$branch" WH_LOG_STDOUT=1 bin/gh-webhook push "$repo" "refs/heads/$branch" "$commit"
 
         kill %1 2>/dev/null || true
