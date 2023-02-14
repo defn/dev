@@ -206,17 +206,17 @@
       },
       "locked": {
         "dir": "coder",
-        "lastModified": 1676393603,
-        "narHash": "sha256-EdAIxqCh2rnFLqoh/GDk3+gouj0IPsuMQ8Ac/iTv3eY=",
+        "lastModified": 1676401044,
+        "narHash": "sha256-7JwHQNyYsTlQV+t8fnTGH2JS7jrZhxrVJ96QwoMlLQA=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "372651afb91a10bdc6791610f02a37a29ead0ea2",
+        "rev": "5c73e822c657d254b49b206ef2b5206902a9a892",
         "type": "github"
       },
       "original": {
         "dir": "coder",
         "owner": "defn",
-        "ref": "coder-0.17.2-0",
+        "ref": "coder-0.17.3-0",
         "repo": "pkg",
         "type": "github"
       }
@@ -227,17 +227,17 @@
       },
       "locked": {
         "dir": "codeserver",
-        "lastModified": 1676334927,
-        "narHash": "sha256-rQLJPXkt6afzfZFMyFlOKMgTTf59/t2BoViYHyAqXVs=",
+        "lastModified": 1676401134,
+        "narHash": "sha256-D3TeeLJU4XWgg+OQ+Zj2783Dtj6havBMX389tMhAM5w=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "74667910b34ab983f2b2bedd001930998195e50a",
+        "rev": "197919d1ac5d487a08c70a95b91a07c17c15f119",
         "type": "github"
       },
       "original": {
         "dir": "codeserver",
         "owner": "defn",
-        "ref": "codeserver-4.10.0-rc.1-0",
+        "ref": "codeserver-4.10.0-rc.2-0",
         "repo": "pkg",
         "type": "github"
       }
@@ -3415,17 +3415,17 @@
       },
       "locked": {
         "dir": "localdev",
-        "lastModified": 1676393705,
-        "narHash": "sha256-4UPFShLesMQ1uDWJ3TxbuusIc18rqpTyboLUSirMWfc=",
+        "lastModified": 1676401178,
+        "narHash": "sha256-V7PR+20lEhHRD1bZg4ZfU+9H3Pd0AOMu19XdK24Gds8=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "faa437e29f42c5e14b5dfaa8fa2bb5b4d1d27074",
+        "rev": "c3e157b299915a29776396f0f3ffb7616fe2dec6",
         "type": "github"
       },
       "original": {
         "dir": "localdev",
         "owner": "defn",
-        "ref": "localdev-0.0.19",
+        "ref": "localdev-0.0.20",
         "repo": "pkg",
         "type": "github"
       }
