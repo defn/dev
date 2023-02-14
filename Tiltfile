@@ -271,48 +271,6 @@ else:
         ]
     )
 
-    # Starts gh webhook forward on Linux
-    local_resource("webhook-forward",
-        serve_cmd=[
-            "bash", "-c",
-            """
-                eval "$(direnv hook bash)"
-                _direnv_hook
-                gh extension install cli/gh-webhook || true
-                while true; do
-                    gh webhook forward --repo "$(git remote get-url origin | perl -pe 's{https://github.com/}{}')" --events=push --url=http://localhost:9000/hooks/gh
-                done
-            """
-        ]
-    )
-
-    local_resource("webhook-gh",
-        serve_cmd=[
-            "bash", "-c",
-            """
-                eval "$(direnv hook bash)"
-                _direnv_hook
-
-                export WH_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-                export WH_SECRET="$(pass WH_SECRET)"
-                touch /tmp/cache-priv-key.pem
-                chmod 600 /tmp/cache-priv-key.pem
-                pass nix-serve-cache-priv-key.pem > /tmp/cache-priv-key.pem
-                exec webhook --hooks gh.json --hotreload --template --verbose
-            """
-        ]
-    )
-
-    local_resource("webhook-log",
-        serve_cmd=[
-            "bash", "-c",
-            """
-                touch /tmp/wh.log
-                exec tail -f /tmp/wh.log
-            """
-        ]
-    )
-
     # Starts the docker builder, proxies at localhost:2375.  Configures docker
     # client with creds to publish to fly registry.
     local_resource("proxy-docker",
