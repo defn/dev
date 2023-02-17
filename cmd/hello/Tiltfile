@@ -1,0 +1,5 @@
+# tilt up --legacy --port 0
+local_resource(
+    "build",
+    "time go install && hello",
+    deps=["hello.go", "go.mod", "go.sum"])
