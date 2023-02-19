@@ -2,10 +2,10 @@
   inputs = {
     pkg.url = github:defn/pkg/0.0.165;
     vault.url = github:defn/pkg/vault-1.12.3-2?dir=vault;
-    localdev.url = github:defn/pkg/localdev-0.0.22?dir=localdev;
     kubernetes.url = github:defn/pkg/kubernetes-0.0.7?dir=kubernetes;
     cloud.url = github:defn/pkg/cloud-0.0.2?dir=cloud;
     az.url = github:defn/pkg/az-0.0.12?dir=az;
+    localdev.url = github:defn/pkg/localdev-0.0.22?dir=localdev;
   };
 
   outputs = inputs: inputs.pkg.main rec {
