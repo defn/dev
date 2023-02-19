@@ -1,8 +1,8 @@
 {
   inputs = {
     pkg.url = github:defn/pkg/0.0.165;
-    localdev.url = github:defn/pkg/localdev-0.0.22?dir=localdev;
     vault.url = github:defn/pkg/vault-1.12.3-2?dir=vault;
+    localdev.url = github:defn/pkg/localdev-0.0.22?dir=localdev;
     kubernetes.url = github:defn/pkg/kubernetes-0.0.7?dir=kubernetes;
     cloud.url = github:defn/pkg/cloud-0.0.2?dir=cloud;
     az.url = github:defn/pkg/az-0.0.12?dir=az;
@@ -49,8 +49,8 @@
       propagatedBuildInputs =
         let
           flakeInputs = [
-            inputs.localdev.defaultPackage.${ctx.system}
             inputs.vault.defaultPackage.${ctx.system}
+            inputs.localdev.defaultPackage.${ctx.system}
             inputs.kubernetes.defaultPackage.${ctx.system}
             inputs.cloud.defaultPackage.${ctx.system}
             inputs.az.defaultPackage.${ctx.system}
