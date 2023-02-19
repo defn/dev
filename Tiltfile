@@ -280,7 +280,7 @@ else:
                 eval "$(direnv hook bash)"
                 _direnv_hook
                 flyctl auth docker
-                flyctl deploy --build-only -a wx ~/.dotfiles/flies/wx
+                flyctl deploy --build-only -a wx ~/work/lib/infra/flies/wx
                 flyctl machine start "$(flyctl machine list -a $(flyctl apps list | grep '^fly-builder' | awk '{print $1}') --json | jq -r '.[].id')"
                 exec flyctl proxy 2375:2375 -a "$(flyctl apps list | grep 'fly-builder' | awk '{print $1}' | head -1)"
             """
