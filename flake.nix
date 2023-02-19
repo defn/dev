@@ -1,6 +1,6 @@
 {
   inputs = {
-    dev.url = github:defn/pkg/dev-0.0.23?dir=dev;
+    pkg.url = github:defn/pkg/0.0.165;
     localdev.url = github:defn/pkg/localdev-0.0.22?dir=localdev;
     vault.url = github:defn/pkg/vault-1.12.3-2?dir=vault;
     kubernetes.url = github:defn/pkg/kubernetes-0.0.7?dir=kubernetes;
@@ -8,43 +8,60 @@
     az.url = github:defn/pkg/az-0.0.12?dir=az;
   };
 
-  outputs = inputs: inputs.dev.main rec {
-    inherit inputs;
+  outputs = inputs: inputs.pkg.main rec {
+    src = ./.;
 
-    src = builtins.path { path = ./.; name = builtins.readFile ./SLUG; };
-
-    handler = { pkgs, wrap, system, builders, commands, config }: rec {
-      apps = {
-        coder = {
-          type = "app";
-          program = "${inputs.localdev.inputs.coder.defaultPackage.${system}}/bin/coder";
-        };
-
-        codeserver = {
-          type = "app";
-          program = "${inputs.localdev.inputs.codeserver.defaultPackage.${system}}/bin/code-server";
-        };
-
-        sshd = {
-          type = "app";
-          program = "${pkgs.openssh}/bin/sshd";
-        };
-
-        ssh-keygen = {
-          type = "app";
-          program = "${pkgs.openssh}/bin/ssh-keygen";
-        };
+    apps = ctx: {
+      coder = {
+        type = "app";
+        program = "${inputs.localdev.inputs.coder.defaultPackage.${ctx.system}}/bin/coder";
       };
 
-      devShell = wrap.devShell {
-        devInputs = [ defaultPackage ];
+      codeserver = {
+        type = "app";
+        program = "${inputs.localdev.inputs.codeserver.defaultPackage.${ctx.system}}/bin/code-server";
       };
 
-      defaultPackage = wrap.nullBuilder {
-        propagatedBuildInputs = with pkgs; wrap.flakeInputs ++ commands ++ [
-          builders.yaegi
+      sshd = {
+        type = "app";
+        program = "${ctx.pkgs.openssh}/bin/sshd";
+      };
 
-          packages.pass
+      ssh-keygen = {
+        type = "app";
+        program = "${ctx.pkgs.openssh}/bin/ssh-keygen";
+      };
+    };
+
+    packages = ctx: {
+      pass = ctx.pkgs.writeShellScriptBin "pass" ''
+        { ${ctx.pkgs.pass}/bin/pass "$@" 2>&1 1>&3 3>&- | grep -v 'problem with fast path key listing'; } 3>&1 1>&2 | cat
+      '';
+    };
+
+    devShell = ctx: ctx.wrap.devShell {
+      devInputs = [
+        (defaultPackage ctx)
+      ];
+    };
+
+    defaultPackage = ctx: ctx.wrap.nullBuilder {
+      propagatedBuildInputs =
+        let
+          flakeInputs = [
+            inputs.localdev.defaultPackage.${ctx.system}
+            inputs.vault.defaultPackage.${ctx.system}
+            inputs.kubernetes.defaultPackage.${ctx.system}
+            inputs.cloud.defaultPackage.${ctx.system}
+            inputs.az.defaultPackage.${ctx.system}
+          ];
+
+          p = packages ctx;
+        in
+        flakeInputs
+        ++ ctx.commands
+        ++ (with ctx.pkgs; [
+          p.pass
 
           bashInteractive
           powerline-go
@@ -86,12 +103,7 @@
           direnv
           nix-direnv
           nixpkgs-fmt
-        ];
-      };
-
-      packages.pass = pkgs.writeShellScriptBin "pass" ''
-        { ${pkgs.pass}/bin/pass "$@" 2>&1 1>&3 3>&- | grep -v 'problem with fast path key listing'; } 3>&1 1>&2 | cat
-      '';
+        ]);
     };
 
     scripts = { system }: {
