@@ -1082,17 +1082,17 @@
       },
       "locked": {
         "dir": "earthly",
-        "lastModified": 1676774549,
-        "narHash": "sha256-L6VA75EDVVubHpu7GDCNftyuZyRnHZhXswzlYHcloIw=",
+        "lastModified": 1676866419,
+        "narHash": "sha256-k53U3WzCS8QcQ6cY3h9+QaOkvotlp2Xz7JgNuDcpsz0=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "f6473503e0b809be6448ceddf279b72c7aead841",
+        "rev": "f3bf182ba40aeaecfd8f4ee8586292ece29a9d2b",
         "type": "github"
       },
       "original": {
         "dir": "earthly",
         "owner": "defn",
-        "ref": "earthly-0.7.0-rc3-1",
+        "ref": "earthly-0.7.0-rc3-2",
         "repo": "pkg",
         "type": "github"
       }
@@ -2971,17 +2971,17 @@
       },
       "locked": {
         "dir": "localdev",
-        "lastModified": 1676791370,
-        "narHash": "sha256-vAhkg3F3nrAwXuQC8XvpB7DJKpkektvK4vuL5m3V0Gc=",
+        "lastModified": 1676866466,
+        "narHash": "sha256-ay42yld0LnOoM52i4IO/Zzan2P06Q2nm5Upp3YKJVB4=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "63268ad24a7182156754ef5c2375cbd67ec17bfc",
+        "rev": "b51311b73d952c6b9410935bf9dad7e18f5821b5",
         "type": "github"
       },
       "original": {
         "dir": "localdev",
         "owner": "defn",
-        "ref": "localdev-0.0.23",
+        "ref": "localdev-0.0.24",
         "repo": "pkg",
         "type": "github"
       }
@@ -3902,16 +3902,16 @@
         "dev": "dev_27"
       },
       "locked": {
-        "lastModified": 1676773723,
-        "narHash": "sha256-V+3O1YjyN6K5iG8ik85LxHs6IG69hV73sG+64ZOlmHs=",
+        "lastModified": 1676781024,
+        "narHash": "sha256-SeO4MStl1FzhrvzYuGMiwvbF/Zq2VTbMZGu+2+6L4q0=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "0dece79e91aacb7cfd9802d27162a4c4681fe861",
+        "rev": "8c687db25eb034cc70e17ae9f0095d18306b7fa7",
         "type": "github"
       },
       "original": {
         "owner": "defn",
-        "ref": "0.0.156",
+        "ref": "0.0.159",
         "repo": "pkg",
         "type": "github"
       }

@@ -5,7 +5,7 @@
     kubernetes.url = github:defn/pkg/kubernetes-0.0.8?dir=kubernetes;
     cloud.url = github:defn/pkg/cloud-0.0.3?dir=cloud;
     az.url = github:defn/pkg/az-0.0.12?dir=az;
-    localdev.url = github:defn/pkg/localdev-0.0.23?dir=localdev;
+    localdev.url = github:defn/pkg/localdev-0.0.24?dir=localdev;
   };
 
   outputs = inputs: inputs.pkg.main rec {
