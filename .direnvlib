@@ -1,0 +1,3 @@
+function layout_meh {
+    export MEH=feh
+}
