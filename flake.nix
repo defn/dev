@@ -7,6 +7,7 @@
     az.url = github:defn/pkg/az-0.0.16?dir=az;
     localdev.url = github:defn/pkg/localdev-0.0.26?dir=localdev;
     tailscale.url = github:defn/pkg/tailscale-1.36.1-1?dir=tailscale;
+    terraform.url = github:defn/pkg/terraform-1.4.0-beta2-1?dir=terraform;
   };
 
   outputs = inputs: inputs.pkg.main rec {
@@ -20,7 +21,7 @@
 
       codeserver = {
         type = "app";
-        program = "${inputs.localdev.inputs.codeserver.defaultPackage.${ctx.system}}/bin/code-server";
+        program = "${(packages ctx).codeserver}/bin/code-server";
       };
 
       sshd = {
@@ -48,6 +49,26 @@
       pass = ctx.pkgs.writeShellScriptBin "pass" ''
         { ${ctx.pkgs.pass}/bin/pass "$@" 2>&1 1>&3 3>&- | grep -v 'problem with fast path key listing'; } 3>&1 1>&2 | cat
       '';
+
+      codeserver = ctx: ctx.wrap.bashBuilder {
+        inherit src;
+
+        propagatedBuildInputs = [
+          inputs.godev.defaultPackage.${ctx.system}
+          inputs.nodedev.defaultPackage.${ctx.system}
+          inputs.terraform.defaultPackage.${ctx.system}
+          inputs.localdev.inputs.codeserver.defaultPackage.${ctx.system}
+        ];
+
+        installPhase = ''
+          mkdir -p $out/bin
+          (
+            echo "#!/usr/bin/bash"
+            echo ${inputs.localdev.inputs.codeserver.defaultPackage.${ctx.system}} "$@"
+          ) > $out/bin/code-server
+          chmod 755 $out/bin/code-server
+        '';
+      };
     };
 
     devShell = ctx: ctx.wrap.devShell {

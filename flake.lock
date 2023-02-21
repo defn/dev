@@ -1004,6 +1004,30 @@
         "type": "github"
       }
     },
+    "dev_37": {
+      "inputs": {
+        "flake-utils": "flake-utils_37",
+        "gomod2nix": "gomod2nix_37",
+        "nixpkgs": "nixpkgs_37",
+        "wrapper": "wrapper_37"
+      },
+      "locked": {
+        "dir": "dev",
+        "lastModified": 1676749253,
+        "narHash": "sha256-GmewHzmkLWeyKV+97DX14K2WwSkwd5ZC94kwtvLfBW0=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "10165068e082bac7963632f6d27f60c477b73eda",
+        "type": "github"
+      },
+      "original": {
+        "dir": "dev",
+        "owner": "defn",
+        "ref": "dev-0.0.29",
+        "repo": "pkg",
+        "type": "github"
+      }
+    },
     "dev_4": {
       "inputs": {
         "flake-utils": "flake-utils_4",
@@ -1655,6 +1679,22 @@
       }
     },
     "flake-utils_36": {
+      "locked": {
+        "lastModified": 1652776076,
+        "narHash": "sha256-gzTw/v1vj4dOVbpBSJX4J0DwUR6LIyXo7/SuuTJp1kM=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "04c1b180862888302ddfb2e3ad9eaa63afc60cf8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "04c1b180862888302ddfb2e3ad9eaa63afc60cf8",
+        "type": "github"
+      }
+    },
+    "flake-utils_37": {
       "locked": {
         "lastModified": 1652776076,
         "narHash": "sha256-gzTw/v1vj4dOVbpBSJX4J0DwUR6LIyXo7/SuuTJp1kM=",
@@ -2751,6 +2791,36 @@
     "gomod2nix_36": {
       "inputs": {
         "nixpkgs": [
+          "terraform",
+          "pkg",
+          "dev",
+          "nixpkgs"
+        ],
+        "utils": [
+          "terraform",
+          "pkg",
+          "dev",
+          "flake-utils"
+        ]
+      },
+      "locked": {
+        "lastModified": 1671408935,
+        "narHash": "sha256-bOf1aatxSy9g7PQKvT1cZ9rJ4AjAD5aYjUS9OMFfwqI=",
+        "owner": "defn",
+        "repo": "gomod2nix",
+        "rev": "8e5aeada820beff0c392c31ecdb9bef0f0dc97b8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "defn",
+        "ref": "1.5.0-4",
+        "repo": "gomod2nix",
+        "type": "github"
+      }
+    },
+    "gomod2nix_37": {
+      "inputs": {
+        "nixpkgs": [
           "vault",
           "pkg",
           "dev",
@@ -3742,6 +3812,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_37": {
+      "locked": {
+        "lastModified": 1669833724,
+        "narHash": "sha256-/HEZNyGbnQecrgJnfE8d0WC5c1xuPSD2LUpB6YXlg4c=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4d2b37a84fad1091b9de401eb450aae66f1a741e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4d2b37a84fad1091b9de401eb450aae66f1a741e",
+        "type": "github"
+      }
+    },
     "nixpkgs_4": {
       "locked": {
         "lastModified": 1669833724,
@@ -4429,6 +4515,25 @@
         "type": "github"
       }
     },
+    "pkg_37": {
+      "inputs": {
+        "dev": "dev_37"
+      },
+      "locked": {
+        "lastModified": 1676773723,
+        "narHash": "sha256-V+3O1YjyN6K5iG8ik85LxHs6IG69hV73sG+64ZOlmHs=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "0dece79e91aacb7cfd9802d27162a4c4681fe861",
+        "type": "github"
+      },
+      "original": {
+        "owner": "defn",
+        "ref": "0.0.156",
+        "repo": "pkg",
+        "type": "github"
+      }
+    },
     "pkg_4": {
       "inputs": {
         "dev": "dev_4"
@@ -4551,6 +4656,7 @@
         "localdev": "localdev",
         "pkg": "pkg_34",
         "tailscale": "tailscale",
+        "terraform": "terraform_2",
         "vault": "vault"
       }
     },
@@ -4578,6 +4684,27 @@
     "terraform": {
       "inputs": {
         "pkg": "pkg_32"
+      },
+      "locked": {
+        "dir": "terraform",
+        "lastModified": 1676774308,
+        "narHash": "sha256-ZTAXzxc993Kqbjqm3mC86tr/sKeIEJuXo+b3dL3YwiY=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "e092973abd1b9d3d95de9350b4960c2ccd8bdd33",
+        "type": "github"
+      },
+      "original": {
+        "dir": "terraform",
+        "owner": "defn",
+        "ref": "terraform-1.4.0-beta2-1",
+        "repo": "pkg",
+        "type": "github"
+      }
+    },
+    "terraform_2": {
+      "inputs": {
+        "pkg": "pkg_36"
       },
       "locked": {
         "dir": "terraform",
@@ -4640,7 +4767,7 @@
     },
     "vault": {
       "inputs": {
-        "pkg": "pkg_36"
+        "pkg": "pkg_37"
       },
       "locked": {
         "dir": "vault",
@@ -5438,6 +5565,32 @@
       }
     },
     "wrapper_36": {
+      "inputs": {
+        "nixpkgs": [
+          "terraform",
+          "pkg",
+          "dev",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "wrapper",
+        "lastModified": 1676747824,
+        "narHash": "sha256-e6msdDWO7MZieptdph/A2t8c8IYYGySBu2KHu05wfFs=",
+        "owner": "defn",
+        "repo": "pkg",
+        "rev": "2e9a7e64d488096c2b724465814b85040b34a165",
+        "type": "github"
+      },
+      "original": {
+        "dir": "wrapper",
+        "owner": "defn",
+        "ref": "wrapper-0.0.19",
+        "repo": "pkg",
+        "type": "github"
+      }
+    },
+    "wrapper_37": {
       "inputs": {
         "nixpkgs": [
           "vault",
