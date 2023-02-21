@@ -27,3 +27,4 @@ easyrsa build-server-full server
 openssl rsa -in etc/openvpn/pki/private/server.key  -out etc/openvpn/pki/private/server2.key
 openvpn etc/openvpn/server.conf
 
+
