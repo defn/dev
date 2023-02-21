@@ -8,6 +8,8 @@
     localdev.url = github:defn/pkg/localdev-0.0.26?dir=localdev;
     tailscale.url = github:defn/pkg/tailscale-1.36.1-1?dir=tailscale;
     terraform.url = github:defn/pkg/terraform-1.4.0-beta2-1?dir=terraform;
+    godev.url = github:defn/pkg/godev-0.0.1?dir=godev;
+    nodedev.url = github:defn/pkg/nodedev-0.0.1?dir=nodedev;
   };
 
   outputs = inputs: inputs.pkg.main rec {
@@ -50,7 +52,7 @@
         { ${ctx.pkgs.pass}/bin/pass "$@" 2>&1 1>&3 3>&- | grep -v 'problem with fast path key listing'; } 3>&1 1>&2 | cat
       '';
 
-      codeserver = ctx: ctx.wrap.bashBuilder {
+      codeserver = ctx.wrap.bashBuilder {
         inherit src;
 
         propagatedBuildInputs = [
@@ -78,6 +80,9 @@
     };
 
     defaultPackage = ctx: ctx.wrap.nullBuilder {
+      buildInputs = [
+        (packages ctx).codeserver
+      ];
       propagatedBuildInputs =
         let
           flakeInputs = [
