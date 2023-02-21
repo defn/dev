@@ -6,7 +6,7 @@ docker run --privileged --rm tonistiigi/binfmt --install arm64
 
 mkdir -p /tmp/etc/ssh
 nix run .#ssh-keygen -- -A -f /tmp
-nix run .#sshd -- -f ~/etc/sshd_config -o ListenAddress=0.0.0.0
+nix run .#sshd -- -f ~/etc/sshd_config -o ListenAddress=$(tailscale ip -4)
 
 gpg --armor --export | ssh "$ssh_host" gpg --import
 gpg --export-ownertrust | ssh "$ssh_host" gpg --import-ownertrust
