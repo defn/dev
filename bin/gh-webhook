@@ -34,7 +34,6 @@ function main {
             (
                 cd $a
                 nix build
-                n cache
             )
         done
     )
