@@ -4,7 +4,25 @@ https://www.vaultproject.io/docs/secrets/pki/quick-start-root-ca
 ```
 docker run --privileged --rm tonistiigi/binfmt --install arm64
 ln -nfs ~/.gnupg/S.gpg-agent* /run/user/1000/gnupg/
-```
+
+mkdir -p /tmp/etc/ssh
+
+nix run .#ssh-keygen -- -A -f /tmp
+nix run .#sshd -- -f ~/etc/sshd_config -o ListenAddress=0.0.0.0
+
+ssh -v \
+-o Port=2222 \
+-o StrictHostKeyChecking=no \
+-o UserKnownHostsFile=/dev/null \
+-o ServerAliveInterval=1 \
+-o ServerAliveCountMax=10 \
+-o ConnectTimeout=1 \
+-o ConnectionAttempts=5 \
+-o PasswordAuthentication=no \
+-o StreamLocalBindUnlink=yes \
+-o RemoteForward="/home/ubuntu/.gnupg/S.gpg-agent $HOME/.gnupg/S.gpg-agent.extra" \
+-o RemoteForward="/home/ubuntu/.gnupg/S.gpg-agent.extra $HOME/.gnupg/S.gpg-agent.extra" \
+-A ubuntu@fly-defn bash -c '"ln -nfs $SSH_AUTH_SOCK $HOME/.ssh/S.ssh-agent; ssh-add -L; echo connected; exec sleep infinity"'
 
 ```
 vault secrets enable pki
