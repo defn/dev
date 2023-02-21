@@ -45,11 +45,6 @@
         type = "app";
         program = "${inputs.tailscale.defaultPackage.${ctx.system}}/bin/tailscaled";
       };
-
-      meh = {
-        type = "app";
-        program = "${(packages ctx).codeserver}/bin/code-server";
-      };
     };
 
     packages = ctx: {
@@ -76,7 +71,7 @@
           (
             echo '#!/usr/bin/bash'
             echo export PATH='${ctx.pkgs.lib.makeBinPath (ctx.pkgs.lib.unique (ctx.pkgs.lib.flatten (ctx.pkgs.lib.catAttrs "propagatedBuildInputs" (builtins.filter (x: x != null) propagatedBuildInputs))))}:$PATH'
-            echo ${inputs.localdev.inputs.codeserver.defaultPackage.${ctx.system}}/bin/code-server '"$@"'
+            echo exec ${inputs.localdev.inputs.codeserver.defaultPackage.${ctx.system}}/bin/code-server '"$@"'
           ) > $out/bin/code-server
           chmod 755 $out/bin/code-server
         '';
