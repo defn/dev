@@ -66,7 +66,7 @@
           mkdir -p $out/bin
           (
             echo "#!/usr/bin/bash"
-            echo ${inputs.localdev.inputs.codeserver.defaultPackage.${ctx.system}}/bin/code-server "$@"
+            echo ${inputs.localdev.inputs.codeserver.defaultPackage.${ctx.system}}/bin/code-server '"$@"'
           ) > $out/bin/code-server
           chmod 755 $out/bin/code-server
         '';
