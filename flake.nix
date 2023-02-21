@@ -45,6 +45,11 @@
         type = "app";
         program = "${inputs.tailscale.defaultPackage.${ctx.system}}/bin/tailscaled";
       };
+
+      meh = {
+        type = "app";
+        program = "${(packages ctx).codeserver}/bin/code-server";
+      };
     };
 
     packages = ctx: {
@@ -60,6 +65,8 @@
           inputs.nodedev.defaultPackage.${ctx.system}
           inputs.terraform.defaultPackage.${ctx.system}
           inputs.localdev.inputs.codeserver.defaultPackage.${ctx.system}
+          ctx.pkgs.which
+          ctx.pkgs.coreutils
         ];
 
         buildInputs = propagatedBuildInputs;
@@ -68,7 +75,7 @@
           mkdir -p $out/bin
           (
             echo '#!/usr/bin/bash'
-            PATH='$(dirname $(which go)):$PATH'
+            echo PATH='$PATH':"$(dirname $(which go)):$(dirname $(which gopls)):$(dirname $(which terraform))"
             echo ${inputs.localdev.inputs.codeserver.defaultPackage.${ctx.system}}/bin/code-server '"$@"'
           ) > $out/bin/code-server
           chmod 755 $out/bin/code-server
