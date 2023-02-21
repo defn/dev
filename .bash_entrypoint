@@ -7,13 +7,3 @@ fi
 cd >/dev/null
 if test -f .bash_profile; then source .bash_profile; fi
 cd - >/dev/null
-
-if [[ -n "${WORKDIR}" ]]; then
-    if [[ "${WORKDIR}" != "${PWD}" ]]; then
-        cd "$WORKDIR" >/dev/null
-        if test -f .bash_profile; then source .bash_profile; fi
-        cd - >/dev/null
-    fi
-fi
-
-if test -f .bash_profile; then source .bash_profile; fi
