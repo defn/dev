@@ -206,7 +206,11 @@ function pca {
 }
 
 function w {
-	cd $WORKDIR
+	if [[ -n "${1:-}" ]]; then
+		de "$1"
+	else
+		cd $WORKDIR
+	fi
 }
 
 # dotfiles
