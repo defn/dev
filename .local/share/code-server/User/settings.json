@@ -53,5 +53,6 @@
     "terraform.languageServer.enable": false,
     "git.ignoreLimitWarning": true,
     "diffEditor.ignoreTrimWhitespace": false,
-    "git.openRepositoryInParentFolders": "always"
+    "git.openRepositoryInParentFolders": "always",
+    "go.terminal.activateEnvironment": false
 }
