@@ -28,3 +28,4 @@ openssl rsa -in etc/openvpn/pki/private/server.key  -out etc/openvpn/pki/private
 openvpn etc/openvpn/server.conf
 
 
+
