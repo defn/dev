@@ -52,7 +52,7 @@
         { ${ctx.pkgs.pass}/bin/pass "$@" 2>&1 1>&3 3>&- | grep -v 'problem with fast path key listing'; } 3>&1 1>&2 | cat
       '';
 
-      codeserver = ctx.wrap.bashBuilder {
+      codeserver = ctx.wrap.bashBuilder rec {
         inherit src;
 
         propagatedBuildInputs = [
@@ -61,6 +61,8 @@
           inputs.terraform.defaultPackage.${ctx.system}
           inputs.localdev.inputs.codeserver.defaultPackage.${ctx.system}
         ];
+
+        buildInputs = propagatedBuildInputs;
 
         installPhase = ''
           mkdir -p $out/bin
