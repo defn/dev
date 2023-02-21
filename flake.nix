@@ -6,6 +6,7 @@
     cloud.url = github:defn/pkg/cloud-0.0.3?dir=cloud;
     az.url = github:defn/pkg/az-0.0.16?dir=az;
     localdev.url = github:defn/pkg/localdev-0.0.24?dir=localdev;
+    tailscale.url = github:defn/pkg/tailscale-1.36.1-1?dir=tailscale;
   };
 
   outputs = inputs: inputs.pkg.main rec {
@@ -30,6 +31,16 @@
       ssh-keygen = {
         type = "app";
         program = "${ctx.pkgs.openssh}/bin/ssh-keygen";
+      };
+
+      tailscale = {
+        type = "app";
+        program = "${inputs.tailscale.defaultPackage.${ctx.system}}/bin/tailscale";
+      };
+
+      tailscaled = {
+        type = "app";
+        program = "${inputs.tailscale.defaultPackage.${ctx.system}}/bin/tailscaled";
       };
     };
 
@@ -260,6 +271,7 @@
       '';
 
       nix-gc = ''
+        nix profile wipe-history 
         nix-store --gc
       '';
 
