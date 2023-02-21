@@ -67,7 +67,8 @@
         installPhase = ''
           mkdir -p $out/bin
           (
-            echo "#!/usr/bin/bash"
+            echo '#!/usr/bin/bash'
+            PATH='$(dirname $(which go)):$PATH'
             echo ${inputs.localdev.inputs.codeserver.defaultPackage.${ctx.system}}/bin/code-server '"$@"'
           ) > $out/bin/code-server
           chmod 755 $out/bin/code-server
