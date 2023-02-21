@@ -3,14 +3,16 @@ https://www.vaultproject.io/docs/secrets/pki/quick-start-root-ca
 # fly
 ```
 docker run --privileged --rm tonistiigi/binfmt --install arm64
-ln -nfs ln -nfs /home/ubuntu/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra /run/user/1000/gnupg/ /run/user/1000/gnupg/
 
 mkdir -p /tmp/etc/ssh
 nix run .#ssh-keygen -- -A -f /tmp
 nix run .#sshd -- -f ~/etc/sshd_config -o ListenAddress=0.0.0.0
 
-ssh -v \
--o Port=2222 \
+gpg --armor --export | ssh "$ssh_host" gpg --import
+gpg --export-ownertrust | ssh "$ssh_host" gpg --import-ownertrust
+ln -nfs ln -nfs /home/ubuntu/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra /run/user/1000/gnupg/ /run/user/1000/gnupg/
+
+nix run .#ssh -- \
 -o StrictHostKeyChecking=no \
 -o UserKnownHostsFile=/dev/null \
 -o ServerAliveInterval=1 \
@@ -21,7 +23,7 @@ ssh -v \
 -o StreamLocalBindUnlink=yes \
 -o RemoteForward="/home/ubuntu/.gnupg/S.gpg-agent $HOME/.gnupg/S.gpg-agent.extra" \
 -o RemoteForward="/home/ubuntu/.gnupg/S.gpg-agent.extra $HOME/.gnupg/S.gpg-agent.extra" \
--A ubuntu@fly-defn bash -c '"ln -nfs $SSH_AUTH_SOCK $HOME/.ssh/S.ssh-agent; ssh-add -L; echo connected; exec sleep infinity"'
+-v -p 2222 -A ubuntu@$ssh_host bash -c '"ln -nfs $SSH_AUTH_SOCK $HOME/.ssh/S.ssh-agent; ssh-add -L; echo connected; exec sleep infinity"'
 
 ```
 
