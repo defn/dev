@@ -3,10 +3,9 @@ https://www.vaultproject.io/docs/secrets/pki/quick-start-root-ca
 # fly
 ```
 docker run --privileged --rm tonistiigi/binfmt --install arm64
-ln -nfs ~/.gnupg/S.gpg-agent* /run/user/1000/gnupg/
+ln -nfs ln -nfs /home/ubuntu/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra /run/user/1000/gnupg/ /run/user/1000/gnupg/
 
 mkdir -p /tmp/etc/ssh
-
 nix run .#ssh-keygen -- -A -f /tmp
 nix run .#sshd -- -f ~/etc/sshd_config -o ListenAddress=0.0.0.0
 
