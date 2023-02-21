@@ -205,6 +205,10 @@ function pca {
 	pc run --all "$@"
 }
 
+function w {
+	cd $WORKDIR
+}
+
 # dotfiles
 if [[ -f ~/.dotfiles/dot/bashrc ]]; then source ~/.dotfiles/dot/bashrc; fi
 
