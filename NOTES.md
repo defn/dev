@@ -24,6 +24,8 @@ ssh -v \
 -A ubuntu@fly-defn bash -c '"ln -nfs $SSH_AUTH_SOCK $HOME/.ssh/S.ssh-agent; ssh-add -L; echo connected; exec sleep infinity"'
 
 ```
+
+```
 vault secrets enable pki
 vault secrets tune -max-lease-ttl=87600h pki
 vault delete pki/root; vault write pki/root/generate/internal common_name=gyre.defn.dev ttl=87600h -format=json | jq -r '.data.certificate' > root.crt
