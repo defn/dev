@@ -205,16 +205,20 @@ function pca {
 	pc run --all "$@"
 }
 
+function find-flakes {
+	find ~/work/ -type d \( -name go-mod -o -name go-build -o -name node_modules \) -prune -o -name 'flake.nix' -print | perl -pe 's#.*?/work/##; s#/flake.nix$##' | sort | fzf --query="${1}" --select-1
+}
+
 function w {
 	if [[ -n "${1:-}" ]]; then
-		cd "$HOME/work/$(find "$HOME/work/" -name 'flake.nix' | perl -pe 's#.*?/work/##; s#/flake.nix$##' | sort | fzf --query="${1}" --select-1)"
+		cd "$HOME/work/$(find-flakes)"
 	else
 		cd $WORKDIR
 	fi
 }
 
 function ww {
-	de "$HOME/work/$(find "$HOME/work/" -name 'flake.nix' | perl -pe 's#.*?/work/##; s#/flake.nix$##' | sort | fzf --query="${1:-}" --select-1)"
+	de "$HOME/work/$(find-flakes)"
 }
 
 # dotfiles
