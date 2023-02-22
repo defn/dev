@@ -349,7 +349,6 @@
         if [[ -z "$(pass hello)" ]]; then gpg-agent --daemon --pinentry-program $(which pinentry-mac) || true; dirmngr --daemon || true; fi
         pass hello
         screen -S tilt -d -m bash -il -c "~/bin/withde ~ $(which tilt) up" || true
-        open 'http://localhost:10350/r/(all)/overview'
       '';
     };
   };
