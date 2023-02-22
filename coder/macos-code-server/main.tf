@@ -25,24 +25,24 @@ resource "coder_agent" "macos" {
   startup_script = "exec /usr/local/bin/code-server --auth none"
 }
 
-resource "coder_app" "code-server" {
-  agent_id = coder_agent.macos.id
-
-  url  = "http://localhost:8080/"
-  icon = "/icon/code.svg"
-
-  slug         = "dev"
-  display_name = "code-server"
-
-  subdomain = true
-  share     = "owner"
-
-  healthcheck {
-    url       = "http://localhost:8080/healthz"
-    interval  = 3
-    threshold = 10
-  }
-}
+#resource "coder_app" "code-server" {
+#  agent_id = coder_agent.macos.id
+#
+#  url  = "http://localhost:8080/"
+#  icon = "/icon/code.svg"
+#
+#  slug         = "dev"
+#  display_name = "code-server"
+#
+#  subdomain = true
+#  share     = "owner"
+#
+#  healthcheck {
+#    url       = "http://localhost:8080/healthz"
+#    interval  = 3
+#    threshold = 10
+#  }
+#}
 
 resource "coder_app" "tilt" {
   agent_id = coder_agent.macos.id
