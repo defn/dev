@@ -173,10 +173,6 @@ if [[ -n "${VSCODE_GIT_ASKPASS_MAIN:-}" ]]; then
 fi
 
 # aliases
-function gs {
-	git status -sb "$@"
-}
-
 function vi {
 	if [[ -n "${VSCODE_GIT_ASKPASS_MAIN:-}" ]]; then
 		if [[ ! -f "${1:-}" ]]; then
@@ -197,6 +193,10 @@ function vi {
 	fi
 }
 
+function gs {
+	git status -sb "$@"
+}
+
 function pc {
 	pre-commit "$@"
 }
@@ -207,10 +207,14 @@ function pca {
 
 function w {
 	if [[ -n "${1:-}" ]]; then
-		de "$1"
+		cd "$HOME/work/$(find "$HOME/work/" -name 'flake.nix' | perl -pe 's#.*?/work/##; s#/flake.nix$##' | sort | fzf --query="${1}" --select-1)"
 	else
 		cd $WORKDIR
 	fi
+}
+
+function ww {
+	de "$HOME/work/$(find "$HOME/work/" -name 'flake.nix' | perl -pe 's#.*?/work/##; s#/flake.nix$##' | sort | fzf --query="${1:-}" --select-1)"
 }
 
 # dotfiles
