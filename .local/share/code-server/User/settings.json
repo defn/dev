@@ -57,5 +57,5 @@
     "git.ignoreLimitWarning": true,
     "diffEditor.ignoreTrimWhitespace": false,
     "git.openRepositoryInParentFolders": "always",
-    "go.terminal.activateEnvironment": false
+    "go.terminal.activateEnvironment": false,"remote.SSH.remotePlatform": {"coder-vscode--amanibhavam--immanent":"darwin"}
 }
