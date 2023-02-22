@@ -5,7 +5,7 @@
     kubernetes.url = github:defn/pkg/kubernetes-0.0.8?dir=kubernetes;
     cloud.url = github:defn/pkg/cloud-0.0.4?dir=cloud;
     az.url = github:defn/pkg/az-0.0.16?dir=az;
-    localdev.url = github:defn/pkg/localdev-0.0.26?dir=localdev;
+    localdev.url = github:defn/pkg/localdev-0.0.27?dir=localdev;
     tailscale.url = github:defn/pkg/tailscale-1.36.1-1?dir=tailscale;
     terraform.url = github:defn/pkg/terraform-1.4.0-beta2-1?dir=terraform;
     godev.url = github:defn/pkg/godev-0.0.1?dir=godev;
