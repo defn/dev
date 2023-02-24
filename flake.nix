@@ -113,6 +113,7 @@
           rsync
           gnumake
           git
+          git-lfs
           xz
           unzip
           dnsutils
