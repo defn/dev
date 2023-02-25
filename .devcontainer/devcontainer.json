@@ -14,6 +14,7 @@
 	],
 	"runArgs": [
 		"--privileged",
+		"--device=/dev/net/tun",
 		"--env-file",
 		"${localWorkspaceFolder}/.dotfiles/.env"
 	]
