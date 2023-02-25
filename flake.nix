@@ -259,7 +259,7 @@
       '';
 
       login = ''
-        if [[ ! "false" == "$(vault status | grep Sealed | awk '{print $NF}')" ]]; then mark vault; (cd w/vault; eval "$(direnv hook bash)"; _direnv_hook; this-vault-unseal); fi
+        if [[ ! "false" == "$(vault status | grep Sealed | awk '{print $NF}')" ]]; then mark vault; (cd w/vault; direnv allow; eval "$(direnv hook bash)"; _direnv_hook; this-vault-unseal); fi
         if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then mark kubernetes; this-kubeconfig; this-argocd-login || true; fi
         this-github-login
         this-vault-login
