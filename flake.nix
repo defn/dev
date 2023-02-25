@@ -4,7 +4,10 @@
     vault.url = github:defn/pkg/vault-1.12.3-2?dir=vault;
     kubernetes.url = github:defn/pkg/kubernetes-0.0.8?dir=kubernetes;
     cloud.url = github:defn/pkg/cloud-0.0.5?dir=cloud;
-    az.url = github:defn/pkg/az-0.0.19?dir=az;
+    az.url = github:defn/pkg/az-0.0.20?dir=az;
+    oci.url = github:defn/pkg/oci-0.0.1?dir=oci;
+    nix.url = github:defn/pkg/nix-0.0.1?dir=nix;
+    vpn.url = github:defn/pkg/vpn-0.0.1?dir=vpn;
     localdev.url = github:defn/pkg/localdev-0.0.27?dir=localdev;
     tailscale.url = github:defn/pkg/tailscale-1.36.1-1?dir=tailscale;
     godev.url = github:defn/pkg/godev-0.0.1?dir=godev;
@@ -94,6 +97,9 @@
             inputs.kubernetes.defaultPackage.${ctx.system}
             inputs.cloud.defaultPackage.${ctx.system}
             inputs.az.defaultPackage.${ctx.system}
+            inputs.nix.defaultPackage.${ctx.system}
+            inputs.vpn.defaultPackage.${ctx.system}
+            inputs.oci.defaultPackage.${ctx.system}
           ];
 
           p = packages ctx;
@@ -106,44 +112,26 @@
           bashInteractive
           powerline-go
           vim
+          less
+          groff
           gnupg
           pinentry
+          aws-vault
           rsync
           gnumake
           git
           git-lfs
+          pre-commit
           xz
           unzip
           dnsutils
           nettools
           openssh
           htop
-          pre-commit
-          aws-vault
-          jq
-          yq
-          gron
-          fzf
-          groff
           wget
           curl
           procps
-          less
-          s6
           screen
-
-          easyrsa
-          openvpn
-          wireguard-tools
-          wireguard-go
-
-          docker
-          docker-credential-helpers
-          skopeo
-
-          direnv
-          nix-direnv
-          nixpkgs-fmt
         ]);
     };
 
