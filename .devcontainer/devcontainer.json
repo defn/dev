@@ -7,9 +7,13 @@
 			]
 		}
 	},
-  "mounts": [
-    "source=work,target=/workspaces",
-    "source=nix,target=/nix",
-    "source=nix-cache,target=/cache"
-  ]
+	"mounts": [
+		"source=work,target=/workspaces",
+		"source=nix,target=/nix",
+		"source=nix-cache,target=/cache"
+	],
+	"runArgs": [
+		"--env-file",
+		"${localWorkspaceFolder}/.dotfiles/.env"
+	]
 }
