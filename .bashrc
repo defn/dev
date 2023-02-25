@@ -190,14 +190,11 @@ function vi {
 			return 1
 		fi
 
-		case "${VSCODE_GIT_ASKPASS_MAIN}" in
-			*/code-server*)
-				command code-server "$@"
-				;;
-			*)
-				command code "$@"
-				;;
-		esac
+		if type -P code >/dev/null; then
+			command code "$@"
+		else
+			command code-server "$@"
+		fi
 	else
 		command vi "$@"
 	fi
