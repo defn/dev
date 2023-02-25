@@ -171,3 +171,4 @@ package-lock.json
 .bundle
 etc/derp.json
 go
+.dotnet
