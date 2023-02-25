@@ -81,7 +81,7 @@ root:
     RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm \
         && apt-get update && apt-get upgrade -y \
         && apt-get install -y --no-install-recommends tzdata locales ca-certificates wget curl xz-utils rsync make git direnv \
-            sudo tini procps iptables net-tools iputils-ping iproute2 dnsutils \
+            sudo tini procps iptables net-tools iputils-ping iproute2 dnsutils gnupg \
         && apt-get clean && apt purge -y nano \
         && rm -f /usr/bin/gs
 
