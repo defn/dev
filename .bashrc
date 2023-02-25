@@ -1,3 +1,9 @@
+# vscode terminal init
+if [[ -z "${WORKDIR:-}" ]]; then
+	source ~/.bash_entrypoint
+	return
+fi
+
 # tmp
 export TMPDIR="${TMPDIR:-/tmp}"
 export TEMPDIR="${TEMPDIR:-/tmp}"
