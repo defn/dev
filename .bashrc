@@ -1,3 +1,7 @@
+if [[ -n "${VSCODE_RESOLVING_ENVIRONMENT:-}" ]]; then
+	return
+fi
+
 # vscode terminal init
 if [[ -z "${WORKDIR:-}" ]]; then
 	source ~/.bash_entrypoint
@@ -231,6 +235,3 @@ function ww {
 if [[ -f ~/.dotfiles/dot/bashrc ]]; then source ~/.dotfiles/dot/bashrc; fi
 
 unset DIRENV_DIFF DIRENV_WATCHES
-
-
-env >> /tmp/bleh.log
