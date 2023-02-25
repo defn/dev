@@ -13,6 +13,7 @@
 		"source=nix-cache,target=/cache"
 	],
 	"runArgs": [
+		"--privileged",
 		"--env-file",
 		"${localWorkspaceFolder}/.dotfiles/.env"
 	]
