@@ -7,7 +7,6 @@
     az.url = github:defn/pkg/az-0.0.19?dir=az;
     localdev.url = github:defn/pkg/localdev-0.0.27?dir=localdev;
     tailscale.url = github:defn/pkg/tailscale-1.36.1-1?dir=tailscale;
-    terraform.url = github:defn/pkg/terraform-1.4.0-rc1-0?dir=terraform;
     godev.url = github:defn/pkg/godev-0.0.1?dir=godev;
     nodedev.url = github:defn/pkg/nodedev-0.0.1?dir=nodedev;
   };
@@ -58,7 +57,6 @@
         propagatedBuildInputs = [
           inputs.godev.defaultPackage.${ctx.system}
           inputs.nodedev.defaultPackage.${ctx.system}
-          inputs.terraform.defaultPackage.${ctx.system}
           inputs.localdev.inputs.codeserver.defaultPackage.${ctx.system}
           ctx.pkgs.which
           ctx.pkgs.coreutils
