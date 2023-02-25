@@ -59,8 +59,5 @@
     "git.openRepositoryInParentFolders": "always",
     "dev.containers.copyGitConfig": true,
     "dev.containers.gitCredentialHelperConfigLocation": "none",
-    "go.terminal.activateEnvironment": false,
-    "remote.SSH.remotePlatform": {
-        "coder-vscode--amanibhavam--immanent": "darwin"
-    }
+    "go.terminal.activateEnvironment": false
 }
