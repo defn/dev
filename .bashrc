@@ -231,3 +231,6 @@ function ww {
 if [[ -f ~/.dotfiles/dot/bashrc ]]; then source ~/.dotfiles/dot/bashrc; fi
 
 unset DIRENV_DIFF DIRENV_WATCHES
+
+
+env >> /tmp/bleh.log
