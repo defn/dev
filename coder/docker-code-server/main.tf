@@ -156,12 +156,6 @@ resource "docker_container" "workspace" {
     target = "/var/run/docker.sock"
   }
 
-  mounts {
-    type   = "bind"
-    source = "/tmp/cache/nix"
-    target = "/tmp/cache/nix"
-  }
-
   volumes {
     container_path = "/cache"
     volume_name    = "nix-cache"
