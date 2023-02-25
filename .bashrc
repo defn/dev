@@ -79,10 +79,10 @@ export EDITOR=vim
 if [[ -n "${VSCODE_GIT_ASKPASS_MAIN:-}" ]]; then
 	case "${VSCODE_GIT_ASKPASS_MAIN}" in
 		/vscode/*)
-			export BROWSER=${VSCODE_GIT_ASKPASS_MAIN%/node}/bin/helpers/browser.sh
+			export BROWSER=browser.sh
 			;;
 		*/code-server*)
-			export BROWSER=${VSCODE_GIT_ASKPASS_MAIN/extensions\/git\/dist\/askpass-main.js}bin/helpers/browser.sh
+			export BROWSER=browser.sh
 			;;
 		*)
 			export BROWSER="open"
