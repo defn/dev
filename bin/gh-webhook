@@ -5,7 +5,7 @@ if [[ -z "${WH_LOG_STDOUT:-}" ]]; then
     exec 1>>/tmp/wh.log 2>&1
 fi
 
-unset SSH_AUTH_SOCK 
+unset SSH_AUTH_SOCK
 
 set -exfu
 
@@ -21,22 +21,13 @@ function main {
         echo "ERROR: payload branch ${branch} does not match working branch ${WH_BRANCH:-}" 1>&2
         return 1
     fi
-    
+
     mkdir -p /tmp/meh
     cd /tmp/meh
     git clone -b "$branch" --depth 1 "$repo" "$commit" || true
     cd "$commit"
     git fetch
     git reset --hard "$commit"
-
-    time (
-        for a in . w/vault w/tailscale; do 
-            (
-                cd $a
-                nix build
-            )
-        done
-    )
 
     for a in {nix-{root,installed,empty},flake-root,devcontainer}; do
         time earthly --no-output --push +build-$a
