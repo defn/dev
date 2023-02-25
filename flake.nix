@@ -332,7 +332,7 @@
         _direnv_hook
         if [[ "$(uname -s)" == "Darwin" ]]; then make macos; fi
         if ! test -e /var/run/utmp; then sudo touch /var/run/utmp; fi
-        if [[ -z "$(pass hello)" ]]; then dirmngr --daemon || true; fi
+        dirmngr --daemon || true
         pass hello
         screen -S tilt -d -m bash -il -c "~/bin/withde ~ $(which tilt) up" || true
       '';
