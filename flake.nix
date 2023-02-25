@@ -332,7 +332,6 @@
         _direnv_hook
         if [[ "$(uname -s)" == "Darwin" ]]; then make macos; fi
         if ! test -e /var/run/utmp; then sudo touch /var/run/utmp; fi
-        if [[ -z "$(pass hello)" ]]; then gpg-agent --daemon --pinentry-program $(which pinentry-mac pinentry | head -1) || true; dirmngr --daemon || true; fi
         pass hello
         screen -S tilt -d -m bash -il -c "~/bin/withde ~ $(which tilt) up" || true
       '';
