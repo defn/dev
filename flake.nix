@@ -251,7 +251,6 @@
         if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then mark kubernetes; this-kubeconfig; this-argocd-login || true; fi
         this-github-login
         this-vault-login
-        this-fly-login
         echo
       '';
 
