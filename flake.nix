@@ -7,7 +7,7 @@
     az.url = github:defn/pkg/az-0.0.20?dir=az;
     oci.url = github:defn/pkg/oci-0.0.1?dir=oci;
     nix.url = github:defn/pkg/nix-0.0.1?dir=nix;
-    secrets.url = github:defn/pkg/secrets-0.0.2?dir=secrets;
+    secrets.url = github:defn/pkg/secrets-0.0.3?dir=secrets;
     development.url = github:defn/pkg/development-0.0.1?dir=development;
     utils.url = github:defn/pkg/utils-0.0.1?dir=utils;
     vpn.url = github:defn/pkg/vpn-0.0.1?dir=vpn;
@@ -15,7 +15,7 @@
     tailscale.url = github:defn/pkg/tailscale-1.36.1-1?dir=tailscale;
     godev.url = github:defn/pkg/godev-0.0.1?dir=godev;
     nodedev.url = github:defn/pkg/nodedev-0.0.1?dir=nodedev;
-    shelll.url = github:defn/pkg/shell-0.0.1?dir=shell;
+    shell.url = github:defn/pkg/shell-0.0.1?dir=shell;
   };
 
   outputs = inputs: inputs.pkg.main rec {
