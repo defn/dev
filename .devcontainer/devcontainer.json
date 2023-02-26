@@ -1,5 +1,7 @@
 {
-	"image": "ghcr.io/defn/dev:latest-devcontainer",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
 	"mounts": [
 		"source=work,target=/workspaces",
 		"source=nix,target=/nix",
