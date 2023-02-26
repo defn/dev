@@ -243,3 +243,4 @@ export GIT_COMMITTER_NAME
 if [[ -f ~/.dotfiles/dot/bashrc ]]; then source ~/.dotfiles/dot/bashrc; fi
 
 unset DIRENV_DIFF DIRENV_WATCHES
+
