@@ -29,6 +29,9 @@ nix run .#ssh -- \
 ```
 
 ```
+nix profile install nixpkgs#nodejs-18_x
+(PATH=$HOME/.nix-profile/bin:$PATH; npm install -u @devcontainers/cli)
+
 vault secrets enable -version=2 kv
 vault write sys/policy/dev policy=@etc/vault-dev.hcl
 
