@@ -2258,17 +2258,17 @@
       },
       "locked": {
         "dir": "godev",
-        "lastModified": 1676959476,
-        "narHash": "sha256-ye+P1/ZDys3nqqs6wihec6KcdO5a9WL40JJJ7BsrzsU=",
+        "lastModified": 1677446949,
+        "narHash": "sha256-dPL1vRWTVFkpt2yvptV/e37KJWimk7T18wpACksKbXc=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "e7c237078a709a79c67f617c3be249bcd2bcadac",
+        "rev": "c71700d83b354793266c3ee52f649b04718d3845",
         "type": "github"
       },
       "original": {
         "dir": "godev",
         "owner": "defn",
-        "ref": "godev-0.0.1",
+        "ref": "godev-0.0.2",
         "repo": "pkg",
         "type": "github"
       }
@@ -3946,17 +3946,17 @@
     },
     "latest": {
       "locked": {
-        "lastModified": 1671043181,
-        "narHash": "sha256-AnXU81L8qX5GR7eo+xReYGjJW279rV1GEdvfWeS9rk0=",
+        "lastModified": 1677342105,
+        "narHash": "sha256-kv1fpkfCJGb0M+LZaCHFUuIS9kRIwyVgupHu86Y28nc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "4938e72add339f76d795284cb5a3aae85d02ee53",
+        "rev": "b1f87ca164a9684404c8829b851c3586c4d9f089",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "4938e72add339f76d795284cb5a3aae85d02ee53",
+        "rev": "b1f87ca164a9684404c8829b851c3586c4d9f089",
         "type": "github"
       }
     },
