@@ -213,19 +213,25 @@ function pca {
 }
 
 function find-flakes {
-	find ~/work/ -type d \( -name go-mod -o -name go-build -o -name node_modules \) -prune -o -name 'flake.nix' -print | perl -pe 's#.*?/work/##; s#/flake.nix$##' | sort | fzf --query="${1}" "$@"
+	find ~/work/ -type d \( -name go-mod -o -name go-build -o -name node_modules \) -prune -o -name 'flake.nix' -print | perl -pe 's#.*?/work/##; s#/flake.nix$##' | sort | fzf --query="${1}"
 }
 
 function w {
 	if [[ -n "${1:-}" ]]; then
-		cd "$HOME/work/$(find-flakes --select-1)"
+		local d="$(find-flakes "$@")"
+		if [[ -d "$HOME/work/$d" ]]; then 
+			cd "$HOME/work/$d"
+		fi
 	else
 		cd $WORKDIR
 	fi
 }
 
 function ww {
-	de "$HOME/work/$(find-flakes)"
+	local d="$(find-flakes)"
+	if [[ -d "$HOME/work/$d" ]]; then 
+		de "$HOME/work/$d"
+	fi
 }
 
 # dotfiles
