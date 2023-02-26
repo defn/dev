@@ -108,30 +108,33 @@
         ++ ctx.commands
         ++ (with ctx.pkgs; [
           p.pass
-
-          bashInteractive
-          powerline-go
-          vim
-          less
-          groff
           gnupg
           pinentry
           aws-vault
-          rsync
+
           gnumake
           git
           git-lfs
           pre-commit
+          bazel_6
+
           xz
           unzip
+          rsync
           dnsutils
           nettools
-          openssh
           htop
           wget
           curl
           procps
+
+          vim
+          openssh
           screen
+          powerline-go
+          less
+          groff
+          bashInteractive
         ]);
     };
 
