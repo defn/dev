@@ -2258,17 +2258,17 @@
       },
       "locked": {
         "dir": "godev",
-        "lastModified": 1677446949,
-        "narHash": "sha256-dPL1vRWTVFkpt2yvptV/e37KJWimk7T18wpACksKbXc=",
+        "lastModified": 1677447351,
+        "narHash": "sha256-DSFTvjURJG9w7UjE0YHllFg6ww4dgsShQW+5nncB6W0=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "c71700d83b354793266c3ee52f649b04718d3845",
+        "rev": "e8e58fa322e0c78fb68fe82c77e945f8b861e21b",
         "type": "github"
       },
       "original": {
         "dir": "godev",
         "owner": "defn",
-        "ref": "godev-0.0.2",
+        "ref": "godev-0.0.3",
         "repo": "pkg",
         "type": "github"
       }

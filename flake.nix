@@ -13,7 +13,7 @@
     vpn.url = github:defn/pkg/vpn-0.0.1?dir=vpn;
     localdev.url = github:defn/pkg/localdev-0.0.27?dir=localdev;
     tailscale.url = github:defn/pkg/tailscale-1.36.1-1?dir=tailscale;
-    godev.url = github:defn/pkg/godev-0.0.2?dir=godev;
+    godev.url = github:defn/pkg/godev-0.0.3?dir=godev;
     nodedev.url = github:defn/pkg/nodedev-0.0.1?dir=nodedev;
     shell.url = github:defn/pkg/shell-0.0.1?dir=shell;
   };
