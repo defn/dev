@@ -117,6 +117,7 @@
           git-lfs
           pre-commit
           bazel_6
+          bazel-gazelle
 
           xz
           unzip
