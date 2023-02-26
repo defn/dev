@@ -12,6 +12,8 @@
 		"source=nix,target=/nix",
 		"source=nix-cache,target=/cache"
 	],
+	"workspaceMount": "source=${localWorkspaceFolder}/work,target=/w,type=bind,consistency=cached",
+	"workspaceFolder": "/w",
 	"runArgs": [
 		"--privileged",
 		"--device=/dev/net/tun",
