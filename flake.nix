@@ -7,11 +7,15 @@
     az.url = github:defn/pkg/az-0.0.20?dir=az;
     oci.url = github:defn/pkg/oci-0.0.1?dir=oci;
     nix.url = github:defn/pkg/nix-0.0.1?dir=nix;
+    secrets.url = github:defn/pkg/secrets-0.0.2?dir=secrets;
+    development.url = github:defn/pkg/development-0.0.1?dir=development;
+    utils.url = github:defn/pkg/utils-0.0.1?dir=utils;
     vpn.url = github:defn/pkg/vpn-0.0.1?dir=vpn;
     localdev.url = github:defn/pkg/localdev-0.0.27?dir=localdev;
     tailscale.url = github:defn/pkg/tailscale-1.36.1-1?dir=tailscale;
     godev.url = github:defn/pkg/godev-0.0.1?dir=godev;
     nodedev.url = github:defn/pkg/nodedev-0.0.1?dir=nodedev;
+    shelll.url = github:defn/pkg/shell-0.0.1?dir=shell;
   };
 
   outputs = inputs: inputs.pkg.main rec {
@@ -50,10 +54,6 @@
     };
 
     packages = ctx: {
-      pass = ctx.pkgs.writeShellScriptBin "pass" ''
-        { ${ctx.pkgs.pass}/bin/pass "$@" 2>&1 1>&3 3>&- | grep -v 'problem with fast path key listing'; } 3>&1 1>&2 | cat
-      '';
-
       codeserver = ctx.wrap.bashBuilder rec {
         inherit src;
 
@@ -100,43 +100,15 @@
             inputs.nix.defaultPackage.${ctx.system}
             inputs.vpn.defaultPackage.${ctx.system}
             inputs.oci.defaultPackage.${ctx.system}
+            inputs.secrets.defaultPackage.${ctx.system}
+            inputs.development.defaultPackage.${ctx.system}
+            inputs.utils.defaultPackage.${ctx.system}
+            inputs.shell.defaultPackage.${ctx.system}
           ];
 
           p = packages ctx;
         in
-        flakeInputs
-        ++ ctx.commands
-        ++ (with ctx.pkgs; [
-          p.pass
-          gnupg
-          pinentry
-          aws-vault
-
-          gnumake
-          git
-          git-lfs
-          pre-commit
-          bazel_6
-          bazel-gazelle
-
-          xz
-          unzip
-          rsync
-          dnsutils
-          nettools
-          htop
-          wget
-          curl
-          procps
-
-          vim
-          openssh
-          screen
-          powerline-go
-          less
-          groff
-          bashInteractive
-        ]);
+        flakeInputs ++ ctx.commands;
     };
 
     scripts = { system }: {
