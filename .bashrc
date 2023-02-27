@@ -190,11 +190,7 @@ function vi {
 			return 1
 		fi
 
-		if type -P code >/dev/null; then
-			command code "$@"
-		else
-			command code-server "$@"
-		fi
+		command code "$@"
 	else
 		command vi "$@"
 	fi
@@ -219,7 +215,7 @@ function find-flakes {
 function w {
 	if [[ -n "${1:-}" ]]; then
 		local d="$(find-flakes "$@")"
-		if [[ -d "$HOME/work/$d" ]]; then 
+		if [[ -d "$HOME/work/$d" ]]; then
 			cd "$HOME/work/$d"
 		fi
 	else
@@ -229,8 +225,8 @@ function w {
 
 function ww {
 	local d="$(find-flakes)"
-	if [[ -d "$HOME/work/$d" ]]; then 
-		de "$HOME/work/$d"
+	if [[ -d "$HOME/work/$d" ]]; then
+		code "$HOME/work/$d"
 	fi
 }
 
@@ -243,4 +239,3 @@ export GIT_COMMITTER_NAME
 if [[ -f ~/.dotfiles/dot/bashrc ]]; then source ~/.dotfiles/dot/bashrc; fi
 
 unset DIRENV_DIFF DIRENV_WATCHES
-
