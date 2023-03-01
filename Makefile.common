@@ -79,6 +79,9 @@ install-inner:
 	@mark up
 	this-up
 
+nix-Darwin-upgrade:
+	sudo -i sh -c 'nix-channel --update && nix-env -iA nixpkgs.nix && launchctl remove org.nixos.nix-daemon && launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist'
+
 nix:
 	if ! type -P nix; then . ~/.nix-profile/etc/profile.d/nix.sh; fi && ($(MAKE) nix-$(shell uname -s) || true)
 
