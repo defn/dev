@@ -1,3 +1,4 @@
+brew "bash-completion"
 brew "direnv"
 brew "pass"
 brew "pinentry-mac"
