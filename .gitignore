@@ -172,3 +172,4 @@ package-lock.json
 etc/derp.json
 go
 .dotnet
+/nix
