@@ -35,6 +35,9 @@ install:
 install-inner:
 	$(MAKE) symlinks perms
 
+	@mark nix
+	$(MAKE) nix
+
 	@mark configure password-store
 	mkdir -p ~/work/password-store
 	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
