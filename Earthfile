@@ -132,7 +132,6 @@ nix-installed:
 
     # nix
     RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' \
-        && ln -nfs ~/nix/profile ~/.nix-profile \
         && echo . ~/.bashrc > ~/.bash_profile \
         && echo . ~/.nix-profile/etc/profile.d/nix.sh > ~/.bashrc \
         && echo 'eval "$(direnv hook bash)"' >> ~/.bashrc \
@@ -157,8 +156,7 @@ nix-empty:
     # nix
     COPY --chown=ubuntu:ubuntu +nix-empty-installed/var /nix/var
     COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
-    RUN ln -nfs ~/nix/profile ~/.nix-profile \
-        && echo . ~/.bashrc > ~/.bash_profile \
+    RUN echo . ~/.bashrc > ~/.bash_profile \
         && echo . ~/.nix-profile/etc/profile.d/nix.sh > ~/.bashrc \
         && echo 'eval "$(direnv hook bash)"' >> ~/.bashrc \
         && echo 'use flake' > .envrc
