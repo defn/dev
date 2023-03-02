@@ -138,8 +138,6 @@ nix-installed:
         && . ~/.nix-profile/etc/profile.d/nix.sh \
         && nix profile install nixpkgs#nix-direnv nixpkgs#direnv \
         && echo 'use flake' > .envrc \
-        && nix profile wipe-history \
-        && nix-store --gc
     COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
 
 # nix applications where /nix/store is emptied
@@ -174,7 +172,7 @@ NIX_DIRENV:
 
     FROM ghcr.io/defn/dev:latest-nix-installed
     COPY --chown=ubuntu:ubuntu --dir . .
-    RUN bash -c '. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh; eval "$(direnv hook bash)"; direnv allow; _direnv_hook; nix profile wipe-history; nix-store --gc'
+    RUN bash -c '. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh; eval "$(direnv hook bash)"; direnv allow; _direnv_hook'
     RUN sudo install -d -o ubuntu -g ubuntu /store
     RUN rsync -ia `/home/ubuntu/.nix-profile/bin/nix-store -qR ~/.nix-profile $(ls -d .direnv/flake-profile-* | grep -v 'rc$')` /store/
 
@@ -202,9 +200,7 @@ devcontainer:
     # nix profile
     COPY --chown=ubuntu:ubuntu .config/nix/nix-earthly.conf /home/ubuntu/.config/nix/nix.conf
     RUN . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh \
-        && nix profile install nixpkgs#nixpkgs-fmt \
-        && nix profile wipe-history \
-        && nix-store --gc
+        && nix profile install nixpkgs#nixpkgs-fmt
 
     # run dir
     RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
