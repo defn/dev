@@ -11,7 +11,7 @@
     development.url = github:defn/pkg/development-0.0.1?dir=development;
     utils.url = github:defn/pkg/utils-0.0.1?dir=utils;
     vpn.url = github:defn/pkg/vpn-0.0.1?dir=vpn;
-    localdev.url = github:defn/pkg/localdev-0.0.27?dir=localdev;
+    localdev.url = github:defn/pkg/localdev-0.0.29?dir=localdev;
     tailscale.url = github:defn/pkg/tailscale-1.36.1-1?dir=tailscale;
     godev.url = github:defn/pkg/godev-0.0.3?dir=godev;
     nodedev.url = github:defn/pkg/nodedev-0.0.1?dir=nodedev;
