@@ -94,9 +94,11 @@ nix-Darwin:
 
 nix-Linux-bootstrap:
 	sh <(curl -L https://nixos.org/nix/install) --no-daemon
+	git checkout .bash_profile
 
 nix-Darwin-bootstrap:
 	sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume --daemon
+	git checkout .bash_profile
 
 nix-reinstall:
 	nix profile list | tail -n +2 | awk '{print $$NF}' | xargs nix profile remove
