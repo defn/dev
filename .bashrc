@@ -120,53 +120,59 @@ export DIRENV_LOG_FORMAT=
 if type -P direnv >/dev/null; then
 	eval "$(direnv hook bash)"
 	_direnv_hook
+else
+	function _direnv_hook {
+		true
+	}
 fi
 
 # powerline-go
-export EXTRA="${EXTRA:- }"
-if tty >/dev/null; then
-  if type -P powerline-go >/dev/null; then
-	function render_ps1 {
+function render_ps1 {
+  	if type -P powerline-go >/dev/null; then
 		powerline-go --colorize-hostname -mode flat -newline \
 			-modules host,ssh,cwd,perms,gitlite,load,exit,venv,kube,shell-var \
 			-shell-var EXTRA
-	}
+	else
+		echo '$ '
+	fi
+}
 
-	function update_ps1 {
-		ls -td /tmp/vscode-ssh-auth-sock* 2>/dev/null | tail -n +2 | xargs rm -f /tmp/.meh;
-		EXTRA=""
+function update_ps1 {
+	ls -td /tmp/vscode-ssh-auth-sock* 2>/dev/null | tail -n +2 | xargs rm -f /tmp/.meh;
+	EXTRA=""
 
-		local slug=
-		if [[ -f SLUG ]]; then
-			slub="$(cat SLUG)"
-		fi
+	local slug=
+	if [[ -f SLUG ]]; then
+		slub="$(cat SLUG)"
+	fi
 
-		local vendor=
-		if [[ -f VENDOR ]]; then
-			vendor="$(cat VENDOR)"
-		fi
+	local vendor=
+	if [[ -f VENDOR ]]; then
+		vendor="$(cat VENDOR)"
+	fi
 
-		local revision=
-		if [[ -f REVISION ]]; then
-			revision="$(cat REVISION)"
-		fi
+	local revision=
+	if [[ -f REVISION ]]; then
+		revision="$(cat REVISION)"
+	fi
 
-		local version=
-		if [[ -f VERSION ]]; then
-			version="$(cat VERSION)"
-		fi
+	local version=
+	if [[ -f VERSION ]]; then
+		version="$(cat VERSION)"
+	fi
 
-		if [[ -n "${version:-}" ]]; then
-			EXTRA="${version:-}"
-		else
-			EXTRA="${slug:-}${vendor:-}${revision:+${vendor:+-}${revision}}"
-		fi
-		EXTRA="${EXTRA:- }"
-		PS1="$(render_ps1)"
-	}
+	if [[ -n "${version:-}" ]]; then
+		EXTRA="${version:-}"
+	else
+		EXTRA="${slug:-}${vendor:-}${revision:+${vendor:+-}${revision}}"
+	fi
+	EXTRA="${EXTRA:- }"
+	PS1="$(render_ps1)"
+}
 
+export EXTRA="${EXTRA:- }"
+if tty >/dev/null; then
 	PROMPT_COMMAND="_direnv_hook;update_ps1"
-  fi
 fi
 
 # install
