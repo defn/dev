@@ -19,10 +19,8 @@ if [[ "Linux" == "$(uname -s)" ]]; then
 	export LC_ALL=C.UTF-8
 fi
 
-if [ -e /home/ubuntu/.nix-profile/etc/profile.d/nix.sh ]; then
-	. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh
-else
-	PATH="/nix/var/nix/profiles/default/bin:$PATH"
+if [[ -e ~/.nix-profile/etc/profile.d/nix.sh ]]; then
+	. ~/.nix-profile/etc/profile.d/nix.sh
 fi
 
 # python
