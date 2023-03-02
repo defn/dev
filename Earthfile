@@ -131,7 +131,7 @@ nix-installed:
     WORKDIR /app
 
     # nix
-    RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon' \
+    RUN bash -c 'sh <(curl -L https://releases.nixos.org/nix/nix-2.14.0/install) --no-daemon' \
         && echo . ~/.bashrc > ~/.bash_profile \
         && echo . ~/.nix-profile/etc/profile.d/nix.sh > ~/.bashrc \
         && echo 'eval "$(direnv hook bash)"' >> ~/.bashrc \

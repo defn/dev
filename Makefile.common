@@ -93,11 +93,11 @@ nix-Darwin:
 	. ~/.nix-profile/etc/profile.d/nix.sh && if test "$(shell which direnv nixpkgs-fmt | grep /nix | wc -l)" != "2"; then export LC_ALL=C.UTF-8 && nix profile install nixpkgs\#{nix-direnv,nixpkgs-fmt}; fi
 
 nix-Linux-bootstrap:
-	sh <(curl -L https://nixos.org/nix/install) --no-daemon
+	sh <(curl -L https://releases.nixos.org/nix/nix-2.14.0/install) --no-daemon
 	git checkout .bash_profile
 
 nix-Darwin-bootstrap:
-	sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume --daemon
+	sh <(curl -L https://releases.nixos.org/nix/nix-2.14.0/install) --darwin-use-unencrypted-nix-store-volume --daemon
 	git checkout .bash_profile
 
 nix-reinstall:
