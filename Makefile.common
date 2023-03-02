@@ -30,7 +30,7 @@ perms:
 
 install:
 	$(MAKE) nix
-	bin/withde ~ $(MAKE) install-inner
+	. ~/.nix-profile/etc/profile.d/nix.sh && bin/withde ~ $(MAKE) install-inner
 
 install-inner:
 	$(MAKE) symlinks perms
