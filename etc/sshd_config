@@ -1,5 +1,5 @@
 # ssh-keygen -A -f /tmp
-# $(which sshd) -D -f ~/etc/sshd_config 
+# $(which sshd) -D -f ~/etc/sshd_config
 
 Port 2222
 ListenAddress 127.0.0.1
