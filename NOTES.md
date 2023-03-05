@@ -1,4 +1,6 @@
-https://www.vaultproject.io/docs/secrets/pki/quick-start-root-ca
+- https://www.vaultproject.io/docs/secrets/pki/quick-start-root-ca
+- https://buildkite.com/docs/agent/v3/configuration
+- https://buildkite.com/docs/pipelines/environment-variables
 
 # misc
 ```

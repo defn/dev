@@ -291,6 +291,14 @@
         sudo -A wg-quick down wg0nix-bootstrap:
       '';
 
+      ci = ''
+        BUILDKITE_AGENT_TOKEN="$(pass BUILDKITE_AGENT_TOKEN)"
+        BUILDKITE_AGENT_NAME="%hostname-%spawn"
+        BUILDKITE_BUILD_PATH="$HOME/.buildkite-agent/builds"
+        export BUILDKITE_AGENT_TOKEN BUILDKITE_AGENT_NAME BUILDKITE_BUILD_PATH
+        buildkite-agent start
+      '';
+
       dev = ''
         docker pull ghcr.io/defn/dev:latest-devcontainer
         nix develop github:defn/pkg/nodedev-0.0.1?dir=nodedev --command devcontainer build --workspace-folder .
