@@ -293,6 +293,7 @@
 
       dev = ''
         docker pull ghcr.io/defn/dev:latest-devcontainer
+        nix develop github:defn/pkg/nodedev-0.0.1?dir=nodedev --command devcontainer build --workspace-folder .
         code --folder-uri "vscode-remote://dev-container+$(pwd | perl -pe 's{\s+}{}g' | xxd -p)/home/ubuntu"
       '';
 
