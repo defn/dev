@@ -5,11 +5,13 @@
 	"mounts": [
 		"source=work,target=/workspaces",
 		"source=nix,target=/nix",
-		"source=nix-cache,target=/cache"
+		"source=nix-cache,target=/cache",
+		"source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
 	],
 	"workspaceMount": "source=${localWorkspaceFolder}/work,target=/w,type=bind,consistency=cached",
 	"workspaceFolder": "/w",
 	"runArgs": [
+		"--init",
 		"--privileged",
 		"--device=/dev/net/tun",
 		"--env-file",
