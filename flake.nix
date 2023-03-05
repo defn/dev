@@ -188,25 +188,9 @@
       '';
 
       build = ''
-        repo="$(git remote get-url origin)"
-        branch="$(git rev-parse --abbrev-ref HEAD)"
-
-        if test -n "''${1:-}"; then
-          commit="$1"; shift
-        else
-          commit="$(git rev-parse HEAD)"
-        fi
-
         touch /tmp/cache-priv-key.pem
         chmod 600 /tmp/cache-priv-key.pem
         pass nix-serve-cache-priv-key.pem > /tmp/cache-priv-key.pem
-
-        env WH_BRANCH="$branch" WH_LOG_STDOUT=1 bin/gh-webhook push "$repo" "refs/heads/$branch" "$commit"
-
-        kill %1 2>/dev/null || true
-
-        wait
-        echo
       '';
 
       trust-ca = ''

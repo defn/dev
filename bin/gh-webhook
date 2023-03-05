@@ -1,44 +1,17 @@
 #!/usr/bin/env bash
 
-if [[ -z "${WH_LOG_STDOUT:-}" ]]; then
-    echo see /tmp/wh.log
-    exec 1>>/tmp/wh.log 2>&1
-fi
-
-unset SSH_AUTH_SOCK
-
-set -exfu
-
 function main {
-    local event=$1; shift
-    local repo=$1; shift
-    local ref=$1; shift
-    local commit=$1; shift
+    set -exfu
 
-    local branch="${ref##refs/heads/}"
-
-    if [[ "${branch}" != "${WH_BRANCH:-}" ]]; then
-        echo "ERROR: payload branch ${branch} does not match working branch ${WH_BRANCH:-}" 1>&2
-        return 1
-    fi
-
-    mkdir -p /tmp/meh
-    cd /tmp/meh
-    git clone -b "$branch" --depth 1 "$repo" "$commit" || true
-    cd "$commit"
-    git fetch
-    git reset --hard "$commit"
+    eval "$(direnv hook bash)"
+    direnv allow
+    _direnv_hook
 
     for a in {nix-{root,installed,empty},flake-root,devcontainer}; do
         time earthly --no-output --push +build-$a
         time docker pull ghcr.io/defn/dev:latest-$a
         time skopeo copy docker://ghcr.io/defn/dev:latest-$a docker://169.254.32.1:5000/defn/dev:latest-$a --multi-arch all --dest-tls-verify=false --insecure-policy || true
     done
-
-    set +x
-
-    sync
-    echo "done: $commit"
 }
 
 main "$@"
