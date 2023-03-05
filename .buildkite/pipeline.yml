@@ -1,2 +1,2 @@
 steps:
-  - command: "nix build"
+  - command: "eval \"$(direnv hook bash)\"; direnv allow; _direnv_hook; this-build"
