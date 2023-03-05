@@ -90,3 +90,13 @@ else:
             """
         ]
     )
+
+# Starts Tailscale on Linux
+local_resource("buildkite",
+    serve_cmd=[
+        "bash", "-c",
+        """
+            exec this-ci
+        """
+    ]
+)
