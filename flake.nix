@@ -3,8 +3,8 @@
     pkg.url = github:defn/pkg/0.0.166;
     vault.url = github:defn/pkg/vault-1.12.3-2?dir=vault;
     kubernetes.url = github:defn/pkg/kubernetes-0.0.8?dir=kubernetes;
-    cloud.url = github:defn/pkg/cloud-0.0.5?dir=cloud;
-    az.url = github:defn/pkg/az-0.0.20?dir=az;
+    cloud.url = github:defn/pkg/cloud-0.0.6?dir=cloud;
+    az.url = github:defn/pkg/az-0.0.21?dir=az;
     oci.url = github:defn/pkg/oci-0.0.1?dir=oci;
     nix.url = github:defn/pkg/nix-0.0.1?dir=nix;
     secrets.url = github:defn/pkg/secrets-0.0.3?dir=secrets;
@@ -245,13 +245,6 @@
         fi
         set -x
         if test -n "''${GIT_AUTHOR_NAME:-}"; then pass GHCR_TOKEN | docker login ghcr.io -u $GIT_AUTHOR_NAME --password-stdin; echo; fi
-      '';
-
-      fly-login = ''
-        mark fly;
-        if ! flyctl auth whoami; then
-          flyctl auth login
-        fi
       '';
 
       home-repos = ''

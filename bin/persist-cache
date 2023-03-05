@@ -35,8 +35,6 @@ function cache {
 
   persist ~/work/config-precommit ~/.cache/pre-commit
 
-  persist ~/work/config-fly ~/.fly
-
   persist ~/work/config-temporalite ~/.config/temporalite
 
   persist ~/work/config-kube ~/.kube
