@@ -3,7 +3,7 @@
     pkg.url = github:defn/pkg/0.0.166;
     vault.url = github:defn/pkg/vault-1.12.3-2?dir=vault;
     kubernetes.url = github:defn/pkg/kubernetes-0.0.8?dir=kubernetes;
-    cloud.url = github:defn/pkg/cloud-0.0.6?dir=cloud;
+    cloud.url = github:defn/pkg/cloud-0.0.7?dir=cloud;
     az.url = github:defn/pkg/az-0.0.21?dir=az;
     oci.url = github:defn/pkg/oci-0.0.1?dir=oci;
     nix.url = github:defn/pkg/nix-0.0.1?dir=nix;
@@ -11,7 +11,7 @@
     development.url = github:defn/pkg/development-0.0.1?dir=development;
     utils.url = github:defn/pkg/utils-0.0.1?dir=utils;
     vpn.url = github:defn/pkg/vpn-0.0.1?dir=vpn;
-    localdev.url = github:defn/pkg/localdev-0.0.31?dir=localdev;
+    localdev.url = github:defn/pkg/localdev-0.0.34?dir=localdev;
     tailscale.url = github:defn/pkg/tailscale-1.36.1-1?dir=tailscale;
     godev.url = github:defn/pkg/godev-0.0.3?dir=godev;
     nodedev.url = github:defn/pkg/nodedev-0.0.1?dir=nodedev;
@@ -22,16 +22,6 @@
     src = ./.;
 
     apps = ctx: {
-      coder = {
-        type = "app";
-        program = "${inputs.localdev.inputs.coder.defaultPackage.${ctx.system}}/bin/coder";
-      };
-
-      codeserver = {
-        type = "app";
-        program = "${(packages ctx).codeserver}/bin/code-server";
-      };
-
       sshd = {
         type = "app";
         program = "${ctx.pkgs.openssh}/bin/sshd";
@@ -53,42 +43,15 @@
       };
     };
 
-    packages = ctx: {
-      codeserver = ctx.wrap.bashBuilder rec {
-        inherit src;
-
-        propagatedBuildInputs = [
-          inputs.godev.defaultPackage.${ctx.system}
-          inputs.nodedev.defaultPackage.${ctx.system}
-          inputs.localdev.inputs.codeserver.defaultPackage.${ctx.system}
-          ctx.pkgs.which
-          ctx.pkgs.coreutils
+    packages = ctx: rec {
+      devShell = ctx: ctx.wrap.devShell {
+        devInputs = [
+          (defaultPackage ctx)
         ];
-
-        buildInputs = propagatedBuildInputs;
-
-        installPhase = ''
-          mkdir -p $out/bin
-          (
-            echo '#!/usr/bin/bash'
-            echo export PATH='${ctx.pkgs.lib.makeBinPath (ctx.pkgs.lib.unique (ctx.pkgs.lib.flatten (ctx.pkgs.lib.catAttrs "propagatedBuildInputs" (builtins.filter (x: x != null) propagatedBuildInputs))))}:$PATH'
-            echo exec ${inputs.localdev.inputs.codeserver.defaultPackage.${ctx.system}}/bin/code-server '"$@"'
-          ) > $out/bin/code-server
-          chmod 755 $out/bin/code-server
-        '';
       };
     };
 
-    devShell = ctx: ctx.wrap.devShell {
-      devInputs = [
-        (defaultPackage ctx)
-      ];
-    };
-
     defaultPackage = ctx: ctx.wrap.nullBuilder {
-      buildInputs = [
-        (packages ctx).codeserver
-      ];
       propagatedBuildInputs =
         let
           flakeInputs = [
@@ -105,88 +68,11 @@
             inputs.utils.defaultPackage.${ctx.system}
             inputs.shell.defaultPackage.${ctx.system}
           ];
-
-          p = packages ctx;
         in
         flakeInputs ++ ctx.commands;
     };
 
     scripts = { system }: {
-      coder-delete-database = ''
-        rm -rf ~/.config/coderv2/postgres
-      '';
-
-      coder-server-for-orgs-wildcard-tls = ''
-        coder server --no-feature-warning --cache-dir ~/.cache/coder --global-config ~/.config/coderv2 \
-          --access-url=$(pass coder_access_url) --wildcard-access-url="$(pass coder_wildcard_access_url)" \
-          --http-address=localhost:5555 \
-          --tls-address=localhost:5556 \
-          --tls-enable --tls-redirect-http-to-https=false \
-          --tls-min-version tls13 \
-          --tls-cert-file "$(pass coder_cert_file)" \
-          --tls-key-file "$(pass coder_cert_key)" \
-          --oauth2-github-allow-signups --oauth2-github-client-id=$(pass coder_github_client_id) --oauth2-github-client-secret=$(pass coder_github_client_secret) \
-          --oauth2-github-allowed-orgs=$(pass coder_github_allowed_orgs)
-      '';
-
-      coder-initial-user = ''
-        coder login --first-user-email=$(pass coder_admin_email) --first-user-password=$(pass coder_admin_password) --first-user-username=$(pass coder_admin_username) \
-          --first-user-trial=false http://localhost
-      '';
-
-      coder-template-docker = ''
-        set -exfu
-        cd ~/coder/docker-code-server
-        coder template create --yes || true
-        coder template push --yes --name "$(git log . | head -1 | awk '{print $2}' | cut -b1-8)"
-        # https://github.com/coder/coder/tree/main/site/static/icon
-        coder template edit docker-code-server --icon "https://cdn-icons-png.flaticon.com/512/919/919853.png"
-      '';
-
-      coder-template-macos = ''
-        set -exfu
-        cd ~/coder/macos-code-server
-        coder template create --yes || true
-        coder template push --yes --name "$(git log . | head -1 | awk '{print $2}' | cut -b1-8)"
-        # https://github.com/coder/coder/tree/main/site/static/icon
-        coder template edit macos-code-server --icon "https://upload.wikimedia.org/wikipedia/commons/c/c9/Finder_Icon_macOS_Big_Sur.png"
-      '';
-
-      coder-server-wait-for-alive = ''
-        while [[ "000" == "$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 1 -m 1 http://localhost 2>&- )" ]]; do sleep 1; done
-      '';
-
-      coder-server-wait-for-dead = ''
-        while [[ "000" != "$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 1 -m 1 http://localhost)" ]]; do sleep 1; done
-      '';
-
-      coder-server-kill = ''
-        pkill -9 -f /coder
-        pkill -f postgres
-        this-coder-server-wait-for-dead
-        pkill -f /this-coder
-      '';
-
-      coder-server-stop = ''
-        pkill -f /coder
-        this-coder-server-wait-for-dead
-        pkill -f /this-coder
-      '';
-
-      coder-init = ''
-         (
-           this-coder-server-wait-for-alive
-           pass coder_access_url > .config/coderv2/url
-           if ! coder users show me | grep Organizations: | grep admin; then this-coder-initial-user | cat; fi
-           if ! coder template list | grep docker-code-server; then this-coder-template-docker; fi
-           if ! coder template list | grep macos-code-server; then this-coder-template-macos; fi
-         ) &
-
-         for="''${1:-orgs}"
-
-        "this-coder-server-for-$for"
-      '';
-
       build = ''
         touch /tmp/cache-priv-key.pem
         chmod 600 /tmp/cache-priv-key.pem
@@ -195,10 +81,6 @@
 
       trust-ca = ''
         sudo security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-db etc/ca.crt
-      '';
-
-      down = ''
-        touch .local/share/code-server/idle
       '';
 
       logout = ''

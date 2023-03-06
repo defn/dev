@@ -53,11 +53,7 @@ install-inner:
 		mkdir -p ~//work/.codespaces/.persistedshare; \
 		rm -rf ~/work/.codespaces/.persistedshare/dotfiles; \
 		ln -nfs ~/.config/coderv2/dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
-		if ! test -d ~/.dotfiles/.git/.; then \
-			nix run .#coder -- dotfiles --yes https://github.com/$${GIT_AUTHOR_NAME}/dotfiles; \
-		else \
-			(cd ~/.dotfiles && ./bootstrap); \
-		fi; \
+		(cd ~/.dotfiles && ./bootstrap); \
 	fi
 
 	@mark docker

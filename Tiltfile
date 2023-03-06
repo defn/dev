@@ -3,13 +3,6 @@ analytics_settings(False)
 load("ext://uibutton", "cmd_button", "location")
 
 if "-darwin" in os.getenv("system"):
-    cmd_button("coder",
-                argv=['bash', '-c', 'open "$(pass coder_access_url)"'],
-                icon_name='cloud_download',
-                location=location.NAV,
-                text='Coder'
-    )
-
     # Starts openvpn on macOS
     local_resource("openvpn",
         serve_cmd=[
