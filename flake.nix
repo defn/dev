@@ -109,8 +109,6 @@
         if ! gh auth status; then
           echo Y | gh auth login -p https -h github.com -w
         fi
-        set -x
-        if test -n "''${GIT_AUTHOR_NAME:-}"; then pass GHCR_TOKEN | docker login ghcr.io -u $GIT_AUTHOR_NAME --password-stdin; echo; fi
       '';
 
       home-repos = ''
@@ -166,7 +164,7 @@
       '';
 
       dev = ''
-        docker pull ghcr.io/defn/dev:latest-devcontainer
+        docker pull quay.io/defn/dev:latest-devcontainer
         nix develop github:defn/pkg/nodedev-0.0.1?dir=nodedev --command devcontainer build --workspace-folder .
         code --folder-uri "vscode-remote://dev-container+$(pwd | perl -pe 's{\s+}{}g' | xxd -p)/home/ubuntu"
       '';

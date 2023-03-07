@@ -1,27 +1,27 @@
 VERSION --use-registry-for-with-docker --ci-arg 0.7
 
 build-nix-root:
-    ARG image=ghcr.io/defn/dev:latest-nix-root
+    ARG image=quay.io/defn/dev:latest-nix-root
     BUILD --platform=linux/amd64 +image-nix-root --image=${image} --arch=amd64
     BUILD --platform=linux/arm64 +image-nix-root --image=${image} --arch=arm64
 
 build-nix-empty:
-    ARG image=ghcr.io/defn/dev:latest-nix-empty
+    ARG image=quay.io/defn/dev:latest-nix-empty
     BUILD --platform=linux/amd64 +image-nix-empty --image=${image}
     BUILD --platform=linux/arm64 +image-nix-empty --image=${image}
 
 build-nix-installed:
-    ARG image=ghcr.io/defn/dev:latest-nix-installed
+    ARG image=quay.io/defn/dev:latest-nix-installed
     BUILD --platform=linux/amd64 +image-nix-installed --image=${image}
     BUILD --platform=linux/arm64 +image-nix-installed --image=${image}
 
 build-flake-root:
-    ARG image=ghcr.io/defn/dev:latest-flake-root
+    ARG image=quay.io/defn/dev:latest-flake-root
     BUILD --platform=linux/amd64 +image-flake-root --image=${image}
     BUILD --platform=linux/arm64 +image-flake-root --image=${image}
 
 build-devcontainer:
-    ARG image=ghcr.io/defn/dev:latest-devcontainer
+    ARG image=quay.io/defn/dev:latest-devcontainer
     BUILD --platform=linux/amd64 +image-devcontainer --image=${image}
     BUILD --platform=linux/arm64 +image-devcontainer --image=${image}
 
@@ -127,7 +127,7 @@ nix-root:
 
 # nix applications where /nix is not a data volume
 nix-installed:
-    FROM ghcr.io/defn/dev:latest-nix-root
+    FROM quay.io/defn/dev:latest-nix-root
     WORKDIR /app
 
     # nix
@@ -144,13 +144,13 @@ nix-installed:
 
 # nix applications where /nix/store is emptied
 nix-empty-installed:
-    FROM ghcr.io/defn/dev:latest-nix-installed
+    FROM quay.io/defn/dev:latest-nix-installed
 
     RUN sudo install -d -o ubuntu -g ubuntu /store
     SAVE ARTIFACT /nix/var var
 
 nix-empty:
-    FROM ghcr.io/defn/dev:latest-nix-root
+    FROM quay.io/defn/dev:latest-nix-root
     WORKDIR /app
 
     # nix
@@ -163,7 +163,7 @@ nix-empty:
 
 # for building flakes and saving thier nix artifacts
 flake-root:
-    FROM ghcr.io/defn/dev:latest-nix-installed
+    FROM quay.io/defn/dev:latest-nix-installed
     WORKDIR /app
 
     # build prep
@@ -172,7 +172,7 @@ flake-root:
 NIX_DIRENV:
     COMMAND
 
-    FROM ghcr.io/defn/dev:latest-nix-installed
+    FROM quay.io/defn/dev:latest-nix-installed
     COPY --chown=ubuntu:ubuntu --dir . .
     RUN bash -c '. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh; eval "$(direnv hook bash)"; direnv allow; _direnv_hook; nix profile wipe-history; nix-store --gc'
     RUN sudo install -d -o ubuntu -g ubuntu /store
@@ -180,7 +180,7 @@ NIX_DIRENV:
 
 # testing defn/dev build
 dev:
-    FROM ghcr.io/defn/dev:latest-nix-installed
+    FROM quay.io/defn/dev:latest-nix-installed
     WORKDIR /home/ubuntu
 
     # work
@@ -196,7 +196,7 @@ dev:
 
 # coder workspace container
 devcontainer:
-    FROM ghcr.io/defn/dev:latest-nix-installed
+    FROM quay.io/defn/dev:latest-nix-installed
     WORKDIR /home/ubuntu
 
     # nix profile
