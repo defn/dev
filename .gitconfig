@@ -10,10 +10,10 @@
 [core]
   quotepath = false
 
-[url "git@github.com:"]
+[url "https://github.com/"]
+  insteadOf = git@github.com:
   insteadOf = git://github.com/
   insteadOf = ssh://git@github.com/
-  insteadOf = https://github.com/
 
 [pull]
   rebase = false
@@ -25,7 +25,6 @@
 [credential "https://gist.github.com"]
 	helper =
 	helper = !gh auth git-credential
-
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
