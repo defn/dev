@@ -1,2 +1,2 @@
 steps:
-  - command: "bin/gh-webhook"
+  - command: "env USER=$(id -un) bin/gh-webhook"
