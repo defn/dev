@@ -8,7 +8,7 @@
 		"source=nix-cache,target=/cache",
 		"source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
 	],
-	"workspaceMount": "source=${localWorkspaceFolder}/work,target=/w,type=bind,consistency=cached",
+	"workspaceMount": "source=${localWorkspaceFolder}/.devcontainer,target=/w,type=bind,consistency=cached",
 	"workspaceFolder": "/w",
 	"runArgs": [
 		"--init",
