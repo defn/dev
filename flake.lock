@@ -2093,17 +2093,17 @@
       },
       "locked": {
         "dir": "gh",
-        "lastModified": 1678416078,
-        "narHash": "sha256-Ntoe9q4OIVrDEoUIckm+rMpp0PnXLcOjoZsNu0VuM64=",
+        "lastModified": 1678418587,
+        "narHash": "sha256-/t0jO1FAJUaon7V2d/Fr+5LiYUDBl2jo6Q64K0aaAKk=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "4ddaf117fb1302517571f806749cf1243d913749",
+        "rev": "4f7f403645b6eae2f2eebd68f36a21a709ad3381",
         "type": "github"
       },
       "original": {
         "dir": "gh",
         "owner": "defn",
-        "ref": "gh-2.24.3-0",
+        "ref": "gh-2.24.3-1",
         "repo": "pkg",
         "type": "github"
       }
@@ -3568,17 +3568,17 @@
       },
       "locked": {
         "dir": "helm",
-        "lastModified": 1678417224,
-        "narHash": "sha256-XLJ8eqK67twDyQ0NUOMD9j+iU4jUMWnFG8AqyKBKULE=",
+        "lastModified": 1678418701,
+        "narHash": "sha256-sjkqlXRT47Holz0XB4pZIKsLFcEIMol1RD2m0s4k7+Q=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "87b2941b2d8d4fc2b566848b20af0b11ce982025",
+        "rev": "418feaf1477b056f413500db7dce9f0171e84528",
         "type": "github"
       },
       "original": {
         "dir": "helm",
         "owner": "defn",
-        "ref": "helm-3.11.2-0",
+        "ref": "helm-3.11.2-1",
         "repo": "pkg",
         "type": "github"
       }
@@ -3702,17 +3702,17 @@
       },
       "locked": {
         "dir": "kubernetes",
-        "lastModified": 1678417363,
-        "narHash": "sha256-AImxTi2qH9xZx4c1MCE/uCQQxXQihdgnv2hT4XejX5I=",
+        "lastModified": 1678418766,
+        "narHash": "sha256-n5zM9cAqBEeR6OAGP5H4l/TQYA92pLZUCCOiWDCyuWE=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "0ec8b471c026ee5ce5d6dd2d7a6149cdd034635b",
+        "rev": "d8f0ae651010f98eb3d27f99a0f15bb8ac59ff7c",
         "type": "github"
       },
       "original": {
         "dir": "kubernetes",
         "owner": "defn",
-        "ref": "kubernetes-0.0.9",
+        "ref": "kubernetes-0.0.10",
         "repo": "pkg",
         "type": "github"
       }
@@ -3768,17 +3768,17 @@
       },
       "locked": {
         "dir": "localdev",
-        "lastModified": 1678417534,
-        "narHash": "sha256-69ddjPnw/cNiLuK7pAIEqbTd+sgKdRYgHktFtlZGPMs=",
+        "lastModified": 1678418655,
+        "narHash": "sha256-6ueoojN4dD7yuNISlHaUjpjP8qGP58ZBzDtegE2LEj0=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "8016a20202734375075dcd18f4c2f8e0671d76e9",
+        "rev": "f331f56c392ee5844e59dac775514b8a2fdc8d31",
         "type": "github"
       },
       "original": {
         "dir": "localdev",
         "owner": "defn",
-        "ref": "localdev-0.0.38",
+        "ref": "localdev-0.0.39",
         "repo": "pkg",
         "type": "github"
       }
