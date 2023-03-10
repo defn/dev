@@ -79,7 +79,7 @@ nix-Darwin-upgrade:
 	sudo -i sh -c 'nix-channel --update && nix-env -iA nixpkgs.nix && launchctl remove org.nixos.nix-daemon && launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist'
 
 nix:
-	$(MAKE) nix-$(shell uname -s)
+	(. ~/.nix-profile/etc/profile.d/nix.sh || true); $(MAKE) nix-$(shell uname -s)
 
 nix-Linux:
 	export LC_ALL=C.UTF-8 && if ! type -P nix; then $(MAKE) nix-Linux-bootstrap; fi
