@@ -79,7 +79,8 @@ nix-Darwin-upgrade:
 	sudo -i sh -c 'nix-channel --update && nix-env -iA nixpkgs.nix && launchctl remove org.nixos.nix-daemon && launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist'
 
 nix:
-	-ln -nfs $(ls -d /nix/store/*-nix-2.14.1/etc) ~/.local/state/nix/profiles/profile/etc
+	-ln -nfs $(ls -d /nix/store/*-nix-2.14.1/etc) ~/.local/state/nix/profiles/profile/
+	-ln -nfs ~/.local/state/nix/profiles/profile ~/.nix-profile
 	(. ~/.nix-profile/etc/profile.d/nix.sh || true); $(MAKE) nix-$(shell uname -s)
 
 nix-Linux:
