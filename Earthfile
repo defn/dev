@@ -180,7 +180,7 @@ NIX_DIRENV:
 
 # coder workspace container
 devcontainer:
-    FROM FROM quay.io/defn/dev:latest-nix-root
+    FROM quay.io/defn/dev:latest-nix-root
     WORKDIR /home/ubuntu
 
     # run dir
