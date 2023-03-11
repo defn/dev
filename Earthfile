@@ -178,36 +178,25 @@ NIX_DIRENV:
     RUN sudo install -d -o ubuntu -g ubuntu /store
     RUN rsync -ia `/home/ubuntu/.nix-profile/bin/nix-store -qR ~/.nix-profile $(ls -d .direnv/flake-profile-* | grep -v 'rc$')` /store/
 
-# testing defn/dev build
-dev:
-    FROM quay.io/defn/dev:latest-nix-installed
-    WORKDIR /home/ubuntu
-
-    # work
-    COPY --chown=ubuntu:ubuntu bin/persist-cache /tmp/
-    RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /work && ln -nfs /work . \
-        && /tmp/persist-cache && rm -f /tmp/persist-cache
-
-    # defn/dev
-    COPY --chown=ubuntu:ubuntu --dir . .
-    COPY --chown=ubuntu:ubuntu .config/nix/nix-earthly.conf /home/ubuntu/.config/nix/nix.conf
-    RUN . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh \
-        && nix build
-
 # coder workspace container
 devcontainer:
-    FROM quay.io/defn/dev:latest-nix-installed
+    FROM FROM quay.io/defn/dev:latest-nix-root
     WORKDIR /home/ubuntu
 
     # run dir
     RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
 
-    # nix profile
-    COPY --chown=ubuntu:ubuntu .config/nix/nix-earthly.conf /home/ubuntu/.config/nix/nix.conf
-    RUN . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh \
-        && nix profile install nixpkgs#nixpkgs-fmt nixpkgs#direnv \
+    # nix install
+    RUN bash -c 'sh <(curl -L https://releases.nixos.org/nix/nix-2.14.1/install) --no-daemon' \
+        && echo . ~/.bashrc > ~/.bash_profile \
+        && echo . ~/.nix-profile/etc/profile.d/nix.sh > ~/.bashrc \
+        && echo 'eval "$(direnv hook bash)"' >> ~/.bashrc \
+        && . ~/.nix-profile/etc/profile.d/nix.sh \
+        && nix profile install nixpkgs#nix-direnv nixpkgs#direnv \
+        && echo 'use flake' > .envrc \
         && nix profile wipe-history \
-        && nix-store --gc
+        && nix-store --gc \
+        && sudo /nix /mix
 
     # defn/dev
     COPY --chown=ubuntu:ubuntu --dir .git .git
