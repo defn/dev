@@ -162,6 +162,7 @@ Brewfile.lock.json
 .direnv
 result
 
+.nix*
 .nix-profile
 .nix-defexpr/channels
 package-lock.json

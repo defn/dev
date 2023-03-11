@@ -209,6 +209,8 @@ devcontainer:
         && nix profile wipe-history \
         && nix-store --gc
 
+    RUN ["/bin/bash", "-c", "ln -nfs $(cd /home/ubuntu/.local/state/nix/profiles/profile/etc && pwd -P)/profile.d/nix.sh .nix.sh"]
+
     # defn/dev
     COPY --chown=ubuntu:ubuntu --dir .git .git
     RUN git reset --hard
