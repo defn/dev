@@ -186,18 +186,6 @@ devcontainer:
     # run dir
     RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
 
-    # nix install
-    RUN bash -c 'sh <(curl -L https://releases.nixos.org/nix/nix-2.14.1/install) --no-daemon' \
-        && echo . ~/.bashrc > ~/.bash_profile \
-        && echo . ~/.nix-profile/etc/profile.d/nix.sh > ~/.bashrc \
-        && echo 'eval "$(direnv hook bash)"' >> ~/.bashrc \
-        && . ~/.nix-profile/etc/profile.d/nix.sh \
-        && nix profile install nixpkgs#nix-direnv nixpkgs#direnv \
-        && echo 'use flake' > .envrc \
-        && nix profile wipe-history \
-        && nix-store --gc \
-        && sudo /nix /mix
-
     # defn/dev
     COPY --chown=ubuntu:ubuntu --dir .git .git
     RUN git reset --hard
