@@ -83,10 +83,10 @@ nix:
 
 nix-Linux:
 	export LC_ALL=C.UTF-8 && if ! type -P nix; then $(MAKE) nix-Linux-bootstrap; fi
-	. ~/.nix-profile/etc/profile.d/nix.sh && if test "$(shell which direnv nixpkgs-fmt | grep nix | wc -l)" != "2"; then export LC_ALL=C.UTF-8 && nix profile install --offline nixpkgs\#{nix-direnv,nixpkgs-fmt}; fi
+	. ~/.nix-profile/etc/profile.d/nix.sh && if test "$(shell which direnv nixpkgs-fmt | grep nix | wc -l)" != "2"; then export LC_ALL=C.UTF-8 && nix profile install nixpkgs\#{nix-direnv,nixpkgs-fmt}; fi
 
 nix-Darwin:
-	. ~/.nix-profile/etc/profile.d/nix.sh && if test "$(shell which direnv nixpkgs-fmt | grep nix | wc -l)" != "2"; then export LC_ALL=C.UTF-8 && nix profile install --offline nixpkgs\#{nix-direnv,nixpkgs-fmt}; fi
+	. ~/.nix-profile/etc/profile.d/nix.sh && if test "$(shell which direnv nixpkgs-fmt | grep nix | wc -l)" != "2"; then export LC_ALL=C.UTF-8 && nix profile install nixpkgs\#{nix-direnv,nixpkgs-fmt}; fi
 
 nix-Linux-bootstrap:
 	sh <(curl -L https://releases.nixos.org/nix/nix-2.14.1/install) --no-daemon
