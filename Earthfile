@@ -206,10 +206,7 @@ devcontainer:
     COPY --chown=ubuntu:ubuntu .config/nix/nix-earthly.conf /home/ubuntu/.config/nix/nix.conf
     RUN . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh \
         && nix profile install nixpkgs#nixpkgs-fmt nixpkgs#direnv \
-        && nix profile wipe-history \
         && nix-store --gc
-
-    RUN ["/bin/bash", "-c", "ln -nfs $(cd /home/ubuntu/.local/state/nix/profiles/profile/etc && pwd -P)/profile.d/nix.sh .nix.sh"]
 
     # defn/dev
     COPY --chown=ubuntu:ubuntu --dir .git .git
