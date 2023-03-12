@@ -3608,17 +3608,17 @@
       },
       "locked": {
         "dir": "kubernetes",
-        "lastModified": 1678653796,
-        "narHash": "sha256-nd8MEddxiyIPSHGUz23nXSKSeaYrADPRyuqwYI7IVgI=",
+        "lastModified": 1678653976,
+        "narHash": "sha256-2qTTDeoCHHlYMJog+Yq70fzixFp8Zt/KkeJkUy4e7MI=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "06a91c0077964036c66fdc83c4e5e8afaa7ccf59",
+        "rev": "fc5301d281a1b9968f46872632a331437e2e76db",
         "type": "github"
       },
       "original": {
         "dir": "kubernetes",
         "owner": "defn",
-        "ref": "kubernetes-0.0.12",
+        "ref": "kubernetes-0.0.13",
         "repo": "pkg",
         "type": "github"
       }
