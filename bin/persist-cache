@@ -18,6 +18,8 @@ function persist {
 }
 
 function cache {
+  if ! type -P sudo; then return 0; fi
+
   if [[ "Linux" == "$(uname -s)" ]]; then
 	  if test -d /workspaces; then
       sudo install -d -m 0755 -o ubuntu -g ubuntu /workspaces
