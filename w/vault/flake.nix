@@ -1,6 +1,6 @@
 {
   inputs = {
-    pkg.url = github:defn/pkg/0.0.165;
+    pkg.url = github:defn/pkg/0.0.166;
     vault.url = github:defn/pkg/vault-1.13.0-0?dir=vault;
     acme.url = github:defn/pkg/acme-3.0.5-5?dir=acme;
   };
