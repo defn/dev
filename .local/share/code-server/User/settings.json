@@ -59,5 +59,6 @@
     "git.openRepositoryInParentFolders": "always",
     "dev.containers.copyGitConfig": true,
     "dev.containers.gitCredentialHelperConfigLocation": "none",
-    "go.terminal.activateEnvironment": false
+    "go.terminal.activateEnvironment": false,
+    "window.zoomLevel": 0
 }
