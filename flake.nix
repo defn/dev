@@ -1,20 +1,20 @@
 {
   inputs = {
-    pkg.url = github:defn/pkg/0.0.167;
-    kubernetes.url = github:defn/pkg/kubernetes-0.0.13?dir=kubernetes;
-    cloud.url = github:defn/pkg/cloud-0.0.9?dir=cloud;
-    az.url = github:defn/pkg/az-0.0.28?dir=az;
-    oci.url = github:defn/pkg/oci-0.0.1?dir=oci;
-    nix.url = github:defn/pkg/nix-0.0.1?dir=nix;
-    secrets.url = github:defn/pkg/secrets-0.0.3?dir=secrets;
-    development.url = github:defn/pkg/development-0.0.1?dir=development;
-    utils.url = github:defn/pkg/utils-0.0.1?dir=utils;
-    vpn.url = github:defn/pkg/vpn-0.0.1?dir=vpn;
-    localdev.url = github:defn/pkg/localdev-0.0.40?dir=localdev;
-    tailscale.url = github:defn/pkg/tailscale-1.36.1-1?dir=tailscale;
-    godev.url = github:defn/pkg/godev-0.0.13?dir=godev;
-    nodedev.url = github:defn/pkg/nodedev-0.0.1?dir=nodedev;
-    shell.url = github:defn/pkg/shell-0.0.1?dir=shell;
+    pkg.url = github:defn/pkg/0.0.170;
+    kubernetes.url = github:defn/pkg/kubernetes-0.0.16?dir=kubernetes;
+    cloud.url = github:defn/pkg/cloud-0.0.12?dir=cloud;
+    az.url = github:defn/pkg/az-0.0.30?dir=az;
+    oci.url = github:defn/pkg/oci-0.0.3?dir=oci;
+    nix.url = github:defn/pkg/nix-0.0.3?dir=nix;
+    secrets.url = github:defn/pkg/secrets-0.0.5?dir=secrets;
+    development.url = github:defn/pkg/development-0.0.3?dir=development;
+    utils.url = github:defn/pkg/utils-0.0.3?dir=utils;
+    vpn.url = github:defn/pkg/vpn-0.0.3?dir=vpn;
+    localdev.url = github:defn/pkg/localdev-0.0.42?dir=localdev;
+    tailscale.url = github:defn/pkg/tailscale-1.36.1-3?dir=tailscale;
+    godev.url = github:defn/pkg/godev-0.0.16?dir=godev;
+    nodedev.url = github:defn/pkg/nodedev-0.0.3?dir=nodedev;
+    shell.url = github:defn/pkg/shell-0.0.3?dir=shell;
   };
 
   outputs = inputs: inputs.pkg.main rec {
@@ -153,7 +153,7 @@
 
       dev = ''
         #docker pull quay.io/defn/dev:latest-devcontainer
-        #nix develop github:defn/pkg/nodedev-0.0.1?dir=nodedev --command devcontainer build --workspace-folder .
+        #nix develop github:defn/pkg/nodedev-0.0.3?dir=nodedev --command devcontainer build --workspace-folder .
         code --folder-uri "vscode-remote://dev-container+$(pwd | perl -pe 's{\s+}{}g' | xxd -p)/home/ubuntu"
       '';
 
