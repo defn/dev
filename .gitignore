@@ -174,3 +174,4 @@ etc/derp.json
 go
 .dotnet
 /nix
+.netrc
