@@ -145,6 +145,7 @@
 
       ci = ''
         BUILDKITE_AGENT_TOKEN="$(pass BUILDKITE_AGENT_TOKEN)"
+        BUILDKITE_AGENT_SPAWN="2"
         BUILDKITE_AGENT_NAME="%hostname-%spawn"
         BUILDKITE_BUILD_PATH="$HOME/.buildkite-agent/builds"
         export BUILDKITE_AGENT_TOKEN BUILDKITE_AGENT_NAME BUILDKITE_BUILD_PATH
