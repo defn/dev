@@ -3,7 +3,7 @@
     pkg.url = github:defn/pkg/0.0.170;
     kubernetes.url = github:defn/pkg/kubernetes-0.0.16?dir=kubernetes;
     cloud.url = github:defn/pkg/cloud-0.0.12?dir=cloud;
-    az.url = github:defn/pkg/az-0.0.35?dir=az;
+    az.url = github:defn/pkg/az-0.0.36?dir=az;
     oci.url = github:defn/pkg/oci-0.0.3?dir=oci;
     nix.url = github:defn/pkg/nix-0.0.3?dir=nix;
     secrets.url = github:defn/pkg/secrets-0.0.5?dir=secrets;
