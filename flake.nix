@@ -144,12 +144,17 @@
       '';
 
       ci = ''
+        set -a
         BUILDKITE_AGENT_TOKEN="$(pass BUILDKITE_AGENT_TOKEN)"
         BUILDKITE_AGENT_SPAWN="2"
         BUILDKITE_AGENT_NAME="%hostname-%spawn"
         BUILDKITE_BUILD_PATH="$HOME/.buildkite-agent/builds"
-        export BUILDKITE_AGENT_TOKEN BUILDKITE_AGENT_NAME BUILDKITE_BUILD_PATH BUILDKITE_AGENT_SPAWN
-        buildkite-agent start
+        OTEL_EXPORTER_OTLP_ENDPOINT="https://api.honeycomb.io/"
+        OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team=$(pass HONEYCOMB_API_KEY)"
+        OTEL_SERVICE_NAME="buildevents"
+        set +a
+
+        buildkite-agent start --tracing-backend opentelemetry 
       '';
 
       dev = ''
