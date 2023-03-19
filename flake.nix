@@ -146,15 +146,23 @@
       ci = ''
         set -a
         BUILDKITE_AGENT_TOKEN="$(pass BUILDKITE_AGENT_TOKEN)"
-        BUILDKITE_AGENT_SPAWN="2"
+        BUILDKITE_AGENT_SPAWN="4"
         BUILDKITE_AGENT_NAME="%hostname-%spawn"
         BUILDKITE_BUILD_PATH="$HOME/.buildkite-agent/builds"
-        OTEL_EXPORTER_OTLP_ENDPOINT="https://api.honeycomb.io/"
+
+        OTEL_EXPORTER_OTLP_ENDPOINT="https://api.honeycomb.io:443"
+        BUILDEVENT_APIHOST="https://api.honeycomb.io:443"
+
         OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team=$(pass HONEYCOMB_API_KEY)"
-        OTEL_SERVICE_NAME="buildevents"
+        BUILDEVENT_APIKEY="$(pass HONEYCOMB_API_KEY)"
+
+        # TODO doesn't change the service name
+        OTEL_SERVICE_NAME="buildkite-agent"
+        BUILDEVENT_DATASET="buildkite-agent"
+
         set +a
 
-        buildkite-agent start --tracing-backend opentelemetry 
+        buildkite-agent start --tracing-backend opentelemetry
       '';
 
       dev = ''
