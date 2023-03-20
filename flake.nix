@@ -7,13 +7,13 @@
     oci.url = github:defn/pkg/oci-0.0.3?dir=oci;
     nix.url = github:defn/pkg/nix-0.0.3?dir=nix;
     secrets.url = github:defn/pkg/secrets-0.0.5?dir=secrets;
-    development.url = github:defn/pkg/development-0.0.3?dir=development;
+    development.url = github:defn/pkg/development-0.0.4?dir=development;
     utils.url = github:defn/pkg/utils-0.0.3?dir=utils;
     vpn.url = github:defn/pkg/vpn-0.0.3?dir=vpn;
     localdev.url = github:defn/pkg/localdev-0.0.46?dir=localdev;
     tailscale.url = github:defn/pkg/tailscale-1.38.1-0?dir=tailscale;
-    godev.url = github:defn/pkg/godev-0.0.16?dir=godev;
-    nodedev.url = github:defn/pkg/nodedev-0.0.3?dir=nodedev;
+    godev.url = github:defn/pkg/godev-0.0.17?dir=godev;
+    nodedev.url = github:defn/pkg/nodedev-0.0.4?dir=nodedev;
     shell.url = github:defn/pkg/shell-0.0.3?dir=shell;
   };
 
@@ -167,7 +167,7 @@
 
       dev = ''
         #docker pull quay.io/defn/dev:latest-devcontainer
-        #nix develop github:defn/pkg/nodedev-0.0.3?dir=nodedev --command devcontainer build --workspace-folder .
+        #nix develop github:defn/pkg/nodedev-0.0.4?dir=nodedev --command devcontainer build --workspace-folder .
         code --folder-uri "vscode-remote://dev-container+$(pwd | perl -pe 's{\s+}{}g' | xxd -p)/home/ubuntu"
       '';
 
