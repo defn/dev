@@ -13,6 +13,7 @@ macos:
 	defaults write -g ApplePressAndHoldEnabled -bool false
 	-docker context create host --docker host=unix:///var/run/docker.sock
 	-docker network create dev
+	docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock ubuntu chown 1000:1000 /var/run/docker.sock
 	(echo "rdr pass inet proto tcp from any to any port 80 -> 127.0.0.1 port 5555"; echo "rdr pass inet proto tcp from any to any port 443 -> 127.0.0.1 port 5556") | sudo -A pfctl -ef -
 
 symlinks:
