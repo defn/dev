@@ -15,7 +15,7 @@
 		"--init",
 		"--privileged",
 		"--device=/dev/net/tun",
-		"--env-file",
-		"${localWorkspaceFolder}/.dotfiles/.env"
+    "--network=app-network=dev",
+		"--env-file=${localWorkspaceFolder}/.dotfiles/.env"
 	]
 }
