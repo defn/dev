@@ -3,20 +3,6 @@ analytics_settings(False)
 load("ext://uibutton", "cmd_button", "location")
 
 if "-darwin" in os.getenv("system"):
-    # Starts openvpn on macOS
-    local_resource("openvpn",
-        serve_cmd=[
-            "bash", "-c",
-            """
-                eval "$(direnv hook bash)"
-                _direnv_hook
-                sudo -A pkill -f bin/openvp[n] || true
-                sleep 2; sudo -A pkill -9 -f bin/openvp[n] || true
-                exec sudo -A $(which openvpn) etc/openvpn/server.conf
-            """
-        ]
-    )
-
     # Starts Vault on macOS
     local_resource("vault",
         serve_cmd=[
@@ -57,19 +43,6 @@ if "-darwin" in os.getenv("system"):
         ]
     )
 else:
-    # Starts openvpn on Linux
-    local_resource("openvpn",
-        serve_cmd=[
-            "bash", "-c",
-            """
-                eval "$(direnv hook bash)"
-                _direnv_hook
-                sudo pkill -f bin/openvp[n] || true
-                sleep 2; sudo pkill -9 -f bin/openvp[n] || true
-                exec sudo -A $(which openvpn) etc/openvpn/client.conf
-            """
-        ]
-    )
     # Starts Tailscale on Linux
     local_resource("tailscale",
         serve_cmd=[
