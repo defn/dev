@@ -77,7 +77,7 @@ install-inner:
 
 	@mark up
 	this-up
-	while true; do vault status; if [[ "$$" == 1 ]]; then sleep 5; continue; fi; break; done
+	while true; do vault status; if [[ "$$?" == 1 ]]; then sleep 5; continue; fi; break; done
 
 	this-login
 
