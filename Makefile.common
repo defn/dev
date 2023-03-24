@@ -10,6 +10,7 @@ macos:
 	for ip in $(dummy_ip); do if ! ifconfig lo0 | grep "inet $$ip"; then sudo -A ifconfig lo0 alias "$$ip" netmask 255.255.255.255; fi; done;
 	ifconfig lo0
 	defaults write -g ApplePressAndHoldEnabled -bool false
+	while true; do if docker ps; then break; fi; sleep 5; done
 	-docker context create host --docker host=unix:///var/run/docker.sock
 	-docker network create dev
 	docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock ubuntu chown 1000:1000 /var/run/docker.sock
@@ -69,14 +70,15 @@ install-inner:
 		nix develop github:defn/pkg/godev-0.0.3?dir=godev --command bash -c 'sudo ln -nfs "$$(which go)" "$${VSCODE_GIT_ASKPASS_NODE%/node}/bin/"'; \
 		fi
 
-	this-login
-
 	@mark doctor
 	pass hello; echo; echo
 	ssh-add -L; echo; echo
 
 	@mark up
+	~/bin/withde ~ true
 	this-up
+
+	this-login
 
 nix-Darwin-upgrade:
 	sudo -i sh -c 'nix-channel --update && nix-env -iA nixpkgs.nix && launchctl remove org.nixos.nix-daemon && launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist'
