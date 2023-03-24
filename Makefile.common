@@ -47,7 +47,7 @@ install-inner:
 	@mark configure gpg
 	if test -d ~/.password-store/config/gnupg-config/.; then rsync -ia ~/.password-store/config/gnupg-config/. ~/.gnupg/.; fi
 	$(MAKE) perms
-	if [[ "$(uname -s)" == "Darwin" ]]; then make macos; fi
+	if [[ "$(shell uname -s)" == "Darwin" ]]; then $(MAKE) macos; fi
 	dirmngr --daemon || true
 
 	@mark dotfiles
