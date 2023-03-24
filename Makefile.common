@@ -7,7 +7,6 @@ second_ = $(word 2, $(subst _, ,$@))
 
 macos:
 	-$(shell which gpg-agent) --daemon --pinentry-program $$(which pinentry-mac)
-	-$(shell which dirmngr) --daemon
 	for ip in $(dummy_ip); do if ! ifconfig lo0 | grep "inet $$ip"; then sudo -A ifconfig lo0 alias "$$ip" netmask 255.255.255.255; fi; done;
 	ifconfig lo0
 	defaults write -g ApplePressAndHoldEnabled -bool false
@@ -34,7 +33,8 @@ install:
 	. ~/.nix-profile/etc/profile.d/nix.sh && bin/withde ~ $(MAKE) install-inner
 
 install-inner:
-	$(MAKE) symlinks perms
+	$(MAKE) symlinks
+	$(MAKE) perms
 
 	@mark configure password-store
 	mkdir -p ~/work/password-store
@@ -47,6 +47,8 @@ install-inner:
 	@mark configure gpg
 	if test -d ~/.password-store/config/gnupg-config/.; then rsync -ia ~/.password-store/config/gnupg-config/. ~/.gnupg/.; fi
 	$(MAKE) perms
+	if [[ "$(uname -s)" == "Darwin" ]]; then make macos; fi
+	dirmngr --daemon || true
 
 	@mark dotfiles
 	if test -n "$${GIT_AUTHOR_NAME:-}"; then \

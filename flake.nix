@@ -174,9 +174,7 @@
       up = ''
         eval "$(direnv hook bash)"
         _direnv_hook
-        if [[ "$(uname -s)" == "Darwin" ]]; then make macos; fi
         if ! test -e /var/run/utmp; then sudo touch /var/run/utmp; fi
-        dirmngr --daemon || true
         pass hello
         screen -S tilt -d -m bash -il -c "~/bin/withde ~ $(which tilt) up" || true
       '';
