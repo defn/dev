@@ -123,9 +123,9 @@
       '';
 
       prune = ''
-        	docker images | grep '<none>' | awk '{print $3}' | runmany 'docker rmi $1'
         	docker system prune -f
-        	earthly prune
+        	docker images | grep '<none>' | awk '{print $3}' | runmany 'docker rmi $1'
+        	earthly prune --reset
       '';
 
       wg-up = ''
