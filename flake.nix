@@ -123,9 +123,9 @@
       '';
 
       prune = ''
-        	-docker images | grep :5000/ | grep -E 'weeks|days' | awk '{print $1 ":" $2}' | runmany 'docker rmi $1'
-        	-docker system prune -f
-        	-earthly prune
+        	docker images | grep :5000/ | grep -E 'weeks|days' | awk '{print $1 ":" $2}' | runmany 'docker rmi $1'
+        	docker system prune -f
+        	earthly prune
       '';
 
       wg-up = ''
