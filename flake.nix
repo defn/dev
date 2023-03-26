@@ -123,7 +123,7 @@
       '';
 
       prune = ''
-        	docker images | grep '<none>' | awk '{print $1 ":" $2}' | runmany 'docker rmi $1'
+        	docker images | grep '<none>' | awk '{print $3}' | runmany 'docker rmi $1'
         	docker system prune -f
         	earthly prune
       '';
