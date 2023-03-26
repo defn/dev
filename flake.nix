@@ -145,10 +145,12 @@
 
       ci = ''
         set -a
+        BUILDKITE_BUILD_PATH="$HOME/.buildkite-agent/builds"
+
         BUILDKITE_AGENT_TOKEN="$(pass BUILDKITE_AGENT_TOKEN)"
         BUILDKITE_AGENT_SPAWN="4"
         BUILDKITE_AGENT_NAME="%hostname-%spawn"
-        BUILDKITE_BUILD_PATH="$HOME/.buildkite-agent/builds"
+        BUILDKITE_AGENT_TAGS="queue=$GIT_AUTHOR_NAME,cpu=$(nproc)"
 
         OTEL_EXPORTER_OTLP_ENDPOINT="https://api.honeycomb.io:443"
         BUILDEVENT_APIHOST="https://api.honeycomb.io:443"
