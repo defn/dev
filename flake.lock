@@ -48,17 +48,17 @@
       },
       "locked": {
         "dir": "awscli",
-        "lastModified": 1680159430,
-        "narHash": "sha256-pMotSav1uDyH6jnoR4BZGIZbs7XnX8LpLaEQvqIq6Ug=",
+        "lastModified": 1680316278,
+        "narHash": "sha256-jaErR6ZCIWv7aQEOmjbLId3cW3Q/XAsT0VDWadonw6I=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "e40fcddbc3e99e0d71493005ee5730f91dfa9073",
+        "rev": "9aa7f1a14a20a030145c322414610662d2151ada",
         "type": "github"
       },
       "original": {
         "dir": "awscli",
         "owner": "defn",
-        "ref": "awscli-2.11.7-0",
+        "ref": "awscli-2.11.8-0",
         "repo": "pkg",
         "type": "github"
       }
@@ -227,17 +227,17 @@
       },
       "locked": {
         "dir": "cloud",
-        "lastModified": 1680244630,
-        "narHash": "sha256-orIZNlxlnG/5pPo8Ec/ffZ9NlukS16noCHFJnqAOKEQ=",
+        "lastModified": 1680321063,
+        "narHash": "sha256-SgkM/fEKop2RgGFwJwIfHJiJQasOHNIhtmT9SZtOvb8=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "d41b70dae17849058911a39658cd1ba25d746048",
+        "rev": "0206b0cbbd0c5ce298747f3d723aed5511d981e9",
         "type": "github"
       },
       "original": {
         "dir": "cloud",
         "owner": "defn",
-        "ref": "cloud-0.0.17",
+        "ref": "cloud-0.0.18",
         "repo": "pkg",
         "type": "github"
       }
@@ -4306,17 +4306,17 @@
       },
       "locked": {
         "dir": "kubernetes",
-        "lastModified": 1680317983,
-        "narHash": "sha256-qmUiZXG3b9r5iTafjrTf5BZKoDCU+5Ezhx50w8ebXh0=",
+        "lastModified": 1680321019,
+        "narHash": "sha256-OlljPS3AD00OqvfhFxC+RdrFgUbzu2z8p1b+qMgFpqo=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "47597f1c27c0962c9989a55dc14dec2e5c2add80",
+        "rev": "c7b6be9bbda0277002c373abc471076a95872ebf",
         "type": "github"
       },
       "original": {
         "dir": "kubernetes",
         "owner": "defn",
-        "ref": "kubernetes-0.0.22",
+        "ref": "kubernetes-0.0.23",
         "repo": "pkg",
         "type": "github"
       }
@@ -6563,17 +6563,17 @@
       },
       "locked": {
         "dir": "tkn",
-        "lastModified": 1680317533,
-        "narHash": "sha256-NYz5cBwm3tAGyDRztgwdshUgDWNcw3LFCl6Yb/im+Gk=",
+        "lastModified": 1680320760,
+        "narHash": "sha256-Fpd+MDh2bLyTXJ0idLGDDRadEWQS2T1aEFkhD8eEjks=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "bdd000d67d3ab3352cc44fa7251e5d42c1ecf6bf",
+        "rev": "be2f3dab97e681144d938942dda9e3c335381572",
         "type": "github"
       },
       "original": {
         "dir": "tkn",
         "owner": "defn",
-        "ref": "tkn-0.30.0-0",
+        "ref": "tkn-0.30.0-1",
         "repo": "pkg",
         "type": "github"
       }
