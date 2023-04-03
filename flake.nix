@@ -1,6 +1,6 @@
 {
   inputs = {
-    pkg.url = github:defn/pkg/0.0.173;
+    pkg.url = github:defn/pkg/0.0.174;
     kubernetes.url = github:defn/pkg/kubernetes-0.0.27?dir=kubernetes;
     cloud.url = github:defn/pkg/cloud-0.0.20?dir=cloud;
     az.url = github:defn/pkg/az-0.0.52?dir=az;
@@ -11,7 +11,7 @@
     utils.url = github:defn/pkg/utils-0.0.4?dir=utils;
     vpn.url = github:defn/pkg/vpn-0.0.4?dir=vpn;
     localdev.url = github:defn/pkg/localdev-0.0.53?dir=localdev;
-    tailscale.url = github:defn/pkg/tailscale-1.38.3-1?dir=tailscale;
+    tailscale.url = github:defn/pkg/tailscale-1.38.3-4?dir=tailscale;
     godev.url = github:defn/pkg/godev-0.0.21?dir=godev;
     nodedev.url = github:defn/pkg/nodedev-0.0.5?dir=nodedev;
     shell.url = github:defn/pkg/shell-0.0.4?dir=shell;
@@ -54,6 +54,7 @@
             inputs.secrets.defaultPackage.${ctx.system}
             inputs.development.defaultPackage.${ctx.system}
             inputs.utils.defaultPackage.${ctx.system}
+            inputs.tailscale.defaultPackage.${ctx.system}
             inputs.shell.defaultPackage.${ctx.system}
           ];
         in
