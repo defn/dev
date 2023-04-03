@@ -66,11 +66,6 @@ install-inner:
 		&& docker context create host --docker host=unix:///var/run/docker.sock || true \
         && docker context use host
 
-	@mark dev
-	if echo "$${VSCODE_GIT_ASKPASS_NODE:-}" | grep ^/vscode; then \
-		nix develop github:defn/pkg/godev-0.0.3?dir=godev --command bash -c 'sudo ln -nfs "$$(which go)" "$${VSCODE_GIT_ASKPASS_NODE%/node}/bin/"'; \
-		fi
-
 	@mark doctor
 	pass hello; echo; echo
 	ssh-add -L; echo; echo
