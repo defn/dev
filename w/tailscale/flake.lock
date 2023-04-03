@@ -341,17 +341,17 @@
       },
       "locked": {
         "dir": "tailscale",
-        "lastModified": 1680509137,
-        "narHash": "sha256-JniyN/VD+2lWdbw9qEQbbwUm4psMx27Pg56kflbvRtw=",
+        "lastModified": 1680509219,
+        "narHash": "sha256-Pq7w1AwnXymKSfPwbIHIUWpa6AIMNHsz8eGNyjerwEc=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "4181c7fe9613ef51ef2a95609a991c957ddbd90a",
+        "rev": "a092b524dbc387dbbb539552885a705129fe6b4a",
         "type": "github"
       },
       "original": {
         "dir": "tailscale",
         "owner": "defn",
-        "ref": "tailscale-1.38.3-3",
+        "ref": "tailscale-1.38.3-4",
         "repo": "pkg",
         "type": "github"
       }
