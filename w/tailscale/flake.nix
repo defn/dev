@@ -1,8 +1,8 @@
 {
   inputs = {
-    pkg.url = github:defn/pkg/0.0.172;
-    tailscale.url = github:defn/pkg/tailscale-1.38.3-0?dir=tailscale;
-    cloudflared.url = github:defn/pkg/cloudflared-2023.3.1-0?dir=cloudflared;
+    pkg.url = github:defn/pkg/0.0.173;
+    tailscale.url = github:defn/pkg/tailscale-1.38.3-1?dir=tailscale;
+    cloudflared.url = github:defn/pkg/cloudflared-2023.3.1-1?dir=cloudflared;
   };
 
   outputs = inputs: inputs.pkg.main rec {
