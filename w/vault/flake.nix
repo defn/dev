@@ -1,8 +1,8 @@
 {
   inputs = {
-    pkg.url = github:defn/pkg/0.0.173;
-    vault.url = github:defn/pkg/vault-1.13.1-1?dir=vault;
-    acme.url = github:defn/pkg/acme-3.0.5-9?dir=acme;
+    pkg.url = github:defn/pkg/0.0.198;
+    vault.url = github:defn/pkg/vault-1.13.1-26?dir=vault;
+    acme.url = github:defn/pkg/acme-3.0.5-34?dir=acme;
   };
 
   outputs = inputs: inputs.pkg.main rec {
