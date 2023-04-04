@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "cloudflared",
-        "lastModified": 1680486301,
-        "narHash": "sha256-Eg2xoZCEtwC1wqdUCfcmD5IGBvEENQlC/7reeAz0gQE=",
+        "lastModified": 1680530164,
+        "narHash": "sha256-NlnzpgKdp42pGcYfbXVyzDW4Qdi7KX8MdFE0lv2C6fE=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "17a3cd0f8aa4f45d545a3aac3ec5deff3f29829c",
+        "rev": "c23bf4f90d64189c3b9b3578a62218611d9c8ab2",
         "type": "github"
       },
       "original": {
         "dir": "cloudflared",
         "owner": "defn",
-        "ref": "cloudflared-2023.3.1-1",
+        "ref": "cloudflared-2023.3.1-26",
         "repo": "pkg",
         "type": "github"
       }
@@ -29,17 +29,17 @@
       },
       "locked": {
         "dir": "dev",
-        "lastModified": 1680485956,
-        "narHash": "sha256-UBSglC6fKPgBs9vgSZYJjyJlLPT9WxckWSolrJE7bBA=",
+        "lastModified": 1680508743,
+        "narHash": "sha256-3ksGTLROPg18UODv5wkJChJXftWiBL2jlDcDKlATHJM=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "ea781868b6c6b71a4a378c5224e4d375d19ef0f0",
+        "rev": "ccdf170bafdf5800de515bfcff80fdfb06a048b8",
         "type": "github"
       },
       "original": {
         "dir": "dev",
         "owner": "defn",
-        "ref": "dev-0.0.35",
+        "ref": "dev-0.0.36",
         "repo": "pkg",
         "type": "github"
       }
@@ -276,16 +276,16 @@
         "dev": "dev"
       },
       "locked": {
-        "lastModified": 1680486099,
-        "narHash": "sha256-Xk/TJ+OmCQFh/MpgK38tD6BYszBANtdNqP27KLNMxMM=",
+        "lastModified": 1680529410,
+        "narHash": "sha256-FCZBGTr3sUSxjOLGAruGNC/nsZ5t1y1XKbA32Yj4iAA=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "dbdfd7abb9d53d861d3ad9420175a61a499af190",
+        "rev": "a8c0a2ec2ebd3c8e6ddc26fde9df886642c676b5",
         "type": "github"
       },
       "original": {
         "owner": "defn",
-        "ref": "0.0.173",
+        "ref": "0.0.198",
         "repo": "pkg",
         "type": "github"
       }
@@ -295,16 +295,16 @@
         "dev": "dev_2"
       },
       "locked": {
-        "lastModified": 1680508790,
-        "narHash": "sha256-ttht/n9WBRWEoprV99H+rtBadY4QGeXzhUg2FOMyo/E=",
+        "lastModified": 1680529410,
+        "narHash": "sha256-FCZBGTr3sUSxjOLGAruGNC/nsZ5t1y1XKbA32Yj4iAA=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "5ce7856d48615254d393ebf016cb7f9372e2fc46",
+        "rev": "a8c0a2ec2ebd3c8e6ddc26fde9df886642c676b5",
         "type": "github"
       },
       "original": {
         "owner": "defn",
-        "ref": "0.0.174",
+        "ref": "0.0.198",
         "repo": "pkg",
         "type": "github"
       }
@@ -314,16 +314,16 @@
         "dev": "dev_3"
       },
       "locked": {
-        "lastModified": 1680508790,
-        "narHash": "sha256-ttht/n9WBRWEoprV99H+rtBadY4QGeXzhUg2FOMyo/E=",
+        "lastModified": 1680529410,
+        "narHash": "sha256-FCZBGTr3sUSxjOLGAruGNC/nsZ5t1y1XKbA32Yj4iAA=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "5ce7856d48615254d393ebf016cb7f9372e2fc46",
+        "rev": "a8c0a2ec2ebd3c8e6ddc26fde9df886642c676b5",
         "type": "github"
       },
       "original": {
         "owner": "defn",
-        "ref": "0.0.174",
+        "ref": "0.0.198",
         "repo": "pkg",
         "type": "github"
       }
@@ -341,17 +341,17 @@
       },
       "locked": {
         "dir": "tailscale",
-        "lastModified": 1680509219,
-        "narHash": "sha256-Pq7w1AwnXymKSfPwbIHIUWpa6AIMNHsz8eGNyjerwEc=",
+        "lastModified": 1680529551,
+        "narHash": "sha256-Izw3DrMCqNr2EvXVSCPHBu3b+S09aUdxMzBHE9cJtuI=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "a092b524dbc387dbbb539552885a705129fe6b4a",
+        "rev": "bd4ac215024bfaa3ce3e8412765371d2537717a9",
         "type": "github"
       },
       "original": {
         "dir": "tailscale",
         "owner": "defn",
-        "ref": "tailscale-1.38.3-4",
+        "ref": "tailscale-1.38.3-28",
         "repo": "pkg",
         "type": "github"
       }
