@@ -47,6 +47,9 @@ if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$HOME/node_modules/.bin:$PATH"; fi
 export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
 export DISABLE_VERSION_CHECK=1
 
+# cloud-nuke
+export DISABLE_TELEMETRY=1
+
 # nextjs
 export NEXT_TELEMETRY_DISABLED=1
 
