@@ -2351,17 +2351,17 @@
       },
       "locked": {
         "dir": "gh",
-        "lastModified": 1680649440,
-        "narHash": "sha256-XqCXORuJvd0QfpWEY0/U2at57J7Wh6IvYuK/oAUVMt0=",
+        "lastModified": 1680654717,
+        "narHash": "sha256-poWfkHgF34IT5s8xarl7hyFj92XFrEDHuyi9owRTNVs=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "116598aba3ac8db535871cc0b93b85d4acb415c5",
+        "rev": "d551b1e15496c780ee04c2fb1d3d950a18a2fcf2",
         "type": "github"
       },
       "original": {
         "dir": "gh",
         "owner": "defn",
-        "ref": "gh-2.26.0-1",
+        "ref": "gh-2.26.1-1",
         "repo": "pkg",
         "type": "github"
       }
@@ -2829,17 +2829,17 @@
       },
       "locked": {
         "dir": "localdev",
-        "lastModified": 1680650210,
-        "narHash": "sha256-xi5+4eTKew6wzM0rkerSZ8SBxKzmva3chFdHlTvn7G8=",
+        "lastModified": 1680737104,
+        "narHash": "sha256-cKzygmlq0zq+B5jHYuV8g4BKnm6AvtVBQGCnSIIIkPQ=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "3cc3d1d6eeee4e74a9d7c91613412b6791a623a5",
+        "rev": "7d333c87412676d377b789738864d9d9d66e7ea6",
         "type": "github"
       },
       "original": {
         "dir": "localdev",
         "owner": "defn",
-        "ref": "localdev-0.0.82",
+        "ref": "localdev-0.0.83",
         "repo": "pkg",
         "type": "github"
       }
@@ -3762,17 +3762,17 @@
       },
       "locked": {
         "dir": "nomad",
-        "lastModified": 1680588114,
-        "narHash": "sha256-M1bxBcaOPlXb5mCEtJTe29FffnYoSP1jNcnHnkwk0s0=",
+        "lastModified": 1680736818,
+        "narHash": "sha256-YnsO/vSbzCDqdKGN5jAhf13Jar/+yzWrDCYe2fmOmAY=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "4fe9d18afffd699dd377efc1f2210691aad49f88",
+        "rev": "7953dd03be48eca3372c8c6a8d30bfefb4ca992b",
         "type": "github"
       },
       "original": {
         "dir": "nomad",
         "owner": "defn",
-        "ref": "nomad-1.5.2-27",
+        "ref": "nomad-1.5.3-1",
         "repo": "pkg",
         "type": "github"
       }
@@ -4956,17 +4956,17 @@
       },
       "locked": {
         "dir": "tailscale",
-        "lastModified": 1680588257,
-        "narHash": "sha256-jAFQz1Ssbu0n/fWGiyUwrA3mCx1LDcWkzIVXvYeDTjQ=",
+        "lastModified": 1680736689,
+        "narHash": "sha256-m6lG+prOhQf0lRktmXeDv0sq7/D+JQWWsU5CmZt9IYM=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "1f5b60c7560a0a4c9444b71d09781c1117c73f5c",
+        "rev": "4ca4fd8829aa4f7fa4a00c118131d11bcc9977cd",
         "type": "github"
       },
       "original": {
         "dir": "tailscale",
         "owner": "defn",
-        "ref": "tailscale-1.38.3-29",
+        "ref": "tailscale-1.38.4-1",
         "repo": "pkg",
         "type": "github"
       }

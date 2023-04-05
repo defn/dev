@@ -52,7 +52,7 @@ else:
                 eval "$(direnv hook bash)"
                 direnv allow
                 _direnv_hook
-                exec this-tailscale-start
+                exec sudo "$(which tailscaled)" "$@"
             """
         ]
     )
