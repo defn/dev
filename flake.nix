@@ -2,7 +2,7 @@
   inputs = {
     pkg.url = github:defn/pkg/0.0.199;
     kubernetes.url = github:defn/pkg/kubernetes-0.0.55?dir=kubernetes;
-    cloud.url = github:defn/pkg/cloud-0.0.49?dir=cloud;
+    cloud.url = github:defn/pkg/cloud-0.0.50?dir=cloud;
     az.url = github:defn/pkg/az-0.0.80?dir=az;
     oci.url = github:defn/pkg/oci-0.0.30?dir=oci;
     nix.url = github:defn/pkg/nix-0.0.30?dir=nix;
@@ -12,7 +12,7 @@
     vpn.url = github:defn/pkg/vpn-0.0.30?dir=vpn;
     localdev.url = github:defn/pkg/localdev-0.0.83?dir=localdev;
     tailscale.url = github:defn/pkg/tailscale-1.38.4-1?dir=tailscale;
-    godev.url = github:defn/pkg/godev-0.0.49?dir=godev;
+    godev.url = github:defn/pkg/godev-0.0.50?dir=godev;
     nodedev.url = github:defn/pkg/nodedev-0.0.31?dir=nodedev;
     shell.url = github:defn/pkg/shell-0.0.30?dir=shell;
   };

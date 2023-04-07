@@ -48,17 +48,17 @@
       },
       "locked": {
         "dir": "awscli",
-        "lastModified": 1680587203,
-        "narHash": "sha256-HLZiEsMwAfRvEXlkfoAQCLHxN+Z37d9gEi4n2CMhTkU=",
+        "lastModified": 1680753387,
+        "narHash": "sha256-vTDyLzd6bCu9qefv5hXFGGtN6FC3YCAJULWkPt/bgFI=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "9df732f3b3316bef483eae1a6f05c3188a7f847b",
+        "rev": "d0638ee3efd0492180fa4d88e129772b833567a6",
         "type": "github"
       },
       "original": {
         "dir": "awscli",
         "owner": "defn",
-        "ref": "awscli-2.11.9-2",
+        "ref": "awscli-2.11.10-1",
         "repo": "pkg",
         "type": "github"
       }
@@ -137,17 +137,17 @@
       },
       "locked": {
         "dir": "buf",
-        "lastModified": 1680587267,
-        "narHash": "sha256-ztBQbBjuB3I3AYtkSOvX3l/toNZPBje+dQXZ3BXJa9U=",
+        "lastModified": 1680736756,
+        "narHash": "sha256-IF8PDZoMf0ujTGzVKANi2OYBYfn5LdyPaPhMyW8QRU0=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "1836efdbd5a8718d2d8baf3d5869b3a59c4cdee9",
+        "rev": "5793a27cb431713dff8dda39c5b3576d781514c5",
         "type": "github"
       },
       "original": {
         "dir": "buf",
         "owner": "defn",
-        "ref": "buf-1.16.0-27",
+        "ref": "buf-1.17.0-1",
         "repo": "pkg",
         "type": "github"
       }
@@ -227,17 +227,17 @@
       },
       "locked": {
         "dir": "cloud",
-        "lastModified": 1680588614,
-        "narHash": "sha256-zx0CWh8tvEWJ+o8zA8rGEuR+ebEnBBliBLMqCYLUaFw=",
+        "lastModified": 1680753556,
+        "narHash": "sha256-pG/fcm8ClKC/LeqF8NPDiO5TUSb1kq5WiesTYtIROdI=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "4a6b445d019e50bdf3b5366472643a7e37cff055",
+        "rev": "d03d5c5daba35e49a1603cb2692d88fe6617dfc5",
         "type": "github"
       },
       "original": {
         "dir": "cloud",
         "owner": "defn",
-        "ref": "cloud-0.0.49",
+        "ref": "cloud-0.0.50",
         "repo": "pkg",
         "type": "github"
       }
@@ -248,17 +248,17 @@
       },
       "locked": {
         "dir": "cosign",
-        "lastModified": 1680587529,
-        "narHash": "sha256-jV0JfP7S2Z7ne1C32VRcacBfhXrAY8pvo4H03MvxEEQ=",
+        "lastModified": 1680834983,
+        "narHash": "sha256-0/tyVN7MzvK96QxcFo4Mk1EJDE9+3fkZKghrGej5VHc=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "7f02c9d5cea75944c73aebaf9988237c4ec7ee99",
+        "rev": "45e774868aea39782c7113858ad162c204a690a8",
         "type": "github"
       },
       "original": {
         "dir": "cosign",
         "owner": "defn",
-        "ref": "cosign-2.0.0-31",
+        "ref": "cosign-2.0.1-1",
         "repo": "pkg",
         "type": "github"
       }
@@ -2398,17 +2398,17 @@
       },
       "locked": {
         "dir": "godev",
-        "lastModified": 1680588816,
-        "narHash": "sha256-yCSM8HsC+hwDoEBShZBi1Y6TgF3KtbHkQkY8OekHx90=",
+        "lastModified": 1680835535,
+        "narHash": "sha256-4ybQte3QTG2vofllwTVa707TjNWC+SjbQth8TUnS8iY=",
         "owner": "defn",
         "repo": "pkg",
-        "rev": "e9c38dfb2a149dac6cbdf2f2325e0945e2b40028",
+        "rev": "2b0bd128080a09493ce3d548d5bbcfa56613f016",
         "type": "github"
       },
       "original": {
         "dir": "godev",
         "owner": "defn",
-        "ref": "godev-0.0.49",
+        "ref": "godev-0.0.50",
         "repo": "pkg",
         "type": "github"
       }
