@@ -56,16 +56,3 @@ else:
             """
         ]
     )
-
-    # Starts Tailscale on Linux
-    local_resource("buildkite",
-        serve_cmd=[
-            "bash", "-c",
-            """
-                eval "$(direnv hook bash)"
-                direnv allow
-                _direnv_hook
-                exec this-ci
-            """
-        ]
-    )
