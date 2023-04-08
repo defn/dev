@@ -1,20 +1,22 @@
 {
   inputs = {
-    pkg.url = github:defn/pkg/0.0.199;
-    kubernetes.url = github:defn/pkg/kubernetes-0.0.55?dir=kubernetes;
-    cloud.url = github:defn/pkg/cloud-0.0.50?dir=cloud;
-    az.url = github:defn/pkg/az-0.0.80?dir=az;
-    oci.url = github:defn/pkg/oci-0.0.30?dir=oci;
-    nix.url = github:defn/pkg/nix-0.0.30?dir=nix;
-    secrets.url = github:defn/pkg/secrets-0.0.32?dir=secrets;
-    development.url = github:defn/pkg/development-0.0.31?dir=development;
-    utils.url = github:defn/pkg/utils-0.0.30?dir=utils;
-    vpn.url = github:defn/pkg/vpn-0.0.30?dir=vpn;
-    localdev.url = github:defn/pkg/localdev-0.0.83?dir=localdev;
-    tailscale.url = github:defn/pkg/tailscale-1.38.4-1?dir=tailscale;
-    godev.url = github:defn/pkg/godev-0.0.50?dir=godev;
-    nodedev.url = github:defn/pkg/nodedev-0.0.31?dir=nodedev;
-    shell.url = github:defn/pkg/shell-0.0.30?dir=shell;
+    pkg.url = github:defn/pkg/0.0.208;
+    kubernetes.url = github:defn/pkg/kubernetes-0.0.64?dir=kubernetes;
+    cloud.url = github:defn/pkg/cloud-0.0.58?dir=cloud;
+    az.url = github:defn/pkg/az-0.0.88?dir=az;
+    oci.url = github:defn/pkg/oci-0.0.37?dir=oci;
+    nix.url = github:defn/pkg/nix-0.0.37?dir=nix;
+    secrets.url = github:defn/pkg/secrets-0.0.39?dir=secrets;
+    development.url = github:defn/pkg/development-0.0.38?dir=development;
+    utils.url = github:defn/pkg/utils-0.0.37?dir=utils;
+    vpn.url = github:defn/pkg/vpn-0.0.38?dir=vpn;
+    vault.url = github:defn/pkg/vault-1.13.1-34?dir=vault;
+    acme.url = github:defn/pkg/acme-3.0.5-42?dir=acme;
+    localdev.url = github:defn/pkg/localdev-0.0.92?dir=localdev;
+    tailscale.url = github:defn/pkg/tailscale-1.38.4-8?dir=tailscale;
+    godev.url = github:defn/pkg/godev-0.0.59?dir=godev;
+    nodedev.url = github:defn/pkg/nodedev-0.0.38?dir=nodedev;
+    shell.url = github:defn/pkg/shell-0.0.37?dir=shell;
   };
 
   outputs = inputs: inputs.pkg.main rec {
@@ -55,6 +57,8 @@
             inputs.development.defaultPackage.${ctx.system}
             inputs.utils.defaultPackage.${ctx.system}
             inputs.tailscale.defaultPackage.${ctx.system}
+            inputs.vault.defaultPackage.${ctx.system}
+            inputs.acme.defaultPackage.${ctx.system}
             inputs.shell.defaultPackage.${ctx.system}
           ];
         in
@@ -78,7 +82,7 @@
       '';
 
       login = ''
-        if [[ ! "false" == "$(vault status | grep Sealed | awk '{print $NF}')" ]]; then mark vault; (cd w/vault; direnv allow; eval "$(direnv hook bash)"; _direnv_hook; this-vault-unseal); fi
+        if [[ ! "false" == "$(vault status | grep Sealed | awk '{print $NF}')" ]]; then mark vault; (direnv allow; eval "$(direnv hook bash)"; _direnv_hook; this-vault-unseal); fi
         if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then mark kubernetes; this-kubeconfig; this-argocd-login || true; fi
         this-github-login
         this-vault-login
@@ -170,7 +174,7 @@
 
       dev = ''
         #docker pull quay.io/defn/dev:latest-devcontainer
-        #nix develop github:defn/pkg/nodedev-0.0.31?dir=nodedev --command devcontainer build --workspace-folder .
+        #nix develop github:defn/pkg/nodedev-0.0.38?dir=nodedev --command devcontainer build --workspace-folder .
         code --folder-uri "vscode-remote://dev-container+$(pwd | perl -pe 's{\s+}{}g' | xxd -p)/home/ubuntu"
       '';
 
@@ -180,6 +184,53 @@
         if ! test -e /var/run/utmp; then sudo touch /var/run/utmp; fi
         pass hello
         screen -S tilt -d -m bash -il -c "~/bin/withde ~ $(which tilt) up" || true
+      '';
+
+      acme-issue = ''
+        domain="$1"; shift
+        export CF_Token="$(pass cloudflare_$(echo $domain | perl -pe 's{^.*?([^\.]+\.[^\.]+)$}{$1}'))"
+        acme.sh --issue --dns dns_cf --ocsp-must-staple --keylength ec-384 -d "$domain"
+      '';
+
+      acme-renew = ''
+        domain="$1"; shift
+        acme.sh --renew --ecc -d "$domain"
+      '';
+
+      vault-start = ''
+        set -exfu
+
+        vault server -config vault.yaml
+      '';
+
+      vault-unseal = ''
+        set -exfu
+
+        pass Unseal_Key_1 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') $VAULT_ADDR/v1/sys/unseal
+        pass Unseal_Key_3 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') $VAULT_ADDR/v1/sys/unseal
+        pass Unseal_Key_5 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') $VAULT_ADDR/v1/sys/unseal
+      '';
+
+      vault-seal = ''
+        set -exfu
+
+        vault operator seal
+        rm -f ~/.vault-token
+        cd ~/.password-store && git add vault && git add -u vault && git stash
+      '';
+
+      vault-backup = ''
+        set -exfu
+
+        this-vault-seal
+        cd ~/.password-store
+        git stash apply
+        git add vault
+        git add -u vault
+        git commit -m "backup vault"
+        git push
+        git status -sb
+        this-vault-unseal
       '';
     };
   };

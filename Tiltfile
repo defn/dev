@@ -8,7 +8,6 @@ if "-darwin" in os.getenv("system"):
         serve_cmd=[
             "bash", "-c",
             """
-                cd w/vault
                 eval "$(direnv hook bash)"
                 direnv allow
                 _direnv_hook
@@ -27,28 +26,12 @@ if "-darwin" in os.getenv("system"):
             """
         ]
     )
-
-    # Starts registry on macOS
-    local_resource("registry",
-        serve_cmd=[
-            "bash", "-c",
-            """
-                cd work/lib/w/k3d
-                eval "$(direnv hook bash)"
-                direnv allow
-                _direnv_hook
-                this-k3d-registry || true
-                exec docker logs -f k3d-registry
-            """
-        ]
-    )
 else:
     # Starts Tailscale on Linux
     local_resource("tailscale",
         serve_cmd=[
             "bash", "-c",
             """
-                cd w/tailscale
                 eval "$(direnv hook bash)"
                 direnv allow
                 _direnv_hook
