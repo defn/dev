@@ -61,4 +61,7 @@ easyrsa build-ca
 easyrsa build-server-full server
 openssl rsa -in pki/private/server.key  -out pki/private/server2.key
 sudo openvpn server.conf
+
+acme.sh --register-account -m iam@defn.sh
+acme.sh --issue --domain '*.defn.run' --dns --yes-I-know-dns-manual-mode-enough-go-ahead-please
 ```
