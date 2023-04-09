@@ -1,22 +1,22 @@
 {
   inputs = {
-    pkg.url = github:defn/pkg/0.0.208;
-    kubernetes.url = github:defn/pkg/kubernetes-0.0.65?dir=kubernetes;
-    cloud.url = github:defn/pkg/cloud-0.0.58?dir=cloud;
-    az.url = github:defn/pkg/az-0.0.89?dir=az;
-    oci.url = github:defn/pkg/oci-0.0.37?dir=oci;
-    nix.url = github:defn/pkg/nix-0.0.37?dir=nix;
-    secrets.url = github:defn/pkg/secrets-0.0.39?dir=secrets;
-    development.url = github:defn/pkg/development-0.0.38?dir=development;
-    utils.url = github:defn/pkg/utils-0.0.37?dir=utils;
-    vpn.url = github:defn/pkg/vpn-0.0.38?dir=vpn;
-    vault.url = github:defn/pkg/vault-1.13.1-34?dir=vault;
-    acme.url = github:defn/pkg/acme-3.0.5-42?dir=acme;
-    localdev.url = github:defn/pkg/localdev-0.0.92?dir=localdev;
-    tailscale.url = github:defn/pkg/tailscale-1.38.4-8?dir=tailscale;
-    godev.url = github:defn/pkg/godev-0.0.59?dir=godev;
-    nodedev.url = github:defn/pkg/nodedev-0.0.38?dir=nodedev;
-    shell.url = github:defn/pkg/shell-0.0.37?dir=shell;
+    pkg.url = github:defn/pkg/0.0.210;
+    kubernetes.url = github:defn/pkg/kubernetes-0.0.69?dir=kubernetes;
+    cloud.url = github:defn/pkg/cloud-0.0.61?dir=cloud;
+    az.url = github:defn/pkg/az-0.0.93?dir=az;
+    oci.url = github:defn/pkg/oci-0.0.39?dir=oci;
+    nix.url = github:defn/pkg/nix-0.0.39?dir=nix;
+    secrets.url = github:defn/pkg/secrets-0.0.41?dir=secrets;
+    development.url = github:defn/pkg/development-0.0.40?dir=development;
+    utils.url = github:defn/pkg/utils-0.0.39?dir=utils;
+    vpn.url = github:defn/pkg/vpn-0.0.40?dir=vpn;
+    vault.url = github:defn/pkg/vault-1.13.1-36?dir=vault;
+    acme.url = github:defn/pkg/acme-3.0.5-44?dir=acme;
+    localdev.url = github:defn/pkg/localdev-0.0.96?dir=localdev;
+    tailscale.url = github:defn/pkg/tailscale-1.38.4-10?dir=tailscale;
+    godev.url = github:defn/pkg/godev-0.0.62?dir=godev;
+    nodedev.url = github:defn/pkg/nodedev-0.0.40?dir=nodedev;
+    shell.url = github:defn/pkg/shell-0.0.39?dir=shell;
   };
 
   outputs = inputs: inputs.pkg.main rec {
@@ -174,7 +174,7 @@
 
       dev = ''
         #docker pull quay.io/defn/dev:latest-devcontainer
-        #nix develop github:defn/pkg/nodedev-0.0.38?dir=nodedev --command devcontainer build --workspace-folder .
+        #nix develop github:defn/pkg/nodedev-0.0.40?dir=nodedev --command devcontainer build --workspace-folder .
         code --folder-uri "vscode-remote://dev-container+$(pwd | perl -pe 's{\s+}{}g' | xxd -p)/home/ubuntu"
       '';
 
