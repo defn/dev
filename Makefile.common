@@ -68,7 +68,7 @@ install-inner:
 
 	@mark godev
 	if echo "$${VSCODE_GIT_ASKPASS_NODE:-}" | grep ^/vscode; then \
-		nix develop github:defn/pkg/godev-0.0.49?dir=godev --command bash -c 'sudo ln -nfs "$$(which go)" "$${VSCODE_GIT_ASKPASS_NODE%/node}/bin/"'; \
+		nix develop github:defn/m/pkg-godev-0.0.65?dir=pkg/godev --command bash -c 'sudo ln -nfs "$$(which go)" "$${VSCODE_GIT_ASKPASS_NODE%/node}/bin/"'; \
 		fi
 
 	@mark doctor
