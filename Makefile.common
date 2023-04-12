@@ -32,7 +32,7 @@ perms:
 
 install:
 	$(MAKE) nix
-	. ~/.nix-profile/etc/profile.d/nix.sh && bin/withde ~ $(MAKE) install-inner
+	. ~/.nix-profile/etc/profile.d/nix.sh && bin/withde ~ env VAULT_TOKEN="$$(pass Initial_Root_Token 2>&- || true)" $(MAKE) install-inner
 
 install-inner:
 	$(MAKE) symlinks
@@ -78,7 +78,6 @@ install-inner:
 	@mark up
 	this-up
 	while true; do vault status; if [[ "$$?" == 1 ]]; then sleep 5; continue; fi; break; done
-
 	this-login
 
 nix-Darwin-upgrade:
