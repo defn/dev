@@ -6,15 +6,13 @@
     oci.url = github:defn/m/pkg-oci-0.0.42?dir=pkg/oci;
     nix.url = github:defn/m/pkg-nix-0.0.42?dir=pkg/nix;
     secrets.url = github:defn/m/pkg-secrets-0.0.44?dir=pkg/secrets;
-    development.url = github:defn/m/pkg-development-0.0.43?dir=pkg/development;
     utils.url = github:defn/m/pkg-utils-0.0.42?dir=pkg/utils;
     vpn.url = github:defn/m/pkg-vpn-0.0.43?dir=pkg/vpn;
     vault.url = github:defn/m/pkg-vault-1.13.1-3?dir=pkg/vault;
     acme.url = github:defn/m/pkg-acme-3.0.5-6?dir=pkg/acme;
-    localdev.url = github:defn/m/pkg-localdev-0.0.100?dir=pkg/localdev;
     tailscale.url = github:defn/m/pkg-tailscale-1.38.4-3?dir=pkg/tailscale;
-    godev.url = github:defn/m/pkg-godev-0.0.68?dir=pkg/godev;
-    nodedev.url = github:defn/m/pkg-nodedev-0.0.43?dir=pkg/nodedev;
+    localdev.url = github:defn/m/pkg-localdev-0.0.100?dir=pkg/localdev;
+    development.url = github:defn/m/pkg-development-0.0.45?dir=pkg/development;
     shell.url = github:defn/m/pkg-shell-0.0.42?dir=pkg/shell;
   };
 
@@ -45,7 +43,6 @@
       propagatedBuildInputs =
         let
           flakeInputs = [
-            inputs.localdev.defaultPackage.${ctx.system}
             inputs.kubernetes.defaultPackage.${ctx.system}
             inputs.cloud.defaultPackage.${ctx.system}
             inputs.az.defaultPackage.${ctx.system}
@@ -53,9 +50,10 @@
             inputs.vpn.defaultPackage.${ctx.system}
             inputs.oci.defaultPackage.${ctx.system}
             inputs.secrets.defaultPackage.${ctx.system}
-            inputs.development.defaultPackage.${ctx.system}
             inputs.utils.defaultPackage.${ctx.system}
             inputs.tailscale.defaultPackage.${ctx.system}
+            inputs.localdev.defaultPackage.${ctx.system}
+            inputs.development.defaultPackage.${ctx.system}
             inputs.vault.defaultPackage.${ctx.system}
             inputs.acme.defaultPackage.${ctx.system}
             inputs.shell.defaultPackage.${ctx.system}
