@@ -11,6 +11,7 @@
     vault.url = github:defn/m/pkg-vault-1.13.1-3?dir=pkg/vault;
     acme.url = github:defn/m/pkg-acme-3.0.5-6?dir=pkg/acme;
     tailscale.url = github:defn/m/pkg-tailscale-1.38.4-3?dir=pkg/tailscale;
+    localdev.url = github:defn/m/pkg-localdev-0.0.100?dir=pkg/localdev;
     shell.url = github:defn/m/pkg-shell-0.0.42?dir=pkg/shell;
   };
 
@@ -50,6 +51,7 @@
             inputs.secrets.defaultPackage.${ctx.system}
             inputs.utils.defaultPackage.${ctx.system}
             inputs.tailscale.defaultPackage.${ctx.system}
+            inputs.localdev.defaultPackage.${ctx.system}
             inputs.vault.defaultPackage.${ctx.system}
             inputs.acme.defaultPackage.${ctx.system}
             inputs.shell.defaultPackage.${ctx.system}
