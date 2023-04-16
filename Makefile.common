@@ -92,7 +92,7 @@ nix-Linux:
 	nix profile install nixpkgs\#{nix-direnv,nixpkgs-fmt}
 
 nix-Darwin:
-	nix profile install github:NixOS/nixpkgs -p nix
+	nix profile install github:NixOS/nixpkgs\#nix
 	nix profile install nixpkgs\#{nix-direnv,nixpkgs-fmt}
 
 nix-Linux-bootstrap:
