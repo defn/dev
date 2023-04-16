@@ -1,19 +1,19 @@
 {
   inputs = {
-    kubernetes.url = github:defn/m/pkg-kubernetes-0.0.75?dir=pkg/kubernetes;
-    cloud.url = github:defn/m/pkg-cloud-0.0.66?dir=pkg/cloud;
-    az.url = github:defn/m/pkg-az-0.0.101?dir=pkg/az;
-    oci.url = github:defn/m/pkg-oci-0.0.42?dir=pkg/oci;
-    nix.url = github:defn/m/pkg-nix-0.0.42?dir=pkg/nix;
-    secrets.url = github:defn/m/pkg-secrets-0.0.44?dir=pkg/secrets;
-    utils.url = github:defn/m/pkg-utils-0.0.42?dir=pkg/utils;
-    vpn.url = github:defn/m/pkg-vpn-0.0.43?dir=pkg/vpn;
-    vault.url = github:defn/m/pkg-vault-1.13.1-3?dir=pkg/vault;
-    acme.url = github:defn/m/pkg-acme-3.0.5-8?dir=pkg/acme;
-    tailscale.url = github:defn/m/pkg-tailscale-1.38.4-3?dir=pkg/tailscale;
-    localdev.url = github:defn/m/pkg-localdev-0.0.102?dir=pkg/localdev;
-    development.url = github:defn/m/pkg-development-0.0.46?dir=pkg/development;
-    shell.url = github:defn/m/pkg-shell-0.0.42?dir=pkg/shell;
+    kubernetes.url = github:defn/m/pkg-kubernetes-0.0.80?dir=pkg/kubernetes;
+    cloud.url = github:defn/m/pkg-cloud-0.0.71?dir=pkg/cloud;
+    az.url = github:defn/m/pkg-az-0.0.107?dir=pkg/az;
+    oci.url = github:defn/m/pkg-oci-0.0.46?dir=pkg/oci;
+    nix.url = github:defn/m/pkg-nix-0.0.45?dir=pkg/nix;
+    secrets.url = github:defn/m/pkg-secrets-0.0.48?dir=pkg/secrets;
+    utils.url = github:defn/m/pkg-utils-0.0.46?dir=pkg/utils;
+    vpn.url = github:defn/m/pkg-vpn-0.0.47?dir=pkg/vpn;
+    vault.url = github:defn/m/pkg-vault-1.13.1-7?dir=pkg/vault;
+    acme.url = github:defn/m/pkg-acme-3.0.5-10?dir=pkg/acme;
+    tailscale.url = github:defn/m/pkg-tailscale-1.38.4-7?dir=pkg/tailscale;
+    localdev.url = github:defn/m/pkg-localdev-0.0.107?dir=pkg/localdev;
+    development.url = github:defn/m/pkg-development-0.0.50?dir=pkg/development;
+    shell.url = github:defn/m/pkg-shell-0.0.46?dir=pkg/shell;
   };
 
   outputs = inputs: inputs.kubernetes.inputs.kubectl.inputs.pkg.main rec {
