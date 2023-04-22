@@ -1,63 +1,58 @@
 {
-    "files.autoSave": "afterDelay",
-    "editor.formatOnSave": true,
-    "editor.minimap.enabled": false,
-    "extensions.ignoreRecommendations": true,
-    "git.confirmSync": false,
-    "terminal.integrated.copyOnSelection": true,
-    "terminal.integrated.enableMultiLinePasteWarning": false,
-    "terminal.integrated.localEchoEnabled": "off",
-    "terminal.integrated.sendKeybindingsToShell": true,
-    "terminal.integrated.showExitAlert": false,
-    "terminal.integrated.defaultProfile.linux": "dev",
-    "terminal.integrated.profiles.linux": {
-        "dev": {
-            "path": "bash",
-            "args": [
-                "--init-file",
-                "~/.bash_entrypoint",
-                "-s",
-                "${workspaceFolder}"
-            ]
-        },
-    },
-    "terminal.integrated.env.linux": {
-        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-    },
-    "workbench.colorTheme": "Default Dark+",
-    "workbench.editor.untitled.hint": "hidden",
-    "workbench.startupEditor": "none",
-    "go.survey.prompt": false,
-    "go.toolsManagement.checkForUpdates": "off",
-    "gopls": {
-        "ui.semanticTokens": true
-    },
-    "files.watcherExclude": {
-        "**/.git/objects/**": true,
-        "**/.git/subtree-cache/**": true,
-        "**/node_modules/*/**": true,
-        "/home/ubuntu/.local/**": true,
-        "/home/ubuntu/.cache/**": true,
-        "/home/ubuntu/.kube/cache/**": true,
-        "/home/ubuntu/work/**": true
-    },
-    "nix.formatterPath": "/tmp/.nix-profile/bin/nixpkgs-fmt",
-    "terraform.languageServer.ignoreSingleFileWarning": true,
-    "terraform.languageServer.enable": false,
-    "git.ignoreLimitWarning": true,
-    "diffEditor.ignoreTrimWhitespace": false,
-    "git.openRepositoryInParentFolders": "always",
-    "dev.containers.copyGitConfig": true,
-    "dev.containers.gitCredentialHelperConfigLocation": "none",
-    "go.terminal.activateEnvironment": false,
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[json]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[jsonc]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "svelte.enable-ts-plugin": true
+  "files.autoSave": "afterDelay",
+  "editor.formatOnSave": true,
+  "editor.minimap.enabled": false,
+  "extensions.ignoreRecommendations": true,
+  "git.confirmSync": false,
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "terminal.integrated.localEchoEnabled": "off",
+  "terminal.integrated.sendKeybindingsToShell": true,
+  "terminal.integrated.showExitAlert": false,
+  "terminal.integrated.defaultProfile.linux": "dev",
+  "terminal.integrated.profiles.linux": {
+    "dev": {
+      "path": "bash",
+      "args": ["--init-file", "~/.bash_entrypoint", "-s", "${workspaceFolder}"]
+    }
+  },
+  "terminal.integrated.env.linux": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+  },
+  "workbench.colorTheme": "Default Dark+",
+  "workbench.editor.untitled.hint": "hidden",
+  "workbench.startupEditor": "none",
+  "go.survey.prompt": false,
+  "go.toolsManagement.checkForUpdates": "off",
+  "gopls": {
+    "ui.semanticTokens": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true,
+    "/home/ubuntu/.local/**": true,
+    "/home/ubuntu/.cache/**": true,
+    "/home/ubuntu/.kube/cache/**": true,
+    "/home/ubuntu/work/**": true
+  },
+  "nix.formatterPath": "/tmp/.nix-profile/bin/nixpkgs-fmt",
+  "terraform.languageServer.ignoreSingleFileWarning": true,
+  "terraform.languageServer.enable": false,
+  "git.ignoreLimitWarning": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "git.openRepositoryInParentFolders": "always",
+  "dev.containers.copyGitConfig": true,
+  "dev.containers.gitCredentialHelperConfigLocation": "none",
+  "go.terminal.activateEnvironment": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "svelte.enable-ts-plugin": true
 }
