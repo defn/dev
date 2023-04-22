@@ -11,7 +11,7 @@ if "-darwin" in os.getenv("system"):
                 eval "$(direnv hook bash)"
                 direnv allow
                 _direnv_hook
-                exec this-vault-start
+                exec this-vault-start -log-level debug
             """
         ]
     )
