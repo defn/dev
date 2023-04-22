@@ -175,3 +175,4 @@ go
 .dotnet
 /nix
 .netrc
+.bin
