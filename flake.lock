@@ -2376,17 +2376,17 @@
       },
       "locked": {
         "dir": "pkg/localdev",
-        "lastModified": 1681788092,
-        "narHash": "sha256-P2X3Ezv9XFqeIqs/xk8lx2meblLGKd4LhXtTzB3dbLs=",
+        "lastModified": 1682135881,
+        "narHash": "sha256-mYgtzMpZb35dMaST0MZGwD9WqYB6WTP2ho2UzPf+EnI=",
         "owner": "defn",
         "repo": "m",
-        "rev": "3c06ffa3ff3667efe9cbac6d3de843827719342a",
+        "rev": "2804ab5624cc61cf005933ccf699bf4be05bf591",
         "type": "github"
       },
       "original": {
         "dir": "pkg/localdev",
         "owner": "defn",
-        "ref": "pkg-localdev-0.0.108",
+        "ref": "pkg-localdev-0.0.110",
         "repo": "m",
         "type": "github"
       }
