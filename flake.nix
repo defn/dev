@@ -1,7 +1,7 @@
 {
   inputs = {
     kubernetes.url = github:defn/m/pkg-kubernetes-0.0.80?dir=pkg/kubernetes;
-    cloud.url = github:defn/m/pkg-cloud-0.0.71?dir=pkg/cloud;
+    cloud.url = github:defn/m/pkg-cloud-0.0.73?dir=pkg/cloud;
     az.url = github:defn/m/pkg-az-0.0.107?dir=pkg/az;
     oci.url = github:defn/m/pkg-oci-0.0.46?dir=pkg/oci;
     nix.url = github:defn/m/pkg-nix-0.0.45?dir=pkg/nix;
