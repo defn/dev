@@ -43,6 +43,9 @@ export SUDO_ASKPASS="$HOME/bin/askpass"
 # nodejs
 if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$HOME/node_modules/.bin:$PATH"; fi
 
+# cueimports
+PATH="$PATH:$HOME/.bin"
+
 # terraform
 export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
 export DISABLE_VERSION_CHECK=1
