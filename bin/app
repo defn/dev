@@ -3,7 +3,14 @@
 function main {
 	set -efu
 
-	exec argocd --core app "$@"
+	case "${1:-}" in
+		sync|get|wait|terminate-op|resources|logs|diff)
+			exec argocd --core app "$@" "$(app list | tail -n +2 | awk '{print $1}' | fzf --select-1)"
+			;;
+		*)
+			exec argocd --core app "$@"
+			;;
+	esac
 }
 
 main "$@"
