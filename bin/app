@@ -5,11 +5,7 @@ function main {
 
 	case "${1:-}" in
 		sync|get|wait|terminate-op|resources|logs|diff)
-			if [[ -z "${2:-}" ]]; then
-				exec argocd --core app "$@" "$(app list | tail -n +2 | awk '{print $1}' | fzf --select-1)"
-			else
-				exec argocd --core app "$@"
-			fi
+			exec argocd --core app "$1" "$(app list | tail -n +2 | awk '{print $1}' | fzf --query="${2}" --select-1)"
 			;;
 		*)
 			exec argocd --core app "$@"
