@@ -176,3 +176,6 @@ go
 /nix
 .netrc
 .bin
+.yarnrc
+.X*
+.serverauth*
