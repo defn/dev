@@ -1,7 +1,5 @@
 {
   inputs = {
-    kubernetes.url = github:defn/m/pkg-kubernetes-0.0.83?dir=pkg/kubernetes;
-    cloud.url = github:defn/m/pkg-cloud-0.0.74?dir=pkg/cloud;
     az.url = github:defn/m/pkg-az-0.0.108?dir=pkg/az;
     oci.url = github:defn/m/pkg-oci-0.0.46?dir=pkg/oci;
     nix.url = github:defn/m/pkg-nix-0.0.45?dir=pkg/nix;
@@ -11,12 +9,11 @@
     vault.url = github:defn/m/pkg-vault-1.13.1-7?dir=pkg/vault;
     acme.url = github:defn/m/pkg-acme-3.0.5-10?dir=pkg/acme;
     tailscale.url = github:defn/m/pkg-tailscale-1.38.4-7?dir=pkg/tailscale;
-    localdev.url = github:defn/m/pkg-localdev-0.0.110?dir=pkg/localdev;
     development.url = github:defn/m/pkg-development-0.0.50?dir=pkg/development;
     shell.url = github:defn/m/pkg-shell-0.0.46?dir=pkg/shell;
   };
 
-  outputs = inputs: inputs.kubernetes.inputs.kubectl.inputs.pkg.main rec {
+  outputs = inputs: inputs.az.inputs.cue.inputs.pkg.main rec {
     src = ./.;
 
     apps = ctx: {
@@ -43,8 +40,6 @@
       propagatedBuildInputs =
         let
           flakeInputs = [
-            inputs.kubernetes.defaultPackage.${ctx.system}
-            inputs.cloud.defaultPackage.${ctx.system}
             inputs.az.defaultPackage.${ctx.system}
             inputs.nix.defaultPackage.${ctx.system}
             inputs.vpn.defaultPackage.${ctx.system}
@@ -52,7 +47,6 @@
             inputs.secrets.defaultPackage.${ctx.system}
             inputs.utils.defaultPackage.${ctx.system}
             inputs.tailscale.defaultPackage.${ctx.system}
-            inputs.localdev.defaultPackage.${ctx.system}
             inputs.development.defaultPackage.${ctx.system}
             inputs.vault.defaultPackage.${ctx.system}
             inputs.acme.defaultPackage.${ctx.system}
