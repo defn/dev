@@ -51,6 +51,7 @@
             inputs.tailscale.defaultPackage.${ctx.system}
             inputs.development.defaultPackage.${ctx.system}
             inputs.localdev.defaultPackage.${ctx.system}
+            inputs.cloud.defaultPackage.${ctx.system}
             inputs.vault.defaultPackage.${ctx.system}
             inputs.acme.defaultPackage.${ctx.system}
             inputs.shell.defaultPackage.${ctx.system}
