@@ -51,17 +51,17 @@
       },
       "locked": {
         "dir": "pkg/az",
-        "lastModified": 1682137081,
-        "narHash": "sha256-HyqWuiH89IJPymlZPoaamAbu9Bd7C1dro77FMgyAvsk=",
+        "lastModified": 1682569945,
+        "narHash": "sha256-1pOiwbW5oH/zOiOFbHnALiE2YYbZbQVcoF2QDTb3CBI=",
         "owner": "defn",
         "repo": "m",
-        "rev": "f9539b64fd2fdca5e1045f7422d301c9aebfdcc5",
+        "rev": "a2a46631d649fae81fa961ae4089af4257326ab3",
         "type": "github"
       },
       "original": {
         "dir": "pkg/az",
         "owner": "defn",
-        "ref": "pkg-az-0.0.108",
+        "ref": "pkg-az-0.0.110",
         "repo": "m",
         "type": "github"
       }
@@ -135,17 +135,17 @@
       },
       "locked": {
         "dir": "pkg/buildifier",
-        "lastModified": 1681615943,
-        "narHash": "sha256-hG48kWaUUfmgY7fPm53ZlmllAIMuMTVITvn3pVTNxIQ=",
+        "lastModified": 1682569221,
+        "narHash": "sha256-Evo5KhfRAWjrrwX15ZuqnPNK9dG73M6MpoOTunFTVKc=",
         "owner": "defn",
         "repo": "m",
-        "rev": "caad6cf7faf1b245fa47a9d9f32d2cb5b3ac80aa",
+        "rev": "e845e01e4890c6c335ed622c0ca1c010916a2ae9",
         "type": "github"
       },
       "original": {
         "dir": "pkg/buildifier",
         "owner": "defn",
-        "ref": "pkg-buildifier-6.1.0-5",
+        "ref": "pkg-buildifier-6.1.1-1",
         "repo": "m",
         "type": "github"
       }
@@ -180,17 +180,17 @@
       },
       "locked": {
         "dir": "pkg/cloud",
-        "lastModified": 1682136816,
-        "narHash": "sha256-Azp9N5XvrJ0YAGDVuHtHYoF4G4CWiDWWfpU68JzOl5g=",
+        "lastModified": 1682569842,
+        "narHash": "sha256-9ozMBWqi/ZfOf5y37rLCNng/aLIEOgOKo5YzUesjxEk=",
         "owner": "defn",
         "repo": "m",
-        "rev": "e6288e8db7d0412decadafb505ee6cbc49df769d",
+        "rev": "36e202f276414e17f4f53a86cffdc547de5e5dc3",
         "type": "github"
       },
       "original": {
         "dir": "pkg/cloud",
         "owner": "defn",
-        "ref": "pkg-cloud-0.0.74",
+        "ref": "pkg-cloud-0.0.75",
         "repo": "m",
         "type": "github"
       }
@@ -928,17 +928,17 @@
       },
       "locked": {
         "dir": "pkg/development",
-        "lastModified": 1681616822,
-        "narHash": "sha256-ORJejApzU6HqQ4W5pXwo1zGi7HfASeWIovd65LmT1Ks=",
+        "lastModified": 1682569853,
+        "narHash": "sha256-0Z93kiiBzdCHicRtPWOzrmTT5srNyKz1XFfCHHtS2Qw=",
         "owner": "defn",
         "repo": "m",
-        "rev": "3173a165d0d3dc2644bafc6e50e7336c07918960",
+        "rev": "12e5b883b7421347098f1cc897190d4b0d6d35b7",
         "type": "github"
       },
       "original": {
         "dir": "pkg/development",
         "owner": "defn",
-        "ref": "pkg-development-0.0.50",
+        "ref": "pkg-development-0.0.51",
         "repo": "m",
         "type": "github"
       }
@@ -1699,17 +1699,17 @@
       },
       "locked": {
         "dir": "pkg/localdev",
-        "lastModified": 1682248341,
-        "narHash": "sha256-+dGgWCrRJJ6Kz4M/jriXSUInK0YlvmkFK/91J8+J+1Q=",
+        "lastModified": 1682569883,
+        "narHash": "sha256-GdAIzrgpxDAsDHO3O3Pkf+H/GqcHtWJpW0Cz8/7PEiM=",
         "owner": "defn",
         "repo": "m",
-        "rev": "394547f4242c24d1bc7b70e5943b9f110f39f9d3",
+        "rev": "6b2d5ec32b8345729a6e1e0b2cd9b264b3474ab9",
         "type": "github"
       },
       "original": {
         "dir": "pkg/localdev",
         "owner": "defn",
-        "ref": "pkg-localdev-0.0.111",
+        "ref": "pkg-localdev-0.0.112",
         "repo": "m",
         "type": "github"
       }
@@ -3068,17 +3068,17 @@
       },
       "locked": {
         "dir": "pkg/tailscale",
-        "lastModified": 1681616351,
-        "narHash": "sha256-urlqAuCo+EgWUPOcoLj4X8KR4j5RqWd0mggGWMEPnHQ=",
+        "lastModified": 1682569285,
+        "narHash": "sha256-7ra5hS6YF3XKwXCW0VNaJFm4myo1cuO+8++tadZtNB8=",
         "owner": "defn",
         "repo": "m",
-        "rev": "6277ba4fb8a1a2f3d58a1a4c608652c4a0339b70",
+        "rev": "56b0978c50c47700b5b9542885af22c7e5ce2106",
         "type": "github"
       },
       "original": {
         "dir": "pkg/tailscale",
         "owner": "defn",
-        "ref": "pkg-tailscale-1.38.4-7",
+        "ref": "pkg-tailscale-1.40.0-1",
         "repo": "m",
         "type": "github"
       }
@@ -3089,17 +3089,17 @@
       },
       "locked": {
         "dir": "pkg/terraform",
-        "lastModified": 1681616368,
-        "narHash": "sha256-dF/oSlLLksvQoU9QnDQZUrCBsY2rkus+8RxtOMrQ/hI=",
+        "lastModified": 1682569302,
+        "narHash": "sha256-3Oi5bn3XsbdDQi+6/9R/G3Hff1xLwshmdnamfJRuexM=",
         "owner": "defn",
         "repo": "m",
-        "rev": "4b135801f8624ea10caa8c21538bc6b9fea402fd",
+        "rev": "f20fff9f7f8462db17a42c80a5f23ea4c52e7fce",
         "type": "github"
       },
       "original": {
         "dir": "pkg/terraform",
         "owner": "defn",
-        "ref": "pkg-terraform-1.4.5-5",
+        "ref": "pkg-terraform-1.4.6-1",
         "repo": "m",
         "type": "github"
       }
@@ -3152,17 +3152,17 @@
       },
       "locked": {
         "dir": "pkg/vault",
-        "lastModified": 1681616404,
-        "narHash": "sha256-uNC9qhE15wSpdz+wg5UwO3QKjr8sR3MgCzk8He72arI=",
+        "lastModified": 1682569329,
+        "narHash": "sha256-EuTVwMW4iHwKF7lRuuo9N7Qirq4sSZFrd3IVqrliORU=",
         "owner": "defn",
         "repo": "m",
-        "rev": "25487fe3c7749f03f06e11d5fb547604dddd8ee7",
+        "rev": "71fa9059577ddc5d31f43f27e6a1299456b00bc1",
         "type": "github"
       },
       "original": {
         "dir": "pkg/vault",
         "owner": "defn",
-        "ref": "pkg-vault-1.13.1-7",
+        "ref": "pkg-vault-1.13.2-1",
         "repo": "m",
         "type": "github"
       }
@@ -3173,17 +3173,17 @@
       },
       "locked": {
         "dir": "pkg/vault",
-        "lastModified": 1681616404,
-        "narHash": "sha256-uNC9qhE15wSpdz+wg5UwO3QKjr8sR3MgCzk8He72arI=",
+        "lastModified": 1682569329,
+        "narHash": "sha256-EuTVwMW4iHwKF7lRuuo9N7Qirq4sSZFrd3IVqrliORU=",
         "owner": "defn",
         "repo": "m",
-        "rev": "25487fe3c7749f03f06e11d5fb547604dddd8ee7",
+        "rev": "71fa9059577ddc5d31f43f27e6a1299456b00bc1",
         "type": "github"
       },
       "original": {
         "dir": "pkg/vault",
         "owner": "defn",
-        "ref": "pkg-vault-1.13.1-7",
+        "ref": "pkg-vault-1.13.2-1",
         "repo": "m",
         "type": "github"
       }

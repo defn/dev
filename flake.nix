@@ -1,17 +1,17 @@
 {
   inputs = {
-    az.url = github:defn/m/pkg-az-0.0.108?dir=pkg/az;
+    az.url = github:defn/m/pkg-az-0.0.110?dir=pkg/az;
     oci.url = github:defn/m/pkg-oci-0.0.46?dir=pkg/oci;
     nix.url = github:defn/m/pkg-nix-0.0.45?dir=pkg/nix;
     secrets.url = github:defn/m/pkg-secrets-0.0.48?dir=pkg/secrets;
     utils.url = github:defn/m/pkg-utils-0.0.46?dir=pkg/utils;
     vpn.url = github:defn/m/pkg-vpn-0.0.47?dir=pkg/vpn;
-    vault.url = github:defn/m/pkg-vault-1.13.1-7?dir=pkg/vault;
+    vault.url = github:defn/m/pkg-vault-1.13.2-1?dir=pkg/vault;
     acme.url = github:defn/m/pkg-acme-3.0.5-10?dir=pkg/acme;
-    tailscale.url = github:defn/m/pkg-tailscale-1.38.4-7?dir=pkg/tailscale;
-    development.url = github:defn/m/pkg-development-0.0.50?dir=pkg/development;
-    localdev.url = github:defn/m/pkg-localdev-0.0.111?dir=pkg/localdev;
-    cloud.url = github:defn/m/pkg-cloud-0.0.74?dir=pkg/cloud;
+    tailscale.url = github:defn/m/pkg-tailscale-1.40.0-1?dir=pkg/tailscale;
+    development.url = github:defn/m/pkg-development-0.0.51?dir=pkg/development;
+    localdev.url = github:defn/m/pkg-localdev-0.0.112?dir=pkg/localdev;
+    cloud.url = github:defn/m/pkg-cloud-0.0.75?dir=pkg/cloud;
     shell.url = github:defn/m/pkg-shell-0.0.46?dir=pkg/shell;
   };
 
