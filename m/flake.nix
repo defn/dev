@@ -56,7 +56,7 @@
         (nme: value: ctx.pkgs.writeShellScriptBin nme ''
           set -efu
 
-          cd ".$(git rev-parse --show-cdup)/m"
+          cd "./$(git rev-parse --show-cdup)m"
 
           name="$GIT_AUTHOR_NAME-${nme}"
           host=k3d-$name-server-0.$(tailscale cert 2>&1 | grep domain..use | cut -d'"' -f2 | cut -d. -f2-)
