@@ -27,17 +27,17 @@
       },
       "locked": {
         "dir": "pkg/awscli",
-        "lastModified": 1682131994,
-        "narHash": "sha256-fZIZZ/2xGL5vqtLjH8g2AKM5xsdB51uKdxFcelwJcr8=",
+        "lastModified": 1682748146,
+        "narHash": "sha256-iYznWglKpRtQ1x8sKJXjbFGvau7Nq8CRWo4xHxGh9rI=",
         "owner": "defn",
         "repo": "m",
-        "rev": "ddaba61f9a48a4b6e93f27f06f21756d2a40e34f",
+        "rev": "9d895eea9f6cbe7ba71df76f0a875204a395f94d",
         "type": "github"
       },
       "original": {
         "dir": "pkg/awscli",
         "owner": "defn",
-        "ref": "pkg-awscli-2.11.15-1",
+        "ref": "pkg-awscli-2.11.16-1",
         "repo": "m",
         "type": "github"
       }
@@ -135,17 +135,17 @@
       },
       "locked": {
         "dir": "pkg/buildifier",
-        "lastModified": 1682569221,
-        "narHash": "sha256-Evo5KhfRAWjrrwX15ZuqnPNK9dG73M6MpoOTunFTVKc=",
+        "lastModified": 1682751358,
+        "narHash": "sha256-uPqj0yTYyVfkVps0feOwuU83Pp0gOwYQouZJ3YojG3E=",
         "owner": "defn",
         "repo": "m",
-        "rev": "e845e01e4890c6c335ed622c0ca1c010916a2ae9",
+        "rev": "1b0d6a959fe43048a1a2e0f8d814b888e80e898e",
         "type": "github"
       },
       "original": {
         "dir": "pkg/buildifier",
         "owner": "defn",
-        "ref": "pkg-buildifier-6.1.1-1",
+        "ref": "pkg-buildifier-6.1.2-1",
         "repo": "m",
         "type": "github"
       }
@@ -180,17 +180,17 @@
       },
       "locked": {
         "dir": "pkg/cloud",
-        "lastModified": 1682569842,
-        "narHash": "sha256-9ozMBWqi/ZfOf5y37rLCNng/aLIEOgOKo5YzUesjxEk=",
+        "lastModified": 1682752207,
+        "narHash": "sha256-GaqteDDUXLPoroglXyN4OZfAvmR7V0+hwQF/5YCMvCc=",
         "owner": "defn",
         "repo": "m",
-        "rev": "36e202f276414e17f4f53a86cffdc547de5e5dc3",
+        "rev": "7430062169ec5dc25c14323413829316408f8723",
         "type": "github"
       },
       "original": {
         "dir": "pkg/cloud",
         "owner": "defn",
-        "ref": "pkg-cloud-0.0.75",
+        "ref": "pkg-cloud-0.0.76",
         "repo": "m",
         "type": "github"
       }
@@ -928,17 +928,17 @@
       },
       "locked": {
         "dir": "pkg/development",
-        "lastModified": 1682569853,
-        "narHash": "sha256-0Z93kiiBzdCHicRtPWOzrmTT5srNyKz1XFfCHHtS2Qw=",
+        "lastModified": 1682752223,
+        "narHash": "sha256-cdxWWNGobZDhIiDPfF+9tPuM3ua7ikclz0B4gJojVz0=",
         "owner": "defn",
         "repo": "m",
-        "rev": "12e5b883b7421347098f1cc897190d4b0d6d35b7",
+        "rev": "01ab819bf29c824ced42eea9f57355857236f2d4",
         "type": "github"
       },
       "original": {
         "dir": "pkg/development",
         "owner": "defn",
-        "ref": "pkg-development-0.0.51",
+        "ref": "pkg-development-0.0.52",
         "repo": "m",
         "type": "github"
       }
@@ -1699,17 +1699,17 @@
       },
       "locked": {
         "dir": "pkg/localdev",
-        "lastModified": 1682569883,
-        "narHash": "sha256-GdAIzrgpxDAsDHO3O3Pkf+H/GqcHtWJpW0Cz8/7PEiM=",
+        "lastModified": 1682752249,
+        "narHash": "sha256-oFeS2p+uIINMPVgi5jzF6mdPlysSUatkiWA3KFGGHqw=",
         "owner": "defn",
         "repo": "m",
-        "rev": "6b2d5ec32b8345729a6e1e0b2cd9b264b3474ab9",
+        "rev": "0bb40a541ca6115a0b1d09f34cb7d9904baaa025",
         "type": "github"
       },
       "original": {
         "dir": "pkg/localdev",
         "owner": "defn",
-        "ref": "pkg-localdev-0.0.112",
+        "ref": "pkg-localdev-0.0.113",
         "repo": "m",
         "type": "github"
       }
@@ -3110,17 +3110,17 @@
       },
       "locked": {
         "dir": "pkg/tilt",
-        "lastModified": 1681787561,
-        "narHash": "sha256-VpXfEPB9KVy2FRBg4jN8/aUHRCFbN/jzWTng/yuSGh4=",
+        "lastModified": 1682748249,
+        "narHash": "sha256-Go6Gmy4NwLO9JjHPtyq6h7MhsoOz0zXgAfjNjXgm4uo=",
         "owner": "defn",
         "repo": "m",
-        "rev": "67d7fc426ccb9a5b59d189ae9c496cf888711189",
+        "rev": "ab63b25e6d282c32bed39bdb7ad71a4260a6344d",
         "type": "github"
       },
       "original": {
         "dir": "pkg/tilt",
         "owner": "defn",
-        "ref": "pkg-tilt-0.32.2-1",
+        "ref": "pkg-tilt-0.32.3-1",
         "repo": "m",
         "type": "github"
       }
