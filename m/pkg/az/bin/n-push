@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	local tag="$(n tag)"
+
+	git tag "${tag}"
+	git push origin "${tag}"
+	rm -rf /tmp/tags
+}
+
+source sub "$0" "$@"

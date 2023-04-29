@@ -1,0 +1,8 @@
+#ManagedBy: cue
+
+patches: []
+namespace: default
+resources:
+  - resource-ingressroute-default.defn.run.yaml
+  - resource-kservice-hello.yaml
+  - resource-kservice-bye.yaml

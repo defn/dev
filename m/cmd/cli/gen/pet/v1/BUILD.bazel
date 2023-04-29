@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "pet",
+    srcs = ["pet.pb.go"],
+    importpath = "github.com/defn/m/cmd/cli/gen/pet/v1",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//cmd/cli/gen/google/type",
+        "@org_golang_google_protobuf//reflect/protoreflect",
+        "@org_golang_google_protobuf//runtime/protoimpl",
+    ],
+)

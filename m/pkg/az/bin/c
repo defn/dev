@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	local cmd="$1"
+	shift
+
+	local args=""
+
+	for a in "$@"; do args="${args}${args:+ }$(echo -n "${a}" | base64)"; done
+
+	local loader=
+
+	if [[ -e '.env' ]]; then
+		source .env
+	fi
+
+	exec $loader cue cmd -t args="${args}" "${cmd}"
+}
+
+source sub "$0" "$@"

@@ -1,0 +1,5 @@
+#ManagedBy: cue
+
+patches: []
+resources:
+  - https://raw.githubusercontent.com/kumahq/kuma-counter-demo/master/demo.yaml

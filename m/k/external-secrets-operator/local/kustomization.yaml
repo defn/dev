@@ -1,0 +1,16 @@
+helmCharts:
+- includeCRDs: true
+  name: external-secrets
+  namespace: external-secrets
+  releaseName: external-secrets
+  repo: https://charts.external-secrets.io
+  valuesInline:
+    certController:
+      create: false
+    webhook:
+      create: false
+  version: 0.8.1
+namespace: external-secrets
+resources:
+- resource-namespace-external-secrets.yaml
+- resource-cluster-role-binding-delegator.yaml

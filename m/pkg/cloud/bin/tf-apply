@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	terraform apply .plan
+	rm -f .plan
+}
+
+source sub "$0" "$@"

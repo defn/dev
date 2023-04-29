@@ -1,0 +1,6 @@
+result
+.direnv
+node_modules
+cover.out
+/bazel-*
+cue.mod/pkg

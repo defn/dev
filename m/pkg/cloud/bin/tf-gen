@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+function main {
+	set -eu
+
+	cue cmd gen
+	git add *.tf.json
+	pc || true
+	git add *.tf.json
+	pc || true
+}
+
+source sub "$0" "$@"

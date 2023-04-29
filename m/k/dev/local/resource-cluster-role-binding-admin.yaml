@@ -1,0 +1,14 @@
+#ManagedBy: cue
+
+metadata:
+  name: dev-admin
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1

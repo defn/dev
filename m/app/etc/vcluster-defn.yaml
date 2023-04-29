@@ -1,0 +1,12 @@
+# vcluster create defn --upgrade -f vc-defn.yaml --connect=false
+sync:
+  nodes:
+    enabled: true
+    nodeSelector: "env=defn"
+syncer:
+  extraArgs:
+    - --enforce-toleration=env=defn:NoSchedule
+tolerations:
+  - key: env
+    operator: Equal
+    value: defn

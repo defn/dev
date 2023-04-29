@@ -1,0 +1,114 @@
+#!/usr/bin/env bash
+
+#- Copyright 2020 Authors of sub
+#-
+#- Licensed under the Apache License, Version 2.0 (the "License");
+#- you may not use this file except in compliance with the License.
+#- You may obtain a copy of the License at
+#-
+#-     http://www.apache.org/licenses/LICENSE-2.0
+#-
+#- Unless required by applicable law or agreed to in writing, software
+#- distributed under the License is distributed on an "AS IS" BASIS,
+#- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#- See the License for the specific language governing permissions and
+#- limitations under the License.
+
+set -efu
+
+function sdebug {
+  if [[ -n "${DEBUG:-}" ]]; then
+    echo "$@" 1>&2
+  fi
+}
+
+function save-function {
+    local original="$(declare -f $1)"
+    local override="$2${original#$1}"
+    eval "$override"
+}
+
+# https://stackoverflow.com/questions/38972736/how-to-print-lines-between-two-patterns-inclusive-or-exclusive-in-sed-awk-or
+function sub-help {
+  FLAGS_PARENT="${0##*/}"
+  FLAGS_PARENT="${FLAGS_PARENT//-/ }"
+
+  FLAGS_HELP="$(awk '
+    BEGIN   {first=1}
+    /^# /   {if (first) {flag=1; first=0}}
+    /^[^#]/ {flag=0}
+    {gsub(/^#/, "")}
+    {gsub(/^ /, "")}
+    flag
+  ' "$0")"
+
+  FLAGS_HELP="${FLAGS_HELP:+${FLAGS_HELP}
+}"
+
+  if [[ "$FLAGS_HELP" =~ ^\s*$ || ! "$FLAGS_HELP" =~ ^USAGE: ]]; then
+    FLAGS_HELP="USAGE: ${FLAGS_PARENT} [flags] args
+"
+  fi
+
+  shflags-help
+  exit $?
+}
+
+function call-main {
+  if declare -F options >/dev/null; then
+    source shflags
+
+    save-function flags_help shflags-help
+    function flags_help { sub-help; }
+
+    options
+
+    POSIXLY_CORRECT=1 FLAGS "$@" || return $?
+    unset POSIXLY_CORRECT
+    eval set -- "${FLAGS_ARGV}"
+  fi
+
+  sdebug "call: main $@"
+  if declare -F main >/dev/null; then
+    main "$@"
+    return $?
+  else
+    sdebug "missing: main $@"
+    return 1
+  fi
+}
+
+function sub-main {
+  local cmd="$1"; shift
+  local bare_cmd="${cmd##*/}"
+
+  sdebug
+  sdebug "cmd: $cmd"
+  sdebug "bare-cmd; $bare_cmd"
+  sdebug "args: $@"
+
+  if [[ "$#" == 0 ]]; then
+    call-main "$@"
+    return $?
+  fi
+
+  local sub_cmd="$1"
+
+  sdebug "finding: ${bare_cmd}-${sub_cmd}"
+  set +e
+  found_cmd="$(type -P "${bare_cmd}-${sub_cmd}")"
+  set -e
+
+  if [[ -z "${found_cmd}" ]]; then
+    call-main "$@"
+    return $?
+  fi
+  sdebug "found: ${found_cmd}"
+
+  shift
+  sdebug "exec: ${found_cmd} $@"
+  exec "${found_cmd}" "$@"
+  return $?
+}
+
+sub-main "$@"

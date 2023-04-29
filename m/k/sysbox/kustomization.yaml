@@ -1,0 +1,6 @@
+#ManagedBy: cue
+
+patches:
+  - path: patch-daemonset-vault-set-vault-token.yaml
+resources:
+  - https://raw.githubusercontent.com/nestybox/sysbox/master/sysbox-k8s-manifests/sysbox-install.yaml

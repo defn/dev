@@ -1,0 +1,35 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "infra_lib",
+    srcs = ["infra.go"],
+    embedsrcs = ["schema/infra.cue"],
+    importpath = "github.com/defn/m/cmd/infra",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@com_github_aws_constructs_go_constructs_v10//:constructs",
+        "@com_github_aws_jsii_runtime_go//:jsii-runtime-go",
+        "@com_github_cdktf_cdktf_provider_aws_go_aws_v12//dataawsssoadmininstances",
+        "@com_github_cdktf_cdktf_provider_aws_go_aws_v12//identitystoregroup",
+        "@com_github_cdktf_cdktf_provider_aws_go_aws_v12//identitystoregroupmembership",
+        "@com_github_cdktf_cdktf_provider_aws_go_aws_v12//identitystoreuser",
+        "@com_github_cdktf_cdktf_provider_aws_go_aws_v12//organizationsaccount",
+        "@com_github_cdktf_cdktf_provider_aws_go_aws_v12//organizationsorganization",
+        "@com_github_cdktf_cdktf_provider_aws_go_aws_v12//provider",
+        "@com_github_cdktf_cdktf_provider_aws_go_aws_v12//ssoadminaccountassignment",
+        "@com_github_cdktf_cdktf_provider_aws_go_aws_v12//ssoadminmanagedpolicyattachment",
+        "@com_github_cdktf_cdktf_provider_aws_go_aws_v12//ssoadminpermissionset",
+        "@com_github_cdktf_cdktf_provider_tfe_go_tfe_v5//provider",
+        "@com_github_cdktf_cdktf_provider_tfe_go_tfe_v5//workspace",
+        "@com_github_hashicorp_terraform_cdk_go_cdktf//:cdktf",
+        "@org_cuelang_go//cue",
+        "@org_cuelang_go//cue/cuecontext",
+        "@org_cuelang_go//cue/load",
+    ],
+)
+
+go_binary(
+    name = "infra",
+    embed = [":infra_lib"],
+    visibility = ["//visibility:public"],
+)

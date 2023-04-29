@@ -1,0 +1,8 @@
+#ManagedBy: cue
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: argocd-server
+  annotations:
+    traefik.ingress.kubernetes.io/service.serverstransport: traefik-insecure@kubernetescrd

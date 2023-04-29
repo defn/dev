@@ -1,0 +1,12 @@
+storage "file" {
+path = "/home/ubuntu/.password-store/vault/data"
+}
+
+disable_mlock = true
+ui = true
+
+listener "tcp" {
+tls_disable = 1
+address = "0.0.0.0:8200"
+cluster_address = "127.0.0.1:8201"
+}

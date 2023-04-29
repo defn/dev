@@ -1,0 +1,13 @@
+#ManagedBy: cue
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: sysbox-deploy-k8s
+  namespace: kube-system
+spec:
+  template:
+    spec:
+      tolerations:
+        - key: env
+          operator: Exists

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+virtctl version --client

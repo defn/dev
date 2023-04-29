@@ -1,0 +1,31 @@
+helmCharts:
+- includeCRDs: true
+  name: traefik
+  namespace: traefik
+  releaseName: traefik
+  repo: https://traefik.github.io/charts
+  valuesInline:
+    logs:
+      access:
+        enabled: true
+      general:
+        level: DEBUG
+    providers:
+      kubernetesCRD:
+        allowCrossNamespace: true
+        allowExternalNameServices: true
+      kubernetesIngress:
+        allowExternalNameServices: true
+        publishedService:
+          enabled: true
+  version: 22.1.0
+namespace: traefik
+patches:
+- path: patch-ingressroute-traefik-dashboard.yaml
+- path: patch-service-tailscale.yaml
+resources:
+- resource-namespace-traefik.yaml
+- resource-tlsstore-traefik.yaml
+- resource-serverstransport-insecure.yaml
+- resource-ingressroute-http-to-https.yaml
+- resource-middleware-http-to-https.yaml

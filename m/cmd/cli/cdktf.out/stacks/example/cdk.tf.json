@@ -1,0 +1,34 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "cloud",
+      "cloud": "tfc",
+      "stackName": "example",
+      "version": "0.15.5"
+    },
+    "outputs": {
+    }
+  },
+  "provider": {
+    "tfe": [
+      {
+        "hostname": "app.terraform.io"
+      }
+    ]
+  },
+  "terraform": {
+    "cloud": {
+      "hostname": "app.terraform.io",
+      "organization": "cli",
+      "workspaces": {
+        "name": "example"
+      }
+    },
+    "required_providers": {
+      "tfe": {
+        "source": "hashicorp/tfe",
+        "version": "0.43.0"
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+# ManagedBy: cue
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: argocd
+  name: vcluster-global-vc0
+spec:
+  project: default
+  destination:
+    name: in-cluster
+  source:
+    repoURL: https://github.com/defn/m
+    targetRevision: main
+    path: r/vcluster-global-vc0
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

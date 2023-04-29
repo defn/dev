@@ -1,0 +1,24 @@
+#ManagedBy: cue
+
+metadata:
+  name: hatch-rosie-egg
+  namespace: default
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      serviceAccountName: default
+      containers:
+        - name: meh
+          image: defn/dev:kubectl
+          command:
+            - bash
+            - -c
+          args:
+            - test "completed" == "$(kubectl get tf rosie-egg -o json | jq -r '.status.phase')"
+      restartPolicy: Never
+kind: Job
+apiVersion: batch/v1

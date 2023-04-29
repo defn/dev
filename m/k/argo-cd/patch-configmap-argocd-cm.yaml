@@ -1,0 +1,57 @@
+#ManagedBy: cue
+
+metadata:
+  name: argocd-cm
+data:
+  kustomize.buildOptions: --enable-helm
+  application.resourceTrackingMethod: annotation
+  resource.customizations.health.networking.k8s.io_Ingress: |-
+    hs = {}
+    hs.status = "Healthy"
+    return hs
+  resource.customizations.health.tf.isaaguilar.com_Terraform: |-
+    hs = {}
+    hs.status = "Progressing"
+    hs.message = ""
+    if obj.status ~= nil then
+        if obj.status.phase ~= nil then
+              if obj.status.phase == "completed" then
+                   hs.status = "Healthy"
+             end
+
+              if obj.status.stage ~= nil then
+                if obj.status.stage.reason ~= nil then
+                      hs.message = obj.status.stage.reason
+                end
+              end
+        end
+    end
+    return hs
+  resource.customizations.health.argoproj.io_Application: |-
+    hs = {}
+    hs.status = "Progressing"
+    hs.message = ""
+    if obj.status ~= nil then
+        if obj.status.health ~= nil then
+        hs.status = obj.status.health.status
+        if obj.status.health.message ~= nil then
+            hs.message = obj.status.health.message
+        end
+        end
+    end
+    return hs
+  resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration: |
+    jsonPointers:
+      - /webhooks/0/clientConfig/caBundle
+      - /webhooks/0/rules
+  resource.customizations.ignoreDifferences.admissionregistration.k8s.io_ValidatingWebhookConfiguration: |
+    jsonPointers:
+      - /webhooks/0/rules
+  resource.customizations.ignoreDifferences.apps_Deployment: |
+    jsonPointers:
+      - /spec/template/spec/tolerations
+  resource.customizations.ignoreDifferences.kyverno.io_ClusterPolicy: |
+    jqPathExpressions:
+      - .spec.rules[] | select(.name|test("autogen-."))
+kind: ConfigMap
+apiVersion: v1

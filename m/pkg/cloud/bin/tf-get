@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	exec terraform get -update "$@"
+}
+
+source sub "$0" "$@"

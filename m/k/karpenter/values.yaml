@@ -1,0 +1,9 @@
+logLevel: error
+clusterName: k3d-control
+clusterEndpoint: https://kubernetes.default.svc.cluster.local
+controller:
+  env:
+    - name: AWS_REGION
+      value: us-west-1
+    - name: AWS_NODE_NAME_CONVENTION
+      value: resource-name

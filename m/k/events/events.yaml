@@ -1,0 +1,73 @@
+apiVersion: argoproj.io/v1alpha1
+kind: EventBus
+metadata:
+  name: default
+spec:
+  jetstream:
+    version: latest
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: my-events
+  annotations:
+    eks.amazonaws.com/role-arn: "arn:aws:iam::319951235442:role/meh"
+    eks.amazonaws.com/audience: "sts.amazonaws.com"
+    eks.amazonaws.com/sts-regional-endpoints: "true"
+    eks.amazonaws.com/token-expiration: "86400"
+---
+apiVersion: argoproj.io/v1alpha1
+kind: EventSource
+metadata:
+  name: default
+spec:
+  resource:
+    example:
+      namespace: default
+      group: ""
+      version: v1
+      resource: configmaps
+      eventTypes:
+        - ADD
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Sensor
+metadata:
+  name: default
+spec:
+  dependencies:
+    - name: input
+      eventSourceName: default
+      eventName: example
+  triggers:
+    - template:
+        name: run-this
+        k8s:
+          operation: create
+          liveObject: true
+          source:
+            resource:
+              apiVersion: batch/v1
+              kind: Job
+              metadata:
+                generateName: run-this
+                namespace: default
+              spec:
+                ttlSecondsAfterFinished: 60
+                template:
+                  spec:
+                    serviceAccountName: my-events
+                    containers:
+                      - name: workspace
+                        image: 169.254.32.1:5000/workspace
+                        command:
+                          - bash
+                          - -c
+                        args:
+                          - "echo hello"
+                    restartPolicy: Never
+          parameters:
+            - src:
+                dependencyName: input
+                dataTemplate: "{{ .Input.body.data.script}}"
+              dest: spec.template.spec.containers.0.args.0

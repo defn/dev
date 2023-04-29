@@ -1,0 +1,16 @@
+#ManagedBy: cue
+
+patches: []
+resources:
+  - resource-namespace-velero.yaml
+helmCharts:
+  - releaseName: velero
+    namespace: velero
+    valuesInline:
+      ingressShim:
+        defaultIssuerName: zerossl-production
+        defaultIssuerKind: ClusterIssuer
+    name: velero
+    version: 3.1.6
+    repo: https://vmware-tanzu.github.io/helm-charts
+    includeCRDs: true

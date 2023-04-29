@@ -1,0 +1,8 @@
+#ManagedBy: cue
+
+patches: []
+resources:
+  - resource-externalsecret-external-dns.yaml
+  - resource-cluster-role-binding-admin.yaml
+  - resource-externalsecret-zerossl-production.yaml
+  - resource-clusterpolicy-clusterissuer-zerossl-production.yaml

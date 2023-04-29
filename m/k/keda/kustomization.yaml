@@ -1,0 +1,14 @@
+#ManagedBy: cue
+
+patches: []
+namespace: keda
+resources:
+  - resource-namespace-keda.yaml
+helmCharts:
+  - releaseName: keda
+    namespace: keda
+    valuesInline: {}
+    name: keda
+    version: 2.8.2
+    repo: https://kedacore.github.io/charts
+    includeCRDs: true

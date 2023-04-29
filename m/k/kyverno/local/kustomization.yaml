@@ -1,0 +1,13 @@
+helmCharts:
+- includeCRDs: true
+  name: kyverno
+  namespace: kyverno
+  releaseName: kyverno
+  repo: https://kyverno.github.io/kyverno
+  valuesInline:
+    replicaCount: 1
+  version: 2.7.2
+namespace: kyverno
+resources:
+- resource-namespace-kyverno.yaml
+- resource-clusterrole-create-clusterissuers.yaml

@@ -1,0 +1,22 @@
+helmCharts:
+- includeCRDs: true
+  name: coder
+  namespace: coder
+  releaseName: coder
+  repo: https://helm.coder.com/v2
+  valuesInline:
+    coder:
+      env:
+      - name: CODER_ACCESS_URL
+        valueFrom:
+          secretKeyRef:
+            key: CODER_ACCESS_URL
+            name: coder
+      service:
+        type: ClusterIP
+  version: 0.22.0
+namespace: coder
+resources:
+- resource-namespace-coder.yaml
+- resource-ingress-coder.yaml
+- resource-externalsecret-coder.yaml

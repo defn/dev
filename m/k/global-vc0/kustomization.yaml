@@ -1,0 +1,49 @@
+#ManagedBy: cue
+
+patches: []
+namespace: global-vc0
+resources:
+  - resource-namespace-vcluster.yaml
+helmCharts:
+  - releaseName: vcluster
+    namespace: global-vc0
+    valuesInline:
+      vcluster:
+        image: rancher/k3s:v1.24.13-k3s1
+      syncer:
+        extraArgs:
+          - --tls-san=vcluster.global-vc0.svc.cluster.local
+          - --enforce-toleration=env=global-vc0:NoSchedule
+      sync:
+        nodes:
+          enabled: true
+          nodeSelector: env=global
+        pods:
+          ephemeralContainers: true
+        persistentvolumes:
+          enabled: true
+        ingresses:
+          enabled: true
+      tolerations:
+        - key: env
+          value: global
+          operator: Equal
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: env
+                    operator: In
+                    values:
+                      - global
+      fallbackHostDns: true
+      multiNamespaceMode:
+        enabled: false
+      service:
+        type: LoadBalancer
+        loadBalancerClass: tailscale
+    name: vcluster
+    version: 0.15.0
+    repo: https://charts.loft.sh
+    includeCRDs: true

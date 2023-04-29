@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  ts.net.server: |2-
+      ts.net {
+        forward . 100.100.100.100
+       }
+kind: ConfigMap
+metadata:
+  name: coredns-custom
+  namespace: kube-system

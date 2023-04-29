@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "petv1connect",
+    srcs = ["pet.connect.go"],
+    importpath = "github.com/defn/m/cmd/cli/gen/pet/v1/petv1connect",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//cmd/cli/gen/pet/v1:pet",
+        "@com_github_bufbuild_connect_go//:connect-go",
+    ],
+)

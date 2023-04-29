@@ -1,0 +1,393 @@
+#ManagedBy: cue
+
+patches: []
+resources: []
+helmCharts:
+  - releaseName: bootstrap
+    valuesInline:
+      anyResources:
+        kyverno: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-global-kyverno
+            annotations:
+              argocd.argoproj.io/sync-wave: "1"
+          spec:
+            project: default
+            destination:
+              name: k3d-global
+            source:
+              repoURL: https://github.com/defn/m
+              targetRevision: main
+              path: r/kyverno
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions:
+                - ServerSideApply=true
+        velero: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-global-velero
+            annotations:
+              argocd.argoproj.io/sync-wave: "1"
+          spec:
+            project: default
+            destination:
+              name: k3d-global
+            source:
+              repoURL: https://github.com/defn/m
+              targetRevision: main
+              path: r/velero
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        coredns: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-global-coredns
+            annotations:
+              argocd.argoproj.io/sync-wave: "1"
+          spec:
+            project: default
+            destination:
+              name: k3d-global
+            source:
+              repoURL: https://github.com/defn/m
+              targetRevision: main
+              path: r/coredns
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        cert-manager: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-global-cert-manager
+            annotations:
+              argocd.argoproj.io/sync-wave: "2"
+          spec:
+            project: default
+            destination:
+              name: k3d-global
+            source:
+              repoURL: https://github.com/defn/m
+              targetRevision: main
+              path: r/cert-manager
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        pod-identity-webhook: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-global-pod-identity-webhook
+            annotations:
+              argocd.argoproj.io/sync-wave: "10"
+          spec:
+            project: default
+            destination:
+              name: k3d-global
+            source:
+              repoURL: https://github.com/defn/m
+              targetRevision: main
+              path: r/pod-identity-webhook
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        external-secrets-operator: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-global-external-secrets-operator
+            annotations:
+              argocd.argoproj.io/sync-wave: "10"
+          spec:
+            project: default
+            destination:
+              name: k3d-global
+            source:
+              repoURL: https://github.com/defn/m
+              targetRevision: main
+              path: r/external-secrets-operator
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        k3d-global-secrets-store: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-global-secrets-store
+            annotations:
+              argocd.argoproj.io/sync-wave: "20"
+          spec:
+            project: default
+            destination:
+              name: k3d-global
+            source:
+              repoURL: https://github.com/defn/m
+              targetRevision: main
+              path: r/k3d-global-secrets-store
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        defn-shared: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-global-defn-shared
+            annotations:
+              argocd.argoproj.io/sync-wave: "30"
+          spec:
+            project: default
+            destination:
+              name: k3d-global
+            source:
+              repoURL: https://github.com/defn/m
+              targetRevision: main
+              path: r/defn-shared
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        external-dns: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-global-external-dns
+            annotations:
+              argocd.argoproj.io/sync-wave: "30"
+          spec:
+            project: default
+            destination:
+              name: k3d-global
+            source:
+              repoURL: https://github.com/defn/m
+              targetRevision: main
+              path: r/external-dns
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        argo-workflows: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-global-argo-workflows
+            annotations:
+              argocd.argoproj.io/sync-wave: "40"
+          spec:
+            project: default
+            destination:
+              name: k3d-global
+              namespace: argo-workflows
+            source:
+              repoURL: https://github.com/defn/m
+              targetRevision: main
+              path: r/argo-workflows
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions:
+                - CreateNamespace=true
+        tfo: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-global-tfo
+            annotations:
+              argocd.argoproj.io/sync-wave: "40"
+          spec:
+            project: default
+            destination:
+              name: k3d-global
+            source:
+              repoURL: https://github.com/defn/m
+              targetRevision: main
+              path: r/tfo
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        knative: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-global-knative
+            annotations:
+              argocd.argoproj.io/sync-wave: "40"
+          spec:
+            project: default
+            destination:
+              name: k3d-global
+            source:
+              repoURL: https://github.com/defn/m
+              targetRevision: main
+              path: r/knative
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        kourier: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-global-kourier
+            annotations:
+              argocd.argoproj.io/sync-wave: "40"
+          spec:
+            project: default
+            destination:
+              name: k3d-global
+            source:
+              repoURL: https://github.com/defn/m
+              targetRevision: main
+              path: r/kourier
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        defn: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-global-defn
+            annotations:
+              argocd.argoproj.io/sync-wave: "40"
+          spec:
+            project: default
+            destination:
+              name: k3d-global
+            source:
+              repoURL: https://github.com/defn/m
+              targetRevision: main
+              path: r/defn
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        traefik: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-global-traefik
+            annotations:
+              argocd.argoproj.io/sync-wave: "50"
+          spec:
+            project: default
+            destination:
+              name: k3d-global
+            source:
+              repoURL: https://github.com/defn/m
+              targetRevision: main
+              path: r/traefik
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        hello: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-global-hello
+            annotations:
+              argocd.argoproj.io/sync-wave: "60"
+          spec:
+            project: default
+            destination:
+              name: k3d-global
+            source:
+              repoURL: https://github.com/defn/m
+              targetRevision: main
+              path: r/hello
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        global-vc0: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-global-global-vc0
+            annotations:
+              argocd.argoproj.io/sync-wave: "60"
+          spec:
+            project: default
+            destination:
+              name: k3d-global
+            source:
+              repoURL: https://github.com/defn/m
+              targetRevision: main
+              path: r/global-vc0
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        argo-cd: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-global-argo-cd
+            annotations:
+              argocd.argoproj.io/sync-wave: "1000"
+          spec:
+            project: default
+            destination:
+              name: k3d-global
+            source:
+              repoURL: https://github.com/defn/m
+              targetRevision: main
+              path: r/argo-cd
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+    name: any-resource
+    version: 0.1.0
+    repo: https://kiwigrid.github.io
+    includeCRDs: true

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	exec nix "$@"
+}
+
+source sub "$0" "$@"

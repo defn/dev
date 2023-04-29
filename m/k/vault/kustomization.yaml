@@ -1,0 +1,40 @@
+#ManagedBy: cue
+
+patches:
+  - path: patch-statefulset-vault-set-vault-token.yaml
+namespace: vault
+resources:
+  - resource-namespace-vault.yaml
+helmCharts:
+  - releaseName: vault
+    namespace: vault
+    valuesInline:
+      server:
+        dataStorage:
+          size: 1Gi
+        standalone:
+          config: |
+            disable_mlock = true
+            ui = true
+
+            listener "tcp" {
+              tls_disable = 1
+              address = "[::]:8200"
+              cluster_address = "[::]:8201"
+            }
+
+            storage "file" {
+              path = "/vault/data"
+            }
+
+            seal "transit" {
+              address = "http://vault.default.svc:8200"
+              disable_renewal = "false"
+              key_name = "autounseal-remo"
+              mount_path = "transit/"
+              tls_skip_verify = "true"
+            }
+    name: vault
+    version: 0.20.1
+    repo: https://helm.releases.hashicorp.com
+    includeCRDs: true

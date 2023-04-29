@@ -1,0 +1,39 @@
+helmCharts:
+- includeCRDs: true
+  name: caddy
+  namespace: caddy
+  releaseName: caddy
+  repo: https://charts.alekc.dev
+  valuesInline:
+    config:
+      caddyFile: "https://*.defn.run {\n    tls /certs/tls.crt /certs/tls.key\n    reverse_proxy
+        {http.request.host.labels.2}.default.svc.cluster.local:80 {\n        header_up
+        -Host\n        header_up X-defn-label0\t\"{http.request.host.labels.0}\"\n
+        \       header_up X-defn-label1\t\"{http.request.host.labels.1}\"\n        header_up
+        X-defn-label2\t\"{http.request.host.labels.2}\"\n    }\n}"
+      global: |-
+        auto_https disable_certs
+
+        local_certs
+
+        log {
+            output stdout
+        }
+    https:
+      enabled: true
+      port: 443
+    listenPort: 80
+    volumeMounts:
+    - mountPath: /certs
+      name: certs
+    volumes:
+    - name: certs
+      secret:
+        optional: false
+        secretName: defn-run-wildcard
+  version: 0.2.4
+namespace: caddy
+patches:
+- path: patch-service-tailscale.yaml
+resources:
+- resource-namespace-caddy.yaml

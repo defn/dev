@@ -1,0 +1,3 @@
+variable "chicken" {
+  type = string
+}

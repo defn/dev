@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+function main {
+	if [[ "$(n from)" != "$(n tag)" ]]; then
+		echo "pending tag: $(n tag)"
+		echo
+	fi
+
+	git diff "$(n from)" .
+}
+
+source sub "$0" "$@"

@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	local slug=
+	local version=
+	local vendor=
+	local revision=
+
+	local slug="$(cat flake.json | jq -r '.slug')"
+
+	if [[ "" == "$(git rev-parse --show-cdup)" ]]; then
+		slug=
+	fi
+
+	if [[ -f VERSION ]]; then
+		version="$(cat VERSION)"
+	fi
+
+	if [[ -f VENDOR ]]; then
+		vendor="$(cat VENDOR)"
+
+		if [[ -f REVISION ]]; then
+			revision="$(cat REVISION)"
+		fi
+	fi
+
+	local tag=
+	if [[ -n "${version}" ]]; then
+		tag="${slug:+${slug}-}${version}"
+	else
+		tag="${slug}${vendor:+-${vendor}}${revision:+-${revision}}"
+	fi
+
+	echo "${tag}"
+}
+
+source sub "$0" "$@"

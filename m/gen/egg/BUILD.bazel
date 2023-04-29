@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "egg",
+    srcs = [
+        "Egg.go",
+        "EggConfig.go",
+        "Egg__checks.go",
+        "main.go",
+    ],
+    importpath = "github.com/defn/m/gen/egg",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//gen/egg/internal",
+        "//gen/egg/jsii",
+        "@com_github_aws_constructs_go_constructs_v10//:constructs",
+        "@com_github_aws_jsii_runtime_go//runtime",
+        "@com_github_hashicorp_terraform_cdk_go_cdktf//:cdktf",
+    ],
+)

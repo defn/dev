@@ -1,0 +1,77 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "1"
+  name: hatch-rocky-egg
+  namespace: default
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      containers:
+      - args:
+        - test "completed" == "$(kubectl get tf rocky-egg -o json | jq -r '.status.phase')"
+        command:
+        - bash
+        - -c
+        image: defn/dev:kubectl
+        name: meh
+      restartPolicy: Never
+      serviceAccountName: default
+---
+apiVersion: tf.isaaguilar.com/v1alpha2
+kind: Terraform
+metadata:
+  name: rocky
+  namespace: default
+spec:
+  backend: |-
+    terraform {
+      backend "kubernetes" {
+        in_cluster_config = true
+        secret_suffix     = "rocky"
+        namespace         = "default"
+      }
+    }
+  ignoreDelete: true
+  keepLatestPodsOnly: true
+  outputsToOmit:
+  - "0"
+  scmAuthMethods: []
+  serviceAccount: default
+  taskOptions:
+  - env:
+    - name: TF_VAR_chicken
+      value: rocky
+    for:
+    - '*'
+  terraformModule:
+    source: https://github.com/defn/m.git//tf/chicken?ref=main
+  terraformVersion: 1.0.0
+---
+apiVersion: tf.isaaguilar.com/v1alpha2
+kind: Terraform
+metadata:
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "0"
+  name: rocky-egg
+  namespace: default
+spec:
+  backend: "terraform {\n\tbackend \"kubernetes\" {\n\t\tin_cluster_config = true\n\t\tsecret_suffix
+    \    = \"rocky-egg\"\n\t\tnamespace         = \"default\"\n\t}\n}"
+  ignoreDelete: true
+  keepLatestPodsOnly: true
+  scmAuthMethods: []
+  serviceAccount: default
+  taskOptions:
+  - env:
+    - name: TF_VAR_egg
+      value: rocky
+    for:
+    - '*'
+  terraformModule:
+    source: https://github.com/ppm.git//app/tf/m/egg?ref=main
+  terraformVersion: 1.0.0

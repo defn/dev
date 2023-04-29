@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	rm -f main.tf.json
+}
+
+source sub "$0" "$@"

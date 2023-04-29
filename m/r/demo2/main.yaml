@@ -1,0 +1,97 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    kuma.io/sidecar-injection: enabled
+  name: kuma-demo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-app
+  namespace: kuma-demo
+spec:
+  ports:
+  - appProtocol: http
+    port: 5000
+    protocol: TCP
+  selector:
+    app: demo-app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: kuma-demo
+spec:
+  ports:
+  - port: 6379
+    protocol: TCP
+  selector:
+    app: redis
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-app
+  namespace: kuma-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-app
+  template:
+    metadata:
+      labels:
+        app: demo-app
+    spec:
+      containers:
+      - env:
+        - name: REDIS_HOST
+          value: redis.kuma-demo.svc.cluster.local
+        - name: REDIS_PORT
+          value: "6379"
+        - name: APP_VERSION
+          value: "1.0"
+        - name: APP_COLOR
+          value: '#efefef'
+        image: kumahq/kuma-demo
+        name: demo-app
+        ports:
+        - containerPort: 5000
+          name: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: kuma-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - image: redis
+        lifecycle:
+          postStart:
+            exec:
+              command:
+              - /usr/local/bin/redis-cli
+              - set
+              - zone
+              - local
+          preStop:
+            exec:
+              command:
+              - /bin/sleep
+              - "30"
+        name: redis
+        ports:
+        - containerPort: 6379
+          name: tcp

@@ -1,0 +1,6 @@
+namespace: default
+resources:
+- resource-statefulset-dev.yaml
+- resource-service-dev.yaml
+- resource-cluster-role-binding-admin.yaml
+- resource-cluster-role-binding-delegator.yaml

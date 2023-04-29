@@ -1,0 +1,48 @@
+{
+  "language": "go",
+  "app": "true",
+  "terraformModules": [
+    {
+      "name": "terraform_aws_dynamic_subnets",
+      "source": "./tf/terraform-aws-dynamic-subnets"
+    },
+    {
+      "name": "terraform_aws_eks_cluster",
+      "source": "./tf/terraform-aws-eks-cluster"
+    },
+    {
+      "name": "terraform_aws_eks_iam_role",
+      "source": "./tf/terraform-aws-eks-iam-role"
+    },
+    {
+      "name": "terraform_aws_eks_node_group",
+      "source": "./tf/terraform-aws-eks-node-group"
+    },
+    {
+      "name": "terraform_aws_vpc",
+      "source": "./tf/terraform-aws-vpc"
+    },
+    {
+      "name": "terraform_null_label",
+      "source": "./tf/terraform-null-label"
+    },
+    {
+      "name": "chicken",
+      "source": "./tf/chicken"
+    },
+    {
+      "name": "devpod",
+      "source": "./tf/devpod"
+    },
+    {
+      "name": "egg",
+      "source": "./tf/egg"
+    },
+    {
+      "name": "fried_chicken",
+      "source": "./tf/fried-chicken"
+    }
+  ],
+  "projectId": "dfe62831-4398-44b7-b24a-01a4b95461a2",
+  "codeMakerOutput": "gen"
+}

@@ -1,0 +1,21 @@
+[submodule "misc/piw/amazon-eks-pod-identity-webhook"]
+	path = misc/piw/amazon-eks-pod-identity-webhook
+	url = https://github.com/aws/amazon-eks-pod-identity-webhook
+[submodule "m/terraform-null-label"]
+	path = m/terraform-null-label
+	url = https://github.com/cloudposse/terraform-null-label
+[submodule "m/terraform-aws-vpc"]
+	path = m/terraform-aws-vpc
+	url = https://github.com/cloudposse/terraform-aws-vpc
+[submodule "m/terraform-aws-dynamic-subnets"]
+	path = m/terraform-aws-dynamic-subnets
+	url = https://github.com/cloudposse/terraform-aws-dynamic-subnets
+[submodule "m/terraform-aws-eks-cluster"]
+	path = m/terraform-aws-eks-cluster
+	url = https://github.com/cloudposse/terraform-aws-eks-cluster
+[submodule "m/terraform-aws-eks-iam-role"]
+	path = m/terraform-aws-eks-iam-role
+	url = https://github.com/cloudposse/terraform-aws-eks-iam-role
+[submodule "m/terraform-aws-eks-node-group"]
+	path = m/terraform-aws-eks-node-group
+	url = https://github.com/cloudposse/terraform-aws-eks-node-group

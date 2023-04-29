@@ -1,0 +1,15 @@
+#ManagedBy: cue
+
+metadata:
+  name: dev
+  namespace: default
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8888
+  selector:
+    app: dev
+  type: ClusterIP
+kind: Service
+apiVersion: v1

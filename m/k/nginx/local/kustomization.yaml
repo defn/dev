@@ -1,0 +1,12 @@
+helmCharts:
+- includeCRDs: true
+  name: nginx
+  namespace: nginx
+  releaseName: nginx
+  repo: https://charts.bitnami.com/bitnami
+  version: 13.2.34
+namespace: nginx
+patches:
+- path: patch-service-nginx.yaml
+resources:
+- resource-namespace-nginx.yaml

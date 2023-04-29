@@ -1,0 +1,14 @@
+helmCharts:
+- includeCRDs: true
+  name: amazon-eks-pod-identity-webhook
+  namespace: default
+  releaseName: pod-identity-webhook
+  repo: https://jkroepke.github.io/helm-charts
+  valuesInline:
+    pki:
+      certManager:
+        certificate:
+          duration: 2160h0m0s
+          renewBefore: 360h0m0s
+  version: 1.2.0
+namespace: default

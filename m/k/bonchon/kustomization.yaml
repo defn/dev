@@ -1,0 +1,7 @@
+#ManagedBy: cue
+
+patches: []
+resources:
+  - resource-tfo-demo-bonchon.yaml
+  - resource-pre-sync-hook-dry-brine-rocky-chicken.yaml
+  - resource-pre-sync-hook-dry-brine-rosie-chicken.yaml

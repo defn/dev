@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	git pull
+	hof mod vendor cue
+	return $?
+}
+
+source sub "$0" "$@"

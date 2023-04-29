@@ -1,0 +1,21 @@
+{
+  "version": "0.15.5",
+  "stacks": {
+    "workspaces": {
+      "name": "workspaces",
+      "constructPath": "workspaces",
+      "workingDirectory": "stacks/workspaces",
+      "synthesizedStackPath": "stacks/workspaces/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    },
+    "gyre": {
+      "name": "gyre",
+      "constructPath": "gyre",
+      "workingDirectory": "stacks/gyre",
+      "synthesizedStackPath": "stacks/gyre/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    }
+  }
+}

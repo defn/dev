@@ -1,0 +1,117 @@
+{
+  "version": "0.15.5",
+  "stacks": {
+    "workspaces": {
+      "name": "workspaces",
+      "constructPath": "workspaces",
+      "workingDirectory": "stacks/workspaces",
+      "synthesizedStackPath": "stacks/workspaces/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    },
+    "coil": {
+      "name": "coil",
+      "constructPath": "coil",
+      "workingDirectory": "stacks/coil",
+      "synthesizedStackPath": "stacks/coil/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    },
+    "whoa": {
+      "name": "whoa",
+      "constructPath": "whoa",
+      "workingDirectory": "stacks/whoa",
+      "synthesizedStackPath": "stacks/whoa/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    },
+    "gyre": {
+      "name": "gyre",
+      "constructPath": "gyre",
+      "workingDirectory": "stacks/gyre",
+      "synthesizedStackPath": "stacks/gyre/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    },
+    "helix": {
+      "name": "helix",
+      "constructPath": "helix",
+      "workingDirectory": "stacks/helix",
+      "synthesizedStackPath": "stacks/helix/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    },
+    "spiral": {
+      "name": "spiral",
+      "constructPath": "spiral",
+      "workingDirectory": "stacks/spiral",
+      "synthesizedStackPath": "stacks/spiral/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    },
+    "vault": {
+      "name": "vault",
+      "constructPath": "vault",
+      "workingDirectory": "stacks/vault",
+      "synthesizedStackPath": "stacks/vault/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    },
+    "circus": {
+      "name": "circus",
+      "constructPath": "circus",
+      "workingDirectory": "stacks/circus",
+      "synthesizedStackPath": "stacks/circus/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    },
+    "chamber": {
+      "name": "chamber",
+      "constructPath": "chamber",
+      "workingDirectory": "stacks/chamber",
+      "synthesizedStackPath": "stacks/chamber/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    },
+    "imma": {
+      "name": "imma",
+      "constructPath": "imma",
+      "workingDirectory": "stacks/imma",
+      "synthesizedStackPath": "stacks/imma/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    },
+    "immanent": {
+      "name": "immanent",
+      "constructPath": "immanent",
+      "workingDirectory": "stacks/immanent",
+      "synthesizedStackPath": "stacks/immanent/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    },
+    "curl": {
+      "name": "curl",
+      "constructPath": "curl",
+      "workingDirectory": "stacks/curl",
+      "synthesizedStackPath": "stacks/curl/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    },
+    "fogg": {
+      "name": "fogg",
+      "constructPath": "fogg",
+      "workingDirectory": "stacks/fogg",
+      "synthesizedStackPath": "stacks/fogg/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    },
+    "jianghu": {
+      "name": "jianghu",
+      "constructPath": "jianghu",
+      "workingDirectory": "stacks/jianghu",
+      "synthesizedStackPath": "stacks/jianghu/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    }
+  }
+}

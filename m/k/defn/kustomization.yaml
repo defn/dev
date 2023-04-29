@@ -1,0 +1,7 @@
+#ManagedBy: cue
+
+patches: []
+resources:
+  - resource-namespace-defn.yaml
+  - resource-certificate-defn-run-wildcard-traefik.yaml
+  - resource-workflow-hello.yaml

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	git log $(n from)..HEAD .
+}
+
+source sub "$0" "$@"

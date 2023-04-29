@@ -1,0 +1,24 @@
+#ManagedBy: cue
+
+patches: []
+namespace: external-dns
+resources:
+  - resource-namespace-external-dns.yaml
+helmCharts:
+  - releaseName: external-dns
+    namespace: external-dns
+    valuesInline:
+      logLevel: debug
+      sources:
+        - service
+        - ingress
+      provider: cloudflare
+      cloudflare:
+        email: cloudflare@defn.us
+        proxied: false
+      domainFilters:
+        - defn.run
+    name: external-dns
+    version: 6.17.0
+    repo: https://charts.bitnami.com/bitnami
+    includeCRDs: true

@@ -1,0 +1,41 @@
+#ManagedBy: cue
+
+metadata:
+  name: dev
+  namespace: default
+spec:
+  serviceName: dev
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dev
+  template:
+    metadata:
+      labels:
+        app: dev
+    spec:
+      volumes:
+        - name: work
+          emptyDir: {}
+      containers:
+        - name: code-server
+          image: 169.254.32.1:5000/workspace
+          imagePullPolicy: Always
+          command:
+            - /usr/bin/tini
+            - --
+          args:
+            - bash
+            - -c
+            - exec ~/bin/e code-server --bind-addr 0.0.0.0:8888 --disable-telemetry
+          tty: true
+          env:
+            - name: PASSWORD
+              value: admin
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - mountPath: /work
+              name: work
+kind: StatefulSet
+apiVersion: apps/v1

@@ -1,0 +1,10 @@
+helmCharts:
+- includeCRDs: true
+  name: keda
+  namespace: keda
+  releaseName: keda
+  repo: https://kedacore.github.io/charts
+  version: 2.8.2
+namespace: keda
+resources:
+- resource-namespace-keda.yaml

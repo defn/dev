@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    eks.amazonaws.com/audience: sts.amazonaws.com
+    eks.amazonaws.com/role-arn: arn:aws:iam::319951235442:role/meh
+    eks.amazonaws.com/sts-regional-endpoints: "true"
+    eks.amazonaws.com/token-expiration: "86400"
+  name: my-events
+  namespace: default
+---
+apiVersion: argoproj.io/v1alpha1
+kind: EventBus
+metadata:
+  name: default
+  namespace: default
+spec:
+  jetstream:
+    version: latest
+---
+apiVersion: argoproj.io/v1alpha1
+kind: EventSource
+metadata:
+  name: default
+  namespace: default
+spec:
+  resource:
+    example:
+      eventTypes:
+      - ADD
+      group: ""
+      namespace: default
+      resource: configmaps
+      version: v1
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Sensor
+metadata:
+  name: default
+  namespace: default
+spec:
+  dependencies:
+  - eventName: example
+    eventSourceName: default
+    name: input
+  triggers:
+  - template:
+      k8s:
+        liveObject: true
+        operation: create
+        parameters:
+        - dest: spec.template.spec.containers.0.args.0
+          src:
+            dataTemplate: '{{ .Input.body.data.script}}'
+            dependencyName: input
+        source:
+          resource:
+            apiVersion: batch/v1
+            kind: Job
+            metadata:
+              generateName: run-this
+              namespace: default
+            spec:
+              template:
+                spec:
+                  containers:
+                  - args:
+                    - echo hello
+                    command:
+                    - bash
+                    - -c
+                    image: 169.254.32.1:5000/workspace
+                    name: workspace
+                  restartPolicy: Never
+                  serviceAccountName: my-events
+              ttlSecondsAfterFinished: 60
+      name: run-this

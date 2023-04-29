@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	tf fmt
+	tf init
+	tf validate
+}
+
+source sub "$0" "$@"

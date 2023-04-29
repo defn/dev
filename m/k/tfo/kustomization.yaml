@@ -1,0 +1,6 @@
+#ManagedBy: cue
+
+patches: []
+namespace: tf-system
+resources:
+  - https://raw.githubusercontent.com/isaaguilar/terraform-operator/master/deploy/bundles/v0.10.0/v0.10.0.yaml

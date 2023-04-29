@@ -1,0 +1,14 @@
+#ManagedBy: cue
+
+patches: []
+namespace: argo-events
+resources:
+  - resource-namespace-argo-events.yaml
+helmCharts:
+  - releaseName: argo-events
+    namespace: argo-events
+    valuesInline: {}
+    name: argo-events
+    version: 2.0.6
+    repo: https://argoproj.github.io/argo-helm
+    includeCRDs: true

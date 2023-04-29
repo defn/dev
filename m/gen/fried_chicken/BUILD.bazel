@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "fried_chicken",
+    srcs = [
+        "FriedChicken.go",
+        "FriedChickenConfig.go",
+        "FriedChicken__checks.go",
+        "main.go",
+    ],
+    importpath = "github.com/defn/m/gen/fried_chicken",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//gen/fried_chicken/internal",
+        "//gen/fried_chicken/jsii",
+        "@com_github_aws_constructs_go_constructs_v10//:constructs",
+        "@com_github_aws_jsii_runtime_go//runtime",
+        "@com_github_hashicorp_terraform_cdk_go_cdktf//:cdktf",
+    ],
+)

@@ -1,0 +1,3 @@
+variable "egg" {
+  type = string
+}

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	if [[ -x validate ]]; then
+		nix develop --command ./validate
+	fi
+}
+
+source sub "$0" "$@"

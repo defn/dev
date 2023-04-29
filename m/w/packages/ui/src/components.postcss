@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* https://gist.github.com/sw-yx/28c25962485101ca291ec1947b9d0b3e */
+
+.app {
+  @apply p-2;
+}
+
+body {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6rem;
+}
+
+p {
+  @apply my-2;
+}
+
+h1 {
+  @apply my-2;
+  font-size: 1.6rem;
+  line-height: 2.7rem;
+  font-weight: 700;
+}
+
+h2 {
+  @apply my-3;
+  font-size: 1.2em;
+  line-height: 1.7rem;
+  font-weight: 700;
+}
+
+h3 {
+  @apply text-lg font-bold my-4;
+}
+
+code {
+  @apply my-4;
+  padding: 3px 6px;
+  border-radius: 3px;
+  background-color: #cbcbcb;
+}
+
+strong {
+  font-weight: 700;
+}
+
+a {
+  text-decoration: underline;
+  font-weight: 500;
+  color: #333;
+}
+
+a:hover {
+  background-color: #f3eaaf;
+}
+
+::selection {
+  background-color: #f3eaaf;
+}
+
+ul.list {
+  @apply list-disc my-1 pl-10;
+}
+
+ol.list {
+  @apply list-decimal my-4 pl-10;
+}
