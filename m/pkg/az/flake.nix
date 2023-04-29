@@ -1,9 +1,9 @@
 {
   inputs = {
-    cue.url = github:defn/dev/m/pkg-cue-0.5.0-4?dir=m/pkg/cue;
-    hof.url = github:defn/dev/m/pkg-hof-0.6.8-beta.12-3?dir=m/pkg/hof;
-    gum.url = github:defn/dev/m/pkg-gum-0.10.0-6?dir=m/pkg/gum;
-    glow.url = github:defn/dev/m/pkg-glow-1.5.0-6?dir=m/pkg/glow;
+    cue.url = github:devn/dev/pkg-cue-0.5.0-4?dir=m/pkg/cue;
+    hof.url = github:devn/dev/pkg-hof-0.6.8-beta.12-3?dir=m/pkg/hof;
+    gum.url = github:devn/dev/pkg-gum-0.10.0-6?dir=m/pkg/gum;
+    glow.url = github:devn/dev/pkg-glow-1.5.0-6?dir=m/pkg/glow;
   };
 
   outputs = inputs: inputs.cue.inputs.pkg.main rec {

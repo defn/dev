@@ -1,12 +1,12 @@
 {
   inputs = {
     gomod2nix.url = github:defn/gomod2nix/1.5.0-9;
-    godev.url = github:defn/dev/m/pkg-godev-0.0.78?dir=m/pkg/godev;
-    nodedev.url = github:defn/dev/m/pkg-nodedev-0.0.47?dir=m/pkg/nodedev;
-    localdev.url = github:defn/dev/m/pkg-localdev-0.0.112?dir=m/pkg/localdev;
-    development.url = github:defn/dev/m/pkg-development-0.0.51?dir=m/pkg/development;
-    kubernetes.url = github:defn/dev/m/pkg-kubernetes-0.0.84?dir=m/pkg/kubernetes;
-    tailscale.url = github:defn/dev/m/pkg-tailscale-1.40.0-1?dir=m/pkg/tailscale;
+    godev.url = github:devn/dev/pkg-godev-0.0.78?dir=m/pkg/godev;
+    nodedev.url = github:devn/dev/pkg-nodedev-0.0.47?dir=m/pkg/nodedev;
+    localdev.url = github:devn/dev/pkg-localdev-0.0.112?dir=m/pkg/localdev;
+    development.url = github:devn/dev/pkg-development-0.0.51?dir=m/pkg/development;
+    kubernetes.url = github:devn/dev/pkg-kubernetes-0.0.84?dir=m/pkg/kubernetes;
+    tailscale.url = github:devn/dev/pkg-tailscale-1.40.0-1?dir=m/pkg/tailscale;
     latest.url = github:NixOS/nixpkgs?rev=64c27498901f104a11df646278c4e5c9f4d642db;
   };
 

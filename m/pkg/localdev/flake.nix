@@ -1,18 +1,18 @@
 {
   inputs = {
-    tilt.url = github:defn/dev/m/pkg-tilt-0.32.2-1?dir=m/pkg/tilt;
-    nomad.url = github:defn/dev/m/pkg-nomad-1.5.3-7?dir=m/pkg/nomad;
-    boundary.url = github:defn/dev/m/pkg-boundary-0.12.2-6?dir=m/pkg/boundary;
-    vault.url = github:defn/dev/m/pkg-vault-1.13.2-1?dir=m/pkg/vault;
-    gh.url = github:defn/dev/m/pkg-gh-2.27.0-6?dir=m/pkg/gh;
-    earthly.url = github:defn/dev/m/pkg-earthly-0.7.4-4?dir=m/pkg/earthly;
-    buildkite.url = github:defn/dev/m/pkg-buildkite-3.45.0-6?dir=m/pkg/buildkite;
-    bk.url = github:defn/dev/m/pkg-bk-2.0.0-7?dir=m/pkg/bk;
-    buildevents.url = github:defn/dev/m/pkg-buildevents-0.13.0-6?dir=m/pkg/buildevents;
-    honeyvent.url = github:defn/dev/m/pkg-honeyvent-1.1.3-6?dir=m/pkg/honeyvent;
-    honeymarker.url = github:defn/dev/m/pkg-honeymarker-0.2.10-6?dir=m/pkg/honeymarker;
-    honeytail.url = github:defn/dev/m/pkg-honeytail-1.8.3-4?dir=m/pkg/honeytail;
-    kuma.url = github:defn/dev/m/pkg-kuma-2.2.0-1?dir=m/pkg/kuma;
+    tilt.url = github:devn/dev/pkg-tilt-0.32.2-1?dir=m/pkg/tilt;
+    nomad.url = github:devn/dev/pkg-nomad-1.5.3-7?dir=m/pkg/nomad;
+    boundary.url = github:devn/dev/pkg-boundary-0.12.2-6?dir=m/pkg/boundary;
+    vault.url = github:devn/dev/pkg-vault-1.13.2-1?dir=m/pkg/vault;
+    gh.url = github:devn/dev/pkg-gh-2.27.0-6?dir=m/pkg/gh;
+    earthly.url = github:devn/dev/pkg-earthly-0.7.4-4?dir=m/pkg/earthly;
+    buildkite.url = github:devn/dev/pkg-buildkite-3.45.0-6?dir=m/pkg/buildkite;
+    bk.url = github:devn/dev/pkg-bk-2.0.0-7?dir=m/pkg/bk;
+    buildevents.url = github:devn/dev/pkg-buildevents-0.13.0-6?dir=m/pkg/buildevents;
+    honeyvent.url = github:devn/dev/pkg-honeyvent-1.1.3-6?dir=m/pkg/honeyvent;
+    honeymarker.url = github:devn/dev/pkg-honeymarker-0.2.10-6?dir=m/pkg/honeymarker;
+    honeytail.url = github:devn/dev/pkg-honeytail-1.8.3-4?dir=m/pkg/honeytail;
+    kuma.url = github:devn/dev/pkg-kuma-2.2.0-1?dir=m/pkg/kuma;
   };
 
   outputs = inputs: inputs.tilt.inputs.pkg.main rec {

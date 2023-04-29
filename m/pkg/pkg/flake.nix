@@ -1,5 +1,5 @@
 {
-  inputs.dev.url = github:defn/dev/m/pkg-dev-0.0.5?dir=m/pkg/dev;
+  inputs.dev.url = github:devn/dev/pkg-dev-0.0.5?dir=m/pkg/dev;
   outputs = inputs:
     let
       main = clr:
