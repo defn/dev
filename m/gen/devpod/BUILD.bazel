@@ -8,7 +8,7 @@ go_library(
         "Devpod__checks.go",
         "main.go",
     ],
-    importpath = "github.com/defn/m/gen/devpod",
+    importpath = "github.com/defn/dev/m/gen/devpod",
     visibility = ["//visibility:public"],
     deps = [
         "//gen/devpod/internal",

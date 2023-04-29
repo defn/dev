@@ -15,4 +15,4 @@ rewrite: # Rewrite k8s.io module name to this repo
 	mkdir -p ./k8s
 	rsync -ia ../cue.mod/gen/k8s.io/. ./k8s/.
 	rm -rf ../cue.mod/gen/k8s.io
-	git grep '"k8s.io/' k8s | cut -d: -f1 | uniq | while read -r f; do perl -pe 's{"k8s.io/}{"github.com/defn/m/boot/k8s/}' -i $$f; done
+	git grep '"k8s.io/' k8s | cut -d: -f1 | uniq | while read -r f; do perl -pe 's{"k8s.io/}{"github.com/defn/dev/m/boot/k8s/}' -i $$f; done

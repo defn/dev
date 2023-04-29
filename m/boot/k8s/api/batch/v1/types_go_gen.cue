@@ -5,9 +5,9 @@
 package v1
 
 import (
-	metav1 "github.com/defn/m/boot/k8s/apimachinery/pkg/apis/meta/v1"
-	corev1 "github.com/defn/m/boot/k8s/api/core/v1"
-	"github.com/defn/m/boot/k8s/apimachinery/pkg/types"
+	metav1 "github.com/defn/dev/m/boot/k8s/apimachinery/pkg/apis/meta/v1"
+	corev1 "github.com/defn/dev/m/boot/k8s/api/core/v1"
+	"github.com/defn/dev/m/boot/k8s/apimachinery/pkg/types"
 )
 
 // All Kubernetes labels need to be prefixed with Kubernetes to distinguish them from end-user labels

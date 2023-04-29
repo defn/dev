@@ -2,7 +2,7 @@ version: v1
 managed:
   enabled: true
   go_package_prefix:
-    default: github.com/defn/m/cmd/cli/gen
+    default: github.com/defn/dev/m/cmd/cli/gen
 plugins:
   - plugin: buf.build/protocolbuffers/go
     out: ../gen

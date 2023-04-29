@@ -54,7 +54,7 @@ k3d:
     RUN . ./.profile && for a in gnumake; do nix profile install nixpkgs#$a; done
     RUN . ./.profile && for a in nixpkgs-fmt; do nix profile install nixpkgs#$a; done
 
-    RUN . ./.profile && nix profile install github:defn/m/pkg-tailscale-1.38.4-3?dir=pkg/tailscale
+    RUN . ./.profile && nix profile install github:defn/dev/m/pkg-tailscale-1.38.4-3?dir=pkg/tailscale
 
     RUN . ./.profile && ssh -o StrictHostKeyChecking=no git@github.com || true
 

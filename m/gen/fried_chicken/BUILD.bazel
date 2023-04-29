@@ -8,7 +8,7 @@ go_library(
         "FriedChicken__checks.go",
         "main.go",
     ],
-    importpath = "github.com/defn/m/gen/fried_chicken",
+    importpath = "github.com/defn/dev/m/gen/fried_chicken",
     visibility = ["//visibility:public"],
     deps = [
         "//gen/fried_chicken/internal",

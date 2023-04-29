@@ -4,7 +4,7 @@
 
 package v1
 
-import metav1 "github.com/defn/m/boot/k8s/apimachinery/pkg/apis/meta/v1"
+import metav1 "github.com/defn/dev/m/boot/k8s/apimachinery/pkg/apis/meta/v1"
 
 // Rule is a tuple of APIGroups, APIVersion, and Resources.It is recommended
 // to make sure that all the tuple expansions are valid.

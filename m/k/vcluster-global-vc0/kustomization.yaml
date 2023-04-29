@@ -19,7 +19,7 @@ helmCharts:
             destination:
               name: vcluster-global-vc0
             source:
-              repoURL: https://github.com/defn/m
+              repoURL: https://github.com/defn/dev/m
               targetRevision: main
               path: r/external-secrets-operator
             syncPolicy:
@@ -40,7 +40,7 @@ helmCharts:
             destination:
               name: vcluster-global-vc0
             source:
-              repoURL: https://github.com/defn/m
+              repoURL: https://github.com/defn/dev/m
               targetRevision: main
               path: r/vcluster-global-vc0-secrets-store
             syncPolicy:
@@ -61,7 +61,7 @@ helmCharts:
             destination:
               name: vcluster-global-vc0
             source:
-              repoURL: https://github.com/defn/m
+              repoURL: https://github.com/defn/dev/m
               targetRevision: main
               path: r/coder
             syncPolicy:

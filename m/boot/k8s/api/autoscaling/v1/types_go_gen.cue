@@ -5,9 +5,9 @@
 package v1
 
 import (
-	metav1 "github.com/defn/m/boot/k8s/apimachinery/pkg/apis/meta/v1"
-	"github.com/defn/m/boot/k8s/apimachinery/pkg/api/resource"
-	"github.com/defn/m/boot/k8s/api/core/v1"
+	metav1 "github.com/defn/dev/m/boot/k8s/apimachinery/pkg/apis/meta/v1"
+	"github.com/defn/dev/m/boot/k8s/apimachinery/pkg/api/resource"
+	"github.com/defn/dev/m/boot/k8s/api/core/v1"
 )
 
 // CrossVersionObjectReference contains enough information to let you identify the referred resource.

@@ -8,7 +8,7 @@ go_library(
         "TerraformAwsEksIamRole__checks.go",
         "main.go",
     ],
-    importpath = "github.com/defn/m/gen/terraform_aws_eks_iam_role",
+    importpath = "github.com/defn/dev/m/gen/terraform_aws_eks_iam_role",
     visibility = ["//visibility:public"],
     deps = [
         "//gen/terraform_aws_eks_iam_role/internal",

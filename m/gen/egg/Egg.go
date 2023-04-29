@@ -3,10 +3,10 @@ package egg
 
 import (
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
-	_init_ "github.com/defn/m/gen/egg/jsii"
+	_init_ "github.com/defn/dev/m/gen/egg/jsii"
 
 	"github.com/aws/constructs-go/constructs/v10"
-	"github.com/defn/m/gen/egg/internal"
+	"github.com/defn/dev/m/gen/egg/internal"
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 

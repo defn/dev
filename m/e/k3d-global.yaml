@@ -10,7 +10,7 @@ spec:
   destination:
     name: in-cluster
   source:
-    repoURL: https://github.com/defn/m
+    repoURL: https://github.com/defn/dev/m
     targetRevision: main
     path: r/k3d-global
   syncPolicy:

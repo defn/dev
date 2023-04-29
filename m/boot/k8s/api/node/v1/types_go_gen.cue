@@ -5,8 +5,8 @@
 package v1
 
 import (
-	metav1 "github.com/defn/m/boot/k8s/apimachinery/pkg/apis/meta/v1"
-	corev1 "github.com/defn/m/boot/k8s/api/core/v1"
+	metav1 "github.com/defn/dev/m/boot/k8s/apimachinery/pkg/apis/meta/v1"
+	corev1 "github.com/defn/dev/m/boot/k8s/api/core/v1"
 )
 
 // RuntimeClass defines a class of container runtime supported in the cluster.

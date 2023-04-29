@@ -3,10 +3,10 @@ package terraform_aws_eks_cluster
 
 import (
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
-	_init_ "github.com/defn/m/gen/terraform_aws_eks_cluster/jsii"
+	_init_ "github.com/defn/dev/m/gen/terraform_aws_eks_cluster/jsii"
 
 	"github.com/aws/constructs-go/constructs/v10"
-	"github.com/defn/m/gen/terraform_aws_eks_cluster/internal"
+	"github.com/defn/dev/m/gen/terraform_aws_eks_cluster/internal"
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 

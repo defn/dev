@@ -18,7 +18,7 @@ helmCharts:
           destination:
             name: k3d-global
           source:
-            repoURL: https://github.com/defn/m
+            repoURL: https://github.com/defn/dev/m
             targetRevision: main
             path: r/argo-cd
           syncPolicy:
@@ -40,7 +40,7 @@ helmCharts:
             name: k3d-global
             namespace: argo-workflows
           source:
-            repoURL: https://github.com/defn/m
+            repoURL: https://github.com/defn/dev/m
             targetRevision: main
             path: r/argo-workflows
           syncPolicy:
@@ -62,7 +62,7 @@ helmCharts:
           destination:
             name: k3d-global
           source:
-            repoURL: https://github.com/defn/m
+            repoURL: https://github.com/defn/dev/m
             targetRevision: main
             path: r/cert-manager
           syncPolicy:
@@ -83,7 +83,7 @@ helmCharts:
           destination:
             name: k3d-global
           source:
-            repoURL: https://github.com/defn/m
+            repoURL: https://github.com/defn/dev/m
             targetRevision: main
             path: r/coredns
           syncPolicy:
@@ -104,7 +104,7 @@ helmCharts:
           destination:
             name: k3d-global
           source:
-            repoURL: https://github.com/defn/m
+            repoURL: https://github.com/defn/dev/m
             targetRevision: main
             path: r/defn
           syncPolicy:
@@ -125,7 +125,7 @@ helmCharts:
           destination:
             name: k3d-global
           source:
-            repoURL: https://github.com/defn/m
+            repoURL: https://github.com/defn/dev/m
             targetRevision: main
             path: r/defn-shared
           syncPolicy:
@@ -146,7 +146,7 @@ helmCharts:
           destination:
             name: k3d-global
           source:
-            repoURL: https://github.com/defn/m
+            repoURL: https://github.com/defn/dev/m
             targetRevision: main
             path: r/external-dns
           syncPolicy:
@@ -167,7 +167,7 @@ helmCharts:
           destination:
             name: k3d-global
           source:
-            repoURL: https://github.com/defn/m
+            repoURL: https://github.com/defn/dev/m
             targetRevision: main
             path: r/external-secrets-operator
           syncPolicy:
@@ -188,7 +188,7 @@ helmCharts:
           destination:
             name: k3d-global
           source:
-            repoURL: https://github.com/defn/m
+            repoURL: https://github.com/defn/dev/m
             targetRevision: main
             path: r/global-vc0
           syncPolicy:
@@ -209,7 +209,7 @@ helmCharts:
           destination:
             name: k3d-global
           source:
-            repoURL: https://github.com/defn/m
+            repoURL: https://github.com/defn/dev/m
             targetRevision: main
             path: r/hello
           syncPolicy:
@@ -230,7 +230,7 @@ helmCharts:
           destination:
             name: k3d-global
           source:
-            repoURL: https://github.com/defn/m
+            repoURL: https://github.com/defn/dev/m
             targetRevision: main
             path: r/k3d-global-secrets-store
           syncPolicy:
@@ -251,7 +251,7 @@ helmCharts:
           destination:
             name: k3d-global
           source:
-            repoURL: https://github.com/defn/m
+            repoURL: https://github.com/defn/dev/m
             targetRevision: main
             path: r/knative
           syncPolicy:
@@ -272,7 +272,7 @@ helmCharts:
           destination:
             name: k3d-global
           source:
-            repoURL: https://github.com/defn/m
+            repoURL: https://github.com/defn/dev/m
             targetRevision: main
             path: r/kourier
           syncPolicy:
@@ -293,7 +293,7 @@ helmCharts:
           destination:
             name: k3d-global
           source:
-            repoURL: https://github.com/defn/m
+            repoURL: https://github.com/defn/dev/m
             targetRevision: main
             path: r/kyverno
           syncPolicy:
@@ -315,7 +315,7 @@ helmCharts:
           destination:
             name: k3d-global
           source:
-            repoURL: https://github.com/defn/m
+            repoURL: https://github.com/defn/dev/m
             targetRevision: main
             path: r/pod-identity-webhook
           syncPolicy:
@@ -336,7 +336,7 @@ helmCharts:
           destination:
             name: k3d-global
           source:
-            repoURL: https://github.com/defn/m
+            repoURL: https://github.com/defn/dev/m
             targetRevision: main
             path: r/tfo
           syncPolicy:
@@ -357,7 +357,7 @@ helmCharts:
           destination:
             name: k3d-global
           source:
-            repoURL: https://github.com/defn/m
+            repoURL: https://github.com/defn/dev/m
             targetRevision: main
             path: r/traefik
           syncPolicy:
@@ -378,7 +378,7 @@ helmCharts:
           destination:
             name: k3d-global
           source:
-            repoURL: https://github.com/defn/m
+            repoURL: https://github.com/defn/dev/m
             targetRevision: main
             path: r/velero
           syncPolicy:

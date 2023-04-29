@@ -3,10 +3,10 @@ package chicken
 
 import (
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
-	_init_ "github.com/defn/m/gen/chicken/jsii"
+	_init_ "github.com/defn/dev/m/gen/chicken/jsii"
 
 	"github.com/aws/constructs-go/constructs/v10"
-	"github.com/defn/m/gen/chicken/internal"
+	"github.com/defn/dev/m/gen/chicken/internal"
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 

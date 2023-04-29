@@ -5,9 +5,9 @@
 package v1
 
 import (
-	metav1 "github.com/defn/m/boot/k8s/apimachinery/pkg/apis/meta/v1"
-	"github.com/defn/m/boot/k8s/api/core/v1"
-	"github.com/defn/m/boot/k8s/apimachinery/pkg/api/resource"
+	metav1 "github.com/defn/dev/m/boot/k8s/apimachinery/pkg/apis/meta/v1"
+	"github.com/defn/dev/m/boot/k8s/api/core/v1"
+	"github.com/defn/dev/m/boot/k8s/apimachinery/pkg/api/resource"
 )
 
 // StorageClass describes the parameters for a class of storage for

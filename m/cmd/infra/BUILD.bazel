@@ -4,7 +4,7 @@ go_library(
     name = "infra_lib",
     srcs = ["infra.go"],
     embedsrcs = ["schema/infra.cue"],
-    importpath = "github.com/defn/m/cmd/infra",
+    importpath = "github.com/defn/dev/m/cmd/infra",
     visibility = ["//visibility:private"],
     deps = [
         "@com_github_aws_constructs_go_constructs_v10//:constructs",

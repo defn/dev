@@ -8,7 +8,7 @@ go_library(
         "TerraformAwsDynamicSubnets__checks.go",
         "main.go",
     ],
-    importpath = "github.com/defn/m/gen/terraform_aws_dynamic_subnets",
+    importpath = "github.com/defn/dev/m/gen/terraform_aws_dynamic_subnets",
     visibility = ["//visibility:public"],
     deps = [
         "//gen/terraform_aws_dynamic_subnets/internal",

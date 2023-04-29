@@ -1,7 +1,7 @@
 package boot
 
 import (
-	"github.com/defn/m/boot/project"
+	"github.com/defn/dev/m/boot/project"
 )
 
 #BootContext: {

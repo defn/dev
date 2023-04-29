@@ -3,10 +3,10 @@ package terraform_null_label
 
 import (
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
-	_init_ "github.com/defn/m/gen/terraform_null_label/jsii"
+	_init_ "github.com/defn/dev/m/gen/terraform_null_label/jsii"
 
 	"github.com/aws/constructs-go/constructs/v10"
-	"github.com/defn/m/gen/terraform_null_label/internal"
+	"github.com/defn/dev/m/gen/terraform_null_label/internal"
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 

@@ -8,7 +8,7 @@ go_library(
         "Egg__checks.go",
         "main.go",
     ],
-    importpath = "github.com/defn/m/gen/egg",
+    importpath = "github.com/defn/dev/m/gen/egg",
     visibility = ["//visibility:public"],
     deps = [
         "//gen/egg/internal",

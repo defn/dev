@@ -5,7 +5,7 @@ import (
 	"tool/file"
 	"tool/exec"
 	"strings"
-	"github.com/defn/m/boot/input"
+	"github.com/defn/dev/m/boot/input"
 )
 
 #ProjectConfig: codeowners: [...string]

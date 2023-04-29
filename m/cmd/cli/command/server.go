@@ -14,8 +14,8 @@ import (
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 
-	petv1 "github.com/defn/m/cmd/cli/gen/pet/v1"
-	"github.com/defn/m/cmd/cli/gen/pet/v1/petv1connect"
+	petv1 "github.com/defn/dev/m/cmd/cli/gen/pet/v1"
+	"github.com/defn/dev/m/cmd/cli/gen/pet/v1/petv1connect"
 )
 
 var serverCmd = &cobra.Command{

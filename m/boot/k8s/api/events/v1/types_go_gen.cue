@@ -5,8 +5,8 @@
 package v1
 
 import (
-	metav1 "github.com/defn/m/boot/k8s/apimachinery/pkg/apis/meta/v1"
-	corev1 "github.com/defn/m/boot/k8s/api/core/v1"
+	metav1 "github.com/defn/dev/m/boot/k8s/apimachinery/pkg/apis/meta/v1"
+	corev1 "github.com/defn/dev/m/boot/k8s/api/core/v1"
 )
 
 // Event is a report of an event somewhere in the cluster. It generally denotes some state change in the system.
@@ -87,7 +87,7 @@ import (
 
 // EventSeries contain information on series of events, i.e. thing that was/is happening
 // continuously for some time. How often to update the EventSeries is up to the event reporters.
-// The default event reporter in "github.com/defn/m/boot/k8s/client-go/tools/events/event_broadcaster.go" shows
+// The default event reporter in "github.com/defn/dev/m/boot/k8s/client-go/tools/events/event_broadcaster.go" shows
 // how this struct is updated on heartbeats and can guide customized reporter implementations.
 #EventSeries: {
 	// count is the number of occurrences in this series up to the last heartbeat time.

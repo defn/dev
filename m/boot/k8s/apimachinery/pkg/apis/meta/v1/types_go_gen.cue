@@ -15,8 +15,8 @@
 package v1
 
 import (
-	"github.com/defn/m/boot/k8s/apimachinery/pkg/types"
-	"github.com/defn/m/boot/k8s/apimachinery/pkg/runtime"
+	"github.com/defn/dev/m/boot/k8s/apimachinery/pkg/types"
+	"github.com/defn/dev/m/boot/k8s/apimachinery/pkg/runtime"
 )
 
 // TypeMeta describes an individual object in an API response or request
@@ -386,7 +386,7 @@ import (
 	// produce the current state of objects in the collection. Once all such
 	// events have been sent, a synthetic "Bookmark" event  will be sent.
 	// The bookmark will report the ResourceVersion (RV) corresponding to the
-	// set of objects, and be marked with `"github.com/defn/m/boot/k8s/initial-events-end": "true"` annotation.
+	// set of objects, and be marked with `"github.com/defn/dev/m/boot/k8s/initial-events-end": "true"` annotation.
 	// Afterwards, the watch stream will proceed as usual, sending watch events
 	// corresponding to changes (subsequent to the RV) to objects watched.
 	//

@@ -5,10 +5,10 @@
 package v1
 
 import (
-	metav1 "github.com/defn/m/boot/k8s/apimachinery/pkg/apis/meta/v1"
-	"github.com/defn/m/boot/k8s/apimachinery/pkg/api/resource"
-	"github.com/defn/m/boot/k8s/apimachinery/pkg/util/intstr"
-	"github.com/defn/m/boot/k8s/apimachinery/pkg/types"
+	metav1 "github.com/defn/dev/m/boot/k8s/apimachinery/pkg/apis/meta/v1"
+	"github.com/defn/dev/m/boot/k8s/apimachinery/pkg/api/resource"
+	"github.com/defn/dev/m/boot/k8s/apimachinery/pkg/util/intstr"
+	"github.com/defn/dev/m/boot/k8s/apimachinery/pkg/types"
 )
 
 // NamespaceDefault means the object is in the default namespace which is applied when not specified by clients

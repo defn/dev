@@ -11,7 +11,7 @@ spec:
   project: default
   source:
     path: r/argo-cd
-    repoURL: https://github.com/defn/m
+    repoURL: https://github.com/defn/dev/m
     targetRevision: main
   syncPolicy:
     automated:
@@ -33,7 +33,7 @@ spec:
   project: default
   source:
     path: r/argo-workflows
-    repoURL: https://github.com/defn/m
+    repoURL: https://github.com/defn/dev/m
     targetRevision: main
   syncPolicy:
     automated:
@@ -55,7 +55,7 @@ spec:
   project: default
   source:
     path: r/cert-manager
-    repoURL: https://github.com/defn/m
+    repoURL: https://github.com/defn/dev/m
     targetRevision: main
   syncPolicy:
     automated:
@@ -76,7 +76,7 @@ spec:
   project: default
   source:
     path: r/coredns
-    repoURL: https://github.com/defn/m
+    repoURL: https://github.com/defn/dev/m
     targetRevision: main
   syncPolicy:
     automated:
@@ -97,7 +97,7 @@ spec:
   project: default
   source:
     path: r/defn
-    repoURL: https://github.com/defn/m
+    repoURL: https://github.com/defn/dev/m
     targetRevision: main
   syncPolicy:
     automated:
@@ -118,7 +118,7 @@ spec:
   project: default
   source:
     path: r/defn-shared
-    repoURL: https://github.com/defn/m
+    repoURL: https://github.com/defn/dev/m
     targetRevision: main
   syncPolicy:
     automated:
@@ -139,7 +139,7 @@ spec:
   project: default
   source:
     path: r/external-dns
-    repoURL: https://github.com/defn/m
+    repoURL: https://github.com/defn/dev/m
     targetRevision: main
   syncPolicy:
     automated:
@@ -160,7 +160,7 @@ spec:
   project: default
   source:
     path: r/external-secrets-operator
-    repoURL: https://github.com/defn/m
+    repoURL: https://github.com/defn/dev/m
     targetRevision: main
   syncPolicy:
     automated:
@@ -181,7 +181,7 @@ spec:
   project: default
   source:
     path: r/global-vc0
-    repoURL: https://github.com/defn/m
+    repoURL: https://github.com/defn/dev/m
     targetRevision: main
   syncPolicy:
     automated:
@@ -202,7 +202,7 @@ spec:
   project: default
   source:
     path: r/hello
-    repoURL: https://github.com/defn/m
+    repoURL: https://github.com/defn/dev/m
     targetRevision: main
   syncPolicy:
     automated:
@@ -223,7 +223,7 @@ spec:
   project: default
   source:
     path: r/knative
-    repoURL: https://github.com/defn/m
+    repoURL: https://github.com/defn/dev/m
     targetRevision: main
   syncPolicy:
     automated:
@@ -244,7 +244,7 @@ spec:
   project: default
   source:
     path: r/kourier
-    repoURL: https://github.com/defn/m
+    repoURL: https://github.com/defn/dev/m
     targetRevision: main
   syncPolicy:
     automated:
@@ -265,7 +265,7 @@ spec:
   project: default
   source:
     path: r/kyverno
-    repoURL: https://github.com/defn/m
+    repoURL: https://github.com/defn/dev/m
     targetRevision: main
   syncPolicy:
     automated:
@@ -287,7 +287,7 @@ spec:
   project: default
   source:
     path: r/pod-identity-webhook
-    repoURL: https://github.com/defn/m
+    repoURL: https://github.com/defn/dev/m
     targetRevision: main
   syncPolicy:
     automated:
@@ -308,7 +308,7 @@ spec:
   project: default
   source:
     path: r/k3d-global-secrets-store
-    repoURL: https://github.com/defn/m
+    repoURL: https://github.com/defn/dev/m
     targetRevision: main
   syncPolicy:
     automated:
@@ -329,7 +329,7 @@ spec:
   project: default
   source:
     path: r/tfo
-    repoURL: https://github.com/defn/m
+    repoURL: https://github.com/defn/dev/m
     targetRevision: main
   syncPolicy:
     automated:
@@ -350,7 +350,7 @@ spec:
   project: default
   source:
     path: r/traefik
-    repoURL: https://github.com/defn/m
+    repoURL: https://github.com/defn/dev/m
     targetRevision: main
   syncPolicy:
     automated:
@@ -371,7 +371,7 @@ spec:
   project: default
   source:
     path: r/velero
-    repoURL: https://github.com/defn/m
+    repoURL: https://github.com/defn/dev/m
     targetRevision: main
   syncPolicy:
     automated:

@@ -1,7 +1,7 @@
 package c
 
 import (
-	batch "github.com/defn/m/boot/k8s/api/batch/v1"
+	batch "github.com/defn/dev/m/boot/k8s/api/batch/v1"
 )
 
 kustomize: [string]: #KustomizeHelm | #KustomizeVCluster | #Kustomize
@@ -226,7 +226,7 @@ kustomize: [NAME=string]: _name: NAME
 
 		spec: {
 			terraformVersion: "1.0.0"
-			terraformModule: source: "https://github.com/defn/m.git//tf/chicken?ref=main"
+			terraformModule: source: "https://github.com/defn/dev/m.git//tf/chicken?ref=main"
 
 			taskOptions: [{
 				for: [ "*"]

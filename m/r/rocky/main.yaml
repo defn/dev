@@ -48,7 +48,7 @@ spec:
     for:
     - '*'
   terraformModule:
-    source: https://github.com/defn/m.git//tf/chicken?ref=main
+    source: https://github.com/defn/dev/m.git//tf/chicken?ref=main
   terraformVersion: 1.0.0
 ---
 apiVersion: tf.isaaguilar.com/v1alpha2

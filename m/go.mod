@@ -1,4 +1,4 @@
-module github.com/defn/m
+module github.com/defn/dev/m
 
 go 1.19
 

@@ -1,4 +1,4 @@
-module github.com/defn/m/boot
+module github.com/defn/dev/m/boot
 
 go 1.20
 

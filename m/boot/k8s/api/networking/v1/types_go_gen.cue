@@ -5,9 +5,9 @@
 package v1
 
 import (
-	metav1 "github.com/defn/m/boot/k8s/apimachinery/pkg/apis/meta/v1"
-	"github.com/defn/m/boot/k8s/api/core/v1"
-	"github.com/defn/m/boot/k8s/apimachinery/pkg/util/intstr"
+	metav1 "github.com/defn/dev/m/boot/k8s/apimachinery/pkg/apis/meta/v1"
+	"github.com/defn/dev/m/boot/k8s/api/core/v1"
+	"github.com/defn/dev/m/boot/k8s/apimachinery/pkg/util/intstr"
 )
 
 // NetworkPolicy describes what network traffic is allowed for a set of Pods

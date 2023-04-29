@@ -8,7 +8,7 @@ go_library(
         "TerraformNullLabel__checks.go",
         "main.go",
     ],
-    importpath = "github.com/defn/m/gen/terraform_null_label",
+    importpath = "github.com/defn/dev/m/gen/terraform_null_label",
     visibility = ["//visibility:public"],
     deps = [
         "//gen/terraform_null_label/internal",

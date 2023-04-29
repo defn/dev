@@ -8,7 +8,7 @@ go_library(
         "TerraformAwsVpc__checks.go",
         "main.go",
     ],
-    importpath = "github.com/defn/m/gen/terraform_aws_vpc",
+    importpath = "github.com/defn/dev/m/gen/terraform_aws_vpc",
     visibility = ["//visibility:public"],
     deps = [
         "//gen/terraform_aws_vpc/internal",

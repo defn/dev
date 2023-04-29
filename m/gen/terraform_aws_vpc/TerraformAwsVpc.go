@@ -3,10 +3,10 @@ package terraform_aws_vpc
 
 import (
 	_jsii_ "github.com/aws/jsii-runtime-go/runtime"
-	_init_ "github.com/defn/m/gen/terraform_aws_vpc/jsii"
+	_init_ "github.com/defn/dev/m/gen/terraform_aws_vpc/jsii"
 
 	"github.com/aws/constructs-go/constructs/v10"
-	"github.com/defn/m/gen/terraform_aws_vpc/internal"
+	"github.com/defn/dev/m/gen/terraform_aws_vpc/internal"
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 

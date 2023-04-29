@@ -8,7 +8,7 @@ metadata:
 spec:
   terraformVersion: 1.0.0
   terraformModule:
-    source: https://github.com/defn/m.git//tf/fried-chicken?ref=main
+    source: https://github.com/defn/dev/m.git//tf/fried-chicken?ref=main
   serviceAccount: default
   scmAuthMethods: []
   ignoreDelete: true
