@@ -1,7 +1,7 @@
 {
   inputs = {
-    ibazel.url = github:devn/dev/pkg-ibazel-0.22.0-5?dir=m/pkg/ibazel;
-    buildifier.url = github:devn/dev/pkg-buildifier-6.1.1-1?dir=m/pkg/buildifier;
+    ibazel.url = github:defn/dev/pkg-ibazel-0.22.0-5?dir=m/pkg/ibazel;
+    buildifier.url = github:defn/dev/pkg-buildifier-6.1.1-2?dir=m/pkg/buildifier;
     latest.url = github:NixOS/nixpkgs?rev=e3b18e82da9ab82b572d70c162d4e13a058aeb7d;
   };
 
