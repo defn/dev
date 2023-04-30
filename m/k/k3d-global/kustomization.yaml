@@ -21,34 +21,13 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/r/kyverno
+              path: r/kyverno
             syncPolicy:
               automated:
                 prune: true
                 selfHeal: true
               syncOptions:
                 - ServerSideApply=true
-        velero: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: k3d-global-velero
-            annotations:
-              argocd.argoproj.io/sync-wave: "1"
-          spec:
-            project: default
-            destination:
-              name: k3d-global
-            source:
-              repoURL: https://github.com/defn/dev
-              targetRevision: main
-              path: m/r/velero
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
         coredns: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
@@ -64,7 +43,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/r/coredns
+              path: r/coredns
             syncPolicy:
               automated:
                 prune: true
@@ -85,7 +64,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/r/cert-manager
+              path: r/cert-manager
             syncPolicy:
               automated:
                 prune: true
@@ -106,7 +85,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/r/pod-identity-webhook
+              path: r/pod-identity-webhook
             syncPolicy:
               automated:
                 prune: true
@@ -127,7 +106,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/r/external-secrets-operator
+              path: r/external-secrets-operator
             syncPolicy:
               automated:
                 prune: true
@@ -148,7 +127,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/r/k3d-global-secrets-store
+              path: r/k3d-global-secrets-store
             syncPolicy:
               automated:
                 prune: true
@@ -169,7 +148,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/r/defn-shared
+              path: r/defn-shared
             syncPolicy:
               automated:
                 prune: true
@@ -190,7 +169,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/r/external-dns
+              path: r/external-dns
             syncPolicy:
               automated:
                 prune: true
@@ -212,7 +191,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/r/argo-workflows
+              path: r/argo-workflows
             syncPolicy:
               automated:
                 prune: true
@@ -234,7 +213,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/r/tfo
+              path: r/tfo
             syncPolicy:
               automated:
                 prune: true
@@ -255,7 +234,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/r/knative
+              path: r/knative
             syncPolicy:
               automated:
                 prune: true
@@ -276,7 +255,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/r/kourier
+              path: r/kourier
             syncPolicy:
               automated:
                 prune: true
@@ -297,7 +276,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/r/defn
+              path: r/defn
             syncPolicy:
               automated:
                 prune: true
@@ -318,7 +297,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/r/traefik
+              path: r/traefik
             syncPolicy:
               automated:
                 prune: true
@@ -339,7 +318,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/r/hello
+              path: r/hello
             syncPolicy:
               automated:
                 prune: true
@@ -360,7 +339,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/r/global-vc0
+              path: r/global-vc0
             syncPolicy:
               automated:
                 prune: true
@@ -381,7 +360,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/r/argo-cd
+              path: r/argo-cd
             syncPolicy:
               automated:
                 prune: true
