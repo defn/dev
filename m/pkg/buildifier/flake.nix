@@ -3,7 +3,7 @@
   outputs = inputs: inputs.pkg.downloadMain rec {
     src = ./.;
 
-    url_template = input: "https://github.com/bazelbuild/buildtools/releases/download/${input.vendor}/buildifier-${input.os}-${input.arch}";
+    url_template = input: "https://github.com/bazelbuild/buildtools/releases/download/v${input.vendor}/buildifier-${input.os}-${input.arch}";
 
     installPhase = pkg: ''
       install -m 0755 -d $out $out/bin
@@ -18,22 +18,22 @@
       "x86_64-linux" = {
         os = "linux";
         arch = "amd64";
-        sha256 = "sha256-90zHFWprZ7vd4QT/kEiHtoD9e1nUBY26L6fibdPlrRo="; # x86_64-linux
+        sha256 = "sha256-UbyUfau3sU7G+xIkRk+896fLE48aEKOzKPAINfcoUs4="; # x86_64-linux
       };
       "aarch64-linux" = {
         os = "linux";
         arch = "arm64";
-        sha256 = "sha256-fT2NhouvOyk1WjoKlG67pMIe232TvZqRq8s8yd72VcM="; # aarch64-linux
+        sha256 = "sha256-C6bo4yCLWgKRZOVC3bVQnmGPh7Y5/+jML1R3ACKFMIA="; # aarch64-linux
       };
       "x86_64-darwin" = {
         os = "darwin";
         arch = "amd64";
-        sha256 = "sha256-M+AuEGtZ7GPLs/Wmt9U0jId4i7VL87zNfE20CIRDbr4="; # x86_64-darwin
+        sha256 = "sha256-4vSmdpHF9VY0+/s4UOuX3ZG+Dt0FnZR7bIPRIGguAhY="; # x86_64-darwin
       };
       "aarch64-darwin" = {
         os = "darwin";
         arch = "arm64";
-        sha256 = "sha256-8DIlc0gj1ApE0DbrRQU/oqsOxhOQpJURv9aNbyaDSBw="; # aarch64-darwin
+        sha256 = "sha256-dUm19TUhmslXqipgadRvv8nqP3Sr2F/T1GCvSxogmaY="; # aarch64-darwin
       };
     };
   };
