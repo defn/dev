@@ -5,12 +5,16 @@ get:
 	npm install
 	npx cdktf get
 
-update:
+upgrade:
 	go get -u  ./...
+	go mod tidy
+
+update:
 	go mod tidy
 	$(MAKE) bazel-ignore
 
 regen:
+	cd a && buf generate
 	$(MAKE) update-repos
 
 build:
@@ -30,7 +34,16 @@ bazel-ignore:
 	echo cmd/cli/proto >> .bazelignore
 
 update-repos:
-	bazel run //:gazelle -- update-repos $$(git ls-files | grep -v tf/terraform | grep 'go.mod' | runmany 'echo -from_file=$$1')
+	@mark gazelle-buf-update-repos
+	bazel run //:gazelle-buf-update-repos
+
+	@mark gazelle-update-repos
+	bazel run //:gazelle-update-repos
+
+	@mark gazelle-buf
+	bazel run //:gazelle-buf
+
+	@mark gazelle
 	bazel run //:gazelle
 
 nix-build-all:

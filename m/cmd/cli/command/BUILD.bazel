@@ -14,8 +14,8 @@ go_library(
     importpath = "github.com/defn/dev/m/cmd/cli/command",
     visibility = ["//visibility:public"],
     deps = [
-        "//cmd/cli/gen/pet/v1:pet",
-        "//cmd/cli/gen/pet/v1/petv1connect",
+        "//a/pet/v1:pet",
+        "//a/pet/v1/petv1connect",
         "@com_github_aws_constructs_go_constructs_v10//:constructs",
         "@com_github_aws_jsii_runtime_go//:jsii-runtime-go",
         "@com_github_bufbuild_connect_go//:connect-go",
