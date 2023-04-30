@@ -1,5 +1,7 @@
+# http_archive
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
+# rules_go
 http_archive(
     name = "io_bazel_rules_go",
     sha256 = "6dc2da7ab4cf5d7bfc7c949776b1b7c733f05e56edc4bcd9022bb249d2e2a996",
@@ -8,6 +10,13 @@ http_archive(
     ],
 )
 
+load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
+
+go_rules_dependencies()
+
+go_register_toolchains(version = "1.20.3")
+
+# bazel-gazelle
 http_archive(
     name = "bazel_gazelle",
     sha256 = "727f3e4edd96ea20c29e8c2ca9e8d2af724d8c7778e7923a854b2c80952bc405",
@@ -16,21 +25,9 @@ http_archive(
     ],
 )
 
-load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies", "go_repository")
 
-############################################################
-# Define your own dependencies here using go_repository.
-# Else, dependencies declared by rules_go/gazelle will be used.
-# The first declaration of an external repository "wins".
-############################################################
-
-go_repository(
-    name = "co_honnef_go_tools",
-    importpath = "honnef.co/go/tools",
-    sum = "h1:UoveltGrhghAA7ePc+e+QYDHXrBps2PqFZiHkGR/xK8=",
-    version = "v0.0.1-2020.1.4",
-)
+# auto generated go repositories
 
 go_repository(
     name = "com_github_armon_go_metrics",
@@ -1244,14 +1241,17 @@ go_repository(
 )
 
 go_repository(
+    name = "co_honnef_go_tools",
+    importpath = "honnef.co/go/tools",
+    sum = "h1:UoveltGrhghAA7ePc+e+QYDHXrBps2PqFZiHkGR/xK8=",
+    version = "v0.0.1-2020.1.4",
+)
+
+go_repository(
     name = "org_uber_go_zap",
     importpath = "go.uber.org/zap",
     sum = "h1:WefMeulhovoZ2sYXz7st6K0sLj7bBhpiFaud4r4zST8=",
     version = "v1.21.0",
 )
-
-go_rules_dependencies()
-
-go_register_toolchains(version = "1.20.3")
 
 gazelle_dependencies()

@@ -1,23 +1,28 @@
 ignore:
 	@true
 
+get:
+	npm install
+	npx cdktf get
+
 update:
 	go get -u  ./...
 	go mod tidy
+	$(MAKE) bazel-ignore
 
 regen:
-	$(MAKE) bazel-ignore
 	$(MAKE) update-repos
-
-watch:
-	ibazel build //...
 
 build:
 	bazel build //...
 
+watch:
+	$(MAKE) build
+	ibazel build //...
+
 bazel-ignore:
-	echo gen > .bazelignore
-	echo tf > .bazelignore
+	echo > .bazelignore
+	echo tf >> .bazelignore
 	echo node_modules >> .bazelignore
 	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1.direnv}' | sort >> .bazelignore
 	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1result}' | sort >> .bazelignore
@@ -30,7 +35,3 @@ update-repos:
 
 nix-build-all:
 	git ls-files | grep flake.nix | perl -pe 's{/?flake.nix}{}' | runmany 'mark $$1; cd ./$$1 && nix build'
-
-cdktf-get:
-	npm install
-	npx cdktf get
