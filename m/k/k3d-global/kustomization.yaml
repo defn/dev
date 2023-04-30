@@ -21,7 +21,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: r/kyverno
+              path: m/r/kyverno
             syncPolicy:
               automated:
                 prune: true
@@ -43,7 +43,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: r/coredns
+              path: m/r/coredns
             syncPolicy:
               automated:
                 prune: true
@@ -64,7 +64,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: r/cert-manager
+              path: m/r/cert-manager
             syncPolicy:
               automated:
                 prune: true
@@ -85,7 +85,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: r/pod-identity-webhook
+              path: m/r/pod-identity-webhook
             syncPolicy:
               automated:
                 prune: true
@@ -106,7 +106,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: r/external-secrets-operator
+              path: m/r/external-secrets-operator
             syncPolicy:
               automated:
                 prune: true
@@ -127,7 +127,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: r/k3d-global-secrets-store
+              path: m/r/k3d-global-secrets-store
             syncPolicy:
               automated:
                 prune: true
@@ -148,7 +148,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: r/defn-shared
+              path: m/r/defn-shared
             syncPolicy:
               automated:
                 prune: true
@@ -169,7 +169,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: r/external-dns
+              path: m/r/external-dns
             syncPolicy:
               automated:
                 prune: true
@@ -191,7 +191,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: r/argo-workflows
+              path: m/r/argo-workflows
             syncPolicy:
               automated:
                 prune: true
@@ -213,7 +213,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: r/tfo
+              path: m/r/tfo
             syncPolicy:
               automated:
                 prune: true
@@ -234,7 +234,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: r/knative
+              path: m/r/knative
             syncPolicy:
               automated:
                 prune: true
@@ -255,7 +255,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: r/kourier
+              path: m/r/kourier
             syncPolicy:
               automated:
                 prune: true
@@ -276,7 +276,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: r/defn
+              path: m/r/defn
             syncPolicy:
               automated:
                 prune: true
@@ -297,7 +297,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: r/traefik
+              path: m/r/traefik
             syncPolicy:
               automated:
                 prune: true
@@ -318,7 +318,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: r/hello
+              path: m/r/hello
             syncPolicy:
               automated:
                 prune: true
@@ -339,7 +339,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: r/global-vc0
+              path: m/r/global-vc0
             syncPolicy:
               automated:
                 prune: true
@@ -360,7 +360,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: r/argo-cd
+              path: m/r/argo-cd
             syncPolicy:
               automated:
                 prune: true
