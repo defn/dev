@@ -121,7 +121,7 @@ import "encoding/yaml"
 			}
 
 			source: {
-				repoURL:        "https://github.com/defn/dev/m"
+				repoURL:        "https://github.com/defn/dev"
 				targetRevision: "main"
 				path:           "r/\(app_name)"
 			}
@@ -168,7 +168,7 @@ import "encoding/yaml"
 		destination: name:       string
 		destination: namespace?: string
 		source: {
-			repoURL:        "https://github.com/defn/dev/m"
+			repoURL:        "https://github.com/defn/dev"
 			targetRevision: "main"
 			path:           string
 		}

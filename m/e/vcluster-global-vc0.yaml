@@ -10,9 +10,9 @@ spec:
   destination:
     name: in-cluster
   source:
-    repoURL: https://github.com/defn/dev/m
+    repoURL: https://github.com/defn/dev
     targetRevision: main
-    path: r/vcluster-global-vc0
+    path: m/r/vcluster-global-vc0
   syncPolicy:
     automated:
       prune: true

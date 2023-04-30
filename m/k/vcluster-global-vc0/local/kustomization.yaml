@@ -18,9 +18,9 @@ helmCharts:
           destination:
             name: vcluster-global-vc0
           source:
-            repoURL: https://github.com/defn/dev/m
+            repoURL: https://github.com/defn/dev
             targetRevision: main
-            path: r/coder
+            path: m/r/coder
           syncPolicy:
             automated:
               prune: true
@@ -39,9 +39,9 @@ helmCharts:
           destination:
             name: vcluster-global-vc0
           source:
-            repoURL: https://github.com/defn/dev/m
+            repoURL: https://github.com/defn/dev
             targetRevision: main
-            path: r/external-secrets-operator
+            path: m/r/external-secrets-operator
           syncPolicy:
             automated:
               prune: true
@@ -60,9 +60,9 @@ helmCharts:
           destination:
             name: vcluster-global-vc0
           source:
-            repoURL: https://github.com/defn/dev/m
+            repoURL: https://github.com/defn/dev
             targetRevision: main
-            path: r/vcluster-global-vc0-secrets-store
+            path: m/r/vcluster-global-vc0-secrets-store
           syncPolicy:
             automated:
               prune: true

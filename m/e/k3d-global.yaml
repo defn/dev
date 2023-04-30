@@ -10,9 +10,9 @@ spec:
   destination:
     name: in-cluster
   source:
-    repoURL: https://github.com/defn/dev/m
+    repoURL: https://github.com/defn/dev
     targetRevision: main
-    path: r/k3d-global
+    path: m/r/k3d-global
   syncPolicy:
     automated:
       prune: true

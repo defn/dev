@@ -10,8 +10,8 @@ spec:
     name: vcluster-global-vc0
   project: default
   source:
-    path: r/coder
-    repoURL: https://github.com/defn/dev/m
+    path: m/r/coder
+    repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
     automated:
@@ -31,8 +31,8 @@ spec:
     name: vcluster-global-vc0
   project: default
   source:
-    path: r/external-secrets-operator
-    repoURL: https://github.com/defn/dev/m
+    path: m/r/external-secrets-operator
+    repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
     automated:
@@ -52,8 +52,8 @@ spec:
     name: vcluster-global-vc0
   project: default
   source:
-    path: r/vcluster-global-vc0-secrets-store
-    repoURL: https://github.com/defn/dev/m
+    path: m/r/vcluster-global-vc0-secrets-store
+    repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
     automated:
