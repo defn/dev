@@ -1,11 +1,19 @@
 {
-  "version": "0.15.5",
+  "version": "0.16.1",
   "stacks": {
     "workspaces": {
       "name": "workspaces",
       "constructPath": "workspaces",
       "workingDirectory": "stacks/workspaces",
       "synthesizedStackPath": "stacks/workspaces/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    },
+    "curl": {
+      "name": "curl",
+      "constructPath": "curl",
+      "workingDirectory": "stacks/curl",
+      "synthesizedStackPath": "stacks/curl/cdk.tf.json",
       "annotations": [],
       "dependencies": []
     },
@@ -17,6 +25,14 @@
       "annotations": [],
       "dependencies": []
     },
+    "helix": {
+      "name": "helix",
+      "constructPath": "helix",
+      "workingDirectory": "stacks/helix",
+      "synthesizedStackPath": "stacks/helix/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    },
     "whoa": {
       "name": "whoa",
       "constructPath": "whoa",
@@ -25,19 +41,35 @@
       "annotations": [],
       "dependencies": []
     },
+    "imma": {
+      "name": "imma",
+      "constructPath": "imma",
+      "workingDirectory": "stacks/imma",
+      "synthesizedStackPath": "stacks/imma/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    },
+    "immanent": {
+      "name": "immanent",
+      "constructPath": "immanent",
+      "workingDirectory": "stacks/immanent",
+      "synthesizedStackPath": "stacks/immanent/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    },
+    "fogg": {
+      "name": "fogg",
+      "constructPath": "fogg",
+      "workingDirectory": "stacks/fogg",
+      "synthesizedStackPath": "stacks/fogg/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    },
     "gyre": {
       "name": "gyre",
       "constructPath": "gyre",
       "workingDirectory": "stacks/gyre",
       "synthesizedStackPath": "stacks/gyre/cdk.tf.json",
-      "annotations": [],
-      "dependencies": []
-    },
-    "helix": {
-      "name": "helix",
-      "constructPath": "helix",
-      "workingDirectory": "stacks/helix",
-      "synthesizedStackPath": "stacks/helix/cdk.tf.json",
       "annotations": [],
       "dependencies": []
     },
@@ -70,38 +102,6 @@
       "constructPath": "chamber",
       "workingDirectory": "stacks/chamber",
       "synthesizedStackPath": "stacks/chamber/cdk.tf.json",
-      "annotations": [],
-      "dependencies": []
-    },
-    "imma": {
-      "name": "imma",
-      "constructPath": "imma",
-      "workingDirectory": "stacks/imma",
-      "synthesizedStackPath": "stacks/imma/cdk.tf.json",
-      "annotations": [],
-      "dependencies": []
-    },
-    "immanent": {
-      "name": "immanent",
-      "constructPath": "immanent",
-      "workingDirectory": "stacks/immanent",
-      "synthesizedStackPath": "stacks/immanent/cdk.tf.json",
-      "annotations": [],
-      "dependencies": []
-    },
-    "curl": {
-      "name": "curl",
-      "constructPath": "curl",
-      "workingDirectory": "stacks/curl",
-      "synthesizedStackPath": "stacks/curl/cdk.tf.json",
-      "annotations": [],
-      "dependencies": []
-    },
-    "fogg": {
-      "name": "fogg",
-      "constructPath": "fogg",
-      "workingDirectory": "stacks/fogg",
-      "synthesizedStackPath": "stacks/fogg/cdk.tf.json",
       "annotations": [],
       "dependencies": []
     },

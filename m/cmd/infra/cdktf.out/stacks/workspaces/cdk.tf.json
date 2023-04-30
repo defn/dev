@@ -4,9 +4,10 @@
       "backend": "cloud",
       "cloud": "tfc",
       "stackName": "workspaces",
-      "version": "0.15.5"
+      "version": "0.16.1"
     },
-    "outputs": {}
+    "outputs": {
+    }
   },
   "provider": {
     "tfe": [
@@ -44,7 +45,7 @@
     "required_providers": {
       "tfe": {
         "source": "hashicorp/tfe",
-        "version": "0.43.0"
+        "version": "0.44.0"
       }
     }
   }

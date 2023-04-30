@@ -4,9 +4,10 @@
       "backend": "cloud",
       "cloud": "tfc",
       "stackName": "gyre",
-      "version": "0.15.5"
+      "version": "0.16.1"
     },
-    "outputs": {}
+    "outputs": {
+    }
   },
   "data": {
     "aws_ssoadmin_instances": {
@@ -125,7 +126,10 @@
           "sso.amazonaws.com",
           "tagpolicies.tag.amazonaws.com"
         ],
-        "enabled_policy_types": ["SERVICE_CONTROL_POLICY", "TAG_POLICY"],
+        "enabled_policy_types": [
+          "SERVICE_CONTROL_POLICY",
+          "TAG_POLICY"
+        ],
         "feature_set": "ALL"
       }
     },
@@ -200,7 +204,7 @@
     "required_providers": {
       "aws": {
         "source": "aws",
-        "version": "4.62.0"
+        "version": "4.65.0"
       }
     }
   }

@@ -57,10 +57,12 @@ github.com/bufbuild/connect-go v1.7.0/go.mod h1:GmMJYR6orFqD0Y6ZgX8pwQ8j9baizDrI
 github.com/bytedance/sonic v1.5.0/go.mod h1:ED5hyg4y6t3/9Ku1R6dU/4KyJ48DZ4jPhfY1O2AihPM=
 github.com/bytedance/sonic v1.8.8 h1:Kj4AYbZSeENfyXicsYppYKO0K2YWab+i2UTSY7Ukz9Q=
 github.com/bytedance/sonic v1.8.8/go.mod h1:i736AoUSYt75HyZLoJW9ERYxcy6eaN6h4BZXU064P/U=
-github.com/cdktf/cdktf-provider-aws-go/aws/v12 v12.0.13 h1:YdWhbHk8BHgMi2HiwDMCVj+JcQ1hZ0XUaJnLo1CwUQU=
-github.com/cdktf/cdktf-provider-aws-go/aws/v12 v12.0.13/go.mod h1:ZmtmEt2kQdsWej5jPSM8wqyIFKTzRsyBYLXQtyJ3bQo=
+github.com/cdktf/cdktf-provider-aws-go/aws/v14 v14.0.2 h1:VOIJ7IJZpbh5p1NRY794uPO0FLa5c6fbo8i9J1pMY+s=
+github.com/cdktf/cdktf-provider-aws-go/aws/v14 v14.0.2/go.mod h1:dnTou+OgPfu6j01yZ+aMkx7tA/3DKf4djAwgBQgfv+g=
 github.com/cdktf/cdktf-provider-tfe-go/tfe/v5 v5.0.2 h1:NXunh9lyoImCVVdFoLbRfI0tyBg17ed72PoWR8OdFS4=
 github.com/cdktf/cdktf-provider-tfe-go/tfe/v5 v5.0.2/go.mod h1:2M9+FZEMOEPjcWGGb8mXwJcuLRH4CuESz8pF0Az6n6g=
+github.com/cdktf/cdktf-provider-tfe-go/tfe/v6 v6.0.1 h1:9hwxEue9P1mls5Ela/jsttzmh7niWWU2UP2Rk95YzXA=
+github.com/cdktf/cdktf-provider-tfe-go/tfe/v6 v6.0.1/go.mod h1:PzgqOMiQ8JtLA+YwLnpFOWrGzyt4nOuYx4fnQ/u4lWI=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
 github.com/charmbracelet/bubbles v0.15.0 h1:c5vZ3woHV5W2b8YZI1q7v4ZNQaPetfHuoHzx+56Z6TI=
 github.com/charmbracelet/bubbles v0.15.0/go.mod h1:Y7gSFbBzlMpUDR/XM9MhZI374Q+1p1kluf1uLl8iK74=

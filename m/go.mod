@@ -1,14 +1,15 @@
 module github.com/defn/dev/m
 
-go 1.19
+go 1.20
 
 require (
 	cuelang.org/go v0.5.0
 	github.com/aws/constructs-go/constructs/v10 v10.2.11
 	github.com/aws/jsii-runtime-go v1.80.0
 	github.com/bufbuild/connect-go v1.7.0
-	github.com/cdktf/cdktf-provider-aws-go/aws/v12 v12.0.13
+	github.com/cdktf/cdktf-provider-aws-go/aws/v14 v14.0.2
 	github.com/cdktf/cdktf-provider-tfe-go/tfe/v5 v5.0.2
+	github.com/cdktf/cdktf-provider-tfe-go/tfe/v6 v6.0.1
 	github.com/charmbracelet/bubbles v0.15.0
 	github.com/charmbracelet/bubbletea v0.23.2
 	github.com/charmbracelet/lipgloss v0.7.1

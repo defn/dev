@@ -28,9 +28,15 @@ schema = 3
   [mod."github.com/cdktf/cdktf-provider-aws-go/aws/v12"]
     version = "v12.0.13"
     hash = "sha256-9bMl2hwTGI989kPPcJKDsNDC3XONt93gdqRcMWbsOYk="
+  [mod."github.com/cdktf/cdktf-provider-aws-go/aws/v14"]
+    version = "v14.0.2"
+    hash = "sha256-8wlGvpHH3lk0ukAmlsnocXTb6jyw/5a8Kp1KCz3BvHY="
   [mod."github.com/cdktf/cdktf-provider-tfe-go/tfe/v5"]
     version = "v5.0.2"
     hash = "sha256-MFyQZ/uUrWjiDt92+AO10Ony5aRxDu9iYOMnyr0VYEQ="
+  [mod."github.com/cdktf/cdktf-provider-tfe-go/tfe/v6"]
+    version = "v6.0.1"
+    hash = "sha256-AvRcOqh0OXQRiccVxXGHYxLWytq4ccLtcfu/VI7Fiwc="
   [mod."github.com/charmbracelet/bubbles"]
     version = "v0.15.0"
     hash = "sha256-DyphnjmsV0+sXdhXcjP/4t5pKqDFokKyqEcMCnK1mTw="
@@ -73,9 +79,6 @@ schema = 3
   [mod."github.com/goccy/go-json"]
     version = "v0.10.2"
     hash = "sha256-6fMD2/Rku8HT0zDdeA23pX0YxbohiIOC8OJNYbylJTQ="
-  [mod."github.com/golang/glog"]
-    version = "v1.1.1"
-    hash = "sha256-lzIGeY7v/vAN1/ym3FHTtMO5lSVeqcFbEcXceu3fz+M="
   [mod."github.com/google/uuid"]
     version = "v1.3.0"
     hash = "sha256-QoR55eBtA94T2tBszyxfDtO7/pjZZSGb5vm7U0Xhs0Y="
