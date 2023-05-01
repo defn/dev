@@ -3,7 +3,7 @@
     gomod2nix.url = github:defn/gomod2nix/1.5.0-9;
     godev.url = github:defn/dev/pkg-godev-0.0.79?dir=m/pkg/godev;
     nodedev.url = github:defn/dev/pkg-nodedev-0.0.48?dir=m/pkg/nodedev;
-    localdev.url = github:defn/dev/pkg-localdev-0.0.114?dir=m/pkg/localdev;
+    localdev.url = github:defn/dev/pkg-localdev-0.0.115?dir=m/pkg/localdev;
     development.url = github:defn/dev/pkg-development-0.0.53?dir=m/pkg/development;
     kubernetes.url = github:defn/dev/pkg-kubernetes-0.0.85?dir=m/pkg/kubernetes;
     tailscale.url = github:defn/dev/pkg-tailscale-1.40.0-2?dir=m/pkg/tailscale;
