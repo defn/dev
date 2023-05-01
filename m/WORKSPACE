@@ -41,16 +41,20 @@ load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_depe
 load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
 load("@rules_buf//buf:repositories.bzl", "rules_buf_dependencies", "rules_buf_toolchains")
 load("@rules_buf//gazelle/buf:repositories.bzl", "gazelle_buf_dependencies")
-load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies", "go_repository")
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 
 # tools
 go_register_toolchains(version = "1.20.3")
+
 rules_proto_toolchains()
+
 rules_buf_toolchains(version = "v1.17.0")
 
 # rules
 go_rules_dependencies()
+
 rules_proto_dependencies()
+
 rules_buf_dependencies()
 
 # gazelle dependencies
@@ -64,4 +68,5 @@ go_deps()
 buf_deps()
 
 gazelle_dependencies()
+
 gazelle_buf_dependencies()
