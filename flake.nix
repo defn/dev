@@ -195,7 +195,7 @@
       vault-start = ''
         set -exfu
 
-        vault server -config vault.yaml "$@"
+        vault server -config vault.hcl "$@"
       '';
 
       vault-unseal = ''
