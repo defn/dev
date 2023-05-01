@@ -3,7 +3,11 @@
   outputs = inputs: inputs.pkg.downloadMain rec {
     src = ./.;
 
-    url_template = input: "https://github.com/cli/cli/releases/download/v${input.vendor}/gh_${input.vendor}_${input.os}_${input.arch}.tar.gz";
+    url_template = input:
+      if input.os == "macOS" then
+        "https://github.com/cli/cli/releases/download/v${input.vendor}/gh_${input.vendor}_${input.os}_${input.arch}.zip"
+      else
+        "https://github.com/cli/cli/releases/download/v${input.vendor}/gh_${input.vendor}_${input.os}_${input.arch}.tar.gz";
 
     installPhase = pkg: ''
       install -m 0755 -d $out $out/bin
@@ -16,22 +20,22 @@
       "x86_64-linux" = {
         os = "linux";
         arch = "amd64";
-        sha256 = "sha256-o+KYfknt5OkOAZL2TF4UgNah7jGW1RpPz74MzQpid0c="; # x86_64-linux
+        sha256 = "sha256-UyYz2FFVfR2oDVmt3LP3uiC6A0HImQ0y0T9K9z6/s/A="; # x86_64-linux
       };
       "aarch64-linux" = {
         os = "linux";
         arch = "arm64";
-        sha256 = "sha256-dekEm9XOqAhAlbOBvyEQO/i2CfmJyu7iCkcCOy+hy+k="; # aarch64-linux
+        sha256 = "sha256-ibA1HSQhwQ3SfpHYruE6l6/pUDlQeiGmwKOomeKsHZw="; # aarch64-linux
       };
       "x86_64-darwin" = {
         os = "macOS";
         arch = "amd64";
-        sha256 = "sha256-3kUski8Wb4n0wjkIeCxvxdMhm7EY/cTMzqfu2QdzMZY="; # x86_64-darwin
+        sha256 = "sha256-HlCmPO7k7NV0kYTarqufdprTmqH0KvBpozdg1pTkQg8="; # x86_64-darwin
       };
       "aarch64-darwin" = {
         os = "macOS";
         arch = "amd64"; # no arm64 macos
-        sha256 = "sha256-3kUski8Wb4n0wjkIeCxvxdMhm7EY/cTMzqfu2QdzMZY="; # aarch64-darwin
+        sha256 = "sha256-HlCmPO7k7NV0kYTarqufdprTmqH0KvBpozdg1pTkQg8="; # aarch64-darwin
       };
     };
   };
