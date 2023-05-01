@@ -10,7 +10,7 @@
     acme.url = github:defn/dev/pkg-acme-3.0.5-11?dir=m/pkg/acme;
     tailscale.url = github:defn/dev/pkg-tailscale-1.40.0-2?dir=m/pkg/tailscale;
     development.url = github:defn/dev/pkg-development-0.0.53?dir=m/pkg/development;
-    localdev.url = github:defn/dev/pkg-localdev-0.0.114?dir=m/pkg/localdev;
+    localdev.url = github:defn/dev/pkg-localdev-0.0.115?dir=m/pkg/localdev;
     cloud.url = github:defn/dev/pkg-cloud-0.0.77?dir=m/pkg/cloud;
     shell.url = github:defn/dev/pkg-shell-0.0.47?dir=m/pkg/shell;
   };
