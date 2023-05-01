@@ -1,6 +1,9 @@
 ignore:
 	@true
 
+up:
+	nix develop --command tilt up --stream --port=0
+
 get:
 	npm install
 	npx cdktf get

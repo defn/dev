@@ -3,7 +3,7 @@ analytics_settings(False)
 load("ext://uibutton", "cmd_button", "location")
 
 if "-darwin" in os.getenv("system"):
-    # Starts Vault on macOS
+    # vault
     local_resource("vault",
         serve_cmd=[
             "bash", "-c",
@@ -16,7 +16,7 @@ if "-darwin" in os.getenv("system"):
         ]
     )
 
-    # Starts nix-cache on macOS
+    # nix-cache
     local_resource("nix-cache",
         serve_cmd=[
             "bash", "-c",
@@ -27,7 +27,7 @@ if "-darwin" in os.getenv("system"):
         ]
     )
 else:
-    # Starts Tailscale on Linux
+    # tailscale
     local_resource("tailscale",
         serve_cmd=[
             "bash", "-c",
