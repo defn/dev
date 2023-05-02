@@ -59,7 +59,7 @@
           exec bazelisk "$@"
         '';
 
-        dev = ctx.pkgs.writeShellScriptBin "develop" ''
+        dev = ctx.pkgs.writeShellScriptBin "dev" ''
           eval "$(direnv hook bash)"
           source ${ctx.pkgs.nix-direnv}/share/nix-direnv/direnvrc
           direnv allow
