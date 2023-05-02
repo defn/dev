@@ -1,13 +1,12 @@
 {
   inputs = {
-    gomod2nix.url = github:defn/gomod2nix/1.5.0-9;
     godev.url = github:defn/dev/pkg-godev-0.0.79?dir=m/pkg/godev;
     nodedev.url = github:defn/dev/pkg-nodedev-0.0.48?dir=m/pkg/nodedev;
     localdev.url = github:defn/dev/pkg-localdev-0.0.116?dir=m/pkg/localdev;
     development.url = github:defn/dev/pkg-development-0.0.54?dir=m/pkg/development;
+    cloud.url = github:defn/dev/pkg-cloud-0.0.77?dir=m/pkg/cloud;
     kubernetes.url = github:defn/dev/pkg-kubernetes-0.0.86?dir=m/pkg/kubernetes;
     tailscale.url = github:defn/dev/pkg-tailscale-1.40.0-2?dir=m/pkg/tailscale;
-    latest.url = github:NixOS/nixpkgs?rev=64c27498901f104a11df646278c4e5c9f4d642db;
   };
 
   outputs = inputs:
@@ -20,33 +19,24 @@
         };
       };
 
-      defaultPackage = ctx:
-        let
-          gomod2nixOverlay = inputs.gomod2nix.overlays.default;
-
-          goPkgs = import inputs.latest {
-            system = ctx.system;
-            overlays = [ gomod2nixOverlay ];
-          };
-        in
-        ctx.wrap.nullBuilder {
-          propagatedBuildInputs = with ctx.pkgs; [
-            goPkgs.gomod2nix
-            inputs.godev.defaultPackage.${ctx.system}
-            inputs.nodedev.defaultPackage.${ctx.system}
-            inputs.localdev.defaultPackage.${ctx.system}
-            inputs.development.defaultPackage.${ctx.system}
-            inputs.kubernetes.defaultPackage.${ctx.system}
-            inputs.tailscale.defaultPackage.${ctx.system}
-            skopeo
-            gron
-            direnv
-            bashInteractive
-          ]
-          ++ ctx.commands
-          ++ (ctx.pkgs.lib.mapAttrsToList (name: value: (packages ctx).${name}) config.clusters)
-          ++ (with (packages ctx); [ bazel dev ]);
-        };
+      defaultPackage = ctx: ctx.wrap.nullBuilder {
+        propagatedBuildInputs = with ctx.pkgs; [
+          inputs.godev.defaultPackage.${ctx.system}
+          inputs.nodedev.defaultPackage.${ctx.system}
+          inputs.localdev.defaultPackage.${ctx.system}
+          inputs.development.defaultPackage.${ctx.system}
+          inputs.cloud.defaultPackage.${ctx.system}
+          inputs.kubernetes.defaultPackage.${ctx.system}
+          inputs.tailscale.defaultPackage.${ctx.system}
+          skopeo
+          gron
+          direnv
+          bashInteractive
+        ]
+        ++ ctx.commands
+        ++ (ctx.pkgs.lib.mapAttrsToList (name: value: (packages ctx).${name}) config.clusters)
+        ++ (with (packages ctx); [ bazel dev ]);
+      };
 
       packages = ctx: {
         devShell = ctx: ctx.wrap.devShell {
