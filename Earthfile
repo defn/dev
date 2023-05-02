@@ -140,6 +140,7 @@ nix-installed:
         && echo 'use flake' > .envrc \
         && nix profile wipe-history \
         && nix-store --gc
+
     COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
 
 # nix applications where /nix/store is emptied
