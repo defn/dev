@@ -3,5 +3,6 @@ VERSION --use-registry-for-with-docker --ci-arg 0.7
 build:
     FROM quay.io/defn/dev:latest-nix-installed 
     ENTRYPOINT ["/bin/bash"]
+    RUN echo source $HOME/.nix-profile/share/nix-direnv/direnvrc > /home/ubuntu/.direnvrc
     COPY . .
     SAVE IMAGE meh
