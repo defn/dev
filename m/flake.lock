@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/argocd",
-        "lastModified": 1682754278,
-        "narHash": "sha256-Zyb+7roWXbNfUmOB+5eD8LKmNMu9ZF4vqfSE90WLKcQ=",
+        "lastModified": 1682995200,
+        "narHash": "sha256-6O9MjJEuDgCTAVkWqeJH1IIPjCflEmwYN317iC6eO/Y=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "4e8f299fba17dcbed7a4a73ddce1185e57878d0e",
+        "rev": "a132924b92b5063a5586af00896767fa35d0df4a",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/argocd",
         "owner": "defn",
-        "ref": "pkg-argocd-2.6.7-8",
+        "ref": "pkg-argocd-2.7.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1552,17 +1552,17 @@
       },
       "locked": {
         "dir": "m/pkg/gh",
-        "lastModified": 1682913591,
-        "narHash": "sha256-UrWT3mf5EugUD26RfH5sIzRNSy3RRAn7W1nYisfr9MI=",
+        "lastModified": 1682994965,
+        "narHash": "sha256-nNQ4JVQMJn6LDH/EHKGrWa3H2BgkPYug3nSrDyPlDwE=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "c768ccce4003346b60a674f880c0b4eea0507bfe",
+        "rev": "ce30405697024cef4ce3052b4226358100bb80be",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/gh",
         "owner": "defn",
-        "ref": "pkg-gh-2.28.0-1",
+        "ref": "pkg-gh-2.28.0-2",
         "repo": "dev",
         "type": "github"
       }
@@ -1837,17 +1837,17 @@
       },
       "locked": {
         "dir": "m/pkg/kubernetes",
-        "lastModified": 1682755220,
-        "narHash": "sha256-pKg21xTkbg7MHNo93Uo8q5AijpyVZUJ66nqymNNYZa8=",
+        "lastModified": 1682997498,
+        "narHash": "sha256-iQuaQqZ9/5oUV9TybpaJ8d6d5Rw42Uhi0yGeHt32oKE=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "6bac5179b8191344fc3f949e3576119c89360b16",
+        "rev": "90c598a109983ea02a8b4a712dda182e3523d54e",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubernetes",
         "owner": "defn",
-        "ref": "pkg-kubernetes-0.0.85",
+        "ref": "pkg-kubernetes-0.0.86",
         "repo": "dev",
         "type": "github"
       }
@@ -1981,17 +1981,17 @@
       },
       "locked": {
         "dir": "m/pkg/localdev",
-        "lastModified": 1682913690,
-        "narHash": "sha256-4afJA0x1VxHRRLv7ZxsyFd23DJNeU9O2ixgzZWYaIjM=",
+        "lastModified": 1682997479,
+        "narHash": "sha256-lV4wouKFpQzJ5jyVMNA7UusbQVJ5PIcFemuM3B6awTg=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "0beaa736d0d0178dc7da624c173cb988e5cb2a66",
+        "rev": "340d94e7af4528872f5fc964af4e07ccd1be4158",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/localdev",
         "owner": "defn",
-        "ref": "pkg-localdev-0.0.115",
+        "ref": "pkg-localdev-0.0.116",
         "repo": "dev",
         "type": "github"
       }
