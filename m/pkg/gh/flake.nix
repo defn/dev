@@ -10,12 +10,27 @@
         "https://github.com/cli/cli/releases/download/v${input.vendor}/gh_${input.vendor}_${input.os}_${input.arch}.tar.gz";
 
     installPhase = pkg: ''
+      set -x
+
       install -m 0755 -d $out $out/bin
+
+      case $src in
+        *.zip)
+          unzip $src
+          ;;
+        *.tar.gz)
+          tar xvfz $src
+          ;;
+      esac
+
       install -m 0755 */bin/gh $out/bin/gh
     '';
 
     downloads = {
-
+      options = pkg: {
+        dontUnpack = true;
+        buildInputs = with pkg.ctx.pkgs; [ unzip ];
+      };
 
       "x86_64-linux" = {
         os = "linux";
