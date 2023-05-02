@@ -52,10 +52,12 @@ update-repos:
 nix-build-all:
 	git ls-files | grep flake.nix | perl -pe 's{/?flake.nix}{}' | runmany 'mark $$1; cd ./$$1 && nix build'
 
-shell:
+image:
 	earthly +build
-	docker run -ti -v nix-data:/nix -v nix-cache:/cache meh "make build; bash -il"
 
 ci:
-	earthly +build
-	docker run -ti -v nix-cache:/cache meh "make build"
+	$(MAKE) image
+	docker run --rm -ti -v nix-cache:/cache meh "make build"
+
+shell:
+	docker run --rm -ti -v nix-data:/nix -v nix-cache:/cache meh "make build; bash -il"
