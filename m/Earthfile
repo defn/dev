@@ -7,5 +7,6 @@ build:
     RUN echo source $HOME/.nix-profile/share/nix-direnv/direnvrc > /home/ubuntu/.direnvrc
     RUN echo export DIRENV_LOG_FORMAT= >> /home/ubuntu/.bashrc
     COPY . .
+    RUN git init && git add . && git commit -m "initial commit"
     RUN direnv allow
     SAVE IMAGE meh
