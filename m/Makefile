@@ -54,4 +54,8 @@ nix-build-all:
 
 shell:
 	earthly +build
-	docker run -ti -v nix-cache:/cache meh
+	docker run -ti -v nix-data:/nix -v nix-cache:/cache meh "make build; bash -il"
+
+ci:
+	earthly +build
+	docker run -ti -v nix-cache:/cache meh "make build"
