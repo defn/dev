@@ -41,12 +41,11 @@
             skopeo
             gron
             direnv
-            nix-direnv
             bashInteractive
           ]
           ++ ctx.commands
           ++ (ctx.pkgs.lib.mapAttrsToList (name: value: (packages ctx).${name}) config.clusters)
-          ++ [ (packages ctx).bazel ];
+          ++ (with (packages ctx); [ bazel dev ]);
         };
 
       packages = ctx: {
@@ -58,6 +57,14 @@
 
         bazel = ctx.pkgs.writeShellScriptBin "bazel" ''
           exec bazelisk "$@"
+        '';
+
+        dev = ctx.pkgs.writeShellScriptBin "develop" ''
+          eval "$(direnv hook bash)"
+          source ${ctx.pkgs.nix-direnv}/share/nix-direnv/direnvrc
+          direnv allow
+          _direnv_hook
+          exec bash
         '';
       } // (ctx.pkgs.lib.mapAttrs
         (nme: value: ctx.pkgs.writeShellScriptBin nme ''
