@@ -40,10 +40,13 @@
             inputs.tailscale.defaultPackage.${ctx.system}
             skopeo
             gron
+            direnv
+            nix-direnv
             bashInteractive
           ]
           ++ ctx.commands
-          ++ (ctx.pkgs.lib.mapAttrsToList (name: value: (packages ctx).${name}) config.clusters);
+          ++ (ctx.pkgs.lib.mapAttrsToList (name: value: (packages ctx).${name}) config.clusters)
+          ++ [ (packages ctx).bazel ];
         };
 
       packages = ctx: {
@@ -52,6 +55,10 @@
             (defaultPackage ctx)
           ];
         };
+
+        bazel = ctx.pkgs.writeShellScriptBin "bazel" ''
+          exec bazelisk "$@"
+        '';
       } // (ctx.pkgs.lib.mapAttrs
         (nme: value: ctx.pkgs.writeShellScriptBin nme ''
           set -efu
