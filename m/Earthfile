@@ -7,6 +7,7 @@ build:
     RUN echo source $HOME/.nix-profile/share/nix-direnv/direnvrc > /home/ubuntu/.direnvrc
     RUN echo export DIRENV_LOG_FORMAT= >> /home/ubuntu/.bashrc
     RUN git init && git config --global user.email "you@example.com" && git config --global user.name "Your Name"
+    RUN mkdir -p /nix/cache /nix/cache/cache /nix/cache/bazel-app && ln -nfs /nix/cache/cache /home/ubuntu/.cache && ln -nfs /nix/cache/bazel-app /app/bazel-app
     COPY . .
     RUN git add . && git commit -m "initial commit"
     RUN direnv allow
