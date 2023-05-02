@@ -6,9 +6,8 @@ build:
     CMD ["bash -il"]
     RUN echo source $HOME/.nix-profile/share/nix-direnv/direnvrc > /home/ubuntu/.direnvrc
     RUN echo export DIRENV_LOG_FORMAT= >> /home/ubuntu/.bashrc
-    RUN echo export GIT_COMMITTER_EMAIL=iam@defn.sh >> /home/ubuntu/.bashrc
-    RUN echo export GIT_COMMITTER_NAME=amanibhavam >> /home/ubuntu/.bashrc
+    RUN git init && git config --global user.email "you@example.com" && git config --global user.name "Your Name"
     COPY . .
-    RUN git init && git add . && git commit -m "initial commit"
+    RUN git add . && git commit -m "initial commit"
     RUN direnv allow
     SAVE IMAGE meh
