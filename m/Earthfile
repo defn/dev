@@ -51,10 +51,6 @@ ubuntu-root:
 
     RUN chown -R ubuntu:ubuntu /home/ubuntu && chmod u+s /usr/bin/sudo
 
-    COPY entrypoint /entrypoint
-    ENTRYPOINT ["/entrypoint"]
-    CMD []
-
     USER ubuntu
     ENV USER=ubuntu
     ENV HOME=/home/ubuntu
@@ -62,6 +58,8 @@ ubuntu-root:
     ENV LC_ALL=C.UTF-8
 
     WORKDIR /home/ubuntu
+
+    SAVE IMAGE --cache-hint
 
 nix-root:
     ARG arch
@@ -71,7 +69,7 @@ nix-root:
 
     # nix config
     RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix && mkdir -p /home/ubuntu/.config/nix
-    COPY --chown=ubuntu:ubuntu .config/nix/nix-flake.conf /home/ubuntu/.config/nix/nix.conf
+    COPY --chown=ubuntu:ubuntu nix-flake.conf /home/ubuntu/.config/nix/nix.conf
 
     # nix
     RUN bash -c 'sh <(curl -L https://releases.nixos.org/nix/nix-2.15.0/install) --no-daemon' \
@@ -80,3 +78,5 @@ nix-root:
         && . ~/.nix-profile/etc/profile.d/nix.sh \
         && nix profile wipe-history \
         && nix-store --gc
+
+    SAVE IMAGE meh
