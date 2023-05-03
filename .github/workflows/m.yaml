@@ -1,0 +1,16 @@
+name: bazel build in m
+
+on:
+  pull_request:
+  push:
+    branches: [ $default-branch ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: bazel build in m
+        run: cd m && bazel build //...
