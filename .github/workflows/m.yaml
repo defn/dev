@@ -20,5 +20,11 @@ jobs:
           name: defn
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
 
+      - name: "nix build: /"
+        run: nix build
+
+      - name: "nix build: m/"
+        run: cd m && nix build
+
       - name: bazel build in m
         run: cd m && bazel build //...
