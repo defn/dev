@@ -4,7 +4,7 @@ build:
     FROM quay.io/defn/dev:latest-nix-installed
     ENTRYPOINT ["/home/ubuntu/.nix-profile/bin/nix", "develop", "--command", "bash", "-c"]
     CMD ["bash -il"]
-    RUN /home/ubuntu/.nix-profile/bin/nix registry ping flake:nixpkgs
+    RUN /home/ubuntu/.nix-profile/bin/nix registry pin flake:nixpkgs
     RUN echo source $HOME/.nix-profile/share/nix-direnv/direnvrc > /home/ubuntu/.direnvrc
     RUN echo export DIRENV_LOG_FORMAT= >> /home/ubuntu/.bashrc
     RUN echo export DIRENV_LOG_TIMEOUT=60 >> /home/ubuntu/.bashrc
