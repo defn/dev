@@ -44,8 +44,8 @@ github.com/Masterminds/semver/v3 v3.2.1 h1:RN9w6+7QoMeJVGyfmbcgs28Br8cvmnucEXnY0
 github.com/Masterminds/semver/v3 v3.2.1/go.mod h1:qvl/7zhW3nngYb5+80sSMF+FG2BjYrf8m9wsX0PNOMQ=
 github.com/atotto/clipboard v0.1.4 h1:EH0zSVneZPSuFR11BlR9YppQTVDbh5+16AmcJi4g1z4=
 github.com/atotto/clipboard v0.1.4/go.mod h1:ZY9tmq7sm5xIbd9bOK4onWV4S6X0u6GY7Vn0Yu86PYI=
-github.com/aws/constructs-go/constructs/v10 v10.2.11 h1:UTTPQycx6wFgauwRKBal7bO8VNhcIFokxiNfuAnsQHw=
-github.com/aws/constructs-go/constructs/v10 v10.2.11/go.mod h1:sFQf3cm+dibw1DxQXZa+m7HYiTQ3yE9qveP+Ux3m4WE=
+github.com/aws/constructs-go/constructs/v10 v10.2.15 h1:PggWMmUoaXmagxjmbNoUJ87JWhKfvaEE9oNqYm2let4=
+github.com/aws/constructs-go/constructs/v10 v10.2.15/go.mod h1:sFQf3cm+dibw1DxQXZa+m7HYiTQ3yE9qveP+Ux3m4WE=
 github.com/aws/jsii-runtime-go v1.80.0 h1:INbbvOdx/UV/+qH4cGmKStCWL4SrEoRwF34nR/3b8tE=
 github.com/aws/jsii-runtime-go v1.80.0/go.mod h1:bV9T+Vxxczx5bK5CKZraDQS+enxb1sgdjAo/AhePGlM=
 github.com/aymanbagabas/go-osc52 v1.0.3/go.mod h1:zT8H+Rk4VSabYN90pWyugflM3ZhpTZNC7cASDfUCdT4=
@@ -91,8 +91,8 @@ github.com/cpuguy83/go-md2man/v2 v2.0.2/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46t
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/emicklei/proto v1.11.1 h1:CBZwNVwPJvkdevxvsoCuFedF9ENiBz0saen3L9y0OTA=
-github.com/emicklei/proto v1.11.1/go.mod h1:rn1FgRS/FANiZdD2djyH7TMA9jdRDcYQ9IEN9yvjX0A=
+github.com/emicklei/proto v1.11.2 h1:DiIeyTJ+gPSyJI+RIAqvuTeKb0tLUmaGXbYg6aFKsnE=
+github.com/emicklei/proto v1.11.2/go.mod h1:rn1FgRS/FANiZdD2djyH7TMA9jdRDcYQ9IEN9yvjX0A=
 github.com/envoyproxy/go-control-plane v0.9.0/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/go-control-plane v0.9.1-0.20191026205805-5f8ba28d4473/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/go-control-plane v0.9.4/go.mod h1:6rpuAdCZL397s3pYoYcLgu1mIlRU8Am5FuJP05cCM98=

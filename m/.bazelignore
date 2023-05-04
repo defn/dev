@@ -9,6 +9,7 @@ pkg/argorollouts/.direnv
 pkg/argoworkflows/.direnv
 pkg/awscli/.direnv
 pkg/az/.direnv
+pkg/bazelisk/.direnv
 pkg/bk/.direnv
 pkg/boundary/.direnv
 pkg/buf/.direnv
@@ -17,7 +18,6 @@ pkg/buildifier/.direnv
 pkg/buildkite/.direnv
 pkg/caddy/.direnv
 pkg/cloud/.direnv
-pkg/cloudflared/.direnv
 pkg/cloudnuke/.direnv
 pkg/coder/.direnv
 pkg/codeserver/.direnv
@@ -79,6 +79,7 @@ pkg/argorollouts/result
 pkg/argoworkflows/result
 pkg/awscli/result
 pkg/az/result
+pkg/bazelisk/result
 pkg/bk/result
 pkg/boundary/result
 pkg/buf/result
@@ -87,7 +88,6 @@ pkg/buildifier/result
 pkg/buildkite/result
 pkg/caddy/result
 pkg/cloud/result
-pkg/cloudflared/result
 pkg/cloudnuke/result
 pkg/coder/result
 pkg/codeserver/result

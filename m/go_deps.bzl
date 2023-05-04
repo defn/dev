@@ -23,8 +23,8 @@ def go_deps():
     go_repository(
         name = "com_github_aws_constructs_go_constructs_v10",
         importpath = "github.com/aws/constructs-go/constructs/v10",
-        sum = "h1:UTTPQycx6wFgauwRKBal7bO8VNhcIFokxiNfuAnsQHw=",
-        version = "v10.2.11",
+        sum = "h1:PggWMmUoaXmagxjmbNoUJ87JWhKfvaEE9oNqYm2let4=",
+        version = "v10.2.15",
     )
     go_repository(
         name = "com_github_aws_jsii_runtime_go",
@@ -191,8 +191,8 @@ def go_deps():
     go_repository(
         name = "com_github_emicklei_proto",
         importpath = "github.com/emicklei/proto",
-        sum = "h1:CBZwNVwPJvkdevxvsoCuFedF9ENiBz0saen3L9y0OTA=",
-        version = "v1.11.1",
+        sum = "h1:DiIeyTJ+gPSyJI+RIAqvuTeKb0tLUmaGXbYg6aFKsnE=",
+        version = "v1.11.2",
     )
     go_repository(
         name = "com_github_envoyproxy_go_control_plane",
