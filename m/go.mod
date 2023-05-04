@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	cuelang.org/go v0.5.0
-	github.com/aws/constructs-go/constructs/v10 v10.2.11
+	github.com/aws/constructs-go/constructs/v10 v10.2.15
 	github.com/aws/jsii-runtime-go v1.80.0
 	github.com/bufbuild/connect-go v1.7.0
 	github.com/cdktf/cdktf-provider-aws-go/aws/v14 v14.0.2
@@ -29,7 +29,7 @@ require (
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect
 	github.com/cockroachdb/apd/v2 v2.0.2 // indirect
 	github.com/containerd/console v1.0.3 // indirect
-	github.com/emicklei/proto v1.11.1 // indirect
+	github.com/emicklei/proto v1.11.2 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
