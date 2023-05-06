@@ -5,6 +5,11 @@ helmCharts:
   releaseName: cilium
   repo: https://helm.cilium.io
   valuesInline:
+    hubble:
+      relay:
+        enabled: true
+      ui:
+        enabled: true
     operator:
       replicas: 1
   version: 1.13.2

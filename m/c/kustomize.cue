@@ -1019,6 +1019,8 @@ kustomize: "cilium": #KustomizeHelm & {
 		repo:      "https://helm.cilium.io"
 		values: {
 			operator: replicas: 1
+			hubble: relay: enabled: true
+			hubble: ui: enabled:    true
 		}
 	}
 }
