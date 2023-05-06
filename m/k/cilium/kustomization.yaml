@@ -6,7 +6,9 @@ resources: []
 helmCharts:
   - releaseName: cilium
     namespace: kube-system
-    valuesInline: {}
+    valuesInline:
+      operator:
+        replicas: 1
     name: cilium
     version: 1.13.2
     repo: https://helm.cilium.io

@@ -1018,6 +1018,7 @@ kustomize: "cilium": #KustomizeHelm & {
 		version:   "1.13.2"
 		repo:      "https://helm.cilium.io"
 		values: {
+			operator: replicas: 1
 		}
 	}
 }
