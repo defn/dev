@@ -15,7 +15,7 @@ helmCharts:
     sources:
     - service
     - ingress
-  version: 6.17.0
+  version: 6.19.1
 namespace: external-dns
 resources:
 - resource-namespace-external-dns.yaml

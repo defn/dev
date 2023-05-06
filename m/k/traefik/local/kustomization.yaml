@@ -18,7 +18,7 @@ helmCharts:
         allowExternalNameServices: true
         publishedService:
           enabled: true
-  version: 22.1.0
+  version: 22.3.0
 namespace: traefik
 patches:
 - path: patch-ingressroute-traefik-dashboard.yaml
