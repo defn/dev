@@ -11,7 +11,7 @@ metadata:
     app.kubernetes.io/instance: external-dns
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
-    helm.sh/chart: external-dns-6.17.0
+    helm.sh/chart: external-dns-6.19.1
   name: external-dns
   namespace: external-dns
 ---
@@ -22,7 +22,7 @@ metadata:
     app.kubernetes.io/instance: external-dns
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
-    helm.sh/chart: external-dns-6.17.0
+    helm.sh/chart: external-dns-6.19.1
   name: external-dns-external-dns
   namespace: external-dns
 rules:
@@ -134,7 +134,7 @@ metadata:
     app.kubernetes.io/instance: external-dns
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
-    helm.sh/chart: external-dns-6.17.0
+    helm.sh/chart: external-dns-6.19.1
   name: external-dns-external-dns
   namespace: external-dns
 roleRef:
@@ -153,7 +153,7 @@ metadata:
     app.kubernetes.io/instance: external-dns
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
-    helm.sh/chart: external-dns-6.17.0
+    helm.sh/chart: external-dns-6.19.1
   name: external-dns
   namespace: external-dns
 spec:
@@ -175,7 +175,7 @@ metadata:
     app.kubernetes.io/instance: external-dns
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
-    helm.sh/chart: external-dns-6.17.0
+    helm.sh/chart: external-dns-6.19.1
   name: external-dns
   namespace: external-dns
 spec:
@@ -191,7 +191,7 @@ spec:
         app.kubernetes.io/instance: external-dns
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: external-dns
-        helm.sh/chart: external-dns-6.17.0
+        helm.sh/chart: external-dns-6.19.1
     spec:
       affinity:
         nodeAffinity: null
@@ -233,7 +233,7 @@ spec:
         - name: CF_API_EMAIL
           value: cloudflare@defn.us
         envFrom: null
-        image: docker.io/bitnami/external-dns:0.13.4-debian-11-r2
+        image: docker.io/bitnami/external-dns:0.13.4-debian-11-r11
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 2
