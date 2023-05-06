@@ -136,7 +136,6 @@ nix-installed:
         && echo . ~/.nix-profile/etc/profile.d/nix.sh > ~/.bashrc \
         && echo 'eval "$(direnv hook bash)"' >> ~/.bashrc \
         && . ~/.nix-profile/etc/profile.d/nix.sh \
-        && nix profile install nixpkgs#nix-direnv nixpkgs#direnv \
         && echo 'use flake' > .envrc \
         && nix profile wipe-history \
         && nix-store --gc

@@ -52,7 +52,6 @@ k3d:
     RUN . ./.profile && for a in findutils; do nix profile install nixpkgs#$a; done
     RUN . ./.profile && for a in git; do nix profile install nixpkgs#$a; done
     RUN . ./.profile && for a in gnumake; do nix profile install nixpkgs#$a; done
-    RUN . ./.profile && for a in nixpkgs-fmt; do nix profile install nixpkgs#$a; done
 
     RUN . ./.profile && nix profile install github:defn/dev/pkg-tailscale-1.40.0-2?dir=m/pkg/tailscale
 
