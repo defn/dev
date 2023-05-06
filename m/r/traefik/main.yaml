@@ -4615,7 +4615,7 @@ metadata:
     app.kubernetes.io/instance: traefik-traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-22.3.0
+    helm.sh/chart: traefik-23.0.1
   name: traefik
   namespace: traefik
 ---
@@ -4626,7 +4626,7 @@ metadata:
     app.kubernetes.io/instance: traefik-traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-22.3.0
+    helm.sh/chart: traefik-23.0.1
   name: traefik-traefik
 rules:
 - apiGroups:
@@ -4681,7 +4681,7 @@ metadata:
     app.kubernetes.io/instance: traefik-traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-22.3.0
+    helm.sh/chart: traefik-23.0.1
   name: traefik-traefik
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -4701,7 +4701,7 @@ metadata:
     app.kubernetes.io/instance: traefik-traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-22.3.0
+    helm.sh/chart: traefik-23.0.1
   name: traefik
   namespace: traefik
 spec:
@@ -4727,7 +4727,7 @@ metadata:
     app.kubernetes.io/instance: traefik-traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-22.3.0
+    helm.sh/chart: traefik-23.0.1
   name: traefik
   namespace: traefik
 spec:
@@ -4752,7 +4752,7 @@ spec:
         app.kubernetes.io/instance: traefik-traefik
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: traefik
-        helm.sh/chart: traefik-22.3.0
+        helm.sh/chart: traefik-23.0.1
     spec:
       containers:
       - args:
@@ -4777,7 +4777,7 @@ spec:
         - --accesslog=true
         - --accesslog.fields.defaultmode=keep
         - --accesslog.fields.headers.defaultmode=drop
-        image: docker.io/traefik:v2.10.0
+        image: docker.io/traefik:v2.10.1
         imagePullPolicy: IfNotPresent
         lifecycle: null
         livenessProbe:
@@ -4848,32 +4848,10 @@ metadata:
     app.kubernetes.io/instance: traefik-traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-22.3.0
+    helm.sh/chart: traefik-23.0.1
   name: traefik
 spec:
   controller: traefik.io/ingress-controller
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  labels:
-    app.kubernetes.io/instance: traefik-traefik
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-22.3.0
-  name: traefik-dashboard
-  namespace: traefik
-spec:
-  entryPoints:
-  - websecure
-  routes:
-  - kind: Rule
-    match: Host(`traefik.defn.run`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
-    middlewares:
-    - name: http-to-https
-    services:
-    - kind: TraefikService
-      name: api@internal
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -4918,3 +4896,25 @@ metadata:
 spec:
   defaultCertificate:
     secretName: defn-run-wildcard
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  labels:
+    app.kubernetes.io/instance: traefik-traefik
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: traefik
+    helm.sh/chart: traefik-23.0.1
+  name: traefik-dashboard
+  namespace: traefik
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - kind: Rule
+    match: Host(`traefik.defn.run`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+    middlewares:
+    - name: http-to-https
+    services:
+    - kind: TraefikService
+      name: api@internal
