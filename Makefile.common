@@ -69,7 +69,7 @@ install-inner:
 
 	@mark godev
 	if echo "$${VSCODE_GIT_ASKPASS_NODE:-}" | grep ^/vscode; then \
-		nix develop github:defn/dev/pkg-godev-0.0.79?dir=m/pkg/godev --command bash -c 'sudo ln -nfs "$$(which go)" "$${VSCODE_GIT_ASKPASS_NODE%/node}/bin/"'; \
+		nix develop github:defn/dev/pkg-godev-0.0.80?dir=m/pkg/godev --command bash -c 'sudo ln -nfs "$$(which go)" "$${VSCODE_GIT_ASKPASS_NODE%/node}/bin/"'; \
 		fi
 
 	@mark doctor
@@ -89,11 +89,9 @@ nix:
 
 nix-Linux:
 	export LC_ALL=C.UTF-8 && if ! type -P nix; then $(MAKE) nix-Linux-bootstrap; fi
-	nix profile install nixpkgs\#{nix-direnv,nixpkgs-fmt}
 
 nix-Darwin:
 	nix profile install github:NixOS/nixpkgs\#nix
-	nix profile install nixpkgs\#{nix-direnv,nixpkgs-fmt}
 
 nix-Linux-bootstrap:
 	sh <(curl -L https://releases.nixos.org/nix/nix-2.15.0/install) --no-daemon
