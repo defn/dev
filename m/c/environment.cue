@@ -26,9 +26,10 @@ env: (#Transform & {
 		// global is the global control plane, used by all machines.
 		global: {
 			bootstrap: {
-				"kyverno": [1, "", "ServerSideApply=true"]
-				"coredns": [1, ""]
-				"cert-manager": [2, ""]
+				"cilium": [1, ""]
+				"kyverno": [2, "", "ServerSideApply=true"]
+				"coredns": [2, ""]
+				"cert-manager": [3, ""]
 				"pod-identity-webhook": [10, ""]
 				"external-secrets-operator": [10, ""]
 				"k3d-global-secrets-store": [20, ""]

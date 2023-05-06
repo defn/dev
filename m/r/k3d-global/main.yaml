@@ -46,7 +46,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "3"
   name: k3d-global-cert-manager
   namespace: argocd
 spec:
@@ -68,6 +68,27 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "1"
+  name: k3d-global-cilium
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-global
+  project: default
+  source:
+    path: m/r/cilium
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
   name: k3d-global-coredns
   namespace: argocd
 spec:
@@ -256,7 +277,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "2"
   name: k3d-global-kyverno
   namespace: argocd
 spec:
