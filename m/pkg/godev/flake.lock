@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/buf",
-        "lastModified": 1682754332,
-        "narHash": "sha256-zt6tobiAsg3Z9fdlmahlYcFh7UQryGuKHjV4iaKN5Y4=",
+        "lastModified": 1683335634,
+        "narHash": "sha256-uyUWTRaQQG27LEGubOTrxA1L4UL/oI9MwZUGXKOu2/8=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "729f35acc6744938386a077d1dc78ddc564fce8a",
+        "rev": "79dfbfbb1e0ec65562e2a4c8601856c38161ae31",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buf",
         "owner": "defn",
-        "ref": "pkg-buf-1.17.0-7",
+        "ref": "pkg-buf-1.18.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -162,17 +162,17 @@
       },
       "locked": {
         "dir": "m/pkg/goreleaser",
-        "lastModified": 1682754526,
-        "narHash": "sha256-e1cYdxDgbJxLVR8eclyoO91B+levL6YzmDom+I5ota4=",
+        "lastModified": 1683335716,
+        "narHash": "sha256-+v/T76EKlUCso9i/JiATOzBMXxJYqhOhTp2wVbJm+qg=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "2cff6d0204c3919d73c01dae928e5f70fe6be2ea",
+        "rev": "14e07c1e9b174956e873ea688abacb06dabba6ef",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/goreleaser",
         "owner": "defn",
-        "ref": "pkg-goreleaser-1.17.2-2",
+        "ref": "pkg-goreleaser-1.18.1-1",
         "repo": "dev",
         "type": "github"
       }
