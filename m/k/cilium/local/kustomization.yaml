@@ -1,0 +1,8 @@
+helmCharts:
+- includeCRDs: true
+  name: cilium
+  namespace: kube-system
+  releaseName: cilium
+  repo: https://helm.cilium.io
+  version: 1.13.2
+namespace: kube-system
