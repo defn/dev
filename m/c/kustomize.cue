@@ -1053,7 +1053,7 @@ kustomize: "traefik": #KustomizeHelm & {
 		release:   "traefik"
 		name:      "traefik"
 		namespace: "traefik"
-		version:   "22.3.0"
+		version:   "23.0.1"
 		repo:      "https://traefik.github.io/charts"
 		values: {
 			logs: general: level:  "DEBUG"
@@ -1121,7 +1121,7 @@ kustomize: "traefik": #KustomizeHelm & {
 	}
 
 	psm: "ingressroute-traefik-dashboard": {
-		apiVersion: "traefik.containo.us/v1alpha1"
+		apiVersion: "traefik.io/v1alpha1"
 		kind:       "IngressRoute"
 		metadata: {
 			name:      "traefik-dashboard"
