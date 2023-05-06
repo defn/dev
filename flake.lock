@@ -27,17 +27,17 @@
       },
       "locked": {
         "dir": "m/pkg/awscli",
-        "lastModified": 1682825503,
-        "narHash": "sha256-4un1pJdt6aMyv9gQsUudZ5+/2/cnEBlWnpBMxLy/Jvw=",
+        "lastModified": 1683335613,
+        "narHash": "sha256-uxkn4+Dviq1BOSetTgfKIjRYkON5C1Xcky9zaKhk5kw=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "2acdb794c83a289c9f13c8d3e1307aecade57523",
+        "rev": "ba054fdbce0d1cf8026010b1abe9b6087f603931",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/awscli",
         "owner": "defn",
-        "ref": "pkg-awscli-2.11.16-1",
+        "ref": "pkg-awscli-2.11.18-1",
         "repo": "dev",
         "type": "github"
       }
@@ -177,17 +177,17 @@
       },
       "locked": {
         "dir": "m/pkg/buildkite",
-        "lastModified": 1682754355,
-        "narHash": "sha256-ANixAFNbaQisiM16/DKGzZ874ueYiAgdoomRcfciUB0=",
+        "lastModified": 1683335660,
+        "narHash": "sha256-I5S0Gi3IrECQw4OYstMuMXZdtzrXl3YciCOq5E84gmQ=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "ee9ee0ee24021c354fb5788f610f0ee0412874da",
+        "rev": "6500fbedcd57ec3f8f089d0b6bb3229784a570fe",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buildkite",
         "owner": "defn",
-        "ref": "pkg-buildkite-3.45.0-7",
+        "ref": "pkg-buildkite-3.46.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -201,17 +201,17 @@
       },
       "locked": {
         "dir": "m/pkg/cloud",
-        "lastModified": 1682827310,
-        "narHash": "sha256-qMBrPc8EcxUSFfMPxpcZAGciMzBzGLsV9wJG4C4S7qg=",
+        "lastModified": 1683336024,
+        "narHash": "sha256-Yloqn+2ItkafCZBx7cvwScD09sjVxOmYYHWnRcKempk=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "e4fc1ec8bae769e95b6bd8398f8618f93a6c7c79",
+        "rev": "da0aa1a42aa4f7e4dba096d47987e61c210cecc0",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cloud",
         "owner": "defn",
-        "ref": "pkg-cloud-0.0.77",
+        "ref": "pkg-cloud-0.0.78",
         "repo": "dev",
         "type": "github"
       }
@@ -1742,17 +1742,17 @@
       },
       "locked": {
         "dir": "m/pkg/localdev",
-        "lastModified": 1683049632,
-        "narHash": "sha256-EOO2oEjLOnVdTauEQrTt8z4rT5l5SW3+TF5pqnd3WGA=",
+        "lastModified": 1683336085,
+        "narHash": "sha256-acTdNf5xPwxaf3bfPJE0IwXGeSKNYrqovYc1P5uGjJ0=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "7606bc10fce3bdccc6a60995152eeff4bff4fe4b",
+        "rev": "1758f3540fb1627413299b010b488c1c40fb8b2f",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/localdev",
         "owner": "defn",
-        "ref": "pkg-localdev-0.0.117",
+        "ref": "pkg-localdev-0.0.118",
         "repo": "dev",
         "type": "github"
       }
@@ -2312,17 +2312,17 @@
       },
       "locked": {
         "dir": "m/pkg/nomad",
-        "lastModified": 1682754702,
-        "narHash": "sha256-zlRhIfvrtgaoMtPlIHi0K65iCjNxTztogQvzi9iynE0=",
+        "lastModified": 1683335757,
+        "narHash": "sha256-P8los1+76m2yYsa7xdXQb/N6jo4SZI/h14K0wlFZBWU=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "d76d519ad0d2b1a51484ae0241bf04e1291f3687",
+        "rev": "18b05f9cdef685520003d084cece7f22d238f20f",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/nomad",
         "owner": "defn",
-        "ref": "pkg-nomad-1.5.3-8",
+        "ref": "pkg-nomad-1.5.5-1",
         "repo": "dev",
         "type": "github"
       }
@@ -2354,17 +2354,17 @@
       },
       "locked": {
         "dir": "m/pkg/packer",
-        "lastModified": 1682754728,
-        "narHash": "sha256-MaWB9hUq2QVM0k0y0W5hml/++ODiAu93OSIlP/yOh2U=",
+        "lastModified": 1683335787,
+        "narHash": "sha256-PFYSubufmw0Z16gbz/7ErAEEqXIgn4d5zRGLqNLI7hQ=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "bd8647dac43ffeba545c4fc38b19ddb4d22ace6a",
+        "rev": "1451bf65987e80eee6338ca85e426222d54a7686",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/packer",
         "owner": "defn",
-        "ref": "pkg-packer-1.8.6-8",
+        "ref": "pkg-packer-1.8.7-1",
         "repo": "dev",
         "type": "github"
       }
