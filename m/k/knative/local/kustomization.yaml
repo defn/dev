@@ -11,4 +11,4 @@ patches:
 - path: patch-config-map-config-features.yaml
 - path: patch-config-map-config-network.yaml
 resources:
-- localized-files/github.com/knative/serving/releases/download/knative-v1.9.3/serving-core.yaml
+- localized-files/github.com/knative/serving/releases/download/knative-v1.10.0/serving-core.yaml
