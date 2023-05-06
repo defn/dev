@@ -102,10 +102,3 @@ nix:
         && nix-store --gc
 
     COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
-
-devcontainer:
-    FROM +root
-
-    # defn/dev
-    COPY --chown=ubuntu:ubuntu --dir .git .git
-    RUN git reset --hard
