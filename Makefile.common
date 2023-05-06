@@ -20,7 +20,6 @@ macos:
 symlinks:
 	@mark configure symlinks
 	bash -x bin/persist-cache
-	ln -nfs ~/.nix-profile /tmp/
 	echo "token_helper=\"$(which vault-token-helper)\"" > ~/.vault
 
 perms:
