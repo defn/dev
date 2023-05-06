@@ -4,5 +4,8 @@ helmCharts:
   namespace: kube-system
   releaseName: cilium
   repo: https://helm.cilium.io
+  valuesInline:
+    operator:
+      replicas: 1
   version: 1.13.2
 namespace: kube-system
