@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/argocd",
-        "lastModified": 1682995200,
-        "narHash": "sha256-6O9MjJEuDgCTAVkWqeJH1IIPjCflEmwYN317iC6eO/Y=",
+        "lastModified": 1683335450,
+        "narHash": "sha256-XTQhpQYE2GTSzgu7VV4Sc+gPVfhSHt+87HnoaUb+tRM=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "a132924b92b5063a5586af00896767fa35d0df4a",
+        "rev": "355c9f345e20a2bc1d77c25fcd254e1d406f2a79",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/argocd",
         "owner": "defn",
-        "ref": "pkg-argocd-2.7.0-1",
+        "ref": "pkg-argocd-2.7.1-1",
         "repo": "dev",
         "type": "github"
       }
@@ -630,17 +630,17 @@
       },
       "locked": {
         "dir": "m/pkg/kustomize",
-        "lastModified": 1682754652,
-        "narHash": "sha256-ZyS3kfSj5jCQOyqpkp/xy/2HXCj6/qQxVv7lIWfH+9w=",
+        "lastModified": 1683335733,
+        "narHash": "sha256-rpOL8RJ5FRbOjOsOV5I5qcXOEy+0Bdhb1hMcpG9VxS8=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "8b8ac44f17f2682c0290035b5b46f815826d653d",
+        "rev": "e6c354f41e7753cd7a6404cecc69bf89f7750a98",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kustomize",
         "owner": "defn",
-        "ref": "pkg-kustomize-5.0.1-7",
+        "ref": "pkg-kustomize-5.0.2-1",
         "repo": "dev",
         "type": "github"
       }
