@@ -108,7 +108,6 @@ kustomize: "coredns": #Kustomize & {
 	}
 }
 
-// https://artifacthub.io/packages/helm/argo/argo-cd
 kustomize: "argo-cd": #Kustomize & {
 	namespace: "argocd"
 
@@ -121,7 +120,7 @@ kustomize: "argo-cd": #Kustomize & {
 	}
 
 	resource: "argo-cd": {
-		url: "https://raw.githubusercontent.com/argoproj/argo-cd/v2.7.0/manifests/install.yaml"
+		url: "https://raw.githubusercontent.com/argoproj/argo-cd/v2.7.1/manifests/install.yaml"
 	}
 
 	_host: "argocd.defn.run"
@@ -268,7 +267,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.24.1"
+		version:   "0.25.1"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [
@@ -439,7 +438,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.17.0"
+		version: "6.19.1"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -1054,7 +1053,7 @@ kustomize: "traefik": #KustomizeHelm & {
 		release:   "traefik"
 		name:      "traefik"
 		namespace: "traefik"
-		version:   "22.1.0"
+		version:   "22.3.0"
 		repo:      "https://traefik.github.io/charts"
 		values: {
 			logs: general: level:  "DEBUG"

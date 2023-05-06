@@ -9,6 +9,6 @@ helmCharts:
       workflowNamespaces:
       - argo-workflows
       - defn
-  version: 0.24.1
+  version: 0.25.1
 resources:
 - resource-namespace-argo-workflows.yaml
