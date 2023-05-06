@@ -2,7 +2,8 @@
 
 patches: []
 namespace: kube-system
-resources: []
+resources:
+  - resource-ingress-hubble-ui.yaml
 helmCharts:
   - releaseName: cilium
     namespace: kube-system

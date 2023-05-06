@@ -14,3 +14,5 @@ helmCharts:
       replicas: 1
   version: 1.13.2
 namespace: kube-system
+resources:
+- resource-ingress-hubble-ui.yaml
