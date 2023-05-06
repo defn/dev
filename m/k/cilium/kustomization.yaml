@@ -9,6 +9,11 @@ helmCharts:
     valuesInline:
       operator:
         replicas: 1
+      hubble:
+        relay:
+          enabled: true
+        ui:
+          enabled: true
     name: cilium
     version: 1.13.2
     repo: https://helm.cilium.io
