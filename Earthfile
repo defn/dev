@@ -175,6 +175,7 @@ NIX_DIRENV:
 
     FROM quay.io/defn/dev:latest-nix-installed
     COPY --chown=ubuntu:ubuntu --dir . .
+    RUN if git clean | grep -i would.remove; then false; fi
     RUN bash -c '. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh; eval "$(direnv hook bash)"; direnv allow; _direnv_hook; nix profile wipe-history; nix-store --gc'
     RUN sudo install -d -o ubuntu -g ubuntu /store
     RUN rsync -ia `/home/ubuntu/.nix-profile/bin/nix-store -qR ~/.nix-profile $(ls -d .direnv/flake-profile-* | grep -v 'rc$')` /store/
