@@ -1,50 +1,20 @@
 VERSION --use-registry-for-with-docker --ci-arg 0.7
 
-build-nix-root:
-    ARG image=quay.io/defn/dev:latest-nix-root
-    BUILD --platform=linux/amd64 +image-nix-root --image=${image} --arch=amd64
-    BUILD --platform=linux/arm64 +image-nix-root --image=${image} --arch=arm64
+# rsync -ia `/home/ubuntu/.nix-profile/bin/nix-store -qR ~/.nix-profile $(ls -d .direnv/flake-profile-* | grep -v 'rc$')` /store/
 
-build-nix-empty:
-    ARG image=quay.io/defn/dev:latest-nix-empty
-    BUILD --platform=linux/amd64 +image-nix-empty --image=${image}
-    BUILD --platform=linux/arm64 +image-nix-empty --image=${image}
-
-build-nix-installed:
-    ARG image=quay.io/defn/dev:latest-nix-installed
-    BUILD --platform=linux/amd64 +image-nix-installed --image=${image}
-    BUILD --platform=linux/arm64 +image-nix-installed --image=${image}
-
-build-flake-root:
-    ARG image=quay.io/defn/dev:latest-flake-root
-    BUILD --platform=linux/amd64 +image-flake-root --image=${image}
-    BUILD --platform=linux/arm64 +image-flake-root --image=${image}
+build-nix:
+    ARG image=quay.io/defn/dev:latest-nix
+    BUILD --platform=linux/amd64 +image-nix --image=${image}
+    BUILD --platform=linux/arm64 +image-nix --image=${image}
 
 build-devcontainer:
     ARG image=quay.io/defn/dev:latest-devcontainer
     BUILD --platform=linux/amd64 +image-devcontainer --image=${image}
     BUILD --platform=linux/arm64 +image-devcontainer --image=${image}
 
-image-nix-root:
-    ARG arch
+image-nix:
     ARG image
-    FROM +nix-root --arch=${arch}
-    SAVE IMAGE --push ${image}
-
-image-nix-empty:
-    ARG image
-    FROM +nix-empty
-    SAVE IMAGE --push ${image}
-
-image-nix-installed:
-    ARG image
-    FROM +nix-installed
-    SAVE IMAGE --push ${image}
-
-image-flake-root:
-    ARG arch
-    ARG image
-    FROM +flake-root --arch=${arch}
+    FROM +nix
     SAVE IMAGE --push ${image}
 
 image-devcontainer:
@@ -54,7 +24,6 @@ image-devcontainer:
 
 ###############################################
 ubuntu-bare:
-    ARG arch
     ARG UBUNTU=ubuntu:jammy-20221130
 
     FROM ${UBUNTU}
@@ -62,9 +31,7 @@ ubuntu-bare:
     SAVE IMAGE --cache-hint
 
 root:
-    ARG arch
-
-    FROM +ubuntu-bare --arch=${arch}
+    FROM +ubuntu-bare
 
     USER root
 
@@ -98,9 +65,8 @@ root:
 
     RUN install -d -m 0755 -o root -g root /run/user \
         && install -d -m 0700 -o root -g root /run/sshd \
-        && install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 \
-        && install -d -m 0700 -o ubuntu -g ubuntu /app \
-        && install -d -m 0700 -o ubuntu -g ubuntu /cache
+        && install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg \
+        && install -d -m 0700 -o ubuntu -g ubuntu /app /cache
 
     RUN chown -R ubuntu:ubuntu /home/ubuntu && chmod u+s /usr/bin/sudo
 
@@ -116,19 +82,14 @@ root:
 
     WORKDIR /home/ubuntu
 
-###############################################
-nix-root:
-    ARG arch
-    FROM +root --arch=${arch}
+nix:
+    FROM +root
+
+    WORKDIR /app
 
     # nix config
     RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix && mkdir -p /home/ubuntu/.config/nix
-    COPY --chown=ubuntu:ubuntu .config/nix/nix-flake.conf /home/ubuntu/.config/nix/nix.conf
-
-# nix applications where /nix is not a data volume
-nix-installed:
-    FROM quay.io/defn/dev:latest-nix-root
-    WORKDIR /app
+    COPY --chown=ubuntu:ubuntu .config/nix/nix.conf /home/ubuntu/.config/nix/nix.conf
 
     # nix
     RUN bash -c 'sh <(curl -L https://releases.nixos.org/nix/nix-2.15.0/install) --no-daemon' \
@@ -142,50 +103,8 @@ nix-installed:
 
     COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
 
-# nix applications where /nix/store is emptied
-nix-empty-installed:
-    FROM quay.io/defn/dev:latest-nix-installed
-
-    RUN sudo install -d -o ubuntu -g ubuntu /store
-    SAVE ARTIFACT /nix/var var
-
-nix-empty:
-    FROM quay.io/defn/dev:latest-nix-root
-    WORKDIR /app
-
-    # nix
-    COPY --chown=ubuntu:ubuntu +nix-empty-installed/var /nix/var
-    COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
-    RUN echo . ~/.bashrc > ~/.bash_profile \
-        && echo . ~/.nix-profile/etc/profile.d/nix.sh > ~/.bashrc \
-        && echo 'eval "$(direnv hook bash)"' >> ~/.bashrc \
-        && echo 'use flake' > .envrc
-
-# for building flakes and saving thier nix artifacts
-flake-root:
-    FROM quay.io/defn/dev:latest-nix-installed
-    WORKDIR /app
-
-    # build prep
-    RUN mkdir build && cd build && git init
-
-NIX_DIRENV:
-    COMMAND
-
-    FROM quay.io/defn/dev:latest-nix-installed
-    COPY --chown=ubuntu:ubuntu --dir . .
-    RUN if git clean | grep -i would.remove; then false; fi
-    RUN bash -c '. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh; eval "$(direnv hook bash)"; direnv allow; _direnv_hook; nix profile wipe-history; nix-store --gc'
-    RUN sudo install -d -o ubuntu -g ubuntu /store
-    RUN rsync -ia `/home/ubuntu/.nix-profile/bin/nix-store -qR ~/.nix-profile $(ls -d .direnv/flake-profile-* | grep -v 'rc$')` /store/
-
-# coder workspace container
 devcontainer:
-    FROM quay.io/defn/dev:latest-nix-root
-    WORKDIR /home/ubuntu
-
-    # run dir
-    RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
+    FROM +root
 
     # defn/dev
     COPY --chown=ubuntu:ubuntu --dir .git .git
