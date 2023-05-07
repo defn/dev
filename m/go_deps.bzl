@@ -23,8 +23,8 @@ def go_deps():
     go_repository(
         name = "com_github_aws_constructs_go_constructs_v10",
         importpath = "github.com/aws/constructs-go/constructs/v10",
-        sum = "h1:PggWMmUoaXmagxjmbNoUJ87JWhKfvaEE9oNqYm2let4=",
-        version = "v10.2.15",
+        sum = "h1:CDb8YgswE+JvHgC5uDe8tueAP8ThmiBsdowvtjqwl7k=",
+        version = "v10.2.17",
     )
     go_repository(
         name = "com_github_aws_jsii_runtime_go",
@@ -71,8 +71,8 @@ def go_deps():
     go_repository(
         name = "com_github_cdktf_cdktf_provider_aws_go_aws_v14",
         importpath = "github.com/cdktf/cdktf-provider-aws-go/aws/v14",
-        sum = "h1:VOIJ7IJZpbh5p1NRY794uPO0FLa5c6fbo8i9J1pMY+s=",
-        version = "v14.0.2",
+        sum = "h1:iXqB40dxMB7fNaMX4qh74lNxA4oVzhT73n38aMbbzE4=",
+        version = "v14.0.4",
     )
     go_repository(
         name = "com_github_cdktf_cdktf_provider_tfe_go_tfe_v5",
@@ -1006,20 +1006,20 @@ def go_deps():
     go_repository(
         name = "org_golang_x_sync",
         importpath = "golang.org/x/sync",
-        sum = "h1:wsuoTGHzEhffawBOhz5CYhcrV4IdKZbEyZjBMuTp12o=",
-        version = "v0.1.0",
+        sum = "h1:PUR+T4wwASmuSTYdKjYHI5TD22Wy5ogLU5qZCOLxBrI=",
+        version = "v0.2.0",
     )
     go_repository(
         name = "org_golang_x_sys",
         importpath = "golang.org/x/sys",
-        sum = "h1:3jlCCIQZPdOYu1h8BkNvLz8Kgwtae2cagcG/VamtZRU=",
-        version = "v0.7.0",
+        sum = "h1:EBmGv8NaZBZTWvrbjNoL6HVt+IVy3QDQpJs7VRIw3tU=",
+        version = "v0.8.0",
     )
     go_repository(
         name = "org_golang_x_term",
         importpath = "golang.org/x/term",
-        sum = "h1:BEvjmm5fURWqcfbSKTdpkDXYBrUS1c0m8agp14W48vQ=",
-        version = "v0.7.0",
+        sum = "h1:n5xxQn2i3PC0yLAbjTpNT85q/Kgzcr2gIoX9OrJUols=",
+        version = "v0.8.0",
     )
     go_repository(
         name = "org_golang_x_text",
