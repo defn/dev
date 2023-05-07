@@ -1,0 +1,3 @@
+steps:
+  - command: "env USER=$(id -un) earthly --no-output --push +build-nix"
+  - command: "env USER=$(id -un) docker pull quay.io/defn/dev:latest-nix"
