@@ -2,7 +2,7 @@
   "nodes": {
     "argocd": {
       "inputs": {
-        "pkg": "pkg_11"
+        "pkg": "pkg_12"
       },
       "locked": {
         "dir": "m/pkg/argocd",
@@ -23,7 +23,7 @@
     },
     "argoworkflows": {
       "inputs": {
-        "pkg": "pkg_12"
+        "pkg": "pkg_13"
       },
       "locked": {
         "dir": "m/pkg/argoworkflows",
@@ -65,7 +65,7 @@
     },
     "bazelisk": {
       "inputs": {
-        "pkg": "pkg_5"
+        "pkg": "pkg_6"
       },
       "locked": {
         "dir": "m/pkg/bazelisk",
@@ -86,7 +86,7 @@
     },
     "bk": {
       "inputs": {
-        "pkg": "pkg_23"
+        "pkg": "pkg_24"
       },
       "locked": {
         "dir": "m/pkg/bk",
@@ -107,7 +107,7 @@
     },
     "boundary": {
       "inputs": {
-        "pkg": "pkg_24"
+        "pkg": "pkg_25"
       },
       "locked": {
         "dir": "m/pkg/boundary",
@@ -128,7 +128,7 @@
     },
     "buf": {
       "inputs": {
-        "pkg": "pkg_8"
+        "pkg": "pkg_9"
       },
       "locked": {
         "dir": "m/pkg/buf",
@@ -149,7 +149,7 @@
     },
     "buildevents": {
       "inputs": {
-        "pkg": "pkg_25"
+        "pkg": "pkg_26"
       },
       "locked": {
         "dir": "m/pkg/buildevents",
@@ -170,7 +170,7 @@
     },
     "buildifier": {
       "inputs": {
-        "pkg": "pkg_6"
+        "pkg": "pkg_7"
       },
       "locked": {
         "dir": "m/pkg/buildifier",
@@ -191,7 +191,7 @@
     },
     "buildkite": {
       "inputs": {
-        "pkg": "pkg_26"
+        "pkg": "pkg_27"
       },
       "locked": {
         "dir": "m/pkg/buildkite",
@@ -213,30 +213,31 @@
     "cloud": {
       "inputs": {
         "awscli": "awscli",
+        "flyctl": "flyctl",
         "packer": "packer",
         "step": "step",
         "terraform": "terraform"
       },
       "locked": {
         "dir": "m/pkg/cloud",
-        "lastModified": 1683336024,
-        "narHash": "sha256-Yloqn+2ItkafCZBx7cvwScD09sjVxOmYYHWnRcKempk=",
+        "lastModified": 1683427425,
+        "narHash": "sha256-WjO1ztu/+n+QwtgQdtw3jsQcoxy8gxcDIOa+iyFwFMc=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "da0aa1a42aa4f7e4dba096d47987e61c210cecc0",
+        "rev": "fe78ac01eeaaf4fd7b9295679677c03299de31f6",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cloud",
         "owner": "defn",
-        "ref": "pkg-cloud-0.0.78",
+        "ref": "pkg-cloud-0.0.79",
         "repo": "dev",
         "type": "github"
       }
     },
     "cosign": {
       "inputs": {
-        "pkg": "pkg_9"
+        "pkg": "pkg_10"
       },
       "locked": {
         "dir": "m/pkg/cosign",
@@ -937,6 +938,28 @@
         "type": "github"
       }
     },
+    "dev_38": {
+      "inputs": {
+        "flake-utils": "flake-utils_38",
+        "nixpkgs": "nixpkgs_38"
+      },
+      "locked": {
+        "dir": "m/pkg/dev",
+        "lastModified": 1682754053,
+        "narHash": "sha256-P/G1izxnGnsPa6W6ud1elZSpjmNYPRkR8US2iUOUa54=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "2d8e3b841b3718e1bbb737ef2ae148cc0a03180d",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/dev",
+        "owner": "defn",
+        "ref": "pkg-dev-0.0.6",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
     "dev_4": {
       "inputs": {
         "flake-utils": "flake-utils_4",
@@ -1094,7 +1117,7 @@
     },
     "earthly": {
       "inputs": {
-        "pkg": "pkg_27"
+        "pkg": "pkg_28"
       },
       "locked": {
         "dir": "m/pkg/earthly",
@@ -1609,6 +1632,22 @@
         "type": "github"
       }
     },
+    "flake-utils_38": {
+      "locked": {
+        "lastModified": 1652776076,
+        "narHash": "sha256-gzTw/v1vj4dOVbpBSJX4J0DwUR6LIyXo7/SuuTJp1kM=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "04c1b180862888302ddfb2e3ad9eaa63afc60cf8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "04c1b180862888302ddfb2e3ad9eaa63afc60cf8",
+        "type": "github"
+      }
+    },
     "flake-utils_4": {
       "locked": {
         "lastModified": 1652776076,
@@ -1705,9 +1744,30 @@
         "type": "github"
       }
     },
+    "flyctl": {
+      "inputs": {
+        "pkg": "pkg_2"
+      },
+      "locked": {
+        "dir": "m/pkg/flyctl",
+        "lastModified": 1683427298,
+        "narHash": "sha256-+D2yOKC5sZtCqRJBAPmbCPINjoA/phK7cmNC3RA8TLo=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "7af457736d0cc6e6569be7b26beaa0866f1ca7e1",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/flyctl",
+        "owner": "defn",
+        "ref": "pkg-flyctl-0.0.558-1",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
     "gh": {
       "inputs": {
-        "pkg": "pkg_28"
+        "pkg": "pkg_29"
       },
       "locked": {
         "dir": "m/pkg/gh",
@@ -1752,7 +1812,7 @@
     },
     "goreleaser": {
       "inputs": {
-        "pkg": "pkg_10"
+        "pkg": "pkg_11"
       },
       "locked": {
         "dir": "m/pkg/goreleaser",
@@ -1773,7 +1833,7 @@
     },
     "helm": {
       "inputs": {
-        "pkg": "pkg_13"
+        "pkg": "pkg_14"
       },
       "locked": {
         "dir": "m/pkg/helm",
@@ -1794,7 +1854,7 @@
     },
     "honeymarker": {
       "inputs": {
-        "pkg": "pkg_29"
+        "pkg": "pkg_30"
       },
       "locked": {
         "dir": "m/pkg/honeymarker",
@@ -1815,7 +1875,7 @@
     },
     "honeytail": {
       "inputs": {
-        "pkg": "pkg_30"
+        "pkg": "pkg_31"
       },
       "locked": {
         "dir": "m/pkg/honeytail",
@@ -1836,7 +1896,7 @@
     },
     "honeyvent": {
       "inputs": {
-        "pkg": "pkg_31"
+        "pkg": "pkg_32"
       },
       "locked": {
         "dir": "m/pkg/honeyvent",
@@ -1857,7 +1917,7 @@
     },
     "ibazel": {
       "inputs": {
-        "pkg": "pkg_7"
+        "pkg": "pkg_8"
       },
       "locked": {
         "dir": "m/pkg/ibazel",
@@ -1878,7 +1938,7 @@
     },
     "k3d": {
       "inputs": {
-        "pkg": "pkg_14"
+        "pkg": "pkg_15"
       },
       "locked": {
         "dir": "m/pkg/k3d",
@@ -1899,7 +1959,7 @@
     },
     "k9s": {
       "inputs": {
-        "pkg": "pkg_15"
+        "pkg": "pkg_16"
       },
       "locked": {
         "dir": "m/pkg/k9s",
@@ -1920,7 +1980,7 @@
     },
     "kn": {
       "inputs": {
-        "pkg": "pkg_16"
+        "pkg": "pkg_17"
       },
       "locked": {
         "dir": "m/pkg/kn",
@@ -1941,21 +2001,21 @@
     },
     "kubectl": {
       "inputs": {
-        "pkg": "pkg_17"
+        "pkg": "pkg_18"
       },
       "locked": {
         "dir": "m/pkg/kubectl",
-        "lastModified": 1682754615,
-        "narHash": "sha256-l27Wc1/bE4Yez1iiKCMA8gqRRdoN8YhphXXk11ty3PI=",
+        "lastModified": 1683341149,
+        "narHash": "sha256-7wKYr06KvUSBOUzOu9zh7SC+a599TEnxTRo08DoKmmg=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "83f3174dc23ed5ce21fa2ca6c9bf6f7bdacf4209",
+        "rev": "a7dbbd1b9a95ecc160980d84c773c62c78ef613c",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubectl",
         "owner": "defn",
-        "ref": "pkg-kubectl-1.25.8-7",
+        "ref": "pkg-kubectl-1.25.9-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1977,24 +2037,24 @@
       },
       "locked": {
         "dir": "m/pkg/kubernetes",
-        "lastModified": 1683336061,
-        "narHash": "sha256-MoqEpTc5+goaQg6kGFQiPNFxoCKPlqzFHKOS6itDOi0=",
+        "lastModified": 1683341194,
+        "narHash": "sha256-PUNulGAzp0Qy25yRqaqEFvh+78bzugmUc14o8YfJ7c0=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "2932c2258409337bff7ebaac4bef47c6f6c285ce",
+        "rev": "74ff198cfc9b8051cb841f7c952abbfc0c195384",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubernetes",
         "owner": "defn",
-        "ref": "pkg-kubernetes-0.0.87",
+        "ref": "pkg-kubernetes-0.0.88",
         "repo": "dev",
         "type": "github"
       }
     },
     "kubevirt": {
       "inputs": {
-        "pkg": "pkg_18"
+        "pkg": "pkg_19"
       },
       "locked": {
         "dir": "m/pkg/kubevirt",
@@ -2015,7 +2075,7 @@
     },
     "kuma": {
       "inputs": {
-        "pkg": "pkg_32"
+        "pkg": "pkg_33"
       },
       "locked": {
         "dir": "m/pkg/kuma",
@@ -2036,7 +2096,7 @@
     },
     "kustomize": {
       "inputs": {
-        "pkg": "pkg_19"
+        "pkg": "pkg_20"
       },
       "locked": {
         "dir": "m/pkg/kustomize",
@@ -2616,6 +2676,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_38": {
+      "locked": {
+        "lastModified": 1669833724,
+        "narHash": "sha256-/HEZNyGbnQecrgJnfE8d0WC5c1xuPSD2LUpB6YXlg4c=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4d2b37a84fad1091b9de401eb450aae66f1a741e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4d2b37a84fad1091b9de401eb450aae66f1a741e",
+        "type": "github"
+      }
+    },
     "nixpkgs_4": {
       "locked": {
         "lastModified": 1669833724,
@@ -2715,7 +2791,7 @@
     "nodedev": {
       "inputs": {
         "latest": "latest_2",
-        "pkg": "pkg_36"
+        "pkg": "pkg_37"
       },
       "locked": {
         "dir": "m/pkg/nodedev",
@@ -2736,7 +2812,7 @@
     },
     "nomad": {
       "inputs": {
-        "pkg": "pkg_33"
+        "pkg": "pkg_34"
       },
       "locked": {
         "dir": "m/pkg/nomad",
@@ -2757,7 +2833,7 @@
     },
     "packer": {
       "inputs": {
-        "pkg": "pkg_2"
+        "pkg": "pkg_3"
       },
       "locked": {
         "dir": "m/pkg/packer",
@@ -3427,6 +3503,27 @@
         "type": "github"
       }
     },
+    "pkg_38": {
+      "inputs": {
+        "dev": "dev_38"
+      },
+      "locked": {
+        "dir": "m/pkg/pkg",
+        "lastModified": 1682754219,
+        "narHash": "sha256-JutGbj54SzQP91gZuErPkn2iL+KN73yIK80bEFBjzTo=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "7402440e97c731f3430dc292506b380eb4800205",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/pkg",
+        "owner": "defn",
+        "ref": "pkg-pkg-0.0.7",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
     "pkg_4": {
       "inputs": {
         "dev": "dev_4"
@@ -3566,7 +3663,7 @@
     },
     "step": {
       "inputs": {
-        "pkg": "pkg_3"
+        "pkg": "pkg_4"
       },
       "locked": {
         "dir": "m/pkg/step",
@@ -3587,7 +3684,7 @@
     },
     "stern": {
       "inputs": {
-        "pkg": "pkg_20"
+        "pkg": "pkg_21"
       },
       "locked": {
         "dir": "m/pkg/stern",
@@ -3608,7 +3705,7 @@
     },
     "tailscale": {
       "inputs": {
-        "pkg": "pkg_37"
+        "pkg": "pkg_38"
       },
       "locked": {
         "dir": "m/pkg/tailscale",
@@ -3629,7 +3726,7 @@
     },
     "terraform": {
       "inputs": {
-        "pkg": "pkg_4"
+        "pkg": "pkg_5"
       },
       "locked": {
         "dir": "m/pkg/terraform",
@@ -3650,7 +3747,7 @@
     },
     "tilt": {
       "inputs": {
-        "pkg": "pkg_34"
+        "pkg": "pkg_35"
       },
       "locked": {
         "dir": "m/pkg/tilt",
@@ -3671,7 +3768,7 @@
     },
     "vault": {
       "inputs": {
-        "pkg": "pkg_35"
+        "pkg": "pkg_36"
       },
       "locked": {
         "dir": "m/pkg/vault",
@@ -3692,7 +3789,7 @@
     },
     "vcluster": {
       "inputs": {
-        "pkg": "pkg_21"
+        "pkg": "pkg_22"
       },
       "locked": {
         "dir": "m/pkg/vcluster",
@@ -3713,7 +3810,7 @@
     },
     "velero": {
       "inputs": {
-        "pkg": "pkg_22"
+        "pkg": "pkg_23"
       },
       "locked": {
         "dir": "m/pkg/velero",
