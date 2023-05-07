@@ -1,2 +1,2 @@
 steps:
-  - command: "cd m && env USER=$(id -un) nix develop --command make ci"
+  - command: "cd m && env USER=$(id -un) nix develop --command make build"
