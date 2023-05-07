@@ -4,10 +4,10 @@ go 1.20
 
 require (
 	cuelang.org/go v0.5.0
-	github.com/aws/constructs-go/constructs/v10 v10.2.15
+	github.com/aws/constructs-go/constructs/v10 v10.2.17
 	github.com/aws/jsii-runtime-go v1.80.0
 	github.com/bufbuild/connect-go v1.7.0
-	github.com/cdktf/cdktf-provider-aws-go/aws/v14 v14.0.2
+	github.com/cdktf/cdktf-provider-aws-go/aws/v14 v14.0.4
 	github.com/cdktf/cdktf-provider-tfe-go/tfe/v5 v5.0.2
 	github.com/cdktf/cdktf-provider-tfe-go/tfe/v6 v6.0.1
 	github.com/charmbracelet/bubbles v0.15.0
@@ -74,9 +74,9 @@ require (
 	golang.org/x/crypto v0.8.0 // indirect
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
 	golang.org/x/mod v0.10.0 // indirect
-	golang.org/x/sync v0.1.0 // indirect
-	golang.org/x/sys v0.7.0 // indirect
-	golang.org/x/term v0.7.0 // indirect
+	golang.org/x/sync v0.2.0 // indirect
+	golang.org/x/sys v0.8.0 // indirect
+	golang.org/x/term v0.8.0 // indirect
 	golang.org/x/text v0.9.0 // indirect
 	golang.org/x/tools v0.8.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
