@@ -6,7 +6,7 @@
     vault.url = github:defn/dev/pkg-vault-1.13.2-2?dir=m/pkg/vault;
     gh.url = github:defn/dev/pkg-gh-2.28.0-4?dir=m/pkg/gh;
     earthly.url = github:defn/dev/pkg-earthly-0.7.4-5?dir=m/pkg/earthly;
-    buildkite.url = github:defn/dev/pkg-buildkite-3.46.0-1?dir=m/pkg/buildkite;
+    buildkite.url = github:defn/dev/pkg-buildkite-3.46.1-1?dir=m/pkg/buildkite;
     bk.url = github:defn/dev/pkg-bk-2.0.0-8?dir=m/pkg/bk;
     buildevents.url = github:defn/dev/pkg-buildevents-0.13.0-7?dir=m/pkg/buildevents;
     honeyvent.url = github:defn/dev/pkg-honeyvent-1.1.3-7?dir=m/pkg/honeyvent;
