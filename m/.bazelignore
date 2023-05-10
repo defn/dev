@@ -28,6 +28,7 @@ pkg/dapr/.direnv
 pkg/dev/.direnv
 pkg/development/.direnv
 pkg/earthly/.direnv
+pkg/flyctl/.direnv
 pkg/gh/.direnv
 pkg/glow/.direnv
 pkg/godev/.direnv
@@ -98,6 +99,7 @@ pkg/dapr/result
 pkg/dev/result
 pkg/development/result
 pkg/earthly/result
+pkg/flyctl/result
 pkg/gh/result
 pkg/glow/result
 pkg/godev/result
