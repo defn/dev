@@ -3,7 +3,7 @@
     terraform.url = github:defn/dev/pkg-terraform-1.4.6-2?dir=m/pkg/terraform;
     packer.url = github:defn/dev/pkg-packer-1.8.7-1?dir=m/pkg/packer;
     step.url = github:defn/dev/pkg-step-0.24.3-6?dir=m/pkg/step;
-    awscli.url = github:defn/dev/pkg-awscli-2.11.18-1?dir=m/pkg/awscli;
+    awscli.url = github:defn/dev/pkg-awscli-2.11.19-1?dir=m/pkg/awscli;
     flyctl.url = github:defn/dev/pkg-flyctl-0.1.0-1?dir=m/pkg/flyctl;
   };
 
