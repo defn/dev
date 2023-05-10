@@ -179,17 +179,17 @@
       },
       "locked": {
         "dir": "m/pkg/glow",
-        "lastModified": 1682754510,
-        "narHash": "sha256-OvhL/Npyo+wEXTQdSwy3hbXGrzfE9WONj4tJHaEv0tc=",
+        "lastModified": 1683759517,
+        "narHash": "sha256-gj83R/nktCPifSsNAf/E5TEUA8s0f6o8Yxk+MW3Ll8g=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "c7fe7add24b61b850cca216d157621f241fb72fd",
+        "rev": "cd8767ecd50523e0fa56d82ffc6631dc944d66c2",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/glow",
         "owner": "defn",
-        "ref": "pkg-glow-1.5.0-7",
+        "ref": "pkg-glow-1.5.1-1",
         "repo": "dev",
         "type": "github"
       }
