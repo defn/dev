@@ -3,7 +3,7 @@
   outputs = inputs: inputs.pkg.downloadMain rec {
     src = ./.;
 
-    url_template = input: "https://github.com/charmbracelet/glow/releases/download/v${input.vendor}/glow_${input.vendor}_${input.os}_${input.arch}.tar.gz";
+    url_template = input: "https://github.com/charmbracelet/glow/releases/download/v${input.vendor}/glow_${input.os}_${input.arch}.tar.gz";
 
     installPhase = pkg: ''
       install -m 0755 -d $out $out/bin
@@ -16,22 +16,22 @@
       "x86_64-linux" = {
         os = "Linux";
         arch = "x86_64";
-        sha256 = "sha256-ROAqfgK23yOYMR6lpgc9NcJkmxCbacF0A5Gyv/J3CR0="; # x86_64-linux
+        sha256 = "sha256-0iS+AG/E7jYcHRqF29RsJpNyt2xUE+Kpv9D3/lLGb3g="; # x86_64-linux
       };
       "aarch64-linux" = {
         os = "Linux";
         arch = "arm64";
-        sha256 = "sha256-BYH96qkB8Gwc2xqoZgWlLCdizNTQsFrvzirB9EyC9MU="; # aarch64-linux
+        sha256 = "sha256-M2YafZeSVyQznU8G5jPffbyY6KcDIGaCNolb4bTIEl8="; # aarch64-linux
       };
       "x86_64-darwin" = {
         os = "Darwin";
         arch = "x86_64";
-        sha256 = "sha256-oE1fR1mtEymWUvA2L+hYbKd7OZ5m+Jm9DJ9zqNTcRmE="; # x86_64-darwin
+        sha256 = "sha256-B/I9FgnVAldN+ZJZBT8kNy2LojFTglKMs74xZhEFykQ="; # x86_64-darwin
       };
       "aarch64-darwin" = {
         os = "Darwin";
         arch = "arm64";
-        sha256 = "sha256-6swuY8BjgMoOXJmjzqjJ6rUhLTeCMCHmd9HyqPfURkE="; # aarch64-darwin
+        sha256 = "sha256-CO0Y6uZse7p/ApUtabD9uO3KuwgwyFqYrZY/JCLDM04="; # aarch64-darwin
       };
     };
   };
