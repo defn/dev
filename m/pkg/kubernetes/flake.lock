@@ -504,17 +504,17 @@
       },
       "locked": {
         "dir": "m/pkg/helm",
-        "lastModified": 1682754541,
-        "narHash": "sha256-Wpm/tuqQWxFfj9G5TMca4hPU3vyTMVzrlx4lo3K919I=",
+        "lastModified": 1683759065,
+        "narHash": "sha256-jk0++YyXsWokDjix7/0TwXFVkdQSgvVjdZMPzOiYxwQ=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "7a55126e7894b6b7ae598490f60e1704084fb5c7",
+        "rev": "c70e9e5ab70d5d8e128ada4431a3caa4a6130cb5",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/helm",
         "owner": "defn",
-        "ref": "pkg-helm-3.11.3-5",
+        "ref": "pkg-helm-3.12.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -630,17 +630,17 @@
       },
       "locked": {
         "dir": "m/pkg/kustomize",
-        "lastModified": 1683335733,
-        "narHash": "sha256-rpOL8RJ5FRbOjOsOV5I5qcXOEy+0Bdhb1hMcpG9VxS8=",
+        "lastModified": 1683759099,
+        "narHash": "sha256-RGVE17+5nO+6khMobPrfnaHNgYkHawS/GHNoCkOVfA4=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "e6c354f41e7753cd7a6404cecc69bf89f7750a98",
+        "rev": "627f7d7145bcc8d665102f6f82b39610485d3a3c",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kustomize",
         "owner": "defn",
-        "ref": "pkg-kustomize-5.0.2-1",
+        "ref": "pkg-kustomize-5.0.3-1",
         "repo": "dev",
         "type": "github"
       }
