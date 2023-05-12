@@ -220,17 +220,17 @@
       },
       "locked": {
         "dir": "m/pkg/cloud",
-        "lastModified": 1683759667,
-        "narHash": "sha256-X03nlRS/gSV4vrRf3Pp6kc/93Gh46v4AJhwubCfu3Z8=",
+        "lastModified": 1683872231,
+        "narHash": "sha256-TyL7iQqYlAzOPOy450mVRHiArgLmbS5jMvXlGWXv4X4=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "4a864ee694dfb82840c488771be604f5a25de296",
+        "rev": "2820b4b824f0490a7abc2cf69d4de81969a18ec6",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cloud",
         "owner": "defn",
-        "ref": "pkg-cloud-0.0.81",
+        "ref": "pkg-cloud-0.0.82",
         "repo": "dev",
         "type": "github"
       }
@@ -1750,17 +1750,17 @@
       },
       "locked": {
         "dir": "m/pkg/flyctl",
-        "lastModified": 1683588852,
-        "narHash": "sha256-Q/0m3gA+LYTXecG5gh1zIlDpZBu8R9cmZlV4WBGdvcc=",
+        "lastModified": 1683871891,
+        "narHash": "sha256-5v0OToeFexEMJZBz1MUNA+fSmjkQ0f96NMtGK8Bdqew=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "8ea18f525fe40f75b37cb5aa1e8a12c3cd6223e3",
+        "rev": "9c750c5e52f14072218d92e2194fe893e4667893",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/flyctl",
         "owner": "defn",
-        "ref": "pkg-flyctl-0.1.0-1",
+        "ref": "pkg-flyctl-0.1.2-1",
         "repo": "dev",
         "type": "github"
       }
@@ -2079,17 +2079,17 @@
       },
       "locked": {
         "dir": "m/pkg/kuma",
-        "lastModified": 1682754644,
-        "narHash": "sha256-KaYUK5TuYnnqqZY3zqTKv1SAbEdEc9WUP3nFZoEfMJg=",
+        "lastModified": 1683872005,
+        "narHash": "sha256-xSR9yOanabBDqou13dzEtxV/lBFWCL/DCmIcqBJq/7c=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "50743d0800fdef47fc3b09e0e55514725d70253b",
+        "rev": "2f2e6b3538517ede4f95e04da47b5fd866a4e20b",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kuma",
         "owner": "defn",
-        "ref": "pkg-kuma-2.2.0-2",
+        "ref": "pkg-kuma-2.2.1-1",
         "repo": "dev",
         "type": "github"
       }
@@ -2165,17 +2165,17 @@
       },
       "locked": {
         "dir": "m/pkg/localdev",
-        "lastModified": 1683759709,
-        "narHash": "sha256-J6spuhSk015LDjuDw2/Tg8CJMWJepC8d8NKU8eFhKBQ=",
+        "lastModified": 1683872257,
+        "narHash": "sha256-e/QKmZWvbXcIdqKwm0DE1WTJjHz1FK5SWhXto5Kwb5M=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "120225889abf98e971119c803ee40dc7c379d1ea",
+        "rev": "bcf2a0818b1234347f63ceb61ba9ae3be05fa021",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/localdev",
         "owner": "defn",
-        "ref": "pkg-localdev-0.0.120",
+        "ref": "pkg-localdev-0.0.121",
         "repo": "dev",
         "type": "github"
       }
@@ -3667,17 +3667,17 @@
       },
       "locked": {
         "dir": "m/pkg/step",
-        "lastModified": 1682754756,
-        "narHash": "sha256-ZwvUypo3HA98dAoIom3tNNQ2peClvxBW8uLoDt/uLVo=",
+        "lastModified": 1683872026,
+        "narHash": "sha256-6NsCO0HZ5K2KjqIjkalhsgt5Ql8/hfWLH7H2iu1D0Vw=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "f1e6ed8eb41cc190dd0dbf393623f7b753efa986",
+        "rev": "9d0071eac93a0049eea298864c7b2bd201c57fb6",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/step",
         "owner": "defn",
-        "ref": "pkg-step-0.24.3-6",
+        "ref": "pkg-step-0.24.4-1",
         "repo": "dev",
         "type": "github"
       }
@@ -3709,17 +3709,17 @@
       },
       "locked": {
         "dir": "m/pkg/tailscale",
-        "lastModified": 1682754772,
-        "narHash": "sha256-sGZGEVqGRLGo+/k8Dtn/v5jJTyunA9FS1KlfZ91oHTg=",
+        "lastModified": 1683872061,
+        "narHash": "sha256-3guehqwcBos51pleSLh9Gv0Aicq9bF2k2OgwRRy0Crk=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "e8084a9e1b6ff4b76461b89f3d627769503cc93b",
+        "rev": "6d5fa3a35a4e1d1870f36634340445f05e522844",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/tailscale",
         "owner": "defn",
-        "ref": "pkg-tailscale-1.40.0-2",
+        "ref": "pkg-tailscale-1.40.1-1",
         "repo": "dev",
         "type": "github"
       }
