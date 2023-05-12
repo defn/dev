@@ -689,17 +689,17 @@
       },
       "locked": {
         "dir": "m/pkg/kuma",
-        "lastModified": 1682754644,
-        "narHash": "sha256-KaYUK5TuYnnqqZY3zqTKv1SAbEdEc9WUP3nFZoEfMJg=",
+        "lastModified": 1683872005,
+        "narHash": "sha256-xSR9yOanabBDqou13dzEtxV/lBFWCL/DCmIcqBJq/7c=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "50743d0800fdef47fc3b09e0e55514725d70253b",
+        "rev": "2f2e6b3538517ede4f95e04da47b5fd866a4e20b",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kuma",
         "owner": "defn",
-        "ref": "pkg-kuma-2.2.0-2",
+        "ref": "pkg-kuma-2.2.1-1",
         "repo": "dev",
         "type": "github"
       }

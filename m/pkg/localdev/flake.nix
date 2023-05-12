@@ -12,7 +12,7 @@
     honeyvent.url = github:defn/dev/pkg-honeyvent-1.1.3-7?dir=m/pkg/honeyvent;
     honeymarker.url = github:defn/dev/pkg-honeymarker-0.2.10-7?dir=m/pkg/honeymarker;
     honeytail.url = github:defn/dev/pkg-honeytail-1.8.3-5?dir=m/pkg/honeytail;
-    kuma.url = github:defn/dev/pkg-kuma-2.2.0-2?dir=m/pkg/kuma;
+    kuma.url = github:defn/dev/pkg-kuma-2.2.1-1?dir=m/pkg/kuma;
   };
 
   outputs = inputs: inputs.tilt.inputs.pkg.main rec {
