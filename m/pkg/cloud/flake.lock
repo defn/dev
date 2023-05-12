@@ -217,17 +217,17 @@
       },
       "locked": {
         "dir": "m/pkg/flyctl",
-        "lastModified": 1683588852,
-        "narHash": "sha256-Q/0m3gA+LYTXecG5gh1zIlDpZBu8R9cmZlV4WBGdvcc=",
+        "lastModified": 1683871891,
+        "narHash": "sha256-5v0OToeFexEMJZBz1MUNA+fSmjkQ0f96NMtGK8Bdqew=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "8ea18f525fe40f75b37cb5aa1e8a12c3cd6223e3",
+        "rev": "9c750c5e52f14072218d92e2194fe893e4667893",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/flyctl",
         "owner": "defn",
-        "ref": "pkg-flyctl-0.1.0-1",
+        "ref": "pkg-flyctl-0.1.2-1",
         "repo": "dev",
         "type": "github"
       }
@@ -453,17 +453,17 @@
       },
       "locked": {
         "dir": "m/pkg/step",
-        "lastModified": 1682754756,
-        "narHash": "sha256-ZwvUypo3HA98dAoIom3tNNQ2peClvxBW8uLoDt/uLVo=",
+        "lastModified": 1683872026,
+        "narHash": "sha256-6NsCO0HZ5K2KjqIjkalhsgt5Ql8/hfWLH7H2iu1D0Vw=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "f1e6ed8eb41cc190dd0dbf393623f7b753efa986",
+        "rev": "9d0071eac93a0049eea298864c7b2bd201c57fb6",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/step",
         "owner": "defn",
-        "ref": "pkg-step-0.24.3-6",
+        "ref": "pkg-step-0.24.4-1",
         "repo": "dev",
         "type": "github"
       }
