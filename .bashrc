@@ -12,17 +12,6 @@ fi
 export TMPDIR="${TMPDIR:-/tmp}"
 export TEMPDIR="${TEMPDIR:-/tmp}"
 
-# nix
-if [[ "Linux" == "$(uname -s)" ]]; then
-	export USER=ubuntu
-	export LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
-	export LC_ALL=C.UTF-8
-fi
-
-if [[ -e ~/.nix-profile/etc/profile.d/nix.sh ]]; then
-	. ~/.nix-profile/etc/profile.d/nix.sh
-fi
-
 # python
 if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$HOME/.local/bin:$PATH"; fi
 export PYTHONPATH
@@ -120,6 +109,17 @@ case "$(uname -s)" in
     ;;
 esac
 
+# nix
+if [[ "Linux" == "$(uname -s)" ]]; then
+	export USER=ubuntu
+	export LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
+	export LC_ALL=C.UTF-8
+fi
+
+if [[ -e ~/.nix-profile/etc/profile.d/nix.sh ]]; then
+	. ~/.nix-profile/etc/profile.d/nix.sh
+fi
+
 # direnv
 export DIRENV_LOG_FORMAT=
 
@@ -195,11 +195,6 @@ fi
 # aliases
 function vi {
 	if [[ -n "${VSCODE_GIT_ASKPASS_MAIN:-}" ]]; then
-		if [[ ! -f "${1:-}" ]]; then
-			echo "ERROR: file $1 not found" 1>&2
-			return 1
-		fi
-
 		command code "$@"
 	else
 		command vi "$@"
@@ -216,28 +211,6 @@ function pc {
 
 function pca {
 	pc run --all "$@"
-}
-
-function find-flakes {
-	find ~/work/ -type d \( -name go-mod -o -name go-build -o -name node_modules \) -prune -o -name 'flake.nix' -print | perl -pe 's#.*?/work/##; s#/flake.nix$##' | sort | fzf --query="${1}"
-}
-
-function w {
-	if [[ -n "${1:-}" ]]; then
-		local d="$(find-flakes "$@")"
-		if [[ -d "$HOME/work/$d" ]]; then
-			cd "$HOME/work/$d"
-		fi
-	else
-		cd $WORKDIR
-	fi
-}
-
-function ww {
-	local d="$(find-flakes)"
-	if [[ -d "$HOME/work/$d" ]]; then
-		code "$HOME/work/$d"
-	fi
 }
 
 # dotfiles
