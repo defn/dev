@@ -2,7 +2,7 @@ VERSION --use-registry-for-with-docker --ci-arg 0.7
 
 # rsync -ia `/home/ubuntu/.nix-profile/bin/nix-store -qR ~/.nix-profile $(ls -d .direnv/flake-profile-* | grep -v 'rc$')` /store/
 
-build-nix:
+build:
     ARG image=quay.io/defn/dev:latest-nix
     BUILD --platform=linux/amd64 +image-nix --image=${image}
     BUILD --platform=linux/arm64 +image-nix --image=${image}
