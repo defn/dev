@@ -3,9 +3,9 @@
 function main {
 	set -efu
 
-	find . -name flake.nix | perl -pe 's{/flake.nix}{}' | while read -r d; do
+	git ls-files | grep flake.nix | perl -pe 's{/?flake.nix}{}' | while read -r d; do
 		(
-			cd "$d"
+			cd "./$d"
 			git grep 'url = github' flake.nix | perl -pe 's{.*?github:}{}; s{(\w+/\w+)/}{$1 }; s{[?;].*}{}; chomp; s{(\S+)}{${_}$2}; s{-\d\S+$}{-}; s{\.\d+$}{.}; s{$}{\n}' | \
 				while read -r repo tag prefix; do
 					echo "$repo $tag $prefix" 1>&2

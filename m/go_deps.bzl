@@ -23,20 +23,20 @@ def go_deps():
     go_repository(
         name = "com_github_aws_constructs_go_constructs_v10",
         importpath = "github.com/aws/constructs-go/constructs/v10",
-        sum = "h1:CDb8YgswE+JvHgC5uDe8tueAP8ThmiBsdowvtjqwl7k=",
-        version = "v10.2.17",
+        sum = "h1:gopBxhKAhwaRATcWA/mgJZ5h49IyJaUcvDjNz8XOcIs=",
+        version = "v10.2.18",
     )
     go_repository(
         name = "com_github_aws_jsii_runtime_go",
         importpath = "github.com/aws/jsii-runtime-go",
-        sum = "h1:INbbvOdx/UV/+qH4cGmKStCWL4SrEoRwF34nR/3b8tE=",
-        version = "v1.80.0",
+        sum = "h1:/8w1btK2Qy+gH0g/nUQ4z5ugvkWZENgHnKAAyjGwio8=",
+        version = "v1.81.0",
     )
     go_repository(
         name = "com_github_aymanbagabas_go_osc52",
         importpath = "github.com/aymanbagabas/go-osc52",
-        sum = "h1:q2sWUyDcozPLcLabEMd+a+7Ea2DitxZVN9hTxab9L4E=",
-        version = "v1.2.1",
+        sum = "h1:DTwqENW7X9arYimJrPeGZcV0ln14sGMt3pHZspWD+Mg=",
+        version = "v1.0.3",
     )
     go_repository(
         name = "com_github_aymanbagabas_go_osc52_v2",
@@ -83,8 +83,8 @@ def go_deps():
     go_repository(
         name = "com_github_cdktf_cdktf_provider_tfe_go_tfe_v6",
         importpath = "github.com/cdktf/cdktf-provider-tfe-go/tfe/v6",
-        sum = "h1:9hwxEue9P1mls5Ela/jsttzmh7niWWU2UP2Rk95YzXA=",
-        version = "v6.0.1",
+        sum = "h1:cQ706wd4Qf2/iRbJVydSxnkKAlSvu7fcixT+7dmcExM=",
+        version = "v6.0.2",
     )
     go_repository(
         name = "com_github_census_instrumentation_opencensus_proto",
@@ -101,8 +101,8 @@ def go_deps():
     go_repository(
         name = "com_github_charmbracelet_bubbletea",
         importpath = "github.com/charmbracelet/bubbletea",
-        sum = "h1:vuUJ9HJ7b/COy4I30e8xDVQ+VRDUEFykIjryPfgsdps=",
-        version = "v0.23.2",
+        sum = "h1:l8PHrft/GIeikDPCUhQe53AJrDD8xGSn0Agirh8xbe8=",
+        version = "v0.24.0",
     )
     go_repository(
         name = "com_github_charmbracelet_harmonica",
@@ -161,8 +161,8 @@ def go_deps():
     go_repository(
         name = "com_github_containerd_console",
         importpath = "github.com/containerd/console",
-        sum = "h1:lIr7SlA5PxZyMV30bDW0MGbiOPXwc63yRuCP0ARubLw=",
-        version = "v1.0.3",
+        sum = "h1:q2hJAaP1k2wIvVRd/hEHD7lacgqrCPS+k8g1MndzfWY=",
+        version = "v1.0.4-0.20230313162750-1ae8d489ac81",
     )
     go_repository(
         name = "com_github_coreos_go_semver",
@@ -958,8 +958,8 @@ def go_deps():
     go_repository(
         name = "org_golang_x_crypto",
         importpath = "golang.org/x/crypto",
-        sum = "h1:pd9TJtTueMTVQXzk8E2XESSMQDj/U7OUu0PqJqPXQjQ=",
-        version = "v0.8.0",
+        sum = "h1:LF6fAI+IutBocDJ2OT0Q1g8plpYljMZ4+lty+dsqw3g=",
+        version = "v0.9.0",
     )
     go_repository(
         name = "org_golang_x_exp",
@@ -994,8 +994,8 @@ def go_deps():
     go_repository(
         name = "org_golang_x_net",
         importpath = "golang.org/x/net",
-        sum = "h1:aWJ/m6xSmxWBx+V0XRHTlrYrPG56jKsLdTFmsSsCzOM=",
-        version = "v0.9.0",
+        sum = "h1:X2//UzNDwYmtCLn7To6G58Wr6f5ahEAQgKNzv9Y951M=",
+        version = "v0.10.0",
     )
     go_repository(
         name = "org_golang_x_oauth2",
@@ -1036,8 +1036,8 @@ def go_deps():
     go_repository(
         name = "org_golang_x_tools",
         importpath = "golang.org/x/tools",
-        sum = "h1:vSDcovVPld282ceKgDimkRSC8kpaH1dgyc9UMzlt84Y=",
-        version = "v0.8.0",
+        sum = "h1:8WMNJAz3zrtPmnYC7ISf5dEn3MT0gY7jBJfw27yrrLo=",
+        version = "v0.9.1",
     )
     go_repository(
         name = "org_golang_x_xerrors",

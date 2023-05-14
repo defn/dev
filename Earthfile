@@ -7,19 +7,9 @@ build-nix:
     BUILD --platform=linux/amd64 +image-nix --image=${image}
     BUILD --platform=linux/arm64 +image-nix --image=${image}
 
-build-devcontainer:
-    ARG image=quay.io/defn/dev:latest-devcontainer
-    BUILD --platform=linux/amd64 +image-devcontainer --image=${image}
-    BUILD --platform=linux/arm64 +image-devcontainer --image=${image}
-
 image-nix:
     ARG image
     FROM +nix
-    SAVE IMAGE --push ${image}
-
-image-devcontainer:
-    ARG image
-    FROM +devcontainer
     SAVE IMAGE --push ${image}
 
 ###############################################
