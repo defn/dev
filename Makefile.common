@@ -84,13 +84,15 @@ nix-Darwin-upgrade:
 	sudo -i sh -c 'nix-channel --update && nix-env -iA nixpkgs.nix && launchctl remove org.nixos.nix-daemon && launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist'
 
 nix:
-	which nix || $(MAKE) nix-$(shell uname -s)
+	. ~/.nix-profile/etc/profile.d/nix.sh && (which nix || $(MAKE) nix-$(shell uname -s))
+	. ~/.nix-profile/etc/profile.d/nix.sh && (which nix && (test -f "$$HOME/.nix-profile/share/nix-direnv/direnvrc" || nix profile install nixpkgs#nix-direnv))
 
 nix-Linux:
 	export LC_ALL=C.UTF-8 && if ! type -P nix; then $(MAKE) nix-Linux-bootstrap; fi
 
 nix-Darwin:
-	nix profile install github:NixOS/nixpkgs\#nix
+	#nix profile install github:NixOS/nixpkgs\#nix
+	true
 
 nix-Linux-bootstrap:
 	sh <(curl -L https://releases.nixos.org/nix/nix-2.15.0/install) --no-daemon
