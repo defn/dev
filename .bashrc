@@ -201,6 +201,10 @@ function vi {
 	fi
 }
 
+function d {
+	ionice -c 3 nice nix develop --command bash -c "touch flake.nix; direnv allow"
+}
+
 function gs {
 	git status -sb "$@"
 }
