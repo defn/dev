@@ -181,17 +181,6 @@ if tty >/dev/null; then
 	PROMPT_COMMAND="_direnv_hook;update_ps1"
 fi
 
-# install
-if [[ -n "${VSCODE_GIT_ASKPASS_MAIN:-}" ]]; then
-	if [[ "Linux" == "$(uname -s)" ]]; then
-		if ! [[ -f ~/.home.done ]]; then
-			if flock -n ~/.home.lock -c 'cd && ~/bin/e make install'; then
-				touch ~/.home.done
-			fi
-		fi
-	fi
-fi
-
 # aliases
 function vi {
 	if [[ -n "${VSCODE_GIT_ASKPASS_MAIN:-}" ]]; then
