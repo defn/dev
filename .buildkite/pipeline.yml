@@ -1,2 +1,2 @@
 steps:
-  - command: "cd m && env USER=$(id -un) nix develop --command make build"
+  - command: "cd m && cachix use defn && env USER=$(id -un) nix develop --command make build"
