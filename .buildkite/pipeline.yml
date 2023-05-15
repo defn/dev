@@ -1,2 +1,2 @@
 steps:
-  - command: "cd m && export USER=$(id -un) && echo trusted-users = root ubuntu | sudo tee -a /etc/nix/nix.conf && sudo pkill nix-daemon && nix profile install nixpkgs#cachix && cachix use defn && nix develop --command make build"
+  - command: "cd m && env USER=$(id -un) nix develop --command make build"
