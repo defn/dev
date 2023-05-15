@@ -1,2 +1,2 @@
 steps:
-  - command: "cd m && cachix use defn && env USER=$(id -un) nix develop --command make build"
+  - command: "cd m && export USER=$(id -un) && nix profile install nixpkgs#cachix && cachix use defn && nix develop --command make build"
