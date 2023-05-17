@@ -9,9 +9,9 @@
     vault.url = github:defn/dev/pkg-vault-1.13.2-2?dir=m/pkg/vault;
     acme.url = github:defn/dev/pkg-acme-3.0.5-11?dir=m/pkg/acme;
     tailscale.url = github:defn/dev/pkg-tailscale-1.40.1-1?dir=m/pkg/tailscale;
-    development.url = github:defn/dev/pkg-development-0.0.54?dir=m/pkg/development;
+    development.url = github:defn/dev/pkg-development-0.0.55?dir=m/pkg/development;
     localdev.url = github:defn/dev/pkg-localdev-0.0.121?dir=m/pkg/localdev;
-    cloud.url = github:defn/dev/pkg-cloud-0.0.84?dir=m/pkg/cloud;
+    cloud.url = github:defn/dev/pkg-cloud-0.0.85?dir=m/pkg/cloud;
     shell.url = github:defn/dev/pkg-shell-0.0.47?dir=m/pkg/shell;
   };
 
