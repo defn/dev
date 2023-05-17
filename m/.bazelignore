@@ -145,5 +145,6 @@ r/argo-cd/result
 r/argo-workflows/result
 r/meh/result
 result
+a/cue.mod
 cue.mod
 cmd/cli/proto
