@@ -9,7 +9,7 @@
 // $description: So many cool pets
 // $location: https://defn.dev/demo/pet/v1
 
-// cool
+// Description of package
 
 package demov1
 
@@ -28,7 +28,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// PetType represents the different types of pets in the pet store.
+// Description of PetType
 type PetType int32
 
 const (
@@ -99,7 +99,7 @@ func (PetType) EnumDescriptor() ([]byte, []int) {
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
-// Pet represents a pet in the pet store.
+// Description of Pet Message
 type Pet struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -171,6 +171,7 @@ func (x *Pet) GetCreatedAt() *_type.DateTime {
 	return nil
 }
 
+// Description of GetPetRequest Message
 type GetPetRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
