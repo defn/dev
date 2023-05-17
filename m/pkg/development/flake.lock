@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/bazelisk",
-        "lastModified": 1682956634,
-        "narHash": "sha256-RqnZyZRswRf5AbBIJZz6svkYV8zL/a153KzAnNqU4DE=",
+        "lastModified": 1684284120,
+        "narHash": "sha256-6Cyh/tQrz+9idw+AxAxb3tO6gypvJp4ShNwy0U89Nd8=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "6b0277b53a28a37120211c8af03a5e33a6f88648",
+        "rev": "4c60b14947c1df226eeabe23ed7a83c7a7f79d45",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/bazelisk",
         "owner": "defn",
-        "ref": "pkg-bazelisk-1.16.0-1",
+        "ref": "pkg-bazelisk-1.17.0-1",
         "repo": "dev",
         "type": "github"
       }
