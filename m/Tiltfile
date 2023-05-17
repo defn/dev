@@ -11,5 +11,7 @@ local_resource(
     deps=[
         "a/google/type/datetime.proto",
         "a/rock/v1/rock.proto",
-        "a/pet/v1/pet.proto"
+        "a/demo/v1/pet.proto",
+        "a/legumes/v1/bean.proto",
+        "a/legumes/v1/pea.proto"
     ])

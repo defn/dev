@@ -14,8 +14,8 @@ import (
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 
-	petv1 "github.com/defn/dev/m/a/pet/v1"
-	"github.com/defn/dev/m/a/pet/v1/petv1connect"
+	demov1 "github.com/defn/dev/m/a/demo/v1"
+	"github.com/defn/dev/m/a/demo/v1/demov1connect"
 )
 
 var serverCmd = &cobra.Command{
@@ -29,7 +29,7 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		mux := http.NewServeMux()
-		path, handler := petv1connect.NewPetStoreServiceHandler(&petStoreServiceServer{})
+		path, handler := demov1connect.NewPetStoreServiceHandler(&petStoreServiceServer{})
 		mux.Handle(path, handler)
 		fmt.Println("... Listening on", address)
 		http.ListenAndServe(
@@ -48,17 +48,17 @@ const address = "localhost:8080"
 
 // petStoreServiceServer implements the PetStoreService API.
 type petStoreServiceServer struct {
-	petv1connect.UnimplementedPetStoreServiceHandler
+	demov1connect.UnimplementedPetStoreServiceHandler
 }
 
 // PutPet adds the pet associated with the given request into the PetStore.
 func (s *petStoreServiceServer) PutPet(
 	ctx context.Context,
-	req *connect.Request[petv1.PutPetRequest],
-) (*connect.Response[petv1.PutPetResponse], error) {
+	req *connect.Request[demov1.PutPetRequest],
+) (*connect.Response[demov1.PutPetResponse], error) {
 	name := req.Msg.GetName()
 	petType := req.Msg.GetPetType()
 	log.Printf("Got a request to create a %v named %s", petType, name)
-	meh := petv1.Pet{Name: name}
-	return connect.NewResponse(&petv1.PutPetResponse{Pet: &meh}), nil
+	meh := demov1.Pet{Name: name}
+	return connect.NewResponse(&demov1.PutPetResponse{Pet: &meh}), nil
 }

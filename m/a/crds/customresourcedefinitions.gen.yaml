@@ -2,6 +2,103 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
+  name: pets.demo.defn.dev
+spec:
+  group: demo.defn.dev
+  names:
+    kind: Pet
+    listKind: PetList
+    plural: pets
+    singular: pet
+  scope: Namespaced
+  versions:
+  - name: v1
+    schema:
+      openAPIV3Schema:
+        properties:
+          spec:
+            properties:
+              createdAt:
+                oneOf:
+                - not:
+                    anyOf:
+                    - required:
+                      - utcOffset
+                    - required:
+                      - timeZone
+                - required:
+                  - utcOffset
+                - required:
+                  - timeZone
+                properties:
+                  day:
+                    description: Required.
+                    format: int32
+                    type: integer
+                  hours:
+                    description: Required.
+                    format: int32
+                    type: integer
+                  minutes:
+                    description: Required.
+                    format: int32
+                    type: integer
+                  month:
+                    description: Required.
+                    format: int32
+                    type: integer
+                  nanos:
+                    description: Required.
+                    format: int32
+                    type: integer
+                  seconds:
+                    description: Required.
+                    format: int32
+                    type: integer
+                  timeZone:
+                    description: Time zone.
+                    properties:
+                      id:
+                        description: IANA Time Zone Database time zone, e.g.
+                        type: string
+                      version:
+                        description: Optional.
+                        type: string
+                    type: object
+                  utcOffset:
+                    description: UTC offset.
+                    type: string
+                  year:
+                    description: Optional.
+                    format: int32
+                    type: integer
+                type: object
+              name:
+                type: string
+              petId:
+                type: string
+              petType:
+                enum:
+                - PET_TYPE_UNSPECIFIED
+                - PET_TYPE_CAT
+                - PET_TYPE_DOG
+                - PET_TYPE_SNAKE
+                - PET_TYPE_HAMSTER
+                type: string
+            type: object
+          status:
+            type: object
+            x-kubernetes-preserve-unknown-fields: true
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
   name: beans.legumes.defn.dev
 spec:
   group: legumes.defn.dev

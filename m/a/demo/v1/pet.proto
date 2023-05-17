@@ -1,19 +1,19 @@
 syntax = "proto3";
 
-// $schema: defn.dev.pet.v1.Pet
+// $schema: defn.dev.demo.v1.Pet
 // $title: Cool pet
 // $description: So many cool pets
-// $location: https://pet.defn.dev/pet/v1
+// $location: https://defn.dev/demo/pet/v1
+
+// cool
+package defn.dev.demo.v1;
 
 import "google/type/datetime.proto";
 
-// cool
-package defn.dev.pet.v1;
-
-option go_package="github.com/defn/dev/m/a/pet/v1";
+option go_package="github.com/defn/dev/m/a/demo/v1";
 
 // <!-- crd generation tags
-// +cue-gen:Pet:groupName:pet.defn.dev
+// +cue-gen:Pet:groupName:demo.defn.dev
 // +cue-gen:Pet:version:v1
 // +cue-gen:Pet:storageVersion
 // +cue-gen:Pet:subresource:status
@@ -23,19 +23,10 @@ option go_package="github.com/defn/dev/m/a/pet/v1";
 //
 // <!-- go code generation tags
 // +kubetype-gen
-// +kubetype-gen:groupVersion=pet.defn.dev/v1
+// +kubetype-gen:groupVersion=demo.defn.dev/v1
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
-// PetType represents the different types of pets in the pet store.
-enum PetType {
-  PET_TYPE_UNSPECIFIED = 0;
-  PET_TYPE_CAT = 1;
-  PET_TYPE_DOG = 2;
-  PET_TYPE_SNAKE = 3;
-  PET_TYPE_HAMSTER = 4;
-}
-
 // Pet represents a pet in the pet store.
 message Pet {
   PetType pet_type = 1;
@@ -72,3 +63,13 @@ service PetStoreService {
   rpc PutPet(PutPetRequest) returns (PutPetResponse) {}
   rpc DeletePet(DeletePetRequest) returns (DeletePetResponse) {}
 }
+
+// PetType represents the different types of pets in the pet store.
+enum PetType {
+  PET_TYPE_UNSPECIFIED = 0;
+  PET_TYPE_CAT = 1;
+  PET_TYPE_DOG = 2;
+  PET_TYPE_SNAKE = 3;
+  PET_TYPE_HAMSTER = 4;
+}
+

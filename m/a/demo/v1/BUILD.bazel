@@ -19,15 +19,15 @@ buf_lint_test(
 go_proto_library(
     name = "v1_go_proto",
     compilers = ["@io_bazel_rules_go//proto:go_grpc"],
-    importpath = "github.com/defn/dev/m/a/pet/v1",
+    importpath = "github.com/defn/dev/m/a/demo/v1",
     proto = ":v1_proto",
     visibility = ["//visibility:public"],
     deps = ["@go_googleapis//google/type:datetime_go_proto"],
 )
 
 go_library(
-    name = "pet",
+    name = "demo",
     embed = [":v1_go_proto"],
-    importpath = "github.com/defn/dev/m/a/pet/v1",
+    importpath = "github.com/defn/dev/m/a/demo/v1",
     visibility = ["//visibility:public"],
 )
