@@ -2,6 +2,7 @@
 //
 // Source: pet/v1/pet.proto
 
+// cool
 package petv1connect
 
 import (
@@ -22,7 +23,7 @@ const _ = connect_go.IsAtLeastVersion0_1_0
 
 const (
 	// PetStoreServiceName is the fully-qualified name of the PetStoreService service.
-	PetStoreServiceName = "pet.v1.PetStoreService"
+	PetStoreServiceName = "defn.dev.pet.v1.PetStoreService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -34,25 +35,25 @@ const (
 // period.
 const (
 	// PetStoreServiceGetPetProcedure is the fully-qualified name of the PetStoreService's GetPet RPC.
-	PetStoreServiceGetPetProcedure = "/pet.v1.PetStoreService/GetPet"
+	PetStoreServiceGetPetProcedure = "/defn.dev.pet.v1.PetStoreService/GetPet"
 	// PetStoreServicePutPetProcedure is the fully-qualified name of the PetStoreService's PutPet RPC.
-	PetStoreServicePutPetProcedure = "/pet.v1.PetStoreService/PutPet"
+	PetStoreServicePutPetProcedure = "/defn.dev.pet.v1.PetStoreService/PutPet"
 	// PetStoreServiceDeletePetProcedure is the fully-qualified name of the PetStoreService's DeletePet
 	// RPC.
-	PetStoreServiceDeletePetProcedure = "/pet.v1.PetStoreService/DeletePet"
+	PetStoreServiceDeletePetProcedure = "/defn.dev.pet.v1.PetStoreService/DeletePet"
 )
 
-// PetStoreServiceClient is a client for the pet.v1.PetStoreService service.
+// PetStoreServiceClient is a client for the defn.dev.pet.v1.PetStoreService service.
 type PetStoreServiceClient interface {
 	GetPet(context.Context, *connect_go.Request[v1.GetPetRequest]) (*connect_go.Response[v1.GetPetResponse], error)
 	PutPet(context.Context, *connect_go.Request[v1.PutPetRequest]) (*connect_go.Response[v1.PutPetResponse], error)
 	DeletePet(context.Context, *connect_go.Request[v1.DeletePetRequest]) (*connect_go.Response[v1.DeletePetResponse], error)
 }
 
-// NewPetStoreServiceClient constructs a client for the pet.v1.PetStoreService service. By default,
-// it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and
-// sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC()
-// or connect.WithGRPCWeb() options.
+// NewPetStoreServiceClient constructs a client for the defn.dev.pet.v1.PetStoreService service. By
+// default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
+// and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
+// connect.WithGRPC() or connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
@@ -84,22 +85,22 @@ type petStoreServiceClient struct {
 	deletePet *connect_go.Client[v1.DeletePetRequest, v1.DeletePetResponse]
 }
 
-// GetPet calls pet.v1.PetStoreService.GetPet.
+// GetPet calls defn.dev.pet.v1.PetStoreService.GetPet.
 func (c *petStoreServiceClient) GetPet(ctx context.Context, req *connect_go.Request[v1.GetPetRequest]) (*connect_go.Response[v1.GetPetResponse], error) {
 	return c.getPet.CallUnary(ctx, req)
 }
 
-// PutPet calls pet.v1.PetStoreService.PutPet.
+// PutPet calls defn.dev.pet.v1.PetStoreService.PutPet.
 func (c *petStoreServiceClient) PutPet(ctx context.Context, req *connect_go.Request[v1.PutPetRequest]) (*connect_go.Response[v1.PutPetResponse], error) {
 	return c.putPet.CallUnary(ctx, req)
 }
 
-// DeletePet calls pet.v1.PetStoreService.DeletePet.
+// DeletePet calls defn.dev.pet.v1.PetStoreService.DeletePet.
 func (c *petStoreServiceClient) DeletePet(ctx context.Context, req *connect_go.Request[v1.DeletePetRequest]) (*connect_go.Response[v1.DeletePetResponse], error) {
 	return c.deletePet.CallUnary(ctx, req)
 }
 
-// PetStoreServiceHandler is an implementation of the pet.v1.PetStoreService service.
+// PetStoreServiceHandler is an implementation of the defn.dev.pet.v1.PetStoreService service.
 type PetStoreServiceHandler interface {
 	GetPet(context.Context, *connect_go.Request[v1.GetPetRequest]) (*connect_go.Response[v1.GetPetResponse], error)
 	PutPet(context.Context, *connect_go.Request[v1.PutPetRequest]) (*connect_go.Response[v1.PutPetResponse], error)
@@ -128,20 +129,20 @@ func NewPetStoreServiceHandler(svc PetStoreServiceHandler, opts ...connect_go.Ha
 		svc.DeletePet,
 		opts...,
 	))
-	return "/pet.v1.PetStoreService/", mux
+	return "/defn.dev.pet.v1.PetStoreService/", mux
 }
 
 // UnimplementedPetStoreServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedPetStoreServiceHandler struct{}
 
 func (UnimplementedPetStoreServiceHandler) GetPet(context.Context, *connect_go.Request[v1.GetPetRequest]) (*connect_go.Response[v1.GetPetResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("pet.v1.PetStoreService.GetPet is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("defn.dev.pet.v1.PetStoreService.GetPet is not implemented"))
 }
 
 func (UnimplementedPetStoreServiceHandler) PutPet(context.Context, *connect_go.Request[v1.PutPetRequest]) (*connect_go.Response[v1.PutPetResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("pet.v1.PetStoreService.PutPet is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("defn.dev.pet.v1.PetStoreService.PutPet is not implemented"))
 }
 
 func (UnimplementedPetStoreServiceHandler) DeletePet(context.Context, *connect_go.Request[v1.DeletePetRequest]) (*connect_go.Response[v1.DeletePetResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("pet.v1.PetStoreService.DeletePet is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("defn.dev.pet.v1.PetStoreService.DeletePet is not implemented"))
 }

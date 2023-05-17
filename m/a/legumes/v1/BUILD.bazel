@@ -5,7 +5,10 @@ load("@rules_buf//buf:defs.bzl", "buf_lint_test")
 
 proto_library(
     name = "v1_proto",
-    srcs = ["bean.proto"],
+    srcs = [
+        "bean.proto",
+        "pea.proto",
+    ],
     visibility = ["//visibility:public"],
 )
 

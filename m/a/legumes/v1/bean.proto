@@ -25,6 +25,7 @@ option go_package="github.com/defn/dev/m/a/legumes/v1";
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
+// cool
 message Bean {
   // cool
   string url = 1;

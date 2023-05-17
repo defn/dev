@@ -42,6 +42,7 @@ const (
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
+// cool
 type Bean struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
