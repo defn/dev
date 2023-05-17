@@ -1,0 +1,30 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@rules_buf//buf:defs.bzl", "buf_lint_test")
+
+proto_library(
+    name = "durationpb_proto",
+    srcs = ["duration.proto"],
+    visibility = ["//visibility:public"],
+)
+
+buf_lint_test(
+    name = "durationpb_proto_lint",
+    config = "//a:buf.yaml",
+    targets = [":durationpb_proto"],
+)
+
+go_proto_library(
+    name = "durationpb_go_proto",
+    importpath = "google.golang.org/protobuf/types/known/durationpb",
+    proto = ":durationpb_proto",
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "durationpb",
+    embed = [":durationpb_go_proto"],
+    importpath = "google.golang.org/protobuf/types/known/durationpb",
+    visibility = ["//visibility:public"],
+)

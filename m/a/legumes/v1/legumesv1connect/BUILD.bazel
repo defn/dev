@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "legumesv1connect",
+    srcs = ["bean.connect.go"],
+    importpath = "github.com/defn/dev/m/a/legumes/v1/legumesv1connect",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//a/legumes/v1:legumes",
+        "@com_github_bufbuild_connect_go//:connect-go",
+    ],
+)
