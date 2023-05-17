@@ -9,8 +9,8 @@ import (
 
 	"github.com/bufbuild/connect-go"
 
-	petv1 "github.com/defn/dev/m/a/pet/v1"
-	"github.com/defn/dev/m/a/pet/v1/petv1connect"
+	demov1 "github.com/defn/dev/m/a/demo/v1"
+	"github.com/defn/dev/m/a/demo/v1/demov1connect"
 )
 
 var clientCmd = &cobra.Command{
@@ -23,14 +23,14 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		client := petv1connect.NewPetStoreServiceClient(
+		client := demov1connect.NewPetStoreServiceClient(
 			http.DefaultClient,
 			"http://localhost:8080",
 		)
 		res, err := client.PutPet(
 			context.Background(),
-			connect.NewRequest(&petv1.PutPetRequest{
-				PetType: petv1.PetType_PET_TYPE_SNAKE,
+			connect.NewRequest(&demov1.PutPetRequest{
+				PetType: demov1.PetType_PET_TYPE_SNAKE,
 				Name:    "Ekans",
 			}),
 		)
