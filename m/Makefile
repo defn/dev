@@ -1,5 +1,5 @@
-ignore:
-	@true
+build:
+	bazel build //...
 
 up:
 	nix develop --command tilt up --stream --port=0
@@ -17,12 +17,9 @@ update:
 	$(MAKE) bazel-ignore
 
 regen:
-	cd a && buf generate && find . -nam 'BUILD.bazel' | xargs rm -f
+	cd a && buf generate && (find . -name 'BUILD.bazel' | xargs rm -fv)
 	$(MAKE) update-repos
 	cd a && $(MAKE)
-
-build:
-	bazel build //...
 
 watch:
 	$(MAKE) build
