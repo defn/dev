@@ -17,8 +17,9 @@ update:
 	$(MAKE) bazel-ignore
 
 regen:
-	cd a && buf generate
+	cd a && buf generate && find . -nam 'BUILD.bazel' | xargs rm -f
 	$(MAKE) update-repos
+	cd a && $(MAKE)
 
 build:
 	bazel build //...
