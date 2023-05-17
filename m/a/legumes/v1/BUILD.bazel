@@ -32,3 +32,8 @@ go_library(
     importpath = "github.com/defn/dev/m/a/legumes/v1",
     visibility = ["//visibility:public"],
 )
+
+buf_lint_test(
+    name = "defn_dev_legumes_v1_proto_lint",
+    targets = [":defn_dev_legumes_v1_proto"],
+)
