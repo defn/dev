@@ -7,7 +7,7 @@
 // $description: So many cool pets
 // $location: https://defn.dev/demo/pet/v1
 
-// cool
+// Description of package
 package demov1connect
 
 import (

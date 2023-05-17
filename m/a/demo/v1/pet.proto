@@ -5,7 +5,7 @@ syntax = "proto3";
 // $description: So many cool pets
 // $location: https://defn.dev/demo/pet/v1
 
-// cool
+// Description of package
 package defn.dev.demo.v1;
 
 import "google/type/datetime.proto";
@@ -27,7 +27,7 @@ option go_package="github.com/defn/dev/m/a/demo/v1";
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
-// Pet represents a pet in the pet store.
+// Description of Pet Message
 message Pet {
   PetType pet_type = 1;
   string pet_id = 2;
@@ -35,6 +35,7 @@ message Pet {
   google.type.DateTime created_at = 4;
 }
 
+// Description of GetPetRequest Message
 message GetPetRequest {
   string pet_id = 1;
 }
@@ -58,13 +59,7 @@ message DeletePetRequest {
 
 message DeletePetResponse {}
 
-service PetStoreService {
-  rpc GetPet(GetPetRequest) returns (GetPetResponse) {}
-  rpc PutPet(PutPetRequest) returns (PutPetResponse) {}
-  rpc DeletePet(DeletePetRequest) returns (DeletePetResponse) {}
-}
-
-// PetType represents the different types of pets in the pet store.
+// Description of PetType
 enum PetType {
   PET_TYPE_UNSPECIFIED = 0;
   PET_TYPE_CAT = 1;
@@ -73,3 +68,8 @@ enum PetType {
   PET_TYPE_HAMSTER = 4;
 }
 
+service PetStoreService {
+  rpc GetPet(GetPetRequest) returns (GetPetResponse) {}
+  rpc PutPet(PutPetRequest) returns (PutPetResponse) {}
+  rpc DeletePet(DeletePetRequest) returns (DeletePetResponse) {}
+}
