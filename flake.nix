@@ -1,6 +1,6 @@
 {
   inputs = {
-    az.url = github:defn/dev/pkg-az-0.0.113?dir=m/pkg/az;
+    az.url = github:defn/dev/pkg-az-0.0.114?dir=m/pkg/az;
     oci.url = github:defn/dev/pkg-oci-0.0.47?dir=m/pkg/oci;
     nix.url = github:defn/dev/pkg-nix-0.0.46?dir=m/pkg/nix;
     secrets.url = github:defn/dev/pkg-secrets-0.0.49?dir=m/pkg/secrets;
@@ -11,7 +11,7 @@
     tailscale.url = github:defn/dev/pkg-tailscale-1.40.1-1?dir=m/pkg/tailscale;
     development.url = github:defn/dev/pkg-development-0.0.55?dir=m/pkg/development;
     localdev.url = github:defn/dev/pkg-localdev-0.0.121?dir=m/pkg/localdev;
-    cloud.url = github:defn/dev/pkg-cloud-0.0.85?dir=m/pkg/cloud;
+    cloud.url = github:defn/dev/pkg-cloud-0.0.86?dir=m/pkg/cloud;
     shell.url = github:defn/dev/pkg-shell-0.0.47?dir=m/pkg/shell;
   };
 
