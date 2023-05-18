@@ -2737,7 +2737,7 @@ spec:
         - cp `which sh` /tmp && cp `which kubectl` /tmp
         command:
         - /bin/sh
-        image: docker.io/bitnami/kubectl:1.26
+        image: docker.io/bitnami/kubectl:1.27
         imagePullPolicy: IfNotPresent
         name: kubectl
         volumeMounts:

@@ -6,6 +6,48 @@ helmCharts:
   - releaseName: bootstrap
     valuesInline:
       anyResources:
+        cilium: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-global-cilium
+            annotations:
+              argocd.argoproj.io/sync-wave: "1"
+          spec:
+            project: default
+            destination:
+              name: k3d-global
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/r/cilium
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        coredns: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-global-coredns
+            annotations:
+              argocd.argoproj.io/sync-wave: "2"
+          spec:
+            project: default
+            destination:
+              name: k3d-global
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/r/coredns
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
         kyverno: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
@@ -28,27 +70,6 @@ helmCharts:
                 selfHeal: true
               syncOptions:
                 - ServerSideApply=true
-        coredns: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: k3d-global-coredns
-            annotations:
-              argocd.argoproj.io/sync-wave: "2"
-          spec:
-            project: default
-            destination:
-              name: k3d-global
-            source:
-              repoURL: https://github.com/defn/dev
-              targetRevision: main
-              path: m/r/coredns
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
         cert-manager: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
