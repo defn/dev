@@ -40,6 +40,15 @@ options:
       - arg: --tls-san=${DEFN_DEV_HOST}
         nodeFilters:
           - server:0
+      - arg: --disable-network-policy
+        nodeFilters:
+          - server:0
+      - arg: --flannel-backend=none
+        nodeFilters:
+          - server:0
+      - arg: --disable=servicelb
+        nodeFilters:
+          - server:0
       - arg: --disable=traefik
         nodeFilters:
           - server:0
