@@ -132,17 +132,17 @@
       },
       "locked": {
         "dir": "m/pkg/buf",
-        "lastModified": 1683335634,
-        "narHash": "sha256-uyUWTRaQQG27LEGubOTrxA1L4UL/oI9MwZUGXKOu2/8=",
+        "lastModified": 1684375612,
+        "narHash": "sha256-gNQv63COUSIKeyHT82eQjSwVW9eF9dn94lg565D9f5I=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "79dfbfbb1e0ec65562e2a4c8601856c38161ae31",
+        "rev": "17376da9d9e4a85bb3d7641e3994c68fad348380",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buf",
         "owner": "defn",
-        "ref": "pkg-buf-1.18.0-1",
+        "ref": "pkg-buf-1.19.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -220,17 +220,17 @@
       },
       "locked": {
         "dir": "m/pkg/cloud",
-        "lastModified": 1684284859,
-        "narHash": "sha256-Eb1rXQ4N9ydI87T13hajRMIDNxEEw54oTxH9qTxh/O4=",
+        "lastModified": 1684376833,
+        "narHash": "sha256-3Bu1Ciqv5I5Faixj9SqL4QYROQaf2IEtQqugeO+E0Gw=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "c8a85101b330a9de00d049961a98d793f182930f",
+        "rev": "c42340855485e8f36a1202be5abe84b8fbf9c990",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cloud",
         "owner": "defn",
-        "ref": "pkg-cloud-0.0.85",
+        "ref": "pkg-cloud-0.0.86",
         "repo": "dev",
         "type": "github"
       }
@@ -1750,17 +1750,17 @@
       },
       "locked": {
         "dir": "m/pkg/flyctl",
-        "lastModified": 1684284236,
-        "narHash": "sha256-u/aFzLPb+8IjyD+xz30NM8MM6Y4yKcmEBfc/C+PFK80=",
+        "lastModified": 1684375644,
+        "narHash": "sha256-nulVZtIUPKtj8wPBsP3M2e//aVi2EXui6PxRTj+r6K0=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "905a51f0e39257a78ec14597644e903ed2a3b905",
+        "rev": "b60729a89bf8f322b1917a164bdf4118fada7b8b",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/flyctl",
         "owner": "defn",
-        "ref": "pkg-flyctl-0.1.6-1",
+        "ref": "pkg-flyctl-0.1.7-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1795,17 +1795,17 @@
       },
       "locked": {
         "dir": "m/pkg/godev",
-        "lastModified": 1683589151,
-        "narHash": "sha256-tKCuaDa0N2OmHk5G1/RHIvqzWaqCc5P1caeCh5Cti+Y=",
+        "lastModified": 1684376848,
+        "narHash": "sha256-i+KsBIM/EMgNDDLdrE8xKXyKoZrLBEew+qDx4nsHmR4=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "9cccc9de2227e0b1c8e048fd7b9713262b1f2673",
+        "rev": "83646f49954a3e7e7317d1f57b6e19ab78e914f9",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/godev",
         "owner": "defn",
-        "ref": "pkg-godev-0.0.81",
+        "ref": "pkg-godev-0.0.82",
         "repo": "dev",
         "type": "github"
       }
@@ -1942,17 +1942,17 @@
       },
       "locked": {
         "dir": "m/pkg/k3d",
-        "lastModified": 1682754592,
-        "narHash": "sha256-RnMWsEJT7/D5IdYpM4RnGn+VINm2NljBnO1JQFid4eA=",
+        "lastModified": 1684375670,
+        "narHash": "sha256-98gulQ0FaWjz9Lxg96gCcb7YYAZU9pklpElGGclhSEU=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "bace879dd77ca9580276d0010a86a76326f7587f",
+        "rev": "c07a5992a918afeb15342d24f48d1ad46865ed66",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/k3d",
         "owner": "defn",
-        "ref": "pkg-k3d-5.4.9-7",
+        "ref": "pkg-k3d-5.5.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -2037,17 +2037,17 @@
       },
       "locked": {
         "dir": "m/pkg/kubernetes",
-        "lastModified": 1684081014,
-        "narHash": "sha256-jcy7JarGa8hgS5SDmQOjUyr2F6cEbWbMUSaH4zmrwRQ=",
+        "lastModified": 1684376865,
+        "narHash": "sha256-JYmsaiWvCickrR5pnQAy1OPtuvBeS8gonAkSNpaJtVE=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "d6ae97e3ccc4b5ec38158de723aa9a5fac313241",
+        "rev": "f0307615125beb5ac826c4be04e94da391710d32",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubernetes",
         "owner": "defn",
-        "ref": "pkg-kubernetes-0.0.91",
+        "ref": "pkg-kubernetes-0.0.92",
         "repo": "dev",
         "type": "github"
       }
