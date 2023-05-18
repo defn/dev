@@ -5,3 +5,4 @@ cover.out
 /bazel-*
 cue.mod/pkg
 manifest.json
+charts

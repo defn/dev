@@ -241,6 +241,7 @@
                 echo ---
                 kustomize build --enable-helm k/argo-cd
                 kustomize build --enable-helm k/coredns
+                kustomize build --enable-helm k/cilium
               ) | docker run --rm -i \
                 -v $name-manifest:/var/lib/rancher/k3s/server/manifests \
                 ubuntu bash -c 'tee /var/lib/rancher/k3s/server/manifests/bootstrap.yaml | wc -l'
@@ -260,7 +261,7 @@
             --k3s-node-label env=''${name##*-}@server:0 \
             --volume $name-tailscale:/var/lib/tailscale@server:0 \
             --volume $name-irsa:/var/lib/rancher/k3s/server/tls2@server:0 \
-            --volume $name-manifest:/var/lib/rancher/k3s/server/manifests2@server:0
+            --volume $name-manifest:/var/lib/rancher/k3s/server/manifests2@server:0 
 
           docker --context=host update --restart=no k3d-$name-server-0
         '';
