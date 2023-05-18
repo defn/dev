@@ -28,11 +28,11 @@ if [[ -z "${DEFN_DEV_TSKEY:-}" ]]; then
   tailscale up --ssh --accept-dns=false --hostname `echo ${domain} | cut -d. -f1`
 fi
 
-mount bpffs -t bpf /sys/fs/bpf
-mount --make-shared /sys/fs/bpf
-mkdir -p /run/cilium/cgroupv2
-mount -t cgroup2 none /run/cilium/cgroupv2
-mount --make-shared /run/cilium/cgroupv2/
+#mount bpffs -t bpf /sys/fs/bpf
+#mount --make-shared /sys/fs/bpf
+#mkdir -p /run/cilium/cgroupv2
+#mount -t cgroup2 none /run/cilium/cgroupv2
+#mount --make-shared /run/cilium/cgroupv2/
 
 for a in /var/lib/rancher/k3s/server/tls /var/lib/rancher/k3s/server/manifests; do
   mkdir -p "$a"
