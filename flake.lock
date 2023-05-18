@@ -51,17 +51,17 @@
       },
       "locked": {
         "dir": "m/pkg/az",
-        "lastModified": 1684080773,
-        "narHash": "sha256-ttZIf/iCuwYPZPhl/kwCZ2wKmnd/zp2staOL+5U5i7I=",
+        "lastModified": 1684376654,
+        "narHash": "sha256-BZVSQuXzAG1Z/53HcNBUGUkZ7tvrF/a7+Q0RhBGths0=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "1550b92728da56680daf324cae79a471f61f5e48",
+        "rev": "1ac5c38a01841e213162a8265772be80e18f2555",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/az",
         "owner": "defn",
-        "ref": "pkg-az-0.0.113",
+        "ref": "pkg-az-0.0.114",
         "repo": "dev",
         "type": "github"
       }
@@ -202,17 +202,17 @@
       },
       "locked": {
         "dir": "m/pkg/cloud",
-        "lastModified": 1684284859,
-        "narHash": "sha256-Eb1rXQ4N9ydI87T13hajRMIDNxEEw54oTxH9qTxh/O4=",
+        "lastModified": 1684376833,
+        "narHash": "sha256-3Bu1Ciqv5I5Faixj9SqL4QYROQaf2IEtQqugeO+E0Gw=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "c8a85101b330a9de00d049961a98d793f182930f",
+        "rev": "c42340855485e8f36a1202be5abe84b8fbf9c990",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cloud",
         "owner": "defn",
-        "ref": "pkg-cloud-0.0.85",
+        "ref": "pkg-cloud-0.0.86",
         "repo": "dev",
         "type": "github"
       }
@@ -1580,17 +1580,17 @@
       },
       "locked": {
         "dir": "m/pkg/flyctl",
-        "lastModified": 1684284236,
-        "narHash": "sha256-u/aFzLPb+8IjyD+xz30NM8MM6Y4yKcmEBfc/C+PFK80=",
+        "lastModified": 1684375644,
+        "narHash": "sha256-nulVZtIUPKtj8wPBsP3M2e//aVi2EXui6PxRTj+r6K0=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "905a51f0e39257a78ec14597644e903ed2a3b905",
+        "rev": "b60729a89bf8f322b1917a164bdf4118fada7b8b",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/flyctl",
         "owner": "defn",
-        "ref": "pkg-flyctl-0.1.6-1",
+        "ref": "pkg-flyctl-0.1.7-1",
         "repo": "dev",
         "type": "github"
       }
