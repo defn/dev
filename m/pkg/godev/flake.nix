@@ -1,6 +1,6 @@
 {
   inputs = {
-    buf.url = github:defn/dev/pkg-buf-1.18.0-1?dir=m/pkg/buf;
+    buf.url = github:defn/dev/pkg-buf-1.19.0-1?dir=m/pkg/buf;
     cosign.url = github:defn/dev/pkg-cosign-2.0.2-2?dir=m/pkg/cosign;
     goreleaser.url = github:defn/dev/pkg-goreleaser-1.18.2-1?dir=m/pkg/goreleaser;
     latest.url = github:NixOS/nixpkgs?rev=e3b18e82da9ab82b572d70c162d4e13a058aeb7d;
