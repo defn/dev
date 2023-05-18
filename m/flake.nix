@@ -253,6 +253,7 @@
           esac
 
           echo $DEFN_DEV_HOST_API
+          export K3D_FIX_MOUNTS=1
           k3d cluster create $name \
             --config k3d/k3d.yaml \
             --registry-config k3d/k3d-registries.yaml \
