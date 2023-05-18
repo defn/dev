@@ -243,7 +243,7 @@
                 kustomize build --enable-helm k/coredns
               ) | docker run --rm -i \
                 -v $name-manifest:/var/lib/rancher/k3s/server/manifests \
-                ubuntu bash -c 'tee /var/lib/rancher/k3s/server/manifests/defn-dev-argo-cd.yaml | wc -l'
+                ubuntu bash -c 'tee /var/lib/rancher/k3s/server/manifests/bootstrap.yaml | wc -l'
               ;;
             *)
               docker run --rm \
