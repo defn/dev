@@ -2157,17 +2157,17 @@
       },
       "locked": {
         "dir": "m/pkg/kubernetes",
-        "lastModified": 1684387571,
-        "narHash": "sha256-TfP7BMFHlmD6BZBuCe+nFtxrYfQgDMy/Brx+cY8mXW0=",
+        "lastModified": 1684387879,
+        "narHash": "sha256-fTVaIrKV191b8YTb5DW7GDcbo+Mzp61uQdlmeY6o/IY=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "cd9b9e9e369bdd7ca41c96ff1e9974bfdd31f678",
+        "rev": "1ccffa707c1e6318b8adf221e377c0f1bd016420",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubernetes",
         "owner": "defn",
-        "ref": "pkg-kubernetes-0.0.93",
+        "ref": "pkg-kubernetes-0.0.94",
         "repo": "dev",
         "type": "github"
       }
