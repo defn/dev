@@ -23,11 +23,6 @@ function main {
 				done
 		)
 	done
-
-	set +e
-
-	git status -sb
-	git diff flake.nix
 }
 
 source sub "$0" "$@"
