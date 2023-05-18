@@ -1,3 +1,11 @@
+SHELL := /bin/bash
+
+nix-ignore:
+	@true
+
+menu: # This menu
+	@perl -ne 'printf("%20s: %s\n","$$1","$$2") if m{^([\w+-]+):[^#]+#\s(.+)$$}' $(shell ls -d Makefile2>/dev/null)
+
 dummy_ip ?= 169.254.32.1
 
 first = $(word 1, $(subst -, ,$@))
@@ -6,10 +14,10 @@ first_ = $(word 1, $(subst _, ,$@))
 second_ = $(word 2, $(subst _, ,$@))
 
 upgrade:
-  cd m/pkg && $(MAKE) upgrade
-  cd m/pkg && n upgrade && n all update pkg deps
-  cd m && n upgrade && n all update m deps
-  n upgrade && n all update homedeps
+	cd m/pkg && $(MAKE) upgrade
+	cd m/pkg && n upgrade && n all update pkg deps
+	cd m && n upgrade && n all update m deps
+	n upgrade && n all update homedeps
 
 macos:
 	@mark macos
@@ -113,3 +121,18 @@ nix-Darwin-bootstrap:
 nix-reinstall:
 	nix profile list | tail -n +2 | awk '{print $$NF}' | xargs nix profile remove
 	$(MAKE) nix
+
+build-site-default:
+
+install-site-default:
+
+init-gpg-default:
+
+login-site-default:
+
+manage-site-default:
+
+%: %-default
+	@true
+
+-include ~/.password-store/Makefile
