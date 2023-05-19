@@ -17,6 +17,7 @@ pkg/buildevents/.direnv
 pkg/buildifier/.direnv
 pkg/buildkite/.direnv
 pkg/caddy/.direnv
+pkg/cilium/.direnv
 pkg/cloud/.direnv
 pkg/cloudnuke/.direnv
 pkg/coder/.direnv
@@ -39,6 +40,7 @@ pkg/hof/.direnv
 pkg/honeymarker/.direnv
 pkg/honeytail/.direnv
 pkg/honeyvent/.direnv
+pkg/hubble/.direnv
 pkg/ibazel/.direnv
 pkg/k3d/.direnv
 pkg/k9s/.direnv
@@ -88,6 +90,7 @@ pkg/buildevents/result
 pkg/buildifier/result
 pkg/buildkite/result
 pkg/caddy/result
+pkg/cilium/result
 pkg/cloud/result
 pkg/cloudnuke/result
 pkg/coder/result
@@ -110,6 +113,7 @@ pkg/hof/result
 pkg/honeymarker/result
 pkg/honeytail/result
 pkg/honeyvent/result
+pkg/hubble/result
 pkg/ibazel/result
 pkg/k3d/result
 pkg/k9s/result
@@ -145,6 +149,5 @@ r/argo-cd/result
 r/argo-workflows/result
 r/meh/result
 result
-a/cue.mod
 cue.mod
 cmd/cli/proto
