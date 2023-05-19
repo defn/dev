@@ -55,5 +55,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "svelte.enable-ts-plugin": true,
-  "cue.formatTool": "cue fmt"
+  "cue.formatTool": "cue fmt",
+  "trunk.trunkGrayOutNonBlockingIssues": false
 }
