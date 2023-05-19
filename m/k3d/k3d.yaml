@@ -55,10 +55,10 @@ options:
       - arg: --kube-apiserver-arg=--service-account-key-file=/var/lib/rancher/k3s/server/tls/service.key
         nodeFilters:
           - server:0
-      - arg: --kube-apiserver-arg=--service-account-key-file=/var/lib/rancher/k3s/server/tls/sa-signer-pkcs8.pub
+      - arg: --kube-apiserver-arg=--service-account-key-file=/var/lib/rancher/k3s/server/tls2/sa-signer-pkcs8.pub
         nodeFilters:
           - server:0
-      - arg: --kube-apiserver-arg=--service-account-signing-key-file=/var/lib/rancher/k3s/server/tls/sa-signer.key
+      - arg: --kube-apiserver-arg=--service-account-signing-key-file=/var/lib/rancher/k3s/server/tls2/sa-signer.key
         nodeFilters:
           - server:0
       - arg: --kube-apiserver-arg=--service-account-issuer=https://raw.githubusercontent.com/amanibhavam/amanibhavam.github.io/master/v9
