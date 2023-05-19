@@ -52,6 +52,9 @@ options:
       - arg: --disable=traefik
         nodeFilters:
           - server:0
+      - arg: --kube-apiserver-arg=--anonymous-auth=true
+        nodeFilters:
+          - server:0
       - arg: --kube-apiserver-arg=--service-account-key-file=/var/lib/rancher/k3s/server/tls/service.key
         nodeFilters:
           - server:0
