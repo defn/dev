@@ -34,7 +34,11 @@
     "/home/ubuntu/.local/**": true,
     "/home/ubuntu/.cache/**": true,
     "/home/ubuntu/.kube/cache/**": true,
-    "/home/ubuntu/work/**": true
+    "/home/ubuntu/work/**": true,
+    "**/.trunk/*out/": true,
+    "**/.trunk/*actions/": true,
+    "**/.trunk/*logs/": true,
+    "**/.trunk/*plugins/": true
   },
   "nix.formatterPath": "/tmp/.nix-profile/bin/nixpkgs-fmt",
   "terraform.languageServer.ignoreSingleFileWarning": true,
@@ -56,5 +60,11 @@
   },
   "svelte.enable-ts-plugin": true,
   "cue.formatTool": "cue fmt",
-  "trunk.trunkGrayOutNonBlockingIssues": false
+  "trunk.trunkGrayOutNonBlockingIssues": false,
+  "files.exclude": {
+    "**/.trunk/*out/": true,
+    "**/.trunk/*actions/": true,
+    "**/.trunk/*logs/": true,
+    "**/.trunk/*plugins/": true
+  }
 }
