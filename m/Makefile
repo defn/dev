@@ -60,7 +60,7 @@ ci:
 shell:
 	docker run --rm -ti -v nix-data:/nix -v nix-cache:/cache meh "make build; bash -il"
 
-oidc:
+k3s-oidc:
 	awk -F': ' '/client-certificate-data/ {print $$2}' /etc/rancher/k3s/k3s.yaml | base64 -d > system.admin.pem && chmod 400 system.admin.pem
 	awk -F': ' '/client-key-data/ {print $$2}' /etc/rancher/k3s/k3s.yaml | base64 -d > system.admin.key && chmod 400 system.admin.key
 	awk -F': ' '/certificate-authority-data/ {print $$2}' /etc/rancher/k3s/k3s.yaml | base64 -d > system.ca.pem && chmod 400 system.ca.pem
