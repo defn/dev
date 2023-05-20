@@ -643,17 +643,17 @@
       },
       "locked": {
         "dir": "m/pkg/k3d",
-        "lastModified": 1684375670,
-        "narHash": "sha256-98gulQ0FaWjz9Lxg96gCcb7YYAZU9pklpElGGclhSEU=",
+        "lastModified": 1684607071,
+        "narHash": "sha256-PfvpXWUMxIn96oxLdrT08OSB3fgxxpXtCGsWvhxVwzs=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "c07a5992a918afeb15342d24f48d1ad46865ed66",
+        "rev": "91fad89f0fd1c6dc836be61c24de8eb28f3e96a5",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/k3d",
         "owner": "defn",
-        "ref": "pkg-k3d-5.5.0-1",
+        "ref": "pkg-k3d-5.5.1-1",
         "repo": "dev",
         "type": "github"
       }
