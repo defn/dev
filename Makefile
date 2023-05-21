@@ -68,10 +68,13 @@ install-inner:
 
 	@mark dotfiles
 	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
+		mkdir -p ~/.dotfiles; \
 		mkdir -p ~/.config/coderv2/dotfiles; \
 		mkdir -p ~//work/.codespaces/.persistedshare; \
 		rm -rf ~/work/.codespaces/.persistedshare/dotfiles; \
-		ln -nfs ~/.config/coderv2/dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
+		rm -rf ~/.config/coderv2/dotfiles; \
+		ln -nfs ~/.dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
+		ln -nfs ~/.dotfiles ~/.config/coderv2/dotfiles; \
 		(cd ~/.dotfiles && ./bootstrap); \
 	fi
 
