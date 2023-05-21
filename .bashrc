@@ -184,7 +184,18 @@ fi
 # aliases
 function vi {
 	if [[ -n "${VSCODE_GIT_ASKPASS_MAIN:-}" ]]; then
-		"${VSCODE_GIT_ASKPASS_MAIN%/extensions/*}/bin/remote-cli/code-linux.sh" "$@"
+		local code
+
+    code="${VSCODE_GIT_ASKPASS_MAIN%/extensions/*}/bin/remote-cli/code-linux.sh" 
+    if [[ ! -x "$code" ]]; then
+      code="${VSCODE_GIT_ASKPASS_MAIN%/extensions/*}/bin/remote-cli/code" 
+    fi
+
+    if [[ ! -x "$code" ]]; then
+      command vi "$@"
+    else
+      "$code" "$@"
+    fi
 	else
 		command vi "$@"
 	fi
