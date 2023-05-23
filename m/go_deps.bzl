@@ -24,14 +24,14 @@ def go_deps():
     go_repository(
         name = "com_github_aws_constructs_go_constructs_v10",
         importpath = "github.com/aws/constructs-go/constructs/v10",
-        sum = "h1:af76rh8syd1NTl7Hw6AAIv8hFOUPxIpKVi9ch4Oba7M=",
-        version = "v10.2.28",
+        sum = "h1:HDQnKQDIvBtS6gZODYCRTA4vVjYZh6/3sr2F1PVlKwE=",
+        version = "v10.2.31",
     )
     go_repository(
         name = "com_github_aws_jsii_runtime_go",
         importpath = "github.com/aws/jsii-runtime-go",
-        sum = "h1:/8w1btK2Qy+gH0g/nUQ4z5ugvkWZENgHnKAAyjGwio8=",
-        version = "v1.81.0",
+        sum = "h1:3AvIUuyDrOcsU2dff0VEsaXZzjDWrdm+gqywZZHplDg=",
+        version = "v1.82.0",
     )
     go_repository(
         name = "com_github_aymanbagabas_go_osc52",
@@ -67,8 +67,8 @@ def go_deps():
     go_repository(
         name = "com_github_bytedance_sonic",
         importpath = "github.com/bytedance/sonic",
-        sum = "h1:Kj4AYbZSeENfyXicsYppYKO0K2YWab+i2UTSY7Ukz9Q=",
-        version = "v1.8.8",
+        sum = "h1:mXB6OoHaI9OrWugkvNxWiuHTy5RCrVfxg2Nn40sf0oc=",
+        version = "v1.8.9",
     )
     go_repository(
         name = "com_github_cdktf_cdktf_provider_aws_go_aws_v14",
@@ -235,6 +235,12 @@ def go_deps():
         sum = "h1:n+5WquG0fcWoWp6xPWfHdbskMCQaFnG6PfBrh1Ky4HY=",
         version = "v1.6.0",
     )
+    go_repository(
+        name = "com_github_gabriel_vasile_mimetype",
+        importpath = "github.com/gabriel-vasile/mimetype",
+        sum = "h1:w5qFW6JKBz9Y393Y4q372O9A7cUSequkh1Q7OhCmWKU=",
+        version = "v1.4.2",
+    )
 
     go_repository(
         name = "com_github_gin_contrib_sse",
@@ -283,8 +289,8 @@ def go_deps():
     go_repository(
         name = "com_github_go_playground_validator_v10",
         importpath = "github.com/go-playground/validator/v10",
-        sum = "h1:cFRQdfaSMCOSfGCCLB20MHvuoHb/s5G8L5pu2ppK5AQ=",
-        version = "v10.13.0",
+        sum = "h1:vgvQWe3XCz3gIeFDm/HnTIbj6UGmg/+t63MyGU2n5js=",
+        version = "v10.14.0",
     )
 
     go_repository(
@@ -562,8 +568,8 @@ def go_deps():
     go_repository(
         name = "com_github_mattn_go_isatty",
         importpath = "github.com/mattn/go-isatty",
-        sum = "h1:DOKFKCQ7FNG2L1rbrmstDN4QVRdS89Nkh85u68Uwp98=",
-        version = "v0.0.18",
+        sum = "h1:JITubQf0MOLdlGRuRq+jtsDlekdYPia9ZFsB8h/APPA=",
+        version = "v0.0.19",
     )
     go_repository(
         name = "com_github_mattn_go_localereader",
