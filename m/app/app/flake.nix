@@ -3,9 +3,9 @@
     gomod2nix.url = github:defn/gomod2nix/1.5.0-9;
     godev.url = github:defn/dev/pkg-godev-0.0.82?dir=m/pkg/godev;
     nodedev.url = github:defn/dev/pkg-nodedev-0.0.48?dir=m/pkg/nodedev;
-    cloud.url = github:defn/dev/pkg-cloud-0.0.88?dir=m/pkg/cloud;
+    cloud.url = github:defn/dev/pkg-cloud-0.0.89?dir=m/pkg/cloud;
     kubernetes.url = github:defn/dev/pkg-kubernetes-0.0.95?dir=m/pkg/kubernetes;
-    localdev.url = github:defn/dev/pkg-localdev-0.0.122?dir=m/pkg/localdev;
+    localdev.url = github:defn/dev/pkg-localdev-0.0.123?dir=m/pkg/localdev;
     latest.url = github:NixOS/nixpkgs?rev=64c27498901f104a11df646278c4e5c9f4d642db;
   };
 
