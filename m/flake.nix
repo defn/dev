@@ -198,16 +198,16 @@
             mark syncing
             kubectl --context k3d-global apply -f e/k3d-$nme.yaml
             sleep 10
-            app sync argocd/k3d-$nme || true
+            argocd --core app sync argocd/k3d-$nme || true
             sleep 10
-            app sync argocd/k3d-$nme || true
-            app wait argocd/k3d-$nme --timeout 5 || true
+            argocd --core app sync argocd/k3d-$nme || true
+            argocd --core app wait argocd/k3d-$nme --timeout 5 || true
             while true; do
-              app sync argocd/k3d-$nme || true
-              if app wait argocd/k3d-$nme --timeout 60; then
+              argocd --core app sync argocd/k3d-$nme || true
+              if argocd --core app wait argocd/k3d-$nme --timeout 60; then
                 break
               fi
-              app list | grep -v 'Synced.*Healthy'
+              argocd --core app list | grep -v 'Synced.*Healthy'
             done
           fi
         '';
