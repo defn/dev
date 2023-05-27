@@ -12,7 +12,7 @@
     vcluster.url = github:defn/dev/pkg-vcluster-0.15.0-6?dir=m/pkg/vcluster;
     kubevirt.url = github:defn/dev/pkg-kubevirt-0.59.0-7?dir=m/pkg/kubevirt;
     velero.url = github:defn/dev/pkg-velero-1.11.0-2?dir=m/pkg/velero;
-    cilium.url = github:defn/dev/pkg-cilium-0.14.4-1?dir=m/pkg/cilium;
+    cilium.url = github:defn/dev/pkg-cilium-0.14.5-1?dir=m/pkg/cilium;
     hubble.url = github:defn/dev/pkg-hubble-0.11.5-1?dir=m/pkg/hubble;
   };
 
