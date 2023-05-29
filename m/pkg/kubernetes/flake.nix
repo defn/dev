@@ -1,19 +1,19 @@
 {
   inputs = {
-    kubectl.url = github:defn/dev/pkg-kubectl-1.25.9-2?dir=m/pkg/kubectl;
-    k3d.url = github:defn/dev/pkg-k3d-5.5.1-2?dir=m/pkg/k3d;
-    k9s.url = github:defn/dev/pkg-k9s-0.27.4-2?dir=m/pkg/k9s;
-    helm.url = github:defn/dev/pkg-helm-3.12.0-2?dir=m/pkg/helm;
-    kustomize.url = github:defn/dev/pkg-kustomize-5.0.3-2?dir=m/pkg/kustomize;
-    stern.url = github:defn/dev/pkg-stern-1.25.0-7?dir=m/pkg/stern;
-    argoworkflows.url = github:defn/dev/pkg-argoworkflows-3.4.8-2?dir=m/pkg/argoworkflows;
-    argocd.url = github:defn/dev/pkg-argocd-2.7.3-2?dir=m/pkg/argocd;
-    kn.url = github:defn/dev/pkg-kn-1.10.0-3?dir=m/pkg/kn;
-    vcluster.url = github:defn/dev/pkg-vcluster-0.15.0-7?dir=m/pkg/vcluster;
-    kubevirt.url = github:defn/dev/pkg-kubevirt-0.59.0-8?dir=m/pkg/kubevirt;
-    velero.url = github:defn/dev/pkg-velero-1.11.0-3?dir=m/pkg/velero;
-    cilium.url = github:defn/dev/pkg-cilium-0.14.5-2?dir=m/pkg/cilium;
-    hubble.url = github:defn/dev/pkg-hubble-0.11.5-2?dir=m/pkg/hubble;
+    kubectl.url = github:defn/dev/pkg-kubectl-1.25.9-3?dir=m/pkg/kubectl;
+    k3d.url = github:defn/dev/pkg-k3d-5.5.1-3?dir=m/pkg/k3d;
+    k9s.url = github:defn/dev/pkg-k9s-0.27.4-3?dir=m/pkg/k9s;
+    helm.url = github:defn/dev/pkg-helm-3.12.0-3?dir=m/pkg/helm;
+    kustomize.url = github:defn/dev/pkg-kustomize-5.0.3-3?dir=m/pkg/kustomize;
+    stern.url = github:defn/dev/pkg-stern-1.25.0-8?dir=m/pkg/stern;
+    argoworkflows.url = github:defn/dev/pkg-argoworkflows-3.4.8-3?dir=m/pkg/argoworkflows;
+    argocd.url = github:defn/dev/pkg-argocd-2.7.3-3?dir=m/pkg/argocd;
+    kn.url = github:defn/dev/pkg-kn-1.10.0-4?dir=m/pkg/kn;
+    vcluster.url = github:defn/dev/pkg-vcluster-0.15.0-8?dir=m/pkg/vcluster;
+    kubevirt.url = github:defn/dev/pkg-kubevirt-0.59.0-9?dir=m/pkg/kubevirt;
+    velero.url = github:defn/dev/pkg-velero-1.11.0-4?dir=m/pkg/velero;
+    cilium.url = github:defn/dev/pkg-cilium-0.14.5-3?dir=m/pkg/cilium;
+    hubble.url = github:defn/dev/pkg-hubble-0.11.5-3?dir=m/pkg/hubble;
   };
 
   outputs = inputs: inputs.kubectl.inputs.pkg.main rec {
