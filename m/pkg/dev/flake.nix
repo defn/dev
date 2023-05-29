@@ -109,12 +109,12 @@
           slug = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).slug;
         } // (
           if pkgs.lib.hasAttr "vendor" (builtins.fromJSON (builtins.readFile (src + "/flake.json"))) then rec {
-            version = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).version;
-          }
-          else rec {
             vendor = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).vendor;
             revision = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).revision;
             version = "${vendor}-${revision}";
+          }
+          else rec {
+            version = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).version;
           }
         ) // config;
 
