@@ -263,17 +263,17 @@
       },
       "locked": {
         "dir": "m/pkg/cloud",
-        "lastModified": 1685324988,
-        "narHash": "sha256-K77xEWRj0SiIuRCNn3cYNZmUDm/a31e2LVsHWTWArts=",
+        "lastModified": 1685325886,
+        "narHash": "sha256-26P9CDhGcMF89GCYY8WUKvEayFk1bvfHdNvLbE0TO50=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "93283a5c6dd81435bac9a33d4805555a9725d428",
+        "rev": "dfe17db29ee164a2c73f14c1f53eb9cf42c6d9a6",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cloud",
         "owner": "defn",
-        "ref": "pkg-cloud-0.0.94",
+        "ref": "pkg-cloud-0.0.95",
         "repo": "dev",
         "type": "github"
       }
