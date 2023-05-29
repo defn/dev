@@ -4,14 +4,14 @@ go 1.20
 
 require (
 	cuelang.org/go v0.5.0
-	github.com/aws/constructs-go/constructs/v10 v10.2.31
+	github.com/aws/constructs-go/constructs/v10 v10.2.36
 	github.com/aws/jsii-runtime-go v1.82.0
 	github.com/bufbuild/connect-go v1.7.0
 	github.com/cdktf/cdktf-provider-aws-go/aws/v14 v14.0.4
 	github.com/cdktf/cdktf-provider-tfe-go/tfe/v5 v5.0.2
 	github.com/cdktf/cdktf-provider-tfe-go/tfe/v6 v6.0.2
 	github.com/charmbracelet/bubbles v0.15.0
-	github.com/charmbracelet/bubbletea v0.24.0
+	github.com/charmbracelet/bubbletea v0.24.1
 	github.com/charmbracelet/lipgloss v0.7.1
 	github.com/gin-gonic/gin v1.9.0
 	github.com/hashicorp/terraform-cdk-go/cdktf v0.16.1
@@ -25,7 +25,7 @@ require (
 	github.com/Masterminds/semver/v3 v3.2.1 // indirect
 	github.com/atotto/clipboard v0.1.4 // indirect
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
-	github.com/bytedance/sonic v1.8.10 // indirect
+	github.com/bytedance/sonic v1.9.0 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect
 	github.com/cockroachdb/apd/v2 v2.0.2 // indirect
 	github.com/containerd/console v1.0.4-0.20230313162750-1ae8d489ac81 // indirect
