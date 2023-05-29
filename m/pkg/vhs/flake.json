@@ -1,4 +1,6 @@
 {
   "slug": "pkg-vhs",
-  "ghrepo": "charmbracelet/vhs"
+  "ghrepo": "charmbracelet/vhs",
+  "vendor": "0.5.0",
+  "revision": "1"
 }

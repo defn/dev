@@ -1,4 +1,6 @@
 {
   "slug": "pkg-gum",
-  "ghrepo": "charmbracelet/gum"
+  "ghrepo": "charmbracelet/gum",
+  "vendor": "0.10.0",
+  "revision": "7"
 }

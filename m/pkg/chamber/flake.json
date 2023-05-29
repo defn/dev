@@ -1,4 +1,6 @@
 {
   "slug": "pkg-chamber",
-  "ghrepo": "segmentio/chamber"
+  "ghrepo": "segmentio/chamber",
+  "vendor": "2.13.0",
+  "revision": "1"
 }

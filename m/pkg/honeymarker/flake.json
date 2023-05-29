@@ -1,4 +1,6 @@
 {
   "slug": "pkg-honeymarker",
-  "ghrepo": "honeycombio/honeymarker"
+  "ghrepo": "honeycombio/honeymarker",
+  "vendor": "0.2.10",
+  "revision": "7"
 }

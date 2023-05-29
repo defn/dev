@@ -1,4 +1,6 @@
 {
   "slug": "pkg-kn",
-  "ghrepo": "knative/client"
+  "ghrepo": "knative/client",
+  "vendor": "1.10.0",
+  "revision": "2"
 }
