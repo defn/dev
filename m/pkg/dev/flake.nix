@@ -108,13 +108,13 @@
         defaultConfig = { src, config ? { } }: {
           slug = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).slug;
         } // (
-          if dev-inputs.nixpkgs.lib.pathIsRegularFile (src + "/VENDOR") then rec {
-            vendor = builtins.readFile (src + "/VENDOR");
-            revision = builtins.readFile (src + "/REVISION");
-            version = "${vendor}-${revision}";
+          if (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).vendor == "null" then {
+            version = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).version;
           }
           else {
-            version = builtins.readFile (src + "/VERSION");
+            vendor = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).vendor;
+            revision = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).revision;
+            version = "${vendor}-${revision}";
           }
         ) // config;
 
