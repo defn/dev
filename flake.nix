@@ -1,6 +1,6 @@
 {
   inputs = {
-    az.url = github:defn/dev/pkg-az-0.0.114?dir=m/pkg/az;
+    az.url = github:defn/dev/pkg-az-0.0.122?dir=m/pkg/az;
     oci.url = github:defn/dev/pkg-oci-0.0.47?dir=m/pkg/oci;
     nix.url = github:defn/dev/pkg-nix-0.0.46?dir=m/pkg/nix;
     secrets.url = github:defn/dev/pkg-secrets-0.0.49?dir=m/pkg/secrets;

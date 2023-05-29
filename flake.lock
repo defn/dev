@@ -51,17 +51,17 @@
       },
       "locked": {
         "dir": "m/pkg/az",
-        "lastModified": 1684376654,
-        "narHash": "sha256-BZVSQuXzAG1Z/53HcNBUGUkZ7tvrF/a7+Q0RhBGths0=",
+        "lastModified": 1685331093,
+        "narHash": "sha256-a8BLBnt1rF/TFgE/X8lFYG7wFcK68uGAYg6nyPyyEm0=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "1ac5c38a01841e213162a8265772be80e18f2555",
+        "rev": "61e325a25086ceb65aac33b7e3748827759f97d9",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/az",
         "owner": "defn",
-        "ref": "pkg-az-0.0.114",
+        "ref": "pkg-az-0.0.122",
         "repo": "dev",
         "type": "github"
       }
