@@ -110,6 +110,7 @@
         } // (
           if (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).vendor == "" then rec {
             version = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).version;
+            vendor = "meh";
           }
           else rec {
             vendor = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).vendor;
