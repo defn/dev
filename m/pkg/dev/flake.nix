@@ -111,7 +111,7 @@
           if (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).vendor == "null" then {
             version = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).version;
           }
-          else {
+          else rec {
             vendor = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).vendor;
             revision = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).revision;
             version = "${vendor}-${revision}";
