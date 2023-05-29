@@ -2,5 +2,5 @@
   "slug": "pkg-caddy",
   "ghrepo": "caddyserver/caddy",
   "vendor": "2.6.4",
-  "revision": "8"
+  "revision": "9"
 }
