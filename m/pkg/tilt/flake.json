@@ -1,4 +1,6 @@
 {
   "slug": "pkg-tilt",
-  "ghrepo": "tilt-dev/tilt"
+  "ghrepo": "tilt-dev/tilt",
+  "vendor": "0.32.4",
+  "revision": "1"
 }

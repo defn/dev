@@ -1,4 +1,6 @@
 {
   "slug": "pkg-cue",
-  "ghrepo": "cue-lang/cue"
+  "ghrepo": "cue-lang/cue",
+  "vendor": "0.5.0",
+  "revision": "5"
 }

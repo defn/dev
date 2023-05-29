@@ -1,4 +1,6 @@
 {
   "slug": "pkg-buildevents",
-  "ghrepo": "honeycombio/buildevents"
+  "ghrepo": "honeycombio/buildevents",
+  "vendor": "0.13.0",
+  "revision": "7"
 }

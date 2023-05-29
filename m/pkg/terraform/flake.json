@@ -1,4 +1,6 @@
 {
   "slug": "pkg-terraform",
-  "ghrepo": "hashicorp/terraform"
+  "ghrepo": "hashicorp/terraform",
+  "vendor": "1.4.6",
+  "revision": "2"
 }

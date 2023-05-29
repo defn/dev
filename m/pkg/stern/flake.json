@@ -1,4 +1,6 @@
 {
   "slug": "pkg-stern",
-  "ghrepo": "stern/stern"
+  "ghrepo": "stern/stern",
+  "vendor": "1.25.0",
+  "revision": "6"
 }

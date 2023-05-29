@@ -1,4 +1,6 @@
 {
   "slug": "pkg-nomad",
-  "ghrepo": "hashicorp/nomad"
+  "ghrepo": "hashicorp/nomad",
+  "vendor": "1.5.6",
+  "revision": "1"
 }

@@ -1,4 +1,6 @@
 {
   "slug": "pkg-bk",
-  "ghrepo": "buildkite/cli"
+  "ghrepo": "buildkite/cli",
+  "vendor": "2.0.0",
+  "revision": "8"
 }
