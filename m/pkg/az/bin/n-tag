@@ -17,7 +17,7 @@ function main {
 	version="$(jq -r '.version' <flake.json)"
 	if [[ "null" == "$version" ]]; then version=""; fi
 
-	vendor="$(cat VENDOR)"
+	vendor="$(jq -r '.vendor' <flake.json)"
 	if [[ "null" == "$vendor" ]]; then vendor=""; fi
 
 	revision="$(jq -r '.revision' <flake.json)"
