@@ -24,8 +24,8 @@ def go_deps():
     go_repository(
         name = "com_github_aws_constructs_go_constructs_v10",
         importpath = "github.com/aws/constructs-go/constructs/v10",
-        sum = "h1:HDQnKQDIvBtS6gZODYCRTA4vVjYZh6/3sr2F1PVlKwE=",
-        version = "v10.2.31",
+        sum = "h1:UB5FDccmw1jOes5LlrL8lyqHiiNJk5reP1s1rfl1DEM=",
+        version = "v10.2.36",
     )
     go_repository(
         name = "com_github_aws_jsii_runtime_go",
@@ -67,8 +67,8 @@ def go_deps():
     go_repository(
         name = "com_github_bytedance_sonic",
         importpath = "github.com/bytedance/sonic",
-        sum = "h1:XFSQg4/rwpQnNWSybNDr8oz6QtQY9uRGfRKDVWVsvP8=",
-        version = "v1.8.10",
+        sum = "h1:iwLYBds8bYtzwOX7kmdYwtS+aY2GgekVoIs2/IxR0tM=",
+        version = "v1.9.0",
     )
     go_repository(
         name = "com_github_cdktf_cdktf_provider_aws_go_aws_v14",
@@ -105,8 +105,8 @@ def go_deps():
     go_repository(
         name = "com_github_charmbracelet_bubbletea",
         importpath = "github.com/charmbracelet/bubbletea",
-        sum = "h1:l8PHrft/GIeikDPCUhQe53AJrDD8xGSn0Agirh8xbe8=",
-        version = "v0.24.0",
+        sum = "h1:LpdYfnu+Qc6XtvMz6d/6rRY71yttHTP5HtrjMgWvixc=",
+        version = "v0.24.1",
     )
     go_repository(
         name = "com_github_charmbracelet_harmonica",
