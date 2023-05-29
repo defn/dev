@@ -110,12 +110,11 @@
         } // (
           if (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).vendor == "" then rec {
             version = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).version;
-            vendor = "meh";
           }
           else rec {
             vendor = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).vendor;
             revision = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).revision;
-            version = "${vendor}-${revision}";
+            version = "meh"; # "${vendor}-${revision}";
           }
         ) // config;
 
