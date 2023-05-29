@@ -14,17 +14,14 @@ function main {
 		slug=
 	fi
 
-	if [[ -f VERSION ]]; then
-		version="$(cat VERSION)"
-	fi
+	version="$(jq -r '.version' <flake.json)"
+	if [[ "null" == "$version" ]]; then version=""; fi
 
-	if [[ -f VENDOR ]]; then
-		vendor="$(cat VENDOR)"
+	vendor="$(cat VENDOR)"
+	if [[ "null" == "$vendor" ]]; then vendor=""; fi
 
-		if [[ -f REVISION ]]; then
-			revision="$(cat REVISION)"
-		fi
-	fi
+	revision="$(jq -r '.revision' <flake.json)"
+	if [[ "null" == "$revision" ]]; then revision=""; fi
 
 	local tag=
 	if [[ -n "${version}" ]]; then
