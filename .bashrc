@@ -148,23 +148,27 @@ function update_ps1 {
 	EXTRA=""
 
 	local slug=
-	if [[ -f SLUG ]]; then
-		slub="$(cat SLUG)"
+	if [[ -f flake.json ]]; then
+		slug="$(jq -r '.slug' flake.json)"
+		if [[ "$slug" == "null" ]]; then slug=""; fi
 	fi
 
 	local vendor=
-	if [[ -f VENDOR ]]; then
-		vendor="$(cat VENDOR)"
+	if [[ -f flake.json ]]; then
+		vendor="$(jq -r '.vendor' flake.json)"
+		if [[ "$vendor" == "null" ]]; then vendor=""; fi
 	fi
 
 	local revision=
-	if [[ -f REVISION ]]; then
-		revision="$(cat REVISION)"
+	if [[ -f flake.json ]]; then
+		revision="$(jq -r '.revision' flake.json)"
+		if [[ "$revision" == "null" ]]; then revision=""; fi
 	fi
 
 	local version=
-	if [[ -f VERSION ]]; then
-		version="$(cat VERSION)"
+	if [[ -f flake.json ]]; then
+		version="$(jq -r '.version' flake.json)"
+		if [[ "$version" == "null" ]]; then version=""; fi
 	fi
 
 	if [[ -n "${version:-}" ]]; then
