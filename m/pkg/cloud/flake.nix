@@ -22,6 +22,7 @@
             inputs.step.defaultPackage.${ctx.system}
             inputs.awscli.defaultPackage.${ctx.system}
             inputs.flyctl.defaultPackage.${ctx.system}
+            inputs.chamber.defaultPackage.${ctx.system}
           ];
         in
         flakeInputs;
