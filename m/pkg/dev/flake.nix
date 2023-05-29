@@ -108,13 +108,13 @@
         defaultConfig = { src, config ? { } }: {
           slug = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).slug;
         } // (
-          if (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).vendor == "" then rec {
+          if hasAttr "vendor" (builtins.fromJSON (builtins.readFile (src + "/flake.json"))) then rec {
             version = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).version;
           }
           else rec {
             vendor = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).vendor;
             revision = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).revision;
-            version = "meh"; # "${vendor}-${revision}";
+            version = "${vendor}-${revision}";
           }
         ) // config;
 
