@@ -5,11 +5,8 @@ function main {
 
 	git pull
 	if ! n cut "$*" ; then
-		git status -sb
 		if [[ -n "${1:-}" ]]; then
-		git status -sb
 			git add -u .
-		git status -sb
 			git commit -m "$*"
 			n cut "$*"
 		fi
