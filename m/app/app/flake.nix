@@ -1,11 +1,11 @@
 {
   inputs = {
     gomod2nix.url = github:defn/gomod2nix/1.5.0-9;
-    godev.url = github:defn/dev/pkg-godev-0.0.82?dir=m/pkg/godev;
-    nodedev.url = github:defn/dev/pkg-nodedev-0.0.48?dir=m/pkg/nodedev;
-    cloud.url = github:defn/dev/pkg-cloud-0.0.95?dir=m/pkg/cloud;
-    kubernetes.url = github:defn/dev/pkg-kubernetes-0.0.99?dir=m/pkg/kubernetes;
-    localdev.url = github:defn/dev/pkg-localdev-0.0.125?dir=m/pkg/localdev;
+    godev.url = github:defn/dev/pkg-godev-0.0.85?dir=m/pkg/godev;
+    nodedev.url = github:defn/dev/pkg-nodedev-0.0.50?dir=m/pkg/nodedev;
+    cloud.url = github:defn/dev/pkg-cloud-0.0.98?dir=m/pkg/cloud;
+    kubernetes.url = github:defn/dev/pkg-kubernetes-0.0.102?dir=m/pkg/kubernetes;
+    localdev.url = github:defn/dev/pkg-localdev-0.0.128?dir=m/pkg/localdev;
     latest.url = github:NixOS/nixpkgs?rev=64c27498901f104a11df646278c4e5c9f4d642db;
   };
 
