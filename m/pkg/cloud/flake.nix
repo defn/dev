@@ -5,6 +5,7 @@
     step.url = github:defn/dev/pkg-step-0.24.4-1?dir=m/pkg/step;
     awscli.url = github:defn/dev/pkg-awscli-2.11.23-1?dir=m/pkg/awscli;
     flyctl.url = github:defn/dev/pkg-flyctl-0.1.20-1?dir=m/pkg/flyctl;
+    chamber.url = github:defn/dev/pkg-chamber-0.1.20-1?dir=m/pkg/chamber;
   };
 
   outputs = inputs: inputs.terraform.inputs.pkg.main rec {
