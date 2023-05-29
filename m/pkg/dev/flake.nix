@@ -108,7 +108,7 @@
         defaultConfig = { src, config ? { } }: {
           slug = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).slug;
         } // (
-          if (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).vendor == "null" then {
+          if (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).vendor == "null" then rec {
             version = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).version;
           }
           else rec {
