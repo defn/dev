@@ -4,30 +4,35 @@ function main {
 	set -efu
 
 	if [[ -z "${1:-}" ]]; then
-		if test -f VENDOR; then
+		if [[ "null" != "$(jq -r '.vendor' <flake.json)" ]]; then
 			# vendor 1.0.0-1 -> 1.0.0-2
-			if ! test -f REVISION; then
-				echo -n 0 > REVISION
+			if [[ "null" == "$(jq -r '.revision' <flake.json)" ]]; then
+				jq '. + { revision: "0" }' < flake.json > 1
+				mv 1 flake.json
 			fi
 
-			local version="$(cat REVISION)"
-			echo -n "$((version + 1 ))" > REVISION
+			jq '. + { revision: ((.revision | tonumber) + 1 | tostring) }' < flake.json > 1
+			mv 1 flake.json
 		else
 			# version 1.2.3 -> 1.2.4
-			if ! test -f VERSION ; then
-				echo -n 0.0.0 > VERSION
+			if [[ "null" == "$(jq -r '.version' <flake.json)" ]]; then
+				jq '. + { version: "0.0.0" }' < flake.json > 1
+				mv 1 flake.json
 			fi
 
-			local rev="$(cat VERSION | cut -d. -f3-)"
-			local majmin="$(cat VERSION | cut -d. -f1-2)"
-			echo -n "$majmin.$((rev + 1 ))" > VERSION
+			local rev="$(jq -r '.version' <flake.json | cut -d. -f3-)"
+			local majmin="$(jq -r '.version' <flake.json  | cut -d. -f1-2)"
+			jq -arg version "$majmin.$((rev + 1 ))" '. + { version: $version }' < flake.json > 1
+			mv 1 flake.json
 		fi
 	else
 		local version="$1"; shift
 
-		if test -f VENDOR; then
-			echo -n "$version" > VENDOR
-			echo -n 0 > REVISION
+		if [[ "null" != "$(jq -r '.vendor' <flake.json)" ]]; then
+			jq -arg version "$version" '. + { vendor: $version }' < flake.json > 1
+			mv 1 flake.json
+			jq '. + { revision: "0" }' < flake.json > 1
+			mv 1 flake.json
       n reset
       while true; do
         if git grep sha256-aaaaa .; then
@@ -38,7 +43,8 @@ function main {
         fi
       done
 		else
-			echo -n "$version" > VERSION
+			jq -arg version "$version" '. + { version: $version }' < flake.json > 1
+			mv 1 flake.json
 		fi
 	fi
 }
