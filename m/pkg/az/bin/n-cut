@@ -16,8 +16,7 @@ function main {
 	fi
 
 	n bump
-	for a in VERSION REVISION; do if test -f "$a"; then git add -f "$a"; fi; done
-	git commit  -m "bump $(basename "$(pwd)") $(cat VERSION REVISION 2>/dev/null || true) $*"
+	git commit  -m "bump $(basename "$(pwd)") $(jq -r '"version=\(.version) vendor=\(.vendor) revision=\(.revision)"' <flake.json 2>/dev/null || true) $*"
 }
 
 source sub "$0" "$@"
