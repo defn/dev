@@ -2,5 +2,5 @@
   "slug": "pkg-kubevirt",
   "ghrepo": "kubevirt/kubevirt",
   "vendor": "0.59.0",
-  "revision": "8"
+  "revision": "9"
 }
