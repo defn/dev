@@ -22,14 +22,14 @@ function main {
 
 			local rev="$(jq -r '.version' <flake.json | cut -d. -f3-)"
 			local majmin="$(jq -r '.version' <flake.json  | cut -d. -f1-2)"
-			jq -arg version "$majmin.$((rev + 1 ))" '. + { version: $version }' < flake.json > 1
+			jq --arg version "$majmin.$((rev + 1 ))" '. + { version: $version }' < flake.json > 1
 			mv 1 flake.json
 		fi
 	else
 		local version="$1"; shift
 
 		if [[ "null" != "$(jq -r '.vendor' <flake.json)" ]]; then
-			jq -arg version "$version" '. + { vendor: $version }' < flake.json > 1
+			jq --arg version "$version" '. + { vendor: $version }' < flake.json > 1
 			mv 1 flake.json
 			jq '. + { revision: "0" }' < flake.json > 1
 			mv 1 flake.json
@@ -43,7 +43,7 @@ function main {
         fi
       done
 		else
-			jq -arg version "$version" '. + { version: $version }' < flake.json > 1
+			jq --arg version "$version" '. + { version: $version }' < flake.json > 1
 			mv 1 flake.json
 		fi
 	fi
