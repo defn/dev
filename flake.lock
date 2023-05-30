@@ -224,17 +224,17 @@
       },
       "locked": {
         "dir": "m/pkg/cloud",
-        "lastModified": 1685334479,
-        "narHash": "sha256-EKsEXc1krgJyA1C5kkP6imlFXBto16q3U3MB5F9MXxo=",
+        "lastModified": 1685478602,
+        "narHash": "sha256-6vulmJ6UxNVwVTFt228LWK+48NDOtVng27ehLTO4kmY=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "29179dc4032da39c233310504830fe662bad65fa",
+        "rev": "2bbfac623a50dd50ebb222417ef48a6fe6fb1bea",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cloud",
         "owner": "defn",
-        "ref": "pkg-cloud-0.0.98",
+        "ref": "pkg-cloud-0.0.99",
         "repo": "dev",
         "type": "github"
       }
@@ -1640,17 +1640,17 @@
       },
       "locked": {
         "dir": "m/pkg/flyctl",
-        "lastModified": 1685334027,
-        "narHash": "sha256-XmnV9V/FrUuU96J3kJB2Z0jsw5nOdj7DPyovQbbs6Mg=",
+        "lastModified": 1685478543,
+        "narHash": "sha256-LPNsRTF7auarHGcgt9WUKqTi3Rkkty9mGAUt9YZBbC4=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "a53c74b94f029f939ca9eca8e4deac5d725055b1",
+        "rev": "7fd0c4c691f6f6bede8a0d236dbc203585b66434",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/flyctl",
         "owner": "defn",
-        "ref": "pkg-flyctl-0.1.20-3",
+        "ref": "pkg-flyctl-0.1.23-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1661,17 +1661,17 @@
       },
       "locked": {
         "dir": "m/pkg/gh",
-        "lastModified": 1685334035,
-        "narHash": "sha256-tD6ZyfmSXWhGqNekiLygM0xIiDkeHhi2HVVCJN6Te70=",
+        "lastModified": 1685478572,
+        "narHash": "sha256-dADCMzuhjDLQluu8qVTcGtHSGlEwqQa7PBtbEA+YhgE=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "d8bde031732c4b23d1ea4d1e68bea95044e4d16a",
+        "rev": "d4dc5de02ef888024605bcb2b46fae3a46bd5a5b",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/gh",
         "owner": "defn",
-        "ref": "pkg-gh-2.29.0-3",
+        "ref": "pkg-gh-2.30.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1862,17 +1862,17 @@
       },
       "locked": {
         "dir": "m/pkg/localdev",
-        "lastModified": 1685334625,
-        "narHash": "sha256-NYo4fb7mRqi4F/ptxuO+cpdNnQ9jeHgPf8q3377OpQw=",
+        "lastModified": 1685478636,
+        "narHash": "sha256-MriHSk4ABY+PiFgfDXTgHkYnZeFpXnSCPi8pfsEhLrE=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "f2c52c4b58163a21ce5448283dbd8873233b98d8",
+        "rev": "ccad2f735756ca643290c8cdd4ce2c2ad56eac01",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/localdev",
         "owner": "defn",
-        "ref": "pkg-localdev-0.0.128",
+        "ref": "pkg-localdev-0.0.129",
         "repo": "dev",
         "type": "github"
       }
