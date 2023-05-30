@@ -17,6 +17,7 @@ pkg/buildevents/.direnv
 pkg/buildifier/.direnv
 pkg/buildkite/.direnv
 pkg/caddy/.direnv
+pkg/chamber/.direnv
 pkg/cilium/.direnv
 pkg/cloud/.direnv
 pkg/cloudnuke/.direnv
@@ -90,6 +91,7 @@ pkg/buildevents/result
 pkg/buildifier/result
 pkg/buildkite/result
 pkg/caddy/result
+pkg/chamber/result
 pkg/cilium/result
 pkg/cloud/result
 pkg/cloudnuke/result
