@@ -1,10 +1,10 @@
 {
   inputs = {
-    godev.url = github:defn/dev/pkg-godev-0.0.85?dir=m/pkg/godev;
+    godev.url = github:defn/dev/pkg-godev-0.0.86?dir=m/pkg/godev;
     nodedev.url = github:defn/dev/pkg-nodedev-0.0.50?dir=m/pkg/nodedev;
-    localdev.url = github:defn/dev/pkg-localdev-0.0.128?dir=m/pkg/localdev;
+    localdev.url = github:defn/dev/pkg-localdev-0.0.129?dir=m/pkg/localdev;
     development.url = github:defn/dev/pkg-development-0.0.58?dir=m/pkg/development;
-    cloud.url = github:defn/dev/pkg-cloud-0.0.98?dir=m/pkg/cloud;
+    cloud.url = github:defn/dev/pkg-cloud-0.0.99?dir=m/pkg/cloud;
     kubernetes.url = github:defn/dev/pkg-kubernetes-0.0.102?dir=m/pkg/kubernetes;
     tailscale.url = github:defn/dev/pkg-tailscale-1.42.0-3?dir=m/pkg/tailscale;
   };
