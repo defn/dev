@@ -706,17 +706,17 @@
       },
       "locked": {
         "dir": "m/pkg/kubectl",
-        "lastModified": 1685334147,
-        "narHash": "sha256-+p0juH02rtaiEbOHJs4ofdx+JgX5B0s1wdsrbOo+IyA=",
+        "lastModified": 1685591890,
+        "narHash": "sha256-H3cafwysAZZMR4hMRLw65zkWCh+9nEgZto7U3n8iv/Q=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "e489e9892952c65fe8abd9148ab2a972e48733d2",
+        "rev": "c874cea45b00ec4bad8a60caa950afba278b4ddc",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubectl",
         "owner": "defn",
-        "ref": "pkg-kubectl-1.25.9-3",
+        "ref": "pkg-kubectl-1.25.10-1",
         "repo": "dev",
         "type": "github"
       }
