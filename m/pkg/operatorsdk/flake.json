@@ -2,5 +2,5 @@
   "slug": "pkg-operatorsdk",
   "ghrepo": "operator-framework/operator-sdk",
   "vendor": "1.29.0",
-  "revision": "0"
+  "revision": "1"
 }
