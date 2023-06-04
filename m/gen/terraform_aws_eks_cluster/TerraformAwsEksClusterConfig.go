@@ -1,4 +1,3 @@
-// terraform_aws_eks_cluster
 package terraform_aws_eks_cluster
 
 import (

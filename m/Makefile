@@ -7,6 +7,7 @@ up:
 get:
 	npm install
 	npx cdktf get
+	$(MAKE) regen
 
 upgrade:
 	go get -u  ./...

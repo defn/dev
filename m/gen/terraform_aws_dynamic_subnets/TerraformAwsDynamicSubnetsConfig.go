@@ -1,4 +1,3 @@
-// terraform_aws_dynamic_subnets
 package terraform_aws_dynamic_subnets
 
 import (

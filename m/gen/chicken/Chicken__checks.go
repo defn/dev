@@ -1,6 +1,5 @@
 //go:build !no_runtime_type_checking
 
-// chicken
 package chicken
 
 import (

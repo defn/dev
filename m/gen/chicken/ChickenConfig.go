@@ -1,4 +1,3 @@
-// chicken
 package chicken
 
 import (

@@ -1,4 +1,3 @@
-// terraform_aws_vpc
 package terraform_aws_vpc
 
 import (

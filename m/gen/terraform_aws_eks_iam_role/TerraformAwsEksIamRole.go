@@ -1,4 +1,3 @@
-// terraform_aws_eks_iam_role
 package terraform_aws_eks_iam_role
 
 import (

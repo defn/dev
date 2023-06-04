@@ -1,6 +1,5 @@
 //go:build !no_runtime_type_checking
 
-// terraform_null_label
 package terraform_null_label
 
 import (

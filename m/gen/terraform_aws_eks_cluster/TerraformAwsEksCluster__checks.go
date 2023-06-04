@@ -1,6 +1,5 @@
 //go:build !no_runtime_type_checking
 
-// terraform_aws_eks_cluster
 package terraform_aws_eks_cluster
 
 import (
