@@ -51,16 +51,6 @@ update-repos:
 nix-build-all:
 	git ls-files | grep flake.nix | perl -pe 's{/?flake.nix}{}' | runmany 'mark $$1; cd ./$$1 && nix build'
 
-image:
-	earthly +build
-
-ci:
-	$(MAKE) image
-	docker run --rm -ti -v nix-cache:/cache meh "make build"
-
-shell:
-	docker run --rm -ti -v nix-data:/nix -v nix-cache:/cache meh "make build; bash -il"
-
 k3s-oidc:
 	awk -F': ' '/client-certificate-data/ {print $$2}' /etc/rancher/k3s/k3s.yaml | base64 -d > system.admin.pem && chmod 600 system.admin.pem
 	awk -F': ' '/client-key-data/ {print $$2}' /etc/rancher/k3s/k3s.yaml | base64 -d > system.admin.key && chmod 600 system.admin.key
