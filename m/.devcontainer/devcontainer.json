@@ -1,7 +1,4 @@
 {
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
   "mounts": [
     "source=work,target=/workspaces",
     "source=nix,target=/nix",

@@ -91,5 +91,8 @@ nix:
         && nix profile wipe-history \
         && nix-store --gc
 
+    RUN sudo ln -nfs /home/ubuntu/.nix-profile/bin/nix-instantiate /usr/local/bin/ \
+        && sudo ln -nfs /home/ubuntu/.nix-profile /tmp/.nix-profile
+
     COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
     RUN --no-cache sudo apt update && sudo apt upgrade -y
