@@ -82,12 +82,6 @@ def go_deps():
         sum = "h1:NXunh9lyoImCVVdFoLbRfI0tyBg17ed72PoWR8OdFS4=",
         version = "v5.0.2",
     )
-    go_repository(
-        name = "com_github_cdktf_cdktf_provider_tfe_go_tfe_v6",
-        importpath = "github.com/cdktf/cdktf-provider-tfe-go/tfe/v6",
-        sum = "h1:cQ706wd4Qf2/iRbJVydSxnkKAlSvu7fcixT+7dmcExM=",
-        version = "v6.0.2",
-    )
 
     go_repository(
         name = "com_github_census_instrumentation_opencensus_proto",
