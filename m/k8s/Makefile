@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-gen: # Generate cue schemas for k8s libraries
+build: # Generate cue schemas for k8s libraries
 	rm -rf ../cue.mod/gen
 	find . -name '*_gen.cue' | xargs rm -fv
 	for a in $$(cue export --out json -e k8s.apis | jq -r '.[]'); do \
