@@ -7,10 +7,10 @@ terraform {
   backend "s3" {
     bucket         = "defn-bootstrap-remote-state"
     key            = "terraform.tfstate"
+    encrypt        = true
     region         = "us-east-2"
     profile        = "terraform"
     dynamodb_table = "defn-bootstrap-remote-state"
-    encrypt        = true
   }
 }
 

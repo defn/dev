@@ -22,9 +22,6 @@ import (
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v14/ssoadminaccountassignment"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v14/ssoadminmanagedpolicyattachment"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v14/ssoadminpermissionset"
-
-	tfe "github.com/cdktf/cdktf-provider-tfe-go/tfe/v6/provider"
-	"github.com/cdktf/cdktf-provider-tfe-go/tfe/v6/workspace"
 )
 
 //go:embed schema/infra.cue
@@ -71,22 +68,13 @@ func jstrue() *bool {
 	return jsii.Bool(true)
 }
 
-func TfcOrganizationWorkspacesStack(scope constructs.Construct, id string) cdktf.TerraformStack {
-	stack := cdktf.NewTerraformStack(scope, js(id))
-
-	tfe.NewTfeProvider(stack, js("tfe"), &tfe.TfeProviderConfig{
-		Hostname: js("app.terraform.io"),
-	})
-
-	return stack
-}
-
 func AwsOrganizationStack(scope constructs.Construct, org *AwsOrganization) cdktf.TerraformStack {
 	stack := cdktf.NewTerraformStack(scope, js(org.Name))
 
 	aws.NewAwsProvider(stack,
 		js("aws"), &aws.AwsProviderConfig{
-			Region: js(org.Region),
+			Region:  js(org.Region),
+			Profile: js(org.Name),
 		})
 
 	organizationsorganization.NewOrganizationsOrganization(stack,
@@ -240,30 +228,25 @@ func main() {
 	app.Node().SetContext(js("excludeStackIdFromLogicalIds"), "true")
 	app.Node().SetContext(js("allowSepCharsInLogicalIds"), "true")
 
-	workspaces := TfcOrganizationWorkspacesStack(app, aws_props.Terraform.Workspace)
-	cdktf.NewCloudBackend(workspaces, &cdktf.CloudBackendConfig{
-		Hostname:     js("app.terraform.io"),
-		Organization: js(aws_props.Terraform.Organization),
-		Workspaces:   cdktf.NewNamedCloudWorkspace(js("workspaces")),
-	})
-
 	for _, org := range aws_props.Organizations {
-		// Create a tfc workspace for each stack
-		workspace.NewWorkspace(workspaces, js(org.Name), &workspace.WorkspaceConfig{
-			Name:                js(org.Name),
-			Organization:        js(aws_props.Terraform.Organization),
-			ExecutionMode:       js("local"),
-			FileTriggersEnabled: false,
-			QueueAllRuns:        false,
-			SpeculativeEnabled:  false,
-		})
-
 		// Create the aws organization + accounts stack
 		aws_org_stack := AwsOrganizationStack(app, &org)
-		cdktf.NewCloudBackend(aws_org_stack, &cdktf.CloudBackendConfig{
-			Hostname:     js("app.terraform.io"),
-			Organization: js(aws_props.Terraform.Organization),
-			Workspaces:   cdktf.NewNamedCloudWorkspace(js(org.Name)),
+
+		/*
+			cdktf.NewCloudBackend(aws_org_stack, &cdktf.CloudBackendConfig{
+				Hostname:     js("app.terraform.io"),
+				Organization: js(aws_props.Terraform.Organization),
+				Workspaces:   cdktf.NewNamedCloudWorkspace(js(org.Name)),
+			})
+		*/
+
+		cdktf.NewS3Backend(aws_org_stack, &cdktf.S3BackendConfig{
+			Bucket:        js("defn-bootstrap-remote-state"),
+			Key:           js(org.Name + "/terraform.tfstate"),
+			Encrypt:       jstrue(),
+			Region:        js("us-east-2"),
+			Profile:       js("terraform"),
+			DynamodbTable: js("defn-bootstrap-remote-state"),
 		})
 	}
 
