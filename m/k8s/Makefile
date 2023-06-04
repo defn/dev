@@ -10,4 +10,3 @@ gen: # Generate cue schemas for k8s libraries
 		rsync -ia ../cue.mod/gen/k8s.io/. ./. && rm -rf ../cue.mod/gen; \
 		git grep '"k8s.io/' */ | cut -d: -f1 | uniq | while read -r f; do perl -pe 's{"k8s.io/}{"github.com/defn/dev/m/k8s/}' -i $$f; done; \
 	done
-	(cd .. && go mod tidy)
