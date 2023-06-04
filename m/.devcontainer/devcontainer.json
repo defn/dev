@@ -7,8 +7,6 @@
     "source=home,target=/home/ubuntu",
     "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
   ],
-  "workspaceMount": "source=${localWorkspaceFolder}/.devcontainer,target=/w,type=bind,consistency=cached",
-  "workspaceFolder": "/w",
   "runArgs": [
     "--init",
     "--privileged",
