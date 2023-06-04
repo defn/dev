@@ -8,11 +8,6 @@ ops_accounts: ["ops"]
 no_accounts: []
 
 input: {
-	terraform: {
-		organization: "defn"
-		workspace:    "workspaces"
-	}
-
 	organizations: [N=string]: {
 		name:     N
 		prefix:   string | *"aws-"

@@ -3,7 +3,7 @@
     "metadata": {
       "backend": "s3",
       "stackName": "immanent",
-      "version": "0.16.1"
+      "version": "0.16.3"
     },
     "outputs": {
     }

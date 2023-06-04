@@ -1,20 +1,25 @@
-#Input: {
-    terraform: #Terraform
-	dog: #Dog
-    cat: #Cat
+package main
+
+#AwsAdmin: {
+	name:  string
+	email: string
 }
 
-#Terraform: {
-    organization: string
-    workspace: string
+#AwsOrganization: {
+	name:   string
+	region: string
+	prefix: string
+	domain: string
+	accounts: [...string]
+	admins: [...#AwsAdmin]
 }
 
-#Dog: {
-    name: string | *"dog"
+#AwsProps: {
+	terraform: #TerraformCloud
+
+	organizations: [N=string]: #AwsOrganization & {
+		name: N
+	}
 }
 
-#Cat: {
-    name: string | *"cat"
-}
-
-input: #Input
+input: #AwsProps
