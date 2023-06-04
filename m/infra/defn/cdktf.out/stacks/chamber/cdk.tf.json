@@ -1,8 +1,7 @@
 {
   "//": {
     "metadata": {
-      "backend": "cloud",
-      "cloud": "tfc",
+      "backend": "s3",
       "stackName": "chamber",
       "version": "0.16.1"
     },
@@ -28,6 +27,7 @@
   "provider": {
     "aws": [
       {
+        "profile": "chamber",
         "region": "us-west-2"
       }
     ]
@@ -43,72 +43,6 @@
         },
         "display_name": "Administrators",
         "identity_store_id": "${element(local.sso_instance_isid, 0)}"
-      }
-    },
-    "aws_identitystore_group_membership": {
-      "admin_sso_user_defn_membership": {
-        "//": {
-          "metadata": {
-            "path": "chamber/admin_sso_user_defn_membership",
-            "uniqueId": "admin_sso_user_defn_membership"
-          }
-        },
-        "group_id": "${aws_identitystore_group.administrators_sso_group.group_id}",
-        "identity_store_id": "${element(local.sso_instance_isid, 0)}",
-        "member_id": "${aws_identitystore_user.admin_sso_user_defn.user_id}"
-      },
-      "admin_sso_user_dgwyn_membership": {
-        "//": {
-          "metadata": {
-            "path": "chamber/admin_sso_user_dgwyn_membership",
-            "uniqueId": "admin_sso_user_dgwyn_membership"
-          }
-        },
-        "group_id": "${aws_identitystore_group.administrators_sso_group.group_id}",
-        "identity_store_id": "${element(local.sso_instance_isid, 0)}",
-        "member_id": "${aws_identitystore_user.admin_sso_user_dgwyn.user_id}"
-      }
-    },
-    "aws_identitystore_user": {
-      "admin_sso_user_defn": {
-        "//": {
-          "metadata": {
-            "path": "chamber/admin_sso_user_defn",
-            "uniqueId": "admin_sso_user_defn"
-          }
-        },
-        "display_name": "defn",
-        "emails": {
-          "primary": true,
-          "type": "work",
-          "value": "iam@defn.sh"
-        },
-        "identity_store_id": "${element(local.sso_instance_isid, 0)}",
-        "name": {
-          "family_name": "defn",
-          "given_name": "defn"
-        },
-        "user_name": "defn"
-      },
-      "admin_sso_user_dgwyn": {
-        "//": {
-          "metadata": {
-            "path": "chamber/admin_sso_user_dgwyn",
-            "uniqueId": "admin_sso_user_dgwyn"
-          }
-        },
-        "display_name": "dgwyn",
-        "emails": {
-          "primary": true,
-          "type": "work",
-          "value": "david@defn.sh"
-        },
-        "identity_store_id": "${element(local.sso_instance_isid, 0)}",
-        "name": {
-          "family_name": "dgwyn",
-          "given_name": "dgwyn"
-        },
-        "user_name": "dgwyn"
       }
     },
     "aws_organizations_account": {
@@ -196,11 +130,14 @@
     }
   },
   "terraform": {
-    "cloud": {
-      "hostname": "app.terraform.io",
-      "organization": "defn",
-      "workspaces": {
-        "name": "chamber"
+    "backend": {
+      "s3": {
+        "bucket": "defn-bootstrap-remote-state",
+        "dynamodb_table": "defn-bootstrap-remote-state",
+        "encrypt": true,
+        "key": "chamber/terraform.tfstate",
+        "profile": "terraform",
+        "region": "us-east-2"
       }
     },
     "required_providers": {

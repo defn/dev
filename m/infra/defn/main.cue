@@ -1,15 +1,9 @@
 package main
 
-aws_admins: [{
-	name:  "defn"
-	email: "iam@defn.sh"
-}, {
-	name:  "dgwyn"
-	email: "david@defn.sh"
-}]
+aws_admins: []
 
 full_accounts: ["ops", "net", "lib", "hub", "log", "sec", "pub", "dev", "dmz"]
-env_accounts: ["ops", "net", "lib", "hub"]
+env_accounts: ["net", "lib", "hub"]
 ops_accounts: ["ops"]
 no_accounts: []
 
