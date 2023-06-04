@@ -11,7 +11,7 @@ go_library(
         "tui.go",
     ],
     embedsrcs = ["infra.cue"],
-    importpath = "github.com/defn/dev/m/cmd/cli/command",
+    importpath = "github.com/defn/dev/m/command",
     visibility = ["//visibility:public"],
     deps = [
         "//a/demo/v1:demo",

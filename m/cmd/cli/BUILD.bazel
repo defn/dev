@@ -5,7 +5,7 @@ go_library(
     srcs = ["cli.go"],
     importpath = "github.com/defn/dev/m/cmd/cli",
     visibility = ["//visibility:private"],
-    deps = ["//cmd/cli/command"],
+    deps = ["//command"],
 )
 
 go_binary(
