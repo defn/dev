@@ -82,9 +82,6 @@ func init() {
 	// infraCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
-//go:embed infra.cue
-var infra_schema_cue string
-
 type AwsAdmin struct {
 	Name  string `json:"name"`
 	Email string `json:"email"`
