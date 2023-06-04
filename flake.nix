@@ -170,7 +170,7 @@
       dev = ''
         #docker pull quay.io/defn/dev:latest-devcontainer
         #nix develop github:defn/dev/pkg-nodedev-0.0.43?dir=m/pkg/nodedev --command devcontainer build --workspace-folder .
-        code --folder-uri "vscode-remote://dev-container+$(pwd | perl -pe 's{\s+}{}g' | xxd -p)/home/ubuntu"
+        code --folder-uri "vscode-remote://dev-container+$(pwd | perl -pe 's{\s+}{}g' | xxd -p)$(pwd | sed "s#$HOME#/home/ubuntu#")"
       '';
 
       up = ''
