@@ -92,3 +92,4 @@ nix:
         && nix-store --gc
 
     COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
+    RUN --no-cache sudo apt update && sudo apt upgrade -y
