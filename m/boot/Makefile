@@ -7,7 +7,7 @@ gen:
 get: # Generate cue schemas for k8s libraries
 	for a in $$(cat k8s.txt); do \
 		mark $$a; \
-		go get $$a; \
+		go get -u $$a; \
 		cue get go $$a; \
 	done
 
