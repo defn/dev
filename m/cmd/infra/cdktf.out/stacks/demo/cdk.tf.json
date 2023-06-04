@@ -1,9 +1,8 @@
 {
   "//": {
     "metadata": {
-      "backend": "cloud",
-      "cloud": "tfc",
-      "stackName": "gyre",
+      "backend": "s3",
+      "stackName": "demo",
       "version": "0.16.1"
     },
     "outputs": {
@@ -14,7 +13,7 @@
       "sso_instance": {
         "//": {
           "metadata": {
-            "path": "gyre/sso_instance",
+            "path": "demo/sso_instance",
             "uniqueId": "sso_instance"
           }
         }
@@ -28,6 +27,7 @@
   "provider": {
     "aws": [
       {
+        "profile": "demo",
         "region": "us-east-2"
       }
     ]
@@ -37,7 +37,7 @@
       "administrators_sso_group": {
         "//": {
           "metadata": {
-            "path": "gyre/administrators_sso_group",
+            "path": "demo/administrators_sso_group",
             "uniqueId": "administrators_sso_group"
           }
         },
@@ -49,7 +49,7 @@
       "admin_sso_user_defn_membership": {
         "//": {
           "metadata": {
-            "path": "gyre/admin_sso_user_defn_membership",
+            "path": "demo/admin_sso_user_defn_membership",
             "uniqueId": "admin_sso_user_defn_membership"
           }
         },
@@ -62,7 +62,7 @@
       "admin_sso_user_defn": {
         "//": {
           "metadata": {
-            "path": "gyre/admin_sso_user_defn",
+            "path": "demo/admin_sso_user_defn",
             "uniqueId": "admin_sso_user_defn"
           }
         },
@@ -81,15 +81,15 @@
       }
     },
     "aws_organizations_account": {
-      "gyre": {
+      "demo": {
         "//": {
           "metadata": {
-            "path": "gyre/gyre",
-            "uniqueId": "gyre"
+            "path": "demo/demo",
+            "uniqueId": "demo"
           }
         },
-        "email": "aws-gyre@defn.us",
-        "name": "gyre",
+        "email": "aws-demo@defn.us",
+        "name": "demo",
         "tags": {
           "ManagedBy": "Terraform"
         }
@@ -97,11 +97,11 @@
       "ops": {
         "//": {
           "metadata": {
-            "path": "gyre/ops",
+            "path": "demo/ops",
             "uniqueId": "ops"
           }
         },
-        "email": "aws-gyre+ops@defn.us",
+        "email": "aws-demo+ops@defn.us",
         "iam_user_access_to_billing": "ALLOW",
         "name": "ops",
         "role_name": "OrganizationAccountAccessRole",
@@ -114,7 +114,7 @@
       "organization": {
         "//": {
           "metadata": {
-            "path": "gyre/organization",
+            "path": "demo/organization",
             "uniqueId": "organization"
           }
         },
@@ -134,24 +134,24 @@
       }
     },
     "aws_ssoadmin_account_assignment": {
-      "gyre_admin_sso_account_assignment": {
+      "demo_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "gyre/gyre_admin_sso_account_assignment",
-            "uniqueId": "gyre_admin_sso_account_assignment"
+            "path": "demo/demo_admin_sso_account_assignment",
+            "uniqueId": "demo_admin_sso_account_assignment"
           }
         },
         "instance_arn": "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}",
         "permission_set_arn": "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}",
         "principal_id": "${aws_identitystore_group.administrators_sso_group.group_id}",
         "principal_type": "GROUP",
-        "target_id": "${aws_organizations_account.gyre.id}",
+        "target_id": "${aws_organizations_account.demo.id}",
         "target_type": "AWS_ACCOUNT"
       },
       "ops_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "gyre/ops_admin_sso_account_assignment",
+            "path": "demo/ops_admin_sso_account_assignment",
             "uniqueId": "ops_admin_sso_account_assignment"
           }
         },
@@ -167,7 +167,7 @@
       "admin_sso_managed_policy_attachment": {
         "//": {
           "metadata": {
-            "path": "gyre/admin_sso_managed_policy_attachment",
+            "path": "demo/admin_sso_managed_policy_attachment",
             "uniqueId": "admin_sso_managed_policy_attachment"
           }
         },
@@ -180,7 +180,7 @@
       "admin_sso_permission_set": {
         "//": {
           "metadata": {
-            "path": "gyre/admin_sso_permission_set",
+            "path": "demo/admin_sso_permission_set",
             "uniqueId": "admin_sso_permission_set"
           }
         },
@@ -194,11 +194,14 @@
     }
   },
   "terraform": {
-    "cloud": {
-      "hostname": "app.terraform.io",
-      "organization": "defn",
-      "workspaces": {
-        "name": "gyre"
+    "backend": {
+      "s3": {
+        "bucket": "defn-bootstrap-remote-state",
+        "dynamodb_table": "defn-bootstrap-remote-state",
+        "encrypt": true,
+        "key": "demo/terraform.tfstate",
+        "profile": "terraform",
+        "region": "us-east-2"
       }
     },
     "required_providers": {

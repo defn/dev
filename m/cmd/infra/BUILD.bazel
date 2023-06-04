@@ -19,8 +19,6 @@ go_library(
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v14//ssoadminaccountassignment",
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v14//ssoadminmanagedpolicyattachment",
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v14//ssoadminpermissionset",
-        "@com_github_cdktf_cdktf_provider_tfe_go_tfe_v6//provider",
-        "@com_github_cdktf_cdktf_provider_tfe_go_tfe_v6//workspace",
         "@com_github_hashicorp_terraform_cdk_go_cdktf//:cdktf",
         "@org_cuelang_go//cue",
         "@org_cuelang_go//cue/cuecontext",

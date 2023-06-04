@@ -25,7 +25,7 @@ input: {
 	}
 
 	organizations: {
-		gyre: {
+		demo: {
 			region:   "us-east-2"
 			accounts: ops_accounts
 		}
