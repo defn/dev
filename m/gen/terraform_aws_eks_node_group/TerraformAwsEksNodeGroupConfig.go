@@ -1,4 +1,3 @@
-// terraform_aws_eks_node_group
 package terraform_aws_eks_node_group
 
 import (

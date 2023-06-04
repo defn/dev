@@ -1,4 +1,3 @@
-// terraform_null_label
 package terraform_null_label
 
 import (

@@ -1,4 +1,3 @@
-// devpod
 package devpod
 
 import (

@@ -1,6 +1,5 @@
 //go:build !no_runtime_type_checking
 
-// fried_chicken
 package fried_chicken
 
 import (

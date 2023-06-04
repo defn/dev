@@ -1,6 +1,5 @@
 //go:build no_runtime_type_checking
 
-// terraform_aws_eks_iam_role
 package terraform_aws_eks_iam_role
 
 // Building without runtime type checking enabled, so all the below just return nil

@@ -31,10 +31,6 @@
       "source": "./tf/chicken"
     },
     {
-      "name": "devpod",
-      "source": "./tf/devpod"
-    },
-    {
       "name": "egg",
       "source": "./tf/egg"
     },

@@ -1,3 +1,4 @@
+// egg
 package egg
 
 import (
