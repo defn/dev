@@ -4,7 +4,7 @@ build:
 up:
 	nix develop --command tilt up --stream --port=0
 
-get:
+cdktf:
 	npm install
 	npx cdktf get
 	$(MAKE) regen
