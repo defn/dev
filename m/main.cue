@@ -1,6 +1,6 @@
-package main
+package m
 
-aws_admins: []
+aws_admins: [...{...}] | *[]
 
 full_accounts: ["ops", "net", "lib", "hub", "log", "sec", "pub", "dev", "dmz"]
 env_accounts: ["net", "lib", "hub"]
