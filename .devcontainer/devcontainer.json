@@ -1,4 +1,5 @@
 {
+  "image": "quay.io/defn/dev:latest-nix",
   "mounts": [
     "source=work,target=/workspaces",
     "source=nix,target=/nix",
