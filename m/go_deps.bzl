@@ -24,8 +24,8 @@ def go_deps():
     go_repository(
         name = "com_github_aws_constructs_go_constructs_v10",
         importpath = "github.com/aws/constructs-go/constructs/v10",
-        sum = "h1:EVSq665Sq+0jrw39zm+LGDiURokHt1BQlbwMcHXHdW4=",
-        version = "v10.2.42",
+        sum = "h1:aqHOBvzri1e4PJuoGZaCi+0/uZCE/yDcqP1pkGJ3V5o=",
+        version = "v10.2.43",
     )
     go_repository(
         name = "com_github_aws_jsii_runtime_go",
@@ -278,8 +278,8 @@ def go_deps():
     go_repository(
         name = "com_github_go_playground_validator_v10",
         importpath = "github.com/go-playground/validator/v10",
-        sum = "h1:vgvQWe3XCz3gIeFDm/HnTIbj6UGmg/+t63MyGU2n5js=",
-        version = "v10.14.0",
+        sum = "h1:9c50NUPC30zyuKprjL3vNZ0m5oG+jU0zvx4AqHGnv4k=",
+        version = "v10.14.1",
     )
 
     go_repository(
