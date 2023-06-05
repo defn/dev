@@ -24,8 +24,8 @@ filegroup(
 )
 
 filegroup(
-    name = "input_script",
-    srcs = ["input.sh"],
+    name = "aws_wrapper_script",
+    srcs = ["aws_wrapper.sh"],
 )
 
 genrule(
@@ -39,4 +39,15 @@ genrule(
     outs = ["aws_config.txt"],
     cmd = "$(location aws_config_script) $(location aws_orgs) $(location aws_accounts) $(location template_org) $(location template_account) $@",
     tools = ["aws_config_script"],
+)
+
+genrule(
+    name = "aws_wrapper",
+    srcs = [
+        "aws_config",
+        "aws_accounts",
+    ],
+    outs = ["bin"],
+    cmd = "$(location aws_wrapper_script) $(location aws_config) $(location aws_accounts) $@",
+    tools = ["aws_wrapper_script"],
 )
