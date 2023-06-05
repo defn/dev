@@ -21,7 +21,7 @@
     defaultPackage = ctx: ctx.wrap.nullBuilder {
       propagatedBuildInputs =
         let
-          flakeInputs = [
+          flakeInputs = with ctx.pkgs; [
             inputs.tilt.defaultPackage.${ctx.system}
             inputs.nomad.defaultPackage.${ctx.system}
             inputs.boundary.defaultPackage.${ctx.system}
@@ -35,6 +35,7 @@
             inputs.honeymarker.defaultPackage.${ctx.system}
             inputs.honeytail.defaultPackage.${ctx.system}
             inputs.kuma.defaultPackage.${ctx.system}
+            skopeo
           ];
         in
         flakeInputs ++ ctx.commands;
