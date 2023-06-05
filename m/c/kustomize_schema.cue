@@ -1,7 +1,7 @@
 package c
 
 import (
-	batch "github.com/defn/dev/m/boot/k8s/api/batch/v1"
+	batch "github.com/defn/dev/m/k8s/api/batch/v1"
 )
 
 kustomize: [string]: #KustomizeHelm | #KustomizeVCluster | #Kustomize
