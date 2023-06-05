@@ -1,0 +1,5 @@
+# org iam user admin
+[profile ORG]
+credential_process=aws-vault exec ORG --json
+region=REGION
+
