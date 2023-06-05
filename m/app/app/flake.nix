@@ -5,7 +5,7 @@
     nodedev.url = github:defn/dev/pkg-nodedev-0.0.50?dir=m/pkg/nodedev;
     cloud.url = github:defn/dev/pkg-cloud-0.0.100?dir=m/pkg/cloud;
     kubernetes.url = github:defn/dev/pkg-kubernetes-0.0.104?dir=m/pkg/kubernetes;
-    localdev.url = github:defn/dev/pkg-localdev-0.0.130?dir=m/pkg/localdev;
+    localdev.url = github:defn/dev/pkg-localdev-0.0.131?dir=m/pkg/localdev;
     latest.url = github:NixOS/nixpkgs?rev=64c27498901f104a11df646278c4e5c9f4d642db;
   };
 
