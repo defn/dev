@@ -38,7 +38,7 @@ function main {
         if git grep sha256-aaaaa .; then
           n sha
         else
-          git diff flake.nix
+          env GIT_PAGER=cat it diff flake.nix
           break
         fi
       done
