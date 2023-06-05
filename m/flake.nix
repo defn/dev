@@ -2,7 +2,7 @@
   inputs = {
     godev.url = github:defn/dev/pkg-godev-0.0.86?dir=m/pkg/godev;
     nodedev.url = github:defn/dev/pkg-nodedev-0.0.50?dir=m/pkg/nodedev;
-    localdev.url = github:defn/dev/pkg-localdev-0.0.130?dir=m/pkg/localdev;
+    localdev.url = github:defn/dev/pkg-localdev-0.0.131?dir=m/pkg/localdev;
     development.url = github:defn/dev/pkg-development-0.0.58?dir=m/pkg/development;
     cloud.url = github:defn/dev/pkg-cloud-0.0.100?dir=m/pkg/cloud;
     kubernetes.url = github:defn/dev/pkg-kubernetes-0.0.104?dir=m/pkg/kubernetes;
@@ -28,9 +28,6 @@
           inputs.cloud.defaultPackage.${ctx.system}
           inputs.kubernetes.defaultPackage.${ctx.system}
           inputs.tailscale.defaultPackage.${ctx.system}
-          skopeo
-          gron
-          direnv
           bashInteractive
         ]
         ++ ctx.commands
