@@ -5,6 +5,9 @@ mkdir -p "$3"
 
 cat "$2" | while read -r org acc id; do
     if [[ -z "$org" ]]; then continue; fi
+
+    echo "wrapper: $org $acc $id" 1>&2
+
     exe="$3/$org-$acc"
     cat <<EOF > "$exe"
 #!/bin/bash

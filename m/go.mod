@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	cuelang.org/go v0.5.0
-	github.com/aws/constructs-go/constructs/v10 v10.2.42
+	github.com/aws/constructs-go/constructs/v10 v10.2.43
 	github.com/aws/jsii-runtime-go v1.82.0
 	github.com/bufbuild/connect-go v1.8.0
 	github.com/cdktf/cdktf-provider-aws-go/aws/v14 v14.0.4
@@ -33,7 +33,7 @@ require (
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-playground/validator/v10 v10.14.0 // indirect
+	github.com/go-playground/validator/v10 v10.14.1 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
