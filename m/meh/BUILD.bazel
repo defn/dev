@@ -3,6 +3,7 @@ load(":cue.bzl", "cue")
 cue(
     name = "testing",
     srcs = ["main.cue"],
+    expr = "input",
 )
 
 filegroup(
