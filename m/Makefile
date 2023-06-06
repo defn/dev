@@ -1,4 +1,7 @@
 build:
+	bazel build //cmd/cli:cli
+
+all:
 	bazel build //...
 
 up:
