@@ -180,3 +180,4 @@ go
 .X*
 .serverauth*
 .cmake
+.dotfiles
