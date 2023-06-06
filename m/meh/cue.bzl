@@ -1,14 +1,20 @@
 """
 """
 
-def cue(file_name):
-    """Does something with cue
+def _cue_impl(ctx):
+    out = ctx.actions.declare_file(ctx.label.name)
+    ctx.actions.write(
+        output = out,
+        content = "Hello\n",
+    )
+    return [DefaultInfo(files = depset([out]))]
 
-    Args:
-        file_name: argument description, can be
-            multiline with additional indentation.
+_cue = rule(
+    implementation = _cue_impl,
+    attrs = {
+        "srcs": attr.label_list(allow_files = [".cue"]),
+    },
+)
 
-    Returns:
-        Something
-    """
-    return [file_name]
+def cue(name, srcs = [], **kwargs):
+    _cue(name = name, srcs = srcs, **kwargs)
