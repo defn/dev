@@ -6,7 +6,7 @@ def _cue_impl(ctx):
     input_paths = [c.path for c in ctx.files.srcs]
 
     ctx.actions.run(
-        arguments = ["-c", "{} export --out=json -e {} {} > {}".format(
+        arguments = ["-c", "{} export --out=json {} {} > {}".format(
             "/nix/store/b9k9jniljz0ifn5l3nfs5cz6vlh96i43-pkg-cue-0.5.0-7/bin/cue",
             ctx.attr.expr,
             " ".join(input_paths),

@@ -1,0 +1,3 @@
+package meh
+
+goodbye: "world"

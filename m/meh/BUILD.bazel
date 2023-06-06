@@ -2,8 +2,7 @@ load("//meh:cue.bzl", "cue")
 
 cue(
     name = "testing",
-    srcs = ["main.cue"],
-    expr = "input",
+    srcs = glob(["*.cue"]),
 )
 
 filegroup(
