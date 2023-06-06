@@ -1,4 +1,4 @@
-load(":cue.bzl", "cue")
+load("//meh:cue.bzl", "cue")
 
 cue(
     name = "testing",
