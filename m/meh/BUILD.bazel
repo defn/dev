@@ -1,6 +1,8 @@
+load(":cue.bzl", "cue")
+
 filegroup(
     name = "aws_orgs",
-    srcs = ["aws_orgs.txt"],
+    srcs = cue("aws_orgs.txt"),
 )
 
 filegroup(
