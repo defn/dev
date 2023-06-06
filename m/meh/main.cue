@@ -1,3 +1,3 @@
 package meh
 
-input: hello: "world"
+hello: "world"
