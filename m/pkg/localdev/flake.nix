@@ -3,10 +3,10 @@
     tilt.url = github:defn/dev/pkg-tilt-0.32.4-3?dir=m/pkg/tilt;
     nomad.url = github:defn/dev/pkg-nomad-1.5.6-3?dir=m/pkg/nomad;
     boundary.url = github:defn/dev/pkg-boundary-0.12.2-9?dir=m/pkg/boundary;
-    vault.url = github:defn/dev/pkg-vault-1.13.2-4?dir=m/pkg/vault;
+    vault.url = github:defn/dev/pkg-vault-1.13.3-1?dir=m/pkg/vault;
     gh.url = github:defn/dev/pkg-gh-2.30.0-1?dir=m/pkg/gh;
-    earthly.url = github:defn/dev/pkg-earthly-0.7.7-1?dir=m/pkg/earthly;
-    buildkite.url = github:defn/dev/pkg-buildkite-3.47.0-3?dir=m/pkg/buildkite;
+    earthly.url = github:defn/dev/pkg-earthly-0.7.8-1?dir=m/pkg/earthly;
+    buildkite.url = github:defn/dev/pkg-buildkite-3.48.0-1?dir=m/pkg/buildkite;
     bk.url = github:defn/dev/pkg-bk-2.0.0-10?dir=m/pkg/bk;
     buildevents.url = github:defn/dev/pkg-buildevents-0.13.0-9?dir=m/pkg/buildevents;
     honeyvent.url = github:defn/dev/pkg-honeyvent-1.1.3-9?dir=m/pkg/honeyvent;
