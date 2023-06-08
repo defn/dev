@@ -48,17 +48,17 @@
       },
       "locked": {
         "dir": "m/pkg/awscli",
-        "lastModified": 1685761160,
-        "narHash": "sha256-GiQVJdKdUkAOVSTgkqlWaPMqZQzDbn9xlBzpMLokRes=",
+        "lastModified": 1686193297,
+        "narHash": "sha256-2v0hx6+FcwypPJT3t3q02B1YZEsi0pcod8X3nhk8SY8=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "ad137c164e30df9db0933d510e866082674595f4",
+        "rev": "181fbaa02af7acd9bb81af2645e0e5ba8f9e575a",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/awscli",
         "owner": "defn",
-        "ref": "pkg-awscli-2.11.25-1",
+        "ref": "pkg-awscli-2.11.26-1",
         "repo": "dev",
         "type": "github"
       }
@@ -195,17 +195,17 @@
       },
       "locked": {
         "dir": "m/pkg/buildkite",
-        "lastModified": 1685333508,
-        "narHash": "sha256-M4NmUvrDTI5Ay/4IGmf6lxH3Od5rvQxL/QRkklyHHKU=",
+        "lastModified": 1686193742,
+        "narHash": "sha256-mL9amAnJp3mdMtY3Eh1Z3jcrF3PrA7PXyG1Rj90XPWI=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "d9790ab83388e36b90bce7dcabf9265b15fc116f",
+        "rev": "5dc8aef3180a42ab978f8f3c91b83db7323608b0",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buildkite",
         "owner": "defn",
-        "ref": "pkg-buildkite-3.47.0-3",
+        "ref": "pkg-buildkite-3.48.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -263,17 +263,17 @@
       },
       "locked": {
         "dir": "m/pkg/cloud",
-        "lastModified": 1685761425,
-        "narHash": "sha256-mG+SQKbnQPLrjX2o+tmE5tpezbnm9o3r1sRNx+2PNIU=",
+        "lastModified": 1686193901,
+        "narHash": "sha256-QhDPMS+IXuJKOqG/DfUc3qM9/bWG7Ep+JjF1n4GGZWA=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "9c2deb076728f3929225a2835ef57f12a8ef531e",
+        "rev": "3252f52fb892e9b7b68608da1019c39752bdf9fd",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cloud",
         "owner": "defn",
-        "ref": "pkg-cloud-0.0.100",
+        "ref": "pkg-cloud-0.0.101",
         "repo": "dev",
         "type": "github"
       }
@@ -1230,17 +1230,17 @@
       },
       "locked": {
         "dir": "m/pkg/earthly",
-        "lastModified": 1685761215,
-        "narHash": "sha256-/p5sOaKjFW1oEK9ji6mPwhEIoXT+sj5a/JXn38T7a8g=",
+        "lastModified": 1686193761,
+        "narHash": "sha256-2ssRj8X1ADUUH/RpEMMpwnkU/bzGauDtHJyGAEWrSYA=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "20d49c05b1ae035cd48e1ab64d6d7c33816c56f2",
+        "rev": "dfd96a3573ee40a01dbd66865cf75c78d3aaccc3",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/earthly",
         "owner": "defn",
-        "ref": "pkg-earthly-0.7.7-1",
+        "ref": "pkg-earthly-0.7.8-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1907,17 +1907,17 @@
       },
       "locked": {
         "dir": "m/pkg/flyctl",
-        "lastModified": 1685761244,
-        "narHash": "sha256-1BxsWheQ7BlhRzrLn5e28DB9t1HZTszZcvsIUVPGS9k=",
+        "lastModified": 1686193780,
+        "narHash": "sha256-y7DEpmAeUMpQMeG6qqit7IUeY/rj+7GDT/zyflFPISk=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "84334c0fdd6bc299dee0b597b8d44accc7591870",
+        "rev": "42b60a280c41d33c888297bd25d159f1f3409d01",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/flyctl",
         "owner": "defn",
-        "ref": "pkg-flyctl-0.1.26-1",
+        "ref": "pkg-flyctl-0.1.31-1",
         "repo": "dev",
         "type": "github"
       }
@@ -2345,17 +2345,17 @@
       },
       "locked": {
         "dir": "m/pkg/localdev",
-        "lastModified": 1685935352,
-        "narHash": "sha256-uNwY7mLESbLtiJBwHtANjZdtEJEjWRIpNEIL8jiRXRU=",
+        "lastModified": 1686193932,
+        "narHash": "sha256-FyGhU3yeHVl2xSOm0ZhYRLXlIlYcOBSyC0URUZ06rjY=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "8f5955eb695a6c6f3bfbfc6f93aca60df97b5618",
+        "rev": "3de6dfdd1875d834b1f37807caa2e4c70a697135",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/localdev",
         "owner": "defn",
-        "ref": "pkg-localdev-0.0.131",
+        "ref": "pkg-localdev-0.0.132",
         "repo": "dev",
         "type": "github"
       }
@@ -4063,17 +4063,17 @@
       },
       "locked": {
         "dir": "m/pkg/vault",
-        "lastModified": 1685334328,
-        "narHash": "sha256-CfdRQp9a4qumqBlBbJL73O0mqvNogMl4R7pnAqlyj34=",
+        "lastModified": 1686193801,
+        "narHash": "sha256-yhs7PFdMegPzM2zah2lpK0bLL3u3UpKmIDsL0e1yhro=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "a1509e00e8d35c875ee444945f43b455206307b3",
+        "rev": "fe2249df7016eae72cf5ad54173c83e0a6d4e87a",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/vault",
         "owner": "defn",
-        "ref": "pkg-vault-1.13.2-4",
+        "ref": "pkg-vault-1.13.3-1",
         "repo": "dev",
         "type": "github"
       }
