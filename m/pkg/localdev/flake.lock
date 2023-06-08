@@ -69,17 +69,17 @@
       },
       "locked": {
         "dir": "m/pkg/buildkite",
-        "lastModified": 1685333508,
-        "narHash": "sha256-M4NmUvrDTI5Ay/4IGmf6lxH3Od5rvQxL/QRkklyHHKU=",
+        "lastModified": 1686193742,
+        "narHash": "sha256-mL9amAnJp3mdMtY3Eh1Z3jcrF3PrA7PXyG1Rj90XPWI=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "d9790ab83388e36b90bce7dcabf9265b15fc116f",
+        "rev": "5dc8aef3180a42ab978f8f3c91b83db7323608b0",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buildkite",
         "owner": "defn",
-        "ref": "pkg-buildkite-3.47.0-3",
+        "ref": "pkg-buildkite-3.48.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -376,17 +376,17 @@
       },
       "locked": {
         "dir": "m/pkg/earthly",
-        "lastModified": 1685761215,
-        "narHash": "sha256-/p5sOaKjFW1oEK9ji6mPwhEIoXT+sj5a/JXn38T7a8g=",
+        "lastModified": 1686193761,
+        "narHash": "sha256-2ssRj8X1ADUUH/RpEMMpwnkU/bzGauDtHJyGAEWrSYA=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "20d49c05b1ae035cd48e1ab64d6d7c33816c56f2",
+        "rev": "dfd96a3573ee40a01dbd66865cf75c78d3aaccc3",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/earthly",
         "owner": "defn",
-        "ref": "pkg-earthly-0.7.7-1",
+        "ref": "pkg-earthly-0.7.8-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1250,17 +1250,17 @@
       },
       "locked": {
         "dir": "m/pkg/vault",
-        "lastModified": 1685334328,
-        "narHash": "sha256-CfdRQp9a4qumqBlBbJL73O0mqvNogMl4R7pnAqlyj34=",
+        "lastModified": 1686193801,
+        "narHash": "sha256-yhs7PFdMegPzM2zah2lpK0bLL3u3UpKmIDsL0e1yhro=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "a1509e00e8d35c875ee444945f43b455206307b3",
+        "rev": "fe2249df7016eae72cf5ad54173c83e0a6d4e87a",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/vault",
         "owner": "defn",
-        "ref": "pkg-vault-1.13.2-4",
+        "ref": "pkg-vault-1.13.3-1",
         "repo": "dev",
         "type": "github"
       }
