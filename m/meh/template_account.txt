@@ -1,0 +1,19 @@
+# member iam role admin
+[profile ORG-MEMBER]
+source_profile=ORG
+role_arn=arn:aws:iam::ACCOUNT_ID:role/OrganizationAccountAccessRole
+region=REGION
+
+# sso login
+[profile ORG-MEMBER-sso]
+credential_process=aws-vault exec ORG-MEMBER-sso-source --json
+region=REGION
+
+# credential source for sso login
+[profile ORG-MEMBER-sso-source]
+sso_start_url=URL
+sso_role_name=Administrator
+sso_account_id=ACCOUNT_ID
+sso_region=REGION
+region=REGION
+

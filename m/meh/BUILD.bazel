@@ -1,0 +1,60 @@
+load("//meh:cue.bzl", "cue")
+
+cue(
+    name = "testing",
+    srcs = glob(["*.cue"]),
+)
+
+filegroup(
+    name = "aws_orgs",
+    srcs = ["aws_orgs.txt"],
+)
+
+filegroup(
+    name = "aws_accounts",
+    srcs = ["aws_accounts.txt"],
+)
+
+filegroup(
+    name = "template_org",
+    srcs = ["template_org.txt"],
+)
+
+filegroup(
+    name = "template_account",
+    srcs = ["template_account.txt"],
+)
+
+filegroup(
+    name = "aws_config_script",
+    srcs = ["aws_config.sh"],
+)
+
+filegroup(
+    name = "aws_wrapper_script",
+    srcs = ["aws_wrapper.sh"],
+)
+
+genrule(
+    name = "aws_config",
+    srcs = [
+        "aws_orgs",
+        "aws_accounts",
+        "template_org",
+        "template_account",
+    ],
+    outs = ["aws_config.txt"],
+    cmd = "$(location aws_config_script) $(location aws_orgs) $(location aws_accounts) $(location template_org) $(location template_account) $@",
+    tools = ["aws_config_script"],
+)
+
+genrule(
+    name = "aws_wrapper",
+    srcs = [
+        "aws_config",
+        "aws_accounts",
+    ],
+    outs = ["bin"],
+    cmd = "$(location aws_wrapper_script) $(location aws_config) $(location aws_accounts) $@",
+    tools = ["aws_wrapper_script"],
+)

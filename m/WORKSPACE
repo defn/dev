@@ -35,12 +35,24 @@ http_archive(
     ],
 )
 
+http_archive(
+    name = "io_tweag_rules_nixpkgs",
+    sha256 = "b01f170580f646ee3cde1ea4c117d00e561afaf3c59eda604cf09194a824ff10",
+    strip_prefix = "rules_nixpkgs-0.9.0",
+    urls = ["https://github.com/tweag/rules_nixpkgs/archive/refs/tags/v0.9.0.tar.gz"],
+)
+
 # load
 load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
 load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
 load("@rules_buf//buf:repositories.bzl", "rules_buf_dependencies", "rules_buf_toolchains")
 load("@rules_buf//gazelle/buf:repositories.bzl", "gazelle_buf_dependencies")
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+
+# nix
+load("@io_tweag_rules_nixpkgs//nixpkgs:repositories.bzl", "rules_nixpkgs_dependencies")
+
+rules_nixpkgs_dependencies()
 
 # tools
 go_register_toolchains(version = "1.20.3")
