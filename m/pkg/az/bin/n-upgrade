@@ -6,21 +6,21 @@ function main {
 	git ls-files | grep flake.nix | perl -pe 's{/?flake.nix}{}' | while read -r d; do
 		(
 			cd "./$d"
-			git grep 'url = github' flake.nix | perl -pe 's{.*?github:}{}; s{(\w+/\w+)/}{$1 }; s{[?;].*}{}; chomp; s{(\S+)}{${_}$2}; s{-\d\S+$}{-}; s{\.\d+$}{.}; s{$}{\n}' | \
+			git grep 'url = github' flake.nix | perl -pe 's{.*?github:}{}; s{(\w+/\w+)/}{$1 }; s{[?;].*}{}; chomp; s{(\S+)}{${_}$2}; s{-\d\S+$}{-}; s{\.\d+$}{.}; s{$}{\n}' |
 				while read -r repo tag prefix; do
 					echo "$repo $tag $prefix" 1>&2
 					mkdir -p "/tmp/tags/$repo"
 					if ! test -f "/tmp/tags/$repo/tags.json"; then
 						curl -sSL "https://$(cat ~/.config/gh/hosts.yml | yq -r '.["github.com"].user'):$(gh auth token)@api.github.com/repos/$repo/git/refs/tags" \
-							> "/tmp/tags/$repo/tags.json"
+							>"/tmp/tags/$repo/tags.json"
 					fi
-					echo $repo $tag "$(cat "/tmp/tags/$repo/tags.json" | jq -r '.[].ref' | grep refs/tags | perl -pe 's{refs/tags/}{}' | grep "^$prefix" | egrep -v '[-](rc|beta)'| tail -1)"
+					echo $repo $tag "$(cat "/tmp/tags/$repo/tags.json" | jq -r '.[].ref' | grep refs/tags | perl -pe 's{refs/tags/}{}' | grep "^$prefix" | egrep -v '[-](rc|beta)' | tail -1)"
 				done | while read -r repo tag latest; do
-					if [[ -n "$latest" ]]; then
-						echo "$repo $tag $latest" 1>&2
-						perl -pe "s{github:$repo/$tag}{github:$repo/$latest}" -i flake.nix
-					fi
-				done
+				if [[ -n $latest ]]; then
+					echo "$repo $tag $latest" 1>&2
+					perl -pe "s{github:$repo/$tag}{github:$repo/$latest}" -i flake.nix
+				fi
+			done
 		)
 	done
 }

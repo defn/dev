@@ -7,6 +7,21 @@ plugins:
       ref: v0.0.17
       uri: https://github.com/trunk-io/plugins
 lint:
+  ignore:
+    - linters: [ALL]
+      paths:
+        - m/tf/terraform-*/**
+        - m/**/main.tf.json
+        - m/gen/**
+        - m/**/cdktf.out/**
+        - m/**/*.gen.yaml
+        - m/r/**
+        - m/e/**
+        - m/k/*/kustomization.yaml
+        - m/k/*/resource-*.yaml
+        - m/k/*/patch-*.yaml
+        - m/k/**/local/**
+        - m/**/*_go_gen.cue
   enabled:
     - actionlint@1.6.24
     - black@23.3.0
@@ -19,7 +34,7 @@ lint:
     - hadolint@2.12.0
     - isort@5.12.0
     - markdownlint@0.34.0
-    - nixpkgs-fmt@1.3.0
+    #- nixpkgs-fmt@1.3.0
     - oxipng@8.0.0
     - prettier@2.8.8
     - ruff@0.0.265

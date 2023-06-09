@@ -3,7 +3,7 @@
 function main {
 	set -efu
 
-    cachix push "$@"
+	cachix push "$@"
 }
 
 source sub "$0" "$@"

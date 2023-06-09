@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 
 function main {
-  set -exfu
+	set -exfu
 
-  if [[ "$(whoami)" == "ubuntu" ]]; then
-    exec sudo "$0" "$@"
-    return $?
-  fi
+	if [[ "$(whoami)" == "ubuntu" ]]; then
+		exec sudo "$0" "$@"
+		return $?
+	fi
 
-  local aptget="env DEBIAN_FRONTEND=noninteractive apt-get"
+	local aptget="env DEBIAN_FRONTEND=noninteractive apt-get"
 
-  $aptget update
-  $aptget upgrade -y
+	$aptget update
+	$aptget upgrade -y
 
-  sync
+	sync
 }
 
 main "$@"

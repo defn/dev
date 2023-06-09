@@ -10,17 +10,17 @@ function main {
 		case "${1:-}" in
 		login)
 			shift
-			if [[ "$#" -gt 0 ]]; then set -- -q "$*"; fi
+			if [[ $# -gt 0 ]]; then set -- -q "$*"; fi
 			local profile="$(aws-vault list | tail -n +2 | grep -v ^- | awk '{print $1}' | grep 'sso$' | fzf "$@")"
-			if [[ -n "${profile}" ]]; then
+			if [[ -n ${profile} ]]; then
 				aws-vault login "${profile}"
 			fi
 			;;
 		bash)
 			shift
-			if [[ "$#" -gt 0 ]]; then set -- -q "$*"; fi
+			if [[ $# -gt 0 ]]; then set -- -q "$*"; fi
 			local profile="$(aws-vault list | tail -n +2 | grep -v ^- | awk '{print $1}' | grep 'sso$' | fzf "$@")"
-			if [[ -n "${profile}" ]]; then
+			if [[ -n ${profile} ]]; then
 				aws-vault exec "${profile}" bash
 			fi
 			;;

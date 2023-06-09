@@ -1,61 +1,71 @@
 #!/usr/bin/env bash
 
 function main {
-  set -exfu
+	set -exfu
 
-  if [[ "$(whoami)" == "ubuntu" ]]; then
-    exec sudo "$0" "$@"
-    return $?
-  fi
+	if [[ "$(whoami)" == "ubuntu" ]]; then
+		exec sudo "$0" "$@"
+		return $?
+	fi
 
-  export DEBIAN_FRONTEND=noninteractive
+	export DEBIAN_FRONTEND=noninteractive
 
-  apt-get update \
-      && apt-get upgrade -y \
-      && apt-get install -y --no-install-recommends \
-      apt-transport-https software-properties-common \
-      openssh-client openssh-server tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip xz-utils rsync \
-      sudo git vim less fzf jo gron jq \
-      build-essential make tini python3-pip python3-venv entr \
-      gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 libolm-dev \
-      xdg-utils figlet lolcat socat netcat-openbsd groff \
-      screen htop \
-      redis \
-      wireguard-tools #linux-generic-hwe-20.04
+	apt-get update &&
+		apt-get upgrade -y &&
+		apt-get install -y --no-install-recommends \
+			apt-transport-https software-properties-common \
+			openssh-client openssh-server tzdata locales iputils-ping iproute2 net-tools dnsutils curl wget unzip xz-utils rsync \
+			sudo git vim less fzf jo gron jq \
+			build-essential make tini python3-pip python3-venv entr \
+			gpg pass pass-extension-otp git-crypt oathtool libusb-1.0-0 libolm-dev \
+			xdg-utils figlet lolcat socat netcat-openbsd groff \
+			screen htop \
+			redis \
+			wireguard-tools #linux-generic-hwe-20.04
 
-  apt-get purge -y nano
+	apt-get purge -y nano
 
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
-      && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu focal stable" | tee /etc/apt/sources.list.d/docker.list \
-      && apt-get update \
-      && apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg &&
+		echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu focal stable" | tee /etc/apt/sources.list.d/docker.list &&
+		apt-get update &&
+		apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
-  apt update && apt upgrade -y
-  ln -sf /usr/share/zoneinfo/UTC /etc/localtime \
-      && dpkg-reconfigure -f noninteractive tzdata \
-      && locale-gen en_US.UTF-8 \
-      && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+	apt update && apt upgrade -y
+	ln -sf /usr/share/zoneinfo/UTC /etc/localtime &&
+		dpkg-reconfigure -f noninteractive tzdata &&
+		locale-gen en_US.UTF-8 &&
+		localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
-  rm -f /usr/bin/gs
+	rm -f /usr/bin/gs
 
-  ln -nfs /usr/bin/git-crypt /usr/local/bin/
+	ln -nfs /usr/bin/git-crypt /usr/local/bin/
 
-  mkdir -p /etc/systemd/network
-  pushd /etc/systemd/network
-  for a in 1; do
-    (echo [NetDev]; echo Name=dummy$a; echo Kind=dummy) | tee dummy$a.netdev
-    (echo [Match]; echo Name=dummy$a; echo; echo [Network]; echo Address=169.254.32.$a/32) | tee dummy$a.network
+	mkdir -p /etc/systemd/network
+	pushd /etc/systemd/network
+	for a in 1; do
+		(
+			echo [NetDev]
+			echo Name=dummy$a
+			echo Kind=dummy
+		) | tee dummy$a.netdev
+		(
+			echo [Match]
+			echo Name=dummy$a
+			echo
+			echo [Network]
+			echo Address=169.254.32.$a/32
+		) | tee dummy$a.network
 
-  done
-  systemctl restart systemd-networkd
-  ip a
+	done
+	systemctl restart systemd-networkd
+	ip a
 
-  groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
-  usermod --groups docker --append ubuntu
-  install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
-  echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu
+	groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
+	usermod --groups docker --append ubuntu
+	install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
+	echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' >/etc/sudoers.d/ubuntu
 
-  install -m 0700 -d -o ubuntu -g ubuntu /mnt/work
+	install -m 0700 -d -o ubuntu -g ubuntu /mnt/work
 }
 
 main "$@"

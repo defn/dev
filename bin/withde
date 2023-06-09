@@ -2,7 +2,8 @@
 
 set -efu
 
-chdir="$1"; shift
+chdir="$1"
+shift
 
 cd "$chdir"
 

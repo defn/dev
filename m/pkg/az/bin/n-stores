@@ -3,14 +3,14 @@
 function main {
 	set -efu
 
-    (
-        nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)'
-        nix build --json | jq -r '.[].outputs | to_entries[].value'
+	(
+		nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)'
+		nix build --json | jq -r '.[].outputs | to_entries[].value'
 
-        if [[ "$(uname -s)" == "Linux" ]] ; then
-            nix-store --query --requisites --include-outputs $(nix path-info --derivation)
-        fi
-    ) | sort -u
+		if [[ "$(uname -s)" == "Linux" ]]; then
+			nix-store --query --requisites --include-outputs $(nix path-info --derivation)
+		fi
+	) | sort -u
 }
 
 source sub "$0" "$@"

@@ -3,7 +3,7 @@
 function main {
 	set -efu
 
-	if git log --pretty="%h %d %s" . | head -1  | egrep ' \(tag: |, tag: '; then
+	if git log --pretty="%h %d %s" . | head -1 | egrep ' \(tag: |, tag: '; then
 		return 1
 	else
 		return 0

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 gm="$(type -P gum)"
-if [[ -x "${gm}" ]]; then
-	gm="gum style --width 40 --border normal --margin 1 --padding \"1 2\" --border-foreground 212"
+if [[ -x ${gm} ]]; then
+	gm='gum style --width 40 --border normal --margin 1 --padding "1 2" --border-foreground 212'
 else
 	gm="echo"
 fi
@@ -12,8 +12,8 @@ m="${m// /\\ }"
 
 echo
 case "${1:-}" in
-	*)
-		eval $gm "$m"
-		;;
+*)
+	eval $gm "$m"
+	;;
 esac
 echo

@@ -2,109 +2,115 @@
 
 function main {
 	case "${1:-}" in
-		role)
+	role)
+		shift
+		local role="$1"
+		shift
+		set $(kv issue admin.gyre.defn.dev 1m "$(mktemp -d -t XXXXXX)") "$@"
+
+		# TODO ensure cert, key are certificates
+		local cert="$1"
+		shift
+		local key="$1"
+		shift
+
+		if [[ $# == 0 ]]; then
+			aws_signing_helper credential-process \
+				--certificate "$cert" --private-key "$key" \
+				--trust-anchor-arn arn:aws:rolesanywhere:us-east-1:319951235442:trust-anchor/bcfd2f6f-388e-4cf8-a753-75238af6ada6 \
+				--profile-arn arn:aws:rolesanywhere:us-east-1:319951235442:profile/f903c6fc-931e-4163-bc62-6e44252526ac \
+				--role-arn "$role"
+			rm -f "$cert" "$key"
+		else
+			local tmp="$(mktemp -d -t XXXXXX)"
+
+			aws_signing_helper credential-process \
+				--certificate "$cert" --private-key "$key" \
+				--trust-anchor-arn arn:aws:rolesanywhere:us-east-1:319951235442:trust-anchor/bcfd2f6f-388e-4cf8-a753-75238af6ada6 \
+				--profile-arn arn:aws:rolesanywhere:us-east-1:319951235442:profile/f903c6fc-931e-4163-bc62-6e44252526ac \
+				--role-arn "$role" >"$tmp/creds.json"
+			rm -f "$cert" "$key"
+
+			export AWS_ACCESS_KEY_ID="$(cat "$tmp/creds.json" | jq -r .AccessKeyId)"
+			export AWS_SECRET_ACCESS_KEY="$(cat "$tmp/creds.json" | jq -r .SecretAccessKey)"
+			export AWS_SESSION_TOKEN="$(cat "$tmp/creds.json" | jq -r .SessionToken)"
+			export AWS_EXPIRATION="$(cat "$tmp/creds.json" | jq -r .Expiration)"
+			rm -f "$tmp/creds.json"
+
+			exec "$@"
+		fi
+
+		;;
+	issue)
+		shift
+		local cn="$1"
+		shift
+		local ttl="$1"
+		shift
+
+		local issue="${cn#*.}"
+
+		if [[ -n ${1:-} ]]; then
+			local tmp="$1"
 			shift
-			local role="$1"; shift
-			set $(kv issue admin.gyre.defn.dev 1m "$(mktemp -d -t XXXXXX)") "$@"
 
-			# TODO ensure cert, key are certificates
-			local cert="$1"; shift
-			local key="$1"; shift
+			local cert="cert"
 
-			if [[ "$#" == 0 ]]; then
-				aws_signing_helper credential-process \
-					--certificate "$cert" --private-key "$key" \
-					--trust-anchor-arn arn:aws:rolesanywhere:us-east-1:319951235442:trust-anchor/bcfd2f6f-388e-4cf8-a753-75238af6ada6 \
-					--profile-arn arn:aws:rolesanywhere:us-east-1:319951235442:profile/f903c6fc-931e-4163-bc62-6e44252526ac \
-					--role-arn "$role"
-				rm -f "$cert" "$key"
-			else
-				local tmp="$(mktemp -d -t XXXXXX)"
-
-				aws_signing_helper credential-process \
-					--certificate "$cert" --private-key "$key" \
-					--trust-anchor-arn arn:aws:rolesanywhere:us-east-1:319951235442:trust-anchor/bcfd2f6f-388e-4cf8-a753-75238af6ada6 \
-					--profile-arn arn:aws:rolesanywhere:us-east-1:319951235442:profile/f903c6fc-931e-4163-bc62-6e44252526ac \
-					--role-arn "$role" > "$tmp/creds.json"
-				rm -f "$cert" "$key"
-
-				export AWS_ACCESS_KEY_ID="$(cat "$tmp/creds.json" | jq -r .AccessKeyId)"
-				export AWS_SECRET_ACCESS_KEY="$(cat "$tmp/creds.json" | jq -r .SecretAccessKey)"
-				export AWS_SESSION_TOKEN="$(cat "$tmp/creds.json" | jq -r .SessionToken)"
-				export AWS_EXPIRATION="$(cat "$tmp/creds.json" | jq -r .Expiration)"
-				rm -f "$tmp/creds.json"
-
-				exec "$@"
-			fi
-
-			;;
-		issue)
-			shift
-			local cn="$1"; shift
-			local ttl="$1"; shift
-
-			local issue="${cn#*.}"
-
-			if [[ -n "${1:-}" ]]; then
-				local tmp="$1"; shift
-
-				local cert="cert"
-
-				kv issue admin.gyre.defn.dev 1m > "$tmp/$cert.json"
-				cat "$tmp/$cert.json" | jq -r '.data.certificate' > "$tmp/$cert.crt"
-				cat "$tmp/$cert.json" | jq -r '.data.private_key' > "$tmp/$cert.key"
-				rm -f "$tmp/$cert.json"
-				echo "$tmp/$cert.crt $tmp/$cert.key"
-			else
-				vault write "pki/issue/$issue" common_name="$cn" ttl="$ttl" -format=json
-			fi
-			;;
-		delete)
-			shift
-			vault kv delete -mount=kv "$1"
-			vault kv metadata delete -mount=kv "$1"
-			$0 "$1"
-			;;
-		*)
+			kv issue admin.gyre.defn.dev 1m >"$tmp/$cert.json"
+			cat "$tmp/$cert.json" | jq -r '.data.certificate' >"$tmp/$cert.crt"
+			cat "$tmp/$cert.json" | jq -r '.data.private_key' >"$tmp/$cert.key"
+			rm -f "$tmp/$cert.json"
+			echo "$tmp/$cert.crt $tmp/$cert.key"
+		else
+			vault write "pki/issue/$issue" common_name="$cn" ttl="$ttl" -format=json
+		fi
+		;;
+	delete)
+		shift
+		vault kv delete -mount=kv "$1"
+		vault kv metadata delete -mount=kv "$1"
+		$0 "$1"
+		;;
+	*)
 		case "$#" in
-			0)
-				# kv
-				vault kv list kv
-				;;
-			1)
-				# kv dev/
-				# kv dev/k3d-global/
-				# kv dev/k3d-global/meh
-				case "$1" in
-					*/)
-						vault kv list "kv/$1"
-						;;
-					*)
-						vault kv get -mount=kv -format=json "$@" | jq .data.data
-						;;
-				esac
-				;;
-			2)
-				case "$2" in
-					@*)
-						# kv dev/k3d-global/meh @version
-						version="$(echo "$2" | cut -d@ -f2-)"
-						vault kv get -mount=kv -format=json -version="${version}" "kv/$1" | jq .data.data
-						;;
-					-)
-						# jq -n '{}' | kv dev/k3d-global/meh -
-						vault kv put -mount=kv "$@"
-						;;
-					*)
-						# kv dev/k3d-global/meh hello=world
-						vault kv patch -mount=kv "$@"
-						;;
-				esac
+		0)
+			# kv
+			vault kv list kv
+			;;
+		1)
+			# kv dev/
+			# kv dev/k3d-global/
+			# kv dev/k3d-global/meh
+			case "$1" in
+			*/)
+				vault kv list "kv/$1"
 				;;
 			*)
-				# kv dev/k3d-global/meh hello=world hi=there
+				vault kv get -mount=kv -format=json "$@" | jq .data.data
+				;;
+			esac
+			;;
+		2)
+			case "$2" in
+			@*)
+				# kv dev/k3d-global/meh @version
+				version="$(echo "$2" | cut -d@ -f2-)"
+				vault kv get -mount=kv -format=json -version="${version}" "kv/$1" | jq .data.data
+				;;
+			-)
+				# jq -n '{}' | kv dev/k3d-global/meh -
+				vault kv put -mount=kv "$@"
+				;;
+			*)
+				# kv dev/k3d-global/meh hello=world
 				vault kv patch -mount=kv "$@"
 				;;
+			esac
+			;;
+		*)
+			# kv dev/k3d-global/meh hello=world hi=there
+			vault kv patch -mount=kv "$@"
+			;;
 		esac
 		;;
 	esac

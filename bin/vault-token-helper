@@ -3,22 +3,22 @@
 export VAULT_PASS_KEY="vault-token-helper/$(echo "$VAULT_ADDR" | base64 -w 0)/$(echo "$VSCODE_PROXY_URI" | base64 -w 0)"
 
 function main {
-    case "${1:-}" in
-        get)
-            if pass "${VAULT_PASS_KEY}" >/dev/null 2>&1; then
-                pass "${VAULT_PASS_KEY}" | perl -pe 's{\s*$}{}'
-            fi
-            ;;
-        store)
-            cat | perl -pe 's{\s*$}{}' | pass insert -e -f "${VAULT_PASS_KEY}"
-            ;;
-        erase)
-            pass rm -f "${VAULT_PASS_KEY}"
-            ;;
-        *)
-            false
-            ;;
-    esac
+	case "${1:-}" in
+	get)
+		if pass "${VAULT_PASS_KEY}" >/dev/null 2>&1; then
+			pass "${VAULT_PASS_KEY}" | perl -pe 's{\s*$}{}'
+		fi
+		;;
+	store)
+		cat | perl -pe 's{\s*$}{}' | pass insert -e -f "${VAULT_PASS_KEY}"
+		;;
+	erase)
+		pass rm -f "${VAULT_PASS_KEY}"
+		;;
+	*)
+		false
+		;;
+	esac
 }
 
 main "$@"

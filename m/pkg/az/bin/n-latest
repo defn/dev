@@ -3,15 +3,15 @@
 function main {
 	set -efu
 
-  local repo="$(cat flake.json | jq -r '.ghrepo')"
+	local repo="$(cat flake.json | jq -r '.ghrepo')"
 
-  if [[ "${repo}" == "null" ]]; then
-    cat VERSION
-  elif [[ "${repo}" == "aws/aws-cli" ]]; then
-    gh api "/repos/${repo}/git/refs/tags" | jq -r '.[].ref' | cut -d/ -f3- | tail -1
-  else
-    gh release list --repo "$repo" --exclude-pre-releases --exclude-drafts | grep Latest | awk '{print $(NF-1)}' | cut -d/ -f 2- | while read -r m; do if ! echo $m | egrep -q '^v?[0-9]'; then echo $m | cut -d- -f2-; else echo $m; fi; done | sed 's#v##'
-  fi | perl -pe 's{\s+$}{}'
+	if [[ ${repo} == "null" ]]; then
+		cat VERSION
+	elif [[ ${repo} == "aws/aws-cli" ]]; then
+		gh api "/repos/${repo}/git/refs/tags" | jq -r '.[].ref' | cut -d/ -f3- | tail -1
+	else
+		gh release list --repo "$repo" --exclude-pre-releases --exclude-drafts | grep Latest | awk '{print $(NF-1)}' | cut -d/ -f 2- | while read -r m; do if ! echo $m | egrep -q '^v?[0-9]'; then echo $m | cut -d- -f2-; else echo $m; fi; done | sed 's#v##'
+	fi | perl -pe 's{\s+$}{}'
 }
 
 source sub "$0" "$@"

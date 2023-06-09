@@ -10,7 +10,7 @@ region=$region
 EOF
 
 	aws organizations list-accounts | jq -r '.Accounts[] | "\(.Id) \(.Name) \(.Status)"' | sort | while read -r id account type; do
-		if [[ "${account}" == "${name}" ]]; then
+		if [[ ${account} == "${name}" ]]; then
 			export account='org'
 		fi
 		cat <<EOF
@@ -29,7 +29,7 @@ region=$region
 [profile $name-$account-org]
 source_profile=$name
 output=json
-$(if [[ "${account}" == "org" ]]; then echo '#'; fi)role_arn=arn:aws:iam::$id:role/OrganizationAccountAccessRole
+$(if [[ ${account} == "org" ]]; then echo '#'; fi)role_arn=arn:aws:iam::$id:role/OrganizationAccountAccessRole
 region=$region
 
 [profile $name-$account-adm]

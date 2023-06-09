@@ -3,7 +3,10 @@
 function main {
 	set -efu
 
-	for a in $(set +f; git status -sb */ | grep ^.M | grep /flake | awk '{print $NF}' | perl -pe 's{/[^/]+$}{\n}'); do
+	for a in $(
+		set +f
+		git status -sb */ | grep ^.M | grep /flake | awk '{print $NF}' | perl -pe 's{/[^/]+$}{\n}'
+	); do
 		mark "$a"
 		pushd "$a" && n release "$@" && popd
 	done

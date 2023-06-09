@@ -42,15 +42,16 @@ http_archive(
     urls = ["https://github.com/tweag/rules_nixpkgs/archive/refs/tags/v0.9.0.tar.gz"],
 )
 
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+
 # load
 load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
-load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
-load("@rules_buf//buf:repositories.bzl", "rules_buf_dependencies", "rules_buf_toolchains")
-load("@rules_buf//gazelle/buf:repositories.bzl", "gazelle_buf_dependencies")
-load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 
 # nix
 load("@io_tweag_rules_nixpkgs//nixpkgs:repositories.bzl", "rules_nixpkgs_dependencies")
+load("@rules_buf//buf:repositories.bzl", "rules_buf_dependencies", "rules_buf_toolchains")
+load("@rules_buf//gazelle/buf:repositories.bzl", "gazelle_buf_dependencies")
+load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
 
 rules_nixpkgs_dependencies()
 
@@ -68,9 +69,10 @@ rules_proto_dependencies()
 
 rules_buf_dependencies()
 
+load("//:buf_deps.bzl", "buf_deps")
+
 # gazelle dependencies
 load("//:go_deps.bzl", "go_deps")
-load("//:buf_deps.bzl", "buf_deps")
 
 # gazelle:repository_macro go_deps.bzl%go_deps
 go_deps()

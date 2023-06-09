@@ -4,7 +4,7 @@ function main {
 	set -efu
 
 	terraform init -upgrade
-	terraform  providers lock \
+	terraform providers lock \
 		-platform=linux_arm64 -platform=linux_amd64 \
 		-platform=darwin_amd64 -platform=darwin_arm64
 }
