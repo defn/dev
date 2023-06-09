@@ -1,24 +1,25 @@
 #!/usr/bin/env bash
 
 function main {
-	set -efu
+	set -efu -o pipefail
 
 	case "${1:-}" in
 	login)
 		shift
-		local account="$(grep '^\[profile ' ~/.aws/config | grep \\-sso | awk '{print $2}' | cut -d']' -f1 | sort | fzf --query="${1:-}" --select-1)"
+		local account
+		account="$(grep '^\[profile ' ~/.aws/config | grep \\-sso | awk '{print $2}' | cut -d']' -f1 | sort | fzf --query="${1:-}" --select-1)"
 		b logout
-		aws-vault login "$account"
+		aws-vault login "${account}"
 		;;
 	logout)
 		open https://signin.aws.amazon.com/oauth?Action=logout &
-		redirect_uri=https://aws.amazon.com
 		;;
 	exec)
 		shift
-		local account="$(grep '^\[profile ' ~/.aws/config | grep \\-sso | awk '{print $2}' | cut -d']' -f1 | sort | fzf --query="${1:-}" --select-1)"
+		local account
+		account="$(grep '^\[profile ' ~/.aws/config | grep \\-sso | awk '{print $2}' | cut -d']' -f1 | sort | fzf --query="${1:-}" --select-1)"
 		shift
-		aws-vault exec "$account" -- "$@"
+		aws-vault exec "${account}" -- "$@"
 		;;
 	tilt)
 		shift
