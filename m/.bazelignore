@@ -3,6 +3,7 @@ tf
 node_modules
 .direnv
 app/app/.direnv
+meh/.direnv
 pkg/acme/.direnv
 pkg/argocd/.direnv
 pkg/argorollouts/.direnv
@@ -77,6 +78,7 @@ r/argo-cd/.direnv
 r/argo-workflows/.direnv
 r/meh/.direnv
 app/app/result
+meh/result
 pkg/acme/result
 pkg/argocd/result
 pkg/argorollouts/result
