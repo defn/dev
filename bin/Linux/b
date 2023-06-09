@@ -24,7 +24,8 @@ function main {
 			open 'http://localhost/r/(all)/overview'
 			;;
 		*)
-			exec open "https://$(wait-tailscale-domain)/$*/"
+			local rule="$1"; shift
+			exec bazel run "${rule}" -- "$@"
 			;;
 	esac
 }
