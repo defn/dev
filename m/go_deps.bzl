@@ -24,14 +24,14 @@ def go_deps():
     go_repository(
         name = "com_github_aws_constructs_go_constructs_v10",
         importpath = "github.com/aws/constructs-go/constructs/v10",
-        sum = "h1:aqHOBvzri1e4PJuoGZaCi+0/uZCE/yDcqP1pkGJ3V5o=",
-        version = "v10.2.43",
+        sum = "h1:qYtu4+KW4xejxaw1u0z4s7z2nSH6FCB+5bPfjEtxhMQ=",
+        version = "v10.2.47",
     )
     go_repository(
         name = "com_github_aws_jsii_runtime_go",
         importpath = "github.com/aws/jsii-runtime-go",
-        sum = "h1:3AvIUuyDrOcsU2dff0VEsaXZzjDWrdm+gqywZZHplDg=",
-        version = "v1.82.0",
+        sum = "h1:l+s26jY5wCeVdHq/PHEbXPlacho0hZzg7JEGE9XxbYM=",
+        version = "v1.83.0",
     )
 
     go_repository(
@@ -88,8 +88,8 @@ def go_deps():
     go_repository(
         name = "com_github_charmbracelet_bubbletea",
         importpath = "github.com/charmbracelet/bubbletea",
-        sum = "h1:LpdYfnu+Qc6XtvMz6d/6rRY71yttHTP5HtrjMgWvixc=",
-        version = "v0.24.1",
+        sum = "h1:uaQIKx9Ai6Gdh5zpTbGiWpytMU+CfsPp06RaW2cx/SY=",
+        version = "v0.24.2",
     )
     go_repository(
         name = "com_github_charmbracelet_harmonica",
@@ -765,8 +765,8 @@ def go_deps():
     go_repository(
         name = "com_github_stretchr_testify",
         importpath = "github.com/stretchr/testify",
-        sum = "h1:RP3t2pwF7cMEbC1dqtB6poj3niw/9gnV4Cjg5oW5gtY=",
-        version = "v1.8.3",
+        sum = "h1:CcVxjf3Q8PM0mHUKJCdn+eZZtm5yQwehR5yeSVQQcUk=",
+        version = "v1.8.4",
     )
     go_repository(
         name = "com_github_subosito_gotenv",

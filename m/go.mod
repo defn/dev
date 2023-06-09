@@ -4,12 +4,12 @@ go 1.20
 
 require (
 	cuelang.org/go v0.5.0
-	github.com/aws/constructs-go/constructs/v10 v10.2.43
-	github.com/aws/jsii-runtime-go v1.82.0
+	github.com/aws/constructs-go/constructs/v10 v10.2.47
+	github.com/aws/jsii-runtime-go v1.83.0
 	github.com/bufbuild/connect-go v1.8.0
 	github.com/cdktf/cdktf-provider-aws-go/aws/v14 v14.0.4
 	github.com/charmbracelet/bubbles v0.16.1
-	github.com/charmbracelet/bubbletea v0.24.1
+	github.com/charmbracelet/bubbletea v0.24.2
 	github.com/charmbracelet/lipgloss v0.7.1
 	github.com/gin-gonic/gin v1.9.1
 	github.com/hashicorp/terraform-cdk-go/cdktf v0.16.3
