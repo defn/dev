@@ -263,17 +263,17 @@
       },
       "locked": {
         "dir": "m/pkg/cloud",
-        "lastModified": 1686193901,
-        "narHash": "sha256-QhDPMS+IXuJKOqG/DfUc3qM9/bWG7Ep+JjF1n4GGZWA=",
+        "lastModified": 1686282676,
+        "narHash": "sha256-aJEkXGbNnMZCSSqmNlAlt1rOhLbv7tEMKT6brCE8Wb4=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "3252f52fb892e9b7b68608da1019c39752bdf9fd",
+        "rev": "310ee2266acbde731309b0a664df3c0d100c7dae",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cloud",
         "owner": "defn",
-        "ref": "pkg-cloud-0.0.101",
+        "ref": "pkg-cloud-0.0.102",
         "repo": "dev",
         "type": "github"
       }
@@ -1907,17 +1907,17 @@
       },
       "locked": {
         "dir": "m/pkg/flyctl",
-        "lastModified": 1686193780,
-        "narHash": "sha256-y7DEpmAeUMpQMeG6qqit7IUeY/rj+7GDT/zyflFPISk=",
+        "lastModified": 1686282592,
+        "narHash": "sha256-72KDGYmVhNI6QijGzX1tHq8pBVo6d8kbjexZOzw+cHw=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "42b60a280c41d33c888297bd25d159f1f3409d01",
+        "rev": "44398732f976a4faee4c41d95ad0b82711cb2125",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/flyctl",
         "owner": "defn",
-        "ref": "pkg-flyctl-0.1.31-1",
+        "ref": "pkg-flyctl-0.1.32-1",
         "repo": "dev",
         "type": "github"
       }
@@ -2078,17 +2078,17 @@
       },
       "locked": {
         "dir": "m/pkg/hubble",
-        "lastModified": 1685334107,
-        "narHash": "sha256-+3QLSCRO9ZrIitXW0xErdYD9zC2Ndh/f8nAlQ5yBrTw=",
+        "lastModified": 1686282620,
+        "narHash": "sha256-VkjeD6sgs+xIpFnxrUGo7Y2NePoP9JmHW4LBsZvGoyg=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "a37e476587f974bbfcea88ba5fce04e2da1f099c",
+        "rev": "8731ee7511e84631f1c521f47a28c48925ccbfd6",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/hubble",
         "owner": "defn",
-        "ref": "pkg-hubble-0.11.5-3",
+        "ref": "pkg-hubble-0.11.6-1",
         "repo": "dev",
         "type": "github"
       }
@@ -2217,17 +2217,17 @@
       },
       "locked": {
         "dir": "m/pkg/kubernetes",
-        "lastModified": 1686003413,
-        "narHash": "sha256-JuZ9UYCmg8PM2jJOXjdCGZnX7MqjUsmkdYsfeStdoks=",
+        "lastModified": 1686282695,
+        "narHash": "sha256-RHeNSdwQQuGMrhKtsty/GAY57xNixJR88EqjPpL1WvU=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "9305dad2e921cd862aab1b255241fb4885166f95",
+        "rev": "e509af1b32c2e1d63f185d9f399fb4bcb3613f83",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubernetes",
         "owner": "defn",
-        "ref": "pkg-kubernetes-0.0.105",
+        "ref": "pkg-kubernetes-0.0.106",
         "repo": "dev",
         "type": "github"
       }
@@ -4084,17 +4084,17 @@
       },
       "locked": {
         "dir": "m/pkg/vcluster",
-        "lastModified": 1685334336,
-        "narHash": "sha256-hX0vzUnr/JRS0DZ1F45fl/nRlOceWo7HA5gJFGz/Ilw=",
+        "lastModified": 1686282645,
+        "narHash": "sha256-QP4ZHYs2kybLGAER1t5V0YIHQSlUl43KJQOkM+mObMg=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "17fd7f361b08432735052c20a62b43232594b7f6",
+        "rev": "78e9d85a304b9770cac20e607f6a476d17e8514f",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/vcluster",
         "owner": "defn",
-        "ref": "pkg-vcluster-0.15.0-8",
+        "ref": "pkg-vcluster-0.15.1-1",
         "repo": "dev",
         "type": "github"
       }
