@@ -25,7 +25,7 @@ function main {
 			;;
 		*)
 			local rule="$1"; shift
-			exec bazel run "${rule}" -- "$@"
+			exec bazel run --ui_event_filters=-info,-stdout,-stderr --noshow_progress --noshow_loading_progress "${rule}" -- "$@"
 			;;
 	esac
 }
