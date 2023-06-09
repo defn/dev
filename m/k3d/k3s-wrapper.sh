@@ -2,7 +2,7 @@
 
 set -exfu
 
-PATH=$PATH:/home/ubuntu/.nix-profile/bin
+PATH=${PATH}:/home/ubuntu/.nix-profile/bin
 
 tailscaled --statedir=/var/lib/tailscale &
 
@@ -25,7 +25,7 @@ while test -z "${domain}"; do
 done
 
 if [[ -z "${DEFN_DEV_TSKEY:-}" ]]; then
-	tailscale up --ssh --accept-dns=false --hostname $(echo ${domain} | cut -d. -f1)
+	tailscale up --ssh --accept-dns=false --hostname $(echo "${domain}" | cut -d. -f1)
 fi
 
 #mount bpffs -t bpf /sys/fs/bpf
@@ -35,10 +35,10 @@ fi
 #mount --make-shared /run/cilium/cgroupv2/
 
 for a in /var/lib/rancher/k3s/server/manifests; do
-	mkdir -p "$a"
+	mkdir -p "${a}"
 	(
 		set +f
-		cp ${a}2/* ${a}/
+		cp "${a}"2/* "${a}"/
 	) || true
 done
 

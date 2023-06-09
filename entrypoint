@@ -21,7 +21,7 @@ if [[ -f /app/.envrc ]]; then
 	_direnv_hook
 else
 	set +f
-	for a in /nix/store/*/bin; do PATH="$PATH:$a"; done
+	for a in /nix/store/*/bin; do PATH="${PATH}:${a}"; done
 	set -f
 fi
 

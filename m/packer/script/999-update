@@ -10,8 +10,8 @@ function main {
 
 	local aptget="env DEBIAN_FRONTEND=noninteractive apt-get"
 
-	$aptget update
-	$aptget upgrade -y
+	${aptget} update
+	${aptget} upgrade -y
 
 	sync
 }
