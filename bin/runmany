@@ -10,13 +10,13 @@ function main {
 
 	# process args after --
 	while [[ $# -gt 0 ]]; do
-		if [[ $1 == "--" && -z $fl_args ]]; then
+		if [[ $1 == "--" && -z ${fl_args} ]]; then
 			shift
 			fl_args=1
 			continue
 		fi
 
-		if [[ -n $fl_args ]]; then
+		if [[ -n ${fl_args} ]]; then
 			args_dash+=("$1")
 		else
 			args_command+=("$1")
@@ -43,7 +43,7 @@ function main {
 	fi
 
 	local cmd
-	if [[ -n $fl_args ]]; then
+	if [[ -n ${fl_args} ]]; then
 		cmd="$*"
 		set --
 	else
@@ -60,18 +60,22 @@ function main {
 	Linux)
 		xopts="-r"
 		;;
+	*)
+		true
+		;;
 	esac
 
 	# check if any arguments
+	# shellcheck disable=SC2312
 	if [[ $# -gt 0 ]]; then
 		while [[ $# -gt 0 ]]; do
 			echo "${1// /\\ }"
-			shift
+			shift || true
 		done
 	else
 		# otherwise read arguments from stdin
-		cat
-	fi | xargs ${xopts:+$xopts} -n "$cnt_args" -P "$cnt_proc" bash -c "$cmd" ""
+		cat || true
+	fi | xargs ${xopts:+${xopts}} -n "${cnt_args}" -P "${cnt_proc}" bash -c "${cmd}" ""
 }
 
 main "$@"
