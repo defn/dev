@@ -12,7 +12,7 @@
       };
     };
 
-    url_template = input: "https://github.com/acmesh-official/acme.sh/archive/refs/tags/v${input.vendor}.tar.gz";
+    url_template = input: "https://github.com/acmesh-official/acme.sh/archive/refs/tags/${input.vendor}.tar.gz";
 
     installPhase = pkg: ''
       install -m 0755 -d $out $out/bin $out/bin/dnsapi
@@ -24,16 +24,16 @@
 
 
       "x86_64-linux" = {
-        sha256 = "sha256-aaaaaWVJFAmo2Kk8Jk3LzyZakdRaRt5nSBG5P1mVOY8"; # x86_64-linux
+        sha256 = "sha256-So5Ewn4qjwGpeOjRWt2OmQi4P5sVVWcOSam3aUIfX6Y="; # x86_64-linux
       };
       "aarch64-linux" = {
-        sha256 = "sha256-aaaaaWVJFAmo2Kk8Jk3LzyZakdRaRt5nSBG5P1mVOY8"; # aarch64-linux
+        sha256 = "sha256-So5Ewn4qjwGpeOjRWt2OmQi4P5sVVWcOSam3aUIfX6Y="; # aarch64-linux
       };
       "x86_64-darwin" = {
-        sha256 = "sha256-aaaaaWVJFAmo2Kk8Jk3LzyZakdRaRt5nSBG5P1mVOY8"; # x86_64-darwin
+        sha256 = "sha256-So5Ewn4qjwGpeOjRWt2OmQi4P5sVVWcOSam3aUIfX6Y="; # x86_64-darwin
       };
       "aarch64-darwin" = {
-        sha256 = "sha256-aaaaaWVJFAmo2Kk8Jk3LzyZakdRaRt5nSBG5P1mVOY8"; # aarch64-darwin
+        sha256 = "sha256-So5Ewn4qjwGpeOjRWt2OmQi4P5sVVWcOSam3aUIfX6Y="; # aarch64-darwin
       };
     };
   };
