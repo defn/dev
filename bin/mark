@@ -13,7 +13,7 @@ m="${m// /\\ }"
 echo
 case "${1:-}" in
 *)
-	eval $gm "$m"
+	eval "${gm}" "${m}"
 	;;
 esac
 echo

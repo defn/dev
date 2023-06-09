@@ -4,13 +4,13 @@ function main {
 	set -efu
 
 	for e in "$@"; do
-		case "$e" in
+		case "${e}" in
 		--)
 			shift
 			break
 			;;
 		*)
-			export "$e=$(pass "$e")"
+			export "${e}=$(pass "${e}")"
 			shift
 			;;
 		esac
