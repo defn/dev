@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/acme",
-        "lastModified": 1685333420,
-        "narHash": "sha256-qs45NP6gf6eA6+8ajSkpMvTU43hYrgEqOEY4py4rCak=",
+        "lastModified": 1686351238,
+        "narHash": "sha256-fS3uHHjLvncVRnnRc/RHRxmLENiTsAKfXMHbsNIy9E0=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "74ed64c4aff4643d259194bdba0d2e6dff1786a4",
+        "rev": "dc4855a758dbd49f5c28de806ed174debc3bf6f0",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/acme",
         "owner": "defn",
-        "ref": "pkg-acme-3.0.5-13",
+        "ref": "pkg-acme-3.0.6-1",
         "repo": "dev",
         "type": "github"
       }
@@ -27,17 +27,17 @@
       },
       "locked": {
         "dir": "m/pkg/awscli",
-        "lastModified": 1686193297,
-        "narHash": "sha256-2v0hx6+FcwypPJT3t3q02B1YZEsi0pcod8X3nhk8SY8=",
+        "lastModified": 1686350146,
+        "narHash": "sha256-5mvXsOqQnmtCNBFGVud4KncMAOQlTudLqwwmN1bdFiE=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "181fbaa02af7acd9bb81af2645e0e5ba8f9e575a",
+        "rev": "fa7b6838aaa657cb0e62d03f20cd90f3f07e2051",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/awscli",
         "owner": "defn",
-        "ref": "pkg-awscli-2.11.26-1",
+        "ref": "pkg-awscli-2.11.27-1",
         "repo": "dev",
         "type": "github"
       }
@@ -50,17 +50,17 @@
       },
       "locked": {
         "dir": "m/pkg/az",
-        "lastModified": 1686193617,
-        "narHash": "sha256-mvhS7W/h8AvgDKwqHA3d96yakHoXD6EbIDYyPn6Y7ys=",
+        "lastModified": 1686344441,
+        "narHash": "sha256-4PCmNPucOBwQL7mSjDdxtX1jzUhgMwLwhRaOworz7yw=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "8f47b974bcf5c3d4ae1f7aeea111aef03c050995",
+        "rev": "4fd7f69f0262c95220c68e1d2cb47f3a2dcbe879",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/az",
         "owner": "defn",
-        "ref": "pkg-az-0.0.128",
+        "ref": "pkg-az-0.0.129",
         "repo": "dev",
         "type": "github"
       }
@@ -223,17 +223,17 @@
       },
       "locked": {
         "dir": "m/pkg/cloud",
-        "lastModified": 1686282676,
-        "narHash": "sha256-aJEkXGbNnMZCSSqmNlAlt1rOhLbv7tEMKT6brCE8Wb4=",
+        "lastModified": 1686351485,
+        "narHash": "sha256-Rya18DmvXIPmwiBZfdhF/N3PC3ah29J1IrW0x0CchxM=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "310ee2266acbde731309b0a664df3c0d100c7dae",
+        "rev": "69403d350a11ee45439042e846dcdb3a914bbd6f",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cloud",
         "owner": "defn",
-        "ref": "pkg-cloud-0.0.102",
+        "ref": "pkg-cloud-0.0.104",
         "repo": "dev",
         "type": "github"
       }
@@ -1601,17 +1601,17 @@
       },
       "locked": {
         "dir": "m/pkg/flyctl",
-        "lastModified": 1686282592,
-        "narHash": "sha256-72KDGYmVhNI6QijGzX1tHq8pBVo6d8kbjexZOzw+cHw=",
+        "lastModified": 1686350205,
+        "narHash": "sha256-/Jnp81UlJjTXLzaJ4ElEXp96SFZuk6Ok0WD7ShYLC1w=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "44398732f976a4faee4c41d95ad0b82711cb2125",
+        "rev": "1bde0d435348e2148b845c3e417c370fd97b954b",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/flyctl",
         "owner": "defn",
-        "ref": "pkg-flyctl-0.1.32-1",
+        "ref": "pkg-flyctl-0.1.33-1",
         "repo": "dev",
         "type": "github"
       }
