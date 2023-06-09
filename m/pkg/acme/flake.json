@@ -1,6 +1,6 @@
 {
   "slug": "pkg-acme",
   "ghrepo": "acmesh-official/acme.sh",
-  "vendor": "3.0.5",
-  "revision": "13"
+  "vendor": "3.0.6",
+  "revision": "0"
 }
