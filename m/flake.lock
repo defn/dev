@@ -48,17 +48,17 @@
       },
       "locked": {
         "dir": "m/pkg/awscli",
-        "lastModified": 1686193297,
-        "narHash": "sha256-2v0hx6+FcwypPJT3t3q02B1YZEsi0pcod8X3nhk8SY8=",
+        "lastModified": 1686350146,
+        "narHash": "sha256-5mvXsOqQnmtCNBFGVud4KncMAOQlTudLqwwmN1bdFiE=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "181fbaa02af7acd9bb81af2645e0e5ba8f9e575a",
+        "rev": "fa7b6838aaa657cb0e62d03f20cd90f3f07e2051",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/awscli",
         "owner": "defn",
-        "ref": "pkg-awscli-2.11.26-1",
+        "ref": "pkg-awscli-2.11.27-1",
         "repo": "dev",
         "type": "github"
       }
@@ -263,17 +263,17 @@
       },
       "locked": {
         "dir": "m/pkg/cloud",
-        "lastModified": 1686282676,
-        "narHash": "sha256-aJEkXGbNnMZCSSqmNlAlt1rOhLbv7tEMKT6brCE8Wb4=",
+        "lastModified": 1686351485,
+        "narHash": "sha256-Rya18DmvXIPmwiBZfdhF/N3PC3ah29J1IrW0x0CchxM=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "310ee2266acbde731309b0a664df3c0d100c7dae",
+        "rev": "69403d350a11ee45439042e846dcdb3a914bbd6f",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cloud",
         "owner": "defn",
-        "ref": "pkg-cloud-0.0.102",
+        "ref": "pkg-cloud-0.0.104",
         "repo": "dev",
         "type": "github"
       }
@@ -1907,17 +1907,17 @@
       },
       "locked": {
         "dir": "m/pkg/flyctl",
-        "lastModified": 1686282592,
-        "narHash": "sha256-72KDGYmVhNI6QijGzX1tHq8pBVo6d8kbjexZOzw+cHw=",
+        "lastModified": 1686350205,
+        "narHash": "sha256-/Jnp81UlJjTXLzaJ4ElEXp96SFZuk6Ok0WD7ShYLC1w=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "44398732f976a4faee4c41d95ad0b82711cb2125",
+        "rev": "1bde0d435348e2148b845c3e417c370fd97b954b",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/flyctl",
         "owner": "defn",
-        "ref": "pkg-flyctl-0.1.32-1",
+        "ref": "pkg-flyctl-0.1.33-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1952,17 +1952,17 @@
       },
       "locked": {
         "dir": "m/pkg/godev",
-        "lastModified": 1686003396,
-        "narHash": "sha256-S8QuwYHZILzHIsCoWO2XZ4XuPZh/q2fsh69AJ7J4cXc=",
+        "lastModified": 1686349882,
+        "narHash": "sha256-WqYWeErOSyZ4pQk2hnP1qYFaCdVPfSB0W8ovJ+fRDTk=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "713b92204a962b96069c1a13799f5ead612293b2",
+        "rev": "1167399b573b2d8ce50aae509f9ace9649eb18bd",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/godev",
         "owner": "defn",
-        "ref": "pkg-godev-0.0.87",
+        "ref": "pkg-godev-0.0.88",
         "repo": "dev",
         "type": "github"
       }
@@ -2217,17 +2217,17 @@
       },
       "locked": {
         "dir": "m/pkg/kubernetes",
-        "lastModified": 1686282695,
-        "narHash": "sha256-RHeNSdwQQuGMrhKtsty/GAY57xNixJR88EqjPpL1WvU=",
+        "lastModified": 1686351503,
+        "narHash": "sha256-FEboXjvYirhNi7sUIhVdDr8yL9tslzXhUDt0Px6vljY=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "e509af1b32c2e1d63f185d9f399fb4bcb3613f83",
+        "rev": "80b300bcdb5336a132007c0c953840212a12714a",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubernetes",
         "owner": "defn",
-        "ref": "pkg-kubernetes-0.0.106",
+        "ref": "pkg-kubernetes-0.0.107",
         "repo": "dev",
         "type": "github"
       }
@@ -2297,33 +2297,33 @@
     },
     "latest": {
       "locked": {
-        "lastModified": 1681520089,
-        "narHash": "sha256-nRb1ST3MJ10svRirTOelkDw75Y3PNLdZSGYFJZ99H+8=",
+        "lastModified": 1686339146,
+        "narHash": "sha256-ustOwufzrsfNUJa1JW96Ffz6yae0ozYsNS7Do+E/63Q=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e3b18e82da9ab82b572d70c162d4e13a058aeb7d",
+        "rev": "5b0cc6cee71188c29b20fc0de4ea274e24336bc0",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e3b18e82da9ab82b572d70c162d4e13a058aeb7d",
+        "rev": "5b0cc6cee71188c29b20fc0de4ea274e24336bc0",
         "type": "github"
       }
     },
     "latest_2": {
       "locked": {
-        "lastModified": 1678571061,
-        "narHash": "sha256-0gI2FHID8XYD3504kLFRLH3C2GmMCzVMC50APV/kZp8=",
+        "lastModified": 1686339146,
+        "narHash": "sha256-ustOwufzrsfNUJa1JW96Ffz6yae0ozYsNS7Do+E/63Q=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "8ad5e8132c5dcf977e308e7bf5517cc6cc0bf7d8",
+        "rev": "5b0cc6cee71188c29b20fc0de4ea274e24336bc0",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "8ad5e8132c5dcf977e308e7bf5517cc6cc0bf7d8",
+        "rev": "5b0cc6cee71188c29b20fc0de4ea274e24336bc0",
         "type": "github"
       }
     },
@@ -3023,17 +3023,17 @@
       },
       "locked": {
         "dir": "m/pkg/nodedev",
-        "lastModified": 1685334194,
-        "narHash": "sha256-zXN5IDIzHLJFJP8lxlb0o2EZhltkPvtpoqXQtYtkAmw=",
+        "lastModified": 1686349900,
+        "narHash": "sha256-zEFI59KHy1E2C4FXjfgHUZZ6Z21gjknRE96oBg+SYgI=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "3f40a58fb3269edb0b5875c6f74e4d8c2b92497a",
+        "rev": "39ed1f0ccc128337b04aa1b0f0eeec00967da024",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/nodedev",
         "owner": "defn",
-        "ref": "pkg-nodedev-0.0.50",
+        "ref": "pkg-nodedev-0.0.51",
         "repo": "dev",
         "type": "github"
       }
@@ -4084,17 +4084,17 @@
       },
       "locked": {
         "dir": "m/pkg/vcluster",
-        "lastModified": 1686282645,
-        "narHash": "sha256-QP4ZHYs2kybLGAER1t5V0YIHQSlUl43KJQOkM+mObMg=",
+        "lastModified": 1686350231,
+        "narHash": "sha256-wD2A729iedODPceO7lWjuy+c7/8FmZqx16vip1u9JqY=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "78e9d85a304b9770cac20e607f6a476d17e8514f",
+        "rev": "1c97891aa90286d2a85c384c4686d6c254156a76",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/vcluster",
         "owner": "defn",
-        "ref": "pkg-vcluster-0.15.1-1",
+        "ref": "pkg-vcluster-0.15.2-1",
         "repo": "dev",
         "type": "github"
       }
