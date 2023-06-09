@@ -7,7 +7,7 @@ function main {
     aws_config="$1"; shift
     aws_profile="$1"; shift
 
-    exec env AWS_CONFIG="${aws_config}" AWS_PROFILE="${aws_profile}" nix develop 'github:defn/dev/pkg-awscli-2.11.26-1?dir=m/pkg/awscli' --command aws "$@"
+    exec env AWS_CONFIG="${aws_config}" AWS_PROFILE="${aws_profile}" nix run --quiet --quiet --quiet 'github:defn/dev/pkg-awscli-2.11.26-4?dir=m/pkg/awscli' -- "$@"
 }
 
 main "$@"
