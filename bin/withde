@@ -5,9 +5,9 @@ set -efu
 chdir="$1"
 shift
 
-cd "$chdir"
+cd "${chdir}"
 
-eval "$(direnv hook bash)"
+eval "$(direnv hook bash || true)"
 direnv allow
 _direnv_hook
 

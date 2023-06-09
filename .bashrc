@@ -213,14 +213,6 @@ function gs {
 	git status -sb "$@"
 }
 
-function pc {
-	pre-commit "$@"
-}
-
-function pca {
-	pc run --all "$@"
-}
-
 # dotfiles
 export GIT_AUTHOR_EMAIL
 export GIT_COMMITTER_EMAIL

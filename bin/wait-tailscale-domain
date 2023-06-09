@@ -7,7 +7,7 @@ function main {
 		sleep 1
 	done
 
-	tailscale cert 2>&1 | grep 'For domain' | cut -d'"' -f2
+	tailscale cert 2>&1 | grep 'For domain' | cut -d'"' -f2 || true
 }
 
 main "$@"
