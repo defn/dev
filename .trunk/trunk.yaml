@@ -23,6 +23,7 @@ lint:
         - m/k/**/local/**
         - m/**/*_go_gen.cue
         - "**/node_modules/**"
+        - m/go_deps.bzl
   enabled:
     - actionlint@1.6.24
     - black@23.3.0
