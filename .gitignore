@@ -181,3 +181,4 @@ go
 .serverauth*
 .cmake
 .dotfiles
+.cargo
