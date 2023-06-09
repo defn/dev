@@ -25,6 +25,7 @@
               zcat Payload | (cd $out && cpio -i && mkdir awscli/v2 && mv aws-cli awscli/v2/dist && ln -nfs ../awscli/v2/dist/aws ../awscli/v2/dist/aws_completer bin/)
             ;;
         esac
+        ln -nfs awscli $out/pkg-awscli
       '';
 
       downloads = {
