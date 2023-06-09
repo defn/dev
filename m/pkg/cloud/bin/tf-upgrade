@@ -9,4 +9,5 @@ function main {
 		-platform=darwin_amd64 -platform=darwin_arm64
 }
 
+# shellcheck disable=SC1091
 source sub "$0" "$@"

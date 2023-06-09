@@ -15,4 +15,5 @@ function main {
 	git push
 }
 
+# shellcheck disable=SC1091
 source sub "$0" "$@"

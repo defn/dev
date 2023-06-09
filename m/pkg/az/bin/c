@@ -13,10 +13,12 @@ function main {
 	local loader=
 
 	if [[ -e '.env' ]]; then
+		# shellcheck disable=SC1091
 		source .env
 	fi
 
-	exec $loader cue cmd -t args="${args}" "${cmd}"
+	exec ${loader} cue cmd -t args="${args}" "${cmd}"
 }
 
+# shellcheck disable=SC1091
 source sub "$0" "$@"

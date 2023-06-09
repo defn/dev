@@ -10,4 +10,5 @@ function main {
 	rm -rf /tmp/tags
 }
 
+# shellcheck disable=SC1091
 source sub "$0" "$@"

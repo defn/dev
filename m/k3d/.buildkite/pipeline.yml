@@ -1,2 +1,2 @@
 steps:
-  - command: "env USER=$(id -un) earthly --push +build"
+  - command: env USER=$(id -un) earthly --push +build

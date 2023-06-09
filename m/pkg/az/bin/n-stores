@@ -13,4 +13,5 @@ function main {
 	) | sort -u
 }
 
+# shellcheck disable=SC1091
 source sub "$0" "$@"

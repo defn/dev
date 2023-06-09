@@ -6,4 +6,5 @@ function main {
 	cachix push "$@"
 }
 
+# shellcheck disable=SC1091
 source sub "$0" "$@"

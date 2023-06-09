@@ -11,4 +11,5 @@ function main {
 	echo "example: ${FLAGS_name:-}: $@"
 }
 
+# shellcheck disable=SC1091
 source sub "$0" "$@"
