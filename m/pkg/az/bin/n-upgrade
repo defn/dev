@@ -25,4 +25,5 @@ function main {
 	done
 }
 
+# shellcheck disable=SC1091
 source sub "$0" "$@"

@@ -7,4 +7,5 @@ function main {
 	n cache
 }
 
+# shellcheck disable=SC1091
 source sub "$0" "$@"

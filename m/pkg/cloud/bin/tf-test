@@ -8,4 +8,5 @@ function main {
 	tf validate
 }
 
+# shellcheck disable=SC1091
 source sub "$0" "$@"

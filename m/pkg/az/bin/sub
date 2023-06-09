@@ -23,9 +23,12 @@ function sdebug {
 }
 
 function save-function {
-	local original="$(declare -f $1)"
-	local override="$2${original#$1}"
-	eval "$override"
+	local original
+	local override
+
+	original="$(declare -f "$1")"
+	override="$2${original#"$1"}"
+	eval "${override}"
 }
 
 # https://stackoverflow.com/questions/38972736/how-to-print-lines-between-two-patterns-inclusive-or-exclusive-in-sed-awk-or
@@ -45,7 +48,7 @@ function sub-help {
 	FLAGS_HELP="${FLAGS_HELP:+${FLAGS_HELP}
 }"
 
-	if [[ $FLAGS_HELP =~ ^\s*$ || ! $FLAGS_HELP =~ ^USAGE: ]]; then
+	if [[ ${FLAGS_HELP} =~ ^\s*$ || ! ${FLAGS_HELP} =~ ^USAGE: ]]; then
 		FLAGS_HELP="USAGE: ${FLAGS_PARENT} [flags] args
 "
 	fi
@@ -63,17 +66,19 @@ function call-main {
 
 		options
 
+		# shellcheck disable=SC2310
 		POSIXLY_CORRECT=1 FLAGS "$@" || return $?
+
 		unset POSIXLY_CORRECT
 		eval set -- "${FLAGS_ARGV}"
 	fi
 
-	sdebug "call: main $@"
+	sdebug "call: main $*"
 	if declare -F main >/dev/null; then
 		main "$@"
 		return $?
 	else
-		sdebug "missing: main $@"
+		sdebug "missing: main $*"
 		return 1
 	fi
 }
@@ -84,9 +89,9 @@ function sub-main {
 	local bare_cmd="${cmd##*/}"
 
 	sdebug
-	sdebug "cmd: $cmd"
-	sdebug "bare-cmd; $bare_cmd"
-	sdebug "args: $@"
+	sdebug "cmd: ${cmd}"
+	sdebug "bare-cmd; ${bare_cmd}"
+	sdebug "args: $*"
 
 	if [[ $# == 0 ]]; then
 		call-main "$@"
@@ -107,7 +112,7 @@ function sub-main {
 	sdebug "found: ${found_cmd}"
 
 	shift
-	sdebug "exec: ${found_cmd} $@"
+	sdebug "exec: ${found_cmd} $*"
 	exec "${found_cmd}" "$@"
 	return $?
 }

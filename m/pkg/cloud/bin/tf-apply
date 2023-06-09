@@ -7,4 +7,5 @@ function main {
 	rm -f .plan
 }
 
+# shellcheck disable=SC1091
 source sub "$0" "$@"

@@ -33,4 +33,5 @@ function main {
 	echo "${tag}"
 }
 
+# shellcheck disable=SC1091
 source sub "$0" "$@"
