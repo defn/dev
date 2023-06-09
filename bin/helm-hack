@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
 function main {
-    case "${1:-}" in
-        template)
-            shift
-            exec helm template --validate "$@"
-            ;;
-        *)
-            exec helm "$@"
-            ;;
-    esac
+	case "${1:-}" in
+	template)
+		shift
+		exec helm template --validate "$@"
+		;;
+	*)
+		exec helm "$@"
+		;;
+	esac
 }
 
 main "$@"

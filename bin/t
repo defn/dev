@@ -7,17 +7,17 @@ function main {
 	shift
 
 	case "${cmd}" in
-		up)
-			pass hello
-			if type -P ss >/dev/null; then
-				exec tilt up --context k3d-control --port $(comm -23 <(seq 10350 10359 | sort) <(ss -Htan | awk '{print $4}' | cut -d':' -f2 | sort -u) | shuf | head -n 1) --host 0.0.0.0 "$@"
-			else
-				exec tilt up --context k3d-control "$@"
-			fi
-			;;
-		*)
-			exec tilt "$@"
-			;;
+	up)
+		pass hello
+		if type -P ss >/dev/null; then
+			exec tilt up --context k3d-control --port $(comm -23 <(seq 10350 10359 | sort) <(ss -Htan | awk '{print $4}' | cut -d':' -f2 | sort -u) | shuf | head -n 1) --host 0.0.0.0 "$@"
+		else
+			exec tilt up --context k3d-control "$@"
+		fi
+		;;
+	*)
+		exec tilt "$@"
+		;;
 	esac
 }
 

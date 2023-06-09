@@ -3,63 +3,65 @@
 set -efu
 
 function persist {
-    set +x
-    local s="$1"; shift
-    local d="$1"; shift
+	set +x
+	local s="$1"
+	shift
+	local d="$1"
+	shift
 
-    if ! test -L "$d"; then
-        rm -rf "$d" 2>/dev/null || sudo rm -rf "$d"
-    fi
+	if ! test -L "$d"; then
+		rm -rf "$d" 2>/dev/null || sudo rm -rf "$d"
+	fi
 
-    mkdir -p "$s" 2>/dev/null || sudo mkdir -p "$s"
-    mkdir -p "$(dirname "$d")" 2>/dev/null || sudo mkdir -p "$(dirname "$d")"
-    if [[ "$(readlink "$d")" != "$s" ]]; then ln -nfs "$s" "$d" 2>/dev/null || sudo ln -nfs "$s" "$d"; fi
-    set -x
+	mkdir -p "$s" 2>/dev/null || sudo mkdir -p "$s"
+	mkdir -p "$(dirname "$d")" 2>/dev/null || sudo mkdir -p "$(dirname "$d")"
+	if [[ "$(readlink "$d")" != "$s" ]]; then ln -nfs "$s" "$d" 2>/dev/null || sudo ln -nfs "$s" "$d"; fi
+	set -x
 }
 
 function cache {
-  if ! type -P sudo; then return 0; fi
+	if ! type -P sudo; then return 0; fi
 
-  if [[ "Linux" == "$(uname -s)" ]]; then
-	  if test -d /workspaces; then
-      sudo install -d -m 0755 -o ubuntu -g ubuntu /workspaces
-      ln -nfs /workspaces ~/work
-    else
-      sudo install -d -m 0755 -o ubuntu -g ubuntu /work
-      ln -nfs /work ~/work
-    fi
+	if [[ "Linux" == "$(uname -s)" ]]; then
+		if test -d /workspaces; then
+			sudo install -d -m 0755 -o ubuntu -g ubuntu /workspaces
+			ln -nfs /workspaces ~/work
+		else
+			sudo install -d -m 0755 -o ubuntu -g ubuntu /work
+			ln -nfs /work ~/work
+		fi
 		sudo chown ubuntu:ubuntu ~/work/.
-  fi
+	fi
 
-  persist ~/work/config-gh ~/.config/gh
+	persist ~/work/config-gh ~/.config/gh
 
-  persist ~/work/config-gcloud ~/.config/gcloud
+	persist ~/work/config-gcloud ~/.config/gcloud
 
-  persist ~/work/config-precommit ~/.cache/pre-commit
+	persist ~/work/config-precommit ~/.cache/pre-commit
 
-  persist ~/work/config-temporalite ~/.config/temporalite
+	persist ~/work/config-temporalite ~/.config/temporalite
 
-  persist ~/work/config-kube ~/.kube
+	persist ~/work/config-kube ~/.kube
 
-  persist ~/work/local-gh ~/.local/share/gh
+	persist ~/work/local-gh ~/.local/share/gh
 
-  persist ~/work/terraform-d ~/.terraform.d
-  mkdir -p ~/.terraform.d/plugin-cache
+	persist ~/work/terraform-d ~/.terraform.d
+	mkdir -p ~/.terraform.d/plugin-cache
 
-  persist ~/work/go-build ~/.cache/go-build
-  persist ~/work/go-mod ~/.cache/go-mod
-  persist ~/work/go ~/go
+	persist ~/work/go-build ~/.cache/go-build
+	persist ~/work/go-mod ~/.cache/go-mod
+	persist ~/work/go ~/go
 
-  persist ~/work/config-coder ~/.config/coderv2
-  persist ~/work/code-server-cache/extensions ~/.local/share/code-server/extensions
-  persist ~/work/vscode-cache/extensions ~/.vscode-server/extensions
+	persist ~/work/config-coder ~/.config/coderv2
+	persist ~/work/code-server-cache/extensions ~/.local/share/code-server/extensions
+	persist ~/work/vscode-cache/extensions ~/.vscode-server/extensions
 
-  persist ~/work/direnv-allow ~/.local/share/direnv
-  persist ~/work/direnv-home ~/.direnv
+	persist ~/work/direnv-allow ~/.local/share/direnv
+	persist ~/work/direnv-home ~/.direnv
 
-  persist ~/work/tailscale-state /var/lib/tailscale
+	persist ~/work/tailscale-state /var/lib/tailscale
 
-  persist ~/work/vscode-server/CachedExtensionVSIXs ~/.vscode-server/data/CachedExtensionVSIXs
+	persist ~/work/vscode-server/CachedExtensionVSIXs ~/.vscode-server/data/CachedExtensionVSIXs
 }
 
 cache "$@"

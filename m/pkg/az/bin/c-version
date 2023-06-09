@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function options {
-  DEFINE_string name 'world' "somebody's name" n
+	DEFINE_string name 'world' "somebody's name" n
 }
 
 function main {

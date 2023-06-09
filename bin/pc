@@ -2,28 +2,28 @@
 
 function main {
 	case "${1:-}" in
-		install)
-			(
-				cat <<EOF
+	install)
+		(
+			cat <<EOF
 #!/usr/bin/env bash
 
 ARGS=(hook-impl --config=.pre-commit-config.yaml --hook-type=pre-commit)
-HERE="\$(cd "$(dirname "\$0")" && pwd)"
+HERE="\$(cd "$(dirname '$0')" && pwd)"
 ARGS+=(--hook-dir "\$HERE" -- "\$@")
 
 exec pc "\${ARGS[@]}"
 
 EOF
-			) > .git/hooks/pre-commit
-			chmod 755 .git/hooks/pre-commit
-			;;
-		*)
-			if [[ -d .cache/pre-commit ]]; then
-				env PRE_COMMIT_HOME="$(pwd)/.cache/pre-commit" pre-commit "$@"
-			else
-				pre-commit "$@"
-			fi
-			;;
+		) >.git/hooks/pre-commit
+		chmod 755 .git/hooks/pre-commit
+		;;
+	*)
+		if [[ -d .cache/pre-commit ]]; then
+			env PRE_COMMIT_HOME="$(pwd)/.cache/pre-commit" pre-commit "$@"
+		else
+			pre-commit "$@"
+		fi
+		;;
 	esac
 }
 

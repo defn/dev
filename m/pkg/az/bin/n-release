@@ -4,8 +4,8 @@ function main {
 	set -efu
 
 	git pull
-	if ! n cut "$*" ; then
-		if [[ -n "${1:-}" ]]; then
+	if ! n cut "$*"; then
+		if [[ -n ${1:-} ]]; then
 			git add -u .
 			git commit -m "$*"
 			n cut "$*"

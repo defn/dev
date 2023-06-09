@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 function main {
-  set -exfu
+	set -exfu
 
-  if [[ "$(whoami)" == "ubuntu" ]]; then
-    exec sudo "$0" "$@"
-    return $?
-  fi
+	if [[ "$(whoami)" == "ubuntu" ]]; then
+		exec sudo "$0" "$@"
+		return $?
+	fi
 
-  cat << EOF | tee /etc/apt/apt.conf.d/local
+	cat <<EOF | tee /etc/apt/apt.conf.d/local
 DPkg::Lock::Timeout "-1";
 Dpkg::Options {
    "--force-confdef";
@@ -16,8 +16,8 @@ Dpkg::Options {
 };
 EOF
 
-  apt update
-  apt purge --auto-remove -y unattended-upgrades
+	apt update
+	apt purge --auto-remove -y unattended-upgrades
 }
 
 main "$@"

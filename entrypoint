@@ -4,25 +4,25 @@ set -exfu
 
 # initialize /nix
 if [[ -d /nix-install ]]; then
-    if [[ ! -d /nix/var/nix/profiles/per-user/ubuntu/profile/. ]]; then
-        rsync -ia /nix-install/. /nix/.
-    else
-        rsync -ia /nix-install/store/. /nix/store/.
-    fi
+	if [[ ! -d /nix/var/nix/profiles/per-user/ubuntu/profile/. ]]; then
+		rsync -ia /nix-install/. /nix/.
+	else
+		rsync -ia /nix-install/store/. /nix/store/.
+	fi
 fi
 
 set +x
- . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh
+. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh
 
 # initial flake from /app
 if [[ -f /app/.envrc ]]; then
-    eval "$(direnv hook bash)"
-    direnv allow
-    _direnv_hook
+	eval "$(direnv hook bash)"
+	direnv allow
+	_direnv_hook
 else
-    set +f
-    for a in /nix/store/*/bin; do PATH="$PATH:$a"; done
-    set -f
+	set +f
+	for a in /nix/store/*/bin; do PATH="$PATH:$a"; done
+	set -f
 fi
 
 # one of the nix stores has an executable "nix-entrypoint"

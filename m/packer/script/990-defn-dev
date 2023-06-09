@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 
 function main {
-  set -exfu
+	set -exfu
 
-  if ! [[ "$(whoami)" == "ubuntu" ]]; then
-    exec sudo -H -i -u ubuntu "$0" "$@"
-    return $?
-  fi
+	if ! [[ "$(whoami)" == "ubuntu" ]]; then
+		exec sudo -H -i -u ubuntu "$0" "$@"
+		return $?
+	fi
 
-  ssh -o StrictHostKeyChecking=no git@github.com true || true
-  git clone https://github.com/defn/dev home
-  mv home/.git .
-  git reset --hard
-  git submodule update --init
-  git clean -fdx
+	ssh -o StrictHostKeyChecking=no git@github.com true || true
+	git clone https://github.com/defn/dev home
+	mv home/.git .
+	git reset --hard
+	git submodule update --init
+	git clean -fdx
 }
 
 main "$@"

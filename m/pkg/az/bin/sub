@@ -17,23 +17,23 @@
 set -efu
 
 function sdebug {
-  if [[ -n "${DEBUG:-}" ]]; then
-    echo "$@" 1>&2
-  fi
+	if [[ -n ${DEBUG:-} ]]; then
+		echo "$@" 1>&2
+	fi
 }
 
 function save-function {
-    local original="$(declare -f $1)"
-    local override="$2${original#$1}"
-    eval "$override"
+	local original="$(declare -f $1)"
+	local override="$2${original#$1}"
+	eval "$override"
 }
 
 # https://stackoverflow.com/questions/38972736/how-to-print-lines-between-two-patterns-inclusive-or-exclusive-in-sed-awk-or
 function sub-help {
-  FLAGS_PARENT="${0##*/}"
-  FLAGS_PARENT="${FLAGS_PARENT//-/ }"
+	FLAGS_PARENT="${0##*/}"
+	FLAGS_PARENT="${FLAGS_PARENT//-/ }"
 
-  FLAGS_HELP="$(awk '
+	FLAGS_HELP="$(awk '
     BEGIN   {first=1}
     /^# /   {if (first) {flag=1; first=0}}
     /^[^#]/ {flag=0}
@@ -42,73 +42,74 @@ function sub-help {
     flag
   ' "$0")"
 
-  FLAGS_HELP="${FLAGS_HELP:+${FLAGS_HELP}
+	FLAGS_HELP="${FLAGS_HELP:+${FLAGS_HELP}
 }"
 
-  if [[ "$FLAGS_HELP" =~ ^\s*$ || ! "$FLAGS_HELP" =~ ^USAGE: ]]; then
-    FLAGS_HELP="USAGE: ${FLAGS_PARENT} [flags] args
+	if [[ $FLAGS_HELP =~ ^\s*$ || ! $FLAGS_HELP =~ ^USAGE: ]]; then
+		FLAGS_HELP="USAGE: ${FLAGS_PARENT} [flags] args
 "
-  fi
+	fi
 
-  shflags-help
-  exit $?
+	shflags-help
+	exit $?
 }
 
 function call-main {
-  if declare -F options >/dev/null; then
-    source shflags
+	if declare -F options >/dev/null; then
+		source shflags
 
-    save-function flags_help shflags-help
-    function flags_help { sub-help; }
+		save-function flags_help shflags-help
+		function flags_help { sub-help; }
 
-    options
+		options
 
-    POSIXLY_CORRECT=1 FLAGS "$@" || return $?
-    unset POSIXLY_CORRECT
-    eval set -- "${FLAGS_ARGV}"
-  fi
+		POSIXLY_CORRECT=1 FLAGS "$@" || return $?
+		unset POSIXLY_CORRECT
+		eval set -- "${FLAGS_ARGV}"
+	fi
 
-  sdebug "call: main $@"
-  if declare -F main >/dev/null; then
-    main "$@"
-    return $?
-  else
-    sdebug "missing: main $@"
-    return 1
-  fi
+	sdebug "call: main $@"
+	if declare -F main >/dev/null; then
+		main "$@"
+		return $?
+	else
+		sdebug "missing: main $@"
+		return 1
+	fi
 }
 
 function sub-main {
-  local cmd="$1"; shift
-  local bare_cmd="${cmd##*/}"
+	local cmd="$1"
+	shift
+	local bare_cmd="${cmd##*/}"
 
-  sdebug
-  sdebug "cmd: $cmd"
-  sdebug "bare-cmd; $bare_cmd"
-  sdebug "args: $@"
+	sdebug
+	sdebug "cmd: $cmd"
+	sdebug "bare-cmd; $bare_cmd"
+	sdebug "args: $@"
 
-  if [[ "$#" == 0 ]]; then
-    call-main "$@"
-    return $?
-  fi
+	if [[ $# == 0 ]]; then
+		call-main "$@"
+		return $?
+	fi
 
-  local sub_cmd="$1"
+	local sub_cmd="$1"
 
-  sdebug "finding: ${bare_cmd}-${sub_cmd}"
-  set +e
-  found_cmd="$(type -P "${bare_cmd}-${sub_cmd}")"
-  set -e
+	sdebug "finding: ${bare_cmd}-${sub_cmd}"
+	set +e
+	found_cmd="$(type -P "${bare_cmd}-${sub_cmd}")"
+	set -e
 
-  if [[ -z "${found_cmd}" ]]; then
-    call-main "$@"
-    return $?
-  fi
-  sdebug "found: ${found_cmd}"
+	if [[ -z ${found_cmd} ]]; then
+		call-main "$@"
+		return $?
+	fi
+	sdebug "found: ${found_cmd}"
 
-  shift
-  sdebug "exec: ${found_cmd} $@"
-  exec "${found_cmd}" "$@"
-  return $?
+	shift
+	sdebug "exec: ${found_cmd} $@"
+	exec "${found_cmd}" "$@"
+	return $?
 }
 
 sub-main "$@"

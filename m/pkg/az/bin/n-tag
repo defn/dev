@@ -24,7 +24,7 @@ function main {
 	if [[ "null" == "$revision" ]]; then revision=""; fi
 
 	local tag=
-	if [[ -n "${version}" ]]; then
+	if [[ -n ${version} ]]; then
 		tag="${slug:+${slug}-}${version}"
 	else
 		tag="${slug}${vendor:+-${vendor}}${revision:+-${revision}}"

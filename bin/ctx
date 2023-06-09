@@ -5,13 +5,13 @@ function main {
 
 	local ns="${0##*/}"
 	case "${1:-}" in
-		--)
-			shift
-			exec "$@"
-			;;
-		*)
-			exec kubectl --context k3d-control -n "${ns}" "$@"
-			;;
+	--)
+		shift
+		exec "$@"
+		;;
+	*)
+		exec kubectl --context k3d-control -n "${ns}" "$@"
+		;;
 	esac
 }
 

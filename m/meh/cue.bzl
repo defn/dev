@@ -22,7 +22,7 @@ def _cue_impl(ctx):
 cue = rule(
     implementation = _cue_impl,
     attrs = {
-        "srcs": attr.label_list(allow_files = [".cue"]),
         "expr": attr.string(default = ""),
+        "srcs": attr.label_list(allow_files = [".cue"]),
     },
 )

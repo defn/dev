@@ -3,8 +3,10 @@
 function main {
 	set -efu
 
-	local version="$1"; shift
-	local url="$1"; shift
+	local version="$1"
+	shift
+	local url="$1"
+	shift
 
 	local slug="$(basename "$(pwd)")"
 	local ghrepo="$(echo "$url" | cut -d/ -f4-5)"

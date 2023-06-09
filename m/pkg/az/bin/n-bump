@@ -3,47 +3,48 @@
 function main {
 	set -efu
 
-	if [[ -z "${1:-}" ]]; then
+	if [[ -z ${1:-} ]]; then
 		if [[ "null" != "$(jq -r '.vendor' <flake.json)" ]]; then
 			# vendor 1.0.0-1 -> 1.0.0-2
 			if [[ "null" == "$(jq -r '.revision' <flake.json)" ]]; then
-				jq '. + { revision: "0" }' < flake.json > 1
+				jq '. + { revision: "0" }' <flake.json >1
 				mv 1 flake.json
 			fi
 
-			jq '. + { revision: ((.revision | tonumber) + 1 | tostring) }' < flake.json > 1
+			jq '. + { revision: ((.revision | tonumber) + 1 | tostring) }' <flake.json >1
 			mv 1 flake.json
 		else
 			# version 1.2.3 -> 1.2.4
 			if [[ "null" == "$(jq -r '.version' <flake.json)" ]]; then
-				jq '. + { version: "0.0.0" }' < flake.json > 1
+				jq '. + { version: "0.0.0" }' <flake.json >1
 				mv 1 flake.json
 			fi
 
 			local rev="$(jq -r '.version' <flake.json | cut -d. -f3-)"
-			local majmin="$(jq -r '.version' <flake.json  | cut -d. -f1-2)"
-			jq --arg version "$majmin.$((rev + 1 ))" '. + { version: $version }' < flake.json > 1
+			local majmin="$(jq -r '.version' <flake.json | cut -d. -f1-2)"
+			jq --arg version "$majmin.$((rev + 1))" '. + { version: $version }' <flake.json >1
 			mv 1 flake.json
 		fi
 	else
-		local version="$1"; shift
+		local version="$1"
+		shift
 
 		if [[ "null" != "$(jq -r '.vendor' <flake.json)" ]]; then
-			jq --arg version "$version" '. + { vendor: $version }' < flake.json > 1
+			jq --arg version "$version" '. + { vendor: $version }' <flake.json >1
 			mv 1 flake.json
-			jq '. + { revision: "0" }' < flake.json > 1
+			jq '. + { revision: "0" }' <flake.json >1
 			mv 1 flake.json
-      n reset
-      while true; do
-        if git grep sha256-aaaaa .; then
-          n sha
-        else
-          env GIT_PAGER=cat git diff flake.nix
-          break
-        fi
-      done
+			n reset
+			while true; do
+				if git grep sha256-aaaaa .; then
+					n sha
+				else
+					env GIT_PAGER=cat git diff flake.nix
+					break
+				fi
+			done
 		else
-			jq --arg version "$version" '. + { version: $version }' < flake.json > 1
+			jq --arg version "$version" '. + { version: $version }' <flake.json >1
 			mv 1 flake.json
 		fi
 	fi
