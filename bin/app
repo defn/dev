@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 function main {
-	set -efu
+	set -efu -o pipefail
 
 	case "${1:-}" in
 	sync | get | wait | terminate-op | resources | logs | diff)
-		exec argocd --core app "$1" "$(app list | tail -n +2 | awk '{print $1}' | fzf --query="${2:-}" --select-1)"
+		exec argocd --core app "$1" "$(app list | tail -n +2 | awk '{print $1}' | fzf --query="${2:-}" --select-1 || true)"
 		;;
 	*)
 		exec argocd --core app "$@"

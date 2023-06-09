@@ -29,19 +29,24 @@
 # no-symkey-cache
 # use-agent
 
+set -efu -o pipefail
+
 function main {
-	export GNUPGHOME="$(mktemp -d -t gnupg_$(date +%Y%m%d%H%M)_XXX)"
-	export GNUPASS="$(mktemp -t gnupg_$(date +%Y%m%d%H%M)_XXX)"
+	GNUPGHOME="$(mktemp -d -t "gnupg_$(date +%Y%m%d%H%M || true)_XXX")"
+	GNUPASS="$(mktemp -t "gnupg_$(date +%Y%m%d%H%M || true)_XXX)")"
 
-	gpg --gen-random --armor 0 24 >"$GNUPASS"
+	export GNUPGHOME GNUPASS
 
-	gpg --batch --passphrase-file "$GNUPASS" --quick-generate-key "defn Nghiem <iam@defn.sh>" rsa4096 cert 1y
+	gpg --gen-random --armor 0 24 >"${GNUPASS}"
 
-	local FPR="$(gpg --list-options show-only-fpr-mbox --list-secret-keys | awk '{print $1}')"
+	gpg --batch --passphrase-file "${GNUPASS}" --quick-generate-key "defn Nghiem <iam@defn.sh>" rsa4096 cert 1y
 
-	gpg --batch --passphrase-file "$GNUPASS" --pinentry-mode loopback --quick-add-key "$FPR" rsa4096 sign 1y
-	gpg --batch --passphrase-file "$GNUPASS" --pinentry-mode loopback --quick-add-key "$FPR" rsa4096 encrypt 1y
-	gpg --batch --passphrase-file "$GNUPASS" --pinentry-mode loopback --quick-add-key "$FPR" rsa4096 auth 1y
+	local FPR
+	FPR="$(gpg --list-options show-only-fpr-mbox --list-secret-keys | awk '{print $1}')"
+
+	gpg --batch --passphrase-file "${GNUPASS}" --pinentry-mode loopback --quick-add-key "${FPR}" rsa4096 sign 1y
+	gpg --batch --passphrase-file "${GNUPASS}" --pinentry-mode loopback --quick-add-key "${FPR}" rsa4096 encrypt 1y
+	gpg --batch --passphrase-file "${GNUPASS}" --pinentry-mode loopback --quick-add-key "${FPR}" rsa4096 auth 1y
 
 	gpg --list-keys
 	gpg -K
