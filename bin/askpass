@@ -2,4 +2,4 @@
 
 set -efu
 
-pass macos_$(uname -n)
+pass "macos_$(uname -n || true)"

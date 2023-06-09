@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+set -efu -o pipefail
+
 function main {
-	git diff "$@" | egrep '^([-+]|diff)' | egrep -v '^(---|\+\+\+)' | perl -pe 's{^(diff.*)}{#last:$last\n\n$1}; $last = $1 if $1;' | sed '/^diff --git a.flake.lock/,/a.flake.lock/d' | grep -v ^#last:
+	git diff "$@" | grep -E '^([-+]|diff)' | grep -E -v '^(---|\+\+\+)' | perl -pe 's{^(diff.*)}{#last:$last\n\n$1}; $last = $1 if $1;' | sed '/^diff --git a.flake.lock/,/a.flake.lock/d' | grep -v ^#last:
 }
 
 main "$@"

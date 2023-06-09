@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
+set -efu -o pipefail
+
 function main {
 	case "${1:-}" in
 	role)
 		shift
 		local role="$1"
 		shift
-		set $(kv issue admin.gyre.defn.dev 1m "$(mktemp -d -t XXXXXX)") "$@"
+		set "$(kv issue admin.gyre.defn.dev 1m "$(mktemp -d -t XXXXXX)" || true)" "$@"
 
 		# TODO ensure cert, key are certificates
 		local cert="$1"
@@ -16,26 +18,28 @@ function main {
 
 		if [[ $# == 0 ]]; then
 			aws_signing_helper credential-process \
-				--certificate "$cert" --private-key "$key" \
+				--certificate "${cert}" --private-key "${key}" \
 				--trust-anchor-arn arn:aws:rolesanywhere:us-east-1:319951235442:trust-anchor/bcfd2f6f-388e-4cf8-a753-75238af6ada6 \
 				--profile-arn arn:aws:rolesanywhere:us-east-1:319951235442:profile/f903c6fc-931e-4163-bc62-6e44252526ac \
-				--role-arn "$role"
-			rm -f "$cert" "$key"
+				--role-arn "${role}"
+			rm -f "${cert}" "${key}"
 		else
-			local tmp="$(mktemp -d -t XXXXXX)"
+			local tmp
+			tmp="$(mktemp -d -t XXXXXX)"
 
 			aws_signing_helper credential-process \
-				--certificate "$cert" --private-key "$key" \
+				--certificate "${cert}" --private-key "${key}" \
 				--trust-anchor-arn arn:aws:rolesanywhere:us-east-1:319951235442:trust-anchor/bcfd2f6f-388e-4cf8-a753-75238af6ada6 \
 				--profile-arn arn:aws:rolesanywhere:us-east-1:319951235442:profile/f903c6fc-931e-4163-bc62-6e44252526ac \
-				--role-arn "$role" >"$tmp/creds.json"
-			rm -f "$cert" "$key"
+				--role-arn "${role}" >"${tmp}/creds.json"
+			rm -f "${cert}" "${key}"
 
-			export AWS_ACCESS_KEY_ID="$(cat "$tmp/creds.json" | jq -r .AccessKeyId)"
-			export AWS_SECRET_ACCESS_KEY="$(cat "$tmp/creds.json" | jq -r .SecretAccessKey)"
-			export AWS_SESSION_TOKEN="$(cat "$tmp/creds.json" | jq -r .SessionToken)"
-			export AWS_EXPIRATION="$(cat "$tmp/creds.json" | jq -r .Expiration)"
-			rm -f "$tmp/creds.json"
+			AWS_ACCESS_KEY_ID="$(jq -r .AccessKeyId <"${tmp}/creds.json")"
+			AWS_SECRET_ACCESS_KEY="$(jq -r .SecretAccessKey <"${tmp}/creds.json")"
+			AWS_SESSION_TOKEN="$(jq -r .SessionToken <"${tmp}/creds.json")"
+			AWS_EXPIRATION="$(jq -r .Expiration <"${tmp}/creds.json")"
+			export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_EXPIRATION
+			rm -f "${tmp}/creds.json"
 
 			exec "$@"
 		fi
@@ -56,13 +60,13 @@ function main {
 
 			local cert="cert"
 
-			kv issue admin.gyre.defn.dev 1m >"$tmp/$cert.json"
-			cat "$tmp/$cert.json" | jq -r '.data.certificate' >"$tmp/$cert.crt"
-			cat "$tmp/$cert.json" | jq -r '.data.private_key' >"$tmp/$cert.key"
-			rm -f "$tmp/$cert.json"
-			echo "$tmp/$cert.crt $tmp/$cert.key"
+			kv issue admin.gyre.defn.dev 1m >"${tmp}/${cert}.json"
+			jq -r '.data.certificate' <"${tmp}/${cert}.json" >"${tmp}/${cert}.crt"
+			jq -r '.data.private_key' <"${tmp}/${cert}.json" >"${tmp}/${cert}.key"
+			rm -f "${tmp}/${cert}.json"
+			echo "${tmp}/${cert}.crt ${tmp}/${cert}.key"
 		else
-			vault write "pki/issue/$issue" common_name="$cn" ttl="$ttl" -format=json
+			vault write "pki/issue/${issue}" common_name="${cn}" ttl="${ttl}" -format=json
 		fi
 		;;
 	delete)
