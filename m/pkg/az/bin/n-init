@@ -9,17 +9,17 @@ function main {
 	shift
 
 	local slug="$(basename "$(pwd)")"
-	local ghrepo="$(echo "$url" | cut -d/ -f4-5)"
+	local ghrepo="$(echo "${url}" | cut -d/ -f4-5)"
 
-	jq -n --arg ghrepo "$ghrepo" --arg slug "$slug" '{slug: "\($slug)", ghrepo: "\($ghrepo)"}' | tee flake.json
+	jq -n --arg ghrepo "${ghrepo}" --arg slug "${slug}" '{slug: "\($slug)", ghrepo: "\($ghrepo)"}' | tee flake.json
 
-	n bump "$version"
+	n bump "${version}"
 
-	url="$(echo "$url" | perl -pe 's{linux|macos|darwin}{\${input.os}}ig')"
-	url="$(echo "$url" | perl -pe 's{arm64|amd64|x86_64|aarch64}{\${input.arch}}ig')"
-	url="$(echo "$url" | perl -pe 's{\d+\.\d+\.\d+}{\${input.vendor}}ig')"
+	url="$(echo "${url}" | perl -pe 's{linux|macos|darwin}{\${input.os}}ig')"
+	url="$(echo "${url}" | perl -pe 's{arm64|amd64|x86_64|aarch64}{\${input.arch}}ig')"
+	url="$(echo "${url}" | perl -pe 's{\d+\.\d+\.\d+}{\${input.vendor}}ig')"
 
-	sed "s#url_template = input:.*#url_template = input: \"$url\";#" -i flake.nix
+	sed "s#url_template = input:.*#url_template = input: \"${url}\";#" -i flake.nix
 
 	n reset
 	n sha

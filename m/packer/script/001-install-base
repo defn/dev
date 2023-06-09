@@ -45,16 +45,16 @@ function main {
 	for a in 1; do
 		(
 			echo [NetDev]
-			echo Name=dummy$a
+			echo Name=dummy"${a}"
 			echo Kind=dummy
-		) | tee dummy$a.netdev
+		) | tee dummy"${a}".netdev
 		(
 			echo [Match]
-			echo Name=dummy$a
+			echo Name=dummy"${a}"
 			echo
 			echo [Network]
-			echo Address=169.254.32.$a/32
-		) | tee dummy$a.network
+			echo Address=169.254.32."${a}"/32
+		) | tee dummy"${a}".network
 
 	done
 	systemctl restart systemd-networkd

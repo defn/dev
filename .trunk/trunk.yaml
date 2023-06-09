@@ -22,6 +22,7 @@ lint:
         - m/k/*/patch-*.yaml
         - m/k/**/local/**
         - m/**/*_go_gen.cue
+        - "**/node_modules/**"
   enabled:
     - actionlint@1.6.24
     - black@23.3.0
