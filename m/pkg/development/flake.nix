@@ -14,7 +14,6 @@
           gnumake
           git
           git-lfs
-          pre-commit
           inputs.bazelisk.defaultPackage.${ctx.system}
           inputs.ibazel.defaultPackage.${ctx.system}
           inputs.buildifier.defaultPackage.${ctx.system}

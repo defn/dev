@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 
-export VAULT_PASS_KEY="vault-token-helper/$(echo "$VAULT_ADDR" | base64 -w 0)/$(echo "$VSCODE_PROXY_URI" | base64 -w 0)"
+VAULT_PASS_KEY="vault-token-helper/$(echo "${VAULT_ADDR}" | base64 -w 0 || true)/$(echo "${VSCODE_PROXY_URI}" | base64 -w 0 || true)"
+export VAULT_PASS_KEY
 
 function main {
 	case "${1:-}" in
 	get)
 		if pass "${VAULT_PASS_KEY}" >/dev/null 2>&1; then
-			pass "${VAULT_PASS_KEY}" | perl -pe 's{\s*$}{}'
+			pass "${VAULT_PASS_KEY}" | perl -pe 's{\s*$}{}' || true
 		fi
 		;;
 	store)
-		cat | perl -pe 's{\s*$}{}' | pass insert -e -f "${VAULT_PASS_KEY}"
+		cat | perl -pe 's{\s*$}{}' | pass insert -e -f "${VAULT_PASS_KEY}" || true
 		;;
 	erase)
 		pass rm -f "${VAULT_PASS_KEY}"
