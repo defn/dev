@@ -45,6 +45,7 @@ type AwsOrganization struct {
 }
 
 type KubernetesCluster struct {
+	Name   string
 	Region string `json:"region"`
 
 	NodeGroup map[string]KubernetesNodeGroup `json:"nodegroup"`
@@ -55,6 +56,8 @@ type KubernetesCluster struct {
 }
 
 type KubernetesNodeGroup struct {
+	Name string
+
 	InstanceTypes []string `json:"instance_types"`
 
 	AZ map[string]AWSVPCNetwork `json:"az"`
