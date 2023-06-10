@@ -4,7 +4,7 @@
     bazelisk.url = github:defn/dev/pkg-bazelisk-1.17.0-3?dir=m/pkg/bazelisk;
   };
 
-  outputs = inputs: inputs.ibazel.inputs.pkg.main rec {
+  outputs = inputs: inputs.buildifier.inputs.pkg.main rec {
     src = ./.;
 
     defaultPackage = ctx: ctx.wrap.nullBuilder {
