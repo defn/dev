@@ -70,7 +70,7 @@ jobs:
         with:
           path: |
             ~/.cache/bazel
-          key: ${{ runner.os }}-bazel-${{ hashFiles('.bazelversion', '.bazelrc', 'WORKSPACE', 'WORKSPACE.bazel', 'MODULE.bazel') }}
+          key: ${{ runner.os }}-bazel-${{ hashFiles('m/.bazelversion', 'm/.bazelrc', 'm/WORKSPACE') }}
           restore-keys: |
             ${{ runner.os }}-bazel-
       - name: bazel build
