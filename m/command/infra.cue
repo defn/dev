@@ -18,7 +18,7 @@ package main
 	region: string
 	nodegroup: [string]: {
 		instance_types: [...string]
-		az: [string]: networkk: string
+		az: [string]: network: string
 	}
 	vpc: cidrs: [...string]
 }

@@ -47,7 +47,7 @@ type AwsOrganization struct {
 type KubernetesCluster struct {
 	Region string `json:"region"`
 
-	NodeGroups map[string]KubernetesNodeGroup `json:"nodegroup"`
+	NodeGroup map[string]KubernetesNodeGroup `json:"nodegroup"`
 
 	VPC struct {
 		CIDRs []string `json:"cidrs"`
@@ -57,7 +57,7 @@ type KubernetesCluster struct {
 type KubernetesNodeGroup struct {
 	InstanceTypes []string `json:"instance_types"`
 
-	AZs map[string]AWSVPCNetwork `json:"az"`
+	AZ map[string]AWSVPCNetwork `json:"az"`
 }
 
 type AWSVPCNetwork struct {
