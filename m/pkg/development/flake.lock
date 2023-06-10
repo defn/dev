@@ -86,28 +86,6 @@
         "type": "github"
       }
     },
-    "dev_3": {
-      "inputs": {
-        "flake-utils": "flake-utils_3",
-        "nixpkgs": "nixpkgs_3"
-      },
-      "locked": {
-        "dir": "m/pkg/dev",
-        "lastModified": 1685332452,
-        "narHash": "sha256-p2lDTwwrSFljc9o3phTLXSMw4SQ0tDvlR9tKi6cgZwg=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "2f79e5808a4135c6f6f5f148fc3271ba9f740996",
-        "type": "github"
-      },
-      "original": {
-        "dir": "m/pkg/dev",
-        "owner": "defn",
-        "ref": "pkg-dev-0.0.8",
-        "repo": "dev",
-        "type": "github"
-      }
-    },
     "flake-utils": {
       "locked": {
         "lastModified": 1652776076,
@@ -140,43 +118,6 @@
         "type": "github"
       }
     },
-    "flake-utils_3": {
-      "locked": {
-        "lastModified": 1652776076,
-        "narHash": "sha256-gzTw/v1vj4dOVbpBSJX4J0DwUR6LIyXo7/SuuTJp1kM=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "04c1b180862888302ddfb2e3ad9eaa63afc60cf8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "04c1b180862888302ddfb2e3ad9eaa63afc60cf8",
-        "type": "github"
-      }
-    },
-    "ibazel": {
-      "inputs": {
-        "pkg": "pkg_3"
-      },
-      "locked": {
-        "dir": "m/pkg/ibazel",
-        "lastModified": 1685334115,
-        "narHash": "sha256-IGAz8uPo1mU3rUWQqNAUIQmYX1n+6awHDGDVJu3iV7g=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "38f1c4f06d8c1f22c7bc1bf5e4f4e3382c833468",
-        "type": "github"
-      },
-      "original": {
-        "dir": "m/pkg/ibazel",
-        "owner": "defn",
-        "ref": "pkg-ibazel-0.22.0-8",
-        "repo": "dev",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1669833724,
@@ -194,22 +135,6 @@
       }
     },
     "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1669833724,
-        "narHash": "sha256-/HEZNyGbnQecrgJnfE8d0WC5c1xuPSD2LUpB6YXlg4c=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "4d2b37a84fad1091b9de401eb450aae66f1a741e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "4d2b37a84fad1091b9de401eb450aae66f1a741e",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
       "locked": {
         "lastModified": 1669833724,
         "narHash": "sha256-/HEZNyGbnQecrgJnfE8d0WC5c1xuPSD2LUpB6YXlg4c=",
@@ -267,32 +192,10 @@
         "type": "github"
       }
     },
-    "pkg_3": {
-      "inputs": {
-        "dev": "dev_3"
-      },
-      "locked": {
-        "dir": "m/pkg/pkg",
-        "lastModified": 1685333328,
-        "narHash": "sha256-uzyiI1vF32yd7M52Zhj3XZSY7vxGM+LRZ214jAdNeUQ=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "a870238fa0ed43a425287b594af9f537161e1ff3",
-        "type": "github"
-      },
-      "original": {
-        "dir": "m/pkg/pkg",
-        "owner": "defn",
-        "ref": "pkg-pkg-0.0.10",
-        "repo": "dev",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "bazelisk": "bazelisk",
-        "buildifier": "buildifier",
-        "ibazel": "ibazel"
+        "buildifier": "buildifier"
       }
     }
   },
