@@ -15,6 +15,8 @@ type TerraformAwsEksCluster interface {
 	SetAdditionalTagMap(val *map[string]*string)
 	Addons() interface{}
 	SetAddons(val interface{})
+	AddonsDependsOn() interface{}
+	SetAddonsDependsOn(val interface{})
 	AllowedCidrBlocks() *[]*string
 	SetAllowedCidrBlocks(val *[]*string)
 	AllowedSecurityGroupIds() *[]*string
@@ -37,6 +39,8 @@ type TerraformAwsEksCluster interface {
 	CloudwatchLogGroupNameOutput() *string
 	ClusterAttributes() *[]*string
 	SetClusterAttributes(val *[]*string)
+	ClusterDependsOn() interface{}
+	SetClusterDependsOn(val interface{})
 	ClusterEncryptionConfigEnabled() *bool
 	SetClusterEncryptionConfigEnabled(val *bool)
 	ClusterEncryptionConfigEnabledOutput() *string
@@ -141,6 +145,8 @@ type TerraformAwsEksCluster interface {
 	SetLabelValueCase(val *string)
 	LocalExecInterpreter() *[]*string
 	SetLocalExecInterpreter(val *[]*string)
+	ManagedSecurityGroupRulesEnabled() *bool
+	SetManagedSecurityGroupRulesEnabled(val *bool)
 	MapAdditionalAwsAccounts() *[]*string
 	SetMapAdditionalAwsAccounts(val *[]*string)
 	MapAdditionalIamRoles() interface{}
@@ -237,6 +243,16 @@ func (j *jsiiProxy_TerraformAwsEksCluster) Addons() interface{} {
 	_jsii_.Get(
 		j,
 		"addons",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster) AddonsDependsOn() interface{} {
+	var returns interface{}
+	_jsii_.Get(
+		j,
+		"addonsDependsOn",
 		&returns,
 	)
 	return returns
@@ -357,6 +373,16 @@ func (j *jsiiProxy_TerraformAwsEksCluster) ClusterAttributes() *[]*string {
 	_jsii_.Get(
 		j,
 		"clusterAttributes",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster) ClusterDependsOn() interface{} {
+	var returns interface{}
+	_jsii_.Get(
+		j,
+		"clusterDependsOn",
 		&returns,
 	)
 	return returns
@@ -932,6 +958,16 @@ func (j *jsiiProxy_TerraformAwsEksCluster) LocalExecInterpreter() *[]*string {
 	return returns
 }
 
+func (j *jsiiProxy_TerraformAwsEksCluster) ManagedSecurityGroupRulesEnabled() *bool {
+	var returns *bool
+	_jsii_.Get(
+		j,
+		"managedSecurityGroupRulesEnabled",
+		&returns,
+	)
+	return returns
+}
+
 func (j *jsiiProxy_TerraformAwsEksCluster) MapAdditionalAwsAccounts() *[]*string {
 	var returns *[]*string
 	_jsii_.Get(
@@ -1259,6 +1295,17 @@ func (j *jsiiProxy_TerraformAwsEksCluster)SetAddons(val interface{}) {
 	)
 }
 
+func (j *jsiiProxy_TerraformAwsEksCluster)SetAddonsDependsOn(val interface{}) {
+	if err := j.validateSetAddonsDependsOnParameters(val); err != nil {
+		panic(err)
+	}
+	_jsii_.Set(
+		j,
+		"addonsDependsOn",
+		val,
+	)
+}
+
 func (j *jsiiProxy_TerraformAwsEksCluster)SetAllowedCidrBlocks(val *[]*string) {
 	_jsii_.Set(
 		j,
@@ -1327,6 +1374,17 @@ func (j *jsiiProxy_TerraformAwsEksCluster)SetClusterAttributes(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"clusterAttributes",
+		val,
+	)
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster)SetClusterDependsOn(val interface{}) {
+	if err := j.validateSetClusterDependsOnParameters(val); err != nil {
+		panic(err)
+	}
+	_jsii_.Set(
+		j,
+		"clusterDependsOn",
 		val,
 	)
 }
@@ -1660,6 +1718,14 @@ func (j *jsiiProxy_TerraformAwsEksCluster)SetLocalExecInterpreter(val *[]*string
 	)
 }
 
+func (j *jsiiProxy_TerraformAwsEksCluster)SetManagedSecurityGroupRulesEnabled(val *bool) {
+	_jsii_.Set(
+		j,
+		"managedSecurityGroupRulesEnabled",
+		val,
+	)
+}
+
 func (j *jsiiProxy_TerraformAwsEksCluster)SetMapAdditionalAwsAccounts(val *[]*string) {
 	_jsii_.Set(
 		j,
@@ -1739,9 +1805,6 @@ func (j *jsiiProxy_TerraformAwsEksCluster)SetRegexReplaceChars(val *string) {
 }
 
 func (j *jsiiProxy_TerraformAwsEksCluster)SetRegion(val *string) {
-	if err := j.validateSetRegionParameters(val); err != nil {
-		panic(err)
-	}
 	_jsii_.Set(
 		j,
 		"region",

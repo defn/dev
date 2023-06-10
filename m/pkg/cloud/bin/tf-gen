@@ -4,10 +4,11 @@ function main {
 	set -eu
 
 	cue cmd gen
-	git add *.tf.json
+	git add ./*.tf.json
 	pc || true
-	git add *.tf.json
+	git add ./*.tf.json
 	pc || true
 }
 
+# shellcheck disable=SC1091
 source sub "$0" "$@"

@@ -17,7 +17,8 @@ function main {
 
 	n bump
 	git add flake.json
-	git commit  -m "bump $(basename "$(pwd)") $(jq -r '"version=\(.version) vendor=\(.vendor) revision=\(.revision)"' <flake.json 2>/dev/null || true) $*"
+	git commit -m "bump $(basename "$(pwd)") $(jq -r '"version=\(.version) vendor=\(.vendor) revision=\(.revision)"' <flake.json 2>/dev/null || true) $*"
 }
 
+# shellcheck disable=SC1091
 source sub "$0" "$@"

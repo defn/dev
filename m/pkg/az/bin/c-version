@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function options {
-  DEFINE_string name 'world' "somebody's name" n
+	DEFINE_string name 'world' "somebody's name" n
 }
 
 function main {
@@ -11,4 +11,5 @@ function main {
 	echo "example: ${FLAGS_name:-}: $@"
 }
 
+# shellcheck disable=SC1091
 source sub "$0" "$@"

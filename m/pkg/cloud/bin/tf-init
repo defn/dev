@@ -6,4 +6,5 @@ function main {
 	exec terraform init "$@"
 }
 
+# shellcheck disable=SC1091
 source sub "$0" "$@"

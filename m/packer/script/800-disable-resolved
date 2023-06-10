@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
 function main {
-  set -exfu
+	set -exfu
 
-  if [[ "$(whoami)" == "ubuntu" ]]; then
-    exec sudo "$0" "$@"
-    return $?
-  fi
+	if [[ "$(whoami)" == "ubuntu" ]]; then
+		exec sudo "$0" "$@"
+		return $?
+	fi
 
-  systemctl disable systemd-resolved
-  systemctl stop systemd-resolved
-  rm -f /etc/resolv.conf
-  echo nameserver 1.1.1.1 | tee /etc/resolv.conf
+	systemctl disable systemd-resolved
+	systemctl stop systemd-resolved
+	rm -f /etc/resolv.conf
+	echo nameserver 1.1.1.1 | tee /etc/resolv.conf
 }
 
 main "$@"

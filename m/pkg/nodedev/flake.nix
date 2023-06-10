@@ -1,7 +1,8 @@
 {
   inputs = {
     pkg.url = github:defn/dev/pkg-pkg-0.0.10?dir=m/pkg/pkg;
-    latest.url = github:NixOS/nixpkgs?rev=8ad5e8132c5dcf977e308e7bf5517cc6cc0bf7d8; # nixos-unstable https://lazamar.co.uk/nix-versions/
+    # https://github.com/NixOS/nixpkgs/commits/release-22.11
+    latest.url = github:NixOS/nixpkgs?rev=5b0cc6cee71188c29b20fc0de4ea274e24336bc0;
   };
 
   outputs = inputs: inputs.pkg.main rec {

@@ -15,16 +15,16 @@ function main {
 	fi
 
 	version="$(jq -r '.version' <flake.json)"
-	if [[ "null" == "$version" ]]; then version=""; fi
+	if [[ "null" == "${version}" ]]; then version=""; fi
 
 	vendor="$(jq -r '.vendor' <flake.json)"
-	if [[ "null" == "$vendor" ]]; then vendor=""; fi
+	if [[ "null" == "${vendor}" ]]; then vendor=""; fi
 
 	revision="$(jq -r '.revision' <flake.json)"
-	if [[ "null" == "$revision" ]]; then revision=""; fi
+	if [[ "null" == "${revision}" ]]; then revision=""; fi
 
 	local tag=
-	if [[ -n "${version}" ]]; then
+	if [[ -n ${version} ]]; then
 		tag="${slug:+${slug}-}${version}"
 	else
 		tag="${slug}${vendor:+-${vendor}}${revision:+-${revision}}"
@@ -33,4 +33,5 @@ function main {
 	echo "${tag}"
 }
 
+# shellcheck disable=SC1091
 source sub "$0" "$@"

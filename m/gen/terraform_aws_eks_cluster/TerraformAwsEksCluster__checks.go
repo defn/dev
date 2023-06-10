@@ -98,6 +98,22 @@ func (j *jsiiProxy_TerraformAwsEksCluster) validateSetAddonsParameters(val inter
 	return nil
 }
 
+func (j *jsiiProxy_TerraformAwsEksCluster) validateSetAddonsDependsOnParameters(val interface{}) error {
+	if val == nil {
+		return fmt.Errorf("parameter val is required, but nil was provided")
+	}
+
+	return nil
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster) validateSetClusterDependsOnParameters(val interface{}) error {
+	if val == nil {
+		return fmt.Errorf("parameter val is required, but nil was provided")
+	}
+
+	return nil
+}
+
 func (j *jsiiProxy_TerraformAwsEksCluster) validateSetContextParameters(val interface{}) error {
 	if val == nil {
 		return fmt.Errorf("parameter val is required, but nil was provided")
@@ -131,14 +147,6 @@ func (j *jsiiProxy_TerraformAwsEksCluster) validateSetMapAdditionalIamRolesParam
 }
 
 func (j *jsiiProxy_TerraformAwsEksCluster) validateSetMapAdditionalIamUsersParameters(val interface{}) error {
-	if val == nil {
-		return fmt.Errorf("parameter val is required, but nil was provided")
-	}
-
-	return nil
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) validateSetRegionParameters(val *string) error {
 	if val == nil {
 		return fmt.Errorf("parameter val is required, but nil was provided")
 	}

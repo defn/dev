@@ -3,7 +3,8 @@
 function main {
 	set -efu
 
-    cachix push "$@"
+	cachix push "$@"
 }
 
+# shellcheck disable=SC1091
 source sub "$0" "$@"

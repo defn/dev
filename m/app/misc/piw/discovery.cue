@@ -1,6 +1,5 @@
 package piw
 
-
 issuer:                 "https://raw.githubusercontent.com/amanibhavam/amanibhavam.github.io/master/v8"
 jwks_uri:               "https://raw.githubusercontent.com/amanibhavam/amanibhavam.github.io/master/v8/.well-known/keys.json"
 authorization_endpoint: "urn:kubernetes:programmatic_authorization"

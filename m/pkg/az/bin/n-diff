@@ -9,4 +9,5 @@ function main {
 	git diff "$(n from)" .
 }
 
+# shellcheck disable=SC1091
 source sub "$0" "$@"

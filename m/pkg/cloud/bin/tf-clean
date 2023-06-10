@@ -6,4 +6,5 @@ function main {
 	rm -f main.tf.json
 }
 
+# shellcheck disable=SC1091
 source sub "$0" "$@"
