@@ -60,11 +60,12 @@
   },
   "svelte.enable-ts-plugin": true,
   "cue.formatTool": "cue fmt",
-  "trunk.trunkGrayOutNonBlockingIssues": false,
+  "trunk.trunkGrayOutNonBlockingIssues": true,
   "files.exclude": {
     "**/.trunk/*out/": true,
     "**/.trunk/*actions/": true,
     "**/.trunk/*logs/": true,
     "**/.trunk/*plugins/": true
-  }
+  },
+  "editor.defaultFormatter": "trunk.io"
 }
