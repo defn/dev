@@ -13,8 +13,6 @@ type TerraformAwsEksClusterConfig struct {
 	Providers *[]interface{} `field:"optional" json:"providers" yaml:"providers"`
 	// Experimental.
 	SkipAssetCreationFromLocalModules *bool `field:"optional" json:"skipAssetCreationFromLocalModules" yaml:"skipAssetCreationFromLocalModules"`
-	// AWS Region.
-	Region *string `field:"required" json:"region" yaml:"region"`
 	// A list of subnet IDs to launch the cluster in.
 	SubnetIds *[]*string `field:"required" json:"subnetIds" yaml:"subnetIds"`
 	// VPC ID for the EKS cluster.
@@ -27,6 +25,11 @@ type TerraformAwsEksClusterConfig struct {
 	AdditionalTagMap *map[string]*string `field:"optional" json:"additionalTagMap" yaml:"additionalTagMap"`
 	// Manages [`aws_eks_addon`](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_addon) resources.
 	Addons interface{} `field:"optional" json:"addons" yaml:"addons"`
+	// If provided, all addons will depend on this object, and therefore not be installed until this object is finalized.
+	//
+	// This is useful if you want to ensure that addons are not applied before some other condition is met, e.g. node groups are created.
+	// See [issue #170](https://github.com/cloudposse/terraform-aws-eks-cluster/issues/170) for more details.
+	AddonsDependsOn interface{} `field:"optional" json:"addonsDependsOn" yaml:"addonsDependsOn"`
 	// A list of IPv4 CIDRs to allow access to the cluster.
 	//
 	// The length of this list must be known at "plan" time.
@@ -57,6 +60,10 @@ type TerraformAwsEksClusterConfig struct {
 	CloudwatchLogGroupKmsKeyId *string `field:"optional" json:"cloudwatchLogGroupKmsKeyId" yaml:"cloudwatchLogGroupKmsKeyId"`
 	// Override label module default cluster attributes.
 	ClusterAttributes *[]*string `field:"optional" json:"clusterAttributes" yaml:"clusterAttributes"`
+	// If provided, the EKS will depend on this object, and therefore not be created until this object is finalized.
+	//
+	// This is useful if you want to ensure that the cluster is not created before some other condition is met, e.g. VPNs into the subnet are created.
+	ClusterDependsOn interface{} `field:"optional" json:"clusterDependsOn" yaml:"clusterDependsOn"`
 	// Set to `true` to enable Cluster Encryption Configuration.
 	ClusterEncryptionConfigEnabled *bool `field:"optional" json:"clusterEncryptionConfigEnabled" yaml:"clusterEncryptionConfigEnabled"`
 	// Cluster Encryption Config KMS Key Resource argument - key deletion windows in days post destruction.
@@ -205,6 +212,8 @@ type TerraformAwsEksClusterConfig struct {
 	LabelValueCase *string `field:"optional" json:"labelValueCase" yaml:"labelValueCase"`
 	// shell to use for local_exec.
 	LocalExecInterpreter *[]*string `field:"optional" json:"localExecInterpreter" yaml:"localExecInterpreter"`
+	// Flag to enable/disable the ingress and egress rules for the EKS managed Security Group.
+	ManagedSecurityGroupRulesEnabled *bool `field:"optional" json:"managedSecurityGroupRulesEnabled" yaml:"managedSecurityGroupRulesEnabled"`
 	// Additional AWS account numbers to add to `config-map-aws-auth` ConfigMap.
 	MapAdditionalAwsAccounts *[]*string `field:"optional" json:"mapAdditionalAwsAccounts" yaml:"mapAdditionalAwsAccounts"`
 	// Additional IAM roles to add to `config-map-aws-auth` ConfigMap.
@@ -237,6 +246,8 @@ type TerraformAwsEksClusterConfig struct {
 	// Characters matching the regex will be removed from the ID elements.
 	// If not set, `"/[^a-zA-Z0-9-]/"` is used to remove all characters other than hyphens, letters and digits.
 	RegexReplaceChars *string `field:"optional" json:"regexReplaceChars" yaml:"regexReplaceChars"`
+	// OBSOLETE (not needed): AWS Region.
+	Region *string `field:"optional" json:"region" yaml:"region"`
 	// The CIDR block to assign Kubernetes service IP addresses from.
 	//
 	// You can only specify a custom CIDR block when you create a cluster, changing this value will force a new cluster to be created.
