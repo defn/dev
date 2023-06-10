@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  nix:
+  nix-home:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
