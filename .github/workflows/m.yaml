@@ -1,7 +1,7 @@
 name: nix + bazel
 
 on:
-  pull_request:
+  pull_request: {}
   push:
     branches: [main]
 
@@ -24,7 +24,7 @@ jobs:
           name: defn
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
-      - name: "nix build"
+      - name: nix build
         run: nix build
 
   nix-m:
@@ -41,7 +41,7 @@ jobs:
           name: defn
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
-      - name: "nix build"
+      - name: nix build
         run: cd m && nix build
 
   nix-pkg:
@@ -58,13 +58,20 @@ jobs:
           name: defn
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
-      - name: "nix build"
+      - name: nix build
         run: cd m/pkg && for a in */; do (cd $a && nix build); done
 
   build-m:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
+      - name: Cache Bazel
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/bazel
+          key: ${{ runner.os }}-bazel-${{ hashFiles('.bazelversion', '.bazelrc', 'WORKSPACE', 'WORKSPACE.bazel', 'MODULE.bazel') }}
+          restore-keys: |
+            ${{ runner.os }}-bazel-
       - name: bazel build
         run: cd m && make build
