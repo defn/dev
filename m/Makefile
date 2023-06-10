@@ -27,7 +27,7 @@ regen:
 	cd a && buf generate && (find . -name 'BUILD.bazel' | xargs rm -fv)
 	$(MAKE) update-repos
 	cd a && $(MAKE)
-	trunk fmt .
+	trunk fmt
 
 watch:
 	$(MAKE) build

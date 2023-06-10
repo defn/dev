@@ -30,6 +30,11 @@ filegroup(
     srcs = ["aws_config.sh"],
 )
 
+filegroup(
+    name = "aws_wrapper_script",
+    srcs = ["aws_wrapper.sh"],
+)
+
 genrule(
     name = "aws_config",
     srcs = [
