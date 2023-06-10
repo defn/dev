@@ -70,11 +70,11 @@ load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_
 rules_nixpkgs_dependencies()
 
 # tools
-go_register_toolchains(version = "1.20.3")
+go_register_toolchains(version = "1.20.4")
 
 rules_proto_toolchains()
 
-rules_buf_toolchains(version = "v1.17.0")
+rules_buf_toolchains(version = "v1.21.0")
 
 # rules
 go_rules_dependencies()
