@@ -32,7 +32,6 @@ lint:
     - git-diff-check
     - gitleaks@8.16.4
     - gofmt@1.19.3
-    - golangci-lint@1.53.2
     - hadolint@2.12.0
     - isort@5.12.0
     - markdownlint@0.34.0
