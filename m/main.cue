@@ -7,7 +7,7 @@ env_accounts: ["net", "lib", "hub"]
 ops_accounts: ["ops"]
 no_accounts: []
 
-input: organizations: [N=string]: {
+input: organization: [N=string]: {
 	name:     N
 	prefix:   string | *"aws-"
 	domain:   string | *"defn.us"
