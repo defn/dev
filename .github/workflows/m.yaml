@@ -15,6 +15,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Cache Nix
+        uses: actions/cache@v3
+        with:
+          path: |
+            /nix
+          key: ${{ runner.os }}-nix-home-${{ hashFiles('flake.nix','flake.lock','flake.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nix-home-
+
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
 
@@ -31,6 +40,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Cache Nix
+        uses: actions/cache@v3
+        with:
+          path: |
+            /nix
+          key: ${{ runner.os }}-nix-m-${{ hashFiles('m/flake.nix',',/flake.lock','m/flake.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nix-m-
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
@@ -65,6 +83,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Cache Bazel
         uses: actions/cache@v3
         with:
@@ -73,5 +92,6 @@ jobs:
           key: ${{ runner.os }}-bazel-${{ hashFiles('m/.bazelversion', 'm/.bazelrc', 'm/WORKSPACE') }}
           restore-keys: |
             ${{ runner.os }}-bazel-
+
       - name: bazel build
         run: cd m && make build
