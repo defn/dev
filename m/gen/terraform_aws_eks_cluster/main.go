@@ -14,6 +14,7 @@ func init() {
 		[]_jsii_.Member{
 			_jsii_.MemberProperty{JsiiProperty: "additionalTagMap", GoGetter: "AdditionalTagMap"},
 			_jsii_.MemberProperty{JsiiProperty: "addons", GoGetter: "Addons"},
+			_jsii_.MemberProperty{JsiiProperty: "addonsDependsOn", GoGetter: "AddonsDependsOn"},
 			_jsii_.MemberMethod{JsiiMethod: "addOverride", GoMethod: "AddOverride"},
 			_jsii_.MemberMethod{JsiiMethod: "addProvider", GoMethod: "AddProvider"},
 			_jsii_.MemberProperty{JsiiProperty: "allowedCidrBlocks", GoGetter: "AllowedCidrBlocks"},
@@ -28,6 +29,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "cloudwatchLogGroupKmsKeyIdOutput", GoGetter: "CloudwatchLogGroupKmsKeyIdOutput"},
 			_jsii_.MemberProperty{JsiiProperty: "cloudwatchLogGroupNameOutput", GoGetter: "CloudwatchLogGroupNameOutput"},
 			_jsii_.MemberProperty{JsiiProperty: "clusterAttributes", GoGetter: "ClusterAttributes"},
+			_jsii_.MemberProperty{JsiiProperty: "clusterDependsOn", GoGetter: "ClusterDependsOn"},
 			_jsii_.MemberProperty{JsiiProperty: "clusterEncryptionConfigEnabled", GoGetter: "ClusterEncryptionConfigEnabled"},
 			_jsii_.MemberProperty{JsiiProperty: "clusterEncryptionConfigEnabledOutput", GoGetter: "ClusterEncryptionConfigEnabledOutput"},
 			_jsii_.MemberProperty{JsiiProperty: "clusterEncryptionConfigKmsKeyDeletionWindowInDays", GoGetter: "ClusterEncryptionConfigKmsKeyDeletionWindowInDays"},
@@ -87,6 +89,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "labelsAsTags", GoGetter: "LabelsAsTags"},
 			_jsii_.MemberProperty{JsiiProperty: "labelValueCase", GoGetter: "LabelValueCase"},
 			_jsii_.MemberProperty{JsiiProperty: "localExecInterpreter", GoGetter: "LocalExecInterpreter"},
+			_jsii_.MemberProperty{JsiiProperty: "managedSecurityGroupRulesEnabled", GoGetter: "ManagedSecurityGroupRulesEnabled"},
 			_jsii_.MemberProperty{JsiiProperty: "mapAdditionalAwsAccounts", GoGetter: "MapAdditionalAwsAccounts"},
 			_jsii_.MemberProperty{JsiiProperty: "mapAdditionalIamRoles", GoGetter: "MapAdditionalIamRoles"},
 			_jsii_.MemberProperty{JsiiProperty: "mapAdditionalIamUsers", GoGetter: "MapAdditionalIamUsers"},

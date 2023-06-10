@@ -36,6 +36,14 @@ func (j *jsiiProxy_TerraformAwsEksCluster) validateSetAddonsParameters(val inter
 	return nil
 }
 
+func (j *jsiiProxy_TerraformAwsEksCluster) validateSetAddonsDependsOnParameters(val interface{}) error {
+	return nil
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster) validateSetClusterDependsOnParameters(val interface{}) error {
+	return nil
+}
+
 func (j *jsiiProxy_TerraformAwsEksCluster) validateSetContextParameters(val interface{}) error {
 	return nil
 }
@@ -53,10 +61,6 @@ func (j *jsiiProxy_TerraformAwsEksCluster) validateSetMapAdditionalIamRolesParam
 }
 
 func (j *jsiiProxy_TerraformAwsEksCluster) validateSetMapAdditionalIamUsersParameters(val interface{}) error {
-	return nil
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) validateSetRegionParameters(val *string) error {
 	return nil
 }
 

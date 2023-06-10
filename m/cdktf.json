@@ -11,10 +11,6 @@
       "source": "./tf/terraform-aws-eks-cluster"
     },
     {
-      "name": "terraform_aws_eks_iam_role",
-      "source": "./tf/terraform-aws-eks-iam-role"
-    },
-    {
       "name": "terraform_aws_eks_node_group",
       "source": "./tf/terraform-aws-eks-node-group"
     },

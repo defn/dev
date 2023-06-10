@@ -65,7 +65,7 @@ type TerraformAwsEksNodeGroupConfig struct {
 	// Each list element is an object with a `device_name` key and
 	// any keys supported by the `ebs` block of `launch_template`.
 	BlockDeviceMappings *[]interface{} `field:"optional" json:"blockDeviceMappings" yaml:"blockDeviceMappings"`
-	// Additional options to bootstrap.sh. DO NOT include `--kubelet-additional-args`, use `kubelet_additional_args` var instead.
+	// Additional options to bootstrap.sh. DO NOT include `--kubelet-additional-args`, use `kubelet_additional_options` var instead.
 	BootstrapAdditionalOptions *[]*string `field:"optional" json:"bootstrapAdditionalOptions" yaml:"bootstrapAdditionalOptions"`
 	// Type of capacity associated with the EKS Node Group.
 	//
