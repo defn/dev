@@ -41,6 +41,10 @@ jobs:
       - name: nix build
         run: nix build
 
+      - name: Export Nix store cache
+        if: steps.nix-cache.outputs.cache-hit != 'true'
+        run: nix-store --export $(find /nix/store -maxdepth 1 -name '*-*') > /tmp/nixcache
+
   nix-m:
     runs-on: ubuntu-latest
     steps:
