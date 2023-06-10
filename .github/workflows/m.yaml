@@ -19,7 +19,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            /nix
+            /nix/store
           key: ${{ runner.os }}-nix-home-${{ hashFiles('flake.nix','flake.lock','flake.json') }}
           restore-keys: |
             ${{ runner.os }}-nix-home-
@@ -45,7 +45,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            /nix
+            /nix/store
           key: ${{ runner.os }}-nix-m-${{ hashFiles('m/flake.nix',',/flake.lock','m/flake.json') }}
           restore-keys: |
             ${{ runner.os }}-nix-m-
