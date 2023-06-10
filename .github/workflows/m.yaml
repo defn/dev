@@ -15,6 +15,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Install Cachix
+        uses: cachix/cachix-action@v12
+        with:
+          name: defn
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+
       - name: Cache Nix
         uses: actions/cache@v3
         with:
@@ -24,6 +33,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nix-home-
 
+      - name: nix build
+        run: nix build
+
+  nix-m:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
 
@@ -32,14 +49,6 @@ jobs:
         with:
           name: defn
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-
-      - name: nix build
-        run: nix build
-
-  nix-m:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
 
       - name: Cache Nix
         uses: actions/cache@v3
@@ -49,15 +58,6 @@ jobs:
           key: ${{ runner.os }}-nix-m-${{ hashFiles('m/flake.nix',',/flake.lock','m/flake.json') }}
           restore-keys: |
             ${{ runner.os }}-nix-m-
-
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@main
-
-      - name: Install Cachix
-        uses: cachix/cachix-action@v12
-        with:
-          name: defn
-          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: nix build
         run: cd m && nix build
