@@ -15,8 +15,10 @@ package main
 }
 
 #KubernetesCluster: {
+	name:   string
 	region: string
-	nodegroup: [string]: {
+	nodegroup: [NAME=string]: {
+		name: string | *NAME
 		instance_types: [...string]
 		az: [string]: network: string
 	}
