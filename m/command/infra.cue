@@ -14,10 +14,21 @@ package main
 	admins: [...#AwsAdmin]
 }
 
-#AwsProps: {
-	terraform: #TerraformCloud
+#KubernetesCluster: {
+	region: string
+	nodegroup: [string]: {
+		instance_types: [...string]
+		az: [string]: networkk: string
+	}
+	vpc: cidrs: [...string]
+}
 
-	organizations: [N=string]: #AwsOrganization & {
+#AwsProps: {
+	organization: [N=string]: #AwsOrganization & {
+		name: N
+	}
+
+	kubernetes: [N=string]: #KubernetesCluster & {
 		name: N
 	}
 }

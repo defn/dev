@@ -30,6 +30,46 @@ import (
 //go:embed infra.cue
 var infra_schema string
 
+type AwsAdmin struct {
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
+
+type AwsOrganization struct {
+	Name     string     `json:"name"`
+	Region   string     `json:"region"`
+	Prefix   string     `json:"prefix"`
+	Domain   string     `json:"domain"`
+	Accounts []string   `json:"accounts"`
+	Admins   []AwsAdmin `json:"admins"`
+}
+
+type KubernetesCluster struct {
+	Region string `json:"region"`
+
+	NodeGroups map[string]KubernetesNodeGroup `json:"nodegroup"`
+
+	VPC struct {
+		CIDRs []string `json:"cidrs"`
+	} `json:"vpc"`
+}
+
+type KubernetesNodeGroup struct {
+	InstanceTypes []string `json:"instance_types"`
+
+	AZs map[string]AWSVPCNetwork `json:"az"`
+}
+
+type AWSVPCNetwork struct {
+	Network string `json:"network"`
+}
+
+type AwsProps struct {
+	Organization map[string]AwsOrganization `json:"organization"`
+
+	Kubernetes map[string]KubernetesCluster `json:"kubernetes"`
+}
+
 // infraCmd represents the infra command
 var infraCmd = &cobra.Command{
 	Use:   "infra",
@@ -50,7 +90,7 @@ to quickly create a Cobra application.`,
 		app.Node().SetContext(js("excludeStackIdFromLogicalIds"), "true")
 		app.Node().SetContext(js("allowSepCharsInLogicalIds"), "true")
 
-		for _, org := range aws_props.Organizations {
+		for _, org := range aws_props.Organization {
 			aws_org_stack := AwsOrganizationStack(app, &org)
 
 			cdktf.NewS3Backend(aws_org_stack, &cdktf.S3BackendConfig{
@@ -80,24 +120,6 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// infraCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-}
-
-type AwsAdmin struct {
-	Name  string `json:"name"`
-	Email string `json:"email"`
-}
-
-type AwsOrganization struct {
-	Name     string     `json:"name"`
-	Region   string     `json:"region"`
-	Prefix   string     `json:"prefix"`
-	Domain   string     `json:"domain"`
-	Accounts []string   `json:"accounts"`
-	Admins   []AwsAdmin `json:"admins"`
-}
-
-type AwsProps struct {
-	Organizations map[string]AwsOrganization `json:"organizations"`
 }
 
 // alias
@@ -144,6 +166,7 @@ func AwsOrganizationStack(scope constructs.Construct, org *AwsOrganization) cdkt
 				js("sso.amazonaws.com"),
 				js("tagpolicies.tag.amazonaws.com")},
 		})
+
 	// Lookup pre-enabled AWS SSO instance
 	ssoadmin_instance := dataawsssoadmininstances.NewDataAwsSsoadminInstances(stack,
 		js("sso_instance"),
