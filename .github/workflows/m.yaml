@@ -21,15 +21,15 @@ jobs:
         with:
           path: |
             /tmp/nixcache
-          key: ${{ runner.os }}-nix-home-${{ hashFiles('flake.nix','flake.lock','flake.json') }}-2
+          key: ${{ runner.os }}-nix-3-home-${{ hashFiles('flake.nix','flake.lock','flake.json') }}
           restore-keys: |
-            ${{ runner.os }}-nix-home-
+            ${{ runner.os }}-nix-3-home-
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
 
       - name: Import Nix store cache
-        run: mkdir -p /tmp/nixcache && nix copy --from /tmp/nixcache --no-check-sigs
+        run: nix copy --from /tmp/nixcache --no-check-sigs || true
 
       - name: Install Cachix
         uses: cachix/cachix-action@v12
@@ -42,7 +42,7 @@ jobs:
 
       - name: Export Nix store cache
         if: steps.nix-cache.outputs.cache-hit != 'true'
-        run: mkdir -p /tmp/nixcache && nix copy --to /tmp/nixcache --no-check-sigs
+        run: mkdir -p /tmp/nixcache || true; nix copy --to /tmp/nixcache --no-check-sigs
 
   nix-m:
     runs-on: ubuntu-latest
@@ -55,15 +55,15 @@ jobs:
         with:
           path: |
             /nix/store
-          key: ${{ runner.os }}-nix-m-${{ hashFiles('m/flake.nix',',/flake.lock','m/flake.json') }}-2
+          key: ${{ runner.os }}-nix-3-m-${{ hashFiles('m/flake.nix',',/flake.lock','m/flake.json') }}
           restore-keys: |
-            ${{ runner.os }}-nix-m-
+            ${{ runner.os }}-nix-3-m
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
 
       - name: Import Nix store cache
-        run: mkdir -p /tmp/nixcache && nix copy --from /tmp/nixcache --no-check-sigs
+        run: nix copy --from /tmp/nixcache --no-check-sigs || true
 
       - name: Install Cachix
         uses: cachix/cachix-action@v12
@@ -76,7 +76,7 @@ jobs:
 
       - name: Export Nix store cache
         if: steps.nix-cache.outputs.cache-hit != 'true'
-        run: mkdir -p /tmp/nixcache && nix copy --to /tmp/nixcache --no-check-sigs
+        run: mkdir -p /tmp/nixcache || true; nix copy --to /tmp/nixcache --no-check-sigs
 
   build-m:
     runs-on: ubuntu-latest
