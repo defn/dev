@@ -21,9 +21,9 @@ jobs:
         with:
           path: |
             /tmp/nixcache
-          key: ${{ runner.os }}-nix-3-home-${{ hashFiles('flake.nix','flake.lock','flake.json') }}
+          key: ${{ runner.os }}-nix-4-home-${{ hashFiles('flake.nix','flake.lock','flake.json') }}
           restore-keys: |
-            ${{ runner.os }}-nix-3-home-
+            ${{ runner.os }}-nix-4-home-
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
@@ -41,7 +41,7 @@ jobs:
         run: nix build
 
       - name: Export Nix store cache
-        run: mkdir -p /tmp/nixcache || true; nix copy --to /tmp/nixcache --no-check-sigs
+        run: (nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)'; nix build --json | jq -r '.[].outputs | to_entries[].value'; nix-store --query --requisites --include-outputs $(nix path-info --derivation) | sort -u | xargs -n 500 | while read -r a; do nix copy --verbose --to 'file:///tmp/nixcache?compression-level=0&parallel-compression=true'; done
         #if: steps.nix-cache.outputs.cache-hit != 'true'
 
   nix-m:
