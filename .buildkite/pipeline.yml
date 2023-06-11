@@ -1,2 +1,3 @@
 steps:
   - command: nix develop --command true
+  - command: cd m && bk
