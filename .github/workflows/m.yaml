@@ -21,9 +21,9 @@ jobs:
         with:
           path: |
             /tmp/nixcache
-          key: ${{ runner.os }}-nix-4-home-${{ hashFiles('flake.nix','flake.lock','flake.json') }}
+          key: ${{ runner.os }}-nix-5-home-${{ hashFiles('flake.nix','flake.lock','flake.json') }}
           restore-keys: |
-            ${{ runner.os }}-nix-4-home-
+            ${{ runner.os }}-nix-5-home-
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
@@ -49,9 +49,9 @@ jobs:
         with:
           path: |
             /nix/store
-          key: ${{ runner.os }}-nix-3-m-${{ hashFiles('m/flake.nix',',/flake.lock','m/flake.json') }}
+          key: ${{ runner.os }}-nix-5-m-${{ hashFiles('m/flake.nix',',/flake.lock','m/flake.json') }}
           restore-keys: |
-            ${{ runner.os }}-nix-3-m
+            ${{ runner.os }}-nix-5-m
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
