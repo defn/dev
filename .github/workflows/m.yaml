@@ -41,8 +41,8 @@ jobs:
         run: nix build
 
       - name: Export Nix store cache
-        if: steps.nix-cache.outputs.cache-hit != 'true'
         run: mkdir -p /tmp/nixcache || true; nix copy --to /tmp/nixcache --no-check-sigs
+        #if: steps.nix-cache.outputs.cache-hit != 'true'
 
   nix-m:
     runs-on: ubuntu-latest
@@ -75,8 +75,8 @@ jobs:
         run: cd m && nix build
 
       - name: Export Nix store cache
-        if: steps.nix-cache.outputs.cache-hit != 'true'
         run: mkdir -p /tmp/nixcache || true; nix copy --to /tmp/nixcache --no-check-sigs
+        #if: steps.nix-cache.outputs.cache-hit != 'true'
 
   build-m:
     runs-on: ubuntu-latest
