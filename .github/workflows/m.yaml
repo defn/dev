@@ -21,7 +21,7 @@ jobs:
         with:
           path: |
             /tmp/nixcache
-          key: ${{ runner.os }}-nix-home-${{ hashFiles('flake.nix','flake.lock','flake.json') }}
+          key: ${{ runner.os }}-nix-home-${{ hashFiles('flake.nix','flake.lock','flake.json') }}-2
           restore-keys: |
             ${{ runner.os }}-nix-home-
 
@@ -29,7 +29,6 @@ jobs:
         uses: DeterminateSystems/nix-installer-action@main
 
       - name: Import Nix store cache
-        if: steps.nix-cache.outputs.cache-hit == 'true'
         run: mkdir -p /tmp/nixcache && nix copy --from /tmp/nixcache --no-check-sigs
 
       - name: Install Cachix
@@ -56,12 +55,15 @@ jobs:
         with:
           path: |
             /nix/store
-          key: ${{ runner.os }}-nix-m-${{ hashFiles('m/flake.nix',',/flake.lock','m/flake.json') }}
+          key: ${{ runner.os }}-nix-m-${{ hashFiles('m/flake.nix',',/flake.lock','m/flake.json') }}-2
           restore-keys: |
             ${{ runner.os }}-nix-m-
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Import Nix store cache
+        run: mkdir -p /tmp/nixcache && nix copy --from /tmp/nixcache --no-check-sigs
 
       - name: Install Cachix
         uses: cachix/cachix-action@v12
@@ -74,7 +76,7 @@ jobs:
 
       - name: Export Nix store cache
         if: steps.nix-cache.outputs.cache-hit != 'true'
-        run: nix-store --export $(find /nix/store -maxdepth 1 -name '*-*') > /tmp/nixcache
+        run: mkdir -p /tmp/nixcache && nix copy --to /tmp/nixcache --no-check-sigs
 
   build-m:
     runs-on: ubuntu-latest
