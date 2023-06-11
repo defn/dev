@@ -30,7 +30,7 @@ jobs:
 
       - name: Import Nix store cache
         if: steps.nix-cache.outputs.cache-hit == 'true'
-        run: nix copy --from /tmp/nixcache --no-check-sigs
+        run: nix copy --from /tmp/nixcache --no-check-sigs || true
 
       - name: Install Cachix
         uses: cachix/cachix-action@v12
