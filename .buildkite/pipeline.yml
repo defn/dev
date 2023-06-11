@@ -1,2 +1,3 @@
 steps:
-  - command: "cd m && env USER=$(id -un) nix develop --command make build"
+  - command: env USER=$(id -un) nix develop --command true
+  - command: cd m && bk
