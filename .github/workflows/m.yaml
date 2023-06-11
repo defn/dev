@@ -10,62 +10,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  nix-home:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Cache Nix
-        uses: actions/cache@v3
-        id: nix-cache
-        with:
-          path: |
-            /tmp/nixcache
-          key: ${{ runner.os }}-nix-5-home-${{ hashFiles('flake.nix','flake.lock','flake.json') }}
-          restore-keys: |
-            ${{ runner.os }}-nix-5-home-
-
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@main
-
-      - name: Import Nix store cache
-        run: nix copy --from /tmp/nixcache --no-check-sigs || true
-
-      - name: nix build
-        run: nix build
-
-      - name: Export Nix store cache
-        run: (nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)'; nix build --json | jq -r '.[].outputs | to_entries[].value'; nix-store --query --requisites --include-outputs $(nix path-info --derivation)) | sort -u | xargs -n 500 | while read -r a; do nix copy --verbose --to 'file:///tmp/nixcache?compression-level=0&parallel-compression=true'; done
-        #if: steps.nix-cache.outputs.cache-hit != 'true'
-
-  nix-m:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Cache Nix
-        uses: actions/cache@v3
-        id: nix-cache
-        with:
-          path: |
-            /nix/store
-          key: ${{ runner.os }}-nix-6-m-${{ hashFiles('m/flake.nix',',/flake.lock','m/flake.json') }}
-          restore-keys: |
-            ${{ runner.os }}-nix-6-m
-
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@main
-
-      - name: Import Nix store cache
-        run: nix copy --from /tmp/nixcache --no-check-sigs || true
-
-      - name: nix build
-        run: cd m && nix build
-
-      - name: Export Nix store cache
-        run: (nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)'; nix build --json | jq -r '.[].outputs | to_entries[].value'; nix-store --query --requisites --include-outputs $(nix path-info --derivation)) | sort -u | xargs -n 500 | while read -r a; do nix copy --verbose --to 'file:///tmp/nixcache?compression-level=0&parallel-compression=true'; done
-        #if: steps.nix-cache.outputs.cache-hit != 'true'
-
   build-m:
     runs-on: ubuntu-latest
     steps:
