@@ -75,11 +75,7 @@ jobs:
         run: cd m && nix build
 
       - name: Export Nix store cache
-        run: |
-          (   nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)'
-              nix build --json | jq -r '.[].outputs | to_entries[].value'
-              nix-store --query --requisites --include-outputs $(nix path-info --derivation
-          ) | sort -u | xargs -n 500 | while read -r a; do nix copy --verbose --to 'file:///tmp/nixcache?compression-level=0&parallel-compression=true'; done
+        run: (nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)'; nix build --json | jq -r '.[].outputs | to_entries[].value'; nix-store --query --requisites --include-outputs $(nix path-info --derivation) | sort -u | xargs -n 500 | while read -r a; do nix copy --verbose --to 'file:///tmp/nixcache?compression-level=0&parallel-compression=true'; done
         #if: steps.nix-cache.outputs.cache-hit != 'true'
 
   build-m:
