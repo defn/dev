@@ -1,2 +1,2 @@
 steps:
-  - command: env USER=$(id -un) nix develop --command make all
+  - command: nix develop --command make all

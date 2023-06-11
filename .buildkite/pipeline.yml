@@ -1,3 +1,2 @@
 steps:
-  - command: env USER=$(id -un) nix develop --command true
-  - command: cd m && bk
+  - command: nix develop --command true
