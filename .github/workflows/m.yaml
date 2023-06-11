@@ -49,9 +49,9 @@ jobs:
         with:
           path: |
             /nix/store
-          key: ${{ runner.os }}-nix-5-m-${{ hashFiles('m/flake.nix',',/flake.lock','m/flake.json') }}
+          key: ${{ runner.os }}-nix-6-m-${{ hashFiles('m/flake.nix',',/flake.lock','m/flake.json') }}
           restore-keys: |
-            ${{ runner.os }}-nix-5-m
+            ${{ runner.os }}-nix-6-m
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
