@@ -3,8 +3,7 @@ load("//meh:cue.bzl", "cue")
 cue(
     name = "testing",
     srcs = glob(["*.cue"]),
-    configs = ["flake"],
-    cue = "/nix/store/b9k9jniljz0ifn5l3nfs5cz6vlh96i43-pkg-cue-0.5.0-7/bin/cue",
+    configs = ["flake_cue"],
 )
 
 filegroup(
@@ -76,11 +75,11 @@ sh_binary(
 
 # flake/direnv builder
 genrule(
-    name = "flake",
+    name = "flake_cue",
     srcs = [
         "flake_path_script",
         "flake_config",
     ],
     outs = ["meh.txt"],
-    cmd = "$(location flake_path_script) > $@",
+    cmd = "$(location flake_path_script) $@ which cue",
 )

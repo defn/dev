@@ -5,6 +5,11 @@ set -euo pipefail
 set -x
 
 function main {
+	local out
+
+	out="$1"
+	shift
+
 	cd meh
 
 	mkdir nix
@@ -13,7 +18,7 @@ function main {
 	git init
 	git add .
 	# shellcheck disable=SC2016
-	nix develop --command bash -c 'echo $PATH' '>' ../meh.txt
+	nix develop --command "$@" >../../"${out}"
 }
 
 main "$@"
