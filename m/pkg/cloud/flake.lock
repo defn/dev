@@ -276,17 +276,17 @@
       },
       "locked": {
         "dir": "m/pkg/flyctl",
-        "lastModified": 1686350205,
-        "narHash": "sha256-/Jnp81UlJjTXLzaJ4ElEXp96SFZuk6Ok0WD7ShYLC1w=",
+        "lastModified": 1686606576,
+        "narHash": "sha256-SzoIVIpOBGcxrNhkUyKJDr58Pt9Sx9AMiXRV+v6xObY=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "1bde0d435348e2148b845c3e417c370fd97b954b",
+        "rev": "89a46903a209468480d55dd307a316bd31a98227",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/flyctl",
         "owner": "defn",
-        "ref": "pkg-flyctl-0.1.33-1",
+        "ref": "pkg-flyctl-0.1.34-1",
         "repo": "dev",
         "type": "github"
       }
@@ -571,17 +571,17 @@
       },
       "locked": {
         "dir": "m/pkg/terraform",
-        "lastModified": 1685334301,
-        "narHash": "sha256-UI9XJAtABID5Mqgwe1VoK5DXgEOO9unHfuJuSAfxT9Y=",
+        "lastModified": 1686606599,
+        "narHash": "sha256-tOuC1/CErXrhjZbO3V1AkdeFtO4XeAnPnxaiBgyETBw=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "e1f09129f059a551a3876af7fc7c7ba46d917f74",
+        "rev": "01a953ebd3e53e833ac54d5344c7580a84f21e1e",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/terraform",
         "owner": "defn",
-        "ref": "pkg-terraform-1.4.6-4",
+        "ref": "pkg-terraform-1.5.0-1",
         "repo": "dev",
         "type": "github"
       }
