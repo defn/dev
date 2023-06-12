@@ -3,6 +3,8 @@ load("//meh:cue.bzl", "cue")
 cue(
     name = "testing",
     srcs = glob(["*.cue"]),
+    configs = ["flake"],
+    cue = "/nix/store/b9k9jniljz0ifn5l3nfs5cz6vlh96i43-pkg-cue-0.5.0-7/bin/cue",
 )
 
 filegroup(
@@ -28,6 +30,20 @@ filegroup(
 filegroup(
     name = "aws_config_script",
     srcs = ["aws_config.sh"],
+)
+
+filegroup(
+    name = "flake_path_script",
+    srcs = ["flake_path.sh"],
+)
+
+filegroup(
+    name = "flake_config",
+    srcs = [
+        "flake.json",
+        "flake.lock",
+        "flake.nix",
+    ],
 )
 
 # aws configuration
@@ -56,4 +72,15 @@ sh_binary(
         "aws_config",
         "testing",
     ],
+)
+
+# flake/direnv builder
+genrule(
+    name = "flake",
+    srcs = [
+        "flake_path_script",
+        "flake_config",
+    ],
+    outs = ["meh.txt"],
+    cmd = "$(location flake_path_script) > $@",
 )
