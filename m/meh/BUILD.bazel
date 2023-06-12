@@ -49,8 +49,11 @@ sh_binary(
     name = "aws_cli",
     srcs = ["aws_cli.sh"],
     args = [
-        "2.11.26-4",
+        "$(location testing)",
         "$(location :aws_config)",
     ],
-    data = [":aws_config"],
+    data = [
+        "aws_config",
+        "testing",
+    ],
 )
