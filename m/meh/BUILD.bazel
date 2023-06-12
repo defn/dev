@@ -46,8 +46,8 @@ genrule(
 
 # aws cli wrapper
 sh_binary(
-    name = "aws",
-    srcs = ["aws.sh"],
+    name = "aws_cli",
+    srcs = ["aws_cli.sh"],
     args = [
         "2.11.26-4",
         "$(location :aws_config)",
