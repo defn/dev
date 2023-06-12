@@ -7,7 +7,7 @@ def _cue_impl(ctx):
 
     ctx.actions.run(
         arguments = ["-c", "{} export --out=json {} {} > {}".format(
-            "/nix/store/b9k9jniljz0ifn5l3nfs5cz6vlh96i43-pkg-cue-0.5.0-7/bin/cue",
+            ctx.attr.cue,
             ctx.attr.expr,
             " ".join(input_paths),
             out.path,
@@ -22,6 +22,8 @@ def _cue_impl(ctx):
 cue = rule(
     implementation = _cue_impl,
     attrs = {
+        "configs": attr.label_list(),
+        "cue": attr.string(),
         "expr": attr.string(default = ""),
         "srcs": attr.label_list(allow_files = [".cue"]),
     },

@@ -1,2 +1,2 @@
 steps:
-  - command: bazel build //meh/...
+  - command: bazel build //meh/... --sandbox_writable_path=/nix --sandbox_writable_path=/home/ubuntu/.cache/nix
