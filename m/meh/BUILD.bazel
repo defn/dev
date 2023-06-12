@@ -30,35 +30,21 @@ filegroup(
     srcs = ["aws_config.sh"],
 )
 
-filegroup(
-    name = "aws_wrapper_script",
-    srcs = ["aws_wrapper.sh"],
-)
-
+# aws configuration
 genrule(
     name = "aws_config",
     srcs = [
-        "aws_orgs",
         "aws_accounts",
-        "template_org",
+        "aws_orgs",
         "template_account",
+        "template_org",
     ],
     outs = ["aws_config.txt"],
     cmd = "$(location aws_config_script) $(location aws_orgs) $(location aws_accounts) $(location template_org) $(location template_account) $@",
     tools = ["aws_config_script"],
 )
 
-genrule(
-    name = "aws_wrapper",
-    srcs = [
-        "aws_config",
-        "aws_accounts",
-    ],
-    outs = ["bin"],
-    cmd = "$(location aws_wrapper_script) $(location aws_config) $(location aws_accounts) $@",
-    tools = ["aws_wrapper_script"],
-)
-
+# aws cli wrapper
 sh_binary(
     name = "aws",
     srcs = ["aws.sh"],
