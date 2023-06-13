@@ -33,10 +33,29 @@ function main {
 			bazel query --ui_event_filters=-info --noshow_progress --noshow_loading_progress "//${bazel_prefix}/..." | sed "s#^//${bazel_prefix}:##"
 		else
 			local rule
-			rule="$1"
-			shift
 
-			exec bazel run --ui_event_filters=-info,-stdout,-stderr --noshow_progress --noshow_loading_progress "//${bazel_prefix}:${rule}" -- "$@"
+			if [[ $1 == "build" ]]; then
+				shift
+
+				if [[ $# == 0 ]]; then
+					rule="/..."
+				else
+					rule=":$1"
+					shift
+				fi
+
+				exec bazel build \
+					--ui_event_filters=-info,-stdout,-stderr --noshow_progress --noshow_loading_progress \
+					--sandbox_writable_path=/nix --sandbox_writable_path=/home/ubuntu/.cache/nix \
+					"//${bazel_prefix}${rule}"
+			else
+				rule="$1"
+				shift
+
+				exec bazel run \
+					--ui_event_filters=-info,-stdout,-stderr --noshow_progress --noshow_loading_progress \
+					"//${bazel_prefix}:${rule}" -- "$@"
+			fi
 		fi
 		;;
 	esac
