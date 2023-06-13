@@ -1,11 +1,5 @@
 load("//meh:cue.bzl", "cue")
 
-cue(
-    name = "app_config",
-    srcs = ["flake_cue"],
-    cues = glob(["*.cue"]),
-)
-
 filegroup(
     name = "aws_orgs",
     srcs = ["aws_orgs.txt"],
@@ -45,6 +39,28 @@ filegroup(
     ],
 )
 
+# build cue
+genrule(
+    name = "flake_cue",
+    srcs = [
+        "flake_path_script",
+        "flake_config",
+    ],
+    outs = ["cue_bin"],
+    cmd = "$(location flake_path_script) $@ which cue",
+)
+
+# build aws cli
+genrule(
+    name = "flake_aws",
+    srcs = [
+        "flake_path_script",
+        "flake_config",
+    ],
+    outs = ["aws_bin"],
+    cmd = "$(location flake_path_script) $@ which aws",
+)
+
 # aws configuration
 genrule(
     name = "aws_config",
@@ -59,27 +75,25 @@ genrule(
     tools = ["aws_config_script"],
 )
 
+# app configuration
+cue(
+    name = "app_config",
+    srcs = ["flake_cue"],
+    cues = glob(["*.cue"]),
+)
+
 # aws cli wrapper
 sh_binary(
     name = "aws_cli",
     srcs = ["aws_cli.sh"],
     args = [
+        "$(location flake_aws)",
         "$(location app_config)",
-        "$(location :aws_config)",
+        "$(location aws_config)",
     ],
     data = [
         "app_config",
         "aws_config",
+        "flake_aws",
     ],
-)
-
-# flake/direnv builder
-genrule(
-    name = "flake_cue",
-    srcs = [
-        "flake_path_script",
-        "flake_config",
-    ],
-    outs = ["cue_bin"],
-    cmd = "$(location flake_path_script) $@ which cue",
 )
