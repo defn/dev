@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function main {
-	local config
+	local app_config
 	local aws_config
 	local aws_profile
 

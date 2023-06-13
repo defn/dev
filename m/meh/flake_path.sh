@@ -18,7 +18,7 @@ function main {
 	git init
 	git add .
 	# shellcheck disable=SC2016
-	nix develop --command "$@" >"${out}"
+	ln -nfs "$(nix develop --command "$@" || true)" "${out}"
 }
 
 main "$@"
