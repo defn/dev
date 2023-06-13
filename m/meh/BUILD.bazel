@@ -2,8 +2,8 @@ load("//meh:cue.bzl", "cue")
 
 cue(
     name = "app_config",
-    srcs = glob(["*.cue"]),
-    configs = ["flake_cue"],
+    srcs = ["flake_cue"],
+    cues = glob(["*.cue"]),
 )
 
 filegroup(
@@ -80,6 +80,6 @@ genrule(
         "flake_path_script",
         "flake_config",
     ],
-    outs = ["meh.txt"],
+    outs = ["cue_bin"],
     cmd = "$(location flake_path_script) $@ which cue",
 )
