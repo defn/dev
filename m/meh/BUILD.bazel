@@ -26,6 +26,11 @@ filegroup(
 )
 
 filegroup(
+    name = "earthfile_config",
+    srcs = ["Earthfile"],
+)
+
+filegroup(
     name = "flake_path_script",
     srcs = ["flake_path.sh"],
 )
@@ -59,6 +64,17 @@ genrule(
     ],
     outs = ["aws_bin"],
     cmd = "$(location flake_path_script) $@ which aws",
+)
+
+# build earthly
+genrule(
+    name = "flake_earthly",
+    srcs = [
+        "flake_path_script",
+        "flake_config",
+    ],
+    outs = ["earthly_bin"],
+    cmd = "$(location flake_path_script) $@ which earthly",
 )
 
 # aws configuration
@@ -95,5 +111,23 @@ sh_binary(
         "app_config",
         "aws_config",
         "flake_aws",
+    ],
+)
+
+# build docker image
+sh_binary(
+    name = "earthly",
+    srcs = ["earthly.sh"],
+    args = [
+        "$(location flake_earthly)",
+        "$(location earthfile_config)",
+        "$(location app_config)",
+        "$(location aws_config)",
+    ],
+    data = [
+        "app_config",
+        "aws_config",
+        "earthfile_config",
+        "flake_earthly",
     ],
 )
