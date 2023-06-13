@@ -1,6 +1,6 @@
 {
   "slug": "pkg-boundary",
   "ghrepo": "hashicorp/boundary",
-  "vendor": "0.12.2",
-  "revision": "9"
+  "vendor": "0.13.0",
+  "revision": "0"
 }
