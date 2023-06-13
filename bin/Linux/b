@@ -54,6 +54,7 @@ function main {
 
 				exec bazel run \
 					--ui_event_filters=-info,-stdout,-stderr --noshow_progress --noshow_loading_progress \
+					--sandbox_writable_path=/nix --sandbox_writable_path=/home/ubuntu/.cache/nix \
 					"//${bazel_prefix}:${rule}" -- "$@"
 			fi
 		fi
