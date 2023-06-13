@@ -1,7 +1,7 @@
 load("//meh:cue.bzl", "cue")
 
 cue(
-    name = "testing",
+    name = "app_config",
     srcs = glob(["*.cue"]),
     configs = ["flake_cue"],
 )
@@ -64,12 +64,12 @@ sh_binary(
     name = "aws_cli",
     srcs = ["aws_cli.sh"],
     args = [
-        "$(location testing)",
+        "$(location app_config)",
         "$(location :aws_config)",
     ],
     data = [
+        "app_config",
         "aws_config",
-        "testing",
     ],
 )
 
