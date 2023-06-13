@@ -2,8 +2,6 @@
 
 set -euo pipefail
 
-set -x
-
 function main {
 	local out
 

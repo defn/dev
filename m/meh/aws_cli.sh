@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -efuo pipefail
+
 function main {
 	local flake_aws
 	local app_config
