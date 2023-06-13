@@ -26,9 +26,18 @@ function main {
 		open 'http://localhost/r/(all)/overview'
 		;;
 	*)
-		local rule="$1"
-		shift
-		exec bazel run --ui_event_filters=-info,-stdout,-stderr --noshow_progress --noshow_loading_progress "${rule}" -- "$@"
+		local bazel_prefix
+		bazel_prefix="$(git rev-parse --show-prefix | sed 's#/$##; s#^m/##')"
+
+		if [[ $# == 0 ]]; then
+			bazel query --ui_event_filters=-info --noshow_progress --noshow_loading_progress "//${bazel_prefix}/..." | sed "s#^//${bazel_prefix}:##"
+		else
+			local rule
+			rule="$1"
+			shift
+
+			exec bazel run --ui_event_filters=-info,-stdout,-stderr --noshow_progress --noshow_loading_progress "//${bazel_prefix}:${rule}" -- "$@"
+		fi
 		;;
 	esac
 }
