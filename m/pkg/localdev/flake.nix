@@ -6,6 +6,7 @@
     vault.url = github:defn/dev/pkg-vault-1.13.3-1?dir=m/pkg/vault;
     gh.url = github:defn/dev/pkg-gh-2.30.0-1?dir=m/pkg/gh;
     earthly.url = github:defn/dev/pkg-earthly-0.7.8-1?dir=m/pkg/earthly;
+    dagger.url = github:defn/dev/pkg-dagger-0.6.1-2?dir=m/pkg/dagger;
     buildkite.url = github:defn/dev/pkg-buildkite-3.48.0-1?dir=m/pkg/buildkite;
     bk.url = github:defn/dev/pkg-bk-2.0.0-10?dir=m/pkg/bk;
     buildevents.url = github:defn/dev/pkg-buildevents-0.13.0-9?dir=m/pkg/buildevents;
@@ -28,6 +29,7 @@
             inputs.vault.defaultPackage.${ctx.system}
             inputs.gh.defaultPackage.${ctx.system}
             inputs.earthly.defaultPackage.${ctx.system}
+            inputs.dagger.defaultPackage.${ctx.system}
             inputs.buildkite.defaultPackage.${ctx.system}
             inputs.bk.defaultPackage.${ctx.system}
             inputs.buildevents.defaultPackage.${ctx.system}
