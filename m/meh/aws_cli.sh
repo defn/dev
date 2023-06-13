@@ -1,10 +1,15 @@
 #!/usr/bin/env bash
 
 function main {
+	local flake_aws
 	local app_config
 	local aws_config
 	local aws_profile
 
+	flake_aws="$1"
+	shift
+
+	# shellcheck disable=SC2034
 	app_config="$1"
 	shift
 
@@ -14,10 +19,7 @@ function main {
 	aws_profile="$1"
 	shift
 
-	local aws_version
-	aws_version="$(jq -r .version.aws <"${app_config}")"
-
-	exec env AWS_CONFIG="${aws_config}" AWS_PROFILE="${aws_profile}" nix run --quiet --quiet --quiet "github:defn/dev/pkg-awscli-${aws_version}?dir=m/pkg/awscli" -- "$@"
+	exec env AWS_CONFIG="${aws_config}" AWS_PROFILE="${aws_profile}" "${flake_aws}" "$@"
 }
 
 main "$@"
