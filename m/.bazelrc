@@ -1,4 +1,4 @@
-build --ui_event_filters=-info,-stdout,-stderr
+build --ui_event_filters=-info
 build --noshow_progress
 build --noshow_loading_progress
 build --sandbox_writable_path=/nix
@@ -9,3 +9,15 @@ run --noshow_progress
 run --noshow_loading_progress
 run --sandbox_writable_path=/nix
 run --sandbox_writable_path=/home/ubuntu/.cache/nix
+
+query --ui_event_filters=-info
+query --noshow_progress
+query --noshow_loading_progress
+
+cquery --ui_event_filters=-info
+cquery --noshow_progress
+cquery --noshow_loading_progress
+
+info --ui_event_filters=-info
+info --noshow_progress
+info --noshow_loading_progress
