@@ -79,7 +79,7 @@ genrule(
 
 # aws configuration
 genrule(
-    name = "aws_config",
+    name = "aws_config_cfg",
     srcs = [
         "aws_accounts",
         "aws_orgs",
@@ -105,11 +105,11 @@ sh_binary(
     args = [
         "$(location flake_aws)",
         "$(location app_config)",
-        "$(location aws_config)",
+        "$(location aws_config_cfg)",
     ],
     data = [
         "app_config",
-        "aws_config",
+        "aws_config_cfg",
         "flake_aws",
     ],
 )
