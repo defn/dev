@@ -122,11 +122,11 @@ sh_binary(
         "$(location flake_earthly)",
         "$(location earthfile_config)",
         "$(location app_config)",
-        "$(location aws_config)",
+        "$(location aws_config_cfg)",
     ],
     data = [
         "app_config",
-        "aws_config",
+        "aws_config_cfg",
         "earthfile_config",
         "flake_earthly",
     ],
