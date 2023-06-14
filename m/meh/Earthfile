@@ -5,11 +5,16 @@ build:
     BUILD --platform=linux/amd64 +image --image=${image}
     BUILD --platform=linux/arm64 +image --image=${image}
 
+nix-archive:
+    FROM ubuntu
+    COPY *.tar.gz .
+    RUN for a in *.tar.gz; do echo $a; tar xfz $a -C /; done
+    SAVE ARTIFACT /nix nix
+
 image:
     FROM ubuntu
     ARG image
     COPY aws_config.txt .
     COPY app_config .
-    COPY *.tar.gz .
-    RUN for a in *.tar.gz; do echo $a; tar xfz $a -C /; done
+    COPY --dir --chown=ubuntu:ubuntu +nix-archive/nix /nix
     SAVE IMAGE --push ${image}
