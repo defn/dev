@@ -6,7 +6,7 @@ build:
     BUILD --platform=linux/arm64 +image --image=${image}
 
 image:
-    FROM ubuntu
+    FROM quay.io/defn/dev:latest-nix
     ARG image
     COPY aws_config.txt .
     COPY app_config .
