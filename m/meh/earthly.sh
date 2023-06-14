@@ -8,7 +8,10 @@ function main {
 	local app_config
 	local aws_config
 
-	flake_earthly="$(pwd)/$1"
+	local bhome
+	bhome="$(pwd)"
+
+	flake_earthly="${bhome}/$1"
 	shift
 
 	# shellcheck disable=SC2034
@@ -25,10 +28,11 @@ function main {
 
 	local pth_build
 	pth_build="$(mktemp -d -t XXXXXX)"
-	cp "${earthfile}" "${app_config}" "${aws_config}" "${pth_build}/"
+	cp -v "${earthfile}" "${app_config}" "${aws_config}" "${pth_build}/"
+	cp -v "$@" "${pth_build}/"
 
 	cd "${pth_build}"
-	"${flake_earthly}" "$@"
+	"${flake_earthly}" +build
 
 	rm -rf "${pth_build}"
 }

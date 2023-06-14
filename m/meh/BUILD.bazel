@@ -93,6 +93,13 @@ genrule(
     cmd = "$(location flake_store_script) $@ /nix/store/bap4d0lpcrhpwmpb8ayjcgkmvfj62lnq-bash-interactive-5.1-p16",
 )
 
+filegroup(
+    name = "flake_store_archives",
+    srcs = [
+        "flake_store_bap4d0lpcrhpwmpb8ayjcgkmvfj62lnq-bash-interactive-5.1-p16",
+    ],
+)
+
 # aws configuration
 genrule(
     name = "aws_config_cfg",
@@ -139,11 +146,13 @@ sh_binary(
         "$(location earthfile_config)",
         "$(location app_config)",
         "$(location aws_config_cfg)",
+        "$(location flake_store_archives)",
     ],
     data = [
         "app_config",
         "aws_config_cfg",
         "earthfile_config",
         "flake_earthly",
+        "flake_store_archives",
     ],
 )

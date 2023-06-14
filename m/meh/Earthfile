@@ -6,8 +6,10 @@ build:
     BUILD --platform=linux/arm64 +image --image=${image}
 
 image:
-    FROM quay.io/defn/dev:latest-nix
+    FROM ubuntu
     ARG image
     COPY aws_config.txt .
     COPY app_config .
+    COPY bap4d0lpcrhpwmpb8ayjcgkmvfj62lnq-bash-interactive-5.1-p16.tar.gz .
+    RUN tar xfz bap4d0lpcrhpwmpb8ayjcgkmvfj62lnq-bash-interactive-5.1-p16.tar.gz -C /
     SAVE IMAGE --push ${image}
