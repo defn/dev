@@ -10,6 +10,6 @@ image:
     ARG image
     COPY aws_config.txt .
     COPY app_config .
-    COPY bap4d0lpcrhpwmpb8ayjcgkmvfj62lnq-bash-interactive-5.1-p16.tar.gz .
-    RUN tar xfz bap4d0lpcrhpwmpb8ayjcgkmvfj62lnq-bash-interactive-5.1-p16.tar.gz -C /
+    COPY *.tar.gz .
+    RUN for a in *.tar.gz; do echo $a; tar xfz $a -C /; done
     SAVE IMAGE --push ${image}

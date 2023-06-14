@@ -19,7 +19,10 @@ function main {
 
 	nix build
 	set -x
-	tar cvfz "${out}" "$@"
+	mkdir -p "${out}"
+	for a in $(nix-store --query --requisites --include-outputs result); do
+		tar cvfz "${out}/${a##*/}.tar.gz" "${a}"
+	done
 }
 
 main "$@"
