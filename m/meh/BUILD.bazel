@@ -84,20 +84,13 @@ genrule(
 
 # build flake archives
 genrule(
-    name = "flake_store_bap4d0lpcrhpwmpb8ayjcgkmvfj62lnq-bash-interactive-5.1-p16",
+    name = "flake_store_archives",
     srcs = [
         "flake_store_script",
         "flake_config",
     ],
-    outs = ["bap4d0lpcrhpwmpb8ayjcgkmvfj62lnq-bash-interactive-5.1-p16.tar.gz"],
-    cmd = "$(location flake_store_script) $@ /nix/store/bap4d0lpcrhpwmpb8ayjcgkmvfj62lnq-bash-interactive-5.1-p16",
-)
-
-filegroup(
-    name = "flake_store_archives",
-    srcs = [
-        "flake_store_bap4d0lpcrhpwmpb8ayjcgkmvfj62lnq-bash-interactive-5.1-p16",
-    ],
+    outs = ["nix-stores"],
+    cmd = "$(location flake_store_script) $@",
 )
 
 # aws configuration

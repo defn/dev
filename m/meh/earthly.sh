@@ -29,7 +29,10 @@ function main {
 	local pth_build
 	pth_build="$(mktemp -d -t XXXXXX)"
 	cp -v "${earthfile}" "${app_config}" "${aws_config}" "${pth_build}/"
-	cp -v "$@" "${pth_build}/"
+	(
+		set +f
+		cp -v "$*"/* "${pth_build}/"
+	)
 
 	cd "${pth_build}"
 	"${flake_earthly}" +build
