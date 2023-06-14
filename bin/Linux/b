@@ -50,15 +50,22 @@ function main {
 			output)
 				shift
 
-				if [[ $# == 0 ]]; then
-					rule="/..."
-				else
-					rule=":$1"
-					shift
-				fi
+				rule=":$(b | fzf --query="${1:-}" --select-1)"
+				shift
 
-				local w="$(bazel info workspace)"
+				local w
+				w="$(bazel info workspace)"
 				bazel cquery "//${bazel_prefix}${rule}" --output=files | grep bazel-out/ | sed "s#^#${w}/#"
+				;;
+			cat)
+				shift
+
+				rule=":$(b | fzf --query="${1:-}" --select-1)"
+				shift
+
+				local w
+				w="$(bazel info workspace)"
+				cat "$(bazel cquery "//${bazel_prefix}${rule}" --output=files | grep bazel-out/ | sed "s#^#${w}/#" || true)"
 				;;
 			*)
 				rule="$1"
