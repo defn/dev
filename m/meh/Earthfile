@@ -16,5 +16,5 @@ image:
     ARG image
     COPY aws_config.txt .
     COPY app_config .
-    COPY --dir --chown=ubuntu:ubuntu +nix-archive/nix /nix
+    COPY --dir +nix-archive/nix /nix
     SAVE IMAGE --push ${image}
