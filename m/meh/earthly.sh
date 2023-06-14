@@ -35,7 +35,7 @@ function main {
 	)
 
 	cd "${pth_build}"
-	"${flake_earthly}" +build
+	"${flake_earthly}" --push +build
 
 	rm -rf "${pth_build}"
 }
