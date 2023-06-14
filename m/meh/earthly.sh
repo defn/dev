@@ -14,16 +14,16 @@ function main {
 	flake_earthly="${bhome}/$1"
 	shift
 
-	# shellcheck disable=SC2034
 	earthfile="$1"
 	shift
 
-	# shellcheck disable=SC2034
 	app_config="$1"
 	shift
 
-	# shellcheck disable=SC2034
 	aws_config="$1"
+	shift
+
+	nix_archives="$1"
 	shift
 
 	local pth_build
@@ -31,11 +31,13 @@ function main {
 	cp -v "${earthfile}" "${app_config}" "${aws_config}" "${pth_build}/"
 	(
 		set +f
-		cp -v "$*"/* "${pth_build}/"
+		cp -v "${nix_archives}"/* "${pth_build}/"
 	)
 
+	if [[ $# == 0 ]]; then set -- --push -no-output +build; fi
+
 	cd "${pth_build}"
-	"${flake_earthly}" --push +build
+	"${flake_earthly}" "$@"
 
 	rm -rf "${pth_build}"
 }
