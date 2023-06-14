@@ -21,6 +21,7 @@
         inputs.cue.defaultPackage.${ctx.system}
         inputs.awscli.defaultPackage.${ctx.system}
         inputs.earthly.defaultPackage.${ctx.system}
+        ctx.pkgs.bashInteractive
       ];
     };
   };

@@ -36,6 +36,11 @@ filegroup(
 )
 
 filegroup(
+    name = "flake_store_script",
+    srcs = ["flake_store.sh"],
+)
+
+filegroup(
     name = "flake_config",
     srcs = [
         "flake.json",
@@ -75,6 +80,17 @@ genrule(
     ],
     outs = ["earthly_bin"],
     cmd = "$(location flake_path_script) $@ which earthly",
+)
+
+# build flake archives
+genrule(
+    name = "flake_store_bap4d0lpcrhpwmpb8ayjcgkmvfj62lnq-bash-interactive-5.1-p16",
+    srcs = [
+        "flake_store_script",
+        "flake_config",
+    ],
+    outs = ["bap4d0lpcrhpwmpb8ayjcgkmvfj62lnq-bash-interactive-5.1-p16.tar.gz"],
+    cmd = "$(location flake_store_script) $@ /nix/store/bap4d0lpcrhpwmpb8ayjcgkmvfj62lnq-bash-interactive-5.1-p16",
 )
 
 # aws configuration
