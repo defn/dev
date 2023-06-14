@@ -30,11 +30,12 @@ function main {
 		bazel_prefix="$(git rev-parse --show-prefix | sed 's#/$##; s#^m/##')"
 
 		if [[ $# == 0 ]]; then
-			bazel query --ui_event_filters=-info --noshow_progress --noshow_loading_progress "//${bazel_prefix}/..." | sed "s#^//${bazel_prefix}:##"
+			bazel query "//${bazel_prefix}/..." | sed "s#^//${bazel_prefix}:##"
 		else
 			local rule
 
-			if [[ $1 == "build" ]]; then
+			case "$1" in
+			build)
 				shift
 
 				if [[ $# == 0 ]]; then
@@ -45,12 +46,27 @@ function main {
 				fi
 
 				exec bazel build "//${bazel_prefix}${rule}"
-			else
+				;;
+			output)
+				shift
+
+				if [[ $# == 0 ]]; then
+					rule="/..."
+				else
+					rule=":$1"
+					shift
+				fi
+
+				local w="$(bazel info workspace)"
+				bazel cquery "//${bazel_prefix}${rule}" --output=files | grep bazel-out/ | sed "s#^#${w}/#"
+				;;
+			*)
 				rule="$1"
 				shift
 
 				exec bazel run "//${bazel_prefix}:${rule}" -- "$@"
-			fi
+				;;
+			esac
 		fi
 		;;
 	esac
