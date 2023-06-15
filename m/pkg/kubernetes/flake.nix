@@ -3,7 +3,7 @@
     kubectl.url = github:defn/dev/pkg-kubectl-1.25.10-1?dir=m/pkg/kubectl;
     k3d.url = github:defn/dev/pkg-k3d-5.5.1-3?dir=m/pkg/k3d;
     k9s.url = github:defn/dev/pkg-k9s-0.27.4-3?dir=m/pkg/k9s;
-    helm.url = github:defn/dev/pkg-helm-3.12.0-3?dir=m/pkg/helm;
+    helm.url = github:defn/dev/pkg-helm-3.12.1-1?dir=m/pkg/helm;
     kustomize.url = github:defn/dev/pkg-kustomize-5.0.3-3?dir=m/pkg/kustomize;
     stern.url = github:defn/dev/pkg-stern-1.25.0-8?dir=m/pkg/stern;
     argoworkflows.url = github:defn/dev/pkg-argoworkflows-3.4.8-3?dir=m/pkg/argoworkflows;
@@ -12,7 +12,7 @@
     vcluster.url = github:defn/dev/pkg-vcluster-0.15.2-1?dir=m/pkg/vcluster;
     kubevirt.url = github:defn/dev/pkg-kubevirt-0.59.1-1?dir=m/pkg/kubevirt;
     velero.url = github:defn/dev/pkg-velero-1.11.0-4?dir=m/pkg/velero;
-    cilium.url = github:defn/dev/pkg-cilium-0.14.6-1?dir=m/pkg/cilium;
+    cilium.url = github:defn/dev/pkg-cilium-0.14.7-1?dir=m/pkg/cilium;
     hubble.url = github:defn/dev/pkg-hubble-0.11.6-1?dir=m/pkg/hubble;
   };
 
