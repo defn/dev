@@ -83,4 +83,5 @@ earthly_build(
         "flake_archives",
     ],
     earthly_bin = "flake_earthly",
+    image = "aws",
 )

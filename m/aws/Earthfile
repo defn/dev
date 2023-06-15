@@ -1,9 +1,8 @@
 VERSION --use-registry-for-with-docker --ci-arg 0.7
 
 build:
-    ARG image=quay.io/defn/dev:latest-bazel
-    BUILD --platform=linux/amd64 +image --image=${image}
-    BUILD --platform=linux/arm64 +image --image=${image}
+    ARG image
+    BUILD +image --image=${image}
 
 nix-archive:
     FROM ubuntu
@@ -17,4 +16,4 @@ image:
     COPY aws_config.txt .
     COPY app_config .
     COPY --dir +nix-archive/nix /nix
-    SAVE IMAGE --push ${image}
+    SAVE IMAGE ${image}
