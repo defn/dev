@@ -1,4 +1,5 @@
-load("//meh:cue.bzl", "cue")
+load("//cue:cue.bzl", "cue_export")
+load("//earthly:earthly.bzl", "earthly_build")
 load("//nix:nix.bzl", "nix_flake")
 
 filegroup(
@@ -26,11 +27,6 @@ filegroup(
     srcs = ["aws_config.sh"],
 )
 
-filegroup(
-    name = "earthfile_config",
-    srcs = ["Earthfile"],
-)
-
 # aws configuration
 genrule(
     name = "aws_config_cfg",
@@ -48,6 +44,7 @@ genrule(
 # nix flake
 nix_flake(
     name = "flake",
+    dir = "aws",
     flakes = [
         "cue",
         "awscli",
@@ -56,7 +53,7 @@ nix_flake(
 )
 
 # app configuration
-cue(
+cue_export(
     name = "app_config",
     srcs = ["flake_cue"],
     cues = glob(["*.cue"]),
@@ -79,21 +76,12 @@ sh_binary(
 )
 
 # build docker image
-sh_binary(
-    name = "earthly",
-    srcs = ["earthly.sh"],
-    args = [
-        "$(location flake_earthly)",
-        "$(location earthfile_config)",
-        "$(location app_config)",
-        "$(location aws_config_cfg)",
-        "$(location flake_archives)",
-    ],
+earthly_build(
+    name = "aws",
     data = [
         "app_config",
         "aws_config_cfg",
-        "earthfile_config",
         "flake_archives",
-        "flake_earthly",
     ],
+    earthly_bin = "flake_earthly",
 )

@@ -3,12 +3,16 @@
 set -euo pipefail
 
 function main {
+	local dir
 	local out
+
+	dir="$1"
+	shift
 
 	out="$(pwd)/$1"
 	shift
 
-	cd meh
+	cd "${dir}"
 	mkdir nix
 	cp flake.* nix/
 
