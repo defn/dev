@@ -48,17 +48,17 @@
       },
       "locked": {
         "dir": "m/pkg/cilium",
-        "lastModified": 1685761187,
-        "narHash": "sha256-6zjmuE6wksM4TmKIk4CDm4WKovcxPHij+AhcHXhsNEw=",
+        "lastModified": 1686793551,
+        "narHash": "sha256-P7NhlUIFiIZEhLAQ1Cf2DNI8Zz3+0nLxIBuUEvLAFBU=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "b4296015ea3de6edc03b0e581b71fdc01a815a33",
+        "rev": "074e13a7af1fab0587d57d8ff28337ae8f14d2d6",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cilium",
         "owner": "defn",
-        "ref": "pkg-cilium-0.14.6-1",
+        "ref": "pkg-cilium-0.14.7-1",
         "repo": "dev",
         "type": "github"
       }
@@ -601,17 +601,17 @@
       },
       "locked": {
         "dir": "m/pkg/helm",
-        "lastModified": 1685334065,
-        "narHash": "sha256-r7hs3A3giqN6XldG+qCIgpSDophmW22bAT7sNWNnJZw=",
+        "lastModified": 1686794438,
+        "narHash": "sha256-WMErhtuW8+qysp55lWeClTsaDfreEVvG04LSz+ZGm0g=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "1d5624d56de9ce50c37fec926ad7ffe32c87a113",
+        "rev": "d59228fde1d2efb716c843c01d316b447679857b",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/helm",
         "owner": "defn",
-        "ref": "pkg-helm-3.12.0-3",
+        "ref": "pkg-helm-3.12.1-1",
         "repo": "dev",
         "type": "github"
       }
