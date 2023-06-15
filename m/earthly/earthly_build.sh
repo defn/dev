@@ -3,12 +3,19 @@
 set -efuo pipefail
 
 function main {
+	local out
+	local image
 	local flake_earthly
-
 	local earthfile
 
 	local bhome
 	bhome="$(pwd)"
+
+	out="${bhome}/$1"
+	shift
+
+	image="$1"
+	shift
 
 	flake_earthly="${bhome}/$1"
 	shift
@@ -34,8 +41,11 @@ function main {
 
 	if [[ $# == 0 ]]; then set -- --push -no-output +build; fi
 
+	set -x
+
 	cd "${pth_build}"
-	"${flake_earthly}" --push +build
+	"${flake_earthly}" --build-arg "image=${image}" +build
+	docker save "${image}" -o "${out}"
 
 	rm -rf "${pth_build}"
 }

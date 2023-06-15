@@ -1,7 +1,7 @@
 """
 """
 
-def earthly_build(name, data, earthly_bin, visibility = None):
+def earthly_build(name, image, data, earthly_bin, visibility = None):
     native.filegroup(
         name = "{}_earthfile".format(name),
         srcs = [
@@ -10,15 +10,20 @@ def earthly_build(name, data, earthly_bin, visibility = None):
         visibility = visibility,
     )
 
-    native.sh_binary(
+    earthly_build_script = Label(":earthly_build_script")
+
+    native.genrule(
         name = "{}_earthly_build".format(name),
-        srcs = [
-            Label("earthly_build"),
-        ],
-        visibility = visibility,
-        args =
-            ["$(location {})".format(earthly_bin)] +
-            ["$(location {}_earthfile)".format(name)] +
-            ["$(location {})".format(d) for d in data],
-        data = [earthly_bin, "{}_earthfile".format(name)] + data,
+        srcs = [earthly_build_script, earthly_bin, "{}_earthfile".format(name)] + data,
+        outs = ["{}_docker_image".format(name)],
+        cmd = "$(location //{}:{}) $@ {} $(location {}) $(location {}_earthfile) {}".format(
+            earthly_build_script.package,
+            earthly_build_script.name,
+            image,
+            earthly_bin,
+            name,
+            " ".join(["$(location {})".format(d) for d in data]),
+        ),
     )
+
+    return [DefaultInfo(files = depset(["{}_docker_image".format(name)]))]
