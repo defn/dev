@@ -4,9 +4,8 @@ set -efuo pipefail
 
 function main {
 	local flake_earthly
+
 	local earthfile
-	local app_config
-	local aws_config
 
 	local bhome
 	bhome="$(pwd)"
@@ -17,27 +16,26 @@ function main {
 	earthfile="$1"
 	shift
 
-	app_config="$1"
-	shift
-
-	aws_config="$1"
-	shift
-
-	nix_archives="$1"
-	shift
-
 	local pth_build
 	pth_build="$(mktemp -d -t XXXXXX)"
-	cp -v "${earthfile}" "${app_config}" "${aws_config}" "${pth_build}/"
+
+	cp -v "${earthfile}" "${pth_build}/"
+
 	(
 		set +f
-		cp -v "${nix_archives}"/* "${pth_build}/"
+		for i in "$@"; do
+			if test -d "${i}"; then
+				cp -v "${i}"/* "${pth_build}/"
+			else
+				cp -v "${i}" "${pth_build}/"
+			fi
+		done
 	)
 
 	if [[ $# == 0 ]]; then set -- --push -no-output +build; fi
 
 	cd "${pth_build}"
-	"${flake_earthly}" "$@"
+	"${flake_earthly}" --push +build
 
 	rm -rf "${pth_build}"
 }

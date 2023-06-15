@@ -1,7 +1,7 @@
 """
 """
 
-def nix_flake(name, visibility = None, flakes = []):
+def nix_flake(name, dir, visibility = None, flakes = []):
     native.filegroup(
         name = "{}_config".format(name),
         srcs = [
@@ -18,7 +18,7 @@ def nix_flake(name, visibility = None, flakes = []):
             "{}_config".format(name),
         ],
         outs = ["{}_nix_stores".format(name)],
-        cmd = "$(location //nix:flake_store_script) $@",
+        cmd = "$(location //nix:flake_store_script) {} $@".format(dir),
         visibility = visibility,
     )
 
@@ -30,6 +30,6 @@ def nix_flake(name, visibility = None, flakes = []):
                 "{}_config".format(name),
             ],
             outs = ["{}_{}_bin".format(name, f)],
-            cmd = "$(location //nix:flake_path_script) $@ which {}".format(f),
+            cmd = "$(location //nix:flake_path_script) {} $@ which {}".format(dir, f),
             visibility = visibility,
         )
