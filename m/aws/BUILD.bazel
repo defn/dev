@@ -63,14 +63,14 @@ sh_binary(
     name = "aws_cli",
     srcs = ["aws_cli.sh"],
     args = [
-        "$(location flake_aws)",
+        "$(location flake_awscli)",
         "$(location app_config)",
         "$(location aws_config_cfg)",
     ],
     data = [
         "app_config",
         "aws_config_cfg",
-        "flake_aws",
+        "flake_awscli",
     ],
 )
 
