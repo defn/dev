@@ -14,7 +14,7 @@ function main {
 	cp flake.* nix/
 
 	cd nix
-	git init
+	git init --quiet
 	git add .
 
 	nix build

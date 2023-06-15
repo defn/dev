@@ -93,7 +93,7 @@ function main {
 				rule="$1"
 				shift
 
-				exec bazel run "//${bazel_prefix}:${rule}" -- "$@"
+				exec bazel run "//${bazel_prefix}:${rule}" --sandbox_debug -- "$@"
 				;;
 			esac
 		fi

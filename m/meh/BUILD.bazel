@@ -1,4 +1,5 @@
 load("//meh:cue.bzl", "cue")
+load("//nix:nix.bzl", "nix_flake")
 
 filegroup(
     name = "aws_orgs",
@@ -30,69 +31,6 @@ filegroup(
     srcs = ["Earthfile"],
 )
 
-filegroup(
-    name = "flake_path_script",
-    srcs = ["flake_path.sh"],
-)
-
-filegroup(
-    name = "flake_store_script",
-    srcs = ["flake_store.sh"],
-)
-
-filegroup(
-    name = "flake_config",
-    srcs = [
-        "flake.json",
-        "flake.lock",
-        "flake.nix",
-    ],
-)
-
-# build cue
-genrule(
-    name = "flake_cue",
-    srcs = [
-        "flake_path_script",
-        "flake_config",
-    ],
-    outs = ["cue_bin"],
-    cmd = "$(location flake_path_script) $@ which cue",
-)
-
-# build aws cli
-genrule(
-    name = "flake_aws",
-    srcs = [
-        "flake_path_script",
-        "flake_config",
-    ],
-    outs = ["aws_bin"],
-    cmd = "$(location flake_path_script) $@ which aws",
-)
-
-# build earthly
-genrule(
-    name = "flake_earthly",
-    srcs = [
-        "flake_path_script",
-        "flake_config",
-    ],
-    outs = ["earthly_bin"],
-    cmd = "$(location flake_path_script) $@ which earthly",
-)
-
-# build flake archives
-genrule(
-    name = "flake_store_archives",
-    srcs = [
-        "flake_store_script",
-        "flake_config",
-    ],
-    outs = ["nix-stores"],
-    cmd = "$(location flake_store_script) $@",
-)
-
 # aws configuration
 genrule(
     name = "aws_config_cfg",
@@ -105,6 +43,16 @@ genrule(
     outs = ["aws_config.txt"],
     cmd = "$(location aws_config_script) $(location aws_orgs) $(location aws_accounts) $(location template_org) $(location template_account) $@",
     tools = ["aws_config_script"],
+)
+
+# nix flake
+nix_flake(
+    name = "flake",
+    flakes = [
+        "cue",
+        "awscli",
+        "earthly",
+    ],
 )
 
 # app configuration
@@ -139,13 +87,13 @@ sh_binary(
         "$(location earthfile_config)",
         "$(location app_config)",
         "$(location aws_config_cfg)",
-        "$(location flake_store_archives)",
+        "$(location flake_archives)",
     ],
     data = [
         "app_config",
         "aws_config_cfg",
         "earthfile_config",
+        "flake_archives",
         "flake_earthly",
-        "flake_store_archives",
     ],
 )
