@@ -48,17 +48,17 @@
       },
       "locked": {
         "dir": "m/pkg/awscli",
-        "lastModified": 1686350146,
-        "narHash": "sha256-5mvXsOqQnmtCNBFGVud4KncMAOQlTudLqwwmN1bdFiE=",
+        "lastModified": 1686793309,
+        "narHash": "sha256-GiQIfYmaW1uFH6TfiM4dKZH20e90YCjrk31wxg4WG8k=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "fa7b6838aaa657cb0e62d03f20cd90f3f07e2051",
+        "rev": "8c39268681bfa201eff8d9cda6a2b6baaea44cf7",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/awscli",
         "owner": "defn",
-        "ref": "pkg-awscli-2.11.27-1",
+        "ref": "pkg-awscli-2.12.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -237,17 +237,17 @@
       },
       "locked": {
         "dir": "m/pkg/cilium",
-        "lastModified": 1685761187,
-        "narHash": "sha256-6zjmuE6wksM4TmKIk4CDm4WKovcxPHij+AhcHXhsNEw=",
+        "lastModified": 1686793551,
+        "narHash": "sha256-P7NhlUIFiIZEhLAQ1Cf2DNI8Zz3+0nLxIBuUEvLAFBU=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "b4296015ea3de6edc03b0e581b71fdc01a815a33",
+        "rev": "074e13a7af1fab0587d57d8ff28337ae8f14d2d6",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cilium",
         "owner": "defn",
-        "ref": "pkg-cilium-0.14.6-1",
+        "ref": "pkg-cilium-0.14.7-1",
         "repo": "dev",
         "type": "github"
       }
@@ -263,17 +263,17 @@
       },
       "locked": {
         "dir": "m/pkg/cloud",
-        "lastModified": 1686694034,
-        "narHash": "sha256-Q8M6TKnMcgWRPH5VkkZ0m0Vypj9jVV9mIufXEba1O8g=",
+        "lastModified": 1686794487,
+        "narHash": "sha256-ApuK2CF2lfr5XjGi9Rk2Q01qicTyI0kgPQU//7pxfgE=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "4d89ea90fa9b7047a531aca58f85eff024fbc909",
+        "rev": "05ca09683cfcd4fb014339e6786e113d9f87df60",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cloud",
         "owner": "defn",
-        "ref": "pkg-cloud-0.0.106",
+        "ref": "pkg-cloud-0.0.107",
         "repo": "dev",
         "type": "github"
       }
@@ -1927,17 +1927,17 @@
       },
       "locked": {
         "dir": "m/pkg/flyctl",
-        "lastModified": 1686693999,
-        "narHash": "sha256-AILh1HmyTpX17ZsSgGJ+0evUEsaF1Me3SklaaCWWpi4=",
+        "lastModified": 1686794418,
+        "narHash": "sha256-oyklMZ5Zny8O19wUG8+qq2CpQKR/42eTHQ9vvV2T1zE=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "6698bb5a24f049c6c723bbc4714947507873a35b",
+        "rev": "0ed33afc27ed2355ddeb80af64046f066b1228a6",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/flyctl",
         "owner": "defn",
-        "ref": "pkg-flyctl-0.1.35-1",
+        "ref": "pkg-flyctl-0.1.36-1",
         "repo": "dev",
         "type": "github"
       }
@@ -2014,17 +2014,17 @@
       },
       "locked": {
         "dir": "m/pkg/helm",
-        "lastModified": 1685334065,
-        "narHash": "sha256-r7hs3A3giqN6XldG+qCIgpSDophmW22bAT7sNWNnJZw=",
+        "lastModified": 1686794438,
+        "narHash": "sha256-WMErhtuW8+qysp55lWeClTsaDfreEVvG04LSz+ZGm0g=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "1d5624d56de9ce50c37fec926ad7ffe32c87a113",
+        "rev": "d59228fde1d2efb716c843c01d316b447679857b",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/helm",
         "owner": "defn",
-        "ref": "pkg-helm-3.12.0-3",
+        "ref": "pkg-helm-3.12.1-1",
         "repo": "dev",
         "type": "github"
       }
@@ -2216,17 +2216,17 @@
       },
       "locked": {
         "dir": "m/pkg/kubernetes",
-        "lastModified": 1686351503,
-        "narHash": "sha256-FEboXjvYirhNi7sUIhVdDr8yL9tslzXhUDt0Px6vljY=",
+        "lastModified": 1686794510,
+        "narHash": "sha256-Pp+fUkZLq5fxLuPDGU/jsCxEcgUIVqFv2DP9V5ikOlk=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "80b300bcdb5336a132007c0c953840212a12714a",
+        "rev": "21a9b3e85ba768d8b41535f117cd09ba0b0eb03f",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubernetes",
         "owner": "defn",
-        "ref": "pkg-kubernetes-0.0.107",
+        "ref": "pkg-kubernetes-0.0.108",
         "repo": "dev",
         "type": "github"
       }
