@@ -57,6 +57,34 @@ function main {
 				w="$(bazel info workspace)"
 				bazel cquery "//${bazel_prefix}${rule}" --output=files | grep bazel-out/ | sed "s#^#${w}/#"
 				;;
+			in)
+				shift
+
+				rule=":$(b | fzf --query="${1:-}" --select-1)"
+				shift
+
+				local w
+				w="$(bazel info workspace)"
+
+				local out
+				out="$(bazel cquery "//${bazel_prefix}${rule}" --output=files | grep -v bazel-out/ | sed "s#^#${w}/#" || true)"
+
+				cat "${out}"
+				;;
+			out)
+				shift
+
+				rule=":$(b | fzf --query="${1:-}" --select-1)"
+				shift
+
+				local w
+				w="$(bazel info workspace)"
+
+				local out
+				out="$(bazel cquery "//${bazel_prefix}${rule}" --output=files | grep bazel-out/ | sed "s#^#${w}/#" || true)"
+
+				cat "${out}"
+				;;
 			cat)
 				shift
 
@@ -65,7 +93,15 @@ function main {
 
 				local w
 				w="$(bazel info workspace)"
-				cat "$(bazel cquery "//${bazel_prefix}${rule}" --output=files | grep bazel-out/ | sed "s#^#${w}/#" || true)"
+
+				local out
+				out="$(bazel cquery "//${bazel_prefix}${rule}" --output=files | grep bazel-out/ | sed "s#^#${w}/#" || true)"
+
+				if [[ -z ${out} ]]; then
+					out="$(bazel cquery "//${bazel_prefix}${rule}" --output=files | grep -v bazel-out/ | sed "s#^#${w}/#" || true)"
+				fi
+
+				cat "${out}"
 				;;
 			*)
 				rule="$1"
