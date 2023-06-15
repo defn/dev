@@ -1,7 +1,16 @@
 """
 """
 
-def nix_flake(name, dir, visibility = None, flakes = []):
+def nix_flake(name, visibility = None, flakes = []):
+    """ something
+
+    Args:
+        name: something
+        visibility: something
+        flakes: something
+    """
+    dir = native.package_name()
+
     native.filegroup(
         name = "{}_config".format(name),
         srcs = [
