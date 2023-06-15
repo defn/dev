@@ -13,7 +13,7 @@ function main {
 	cp flake.* nix/
 
 	cd nix
-	git init
+	git init --quiet
 	git add .
 	# shellcheck disable=SC2016
 	ln -nfs "$(nix develop --command "$@" || true)" "${out}"

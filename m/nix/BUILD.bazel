@@ -1,0 +1,11 @@
+filegroup(
+    name = "flake_path_script",
+    srcs = ["flake_path.sh"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "flake_store_script",
+    srcs = ["flake_store.sh"],
+    visibility = ["//visibility:public"],
+)
