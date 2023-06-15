@@ -44,7 +44,6 @@ genrule(
 # nix flake
 nix_flake(
     name = "flake",
-    dir = "aws",
     flakes = [
         "cue",
         "awscli",
