@@ -26,6 +26,7 @@
             ;;
         esac
         ln -nfs aws $out/bin/pkg-awscli
+        ln -nfs aws $out/bin/awscli
       '';
 
       downloads = {
