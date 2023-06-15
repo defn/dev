@@ -42,26 +42,14 @@ function main {
 					rule="/..."
 				else
 					rule=":$(b | fzf --query="${1:-}" --select-1)"
-					shift
 				fi
 
 				exec bazel build "//${bazel_prefix}${rule}"
 				;;
-			output)
-				shift
-
-				rule=":$(b | fzf --query="${1:-}" --select-1)"
-				shift
-
-				local w
-				w="$(bazel info workspace)"
-				bazel cquery "//${bazel_prefix}${rule}" --output=files | grep bazel-out/ | sed "s#^#${w}/#"
-				;;
 			in)
 				shift
 
-				rule=":$(b | fzf --query="${1:-}" --select-1)"
-				shift
+				rule=":$(b | fzf --query="${1:-}" --select-1 || true)"
 
 				local w
 				w="$(bazel info workspace)"
@@ -75,7 +63,6 @@ function main {
 				shift
 
 				rule=":$(b | fzf --query="${1:-}" --select-1)"
-				shift
 
 				local w
 				w="$(bazel info workspace)"
@@ -89,7 +76,6 @@ function main {
 				shift
 
 				rule=":$(b | fzf --query="${1:-}" --select-1)"
-				shift
 
 				local w
 				w="$(bazel info workspace)"
