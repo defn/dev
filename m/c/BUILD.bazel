@@ -30,7 +30,7 @@ pkg_tar(
 
 oci_image(
     name = "c_image",
-    base = "@nginx_debian_slim",
+    base = "@distroless_base",
     tars = [
         "c_tar",
     ],
