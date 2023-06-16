@@ -54,7 +54,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: spec.nodeName
-        image: registry.nestybox.com/nestybox/sysbox-deploy-k8s:v0.6.1
+        image: registry.nestybox.com/nestybox/sysbox-deploy-k8s:v0.6.2
         imagePullPolicy: Always
         name: sysbox-deploy-k8s
         securityContext:
