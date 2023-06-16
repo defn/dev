@@ -1,0 +1,17 @@
+load("//cue:cue.bzl", "cue_export")
+load("//nix:nix.bzl", "nix_flake")
+
+# nix flake
+nix_flake(
+    name = "flake",
+    flakes = [
+        "cue",
+    ],
+)
+
+# app configuration
+cue_export(
+    name = "app_config",
+    srcs = ["flake_cue"],
+    cues = glob(["*.cue"]),
+)
