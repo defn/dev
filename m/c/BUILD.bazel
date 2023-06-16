@@ -12,6 +12,9 @@ nix_flake(
 # app configuration
 cue_export(
     name = "app_config",
-    srcs = ["flake_cue"],
+    srcs = [
+        "flake_cue",
+        "//cue.mod/gen/k8s.io:k8s_cue",
+    ],
     cues = glob(["*.cue"]),
 )

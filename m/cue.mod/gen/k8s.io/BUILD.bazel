@@ -1,5 +1,5 @@
 filegroup(
     name = "k8s_cue",
-    srcs = glob(["**/*.cue"]),
-    include_directories = True,
+    srcs = glob(["**/*.cue"]) + ["//cue.mod:cue_mod"],
+    visibility = ["//visibility:public"],
 )

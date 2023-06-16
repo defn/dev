@@ -1,0 +1,5 @@
+filegroup(
+    name = "cue_mod",
+    srcs = ["module.cue"],
+    visibility = ["//visibility:public"],
+)
