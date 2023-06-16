@@ -1,5 +1,4 @@
 SHELL := /bin/bash
 
 build: # Generate cue schemas for k8s libraries
-	rm -rf ../cue.mod/gen
-	cue export --out json -e k8s.apis | jq -r '.[]' | runmany 'mark $$1; go get $$1; cue get go $$1'
+	b out app_config | jq -r '.k8s.apis[]' | runmany 'mark $$1; go get $$1; cue get go $$1'
