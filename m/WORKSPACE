@@ -92,6 +92,20 @@ oci_pull(
     name = "nginx_debian_slim",
     digest = "sha256:6b06964cdbbc517102ce5e0cef95152f3c6a7ef703e4057cb574539de91f72e6",
     image = "docker.io/library/nginx",
+    platforms = [
+        "linux/amd64",
+        "linux/arm64",
+    ],
+)
+
+oci_pull(
+    name = "distroless_base",
+    digest = "sha256:ccaef5ee2f1850270d453fdf700a5392534f8d1a8ca2acda391fbb6a06b81c86",
+    image = "gcr.io/distroless/base",
+    platforms = [
+        "linux/amd64",
+        "linux/arm64",
+    ],
 )
 
 # go
