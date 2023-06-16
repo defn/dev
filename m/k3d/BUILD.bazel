@@ -1,0 +1,28 @@
+load("//earthly:earthly.bzl", "earthly_build")
+load("//nix:nix.bzl", "nix_flake")
+
+# earthly inputs
+filegroup(
+    name = "earthly_inputs",
+    srcs = [
+        "k3d-config.toml",
+        "k3s-wrapper.sh",
+    ],
+)
+
+# nix flake
+nix_flake(
+    name = "flake",
+    flakes = ["earthly"],
+)
+
+# build docker image
+earthly_build(
+    name = "k3d",
+    build_args = ["K3S=1.25.10-k3s1"],
+    data = [
+        "earthly_inputs",
+    ],
+    earthly_bin = "flake_earthly",
+    image = "quay.io/defn/dev:latest-k3d",
+)

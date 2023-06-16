@@ -7,6 +7,7 @@ function main {
 	local image
 	local flake_earthly
 	local earthfile
+	local build_args
 
 	local bhome
 	bhome="$(pwd)"
@@ -21,6 +22,9 @@ function main {
 	shift
 
 	earthfile="$1"
+	shift
+
+	build_args="$1"
 	shift
 
 	local pth_build
@@ -44,8 +48,9 @@ function main {
 	set -x
 
 	cd "${pth_build}"
-	"${flake_earthly}" --build-arg "image=${image}" +build
-	docker save "${image}" -o "${out}"
+	# shellcheck disable=SC2086
+	"${flake_earthly}" --build-arg "image=${image}" ${build_args} +build
+	echo docker save "${image}" -o "${out}" >"${out}"
 
 	rm -rf "${pth_build}"
 }
