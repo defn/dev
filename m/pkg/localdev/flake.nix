@@ -29,7 +29,7 @@
             inputs.vault.defaultPackage.${ctx.system}
             inputs.gh.defaultPackage.${ctx.system}
             inputs.earthly.defaultPackage.${ctx.system}
-            inputs.dagger.defaultPackage.${ctx.system}
+            inputs.oras.defaultPackage.${ctx.system}
             inputs.buildkite.defaultPackage.${ctx.system}
             inputs.bk.defaultPackage.${ctx.system}
             inputs.buildevents.defaultPackage.${ctx.system}
