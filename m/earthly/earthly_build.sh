@@ -50,7 +50,7 @@ function main {
 	cd "${pth_build}"
 	# shellcheck disable=SC2086
 	"${flake_earthly}" --build-arg "image=${image}" ${build_args} +build
-	echo docker save "${image}" -o "${out}" >"${out}"
+	docker save "${image}" -o "${out}"
 
 	rm -rf "${pth_build}"
 }
