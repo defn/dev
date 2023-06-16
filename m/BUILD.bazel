@@ -9,7 +9,6 @@ gazelle_binary(
     visibility = ["//visibility:public"],
 )
 
-# gazelle:prefix github.com/defn/dev/m
 gazelle(name = "gazelle")
 
 gazelle(

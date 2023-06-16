@@ -3,7 +3,10 @@ tf
 node_modules
 .direnv
 app/app/.direnv
-meh/.direnv
+aws/.direnv
+c/.direnv
+k3d/.direnv
+k8s/.direnv
 pkg/acme/.direnv
 pkg/argocd/.direnv
 pkg/argorollouts/.direnv
@@ -27,6 +30,7 @@ pkg/codeserver/.direnv
 pkg/coredns/.direnv
 pkg/cosign/.direnv
 pkg/cue/.direnv
+pkg/dagger/.direnv
 pkg/dapr/.direnv
 pkg/dev/.direnv
 pkg/development/.direnv
@@ -43,7 +47,6 @@ pkg/honeymarker/.direnv
 pkg/honeytail/.direnv
 pkg/honeyvent/.direnv
 pkg/hubble/.direnv
-pkg/ibazel/.direnv
 pkg/k3d/.direnv
 pkg/k9s/.direnv
 pkg/kn/.direnv
@@ -78,7 +81,10 @@ r/argo-cd/.direnv
 r/argo-workflows/.direnv
 r/meh/.direnv
 app/app/result
-meh/result
+aws/result
+c/result
+k3d/result
+k8s/result
 pkg/acme/result
 pkg/argocd/result
 pkg/argorollouts/result
@@ -102,6 +108,7 @@ pkg/codeserver/result
 pkg/coredns/result
 pkg/cosign/result
 pkg/cue/result
+pkg/dagger/result
 pkg/dapr/result
 pkg/dev/result
 pkg/development/result
@@ -118,7 +125,6 @@ pkg/honeymarker/result
 pkg/honeytail/result
 pkg/honeyvent/result
 pkg/hubble/result
-pkg/ibazel/result
 pkg/k3d/result
 pkg/k9s/result
 pkg/kn/result
@@ -153,5 +159,3 @@ r/argo-cd/result
 r/argo-workflows/result
 r/meh/result
 result
-cue.mod
-cmd/cli/proto
