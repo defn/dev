@@ -89,7 +89,7 @@ rules_pkg_dependencies()
 load("@rules_oci//oci:pull.bzl", "oci_pull")
 
 oci_pull(
-    name = "nginx_debian_slim",
+    name = "nginx",
     digest = "sha256:6b06964cdbbc517102ce5e0cef95152f3c6a7ef703e4057cb574539de91f72e6",
     image = "docker.io/library/nginx",
     platforms = [
