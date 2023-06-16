@@ -23,4 +23,4 @@ gen:
 	cue cmd gen
 
 yaml:
-	runmany 4 'echo $$1; (cd ../k/$$1 && echo && pwd && rm -rf charts local && mkdir -p ../../r/$$1 && kustomize localize . local && kustomize build --enable-helm local > ../../r/$$1/main.yaml && rm -rf charts local/charts) || (echo "ERROR: $$1" && true)' < <(cd ../k && ls -d */)
+	runmany 4 'echo $$1; (cd $$1 && echo && pwd && rm -rf charts local && mkdir -p ../../r/$$(basename $$1) && kustomize localize . local && kustomize build --enable-helm local > ../../r/$$(basename $$1)/main.yaml && rm -rf charts local/charts) || (echo "ERROR: $$1" && true)' < <(ls -d ../k/*/)
