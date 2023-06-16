@@ -8,8 +8,7 @@ build:
 build-k3d:
     ARG K3S
     ARG image
-    BUILD --platform=linux/amd64 +image-k3d --image=${image} --K3S=${K3S}
-    BUILD --platform=linux/arm64 +image-k3d --image=${image} --K3S=${K3S}
+    BUILD +image-k3d --image=${image} --K3S=${K3S}
 
 image-k3d:
     ARG K3S
@@ -17,6 +16,11 @@ image-k3d:
 
     FROM +k3d --K3S=${K3S}
     SAVE IMAGE --push ${image}
+
+nix:
+    FROM quay.io/defn/dev:latest-nix-installed
+    SAVE ARTIFACT /nix nix
+    SAVE ARTIFACT /home/ubuntu ubuntu
 
 k3d:
     ARG K3S
@@ -69,8 +73,3 @@ k3d:
         && cp -a /home/ubuntu/.nix-profile/bin/bash /bin/bash \
         && ln -nfs /bin/env /usr/bin/env \
         && sed 's#/bin/sh#/bin/bash#' -i /etc/passwd
-
-nix:
-    FROM quay.io/defn/dev:latest-nix-installed
-    SAVE ARTIFACT /nix nix
-    SAVE ARTIFACT /home/ubuntu ubuntu

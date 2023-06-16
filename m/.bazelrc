@@ -1,6 +1,3 @@
-build --ui_event_filters=-info
-build --noshow_progress
-build --noshow_loading_progress
 build --sandbox_writable_path=/nix
 build --sandbox_writable_path=/home/ubuntu/.cache/nix
 

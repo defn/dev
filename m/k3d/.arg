@@ -1,2 +1,0 @@
-K3S=1.25.10-k3s1
-image=quay.io/defn/dev:latest-k3d
