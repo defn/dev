@@ -1,10 +1,10 @@
 package c
 
 import (
-	core "github.com/defn/dev/m/k8s/api/core/v1"
-	batch "github.com/defn/dev/m/k8s/api/batch/v1"
-	apps "github.com/defn/dev/m/k8s/api/apps/v1"
-	rbac "github.com/defn/dev/m/k8s/api/rbac/v1"
+	core "k8s.io/api/core/v1"
+	batch "k8s.io/api/batch/v1"
+	apps "k8s.io/api/apps/v1"
+	rbac "k8s.io/api/rbac/v1"
 )
 
 _issuer: "zerossl-production"
