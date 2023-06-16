@@ -6,11 +6,6 @@ import (
 	"tool/file"
 )
 
-// This makes the c wrapper happy.
-command: {
-	args: string @tag(args)
-}
-
 command: gen: {
 	genKustomizeYaml: {
 		for kname, k in kustomize {
