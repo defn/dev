@@ -46,6 +46,16 @@ function main {
 
 				exec bazel build "//${bazel_prefix}${rule}"
 				;;
+			outputs)
+				shift
+
+				rule=":$(b | fzf --query="${1:-}" --select-1)"
+
+				local w
+				w="$(bazel info workspace)"
+
+				bazel cquery "//${bazel_prefix}${rule}" --output=files | grep bazel-out/
+				;;
 			in)
 				shift
 
