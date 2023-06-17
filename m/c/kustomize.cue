@@ -381,7 +381,7 @@ kustomize: "kyverno": #KustomizeHelm & {
 	helm: {
 		release: "kyverno"
 		name:    "kyverno"
-		version: "2.7.2"
+		version: "3.0.1"
 		repo:    "https://kyverno.github.io/kyverno"
 		values: {
 			replicaCount: 1
@@ -438,7 +438,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.19.1"
+		version: "6.20.3"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -687,7 +687,7 @@ kustomize: "external-secrets-operator": #KustomizeHelm & {
 	helm: {
 		release: "external-secrets"
 		name:    "external-secrets"
-		version: "0.8.1"
+		version: "0.8.3"
 		repo:    "https://charts.external-secrets.io"
 		values: {
 			webhook: create:        false
@@ -893,7 +893,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 		release:   "cert-manager"
 		name:      "cert-manager"
 		namespace: "cert-manager"
-		version:   "1.11.1"
+		version:   "1.12.2"
 		repo:      "https://charts.jetstack.io"
 		values: {
 			ingressShim: {
@@ -954,7 +954,7 @@ kustomize: "velero": #KustomizeHelm & {
 	helm: {
 		release: "vcluster"
 		name:    "vcluster"
-		version: "0.15.0"
+		version: "0.15.2"
 		repo:    "https://charts.loft.sh"
 
 		values: {
@@ -1101,7 +1101,7 @@ kustomize: "traefik": #KustomizeHelm & {
 		release:   "traefik"
 		name:      "traefik"
 		namespace: "traefik"
-		version:   "23.0.1"
+		version:   "23.1.0"
 		repo:      "https://traefik.github.io/charts"
 		values: {
 			logs: general: level:  "DEBUG"

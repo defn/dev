@@ -3,7 +3,7 @@
 patches: []
 resources:
   - resource-namespace-cert-manager.yaml
-  - https://github.com/cert-manager/cert-manager/releases/download/v1.11.1/cert-manager.crds.yaml
+  - https://github.com/cert-manager/cert-manager/releases/download/v1.12.2/cert-manager.crds.yaml
 helmCharts:
   - releaseName: cert-manager
     namespace: cert-manager
@@ -14,6 +14,6 @@ helmCharts:
       global:
         logLevel: 4
     name: cert-manager
-    version: 1.11.1
+    version: 1.12.2
     repo: https://charts.jetstack.io
     includeCRDs: true
