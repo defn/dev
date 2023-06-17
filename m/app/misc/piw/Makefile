@@ -22,26 +22,3 @@ json:
 
 json-inner:
 	$(MAKE) discovery.json keys.json
-
-#    env:
-#    - name: AWS_DEFAULT_REGION
-#      value: us-west-2
-#    - name: AWS_REGION
-#      value: us-west-2
-#    - name: AWS_ROLE_ARN
-#      value: "arn:aws:iam::111122223333:role/s3-reader"
-#    - name: AWS_WEB_IDENTITY_TOKEN_FILE
-#      value: "/var/run/secrets/eks.amazonaws.com/serviceaccount/token"
-#    - name: AWS_STS_REGIONAL_ENDPOINTS
-#      value: "regional"
-#    volumeMounts:
-#    - mountPath: "/var/run/secrets/eks.amazonaws.com/serviceaccount/"
-#      name: aws-token
-#  volumes:
-#  - name: aws-token
-#    projected:
-#      sources:
-#      - serviceAccountToken:
-#          audience: "sts.amazonaws.com"
-#          expirationSeconds: 86400
-#          path: token
