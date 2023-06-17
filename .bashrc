@@ -131,7 +131,8 @@ else
 		true
 	}
 fi
-o# precommit
+
+# precommit
 export PRE_COMMIT_ALLOW_NO_CONFIG=1
 
 # powerline-go
