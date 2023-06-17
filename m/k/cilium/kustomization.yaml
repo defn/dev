@@ -16,6 +16,6 @@ helmCharts:
         ui:
           enabled: true
     name: cilium
-    version: 1.13.2
+    version: 1.13.4
     repo: https://helm.cilium.io
     includeCRDs: true
