@@ -1,3 +1,5 @@
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_tarball")
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
 load("//cue:cue.bzl", "cue_export")
 load("//earthly:earthly.bzl", "earthly_build")
 load("//nix:nix.bzl", "nix_flake")
@@ -84,4 +86,29 @@ earthly_build(
     ],
     earthly_bin = "flake_earthly",
     image = "aws",
+)
+
+# oci
+pkg_tar(
+    name = "aws_tar",
+    srcs = [
+        "app_config",
+        "aws_config_cfg",
+        "flake_archives",
+    ],
+    package_dir = "/app",
+)
+
+oci_image(
+    name = "aws_image",
+    base = "@distroless_base",
+    tars = [
+        "aws_tar",
+    ],
+)
+
+oci_tarball(
+    name = "aws_save",
+    image = "aws_image",
+    repo_tags = ["quay.io/defn/dev:latest-aws"],
 )
