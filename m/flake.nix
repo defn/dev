@@ -65,9 +65,6 @@
           export VAULT_ADDR=http://host.docker.internal:8200
 
           case "''${1:-}" in
-            build)
-              cd k3d && earthly --push +build
-              ;;
             create)
               export DEFN_DEV_HOST_API="$(host $host | grep 'has address' | awk '{print $NF}')"
               this-k3d-provision ${nme} $name
@@ -214,7 +211,6 @@
 
           name=$1; shift
 
-          docker pull quay.io/defn/dev:latest-k3d
           k3d cluster delete $name || true
 
           for a in tailscale irsa; do
