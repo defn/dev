@@ -1,11 +1,6 @@
-build --sandbox_writable_path=/nix
-build --sandbox_writable_path=/home/ubuntu/.cache/nix
-
 run --ui_event_filters=-info,-stdout,-stderr
 run --noshow_progress
 run --noshow_loading_progress
-run --sandbox_writable_path=/nix
-run --sandbox_writable_path=/home/ubuntu/.cache/nix
 
 query --ui_event_filters=-info
 query --noshow_progress
