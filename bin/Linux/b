@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+function bazel {
+	command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "$@"
+}
+
 function main {
 	set -efu -o pipefail
 
@@ -45,7 +49,7 @@ function main {
 					shift
 				fi
 
-				exec bazel build "//${bazel_prefix}${rule}"
+				bazel build "//${bazel_prefix}${rule}"
 				;;
 			outputs)
 				shift
@@ -71,6 +75,7 @@ function main {
 				w="$(bazel info workspace)"
 
 				local out
+				# shellcheck disable=SC2310
 				out="$(bazel cquery "//${bazel_prefix}${rule}" --output=files | grep -v bazel-out/ | sed "s#^#${w}/#" || true)"
 
 				cat "${out}"
@@ -84,6 +89,7 @@ function main {
 				w="$(bazel info workspace)"
 
 				local out
+				# shellcheck disable=SC2310
 				out="$(bazel cquery "//${bazel_prefix}${rule}" --output=files | grep bazel-out/ | sed "s#^#${w}/#" || true)"
 
 				cat "${out}"
@@ -97,19 +103,26 @@ function main {
 				w="$(bazel info workspace)"
 
 				local out
+				# shellcheck disable=SC2310
 				out="$(bazel cquery "//${bazel_prefix}${rule}" --output=files | grep bazel-out/ | sed "s#^#${w}/#" || true)"
 
 				if [[ -z ${out} ]]; then
+					# shellcheck disable=SC2310
 					out="$(bazel cquery "//${bazel_prefix}${rule}" --output=files | grep -v bazel-out/ | sed "s#^#${w}/#" || true)"
 				fi
 
 				cat "${out}"
 				;;
-			*)
-				rule="$1"
+			run)
 				shift
 
-				exec bazel run "//${bazel_prefix}:${rule}" --sandbox_debug -- "$@"
+				rule=":$(b | fzf --query="${1}" --select-1)"
+				shift
+
+				bazel run "//${bazel_prefix}:${rule}" --sandbox_debug -- "$@"
+				;;
+			*)
+				return 1
 				;;
 			esac
 		fi
