@@ -57,5 +57,8 @@
     "**/.trunk/*logs/": true,
     "**/.trunk/*plugins/": true
   },
-  "editor.defaultFormatter": "trunk.io"
+  "editor.defaultFormatter": "trunk.io",
+  "trunk.autoInit": false,
+  "trunk.showWhatsNew": false,
+  "trunk.showWhatsNewMessage": false
 }
