@@ -1,5 +1,13 @@
-gen:
-	go get istio.io/tools/cmd/cue-gen
-	go install istio.io/tools/cmd/cue-gen
-	git checkout ../go.mod ../go.sum
-	~/go/bin/cue-gen -f=cue.yaml --crd=true
+SHELL := /bin/bash
+
+build:
+	$(MAKE) make_crd_cue_gen
+
+update:
+	$(MAKE) make_update_cue_gen
+
+make_crd_cue_gen:
+	./make_crd_cue_gen.sh
+
+make_update_cue_gen:
+	./make_update_cue_gen.sh
