@@ -11,7 +11,7 @@ metadata:
     app.kubernetes.io/instance: external-dns
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
-    helm.sh/chart: external-dns-6.19.1
+    helm.sh/chart: external-dns-6.20.3
   name: external-dns
   namespace: external-dns
 ---
@@ -22,7 +22,7 @@ metadata:
     app.kubernetes.io/instance: external-dns
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
-    helm.sh/chart: external-dns-6.19.1
+    helm.sh/chart: external-dns-6.20.3
   name: external-dns-external-dns
   namespace: external-dns
 rules:
@@ -33,6 +33,7 @@ rules:
   - pods
   - nodes
   - endpoints
+  - namespaces
   verbs:
   - get
   - list
@@ -114,6 +115,7 @@ rules:
   - tlsroutes
   - tcproutes
   - udproutes
+  - grpcroutes
   verbs:
   - get
   - list
@@ -134,7 +136,7 @@ metadata:
     app.kubernetes.io/instance: external-dns
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
-    helm.sh/chart: external-dns-6.19.1
+    helm.sh/chart: external-dns-6.20.3
   name: external-dns-external-dns
   namespace: external-dns
 roleRef:
@@ -153,7 +155,7 @@ metadata:
     app.kubernetes.io/instance: external-dns
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
-    helm.sh/chart: external-dns-6.19.1
+    helm.sh/chart: external-dns-6.20.3
   name: external-dns
   namespace: external-dns
 spec:
@@ -175,7 +177,7 @@ metadata:
     app.kubernetes.io/instance: external-dns
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
-    helm.sh/chart: external-dns-6.19.1
+    helm.sh/chart: external-dns-6.20.3
   name: external-dns
   namespace: external-dns
 spec:
@@ -191,7 +193,7 @@ spec:
         app.kubernetes.io/instance: external-dns
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: external-dns
-        helm.sh/chart: external-dns-6.19.1
+        helm.sh/chart: external-dns-6.20.3
     spec:
       affinity:
         nodeAffinity: null
@@ -233,7 +235,7 @@ spec:
         - name: CF_API_EMAIL
           value: cloudflare@defn.us
         envFrom: null
-        image: docker.io/bitnami/external-dns:0.13.4-debian-11-r11
+        image: docker.io/bitnami/external-dns:0.13.4-debian-11-r19
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 2
