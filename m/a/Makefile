@@ -1,13 +1,10 @@
 SHELL := /bin/bash
 
-build:
+build: # Generate CRDs using cue-gen
 	$(MAKE) make_crd_cue_gen
 
-update:
+update: # Update cue-gen go packages
 	$(MAKE) make_update_cue_gen
 
-make_crd_cue_gen:
-	./make_crd_cue_gen.sh
-
-make_update_cue_gen:
-	./make_update_cue_gen.sh
+make_%:
+	./$@.sh
