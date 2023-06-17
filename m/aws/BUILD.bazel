@@ -94,7 +94,6 @@ pkg_tar(
     srcs = [
         "app_config",
         "aws_config_cfg",
-        "flake_archives",
     ],
     package_dir = "/app",
 )
