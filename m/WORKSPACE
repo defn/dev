@@ -74,6 +74,9 @@ load("@rules_oci//oci:dependencies.bzl", "rules_oci_dependencies")
 load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
 load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
 
+# pkgs
+rules_pkg_dependencies()
+
 # oci
 rules_oci_dependencies()
 
@@ -84,9 +87,34 @@ oci_register_toolchains(
     crane_version = LATEST_CRANE_VERSION,
 )
 
-# images
-rules_pkg_dependencies()
+# go, proto
+go_register_toolchains(version = "1.20.4")
 
+rules_proto_toolchains()
+
+rules_buf_toolchains(version = "v1.21.0")
+
+go_rules_dependencies()
+
+rules_proto_dependencies()
+
+rules_buf_dependencies()
+
+# gazelle dependencies
+load("//:buf_deps.bzl", "buf_deps")
+load("//:go_deps.bzl", "go_deps")
+
+# gazelle:repository_macro go_deps.bzl%go_deps
+go_deps()
+
+# gazelle:repository_macro buf_deps.bzl%buf_deps
+buf_deps()
+
+# gazelle
+gazelle_dependencies()
+gazelle_buf_dependencies()
+
+# images
 load("@rules_oci//oci:pull.bzl", "oci_pull")
 
 oci_pull(
@@ -108,31 +136,3 @@ oci_pull(
         "linux/arm64",
     ],
 )
-
-# go
-go_register_toolchains(version = "1.20.4")
-
-rules_proto_toolchains()
-
-rules_buf_toolchains(version = "v1.21.0")
-
-go_rules_dependencies()
-
-rules_proto_dependencies()
-
-rules_buf_dependencies()
-
-load("//:buf_deps.bzl", "buf_deps")
-
-# gazelle dependencies
-load("//:go_deps.bzl", "go_deps")
-
-# gazelle:repository_macro go_deps.bzl%go_deps
-go_deps()
-
-# gazelle:repository_macro buf_deps.bzl%buf_deps
-buf_deps()
-
-gazelle_dependencies()
-
-gazelle_buf_dependencies()
