@@ -1,7 +1,10 @@
 SHELL := /bin/bash
 
-build:
+build: # Generate cue definitions from k8s go packages
 	$(MAKE) make_k8s_cue
 
-make_k8s_cue: # Generate cue schemas for k8s libraries
-	b out app_config | ./make_k8s_cue.sh
+update: # Update k8s go packages
+	$(MAKE) make_update_k8s_go
+
+make_%:
+	./$@.sh
