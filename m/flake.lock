@@ -2161,17 +2161,17 @@
       },
       "locked": {
         "dir": "m/pkg/kubectl",
-        "lastModified": 1685591890,
-        "narHash": "sha256-H3cafwysAZZMR4hMRLw65zkWCh+9nEgZto7U3n8iv/Q=",
+        "lastModified": 1687040925,
+        "narHash": "sha256-MSA4mTm2urNnN4knIhsOTZCsNo1XBYtJfiKJ98jyFm4=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "c874cea45b00ec4bad8a60caa950afba278b4ddc",
+        "rev": "6abd77645a49982f3ec9a61c1c91ef561a896c9c",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubectl",
         "owner": "defn",
-        "ref": "pkg-kubectl-1.25.10-1",
+        "ref": "pkg-kubectl-1.26.5-2",
         "repo": "dev",
         "type": "github"
       }
@@ -2195,17 +2195,17 @@
       },
       "locked": {
         "dir": "m/pkg/kubernetes",
-        "lastModified": 1686977144,
-        "narHash": "sha256-ylSuCBWcZdmByu1KZcy8u5ACiM4N3OlnjCv8kTMYW0g=",
+        "lastModified": 1687041056,
+        "narHash": "sha256-Pfozrix5wkMC/E+oLnVPfSe+mmsbXasl6BdquqCL1p0=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "1dcc0d6a1f594d89c15548b1b057226557078501",
+        "rev": "4506ad740de43a0b1f4bbe16e80b072f9375ed6a",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubernetes",
         "owner": "defn",
-        "ref": "pkg-kubernetes-0.0.109",
+        "ref": "pkg-kubernetes-0.0.110",
         "repo": "dev",
         "type": "github"
       }
