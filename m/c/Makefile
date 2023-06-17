@@ -4,7 +4,7 @@ build:
 	$(MAKE) check
 	$(MAKE) clean
 	$(MAKE) gen
-	$(MAKE) yaml
+#	$(MAKE) yaml
 	$(MAKE) add
 
 check:
@@ -13,11 +13,11 @@ check:
 clean:
 	rm -f ../e/*/*.yaml
 	rm -f ../k/*/kustomization.yaml ../k/*/resource-*.yaml ../k/*/patch-*.yaml
-	rm -f ../r/*/main.yaml
+#	rm -f ../r/*/main.yaml
 
 add:
 	git add -u ../e ../k && git add ../e ../k
-	git add -u ../r && git add ../r
+#	git add -u ../r && git add ../r
 
 gen:
 	cue cmd gen
