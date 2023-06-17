@@ -1,8 +1,8 @@
 build:
-	bazel build //cmd/cli:cli
+	b pass build //cmd/cli:cli
 
 all:
-	bazel build //...
+	b pass build //...
 
 up:
 	nix develop --command tilt up --stream --port=0
@@ -39,16 +39,16 @@ bazel-ignore:
 
 update-repos:
 	@mark gazelle-buf-update-repos
-	bazel run //:gazelle-buf-update-repos
+	b pass run //:gazelle-buf-update-repos
 
 	@mark gazelle-update-repos
-	bazel run //:gazelle-update-repos
+	b pass run //:gazelle-update-repos
 
 	@mark gazelle-buf
-	bazel run //:gazelle-buf
+	b pass run //:gazelle-buf
 
 	@mark gazelle
-	bazel run //:gazelle
+	b pass run //:gazelle
 
 nix-build-all:
 	git ls-files | grep flake.nix | perl -pe 's{/?flake.nix}{}' | runmany 'mark $$1; cd ./$$1 && nix build'

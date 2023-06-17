@@ -131,6 +131,8 @@ else
 		true
 	}
 fi
+o# precommit
+export PRE_COMMIT_ALLOW_NO_CONFIG=1
 
 # powerline-go
 function render_ps1 {
