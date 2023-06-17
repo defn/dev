@@ -46,11 +46,11 @@ function main {
 		open 'http://localhost/r/(all)/overview'
 		;;
 	*)
-		local bazel_prefix
-		bazel_prefix="$(git rev-parse --show-prefix | sed 's#/$##; s#^m/##')"
-
 		if [[ $# == 0 ]]; then
-			bazel query "//${bazel_prefix}/..." | sed "s#^//${bazel_prefix}:##" | grep -v ^_
+      local bazel_prefix
+      bazel_prefix="$(git rev-parse --show-prefix | sed 's#/$##; s#^m/##')"
+
+			bazel query "..." | sed "s#^//${bazel_prefix}:##" | grep -v ^_
 		else
 			local rule
 
@@ -61,11 +61,11 @@ function main {
 				if [[ $# == 0 ]]; then
 					rule="/..."
 				else
-					rule=":$(b | fzf --query="$1" --select-1)"
+					rule="$(b | fzf --query="$1" --select-1)"
 					shift
 				fi
 
-				bazel build --sandbox_writable_path=/nix --sandbox_writable_path="${HOME}/.cache/nix" "//${bazel_prefix}${rule}"
+				bazel build --sandbox_writable_path=/nix --sandbox_writable_path="${HOME}/.cache/nix" "${rule}"
 				;;
 			outputs)
 				shift
@@ -80,7 +80,7 @@ function main {
 				local w
 				w="$(bazel info workspace)"
 
-				bazel cquery "//${bazel_prefix}${rule}" --output=files | grep bazel-out/
+				bazel cquery "${rule}" --output=files | grep bazel-out/
 				;;
 			in)
 				shift
@@ -92,7 +92,7 @@ function main {
 
 				local out
 				# shellcheck disable=SC2310
-				out="$(bazel cquery "//${bazel_prefix}${rule}" --output=files | grep -v bazel-out/ | sed "s#^#${w}/#" || true)"
+				out="$(bazel cquery "${rule}" --output=files | grep -v bazel-out/ | sed "s#^#${w}/#" || true)"
 
 				cat "${out}"
 				;;
@@ -106,7 +106,7 @@ function main {
 
 				local out
 				# shellcheck disable=SC2310
-				out="$(bazel cquery "//${bazel_prefix}${rule}" --output=files | grep bazel-out/ | sed "s#^#${w}/#" || true)"
+				out="$(bazel cquery "${rule}" --output=files | grep bazel-out/ | sed "s#^#${w}/#" || true)"
 
 				cat "${out}"
 				;;
@@ -120,11 +120,11 @@ function main {
 
 				local out
 				# shellcheck disable=SC2310
-				out="$(bazel cquery "//${bazel_prefix}${rule}" --output=files | grep bazel-out/ | sed "s#^#${w}/#" || true)"
+				out="$(bazel cquery "${rule}" --output=files | grep bazel-out/ | sed "s#^#${w}/#" || true)"
 
 				if [[ -z ${out} ]]; then
 					# shellcheck disable=SC2310
-					out="$(bazel cquery "//${bazel_prefix}${rule}" --output=files | grep -v bazel-out/ | sed "s#^#${w}/#" || true)"
+					out="$(bazel cquery "${rule}" --output=files | grep -v bazel-out/ | sed "s#^#${w}/#" || true)"
 				fi
 
 				cat "${out}"
@@ -132,10 +132,10 @@ function main {
 			run)
 				shift
 
-				rule=":$(b | fzf --query="${1}" --select-1)"
+				rule="$(b | fzf --query="${1}" --select-1)"
 				shift
 
-				bazel run --sandbox_writable_path=/nix --sandbox_writable_path="${HOME}/.cache/nix" "//${bazel_prefix}:${rule}" -- "$@"
+				bazel run --sandbox_writable_path=/nix --sandbox_writable_path="${HOME}/.cache/nix" "${rule}" -- "$@"
 				;;
 			pass)
 				shift
