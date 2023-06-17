@@ -6,9 +6,9 @@ function bazel {
 
 	case "${cmd}" in
 	build | run)
-		if [[ "$(uname -s)" == "Darwin" ]]; then
-			PATH="/usr/bin:$PATH"
-			command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "${cmd}" --macos_sdk_version="$(xcrun -show-sdk-version)" "$@"
+		if [[ "$(uname -s || true)" == "Darwin" ]]; then
+			PATH="/usr/bin:${PATH}"
+			command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "${cmd}" --macos_sdk_version="$(xcrun -show-sdk-version || true)" "$@"
 			return $?
 		fi
 		;;
@@ -65,7 +65,7 @@ function main {
 					shift
 				fi
 
-				bazel build --sandbox_writable_path=/nix --sandbox_writable_path="$HOME/.cache/nix" "//${bazel_prefix}${rule}"
+				bazel build --sandbox_writable_path=/nix --sandbox_writable_path="${HOME}/.cache/nix" "//${bazel_prefix}${rule}"
 				;;
 			outputs)
 				shift
@@ -135,7 +135,7 @@ function main {
 				rule=":$(b | fzf --query="${1}" --select-1)"
 				shift
 
-				bazel run --sandbox_writable_path=/nix --sandbox_writable_path="$HOME/.cache/nix" "//${bazel_prefix}:${rule}" -- "$@"
+				bazel run --sandbox_writable_path=/nix --sandbox_writable_path="${HOME}/.cache/nix" "//${bazel_prefix}:${rule}" -- "$@"
 				;;
 			pass)
 				shift
