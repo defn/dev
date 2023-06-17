@@ -1007,7 +1007,7 @@ kustomize: "velero": #KustomizeHelm & {
 	}
 }
 
-// https://artifacthub.io/packages/helm/bitnami/nginx
+// https://artifacthub.io/packages/helm/cilium/cilium
 kustomize: "cilium": #KustomizeHelm & {
 	namespace: "kube-system"
 
@@ -1015,7 +1015,7 @@ kustomize: "cilium": #KustomizeHelm & {
 		release:   "cilium"
 		name:      "cilium"
 		namespace: "kube-system"
-		version:   "1.13.2"
+		version:   "1.13.4"
 		repo:      "https://helm.cilium.io"
 		values: {
 			operator: replicas: 1
@@ -1063,7 +1063,7 @@ kustomize: "nginx": #KustomizeHelm & {
 		release:   "nginx"
 		name:      "nginx"
 		namespace: "nginx"
-		version:   "13.2.34"
+		version:   "15.0.2"
 		repo:      "https://charts.bitnami.com/bitnami"
 		values: {
 		}
