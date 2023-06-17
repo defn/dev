@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/argocd",
-        "lastModified": 1686003237,
-        "narHash": "sha256-ebpfX2S4lYwfOuSWKDjncL6l6hbbcAoa98c0fx3urqA=",
+        "lastModified": 1686976875,
+        "narHash": "sha256-cUd/C2Tm51HO9r3h4k1zLgEjDE2M6p+MJbb/eLPXCvA=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "9055637924cc2b834030cc2466290fa8e464fa30",
+        "rev": "cc061d53722eaa2456962c047f28c309b90f1be4",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/argocd",
         "owner": "defn",
-        "ref": "pkg-argocd-2.7.4-1",
+        "ref": "pkg-argocd-2.7.5-1",
         "repo": "dev",
         "type": "github"
       }
@@ -48,17 +48,17 @@
       },
       "locked": {
         "dir": "m/pkg/awscli",
-        "lastModified": 1686811316,
-        "narHash": "sha256-5vK3gZlWEEmMkKuOWKNfzFv9q1kHr3jReWa9AX6hidQ=",
+        "lastModified": 1686976912,
+        "narHash": "sha256-4rEdRR5lqv16yn/n6sPkgYmFEXOpS/1HHP6tbYXUbno=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "7b0e6cef3158df63af1e99b282deaa8166fb83a3",
+        "rev": "864e4cebea1be2cb2e7accf5a100023d0c68101d",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/awscli",
         "owner": "defn",
-        "ref": "pkg-awscli-2.12.0-2",
+        "ref": "pkg-awscli-2.12.1-1",
         "repo": "dev",
         "type": "github"
       }
@@ -263,17 +263,17 @@
       },
       "locked": {
         "dir": "m/pkg/cloud",
-        "lastModified": 1686811389,
-        "narHash": "sha256-l5j6R5Vkz41Q1pPuULP2QM9Vr7FlbOVoQksPUrUql+c=",
+        "lastModified": 1686977061,
+        "narHash": "sha256-uewJ+C4aobWCSBaCms42saMbn33axiwhiy3XSmKPOF0=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "dd71a179ed7b3b901619a0e1461abb7448983a67",
+        "rev": "65b43f4a56c14880126557bf9ac438967308009a",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cloud",
         "owner": "defn",
-        "ref": "pkg-cloud-0.0.108",
+        "ref": "pkg-cloud-0.0.109",
         "repo": "dev",
         "type": "github"
       }
@@ -1906,17 +1906,17 @@
       },
       "locked": {
         "dir": "m/pkg/flyctl",
-        "lastModified": 1686794418,
-        "narHash": "sha256-oyklMZ5Zny8O19wUG8+qq2CpQKR/42eTHQ9vvV2T1zE=",
+        "lastModified": 1686977015,
+        "narHash": "sha256-Em3SJpEPSDrT+zcpJbXV8iV4f6svCoZYeFDSGFepbLI=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "0ed33afc27ed2355ddeb80af64046f066b1228a6",
+        "rev": "60a3992ae70be7b0ab45b8b7b75b4748d11ad7eb",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/flyctl",
         "owner": "defn",
-        "ref": "pkg-flyctl-0.1.36-1",
+        "ref": "pkg-flyctl-0.1.38-1",
         "repo": "dev",
         "type": "github"
       }
@@ -2195,17 +2195,17 @@
       },
       "locked": {
         "dir": "m/pkg/kubernetes",
-        "lastModified": 1686794510,
-        "narHash": "sha256-Pp+fUkZLq5fxLuPDGU/jsCxEcgUIVqFv2DP9V5ikOlk=",
+        "lastModified": 1686977144,
+        "narHash": "sha256-ylSuCBWcZdmByu1KZcy8u5ACiM4N3OlnjCv8kTMYW0g=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "21a9b3e85ba768d8b41535f117cd09ba0b0eb03f",
+        "rev": "1dcc0d6a1f594d89c15548b1b057226557078501",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubernetes",
         "owner": "defn",
-        "ref": "pkg-kubernetes-0.0.108",
+        "ref": "pkg-kubernetes-0.0.109",
         "repo": "dev",
         "type": "github"
       }
