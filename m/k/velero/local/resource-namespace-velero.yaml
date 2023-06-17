@@ -1,6 +1,0 @@
-#ManagedBy: cue
-
-metadata:
-  name: velero
-kind: Namespace
-apiVersion: v1

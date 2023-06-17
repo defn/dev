@@ -8,7 +8,7 @@ kind: ServiceAccount
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.0
+    chart: vcluster-0.15.2
     heritage: Helm
     release: vcluster
   name: vc-vcluster
@@ -19,7 +19,7 @@ kind: ServiceAccount
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.0
+    chart: vcluster-0.15.2
     heritage: Helm
     release: vcluster
   name: vc-workload-vcluster
@@ -30,7 +30,7 @@ kind: Role
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.0
+    chart: vcluster-0.15.2
     heritage: Helm
     release: vcluster
   name: vcluster
@@ -109,7 +109,7 @@ kind: ClusterRole
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.0
+    chart: vcluster-0.15.2
     heritage: Helm
     release: vcluster
   name: vc-vcluster-v-global-vc0
@@ -127,9 +127,16 @@ rules:
   - ""
   resources:
   - pods
-  - nodes/proxy
   - nodes/metrics
   - nodes/stats
+  verbs:
+  - get
+  - watch
+  - list
+- apiGroups:
+  - ""
+  resources:
+  - nodes/proxy
   verbs:
   - get
   - watch
@@ -160,7 +167,7 @@ kind: RoleBinding
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.0
+    chart: vcluster-0.15.2
     heritage: Helm
     release: vcluster
   name: vcluster
@@ -179,7 +186,7 @@ kind: ClusterRoleBinding
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.0
+    chart: vcluster-0.15.2
     heritage: Helm
     release: vcluster
   name: vc-vcluster-v-global-vc0
@@ -269,7 +276,7 @@ kind: ConfigMap
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.0
+    chart: vcluster-0.15.2
     heritage: Helm
     release: vcluster
   name: vcluster-init-manifests
@@ -280,7 +287,7 @@ kind: Service
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.0
+    chart: vcluster-0.15.2
     heritage: Helm
     release: vcluster
   name: vcluster
@@ -305,7 +312,7 @@ kind: Service
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.0
+    chart: vcluster-0.15.2
     heritage: Helm
     release: vcluster
   name: vcluster-headless
@@ -326,7 +333,7 @@ kind: Service
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.0
+    chart: vcluster-0.15.2
     heritage: Helm
     release: vcluster
   name: vcluster-lb
@@ -348,7 +355,7 @@ kind: StatefulSet
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.0
+    chart: vcluster-0.15.2
     heritage: Helm
     release: vcluster
   name: vcluster
@@ -431,7 +438,7 @@ spec:
           value: '---'
         - name: VCLUSTER_TELEMETRY_CONFIG
           value: '{"disabled":"false","instanceCreator":"helm","instanceCreatorUID":""}'
-        image: ghcr.io/loft-sh/vcluster:0.15.0
+        image: ghcr.io/loft-sh/vcluster:0.15.2
         livenessProbe:
           failureThreshold: 60
           httpGet:

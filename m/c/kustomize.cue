@@ -1,10 +1,10 @@
 package c
 
 import (
-	core "github.com/defn/dev/m/k8s/api/core/v1"
-	batch "github.com/defn/dev/m/k8s/api/batch/v1"
-	apps "github.com/defn/dev/m/k8s/api/apps/v1"
-	rbac "github.com/defn/dev/m/k8s/api/rbac/v1"
+	core "k8s.io/api/core/v1"
+	batch "k8s.io/api/batch/v1"
+	apps "k8s.io/api/apps/v1"
+	rbac "k8s.io/api/rbac/v1"
 )
 
 _issuer: "zerossl-production"
@@ -267,7 +267,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.25.1"
+		version:   "0.29.2"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [
@@ -296,7 +296,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "0.22.0"
+		version:   "0.24.1"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {
@@ -381,7 +381,7 @@ kustomize: "kyverno": #KustomizeHelm & {
 	helm: {
 		release: "kyverno"
 		name:    "kyverno"
-		version: "2.7.2"
+		version: "3.0.1"
 		repo:    "https://kyverno.github.io/kyverno"
 		values: {
 			replicaCount: 1
@@ -438,7 +438,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.19.1"
+		version: "6.20.3"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -687,7 +687,7 @@ kustomize: "external-secrets-operator": #KustomizeHelm & {
 	helm: {
 		release: "external-secrets"
 		name:    "external-secrets"
-		version: "0.8.1"
+		version: "0.8.3"
 		repo:    "https://charts.external-secrets.io"
 		values: {
 			webhook: create:        false
@@ -893,7 +893,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 		release:   "cert-manager"
 		name:      "cert-manager"
 		namespace: "cert-manager"
-		version:   "1.11.1"
+		version:   "1.12.2"
 		repo:      "https://charts.jetstack.io"
 		values: {
 			ingressShim: {
@@ -924,7 +924,7 @@ kustomize: "velero": #KustomizeHelm & {
 		release:   "velero"
 		name:      "velero"
 		namespace: "velero"
-		version:   "3.1.6"
+		version:   "4.0.3"
 		repo:      "https://vmware-tanzu.github.io/helm-charts"
 		values: {
 			ingressShim: {
@@ -954,7 +954,7 @@ kustomize: "velero": #KustomizeHelm & {
 	helm: {
 		release: "vcluster"
 		name:    "vcluster"
-		version: "0.15.0"
+		version: "0.15.2"
 		repo:    "https://charts.loft.sh"
 
 		values: {
@@ -1007,7 +1007,7 @@ kustomize: "velero": #KustomizeHelm & {
 	}
 }
 
-// https://artifacthub.io/packages/helm/bitnami/nginx
+// https://artifacthub.io/packages/helm/cilium/cilium
 kustomize: "cilium": #KustomizeHelm & {
 	namespace: "kube-system"
 
@@ -1015,16 +1015,64 @@ kustomize: "cilium": #KustomizeHelm & {
 		release:   "cilium"
 		name:      "cilium"
 		namespace: "kube-system"
-		version:   "1.13.2"
+		version:   "1.13.4"
 		repo:      "https://helm.cilium.io"
 		values: {
 			operator: replicas: 1
-			hubble: relay: enabled: true
-			hubble: ui: enabled:    true
+			hubble: {
+				relay: enabled: true
+				ui: enabled:    true
+				tls: auto: {
+					method: "certmanager"
+					certManagerIssuerRef: {
+						name:  "cilium"
+						kind:  "ClusterIssuer"
+						group: "cert-manager.io"
+					}
+				}
+			}
 		}
 	}
 
 	_host: "hubble.defn.run"
+
+	resource: "externalsecret-kube-system-cilium-ca": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: {
+			name:      "cilium-ca"
+			namespace: "kube-system"
+		}
+		spec: {
+			target: {
+				name:           "cilium-ca"
+				creationPolicy: "Owner"
+			}
+
+			refreshInterval: "1h"
+
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: "dev"
+			}
+
+			data: [ {
+				secretKey: "ca.crt"
+				remoteRef: {
+					key:              "dev/amanibhavam-global-cilium"
+					property:         "cilium_ca_crt"
+					decodingStrategy: "Base64"
+				}
+			}, {
+				secretKey: "ca.key"
+				remoteRef: {
+					key:              "dev/amanibhavam-global-cilium"
+					property:         "cilium_ca_key"
+					decodingStrategy: "Base64"
+				}
+			}]
+		}
+	}
 
 	resource: "ingress-hubble-ui": {
 		apiVersion: "networking.k8s.io/v1"
@@ -1063,7 +1111,7 @@ kustomize: "nginx": #KustomizeHelm & {
 		release:   "nginx"
 		name:      "nginx"
 		namespace: "nginx"
-		version:   "13.2.34"
+		version:   "15.0.2"
 		repo:      "https://charts.bitnami.com/bitnami"
 		values: {
 		}
@@ -1101,7 +1149,7 @@ kustomize: "traefik": #KustomizeHelm & {
 		release:   "traefik"
 		name:      "traefik"
 		namespace: "traefik"
-		version:   "23.0.1"
+		version:   "23.1.0"
 		repo:      "https://traefik.github.io/charts"
 		values: {
 			logs: general: level:  "DEBUG"

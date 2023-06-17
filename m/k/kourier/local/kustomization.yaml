@@ -1,5 +1,0 @@
-patches:
-- path: patch-service-kourier-set-cluster-ip.yaml
-resources:
-- localized-files/github.com/knative-sandbox/net-kourier/releases/download/knative-v1.10.0/kourier.yaml
-- resource-ingress-default-wildcard.yaml

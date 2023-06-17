@@ -84,27 +84,6 @@
         "type": "github"
       }
     },
-    "dagger": {
-      "inputs": {
-        "pkg": "pkg_5"
-      },
-      "locked": {
-        "dir": "m/pkg/dagger",
-        "lastModified": 1686697793,
-        "narHash": "sha256-wzj5HAyZh3F5toclyMtO9MawQW+3PknbyeuWAwjEtpQ=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "856e07755ee96ea4b7ba174e1e28394caf8aef01",
-        "type": "github"
-      },
-      "original": {
-        "dir": "m/pkg/dagger",
-        "owner": "defn",
-        "ref": "pkg-dagger-0.6.1-2",
-        "repo": "dev",
-        "type": "github"
-      }
-    },
     "dev": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -415,7 +394,7 @@
     },
     "earthly": {
       "inputs": {
-        "pkg": "pkg_6"
+        "pkg": "pkg_5"
       },
       "locked": {
         "dir": "m/pkg/earthly",
@@ -660,7 +639,7 @@
     },
     "gh": {
       "inputs": {
-        "pkg": "pkg_7"
+        "pkg": "pkg_6"
       },
       "locked": {
         "dir": "m/pkg/gh",
@@ -681,7 +660,7 @@
     },
     "honeymarker": {
       "inputs": {
-        "pkg": "pkg_8"
+        "pkg": "pkg_7"
       },
       "locked": {
         "dir": "m/pkg/honeymarker",
@@ -702,7 +681,7 @@
     },
     "honeytail": {
       "inputs": {
-        "pkg": "pkg_9"
+        "pkg": "pkg_8"
       },
       "locked": {
         "dir": "m/pkg/honeytail",
@@ -723,7 +702,7 @@
     },
     "honeyvent": {
       "inputs": {
-        "pkg": "pkg_10"
+        "pkg": "pkg_9"
       },
       "locked": {
         "dir": "m/pkg/honeyvent",
@@ -744,7 +723,7 @@
     },
     "kuma": {
       "inputs": {
-        "pkg": "pkg_11"
+        "pkg": "pkg_10"
       },
       "locked": {
         "dir": "m/pkg/kuma",
@@ -989,7 +968,7 @@
     },
     "nomad": {
       "inputs": {
-        "pkg": "pkg_12"
+        "pkg": "pkg_11"
       },
       "locked": {
         "dir": "m/pkg/nomad",
@@ -1004,6 +983,27 @@
         "dir": "m/pkg/nomad",
         "owner": "defn",
         "ref": "pkg-nomad-1.5.6-3",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
+    "oras": {
+      "inputs": {
+        "pkg": "pkg_12"
+      },
+      "locked": {
+        "dir": "m/pkg/oras",
+        "lastModified": 1686901269,
+        "narHash": "sha256-feJG/ybTgJL3n1Np1XPhTu53qw1ulDOv1o5upHnvwAk=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "786188fc6e7b523edee4269565547df344b974f8",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/oras",
+        "owner": "defn",
+        "ref": "pkg-oras-1.0.0-2",
         "repo": "dev",
         "type": "github"
       }
@@ -1308,7 +1308,6 @@
         "boundary": "boundary",
         "buildevents": "buildevents",
         "buildkite": "buildkite",
-        "dagger": "dagger",
         "earthly": "earthly",
         "gh": "gh",
         "honeymarker": "honeymarker",
@@ -1316,6 +1315,7 @@
         "honeyvent": "honeyvent",
         "kuma": "kuma",
         "nomad": "nomad",
+        "oras": "oras",
         "tilt": "tilt",
         "vault": "vault"
       }

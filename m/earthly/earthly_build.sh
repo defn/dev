@@ -3,17 +3,28 @@
 set -efuo pipefail
 
 function main {
+	local out
+	local image
 	local flake_earthly
-
 	local earthfile
+	local build_args
 
 	local bhome
 	bhome="$(pwd)"
+
+	out="${bhome}/$1"
+	shift
+
+	image="$1"
+	shift
 
 	flake_earthly="${bhome}/$1"
 	shift
 
 	earthfile="$1"
+	shift
+
+	build_args="$1"
 	shift
 
 	local pth_build
@@ -34,8 +45,12 @@ function main {
 
 	if [[ $# == 0 ]]; then set -- --push -no-output +build; fi
 
+	set -x
+
 	cd "${pth_build}"
-	"${flake_earthly}" --push +build
+	# shellcheck disable=SC2086
+	"${flake_earthly}" --build-arg "image=${image}" ${build_args} +build
+	docker save "${image}" -o "${out}"
 
 	rm -rf "${pth_build}"
 }

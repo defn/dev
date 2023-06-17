@@ -1,6 +1,0 @@
-#ManagedBy: cue
-
-metadata:
-  name: kyverno
-kind: Namespace
-apiVersion: v1

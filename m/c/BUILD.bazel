@@ -1,0 +1,43 @@
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_tarball")
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
+load("//cue:cue.bzl", "cue_export")
+load("//nix:nix.bzl", "nix_flake")
+
+# nix flake
+nix_flake(
+    name = "flake",
+    flakes = [
+        "cue",
+    ],
+)
+
+# app configuration
+cue_export(
+    name = "app_config",
+    srcs = [
+        "flake_cue",
+        "//cue.mod/gen/k8s.io:k8s_cue",
+    ],
+    cues = glob(["*.cue"]),
+)
+
+# oci
+pkg_tar(
+    name = "c_tar",
+    srcs = ["app_config"],
+    package_dir = "/usr/share/nginx/html",
+)
+
+oci_image(
+    name = "c_image",
+    base = "@distroless_base",
+    tars = [
+        "c_tar",
+    ],
+)
+
+oci_tarball(
+    name = "c_save",
+    image = "c_image",
+    repo_tags = ["quay.io/defn/dev:latest-c"],
+)

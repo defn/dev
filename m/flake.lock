@@ -48,17 +48,17 @@
       },
       "locked": {
         "dir": "m/pkg/awscli",
-        "lastModified": 1686793309,
-        "narHash": "sha256-GiQIfYmaW1uFH6TfiM4dKZH20e90YCjrk31wxg4WG8k=",
+        "lastModified": 1686811316,
+        "narHash": "sha256-5vK3gZlWEEmMkKuOWKNfzFv9q1kHr3jReWa9AX6hidQ=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "8c39268681bfa201eff8d9cda6a2b6baaea44cf7",
+        "rev": "7b0e6cef3158df63af1e99b282deaa8166fb83a3",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/awscli",
         "owner": "defn",
-        "ref": "pkg-awscli-2.12.0-1",
+        "ref": "pkg-awscli-2.12.0-2",
         "repo": "dev",
         "type": "github"
       }
@@ -263,17 +263,17 @@
       },
       "locked": {
         "dir": "m/pkg/cloud",
-        "lastModified": 1686794487,
-        "narHash": "sha256-ApuK2CF2lfr5XjGi9Rk2Q01qicTyI0kgPQU//7pxfgE=",
+        "lastModified": 1686811389,
+        "narHash": "sha256-l5j6R5Vkz41Q1pPuULP2QM9Vr7FlbOVoQksPUrUql+c=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "05ca09683cfcd4fb014339e6786e113d9f87df60",
+        "rev": "dd71a179ed7b3b901619a0e1461abb7448983a67",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cloud",
         "owner": "defn",
-        "ref": "pkg-cloud-0.0.107",
+        "ref": "pkg-cloud-0.0.108",
         "repo": "dev",
         "type": "github"
       }
@@ -295,27 +295,6 @@
         "dir": "m/pkg/cosign",
         "owner": "defn",
         "ref": "pkg-cosign-2.0.2-4",
-        "repo": "dev",
-        "type": "github"
-      }
-    },
-    "dagger": {
-      "inputs": {
-        "pkg": "pkg_30"
-      },
-      "locked": {
-        "dir": "m/pkg/dagger",
-        "lastModified": 1686697793,
-        "narHash": "sha256-wzj5HAyZh3F5toclyMtO9MawQW+3PknbyeuWAwjEtpQ=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "856e07755ee96ea4b7ba174e1e28394caf8aef01",
-        "type": "github"
-      },
-      "original": {
-        "dir": "m/pkg/dagger",
-        "owner": "defn",
-        "ref": "pkg-dagger-0.6.1-2",
         "repo": "dev",
         "type": "github"
       }
@@ -1246,7 +1225,7 @@
     },
     "earthly": {
       "inputs": {
-        "pkg": "pkg_31"
+        "pkg": "pkg_30"
       },
       "locked": {
         "dir": "m/pkg/earthly",
@@ -1944,7 +1923,7 @@
     },
     "gh": {
       "inputs": {
-        "pkg": "pkg_32"
+        "pkg": "pkg_31"
       },
       "locked": {
         "dir": "m/pkg/gh",
@@ -2031,7 +2010,7 @@
     },
     "honeymarker": {
       "inputs": {
-        "pkg": "pkg_33"
+        "pkg": "pkg_32"
       },
       "locked": {
         "dir": "m/pkg/honeymarker",
@@ -2052,7 +2031,7 @@
     },
     "honeytail": {
       "inputs": {
-        "pkg": "pkg_34"
+        "pkg": "pkg_33"
       },
       "locked": {
         "dir": "m/pkg/honeytail",
@@ -2073,7 +2052,7 @@
     },
     "honeyvent": {
       "inputs": {
-        "pkg": "pkg_35"
+        "pkg": "pkg_34"
       },
       "locked": {
         "dir": "m/pkg/honeyvent",
@@ -2254,7 +2233,7 @@
     },
     "kuma": {
       "inputs": {
-        "pkg": "pkg_36"
+        "pkg": "pkg_35"
       },
       "locked": {
         "dir": "m/pkg/kuma",
@@ -2332,7 +2311,6 @@
         "boundary": "boundary",
         "buildevents": "buildevents",
         "buildkite": "buildkite",
-        "dagger": "dagger",
         "earthly": "earthly",
         "gh": "gh",
         "honeymarker": "honeymarker",
@@ -2340,22 +2318,23 @@
         "honeyvent": "honeyvent",
         "kuma": "kuma",
         "nomad": "nomad",
+        "oras": "oras",
         "tilt": "tilt",
         "vault": "vault"
       },
       "locked": {
         "dir": "m/pkg/localdev",
-        "lastModified": 1686697874,
-        "narHash": "sha256-f/AjXir2zKLEE/9UXEbZkkjiva3ZhISPQR6PRLCJ+0Q=",
+        "lastModified": 1686901400,
+        "narHash": "sha256-igUwJww50jspJoNC2NPFqYZms8ENO0jgi3inVN5hkc8=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "aa146f9e29b82a5b52e02b06ab0daecb73413ffa",
+        "rev": "4cda111a77fc51ea9ec7d0b868011a6e4e798bf1",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/localdev",
         "owner": "defn",
-        "ref": "pkg-localdev-0.0.134",
+        "ref": "pkg-localdev-0.0.135",
         "repo": "dev",
         "type": "github"
       }
@@ -3040,7 +3019,7 @@
     },
     "nomad": {
       "inputs": {
-        "pkg": "pkg_37"
+        "pkg": "pkg_36"
       },
       "locked": {
         "dir": "m/pkg/nomad",
@@ -3055,6 +3034,27 @@
         "dir": "m/pkg/nomad",
         "owner": "defn",
         "ref": "pkg-nomad-1.5.6-3",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
+    "oras": {
+      "inputs": {
+        "pkg": "pkg_37"
+      },
+      "locked": {
+        "dir": "m/pkg/oras",
+        "lastModified": 1686901269,
+        "narHash": "sha256-feJG/ybTgJL3n1Np1XPhTu53qw1ulDOv1o5upHnvwAk=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "786188fc6e7b523edee4269565547df344b974f8",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/oras",
+        "owner": "defn",
+        "ref": "pkg-oras-1.0.0-2",
         "repo": "dev",
         "type": "github"
       }

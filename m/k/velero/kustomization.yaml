@@ -11,6 +11,6 @@ helmCharts:
         defaultIssuerName: zerossl-production
         defaultIssuerKind: ClusterIssuer
     name: velero
-    version: 3.1.6
+    version: 4.0.3
     repo: https://vmware-tanzu.github.io/helm-charts
     includeCRDs: true

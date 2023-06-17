@@ -1,5 +1,5 @@
 filegroup(
-    name = "earthly_build",
+    name = "earthly_build_script",
     srcs = ["earthly_build.sh"],
     visibility = ["//visibility:public"],
 )

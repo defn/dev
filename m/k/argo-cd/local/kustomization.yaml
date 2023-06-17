@@ -1,8 +1,0 @@
-namespace: argocd
-patches:
-- path: patch-service-argocd-server.yaml
-- path: patch-configmap-argocd-cm.yaml
-resources:
-- resource-namespace-argocd.yaml
-- localized-files/raw.githubusercontent.com/argoproj/argo-cd/v2.7.1/manifests/install.yaml
-- resource-ingress-argo-cd.yaml

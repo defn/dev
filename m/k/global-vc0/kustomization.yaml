@@ -44,6 +44,6 @@ helmCharts:
         type: LoadBalancer
         loadBalancerClass: tailscale
     name: vcluster
-    version: 0.15.0
+    version: 0.15.2
     repo: https://charts.loft.sh
     includeCRDs: true

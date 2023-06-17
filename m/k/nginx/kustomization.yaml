@@ -10,6 +10,6 @@ helmCharts:
     namespace: nginx
     valuesInline: {}
     name: nginx
-    version: 13.2.34
+    version: 15.0.2
     repo: https://charts.bitnami.com/bitnami
     includeCRDs: true
