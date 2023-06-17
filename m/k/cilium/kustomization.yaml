@@ -3,6 +3,7 @@
 patches: []
 namespace: kube-system
 resources:
+  - resource-externalsecret-kube-system-cilium-ca.yaml
   - resource-ingress-hubble-ui.yaml
 helmCharts:
   - releaseName: cilium
@@ -15,6 +16,13 @@ helmCharts:
           enabled: true
         ui:
           enabled: true
+        tls:
+          auto:
+            method: certmanager
+            certManagerIssuerRef:
+              name: cilium
+              kind: ClusterIssuer
+              group: cert-manager.io
     name: cilium
     version: 1.13.4
     repo: https://helm.cilium.io
