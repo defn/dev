@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/argocd",
-        "lastModified": 1686003237,
-        "narHash": "sha256-ebpfX2S4lYwfOuSWKDjncL6l6hbbcAoa98c0fx3urqA=",
+        "lastModified": 1686976875,
+        "narHash": "sha256-cUd/C2Tm51HO9r3h4k1zLgEjDE2M6p+MJbb/eLPXCvA=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "9055637924cc2b834030cc2466290fa8e464fa30",
+        "rev": "cc061d53722eaa2456962c047f28c309b90f1be4",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/argocd",
         "owner": "defn",
-        "ref": "pkg-argocd-2.7.4-1",
+        "ref": "pkg-argocd-2.7.5-1",
         "repo": "dev",
         "type": "github"
       }
