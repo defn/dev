@@ -1,7 +1,22 @@
 #!/usr/bin/env bash
 
 function bazel {
-	command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "$@"
+  local cmd="$1"; shift
+
+  case "${cmd}" in
+    build|run)
+      if [[ "$(uname -s)" == "Darwin" ]]; then
+        PATH="/usr/bin:$PATH"
+        command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "${cmd}" --macos_sdk_version="$(xcrun -show-sdk-version)" "$@"
+        return $?
+      fi
+      ;;
+    *)
+      true
+      ;;
+  esac
+    
+  command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "$@"
 }
 
 function main {
@@ -121,6 +136,10 @@ function main {
 
 				bazel run --sandbox_writable_path=/nix --sandbox_writable_path="$HOME/.cache/nix" "//${bazel_prefix}:${rule}" -- "$@"
 				;;
+      pass)
+          shift
+          bazel "$@"
+        ;;
 			*)
 				return 1
 				;;
