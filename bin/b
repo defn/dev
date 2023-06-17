@@ -142,7 +142,7 @@ function main {
 				bazel "$@"
 				;;
 			*)
-				return 1
+				bazel "$@"
 				;;
 			esac
 		fi
