@@ -1,6 +1,0 @@
-#ManagedBy: cue
-
-metadata:
-  name: vault
-kind: Namespace
-apiVersion: v1

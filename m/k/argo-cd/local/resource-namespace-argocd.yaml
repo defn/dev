@@ -1,6 +1,0 @@
-#ManagedBy: cue
-
-metadata:
-  name: argocd
-kind: Namespace
-apiVersion: v1

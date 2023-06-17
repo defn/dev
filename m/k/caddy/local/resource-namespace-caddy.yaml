@@ -1,6 +1,0 @@
-#ManagedBy: cue
-
-metadata:
-  name: caddy
-kind: Namespace
-apiVersion: v1

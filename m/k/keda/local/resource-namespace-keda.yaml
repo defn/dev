@@ -1,6 +1,0 @@
-#ManagedBy: cue
-
-metadata:
-  name: keda
-kind: Namespace
-apiVersion: v1

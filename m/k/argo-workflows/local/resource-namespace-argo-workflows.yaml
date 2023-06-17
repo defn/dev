@@ -1,6 +1,0 @@
-#ManagedBy: cue
-
-metadata:
-  name: argo-workflows
-kind: Namespace
-apiVersion: v1
