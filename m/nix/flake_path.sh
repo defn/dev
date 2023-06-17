@@ -18,7 +18,8 @@ function main {
 
 	cd nix
 	git init --quiet
-	git add .
+	git add --intent-to-add .
+
 	# shellcheck disable=SC2016
 	ln -nfs "$(nix develop --command "$@" || true)" "${out}"
 }

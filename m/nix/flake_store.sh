@@ -19,10 +19,10 @@ function main {
 
 	cd nix
 	git init --quiet
-	git add .
+	git add --intent-to-add .
 
 	nix build
-	set -x
+
 	mkdir -p "${out}"
 	for a in $(nix-store --query --requisites --include-outputs result); do
 		tar cvfz "${out}/${a##*/}.tar.gz" "${a}"
