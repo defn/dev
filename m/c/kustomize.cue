@@ -267,7 +267,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.25.1"
+		version:   "0.29.2"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [
@@ -296,7 +296,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "0.22.0"
+		version:   "0.24.1"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {
@@ -924,7 +924,7 @@ kustomize: "velero": #KustomizeHelm & {
 		release:   "velero"
 		name:      "velero"
 		namespace: "velero"
-		version:   "3.1.6"
+		version:   "4.0.3"
 		repo:      "https://vmware-tanzu.github.io/helm-charts"
 		values: {
 			ingressShim: {
