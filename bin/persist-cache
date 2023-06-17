@@ -52,6 +52,9 @@ function cache {
 	persist ~/work/go-mod ~/.cache/go-mod
 	persist ~/work/go ~/go
 
+	persist ~/work/bazel ~/.cache/bazel
+	persist ~/work/bazelisk ~/.cache/bazelisk
+
 	persist ~/work/config-coder ~/.config/coderv2
 	persist ~/work/code-server-cache/extensions ~/.local/share/code-server/extensions
 	persist ~/work/vscode-cache/extensions ~/.vscode-server/extensions
