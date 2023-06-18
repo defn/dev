@@ -66,6 +66,9 @@ k3d-update:
 	curl -sSL -o k3d-tailscale-operator.yaml https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/manifests/operator.yaml
 	trunk fmt k3d-tailscale-operator.yaml
 
-k3d-secrets:
+k3d-ca:
 	step certificate create cilium-ca ca.crt ca.key --profile root-ca --not-after 8760h --no-password --insecure --kty RSA --size 4096 --force
-	kubectl create secret generic -n kube-system cilium-ca --from-file=ca.key --from-file=ca.crt
+
+k3d-secrets:
+	-kubectl create secret generic -n kube-system cilium-ca --from-file=ca.key --from-file=ca.crt
+	-kubectl create secret generic -n cert-manager cilium-ca --from-file=tls.key=ca.key --from-file=tls.crt=ca.crt
