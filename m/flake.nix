@@ -228,7 +228,7 @@
             *-global)
               (
                 set +x
-                cat k3d/operator.yaml \
+                cat k3d-tailscale-operator.yaml \
                   | sed "s#client_id: .*#client_id: \"$(pass tailscale-operator-client-id-$name)\"#" \
                   | sed "s#client_secret: .*#client_secret: \"$(pass tailscale-operator-client-secret-$name)\"#"
                 echo ---
