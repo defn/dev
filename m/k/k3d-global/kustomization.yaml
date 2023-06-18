@@ -6,27 +6,6 @@ helmCharts:
   - releaseName: bootstrap
     valuesInline:
       anyResources:
-        cilium: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: k3d-global-cilium
-            annotations:
-              argocd.argoproj.io/sync-wave: "1"
-          spec:
-            project: default
-            destination:
-              name: k3d-global
-            source:
-              repoURL: https://github.com/defn/dev
-              targetRevision: main
-              path: m/r/cilium
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
         coredns: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
@@ -382,6 +361,27 @@ helmCharts:
               repoURL: https://github.com/defn/dev
               targetRevision: main
               path: m/r/argo-cd
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        cilium: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-global-cilium
+            annotations:
+              argocd.argoproj.io/sync-wave: "1000"
+          spec:
+            project: default
+            destination:
+              name: k3d-global
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/r/cilium
             syncPolicy:
               automated:
                 prune: true

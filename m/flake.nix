@@ -232,9 +232,9 @@
                   | sed "s#client_id: .*#client_id: \"$(pass tailscale-operator-client-id-$name)\"#" \
                   | sed "s#client_secret: .*#client_secret: \"$(pass tailscale-operator-client-secret-$name)\"#"
                 echo ---
-                kustomize build --enable-helm k/argo-cd
-                kustomize build --enable-helm k/coredns
-                kustomize build --enable-helm k/cilium
+                cat r/argo-cd/main.yaml
+                cat r/coredns/main.yaml
+                cat r/cilium/main.yaml
               ) | docker run --rm -i \
                 -v $name-manifest:/var/lib/rancher/k3s/server/manifests \
                 ubuntu bash -c 'tee /var/lib/rancher/k3s/server/manifests/bootstrap.yaml | wc -l'
