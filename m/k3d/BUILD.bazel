@@ -19,7 +19,7 @@ nix_flake(
 # build docker image
 earthly_build(
     name = "k3d",
-    build_args = ["K3S=1.26.5-k3s1"],
+    build_args = ["K3S=1.25.10-k3s1"],
     data = [
         "earthly_inputs",
     ],
