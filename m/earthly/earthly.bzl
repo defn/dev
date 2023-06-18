@@ -2,6 +2,19 @@
 """
 
 def earthly_build(name, image, data, earthly_bin, build_args = [], visibility = None):
+    """Something
+
+    Args:
+        name: meh
+        image: meh
+        data: meh
+        earthly_bin: meh
+        build_args: meh
+        visibility: meh
+
+    Returns:
+        something
+    """
     native.filegroup(
         name = "{}_earthfile".format(name),
         srcs = ["Earthfile"],
@@ -23,6 +36,21 @@ def earthly_build(name, image, data, earthly_bin, build_args = [], visibility = 
             "\"{}\"".format(" ".join(["--build-arg {}".format(ba) for ba in build_args])),
             " ".join(["$(locations {})".format(d) for d in data]),
         ),
+        visibility = visibility,
+    )
+
+    docker_load_script = Label(":docker_load_script")
+
+    native.sh_binary(
+        name = "{}_docker_load".format(name),
+        srcs = [docker_load_script],
+        args = [
+            "$(location {}_earthly_build)".format(name),
+        ],
+        data = [
+            "{}_earthly_build".format(name),
+        ],
+        visibility = visibility,
     )
 
     return [DefaultInfo(files = depset(["{}_docker_image".format(name)]))]

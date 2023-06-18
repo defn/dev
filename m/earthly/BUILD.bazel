@@ -3,3 +3,9 @@ filegroup(
     srcs = ["earthly_build.sh"],
     visibility = ["//visibility:public"],
 )
+
+filegroup(
+    name = "docker_load_script",
+    srcs = ["docker_load.sh"],
+    visibility = ["//visibility:public"],
+)
