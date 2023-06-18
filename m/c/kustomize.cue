@@ -916,6 +916,17 @@ kustomize: "cert-manager": #KustomizeHelm & {
 	resource: "cert-manager-crds": {
 		url: "https://github.com/cert-manager/cert-manager/releases/download/v\(helm.version)/cert-manager.crds.yaml"
 	}
+
+	resource: "clusterissuer-cilium": {
+		apiVersion: "cert-manager.io/v1"
+		kind:       "ClusterIssuer"
+		metadata: {
+			name: "cilium-ca"
+		}
+		spec: {
+			ca: secretName: "cilium-ca"
+		}
+	}
 }
 
 // https://artifacthub.io/packages/helm/vmware-tanzu/velero
@@ -1025,7 +1036,7 @@ kustomize: "cilium": #KustomizeHelm & {
 				tls: auto: {
 					method: "certmanager"
 					certManagerIssuerRef: {
-						name:  "cilium"
+						name:  "cilium-ca"
 						kind:  "ClusterIssuer"
 						group: "cert-manager.io"
 					}
@@ -1035,44 +1046,6 @@ kustomize: "cilium": #KustomizeHelm & {
 	}
 
 	_host: "hubble.defn.run"
-
-	resource: "externalsecret-kube-system-cilium-ca": {
-		apiVersion: "external-secrets.io/v1beta1"
-		kind:       "ExternalSecret"
-		metadata: {
-			name:      "cilium-ca"
-			namespace: "kube-system"
-		}
-		spec: {
-			target: {
-				name:           "cilium-ca"
-				creationPolicy: "Owner"
-			}
-
-			refreshInterval: "1h"
-
-			secretStoreRef: {
-				kind: "ClusterSecretStore"
-				name: "dev"
-			}
-
-			data: [ {
-				secretKey: "ca.crt"
-				remoteRef: {
-					key:              "dev/amanibhavam-global-cilium"
-					property:         "cilium_ca_crt"
-					decodingStrategy: "Base64"
-				}
-			}, {
-				secretKey: "ca.key"
-				remoteRef: {
-					key:              "dev/amanibhavam-global-cilium"
-					property:         "cilium_ca_key"
-					decodingStrategy: "Base64"
-				}
-			}]
-		}
-	}
 
 	resource: "ingress-hubble-ui": {
 		apiVersion: "networking.k8s.io/v1"
