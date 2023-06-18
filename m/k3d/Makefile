@@ -8,6 +8,7 @@ update:
 	trunk fmt operator.yaml
 
 import:
+	b build k3d_earthly_build
 	b out k3d_earthly_build | docker load
 
 make_%:
