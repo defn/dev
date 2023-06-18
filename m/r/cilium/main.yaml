@@ -1267,7 +1267,7 @@ spec:
   issuerRef:
     group: cert-manager.io
     kind: ClusterIssuer
-    name: cilium
+    name: cilium-ca
   secretName: hubble-relay-client-certs
 ---
 apiVersion: cert-manager.io/v1
@@ -1283,33 +1283,8 @@ spec:
   issuerRef:
     group: cert-manager.io
     kind: ClusterIssuer
-    name: cilium
-  secretName: hubble-server-certs
----
-apiVersion: external-secrets.io/v1beta1
-kind: ExternalSecret
-metadata:
-  name: cilium-ca
-  namespace: kube-system
-spec:
-  data:
-  - remoteRef:
-      decodingStrategy: Base64
-      key: dev/amanibhavam-global-cilium
-      property: cilium_ca_crt
-    secretKey: ca.crt
-  - remoteRef:
-      decodingStrategy: Base64
-      key: dev/amanibhavam-global-cilium
-      property: cilium_ca_key
-    secretKey: ca.key
-  refreshInterval: 1h
-  secretStoreRef:
-    kind: ClusterSecretStore
-    name: dev
-  target:
-    creationPolicy: Owner
     name: cilium-ca
+  secretName: hubble-server-certs
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress

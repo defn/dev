@@ -3,7 +3,6 @@
 patches: []
 namespace: kube-system
 resources:
-  - resource-externalsecret-kube-system-cilium-ca.yaml
   - resource-ingress-hubble-ui.yaml
 helmCharts:
   - releaseName: cilium
@@ -20,7 +19,7 @@ helmCharts:
           auto:
             method: certmanager
             certManagerIssuerRef:
-              name: cilium
+              name: cilium-ca
               kind: ClusterIssuer
               group: cert-manager.io
     name: cilium
