@@ -67,7 +67,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "1000"
   name: k3d-global-cilium
   namespace: argocd
 spec:

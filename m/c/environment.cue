@@ -26,7 +26,6 @@ env: (#Transform & {
 		// global is the global control plane, used by all machines.
 		global: {
 			bootstrap: {
-				"cilium": [1, ""]
 				"coredns": [2, ""]
 				"kyverno": [2, "", "ServerSideApply=true"]
 				"coredns": [2, ""]
@@ -45,6 +44,7 @@ env: (#Transform & {
 				"hello": [60, ""]
 				"global-vc0": [60, ""]
 				"argo-cd": [1000, ""]
+				"cilium": [1000, ""]
 			}
 		}
 	}

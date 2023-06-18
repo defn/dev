@@ -929,31 +929,6 @@ kustomize: "cert-manager": #KustomizeHelm & {
 	}
 }
 
-// https://artifacthub.io/packages/helm/vmware-tanzu/velero
-kustomize: "velero": #KustomizeHelm & {
-	helm: {
-		release:   "velero"
-		name:      "velero"
-		namespace: "velero"
-		version:   "4.0.3"
-		repo:      "https://vmware-tanzu.github.io/helm-charts"
-		values: {
-			ingressShim: {
-				defaultIssuerName: _issuer
-				defaultIssuerKind: "ClusterIssuer"
-			}
-		}
-	}
-
-	resource: "namespace-velero": core.#Namespace & {
-		apiVersion: "v1"
-		kind:       "Namespace"
-		metadata: {
-			name: "velero"
-		}
-	}
-}
-
 // https://artifacthub.io/packages/helm/loft/vcluster
 #KustomizeVCluster: {
 	_in: #TransformKustomizeVCluster.from
