@@ -80,7 +80,7 @@
               kubectl config use-context vcluster-${nme}-$1
               server="$(kubectl --context vcluster-${nme}-$1 config view -o jsonpath='{.clusters[?(@.name == "vcluster-'${nme}-$1'")]}' --raw | jq -r '.cluster.server')"
               ca="$(kubectl --context vcluster-${nme}-$1 config view -o jsonpath='{.clusters[?(@.name == "vcluster-'${nme}-$1'")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d')"
-              vault write sys/policy/vcluster-${nme}-$1-external-secrets policy=@k3d/policy-external-secrets.hcl
+              vault write sys/policy/vcluster-${nme}-$1-external-secrets policy=@k3d-external-secrets-vault.hcl
               vault auth enable -path "vcluster-${nme}-$1" kubernetes || true
               vault write "auth/vcluster-${nme}-$1/config" \
                 kubernetes_host="$server" \
@@ -130,7 +130,7 @@
               kubectl --context k3d-${nme} config view -o jsonpath='{.clusters[?(@.name == "k3d-'$name'")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d'
               ;;
             vault-init)
-              vault write sys/policy/k3d-${nme}-external-secrets policy=@k3d/policy-external-secrets.hcl
+              vault write sys/policy/k3d-${nme}-external-secrets policy=@k3d-external-secrets-vault.hcl
               vault auth enable -path "k3d-${nme}" kubernetes || true
               ;;
             vault-config)
