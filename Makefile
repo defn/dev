@@ -13,8 +13,8 @@ second = $(word 2, $(subst -, ,$@))
 first_ = $(word 1, $(subst _, ,$@))
 second_ = $(word 2, $(subst _, ,$@))
 
-upgrade:
-	cd m/pkg && $(MAKE) upgrade
+update:
+	cd m/pkg && $(MAKE) update
 	cd m/pkg && n upgrade && n all update pkg deps
 	cd m && n upgrade && n release update m deps && n cache
 	n upgrade && n release update home deps && n cache
