@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/argocd",
-        "lastModified": 1686976875,
-        "narHash": "sha256-cUd/C2Tm51HO9r3h4k1zLgEjDE2M6p+MJbb/eLPXCvA=",
+        "lastModified": 1687423355,
+        "narHash": "sha256-6Izp/OY6fpL62pH6mQWeBLzkSHEIR0I6V8xpYtQQE+Y=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "cc061d53722eaa2456962c047f28c309b90f1be4",
+        "rev": "fa38d55a3fff63f368f36035fcff89267adb6a69",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/argocd",
         "owner": "defn",
-        "ref": "pkg-argocd-2.7.5-1",
+        "ref": "pkg-argocd-2.7.6-1",
         "repo": "dev",
         "type": "github"
       }
@@ -48,17 +48,17 @@
       },
       "locked": {
         "dir": "m/pkg/awscli",
-        "lastModified": 1686976912,
-        "narHash": "sha256-4rEdRR5lqv16yn/n6sPkgYmFEXOpS/1HHP6tbYXUbno=",
+        "lastModified": 1687425562,
+        "narHash": "sha256-2XpWTtF+0I7BmLpi2Bizlj0qdJiL7cjum5Mb/tPZl3o=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "864e4cebea1be2cb2e7accf5a100023d0c68101d",
+        "rev": "45ae2ee760f09240408b8446c7b65096a7b9cbdf",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/awscli",
         "owner": "defn",
-        "ref": "pkg-awscli-2.12.1-1",
+        "ref": "pkg-awscli-2.12.2-1",
         "repo": "dev",
         "type": "github"
       }
@@ -195,17 +195,17 @@
       },
       "locked": {
         "dir": "m/pkg/buildkite",
-        "lastModified": 1686193742,
-        "narHash": "sha256-mL9amAnJp3mdMtY3Eh1Z3jcrF3PrA7PXyG1Rj90XPWI=",
+        "lastModified": 1687425584,
+        "narHash": "sha256-xdpU29RQcbPImBHMryp23czF4avn+d6eBshj/6/nam8=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "5dc8aef3180a42ab978f8f3c91b83db7323608b0",
+        "rev": "536081cb2e3d7f488506b82117411e8bdbe87309",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buildkite",
         "owner": "defn",
-        "ref": "pkg-buildkite-3.48.0-1",
+        "ref": "pkg-buildkite-3.49.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -263,17 +263,17 @@
       },
       "locked": {
         "dir": "m/pkg/cloud",
-        "lastModified": 1686977061,
-        "narHash": "sha256-uewJ+C4aobWCSBaCms42saMbn33axiwhiy3XSmKPOF0=",
+        "lastModified": 1687425931,
+        "narHash": "sha256-Zma2eAu0/xLBWfZAQQ4uf8KDG8zL+7j2JUpcJELiFQE=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "65b43f4a56c14880126557bf9ac438967308009a",
+        "rev": "aa331e79cc91ab2d5966597f22ef295cc0f3a41a",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cloud",
         "owner": "defn",
-        "ref": "pkg-cloud-0.0.109",
+        "ref": "pkg-cloud-0.0.110",
         "repo": "dev",
         "type": "github"
       }
@@ -1945,17 +1945,17 @@
       },
       "locked": {
         "dir": "m/pkg/flyctl",
-        "lastModified": 1686977015,
-        "narHash": "sha256-Em3SJpEPSDrT+zcpJbXV8iV4f6svCoZYeFDSGFepbLI=",
+        "lastModified": 1687425615,
+        "narHash": "sha256-udK0u0oZO/lm+hZs4kiz0pXlw6BNnAl1tiAT70cz77Q=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "60a3992ae70be7b0ab45b8b7b75b4748d11ad7eb",
+        "rev": "953d17095b323236ff36010de2dc8d5df13a0eb7",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/flyctl",
         "owner": "defn",
-        "ref": "pkg-flyctl-0.1.38-1",
+        "ref": "pkg-flyctl-0.1.40-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1966,17 +1966,17 @@
       },
       "locked": {
         "dir": "m/pkg/gh",
-        "lastModified": 1685478572,
-        "narHash": "sha256-dADCMzuhjDLQluu8qVTcGtHSGlEwqQa7PBtbEA+YhgE=",
+        "lastModified": 1687425638,
+        "narHash": "sha256-WAMHnUnCSl0DHYrtEbmmTrifueDoCP3cnhPj3mfZPA0=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "d4dc5de02ef888024605bcb2b46fae3a46bd5a5b",
+        "rev": "88e4e517932fa5f0654f72709581fbaeeb28ac86",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/gh",
         "owner": "defn",
-        "ref": "pkg-gh-2.30.0-1",
+        "ref": "pkg-gh-2.31.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -2255,17 +2255,17 @@
       },
       "locked": {
         "dir": "m/pkg/kubernetes",
-        "lastModified": 1687041056,
-        "narHash": "sha256-Pfozrix5wkMC/E+oLnVPfSe+mmsbXasl6BdquqCL1p0=",
+        "lastModified": 1687425962,
+        "narHash": "sha256-9kaop9E1K0HIppsJODdAhs1pqPff8GbeTgjOevCUsZ4=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "4506ad740de43a0b1f4bbe16e80b072f9375ed6a",
+        "rev": "91d17d18152b673e2722af294194072f251c1ecd",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubernetes",
         "owner": "defn",
-        "ref": "pkg-kubernetes-0.0.110",
+        "ref": "pkg-kubernetes-0.0.111",
         "repo": "dev",
         "type": "github"
       }
@@ -2276,17 +2276,17 @@
       },
       "locked": {
         "dir": "m/pkg/kubevirt",
-        "lastModified": 1685761287,
-        "narHash": "sha256-4+RY3SV6HJdbi45Q3Hf5KTD8H4B2RqJGWerB5x20fFk=",
+        "lastModified": 1687425672,
+        "narHash": "sha256-oDDLyF1zu94HA0d68OXyU5B1ZDu6qvGlTEmpqhtNOfg=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "d027e4337deb3a51f9a7b85f866e91ee2f43fc6b",
+        "rev": "9dddbbb62bd0edb6ac9a21c5ff70d2aea3db6655",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubevirt",
         "owner": "defn",
-        "ref": "pkg-kubevirt-0.59.1-1",
+        "ref": "pkg-kubevirt-0.59.2-1",
         "repo": "dev",
         "type": "github"
       }
@@ -2297,17 +2297,17 @@
       },
       "locked": {
         "dir": "m/pkg/kuma",
-        "lastModified": 1685334163,
-        "narHash": "sha256-sJdwpIrDSrJ0YTeYjL53xrETIkHtqPKcCaKrbwUOQ/4=",
+        "lastModified": 1687425775,
+        "narHash": "sha256-WcNu2Q1yveb1NN8cnyrvLUyGqRTbqkuQeTS/GBfjUAo=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "0866ca470886dcf109bbe62925dcfaa368897205",
+        "rev": "bd46ae9f8251926c7b55707470e0f859ac7bd33a",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kuma",
         "owner": "defn",
-        "ref": "pkg-kuma-2.2.1-3",
+        "ref": "pkg-kuma-2.2.2-1",
         "repo": "dev",
         "type": "github"
       }
@@ -2384,17 +2384,17 @@
       },
       "locked": {
         "dir": "m/pkg/localdev",
-        "lastModified": 1686901400,
-        "narHash": "sha256-igUwJww50jspJoNC2NPFqYZms8ENO0jgi3inVN5hkc8=",
+        "lastModified": 1687426026,
+        "narHash": "sha256-yGqT1LnTD0c5geSuZ7eN1NiPvDHTnVBfo2FMxaMRACk=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "4cda111a77fc51ea9ec7d0b868011a6e4e798bf1",
+        "rev": "98f2d2e0f74ee4d000b580df522a5e1dadb099a2",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/localdev",
         "owner": "defn",
-        "ref": "pkg-localdev-0.0.135",
+        "ref": "pkg-localdev-0.0.136",
         "repo": "dev",
         "type": "github"
       }
@@ -4097,17 +4097,17 @@
       },
       "locked": {
         "dir": "m/pkg/tailscale",
-        "lastModified": 1685334283,
-        "narHash": "sha256-VsVNOyluwwFFcdcWLqed4FNyk3cw2503ipm/HhSOP9s=",
+        "lastModified": 1687425811,
+        "narHash": "sha256-aU7hsMekjAXmQkbBLCA0hhqNMuroMK/TQ2PMvVTXloU=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "27c5467c47bee0337965440abca7761ca309b047",
+        "rev": "39ce1e605aa9e212e98a90a304e10821ae2bf188",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/tailscale",
         "owner": "defn",
-        "ref": "pkg-tailscale-1.42.0-3",
+        "ref": "pkg-tailscale-1.44.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -4118,17 +4118,17 @@
       },
       "locked": {
         "dir": "m/pkg/terraform",
-        "lastModified": 1686606599,
-        "narHash": "sha256-tOuC1/CErXrhjZbO3V1AkdeFtO4XeAnPnxaiBgyETBw=",
+        "lastModified": 1687425834,
+        "narHash": "sha256-5W/tGc6uGs+gMULwPFLMbOkQEMAThDhBbBOnZ+9R9cc=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "01a953ebd3e53e833ac54d5344c7580a84f21e1e",
+        "rev": "1bc809da62dd82bbae4e84f28cad51a5f0908041",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/terraform",
         "owner": "defn",
-        "ref": "pkg-terraform-1.5.0-1",
+        "ref": "pkg-terraform-1.5.1-1",
         "repo": "dev",
         "type": "github"
       }
@@ -4160,17 +4160,17 @@
       },
       "locked": {
         "dir": "m/pkg/vault",
-        "lastModified": 1686193801,
-        "narHash": "sha256-yhs7PFdMegPzM2zah2lpK0bLL3u3UpKmIDsL0e1yhro=",
+        "lastModified": 1687425873,
+        "narHash": "sha256-Ol9Xka/VwyKetK4DhxmsCkeVdc2NfEnYsqQ3lk32Pzg=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "fe2249df7016eae72cf5ad54173c83e0a6d4e87a",
+        "rev": "e04aeed804572f8162b34b64730c329221469d0e",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/vault",
         "owner": "defn",
-        "ref": "pkg-vault-1.13.3-1",
+        "ref": "pkg-vault-1.14.0-1",
         "repo": "dev",
         "type": "github"
       }
