@@ -3,7 +3,7 @@
 set -eufo pipefail
 
 function main {
-	./make_list_vendor_updates.sh | while read -r slug current latest; do
+	./make_list_vendor_updates.sh | while read -r slug current latest real_tag; do
 		(
 			mark "${slug}"
 			cd "${slug}"
