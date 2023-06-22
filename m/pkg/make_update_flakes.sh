@@ -7,7 +7,7 @@ function main {
 		(
 			mark "${slug}"
 			cd "${slug}"
-			../az/bin/n-bump "$$latest"
+			../az/bin/n-bump "${latest}"
 			../az/bin/n-release "${slug} ${current} -> ${latest}"
 		)
 	done
