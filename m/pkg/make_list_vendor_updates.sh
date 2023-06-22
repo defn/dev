@@ -15,7 +15,7 @@ function main {
 		if [[ ${current} != "${latest}" ]]; then
 			echo "${slug} ${current} ${latest}"
 		fi
-	done | (grep -v 'ibazel/ 0.22.0 0.23.1' || true)
+	done | (grep -E -v 'kustomize/ 5.0.3 5.1.0' || true)
 }
 
 main "$@"
