@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/argocd",
-        "lastModified": 1686976875,
-        "narHash": "sha256-cUd/C2Tm51HO9r3h4k1zLgEjDE2M6p+MJbb/eLPXCvA=",
+        "lastModified": 1687423355,
+        "narHash": "sha256-6Izp/OY6fpL62pH6mQWeBLzkSHEIR0I6V8xpYtQQE+Y=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "cc061d53722eaa2456962c047f28c309b90f1be4",
+        "rev": "fa38d55a3fff63f368f36035fcff89267adb6a69",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/argocd",
         "owner": "defn",
-        "ref": "pkg-argocd-2.7.5-1",
+        "ref": "pkg-argocd-2.7.6-1",
         "repo": "dev",
         "type": "github"
       }
@@ -727,17 +727,17 @@
       },
       "locked": {
         "dir": "m/pkg/kubevirt",
-        "lastModified": 1685761287,
-        "narHash": "sha256-4+RY3SV6HJdbi45Q3Hf5KTD8H4B2RqJGWerB5x20fFk=",
+        "lastModified": 1687425672,
+        "narHash": "sha256-oDDLyF1zu94HA0d68OXyU5B1ZDu6qvGlTEmpqhtNOfg=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "d027e4337deb3a51f9a7b85f866e91ee2f43fc6b",
+        "rev": "9dddbbb62bd0edb6ac9a21c5ff70d2aea3db6655",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubevirt",
         "owner": "defn",
-        "ref": "pkg-kubevirt-0.59.1-1",
+        "ref": "pkg-kubevirt-0.59.2-1",
         "repo": "dev",
         "type": "github"
       }
