@@ -78,7 +78,7 @@ sh_binary(
 
 # oci
 pkg_tar(
-    name = "aws_tar",
+    name = "aws_config_tar",
     srcs = [
         "app_config",
         "aws_config_cfg",
@@ -90,7 +90,8 @@ oci_image(
     name = "aws_image",
     base = "@distroless_base",
     tars = [
-        "aws_tar",
+        "aws_config_tar",
+        "flake_store",
     ],
 )
 

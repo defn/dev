@@ -47,8 +47,8 @@ function main {
 		;;
 	*)
 		if [[ $# == 0 ]]; then
-      local bazel_prefix
-      bazel_prefix="$(git rev-parse --show-prefix | sed 's#/$##; s#^m/##')"
+			local bazel_prefix
+			bazel_prefix="$(git rev-parse --show-prefix | sed 's#/$##; s#^m/##')"
 
 			bazel query "..." | sed "s#^//${bazel_prefix}:##" | grep -v ^_
 		else
@@ -135,7 +135,7 @@ function main {
 				rule="$(b | fzf --query="${1}" --select-1)"
 				shift
 
-				bazel run --sandbox_writable_path=/nix --sandbox_writable_path="${HOME}/.cache/nix" "${rule}" -- "$@"
+				bazel run --sandbox_writable_path=/nix --sandbox_writable_path="${HOME}/.cache/nix" "${rule}" --sandbox_debug -- "$@"
 				;;
 			pass)
 				shift
