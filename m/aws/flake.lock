@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/awscli",
-        "lastModified": 1686811316,
-        "narHash": "sha256-5vK3gZlWEEmMkKuOWKNfzFv9q1kHr3jReWa9AX6hidQ=",
+        "lastModified": 1687425562,
+        "narHash": "sha256-2XpWTtF+0I7BmLpi2Bizlj0qdJiL7cjum5Mb/tPZl3o=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "7b0e6cef3158df63af1e99b282deaa8166fb83a3",
+        "rev": "45ae2ee760f09240408b8446c7b65096a7b9cbdf",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/awscli",
         "owner": "defn",
-        "ref": "pkg-awscli-2.12.0-2",
+        "ref": "pkg-awscli-2.12.2-1",
         "repo": "dev",
         "type": "github"
       }
@@ -114,17 +114,17 @@
       },
       "locked": {
         "dir": "m/pkg/earthly",
-        "lastModified": 1686193761,
-        "narHash": "sha256-2ssRj8X1ADUUH/RpEMMpwnkU/bzGauDtHJyGAEWrSYA=",
+        "lastModified": 1687481136,
+        "narHash": "sha256-wDkWXmYgNPZPsDJCLYBUUApJU90jDBDZjUJdhLnvRNY=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "dfd96a3573ee40a01dbd66865cf75c78d3aaccc3",
+        "rev": "f861aae80d3d91599bd52fe49a1df0aaa6c44128",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/earthly",
         "owner": "defn",
-        "ref": "pkg-earthly-0.7.8-1",
+        "ref": "pkg-earthly-0.7.9-1",
         "repo": "dev",
         "type": "github"
       }

@@ -23,12 +23,12 @@ def nix_flake(name, visibility = None, flakes = []):
     flake_store_script = Label(":flake_store_script")
 
     native.genrule(
-        name = "{}_archives".format(name),
+        name = "{}_store".format(name),
         srcs = [
             flake_store_script,
             "{}_config".format(name),
         ],
-        outs = ["{}_nix_stores".format(name)],
+        outs = ["{}_nix_store.tar".format(name)],
         cmd = "$(location //{}:{}) {} $@".format(flake_store_script.package, flake_store_script.name, dir),
         visibility = visibility,
     )

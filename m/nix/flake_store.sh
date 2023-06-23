@@ -23,10 +23,10 @@ function main {
 
 	nix build
 
-	mkdir -p "${out}"
-	for a in $(nix-store --query --requisites --include-outputs result); do
-		tar cvfz "${out}/${a##*/}.tar.gz" "${a}"
-	done
+	cp "$(nix-store --query --requisites --include-outputs result | grep bash-interactive | head -1 || true)/bin/bash" bash
+
+	# shellcheck disable=SC2046
+	tar cvf "${out}" bash $(nix-store --query --requisites --include-outputs result || true)
 }
 
 main "$@"
