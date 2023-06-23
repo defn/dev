@@ -31,7 +31,7 @@ pkg_tar(
 
 oci_image(
     name = "c_image",
-    base = "@distroless_base",
+    base = "@ubuntu_2204",
     tars = [
         "c_tar",
     ],

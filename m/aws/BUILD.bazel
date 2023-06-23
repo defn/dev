@@ -88,7 +88,7 @@ pkg_tar(
 
 oci_image(
     name = "aws_image",
-    base = "@distroless_base",
+    base = "@ubuntu_2204",
     tars = [
         "aws_config_tar",
         "flake_store",
