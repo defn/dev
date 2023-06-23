@@ -2,7 +2,6 @@
 tf
 node_modules
 .direnv
-app/app/.direnv
 aws/.direnv
 c/.direnv
 k3d/.direnv
@@ -30,7 +29,6 @@ pkg/codeserver/.direnv
 pkg/coredns/.direnv
 pkg/cosign/.direnv
 pkg/cue/.direnv
-pkg/dagger/.direnv
 pkg/dapr/.direnv
 pkg/dev/.direnv
 pkg/development/.direnv
@@ -47,6 +45,7 @@ pkg/honeymarker/.direnv
 pkg/honeytail/.direnv
 pkg/honeyvent/.direnv
 pkg/hubble/.direnv
+pkg/ibazel/.direnv
 pkg/k3d/.direnv
 pkg/k9s/.direnv
 pkg/kn/.direnv
@@ -61,6 +60,7 @@ pkg/nodedev/.direnv
 pkg/nomad/.direnv
 pkg/oci/.direnv
 pkg/operatorsdk/.direnv
+pkg/oras/.direnv
 pkg/packer/.direnv
 pkg/pkg/.direnv
 pkg/secrets/.direnv
@@ -77,10 +77,6 @@ pkg/vcluster/.direnv
 pkg/velero/.direnv
 pkg/vhs/.direnv
 pkg/vpn/.direnv
-r/argo-cd/.direnv
-r/argo-workflows/.direnv
-r/meh/.direnv
-app/app/result
 aws/result
 c/result
 k3d/result
@@ -108,7 +104,6 @@ pkg/codeserver/result
 pkg/coredns/result
 pkg/cosign/result
 pkg/cue/result
-pkg/dagger/result
 pkg/dapr/result
 pkg/dev/result
 pkg/development/result
@@ -125,6 +120,7 @@ pkg/honeymarker/result
 pkg/honeytail/result
 pkg/honeyvent/result
 pkg/hubble/result
+pkg/ibazel/result
 pkg/k3d/result
 pkg/k9s/result
 pkg/kn/result
@@ -139,6 +135,7 @@ pkg/nodedev/result
 pkg/nomad/result
 pkg/oci/result
 pkg/operatorsdk/result
+pkg/oras/result
 pkg/packer/result
 pkg/pkg/result
 pkg/secrets/result
@@ -155,7 +152,4 @@ pkg/vcluster/result
 pkg/velero/result
 pkg/vhs/result
 pkg/vpn/result
-r/argo-cd/result
-r/argo-workflows/result
-r/meh/result
 result
