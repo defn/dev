@@ -6,12 +6,12 @@
     secrets.url = github:defn/dev/pkg-secrets-0.0.51?dir=m/pkg/secrets;
     utils.url = github:defn/dev/pkg-utils-0.0.49?dir=m/pkg/utils;
     vpn.url = github:defn/dev/pkg-vpn-0.0.50?dir=m/pkg/vpn;
-    vault.url = github:defn/dev/pkg-vault-1.13.3-1?dir=m/pkg/vault;
+    vault.url = github:defn/dev/pkg-vault-1.14.0-1?dir=m/pkg/vault;
     acme.url = github:defn/dev/pkg-acme-3.0.6-1?dir=m/pkg/acme;
-    tailscale.url = github:defn/dev/pkg-tailscale-1.42.0-3?dir=m/pkg/tailscale;
-    development.url = github:defn/dev/pkg-development-0.0.59?dir=m/pkg/development;
-    localdev.url = github:defn/dev/pkg-localdev-0.0.135?dir=m/pkg/localdev;
-    cloud.url = github:defn/dev/pkg-cloud-0.0.109?dir=m/pkg/cloud;
+    tailscale.url = github:defn/dev/pkg-tailscale-1.44.0-1?dir=m/pkg/tailscale;
+    development.url = github:defn/dev/pkg-development-0.0.60?dir=m/pkg/development;
+    localdev.url = github:defn/dev/pkg-localdev-0.0.137?dir=m/pkg/localdev;
+    cloud.url = github:defn/dev/pkg-cloud-0.0.111?dir=m/pkg/cloud;
     shell.url = github:defn/dev/pkg-shell-0.0.49?dir=m/pkg/shell;
   };
 
