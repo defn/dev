@@ -2,7 +2,7 @@
   inputs = {
     cue.url = github:defn/dev/pkg-cue-0.5.0-7?dir=m/pkg/cue;
     awscli.url = github:defn/dev/pkg-awscli-2.12.2-1?dir=m/pkg/awscli;
-    earthly.url = github:defn/dev/pkg-earthly-0.7.8-1?dir=m/pkg/earthly;
+    earthly.url = github:defn/dev/pkg-earthly-0.7.9-1?dir=m/pkg/earthly;
   };
 
   outputs = inputs: inputs.cue.inputs.pkg.main rec {
