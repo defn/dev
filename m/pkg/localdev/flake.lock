@@ -398,17 +398,17 @@
       },
       "locked": {
         "dir": "m/pkg/earthly",
-        "lastModified": 1686193761,
-        "narHash": "sha256-2ssRj8X1ADUUH/RpEMMpwnkU/bzGauDtHJyGAEWrSYA=",
+        "lastModified": 1687481136,
+        "narHash": "sha256-wDkWXmYgNPZPsDJCLYBUUApJU90jDBDZjUJdhLnvRNY=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "dfd96a3573ee40a01dbd66865cf75c78d3aaccc3",
+        "rev": "f861aae80d3d91599bd52fe49a1df0aaa6c44128",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/earthly",
         "owner": "defn",
-        "ref": "pkg-earthly-0.7.8-1",
+        "ref": "pkg-earthly-0.7.9-1",
         "repo": "dev",
         "type": "github"
       }
