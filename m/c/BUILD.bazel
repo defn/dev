@@ -2,6 +2,7 @@ load("@rules_oci//oci:defs.bzl", "oci_image")
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
 load("//cue:cue.bzl", "cue_export")
 load("//nix:nix.bzl", "nix_flake")
+load("//oci:oci.bzl", "skopeo_copy")
 
 # nix flake
 nix_flake(
@@ -34,4 +35,11 @@ oci_image(
     tars = [
         "c_tar",
     ],
+)
+
+skopeo_copy(
+    name = "c_push",
+    image = ":c_image",
+    remote_tags = ["latest"],
+    repository = "169.254.32.1:5000/defn/dev/c",
 )
