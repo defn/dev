@@ -1,4 +1,4 @@
-load("@rules_oci//oci:defs.bzl", "oci_image", "oci_tarball")
+load("@rules_oci//oci:defs.bzl", "oci_image")
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
 load("//cue:cue.bzl", "cue_export")
 load("//nix:nix.bzl", "nix_flake")
@@ -34,10 +34,4 @@ oci_image(
     tars = [
         "c_tar",
     ],
-)
-
-oci_tarball(
-    name = "c_save",
-    image = "c_image",
-    repo_tags = ["quay.io/defn/dev:latest-c"],
 )
