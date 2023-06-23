@@ -1,8 +1,8 @@
-load("@rules_oci//oci:defs.bzl", "oci_image", "oci_tarball")
+load("@rules_oci//oci:defs.bzl", "oci_image")
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
 load("//cue:cue.bzl", "cue_export")
-load("//earthly:earthly.bzl", "earthly_build")
 load("//nix:nix.bzl", "nix_flake")
+load("//oci:oci.bzl", "skopeo_copy")
 
 filegroup(
     name = "aws_orgs",
@@ -76,18 +76,6 @@ sh_binary(
     ],
 )
 
-# build docker image
-earthly_build(
-    name = "aws",
-    data = [
-        "app_config",
-        "aws_config_cfg",
-        "flake_archives",
-    ],
-    earthly_bin = "flake_earthly",
-    image = "aws",
-)
-
 # oci
 pkg_tar(
     name = "aws_tar",
@@ -106,8 +94,9 @@ oci_image(
     ],
 )
 
-oci_tarball(
-    name = "aws_save",
-    image = "aws_image",
-    repo_tags = ["quay.io/defn/dev:latest-aws"],
+skopeo_copy(
+    name = "aws_push",
+    image = ":aws_image",
+    remote_tags = ["latest"],
+    repository = "169.254.32.1:5000/defn/dev/aws",
 )
