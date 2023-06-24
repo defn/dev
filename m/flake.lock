@@ -132,17 +132,17 @@
       },
       "locked": {
         "dir": "m/pkg/buf",
-        "lastModified": 1686003339,
-        "narHash": "sha256-Ml0ruLYmbq2EObYKodL0/fGdyWmer371+G2rcgMdyRg=",
+        "lastModified": 1687582741,
+        "narHash": "sha256-uqQa8SKjFGNfF2uZ/8v3UwgZAgzlQ2dAaXA9urW8O8M=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "2dd71154578eb7241c12dfd3e3aa4657dd1280ad",
+        "rev": "d0fecbb311a74be4052a1a1aa5cc07da4dfcee03",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buf",
         "owner": "defn",
-        "ref": "pkg-buf-1.21.0-1",
+        "ref": "pkg-buf-1.22.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -153,17 +153,17 @@
       },
       "locked": {
         "dir": "m/pkg/buildevents",
-        "lastModified": 1685333491,
-        "narHash": "sha256-paEW6zthhoQmDkuXM6xUf1RZb15oHMsx4unG7mjkaC0=",
+        "lastModified": 1687582765,
+        "narHash": "sha256-KY40qtHmMuy8VRpgyyLb97C/pao2Nf8KptBpEsBOj1I=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "8199740b9d30feacb89dad310fa1495d9fdb6e51",
+        "rev": "d8555cd97e4f1a6e55cdaa607a4b3cf50bb4bf85",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buildevents",
         "owner": "defn",
-        "ref": "pkg-buildevents-0.13.0-9",
+        "ref": "pkg-buildevents-0.14.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -237,17 +237,17 @@
       },
       "locked": {
         "dir": "m/pkg/cilium",
-        "lastModified": 1686793551,
-        "narHash": "sha256-P7NhlUIFiIZEhLAQ1Cf2DNI8Zz3+0nLxIBuUEvLAFBU=",
+        "lastModified": 1687582793,
+        "narHash": "sha256-B4ExAwulFACCvGsBcDBicoTCXsoIeFoJgasG0L2nnHM=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "074e13a7af1fab0587d57d8ff28337ae8f14d2d6",
+        "rev": "478fbc94b1a7dfa4c23714a4f25c29f82cdd26e2",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cilium",
         "owner": "defn",
-        "ref": "pkg-cilium-0.14.7-1",
+        "ref": "pkg-cilium-0.14.8-1",
         "repo": "dev",
         "type": "github"
       }
@@ -284,17 +284,17 @@
       },
       "locked": {
         "dir": "m/pkg/cosign",
-        "lastModified": 1685333593,
-        "narHash": "sha256-+bA/289dCL6XazFrTktcDoJM5B9+LMaPD0t6PGEHmQw=",
+        "lastModified": 1687583001,
+        "narHash": "sha256-+/bdDXtB6mZ2yFa48EpkRazmQKZu0wB+nlZO/GLP3go=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "62dd94f07480e67efa1a470c511b0c91ff918e6b",
+        "rev": "ce86c2d983a420ce45d2412e1bfe34efe64b23f9",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cosign",
         "owner": "defn",
-        "ref": "pkg-cosign-2.0.2-4",
+        "ref": "pkg-cosign-2.1.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1990,17 +1990,17 @@
       },
       "locked": {
         "dir": "m/pkg/godev",
-        "lastModified": 1686349882,
-        "narHash": "sha256-WqYWeErOSyZ4pQk2hnP1qYFaCdVPfSB0W8ovJ+fRDTk=",
+        "lastModified": 1687583129,
+        "narHash": "sha256-TOQMgZwtkg+7tkQZ7HTsEFZVnlknIVfoHECNYyl0Kww=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "1167399b573b2d8ce50aae509f9ace9649eb18bd",
+        "rev": "165cba47e95966f8a37bbd36fa854bcc28e6c3bd",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/godev",
         "owner": "defn",
-        "ref": "pkg-godev-0.0.88",
+        "ref": "pkg-godev-0.0.89",
         "repo": "dev",
         "type": "github"
       }
@@ -2255,17 +2255,17 @@
       },
       "locked": {
         "dir": "m/pkg/kubernetes",
-        "lastModified": 1687425962,
-        "narHash": "sha256-9kaop9E1K0HIppsJODdAhs1pqPff8GbeTgjOevCUsZ4=",
+        "lastModified": 1687583148,
+        "narHash": "sha256-r77aRddA0ZyJce5W8eP12Yw4z+QIp3cC5I8bP0r5n+U=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "91d17d18152b673e2722af294194072f251c1ecd",
+        "rev": "fe871e6d90425332cce8e8f1a0f96a0d56fb44c2",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubernetes",
         "owner": "defn",
-        "ref": "pkg-kubernetes-0.0.111",
+        "ref": "pkg-kubernetes-0.0.112",
         "repo": "dev",
         "type": "github"
       }
@@ -2297,17 +2297,17 @@
       },
       "locked": {
         "dir": "m/pkg/kuma",
-        "lastModified": 1687425775,
-        "narHash": "sha256-WcNu2Q1yveb1NN8cnyrvLUyGqRTbqkuQeTS/GBfjUAo=",
+        "lastModified": 1687583098,
+        "narHash": "sha256-DVczkPhIRjvps4ZW5xYMQENa/VrN2hQgwd+NYaWkBJQ=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "bd46ae9f8251926c7b55707470e0f859ac7bd33a",
+        "rev": "5f0d641b0a4e01726eaf30ae0d30e27693dc8aa7",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kuma",
         "owner": "defn",
-        "ref": "pkg-kuma-2.2.2-1",
+        "ref": "pkg-kuma-2.3.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -2384,17 +2384,17 @@
       },
       "locked": {
         "dir": "m/pkg/localdev",
-        "lastModified": 1687481185,
-        "narHash": "sha256-Hrk6h+PO3HPPfVTM9Iw9vihflQuL7U1tib9kM9ONd14=",
+        "lastModified": 1687583183,
+        "narHash": "sha256-sU4qoLdrrUC2ASKqom7YKSqBk9KyvG+dgTAbvVjnY4o=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "887da14c7897139948bd3b4dd403f3ff03a08b90",
+        "rev": "72b31976fc7aa8c2ce6714e2ad745c970e005543",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/localdev",
         "owner": "defn",
-        "ref": "pkg-localdev-0.0.137",
+        "ref": "pkg-localdev-0.0.138",
         "repo": "dev",
         "type": "github"
       }
