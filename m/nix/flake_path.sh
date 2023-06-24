@@ -13,8 +13,9 @@ function main {
 	shift
 
 	cd "${dir}"
+
 	mkdir nix
-	cp flake.* nix/
+	rsync -ia --copy-links --exclude nix . nix/.
 
 	cd nix
 	git init --quiet
