@@ -65,7 +65,7 @@ function main {
 					shift
 				fi
 
-				bazel build --sandbox_writable_path=/nix --sandbox_writable_path="${HOME}/.cache/nix" "${rule}"
+				bazel build --sandbox_writable_path=/nix --sandbox_writable_path="${HOME}/.cache/nix" --sandbox_writable_path="${HOME}/.earthly" "${rule}"
 				;;
 			outputs)
 				shift
@@ -135,7 +135,7 @@ function main {
 				rule="$(b | fzf --query="${1}" --select-1)"
 				shift
 
-				bazel run --sandbox_writable_path=/nix --sandbox_writable_path="${HOME}/.cache/nix" "${rule}" --sandbox_debug -- "$@"
+				bazel run --sandbox_writable_path=/nix --sandbox_writable_path="${HOME}/.cache/nix" --sandbox_writable_path="${HOME}/.earthly" "${rule}" --sandbox_debug -- "$@"
 				;;
 			pass)
 				shift
