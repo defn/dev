@@ -1,5 +1,5 @@
 build:
-	b pass build //cmd/cli:cli
+	~/bin/b pass build //cmd/cli:cli
 
 all:
 	b pass build //...
