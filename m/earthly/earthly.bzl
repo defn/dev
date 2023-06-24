@@ -26,7 +26,7 @@ def earthly_build(name, image, data, earthly_bin, build_args = [], visibility = 
     native.genrule(
         name = "{}_earthly_build".format(name),
         srcs = [earthly_build_script, earthly_bin, "{}_earthfile".format(name)] + data,
-        outs = ["{}_docker_image".format(name)],
+        outs = ["{}_docker_image.tar".format(name)],
         cmd = "$(location //{}:{}) $@ {} $(location {}) $(location {}_earthfile) {} {}".format(
             earthly_build_script.package,
             earthly_build_script.name,

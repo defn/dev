@@ -31,9 +31,8 @@ earthly_build(
 
 oci_image(
     name = "k3d_image",
-    base = "@distroless_base",
+    base = "@defn_dev_k3d",
     tars = [
-      "k3d_earthly_build"
     ],
 )
 
