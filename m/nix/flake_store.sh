@@ -23,10 +23,8 @@ function main {
 
 	nix build
 
-	cp "$(nix-store --query --requisites --include-outputs result | grep bash-interactive | head -1 || true)/bin/bash" bash
-
 	# shellcheck disable=SC2046
-	tar cvf "${out}" bash $(nix-store --query --requisites --include-outputs result || true)
+	tar cvf "${out}" $(nix-store --query --requisites --include-outputs result || true)
 }
 
 main "$@"

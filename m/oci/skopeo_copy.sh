@@ -17,6 +17,7 @@ function main {
 
 	for t in "$@"; do
 		skopeo copy "oci:${oci_in}" "docker://${repository}:${t}" --dest-tls-verify=false --insecure-policy
+		docker pull "${repository}:${t}"
 	done
 }
 

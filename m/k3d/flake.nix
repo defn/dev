@@ -9,6 +9,7 @@
     packages = ctx: rec {
       devShell = ctx: ctx.wrap.devShell {
         devInputs = [
+          inputs.earthly.defaultPackage.${ctx.system}
           (defaultPackage ctx)
         ];
       };
@@ -16,7 +17,6 @@
 
     defaultPackage = ctx: ctx.wrap.nullBuilder {
       propagatedBuildInputs = [
-        inputs.earthly.defaultPackage.${ctx.system}
       ];
     };
   };
