@@ -15,7 +15,7 @@ function main {
 	cd "${dir}"
 
 	mkdir nix
-	cp flake.* nix/
+	rsync -ia --copy-links --exclude nix . nix/.
 
 	cd nix
 	git init --quiet

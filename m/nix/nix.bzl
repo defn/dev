@@ -1,11 +1,12 @@
 """
 """
 
-def nix_flake(name, visibility = None, flakes = []):
+def nix_flake(name, srcs = [], visibility = None, flakes = []):
     """ something
 
     Args:
         name: something
+        srcs: something
         visibility: something
         flakes: something
     """
@@ -17,7 +18,7 @@ def nix_flake(name, visibility = None, flakes = []):
             "flake.json",
             "flake.lock",
             "flake.nix",
-        ],
+        ] + srcs,
     )
 
     flake_store_script = Label(":flake_store_script")
