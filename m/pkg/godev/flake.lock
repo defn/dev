@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/buf",
-        "lastModified": 1686003339,
-        "narHash": "sha256-Ml0ruLYmbq2EObYKodL0/fGdyWmer371+G2rcgMdyRg=",
+        "lastModified": 1687582741,
+        "narHash": "sha256-uqQa8SKjFGNfF2uZ/8v3UwgZAgzlQ2dAaXA9urW8O8M=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "2dd71154578eb7241c12dfd3e3aa4657dd1280ad",
+        "rev": "d0fecbb311a74be4052a1a1aa5cc07da4dfcee03",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buf",
         "owner": "defn",
-        "ref": "pkg-buf-1.21.0-1",
+        "ref": "pkg-buf-1.22.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -27,17 +27,17 @@
       },
       "locked": {
         "dir": "m/pkg/cosign",
-        "lastModified": 1685333593,
-        "narHash": "sha256-+bA/289dCL6XazFrTktcDoJM5B9+LMaPD0t6PGEHmQw=",
+        "lastModified": 1687583001,
+        "narHash": "sha256-+/bdDXtB6mZ2yFa48EpkRazmQKZu0wB+nlZO/GLP3go=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "62dd94f07480e67efa1a470c511b0c91ff918e6b",
+        "rev": "ce86c2d983a420ce45d2412e1bfe34efe64b23f9",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cosign",
         "owner": "defn",
-        "ref": "pkg-cosign-2.0.2-4",
+        "ref": "pkg-cosign-2.1.0-1",
         "repo": "dev",
         "type": "github"
       }
