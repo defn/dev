@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -exfu
+set -exu
 
 PATH=${PATH}:/home/ubuntu/.nix-profile/bin
 
@@ -8,9 +8,7 @@ tailscaled --statedir=/var/lib/tailscale &
 
 container_ip=$(ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | cut -d' ' -f1)
 
-if [[ -n "${DEFN_DEV_TSKEY:-}" ]]; then
-	tailscale up --authkey="${DEFN_DEV_TSKEY}" --accept-dns=false --ssh
-fi
+tailscale up --authkey="${DEFN_DEV_TSKEY}" --accept-dns=false --ssh
 
 while true; do
 	ts_ip=$(tailscale ip -4 || true)
@@ -23,10 +21,6 @@ while test -z "${domain}"; do
 	domain=$(tailscale cert 2>&1 | grep ' use ' | cut -d'"' -f2)
 	sleep 1
 done
-
-if [[ -z "${DEFN_DEV_TSKEY:-}" ]]; then
-	tailscale up --ssh --accept-dns=false --hostname $(echo "${domain}" | cut -d. -f1)
-fi
 
 #mount bpffs -t bpf /sys/fs/bpf
 #mount --make-shared /sys/fs/bpf
@@ -42,8 +36,4 @@ for a in /var/lib/rancher/k3s/server/manifests; do
 	) || true
 done
 
-if [[ -n "${DEFN_DEV_TSKEY:-}" ]]; then
-	exec /bin/k3s-real "$@" --node-ip "${ts_ip}" --flannel-iface=tailscale0
-else
-	exec /bin/k3s-real "$@" --node-ip "${ts_ip}" --node-external-ip "${ts_ip}" --flannel-iface=tailscale0
-fi
+exec /bin/k3s "$@" --node-ip "${ts_ip}" --node-external-ip "${ts_ip}" --flannel-iface=tailscale0

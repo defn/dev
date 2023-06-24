@@ -1,4 +1,4 @@
-VERSION --use-registry-for-with-docker --ci-arg 0.7
+VERSION 0.7
 
 build:
     ARG K3S
@@ -19,7 +19,23 @@ image-k3d:
 
 nix:
     FROM quay.io/defn/dev:latest-nix-installed
+
     SAVE ARTIFACT /nix nix
+
+home:
+    FROM +nix
+
+    USER root
+    RUN apt update && apt install -y git openssh-client
+
+    USER ubuntu
+    RUN git clone https://github.com/defn/dev dev \
+        && mv dev/.git . \
+        && rm -rf dev \
+        && git reset --hard
+
+    RUN (echo export USER=ubuntu; echo export HOME=/home/ubuntu; echo export PATH="/bin:/usr/bin"; echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh) > .profile
+
     SAVE ARTIFACT /home/ubuntu ubuntu
 
 k3d:
@@ -34,42 +50,17 @@ k3d:
         && install -d -m 0700 -o root -g root /root \
         && mkdir -p /home && install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
 
-    RUN mv /bin/k3s /bin/k3s-real
-
-    RUN for a in /bin/kubectl /bin/k3s-server /bin/k3s-secrets-encrypt /bin/k3s-etcd-snapshot /bin/k3s-completion /bin/k3s-certificate /bin/k3s-agent /bin/crictl /bin/ctr; do ln -nfs k3s-real $a; done
+    RUN install -d -m 0700 -o ubuntu -g ubuntu /cache \
+        && ln -nfs /bin/env /usr/bin/env
 
     RUN mkdir -p /var/lib/rancher/k3s/agent/etc/containerd
     COPY k3d-config.toml var/lib/rancher/k3s/agent/etc/containerd/config.toml
 
-    COPY k3s-wrapper.sh /bin/k3s
-
-    USER ubuntu
-    WORKDIR /home/ubuntu
+    COPY k3s-wrapper.sh /bin/k3s-wrapper.sh
+    ENTRYPOINT ["/bin/k3s-wrapper.sh"]
 
     COPY --dir --chown=ubuntu:ubuntu +nix/nix /nix
-    COPY --dir --chown=ubuntu:ubuntu +nix/ubuntu /home/
+    COPY --dir --chown=ubuntu:ubuntu +home/ubuntu /home
 
-    RUN (echo export USER=ubuntu; echo export HOME=/home/ubuntu; echo export PATH="/bin:/usr/bin"; echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh) > .profile
-
-    RUN . ./.profile && for a in bashInteractive; do nix profile install nixpkgs#$a; done
-    RUN . ./.profile && for a in openssh; do nix profile install nixpkgs#$a; done
-    RUN . ./.profile && for a in findutils; do nix profile install nixpkgs#$a; done
-    RUN . ./.profile && for a in git; do nix profile install nixpkgs#$a; done
-    RUN . ./.profile && for a in gnumake; do nix profile install nixpkgs#$a; done
-
-    RUN . ./.profile && nix profile install github:defn/dev/pkg-tailscale-1.42.0-1?dir=m/pkg/tailscale
-
-    RUN . ./.profile && ssh -o StrictHostKeyChecking=no git@github.com || true
-
-    RUN --no-cache . ./.profile \
-        && git clone https://github.com/defn/dev dev \
-        && mv dev/.git . \
-        && rm -rf dev \
-        && git reset --hard
-
-    USER root
-    WORKDIR /
-    RUN install -d -m 0700 -o ubuntu -g ubuntu /cache \
-        && cp -a /home/ubuntu/.nix-profile/bin/bash /bin/bash \
-        && ln -nfs /bin/env /usr/bin/env \
-        && sed 's#/bin/sh#/bin/bash#' -i /etc/passwd
+    # must be last because /bin/bash doesn't exist yet
+    RUN sed 's#/bin/sh#/bin/bash#' -i /etc/passwd

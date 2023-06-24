@@ -1,5 +1,7 @@
+load("@rules_oci//oci:defs.bzl", "oci_image")
 load("//earthly:earthly.bzl", "earthly_build")
 load("//nix:nix.bzl", "nix_flake")
+load("//oci:oci.bzl", "skopeo_copy")
 
 # earthly inputs
 filegroup(
@@ -25,4 +27,19 @@ earthly_build(
     ],
     earthly_bin = "flake_earthly",
     image = "quay.io/defn/dev:latest-k3d",
+)
+
+oci_image(
+    name = "k3d_image",
+    base = "@distroless_base",
+    tars = [
+      "k3d_earthly_build"
+    ],
+)
+
+skopeo_copy(
+    name = "k3d_push",
+    image = ":k3d_image",
+    remote_tags = ["latest"],
+    repository = "169.254.32.1:5000/defn/dev/k3d",
 )
