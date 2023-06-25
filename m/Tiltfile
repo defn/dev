@@ -9,8 +9,6 @@ local_resource(
     "buf-generate",
     cmd=["bash", "-c", "cd a && buf generate"],
     deps=[
-        "defn/dev/google/protobuf/duration.proto",
-        "defn/dev/google/type/datetime.proto",
         "defn/dev/rock/v1/rock.proto",
         "defn/dev/demo/v1/pet.proto",
         "defn/dev/legumes/v1/bean.proto",
