@@ -77,7 +77,8 @@ function main {
 					shift
 				fi
 
-				bazel test --sandbox_writable_path=/nix --sandbox_writable_path="${HOME}/.cache/nix" --sandbox_writable_path="${HOME}/.earthly" "${rule}"
+				bazel test --color=yes --sandbox_writable_path=/nix --sandbox_writable_path="${HOME}/.cache/nix" --sandbox_writable_path="${HOME}/.earthly" "${rule}" | grep -v 'There were tests whose specified size is too big'
+
 				;;
 			outputs)
 				shift
@@ -151,7 +152,8 @@ function main {
 				;;
 			pass)
 				shift
-				cmd="$1"; shift
+				cmd="$1"
+				shift
 				bazel "${cmd}" --sandbox_writable_path=/nix --sandbox_writable_path="${HOME}/.cache/nix" --sandbox_writable_path="${HOME}/.earthly" "$@"
 				;;
 			*)
