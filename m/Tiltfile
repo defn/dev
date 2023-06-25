@@ -1,14 +1,15 @@
 analytics_settings(False)
 
-# ibazel
-local_resource("ibazel",
-    serve_cmd=["make", "watch"])
+# buildkite
+local_resource("buildkite",
+    serve_cmd=["make", "ci"])
 
 # buf generate
 local_resource(
     "buf-generate",
     cmd=["bash", "-c", "cd a && buf generate"],
     deps=[
+        "a/google/protobuf/duration.proto",
         "a/google/type/datetime.proto",
         "a/rock/v1/rock.proto",
         "a/demo/v1/pet.proto",
