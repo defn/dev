@@ -1,0 +1,3 @@
+syntax = "proto3";
+
+package defn.dev.ignore.v1;
