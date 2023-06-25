@@ -22,7 +22,7 @@ const _ = connect_go.IsAtLeastVersion0_1_0
 
 const (
 	// RockStoreServiceName is the fully-qualified name of the RockStoreService service.
-	RockStoreServiceName = "rock.v1.RockStoreService"
+	RockStoreServiceName = "defn.dev.rock.v1.RockStoreService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -35,25 +35,25 @@ const (
 const (
 	// RockStoreServiceGetRockProcedure is the fully-qualified name of the RockStoreService's GetRock
 	// RPC.
-	RockStoreServiceGetRockProcedure = "/rock.v1.RockStoreService/GetRock"
+	RockStoreServiceGetRockProcedure = "/defn.dev.rock.v1.RockStoreService/GetRock"
 	// RockStoreServicePutRockProcedure is the fully-qualified name of the RockStoreService's PutRock
 	// RPC.
-	RockStoreServicePutRockProcedure = "/rock.v1.RockStoreService/PutRock"
+	RockStoreServicePutRockProcedure = "/defn.dev.rock.v1.RockStoreService/PutRock"
 	// RockStoreServiceDeleteRockProcedure is the fully-qualified name of the RockStoreService's
 	// DeleteRock RPC.
-	RockStoreServiceDeleteRockProcedure = "/rock.v1.RockStoreService/DeleteRock"
+	RockStoreServiceDeleteRockProcedure = "/defn.dev.rock.v1.RockStoreService/DeleteRock"
 )
 
-// RockStoreServiceClient is a client for the rock.v1.RockStoreService service.
+// RockStoreServiceClient is a client for the defn.dev.rock.v1.RockStoreService service.
 type RockStoreServiceClient interface {
 	GetRock(context.Context, *connect_go.Request[v1.GetRockRequest]) (*connect_go.Response[v1.GetRockResponse], error)
 	PutRock(context.Context, *connect_go.Request[v1.PutRockRequest]) (*connect_go.Response[v1.PutRockResponse], error)
 	DeleteRock(context.Context, *connect_go.Request[v1.DeleteRockRequest]) (*connect_go.Response[v1.DeleteRockResponse], error)
 }
 
-// NewRockStoreServiceClient constructs a client for the rock.v1.RockStoreService service. By
-// default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
-// and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
+// NewRockStoreServiceClient constructs a client for the defn.dev.rock.v1.RockStoreService service.
+// By default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped
+// responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
 // connect.WithGRPC() or connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
@@ -86,22 +86,22 @@ type rockStoreServiceClient struct {
 	deleteRock *connect_go.Client[v1.DeleteRockRequest, v1.DeleteRockResponse]
 }
 
-// GetRock calls rock.v1.RockStoreService.GetRock.
+// GetRock calls defn.dev.rock.v1.RockStoreService.GetRock.
 func (c *rockStoreServiceClient) GetRock(ctx context.Context, req *connect_go.Request[v1.GetRockRequest]) (*connect_go.Response[v1.GetRockResponse], error) {
 	return c.getRock.CallUnary(ctx, req)
 }
 
-// PutRock calls rock.v1.RockStoreService.PutRock.
+// PutRock calls defn.dev.rock.v1.RockStoreService.PutRock.
 func (c *rockStoreServiceClient) PutRock(ctx context.Context, req *connect_go.Request[v1.PutRockRequest]) (*connect_go.Response[v1.PutRockResponse], error) {
 	return c.putRock.CallUnary(ctx, req)
 }
 
-// DeleteRock calls rock.v1.RockStoreService.DeleteRock.
+// DeleteRock calls defn.dev.rock.v1.RockStoreService.DeleteRock.
 func (c *rockStoreServiceClient) DeleteRock(ctx context.Context, req *connect_go.Request[v1.DeleteRockRequest]) (*connect_go.Response[v1.DeleteRockResponse], error) {
 	return c.deleteRock.CallUnary(ctx, req)
 }
 
-// RockStoreServiceHandler is an implementation of the rock.v1.RockStoreService service.
+// RockStoreServiceHandler is an implementation of the defn.dev.rock.v1.RockStoreService service.
 type RockStoreServiceHandler interface {
 	GetRock(context.Context, *connect_go.Request[v1.GetRockRequest]) (*connect_go.Response[v1.GetRockResponse], error)
 	PutRock(context.Context, *connect_go.Request[v1.PutRockRequest]) (*connect_go.Response[v1.PutRockResponse], error)
@@ -130,20 +130,20 @@ func NewRockStoreServiceHandler(svc RockStoreServiceHandler, opts ...connect_go.
 		svc.DeleteRock,
 		opts...,
 	))
-	return "/rock.v1.RockStoreService/", mux
+	return "/defn.dev.rock.v1.RockStoreService/", mux
 }
 
 // UnimplementedRockStoreServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedRockStoreServiceHandler struct{}
 
 func (UnimplementedRockStoreServiceHandler) GetRock(context.Context, *connect_go.Request[v1.GetRockRequest]) (*connect_go.Response[v1.GetRockResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("rock.v1.RockStoreService.GetRock is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("defn.dev.rock.v1.RockStoreService.GetRock is not implemented"))
 }
 
 func (UnimplementedRockStoreServiceHandler) PutRock(context.Context, *connect_go.Request[v1.PutRockRequest]) (*connect_go.Response[v1.PutRockResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("rock.v1.RockStoreService.PutRock is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("defn.dev.rock.v1.RockStoreService.PutRock is not implemented"))
 }
 
 func (UnimplementedRockStoreServiceHandler) DeleteRock(context.Context, *connect_go.Request[v1.DeleteRockRequest]) (*connect_go.Response[v1.DeleteRockResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("rock.v1.RockStoreService.DeleteRock is not implemented"))
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("defn.dev.rock.v1.RockStoreService.DeleteRock is not implemented"))
 }
