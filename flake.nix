@@ -177,7 +177,7 @@
         _direnv_hook
         if ! test -e /var/run/utmp; then sudo touch /var/run/utmp; fi
         pass hello
-        screen -S tilt -d -m bash -il -c "~/bin/withde ~ $(which tilt) up" || true
+        if [[ "$(uname -s)" == "Darwin" ]]; then screen -S tilt -d -m bash -il -c "~/bin/withde ~ $(which tilt) up" || true; fi
       '';
 
       acme-issue = ''
