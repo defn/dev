@@ -8,7 +8,7 @@ ci:
 	buildkite-agent start --build-path /cache/buildkite --token "$$(pass BUILDKITE_AGENT_TOKEN)"
 
 up:
-	nix develop --command tilt up --stream --port=0
+	nix develop --command tilt up --stream --port=10351
 
 cdktf:
 	npm install
