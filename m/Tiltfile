@@ -16,3 +16,10 @@ local_resource(
         "a/legumes/v1/bean.proto",
         "a/legumes/v1/pea.proto"
     ])
+
+if "-linux" in os.getenv("system"):
+    local_resource("tailscale",
+        serve_cmd=[ "bash", "-c", """
+            exec sudo "$(which tailscaled)" "$@"
+            """ ]
+    )

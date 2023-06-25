@@ -26,16 +26,3 @@ if "-darwin" in os.getenv("system"):
             """
         ]
     )
-else:
-    # tailscale
-    local_resource("tailscale",
-        serve_cmd=[
-            "bash", "-c",
-            """
-                eval "$(direnv hook bash)"
-                direnv allow
-                _direnv_hook
-                exec sudo "$(which tailscaled)" "$@"
-            """
-        ]
-    )
