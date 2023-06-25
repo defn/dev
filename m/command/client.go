@@ -9,8 +9,8 @@ import (
 
 	"github.com/bufbuild/connect-go"
 
-	demov1 "github.com/defn/dev/m/a/demo/v1"
-	"github.com/defn/dev/m/a/demo/v1/demov1connect"
+	demov1 "github.com/defn/dev/m/defn/dev/demo/v1"
+	"github.com/defn/dev/m/defn/dev/demo/v1/demov1connect"
 )
 
 var clientCmd = &cobra.Command{

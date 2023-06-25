@@ -21,6 +21,6 @@ cue_export(
 copy_outputs(
     name = "outputs",
     gen = {
-        "app_config.json": "app_config"
-    }
+        "app_config.json": "app_config",
+    },
 )

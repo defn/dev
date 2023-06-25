@@ -27,10 +27,10 @@ update:
 	$(MAKE) bazel-ignore
 
 regen:
-	cd a && buf generate && (find . -name 'BUILD.bazel' | xargs rm -fv)
+	buf generate
+	cd defn/dev && (find . -name 'BUILD.bazel' | xargs rm -fv)
 	$(MAKE) update-repos
-	cd a && $(MAKE)
-	trunk fmt
+	cd defn/dev && $(MAKE)
 
 watch:
 	$(MAKE) build

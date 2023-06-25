@@ -14,8 +14,8 @@ import (
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 
-	demov1 "github.com/defn/dev/m/a/demo/v1"
-	"github.com/defn/dev/m/a/demo/v1/demov1connect"
+	demov1 "github.com/defn/dev/m/defn/dev/demo/v1"
+	"github.com/defn/dev/m/defn/dev/demo/v1/demov1connect"
 )
 
 var serverCmd = &cobra.Command{
