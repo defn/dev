@@ -8,7 +8,7 @@ ci:
 	buildkite-agent start --build-path /cache/buildkite --token "$$(pass BUILDKITE_AGENT_TOKEN)"
 
 up:
-	screen -S tilt -d -m bash -il -c tilt up --stream --port=10351
+	screen -S tilt -d -m bash -il -c "tilt up --stream --port=10351"
 
 cdktf:
 	npm install
