@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package rock.v1;
+package defn.dev.rock.v1;
 
 // RockType represents the different types of rocks in the rock store.
 enum RockType {
