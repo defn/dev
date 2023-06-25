@@ -4,27 +4,27 @@ load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@rules_buf//buf:defs.bzl", "buf_lint_test")
 
 proto_library(
-    name = "defn_dev_ignore_proto",
+    name = "defn_dev_ignore_v1_proto",
     srcs = ["ignore.proto"],
     visibility = ["//visibility:public"],
 )
 
 buf_lint_test(
-    name = "defn_dev_ignore_proto_lint",
+    name = "defn_dev_ignore_v1_proto_lint",
     config = "//:buf.yaml",
-    targets = [":defn_dev_ignore_proto"],
+    targets = [":defn_dev_ignore_v1_proto"],
 )
 
 go_proto_library(
-    name = "defn_dev_ignore_go_proto",
-    importpath = "github.com/defn/dev/m/defn/dev/ignore",
-    proto = ":defn_dev_ignore_proto",
+    name = "defn_dev_ignore_v1_go_proto",
+    importpath = "github.com/defn/dev/m/defn/dev/ignore/v1",
+    proto = ":defn_dev_ignore_v1_proto",
     visibility = ["//visibility:public"],
 )
 
 go_library(
     name = "ignore",
-    embed = [":defn_dev_ignore_go_proto"],
-    importpath = "github.com/defn/dev/m/defn/dev/ignore",
+    embed = [":defn_dev_ignore_v1_go_proto"],
+    importpath = "github.com/defn/dev/m/defn/dev/ignore/v1",
     visibility = ["//visibility:public"],
 )
