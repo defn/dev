@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package rock.v1;
+
+// RockType represents the different types of rocks in the rock store.
+enum RockType {
+  ROCK_TYPE_UNSPECIFIED = 0;
+  ROCK_TYPE_CAT = 1;
+  ROCK_TYPE_DOG = 2;
+  ROCK_TYPE_SNAKE = 3;
+  ROCK_TYPE_HAMSTER = 4;
+}
+
+// Rock represents a rock in the rock store.
+message Rock {
+  RockType rock_type = 1;
+  string rock_id = 2;
+  string name = 3;
+  string created_at = 4;
+}
+
+message GetRockRequest {
+  string rock_id = 1;
+}
+
+message GetRockResponse {
+  Rock rock = 1;
+}
+
+message PutRockRequest {
+  RockType rock_type = 1;
+  string name = 2;
+}
+
+message PutRockResponse {
+  Rock rock = 1;
+}
+
+message DeleteRockRequest {
+  string rock_id = 1;
+}
+
+message DeleteRockResponse {}
+
+service RockStoreService {
+  rpc GetRock(GetRockRequest) returns (GetRockResponse) {}
+  rpc PutRock(PutRockRequest) returns (PutRockResponse) {}
+  rpc DeleteRock(DeleteRockRequest) returns (DeleteRockResponse) {}
+}
