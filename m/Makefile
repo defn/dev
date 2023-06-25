@@ -4,6 +4,9 @@ build:
 all:
 	b pass build //...
 
+todo:
+	@(bazel cquery //... --output=files | grep -v ^bazel-; git ls-files .) | sort | uniq -c | grep '^ *1 ' | awk '{print $$2}'
+
 ci:
 	buildkite-agent start --build-path /cache/buildkite --token "$$(pass BUILDKITE_AGENT_TOKEN)"
 
