@@ -53,11 +53,11 @@ const (
 // BeanStoreServiceClient is a client for the defn.dev.legumes.v1.BeanStoreService service.
 type BeanStoreServiceClient interface {
 	// get the beans
-	GetBean(context.Context, *connect_go.Request[v1.Bean]) (*connect_go.Response[v1.Bean], error)
+	GetBean(context.Context, *connect_go.Request[v1.GetBeanRequest]) (*connect_go.Response[v1.GetBeanResponse], error)
 	// put the beans
-	PutBean(context.Context, *connect_go.Request[v1.Bean]) (*connect_go.Response[v1.Bean], error)
+	PutBean(context.Context, *connect_go.Request[v1.PutBeanRequest]) (*connect_go.Response[v1.PutBeanResponse], error)
 	// del the beans
-	DeleteBean(context.Context, *connect_go.Request[v1.Bean]) (*connect_go.Response[v1.Bean], error)
+	DeleteBean(context.Context, *connect_go.Request[v1.DeleteBeanRequest]) (*connect_go.Response[v1.DeleteBeanResponse], error)
 }
 
 // NewBeanStoreServiceClient constructs a client for the defn.dev.legumes.v1.BeanStoreService
@@ -70,17 +70,17 @@ type BeanStoreServiceClient interface {
 func NewBeanStoreServiceClient(httpClient connect_go.HTTPClient, baseURL string, opts ...connect_go.ClientOption) BeanStoreServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &beanStoreServiceClient{
-		getBean: connect_go.NewClient[v1.Bean, v1.Bean](
+		getBean: connect_go.NewClient[v1.GetBeanRequest, v1.GetBeanResponse](
 			httpClient,
 			baseURL+BeanStoreServiceGetBeanProcedure,
 			opts...,
 		),
-		putBean: connect_go.NewClient[v1.Bean, v1.Bean](
+		putBean: connect_go.NewClient[v1.PutBeanRequest, v1.PutBeanResponse](
 			httpClient,
 			baseURL+BeanStoreServicePutBeanProcedure,
 			opts...,
 		),
-		deleteBean: connect_go.NewClient[v1.Bean, v1.Bean](
+		deleteBean: connect_go.NewClient[v1.DeleteBeanRequest, v1.DeleteBeanResponse](
 			httpClient,
 			baseURL+BeanStoreServiceDeleteBeanProcedure,
 			opts...,
@@ -90,34 +90,34 @@ func NewBeanStoreServiceClient(httpClient connect_go.HTTPClient, baseURL string,
 
 // beanStoreServiceClient implements BeanStoreServiceClient.
 type beanStoreServiceClient struct {
-	getBean    *connect_go.Client[v1.Bean, v1.Bean]
-	putBean    *connect_go.Client[v1.Bean, v1.Bean]
-	deleteBean *connect_go.Client[v1.Bean, v1.Bean]
+	getBean    *connect_go.Client[v1.GetBeanRequest, v1.GetBeanResponse]
+	putBean    *connect_go.Client[v1.PutBeanRequest, v1.PutBeanResponse]
+	deleteBean *connect_go.Client[v1.DeleteBeanRequest, v1.DeleteBeanResponse]
 }
 
 // GetBean calls defn.dev.legumes.v1.BeanStoreService.GetBean.
-func (c *beanStoreServiceClient) GetBean(ctx context.Context, req *connect_go.Request[v1.Bean]) (*connect_go.Response[v1.Bean], error) {
+func (c *beanStoreServiceClient) GetBean(ctx context.Context, req *connect_go.Request[v1.GetBeanRequest]) (*connect_go.Response[v1.GetBeanResponse], error) {
 	return c.getBean.CallUnary(ctx, req)
 }
 
 // PutBean calls defn.dev.legumes.v1.BeanStoreService.PutBean.
-func (c *beanStoreServiceClient) PutBean(ctx context.Context, req *connect_go.Request[v1.Bean]) (*connect_go.Response[v1.Bean], error) {
+func (c *beanStoreServiceClient) PutBean(ctx context.Context, req *connect_go.Request[v1.PutBeanRequest]) (*connect_go.Response[v1.PutBeanResponse], error) {
 	return c.putBean.CallUnary(ctx, req)
 }
 
 // DeleteBean calls defn.dev.legumes.v1.BeanStoreService.DeleteBean.
-func (c *beanStoreServiceClient) DeleteBean(ctx context.Context, req *connect_go.Request[v1.Bean]) (*connect_go.Response[v1.Bean], error) {
+func (c *beanStoreServiceClient) DeleteBean(ctx context.Context, req *connect_go.Request[v1.DeleteBeanRequest]) (*connect_go.Response[v1.DeleteBeanResponse], error) {
 	return c.deleteBean.CallUnary(ctx, req)
 }
 
 // BeanStoreServiceHandler is an implementation of the defn.dev.legumes.v1.BeanStoreService service.
 type BeanStoreServiceHandler interface {
 	// get the beans
-	GetBean(context.Context, *connect_go.Request[v1.Bean]) (*connect_go.Response[v1.Bean], error)
+	GetBean(context.Context, *connect_go.Request[v1.GetBeanRequest]) (*connect_go.Response[v1.GetBeanResponse], error)
 	// put the beans
-	PutBean(context.Context, *connect_go.Request[v1.Bean]) (*connect_go.Response[v1.Bean], error)
+	PutBean(context.Context, *connect_go.Request[v1.PutBeanRequest]) (*connect_go.Response[v1.PutBeanResponse], error)
 	// del the beans
-	DeleteBean(context.Context, *connect_go.Request[v1.Bean]) (*connect_go.Response[v1.Bean], error)
+	DeleteBean(context.Context, *connect_go.Request[v1.DeleteBeanRequest]) (*connect_go.Response[v1.DeleteBeanResponse], error)
 }
 
 // NewBeanStoreServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -148,14 +148,14 @@ func NewBeanStoreServiceHandler(svc BeanStoreServiceHandler, opts ...connect_go.
 // UnimplementedBeanStoreServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedBeanStoreServiceHandler struct{}
 
-func (UnimplementedBeanStoreServiceHandler) GetBean(context.Context, *connect_go.Request[v1.Bean]) (*connect_go.Response[v1.Bean], error) {
+func (UnimplementedBeanStoreServiceHandler) GetBean(context.Context, *connect_go.Request[v1.GetBeanRequest]) (*connect_go.Response[v1.GetBeanResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("defn.dev.legumes.v1.BeanStoreService.GetBean is not implemented"))
 }
 
-func (UnimplementedBeanStoreServiceHandler) PutBean(context.Context, *connect_go.Request[v1.Bean]) (*connect_go.Response[v1.Bean], error) {
+func (UnimplementedBeanStoreServiceHandler) PutBean(context.Context, *connect_go.Request[v1.PutBeanRequest]) (*connect_go.Response[v1.PutBeanResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("defn.dev.legumes.v1.BeanStoreService.PutBean is not implemented"))
 }
 
-func (UnimplementedBeanStoreServiceHandler) DeleteBean(context.Context, *connect_go.Request[v1.Bean]) (*connect_go.Response[v1.Bean], error) {
+func (UnimplementedBeanStoreServiceHandler) DeleteBean(context.Context, *connect_go.Request[v1.DeleteBeanRequest]) (*connect_go.Response[v1.DeleteBeanResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("defn.dev.legumes.v1.BeanStoreService.DeleteBean is not implemented"))
 }

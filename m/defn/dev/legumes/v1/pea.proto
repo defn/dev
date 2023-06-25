@@ -34,14 +34,38 @@ message Pea {
   string sha256 = 2;
 }
 
+message GetPeaRequest {
+  Pea req = 1;
+}
+
+message GetPeaResponse {
+  Pea req = 1;
+}
+
+message PutPeaRequest {
+  Pea req = 1;
+}
+
+message PutPeaResponse {
+  Pea req = 1;
+}
+
+message DeletePeaRequest {
+  Pea req = 1;
+}
+
+message DeletePeaResponse {
+  Pea req = 1;
+}
+
 // cool bean service
 service PeaStoreService {
   // get the peas
-  rpc GetPea(Pea) returns (Pea) {}
+  rpc GetPea(GetPeaRequest) returns (GetPeaResponse) {}
 
   // put the peas
-  rpc PutPea(Pea) returns (Pea) {}
+  rpc PutPea(PutPeaRequest) returns (PutPeaResponse) {}
 
   // del the peas
-  rpc DeletePea(Pea) returns (Pea) {}
+  rpc DeletePea(DeletePeaRequest) returns (DeletePeaResponse) {}
  }

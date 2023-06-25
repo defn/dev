@@ -51,11 +51,11 @@ const (
 // PeaStoreServiceClient is a client for the defn.dev.legumes.v1.PeaStoreService service.
 type PeaStoreServiceClient interface {
 	// get the peas
-	GetPea(context.Context, *connect_go.Request[v1.Pea]) (*connect_go.Response[v1.Pea], error)
+	GetPea(context.Context, *connect_go.Request[v1.GetPeaRequest]) (*connect_go.Response[v1.GetPeaResponse], error)
 	// put the peas
-	PutPea(context.Context, *connect_go.Request[v1.Pea]) (*connect_go.Response[v1.Pea], error)
+	PutPea(context.Context, *connect_go.Request[v1.PutPeaRequest]) (*connect_go.Response[v1.PutPeaResponse], error)
 	// del the peas
-	DeletePea(context.Context, *connect_go.Request[v1.Pea]) (*connect_go.Response[v1.Pea], error)
+	DeletePea(context.Context, *connect_go.Request[v1.DeletePeaRequest]) (*connect_go.Response[v1.DeletePeaResponse], error)
 }
 
 // NewPeaStoreServiceClient constructs a client for the defn.dev.legumes.v1.PeaStoreService service.
@@ -68,17 +68,17 @@ type PeaStoreServiceClient interface {
 func NewPeaStoreServiceClient(httpClient connect_go.HTTPClient, baseURL string, opts ...connect_go.ClientOption) PeaStoreServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &peaStoreServiceClient{
-		getPea: connect_go.NewClient[v1.Pea, v1.Pea](
+		getPea: connect_go.NewClient[v1.GetPeaRequest, v1.GetPeaResponse](
 			httpClient,
 			baseURL+PeaStoreServiceGetPeaProcedure,
 			opts...,
 		),
-		putPea: connect_go.NewClient[v1.Pea, v1.Pea](
+		putPea: connect_go.NewClient[v1.PutPeaRequest, v1.PutPeaResponse](
 			httpClient,
 			baseURL+PeaStoreServicePutPeaProcedure,
 			opts...,
 		),
-		deletePea: connect_go.NewClient[v1.Pea, v1.Pea](
+		deletePea: connect_go.NewClient[v1.DeletePeaRequest, v1.DeletePeaResponse](
 			httpClient,
 			baseURL+PeaStoreServiceDeletePeaProcedure,
 			opts...,
@@ -88,34 +88,34 @@ func NewPeaStoreServiceClient(httpClient connect_go.HTTPClient, baseURL string, 
 
 // peaStoreServiceClient implements PeaStoreServiceClient.
 type peaStoreServiceClient struct {
-	getPea    *connect_go.Client[v1.Pea, v1.Pea]
-	putPea    *connect_go.Client[v1.Pea, v1.Pea]
-	deletePea *connect_go.Client[v1.Pea, v1.Pea]
+	getPea    *connect_go.Client[v1.GetPeaRequest, v1.GetPeaResponse]
+	putPea    *connect_go.Client[v1.PutPeaRequest, v1.PutPeaResponse]
+	deletePea *connect_go.Client[v1.DeletePeaRequest, v1.DeletePeaResponse]
 }
 
 // GetPea calls defn.dev.legumes.v1.PeaStoreService.GetPea.
-func (c *peaStoreServiceClient) GetPea(ctx context.Context, req *connect_go.Request[v1.Pea]) (*connect_go.Response[v1.Pea], error) {
+func (c *peaStoreServiceClient) GetPea(ctx context.Context, req *connect_go.Request[v1.GetPeaRequest]) (*connect_go.Response[v1.GetPeaResponse], error) {
 	return c.getPea.CallUnary(ctx, req)
 }
 
 // PutPea calls defn.dev.legumes.v1.PeaStoreService.PutPea.
-func (c *peaStoreServiceClient) PutPea(ctx context.Context, req *connect_go.Request[v1.Pea]) (*connect_go.Response[v1.Pea], error) {
+func (c *peaStoreServiceClient) PutPea(ctx context.Context, req *connect_go.Request[v1.PutPeaRequest]) (*connect_go.Response[v1.PutPeaResponse], error) {
 	return c.putPea.CallUnary(ctx, req)
 }
 
 // DeletePea calls defn.dev.legumes.v1.PeaStoreService.DeletePea.
-func (c *peaStoreServiceClient) DeletePea(ctx context.Context, req *connect_go.Request[v1.Pea]) (*connect_go.Response[v1.Pea], error) {
+func (c *peaStoreServiceClient) DeletePea(ctx context.Context, req *connect_go.Request[v1.DeletePeaRequest]) (*connect_go.Response[v1.DeletePeaResponse], error) {
 	return c.deletePea.CallUnary(ctx, req)
 }
 
 // PeaStoreServiceHandler is an implementation of the defn.dev.legumes.v1.PeaStoreService service.
 type PeaStoreServiceHandler interface {
 	// get the peas
-	GetPea(context.Context, *connect_go.Request[v1.Pea]) (*connect_go.Response[v1.Pea], error)
+	GetPea(context.Context, *connect_go.Request[v1.GetPeaRequest]) (*connect_go.Response[v1.GetPeaResponse], error)
 	// put the peas
-	PutPea(context.Context, *connect_go.Request[v1.Pea]) (*connect_go.Response[v1.Pea], error)
+	PutPea(context.Context, *connect_go.Request[v1.PutPeaRequest]) (*connect_go.Response[v1.PutPeaResponse], error)
 	// del the peas
-	DeletePea(context.Context, *connect_go.Request[v1.Pea]) (*connect_go.Response[v1.Pea], error)
+	DeletePea(context.Context, *connect_go.Request[v1.DeletePeaRequest]) (*connect_go.Response[v1.DeletePeaResponse], error)
 }
 
 // NewPeaStoreServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -146,14 +146,14 @@ func NewPeaStoreServiceHandler(svc PeaStoreServiceHandler, opts ...connect_go.Ha
 // UnimplementedPeaStoreServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedPeaStoreServiceHandler struct{}
 
-func (UnimplementedPeaStoreServiceHandler) GetPea(context.Context, *connect_go.Request[v1.Pea]) (*connect_go.Response[v1.Pea], error) {
+func (UnimplementedPeaStoreServiceHandler) GetPea(context.Context, *connect_go.Request[v1.GetPeaRequest]) (*connect_go.Response[v1.GetPeaResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("defn.dev.legumes.v1.PeaStoreService.GetPea is not implemented"))
 }
 
-func (UnimplementedPeaStoreServiceHandler) PutPea(context.Context, *connect_go.Request[v1.Pea]) (*connect_go.Response[v1.Pea], error) {
+func (UnimplementedPeaStoreServiceHandler) PutPea(context.Context, *connect_go.Request[v1.PutPeaRequest]) (*connect_go.Response[v1.PutPeaResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("defn.dev.legumes.v1.PeaStoreService.PutPea is not implemented"))
 }
 
-func (UnimplementedPeaStoreServiceHandler) DeletePea(context.Context, *connect_go.Request[v1.Pea]) (*connect_go.Response[v1.Pea], error) {
+func (UnimplementedPeaStoreServiceHandler) DeletePea(context.Context, *connect_go.Request[v1.DeletePeaRequest]) (*connect_go.Response[v1.DeletePeaResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("defn.dev.legumes.v1.PeaStoreService.DeletePea is not implemented"))
 }
