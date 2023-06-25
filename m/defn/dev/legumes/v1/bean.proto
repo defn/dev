@@ -34,14 +34,38 @@ message Bean {
   string sha256 = 2;
 }
 
+message GetBeanRequest {
+  Bean req = 1;
+}
+
+message GetBeanResponse {
+  Bean req = 1;
+}
+
+message PutBeanRequest {
+  Bean req = 1;
+}
+
+message PutBeanResponse {
+  Bean req = 1;
+}
+
+message DeleteBeanRequest {
+  Bean req = 1;
+}
+
+message DeleteBeanResponse {
+  Bean req = 1;
+}
+
 // cool bean service
 service BeanStoreService {
   // get the beans
-  rpc GetBean(Bean) returns (Bean) {}
+  rpc GetBean(GetBeanRequest) returns (GetBeanResponse) {}
 
   // put the beans
-  rpc PutBean(Bean) returns (Bean) {}
+  rpc PutBean(PutBeanRequest) returns (PutBeanResponse) {}
 
   // del the beans
-  rpc DeleteBean(Bean) returns (Bean) {}
+  rpc DeleteBean(DeleteBeanRequest) returns (DeleteBeanResponse) {}
  }
