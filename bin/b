@@ -67,6 +67,18 @@ function main {
 
 				bazel build --sandbox_writable_path=/nix --sandbox_writable_path="${HOME}/.cache/nix" --sandbox_writable_path="${HOME}/.earthly" "${rule}"
 				;;
+			test)
+				shift
+
+				if [[ $# == 0 ]]; then
+					rule="/..."
+				else
+					rule="$(b | fzf --query="$1" --select-1)"
+					shift
+				fi
+
+				bazel test --sandbox_writable_path=/nix --sandbox_writable_path="${HOME}/.cache/nix" --sandbox_writable_path="${HOME}/.earthly" "${rule}"
+				;;
 			outputs)
 				shift
 
@@ -139,7 +151,8 @@ function main {
 				;;
 			pass)
 				shift
-				bazel "$@"
+				cmd="$1"; shift
+				bazel "${cmd}" --sandbox_writable_path=/nix --sandbox_writable_path="${HOME}/.cache/nix" --sandbox_writable_path="${HOME}/.earthly" "$@"
 				;;
 			*)
 				bazel "$@"

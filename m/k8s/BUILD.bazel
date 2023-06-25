@@ -20,18 +20,22 @@ cue_export(
 )
 
 # https://www.aspect.dev/blog/bazel-can-write-to-the-source-folder
+_GEN = {
+    "app_config.json": "app_config"
+}
 _GENERATED = {
-    "k8s/app_config.json": "//k8s:app_config"
+    "{}/{}".format(package_name(),k): "//{}:{}".format(package_name(),v)
+    for [k, v] in _GEN.items()
 }
 
 [
     diff_test(
         name = "check_" + k,
-        failure_message = "Please run: b run //:update_repo",
+        failure_message = "Please run: b run //{}:update_repo".format(package_name()),
         file1 = k,
         file2 = v,
     )
-    for [k, v] in _GENERATED.items()
+    for [k, v] in _GEN.items()
 ]
 
 write_file(
