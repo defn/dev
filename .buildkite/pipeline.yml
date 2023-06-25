@@ -1,2 +1,2 @@
 steps:
-  - command: cd m && ../bin/b build
+  - command: cd m && nix develop --command ../bin/b build
