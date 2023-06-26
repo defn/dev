@@ -14,7 +14,7 @@ spec:
     source: https://github.com/ppm.git//app/tf/m/egg?ref=main
   taskOptions:
     - for:
-        - "*"
+        - '*'
       env:
         - name: TF_VAR_egg
           value: rosie

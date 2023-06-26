@@ -11,7 +11,7 @@ spec:
     source: https://github.com/defn/dev/m.git//tf/chicken?ref=main
   taskOptions:
     - for:
-        - "*"
+        - '*'
       env:
         - name: TF_VAR_chicken
           value: rocky
