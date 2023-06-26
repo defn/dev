@@ -123,7 +123,7 @@ import "encoding/yaml"
 			source: {
 				repoURL:        "https://github.com/defn/dev"
 				targetRevision: "main"
-				path:           "m/r/\(app_name)"
+				path:           "m/k/r/\(app_name)"
 			}
 
 			syncPolicy: {
@@ -147,7 +147,7 @@ import "encoding/yaml"
 	env: {
 		// ex: k/k3d-global
 		// ex: k/vcluster-global-vc0
-		spec: source: path: "m/r/\(type)-\(name)"
+		spec: source: path: "m/k/r/\(type)-\(name)"
 
 		spec: destination: name: "in-cluster"
 	}

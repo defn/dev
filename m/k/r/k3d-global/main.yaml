@@ -10,7 +10,7 @@ spec:
     name: k3d-global
   project: default
   source:
-    path: m/r/argo-cd
+    path: m/k/r/argo-cd
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -32,7 +32,7 @@ spec:
     namespace: argo-workflows
   project: default
   source:
-    path: m/r/argo-workflows
+    path: m/k/r/argo-workflows
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -54,7 +54,7 @@ spec:
     name: k3d-global
   project: default
   source:
-    path: m/r/cert-manager
+    path: m/k/r/cert-manager
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -75,7 +75,7 @@ spec:
     name: k3d-global
   project: default
   source:
-    path: m/r/cilium
+    path: m/k/r/cilium
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -96,7 +96,7 @@ spec:
     name: k3d-global
   project: default
   source:
-    path: m/r/coredns
+    path: m/k/r/coredns
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -117,7 +117,7 @@ spec:
     name: k3d-global
   project: default
   source:
-    path: m/r/defn
+    path: m/k/r/defn
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -138,7 +138,7 @@ spec:
     name: k3d-global
   project: default
   source:
-    path: m/r/defn-shared
+    path: m/k/r/defn-shared
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -159,7 +159,7 @@ spec:
     name: k3d-global
   project: default
   source:
-    path: m/r/external-dns
+    path: m/k/r/external-dns
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -180,7 +180,7 @@ spec:
     name: k3d-global
   project: default
   source:
-    path: m/r/external-secrets-operator
+    path: m/k/r/external-secrets-operator
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -201,7 +201,7 @@ spec:
     name: k3d-global
   project: default
   source:
-    path: m/r/global-vc0
+    path: m/k/r/global-vc0
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -222,7 +222,7 @@ spec:
     name: k3d-global
   project: default
   source:
-    path: m/r/hello
+    path: m/k/r/hello
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -243,7 +243,7 @@ spec:
     name: k3d-global
   project: default
   source:
-    path: m/r/knative
+    path: m/k/r/knative
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -264,7 +264,7 @@ spec:
     name: k3d-global
   project: default
   source:
-    path: m/r/kourier
+    path: m/k/r/kourier
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -285,7 +285,7 @@ spec:
     name: k3d-global
   project: default
   source:
-    path: m/r/kyverno
+    path: m/k/r/kyverno
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -307,7 +307,7 @@ spec:
     name: k3d-global
   project: default
   source:
-    path: m/r/pod-identity-webhook
+    path: m/k/r/pod-identity-webhook
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -328,7 +328,7 @@ spec:
     name: k3d-global
   project: default
   source:
-    path: m/r/k3d-global-secrets-store
+    path: m/k/r/k3d-global-secrets-store
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -349,7 +349,7 @@ spec:
     name: k3d-global
   project: default
   source:
-    path: m/r/tfo
+    path: m/k/r/tfo
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -370,7 +370,7 @@ spec:
     name: k3d-global
   project: default
   source:
-    path: m/r/traefik
+    path: m/k/r/traefik
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
