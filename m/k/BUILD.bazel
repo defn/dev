@@ -7,6 +7,8 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+exclude=["BUILD.bazel", "r", "gen_release.sh"]
+
 [
     genrule(
         name = "release_{}".format(k),
@@ -17,13 +19,13 @@ filegroup(
         cmd = "$(location gen_release_script) $(location {}) $@".format(k),
         tools = ["gen_release_script"],
     )
-    for k in glob(["*"], exclude=["BUILD.bazel"], exclude_directories=0)
+    for k in glob(["*"], exclude=exclude, exclude_directories=0)
 ]
 
 copy_files(
     name = "outputs_release",
     gen = {
         "r/{}/main.yaml".format(k): "r/{}/main.yaml".format(k)
-        for k in glob(["*"], exclude=["BUILD.bazel", "r", "gen_release.sh"], exclude_directories=0)
+        for k in glob(["*"], exclude=exclude, exclude_directories=0)
     },
 )
