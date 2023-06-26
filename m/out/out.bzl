@@ -4,7 +4,7 @@
 load("@bazel_skylib//rules:diff_test.bzl", "diff_test")
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
 
-def copy_outputs(name, gen, visibility = None):
+def copy_files(name, gen, visibility = None):
     """Something
 
     Args:
