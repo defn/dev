@@ -1,11 +1,9 @@
 SHELL := /bin/bash
 
 build:
-# generate app.json
-	b run update__repo
-# generate ../k
-#$(MAKE) make_generate_release
-#$(MAKE) make_add_generated
+	b run outputs_config__update
+	b run outputs_kustomize__update
+	$(MAKE) make_add_generated
 
 update:
 	helm template karpenter --version v0.28.0 --include-crds -f karpenter-values.yaml oci://public.ecr.aws/karpenter/karpenter | tail -n +3 > ../k/karpenter/karpenter.yaml
