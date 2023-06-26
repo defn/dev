@@ -91,7 +91,7 @@ spec:
       containers:
       - args:
         - -P
-        - http://backend:3001
+        - http://backend_kuma-demo_svc_3001.mesh
         image: kvn0218/kuma-demo-fe:latest
         imagePullPolicy: IfNotPresent
         name: kuma-fe
@@ -118,11 +118,15 @@ spec:
       containers:
       - env:
         - name: POSTGRES_HOST
-          value: postgres
+          value: postgres_kuma-demo_svc_5432.mesh
+        - name: POSTGRES_PORT_NUM
+          value: "80"
         - name: SPECIAL_OFFER
           value: "false"
         - name: REDIS_HOST
-          value: redis
+          value: redis_kuma-demo_svc_6379.mesh
+        - name: REDIS_PORT
+          value: "80"
         image: kvn0218/kuma-demo-be:latest
         imagePullPolicy: IfNotPresent
         name: kuma-be
@@ -151,9 +155,13 @@ spec:
       containers:
       - env:
         - name: POSTGRES_HOST
-          value: postgres
+          value: postgres_kuma-demo_svc_5432.mesh
+        - name: POSTGRES_PORT_NUM
+          value: "80"
         - name: REDIS_HOST
-          value: redis
+          value: redis_kuma-demo_svc_6379.mesh
+        - name: REDIS_PORT
+          value: "80"
         image: kvn0218/kuma-demo-be:latest
         imagePullPolicy: IfNotPresent
         name: kuma-be
@@ -182,11 +190,15 @@ spec:
       containers:
       - env:
         - name: POSTGRES_HOST
-          value: postgres
+          value: postgres_kuma-demo_svc_5432.mesh
+        - name: POSTGRES_PORT_NUM
+          value: "80"
         - name: TOTAL_OFFER
           value: "2"
         - name: REDIS_HOST
-          value: redis
+          value: redis_kuma-demo_svc_6379.mesh
+        - name: REDIS_PORT
+          value: "80"
         image: kvn0218/kuma-demo-be:latest
         imagePullPolicy: IfNotPresent
         name: kuma-be
