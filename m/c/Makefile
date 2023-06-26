@@ -1,7 +1,9 @@
 SHELL := /bin/bash
 
 build:
-	$(MAKE) make_generate_kustomize
+# generate app.json
+	b run update__repo
+# generate ../k
 	$(MAKE) make_generate_release
 	$(MAKE) make_add_generated
 
