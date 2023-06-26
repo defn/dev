@@ -12,9 +12,9 @@ metadata:
   namespace: kuma-demo
 spec:
   ports:
-    - appProtocol: http
-      port: 5000
-      protocol: TCP
+  - appProtocol: http
+    port: 5000
+    protocol: TCP
   selector:
     app: demo-app
 ---
@@ -25,8 +25,8 @@ metadata:
   namespace: kuma-demo
 spec:
   ports:
-    - port: 6379
-      protocol: TCP
+  - port: 6379
+    protocol: TCP
   selector:
     app: redis
 ---
@@ -46,20 +46,20 @@ spec:
         app: demo-app
     spec:
       containers:
-        - env:
-            - name: REDIS_HOST
-              value: redis.kuma-demo.svc.cluster.local
-            - name: REDIS_PORT
-              value: "6379"
-            - name: APP_VERSION
-              value: "1.0"
-            - name: APP_COLOR
-              value: "#efefef"
-          image: kumahq/kuma-demo
-          name: demo-app
-          ports:
-            - containerPort: 5000
-              name: http
+      - env:
+        - name: REDIS_HOST
+          value: redis.kuma-demo.svc.cluster.local
+        - name: REDIS_PORT
+          value: "6379"
+        - name: APP_VERSION
+          value: "1.0"
+        - name: APP_COLOR
+          value: '#efefef'
+        image: kumahq/kuma-demo
+        name: demo-app
+        ports:
+        - containerPort: 5000
+          name: http
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -77,21 +77,21 @@ spec:
         app: redis
     spec:
       containers:
-        - image: redis
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                  - /usr/local/bin/redis-cli
-                  - set
-                  - zone
-                  - local
-            preStop:
-              exec:
-                command:
-                  - /bin/sleep
-                  - "30"
-          name: redis
-          ports:
-            - containerPort: 6379
-              name: tcp
+      - image: redis
+        lifecycle:
+          postStart:
+            exec:
+              command:
+              - /usr/local/bin/redis-cli
+              - set
+              - zone
+              - local
+          preStop:
+            exec:
+              command:
+              - /bin/sleep
+              - "30"
+        name: redis
+        ports:
+        - containerPort: 6379
+          name: tcp

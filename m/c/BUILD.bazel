@@ -42,7 +42,7 @@ genrule(
 )
 
 copy_files(
-    name = "outputs_kustomize_outputs",
+    name = "outputs_kustomize",
     gen = {
         "o": "o",
     },

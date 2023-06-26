@@ -11,13 +11,13 @@ spec:
   template:
     spec:
       containers:
-        - args:
-            - test "completed" == "$(kubectl get tf rocky-egg -o json | jq -r '.status.phase')"
-          command:
-            - bash
-            - -c
-          image: defn/dev:kubectl
-          name: meh
+      - args:
+        - test "completed" == "$(kubectl get tf rocky-egg -o json | jq -r '.status.phase')"
+        command:
+        - bash
+        - -c
+        image: defn/dev:kubectl
+        name: meh
       restartPolicy: Never
       serviceAccountName: default
 ---
@@ -38,15 +38,15 @@ spec:
   ignoreDelete: true
   keepLatestPodsOnly: true
   outputsToOmit:
-    - "0"
+  - "0"
   scmAuthMethods: []
   serviceAccount: default
   taskOptions:
-    - env:
-        - name: TF_VAR_chicken
-          value: rocky
-      for:
-        - "*"
+  - env:
+    - name: TF_VAR_chicken
+      value: rocky
+    for:
+    - '*'
   terraformModule:
     source: https://github.com/defn/dev/m.git//tf/chicken?ref=main
   terraformVersion: 1.0.0
@@ -60,19 +60,18 @@ metadata:
   name: rocky-egg
   namespace: default
 spec:
-  backend:
-    "terraform {\n\tbackend \"kubernetes\" {\n\t\tin_cluster_config = true\n\t\tsecret_suffix
+  backend: "terraform {\n\tbackend \"kubernetes\" {\n\t\tin_cluster_config = true\n\t\tsecret_suffix
     \    = \"rocky-egg\"\n\t\tnamespace         = \"default\"\n\t}\n}"
   ignoreDelete: true
   keepLatestPodsOnly: true
   scmAuthMethods: []
   serviceAccount: default
   taskOptions:
-    - env:
-        - name: TF_VAR_egg
-          value: rocky
-      for:
-        - "*"
+  - env:
+    - name: TF_VAR_egg
+      value: rocky
+    for:
+    - '*'
   terraformModule:
     source: https://github.com/ppm.git//app/tf/m/egg?ref=main
   terraformVersion: 1.0.0

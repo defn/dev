@@ -11,20 +11,20 @@ metadata:
 spec:
   arguments:
     parameters:
-      - name: message
-        value: world
+    - name: message
+      value: world
   entrypoint: whalesay
   templates:
-    - container:
-        args:
-          - "{{inputs.parameters.message}}"
-        command:
-          - cowsay
-        image: docker/whalesay
-      inputs:
-        parameters:
-          - name: message
-      name: whalesay
+  - container:
+      args:
+      - '{{inputs.parameters.message}}'
+      command:
+      - cowsay
+      image: docker/whalesay
+    inputs:
+      parameters:
+      - name: message
+    name: whalesay
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -33,8 +33,8 @@ metadata:
   namespace: traefik
 spec:
   dnsNames:
-    - "*.defn.run"
-    - "*.default.defn.run"
+  - '*.defn.run'
+  - '*.default.defn.run'
   issuerRef:
     group: cert-manager.io
     kind: ClusterIssuer

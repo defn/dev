@@ -15,18 +15,13 @@ lint:
         - m/gen/**
         - m/**/cdktf.out/**
         - m/**/*.gen.yaml
-        - m/r/**
         - m/e/**
-        - m/k/*/kustomization.yaml
-        - m/k/*/resource-*.yaml
-        - m/k/*/patch-*.yaml
-        - m/k/**/local/**
+        - m/k/**
         - m/**/*_go_gen.cue
         - "**/node_modules/**"
         - m/go_deps.bzl
         - m/k3d-tailscale-operator.yaml
         - m/**/config.json
-        - m/k/karpenter/karpenter.yaml
   enabled:
     - actionlint@1.6.24
     - black@23.3.0

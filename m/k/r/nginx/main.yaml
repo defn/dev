@@ -16,9 +16,9 @@ metadata:
 spec:
   externalTrafficPolicy: Cluster
   ports:
-    - name: http
-      port: 80
-      targetPort: http
+  - name: http
+    port: 80
+    targetPort: http
   selector:
     app.kubernetes.io/instance: nginx
     app.kubernetes.io/name: nginx
@@ -58,47 +58,47 @@ spec:
         podAffinity: null
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-            - podAffinityTerm:
-                labelSelector:
-                  matchLabels:
-                    app.kubernetes.io/instance: nginx
-                    app.kubernetes.io/name: nginx
-                topologyKey: kubernetes.io/hostname
-              weight: 1
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/instance: nginx
+                  app.kubernetes.io/name: nginx
+              topologyKey: kubernetes.io/hostname
+            weight: 1
       automountServiceAccountToken: false
       containers:
-        - env:
-            - name: BITNAMI_DEBUG
-              value: "false"
-            - name: NGINX_HTTP_PORT_NUMBER
-              value: "8080"
-          envFrom: null
-          image: docker.io/bitnami/nginx:1.25.1-debian-11-r0
-          imagePullPolicy: IfNotPresent
-          livenessProbe:
-            failureThreshold: 6
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            successThreshold: 1
-            tcpSocket:
-              port: http
-            timeoutSeconds: 5
-          name: nginx
-          ports:
-            - containerPort: 8080
-              name: http
-          readinessProbe:
-            failureThreshold: 3
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            successThreshold: 1
-            tcpSocket:
-              port: http
-            timeoutSeconds: 3
-          resources:
-            limits: {}
-            requests: {}
-          volumeMounts: null
+      - env:
+        - name: BITNAMI_DEBUG
+          value: "false"
+        - name: NGINX_HTTP_PORT_NUMBER
+          value: "8080"
+        envFrom: null
+        image: docker.io/bitnami/nginx:1.25.1-debian-11-r0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 6
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: http
+          timeoutSeconds: 5
+        name: nginx
+        ports:
+        - containerPort: 8080
+          name: http
+        readinessProbe:
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          tcpSocket:
+            port: http
+          timeoutSeconds: 3
+        resources:
+          limits: {}
+          requests: {}
+        volumeMounts: null
       hostIPC: false
       hostNetwork: false
       initContainers: null

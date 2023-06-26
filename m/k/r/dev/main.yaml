@@ -7,9 +7,9 @@ roleRef:
   kind: ClusterRole
   name: cluster-admin
 subjects:
-  - kind: ServiceAccount
-    name: default
-    namespace: default
+- kind: ServiceAccount
+  name: default
+  namespace: default
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -20,9 +20,9 @@ roleRef:
   kind: ClusterRole
   name: system:auth-delegator
 subjects:
-  - kind: ServiceAccount
-    name: default
-    namespace: default
+- kind: ServiceAccount
+  name: default
+  namespace: default
 ---
 apiVersion: v1
 kind: Service
@@ -31,9 +31,9 @@ metadata:
   namespace: default
 spec:
   ports:
-    - port: 80
-      protocol: TCP
-      targetPort: 8888
+  - port: 80
+    protocol: TCP
+    targetPort: 8888
   selector:
     app: dev
   type: ClusterIP
@@ -55,25 +55,25 @@ spec:
         app: dev
     spec:
       containers:
-        - args:
-            - bash
-            - -c
-            - exec ~/bin/e code-server --bind-addr 0.0.0.0:8888 --disable-telemetry
-          command:
-            - /usr/bin/tini
-            - --
-          env:
-            - name: PASSWORD
-              value: admin
-          image: 169.254.32.1:5000/workspace
-          imagePullPolicy: Always
-          name: code-server
-          securityContext:
-            privileged: true
-          tty: true
-          volumeMounts:
-            - mountPath: /work
-              name: work
-      volumes:
-        - emptyDir: {}
+      - args:
+        - bash
+        - -c
+        - exec ~/bin/e code-server --bind-addr 0.0.0.0:8888 --disable-telemetry
+        command:
+        - /usr/bin/tini
+        - --
+        env:
+        - name: PASSWORD
+          value: admin
+        image: 169.254.32.1:5000/workspace
+        imagePullPolicy: Always
+        name: code-server
+        securityContext:
+          privileged: true
+        tty: true
+        volumeMounts:
+        - mountPath: /work
           name: work
+      volumes:
+      - emptyDir: {}
+        name: work
