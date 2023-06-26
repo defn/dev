@@ -70,11 +70,3 @@ skopeo_copy(
     remote_tags = ["latest"],
     repository = "169.254.32.1:5000/defn/dev/c",
 )
-
-copy_files(
-    name = "outputs_config",
-    gen = {
-        "config.json": "config",
-    },
-)
-
