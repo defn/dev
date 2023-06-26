@@ -28,4 +28,5 @@ copy_files(
         "r/{}/main.yaml".format(k): "r/{}/main.yaml".format(k)
         for k in glob(["*"], exclude=exclude, exclude_directories=0)
     },
+    dir= "."
 )
