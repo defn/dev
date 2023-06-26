@@ -15,7 +15,7 @@ nix_flake(
 
 # app configuration
 cue_export(
-    name = "app",
+    name = "config",
     srcs = [
         "flake_cue",
         "//cue.mod/gen/k8s.io:k8s_cue",
@@ -24,10 +24,35 @@ cue_export(
     visibility = ["//visibility:public"],
 )
 
+# kustomize configuration
+filegroup(
+    name = "gen_kustomize_script",
+    srcs = ["gen_kustomize.sh"],
+    visibility = ["//visibility:public"],
+)
+
+genrule(
+    name = "kustomize",
+    srcs = [
+        "config"
+    ],
+    outs = ["o"],
+    cmd = "$(location gen_kustomize_script) $(location config) $@",
+    tools = ["gen_kustomize_script"],
+)
+
+copy_files(
+    name = "outputs_kustomize_outputs",
+    gen = {
+        "o": "o",
+    },
+    dir = "."
+)
+
 # oci
 pkg_tar(
     name = "c_tar",
-    srcs = ["app"],
+    srcs = ["config"],
     package_dir = "/usr/share/nginx/html",
 )
 
@@ -47,9 +72,9 @@ skopeo_copy(
 )
 
 copy_files(
-    name = "app_config_outputs",
+    name = "outputs_config",
     gen = {
-        "app.json": "app",
+        "config.json": "config",
     },
 )
 

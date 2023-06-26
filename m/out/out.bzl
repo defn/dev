@@ -4,12 +4,13 @@
 load("@bazel_skylib//rules:diff_test.bzl", "diff_test")
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
 
-def copy_files(name, gen, visibility = None):
+def copy_files(name, gen, dir = None, visibility = None):
     """Something
 
     Args:
         name: something
-        gen: meh
+        gen: something
+        dir: something
         visibility: something
 
     Returns:
@@ -22,26 +23,28 @@ def copy_files(name, gen, visibility = None):
         for [k, v] in gen.items()
     }
 
-    for [k, v] in gen.items():
-        diff_test(
-            name = "check_" + k,
-            failure_message = "Please run: b run //{}:update_repo".format(native.package_name()),
-            file1 = k,
-            file2 = v,
-            visibility = visibility,
-        )
+    if dir != None:
+        for [k, v] in gen.items():
+            diff_test(
+                name = "{}_check_".format(name) + k,
+                failure_message = "Please run: b run //{}:update_repo".format(native.package_name()),
+                file1 = k,
+                file2 = v,
+                visibility = visibility,
+            )
 
     write_file(
-        name = "gen_update_script",
-        out = "update.sh",
+        name = "{}_gen_script".format(name),
+        out = "{}_update.sh".format(name),
         content = [
             "#!/usr/bin/env bash",
             "cd $BUILD_WORKSPACE_DIRECTORY",
         ] + [
-            "cp -fv bazel-bin/{1} {0}; chmod 644 {0}".format(
+            "set -x; if test -d bazel-bin/{1}; then rsync -ia bazel-bin/{1}/* {2}/; else mv bazel-bin/{1} {0}; fi".format(
                 k,
                 # Convert label to path
                 v.replace(":", "/"),
+                dir,
             )
             for [k, v] in _GENERATED.items()
         ],
@@ -49,8 +52,8 @@ def copy_files(name, gen, visibility = None):
     )
 
     native.sh_binary(
-        name = "update__repo",
-        srcs = ["update.sh"],
+        name = "{}__update".format(name),
+        srcs = ["{}_update.sh".format(name)],
         data = _GENERATED.values(),
         visibility = visibility,
     )
