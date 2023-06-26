@@ -40,7 +40,7 @@ def copy_files(name, gen, dir = None, visibility = None):
             "#!/usr/bin/env bash",
             "cd $BUILD_WORKSPACE_DIRECTORY",
         ] + [
-            "set -x; if test -d bazel-bin/{1}; then rsync -ia bazel-bin/{1}/* {2}/; else mv -f bazel-bin/{1} {0}; fi".format(
+            "set -x; if test -d bazel-bin/{1}; then rsync -ia bazel-bin/{1}/* {2}/; else mkdir -p $(dirname {0}); mv -f bazel-bin/{1} {0}; fi".format(
                 k,
                 # Convert label to path
                 v.replace(":", "/"),

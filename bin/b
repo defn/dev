@@ -65,7 +65,7 @@ function main {
 					shift
 				fi
 
-				bazel build --sandbox_writable_path=/nix --sandbox_writable_path="${HOME}/.cache/nix" --sandbox_writable_path="${HOME}/.earthly" "${rule}"
+				bazel build --sandbox_writable_path=/nix --sandbox_writable_path="${HOME}/.cache/nix" --sandbox_writable_path="${HOME}/.earthly" --sandbox_writable_path="${HOME}/m/k" "${rule}"
 				;;
 			test)
 				shift

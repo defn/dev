@@ -1,0 +1,31 @@
+load("//out:out.bzl", "copy_files")
+
+# release configuration
+filegroup(
+    name = "gen_release_script",
+    srcs = ["gen_release.sh"],
+    visibility = ["//visibility:public"],
+)
+
+[
+    genrule(
+        name = "release_{}".format(k),
+        srcs = [
+            k
+        ],
+        outs = ["r/{}/main.yaml".format(k)],
+        cmd = "$(location gen_release_script) $(location {}) $@".format(k),
+        tools = ["gen_release_script"],
+    )
+    for k in glob(["*"], exclude=["BUILD.bazel"], exclude_directories=0)
+]
+
+[
+    copy_files(
+        name = "outputs_{}".format(k),
+        gen = {
+            "r/{}/main.yaml".format(k): "r/{}/main.yaml".format(k)
+        },
+    )
+    for k in glob(["*"], exclude=["BUILD.bazel"], exclude_directories=0)
+]
