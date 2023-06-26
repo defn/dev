@@ -40,13 +40,11 @@ data:
         end
     end
     return hs
-  resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration:
-    |
+  resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration: |
     jsonPointers:
       - /webhooks/0/clientConfig/caBundle
       - /webhooks/0/rules
-  resource.customizations.ignoreDifferences.admissionregistration.k8s.io_ValidatingWebhookConfiguration:
-    |
+  resource.customizations.ignoreDifferences.admissionregistration.k8s.io_ValidatingWebhookConfiguration: |
     jsonPointers:
       - /webhooks/0/rules
   resource.customizations.ignoreDifferences.apps_Deployment: |

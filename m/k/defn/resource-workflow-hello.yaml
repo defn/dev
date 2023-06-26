@@ -21,4 +21,4 @@ spec:
         command:
           - cowsay
         args:
-          - "{{inputs.parameters.message}}"
+          - '{{inputs.parameters.message}}'
