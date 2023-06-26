@@ -1,6 +1,7 @@
 """
 """
 
+load("@bazel_skylib//rules:diff_test.bzl", "diff_test")
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
 
 def copy_files(name, gen, dir = None, visibility = None):
@@ -21,6 +22,16 @@ def copy_files(name, gen, dir = None, visibility = None):
         "{}/{}".format(native.package_name(),k): "//{}:{}".format(native.package_name(),v)
         for [k, v] in gen.items()
     }
+
+    if dir != None:
+        for [k, v] in gen.items():
+            diff_test(
+                name = "{}_check_".format(name) + k,
+                failure_message = "Please run: b run //{}:update_repo".format(native.package_name()),
+                file1 = k,
+                file2 = v,
+                visibility = visibility,
+            )
 
     write_file(
         name = "{}_gen_script".format(name),
