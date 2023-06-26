@@ -26,6 +26,7 @@ lint:
         - m/go_deps.bzl
         - m/k3d-tailscale-operator.yaml
         - m/**/config.json
+        - m/k/karpenter/karpenter.yaml
   enabled:
     - actionlint@1.6.24
     - black@23.3.0
