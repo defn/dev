@@ -1,6 +1,7 @@
 SHELL := /bin/bash
 
 build:
+	$(MAKE) update
 	b run outputs_config__update
 	b run outputs_kustomize__update
 	$(MAKE) make_add_generated
