@@ -10,13 +10,13 @@ spec:
   template:
     spec:
       containers:
-        - args:
-            - test "completed" == "$(kubectl get tf "rocky" -o json | jq -r '.status.phase')"
-          command:
-            - bash
-            - -c
-          image: defn/dev:kubectl
-          name: meh
+      - args:
+        - test "completed" == "$(kubectl get tf "rocky" -o json | jq -r '.status.phase')"
+        command:
+        - bash
+        - -c
+        image: defn/dev:kubectl
+        name: meh
       restartPolicy: Never
       serviceAccountName: default
 ---
@@ -32,13 +32,13 @@ spec:
   template:
     spec:
       containers:
-        - args:
-            - test "completed" == "$(kubectl get tf "rosie" -o json | jq -r '.status.phase')"
-          command:
-            - bash
-            - -c
-          image: defn/dev:kubectl
-          name: meh
+      - args:
+        - test "completed" == "$(kubectl get tf "rosie" -o json | jq -r '.status.phase')"
+        command:
+        - bash
+        - -c
+        image: defn/dev:kubectl
+        name: meh
       restartPolicy: Never
       serviceAccountName: default
 ---
@@ -59,7 +59,7 @@ spec:
   ignoreDelete: true
   keepLatestPodsOnly: true
   outputsToOmit:
-    - "0"
+  - "0"
   scmAuthMethods: []
   serviceAccount: default
   terraformModule:

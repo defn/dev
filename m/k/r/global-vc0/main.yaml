@@ -36,73 +36,73 @@ metadata:
   name: vcluster
   namespace: global-vc0
 rules:
-  - apiGroups:
-      - ""
-    resources:
-      - configmaps
-      - secrets
-      - services
-      - pods
-      - pods/attach
-      - pods/portforward
-      - pods/exec
-      - persistentvolumeclaims
-    verbs:
-      - create
-      - delete
-      - patch
-      - update
-      - get
-      - list
-      - watch
-  - apiGroups:
-      - ""
-    resources:
-      - pods/ephemeralcontainers
-    verbs:
-      - patch
-      - update
-  - apiGroups:
-      - ""
-    resources:
-      - endpoints
-    verbs:
-      - create
-      - delete
-      - patch
-      - update
-  - apiGroups:
-      - ""
-    resources:
-      - endpoints
-      - events
-      - pods/log
-    verbs:
-      - get
-      - list
-      - watch
-  - apiGroups:
-      - networking.k8s.io
-    resources:
-      - ingresses
-    verbs:
-      - create
-      - delete
-      - patch
-      - update
-      - get
-      - list
-      - watch
-  - apiGroups:
-      - apps
-    resources:
-      - statefulsets
-      - replicasets
-      - deployments
-    verbs:
-      - get
-      - list
-      - watch
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  - secrets
+  - services
+  - pods
+  - pods/attach
+  - pods/portforward
+  - pods/exec
+  - persistentvolumeclaims
+  verbs:
+  - create
+  - delete
+  - patch
+  - update
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - pods/ephemeralcontainers
+  verbs:
+  - patch
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - endpoints
+  verbs:
+  - create
+  - delete
+  - patch
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - endpoints
+  - events
+  - pods/log
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses
+  verbs:
+  - create
+  - delete
+  - patch
+  - update
+  - get
+  - list
+  - watch
+- apiGroups:
+  - apps
+  resources:
+  - statefulsets
+  - replicasets
+  - deployments
+  verbs:
+  - get
+  - list
+  - watch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -114,53 +114,53 @@ metadata:
     release: vcluster
   name: vc-vcluster-v-global-vc0
 rules:
-  - apiGroups:
-      - ""
-    resources:
-      - nodes
-      - nodes/status
-    verbs:
-      - get
-      - watch
-      - list
-  - apiGroups:
-      - ""
-    resources:
-      - pods
-      - nodes/metrics
-      - nodes/stats
-    verbs:
-      - get
-      - watch
-      - list
-  - apiGroups:
-      - ""
-    resources:
-      - nodes/proxy
-    verbs:
-      - get
-      - watch
-      - list
-  - apiGroups:
-      - ""
-    resources:
-      - persistentvolumes
-    verbs:
-      - create
-      - delete
-      - patch
-      - update
-      - get
-      - watch
-      - list
-  - apiGroups:
-      - networking.k8s.io
-    resources:
-      - ingressclasses
-    verbs:
-      - get
-      - watch
-      - list
+- apiGroups:
+  - ""
+  resources:
+  - nodes
+  - nodes/status
+  verbs:
+  - get
+  - watch
+  - list
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - nodes/metrics
+  - nodes/stats
+  verbs:
+  - get
+  - watch
+  - list
+- apiGroups:
+  - ""
+  resources:
+  - nodes/proxy
+  verbs:
+  - get
+  - watch
+  - list
+- apiGroups:
+  - ""
+  resources:
+  - persistentvolumes
+  verbs:
+  - create
+  - delete
+  - patch
+  - update
+  - get
+  - watch
+  - list
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingressclasses
+  verbs:
+  - get
+  - watch
+  - list
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -177,9 +177,9 @@ roleRef:
   kind: Role
   name: vcluster
 subjects:
-  - kind: ServiceAccount
-    name: vc-vcluster
-    namespace: global-vc0
+- kind: ServiceAccount
+  name: vc-vcluster
+  namespace: global-vc0
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -195,14 +195,13 @@ roleRef:
   kind: ClusterRole
   name: vc-vcluster-v-global-vc0
 subjects:
-  - kind: ServiceAccount
-    name: vc-vcluster
-    namespace: global-vc0
+- kind: ServiceAccount
+  name: vc-vcluster
+  namespace: global-vc0
 ---
 apiVersion: v1
 data:
-  coredns.yaml:
-    "apiVersion: v1\nkind: ServiceAccount\nmetadata:\n  name: coredns\n
+  coredns.yaml: "apiVersion: v1\nkind: ServiceAccount\nmetadata:\n  name: coredns\n
     \ namespace: kube-system\n---\napiVersion: rbac.authorization.k8s.io/v1\nkind:
     ClusterRole\nmetadata:\n  labels:\n    kubernetes.io/bootstrapping: rbac-defaults\n
     \ name: system:coredns\nrules:\n  - apiGroups:\n      - \"\"\n    resources:\n
@@ -272,7 +271,7 @@ metadata:
 ---
 apiVersion: v1
 data:
-  manifests: "---"
+  manifests: '---'
 kind: ConfigMap
 metadata:
   labels:
@@ -295,14 +294,14 @@ metadata:
   namespace: global-vc0
 spec:
   ports:
-    - name: https
-      port: 443
-      protocol: TCP
-      targetPort: 8443
-    - name: kubelet
-      port: 10250
-      protocol: TCP
-      targetPort: 8443
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 8443
+  - name: kubelet
+    port: 10250
+    protocol: TCP
+    targetPort: 8443
   selector:
     app: vcluster
     release: vcluster
@@ -321,10 +320,10 @@ metadata:
 spec:
   clusterIP: None
   ports:
-    - name: https
-      port: 443
-      protocol: TCP
-      targetPort: 8443
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 8443
   selector:
     app: vcluster
     release: vcluster
@@ -342,10 +341,10 @@ metadata:
 spec:
   loadBalancerClass: tailscale
   ports:
-    - name: https
-      port: 443
-      protocol: TCP
-      targetPort: 8443
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 8443
   selector:
     app: vcluster
     release: vcluster
@@ -378,119 +377,119 @@ spec:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
-              - matchExpressions:
-                  - key: env
-                    operator: In
-                    values:
-                      - global
+            - matchExpressions:
+              - key: env
+                operator: In
+                values:
+                - global
       containers:
-        - args:
-            - -c
-            - /bin/k3s server --write-kubeconfig=/data/k3s-config/kube-config.yaml --data-dir=/data
-              --disable=traefik,servicelb,metrics-server,local-storage,coredns --disable-network-policy
-              --disable-agent --disable-cloud-controller --flannel-backend=none --disable-scheduler
-              --kube-controller-manager-arg=controllers=*,-nodeipam,-nodelifecycle,-persistentvolume-binder,-attachdetach,-persistentvolume-expander,-cloud-node-lifecycle,-ttl
-              --kube-apiserver-arg=endpoint-reconciler-type=none --service-cidr=$(SERVICE_CIDR)
-              && true
-          command:
-            - /bin/sh
-          env:
-            - name: SERVICE_CIDR
-              valueFrom:
-                configMapKeyRef:
-                  key: cidr
-                  name: vc-cidr-vcluster
-          image: rancher/k3s:v1.24.13-k3s1
-          name: vcluster
-          resources:
-            limits:
-              memory: 2Gi
-            requests:
-              cpu: 200m
-              memory: 256Mi
-          securityContext:
-            allowPrivilegeEscalation: false
-          volumeMounts:
-            - mountPath: /etc/rancher
-              name: config
-            - mountPath: /data
-              name: data
-        - args:
-            - --name=vcluster
-            - --service-account=vc-workload-vcluster
-            - --kube-config-context-name=my-vcluster
-            - --leader-elect=false
-            - --sync=ingresses
-            - --sync=nodes
-            - --sync=persistentvolumes
-            - --node-selector=env=global
-            - --tls-san=vcluster.global-vc0.svc.cluster.local
-            - --enforce-toleration=env=global-vc0:NoSchedule
-          env:
-            - name: POD_IP
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.podIP
-            - name: VCLUSTER_NODE_NAME
-              valueFrom:
-                fieldRef:
-                  fieldPath: spec.nodeName
-            - name: CONFIG
-              value: "---"
-            - name: VCLUSTER_TELEMETRY_CONFIG
-              value: '{"disabled":"false","instanceCreator":"helm","instanceCreatorUID":""}'
-          image: ghcr.io/loft-sh/vcluster:0.15.2
-          livenessProbe:
-            failureThreshold: 60
-            httpGet:
-              path: /healthz
-              port: 8443
-              scheme: HTTPS
-            initialDelaySeconds: 60
-            periodSeconds: 2
-          name: syncer
-          readinessProbe:
-            failureThreshold: 60
-            httpGet:
-              path: /readyz
-              port: 8443
-              scheme: HTTPS
-            periodSeconds: 2
-          resources:
-            limits:
-              cpu: 1000m
-              memory: 512Mi
-            requests:
-              cpu: 20m
-              memory: 64Mi
-          securityContext:
-            allowPrivilegeEscalation: false
-          volumeMounts:
-            - mountPath: /manifests/coredns
-              name: coredns
-              readOnly: true
-            - mountPath: /data
-              name: data
-              readOnly: true
+      - args:
+        - -c
+        - /bin/k3s server --write-kubeconfig=/data/k3s-config/kube-config.yaml --data-dir=/data
+          --disable=traefik,servicelb,metrics-server,local-storage,coredns --disable-network-policy
+          --disable-agent --disable-cloud-controller --flannel-backend=none --disable-scheduler
+          --kube-controller-manager-arg=controllers=*,-nodeipam,-nodelifecycle,-persistentvolume-binder,-attachdetach,-persistentvolume-expander,-cloud-node-lifecycle,-ttl
+          --kube-apiserver-arg=endpoint-reconciler-type=none --service-cidr=$(SERVICE_CIDR)
+          && true
+        command:
+        - /bin/sh
+        env:
+        - name: SERVICE_CIDR
+          valueFrom:
+            configMapKeyRef:
+              key: cidr
+              name: vc-cidr-vcluster
+        image: rancher/k3s:v1.24.13-k3s1
+        name: vcluster
+        resources:
+          limits:
+            memory: 2Gi
+          requests:
+            cpu: 200m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+        volumeMounts:
+        - mountPath: /etc/rancher
+          name: config
+        - mountPath: /data
+          name: data
+      - args:
+        - --name=vcluster
+        - --service-account=vc-workload-vcluster
+        - --kube-config-context-name=my-vcluster
+        - --leader-elect=false
+        - --sync=ingresses
+        - --sync=nodes
+        - --sync=persistentvolumes
+        - --node-selector=env=global
+        - --tls-san=vcluster.global-vc0.svc.cluster.local
+        - --enforce-toleration=env=global-vc0:NoSchedule
+        env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: VCLUSTER_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: CONFIG
+          value: '---'
+        - name: VCLUSTER_TELEMETRY_CONFIG
+          value: '{"disabled":"false","instanceCreator":"helm","instanceCreatorUID":""}'
+        image: ghcr.io/loft-sh/vcluster:0.15.2
+        livenessProbe:
+          failureThreshold: 60
+          httpGet:
+            path: /healthz
+            port: 8443
+            scheme: HTTPS
+          initialDelaySeconds: 60
+          periodSeconds: 2
+        name: syncer
+        readinessProbe:
+          failureThreshold: 60
+          httpGet:
+            path: /readyz
+            port: 8443
+            scheme: HTTPS
+          periodSeconds: 2
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+          requests:
+            cpu: 20m
+            memory: 64Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+        volumeMounts:
+        - mountPath: /manifests/coredns
+          name: coredns
+          readOnly: true
+        - mountPath: /data
+          name: data
+          readOnly: true
       nodeSelector: {}
       serviceAccountName: vc-vcluster
       terminationGracePeriodSeconds: 10
       tolerations:
-        - key: env
-          operator: Equal
-          value: global
+      - key: env
+        operator: Equal
+        value: global
       volumes:
-        - emptyDir: {}
-          name: config
-        - configMap:
-            name: vcluster-coredns
-          name: coredns
+      - emptyDir: {}
+        name: config
+      - configMap:
+          name: vcluster-coredns
+        name: coredns
   volumeClaimTemplates:
-    - metadata:
-        name: data
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 5Gi
+  - metadata:
+      name: data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 5Gi

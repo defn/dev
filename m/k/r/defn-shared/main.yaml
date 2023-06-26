@@ -7,9 +7,9 @@ roleRef:
   kind: ClusterRole
   name: cluster-admin
 subjects:
-  - kind: ServiceAccount
-    name: default
-    namespace: default
+- kind: ServiceAccount
+  name: default
+  namespace: default
 ---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
@@ -18,8 +18,8 @@ metadata:
   namespace: cert-manager
 spec:
   dataFrom:
-    - extract:
-        key: dev/amanibhavam-global
+  - extract:
+      key: dev/amanibhavam-global
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
@@ -35,8 +35,8 @@ metadata:
   namespace: external-dns
 spec:
   dataFrom:
-    - extract:
-        key: dev/amanibhavam-global
+  - extract:
+      key: dev/amanibhavam-global
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
@@ -52,38 +52,38 @@ metadata:
 spec:
   generateExistingOnPolicyUpdate: true
   rules:
-    - generate:
-        apiVersion: cert-manager.io/v1
-        data:
-          spec:
-            acme:
-              email: "{{request.object.data.zerossl_email | base64_decode(@)}}"
-              externalAccountBinding:
-                keyID: "{{request.object.data.zerossl_eab_kid | base64_decode(@)}}"
-                keySecretRef:
-                  key: zerossl-eab-hmac
-                  name: zerossl-production
-              privateKeySecretRef:
-                name: zerossl-production-acme
-              server: https://acme.zerossl.com/v2/DV90
-              solvers:
-                - dns01:
-                    cloudflare:
-                      apiTokenSecretRef:
-                        key: cloudflare-api-token
-                        name: zerossl-production
-                      email: "{{request.object.data.cloudflare_email | base64_decode(@)}}"
-                  selector: {}
-        kind: ClusterIssuer
-        name: zerossl-production
-        synchronize: true
-      match:
-        any:
-          - resources:
-              kinds:
-                - Secret
-              names:
-                - zerossl-production
-              namespaces:
-                - cert-manager
-      name: create-cluster-issuer
+  - generate:
+      apiVersion: cert-manager.io/v1
+      data:
+        spec:
+          acme:
+            email: '{{request.object.data.zerossl_email | base64_decode(@)}}'
+            externalAccountBinding:
+              keyID: '{{request.object.data.zerossl_eab_kid | base64_decode(@)}}'
+              keySecretRef:
+                key: zerossl-eab-hmac
+                name: zerossl-production
+            privateKeySecretRef:
+              name: zerossl-production-acme
+            server: https://acme.zerossl.com/v2/DV90
+            solvers:
+            - dns01:
+                cloudflare:
+                  apiTokenSecretRef:
+                    key: cloudflare-api-token
+                    name: zerossl-production
+                  email: '{{request.object.data.cloudflare_email | base64_decode(@)}}'
+              selector: {}
+      kind: ClusterIssuer
+      name: zerossl-production
+      synchronize: true
+    match:
+      any:
+      - resources:
+          kinds:
+          - Secret
+          names:
+          - zerossl-production
+          namespaces:
+          - cert-manager
+    name: create-cluster-issuer

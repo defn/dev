@@ -27,7 +27,7 @@ spec:
   resource:
     example:
       eventTypes:
-        - ADD
+      - ADD
       group: ""
       namespace: default
       resource: configmaps
@@ -40,38 +40,38 @@ metadata:
   namespace: default
 spec:
   dependencies:
-    - eventName: example
-      eventSourceName: default
-      name: input
+  - eventName: example
+    eventSourceName: default
+    name: input
   triggers:
-    - template:
-        k8s:
-          liveObject: true
-          operation: create
-          parameters:
-            - dest: spec.template.spec.containers.0.args.0
-              src:
-                dataTemplate: "{{ .Input.body.data.script}}"
-                dependencyName: input
-          source:
-            resource:
-              apiVersion: batch/v1
-              kind: Job
-              metadata:
-                generateName: run-this
-                namespace: default
-              spec:
-                template:
-                  spec:
-                    containers:
-                      - args:
-                          - echo hello
-                        command:
-                          - bash
-                          - -c
-                        image: 169.254.32.1:5000/workspace
-                        name: workspace
-                    restartPolicy: Never
-                    serviceAccountName: my-events
-                ttlSecondsAfterFinished: 60
-        name: run-this
+  - template:
+      k8s:
+        liveObject: true
+        operation: create
+        parameters:
+        - dest: spec.template.spec.containers.0.args.0
+          src:
+            dataTemplate: '{{ .Input.body.data.script}}'
+            dependencyName: input
+        source:
+          resource:
+            apiVersion: batch/v1
+            kind: Job
+            metadata:
+              generateName: run-this
+              namespace: default
+            spec:
+              template:
+                spec:
+                  containers:
+                  - args:
+                    - echo hello
+                    command:
+                    - bash
+                    - -c
+                    image: 169.254.32.1:5000/workspace
+                    name: workspace
+                  restartPolicy: Never
+                  serviceAccountName: my-events
+              ttlSecondsAfterFinished: 60
+      name: run-this

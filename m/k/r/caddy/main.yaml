@@ -17,8 +17,7 @@ metadata:
 ---
 apiVersion: v1
 data:
-  Caddyfile:
-    "{\n  http_port 80\n  \n  auto_https disable_certs\n  \n  local_certs\n
+  Caddyfile: "{\n  http_port 80\n  \n  auto_https disable_certs\n  \n  local_certs\n
     \ \n  log {\n      output stdout\n  }\n}\n\n:9999 {\n  handle / {\n    respond
     \"OK\"\n  }\n}\n\n\nhttps://*.defn.run {\n    tls /certs/tls.crt /certs/tls.key\n
     \   reverse_proxy {http.request.host.labels.2}.default.svc.cluster.local:80 {\n
@@ -52,14 +51,14 @@ metadata:
 spec:
   loadBalancerClass: tailscale
   ports:
-    - name: http
-      port: 80
-      protocol: TCP
-      targetPort: http
-    - name: https
-      port: 443
-      protocol: TCP
-      targetPort: https
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: http
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: https
   selector:
     app.kubernetes.io/instance: caddy
     app.kubernetes.io/name: caddy
@@ -91,44 +90,44 @@ spec:
         app.kubernetes.io/name: caddy
     spec:
       containers:
-        - image: caddy:2.6.4-alpine
-          imagePullPolicy: IfNotPresent
-          livenessProbe:
-            httpGet:
-              path: /
-              port: health
-          name: caddy
-          ports:
-            - containerPort: 80
-              name: http
-              protocol: TCP
-            - containerPort: 443
-              name: https
-              protocol: TCP
-            - containerPort: 9999
-              name: health
-              protocol: TCP
-          resources:
-            requests:
-              cpu: 32m
-              memory: 64Mi
-          securityContext: {}
-          volumeMounts:
-            - mountPath: /etc/caddy/Caddyfile
-              name: config
-              subPath: Caddyfile
-            - mountPath: /certs
-              name: certs
+      - image: caddy:2.6.4-alpine
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /
+            port: health
+        name: caddy
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        - containerPort: 443
+          name: https
+          protocol: TCP
+        - containerPort: 9999
+          name: health
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 32m
+            memory: 64Mi
+        securityContext: {}
+        volumeMounts:
+        - mountPath: /etc/caddy/Caddyfile
+          name: config
+          subPath: Caddyfile
+        - mountPath: /certs
+          name: certs
       securityContext: {}
       serviceAccountName: caddy
       volumes:
-        - configMap:
-            name: caddy
-          name: config
-        - name: certs
-          secret:
-            optional: false
-            secretName: defn-run-wildcard
+      - configMap:
+          name: caddy
+        name: config
+      - name: certs
+        secret:
+          optional: false
+          secretName: defn-run-wildcard
 ---
 apiVersion: v1
 kind: Pod
@@ -145,10 +144,10 @@ metadata:
   namespace: caddy
 spec:
   containers:
-    - args:
-        - caddy:80
-      command:
-        - wget
-      image: busybox
-      name: wget
+  - args:
+    - caddy:80
+    command:
+    - wget
+    image: busybox
+    name: wget
   restartPolicy: Never

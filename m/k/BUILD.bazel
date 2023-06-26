@@ -20,12 +20,10 @@ filegroup(
     for k in glob(["*"], exclude=["BUILD.bazel"], exclude_directories=0)
 ]
 
-[
-    copy_files(
-        name = "outputs_{}".format(k),
-        gen = {
-            "r/{}/main.yaml".format(k): "r/{}/main.yaml".format(k)
-        },
-    )
-    for k in glob(["*"], exclude=["BUILD.bazel"], exclude_directories=0)
-]
+copy_files(
+    name = "outputs_release",
+    gen = {
+        "r/{}/main.yaml".format(k): "r/{}/main.yaml".format(k)
+        for k in glob(["*"], exclude=["BUILD.bazel", "r", "gen_release.sh"], exclude_directories=0)
+    },
+)
