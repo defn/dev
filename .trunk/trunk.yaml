@@ -25,6 +25,7 @@ lint:
         - "**/node_modules/**"
         - m/go_deps.bzl
         - m/k3d-tailscale-operator.yaml
+        - m/**/app.json
   enabled:
     - actionlint@1.6.24
     - black@23.3.0
