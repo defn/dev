@@ -21,7 +21,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/r/external-secrets-operator
+              path: m/k/r/external-secrets-operator
             syncPolicy:
               automated:
                 prune: true
@@ -42,7 +42,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/r/vcluster-global-vc0-secrets-store
+              path: m/k/r/vcluster-global-vc0-secrets-store
             syncPolicy:
               automated:
                 prune: true
@@ -63,7 +63,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/r/coder
+              path: m/k/r/coder
             syncPolicy:
               automated:
                 prune: true

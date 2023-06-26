@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://github.com/defn/dev
     targetRevision: main
-    path: m/r/vcluster-global-vc0
+    path: m/k/r/vcluster-global-vc0
   syncPolicy:
     automated:
       prune: true

@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://github.com/defn/dev
     targetRevision: main
-    path: m/r/k3d-global
+    path: m/k/r/k3d-global
   syncPolicy:
     automated:
       prune: true
