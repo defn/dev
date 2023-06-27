@@ -1,6 +1,5 @@
 load("//cue:cue.bzl", "cue_export")
 load("//nix:nix.bzl", "nix_flake")
-load("//out:out.bzl", "copy_files")
 
 
 filegroup(
