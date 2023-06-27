@@ -149,8 +149,12 @@ function main {
 			run)
 				shift
 
-				rule="$(b | fzf --query="${1}" --select-1)"
-				shift
+				if [[ -z ${1:-} ]]; then
+					rule="$(b | grep __ | fzf --select-1)"
+				else
+					rule="$(b | fzf --query="${1}" --select-1)"
+					shift
+				fi
 
 				# shellcheck disable=SC2086
 				bazel run ${bopts} "${rule}" --sandbox_debug -- "$@"
