@@ -1,1 +1,0 @@
-/home/ubuntu/.password-store/defn/aws/accounts
