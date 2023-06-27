@@ -12,6 +12,7 @@ function main {
 	shift
 
 	kustomize build --enable-helm "${app}" >"${out}"
+	rm -rf "${app}/charts"
 }
 
 main "$@"
