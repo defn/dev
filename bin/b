@@ -32,7 +32,15 @@ function main {
 	login)
 		shift
 		local account
-		account="$(b pass run //aws:aws__list_accounts | fzf --query="${1:-}" --select-1)"
+		case "${1:-}" in
+		"" | /*)
+			account="${1:-}"
+			account="$(b pass run //aws:aws__list_accounts | fzf --query="${account#/}" --select-1)"
+			;;
+		*)
+			account="$1"
+			;;
+		esac
 		b logout
 		# TODO wrap aws-vault
 		aws-vault login "${account}"
@@ -40,7 +48,15 @@ function main {
 	exec)
 		shift
 		local account
-		account="$(b pass run //aws:aws__list_accounts | fzf --query="${1:-}" --select-1)"
+		case "${1:-}" in
+		"" | /*)
+			account="${1:-}"
+			account="$(b pass run //aws:aws__list_accounts | fzf --query="${account#/}" --select-1)"
+			;;
+		*)
+			account="$1"
+			;;
+		esac
 		shift
 		# TODO wrap aws-vault
 		aws-vault exec "${account}" -- "$@"
@@ -54,7 +70,15 @@ function main {
 		fi
 
 		local account
-		account="$(b pass run //aws:aws__list_accounts | fzf --query="${1:-}" --select-1)"
+		case "${1:-}" in
+		"" | /*)
+			account="${1:-}"
+			account="$(b pass run //aws:aws__list_accounts | fzf --query="${account#/}" --select-1)"
+			;;
+		*)
+			account="$1"
+			;;
+		esac
 		shift
 		b pass run //aws:aws__cli "${account}" "$@"
 		;;
