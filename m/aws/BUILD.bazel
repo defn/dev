@@ -3,6 +3,8 @@ load("@rules_pkg//:pkg.bzl", "pkg_tar")
 load("//cue:cue.bzl", "cue_export")
 load("//nix:nix.bzl", "nix_flake")
 load("//oci:oci.bzl", "skopeo_copy")
+load("//out:out.bzl", "copy_files")
+
 
 filegroup(
     name = "template_org",
@@ -51,17 +53,26 @@ cue_export(
 
 # aws cli wrapper
 sh_binary(
-    name = "aws_cli",
+    name = "aws__cli",
     srcs = ["aws_cli.sh"],
     args = [
         "$(location flake_awscli)",
-        "$(location app_config)",
         "$(location aws_config_cfg)",
     ],
     data = [
-        "app_config",
         "aws_config_cfg",
         "flake_awscli",
+    ],
+)
+
+sh_binary(
+    name = "aws__list_accounts",
+    srcs = ["aws_list_accounts.sh"],
+    args = [
+        "$(location app_config)",
+    ],
+    data = [
+        "app_config",
     ],
 )
 

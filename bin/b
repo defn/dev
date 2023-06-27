@@ -26,26 +26,31 @@ function main {
 	set -efu -o pipefail
 
 	case "${1:-}" in
+	logout)
+		open https://signin.aws.amazon.com/oauth?Action=logout &
+		;;
 	login)
 		shift
 		local account
-		account="$(grep '^\[profile ' ~/.aws/config | grep \\-sso | awk '{print $2}' | cut -d']' -f1 | sort | fzf --query="${1:-}" --select-1)"
+		account="$(b pass run //aws:aws__list_accounts | fzf --query="${1:-}" --select-1)"
 		b logout
+		# TODO wrap aws-vault
 		aws-vault login "${account}"
-		;;
-	logout)
-		open https://signin.aws.amazon.com/oauth?Action=logout &
 		;;
 	exec)
 		shift
 		local account
-		account="$(grep '^\[profile ' ~/.aws/config | grep \\-sso | awk '{print $2}' | cut -d']' -f1 | sort | fzf --query="${1:-}" --select-1)"
+		account="$(b pass run //aws:aws__list_accounts | fzf --query="${1:-}" --select-1)"
 		shift
+		# TODO wrap aws-vault
 		aws-vault exec "${account}" -- "$@"
 		;;
-	tilt)
+	aws)
 		shift
-		open 'http://localhost/r/(all)/overview'
+		local account
+		account="$(b pass run //aws:aws__list_accounts | fzf --query="${1:-}" --select-1)"
+		shift
+		b pass run //aws:aws__cli "${account}" "$@"
 		;;
 	*)
 		if [[ $# == 0 ]]; then
