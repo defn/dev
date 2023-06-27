@@ -47,6 +47,12 @@ function main {
 		;;
 	aws)
 		shift
+
+		if [[ $# == 0 ]]; then
+			b pass run //aws:aws__list_accounts
+			return $?
+		fi
+
 		local account
 		account="$(b pass run //aws:aws__list_accounts | fzf --query="${1:-}" --select-1)"
 		shift
