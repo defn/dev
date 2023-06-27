@@ -40,8 +40,10 @@ nix_flake(
     flakes = [
         "cue",
         "awscli",
-        "earthly",
     ],
+    cmds = [
+        "aws-vault",
+    ]
 )
 
 # app configuration
@@ -57,11 +59,13 @@ sh_binary(
     srcs = ["aws_cli.sh"],
     args = [
         "$(location flake_awscli)",
+        "$(location flake_aws-vault)",
         "$(location aws_config_cfg)",
     ],
     data = [
-        "aws_config_cfg",
         "flake_awscli",
+        "flake_aws-vault",
+        "aws_config_cfg",
     ],
 )
 

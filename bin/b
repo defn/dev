@@ -42,8 +42,7 @@ function main {
 			;;
 		esac
 		b logout
-		# TODO wrap aws-vault
-		aws-vault login "${account}"
+		b pass run //aws:aws__cli "${account}" aws-vault login "${account}"
 		;;
 	exec)
 		shift
@@ -58,8 +57,7 @@ function main {
 			;;
 		esac
 		shift
-		# TODO wrap aws-vault
-		aws-vault exec "${account}" -- "$@"
+		b pass run //aws:aws__cli "${account}" aws-vault exec "${account}" -- "$@"
 		;;
 	aws)
 		shift
@@ -80,7 +78,7 @@ function main {
 			;;
 		esac
 		shift
-		b pass run //aws:aws__cli "${account}" "$@"
+		b pass run //aws:aws__cli "${account}" aws "$@"
 		;;
 	*)
 		if [[ $# == 0 ]]; then
