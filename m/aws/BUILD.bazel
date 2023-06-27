@@ -5,16 +5,6 @@ load("//nix:nix.bzl", "nix_flake")
 load("//oci:oci.bzl", "skopeo_copy")
 
 filegroup(
-    name = "aws_orgs",
-    srcs = ["aws_orgs.txt"],
-)
-
-filegroup(
-    name = "aws_accounts",
-    srcs = ["aws_accounts.txt"],
-)
-
-filegroup(
     name = "template_org",
     srcs = ["template_org.txt"],
 )
@@ -33,13 +23,12 @@ filegroup(
 genrule(
     name = "aws_config_cfg",
     srcs = [
-        "aws_accounts",
-        "aws_orgs",
+        "app_config",
         "template_account",
         "template_org",
     ],
     outs = ["aws_config.txt"],
-    cmd = "$(location aws_config_script) $(location aws_orgs) $(location aws_accounts) $(location template_org) $(location template_account) $@",
+    cmd = "$(location aws_config_script) $(location app_config) $(location template_org) $(location template_account) $@",
     tools = ["aws_config_script"],
 )
 
