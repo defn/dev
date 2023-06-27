@@ -36,7 +36,7 @@ genrule(
     srcs = [
         "config"
     ],
-    outs = ["o"],
+    outs = ["generate_kustomize"],
     cmd = "$(location gen_kustomize_script) $(location config) $@",
     tools = ["gen_kustomize_script"],
 )
@@ -44,7 +44,7 @@ genrule(
 copy_files(
     name = "outputs_kustomize",
     gen = {
-        "o": "o",
+        "generate_kustomize": "generate_kustomize",
     },
     dir = "."
 )
