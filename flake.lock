@@ -223,17 +223,17 @@
       },
       "locked": {
         "dir": "m/pkg/cloud",
-        "lastModified": 1687481163,
-        "narHash": "sha256-/wf0nN4/uOk/wgUFPtAtZVobm8PnIdUlmE8lWJLHRV8=",
+        "lastModified": 1687833340,
+        "narHash": "sha256-JEw7jR3vgDzuuDw0eSGMDnQGhJni/LaTBouNsWps5Ys=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "f78e3eb45e4c6cc20610172215aea7541b9ab061",
+        "rev": "3bd8cf2552d4bbf381d8d8e71ecab37ef4265ff7",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cloud",
         "owner": "defn",
-        "ref": "pkg-cloud-0.0.111",
+        "ref": "pkg-cloud-0.0.112",
         "repo": "dev",
         "type": "github"
       }
@@ -1639,17 +1639,17 @@
       },
       "locked": {
         "dir": "m/pkg/flyctl",
-        "lastModified": 1687425615,
-        "narHash": "sha256-udK0u0oZO/lm+hZs4kiz0pXlw6BNnAl1tiAT70cz77Q=",
+        "lastModified": 1687833304,
+        "narHash": "sha256-4fCmU99ZOh9cL4nXbBpALtQOYQ+C4BspV+4NQzabIQQ=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "953d17095b323236ff36010de2dc8d5df13a0eb7",
+        "rev": "395f3d5911441f22ec6f851348015bfde75a0366",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/flyctl",
         "owner": "defn",
-        "ref": "pkg-flyctl-0.1.40-1",
+        "ref": "pkg-flyctl-0.1.41-1",
         "repo": "dev",
         "type": "github"
       }
