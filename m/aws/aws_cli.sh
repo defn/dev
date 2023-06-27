@@ -3,11 +3,16 @@
 set -efuo pipefail
 
 function main {
-	local flake_aws
+	local flake_awscli
+	local flake_awsvault
 	local aws_config
 	local aws_profile
+	local mode
 
-	flake_aws="$1"
+	flake_awscli="$1"
+	shift
+
+	flake_awsvault="$1"
 	shift
 
 	aws_config="$1"
@@ -16,7 +21,20 @@ function main {
 	aws_profile="$1"
 	shift
 
-	exec env AWS_CONFIG="${aws_config}" AWS_PROFILE="${aws_profile}" "${flake_aws}" "$@"
+	mode="$1"
+	shift
+
+	case "${mode}" in
+	aws)
+		exec env AWS_CONFIG="${aws_config}" AWS_PROFILE="${aws_profile}" "${flake_awscli}" "$@"
+		;;
+	aws-vault)
+		exec env AWS_CONFIG="${aws_config}" AWS_PROFILE="${aws_profile}" "${flake_awsvault}" "$@"
+		;;
+	*)
+		echo "ERROR: unknown mode ${mode}"
+		;;
+	esac
 }
 
 main "$@"

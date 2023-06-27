@@ -1,7 +1,7 @@
 """
 """
 
-def nix_flake(name, srcs = [], visibility = None, flakes = []):
+def nix_flake(name, srcs = [], visibility = None, flakes = [], cmds = []):
     """ something
 
     Args:
@@ -9,6 +9,7 @@ def nix_flake(name, srcs = [], visibility = None, flakes = []):
         srcs: something
         visibility: something
         flakes: something
+        cmds: something
     """
     dir = native.package_name()
 
@@ -45,5 +46,17 @@ def nix_flake(name, srcs = [], visibility = None, flakes = []):
             ],
             outs = ["{}_{}_bin".format(name, f)],
             cmd = "$(location //{}:{}) {} $@ which {}".format(flake_path_script.package, flake_path_script.name, dir, f),
+            visibility = visibility,
+        )
+
+    for c in cmds:
+        native.genrule(
+            name = "{}_{}".format(name, c),
+            srcs = [
+                flake_path_script,
+                "{}_config".format(name),
+            ],
+            outs = ["{}_{}_bin".format(name, c)],
+            cmd = "$(location //{}:{}) {} $@ which {}".format(flake_path_script.package, flake_path_script.name, dir, c),
             visibility = visibility,
         )
