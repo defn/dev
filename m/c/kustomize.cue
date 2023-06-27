@@ -267,7 +267,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.29.2"
+		version:   "0.30.0"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [
@@ -438,7 +438,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.20.3"
+		version: "6.20.4"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -687,7 +687,7 @@ kustomize: "external-secrets-operator": #KustomizeHelm & {
 	helm: {
 		release: "external-secrets"
 		name:    "external-secrets"
-		version: "0.8.3"
+		version: "0.9.0"
 		repo:    "https://charts.external-secrets.io"
 		values: {
 			webhook: create:        false
