@@ -1,8 +1,5 @@
-load("@rules_oci//oci:defs.bzl", "oci_image")
-load("@rules_pkg//:pkg.bzl", "pkg_tar")
 load("//cue:cue.bzl", "cue_export")
 load("//nix:nix.bzl", "nix_flake")
-load("//oci:oci.bzl", "skopeo_copy")
 load("//out:out.bzl", "copy_files")
 
 
@@ -78,30 +75,4 @@ sh_binary(
     data = [
         "app_config",
     ],
-)
-
-# oci
-pkg_tar(
-    name = "aws_config_tar",
-    srcs = [
-        "app_config",
-        "aws_config_cfg",
-    ],
-    package_dir = "/app",
-)
-
-oci_image(
-    name = "aws_image",
-    base = "@ubuntu_2204",
-    tars = [
-        "aws_config_tar",
-        "flake_store",
-    ],
-)
-
-skopeo_copy(
-    name = "aws_push",
-    image = ":aws_image",
-    remote_tags = ["latest"],
-    repository = "169.254.32.1:5000/defn/dev/aws",
 )
