@@ -182,3 +182,5 @@ go
 .cmake
 .dotfiles
 .cargo
+graph.in
+graph.png
