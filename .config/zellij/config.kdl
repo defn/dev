@@ -1,5 +1,8 @@
 default_layout "compact"
 
+# does not work
+mode_mode false
+
 pane_frames false
 
 plugins {
