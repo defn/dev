@@ -1,20 +1,11 @@
 load("//cue:cue.bzl", "cue_export")
-load("//nix:nix.bzl", "nix_flake")
 load("//out:out.bzl", "copy_files")
-
-# nix flake
-nix_flake(
-    name = "flake",
-    flakes = [
-        "cue",
-    ],
-)
 
 # app configuration
 cue_export(
     name = "app",
     srcs = [
-        "flake_cue",
+        "//pkg/cue:flake_cue",
     ],
     cues = glob(["*.cue"]),
     visibility = ["//visibility:public"],
