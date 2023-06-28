@@ -5,6 +5,8 @@ load("//oci:oci.bzl", "skopeo_copy")
 # nix flake
 nix_flake(
     name = "flake",
+    cmds = ["cue"],
+    visibility = ["//visibility:public"],
 )
 
 # oci
@@ -16,9 +18,10 @@ oci_image(
     ],
 )
 
+# docker push
 skopeo_copy(
     name = "push",
     image = ":image",
     remote_tags = ["latest"],
-    repository = "169.254.32.1:5000/defn/dev/pkg/cue",
+    repository = "169.254.32.1:5000/defn/dev/{}".format(package_name()),
 )

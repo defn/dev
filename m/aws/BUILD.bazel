@@ -1,5 +1,4 @@
 load("//cue:cue.bzl", "cue_export")
-load("//nix:nix.bzl", "nix_flake")
 
 filegroup(
     name = "template_org",
@@ -29,22 +28,10 @@ genrule(
     tools = ["aws_config_script"],
 )
 
-# nix flake
-nix_flake(
-    name = "flake",
-    cmds = [
-        "aws-vault",
-    ],
-    flakes = [
-        "cue",
-        "awscli",
-    ],
-)
-
 # app configuration
 cue_export(
     name = "app_config",
-    srcs = ["flake_cue"],
+    srcs = ["//pkg/cue:flake_cue"],
     cues = glob(["*.cue"]),
 )
 
@@ -53,14 +40,14 @@ sh_binary(
     name = "aws__cli",
     srcs = ["aws_cli.sh"],
     args = [
-        "$(location flake_awscli)",
-        "$(location flake_aws-vault)",
+        "$(location //pkg/awscli:flake_aws)",
+        "$(location //pkg/secrets:flake_aws-vault)",
         "$(location aws_config_cfg)",
     ],
     data = [
         "aws_config_cfg",
-        "flake_aws-vault",
-        "flake_awscli",
+        "//pkg/secrets:flake_aws-vault",
+        "//pkg/awscli:flake_aws",
     ],
 )
 
