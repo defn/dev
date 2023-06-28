@@ -6,16 +6,9 @@ plugins {
     compact-bar { path "compact-bar"; }
 }
 
-keybinds clear-defaults=true {
+keybind {
     normal {
-        bind "Ctrl g" { SwitchToMode "dashboard"; }
         bind "Ctrl n" { NewPane; }
-    }
-
-    dashboard {
-        bind "-" { Resize "Decrease"; }
-        bind "+" { Resize "Increase"; }
-        bind "d" { Detach; }
     }
 }
 
