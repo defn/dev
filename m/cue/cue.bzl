@@ -30,6 +30,6 @@ cue_export = rule(
         "expr": attr.string(default = ""),
         "format": attr.string(default = "json"),
         "shell": attr.string(default = "/bin/bash"),
-        "srcs": attr.label_list(),
+        "srcs": attr.label_list(default = ["//pkg/cue:flake_cue"]),
     },
 )
