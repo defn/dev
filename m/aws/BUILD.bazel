@@ -31,7 +31,6 @@ genrule(
 # app configuration
 cue_export(
     name = "app_config",
-    srcs = ["//pkg/cue:flake_cue"],
     cues = glob(["*.cue"]),
 )
 
