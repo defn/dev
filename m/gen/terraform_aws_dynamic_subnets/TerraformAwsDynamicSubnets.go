@@ -9,6 +9,9 @@ import (
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 
+// Defines an TerraformAwsDynamicSubnets based on a Terraform module.
+//
+// Source at ./tf/terraform-aws-dynamic-subnets
 type TerraformAwsDynamicSubnets interface {
 	cdktf.TerraformModule
 	AdditionalTagMap() *map[string]*string

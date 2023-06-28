@@ -9,6 +9,9 @@ import (
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 
+// Defines an TerraformAwsEksCluster based on a Terraform module.
+//
+// Source at ./tf/terraform-aws-eks-cluster
 type TerraformAwsEksCluster interface {
 	cdktf.TerraformModule
 	AdditionalTagMap() *map[string]*string

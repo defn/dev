@@ -9,6 +9,9 @@ import (
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 
+// Defines an Egg based on a Terraform module.
+//
+// Source at ./tf/egg
 type Egg interface {
 	cdktf.TerraformModule
 	// Experimental.

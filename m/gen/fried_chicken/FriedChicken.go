@@ -9,6 +9,9 @@ import (
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 
+// Defines an FriedChicken based on a Terraform module.
+//
+// Source at ./tf/fried-chicken
 type FriedChicken interface {
 	cdktf.TerraformModule
 	// Experimental.

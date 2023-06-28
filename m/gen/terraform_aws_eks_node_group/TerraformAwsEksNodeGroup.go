@@ -9,6 +9,9 @@ import (
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 
+// Defines an TerraformAwsEksNodeGroup based on a Terraform module.
+//
+// Source at ./tf/terraform-aws-eks-node-group
 type TerraformAwsEksNodeGroup interface {
 	cdktf.TerraformModule
 	AdditionalTagMap() *map[string]*string

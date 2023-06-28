@@ -9,6 +9,9 @@ import (
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 
+// Defines an TerraformNullLabel based on a Terraform module.
+//
+// Source at ./tf/terraform-null-label
 type TerraformNullLabel interface {
 	cdktf.TerraformModule
 	AdditionalTagMap() *map[string]*string
