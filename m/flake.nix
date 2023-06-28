@@ -1,7 +1,5 @@
 {
   inputs = {
-    godev.url = github:defn/dev/pkg-godev-0.0.89?dir=m/pkg/godev;
-    nodedev.url = github:defn/dev/pkg-nodedev-0.0.51?dir=m/pkg/nodedev;
     localdev.url = github:defn/dev/pkg-localdev-0.0.138?dir=m/pkg/localdev;
     development.url = github:defn/dev/pkg-development-0.0.60?dir=m/pkg/development;
     cloud.url = github:defn/dev/pkg-cloud-0.0.112?dir=m/pkg/cloud;
@@ -10,7 +8,7 @@
   };
 
   outputs = inputs:
-    inputs.godev.inputs.goreleaser.inputs.pkg.main rec {
+    inputs.localdev.inputs.tilt.inputs.pkg.main rec {
       src = ./.;
 
       config = rec {
@@ -21,8 +19,6 @@
 
       defaultPackage = ctx: ctx.wrap.nullBuilder {
         propagatedBuildInputs = with ctx.pkgs; [
-          inputs.godev.defaultPackage.${ctx.system}
-          inputs.nodedev.defaultPackage.${ctx.system}
           inputs.localdev.defaultPackage.${ctx.system}
           inputs.development.defaultPackage.${ctx.system}
           inputs.cloud.defaultPackage.${ctx.system}
