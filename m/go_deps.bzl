@@ -24,8 +24,8 @@ def go_deps():
     go_repository(
         name = "com_github_aws_constructs_go_constructs_v10",
         importpath = "github.com/aws/constructs-go/constructs/v10",
-        sum = "h1:qPsZj/T9RqIZvQjILb5UFVCg3OkN7LUcq4VSk38pA68=",
-        version = "v10.2.59",
+        sum = "h1:xj5lFzmjq4M8018V+pb05LQSjwhUHFKbgbRDYckIaBs=",
+        version = "v10.2.62",
     )
     go_repository(
         name = "com_github_aws_jsii_runtime_go",
@@ -640,8 +640,8 @@ def go_deps():
     go_repository(
         name = "com_github_muesli_termenv",
         importpath = "github.com/muesli/termenv",
-        sum = "h1:UzuTb/+hhlBugQz28rpzey4ZuKcZ03MeKsoG7IJZIxs=",
-        version = "v0.15.1",
+        sum = "h1:GohcuySI0QmI3wN8Ok9PtKGkgkFIk7y6Vpb5PvrY+Wo=",
+        version = "v0.15.2",
     )
 
     go_repository(
@@ -979,8 +979,8 @@ def go_deps():
     go_repository(
         name = "org_golang_google_protobuf",
         importpath = "google.golang.org/protobuf",
-        sum = "h1:kPPoIgf3TsEvrm0PFe15JQ+570QVxYzEvvHqChK+cng=",
-        version = "v1.30.0",
+        sum = "h1:g0LDEJHgrBl9N9r17Ru3sqWhkIx2NB67okBHPwC7hs8=",
+        version = "v1.31.0",
     )
     go_repository(
         name = "org_golang_x_arch",

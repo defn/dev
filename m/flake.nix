@@ -1,6 +1,6 @@
 {
   inputs = {
-    godev.url = github:defn/dev/pkg-godev-0.0.89?dir=m/pkg/godev;
+    godev.url = github:defn/dev/pkg-godev-0.0.90?dir=m/pkg/godev;
     nodedev.url = github:defn/dev/pkg-nodedev-0.0.51?dir=m/pkg/nodedev;
     localdev.url = github:defn/dev/pkg-localdev-0.0.138?dir=m/pkg/localdev;
     development.url = github:defn/dev/pkg-development-0.0.60?dir=m/pkg/development;
