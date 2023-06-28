@@ -6,23 +6,19 @@ plugins {
     compact-bar { path "compact-bar"; }
 }
 
-keybinds {
+keybinds clear-defaults=true {
     normal {
-        bind "Ctrl g" { SwitchToMode "locked"; }
-        bind "Ctrl p" { SwitchToMode "pane"; }
+        bind "Ctrl g" { SwitchToMode "dashboard"; }
         bind "Ctrl n" { NewPane; }
     }
 
-    pane {
-        bind "p" { SwitchFocus; }
-
-        bind "n" "Left" { MoveFocus "Left"; }
-    }
-
-    locked {
-        bind "Ctrl g" { SwitchToMode "normal"; }
+    dashboard {
+        bind "-" { Resize "Decrease"; }
+        bind "+" { Resize "Increase"; }
+        bind "d" { Detach; }
     }
 }
+
 
 // https://github.com/zellij-org/zellij/tree/main/zellij-utils/assets/themes
 theme "gruvbox-dark"
