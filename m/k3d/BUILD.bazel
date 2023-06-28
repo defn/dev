@@ -1,6 +1,5 @@
 load("@rules_oci//oci:defs.bzl", "oci_image")
 load("//earthly:earthly.bzl", "earthly_build")
-load("//nix:nix.bzl", "nix_flake")
 load("//oci:oci.bzl", "skopeo_copy")
 
 # earthly inputs
@@ -12,12 +11,6 @@ filegroup(
     ],
 )
 
-# nix flake
-nix_flake(
-    name = "flake",
-    flakes = ["earthly"],
-)
-
 # build docker image
 earthly_build(
     name = "k3d",
@@ -25,7 +18,7 @@ earthly_build(
     data = [
         "earthly_inputs",
     ],
-    earthly_bin = "flake_earthly",
+    earthly_bin = "//pkg/earthly:flake_earthly",
     image = "quay.io/defn/dev:latest-k3d",
 )
 
