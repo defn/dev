@@ -33,9 +33,9 @@
         sha256 = "sha256-aTGOfTB0+Lx8cFmfj2k5ih9AvYTXCp2VdPAol5U82Pc="; # x86_64-darwin
       };
       "aarch64-darwin" = {
-        os = "Darwin";
+        os = "darwin";
         arch = "aarch64";
-        sha256 = "sha256-aaaaag/4VLrQcMNMl6y5TD0IC7Zdg8YV7TOJVLP2qhE="; # aarch64-darwin
+        sha256 = "sha256-SvtqABwkYWgzDxE0sZ2mKeduNaFv6FyvJZAIhB++XUc="; # aarch64-darwin
       };
     };
   };
