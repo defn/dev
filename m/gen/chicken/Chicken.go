@@ -9,6 +9,9 @@ import (
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 
+// Defines an Chicken based on a Terraform module.
+//
+// Source at ./tf/chicken
 type Chicken interface {
 	cdktf.TerraformModule
 	// Experimental.

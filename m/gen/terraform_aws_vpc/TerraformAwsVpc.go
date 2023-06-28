@@ -9,6 +9,9 @@ import (
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 
+// Defines an TerraformAwsVpc based on a Terraform module.
+//
+// Source at ./tf/terraform-aws-vpc
 type TerraformAwsVpc interface {
 	cdktf.TerraformModule
 	AdditionalCidrBlocksOutput() *string
