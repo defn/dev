@@ -17,7 +17,7 @@ function main {
 		if [[ ${current} != "${latest}" ]]; then
 			echo "${slug} ${current} ${latest} ${real_tag}"
 		fi
-	done | (grep -E -v 'kustomize/ 5.0.3 5.1.0' || true)
+	done | (grep -E -v 'kustomize/ 5.0.3 5.1.0|tilt/ 0.32.4 0.33.0' || true)
 }
 
 main "$@"
