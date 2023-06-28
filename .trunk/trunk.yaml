@@ -1,6 +1,6 @@
 version: 0.1
 cli:
-  version: 1.10.0
+  version: 1.11.1
 plugins:
   sources:
     - id: trunk
@@ -23,25 +23,25 @@ lint:
         - m/k3d-tailscale-operator.yaml
         - m/**/config.json
   enabled:
-    - actionlint@1.6.24
+    - actionlint@1.6.25
     - black@23.3.0
     #- buildifier@6.1.2
-    - cue-fmt@0.4.3
+    - cue-fmt@0.5.0
     - git-diff-check
-    - gitleaks@8.16.4
-    - gofmt@1.19.3
+    - gitleaks@8.17.0
+    - gofmt@1.20.4
     - hadolint@2.12.0
     - isort@5.12.0
-    - markdownlint@0.34.0
+    - markdownlint@0.35.0
     # sudo ln -nfs $(which gcc) /usr/local/bin/cc
     # - nixpkgs-fmt@1.3.0
     - oxipng@8.0.0
     - prettier@2.8.8
-    - ruff@0.0.265
+    - ruff@0.0.275
     - shellcheck@0.9.0
-    - shfmt@3.5.0
+    - shfmt@3.6.0
     - taplo@0.7.0
-    - tflint@0.46.1
+    - tflint@0.47.0
     - yamllint@1.32.0
 runtimes:
   enabled:
@@ -51,6 +51,7 @@ runtimes:
     - rust@1.67.0
 actions:
   enabled:
+    - git-lfs
     - trunk-announce
     - trunk-check-pre-push
     - trunk-fmt-pre-commit
