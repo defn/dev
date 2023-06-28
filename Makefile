@@ -88,6 +88,10 @@ install-inner:
 		nix develop github:defn/dev/pkg-godev-0.0.88?dir=m/pkg/godev --command bash -c 'sudo ln -nfs "$$(which go)" "$${VSCODE_GIT_ASKPASS_NODE%/node}/bin/"'; \
 		fi
 
+	@mark trunk
+	sudo ln -nfs $$(which gcc) /usr/local/bin/cc
+	trunk install
+
 	@mark doctor
 	pass hello; echo; echo
 	ssh-add -L; echo; echo
