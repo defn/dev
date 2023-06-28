@@ -1,5 +1,5 @@
 load("@rules_oci//oci:defs.bzl", "oci_image")
-load("//earthly:earthly.bzl", "earthly_build")
+#load("//earthly:earthly.bzl", "earthly_build")
 load("//oci:oci.bzl", "skopeo_copy")
 
 # earthly inputs
@@ -12,15 +12,15 @@ filegroup(
 )
 
 # build docker image
-earthly_build(
-    name = "k3d",
-    build_args = ["K3S=1.25.10-k3s1"],
-    data = [
-        "earthly_inputs",
-    ],
-    earthly_bin = "//pkg/earthly:flake_earthly",
-    image = "quay.io/defn/dev:latest-k3d",
-)
+#earthly_build(
+#    name = "k3d",
+#    build_args = ["K3S=1.25.10-k3s1"],
+#    data = [
+#        "earthly_inputs",
+#    ],
+#    earthly_bin = "//pkg/earthly:flake_earthly",
+#    image = "quay.io/defn/dev:latest-k3d",
+#)
 
 oci_image(
     name = "k3d_image",
