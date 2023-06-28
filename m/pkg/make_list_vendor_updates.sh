@@ -9,7 +9,7 @@ function main {
 			(
 				cd "${a}"
 				echo "${a} $(jq -r '.vendor' <flake.json || true) $(../az/bin/n-latest || true)" | while read -r slug current latest real_tag; do
-					echo "${slug} ${current} ${latest} https://github.com/$(jq -r .ghrepo <flake.json)/releases/tag/${real_tag}"
+					echo "${slug} ${current} ${latest} https://github.com/$(jq -r .ghrepo <flake.json || true)/releases/tag/${real_tag}"
 				done
 			)
 		fi
