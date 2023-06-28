@@ -14,7 +14,7 @@ nix_flake(
 cue_export(
     name = "app",
     srcs = [
-        "flake_cue"
+        "flake_cue",
     ],
     cues = glob(["*.cue"]),
     visibility = ["//visibility:public"],
@@ -26,4 +26,3 @@ copy_files(
         "app.json": "app",
     },
 )
-

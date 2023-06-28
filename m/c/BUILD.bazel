@@ -34,7 +34,7 @@ filegroup(
 genrule(
     name = "kustomize",
     srcs = [
-        "config"
+        "config",
     ],
     outs = ["generate_kustomize"],
     cmd = "$(location gen_kustomize_script) $(location config) $@",
@@ -43,10 +43,10 @@ genrule(
 
 copy_files(
     name = "outputs_kustomize",
+    dir = ".",
     gen = {
         "generate_kustomize": "generate_kustomize",
     },
-    dir = "."
 )
 
 # oci

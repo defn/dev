@@ -77,6 +77,7 @@ pkg/vcluster/.direnv
 pkg/velero/.direnv
 pkg/vhs/.direnv
 pkg/vpn/.direnv
+pkg/zellij/.direnv
 aws/result
 c/result
 k3d/result
@@ -152,4 +153,5 @@ pkg/vcluster/result
 pkg/velero/result
 pkg/vhs/result
 pkg/vpn/result
+pkg/zellij/result
 result

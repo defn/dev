@@ -1,7 +1,6 @@
 load("//cue:cue.bzl", "cue_export")
 load("//nix:nix.bzl", "nix_flake")
 
-
 filegroup(
     name = "template_org",
     srcs = ["template_org.txt"],
@@ -33,13 +32,13 @@ genrule(
 # nix flake
 nix_flake(
     name = "flake",
+    cmds = [
+        "aws-vault",
+    ],
     flakes = [
         "cue",
         "awscli",
     ],
-    cmds = [
-        "aws-vault",
-    ]
 )
 
 # app configuration
@@ -59,9 +58,9 @@ sh_binary(
         "$(location aws_config_cfg)",
     ],
     data = [
-        "flake_awscli",
-        "flake_aws-vault",
         "aws_config_cfg",
+        "flake_aws-vault",
+        "flake_awscli",
     ],
 )
 
