@@ -24,7 +24,7 @@ function main {
 	nix build
 
 	# shellcheck disable=SC2046
-	tar cvf "${out}" $(nix-store --query --requisites --include-outputs result || true)
+	tar cf "${out}" $(nix-store --query --requisites --include-outputs result || true)
 }
 
 main "$@"
