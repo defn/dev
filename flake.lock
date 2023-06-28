@@ -3376,17 +3376,17 @@
       },
       "locked": {
         "dir": "m/pkg/shell",
-        "lastModified": 1687922886,
-        "narHash": "sha256-rkT3gXwsr5OBqcE788ewzdL/sxgFK9KYpAFxLHHVydw=",
+        "lastModified": 1687971388,
+        "narHash": "sha256-hjStBKGClB1kKAsNpTFpkgySvi6lZe78WEvCWBfnrVA=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "097ddf74213c35bf02f8c1e4147d268844b46913",
+        "rev": "0afcb21df166efd647c3cc0125a51b69cde2e68c",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/shell",
         "owner": "defn",
-        "ref": "pkg-shell-0.0.50",
+        "ref": "pkg-shell-0.0.51",
         "repo": "dev",
         "type": "github"
       }
@@ -3565,17 +3565,17 @@
       },
       "locked": {
         "dir": "m/pkg/zellij",
-        "lastModified": 1687922732,
-        "narHash": "sha256-ehN6sIUhnzAmb9sPz34WY8ktzvAYMpPhg6GgkS3TMEo=",
+        "lastModified": 1687971164,
+        "narHash": "sha256-afDAhobORTWTayMYcTKgLqKM6KISBVHYsXr+xe24oQE=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "f48313fb01ff0c5b9af10483d04034b374c56c12",
+        "rev": "10fa9aac8bbbb79b640e65defb71dcddc17f1abf",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/zellij",
         "owner": "defn",
-        "ref": "pkg-zellij-0.37.2-1",
+        "ref": "pkg-zellij-0.37.2-2",
         "repo": "dev",
         "type": "github"
       }
