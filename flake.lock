@@ -27,17 +27,17 @@
       },
       "locked": {
         "dir": "m/pkg/awscli",
-        "lastModified": 1687995457,
-        "narHash": "sha256-gj0kzuzptaP7cq8f2c0JPX7oWDFdb4lQ9TB9WeBi5Jc=",
+        "lastModified": 1688025342,
+        "narHash": "sha256-wgD9TC7r03YaqoS2DtzZXkSOamfT8oRKnx228x3OKO8=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "fac94f38ec12b83f6d442a2db21dd57926ad06bb",
+        "rev": "a19cb73ca7e331e5f8f39c095e0f47bc8b11bd82",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/awscli",
         "owner": "defn",
-        "ref": "pkg-awscli-2.12.4-1",
+        "ref": "pkg-awscli-2.12.4-2",
         "repo": "dev",
         "type": "github"
       }
@@ -223,17 +223,17 @@
       },
       "locked": {
         "dir": "m/pkg/cloud",
-        "lastModified": 1687995593,
-        "narHash": "sha256-Xn2fZBVI5g5dhor0iila+BDEKsBO/kUBw4xAKBqxpTI=",
+        "lastModified": 1688025457,
+        "narHash": "sha256-X9c992BbjWir+lWf1fdR1GcSsH9Zkloa96/WTuZ3qIc=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "c9547ded2f1510bae1182ba1c65771dfb8af5304",
+        "rev": "b936f7be4e157714766a1442d5c6cf6a2cb6708c",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cloud",
         "owner": "defn",
-        "ref": "pkg-cloud-0.0.113",
+        "ref": "pkg-cloud-0.0.114",
         "repo": "dev",
         "type": "github"
       }
