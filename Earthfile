@@ -1,4 +1,4 @@
-VERSION --use-registry-for-with-docker --ci-arg 0.7
+VERSION 0.7
 
 # rsync -ia `/home/ubuntu/.nix-profile/bin/nix-store -qR ~/.nix-profile $(ls -d .direnv/flake-profile-* | grep -v 'rc$')` /store/
 
@@ -38,7 +38,7 @@ root:
     RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm \
         && apt-get update && apt-get upgrade -y \
         && apt-get install -y --no-install-recommends lsb-release tzdata locales ca-certificates wget curl xz-utils rsync make git direnv bash-completion less \
-            sudo tini procps iptables net-tools iputils-ping iproute2 dnsutils gnupg \
+            sudo tini procps iptables net-tools iputils-ping iproute2 dnsutils gnupg graphviz irssi \
         && apt-get clean && apt purge -y nano \
         && rm -f /usr/bin/gs
 
