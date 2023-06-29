@@ -9,7 +9,7 @@
     oras.url = github:defn/dev/pkg-oras-1.0.0-2?dir=m/pkg/oras;
     buildkite.url = github:defn/dev/pkg-buildkite-3.49.0-1?dir=m/pkg/buildkite;
     bk.url = github:defn/dev/pkg-bk-2.0.0-10?dir=m/pkg/bk;
-    buildevents.url = github:defn/dev/pkg-buildevents-0.14.0-1?dir=m/pkg/buildevents;
+    buildevents.url = github:defn/dev/pkg-buildevents-0.14.0-2?dir=m/pkg/buildevents;
     honeyvent.url = github:defn/dev/pkg-honeyvent-1.1.3-9?dir=m/pkg/honeyvent;
     honeymarker.url = github:defn/dev/pkg-honeymarker-0.2.10-9?dir=m/pkg/honeymarker;
     honeytail.url = github:defn/dev/pkg-honeytail-1.8.3-7?dir=m/pkg/honeytail;
