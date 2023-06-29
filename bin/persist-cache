@@ -26,9 +26,12 @@ function cache {
 		if test -d /workspaces; then
 			sudo install -d -m 0755 -o ubuntu -g ubuntu /workspaces
 			ln -nfs /workspaces ~/work
-		else
+		elif test -d /work; then
 			sudo install -d -m 0755 -o ubuntu -g ubuntu /work
 			ln -nfs /work ~/work
+		elif test -d /nix; then
+			sudo install -d -m 0755 -o ubuntu -g ubuntu /nix/work
+			ln -nfs /nix/work ~/work
 		fi
 		sudo chown ubuntu:ubuntu ~/work/.
 	fi
