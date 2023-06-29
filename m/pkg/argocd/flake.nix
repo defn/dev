@@ -8,6 +8,7 @@
     installPhase = pkg: ''
       install -m 0755 -d $out $out/bin
       install -m 0755 $src $out/bin/argocd
+      chmod -R g-s $out/.
     '';
 
     downloads = {
