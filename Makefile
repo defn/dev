@@ -89,7 +89,6 @@ install-inner:
 		fi
 
 	@mark trunk
-	sudo ln -nfs $$(which gcc) /usr/local/bin/cc
 	trunk install
 
 	@mark doctor
