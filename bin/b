@@ -25,16 +25,16 @@ function bazel {
 function main {
 	set -efu -o pipefail
 
-	case "${1:-}" in
+	case "${1-}" in
 	logout)
 		open https://signin.aws.amazon.com/oauth?Action=logout &
 		;;
 	login)
 		shift
 		local account
-		case "${1:-}" in
+		case "${1-}" in
 		"" | /*)
-			account="${1:-}"
+			account="${1-}"
 			account="$(b pass run //aws:aws__list_accounts | fzf --query="${account#/}" --select-1)"
 			;;
 		*)
@@ -47,9 +47,9 @@ function main {
 	exec)
 		shift
 		local account
-		case "${1:-}" in
+		case "${1-}" in
 		"" | /*)
-			account="${1:-}"
+			account="${1-}"
 			account="$(b pass run //aws:aws__list_accounts | fzf --query="${account#/}" --select-1)"
 			;;
 		*)
@@ -68,9 +68,9 @@ function main {
 		fi
 
 		local account
-		case "${1:-}" in
+		case "${1-}" in
 		"" | /*)
-			account="${1:-}"
+			account="${1-}"
 			account="$(b pass run //aws:aws__list_accounts | fzf --query="${account#/}" --select-1)"
 			;;
 		*)
@@ -79,6 +79,15 @@ function main {
 		esac
 		shift
 		b pass run //aws:aws__cli "${account}" aws "$@"
+		;;
+	graph)
+		shift
+		local rule="$1"
+		shift
+		local tmp_dot
+		tmp_dot="$(mktemp -d XXXXXX || true)"
+		b query --noimplicit_deps "deps(${rule})" --output graph >"${tmp_dot}/graph.in" && dot -Tpng <"${tmp_dot}/graph.in" >"${tmp_dot}/graph.png" && code "${tmp_dot}/graph.png"
+		rm -rf "${tmp_dot}"
 		;;
 	*)
 		if [[ $# == 0 ]]; then
@@ -135,7 +144,7 @@ function main {
 			in)
 				shift
 
-				rule=":$(b | fzf --query="${1:-}" --select-1 || true)"
+				rule=":$(b | fzf --query="${1-}" --select-1 || true)"
 
 				local w
 				w="$(bazel info workspace)"
@@ -149,7 +158,7 @@ function main {
 			out)
 				shift
 
-				rule=":$(b | fzf --query="${1:-}" --select-1)"
+				rule=":$(b | fzf --query="${1-}" --select-1)"
 
 				local w
 				w="$(bazel info workspace)"
@@ -163,7 +172,7 @@ function main {
 			cat)
 				shift
 
-				rule=":$(b | fzf --query="${1:-}" --select-1)"
+				rule=":$(b | fzf --query="${1-}" --select-1)"
 
 				local w
 				w="$(bazel info workspace)"
@@ -182,7 +191,7 @@ function main {
 			run)
 				shift
 
-				if [[ -z ${1:-} ]]; then
+				if [[ -z ${1-} ]]; then
 					rule="$(b | grep __ | fzf --select-1)"
 				else
 					rule="$(b | fzf --query="${1}" --select-1)"
