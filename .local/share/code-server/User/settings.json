@@ -60,5 +60,11 @@
   "editor.defaultFormatter": "trunk.io",
   "trunk.autoInit": false,
   "trunk.showWhatsNew": false,
-  "trunk.showWhatsNewMessage": false
+  "trunk.showWhatsNewMessage": false,
+  "remote.SSH.remotePlatform": {
+    "coder-vscode--defnn--demo": "linux"
+  },
+  "files.associations": {
+    "Makefile": "makefile"
+  }
 }
