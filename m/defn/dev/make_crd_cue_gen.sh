@@ -3,14 +3,15 @@
 set -eufo pipefail
 
 function main {
-	if ! test -x "$(go env GOPATH || true)/bin/cue-gen"; then
-		go mod init meh
-		go get istio.io/tools/cmd/cue-gen
+	if ! test -x ./cue-gen/go/bin/cue-gen; then
+		pushd cue-gen
+		GOPATH="$(pwd)/go"
+		export GOPATH
 		go install istio.io/tools/cmd/cue-gen
-		rm go.mod go.sum
+		popd
 	fi
 
-	"$(go env GOPATH || true)/bin/cue-gen" -f=cue.yaml --crd=true
+	./cue-gen/go/bin/cue-gen -f=cue.yaml --crd=true
 }
 
 main "$@"
