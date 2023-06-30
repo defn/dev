@@ -22,7 +22,6 @@ function main {
 	# TODO hacky
 	cd defn/dev
 
-	find . -ls
 	"${cue_gen_bin}" -f="${cue_yaml}" --crd=true
 	mv crds/customresourcedefinitions.gen.yaml "${out}"
 }

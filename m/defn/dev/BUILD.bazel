@@ -1,3 +1,5 @@
+load("//out:out.bzl", "copy_files")
+
 filegroup(
     name = "make_crds_cue_gen_script",
     srcs = ["make_crds_cue_gen.sh"],
@@ -29,4 +31,11 @@ genrule(
     outs = ["customresourcedefinitions.gen.yaml"],
     cmd = "$(location make_crds_cue_gen_script) $(location cue_yaml) $(location //defn/dev/cue-gen:build_cue_gen_binary) $@",
     tools = ["make_crds_cue_gen_script"],
+)
+
+copy_files(
+    name = "outputs_crds",
+    gen = {
+        "crds/customresourcedefinitions.gen.yaml": "customresourcedefinitions.gen.yaml",
+    },
 )
