@@ -24,7 +24,6 @@ upgrade:
 	go mod tidy
 
 update:
-	go mod tidy
 	$(MAKE) bazel-ignore
 
 regen:
