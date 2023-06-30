@@ -66,5 +66,8 @@
   },
   "files.associations": {
     "Makefile": "makefile"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
