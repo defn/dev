@@ -45,8 +45,8 @@ sh_binary(
     ],
     data = [
         "aws_config_cfg",
-        "//pkg/secrets:flake_aws-vault",
         "//pkg/awscli:flake_aws",
+        "//pkg/secrets:flake_aws-vault",
     ],
 )
 
