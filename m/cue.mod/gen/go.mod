@@ -1,4 +1,4 @@
-module github.com/defn/dev/m/k8s
+module github.com/defn/dev/m/ignore/this
 
 go 1.20
 
