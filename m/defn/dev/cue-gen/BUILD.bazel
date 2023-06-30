@@ -20,4 +20,5 @@ genrule(
     outs = ["cue-gen"],
     cmd = "$(location make_cue_gen_script) $(location //pkg/godev:flake_go) $@",
     tools = ["make_cue_gen_script"],
+    visibility = ["//visibility:public"],
 )
