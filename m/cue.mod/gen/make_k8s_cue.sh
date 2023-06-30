@@ -26,7 +26,7 @@ function main {
 	shift
 
 	# TODO hacky
-	pushd k8s
+	pushd cue.mod/gen
 	export HOME="/home/ubuntu"
 	export GOMODCACHE="${HOME}/.cache/go-mod"
 
@@ -35,10 +35,9 @@ function main {
 		"${flake-cue}" get go "${p}"
 		break
 	done
-	popd
 
 	mkdir -p "${out}/cue.mod/gen"
-	rsync -ia k8s/cue.mod/gen/. "${out}/cue.mod/gen/."
+	rsync -ia cue.mod/gen/k8s.io "${out}/"
 }
 
 main "$@"
