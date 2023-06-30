@@ -26,6 +26,7 @@ lint:
         - m/k3d-tailscale-operator.yaml
         - m/**/config.json
   enabled:
+    - checkov@2.3.309
     - actionlint@1.6.25
     - black@23.3.0
     - buildifier@6.1.2
