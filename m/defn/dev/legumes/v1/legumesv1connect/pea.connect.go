@@ -124,23 +124,33 @@ type PeaStoreServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewPeaStoreServiceHandler(svc PeaStoreServiceHandler, opts ...connect_go.HandlerOption) (string, http.Handler) {
-	mux := http.NewServeMux()
-	mux.Handle(PeaStoreServiceGetPeaProcedure, connect_go.NewUnaryHandler(
+	peaStoreServiceGetPeaHandler := connect_go.NewUnaryHandler(
 		PeaStoreServiceGetPeaProcedure,
 		svc.GetPea,
 		opts...,
-	))
-	mux.Handle(PeaStoreServicePutPeaProcedure, connect_go.NewUnaryHandler(
+	)
+	peaStoreServicePutPeaHandler := connect_go.NewUnaryHandler(
 		PeaStoreServicePutPeaProcedure,
 		svc.PutPea,
 		opts...,
-	))
-	mux.Handle(PeaStoreServiceDeletePeaProcedure, connect_go.NewUnaryHandler(
+	)
+	peaStoreServiceDeletePeaHandler := connect_go.NewUnaryHandler(
 		PeaStoreServiceDeletePeaProcedure,
 		svc.DeletePea,
 		opts...,
-	))
-	return "/defn.dev.legumes.v1.PeaStoreService/", mux
+	)
+	return "/defn.dev.legumes.v1.PeaStoreService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case PeaStoreServiceGetPeaProcedure:
+			peaStoreServiceGetPeaHandler.ServeHTTP(w, r)
+		case PeaStoreServicePutPeaProcedure:
+			peaStoreServicePutPeaHandler.ServeHTTP(w, r)
+		case PeaStoreServiceDeletePeaProcedure:
+			peaStoreServiceDeletePeaHandler.ServeHTTP(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	})
 }
 
 // UnimplementedPeaStoreServiceHandler returns CodeUnimplemented from all methods.

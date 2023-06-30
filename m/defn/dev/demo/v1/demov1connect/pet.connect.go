@@ -118,23 +118,33 @@ type PetStoreServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewPetStoreServiceHandler(svc PetStoreServiceHandler, opts ...connect_go.HandlerOption) (string, http.Handler) {
-	mux := http.NewServeMux()
-	mux.Handle(PetStoreServiceGetPetProcedure, connect_go.NewUnaryHandler(
+	petStoreServiceGetPetHandler := connect_go.NewUnaryHandler(
 		PetStoreServiceGetPetProcedure,
 		svc.GetPet,
 		opts...,
-	))
-	mux.Handle(PetStoreServicePutPetProcedure, connect_go.NewUnaryHandler(
+	)
+	petStoreServicePutPetHandler := connect_go.NewUnaryHandler(
 		PetStoreServicePutPetProcedure,
 		svc.PutPet,
 		opts...,
-	))
-	mux.Handle(PetStoreServiceDeletePetProcedure, connect_go.NewUnaryHandler(
+	)
+	petStoreServiceDeletePetHandler := connect_go.NewUnaryHandler(
 		PetStoreServiceDeletePetProcedure,
 		svc.DeletePet,
 		opts...,
-	))
-	return "/defn.dev.demo.v1.PetStoreService/", mux
+	)
+	return "/defn.dev.demo.v1.PetStoreService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case PetStoreServiceGetPetProcedure:
+			petStoreServiceGetPetHandler.ServeHTTP(w, r)
+		case PetStoreServicePutPetProcedure:
+			petStoreServicePutPetHandler.ServeHTTP(w, r)
+		case PetStoreServiceDeletePetProcedure:
+			petStoreServiceDeletePetHandler.ServeHTTP(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	})
 }
 
 // UnimplementedPetStoreServiceHandler returns CodeUnimplemented from all methods.

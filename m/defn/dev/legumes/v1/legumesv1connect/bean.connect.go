@@ -126,23 +126,33 @@ type BeanStoreServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewBeanStoreServiceHandler(svc BeanStoreServiceHandler, opts ...connect_go.HandlerOption) (string, http.Handler) {
-	mux := http.NewServeMux()
-	mux.Handle(BeanStoreServiceGetBeanProcedure, connect_go.NewUnaryHandler(
+	beanStoreServiceGetBeanHandler := connect_go.NewUnaryHandler(
 		BeanStoreServiceGetBeanProcedure,
 		svc.GetBean,
 		opts...,
-	))
-	mux.Handle(BeanStoreServicePutBeanProcedure, connect_go.NewUnaryHandler(
+	)
+	beanStoreServicePutBeanHandler := connect_go.NewUnaryHandler(
 		BeanStoreServicePutBeanProcedure,
 		svc.PutBean,
 		opts...,
-	))
-	mux.Handle(BeanStoreServiceDeleteBeanProcedure, connect_go.NewUnaryHandler(
+	)
+	beanStoreServiceDeleteBeanHandler := connect_go.NewUnaryHandler(
 		BeanStoreServiceDeleteBeanProcedure,
 		svc.DeleteBean,
 		opts...,
-	))
-	return "/defn.dev.legumes.v1.BeanStoreService/", mux
+	)
+	return "/defn.dev.legumes.v1.BeanStoreService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case BeanStoreServiceGetBeanProcedure:
+			beanStoreServiceGetBeanHandler.ServeHTTP(w, r)
+		case BeanStoreServicePutBeanProcedure:
+			beanStoreServicePutBeanHandler.ServeHTTP(w, r)
+		case BeanStoreServiceDeleteBeanProcedure:
+			beanStoreServiceDeleteBeanHandler.ServeHTTP(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	})
 }
 
 // UnimplementedBeanStoreServiceHandler returns CodeUnimplemented from all methods.
