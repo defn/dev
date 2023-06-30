@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
 build: # Generate CRDs using cue-gen
-	$(MAKE) make_crd_cue_gen
+	cue-gen -f=cue.yaml --crd=true
 	buf generate
 
 make_%:
