@@ -2,10 +2,6 @@
 tf
 node_modules
 .direnv
-aws/.direnv
-c/.direnv
-k3d/.direnv
-k8s/.direnv
 pkg/acme/.direnv
 pkg/argocd/.direnv
 pkg/argorollouts/.direnv
@@ -78,10 +74,6 @@ pkg/velero/.direnv
 pkg/vhs/.direnv
 pkg/vpn/.direnv
 pkg/zellij/.direnv
-aws/result
-c/result
-k3d/result
-k8s/result
 pkg/acme/result
 pkg/argocd/result
 pkg/argorollouts/result
