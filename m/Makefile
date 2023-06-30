@@ -28,7 +28,7 @@ update:
 	$(MAKE) bazel-ignore
 
 regen:
-	cd defn/dev && buf generate && (find . -name 'BUILD.bazel' | xargs rm -fv) && $(MAKE)
+	cd defn/dev && $(MAKE)
 	$(MAKE) update-repos
 
 watch:
