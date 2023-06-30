@@ -7,10 +7,7 @@ load("//out:out.bzl", "copy_files")
 # app configuration
 cue_export(
     name = "config",
-    srcs = [
-        "//cue.mod/gen/k8s.io:k8s_cue",
-        "//pkg/cue:flake_cue",
-    ],
+    srcs = ["//cue.mod/gen/k8s.io:k8s_cue"],
     cues = glob(["*.cue"]),
     visibility = ["//visibility:public"],
 )
