@@ -2,8 +2,6 @@
 
 set -eufo pipefail
 
-set -x
-
 function main {
 	local app_config
 	local flake_jq
@@ -26,18 +24,20 @@ function main {
 	shift
 
 	# TODO hacky
-	pushd cue.mod/gen
+	local dst="cue.mod/gen"
+	local desired="k8s.io"
+
+	pushd "${dst}"
 	export HOME="/home/ubuntu"
 	export GOMODCACHE="${HOME}/.cache/go-mod"
 
 	for p in $("${flake_jq}" -r '.k8s.apis[]' "${app_config}"); do
 		"${flake_go}" get "${p}"
 		"${flake-cue}" get go "${p}"
-		break
 	done
 
-	mkdir -p "${out}/cue.mod/gen"
-	rsync -ia cue.mod/gen/k8s.io "${out}/"
+	mkdir -p "${out}/${dst}"
+	rsync -ia "${dst}/${desired}" "${out}/${dst}/"
 }
 
 main "$@"
