@@ -74,6 +74,9 @@ if [[ -n "${VSCODE_GIT_ASKPASS_MAIN:-}" ]]; then
 		/vscode/*)
 			export BROWSER=browser.sh
 			;;
+		*/.vscode-server/*)
+			export BROWSER="${VSCODE_GIT_ASKPASS_MAIN%%extensions/*}/bin/helpers/browser.sh"
+			;;
 		*/code-server*)
 			export BROWSER=browser.sh
 			;;
