@@ -24,25 +24,12 @@ upgrade:
 	go mod tidy
 
 update:
-	go mod tidy
 	$(MAKE) bazel-ignore
 
 regen:
-	cd defn/dev && buf generate && (find . -name 'BUILD.bazel' | xargs rm -fv) && $(MAKE)
-	$(MAKE) update-repos
+	@mark defn.dev protos
+	cd defn/dev && $(MAKE)
 
-watch:
-	$(MAKE) build
-	ibazel build //...
-
-bazel-ignore:
-	echo > .bazelignore
-	echo tf >> .bazelignore
-	echo node_modules >> .bazelignore
-	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1.direnv}' | sort >> .bazelignore
-	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1result}' | sort >> .bazelignore
-
-update-repos:
 	@mark gazelle-buf-update-repos
 	b pass run //:gazelle-buf-update-repos
 
@@ -54,6 +41,17 @@ update-repos:
 
 	@mark gazelle
 	b pass run //:gazelle
+
+watch:
+	$(MAKE) build
+	ibazel build //...
+
+bazel-ignore:
+	echo > .bazelignore
+	echo tf >> .bazelignore
+	echo node_modules >> .bazelignore
+	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1.direnv}' | sort >> .bazelignore
+	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1result}' | sort >> .bazelignore
 
 nix-build-all:
 	git ls-files | grep flake.nix | perl -pe 's{/?flake.nix}{}' | runmany 'mark $$1; cd ./$$1 && nix build'

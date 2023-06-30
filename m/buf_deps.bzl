@@ -1,2 +1,7 @@
+"""
+"""
+
 def buf_deps():
-    True
+    """something
+    """
+    return True

@@ -18,7 +18,7 @@ def copy_files(name, gen, dir = None, visibility = None):
     https://www.aspect.dev/blog/bazel-can-write-to-the-source-folder
     """
     _GENERATED = {
-        "{}/{}".format(native.package_name(),k): "//{}:{}".format(native.package_name(),v)
+        "{}/{}".format(native.package_name(), k): "//{}:{}".format(native.package_name(), v)
         for [k, v] in gen.items()
     }
 
@@ -29,7 +29,7 @@ def copy_files(name, gen, dir = None, visibility = None):
             "#!/usr/bin/env bash",
             "cd $BUILD_WORKSPACE_DIRECTORY",
         ] + [
-            "echo {1}; if test -d bazel-bin/{1}; then rsync -ia bazel-bin/{1}/* {2}/; else mkdir -p $(dirname {0}); mv -f bazel-bin/{1} {0}; fi".format(
+            "echo {1}; if test -d bazel-bin/{1}; then rsync -ia bazel-bin/{1}/* {2}/; else mkdir -p $(dirname {0}); install -m 0644 bazel-bin/{1} {0}; fi".format(
                 k,
                 # Convert label to path
                 v.replace(":", "/"),
