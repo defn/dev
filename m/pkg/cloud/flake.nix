@@ -4,7 +4,7 @@
     packer.url = github:defn/dev/pkg-packer-1.9.1-1?dir=m/pkg/packer;
     step.url = github:defn/dev/pkg-step-0.24.4-3?dir=m/pkg/step;
     awscli.url = github:defn/dev/pkg-awscli-2.12.5-1?dir=m/pkg/awscli;
-    flyctl.url = github:defn/dev/pkg-flyctl-0.1.44-1?dir=m/pkg/flyctl;
+    flyctl.url = github:defn/dev/pkg-flyctl-0.1.45-1?dir=m/pkg/flyctl;
     chamber.url = github:defn/dev/pkg-chamber-2.13.1-1?dir=m/pkg/chamber;
   };
 
