@@ -6,6 +6,7 @@
     development.url = github:defn/dev/pkg-development-0.0.60?dir=m/pkg/development;
     cloud.url = github:defn/dev/pkg-cloud-0.0.115?dir=m/pkg/cloud;
     kubernetes.url = github:defn/dev/pkg-kubernetes-0.0.114?dir=m/pkg/kubernetes;
+    coder.url = github:defn/dev/pkg-coder-0.24.1-1?dir=m/pkg/coder;
     tailscale.url = github:defn/dev/pkg-tailscale-1.44.0-1?dir=m/pkg/tailscale;
   };
 
@@ -27,6 +28,7 @@
           inputs.development.defaultPackage.${ctx.system}
           inputs.cloud.defaultPackage.${ctx.system}
           inputs.kubernetes.defaultPackage.${ctx.system}
+          inputs.coder.defaultPackage.${ctx.system}
           inputs.tailscale.defaultPackage.${ctx.system}
           bashInteractive
         ]
@@ -254,7 +256,7 @@
             --k3s-node-label env=''${name##*-}@server:0 \
             --volume $name-tailscale:/var/lib/tailscale@server:0 \
             --volume $name-irsa:/var/lib/rancher/k3s/server/tls2@server:0 \
-            --volume $name-manifest:/var/lib/rancher/k3s/server/manifests2@server:0 
+            --volume $name-manifest:/var/lib/rancher/k3s/server/manifests2@server:0
 
           docker --context=host update --restart=no k3d-$name-server-0
         '';
