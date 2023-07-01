@@ -9,8 +9,7 @@ function bazel {
 	case "${cmd}" in
 	build | run | test)
 		if [[ "$(uname -s || true)" == "Darwin" ]]; then
-			PATH="/usr/bin:${PATH}"
-			command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "${cmd}" --macos_sdk_version="$(xcrun -show-sdk-version || true)" "$@"
+			command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "${cmd}" --macos_sdk_version="$(/usr/bin/xcrun -show-sdk-version || true)" "$@"
 			return $?
 		fi
 		;;
