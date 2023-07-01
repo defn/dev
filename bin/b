@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-bopts="--sandbox_writable_path=/nix --sandbox_writable_path=${HOME}/.cache/nix --sandbox_writable_path=${HOME}/.cache/go-mod --sandbox_writable_path=${HOME}/.cache/go-build  --sandbox_writable_path=${HOME}/.earthly --sandbox_writable_path=${HOME}/m/k"
+bopts="--sandbox_writable_path=/nix --sandbox_writable_path=${HOME}/.cache/nix --sandbox_writable_path=${HOME}/.cache/go-mod --sandbox_writable_path=${HOME}/.cache/go-build  --sandbox_writable_path=${HOME}/.earthly --sandbox_writable_path=${HOME}/m/k --sandbox_writeable_path=${HOME}/work"
 
 function bazel {
 	local cmd="$1"
