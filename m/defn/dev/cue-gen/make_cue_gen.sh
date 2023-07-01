@@ -17,7 +17,6 @@ function main {
 
 	# TODO hacky
 	cd defn/dev/cue-gen
-	export HOME="/home/ubuntu"
 	export GOMODCACHE="${HOME}/.cache/go-mod"
 
 	"${flake_go}" build istio.io/tools/cmd/cue-gen
