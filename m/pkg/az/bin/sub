@@ -17,7 +17,7 @@
 set -efu
 
 function sdebug {
-	if [[ -n ${DEBUG:-} ]]; then
+	if [[ -n ${DEBUG-} ]]; then
 		echo "$@" 1>&2
 	fi
 }

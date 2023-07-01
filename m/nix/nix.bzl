@@ -20,7 +20,7 @@ def nix_flake(name, srcs = [], cmds = [], flake = None, visibility = None):
             "flake.lock",
             "flake.nix",
         ] + srcs,
-        visibility = visibility
+        visibility = visibility,
     )
 
     if flake == None:
