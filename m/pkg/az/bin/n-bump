@@ -3,7 +3,7 @@
 function main {
 	set -efu
 
-	if [[ -z ${1:-} ]]; then
+	if [[ -z ${1-} ]]; then
 		if [[ "null" != "$(jq -r '.vendor' <flake.json)" ]]; then
 			# vendor 1.0.0-1 -> 1.0.0-2
 			if [[ "null" == "$(jq -r '.revision' <flake.json)" ]]; then

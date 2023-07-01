@@ -8,7 +8,7 @@ function main {
 	set -efu
 
 	echo "v0.0.1"
-	echo "example: ${FLAGS_name:-}: $@"
+	echo "example: ${FLAGS_name-}: $@"
 }
 
 # shellcheck disable=SC1091

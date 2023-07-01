@@ -26,6 +26,13 @@ lint:
         - m/k3d-tailscale-operator.yaml
         - m/**/config.json
   enabled:
+    - bandit@1.7.5
+    - gokart@0.5.1
+    - osv-scanner@1.3.4
+    - terrascan@1.18.1
+    - tfsec@1.28.1
+    - trivy@0.42.1
+    - trufflehog@3.42.0
     - checkov@2.3.309
     - actionlint@1.6.25
     - black@23.3.0

@@ -6,7 +6,7 @@ function main {
 	local repo="$(cat flake.json | jq -r '.ghrepo')"
 
 	if [[ ${repo} == "null" ]]; then
-		jq -n .version <flake.json 
+		jq -n .version <flake.json
 	elif [[ ${repo} == "aws/aws-cli" ]]; then
 		gh api "/repos/${repo}/git/refs/tags" | jq -r '.[].ref' | cut -d/ -f3- | tail -1
 	else
