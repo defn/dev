@@ -28,7 +28,6 @@ function main {
 	local desired="k8s.io"
 
 	pushd "${dst}"
-	export HOME="/home/ubuntu"
 	export GOMODCACHE="${HOME}/.cache/go-mod"
 
 	for p in $("${flake_jq}" -r '.k8s.apis[]' "${app_config}"); do
