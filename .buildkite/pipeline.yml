@@ -1,5 +1,3 @@
 steps:
-  - name: build
-    command: cd m && nix develop --command ../bin/b build
   - name: test
     command: cd m && nix develop --command ../bin/b test
