@@ -60,6 +60,8 @@
         inputs.kubernetes.defaultPackage.${ctx.system}
         inputs.coder.defaultPackage.${ctx.system}
 
+        ctx.pkgs.irssi
+
         inputs.shell.defaultPackage.${ctx.system}
       ]
       ++ ctx.commands
