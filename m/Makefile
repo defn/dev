@@ -1,6 +1,10 @@
 build:
 	../bin/b pass build //cmd/cli:cli
 
+bazel:
+	for a in bazel bazelisk cue go helm kustomize nix nix-store; do ln -nfs $$(which $$a) bin/; done
+	export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:$$HOME/bin:$$(pwd)/bin && b build
+
 all:
 	b pass build //...
 
