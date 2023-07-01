@@ -2,7 +2,7 @@ build:
 	../bin/b pass build //cmd/cli:cli
 
 bazel:
-	for a in bazel bazelisk cue go helm kustomize nix nix-store; do ln -nfs $$(which $$a) bin/bazel/; done
+	for a in bazel bazelisk cue go helm kustomize nix nix-store; do ln -nfs $$(which $$a) /usr/local/bin/; done
 
 all:
 	b pass build //...
