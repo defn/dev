@@ -202,6 +202,10 @@ function vi {
     fi
 
     if [[ ! -x "$code" ]]; then
+      code="$(type -P code || true)"
+    fi
+
+    if [[ ! -x "$code" ]]; then
       command vi "$@"
     else
       "$code" "$@"
