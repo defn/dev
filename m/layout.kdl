@@ -1,8 +1,10 @@
 layout {
     pane split_direction="vertical" {
-        pane edit="Tiltfile"
         pane command="make" {
             args "up"
+        }
+        pane command="make" {
+            args "ci"
         }
     }
 }

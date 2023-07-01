@@ -1,13 +1,9 @@
 analytics_settings(False)
 
-# buildkite
-local_resource("buildkite",
-    serve_cmd=["make", "ci"])
-
 # buf generate
 local_resource(
     "buf-generate",
-    cmd=["bash", "-c", "cd a && buf generate"],
+    cmd=["bash", "-c", "cd defn/dev && buf generate"],
     deps=[
         "defn/dev/rock/v1/rock.proto",
         "defn/dev/demo/v1/pet.proto",
@@ -15,9 +11,21 @@ local_resource(
         "defn/dev/legumes/v1/pea.proto"
     ])
 
+if "-darwin" in os.getenv("system"):
+    # vault
+    local_resource("vault",
+        serve_cmd=[
+            "bash", "-c",
+            """
+                exec this-vault-start -log-level debug
+            """
+        ]
+    )
+
 if "-linux" in os.getenv("system"):
     local_resource("tailscale",
         serve_cmd=[ "bash", "-c", """
             exec sudo "$(which tailscaled)" "$@"
             """ ]
     )
+
