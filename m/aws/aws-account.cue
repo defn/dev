@@ -1,558 +1,356 @@
 package aws
 
+org: [ORG=string]: account: [ACCOUNT=string]: {
+	org:     ORG
+	account: ACCOUNT
+}
+
 org: {
+	defn: account: {
+		bootstrap: {
+			id: "510430971399"
+		}
+	}
 	coil: account: {
 		org: {
-			org:     "coil"
-			id:      "138291560003"
-			account: "org"
+			id: "138291560003"
 		}
 		lib: {
-			org:     "coil"
-			id:      "160764896647"
-			account: "lib"
+			id: "160764896647"
 		}
 		net: {
-			org:     "coil"
-			id:      "278790191486"
-			account: "net"
+			id: "278790191486"
 		}
 		hub: {
-			org:     "coil"
-			id:      "453991412409"
-			account: "hub"
+			id: "453991412409"
 		}
 	}
 	curl: account: {
 		net: {
-			org:     "curl"
-			id:      "101142583332"
-			account: "net"
+			id: "101142583332"
 		}
 		lib: {
-			org:     "curl"
-			id:      "298406631539"
-			account: "lib"
+			id: "298406631539"
 		}
 		org: {
-			org:     "curl"
-			id:      "424535767618"
-			account: "org"
+			id: "424535767618"
 		}
 		hub: {
-			org:     "curl"
-			id:      "804430872255"
-			account: "hub"
+			id: "804430872255"
 		}
 	}
 	gyre: account: {
 		org: {
-			org:     "gyre"
-			id:      "065163301604"
-			account: "org"
+			id: "065163301604"
 		}
 		ops: {
-			org:     "gyre"
-			id:      "319951235442"
-			account: "ops"
+			id: "319951235442"
 		}
 	}
 	helix: account: {
 		sec: {
-			org:     "helix"
-			id:      "018520313738"
-			account: "sec"
+			id: "018520313738"
 		}
 		ops: {
-			org:     "helix"
-			id:      "368812692254"
-			account: "ops"
+			id: "368812692254"
 		}
 		lib: {
-			org:     "helix"
-			id:      "377857698578"
-			account: "lib"
+			id: "377857698578"
 		}
 		hub: {
-			org:     "helix"
-			id:      "436043820387"
-			account: "hub"
+			id: "436043820387"
 		}
 		net: {
-			org:     "helix"
-			id:      "504722108514"
-			account: "net"
+			id: "504722108514"
 		}
 		pub: {
-			org:     "helix"
-			id:      "536806623881"
-			account: "pub"
+			id: "536806623881"
 		}
 		log: {
-			org:     "helix"
-			id:      "664427926343"
-			account: "log"
+			id: "664427926343"
 		}
 		dmz: {
-			org:     "helix"
-			id:      "724643698007"
-			account: "dmz"
+			id: "724643698007"
 		}
 		org: {
-			org:     "helix"
-			id:      "816178966829"
-			account: "org"
+			id: "816178966829"
 		}
 		dev: {
-			org:     "helix"
-			id:      "843784871878"
-			account: "dev"
+			id: "843784871878"
 		}
 	}
 	spiral: account: {
 		org: {
-			org:     "spiral"
-			id:      "232091571197"
-			account: "org"
+			id: "232091571197"
 		}
 		net: {
-			org:     "spiral"
-			id:      "057533398557"
-			account: "net"
+			id: "057533398557"
 		}
 		lib: {
-			org:     "spiral"
-			id:      "073874947996"
-			account: "lib"
+			id: "073874947996"
 		}
 		dmz: {
-			org:     "spiral"
-			id:      "130046154300"
-			account: "dmz"
+			id: "130046154300"
 		}
 		hub: {
-			org:     "spiral"
-			id:      "216704421225"
-			account: "hub"
+			id: "216704421225"
 		}
 		dev: {
-			org:     "spiral"
-			id:      "308726031860"
-			account: "dev"
+			id: "308726031860"
 		}
 		pub: {
-			org:     "spiral"
-			id:      "371657257885"
-			account: "pub"
+			id: "371657257885"
 		}
 		sec: {
-			org:     "spiral"
-			id:      "398258703387"
-			account: "sec"
+			id: "398258703387"
 		}
 		log: {
-			org:     "spiral"
-			id:      "442333715734"
-			account: "log"
+			id: "442333715734"
 		}
 		ops: {
-			org:     "spiral"
-			id:      "601164058091"
-			account: "ops"
+			id: "601164058091"
 		}
 	}
 	fogg: account: {
 		org: {
-			org:     "fogg"
-			id:      "328216504962"
-			account: "org"
+			id: "328216504962"
 		}
 		asset: {
-			org:     "fogg"
-			id:      "060659916753"
-			account: "asset"
+			id: "060659916753"
 		}
 		circus: {
-			org:     "fogg"
-			id:      "844609041254"
-			account: "circus"
+			id: "844609041254"
 		}
 		data: {
-			org:     "fogg"
-			id:      "624713464251"
-			account: "data"
+			id: "624713464251"
 		}
 		gateway: {
-			org:     "fogg"
-			id:      "318746665903"
-			account: "gateway"
+			id: "318746665903"
 		}
 		home: {
-			org:     "fogg"
-			id:      "812459563189"
-			account: "home"
+			id: "812459563189"
 		}
 		hub: {
-			org:     "fogg"
-			id:      "337248635000"
-			account: "hub"
+			id: "337248635000"
 		}
 		post: {
-			org:     "fogg"
-			id:      "565963418226"
-			account: "post"
+			id: "565963418226"
 		}
 		sandbox: {
-			org:     "fogg"
-			id:      "442766271046"
-			account: "sandbox"
+			id: "442766271046"
 		}
 		security: {
-			org:     "fogg"
-			id:      "372333168887"
-			account: "security"
+			id: "372333168887"
 		}
 	}
 	imma: account: {
 		org: {
-			org:     "imma"
-			id:      "548373030883"
-			account: "org"
+			id: "548373030883"
 		}
 		defn: {
-			org:     "imma"
-			id:      "246197522468"
-			account: "defn"
+			id: "246197522468"
 		}
 		dev: {
-			org:     "imma"
-			id:      "445584037541"
-			account: "dev"
+			id: "445584037541"
 		}
 		dgwyn: {
-			org:     "imma"
-			id:      "289716781198"
-			account: "dgwyn"
+			id: "289716781198"
 		}
 		prod: {
-			org:     "imma"
-			id:      "766142996227"
-			account: "prod"
+			id: "766142996227"
 		}
 		tolan: {
-			org:     "imma"
-			id:      "516851121506"
-			account: "tolan"
+			id: "516851121506"
 		}
 	}
 	immanent: account: {
 		org: {
-			org:     "immanent"
-			id:      "545070380609"
-			account: "org"
+			id: "545070380609"
 		}
 		changer: {
-			org:     "immanent"
-			id:      "003884504807"
-			account: "changer"
+			id: "003884504807"
 		}
 		chanter: {
-			org:     "immanent"
-			id:      "071244154667"
-			account: "chanter"
+			id: "071244154667"
 		}
 		doorkeeper: {
-			org:     "immanent"
-			id:      "013267321144"
-			account: "doorkeeper"
+			id: "013267321144"
 		}
 		ged: {
-			org:     "immanent"
-			id:      "640792184178"
-			account: "ged"
+			id: "640792184178"
 		}
 		hand: {
-			org:     "immanent"
-			id:      "826250190242"
-			account: "hand"
+			id: "826250190242"
 		}
 		herbal: {
-			org:     "immanent"
-			id:      "165452499696"
-			account: "herbal"
+			id: "165452499696"
 		}
 		namer: {
-			org:     "immanent"
-			id:      "856549015893"
-			account: "namer"
+			id: "856549015893"
 		}
 		patterner: {
-			org:     "immanent"
-			id:      "143220204648"
-			account: "patterner"
+			id: "143220204648"
 		}
 		roke: {
-			org:     "immanent"
-			id:      "892560628624"
-			account: "roke"
+			id: "892560628624"
 		}
 		summoner: {
-			org:     "immanent"
-			id:      "397411277587"
-			account: "summoner"
+			id: "397411277587"
 		}
 		windkey: {
-			org:     "immanent"
-			id:      "095764861781"
-			account: "windkey"
+			id: "095764861781"
 		}
 	}
 	whoa: account: {
 		org: {
-			org:     "whoa"
-			id:      "389772512117"
-			account: "org"
+			id: "389772512117"
 		}
 		dev: {
-			org:     "whoa"
-			id:      "439761234835"
-			account: "dev"
+			id: "439761234835"
 		}
 		prod: {
-			org:     "whoa"
-			id:      "204827926367"
-			account: "prod"
+			id: "204827926367"
 		}
 		secrets: {
-			org:     "whoa"
-			id:      "464075062390"
-			account: "secrets"
+			id: "464075062390"
 		}
 	}
 	chamber: account: {
 		org: {
-			org:     "chamber"
-			id:      "730917619329"
-			account: "org"
+			id: "730917619329"
 		}
 		"1": {
-			org:     "chamber"
-			id:      "741346472057"
-			account: "1"
+			id: "741346472057"
 		}
 		"2": {
-			org:     "chamber"
-			id:      "447993872368"
-			account: "2"
+			id: "447993872368"
 		}
 		"3": {
-			org:     "chamber"
-			id:      "463050069968"
-			account: "3"
+			id: "463050069968"
 		}
 		"4": {
-			org:     "chamber"
-			id:      "368890376620"
-			account: "4"
+			id: "368890376620"
 		}
 		"5": {
-			org:     "chamber"
-			id:      "200733412967"
-			account: "5"
+			id: "200733412967"
 		}
 		"6": {
-			org:     "chamber"
-			id:      "493089153027"
-			account: "6"
+			id: "493089153027"
 		}
 		"7": {
-			org:     "chamber"
-			id:      "837425503386"
-			account: "7"
+			id: "837425503386"
 		}
 		"8": {
-			org:     "chamber"
-			id:      "773314335856"
-			account: "8"
+			id: "773314335856"
 		}
 		"9": {
-			org:     "chamber"
-			id:      "950940975070"
-			account: "9"
+			id: "950940975070"
 		}
 		a: {
-			org:     "chamber"
-			id:      "503577294851"
-			account: "a"
+			id: "503577294851"
 		}
 		b: {
-			org:     "chamber"
-			id:      "310940910494"
-			account: "b"
+			id: "310940910494"
 		}
 		c: {
-			org:     "chamber"
-			id:      "047633732615"
-			account: "c"
+			id: "047633732615"
 		}
 		d: {
-			org:     "chamber"
-			id:      "699441347021"
-			account: "d"
+			id: "699441347021"
 		}
 		e: {
-			org:     "chamber"
-			id:      "171831323337"
-			account: "e"
+			id: "171831323337"
 		}
 		f: {
-			org:     "chamber"
-			id:      "842022523232"
-			account: "f"
+			id: "842022523232"
 		}
 		g: {
-			org:     "chamber"
-			id:      "023867963778"
-			account: "g"
+			id: "023867963778"
 		}
 		h: {
-			org:     "chamber"
-			id:      "371020107387"
-			account: "h"
+			id: "371020107387"
 		}
 		i: {
-			org:     "chamber"
-			id:      "290132238209"
-			account: "i"
+			id: "290132238209"
 		}
 		j: {
-			org:     "chamber"
-			id:      "738433022197"
-			account: "j"
+			id: "738433022197"
 		}
 		k: {
-			org:     "chamber"
-			id:      "580612865853"
-			account: "k"
+			id: "580612865853"
 		}
 		l: {
-			org:     "chamber"
-			id:      "991300382347"
-			account: "l"
+			id: "991300382347"
 		}
 		m: {
-			org:     "chamber"
-			id:      "684895750259"
-			account: "m"
+			id: "684895750259"
 		}
 		n: {
-			org:     "chamber"
-			id:      "705881812506"
-			account: "n"
+			id: "705881812506"
 		}
 		o: {
-			org:     "chamber"
-			id:      "307136835824"
-			account: "o"
+			id: "307136835824"
 		}
 		p: {
-			org:     "chamber"
-			id:      "706168331526"
-			account: "p"
+			id: "706168331526"
 		}
 		q: {
-			org:     "chamber"
-			id:      "217047480856"
-			account: "q"
+			id: "217047480856"
 		}
 		r: {
-			org:     "chamber"
-			id:      "416221726155"
-			account: "r"
+			id: "416221726155"
 		}
 		s: {
-			org:     "chamber"
-			id:      "840650118369"
-			account: "s"
+			id: "840650118369"
 		}
 		t: {
-			org:     "chamber"
-			id:      "490895200523"
-			account: "t"
+			id: "490895200523"
 		}
 		u: {
-			org:     "chamber"
-			id:      "467995590869"
-			account: "u"
+			id: "467995590869"
 		}
 		v: {
-			org:     "chamber"
-			id:      "979368042862"
-			account: "v"
+			id: "979368042862"
 		}
 		w: {
-			org:     "chamber"
-			id:      "313387692116"
-			account: "w"
+			id: "313387692116"
 		}
 		x: {
-			org:     "chamber"
-			id:      "834936839208"
-			account: "x"
+			id: "834936839208"
 		}
 		y: {
-			org:     "chamber"
-			id:      "153556747817"
-			account: "y"
+			id: "153556747817"
 		}
 		z: {
-			org:     "chamber"
-			id:      "037804009879"
-			account: "z"
+			id: "037804009879"
 		}
 	}
 	jianghu: account: {
 		org: {
-			org:     "jianghu"
-			id:      "657613322961"
-			account: "org"
+			id: "657613322961"
 		}
 		tahoe: {
-			org:     "jianghu"
-			id:      "025636091251"
-			account: "tahoe"
+			id: "025636091251"
 		}
 		klamath: {
-			org:     "jianghu"
-			id:      "298431841138"
-			account: "klamath"
+			id: "298431841138"
 		}
 	}
 	vault: account: org: {
-		org:     "vault"
-		id:      "475528707847"
-		account: "org"
+		id: "475528707847"
 	}
 	circus: account: {
 		org: {
-			org:     "circus"
-			id:      "036139182623"
-			account: "org"
+			id: "036139182623"
 		}
 		audit: {
-			org:     "circus"
-			id:      "707476523482"
-			account: "audit"
+			id: "707476523482"
 		}
 		ops: {
-			org:     "circus"
-			id:      "415618116579"
-			account: "ops"
+			id: "415618116579"
 		}
 		transit: {
-			org:     "circus"
-			id:      "002516226222"
-			account: "transit"
+			id: "002516226222"
 		}
 	}
 }
