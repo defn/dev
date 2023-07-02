@@ -69,22 +69,6 @@ export KUBECONFIG_ALL="$HOME/.kube/config"
 # editor
 export CODER_TELEMETRY=false
 export EDITOR=vim
-if [[ -n "${VSCODE_GIT_ASKPASS_MAIN:-}" ]]; then
-	case "${VSCODE_GIT_ASKPASS_MAIN}" in
-		/vscode/*)
-			export BROWSER=browser.sh
-			;;
-		*/.vscode-server/*)
-			export BROWSER="${VSCODE_GIT_ASKPASS_MAIN%%extensions/*}/bin/helpers/browser.sh"
-			;;
-		*/code-server*)
-			export BROWSER=browser.sh
-			;;
-		*)
-			export BROWSER="open"
-			;;
-	esac
-fi
 
 # ssh-agent
 case "$(uname -s)" in

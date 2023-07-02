@@ -105,7 +105,7 @@
             this-k3d-provision ${nme} $name
             ${nme} get -A svc | grep -v '<none>'
 
-            $BROWSER https://argocd.defn.run
+            browser https://argocd.defn.run
             ${nme} password
             ;;
           vc0)
