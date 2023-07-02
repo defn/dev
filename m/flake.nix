@@ -61,6 +61,7 @@
         inputs.coder.defaultPackage.${ctx.system}
 
         ctx.pkgs.irssi
+        ctx.pkgs.graphviz
 
         inputs.shell.defaultPackage.${ctx.system}
       ]
