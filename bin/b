@@ -8,7 +8,14 @@ function bazel {
 	local cmd="$1"
 	shift
 
-	command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "${cmd}" --macos_sdk_version="$(/usr/bin/xcrun -show-sdk-version || true)" "$@"
+	case "${cmd}" in
+	build | test | run)
+		command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "${cmd}" --macos_sdk_version="$(/usr/bin/xcrun -show-sdk-version || true)" "$@"
+		;;
+	*)
+		command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "${cmd}" "$@"
+		;;
+	esac
 }
 
 function main {
