@@ -83,13 +83,9 @@ install-inner:
 		&& docker context create host --docker host=unix:///var/run/docker.sock || true \
         && docker context use host
 
-	@mark godev
-	if echo "$${VSCODE_GIT_ASKPASS_NODE:-}" | grep ^/vscode; then \
-		nix develop github:defn/dev/pkg-godev-0.0.88?dir=m/pkg/godev --command bash -c 'sudo ln -nfs "$$(which go)" "$${VSCODE_GIT_ASKPASS_NODE%/node}/bin/"'; \
-		fi
-
 	@mark home flake_path
 	(cd m/pkg/home && ~/bin/b build flake_path && ~/bin/b out flake_path) >bin/nix/.path
+	ln -nfs "$(shell env PATH="$(shell cat bin/nix/.path):$(PATH)" which go)" /usr/local/bin/
 
 	@mark trunk
 	trunk install
