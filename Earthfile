@@ -37,8 +37,8 @@ root:
 
     RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm \
         && apt-get update && apt-get upgrade -y \
-        && apt-get install -y --no-install-recommends lsb-release tzdata locales ca-certificates wget curl xz-utils rsync make git direnv bash-completion less \
-            sudo tini procps iptables net-tools iputils-ping iproute2 dnsutils gnupg graphviz irssi \
+        && apt-get install -y --no-install-recommends lsb-release tzdata locales ca-certificates wget curl xz-utils rsync make git direnv bash-completion less pass \
+            sudo tini procps iptables net-tools iputils-ping iproute2 dnsutils gnupg \
         && apt-get clean && apt purge -y nano \
         && rm -f /usr/bin/gs
 
