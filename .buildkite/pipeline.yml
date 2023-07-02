@@ -2,7 +2,7 @@ steps:
   - command: aws sts get-caller-identity
     plugins:
       - aws-assume-role-with-web-identity:
-          role-arn: arn:aws:iam::510430971399:role/OrganizationAccountAccessRole
+          role-arn: arn:aws:iam::510430971399:role/buildkite-agent-readonly
   - name: build
     command: cd m && ../bin/b build
   - name: test
