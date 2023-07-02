@@ -6,7 +6,10 @@ function main {
 	local oci_in
 	local repository
 
-	oci_in="${BUILD_WORKING_DIRECTORY}/$1"
+	local bhome
+	bhome="$(pwd)"
+
+	oci_in="${bhome}/$1"
 	shift
 
 	repository="$1"

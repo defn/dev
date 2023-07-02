@@ -9,13 +9,16 @@ function main {
 	local earthfile
 	local build_args
 
-	out="${BUILD_WORKING_DIRECTORY}/$1"
+	local bhome
+	bhome="$(pwd)"
+
+	out="${bhome}/$1"
 	shift
 
 	image="$1"
 	shift
 
-	flake_earthly="${BUILD_WORKING_DIRECTORY}/$1"
+	flake_earthly="${bhome}/$1"
 	shift
 
 	earthfile="$1"
