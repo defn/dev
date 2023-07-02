@@ -8,7 +8,11 @@ function bazel {
 
 	case "${cmd}" in
 	build | test | run)
-		command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "${cmd}" --macos_sdk_version="$(/usr/bin/xcrun -show-sdk-version || true)" "$@"
+		if test -x /usr/bin/xcrun >/dev/null; then
+			command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "${cmd}" --macos_sdk_version="$(/usr/bin/xcrun -show-sdk-version || true)" "$@"
+		else
+			command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "${cmd}" "$@"
+		fi
 		;;
 	*)
 		command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "${cmd}" "$@"
