@@ -25,11 +25,11 @@ macos:
 	for ip in $(dummy_ip); do if ! ifconfig lo0 | grep "inet $$ip"; then sudo -A ifconfig lo0 alias "$$ip" netmask 255.255.255.255; fi; done;
 	ifconfig lo0
 	defaults write -g ApplePressAndHoldEnabled -bool false
-	sudo -A ln -nfs ~/.docker/run/docker.sock /var/run/docker.sock
-	while true; do if docker ps; then break; fi; sleep 5; done
-	-docker context create host --docker host=unix:///var/run/docker.sock
-	-docker network create dev
-	docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock ubuntu chown 1000:1000 /var/run/docker.sock
+#	sudo -A ln -nfs ~/.docker/run/docker.sock /var/run/docker.sock
+#	while true; do if docker ps; then break; fi; sleep 5; done
+#	-docker context create host --docker host=unix:///var/run/docker.sock
+#	-docker network create dev
+#	docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock ubuntu chown 1000:1000 /var/run/docker.sock
 
 symlinks:
 	@mark configure symlinks
@@ -95,10 +95,12 @@ install-inner:
 	pass hello; echo; echo
 	ssh-add -L; echo; echo
 
-	@mark up
-	this-up
-	while true; do vault status; if [[ "$$?" == 1 ]]; then sleep 5; continue; fi; break; done
-	this-login
+#	@mark up
+#	cd m && this-up
+#	while true; do vault status; if [[ "$$?" == 1 ]]; then sleep 5; continue; fi; break; done
+#	this-login
+	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then mark kubernetes; this-kubeconfig; this-argocd-login || true; fi
+	this-github-login
 
 nix-Darwin-upgrade:
 	sudo -i sh -c 'nix-channel --update && nix-env -iA nixpkgs.nix && launchctl remove org.nixos.nix-daemon && launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist'

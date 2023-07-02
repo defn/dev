@@ -11,16 +11,16 @@ local_resource(
         "defn/dev/legumes/v1/pea.proto"
     ])
 
-if "-darwin" in os.getenv("system"):
-    # vault
-    local_resource("vault",
-        serve_cmd=[
-            "bash", "-c",
-            """
-                exec this-vault-start -log-level debug
-            """
-        ]
-    )
+#if "-darwin" in os.getenv("system"):
+#    # vault
+#    local_resource("vault",
+#        serve_cmd=[
+#            "bash", "-c",
+#            """
+#                exec this-vault-start -log-level debug
+#            """
+#        ]
+#    )
 
 if "-linux" in os.getenv("system"):
     local_resource("tailscale",
