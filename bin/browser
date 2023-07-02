@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+if [[ -n ${BROWSER-} ]]; then
+	echo "ERROR: browser already called: ${BROWSER}" 1>&2
+	exit 1
+fi
+
+export BROWSER="$0"
+
+function main {
+	case "${VSCODE_GIT_ASKPASS_MAIN-}" in
+	/vscode/*)
+		exec browser.sh "$@"
+		;;
+	*/code-server*)
+		exec browser.sh "$@"
+		;;
+	*/.vscode-server/*)
+		exec "${VSCODE_GIT_ASKPASS_MAIN%%extensions/*}/bin/helpers/browser.sh" "$@"
+		;;
+	*)
+		if [[ -x /usr/bin/open ]]; then
+			exec /usr/bin/open "$@"
+		else
+			echo "ERROR: can't find browser.sh script for ${VSCODE_GIT_ASKPASS_MAIN-}" 1>&2
+			return 1
+		fi
+		;;
+	esac
+}
+
+main "$@"

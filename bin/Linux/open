@@ -3,7 +3,7 @@
 function main {
 	set -efu
 
-	exec "${BROWSER}" "$@"
+	exec browser "$@"
 }
 
 main "$@"
