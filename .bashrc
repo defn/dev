@@ -13,27 +13,14 @@ export TMPDIR="${TMPDIR:-/tmp}"
 export TEMPDIR="${TEMPDIR:-/tmp}"
 
 # python
-if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$HOME/.local/bin:$PATH"; fi
 export PYTHONPATH
 export PIP_DISABLE_PIP_VERSION_CHECK=1
-
-# homebrew
-PATH="$PATH:/opt/homebrew/bin"
-
-# home
-PATH="$PATH:$HOME/bin"
 
 # bash
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # sudo
 export SUDO_ASKPASS="$HOME/bin/askpass"
-
-# nodejs
-if [[ -z "${IN_NIX_SHELL:-}" ]]; then PATH="$HOME/node_modules/.bin:$PATH"; fi
-
-# cueimports
-PATH="$PATH:$HOME/.bin"
 
 # terraform
 export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
@@ -106,8 +93,6 @@ fi
 if [[ -e ~/.nix-profile/etc/profile.d/nix.sh ]]; then
 	. ~/.nix-profile/etc/profile.d/nix.sh
 fi
-
-PATH="${HOME}/bin/nix:${PATH}"
 
 # direnv
 export DIRENV_LOG_FORMAT=

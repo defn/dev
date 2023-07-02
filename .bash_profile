@@ -1,6 +1,4 @@
-IN_NIX_SHELL=
-
-PATH="${PATH}:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin"
+PATH="/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/opt/homebrew/bin:/nix/var/nix/profiles/default/bin"
 
 if [[ -r /etc/profile.d/bash_completion.sh ]]; then
     source /etc/profile.d/bash_completion.sh
