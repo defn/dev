@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+function main {
+	case "${VSCODE_GIT_ASKPASS_MAIN-}" in
+	/Application)
+		exec "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" "$@"
+		;;
+	*)
+		if [[ -x "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" ]]; then
+			exec "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" "$@"
+		else
+			echo "TODO: find where code is on this platform: ${VSCODE_GIT_ASKPASS_MAIN-}" 1>&2
+			exit 1
+		fi
+		;;
+	esac
+}
+
+main "$@"
