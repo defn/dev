@@ -61,9 +61,7 @@
   "trunk.autoInit": false,
   "trunk.showWhatsNew": false,
   "trunk.showWhatsNewMessage": false,
-  "remote.SSH.remotePlatform": {
-    "coder-vscode--defnn--demo": "linux"
-  },
+  "remote.SSH.remotePlatform": {"coder-vscode--defnn--demo":"linux","coder-vscode--defnn--beans":"linux","coder-vscode--defnn--glyd":"linux","coder-vscode--defnn--glyd--main":"linux"},
   "files.associations": {
     "Makefile": "makefile"
   },

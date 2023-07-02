@@ -73,9 +73,7 @@ install-inner:
 
 	@mark home flake_path
 	(cd m/pkg/home && ~/bin/b build flake_path && ~/bin/b out flake_path) >bin/nix/.path
-	(IFS=:; for a in $$(cat bin/nix/.path | perl -e 'print reverse <>'); do for b in $$a/*; do if test -x "$$b"; then if [[ "$$(readlink "bin/nix/$$b{##*/}" || true)" == "$$b" ]]; then ln -nfs "$$b" bin/nix/; fi; fi; done; done)
-	rm -f /usr/local/bin/go
-	ln -nfs "$(shell env PATH="$(shell cat bin/nix/.path):$(PATH)" which go)" /usr/local/bin/
+	(IFS=:; for a in $$(cat bin/nix/.path | perl -e 'print reverse <>'); do for b in $$a/*; do if test -x "$$b"; then if [[ "$$(readlink "bin/nix/$$b{##*/}" || true)" != "$$b" ]]; then ln -nfs "$$b" bin/nix/; fi; fi; done; done)
 
 	@mark trunk
 	trunk install

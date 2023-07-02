@@ -6,6 +6,8 @@ brew "pstree"
 brew "ykman"
 brew "git"
 brew "git-lfs"
+brew "fzf"
+brew "bazelisk"
 
 cask "divvy"
 cask "iterm2"
