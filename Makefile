@@ -85,6 +85,7 @@ install-inner:
 
 	@mark home flake_path
 	(cd m/pkg/home && ~/bin/b build flake_path && ~/bin/b out flake_path) >bin/nix/.path
+	rm -f /usr/local/bin/go
 	ln -nfs "$(shell env PATH="$(shell cat bin/nix/.path):$(PATH)" which go)" /usr/local/bin/
 
 	@mark trunk
