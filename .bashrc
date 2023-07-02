@@ -107,6 +107,8 @@ if [[ -e ~/.nix-profile/etc/profile.d/nix.sh ]]; then
 	. ~/.nix-profile/etc/profile.d/nix.sh
 fi
 
+PATH="${HOME}/bin/nix"${PATH}"
+
 # direnv
 export DIRENV_LOG_FORMAT=
 
