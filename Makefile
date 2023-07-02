@@ -66,25 +66,14 @@ install-inner:
 	if [[ "$(shell uname -s)" == "Darwin" ]]; then $(MAKE) macos; fi
 	dirmngr --daemon || true
 
-	@mark dotfiles
-	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
-		mkdir -p ~/.dotfiles; \
-		mkdir -p ~/.config/coderv2/dotfiles; \
-		mkdir -p ~//work/.codespaces/.persistedshare; \
-		rm -rf ~/work/.codespaces/.persistedshare/dotfiles; \
-		rm -rf ~/.config/coderv2/dotfiles; \
-		ln -nfs ~/.dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
-		ln -nfs ~/.dotfiles ~/.config/coderv2/dotfiles; \
-		(cd ~/.dotfiles && ./bootstrap); \
-	fi
-
-	@mark docker
-	docker context create pod --docker host=tcp://localhost:2375 || true \
-		&& docker context create host --docker host=unix:///var/run/docker.sock || true \
-        && docker context use host
+#	@mark docker
+#	docker context create pod --docker host=tcp://localhost:2375 || true \
+#		&& docker context create host --docker host=unix:///var/run/docker.sock || true \
+#        && docker context use host
 
 	@mark home flake_path
 	(cd m/pkg/home && ~/bin/b build flake_path && ~/bin/b out flake_path) >bin/nix/.path
+	(IFS=:; for a in $$(cat bin/nix/.path | perl -e 'print reverse <>'); do for b in $$a/*; do ln -nfs "$$b" bin/nix/; done; done)
 	rm -f /usr/local/bin/go
 	ln -nfs "$(shell env PATH="$(shell cat bin/nix/.path):$(PATH)" which go)" /usr/local/bin/
 
@@ -101,6 +90,18 @@ install-inner:
 #	this-login
 	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then mark kubernetes; this-kubeconfig; this-argocd-login || true; fi
 	this-github-login
+
+	@mark dotfiles
+	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
+		mkdir -p ~/.dotfiles; \
+		mkdir -p ~/.config/coderv2/dotfiles; \
+		mkdir -p ~//work/.codespaces/.persistedshare; \
+		rm -rf ~/work/.codespaces/.persistedshare/dotfiles; \
+		rm -rf ~/.config/coderv2/dotfiles; \
+		ln -nfs ~/.dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
+		ln -nfs ~/.dotfiles ~/.config/coderv2/dotfiles; \
+		(cd ~/.dotfiles && ./bootstrap); \
+	fi
 
 nix-Darwin-upgrade:
 	sudo -i sh -c 'nix-channel --update && nix-env -iA nixpkgs.nix && launchctl remove org.nixos.nix-daemon && launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist'
