@@ -90,10 +90,6 @@ if [[ "Linux" == "$(uname -s)" ]]; then
 	export LC_ALL=C.UTF-8
 fi
 
-if [[ -e ~/.nix-profile/etc/profile.d/nix.sh ]]; then
-	. ~/.nix-profile/etc/profile.d/nix.sh
-fi
-
 # direnv
 export DIRENV_LOG_FORMAT=
 
