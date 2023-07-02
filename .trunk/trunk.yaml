@@ -27,6 +27,7 @@ lint:
         - m/k3d-tailscale-operator.yaml
         - m/**/config.json
   enabled:
+    - dotenv-linter@3.3.0
     - bandit@1.7.5
     - gokart@0.5.1
     - osv-scanner@1.3.4
