@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-#export PATH="/opt/bazel-bin:/bin:/sbin:/usr/bin:/usr/sbin"
-
 bopts="--sandbox_writable_path=/nix --sandbox_writable_path=${HOME}/.cache/nix --sandbox_writable_path=${HOME}/.cache/go-mod --sandbox_writable_path=${HOME}/.cache/go-build  --sandbox_writable_path=${HOME}/.earthly --sandbox_writable_path=${HOME}/m/k --sandbox_writable_path=${HOME}/work --action_env=HOME=${HOME} --test_env=HOME=${HOME}"
 
 function bazel {
@@ -10,7 +8,12 @@ function bazel {
 
 	case "${cmd}" in
 	build | test | run)
-		command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "${cmd}" --macos_sdk_version="$(/usr/bin/xcrun -show-sdk-version || true)" "$@"
+		# shellcheck disable=SC2065
+		if test -x /usr/bin/xcrun >/dev/null; then
+			command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "${cmd}" --macos_sdk_version="$(/usr/bin/xcrun -show-sdk-version || true)" "$@"
+		else
+			command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "${cmd}" "$@"
+		fi
 		;;
 	*)
 		command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "${cmd}" "$@"
