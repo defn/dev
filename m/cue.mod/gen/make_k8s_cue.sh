@@ -8,16 +8,19 @@ function main {
 	local flake_go
 	local out
 
-	app_config="${BUILD_WORKING_DIRECTORY}/$1"
+	local shome
+	shome="$(pwd)"
+
+	app_config="${shome}/$1"
 	shift
 
-	flake_jq="${BUILD_WORKING_DIRECTORY}/$1"
+	flake_jq="${shome}/$1"
 	shift
 
-	flake_go="${BUILD_WORKING_DIRECTORY}/$1"
+	flake_go="${shome}/$1"
 	shift
 
-	out="${BUILD_WORKING_DIRECTORY}/$1"
+	out="${shome}/$1"
 	shift
 
 	# TODO hacky
