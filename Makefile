@@ -46,7 +46,7 @@ perms:
 
 install:
 	$(MAKE) nix
-	. ~/.nix-profile/etc/profile.d/nix.sh && bin/withde ~ env VAULT_TOKEN="$$(pass Initial_Root_Token 2>&- || true)" $(MAKE) install-inner
+	. ~/.nix-profile/etc/profile.d/nix.sh && $(MAKE) install-inner
 
 install-inner:
 	$(MAKE) symlinks
@@ -87,6 +87,9 @@ install-inner:
 	if echo "$${VSCODE_GIT_ASKPASS_NODE:-}" | grep ^/vscode; then \
 		nix develop github:defn/dev/pkg-godev-0.0.88?dir=m/pkg/godev --command bash -c 'sudo ln -nfs "$$(which go)" "$${VSCODE_GIT_ASKPASS_NODE%/node}/bin/"'; \
 		fi
+
+	@mark home flake_path
+	(cd m/pkg/home && ~/bin/b build flake_path && ~/bin/b out flake_path) >bin/nix/.path
 
 	@mark trunk
 	trunk install
