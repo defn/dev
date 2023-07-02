@@ -1,6 +1,8 @@
 steps:
-  - name: token
-    command: buildkite-agent oidc request-token
+  - command: aws sts get-caller-identity
+    plugins:
+      - aws-assume-role-with-web-identity:
+          role-arn: arn:aws:iam::510430971399:role/OrganizationAccountAccessRole
   - name: build
     command: cd m && ../bin/b build
   - name: test
