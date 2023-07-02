@@ -223,7 +223,7 @@
         "dynamodb_table": "defn-bootstrap-remote-state",
         "encrypt": true,
         "key": "curl/terraform.tfstate",
-        "profile": "terraform",
+        "profile": "defn-defn-sso",
         "region": "us-east-2"
       }
     },

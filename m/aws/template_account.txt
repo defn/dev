@@ -1,3 +1,4 @@
+########################################################################3
 # member iam role admin
 [profile ORG-MEMBER]
 source_profile=ORG
@@ -12,8 +13,7 @@ region=REGION
 # credential source for sso login
 [profile ORG-MEMBER-sso-source]
 sso_start_url=URL
-sso_role_name=Administrator
+sso_role_name=SSO_ROLE
 sso_account_id=ACCOUNT_ID
 sso_region=REGION
 region=REGION
-
