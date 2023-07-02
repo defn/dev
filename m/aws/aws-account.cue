@@ -7,7 +7,7 @@ org: [ORG=string]: account: [ACCOUNT=string]: {
 
 org: {
 	defn: account: {
-		bootstrap: {
+		defn: {
 			id: "510430971399"
 		}
 	}
