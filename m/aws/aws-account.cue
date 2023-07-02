@@ -1,14 +1,16 @@
 package aws
 
 org: [ORG=string]: account: [ACCOUNT=string]: {
-	org:     ORG
-	account: ACCOUNT
+	org:      ORG
+	account:  ACCOUNT
+	sso_role: string | *"Administrator"
 }
 
 org: {
 	defn: account: {
 		defn: {
-			id: "510430971399"
+			id:       "510430971399"
+			sso_role: "TerraformRemoteState"
 		}
 	}
 	coil: account: {

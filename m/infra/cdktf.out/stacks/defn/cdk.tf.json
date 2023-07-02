@@ -28,7 +28,7 @@
     "aws": [
       {
         "profile": "defn",
-        "region": "us-west-2"
+        "region": "us-east-2"
       }
     ]
   },
@@ -136,7 +136,7 @@
         "dynamodb_table": "defn-bootstrap-remote-state",
         "encrypt": true,
         "key": "defn/terraform.tfstate",
-        "profile": "terraform",
+        "profile": "defn-defn-sso",
         "region": "us-east-2"
       }
     },

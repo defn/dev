@@ -14,8 +14,7 @@ input: kubernetes: [NAME=string]: command.#KubernetesCluster & {
 
 input: organization: {
 	defn: {
-		region: "us-west-2"
-		accounts: []
+		region: "us-east-2"
 	}
 	gyre: {
 		region:   "us-east-2"
