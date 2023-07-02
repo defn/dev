@@ -41,16 +41,29 @@ def nix_flake(name, srcs = [], cmds = [], flake = None, visibility = None):
         visibility = visibility,
     )
 
-    flake_path_script = Label(":flake_path_script".format(name))
+    flake_which_script = Label(":flake_which_script".format(name))
 
     for c in cmds:
         native.genrule(
             name = "{}_{}".format(name, c),
             srcs = [
-                flake_path_script,
+                flake_which_script,
                 flake_config,
             ],
             outs = ["{}_{}_bin".format(name, c)],
-            cmd = "$(location //{}:{}) {} $@ which {}".format(flake_path_script.package, flake_path_script.name, dir, c),
+            cmd = "$(location //{}:{}) {} $@ which {}".format(flake_which_script.package, flake_which_script.name, dir, c),
             visibility = visibility,
         )
+
+    flake_path_script = Label(":flake_path_script".format(name))
+
+    native.genrule(
+        name = "{}_path".format(name),
+        srcs = [
+            flake_path_script,
+            flake_config,
+        ],
+        outs = ["{}_path.sh".format(name)],
+        cmd = "$(location //{}:{}) {} $@".format(flake_path_script.package, flake_path_script.name, dir),
+        visibility = visibility,
+    )
