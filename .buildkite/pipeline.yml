@@ -1,4 +1,6 @@
 steps:
+  - name: token
+    command: buildkite-agent oidc request-token
   - name: build
     command: cd m && ../bin/b build
   - name: test
