@@ -6,13 +6,10 @@ function main {
 	local flake_go
 	local out
 
-	local shome
-	shome="$(pwd)"
-
-	flake_go="${shome}/$1"
+	flake_go="${BUILD_WORKING_DIRECTORY}/$1"
 	shift
 
-	out="${shome}/$1"
+	out="${BUILD_WORKING_DIRECTORY}/$1"
 	shift
 
 	# TODO hacky
