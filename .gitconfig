@@ -5,18 +5,18 @@
 # export GIT_COMMITTER_NAME=amanibhavam
 
 [push]
-  default = simple
+	default = simple
 
 [core]
-  quotepath = false
+	quotepath = false
 
 [url "https://github.com/"]
-  insteadOf = git://github.com/
-  insteadOf = ssh://git@github.com/
-  insteadOf = git@github.com:
+	insteadOf = git://github.com/
+	insteadOf = ssh://git@github.com/
+	insteadOf = git@github.com:
 
 [pull]
-  rebase = false
+	rebase = false
 
 [credential "https://github.com"]
 	helper =

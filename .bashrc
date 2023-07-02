@@ -197,10 +197,4 @@ function gs {
 # vscode browser
 export BROWSER="$(type -P browser || true)"
 
-# dotfiles
-export GIT_AUTHOR_EMAIL
-export GIT_COMMITTER_EMAIL
-export GIT_AUTHOR_NAME
-export GIT_COMMITTER_NAME
-
-if [[ -f ~/.dotfiles/dot/bashrc ]]; then source ~/.dotfiles/dot/bashrc; fi
+unset DIRENV_DIFF DIRENV_WATCHES
