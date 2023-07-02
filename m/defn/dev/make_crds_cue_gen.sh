@@ -7,16 +7,13 @@ function main {
 	local cue_gen_bin
 	local out
 
-	local shome
-	shome="$(pwd)"
-
-	cue_yaml="${shome}/$1"
+	cue_yaml="${BUILD_WORKING_DIRECTORY}/$1"
 	shift
 
-	cue_gen_bin="${shome}/$1"
+	cue_gen_bin="${BUILD_WORKING_DIRECTORY}/$1"
 	shift
 
-	out="${shome}/$1"
+	out="${BUILD_WORKING_DIRECTORY}/$1"
 	shift
 
 	# TODO hacky

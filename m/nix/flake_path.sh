@@ -9,7 +9,7 @@ function main {
 	dir="$1"
 	shift
 
-	out="$(pwd)/$1"
+	out="${BUILD_WORKING_DIRECTORY}/$1"
 	shift
 
 	cd "${dir}"
