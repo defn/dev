@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/instance: nginx
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: nginx
-    helm.sh/chart: nginx-15.0.2
+    helm.sh/chart: nginx-15.1.0
   name: nginx
   namespace: nginx
 spec:
@@ -32,11 +32,12 @@ metadata:
     app.kubernetes.io/instance: nginx
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: nginx
-    helm.sh/chart: nginx-15.0.2
+    helm.sh/chart: nginx-15.1.0
   name: nginx
   namespace: nginx
 spec:
   replicas: 1
+  revisionHistoryLimit: 10
   selector:
     matchLabels:
       app.kubernetes.io/instance: nginx
@@ -51,7 +52,7 @@ spec:
         app.kubernetes.io/instance: nginx
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: nginx
-        helm.sh/chart: nginx-15.0.2
+        helm.sh/chart: nginx-15.1.0
     spec:
       affinity:
         nodeAffinity: null
