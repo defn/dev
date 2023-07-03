@@ -2,11 +2,12 @@ SHELL := /bin/bash
 
 build:
 # helm generates ./k/karpenter/karpenter.yaml
-	helm template karpenter --namespace default --version v0.28.1 --include-crds -f karpenter-values.yaml oci://public.ecr.aws/karpenter/karpenter | tail -n +3 > ../k/karpenter/karpenter.yaml
+	b run outputs_karpenter__update
 # cue ./c/ generates kustomize ./k/
 	b run outputs_kustomize__update
 # kustomize ./k/ generates ./k/r/ release yaml
-	b pass run //k:outputs_release__update
+	(cd ../k && b run outputs_release__update)
+# add generated to git
 	$(MAKE) make_add_generated
 
 event:

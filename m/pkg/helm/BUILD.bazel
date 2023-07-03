@@ -5,6 +5,8 @@ load("//oci:oci.bzl", "skopeo_copy")
 # nix flake
 nix_flake(
     name = "flake",
+    cmds = ["helm"],
+    visibility = ["//visibility:public"],
 )
 
 # oci
