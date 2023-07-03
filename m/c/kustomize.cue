@@ -1059,7 +1059,7 @@ kustomize: "nginx": #KustomizeHelm & {
 		release:   "nginx"
 		name:      "nginx"
 		namespace: "nginx"
-		version:   "15.0.2"
+		version:   "15.1.0"
 		repo:      "https://charts.bitnami.com/bitnami"
 		values: {
 		}
