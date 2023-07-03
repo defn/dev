@@ -8,7 +8,7 @@ todo:
 	@(bazel cquery //... --output=files | grep -v ^bazel-; git ls-files .) | sort | uniq -c | grep '^ *1 ' | awk '{print $$2}'
 
 ci:
-	buildkite-agent start --build-path ~/work/buildkite-agent --plugins-path ~/work/buildkite-plugins --token "$$(pass BUILDKITE_AGENT_TOKEN)"
+	env BUILDKITE_AGENT_DISCONNECT_AFTER_IDLE_TIMEOUT=5 buildkite-agent start --build-path ~/work/buildkite-agent --plugins-path ~/work/buildkite-plugins --token "$$(pass BUILDKITE_AGENT_TOKEN)"
 
 up:
 #screen -S tilt -d -m bash -il -c "tilt up --stream --port=10351"
