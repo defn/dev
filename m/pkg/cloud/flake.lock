@@ -276,17 +276,17 @@
       },
       "locked": {
         "dir": "m/pkg/flyctl",
-        "lastModified": 1688160143,
-        "narHash": "sha256-jJWioj4u206/9RwGt6/iNwdtWT8nQgjAe4gFPzUm+Lk=",
+        "lastModified": 1688421353,
+        "narHash": "sha256-A/rQzsAQeoTsKR8VrHqMjOnLI6eN54VSOKbIPKNzn+I=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "df17d313df0382748697f909c8c955602560fbff",
+        "rev": "fab39f98093a3af52bb64778bee683a2ccc734c2",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/flyctl",
         "owner": "defn",
-        "ref": "pkg-flyctl-0.1.45-1",
+        "ref": "pkg-flyctl-0.1.47-1",
         "repo": "dev",
         "type": "github"
       }
