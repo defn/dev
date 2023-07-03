@@ -61,10 +61,18 @@ function main {
 			;;
 		*)
 			account="$1"
+			case "${account}" in
+			*-sso)
+				account="${account}-source"
+				;;
+			*)
+				true
+				;;
+			esac
 			;;
 		esac
 		shift
-		b pass run //aws:aws__cli "${account}" aws-vault exec "${account}" -- "$@"
+		b pass run //aws:aws__cli "${account}" aws-vault exec "${account}" -- -- "$@"
 		;;
 	aws)
 		shift
@@ -82,6 +90,14 @@ function main {
 			;;
 		*)
 			account="$1"
+			case "${account}" in
+			*-sso)
+				account="${account}-source"
+				;;
+			*)
+				true
+				;;
+			esac
 			;;
 		esac
 		shift
