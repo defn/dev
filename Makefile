@@ -43,6 +43,9 @@ perms:
 	-if ! test -f ~/.kube/config; then touch ~/.kube/config; fi
 	-chmod 0600 ~/.kube/config
 
+ci:
+	cd m && $(MAKE) ci
+
 install:
 	$(MAKE) nix
 	. ~/.nix-profile/etc/profile.d/nix.sh && $(MAKE) install-inner
