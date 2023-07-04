@@ -16,7 +16,8 @@ second_ = $(word 2, $(subst _, ,$@))
 update:
 	cd m/pkg && $(MAKE) update
 	cd m/pkg && n upgrade && n all update pkg deps
-	cd m && n upgrade && n release update m deps
+	cd m/pkg && n upgrade && n all update pkg deps || true
+	$(MAKE) install
 
 macos:
 	@mark macos
