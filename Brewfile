@@ -8,6 +8,7 @@ brew "git"
 brew "git-lfs"
 brew "fzf"
 brew "bazelisk"
+brew "util-linux"
 
 cask "divvy"
 cask "iterm2"
