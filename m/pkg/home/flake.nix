@@ -14,7 +14,7 @@
     development.url = github:defn/dev/pkg-development-0.0.60?dir=m/pkg/development;
     cloud.url = github:defn/dev/pkg-cloud-0.0.118?dir=m/pkg/cloud;
     kubernetes.url = github:defn/dev/pkg-kubernetes-0.0.114?dir=m/pkg/kubernetes;
-    coder.url = github:defn/dev/pkg-coder-0.24.1-1?dir=m/pkg/coder;
+    coder.url = github:defn/dev/pkg-coder-0.25.0-1?dir=m/pkg/coder;
     tailscale.url = github:defn/dev/pkg-tailscale-1.44.0-1?dir=m/pkg/tailscale;
     shell.url = github:defn/dev/pkg-shell-0.0.51?dir=m/pkg/shell;
   };
