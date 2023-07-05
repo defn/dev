@@ -78,6 +78,7 @@ install-inner:
 	(cd m/pkg/home && ~/bin/b build flake_path && ~/bin/b out flake_path) >bin/nix/.path
 	(IFS=:; for a in $$(cat bin/nix/.path | perl -e 'print reverse <>'); do for b in $$a/*; do if test -x "$$b"; then if [[ "$$(readlink "bin/nix/$$b{##*/}" || true)" != "$$b" ]]; then ln -nfs "$$b" bin/nix/; fi; fi; done; done)
 	rm -f bin/nix/{gcc,cc,ld}
+	ln -nfs /opt/homebrew/opt/util-linux/bin/flock bin/nix/
 
 	@mark trunk
 	trunk install
