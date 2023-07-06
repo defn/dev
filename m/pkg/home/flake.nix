@@ -42,6 +42,8 @@
 
     defaultPackage = ctx: ctx.wrap.nullBuilder {
       propagatedBuildInputs = with ctx.pkgs; [
+        ctx.pkgs.irssi
+
         inputs.az.defaultPackage.${ctx.system}
         inputs.nix.defaultPackage.${ctx.system}
         inputs.vpn.defaultPackage.${ctx.system}
@@ -59,9 +61,6 @@
         inputs.cloud.defaultPackage.${ctx.system}
         inputs.kubernetes.defaultPackage.${ctx.system}
         inputs.coder.defaultPackage.${ctx.system}
-
-        ctx.pkgs.irssi
-        ctx.pkgs.graphviz
 
         inputs.shell.defaultPackage.${ctx.system}
       ]
