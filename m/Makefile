@@ -11,6 +11,7 @@ ci:
 	env BUILDKITE_AGENT_DISCONNECT_AFTER_IDLE_TIMEOUT=5 buildkite-agent start --build-path ~/work/buildkite-agent --plugins-path ~/work/buildkite-plugins --token "$$(pass BUILDKITE_AGENT_TOKEN)"
 
 dev:
+# rm -rf ~/Library/App*/coderv2/postgres
 	coder server
 
 up:
