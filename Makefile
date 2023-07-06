@@ -83,11 +83,6 @@ trunk:
 	$(MARK) trunk
 	trunk install
 
-doctor:
-	$(MARK) doctor
-	pass hello; echo; echo
-	ssh-add -L; echo; echo
-
 login:
 	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then mark kubernetes; this-kubeconfig; this-argocd-login || true; fi
 	this-github-login
@@ -124,7 +119,6 @@ install-inner:
 	$(MAKE) gpg
 
 	$(MAKE) trunk
-	$(MAKE) doctor
 
 nix-Darwin-upgrade:
 	sudo -i sh -c 'nix-channel --update && nix-env -iA nixpkgs.nix && launchctl remove org.nixos.nix-daemon && launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist'
