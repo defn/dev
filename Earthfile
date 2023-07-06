@@ -39,6 +39,7 @@ root:
         && apt-get update && apt-get upgrade -y \
         && apt-get install -y --no-install-recommends lsb-release tzdata locales ca-certificates wget curl xz-utils rsync make git direnv bash-completion less pass \
             sudo tini procps iptables net-tools iputils-ping iproute2 dnsutils gnupg \
+            openssh-client \
         && apt-get clean && apt purge -y nano \
         && rm -f /usr/bin/gs
 
