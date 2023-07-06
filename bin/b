@@ -109,10 +109,10 @@ function main {
 		local rule
 		case "${1-}" in
 		"")
-			rule="$("$0"| fzf --select-1)"
+			rule="$("$0" | fzf --select-1)"
 			;;
 		/*)
-			rule="$("$0"| fzf --query="${1#/}" --select-1)"
+			rule="$("$0" | fzf --query="${1#/}" --select-1)"
 			shift
 			;;
 		*)
@@ -141,7 +141,7 @@ function main {
 				if [[ $# == 0 ]]; then
 					rule="/..."
 				else
-					rule="$("$0"| fzf --query="$1" --select-1)"
+					rule="$("$0" | fzf --query="$1" --select-1)"
 					shift
 				fi
 
@@ -154,7 +154,7 @@ function main {
 				if [[ $# == 0 ]]; then
 					rule="/..."
 				else
-					rule="$("$0"| fzf --query="$1" --select-1)"
+					rule="$("$0" | fzf --query="$1" --select-1)"
 					shift
 				fi
 
@@ -168,7 +168,7 @@ function main {
 				if [[ $# == 0 ]]; then
 					rule="/..."
 				else
-					rule=":$("$0"| fzf --query="$1" --select-1)"
+					rule=":$("$0" | fzf --query="$1" --select-1)"
 					shift
 				fi
 
@@ -180,7 +180,7 @@ function main {
 			in)
 				shift
 
-				rule=":$("$0"| fzf --query="${1-}" --select-1 || true)"
+				rule=":$("$0" | fzf --query="${1-}" --select-1 || true)"
 
 				local w
 				w="$(bazel info workspace)"
@@ -194,7 +194,7 @@ function main {
 			out)
 				shift
 
-				rule=":$("$0"| fzf --query="${1-}" --select-1)"
+				rule=":$("$0" | fzf --query="${1-}" --select-1)"
 
 				local w
 				w="$(bazel info workspace)"
@@ -208,7 +208,7 @@ function main {
 			cat)
 				shift
 
-				rule=":$("$0"| fzf --query="${1-}" --select-1)"
+				rule=":$("$0" | fzf --query="${1-}" --select-1)"
 
 				local w
 				w="$(bazel info workspace)"
@@ -228,9 +228,9 @@ function main {
 				shift
 
 				if [[ -z ${1-} ]]; then
-					rule="$("$0"| grep __ | fzf --select-1)"
+					rule="$("$0" | grep __ | fzf --select-1)"
 				else
-					rule="$("$0"| fzf --query="${1}" --select-1)"
+					rule="$("$0" | fzf --query="${1}" --select-1)"
 					shift
 				fi
 
