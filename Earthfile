@@ -39,9 +39,11 @@ root:
         && apt-get update && apt-get upgrade -y \
         && apt-get install -y --no-install-recommends lsb-release tzdata locales ca-certificates wget curl xz-utils rsync make git direnv bash-completion less pass \
             sudo tini procps iptables net-tools iputils-ping iproute2 dnsutils gnupg \
-            openssh-client \
+            openssh-client fzf build-essential \
         && apt-get clean && apt purge -y nano \
-        && rm -f /usr/bin/gs
+        && rm -f /usr/bin/gs \
+        && curl -sSL -o /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-$(if test "$(uname -m)" == x86_64; then echo "amd64"; else echo "arm64"; fi) \
+        &&  sudo chmod 755 /usr/local/bin/bazel
 
     RUN apt update && apt upgrade -y
 
@@ -61,8 +63,7 @@ root:
 
     RUN chown -R ubuntu:ubuntu /home/ubuntu && chmod u+s /usr/bin/sudo
 
-    COPY entrypoint /entrypoint
-    ENTRYPOINT ["/entrypoint"]
+    ENTRYPOINT []
     CMD []
 
     USER ubuntu
