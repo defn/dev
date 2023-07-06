@@ -65,7 +65,7 @@
 
         inputs.shell.defaultPackage.${ctx.system}
 
-        ctx.bashInteractive
+        ctx.pkgs.bashInteractive
       ]
       ++ ctx.commands
       ++ (ctx.pkgs.lib.mapAttrsToList (name: value: (packages ctx).${name}) config.clusters)
