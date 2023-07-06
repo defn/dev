@@ -41,10 +41,12 @@ resource "coder_agent" "main" {
 
     cd
     ssh -o StrictHostKeyChecking=no git@github.com true || true
-    git clone http://github.com/defn/dev dev
-    mv dev/.git .
-    rm -rf dev
-    git reset --hard
+    if ! test -d .git/.; then
+      git clone http://github.com/defn/dev dev
+      mv dev/.git .
+      rm -rf dev
+      git reset --hard
+    fi
 
     # install and start code-server
     curl -fsSL https://code-server.dev/install.sh | sh -s -- --method=standalone --prefix=/tmp/code-server --version 4.14.1
