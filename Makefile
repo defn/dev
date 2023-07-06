@@ -31,6 +31,62 @@ macos:
 #	-docker network create dev
 #	docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock ubuntu chown 1000:1000 /var/run/docker.sock
 
+home:
+	@mark home
+	(cd m/pkg/home && ~/bin/b build flake_path && ~/bin/b out flake_path) >bin/nix/.path
+	(IFS=:; for a in $$(cat bin/nix/.path | perl -e 'print reverse <>'); do for b in $$a/*; do if test -x "$$b"; then if [[ "$$(readlink "bin/nix/$$b{##*/}" || true)" != "$$b" ]]; then ln -nfs "$$b" bin/nix/; fi; fi; done; done)
+	rm -f bin/nix/{gcc,cc,ld}
+	if test -x /opt/homebrew/opt/util-linux/bin/flock; then ln -nfs /opt/homebrew/opt/util-linux/bin/flock bin/nix/; fi
+	if test -x /usr/local/Cellar/util-linux/2.39.1/bin/flock; then ln -nfs /usr/local/Cellar/util-linux/2.39.1/bin/flock bin/nix/; fi
+
+password-store:
+	@mark configure password-store
+	mkdir -p ~/work/password-store
+	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
+		if ! test -d ~/work/password-store/.git/.; then \
+			git clone https://github.com/$${GIT_AUTHOR_NAME}/password-store ~/work/password-store; \
+		fi; \
+	fi
+
+gpg:
+	@mark configure gpg
+	if test -d ~/.password-store/config/gnupg-config/.; then rsync -ia ~/.password-store/config/gnupg-config/. ~/.gnupg/.; fi
+	$(MAKE) perms
+	if [[ "$(shell uname -s)" == "Darwin" ]]; then $(MAKE) macos; fi
+	dirmngr --daemon || true
+
+docker:
+	@mark docker
+	docker context create pod --docker host=tcp://localhost:2375 || true \
+		&& docker context create host --docker host=unix:///var/run/docker.sock || true \
+		&& docker context use host
+
+trunk:
+	@mark trunk
+	trunk install
+
+doctor:
+	@mark doctor
+	pass hello; echo; echo
+	ssh-add -L; echo; echo
+
+login:
+	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then mark kubernetes; this-kubeconfig; this-argocd-login || true; fi
+	this-github-login
+
+dotfiles:
+	@mark dotfiles
+	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
+		mkdir -p ~/.dotfiles; \
+		mkdir -p ~/.config/coderv2/dotfiles; \
+		mkdir -p ~//work/.codespaces/.persistedshare; \
+		rm -rf ~/work/.codespaces/.persistedshare/dotfiles; \
+		rm -rf ~/.config/coderv2/dotfiles; \
+		ln -nfs ~/.dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
+		ln -nfs ~/.dotfiles ~/.config/coderv2/dotfiles; \
+		(cd ~/.dotfiles && ./bootstrap); \
+	fi
+
 symlinks:
 	@mark configure symlinks
 	bash -x bin/persist-cache
@@ -54,59 +110,17 @@ install:
 install-inner:
 	$(MAKE) symlinks
 	$(MAKE) perms
+	$(MAKE) home
+	$(MAKE) password-store
+	$(MAKE) gpg
 
-	@mark configure password-store
-	mkdir -p ~/work/password-store
-	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
-		if ! test -d ~/work/password-store/.git/.; then \
-			git clone https://github.com/$${GIT_AUTHOR_NAME}/password-store ~/work/password-store; \
-		fi; \
-	fi
+	$(MAKE) trunk
 
-	@mark configure gpg
-	if test -d ~/.password-store/config/gnupg-config/.; then rsync -ia ~/.password-store/config/gnupg-config/. ~/.gnupg/.; fi
-	$(MAKE) perms
-	if [[ "$(shell uname -s)" == "Darwin" ]]; then $(MAKE) macos; fi
-	dirmngr --daemon || true
+	$(MAKE) doctor
 
-#	@mark docker
-#	docker context create pod --docker host=tcp://localhost:2375 || true \
-#		&& docker context create host --docker host=unix:///var/run/docker.sock || true \
-#        && docker context use host
+	$(MAKE) login
 
-	@mark home flake_path
-	(cd m/pkg/home && ~/bin/b build flake_path && ~/bin/b out flake_path) >bin/nix/.path
-	(IFS=:; for a in $$(cat bin/nix/.path | perl -e 'print reverse <>'); do for b in $$a/*; do if test -x "$$b"; then if [[ "$$(readlink "bin/nix/$$b{##*/}" || true)" != "$$b" ]]; then ln -nfs "$$b" bin/nix/; fi; fi; done; done)
-	rm -f bin/nix/{gcc,cc,ld}
-	if test -x /opt/homebrew/opt/util-linux/bin/flock; then ln -nfs /opt/homebrew/opt/util-linux/bin/flock bin/nix/; fi
-	if test -x /usr/local/Cellar/util-linux/2.39.1/bin/flock; then ln -nfs /usr/local/Cellar/util-linux/2.39.1/bin/flock bin/nix/; fi
-
-	@mark trunk
-	trunk install
-
-	@mark doctor
-	pass hello; echo; echo
-	ssh-add -L; echo; echo
-
-#	@mark up
-#	cd m && this-up
-#	while true; do vault status; if [[ "$$?" == 1 ]]; then sleep 5; continue; fi; break; done
-#	this-login
-	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then mark kubernetes; this-kubeconfig; this-argocd-login || true; fi
-	this-github-login
-
-	@mark dotfiles
-	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
-		mkdir -p ~/.dotfiles; \
-		mkdir -p ~/.config/coderv2/dotfiles; \
-		mkdir -p ~//work/.codespaces/.persistedshare; \
-		rm -rf ~/work/.codespaces/.persistedshare/dotfiles; \
-		rm -rf ~/.config/coderv2/dotfiles; \
-		ln -nfs ~/.dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
-		ln -nfs ~/.dotfiles ~/.config/coderv2/dotfiles; \
-		(cd ~/.dotfiles && ./bootstrap); \
-	fi
-
+	$(MAKE) dotfiles
 nix-Darwin-upgrade:
 	sudo -i sh -c 'nix-channel --update && nix-env -iA nixpkgs.nix && launchctl remove org.nixos.nix-daemon && launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist'
 
