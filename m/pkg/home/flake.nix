@@ -42,6 +42,8 @@
 
     defaultPackage = ctx: ctx.wrap.nullBuilder {
       propagatedBuildInputs = with ctx.pkgs; [
+        inputs.shell.defaultPackage.${ctx.system}
+
         inputs.az.defaultPackage.${ctx.system}
         inputs.nix.defaultPackage.${ctx.system}
         inputs.vpn.defaultPackage.${ctx.system}
@@ -63,9 +65,6 @@
         ctx.pkgs.irssi
         ctx.pkgs.graphviz
 
-        inputs.shell.defaultPackage.${ctx.system}
-
-        ctx.pkgs.bashInteractive
       ]
       ++ ctx.commands
       ++ (ctx.pkgs.lib.mapAttrsToList (name: value: (packages ctx).${name}) config.clusters)
