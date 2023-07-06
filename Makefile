@@ -108,7 +108,7 @@ ci dev:
 
 install:
 	$(MAKE) nix
-	. ~/.nix-profile/etc/profile.d/nix.sh && env PATH="$$HOME/bin:$$PATH" $(MAKE) install-inner
+	. .bash_profile && $(MAKE) install-inner
 
 install-inner:
 	$(MAKE) symlinks
