@@ -1,5 +1,5 @@
 steps:
-  - command: buildkite-agent oidc request-token --lifetime 60 --claim defn=meh
+  - command: buildkite-agent oidc request-token --lifetime 60
   - command: aws sts get-caller-identity
     plugins:
       - aws-assume-role-with-web-identity:
