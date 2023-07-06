@@ -10,6 +10,9 @@ todo:
 ci:
 	env BUILDKITE_AGENT_DISCONNECT_AFTER_IDLE_TIMEOUT=5 buildkite-agent start --build-path ~/work/buildkite-agent --plugins-path ~/work/buildkite-plugins --token "$$(pass BUILDKITE_AGENT_TOKEN)"
 
+dev:
+	coder server
+
 up:
 #screen -S tilt -d -m bash -il -c "tilt up --stream --port=10351"
 	tilt up --stream --port=10351
