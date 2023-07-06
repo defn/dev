@@ -31,12 +31,6 @@ resource "coder_agent" "main" {
   startup_script         = <<-EOT
     set -e
 
-    # defn/dev requirements
-    sudo apt update
-    sudo apt install -y openssh-client fzf build-essential
-    sudo curl -sSL -o /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-$(if test "$(uname -m)" == x86_64; then echo "amd64"; else echo "arm64"; fi)
-    sudo chmod 755 /usr/local/bin/bazel
-
     sudo cp $(readlink -f /proc/1/cwd)/coder /usr/local/bin/
 
     cd
