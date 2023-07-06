@@ -110,7 +110,7 @@ ci dev:
 
 install:
 	$(MAKE) nix
-	. ~/.nix-profile/etc/profile.d/nix.sh & . ~/.bash_profile && $(MAKE) install-inner
+	$(MAKE) install-inner
 
 install-inner:
 	$(MAKE) symlinks
