@@ -13,6 +13,8 @@ second = $(word 2, $(subst -, ,$@))
 first_ = $(word 1, $(subst _, ,$@))
 second_ = $(word 2, $(subst _, ,$@))
 
+MARK = $(shell which mark || echo echo)
+
 update:
 	cd m/pkg && $(MAKE) update
 	cd m/pkg && n upgrade && n all update pkg deps
@@ -20,7 +22,7 @@ update:
 	$(MAKE) install
 
 macos:
-	@mark macos
+	$(MARK) macos
 	-$(shell which gpg-agent) --daemon --pinentry-program $$(which pinentry-mac)
 	for ip in $(dummy_ip); do if ! ifconfig lo0 | grep "inet $$ip"; then sudo -A ifconfig lo0 alias "$$ip" netmask 255.255.255.255; fi; done;
 	ifconfig lo0
@@ -32,7 +34,7 @@ macos:
 #	docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock ubuntu chown 1000:1000 /var/run/docker.sock
 
 home:
-	@mark home
+	$(MARK) home
 	(cd m/pkg/home && ~/bin/b build flake_path && ~/bin/b out flake_path) >bin/nix/.path
 	(IFS=:; for a in $$(cat bin/nix/.path | perl -e 'print reverse <>'); do for b in $$a/*; do if test -x "$$b"; then if [[ "$$(readlink "bin/nix/$$b{##*/}" || true)" != "$$b" ]]; then ln -nfs "$$b" bin/nix/; fi; fi; done; done)
 	rm -f bin/nix/{gcc,cc,ld}
@@ -40,7 +42,7 @@ home:
 	if test -x /usr/local/Cellar/util-linux/2.39.1/bin/flock; then ln -nfs /usr/local/Cellar/util-linux/2.39.1/bin/flock bin/nix/; fi
 
 dotfiles:
-	@mark dotfiles
+	$(MARK) dotfiles
 	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
 		if ! test -d ~/.dotfiles/.git/.; then \
 			git clone https://github.com/$${GIT_AUTHOR_NAME}/dotfiles ~/.dotfiles; \
@@ -56,7 +58,7 @@ dotfiles:
 	fi
 
 password-store:
-	@mark configure password-store
+	$(MARK) configure password-store
 	mkdir -p ~/work/password-store
 	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
 		if ! test -d ~/work/password-store/.git/.; then \
@@ -65,24 +67,24 @@ password-store:
 	fi
 
 gpg:
-	@mark configure gpg
+	$(MARK) configure gpg
 	if test -d ~/.password-store/config/gnupg-config/.; then rsync -ia ~/.password-store/config/gnupg-config/. ~/.gnupg/.; fi
 	$(MAKE) perms
 	if [[ "$(shell uname -s)" == "Darwin" ]]; then $(MAKE) macos; fi
 	dirmngr --daemon || true
 
 docker:
-	@mark docker
+	$(MARK) docker
 	docker context create pod --docker host=tcp://localhost:2375 || true \
 		&& docker context create host --docker host=unix:///var/run/docker.sock || true \
 		&& docker context use host
 
 trunk:
-	@mark trunk
+	$(MARK) trunk
 	trunk install
 
 doctor:
-	@mark doctor
+	$(MARK) doctor
 	pass hello; echo; echo
 	ssh-add -L; echo; echo
 
@@ -91,12 +93,12 @@ login:
 	this-github-login
 
 symlinks:
-	@mark configure symlinks
+	$(MARK) configure symlinks
 	bash -x bin/persist-cache
 	echo "token_helper=\"$(which vault-token-helper)\"" > ~/.vault
 
 perms:
-	@mark configure permissions
+	$(MARK) configure permissions
 	if [[ "Linux" == "$(shell uname -s)" ]]; then if test -S /var/run/docker.sock; then sudo chgrp ubuntu /var/run/docker.sock; sudo chmod 770 /var/run/docker.sock; fi; fi
 	if test -S /run/containerd/containerd.sock; then sudo chgrp ubuntu /run/containerd/containerd.sock; sudo chmod 770 /run/containerd/containerd.sock; fi
 	-chmod 0700 ~/.gnupg/. ~/.gnupg2/.
