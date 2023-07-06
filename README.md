@@ -1,6 +1,6 @@
 # Local Coder
 
-### Setup OS
+## Setup OS
 
 ```bash
 sudo apt update
@@ -9,7 +9,7 @@ sudo curl -sSL -o /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/re
 sudo chmod 755 /usr/local/bin/bazel
 ```
 
-### Setup HOME
+## Setup HOME
 
 ```bash
 sudo cp $(readlink -f /proc/1/cwd)/coder /usr/local/bin/
