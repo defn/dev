@@ -3,11 +3,6 @@
 ## Setup HOME
 
 ```bash
-git clone git@github.com:defn/dev dev
-mv dev/.git .
-rm -rf dev
-git reset --hard
-export GIT_AUTHOR_NAME=amanibhavam
 make install
 cd m && b build
 ```
