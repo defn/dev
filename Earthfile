@@ -76,25 +76,3 @@ root:
 
 nix:
     FROM +root
-
-    WORKDIR /app
-
-    # nix config
-    RUN sudo install -d -m 0755 -o ubuntu -g ubuntu /nix && mkdir -p /home/ubuntu/.config/nix
-    COPY --chown=ubuntu:ubuntu .config/nix/nix.conf /home/ubuntu/.config/nix/nix.conf
-
-    # nix
-    RUN bash -c 'sh <(curl -L https://releases.nixos.org/nix/nix-2.15.0/install) --no-daemon' \
-        && echo . ~/.bashrc > ~/.bash_profile \
-        && echo . ~/.nix-profile/etc/profile.d/nix.sh > ~/.bashrc \
-        && echo 'eval "$(direnv hook bash)"' >> ~/.bashrc \
-        && . ~/.nix-profile/etc/profile.d/nix.sh \
-        && echo 'use flake' > .envrc \
-        && nix profile wipe-history \
-        && nix-store --gc
-
-    RUN sudo ln -nfs /home/ubuntu/.nix-profile/bin/nix-instantiate /usr/local/bin/ \
-        && sudo ln -nfs /home/ubuntu/.nix-profile /tmp/.nix-profile
-
-    COPY --chown=ubuntu:ubuntu .direnvrc /home/ubuntu/.direnvrc
-    RUN --no-cache sudo apt update && sudo apt upgrade -y
