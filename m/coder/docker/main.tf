@@ -75,22 +75,6 @@ resource "coder_agent" "main" {
     interval     = 60
     timeout      = 1
   }
-
-  metadata {
-    display_name = "CPU Usage (Host)"
-    key          = "4_cpu_usage_host"
-    script       = "coder stat cpu --host"
-    interval     = 10
-    timeout      = 1
-  }
-
-  metadata {
-    display_name = "Memory Usage (Host)"
-    key          = "5_mem_usage_host"
-    script       = "coder stat mem --host"
-    interval     = 10
-    timeout      = 1
-  }
 }
 
 resource "coder_app" "code-server" {
