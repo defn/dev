@@ -31,6 +31,16 @@ resource "coder_agent" "main" {
   startup_script         = <<-EOT
     set -e
 
+    # defn/dev requirements
+    sudo apt update
+    sudo apt install -y openssh-client fzf build-essential
+    sudo curl -sSL -o /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-$$(if test "$$(uname -m)" == x86_64; then echo "amd64"; else echo "arm64"; fi)
+    sudo chmod 755 /usr/local/bin/bazel
+
+    sudo cp $(readlink -f /proc/1/cwd)/coder /usr/local/bin/
+
+    ssh -o StrictHostKeyChecking=no git@github.com true || true
+
     # install and start code-server
     curl -fsSL https://code-server.dev/install.sh | sh -s -- --method=standalone --prefix=/tmp/code-server --version 4.14.1
     /tmp/code-server/bin/code-server --auth none --port 13337 >/tmp/code-server.log 2>&1 &
@@ -72,6 +82,14 @@ resource "coder_agent" "main" {
     display_name = "Home Disk"
     key          = "3_home_disk"
     script       = "coder stat disk --path $${HOME}"
+    interval     = 60
+    timeout      = 1
+  }
+
+  metadata {
+    display_name = "Root"
+    key          = "4_root_disk"
+    script       = "coder stat disk --path /"
     interval     = 60
     timeout      = 1
   }
