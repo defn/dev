@@ -34,7 +34,7 @@ function main {
 		case "${1-}" in
 		"" | /*)
 			account="${1-}"
-			account="$(b pass run //aws:aws__list_accounts | fzf --query="${account#/}" --select-1)"
+			account="$("$0" pass run //aws:aws__list_accounts | fzf --query="${account#/}" --select-1)"
 			;;
 		*)
 			account="$1"
@@ -48,8 +48,8 @@ function main {
 			esac
 			;;
 		esac
-		b logout
-		b pass run //aws:aws__cli "${account}" aws-vault login "${account}"
+		"$0" logout
+		"$0" pass run //aws:aws__cli "${account}" aws-vault login "${account}"
 		;;
 	exec)
 		shift
@@ -57,7 +57,7 @@ function main {
 		case "${1-}" in
 		"" | /*)
 			account="${1-}"
-			account="$(b pass run //aws:aws__list_accounts | fzf --query="${account#/}" --select-1)"
+			account="$("$0"pass run //aws:aws__list_accounts | fzf --query="${account#/}" --select-1)"
 			;;
 		*)
 			account="$1"
@@ -72,13 +72,13 @@ function main {
 			;;
 		esac
 		shift
-		b pass run //aws:aws__cli "${account}" aws-vault exec "${account}" -- -- "$@"
+		"$0" pass run //aws:aws__cli "${account}" aws-vault exec "${account}" -- -- "$@"
 		;;
 	aws)
 		shift
 
 		if [[ $# == 0 ]]; then
-			b pass run //aws:aws__list_accounts
+			"$0"pass run //aws:aws__list_accounts
 			return $?
 		fi
 
@@ -86,7 +86,7 @@ function main {
 		case "${1-}" in
 		"" | /*)
 			account="${1-}"
-			account="$(b pass run //aws:aws__list_accounts | fzf --query="${account#/}" --select-1)"
+			account="$("$0" pass run //aws:aws__list_accounts | fzf --query="${account#/}" --select-1)"
 			;;
 		*)
 			account="$1"
@@ -101,7 +101,7 @@ function main {
 			;;
 		esac
 		shift
-		b pass run //aws:aws__cli "${account}" aws "$@"
+		"$0"pass run //aws:aws__cli "${account}" aws "$@"
 		;;
 	graph)
 		shift
@@ -109,10 +109,10 @@ function main {
 		local rule
 		case "${1-}" in
 		"")
-			rule="$(b | fzf --select-1)"
+			rule="$("$0"| fzf --select-1)"
 			;;
 		/*)
-			rule="$(b | fzf --query="${1#/}" --select-1)"
+			rule="$("$0"| fzf --query="${1#/}" --select-1)"
 			shift
 			;;
 		*)
@@ -123,7 +123,7 @@ function main {
 		local tmp_dot
 		tmp_dot="$(mktemp -d -t graphiz-XXXXXX || true)"
 		set -x
-		b query --noimplicit_deps "deps(${rule})" --output graph >"${tmp_dot}/graph.in" && dot -Tpng <"${tmp_dot}/graph.in" >"${tmp_dot}/graph.png" && code "${tmp_dot}/graph.png"
+		"$0"query --noimplicit_deps "deps(${rule})" --output graph >"${tmp_dot}/graph.in" && dot -Tpng <"${tmp_dot}/graph.in" >"${tmp_dot}/graph.png" && code "${tmp_dot}/graph.png"
 		;;
 	*)
 		if [[ $# == 0 ]]; then
@@ -141,7 +141,7 @@ function main {
 				if [[ $# == 0 ]]; then
 					rule="/..."
 				else
-					rule="$(b | fzf --query="$1" --select-1)"
+					rule="$("$0"| fzf --query="$1" --select-1)"
 					shift
 				fi
 
@@ -154,7 +154,7 @@ function main {
 				if [[ $# == 0 ]]; then
 					rule="/..."
 				else
-					rule="$(b | fzf --query="$1" --select-1)"
+					rule="$("$0"| fzf --query="$1" --select-1)"
 					shift
 				fi
 
@@ -168,7 +168,7 @@ function main {
 				if [[ $# == 0 ]]; then
 					rule="/..."
 				else
-					rule=":$(b | fzf --query="$1" --select-1)"
+					rule=":$("$0"| fzf --query="$1" --select-1)"
 					shift
 				fi
 
@@ -180,7 +180,7 @@ function main {
 			in)
 				shift
 
-				rule=":$(b | fzf --query="${1-}" --select-1 || true)"
+				rule=":$("$0"| fzf --query="${1-}" --select-1 || true)"
 
 				local w
 				w="$(bazel info workspace)"
@@ -194,7 +194,7 @@ function main {
 			out)
 				shift
 
-				rule=":$(b | fzf --query="${1-}" --select-1)"
+				rule=":$("$0"| fzf --query="${1-}" --select-1)"
 
 				local w
 				w="$(bazel info workspace)"
@@ -208,7 +208,7 @@ function main {
 			cat)
 				shift
 
-				rule=":$(b | fzf --query="${1-}" --select-1)"
+				rule=":$("$0"| fzf --query="${1-}" --select-1)"
 
 				local w
 				w="$(bazel info workspace)"
@@ -228,9 +228,9 @@ function main {
 				shift
 
 				if [[ -z ${1-} ]]; then
-					rule="$(b | grep __ | fzf --select-1)"
+					rule="$("$0"| grep __ | fzf --select-1)"
 				else
-					rule="$(b | fzf --query="${1}" --select-1)"
+					rule="$("$0"| fzf --query="${1}" --select-1)"
 					shift
 				fi
 
