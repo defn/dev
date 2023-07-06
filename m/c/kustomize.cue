@@ -296,7 +296,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "0.24.1"
+		version:   "0.25.0"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {
