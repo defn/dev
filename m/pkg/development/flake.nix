@@ -14,6 +14,7 @@
           gnumake
           git
           git-lfs
+          graphviz
           inputs.bazelisk.defaultPackage.${ctx.system}
           inputs.buildifier.defaultPackage.${ctx.system}
           inputs.ibazel.defaultPackage.${ctx.system}
