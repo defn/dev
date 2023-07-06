@@ -39,6 +39,22 @@ home:
 	if test -x /opt/homebrew/opt/util-linux/bin/flock; then ln -nfs /opt/homebrew/opt/util-linux/bin/flock bin/nix/; fi
 	if test -x /usr/local/Cellar/util-linux/2.39.1/bin/flock; then ln -nfs /usr/local/Cellar/util-linux/2.39.1/bin/flock bin/nix/; fi
 
+dotfiles:
+	@mark dotfiles
+	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
+		if ! test -d ~/.dotfiles/.git/.; then \
+			git clone https://github.com/$${GIT_AUTHOR_NAME}/dotfiles ~/.dotfiles; \
+		fi; \
+		mkdir -p ~/.dotfiles; \
+		mkdir -p ~/.config/coderv2/dotfiles; \
+		mkdir -p ~//work/.codespaces/.persistedshare; \
+		rm -rf ~/work/.codespaces/.persistedshare/dotfiles; \
+		rm -rf ~/.config/coderv2/dotfiles; \
+		ln -nfs ~/.dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
+		ln -nfs ~/.dotfiles ~/.config/coderv2/dotfiles; \
+		(cd ~/.dotfiles && ./bootstrap); \
+	fi
+
 password-store:
 	@mark configure password-store
 	mkdir -p ~/work/password-store
@@ -74,19 +90,6 @@ login:
 	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then mark kubernetes; this-kubeconfig; this-argocd-login || true; fi
 	this-github-login
 
-dotfiles:
-	@mark dotfiles
-	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
-		mkdir -p ~/.dotfiles; \
-		mkdir -p ~/.config/coderv2/dotfiles; \
-		mkdir -p ~//work/.codespaces/.persistedshare; \
-		rm -rf ~/work/.codespaces/.persistedshare/dotfiles; \
-		rm -rf ~/.config/coderv2/dotfiles; \
-		ln -nfs ~/.dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
-		ln -nfs ~/.dotfiles ~/.config/coderv2/dotfiles; \
-		(cd ~/.dotfiles && ./bootstrap); \
-	fi
-
 symlinks:
 	@mark configure symlinks
 	bash -x bin/persist-cache
@@ -111,16 +114,16 @@ install-inner:
 	$(MAKE) symlinks
 	$(MAKE) perms
 	$(MAKE) home
-	$(MAKE) password-store
-	$(MAKE) gpg
-
-	$(MAKE) trunk
-
-	$(MAKE) doctor
 
 	$(MAKE) login
 
 	$(MAKE) dotfiles
+	$(MAKE) password-store
+	$(MAKE) gpg
+
+	$(MAKE) trunk
+	$(MAKE) doctor
+
 nix-Darwin-upgrade:
 	sudo -i sh -c 'nix-channel --update && nix-env -iA nixpkgs.nix && launchctl remove org.nixos.nix-daemon && launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist'
 
