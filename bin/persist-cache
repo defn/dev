@@ -67,8 +67,6 @@ function cache {
 	persist ~/work/tailscale-state /var/lib/tailscale
 
 	persist ~/work/vscode-server/CachedExtensionVSIXs ~/.vscode-server/data/CachedExtensionVSIXs
-
-	mkdir -p ~/.cache/helm
 }
 
 cache "$@"
