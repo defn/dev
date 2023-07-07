@@ -69,7 +69,9 @@
     "coder-vscode--defn--mog": "linux",
     "coder-vscode--defn--mog--main": "linux",
     "coder-vscode--amanibhavam--docker": "linux",
-    "coder-vscode--amanibhavam--docker--main": "linux"
+    "coder-vscode--amanibhavam--docker--main": "linux",
+    "coder-vscode--defnn--aws2": "linux",
+    "coder-vscode--defnn--gpu": "linux"
   },
   "files.associations": {
     "Makefile": "makefile"
