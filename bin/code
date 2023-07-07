@@ -13,12 +13,8 @@ function main {
 		/tmp/code-server/lib/code-server-4.12.0/lib/vscode/bin/remote-cli/code-linux.sh
 		;;
 	*)
-		if [[ -x "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" ]]; then
-			exec "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" "$@"
-		else
-			echo "TODO: find where code is on this platform: ${VSCODE_GIT_ASKPASS_MAIN-}" 1>&2
-			exit 1
-		fi
+		echo "TODO: find where code is on this platform: ${VSCODE_GIT_ASKPASS_MAIN-}" 1>&2
+		exit 1
 		;;
 	esac
 }
