@@ -82,6 +82,7 @@ docker:
 trunk:
 	$(MARK) trunk
 	trunk install
+	git checkout .local/share/code-server/User/settings.json
 
 login:
 	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then mark kubernetes; this-kubeconfig; this-argocd-login || true; fi
