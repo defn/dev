@@ -35,7 +35,7 @@ macos:
 
 home:
 	$(MARK) home
-	(cd m/pkg/home && ~/bin/b build flake_path && ~/bin/b out flake_path) >bin/nix/.path
+	(. ~/.nix-profile/etc/profile.d/nix.sh && cd m/pkg/home && ~/bin/b build flake_path && ~/bin/b out flake_path) >bin/nix/.path
 	(for a in $$(cat bin/nix/.path | tr : "\n" | perl -e 'print reverse <>'); do for b in $$a/*; do if test -x "$$b"; then if [[ "$$(readlink "bin/nix/$$b{##*/}" || true)" != "$$b" ]]; then ln -nfs "$$b" bin/nix/; fi; fi; done; done)
 	rm -f bin/nix/{gcc,cc,ld}
 	if test -x /opt/homebrew/opt/util-linux/bin/flock; then ln -nfs /opt/homebrew/opt/util-linux/bin/flock bin/nix/; fi
@@ -112,6 +112,9 @@ install-inner:
 	$(MAKE) perms
 	$(MAKE) home
 
+	. ~/.bash_profile && . ~/.envrc && $(MAKE) install-innermost
+
+install-innermost:
 	$(MAKE) login
 
 	$(MAKE) dotfiles
@@ -124,7 +127,7 @@ nix-Darwin-upgrade:
 	sudo -i sh -c 'nix-channel --update && nix-env -iA nixpkgs.nix && launchctl remove org.nixos.nix-daemon && launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist'
 
 nix:
-	. ~/.nix-profile/etc/profile.d/nix.sh && (which nix || $(MAKE) nix-$(shell uname -s))
+	(. ~/.nix-profile/etc/profile.d/nix.sh && which nix) || $(MAKE) nix-$(shell uname -s)
 	. ~/.nix-profile/etc/profile.d/nix.sh && (which nix && (which cachix || nix profile install nixpkgs#cachix))
 	. ~/.nix-profile/etc/profile.d/nix.sh && (which nix && (test -f "$$HOME/.nix-profile/share/nix-direnv/direnvrc" || nix profile install nixpkgs#nix-direnv))
 

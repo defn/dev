@@ -34,7 +34,6 @@
     "**/.cache/**": true,
     "**/.kube/**": true,
     "**/work/**": true,
-    "**/.trunk/**": true,
     "**/.trunk/*out/": true,
     "**/.trunk/*actions/": true,
     "**/.trunk/*logs/": true,
