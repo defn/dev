@@ -9,14 +9,11 @@ export _BROWSER="$0"
 
 function main {
 	case "${VSCODE_GIT_ASKPASS_MAIN-}" in
-	/vscode/*)
-		exec browser.sh "$@"
-		;;
 	*/code-server*)
-		exec browser.sh "$@"
+		exec "${VSCODE_GIT_ASKPASS_MAIN%%/extensions/*}/bin/helpers/browser.sh" "$@"
 		;;
 	*/.vscode-server/*)
-		exec "${VSCODE_GIT_ASKPASS_MAIN%%extensions/*}/bin/helpers/browser.sh" "$@"
+		exec "${VSCODE_GIT_ASKPASS_MAIN%%/extensions/*}/bin/helpers/browser.sh" "$@"
 		;;
 	*)
 		if [[ -x /usr/bin/open ]]; then
