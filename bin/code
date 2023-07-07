@@ -2,7 +2,7 @@
 
 function main {
 	case "${VSCODE_GIT_ASKPASS_MAIN-}" in
-	/Application)
+	/Application*)
 		exec "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" "$@"
 		;;
 	*/.vscode-server/bin/*)
@@ -10,7 +10,6 @@ function main {
 		;;
 	/tmp/code-server/lib/*)
 		exec "${VSCODE_GIT_ASKPASS_MAIN%%extensions/*}/bin/remote-cli/code-linux.sh" "$@"
-		/tmp/code-server/lib/code-server-4.12.0/lib/vscode/bin/remote-cli/code-linux.sh
 		;;
 	*)
 		echo "TODO: find where code is on this platform: ${VSCODE_GIT_ASKPASS_MAIN-}" 1>&2
