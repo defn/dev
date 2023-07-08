@@ -15,17 +15,17 @@ lint:
     - linters: [ALL]
       paths:
         - m/tf/terraform-*/**
-        - "m/**/main.tf.json"
+        - m/**/main.tf.json
         - m/gen/**
-        - "m/**/cdktf.out/**"
-        - "m/**/*.gen.yaml"
+        - m/**/cdktf.out/**
+        - m/**/*.gen.yaml
         - m/e/**
         - m/k/**
-        - "m/**/*_go_gen.cue"
-        - "m/**/node_modules/**"
+        - m/**/*_go_gen.cue
+        - m/**/node_modules/**
         - m/go_deps.bzl
         - m/k3d-tailscale-operator.yaml
-        - "m/**/config.json"
+        - m/**/config.json
   enabled:
     - dotenv-linter@3.3.0
     - bandit@1.7.5
