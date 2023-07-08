@@ -47,9 +47,9 @@ resource "coder_agent" "main" {
     make nix
     make symlinks
     make perms
-    echo make home
+    make home
 
-    echo ~/bin/nix/code-server --auth none --port 13337 >/tmp/code-server.log 2>&1 &
+    ~/bin/nix/code-server --auth none --port 13337 >/tmp/code-server.log 2>&1 &
   EOT
 
   env = {
