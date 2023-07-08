@@ -2,7 +2,7 @@ data "coder_parameter" "region" {
   name         = "region"
   display_name = "Region"
   description  = "The region to deploy the workspace in."
-  default      = "us-east-1"
+  default      = "us-west-1"
   mutable      = false
 
   option {
