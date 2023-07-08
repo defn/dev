@@ -15,9 +15,9 @@ locals {
   username = "ubuntu"
 }
 
-data "coder_provisioner" "me" {}
+data "coder_provisioner" "me" { }
 
-data "coder_workspace" "me" {}
+data "coder_workspace" "me" { }
 
 resource "coder_agent" "main" {
   arch                   = data.coder_provisioner.me.arch
@@ -35,19 +35,18 @@ resource "coder_agent" "main" {
       mv dev/.git .
       rm -rf dev
       git reset --hard
-      make nix
-      make symlinks
-      make perms
-      make home
+    else
+      git pull
     fi
+
+    make nix
+    make symlinks
+    make perms
+    make home
 
     ~/bin/nix/code-server --auth none --port 13337 >/tmp/code-server.log 2>&1 &
   EOT
 
-  # These environment variables allow you to make Git commits right away after creating a
-  # workspace. Note that they take precedence over configuration defined in ~/.gitconfig!
-  # You can remove this block if you'd prefer to configure Git manually or using
-  # dotfiles. (see docs/dotfiles.md)
   env = {
     GIT_AUTHOR_NAME     = "${data.coder_workspace.me.owner}"
     GIT_COMMITTER_NAME  = "${data.coder_workspace.me.owner}"
