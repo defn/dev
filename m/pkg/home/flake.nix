@@ -15,6 +15,7 @@
     cloud.url = github:defn/dev/pkg-cloud-0.0.121?dir=m/pkg/cloud;
     kubernetes.url = github:defn/dev/pkg-kubernetes-0.0.115?dir=m/pkg/kubernetes;
     coder.url = github:defn/dev/pkg-coder-0.25.0-1?dir=m/pkg/coder;
+    codeserver.url = github:defn/dev/pkg-codeserver-4.14.1-1?dir=m/pkg/codeserver;
     tailscale.url = github:defn/dev/pkg-tailscale-1.44.0-1?dir=m/pkg/tailscale;
     shell.url = github:defn/dev/pkg-shell-0.0.51?dir=m/pkg/shell;
   };
@@ -61,6 +62,7 @@
         inputs.cloud.defaultPackage.${ctx.system}
         inputs.kubernetes.defaultPackage.${ctx.system}
         inputs.coder.defaultPackage.${ctx.system}
+        inputs.codeserver.defaultPackage.${ctx.system}
 
         inputs.shell.defaultPackage.${ctx.system}
       ]
