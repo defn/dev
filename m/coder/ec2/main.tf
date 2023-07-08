@@ -123,6 +123,9 @@ install -d -m 0755 -o root -g root /run/user \
 
 chown -R ubuntu:ubuntu /home/ubuntu && chmod u+s /usr/bin/sudo
 
+mkdir -p /nix
+chown -R ubuntu:ubuntu /nix
+
 sudo -u ${local.username} sh -c '${coder_agent.main.init_script}'
 --//--
 EOT
