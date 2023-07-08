@@ -10,7 +10,7 @@ org: {
 	defn: account: {
 		defn: {
 			id:       "510430971399"
-			sso_role: "TerraformRemoteState"
+			sso_role: "AdministratorAccess"
 		}
 	}
 	coil: account: {
