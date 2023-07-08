@@ -1,6 +1,6 @@
 provider "coder" {
   feature_use_managed_variables = true
-  }
+}
 
 locals {
   username = "ubuntu"
@@ -33,8 +33,6 @@ resource "coder_agent" "main" {
   startup_script         = <<-EOT
     set -e
 
-    sudo cp $(readlink -f /proc/$(pgrep -f coder.agent)/cwd)/coder /usr/local/bin/
-
     cd
     ssh -o StrictHostKeyChecking=no git@github.com true || true
     if ! test -d .git/.; then
@@ -49,9 +47,9 @@ resource "coder_agent" "main" {
     make nix
     make symlinks
     make perms
-    make home
+    echo make home
 
-    ~/bin/nix/code-server --auth none --port 13337 >/tmp/code-server.log 2>&1 &
+    echo ~/bin/nix/code-server --auth none --port 13337 >/tmp/code-server.log 2>&1 &
   EOT
 
   env = {
@@ -61,4 +59,3 @@ resource "coder_agent" "main" {
     GIT_COMMITTER_EMAIL = "${data.coder_workspace.me.owner_email}"
   }
 }
-
