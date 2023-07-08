@@ -59,4 +59,3 @@ resource "coder_agent" "main" {
     GIT_COMMITTER_EMAIL = "${data.coder_workspace.me.owner_email}"
   }
 }
-
