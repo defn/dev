@@ -4,7 +4,7 @@ org: [ORG=string]: org: ORG
 
 org: {
 	defn: {
-		region: "us-west-2"
+		region: "us-east-2"
 		url:    "https://defn.awsapps.com/start"
 	}
 	coil: {

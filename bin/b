@@ -62,6 +62,29 @@ function main {
 		"$0" logout
 		"$0" pass run //aws:aws__cli "${account}" aws-vault login "${account}"
 		;;
+	server)
+		shift
+		local account
+		case "${1-}" in
+		"" | /*)
+			account="${1-}"
+			account="$("$0"pass run //aws:aws__list_accounts | fzf --query="${account#/}" --select-1)"
+			;;
+		*)
+			account="$1"
+			case "${account}" in
+			*-sso)
+				account="${account}-source"
+				;;
+			*)
+				true
+				;;
+			esac
+			;;
+		esac
+		shift
+		"$0" pass run //aws:aws__cli "${account}" -- aws-vault exec --prompt pass --ec2-server "${account}" -- "$@"
+		;;
 	exec)
 		shift
 		local account
@@ -83,7 +106,7 @@ function main {
 			;;
 		esac
 		shift
-		"$0" pass run //aws:aws__cli "${account}" aws-vault exec "${account}" -- -- "$@"
+		"$0" pass run //aws:aws__cli "${account}" -- aws-vault exec "${account}" -- "$@"
 		;;
 	aws)
 		shift

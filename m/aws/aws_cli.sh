@@ -24,12 +24,14 @@ function main {
 	mode="$1"
 	shift
 
+	export AWS_CONFIG_FILE="${aws_config}" AWS_PROFILE="${aws_profile}"
+
 	case "${mode}" in
 	aws)
-		exec env AWS_CONFIG_FILE="${aws_config}" AWS_PROFILE="${aws_profile}" "${flake_awscli}" "$@"
+		exec "${flake_awscli}" "$@"
 		;;
 	aws-vault)
-		exec env AWS_CONFIG_FILE="${aws_config}" AWS_PROFILE="${aws_profile}" "${flake_awsvault}" "$@"
+		exec "${flake_awsvault}" "$@"
 		;;
 	*)
 		echo "ERROR: unknown mode ${mode}"
