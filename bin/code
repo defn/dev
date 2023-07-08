@@ -11,6 +11,9 @@ function main {
 	/tmp/code-server/lib/*)
 		exec "${VSCODE_GIT_ASKPASS_MAIN%%extensions/*}/bin/remote-cli/code-linux.sh" "$@"
 		;;
+	/nix/store/*codeserver*)
+		exec "${VSCODE_GIT_ASKPASS_MAIN%%extensions/*}/bin/remote-cli/code-linux.sh" "$@"
+		;;
 	*)
 		echo "TODO: find where code is on this platform: ${VSCODE_GIT_ASKPASS_MAIN-}" 1>&2
 		exit 1
