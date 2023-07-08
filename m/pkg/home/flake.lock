@@ -69,17 +69,17 @@
       },
       "locked": {
         "dir": "m/pkg/awscli",
-        "lastModified": 1688597912,
-        "narHash": "sha256-3gtB5jDLTsNpQgRv1lRYTykPr+p0fjQGtbA7uFOVDE8=",
+        "lastModified": 1688778818,
+        "narHash": "sha256-p3Us2Y9YUKR1Gj3eCOQ7kf4OdnHpLGS2rItUzgoyc78=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "c1e17c7c16c38594ad241fff0d1b7b8995b3118c",
+        "rev": "db1e6198e4ff392636d81657e47f19010da4b38d",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/awscli",
         "owner": "defn",
-        "ref": "pkg-awscli-2.12.7-1",
+        "ref": "pkg-awscli-2.13.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -307,17 +307,17 @@
       },
       "locked": {
         "dir": "m/pkg/cloud",
-        "lastModified": 1688674435,
-        "narHash": "sha256-Vbqbn3KJkm+3qDZrjGSM+qDdq3PHeFsmlFRk6pX9c2E=",
+        "lastModified": 1688778875,
+        "narHash": "sha256-Y9hxm3lVKAL6hQMc0N5lUkl2w+mR8YRyIeiJmH2ytVI=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "0ff65c0f9baf349c4e38f0f823f0c4606af2b87d",
+        "rev": "8a57927138268a2b3c515c0aee03427603ae5717",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cloud",
         "owner": "defn",
-        "ref": "pkg-cloud-0.0.120",
+        "ref": "pkg-cloud-0.0.121",
         "repo": "dev",
         "type": "github"
       }
@@ -2525,17 +2525,17 @@
       },
       "locked": {
         "dir": "m/pkg/flyctl",
-        "lastModified": 1688674400,
-        "narHash": "sha256-/K9253qXA26ykafU1MpB5ugKx40quYsdkAcJkH9w42A=",
+        "lastModified": 1688778835,
+        "narHash": "sha256-d5e+Fu268/uR22MVUySKq/iCki1xfDegSfVXD0fMGtQ=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "d96f9a5f51a083da94ba90143097ad600ad464af",
+        "rev": "fed3ca7fa0601ebb5cf2d208500bcd12ce9fd10a",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/flyctl",
         "owner": "defn",
-        "ref": "pkg-flyctl-0.1.51-1",
+        "ref": "pkg-flyctl-0.1.52-1",
         "repo": "dev",
         "type": "github"
       }
@@ -2591,17 +2591,17 @@
       },
       "locked": {
         "dir": "m/pkg/godev",
-        "lastModified": 1688160198,
-        "narHash": "sha256-K9CZOIJmh0+I3NXXEd9shBn0iUZPWhFvFVqeS8sUasI=",
+        "lastModified": 1688778888,
+        "narHash": "sha256-kLkQMvkYTYZdzcva2oCpEKdw5zUPVAp4S45ajd0eavQ=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "bbdc312387a93aa19190936bd0a252f3f41139cb",
+        "rev": "ebe676ead3ede305dbe08630a9268d32dbf98e98",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/godev",
         "owner": "defn",
-        "ref": "pkg-godev-0.0.93",
+        "ref": "pkg-godev-0.0.94",
         "repo": "dev",
         "type": "github"
       }
@@ -2612,17 +2612,17 @@
       },
       "locked": {
         "dir": "m/pkg/goreleaser",
-        "lastModified": 1688078430,
-        "narHash": "sha256-lwqgCM+TPWxRVE1kw/7D4mLbsdeX4V7aEvLsoputFwU=",
+        "lastModified": 1688778849,
+        "narHash": "sha256-Tii6a0VLgbTw3BKFUomonTx5ukCzdvhAwu6jj2kM+w8=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "183045c47a533b40c25a3443b7e416cd82765455",
+        "rev": "8f254423e992a7e463546fd5f0bc398c309b8891",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/goreleaser",
         "owner": "defn",
-        "ref": "pkg-goreleaser-1.19.1-1",
+        "ref": "pkg-goreleaser-1.19.2-1",
         "repo": "dev",
         "type": "github"
       }
