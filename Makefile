@@ -104,7 +104,7 @@ perms:
 	-chmod 0600 ~/.kube/config
 
 ci dev:
-	cd m && $(MAKE) $@
+	cd m && b run env FLY_API_TOKEN=$$(pass FLY_API_TOKEN) $(MAKE) $@
 
 install:
 	$(MAKE) nix
