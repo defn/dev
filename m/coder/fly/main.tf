@@ -44,6 +44,14 @@ resource "coder_agent" "main" {
       git pull
     fi
 
+    rm -rf .cache
+    sudo install -d -m 0700 -o ubuntu -g ubuntu /nix/home/cache
+    ln -nfs /nix/home/cache .cache
+
+    rm -rf work
+    sudo install -d -m 0700 -o ubuntu -g ubuntu /nix/home/work
+    ln -nfs /nix/home/work work
+
     make nix
     make symlinks
     make perms
