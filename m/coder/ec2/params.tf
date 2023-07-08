@@ -34,21 +34,21 @@ data "coder_parameter" "instance_type" {
   name         = "instance_type"
   display_name = "Instance type"
   description  = "What instance type should your workspace use?"
-  default      = "t4.xlarge"
+  default      = "t3.xlarge"
   mutable      = false
 
   option {
     name  = "4 vCPU, 16 GiB RAM"
-    value = "t4.xlarge"
+    value = "t3.xlarge"
   }
 
   option {
     name  = "8 vCPU, 32 GiB RAM"
-    value = "t4.2xlarge"
+    value = "t3.2xlarge"
   }
 
   option {
     name  = "16 vCPU, 64 GiB RAM"
-    value = "t4.4xlarge"
+    value = "t3.4xlarge"
   }
 }
