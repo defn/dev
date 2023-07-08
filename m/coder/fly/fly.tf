@@ -60,7 +60,7 @@ resource "fly_machine" "workspace" {
   mounts = [
     {
       volume = fly_volume.home-volume.id
-      path   = "/home/coder"
+      path   = "/nix"
     }
   ]
 }
