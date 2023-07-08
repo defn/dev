@@ -1,4 +1,6 @@
-provider "coder" {}
+provider "coder" {
+  feature_use_managed_variables = true
+  }
 
 locals {
   username = "ubuntu"

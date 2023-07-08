@@ -64,7 +64,6 @@ data "coder_parameter" "volume-size" {
   }
 }
 
-# You can see all available regions here: https://fly.io/docs/reference/regions/
 data "coder_parameter" "region" {
   name         = "region"
   display_name = "Region"
