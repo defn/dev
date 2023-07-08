@@ -40,6 +40,9 @@ resource "coder_agent" "main" {
     GIT_COMMITTER_NAME  = "${data.coder_workspace.me.owner}"
     GIT_AUTHOR_EMAIL    = "${data.coder_workspace.me.owner_email}"
     GIT_COMMITTER_EMAIL = "${data.coder_workspace.me.owner_email}"
+
+    LOCAL_ARCHIVE = "/usr/lib/locale/locale-archive"
+    LC_ALL        = "C.UTF-8"
   }
 }
 
@@ -84,6 +87,42 @@ Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment; filename="userdata.txt"
 
 #!/bin/bash
+export LANG en_US.UTF-8
+export LANGUAGE en_US:en
+export LC_ALL en_US.UTF-8
+
+export DEBIAN_FRONTEND=noninteractive
+
+(echo "Update-Manager::Never-Include-Phased-Updates;"; echo "APT::Get::Never-Include-Phased-Updates: True;") > /etc/apt/apt.conf.d/99-Phased-Updates
+
+dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm \
+    && apt-get update && apt-get upgrade -y \
+    && apt-get install -y --no-install-recommends lsb-release tzdata locales ca-certificates wget curl xz-utils rsync make git direnv bash-completion less pass \
+        sudo tini procps iptables net-tools iputils-ping iproute2 dnsutils gnupg \
+        openssh-client fzf build-essential \
+    && apt-get clean && apt purge -y nano \
+    && rm -f /usr/bin/gs \
+    && curl -sSL -o /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64 \
+    &&  sudo chmod 755 /usr/local/bin/bazel
+
+apt update && apt upgrade -y
+
+ln -sf /usr/share/zoneinfo/UTC /etc/localtime \
+    && dpkg-reconfigure -f noninteractive tzdata \
+    && locale-gen en_US.UTF-8 \
+    && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+
+groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu \
+    && echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu \
+    && install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
+
+install -d -m 0755 -o root -g root /run/user \
+    && install -d -m 0700 -o root -g root /run/sshd \
+    && install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg \
+    && install -d -m 0700 -o ubuntu -g ubuntu /app /cache
+
+chown -R ubuntu:ubuntu /home/ubuntu && chmod u+s /usr/bin/sudo
+
 sudo -u ${local.username} sh -c '${coder_agent.main.init_script}'
 --//--
 EOT
