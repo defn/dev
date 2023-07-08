@@ -1,6 +1,7 @@
 data "coder_workspace" "me" {}
 
 resource "coder_agent" "main" {
+  auth                   = "aws-instance-identity"
   arch                   = "amd64"
   os                     = "linux"
   startup_script_timeout = 180
@@ -60,10 +61,61 @@ resource "coder_app" "code-server" {
 
 locals {
   username = "ubuntu"
+
+  user_data_start = <<EOT
+Content-Type: multipart/mixed; boundary="//"
+MIME-Version: 1.0
+
+--//
+Content-Type: text/cloud-config; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="cloud-config.txt"
+
+#cloud-config
+cloud_final_modules:
+hostname: ${lower(data.coder_workspace.me.name)}
+- [scripts-user, always]
+
+--//
+Content-Type: text/x-shellscript; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="userdata.txt"
+
+#!/bin/bash
+sudo -u ${local.username} sh -c '${coder_agent.main.init_script}'
+--//--
+EOT
+
+  user_data_end = <<EOT
+Content-Type: multipart/mixed; boundary="//"
+MIME-Version: 1.0
+
+--//
+Content-Type: text/cloud-config; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="cloud-config.txt"
+
+#cloud-config
+cloud_final_modules:
+- [scripts-user, always]
+
+--//
+Content-Type: text/x-shellscript; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="userdata.txt"
+
+#!/bin/bash
+sudo shutdown -h now
+--//--
+EOT
 }
 
 resource "coder_metadata" "workspace" {
-  resource_id = fly_app.workspace.id
+  resource_id = aws_instance.dev.id
 
   item {
     key   = "Region"
@@ -71,22 +123,12 @@ resource "coder_metadata" "workspace" {
   }
 
   item {
-    key   = "CPU Type"
-    value = data.coder_parameter.cputype.value
-  }
-
-  item {
-    key   = "CPU Count"
-    value = data.coder_parameter.cpu.value
-  }
-
-  item {
-    key   = "Memory (GB)"
-    value = data.coder_parameter.memory.value
+    key   = "Instance Type"
+    value = aws_instance.dev.instance_type
   }
 
   item {
     key   = "Volume Size (GB)"
-    value = data.coder_parameter.volume-size.value
+    value = "${aws_instance.dev.root_block_device[0].volume_size} GiB"
   }
 }
