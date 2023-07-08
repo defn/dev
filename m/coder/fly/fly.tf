@@ -1,5 +1,10 @@
 provider "fly" {}
 
+variable "fly_org" {
+  type    = string
+  default = "personal"
+}
+
 resource "fly_app" "workspace" {
   name = "coder-${data.coder_workspace.me.owner}-${lower(data.coder_workspace.me.name)}"
   org  = var.fly_org
@@ -58,13 +63,4 @@ resource "fly_machine" "workspace" {
       path   = "/home/coder"
     }
   ]
-}
-
-variable "fly_org" {
-  type        = string
-  description = <<-EOF
-The Fly.io organization slug to deploy the workspace in. List organizations by running:
-
-$ flyctl orgs list
-EOF
 }
