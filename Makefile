@@ -83,7 +83,7 @@ docker:
 
 trunk:
 	$(MARK) trunk
-	trunk install
+	cd m && trunk install
 	git checkout .local/share/code-server/User/settings.json
 
 login:
