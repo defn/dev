@@ -71,6 +71,8 @@ gpg:
 	if test -d ~/.password-store/config/gnupg-config/.; then rsync -ia ~/.password-store/config/gnupg-config/. ~/.gnupg/.; fi
 	$(MAKE) perms
 	if [[ "$(shell uname -s)" == "Darwin" ]]; then $(MAKE) macos; fi
+	rm -rf /run/user/1000/gnupg
+	ln -nfs ~/.gnupg /run/user/1000/gnupg
 	dirmngr --daemon || true
 
 docker:
