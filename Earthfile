@@ -42,7 +42,7 @@ root:
             openssh-client fzf build-essential \
         && apt-get clean && apt purge -y nano \
         && rm -f /usr/bin/gs \
-        && curl -sSL -o /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-$(if test "$(uname -m)" == x86_64; then echo "amd64"; else echo "arm64"; fi) \
+        && curl -sSL -o /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64 \
         &&  sudo chmod 755 /usr/local/bin/bazel
 
     RUN apt update && apt upgrade -y
