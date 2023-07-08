@@ -31,7 +31,7 @@ resource "coder_agent" "main" {
   startup_script         = <<-EOT
     set -e
 
-    sudo cp $(readlink -f /proc/1/cwd)/coder /usr/local/bin/
+    sudo cp $(readlink -f /proc/$(pgrep -f coder.agent)/cwd)/coder /usr/local/bin/
 
     cd
     ssh -o StrictHostKeyChecking=no git@github.com true || true
