@@ -49,23 +49,38 @@ resource "aws_iam_instance_profile" "dev" {
   role = aws_iam_role.dev.name
 }
 
+resource "aws_default_vpc" "default" {}
+
+resource "aws_security_group" "dev" {
+  name        = local.coder_name
+  description = local.coder_name
+
+  vpc_id = aws_default_vpc.default.id
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
 resource "aws_instance" "dev" {
   ami               = data.aws_ami.ubuntu.id
   availability_zone = "${data.coder_parameter.region.value}a"
   instance_type     = data.coder_parameter.instance_type.value
-  ebs_optimized     = true
 
-  iam_instance_profile = aws_iam_instance_profile.dev.name
+  ebs_optimized = true
+  monitoring    = true
+
+  iam_instance_profile   = aws_iam_instance_profile.dev.name
+  vpc_security_group_ids = [aws_security_group.dev.id]
 
   user_data = data.coder_workspace.me.transition == "start" ? local.user_data_start : local.user_data_end
 
   root_block_device {
     volume_size = 50
     encrypted   = true
-  }
-
-  monitoring {
-    enabled = true
   }
 
   metadata_options {
