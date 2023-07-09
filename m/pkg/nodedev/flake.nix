@@ -11,7 +11,6 @@
     defaultPackage = ctx: ctx.wrap.nullBuilder {
       propagatedBuildInputs =
         with (import inputs.latest { system = ctx.system; }); [
-          bashInteractive
           nodejs-18_x
         ];
     };
