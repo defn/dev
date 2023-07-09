@@ -53,6 +53,7 @@ resource "aws_instance" "dev" {
   ami               = data.aws_ami.ubuntu.id
   availability_zone = "${data.coder_parameter.region.value}a"
   instance_type     = data.coder_parameter.instance_type.value
+  ebs_optimized     = true
 
   iam_instance_profile = aws_iam_instance_profile.dev.name
 
@@ -61,6 +62,10 @@ resource "aws_instance" "dev" {
   root_block_device {
     volume_size = 50
     encrypted   = true
+  }
+
+  monitoring {
+    enabled = true
   }
 
   metadata_options {
