@@ -76,6 +76,6 @@
     "Makefile": "makefile"
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "trunk.io"
   }
 }
