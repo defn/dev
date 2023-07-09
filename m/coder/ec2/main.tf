@@ -65,7 +65,7 @@ resource "coder_app" "code-server" {
 locals {
   username = "ubuntu"
 
-  user_data_start = <<EOT
+  user_data = <<EOT
 Content-Type: multipart/mixed; boundary="//"
 MIME-Version: 1.0
 
@@ -133,35 +133,12 @@ sudo -u ${local.username} sh -c '${coder_agent.main.init_script}'
 
 --//--
 EOT
-
-  user_data_end = <<EOT
-Content-Type: multipart/mixed; boundary="//"
-MIME-Version: 1.0
-
---//
-Content-Type: text/cloud-config; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="cloud-config.txt"
-
-#cloud-config
-cloud_final_modules:
-- [scripts-user, always]
-
---//
-Content-Type: text/x-shellscript; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="userdata.txt"
-
-#!/bin/bash
-sudo shutdown -h now
---//--
-EOT
 }
 
 resource "coder_metadata" "workspace" {
-  resource_id = aws_instance.dev.id
+  count = data.coder_workspace.me.start_count
+
+  resource_id = aws_instance.dev[count.index].id
 
   item {
     key   = "Region"
@@ -170,11 +147,11 @@ resource "coder_metadata" "workspace" {
 
   item {
     key   = "Instance Type"
-    value = aws_instance.dev.instance_type
+    value = aws_instance.dev[count.index].instance_type
   }
 
   item {
     key   = "Volume Size (GB)"
-    value = "${aws_instance.dev.root_block_device[0].volume_size} GiB"
+    value = "${aws_instance.dev[count.index].root_block_device[0].volume_size} GiB"
   }
 }
