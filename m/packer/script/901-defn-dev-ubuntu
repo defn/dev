@@ -23,14 +23,12 @@ function main {
 	make nix
 	make symlinks
 	make perms
-	(
-		set +x
-		source .bash_profile
-		source .envrc
-		set -x
-		make trunk
-	)
 	make home
+
+	set +x
+	source .bash_profile
+	source .envrc
+	make trunk
 }
 
 main "$@"
