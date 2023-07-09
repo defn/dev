@@ -96,11 +96,7 @@ function setup {
 
   install -d -m 0755 -o root -g root /run/user \
       && install -d -m 0700 -o root -g root /run/sshd \
-      && install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg \
-      && install -d -m 0700 -o ubuntu -g ubuntu /app /cache
-
-  mkdir -p /nix
-  chown -R ubuntu:ubuntu /nix
+      && install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg /nix
 }
 
 setup || true
