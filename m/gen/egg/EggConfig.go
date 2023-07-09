@@ -13,7 +13,6 @@ type EggConfig struct {
 	Providers *[]interface{} `field:"optional" json:"providers" yaml:"providers"`
 	// Experimental.
 	SkipAssetCreationFromLocalModules *bool `field:"optional" json:"skipAssetCreationFromLocalModules" yaml:"skipAssetCreationFromLocalModules"`
-	// undefined.
 	Egg *string `field:"required" json:"egg" yaml:"egg"`
 }
 
