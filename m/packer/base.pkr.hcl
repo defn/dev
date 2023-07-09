@@ -20,23 +20,13 @@ source "amazon-ebs" "this" {
   associate_public_ip_address = "true"
   encrypt_boot                = "true"
   spot_price                  = "auto"
+  ssh_interface               = "public_ip"
+  ssh_username                = "ubuntu"
 
   instance_type = "t3.small"
   region        = "us-west-2"
-  disk_size     = 30
-
-  ssh_interface = "public_ip"
-  ssh_username  = "ubuntu"
-
-  run_tags = {
-    ManagedBy = "Packer"
-  }
-  run_volume_tags = {
-    ManagedBy = "Packer"
-  }
-  snapshot_tags = {
-    ManagedBy = "Packer"
-  }
+  volume_type   = "gp3"
+  volume_size   = "40"
 
   source_ami_filter {
     owners      = ["099720109477"]
@@ -48,6 +38,18 @@ source "amazon-ebs" "this" {
       root-device-type    = "ebs"
       virtualization-type = "hvm"
     }
+  }
+
+  run_tags = {
+    ManagedBy = "Packer"
+  }
+
+  run_volume_tags = {
+    ManagedBy = "Packer"
+  }
+
+  snapshot_tags = {
+    ManagedBy = "Packer"
   }
 }
 
