@@ -9,7 +9,8 @@ function main {
 
 	make symlinks
 	make perms
-	make home || true
+	make home
+	make trunk
 }
 
 main "$@"
