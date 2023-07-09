@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+function main {
+	set -exfu
+
+	cd
+
+	git pull
+
+	make symlinks
+	make perms
+	make home || true
+}
+
+main "$@"

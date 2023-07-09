@@ -1,7 +1,7 @@
 variable "scripts" {
   type = list(string)
   default = [
-    "script/989-defn-dev-update",
+    "script/998-defn-dev-update",
     "script/999-update"
   ]
 }
