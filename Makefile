@@ -83,7 +83,7 @@ docker:
 
 trunk:
 	$(MARK) trunk
-	PATH="$$(pwd)/bin:$$PATH" && bin/trunk install
+	trunk install
 	git checkout .local/share/code-server/User/settings.json
 
 login:
