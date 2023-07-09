@@ -9,23 +9,8 @@ resource "coder_agent" "main" {
     set -e
 
     cd
-    ssh -o StrictHostKeyChecking=no git@github.com true || true
-    if ! test -d .git/.; then
-      git clone http://github.com/defn/dev dev
-      mv dev/.git .
-      rm -rf dev
-      git reset --hard
-    else
-      git pull
-    fi
-
-    rm -rf .cache
-    sudo install -d -m 0700 -o ubuntu -g ubuntu /nix/home/cache
-    ln -nfs /nix/home/cache .cache
-
-    rm -rf work
-    sudo install -d -m 0700 -o ubuntu -g ubuntu /nix/home/work
-    ln -nfs /nix/home/work work
+    
+    git pull
 
     make nix
     make symlinks
@@ -87,20 +72,6 @@ Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment; filename="userdata.txt"
 
 #!/bin/bash
-
-function setup {
-  curl -sSL -o /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64 \
-      &&  sudo chmod 755 /usr/local/bin/bazel
-
-  apt-get update && apt-get upgrade -y
-
-  install -d -m 0755 -o root -g root /run/user \
-      && install -d -m 0700 -o root -g root /run/sshd \
-      && install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg /nix
-}
-
-setup || true
-
 sudo -u ${local.username} sh -c '${coder_agent.main.init_script}'
 
 --//--
