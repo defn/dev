@@ -19,7 +19,7 @@ source "amazon-ebs" "this" {
   ssh_username                = "ubuntu"
 
   spot_price    = "auto"
-  instance_type = "t3.small"
+  instance_type = "t3.xlarge"
   region        = "us-west-2"
 
   source_ami_filter {
