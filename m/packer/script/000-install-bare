@@ -21,7 +21,10 @@ EOF
 		echo "APT::Get::Never-Include-Phased-Updates: True;"
 	) >/etc/apt/apt.conf.d/99-Phased-Updates
 
-	apt update
+	while ! apt-get update; do
+		sleep 1
+	done
+
 	apt purge --auto-remove -y unattended-upgrades
 }
 
