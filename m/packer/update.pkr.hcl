@@ -46,7 +46,7 @@ source "amazon-ebs" "this" {
   }
 
   snapshot_tags = {
-    Name      = "Packer"
+    Name      = "Packer update ${local.timestamp}"
     ManagedBy = "Packer"
   }
 }
