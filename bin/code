@@ -2,7 +2,7 @@
 
 function main {
 	case "${VSCODE_GIT_ASKPASS_MAIN-}" in
-	/Application*)
+	/Application* | "")
 		exec "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" "$@"
 		;;
 	*/.vscode-server/bin/*)
