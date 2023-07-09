@@ -9,13 +9,15 @@ function main {
 	local aws_profile
 	local mode
 
-	flake_awscli="$1"
+	local shome="$(pwd)"
+
+	flake_awscli="${shome}/$1"
 	shift
 
-	flake_awsvault="$1"
+	flake_awsvault="${shome}/$1"
 	shift
 
-	aws_config="$1"
+	aws_config="${shome}/$1"
 	shift
 
 	aws_profile="$1"
@@ -23,6 +25,8 @@ function main {
 
 	mode="$1"
 	shift
+
+	cd "${BUILD_WORKING_DIRECTORY}"
 
 	export AWS_CONFIG_FILE="${aws_config}" AWS_PROFILE="${aws_profile}"
 
