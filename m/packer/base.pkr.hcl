@@ -18,15 +18,16 @@ source "amazon-ebs" "this" {
   ami_name        = "base-amd64-${local.timestamp}"
 
   associate_public_ip_address = "true"
-  encrypt_boot                = "true"
-  spot_price                  = "auto"
   ssh_interface               = "public_ip"
   ssh_username                = "ubuntu"
 
+  spot_price    = "auto"
   instance_type = "t3.small"
   region        = "us-west-2"
-  volume_type   = "gp3"
-  volume_size   = "40"
+
+  encrypt_boot = "true"
+  volume_type  = "gp3"
+  volume_size  = "40"
 
   source_ami_filter {
     owners      = ["099720109477"]
