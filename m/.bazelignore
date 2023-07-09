@@ -1,7 +1,6 @@
 
 tf
 node_modules
-.direnv
 pkg/acme/.direnv
 pkg/argocd/.direnv
 pkg/argorollouts/.direnv
@@ -37,6 +36,7 @@ pkg/goreleaser/.direnv
 pkg/gum/.direnv
 pkg/helm/.direnv
 pkg/hof/.direnv
+pkg/home/.direnv
 pkg/honeymarker/.direnv
 pkg/honeytail/.direnv
 pkg/honeyvent/.direnv
@@ -109,6 +109,7 @@ pkg/goreleaser/result
 pkg/gum/result
 pkg/helm/result
 pkg/hof/result
+pkg/home/result
 pkg/honeymarker/result
 pkg/honeytail/result
 pkg/honeyvent/result
@@ -146,4 +147,3 @@ pkg/velero/result
 pkg/vhs/result
 pkg/vpn/result
 pkg/zellij/result
-result
