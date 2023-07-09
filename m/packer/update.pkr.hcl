@@ -36,14 +36,17 @@ source "amazon-ebs" "this" {
   }
 
   run_tags = {
+    Name      = "Packer"
     ManagedBy = "Packer"
   }
 
   run_volume_tags = {
+    Name      = "Packer"
     ManagedBy = "Packer"
   }
 
   snapshot_tags = {
+    Name      = "Packer"
     ManagedBy = "Packer"
   }
 }
