@@ -11,18 +11,21 @@ variable "scripts" {
 
 locals {
   timestamp = regex_replace(timestamp(), "[- TZ:]", "")
+  name      = "base"
+  owner     = "099720109477"
+  ami       = "ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"
 }
 
 source "amazon-ebs" "this" {
-  ami_description = "base"
-  ami_name        = "base-amd64-${local.timestamp}"
+  ami_description = local.name
+  ami_name        = "${local.name}-amd64-${local.timestamp}"
 
   associate_public_ip_address = "true"
   ssh_interface               = "public_ip"
   ssh_username                = "ubuntu"
 
   spot_price    = "auto"
-  instance_type = "t3.small"
+  instance_type = "t3.xlarge"
   region        = "us-west-2"
 
   encrypt_boot = "true"
@@ -35,12 +38,13 @@ source "amazon-ebs" "this" {
   }
 
   source_ami_filter {
-    owners      = ["099720109477"]
+    owners      = [local.owner]
     most_recent = true
 
     filters = {
-      name                = "ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"
-      architecture        = "x86_64"
+      name         = local.ami
+      architecture = "x86_64"
+
       root-device-type    = "ebs"
       virtualization-type = "hvm"
     }
