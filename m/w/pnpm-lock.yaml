@@ -91,66 +91,66 @@ importers:
   apps/docs:
     dependencies:
       '@popperjs/core':
-        specifier: ^2.11.7
-        version: 2.11.7
+        specifier: ^2.11.8
+        version: 2.11.8
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
     devDependencies:
       '@sveltejs/adapter-static':
         specifier: ^2.0.2
-        version: 2.0.2(@sveltejs/kit@1.15.7)
+        version: 2.0.2(@sveltejs/kit@1.22.1)
       '@sveltejs/kit':
-        specifier: ^1.15.7
-        version: 1.15.7(svelte@3.58.0)(vite@4.3.1)
+        specifier: ^1.22.1
+        version: 1.22.1(svelte@4.0.5)(vite@4.4.2)
       '@tailwindcss/nesting':
         specifier: 0.0.0-insiders.565cd3e
-        version: 0.0.0-insiders.565cd3e(postcss@8.4.23)
+        version: 0.0.0-insiders.565cd3e(postcss@8.4.25)
       autoprefixer:
         specifier: ^10.4.14
-        version: 10.4.14(postcss@8.4.23)
+        version: 10.4.14(postcss@8.4.25)
       eslint-config-custom:
         specifier: workspace:*
         version: link:../../packages/eslint-config-custom
       flowbite:
-        specifier: ^1.6.5
-        version: 1.6.5
+        specifier: ^1.7.0
+        version: 1.7.0
       flowbite-svelte:
-        specifier: ^0.34.9
-        version: 0.34.9(@popperjs/core@2.11.7)(classnames@2.3.2)(flowbite@1.6.5)(svelte@3.58.0)
+        specifier: ^0.39.2
+        version: 0.39.2(svelte@4.0.5)
       postcss:
-        specifier: ^8.4.23
-        version: 8.4.23
+        specifier: ^8.4.25
+        version: 8.4.25
       postcss-load-config:
         specifier: ^4.0.1
-        version: 4.0.1(postcss@8.4.23)
+        version: 4.0.1(postcss@8.4.25)
       svelte:
-        specifier: ^3.58.0
-        version: 3.58.0
+        specifier: ^4.0.5
+        version: 4.0.5
       svelte-check:
-        specifier: ^2.10.3
-        version: 2.10.3(@babel/core@7.21.4)(postcss-load-config@4.0.1)(postcss@8.4.23)(svelte@3.58.0)
+        specifier: ^3.4.5
+        version: 3.4.5(postcss-load-config@4.0.1)(postcss@8.4.25)(svelte@4.0.5)
       svelte-preprocess:
-        specifier: ^4.10.7
-        version: 4.10.7(@babel/core@7.21.4)(postcss-load-config@4.0.1)(postcss@8.4.23)(svelte@3.58.0)(typescript@4.9.5)
+        specifier: ^5.0.4
+        version: 5.0.4(postcss-load-config@4.0.1)(postcss@8.4.25)(svelte@4.0.5)(typescript@5.1.6)
       tailwindcss:
-        specifier: ^3.3.1
-        version: 3.3.1(postcss@8.4.23)
+        specifier: ^3.3.2
+        version: 3.3.2
       tslib:
-        specifier: ^2.5.0
-        version: 2.5.0
+        specifier: ^2.6.0
+        version: 2.6.0
       typescript:
-        specifier: ^4.9.5
-        version: 4.9.5
+        specifier: ^5.1.6
+        version: 5.1.6
       ui:
         specifier: workspace:*
         version: link:../../packages/ui
       vite:
-        specifier: ^4.3.1
-        version: 4.3.1
+        specifier: ^4.4.2
+        version: 4.4.2(@types/node@20.4.1)
       vitest:
-        specifier: ^0.30.1
-        version: 0.30.1
+        specifier: ^0.33.0
+        version: 0.33.0
 
   apps/web:
     dependencies:
@@ -320,7 +320,7 @@ importers:
         version: 4.9.5
       vite:
         specifier: ^4.3.1
-        version: 4.3.1
+        version: 4.3.1(@types/node@20.4.1)
       vitest:
         specifier: ^0.30.1
         version: 0.30.1
@@ -2855,7 +2855,7 @@ packages:
       remark-slug: 6.1.0
       rollup: 3.26.2
       typescript: 4.9.5
-      vite: 4.3.1
+      vite: 4.3.1(@types/node@20.4.1)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3240,7 +3240,7 @@ packages:
       svelte: 3.58.0
       sveltedoc-parser: 4.2.1
       ts-dedent: 2.2.0
-      vite: 4.3.1
+      vite: 4.3.1(@types/node@20.4.1)
     transitivePeerDependencies:
       - '@preact/preset-vite'
       - supports-color
@@ -3277,7 +3277,7 @@ packages:
       '@storybook/builder-vite': 7.0.6(typescript@4.9.5)(vite@4.3.1)
       '@storybook/svelte': 7.0.6(svelte@3.58.0)
       '@storybook/svelte-vite': 7.0.6(react-dom@18.2.0)(react@18.2.0)(typescript@4.9.5)(vite@4.3.1)
-      vite: 4.3.1
+      vite: 4.3.1(@types/node@20.4.1)
     transitivePeerDependencies:
       - '@preact/preset-vite'
       - react
@@ -3377,7 +3377,7 @@ packages:
       svelte: 3.58.0
       tiny-glob: 0.2.9
       undici: 5.20.0
-      vite: 4.3.1
+      vite: 4.3.1(@types/node@20.4.1)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3420,7 +3420,7 @@ packages:
       '@sveltejs/vite-plugin-svelte': 2.4.2(svelte@3.58.0)(vite@4.3.1)
       debug: 4.3.4
       svelte: 3.58.0
-      vite: 4.3.1
+      vite: 4.3.1(@types/node@20.4.1)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3454,7 +3454,7 @@ packages:
       magic-string: 0.30.0
       svelte: 3.58.0
       svelte-hmr: 0.15.1(svelte@3.58.0)
-      vite: 4.3.1
+      vite: 4.3.1(@types/node@20.4.1)
       vitefu: 0.2.4(vite@4.3.1)
     transitivePeerDependencies:
       - supports-color
@@ -3474,7 +3474,7 @@ packages:
       magic-string: 0.30.1
       svelte: 3.58.0
       svelte-hmr: 0.15.2(svelte@3.58.0)
-      vite: 4.3.1
+      vite: 4.3.1(@types/node@20.4.1)
       vitefu: 0.2.4(vite@4.3.1)
     transitivePeerDependencies:
       - supports-color
@@ -7100,11 +7100,6 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /pirates@4.0.5:
-    resolution: {integrity: sha512-8V9+HQPupnaXMA23c5hvl69zXvTwTzyAYasnkb0Tts4XvO4CliqONMOnvlq26rkhLC3nWDFBJf73LU1e1VZLaQ==}
-    engines: {node: '>= 6'}
-    dev: true
-
   /pirates@4.0.6:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
     engines: {node: '>= 6'}
@@ -8142,7 +8137,7 @@ packages:
       glob: 7.1.6
       lines-and-columns: 1.2.4
       mz: 2.7.0
-      pirates: 4.0.5
+      pirates: 4.0.6
       ts-interface-checker: 0.1.13
     dev: true
 
@@ -8953,11 +8948,10 @@ packages:
       mlly: 1.4.0
       pathe: 1.1.1
       picocolors: 1.0.0
-      vite: 4.4.2(@types/node@20.4.1)
+      vite: 4.3.1(@types/node@20.4.1)
     transitivePeerDependencies:
       - '@types/node'
       - less
-      - lightningcss
       - sass
       - stylus
       - sugarss
@@ -8987,7 +8981,7 @@ packages:
       - terser
     dev: true
 
-  /vite@4.3.1:
+  /vite@4.3.1(@types/node@20.4.1):
     resolution: {integrity: sha512-EPmfPLAI79Z/RofuMvkIS0Yr091T2ReUoXQqc5ppBX/sjFRhHKiPPF/R46cTdoci/XgeQpB23diiJxq5w30vdg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -9012,6 +9006,7 @@ packages:
       terser:
         optional: true
     dependencies:
+      '@types/node': 20.4.1
       esbuild: 0.17.17
       postcss: 8.4.23
       rollup: 3.20.7
@@ -9063,7 +9058,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 4.3.1
+      vite: 4.3.1(@types/node@20.4.1)
     dev: true
 
   /vitefu@0.2.4(vite@4.4.2):
@@ -9131,12 +9126,11 @@ packages:
       strip-literal: 1.0.1
       tinybench: 2.5.0
       tinypool: 0.4.0
-      vite: 4.4.2(@types/node@20.4.1)
+      vite: 4.3.1(@types/node@20.4.1)
       vite-node: 0.30.1(@types/node@20.4.1)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less
-      - lightningcss
       - sass
       - stylus
       - sugarss
