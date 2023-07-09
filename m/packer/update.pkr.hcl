@@ -8,11 +8,14 @@ variable "scripts" {
 
 locals {
   timestamp = regex_replace(timestamp(), "[- TZ:]", "")
+  name      = "update"
+  owner     = "self"
+  ami       = "base-*"
 }
 
 source "amazon-ebs" "this" {
-  ami_description = "update"
-  ami_name        = "update-amd64-${local.timestamp}"
+  ami_description = local.name
+  ami_name        = "${local.name}-amd64-${local.timestamp}"
 
   associate_public_ip_address = "true"
   ssh_interface               = "public_ip"
@@ -23,11 +26,11 @@ source "amazon-ebs" "this" {
   region        = "us-west-2"
 
   source_ami_filter {
-    owners      = ["self"]
+    owners      = [local.owner]
     most_recent = true
 
     filters = {
-      name         = "base-*"
+      name         = local.ami
       architecture = "x86_64"
     }
   }
