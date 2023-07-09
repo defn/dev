@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+function main {
+	set -exfu
+
+	cd
+
+	ssh -o StrictHostKeyChecking=no git@github.com true || true
+
+	git clone http://github.com/defn/dev dev
+	mv dev/.git .
+	rm -rf dev
+	git reset --hard
+
+	rm -rf .cache
+	install -d -m 0700 -o ubuntu -g ubuntu /nix/home/cache
+	ln -nfs /nix/home/cache .cache
+
+	rm -rf work
+	install -d -m 0700 -o ubuntu -g ubuntu /nix/home/work
+	ln -nfs /nix/home/work work
+
+	make nix
+	make symlinks
+	make perms
+	make home
+}
+
+main "$@"
