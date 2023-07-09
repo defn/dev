@@ -135,7 +135,7 @@ function main {
 			;;
 		esac
 		shift
-		"$0"pass run //aws:aws__cli "${account}" aws "$@"
+		"$0" pass run //aws:aws__cli "${account}" aws "$@"
 		;;
 	graph)
 		shift
