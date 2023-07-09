@@ -58,7 +58,7 @@ resource "aws_security_group" "dev" {
   vpc_id = aws_default_vpc.default.id
 
   egress {
-    desc        = "allow all egress"
+    description = "allow all egress"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
