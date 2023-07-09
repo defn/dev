@@ -26,8 +26,13 @@ source "amazon-ebs" "this" {
   region        = "us-west-2"
 
   encrypt_boot = "true"
-  volume_type  = "gp3"
-  volume_size  = "40"
+
+  launch_block_device_mappings {
+    device_name           = "/dev/sda1"
+    volume_size           = 40
+    volume_type           = "gp3"
+    delete_on_termination = true
+  }
 
   source_ami_filter {
     owners      = ["099720109477"]
