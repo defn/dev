@@ -114,17 +114,15 @@ install-inner:
 	$(MAKE) symlinks
 	$(MAKE) perms
 	$(MAKE) home
+	$(MAKE) trunk
 
 	. ~/.bash_profile && . ~/.envrc && $(MAKE) install-innermost
 
 install-innermost:
-	$(MAKE) login
-
+	git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
 	$(MAKE) dotfiles
 	$(MAKE) password-store
 	$(MAKE) gpg
-
-	$(MAKE) trunk
 
 nix-Darwin-upgrade:
 	sudo -i sh -c 'nix-channel --update && nix-env -iA nixpkgs.nix && launchctl remove org.nixos.nix-daemon && launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist'
