@@ -13,7 +13,6 @@ type ChickenConfig struct {
 	Providers *[]interface{} `field:"optional" json:"providers" yaml:"providers"`
 	// Experimental.
 	SkipAssetCreationFromLocalModules *bool `field:"optional" json:"skipAssetCreationFromLocalModules" yaml:"skipAssetCreationFromLocalModules"`
-	// undefined.
 	Chicken *string `field:"required" json:"chicken" yaml:"chicken"`
 }
 
