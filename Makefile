@@ -134,6 +134,9 @@ nix:
 	. ~/.nix-profile/etc/profile.d/nix.sh && (which nix && (which cachix || nix profile install nixpkgs#cachix))
 	. ~/.nix-profile/etc/profile.d/nix.sh && (which nix && (test -f "$$HOME/.nix-profile/share/nix-direnv/direnvrc" || nix profile install nixpkgs#nix-direnv))
 
+nix-clean:
+	rm -rf .nix-profile .local/state/nix/profiles/profile
+
 nix-Linux:
 	export LC_ALL=C.UTF-8 && if ! type -P nix; then $(MAKE) nix-Linux-bootstrap; fi
 
