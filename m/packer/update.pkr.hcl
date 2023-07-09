@@ -27,7 +27,7 @@ source "amazon-ebs" "this" {
     most_recent = true
 
     filters = {
-      name         = "update-*"
+      name         = "base-*"
       architecture = "x86_64"
     }
   }
