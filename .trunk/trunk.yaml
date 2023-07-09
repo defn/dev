@@ -12,6 +12,7 @@ lint:
     - tfsec
     - trivy
     - golangci-lint
+    - trufflehog
   ignore:
     - linters: [ALL]
       paths:
@@ -33,8 +34,6 @@ lint:
     - gokart@0.5.1
     - osv-scanner@1.3.4
     - terrascan@1.18.1
-    #- tfsec@1.28.1
-    - trufflehog@3.43.0
     - checkov@2.3.314
     - actionlint@1.6.25
     - black@23.3.0
