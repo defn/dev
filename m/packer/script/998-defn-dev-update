@@ -5,7 +5,10 @@ function main {
 
 	cd
 
-	git pull
+	rm -f .gitconfig
+	git fetch
+	git reset --hard
+	git merge origin/main
 
 	make symlinks
 	make perms
