@@ -142,11 +142,11 @@ nix-Darwin:
 	true
 
 nix-Linux-bootstrap:
-	sh <(curl -L https://releases.nixos.org/nix/nix-2.15.0/install) --no-daemon
+	sh <(curl -L https://releases.nixos.org/nix/nix-2.16.0/install) --no-daemon
 	git checkout .bash_profile
 
 nix-Darwin-bootstrap:
-	sh <(curl -L https://releases.nixos.org/nix/nix-2.15.0/install) --darwin-use-unencrypted-nix-store-volume --daemon
+	sh <(curl -L https://releases.nixos.org/nix/nix-2.16.0/install) --darwin-use-unencrypted-nix-store-volume --daemon
 	git checkout .bash_profile
 
 nix-reinstall:
