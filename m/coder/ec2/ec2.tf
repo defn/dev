@@ -13,12 +13,12 @@ data "aws_ami" "ubuntu" {
 
   filter {
     name   = "name"
-    values = ["base-amd64-*"]
+    values = ["update-*"]
   }
 
   filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
+    name   = "architecture"
+    values = ["x86_64"]
   }
 }
 
