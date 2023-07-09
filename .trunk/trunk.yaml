@@ -9,6 +9,7 @@ plugins:
       uri: https://github.com/trunk-io/plugins
 lint:
   disabled:
+    - tfsec
     - trivy
     - golangci-lint
   ignore:
