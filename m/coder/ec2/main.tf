@@ -88,11 +88,6 @@ Content-Disposition: attachment; filename="userdata.txt"
 
 #!/bin/bash
 
-export LANG en_US.UTF-8
-export LANGUAGE en_US:en
-export LC_ALL en_US.UTF-8
-export DEBIAN_FRONTEND=noninteractive
-
 function setup {
   (echo "Update-Manager::Never-Include-Phased-Updates;"; echo "APT::Get::Never-Include-Phased-Updates: True;") > /etc/apt/apt.conf.d/99-Phased-Updates
 
@@ -128,9 +123,15 @@ function setup {
   chown -R ubuntu:ubuntu /nix
 }
 
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US:en
+export LC_ALL=en_US.UTF-8
+export DEBIAN_FRONTEND=noninteractive
+
 setup || true
 
 sudo -u ${local.username} sh -c '${coder_agent.main.init_script}'
+
 --//--
 EOT
 
