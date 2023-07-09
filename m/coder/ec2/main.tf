@@ -89,43 +89,19 @@ Content-Disposition: attachment; filename="userdata.txt"
 #!/bin/bash
 
 function setup {
-  (echo "Update-Manager::Never-Include-Phased-Updates;"; echo "APT::Get::Never-Include-Phased-Updates: True;") > /etc/apt/apt.conf.d/99-Phased-Updates
-
-  apt-get update && apt-get upgrade -y \
-      && apt-get install -y --no-install-recommends lsb-release tzdata locales ca-certificates wget curl xz-utils rsync make git direnv bash-completion less pass \
-          sudo tini procps iptables net-tools iputils-ping iproute2 dnsutils gnupg \
-          openssh-client fzf build-essential \
-      && apt-get clean && apt purge -y nano \
-      && rm -f /usr/bin/gs \
-      && curl -sSL -o /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64 \
+  curl -sSL -o /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64 \
       &&  sudo chmod 755 /usr/local/bin/bazel
 
-  apt update && apt upgrade -y
-
-  ln -sf /usr/share/zoneinfo/UTC /etc/localtime \
-      && dpkg-reconfigure -f noninteractive tzdata \
-      && locale-gen en_US.UTF-8 \
-      && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-
-  groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu \
-      && echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu \
-      && install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
+  apt-get update && apt-get upgrade -y
 
   install -d -m 0755 -o root -g root /run/user \
       && install -d -m 0700 -o root -g root /run/sshd \
       && install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg \
       && install -d -m 0700 -o ubuntu -g ubuntu /app /cache
 
-  chown -R ubuntu:ubuntu /home/ubuntu && chmod u+s /usr/bin/sudo
-
   mkdir -p /nix
   chown -R ubuntu:ubuntu /nix
 }
-
-export LANG=en_US.UTF-8
-export LANGUAGE=en_US:en
-export LC_ALL=en_US.UTF-8
-export DEBIAN_FRONTEND=noninteractive
 
 setup || true
 

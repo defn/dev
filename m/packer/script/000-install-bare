@@ -16,6 +16,11 @@ Dpkg::Options {
 };
 EOF
 
+	(
+		echo "Update-Manager::Never-Include-Phased-Updates;"
+		echo "APT::Get::Never-Include-Phased-Updates: True;"
+	) >/etc/apt/apt.conf.d/99-Phased-Updates
+
 	apt update
 	apt purge --auto-remove -y unattended-upgrades
 }
