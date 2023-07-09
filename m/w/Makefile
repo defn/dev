@@ -1,4 +1,7 @@
+build:
+	npx pnpm build
+
 install:
 	cd .. && npm install
 	npx pnpm install
-	npx pnpm build
+	$(MAKE) build
