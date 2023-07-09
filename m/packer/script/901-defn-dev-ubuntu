@@ -23,7 +23,11 @@ function main {
 	make nix
 	make symlinks
 	make perms
-	make trunk
+	(
+		source .bash_profile
+		source .envrc
+		make trunk
+	)
 	make home
 }
 
