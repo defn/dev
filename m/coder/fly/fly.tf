@@ -19,6 +19,7 @@ resource "fly_volume" "home-volume" {
 
 resource "fly_machine" "workspace" {
   count    = data.coder_workspace.me.start_count
+
   app      = fly_app.workspace.name
   region   = data.coder_parameter.region.value
   name     = data.coder_workspace.me.name

@@ -67,6 +67,8 @@ resource "aws_security_group" "dev" {
 }
 
 resource "aws_instance" "dev" {
+  count = data.coder_workspace.me.start_count
+
   ami               = data.aws_ami.ubuntu.id
   availability_zone = "${data.coder_parameter.region.value}a"
   instance_type     = data.coder_parameter.instance_type.value
@@ -77,10 +79,11 @@ resource "aws_instance" "dev" {
   iam_instance_profile   = aws_iam_instance_profile.dev.name
   vpc_security_group_ids = [aws_security_group.dev.id]
 
-  user_data = data.coder_workspace.me.transition == "start" ? local.user_data_start : local.user_data_end
+  user_data = local.user_data
 
   root_block_device {
     volume_size           = 50
+    volume_type           = "gp3"
     encrypted             = true
     delete_on_termination = true
   }
