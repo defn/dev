@@ -28,9 +28,8 @@ source "amazon-ebs" "this" {
   instance_type = "t3.xlarge"
   region        = "us-west-2"
 
-  encrypt_boot = "true"
-
   launch_block_device_mappings {
+    encrypted             = true
     device_name           = "/dev/sda1"
     volume_size           = 40
     volume_type           = "gp3"
@@ -51,14 +50,17 @@ source "amazon-ebs" "this" {
   }
 
   run_tags = {
+    Name      = "Packer"
     ManagedBy = "Packer"
   }
 
   run_volume_tags = {
+    Name      = "Packer"
     ManagedBy = "Packer"
   }
 
   snapshot_tags = {
+    Name      = "Packer"
     ManagedBy = "Packer"
   }
 }
