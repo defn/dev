@@ -3,12 +3,12 @@
 function main {
 	set -exfu
 
-	if [[ "$(whoami)" == "ubuntu" ]]; then
+	if [[ "$(whoami || true)" == "ubuntu" ]]; then
 		exec sudo "$0" "$@"
 		return $?
 	fi
 
-	cat <<EOF | tee /etc/apt/apt.conf.d/local
+	tee /etc/apt/apt.conf.d/local <<EOF
 DPkg::Lock::Timeout "-1";
 Dpkg::Options {
    "--force-confdef";

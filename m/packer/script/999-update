@@ -3,15 +3,15 @@
 function main {
 	set -exfu
 
-	if [[ "$(whoami)" == "ubuntu" ]]; then
+	if [[ "$(whoami || true)" == "ubuntu" ]]; then
 		exec sudo "$0" "$@"
 		return $?
 	fi
 
-	local aptget="env DEBIAN_FRONTEND=noninteractive apt-get"
+	export DEBIAN_FRONTEND=noninteractive
 
-	${aptget} update
-	${aptget} upgrade -y
+	apt-get update
+	apt-get upgrade -y
 
 	sync
 }

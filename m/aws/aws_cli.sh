@@ -9,7 +9,8 @@ function main {
 	local aws_profile
 	local mode
 
-	local shome="$(pwd)"
+	local shome
+	shome="$(pwd)"
 
 	flake_awscli="${shome}/$1"
 	shift
