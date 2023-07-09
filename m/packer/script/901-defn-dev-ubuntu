@@ -23,8 +23,8 @@ function main {
 	make nix
 	make symlinks
 	make perms
-	make home
 	make trunk
+	make home
 }
 
 main "$@"
