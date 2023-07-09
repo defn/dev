@@ -8,6 +8,8 @@ resource "coder_agent" "main" {
   startup_script         = <<-EOT
     set -e
 
+    sudo install -d -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
+
     cd
     
     git pull
