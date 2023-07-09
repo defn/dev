@@ -28,6 +28,7 @@ lint:
         - m/go_deps.bzl
         - m/k3d-tailscale-operator.yaml
         - m/**/config.json
+        - m/w/pnpm-lock.yaml
   enabled:
     - dotenv-linter@3.3.0
     - bandit@1.7.5
