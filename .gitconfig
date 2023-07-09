@@ -4,11 +4,11 @@
 [core]
 	quotepath = false
 
-[url "git@github.com:"]
-	insteadOf = git://github.com/
-	insteadOf = ssh://git@github.com/
-	insteadOf = https://github.com/
-	insteadOf = http://github.com/
+[url "git@github.com:defn/"]
+	insteadOf = git://github.com/defn/
+	insteadOf = ssh://git@github.com/defn/
+	insteadOf = https://github.com/defn/
+	insteadOf = http://github.com/defn/
 
 [pull]
 	rebase = false
