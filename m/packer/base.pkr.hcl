@@ -3,6 +3,8 @@ variable "scripts" {
   default = [
     "script/000-install-bare",
     "script/001-install-base",
+    "script/900-defn-dev-root",
+    "script/901-defn-dev-ubuntu",
     "script/999-update"
   ]
 }
@@ -12,13 +14,16 @@ locals {
 }
 
 source "amazon-ebs" "this" {
-  ami_description             = "base"
-  ami_name                    = "base-amd64-${local.timestamp}"
+  ami_description = "base"
+  ami_name        = "base-amd64-${local.timestamp}"
+
   associate_public_ip_address = "true"
   encrypt_boot                = "true"
-  instance_type               = "t3.small"
   spot_price                  = "auto"
-  region                      = "us-west-2"
+
+  instance_type = "t3.small"
+  region        = "us-west-2"
+  disk_size     = 30
 
   ssh_interface = "public_ip"
   ssh_username  = "ubuntu"
