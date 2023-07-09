@@ -4,22 +4,8 @@
 [core]
 	quotepath = false
 
-[url "git@github.com:defn/"]
-	insteadOf = git://github.com/defn/
-	insteadOf = ssh://git@github.com/defn/
-	insteadOf = https://github.com/defn/
-	insteadOf = http://github.com/defn/
-
 [pull]
 	rebase = false
-
-[credential "https://github.com"]
-	helper =
-	helper = !gh auth git-credential
-
-[credential "https://gist.github.com"]
-	helper =
-	helper = !gh auth git-credential
 
 [filter "lfs"]
 	required = true
