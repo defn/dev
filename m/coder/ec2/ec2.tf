@@ -80,8 +80,9 @@ resource "aws_instance" "dev" {
   user_data = data.coder_workspace.me.transition == "start" ? local.user_data_start : local.user_data_end
 
   root_block_device {
-    volume_size = 50
-    encrypted   = true
+    volume_size           = 50
+    encrypted             = true
+    delete_on_termination = true
   }
 
   metadata_options {
