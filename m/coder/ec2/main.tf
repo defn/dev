@@ -91,8 +91,7 @@ Content-Disposition: attachment; filename="userdata.txt"
 function setup {
   (echo "Update-Manager::Never-Include-Phased-Updates;"; echo "APT::Get::Never-Include-Phased-Updates: True;") > /etc/apt/apt.conf.d/99-Phased-Updates
 
-  dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm \
-      && apt-get update && apt-get upgrade -y \
+  apt-get update && apt-get upgrade -y \
       && apt-get install -y --no-install-recommends lsb-release tzdata locales ca-certificates wget curl xz-utils rsync make git direnv bash-completion less pass \
           sudo tini procps iptables net-tools iputils-ping iproute2 dnsutils gnupg \
           openssh-client fzf build-essential \
