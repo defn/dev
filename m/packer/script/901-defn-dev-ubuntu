@@ -24,8 +24,10 @@ function main {
 	make symlinks
 	make perms
 	(
+		set +x
 		source .bash_profile
 		source .envrc
+		set -x
 		make trunk
 	)
 	make home
