@@ -53,11 +53,12 @@ resource "aws_default_vpc" "default" {}
 
 resource "aws_security_group" "dev" {
   name        = local.coder_name
-  description = "sg ${local.coder_name}"
+  description = local.coder_name
 
   vpc_id = aws_default_vpc.default.id
 
   egress {
+    desc        = "allow all egress"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
