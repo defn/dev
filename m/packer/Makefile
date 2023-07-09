@@ -3,7 +3,7 @@ SHELL := /bin/bash
 build:
 	$(MAKE) base
 
-base:
+base update:
 	b exec defn-defn-sso env AWS_REGION=us-west-2 packer build -color=true -timestamp-ui=true $@.pkr.hcl
 
 fmt: # Format packer configs
