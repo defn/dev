@@ -1,4 +1,4 @@
-. .envrc
+. ~/.envrc
 PATH="${BASE_PATH}:${HOME}/bin/blackhole"
 
 if [[ -r /etc/profile.d/bash_completion.sh ]]; then
@@ -9,5 +9,5 @@ elif [[ -r /opt/homebrew/etc/profile.d/bash_completion.sh ]]; then
     source /opt/homebrew/etc/profile.d/bash_completion.sh
 fi
 
-. .envrc
+. ~/.envrc
 source ~/.bashrc
