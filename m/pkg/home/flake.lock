@@ -2797,17 +2797,17 @@
       },
       "locked": {
         "dir": "m/pkg/hubble",
-        "lastModified": 1686282620,
-        "narHash": "sha256-VkjeD6sgs+xIpFnxrUGo7Y2NePoP9JmHW4LBsZvGoyg=",
+        "lastModified": 1689003906,
+        "narHash": "sha256-UQPvqJD48vMHBOQrN5PPuGBzWxS7F4UF0xPeRFxLNPo=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "8731ee7511e84631f1c521f47a28c48925ccbfd6",
+        "rev": "3dee023a251bfe92f0df16a200bc7eb8515a9f03",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/hubble",
         "owner": "defn",
-        "ref": "pkg-hubble-0.11.6-1",
+        "ref": "pkg-hubble-0.12.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -2936,17 +2936,17 @@
       },
       "locked": {
         "dir": "m/pkg/kubernetes",
-        "lastModified": 1688674459,
-        "narHash": "sha256-1Blhjj5SOcS85dCufxVFmPjzdzgCkbB61C+brHXzxtI=",
+        "lastModified": 1689004007,
+        "narHash": "sha256-fIB0UdGuI56hqub47CbZDtcsX6e9Q17Po0uGhca1dYk=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "e780db53500c90f958b764e74c43084086db3041",
+        "rev": "b16e53d77a16f7e8c5cae9a31a60b5b4a22153ba",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubernetes",
         "owner": "defn",
-        "ref": "pkg-kubernetes-0.0.115",
+        "ref": "pkg-kubernetes-0.0.116",
         "repo": "dev",
         "type": "github"
       }
