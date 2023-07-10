@@ -12,7 +12,7 @@
     nodedev.url = github:defn/dev/pkg-nodedev-0.0.53?dir=m/pkg/nodedev;
     localdev.url = github:defn/dev/pkg-localdev-0.0.142?dir=m/pkg/localdev;
     development.url = github:defn/dev/pkg-development-0.0.61?dir=m/pkg/development;
-    cloud.url = github:defn/dev/pkg-cloud-0.0.121?dir=m/pkg/cloud;
+    cloud.url = github:defn/dev/pkg-cloud-0.0.122?dir=m/pkg/cloud;
     kubernetes.url = github:defn/dev/pkg-kubernetes-0.0.115?dir=m/pkg/kubernetes;
     coder.url = github:defn/dev/pkg-coder-0.25.0-1?dir=m/pkg/coder;
     codeserver.url = github:defn/dev/pkg-codeserver-4.14.1-1?dir=m/pkg/codeserver;
