@@ -185,3 +185,4 @@ graph.in
 graph.png
 .terrascan
 .cache
+.matplotlib
