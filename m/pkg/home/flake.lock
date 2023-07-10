@@ -2650,17 +2650,17 @@
       },
       "locked": {
         "dir": "m/pkg/godev",
-        "lastModified": 1688778888,
-        "narHash": "sha256-kLkQMvkYTYZdzcva2oCpEKdw5zUPVAp4S45ajd0eavQ=",
+        "lastModified": 1688939259,
+        "narHash": "sha256-Ewa+UxHqGa3qbtIY+7SR0ETwmTZrzRjIFLZ6f7brAro=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "ebe676ead3ede305dbe08630a9268d32dbf98e98",
+        "rev": "06f2a8d2bb3926c1aa46264bfe0dda5a90c39ece",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/godev",
         "owner": "defn",
-        "ref": "pkg-godev-0.0.94",
+        "ref": "pkg-godev-0.0.96",
         "repo": "dev",
         "type": "github"
       }
@@ -3016,33 +3016,33 @@
     },
     "latest": {
       "locked": {
-        "lastModified": 1686339146,
-        "narHash": "sha256-ustOwufzrsfNUJa1JW96Ffz6yae0ozYsNS7Do+E/63Q=",
+        "lastModified": 1688392541,
+        "narHash": "sha256-lHrKvEkCPTUO+7tPfjIcb7Trk6k31rz18vkyqmkeJfY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5b0cc6cee71188c29b20fc0de4ea274e24336bc0",
+        "rev": "ea4c80b39be4c09702b0cb3b42eab59e2ba4f24b",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5b0cc6cee71188c29b20fc0de4ea274e24336bc0",
+        "rev": "ea4c80b39be4c09702b0cb3b42eab59e2ba4f24b",
         "type": "github"
       }
     },
     "latest_2": {
       "locked": {
-        "lastModified": 1686339146,
-        "narHash": "sha256-ustOwufzrsfNUJa1JW96Ffz6yae0ozYsNS7Do+E/63Q=",
+        "lastModified": 1688392541,
+        "narHash": "sha256-lHrKvEkCPTUO+7tPfjIcb7Trk6k31rz18vkyqmkeJfY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5b0cc6cee71188c29b20fc0de4ea274e24336bc0",
+        "rev": "ea4c80b39be4c09702b0cb3b42eab59e2ba4f24b",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5b0cc6cee71188c29b20fc0de4ea274e24336bc0",
+        "rev": "ea4c80b39be4c09702b0cb3b42eab59e2ba4f24b",
         "type": "github"
       }
     },
@@ -4004,17 +4004,17 @@
       },
       "locked": {
         "dir": "m/pkg/nodedev",
-        "lastModified": 1686349900,
-        "narHash": "sha256-zEFI59KHy1E2C4FXjfgHUZZ6Z21gjknRE96oBg+SYgI=",
+        "lastModified": 1688939228,
+        "narHash": "sha256-4L4RwFAWEYaCWAVlM6pQK81Lmndu/J6HTnKigGNFGaI=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "39ed1f0ccc128337b04aa1b0f0eeec00967da024",
+        "rev": "602335fea694ed095e484950a5af45771ecabb19",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/nodedev",
         "owner": "defn",
-        "ref": "pkg-nodedev-0.0.51",
+        "ref": "pkg-nodedev-0.0.53",
         "repo": "dev",
         "type": "github"
       }
