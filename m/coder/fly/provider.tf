@@ -9,6 +9,4 @@ terraform {
   }
 }
 
-provider "coder" {
-  feature_use_managed_variables = true
-}
+provider "coder" {}
