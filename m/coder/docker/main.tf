@@ -1,5 +1,3 @@
-provider "coder" {}
-
 locals {
   username = "ubuntu"
 }
