@@ -2,5 +2,5 @@
   "slug": "pkg-velero",
   "ghrepo": "vmware-tanzu/velero",
   "vendor": "1.11.0",
-  "revision": "4"
+  "revision": "5"
 }
