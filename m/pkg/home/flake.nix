@@ -1,23 +1,23 @@
 {
   inputs = {
     az.url = github:defn/dev/pkg-az-0.0.130?dir=m/pkg/az;
-    oci.url = github:defn/dev/pkg-oci-0.0.49?dir=m/pkg/oci;
-    nix.url = github:defn/dev/pkg-nix-0.0.48?dir=m/pkg/nix;
-    secrets.url = github:defn/dev/pkg-secrets-0.0.51?dir=m/pkg/secrets;
-    utils.url = github:defn/dev/pkg-utils-0.0.49?dir=m/pkg/utils;
-    vpn.url = github:defn/dev/pkg-vpn-0.0.50?dir=m/pkg/vpn;
-    vault.url = github:defn/dev/pkg-vault-1.14.0-1?dir=m/pkg/vault;
-    acme.url = github:defn/dev/pkg-acme-3.0.6-1?dir=m/pkg/acme;
+    oci.url = github:defn/dev/pkg-oci-0.0.50?dir=m/pkg/oci;
+    nix.url = github:defn/dev/pkg-nix-0.0.49?dir=m/pkg/nix;
+    secrets.url = github:defn/dev/pkg-secrets-0.0.52?dir=m/pkg/secrets;
+    utils.url = github:defn/dev/pkg-utils-0.0.50?dir=m/pkg/utils;
+    vpn.url = github:defn/dev/pkg-vpn-0.0.51?dir=m/pkg/vpn;
+    vault.url = github:defn/dev/pkg-vault-1.14.0-2?dir=m/pkg/vault;
+    acme.url = github:defn/dev/pkg-acme-3.0.6-2?dir=m/pkg/acme;
     godev.url = github:defn/dev/pkg-godev-0.0.97?dir=m/pkg/godev;
-    nodedev.url = github:defn/dev/pkg-nodedev-0.0.54?dir=m/pkg/nodedev;
-    localdev.url = github:defn/dev/pkg-localdev-0.0.143?dir=m/pkg/localdev;
+    nodedev.url = github:defn/dev/pkg-nodedev-0.0.55?dir=m/pkg/nodedev;
+    localdev.url = github:defn/dev/pkg-localdev-0.0.144?dir=m/pkg/localdev;
     development.url = github:defn/dev/pkg-development-0.0.62?dir=m/pkg/development;
     cloud.url = github:defn/dev/pkg-cloud-0.0.126?dir=m/pkg/cloud;
     kubernetes.url = github:defn/dev/pkg-kubernetes-0.0.118?dir=m/pkg/kubernetes;
-    coder.url = github:defn/dev/pkg-coder-0.26.1-1?dir=m/pkg/coder;
-    codeserver.url = github:defn/dev/pkg-codeserver-4.14.1-1?dir=m/pkg/codeserver;
-    tailscale.url = github:defn/dev/pkg-tailscale-1.44.0-1?dir=m/pkg/tailscale;
-    shell.url = github:defn/dev/pkg-shell-0.0.51?dir=m/pkg/shell;
+    coder.url = github:defn/dev/pkg-coder-0.26.1-2?dir=m/pkg/coder;
+    codeserver.url = github:defn/dev/pkg-codeserver-4.14.1-2?dir=m/pkg/codeserver;
+    tailscale.url = github:defn/dev/pkg-tailscale-1.44.0-2?dir=m/pkg/tailscale;
+    shell.url = github:defn/dev/pkg-shell-0.0.52?dir=m/pkg/shell;
   };
 
   outputs = inputs: inputs.az.inputs.cue.inputs.pkg.main rec {
