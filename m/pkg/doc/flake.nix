@@ -1,6 +1,6 @@
 {
   inputs = {
-    pkg.url = github:defn/dev/pkg-pkg-0.0.10?dir=m/pkg/pkg;
+    pkg.url = github:defn/dev/pkg-pkg-0.0.11?dir=m/pkg/pkg;
   };
 
   outputs = inputs: inputs.pkg.main rec {
@@ -10,7 +10,7 @@
       propagatedBuildInputs =
         let
           flakeInputs = [
-            ctx.pkgs.hugo
+            ctx.pkgs.zola
           ];
         in
         flakeInputs;
