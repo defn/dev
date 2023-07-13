@@ -14,6 +14,7 @@
     honeymarker.url = github:defn/dev/pkg-honeymarker-0.2.10-9?dir=m/pkg/honeymarker;
     honeytail.url = github:defn/dev/pkg-honeytail-1.8.3-7?dir=m/pkg/honeytail;
     kuma.url = github:defn/dev/pkg-kuma-2.3.0-1?dir=m/pkg/kuma;
+    zola.url = github:defn/dev/pkg-zola-0.0.3?dir=m/pkg/zola;
   };
 
   outputs = inputs: inputs.tilt.inputs.pkg.main rec {
