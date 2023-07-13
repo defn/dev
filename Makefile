@@ -72,7 +72,8 @@ gpg:
 	$(MAKE) perms
 	if [[ "$(shell uname -s)" == "Darwin" ]]; then $(MAKE) macos; fi
 	if test -d /run/user; then \
-		rm -rf /run/user/1000/gnupg; \
+		sudo rm -rf /run/user/1000/gnupg; \
+		sudo install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000; \
 		ln -nfs ~/.gnupg /run/user/1000/gnupg; \
 		fi
 	dirmngr --daemon || true
