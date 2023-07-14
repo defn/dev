@@ -3,7 +3,7 @@
     kubectl.url = github:defn/dev/pkg-kubectl-1.26.5-3?dir=m/pkg/kubectl;
     k3d.url = github:defn/dev/pkg-k3d-5.5.1-4?dir=m/pkg/k3d;
     k9s.url = github:defn/dev/pkg-k9s-0.27.4-4?dir=m/pkg/k9s;
-    helm.url = github:defn/dev/pkg-helm-3.12.1-2?dir=m/pkg/helm;
+    helm.url = github:defn/dev/pkg-helm-3.12.2-1?dir=m/pkg/helm;
     kustomize.url = github:defn/dev/pkg-kustomize-5.0.3-4?dir=m/pkg/kustomize;
     stern.url = github:defn/dev/pkg-stern-1.25.0-9?dir=m/pkg/stern;
     argoworkflows.url = github:defn/dev/pkg-argoworkflows-3.4.8-4?dir=m/pkg/argoworkflows;
