@@ -119,7 +119,7 @@ install-inner:
 	$(MAKE) home
 	$(MAKE) trunk
 
-	. ~/.bash_profile && . ~/.envrc && $(MAKE) install-innermost
+	. ~/.bash_profile && $(MAKE) install-innermost
 
 install-innermost:
 	git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
