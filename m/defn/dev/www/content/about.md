@@ -7,5 +7,3 @@ draft: false
 images: []
 type: "about"
 ---
-
-[About]
