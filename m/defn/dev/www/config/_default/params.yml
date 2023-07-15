@@ -18,14 +18,14 @@ image:
   gif_div_factor: 10 # 10 (default)
 
   ## Figure
-  target: "_blank" # _blank (default)
-  rel: "noopener, noreferrer" # noopener, noreferrer (default)
-  figure_class: "figure" # figure (default)
-  figure_image_class: "figure-img img-fluid blur-up" # "figure-img img-fluid" (default)
+  target: _blank
+  rel: noopener, noreferrer
+  figure_class: figure
+  figure_image_class: figure-img img-fluid blur-up
   figcaption_class: figure-caption # figure-caption (default)
-  figcaption_title_h: 4 # 4 (default)
-  attr_link_target: "_blank" # _blank (default)
-  attr_link_rel: "noopener, noreferrer" # noopener, noreferrer (default)
+  figcaption_title_h: 4
+  attr_link_target: _blank
+  attr_link_rel: noopener, noreferrer
 
   ## Render hook
   render_hook: true # false (default) or true
@@ -38,28 +38,6 @@ image:
   suppress_width_warning: false # false (default) or true
   debug: false # false (default) or true
 
-# SEO (@hyas/seo)
-seo:
-  description: "Doks is a Hyas theme for building custom, production-ready documentation websites."
-  generate:
-    title: true
-    meta: true
-    twitter: true
-    og: true
-    jsonld:
-      article: true
-      breadcrumbs: true
-  title_tag:
-    separator: "|"
-    home_text: "Modern Documentation Theme"
-  og_article_types:
-    [post, posts, blog, news, article, articles, event, events, course, courses]
-  jsonld_article_types: [article, articles]
-  jsonld_news_article_types: [news, updates]
-  jsonld_blog_posting_types: [post, posts, blog]
-  image: "/images/hyas-schema-image.png"
-  private: false
-
 # Inline SVG (@hyas/inline-svg)
 inline_svg:
-  icon_set_dir: "tabler-icons" # tabler-icons (default)
+  icon_set_dir: tabler-icons
