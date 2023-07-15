@@ -1,7 +1,7 @@
 # sudo ln -nfs $(which gcc) /usr/local/bin/cc
 version: 0.1
 cli:
-  version: 1.11.1
+  version: 1.12.0
 plugins:
   sources:
     - id: trunk
@@ -35,9 +35,9 @@ lint:
     - gokart@0.5.1
     - osv-scanner@1.3.4
     - terrascan@1.18.1
-    - checkov@2.3.316
+    - checkov@2.3.324
     - actionlint@1.6.25
-    - black@23.3.0
+    - black@23.7.0
     - buildifier@6.1.2
     - cue-fmt@0.5.0
     - git-diff-check
@@ -49,7 +49,7 @@ lint:
     - nixpkgs-fmt@1.3.0
     - oxipng@8.0.0
     - prettier@3.0.0
-    - ruff@0.0.277
+    - ruff@0.0.278
     - shellcheck@0.9.0
     - shfmt@3.6.0
     - taplo@0.7.0
