@@ -15,6 +15,7 @@
     honeytail.url = github:defn/dev/pkg-honeytail-1.8.3-8?dir=m/pkg/honeytail;
     kuma.url = github:defn/dev/pkg-kuma-2.3.0-2?dir=m/pkg/kuma;
     zola.url = github:defn/dev/pkg-zola-0.0.3?dir=m/pkg/zola;
+    hugo.url = github:defn/dev/pkg-hugo-0.0.3?dir=m/pkg/hugo;
   };
 
   outputs = inputs: inputs.tilt.inputs.pkg.main rec {
@@ -39,6 +40,7 @@
             inputs.honeytail.defaultPackage.${ctx.system}
             inputs.kuma.defaultPackage.${ctx.system}
             inputs.zola.defaultPackage.${ctx.system}
+            inputs.hugo.defaultPackage.${ctx.system}
             skopeo
           ];
         in
