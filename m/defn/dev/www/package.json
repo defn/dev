@@ -25,9 +25,6 @@
   "dependencies": {
     "@hyas/doks-core": "^1.0.3"
   },
-  "devDependencies": {
-    "auto-changelog": "^2.4.0"
-  },
   "engines": {
     "node": ">=16.12.0",
     "pnpm": ">=8.6.2"
