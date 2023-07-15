@@ -15,7 +15,7 @@
     honeytail.url = github:defn/dev/pkg-honeytail-1.8.3-8?dir=m/pkg/honeytail;
     kuma.url = github:defn/dev/pkg-kuma-2.3.0-2?dir=m/pkg/kuma;
     zola.url = github:defn/dev/pkg-zola-0.0.3?dir=m/pkg/zola;
-    hugo.url = github:defn/dev/pkg-hugo-0.0.3?dir=m/pkg/hugo;
+    hugo.url = github:defn/dev/pkg-hugo-0.0.5?dir=m/pkg/hugo;
   };
 
   outputs = inputs: inputs.tilt.inputs.pkg.main rec {
