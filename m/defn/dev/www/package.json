@@ -4,5 +4,8 @@
     "dev": "hugo server --bind=0.0.0.0 --disableFastRender --baseURL=http://localhost --noHTTPCache",
     "build": "hugo --minify",
     "clean": "rm -rf public resources .hugo_build.lock"
+  },
+  "dependencies": {
+    "@hyas/doks-core": "^1.0.3"
   }
 }

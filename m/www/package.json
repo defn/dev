@@ -1,8 +1,5 @@
 {
   "name": "doks",
   "author": "Hyas",
-  "license": "MIT",
-  "dependencies": {
-    "@hyas/doks-core": "^1.0.3"
-  }
+  "license": "MIT"
 }
