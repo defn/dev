@@ -1,0 +1,5 @@
+# License
+
+This website is forked from https://github.com/h-enk/doks.git. The license and copyright are retained in `LICENSE`.
+
+As this project is a website extending a theme and not intended to be shared as a theme, files only related to theming or the original project are removed. They remain in the git history and this document makes it clear the ancestry of this website. The goal of pruning files is to minimize the number of files to maintain and reduce `git grep` clutter.
