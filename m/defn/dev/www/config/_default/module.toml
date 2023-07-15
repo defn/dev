@@ -76,6 +76,10 @@ source = "parent/layouts"
 target = "layouts"
 
 [[mounts]]
+source = "parent/static"
+target = "static"
+
+[[mounts]]
 source = "content"
 target = "content"
 
