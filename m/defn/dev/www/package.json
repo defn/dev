@@ -1,13 +1,4 @@
 {
-  "name": "doks",
-  "version": "1.0.0-rc.2",
-  "description": "Doks theme",
-  "author": "Hyas",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gethyas/doks.git"
-  },
   "scripts": {
     "dev": "exec-bin node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender --baseURL=http://localhost --noHTTPCache",
     "dev:drafts": "exec-bin node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender --baseURL=http://localhost --noHTTPCache --buildDrafts",
