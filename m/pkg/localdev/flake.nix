@@ -38,6 +38,7 @@
             inputs.honeymarker.defaultPackage.${ctx.system}
             inputs.honeytail.defaultPackage.${ctx.system}
             inputs.kuma.defaultPackage.${ctx.system}
+            inputs.zola.defaultPackage.${ctx.system}
             skopeo
           ];
         in
