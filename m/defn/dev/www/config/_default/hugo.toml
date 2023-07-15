@@ -1,5 +1,5 @@
 title = "defn.dev"
-baseurl = "/"
+baseurl = "/dev/"
 canonifyURLs = false
 disableAliases = true
 disableHugoGeneratorInject = true
