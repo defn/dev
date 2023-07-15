@@ -1,5 +1,5 @@
 [[mounts]]
-source = "config/_default/hyas"
+source = "config/_default/defn.dev"
 target = "data"
 
 [[mounts]]
@@ -54,10 +54,6 @@ target = "static"
 [[mounts]]
 source = "node_modules/flexsearch"
 target = "assets/js/vendor/flexsearch"
-
-[[mounts]]
-source = "node_modules/katex"
-target = "assets/js/vendor/katex"
 
 [[mounts]]
 source = "node_modules/mermaid"

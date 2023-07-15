@@ -53,7 +53,6 @@ module.exports = {
           "./node_modules/@hyas/doks-core/assets/scss/components/_search.scss",
           "./node_modules/@hyas/doks-core/assets/scss/common/_dark.scss",
           "./node_modules/bootstrap/scss/_dropdown.scss",
-          // './node_modules/katex/dist/katex.css',
         ]),
       ],
     }),
