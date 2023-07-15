@@ -7,8 +7,8 @@ navbarSticky = true        # true (default) or false
 containerBreakpoint = "lg" # "", "sm", "md", "lg" (default), "xl", "xxl", or "fluid"
 
 ## Button
-navBarButton = false                             # false (default) or true
-navBarButtonUrl = "/docs/prologue/introduction/"
+navBarButton = true                # false (default) or true
+navBarButtonUrl = "/docs/tutorial"
 navBarButtonText = "Get started"
 
 # FlexSearch
@@ -24,9 +24,9 @@ showSummary = true # true (default) or false
 searchLimit = 5    # 0 (no limit, default) or natural number
 
 # Global alert
-alert = false                                                                                                        # false (default) or true
-alertDismissable = true                                                                                              # true (default) or false
-alertText = '<a class="alert-link stretched-link fw-normal" href="/blog/doks-1/">Doks version 1.0 just shipped!</a>'
+alert = false           # false (default) or true
+alertDismissable = true # true (default) or false
+alertText = ''
 
 # Bootstrap
 bootstrapJavascript = false # false (default) or true

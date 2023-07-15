@@ -2,11 +2,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "hugo server --bind=0.0.0.0 --disableFastRender --baseURL=http://localhost --noHTTPCache",
-    "dev:drafts": "hugo server --bind=0.0.0.0 --disableFastRender --baseURL=http://localhost --noHTTPCache --buildDrafts",
     "build": "hugo --minify",
-    "clean": "npm run clean:build && npm run clean:lint && npm run clean:install",
-    "clean:build": "rm -rf public resources .hugo_build.lock",
-    "clean:install": "rm -rf node_modules package-lock.json yarn.lock pnpm-lock.yaml",
-    "clean:lint": "rm -rf .eslintcache .stylelintcache"
+    "clean": "rm -rf public resources .hugo_build.lock"
   }
 }
