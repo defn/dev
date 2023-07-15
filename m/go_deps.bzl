@@ -184,8 +184,8 @@ def go_deps():
     go_repository(
         name = "com_github_emicklei_proto",
         importpath = "github.com/emicklei/proto",
-        sum = "h1:DiIeyTJ+gPSyJI+RIAqvuTeKb0tLUmaGXbYg6aFKsnE=",
-        version = "v1.11.2",
+        sum = "h1:RbLrwtFcd5gUWLCgpSl/cEpNRekwlxH9Gunz+L0DHKs=",
+        version = "v1.12.0",
     )
     go_repository(
         name = "com_github_envoyproxy_go_control_plane",
@@ -622,8 +622,8 @@ def go_deps():
     go_repository(
         name = "com_github_pelletier_go_toml_v2",
         importpath = "github.com/pelletier/go-toml/v2",
-        sum = "h1:0ctb6s9mE31h0/lhu+J6OPmVeDxJn+kYnJc2jZR9tGQ=",
-        version = "v2.0.8",
+        sum = "h1:uH2qQXheeefCCkuBBSLi7jCiSmj3VRh2+Goq2N7Xxu0=",
+        version = "v2.0.9",
     )
     go_repository(
         name = "com_github_pkg_diff",
