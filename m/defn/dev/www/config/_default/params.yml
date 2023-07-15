@@ -7,7 +7,7 @@ image:
   formats: [original, webp] # [original, webp] (default)
   provider: null # null (default) or netlify
   loading: lazysizes # auto (default), lazy, or lazysizes
-  class: "img-fluid blur-up" # img-fluid (default)
+  class: img-fluid blur-up
   output: picture # picture (default), figure, or img
   noscript: false # false (default) or true
 
