@@ -74,6 +74,7 @@ pkg/velero/.direnv
 pkg/vhs/.direnv
 pkg/vpn/.direnv
 pkg/zellij/.direnv
+pkg/zola/.direnv
 pkg/acme/result
 pkg/argocd/result
 pkg/argorollouts/result
@@ -147,3 +148,4 @@ pkg/velero/result
 pkg/vhs/result
 pkg/vpn/result
 pkg/zellij/result
+pkg/zola/result
