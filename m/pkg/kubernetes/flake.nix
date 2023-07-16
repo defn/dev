@@ -14,6 +14,7 @@
     velero.url = github:defn/dev/pkg-velero-1.11.0-5?dir=m/pkg/velero;
     cilium.url = github:defn/dev/pkg-cilium-0.15.2-2?dir=m/pkg/cilium;
     hubble.url = github:defn/dev/pkg-hubble-0.12.0-2?dir=m/pkg/hubble;
+    tfo.url = github:defn/dev/pkg-tfo-1.3.0-2?dir=m/pkg/tfo;
   };
 
   outputs = inputs: inputs.kubectl.inputs.pkg.main rec {
@@ -37,6 +38,7 @@
             inputs.velero.defaultPackage.${ctx.system}
             inputs.cilium.defaultPackage.${ctx.system}
             inputs.hubble.defaultPackage.${ctx.system}
+            inputs.tfo.defaultPackage.${ctx.system}
           ];
         in
         flakeInputs;
