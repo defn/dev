@@ -1298,7 +1298,7 @@ kustomize: "tfo": #Kustomize & {
 	namespace: "tf-system"
 
 	resource: "tfo": {
-		url: "https://raw.githubusercontent.com/isaaguilar/terraform-operator/master/deploy/bundles/v0.10.0/v0.10.0.yaml"
+		url: "https://raw.githubusercontent.com/GalleyBytes/terraform-operator/v0.12.1/deploy/bundles/v0.12.0/v0.12.0.yaml"
 	}
 }
 
