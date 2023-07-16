@@ -12,7 +12,7 @@ ci:
 
 dev:
 # rm -rf ~/Library/App*/coderv2/postgres
-	coder server
+	coder server --disable-password-auth --oauth2-github-allowed-teams $$(pass coder_oauth2-github-allowed-teams) --oauth2-github-client-id $$(pass coder_oauth2-github-client-id) --oauth2-github-client-secret $$(coder_oauth2-github-client-secret)
 
 up:
 #screen -S tilt -d -m bash -il -c "tilt up --stream --port=10351"
