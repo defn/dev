@@ -32,6 +32,8 @@ resource "coder_agent" "main" {
     make home
 
     ~/bin/nix/code-server --auth none --port 13337 >/tmp/code-server.log 2>&1 &
+
+    uptime
   EOT
 
   env = {
