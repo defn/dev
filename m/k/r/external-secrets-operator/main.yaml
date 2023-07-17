@@ -216,14 +216,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .spec.secretStoreRef.name
+    - jsonPath: .spec.externalSecretSpec.secretStoreRef.name
       name: Store
       type: string
-    - jsonPath: .spec.refreshInterval
+    - jsonPath: .spec.refreshTime
       name: Refresh Interval
-      type: string
-    - jsonPath: .status.conditions[?(@.type=="Ready")].reason
-      name: Status
       type: string
     - jsonPath: .status.conditions[?(@.type=="Ready")].status
       name: Ready
@@ -3009,6 +3006,78 @@ spec:
                     required:
                     - auth
                     - url
+                    type: object
+                  delinea:
+                    description: Delinea DevOps Secrets Vault https://docs.delinea.com/online-help/products/devops-secrets-vault/current
+                    properties:
+                      clientId:
+                        description: ClientID is the non-secret part of the credential.
+                        properties:
+                          secretRef:
+                            description: SecretRef references a key in a secret that
+                              will be used as value.
+                            properties:
+                              key:
+                                description: The key of the entry in the Secret resource's
+                                  `data` field to be used. Some instances of this
+                                  field may be defaulted, in others it may be required.
+                                type: string
+                              name:
+                                description: The name of the Secret resource being
+                                  referred to.
+                                type: string
+                              namespace:
+                                description: Namespace of the resource being referred
+                                  to. Ignored if referent is not cluster-scoped. cluster-scoped
+                                  defaults to the namespace of the referent.
+                                type: string
+                            type: object
+                          value:
+                            description: Value can be specified directly to set a
+                              value without using a secret.
+                            type: string
+                        type: object
+                      clientSecret:
+                        description: ClientSecret is the secret part of the credential.
+                        properties:
+                          secretRef:
+                            description: SecretRef references a key in a secret that
+                              will be used as value.
+                            properties:
+                              key:
+                                description: The key of the entry in the Secret resource's
+                                  `data` field to be used. Some instances of this
+                                  field may be defaulted, in others it may be required.
+                                type: string
+                              name:
+                                description: The name of the Secret resource being
+                                  referred to.
+                                type: string
+                              namespace:
+                                description: Namespace of the resource being referred
+                                  to. Ignored if referent is not cluster-scoped. cluster-scoped
+                                  defaults to the namespace of the referent.
+                                type: string
+                            type: object
+                          value:
+                            description: Value can be specified directly to set a
+                              value without using a secret.
+                            type: string
+                        type: object
+                      tenant:
+                        description: Tenant is the chosen hostname / site name.
+                        type: string
+                      tld:
+                        description: TLD is based on the server location that was
+                          chosen during provisioning. If unset, defaults to "com".
+                        type: string
+                      urlTemplate:
+                        description: URLTemplate If unset, defaults to "https://%s.secretsvaultcloud.%s/v1/%s%s".
+                        type: string
+                    required:
+                    - clientId
+                    - clientSecret
+                    - tenant
                     type: object
                   doppler:
                     description: Doppler configures this store to sync secrets using
@@ -8248,6 +8317,78 @@ spec:
                     - auth
                     - url
                     type: object
+                  delinea:
+                    description: Delinea DevOps Secrets Vault https://docs.delinea.com/online-help/products/devops-secrets-vault/current
+                    properties:
+                      clientId:
+                        description: ClientID is the non-secret part of the credential.
+                        properties:
+                          secretRef:
+                            description: SecretRef references a key in a secret that
+                              will be used as value.
+                            properties:
+                              key:
+                                description: The key of the entry in the Secret resource's
+                                  `data` field to be used. Some instances of this
+                                  field may be defaulted, in others it may be required.
+                                type: string
+                              name:
+                                description: The name of the Secret resource being
+                                  referred to.
+                                type: string
+                              namespace:
+                                description: Namespace of the resource being referred
+                                  to. Ignored if referent is not cluster-scoped. cluster-scoped
+                                  defaults to the namespace of the referent.
+                                type: string
+                            type: object
+                          value:
+                            description: Value can be specified directly to set a
+                              value without using a secret.
+                            type: string
+                        type: object
+                      clientSecret:
+                        description: ClientSecret is the secret part of the credential.
+                        properties:
+                          secretRef:
+                            description: SecretRef references a key in a secret that
+                              will be used as value.
+                            properties:
+                              key:
+                                description: The key of the entry in the Secret resource's
+                                  `data` field to be used. Some instances of this
+                                  field may be defaulted, in others it may be required.
+                                type: string
+                              name:
+                                description: The name of the Secret resource being
+                                  referred to.
+                                type: string
+                              namespace:
+                                description: Namespace of the resource being referred
+                                  to. Ignored if referent is not cluster-scoped. cluster-scoped
+                                  defaults to the namespace of the referent.
+                                type: string
+                            type: object
+                          value:
+                            description: Value can be specified directly to set a
+                              value without using a secret.
+                            type: string
+                        type: object
+                      tenant:
+                        description: Tenant is the chosen hostname / site name.
+                        type: string
+                      tld:
+                        description: TLD is based on the server location that was
+                          chosen during provisioning. If unset, defaults to "com".
+                        type: string
+                      urlTemplate:
+                        description: URLTemplate If unset, defaults to "https://%s.secretsvaultcloud.%s/v1/%s%s".
+                        type: string
+                    required:
+                    - clientId
+                    - clientSecret
+                    - tenant
+                    type: object
                   doppler:
                     description: Doppler configures this store to sync secrets using
                       the Doppler provider
@@ -10414,8 +10555,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.0
-    helm.sh/chart: external-secrets-0.9.0
+    app.kubernetes.io/version: v0.9.1
+    helm.sh/chart: external-secrets-0.9.1
   name: external-secrets
   namespace: external-secrets
 ---
@@ -10426,8 +10567,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.0
-    helm.sh/chart: external-secrets-0.9.0
+    app.kubernetes.io/version: v0.9.1
+    helm.sh/chart: external-secrets-0.9.1
   name: external-secrets-leaderelection
   namespace: external-secrets
 rules:
@@ -10464,8 +10605,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.0
-    helm.sh/chart: external-secrets-0.9.0
+    app.kubernetes.io/version: v0.9.1
+    helm.sh/chart: external-secrets-0.9.1
   name: external-secrets-controller
 rules:
 - apiGroups:
@@ -10572,8 +10713,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.0
-    helm.sh/chart: external-secrets-0.9.0
+    app.kubernetes.io/version: v0.9.1
+    helm.sh/chart: external-secrets-0.9.1
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
   name: external-secrets-edit
@@ -10614,8 +10755,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.0
-    helm.sh/chart: external-secrets-0.9.0
+    app.kubernetes.io/version: v0.9.1
+    helm.sh/chart: external-secrets-0.9.1
     servicebinding.io/controller: "true"
   name: external-secrets-servicebindings
 rules:
@@ -10635,8 +10776,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.0
-    helm.sh/chart: external-secrets-0.9.0
+    app.kubernetes.io/version: v0.9.1
+    helm.sh/chart: external-secrets-0.9.1
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
     rbac.authorization.k8s.io/aggregate-to-view: "true"
@@ -10674,8 +10815,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.0
-    helm.sh/chart: external-secrets-0.9.0
+    app.kubernetes.io/version: v0.9.1
+    helm.sh/chart: external-secrets-0.9.1
   name: external-secrets-leaderelection
   namespace: external-secrets
 roleRef:
@@ -10694,8 +10835,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.0
-    helm.sh/chart: external-secrets-0.9.0
+    app.kubernetes.io/version: v0.9.1
+    helm.sh/chart: external-secrets-0.9.1
   name: external-secrets-controller
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -10726,8 +10867,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.0
-    helm.sh/chart: external-secrets-0.9.0
+    app.kubernetes.io/version: v0.9.1
+    helm.sh/chart: external-secrets-0.9.1
   name: external-secrets
   namespace: external-secrets
 spec:
@@ -10747,7 +10888,7 @@ spec:
       containers:
       - args:
         - --concurrent=1
-        image: ghcr.io/external-secrets/external-secrets:v0.9.0
+        image: ghcr.io/external-secrets/external-secrets:v0.9.1
         imagePullPolicy: IfNotPresent
         name: external-secrets
         ports:
