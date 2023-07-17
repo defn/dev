@@ -197,17 +197,17 @@
       },
       "locked": {
         "dir": "m/pkg/buildevents",
-        "lastModified": 1689278368,
-        "narHash": "sha256-IBQDgOV2ooc5gxpVis+LOCL/2KE+kjQTqJgo4dwK2wc=",
+        "lastModified": 1689624530,
+        "narHash": "sha256-XS4EY6jssgq471cOg3guUbBghJcmwYSf1yLxB39TQQQ=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "c0ea3ba22934cb46ccbe1b0e0aa12729e44fa9d5",
+        "rev": "cf4b31ba791044a78817e5cf82a0b4a3e413c7ac",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buildevents",
         "owner": "defn",
-        "ref": "pkg-buildevents-0.14.0-3",
+        "ref": "pkg-buildevents-0.15.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -281,17 +281,17 @@
       },
       "locked": {
         "dir": "m/pkg/cilium",
-        "lastModified": 1689278507,
-        "narHash": "sha256-qf4yf9Y6UXhMSbkhXpNNjzSLq7Y4vlN2snBQyCSvkfA=",
+        "lastModified": 1689624549,
+        "narHash": "sha256-qCWvXVsL2DqAe4B6gnS5E3uilVojjwbPl69/4P2gc3k=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "dc758ce4cc56b4d995577a8e124705655ec305f9",
+        "rev": "3f32a2c6e75fb2495f1fe003a55a6a6946678f20",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cilium",
         "owner": "defn",
-        "ref": "pkg-cilium-0.15.2-2",
+        "ref": "pkg-cilium-0.15.3-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1733,17 +1733,17 @@
       },
       "locked": {
         "dir": "m/pkg/earthly",
-        "lastModified": 1689278752,
-        "narHash": "sha256-NfNTloDGOKFjyH7vsJdsUbq6y54J8eUH7cmIqTcltl0=",
+        "lastModified": 1689624563,
+        "narHash": "sha256-3W8xA9RT1znlGC6SltVyS68L4xvve1Xu+rZdDXk8B7A=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "b64d4f61a3901c031072846d4c5ef857fd128105",
+        "rev": "0ee9ffdae0d590f759438f9842a7df0b00887bda",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/earthly",
         "owner": "defn",
-        "ref": "pkg-earthly-0.7.11-2",
+        "ref": "pkg-earthly-0.7.12-1",
         "repo": "dev",
         "type": "github"
       }
@@ -3072,17 +3072,17 @@
       },
       "locked": {
         "dir": "m/pkg/kubernetes",
-        "lastModified": 1689539683,
-        "narHash": "sha256-wT5FH3/nSJ39Ewz72Fo0SI61NlOZJV62/NFArpYRQXM=",
+        "lastModified": 1689624588,
+        "narHash": "sha256-ghlPDnogVWQHMMO+XmD9M+iaYPf4t70/FFU6XbhHOlk=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "3654645f6f140b8fe2c0a9bcc8cf0e12153fd6f8",
+        "rev": "4dc2bd276684ccdcd22a18636040b679f77b9d71",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubernetes",
         "owner": "defn",
-        "ref": "pkg-kubernetes-0.0.121",
+        "ref": "pkg-kubernetes-0.0.122",
         "repo": "dev",
         "type": "github"
       }
@@ -3203,17 +3203,17 @@
       },
       "locked": {
         "dir": "m/pkg/localdev",
-        "lastModified": 1689408565,
-        "narHash": "sha256-UhKBXbj0gXaASgStYMD3ywo69EIn5PIgiyPG2A7dqa0=",
+        "lastModified": 1689624609,
+        "narHash": "sha256-E6MtjJD0e+pizsffQx3X+yjTStifgUNQikm54HFwywE=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "760b32dd96f132ee473e4b9b3e5aa70534d5bdd0",
+        "rev": "1fe836d88af02213acd71120877501850ed9ffb6",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/localdev",
         "owner": "defn",
-        "ref": "pkg-localdev-0.0.147",
+        "ref": "pkg-localdev-0.0.148",
         "repo": "dev",
         "type": "github"
       }
