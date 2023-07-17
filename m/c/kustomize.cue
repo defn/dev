@@ -736,7 +736,7 @@ kustomize: "pod-identity-webhook": #KustomizeHelm & {
 	}
 }
 
-// helm template karpenter --include-crds --version v0.27.0 -f ../k/karpenter/values.yaml  oci://public.ecr.aws/karpenter/karpenter | tail -n +3 > ../k/karpenter/karpenter.yaml
+// gen_karpenter.sh
 kustomize: "karpenter": #Kustomize & {
 	namespace: "karpenter"
 
