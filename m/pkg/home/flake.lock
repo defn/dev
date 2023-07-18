@@ -155,17 +155,17 @@
       },
       "locked": {
         "dir": "m/pkg/boundary",
-        "lastModified": 1689278312,
-        "narHash": "sha256-HupjZNR45aGo4xWJSzZIWC4VZsh6gCEsQPfw+sdGDu8=",
+        "lastModified": 1689714559,
+        "narHash": "sha256-u8+C3gncXjuplqYtB9DsDn+/uwTOkt6mpiBsVJSJcbo=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "8efc31d03b95b74d0165a57aea75e3c5122cf84c",
+        "rev": "ed0defaac3a9dea6e896d8343c9ebbf195cf545f",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/boundary",
         "owner": "defn",
-        "ref": "pkg-boundary-0.13.0-2",
+        "ref": "pkg-boundary-0.13.1-1",
         "repo": "dev",
         "type": "github"
       }
@@ -176,17 +176,17 @@
       },
       "locked": {
         "dir": "m/pkg/buf",
-        "lastModified": 1689305678,
-        "narHash": "sha256-VFeehIbeor+TMOqlimXe6Xd02vOSzOxnX6k66WoKSqc=",
+        "lastModified": 1689713037,
+        "narHash": "sha256-9SZLe4OJuajYgBfh6DVaVtUoDJGwQu4Wl2AI8/kB89k=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "2cd0aa2d255b00bcc94a34283a301d1dce1c836a",
+        "rev": "52e31d5c8699190abaf719a233025ce6152aa14b",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buf",
         "owner": "defn",
-        "ref": "pkg-buf-1.24.0-1",
+        "ref": "pkg-buf-1.25.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -2764,17 +2764,17 @@
       },
       "locked": {
         "dir": "m/pkg/godev",
-        "lastModified": 1689306014,
-        "narHash": "sha256-tGFaf8ri4jVE1KHckzqCf8csTGdDPAihlRcCobDkDs4=",
+        "lastModified": 1689714853,
+        "narHash": "sha256-bx8mlQb0OcP62jGJaHPsWwVJca6ABwJOHF/9pm3/LGM=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "4493490fb67b1eeab69b58d0e369e99767b07417",
+        "rev": "39fe16bae20f496b3c7e4ddcfa45d76e15fd4f2f",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/godev",
         "owner": "defn",
-        "ref": "pkg-godev-0.0.99",
+        "ref": "pkg-godev-0.0.100",
         "repo": "dev",
         "type": "github"
       }
@@ -3203,17 +3203,17 @@
       },
       "locked": {
         "dir": "m/pkg/localdev",
-        "lastModified": 1689624609,
-        "narHash": "sha256-E6MtjJD0e+pizsffQx3X+yjTStifgUNQikm54HFwywE=",
+        "lastModified": 1689715374,
+        "narHash": "sha256-rV4t83MLvWmzanOZU89ZANvLhWqrjTb1pt08k0QkNes=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "1fe836d88af02213acd71120877501850ed9ffb6",
+        "rev": "e454f8a6a0437c28b9edffa20ebb33ce370db991",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/localdev",
         "owner": "defn",
-        "ref": "pkg-localdev-0.0.148",
+        "ref": "pkg-localdev-0.0.149",
         "repo": "dev",
         "type": "github"
       }
