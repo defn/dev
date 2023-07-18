@@ -1,5 +1,3 @@
-provider "fly" {}
-
 variable "fly_org" {
   type    = string
   default = "personal"
