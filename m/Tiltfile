@@ -1,31 +1,9 @@
 analytics_settings(False)
 
-# buf generate
-local_resource(
-    "buf-generate",
-    cmd=["bash", "-c", "cd defn/dev && buf generate"],
-    deps=[
-        "defn/dev/rock/v1/rock.proto",
-        "defn/dev/demo/v1/pet.proto",
-        "defn/dev/legumes/v1/bean.proto",
-        "defn/dev/legumes/v1/pea.proto"
-    ])
-
-#if "-darwin" in os.getenv("system"):
-#    # vault
-#    local_resource("vault",
-#        serve_cmd=[
-#            "bash", "-c",
-#            """
-#                exec this-vault-start -log-level debug
-#            """
-#        ]
-#    )
-
-if "-linux" in os.getenv("system"):
-    local_resource("tailscale",
+local_resource("hugo",
         serve_cmd=[ "bash", "-c", """
-            exec sudo "$(which tailscaled)" "$@"
+            cd ~/m/defn/dev/www
+            npm install
+            exec npm run dev
             """ ]
     )
-
