@@ -35,9 +35,11 @@ resource "coder_agent" "main" {
     make perms
     make home
 
+    source .bash_profile
+
     ~/bin/nix/code-server --auth none --port 13337 >/tmp/code-server.log 2>&1 &
 
-    ~/bin/nix/tilt up &
+    (cd m && ~/bin/nix/tilt up) &
   EOT
 
   env = {
@@ -54,7 +56,7 @@ resource "coder_app" "code-server" {
   display_name = "code-server"
   url          = "http://localhost:13337/?folder=/home/${local.username}"
   icon         = "/icon/code.svg"
-  subdomain    = false
+  subdomain    = true
   share        = "owner"
 
   healthcheck {
@@ -70,7 +72,7 @@ resource "coder_app" "tilt" {
   display_name = "tilt"
   url          = "http://localhost:10350"
   icon         = "/icon/code.svg"
-  subdomain    = false
+  subdomain    = true
   share        = "owner"
 
   healthcheck {
@@ -86,7 +88,7 @@ resource "coder_app" "hugo" {
   display_name = "hugo"
   url          = "http://localhost:1313"
   icon         = "/icon/code.svg"
-  subdomain    = false
+  subdomain    = true
   share        = "owner"
 
   healthcheck {
