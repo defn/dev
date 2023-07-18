@@ -27,17 +27,17 @@
       },
       "locked": {
         "dir": "m/pkg/boundary",
-        "lastModified": 1689278312,
-        "narHash": "sha256-HupjZNR45aGo4xWJSzZIWC4VZsh6gCEsQPfw+sdGDu8=",
+        "lastModified": 1689714559,
+        "narHash": "sha256-u8+C3gncXjuplqYtB9DsDn+/uwTOkt6mpiBsVJSJcbo=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "8efc31d03b95b74d0165a57aea75e3c5122cf84c",
+        "rev": "ed0defaac3a9dea6e896d8343c9ebbf195cf545f",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/boundary",
         "owner": "defn",
-        "ref": "pkg-boundary-0.13.0-2",
+        "ref": "pkg-boundary-0.13.1-1",
         "repo": "dev",
         "type": "github"
       }
