@@ -1,5 +1,9 @@
 data "coder_workspace" "me" {}
 
+locals {
+  username = "ubuntu"
+}
+
 resource "coder_agent" "main" {
   arch                   = "amd64"
   os                     = "linux"
@@ -33,7 +37,7 @@ resource "coder_agent" "main" {
 
     ~/bin/nix/code-server --auth none --port 13337 >/tmp/code-server.log 2>&1 &
 
-    uptime
+    ~/bin/nix/tilt up &
   EOT
 
   env = {
@@ -60,8 +64,36 @@ resource "coder_app" "code-server" {
   }
 }
 
-locals {
-  username = "ubuntu"
+resource "coder_app" "tilt" {
+  agent_id     = coder_agent.main.id
+  slug         = "tilt"
+  display_name = "tilt"
+  url          = "http://localhost:10350"
+  icon         = "/icon/code.svg"
+  subdomain    = false
+  share        = "owner"
+
+  healthcheck {
+    url       = "http://localhost:10350"
+    interval  = 5
+    threshold = 6
+  }
+}
+
+resource "coder_app" "hugo" {
+  agent_id     = coder_agent.main.id
+  slug         = "hugo"
+  display_name = "hugo"
+  url          = "http://localhost:1313"
+  icon         = "/icon/code.svg"
+  subdomain    = false
+  share        = "owner"
+
+  healthcheck {
+    url       = "http://localhost:1313"
+    interval  = 5
+    threshold = 6
+  }
 }
 
 resource "coder_metadata" "workspace" {
