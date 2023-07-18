@@ -8,9 +8,9 @@
     vpn.url = github:defn/dev/pkg-vpn-0.0.51?dir=m/pkg/vpn;
     vault.url = github:defn/dev/pkg-vault-1.14.0-2?dir=m/pkg/vault;
     acme.url = github:defn/dev/pkg-acme-3.0.6-2?dir=m/pkg/acme;
-    godev.url = github:defn/dev/pkg-godev-0.0.99?dir=m/pkg/godev;
+    godev.url = github:defn/dev/pkg-godev-0.0.100?dir=m/pkg/godev;
     nodedev.url = github:defn/dev/pkg-nodedev-0.0.55?dir=m/pkg/nodedev;
-    localdev.url = github:defn/dev/pkg-localdev-0.0.148?dir=m/pkg/localdev;
+    localdev.url = github:defn/dev/pkg-localdev-0.0.149?dir=m/pkg/localdev;
     development.url = github:defn/dev/pkg-development-0.0.63?dir=m/pkg/development;
     cloud.url = github:defn/dev/pkg-cloud-0.0.130?dir=m/pkg/cloud;
     kubernetes.url = github:defn/dev/pkg-kubernetes-0.0.122?dir=m/pkg/kubernetes;
