@@ -45,7 +45,7 @@ dotfiles:
 	$(MARK) dotfiles
 	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
 		if ! test -d ~/.dotfiles/.git/.; then \
-			git clone https://github.com/$${GIT_AUTHOR_NAME}/dotfiles ~/.dotfiles; \
+			git clone git@github.com:$${GIT_AUTHOR_NAME}/dotfiles ~/.dotfiles; \
 		fi; \
 		mkdir -p ~/.dotfiles; \
 		mkdir -p ~/.config/coderv2/dotfiles; \
@@ -62,7 +62,7 @@ password-store:
 	mkdir -p ~/work/password-store
 	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
 		if ! test -d ~/work/password-store/.git/.; then \
-			git clone https://github.com/$${GIT_AUTHOR_NAME}/password-store ~/work/password-store; \
+			git clone git@github.com:$${GIT_AUTHOR_NAME}/password-store ~/work/password-store; \
 		fi; \
 	fi
 
