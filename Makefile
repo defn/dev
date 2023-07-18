@@ -117,7 +117,8 @@ install-inner:
 	$(MAKE) symlinks
 	$(MAKE) perms
 	$(MAKE) home
-	$(MAKE) trunk
+
+	if test "$$(uname -m)" != "aarch64"; then $(MAKE) trunk; fi
 
 	. ~/.bash_profile && $(MAKE) install-innermost
 
