@@ -26,7 +26,7 @@ resource "fly_machine" "workspace" {
   cputype  = data.coder_parameter.cputype.value
   memorymb = data.coder_parameter.memory.value * 1024
   env = {
-    CODER_AGENT_TOKEN = "${coder_agent.main.token}"
+    CODER_AGENT_TOKEN = coder_agent.main.token
   }
   entrypoint = ["sh", "-c", coder_agent.main.init_script]
   services = [
