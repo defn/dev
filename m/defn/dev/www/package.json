@@ -1,7 +1,7 @@
 {
   "version": "0.0.1",
   "scripts": {
-    "dev": "hugo server --bind=0.0.0.0 --disableFastRender --baseURL=http://localhost --noHTTPCache",
+    "dev": "hugo server --bind=0.0.0.0 --disableFastRender --noHTTPCache --appendPort=false",
     "build": "hugo --minify",
     "clean": "rm -rf public resources .hugo_build.lock"
   },
