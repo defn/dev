@@ -239,17 +239,17 @@
       },
       "locked": {
         "dir": "m/pkg/buildkite",
-        "lastModified": 1689278428,
-        "narHash": "sha256-pEwVyNmeobVJD+uk5sJHuLoiopwVqEK9SE9F3vV8ai4=",
+        "lastModified": 1689740021,
+        "narHash": "sha256-4FvIr+do6xfXLG9zu0cbp+7FGSZSdY0xVZGJol7oX88=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "b2e4a197121f50842d244fcbbba00764815342d0",
+        "rev": "3a463e948a24ae7179074791a69d29f8fe3a5a20",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buildkite",
         "owner": "defn",
-        "ref": "pkg-buildkite-3.49.0-2",
+        "ref": "pkg-buildkite-3.50.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -3203,17 +3203,17 @@
       },
       "locked": {
         "dir": "m/pkg/localdev",
-        "lastModified": 1689715374,
-        "narHash": "sha256-rV4t83MLvWmzanOZU89ZANvLhWqrjTb1pt08k0QkNes=",
+        "lastModified": 1689740122,
+        "narHash": "sha256-NP6ZYz4ZxhnbMx7hyiNSCv1DITCznrIUkU/kGowjP4E=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "e454f8a6a0437c28b9edffa20ebb33ce370db991",
+        "rev": "4e997b1a3986f06c14bde542e4136ca316d3042a",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/localdev",
         "owner": "defn",
-        "ref": "pkg-localdev-0.0.149",
+        "ref": "pkg-localdev-0.0.150",
         "repo": "dev",
         "type": "github"
       }
