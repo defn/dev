@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/awscli",
-        "lastModified": 1689305593,
-        "narHash": "sha256-QKlpt2qQfspEXElmgWifKdHgGvBOkhRWXpywDVO5xgQ=",
+        "lastModified": 1689836428,
+        "narHash": "sha256-kzpw/x42cfljlhAFDWlBq/LgBV4sqOnzK5m3V7d2HeU=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "a14097279f94a5f30abf2a4391aec3b803608e8b",
+        "rev": "a2b7160b8fcefa21cd9dcdc80e3c220836359e8f",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/awscli",
         "owner": "defn",
-        "ref": "pkg-awscli-2.13.1-1",
+        "ref": "pkg-awscli-2.13.2-1",
         "repo": "dev",
         "type": "github"
       }
@@ -276,17 +276,17 @@
       },
       "locked": {
         "dir": "m/pkg/flyctl",
-        "lastModified": 1689388042,
-        "narHash": "sha256-cv+xQfZMp/Rlq88XhCSTKSwmCuE33rx2YOkRiN9nceA=",
+        "lastModified": 1689891989,
+        "narHash": "sha256-hrHG1K6Fv27EkxSPbY9KanEd1kePvRHIpw0uUfVNf0c=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "127b1b5ccb3bc965bcf34e3c2439a1510e5db781",
+        "rev": "52758843d90b56e17395b65777c2ff6b0e2cf94e",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/flyctl",
         "owner": "defn",
-        "ref": "pkg-flyctl-0.1.58-1",
+        "ref": "pkg-flyctl-0.1.63-1",
         "repo": "dev",
         "type": "github"
       }
@@ -393,17 +393,17 @@
       },
       "locked": {
         "dir": "m/pkg/packer",
-        "lastModified": 1689279570,
-        "narHash": "sha256-skaNf9VjPw4/W5NWqQB0r6xuqdW1+UhI+1MwTJYLJm8=",
+        "lastModified": 1689837076,
+        "narHash": "sha256-8KIO1L5yflKh9L02tgI/nAZLjRFkSkuM/n/FzSI0K/k=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "94138d656d22f0a75ec0b299ca0af6d5c1ae3eeb",
+        "rev": "2ad24135b9c8484d35eff7bd135c9deac617cb59",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/packer",
         "owner": "defn",
-        "ref": "pkg-packer-1.9.1-2",
+        "ref": "pkg-packer-1.9.2-1",
         "repo": "dev",
         "type": "github"
       }
