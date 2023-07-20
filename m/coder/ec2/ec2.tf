@@ -67,8 +67,6 @@ resource "aws_security_group" "dev" {
 }
 
 resource "aws_instance" "dev" {
-  count = data.coder_workspace.me.start_count
-
   ami               = data.aws_ami.ubuntu.id
   availability_zone = "${data.coder_parameter.region.value}a"
   instance_type     = data.coder_parameter.instance_type.value
@@ -99,4 +97,9 @@ resource "aws_instance" "dev" {
     Name              = local.coder_name
     Coder_Provisioned = "true"
   }
+}
+
+resource "aws_ec2_instance_state" "dev" {
+  instance_id = aws_instance.dev.id
+  state       = data.coder_workspace.me.transition == "start" ? "running" : "stopped"
 }
