@@ -124,6 +124,7 @@ install-inner:
 
 install-innermost:
 	git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
+	git config diff.lfs.textconv cat
 	$(MAKE) dotfiles
 	$(MAKE) password-store
 	$(MAKE) gpg
