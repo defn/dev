@@ -69,17 +69,17 @@
       },
       "locked": {
         "dir": "m/pkg/buildkite",
-        "lastModified": 1689740021,
-        "narHash": "sha256-4FvIr+do6xfXLG9zu0cbp+7FGSZSdY0xVZGJol7oX88=",
+        "lastModified": 1689836505,
+        "narHash": "sha256-H+GDnzZzOD7AGTQZQiWoIsb20/A4zv4K5fI0f1EyZko=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "3a463e948a24ae7179074791a69d29f8fe3a5a20",
+        "rev": "a56b9ca5407318b3511e998ce340011e7fe9979e",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buildkite",
         "owner": "defn",
-        "ref": "pkg-buildkite-3.50.0-1",
+        "ref": "pkg-buildkite-3.50.1-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1101,17 +1101,17 @@
       },
       "locked": {
         "dir": "m/pkg/nomad",
-        "lastModified": 1689279451,
-        "narHash": "sha256-g6VT66VtVEJbEHb+jbqihlB4sudNrM7rsNNoKi8cNy4=",
+        "lastModified": 1689836985,
+        "narHash": "sha256-wq2mnyHbip72YzZ3nL2VLr7D38dYnxv9+mT46w8woi0=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "988ff1a72154b99e83d666fb6399df8533ac21cf",
+        "rev": "f5349ed5f7bf925cb55eac80e46f34ebb7bdb70f",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/nomad",
         "owner": "defn",
-        "ref": "pkg-nomad-1.5.6-4",
+        "ref": "pkg-nomad-1.6.0-1",
         "repo": "dev",
         "type": "github"
       }
