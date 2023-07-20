@@ -2,33 +2,48 @@ data "coder_workspace" "me" {}
 
 locals {
   username = "ubuntu"
+
+  user_data = <<EOT
+Content-Type: multipart/mixed; boundary="//"
+MIME-Version: 1.0
+
+--//
+Content-Type: text/cloud-config; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="cloud-config.txt"
+
+#cloud-config
+hostname: ${lower(data.coder_workspace.me.name)}
+cloud_final_modules:
+- [scripts-user, always]
+
+--//
+Content-Type: text/x-shellscript; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="userdata.txt"
+
+#!/bin/bash
+exec sudo -u ${local.username} sh -c '${coder_agent.main.init_script}' &
+
+--//--
+EOT
 }
 
 resource "coder_agent" "main" {
+  auth                   = "aws-instance-identity"
   arch                   = "amd64"
   os                     = "linux"
   startup_script_timeout = 180
   startup_script         = <<-EOT
     set -e
 
+    sudo install -d -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
+
     cd
-    ssh -o StrictHostKeyChecking=no git@github.com true || true
-    if ! test -d .git/.; then
-      git clone http://github.com/defn/dev dev
-      mv dev/.git .
-      rm -rf dev
-      git reset --hard
-    else
-      git pull
-    fi
-
-    rm -rf .cache
-    sudo install -d -m 0700 -o ubuntu -g ubuntu /nix/home/cache
-    ln -nfs /nix/home/cache .cache
-
-    rm -rf work
-    sudo install -d -m 0700 -o ubuntu -g ubuntu /nix/home/work
-    ln -nfs /nix/home/work work
+    
+    git pull
 
     make nix
     make symlinks
@@ -102,7 +117,7 @@ resource "coder_app" "hugo" {
 }
 
 resource "coder_metadata" "workspace" {
-  resource_id = fly_app.workspace.id
+  resource_id = aws_instance.dev.id
 
   item {
     key   = "Region"
@@ -110,22 +125,12 @@ resource "coder_metadata" "workspace" {
   }
 
   item {
-    key   = "CPU Type"
-    value = data.coder_parameter.cputype.value
-  }
-
-  item {
-    key   = "CPU Count"
-    value = data.coder_parameter.cpu.value
-  }
-
-  item {
-    key   = "Memory (GB)"
-    value = data.coder_parameter.memory.value
+    key   = "Instance Type"
+    value = aws_instance.dev.instance_type
   }
 
   item {
     key   = "Volume Size (GB)"
-    value = data.coder_parameter.volume-size.value
+    value = "${aws_instance.dev.root_block_device[0].volume_size} GiB"
   }
 }
