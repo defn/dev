@@ -85,9 +85,7 @@ EOT
 }
 
 resource "coder_metadata" "workspace" {
-  count = data.coder_workspace.me.start_count
-
-  resource_id = aws_instance.dev[count.index].id
+  resource_id = aws_instance.dev.id
 
   item {
     key   = "Region"
@@ -96,11 +94,11 @@ resource "coder_metadata" "workspace" {
 
   item {
     key   = "Instance Type"
-    value = aws_instance.dev[count.index].instance_type
+    value = aws_instance.dev.instance_type
   }
 
   item {
     key   = "Volume Size (GB)"
-    value = "${aws_instance.dev[count.index].root_block_device[0].volume_size} GiB"
+    value = "${aws_instance.dev.root_block_device[0].volume_size} GiB"
   }
 }
