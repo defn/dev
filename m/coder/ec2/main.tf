@@ -19,7 +19,11 @@ resource "coder_agent" "main" {
     make perms
     make home
 
+    source .bash_profile
+
     ~/bin/nix/code-server --auth none --port 13337 >/tmp/code-server.log 2>&1 &
+
+    (cd m && ~/bin/nix/tilt up) &
   EOT
 
   env = {
@@ -74,7 +78,7 @@ Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment; filename="userdata.txt"
 
 #!/bin/bash
-sudo -u ${local.username} sh -c '${coder_agent.main.init_script}'
+exec sudo -u ${local.username} sh -c '${coder_agent.main.init_script}' &
 
 --//--
 EOT
