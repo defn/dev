@@ -10,10 +10,10 @@
     acme.url = github:defn/dev/pkg-acme-3.0.6-2?dir=m/pkg/acme;
     godev.url = github:defn/dev/pkg-godev-0.0.100?dir=m/pkg/godev;
     nodedev.url = github:defn/dev/pkg-nodedev-0.0.55?dir=m/pkg/nodedev;
-    localdev.url = github:defn/dev/pkg-localdev-0.0.150?dir=m/pkg/localdev;
+    localdev.url = github:defn/dev/pkg-localdev-0.0.151?dir=m/pkg/localdev;
     development.url = github:defn/dev/pkg-development-0.0.63?dir=m/pkg/development;
-    cloud.url = github:defn/dev/pkg-cloud-0.0.130?dir=m/pkg/cloud;
-    kubernetes.url = github:defn/dev/pkg-kubernetes-0.0.122?dir=m/pkg/kubernetes;
+    cloud.url = github:defn/dev/pkg-cloud-0.0.131?dir=m/pkg/cloud;
+    kubernetes.url = github:defn/dev/pkg-kubernetes-0.0.123?dir=m/pkg/kubernetes;
     coder.url = github:defn/dev/pkg-coder-0.26.1-2?dir=m/pkg/coder;
     codeserver.url = github:defn/dev/pkg-codeserver-4.14.1-2?dir=m/pkg/codeserver;
     tailscale.url = github:defn/dev/pkg-tailscale-1.46.0-1?dir=m/pkg/tailscale;
