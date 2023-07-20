@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/argocd",
-        "lastModified": 1689278127,
-        "narHash": "sha256-h8JwoJvRCyGfnFOI+M8yUJwPnrZHytBxLtXH/R1EfqM=",
+        "lastModified": 1689836314,
+        "narHash": "sha256-tkHzAUHYeMe2sqdqA7rQHqhxQD11zAnDCi6Fevp0Bu8=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "6959f9985632da88237e4f37165b52e035eadf31",
+        "rev": "c15512b211b7851e268017ec6930fbcfaf212930",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/argocd",
         "owner": "defn",
-        "ref": "pkg-argocd-2.7.7-2",
+        "ref": "pkg-argocd-2.7.8-1",
         "repo": "dev",
         "type": "github"
       }
@@ -27,17 +27,17 @@
       },
       "locked": {
         "dir": "m/pkg/argoworkflows",
-        "lastModified": 1689278190,
-        "narHash": "sha256-AMiu7SkkE5iQQzOhD9tntvn1Xs3CusSAN+6yUZDzxBo=",
+        "lastModified": 1689892775,
+        "narHash": "sha256-pOBovfBb7HvDoK279RK9wBN4kuwZMoWCuf2Z+1Myq5g=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "5e69ffb0e67d7902b3cc53d3ac7e9dade2185be5",
+        "rev": "d6f07b0d47e51f91ec0ee74e1eaf2656ad489a4c",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/argoworkflows",
         "owner": "defn",
-        "ref": "pkg-argoworkflows-3.4.8-4",
+        "ref": "pkg-argoworkflows-3.4.9-1",
         "repo": "dev",
         "type": "github"
       }
