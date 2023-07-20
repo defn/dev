@@ -2,8 +2,11 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/coder/coder" {
-  version = "0.11.0"
+  version     = "0.11.0"
+  constraints = "~> 0.11.0"
   hashes = [
+    "h1:9F8yb4ehMSiWyIaYDQXWDoAT+7WH5TY2F8UwVh2fyWE=",
+    "h1:Rw0xuShkvuK+rTDcWxYAEyuUmmmrv7yI2BweYhlAeTM=",
     "h1:ciYalLx+8lwREQG6SNmJNL/SZo0sYwF1rrgjnu7hYYs=",
     "zh:2ca19180a2c6ff9e30d9d1d6d845771c3f6771779185cd95e6f8a348abf82c4e",
     "zh:48daf755756daf1ca72536b60513d059157967e8d8f21413e1561e6b595b13c3",
@@ -24,9 +27,12 @@ provider "registry.terraform.io/coder/coder" {
 }
 
 provider "registry.terraform.io/fly-apps/fly" {
-  version = "0.0.23"
+  version     = "0.0.23"
+  constraints = "~> 0.0.23"
   hashes = [
     "h1:6gklEyEzzCMpnqzF8vT207ivMk/NSfXTmoWEb2znig8=",
+    "h1:812zz8aVN4HYcj49ZzOjaVa3ZuHCkZjkAXJlvDEABXE=",
+    "h1:FAtRSDCgAQC0sTJnp6Qn7NhxkEFWmEq+s2Tj66q5D4g=",
     "zh:1218d3ddd6395d5f0457ba6e3831ece52068c1b168e89f31695fb97768f14846",
     "zh:2281ffb369a001849223f585fb607d83a77a47534d4a8f1d023d9b883cb7bd69",
     "zh:24e914c70ae82cb2b26f219ee3a1ab3feaaec98d1484e2e3e1ba45c6e086feec",
