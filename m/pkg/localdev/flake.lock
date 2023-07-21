@@ -1101,17 +1101,17 @@
       },
       "locked": {
         "dir": "m/pkg/nomad",
-        "lastModified": 1689836985,
-        "narHash": "sha256-wq2mnyHbip72YzZ3nL2VLr7D38dYnxv9+mT46w8woi0=",
+        "lastModified": 1689957574,
+        "narHash": "sha256-WZuQ+8q0zq7AASU0wNKLVIErqq8556dz7ESqV9t8228=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "f5349ed5f7bf925cb55eac80e46f34ebb7bdb70f",
+        "rev": "9b6e307e888a0641eeaab9681382e15c61fd8c92",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/nomad",
         "owner": "defn",
-        "ref": "pkg-nomad-1.6.0-1",
+        "ref": "pkg-nomad-1.6.1-1",
         "repo": "dev",
         "type": "github"
       }
