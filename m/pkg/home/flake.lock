@@ -3203,17 +3203,17 @@
       },
       "locked": {
         "dir": "m/pkg/localdev",
-        "lastModified": 1689928227,
-        "narHash": "sha256-eVN2WfFOK8HX+C6uLBhnG+5zZCUNsfJ2ELPFGlNXqoM=",
+        "lastModified": 1689957663,
+        "narHash": "sha256-ZZ6q/pBnWCWGGovF1uAyhk7yC9+EGe9MoctxtLL7WxU=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "1d3000e69db450a8b95237073f87d52ba1831d2c",
+        "rev": "7f86551da9bf527bfd827a3da54b8a7343686330",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/localdev",
         "owner": "defn",
-        "ref": "pkg-localdev-0.0.152",
+        "ref": "pkg-localdev-0.0.153",
         "repo": "dev",
         "type": "github"
       }
@@ -4211,17 +4211,17 @@
       },
       "locked": {
         "dir": "m/pkg/nomad",
-        "lastModified": 1689836985,
-        "narHash": "sha256-wq2mnyHbip72YzZ3nL2VLr7D38dYnxv9+mT46w8woi0=",
+        "lastModified": 1689957574,
+        "narHash": "sha256-WZuQ+8q0zq7AASU0wNKLVIErqq8556dz7ESqV9t8228=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "f5349ed5f7bf925cb55eac80e46f34ebb7bdb70f",
+        "rev": "9b6e307e888a0641eeaab9681382e15c61fd8c92",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/nomad",
         "owner": "defn",
-        "ref": "pkg-nomad-1.6.0-1",
+        "ref": "pkg-nomad-1.6.1-1",
         "repo": "dev",
         "type": "github"
       }
