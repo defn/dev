@@ -107,7 +107,7 @@ perms:
 	-chmod 0600 ~/.kube/config
 
 ci dev:
-	cd m && b server defn-defn-sso env FLY_API_TOKEN=$$(pass FLY_API_TOKEN) bash -c 'cd; cd m; $(MAKE) $@'
+	cd m && b server defn-defn-sso env FLY_API_TOKEN=$$(pass FLY_API_TOKEN) DIGITALOCEAN_TOKEN=$$(pass DIGITALOCEAN_TOKEN) bash -c 'cd; cd m; $(MAKE) $@'
 
 install:
 	$(MAKE) nix
