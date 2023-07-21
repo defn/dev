@@ -239,17 +239,17 @@
       },
       "locked": {
         "dir": "m/pkg/buildkite",
-        "lastModified": 1689836505,
-        "narHash": "sha256-H+GDnzZzOD7AGTQZQiWoIsb20/A4zv4K5fI0f1EyZko=",
+        "lastModified": 1689927962,
+        "narHash": "sha256-jC5sL+TNuvXnNh1YcrU9WPmUYYBVij1VI+B5iGO0i9Y=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "a56b9ca5407318b3511e998ce340011e7fe9979e",
+        "rev": "7e408628d4bd8c4b2b48655d544c55e9ebbe315a",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buildkite",
         "owner": "defn",
-        "ref": "pkg-buildkite-3.50.1-1",
+        "ref": "pkg-buildkite-3.50.2-1",
         "repo": "dev",
         "type": "github"
       }
@@ -281,17 +281,17 @@
       },
       "locked": {
         "dir": "m/pkg/cilium",
-        "lastModified": 1689624549,
-        "narHash": "sha256-qCWvXVsL2DqAe4B6gnS5E3uilVojjwbPl69/4P2gc3k=",
+        "lastModified": 1689928022,
+        "narHash": "sha256-x4Sn9NYU7YnE5iXTIb94wgZu2FoAt6Qas+xCSE/HzfY=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "3f32a2c6e75fb2495f1fe003a55a6a6946678f20",
+        "rev": "5a04e20063760b2fec48efd1ed310c0fa49dcbca",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cilium",
         "owner": "defn",
-        "ref": "pkg-cilium-0.15.3-1",
+        "ref": "pkg-cilium-0.15.4-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1712,17 +1712,17 @@
       },
       "locked": {
         "dir": "m/pkg/development",
-        "lastModified": 1689283016,
-        "narHash": "sha256-DS+8kRRH3+VMHj2VNKO7YKxSqRnxkYxM2ATCI8s+yRk=",
+        "lastModified": 1689928117,
+        "narHash": "sha256-D19SdN7qZeabPvDB06l3Ibtz5A20B4l2ZJmprszEurY=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "d1dafdf83e344a8bc0d0ff8f3e9d74bbd1d4a732",
+        "rev": "32df8ba96ac8e7095030cc00c10329332264adf6",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/development",
         "owner": "defn",
-        "ref": "pkg-development-0.0.63",
+        "ref": "pkg-development-0.0.64",
         "repo": "dev",
         "type": "github"
       }
@@ -2953,17 +2953,17 @@
       },
       "locked": {
         "dir": "m/pkg/ibazel",
-        "lastModified": 1689279115,
-        "narHash": "sha256-TSsMxM0nBxrBrevV54pT/vDrbhLWtdTEqZrog5oeY+o=",
+        "lastModified": 1689928064,
+        "narHash": "sha256-yBfCbnER79O4WcLCU/yvOdTNkMHUf2IsRfMhNv60m/8=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "afb19d679404e6d3e6248741799ee7c9275e9e11",
+        "rev": "238e8c84a8732a856495b49770ae7c42942672f1",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/ibazel",
         "owner": "defn",
-        "ref": "pkg-ibazel-0.23.3-2",
+        "ref": "pkg-ibazel-0.23.4-1",
         "repo": "dev",
         "type": "github"
       }
@@ -3072,17 +3072,17 @@
       },
       "locked": {
         "dir": "m/pkg/kubernetes",
-        "lastModified": 1689893274,
-        "narHash": "sha256-aLEr6iJ2M6+wuEj4yVxeyxFNNIWvDx5o2OD3u1JJclQ=",
+        "lastModified": 1689928174,
+        "narHash": "sha256-4Z/+Rwn9YstUbkyKtfEeldi8CpiKVhimzH9Hc0T3Lfo=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "90f5247b177911abb860552afb4ec593945d7743",
+        "rev": "1219fe6065b4431fef8db342b4181ad41fc4274f",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubernetes",
         "owner": "defn",
-        "ref": "pkg-kubernetes-0.0.123",
+        "ref": "pkg-kubernetes-0.0.124",
         "repo": "dev",
         "type": "github"
       }
@@ -3203,17 +3203,17 @@
       },
       "locked": {
         "dir": "m/pkg/localdev",
-        "lastModified": 1689893347,
-        "narHash": "sha256-att9/14C6qHxERZuuE0NnFgcaOSqQ/BB8kNFCw10oeE=",
+        "lastModified": 1689928227,
+        "narHash": "sha256-eVN2WfFOK8HX+C6uLBhnG+5zZCUNsfJ2ELPFGlNXqoM=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "c239111dcba3f3fd6313db21cf2ce027e402aee4",
+        "rev": "1d3000e69db450a8b95237073f87d52ba1831d2c",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/localdev",
         "owner": "defn",
-        "ref": "pkg-localdev-0.0.151",
+        "ref": "pkg-localdev-0.0.152",
         "repo": "dev",
         "type": "github"
       }
