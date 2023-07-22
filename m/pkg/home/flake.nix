@@ -228,13 +228,13 @@
           *-global)
             (
               set +x
-              cat k3d-tailscale-operator.yaml \
+              cat ~/m/k3d-tailscale-operator.yaml \
                 | sed "s#client_id: .*#client_id: \"$(pass tailscale-operator-client-id-$name)\"#" \
                 | sed "s#client_secret: .*#client_secret: \"$(pass tailscale-operator-client-secret-$name)\"#"
               echo ---
-              cat r/argo-cd/main.yaml
-              cat r/coredns/main.yaml
-              cat r/cilium/main.yaml
+              cat ~/k/r/argo-cd/main.yaml
+              cat ~/k/r/coredns/main.yaml
+              cat ~/k/r/cilium/main.yaml
             ) | docker run --rm -i \
               -v $name-manifest:/var/lib/rancher/k3s/server/manifests \
               ubuntu bash -c 'tee /var/lib/rancher/k3s/server/manifests/bootstrap.yaml | wc -l'
@@ -249,8 +249,8 @@
         echo $DEFN_DEV_HOST_API
         export K3D_FIX_MOUNTS=1
         k3d cluster create $name \
-          --config k3d.yaml \
-          --registry-config k3d-registries.yaml \
+          --config ~/m/k3d.yaml \
+          --registry-config ~/m/k3d-registries.yaml \
           --k3s-node-label env=''${name##*-}@server:0 \
           --volume $name-tailscale:/var/lib/tailscale@server:0 \
           --volume $name-irsa:/var/lib/rancher/k3s/server/tls2@server:0 \
