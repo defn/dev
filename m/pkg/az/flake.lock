@@ -162,17 +162,17 @@
       },
       "locked": {
         "dir": "m/pkg/gum",
-        "lastModified": 1689278896,
-        "narHash": "sha256-gRbhr8HU6j4sOSsU+dQS2DXG88ffx5i8FhxCErtW1QM=",
+        "lastModified": 1689987863,
+        "narHash": "sha256-EfZfzy41CW3qdbeEkc7AbvWPPqfSrvhOJWVRIylP/GU=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "92ecce8e657aef3bf9409a41fa97a1434a67ca40",
+        "rev": "f207e52bf3137e17b5cd47db36ee4688ba86b63d",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/gum",
         "owner": "defn",
-        "ref": "pkg-gum-0.10.0-10",
+        "ref": "pkg-gum-0.11.0-1",
         "repo": "dev",
         "type": "github"
       }
