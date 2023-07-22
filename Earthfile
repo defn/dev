@@ -5,7 +5,7 @@ VERSION 0.7
 build:
     ARG image=quay.io/defn/dev:latest-nix
     BUILD --platform=linux/amd64 +image-nix --image=${image}
-    BUILD --platform=linux/arm64 +image-nix --image=${image}
+    #BUILD --platform=linux/arm64 +image-nix --image=${image}
 
 image-nix:
     ARG image
