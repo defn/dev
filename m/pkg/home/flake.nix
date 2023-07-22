@@ -176,9 +176,9 @@
         esac
         perl -pe 's{(https://'$DEFN_DEV_HOST_API'):\d+}{$1:6443}' -i ~/.kube/config
 
-        export VAULT_TOKEN="$(pass Initial_Root_Token)"
-        $nme vault-init
-        $nme vault-config
+        #export VAULT_TOKEN="$(pass Initial_Root_Token)"
+        #$nme vault-init
+        #$nme vault-config
 
         if test -f e/k3d-$nme.yaml; then
           kubectl config use-context k3d-global
