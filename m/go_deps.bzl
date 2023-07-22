@@ -34,8 +34,8 @@ def go_deps():
     go_repository(
         name = "com_github_aws_jsii_runtime_go",
         importpath = "github.com/aws/jsii-runtime-go",
-        sum = "h1:ZvOKkGKQBZC8qrlM3qi2hXnbnqI64o3WtVw5ZVd/q9s=",
-        version = "v1.84.0",
+        sum = "h1:oRK9X0YSo31iHW6JqQceO9q59W4Jke8t6NabiMf1r5M=",
+        version = "v1.85.0",
     )
     go_repository(
         name = "com_github_aymanbagabas_go_osc52_v2",
@@ -64,8 +64,8 @@ def go_deps():
     go_repository(
         name = "com_github_bytedance_sonic",
         importpath = "github.com/bytedance/sonic",
-        sum = "h1:GDaNjuWSGu09guE9Oql0MSTNhNCLlWwO8y/xM5BzcbM=",
-        version = "v1.9.2",
+        sum = "h1:oDfRZ+4m6AYCOC0GFeOCeYqvBmucy1isvouS2K0cPzo=",
+        version = "v1.10.0-rc2",
     )
     go_repository(
         name = "com_github_cdktf_cdktf_provider_aws_go_aws_v15",
@@ -106,9 +106,16 @@ def go_deps():
     go_repository(
         name = "com_github_chenzhuoyu_base64x",
         importpath = "github.com/chenzhuoyu/base64x",
-        sum = "h1:qSGYFH7+jGhDF8vLC+iwCD4WpbV1EBDSzWkJODFLams=",
-        version = "v0.0.0-20221115062448-fe3a3abad311",
+        sum = "h1:77cEq6EriyTZ0g/qfRdp61a3Uu/AWrgIq2s0ClJV1g0=",
+        version = "v0.0.0-20230717121745-296ad89f973d",
     )
+    go_repository(
+        name = "com_github_chenzhuoyu_iasm",
+        importpath = "github.com/chenzhuoyu/iasm",
+        sum = "h1:9fhXjVzq5hUy2gkhhgHl95zG2cEAhw9OSGs8toWWAwo=",
+        version = "v0.9.0",
+    )
+
     go_repository(
         name = "com_github_chzyer_logex",
         importpath = "github.com/chzyer/logex",
@@ -184,8 +191,8 @@ def go_deps():
     go_repository(
         name = "com_github_emicklei_proto",
         importpath = "github.com/emicklei/proto",
-        sum = "h1:RbLrwtFcd5gUWLCgpSl/cEpNRekwlxH9Gunz+L0DHKs=",
-        version = "v1.12.0",
+        sum = "h1:6n/Z2pZAnBwuhU66Gs8160B8rrrYKo7h2F2sCOnNceE=",
+        version = "v1.12.1",
     )
     go_repository(
         name = "com_github_envoyproxy_go_control_plane",
@@ -202,8 +209,8 @@ def go_deps():
     go_repository(
         name = "com_github_fatih_color",
         importpath = "github.com/fatih/color",
-        sum = "h1:8LOYc1KYPPmyKMuN8QV2DNRWNbLo6LZ0iLs8+mlH53w=",
-        version = "v1.13.0",
+        sum = "h1:kOqh6YHBtK8aywxGerMG2Eq3H6Qgoqeo13Bk2Mv/nBs=",
+        version = "v1.15.0",
     )
     go_repository(
         name = "com_github_frankban_quicktest",
@@ -436,8 +443,8 @@ def go_deps():
     go_repository(
         name = "com_github_hashicorp_terraform_cdk_go_cdktf",
         importpath = "github.com/hashicorp/terraform-cdk-go/cdktf",
-        sum = "h1:7Tb3LRKV70BbZ5KFa6EXGqZpOY0og+Z0tDqQ40Jis+s=",
-        version = "v0.17.1",
+        sum = "h1:x/v4UeSKUiTE0uRweXW+QauOV5mWkbkEtrW2+OTMGI4=",
+        version = "v0.17.2",
     )
     go_repository(
         name = "com_github_ianlancetaylor_demangle",
@@ -475,6 +482,13 @@ def go_deps():
         sum = "h1:0E5MSMDEoAulmXNFquVs//DdoomxaoTY1kUhbc/qbZg=",
         version = "v2.2.5",
     )
+    go_repository(
+        name = "com_github_knz_go_libedit",
+        importpath = "github.com/knz/go-libedit",
+        sum = "h1:0pHpWtx9vcvC0xGZqEQlQdfSQs7WRlAjuPvk3fOZDCo=",
+        version = "v1.10.1",
+    )
+
     go_repository(
         name = "com_github_kr_fs",
         importpath = "github.com/kr/fs",
@@ -538,8 +552,8 @@ def go_deps():
     go_repository(
         name = "com_github_mattn_go_colorable",
         importpath = "github.com/mattn/go-colorable",
-        sum = "h1:jF+Du6AlPIjs2BiUiQlKOX0rt3SujHxPnksPKZbaA40=",
-        version = "v0.1.12",
+        sum = "h1:fFA4WZxdEF4tXPZVKMLwD8oUnCTTo08duU7wxecdEvA=",
+        version = "v0.1.13",
     )
     go_repository(
         name = "com_github_mattn_go_isatty",
@@ -817,6 +831,13 @@ def go_deps():
         sum = "h1:6RRlFMv1omScs6iq2hfE3IvgE+l6RfJPampq8UZc5TU=",
         version = "v1.14.0",
     )
+    go_repository(
+        name = "com_nullprogram_x_optparse",
+        importpath = "nullprogram.com/x/optparse",
+        sum = "h1:xGFgVi5ZaWOnYdac2foDT3vg0ZZC9ErXFV57mr4OHrI=",
+        version = "v1.0.0",
+    )
+
     go_repository(
         name = "com_shuralyov_dmitri_gpu_mtl",
         importpath = "dmitri.shuralyov.com/gpu/mtl",
