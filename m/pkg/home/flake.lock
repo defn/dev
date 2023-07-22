@@ -328,17 +328,17 @@
       },
       "locked": {
         "dir": "m/pkg/coder",
-        "lastModified": 1689957537,
-        "narHash": "sha256-bmCjCqOwcpn6r1+7ISGOOvwaGUXgjDopmY4dpBIAGGs=",
+        "lastModified": 1689987808,
+        "narHash": "sha256-B1JTkGBoGG+rAzFUEz1CQ+akiA0SDn1glZi1EWwf9Ks=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "b04adbf06862d7361e32de2b066a7a98ca935d5b",
+        "rev": "86fcf02cdddbf5484ca48b31f0028076f009d5b3",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/coder",
         "owner": "defn",
-        "ref": "pkg-coder-0.27.0-1",
+        "ref": "pkg-coder-0.27.1-1",
         "repo": "dev",
         "type": "github"
       }
@@ -349,17 +349,17 @@
       },
       "locked": {
         "dir": "m/pkg/codeserver",
-        "lastModified": 1689278615,
-        "narHash": "sha256-ms/2JCL4K/mnHrcTVdZEce6wxM5Lae7qw5+EXDf3axM=",
+        "lastModified": 1689987833,
+        "narHash": "sha256-NgAeZJH01KC1IwwClNudH0i2tHYUcQFByUqZ+r51OR0=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "b065abe3f23e2800b381964a4683be2f53c0e7c8",
+        "rev": "42212e217cb2c072efdd8b605040bf1ef01e3d7b",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/codeserver",
         "owner": "defn",
-        "ref": "pkg-codeserver-4.14.1-2",
+        "ref": "pkg-codeserver-4.15.0-1",
         "repo": "dev",
         "type": "github"
       }
