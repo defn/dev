@@ -1,6 +1,6 @@
 {
   inputs = {
-    az.url = github:defn/dev/pkg-az-0.0.131?dir=m/pkg/az;
+    az.url = github:defn/dev/pkg-az-0.0.132?dir=m/pkg/az;
     oci.url = github:defn/dev/pkg-oci-0.0.50?dir=m/pkg/oci;
     nix.url = github:defn/dev/pkg-nix-0.0.49?dir=m/pkg/nix;
     secrets.url = github:defn/dev/pkg-secrets-0.0.52?dir=m/pkg/secrets;
@@ -10,9 +10,9 @@
     acme.url = github:defn/dev/pkg-acme-3.0.6-2?dir=m/pkg/acme;
     godev.url = github:defn/dev/pkg-godev-0.0.100?dir=m/pkg/godev;
     nodedev.url = github:defn/dev/pkg-nodedev-0.0.55?dir=m/pkg/nodedev;
-    localdev.url = github:defn/dev/pkg-localdev-0.0.153?dir=m/pkg/localdev;
+    localdev.url = github:defn/dev/pkg-localdev-0.0.154?dir=m/pkg/localdev;
     development.url = github:defn/dev/pkg-development-0.0.64?dir=m/pkg/development;
-    cloud.url = github:defn/dev/pkg-cloud-0.0.131?dir=m/pkg/cloud;
+    cloud.url = github:defn/dev/pkg-cloud-0.0.132?dir=m/pkg/cloud;
     kubernetes.url = github:defn/dev/pkg-kubernetes-0.0.124?dir=m/pkg/kubernetes;
     coder.url = github:defn/dev/pkg-coder-0.27.1-1?dir=m/pkg/coder;
     codeserver.url = github:defn/dev/pkg-codeserver-4.15.0-1?dir=m/pkg/codeserver;
