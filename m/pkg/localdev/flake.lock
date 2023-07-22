@@ -824,17 +824,17 @@
       },
       "locked": {
         "dir": "m/pkg/kuma",
-        "lastModified": 1689279295,
-        "narHash": "sha256-x4VsYpQAzlwDizSUZTV6fcuHPpoz1YPMCyooJokLlKc=",
+        "lastModified": 1689987891,
+        "narHash": "sha256-bJT2/bZNkKqBbD+8qk4/W+dbceQ+yPgPcr9+yMuJy3o=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "597a057175997871c2ec469f38c2af1715c3ec5d",
+        "rev": "06b77bc0a8e38ff22b024f0bbc77959131e7b3c7",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kuma",
         "owner": "defn",
-        "ref": "pkg-kuma-2.3.0-2",
+        "ref": "pkg-kuma-2.3.1-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1499,17 +1499,17 @@
       },
       "locked": {
         "dir": "m/pkg/tilt",
-        "lastModified": 1689279820,
-        "narHash": "sha256-KU10tmutS6XjJj4eAi4bi5m2IoTrSrQ3a0XxVJ3zM5E=",
+        "lastModified": 1689987908,
+        "narHash": "sha256-oZZ+g8lD5TviOtvWz31TU9x4L7heu6AzUpsWvCwQ5hA=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "5455b6f48c94a089c4388a3ff29d6c9af2114bb8",
+        "rev": "f18200958666ca672af8ec6f88c81ffc08629cc8",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/tilt",
         "owner": "defn",
-        "ref": "pkg-tilt-0.33.1-2",
+        "ref": "pkg-tilt-0.33.2-1",
         "repo": "dev",
         "type": "github"
       }

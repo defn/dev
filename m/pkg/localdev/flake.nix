@@ -1,6 +1,6 @@
 {
   inputs = {
-    tilt.url = github:defn/dev/pkg-tilt-0.33.1-2?dir=m/pkg/tilt;
+    tilt.url = github:defn/dev/pkg-tilt-0.33.2-1?dir=m/pkg/tilt;
     nomad.url = github:defn/dev/pkg-nomad-1.6.1-1?dir=m/pkg/nomad;
     boundary.url = github:defn/dev/pkg-boundary-0.13.1-1?dir=m/pkg/boundary;
     vault.url = github:defn/dev/pkg-vault-1.14.0-2?dir=m/pkg/vault;
@@ -13,7 +13,7 @@
     honeyvent.url = github:defn/dev/pkg-honeyvent-1.1.3-10?dir=m/pkg/honeyvent;
     honeymarker.url = github:defn/dev/pkg-honeymarker-0.2.10-10?dir=m/pkg/honeymarker;
     honeytail.url = github:defn/dev/pkg-honeytail-1.8.3-8?dir=m/pkg/honeytail;
-    kuma.url = github:defn/dev/pkg-kuma-2.3.0-2?dir=m/pkg/kuma;
+    kuma.url = github:defn/dev/pkg-kuma-2.3.1-1?dir=m/pkg/kuma;
     zola.url = github:defn/dev/pkg-zola-0.0.3?dir=m/pkg/zola;
     hugo.url = github:defn/dev/pkg-hugo-0.0.5?dir=m/pkg/hugo;
   };
