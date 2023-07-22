@@ -80,7 +80,7 @@ resource "aws_instance" "dev" {
   user_data = local.user_data
 
   root_block_device {
-    volume_size           = 50
+    volume_size           = data.coder_parameter.root_volume_size.value
     volume_type           = "gp3"
     encrypted             = true
     delete_on_termination = true

@@ -52,3 +52,16 @@ data "coder_parameter" "instance_type" {
     value = "t3.4xlarge"
   }
 }
+
+data "coder_parameter" "root_volume_size" {
+  name         = "volume_size"
+  display_name = "root volume size"
+  description  = "The size of the volume to create for the workspace in GB (10-100)"
+  type         = "number"
+  default      = "80"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
+  validation {
+    min = 10
+    max = 100
+  }
+}
