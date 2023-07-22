@@ -41,6 +41,7 @@ pkg/honeymarker/.direnv
 pkg/honeytail/.direnv
 pkg/honeyvent/.direnv
 pkg/hubble/.direnv
+pkg/hugo/.direnv
 pkg/ibazel/.direnv
 pkg/k3d/.direnv
 pkg/k9s/.direnv
@@ -66,6 +67,7 @@ pkg/stern/.direnv
 pkg/tailscale/.direnv
 pkg/teller/.direnv
 pkg/terraform/.direnv
+pkg/tfo/.direnv
 pkg/tilt/.direnv
 pkg/utils/.direnv
 pkg/vault/.direnv
@@ -115,6 +117,7 @@ pkg/honeymarker/result
 pkg/honeytail/result
 pkg/honeyvent/result
 pkg/hubble/result
+pkg/hugo/result
 pkg/ibazel/result
 pkg/k3d/result
 pkg/k9s/result
@@ -140,6 +143,7 @@ pkg/stern/result
 pkg/tailscale/result
 pkg/teller/result
 pkg/terraform/result
+pkg/tfo/result
 pkg/tilt/result
 pkg/utils/result
 pkg/vault/result
