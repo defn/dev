@@ -33,6 +33,9 @@ macos:
 #	-docker network create dev
 #	docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock ubuntu chown 1000:1000 /var/run/docker.sock
 
+build:
+	env -u SSH_AUTH_SOCK earthly +build
+
 home:
 	$(MARK) home
 	(. ~/.nix-profile/etc/profile.d/nix.sh && cd m/aws && ~/bin/b build)
