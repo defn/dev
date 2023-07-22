@@ -36,8 +36,10 @@ macos:
 home:
 	$(MARK) home
 	(. ~/.nix-profile/etc/profile.d/nix.sh && cd m/aws && ~/bin/b build)
-	(. ~/.nix-profile/etc/profile.d/nix.sh && cd m/pkg/home && ~/bin/b build flake_path && ~/bin/b out flake_path) >bin/nix/.path
-	(for a in $$(cat bin/nix/.path | tr : "\n" | perl -e 'print reverse <>'); do for b in $$a/*; do if test -x "$$b"; then if [[ "$$(readlink "bin/nix/$$b{##*/}" || true)" != "$$b" ]]; then ln -nfs "$$b" bin/nix/; fi; fi; done; done)
+	for n in az oci nix secrets utils vpn vault acme godev nodedev localdev development cloud kubernetes coder codeserver tailscale shell; do \
+		(. ~/.nix-profile/etc/profile.d/nix.sh && cd m/pkg/$$n && ~/bin/b build flake_path && ~/bin/b out flake_path) >bin/nix/.path; \
+		(for a in $$(cat bin/nix/.path | tr : "\n" | perl -e 'print reverse <>'); do for b in $$a/*; do if test -x "$$b"; then if [[ "$$(readlink "bin/nix/$$b{##*/}" || true)" != "$$b" ]]; then ln -nfs "$$b" bin/nix/; fi; fi; done; done); \
+		done
 	rm -f bin/nix/{gcc,cc,ld}
 	if test -x /opt/homebrew/opt/util-linux/bin/flock; then ln -nfs /opt/homebrew/opt/util-linux/bin/flock bin/nix/; fi
 
