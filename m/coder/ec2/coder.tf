@@ -42,9 +42,17 @@ resource "coder_agent" "main" {
     sudo install -d -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
 
     cd
-    
-    git pull
 
+    ssh -o StrictHostKeyChecking=no git@github.com true || true
+    if ! test -d .git/.; then
+      git clone http://github.com/defn/dev dev
+      mv dev/.git .
+      rm -rf dev
+      git reset --hard
+    else
+      git pull
+    fi
+    
     make nix
     make symlinks
     make perms
