@@ -42,7 +42,7 @@ resource "coder_agent" "main" {
     sudo install -d -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
 
     sudo apt-get update
-    sudo apt-get install -y build-essentials fzf
+    sudo apt-get install -y build-essential fzf
 
     sudo curl -sSL -o /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64
     sudo chmod 755 /usr/local/bin/bazel
