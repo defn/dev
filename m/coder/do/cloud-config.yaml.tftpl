@@ -8,12 +8,6 @@ packages:
   - git
 mounts:
   - [
-      "LABEL=${home_volume_label}",
-      "/home/ubuntu",
-      auto,
-      "defaults,uid=1000,gid=1000",
-    ]
-  - [
       "LABEL=${nix_volume_label}",
       "/nix",
       auto,

@@ -32,30 +32,16 @@ data "coder_parameter" "droplet_size" {
   }
 }
 
-data "coder_parameter" "home_volume_size" {
-  name         = "home_volume_size"
-  display_name = "Home volume size"
-  description  = "How large would you like your home volume to be (in GB)?"
-  type         = "number"
-  default      = "20"
-  mutable      = false
-
-  validation {
-    min = 10
-    max = 100
-  }
-}
-
 data "coder_parameter" "nix_volume_size" {
   name         = "nix_volume_size"
   display_name = "nix volume size"
   description  = "How large would you like your nix volume to be (in GB)?"
   type         = "number"
-  default      = "20"
+  default      = "40"
   mutable      = false
 
   validation {
-    min = 20
+    min = 10
     max = 100
   }
 }
