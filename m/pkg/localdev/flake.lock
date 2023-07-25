@@ -1499,17 +1499,17 @@
       },
       "locked": {
         "dir": "m/pkg/tilt",
-        "lastModified": 1689987908,
-        "narHash": "sha256-oZZ+g8lD5TviOtvWz31TU9x4L7heu6AzUpsWvCwQ5hA=",
+        "lastModified": 1690318912,
+        "narHash": "sha256-eJaGEOCqxT7d5xrqWB11tTiZglNK6ekPJNCvwy0RZOY=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "f18200958666ca672af8ec6f88c81ffc08629cc8",
+        "rev": "7876711085a9a41cbb988818c78b17b4d3e7d67f",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/tilt",
         "owner": "defn",
-        "ref": "pkg-tilt-0.33.2-1",
+        "ref": "pkg-tilt-0.33.3-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1520,17 +1520,17 @@
       },
       "locked": {
         "dir": "m/pkg/vault",
-        "lastModified": 1689279884,
-        "narHash": "sha256-Sykwv7rP/auXLoVcKWJcTiODTxvq4EfemgWl63meV6M=",
+        "lastModified": 1690318933,
+        "narHash": "sha256-BPn1k9uqLWDyZffLZLGjtw2zZbxQWUACcCBYWck/214=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "268fe641df1dce78050c3be0e0dc5092e6fda4ca",
+        "rev": "fac4165cc66d8ce39df380d7ff6e6345702afa14",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/vault",
         "owner": "defn",
-        "ref": "pkg-vault-1.14.0-2",
+        "ref": "pkg-vault-1.14.1-1",
         "repo": "dev",
         "type": "github"
       }
