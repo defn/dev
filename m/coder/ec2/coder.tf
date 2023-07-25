@@ -41,6 +41,12 @@ resource "coder_agent" "main" {
 
     sudo install -d -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
 
+    sudo apt-get update
+    sudo apt-get install -y make
+
+    sudo curl -sSL -o /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64
+    sudo chmod 755 /usr/local/bin/bazel
+
     cd
 
     ssh -o StrictHostKeyChecking=no git@github.com true || true
