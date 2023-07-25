@@ -1,9 +1,9 @@
 {
   inputs = {
-    tilt.url = github:defn/dev/pkg-tilt-0.33.2-1?dir=m/pkg/tilt;
+    tilt.url = github:defn/dev/pkg-tilt-0.33.3-1?dir=m/pkg/tilt;
     nomad.url = github:defn/dev/pkg-nomad-1.6.1-1?dir=m/pkg/nomad;
     boundary.url = github:defn/dev/pkg-boundary-0.13.1-1?dir=m/pkg/boundary;
-    vault.url = github:defn/dev/pkg-vault-1.14.0-2?dir=m/pkg/vault;
+    vault.url = github:defn/dev/pkg-vault-1.14.1-1?dir=m/pkg/vault;
     gh.url = github:defn/dev/pkg-gh-2.32.1-1?dir=m/pkg/gh;
     earthly.url = github:defn/dev/pkg-earthly-0.7.12-1?dir=m/pkg/earthly;
     oras.url = github:defn/dev/pkg-oras-1.0.0-3?dir=m/pkg/oras;
