@@ -58,7 +58,7 @@ data "coder_parameter" "root_volume_size" {
   display_name = "root volume size"
   description  = "The size of the volume to create for the workspace in GB (10-100)"
   type         = "number"
-  default      = "80"
+  default      = "40"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
   validation {
     min = 10

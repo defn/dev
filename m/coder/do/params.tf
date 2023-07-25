@@ -30,10 +30,6 @@ data "coder_parameter" "droplet_size" {
     name  = "4 vCPU, 8 GB RAM"
     value = "s-4vcpu-8gb"
   }
-  option {
-    name  = "8 vCPU, 16 GB RAM"
-    value = "s-8vcpu-16gb"
-  }
 }
 
 data "coder_parameter" "home_volume_size" {
@@ -41,14 +37,15 @@ data "coder_parameter" "home_volume_size" {
   display_name = "Home volume size"
   description  = "How large would you like your home volume to be (in GB)?"
   type         = "number"
-  default      = "40"
+  default      = "20"
   mutable      = false
 
   validation {
-    min = 40
+    min = 10
     max = 100
   }
-}
+cccchkrfbbjcibfbfncrgvrtjrvjrdbdfktiurrdbk
+
 
 data "coder_parameter" "nix_volume_size" {
   name         = "nix_volume_size"
