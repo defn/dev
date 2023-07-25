@@ -2,10 +2,6 @@ provider "aws" {
   region = data.coder_parameter.region.value
 }
 
-locals {
-  coder_name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
-}
-
 data "aws_ami" "ubuntu" {
   most_recent = true
 
