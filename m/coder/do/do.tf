@@ -10,6 +10,7 @@ resource "digitalocean_volume" "nix_volume" {
   }
 }
 
+# trunk-ignore(checkov/CKV_DIO_2)
 resource "digitalocean_droplet" "workspace" {
   count = data.coder_workspace.me.start_count
 
