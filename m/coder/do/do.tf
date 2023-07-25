@@ -1,7 +1,3 @@
-locals {
-  coder_name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
-}
-
 resource "digitalocean_volume" "nix_volume" {
   region                   = data.coder_parameter.region.value
   name                     = "coder-${data.coder_workspace.me.id}-nix"
@@ -17,7 +13,7 @@ resource "digitalocean_volume" "nix_volume" {
 resource "digitalocean_droplet" "workspace" {
   count = data.coder_workspace.me.start_count
 
-  name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+  name = local.coder_name
 
   region = data.coder_parameter.region.value
 

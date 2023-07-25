@@ -2,6 +2,8 @@ data "coder_workspace" "me" {}
 
 locals {
   username = "ubuntu"
+
+  coder_name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
 }
 
 resource "coder_agent" "main" {
