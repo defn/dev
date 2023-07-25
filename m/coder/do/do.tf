@@ -1,3 +1,7 @@
+locals {
+  coder_name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+}
+
 resource "digitalocean_volume" "home_volume" {
   region                   = data.coder_parameter.region.value
   name                     = "coder-${data.coder_workspace.me.id}-home"
@@ -25,10 +29,13 @@ resource "digitalocean_volume" "nix_volume" {
 resource "digitalocean_droplet" "workspace" {
   count = data.coder_workspace.me.start_count
 
+  name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+
   region = data.coder_parameter.region.value
-  name   = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
-  image  = data.coder_parameter.droplet_image.value
-  size   = data.coder_parameter.droplet_size.value
+
+  image = data.coder_parameter.droplet_image.value
+  size  = data.coder_parameter.droplet_size.value
+
   volume_ids = [
     digitalocean_volume.home_volume.id,
     digitalocean_volume.nix_volume.id

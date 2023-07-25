@@ -12,6 +12,7 @@ resource "coder_agent" "main" {
     set -e
 
     cd
+
     ssh -o StrictHostKeyChecking=no git@github.com true || true
     if ! test -d .git/.; then
       git clone http://github.com/defn/dev dev
