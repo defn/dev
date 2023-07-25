@@ -14,7 +14,7 @@ Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment; filename="cloud-config.txt"
 
 #cloud-config
-hostname: ${lower(data.coder_workspace.me.name)}
+hostname: coder-${data.coder_workspace.me.owner}-${lower(data.coder_workspace.me.name)}
 cloud_final_modules:
 - [scripts-user, always]
 
