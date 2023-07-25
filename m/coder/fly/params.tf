@@ -56,7 +56,7 @@ data "coder_parameter" "volume-size" {
   display_name = "Home volume size"
   description  = "The size of the volume to create for the workspace in GB (10-100)"
   type         = "number"
-  default      = "60"
+  default      = "40"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
   validation {
     min = 10
