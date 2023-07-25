@@ -11,7 +11,7 @@
     kn.url = github:defn/dev/pkg-kn-1.10.0-5?dir=m/pkg/kn;
     vcluster.url = github:defn/dev/pkg-vcluster-0.15.2-2?dir=m/pkg/vcluster;
     kubevirt.url = github:defn/dev/pkg-kubevirt-1.0.0-2?dir=m/pkg/kubevirt;
-    velero.url = github:defn/dev/pkg-velero-1.11.0-5?dir=m/pkg/velero;
+    velero.url = github:defn/dev/pkg-velero-1.11.1-1?dir=m/pkg/velero;
     cilium.url = github:defn/dev/pkg-cilium-0.15.4-1?dir=m/pkg/cilium;
     hubble.url = github:defn/dev/pkg-hubble-0.12.0-2?dir=m/pkg/hubble;
     tfo.url = github:defn/dev/pkg-tfo-1.3.0-2?dir=m/pkg/tfo;
