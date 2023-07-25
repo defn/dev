@@ -44,8 +44,7 @@ data "coder_parameter" "home_volume_size" {
     min = 10
     max = 100
   }
-cccchkrfbbjcibfbfncrgvrtjrvjrdbdfktiurrdbk
-
+}
 
 data "coder_parameter" "nix_volume_size" {
   name         = "nix_volume_size"
