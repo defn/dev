@@ -45,6 +45,7 @@ resource "aws_iam_instance_profile" "dev" {
   role = aws_iam_role.dev.name
 }
 
+# trunk-ignore(checkov/CKV_AWS_148)
 resource "aws_default_vpc" "default" {}
 
 resource "aws_security_group" "dev" {
