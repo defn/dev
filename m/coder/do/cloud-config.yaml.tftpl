@@ -41,6 +41,7 @@ write_files:
       [Install]
       WantedBy=multi-user.target
 runcmd:
+  - sudo sudo mount /dev/sda /nix || true
   - chown ubuntu:ubuntu /home/ubuntu
   - chown ubuntu:ubuntu /nix
   - systemctl enable coder-agent
