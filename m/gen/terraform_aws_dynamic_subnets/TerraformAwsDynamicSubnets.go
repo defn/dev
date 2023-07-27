@@ -158,6 +158,7 @@ type TerraformAwsDynamicSubnets interface {
 	PrivateRouteTableEnabled() *bool
 	SetPrivateRouteTableEnabled(val *bool)
 	PrivateRouteTableIdsOutput() *string
+	PrivateSubnetArnsOutput() *string
 	PrivateSubnetCidrsOutput() *string
 	PrivateSubnetIdsOutput() *string
 	PrivateSubnetIpv6CidrsOutput() *string
@@ -183,6 +184,7 @@ type TerraformAwsDynamicSubnets interface {
 	PublicRouteTableIdsOutput() *string
 	PublicRouteTablePerSubnetEnabled() *bool
 	SetPublicRouteTablePerSubnetEnabled(val *bool)
+	PublicSubnetArnsOutput() *string
 	PublicSubnetCidrsOutput() *string
 	PublicSubnetIdsOutput() *string
 	PublicSubnetIpv6CidrsOutput() *string
@@ -1054,6 +1056,16 @@ func (j *jsiiProxy_TerraformAwsDynamicSubnets) PrivateRouteTableIdsOutput() *str
 	return returns
 }
 
+func (j *jsiiProxy_TerraformAwsDynamicSubnets) PrivateSubnetArnsOutput() *string {
+	var returns *string
+	_jsii_.Get(
+		j,
+		"privateSubnetArnsOutput",
+		&returns,
+	)
+	return returns
+}
+
 func (j *jsiiProxy_TerraformAwsDynamicSubnets) PrivateSubnetCidrsOutput() *string {
 	var returns *string
 	_jsii_.Get(
@@ -1199,6 +1211,16 @@ func (j *jsiiProxy_TerraformAwsDynamicSubnets) PublicRouteTablePerSubnetEnabled(
 	_jsii_.Get(
 		j,
 		"publicRouteTablePerSubnetEnabled",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_TerraformAwsDynamicSubnets) PublicSubnetArnsOutput() *string {
+	var returns *string
+	_jsii_.Get(
+		j,
+		"publicSubnetArnsOutput",
 		&returns,
 	)
 	return returns

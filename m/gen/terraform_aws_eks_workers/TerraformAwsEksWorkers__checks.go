@@ -1,6 +1,6 @@
 //go:build !no_runtime_type_checking
 
-package terraform_aws_eks_node_group
+package terraform_aws_eks_workers
 
 import (
 	"fmt"
@@ -11,7 +11,7 @@ import (
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 
-func (t *jsiiProxy_TerraformAwsEksNodeGroup) validateAddOverrideParameters(path *string, value interface{}) error {
+func (t *jsiiProxy_TerraformAwsEksWorkers) validateAddOverrideParameters(path *string, value interface{}) error {
 	if path == nil {
 		return fmt.Errorf("parameter path is required, but nil was provided")
 	}
@@ -23,7 +23,7 @@ func (t *jsiiProxy_TerraformAwsEksNodeGroup) validateAddOverrideParameters(path 
 	return nil
 }
 
-func (t *jsiiProxy_TerraformAwsEksNodeGroup) validateAddProviderParameters(provider interface{}) error {
+func (t *jsiiProxy_TerraformAwsEksWorkers) validateAddProviderParameters(provider interface{}) error {
 	if provider == nil {
 		return fmt.Errorf("parameter provider is required, but nil was provided")
 	}
@@ -50,7 +50,7 @@ func (t *jsiiProxy_TerraformAwsEksNodeGroup) validateAddProviderParameters(provi
 	return nil
 }
 
-func (t *jsiiProxy_TerraformAwsEksNodeGroup) validateGetStringParameters(output *string) error {
+func (t *jsiiProxy_TerraformAwsEksWorkers) validateGetStringParameters(output *string) error {
 	if output == nil {
 		return fmt.Errorf("parameter output is required, but nil was provided")
 	}
@@ -58,7 +58,7 @@ func (t *jsiiProxy_TerraformAwsEksNodeGroup) validateGetStringParameters(output 
 	return nil
 }
 
-func (t *jsiiProxy_TerraformAwsEksNodeGroup) validateInterpolationForOutputParameters(moduleOutput *string) error {
+func (t *jsiiProxy_TerraformAwsEksWorkers) validateInterpolationForOutputParameters(moduleOutput *string) error {
 	if moduleOutput == nil {
 		return fmt.Errorf("parameter moduleOutput is required, but nil was provided")
 	}
@@ -66,7 +66,7 @@ func (t *jsiiProxy_TerraformAwsEksNodeGroup) validateInterpolationForOutputParam
 	return nil
 }
 
-func (t *jsiiProxy_TerraformAwsEksNodeGroup) validateOverrideLogicalIdParameters(newLogicalId *string) error {
+func (t *jsiiProxy_TerraformAwsEksWorkers) validateOverrideLogicalIdParameters(newLogicalId *string) error {
 	if newLogicalId == nil {
 		return fmt.Errorf("parameter newLogicalId is required, but nil was provided")
 	}
@@ -74,7 +74,7 @@ func (t *jsiiProxy_TerraformAwsEksNodeGroup) validateOverrideLogicalIdParameters
 	return nil
 }
 
-func validateTerraformAwsEksNodeGroup_IsConstructParameters(x interface{}) error {
+func validateTerraformAwsEksWorkers_IsConstructParameters(x interface{}) error {
 	if x == nil {
 		return fmt.Errorf("parameter x is required, but nil was provided")
 	}
@@ -82,7 +82,7 @@ func validateTerraformAwsEksNodeGroup_IsConstructParameters(x interface{}) error
 	return nil
 }
 
-func validateTerraformAwsEksNodeGroup_IsTerraformElementParameters(x interface{}) error {
+func validateTerraformAwsEksWorkers_IsTerraformElementParameters(x interface{}) error {
 	if x == nil {
 		return fmt.Errorf("parameter x is required, but nil was provided")
 	}
@@ -90,7 +90,7 @@ func validateTerraformAwsEksNodeGroup_IsTerraformElementParameters(x interface{}
 	return nil
 }
 
-func (j *jsiiProxy_TerraformAwsEksNodeGroup) validateSetClusterNameParameters(val *string) error {
+func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetBlockDeviceMappingsParameters(val interface{}) error {
 	if val == nil {
 		return fmt.Errorf("parameter val is required, but nil was provided")
 	}
@@ -98,7 +98,7 @@ func (j *jsiiProxy_TerraformAwsEksNodeGroup) validateSetClusterNameParameters(va
 	return nil
 }
 
-func (j *jsiiProxy_TerraformAwsEksNodeGroup) validateSetContextParameters(val interface{}) error {
+func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetClusterCertificateAuthorityDataParameters(val *string) error {
 	if val == nil {
 		return fmt.Errorf("parameter val is required, but nil was provided")
 	}
@@ -106,7 +106,7 @@ func (j *jsiiProxy_TerraformAwsEksNodeGroup) validateSetContextParameters(val in
 	return nil
 }
 
-func (j *jsiiProxy_TerraformAwsEksNodeGroup) validateSetDescriptorFormatsParameters(val interface{}) error {
+func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetClusterEndpointParameters(val *string) error {
 	if val == nil {
 		return fmt.Errorf("parameter val is required, but nil was provided")
 	}
@@ -114,7 +114,7 @@ func (j *jsiiProxy_TerraformAwsEksNodeGroup) validateSetDescriptorFormatsParamet
 	return nil
 }
 
-func (j *jsiiProxy_TerraformAwsEksNodeGroup) validateSetDesiredSizeParameters(val *float64) error {
+func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetClusterNameParameters(val *string) error {
 	if val == nil {
 		return fmt.Errorf("parameter val is required, but nil was provided")
 	}
@@ -122,7 +122,7 @@ func (j *jsiiProxy_TerraformAwsEksNodeGroup) validateSetDesiredSizeParameters(va
 	return nil
 }
 
-func (j *jsiiProxy_TerraformAwsEksNodeGroup) validateSetKubernetesTaintsParameters(val interface{}) error {
+func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetClusterSecurityGroupIdParameters(val *string) error {
 	if val == nil {
 		return fmt.Errorf("parameter val is required, but nil was provided")
 	}
@@ -130,7 +130,7 @@ func (j *jsiiProxy_TerraformAwsEksNodeGroup) validateSetKubernetesTaintsParamete
 	return nil
 }
 
-func (j *jsiiProxy_TerraformAwsEksNodeGroup) validateSetMaxSizeParameters(val *float64) error {
+func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetContextParameters(val interface{}) error {
 	if val == nil {
 		return fmt.Errorf("parameter val is required, but nil was provided")
 	}
@@ -138,7 +138,7 @@ func (j *jsiiProxy_TerraformAwsEksNodeGroup) validateSetMaxSizeParameters(val *f
 	return nil
 }
 
-func (j *jsiiProxy_TerraformAwsEksNodeGroup) validateSetMinSizeParameters(val *float64) error {
+func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetCreditSpecificationParameters(val interface{}) error {
 	if val == nil {
 		return fmt.Errorf("parameter val is required, but nil was provided")
 	}
@@ -146,7 +146,7 @@ func (j *jsiiProxy_TerraformAwsEksNodeGroup) validateSetMinSizeParameters(val *f
 	return nil
 }
 
-func (j *jsiiProxy_TerraformAwsEksNodeGroup) validateSetModuleDependsOnParameters(val interface{}) error {
+func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetElasticGpuSpecificationsParameters(val interface{}) error {
 	if val == nil {
 		return fmt.Errorf("parameter val is required, but nil was provided")
 	}
@@ -154,7 +154,7 @@ func (j *jsiiProxy_TerraformAwsEksNodeGroup) validateSetModuleDependsOnParameter
 	return nil
 }
 
-func (j *jsiiProxy_TerraformAwsEksNodeGroup) validateSetNodeGroupTerraformTimeoutsParameters(val interface{}) error {
+func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetInstanceMarketOptionsParameters(val interface{}) error {
 	if val == nil {
 		return fmt.Errorf("parameter val is required, but nil was provided")
 	}
@@ -162,7 +162,7 @@ func (j *jsiiProxy_TerraformAwsEksNodeGroup) validateSetNodeGroupTerraformTimeou
 	return nil
 }
 
-func (j *jsiiProxy_TerraformAwsEksNodeGroup) validateSetSubnetIdsParameters(val *[]*string) error {
+func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetInstanceTypeParameters(val *string) error {
 	if val == nil {
 		return fmt.Errorf("parameter val is required, but nil was provided")
 	}
@@ -170,7 +170,55 @@ func (j *jsiiProxy_TerraformAwsEksNodeGroup) validateSetSubnetIdsParameters(val 
 	return nil
 }
 
-func validateNewTerraformAwsEksNodeGroupParameters(scope constructs.Construct, id *string, config *TerraformAwsEksNodeGroupConfig) error {
+func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetMaxSizeParameters(val *float64) error {
+	if val == nil {
+		return fmt.Errorf("parameter val is required, but nil was provided")
+	}
+
+	return nil
+}
+
+func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetMinSizeParameters(val *float64) error {
+	if val == nil {
+		return fmt.Errorf("parameter val is required, but nil was provided")
+	}
+
+	return nil
+}
+
+func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetMixedInstancesPolicyParameters(val interface{}) error {
+	if val == nil {
+		return fmt.Errorf("parameter val is required, but nil was provided")
+	}
+
+	return nil
+}
+
+func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetPlacementParameters(val interface{}) error {
+	if val == nil {
+		return fmt.Errorf("parameter val is required, but nil was provided")
+	}
+
+	return nil
+}
+
+func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetSubnetIdsParameters(val *[]*string) error {
+	if val == nil {
+		return fmt.Errorf("parameter val is required, but nil was provided")
+	}
+
+	return nil
+}
+
+func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetVpcIdParameters(val *string) error {
+	if val == nil {
+		return fmt.Errorf("parameter val is required, but nil was provided")
+	}
+
+	return nil
+}
+
+func validateNewTerraformAwsEksWorkersParameters(scope constructs.Construct, id *string, config *TerraformAwsEksWorkersConfig) error {
 	if scope == nil {
 		return fmt.Errorf("parameter scope is required, but nil was provided")
 	}

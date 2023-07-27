@@ -11,8 +11,8 @@
       "source": "./tf/terraform-aws-eks-cluster"
     },
     {
-      "name": "terraform_aws_eks_node_group",
-      "source": "./tf/terraform-aws-eks-node-group"
+      "name": "terraform_aws_eks_workers",
+      "source": "./tf/terraform-aws-eks-workers"
     },
     {
       "name": "terraform_aws_vpc",
@@ -21,18 +21,6 @@
     {
       "name": "terraform_null_label",
       "source": "./tf/terraform-null-label"
-    },
-    {
-      "name": "chicken",
-      "source": "./tf/chicken"
-    },
-    {
-      "name": "egg",
-      "source": "./tf/egg"
-    },
-    {
-      "name": "fried_chicken",
-      "source": "./tf/fried-chicken"
     }
   ],
   "projectId": "dfe62831-4398-44b7-b24a-01a4b95461a2",
