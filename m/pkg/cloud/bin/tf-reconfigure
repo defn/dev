@@ -1,13 +1,9 @@
 #!/usr/bin/env bash
 
 function main {
-	set -eu
+	set -efu
 
-	cue cmd gen
-	git add ./*.tf.json
-	pc || true
-	git add ./*.tf.json
-	pc || true
+	terraform init -reconfigure
 }
 
 # shellcheck disable=SC1091
