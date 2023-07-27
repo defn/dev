@@ -3,7 +3,7 @@
     "metadata": {
       "backend": "s3",
       "stackName": "spiral",
-      "version": "0.17.2"
+      "version": "0.17.3"
     },
     "outputs": {
     }
@@ -404,7 +404,7 @@
     "required_providers": {
       "aws": {
         "source": "aws",
-        "version": "4.67.0"
+        "version": "5.9.0"
       }
     }
   }
