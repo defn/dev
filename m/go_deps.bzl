@@ -46,8 +46,8 @@ def go_deps():
     go_repository(
         name = "com_github_bufbuild_connect_go",
         importpath = "github.com/bufbuild/connect-go",
-        sum = "h1:srluNkFkZBfSfg9Qb6DrO+5nMaxix//h2ctrHZhMGKc=",
-        version = "v1.8.0",
+        sum = "h1:QAJ3G9A1OYQW2Jbk3DeoJbkCxuKArrvZgDt47mjdTbg=",
+        version = "v1.10.0",
     )
     go_repository(
         name = "com_github_burntsushi_toml",
