@@ -1,3 +1,0 @@
-variable "chicken" {
-  type = string
-}
