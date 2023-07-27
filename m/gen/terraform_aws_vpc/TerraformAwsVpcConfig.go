@@ -18,10 +18,14 @@ type TerraformAwsVpcConfig struct {
 	// Not added to `tags` or `id`.
 	// This is for some rare cases where resources want additional configuration of tags
 	// and therefore take a list of maps with tag key, value, and additional configuration.
+	//
+	// [object Object]
+	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	AdditionalTagMap *map[string]*string `field:"optional" json:"additionalTagMap" yaml:"additionalTagMap"`
 	// When `true`, assign AWS generated IPv6 CIDR block to the VPC.
 	//
 	// Conflicts with `ipv6_ipam_pool_id`.
+	// true.
 	AssignGeneratedIpv6CidrBlock *bool `field:"optional" json:"assignGeneratedIpv6CidrBlock" yaml:"assignGeneratedIpv6CidrBlock"`
 	// ID element.
 	//
@@ -36,6 +40,8 @@ type TerraformAwsVpcConfig struct {
 	// Leave string and numeric variables as `null` to use default value.
 	// Individual variable settings (non-null) override settings in context object,
 	// except for attributes, tags, and additional_tag_map, which are merged.
+	//
+	// [object Object].
 	Context interface{} `field:"optional" json:"context" yaml:"context"`
 	// When `true`, manage the default network acl and remove all rules, disabling all ingress and egress.
 	//
@@ -49,6 +55,8 @@ type TerraformAwsVpcConfig struct {
 	// When `true`, manage the default security group and remove all rules, disabling all ingress and egress.
 	//
 	// When `false`, do not manage the default security group, allowing it to be managed by another component.
+	//
+	// true.
 	DefaultSecurityGroupDenyAll *bool `field:"optional" json:"defaultSecurityGroupDenyAll" yaml:"defaultSecurityGroupDenyAll"`
 	// Delimiter to be used between ID elements.
 	//
@@ -67,10 +75,12 @@ type TerraformAwsVpcConfig struct {
 	// Label values will be normalized before being passed to `format()` so they will be
 	// identical to how they appear in `id`.
 	// Default is `{}` (`descriptors` output will be empty).
+	//
+	// [object Object].
 	DescriptorFormats interface{} `field:"optional" json:"descriptorFormats" yaml:"descriptorFormats"`
-	// Set `true` to enable [DNS hostnames](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-hostnames) in the VPC.
+	// Set `true` to enable [DNS hostnames](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-hostnames) in the VPC true.
 	DnsHostnamesEnabled *bool `field:"optional" json:"dnsHostnamesEnabled" yaml:"dnsHostnamesEnabled"`
-	// Set `true` to enable DNS resolution in the VPC through the Amazon provided DNS server.
+	// Set `true` to enable DNS resolution in the VPC through the Amazon provided DNS server true.
 	DnsSupportEnabled *bool `field:"optional" json:"dnsSupportEnabled" yaml:"dnsSupportEnabled"`
 	// Set to false to prevent the module from creating any resources.
 	Enabled *bool `field:"optional" json:"enabled" yaml:"enabled"`
@@ -84,14 +94,16 @@ type TerraformAwsVpcConfig struct {
 	// Set to `null` for keep the existing setting, which defaults to `0`.
 	// Does not affect `id_full`.
 	IdLengthLimit *float64 `field:"optional" json:"idLengthLimit" yaml:"idLengthLimit"`
-	// A tenancy option for instances launched into the VPC.
+	// A tenancy option for instances launched into the VPC default.
 	InstanceTenancy *string `field:"optional" json:"instanceTenancy" yaml:"instanceTenancy"`
-	// Set `true` to create an Internet Gateway for the VPC.
+	// Set `true` to create an Internet Gateway for the VPC true.
 	InternetGatewayEnabled *bool `field:"optional" json:"internetGatewayEnabled" yaml:"internetGatewayEnabled"`
 	// IPv4 CIDR blocks to assign to the VPC.
 	//
 	// `ipv4_cidr_block` can be set explicitly, or set to `null` with the CIDR block derived from `ipv4_ipam_pool_id` using `ipv4_netmask_length`.
 	// Map keys must be known at `plan` time, and are only used to track changes.
+	//
+	// [object Object].
 	Ipv4AdditionalCidrBlockAssociations interface{} `field:"optional" json:"ipv4AdditionalCidrBlockAssociations" yaml:"ipv4AdditionalCidrBlockAssociations"`
 	// Timeouts (in `go` duration format) for creating and destroying IPv4 CIDR block associations.
 	Ipv4CidrBlockAssociationTimeouts interface{} `field:"optional" json:"ipv4CidrBlockAssociationTimeouts" yaml:"ipv4CidrBlockAssociationTimeouts"`
@@ -109,6 +121,8 @@ type TerraformAwsVpcConfig struct {
 	//
 	// `ipv6_cidr_block` can be set explicitly, or set to `null` with the CIDR block derived from `ipv6_ipam_pool_id` using `ipv6_netmask_length`.
 	// Map keys must be known at `plan` time and are used solely to prevent unnecessary changes.
+	//
+	// [object Object].
 	Ipv6AdditionalCidrBlockAssociations interface{} `field:"optional" json:"ipv6AdditionalCidrBlockAssociations" yaml:"ipv6AdditionalCidrBlockAssociations"`
 	// Timeouts (in `go` duration format) for creating and destroying IPv6 CIDR block associations.
 	Ipv6CidrBlockAssociationTimeouts interface{} `field:"optional" json:"ipv6CidrBlockAssociationTimeouts" yaml:"ipv6CidrBlockAssociationTimeouts"`
@@ -143,6 +157,8 @@ type TerraformAwsVpcConfig struct {
 	// The value of the `name` tag, if included, will be the `id`, not the `name`.
 	// Unlike other `null-label` inputs, the initial setting of `labels_as_tags` cannot be
 	// changed in later chained modules. Attempts to change it will be silently ignored.
+	//
+	// default.
 	LabelsAsTags *[]*string `field:"optional" json:"labelsAsTags" yaml:"labelsAsTags"`
 	// Controls the letter case of ID elements (labels) as included in `id`, set as tag values, and output by this module individually.
 	//
@@ -171,6 +187,9 @@ type TerraformAwsVpcConfig struct {
 	// Usually used to indicate role, e.g. 'prod', 'staging', 'source', 'build', 'test', 'deploy', 'release'
 	Stage *string `field:"optional" json:"stage" yaml:"stage"`
 	// Additional tags (e.g. `{'BusinessUnit': 'XYZ'}`). Neither the tag keys nor the tag values will be modified by this module.
+	//
+	// [object Object]
+	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	Tags *map[string]*string `field:"optional" json:"tags" yaml:"tags"`
 	// ID element _(Rarely used, not included by default)_.
 	//

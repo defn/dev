@@ -18,6 +18,9 @@ type TerraformNullLabelConfig struct {
 	// Not added to `tags` or `id`.
 	// This is for some rare cases where resources want additional configuration of tags
 	// and therefore take a list of maps with tag key, value, and additional configuration.
+	//
+	// [object Object]
+	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	AdditionalTagMap *map[string]*string `field:"optional" json:"additionalTagMap" yaml:"additionalTagMap"`
 	// ID element.
 	//
@@ -32,6 +35,8 @@ type TerraformNullLabelConfig struct {
 	// Leave string and numeric variables as `null` to use default value.
 	// Individual variable settings (non-null) override settings in context object,
 	// except for attributes, tags, and additional_tag_map, which are merged.
+	//
+	// [object Object].
 	Context interface{} `field:"optional" json:"context" yaml:"context"`
 	// Delimiter to be used between ID elements.
 	//
@@ -50,6 +55,8 @@ type TerraformNullLabelConfig struct {
 	// Label values will be normalized before being passed to `format()` so they will be
 	// identical to how they appear in `id`.
 	// Default is `{}` (`descriptors` output will be empty).
+	//
+	// [object Object].
 	DescriptorFormats interface{} `field:"optional" json:"descriptorFormats" yaml:"descriptorFormats"`
 	// Set to false to prevent the module from creating any resources.
 	Enabled *bool `field:"optional" json:"enabled" yaml:"enabled"`
@@ -83,6 +90,8 @@ type TerraformNullLabelConfig struct {
 	// The value of the `name` tag, if included, will be the `id`, not the `name`.
 	// Unlike other `null-label` inputs, the initial setting of `labels_as_tags` cannot be
 	// changed in later chained modules. Attempts to change it will be silently ignored.
+	//
+	// default.
 	LabelsAsTags *[]*string `field:"optional" json:"labelsAsTags" yaml:"labelsAsTags"`
 	// Controls the letter case of ID elements (labels) as included in `id`, set as tag values, and output by this module individually.
 	//
@@ -111,6 +120,9 @@ type TerraformNullLabelConfig struct {
 	// Usually used to indicate role, e.g. 'prod', 'staging', 'source', 'build', 'test', 'deploy', 'release'
 	Stage *string `field:"optional" json:"stage" yaml:"stage"`
 	// Additional tags (e.g. `{'BusinessUnit': 'XYZ'}`). Neither the tag keys nor the tag values will be modified by this module.
+	//
+	// [object Object]
+	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	Tags *map[string]*string `field:"optional" json:"tags" yaml:"tags"`
 	// ID element _(Rarely used, not included by default)_.
 	//

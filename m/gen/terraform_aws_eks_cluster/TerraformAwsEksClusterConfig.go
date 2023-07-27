@@ -22,6 +22,9 @@ type TerraformAwsEksClusterConfig struct {
 	// Not added to `tags` or `id`.
 	// This is for some rare cases where resources want additional configuration of tags
 	// and therefore take a list of maps with tag key, value, and additional configuration.
+	//
+	// [object Object]
+	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	AdditionalTagMap *map[string]*string `field:"optional" json:"additionalTagMap" yaml:"additionalTagMap"`
 	// Manages [`aws_eks_addon`](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_addon) resources.
 	Addons interface{} `field:"optional" json:"addons" yaml:"addons"`
@@ -41,7 +44,7 @@ type TerraformAwsEksClusterConfig struct {
 	// Historical description: List of Security Group IDs to be allowed to connect to the EKS cluster.
 	// Historical default: `[]`.
 	AllowedSecurityGroups *[]*string `field:"optional" json:"allowedSecurityGroups" yaml:"allowedSecurityGroups"`
-	// Whether to apply the ConfigMap to allow worker nodes to join the EKS cluster and allow additional users, accounts and roles to acces the cluster.
+	// Whether to apply the ConfigMap to allow worker nodes to join the EKS cluster and allow additional users, accounts and roles to acces the cluster true.
 	ApplyConfigMapAwsAuth *bool `field:"optional" json:"applyConfigMapAwsAuth" yaml:"applyConfigMapAwsAuth"`
 	// A list of IDs of Security Groups to associate the cluster with.
 	//
@@ -54,27 +57,27 @@ type TerraformAwsEksClusterConfig struct {
 	// end of the list. The elements of the list are joined by the `delimiter`
 	// and treated as a single ID element.
 	Attributes *[]*string `field:"optional" json:"attributes" yaml:"attributes"`
-	// If true, remove double quotes from the generated aws-auth ConfigMap YAML to reduce spurious diffs in plans.
+	// If true, remove double quotes from the generated aws-auth ConfigMap YAML to reduce spurious diffs in plans true.
 	AwsAuthYamlStripQuotes *bool `field:"optional" json:"awsAuthYamlStripQuotes" yaml:"awsAuthYamlStripQuotes"`
 	// If provided, the KMS Key ID to use to encrypt AWS CloudWatch logs.
 	CloudwatchLogGroupKmsKeyId *string `field:"optional" json:"cloudwatchLogGroupKmsKeyId" yaml:"cloudwatchLogGroupKmsKeyId"`
-	// Override label module default cluster attributes.
+	// Override label module default cluster attributes cluster.
 	ClusterAttributes *[]*string `field:"optional" json:"clusterAttributes" yaml:"clusterAttributes"`
 	// If provided, the EKS will depend on this object, and therefore not be created until this object is finalized.
 	//
 	// This is useful if you want to ensure that the cluster is not created before some other condition is met, e.g. VPNs into the subnet are created.
 	ClusterDependsOn interface{} `field:"optional" json:"clusterDependsOn" yaml:"clusterDependsOn"`
-	// Set to `true` to enable Cluster Encryption Configuration.
+	// Set to `true` to enable Cluster Encryption Configuration true.
 	ClusterEncryptionConfigEnabled *bool `field:"optional" json:"clusterEncryptionConfigEnabled" yaml:"clusterEncryptionConfigEnabled"`
-	// Cluster Encryption Config KMS Key Resource argument - key deletion windows in days post destruction.
+	// Cluster Encryption Config KMS Key Resource argument - key deletion windows in days post destruction 10.
 	ClusterEncryptionConfigKmsKeyDeletionWindowInDays *float64 `field:"optional" json:"clusterEncryptionConfigKmsKeyDeletionWindowInDays" yaml:"clusterEncryptionConfigKmsKeyDeletionWindowInDays"`
-	// Cluster Encryption Config KMS Key Resource argument - enable kms key rotation.
+	// Cluster Encryption Config KMS Key Resource argument - enable kms key rotation true.
 	ClusterEncryptionConfigKmsKeyEnableKeyRotation *bool `field:"optional" json:"clusterEncryptionConfigKmsKeyEnableKeyRotation" yaml:"clusterEncryptionConfigKmsKeyEnableKeyRotation"`
 	// KMS Key ID to use for cluster encryption config.
 	ClusterEncryptionConfigKmsKeyId *string `field:"optional" json:"clusterEncryptionConfigKmsKeyId" yaml:"clusterEncryptionConfigKmsKeyId"`
 	// Cluster Encryption Config KMS Key Resource argument - key policy.
 	ClusterEncryptionConfigKmsKeyPolicy *string `field:"optional" json:"clusterEncryptionConfigKmsKeyPolicy" yaml:"clusterEncryptionConfigKmsKeyPolicy"`
-	// Cluster Encryption Config Resources to encrypt, e.g. ['secrets'].
+	// Cluster Encryption Config Resources to encrypt, e.g. ['secrets'] secrets.
 	ClusterEncryptionConfigResources *[]interface{} `field:"optional" json:"clusterEncryptionConfigResources" yaml:"clusterEncryptionConfigResources"`
 	// Number of days to retain cluster logs.
 	//
@@ -86,8 +89,10 @@ type TerraformAwsEksClusterConfig struct {
 	// Leave string and numeric variables as `null` to use default value.
 	// Individual variable settings (non-null) override settings in context object,
 	// except for attributes, tags, and additional_tag_map, which are merged.
+	//
+	// [object Object].
 	Context interface{} `field:"optional" json:"context" yaml:"context"`
-	// Set `false` to use existing `eks_cluster_service_role_arn` instead of creating one.
+	// Set `false` to use existing `eks_cluster_service_role_arn` instead of creating one true.
 	CreateEksServiceRole *bool `field:"optional" json:"createEksServiceRole" yaml:"createEksServiceRole"`
 	// Set to `true` to create and configure an additional Security Group for the cluster.
 	//
@@ -116,6 +121,8 @@ type TerraformAwsEksClusterConfig struct {
 	// Label values will be normalized before being passed to `format()` so they will be
 	// identical to how they appear in `id`.
 	// Default is `{}` (`descriptors` output will be empty).
+	//
+	// [object Object].
 	DescriptorFormats interface{} `field:"optional" json:"descriptorFormats" yaml:"descriptorFormats"`
 	// URL of a dummy API server for the Kubernetes server to use when the real one is unknown.
 	//
@@ -123,6 +130,8 @@ type TerraformAwsEksClusterConfig struct {
 	// You can disable it by setting it to `null`; however, as of Kubernetes provider v2.3.2, doing so _will_
 	// cause Terraform to fail in several situations unless you provide a valid `kubeconfig` file
 	// via `kubeconfig_path` and set `kubeconfig_path_enabled` to `true`.
+	//
+	// https://jsonplaceholder.typicode.com
 	DummyKubeapiServer *string `field:"optional" json:"dummyKubeapiServer" yaml:"dummyKubeapiServer"`
 	// The ARN of an IAM role for the EKS cluster to use that provides permissions for the Kubernetes control plane to perform needed AWS API operations.
 	//
@@ -140,7 +149,8 @@ type TerraformAwsEksClusterConfig struct {
 	EndpointPrivateAccess *bool `field:"optional" json:"endpointPrivateAccess" yaml:"endpointPrivateAccess"`
 	// Indicates whether or not the Amazon EKS public API server endpoint is enabled.
 	//
-	// Default to AWS EKS resource and it is true.
+	// Default to AWS EKS resource and it is true
+	// true.
 	EndpointPublicAccess *bool `field:"optional" json:"endpointPublicAccess" yaml:"endpointPublicAccess"`
 	// ID element.
 	//
@@ -158,9 +168,9 @@ type TerraformAwsEksClusterConfig struct {
 	KubeconfigPath *string `field:"optional" json:"kubeconfigPath" yaml:"kubeconfigPath"`
 	// If `true`, configure the Kubernetes provider with `kubeconfig_path` and use it for authenticating to the EKS cluster.
 	KubeconfigPathEnabled *bool `field:"optional" json:"kubeconfigPathEnabled" yaml:"kubeconfigPathEnabled"`
-	// If `true`, use an `aws_eks_cluster_auth` data source to authenticate to the EKS cluster.
+	// If `true`, use an `aws_eks_cluster_auth` data source to authenticate to the EKS cluster. Disabled by `kubeconfig_path_enabled` or `kube_exec_auth_enabled`.
 	//
-	// Disabled by `kubeconfig_path_enabled` or `kube_exec_auth_enabled`.
+	// true.
 	KubeDataAuthEnabled *bool `field:"optional" json:"kubeDataAuthEnabled" yaml:"kubeDataAuthEnabled"`
 	// The AWS config profile for `aws eks get-token` to use.
 	KubeExecAuthAwsProfile *string `field:"optional" json:"kubeExecAuthAwsProfile" yaml:"kubeExecAuthAwsProfile"`
@@ -174,13 +184,14 @@ type TerraformAwsEksClusterConfig struct {
 	KubeExecAuthRoleArn *string `field:"optional" json:"kubeExecAuthRoleArn" yaml:"kubeExecAuthRoleArn"`
 	// If `true`, pass `kube_exec_auth_role_arn` as the role ARN to `aws eks get-token`.
 	KubeExecAuthRoleArnEnabled *bool `field:"optional" json:"kubeExecAuthRoleArnEnabled" yaml:"kubeExecAuthRoleArnEnabled"`
-	// Set to `true` to ignore IAM role changes in the Kubernetes Auth ConfigMap.
+	// Set to `true` to ignore IAM role changes in the Kubernetes Auth ConfigMap true.
 	KubernetesConfigMapIgnoreRoleChanges *bool `field:"optional" json:"kubernetesConfigMapIgnoreRoleChanges" yaml:"kubernetesConfigMapIgnoreRoleChanges"`
 	// Set true to use IPv6 addresses for Kubernetes pods and services.
 	KubernetesNetworkIpv6Enabled *bool `field:"optional" json:"kubernetesNetworkIpv6Enabled" yaml:"kubernetesNetworkIpv6Enabled"`
 	// Desired Kubernetes master version.
 	//
-	// If you do not specify a value, the latest available version is used.
+	// If you do not specify a value, the latest available version is used
+	// 1.21
 	KubernetesVersion *string `field:"optional" json:"kubernetesVersion" yaml:"kubernetesVersion"`
 	// Controls the letter case of the `tags` keys (label names) for tags generated by this module.
 	//
@@ -202,6 +213,8 @@ type TerraformAwsEksClusterConfig struct {
 	// The value of the `name` tag, if included, will be the `id`, not the `name`.
 	// Unlike other `null-label` inputs, the initial setting of `labels_as_tags` cannot be
 	// changed in later chained modules. Attempts to change it will be silently ignored.
+	//
+	// default.
 	LabelsAsTags *[]*string `field:"optional" json:"labelsAsTags" yaml:"labelsAsTags"`
 	// Controls the letter case of ID elements (labels) as included in `id`, set as tag values, and output by this module individually.
 	//
@@ -210,9 +223,9 @@ type TerraformAwsEksClusterConfig struct {
 	// Set this to `title` and set `delimiter` to `""` to yield Pascal Case IDs.
 	// Default value: `lower`.
 	LabelValueCase *string `field:"optional" json:"labelValueCase" yaml:"labelValueCase"`
-	// shell to use for local_exec.
+	// shell to use for local_exec /bin/sh,-c.
 	LocalExecInterpreter *[]*string `field:"optional" json:"localExecInterpreter" yaml:"localExecInterpreter"`
-	// Flag to enable/disable the ingress and egress rules for the EKS managed Security Group.
+	// Flag to enable/disable the ingress and egress rules for the EKS managed Security Group true.
 	ManagedSecurityGroupRulesEnabled *bool `field:"optional" json:"managedSecurityGroupRulesEnabled" yaml:"managedSecurityGroupRulesEnabled"`
 	// Additional AWS account numbers to add to `config-map-aws-auth` ConfigMap.
 	MapAdditionalAwsAccounts *[]*string `field:"optional" json:"mapAdditionalAwsAccounts" yaml:"mapAdditionalAwsAccounts"`
@@ -240,6 +253,7 @@ type TerraformAwsEksClusterConfig struct {
 	// Indicates which CIDR blocks can access the Amazon EKS public API server endpoint when enabled.
 	//
 	// EKS defaults this to a list with 0.0.0.0/0.
+	// 0.0.0.0/0
 	PublicAccessCidrs *[]*string `field:"optional" json:"publicAccessCidrs" yaml:"publicAccessCidrs"`
 	// Terraform regular expression (regex) string.
 	//
@@ -257,6 +271,9 @@ type TerraformAwsEksClusterConfig struct {
 	// Usually used to indicate role, e.g. 'prod', 'staging', 'source', 'build', 'test', 'deploy', 'release'
 	Stage *string `field:"optional" json:"stage" yaml:"stage"`
 	// Additional tags (e.g. `{'BusinessUnit': 'XYZ'}`). Neither the tag keys nor the tag values will be modified by this module.
+	//
+	// [object Object]
+	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	Tags *map[string]*string `field:"optional" json:"tags" yaml:"tags"`
 	// ID element _(Rarely used, not included by default)_.
 	//
@@ -264,7 +281,8 @@ type TerraformAwsEksClusterConfig struct {
 	Tenant *string `field:"optional" json:"tenant" yaml:"tenant"`
 	// `local-exec` command to execute to determine if the EKS cluster is healthy.
 	//
-	// Cluster endpoint URL is available as environment variable `ENDPOINT`.
+	// Cluster endpoint URL is available as environment variable `ENDPOINT`
+	// if test -n "$ENDPOINT"; then curl --silent --fail --retry 30 --retry-delay 10 --retry-connrefused --max-time 11 --insecure --output /dev/null $ENDPOINT/healthz; fi.
 	WaitForClusterCommand *string `field:"optional" json:"waitForClusterCommand" yaml:"waitForClusterCommand"`
 	// List of Role ARNs of the worker nodes.
 	WorkersRoleArns *[]*string `field:"optional" json:"workersRoleArns" yaml:"workersRoleArns"`
