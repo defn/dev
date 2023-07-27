@@ -64,15 +64,16 @@ def go_deps():
     go_repository(
         name = "com_github_bytedance_sonic",
         importpath = "github.com/bytedance/sonic",
-        sum = "h1:oDfRZ+4m6AYCOC0GFeOCeYqvBmucy1isvouS2K0cPzo=",
-        version = "v1.10.0-rc2",
+        sum = "h1:uNSnscRapXTwUgTyOF0GVljYD08p9X/Lbr9MweSV3V0=",
+        version = "v1.10.0-rc3",
     )
     go_repository(
-        name = "com_github_cdktf_cdktf_provider_aws_go_aws_v15",
-        importpath = "github.com/cdktf/cdktf-provider-aws-go/aws/v15",
-        sum = "h1:eYpC8gR7csMPH4HIljUJviOxmS40Av4smDgRHDhpChY=",
-        version = "v15.0.0",
+        name = "com_github_cdktf_cdktf_provider_aws_go_aws_v16",
+        importpath = "github.com/cdktf/cdktf-provider-aws-go/aws/v16",
+        sum = "h1:bR2lrp+6vi6vxeq55s8XJOO7Y2hm/vyglBPyqxDkJ4I=",
+        version = "v16.0.4",
     )
+
     go_repository(
         name = "com_github_census_instrumentation_opencensus_proto",
         importpath = "github.com/census-instrumentation/opencensus-proto",
@@ -443,8 +444,8 @@ def go_deps():
     go_repository(
         name = "com_github_hashicorp_terraform_cdk_go_cdktf",
         importpath = "github.com/hashicorp/terraform-cdk-go/cdktf",
-        sum = "h1:x/v4UeSKUiTE0uRweXW+QauOV5mWkbkEtrW2+OTMGI4=",
-        version = "v0.17.2",
+        sum = "h1:VtehUlxej6l1TV9NRjO5jHlikMfV39Qj6bTsR4ps5do=",
+        version = "v0.17.3",
     )
     go_repository(
         name = "com_github_ianlancetaylor_demangle",
@@ -570,8 +571,8 @@ def go_deps():
     go_repository(
         name = "com_github_mattn_go_runewidth",
         importpath = "github.com/mattn/go-runewidth",
-        sum = "h1:+xnbZSEeDbOIg5/mE6JF0w6n9duR1l3/WmbinWVwUuU=",
-        version = "v0.0.14",
+        sum = "h1:UNAjwbU9l54TA3KzvqLGxwWjHmMgBUVhBiTjelZgg3U=",
+        version = "v0.0.15",
     )
     go_repository(
         name = "com_github_mitchellh_go_homedir",
@@ -774,8 +775,8 @@ def go_deps():
     go_repository(
         name = "com_github_yuin_goldmark",
         importpath = "github.com/yuin/goldmark",
-        sum = "h1:2uY/xC0roWy8IBEGLgB1ywIoEJFGmRrX21YQcvGZzjU=",
-        version = "v1.5.4",
+        sum = "h1:IJznPe8wOzfIKETmMkd06F8nXkmlhaHqFRM9l1hAGsU=",
+        version = "v1.5.5",
     )
     go_repository(
         name = "com_google_cloud_go",

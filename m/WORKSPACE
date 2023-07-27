@@ -107,7 +107,7 @@ go_register_toolchains(version = "1.20.5")
 
 rules_proto_toolchains()
 
-rules_buf_toolchains(version = "v1.21.0")
+rules_buf_toolchains(version = "v1.25.0")
 
 go_rules_dependencies()
 
