@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-build: # Generate CRDs using cue-gen
+build:
 	buf generate
 
 make_%:

@@ -43,12 +43,7 @@ def go_deps():
         sum = "h1:HwpRHbFMcZLEVr42D4p7XBqjyuxQH5SMiErDT4WkJ2k=",
         version = "v2.0.1",
     )
-    go_repository(
-        name = "com_github_bufbuild_connect_go",
-        importpath = "github.com/bufbuild/connect-go",
-        sum = "h1:QAJ3G9A1OYQW2Jbk3DeoJbkCxuKArrvZgDt47mjdTbg=",
-        version = "v1.10.0",
-    )
+
     go_repository(
         name = "com_github_burntsushi_toml",
         importpath = "github.com/BurntSushi/toml",
