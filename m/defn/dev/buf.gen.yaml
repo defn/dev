@@ -7,6 +7,3 @@ plugins:
   - plugin: buf.build/protocolbuffers/go:v1.31.0
     out: .
     opt: paths=source_relative
-  - plugin: buf.build/bufbuild/connect-go:v1.9.0
-    out: .
-    opt: paths=source_relative
