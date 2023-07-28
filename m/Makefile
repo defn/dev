@@ -1,6 +1,5 @@
 build:
-#	../bin/b pass build //cmd/cli:cli
-	cd cmd/cli && go build && mv -f cli ../../bazel-bin/cmd/cli/cli_/cli
+	../bin/b pass build //cmd/cli:cli
 
 all:
 	b pass build //...
