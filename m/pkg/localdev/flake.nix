@@ -14,6 +14,7 @@
     honeymarker.url = github:defn/dev/pkg-honeymarker-0.2.10-10?dir=m/pkg/honeymarker;
     honeytail.url = github:defn/dev/pkg-honeytail-1.8.3-8?dir=m/pkg/honeytail;
     hugo.url = github:defn/dev/pkg-hugo-0.0.5?dir=m/pkg/hugo;
+    temporal.url = github:defn/dev/pkg-temporal-0.10.4-1?dir=m/pkg/temporal;
   };
 
   outputs = inputs: inputs.tilt.inputs.pkg.main rec {
@@ -37,6 +38,7 @@
             inputs.honeymarker.defaultPackage.${ctx.system}
             inputs.honeytail.defaultPackage.${ctx.system}
             inputs.hugo.defaultPackage.${ctx.system}
+            inputs.temporal.defaultPackage.${ctx.system}
             skopeo
           ];
         in
