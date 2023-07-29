@@ -13,8 +13,6 @@
     honeyvent.url = github:defn/dev/pkg-honeyvent-1.1.3-10?dir=m/pkg/honeyvent;
     honeymarker.url = github:defn/dev/pkg-honeymarker-0.2.10-10?dir=m/pkg/honeymarker;
     honeytail.url = github:defn/dev/pkg-honeytail-1.8.3-8?dir=m/pkg/honeytail;
-    kuma.url = github:defn/dev/pkg-kuma-2.3.1-1?dir=m/pkg/kuma;
-    zola.url = github:defn/dev/pkg-zola-0.0.3?dir=m/pkg/zola;
     hugo.url = github:defn/dev/pkg-hugo-0.0.5?dir=m/pkg/hugo;
   };
 
@@ -38,8 +36,6 @@
             inputs.honeyvent.defaultPackage.${ctx.system}
             inputs.honeymarker.defaultPackage.${ctx.system}
             inputs.honeytail.defaultPackage.${ctx.system}
-            inputs.kuma.defaultPackage.${ctx.system}
-            inputs.zola.defaultPackage.${ctx.system}
             inputs.hugo.defaultPackage.${ctx.system}
             skopeo
           ];
