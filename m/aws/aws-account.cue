@@ -8,7 +8,7 @@ org: [ORG=string]: account: [ACCOUNT=string]: {
 
 org: {
 	defn: account: {
-		defn: {
+		org: {
 			id:       "510430971399"
 			sso_role: "AdministratorAccess"
 		}
