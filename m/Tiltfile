@@ -7,3 +7,10 @@ local_resource("hugo",
             exec npm run dev
             """ ]
     )
+
+local_resource("temporal",
+        serve_cmd=[ "bash", "-c", """
+            cd ~/m
+            exec temporal server start-dev
+            """ ]
+    )
