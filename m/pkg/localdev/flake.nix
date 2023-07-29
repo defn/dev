@@ -42,19 +42,7 @@
             skopeo
           ];
         in
-        flakeInputs ++ ctx.commands;
-    };
-
-    scripts = { system }: {
-      tilt = ''
-        port="$(
-          (
-          ss -tln --tcp --no-header | awk '{print $4}' | cut -d: -f2 | sort
-          seq 10300 10399
-          ) | sort | uniq -c | perl -ne 'print if m{\b103\d\d\b}' | grep ' 1 ' | awk '{print $2}' | head -1
-        )"
-        exec tilt up --port "$port" "$@"
-      '';
+        flakeInputs;
     };
   };
 }
