@@ -8,10 +8,13 @@ function main {
 	local url="$1"
 	shift
 
-	local slug="$(basename "$(pwd)")"
-	local ghrepo="$(echo "${url}" | cut -d/ -f4-5)"
+	local slug
+	slug="$(basename "$(pwd || true)")"
 
-	jq -n --arg ghrepo "${ghrepo}" --arg slug "${slug}" '{slug: "\($slug)", ghrepo: "\($ghrepo)"}' | tee flake.json
+	local ghrepo
+	ghrepo="$(echo "${url}" | cut -d/ -f4-5)"
+
+	(jq -n --arg ghrepo "${ghrepo}" --arg slug "${slug}" '{slug: "pkg-\($slug)", ghrepo: "\($ghrepo)", vendor: "0.0.0", revision: "1"}' || true) | tee flake.json
 
 	n bump "${version}"
 
