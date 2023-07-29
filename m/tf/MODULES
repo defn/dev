@@ -3,3 +3,4 @@ terraform-aws-eks-cluster:2.9.0
 terraform-aws-eks-workers:0.18.4
 terraform-aws-vpc:2.1.0
 terraform-null-label:0.25.0
+terraform-aws-ec2-autoscale-group:0.35.1
