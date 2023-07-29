@@ -11,7 +11,7 @@ resource "docker_container" "workspace" {
 
   name = "coder-${data.coder_workspace.me.owner}-${lower(data.coder_workspace.me.name)}"
 
-  hostname = data.coder_workspace.me.name
+  hostname = "coder-${data.coder_workspace.me.owner}-${lower(data.coder_workspace.me.name)}"
 
   entrypoint = ["sh", "-c", replace(coder_agent.main.init_script, "/localhost|127\\.0\\.0\\.1/", "host.docker.internal")]
   env        = ["CODER_AGENT_TOKEN=${coder_agent.main.token}"]
