@@ -32,7 +32,7 @@ resource "coder_agent" "main" {
     else
       git pull
     fi
-    
+
     make nix
     make symlinks
     make perms
@@ -99,6 +99,22 @@ resource "coder_app" "hugo" {
 
   healthcheck {
     url       = "http://localhost:1313"
+    interval  = 5
+    threshold = 6
+  }
+}
+
+resource "coder_app" "temporal" {
+  agent_id     = coder_agent.main.id
+  slug         = "temporal"
+  display_name = "temporal"
+  url          = "http://localhost:8233"
+  icon         = "/icon/code.svg"
+  subdomain    = true
+  share        = "owner"
+
+  healthcheck {
+    url       = "http://localhost:8233"
     interval  = 5
     threshold = 6
   }

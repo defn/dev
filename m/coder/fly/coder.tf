@@ -2,6 +2,8 @@ data "coder_workspace" "me" {}
 
 locals {
   username = "ubuntu"
+
+  coder_name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
 }
 
 resource "coder_agent" "main" {
@@ -10,6 +12,14 @@ resource "coder_agent" "main" {
   startup_script_timeout = 180
   startup_script         = <<-EOT
     set -e
+
+    sudo install -d -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
+
+    sudo apt-get update
+    sudo apt-get install -y build-essential fzf jq
+
+    sudo curl -sSL -o /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64
+    sudo chmod 755 /usr/local/bin/bazel
 
     cd
 
@@ -97,6 +107,22 @@ resource "coder_app" "hugo" {
 
   healthcheck {
     url       = "http://localhost:1313"
+    interval  = 5
+    threshold = 6
+  }
+}
+
+resource "coder_app" "temporal" {
+  agent_id     = coder_agent.main.id
+  slug         = "temporal"
+  display_name = "temporal"
+  url          = "http://localhost:8233"
+  icon         = "/icon/code.svg"
+  subdomain    = true
+  share        = "owner"
+
+  healthcheck {
+    url       = "http://localhost:8233"
     interval  = 5
     threshold = 6
   }
