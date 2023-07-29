@@ -27,7 +27,7 @@ resource "digitalocean_droplet" "workspace" {
 
   user_data = templatefile("cloud-config.yaml.tftpl", {
     nix_volume_label  = digitalocean_volume.nix_volume.initial_filesystem_label
-    init_script       = base64encode(coder_agent.main.init_script)
+    init_script       = base64encode(replace(replace(coder_agent.main.init_script, "/^BINARY_NAME=coder/", "BINARY_NAME=/home/ubuntu/bin/nix/coder"), "/^while :; do/", "test -x $BINARY_NAME || BINARY_NAME=coder && while :; do"))
     coder_agent_token = coder_agent.main.token
   })
 }
