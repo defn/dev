@@ -83,7 +83,7 @@ function main {
 			;;
 		esac
 		shift
-		"$0" pass run //aws:aws__cli "${account}" -- aws-vault exec --ecs-server "${account}" -- "$@"
+		"$0" pass run //aws:aws__cli "${account}" -- aws-vault exec --lazy --ecs-server "${account}" -- "$@"
 		;;
 	exec)
 		shift
@@ -112,7 +112,7 @@ function main {
 		shift
 
 		if [[ $# == 0 ]]; then
-			"$0"pass run //aws:aws__list_accounts
+			"$0" pass run //aws:aws__list_accounts
 			return $?
 		fi
 
