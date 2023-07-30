@@ -219,12 +219,12 @@
   "terraform": {
     "backend": {
       "s3": {
-        "bucket": "defn-bootstrap-remote-state",
-        "dynamodb_table": "defn-bootstrap-remote-state",
+        "bucket": "dfn-defn-terraform-state",
+        "dynamodb_table": "dfn-defn-terraform-state-lock",
         "encrypt": true,
-        "key": "curl/terraform.tfstate",
+        "key": "stacks/curl/terraform.tfstate",
         "profile": "defn-org-sso",
-        "region": "us-east-2"
+        "region": "us-east-1"
       }
     },
     "required_providers": {

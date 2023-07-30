@@ -95,7 +95,7 @@ var infraCmd = &cobra.Command{
 				Bucket:        js("dfn-defn-terraform-state"),
 				Key:           js("stacks/" + org.Name + "/terraform.tfstate"),
 				Encrypt:       jstrue(),
-				Region:        js("us-east-2"),
+				Region:        js("us-east-1"),
 				Profile:       js("defn-org-sso"),
 				DynamodbTable: js("dfn-defn-terraform-state-lock"),
 			})
