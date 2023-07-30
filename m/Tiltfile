@@ -2,8 +2,8 @@ analytics_settings(False)
 
 local_resource("code-server",
         serve_cmd=[ "bash", "-c", """
-            cd
-            exec ~/bin/nix/code-server --auth none --port 13337
+            cd ~/m
+            exec code-server --auth none --port 13337
             """ ]
     )
 
@@ -19,5 +19,12 @@ local_resource("temporal",
         serve_cmd=[ "bash", "-c", """
             cd ~/m
             exec temporal server start-dev
+            """ ]
+    )
+
+local_resource("nomad",
+        serve_cmd=[ "bash", "-c", """
+            cd ~/m
+            exec nomad agent -dev -bind 0.0.0.0 -network-interface='{{ GetDefaultInterfaces | attr "name" }}'
             """ ]
     )
