@@ -93,14 +93,8 @@ fi
 # direnv
 export DIRENV_LOG_FORMAT=
 
-if type -P direnv >/dev/null; then
-	eval "$(direnv hook bash)"
-	_direnv_hook
-else
-	function _direnv_hook {
-		true
-	}
-fi
+#	eval "$(direnv hook bash)"
+#	_direnv_hook
 
 # precommit
 export PRE_COMMIT_ALLOW_NO_CONFIG=1
@@ -192,5 +186,3 @@ function gs {
 
 # vscode browser
 export BROWSER="$(type -P browser || true)"
-
-unset DIRENV_DIFF DIRENV_WATCHES
