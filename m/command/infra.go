@@ -96,7 +96,7 @@ var infraCmd = &cobra.Command{
 				Key:           js(org.Name + "/terraform.tfstate"),
 				Encrypt:       jstrue(),
 				Region:        js("us-east-2"),
-				Profile:       js("defn-defn-sso"),
+				Profile:       js("defn-org-sso"),
 				DynamodbTable: js("defn-bootstrap-remote-state"),
 			})
 		}
