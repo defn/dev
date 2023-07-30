@@ -39,15 +39,15 @@ resource "coder_agent" "main" {
     if [[ ! -x "bin/bazel" ]]; then
       case "$(uname -m)" in
         aarch64)
-          sudo curl -sSL -o bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-arm64
+          curl -sSL -o bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-arm64
           ;;
         *)
-          sudo curl -sSL -o /bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64
+          curl -sSL -o bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64
           ;;
       esac
 
-      sudo chmod 755 bin/bazelisk
-      sudo ln -nfs bazelisk bin/bazel
+      chmod 755 bin/bazelisk
+      ln -nfs bazelisk bin/bazel
     fi
 
     make install
