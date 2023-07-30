@@ -34,7 +34,7 @@ function main {
 		a=$(date +%s)
 		rsync -ia ~/.gnupg/pubring.kbx ~/.gnupg/trustdb.gpg "${remote}:.gnupg/"
 		ssh "${remote}" ln -nfs "/tmp/S.gpg-agent.${a}" /home/ubuntu/.gnupg/S.gpg-agent
-		ssh -v "${remote}" -o ServerAliveInterval=30 -o RemoteForward="/tmp/S.gpg-agent.${a} ${HOME}/.gnupg/S.gpg-agent.extra" "$@"
+		ssh -v "${remote}" -N -o ServerAliveInterval=30 -o RemoteForward="/tmp/S.gpg-agent.${a} ${HOME}/.gnupg/S.gpg-agent.extra" "$@"
 		;;
 	logout)
 		open https://signin.aws.amazon.com/oauth?Action=logout &
