@@ -16,9 +16,8 @@ resource "coder_agent" "main" {
     sudo apt-get update
     sudo apt-get install -y build-essential fzf jq
 
-    ssh -o StrictHostKeyChecking=no git@github.com true || true
-
     if [[ ! -d "/nix/home/.git/." ]]; then
+      ssh -o StrictHostKeyChecking=no git@github.com true || true
       git clone http://github.com/defn/dev /nix/home
       pushd /nix/home
       git reset --hard
@@ -31,6 +30,7 @@ resource "coder_agent" "main" {
 
     sudo rm -rf "$HOME"
     sudo ln -nfs /nix/home "$HOME"
+    ssh -o StrictHostKeyChecking=no git@github.com true || true
 
     sudo install -d -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
 
