@@ -14,7 +14,7 @@ resource "coder_agent" "main" {
     set -e
 
     sudo apt-get update
-    sudo apt-get install -y build-essential fzf jq
+    sudo apt-get install -y build-essential fzf jq gettext
 
     if [[ ! -d "/nix/home/.git/." ]]; then
       ssh -o StrictHostKeyChecking=no git@github.com true || true
