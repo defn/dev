@@ -1,4 +1,4 @@
-module "s3_bucket" {
+module "s3-immanent-roke" {
   source  = "../terraform-aws-s3-bucket"
   context = module.this.context
 
