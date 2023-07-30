@@ -68,7 +68,7 @@ function main {
 		case "${1-}" in
 		"" | /*)
 			account="${1-}"
-			account="$("$0"pass run //aws:aws__list_accounts | fzf --query="${account#/}" --select-1)"
+			account="$("$0" pass run //aws:aws__list_accounts | fzf --query="${account#/}" --select-1)"
 			;;
 		*)
 			account="$1"
@@ -91,7 +91,7 @@ function main {
 		case "${1-}" in
 		"" | /*)
 			account="${1-}"
-			account="$("$0"pass run //aws:aws__list_accounts | fzf --query="${account#/}" --select-1)"
+			account="$("$0" pass run //aws:aws__list_accounts | fzf --query="${account#/}" --select-1)"
 			;;
 		*)
 			account="$1"
