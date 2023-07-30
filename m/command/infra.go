@@ -92,12 +92,12 @@ var infraCmd = &cobra.Command{
 			aws_org_stack := AwsOrganizationStack(app, &org)
 
 			cdktf.NewS3Backend(aws_org_stack, &cdktf.S3BackendConfig{
-				Bucket:        js("defn-bootstrap-remote-state"),
-				Key:           js(org.Name + "/terraform.tfstate"),
+				Bucket:        js("dfn-defn-terraform-state"),
+				Key:           js("stacks/" + org.Name + "/terraform.tfstate"),
 				Encrypt:       jstrue(),
 				Region:        js("us-east-2"),
 				Profile:       js("defn-org-sso"),
-				DynamodbTable: js("defn-bootstrap-remote-state"),
+				DynamodbTable: js("dfn-defn-terraform-state-lock"),
 			})
 		}
 
