@@ -8,7 +8,7 @@ module "s3-${ACC_SLUG}" {
   }
 
   acl                = "private"
-  user_enabled       = true
+  user_enabled       = false
   versioning_enabled = false
 
   lifecycle_configuration_rules = local.lifecycle_configuration_rules
