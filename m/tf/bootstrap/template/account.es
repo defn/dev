@@ -1,5 +1,5 @@
 module "${ACCOUNT}" {
-    source = "../terraform-aws-defn-account"
+    source = "../../terraform-aws-defn-account"
     context = module.this.context
 
     providers = {

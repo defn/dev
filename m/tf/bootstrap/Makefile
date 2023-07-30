@@ -1,3 +1,6 @@
 config:
 	for a in $$(b aws); do cat template/provider.es | env PROFILE="$$a" envsubst; echo; echo; done > provider.tf
-	for a in $$(b aws | egrep -E '^(defn|imma)'); do cat template/account.es | env ACCOUNT="$$a" envsubst; echo; echo; done > account.tf
+	for a in $$(b aws); do mkdir -p account-$$a; cat template/account.es | env ACCOUNT="$$a" envsubst > account-$$a/account.tf; ln -nfs ../{provider.tf,version.tf,context.tf,terraform.tfvars,.terraform.lock.hcl} account-$$a/; done
+
+shell:
+	env AWS_REGION=us-east-1 AWS_CONFIG_FILE=../.aws/config bash
