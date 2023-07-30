@@ -24,13 +24,13 @@ resource "coder_agent" "main" {
 
     ssh -o StrictHostKeyChecking=no git@github.com true || true
 
-    if [[ ! -d "$HOME/.git/." ]]; then
+    if [[ ! -d "/nix/home/.git/." ]]; then
       git clone http://github.com/defn/dev /nix/home
       pushd /nix/home
       git reset --hard
       popd
 
-      rm -rf "$HOME"
+      sudo rm -rf "$HOME"
       ln -nfs /nix/home "$HOME"
     fi
 
