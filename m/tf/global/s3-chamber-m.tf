@@ -1,5 +1,5 @@
 module "s3-chamber-m" {
-  source     = "../terraform-aws-s3-bucket"
+  source     = "../mod/terraform-aws-s3-bucket"
   context    = module.this.context
   attributes = [ "chamber-m" ]
 
