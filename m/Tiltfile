@@ -1,5 +1,12 @@
 analytics_settings(False)
 
+local_resource("code-server",
+        serve_cmd=[ "bash", "-c", """
+            cd
+            exec ~/bin/nix/code-server --auth none --port 13337
+            """ ]
+    )
+
 local_resource("hugo",
         serve_cmd=[ "bash", "-c", """
             cd ~/m/defn/dev/www

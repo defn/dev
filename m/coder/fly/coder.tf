@@ -53,10 +53,7 @@ resource "coder_agent" "main" {
     make install
 
     source .bash_profile
-
-    setsid (~/bin/nix/code-server --auth none --port 13337 >/tmp/code-server.log 2>&1) &
-
-    setsid (cd m && ~/bin/nix/tilt up 2>&1) &
+    (cd m && setsid ~/bin/nix/tilt up 2>&1) &
   EOT
 
   env = {
