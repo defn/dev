@@ -123,8 +123,6 @@ install-inner:
 	$(MAKE) perms
 	$(MAKE) home
 
-	if test "$$(uname -m)" != "aarch64"; then $(MAKE) trunk; fi
-
 	. ~/.bash_profile && $(MAKE) install-innermost
 
 install-innermost:

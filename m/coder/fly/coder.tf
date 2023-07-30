@@ -18,7 +18,14 @@ resource "coder_agent" "main" {
     sudo apt-get update
     sudo apt-get install -y build-essential fzf jq
 
-    sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64
+    case "$(uname -m)" in
+      aarch64)
+        sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-arm64
+        ;;
+      *)
+        sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64
+        ;;
+    esac
     sudo chmod 755 /usr/local/bin/bazelisk
     sudo ln -nfs bazelisk /usr/local/bin/bazel
 
@@ -29,21 +36,23 @@ resource "coder_agent" "main" {
       pushd /nix/home
       git reset --hard
       popd
-
-      sudo rm -rf "$HOME"
-      ln -nfs /nix/home "$HOME"
+    else
+      pushd /nix/home
+      git pull
+      popd
     fi
 
-    cd
-    git pull
+    sudo rm -rf "$HOME"
+    sudo ln -nfs /nix/home "$HOME"
 
+    cd
     make install
 
     source .bash_profile
 
-    ~/bin/nix/code-server --auth none --port 13337 >/tmp/code-server.log 2>&1 &
+    setsid (~/bin/nix/code-server --auth none --port 13337 >/tmp/code-server.log 2>&1) &
 
-    (cd m && ~/bin/nix/tilt up) &
+    setsid (cd m && ~/bin/nix/tilt up 2>&1) &
   EOT
 
   env = {
