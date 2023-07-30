@@ -1,0 +1,86 @@
+{
+  "nodes": {
+    "dev": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "dir": "m/pkg/dev",
+        "lastModified": 1689277319,
+        "narHash": "sha256-gsqaQTNX3WNS3+DDb1wva2m4OjEJzjCe5sKzUcIaI0Y=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "7f1db96942f2c6ff834b9a180f57bc6f6a23436b",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/dev",
+        "owner": "defn",
+        "ref": "pkg-dev-0.0.9",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1652776076,
+        "narHash": "sha256-gzTw/v1vj4dOVbpBSJX4J0DwUR6LIyXo7/SuuTJp1kM=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "04c1b180862888302ddfb2e3ad9eaa63afc60cf8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "04c1b180862888302ddfb2e3ad9eaa63afc60cf8",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1689088367,
+        "narHash": "sha256-Y2tl2TlKCWEHrOeM9ivjCLlRAKH3qoPUE/emhZECU14=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "5c9ddb86679c400d6b7360797b8a22167c2053f8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "5c9ddb86679c400d6b7360797b8a22167c2053f8",
+        "type": "github"
+      }
+    },
+    "pkg": {
+      "inputs": {
+        "dev": "dev"
+      },
+      "locked": {
+        "dir": "m/pkg/pkg",
+        "lastModified": 1689277368,
+        "narHash": "sha256-PcqZACb6LghiievM+AlhUGGNK0ch723H4zI+o1ma+08=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "26dc66a816419acea5a46ea0a23af639a9a030a2",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/pkg",
+        "owner": "defn",
+        "ref": "pkg-pkg-0.0.11",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "pkg": "pkg"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

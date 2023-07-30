@@ -6,6 +6,7 @@ cue.mod/pkg
 snap
 
 # working files
+/.trunk
 node_modules
 .profile
 .bash_history
