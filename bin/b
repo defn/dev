@@ -180,7 +180,7 @@ function main {
 				fi
 
 				# shellcheck disable=SC2086
-				bazel build --sandbox_debug ${bopts} "${rule}"
+				bazel build ${bopts} "${rule}"
 				;;
 			test)
 				shift
@@ -269,7 +269,7 @@ function main {
 				fi
 
 				# shellcheck disable=SC2086
-				bazel run ${bopts} "${rule}" --sandbox_debug -- "$@"
+				bazel run ${bopts} "${rule}" -- "$@"
 				;;
 			pass)
 				shift
