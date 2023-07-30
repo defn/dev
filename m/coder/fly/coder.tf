@@ -13,21 +13,8 @@ resource "coder_agent" "main" {
   startup_script         = <<-EOT
     set -e
 
-    sudo install -d -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
-
     sudo apt-get update
     sudo apt-get install -y build-essential fzf jq
-
-    case "$(uname -m)" in
-      aarch64)
-        sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-arm64
-        ;;
-      *)
-        sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64
-        ;;
-    esac
-    sudo chmod 755 /usr/local/bin/bazelisk
-    sudo ln -nfs bazelisk /usr/local/bin/bazel
 
     ssh -o StrictHostKeyChecking=no git@github.com true || true
 
@@ -45,7 +32,24 @@ resource "coder_agent" "main" {
     sudo rm -rf "$HOME"
     sudo ln -nfs /nix/home "$HOME"
 
+    sudo install -d -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
+
     cd
+
+    if [[ ! -x "bin/bazel" ]]; then
+      case "$(uname -m)" in
+        aarch64)
+          sudo curl -sSL -o bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-arm64
+          ;;
+        *)
+          sudo curl -sSL -o /bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64
+          ;;
+      esac
+
+      sudo chmod 755 bin/bazelisk
+      sudo ln -nfs bazelisk bin/bazel
+    fi
+
     make install
 
     source .bash_profile
