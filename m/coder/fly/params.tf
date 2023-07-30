@@ -16,7 +16,7 @@ data "coder_parameter" "cpu" {
   mutable      = true
   validation {
     min = 4
-    max = 8
+    max = 16
   }
 }
 
@@ -24,7 +24,7 @@ data "coder_parameter" "cputype" {
   name         = "cputype"
   display_name = "CPU type"
   description  = "Which CPU type do you want?"
-  default      = "shared"
+  default      = "performance"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-1.svg"
   mutable      = true
   option {
@@ -47,7 +47,7 @@ data "coder_parameter" "memory" {
   mutable      = true
   validation {
     min = 8
-    max = 16
+    max = 64
   }
 }
 
