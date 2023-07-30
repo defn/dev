@@ -1,5 +1,5 @@
 module "imma-prod" {
-    source = "../../terraform-aws-defn-account"
+    source = "../../mod/terraform-aws-defn-account"
     context = module.this.context
 
     providers = {

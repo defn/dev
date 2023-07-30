@@ -1,5 +1,5 @@
 module "s3-circus-transit" {
-  source     = "../terraform-aws-s3-bucket"
+  source     = "../mod/terraform-aws-s3-bucket"
   context    = module.this.context
   attributes = [ "circus-transit" ]
 
