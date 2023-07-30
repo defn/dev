@@ -1,6 +1,7 @@
 module "s3-helix-dmz" {
-  source  = "../terraform-aws-s3-bucket"
-  context = module.this.context
+  source     = "../terraform-aws-s3-bucket"
+  context    = module.this.context
+  attributes = ["helix-dmz"]
 
   providers = {
     aws = aws.helix-dmz

@@ -1,6 +1,7 @@
 module "s3-immanent-roke" {
-  source  = "../terraform-aws-s3-bucket"
-  context = module.this.context
+  source     = "../terraform-aws-s3-bucket"
+  context    = module.this.context
+  attributes = ["immanent-roke"]
 
   providers = {
     aws = aws.immanent-roke

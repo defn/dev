@@ -1,6 +1,7 @@
 module "s3-immanent-doorkeeper" {
-  source  = "../terraform-aws-s3-bucket"
-  context = module.this.context
+  source     = "../terraform-aws-s3-bucket"
+  context    = module.this.context
+  attributes = ["immanent-doorkeeper"]
 
   providers = {
     aws = aws.immanent-doorkeeper

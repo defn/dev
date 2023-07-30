@@ -1,6 +1,7 @@
 module "s3-spiral-dev" {
-  source  = "../terraform-aws-s3-bucket"
-  context = module.this.context
+  source     = "../terraform-aws-s3-bucket"
+  context    = module.this.context
+  attributes = ["spiral-dev"]
 
   providers = {
     aws = aws.spiral-dev

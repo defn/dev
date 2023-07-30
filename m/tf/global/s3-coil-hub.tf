@@ -1,6 +1,7 @@
 module "s3-coil-hub" {
-  source  = "../terraform-aws-s3-bucket"
-  context = module.this.context
+  source     = "../terraform-aws-s3-bucket"
+  context    = module.this.context
+  attributes = ["coil-hub"]
 
   providers = {
     aws = aws.coil-hub

@@ -1,6 +1,7 @@
 module "s3-immanent-hand" {
-  source  = "../terraform-aws-s3-bucket"
-  context = module.this.context
+  source     = "../terraform-aws-s3-bucket"
+  context    = module.this.context
+  attributes = ["immanent-hand"]
 
   providers = {
     aws = aws.immanent-hand

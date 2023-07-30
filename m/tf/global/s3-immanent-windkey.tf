@@ -1,6 +1,7 @@
 module "s3-immanent-windkey" {
-  source  = "../terraform-aws-s3-bucket"
-  context = module.this.context
+  source     = "../terraform-aws-s3-bucket"
+  context    = module.this.context
+  attributes = ["immanent-windkey"]
 
   providers = {
     aws = aws.immanent-windkey

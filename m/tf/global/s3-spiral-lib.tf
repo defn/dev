@@ -1,6 +1,7 @@
 module "s3-spiral-lib" {
-  source  = "../terraform-aws-s3-bucket"
-  context = module.this.context
+  source     = "../terraform-aws-s3-bucket"
+  context    = module.this.context
+  attributes = ["spiral-lib"]
 
   providers = {
     aws = aws.spiral-lib

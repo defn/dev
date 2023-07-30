@@ -1,6 +1,7 @@
 module "s3-fogg-circus" {
-  source  = "../terraform-aws-s3-bucket"
-  context = module.this.context
+  source     = "../terraform-aws-s3-bucket"
+  context    = module.this.context
+  attributes = ["fogg-circus"]
 
   providers = {
     aws = aws.fogg-circus

@@ -1,6 +1,7 @@
 module "s3-immanent-summoner" {
-  source  = "../terraform-aws-s3-bucket"
-  context = module.this.context
+  source     = "../terraform-aws-s3-bucket"
+  context    = module.this.context
+  attributes = ["immanent-summoner"]
 
   providers = {
     aws = aws.immanent-summoner

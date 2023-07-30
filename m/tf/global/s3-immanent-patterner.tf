@@ -1,6 +1,7 @@
 module "s3-immanent-patterner" {
-  source  = "../terraform-aws-s3-bucket"
-  context = module.this.context
+  source     = "../terraform-aws-s3-bucket"
+  context    = module.this.context
+  attributes = ["immanent-patterner"]
 
   providers = {
     aws = aws.immanent-patterner
