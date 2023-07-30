@@ -1,6 +1,7 @@
 module "s3-helix-ops" {
-  source  = "../terraform-aws-s3-bucket"
-  context = module.this.context
+  source     = "../terraform-aws-s3-bucket"
+  context    = module.this.context
+  attributes = ["helix-ops"]
 
   providers = {
     aws = aws.helix-ops

@@ -1,6 +1,7 @@
 module "s3-${ACC_SLUG}" {
-  source  = "../terraform-aws-s3-bucket"
-  context = module.this.context
+  source     = "../terraform-aws-s3-bucket"
+  context    = module.this.context
+  attributes = [ "${ACC_SLUG}" ]
 
   providers = {
     aws = aws.${ACC_SLUG}

@@ -1,6 +1,7 @@
 module "s3-chamber-4" {
-  source  = "../terraform-aws-s3-bucket"
-  context = module.this.context
+  source     = "../terraform-aws-s3-bucket"
+  context    = module.this.context
+  attributes = ["chamber-4"]
 
   providers = {
     aws = aws.chamber-4

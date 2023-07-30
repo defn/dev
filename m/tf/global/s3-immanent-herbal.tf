@@ -1,6 +1,7 @@
 module "s3-immanent-herbal" {
-  source  = "../terraform-aws-s3-bucket"
-  context = module.this.context
+  source     = "../terraform-aws-s3-bucket"
+  context    = module.this.context
+  attributes = ["immanent-herbal"]
 
   providers = {
     aws = aws.immanent-herbal

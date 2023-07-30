@@ -1,6 +1,7 @@
 module "s3-jianghu-org" {
-  source  = "../terraform-aws-s3-bucket"
-  context = module.this.context
+  source     = "../terraform-aws-s3-bucket"
+  context    = module.this.context
+  attributes = ["jianghu-org"]
 
   providers = {
     aws = aws.jianghu-org

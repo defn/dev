@@ -1,6 +1,7 @@
 module "s3-fogg-sandbox" {
-  source  = "../terraform-aws-s3-bucket"
-  context = module.this.context
+  source     = "../terraform-aws-s3-bucket"
+  context    = module.this.context
+  attributes = ["fogg-sandbox"]
 
   providers = {
     aws = aws.fogg-sandbox

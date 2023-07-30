@@ -1,6 +1,7 @@
 module "s3-imma-org" {
-  source  = "../terraform-aws-s3-bucket"
-  context = module.this.context
+  source     = "../terraform-aws-s3-bucket"
+  context    = module.this.context
+  attributes = ["imma-org"]
 
   providers = {
     aws = aws.imma-org

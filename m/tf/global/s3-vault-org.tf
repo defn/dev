@@ -1,6 +1,7 @@
 module "s3-vault-org" {
-  source  = "../terraform-aws-s3-bucket"
-  context = module.this.context
+  source     = "../terraform-aws-s3-bucket"
+  context    = module.this.context
+  attributes = ["vault-org"]
 
   providers = {
     aws = aws.vault-org
