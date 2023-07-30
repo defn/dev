@@ -1,14 +1,14 @@
 module "s3-spiral-net" {
   source     = "../terraform-aws-s3-bucket"
   context    = module.this.context
-  attributes = ["spiral-net"]
+  attributes = [ "spiral-net" ]
 
   providers = {
     aws = aws.spiral-net
   }
 
   acl                = "private"
-  user_enabled       = true
+  user_enabled       = false
   versioning_enabled = false
 
   lifecycle_configuration_rules = local.lifecycle_configuration_rules
