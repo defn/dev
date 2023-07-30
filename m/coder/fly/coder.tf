@@ -18,33 +18,26 @@ resource "coder_agent" "main" {
     sudo apt-get update
     sudo apt-get install -y build-essential fzf jq
 
-    sudo curl -sSL -o /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64
-    sudo chmod 755 /usr/local/bin/bazel
-
-    cd
+    sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64
+    sudo chmod 755 /usr/local/bin/bazelisk
+    sudo ln -nfs bazelisk /usr/local/bin/bazel
 
     ssh -o StrictHostKeyChecking=no git@github.com true || true
-    if ! test -d .git/.; then
-      git clone http://github.com/defn/dev dev
-      mv dev/.git .
-      rm -rf dev
+
+    if [[ ! -d "$HOME/.git/." ]]; then
+      git clone http://github.com/defn/dev /nix/home
+      pushd /nix/home
       git reset --hard
-    else
-      git pull
+      popd
+
+      rm -rf "$HOME"
+      ln -nfs /nix/home "$HOME"
     fi
 
-    rm -rf .cache
-    sudo install -d -m 0700 -o ubuntu -g ubuntu /nix/home/cache
-    ln -nfs /nix/home/cache .cache
+    cd
+    git pull
 
-    rm -rf work
-    sudo install -d -m 0700 -o ubuntu -g ubuntu /nix/home/work
-    ln -nfs /nix/home/work work
-
-    make nix
-    make symlinks
-    make perms
-    make home
+    make install
 
     source .bash_profile
 
