@@ -1,30 +1,30 @@
 locals {
   lifecycle_configuration_rules = [{
-    enabled = true # bool
+    enabled = true
     id      = "v2rule"
 
-    abort_incomplete_multipart_upload_days = 1 # number
+    abort_incomplete_multipart_upload_days = 1
 
     filter_and = null
     expiration = {
-      days = 120 # integer > 0
+      days = 120
     }
     noncurrent_version_expiration = {
-      newer_noncurrent_versions = 3  # integer > 0
-      noncurrent_days           = 60 # integer >= 0
+      newer_noncurrent_versions = 3
+      noncurrent_days           = 60
     }
     transition = [{
-      days          = 30            # integer >= 0
-      storage_class = "STANDARD_IA" # string/enum, one of GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR.
+      days          = 30
+      storage_class = "STANDARD_IA"
       },
       {
-        days          = 60           # integer >= 0
-        storage_class = "ONEZONE_IA" # string/enum, one of GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR.
+        days          = 60
+        storage_class = "ONEZONE_IA"
     }]
     noncurrent_version_transition = [{
-      newer_noncurrent_versions = 3            # integer >= 0
-      noncurrent_days           = 30           # integer >= 0
-      storage_class             = "ONEZONE_IA" # string/enum, one of GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR.
+      newer_noncurrent_versions = 3
+      noncurrent_days           = 30
+      storage_class             = "ONEZONE_IA"
     }]
   }]
 
