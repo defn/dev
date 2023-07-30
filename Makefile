@@ -44,7 +44,7 @@ home:
 		(for a in $$(cat bin/nix/.path | tr : "\n" | perl -e 'print reverse <>'); do for b in $$a/*; do if test -x "$$b"; then if [[ "$$(readlink "bin/nix/$$b{##*/}" || true)" != "$$b" ]]; then ln -nfs "$$b" bin/nix/; fi; fi; done; done); \
 		done
 	rm -f bin/nix/{gcc,cc,ld}
-	ln -nfs ~/bin/nix/go $${VSCODE_GIT_ASKPASS_NODE%/*}/vscode/bin/remote-cli/
+	-ln -nfs ~/bin/nix/go $${VSCODE_GIT_ASKPASS_NODE%/*}/vscode/bin/remote-cli/
 	if test -x /opt/homebrew/opt/util-linux/bin/flock; then ln -nfs /opt/homebrew/opt/util-linux/bin/flock bin/nix/; fi
 
 dotfiles:
