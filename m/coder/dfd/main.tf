@@ -1,3 +1,3 @@
 module "workspace" {
-  source = "./m/terraform-coder-defn-dev"
+  source = "../mod/terraform-coder-defn-dev"
 }
