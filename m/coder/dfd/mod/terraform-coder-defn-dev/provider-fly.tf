@@ -15,7 +15,7 @@ resource "fly_app" "workspace" {
   org  = "personal"
 }
 
-resource "fly_volume" "nix-volume" {
+resource "fly_volume" "nix_volume" {
   app    = fly_app.workspace.name
   name   = "coder_${data.coder_workspace.me.owner}_${lower(replace(data.coder_workspace.me.name, "-", "_"))}_nix"
   size   = local.fly.nix_size
@@ -61,7 +61,7 @@ resource "fly_machine" "workspace" {
   }]
 
   mounts = [{
-    volume = fly_volume.home-volume.id
+    volume = fly_volume.nix_volume.id
     path   = "/nix"
   }]
 }
