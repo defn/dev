@@ -10,7 +10,7 @@ locals {
   defn_ami_filter = ["base*"]
 
   owners     = local.defn_owners
-  ami_filter = local.ami_filter
+  ami_filter = local.defn_ami_filter
 }
 
 data "aws_ami" "ubuntu" {
