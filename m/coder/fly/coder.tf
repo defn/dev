@@ -56,9 +56,8 @@ resource "coder_agent" "main" {
       ln -nfs bazelisk bin/bazel
     fi
 
-    make install
-
     source .bash_profile
+    make install
     (cd m && setsid ~/bin/nix/tilt up 2>&1) &
   EOT
 
