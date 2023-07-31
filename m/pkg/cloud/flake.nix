@@ -1,6 +1,7 @@
 {
   inputs = {
     terraform.url = github:defn/dev/pkg-terraform-1.5.4-1?dir=m/pkg/terraform;
+    terraformdocs.url = github:defn/dev/pkg-terraformdocs-1.5.4-1?dir=m/pkg/terraformdocs;
     packer.url = github:defn/dev/pkg-packer-1.9.2-1?dir=m/pkg/packer;
     step.url = github:defn/dev/pkg-step-0.24.4-4?dir=m/pkg/step;
     awscli.url = github:defn/dev/pkg-awscli-2.13.5-1?dir=m/pkg/awscli;
@@ -18,6 +19,7 @@
         let
           flakeInputs = [
             inputs.terraform.defaultPackage.${ctx.system}
+            inputs.terraformdocs.defaultPackage.${ctx.system}
             inputs.packer.defaultPackage.${ctx.system}
             inputs.step.defaultPackage.${ctx.system}
             inputs.awscli.defaultPackage.${ctx.system}
