@@ -1,3 +1,12 @@
+locals {
+  aws = {
+    region            = ""
+    availability_zone = ""
+    instance_type     = ""
+    root_volume_size  = ""
+  }
+}
+
 provider "aws" {
   region = local.aws.region
 }
