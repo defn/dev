@@ -5,18 +5,18 @@ locals {
     instance_type     = "t3.xlarge"
     root_volume_size  = data.coder_parameter.nix_volume_size.value
   }
+
+  owners     = ["self"]
+  ami_filter = ["base-*"]
 }
 
 provider "aws" {
   region = local.aws.region
 }
 
-locals {
-  owners     = ["self"]
-  ami_filter = ["base-*"]
-}
-
 data "aws_ami" "ubuntu" {
+  count = local.ec2_count
+
   most_recent = true
 
   owners = local.owners
@@ -33,6 +33,8 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_iam_role" "dev" {
+  count = local.ec2_count
+
   name = local.coder_name
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -50,23 +52,32 @@ resource "aws_iam_role" "dev" {
 }
 
 resource "aws_iam_role_policy_attachment" "dev" {
-  role       = aws_iam_role.dev.name
+  count = local.ec2_count
+
+  role       = aws_iam_role.dev[count.index].name
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
 resource "aws_iam_instance_profile" "dev" {
+  count = local.ec2_count
+
   name = local.coder_name
-  role = aws_iam_role.dev.name
+  role = aws_iam_role.dev[count.index].name
 }
 
 # trunk-ignore(checkov/CKV_AWS_148)
-resource "aws_default_vpc" "default" {}
+resource "aws_default_vpc" "default" {
+  count = local.ec2_count
+}
+
 
 resource "aws_security_group" "dev" {
+  count = local.ec2_count
+
   name        = local.coder_name
   description = local.coder_name
 
-  vpc_id = aws_default_vpc.default.id
+  vpc_id = aws_default_vpc.default[count.index].id
 
   egress {
     description = "allow all egress"
@@ -78,15 +89,17 @@ resource "aws_security_group" "dev" {
 }
 
 resource "aws_instance" "dev" {
-  ami               = data.aws_ami.ubuntu.id
+  count = local.ec2_count
+
+  ami               = data.aws_ami.ubuntu[count.index].id
   availability_zone = local.aws.availability_zone
   instance_type     = local.aws.instance_type
 
   ebs_optimized = true
   monitoring    = true
 
-  iam_instance_profile   = aws_iam_instance_profile.dev.name
-  vpc_security_group_ids = [aws_security_group.dev.id]
+  iam_instance_profile   = aws_iam_instance_profile.dev[count.index].name
+  vpc_security_group_ids = [aws_security_group.dev[count.index].id]
 
   user_data = local.user_data
 
@@ -111,6 +124,8 @@ resource "aws_instance" "dev" {
 }
 
 resource "aws_ec2_instance_state" "dev" {
-  instance_id = aws_instance.dev.id
+  count = local.ec2_count
+
+  instance_id = aws_instance.dev[count.index].id
   state       = data.coder_workspace.me.transition == "start" ? "running" : "stopped"
 }
