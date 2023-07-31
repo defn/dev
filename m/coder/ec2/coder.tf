@@ -38,7 +38,7 @@ resource "coder_agent" "main" {
   os                     = "linux"
   startup_script_timeout = 180
   startup_script         = <<-EOT
-    set -e
+    set -ex
 
     sudo apt-get update
     sudo apt-get install -y build-essential fzf jq gettext
@@ -47,6 +47,9 @@ resource "coder_agent" "main" {
     sudo chmod 0600 /root/swap
     sudo mkswap /root/swap
     sudo swapon /root/swap
+
+    sudo install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
+    sudo install -d -m 0700 -o ubuntu -g ubuntu /nix /nix
 
     if [[ ! -d "/nix/home/.git/." ]]; then
       ssh -o StrictHostKeyChecking=no git@github.com true || true
@@ -63,8 +66,6 @@ resource "coder_agent" "main" {
     sudo rm -rf "$HOME"
     sudo ln -nfs /nix/home "$HOME"
     ssh -o StrictHostKeyChecking=no git@github.com true || true
-
-    sudo install -d -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
 
     cd
 
