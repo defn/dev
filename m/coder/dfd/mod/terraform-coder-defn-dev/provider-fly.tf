@@ -3,23 +3,23 @@ resource "fly_app" "workspace" {
   org  = "personal"
 }
 
-resource "fly_volume" "home-volume" {
+resource "fly_volume" "nix-volume" {
   app    = fly_app.workspace.name
-  name   = "coder_${data.coder_workspace.me.owner}_${lower(replace(data.coder_workspace.me.name, "-", "_"))}_home"
-  size   = data.coder_parameter.volume-size.value
-  region = data.coder_parameter.region.value
+  name   = "coder_${data.coder_workspace.me.owner}_${lower(replace(data.coder_workspace.me.name, "-", "_"))}_nix"
+  size   = local.fly.nix_size
+  region = local.fly.region
 }
 
 resource "fly_machine" "workspace" {
   count = data.coder_workspace.me.start_count
 
   app      = fly_app.workspace.name
-  region   = data.coder_parameter.region.value
+  region   = local.fly.region
   name     = data.coder_workspace.me.name
-  image    = data.coder_parameter.docker-image.value
-  cpus     = data.coder_parameter.cpu.value
-  cputype  = data.coder_parameter.cputype.value
-  memorymb = data.coder_parameter.memory.value * 1024
+  image    = local.fly.image
+  cpus     = local.fly.cpus
+  cputype  = local.fly.cputype
+  memorymb = local.fly.memorymb * 1024
 
   env = {
     CODER_AGENT_TOKEN = coder_agent.main.token

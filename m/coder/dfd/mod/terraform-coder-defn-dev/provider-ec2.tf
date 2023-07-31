@@ -1,16 +1,10 @@
 provider "aws" {
-  region = data.coder_parameter.region.value
+  region = local.aws.region
 }
 
 locals {
-  ubuntu_owners     = ["099720109477"]
-  ubuntu_ami_filter = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
-
-  defn_owners     = ["self"]
-  defn_ami_filter = ["base*"]
-
-  owners     = local.defn_owners
-  ami_filter = local.defn_ami_filter
+  owners     = ["self"]
+  ami_filter = ["base-*"]
 }
 
 data "aws_ami" "ubuntu" {
@@ -76,8 +70,8 @@ resource "aws_security_group" "dev" {
 
 resource "aws_instance" "dev" {
   ami               = data.aws_ami.ubuntu.id
-  availability_zone = "${data.coder_parameter.region.value}a"
-  instance_type     = data.coder_parameter.instance_type.value
+  availability_zone = local.aws.availability_zone
+  instance_type     = local.aws.instance_type
 
   ebs_optimized = true
   monitoring    = true
@@ -88,7 +82,7 @@ resource "aws_instance" "dev" {
   user_data = local.user_data
 
   root_block_device {
-    volume_size           = data.coder_parameter.root_volume_size.value
+    volume_size           = local.aws.root_volume_size
     volume_type           = "gp3"
     encrypted             = true
     delete_on_termination = true
