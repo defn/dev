@@ -1,7 +1,7 @@
 provider "docker" {}
 
 resource "docker_image" "main" {
-  name = "quay.io/defn/dev:latest-nix"
+  name = "ubuntu:22.04"
 }
 
 resource "docker_container" "workspace" {
@@ -13,18 +13,12 @@ resource "docker_container" "workspace" {
 
   hostname = "coder-${data.coder_workspace.me.owner}-${lower(data.coder_workspace.me.name)}"
 
-  entrypoint = ["sh", "-c", replace(coder_agent.main.init_script, "/localhost|127\\.0\\.0\\.1/", "host.docker.internal")]
+  entrypoint = ["bash", "-c", replace(coder_agent.main.init_script, "/localhost|127\\.0\\.0\\.1/", "host.docker.internal")]
   env        = ["CODER_AGENT_TOKEN=${coder_agent.main.token}"]
 
   host {
     host = "host.docker.internal"
     ip   = "host-gateway"
-  }
-
-  volumes {
-    container_path = "/home/ubuntu"
-    volume_name    = "defn-dev-home"
-    read_only      = false
   }
 
   volumes {
