@@ -1,7 +1,7 @@
 locals {
-  fly_count = data.coder_parameter.provider.value == "fly" ? 1 : 0
-  ec2_count = data.coder_parameter.provider.value == "ec2" ? 1 : 0
-  do_count = data.coder_parameter.provider.value == "do" ? 1 : 0
+  fly_count    = data.coder_parameter.provider.value == "fly" ? 1 : 0
+  ec2_count    = data.coder_parameter.provider.value == "ec2" ? 1 : 0
+  do_count     = data.coder_parameter.provider.value == "do" ? 1 : 0
   docker_count = data.coder_parameter.provider.value == "docker" ? 1 : 0
 }
 
