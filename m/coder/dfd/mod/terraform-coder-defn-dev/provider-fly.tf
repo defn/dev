@@ -1,3 +1,15 @@
+
+locals {
+  fly = {
+    niz_size = ""
+    region   = ""
+    image    = ""
+    cpus     = ""
+    cputype  = ""
+    memorymb = ""
+  }
+}
+
 resource "fly_app" "workspace" {
   name = "coder-${data.coder_workspace.me.owner}-${lower(data.coder_workspace.me.name)}"
   org  = "personal"
