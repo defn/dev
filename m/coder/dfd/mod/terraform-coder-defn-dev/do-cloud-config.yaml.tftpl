@@ -1,0 +1,49 @@
+#cloud-config
+users:
+  - name: ubuntu
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+    groups: sudo
+    shell: /bin/bash
+packages:
+  - git
+mounts:
+  - [
+      "LABEL=${nix_volume_label}",
+      "/nix",
+      auto,
+      "defaults,uid=1000,gid=1000",
+    ]
+write_files:
+  - path: /opt/coder/init
+    permissions: "0755"
+    encoding: b64
+    content: ${init_script}
+  - path: /etc/systemd/system/coder-agent.service
+    permissions: "0644"
+    content: |
+      [Unit]
+      Description=Coder Agent
+      After=network-online.target
+      Wants=network-online.target
+
+      [Service]
+      User=ubuntu
+      ExecStart=/opt/coder/init
+      Environment=CODER_AGENT_TOKEN=${coder_agent_token}
+      Restart=always
+      RestartSec=10
+      TimeoutStopSec=90
+      KillMode=process
+
+      OOMScoreAdjust=-900
+      SyslogIdentifier=coder-agent
+
+      [Install]
+      WantedBy=multi-user.target
+runcmd:
+  - sudo install -d -m 0755 /nix
+  - while true; do sudo mount /dev/sda /nix || true; if df -klh /nix | tail -1 | awk '{print $NF}' | grep ^/nix; then break; fi; sleep 5; done
+  - chown ubuntu:ubuntu /home/ubuntu
+  - chown ubuntu:ubuntu /nix
+  - systemctl enable coder-agent
+  - systemctl start coder-agent
