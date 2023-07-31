@@ -2,7 +2,7 @@ data "coder_parameter" "docker-image" {
   name         = "docker-image"
   display_name = "Docker image"
   description  = "The docker image to use for the workspace"
-  default      = "quay.io/defn/dev:latest-nix"
+  default      = "quay.io/defn/dev:latest"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/docker.svg"
 }
 
