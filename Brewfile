@@ -11,7 +11,6 @@ brew "bazelisk"
 brew "util-linux"
 
 cask "divvy"
-cask "iterm2"
 cask "docker"
 cask "google-chrome"
 cask "visual-studio-code"
