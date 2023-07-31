@@ -23,26 +23,10 @@ root:
     ENV LC_ALL en_US.UTF-8
     ENV DEBIAN_FRONTEND=noninteractive
 
-    RUN  (echo "Update-Manager::Never-Include-Phased-Updates;"; echo "APT::Get::Never-Include-Phased-Updates: True;") > /etc/apt/apt.conf.d/99-Phased-Updates
-
-    RUN dpkg-divert --local --rename --add /sbin/udevadm && ln -s /bin/true /sbin/udevadm \
-        && apt-get update && apt-get upgrade -y \
-        && apt-get install -y --no-install-recommends lsb-release tzdata locales ca-certificates iproute2 sudo curl build-essential openssh-client rsync git git-lfs fzf jq gettext direnv \
-        && apt-get clean && apt purge -y nano \
-        && rm -f /usr/bin/gs
-
-    RUN apt update && apt upgrade -y
-
-    RUN ln -sf /usr/share/zoneinfo/UTC /etc/localtime \
-        && dpkg-reconfigure -f noninteractive tzdata \
-        && locale-gen en_US.UTF-8 \
-        && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-
-    RUN groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu \
-        && echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu \
-        && install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
-
-    RUN chown -R ubuntu:ubuntu /home/ubuntu && chmod u+s /usr/bin/sudo
+    COPY scripts .
+    RUN script/000-install-bare
+    RUN script/001-install-base
+    RUN script/999-update
 
     ENTRYPOINT []
     CMD []
@@ -50,9 +34,6 @@ root:
     USER ubuntu
     ENV USER=ubuntu
     ENV HOME=/home/ubuntu
-    ENV LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
-    ENV LC_ALL=C.UTF-8
-
     WORKDIR /home/ubuntu
 
     SAVE IMAGE --push ${image}
