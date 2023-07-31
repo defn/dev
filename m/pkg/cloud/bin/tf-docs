@@ -7,7 +7,7 @@ function main {
 		set -- .
 	fi
 
-	exec terraform fmt "$@"
+	exec terraform-docs markdown table --output-file README.md --output-mode inject "$@"
 }
 
 # shellcheck disable=SC1091
