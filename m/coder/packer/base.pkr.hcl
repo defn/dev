@@ -1,16 +1,17 @@
 variable "scripts" {
   type = list(string)
   default = [
-    "script/998-defn-dev-update",
+    "script/000-install-bare",
+    "script/001-install-base",
     "script/999-update"
   ]
 }
 
 locals {
   timestamp = regex_replace(timestamp(), "[- TZ:]", "")
-  name      = "update"
-  owner     = "self"
-  ami       = "base-*"
+  name      = "base"
+  owner     = "099720109477"
+  ami       = "ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"
 }
 
 source "amazon-ebs" "this" {
@@ -25,6 +26,14 @@ source "amazon-ebs" "this" {
   instance_type = "t3.xlarge"
   region        = "us-west-2"
 
+  launch_block_device_mappings {
+    encrypted             = true
+    device_name           = "/dev/sda1"
+    volume_size           = 40
+    volume_type           = "gp3"
+    delete_on_termination = true
+  }
+
   source_ami_filter {
     owners      = [local.owner]
     most_recent = true
@@ -32,6 +41,9 @@ source "amazon-ebs" "this" {
     filters = {
       name         = local.ami
       architecture = "x86_64"
+
+      root-device-type    = "ebs"
+      virtualization-type = "hvm"
     }
   }
 
@@ -46,7 +58,7 @@ source "amazon-ebs" "this" {
   }
 
   snapshot_tags = {
-    Name      = "Packer update ${local.timestamp}"
+    Name      = "Packer base ${local.timestamp}"
     ManagedBy = "Packer"
   }
 }
