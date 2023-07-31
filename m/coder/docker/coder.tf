@@ -11,38 +11,54 @@ resource "coder_agent" "main" {
   os                     = "linux"
   startup_script_timeout = 180
   startup_script         = <<-EOT
-    set -e
-
-    sudo install -d -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
+    set -ex
 
     sudo apt-get update
-    sudo apt-get install -y build-essential fzf jq
+    sudo apt-get install -y build-essential fzf jq gettext direnv
 
-    sudo curl -sSL -o /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64
-    sudo chmod 755 /usr/local/bin/bazel
+    sudo dd if=/dev/zero of=/root/swap bs=1M count=4096
+    sudo chmod 0600 /root/swap
+    sudo mkswap /root/swap
+    sudo swapon /root/swap
+
+    sudo install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
+    sudo install -d -m 0700 -o ubuntu -g ubuntu /nix /nix
+
+    if [[ ! -d "/nix/home/.git/." ]]; then
+      ssh -o StrictHostKeyChecking=no git@github.com true || true
+      git clone http://github.com/defn/dev /nix/home
+      pushd /nix/home
+      git reset --hard
+      popd
+    else
+      pushd /nix/home
+      git pull
+      popd
+    fi
+
+    sudo rm -rf "$HOME"
+    sudo ln -nfs /nix/home "$HOME"
+    ssh -o StrictHostKeyChecking=no git@github.com true || true
 
     cd
 
-    ssh -o StrictHostKeyChecking=no git@github.com true || true
-    if ! test -d .git/.; then
-      git clone http://github.com/defn/dev dev
-      mv dev/.git .
-      rm -rf dev
-      git reset --hard
-    else
-      git pull
+    if [[ ! -x "bin/bazel" ]]; then
+      case "$(uname -m)" in
+        aarch64)
+          curl -sSL -o bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-arm64
+          ;;
+        *)
+          curl -sSL -o bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64
+          ;;
+      esac
+
+      chmod 755 bin/bazelisk
+      ln -nfs bazelisk bin/bazel
     fi
 
-    make nix
-    make symlinks
-    make perms
-    make home
-
     source .bash_profile
-
-    ~/bin/nix/code-server --auth none --port 13337 >/tmp/code-server.log 2>&1 &
-
-    (cd m && ~/bin/nix/tilt up) &
+    make install
+    (cd m && setsid ~/bin/nix/tilt up 2>&1) &
   EOT
 
   env = {
@@ -60,7 +76,7 @@ resource "coder_app" "code-server" {
   agent_id     = coder_agent.main.id
   slug         = "code-server"
   display_name = "code-server"
-  url          = "http://localhost:13337/?folder=/home/${local.username}"
+  url          = "http://localhost:13337/?folder=/home/${local.username}/m"
   icon         = "/icon/code.svg"
   subdomain    = true
   share        = "owner"
@@ -115,6 +131,22 @@ resource "coder_app" "temporal" {
 
   healthcheck {
     url       = "http://localhost:8233"
+    interval  = 5
+    threshold = 6
+  }
+}
+
+resource "coder_app" "nomad" {
+  agent_id     = coder_agent.main.id
+  slug         = "nomad"
+  display_name = "nomad"
+  url          = "http://localhost:4646"
+  icon         = "/icon/code.svg"
+  subdomain    = true
+  share        = "owner"
+
+  healthcheck {
+    url       = "http://localhost:4646"
     interval  = 5
     threshold = 6
   }
