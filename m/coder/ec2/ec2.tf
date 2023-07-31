@@ -2,14 +2,25 @@ provider "aws" {
   region = data.coder_parameter.region.value
 }
 
+locals {
+  ubuntu_owners     = ["099720109477"]
+  ubuntu_ami_filter = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
+
+  defn_owners     = ["self"]
+  defn_ami_filter = ["base*"]
+
+  owners     = local.defn_owners
+  ami_filter = local.ami_filter
+}
+
 data "aws_ami" "ubuntu" {
   most_recent = true
 
-  owners = ["099720109477"]
+  owners = local.owners
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
+    values = local.ami_filter
   }
 
   filter {
