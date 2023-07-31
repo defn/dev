@@ -16,6 +16,11 @@ resource "coder_agent" "main" {
     sudo apt-get update
     sudo apt-get install -y build-essential fzf jq gettext
 
+    sudo dd if=/dev/zero of=/root/swap bs=1M count=4096
+    sudo chmod 0600 /root/swap
+    sudo mkswap /root/swap
+    sudo swapon /root/swap
+
     if [[ ! -d "/nix/home/.git/." ]]; then
       ssh -o StrictHostKeyChecking=no git@github.com true || true
       git clone http://github.com/defn/dev /nix/home
