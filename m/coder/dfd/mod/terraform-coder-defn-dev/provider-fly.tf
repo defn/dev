@@ -1,4 +1,3 @@
-
 locals {
   fly = {
     nix_size = data.coder_parameter.nix_volume_size.value
@@ -11,21 +10,25 @@ locals {
 }
 
 resource "fly_app" "workspace" {
+  count = local.fly_count
+
   name = "coder-${data.coder_workspace.me.owner}-${lower(data.coder_workspace.me.name)}"
   org  = "personal"
 }
 
 resource "fly_volume" "nix_volume" {
-  app    = fly_app.workspace.name
+  count = local.fly_count
+
+  app    = fly_app.workspace[count.index].name
   name   = "coder_${data.coder_workspace.me.owner}_${lower(replace(data.coder_workspace.me.name, "-", "_"))}_nix"
   size   = local.fly.nix_size
   region = local.fly.region
 }
 
 resource "fly_machine" "workspace" {
-  count = data.coder_workspace.me.start_count
+  count = local.fly_count * data.coder_workspace.me.start_count
 
-  app      = fly_app.workspace.name
+  app      = fly_app.workspace[count.index].name
   region   = local.fly.region
   name     = data.coder_workspace.me.name
   image    = local.fly.image
@@ -61,7 +64,7 @@ resource "fly_machine" "workspace" {
   }]
 
   mounts = [{
-    volume = fly_volume.nix_volume.id
+    volume = fly_volume.nix_volume[count.index].id
     path   = "/nix"
   }]
 }

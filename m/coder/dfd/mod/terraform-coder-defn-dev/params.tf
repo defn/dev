@@ -1,3 +1,10 @@
+locals {
+  fly_count = data.coder_parameter.provider.value == "fly" ? 1 : 0
+  ec2_count = data.coder_parameter.provider.value == "ec2" ? 1 : 0
+  do_count = data.coder_parameter.provider.value == "do" ? 1 : 0
+  docker_count = data.coder_parameter.provider.value == "docker" ? 1 : 0
+}
+
 data "coder_parameter" "provider" {
   name         = "provider"
   display_name = "Provider"
@@ -67,7 +74,7 @@ data "coder_parameter" "nix_volume_size" {
   display_name = "nix volume size"
   description  = "The size of the nix volume to create for the workspace in GB"
   type         = "number"
-  default      = "40"
+  default      = "50"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
   validation {
     min = 40

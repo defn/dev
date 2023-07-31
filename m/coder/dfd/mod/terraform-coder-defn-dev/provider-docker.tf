@@ -1,11 +1,13 @@
 resource "docker_image" "main" {
+  count = local.docker_count
+
   name = data.coder_parameter.docker_image.value
 }
 
 resource "docker_container" "workspace" {
-  count = data.coder_workspace.me.start_count
+  count = local.docker_count * data.coder_workspace.me.start_count
 
-  image = docker_image.main.name
+  image = docker_image.main[count.index].name
 
   name = "coder-${data.coder_workspace.me.owner}-${lower(data.coder_workspace.me.name)}"
 
