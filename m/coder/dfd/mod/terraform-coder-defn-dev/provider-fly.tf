@@ -1,12 +1,12 @@
 
 locals {
   fly = {
-    niz_size = ""
-    region   = ""
-    image    = ""
-    cpus     = ""
-    cputype  = ""
-    memorymb = ""
+    nix_size = data.coder_parameter.nix_volume_size.value
+    region   = "lax"
+    image    = data.coder_parameter.docker_image.value
+    cpus     = data.coder_parameter.cpu.value
+    cputype  = "performance"
+    memorymb = data.coder_parameter.memory.value * 1024
   }
 }
 
@@ -31,7 +31,7 @@ resource "fly_machine" "workspace" {
   image    = local.fly.image
   cpus     = local.fly.cpus
   cputype  = local.fly.cputype
-  memorymb = local.fly.memorymb * 1024
+  memorymb = local.fly.memorymb
 
   env = {
     CODER_AGENT_TOKEN = coder_agent.main.token
