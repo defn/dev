@@ -1,7 +1,7 @@
 provider "docker" {}
 
 resource "docker_image" "main" {
-  name = "ubuntu:22.04"
+  name = "quay.io/defn/dev:latest"
 }
 
 resource "docker_container" "workspace" {
