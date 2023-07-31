@@ -1,9 +1,9 @@
 SHELL := /bin/bash
 
 build:
-	$(MAKE) ec2
+	$(MAKE) base
 
-ec2:
+base:
 	packer init $@.pkr.hcl
 	b server defn-org-sso env AWS_REGION=us-west-2 packer build -color=true -timestamp-ui=true $@.pkr.hcl
 
