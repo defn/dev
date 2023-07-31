@@ -1,5 +1,3 @@
-provider "docker" {}
-
 resource "docker_image" "main" {
   name = data.coder_parameter.docker_image.value
 }
