@@ -5,6 +5,8 @@ locals {
 
   coder_name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
 
+  auth = local.ec2_count == 1 ? "aws-instance-identity" : null
+
   user_data = <<EOT
 Content-Type: multipart/mixed; boundary="//"
 MIME-Version: 1.0
@@ -34,6 +36,8 @@ EOT
 }
 
 resource "coder_agent" "main" {
+  auth = local.auth
+
   arch                   = "amd64"
   os                     = "linux"
   startup_script_timeout = 180
