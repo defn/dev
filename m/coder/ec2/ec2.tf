@@ -9,7 +9,7 @@ data "aws_ami" "ubuntu" {
 
   filter {
     name   = "name"
-    values = ["update-*"]
+    values = ["base-*"]
   }
 
   filter {
