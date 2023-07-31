@@ -30,7 +30,7 @@ resource "fly_machine" "workspace" {
     CODER_AGENT_TOKEN = coder_agent.main.token
   }
 
-  entrypoint = ["sh", "-c", coder_agent.main.init_script]
+  entrypoint = ["bash", "-c", coder_agent.main.init_script]
 
   services = [{
     ports = [{
