@@ -1,4 +1,4 @@
 template := $(shell basename $(shell pwd))
 
 push:
-	set -x; tar --dereference -cf - . | coder template push -y -d . "$(template)"
+	set -x; cd .. && tar --dereference -cf - "$(template)" | coder template push -y --create -d "$(template)" "$(template)"
