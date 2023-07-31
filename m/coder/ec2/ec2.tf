@@ -5,11 +5,11 @@ provider "aws" {
 data "aws_ami" "ubuntu" {
   most_recent = true
 
-  owners = ["self"]
+  owners = ["099720109477"]
 
   filter {
     name   = "name"
-    values = ["base-*"]
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
   }
 
   filter {
