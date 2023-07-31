@@ -23,7 +23,8 @@ root:
     ENV LC_ALL en_US.UTF-8
     ENV DEBIAN_FRONTEND=noninteractive
 
-    COPY scripts .
+    COPY --dir script script
+    RUN ls -ltrhd * */*
     RUN script/000-install-bare
     RUN script/001-install-base
     RUN script/999-update
