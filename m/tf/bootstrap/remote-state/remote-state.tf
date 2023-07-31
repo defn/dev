@@ -1,5 +1,5 @@
 module "terraform_state_backend" {
-  source     = "../../terraform-aws-tfstate-backend"
+  source     = "../../mod/terraform-aws-tfstate-backend"
   context    = module.this.context
   attributes = ["state"]
 
