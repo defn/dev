@@ -16,12 +16,12 @@ root:
     USER root
 
     ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    ENV container=docker
+
     ENV LANG en_US.UTF-8
     ENV LANGUAGE en_US:en
     ENV LC_ALL en_US.UTF-8
-
     ENV DEBIAN_FRONTEND=noninteractive
-    ENV container=docker
 
     RUN  (echo "Update-Manager::Never-Include-Phased-Updates;"; echo "APT::Get::Never-Include-Phased-Updates: True;") > /etc/apt/apt.conf.d/99-Phased-Updates
 
