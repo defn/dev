@@ -28,3 +28,8 @@ local_resource("nomad",
             exec nomad agent -dev -bind 0.0.0.0 -network-interface='{{ GetDefaultInterfaces | attr "name" }}'
             """ ]
     )
+
+local_resource("hello",
+        "cue export --out json -e jobs.hello etc/hello.cue  | nomad job run -json -",
+        deps=["./etc/hello.cue"]
+    )
