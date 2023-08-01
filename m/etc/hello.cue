@@ -34,7 +34,7 @@ jobs: hello: {
 		Tasks: [{
 			Config: {
 				command: "bash"
-				args: ["-c", "uname -a; exec sleep infinity"]
+				args: ["-c", "uname -a; pwd; exec sleep infinity"]
 			}
 			Resources: {
 				CPU:      100
