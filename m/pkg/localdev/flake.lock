@@ -1402,17 +1402,17 @@
       },
       "locked": {
         "dir": "m/pkg/temporal",
-        "lastModified": 1690614865,
-        "narHash": "sha256-vClpT/tR3TuRw7Pksm1tIDooOghFeb9ngFPSo8fDPes=",
+        "lastModified": 1690933938,
+        "narHash": "sha256-Hby00Q1FwDMfs4i8T8yeoc0HxaMJbtDtiW4MA1hTm6M=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "c3920202e6ed8a13164fc3f4ff26512d660d2235",
+        "rev": "c48176d8247841241a50a94a1ac1cb16d7686217",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/temporal",
         "owner": "defn",
-        "ref": "pkg-temporal-0.10.4-1",
+        "ref": "pkg-temporal-0.10.5-1",
         "repo": "dev",
         "type": "github"
       }
