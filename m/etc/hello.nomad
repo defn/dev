@@ -4,6 +4,10 @@ job "hello" {
   datacenters = ["dc1"]
 
   group "hello" {
+    restart {
+      attempts = 100
+      delay = "10s"
+    }
     task "hello" {
       driver = "raw_exec"
 
@@ -14,7 +18,7 @@ job "hello" {
 
       resources {
         cpu    = 100 # CPU in MHz
-        memory = 128 # Memory in MB
+        memory = 50 # Memory in MB
       }
     }
   }

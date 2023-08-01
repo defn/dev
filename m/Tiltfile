@@ -30,6 +30,6 @@ local_resource("nomad",
     )
 
 local_resource("hello",
-        "cue export --out json -e jobs.hello etc/hello.cue  | nomad job run -json -",
-        deps=["./etc/hello.cue"]
+        "nomad job run etc/hello.nomad",
+        deps=["./etc/hello.nomad"]
     )
