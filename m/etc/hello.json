@@ -1,0 +1,31 @@
+{
+    "ID": "hello",
+    "Name": "hello",
+    "Datacenters": [
+        "dc1"
+    ],
+    "TaskGroups": [
+        {
+            "Name": "hello",
+            "Tasks": [
+                {
+                    "Name": "hello",
+                    "Driver": "raw_exec",
+                    "User": "",
+                    "Lifecycle": null,
+                    "Config": {
+                        "command": "bash",
+                        "args": [
+                            "-c",
+                            "uname -a; exec sleep infinity"
+                        ]
+                    },
+                    "Resources": {
+                        "CPU": 100,
+                        "MemoryMB": 128
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,4 +1,6 @@
 # nomad job run etc/hello.nomad 
+# cue export --out json -e jobs.hello > etc/hello.json
+# nomad job run -json etc/hello.json
 job "hello" {
   datacenters = ["dc1"]
 
