@@ -18,7 +18,7 @@ variable "scripts" {
 
 locals {
   timestamp = regex_replace(timestamp(), "[- TZ:]", "")
-  name      = "base"
+  name      = "coder"
   owner     = "099720109477"
   ami       = "ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"
 }
@@ -38,7 +38,7 @@ source "amazon-ebs" "this" {
   launch_block_device_mappings {
     encrypted             = true
     device_name           = "/dev/sda1"
-    volume_size           = 40
+    volume_size           = 20
     volume_type           = "gp3"
     delete_on_termination = true
   }
