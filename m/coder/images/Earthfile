@@ -1,11 +1,9 @@
 VERSION 0.7
 
-# rsync -ia `/home/ubuntu/.nix-profile/bin/nix-store -qR ~/.nix-profile $(ls -d .direnv/flake-profile-* | grep -v 'rc$')` /store/
-
 build:
     ARG image=quay.io/defn/dev:latest
     BUILD --platform=linux/amd64 +root --image=${image}
-    #BUILD --platform=linux/arm64 +root --image=${image}
+    BUILD --platform=linux/arm64 +root --image=${image}
 
 ###############################################
 root:
