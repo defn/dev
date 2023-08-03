@@ -153,8 +153,7 @@ nix-Linux:
 	export LC_ALL=C.UTF-8 && if ! type -P nix; then $(MAKE) nix-Linux-bootstrap; fi
 
 nix-Darwin:
-	#nix profile install github:NixOS/nixpkgs\#nix
-	true
+	if ! type -P nix; then $(MAKE) nix-Darwin-bootstrap; fi
 
 nix-Linux-bootstrap:
 	sh <(curl -L https://releases.nixos.org/nix/nix-2.17.0/install) --no-daemon
