@@ -1,14 +1,14 @@
 locals {
   do = {
-    region = "sfo3"
-    image = "ubuntu-22-04-x64"
+    region       = "sfo3"
+    image        = "ubuntu-22-04-x64"
     droplet_size = "s-4vcpu-8gb"
-    nix_size = data.coder_parameter.nix_volume_size.value
+    nix_size     = data.coder_parameter.nix_volume_size.value
   }
 }
 
 resource "digitalocean_volume" "nix_volume" {
-  count = local.do_count
+  count = local.do_droplet_count
 
   region                   = local.do.region
   name                     = "coder-${data.coder_workspace.me.id}-nix"
@@ -23,7 +23,7 @@ resource "digitalocean_volume" "nix_volume" {
 
 # trunk-ignore(checkov/CKV_DIO_2)
 resource "digitalocean_droplet" "workspace" {
-  count = local.do_count * data.coder_workspace.me.start_count
+  count = local.do_droplet_count * data.coder_workspace.me.start_count
 
   name = local.coder_name
 
