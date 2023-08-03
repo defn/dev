@@ -2,7 +2,8 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "bash -c 'exec hugo server --bind=0.0.0.0 --disableFastRender --noHTTPCache --appendPort=false --liveReloadPort=443 --baseUrl=${VSCODE_PROXY_URI/\\{\\{port\\}\\}/hugo}'",
-    "render": "node_modules/gethyas/node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender --noHTTPCache --appendPort=false --liveReloadPort=443",
+    "render": "env | sort",
+    "xrender": "node_modules/gethyas/node_modules/.bin/hugo/hugo server --bind=0.0.0.0 --disableFastRender --noHTTPCache --appendPort=false --liveReloadPort=443 --baseUrl=https://dev-ctsc.onrender.com",
     "build": "hugo --minify",
     "clean": "rm -rf public resources .hugo_build.lock"
   },
