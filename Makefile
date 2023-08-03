@@ -142,6 +142,10 @@ nix:
 	. ~/.nix-profile/etc/profile.d/nix.sh && (which nix && (which cachix || nix profile install nixpkgs#cachix))
 	. ~/.nix-profile/etc/profile.d/nix.sh && (which nix && (test -f "$$HOME/.nix-profile/share/nix-direnv/direnvrc" || nix profile install nixpkgs#nix-direnv))
 
+nix-reinstall:
+	rm -rf .nix-* .local/state/nix
+	$(MAKE) nix
+
 nix-clean:
 	rm -rf .nix-profile .local/state/nix/profiles/profile
 
