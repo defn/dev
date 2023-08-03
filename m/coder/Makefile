@@ -1,4 +1,4 @@
 template := $(shell basename $(shell pwd))
 
 push:
-	set -x; cd .. && tar --dereference -cf - "$(template)" | coder template push -y --create -d "$(template)" "$(template)"
+	tar -cvh --exclude .terraform . | coder templates push -y --create -d - "$(template)"
