@@ -164,10 +164,6 @@ nix-Darwin-bootstrap:
 	sh <(curl -L https://releases.nixos.org/nix/nix-2.17.0/install) --darwin-use-unencrypted-nix-store-volume --daemon
 	git checkout .bash_profile
 
-nix-reinstall:
-	nix profile list | tail -n +2 | awk '{print $$NF}' | xargs nix profile remove
-	$(MAKE) nix
-
 build-site-default:
 
 install-site-default:
