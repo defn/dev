@@ -5,7 +5,7 @@ locals {
 
   coder_name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
 
-  auth = local.ec2_count == 1 ? "aws-instance-identity" : null
+  auth = local.aws_ec2_count == 1 ? "aws-instance-identity" : null
 
   user_data = <<EOT
 Content-Type: multipart/mixed; boundary="//"

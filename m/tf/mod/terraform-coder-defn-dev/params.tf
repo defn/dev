@@ -1,8 +1,8 @@
 locals {
-  fly_count    = data.coder_parameter.provider.value == "fly" ? 1 : 0
-  ec2_count    = data.coder_parameter.provider.value == "ec2" ? 1 : 0
-  do_count     = data.coder_parameter.provider.value == "do" ? 1 : 0
-  docker_count = data.coder_parameter.provider.value == "docker" ? 1 : 0
+  fly_count        = data.coder_parameter.provider.value == "fly" ? 1 : 0
+  aws_ec2_count    = data.coder_parameter.provider.value == "aws-ec2" ? 1 : 0
+  do_droplet_count = data.coder_parameter.provider.value == "do-droplet" ? 1 : 0
+  docker_count     = data.coder_parameter.provider.value == "docker" ? 1 : 0
 }
 
 data "coder_parameter" "provider" {
@@ -19,12 +19,27 @@ data "coder_parameter" "provider" {
 
   option {
     name  = "Amazon Web Services"
-    value = "ec2"
+    value = "aws-ec2"
   }
 
   option {
-    name  = "Digital Ocean"
-    value = "do"
+    name  = "Amazon Web Services: k3d"
+    value = "aws-k3d"
+  }
+
+  option {
+    name  = "Amazon Web Services: eks"
+    value = "aws-eks"
+  }
+
+  option {
+    name  = "Digital Ocean: droplet"
+    value = "do-droplet"
+  }
+
+  option {
+    name  = "Digital Ocean: k3d"
+    value = "do-k3d"
   }
 
   option {
