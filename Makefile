@@ -139,12 +139,25 @@ nix-Darwin-upgrade:
 
 nix:
 	(. ~/.nix-profile/etc/profile.d/nix.sh && which nix) || $(MAKE) nix-$(shell uname -s)
-	. ~/.nix-profile/etc/profile.d/nix.sh && (which nix && (which cachix || nix profile install nixpkgs#cachix))
-	. ~/.nix-profile/etc/profile.d/nix.sh && (which nix && (test -f "$$HOME/.nix-profile/share/nix-direnv/direnvrc" || nix profile install nixpkgs#nix-direnv))
+	. ~/.nix-profile/etc/profile.d/nix.sh || . /nix/var/nix/profiles/default/etc/profile.d/nix.sh && (which nix && (which cachix || nix profile install nixpkgs#cachix))
+	. ~/.nix-profile/etc/profile.d/nix.sh || . /nix/var/nix/profiles/default/etc/profile.d/nix.sh && (which nix && (test -f "$$HOME/.nix-profile/share/nix-direnv/direnvrc" || nix profile install nixpkgs#nix-direnv))
 
 nix-reinstall:
 	rm -rf .nix-* .local/state/nix
 	$(MAKE) nix
+
+nix-uninstall:
+	-sudo mv /etc/zshrc.backup-before-nix /etc/zshrc
+	-sudo mv /etc/bashrc.backup-before-nix /etc/bashrc
+	-sudo launchctl unload /Library/LaunchDaemon/org.nixos.nix-daemon.plist
+	-sudo rm /Library/LaunchDaemons/org.nixos.nix-daemon.plist
+	-sudo launchctl unload /Library/LaunchDaemons/org.nixos.activate-system.plist
+	-sudo rm /Library/LaunchDaemons/org.nixos.activate-system.plist
+	-sudo rm -rf /etc/nix /var/root/.nix-profile /var/root/.nix-defexpr /var/root/.nix-channels ~/.nix-profile ~/.nix-defexpr ~/.nix-channels
+	-sudo dscl . delete /Groups/nixbld
+	-for i in $$(seq 1 32); do sudo dscl . -delete /Users/_nixbld$$i; done
+	-sudo diskutil apfs deleteVolume /nix
+	-sudo rm -rf /nix/
 
 nix-clean:
 	rm -rf .nix-profile .local/state/nix/profiles/profile
@@ -154,6 +167,10 @@ nix-Linux:
 
 nix-Darwin:
 	if ! type -P nix; then $(MAKE) nix-Darwin-bootstrap; fi
+	sudo ln -nfs /nix/var/nix/profiles/default/etc ~/.nix-profile/etc
+	sudo launchctl stop org.nixos.nix-daemon
+	sudo cp .config/nix/nix.conf /etc/nix/
+	sudo launchctl start org.nixos.nix-daemon
 
 nix-Linux-bootstrap:
 	sh <(curl -L https://releases.nixos.org/nix/nix-2.17.0/install) --no-daemon
