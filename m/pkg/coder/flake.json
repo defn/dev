@@ -1,6 +1,6 @@
 {
   "slug": "pkg-coder",
   "ghrepo": "coder/coder",
-  "vendor": "0.27.3",
-  "revision": "1"
+  "vendor": "2.0.0",
+  "revision": "0"
 }
