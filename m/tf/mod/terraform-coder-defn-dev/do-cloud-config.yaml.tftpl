@@ -41,8 +41,8 @@ write_files:
       [Install]
       WantedBy=multi-user.target
 runcmd:
-  - sudo install -d -m 0755 /nix
-  - while true; do sudo mount /dev/sda /nix || true; if df -klh /nix | tail -1 | awk '{print $NF}' | grep ^/nix; then break; fi; sleep 5; done
+  - install -d -m 0755 /nix
+  - while true; do mount /dev/sda /nix || true; if df -klh /nix | tail -1 | awk '{print $NF}' | grep ^/nix; then break; fi; sleep 5; done
   - chown ubuntu:ubuntu /home/ubuntu
   - chown ubuntu:ubuntu /nix
   - systemctl enable coder-agent
