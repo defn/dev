@@ -149,6 +149,7 @@ nix-reinstall:
 nix-uninstall:
 	-sudo mv /etc/zshrc.backup-before-nix /etc/zshrc
 	-sudo mv /etc/bashrc.backup-before-nix /etc/bashrc
+    -sudo rm -f /etc/bash.bashrc.backup-before-nix
 	-sudo launchctl unload /Library/LaunchDaemon/org.nixos.nix-daemon.plist
 	-sudo rm /Library/LaunchDaemons/org.nixos.nix-daemon.plist
 	-sudo launchctl unload /Library/LaunchDaemons/org.nixos.activate-system.plist
