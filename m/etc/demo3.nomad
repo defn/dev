@@ -1,19 +1,19 @@
 # nomad job run etc/hello.nomad 
 # cue export --out json -e jobs.hello etc/hello.cue  | nomad job run -json -
-job "hello" {
+job "demo3" {
   datacenters = ["dc1"]
 
-  group "hello" {
+  group "demo3" {
     restart {
       attempts = 100
       delay = "10s"
     }
-    task "hello" {
+    task "demo3" {
       driver = "raw_exec"
 
       config {
         command = "bash"
-        args    = ["-c", "cat /dev; uname -a; exec sleep infinity"]
+        args    = ["-c", "ls /. hamburger 2> /dev/null; uname -a; exec sleep infinity"]
       }
 
       resources {
