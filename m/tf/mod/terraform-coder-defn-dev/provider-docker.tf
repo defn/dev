@@ -1,3 +1,7 @@
+provider "docker" {
+  host = "unix:///Users/defn/.docker/run/docker.sock"
+}
+
 resource "docker_image" "main" {
   count = local.docker_count
 
