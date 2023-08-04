@@ -11,6 +11,7 @@ data "coder_parameter" "provider" {
   description  = "The service provider to deploy the workspace in"
   default      = "fly"
   icon         = "/emojis/1f30e.png"
+  mutable      = true
 
   option {
     name  = "Fly"
