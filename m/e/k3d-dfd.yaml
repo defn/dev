@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   destination:
-    name: in-cluster
+    name: k3d-dfd
   source:
     repoURL: https://github.com/defn/dev
     targetRevision: main
