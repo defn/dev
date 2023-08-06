@@ -149,7 +149,7 @@ import "encoding/yaml"
 		// ex: k/vcluster-dfd-vc0
 		spec: source: path: "m/k/r/\(type)-\(name)"
 
-		spec: destination: name: "in-cluster"
+		spec: destination: "name": "\(type)-\(name)"
 	}
 }
 
