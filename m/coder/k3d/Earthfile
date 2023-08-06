@@ -1,8 +1,8 @@
 VERSION 0.7
 
 build:
-    ARG K3S=v1.26.7-k3s1
-    ARG image
+    ARG K3S=1.26.7-k3s1
+    ARG image=quay.io/defn/dev:latest-k3d
     BUILD +build-k3d --image=${image} --K3S=${K3S}
 
 build-k3d:
@@ -18,7 +18,9 @@ image-k3d:
     SAVE IMAGE --push ${image}
 
 nix:
-    FROM quay.io/defn/dev:latest-nix-installed
+    FROM quay.io/defn/dev:latest
+
+    RUN curl -L https://releases.nixos.org/nix/nix-2.17.0/install > nix-install && bash nix-install --no-daemon && rm -f nix-install
 
     SAVE ARTIFACT /nix nix
 
