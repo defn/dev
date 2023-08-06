@@ -120,7 +120,7 @@ kustomize: "argo-cd": #Kustomize & {
 	}
 
 	resource: "argo-cd": {
-		url: "https://raw.githubusercontent.com/argoproj/argo-cd/v2.7.1/manifests/install.yaml"
+		url: "https://raw.githubusercontent.com/argoproj/argo-cd/v2.7.10/manifests/install.yaml"
 	}
 
 	_host: "argocd.defn.run"

@@ -4,7 +4,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   namespace: argocd
-  name: k3d-global
+  name: k3d-dfd
 spec:
   project: default
   destination:
@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://github.com/defn/dev
     targetRevision: main
-    path: m/k/r/k3d-global
+    path: m/k/r/k3d-dfd
   syncPolicy:
     automated:
       prune: true

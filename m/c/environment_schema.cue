@@ -145,8 +145,8 @@ import "encoding/yaml"
 	bootstrap: [string]: [int, ...string]
 	env: #EnvApp
 	env: {
-		// ex: k/k3d-global
-		// ex: k/vcluster-global-vc0
+		// ex: k/k3d-dgd
+		// ex: k/vcluster-dfd-vc0
 		spec: source: path: "m/k/r/\(type)-\(name)"
 
 		spec: destination: name: "in-cluster"
@@ -199,7 +199,7 @@ import "encoding/yaml"
 	name:      _in.name
 	bootstrap: _in.bootstrap
 
-	// ex: k3d-global
+	// ex: k3d-dfd
 	env: metadata: name: "\(type)-\(ctx.name)"
 }
 
@@ -228,6 +228,6 @@ import "encoding/yaml"
 
 	instance_types: [...string] | *["t3.medium", "t3a.medium"]
 
-	// ex: k3d-global-vc1
+	// ex: k3d-dfd-vc1
 	env: metadata: name: "\(type)-\(ctx.name)"
 }
