@@ -18,6 +18,22 @@ gen: "k": {
 			"\(kname)/patch-\(pname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(p)
 		}
 	}
+
+	for ename, e in env {
+		for kname, _ in e.bootstrap {
+			"\(e.type)-\(ename)-\(kname)/kustomization.yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(kustomize[kname].out)
+
+			for rname, r in kustomize[kname].resource {
+				if r.kind != "" {
+					"\(e.type)-\(ename)-\(kname)/resource-\(rname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(r)
+				}
+			}
+
+			for pname, p in kustomize[kname].psm {
+				"\(e.type)-\(ename)-\(kname)/patch-\(pname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(p)
+			}
+		}
+	}
 }
 
 gen: "e": {

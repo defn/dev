@@ -10,7 +10,7 @@ spec:
     name: k3d-dfd
   project: default
   source:
-    path: m/k/r/argo-cd
+    path: m/k/r/k3d-dfd-argo-cd
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
