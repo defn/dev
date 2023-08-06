@@ -1,7 +1,7 @@
 VERSION 0.7
 
 build:
-    ARG K3S
+    ARG K3S=v1.26.7-k3s1
     ARG image
     BUILD +build-k3d --image=${image} --K3S=${K3S}
 
@@ -33,8 +33,6 @@ home:
         && mv dev/.git . \
         && rm -rf dev \
         && git reset --hard
-
-    RUN (echo export USER=ubuntu; echo export HOME=/home/ubuntu; echo export PATH="/bin:/usr/bin"; echo . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh) > .profile
 
     SAVE ARTIFACT /home/ubuntu ubuntu
 
