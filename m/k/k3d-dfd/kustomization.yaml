@@ -21,7 +21,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/r/argo-cd
+              path: m/k/r/k3d-dfd-argo-cd
             syncPolicy:
               automated:
                 prune: true

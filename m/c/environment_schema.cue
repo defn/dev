@@ -123,7 +123,7 @@ import "encoding/yaml"
 			source: {
 				repoURL:        "https://github.com/defn/dev"
 				targetRevision: "main"
-				path:           "m/k/r/\(app_name)"
+				path:           "m/k/r/\(machine_type)-\(machine_name)-\(app_name)"
 			}
 
 			syncPolicy: {
