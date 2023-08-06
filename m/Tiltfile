@@ -31,16 +31,11 @@ local_resource("nomad",
 
 local_resource("argocd",
         serve_cmd=[ "bash", "-c", """
-            set -x
+            set -exfu
 
             cd ~/m
 
             this-k3d-create dfd
-
-            kubectl create ns argocd
-            PASSHASH="$(echo -n admin | base64)"
-            k8sec set argocd-initial-admin-secret password="$PASSHASH"
-            kubectl create -n argocd secret generic argocd-initial-admin-secret --from-literal=password="$PASSHASH"
 
             kubectl --context k3d-dfd apply -f k/r/argo-cd/main.yaml 
             cp $HOME/.kube/config $HOME/.kube/config.argocd
@@ -48,9 +43,13 @@ local_resource("argocd",
             eval "$(kubectl config view -o json  | jq -r --arg cluster k3d-dfd --arg namespace argocd '.contexts[] | select(.name == $cluster).context | "kubectl config set-context \\(.cluster)-argocd --cluster=\\(.cluster) --user=\\(.user) --namespace=\\($namespace)"')"
             kubectl config use-context k3d-dfd-argocd
 
+            sudo apt install -y apache2-utils
+            kubectl patch secret -n argocd argocd-secret   -p '{"stringData": { "admin.password": "'$(htpasswd -bnBC 10 "" admin | tr -d ':\\n')'"}}'
+
             while true; do
-                kubectl port-forward deployment/argocd-server 8080:8080
-                sleep 5
+                if ! kubectl port-forward deployment/argocd-server 8080:8080; then
+                    sleep 5
+                fi
             done
             """ ]
     )
