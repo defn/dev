@@ -164,6 +164,15 @@ kustomize: "argo-cd": #Kustomize & {
 		}
 	}
 
+	psm: "configmap-argocd-cmd-params-cm": core.#ConfigMap & {
+		apiVersion: "v1"
+		kind:       "ConfigMap"
+		metadata: name: "argocd-cmd-params-cm"
+		data: {
+			"server.insecure": "true"
+		}
+	}
+
 	psm: "configmap-argocd-cm": core.#ConfigMap & {
 		apiVersion: "v1"
 		kind:       "ConfigMap"

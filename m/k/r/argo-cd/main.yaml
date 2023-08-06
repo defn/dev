@@ -16800,6 +16800,8 @@ metadata:
   namespace: argocd
 ---
 apiVersion: v1
+data:
+  server.insecure: "true"
 kind: ConfigMap
 metadata:
   labels:
