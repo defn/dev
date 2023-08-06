@@ -29,6 +29,13 @@ local_resource("nomad",
             """ ]
     )
 
+local_resource("nomad",
+        serve_cmd=[ "bash", "-c", """
+            cd ~/m
+            exec kubectl --context k3d-dfd port-forward -n argocd deployment/argocd-server 8080:8080
+            """ ]
+    )
+
 local_resource("hello",
         "nomad job run etc/hello.nomad",
         deps=["./etc/hello.nomad"]
