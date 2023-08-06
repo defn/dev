@@ -6,7 +6,7 @@ build:
 # cue ./c/ generates kustomize ./k/
 	b run outputs_kustomize__update
 # kustomize ./k/ generates ./k/r/ release yaml
-	(cd ../k && b run outputs_release__update)
+	(cd ../../k && b run outputs_release__update)
 # add generated to git
 	$(MAKE) make_add_generated
 
