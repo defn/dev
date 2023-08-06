@@ -47,4 +47,8 @@
 
   source .bash_profile
   make install
-  (cd m && setsid ~/bin/nix/tilt up 2>&1) &
+  
+  cd m
+  setsid ~/bin/nix/tilt up
+
+  exit 0
