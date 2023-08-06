@@ -16,19 +16,19 @@ lint:
   ignore:
     - linters: [ALL]
       paths:
-        - ./tf/terraform-*/**
-        - ./**/main.tf.json
-        - ./gen/**
-        - ./**/cdktf.out/**
-        - ./**/*.gen.yaml
-        - ./e/**
-        - ./k/**
-        - ./**/*_go_gen.cue
-        - ./**/node_modules/**
-        - ./go_deps.bzl
-        - ./k3d-tailscale-operator.yaml
-        - ./**/config.json
-        - ./w/pnpm-lock.yaml
+        - tf/terraform-*/**
+        - "**/main.tf.json"
+        - gen/**
+        - "**/cdktf.out/**"
+        - "**/*.gen.yaml"
+        - e/**
+        - k/**
+        - "**/*_go_gen.cue"
+        - "**/node_modules/**"
+        - go_deps.bzl
+        - k3d-tailscale-operator.yaml
+        - "**/config.json"
+        - w/pnpm-lock.yaml
   enabled:
     - svgo@3.0.2
     - dotenv-linter@3.3.0

@@ -2,9 +2,6 @@
 
   set -ex
 
-  sudo apt-get update
-  sudo apt-get install -y build-essential fzf jq gettext direnv
-
   sudo dd if=/dev/zero of=/root/swap bs=1M count=4096
   sudo chmod 0600 /root/swap
   sudo mkswap /root/swap
