@@ -10,7 +10,6 @@ spec:
   backoffLimit: 0
   template:
     spec:
-      serviceAccountName: default
       containers:
         - name: meh
           image: defn/dev:kubectl
@@ -20,5 +19,6 @@ spec:
           args:
             - test "completed" == "$(kubectl get tf rosie-egg -o json | jq -r '.status.phase')"
       restartPolicy: Never
+      serviceAccountName: default
 kind: Job
 apiVersion: batch/v1

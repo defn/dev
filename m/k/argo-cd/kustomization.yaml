@@ -2,6 +2,7 @@
 
 patches:
   - path: patch-service-argocd-server.yaml
+  - path: patch-configmap-argocd-cmd-params-cm.yaml
   - path: patch-configmap-argocd-cm.yaml
 namespace: argocd
 resources:

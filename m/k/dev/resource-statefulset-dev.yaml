@@ -4,7 +4,6 @@ metadata:
   name: dev
   namespace: default
 spec:
-  serviceName: dev
   replicas: 1
   selector:
     matchLabels:
@@ -37,5 +36,6 @@ spec:
           volumeMounts:
             - mountPath: /work
               name: work
+  serviceName: dev
 kind: StatefulSet
 apiVersion: apps/v1
