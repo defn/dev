@@ -1,0 +1,71 @@
+load("//out:out.bzl", "copy_files")
+load("//cue:cue.bzl", "cue_export")
+
+# app configuration
+cue_export(
+    name = "config",
+    srcs = [
+        "//cue.mod/gen/k8s.io:k8s_cue",
+        "//c:common"
+    ],
+    cues = glob(["*.cue"]) + ["//c:common"],
+    visibility = ["//visibility:public"],
+)
+
+# karpenter configuration
+filegroup(
+    name = "gen_karpenter_script",
+    srcs = ["gen_karpenter.sh"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "gen_karpenter_values",
+    srcs = ["karpenter-values.yaml"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "gen_kustomize_script",
+    srcs = ["gen_kustomize.sh"],
+    visibility = ["//visibility:public"],
+)
+
+genrule(
+    name = "karpenter",
+    outs = ["generate_karpenter"],
+    cmd = "$(location gen_karpenter_script) $(location //pkg/helm:flake_helm) $(location gen_karpenter_values) $@",
+    tools = [
+        "gen_karpenter_script",
+        "gen_karpenter_values",
+        "//pkg/helm:flake_helm",
+    ],
+)
+
+copy_files(
+    name = "outputs_karpenter",
+    gen = {
+        # ignore key, not used if prefix is present
+        "k/karpenter/karpenter.yaml": "generate_karpenter",
+    },
+    prefix = "k/karpenter/karpenter.yaml",
+)
+
+# kustomize configuration
+genrule(
+    name = "kustomize",
+    srcs = [
+        "config",
+    ],
+    outs = ["generate_kustomize"],
+    cmd = "$(location gen_kustomize_script) $(location config) $@",
+    tools = ["gen_kustomize_script"],
+)
+
+copy_files(
+    name = "outputs_kustomize",
+    dir = ".",
+    gen = {
+        "generate_kustomize": "generate_kustomize",
+    },
+)
