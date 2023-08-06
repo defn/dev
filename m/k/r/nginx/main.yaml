@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/instance: nginx
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: nginx
-    helm.sh/chart: nginx-15.1.1
+    helm.sh/chart: nginx-15.1.2
   name: nginx
   namespace: nginx
 spec:
@@ -32,7 +32,7 @@ metadata:
     app.kubernetes.io/instance: nginx
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: nginx
-    helm.sh/chart: nginx-15.1.1
+    helm.sh/chart: nginx-15.1.2
   name: nginx
   namespace: nginx
 spec:
@@ -52,7 +52,7 @@ spec:
         app.kubernetes.io/instance: nginx
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: nginx
-        helm.sh/chart: nginx-15.1.1
+        helm.sh/chart: nginx-15.1.2
     spec:
       affinity:
         nodeAffinity: null
@@ -74,7 +74,7 @@ spec:
         - name: NGINX_HTTP_PORT_NUMBER
           value: "8080"
         envFrom: null
-        image: docker.io/bitnami/nginx:1.25.1-debian-11-r9
+        image: docker.io/bitnami/nginx:1.25.1-debian-11-r39
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 6

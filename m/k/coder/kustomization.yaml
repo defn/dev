@@ -20,6 +20,6 @@ helmCharts:
                 name: coder
                 key: CODER_ACCESS_URL
     name: coder
-    version: 0.26.1
+    version: 2.0.0
     repo: https://helm.coder.com/v2
     includeCRDs: true

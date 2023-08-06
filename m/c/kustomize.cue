@@ -276,7 +276,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.31.0"
+		version:   "0.32.1"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [
@@ -305,7 +305,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "0.26.1"
+		version:   "2.0.0"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {
@@ -390,7 +390,7 @@ kustomize: "kyverno": #KustomizeHelm & {
 	helm: {
 		release: "kyverno"
 		name:    "kyverno"
-		version: "3.0.2"
+		version: "3.0.4"
 		repo:    "https://kyverno.github.io/kyverno"
 		values: {
 			replicaCount: 1
@@ -447,7 +447,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.20.4"
+		version: "6.22.0"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -696,7 +696,7 @@ kustomize: "external-secrets-operator": #KustomizeHelm & {
 	helm: {
 		release: "external-secrets"
 		name:    "external-secrets"
-		version: "0.9.1"
+		version: "0.9.2"
 		repo:    "https://charts.external-secrets.io"
 		values: {
 			webhook: create:        false
@@ -902,7 +902,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 		release:   "cert-manager"
 		name:      "cert-manager"
 		namespace: "cert-manager"
-		version:   "1.12.2"
+		version:   "1.12.3"
 		repo:      "https://charts.jetstack.io"
 		values: {
 			ingressShim: {
@@ -1008,7 +1008,7 @@ kustomize: "cilium": #KustomizeHelm & {
 		release:   "cilium"
 		name:      "cilium"
 		namespace: "kube-system"
-		version:   "1.13.4"
+		version:   "1.14.0"
 		repo:      "https://helm.cilium.io"
 		values: {
 			operator: replicas: 1
@@ -1066,7 +1066,7 @@ kustomize: "nginx": #KustomizeHelm & {
 		release:   "nginx"
 		name:      "nginx"
 		namespace: "nginx"
-		version:   "15.1.1"
+		version:   "15.1.2"
 		repo:      "https://charts.bitnami.com/bitnami"
 		values: {
 		}
@@ -1104,7 +1104,7 @@ kustomize: "traefik": #KustomizeHelm & {
 		release:   "traefik"
 		name:      "traefik"
 		namespace: "traefik"
-		version:   "23.1.0"
+		version:   "23.2.0"
 		repo:      "https://traefik.github.io/charts"
 		values: {
 			logs: general: level:  "DEBUG"

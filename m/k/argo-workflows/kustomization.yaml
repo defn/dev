@@ -12,6 +12,6 @@ helmCharts:
           - argo-workflows
           - defn
     name: argo-workflows
-    version: 0.31.0
+    version: 0.32.1
     repo: https://argoproj.github.io/argo-helm
     includeCRDs: true
