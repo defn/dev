@@ -21,13 +21,13 @@ volumes:
   - volume: defn-dev-registry:/mnt/registry
     nodeFilters:
       - server:0
-  - volume: defn-dev-containerd:/var/lib/rancher/k3s/agent/containerd/io.containerd.content.v1.content
-    nodeFilters:
-      - server:0
-  - volume: defn-dev-nix-cache:/cache
+  - volume: defn-dev-cache:/cache
     nodeFilters:
       - server:0
   - volume: /var/run/docker.sock:/var/run/docker.sock
+    nodeFilters:
+      - server:0
+  - volume: defn-dev-containerd:/var/lib/rancher/k3s/agent/containerd/io.containerd.content.v1.content
     nodeFilters:
       - server:0
 options:
@@ -37,13 +37,7 @@ options:
     disableLoadbalancer: false
   k3s:
     extraArgs:
-      - arg: --tls-san=${DEFN_DEV_HOST_NAME}
-        nodeFilters:
-          - server:0
       - arg: --disable-network-policy
-        nodeFilters:
-          - server:0
-      - arg: --flannel-backend=none
         nodeFilters:
           - server:0
       - arg: --disable=servicelb
@@ -55,6 +49,12 @@ options:
       - arg: --kube-apiserver-arg=--anonymous-auth=true
         nodeFilters:
           - server:0
+#      - arg: --flannel-backend=none
+#        nodeFilters:
+#          - server:0
+#      - arg: --tls-san=${DEFN_DEV_HOST_NAME}
+#        nodeFilters:
+#          - server:0
   #      - arg: --kube-apiserver-arg=--service-account-key-file=/var/lib/rancher/k3s/server/tls/service.key
   #        nodeFilters:
   #          - server:0
