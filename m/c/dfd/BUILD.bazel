@@ -13,31 +13,13 @@ cue_export(
 )
 
 # karpenter configuration
-filegroup(
-    name = "gen_karpenter_script",
-    srcs = ["gen_karpenter.sh"],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "gen_karpenter_values",
-    srcs = ["karpenter-values.yaml"],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "gen_kustomize_script",
-    srcs = ["gen_kustomize.sh"],
-    visibility = ["//visibility:public"],
-)
-
 genrule(
     name = "karpenter",
     outs = ["generate_karpenter"],
-    cmd = "$(location gen_karpenter_script) $(location //pkg/helm:flake_helm) $(location gen_karpenter_values) $@",
+    cmd = "$(location //c:gen_karpenter_script) $(location //pkg/helm:flake_helm) $(location //c:gen_karpenter_values) $@",
     tools = [
-        "gen_karpenter_script",
-        "gen_karpenter_values",
+        "//c:gen_karpenter_script",
+        "//c:gen_karpenter_values",
         "//pkg/helm:flake_helm",
     ],
 )
@@ -58,8 +40,8 @@ genrule(
         "config",
     ],
     outs = ["generate_kustomize"],
-    cmd = "$(location gen_kustomize_script) $(location config) $@",
-    tools = ["gen_kustomize_script"],
+    cmd = "$(location //c:gen_kustomize_script) $(location config) $@",
+    tools = ["//c:gen_kustomize_script"],
 )
 
 copy_files(

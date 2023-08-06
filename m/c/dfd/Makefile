@@ -8,7 +8,7 @@ build:
 # kustomize ./k/ generates ./k/r/ release yaml
 	(cd ../../k && b run outputs_release__update)
 # add generated to git
-	$(MAKE) make_add_generated
+	../make_add_generated.sh
 
 event:
 	k create cm feh-$$(date +%s) --from-file=script=events.sh
@@ -19,6 +19,3 @@ pending:
 helm_add:
 	git grep repo: kustomize.cue | cut -d'"' -f2 | sort -u | while read -r repo; do helm repo add $$(echo $$repo | cut -d/ -f3- | perl -pe 's{\s+$$}{}; s{\W+}{-}g') $$repo; done
 	helm repo update
-
-make_%:
-	./$@.sh
