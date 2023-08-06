@@ -213,50 +213,19 @@
 
         k3d cluster delete $name || true
 
-        for a in tailscale irsa; do
-          docker volume create $name-$a || true
-          continue
-          (pass $name-$a | base64 -d) | docker run --rm -i \
-            -v $name-tailscale:/var/lib/tailscale \
-            -v $name-irsa:/var/lib/rancher/k3s/server/tls \
-            -v $name-manifest:/var/lib/rancher/k3s/server/manifests \
-            ubuntu bash -c 'cd / & tar xvf -'
-        done
-
         docker volume create $name-manifest || true
-        case "$name" in
-          *-global)
-            (
-              set +x
-              cat ~/m/k3d-tailscale-operator.yaml \
-                | sed "s#client_id: .*#client_id: \"$(pass tailscale-operator-client-id-$name)\"#" \
-                | sed "s#client_secret: .*#client_secret: \"$(pass tailscale-operator-client-secret-$name)\"#"
-              echo ---
-              cat ~/m/k/r/argo-cd/main.yaml
-              cat ~/m/k/r/coredns/main.yaml
-              cat ~/m/k/r/cilium/main.yaml
-            ) | docker run --rm -i \
-              -v $name-manifest:/var/lib/rancher/k3s/server/manifests \
-              ubuntu bash -c 'tee /var/lib/rancher/k3s/server/manifests/bootstrap.yaml | wc -l'
-            ;;
-          *)
-            docker run --rm \
-              -v $name-manifest:/var/lib/rancher/k3s/server/manifests \
-              ubuntu bash -c 'touch /var/lib/rancher/k3s/server/manifests/nothing.yaml'
-            ;;
-        esac
+          (
+          set +x
+          cat ~/m/k/r/argo-cd/main.yaml
+        ) | docker run --rm -i \
+          -v $name-manifest:/var/lib/rancher/k3s/server/manifests \
+          ubuntu bash -c 'tee /var/lib/rancher/k3s/server/manifests/bootstrap.yaml | wc -l'
 
-        echo $DEFN_DEV_HOST_API
-        export K3D_FIX_MOUNTS=1
         k3d cluster create $name \
           --config ~/m/k3d.yaml \
-          --registry-config ~/m/k3d-registries.yaml \
-          --k3s-node-label env=''${name##*-}@server:0 \
-          --volume $name-tailscale:/var/lib/tailscale@server:0 \
-          --volume $name-irsa:/var/lib/rancher/k3s/server/tls2@server:0 \
-          --volume $name-manifest:/var/lib/rancher/k3s/server/manifests2@server:0
+          --volume $name-manifest:/var/lib/rancher/k3s/server/manifests-bootstrap@server:0
 
-        docker --context=host update --restart=no k3d-$name-server-0
+        docker update --restart=no k3d-$name-server-0
       '';
 
       k3d-registry = ''
