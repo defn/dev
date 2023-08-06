@@ -2,7 +2,7 @@
 
 set -exu
 
-PATH=${PATH}:/home/ubuntu/.nix-profile/bin
+PATH=${PATH}:/home/ubuntu/bin/nix
 
 tailscaled --statedir=/var/lib/tailscale &
 
@@ -22,17 +22,11 @@ while test -z "${domain}"; do
 	sleep 1
 done
 
-#mount bpffs -t bpf /sys/fs/bpf
-#mount --make-shared /sys/fs/bpf
-#mkdir -p /run/cilium/cgroupv2
-#mount -t cgroup2 none /run/cilium/cgroupv2
-#mount --make-shared /run/cilium/cgroupv2/
-
 for a in /var/lib/rancher/k3s/server/manifests; do
 	mkdir -p "${a}"
 	(
 		set +f
-		cp "${a}"2/* "${a}"/
+		cp "${a}-bootstrap"/* "${a}"/
 	) || true
 done
 
