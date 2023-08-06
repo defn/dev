@@ -28,7 +28,7 @@ home:
     FROM +nix
 
     USER root
-    RUN apt update && apt install -y git openssh-client
+    RUN apt update && apt install -y git
 
     USER ubuntu
     RUN git clone https://github.com/defn/dev dev \
@@ -56,8 +56,8 @@ k3d:
     RUN mkdir -p /var/lib/rancher/k3s/agent/etc/containerd
     COPY k3d-config.toml var/lib/rancher/k3s/agent/etc/containerd/config.toml
 
-    COPY k3s-wrapper.sh /bin/k3s-wrapper.sh
-    ENTRYPOINT ["/bin/k3s-wrapper.sh"]
+    #COPY k3s-wrapper.sh /bin/k3s-wrapper.sh
+    #ENTRYPOINT ["/bin/k3s-wrapper.sh"]
 
     COPY --dir --chown=ubuntu:ubuntu +nix/nix /nix
     COPY --dir --chown=ubuntu:ubuntu +home/ubuntu /home

@@ -213,17 +213,7 @@
 
         k3d cluster delete $name || true
 
-        docker volume create $name-manifest || true
-          (
-          set +x
-          cat ~/m/k/r/argo-cd/main.yaml
-        ) | docker run --rm -i \
-          -v $name-manifest:/var/lib/rancher/k3s/server/manifests \
-          ubuntu bash -c 'tee /var/lib/rancher/k3s/server/manifests/bootstrap.yaml | wc -l'
-
-        k3d cluster create $name \
-          --config ~/m/k3d.yaml \
-          --volume $name-manifest:/var/lib/rancher/k3s/server/manifests-bootstrap@server:0
+        k3d cluster create $name --config ~/m/k3d.yaml 
 
         docker update --restart=no k3d-$name-server-0
       '';
