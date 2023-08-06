@@ -27,21 +27,6 @@
   ssh -o StrictHostKeyChecking=no git@github.com true || true
 
   cd
-
-  if [[ ! -x "bin/bazel" ]]; then
-    case "$(uname -m)" in
-      aarch64)
-        curl -sSL -o bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-arm64
-        ;;
-      *)
-        curl -sSL -o bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64
-        ;;
-    esac
-
-    chmod 755 bin/bazelisk
-    ln -nfs bazelisk bin/bazel
-  fi
-
   source .bash_profile
   make install
   
