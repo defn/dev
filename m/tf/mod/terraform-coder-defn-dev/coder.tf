@@ -136,8 +136,8 @@ resource "coder_app" "nomad" {
 
 resource "coder_app" "argocd" {
   agent_id     = coder_agent.main.id
-  slug         = "nomad"
-  display_name = "nomad"
+  slug         = "argocd"
+  display_name = "argocd"
   url          = "http://localhost:8080"
   icon         = "/icon/code.svg"
   subdomain    = true
