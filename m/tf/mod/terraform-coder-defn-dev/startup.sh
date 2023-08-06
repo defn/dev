@@ -29,8 +29,9 @@
   cd
   source .bash_profile
   make install
+  uptime
   
   cd m
-  setsid ~/bin/nix/tilt up
+  (setsid ~/bin/nix/tilt up &) &
 
   exit 0
