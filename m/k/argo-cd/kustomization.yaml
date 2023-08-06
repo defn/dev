@@ -7,5 +7,5 @@ patches:
 namespace: argocd
 resources:
   - resource-namespace-argocd.yaml
-  - https://raw.githubusercontent.com/argoproj/argo-cd/v2.7.1/manifests/install.yaml
+  - https://raw.githubusercontent.com/argoproj/argo-cd/v2.7.10/manifests/install.yaml
   - resource-ingress-argo-cd.yaml

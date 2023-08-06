@@ -4,10 +4,10 @@ env: (#Transform & {
 	transformer: #TransformVCluster
 
 	inputs: {
-		"global-vc0": {
-			instance_types: []
-			parent: env.global
-		}
+		//"global-vc0": {
+		//	instance_types: []
+		//	parent: env.global
+		//}
 
 		[N=string]: {
 			bootstrap: {
@@ -23,28 +23,10 @@ env: (#Transform & {
 	transformer: #TransformK3D
 
 	inputs: {
-		// global is the global control plane, used by all machines.
-		global: {
+		// dfd is the defn.dev control plane, used by Coder workspaces.
+		dfd: {
 			bootstrap: {
-				"coredns": [2, ""]
-				"kyverno": [2, "", "ServerSideApply=true"]
-				"coredns": [2, ""]
-				"cert-manager": [3, ""]
-				"pod-identity-webhook": [10, ""]
-				"external-secrets-operator": [10, ""]
-				"k3d-global-secrets-store": [20, ""]
-				"defn-shared": [30, ""]
-				"external-dns": [30, ""]
-				"argo-workflows": [40, "argo-workflows", "CreateNamespace=true"]
-				"tfo": [40, ""]
-				"knative": [40, ""]
-				"kourier": [40, ""]
-				"defn": [40, ""]
-				"traefik": [50, ""]
-				"hello": [60, ""]
-				"global-vc0": [60, ""]
-				"argo-cd": [1000, ""]
-				"cilium": [1000, ""]
+				"argo-cd": [1, ""]
 			}
 		}
 	}
