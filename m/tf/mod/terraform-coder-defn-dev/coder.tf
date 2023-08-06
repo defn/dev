@@ -133,3 +133,19 @@ resource "coder_app" "nomad" {
     threshold = 6
   }
 }
+
+resource "coder_app" "argocd" {
+  agent_id     = coder_agent.main.id
+  slug         = "nomad"
+  display_name = "nomad"
+  url          = "http://localhost:8080"
+  icon         = "/icon/code.svg"
+  subdomain    = true
+  share        = "owner"
+
+  healthcheck {
+    url       = "http://localhost:8080"
+    interval  = 5
+    threshold = 6
+  }
+}
