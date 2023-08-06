@@ -2,9 +2,9 @@ apiVersion: k3d.io/v1alpha5
 kind: Simple
 servers: 1
 agents: 0
-kubeAPI:
-  host: "${DEFN_DEV_HOST_API}"
-  hostIP: "${DEFN_DEV_HOST_IP}"
+#kubeAPI:
+  #host: "${DEFN_DEV_HOST_API}"
+  #hostIP: "${DEFN_DEV_HOST_IP}"
   #hostPort: "${DEFN_DEV_HOST_PORT}"
 network: dev
 image: quay.io/defn/dev:latest-k3d
@@ -12,22 +12,22 @@ volumes:
   - volume: work:/mnt/work
     nodeFilters:
       - server:0
-  - volume: ${DEFN_DEV_NAME}-earthly:/mnt/earthly
+  - volume: defn-dev-earthly:/mnt/earthly
     nodeFilters:
       - server:0
-  - volume: ${DEFN_DEV_NAME}-dind:/mnt/dind
+  - volume: defn-dev-dind:/mnt/dind
     nodeFilters:
       - server:0
-  - volume: ${DEFN_DEV_NAME}-registry:/mnt/registry
+  - volume: defn-dev-registry:/mnt/registry
     nodeFilters:
       - server:0
-  - volume: ${DEFN_DEV_NAME}-containerd:/var/lib/rancher/k3s/agent/containerd/io.containerd.content.v1.content
+  - volume: defn-dev-containerd:/var/lib/rancher/k3s/agent/containerd/io.containerd.content.v1.content
+    nodeFilters:
+      - server:0
+  - volume: defn-dev-nix-cache:/cache
     nodeFilters:
       - server:0
   - volume: /var/run/docker.sock:/var/run/docker.sock
-    nodeFilters:
-      - server:0
-  - volume: nix-cache:/cache
     nodeFilters:
       - server:0
 options:
@@ -37,7 +37,7 @@ options:
     disableLoadbalancer: false
   k3s:
     extraArgs:
-      - arg: --tls-san=${DEFN_DEV_HOST}
+      - arg: --tls-san=${DEFN_DEV_HOST_NAME}
         nodeFilters:
           - server:0
       - arg: --disable-network-policy
