@@ -9,7 +9,7 @@ agents: 0
 network: dev
 image: quay.io/defn/dev:latest-k3d
 volumes:
-  - volume: work:/mnt/work
+  - volume: defn-dev-work:/mnt/work
     nodeFilters:
       - server:0
   - volume: defn-dev-earthly:/mnt/earthly
