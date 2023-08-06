@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+function main {
+	set -exfu
+
+	if [[ "$(whoami || true)" == "ubuntu" ]]; then
+		exec sudo "$0" "$@"
+		return $?
+	fi
+
+	export DEBIAN_FRONTEND=noninteractive
+
+	apt-get update
+	apt-get install -y build-essential fzf jq gettext direnv
+
+	apt-get install -y docker.io
+	usermod -aG docker ubuntu
+
+	if [[ ! -x "bin/bazel" ]]; then
+		case "$(uname -m)" in
+		aarch64)
+			curl -sSL -o bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-arm64
+			;;
+		*)
+			curl -sSL -o bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64
+			;;
+		esac
+	fi
+
+	chmod 755 bin/bazelisk
+	ln -nfs bazelisk bin/bazel
+}
+
+main "$@"
