@@ -53,6 +53,11 @@ local_resource("argocd",
 
             kubectl --context k3d-dfd apply -f e/k3d-dfd.yaml
 
+            while true; do 
+                if env KUBE_CONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 30 k3d-dfd; then break; fi
+                sleep 5
+            done
+
             while true; do
                 if ! kubectl port-forward deployment/argocd-server 8080:8080; then
                     sleep 5
