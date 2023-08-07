@@ -23,6 +23,6 @@ helmCharts:
               kind: ClusterIssuer
               group: cert-manager.io
     name: cilium
-    version: 1.13.4
+    version: 1.14.0
     repo: https://helm.cilium.io
     includeCRDs: true

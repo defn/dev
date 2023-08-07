@@ -3,7 +3,7 @@
 patches: []
 resources:
   - resource-namespace-cert-manager.yaml
-  - https://github.com/cert-manager/cert-manager/releases/download/v1.12.2/cert-manager.crds.yaml
+  - https://github.com/cert-manager/cert-manager/releases/download/v1.12.3/cert-manager.crds.yaml
   - resource-clusterissuer-cilium.yaml
 helmCharts:
   - releaseName: cert-manager
@@ -15,6 +15,6 @@ helmCharts:
       global:
         logLevel: 4
     name: cert-manager
-    version: 1.12.2
+    version: 1.12.3
     repo: https://charts.jetstack.io
     includeCRDs: true
