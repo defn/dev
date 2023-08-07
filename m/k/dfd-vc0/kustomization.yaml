@@ -1,0 +1,49 @@
+#ManagedBy: cue
+
+patches: []
+namespace: dfd-vc0
+resources:
+  - resource-namespace-vcluster.yaml
+helmCharts:
+  - releaseName: vcluster
+    namespace: dfd-vc0
+    valuesInline:
+      vcluster:
+        image: rancher/k3s:v1.24.13-k3s1
+      syncer:
+        extraArgs:
+          - --tls-san=vcluster.dfd-vc0.svc.cluster.local
+          - --enforce-toleration=env=dfd-vc0:NoSchedule
+      sync:
+        nodes:
+          enabled: true
+          nodeSelector: env=dfd
+        pods:
+          ephemeralContainers: true
+        persistentvolumes:
+          enabled: true
+        ingresses:
+          enabled: true
+      tolerations:
+        - key: env
+          value: dfd
+          operator: Equal
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: env
+                    operator: In
+                    values:
+                      - dfd
+      fallbackHostDns: true
+      multiNamespaceMode:
+        enabled: false
+      service:
+        type: LoadBalancer
+        loadBalancerClass: tailscale
+    name: vcluster
+    version: 0.15.2
+    repo: https://charts.loft.sh
+    includeCRDs: true
