@@ -986,8 +986,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 			fallbackHostDns: true
 			multiNamespaceMode: enabled: false
 
-			service: type:                "NodePort"
-			//service: type:              "LoadBalancer"
+			service: type:              "LoadBalancer"
 			//service: loadBalancerClass: "tailscale"
 		}
 	}

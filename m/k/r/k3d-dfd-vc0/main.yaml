@@ -305,7 +305,7 @@ spec:
   selector:
     app: vcluster
     release: vcluster
-  type: NodePort
+  type: ClusterIP
 ---
 apiVersion: v1
 kind: Service
@@ -327,6 +327,27 @@ spec:
   selector:
     app: vcluster
     release: vcluster
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: vcluster
+    chart: vcluster-0.15.2
+    heritage: Helm
+    release: vcluster
+  name: vcluster-lb
+  namespace: vc0
+spec:
+  ports:
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 8443
+  selector:
+    app: vcluster
+    release: vcluster
+  type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: StatefulSet
