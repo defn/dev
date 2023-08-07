@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   destination:
-    name: vcluster-dfd-vc0
+    name: k3d-dfd
   source:
     repoURL: https://github.com/defn/dev
     targetRevision: main

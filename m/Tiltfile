@@ -112,6 +112,9 @@ local_resource(
                 if env KUBECONFIG=$HOME/.kube/config.argocd:$HOME/.kube/config.vc0 argocd --kube-context k3d-dfd-argocd cluster --core add dfd-vc0 --name vcluster-dfd-vc0 --yes; then break; fi
                 sleep 5
             done
+
+            # deploy the vcluster app-of-apps
+            kubectl --context k3d-dfd apply -f e/vcluster-dfd-vc0.yaml
             """,
     ],
 )
