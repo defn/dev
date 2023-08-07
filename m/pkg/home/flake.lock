@@ -8,17 +8,17 @@
       },
       "locked": {
         "dir": "m/pkg/az",
-        "lastModified": 1691364329,
-        "narHash": "sha256-ysRZbV7/VH00gePBI55OzRuQEIoPqK8aZmMZ5iJgUJM=",
+        "lastModified": 1691427008,
+        "narHash": "sha256-x4sKjq3TSu7hIyp8odph7McsMym1a432bCWltqBtjPw=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "16f7085e3464f163991d19e36a119bd1d134f0cc",
+        "rev": "3ab523acf715716ebabdc8ff3294a8584c3b3b60",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/az",
         "owner": "defn",
-        "ref": "pkg-az-0.0.138",
+        "ref": "pkg-az-0.0.139",
         "repo": "dev",
         "type": "github"
       }
@@ -29,17 +29,17 @@
       },
       "locked": {
         "dir": "m/pkg/cue",
-        "lastModified": 1690909213,
-        "narHash": "sha256-LJpPdNR0LyeZFqklwrFR5C/Q+LOUhXeIvY4747CNljg=",
+        "lastModified": 1689278703,
+        "narHash": "sha256-Ie5X25/pwhIA6eFi74Nq/zoQKXQZkYIInhBW82PcKuU=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "ef722cd94a6a2c543371a51c06145de6afc42390",
+        "rev": "1182d43a79300ef3270ad872b6f78ea8621849be",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cue",
         "owner": "defn",
-        "ref": "pkg-cue-0.6.0-rc.1-1",
+        "ref": "pkg-cue-0.5.0-8",
         "repo": "dev",
         "type": "github"
       }
