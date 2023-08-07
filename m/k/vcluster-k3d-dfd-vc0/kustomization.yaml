@@ -11,38 +11,17 @@ helmCharts:
           kind: Application
           metadata:
             namespace: argocd
-            name: k3d-dfd-argo-cd
+            name: vcluster-k3d-dfd-vc0-argo-cd
             annotations:
               argocd.argoproj.io/sync-wave: "1"
           spec:
             project: default
             destination:
-              name: k3d-dfd
+              name: vcluster-k3d-dfd-vc0
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/r/k3d-dfd-argo-cd
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        k3d-dfd-vc0: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: k3d-dfd-vc0
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: k3d-dfd
-            source:
-              repoURL: https://github.com/defn/dev
-              targetRevision: main
-              path: m/k/r/k3d-dfd-k3d-dfd-vc0
+              path: m/k/r/vcluster-k3d-dfd-vc0-argo-cd
             syncPolicy:
               automated:
                 prune: true

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: global-vc0
+  name: k3d-dfd-vc0
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -12,7 +12,7 @@ metadata:
     heritage: Helm
     release: vcluster
   name: vc-vcluster
-  namespace: global-vc0
+  namespace: k3d-dfd-vc0
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -23,7 +23,7 @@ metadata:
     heritage: Helm
     release: vcluster
   name: vc-workload-vcluster
-  namespace: global-vc0
+  namespace: k3d-dfd-vc0
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -34,7 +34,7 @@ metadata:
     heritage: Helm
     release: vcluster
   name: vcluster
-  namespace: global-vc0
+  namespace: k3d-dfd-vc0
 rules:
 - apiGroups:
   - ""
@@ -112,7 +112,7 @@ metadata:
     chart: vcluster-0.15.2
     heritage: Helm
     release: vcluster
-  name: vc-vcluster-v-global-vc0
+  name: vc-vcluster-v-k3d-dfd-vc0
 rules:
 - apiGroups:
   - ""
@@ -171,7 +171,7 @@ metadata:
     heritage: Helm
     release: vcluster
   name: vcluster
-  namespace: global-vc0
+  namespace: k3d-dfd-vc0
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -179,7 +179,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: vc-vcluster
-  namespace: global-vc0
+  namespace: k3d-dfd-vc0
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -189,15 +189,15 @@ metadata:
     chart: vcluster-0.15.2
     heritage: Helm
     release: vcluster
-  name: vc-vcluster-v-global-vc0
+  name: vc-vcluster-v-k3d-dfd-vc0
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: vc-vcluster-v-global-vc0
+  name: vc-vcluster-v-k3d-dfd-vc0
 subjects:
 - kind: ServiceAccount
   name: vc-vcluster
-  namespace: global-vc0
+  namespace: k3d-dfd-vc0
 ---
 apiVersion: v1
 data:
@@ -267,7 +267,7 @@ data:
 kind: ConfigMap
 metadata:
   name: vcluster-coredns
-  namespace: global-vc0
+  namespace: k3d-dfd-vc0
 ---
 apiVersion: v1
 data:
@@ -280,7 +280,7 @@ metadata:
     heritage: Helm
     release: vcluster
   name: vcluster-init-manifests
-  namespace: global-vc0
+  namespace: k3d-dfd-vc0
 ---
 apiVersion: v1
 kind: Service
@@ -291,7 +291,7 @@ metadata:
     heritage: Helm
     release: vcluster
   name: vcluster
-  namespace: global-vc0
+  namespace: k3d-dfd-vc0
 spec:
   ports:
   - name: https
@@ -316,7 +316,7 @@ metadata:
     heritage: Helm
     release: vcluster
   name: vcluster-headless
-  namespace: global-vc0
+  namespace: k3d-dfd-vc0
 spec:
   clusterIP: None
   ports:
@@ -337,7 +337,7 @@ metadata:
     heritage: Helm
     release: vcluster
   name: vcluster-lb
-  namespace: global-vc0
+  namespace: k3d-dfd-vc0
 spec:
   loadBalancerClass: tailscale
   ports:
@@ -359,7 +359,7 @@ metadata:
     heritage: Helm
     release: vcluster
   name: vcluster
-  namespace: global-vc0
+  namespace: k3d-dfd-vc0
 spec:
   replicas: 1
   selector:
@@ -373,15 +373,6 @@ spec:
         app: vcluster
         release: vcluster
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: env
-                operator: In
-                values:
-                - global
       containers:
       - args:
         - -c
@@ -399,7 +390,7 @@ spec:
             configMapKeyRef:
               key: cidr
               name: vc-cidr-vcluster
-        image: rancher/k3s:v1.24.13-k3s1
+        image: rancher/k3s:v1.26.7-k3s1
         name: vcluster
         resources:
           limits:
@@ -422,9 +413,8 @@ spec:
         - --sync=ingresses
         - --sync=nodes
         - --sync=persistentvolumes
-        - --node-selector=env=global
-        - --tls-san=vcluster.global-vc0.svc.cluster.local
-        - --enforce-toleration=env=global-vc0:NoSchedule
+        - --tls-san=vcluster.k3d-dfd-vc0.svc.cluster.local
+        - --enforce-toleration=env=k3d-dfd-vc0:NoSchedule
         env:
         - name: POD_IP
           valueFrom:
@@ -474,10 +464,7 @@ spec:
       nodeSelector: {}
       serviceAccountName: vc-vcluster
       terminationGracePeriodSeconds: 10
-      tolerations:
-      - key: env
-        operator: Equal
-        value: global
+      tolerations: []
       volumes:
       - emptyDir: {}
         name: config
