@@ -420,17 +420,17 @@
       },
       "locked": {
         "dir": "m/pkg/earthly",
-        "lastModified": 1690832263,
-        "narHash": "sha256-F8vxCBNbwmVs2l5oTAwuQVu0Cw39RZNAO6U9M0xu+X4=",
+        "lastModified": 1691426956,
+        "narHash": "sha256-4v0XkZBUBwNXaukmfZbN+jRUXQjl7+M6bVs3ybZIHM4=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "364a549349395dc8b57867c08f927519791efee4",
+        "rev": "0167ad9933b8f1288f9593884423b1669cc90a07",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/earthly",
         "owner": "defn",
-        "ref": "pkg-earthly-0.7.14-1",
+        "ref": "pkg-earthly-0.7.15-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1047,17 +1047,17 @@
       },
       "locked": {
         "dir": "m/pkg/oras",
-        "lastModified": 1689279543,
-        "narHash": "sha256-nnziA7iNamSb5wX8ayOEOTrP0s4GHYKJ0qCDYMjWEbA=",
+        "lastModified": 1691426974,
+        "narHash": "sha256-YFlrag22cLSCslBvUvnNmakYeeXgudvwCB/qwMol2Uw=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "2b34e294cee23ca0d588c17841afdeaa93ca2318",
+        "rev": "872dbc338e656a7a7f35dbe365dfb169be0c2f19",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/oras",
         "owner": "defn",
-        "ref": "pkg-oras-1.0.0-3",
+        "ref": "pkg-oras-1.0.1-1",
         "repo": "dev",
         "type": "github"
       }
