@@ -6,6 +6,7 @@ env: (#Transform & {
 	inputs: "dfd": {
 		bootstrap: {
 			"argo-cd": [1, ""]
+			"k3d-dfd-vc0": [100, ""]
 		}
 	}
 }).outputs

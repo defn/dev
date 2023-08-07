@@ -953,37 +953,35 @@ kustomize: "cert-manager": #KustomizeHelm & {
 		repo:    "https://charts.loft.sh"
 
 		values: {
-			vcluster: image: "rancher/k3s:v1.24.13-k3s1"
+			vcluster: image: "rancher/k3s:v1.26.7-k3s1"
 
 			syncer: extraArgs: [
 				"--tls-san=vcluster.\(_in.vc_name).svc.cluster.local",
 				"--enforce-toleration=env=\(_in.vc_name):NoSchedule",
 			]
 
-			sync: nodes: {
-				enabled:      true
-				nodeSelector: "env=\(_in.vc_machine)"
-			}
-
 			sync: {
 				pods: ephemeralContainers:  true
 				persistentvolumes: enabled: true
 				ingresses: enabled:         true
+				nodes: enabled:             true
 			}
 
-			tolerations: [{
-				key:      "env"
-				value:    _in.vc_machine
-				operator: "Equal"
-			}]
+			//sync: nodes: nodeSelector: "env=\(_in.vc_machine)"
 
-			affinity: nodeAffinity: requiredDuringSchedulingIgnoredDuringExecution: nodeSelectorTerms: [{
-				matchExpressions: [{
-					key:      "env"
-					operator: "In"
-					values: [_in.vc_machine]
-				}]
-			}]
+			//tolerations: [{
+			//	key:      "env"
+			//	value:    _in.vc_machine
+			//	operator: "Equal"
+			//}]
+
+			//affinity: nodeAffinity: requiredDuringSchedulingIgnoredDuringExecution: nodeSelectorTerms: [{
+			//	matchExpressions: [{
+			//		key:      "env"
+			//		operator: "In"
+			//		values: [_in.vc_machine]
+			//	}]
+			//}]
 
 			fallbackHostDns: true
 			multiNamespaceMode: enabled: false

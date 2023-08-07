@@ -3,7 +3,7 @@ package c
 env: (#Transform & {
 	transformer: #TransformVCluster
 
-	inputs: "dfd-vc0": {
+	inputs: "k3d-dfd-vc0": {
 		bootstrap: {
 			"argo-cd": [1, ""]
 		}
@@ -17,7 +17,7 @@ env: (#Transform & {
 kustomize: (#Transform & {
 	transformer: #TransformKustomizeVCluster
 
-	inputs: "dfd-vc0": {
+	inputs: "k3d-dfd-vc0": {
 		vc_machine: "dfd"
 	}
 }).outputs

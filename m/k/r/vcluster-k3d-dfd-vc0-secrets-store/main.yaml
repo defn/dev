@@ -1,5 +1,3 @@
-#ManagedBy: cue
-
 apiVersion: external-secrets.io/v1beta1
 kind: ClusterSecretStore
 metadata:
@@ -7,10 +5,10 @@ metadata:
 spec:
   provider:
     vault:
-      server: http://169.254.32.1:8200
-      path: kv
-      version: v2
       auth:
         kubernetes:
-          mountPath: vcluster-global-vc0
+          mountPath: vcluster-k3d-dfd-vc0
           role: external-secrets
+      path: kv
+      server: http://169.254.32.1:8200
+      version: v2
