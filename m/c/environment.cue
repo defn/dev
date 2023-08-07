@@ -1,5 +1,7 @@
 package c
 
+env: {...}
+
 bootstrap: (#Transform & {
 	transformer: #TransformEnvToBootstrapMachine
 
