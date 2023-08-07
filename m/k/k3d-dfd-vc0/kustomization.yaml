@@ -27,8 +27,7 @@ helmCharts:
       multiNamespaceMode:
         enabled: false
       service:
-        type: LoadBalancer
-        loadBalancerClass: tailscale
+        type: ClusterIP
     name: vcluster
     version: 0.15.2
     repo: https://charts.loft.sh
