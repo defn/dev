@@ -986,8 +986,9 @@ kustomize: "cert-manager": #KustomizeHelm & {
 			fallbackHostDns: true
 			multiNamespaceMode: enabled: false
 
-			service: type:              "LoadBalancer"
-			service: loadBalancerClass: "tailscale"
+			service: type:              "ClusterIP"
+			//service: type:              "LoadBalancer"
+			//service: loadBalancerClass: "tailscale"
 		}
 	}
 
