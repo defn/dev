@@ -5,6 +5,7 @@ env: (#Transform & {
 
 	inputs: "dfd-vc0": {
 		bootstrap: {
+			"argo-cd": [1, ""]
 		}
 
 		instance_types: []
