@@ -1,0 +1,3 @@
+```
+vcluster --context k3d-dfd connect vcluster -n vc0 --server=$(kubectl --context k3d-dfd get nodes -o json | jq -r '.items[].metadata.annotations["k3s.io/internal-ip"]'):443 --insecure --update-current=true
+```
