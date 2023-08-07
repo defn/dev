@@ -97,7 +97,19 @@ local_resource(
 
             # wait until app-of-apps is synced
             while true; do 
-                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 30 k3d-dfd; then break; fi
+                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 10 k3d-dfd; then break; fi
+                sleep 5
+            done
+
+            # wait until vcluster is ready
+            while true; do 
+                if vcluster --context k3d-dfd connect vcluster -n vc0 --server=$(kubectl --context k3d-dfd get nodes -o json | jq -r '.items[].metadata.annotations["k3s.io/internal-ip"]'):443 --insecure --update-current=false --kube-config-context-name dfd-vc0 --kube-config $HOME/.kube/config.vc0; then break; fi
+                sleep 5
+            done
+
+            # add vcluster to argocd
+            while true; do
+                if env KUBECONFIG=$HOME/.kube/config.argocd:$HOME/.kube/config.vc0 argocd --kube-context k3d-dfd-argocd cluster --core add dfd-vc0 --name vcluster-dfd-vc0 --yes; then break; fi
                 sleep 5
             done
             """,
