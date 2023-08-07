@@ -51,7 +51,7 @@ export HOF_TELEMETRY_DISABLED=1
 #export DISPLAY=1
 
 # kubectl
-export KUBECONFIG_ALL="$HOME/.kube/config"
+export KUBECONFIG_ALL="$HOME/.kube/config:$HOME/.kube/config.argocd:$HOME/.kube/config.vc0"
 
 # editor
 export CODER_TELEMETRY=false
