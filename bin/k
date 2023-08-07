@@ -1,3 +1,14 @@
 #!/usr/bin/env bash
 
-exec kubectl "$@"
+function main {
+    if test -r "${HOME}/.kube/config.${1:-}"; then
+        local config
+        config="$1"
+        shift
+        env KUBECONFIG="${HOME}/.kube/config.${config}" kubectl "$@"
+    else
+        exec kubectl "$@"
+    fi
+}
+
+main "$@"
