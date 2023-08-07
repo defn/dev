@@ -1,87 +1,132 @@
+#!/usr/bin/env python
+
 analytics_settings(False)
 
-local_resource("code-server",
-        serve_cmd=[ "bash", "-c", """
+local_resource(
+    "code-server",
+    serve_cmd=[
+        "bash",
+        "-c",
+        """
             cd ~/m
             exec code-server --auth none --port 13337
-            """ ]
-    )
+            """,
+    ],
+)
 
-local_resource("hugo",
-        serve_cmd=[ "bash", "-c", """
+local_resource(
+    "hugo",
+    serve_cmd=[
+        "bash",
+        "-c",
+        """
             cd ~/m/defn/dev/www
             npm install
             exec npm run dev
-            """ ]
-    )
+            """,
+    ],
+)
 
-local_resource("temporal",
-        serve_cmd=[ "bash", "-c", """
+local_resource(
+    "temporal",
+    serve_cmd=[
+        "bash",
+        "-c",
+        """
             cd ~/m
             exec temporal server start-dev
-            """ ]
-    )
+            """,
+    ],
+)
 
-local_resource("nomad",
-        serve_cmd=[ "bash", "-c", """
+local_resource(
+    "nomad",
+    serve_cmd=[
+        "bash",
+        "-c",
+        """
             cd ~/m
             exec nomad agent -dev -bind 0.0.0.0 -network-interface='{{ GetDefaultInterfaces | attr "name" }}'
-            """ ]
-    )
+            """,
+    ],
+)
 
-local_resource("argocd",
-        serve_cmd=[ "bash", "-c", """
-            set -exfu
+local_resource(
+    "k3d",
+    cmd=[
+        "bash",
+        "-c",
+        """
+            set -exu
 
             cd ~/m
 
-            this-k3d-create dfd
-
+            # deploy k3d, argocd
+            rm -vf ~/.kube/config*
+            env KUBECONFIG=$HOME/.kube/config this-k3d-create dfd
             kubectl --context k3d-dfd apply -f k/r/argo-cd/main.yaml 
+
+            # dedicated kubectl config for argocd
             cp $HOME/.kube/config $HOME/.kube/config.argocd
-            export KUBECONFIG=$HOME/.kube/config.argocd
-            eval "$(kubectl config view -o json  | jq -r --arg cluster k3d-dfd --arg namespace argocd '.contexts[] | select(.name == $cluster).context | "kubectl config set-context \\(.cluster)-argocd --cluster=\\(.cluster) --user=\\(.user) --namespace=\\($namespace)"')"
-            kubectl config use-context k3d-dfd-argocd
+            (
+                export KUBECONFIG=$HOME/.kube/config.argocd
+                eval "$(kubectl config view -o json  | jq -r --arg cluster k3d-dfd --arg namespace argocd '.contexts[] | select(.name == $cluster).context | "kubectl config set-context \\(.cluster)-argocd --cluster=\\(.cluster) --user=\\(.user) --namespace=\\($namespace)"')"
+                kubectl config use-context k3d-dfd-argocd
+            )
 
+            # switch back to the default config
+            kubectl config use-context k3d-dfd
+
+            # needed for argocd password generation
             sudo apt install -y apache2-utils
-            kubectl patch secret -n argocd argocd-secret   -p '{"stringData": { "admin.password": "'$(htpasswd -bnBC 10 "" admin | tr -d ':\\n')'"}}'
 
+            # wait until argocd is able to deploy to k3d
             while true; do
-                if argocd cluster add k3d-dfd --yes --core --in-cluster; then break; fi
+                # patch argocd admin password
+                if kubectl --context k3d-dfd-argocd patch secret argocd-secret   -p '{"stringData": { "admin.password": "'$(htpasswd -bnBC 10 "" admin | tr -d ':\\n')'"}}'; then
+                    # add k3d to argocd
+                    if env KUBECONFIG=$HOME/.kube/config.argocd argocd cluster add k3d-dfd --yes --core --in-cluster; then
+                        break
+                    fi
+                fi
                 sleep 5
             done
 
+            # deploy the cluster app-of-apps
             kubectl --context k3d-dfd apply -f e/k3d-dfd.yaml
 
+            # wait until app-of-apps is synced
             while true; do 
                 if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 30 k3d-dfd; then break; fi
                 sleep 5
             done
+            """,
+    ],
+)
+
+local_resource(
+    "argocd-forward",
+    serve_cmd=[
+        "bash",
+        "-c",
+        """
+            set -exu
+
+            cd ~/m
 
             while true; do
-                if ! kubectl port-forward deployment/argocd-server 8080:8080; then
+                if ! kubectl --context k3d-dfd-argocd port-forward deployment/argocd-server 8080:8080; then
                     sleep 5
                 fi
             done
-            """ ]
-    )
+            """,
+    ],
+)
 
-local_resource("hello",
-        "nomad job run etc/hello.nomad",
-        deps=["./etc/hello.nomad"]
-    )
-    
-local_resource("demo1",
-        "nomad job run etc/demo1.nomad",
-        deps=["./etc/demo1.nomad"]
-    )
+local_resource("hello", "nomad job run etc/hello.nomad", deps=["./etc/hello.nomad"])
 
-local_resource("demo2",
-        "nomad job run etc/demo2.nomad",
-        deps=["./etc/demo2.nomad"]
-    )
+local_resource("demo1", "nomad job run etc/demo1.nomad", deps=["./etc/demo1.nomad"])
 
-local_resource("demo3",
-        "nomad job run etc/demo3.nomad",
-        deps=["./etc/demo3.nomad"]
-    )
+local_resource("demo2", "nomad job run etc/demo2.nomad", deps=["./etc/demo2.nomad"])
+
+local_resource("demo3", "nomad job run etc/demo3.nomad", deps=["./etc/demo3.nomad"])
