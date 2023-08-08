@@ -1,0 +1,15 @@
+#ManagedBy: cue
+
+patches:
+  - path: patch-service-nginx.yaml
+namespace: nginx
+resources:
+  - resource-namespace-nginx.yaml
+helmCharts:
+  - releaseName: nginx
+    namespace: nginx
+    valuesInline: {}
+    name: nginx
+    version: 15.1.2
+    repo: https://charts.bitnami.com/bitnami
+    includeCRDs: true

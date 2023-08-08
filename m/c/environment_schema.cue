@@ -224,7 +224,7 @@ import "encoding/yaml"
 
 	type:           "vcluster"
 	name:           _in.name
-	destination: "\(parent.type)-\(parent.name)"
+	destination:    "\(parent.type)-\(parent.name)"
 	bootstrap:      _in.bootstrap
 	instance_types: _in.instance_types
 	parent:         #K3D & _in.parent

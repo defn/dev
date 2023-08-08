@@ -10,3 +10,11 @@ env: (#Transform & {
 		}
 	}
 }).outputs
+
+kustomize: (#Transform & {
+	transformer: #TransformKustomizeVCluster
+
+	inputs: "vc0": {
+		vc_machine: "dfd"
+	}
+}).outputs
