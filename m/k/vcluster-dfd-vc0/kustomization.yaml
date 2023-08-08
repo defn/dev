@@ -27,12 +27,12 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
-        kyverno: |
+        cert-manager: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
           metadata:
             namespace: argocd
-            name: vcluster-dfd-vc0-kyverno
+            name: vcluster-dfd-vc0-cert-manager
             annotations:
               argocd.argoproj.io/sync-wave: "2"
           spec:
@@ -42,7 +42,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/r/vcluster-dfd-vc0-kyverno
+              path: m/k/r/vcluster-dfd-vc0-cert-manager
             syncPolicy:
               automated:
                 prune: true
