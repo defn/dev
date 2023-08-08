@@ -142,6 +142,8 @@ import "encoding/yaml"
 	type: string
 	name: string
 
+	destination: string | *"\(type)-\(name)"
+
 	bootstrap: [string]: [int, ...string]
 	env: #EnvApp
 	env: {
@@ -149,7 +151,7 @@ import "encoding/yaml"
 		// ex: k/vcluster-dfd-vc0
 		spec: source: path: "m/k/r/\(type)-\(name)"
 
-		spec: destination: "name": "\(type)-\(name)"
+		spec: "destination": "name": destination
 	}
 }
 
@@ -222,6 +224,7 @@ import "encoding/yaml"
 
 	type:           "vcluster"
 	name:           _in.name
+	destination: "\(parent.type)-\(parent.name)"
 	bootstrap:      _in.bootstrap
 	instance_types: _in.instance_types
 	parent:         #K3D & _in.parent
