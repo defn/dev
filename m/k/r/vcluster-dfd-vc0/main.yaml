@@ -24,14 +24,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "2"
-  name: vcluster-dfd-vc0-nginx
+  name: vcluster-dfd-vc0-kyverno
   namespace: argocd
 spec:
   destination:
     name: vcluster-dfd-vc0
   project: default
   source:
-    path: m/k/r/vcluster-dfd-vc0-nginx
+    path: m/k/r/vcluster-dfd-vc0-kyverno
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:

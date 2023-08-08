@@ -27,12 +27,12 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
-        nginx: |
+        kyverno: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
           metadata:
             namespace: argocd
-            name: vcluster-dfd-vc0-nginx
+            name: vcluster-dfd-vc0-kyverno
             annotations:
               argocd.argoproj.io/sync-wave: "2"
           spec:
@@ -42,7 +42,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/r/vcluster-dfd-vc0-nginx
+              path: m/k/r/vcluster-dfd-vc0-kyverno
             syncPolicy:
               automated:
                 prune: true
