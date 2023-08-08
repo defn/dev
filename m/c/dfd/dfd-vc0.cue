@@ -6,7 +6,7 @@ env: (#Transform & {
 	inputs: "dfd-vc0": {
 		bootstrap: {
 			"argo-cd": [1, ""]
-			"nginx": [2, ""]
+			"kyverno": [2, ""]
 		}
 
 		instance_types: []
