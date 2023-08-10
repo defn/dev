@@ -101,7 +101,7 @@ local_resource(
                 sleep 5
             done
 
-            for v in 0; do
+            for v in 0 1; do
                 # wait until vcluster is ready
                 while true; do 
                     if vcluster --context k3d-dfd connect vcluster -n "vc${v}" --server=$(kubectl --context k3d-dfd get nodes -o json | jq -r '.items[].metadata.annotations["k3s.io/internal-ip"]'):$((8443 + v)) --insecure --update-current=false --kube-config-context-name dfd-vc${v} --kube-config $HOME/.kube/config.vc${v}; then break; fi

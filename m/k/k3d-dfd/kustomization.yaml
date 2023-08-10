@@ -55,7 +55,7 @@ helmCharts:
             namespace: argocd
             name: k3d-dfd-vc1
             annotations:
-              argocd.argoproj.io/sync-wave: "101"
+              argocd.argoproj.io/sync-wave: "100"
           spec:
             project: default
             destination:
