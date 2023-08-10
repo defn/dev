@@ -44,7 +44,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "101"
+    argocd.argoproj.io/sync-wave: "100"
   name: k3d-dfd-vc1
   namespace: argocd
 spec:
