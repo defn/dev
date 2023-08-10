@@ -2,6 +2,10 @@
 
   set -ex
 
+  exec >>/tmp/dfd-startup.log 2>&1
+
+  tail -f /tmp/dfd-startup.log &
+
   sudo install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
   sudo install -d -m 0700 -o ubuntu -g ubuntu /nix /nix
 
@@ -22,6 +26,7 @@
   ssh -o StrictHostKeyChecking=no git@github.com true || true
 
   # persist daemon data
+
   for d in docker tailscale; do
     if test -d "/nix/${d}"; then
       sudo rm -rf "/var/lib/${d}"
@@ -38,7 +43,7 @@
   make install
   uptime
   
-  (cd m && setsid ~/bin/nix/tilt up >>/tmp/tilt.log 2>&1 &) &
+  (exec >>/tmp/dfd-tilt.log 2>&1 && cd m && setsid ~/bin/nix/tilt up &) &
 
   # TODO add swap when /mnt is local ssd
   #sudo dd if=/dev/zero of=/mnt/swap bs=1M count=4096
