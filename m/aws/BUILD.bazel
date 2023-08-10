@@ -1,4 +1,4 @@
-load("//cue:cue.bzl", "cue_export")
+load("//b/cue:cue.bzl", "cue_export")
 
 filegroup(
     name = "template_org",

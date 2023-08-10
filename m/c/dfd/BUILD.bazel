@@ -1,5 +1,5 @@
-load("//out:out.bzl", "copy_files")
-load("//cue:cue.bzl", "cue_export")
+load("//b/out:out.bzl", "copy_files")
+load("//b/cue:cue.bzl", "cue_export")
 
 # app configuration
 cue_export(

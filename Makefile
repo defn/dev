@@ -40,6 +40,7 @@ home:
 	$(MARK) home
 	(. ~/.nix-profile/etc/profile.d/nix.sh && cd m/aws && ~/bin/b build)
 	for n in home oci nix secrets utils vpn vault acme godev nodedev localdev development cloud kubernetes coder codeserver tailscale shell; do \
+		mark $$n; \
 		(. ~/.nix-profile/etc/profile.d/nix.sh && cd m/pkg/$$n && ~/bin/b build flake_path && ~/bin/b out flake_path) >bin/nix/.path; \
 		(for a in $$(cat bin/nix/.path | tr : "\n" | perl -e 'print reverse <>'); do for b in $$a/*; do if test -x "$$b"; then if [[ "$$(readlink "bin/nix/$$b{##*/}" || true)" != "$$b" ]]; then ln -nfs "$$b" bin/nix/; fi; fi; done; done); \
 		done
