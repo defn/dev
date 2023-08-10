@@ -25,8 +25,10 @@
   for d in docker tailscale; do
     if test -d "/nix/${d}"; then
       rm -rf "/var/lib/${d}"
-    else
+    elif test -d "/var/lib/${d}"; then
       sudo mv "/var/lib/${d}" "/nix/${d}"
+    else
+      sudo install -d -m 0700 "/nix/${d}"
     fi
     sudo ln -nfs "/nix/${d}" "/var/lib/${d}"
   done
