@@ -24,7 +24,7 @@
   # persist daemon data
   for d in docker tailscale; do
     if test -d "/nix/${d}"; then
-      rm -rf "/var/lib/${d}"
+      sudo rm -rf "/var/lib/${d}"
     elif test -d "/var/lib/${d}"; then
       sudo mv "/var/lib/${d}" "/nix/${d}"
     else
