@@ -101,6 +101,7 @@ kustomize: [NAME=string]: _name: NAME
 		#Input
 		vc_name:    string | *from.name
 		vc_machine: string | *from.name
+		vc_index: int | *0
 	}
 
 	to: #KustomizeVCluster
