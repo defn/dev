@@ -6,14 +6,14 @@ helmCharts:
   - releaseName: bootstrap
     valuesInline:
       anyResources:
-        argo-cd: |
+        cert-manager: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
           metadata:
             namespace: argocd
-            name: vcluster-dfd-vc0-argo-cd
+            name: vcluster-dfd-vc0-cert-manager
             annotations:
-              argocd.argoproj.io/sync-wave: "1"
+              argocd.argoproj.io/sync-wave: "2"
           spec:
             project: default
             destination:
@@ -21,7 +21,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/r/vcluster-dfd-vc0-argo-cd
+              path: m/k/r/vcluster-dfd-vc0-cert-manager
             syncPolicy:
               automated:
                 prune: true

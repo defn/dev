@@ -2,15 +2,15 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
-  name: vcluster-dfd-vc0-argo-cd
+    argocd.argoproj.io/sync-wave: "2"
+  name: vcluster-dfd-vc0-cert-manager
   namespace: argocd
 spec:
   destination:
     name: vcluster-dfd-vc0
   project: default
   source:
-    path: m/k/r/vcluster-dfd-vc0-argo-cd
+    path: m/k/r/vcluster-dfd-vc0-cert-manager
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
