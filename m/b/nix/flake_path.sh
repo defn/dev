@@ -22,12 +22,13 @@ function main {
 	git add --intent-to-add .
 
 	# shellcheck disable=SC2016
-	nix develop --ignore-environment --command env | grep ^PATH= | cut -d= -f2- >.path
+	nix develop --ignore-environment --command env | grep ^PATH= | cut -d= -f2- >../.path
 
-	mkdir bin
-	(for a in $(cat .path | tr : "\n" | perl -e 'print reverse <>'); do for b in "${a}"/*; do if test -x "${b}"; then if [[ "$(readlink "bin/nix/$b{##*/}" || true)" != "${b}" ]]; then ln -nfs "${b}" bin/; fi; fi; done; done)
+	cd ..
+	mkdir nix_bin
+	(for a in $(cat .path | tr : "\n" | perl -e 'print reverse <>'); do for b in "${a}"/*; do if test -x "${b}"; then if [[ "$(readlink "bin/nix/$b{##*/}" || true)" != "${b}" ]]; then ln -nfs "${b}" nix_bin/; fi; fi; done; done)
 
-	cd bin
+	cd nix_bin
 	ls -ltrhd *
 	tar cfz "${bin_out}" .
 }
