@@ -195,28 +195,6 @@
         "type": "github"
       }
     },
-    "dev_15": {
-      "inputs": {
-        "flake-utils": "flake-utils_15",
-        "nixpkgs": "nixpkgs_15"
-      },
-      "locked": {
-        "dir": "m/pkg/dev",
-        "lastModified": 1689277319,
-        "narHash": "sha256-gsqaQTNX3WNS3+DDb1wva2m4OjEJzjCe5sKzUcIaI0Y=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "7f1db96942f2c6ff834b9a180f57bc6f6a23436b",
-        "type": "github"
-      },
-      "original": {
-        "dir": "m/pkg/dev",
-        "owner": "defn",
-        "ref": "pkg-dev-0.0.9",
-        "repo": "dev",
-        "type": "github"
-      }
-    },
     "dev_2": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -474,22 +452,6 @@
       }
     },
     "flake-utils_14": {
-      "locked": {
-        "lastModified": 1652776076,
-        "narHash": "sha256-gzTw/v1vj4dOVbpBSJX4J0DwUR6LIyXo7/SuuTJp1kM=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "04c1b180862888302ddfb2e3ad9eaa63afc60cf8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "04c1b180862888302ddfb2e3ad9eaa63afc60cf8",
-        "type": "github"
-      }
-    },
-    "flake-utils_15": {
       "locked": {
         "lastModified": 1652776076,
         "narHash": "sha256-gzTw/v1vj4dOVbpBSJX4J0DwUR6LIyXo7/SuuTJp1kM=",
@@ -897,22 +859,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_15": {
-      "locked": {
-        "lastModified": 1689088367,
-        "narHash": "sha256-Y2tl2TlKCWEHrOeM9ivjCLlRAKH3qoPUE/emhZECU14=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "5c9ddb86679c400d6b7360797b8a22167c2053f8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "5c9ddb86679c400d6b7360797b8a22167c2053f8",
-        "type": "github"
-      }
-    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1689088367,
@@ -1167,27 +1113,6 @@
         "type": "github"
       }
     },
-    "pkg_15": {
-      "inputs": {
-        "dev": "dev_15"
-      },
-      "locked": {
-        "dir": "m/pkg/pkg",
-        "lastModified": 1689277368,
-        "narHash": "sha256-PcqZACb6LghiievM+AlhUGGNK0ch723H4zI+o1ma+08=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "26dc66a816419acea5a46ea0a23af639a9a030a2",
-        "type": "github"
-      },
-      "original": {
-        "dir": "m/pkg/pkg",
-        "owner": "defn",
-        "ref": "pkg-pkg-0.0.11",
-        "repo": "dev",
-        "type": "github"
-      }
-    },
     "pkg_2": {
       "inputs": {
         "dev": "dev_2"
@@ -1371,8 +1296,7 @@
         "kustomize": "kustomize",
         "stern": "stern",
         "tfo": "tfo",
-        "vcluster": "vcluster",
-        "velero": "velero"
+        "vcluster": "vcluster"
       }
     },
     "stern": {
@@ -1434,27 +1358,6 @@
         "dir": "m/pkg/vcluster",
         "owner": "defn",
         "ref": "pkg-vcluster-0.15.5-1",
-        "repo": "dev",
-        "type": "github"
-      }
-    },
-    "velero": {
-      "inputs": {
-        "pkg": "pkg_15"
-      },
-      "locked": {
-        "dir": "m/pkg/velero",
-        "lastModified": 1690297766,
-        "narHash": "sha256-C8+I76kusgCfQ0gyebgXl7FUx62tYsif08jwoUxYZAg=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "0c08bb587d9985812aa001e54a5dac20f0064b76",
-        "type": "github"
-      },
-      "original": {
-        "dir": "m/pkg/velero",
-        "owner": "defn",
-        "ref": "pkg-velero-1.11.1-1",
         "repo": "dev",
         "type": "github"
       }
