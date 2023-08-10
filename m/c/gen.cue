@@ -22,6 +22,24 @@ lookup: {
 
 gen: "k": {
 	for ename, e in env {
+		let ekname = "\(e.type)-\(ename)"
+
+		"\(ekname)/kustomization.yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(kustomize[ekname].out)
+
+		for rname, r in kustomize[ekname].resource {
+			if r.kind != "" {
+				"\(ekname)/resource-\(rname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(r)
+			}
+		}
+
+		for pname, p in kustomize[ekname].psm {
+			"\(ekname)/patch-\(pname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(p)
+		}
+
+		for jname, j in kustomize[ekname].jsp {
+			"\(ekname)/jsonp-\(jname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(j.patches)
+		}
+
 		for kname, _ in e.bootstrap {
 			"\(lookup[ename][kname])/kustomization.yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(kustomize[kname].out)
 

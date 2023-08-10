@@ -1,0 +1,75 @@
+#ManagedBy: cue
+
+patches: []
+resources: []
+helmCharts:
+  - releaseName: bootstrap
+    valuesInline:
+      anyResources:
+        argo-cd: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-dfd-argo-cd
+            annotations:
+              argocd.argoproj.io/sync-wave: "1"
+          spec:
+            project: default
+            destination:
+              name: k3d-dfd
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/k/r/k3d-dfd-argo-cd
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        k3d-dfd-vc0: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-dfd-vc0
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: k3d-dfd
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/k/r/k3d-dfd-k3d-dfd-vc0
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        k3d-dfd-vc1: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-dfd-vc1
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: k3d-dfd
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/k/r/k3d-dfd-k3d-dfd-vc1
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+    name: any-resource
+    version: 0.1.0
+    repo: https://kiwigrid.github.io
+    includeCRDs: true
