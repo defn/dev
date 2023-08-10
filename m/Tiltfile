@@ -2,6 +2,8 @@
 
 analytics_settings(False)
 
+update_settings(max_parallel_updates=2)
+
 local_resource(
     "code-server",
     serve_cmd=[
