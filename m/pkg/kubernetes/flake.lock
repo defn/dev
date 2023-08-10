@@ -601,17 +601,17 @@
       },
       "locked": {
         "dir": "m/pkg/helm",
-        "lastModified": 1689305766,
-        "narHash": "sha256-UKEpHtHYETn4J42Cfhg8ypn9wyRoBR5guE42znL0CeI=",
+        "lastModified": 1691701801,
+        "narHash": "sha256-tVw9qSUOGRAIQH2thTR/zg4BgbHXzL79Kno8M828v6k=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "2d78ade8ba2228f50dde0c0487700c8fe6e036fc",
+        "rev": "9f9cc89eb98f13d8870d4aba633d61253c82c891",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/helm",
         "owner": "defn",
-        "ref": "pkg-helm-3.12.2-1",
+        "ref": "pkg-helm-3.12.3-1",
         "repo": "dev",
         "type": "github"
       }
