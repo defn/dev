@@ -21,6 +21,16 @@
   sudo ln -nfs /nix/home "$HOME"
   ssh -o StrictHostKeyChecking=no git@github.com true || true
 
+  # persist daemon data
+  for d in docker tailscale; do
+    if test -d "/nix/${d}"; then
+      rm -rf "/var/lib/${d}"
+    else
+      sudo mv "/var/lib/${d}" "/nix/${d}"
+    fi
+    sudo ln -nfs "/nix/${d}" "/var/lib/${d}"
+  done
+
   cd
   source .bash_profile
   make install
