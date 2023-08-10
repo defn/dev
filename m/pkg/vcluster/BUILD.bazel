@@ -1,25 +1,6 @@
-load("@rules_oci//oci:defs.bzl", "oci_image")
-load("//nix:nix.bzl", "nix_flake")
-load("//oci:oci.bzl", "skopeo_copy")
+load("//b/nix:nix.bzl", "nix_flake")
 
 # nix flake
 nix_flake(
     name = "flake",
-)
-
-# oci
-oci_image(
-    name = "image",
-    base = "@ubuntu_2204",
-    tars = [
-        "flake_store",
-    ],
-)
-
-# docker push
-skopeo_copy(
-    name = "push",
-    image = ":image",
-    remote_tags = ["latest"],
-    repository = "169.254.32.1:5000/defn/dev/{}".format(package_name()),
 )

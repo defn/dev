@@ -1,4 +1,4 @@
-load("//out:out.bzl", "copy_files")
+load("//b/out:out.bzl", "copy_files")
 
 filegroup(
     name = "make_crds_cue_gen_script",
