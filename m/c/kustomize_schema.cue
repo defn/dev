@@ -31,9 +31,11 @@ kustomize: [NAME=string]: _name: NAME
 	let kns = namespace
 
 	psm: {...} | *{}
+	jsp: {...} | *{}
 
 	resource: {...} | *{}
 	resource: [string]: #Resource
+
 
 	out: {
 		if kns != "" {
@@ -43,6 +45,11 @@ kustomize: [NAME=string]: _name: NAME
 		patches: [
 			for _psm_name, _psm in psm {
 				path: "patch-\(_psm_name).yaml"
+			},
+		] + [
+			for _jsp_name, _jsp in jsp {
+				path: "jsonp-\(_jsp_name).yaml"
+				target: _jsp.target
 			},
 		]
 

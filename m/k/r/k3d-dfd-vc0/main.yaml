@@ -340,7 +340,7 @@ metadata:
 spec:
   ports:
   - name: https
-    port: 443
+    port: "8443"
     protocol: TCP
     targetPort: 8443
   selector:
@@ -412,7 +412,6 @@ spec:
         - --sync=nodes
         - --sync=persistentvolumes
         - --tls-san=vcluster.vc0.svc.cluster.local
-        - --enforce-toleration=env=vc0:NoSchedule
         env:
         - name: POD_IP
           valueFrom:

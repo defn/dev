@@ -17,6 +17,10 @@ gen: "k": {
 		for pname, p in k.psm {
 			"\(kname)/patch-\(pname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(p)
 		}
+
+		for jname, j in k.jsp {
+			"\(kname)/jsonp-\(jname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(j.patches)
+		}
 	}
 
 	for ename, e in env {
@@ -31,6 +35,10 @@ gen: "k": {
 
 			for pname, p in kustomize[kname].psm {
 				"\(e.type)-\(ename)-\(kname)/patch-\(pname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(p)
+			}
+
+			for jname, j in kustomize[kname].jsp {
+				"\(e.type)-\(ename)-\(kname)/jsonp-\(jname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(j.patches)
 			}
 		}
 	}
