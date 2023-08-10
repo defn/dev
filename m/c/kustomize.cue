@@ -1011,7 +1011,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 		patches: [{
 			op: "replace"
 			path: "/spec/ports/0/port"
-			value: "8443"
+			value: 8443
 		}]
 	}
 }
