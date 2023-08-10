@@ -8,7 +8,7 @@ kind: ServiceAccount
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.2
+    chart: vcluster-0.15.5
     heritage: Helm
     release: vcluster
   name: vc-vcluster
@@ -19,7 +19,7 @@ kind: ServiceAccount
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.2
+    chart: vcluster-0.15.5
     heritage: Helm
     release: vcluster
   name: vc-workload-vcluster
@@ -30,7 +30,7 @@ kind: Role
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.2
+    chart: vcluster-0.15.5
     heritage: Helm
     release: vcluster
   name: vcluster
@@ -109,7 +109,7 @@ kind: ClusterRole
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.2
+    chart: vcluster-0.15.5
     heritage: Helm
     release: vcluster
   name: vc-vcluster-v-vc0
@@ -167,7 +167,7 @@ kind: RoleBinding
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.2
+    chart: vcluster-0.15.5
     heritage: Helm
     release: vcluster
   name: vcluster
@@ -186,7 +186,7 @@ kind: ClusterRoleBinding
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.2
+    chart: vcluster-0.15.5
     heritage: Helm
     release: vcluster
   name: vc-vcluster-v-vc0
@@ -213,23 +213,22 @@ data:
     rbac-defaults\n  name: system:coredns\nroleRef:\n  apiGroup: rbac.authorization.k8s.io\n
     \ kind: ClusterRole\n  name: system:coredns\nsubjects:\n  - kind: ServiceAccount\n
     \   name: coredns\n    namespace: kube-system\n---\napiVersion: v1\nkind: ConfigMap\nmetadata:\n
-    \ name: coredns\n  namespace: kube-system\ndata:\n  Corefile: |\n    .:1053 {\n
-    \       {{.LOG_IN_DEBUG}}\n        errors\n        health\n        ready\n        rewrite
-    name regex .*\\.nodes\\.vcluster\\.com kubernetes.default.svc.cluster.local\n
-    \       kubernetes cluster.local in-addr.arpa ip6.arpa { \n          pods insecure\n
-    \         fallthrough cluster.local in-addr.arpa ip6.arpa\n        }\n        hosts
-    /etc/coredns/NodeHosts {\n          ttl 60\n          reload 15s\n          fallthrough\n
+    \ name: coredns\n  namespace: kube-system\ndata:\n  Corefile: |-\n    .:1053 {\n
+    \       errors {\n            stacktrace\n        }\n        health\n        ready\n
+    \       rewrite name regex .*\\.nodes\\.vcluster\\.com kubernetes.default.svc.cluster.local\n
+    \       kubernetes cluster.local in-addr.arpa ip6.arpa {\n            pods insecure\n
+    \           fallthrough cluster.local in-addr.arpa ip6.arpa\n        }\n        hosts
+    /etc/NodeHosts {\n            ttl 60\n            reload 15s\n            fallthrough\n
     \       }\n        prometheus :9153\n        forward . {{.HOST_CLUSTER_DNS}}\n
-    \       cache 30\n        loop\n        reload\n        loadbalance\n    }\n\n
-    \   import /etc/coredns/custom/*.server\n  NodeHosts: \"\"\n---\napiVersion: apps/v1\nkind:
-    Deployment\nmetadata:\n  name: coredns\n  namespace: kube-system\n  labels:\n
-    \   k8s-app: kube-dns\n    kubernetes.io/name: \"CoreDNS\"\nspec:\n  replicas:
-    1\n  strategy:\n    type: RollingUpdate\n    rollingUpdate:\n      maxUnavailable:
-    1\n  selector:\n    matchLabels:\n      k8s-app: kube-dns\n  template:\n    metadata:\n
-    \     labels:\n        k8s-app: kube-dns\n    spec:\n      priorityClassName:
-    \"system-cluster-critical\"\n      serviceAccountName: coredns\n      nodeSelector:\n
-    \       kubernetes.io/os: linux\n      topologySpreadConstraints:\n        - maxSkew:
-    1\n          topologyKey: kubernetes.io/hostname\n          whenUnsatisfiable:
+    \       cache 30\n        loop\n        loadbalance\n    }\n  \n    import /etc/coredns/custom/*.server\n
+    \ NodeHosts: \"\"\n---\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name:
+    coredns\n  namespace: kube-system\n  labels:\n    k8s-app: kube-dns\n    kubernetes.io/name:
+    \"CoreDNS\"\nspec:\n  replicas: 1\n  strategy:\n    type: RollingUpdate\n    rollingUpdate:\n
+    \     maxUnavailable: 1\n  selector:\n    matchLabels:\n      k8s-app: kube-dns\n
+    \ template:\n    metadata:\n      labels:\n        k8s-app: kube-dns\n    spec:\n
+    \     priorityClassName: \"system-cluster-critical\"\n      serviceAccountName:
+    coredns\n      nodeSelector:\n        kubernetes.io/os: linux\n      topologySpreadConstraints:\n
+    \       - maxSkew: 1\n          topologyKey: kubernetes.io/hostname\n          whenUnsatisfiable:
     DoNotSchedule\n          labelSelector:\n            matchLabels:\n              k8s-app:
     kube-dns\n      containers:\n        - name: coredns\n          image: {{.IMAGE}}\n
     \         imagePullPolicy: IfNotPresent\n          resources:\n            limits:\n
@@ -276,7 +275,7 @@ kind: ConfigMap
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.2
+    chart: vcluster-0.15.5
     heritage: Helm
     release: vcluster
   name: vcluster-init-manifests
@@ -287,7 +286,7 @@ kind: Service
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.2
+    chart: vcluster-0.15.5
     heritage: Helm
     release: vcluster
   name: vcluster
@@ -312,7 +311,7 @@ kind: Service
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.2
+    chart: vcluster-0.15.5
     heritage: Helm
     release: vcluster
   name: vcluster-headless
@@ -333,7 +332,7 @@ kind: Service
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.2
+    chart: vcluster-0.15.5
     heritage: Helm
     release: vcluster
   name: vcluster-lb
@@ -354,7 +353,7 @@ kind: StatefulSet
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.2
+    chart: vcluster-0.15.5
     heritage: Helm
     release: vcluster
   name: vcluster
@@ -427,7 +426,7 @@ spec:
           value: '---'
         - name: VCLUSTER_TELEMETRY_CONFIG
           value: '{"disabled":"false","instanceCreator":"helm","instanceCreatorUID":""}'
-        image: ghcr.io/loft-sh/vcluster:0.15.2
+        image: ghcr.io/loft-sh/vcluster:0.15.5
         livenessProbe:
           failureThreshold: 60
           httpGet:
@@ -457,9 +456,11 @@ spec:
         - mountPath: /manifests/coredns
           name: coredns
           readOnly: true
+        - mountPath: /etc/coredns/custom
+          name: custom-config-volume
+          readOnly: true
         - mountPath: /data
           name: data
-          readOnly: true
       nodeSelector: {}
       serviceAccountName: vc-vcluster
       terminationGracePeriodSeconds: 10
@@ -470,6 +471,10 @@ spec:
       - configMap:
           name: vcluster-coredns
         name: coredns
+      - configMap:
+          name: coredns-custom
+          optional: true
+        name: custom-config-volume
   volumeClaimTemplates:
   - metadata:
       name: data

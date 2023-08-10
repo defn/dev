@@ -115,6 +115,8 @@ local_resource(
 #
 #            # deploy the vcluster app-of-apps
 #            kubectl --context k3d-dfd apply -f e/vcluster-dfd-vc0.yaml
+
+            uptime
             """,
     ],
 )
@@ -130,6 +132,7 @@ local_resource(
             cd ~/m
 
             while true; do
+                uptime
                 if ! kubectl --context k3d-dfd-argocd port-forward deployment/argocd-server 8080:8080; then
                     sleep 5
                 fi

@@ -305,7 +305,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "2.0.0"
+		version:   "2.0.2"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {
@@ -447,7 +447,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.22.0"
+		version: "6.23.0"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -949,7 +949,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 	helm: {
 		release: "vcluster"
 		name:    "vcluster"
-		version: "0.15.2"
+		version: "0.15.5"
 		repo:    "https://charts.loft.sh"
 
 		values: {
@@ -1104,7 +1104,7 @@ kustomize: "traefik": #KustomizeHelm & {
 		release:   "traefik"
 		name:      "traefik"
 		namespace: "traefik"
-		version:   "23.2.0"
+		version:   "24.0.0"
 		repo:      "https://traefik.github.io/charts"
 		values: {
 			logs: general: level:  "DEBUG"
