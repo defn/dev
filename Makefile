@@ -48,19 +48,21 @@ home:
 	if test -x /opt/homebrew/opt/util-linux/bin/flock; then ln -nfs /opt/homebrew/opt/util-linux/bin/flock bin/nix/; fi
 
 dotfiles:
-	$(MARK) dotfiles
+	$(MARK) configure dotfiles
+	mkdir -p ~/work/dotfiles
 	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
-		if ! test -d ~/.dotfiles/.git/.; then \
-			git clone git@github.com:$${GIT_AUTHOR_NAME}/dotfiles ~/.dotfiles; \
+		if ! test -d ~/work/dotfiles/.git/.; then \
+			git clone git@github.com:$${GIT_AUTHOR_NAME}/dotfiles ~/work/dotfiles; \
 		fi; \
-		mkdir -p ~/.dotfiles; \
-		mkdir -p ~/.config/coderv2/dotfiles; \
 		mkdir -p ~//work/.codespaces/.persistedshare; \
+		mkdir -p ~/.config/coderv2; \
 		rm -rf ~/work/.codespaces/.persistedshare/dotfiles; \
 		rm -rf ~/.config/coderv2/dotfiles; \
-		ln -nfs ~/.dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
-		ln -nfs ~/.dotfiles ~/.config/coderv2/dotfiles; \
-		(cd ~/.dotfiles && ./bootstrap); \
+		rm -rf ~/.dotfiles; \
+		ln -nfs ~/work/dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
+		ln -nfs ~/work/dotfiles ~/.config/coderv2/dotfiles; \
+		ln -nfs ~/work/dotfiles ~/.dotfiles; \
+		(./.dotfiles/bootstrap); \
 	fi
 
 password-store:
