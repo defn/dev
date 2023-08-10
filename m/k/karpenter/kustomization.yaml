@@ -1,7 +1,0 @@
-#ManagedBy: cue
-
-patches: []
-namespace: karpenter
-resources:
-  - karpenter.yaml
-  - resource-namespace-karpenter.yaml

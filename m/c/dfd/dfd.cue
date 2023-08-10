@@ -1,16 +1,17 @@
 package c
 
+cluster_name: "dfd"
+cluster_type: "k3d"
 vclusters: [0,1]
 
 env: (#Transform & {
 	transformer: #TransformK3D
 
-	inputs: "dfd": {
+	inputs: "\(cluster_name)": {
 		bootstrap: {
 			"argo-cd": [1, ""]
-			for v in vclusters {
-				"vc\(v)": [100, ""]
-			}
+			"\(cluster_type)-\(cluster_name)-vc0": [100, ""]
+			"\(cluster_type)-\(cluster_name)-vc1": [100, ""]
 		}
 	}
 }).outputs
@@ -21,14 +22,14 @@ env: (#Transform & {
 	inputs: {
 		[string]: {
 			instance_types: []
-			parent: env.dfd
+			parent: env[cluster_name]
 		}
-		"dfd-vc0": {
+		"\(cluster_name)-vc0": {
 			bootstrap: {
 				"cert-manager": [2, ""]
 			}
 		}
-		"dfd-vc1": {
+		"\(cluster_name)-vc1": {
 			bootstrap: {
 				"cert-manager": [2, ""]
 			}
@@ -40,9 +41,9 @@ kustomize: (#Transform & {
 	transformer: #TransformKustomizeVCluster
 
 	inputs: {
-		[string]: vc_machine: "dfd"
+		[string]: vc_machine: cluster_name
 		for v in vclusters {
-			"vc\(v)": vc_index: v
+			"\(cluster_type)-\(cluster_name)-vc\(v)": vc_index: v
 		}
 	}
 }).outputs

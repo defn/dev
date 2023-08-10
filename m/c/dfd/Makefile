@@ -4,7 +4,7 @@ build:
 # remove everything
 	rm -rf ../../k/*/
 # helm generates ./k/karpenter/karpenter.yaml
-	b run outputs_karpenter__update
+#	b run outputs_karpenter__update
 # cue ./c/ generates kustomize ./k/
 	b run outputs_kustomize__update
 # kustomize ./k/ generates ./k/r/ release yaml

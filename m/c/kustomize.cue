@@ -939,6 +939,17 @@ kustomize: "cert-manager": #KustomizeHelm & {
 }
 
 // https://artifacthub.io/packages/helm/loft/vcluster
+#TransformKustomizeVCluster: {
+	from: {
+		#Input
+		vc_name:    string | *from.name
+		vc_machine: string | *from.name
+		vc_index: int | *0
+	}
+
+	to: #KustomizeVCluster
+}
+
 #KustomizeVCluster: {
 	_in: #TransformKustomizeVCluster.from
 
