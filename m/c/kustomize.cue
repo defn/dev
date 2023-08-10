@@ -74,25 +74,25 @@ kustomize: "hello": #Kustomize & {
 	}
 }
 
-kustomize: "events": #Kustomize & {
-	namespace: "default"
-
-	resource: "events": {
-		url: "events.yaml"
-	}
-}
-
-kustomize: "demo1": #Kustomize & {
-	resource: "demo": {
-		url: "https://bit.ly/demokuma"
-	}
-}
-
-kustomize: "demo2": #Kustomize & {
-	resource: "demo": {
-		url: "https://raw.githubusercontent.com/kumahq/kuma-counter-demo/master/demo.yaml"
-	}
-}
+//kustomize: "events": #Kustomize & {
+//	namespace: "default"
+//
+//	resource: "events": {
+//		url: "events.yaml"
+//	}
+//}
+//
+//kustomize: "demo1": #Kustomize & {
+//	resource: "demo": {
+//		url: "https://bit.ly/demokuma"
+//	}
+//}
+//
+//kustomize: "demo2": #Kustomize & {
+//	resource: "demo": {
+//		url: "https://raw.githubusercontent.com/kumahq/kuma-counter-demo/master/demo.yaml"
+//	}
+//}
 
 kustomize: "coredns": #Kustomize & {
 	resource: "configmap-coredns": core.#ConfigMap & {
