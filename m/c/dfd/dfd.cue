@@ -7,6 +7,7 @@ env: (#Transform & {
 		bootstrap: {
 			"argo-cd": [1, ""]
 			"vc0": [100, ""]
+			"vc1": [101, ""]
 		}
 	}
 }).outputs
@@ -14,20 +15,37 @@ env: (#Transform & {
 env: (#Transform & {
 	transformer: #TransformVCluster
 
-	inputs: "dfd-vc0": {
-		bootstrap: {
-			"cert-manager": [2, ""]
-		}
+	inputs: {
+		"dfd-vc0": {
+			bootstrap: {
+				"cert-manager": [2, ""]
+			}
 
-		instance_types: []
-		parent: env.dfd
+			instance_types: []
+			parent: env.dfd
+		}
+		"dfd-vc1": {
+			bootstrap: {
+				"cert-manager": [2, ""]
+			}
+
+			instance_types: []
+			parent: env.dfd
+		}
 	}
 }).outputs
 
 kustomize: (#Transform & {
 	transformer: #TransformKustomizeVCluster
 
-	inputs: "vc0": {
-		vc_machine: "dfd"
+	inputs: {
+		"vc0": {
+			vc_machine: "dfd"
+			vc_index: 0
+		}
+		"vc1": {
+			vc_machine: "dfd"
+			vc_index: 1
+		}
 	}
 }).outputs
