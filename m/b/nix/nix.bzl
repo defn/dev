@@ -63,7 +63,7 @@ def nix_flake(name, srcs = [], cmds = [], flake = None, visibility = None):
             flake_path_script,
             flake_config,
         ],
-        outs = ["{}_path.sh".format(name)],
+        outs = ["{}_path.tar.gz".format(name)],
         cmd = "$(location //{}:{}) {} $@".format(flake_path_script.package, flake_path_script.name, dir),
         visibility = visibility,
     )
