@@ -1,5 +1,0 @@
-#ManagedBy: cue
-
-patches: []
-resources:
-  - resource-configmap-coredns.yaml

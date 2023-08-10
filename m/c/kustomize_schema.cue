@@ -96,16 +96,6 @@ kustomize: [NAME=string]: _name: NAME
 	}
 }
 
-#TransformKustomizeVCluster: {
-	from: {
-		#Input
-		vc_name:    string | *from.name
-		vc_machine: string | *from.name
-		vc_index: int | *0
-	}
-
-	to: #KustomizeVCluster
-}
 
 #TransformKarpenterProvisioner: {
 	from: {
