@@ -2,11 +2,6 @@
 
   set -ex
 
-  sudo dd if=/dev/zero of=/root/swap bs=1M count=4096
-  sudo chmod 0600 /root/swap
-  sudo mkswap /root/swap
-  sudo swapon /root/swap || true
-
   sudo install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
   sudo install -d -m 0700 -o ubuntu -g ubuntu /nix /nix
 
@@ -31,7 +26,12 @@
   make install
   uptime
   
-  cd m
-  (setsid ~/bin/nix/tilt up &) &
+  (cd m && setsid ~/bin/nix/tilt up >>/tmp/tilt.log 2>&1 &) &
+
+  # TODO add swap when /mnt is local ssd
+  #sudo dd if=/dev/zero of=/mnt/swap bs=1M count=4096
+  #sudo chmod 0600 /mnt/swap
+  #sudo mkswap /mnt/swap
+  #sudo swapon /mnt/swap || true
 
   exit 0
