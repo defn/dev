@@ -957,7 +957,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 
 			syncer: extraArgs: [
 				"--tls-san=vcluster.\(_in.vc_name).svc.cluster.local",
-				"--enforce-toleration=env=\(_in.vc_name):NoSchedule",
+				//"--enforce-toleration=env=\(_in.vc_name):NoSchedule",
 			]
 
 			sync: {
@@ -997,6 +997,22 @@ kustomize: "cert-manager": #KustomizeHelm & {
 		metadata: {
 			name: _in.vc_name
 		}
+	}
+
+	jsp: "service-vcluster-lb": {
+		target: {
+			group: ""
+			version: "v1"
+			kind: "Service"
+			name: "vcluster-lb"
+			namespace: _in.vc_name
+		}
+
+		patches: [{
+			op: "replace"
+			path: "/spec/ports/0/port"
+			value: "8443"
+		}]
 	}
 }
 

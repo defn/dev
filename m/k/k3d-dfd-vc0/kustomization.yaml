@@ -1,6 +1,13 @@
 #ManagedBy: cue
 
-patches: []
+patches:
+  - path: jsonp-service-vcluster-lb.yaml
+    target:
+      group: ""
+      version: v1
+      kind: Service
+      name: vcluster-lb
+      namespace: vc0
 namespace: vc0
 resources:
   - resource-namespace-vcluster.yaml
@@ -13,7 +20,6 @@ helmCharts:
       syncer:
         extraArgs:
           - --tls-san=vcluster.vc0.svc.cluster.local
-          - --enforce-toleration=env=vc0:NoSchedule
       sync:
         pods:
           ephemeralContainers: true
