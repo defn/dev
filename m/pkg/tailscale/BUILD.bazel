@@ -9,5 +9,6 @@ filegroup(
 nix_flake(
     name = "flake",
     cmds = ["tailscale"],
+    srcs = ["etc"],
     visibility = ["//visibility:public"],
 )
