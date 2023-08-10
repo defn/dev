@@ -24,12 +24,12 @@ env: (#Transform & {
 			instance_types: []
 			parent: env[cluster_name]
 		}
-		"\(cluster_name)-vc0": {
+		"\(cluster_type)-\(cluster_name)-vc0": {
 			bootstrap: {
 				"cert-manager": [2, ""]
 			}
 		}
-		"\(cluster_name)-vc1": {
+		"\(cluster_type)-\(cluster_name)-vc1": {
 			bootstrap: {
 				"cert-manager": [2, ""]
 			}
