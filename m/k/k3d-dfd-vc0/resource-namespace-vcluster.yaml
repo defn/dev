@@ -1,6 +1,0 @@
-#ManagedBy: cue
-
-metadata:
-  name: vc0
-kind: Namespace
-apiVersion: v1
