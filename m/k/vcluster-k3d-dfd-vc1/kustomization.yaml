@@ -20,8 +20,8 @@ helmCharts:
               name: vcluster-k3d-dfd-vc1
             source:
               repoURL: https://github.com/defn/dev
-              targetRevision: main
               path: m/k/r/vcluster-k3d-dfd-vc1-cert-manager
+              targetRevision: main
             syncPolicy:
               automated:
                 prune: true

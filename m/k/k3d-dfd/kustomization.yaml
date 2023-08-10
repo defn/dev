@@ -20,8 +20,8 @@ helmCharts:
               name: k3d-dfd
             source:
               repoURL: https://github.com/defn/dev
-              targetRevision: main
               path: m/k/r/k3d-dfd-argo-cd
+              targetRevision: main
             syncPolicy:
               automated:
                 prune: true
@@ -41,8 +41,8 @@ helmCharts:
               name: k3d-dfd
             source:
               repoURL: https://github.com/defn/dev
+              path: m/k/r/k3d-dfd-vc0
               targetRevision: main
-              path: m/k/r/k3d-dfd-k3d-dfd-vc0
             syncPolicy:
               automated:
                 prune: true
@@ -62,8 +62,8 @@ helmCharts:
               name: k3d-dfd
             source:
               repoURL: https://github.com/defn/dev
+              path: m/k/r/k3d-dfd-vc1
               targetRevision: main
-              path: m/k/r/k3d-dfd-k3d-dfd-vc1
             syncPolicy:
               automated:
                 prune: true
