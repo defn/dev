@@ -41,7 +41,7 @@ home:
 	cd m/aws && ~/bin/b build
 	set -x; for n in home oci nix secrets utils vpn vault acme godev nodedev localdev development cloud kubernetes coder codeserver tailscale shell; do \
 		mark $$n; \
-		(cd m/pkg/$$n && ~/bin/b build flake_path && ~/bin/b out flake_path) | (cd ~/bin/nix && tar xfz -); \
+		(cd m/pkg/$$n && ~/bin/b build && ~/bin/b out flake_path) | (cd ~/bin/nix && tar xfz -); \
 		done
 	rm -f bin/nix/{gcc,cc,ld}
 	ln -nfs ~/bin/nix/go $${VSCODE_GIT_ASKPASS_NODE%/*}/vscode/bin/remote-cli/ 2>/dev/null || true
