@@ -3,6 +3,7 @@ SHELL := /bin/bash
 build:
 # remove everything
 	rm -rf ../../k/*/
+	rm -rf ../../e/*.yaml
 # helm generates ./k/karpenter/karpenter.yaml
 #	b run outputs_karpenter__update
 # cue ./c/ generates kustomize ./k/
