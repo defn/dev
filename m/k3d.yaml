@@ -46,9 +46,9 @@ options:
       - arg: --kube-apiserver-arg=--anonymous-auth=true
         nodeFilters:
           - server:0
-      - arg: --flannel-backend=none
-        nodeFilters:
-          - server:0
+#      - arg: --flannel-backend=none
+#        nodeFilters:
+#          - server:0
 #      - arg: --tls-san=${DEFN_DEV_HOST_NAME}
 #        nodeFilters:
 #          - server:0

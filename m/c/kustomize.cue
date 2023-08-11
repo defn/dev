@@ -1031,13 +1031,13 @@ kustomize: "cilium": #KustomizeHelm & {
 		release:   "cilium"
 		name:      "cilium"
 		namespace: "kube-system"
-		version:   "1.13.5"
+		version:   "1.14.0"
 		repo:      "https://helm.cilium.io"
 		values: {
 			operator: replicas: 1
 			hubble: {
-				relay: enabled: true
-				ui: enabled:    true
+				relay: enabled: false
+				ui: enabled:    false
 //				tls: auto: {
 //					method: "certmanager"
 //					certManagerIssuerRef: {
