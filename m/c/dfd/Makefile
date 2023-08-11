@@ -33,6 +33,6 @@ ca.key ca.crt:
 	$(MAKE) k3d-ca
 
 k3d-secrets: ca.key ca.crt
-	-kubectl --context k3d-dfd create namespace cert-manager
-	-kubectl --context k3d-dfd create secret generic -n kube-system cilium-ca --from-file=ca.key --from-file=ca.crt
-	-kubectl --context k3d-dfd create secret generic -n cert-manager cilium-ca --from-file=tls.key=ca.key --from-file=tls.crt=ca.crt
+	kubectl --context k3d-dfd create namespace cert-manager
+	kubectl --context k3d-dfd create secret generic -n kube-system cilium-ca --from-file=ca.key --from-file=ca.crt
+	kubectl --context k3d-dfd create secret generic -n cert-manager cilium-ca --from-file=tls.key=ca.key --from-file=tls.crt=ca.crt
