@@ -40,11 +40,13 @@ env: (#Transform & {
 		}
 		"\(cluster_type)-\(cluster_name)-vc0": {
 			bootstrap: {
+				"cert-manager-crds": [1, ""]
 				"cert-manager": [2, ""]
 			}
 		}
 		"\(cluster_type)-\(cluster_name)-vc1": {
 			bootstrap: {
+				"cert-manager-crds": [1, ""]
 				"cert-manager": [2, ""]
 			}
 		}
