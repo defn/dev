@@ -33,9 +33,8 @@ ca.key ca.crt:
 	$(MAKE) k3d-ca
 
 k3d-secrets: ca.key ca.crt
-	-kubectl --context k3d-dfd create namespace cert-manager
-	-kubectl --context k3d-dfd create secret generic -n kube-system cilium-ca --from-file=ca.key --from-file=ca.crt
-	-kubectl --context k3d-dfd create secret generic -n cert-manager cilium-ca --from-file=tls.key=ca.key --from-file=tls.crt=ca.crt
-	-kubectl --context k3d-dfd create namespace tailscale
-	-kubectl --context k3d-dfd delete secret -n tailscale operator-oauth
-	-kubectl --context k3d-dfd create secret -n tailscale generic operator-oauth --from-literal=client_id=$$(pass OAUTH_CLIENT_ID) --from-literal=client_secret=$$(pass OAUTH_CLIENT_SECRET)
+	kubectl --context k3d-dfd create namespace cert-manager
+	kubectl --context k3d-dfd create secret generic -n kube-system cilium-ca --from-file=ca.key --from-file=ca.crt
+	kubectl --context k3d-dfd create secret generic -n cert-manager cilium-ca --from-file=tls.key=ca.key --from-file=tls.crt=ca.crt
+	kubectl --context k3d-dfd create namespace tailscale
+	kubectl --context k3d-dfd create secret -n tailscale generic operator-oauth --from-literal=client_id=$$(pass OAUTH_CLIENT_ID) --from-literal=client_secret=$$(pass OAUTH_CLIENT_SECRET)
