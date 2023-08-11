@@ -9,11 +9,13 @@ helmCharts:
     valuesInline:
       operator:
         replicas: 1
+      envoy:
+        enabled: true
       hubble:
         relay:
-          enabled: false
+          enabled: true
         ui:
-          enabled: false
+          enabled: true
         tls:
           auto:
             method: certmanager
