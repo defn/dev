@@ -42,18 +42,6 @@ local_resource(
 )
 
 local_resource(
-    "nomad",
-    serve_cmd=[
-        "bash",
-        "-c",
-        """
-            cd ~/m
-            exec nomad agent -dev -bind 0.0.0.0 -network-interface='{{ GetDefaultInterfaces | attr "name" }}'
-            """,
-    ],
-)
-
-local_resource(
     "k3d",
     cmd=[
         "bash",
@@ -173,11 +161,3 @@ local_resource(
             """,
     ],
 )
-
-#local_resource("hello", "nomad job run etc/hello.nomad", deps=["./etc/hello.nomad"])
-#
-#local_resource("demo1", "nomad job run etc/demo1.nomad", deps=["./etc/demo1.nomad"])
-#
-#local_resource("demo2", "nomad job run etc/demo2.nomad", deps=["./etc/demo2.nomad"])
-#
-#local_resource("demo3", "nomad job run etc/demo3.nomad", deps=["./etc/demo3.nomad"])
