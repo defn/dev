@@ -100,7 +100,7 @@ local_resource(
             # background app-of-apps syncing
             while true; do 
                 if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 10 k3d-dfd; then break; fi
-                sleep 5
+                sleep 30
             done &
 
             for v in 0 1; do
@@ -122,9 +122,13 @@ local_resource(
 
             while true; do 
                 if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 10 k3d-dfd; then break; fi
-                sleep 5
+                sleep 30
             done
 
+            for v in 0 1; do
+                # start a sync on vcluster
+                env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 10 k3d-dfd-vcluster-k3d-dfd-vc${v} || true
+            done
             uptime
             """,
     ],
