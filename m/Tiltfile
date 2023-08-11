@@ -97,11 +97,11 @@ local_resource(
             # deploy the cluster app-of-apps
             kubectl --context k3d-dfd apply -f e/k3d-dfd.yaml
 
-            # wait until app-of-apps is synced
+            # background app-of-apps syncing
             while true; do 
                 if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 10 k3d-dfd; then break; fi
                 sleep 5
-            done
+            done &
 
             for v in 0 1; do
                 # wait until vcluster is ready
@@ -116,6 +116,8 @@ local_resource(
                     sleep 5
                 done
             done
+
+            fg
 
             uptime
             """,
