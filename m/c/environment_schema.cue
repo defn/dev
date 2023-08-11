@@ -123,7 +123,7 @@ import (
 				if strings.HasPrefix(app_name, "\(machine_type)-\(machine_name)") {
 					path: "m/k/r/\(app_name)"
 				}
-				if ! strings.HasPrefix(app_name, "\(machine_type)-\(machine_name)") {
+				if !strings.HasPrefix(app_name, "\(machine_type)-\(machine_name)") {
 					path: "m/k/r/\(machine_type)-\(machine_name)-\(app_name)"
 				}
 			}

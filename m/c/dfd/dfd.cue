@@ -2,7 +2,7 @@ package c
 
 cluster_name: "dfd"
 cluster_type: "k3d"
-vclusters: [0,1]
+vclusters: [0, 1]
 
 env: (#Transform & {
 	transformer: #TransformK3D

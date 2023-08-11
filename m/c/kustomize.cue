@@ -871,7 +871,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 		#Input
 		vc_name:    string | *from.name
 		vc_machine: string | *from.name
-		vc_index: int | *0
+		vc_index:   int | *0
 	}
 
 	to: #KustomizeVCluster
@@ -939,16 +939,16 @@ kustomize: "cert-manager": #KustomizeHelm & {
 
 	jsp: "service-vcluster-lb": {
 		target: {
-			group: ""
-			version: "v1"
-			kind: "Service"
-			name: "vcluster-lb"
+			group:     ""
+			version:   "v1"
+			kind:      "Service"
+			name:      "vcluster-lb"
 			namespace: _in.vc_name
 		}
 
 		patches: [{
-			op: "replace"
-			path: "/spec/ports/0/port"
+			op:    "replace"
+			path:  "/spec/ports/0/port"
 			value: 8443 + _in.vc_index
 		}]
 	}
@@ -993,7 +993,7 @@ kustomize: "cilium": #KustomizeHelm & {
 		repo:      "https://helm.cilium.io"
 		values: {
 			operator: replicas: 1
-			envoy: enabled: true
+			envoy: enabled:     true
 			hubble: {
 				relay: enabled: true
 				ui: enabled:    true
@@ -1009,35 +1009,35 @@ kustomize: "cilium": #KustomizeHelm & {
 		}
 	}
 
-//	_host: "hubble.defn.run"
-//
-//	resource: "ingress-hubble-ui": {
-//		apiVersion: "networking.k8s.io/v1"
-//		kind:       "Ingress"
-//		metadata: {
-//			name: "hubble-ui"
-//			annotations: {
-//				"external-dns.alpha.kubernetes.io/hostname":        _host
-//				"traefik.ingress.kubernetes.io/router.tls":         "true"
-//				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
-//			}
-//		}
-//
-//		spec: {
-//			ingressClassName: "traefik"
-//			rules: [{
-//				host: _host
-//				http: paths: [{
-//					path:     "/"
-//					pathType: "Prefix"
-//					backend: service: {
-//						name: "hubble-ui"
-//						port: number: 80
-//					}
-//				}]
-//			}]
-//		}
-//	}
+	//	_host: "hubble.defn.run"
+	//
+	//	resource: "ingress-hubble-ui": {
+	//		apiVersion: "networking.k8s.io/v1"
+	//		kind:       "Ingress"
+	//		metadata: {
+	//			name: "hubble-ui"
+	//			annotations: {
+	//				"external-dns.alpha.kubernetes.io/hostname":        _host
+	//				"traefik.ingress.kubernetes.io/router.tls":         "true"
+	//				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
+	//			}
+	//		}
+	//
+	//		spec: {
+	//			ingressClassName: "traefik"
+	//			rules: [{
+	//				host: _host
+	//				http: paths: [{
+	//					path:     "/"
+	//					pathType: "Prefix"
+	//					backend: service: {
+	//						name: "hubble-ui"
+	//						port: number: 80
+	//					}
+	//				}]
+	//			}]
+	//		}
+	//	}
 }
 
 // https://artifacthub.io/packages/helm/bitnami/nginx
@@ -1081,6 +1081,20 @@ kustomize: "nginx": #KustomizeHelm & {
 kustomize: "tailscale": #Kustomize & {
 	resource: "tailscale": {
 		url: "https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/manifests/operator.yaml"
+	}
+
+	jsp: "secret-operator-oauth-remove": {
+		target: {
+			version: "v1"
+			kind:    "Secret"
+			name:    "operator-oauth"
+			namespace: "tailscale"
+		}
+		patches: [{
+			op:    "replace"
+			path:  "/metadata/name"
+			value: "not-used"
+		}]
 	}
 }
 

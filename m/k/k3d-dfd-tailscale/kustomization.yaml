@@ -1,5 +1,11 @@
 #ManagedBy: cue
 
-patches: []
+patches:
+  - path: jsonp-secret-operator-oauth-remove.yaml
+    target:
+      version: v1
+      kind: Secret
+      name: operator-oauth
+      namespace: tailscale
 resources:
   - https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/manifests/operator.yaml

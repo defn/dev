@@ -12,7 +12,7 @@ lookup: {
 				if strings.HasPrefix(kname, "\(e.type)-\(ename)") {
 					"\(kname)": kname
 				}
-				if ! strings.HasPrefix(kname, "\(e.type)-\(ename)") {
+				if !strings.HasPrefix(kname, "\(e.type)-\(ename)") {
 					"\(kname)": "\(e.type)-\(ename)-\(kname)"
 				}
 			}
