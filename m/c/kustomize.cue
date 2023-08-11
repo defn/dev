@@ -1024,6 +1024,25 @@ kustomize: "cert-manager": #KustomizeHelm & {
 }
 
 // https://artifacthub.io/packages/helm/cilium/cilium
+kustomize: "cilium-bootstrap": #KustomizeHelm & {
+	namespace: "kube-system"
+
+	helm: {
+		release:   "cilium"
+		name:      "cilium"
+		namespace: "kube-system"
+		version:   "1.14.0"
+		repo:      "https://helm.cilium.io"
+		values: {
+			operator: replicas: 1
+			hubble: {
+				relay: enabled: false
+				ui: enabled:    false
+			}
+		}
+	}
+}
+
 kustomize: "cilium": #KustomizeHelm & {
 	namespace: "kube-system"
 
@@ -1038,14 +1057,14 @@ kustomize: "cilium": #KustomizeHelm & {
 			hubble: {
 				relay: enabled: false
 				ui: enabled:    false
-//				tls: auto: {
-//					method: "certmanager"
-//					certManagerIssuerRef: {
-//						name:  "cilium-ca"
-//						kind:  "ClusterIssuer"
-//						group: "cert-manager.io"
-//					}
-//				}
+				tls: auto: {
+					method: "certmanager"
+					certManagerIssuerRef: {
+						name:  "cilium-ca"
+						kind:  "ClusterIssuer"
+						group: "cert-manager.io"
+					}
+				}
 			}
 		}
 	}
