@@ -92,18 +92,6 @@
       config.clusters);
 
     scripts = { system }: {
-      k3d-create = ''
-        set -exfu
-
-        name=$1; shift
-
-        k3d cluster delete $name || true
-
-        k3d cluster create $name --config ~/m/k3d.yaml
-
-        docker update --restart=no k3d-$name-server-0
-      '';
-
       k3d-registry = ''
         k3d registry create registry --port 0.0.0.0:5000
       '';

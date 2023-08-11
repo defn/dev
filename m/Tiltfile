@@ -54,6 +54,7 @@ local_resource(
             # deploy k3d, argocd
             rm -vf ~/.kube/config*
             env KUBECONFIG=$HOME/.kube/config this-k3d-create dfd
+            docker update --restart=no k3d-dfd-server-0
 
             (cd c/dfd && make k3d-secrets)
 
