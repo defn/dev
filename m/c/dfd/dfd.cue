@@ -7,6 +7,12 @@ vclusters: [0,1]
 env: (#Transform & {
 	transformer: #TransformK3D
 
+	inputs: "\(cluster_name)-bootstrap": bootstrap: "cilium-bootstrap": [1, ""]
+}).outputs
+
+env: (#Transform & {
+	transformer: #TransformK3D
+
 	inputs: "\(cluster_name)": {
 		bootstrap: {
 			"cert-manager-crds": [1, ""]
