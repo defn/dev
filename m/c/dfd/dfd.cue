@@ -9,7 +9,9 @@ env: (#Transform & {
 
 	inputs: "\(cluster_name)": {
 		bootstrap: {
-			"argo-cd": [1, ""]
+			"cert-manager": [1, ""]
+			"cilium": [2, ""]
+			"argo-cd": [3, ""]
 			"\(cluster_type)-\(cluster_name)-vc0": [100, ""]
 			"\(cluster_type)-\(cluster_name)-vc1": [100, ""]
 			"vcluster-\(cluster_type)-\(cluster_name)-vc0": [200, ""]
