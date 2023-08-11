@@ -1077,6 +1077,13 @@ kustomize: "nginx": #KustomizeHelm & {
 	}
 }
 
+// https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/manifests/operator.yaml
+kustomize: "tailscale": #Kustomize & {
+	resource: "tailscale": {
+		url: "https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/manifests/operator.yaml"
+	}
+}
+
 // https://doc.traefik.io/traefik/routing/providers/kubernetes-ingress/
 // https://artifacthub.io/packages/helm/traefik/traefik
 kustomize: "traefik": #KustomizeHelm & {
