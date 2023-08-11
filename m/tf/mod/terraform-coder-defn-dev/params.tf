@@ -9,23 +9,23 @@ data "coder_parameter" "provider" {
   name         = "provider"
   display_name = "Provider"
   description  = "The service provider to deploy the workspace in"
-  default      = "fly"
+  default      = "aws-ec2"
   icon         = "/emojis/1f30e.png"
   mutable      = true
 
   option {
-    name  = "Fly"
-    value = "fly"
-  }
-
-  option {
-    name  = "Amazon Web Services: ec2"
+    name  = "Amazon Web Services VM"
     value = "aws-ec2"
   }
 
   option {
-    name  = "Digital Ocean: droplet"
+    name  = "Digital Ocean VM"
     value = "do-droplet"
+  }
+
+  option {
+    name  = "Fly"
+    value = "fly"
   }
 
   option {
