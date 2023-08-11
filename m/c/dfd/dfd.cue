@@ -17,15 +17,14 @@ env: (#Transform & {
 		bootstrap: {
 			"cert-manager-crds": [1, ""]
 			"cert-manager": [2, ""]
-			"argo-cd": [3, ""]
-
-			"cilium": [10, ""]
+			"cilium": [3, ""]
 
 			"\(cluster_type)-\(cluster_name)-vc0": [100, ""]
 			"\(cluster_type)-\(cluster_name)-vc1": [100, ""]
 
 			"vcluster-\(cluster_type)-\(cluster_name)-vc0": [200, ""]
 			"vcluster-\(cluster_type)-\(cluster_name)-vc1": [200, ""]
+			"argo-cd": [200, ""]
 		}
 	}
 }).outputs
