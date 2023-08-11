@@ -1,7 +1,6 @@
 {
   inputs = {
     tilt.url = github:defn/dev/pkg-tilt-0.33.3-1?dir=m/pkg/tilt;
-    vault.url = github:defn/dev/pkg-vault-1.14.1-1?dir=m/pkg/vault;
     gh.url = github:defn/dev/pkg-gh-2.32.1-1?dir=m/pkg/gh;
     earthly.url = github:defn/dev/pkg-earthly-0.7.15-1?dir=m/pkg/earthly;
     oras.url = github:defn/dev/pkg-oras-1.0.1-1?dir=m/pkg/oras;
@@ -23,7 +22,6 @@
         let
           flakeInputs = with ctx.pkgs; [
             inputs.tilt.defaultPackage.${ctx.system}
-            inputs.vault.defaultPackage.${ctx.system}
             inputs.gh.defaultPackage.${ctx.system}
             inputs.earthly.defaultPackage.${ctx.system}
             inputs.oras.defaultPackage.${ctx.system}
