@@ -19,28 +19,13 @@ data "coder_parameter" "provider" {
   }
 
   option {
-    name  = "Amazon Web Services"
+    name  = "Amazon Web Services: ec2"
     value = "aws-ec2"
-  }
-
-  option {
-    name  = "Amazon Web Services: k3d"
-    value = "aws-k3d"
-  }
-
-  option {
-    name  = "Amazon Web Services: eks"
-    value = "aws-eks"
   }
 
   option {
     name  = "Digital Ocean: droplet"
     value = "do-droplet"
-  }
-
-  option {
-    name  = "Digital Ocean: k3d"
-    value = "do-k3d"
   }
 
   option {
