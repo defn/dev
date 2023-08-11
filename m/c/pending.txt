@@ -1,5 +1,5 @@
 https://artifacthub.io/packages/helm/alekc/caddy/0.2.4
-https://artifacthub.io/packages/helm/argo/argo-workflows/0.32.1
+https://artifacthub.io/packages/helm/argo/argo-workflows/0.32.2
 https://artifacthub.io/packages/helm/bitnami/external-dns/6.23.3
 https://artifacthub.io/packages/helm/bitnami/nginx/15.1.2
 https://artifacthub.io/packages/helm/cert-manager/cert-manager/1.12.3
@@ -7,6 +7,6 @@ https://artifacthub.io/packages/helm/cilium/cilium/1.14.0
 https://artifacthub.io/packages/helm/coder-v2/coder/2.0.2
 https://artifacthub.io/packages/helm/external-secrets-operator/external-secrets/0.9.2
 https://artifacthub.io/packages/helm/jkroepke/amazon-eks-pod-identity-webhook/1.2.0
-https://artifacthub.io/packages/helm/kyverno/kyverno/3.0.4
+https://artifacthub.io/packages/helm/kyverno/kyverno/3.0.5
 https://artifacthub.io/packages/helm/loft/vcluster/0.15.5
 https://artifacthub.io/packages/helm/traefik/traefik/24.0.0

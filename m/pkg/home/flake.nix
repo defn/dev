@@ -213,7 +213,7 @@
 
         k3d cluster delete $name || true
 
-        k3d cluster create $name --config ~/m/k3d.yaml 
+        k3d cluster create $name --config ~/m/k3d.yaml
 
         docker update --restart=no k3d-$name-server-0
       '';

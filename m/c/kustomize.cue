@@ -276,7 +276,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.32.1"
+		version:   "0.32.2"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [
@@ -390,7 +390,7 @@ kustomize: "kyverno": #KustomizeHelm & {
 	helm: {
 		release: "kyverno"
 		name:    "kyverno"
-		version: "3.0.4"
+		version: "3.0.5"
 		repo:    "https://kyverno.github.io/kyverno"
 		values: {
 			replicaCount: 1
@@ -917,9 +917,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 	resource: "namespace-cert-manager": core.#Namespace & {
 		apiVersion: "v1"
 		kind:       "Namespace"
-		metadata: {
-			name: "cert-manager"
-		}
+		metadata: name: "cert-manager"
 	}
 
 	resource: "cert-manager-crds": {
@@ -929,12 +927,8 @@ kustomize: "cert-manager": #KustomizeHelm & {
 	resource: "clusterissuer-cilium": {
 		apiVersion: "cert-manager.io/v1"
 		kind:       "ClusterIssuer"
-		metadata: {
-			name: "cilium-ca"
-		}
-		spec: {
-			ca: secretName: "cilium-ca"
-		}
+		metadata: name: "cilium-ca"
+		spec: ca: secretName: "cilium-ca"
 	}
 }
 
