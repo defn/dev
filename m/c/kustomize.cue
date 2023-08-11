@@ -1031,54 +1031,54 @@ kustomize: "cilium": #KustomizeHelm & {
 		release:   "cilium"
 		name:      "cilium"
 		namespace: "kube-system"
-		version:   "1.14.0"
+		version:   "1.13.5"
 		repo:      "https://helm.cilium.io"
 		values: {
 			operator: replicas: 1
 			hubble: {
 				relay: enabled: true
 				ui: enabled:    true
-				tls: auto: {
-					method: "certmanager"
-					certManagerIssuerRef: {
-						name:  "cilium-ca"
-						kind:  "ClusterIssuer"
-						group: "cert-manager.io"
-					}
-				}
+//				tls: auto: {
+//					method: "certmanager"
+//					certManagerIssuerRef: {
+//						name:  "cilium-ca"
+//						kind:  "ClusterIssuer"
+//						group: "cert-manager.io"
+//					}
+//				}
 			}
 		}
 	}
 
-	_host: "hubble.defn.run"
-
-	resource: "ingress-hubble-ui": {
-		apiVersion: "networking.k8s.io/v1"
-		kind:       "Ingress"
-		metadata: {
-			name: "hubble-ui"
-			annotations: {
-				"external-dns.alpha.kubernetes.io/hostname":        _host
-				"traefik.ingress.kubernetes.io/router.tls":         "true"
-				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
-			}
-		}
-
-		spec: {
-			ingressClassName: "traefik"
-			rules: [{
-				host: _host
-				http: paths: [{
-					path:     "/"
-					pathType: "Prefix"
-					backend: service: {
-						name: "hubble-ui"
-						port: number: 80
-					}
-				}]
-			}]
-		}
-	}
+//	_host: "hubble.defn.run"
+//
+//	resource: "ingress-hubble-ui": {
+//		apiVersion: "networking.k8s.io/v1"
+//		kind:       "Ingress"
+//		metadata: {
+//			name: "hubble-ui"
+//			annotations: {
+//				"external-dns.alpha.kubernetes.io/hostname":        _host
+//				"traefik.ingress.kubernetes.io/router.tls":         "true"
+//				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
+//			}
+//		}
+//
+//		spec: {
+//			ingressClassName: "traefik"
+//			rules: [{
+//				host: _host
+//				http: paths: [{
+//					path:     "/"
+//					pathType: "Prefix"
+//					backend: service: {
+//						name: "hubble-ui"
+//						port: number: 80
+//					}
+//				}]
+//			}]
+//		}
+//	}
 }
 
 // https://artifacthub.io/packages/helm/bitnami/nginx

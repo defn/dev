@@ -98,9 +98,6 @@ rules:
   - ciliumnetworkpolicies
   - ciliumnodes
   - ciliumnodeconfigs
-  - ciliumcidrgroups
-  - ciliuml2announcementpolicies
-  - ciliumpodippools
   verbs:
   - list
   - watch
@@ -140,7 +137,6 @@ rules:
   - ciliumclusterwidenetworkpolicies/status
   - ciliumendpoints/status
   - ciliumendpoints
-  - ciliuml2announcementpolicies/status
   verbs:
   - patch
 ---
@@ -298,9 +294,6 @@ rules:
   - ciliumnetworkpolicies.cilium.io
   - ciliumnodes.cilium.io
   - ciliumnodeconfigs.cilium.io
-  - ciliumcidrgroups.cilium.io
-  - ciliuml2announcementpolicies.cilium.io
-  - ciliumpodippools.cilium.io
   resources:
   - customresourcedefinitions
   verbs:
@@ -309,17 +302,10 @@ rules:
   - cilium.io
   resources:
   - ciliumloadbalancerippools
-  - ciliumpodippools
   verbs:
   - get
   - list
   - watch
-- apiGroups:
-  - cilium.io
-  resources:
-  - ciliumpodippools
-  verbs:
-  - create
 - apiGroups:
   - cilium.io
   resources:
@@ -458,34 +444,27 @@ data:
   cluster-name: default
   cluster-pool-ipv4-cidr: 10.0.0.0/8
   cluster-pool-ipv4-mask-size: "24"
-  cni-exclusive: "true"
-  cni-log-file: /var/run/cilium/cilium-cni.log
-  cnp-node-status-gc-interval: 0s
+  cni-uninstall: "true"
   custom-cni-conf: "false"
   debug: "false"
   disable-cnp-status-updates: "true"
-  egress-gateway-reconciliation-trigger-interval: 1s
+  disable-endpoint-crd: "false"
   enable-auto-protect-node-port-range: "true"
   enable-bgp-control-plane: "false"
   enable-bpf-clock-probe: "false"
   enable-endpoint-health-checking: "true"
-  enable-external-ips: "false"
   enable-health-check-nodeport: "true"
   enable-health-checking: "true"
-  enable-host-port: "false"
   enable-hubble: "true"
   enable-ipv4: "true"
-  enable-ipv4-big-tcp: "false"
   enable-ipv4-masquerade: "true"
   enable-ipv6: "false"
   enable-ipv6-big-tcp: "false"
   enable-ipv6-masquerade: "true"
-  enable-k8s-networkpolicy: "true"
   enable-k8s-terminating-endpoint: "true"
   enable-l2-neigh-discovery: "true"
   enable-l7-proxy: "true"
   enable-local-redirect-policy: "false"
-  enable-node-port: "false"
   enable-policy: default
   enable-remote-node-identity: "true"
   enable-sctp: "false"
@@ -493,7 +472,6 @@ data:
   enable-vtep: "false"
   enable-well-known-identities: "false"
   enable-xt-socket-fallback: "true"
-  external-envoy-proxy: "false"
   hubble-disable-tls: "false"
   hubble-listen-address: :4244
   hubble-socket-path: /var/run/cilium/hubble.sock
@@ -505,15 +483,7 @@ data:
   identity-heartbeat-timeout: 30m0s
   install-no-conntrack-iptables-rules: "false"
   ipam: cluster-pool
-  ipam-cilium-node-update-rate: 15s
-  k8s-client-burst: "10"
-  k8s-client-qps: "5"
-  kube-proxy-replacement: "false"
-  kube-proxy-replacement-healthz-bind-address: ""
-  mesh-auth-enabled: "true"
-  mesh-auth-gc-interval: 5m0s
-  mesh-auth-queue-size: "1024"
-  mesh-auth-rotated-identities-queue-size: "1024"
+  kube-proxy-replacement: disabled
   monitor-aggregation: medium
   monitor-aggregation-flags: all
   monitor-aggregation-interval: 5s
@@ -522,14 +492,8 @@ data:
   operator-api-serve-addr: 127.0.0.1:9234
   preallocate-bpf-maps: "false"
   procfs: /host/proc
-  proxy-connect-timeout: "2"
-  proxy-max-connection-duration-seconds: "0"
-  proxy-max-requests-per-connection: "0"
-  proxy-prometheus-port: "9964"
   remove-cilium-node-taints: "true"
-  routing-mode: tunnel
   set-cilium-is-up-condition: "true"
-  set-cilium-node-taints: "true"
   sidecar-istio-proxy-image: cilium/istio_proxy
   skip-cnp-status-startup-clean: "false"
   synchronize-k8s-nodes: "true"
@@ -538,14 +502,14 @@ data:
   tofqdns-endpoint-max-ip-per-hostname: "50"
   tofqdns-idle-connection-grace-period: 0s
   tofqdns-max-deferred-connection-deletes: "10000"
+  tofqdns-min-ttl: "3600"
   tofqdns-proxy-response-max-delay: 100ms
-  tunnel-protocol: vxlan
+  tunnel: vxlan
   unmanaged-pod-watcher-interval: "15"
   vtep-cidr: ""
   vtep-endpoint: ""
   vtep-mac: ""
   vtep-mask: ""
-  write-cni-conf-when-ready: /host/etc/cni/net.d/05-cilium.conflist
 kind: ConfigMap
 metadata:
   name: cilium-config
@@ -554,8 +518,8 @@ metadata:
 apiVersion: v1
 data:
   config.yaml: "cluster-name: default\npeer-service: \"hubble-peer.kube-system.svc.cluster.local:443\"\nlisten-address:
-    :4245\ngops: true\ngops-port: \"9893\"\ndial-timeout: \nretry-timeout: \nsort-buffer-len-max:
-    \nsort-buffer-drain-timeout: \ntls-hubble-client-cert-file: /var/lib/hubble-relay/tls/client.crt\ntls-hubble-client-key-file:
+    :4245\ndial-timeout: \nretry-timeout: \nsort-buffer-len-max: \nsort-buffer-drain-timeout:
+    \ntls-client-cert-file: /var/lib/hubble-relay/tls/client.crt\ntls-client-key-file:
     /var/lib/hubble-relay/tls/client.key\ntls-hubble-server-ca-files: /var/lib/hubble-relay/tls/hubble-server-ca.crt\ndisable-server-tls:
     true\n"
 kind: ConfigMap
@@ -583,6 +547,46 @@ kind: ConfigMap
 metadata:
   name: hubble-ui-nginx
   namespace: kube-system
+---
+apiVersion: v1
+data:
+  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURFekNDQWZ1Z0F3SUJBZ0lRWGFjaVpQTGpQUS82ckEwOE43bVhSVEFOQmdrcWhraUc5dzBCQVFzRkFEQVUKTVJJd0VBWURWUVFERXdsRGFXeHBkVzBnUTBFd0hoY05Nak13T0RFeE1EVXpNREUwV2hjTk1qWXdPREV3TURVegpNREUwV2pBVU1SSXdFQVlEVlFRREV3bERhV3hwZFcwZ1EwRXdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUFBNElCCkR3QXdnZ0VLQW9JQkFRQ2VxdjR1QnoraGYrVHdBVVVPUC8rSENMNVJ4Zk1LQndiZERqQWJ2ZW5WTTZ4UHJjZDcKM0JCUjJwV2FZeHhGa21XYWZMZnBDZS9NTmR3dGl2WU1hOXJzOTBJc0xUMFloNXJEa1YyR1pBdWc4VHRrekozYgpxYkV4WGtZZlVwemRtQWlzNjhDWjNaemZOdHU3aWY2Q3dML2xLVkFISm56VjZNVFNSeTA3L3IwQnJzeDBRcDh4CjRScnZ6dUxRY2FoTnZwVlVRNjRUZm1WQVV6NnYxUk5YMTRKb21LNEtUTDJ0d0dYaE5jMkdDaXRYbFFaSXI4YTAKZFpROERTWDhWeFd3ZWlVN3FkenI2elJXbmk2RWx0QjR0T2ZzdSsvVmdQMWY1Z2hTWU5UVXoxaGt4RzhReWZ3MAoya2JjUThKUjlUV1o4NUxxdW9HNmlKR3BBWkYyd0RicUt2d05BZ01CQUFHallUQmZNQTRHQTFVZER3RUIvd1FFCkF3SUNwREFkQmdOVkhTVUVGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0R3WURWUjBUQVFIL0JBVXcKQXdFQi96QWRCZ05WSFE0RUZnUVVQV25uSDFwdXNpblJzWVdGTjBlU2ZjMzJwdFF3RFFZSktvWklodmNOQVFFTApCUUFEZ2dFQkFKaHViV1grNUJOWXBJV2dmSWdUeWQ3TDV3ejQ0VmNOSDNLV0c1dG40dWtTT3lkM2gwU2JZVE5uCk1BdFNLY0JmWVFwQXZJODBnS0tXc08xZlZMc1kvZDJ4dW9ZSDM4d0gyNTFqMkxWMnhEUHRXWitTNGdGN1FIZEMKMW9Zc0NMczFxNUJUcTAreGFJUk4yT1piZVpFUkN4RnFnM1RsUXJIY0hXRVArL0dTS2lLdE02K0dnbXJ0Zjh4QgpOZHZwL3FtaksyYmdrYlRSUGRMNlZRVGtaNFpwN3RKbEQwT3N5dzhlKzFLT01ISUxzUm5RbXpqbVJ1YitYSEY4Ck5DSGdwOWYydDkwVW9kN0c3Q2Z2c25MZ0ZkUHdlM2YvTjNMay81MnlKcTZXeERPNFBTZFdJdW4rSVJDS2F3TmoKUy9EcDB2YmdCblczZWNIdkQxb2srSzl3b3N6b0Z4UT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+  ca.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBbnFyK0xnYy9vWC9rOEFGRkRqLy9od2krVWNYekNnY0czUTR3RzczcDFUT3NUNjNICmU5d1FVZHFWbW1NY1JaSmxtbnkzNlFudnpEWGNMWXIyREd2YTdQZENMQzA5R0llYXc1RmRobVFMb1BFN1pNeWQKMjZteE1WNUdIMUtjM1pnSXJPdkFtZDJjM3piYnU0bitnc0MvNVNsUUJ5WjgxZWpFMGtjdE8vNjlBYTdNZEVLZgpNZUVhNzg3aTBIR29UYjZWVkVPdUUzNWxRRk0rcjlVVFY5ZUNhSml1Q2t5OXJjQmw0VFhOaGdvclY1VUdTSy9HCnRIV1VQQTBsL0ZjVnNIb2xPNm5jNitzMFZwNHVoSmJRZUxUbjdMdnYxWUQ5WCtZSVVtRFUxTTlZWk1SdkVNbjgKTk5wRzNFUENVZlUxbWZPUzZycUJ1b2lScVFHUmRzQTI2aXI4RFFJREFRQUJBb0lCQUVuMmY2SkpNcm8vK2lKLwpGUWU5Z1lvYTQwMFBMMm9mT0czWGJVbWhUOTFZeHh3bGIvWW04VnlXdm1KSGpTaEpSQit0djdWY01uSkpNU2Z4CnZSeXhNazZBUEZLSGpCRmhOUjJ4SjUyOENVZXU2L2JqQXpzZ2NUOElLVHYwc0xjRFpoZmxsZFNqMzdxVndmdzgKS1c0ZUY5WGxXaTdiSEJwQzlXem9UUWZJaWFhOGJ4NDdvNGFtek1lZk1mbUNieldLNGNubDB3NkNxaTVOWXMyKwo1NG1RTm5QQzdOamFGRU1FRm1mNXFqL0FXYzZOTitMazlHSjMzekZvSWxuemtTSWJZY05vZXg3UG94M0FxRUtFCldqWnllVmxlV0NKQ3pMMEFVSGpYTndDZ25SMFBJN2hzMzlvOTA0NXFPZzFOTW5HLzF4QnJROHFyUWxuQTJtTzEKdFk3SS8ra0NnWUVBeTBZbUhvRWZnanZrQUhBaHl3STE1YVN3TjMya080SW8yQ2huVUMzTVVnM0tQRDFndktkOAo4b1IxRDhXSnkzY3FYR0RDZGp0dW11bVRqeVRBYVRJeThnd25NS2FpNktUVnphWDdKcUx5N3k4MGwyMkFPZ0dUCnhsOVB1aWhsV0dsZ1Z0VUd2Qlh1QnRsZDRBQlNEN2s2RmJ3MUlCWXphenh3eE5mSkdkYXZqNk1DZ1lFQXg5TG0KZU8yc2lPRGQwTGovMVF5enZ5NklKSU1BRE9BQnFuWlI0WFlabWhMRFQ2bldNTkFwUXJGRkh6WjdrWG9YaEQ4aQp6TGNSaExkYkFWMCszTFo4SUpOMkpqT0hJSmdvMUNYUVRISGg4MGN4Ykl2R3lMTVpMZkloZzFJUk9qMk9GbE9XCjc2N2ErUWgvV0pnUkR1MGZ5QmdZRzdqak9sTm1VQ0NaTjN3YlFJOENnWUIzb3pYVVJsTHhKNmF0eTFGWVZsaTYKYkE5NjJXdkx5bk9YcFZBSkZLdG9yODBUWDF5TUxGZVJ0UHZnNkhhTlZmbU1uVFpXdCt3RktPdzhGM2xYY01BagpUWnZUT29BdlJMVEJjS3M4dGpNZEt6OWMwSW5qbWdJTGd4VTlqNEQyWkM3YmJFMm1iWkhHWGpDdUlnSXFWdTRrCjFMeS93ZEZKa0MwZTdaSGlyMFJzMlFLQmdDWnRSVXIrRWM3a3gyTkxJRStkT0xmTVAvd2RnUlg0d2ZsQTliQVEKNFEyRERESTJxKzBKS3RZYmR2cHdwTVN1SVBXYW1wdVpuUEhUdk5sL1VBWnJ4V1VTVm9jMEk0aytHYVBxZmFzbAp2MWprV1BuUnkzRnZGNm1CUmJhV1FwL2JsSVp3bnJjSy9pc2oyakYwVk50MCtFYW5jNE5wUTdGRXRvazBLNkxDCjZBNjdBb0dCQUlBOFlJL2U2MkQzcEpmamZXY25KTU1Ybmc1R0V3QWtBREs5OVJqZHZzZjBKQVlKRVFaZ3NpeGQKTTV0NTdmZi9rTFAwTmdOOTZIMEw1VFBWTWhmWW93dng2UW4wSmx6UFJtRGM3SlhHbFJCeWhjYmx4WHR1TjZYSQpSY1RhclJ4d2NLc0NQZ0Y5Q1VoeHFYQzFEOGw1a1B0aVBOaWZrcE05dEpneHhrSkU4OVBNCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
+kind: Secret
+metadata:
+  name: cilium-ca
+  namespace: kube-system
+---
+apiVersion: v1
+data:
+  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURFekNDQWZ1Z0F3SUJBZ0lRWGFjaVpQTGpQUS82ckEwOE43bVhSVEFOQmdrcWhraUc5dzBCQVFzRkFEQVUKTVJJd0VBWURWUVFERXdsRGFXeHBkVzBnUTBFd0hoY05Nak13T0RFeE1EVXpNREUwV2hjTk1qWXdPREV3TURVegpNREUwV2pBVU1SSXdFQVlEVlFRREV3bERhV3hwZFcwZ1EwRXdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUFBNElCCkR3QXdnZ0VLQW9JQkFRQ2VxdjR1QnoraGYrVHdBVVVPUC8rSENMNVJ4Zk1LQndiZERqQWJ2ZW5WTTZ4UHJjZDcKM0JCUjJwV2FZeHhGa21XYWZMZnBDZS9NTmR3dGl2WU1hOXJzOTBJc0xUMFloNXJEa1YyR1pBdWc4VHRrekozYgpxYkV4WGtZZlVwemRtQWlzNjhDWjNaemZOdHU3aWY2Q3dML2xLVkFISm56VjZNVFNSeTA3L3IwQnJzeDBRcDh4CjRScnZ6dUxRY2FoTnZwVlVRNjRUZm1WQVV6NnYxUk5YMTRKb21LNEtUTDJ0d0dYaE5jMkdDaXRYbFFaSXI4YTAKZFpROERTWDhWeFd3ZWlVN3FkenI2elJXbmk2RWx0QjR0T2ZzdSsvVmdQMWY1Z2hTWU5UVXoxaGt4RzhReWZ3MAoya2JjUThKUjlUV1o4NUxxdW9HNmlKR3BBWkYyd0RicUt2d05BZ01CQUFHallUQmZNQTRHQTFVZER3RUIvd1FFCkF3SUNwREFkQmdOVkhTVUVGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0R3WURWUjBUQVFIL0JBVXcKQXdFQi96QWRCZ05WSFE0RUZnUVVQV25uSDFwdXNpblJzWVdGTjBlU2ZjMzJwdFF3RFFZSktvWklodmNOQVFFTApCUUFEZ2dFQkFKaHViV1grNUJOWXBJV2dmSWdUeWQ3TDV3ejQ0VmNOSDNLV0c1dG40dWtTT3lkM2gwU2JZVE5uCk1BdFNLY0JmWVFwQXZJODBnS0tXc08xZlZMc1kvZDJ4dW9ZSDM4d0gyNTFqMkxWMnhEUHRXWitTNGdGN1FIZEMKMW9Zc0NMczFxNUJUcTAreGFJUk4yT1piZVpFUkN4RnFnM1RsUXJIY0hXRVArL0dTS2lLdE02K0dnbXJ0Zjh4QgpOZHZwL3FtaksyYmdrYlRSUGRMNlZRVGtaNFpwN3RKbEQwT3N5dzhlKzFLT01ISUxzUm5RbXpqbVJ1YitYSEY4Ck5DSGdwOWYydDkwVW9kN0c3Q2Z2c25MZ0ZkUHdlM2YvTjNMay81MnlKcTZXeERPNFBTZFdJdW4rSVJDS2F3TmoKUy9EcDB2YmdCblczZWNIdkQxb2srSzl3b3N6b0Z4UT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+  ca.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBbnFyK0xnYy9vWC9rOEFGRkRqLy9od2krVWNYekNnY0czUTR3RzczcDFUT3NUNjNICmU5d1FVZHFWbW1NY1JaSmxtbnkzNlFudnpEWGNMWXIyREd2YTdQZENMQzA5R0llYXc1RmRobVFMb1BFN1pNeWQKMjZteE1WNUdIMUtjM1pnSXJPdkFtZDJjM3piYnU0bitnc0MvNVNsUUJ5WjgxZWpFMGtjdE8vNjlBYTdNZEVLZgpNZUVhNzg3aTBIR29UYjZWVkVPdUUzNWxRRk0rcjlVVFY5ZUNhSml1Q2t5OXJjQmw0VFhOaGdvclY1VUdTSy9HCnRIV1VQQTBsL0ZjVnNIb2xPNm5jNitzMFZwNHVoSmJRZUxUbjdMdnYxWUQ5WCtZSVVtRFUxTTlZWk1SdkVNbjgKTk5wRzNFUENVZlUxbWZPUzZycUJ1b2lScVFHUmRzQTI2aXI4RFFJREFRQUJBb0lCQUVuMmY2SkpNcm8vK2lKLwpGUWU5Z1lvYTQwMFBMMm9mT0czWGJVbWhUOTFZeHh3bGIvWW04VnlXdm1KSGpTaEpSQit0djdWY01uSkpNU2Z4CnZSeXhNazZBUEZLSGpCRmhOUjJ4SjUyOENVZXU2L2JqQXpzZ2NUOElLVHYwc0xjRFpoZmxsZFNqMzdxVndmdzgKS1c0ZUY5WGxXaTdiSEJwQzlXem9UUWZJaWFhOGJ4NDdvNGFtek1lZk1mbUNieldLNGNubDB3NkNxaTVOWXMyKwo1NG1RTm5QQzdOamFGRU1FRm1mNXFqL0FXYzZOTitMazlHSjMzekZvSWxuemtTSWJZY05vZXg3UG94M0FxRUtFCldqWnllVmxlV0NKQ3pMMEFVSGpYTndDZ25SMFBJN2hzMzlvOTA0NXFPZzFOTW5HLzF4QnJROHFyUWxuQTJtTzEKdFk3SS8ra0NnWUVBeTBZbUhvRWZnanZrQUhBaHl3STE1YVN3TjMya080SW8yQ2huVUMzTVVnM0tQRDFndktkOAo4b1IxRDhXSnkzY3FYR0RDZGp0dW11bVRqeVRBYVRJeThnd25NS2FpNktUVnphWDdKcUx5N3k4MGwyMkFPZ0dUCnhsOVB1aWhsV0dsZ1Z0VUd2Qlh1QnRsZDRBQlNEN2s2RmJ3MUlCWXphenh3eE5mSkdkYXZqNk1DZ1lFQXg5TG0KZU8yc2lPRGQwTGovMVF5enZ5NklKSU1BRE9BQnFuWlI0WFlabWhMRFQ2bldNTkFwUXJGRkh6WjdrWG9YaEQ4aQp6TGNSaExkYkFWMCszTFo4SUpOMkpqT0hJSmdvMUNYUVRISGg4MGN4Ykl2R3lMTVpMZkloZzFJUk9qMk9GbE9XCjc2N2ErUWgvV0pnUkR1MGZ5QmdZRzdqak9sTm1VQ0NaTjN3YlFJOENnWUIzb3pYVVJsTHhKNmF0eTFGWVZsaTYKYkE5NjJXdkx5bk9YcFZBSkZLdG9yODBUWDF5TUxGZVJ0UHZnNkhhTlZmbU1uVFpXdCt3RktPdzhGM2xYY01BagpUWnZUT29BdlJMVEJjS3M4dGpNZEt6OWMwSW5qbWdJTGd4VTlqNEQyWkM3YmJFMm1iWkhHWGpDdUlnSXFWdTRrCjFMeS93ZEZKa0MwZTdaSGlyMFJzMlFLQmdDWnRSVXIrRWM3a3gyTkxJRStkT0xmTVAvd2RnUlg0d2ZsQTliQVEKNFEyRERESTJxKzBKS3RZYmR2cHdwTVN1SVBXYW1wdVpuUEhUdk5sL1VBWnJ4V1VTVm9jMEk0aytHYVBxZmFzbAp2MWprV1BuUnkzRnZGNm1CUmJhV1FwL2JsSVp3bnJjSy9pc2oyakYwVk50MCtFYW5jNE5wUTdGRXRvazBLNkxDCjZBNjdBb0dCQUlBOFlJL2U2MkQzcEpmamZXY25KTU1Ybmc1R0V3QWtBREs5OVJqZHZzZjBKQVlKRVFaZ3NpeGQKTTV0NTdmZi9rTFAwTmdOOTZIMEw1VFBWTWhmWW93dng2UW4wSmx6UFJtRGM3SlhHbFJCeWhjYmx4WHR1TjZYSQpSY1RhclJ4d2NLc0NQZ0Y5Q1VoeHFYQzFEOGw1a1B0aVBOaWZrcE05dEpneHhrSkU4OVBNCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
+kind: Secret
+metadata:
+  name: hubble-ca-secret
+  namespace: kube-system
+---
+apiVersion: v1
+data:
+  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURFekNDQWZ1Z0F3SUJBZ0lRWGFjaVpQTGpQUS82ckEwOE43bVhSVEFOQmdrcWhraUc5dzBCQVFzRkFEQVUKTVJJd0VBWURWUVFERXdsRGFXeHBkVzBnUTBFd0hoY05Nak13T0RFeE1EVXpNREUwV2hjTk1qWXdPREV3TURVegpNREUwV2pBVU1SSXdFQVlEVlFRREV3bERhV3hwZFcwZ1EwRXdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUFBNElCCkR3QXdnZ0VLQW9JQkFRQ2VxdjR1QnoraGYrVHdBVVVPUC8rSENMNVJ4Zk1LQndiZERqQWJ2ZW5WTTZ4UHJjZDcKM0JCUjJwV2FZeHhGa21XYWZMZnBDZS9NTmR3dGl2WU1hOXJzOTBJc0xUMFloNXJEa1YyR1pBdWc4VHRrekozYgpxYkV4WGtZZlVwemRtQWlzNjhDWjNaemZOdHU3aWY2Q3dML2xLVkFISm56VjZNVFNSeTA3L3IwQnJzeDBRcDh4CjRScnZ6dUxRY2FoTnZwVlVRNjRUZm1WQVV6NnYxUk5YMTRKb21LNEtUTDJ0d0dYaE5jMkdDaXRYbFFaSXI4YTAKZFpROERTWDhWeFd3ZWlVN3FkenI2elJXbmk2RWx0QjR0T2ZzdSsvVmdQMWY1Z2hTWU5UVXoxaGt4RzhReWZ3MAoya2JjUThKUjlUV1o4NUxxdW9HNmlKR3BBWkYyd0RicUt2d05BZ01CQUFHallUQmZNQTRHQTFVZER3RUIvd1FFCkF3SUNwREFkQmdOVkhTVUVGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0R3WURWUjBUQVFIL0JBVXcKQXdFQi96QWRCZ05WSFE0RUZnUVVQV25uSDFwdXNpblJzWVdGTjBlU2ZjMzJwdFF3RFFZSktvWklodmNOQVFFTApCUUFEZ2dFQkFKaHViV1grNUJOWXBJV2dmSWdUeWQ3TDV3ejQ0VmNOSDNLV0c1dG40dWtTT3lkM2gwU2JZVE5uCk1BdFNLY0JmWVFwQXZJODBnS0tXc08xZlZMc1kvZDJ4dW9ZSDM4d0gyNTFqMkxWMnhEUHRXWitTNGdGN1FIZEMKMW9Zc0NMczFxNUJUcTAreGFJUk4yT1piZVpFUkN4RnFnM1RsUXJIY0hXRVArL0dTS2lLdE02K0dnbXJ0Zjh4QgpOZHZwL3FtaksyYmdrYlRSUGRMNlZRVGtaNFpwN3RKbEQwT3N5dzhlKzFLT01ISUxzUm5RbXpqbVJ1YitYSEY4Ck5DSGdwOWYydDkwVW9kN0c3Q2Z2c25MZ0ZkUHdlM2YvTjNMay81MnlKcTZXeERPNFBTZFdJdW4rSVJDS2F3TmoKUy9EcDB2YmdCblczZWNIdkQxb2srSzl3b3N6b0Z4UT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURTRENDQWpDZ0F3SUJBZ0lRUGZhSUdpL3hkL2prR0hPdUdoTFlIREFOQmdrcWhraUc5dzBCQVFzRkFEQVUKTVJJd0VBWURWUVFERXdsRGFXeHBkVzBnUTBFd0hoY05Nak13T0RFeE1EVXpNREUxV2hjTk1qWXdPREV3TURVegpNREUxV2pBak1TRXdId1lEVlFRRERCZ3FMbWgxWW1Kc1pTMXlaV3hoZVM1amFXeHBkVzB1YVc4d2dnRWlNQTBHCkNTcUdTSWIzRFFFQkFRVUFBNElCRHdBd2dnRUtBb0lCQVFDcjJBV0I2bWdUbmFKSk9ZSXJCRTVBWXlyUyszUm8KeXVsYWZwN2YraU5ZbW1JeDREeGdQblZlaWlveWtqLzRnUS82Qm9jYWpUL0ZHUDBabWl2SVpnNm9xU2o5ckFZRwpTWWI5T0VhVlZEWWpYNGFZMUh6cE84eFdVVmJRRVF1dkZTNTUvSTUyQ0RxUGVnTThTMy9pd0h4dzE3aHdQckpHCjNNYmw2QzR4aGtxRkxkMmJmbU5RdWJQN0dFbXkydjdrTmNETFdsQjBrUTFWbU53U0FNOUpVRlJ0REI0dVQ5eEoKNWNTZy9sUWEzcnBlU0JQa2JrRmgyeGhYQVBqOXQxV29lMEd4VVREYnN2UDVMbTRablpPVWs0bThReWJTTnQzego2ZUVMRGRMM1pXOU1YampYY1IxSHNWZnFvUC9EWUNOZG9SZDhQakZtSVBtL2FDN0ljeDF5eXhVdEFnTUJBQUdqCmdZWXdnWU13RGdZRFZSMFBBUUgvQkFRREFnV2dNQjBHQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01CQmdnckJnRUYKQlFjREFqQU1CZ05WSFJNQkFmOEVBakFBTUI4R0ExVWRJd1FZTUJhQUZEMXA1eDlhYnJJcDBiR0ZoVGRIa24zTgo5cWJVTUNNR0ExVWRFUVFjTUJxQ0dDb3VhSFZpWW14bExYSmxiR0Y1TG1OcGJHbDFiUzVwYnpBTkJna3Foa2lHCjl3MEJBUXNGQUFPQ0FRRUFHaGxJd1U3WjZxNkYwY2c0Q0FQRzZ6Vm9ZU1laVkNRV3FPdTRIUWRuSzg5cDVNYWoKSUt5RlI3TU5FSDFrb2dDNTQwcTNUV2ZnTVlCajRFNjM1dTFMN2xGbTVZYWVkbDNwbmE4Y1hld09QUHZqQkZycwpESXk3RmJrRWU1OEFxdDduUjR5bDdFdFMwczRnWGJ6ZTFtajc2aXZ0eWp6V2cwSjFqOG1vRXZFK1E0TGdBdG9pCi80TGYySmo5VEg5OEpWTGlKWWpocytReTdpWkFmNU1WSSthTEFoVy9SYUo4d2Y0SWhFd3p3Z2FxWnd6K1o1RjkKVmJsdnZkZlc0VkhFL1dyd3Roa0ZSQU43T0xybXU1UmVOTWoxcVVTb2JZaXQ1UUNWNGZWaUIzRmJoNVdNZXFDRAprZDVFNlBkQWNDTDQ1eW5vMVA2U3hNajFIWGwwUTZJZ1JkRG52QT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBcTlnRmdlcG9FNTJpU1RtQ0t3Uk9RR01xMHZ0MGFNcnBXbjZlMy9valdKcGlNZUE4CllENTFYb29xTXBJLytJRVArZ2FIR28wL3hSajlHWm9yeUdZT3FLa28vYXdHQmttRy9UaEdsVlEySTErR21OUjgKNlR2TVZsRlcwQkVMcnhVdWVmeU9kZ2c2ajNvRFBFdC80c0I4Y05lNGNENnlSdHpHNWVndU1ZWktoUzNkbTM1agpVTG16K3hoSnN0cis1RFhBeTFwUWRKRU5WWmpjRWdEUFNWQlViUXdlTGsvY1NlWEVvUDVVR3Q2NlhrZ1Q1RzVCCllkc1lWd0Q0L2JkVnFIdEJzVkV3MjdMeitTNXVHWjJUbEpPSnZFTW0wamJkOCtuaEN3M1M5MlZ2VEY0NDEzRWQKUjdGWDZxRC93MkFqWGFFWGZENHhaaUQ1djJndXlITWRjc3NWTFFJREFRQUJBb0lCQUczcVU4T0FhcWU1V1RkYgpDRzU1WjQvNW5rZXJQUTlXVXFKbWdUcWtKWDJqNmhFYTY2Tm43K3pUbFNBWnViODYxanhIZHAwK0liN3hOOXJyCmFQdmFnNS9QNjM4dVRBQXpnWnR3Sm4yWGlyVmZnWms1dU5mNlByNHJjc3JOVEZybHduK1dVbzBld0U1TGJjeGcKUW1HSVcxQldPd3ZZbm5HQy85bklnOXQ3bVNqTFcwcllNQ0pOUmE1SWNndnFLVWlCVWFSU3U0RXVBQldhRk04ZwpYU3duRlZvOUdnUmVRdytVVm9UVllXdTNIbWd5RVY4K3BsdWc3N1dQVzJVaXViczFUOXRhY3lja280dXRRWHg3CmtvRGdZS1RCMjY3V2NkSmVUdVdPWUk3Z2lvQXlCQW9YeEZjMWJaRkhpNFcwcTE4UWJIQXd6a2VRdE5WcndjZjMKTVg5a3NNRUNnWUVBNDlOK2tkUENkY2grbnBLb2NWTE5oMGZCdjFFeS9TcG5yUGpGMUZDSnJzUjlMMlJUNUQwawpzVDh3aEpGcUZCa0dsQ2R3NE5pRHlnbGM3d0dyYzRuaTV5SzZvU3Vmc0o4bW9hU28xdTRsWkd5VmpBQmpSZXJiCnBHbUtBT3lyV1Iza2krZEVFOFgxRllmbVlxUkpWTkRZd3EvVlcwSU1xMnhVNmYvM0dDUkc2VEVDZ1lFQXdSZysKRjNpNEREUEZwS0F1VWRNNWtQQXJtYnN6L1lVejBkZlkvZENDeHRrY3lQUUMweEtqa09ZRDdmU1U1bCs3cEZYdgpDTDJHRUxMamVwejliMVViS05Yd3pUTThwV2o4M2JrVjVGbGQxanNOTzFtN05lMWoyWGROTXRsSXJWTmdlRzk5CmRURWk2Mnh0SEY4dVdWSS9nQisranN2b0EvUFd2elpSdlRFRXJMMENnWUJrRUxPcDkxbVZCQi9oSkVkSnB2WFEKOGtwOTduczN5UlZLV3VZQlQvSjVTYUkyVzVtaFNOM0I0Q0ErU2VST3VZTXpOWE9Wdm1OOExNcWR5NXp6blYrRQo1N01UTVNidG02bUxHOWh3dHA3RDBoR0pNVzVvK2pQSXJmWklXNnNTOUZjNnY3UWQvemViWWxwbGZ3VWFkTFNRCkprek96VjdsT0NxL3NJWm1HeUR1TVFLQmdRQ3ovVVg3bVFKdUZXQTQrVHJUK1FGaThneWlTeGJHVFlDbExQOU8KY0N0RzhhQmNUTi9KSWttblNsRUZZUVBlemdQWnhtUi9FRExFcEF0WkFyZFdMTTJaUGZzdE80SmZhVUt6NXMvYQpQOWN4VjNBWkQ2WnJPVEhteHNjR0MvWXI0bGs5U2lkMnN1dXE2VEczelowbGszNHZqdWVRc2M4K3grODM0NGxECndrcHFQUUtCZ1FEUWhhaElWN1JYOW1DOHBENzFkdTlpVmJmOWMxcExRb0tGelo0NFJXS0wwOTJqTXNqUzFsM1UKVUNramdGZmZMUzMzNGlvaDlkT3VxeElueVlIZjE4cGs2cHowVjRwb0dMSUNVcnVzOXk1OWZmamFOMEFoUktVQwpKVFl1VkYyenl5eGdURjVVbTUzTXh6ckJwR2dYRytqSld6OVBOU3BVcXZTQjBHYnZUMS9vRmc9PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=
+kind: Secret
+metadata:
+  name: hubble-relay-client-certs
+  namespace: kube-system
+type: kubernetes.io/tls
+---
+apiVersion: v1
+data:
+  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURFekNDQWZ1Z0F3SUJBZ0lRWGFjaVpQTGpQUS82ckEwOE43bVhSVEFOQmdrcWhraUc5dzBCQVFzRkFEQVUKTVJJd0VBWURWUVFERXdsRGFXeHBkVzBnUTBFd0hoY05Nak13T0RFeE1EVXpNREUwV2hjTk1qWXdPREV3TURVegpNREUwV2pBVU1SSXdFQVlEVlFRREV3bERhV3hwZFcwZ1EwRXdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUFBNElCCkR3QXdnZ0VLQW9JQkFRQ2VxdjR1QnoraGYrVHdBVVVPUC8rSENMNVJ4Zk1LQndiZERqQWJ2ZW5WTTZ4UHJjZDcKM0JCUjJwV2FZeHhGa21XYWZMZnBDZS9NTmR3dGl2WU1hOXJzOTBJc0xUMFloNXJEa1YyR1pBdWc4VHRrekozYgpxYkV4WGtZZlVwemRtQWlzNjhDWjNaemZOdHU3aWY2Q3dML2xLVkFISm56VjZNVFNSeTA3L3IwQnJzeDBRcDh4CjRScnZ6dUxRY2FoTnZwVlVRNjRUZm1WQVV6NnYxUk5YMTRKb21LNEtUTDJ0d0dYaE5jMkdDaXRYbFFaSXI4YTAKZFpROERTWDhWeFd3ZWlVN3FkenI2elJXbmk2RWx0QjR0T2ZzdSsvVmdQMWY1Z2hTWU5UVXoxaGt4RzhReWZ3MAoya2JjUThKUjlUV1o4NUxxdW9HNmlKR3BBWkYyd0RicUt2d05BZ01CQUFHallUQmZNQTRHQTFVZER3RUIvd1FFCkF3SUNwREFkQmdOVkhTVUVGakFVQmdnckJnRUZCUWNEQVFZSUt3WUJCUVVIQXdJd0R3WURWUjBUQVFIL0JBVXcKQXdFQi96QWRCZ05WSFE0RUZnUVVQV25uSDFwdXNpblJzWVdGTjBlU2ZjMzJwdFF3RFFZSktvWklodmNOQVFFTApCUUFEZ2dFQkFKaHViV1grNUJOWXBJV2dmSWdUeWQ3TDV3ejQ0VmNOSDNLV0c1dG40dWtTT3lkM2gwU2JZVE5uCk1BdFNLY0JmWVFwQXZJODBnS0tXc08xZlZMc1kvZDJ4dW9ZSDM4d0gyNTFqMkxWMnhEUHRXWitTNGdGN1FIZEMKMW9Zc0NMczFxNUJUcTAreGFJUk4yT1piZVpFUkN4RnFnM1RsUXJIY0hXRVArL0dTS2lLdE02K0dnbXJ0Zjh4QgpOZHZwL3FtaksyYmdrYlRSUGRMNlZRVGtaNFpwN3RKbEQwT3N5dzhlKzFLT01ISUxzUm5RbXpqbVJ1YitYSEY4Ck5DSGdwOWYydDkwVW9kN0c3Q2Z2c25MZ0ZkUHdlM2YvTjNMay81MnlKcTZXeERPNFBTZFdJdW4rSVJDS2F3TmoKUy9EcDB2YmdCblczZWNIdkQxb2srSzl3b3N6b0Z4UT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURWakNDQWo2Z0F3SUJBZ0lRYlR2ZS81TXZOSXJYQ0U0UDU2VVBNREFOQmdrcWhraUc5dzBCQVFzRkFEQVUKTVJJd0VBWURWUVFERXdsRGFXeHBkVzBnUTBFd0hoY05Nak13T0RFeE1EVXpNREUwV2hjTk1qWXdPREV3TURVegpNREUwV2pBcU1TZ3dKZ1lEVlFRRERCOHFMbVJsWm1GMWJIUXVhSFZpWW14bExXZHljR011WTJsc2FYVnRMbWx2Ck1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBN3dES1lCWTl1c2dlanFNdkY5cmEKSmcxSnhBYSt4RVFKbGtBQzBWdGd6YUt1aUF3ZVc1QjZ2bFRlSkNBaHFWUjlGckpDSzV2Q2FSQ0FWMzdRZ21VbQpZcW5hR201cUdiV2NCR1FzcUhHVU53UnM4R2JEMUIzTjJ5YlI0V2dLV05PRUUwVDZJTXkxcEUyeVdjaGxTelplCllSQU9GNVJoSEJsc1NpbFRDTnFPWGVkZ1Azbmo0Yko1aXRqemN5QTZOOGcybW9CSmV6U05lR3RLSlQ5MWxBSzkKMWpjL2lWYVAyQkNoWTZIQkYyN0tqdjhPQmpKc3VtZndzbjdab2gzU0FFcXlHcWFoV3o5WkRoMjBZbENTNFBPbgpaU1ZIZ0pYYTlZbjBHSnBjSE1nVjJwbXJoTGhOelh6U0ZUeVB0eFUveDJqN1NVVTUxeU9vQWw1Nk9HVHpWV3p5CjhRSURBUUFCbzRHTk1JR0tNQTRHQTFVZER3RUIvd1FFQXdJRm9EQWRCZ05WSFNVRUZqQVVCZ2dyQmdFRkJRY0QKQVFZSUt3WUJCUVVIQXdJd0RBWURWUjBUQVFIL0JBSXdBREFmQmdOVkhTTUVHREFXZ0JROWFlY2ZXbTZ5S2RHeApoWVUzUjVKOXpmYW0xREFxQmdOVkhSRUVJekFoZ2g4cUxtUmxabUYxYkhRdWFIVmlZbXhsTFdkeWNHTXVZMmxzCmFYVnRMbWx2TUEwR0NTcUdTSWIzRFFFQkN3VUFBNElCQVFBSHhVNmFaNEEzSGVyc2ptMXFkQ1VaYUpmYWk0MmEKTXlDbjFVWGZEeFRSd2JXV1FHUGFmVy9wc204d2R5TnNjTms4eW5jaDMvcWwwY0lZUUk2N04rWFJsKzRlWTJ6Vwo4aGRNT3JxN1V5eWNIaCtKVVBpUGphVUY5QWRQWjVtMzluVXZST3FsczgwYUovN3FFVnllUGRVZEV5SmkwMk1sCjkxdXVFVERoN1NvN0h4cGtQY0ZLL3hUWFdLaVV6Z0tKSFJGcmhLc0NBOGYwM1NhNUpqWTBHN3dEcEpsbnBCQzAKTFVEL0IzNlNPYUdqWktxQVQvUThndDVHbTZyUTdRRmU4L3ZIb0JoQzRtcHkyYVZMdEtxdUUyb0gxZnFwcVRlRgpneXhycHhLTkM5dDRpcFRYN0Z4azZEQUZ1MjN6bVpENlBHOEEzMDNuS2c4WTFlUWFuQmN6SGEvMQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcFFJQkFBS0NBUUVBN3dES1lCWTl1c2dlanFNdkY5cmFKZzFKeEFhK3hFUUpsa0FDMFZ0Z3phS3VpQXdlClc1QjZ2bFRlSkNBaHFWUjlGckpDSzV2Q2FSQ0FWMzdRZ21VbVlxbmFHbTVxR2JXY0JHUXNxSEdVTndSczhHYkQKMUIzTjJ5YlI0V2dLV05PRUUwVDZJTXkxcEUyeVdjaGxTelplWVJBT0Y1UmhIQmxzU2lsVENOcU9YZWRnUDNuago0Yko1aXRqemN5QTZOOGcybW9CSmV6U05lR3RLSlQ5MWxBSzkxamMvaVZhUDJCQ2hZNkhCRjI3S2p2OE9CakpzCnVtZndzbjdab2gzU0FFcXlHcWFoV3o5WkRoMjBZbENTNFBPblpTVkhnSlhhOVluMEdKcGNITWdWMnBtcmhMaE4Kelh6U0ZUeVB0eFUveDJqN1NVVTUxeU9vQWw1Nk9HVHpWV3p5OFFJREFRQUJBb0lCQVFDVUVhOVBYRGdlTWNFTQpxWGlSbE5xMTNHR28rbXpSZHoxaFFvTDhaVnBSeThuSks0amJQV1Z0NlhJK2UxR2ZjR0tXM3hVem95b01vVmFCCjNtVWJnOE1HT1NpUVczdU1OZ0ZVanlORHNDb2M4N2J5TVJoOW40RmJsbTlNOElJSWlmSTNaZko0dzVwOUVrMisKWmZLcmFDR01qTC9PUi9UcHphNVRPOHJmbjFlNFFGKzJXSk5FVnFGc05HNTJqSC9yd2VIM2o5eXZ0Z0dYTXBZUApDS2pwMXV0dzdQbUVXM2tzUGRkUmZpRmFOakFGcUFEYUkrcVl1Q1cyQ1pDNXZid0lvTk92UU5WeVg1TXRkblJLCnZEd1lNR3c3N2N6b1RCd2NCbUI4elFnck5CeVNuVFpWd1dvSGhqS2hrOW1iajR1UmxXT0diWE92ZXJvZFRPOFEKaG5VNG9JZGhBb0dCQVBBank0YTRTRWRHak1vVVhIM0NEZWVjZkR6aUhCOHlCRXUvTExHS1RKS0tqc3V5eHorWgpsUUd0S3FDVGgxNm9laUR5VEJNaGFBTzRRK3c4cGN0WVJPdi9vS0x0TEF4Mlh0YURpZVFsUGFzczFxSDJPKytTCnhoMkpWZ095VUJncUFHMXUyQmM5Z2Fnd3Z0aUUvUTJ3MXlpTEdUWjYyejNkZGdIVXc0bUVwbWpWQW9HQkFQN0oKeHFRWjRUTlNIb1ZoZUQrYXdLcDFLSUQzd1lhS3hoZVNORndXdWZUcjE4MFNmV3dxTmo3SVA4ejRiTis1N2VwZwoxSE9TR09RbUxtMEE1a1FVRXZaUVhJSVY3R3k2eXF2Z05kbFhLcGJZSGNPZ3R5R3llSm96SUkwczhSTmY5U2NECjZHay81R2EyaVZKNEQ3T3RIZkRoNXpMT2pkWWdFbDhvMkQ2QlZTK3RBb0dCQUxtd3BDL1BqaXgzVkdUcXE3NmUKOE11WlNNUjNmNUZyeHNDZjJycUttNzF4SVF4SWVTUW42WDM3WG92K3FGMjgzM3RjZ1JFRjh2MTFYaWh0bVRLTgpWZlk3bkFhQWFXQlZvKzR5bHN6eE15ZUxLNGpmOCtiRVV5Z0J5NTVlSXVzY2gyb1huVWNUUzVBMzZVdGFRcWQwCmlGdVVlL0dSdkxpdzZCQndhcWVMQ0hibEFvR0JBTXhKZHBidkZTejBBL3JIK3dWc2pGeGdFYmpPYmdIMVZQMWoKUWM0d2ZxdE5TanRvUHQ0eVBrbzZmMFZXVHQxWGs5WmdDeGdiSlJBUk9SbzNKV21pZXMyNkEySmVON0c2VjNSVwpFbmNRTjlxNHI2ekNPUE93eUpoQ3RDL2R2L0hiOTVGdnhiSldBMGtEeExrMkFNajgza3ZjcFdhTVRSZEpvZEZnCnkzbmFjellGQW9HQUtIZVZMeE9ML25BZVl4Z0xlTnpWUU5TbFJhZGZFSzhVcXFtTWpHMFFQclNBRC9NeWgvSnkKV0NDRXQxSHpmV2xhdEFqYXY0Zjl5RElXU1NJMGlWKzdMOHV1a2Zad01QZ21ZaUhNTUtGZFpIMlc0bmNBZ2luWgpvTmRlMDBqNzR0bmppTHppSkk5Q0Vsa3E3bS9iZm5wQjFPc0dBMmVLNDVoNmw5bFltVk5pZldJPQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=
+kind: Secret
+metadata:
+  name: hubble-server-certs
+  namespace: kube-system
+type: kubernetes.io/tls
 ---
 apiVersion: v1
 kind: Service
@@ -657,8 +661,8 @@ spec:
       name: cilium-operator
   strategy:
     rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 100%
+      maxSurge: 1
+      maxUnavailable: 1
     type: RollingUpdate
   template:
     metadata:
@@ -700,7 +704,7 @@ spec:
               key: debug
               name: cilium-config
               optional: true
-        image: quay.io/cilium/operator-generic:v1.14.0@sha256:3014d4bcb8352f0ddef90fa3b5eb1bbf179b91024813a90a0066eb4517ba93c9
+        image: quay.io/cilium/operator-generic:v1.13.5@sha256:d77f3e1472725b3c28b5d88d6a49c7fcba3072c0c08a26e2e16c1e9139c96207
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -712,16 +716,6 @@ spec:
           periodSeconds: 10
           timeoutSeconds: 3
         name: cilium-operator
-        readinessProbe:
-          failureThreshold: 5
-          httpGet:
-            host: 127.0.0.1
-            path: /healthz
-            port: 9234
-            scheme: HTTP
-          initialDelaySeconds: 0
-          periodSeconds: 5
-          timeoutSeconds: 3
         terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:
         - mountPath: /tmp/cilium/config-map
@@ -780,7 +774,7 @@ spec:
         - serve
         command:
         - hubble-relay
-        image: quay.io/cilium/hubble-relay:v1.14.0@sha256:bfe6ef86a1c0f1c3e8b105735aa31db64bcea97dd4732db6d0448c55a3c8e70c
+        image: quay.io/cilium/hubble-relay:v1.13.5@sha256:a1bca42ac2f9f934d7dc9311ecff5ff7012023830a63ba2980091abbfc148cbb
         imagePullPolicy: IfNotPresent
         livenessProbe:
           tcpSocket:
@@ -792,13 +786,6 @@ spec:
         readinessProbe:
           tcpSocket:
             port: grpc
-        securityContext:
-          capabilities:
-            drop:
-            - ALL
-          runAsGroup: 65532
-          runAsNonRoot: true
-          runAsUser: 65532
         terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:
         - mountPath: /etc/hubble-relay
@@ -811,8 +798,6 @@ spec:
         kubernetes.io/os: linux
       priorityClassName: null
       restartPolicy: Always
-      securityContext:
-        fsGroup: 65532
       serviceAccount: hubble-relay
       serviceAccountName: hubble-relay
       terminationGracePeriodSeconds: 1
@@ -829,12 +814,12 @@ spec:
           sources:
           - secret:
               items:
+              - key: ca.crt
+                path: hubble-server-ca.crt
               - key: tls.crt
                 path: client.crt
               - key: tls.key
                 path: client.key
-              - key: ca.crt
-                path: hubble-server-ca.crt
               name: hubble-relay-client-certs
 ---
 apiVersion: apps/v1
@@ -865,7 +850,7 @@ spec:
     spec:
       automountServiceAccountToken: true
       containers:
-      - image: quay.io/cilium/hubble-ui:v0.12.0@sha256:1c876cfa1d5e35bc91e1025c9314f922041592a88b03313c22c1f97a5d2ba88f
+      - image: quay.io/cilium/hubble-ui:v0.11.0@sha256:bcb369c47cada2d4257d63d3749f7f87c91dde32e010b223597306de95d1ecc8
         imagePullPolicy: IfNotPresent
         name: frontend
         ports:
@@ -883,7 +868,7 @@ spec:
           value: "8090"
         - name: FLOWS_API_ADDR
           value: hubble-relay:80
-        image: quay.io/cilium/hubble-ui-backend:v0.12.0@sha256:8a79a1aad4fc9c2aa2b3e4379af0af872a89fcec9d99e117188190671c66fc2e
+        image: quay.io/cilium/hubble-ui-backend:v0.11.0@sha256:14c04d11f78da5c363f88592abae8d2ecee3cbe009f443ef11df6ac5f692d839
         imagePullPolicy: IfNotPresent
         name: backend
         ports:
@@ -894,6 +879,10 @@ spec:
       nodeSelector:
         kubernetes.io/os: linux
       priorityClassName: null
+      securityContext:
+        fsGroup: 1001
+        runAsGroup: 1001
+        runAsUser: 1001
       serviceAccount: hubble-ui
       serviceAccountName: hubble-ui
       volumes:
@@ -955,9 +944,28 @@ spec:
               fieldPath: metadata.namespace
         - name: CILIUM_CLUSTERMESH_CONFIG
           value: /var/lib/cilium/clustermesh/
-        image: quay.io/cilium/cilium:v1.14.0@sha256:5a94b561f4651fcfd85970a50bc78b201cfbd6e2ab1a03848eab25a82832653a
+        - name: CILIUM_CNI_CHAINING_MODE
+          valueFrom:
+            configMapKeyRef:
+              key: cni-chaining-mode
+              name: cilium-config
+              optional: true
+        - name: CILIUM_CUSTOM_CNI_CONF
+          valueFrom:
+            configMapKeyRef:
+              key: custom-cni-conf
+              name: cilium-config
+              optional: true
+        image: quay.io/cilium/cilium:v1.13.5@sha256:e02744b4413824093d25a6fb35e2e418f7301e55825fa53a8e1943fe7e9e5aef
         imagePullPolicy: IfNotPresent
         lifecycle:
+          postStart:
+            exec:
+              command:
+              - bash
+              - -c
+              - |
+                /cni-install.sh --enable-debug=false --cni-exclusive=true --log-file=/var/run/cilium/cilium-cni.log
           preStop:
             exec:
               command:
@@ -1063,7 +1071,7 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: metadata.namespace
-        image: quay.io/cilium/cilium:v1.14.0@sha256:5a94b561f4651fcfd85970a50bc78b201cfbd6e2ab1a03848eab25a82832653a
+        image: quay.io/cilium/cilium:v1.13.5@sha256:e02744b4413824093d25a6fb35e2e418f7301e55825fa53a8e1943fe7e9e5aef
         imagePullPolicy: IfNotPresent
         name: config
         terminationMessagePolicy: FallbackToLogsOnError
@@ -1082,7 +1090,7 @@ spec:
           value: /run/cilium/cgroupv2
         - name: BIN_PATH
           value: /opt/cni/bin
-        image: quay.io/cilium/cilium:v1.14.0@sha256:5a94b561f4651fcfd85970a50bc78b201cfbd6e2ab1a03848eab25a82832653a
+        image: quay.io/cilium/cilium:v1.13.5@sha256:e02744b4413824093d25a6fb35e2e418f7301e55825fa53a8e1943fe7e9e5aef
         imagePullPolicy: IfNotPresent
         name: mount-cgroup
         securityContext:
@@ -1112,7 +1120,7 @@ spec:
         env:
         - name: BIN_PATH
           value: /opt/cni/bin
-        image: quay.io/cilium/cilium:v1.14.0@sha256:5a94b561f4651fcfd85970a50bc78b201cfbd6e2ab1a03848eab25a82832653a
+        image: quay.io/cilium/cilium:v1.13.5@sha256:e02744b4413824093d25a6fb35e2e418f7301e55825fa53a8e1943fe7e9e5aef
         imagePullPolicy: IfNotPresent
         name: apply-sysctl-overwrites
         securityContext:
@@ -1138,7 +1146,7 @@ spec:
         - /bin/bash
         - -c
         - --
-        image: quay.io/cilium/cilium:v1.14.0@sha256:5a94b561f4651fcfd85970a50bc78b201cfbd6e2ab1a03848eab25a82832653a
+        image: quay.io/cilium/cilium:v1.13.5@sha256:e02744b4413824093d25a6fb35e2e418f7301e55825fa53a8e1943fe7e9e5aef
         imagePullPolicy: IfNotPresent
         name: mount-bpf-fs
         securityContext:
@@ -1163,7 +1171,7 @@ spec:
               key: clean-cilium-bpf-state
               name: cilium-config
               optional: true
-        image: quay.io/cilium/cilium:v1.14.0@sha256:5a94b561f4651fcfd85970a50bc78b201cfbd6e2ab1a03848eab25a82832653a
+        image: quay.io/cilium/cilium:v1.13.5@sha256:e02744b4413824093d25a6fb35e2e418f7301e55825fa53a8e1943fe7e9e5aef
         imagePullPolicy: IfNotPresent
         name: clean-cilium-state
         resources:
@@ -1193,7 +1201,7 @@ spec:
           name: cilium-run
       - command:
         - /install-plugin.sh
-        image: quay.io/cilium/cilium:v1.14.0@sha256:5a94b561f4651fcfd85970a50bc78b201cfbd6e2ab1a03848eab25a82832653a
+        image: quay.io/cilium/cilium:v1.13.5@sha256:e02744b4413824093d25a6fb35e2e418f7301e55825fa53a8e1943fe7e9e5aef
         imagePullPolicy: IfNotPresent
         name: install-cni-binaries
         resources:
@@ -1255,22 +1263,10 @@ spec:
           type: FileOrCreate
         name: xtables-lock
       - name: clustermesh-secrets
-        projected:
+        secret:
           defaultMode: 256
-          sources:
-          - secret:
-              name: cilium-clustermesh
-              optional: true
-          - secret:
-              items:
-              - key: tls.key
-                path: common-etcd-client.key
-              - key: tls.crt
-                path: common-etcd-client.crt
-              - key: ca.crt
-                path: common-etcd-client-ca.crt
-              name: clustermesh-apiserver-remote-cert
-              optional: true
+          optional: true
+          secretName: cilium-clustermesh
       - hostPath:
           path: /proc/sys/net
           type: Directory
@@ -1285,70 +1281,15 @@ spec:
           sources:
           - secret:
               items:
+              - key: ca.crt
+                path: client-ca.crt
               - key: tls.crt
                 path: server.crt
               - key: tls.key
                 path: server.key
-              - key: ca.crt
-                path: client-ca.crt
               name: hubble-server-certs
               optional: true
   updateStrategy:
     rollingUpdate:
       maxUnavailable: 2
     type: RollingUpdate
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: hubble-relay-client-certs
-  namespace: kube-system
-spec:
-  commonName: '*.hubble-relay.cilium.io'
-  dnsNames:
-  - '*.hubble-relay.cilium.io'
-  duration: 26280h0m0s
-  issuerRef:
-    group: cert-manager.io
-    kind: ClusterIssuer
-    name: cilium-ca
-  secretName: hubble-relay-client-certs
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: hubble-server-certs
-  namespace: kube-system
-spec:
-  commonName: '*.default.hubble-grpc.cilium.io'
-  dnsNames:
-  - '*.default.hubble-grpc.cilium.io'
-  duration: 26280h0m0s
-  issuerRef:
-    group: cert-manager.io
-    kind: ClusterIssuer
-    name: cilium-ca
-  secretName: hubble-server-certs
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  annotations:
-    external-dns.alpha.kubernetes.io/hostname: hubble.defn.run
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.tls: "true"
-  name: hubble-ui
-  namespace: kube-system
-spec:
-  ingressClassName: traefik
-  rules:
-  - host: hubble.defn.run
-    http:
-      paths:
-      - backend:
-          service:
-            name: hubble-ui
-            port:
-              number: 80
-        path: /
-        pathType: Prefix
