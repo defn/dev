@@ -70,7 +70,6 @@ pkg/terraformdocs/.direnv
 pkg/tfo/.direnv
 pkg/tilt/.direnv
 pkg/utils/.direnv
-pkg/vault/.direnv
 pkg/vcluster/.direnv
 pkg/vhs/.direnv
 pkg/vpn/.direnv
@@ -144,7 +143,6 @@ pkg/terraformdocs/result
 pkg/tfo/result
 pkg/tilt/result
 pkg/utils/result
-pkg/vault/result
 pkg/vcluster/result
 pkg/vhs/result
 pkg/vpn/result

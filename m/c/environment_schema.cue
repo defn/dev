@@ -45,14 +45,8 @@ import (
 			apiVersion: "external-secrets.io/v1beta1"
 			kind:       "ClusterSecretStore"
 			metadata: name: "dev"
-			spec: provider: vault: {
-				server:  "http://169.254.32.1:8200"
-				path:    "kv"
-				version: "v2"
-				auth: kubernetes: {
-					mountPath: "\(_in.type)-\(_in.name)"
-					role:      "external-secrets"
-				}
+			spec: provider: {
+				// TODO replace with AWS secrets manager
 			}
 		}
 	}
