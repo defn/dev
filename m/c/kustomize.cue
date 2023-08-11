@@ -1036,8 +1036,16 @@ kustomize: "cilium-bootstrap": #KustomizeHelm & {
 		values: {
 			operator: replicas: 1
 			hubble: {
-				relay: enabled: false
+				relay: enabled: true
 				ui: enabled:    false
+				tls: auto: {
+					method: "certmanager"
+					certManagerIssuerRef: {
+						name:  "cilium-ca"
+						kind:  "ClusterIssuer"
+						group: "cert-manager.io"
+					}
+				}
 			}
 		}
 	}

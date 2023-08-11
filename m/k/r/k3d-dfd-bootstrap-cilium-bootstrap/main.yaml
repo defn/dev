@@ -10,6 +10,12 @@ metadata:
   name: cilium-operator
   namespace: kube-system
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: hubble-relay
+  namespace: kube-system
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -481,23 +487,15 @@ metadata:
 ---
 apiVersion: v1
 data:
-  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURGRENDQWZ5Z0F3SUJBZ0lSQU15Q3FGRjBXQmRrajkwOHlqdjNlSGd3RFFZSktvWklodmNOQVFFTEJRQXcKRkRFU01CQUdBMVVFQXhNSlEybHNhWFZ0SUVOQk1CNFhEVEl6TURneE1UQTJNalV4TWxvWERUSTJNRGd4TURBMgpNalV4TWxvd0ZERVNNQkFHQTFVRUF4TUpRMmxzYVhWdElFTkJNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DCkFROEFNSUlCQ2dLQ0FRRUF2QmxjTHZGSGRDVlFGUUxHZVVxcDB2bmI2UGFOQVRibFBuUHgrcWxJVVcvaWJac1UKenNhNElNSnh0eHBLUUMwVmNRMXg4RmtwK0R5ZjZmbTBOQmcvS2xUcjNDc0V1QkQvbS80Qi9vdzZQajkzejRTawpnYXhGMGhzQzVvd3JNcS8yclJQKzhEeitOZ0xITDVWVEh5WmtIU2VXVVV0Q2tTc3dEUkMrcXRKcExOUnE4Mlk5ClhaSUdsYnVoaVZ2T2JpMHNVcnNxcXJqbzhQeDJRNVhWb2Rjd2tqSU1nNG5xZjNEeXFZK3NwbnIrU2RVcnFaQy8KTmFsNDJUMjhBb1FlbE84d0g3UXBDaVdQZU5yZTRMZ2ZBVkY0MytxUWZraU5QdnFibzNWQW4vYVBMWkVwTjVWawpPUThoZ3ZyYW5iSWFaRE03Z1ZsN3BkMkl3L1F1RVZVRlA0eVE5UUlEQVFBQm8yRXdYekFPQmdOVkhROEJBZjhFCkJBTUNBcVF3SFFZRFZSMGxCQll3RkFZSUt3WUJCUVVIQXdFR0NDc0dBUVVGQndNQ01BOEdBMVVkRXdFQi93UUYKTUFNQkFmOHdIUVlEVlIwT0JCWUVGSnl2Vm5tNVZpekgzUXhRdGJ2VHM2emZmdm5LTUEwR0NTcUdTSWIzRFFFQgpDd1VBQTRJQkFRQU14RnB4Vjl6MDBTSjM2SEpEWmJJUEFNa3hBYzV1OG9SRnp5N1pxaWdCOHVaZVdzQ2hrSFBKCittL2UxVmhRekIrZG1uL2IzMjFCUTRJRmxxNHQrRnZaNEs3Skx4V3A3dDh4SXZPWThsaUlaUEZuMTVHcDBMV0IKamkrMU10MEs3YzhVelpFd1VDME1UNmpaQ21YdUF0SnVVTVYwZldZQ1JXaTdES0N6ZVFZK3pVUHZDQ1RPUWVXRgpDU1c4anFzMGl2cXdubjZ4NFhvelFEUndJVGVreSt2ZVRYMW9QQXY1WVlZcTZRTmtrZVp1SDVicXUvWU9wZGFzClRwQ01laEtZbXQ0aVovK3lkV214ZWY0UjdubCs0RjQ2VGxIQ2tpVm5YMzlmQlJGTnl3QVZHUWNiMEUvb2lseFMKbHAya1hFQ2FDWUxxQ0RXWHlQbU50OXNxajNZZ0hqRlIKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
-  ca.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBdkJsY0x2RkhkQ1ZRRlFMR2VVcXAwdm5iNlBhTkFUYmxQblB4K3FsSVVXL2liWnNVCnpzYTRJTUp4dHhwS1FDMFZjUTF4OEZrcCtEeWY2Zm0wTkJnL0tsVHIzQ3NFdUJEL20vNEIvb3c2UGo5M3o0U2sKZ2F4RjBoc0M1b3dyTXEvMnJSUCs4RHorTmdMSEw1VlRIeVprSFNlV1VVdENrU3N3RFJDK3F0SnBMTlJxODJZOQpYWklHbGJ1aGlWdk9iaTBzVXJzcXFyam84UHgyUTVYVm9kY3draklNZzRucWYzRHlxWStzcG5yK1NkVXJxWkMvCk5hbDQyVDI4QW9RZWxPOHdIN1FwQ2lXUGVOcmU0TGdmQVZGNDMrcVFma2lOUHZxYm8zVkFuL2FQTFpFcE41VmsKT1E4aGd2cmFuYklhWkRNN2dWbDdwZDJJdy9RdUVWVUZQNHlROVFJREFRQUJBb0lCQUcwNzRQL1YyS1FIZ3pFZwpjbmcvdHMyeGtsY0F6elFVV0I3am9IUHIyUGFLSGhsK3hSK3I0WVFNeDVNSTduUEVlcjR6aTZhRGNVOGFqZGVICnpuR3VYd2hMVnNsK0pmaHF6cllkVmJVb1pDNkFGeWpwSTh1MmFybXdQQWY5QUowbitQM2NMZUgvMmJVdCtkU1YKU0RjL3lVWHhGbWRSYUcvN2Y2VW13ME5hZS8rdXdPWGJ1T1M4YnNobTN3S0dYOCs3c1UxTUVEbW9La05zRnJLcwpGNjlTQ0pIVE1mRTc3YWw2VUF1Nm5EVEhQeTN0VmFLaEtFaitUd2t4ZnFSZ3RQWWtnd3hlaXVlQ2l0aFBUMEt6CnVsQTNxTG1vbzJCdEYwZmVDeGVlTGFvWFE4TitYWHlHUjB6VTVHS1UwVFJNTFR3enVTMkE5UXRaYmRGQ3l0aUoKVVFqTm5JVUNnWUVBNWJxQzZ1V3hBczhJK0xVNjg4OFF0RmlWRXFxanZDQ3JNclhtUnRBOTA1ZWYwa1YxTmFGaQp0VzdhWDRsTkhiQkR5UVZZTXZReFpRRzk0LzZ2aHVrQXpOVkoycVdueThnT2lqUUxkaC9IdmJDV1FDM0RRWHdmClhhMlZET3dZd3dXYXpERDhBRU9ZVG9zYWs2R0ZrMndDMi9WVWJ3UEdsWFZWZERCOVRaendOM01DZ1lFQTBad2MKbERQSkVtOGhGWUVmT3d6cWtMWE9Yd3ZpaWcwV2pHQUQwdVRUTkVqNERhVENua1ZNbmNRdGpLdEtvRkk4MjR4NgpaS1pTRitUNXUrWkQvRzhmRW41MXpMOWgwRmdPUmNUTG53YjJ3TWR6ZllkcFk5eTBLeTBIeXFsT2NnbVZ4M2NOCmZVR1BBUWpBVWxUcllweGFqVXFxUmQyejJXbWRuWkpHOTlaK2EvY0NnWUJlRTNFRmJLWitkZlpBazBiZkRRN1UKSytwd1NIemd6NmdNRGoyTkJqNHJaazVHdDdiMkRXNzB5YjZYblF4OWVlOW9aTTNubitTU2JwSXF5ZU5ycGdOegozbXh1STZTQmFSMjdMdkQ2b0swVld6bE1jdkVnNGdtZVBUVnFvMHpJb0lUeDFhVjlIakZEQ09nTFNQd0FrUnppCm9xYS9CNWJOSWMycTFTaWJIZ2VwVFFLQmdISVlNTEkyOGZiM3lLRms5SFAzRnVNSUl6bzNST3R5TGxqZ2xwUS8KKy9yVTBUalQreCtkaHhQRlNpbnN2eVUvUG1NZk55djhJR2xqT05DZmlWZ3B3RmNYd05WZlEwWGQrSDdmblJxRgo5dUIrY0kzZW5HNUFIMDMxSisyWGROeTcvT3hqRUZPaTBNMTJUd0ZCdWhLbUd1QVh5VkZZV1dJNWpCTE9JWlVjCkN4cUhBb0dCQUo5SksrYWpaT0Q5N25qZVFJdFhaVVJjdzZuUVVSRnFKeDBIMGRuS3hldkxUdGtiYVFtOVcvY2cKN0MwOU1JYlBYdUNPNm1CMFd4U3AybFNuUHYzMG0ybHZhQlREU3puUU10aUVnbjJnb3JVa3AzUXpJd3pNUmsxKwpFZkZRSDIvUUowdVBXMVk1T0FvMGtoS1J4REZSRXh5ZHBBSzFhR09FNGxRTkh0dE85dWRhCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
-kind: Secret
+  config.yaml: "cluster-name: default\npeer-service: \"hubble-peer.kube-system.svc.cluster.local:443\"\nlisten-address:
+    :4245\ngops: true\ngops-port: \"9893\"\ndial-timeout: \nretry-timeout: \nsort-buffer-len-max:
+    \nsort-buffer-drain-timeout: \ntls-hubble-client-cert-file: /var/lib/hubble-relay/tls/client.crt\ntls-hubble-client-key-file:
+    /var/lib/hubble-relay/tls/client.key\ntls-hubble-server-ca-files: /var/lib/hubble-relay/tls/hubble-server-ca.crt\ndisable-server-tls:
+    true\n"
+kind: ConfigMap
 metadata:
-  name: cilium-ca
+  name: hubble-relay-config
   namespace: kube-system
----
-apiVersion: v1
-data:
-  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURGRENDQWZ5Z0F3SUJBZ0lSQU15Q3FGRjBXQmRrajkwOHlqdjNlSGd3RFFZSktvWklodmNOQVFFTEJRQXcKRkRFU01CQUdBMVVFQXhNSlEybHNhWFZ0SUVOQk1CNFhEVEl6TURneE1UQTJNalV4TWxvWERUSTJNRGd4TURBMgpNalV4TWxvd0ZERVNNQkFHQTFVRUF4TUpRMmxzYVhWdElFTkJNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DCkFROEFNSUlCQ2dLQ0FRRUF2QmxjTHZGSGRDVlFGUUxHZVVxcDB2bmI2UGFOQVRibFBuUHgrcWxJVVcvaWJac1UKenNhNElNSnh0eHBLUUMwVmNRMXg4RmtwK0R5ZjZmbTBOQmcvS2xUcjNDc0V1QkQvbS80Qi9vdzZQajkzejRTawpnYXhGMGhzQzVvd3JNcS8yclJQKzhEeitOZ0xITDVWVEh5WmtIU2VXVVV0Q2tTc3dEUkMrcXRKcExOUnE4Mlk5ClhaSUdsYnVoaVZ2T2JpMHNVcnNxcXJqbzhQeDJRNVhWb2Rjd2tqSU1nNG5xZjNEeXFZK3NwbnIrU2RVcnFaQy8KTmFsNDJUMjhBb1FlbE84d0g3UXBDaVdQZU5yZTRMZ2ZBVkY0MytxUWZraU5QdnFibzNWQW4vYVBMWkVwTjVWawpPUThoZ3ZyYW5iSWFaRE03Z1ZsN3BkMkl3L1F1RVZVRlA0eVE5UUlEQVFBQm8yRXdYekFPQmdOVkhROEJBZjhFCkJBTUNBcVF3SFFZRFZSMGxCQll3RkFZSUt3WUJCUVVIQXdFR0NDc0dBUVVGQndNQ01BOEdBMVVkRXdFQi93UUYKTUFNQkFmOHdIUVlEVlIwT0JCWUVGSnl2Vm5tNVZpekgzUXhRdGJ2VHM2emZmdm5LTUEwR0NTcUdTSWIzRFFFQgpDd1VBQTRJQkFRQU14RnB4Vjl6MDBTSjM2SEpEWmJJUEFNa3hBYzV1OG9SRnp5N1pxaWdCOHVaZVdzQ2hrSFBKCittL2UxVmhRekIrZG1uL2IzMjFCUTRJRmxxNHQrRnZaNEs3Skx4V3A3dDh4SXZPWThsaUlaUEZuMTVHcDBMV0IKamkrMU10MEs3YzhVelpFd1VDME1UNmpaQ21YdUF0SnVVTVYwZldZQ1JXaTdES0N6ZVFZK3pVUHZDQ1RPUWVXRgpDU1c4anFzMGl2cXdubjZ4NFhvelFEUndJVGVreSt2ZVRYMW9QQXY1WVlZcTZRTmtrZVp1SDVicXUvWU9wZGFzClRwQ01laEtZbXQ0aVovK3lkV214ZWY0UjdubCs0RjQ2VGxIQ2tpVm5YMzlmQlJGTnl3QVZHUWNiMEUvb2lseFMKbHAya1hFQ2FDWUxxQ0RXWHlQbU50OXNxajNZZ0hqRlIKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
-  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURWekNDQWorZ0F3SUJBZ0lSQU10bGxtRDN1b0craTZjMGVlb3BBanN3RFFZSktvWklodmNOQVFFTEJRQXcKRkRFU01CQUdBMVVFQXhNSlEybHNhWFZ0SUVOQk1CNFhEVEl6TURneE1UQTJNalV4TWxvWERUSTJNRGd4TURBMgpNalV4TWxvd0tqRW9NQ1lHQTFVRUF3d2ZLaTVrWldaaGRXeDBMbWgxWW1Kc1pTMW5jbkJqTG1OcGJHbDFiUzVwCmJ6Q0NBU0l3RFFZSktvWklodmNOQVFFQkJRQURnZ0VQQURDQ0FRb0NnZ0VCQU5PYlpTdVUybkVvRnpYVXk5QysKWnJNUFM0N1RJR0JkZEVwR24vZjJOT3dZUlAvcnE2YkU5ZE9zZWNHeXRLeTdzQ29Ua2drV1ptQ3pIMGd3QWM3YgpmaUpiWktSUnpGTk1HWmFpaVNlaXJRaUgyMWNmeVZtL2dhMjVjK0l0SjlVb2tQQlRvL3EweTdvbnBqekF3WFdWCkVURHJnRnJ4Z1liWmw3N3lWWWRBVTNMZkF0MHZlYUpFR1pkYzhrWHVHMUtLMDZHM0pCd2pWcjd4L0FKVTdwUFQKMlNoZUNBSHl5OHJYQVFsd0hFdnZqUW95dVVhdUUyUm5acThZY2k0WWx2U1IwZWV1YndoL3dvNnJaSUpHRG9yZQp2dnBSNjMram9DYW1EZmhuOG14OGh0UkU5UGpCVXZzWU1ndm0zcEs4Y0NCTXQ1KzdXOWx0bzNlejJ2UHpzUVMrCmdjc0NBd0VBQWFPQmpUQ0JpakFPQmdOVkhROEJBZjhFQkFNQ0JhQXdIUVlEVlIwbEJCWXdGQVlJS3dZQkJRVUgKQXdFR0NDc0dBUVVGQndNQ01Bd0dBMVVkRXdFQi93UUNNQUF3SHdZRFZSMGpCQmd3Rm9BVW5LOVdlYmxXTE1mZApERkMxdTlPenJOOSsrY293S2dZRFZSMFJCQ013SVlJZktpNWtaV1poZFd4MExtaDFZbUpzWlMxbmNuQmpMbU5wCmJHbDFiUzVwYnpBTkJna3Foa2lHOXcwQkFRc0ZBQU9DQVFFQWNtTnRzeHRhQmlVTVpLTFhmT2NhZ1liK1ZwTmgKc2YyZy9jUkpEazlGUWdSYnF6SWFmK1FFTTdDOXRpcVIveDg0MnJVdDhFamtQUUtHNTh2TGpKMEpObkdZRnAyRQpoQ3ZDZWt4UFFvZkJwU2pCVXEvS0ZGYzlFTzMrZXE3UDNScTNiQWpHSUZiWUFBSHlpK0EyL25xZnZVMTYxMW9pCjZOd1NqVVB0d1g0UFQwWGdRWS9oeDF1WTR4TWNDQkVTSWFJaXA1WmNMbVBYSG15aGt4YUFMREdSK3E1TC8wNHkKYkphbHBJWHEwa0JZWk45Y3M5R2VMY3RRc2N3azBCdXNGUzBlRzYySGpuTVJTMnJvbEZ1d0V6bTJaOUdFZG1VUApTZlJrMzZCTURBSGdlRFoyWjY5OUJxVFUwbW5WL1grMUppR0w4d084TEtKZ1dxdk5QT0cxdi9zT0J3PT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
-  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBMDV0bEs1VGFjU2dYTmRUTDBMNW1zdzlManRNZ1lGMTBTa2FmOS9ZMDdCaEUvK3VyCnBzVDEwNng1d2JLMHJMdXdLaE9TQ1JabVlMTWZTREFCenR0K0lsdGtwRkhNVTB3WmxxS0pKNkt0Q0lmYlZ4L0oKV2IrQnJibHo0aTBuMVNpUThGT2orclRMdWllbVBNREJkWlVSTU91QVd2R0JodG1YdnZKVmgwQlRjdDhDM1M5NQpva1FabDF6eVJlNGJVb3JUb2Jja0hDTld2dkg4QWxUdWs5UFpLRjRJQWZMTHl0Y0JDWEFjUysrTkNqSzVScTRUClpHZG1yeGh5TGhpVzlKSFI1NjV2Q0gvQ2pxdGtna1lPaXQ2KytsSHJmNk9nSnFZTitHZnliSHlHMUVUMCtNRlMKK3hneUMrYmVrcnh3SUV5M243dGIyVzJqZDdQYTgvT3hCTDZCeXdJREFRQUJBb0lCQUczZ2JNSWFndXJxOUZKaApjb3Vyc2t3Y0R4SFVreVUyb2FISDFseTlIWEhTa0ZHTElCQnlpV3NtVGZyRVBvaksxSWlrck5uSEpkWGtiTVBoCkdhODl6ZHN0TmE4VlFsR21YRXNaanJwa0FCRkQ2aUx0UUhJM3ZMQm1jY1BweXBzbWUwd3ZRaUIyTEtzMjExMEkKZ2V2NlFYanpjQ3pJNW9jTkNYeCsvT1pFQXBETVJkZXgrRzUyTzVNb0VvVkFMTENZZzMzRlB4azVJUGJSWkxQYwo4L0hSTHF6L2trNkNKN2k2N2tYaVk0bzc1ZkRpK1VUVFZjQVBlNW9JYUwrcWxtbDYzemhvWXRwWEp2Z1VsOWtkClAzSCtMbjFraVJ2bUlISFZYT0pEYzFnME5OYjVRUlEzUFBQNEZOS2tqVGN6YUJINW1EUGFhVlpCRkxoOGtWbysKMk5McjdDRUNnWUVBOTN2V3NXQ0JUTVRjVEViQ2FuQkIyV3dZL0liSUdrT0RnQlcvUy9TajlBc3VveVljSnFCQwpnMEV0T2xoNzdITVVUUnBTQmcrYmU2Mkltc0dJSkxYdndGS0RraVhPOVdxdlJabDJVU2pzQVo0WTRSU2hKbU0wCmJPMDJSTk1kY3F0RHVHUUtneWU2bjQvZ2RPLy9mWm9DMTJ2bDZRcEZkMjdNK0lqWnUwemVJYU1DZ1lFQTJ1T0IKMnd1bTgxUVQwNDlOUWcxNHhzUStlVE8xaGU5Vy9JM2NQdFYrTitpR0cxREUzQStWV3o4aGszdllBb2ZxZS9GSgpSVm14TDBHZ01LeDN1ZERaNGVUS20yTURtaWd2azdtcVlLSHN0OFE1bC9hWHpOU0pmR1ZFN0tDa1M2T255bHZ1CkNRVU5uVHlSVUcrdkVOaVRRR2hwMFpkVnRTSVFPeGM0a2NtWU1ia0NnWUFXR2pSQllTb0xEaVhTbGhzMDRGT3gKTkV0QytsS1NyZWJub0ltV0lnSW1nSDBveXZXR3FaZG5HNElMak8xOFg0YTNvQnNsT1cyY2JSSWZLQnVkazdZVwp5Z2ZBSEtwUUZyZ1Nrak1UNm9DeFlFbytoOVlnbEltUkZOcGM2VEhmRk5hV2VERE1KOWN0K3U2RDR3OUJTMmpuCmpsWlpLcmFyaFBTL1daR0FmY3YwMndLQmdRQ09ORG43NWVFTHVuYTYvaUZ5SlRCdTZiV3dwakJyR0NnS0lkdVIKa3IvU2NLVVhmK3kxRHdhNFpoWlpLNThWWGRtdnRmMGxLZlVidjJYajJWaGJCdDFXalg0M1h5ZEs4b3FlVFlQcwpEYWF0YUxVR0RmVm01RG1COElUTHVqMml5bXJLNDlpTVVaVWJydXExT0Ntakp5RGJPanB0S1FWTWpSbkFXZ0N0CmJpd0xPUUtCZ1FEM0JOSy9DYXczeDlGdUVmZjV2M1hsQTVOM0MzRTdHbVZCWFhhMEo0anV5Tng0RU1tR3J4SVQKSHdiZmg0RURBdER2clowV3NaY3FPN2NrV3NKZnIzSWFRUjBjV0ZVc2E2ZUtwK1BUbHkzY0R2SVRLc1JpSDF6NApzK0xYQWZ4aWl3MlltOEczRGJyLzdjY3oxbVlNcmVCdHl5eDRFSlh4MHk4NGVTN2VuVWswN2c9PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=
-kind: Secret
-metadata:
-  name: hubble-server-certs
-  namespace: kube-system
-type: kubernetes.io/tls
 ---
 apiVersion: v1
 kind: Service
@@ -517,6 +515,24 @@ spec:
     targetPort: 4244
   selector:
     k8s-app: cilium
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: hubble-relay
+    app.kubernetes.io/part-of: cilium
+    k8s-app: hubble-relay
+  name: hubble-relay
+  namespace: kube-system
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 4245
+  selector:
+    k8s-app: hubble-relay
+  type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -619,6 +635,102 @@ spec:
       - configMap:
           name: cilium-config
         name: cilium-config-path
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: hubble-relay
+    app.kubernetes.io/part-of: cilium
+    k8s-app: hubble-relay
+  name: hubble-relay
+  namespace: kube-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: hubble-relay
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations: null
+      labels:
+        app.kubernetes.io/name: hubble-relay
+        app.kubernetes.io/part-of: cilium
+        k8s-app: hubble-relay
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                k8s-app: cilium
+            topologyKey: kubernetes.io/hostname
+      automountServiceAccountToken: false
+      containers:
+      - args:
+        - serve
+        command:
+        - hubble-relay
+        image: quay.io/cilium/hubble-relay:v1.14.0@sha256:bfe6ef86a1c0f1c3e8b105735aa31db64bcea97dd4732db6d0448c55a3c8e70c
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          tcpSocket:
+            port: grpc
+        name: hubble-relay
+        ports:
+        - containerPort: 4245
+          name: grpc
+        readinessProbe:
+          tcpSocket:
+            port: grpc
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          runAsGroup: 65532
+          runAsNonRoot: true
+          runAsUser: 65532
+        terminationMessagePolicy: FallbackToLogsOnError
+        volumeMounts:
+        - mountPath: /etc/hubble-relay
+          name: config
+          readOnly: true
+        - mountPath: /var/lib/hubble-relay/tls
+          name: tls
+          readOnly: true
+      nodeSelector:
+        kubernetes.io/os: linux
+      priorityClassName: null
+      restartPolicy: Always
+      securityContext:
+        fsGroup: 65532
+      serviceAccount: hubble-relay
+      serviceAccountName: hubble-relay
+      terminationGracePeriodSeconds: 1
+      volumes:
+      - configMap:
+          items:
+          - key: config.yaml
+            path: config.yaml
+          name: hubble-relay-config
+        name: config
+      - name: tls
+        projected:
+          defaultMode: 256
+          sources:
+          - secret:
+              items:
+              - key: tls.crt
+                path: client.crt
+              - key: tls.key
+                path: client.key
+              - key: ca.crt
+                path: hubble-server-ca.crt
+              name: hubble-relay-client-certs
 ---
 apiVersion: apps/v1
 kind: DaemonSet
@@ -1013,3 +1125,35 @@ spec:
     rollingUpdate:
       maxUnavailable: 2
     type: RollingUpdate
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: hubble-relay-client-certs
+  namespace: kube-system
+spec:
+  commonName: '*.hubble-relay.cilium.io'
+  dnsNames:
+  - '*.hubble-relay.cilium.io'
+  duration: 26280h0m0s
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: cilium-ca
+  secretName: hubble-relay-client-certs
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: hubble-server-certs
+  namespace: kube-system
+spec:
+  commonName: '*.default.hubble-grpc.cilium.io'
+  dnsNames:
+  - '*.default.hubble-grpc.cilium.io'
+  duration: 26280h0m0s
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: cilium-ca
+  secretName: hubble-server-certs
