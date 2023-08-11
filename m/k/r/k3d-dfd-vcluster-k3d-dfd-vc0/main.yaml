@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  name: vcluster-k3d-dfd-vc0-cert-manager
+  namespace: argocd
+spec:
+  destination:
+    name: vcluster-k3d-dfd-vc0
+  project: default
+  source:
+    path: m/k/r/vcluster-k3d-dfd-vc0-cert-manager
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []

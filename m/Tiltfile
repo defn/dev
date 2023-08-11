@@ -106,13 +106,13 @@ local_resource(
             for v in 0 1; do
                 # wait until vcluster is ready
                 while true; do 
-                    if vcluster --context k3d-dfd connect vcluster -n "k3d-dfd-vc${v}" --server=$(kubectl --context k3d-dfd get nodes -o json | jq -r '.items[].metadata.annotations["k3s.io/internal-ip"]'):$((8443 + v)) --insecure --update-current=false --kube-config-context-name k3d-dfd-vc${v} --kube-config $HOME/.kube/config.vc${v}; then break; fi
+                    if vcluster --context k3d-dfd connect vcluster -n "k3d-dfd-vc${v}" --server=$(kubectl --context k3d-dfd get nodes -o json | jq -r '.items[].metadata.annotations["k3s.io/internal-ip"]'):$((8443 + v)) --insecure --update-current=false --kube-config-context-name vcluster-k3d-dfd-vc${v} --kube-config $HOME/.kube/config.vc${v}; then break; fi
                     sleep 5
                 done
 
                 # add vcluster to argocd
                 while true; do
-                    if env KUBECONFIG="$HOME/.kube/config.argocd:$HOME/.kube/config.vc${v}" argocd --kube-context k3d-dfd-argocd cluster --core add "k3d-dfd-vc${v}" --name "k3d-dfd-vc${v}" --yes; then break; fi
+                    if env KUBECONFIG="$HOME/.kube/config.argocd:$HOME/.kube/config.vc${v}" argocd --kube-context k3d-dfd-argocd cluster --core add "vcluster-k3d-dfd-vc${v}" --yes; then break; fi
                     sleep 5
                 done
 

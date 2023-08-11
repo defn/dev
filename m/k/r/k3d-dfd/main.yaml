@@ -60,3 +60,45 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "200"
+  name: k3d-dfd-vcluster-k3d-dfd-vc0
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-vcluster-k3d-dfd-vc0
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "200"
+  name: k3d-dfd-vcluster-k3d-dfd-vc1
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-vcluster-k3d-dfd-vc1
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
