@@ -48,12 +48,12 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
-        argo-cd: |
+        cilium: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
           metadata:
             namespace: argocd
-            name: k3d-dfd-argo-cd
+            name: k3d-dfd-cilium
             annotations:
               argocd.argoproj.io/sync-wave: "3"
           spec:
@@ -62,28 +62,28 @@ helmCharts:
               name: k3d-dfd
             source:
               repoURL: https://github.com/defn/dev
-              path: m/k/r/k3d-dfd-argo-cd
+              path: m/k/r/k3d-dfd-cilium
               targetRevision: main
             syncPolicy:
               automated:
                 prune: true
                 selfHeal: true
               syncOptions: []
-        cilium: |
+        argo-cd: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
           metadata:
             namespace: argocd
-            name: k3d-dfd-cilium
+            name: k3d-dfd-argo-cd
             annotations:
-              argocd.argoproj.io/sync-wave: "10"
+              argocd.argoproj.io/sync-wave: "200"
           spec:
             project: default
             destination:
               name: k3d-dfd
             source:
               repoURL: https://github.com/defn/dev
-              path: m/k/r/k3d-dfd-cilium
+              path: m/k/r/k3d-dfd-argo-cd
               targetRevision: main
             syncPolicy:
               automated:
