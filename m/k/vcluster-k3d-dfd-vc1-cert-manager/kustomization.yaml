@@ -3,7 +3,6 @@
 patches: []
 resources:
   - resource-namespace-cert-manager.yaml
-  - https://github.com/cert-manager/cert-manager/releases/download/v1.12.3/cert-manager.crds.yaml
   - resource-clusterissuer-cilium.yaml
 helmCharts:
   - releaseName: cert-manager
