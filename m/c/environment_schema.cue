@@ -239,6 +239,6 @@ import (
 
 	instance_types: [...string] | *["t3.medium", "t3a.medium"]
 
-	// ex: k3d-dfd-vc1
-	env: metadata: name: "\(ctx.name)"
+	// ex: vcluster-k3d-dfd-vc1
+	env: metadata: name: "\(type)-\(ctx.name)"
 }

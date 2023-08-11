@@ -117,7 +117,7 @@ local_resource(
                 done
 
                 # deploy the vcluster app-of-apps
-                kubectl --context k3d-dfd apply -f "e/k3d-dfd-vc${v}.yaml"
+                kubectl --context k3d-dfd apply -f "e/vcluster-k3d-dfd-vc${v}.yaml"
             done
 
             uptime
