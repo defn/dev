@@ -1056,8 +1056,8 @@ kustomize: "cilium": #KustomizeHelm & {
 			operator: replicas: 1
 			envoy: enabled: true
 			hubble: {
-				relay: enabled: true
-				ui: enabled:    true
+				relay: enabled: false
+				ui: enabled:    false
 				tls: auto: {
 					method: "certmanager"
 					certManagerIssuerRef: {
