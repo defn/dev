@@ -76,6 +76,9 @@ k3d-update:
 k3d-ca:
 	step certificate create cilium-ca ca.crt ca.key --profile root-ca --not-after 8760h --no-password --insecure --kty RSA --size 4096 --force
 
-k3d-secrets:
-	-kubectl create secret generic -n kube-system cilium-ca --from-file=ca.key --from-file=ca.crt
-	-kubectl create secret generic -n cert-manager cilium-ca --from-file=tls.key=ca.key --from-file=tls.crt=ca.crt
+ca.key ca.crt:
+	$(MAKE) k3d-ca
+
+k3d-secrets: ca.key ca.crt
+	-kubectl --context k3d-dfd create secret generic -n kube-system cilium-ca --from-file=ca.key --from-file=ca.crt
+	-kubectl --context k3d-dfd create secret generic -n cert-manager cilium-ca --from-file=tls.key=ca.key --from-file=tls.crt=ca.crt
