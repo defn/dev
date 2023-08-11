@@ -13,9 +13,9 @@ helmCharts:
         enabled: true
       hubble:
         relay:
-          enabled: true
+          enabled: false
         ui:
-          enabled: true
+          enabled: false
         tls:
           auto:
             method: certmanager
