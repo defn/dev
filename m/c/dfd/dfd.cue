@@ -12,6 +12,8 @@ env: (#Transform & {
 			"argo-cd": [1, ""]
 			"\(cluster_type)-\(cluster_name)-vc0": [100, ""]
 			"\(cluster_type)-\(cluster_name)-vc1": [100, ""]
+			"vcluster-\(cluster_type)-\(cluster_name)-vc0": [200, ""]
+			"vcluster-\(cluster_type)-\(cluster_name)-vc1": [200, ""]
 		}
 	}
 }).outputs
