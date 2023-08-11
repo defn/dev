@@ -115,9 +115,15 @@ local_resource(
                     if env KUBECONFIG="$HOME/.kube/config.argocd:$HOME/.kube/config.vc${v}" argocd --kube-context k3d-dfd-argocd cluster --core add "vcluster-k3d-dfd-vc${v}" --yes; then break; fi
                     sleep 5
                 done
+
+                # start a sync on vcluster
+                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 10 vcluster-k3d-dfd-vc${v}; then break; fi
             done
 
-            fg
+            while true; do 
+                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 10 k3d-dfd; then break; fi
+                sleep 5
+            done
 
             uptime
             """,
