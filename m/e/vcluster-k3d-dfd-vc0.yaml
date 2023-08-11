@@ -4,7 +4,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   namespace: argocd
-  name: k3d-dfd-vc0
+  name: vcluster-k3d-dfd-vc0
 spec:
   project: default
   destination:
