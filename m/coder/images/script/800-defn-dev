@@ -16,19 +16,19 @@ function main {
 	apt-get install -y docker.io
 	usermod -aG docker ubuntu
 
-	if [[ ! -x "bin/bazel" ]]; then
+	if [[ ! -x "/usr/local/bin/bazel" ]]; then
 		case "$(uname -m)" in
 		aarch64)
-			curl -sSL -o bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-arm64
+			sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-arm64
 			;;
 		*)
-			curl -sSL -o bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64
+			sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64
 			;;
 		esac
 	fi
 
-	chmod 755 bin/bazelisk
-	ln -nfs bazelisk bin/bazel
+	sudo chmod 755 /usr/local/bin/bazelisk
+	sudo ln -nfs bazelisk /usr/local/bin/bazel
 }
 
 main "$@"
