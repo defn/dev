@@ -6,6 +6,27 @@ helmCharts:
   - releaseName: bootstrap
     valuesInline:
       anyResources:
+        cert-manager-crds: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: vcluster-k3d-dfd-vc0-cert-manager-crds
+            annotations:
+              argocd.argoproj.io/sync-wave: "1"
+          spec:
+            project: default
+            destination:
+              name: vcluster-k3d-dfd-vc0
+            source:
+              repoURL: https://github.com/defn/dev
+              path: m/k/r/vcluster-k3d-dfd-vc0-cert-manager-crds
+              targetRevision: main
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
         cert-manager: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
