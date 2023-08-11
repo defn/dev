@@ -475,75 +475,6 @@ kustomize: "external-dns": #KustomizeHelm & {
 	}
 }
 
-kustomize: "vault": #KustomizeHelm & {
-	namespace: "vault"
-
-	helm: {
-		release: "vault"
-		name:    "vault"
-		version: "0.20.1"
-		repo:    "https://helm.releases.hashicorp.com"
-		values: {
-			server: {
-				dataStorage: size: "1Gi"
-				standalone: config: """
-					disable_mlock = true
-					ui = true
-
-					listener "tcp" {
-					  tls_disable = 1
-					  address = "[::]:8200"
-					  cluster_address = "[::]:8201"
-					}
-
-					storage "file" {
-					  path = "/vault/data"
-					}
-
-					seal "transit" {
-					  address = "http://vault.default.svc:8200"
-					  disable_renewal = "false"
-					  key_name = "autounseal-remo"
-					  mount_path = "transit/"
-					  tls_skip_verify = "true"
-					}
-
-					"""
-			}
-		}
-	}
-
-	resource: "namespace-vault": core.#Namespace & {
-		apiVersion: "v1"
-		kind:       "Namespace"
-		metadata: {
-			name: "vault"
-		}
-	}
-
-	psm: "statefulset-vault-set-vault-token": {
-		apiVersion: "apps/v1"
-		kind:       "StatefulSet"
-		metadata: {
-			name:      "vault"
-			namespace: "vault"
-		}
-		spec: template: spec: containers: [
-			{name: "vault"
-				env: [
-					{
-						name: "VAULT_TOKEN"
-						valueFrom: secretKeyRef: {
-							name: "vault-unseal"
-							key:  "VAULT_TOKEN"
-						}
-					},
-				]
-			},
-		]
-	}
-}
-
 // https://github.com/knative-sandbox/net-kourier/releases
 kustomize: "kourier": #Kustomize & {
 	resource: "kourier": {
@@ -1426,7 +1357,7 @@ kustomize: "sysbox": #Kustomize & {
 		url: "https://raw.githubusercontent.com/nestybox/sysbox/master/sysbox-k8s-manifests/sysbox-install.yaml"
 	}
 
-	psm: "daemonset-vault-set-vault-token": {
+	psm: "sysbox-deploy-k8s": {
 		apiVersion: "apps/v1"
 		kind:       "DaemonSet"
 
@@ -1434,11 +1365,6 @@ kustomize: "sysbox": #Kustomize & {
 			name:      "sysbox-deploy-k8s"
 			namespace: "kube-system"
 		}
-
-		spec: template: spec: tolerations: [{
-			key:      "env"
-			operator: "Exists"
-		}]
 	}
 }
 

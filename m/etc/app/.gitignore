@@ -63,7 +63,6 @@ node_modules
 .skaffold
 .kumactl
 .rediscli_history
-.vault*
 .step
 .dogrc
 .commit

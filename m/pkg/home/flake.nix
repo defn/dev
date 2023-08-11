@@ -8,7 +8,7 @@
 
     config = rec {
       clusters = {
-        global = { };
+        dfd = { };
       };
     };
 
@@ -59,89 +59,30 @@
 
         cd "./$(git rev-parse --show-cdup)m"
 
-        name="$GIT_AUTHOR_NAME-${nme}"
-        host=k3d-$name-server-0.$(tailscale cert 2>&1 | grep domain..use | cut -d'"' -f2 | cut -d. -f2-)
-
-        export VAULT_ADDR=http://host.docker.internal:8200
-
         case "''${1:-}" in
-          create)
-            export DEFN_DEV_HOST_API="$(host $host | grep 'has address' | awk '{print $NF}')"
-            this-k3d-provision ${nme} $name
-            ${nme} get -A svc | grep -v '<none>'
-
-            browser https://argocd.defn.run
-            ${nme} password
-            ;;
-          vc0)
-            set -x
-            vcluster connect --context k3d-${nme} --kube-config-context-name=vcluster-${nme}-$1 vcluster
-
-            kubectl config use-context vcluster-${nme}-$1
-            server="$(kubectl --context vcluster-${nme}-$1 config view -o jsonpath='{.clusters[?(@.name == "vcluster-'${nme}-$1'")]}' --raw | jq -r '.cluster.server')"
-            ca="$(kubectl --context vcluster-${nme}-$1 config view -o jsonpath='{.clusters[?(@.name == "vcluster-'${nme}-$1'")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d')"
-            vault write sys/policy/vcluster-${nme}-$1-external-secrets policy=@k3d-external-secrets-vault.hcl
-            vault auth enable -path "vcluster-${nme}-$1" kubernetes || true
-            vault write "auth/vcluster-${nme}-$1/config" \
-              kubernetes_host="$server" \
-              kubernetes_ca_cert=@<(echo "$ca") \
-              disable_local_ca_jwt=true
-            vault write "auth/vcluster-${nme}-$1/role/external-secrets" \
-              bound_service_account_names=external-secrets \
-              bound_service_account_namespaces=external-secrets \
-              policies=vcluster-${nme}-$1-external-secrets ttl=1h
-
-            kubectl config use-context k3d-${nme}
-            kubectl config set-context --current --namespace=argocd
-            argocd cluster add --core --yes --upsert vcluster-${nme}-$1
-            kubectl apply -f e/vcluster-${nme}-$1.yaml
-            ;;
           root)
-            docker exec -ti -u root -w /home/ubuntu k3d-$name-server-0 bash
+            docker exec -ti -u root -w /home/ubuntu k3d-${nme}-server-0 bash
             ;;
           shell)
-            docker exec -ti -u ubuntu -w /home/ubuntu k3d-$name-server-0 bash
-            ;;
-          ssh)
-            ssh $host
+            docker exec -ti -u ubuntu -w /home/ubuntu k3d-${nme} -server-0 bash
             ;;
           stop)
-            k3d cluster stop $name
+            k3d cluster stop ${nme}
             ;;
           start)
-            k3d cluster start $name
+            k3d cluster start ${nme}
             ;;
           "")
-            k3d cluster list $name
+            k3d cluster list ${nme}
             ;;
           cache)
             (this-k3d-list-images ${nme}; ssh root@$host /bin/ctr -n k8s.io images list  | awk '{print $1}' | grep -v sha256 | grep -v ^REF) | sort -u | this-k3d-save-images
             ;;
-          use)
-            kubectl config use-context k3d-${nme}
-            ;;
-          password)
-            argocd --context k3d-${nme} admin initial-password | head -1
-            ;;
           server)
-            kubectl --context k3d-${nme} config view -o jsonpath='{.clusters[?(@.name == "k3d-'$name'")]}' --raw | jq -r '.cluster.server'
+            kubectl --context k3d-${nme} config view -o jsonpath='{.clusters[?(@.name == "k3d-${nme}")]}' --raw | jq -r '.cluster.server'
             ;;
           ca)
-            kubectl --context k3d-${nme} config view -o jsonpath='{.clusters[?(@.name == "k3d-'$name'")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d'
-            ;;
-          vault-init)
-            vault write sys/policy/k3d-${nme}-external-secrets policy=@k3d-external-secrets-vault.hcl
-            vault auth enable -path "k3d-${nme}" kubernetes || true
-            ;;
-          vault-config)
-            vault write "auth/k3d-${nme}/config" \
-              kubernetes_host="$(${nme} server)" \
-              kubernetes_ca_cert=@<(${nme} ca) \
-              disable_local_ca_jwt=true
-            vault write "auth/k3d-${nme}/role/external-secrets" \
-              bound_service_account_names=external-secrets \
-              bound_service_account_namespaces=external-secrets \
-              policies=k3d-${nme}-external-secrets ttl=1h
+            kubectl --context k3d-${nme} config view -o jsonpath='{.clusters[?(@.name == "k3d-${nme}")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d'
             ;;
           *)
             kubectl --context k3d-${nme} "$@"
@@ -151,61 +92,6 @@
       config.clusters);
 
     scripts = { system }: {
-      k3d-provision = ''
-        set -exfu
-
-        nme=$1; shift
-        name=$1; shift
-
-        export DOCKER_CONTEXT=host
-        export DEFN_DEV_NAME=$name
-        export DEFN_DEV_HOST=k3d-$name
-        export DEFN_DEV_HOST_IP="127.0.0.1"
-
-        this-k3d-create $name
-
-        kubectl config delete-context k3d-$nme || true
-        kubectl config rename-context k3d-$name k3d-$nme
-        case "$name" in
-          *-global)
-            kubectl config set-context k3d-$nme --cluster=k3d-$name --user=admin@k3d-$name --namespace argocd
-            ;;
-          *)
-            kubectl config set-context k3d-$nme --cluster=k3d-$name --user=admin@k3d-$name
-            ;;
-        esac
-        perl -pe 's{(https://'$DEFN_DEV_HOST_API'):\d+}{$1:6443}' -i ~/.kube/config
-
-        #export VAULT_TOKEN="$(pass Initial_Root_Token)"
-        #$nme vault-init
-        #$nme vault-config
-
-        if test -f e/k3d-$nme.yaml; then
-          kubectl config use-context k3d-global
-
-          mark waiting for argocd
-          while ! argocd --core app list 2>/dev/null; do date; sleep 5; done
-
-          mark upserting k3d-$nme
-          while ! argocd cluster add --core --yes --upsert k3d-$nme; do date; sleep 5; done
-
-          mark syncing
-          kubectl --context k3d-global apply -f e/k3d-$nme.yaml
-          sleep 10
-          argocd --core app sync argocd/k3d-$nme || true
-          sleep 10
-          argocd --core app sync argocd/k3d-$nme || true
-          argocd --core app wait argocd/k3d-$nme --timeout 5 || true
-          while true; do
-            argocd --core app sync argocd/k3d-$nme || true
-            if argocd --core app wait argocd/k3d-$nme --timeout 60; then
-              break
-            fi
-            argocd --core app list | grep -v 'Synced.*Healthy'
-          done
-        fi
-      '';
-
       k3d-create = ''
         set -exfu
 
@@ -252,19 +138,9 @@
       '';
 
       login = ''
-        if [[ ! "false" == "$(vault status | grep Sealed | awk '{print $NF}')" ]]; then mark vault; (direnv allow; eval "$(direnv hook bash)"; _direnv_hook; this-vault-unseal); fi
         if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then mark kubernetes; this-kubeconfig; this-argocd-login || true; fi
         this-github-login
-        this-vault-login
         echo
-      '';
-
-      vault-login = ''
-        if ! kv >/dev/null; then
-          mark vault
-          vault login -method=github token="$(cat ~/.config/gh/hosts.yml  | yq -r '.["github.com"].oauth_token')" | egrep -v '^(token_accessor|token) '
-          kv
-        fi
       '';
 
       github-login = ''
@@ -363,42 +239,6 @@
       acme-renew = ''
         domain="$1"; shift
         acme.sh --renew --ecc -d "$domain"
-      '';
-
-      vault-start = ''
-        set -exfu
-
-        vault server -config vault.hcl "$@"
-      '';
-
-      vault-unseal = ''
-        set -exfu
-
-        pass Unseal_Key_1 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') $VAULT_ADDR/v1/sys/unseal
-        pass Unseal_Key_3 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') $VAULT_ADDR/v1/sys/unseal
-        pass Unseal_Key_5 | curl -sSL -X PUT -d @<(jq -nrR 'inputs|{key:.}|@json') $VAULT_ADDR/v1/sys/unseal
-      '';
-
-      vault-seal = ''
-        set -exfu
-
-        vault operator seal
-        rm -f ~/.vault-token
-        cd ~/.password-store && git add vault && git add -u vault && git stash
-      '';
-
-      vault-backup = ''
-        set -exfu
-
-        this-vault-seal
-        cd ~/.password-store
-        git stash apply
-        git add vault
-        git add -u vault
-        git commit -m "backup vault"
-        git push
-        git status -sb
-        this-vault-unseal
       '';
     };
   };

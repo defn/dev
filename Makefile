@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-flakes ?= home oci nix secrets utils vpn vault acme godev nodedev localdev development cloud kubernetes coder codeserver tailscale shell
+flakes ?= home oci nix secrets utils vpn acme godev nodedev localdev development cloud kubernetes coder codeserver tailscale shell
 
 nix-ignore:
 	@true
@@ -107,7 +107,6 @@ login:
 symlinks:
 	$(MARK) configure symlinks
 	bash -x bin/persist-cache
-	echo "token_helper=\"$(which vault-token-helper)\"" > ~/.vault
 
 perms:
 	$(MARK) configure permissions
