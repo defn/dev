@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-wave: "4"
   name: k3d-dfd-argo-cd
   namespace: argocd
 spec:
@@ -23,7 +23,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "2"
   name: k3d-dfd-cert-manager
   namespace: argocd
 spec:
@@ -44,7 +44,28 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "1"
+  name: k3d-dfd-cert-manager-crds
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cert-manager-crds
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
   name: k3d-dfd-cilium
   namespace: argocd
 spec:
