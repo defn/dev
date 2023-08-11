@@ -104,7 +104,7 @@ subjects:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: operator-oauth
+  name: not-used
   namespace: tailscale
 stringData:
   client_id: null
@@ -163,4 +163,4 @@ spec:
       volumes:
       - name: oauth
         secret:
-          secretName: operator-oauth
+          secretName: not-used

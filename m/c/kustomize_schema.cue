@@ -36,19 +36,18 @@ kustomize: [NAME=string]: _name: NAME
 	resource: {...} | *{}
 	resource: [string]: #Resource
 
-
 	out: {
 		if kns != "" {
 			namespace: kns
 		}
 
 		patches: [
-			for _psm_name, _psm in psm {
+				for _psm_name, _psm in psm {
 				path: "patch-\(_psm_name).yaml"
 			},
 		] + [
 			for _jsp_name, _jsp in jsp {
-				path: "jsonp-\(_jsp_name).yaml"
+				path:   "jsonp-\(_jsp_name).yaml"
 				target: _jsp.target
 			},
 		]
@@ -95,7 +94,6 @@ kustomize: [NAME=string]: _name: NAME
 		}]
 	}
 }
-
 
 #TransformKarpenterProvisioner: {
 	from: {
