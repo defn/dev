@@ -2,7 +2,7 @@
 
 analytics_settings(False)
 
-update_settings(max_parallel_updates=2)
+update_settings(max_parallel_updates=3)
 
 local_resource(
     "code-server",
@@ -106,7 +106,7 @@ local_resource(
 
             # background app-of-apps syncing
             while true; do 
-                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 10 k3d-dfd; then break; fi
+                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 20 k3d-dfd; then break; fi
                 sleep 30
             done &
 
@@ -125,23 +125,23 @@ local_resource(
 
                 # start syncing vcluster
                 while true; do
-                    if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 10 k3d-dfd-vcluster-k3d-dfd-vc${v}; then break; fi
+                    if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 20 k3d-dfd-vcluster-k3d-dfd-vc${v}; then break; fi
                     sleep 5
                 done &
             done
 
             while true; do
-                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 10 k3d-dfd-vcluster-k3d-dfd-vc0; then break; fi
+                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 20 k3d-dfd-vcluster-k3d-dfd-vc0; then break; fi
                 sleep 5
             done
 
             while true; do
-                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 10 k3d-dfd-vcluster-k3d-dfd-vc1; then break; fi
+                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 20 k3d-dfd-vcluster-k3d-dfd-vc1; then break; fi
                 sleep 5
             done
 
             while true; do 
-                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 10 k3d-dfd; then break; fi
+                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 20 k3d-dfd; then break; fi
                 sleep 30
             done
 
