@@ -66,8 +66,11 @@ local_resource(
             # deploy k3d, argocd
             rm -vf ~/.kube/config*
             env KUBECONFIG=$HOME/.kube/config this-k3d-create dfd
-            docker exec -i k3d-dfd-server-0 mount bpffs /sys/fs/bpf -t bpf
-            docker exec -i k3d-dfd-server-0 mount --make-shared /sys/fs/bpf
+            docker exec -i k3d-dfd-server-0  mount bpffs -t bpf /sys/fs/bpf
+            docker exec -i k3d-dfd-server-0  mount --make-shared /sys/fs/bpf
+            docker exec -i k3d-dfd-server-0  mkdir -p /run/cilium/cgroupv2
+            docker exec -i k3d-dfd-server-0  mount -t cgroup2 none /run/cilium/cgroupv2
+            docker exec -i k3d-dfd-server-0  mount --make-shared /run/cilium/cgroupv2
 
             kubectl --context k3d-dfd apply -f k/r/k3d-dfd-cilium/main.yaml 
             kubectl --context k3d-dfd apply -f k/r/k3d-dfd-argo-cd/main.yaml 
