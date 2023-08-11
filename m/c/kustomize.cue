@@ -1054,9 +1054,10 @@ kustomize: "cilium": #KustomizeHelm & {
 		repo:      "https://helm.cilium.io"
 		values: {
 			operator: replicas: 1
+			envoy: enabled: true
 			hubble: {
-				relay: enabled: false
-				ui: enabled:    false
+				relay: enabled: true
+				ui: enabled:    true
 				tls: auto: {
 					method: "certmanager"
 					certManagerIssuerRef: {
