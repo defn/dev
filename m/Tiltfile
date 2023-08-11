@@ -115,9 +115,6 @@ local_resource(
                     if env KUBECONFIG="$HOME/.kube/config.argocd:$HOME/.kube/config.vc${v}" argocd --kube-context k3d-dfd-argocd cluster --core add "vcluster-k3d-dfd-vc${v}" --yes; then break; fi
                     sleep 5
                 done
-
-                # deploy the vcluster app-of-apps
-                kubectl --context k3d-dfd apply -f "e/vcluster-k3d-dfd-vc${v}.yaml"
             done
 
             uptime
