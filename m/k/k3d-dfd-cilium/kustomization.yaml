@@ -2,8 +2,7 @@
 
 patches: []
 namespace: kube-system
-resources:
-  - resource-ingress-hubble-ui.yaml
+resources: []
 helmCharts:
   - releaseName: cilium
     namespace: kube-system
@@ -15,14 +14,7 @@ helmCharts:
           enabled: true
         ui:
           enabled: true
-        tls:
-          auto:
-            method: certmanager
-            certManagerIssuerRef:
-              name: cilium-ca
-              kind: ClusterIssuer
-              group: cert-manager.io
     name: cilium
-    version: 1.14.0
+    version: 1.13.5
     repo: https://helm.cilium.io
     includeCRDs: true

@@ -66,8 +66,6 @@ local_resource(
             # deploy k3d, argocd
             rm -vf ~/.kube/config*
             env KUBECONFIG=$HOME/.kube/config this-k3d-create dfd
-            kubectl --context k3d-dfd apply -f k/r/k3d-dfd-cert-manager-crds/main.yaml 
-            kubectl --context k3d-dfd apply -f k/r/k3d-dfd-cert-manager/main.yaml 
             kubectl --context k3d-dfd apply -f k/r/k3d-dfd-cilium/main.yaml 
             kubectl --context k3d-dfd apply -f k/r/k3d-dfd-argo-cd/main.yaml 
 
