@@ -1,0 +1,5 @@
+#ManagedBy: cue
+
+patches: []
+resources:
+  - https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/manifests/operator.yaml
