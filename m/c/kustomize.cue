@@ -1096,6 +1096,19 @@ kustomize: "tailscale": #Kustomize & {
 			value: "not-used"
 		}]
 	}
+
+	jsp: "deployment-operator-increase-logging": {
+		target: {
+			kind:    "Deployment"
+			name:    "operator"
+			namespace: "tailscale"
+		}
+		patches: [{
+			op:    "replace"
+			path:  "/spec/template/spec/containers/0/env/2/value"
+			value: "dev"
+		}]
+	}
 }
 
 // https://doc.traefik.io/traefik/routing/providers/kubernetes-ingress/

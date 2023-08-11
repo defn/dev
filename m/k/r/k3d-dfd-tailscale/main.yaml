@@ -134,7 +134,7 @@ spec:
         - name: OPERATOR_SECRET
           value: operator
         - name: OPERATOR_LOGGING
-          value: info
+          value: dev
         - name: OPERATOR_NAMESPACE
           valueFrom:
             fieldRef:

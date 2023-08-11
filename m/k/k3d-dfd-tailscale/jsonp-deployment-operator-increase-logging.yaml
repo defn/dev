@@ -1,0 +1,5 @@
+#ManagedBy: cue
+
+- op: replace
+  path: /spec/template/spec/containers/0/env/2/value
+  value: dev
