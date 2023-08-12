@@ -1,10 +1,14 @@
 {
-  inputs.pkg.url = github:defn/dev/pkg-pkg-0.0.11?dir=m/pkg/pkg;
-  outputs = inputs: inputs.pkg.main rec {
+  inputs = {
+    tailscale.url = github:defn/dev/pkg-tailscale-1.46.1-1?dir=m/pkg/tailscale;
+  };
+
+  outputs = inputs: inputs.tailscale.inputs.pkg.main rec {
     src = ./.;
 
     defaultPackage = ctx: ctx.wrap.nullBuilder {
       propagatedBuildInputs = with ctx.pkgs; [
+        inputs.tailscale.defaultPackage.${ctx.system};
         easyrsa
         openvpn
         wireguard-tools
