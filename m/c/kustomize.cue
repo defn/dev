@@ -8,15 +8,6 @@ import (
 
 _issuer: "zerossl-production"
 
-kustomize: (#Transform & {
-	transformer: #TransformChicken
-
-	inputs: {
-		rocky: {}
-		rosie: {}
-	}
-}).outputs
-
 kustomize: "coredns": #Kustomize & {
 	resource: "configmap-coredns": core.#ConfigMap & {
 		apiVersion: "v1"
