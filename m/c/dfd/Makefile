@@ -1,5 +1,11 @@
 SHELL := /bin/bash
 
+PRIV_KEY := sa-signer.key
+PUB_KEY := sa-signer.key.pub
+PKCS_KEY := sa-signer-pkcs8.pub
+
+k3s_url := $(shell cat ~/.kube/config | grep server: | awk '{print $$NF}')
+
 build:
 # remove everything
 	rm -rf ../../k/*/
@@ -13,7 +19,18 @@ build:
 # add generated to git
 	../make_add_generated.sh
 
-k3s_url := $(shell cat ~/.kube/config | grep server: | awk '{print $$NF}')
+secrets:
+	$(MAKE) clean
+	ssh-keygen -N "" -t rsa -b 2048 -f $(PRIV_KEY) -m pem
+	ssh-keygen -e -m PKCS8 -f $(PUB_KEY) > $(PKCS_KEY)
+	$(MAKE) discovery.json keys.json
+	$(MAKE) k3d-secrets
+
+clean:
+	rm -rf amazon-eks-pod-identity-webhook
+	rm -f sa-signer-pkcs8.pub sa-signer.key sa-signer.key.pub
+	rm -f discovery.json keys.json
+	rm -rf oidc system.admin.key system.admin.pem system.ca.pem
 
 system.admin.key system.admin.pem system.ca.pem:
 	docker exec k3d-dfd-server-0 cat /etc/rancher/k3s/k3s.yaml | awk -F': ' '/client-certificate-data/ {print $$2}' | base64 -d > system.admin.pem && chmod 600 system.admin.pem
@@ -34,6 +51,11 @@ k3d-secrets: ca.key ca.crt system.admin.key system.admin.pem system.ca.pem
 	kubectl --context k3d-dfd create namespace tailscale
 	kubectl --context k3d-dfd create secret -n tailscale generic operator-oauth-custom --from-literal=client_id=$$(pass OAUTH_CLIENT_ID) --from-literal=client_secret=$$(pass OAUTH_CLIENT_SECRET)
 
-secrets:
-	rm -rf oidc system.admin.key system.admin.pem system.ca.pem
-	$(MAKE) k3d-secrets
+# /keys.json
+keys.json:
+	git clone https://github.com/aws/amazon-eks-pod-identity-webhook
+	(cd amazon-eks-pod-identity-webhook && go run ./hack/self-hosted/main.go -key ../$(PKCS_KEY)) | jq '.keys += [.keys[0]] | .keys[1].kid = ""' > keys.json
+
+# /.well-known/openid-configuration
+discovery.json:
+	cue export -e discovery --out=json > discovery.json
