@@ -1,0 +1,6 @@
+#ManagedBy: cue
+
+metadata:
+  name: traefik
+kind: Namespace
+apiVersion: v1

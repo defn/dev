@@ -19,6 +19,7 @@ env: (#Transform & {
 			"cert-manager": [2, ""]
 			"cilium": [3, ""]
 			"tailscale": [4, ""]
+			"traefik": [5, ""]
 
 			"\(cluster_type)-\(cluster_name)-vc0": [100, ""]
 			"\(cluster_type)-\(cluster_name)-vc1": [100, ""]
