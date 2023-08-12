@@ -2,7 +2,7 @@
   inputs = {
     pkg.url = github:defn/dev/pkg-pkg-0.0.11?dir=m/pkg/pkg;
     # https://github.com/NixOS/nixpkgs/commits/release-23.05
-    latest.url = github:NixOS/nixpkgs?rev=5c9ddb86679c400d6b7360797b8a22167c2053f8;
+    latest.url = github:NixOS/nixpkgs?rev=3fe694c4156b84dac12627685c7ae592a71e2206;
   };
 
   outputs = inputs: inputs.pkg.main rec {
