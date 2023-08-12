@@ -29,7 +29,6 @@ function bazel {
 	local cmd="$1"
 	shift
 
-		
 	case "${cmd}" in
 	build | test | run)
 		# shellcheck disable=SC2065
