@@ -1135,7 +1135,7 @@ kustomize: "tailscale": #Kustomize & {
 			path:  "/spec/template/spec/volumes/1"
 			value: {
 				name: "oauth"
-				secret: secretName: "operator-oauth"
+				secret: secretName: "operator-oauth-custom"
 			}
 		}]
 	}
