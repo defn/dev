@@ -1,10 +1,13 @@
 SHELL := /bin/bash
 
+list:
+	$(MAKE) list_vendor_updates
+
 build:
-	true
+	true	
 
 update:
-	$(MAKE) make_update_flakes
+	$(MAKE) update_flakes
 
-make_%:
-	./$@.sh
+%:
+	./make_$@.sh
