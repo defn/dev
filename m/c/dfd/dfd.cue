@@ -1,5 +1,9 @@
 package c
 
+import (
+	rbac "k8s.io/api/rbac/v1"
+)
+
 cluster_name: "dfd"
 cluster_type: "k3d"
 vclusters: [0, 1]
