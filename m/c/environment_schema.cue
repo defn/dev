@@ -31,27 +31,6 @@ import (
 	}
 }
 
-#TransformEnvToSecretStore: {
-	from: {
-		#Input
-
-		type: string
-	}
-
-	to: #Kustomize & {
-		_in: from
-
-		resource: "cluster-secret-store-dev": {
-			apiVersion: "external-secrets.io/v1beta1"
-			kind:       "ClusterSecretStore"
-			metadata: name: "dev"
-			spec: provider: {
-				// TODO replace with AWS secrets manager
-			}
-		}
-	}
-}
-
 #TransformEnvToBootstrapMachine: {
 	from: {
 		#Input

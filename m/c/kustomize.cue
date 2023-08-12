@@ -283,7 +283,7 @@ kustomize: "kourier": #Kustomize & {
 }
 
 // https://artifacthub.io/packages/helm/external-secrets-operator/external-secrets
-kustomize: "external-secrets-operator": #KustomizeHelm & {
+kustomize: "external-secrets": #KustomizeHelm & {
 	namespace: "external-secrets"
 
 	helm: {
@@ -323,7 +323,7 @@ kustomize: "external-secrets-operator": #KustomizeHelm & {
 }
 
 // https://artifacthub.io/packages/helm/jkroepke/amazon-eks-pod-identity-webhook
-kustomize: "pod-identity-webhook": #KustomizeHelm & {
+kustomize: "pod-identity": #KustomizeHelm & {
 	namespace: "default"
 
 	helm: {
