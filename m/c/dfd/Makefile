@@ -27,9 +27,13 @@ system.admin.key system.admin.pem system.ca.pem:
 ca.key ca.crt:
 	step certificate create cilium-ca ca.crt ca.key --profile root-ca --not-after 8760h --no-password --insecure --kty RSA --size 4096 --force
 
-secrets k3d-secrets: ca.key ca.crt system.admin.key system.admin.pem system.ca.pem
+k3d-secrets: ca.key ca.crt system.admin.key system.admin.pem system.ca.pem
 	kubectl --context k3d-dfd create namespace cert-manager
 	kubectl --context k3d-dfd create secret generic -n kube-system cilium-ca --from-file=ca.key --from-file=ca.crt
 	kubectl --context k3d-dfd create secret generic -n cert-manager cilium-ca --from-file=tls.key=ca.key --from-file=tls.crt=ca.crt
 	kubectl --context k3d-dfd create namespace tailscale
 	kubectl --context k3d-dfd create secret -n tailscale generic operator-oauth-custom --from-literal=client_id=$$(pass OAUTH_CLIENT_ID) --from-literal=client_secret=$$(pass OAUTH_CLIENT_SECRET)
+
+secrets:
+	rm -rf oidc system.admin.key system.admin.pem system.ca.pem
+	$(MAKE) k3d-secrets

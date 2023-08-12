@@ -49,35 +49,37 @@ local_resource(
         """
             set -exu
 
+            nme="dfd"
+
             cd ~/m
 
             # deploy k3d, argocd
             rm -vf ~/.kube/config*
-            env KUBECONFIG=$HOME/.kube/config this-k3d-create dfd
-            docker update --restart=no k3d-dfd-server-0
+            env KUBECONFIG=$HOME/.kube/config this-k3d-create ${nme}
+            docker update --restart=no k3d-${nme}-server-0
 
-            (cd c/dfd && make k3d-secrets)
+            (cd c/${nme} && make secrets)
 
-            docker exec -i k3d-dfd-server-0  mount bpffs -t bpf /sys/fs/bpf
-            docker exec -i k3d-dfd-server-0  mount --make-shared /sys/fs/bpf
-            docker exec -i k3d-dfd-server-0  mkdir -p /run/cilium/cgroupv2
-            docker exec -i k3d-dfd-server-0  mount -t cgroup2 none /run/cilium/cgroupv2
-            docker exec -i k3d-dfd-server-0  mount --make-shared /run/cilium/cgroupv2
+            docker exec -i k3d-${nme}-server-0  mount bpffs -t bpf /sys/fs/bpf
+            docker exec -i k3d-${nme}-server-0  mount --make-shared /sys/fs/bpf
+            docker exec -i k3d-${nme}-server-0  mkdir -p /run/cilium/cgroupv2
+            docker exec -i k3d-${nme}-server-0  mount -t cgroup2 none /run/cilium/cgroupv2
+            docker exec -i k3d-${nme}-server-0  mount --make-shared /run/cilium/cgroupv2
 
-            kubectl --context k3d-dfd apply -f k/r/k3d-dfd-cert-manager-crds/main.yaml
-            kubectl --context k3d-dfd apply -f k/r/k3d-dfd-bootstrap-cilium-bootstrap/main.yaml
-            kubectl --context k3d-dfd apply -f k/r/k3d-dfd-argo-cd/main.yaml 
+            kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-cert-manager-crds/main.yaml
+            kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-bootstrap-cilium-bootstrap/main.yaml
+            kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-argo-cd/main.yaml 
 
             # dedicated kubectl config for argocd
             cp $HOME/.kube/config $HOME/.kube/config.argocd
             (
                 export KUBECONFIG=$HOME/.kube/config.argocd
-                eval "$(kubectl config view -o json  | jq -r --arg cluster k3d-dfd --arg namespace argocd '.contexts[] | select(.name == $cluster).context | "kubectl config set-context \\(.cluster)-argocd --cluster=\\(.cluster) --user=\\(.user) --namespace=\\($namespace)"')"
-                kubectl config use-context k3d-dfd-argocd
+                eval "$(kubectl config view -o json  | jq -r --arg cluster k3d-${nme} --arg namespace argocd '.contexts[] | select(.name == $cluster).context | "kubectl config set-context \\(.cluster)-argocd --cluster=\\(.cluster) --user=\\(.user) --namespace=\\($namespace)"')"
+                kubectl config use-context k3d-${nme}-argocd
             )
 
             # switch back to the default config
-            kubectl config use-context k3d-dfd
+            kubectl config use-context k3d-${nme}
 
             # needed for argocd password generation
             sudo apt install -y apache2-utils
@@ -85,9 +87,9 @@ local_resource(
             # wait until argocd is able to deploy to k3d
             while true; do
                 # patch argocd admin password
-                if kubectl --context k3d-dfd-argocd patch secret argocd-secret   -p '{"stringData": { "admin.password": "'$(htpasswd -bnBC 10 "" admin | tr -d ':\\n')'"}}'; then
+                if kubectl --context k3d-${nme}-argocd patch secret argocd-secret   -p '{"stringData": { "admin.password": "'$(htpasswd -bnBC 10 "" admin | tr -d ':\\n')'"}}'; then
                     # add k3d to argocd
-                    if env KUBECONFIG=$HOME/.kube/config.argocd argocd cluster add k3d-dfd --yes --core --in-cluster; then
+                    if env KUBECONFIG=$HOME/.kube/config.argocd argocd cluster add k3d-${nme} --yes --core --in-cluster; then
                         break
                     fi
                 fi
@@ -95,46 +97,46 @@ local_resource(
             done
 
             # deploy the cluster app-of-apps
-            kubectl --context k3d-dfd apply -f e/k3d-dfd.yaml
+            kubectl --context k3d-${nme} apply -f e/k3d-${nme}.yaml
 
             # background app-of-apps syncing
             while true; do 
-                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 20 k3d-dfd; then break; fi
+                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 20 k3d-${nme}; then break; fi
                 sleep 30
             done &
 
             for v in 0 1; do
                 # wait until vcluster is ready
                 while true; do 
-                    if vcluster --context k3d-dfd connect vcluster -n "k3d-dfd-vc${v}" --server=$(kubectl --context k3d-dfd get nodes -o json | jq -r '.items[].metadata.annotations["k3s.io/internal-ip"]'):$((8443 + v)) --insecure --update-current=false --kube-config-context-name vcluster-k3d-dfd-vc${v} --kube-config $HOME/.kube/config.vc${v}; then break; fi
+                    if vcluster --context k3d-${nme} connect vcluster -n "k3d-${nme}-vc${v}" --server=$(kubectl --context k3d-${nme} get nodes -o json | jq -r '.items[].metadata.annotations["k3s.io/internal-ip"]'):$((8443 + v)) --insecure --update-current=false --kube-config-context-name vcluster-k3d-${nme}-vc${v} --kube-config $HOME/.kube/config.vc${v}; then break; fi
                     sleep 5
                 done
 
                 # add vcluster to argocd
                 while true; do
-                    if env KUBECONFIG="$HOME/.kube/config.argocd:$HOME/.kube/config.vc${v}" argocd --kube-context k3d-dfd-argocd cluster --core add "vcluster-k3d-dfd-vc${v}" --yes; then break; fi
+                    if env KUBECONFIG="$HOME/.kube/config.argocd:$HOME/.kube/config.vc${v}" argocd --kube-context k3d-${nme}-argocd cluster --core add "vcluster-k3d-${nme}-vc${v}" --yes; then break; fi
                     sleep 5
                 done
 
                 # start syncing vcluster
                 while true; do
-                    if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 20 k3d-dfd-vcluster-k3d-dfd-vc${v}; then break; fi
+                    if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 20 k3d-${nme}-vcluster-k3d-${nme}-vc${v}; then break; fi
                     sleep 5
                 done &
             done
 
             while true; do
-                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 20 k3d-dfd-vcluster-k3d-dfd-vc0; then break; fi
+                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 20 k3d-${nme}-vcluster-k3d-${nme}-vc0; then break; fi
                 sleep 5
             done
 
             while true; do
-                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 20 k3d-dfd-vcluster-k3d-dfd-vc1; then break; fi
+                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 20 k3d-${nme}-vcluster-k3d-${nme}-vc1; then break; fi
                 sleep 5
             done
 
             while true; do 
-                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 20 k3d-dfd; then break; fi
+                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 20 k3d-${nme}; then break; fi
                 sleep 30
             done
 
