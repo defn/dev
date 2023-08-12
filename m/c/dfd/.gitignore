@@ -1,1 +1,5 @@
+oidc/
 ca.*
+system.admin.key
+system.admin.pem
+system.ca.pem
