@@ -1,0 +1,7 @@
+#ManagedBy: cue
+
+metadata:
+  name: autoscaler
+  namespace: knative-serving
+kind: Deployment
+apiVersion: apps/v1
