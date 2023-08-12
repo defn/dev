@@ -46,7 +46,8 @@ home:
 		(cd m/pkg/$$n && ~/bin/b out flake_path) | (cd ~/bin/nix && tar xfz -); \
 		done
 	rm -f bin/nix/{gcc,cc,ld}
-	ln -nfs ~/bin/nix/go $${VSCODE_GIT_ASKPASS_NODE%/*}/vscode/bin/remote-cli/ 2>/dev/null || true
+	sudo ln -nfs ~/bin/nix/go /usr/local/bin/
+	sudo ln -nfs /home/ubuntu/.nix-profile/bin/nix-instantiate /usr/local/bin/
 	if test -x /opt/homebrew/opt/util-linux/bin/flock; then ln -nfs /opt/homebrew/opt/util-linux/bin/flock bin/nix/; fi
 
 dotfiles:
