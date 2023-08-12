@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-flakes ?= home oci nix secrets utils vpn acme godev nodedev localdev development cloud kubernetes coder codeserver tailscale shell
+flakes ?= home oci nix secrets utils vpn acme godev nodedev localdev development cloud kubernetes remotedev shell
 
 nix-ignore:
 	@true
