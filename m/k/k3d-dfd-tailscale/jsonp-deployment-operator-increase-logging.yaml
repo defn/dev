@@ -26,4 +26,4 @@
   value:
     name: oauth
     secret:
-      secretName: oauth-operator
+      secretName: operator-oauth

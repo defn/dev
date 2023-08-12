@@ -169,4 +169,4 @@ spec:
           secretName: not-used
       - name: oauth
         secret:
-          secretName: oauth-operator
+          secretName: not-used
