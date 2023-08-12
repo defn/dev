@@ -8,7 +8,7 @@
 
     defaultPackage = ctx: ctx.wrap.nullBuilder {
       propagatedBuildInputs = with ctx.pkgs; [
-        inputs.tailscale.defaultPackage.${ctx.system};
+        inputs.tailscale.defaultPackage.${ctx.system}
         easyrsa
         openvpn
         wireguard-tools

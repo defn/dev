@@ -77,7 +77,28 @@
     },
     "root": {
       "inputs": {
+        "tailscale": "tailscale"
+      }
+    },
+    "tailscale": {
+      "inputs": {
         "pkg": "pkg"
+      },
+      "locked": {
+        "dir": "m/pkg/tailscale",
+        "lastModified": 1690422749,
+        "narHash": "sha256-EnevC5rlBF+T/tBnwzntzlZWaM4n5ExWAA8AJrplNq0=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "024ad6be3258fd4a95f15a0996bbf746479364d3",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/tailscale",
+        "owner": "defn",
+        "ref": "pkg-tailscale-1.46.1-1",
+        "repo": "dev",
+        "type": "github"
       }
     }
   },
