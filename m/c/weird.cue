@@ -231,7 +231,7 @@ kustomize: "keda": #KustomizeHelm & {
 	helm: {
 		release: "keda"
 		name:    "keda"
-		version: "2.8.2"
+		version: "2.11.2"
 		repo:    "https://kedacore.github.io/charts"
 	}
 
@@ -240,41 +240,6 @@ kustomize: "keda": #KustomizeHelm & {
 		kind:       "Namespace"
 		metadata: {
 			name: "keda"
-		}
-	}
-}
-
-// https://artifacthub.io/packages/helm/bitnami/external-dns
-kustomize: "external-dns": #KustomizeHelm & {
-	namespace: "external-dns"
-
-	helm: {
-		release: "external-dns"
-		name:    "external-dns"
-		version: "6.23.0"
-		repo:    "https://charts.bitnami.com/bitnami"
-		values: {
-			logLevel: "debug"
-			sources: [
-				"service",
-				"ingress",
-			]
-			provider: "cloudflare"
-			cloudflare: {
-				email:   "cloudflare@defn.us"
-				proxied: false
-			}
-			domainFilters: [
-				"defn.run",
-			]
-		}
-	}
-
-	resource: "namespace-external-dns": core.#Namespace & {
-		apiVersion: "v1"
-		kind:       "Namespace"
-		metadata: {
-			name: "external-dns"
 		}
 	}
 }

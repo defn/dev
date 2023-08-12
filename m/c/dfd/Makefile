@@ -6,6 +6,9 @@ PKCS_KEY := sa-signer-pkcs8.pub
 
 k3s_url := $(shell cat ~/.kube/config | grep server: | awk '{print $$NF}')
 
+list:
+	true
+
 build:
 # remove everything
 	rm -rf ../../k/*/
