@@ -7,6 +7,15 @@ import (
 	rbac "k8s.io/api/rbac/v1"
 )
 
+kustomize: (#Transform & {
+	transformer: #TransformChicken
+
+	inputs: {
+		rocky: {}
+		rosie: {}
+	}
+}).outputs
+
 kustomize: "hello": #Kustomize & {
 	namespace: "default"
 

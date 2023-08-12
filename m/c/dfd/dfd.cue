@@ -18,8 +18,10 @@ env: (#Transform & {
 			"cert-manager-crds": [1, ""]
 			"cert-manager": [2, ""]
 			"cilium": [3, ""]
+			"kyverno": [3, ""]
 			"tailscale": [4, ""]
 			"traefik": [5, ""]
+			"coredns": [5, ""]
 
 			"\(cluster_type)-\(cluster_name)-vc0": [100, ""]
 			"\(cluster_type)-\(cluster_name)-vc1": [100, ""]
