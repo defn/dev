@@ -55,7 +55,8 @@ local_resource(
 
             # deploy k3d, argocd
             rm -vf ~/.kube/config*
-            env KUBECONFIG=$HOME/.kube/config this-k3d-create ${nme}
+            env KUBECONFIG=$HOME/.kube/config k3d cluster delete ${nme} || true
+            env KUBECONFIG=$HOME/.kube/config k3d cluster create ${nme} --config k3d.yaml
             docker update --restart=no k3d-${nme}-server-0
 
             (cd c/${nme} && make secrets)
