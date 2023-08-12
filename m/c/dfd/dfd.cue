@@ -18,7 +18,7 @@ env: (#Transform & {
 			"cert-manager-crds": [1, ""]
 			"cert-manager": [2, ""]
 			"cilium": [3, ""]
-			"kyverno": [3, ""]
+			"kyverno": [3, "", "ServerSideApply=true"]
 			"tailscale": [4, ""]
 			"traefik": [5, ""]
 			"coredns": [5, ""]
@@ -43,14 +43,12 @@ env: (#Transform & {
 		}
 		"\(cluster_type)-\(cluster_name)-vc0": {
 			bootstrap: {
-				"cert-manager-crds": [1, ""]
-				"cert-manager": [2, ""]
+			"kyverno": [3, "", "ServerSideApply=true"]
 			}
 		}
 		"\(cluster_type)-\(cluster_name)-vc1": {
 			bootstrap: {
-				"cert-manager-crds": [1, ""]
-				"cert-manager": [2, ""]
+			"kyverno": [3, "", "ServerSideApply=true"]
 			}
 		}
 	}

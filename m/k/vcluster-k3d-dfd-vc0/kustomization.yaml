@@ -6,48 +6,28 @@ helmCharts:
   - releaseName: bootstrap
     valuesInline:
       anyResources:
-        cert-manager-crds: |
+        kyverno: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
           metadata:
             namespace: argocd
-            name: vcluster-k3d-dfd-vc0-cert-manager-crds
+            name: vcluster-k3d-dfd-vc0-kyverno
             annotations:
-              argocd.argoproj.io/sync-wave: "1"
+              argocd.argoproj.io/sync-wave: "3"
           spec:
             project: default
             destination:
               name: vcluster-k3d-dfd-vc0
             source:
               repoURL: https://github.com/defn/dev
-              path: m/k/r/vcluster-k3d-dfd-vc0-cert-manager-crds
+              path: m/k/r/vcluster-k3d-dfd-vc0-kyverno
               targetRevision: main
             syncPolicy:
               automated:
                 prune: true
                 selfHeal: true
-              syncOptions: []
-        cert-manager: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: vcluster-k3d-dfd-vc0-cert-manager
-            annotations:
-              argocd.argoproj.io/sync-wave: "2"
-          spec:
-            project: default
-            destination:
-              name: vcluster-k3d-dfd-vc0
-            source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/vcluster-k3d-dfd-vc0-cert-manager
-              targetRevision: main
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
+              syncOptions:
+                - ServerSideApply=true
     name: any-resource
     version: 0.1.0
     repo: https://kiwigrid.github.io
