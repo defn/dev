@@ -117,19 +117,3 @@ resource "coder_app" "temporal" {
     threshold = 6
   }
 }
-
-resource "coder_app" "argocd" {
-  agent_id     = coder_agent.main.id
-  slug         = "argocd"
-  display_name = "argocd"
-  url          = "http://localhost:8080"
-  icon         = "/icon/code.svg"
-  subdomain    = true
-  share        = "owner"
-
-  healthcheck {
-    url       = "http://localhost:8080"
-    interval  = 5
-    threshold = 6
-  }
-}
