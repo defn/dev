@@ -1124,6 +1124,13 @@ kustomize: "tailscale": #Kustomize & {
 				readOnly: true
 			}
 		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/volumes/0"
+			value: {
+				name: "not-used"
+				secret: secretName: "not-used"
+			}
+		}, {
 			op:    "add"
 			path:  "/spec/template/spec/volumes/1"
 			value: {
