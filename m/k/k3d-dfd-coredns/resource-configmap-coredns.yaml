@@ -1,0 +1,12 @@
+#ManagedBy: cue
+
+metadata:
+  name: coredns-custom
+  namespace: kube-system
+data:
+  ts.net.server: |2-
+      ts.net {
+        forward . 100.100.100.100
+       }
+kind: ConfigMap
+apiVersion: v1
