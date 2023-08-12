@@ -164,7 +164,7 @@ spec:
           readOnly: true
       serviceAccountName: operator
       volumes:
-      - name: oauth
+      - name: not-used
         secret:
           secretName: not-used
       - name: oauth
