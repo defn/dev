@@ -156,6 +156,9 @@ spec:
             cpu: 500m
             memory: 100Mi
         volumeMounts:
+        - mountPath: /not-used
+          name: not-used
+          readOnly: true
         - mountPath: /oauth
           name: oauth
           readOnly: true
@@ -164,3 +167,6 @@ spec:
       - name: oauth
         secret:
           secretName: not-used
+      - name: oauth
+        secret:
+          secretName: oauth-operator

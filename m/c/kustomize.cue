@@ -1107,6 +1107,29 @@ kustomize: "tailscale": #Kustomize & {
 			op:    "replace"
 			path:  "/spec/template/spec/containers/0/env/2/value"
 			value: "dev"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/containers/0/volumeMounts/0"
+			value: {
+				mountPath: "/not-used"
+				name: "not-used"
+				readOnly: true
+			}
+		}, {
+			op:    "add"
+			path:  "/spec/template/spec/containers/0/volumeMounts/1"
+			value: {
+				mountPath: "/oauth"
+				name: "oauth"
+				readOnly: true
+			}
+		}, {
+			op:    "add"
+			path:  "/spec/template/spec/volumes/1"
+			value: {
+				name: "oauth"
+				secret: secretName: "oauth-operator"
+			}
 		}]
 	}
 }
