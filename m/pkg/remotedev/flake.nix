@@ -1,7 +1,7 @@
 {
   inputs = {
     coder.url = github:defn/dev/pkg-coder-2.0.2-1?dir=m/pkg/coder;
-    code-server.url = github:defn/dev/pkg-code-server-2.32.1-1?dir=m/pkg/code-server;
+    codeserver.url = github:defn/dev/pkg-code-server-2.32.1-1?dir=m/pkg/codeserver;
   };
 
   outputs = inputs: inputs.coder.inputs.pkg.main rec {
@@ -12,7 +12,7 @@
         let
           flakeInputs = with ctx.pkgs; [
             inputs.coder.defaultPackage.${ctx.system}
-            inputs.code-server.defaultPackage.${ctx.system}
+            inputs.codeserver.defaultPackage.${ctx.system}
           ];
         in
         flakeInputs;
