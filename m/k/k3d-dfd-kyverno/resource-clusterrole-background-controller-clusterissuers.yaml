@@ -5,6 +5,7 @@ kind: ClusterRole
 metadata:
   name: kyverno:generate-clusterissuers
   labels:
+    app.kubernetes.io/component: background-controller
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/name: kyverno
 rules:

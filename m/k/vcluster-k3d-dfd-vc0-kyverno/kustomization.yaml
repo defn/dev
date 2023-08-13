@@ -4,7 +4,7 @@ patches: []
 namespace: kyverno
 resources:
   - resource-namespace-kyverno.yaml
-  - resource-clusterrole-create-clusterissuers.yaml
+  - resource-clusterrole-background-controller-clusterissuers.yaml
 helmCharts:
   - releaseName: kyverno
     namespace: kyverno
