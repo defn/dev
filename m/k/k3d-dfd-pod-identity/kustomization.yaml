@@ -4,7 +4,7 @@ patches: []
 namespace: kube-system
 resources: []
 helmCharts:
-  - releaseName: pod-identity-webhook
+  - releaseName: pod-identity
     namespace: kube-system
     valuesInline:
       pki:

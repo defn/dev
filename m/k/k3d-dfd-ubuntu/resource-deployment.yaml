@@ -14,7 +14,6 @@ spec:
       labels:
         app: ubuntu
     spec:
-      restartPolicy: Never
       serviceAccountName: ubuntu
       containers:
         - name: ubuntu

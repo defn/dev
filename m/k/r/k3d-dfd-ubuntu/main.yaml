@@ -27,5 +27,4 @@ spec:
         - get-caller-identity
         image: amazon/aws-cli
         name: ubuntu
-      restartPolicy: Never
       serviceAccountName: ubuntu

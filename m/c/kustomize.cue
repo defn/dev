@@ -327,7 +327,7 @@ kustomize: "pod-identity": #KustomizeHelm & {
 	namespace: "kube-system"
 
 	helm: {
-		release: "pod-identity-webhook"
+		release: "pod-identity"
 		name:    "amazon-eks-pod-identity-webhook"
 		version: "1.2.0"
 		repo:    "https://jkroepke.github.io/helm-charts"
@@ -921,7 +921,6 @@ kustomize: "ubuntu": #Kustomize & {
 			template: {
 				metadata: labels: app: "ubuntu"
 				spec: {
-					restartPolicy: "Never"
 					serviceAccountName: "ubuntu"
 					containers: [{
 						name:  "ubuntu"
