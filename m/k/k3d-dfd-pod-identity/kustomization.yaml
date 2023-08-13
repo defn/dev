@@ -12,6 +12,9 @@ helmCharts:
           certificate:
             duration: 2160h0m0s
             renewBefore: 360h0m0s
+      config:
+        extraArgs:
+          - !!binary LS1pbi1jbHVzdGVyPXRydWU=
     name: amazon-eks-pod-identity-webhook
     version: 1.2.0
     repo: https://jkroepke.github.io/helm-charts
