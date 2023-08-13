@@ -343,9 +343,9 @@ kustomize: "pod-identity": #KustomizeHelm & {
 		metadata: {
 			name:      "pod-identity-webhook-amazon-eks-pod-identity-webhook"
 			namespace: "default"
-
-			roleRef: name: "admin"
 		}
+		
+		roleRef: name: "admin"
 	}
 }
 
