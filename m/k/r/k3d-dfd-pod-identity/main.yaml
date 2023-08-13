@@ -121,7 +121,6 @@ spec:
         - --token-mount-path=/var/run/secrets/eks.amazonaws.com/serviceaccount
         - --tls-cert=/etc/webhook/certs/tls.crt
         - --tls-key=/etc/webhook/certs/tls.key
-        - --in-cluster=true
         image: docker.io/amazon/amazon-eks-pod-identity-webhook:v0.4.0
         imagePullPolicy: IfNotPresent
         livenessProbe:
