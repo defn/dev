@@ -30,10 +30,14 @@ env: (#Transform & {
 			// network
 			"cilium": [4, ""]
 
-			// secrets, vpn
+			// aws, vpn
 			"tailscale": [5, ""]
 			"pod-identity": [5, ""]
-			"external-secrets": [5, ""]
+
+			// secrets
+			"external-secrets": [6, ""]
+
+			"ubuntu": [6, ""]
 
 			// secrets
 			"secrets": [20, ""]

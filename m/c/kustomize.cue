@@ -907,3 +907,35 @@ kustomize: "sysbox": #Kustomize & {
 		}
 	}
 }
+
+kustomize: "ubuntu": #Kustomize & {
+	resource: "deployment": {
+		apiVersion: "apps/v1"
+		kind:       "Deployment"
+		metadata: name: "ubuntu"
+		spec: {
+			replicas: 1
+			selector: matchLabels: app: "ubuntu"
+			template: {
+				metadata: labels: app: "ubuntu"
+				spec: {
+					serviceAccountName: "ubuntu"
+					containers: [{
+						name:  "ubuntu"
+						image: "amazon/aws-cli"
+						args: ["sts", "get-caller-identity"]
+					}]
+				}
+			}
+		}
+	}
+
+	resource: "serviceaccount": {
+		apiVersion: "v1"
+		kind:       "ServiceAccount"
+		metadata: {
+			name: "ubuntu"
+			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::510430971399:role/ro"
+		}
+	}
+}
