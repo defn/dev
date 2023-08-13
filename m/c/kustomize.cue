@@ -336,17 +336,6 @@ kustomize: "pod-identity": #KustomizeHelm & {
 			pki: certManager: certificate: renewBefore: "360h0m0s"
 		}
 	}
-
-	psm: "clusterrolebinding-piw": {
-		apiVersion: "rbac.authorization.k8s.io/v1"
-		kind: "ClusterRoleBinding"
-		metadata: {
-			name:      "pod-identity-webhook-amazon-eks-pod-identity-webhook"
-			namespace: "default"
-		}
-		
-		roleRef: name: "admin"
-	}
 }
 
 // gen_karpenter.sh

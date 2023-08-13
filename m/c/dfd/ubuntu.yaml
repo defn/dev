@@ -2,6 +2,8 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: ubuntu
+  annotations:
+    eks.amazonaws.com/role-arn: "arn:aws:iam::510430971399:role/ro"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -16,11 +18,9 @@ spec:
     metadata:
       labels:
         app: ubuntu
-      annotations:
-        eks.amazonaws.com/role-arn: "arn:aws:iam::510430971399:role/ro"
     spec:
       serviceAccountName: ubuntu
       containers:
       - name: ubuntu
         image: ubuntu
-        command: ["bash", "-c", "export DEBIAN_FRONTEND=noninteractive; apt update; apt install -y tar awscli; aws sts get-caller-identity; sleep infinity"]
+        command: ["bash", "-c", "export DEBIAN_FRONTEND=noninteractive; env | sort; apt update; apt install -y awscli; env | sort; aws sts get-caller-identity; sleep infinity"]

@@ -1,7 +1,6 @@
 #ManagedBy: cue
 
-patches:
-  - path: patch-clusterrolebinding-piw.yaml
+patches: []
 namespace: default
 resources: []
 helmCharts:
