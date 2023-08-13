@@ -513,6 +513,10 @@ kustomize: "cert-manager": #KustomizeHelm & {
 		}
 	}
 
+	resource: "cert-manager-crds": {
+		url: "https://github.com/cert-manager/cert-manager/releases/download/v1.12.3/cert-manager.crds.yaml"
+	}
+	
 	resource: "namespace-cert-manager": core.#Namespace & {
 		apiVersion: "v1"
 		kind:       "Namespace"
