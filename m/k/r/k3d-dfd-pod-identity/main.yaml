@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/version: v0.4.0
     helm.sh/chart: amazon-eks-pod-identity-webhook-1.2.0
   name: pod-identity-webhook-amazon-eks-pod-identity-webhook
-  namespace: default
+  namespace: kube-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -47,7 +47,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: pod-identity-webhook-amazon-eks-pod-identity-webhook
-  namespace: default
+  namespace: kube-system
 ---
 apiVersion: v1
 kind: Service
@@ -59,7 +59,7 @@ metadata:
     app.kubernetes.io/version: v0.4.0
     helm.sh/chart: amazon-eks-pod-identity-webhook-1.2.0
   name: pod-identity-webhook-amazon-eks-pod-identity-webhook
-  namespace: default
+  namespace: kube-system
 spec:
   ports:
   - name: https
@@ -85,7 +85,7 @@ metadata:
     app.kubernetes.io/version: v0.4.0
     helm.sh/chart: amazon-eks-pod-identity-webhook-1.2.0
   name: pod-identity-webhook-amazon-eks-pod-identity-webhook
-  namespace: default
+  namespace: kube-system
 spec:
   replicas: 1
   selector:
@@ -105,7 +105,7 @@ spec:
         - --aws-default-region=us-east-1
         - --in-cluster=false
         - --logtostderr
-        - --namespace=default
+        - --namespace=kube-system
         - --metrics-port=9999
         - --port=8443
         - --sts-regional-endpoint=true
@@ -156,14 +156,14 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: pod-identity-webhook-amazon-eks-pod-identity-webhook
-  namespace: default
+  namespace: kube-system
 spec:
-  commonName: pod-identity-webhook-amazon-eks-pod-identity-webhook.default.svc
+  commonName: pod-identity-webhook-amazon-eks-pod-identity-webhook.kube-system.svc
   dnsNames:
   - pod-identity-webhook-amazon-eks-pod-identity-webhook
-  - pod-identity-webhook-amazon-eks-pod-identity-webhook.default
-  - pod-identity-webhook-amazon-eks-pod-identity-webhook.default.svc
-  - pod-identity-webhook-amazon-eks-pod-identity-webhook.default.svc.local
+  - pod-identity-webhook-amazon-eks-pod-identity-webhook.kube-system
+  - pod-identity-webhook-amazon-eks-pod-identity-webhook.kube-system.svc
+  - pod-identity-webhook-amazon-eks-pod-identity-webhook.kube-system.svc.local
   duration: 2160h0m0s
   issuerRef:
     kind: Issuer
@@ -181,7 +181,7 @@ metadata:
     app.kubernetes.io/version: v0.4.0
     helm.sh/chart: amazon-eks-pod-identity-webhook-1.2.0
   name: pod-identity-webhook-amazon-eks-pod-identity-webhook
-  namespace: default
+  namespace: kube-system
 spec:
   selfSigned: {}
 ---
@@ -189,7 +189,7 @@ apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
   annotations:
-    cert-manager.io/inject-ca-from: default/pod-identity-webhook-amazon-eks-pod-identity-webhook
+    cert-manager.io/inject-ca-from: kube-system/pod-identity-webhook-amazon-eks-pod-identity-webhook
   name: pod-identity-webhook-amazon-eks-pod-identity-webhook
 webhooks:
 - admissionReviewVersions:
@@ -197,7 +197,7 @@ webhooks:
   clientConfig:
     service:
       name: pod-identity-webhook-amazon-eks-pod-identity-webhook
-      namespace: default
+      namespace: kube-system
       path: /mutate
       port: 8443
   failurePolicy: Ignore

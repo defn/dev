@@ -1,11 +1,11 @@
 #ManagedBy: cue
 
 patches: []
-namespace: default
+namespace: kube-system
 resources: []
 helmCharts:
   - releaseName: pod-identity-webhook
-    namespace: default
+    namespace: kube-system
     valuesInline:
       pki:
         certManager:
