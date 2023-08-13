@@ -926,9 +926,9 @@ kustomize: "ubuntu": #Kustomize & {
 				spec: {
 					serviceAccountName: "ubuntu"
       				restartPolicy: "Never"
+					runtimeClassName: "sysbox-runc"
 					containers: [{
 						name:  "ubuntu"
-						runtimeClassName: "sysbox-runc"
 						image: "amazon/aws-cli"
 						args: ["sts", "get-caller-identity"]
 					}]
