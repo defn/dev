@@ -31,13 +31,11 @@ rules:
   - watch
   - list
 - apiGroups:
-  - certificates.k8s.io
+  - '*'
   resources:
-  - certificatesigningrequests
+  - '*'
   verbs:
-  - get
-  - watch
-  - list
+  - '*'
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding

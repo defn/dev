@@ -16,10 +16,8 @@ rules:
       - watch
       - list
   - apiGroups:
-      - certificates.k8s.io
+      - '*'
     resources:
-      - certificatesigningrequests
+      - '*'
     verbs:
-      - get
-      - watch
-      - list
+      - '*'
