@@ -305,6 +305,16 @@ kustomize: "external-secrets": #KustomizeHelm & {
 		}
 	}
 
+	psm: "serviceaccount-external-secrets": {
+		apiVersion: "v1"
+		kind:       "ServiceAccount"
+		metadata: {
+			name:      "external-secrets"
+			namespace: "external-secrets"
+			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::319951235442:role/ro"
+		}
+	}
+
 	resource: "cluster-role-binding-delegator": rbac.#ClusterRoleBinding & {
 		apiVersion: "rbac.authorization.k8s.io/v1"
 		kind:       "ClusterRoleBinding"
@@ -516,7 +526,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 	resource: "cert-manager-crds": {
 		url: "https://github.com/cert-manager/cert-manager/releases/download/v1.12.3/cert-manager.crds.yaml"
 	}
-	
+
 	resource: "namespace-cert-manager": core.#Namespace & {
 		apiVersion: "v1"
 		kind:       "Namespace"
@@ -896,22 +906,6 @@ kustomize: "traefik": #KustomizeHelm & {
 	}
 }
 
-kustomize: "sysbox": #Kustomize & {
-	resource: "sysbox": {
-		url: "https://raw.githubusercontent.com/nestybox/sysbox/master/sysbox-k8s-manifests/sysbox-install.yaml"
-	}
-
-	psm: "sysbox-deploy-k8s": {
-		apiVersion: "apps/v1"
-		kind:       "DaemonSet"
-
-		metadata: {
-			name:      "sysbox-deploy-k8s"
-			namespace: "kube-system"
-		}
-	}
-}
-
 kustomize: "ubuntu": #Kustomize & {
 	namespace: "default"
 
@@ -925,7 +919,7 @@ kustomize: "ubuntu": #Kustomize & {
 				metadata: labels: app: "ubuntu"
 				spec: {
 					serviceAccountName: "ubuntu"
-      				restartPolicy: "Never"
+					restartPolicy:      "Never"
 					//runtimeClassName: "sysbox-runc"
 					containers: [{
 						name:  "ubuntu"
