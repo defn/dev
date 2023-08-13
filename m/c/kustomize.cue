@@ -334,6 +334,9 @@ kustomize: "pod-identity": #KustomizeHelm & {
 		values: {
 			pki: certManager: certificate: duration:    "2160h0m0s"
 			pki: certManager: certificate: renewBefore: "360h0m0s"
+			config: extraArgs: [
+				'--in-cluster=true'
+			]
 		}
 	}
 }
