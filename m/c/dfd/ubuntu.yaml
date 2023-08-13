@@ -22,5 +22,5 @@ spec:
       serviceAccountName: ubuntu
       containers:
       - name: ubuntu
-        image: ubuntu
-        command: ["bash", "-c", "export DEBIAN_FRONTEND=noninteractive; env | sort; apt update; apt install -y awscli; env | sort; aws sts get-caller-identity; sleep infinity"]
+        image: amazon/aws-cli
+        args: ["sts", "get-caller-identity"]
