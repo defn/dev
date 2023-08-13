@@ -1,3 +1,18 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: defn-run-wildcard
+  namespace: traefik
+spec:
+  dnsNames:
+  - '*.defn.run'
+  - '*.default.defn.run'
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: zerossl-production
+  secretName: defn-run-wildcard
+---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
