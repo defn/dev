@@ -208,4 +208,25 @@ kustomize: "shared": #Kustomize & {
 			}]
 		}
 	}
+
+	resource: "certificate-defn-run-wildcard-traefik": {
+		apiVersion: "cert-manager.io/v1"
+		kind:       "Certificate"
+		metadata: {
+			name:      "defn-run-wildcard"
+			namespace: "traefik"
+		}
+		spec: {
+			secretName: "defn-run-wildcard"
+			dnsNames: [
+				"*.defn.run",
+				"*.default.defn.run",
+			]
+			issuerRef: {
+				name:  _issuer
+				kind:  "ClusterIssuer"
+				group: "cert-manager.io"
+			}
+		}
+	}
 }
