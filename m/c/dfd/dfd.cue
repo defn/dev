@@ -33,8 +33,7 @@ env: (#Transform & {
 			// aws
 			"pod-identity": [5, ""]
 
-			// secrets, vpn
-			"tailscale": [6, ""]
+			// secrets
 			"external-secrets": [6, ""]
 			"ubuntu": [6, ""]
 
@@ -44,6 +43,7 @@ env: (#Transform & {
 			// shared, external
 			"shared": [30, ""]
 			"external-dns": [30, ""]
+			"tailscale": [30, ""]
 
 			// functions
 			"knative": [40, ""]
