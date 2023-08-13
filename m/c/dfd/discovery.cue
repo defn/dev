@@ -1,8 +1,10 @@
 package c
 
+discovery_url: string
+
 discovery: {
-	issuer:                 "https://raw.githubusercontent.com/amanibhavam/amanibhavam.github.io/master/v8"
-	jwks_uri:               "https://raw.githubusercontent.com/amanibhavam/amanibhavam.github.io/master/v8/.well-known/keys.json"
+	issuer:                 discovery_url
+	jwks_uri:               "\(discovery_url)/v1/jwks"
 	authorization_endpoint: "urn:kubernetes:programmatic_authorization"
 	response_types_supported: [
 		"id_token",
