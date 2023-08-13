@@ -4,11 +4,13 @@ metadata:
   annotations:
     eks.amazonaws.com/role-arn: arn:aws:iam::510430971399:role/ro
   name: ubuntu
+  namespace: default
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ubuntu
+  namespace: default
 spec:
   replicas: 1
   selector:

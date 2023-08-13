@@ -909,6 +909,8 @@ kustomize: "sysbox": #Kustomize & {
 }
 
 kustomize: "ubuntu": #Kustomize & {
+	namespace: "default"
+
 	resource: "deployment": {
 		apiVersion: "apps/v1"
 		kind:       "Deployment"
