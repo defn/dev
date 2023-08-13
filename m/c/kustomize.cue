@@ -916,12 +916,12 @@ kustomize: "ubuntu": #Kustomize & {
 		kind:       "Deployment"
 		metadata: name: "ubuntu"
 		spec: {
-			restartPolicy: "Never"
 			replicas: 1
 			selector: matchLabels: app: "ubuntu"
 			template: {
 				metadata: labels: app: "ubuntu"
 				spec: {
+					restartPolicy: "Never"
 					serviceAccountName: "ubuntu"
 					containers: [{
 						name:  "ubuntu"
