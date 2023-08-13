@@ -24,13 +24,9 @@ build:
 
 secrets:
 	$(MAKE) clean
-	$(MAKE) jwks.json
 	$(MAKE) k3d-secrets
 
 clean:
-	rm -rf amazon-eks-pod-identity-webhook
-	rm -f sa-signer-pkcs8.pub sa-signer.key sa-signer.key.pub
-	rm -f jwks.json
 	rm -rf openid system.admin.key system.admin.pem system.ca.pem
 
 openid: openid/.well-known/openid-configuration
@@ -57,9 +53,3 @@ k3d-secrets: ca.key ca.crt openid/.well-known/openid-configuration
 
 ca.key ca.crt:
 	step certificate create cilium-ca ca.crt ca.key --profile root-ca --not-after 8760h --no-password --insecure --kty RSA --size 4096 --force
-
-jwks.json:
-	ssh-keygen -N "" -t rsa -b 2048 -f $(PRIV_KEY) -m pem
-	ssh-keygen -e -m PKCS8 -f $(PUB_KEY) > $(PKCS_KEY)
-	git clone https://github.com/aws/amazon-eks-pod-identity-webhook
-	(cd amazon-eks-pod-identity-webhook && go run ./hack/self-hosted/main.go -key ../$(PKCS_KEY)) | jq '.keys += [.keys[0]] | .keys[1].kid = ""' > jwks.json
