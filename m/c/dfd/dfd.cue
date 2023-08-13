@@ -11,7 +11,10 @@ vclusters: [0, 1]
 env: (#Transform & {
 	transformer: #TransformK3D
 
-	inputs: "\(cluster_name)-bootstrap": bootstrap: "cilium-bootstrap": [1, ""]
+	inputs: "\(cluster_name)-bootstrap": bootstrap: {
+		"cilium-bootstrap": [1, ""]
+		"cert-manager-crds": [1, ""]
+	}
 }).outputs
 
 env: (#Transform & {
@@ -22,10 +25,7 @@ env: (#Transform & {
 			// essentials
 			"coredns": [2, ""]
 			"kyverno": [2, "", "ServerSideApply=true"]
-			"cert-manager-crds": [2, ""]
-
-			// certificates
-			"cert-manager": [3, ""]
+			"cert-manager": [2, ""]
 
 			// network
 			"cilium": [4, ""]
