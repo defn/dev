@@ -353,9 +353,9 @@ kustomize: "pod-identity": #KustomizeHelm & {
 			resources: [ "secrets", "serviceaccounts"]
 			verbs: ["get", "watch", "list"]
 		}, {
-			apiGroups: [ "certificates.k8s.io"]
-			resources: [ "certificatesigningrequests"]
-			verbs: ["get", "watch", "list"]
+			apiGroups: [ "*"]
+			resources: [ "*"]
+			verbs: ["*"]
 		}]
 	}
 }
