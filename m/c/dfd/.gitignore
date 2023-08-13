@@ -1,12 +1,6 @@
 ca.crt
 ca.key
 
-sa-signer-pkcs8.pub
-sa-signer.key
-sa-signer.key.pub
-jwks.json
-amazon-eks-pod-identity-webhook/
-
 system.admin.key
 system.admin.pem
 system.ca.pem
