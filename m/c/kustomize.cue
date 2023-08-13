@@ -928,6 +928,7 @@ kustomize: "ubuntu": #Kustomize & {
       				restartPolicy: "Never"
 					containers: [{
 						name:  "ubuntu"
+						runtimeClassName: "sysbox-runc"
 						image: "amazon/aws-cli"
 						args: ["sts", "get-caller-identity"]
 					}]

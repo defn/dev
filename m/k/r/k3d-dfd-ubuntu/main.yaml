@@ -24,5 +24,6 @@ spec:
         - get-caller-identity
         image: amazon/aws-cli
         name: ubuntu
+        runtimeClassName: sysbox-runc
       restartPolicy: Never
       serviceAccountName: ubuntu
