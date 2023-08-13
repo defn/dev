@@ -4,5 +4,6 @@ metadata:
   name: dev
 spec:
   provider:
-    region: us-west-2
-    service: SecretsManager
+    aws:
+      region: us-west-2
+      service: SecretsManager

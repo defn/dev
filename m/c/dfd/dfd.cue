@@ -103,7 +103,7 @@ kustomize: "secrets": #Kustomize & {
 		apiVersion: "external-secrets.io/v1beta1"
 		kind:       "ClusterSecretStore"
 		metadata: name: "dev"
-		spec: provider: {
+		spec: provider: aws: {
 			service: "SecretsManager"
 			region:  "us-west-2"
 		}
