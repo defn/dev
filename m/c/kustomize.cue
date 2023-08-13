@@ -311,7 +311,7 @@ kustomize: "external-secrets": #KustomizeHelm & {
 		metadata: {
 			name:      "external-secrets"
 			namespace: "external-secrets"
-			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::319951235442:role/ro"
+			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::510430971399:role/ro"
 		}
 	}
 
