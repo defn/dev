@@ -140,7 +140,7 @@ helmCharts:
             namespace: argocd
             name: k3d-dfd-external-secrets
             annotations:
-              argocd.argoproj.io/sync-wave: "6"
+              argocd.argoproj.io/sync-wave: "10"
           spec:
             project: default
             destination:
@@ -161,7 +161,7 @@ helmCharts:
             namespace: argocd
             name: k3d-dfd-ubuntu
             annotations:
-              argocd.argoproj.io/sync-wave: "6"
+              argocd.argoproj.io/sync-wave: "10"
           spec:
             project: default
             destination:
@@ -350,7 +350,7 @@ helmCharts:
             namespace: argocd
             name: k3d-dfd-vc0
             annotations:
-              argocd.argoproj.io/sync-wave: "100"
+              argocd.argoproj.io/sync-wave: "8"
           spec:
             project: default
             destination:
@@ -371,7 +371,7 @@ helmCharts:
             namespace: argocd
             name: k3d-dfd-vc1
             annotations:
-              argocd.argoproj.io/sync-wave: "100"
+              argocd.argoproj.io/sync-wave: "8"
           spec:
             project: default
             destination:
@@ -392,7 +392,7 @@ helmCharts:
             namespace: argocd
             name: k3d-dfd-vcluster-k3d-dfd-vc0
             annotations:
-              argocd.argoproj.io/sync-wave: "200"
+              argocd.argoproj.io/sync-wave: "9"
           spec:
             project: default
             destination:
@@ -413,7 +413,7 @@ helmCharts:
             namespace: argocd
             name: k3d-dfd-vcluster-k3d-dfd-vc1
             annotations:
-              argocd.argoproj.io/sync-wave: "200"
+              argocd.argoproj.io/sync-wave: "9"
           spec:
             project: default
             destination:

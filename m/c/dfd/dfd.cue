@@ -34,8 +34,8 @@ env: (#Transform & {
 			"pod-identity": [5, ""]
 
 			// secrets
-			"external-secrets": [6, ""]
-			"ubuntu": [6, ""]
+			"external-secrets": [10, ""]
+			"ubuntu": [10, ""]
 
 			// secrets
 			"secrets": [20, ""]
@@ -54,12 +54,12 @@ env: (#Transform & {
 			"argo-cd": [50, ""]
 
 			// vclluster
-			"\(cluster_type)-\(cluster_name)-vc0": [100, ""]
-			"\(cluster_type)-\(cluster_name)-vc1": [100, ""]
+			"\(cluster_type)-\(cluster_name)-vc0": [8, ""]
+			"\(cluster_type)-\(cluster_name)-vc1": [8, ""]
 
 			// vcluster workloads
-			"vcluster-\(cluster_type)-\(cluster_name)-vc0": [200, ""]
-			"vcluster-\(cluster_type)-\(cluster_name)-vc1": [200, ""]
+			"vcluster-\(cluster_type)-\(cluster_name)-vc0": [9, ""]
+			"vcluster-\(cluster_type)-\(cluster_name)-vc1": [9, ""]
 		}
 	}
 }).outputs
