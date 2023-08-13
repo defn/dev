@@ -1,0 +1,6 @@
+#ManagedBy: cue
+
+patches: []
+resources:
+  - resource-deployment.yaml
+  - resource-serviceaccount.yaml

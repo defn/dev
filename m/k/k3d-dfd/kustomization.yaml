@@ -161,7 +161,7 @@ helmCharts:
             namespace: argocd
             name: k3d-dfd-external-secrets
             annotations:
-              argocd.argoproj.io/sync-wave: "5"
+              argocd.argoproj.io/sync-wave: "6"
           spec:
             project: default
             destination:
@@ -169,6 +169,27 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               path: m/k/r/k3d-dfd-external-secrets
+              targetRevision: main
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        ubuntu: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-dfd-ubuntu
+            annotations:
+              argocd.argoproj.io/sync-wave: "6"
+          spec:
+            project: default
+            destination:
+              name: k3d-dfd
+            source:
+              repoURL: https://github.com/defn/dev
+              path: m/k/r/k3d-dfd-ubuntu
               targetRevision: main
             syncPolicy:
               automated:

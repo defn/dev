@@ -128,7 +128,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "5"
+    argocd.argoproj.io/sync-wave: "6"
   name: k3d-dfd-external-secrets
   namespace: argocd
 spec:
@@ -306,6 +306,27 @@ spec:
   project: default
   source:
     path: m/k/r/k3d-dfd-traefik
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "6"
+  name: k3d-dfd-ubuntu
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-ubuntu
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
