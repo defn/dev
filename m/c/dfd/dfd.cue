@@ -26,6 +26,7 @@ env: (#Transform & {
 			"coredns": [2, ""]
 			"kyverno": [2, "", "ServerSideApply=true"]
 			"cert-manager": [2, ""]
+			"sysbox": [2, ""]
 
 			// network
 			"cilium": [4, ""]
