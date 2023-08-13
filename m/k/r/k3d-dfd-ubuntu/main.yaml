@@ -6,16 +6,13 @@ metadata:
   name: ubuntu
   namespace: default
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: batch/v1
+kind: Job
 metadata:
   name: ubuntu
   namespace: default
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: ubuntu
+  backoffLimit: 3
   template:
     metadata:
       labels:
@@ -27,4 +24,5 @@ spec:
         - get-caller-identity
         image: amazon/aws-cli
         name: ubuntu
+      restartPolicy: Never
       serviceAccountName: ubuntu

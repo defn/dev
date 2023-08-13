@@ -916,16 +916,16 @@ kustomize: "ubuntu": #Kustomize & {
 	namespace: "default"
 
 	resource: "deployment": {
-		apiVersion: "apps/v1"
-		kind:       "Deployment"
+		apiVersion: "batch/v1"
+		kind:       "Job"
 		metadata: name: "ubuntu"
 		spec: {
-			replicas: 1
-			selector: matchLabels: app: "ubuntu"
+			backoffLimit: 3
 			template: {
 				metadata: labels: app: "ubuntu"
 				spec: {
 					serviceAccountName: "ubuntu"
+      				restartPolicy: "Never"
 					containers: [{
 						name:  "ubuntu"
 						image: "amazon/aws-cli"
