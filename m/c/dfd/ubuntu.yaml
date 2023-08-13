@@ -17,7 +17,7 @@ spec:
       labels:
         app: ubuntu
       annotations:
-        "eks.amazonaws.com/role-arn": "arn:aws:iam::510430971399:role/ro"
+        eks.amazonaws.com/role-arn: "arn:aws:iam::510430971399:role/ro"
     spec:
       serviceAccountName: ubuntu
       containers:
