@@ -189,7 +189,7 @@ kustomize: "shared": #Kustomize & {
 							keyID: "{{request.object.data.zerossl_eab_kid | base64_decode(@)}}"
 							keySecretRef: {
 								name: _issuer
-								key:  "zerossl-eab-hmac"
+								key:  "zerossl_eab_hmac"
 							}
 						}
 
@@ -199,7 +199,7 @@ kustomize: "shared": #Kustomize & {
 								email: "{{request.object.data.cloudflare_email | base64_decode(@)}}"
 								apiTokenSecretRef: {
 									name: _issuer
-									key:  "cloudflare-api-token"
+									key:  "cloudflare_api_token"
 								}
 							}
 						}]

@@ -33,7 +33,7 @@ spec:
                 keyID: '{{request.object.data.zerossl_eab_kid | base64_decode(@)}}'
                 keySecretRef:
                   name: zerossl-production
-                  key: zerossl-eab-hmac
+                  key: zerossl_eab_hmac
               solvers:
                 - selector: {}
                   dns01:
@@ -41,4 +41,4 @@ spec:
                       email: '{{request.object.data.cloudflare_email | base64_decode(@)}}'
                       apiTokenSecretRef:
                         name: zerossl-production
-                        key: cloudflare-api-token
+                        key: cloudflare_api_token
