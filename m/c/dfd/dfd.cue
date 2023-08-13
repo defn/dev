@@ -23,11 +23,16 @@ env: (#Transform & {
 			"kyverno": [2, "", "ServerSideApply=true"]
 			"cert-manager": [2, ""]
 
-			// network
-			"cilium": [4, ""]
-
 			// aws
 			"pod-identity": [5, ""]
+
+			// vcluster
+			"\(cluster_type)-\(cluster_name)-vc0": [8, ""]
+			"\(cluster_type)-\(cluster_name)-vc1": [8, ""]
+
+			// vcluster workloads
+			"vcluster-\(cluster_type)-\(cluster_name)-vc0": [9, ""]
+			"vcluster-\(cluster_type)-\(cluster_name)-vc1": [9, ""]
 
 			// secrets
 			"external-secrets": [10, ""]
@@ -48,16 +53,11 @@ env: (#Transform & {
 			// ingress
 			"traefik": [50, ""]
 
+			// network
+			"cilium": [60, ""]
+
 			// argocd
-			"argo-cd": [9, ""]
-
-			// vcluster
-			"\(cluster_type)-\(cluster_name)-vc0": [8, ""]
-			"\(cluster_type)-\(cluster_name)-vc1": [8, ""]
-
-			// vcluster workloads
-			"vcluster-\(cluster_type)-\(cluster_name)-vc0": [9, ""]
-			"vcluster-\(cluster_type)-\(cluster_name)-vc1": [9, ""]
+			"argo-cd": [100, ""]
 		}
 	}
 }).outputs
