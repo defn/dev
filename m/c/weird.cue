@@ -16,62 +16,6 @@ kustomize: (#Transform & {
 	}
 }).outputs
 
-kustomize: "hello": #Kustomize & {
-	namespace: "default"
-
-	_funcs: ["hello", "bye"]
-	_domain: "default.defn.run"
-
-	resource: "ingressroute-\(_domain)": {
-		apiVersion: "traefik.containo.us/v1alpha1"
-		kind:       "IngressRoute"
-		metadata: {
-			name:      _domain
-			namespace: "default"
-		}
-		spec: entryPoints: ["websecure"]
-		spec: routes: [{
-			match: "HostRegexp(`{subdomain:[a-z0-9-]+}.\(_domain)`)"
-			kind:  "Rule"
-			services: [{
-				name:      "kourier-internal"
-				namespace: "kourier-system"
-				kind:      "Service"
-				port:      80
-				scheme:    "http"
-			}]
-		}]
-	}
-
-	for f in _funcs {
-		resource: "kservice-\(f)": {
-			apiVersion: "serving.knative.dev/v1"
-			kind:       "Service"
-			metadata: {
-				//labels: "networking.knative.dev/visibility": "cluster-local"
-				name:      f
-				namespace: "default"
-			}
-			spec: {
-				template: spec: {
-					containerConcurrency: 0
-					containers: [{
-						name:  "whoami"
-						image: "containous/whoami:latest"
-						ports: [{
-							containerPort: 80
-						}]
-					}]
-				}
-				traffic: [{
-					latestRevision: true
-					percent:        100
-				}]
-			}
-		}
-	}
-}
-
 //kustomize: "events": #Kustomize & {
 //	namespace: "default"
 //
