@@ -46,7 +46,7 @@ options:
       - arg: --flannel-backend=none
         nodeFilters:
           - server:0
-      - arg: --kube-apiserver-arg=--service-account-issuer=https://raw.githubusercontent.com/amanibhavam/amanibhavam.github.io/master/v9/openid
+      - arg: --kube-apiserver-arg=--service-account-issuer=https://raw.githubusercontent.com/defn/dev/main/m/c/dfd/openid
         nodeFilters:
           - server:0
       - arg: --kube-apiserver-arg=--api-audiences=https://kubernetes.default.svc.cluster.local,sts.amazonaws.com
