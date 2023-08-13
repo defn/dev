@@ -157,7 +157,6 @@ local_resource(
             done
 
             while true; do 
-                break
                 if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 20 k3d-${nme}; then break; fi
                 sleep 30
             done
