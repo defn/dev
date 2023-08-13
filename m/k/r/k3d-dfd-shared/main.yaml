@@ -1,16 +1,3 @@
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: default-admin
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-- kind: ServiceAccount
-  name: default
-  namespace: default
----
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
@@ -19,11 +6,11 @@ metadata:
 spec:
   dataFrom:
   - extract:
-      key: dev/amanibhavam-global
+      key: k3d-dfd
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
-    name: dev
+    name: dfd
   target:
     creationPolicy: Owner
     name: zerossl-production
@@ -36,11 +23,11 @@ metadata:
 spec:
   dataFrom:
   - extract:
-      key: dev/amanibhavam-global
+      key: k3d-dfd
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
-    name: dev
+    name: dfd
   target:
     creationPolicy: Owner
     name: external-dns

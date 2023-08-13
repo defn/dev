@@ -1,11 +1,7 @@
 package c
 
-import (
-	rbac "k8s.io/api/rbac/v1"
-)
-
-cluster_name: "dfd"
 cluster_type: "k3d"
+cluster_name: "dfd"
 vclusters: [0, 1]
 
 env: (#Transform & {
@@ -102,7 +98,7 @@ kustomize: "secrets": #Kustomize & {
 	resource: "cluster-secret-store": {
 		apiVersion: "external-secrets.io/v1beta1"
 		kind:       "ClusterSecretStore"
-		metadata: name: "dev"
+		metadata: name: cluster_name
 		spec: provider: aws: {
 			service: "SecretsManager"
 			region:  "us-west-2"
@@ -122,10 +118,10 @@ kustomize: "shared": #Kustomize & {
 			refreshInterval: "1h"
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: "dev"
+				name: cluster_name
 			}
 			dataFrom: [{
-				extract: key: "dev/amanibhavam-global"
+				extract: key: "\(cluster_type)-\(cluster_name)"
 			}]
 			target: {
 				name:           _issuer
@@ -145,10 +141,10 @@ kustomize: "shared": #Kustomize & {
 			refreshInterval: "1h"
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: "dev"
+				name: cluster_name
 			}
 			dataFrom: [{
-				extract: key: "dev/amanibhavam-global"
+				extract: key: "\(cluster_type)-\(cluster_name)"
 			}]
 			target: {
 				name:           "external-dns"
@@ -211,21 +207,5 @@ kustomize: "shared": #Kustomize & {
 				}
 			}]
 		}
-	}
-
-	resource: "cluster-role-binding-admin": rbac.#ClusterRoleBinding & {
-		apiVersion: "rbac.authorization.k8s.io/v1"
-		kind:       "ClusterRoleBinding"
-		metadata: name: "default-admin"
-		roleRef: {
-			apiGroup: "rbac.authorization.k8s.io"
-			kind:     "ClusterRole"
-			name:     "cluster-admin"
-		}
-		subjects: [{
-			kind:      "ServiceAccount"
-			name:      "default"
-			namespace: "default"
-		}]
 	}
 }

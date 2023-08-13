@@ -7,6 +7,8 @@ PKCS_KEY := sa-signer-pkcs8.pub
 k3s_url := $(shell cat ~/.kube/config | grep server: | awk '{print $$NF}')
 
 build:
+# fmt
+	cue fmt .. .
 # remove everything
 	rm -rf ../../k/*/
 	rm -rf ../../e/*.yaml
