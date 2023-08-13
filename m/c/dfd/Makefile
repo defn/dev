@@ -6,9 +6,6 @@ PKCS_KEY := sa-signer-pkcs8.pub
 
 k3s_url := $(shell cat ~/.kube/config | grep server: | awk '{print $$NF}')
 
-list:
-	true
-
 build:
 # remove everything
 	rm -rf ../../k/*/
@@ -21,6 +18,9 @@ build:
 	(cd ../../k && b run outputs_release__update)
 # add generated to git
 	../make_add_generated.sh
+
+list:
+	true
 
 secrets:
 	$(MAKE) clean
