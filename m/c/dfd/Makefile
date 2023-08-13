@@ -37,8 +37,7 @@ openid/.well-known/openid-configuration:
 	docker exec k3d-dfd-server-0 cat /etc/rancher/k3s/k3s.yaml | awk -F': ' '/client-certificate-data/ {print $$2}' | base64 -d > system.admin.pem && chmod 600 system.admin.pem
 	docker exec k3d-dfd-server-0 cat /etc/rancher/k3s/k3s.yaml | awk -F': ' '/client-key-data/ {print $$2}' | base64 -d > system.admin.key && chmod 600 system.admin.key
 	docker exec k3d-dfd-server-0 cat /etc/rancher/k3s/k3s.yaml  |awk -F': ' '/certificate-authority-data/ {print $$2}' | base64 -d > system.ca.pem && chmod 600 system.ca.pem
-	openssl x509 -in system.ca.pem -fingerprint -noout | awk -F'=' 'gsub(/:/,"",$$0) { print $$2 }' > openid/thumbprint && chmod 600 openid/thumbprint
-	curl -sSL --cert system.admin.pem --key system.admin.key --cacert system.ca.pem -k ${k3s_url}/openid/v1/jwks | jq . > openid/v1/jwks
+	curl -sSL --cert system.admin.pem --key system.admin.key --cacert system.ca.pem ${k3s_url}/openid/v1/jwks | jq . > openid/v1/jwks
 	rm -vf system.*
 	cue export -e discovery --out=json | jq . > openid/.well-known/openid-configuration
 
