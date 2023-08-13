@@ -52,15 +52,6 @@ options:
       - arg: --kube-apiserver-arg=--api-audiences=https://kubernetes.default.svc.cluster.local,sts.amazonaws.com
         nodeFilters:
           - server:0
-  #      - arg: --kube-apiserver-arg=--service-account-key-file=/var/lib/rancher/k3s/server/tls/service.key
-  #        nodeFilters:
-  #          - server:0
-  #      - arg: --kube-apiserver-arg=--service-account-key-file=/var/lib/rancher/k3s/server/tls2/sa-signer-pkcs8.pub
-  #        nodeFilters:
-  #          - server:0
-  #      - arg: --kube-apiserver-arg=--service-account-signing-key-file=/var/lib/rancher/k3s/server/tls2/sa-signer.key
-  #        nodeFilters:
-  #          - server:0
   #      - arg: --tls-san=${DEFN_DEV_HOST_NAME}
   #        nodeFilters:
   #          - server:0
