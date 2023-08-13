@@ -1,6 +1,0 @@
-#ManagedBy: cue
-
-patches:
-  - path: patch-sysbox-deploy-k8s.yaml
-resources:
-  - https://raw.githubusercontent.com/nestybox/sysbox/master/sysbox-k8s-manifests/sysbox-install.yaml
