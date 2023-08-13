@@ -3,4 +3,6 @@ kind: ClusterSecretStore
 metadata:
   name: dev
 spec:
-  provider: {}
+  provider:
+    region: us-west-2
+    service: SecretsManager

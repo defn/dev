@@ -104,7 +104,8 @@ kustomize: "secrets": #Kustomize & {
 		kind:       "ClusterSecretStore"
 		metadata: name: "dev"
 		spec: provider: {
-			// TODO replace with AWS secrets manager
+			service: "SecretsManager"
+			region:  "us-west-2"
 		}
 	}
 }
