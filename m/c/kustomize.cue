@@ -187,13 +187,14 @@ kustomize: "kyverno": #KustomizeHelm & {
 		}
 	}
 
-	resource: "clusterrole-create-clusterissuers": {
+	resource: "clusterrole-background-controller-clusterissuers": {
 		apiVersion: "rbac.authorization.k8s.io/v1"
 		kind:       "ClusterRole"
-		metadata: name: "kyverno:generate-clusterissuers"
+		metadata: name: "kyverno:background-controller:cert-manager"
 		metadata: labels: {
-			"app.kubernetes.io/instance": "kyverno"
-			"app.kubernetes.io/name":     "kyverno"
+			"app.kubernetes.io/component": "background-controller"
+			"app.kubernetes.io/instance":  "kyverno"
+			"app.kubernetes.io/part-of":   "kyverno"
 		}
 		rules: [{
 			apiGroups: ["cert-manager.io"]
