@@ -51,9 +51,11 @@ env: (#Transform & {
 
 			// ingress
 			"traefik": [50, ""]
-			"argo-cd": [50, ""]
 
-			// vclluster
+			// argocd
+			"argo-cd": [9, ""]
+
+			// vcluster
 			"\(cluster_type)-\(cluster_name)-vc0": [8, ""]
 			"\(cluster_type)-\(cluster_name)-vc1": [8, ""]
 
