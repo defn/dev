@@ -13,7 +13,6 @@ spec:
     spec:
       serviceAccountName: ubuntu
       restartPolicy: Never
-      runtimeClassName: sysbox-runc
       containers:
         - name: ubuntu
           image: amazon/aws-cli
