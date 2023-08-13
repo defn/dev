@@ -335,9 +335,28 @@ kustomize: "pod-identity": #KustomizeHelm & {
 			pki: certManager: certificate: duration:    "2160h0m0s"
 			pki: certManager: certificate: renewBefore: "360h0m0s"
 			config: extraArgs: [
-				'--in-cluster=true'
+				'--in-cluster=true',
 			]
 		}
+	}
+
+	psm: "clusterrole-piw": {
+		apiVersion: "rbac.authorization.k8s.io/v1"
+		kind: "ClusterRole"
+		metadata: {
+			name:      "pod-identity-webhook-amazon-eks-pod-identity-webhook"
+			namespace: "default"
+		}
+
+		rules: [{
+			apiGroups: [ ""]
+			resources: [ "secrets", "serviceaccounts"]
+			verbs: ["get", "watch", "list"]
+		}, {
+			apiGroups: [ "certificates.k8s.io"]
+			resources: [ "certificatesigningrequests"]
+			verbs: ["get", "watch", "list"]
+		}]
 	}
 }
 
