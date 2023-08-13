@@ -324,7 +324,7 @@ kustomize: "external-secrets": #KustomizeHelm & {
 
 // https://artifacthub.io/packages/helm/jkroepke/amazon-eks-pod-identity-webhook
 kustomize: "pod-identity": #KustomizeHelm & {
-	namespace: "default"
+	namespace: "kube-system"
 
 	helm: {
 		release: "pod-identity-webhook"
