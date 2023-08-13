@@ -49,7 +49,7 @@ options:
       - arg: --kube-apiserver-arg=--anonymous-auth=true
         nodeFilters:
           - server:0
-      - arg: --kube-apiserver-arg=--service-account-issuer=https://raw.githubusercontent.com/amanibhavam/amanibhavam.github.io/master/v9
+      - arg: --kube-apiserver-arg=--service-account-issuer=https://raw.githubusercontent.com/amanibhavam/amanibhavam.github.io/master/v9/openid
         nodeFilters:
           - server:0
       - arg: --kube-apiserver-arg=--api-audiences=https://kubernetes.default.svc.cluster.local,sts.amazonaws.com

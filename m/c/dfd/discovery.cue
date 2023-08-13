@@ -4,7 +4,7 @@ discovery_url: string
 
 discovery: {
 	issuer:                 discovery_url
-	jwks_uri:               "\(discovery_url)/v1/jwks"
+	jwks_uri:               "\(discovery_url)/openid/v1/jwks"
 	authorization_endpoint: "urn:kubernetes:programmatic_authorization"
 	response_types_supported: [
 		"id_token",
