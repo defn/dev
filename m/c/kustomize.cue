@@ -337,23 +337,15 @@ kustomize: "pod-identity": #KustomizeHelm & {
 		}
 	}
 
-	psm: "clusterrole-piw": {
+	psm: "clusterrolebinding-piw": {
 		apiVersion: "rbac.authorization.k8s.io/v1"
-		kind: "ClusterRole"
+		kind: "ClusterRoleBinding"
 		metadata: {
 			name:      "pod-identity-webhook-amazon-eks-pod-identity-webhook"
 			namespace: "default"
-		}
 
-		rules: [{
-			apiGroups: [ ""]
-			resources: [ "secrets", "serviceaccounts"]
-			verbs: ["get", "watch", "list"]
-		}, {
-			apiGroups: [ "*"]
-			resources: [ "*"]
-			verbs: ["*"]
-		}]
+			roleRef: name: "admin"
+		}
 	}
 }
 

@@ -24,18 +24,11 @@ rules:
 - apiGroups:
   - ""
   resources:
-  - secrets
   - serviceaccounts
   verbs:
   - get
   - watch
   - list
-- apiGroups:
-  - '*'
-  resources:
-  - '*'
-  verbs:
-  - '*'
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -47,6 +40,8 @@ metadata:
     app.kubernetes.io/version: v0.4.0
     helm.sh/chart: amazon-eks-pod-identity-webhook-1.2.0
   name: pod-identity-webhook-amazon-eks-pod-identity-webhook
+  roleRef:
+    name: admin
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
