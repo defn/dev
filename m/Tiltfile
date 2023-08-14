@@ -41,6 +41,18 @@ local_resource(
     ],
 )
 
+local_resource(
+    "buildkite",
+    serve_cmd=[
+        "bash",
+        "-c",
+        """
+            cd ~/m
+            make ci timeout=3600
+            """,
+    ],
+)
+
 #local_resource(
 #    "argocd-forward",
 #    serve_cmd=[

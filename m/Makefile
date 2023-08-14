@@ -1,3 +1,5 @@
+timeout ?= 5
+
 build:
 	../bin/b pass build //cmd/cli:cli
 
@@ -8,7 +10,7 @@ todo:
 	@(bazel cquery //... --output=files | grep -v ^bazel-; git ls-files .) | sort | uniq -c | grep '^ *1 ' | awk '{print $$2}'
 
 ci:
-	env BUILDKITE_AGENT_DISCONNECT_AFTER_IDLE_TIMEOUT=5 buildkite-agent start --build-path ~/work/buildkite-agent --plugins-path ~/work/buildkite-plugins --token "$$(pass BUILDKITE_AGENT_TOKEN)"
+	env BUILDKITE_AGENT_DISCONNECT_AFTER_IDLE_TIMEOUT=$(timeout) buildkite-agent start --build-path ~/work/buildkite-agent --plugins-path ~/work/buildkite-plugins --token "$$(pass BUILDKITE_AGENT_TOKEN)"
 
 dev:
 # rm -rf ~/Library/App*/coderv2/postgres
