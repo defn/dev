@@ -9,3 +9,5 @@ images: []
 ---
 
 hello lamda
+
+<a rel="me" href="https://hachyderm.io/@defn">Mastodon</a>
