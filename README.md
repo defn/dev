@@ -4,25 +4,4 @@
 
 Project documentation: https://defn.dev
 
-## Updating Workarea
-Update your workarea.
-```
-git pull
-```
-
-Build your workarea
-```
-make install
-```
-
-### Updating macOS
-
-Install brew packages
-```
-brew bundle
-```
-
-Upgrade brew packages
-```
-env -u SUDO_ASKPASS brew upgrade
-```
+<a rel="me" href="https://hachyderm.io/@defn">Mastodon</a>
