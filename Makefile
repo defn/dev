@@ -87,7 +87,7 @@ gpg:
 		sudo install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000; \
 		ln -nfs ~/.gnupg /run/user/1000/gnupg; \
 		fi
-	-pkill dirmngr
+	pkill dirmngr 2>/dev/null || true
 	dirmngr --daemon || true
 
 docker:
