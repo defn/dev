@@ -1,14 +1,8 @@
 ca.crt
 ca.key
 
-sa-signer-pkcs8.pub
-sa-signer.key
-sa-signer.key.pub
-discovery.json
-keys.json
-amazon-eks-pod-identity-webhook/
-
 system.admin.key
 system.admin.pem
 system.ca.pem
-oidc/
+
+amanibhavam.github.io/

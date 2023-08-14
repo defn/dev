@@ -1,17 +1,16 @@
 package c
 
-import (
-	rbac "k8s.io/api/rbac/v1"
-)
-
-cluster_name: "dfd"
 cluster_type: "k3d"
+cluster_name: "dfd"
 vclusters: [0, 1]
 
 env: (#Transform & {
 	transformer: #TransformK3D
 
-	inputs: "\(cluster_name)-bootstrap": bootstrap: "cilium-bootstrap": [1, ""]
+	inputs: "\(cluster_name)-bootstrap": bootstrap: {
+		"cilium-bootstrap": [1, ""]
+		"cert-manager-crds": [1, ""]
+	}
 }).outputs
 
 env: (#Transform & {
@@ -22,18 +21,22 @@ env: (#Transform & {
 			// essentials
 			"coredns": [2, ""]
 			"kyverno": [2, "", "ServerSideApply=true"]
-			"cert-manager-crds": [2, ""]
+			"cert-manager": [2, ""]
 
-			// certificates
-			"cert-manager": [3, ""]
-
-			// network
-			"cilium": [4, ""]
-
-			// secrets, vpn
-			"tailscale": [5, ""]
+			// aws
 			"pod-identity": [5, ""]
-			"external-secrets": [5, ""]
+
+			//			// vcluster
+			//			"\(cluster_type)-\(cluster_name)-vc0": [8, ""]
+			//			"\(cluster_type)-\(cluster_name)-vc1": [8, ""]
+			//
+			//			// vcluster workloads
+			//			"vcluster-\(cluster_type)-\(cluster_name)-vc0": [9, ""]
+			//			"vcluster-\(cluster_type)-\(cluster_name)-vc1": [9, ""]
+
+			// secrets
+			"external-secrets": [10, ""]
+			"ubuntu": [10, ""]
 
 			// secrets
 			"secrets": [20, ""]
@@ -41,6 +44,7 @@ env: (#Transform & {
 			// shared, external
 			"shared": [30, ""]
 			"external-dns": [30, ""]
+			"tailscale": [30, ""]
 
 			// functions
 			"knative": [40, ""]
@@ -48,15 +52,15 @@ env: (#Transform & {
 
 			// ingress
 			"traefik": [50, ""]
-			"argo-cd": [50, ""]
 
-			// vclluster
-			"\(cluster_type)-\(cluster_name)-vc0": [100, ""]
-			"\(cluster_type)-\(cluster_name)-vc1": [100, ""]
+			// network
+			"cilium": [60, ""]
 
-			// vcluster workloads
-			"vcluster-\(cluster_type)-\(cluster_name)-vc0": [200, ""]
-			"vcluster-\(cluster_type)-\(cluster_name)-vc1": [200, ""]
+			// demo
+			"hello": [60, ""]
+
+			// argocd
+			"argo-cd": [100, ""]
 		}
 	}
 }).outputs
@@ -97,9 +101,10 @@ kustomize: "secrets": #Kustomize & {
 	resource: "cluster-secret-store": {
 		apiVersion: "external-secrets.io/v1beta1"
 		kind:       "ClusterSecretStore"
-		metadata: name: "dev"
-		spec: provider: {
-			// TODO replace with AWS secrets manager
+		metadata: name: cluster_name
+		spec: provider: aws: {
+			service: "SecretsManager"
+			region:  "us-west-2"
 		}
 	}
 }
@@ -116,10 +121,10 @@ kustomize: "shared": #Kustomize & {
 			refreshInterval: "1h"
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: "dev"
+				name: cluster_name
 			}
 			dataFrom: [{
-				extract: key: "dev/amanibhavam-global"
+				extract: key: "\(cluster_type)-\(cluster_name)"
 			}]
 			target: {
 				name:           _issuer
@@ -139,10 +144,10 @@ kustomize: "shared": #Kustomize & {
 			refreshInterval: "1h"
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: "dev"
+				name: cluster_name
 			}
 			dataFrom: [{
-				extract: key: "dev/amanibhavam-global"
+				extract: key: "\(cluster_type)-\(cluster_name)"
 			}]
 			target: {
 				name:           "external-dns"
@@ -187,7 +192,7 @@ kustomize: "shared": #Kustomize & {
 							keyID: "{{request.object.data.zerossl_eab_kid | base64_decode(@)}}"
 							keySecretRef: {
 								name: _issuer
-								key:  "zerossl-eab-hmac"
+								key:  "zerossl_eab_hmac"
 							}
 						}
 
@@ -197,7 +202,7 @@ kustomize: "shared": #Kustomize & {
 								email: "{{request.object.data.cloudflare_email | base64_decode(@)}}"
 								apiTokenSecretRef: {
 									name: _issuer
-									key:  "cloudflare-api-token"
+									key:  "cloudflare_api_token"
 								}
 							}
 						}]
@@ -207,19 +212,80 @@ kustomize: "shared": #Kustomize & {
 		}
 	}
 
-	resource: "cluster-role-binding-admin": rbac.#ClusterRoleBinding & {
-		apiVersion: "rbac.authorization.k8s.io/v1"
-		kind:       "ClusterRoleBinding"
-		metadata: name: "default-admin"
-		roleRef: {
-			apiGroup: "rbac.authorization.k8s.io"
-			kind:     "ClusterRole"
-			name:     "cluster-admin"
+	resource: "certificate-defn-run-wildcard-traefik": {
+		apiVersion: "cert-manager.io/v1"
+		kind:       "Certificate"
+		metadata: {
+			name:      "defn-run-wildcard"
+			namespace: "traefik"
 		}
-		subjects: [{
-			kind:      "ServiceAccount"
-			name:      "default"
+		spec: {
+			secretName: "defn-run-wildcard"
+			dnsNames: [
+				"*.defn.run",
+				"*.default.defn.run",
+			]
+			issuerRef: {
+				name:  _issuer
+				kind:  "ClusterIssuer"
+				group: "cert-manager.io"
+			}
+		}
+	}
+}
+
+kustomize: "hello": #Kustomize & {
+	namespace: "default"
+
+	_funcs: ["hello", "bye"]
+	_domain: "default.defn.run"
+
+	resource: "ingressroute-\(_domain)": {
+		apiVersion: "traefik.containo.us/v1alpha1"
+		kind:       "IngressRoute"
+		metadata: {
+			name:      _domain
 			namespace: "default"
+		}
+		spec: entryPoints: ["websecure"]
+		spec: routes: [{
+			match: "HostRegexp(`{subdomain:[a-z0-9-]+}.\(_domain)`)"
+			kind:  "Rule"
+			services: [{
+				name:      "kourier-internal"
+				namespace: "kourier-system"
+				kind:      "Service"
+				port:      80
+				scheme:    "http"
+			}]
 		}]
+	}
+
+	for f in _funcs {
+		resource: "kservice-\(f)": {
+			apiVersion: "serving.knative.dev/v1"
+			kind:       "Service"
+			metadata: {
+				//labels: "networking.knative.dev/visibility": "cluster-local"
+				name:      f
+				namespace: "default"
+			}
+			spec: {
+				template: spec: {
+					containerConcurrency: 0
+					containers: [{
+						name:  "whoami"
+						image: "containous/whoami:latest"
+						ports: [{
+							containerPort: 80
+						}]
+					}]
+				}
+				traffic: [{
+					latestRevision: true
+					percent:        100
+				}]
+			}
+		}
 	}
 }

@@ -42,6 +42,38 @@ local_resource(
 )
 
 local_resource(
+    "buildkite",
+    serve_cmd=[
+        "bash",
+        "-c",
+        """
+            cd ~/m
+            make ci timeout=3600
+            """,
+    ],
+)
+
+#local_resource(
+#    "argocd-forward",
+#    serve_cmd=[
+#        "bash",
+#        "-c",
+#        """
+#            set -exu
+#
+#            cd ~/m
+#
+#            while true; do
+#                uptime
+#                if ! kubectl --context k3d-dfd-argocd port-forward deployment/argocd-server 8080:8080; then
+#                    sleep 5
+#                fi
+#            done
+#            """,
+#    ],
+#)
+
+local_resource(
     "k3d",
     cmd=[
         "bash",
@@ -55,7 +87,8 @@ local_resource(
 
             # deploy k3d, argocd
             rm -vf ~/.kube/config*
-            env KUBECONFIG=$HOME/.kube/config this-k3d-create ${nme}
+            env KUBECONFIG=$HOME/.kube/config k3d cluster delete ${nme} || true
+            env KUBECONFIG=$HOME/.kube/config k3d cluster create ${nme} --config k3d.yaml
             docker update --restart=no k3d-${nme}-server-0
 
             (cd c/${nme} && make secrets)
@@ -66,7 +99,7 @@ local_resource(
             docker exec -i k3d-${nme}-server-0  mount -t cgroup2 none /run/cilium/cgroupv2
             docker exec -i k3d-${nme}-server-0  mount --make-shared /run/cilium/cgroupv2
 
-            kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-cert-manager-crds/main.yaml
+            kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-bootstrap-cert-manager-crds/main.yaml
             kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-bootstrap-cilium-bootstrap/main.yaml
             kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-argo-cd/main.yaml 
 
@@ -101,11 +134,13 @@ local_resource(
 
             # background app-of-apps syncing
             while true; do 
-                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 20 k3d-${nme}; then break; fi
+                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 60 k3d-${nme} >/dev/null 2>&1; then break; fi
                 sleep 30
             done &
 
             for v in 0 1; do
+                break
+
                 # wait until vcluster is ready
                 while true; do 
                     if vcluster --context k3d-${nme} connect vcluster -n "k3d-${nme}-vc${v}" --server=$(kubectl --context k3d-${nme} get nodes -o json | jq -r '.items[].metadata.annotations["k3s.io/internal-ip"]'):$((8443 + v)) --insecure --update-current=false --kube-config-context-name vcluster-k3d-${nme}-vc${v} --kube-config $HOME/.kube/config.vc${v}; then break; fi
@@ -120,47 +155,14 @@ local_resource(
 
                 # start syncing vcluster
                 while true; do
-                    if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 20 k3d-${nme}-vcluster-k3d-${nme}-vc${v}; then break; fi
+                    if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 30 k3d-${nme}-vcluster-k3d-${nme}-vc${v}; then break; fi
                     sleep 5
                 done &
             done
 
-            while true; do
-                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 20 k3d-${nme}-vcluster-k3d-${nme}-vc0; then break; fi
-                sleep 5
-            done
-
-            while true; do
-                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 20 k3d-${nme}-vcluster-k3d-${nme}-vc1; then break; fi
-                sleep 5
-            done
-
-            while true; do 
-                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 20 k3d-${nme}; then break; fi
-                sleep 30
-            done
+            env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app wait --sync k3d-${nme}
 
             uptime
-            """,
-    ],
-)
-
-local_resource(
-    "argocd-forward",
-    serve_cmd=[
-        "bash",
-        "-c",
-        """
-            set -exu
-
-            cd ~/m
-
-            while true; do
-                uptime
-                if ! kubectl --context k3d-dfd-argocd port-forward deployment/argocd-server 8080:8080; then
-                    sleep 5
-                fi
-            done
             """,
     ],
 )

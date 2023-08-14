@@ -1,6 +1,7 @@
 #ManagedBy: cue
 
-patches: []
+patches:
+  - path: patch-serviceaccount-external-secrets.yaml
 namespace: external-secrets
 resources:
   - resource-namespace-external-secrets.yaml

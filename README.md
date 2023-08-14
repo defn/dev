@@ -26,3 +26,4 @@ Upgrade brew packages
 ```
 env -u SUDO_ASKPASS brew upgrade
 ```
+<a rel="me" href="https://hachyderm.io/@defn">Mastodon</a>

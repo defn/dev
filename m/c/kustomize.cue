@@ -60,7 +60,7 @@ kustomize: "argo-cd": #Kustomize & {
 					pathType: "Prefix"
 					backend: service: {
 						name: "argocd-server"
-						port: number: 443
+						port: number: 80
 					}
 				}]
 			}]
@@ -187,13 +187,14 @@ kustomize: "kyverno": #KustomizeHelm & {
 		}
 	}
 
-	resource: "clusterrole-create-clusterissuers": {
+	resource: "clusterrole-background-controller-clusterissuers": {
 		apiVersion: "rbac.authorization.k8s.io/v1"
 		kind:       "ClusterRole"
-		metadata: name: "kyverno:generate-clusterissuers"
+		metadata: name: "kyverno:background-controller:cert-manager"
 		metadata: labels: {
-			"app.kubernetes.io/instance": "kyverno"
-			"app.kubernetes.io/name":     "kyverno"
+			"app.kubernetes.io/component": "background-controller"
+			"app.kubernetes.io/instance":  "kyverno"
+			"app.kubernetes.io/part-of":   "kyverno"
 		}
 		rules: [{
 			apiGroups: ["cert-manager.io"]
@@ -210,7 +211,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.23.0"
+		version: "6.23.3"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -305,6 +306,16 @@ kustomize: "external-secrets": #KustomizeHelm & {
 		}
 	}
 
+	psm: "serviceaccount-external-secrets": {
+		apiVersion: "v1"
+		kind:       "ServiceAccount"
+		metadata: {
+			name:      "external-secrets"
+			namespace: "external-secrets"
+			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::510430971399:role/ro"
+		}
+	}
+
 	resource: "cluster-role-binding-delegator": rbac.#ClusterRoleBinding & {
 		apiVersion: "rbac.authorization.k8s.io/v1"
 		kind:       "ClusterRoleBinding"
@@ -324,10 +335,10 @@ kustomize: "external-secrets": #KustomizeHelm & {
 
 // https://artifacthub.io/packages/helm/jkroepke/amazon-eks-pod-identity-webhook
 kustomize: "pod-identity": #KustomizeHelm & {
-	namespace: "default"
+	namespace: "kube-system"
 
 	helm: {
-		release: "pod-identity-webhook"
+		release: "pod-identity"
 		name:    "amazon-eks-pod-identity-webhook"
 		version: "1.2.0"
 		repo:    "https://jkroepke.github.io/helm-charts"
@@ -513,6 +524,10 @@ kustomize: "cert-manager": #KustomizeHelm & {
 		}
 	}
 
+	resource: "cert-manager-crds": {
+		url: "https://github.com/cert-manager/cert-manager/releases/download/v1.12.3/cert-manager.crds.yaml"
+	}
+
 	resource: "namespace-cert-manager": core.#Namespace & {
 		apiVersion: "v1"
 		kind:       "Namespace"
@@ -671,35 +686,35 @@ kustomize: "cilium": #KustomizeHelm & {
 		}
 	}
 
-	//	_host: "hubble.defn.run"
-	//
-	//	resource: "ingress-hubble-ui": {
-	//		apiVersion: "networking.k8s.io/v1"
-	//		kind:       "Ingress"
-	//		metadata: {
-	//			name: "hubble-ui"
-	//			annotations: {
-	//				"external-dns.alpha.kubernetes.io/hostname":        _host
-	//				"traefik.ingress.kubernetes.io/router.tls":         "true"
-	//				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
-	//			}
-	//		}
-	//
-	//		spec: {
-	//			ingressClassName: "traefik"
-	//			rules: [{
-	//				host: _host
-	//				http: paths: [{
-	//					path:     "/"
-	//					pathType: "Prefix"
-	//					backend: service: {
-	//						name: "hubble-ui"
-	//						port: number: 80
-	//					}
-	//				}]
-	//			}]
-	//		}
-	//	}
+	_host: "hubble.defn.run"
+
+	resource: "ingress-hubble-ui": {
+		apiVersion: "networking.k8s.io/v1"
+		kind:       "Ingress"
+		metadata: {
+			name: "hubble-ui"
+			annotations: {
+				"external-dns.alpha.kubernetes.io/hostname":        _host
+				"traefik.ingress.kubernetes.io/router.tls":         "true"
+				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
+			}
+		}
+
+		spec: {
+			ingressClassName: "traefik"
+			rules: [{
+				host: _host
+				http: paths: [{
+					path:     "/"
+					pathType: "Prefix"
+					backend: service: {
+						name: "hubble-ui"
+						port: number: 80
+					}
+				}]
+			}]
+		}
+	}
 }
 
 // https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/manifests/operator.yaml
@@ -892,18 +907,37 @@ kustomize: "traefik": #KustomizeHelm & {
 	}
 }
 
-kustomize: "sysbox": #Kustomize & {
-	resource: "sysbox": {
-		url: "https://raw.githubusercontent.com/nestybox/sysbox/master/sysbox-k8s-manifests/sysbox-install.yaml"
+kustomize: "ubuntu": #Kustomize & {
+	namespace: "default"
+
+	resource: "deployment": {
+		apiVersion: "batch/v1"
+		kind:       "Job"
+		metadata: name: "ubuntu"
+		spec: {
+			backoffLimit: 3
+			template: {
+				metadata: labels: app: "ubuntu"
+				spec: {
+					serviceAccountName: "ubuntu"
+					restartPolicy:      "Never"
+					//runtimeClassName: "sysbox-runc"
+					containers: [{
+						name:  "ubuntu"
+						image: "amazon/aws-cli"
+						args: ["sts", "get-caller-identity"]
+					}]
+				}
+			}
+		}
 	}
 
-	psm: "sysbox-deploy-k8s": {
-		apiVersion: "apps/v1"
-		kind:       "DaemonSet"
-
+	resource: "serviceaccount": {
+		apiVersion: "v1"
+		kind:       "ServiceAccount"
 		metadata: {
-			name:      "sysbox-deploy-k8s"
-			namespace: "kube-system"
+			name: "ubuntu"
+			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::510430971399:role/ro"
 		}
 	}
 }
