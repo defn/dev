@@ -129,6 +129,7 @@ local_resource(
             kubectl config use-context k3d-${nme}
 
            env KUBECONFIG=$HOME/.kube/config.argocd kubectl -n argocd rollout status deployment/argocd-server
+           env KUBECONFIG=$HOME/.kube/config.argocd kubectl -n argocd rollout status deployment/argocd-repo-server
 
             if [[ -z "${restarted:-}" ]]; then
                 # needed for argocd password generation
@@ -175,8 +176,11 @@ local_resource(
                 done &
             done
 
-            env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app wait --sync k3d-${nme}
+            while true; do
+                if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app wait --sync k3d-${nme}; then break; fi
+            done
 
+            mark finished
             uptime
             """,
     ],
