@@ -46,7 +46,6 @@ home:
 			(cd m/pkg/$$n && ~/bin/b build); \
 			(cd m/pkg/$$n && ~/bin/b out flake_path) | (cd ~/bin/nix && tar xfz -); \
 			done; \
-			git rev-parse HEAD > bin/nix/.head; \
 	fi
 	rm -f bin/nix/{gcc,cc,ld}
 	sudo ln -nfs ~/bin/nix/go /usr/local/bin/
@@ -126,6 +125,7 @@ ci dev:
 install:
 	$(MAKE) nix
 	$(MAKE) install-inner
+	git rev-parse HEAD > bin/nix/.head
 
 install-inner:
 	$(MAKE) symlinks
@@ -137,7 +137,7 @@ install-inner:
 install-innermost:
 	git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
 	git config diff.lfs.textconv cat
-	$(MAKE) dotfiles
+	if [[ "$$(git rev-parse HEAD)" != "$$(cat bin/nix/.head)" ]]; then $(MAKE) dotfiles; fi
 	$(MAKE) password-store
 	$(MAKE) gpg
 
