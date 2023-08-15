@@ -24,7 +24,7 @@ env: (#Transform & {
 			"cert-manager": [2, ""]
 
 			// aws
-			"pod-identity": [5, ""]
+			"pod-identity": [2, ""]
 
 			//			// vcluster
 			//			"\(cluster_type)-\(cluster_name)-vc0": [8, ""]
@@ -51,7 +51,7 @@ env: (#Transform & {
 			"kourier": [40, ""]
 
 			// ingress
-			"traefik": [50, ""]
+			"traefik": [40, ""]
 
 			// network
 			"cilium": [60, ""]
@@ -60,7 +60,7 @@ env: (#Transform & {
 			"hello": [60, ""]
 
 			// argocd
-			"argo-cd": [100, ""]
+			"argo-cd": [60, ""]
 		}
 	}
 }).outputs
