@@ -96,7 +96,7 @@ resource "aws_instance" "dev" {
   instance_type     = local.aws.instance_type
 
   ebs_optimized = true
-  monitoring    = true
+  monitoring    = false
 
   iam_instance_profile   = aws_iam_instance_profile.dev[count.index].name
   vpc_security_group_ids = [aws_security_group.dev[count.index].id]
@@ -120,6 +120,10 @@ resource "aws_instance" "dev" {
   tags = {
     Name              = local.coder_name
     Coder_Provisioned = "true"
+  }
+
+  lifecycle {
+    ignore_changes = [ami, user_data]
   }
 }
 
