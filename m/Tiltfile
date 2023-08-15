@@ -85,6 +85,9 @@ local_resource(
 
             cd ~/m
 
+            # create k3d registry
+            k3d registry create registry --port 0.0.0.0:5000 || true
+
             # deploy k3d, argocd
             rm -vf ~/.kube/config*
             env KUBECONFIG=$HOME/.kube/config k3d cluster delete ${nme} || true
