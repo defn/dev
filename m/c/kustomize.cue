@@ -237,6 +237,29 @@ kustomize: "external-dns": #KustomizeHelm & {
 			name: "external-dns"
 		}
 	}
+
+	resource: "externalsecret-external-dns": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: {
+			name:      "external-dns"
+			namespace: "external-dns"
+		}
+		spec: {
+			refreshInterval: "1h"
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: cluster_name
+			}
+			dataFrom: [{
+				extract: key: "\(cluster_type)-\(cluster_name)"
+			}]
+			target: {
+				name:           "external-dns"
+				creationPolicy: "Owner"
+			}
+		}
+	}
 }
 
 // https://github.com/knative-sandbox/net-kourier/releases
@@ -779,6 +802,29 @@ kustomize: "tailscale": #Kustomize & {
 			}
 		}]
 	}
+
+	resource: "externalsecret-tailscale": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: {
+			name:      "operator-oauth-custom"
+			namespace: "tailscale"
+		}
+		spec: {
+			refreshInterval: "1h"
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: cluster_name
+			}
+			dataFrom: [{
+				extract: key: "\(cluster_type)-\(cluster_name)"
+			}]
+			target: {
+				name:           "operator-oauth-custom"
+				creationPolicy: "Owner"
+			}
+		}
+	}
 }
 
 // https://doc.traefik.io/traefik/routing/providers/kubernetes-ingress/
@@ -903,6 +949,106 @@ kustomize: "traefik": #KustomizeHelm & {
 		spec: {
 			type:              "LoadBalancer"
 			loadBalancerClass: "tailscale"
+		}
+	}
+
+	resource: "externalsecret-\(_issuer)": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: {
+			name:      _issuer
+			namespace: "cert-manager"
+		}
+		spec: {
+			refreshInterval: "1h"
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: cluster_name
+			}
+			dataFrom: [{
+				extract: key: "\(cluster_type)-\(cluster_name)"
+			}]
+			target: {
+				name:           _issuer
+				creationPolicy: "Owner"
+			}
+		}
+	}
+
+	resource: "clusterpolicy-clusterissuer-\(_issuer)": {
+		apiVersion: "kyverno.io/v1"
+		kind:       "ClusterPolicy"
+		metadata: name: "\(_issuer)-clusterissuer"
+		spec: {
+			generateExistingOnPolicyUpdate: true
+			rules: [{
+				name: "create-cluster-issuer"
+				match: any: [{
+					resources: {
+						names: [
+							_issuer,
+						]
+						kinds: [
+							"Secret",
+						]
+						namespaces: [
+							"cert-manager",
+						]
+					}
+				}]
+				generate: {
+					synchronize: true
+					apiVersion:  "cert-manager.io/v1"
+					kind:        "ClusterIssuer"
+					name:        _issuer
+					data: spec: acme: {
+						server: "https://acme.zerossl.com/v2/DV90"
+						email:  "{{request.object.data.zerossl_email | base64_decode(@)}}"
+
+						privateKeySecretRef: name: "\(_issuer)-acme"
+
+						externalAccountBinding: {
+							keyID: "{{request.object.data.zerossl_eab_kid | base64_decode(@)}}"
+							keySecretRef: {
+								name: _issuer
+								key:  "zerossl_eab_hmac"
+							}
+						}
+
+						solvers: [{
+							selector: {}
+							dns01: cloudflare: {
+								email: "{{request.object.data.cloudflare_email | base64_decode(@)}}"
+								apiTokenSecretRef: {
+									name: _issuer
+									key:  "cloudflare_api_token"
+								}
+							}
+						}]
+					}
+				}
+			}]
+		}
+	}
+
+	resource: "certificate-defn-run-wildcard-traefik": {
+		apiVersion: "cert-manager.io/v1"
+		kind:       "Certificate"
+		metadata: {
+			name:      "defn-run-wildcard"
+			namespace: "traefik"
+		}
+		spec: {
+			secretName: "defn-run-wildcard"
+			dnsNames: [
+				"*.defn.run",
+				"*.default.defn.run",
+			]
+			issuerRef: {
+				name:  _issuer
+				kind:  "ClusterIssuer"
+				group: "cert-manager.io"
+			}
 		}
 	}
 }
