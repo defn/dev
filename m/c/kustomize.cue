@@ -956,8 +956,7 @@ kustomize: "traefik": #KustomizeHelm & {
 		apiVersion: "external-secrets.io/v1beta1"
 		kind:       "ExternalSecret"
 		metadata: {
-			name:      _issuer
-			namespace: "cert-manager"
+			name: _issuer
 		}
 		spec: {
 			refreshInterval: "1h"
@@ -992,7 +991,7 @@ kustomize: "traefik": #KustomizeHelm & {
 							"Secret",
 						]
 						namespaces: [
-							"cert-manager",
+							"traefik",
 						]
 					}
 				}]
