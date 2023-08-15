@@ -17,6 +17,9 @@ registries:
       "docker.io":
         endpoint:
           - http://169.254.32.1:5000
+      "gcr.io":
+        endpoint:
+          - http://169.254.32.1:5000
       "ghcr.io":
         endpoint:
           - http://169.254.32.1:5000
@@ -45,9 +48,9 @@ volumes:
   - volume: /var/run/docker.sock:/var/run/docker.sock
     nodeFilters:
       - server:0
-  - volume: defn-dev-containerd:/var/lib/rancher/k3s/agent/containerd/io.containerd.content.v1.content
-    nodeFilters:
-      - server:0
+#  - volume: defn-dev-containerd:/var/lib/rancher/k3s/agent/containerd/io.containerd.content.v1.content
+#    nodeFilters:
+#      - server:0
 options:
   k3d:
     wait: true
