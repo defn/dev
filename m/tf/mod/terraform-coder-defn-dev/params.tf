@@ -40,6 +40,7 @@ data "coder_parameter" "docker_image" {
   description  = "The docker image to use for the workspace"
   default      = "quay.io/defn/dev:latest"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/docker.svg"
+  mutable      = true
 }
 
 data "coder_parameter" "cpu" {
@@ -77,6 +78,7 @@ data "coder_parameter" "nix_volume_size" {
   type         = "number"
   default      = "60"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
+  mutable      = true
   validation {
     min = 40
     max = 100
