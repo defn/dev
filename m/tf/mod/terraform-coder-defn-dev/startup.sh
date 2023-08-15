@@ -7,7 +7,7 @@
 
   exec >>/tmp/dfd-startup.log 2>&1
 
-  sudo kdir -p /etc/systemd/network
+  sudo mkdir -p /etc/systemd/network
   pushd /etc/systemd/network
   for a in 1; do
     (echo [NetDev]; echo Name=dummy$a; echo Kind=dummy) | sudo tee dummy$a.netdev
