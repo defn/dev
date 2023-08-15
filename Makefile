@@ -40,11 +40,14 @@ build:
 
 home:
 	$(MARK) home
-	set -xeo pipefail; for n in $(flakes); do \
-		mark $$n; \
-		(cd m/pkg/$$n && ~/bin/b build); \
-		(cd m/pkg/$$n && ~/bin/b out flake_path) | (cd ~/bin/nix && tar xfz -); \
-		done
+	if [[ "$$(git rev-parse HEAD)" != "$$(cat bin/nix/.head)" ]]; then \
+		set -xeo pipefail; for n in $(flakes); do \
+			mark $$n; \
+			(cd m/pkg/$$n && ~/bin/b build); \
+			(cd m/pkg/$$n && ~/bin/b out flake_path) | (cd ~/bin/nix && tar xfz -); \
+			done; \
+			git rev-parse HEAD > bin/nix/.head; \
+	fi
 	rm -f bin/nix/{gcc,cc,ld}
 	sudo ln -nfs ~/bin/nix/go /usr/local/bin/
 	sudo ln -nfs /home/ubuntu/.nix-profile/bin/nix-instantiate /usr/local/bin/
