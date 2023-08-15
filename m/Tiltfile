@@ -88,13 +88,22 @@ local_resource(
             # create k3d registry
             k3d registry create registry --port 0.0.0.0:5000 || true
 
-            # deploy k3d, argocd
-            rm -vf ~/.kube/config*
-            env KUBECONFIG=$HOME/.kube/config k3d cluster delete ${nme} || true
-            env KUBECONFIG=$HOME/.kube/config k3d cluster create ${nme} --config k3d.yaml
-            docker update --restart=no k3d-${nme}-server-0
+            restart=
 
-            (cd c/${nme} && make secrets)
+            if k3d cluster list dfd; then
+                # restart k3d
+                env KUBECONFIG=$HOME/.kube/config k3d cluster stop ${nme} || true
+                env KUBECONFIG=$HOME/.kube/config k3d cluster start ${nme}
+                restarted=1
+            else
+                # deploy k3d
+                env KUBECONFIG=$HOME/.kube/config k3d cluster delete ${nme} || true
+                rm -vf ~/.kube/config*
+                env KUBECONFIG=$HOME/.kube/config k3d cluster create ${nme} --config k3d.yaml
+                docker update --restart=no k3d-${nme}-server-0
+
+                (cd c/${nme} && make secrets)
+            fi
 
             docker exec -i k3d-${nme}-server-0  mount bpffs -t bpf /sys/fs/bpf
             docker exec -i k3d-${nme}-server-0  mount --make-shared /sys/fs/bpf
@@ -102,39 +111,41 @@ local_resource(
             docker exec -i k3d-${nme}-server-0  mount -t cgroup2 none /run/cilium/cgroupv2
             docker exec -i k3d-${nme}-server-0  mount --make-shared /run/cilium/cgroupv2
 
-            kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-bootstrap-cert-manager-crds/main.yaml
-            kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-bootstrap-cilium-bootstrap/main.yaml
-            kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-argo-cd/main.yaml 
+            if [[ -z "${restarted:-}" ]]; then
+                kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-bootstrap-cert-manager-crds/main.yaml
+                kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-bootstrap-cilium-bootstrap/main.yaml
+                kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-argo-cd/main.yaml 
 
-            # dedicated kubectl config for argocd
-            cp $HOME/.kube/config $HOME/.kube/config.argocd
-            (
-                export KUBECONFIG=$HOME/.kube/config.argocd
-                eval "$(kubectl config view -o json  | jq -r --arg cluster k3d-${nme} --arg namespace argocd '.contexts[] | select(.name == $cluster).context | "kubectl config set-context \\(.cluster)-argocd --cluster=\\(.cluster) --user=\\(.user) --namespace=\\($namespace)"')"
-                kubectl config use-context k3d-${nme}-argocd
-            )
+                # dedicated kubectl config for argocd
+                cp $HOME/.kube/config $HOME/.kube/config.argocd
+                (
+                    export KUBECONFIG=$HOME/.kube/config.argocd
+                    eval "$(kubectl config view -o json  | jq -r --arg cluster k3d-${nme} --arg namespace argocd '.contexts[] | select(.name == $cluster).context | "kubectl config set-context \\(.cluster)-argocd --cluster=\\(.cluster) --user=\\(.user) --namespace=\\($namespace)"')"
+                    kubectl config use-context k3d-${nme}-argocd
+                )
+            fi
 
             # switch back to the default config
             kubectl config use-context k3d-${nme}
 
-            # needed for argocd password generation
-            sudo apt update
-            sudo apt install -y apache2-utils
+           env KUBECONFIG=$HOME/.kube/config.argocd kubectl -n argocd rollout status deployment/argocd-server
 
-            # wait until argocd is able to deploy to k3d
-            while true; do
+            if [[ -z "${restarted:-}" ]]; then
+                # needed for argocd password generation
+                sudo apt update
+                sudo apt install -y apache2-utils
+
                 # patch argocd admin password
-                if kubectl --context k3d-${nme}-argocd patch secret argocd-secret   -p '{"stringData": { "admin.password": "'$(htpasswd -bnBC 10 "" admin | tr -d ':\\n')'"}}'; then
-                    # add k3d to argocd
-                    if env KUBECONFIG=$HOME/.kube/config.argocd argocd cluster add k3d-${nme} --yes --core --in-cluster; then
-                        break
-                    fi
-                fi
-                sleep 5
-            done
+                kubectl --context k3d-${nme}-argocd patch secret argocd-secret   -p '{"stringData": { "admin.password": "'$(htpasswd -bnBC 10 "" admin | tr -d ':\\n')'"}}'
 
-            # deploy the cluster app-of-apps
-            kubectl --context k3d-${nme} apply -f e/k3d-${nme}.yaml
+                # add k3d to argocd
+                if env KUBECONFIG=$HOME/.kube/config.argocd argocd cluster add k3d-${nme} --yes --core --in-cluster; then
+                    break
+                fi
+
+                # deploy the cluster app-of-apps
+                kubectl --context k3d-${nme} apply -f e/k3d-${nme}.yaml
+            fi
 
             # background app-of-apps syncing
             while true; do 
