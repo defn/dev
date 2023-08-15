@@ -832,7 +832,8 @@ kustomize: "issuer": #Kustomize & {
 		apiVersion: "external-secrets.io/v1beta1"
 		kind:       "ExternalSecret"
 		metadata: {
-			name: _issuer
+			name:      _issuer
+			namespace: "cert-manager"
 		}
 		spec: {
 			refreshInterval: "1h"
