@@ -77,7 +77,7 @@ helmCharts:
             namespace: argocd
             name: k3d-dfd-pod-identity
             annotations:
-              argocd.argoproj.io/sync-wave: "5"
+              argocd.argoproj.io/sync-wave: "2"
           spec:
             project: default
             destination:
@@ -245,7 +245,7 @@ helmCharts:
             namespace: argocd
             name: k3d-dfd-traefik
             annotations:
-              argocd.argoproj.io/sync-wave: "50"
+              argocd.argoproj.io/sync-wave: "40"
           spec:
             project: default
             destination:
@@ -308,7 +308,7 @@ helmCharts:
             namespace: argocd
             name: k3d-dfd-argo-cd
             annotations:
-              argocd.argoproj.io/sync-wave: "100"
+              argocd.argoproj.io/sync-wave: "60"
           spec:
             project: default
             destination:
