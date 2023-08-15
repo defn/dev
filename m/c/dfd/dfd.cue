@@ -36,7 +36,7 @@ env: (#Transform & {
 
 			// secrets
 			"external-secrets": [10, ""]
-			"ubuntu": [10, ""]
+			//"ubuntu": [10, ""]
 
 			// secrets
 			"secrets": [20, ""]
