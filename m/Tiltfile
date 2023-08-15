@@ -118,6 +118,7 @@ local_resource(
             kubectl config use-context k3d-${nme}
 
             # needed for argocd password generation
+            sudo apt update
             sudo apt install -y apache2-utils
 
             # wait until argocd is able to deploy to k3d
