@@ -11,8 +11,6 @@ resources:
   - resource-ingressroute-http-to-https.yaml
   - resource-middleware-http-to-https.yaml
   - resource-certificate-defn-run-wildcard-traefik.yaml
-  - resource-externalsecret-zerossl-production.yaml
-  - resource-clusterpolicy-clusterissuer-zerossl-production.yaml
 helmCharts:
   - releaseName: traefik
     namespace: traefik

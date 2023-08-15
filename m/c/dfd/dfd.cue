@@ -32,9 +32,10 @@ env: (#Transform & {
 			// secrets store
 			"secrets": [20, ""]
 
-			// external dns, vpn
+			// external dns, vpn, issuer
 			"external-dns": [30, ""]
 			"tailscale": [30, ""]
+			"issuer": [30, ""]
 
 			// traefik, functions
 			"knative": [40, ""]
