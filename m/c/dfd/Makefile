@@ -24,6 +24,9 @@ build:
 list:
 	true
 
+cache:
+	this-k3d-list-images dfd | this-k3d-save-images
+
 secrets:
 	$(MAKE) clean
 	$(MAKE) k3d-secrets
