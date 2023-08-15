@@ -5092,7 +5092,7 @@ spec:
           names:
           - zerossl-production
           namespaces:
-          - cert-manager
+          - traefik
     name: create-cluster-issuer
 ---
 apiVersion: networking.k8s.io/v1

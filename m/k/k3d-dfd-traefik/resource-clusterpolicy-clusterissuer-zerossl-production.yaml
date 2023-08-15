@@ -16,7 +16,7 @@ spec:
               kinds:
                 - Secret
               namespaces:
-                - cert-manager
+                - traefik
       generate:
         synchronize: true
         apiVersion: cert-manager.io/v1
