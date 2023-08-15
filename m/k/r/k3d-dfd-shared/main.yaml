@@ -47,6 +47,23 @@ spec:
     creationPolicy: Owner
     name: external-dns
 ---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: operator-oauth-custom
+  namespace: tailscale
+spec:
+  dataFrom:
+  - extract:
+      key: k3d-dfd
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: dfd
+  target:
+    creationPolicy: Owner
+    name: operator-oauth-custom
+---
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:

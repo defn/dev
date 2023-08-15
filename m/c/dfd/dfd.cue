@@ -156,6 +156,29 @@ kustomize: "shared": #Kustomize & {
 		}
 	}
 
+	resource: "externalsecret-tailscale": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: {
+			name:      "operator-oauth-custom"
+			namespace: "tailscale"
+		}
+		spec: {
+			refreshInterval: "1h"
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: cluster_name
+			}
+			dataFrom: [{
+				extract: key: "\(cluster_type)-\(cluster_name)"
+			}]
+			target: {
+				name:           "operator-oauth-custom"
+				creationPolicy: "Owner"
+			}
+		}
+	}
+
 	resource: "clusterpolicy-clusterissuer-\(_issuer)": {
 		apiVersion: "kyverno.io/v1"
 		kind:       "ClusterPolicy"
