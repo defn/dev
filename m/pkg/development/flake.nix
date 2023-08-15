@@ -2,7 +2,7 @@
   inputs = {
     buildifier.url = github:defn/dev/pkg-buildifier-6.1.2-5?dir=m/pkg/buildifier;
     bazelisk.url = github:defn/dev/pkg-bazelisk-1.17.0-5?dir=m/pkg/bazelisk;
-    ibazel.url = github:defn/dev/pkg-ibazel-0.23.7-1?dir=m/pkg/ibazel;
+    ibazel.url = github:defn/dev/pkg-ibazel-0.23.7-2?dir=m/pkg/ibazel;
   };
 
   outputs = inputs: inputs.buildifier.inputs.pkg.main rec {
