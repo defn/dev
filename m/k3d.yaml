@@ -30,24 +30,24 @@ registries:
         endpoint:
           - http://169.254.32.1:5000
 volumes:
-  - volume: defn-dev-work:/mnt/work
-    nodeFilters:
-      - server:0
-  - volume: defn-dev-earthly:/mnt/earthly
-    nodeFilters:
-      - server:0
-  - volume: defn-dev-dind:/mnt/dind
-    nodeFilters:
-      - server:0
-  - volume: defn-dev-registry:/mnt/registry
-    nodeFilters:
-      - server:0
-  - volume: defn-dev-cache:/cache
-    nodeFilters:
-      - server:0
   - volume: /var/run/docker.sock:/var/run/docker.sock
     nodeFilters:
       - server:0
+#  - volume: defn-dev-work:/mnt/work
+#    nodeFilters:
+#      - server:0
+#  - volume: defn-dev-earthly:/mnt/earthly
+#    nodeFilters:
+#      - server:0
+#  - volume: defn-dev-dind:/mnt/dind
+#    nodeFilters:
+#      - server:0
+#  - volume: defn-dev-registry:/mnt/registry
+#    nodeFilters:
+#      - server:0
+#  - volume: defn-dev-cache:/cache
+#    nodeFilters:
+#      - server:0
 #  - volume: defn-dev-containerd:/var/lib/rancher/k3s/agent/containerd/io.containerd.content.v1.content
 #    nodeFilters:
 #      - server:0
