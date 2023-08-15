@@ -7,17 +7,17 @@
       },
       "locked": {
         "dir": "m/pkg/dev",
-        "lastModified": 1689277319,
-        "narHash": "sha256-gsqaQTNX3WNS3+DDb1wva2m4OjEJzjCe5sKzUcIaI0Y=",
+        "lastModified": 1691869221,
+        "narHash": "sha256-QV3p1P2tlTGuLL9XME9RFXh2d2/yO7jpqsKhV3CXUE0=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "7f1db96942f2c6ff834b9a180f57bc6f6a23436b",
+        "rev": "48989a8305b411a0ccce199f8569043626abde96",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/dev",
         "owner": "defn",
-        "ref": "pkg-dev-0.0.9",
+        "ref": "pkg-dev-0.0.10",
         "repo": "dev",
         "type": "github"
       }
@@ -78,17 +78,17 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1689088367,
-        "narHash": "sha256-Y2tl2TlKCWEHrOeM9ivjCLlRAKH3qoPUE/emhZECU14=",
+        "lastModified": 1691831739,
+        "narHash": "sha256-6e12VCvA7jOjhzJ1adLiUV1GTPXGBcCfhggsDwiuNB4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5c9ddb86679c400d6b7360797b8a22167c2053f8",
+        "rev": "3fe694c4156b84dac12627685c7ae592a71e2206",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5c9ddb86679c400d6b7360797b8a22167c2053f8",
+        "rev": "3fe694c4156b84dac12627685c7ae592a71e2206",
         "type": "github"
       }
     },
@@ -114,17 +114,17 @@
       },
       "locked": {
         "dir": "m/pkg/pkg",
-        "lastModified": 1689277368,
-        "narHash": "sha256-PcqZACb6LghiievM+AlhUGGNK0ch723H4zI+o1ma+08=",
+        "lastModified": 1692061434,
+        "narHash": "sha256-3ET3NgIBZVe+59zx5c3c4rv+wbSpGP8tvSw1Dpi1/Us=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "26dc66a816419acea5a46ea0a23af639a9a030a2",
+        "rev": "71fd24a88e85a7011e01f1fa1c9c93228673f87c",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/pkg",
         "owner": "defn",
-        "ref": "pkg-pkg-0.0.11",
+        "ref": "pkg-pkg-0.0.12",
         "repo": "dev",
         "type": "github"
       }
