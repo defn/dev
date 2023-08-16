@@ -16,18 +16,19 @@ lint:
   ignore:
     - linters: [ALL]
       paths:
-        - tf/terraform-*/**
-        - "**/main.tf.json"
-        - gen/**
-        - "**/cdktf.out/**"
-        - "**/*.gen.yaml"
-        - e/**
-        - k/**
-        - "**/*_go_gen.cue"
-        - "**/node_modules/**"
-        - go_deps.bzl
-        - "**/config.json"
-        - w/pnpm-lock.yaml
+        - m/tf/terraform-*/**
+        - m/**/main.tf.json
+        - m/gen/**
+        - m/**/cdktf.out/**
+        - m/**/*.gen.yaml
+        - m/e/**
+        - m/k/**
+        - m/**/*_go_gen.cue
+        - m/**/node_modules/**
+        - m/go_deps.bzl
+        - m/**/config.json
+        - m/w/pnpm-lock.yaml
+        - docs/**
   enabled:
     - buf-lint@1.25.1
     - svgo@3.0.2

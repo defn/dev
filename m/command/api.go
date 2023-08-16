@@ -11,7 +11,7 @@ import (
 var apiCmd = &cobra.Command{
 	Use:   "api",
 	Short: "A brief description of your command",
-	Long: `Something longer`,
+	Long:  `Something longer`,
 	Run: func(cmd *cobra.Command, args []string) {
 		r := gin.Default()
 		r.SetTrustedProxies(nil)

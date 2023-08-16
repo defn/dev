@@ -9,12 +9,15 @@ images: []
 ---
 
 ## Updating Workarea
+
 Update your workarea.
+
 ```
 git pull
 ```
 
 Build your workarea
+
 ```
 make install
 ```
@@ -22,11 +25,13 @@ make install
 ### Updating macOS
 
 Install brew packages
+
 ```
 brew bundle
 ```
 
 Upgrade brew packages
+
 ```
 env -u SUDO_ASKPASS brew upgrade
 ```

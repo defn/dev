@@ -55,9 +55,7 @@ local_resource(
 #    ],
 # )
 
-local_resource(
-    name="build-cli", cmd="make build", deps=["./cmd", "./command"]
-)
+local_resource(name="build-cli", cmd="make build", deps=["./cmd", "./command"])
 
 custom_build_with_restart(
     ref="service-cli",

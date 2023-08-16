@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function main {
-	case "${1:-}" in
+	case "${1-}" in
 	template)
 		shift
 		exec helm template --validate "$@"
