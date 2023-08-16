@@ -16,42 +16,42 @@ local_resource(
     ],
 )
 
-local_resource(
-    "hugo",
-    serve_cmd=[
-        "bash",
-        "-c",
-        """
-            cd ~/m/defn/dev/www
-            npm install
-            exec npm run dev
-            """,
-    ],
-)
-
-local_resource(
-    "temporal",
-    serve_cmd=[
-        "bash",
-        "-c",
-        """
-            cd ~/m
-            exec temporal server start-dev
-            """,
-    ],
-)
-
-local_resource(
-    "buildkite",
-    serve_cmd=[
-        "bash",
-        "-c",
-        """
-            cd ~/m
-            make ci timeout=3600
-            """,
-    ],
-)
+#local_resource(
+#    "hugo",
+#    serve_cmd=[
+#        "bash",
+#        "-c",
+#        """
+#            cd ~/m/defn/dev/www
+#            npm install
+#            exec npm run dev
+#            """,
+#    ],
+#)
+#
+#local_resource(
+#    "temporal",
+#    serve_cmd=[
+#        "bash",
+#        "-c",
+#        """
+#            cd ~/m
+#            exec temporal server start-dev
+#            """,
+#    ],
+#)
+#
+#local_resource(
+#    "buildkite",
+#    serve_cmd=[
+#        "bash",
+#        "-c",
+#        """
+#            cd ~/m
+#            make ci timeout=3600
+#            """,
+#    ],
+#)
 
 #local_resource(
 #    "argocd-forward",
