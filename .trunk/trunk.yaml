@@ -59,9 +59,9 @@ lint:
     - yamllint@1.32.0
 runtimes:
   enabled:
-    - go@1.20.5
-    - node@18.16.1
-    - python@3.10.8
+    - go@1.20.7
+    - node@18.17.1
+    - python@3.10.12
     - rust@1.67.0
 actions:
   enabled:
