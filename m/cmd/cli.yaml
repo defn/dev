@@ -17,5 +17,6 @@ spec:
       - image: service-cli
         name: cli
         command: ["/cli"]
+        args: ["api"]
         ports:
-        - containerPort: 8000
+        - containerPort: 8080

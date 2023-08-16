@@ -197,12 +197,13 @@ local_resource(
 local_resource(
     name="build-cli",
     cmd="cd ~/m/cmd && make build",
+    deps=['./cmd']
 )
 
 custom_build_with_restart(
   ref='service-cli',
-  command='cd ~/m/cmd && make image tag=$EXPECTED_REF',
-  deps=['./cmd', './bazel-bin/cmd/cli/cli_/cli'],
+  command='cd ~/m && make image tag=$EXPECTED_REF',
+  deps=['./bazel-bin/cmd/cli/cli_/cli'],
   entrypoint=["/cli"],
   live_update=[
         sync("./bazel-bin/cmd/cli/cli_/cli", "/cli"),
@@ -211,4 +212,4 @@ custom_build_with_restart(
 
 k8s_yaml(local("cd ~/m/cmd && make manifest"))
 
-k8s_resource("service-cli", port_forwards=8000, resource_deps=["build-cli"])
+k8s_resource("service-cli", port_forwards="8080:8080", resource_deps=["build-cli"])

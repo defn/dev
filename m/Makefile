@@ -3,6 +3,12 @@ timeout ?= 5
 build:
 	../bin/b pass build //cmd/cli:cli
 
+image:
+	cp -f bazel-bin/cmd/cli/cli_/cli cli.bin
+	docker build -t $(tag) .
+	rm -f cli.bin
+	docker push $(tag)
+
 all:
 	b pass build //...
 
