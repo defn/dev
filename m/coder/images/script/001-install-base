@@ -13,10 +13,10 @@ function main {
 	export LC_ALL=en_US.UTF-8
 	export DEBIAN_FRONTEND=noninteractive
 
-    apt-get update && apt-get upgrade -y \
-        && apt-get install -y --no-install-recommends lsb-release tzdata locales ca-certificates iproute2 sudo curl build-essential openssh-client rsync git git-lfs fzf jq gettext direnv apache2-utils \
-        && apt-get clean && apt purge -y nano \
-        && rm -f /usr/bin/gs
+	apt-get update && apt-get upgrade -y &&
+		apt-get install -y --no-install-recommends lsb-release tzdata locales ca-certificates iproute2 sudo curl build-essential openssh-client rsync git git-lfs fzf jq gettext direnv apache2-utils &&
+		apt-get clean && apt purge -y nano &&
+		rm -f /usr/bin/gs
 
 	apt update && apt upgrade -y
 
