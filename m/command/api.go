@@ -20,7 +20,7 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		r := gin.Default()
 		r.SetTrustedProxies(nil)
-		r.GET("/ping", func(c *gin.Context) {
+		r.GET("/", func(c *gin.Context) {
 			c.JSON(http.StatusOK, gin.H{
 				"message": "pong",
 			})
