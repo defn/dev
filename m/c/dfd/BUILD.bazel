@@ -5,8 +5,8 @@ load("//b/cue:cue.bzl", "cue_export")
 cue_export(
     name = "config",
     srcs = [
+        "//c:common",
         "//cue.mod/gen/k8s.io:k8s_cue",
-        "//c:common"
     ],
     cues = glob(["*.cue"]) + ["//c:common"],
     visibility = ["//visibility:public"],
