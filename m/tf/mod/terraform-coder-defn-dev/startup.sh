@@ -61,4 +61,7 @@ time main "$@"
 uptime
 
 cd ~/m
-exec ~/bin/nix/tilt up
+while true; do
+  ~/bin/nix/tilt up || true
+  sleep 5
+done
