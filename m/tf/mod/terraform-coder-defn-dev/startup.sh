@@ -1,12 +1,18 @@
-  #!/usr/bin/env bash
+#!/usr/bin/env bash
 
-  set -ex
+set -ex
 
-  exec 3>&1
-  tail -f /tmp/dfd-startup.log 1>&3 &
+exec 3>&1
+tail -f /tmp/dfd-startup.log 1>&3 &
+exec >>/tmp/dfd-startup.log 2>&1
 
-  exec >>/tmp/dfd-startup.log 2>&1
+# TODO add swap when /mnt is local ssd
+#sudo dd if=/dev/zero of=/mnt/swap bs=1M count=4096
+#sudo chmod 0600 /mnt/swap
+#sudo mkswap /mnt/swap
+#sudo swapon /mnt/swap || true
 
+function main {
   sudo mkdir -p /etc/systemd/network
   pushd /etc/systemd/network
   for a in 1; do
@@ -35,7 +41,6 @@
   ssh -o StrictHostKeyChecking=no git@github.com true || true
 
   # persist daemon data
-
   for d in docker tailscale; do
     if test -d "/nix/${d}"; then
       sudo rm -rf "/var/lib/${d}"
@@ -50,14 +55,10 @@
   cd
   source .bash_profile
   make install
-  uptime
-  
-  (exec >>/tmp/dfd-tilt.log 2>&1 && cd m && setsid ~/bin/nix/tilt up &) &
+}
 
-  # TODO add swap when /mnt is local ssd
-  #sudo dd if=/dev/zero of=/mnt/swap bs=1M count=4096
-  #sudo chmod 0600 /mnt/swap
-  #sudo mkswap /mnt/swap
-  #sudo swapon /mnt/swap || true
+time main "$@"
+uptime
 
-  exit 0
+cd ~/m
+exec ~/bin/nix/tilt up
