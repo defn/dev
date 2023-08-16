@@ -1,6 +1,6 @@
 {
   inputs = {
-    tailscale.url = github:defn/dev/pkg-tailscale-1.46.1-2?dir=m/pkg/tailscale;
+    tailscale.url = github:defn/dev/pkg-tailscale-1.48.0-1?dir=m/pkg/tailscale;
   };
 
   outputs = inputs: inputs.tailscale.inputs.pkg.main rec {
