@@ -58,6 +58,7 @@ pkg/operatorsdk/.direnv
 pkg/oras/.direnv
 pkg/packer/.direnv
 pkg/pkg/.direnv
+pkg/remotedev/.direnv
 pkg/secrets/.direnv
 pkg/shell/.direnv
 pkg/step/.direnv
@@ -131,6 +132,7 @@ pkg/operatorsdk/result
 pkg/oras/result
 pkg/packer/result
 pkg/pkg/result
+pkg/remotedev/result
 pkg/secrets/result
 pkg/shell/result
 pkg/step/result

@@ -313,7 +313,7 @@ kustomize: "external-secrets": #KustomizeHelm & {
 	helm: {
 		release: "external-secrets"
 		name:    "external-secrets"
-		version: "0.9.2"
+		version: "0.9.3"
 		repo:    "https://charts.external-secrets.io"
 		values: {
 			webhook: create:        false
@@ -662,7 +662,7 @@ kustomize: "cilium-bootstrap": #KustomizeHelm & {
 		release:   "cilium"
 		name:      "cilium"
 		namespace: "kube-system"
-		version:   "1.14.0"
+		version:   "1.14.1"
 		repo:      "https://helm.cilium.io"
 		values: {
 			operator: replicas: 1

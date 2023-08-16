@@ -11,7 +11,7 @@ import (
 
 // Defines an TerraformAwsVpc based on a Terraform module.
 //
-// Source at ./tf/terraform-aws-vpc
+// Source at ./tf/mod/terraform-aws-vpc
 type TerraformAwsVpc interface {
 	cdktf.TerraformModule
 	AdditionalCidrBlocksOutput() *string

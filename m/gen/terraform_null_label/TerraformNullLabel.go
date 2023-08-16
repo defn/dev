@@ -11,7 +11,7 @@ import (
 
 // Defines an TerraformNullLabel based on a Terraform module.
 //
-// Source at ./tf/terraform-null-label
+// Source at ./tf/mod/terraform-null-label
 type TerraformNullLabel interface {
 	cdktf.TerraformModule
 	AdditionalTagMap() *map[string]*string
