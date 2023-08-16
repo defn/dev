@@ -61,7 +61,5 @@ time main "$@"
 uptime
 
 cd ~/m
-while true; do
-  ~/bin/nix/tilt up || true
-  sleep 5
-done
+bin/make-k3d || true
+exec ~/bin/nix/tilt up
