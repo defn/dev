@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
+load("ext://restart_process", "custom_build_with_restart")
+
 analytics_settings(False)
 
-update_settings(max_parallel_updates=3)
+default_registry('169.254.32.1:5000')
 
 local_resource(
     "code-server",
@@ -44,6 +46,8 @@ local_resource(
                     # deploy k3d
                     env KUBECONFIG=$HOME/.kube/config k3d cluster delete ${nme} || true
                     rm -vf ~/.kube/config*
+                    echo '{ "insecure-registries" : ["169.254.32.1:5000"] }' | sudo tee /etc/docker/daemon.json
+                    sudo systemctl restart docker
                     env KUBECONFIG=$HOME/.kube/config k3d cluster create ${nme} --config k3d.yaml
                     docker update --restart=no k3d-${nme}-server-0
 
@@ -145,7 +149,7 @@ local_resource(
     ],
 )
 
-#local_resource(
+# local_resource(
 #    "hugo",
 #    serve_cmd=[
 #        "bash",
@@ -156,9 +160,9 @@ local_resource(
 #            exec npm run dev
 #            """,
 #    ],
-#)
+# )
 #
-#local_resource(
+# local_resource(
 #    "temporal",
 #    serve_cmd=[
 #        "bash",
@@ -168,9 +172,9 @@ local_resource(
 #            exec temporal server start-dev
 #            """,
 #    ],
-#)
+# )
 
-#local_resource(
+# local_resource(
 #    "argocd-forward",
 #    serve_cmd=[
 #        "bash",
@@ -188,4 +192,23 @@ local_resource(
 #            done
 #            """,
 #    ],
-#)
+# )
+
+local_resource(
+    name="build-cli",
+    cmd="cd ~/m/cmd && make build",
+)
+
+custom_build_with_restart(
+  ref='service-cli',
+  command='cd ~/m/cmd && make image tag=$EXPECTED_REF',
+  deps=['./cmd', './bazel-bin/cmd/cli/cli_/cli'],
+  entrypoint=["/cli"],
+  live_update=[
+        sync("./bazel-bin/cmd/cli/cli_/cli", "/cli"),
+  ],
+)
+
+k8s_yaml(local("cd ~/m/cmd && make manifest"))
+
+k8s_resource("service-cli", port_forwards=8000, resource_deps=["build-cli"])
