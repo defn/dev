@@ -2,6 +2,7 @@ timeout ?= 5
 
 build:
 	../bin/b pass build //cmd/cli:cli
+	cp -f bazel-bin/cmd/cli/cli_/cli /tmp/cli
 
 image:
 	cp -f bazel-bin/cmd/cli/cli_/cli cli.bin
