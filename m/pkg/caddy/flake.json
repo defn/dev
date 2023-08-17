@@ -1,6 +1,6 @@
 {
   "slug": "pkg-caddy",
   "ghrepo": "caddyserver/caddy",
-  "vendor": "2.7.3",
-  "revision": "2"
+  "vendor": "2.7.4",
+  "revision": "0"
 }
