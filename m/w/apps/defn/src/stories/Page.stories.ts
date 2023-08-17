@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/svelte';
+import type { Meta, StoryObj } from "@storybook/svelte";
 
-import Page from './Page.svelte';
+import Page from "./Page.svelte";
 
 const meta: Meta<Page> = {
-  title: 'Page',
+  title: "Page",
   component: Page,
-  tags: ['autodocs']
+  tags: ["autodocs"],
 };
 
 export default meta;

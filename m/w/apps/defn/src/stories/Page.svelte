@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Page } from '..';
+  import { Page } from 'ui';
   import { NavLi } from 'flowbite-svelte';
 </script>
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Counter } from '..';
+  import { Counter } from 'ui';
 </script>
 
 <Counter />
