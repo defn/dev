@@ -25,6 +25,7 @@ gcr.io/knative-releases/knative.dev/serving/cmd/queue
 gcr.io/knative-releases/knative.dev/serving/cmd/webhook
 ghcr.io/dexidp/dex:v2.37.0
 ghcr.io/external-secrets/external-secrets:v0.9.2
+ghcr.io/external-secrets/external-secrets:v0.9.3
 ghcr.io/kyverno/background-controller:v1.10.3
 ghcr.io/kyverno/cleanup-controller:v1.10.3
 ghcr.io/kyverno/kyverno:v1.10.3
