@@ -27,6 +27,27 @@ importers:
         specifier: ^2.3.2
         version: 2.3.2
     devDependencies:
+      '@storybook/addon-essentials':
+        specifier: ^7.3.1
+        version: 7.3.1(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/addon-interactions':
+        specifier: ^7.3.1
+        version: 7.3.1(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/addon-links':
+        specifier: ^7.3.1
+        version: 7.3.1(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/blocks':
+        specifier: ^7.3.1
+        version: 7.3.1(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/svelte':
+        specifier: ^7.3.1
+        version: 7.3.1(svelte@4.2.0)
+      '@storybook/sveltekit':
+        specifier: ^7.3.1
+        version: 7.3.1(svelte@4.2.0)(typescript@5.1.6)(vite@4.4.9)
+      '@storybook/testing-library':
+        specifier: 0.2.0
+        version: 0.2.0
       '@sveltejs/adapter-static':
         specifier: ^2.0.3
         version: 2.0.3(@sveltejs/kit@1.22.6)
@@ -54,6 +75,15 @@ importers:
       postcss-load-config:
         specifier: ^4.0.1
         version: 4.0.1(postcss@8.4.28)
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
+      storybook:
+        specifier: ^7.3.1
+        version: 7.3.1
       svelte:
         specifier: ^4.2.0
         version: 4.2.0
@@ -234,27 +264,6 @@ importers:
         specifier: ^2.3.2
         version: 2.3.2
     devDependencies:
-      '@storybook/addon-essentials':
-        specifier: ^7.3.1
-        version: 7.3.1(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/addon-interactions':
-        specifier: ^7.3.1
-        version: 7.3.1(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/addon-links':
-        specifier: ^7.3.1
-        version: 7.3.1(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/blocks':
-        specifier: ^7.3.1
-        version: 7.3.1(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/svelte':
-        specifier: ^7.3.1
-        version: 7.3.1(svelte@4.2.0)
-      '@storybook/sveltekit':
-        specifier: ^7.3.1
-        version: 7.3.1(svelte@4.2.0)(typescript@5.1.6)(vite@4.4.9)
-      '@storybook/testing-library':
-        specifier: 0.2.0
-        version: 0.2.0
       '@sveltejs/adapter-static':
         specifier: ^2.0.3
         version: 2.0.3(@sveltejs/kit@1.22.6)
@@ -282,15 +291,6 @@ importers:
       postcss-load-config:
         specifier: ^4.0.1
         version: 4.0.1(postcss@8.4.28)
-      react:
-        specifier: ^18.2.0
-        version: 18.2.0
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
-      storybook:
-        specifier: ^7.3.1
-        version: 7.3.1
       svelte:
         specifier: ^4.2.0
         version: 4.2.0
@@ -309,6 +309,9 @@ importers:
       typescript:
         specifier: ^5.1.6
         version: 5.1.6
+      ui:
+        specifier: workspace:*
+        version: 'link:'
       vite:
         specifier: ^4.4.9
         version: 4.4.9(@types/node@20.5.0)
@@ -5271,7 +5274,7 @@ packages:
       eslint-scope: 7.2.2
       eslint-utils: 3.0.0(eslint@8.4.1)
       eslint-visitor-keys: 3.4.3
-      espree: 9.2.0
+      espree: 9.6.1
       esquery: 1.5.0
       esutils: 2.0.3
       fast-deep-equal: 3.1.3

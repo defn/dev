@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/svelte';
+import type { Meta, StoryObj } from "@storybook/svelte";
 
-import Counter from './Counter.svelte';
+import Counter from "./Counter.svelte";
 
 const meta: Meta<Counter> = {
-  title: 'Counter',
+  title: "Counter",
   component: Counter,
-  tags: ['autodocs']
+  tags: ["autodocs"],
 };
 
 export default meta;
