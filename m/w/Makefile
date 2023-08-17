@@ -4,4 +4,11 @@ build:
 install:
 	cd .. && npm install
 	npx pnpm install
-	$(MAKE) build
+
+list:
+	cd .. && npm outdated
+	npx pnpm outdated
+
+upgrade:
+	cd .. && npm upgrade
+	npx pnpm upgrade
