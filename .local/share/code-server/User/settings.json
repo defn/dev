@@ -64,7 +64,8 @@
     "Makefile": "makefile"
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "trunk.io"
+    "editor.defaultFormatter": "vscode.json-language-features"
   },
-  "git.suggestSmartCommit": false
+  "git.suggestSmartCommit": false,
+  "trunk.showWhatsNew": false
 }
