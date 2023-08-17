@@ -309,9 +309,6 @@ importers:
       typescript:
         specifier: ^5.1.6
         version: 5.1.6
-      ui:
-        specifier: workspace:*
-        version: 'link:'
       vite:
         specifier: ^4.4.9
         version: 4.4.9(@types/node@20.5.0)
