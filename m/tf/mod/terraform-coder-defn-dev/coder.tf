@@ -86,10 +86,10 @@ resource "coder_app" "tilt" {
   }
 }
 
-resource "coder_app" "app" {
+resource "coder_app" "api" {
   agent_id     = coder_agent.main.id
-  slug         = "app"
-  display_name = "app"
+  slug         = "api"
+  display_name = "api"
   url          = "http://localhost:8080"
   icon         = "/icon/code.svg"
   subdomain    = true
@@ -97,6 +97,54 @@ resource "coder_app" "app" {
 
   healthcheck {
     url       = "http://localhost:8080"
+    interval  = 5
+    threshold = 6
+  }
+}
+
+resource "coder_app" "web" {
+  agent_id     = coder_agent.main.id
+  slug         = "web"
+  display_name = "web"
+  url          = "http://localhost:3000"
+  icon         = "/icon/code.svg"
+  subdomain    = true
+  share        = "owner"
+
+  healthcheck {
+    url       = "http://localhost:3000"
+    interval  = 5
+    threshold = 6
+  }
+}
+
+resource "coder_app" "docs" {
+  agent_id     = coder_agent.main.id
+  slug         = "docs"
+  display_name = "docs"
+  url          = "http://localhost:3001"
+  icon         = "/icon/code.svg"
+  subdomain    = true
+  share        = "owner"
+
+  healthcheck {
+    url       = "http://localhost:3001"
+    interval  = 5
+    threshold = 6
+  }
+}
+
+resource "coder_app" "storybook" {
+  agent_id     = coder_agent.main.id
+  slug         = "storybook"
+  display_name = "storybook"
+  url          = "http://localhost:6006"
+  icon         = "/icon/code.svg"
+  subdomain    = true
+  share        = "owner"
+
+  healthcheck {
+    url       = "http://localhost:6006"
     interval  = 5
     threshold = 6
   }
