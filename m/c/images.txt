@@ -4,6 +4,7 @@ busybox
 docker.io/amazon/amazon-eks-pod-identity-webhook:v0.4.0
 docker.io/amazon/aws-cli:latest
 docker.io/bitnami/external-dns:0.13.5-debian-11-r55
+docker.io/bitnami/external-dns:0.13.5-debian-11-r75
 docker.io/bitnami/kubectl:1.26.4
 docker.io/envoyproxy/envoy:v1.23-latest
 docker.io/library/busybox:latest
