@@ -30,6 +30,19 @@ local_resource(
     ],
 )
 
+local_resource(
+    "pnpm",
+    serve_cmd=[
+        "bash",
+        "-c",
+        """
+            cd ~/m/w
+            $(MAKE) install
+            npx pnpm dev
+            """,
+    ],
+)
+
 # local_resource(
 #    "hugo",
 #    serve_cmd=[
