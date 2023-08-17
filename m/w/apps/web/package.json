@@ -2,8 +2,6 @@
   "name": "web",
   "version": "0.0.0",
   "scripts": {
-    "lint": "prettier --check --ignore-path=../../.prettierignore . && eslint \"src\"",
-    "format": "prettier --write --ignore-path=../../.prettierignore .",
     "build": "vite build",
     "package": "vite package",
     "preview": "vite preview",

@@ -3,14 +3,11 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write ."
+    "lint": "turbo run lint"
   },
   "devDependencies": {
     "eslint": "^8.47.0",
     "eslint-config-custom": "workspace:*",
-    "prettier": "^3.0.2",
-    "prettier-plugin-svelte": "^3.0.3",
     "turbo": "latest"
   },
   "packageManager": "pnpm@7.15.0"
