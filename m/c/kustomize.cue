@@ -1103,4 +1103,12 @@ kustomize: "backstage": #KustomizeHelm & {
 		values: {
 		}
 	}
+
+	resource: "namespace-backstage": core.#Namespace & {
+		apiVersion: "v1"
+		kind:       "Namespace"
+		metadata: {
+			name: "backstage"
+		}
+	}
 }

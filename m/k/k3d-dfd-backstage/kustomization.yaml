@@ -2,7 +2,8 @@
 
 patches: []
 namespace: backstage
-resources: []
+resources:
+  - resource-namespace-backstage.yaml
 helmCharts:
   - releaseName: backstage
     namespace: backstage
