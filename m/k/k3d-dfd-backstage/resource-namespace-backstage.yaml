@@ -1,0 +1,6 @@
+#ManagedBy: cue
+
+metadata:
+  name: backstage
+kind: Namespace
+apiVersion: v1
