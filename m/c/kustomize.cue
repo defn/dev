@@ -1158,6 +1158,13 @@ kustomize: "backstage": #KustomizeHelm & {
 			op:   "add"
 			path: "/spec/template/spec/containers/0/env/-"
 			value: {
+				name:  "APP_CONFIG_backend_baseUrl"
+				value: "https://backstage.defn.run"
+			}
+		}, {
+			op:   "add"
+			path: "/spec/template/spec/containers/0/env/-"
+			value: {
 				name:  "APP_CONFIG_organization_name"
 				value: "defn.dev"
 			}
