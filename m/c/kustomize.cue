@@ -1101,6 +1101,7 @@ kustomize: "backstage": #KustomizeHelm & {
 		version:   "1.2.0"
 		repo:      "https://backstage.github.io/charts"
 		values: {
+			postgresql: enabled: true
 		}
 	}
 
