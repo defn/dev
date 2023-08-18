@@ -1,6 +1,11 @@
 #ManagedBy: cue
 
-patches: []
+patches:
+  - path: jsonp-deployment-backstage.yaml
+    target:
+      kind: Deployment
+      name: backstage
+      namespace: backstage
 namespace: backstage
 resources:
   - resource-namespace-backstage.yaml
