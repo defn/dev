@@ -141,6 +141,10 @@ spec:
             secretKeyRef:
               key: password
               name: backstage-postgresql
+        - name: APP_CONFIG_app_baseUrl
+          vailue: https://backstage.defn.run
+        - name: APP_CONFIG_organization_name
+          vailue: defn.dev
         image: ghcr.io/backstage/backstage:latest
         imagePullPolicy: Always
         name: backstage-backend
