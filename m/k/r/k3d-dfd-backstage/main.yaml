@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/component: backstage
+    app.kubernetes.io/instance: backstage
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: backstage
+    helm.sh/chart: backstage-1.2.0
+  name: backstage
+  namespace: backstage
+spec:
+  ports:
+  - name: http-backend
+    nodePort: null
+    port: 7007
+    protocol: TCP
+    targetPort: backend
+  selector:
+    app.kubernetes.io/component: backstage
+    app.kubernetes.io/instance: backstage
+    app.kubernetes.io/name: backstage
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: backstage
+    app.kubernetes.io/instance: backstage
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: backstage
+    helm.sh/chart: backstage-1.2.0
+  name: backstage
+  namespace: backstage
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: backstage
+      app.kubernetes.io/instance: backstage
+      app.kubernetes.io/name: backstage
+  template:
+    metadata:
+      annotations:
+        checksum/app-config: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
+      labels:
+        app.kubernetes.io/component: backstage
+        app.kubernetes.io/instance: backstage
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: backstage
+        helm.sh/chart: backstage-1.2.0
+    spec:
+      containers:
+      - args: null
+        command:
+        - node
+        - packages/backend
+        env:
+        - name: APP_CONFIG_backend_listen_port
+          value: "7007"
+        image: ghcr.io/backstage/backstage:latest
+        imagePullPolicy: Always
+        name: backstage-backend
+        ports:
+        - containerPort: 7007
+          name: backend
+          protocol: TCP
+      serviceAccountName: default
+      volumes: null

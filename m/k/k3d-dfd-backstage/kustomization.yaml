@@ -1,0 +1,13 @@
+#ManagedBy: cue
+
+patches: []
+namespace: backstage
+resources: []
+helmCharts:
+  - releaseName: backstage
+    namespace: backstage
+    valuesInline: {}
+    name: backstage
+    version: 1.2.0
+    repo: https://backstage.github.io/charts
+    includeCRDs: true

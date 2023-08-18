@@ -1089,3 +1089,18 @@ kustomize: "ubuntu": #Kustomize & {
 		}
 	}
 }
+
+// https://artifacthub.io/packages/helm/backstage/backstage
+kustomize: "backstage": #KustomizeHelm & {
+	namespace: "backstage"
+
+	helm: {
+		release:   "backstage"
+		name:      "backstage"
+		namespace: "backstage"
+		version:   "1.2.0"
+		repo:      "https://backstage.github.io/charts"
+		values: {
+		}
+	}
+}
