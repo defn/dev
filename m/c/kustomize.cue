@@ -1111,4 +1111,32 @@ kustomize: "backstage": #KustomizeHelm & {
 			name: "backstage"
 		}
 	}
+
+	resource: "ingress-backstage": {
+		apiVersion: "networking.k8s.io/v1"
+		kind:       "Ingress"
+		metadata: {
+			name: "backstage"
+			annotations: {
+				"external-dns.alpha.kubernetes.io/hostname":        "backstage.defn.run"
+				"traefik.ingress.kubernetes.io/router.tls":         "true"
+				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
+			}
+		}
+
+		spec: {
+			ingressClassName: "traefik"
+			rules: [{
+				host: "backstage.defn.run"
+				http: paths: [{
+					path:     "/"
+					pathType: "Prefix"
+					backend: service: {
+						name: "backstage"
+						port: number: 7007
+					}
+				}]
+			}]
+		}
+	}
 }
