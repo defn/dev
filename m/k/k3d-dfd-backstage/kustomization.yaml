@@ -4,6 +4,7 @@ patches: []
 namespace: backstage
 resources:
   - resource-namespace-backstage.yaml
+  - resource-ingress-backstage.yaml
 helmCharts:
   - releaseName: backstage
     namespace: backstage
