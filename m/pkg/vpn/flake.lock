@@ -7,17 +7,17 @@
       },
       "locked": {
         "dir": "m/pkg/dev",
-        "lastModified": 1691869221,
-        "narHash": "sha256-QV3p1P2tlTGuLL9XME9RFXh2d2/yO7jpqsKhV3CXUE0=",
+        "lastModified": 1689277319,
+        "narHash": "sha256-gsqaQTNX3WNS3+DDb1wva2m4OjEJzjCe5sKzUcIaI0Y=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "48989a8305b411a0ccce199f8569043626abde96",
+        "rev": "7f1db96942f2c6ff834b9a180f57bc6f6a23436b",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/dev",
         "owner": "defn",
-        "ref": "pkg-dev-0.0.10",
+        "ref": "pkg-dev-0.0.9",
         "repo": "dev",
         "type": "github"
       }
@@ -40,17 +40,17 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1691831739,
-        "narHash": "sha256-6e12VCvA7jOjhzJ1adLiUV1GTPXGBcCfhggsDwiuNB4=",
+        "lastModified": 1689088367,
+        "narHash": "sha256-Y2tl2TlKCWEHrOeM9ivjCLlRAKH3qoPUE/emhZECU14=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "3fe694c4156b84dac12627685c7ae592a71e2206",
+        "rev": "5c9ddb86679c400d6b7360797b8a22167c2053f8",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "3fe694c4156b84dac12627685c7ae592a71e2206",
+        "rev": "5c9ddb86679c400d6b7360797b8a22167c2053f8",
         "type": "github"
       }
     },
@@ -60,17 +60,17 @@
       },
       "locked": {
         "dir": "m/pkg/pkg",
-        "lastModified": 1692061434,
-        "narHash": "sha256-3ET3NgIBZVe+59zx5c3c4rv+wbSpGP8tvSw1Dpi1/Us=",
+        "lastModified": 1689277368,
+        "narHash": "sha256-PcqZACb6LghiievM+AlhUGGNK0ch723H4zI+o1ma+08=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "71fd24a88e85a7011e01f1fa1c9c93228673f87c",
+        "rev": "26dc66a816419acea5a46ea0a23af639a9a030a2",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/pkg",
         "owner": "defn",
-        "ref": "pkg-pkg-0.0.12",
+        "ref": "pkg-pkg-0.0.11",
         "repo": "dev",
         "type": "github"
       }
@@ -86,17 +86,17 @@
       },
       "locked": {
         "dir": "m/pkg/tailscale",
-        "lastModified": 1692210847,
-        "narHash": "sha256-QqCNWQHfjXghvZoSl3Hd5E2zevs55aG2NkhtgfJdpnA=",
+        "lastModified": 1690422749,
+        "narHash": "sha256-EnevC5rlBF+T/tBnwzntzlZWaM4n5ExWAA8AJrplNq0=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "9915e1bce10d5f138b399bf904c8df8afabbdcd5",
+        "rev": "024ad6be3258fd4a95f15a0996bbf746479364d3",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/tailscale",
         "owner": "defn",
-        "ref": "pkg-tailscale-1.48.0-1",
+        "ref": "pkg-tailscale-1.46.1-1",
         "repo": "dev",
         "type": "github"
       }
