@@ -48,6 +48,9 @@ env: (#Transform & {
 			"ubuntu": [60, ""]
 			"hello": [60, ""]
 
+			// experimental
+			"backstage": [100, ""]
+
 			//			// vcluster
 			//			"\(cluster_type)-\(cluster_name)-vc0": [8, ""]
 			//			"\(cluster_type)-\(cluster_name)-vc1": [8, ""]
