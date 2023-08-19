@@ -6,11 +6,11 @@ metadata:
   name: default-wildcard
   namespace: kourier-system
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: '*.default.dev.amanihavam.defn.run'
+    external-dns.alpha.kubernetes.io/hostname: '*.default.dev.amanibhavam.defn.run'
 spec:
   ingressClassName: traefik
   rules:
-    - host: wildcard.default.dev.amanihavam.defn.run
+    - host: wildcard.default.dev.amanibhavam.defn.run
       http:
         paths:
           - path: /
