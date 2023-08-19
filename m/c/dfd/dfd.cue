@@ -1,9 +1,5 @@
 package c
 
-import (
-	core "k8s.io/api/core/v1"
-)
-
 _issuer:           "zerossl-production"
 _cloudflare_email: "cloudflare@defn.us"
 
@@ -130,16 +126,8 @@ kustomize: "secrets": #Kustomize & {
 }
 
 kustomize: "hello": #Kustomize & {
-	_app_ns: "hello"
+	_app_ns: "defaul"
 	_funcs: ["hello", "bye"]
-
-	resource: "namespace": core.#Namespace & {
-		apiVersion: "v1"
-		kind:       "Namespace"
-		metadata: {
-			name: _app_ns
-		}
-	}
 
 	resource: "ingressroute-\(_domain)": {
 		apiVersion: "traefik.containo.us/v1alpha1"
