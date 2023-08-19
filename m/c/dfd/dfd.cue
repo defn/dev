@@ -53,11 +53,9 @@ env: (#Transform & {
 
 			// vcluster
 			"\(cluster_type)-\(cluster_name)-vc0": [100, ""]
-			"\(cluster_type)-\(cluster_name)-vc1": [100, ""]
 
 			// vcluster workloads
 			"vcluster-\(cluster_type)-\(cluster_name)-vc0": [101, ""]
-			"vcluster-\(cluster_type)-\(cluster_name)-vc1": [101, ""]
 		}
 	}
 }).outputs
