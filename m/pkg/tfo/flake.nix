@@ -3,7 +3,7 @@
   outputs = inputs: inputs.pkg.downloadMain rec {
     src = ./.;
 
-    url_template = input: "https://github.com/isaaguilar/terraform-operator-cli/releases/download/v${input.vendor}/tfo-v${input.vendor}-${input.os}-${input.arch}.tgz";
+    url_template = input: "https://github.com/isaaguilar/terraform-operator-cli/releases/download/${input.vendor}/tfo-${input.vendor}-${input.os}-${input.arch}.tgz";
 
     installPhase = pkg: ''
       install -m 0755 -d $out $out/bin
