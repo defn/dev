@@ -930,24 +930,21 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    kubernetes.io/ingress.class: nginx
-    kubernetes.io/tls-acme: "true"
-  labels:
-    app: netdata
-    chart: netdata-3.7.68
-    heritage: Helm
-    release: netdata
+    external-dns.alpha.kubernetes.io/hostname: netdata.defn.run
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
   name: netdata
   namespace: netdata
 spec:
+  ingressClassName: traefik
   rules:
-  - host: netdata.k8s.local
+  - host: netdata.defn.run
     http:
       paths:
       - backend:
           service:
             name: netdata
             port:
-              name: http
+              number: 19999
         path: /
         pathType: Prefix

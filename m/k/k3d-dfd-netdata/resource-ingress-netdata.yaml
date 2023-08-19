@@ -1,0 +1,23 @@
+#ManagedBy: cue
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: netdata
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: netdata.defn.run
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: netdata.defn.run
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: netdata
+                port:
+                  number: 19999
