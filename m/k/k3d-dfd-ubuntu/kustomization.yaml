@@ -1,7 +1,0 @@
-#ManagedBy: cue
-
-patches: []
-namespace: default
-resources:
-  - resource-deployment.yaml
-  - resource-serviceaccount.yaml

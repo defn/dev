@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "60"
+    argocd.argoproj.io/sync-wave: "100"
   name: k3d-dfd-argo-cd
   namespace: argocd
 spec:
@@ -65,7 +65,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "60"
+    argocd.argoproj.io/sync-wave: "100"
   name: k3d-dfd-cilium
   namespace: argocd
 spec:
@@ -149,7 +149,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "60"
+    argocd.argoproj.io/sync-wave: "100"
   name: k3d-dfd-hello
   namespace: argocd
 spec:
@@ -327,27 +327,6 @@ spec:
   project: default
   source:
     path: m/k/r/k3d-dfd-traefik
-    repoURL: https://github.com/defn/dev
-    targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions: []
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "60"
-  name: k3d-dfd-ubuntu
-  namespace: argocd
-spec:
-  destination:
-    name: k3d-dfd
-  project: default
-  source:
-    path: m/k/r/k3d-dfd-ubuntu
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
