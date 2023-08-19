@@ -61,6 +61,9 @@ function main {
 		sudo apt update
 		sudo apt install -y apache2-utils
 
+		# bump
+		sudo sysctl -w fs.inotify.max_user_instances=1000
+
 		# patch argocd admin password
 		kubectl --context k3d-${nme}-argocd patch secret argocd-secret -p '{"stringData": { "admin.password": "'$(htpasswd -bnBC 10 "" admin | tr -d ':\n')'"}}'
 
@@ -78,7 +81,7 @@ function main {
 			sleep 30
 		done &
 
-		for v in 0; do
+		for v in $(cd c/dfd && cue export --out json -e vclusters | jq -r '.[]'); do
 			# wait until vcluster is ready
 			while true; do
 				if vcluster --context k3d-${nme} connect vcluster -n "k3d-${nme}-vc${v}" --server=$(kubectl --context k3d-${nme} get nodes -o json | jq -r '.items[].metadata.annotations["k3s.io/internal-ip"]'):$((8443 + v)) --insecure --update-current=false --kube-config-context-name vcluster-k3d-${nme}-vc${v} --kube-config $HOME/.kube/config.vc${v}; then break; fi

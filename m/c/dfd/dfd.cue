@@ -51,11 +51,13 @@ env: (#Transform & {
 			// experimental
 			"backstage": [100, ""]
 
-			// vcluster
-			"\(cluster_type)-\(cluster_name)-vc0": [100, ""]
+			for v in vclusters {
+				// vcluster
+				"\(cluster_type)-\(cluster_name)-vc\(v)": [100, ""]
 
-			// vcluster workloads
-			"vcluster-\(cluster_type)-\(cluster_name)-vc0": [101, ""]
+				// vcluster workloads
+				"vcluster-\(cluster_type)-\(cluster_name)-vc\(v)": [101, ""]
+			}
 		}
 	}
 }).outputs
