@@ -3,13 +3,13 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: default.defn.run
-  namespace: default
+  name: dev.amanihavam.defn.run
+  namespace: hello
 spec:
   entryPoints:
     - websecure
   routes:
-    - match: HostRegexp(`{subdomain:[a-z0-9-]+}.default.defn.run`)
+    - match: HostRegexp(`{subdomain:[a-z0-9-]+}.hello.dev.amanihavam.defn.run`)
       kind: Rule
       services:
         - name: kourier-internal
