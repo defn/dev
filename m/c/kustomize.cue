@@ -217,7 +217,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.23.4"
+		version: "6.23.6"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -1094,36 +1094,46 @@ kustomize: "ubuntu": #Kustomize & {
 	}
 }
 
-// https://artifacthub.io/packages/helm/backstage/backstage
-kustomize: "backstage": #KustomizeHelm & {
-	namespace: "backstage"
+// https://artifacthub.io/packages/helm/coder-v2/coder
+kustomize: "coder": #KustomizeHelm & {
+	namespace: "coder"
 
 	helm: {
-		release:   "backstage"
-		name:      "backstage"
-		namespace: "backstage"
-		version:   "1.2.0"
-		repo:      "https://backstage.github.io/charts"
+		release:   "coder"
+		name:      "coder"
+		namespace: "coder"
+		version:   "2.1.0"
+		repo:      "https://helm.coder.com/v2"
 		values: {
-			postgresql: enabled: true
+			coder: {
+				service: type: "ClusterIP"
+
+				env: [{
+					name: "CODER_ACCESS_URL"
+					valueFrom: secretKeyRef: {
+						name: "coder"
+						key:  "CODER_ACCESS_URL"
+					}
+				}]
+			}
 		}
 	}
 
-	resource: "namespace-backstage": core.#Namespace & {
+	resource: "namespace-coder": core.#Namespace & {
 		apiVersion: "v1"
 		kind:       "Namespace"
 		metadata: {
-			name: "backstage"
+			name: "coder"
 		}
 	}
 
-	resource: "ingress-backstage": {
+	resource: "ingress-coder": {
 		apiVersion: "networking.k8s.io/v1"
 		kind:       "Ingress"
 		metadata: {
-			name: "backstage"
+			name: "coder"
 			annotations: {
-				"external-dns.alpha.kubernetes.io/hostname":        "backstage.\(_domain)"
+				"external-dns.alpha.kubernetes.io/hostname":        "coder.\(_domain)"
 				"traefik.ingress.kubernetes.io/router.tls":         "true"
 				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
 			}
@@ -1132,46 +1142,40 @@ kustomize: "backstage": #KustomizeHelm & {
 		spec: {
 			ingressClassName: "traefik"
 			rules: [{
-				host: "backstage.\(_domain)"
+				host: "coder.\(_domain)"
 				http: paths: [{
 					path:     "/"
 					pathType: "Prefix"
 					backend: service: {
-						name: "backstage"
-						port: number: 7007
+						name: "coder"
+						port: number: 80
 					}
 				}]
 			}]
 		}
 	}
 
-	jsp: "deployment-backstage": {
-		target: {
-			kind:      "Deployment"
-			name:      "backstage"
-			namespace: "backstage"
+	resource: "externalsecret-coder": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: {
+			name:      "coder"
+			namespace: "coder"
 		}
-		patches: [{
-			op:   "add"
-			path: "/spec/template/spec/containers/0/env/-"
-			value: {
-				name:  "APP_CONFIG_app_baseUrl"
-				value: "https://backstage.\(_domain)"
+		spec: {
+			refreshInterval: "1h"
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: cluster_name
 			}
-		}, {
-			op:   "add"
-			path: "/spec/template/spec/containers/0/env/-"
-			value: {
-				name:  "APP_CONFIG_backend_baseUrl"
-				value: "https://backstage.\(_domain)"
+			dataFrom: [{
+				extract: key: "\(cluster_type)-\(cluster_name)"
+			}]
+			target: {
+				name:           "coder"
+				creationPolicy: "Owner"
 			}
-		}, {
-			op:   "add"
-			path: "/spec/template/spec/containers/0/env/-"
-			value: {
-				name:  "APP_CONFIG_organization_name"
-				value: _domain
-			}
-		}]
+		}
 	}
+
 }

@@ -30,6 +30,7 @@ env: (#Transform & {
 			"coredns": [2, ""]
 			"kyverno": [2, "", "ServerSideApply=true"]
 			"cert-manager": [2, ""]
+			"netdata": [2, ""]
 			"pod-identity": [2, ""]
 
 			// ~~~~~ Wave 10 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -72,6 +73,7 @@ env: (#Transform & {
 			}
 
 			// experimental
+			"coder": [100, ""]
 			"hello": [100, ""]
 		}
 	}
