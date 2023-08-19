@@ -27,8 +27,8 @@
           install -m 0755 ${etc_src}/tailscale-darwin $out/bin/tailscale
           ;;
         *)
-          install -m 0755 */tailscale $out/bin/tailscale
           install -m 0755 */tailscaled $out/bin/tailscaled
+          install -m 0755 */tailscale $out/bin/tailscale
           ;;
       esac
     '';
