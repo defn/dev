@@ -141,32 +141,6 @@ kustomize: "hello": #Kustomize & {
 		}
 	}
 
-	resource: "ingress-default-wildcard": {
-		apiVersion: "networking.k8s.io/v1"
-		kind:       "Ingress"
-		metadata: {
-			name:      "default-wildcard"
-			namespace: "kourier-system"
-			annotations: {
-				"external-dns.alpha.kubernetes.io/hostname": "*.\(_app_ns).\(_domain)"
-			}
-		}
-
-		spec: {
-			ingressClassName: "traefik"
-			rules: [{
-				host: "wildcard.\(_app_ns).\(_domain)"
-				http: paths: [{
-					path:     "/"
-					pathType: "Prefix"
-					backend: service: {
-						name: "kourier-internal"
-						port: number: 80
-					}
-				}]
-			}]
-		}
-	}
 	resource: "ingressroute-\(_domain)": {
 		apiVersion: "traefik.containo.us/v1alpha1"
 		kind:       "IngressRoute"
