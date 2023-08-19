@@ -5,8 +5,8 @@ metadata:
 ---
 apiVersion: v1
 data:
-  password: VjVXcDhWdjVDSg==
-  postgres-password: OXV2OW9OYzdTTA==
+  password: VkVzVmtoSFpuUg==
+  postgres-password: VUJFY2FFVUlKTA==
 kind: Secret
 metadata:
   labels:
