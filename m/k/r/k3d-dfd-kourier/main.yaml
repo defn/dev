@@ -597,3 +597,24 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: 3scale-kourier-gateway
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: '*.default.dev.amanihavam.defn.run'
+  name: default-wildcard
+  namespace: kourier-system
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: wildcard.default.dev.amanihavam.defn.run
+    http:
+      paths:
+      - backend:
+          service:
+            name: kourier-internal
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
