@@ -6,7 +6,11 @@ import (
 	rbac "k8s.io/api/rbac/v1"
 )
 
-_issuer: "zerossl-production"
+_issuer:           string
+_domain:           string
+_domain_name:      string
+_domain_slug:      string
+_cloudflare_email: string
 
 kustomize: "coredns": #Kustomize & {
 	resource: "configmap-coredns": core.#ConfigMap & {
@@ -37,15 +41,13 @@ kustomize: "argo-cd": #Kustomize & {
 		url: "https://raw.githubusercontent.com/argoproj/argo-cd/v2.7.10/manifests/install.yaml"
 	}
 
-	_host: "argocd.defn.run"
-
 	resource: "ingress-argo-cd": {
 		apiVersion: "networking.k8s.io/v1"
 		kind:       "Ingress"
 		metadata: {
 			name: "argo-cd"
 			annotations: {
-				"external-dns.alpha.kubernetes.io/hostname":        _host
+				"external-dns.alpha.kubernetes.io/hostname":        "argocd.\(_domain)"
 				"traefik.ingress.kubernetes.io/router.tls":         "true"
 				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
 			}
@@ -54,7 +56,7 @@ kustomize: "argo-cd": #Kustomize & {
 		spec: {
 			ingressClassName: "traefik"
 			rules: [{
-				host: _host
+				host: "argocd.\(_domain)"
 				http: paths: [{
 					path:     "/"
 					pathType: "Prefix"
@@ -221,11 +223,11 @@ kustomize: "external-dns": #KustomizeHelm & {
 			]
 			provider: "cloudflare"
 			cloudflare: {
-				email:   "cloudflare@defn.us"
+				email:   _cloudflare_email
 				proxied: false
 			}
 			domainFilters: [
-				"defn.run",
+				_domain_name,
 			]
 		}
 	}
@@ -285,14 +287,14 @@ kustomize: "kourier": #Kustomize & {
 			name:      "default-wildcard"
 			namespace: "kourier-system"
 			annotations: {
-				"external-dns.alpha.kubernetes.io/hostname": "*.default.defn.run"
+				"external-dns.alpha.kubernetes.io/hostname": "*.default.\(_domain)"
 			}
 		}
 
 		spec: {
 			ingressClassName: "traefik"
 			rules: [{
-				host: "wildcard.default.defn.run"
+				host: "wildcard.default.\(_domain)"
 				http: paths: [{
 					path:     "/"
 					pathType: "Prefix"
@@ -496,7 +498,7 @@ kustomize: "knative": #Kustomize & {
 			name:      "config-domain"
 			namespace: "knative-serving"
 		}
-		data: "defn.run": ""
+		data: "\(_domain)": ""
 	}
 
 	psm: "config-map-config-features": core.#ConfigMap & {
@@ -709,15 +711,13 @@ kustomize: "cilium": #KustomizeHelm & {
 		}
 	}
 
-	_host: "hubble.defn.run"
-
 	resource: "ingress-hubble-ui": {
 		apiVersion: "networking.k8s.io/v1"
 		kind:       "Ingress"
 		metadata: {
 			name: "hubble-ui"
 			annotations: {
-				"external-dns.alpha.kubernetes.io/hostname":        _host
+				"external-dns.alpha.kubernetes.io/hostname":        "hubble.\(_domain)"
 				"traefik.ingress.kubernetes.io/router.tls":         "true"
 				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
 			}
@@ -726,7 +726,7 @@ kustomize: "cilium": #KustomizeHelm & {
 		spec: {
 			ingressClassName: "traefik"
 			rules: [{
-				host: _host
+				host: "hubble.\(_domain)"
 				http: paths: [{
 					path:     "/"
 					pathType: "Prefix"
@@ -950,7 +950,7 @@ kustomize: "traefik": #KustomizeHelm & {
 			namespace: "traefik"
 		}
 
-		spec: defaultCertificate: secretName: "defn-run-wildcard"
+		spec: defaultCertificate: secretName: "\(_domain_slug)-wildcard"
 	}
 
 	resource: "serverstransport-insecure": {
@@ -972,7 +972,7 @@ kustomize: "traefik": #KustomizeHelm & {
 		}
 		spec: entryPoints: ["web"]
 		spec: routes: [{
-			match: "HostRegexp(`{subdomain:[a-z0-9-]+}.defn.run`)"
+			match: "HostRegexp(`{subdomain:[a-z0-9-]+}.\(_domain)`)"
 			kind:  "Rule"
 			services: [{
 				name: "noop@internal"
@@ -993,7 +993,7 @@ kustomize: "traefik": #KustomizeHelm & {
 		}
 		spec: entryPoints: ["websecure"]
 		spec: routes: [{
-			match: "Host(`traefik.defn.run`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
+			match: "Host(`traefik.\(_domain)`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
 			kind:  "Rule"
 			services: [{
 				name: "api@internal"
@@ -1023,7 +1023,7 @@ kustomize: "traefik": #KustomizeHelm & {
 			name:      "traefik"
 			namespace: "traefik"
 			annotations: {
-				"external-dns.alpha.kubernetes.io/hostname": "traefik.defn.run"
+				"external-dns.alpha.kubernetes.io/hostname": "traefik.\(_domain)"
 			}
 		}
 
@@ -1033,18 +1033,18 @@ kustomize: "traefik": #KustomizeHelm & {
 		}
 	}
 
-	resource: "certificate-defn-run-wildcard-traefik": {
+	resource: "certificate-\(_domain_slug)-wildcard-traefik": {
 		apiVersion: "cert-manager.io/v1"
 		kind:       "Certificate"
 		metadata: {
-			name:      "defn-run-wildcard"
+			name:      "\(_domain_slug)-wildcard"
 			namespace: "traefik"
 		}
 		spec: {
-			secretName: "defn-run-wildcard"
+			secretName: "\(_domain_slug)-wildcard"
 			dnsNames: [
-				"*.defn.run",
-				"*.default.defn.run",
+				"*.\(_domain)",
+				"*.default.\(_domain)",
 			]
 			issuerRef: {
 				name:  _issuer
@@ -1119,7 +1119,7 @@ kustomize: "backstage": #KustomizeHelm & {
 		metadata: {
 			name: "backstage"
 			annotations: {
-				"external-dns.alpha.kubernetes.io/hostname":        "backstage.defn.run"
+				"external-dns.alpha.kubernetes.io/hostname":        "backstage.\(_domain)"
 				"traefik.ingress.kubernetes.io/router.tls":         "true"
 				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
 			}
@@ -1128,7 +1128,7 @@ kustomize: "backstage": #KustomizeHelm & {
 		spec: {
 			ingressClassName: "traefik"
 			rules: [{
-				host: "backstage.defn.run"
+				host: "backstage.\(_domain)"
 				http: paths: [{
 					path:     "/"
 					pathType: "Prefix"
@@ -1152,21 +1152,21 @@ kustomize: "backstage": #KustomizeHelm & {
 			path: "/spec/template/spec/containers/0/env/-"
 			value: {
 				name:  "APP_CONFIG_app_baseUrl"
-				value: "https://backstage.defn.run"
+				value: "https://backstage.\(_domain)"
 			}
 		}, {
 			op:   "add"
 			path: "/spec/template/spec/containers/0/env/-"
 			value: {
 				name:  "APP_CONFIG_backend_baseUrl"
-				value: "https://backstage.defn.run"
+				value: "https://backstage.\(_domain)"
 			}
 		}, {
 			op:   "add"
 			path: "/spec/template/spec/containers/0/env/-"
 			value: {
 				name:  "APP_CONFIG_organization_name"
-				value: "defn.dev"
+				value: _domain
 			}
 		}]
 	}
