@@ -20,6 +20,6 @@ helmCharts:
       domainFilters:
         - defn.run
     name: external-dns
-    version: 6.23.4
+    version: 6.23.6
     repo: https://charts.bitnami.com/bitnami
     includeCRDs: true

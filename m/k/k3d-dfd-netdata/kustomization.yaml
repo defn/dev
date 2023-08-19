@@ -1,0 +1,14 @@
+#ManagedBy: cue
+
+patches: []
+namespace: netdata
+resources:
+  - resource-namespace-netdata.yaml
+helmCharts:
+  - releaseName: netdata
+    namespace: netdata
+    valuesInline: {}
+    name: netdata
+    version: 3.7.68
+    repo: https://netdata.github.io/helmchart
+    includeCRDs: true

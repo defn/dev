@@ -55,101 +55,13 @@ kustomize: "argo-events": #KustomizeHelm & {
 	}
 }
 
-// https://artifacthub.io/packages/helm/coder-v2/coder
-kustomize: "coder": #KustomizeHelm & {
-	namespace: "coder"
-
-	_host: "coder.defn.run"
-
-	helm: {
-		release:   "coder"
-		name:      "coder"
-		namespace: "coder"
-		version:   "2.0.2"
-		repo:      "https://helm.coder.com/v2"
-		values: {
-			coder: {
-				service: type: "ClusterIP"
-
-				env: [{
-					name: "CODER_ACCESS_URL"
-					valueFrom: secretKeyRef: {
-						name: "coder"
-						key:  "CODER_ACCESS_URL"
-					}
-				}]
-			}
-		}
-	}
-
-	resource: "namespace-coder": core.#Namespace & {
-		apiVersion: "v1"
-		kind:       "Namespace"
-		metadata: {
-			name: "coder"
-		}
-	}
-
-	resource: "ingress-coder": {
-		apiVersion: "networking.k8s.io/v1"
-		kind:       "Ingress"
-		metadata: {
-			name: "coder"
-			annotations: {
-				"external-dns.alpha.kubernetes.io/hostname":        _host
-				"traefik.ingress.kubernetes.io/router.tls":         "true"
-				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
-			}
-		}
-
-		spec: {
-			ingressClassName: "traefik"
-			rules: [{
-				host: _host
-				http: paths: [{
-					path:     "/"
-					pathType: "Prefix"
-					backend: service: {
-						name: "coder"
-						port: number: 80
-					}
-				}]
-			}]
-		}
-	}
-
-	resource: "externalsecret-coder": {
-		apiVersion: "external-secrets.io/v1beta1"
-		kind:       "ExternalSecret"
-		metadata: {
-			name:      "coder"
-			namespace: "coder"
-		}
-		spec: {
-			refreshInterval: "1h"
-			secretStoreRef: {
-				kind: "ClusterSecretStore"
-				name: "dev"
-			}
-			dataFrom: [{
-				extract: key: "dev/amanibhavam-global-coder"
-			}]
-			target: {
-				name:           "coder"
-				creationPolicy: "Owner"
-			}
-		}
-	}
-
-}
-
 // https://artifacthub.io/packages/helm/argo/argo-workflows
 kustomize: "argo-workflows": #KustomizeHelm & {
 	helm: {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.32.3"
+		version:   "0.33.1"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [
@@ -333,7 +245,7 @@ kustomize: "nginx": #KustomizeHelm & {
 		release:   "nginx"
 		name:      "nginx"
 		namespace: "nginx"
-		version:   "15.1.3"
+		version:   "15.1.4"
 		repo:      "https://charts.bitnami.com/bitnami"
 		values: {
 		}
@@ -370,7 +282,7 @@ kustomize: "caddy": #KustomizeHelm & {
 		release:   "caddy"
 		name:      "caddy"
 		namespace: "caddy"
-		version:   "0.2.4"
+		version:   "0.3.2"
 		repo:      "https://charts.alekc.dev"
 		values: {
 			listenPort: 80
@@ -545,5 +457,87 @@ kustomize: "defn": #Kustomize & {
 				}
 			}]
 		}
+	}
+}
+
+// https://artifacthub.io/packages/helm/backstage/backstage
+kustomize: "backstage": #KustomizeHelm & {
+	namespace: "backstage"
+
+	helm: {
+		release:   "backstage"
+		name:      "backstage"
+		namespace: "backstage"
+		version:   "1.2.0"
+		repo:      "https://backstage.github.io/charts"
+		values: {
+			postgresql: enabled: true
+		}
+	}
+
+	resource: "namespace-backstage": core.#Namespace & {
+		apiVersion: "v1"
+		kind:       "Namespace"
+		metadata: {
+			name: "backstage"
+		}
+	}
+
+	resource: "ingress-backstage": {
+		apiVersion: "networking.k8s.io/v1"
+		kind:       "Ingress"
+		metadata: {
+			name: "backstage"
+			annotations: {
+				"external-dns.alpha.kubernetes.io/hostname":        "backstage.\(_domain)"
+				"traefik.ingress.kubernetes.io/router.tls":         "true"
+				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
+			}
+		}
+
+		spec: {
+			ingressClassName: "traefik"
+			rules: [{
+				host: "backstage.\(_domain)"
+				http: paths: [{
+					path:     "/"
+					pathType: "Prefix"
+					backend: service: {
+						name: "backstage"
+						port: number: 7007
+					}
+				}]
+			}]
+		}
+	}
+
+	jsp: "deployment-backstage": {
+		target: {
+			kind:      "Deployment"
+			name:      "backstage"
+			namespace: "backstage"
+		}
+		patches: [{
+			op:   "add"
+			path: "/spec/template/spec/containers/0/env/-"
+			value: {
+				name:  "APP_CONFIG_app_baseUrl"
+				value: "https://backstage.\(_domain)"
+			}
+		}, {
+			op:   "add"
+			path: "/spec/template/spec/containers/0/env/-"
+			value: {
+				name:  "APP_CONFIG_backend_baseUrl"
+				value: "https://backstage.\(_domain)"
+			}
+		}, {
+			op:   "add"
+			path: "/spec/template/spec/containers/0/env/-"
+			value: {
+				name:  "APP_CONFIG_organization_name"
+				value: _domain
+			}
+		}]
 	}
 }
