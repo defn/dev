@@ -209,7 +209,7 @@ spec:
         - --metrics-address=:7979
         - --log-level=debug
         - --log-format=text
-        - --domain-filter=dev.amanihavam.defn.run
+        - --domain-filter=defn.run
         - --policy=upsert-only
         - --provider=cloudflare
         - --registry=txt

@@ -5,13 +5,13 @@ kind: Ingress
 metadata:
   name: argo-cd
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: argocd.defn.run
+    external-dns.alpha.kubernetes.io/hostname: argocd.dev.amanihavam.defn.run
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
   ingressClassName: traefik
   rules:
-    - host: argocd.defn.run
+    - host: argocd.dev.amanihavam.defn.run
       http:
         paths:
           - path: /

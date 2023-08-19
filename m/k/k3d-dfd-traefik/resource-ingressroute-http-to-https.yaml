@@ -9,7 +9,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: HostRegexp(`{subdomain:[a-z0-9-]+}.defn.run`)
+    - match: HostRegexp(`{subdomain:[a-z0-9-]+}.dev.amanihavam.defn.run`)
       kind: Rule
       services:
         - name: noop@internal

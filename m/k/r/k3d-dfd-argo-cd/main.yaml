@@ -18188,7 +18188,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: argocd.defn.run
+    external-dns.alpha.kubernetes.io/hostname: argocd.dev.amanihavam.defn.run
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
   name: argo-cd
@@ -18196,7 +18196,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: argocd.defn.run
+  - host: argocd.dev.amanihavam.defn.run
     http:
       paths:
       - backend:

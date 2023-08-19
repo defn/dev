@@ -8,8 +8,8 @@ metadata:
 spec:
   secretName: defn-run-wildcard
   dnsNames:
-    - '*.defn.run'
-    - '*.default.defn.run'
+    - '*.dev.amanihavam.defn.run'
+    - '*.default.dev.amanihavam.defn.run'
   issuerRef:
     name: zerossl-production
     kind: ClusterIssuer

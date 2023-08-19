@@ -18,7 +18,7 @@ helmCharts:
         email: cloudflare@defn.us
         proxied: false
       domainFilters:
-        - dev.amanihavam.defn.run
+        - defn.run
     name: external-dns
     version: 6.23.6
     repo: https://charts.bitnami.com/bitnami

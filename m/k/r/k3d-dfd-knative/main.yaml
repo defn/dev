@@ -6816,7 +6816,7 @@ data:
     example.org: |
       selector:
         app: nonprofit
-  defn.run: ""
+  dev.amanihavam.defn.run: ""
 kind: ConfigMap
 metadata:
   annotations:

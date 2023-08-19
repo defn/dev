@@ -6,7 +6,7 @@ metadata:
   name: traefik
   namespace: traefik
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: traefik.defn.run
+    external-dns.alpha.kubernetes.io/hostname: traefik.dev.amanihavam.defn.run
 spec:
   type: LoadBalancer
   loadBalancerClass: tailscale
