@@ -15,7 +15,7 @@ helmCharts:
           type: ClusterIP
         env:
           - name: CODER_ACCESS_URL
-            value: https://coder.dev.amanihavam.defn.run
+            value: https://coder.dev.amanibhavam.defn.run
     name: coder
     version: 2.1.0
     repo: https://helm.coder.com/v2

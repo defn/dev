@@ -2,6 +2,6 @@
 
 patches: []
 resources:
-  - resource-ingressroute-dev.amanihavam.defn.run.yaml
+  - resource-ingressroute-dev.amanibhavam.defn.run.yaml
   - resource-kservice-hello.yaml
   - resource-kservice-bye.yaml

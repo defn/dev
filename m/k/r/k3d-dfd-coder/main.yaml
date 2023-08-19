@@ -158,7 +158,7 @@ spec:
         - name: CODER_DERP_SERVER_RELAY_URL
           value: http://$(KUBE_POD_IP):8080
         - name: CODER_ACCESS_URL
-          value: https://coder.dev.amanihavam.defn.run
+          value: https://coder.dev.amanibhavam.defn.run
         image: ghcr.io/coder/coder:v2.1.0
         imagePullPolicy: IfNotPresent
         lifecycle: {}
@@ -212,7 +212,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: coder.dev.amanihavam.defn.run
+    external-dns.alpha.kubernetes.io/hostname: coder.dev.amanibhavam.defn.run
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
   name: coder
@@ -220,7 +220,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: coder.dev.amanihavam.defn.run
+  - host: coder.dev.amanibhavam.defn.run
     http:
       paths:
       - backend:

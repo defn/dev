@@ -7011,7 +7011,7 @@ data:
     example.org: |
       selector:
         app: nonprofit
-  dev.amanihavam.defn.run: ""
+  dev.amanibhavam.defn.run: ""
 kind: ConfigMap
 metadata:
   annotations:

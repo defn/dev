@@ -6,7 +6,7 @@ _cloudflare_email: "cloudflare@defn.us"
 _domain_slug: "defn-run"
 _domain_name: "defn.run"
 
-_domain: "dev.amanihavam.defn.run"
+_domain: "dev.amanibhavam.defn.run"
 
 cluster_type: "k3d"
 cluster_name: "dfd"
