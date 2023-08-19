@@ -1,8 +1,13 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hello
+---
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: bye
-  namespace: default
+  namespace: hello
 spec:
   template:
     spec:
@@ -20,7 +25,7 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: hello
-  namespace: default
+  namespace: hello
 spec:
   template:
     spec:
@@ -34,17 +39,38 @@ spec:
   - latestRevision: true
     percent: 100
 ---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: '*.hello.dev.amanihavam.defn.run'
+  name: default-wildcard
+  namespace: kourier-system
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: wildcard.hello.dev.amanihavam.defn.run
+    http:
+      paths:
+      - backend:
+          service:
+            name: kourier-internal
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: default.defn.run
-  namespace: default
+  name: dev.amanihavam.defn.run
+  namespace: hello
 spec:
   entryPoints:
   - websecure
   routes:
   - kind: Rule
-    match: HostRegexp(`{subdomain:[a-z0-9-]+}.default.defn.run`)
+    match: HostRegexp(`{subdomain:[a-z0-9-]+}.hello.dev.amanihavam.defn.run`)
     services:
     - kind: Service
       name: kourier-internal

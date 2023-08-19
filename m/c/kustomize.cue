@@ -271,7 +271,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 // https://github.com/knative-sandbox/net-kourier/releases
 kustomize: "kourier": #Kustomize & {
 	resource: "kourier": {
-		url: "https://github.com/knative-sandbox/net-kourier/releases/download/knative-v1.10.0/kourier.yaml"
+		url: "https://github.com/knative-sandbox/net-kourier/releases/download/knative-v1.11.1/kourier.yaml"
 	}
 
 	psm: "service-kourier-set-cluster-ip": {

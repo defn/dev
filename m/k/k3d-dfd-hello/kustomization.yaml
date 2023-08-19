@@ -1,8 +1,9 @@
 #ManagedBy: cue
 
 patches: []
-namespace: default
 resources:
-  - resource-ingressroute-default.defn.run.yaml
+  - resource-namespace.yaml
+  - resource-ingress-default-wildcard.yaml
+  - resource-ingressroute-dev.amanihavam.defn.run.yaml
   - resource-kservice-hello.yaml
   - resource-kservice-bye.yaml

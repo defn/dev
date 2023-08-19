@@ -1,5 +1,9 @@
 package c
 
+import (
+	core "k8s.io/api/core/v1"
+)
+
 _issuer:           "zerossl-production"
 _cloudflare_email: "cloudflare@defn.us"
 
@@ -126,21 +130,53 @@ kustomize: "secrets": #Kustomize & {
 }
 
 kustomize: "hello": #Kustomize & {
-	namespace: "default"
-
+	_app_ns: "hello"
 	_funcs: ["hello", "bye"]
-	_domain: "default.defn.run"
 
+	resource: "namespace": core.#Namespace & {
+		apiVersion: "v1"
+		kind:       "Namespace"
+		metadata: {
+			name: _app_ns
+		}
+	}
+
+	resource: "ingress-default-wildcard": {
+		apiVersion: "networking.k8s.io/v1"
+		kind:       "Ingress"
+		metadata: {
+			name:      "default-wildcard"
+			namespace: "kourier-system"
+			annotations: {
+				"external-dns.alpha.kubernetes.io/hostname": "*.\(_app_ns).\(_domain)"
+			}
+		}
+
+		spec: {
+			ingressClassName: "traefik"
+			rules: [{
+				host: "wildcard.\(_app_ns).\(_domain)"
+				http: paths: [{
+					path:     "/"
+					pathType: "Prefix"
+					backend: service: {
+						name: "kourier-internal"
+						port: number: 80
+					}
+				}]
+			}]
+		}
+	}
 	resource: "ingressroute-\(_domain)": {
 		apiVersion: "traefik.containo.us/v1alpha1"
 		kind:       "IngressRoute"
 		metadata: {
 			name:      _domain
-			namespace: "default"
+			namespace: _app_ns
 		}
 		spec: entryPoints: ["websecure"]
 		spec: routes: [{
-			match: "HostRegexp(`{subdomain:[a-z0-9-]+}.\(_domain)`)"
+			match: "HostRegexp(`{subdomain:[a-z0-9-]+}.\(_app_ns).\(_domain)`)"
 			kind:  "Rule"
 			services: [{
 				name:      "kourier-internal"
@@ -159,7 +195,7 @@ kustomize: "hello": #Kustomize & {
 			metadata: {
 				//labels: "networking.knative.dev/visibility": "cluster-local"
 				name:      f
-				namespace: "default"
+				namespace: _app_ns
 			}
 			spec: {
 				template: spec: {

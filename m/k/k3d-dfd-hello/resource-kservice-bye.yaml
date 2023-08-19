@@ -4,7 +4,7 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: bye
-  namespace: default
+  namespace: hello
 spec:
   template:
     spec:
