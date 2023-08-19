@@ -1,5 +1,11 @@
 package c
 
+_issuer:           "zerossl-production"
+_domain:           "defn.run"
+_domain_name:      "defn.run"
+_domain_slug:      "defn-run"
+_cloudflare_email: "cloudflare@defn.us"
+
 cluster_type: "k3d"
 cluster_name: "dfd"
 vclusters: [0, 1]
@@ -66,7 +72,6 @@ env: (#Transform & {
 			}
 
 			// experimental
-			"backstage": [100, ""]
 			"hello": [100, ""]
 		}
 	}
