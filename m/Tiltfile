@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 
-load("ext://restart_process", "custom_build_with_restart")
-
+# fuck off
 analytics_settings(False)
 
+load("ext://restart_process", "custom_build_with_restart")
+
+# local registry
 default_registry("169.254.32.1:5000")
 
+# code-server
 local_resource(
     "code-server",
     serve_cmd=[
@@ -18,6 +21,7 @@ local_resource(
     ],
 )
 
+# buildkite
 local_resource(
     "buildkite",
     serve_cmd=[
@@ -30,6 +34,7 @@ local_resource(
     ],
 )
 
+# frontend
 local_resource(
     "pnpm",
     serve_cmd=[
@@ -43,44 +48,23 @@ local_resource(
     ],
 )
 
-# local_resource(
-#    "hugo",
-#    serve_cmd=[
-#        "bash",
-#        "-c",
-#        """
-#            cd ~/m/defn/dev/www
-#            npm install
-#            exec npm run dev
-#            """,
-#    ],
-# )
-#
-# local_resource(
-#    "temporal",
-#    serve_cmd=[
-#        "bash",
-#        "-c",
-#        """
-#            cd ~/m
-#            exec temporal server start-dev
-#            """,
-#    ],
-# )
+# api deploy
+k8s_yaml(local("cd cmd && make manifest"))
 
-local_resource(name="build-cli", cmd="make build", deps=["./cmd", "./command"])
+# api service
+k8s_resource("api", resource_deps=["cli"])
 
+# api build
+local_resource(name="cli", cmd="make build", deps=["./cmd", "./command"])
+
+# api update
 custom_build_with_restart(
-    ref="service-cli",
+    ref="api",
     command="make image tag=$EXPECTED_REF",
     deps=["/tmp/cli"],
     trigger=["/tmp/cli"],
     entrypoint=["/cli"],
     live_update=[
-        sync("/tmp/cli", "/cli"),
+        sync("/tmp/cli", "/app"),
     ],
 )
-
-k8s_yaml(local("cd cmd && make manifest"))
-
-k8s_resource("service-cli", port_forwards="8080:8080", resource_deps=["build-cli"])

@@ -86,22 +86,6 @@ resource "coder_app" "tilt" {
   }
 }
 
-resource "coder_app" "api" {
-  agent_id     = coder_agent.main.id
-  slug         = "api"
-  display_name = "api"
-  url          = "http://localhost:8080"
-  icon         = "/icon/code.svg"
-  subdomain    = true
-  share        = "owner"
-
-  healthcheck {
-    url       = "http://localhost:8080"
-    interval  = 5
-    threshold = 6
-  }
-}
-
 resource "coder_app" "web" {
   agent_id     = coder_agent.main.id
   slug         = "web"
