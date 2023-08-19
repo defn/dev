@@ -3,7 +3,7 @@ kind: Namespace
 metadata:
   labels:
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: knative-serving
 ---
 apiVersion: apiextensions.k8s.io/v1
@@ -12,7 +12,7 @@ metadata:
   labels:
     app.kubernetes.io/component: networking
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
     knative.dev/crd-install: "true"
   name: certificates.networking.internal.knative.dev
 spec:
@@ -174,7 +174,7 @@ metadata:
   labels:
     app.kubernetes.io/component: networking
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
     knative.dev/crd-install: "true"
   name: clusterdomainclaims.networking.internal.knative.dev
 spec:
@@ -230,7 +230,7 @@ kind: CustomResourceDefinition
 metadata:
   labels:
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
     duck.knative.dev/podspecable: "true"
     knative.dev/crd-install: "true"
   name: configurations.serving.knative.dev
@@ -562,7 +562,10 @@ spec:
                                           header to be used in HTTP probes
                                         properties:
                                           name:
-                                            description: The header field name
+                                            description: The header field name. This
+                                              will be canonicalized upon output, so
+                                              case-variant names will be understood
+                                              as the same header.
                                             type: string
                                           value:
                                             description: The header field value
@@ -718,7 +721,10 @@ spec:
                                           header to be used in HTTP probes
                                         properties:
                                           name:
-                                            description: The header field name
+                                            description: The header field name. This
+                                              will be canonicalized upon output, so
+                                              case-variant names will be understood
+                                              as the same header.
                                             type: string
                                           value:
                                             description: The header field value
@@ -790,6 +796,30 @@ spec:
                               description: 'Compute Resources required by this container.
                                 Cannot be updated. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/'
                               properties:
+                                claims:
+                                  description: "Claims lists the names of resources,
+                                    defined in spec.resourceClaims, that are used
+                                    by this container. \n This is an alpha field and
+                                    requires enabling the DynamicResourceAllocation
+                                    feature gate. \n This field is immutable. It can
+                                    only be set for containers."
+                                  items:
+                                    description: ResourceClaim references one entry
+                                      in PodSpec.ResourceClaims.
+                                    properties:
+                                      name:
+                                        description: Name must match the name of one
+                                          entry in pod.spec.resourceClaims of the
+                                          Pod where this field is used. It makes that
+                                          resource available inside a container.
+                                        type: string
+                                    required:
+                                    - name
+                                    type: object
+                                  type: array
+                                  x-kubernetes-list-map-keys:
+                                  - name
+                                  x-kubernetes-list-type: map
                                 limits:
                                   additionalProperties:
                                     anyOf:
@@ -1633,7 +1663,7 @@ kind: CustomResourceDefinition
 metadata:
   labels:
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
     knative.dev/crd-install: "true"
   name: domainmappings.serving.knative.dev
 spec:
@@ -1803,7 +1833,7 @@ spec:
             type: object
         type: object
     served: true
-    storage: false
+    storage: true
     subresources:
       status: {}
   - additionalPrinterColumns:
@@ -1816,6 +1846,9 @@ spec:
     - jsonPath: .status.conditions[?(@.type=='Ready')].reason
       name: Reason
       type: string
+    deprecated: true
+    deprecationWarning: The v1alpha1 version of DomainMapping has been deprecated
+      and will be removed in a future release of the API. Please upgrade to v1beta1
     name: v1alpha1
     schema:
       openAPIV3Schema:
@@ -1959,7 +1992,7 @@ spec:
             type: object
         type: object
     served: true
-    storage: true
+    storage: false
     subresources:
       status: {}
 ---
@@ -1968,7 +2001,7 @@ kind: CustomResourceDefinition
 metadata:
   labels:
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
     knative.dev/crd-install: "true"
   name: images.caching.internal.knative.dev
 spec:
@@ -2101,7 +2134,7 @@ metadata:
   labels:
     app.kubernetes.io/component: networking
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
     knative.dev/crd-install: "true"
   name: ingresses.networking.internal.knative.dev
 spec:
@@ -2453,7 +2486,7 @@ kind: CustomResourceDefinition
 metadata:
   labels:
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
     knative.dev/crd-install: "true"
   name: metrics.autoscaling.internal.knative.dev
 spec:
@@ -2578,7 +2611,7 @@ kind: CustomResourceDefinition
 metadata:
   labels:
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
     knative.dev/crd-install: "true"
   name: podautoscalers.autoscaling.internal.knative.dev
 spec:
@@ -2751,7 +2784,7 @@ kind: CustomResourceDefinition
 metadata:
   labels:
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
     knative.dev/crd-install: "true"
   name: revisions.serving.knative.dev
 spec:
@@ -3048,7 +3081,9 @@ spec:
                                   to be used in HTTP probes
                                 properties:
                                   name:
-                                    description: The header field name
+                                    description: The header field name. This will
+                                      be canonicalized upon output, so case-variant
+                                      names will be understood as the same header.
                                     type: string
                                   value:
                                     description: The header field value
@@ -3199,7 +3234,9 @@ spec:
                                   to be used in HTTP probes
                                 properties:
                                   name:
-                                    description: The header field name
+                                    description: The header field name. This will
+                                      be canonicalized upon output, so case-variant
+                                      names will be understood as the same header.
                                     type: string
                                   value:
                                     description: The header field value
@@ -3270,6 +3307,28 @@ spec:
                       description: 'Compute Resources required by this container.
                         Cannot be updated. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/'
                       properties:
+                        claims:
+                          description: "Claims lists the names of resources, defined
+                            in spec.resourceClaims, that are used by this container.
+                            \n This is an alpha field and requires enabling the DynamicResourceAllocation
+                            feature gate. \n This field is immutable. It can only
+                            be set for containers."
+                          items:
+                            description: ResourceClaim references one entry in PodSpec.ResourceClaims.
+                            properties:
+                              name:
+                                description: Name must match the name of one entry
+                                  in pod.spec.resourceClaims of the Pod where this
+                                  field is used. It makes that resource available
+                                  inside a container.
+                                type: string
+                            required:
+                            - name
+                            type: object
+                          type: array
+                          x-kubernetes-list-map-keys:
+                          - name
+                          x-kubernetes-list-type: map
                         limits:
                           additionalProperties:
                             anyOf:
@@ -4085,7 +4144,7 @@ kind: CustomResourceDefinition
 metadata:
   labels:
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
     duck.knative.dev/addressable: "true"
     knative.dev/crd-install: "true"
   name: routes.serving.knative.dev
@@ -4326,7 +4385,7 @@ metadata:
   labels:
     app.kubernetes.io/component: networking
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
     knative.dev/crd-install: "true"
   name: serverlessservices.networking.internal.knative.dev
 spec:
@@ -4513,7 +4572,7 @@ kind: CustomResourceDefinition
 metadata:
   labels:
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
     duck.knative.dev/addressable: "true"
     duck.knative.dev/podspecable: "true"
     knative.dev/crd-install: "true"
@@ -4859,7 +4918,10 @@ spec:
                                           header to be used in HTTP probes
                                         properties:
                                           name:
-                                            description: The header field name
+                                            description: The header field name. This
+                                              will be canonicalized upon output, so
+                                              case-variant names will be understood
+                                              as the same header.
                                             type: string
                                           value:
                                             description: The header field value
@@ -5015,7 +5077,10 @@ spec:
                                           header to be used in HTTP probes
                                         properties:
                                           name:
-                                            description: The header field name
+                                            description: The header field name. This
+                                              will be canonicalized upon output, so
+                                              case-variant names will be understood
+                                              as the same header.
                                             type: string
                                           value:
                                             description: The header field value
@@ -5087,6 +5152,30 @@ spec:
                               description: 'Compute Resources required by this container.
                                 Cannot be updated. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/'
                               properties:
+                                claims:
+                                  description: "Claims lists the names of resources,
+                                    defined in spec.resourceClaims, that are used
+                                    by this container. \n This is an alpha field and
+                                    requires enabling the DynamicResourceAllocation
+                                    feature gate. \n This field is immutable. It can
+                                    only be set for containers."
+                                  items:
+                                    description: ResourceClaim references one entry
+                                      in PodSpec.ResourceClaims.
+                                    properties:
+                                      name:
+                                        description: Name must match the name of one
+                                          entry in pod.spec.resourceClaims of the
+                                          Pod where this field is used. It makes that
+                                          resource available inside a container.
+                                        type: string
+                                    required:
+                                    - name
+                                    type: object
+                                  type: array
+                                  x-kubernetes-list-map-keys:
+                                  - name
+                                  x-kubernetes-list-type: map
                                 limits:
                                   additionalProperties:
                                     anyOf:
@@ -6051,18 +6140,86 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   labels:
+    app.kubernetes.io/component: activator
+    app.kubernetes.io/name: knative-serving
+    app.kubernetes.io/version: 1.11.0
+  name: activator
+  namespace: knative-serving
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
     app.kubernetes.io/component: controller
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: controller
   namespace: knative-serving
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    app.kubernetes.io/name: knative-serving
+    app.kubernetes.io/version: 1.11.0
+    serving.knative.dev/controller: "true"
+  name: knative-serving-activator
+  namespace: knative-serving
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  - secrets
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resourceNames:
+  - routing-serving-certs
+  - knative-serving-certs
+  resources:
+  - secrets
+  verbs:
+  - get
+  - list
+  - watch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
+    serving.knative.dev/controller: "true"
+  name: knative-serving-activator-cluster
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - services
+  - endpoints
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - serving.knative.dev
+  resources:
+  - revisions
+  verbs:
+  - get
+  - list
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: knative-serving
+    app.kubernetes.io/version: 1.11.0
     duck.knative.dev/addressable: "true"
   name: knative-serving-addressable-resolver
 rules:
@@ -6087,7 +6244,7 @@ kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: knative-serving-admin
 ---
 aggregationRule:
@@ -6099,7 +6256,7 @@ kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: knative-serving-aggregated-addressable-resolver
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -6107,7 +6264,7 @@ kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
     serving.knative.dev/controller: "true"
   name: knative-serving-core
 rules:
@@ -6240,7 +6397,7 @@ kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
   name: knative-serving-namespaced-admin
 rules:
@@ -6266,7 +6423,7 @@ kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
   name: knative-serving-namespaced-edit
 rules:
@@ -6295,7 +6452,7 @@ kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
     rbac.authorization.k8s.io/aggregate-to-view: "true"
   name: knative-serving-namespaced-view
 rules:
@@ -6316,7 +6473,7 @@ kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
     duck.knative.dev/podspecable: "true"
   name: knative-serving-podspecable-binding
 rules:
@@ -6331,12 +6488,47 @@ rules:
   - patch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/component: activator
+    app.kubernetes.io/name: knative-serving
+    app.kubernetes.io/version: 1.11.0
+  name: knative-serving-activator
+  namespace: knative-serving
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: knative-serving-activator
+subjects:
+- kind: ServiceAccount
+  name: activator
+  namespace: knative-serving
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/component: activator
+    app.kubernetes.io/name: knative-serving
+    app.kubernetes.io/version: 1.11.0
+  name: knative-serving-activator-cluster
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: knative-serving-activator-cluster
+subjects:
+- kind: ServiceAccount
+  name: activator
+  namespace: knative-serving
+---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   labels:
     app.kubernetes.io/component: controller
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: knative-serving-controller-addressable-resolver
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -6353,7 +6545,7 @@ metadata:
   labels:
     app.kubernetes.io/component: controller
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: knative-serving-controller-admin
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -6556,7 +6748,7 @@ metadata:
   labels:
     app.kubernetes.io/component: autoscaler
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: config-autoscaler
   namespace: knative-serving
 ---
@@ -6698,7 +6890,7 @@ metadata:
   labels:
     app.kubernetes.io/component: controller
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: config-defaults
   namespace: knative-serving
 ---
@@ -6734,15 +6926,18 @@ data:
     queue-sidecar-cpu-request: "25m"
 
     # Sets the queue proxy's CPU limit.
-    # If omitted, no value is specified and the system default is used.
+    # If omitted, a default value (currently "1000m"), is used when
+    # `queueproxy.resource-defaults` is set to `Enabled`.
     queue-sidecar-cpu-limit: "1000m"
 
     # Sets the queue proxy's memory request.
-    # If omitted, no value is specified and the system default is used.
+    # If omitted, a default value (currently "400Mi"), is used when
+    # `queueproxy.resource-defaults` is set to `Enabled`.
     queue-sidecar-memory-request: "400Mi"
 
     # Sets the queue proxy's memory limit.
-    # If omitted, no value is specified and the system default is used.
+    # If omitted, a default value (currently "800Mi"), is used when
+    # `queueproxy.resource-defaults` is set to `Enabled`.
     queue-sidecar-memory-limit: "800Mi"
 
     # Sets the queue proxy's ephemeral storage request.
@@ -6765,15 +6960,15 @@ data:
     # Sets rootCA for the queue proxy - used by QPOptions
     # If omitted, or empty, no rootCA is added to the golang rootCAs
     queue-sidecar-rootca: ""
-  queue-sidecar-image: gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:05f7dabe3447d22099172c17c0903cdcbc7c386cc32aa871ae49f22e8f3e85d7
+  queue-sidecar-image: gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:987f53e3ead58627e3022c8ccbb199ed71b965f10c59485bab8015ecf18b44af
 kind: ConfigMap
 metadata:
   annotations:
-    knative.dev/example-checksum: 410041a0
+    knative.dev/example-checksum: ed77183a
   labels:
     app.kubernetes.io/component: controller
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: config-deployment
   namespace: knative-serving
 ---
@@ -6824,7 +7019,7 @@ metadata:
   labels:
     app.kubernetes.io/component: controller
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: config-domain
   namespace: knative-serving
 ---
@@ -7007,16 +7202,19 @@ data:
     #
     # NOTE THAT THIS IS AN EXPERIMENTAL / ALPHA FEATURE
     queueproxy.mount-podinfo: "disabled"
+
+    # Default queue proxy resource requests and limits to good values for most cases if set.
+    queueproxy.resource-defaults: "disabled"
   kubernetes.podspec-affinity: enabled
   kubernetes.podspec-tolerations: enabled
 kind: ConfigMap
 metadata:
   annotations:
-    knative.dev/example-checksum: d3565159
+    knative.dev/example-checksum: eb70e734
   labels:
     app.kubernetes.io/component: controller
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: config-features
   namespace: knative-serving
 ---
@@ -7101,7 +7299,7 @@ metadata:
   labels:
     app.kubernetes.io/component: controller
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: config-gc
   namespace: knative-serving
 ---
@@ -7148,7 +7346,7 @@ metadata:
   labels:
     app.kubernetes.io/component: controller
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: config-leader-election
   namespace: knative-serving
 ---
@@ -7206,14 +7404,16 @@ data:
     loglevel.net-certmanager-controller: "info"
     loglevel.net-istio-controller: "info"
     loglevel.net-contour-controller: "info"
+    loglevel.net-kourier-controller: "info"
+    loglevel.net-gateway-api-controller: "info"
 kind: ConfigMap
 metadata:
   annotations:
-    knative.dev/example-checksum: b0f3c6f2
+    knative.dev/example-checksum: 53fda05f
   labels:
     app.kubernetes.io/component: logging
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: config-logging
   namespace: knative-serving
 ---
@@ -7368,24 +7568,46 @@ data:
     # Knative doesn't know about that otherwise.
     default-external-scheme: "http"
 
+    # internal-encryption is deprecated and replaced by internal-dataplane-trust and internal-controlplane-trust
     # internal-encryption indicates whether internal traffic is encrypted or not.
-    # If this is "true", the following traffic are encrypted:
-    #  - ingress to activator
-    #  - ingress to queue-proxy
-    #  - activator to queue-proxy
     #
     # NOTE: This flag is in an alpha state and is mostly here to enable internal testing
     #       for now. Use with caution.
     internal-encryption: "false"
+
+    # dataplane-trust indicates the level of trust established in the knative data-plane.
+    # dataplane-trust = "disabled" (the default) - uses no encryption for internal data plane traffic
+    # Using any other value ensures that the following traffic is encrypted using TLS:
+    #  - ingress to activator
+    #  - ingress to queue-proxy
+    #  - activator to queue-proxy
+    #
+    # dataplane-trust = "minimal" ensures data messages are encrypted, Kingress authenticate that the receiver is a Ksvc
+    # dataplane-trust = "enabled" same as "minimal" and in addition, Kingress authenticate that Ksvc is at the correct namespace
+    # dataplane-trust = "mutual" same as "enabled" and in addition, Ksvc authenticate that the messages come from the Kingress
+    # dataplane-trust = "identity" same as "mutual" with Kingress adding a trusted sender identity to the message
+    #
+    # NOTE: This flag is in an alpha state and is mostly here to enable internal testing for now. Use with caution.
+    dataplane-trust: "disabled"
+
+    # controlplane-trust indicates the level of trust established in the knative control-plane.
+    # controlplane-trust = "disabled" (the default) - uses no encryption for internal control plane traffic
+    # Using any other value ensures that control traffic is encrypted using TLS.
+    #
+    # controlplane-trust = "enabled" ensures control messages are encrypted using TLS (client authenticate the server)
+    # controlplane-trust = "mutual" ensures control messages are encrypted using mTLS (client and server authenticate each other)
+    #
+    # NOTE: This flag is in an alpha state and is mostly here to enable internal testing for now. Use with caution.
+    controlplane-trust: "disabled"
   ingress.class: kourier.ingress.networking.knative.dev
 kind: ConfigMap
 metadata:
   annotations:
-    knative.dev/example-checksum: 73d96d1b
+    knative.dev/example-checksum: 2b6d10ba
   labels:
     app.kubernetes.io/component: networking
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: config-network
   namespace: knative-serving
 ---
@@ -7462,10 +7684,21 @@ data:
     # It supports either prometheus (the default) or opencensus.
     metrics.backend-destination: prometheus
 
+    # metrics.reporting-period-seconds specifies the global metrics reporting period for control and data plane components.
+    # If a zero or negative value is passed the default reporting period is used (10 secs).
+    # If the attribute is not specified a default value is used per metrics backend.
+    # For the prometheus backend the default reporting period is 5s while for opencensus it is 60s.
+    metrics.reporting-period-seconds: "5"
+
     # metrics.request-metrics-backend-destination specifies the request metrics
     # destination. It enables queue proxy to send request metrics.
     # Currently supported values: prometheus (the default), opencensus.
     metrics.request-metrics-backend-destination: prometheus
+
+    # metrics.request-metrics-reporting-period-seconds specifies the request metrics reporting period in sec at queue proxy.
+    # If a zero or negative value is passed the default reporting period is used (10 secs).
+    # If the attribute is not specified, it is overridden by the value of metrics.reporting-period-seconds.
+    metrics.request-metrics-reporting-period-seconds: "5"
 
     # profiling.enable indicates whether it is allowed to retrieve runtime profiling data from
     # the pods via an HTTP server in the format expected by the pprof visualization tool. When
@@ -7475,11 +7708,11 @@ data:
 kind: ConfigMap
 metadata:
   annotations:
-    knative.dev/example-checksum: fed4756e
+    knative.dev/example-checksum: 54abd711
   labels:
     app.kubernetes.io/component: observability
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: config-observability
   namespace: knative-serving
 ---
@@ -7521,7 +7754,7 @@ metadata:
   labels:
     app.kubernetes.io/component: tracing
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: config-tracing
   namespace: knative-serving
 ---
@@ -7532,16 +7765,6 @@ metadata:
     networking.internal.knative.dev/certificate-uid: serving-certs
     serving-certs-ctrl: control-plane
   name: control-serving-certs
-  namespace: knative-serving
----
-apiVersion: v1
-kind: Secret
-metadata:
-  labels:
-    app.kubernetes.io/component: domain-mapping
-    app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
-  name: domainmapping-webhook-certs
   namespace: knative-serving
 ---
 apiVersion: v1
@@ -7578,7 +7801,7 @@ metadata:
   labels:
     app.kubernetes.io/component: webhook
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: webhook-certs
   namespace: knative-serving
 ---
@@ -7589,7 +7812,7 @@ metadata:
     app: activator
     app.kubernetes.io/component: activator
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: activator-service
   namespace: knative-serving
 spec:
@@ -7620,7 +7843,7 @@ metadata:
     app: autoscaler
     app.kubernetes.io/component: autoscaler
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: autoscaler
   namespace: knative-serving
 spec:
@@ -7644,7 +7867,7 @@ metadata:
     app: controller
     app.kubernetes.io/component: controller
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: controller
   namespace: knative-serving
 spec:
@@ -7662,34 +7885,9 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app.kubernetes.io/component: domain-mapping
-    app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
-    role: domainmapping-webhook
-  name: domainmapping-webhook
-  namespace: knative-serving
-spec:
-  ports:
-  - name: http-metrics
-    port: 9090
-    targetPort: 9090
-  - name: http-profiling
-    port: 8008
-    targetPort: 8008
-  - name: https-webhook
-    port: 443
-    targetPort: 8443
-  selector:
-    app: domainmapping-webhook
-    role: domainmapping-webhook
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
     app.kubernetes.io/component: webhook
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
     role: webhook
   name: webhook
   namespace: knative-serving
@@ -7714,7 +7912,7 @@ metadata:
   labels:
     app.kubernetes.io/component: activator
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: activator
   namespace: knative-serving
 spec:
@@ -7724,13 +7922,11 @@ spec:
       role: activator
   template:
     metadata:
-      annotations:
-        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
       labels:
         app: activator
         app.kubernetes.io/component: activator
         app.kubernetes.io/name: knative-serving
-        app.kubernetes.io/version: 1.10.0
+        app.kubernetes.io/version: 1.11.0
         role: activator
     spec:
       containers:
@@ -7755,7 +7951,7 @@ spec:
           value: config-observability
         - name: METRICS_DOMAIN
           value: knative.dev/internal/serving
-        image: gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:c129149520cbe84b676d26c08787b471a8c81c5439118f2eb936bdc942836830
+        image: gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:6b98eed95dd6dcc3d957e673aea3d271b768225442504316d713c08524f44ebe
         livenessProbe:
           failureThreshold: 12
           httpGet:
@@ -7799,7 +7995,7 @@ spec:
           runAsNonRoot: true
           seccompProfile:
             type: RuntimeDefault
-      serviceAccountName: controller
+      serviceAccountName: activator
       terminationGracePeriodSeconds: 600
 ---
 apiVersion: apps/v1
@@ -7808,7 +8004,7 @@ metadata:
   labels:
     app.kubernetes.io/component: autoscaler
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: autoscaler
   namespace: knative-serving
 spec:
@@ -7822,13 +8018,11 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      annotations:
-        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
       labels:
         app: autoscaler
         app.kubernetes.io/component: autoscaler
         app.kubernetes.io/name: knative-serving
-        app.kubernetes.io/version: 1.10.0
+        app.kubernetes.io/version: 1.11.0
     spec:
       affinity:
         podAntiAffinity:
@@ -7859,7 +8053,7 @@ spec:
           value: config-observability
         - name: METRICS_DOMAIN
           value: knative.dev/serving
-        image: gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:b30009e0d9eb80b2e288145580b2854715b611622907eab14c89d6d4b71a37af
+        image: gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:5b52cc9aa521ee236645db57f19b70f2a0e8f6ef27dfa9181409a0f96406e2ad
         livenessProbe:
           failureThreshold: 6
           httpGet:
@@ -7905,7 +8099,7 @@ metadata:
   labels:
     app.kubernetes.io/component: controller
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: controller
   namespace: knative-serving
 spec:
@@ -7914,13 +8108,11 @@ spec:
       app: controller
   template:
     metadata:
-      annotations:
-        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
       labels:
         app: controller
         app.kubernetes.io/component: controller
         app.kubernetes.io/name: knative-serving
-        app.kubernetes.io/version: 1.10.0
+        app.kubernetes.io/version: 1.11.0
     spec:
       affinity:
         podAntiAffinity:
@@ -7947,7 +8139,7 @@ spec:
           value: config-observability
         - name: METRICS_DOMAIN
           value: knative.dev/internal/serving
-        image: gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:0763e6f5fe14db808dad883ef0c7ef8640227e9bedec744be7db514d6cba0da1
+        image: gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:b11dbcba050eac9084edd021b7e0eee16b39c9e397b245bc4227266af1893404
         livenessProbe:
           failureThreshold: 6
           httpGet:
@@ -7992,192 +8184,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app.kubernetes.io/component: domain-mapping
-    app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
-  name: domain-mapping
-  namespace: knative-serving
-spec:
-  selector:
-    matchLabels:
-      app: domain-mapping
-  template:
-    metadata:
-      annotations:
-        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
-      labels:
-        app: domain-mapping
-        app.kubernetes.io/component: domain-mapping
-        app.kubernetes.io/name: knative-serving
-        app.kubernetes.io/version: 1.10.0
-    spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - podAffinityTerm:
-              labelSelector:
-                matchLabels:
-                  app: domain-mapping
-              topologyKey: kubernetes.io/hostname
-            weight: 100
-      containers:
-      - env:
-        - name: SYSTEM_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        - name: CONFIG_LOGGING_NAME
-          value: config-logging
-        - name: CONFIG_OBSERVABILITY_NAME
-          value: config-observability
-        - name: METRICS_DOMAIN
-          value: knative.dev/serving
-        image: gcr.io/knative-releases/knative.dev/serving/cmd/domain-mapping@sha256:0831d24d3b7150893b2fba3899c9d6b6f0bad79123681ad4e3d14c1359bb23e2
-        livenessProbe:
-          failureThreshold: 6
-          httpGet:
-            path: /health
-            port: probes
-            scheme: HTTP
-          periodSeconds: 5
-        name: domain-mapping
-        ports:
-        - containerPort: 9090
-          name: metrics
-        - containerPort: 8008
-          name: profiling
-        - containerPort: 8080
-          name: probes
-        readinessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /readiness
-            port: probes
-            scheme: HTTP
-          periodSeconds: 5
-        resources:
-          limits:
-            cpu: 300m
-            memory: 400Mi
-          requests:
-            cpu: 30m
-            memory: 40Mi
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
-          readOnlyRootFilesystem: true
-          runAsNonRoot: true
-          seccompProfile:
-            type: RuntimeDefault
-      serviceAccountName: controller
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    app.kubernetes.io/component: domain-mapping
-    app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
-  name: domainmapping-webhook
-  namespace: knative-serving
-spec:
-  selector:
-    matchLabels:
-      app: domainmapping-webhook
-      role: domainmapping-webhook
-  template:
-    metadata:
-      annotations:
-        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
-      labels:
-        app: domainmapping-webhook
-        app.kubernetes.io/component: domain-mapping
-        app.kubernetes.io/name: knative-serving
-        app.kubernetes.io/version: 1.10.0
-        role: domainmapping-webhook
-    spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - podAffinityTerm:
-              labelSelector:
-                matchLabels:
-                  app: domainmapping-webhook
-              topologyKey: kubernetes.io/hostname
-            weight: 100
-      containers:
-      - env:
-        - name: POD_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        - name: SYSTEM_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        - name: CONFIG_LOGGING_NAME
-          value: config-logging
-        - name: CONFIG_OBSERVABILITY_NAME
-          value: config-observability
-        - name: WEBHOOK_PORT
-          value: "8443"
-        - name: METRICS_DOMAIN
-          value: knative.dev/serving
-        image: gcr.io/knative-releases/knative.dev/serving/cmd/domain-mapping-webhook@sha256:50df310c19bc7c98ea4705a4b909482abafb1a3bb7ec2e26ef61cbd742afa297
-        livenessProbe:
-          failureThreshold: 6
-          httpGet:
-            httpHeaders:
-            - name: k-kubelet-probe
-              value: webhook
-            port: 8443
-            scheme: HTTPS
-          initialDelaySeconds: 20
-          periodSeconds: 1
-        name: domainmapping-webhook
-        ports:
-        - containerPort: 9090
-          name: metrics
-        - containerPort: 8008
-          name: profiling
-        - containerPort: 8443
-          name: https-webhook
-        readinessProbe:
-          httpGet:
-            httpHeaders:
-            - name: k-kubelet-probe
-              value: webhook
-            port: 8443
-            scheme: HTTPS
-          periodSeconds: 1
-        resources:
-          limits:
-            cpu: 500m
-            memory: 500Mi
-          requests:
-            cpu: 100m
-            memory: 100Mi
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
-          readOnlyRootFilesystem: true
-          runAsNonRoot: true
-          seccompProfile:
-            type: RuntimeDefault
-      serviceAccountName: controller
-      terminationGracePeriodSeconds: 300
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
     app.kubernetes.io/component: webhook
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: webhook
   namespace: knative-serving
 spec:
@@ -8187,13 +8196,11 @@ spec:
       role: webhook
   template:
     metadata:
-      annotations:
-        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
       labels:
         app: webhook
         app.kubernetes.io/component: webhook
         app.kubernetes.io/name: knative-serving
-        app.kubernetes.io/version: 1.10.0
+        app.kubernetes.io/version: 1.11.0
         role: webhook
     spec:
       affinity:
@@ -8225,7 +8232,7 @@ spec:
           value: "8443"
         - name: METRICS_DOMAIN
           value: knative.dev/internal/serving
-        image: gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:a43a7bf3a2d2a62782fe802dcd3ba287fb277a0d8274e5a6aef1bba9d09a0dd6
+        image: gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:7b138c73fcaaf0b9bb2d414b8a89a780f8c09371d24c6f57969be1694acf4aaa
         livenessProbe:
           failureThreshold: 6
           httpGet:
@@ -8277,7 +8284,7 @@ metadata:
   labels:
     app.kubernetes.io/component: activator
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: activator-pdb
   namespace: knative-serving
 spec:
@@ -8292,7 +8299,7 @@ metadata:
   labels:
     app.kubernetes.io/component: webhook
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: webhook-pdb
   namespace: knative-serving
 spec:
@@ -8307,7 +8314,7 @@ metadata:
   labels:
     app.kubernetes.io/component: activator
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: activator
   namespace: knative-serving
 spec:
@@ -8331,7 +8338,7 @@ metadata:
   labels:
     app.kubernetes.io/component: webhook
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: webhook
   namespace: knative-serving
 spec:
@@ -8355,44 +8362,11 @@ metadata:
   labels:
     app.kubernetes.io/component: queue-proxy
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: queue-proxy
   namespace: knative-serving
 spec:
-  image: gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:05f7dabe3447d22099172c17c0903cdcbc7c386cc32aa871ae49f22e8f3e85d7
----
-apiVersion: admissionregistration.k8s.io/v1
-kind: MutatingWebhookConfiguration
-metadata:
-  labels:
-    app.kubernetes.io/component: domain-mapping
-    app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
-  name: webhook.domainmapping.serving.knative.dev
-webhooks:
-- admissionReviewVersions:
-  - v1
-  - v1beta1
-  clientConfig:
-    service:
-      name: domainmapping-webhook
-      namespace: knative-serving
-  failurePolicy: Fail
-  name: webhook.domainmapping.serving.knative.dev
-  rules:
-  - apiGroups:
-    - serving.knative.dev
-    apiVersions:
-    - '*'
-    operations:
-    - CREATE
-    - UPDATE
-    resources:
-    - domainmappings
-    - domainmappings/status
-    scope: '*'
-  sideEffects: None
-  timeoutSeconds: 10
+  image: gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:987f53e3ead58627e3022c8ccbb199ed71b965f10c59485bab8015ecf18b44af
 ---
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
@@ -8400,7 +8374,7 @@ metadata:
   labels:
     app.kubernetes.io/component: webhook
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: webhook.serving.knative.dev
 webhooks:
 - admissionReviewVersions:
@@ -8432,6 +8406,8 @@ webhooks:
     - revisions
     - routes
     - services
+    - domainmappings
+    - domainmappings/status
     scope: '*'
   sideEffects: None
   timeoutSeconds: 10
@@ -8442,7 +8418,7 @@ metadata:
   labels:
     app.kubernetes.io/component: webhook
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: config.webhook.serving.knative.dev
 webhooks:
 - admissionReviewVersions:
@@ -8476,43 +8452,9 @@ apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
   labels:
-    app.kubernetes.io/component: domain-mapping
-    app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
-  name: validation.webhook.domainmapping.serving.knative.dev
-webhooks:
-- admissionReviewVersions:
-  - v1
-  - v1beta1
-  clientConfig:
-    service:
-      name: domainmapping-webhook
-      namespace: knative-serving
-  failurePolicy: Fail
-  name: validation.webhook.domainmapping.serving.knative.dev
-  rules:
-  - apiGroups:
-    - serving.knative.dev
-    apiVersions:
-    - '*'
-    operations:
-    - CREATE
-    - UPDATE
-    - DELETE
-    resources:
-    - domainmappings
-    - domainmappings/status
-    scope: '*'
-  sideEffects: None
-  timeoutSeconds: 10
----
-apiVersion: admissionregistration.k8s.io/v1
-kind: ValidatingWebhookConfiguration
-metadata:
-  labels:
     app.kubernetes.io/component: webhook
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.10.0
+    app.kubernetes.io/version: 1.11.0
   name: validation.webhook.serving.knative.dev
 webhooks:
 - admissionReviewVersions:
@@ -8545,6 +8487,8 @@ webhooks:
     - revisions
     - routes
     - services
+    - domainmappings
+    - domainmappings/status
     scope: '*'
   sideEffects: None
   timeoutSeconds: 10
