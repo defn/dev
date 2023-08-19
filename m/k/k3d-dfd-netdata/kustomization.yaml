@@ -4,10 +4,13 @@ patches: []
 namespace: netdata
 resources:
   - resource-namespace-netdata.yaml
+  - resource-ingress-netdata.yaml
 helmCharts:
   - releaseName: netdata
     namespace: netdata
-    valuesInline: {}
+    valuesInline:
+      ingress:
+        enabled: false
     name: netdata
     version: 3.7.68
     repo: https://netdata.github.io/helmchart
