@@ -48,16 +48,17 @@ local_resource(
     ],
 )
 
-# api deploy
+# api initial deploy
+# TODO replace with cue export
 k8s_yaml(local("cd cmd && make manifest"))
 
-# api service
+# api service selected from deploy
 k8s_resource("api", resource_deps=["cli"])
 
-# api build
+# api builds when cmd/, command/ changes
 local_resource(name="cli", cmd="make build", deps=["./cmd", "./command"])
 
-# api update
+# api updates when api builds
 custom_build_with_restart(
     ref="api",
     command="make image tag=$EXPECTED_REF",
