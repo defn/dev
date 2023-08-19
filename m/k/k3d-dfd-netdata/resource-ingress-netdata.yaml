@@ -5,13 +5,13 @@ kind: Ingress
 metadata:
   name: netdata
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: netdata.defn.run
+    external-dns.alpha.kubernetes.io/hostname: netdata.dev.amanihavam.defn.run
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
   ingressClassName: traefik
   rules:
-    - host: netdata.defn.run
+    - host: netdata.dev.amanihavam.defn.run
       http:
         paths:
           - path: /

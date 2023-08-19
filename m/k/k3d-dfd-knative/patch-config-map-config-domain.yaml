@@ -4,6 +4,6 @@ metadata:
   name: config-domain
   namespace: knative-serving
 data:
-  defn.run: ""
+  dev.amanihavam.defn.run: ""
 kind: ConfigMap
 apiVersion: v1

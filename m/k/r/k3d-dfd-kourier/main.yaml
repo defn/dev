@@ -602,13 +602,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: '*.default.defn.run'
+    external-dns.alpha.kubernetes.io/hostname: '*.default.dev.amanihavam.defn.run'
   name: default-wildcard
   namespace: kourier-system
 spec:
   ingressClassName: traefik
   rules:
-  - host: wildcard.default.defn.run
+  - host: wildcard.default.dev.amanihavam.defn.run
     http:
       paths:
       - backend:

@@ -4866,7 +4866,7 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: traefik.defn.run
+    external-dns.alpha.kubernetes.io/hostname: traefik.dev.amanihavam.defn.run
   labels:
     app.kubernetes.io/instance: traefik-traefik
     app.kubernetes.io/managed-by: Helm
@@ -5026,8 +5026,8 @@ metadata:
   namespace: traefik
 spec:
   dnsNames:
-  - '*.defn.run'
-  - '*.default.defn.run'
+  - '*.dev.amanihavam.defn.run'
+  - '*.default.dev.amanihavam.defn.run'
   issuerRef:
     group: cert-manager.io
     kind: ClusterIssuer
@@ -5058,7 +5058,7 @@ spec:
   - web
   routes:
   - kind: Rule
-    match: HostRegexp(`{subdomain:[a-z0-9-]+}.defn.run`)
+    match: HostRegexp(`{subdomain:[a-z0-9-]+}.dev.amanihavam.defn.run`)
     middlewares:
     - name: http-to-https
     services:
@@ -5107,7 +5107,7 @@ spec:
   - websecure
   routes:
   - kind: Rule
-    match: Host(`traefik.defn.run`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+    match: Host(`traefik.dev.amanihavam.defn.run`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
     middlewares:
     - name: http-to-https
     services:

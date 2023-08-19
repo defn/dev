@@ -1,10 +1,12 @@
 package c
 
 _issuer:           "zerossl-production"
-_domain:           "defn.run"
-_domain_slug:      "defn-run"
-_domain_name:      "dev.amanihavam.defn.run"
 _cloudflare_email: "cloudflare@defn.us"
+
+_domain_slug: "defn-run"
+_domain_name: "defn.run"
+
+_domain: "dev.amanihavam.defn.run"
 
 cluster_type: "k3d"
 cluster_name: "dfd"
