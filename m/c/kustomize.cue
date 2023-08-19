@@ -1109,11 +1109,8 @@ kustomize: "coder": #KustomizeHelm & {
 				service: type: "ClusterIP"
 
 				env: [{
-					name: "CODER_ACCESS_URL"
-					valueFrom: secretKeyRef: {
-						name: "coder"
-						key:  "CODER_ACCESS_URL"
-					}
+					name:  "CODER_ACCESS_URL"
+					value: "https://coder.\(_domain)"
 				}]
 			}
 		}
