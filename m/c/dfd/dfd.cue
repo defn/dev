@@ -2,8 +2,8 @@ package c
 
 _issuer:           "zerossl-production"
 _domain:           "defn.run"
-_domain_name:      "defn.run"
 _domain_slug:      "defn-run"
+_domain_name:      "dev.amanihavam.defn.run"
 _cloudflare_email: "cloudflare@defn.us"
 
 cluster_type: "k3d"
