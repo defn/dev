@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-cli
+  name: api
   labels:
-    app: service-cli
+    app: api
 spec:
   selector:
     matchLabels:
-      app: service-cli
+      app: api
   template:
     metadata:
       labels:
-        app: service-cli
+        app: api
     spec:
       containers:
-        - image: service-cli
+        - image: api
           name: cli
-          command: ["/cli"]
+          command: ["/api"]
           args: ["api"]
           ports:
             - containerPort: 8080
