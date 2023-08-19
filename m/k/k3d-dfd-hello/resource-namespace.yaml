@@ -1,6 +1,0 @@
-#ManagedBy: cue
-
-metadata:
-  name: hello
-kind: Namespace
-apiVersion: v1
