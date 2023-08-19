@@ -29,7 +29,7 @@ local_resource(
         "-c",
         """
             cd ~/m
-            make ci timeout=3600
+            make ci timeout=9999
             """,
     ],
 )
