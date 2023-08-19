@@ -186,3 +186,5 @@ graph.png
 .terrascan
 .cache
 .matplotlib
+.tfo
+.pki*
