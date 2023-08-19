@@ -12,6 +12,10 @@ _domain_name:      string
 _domain_slug:      string
 _cloudflare_email: string
 
+cluster_type: string
+cluster_name: string
+vclusters: [...int]
+
 kustomize: "coredns": #Kustomize & {
 	resource: "configmap-coredns": core.#ConfigMap & {
 		apiVersion: "v1"
