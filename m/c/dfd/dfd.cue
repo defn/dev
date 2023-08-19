@@ -126,7 +126,7 @@ kustomize: "secrets": #Kustomize & {
 }
 
 kustomize: "hello": #Kustomize & {
-	_app_ns: "defaul"
+	_app_ns: "default"
 	_funcs: ["hello", "bye"]
 
 	resource: "ingressroute-\(_domain)": {

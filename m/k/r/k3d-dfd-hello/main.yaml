@@ -2,7 +2,7 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: bye
-  namespace: defaul
+  namespace: default
 spec:
   template:
     spec:
@@ -20,7 +20,7 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: hello
-  namespace: defaul
+  namespace: default
 spec:
   template:
     spec:
@@ -38,7 +38,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: dev.amanihavam.defn.run
-  namespace: defaul
+  namespace: default
 spec:
   entryPoints:
   - websecure
