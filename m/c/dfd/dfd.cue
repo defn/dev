@@ -150,7 +150,7 @@ kustomize: "hello": #Kustomize & {
 		}
 		spec: entryPoints: ["websecure"]
 		spec: routes: [{
-			match: "HostRegexp(`{subdomain:[a-z0-9-]+}.\(_app_ns).\(_domain)`)"
+			match: "HostRegexp(`{subdomain:[a-z0-9-]+}.default.\(_domain)`)"
 			kind:  "Rule"
 			services: [{
 				name:      "kourier-internal"

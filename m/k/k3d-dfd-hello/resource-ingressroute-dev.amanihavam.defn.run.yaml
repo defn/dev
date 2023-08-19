@@ -9,7 +9,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: HostRegexp(`{subdomain:[a-z0-9-]+}.hello.dev.amanihavam.defn.run`)
+    - match: HostRegexp(`{subdomain:[a-z0-9-]+}.default.dev.amanihavam.defn.run`)
       kind: Rule
       services:
         - name: kourier-internal
