@@ -283,33 +283,6 @@ kustomize: "kourier": #Kustomize & {
 		}
 		spec: type: "ClusterIP"
 	}
-
-	resource: "ingress-default-wildcard": {
-		apiVersion: "networking.k8s.io/v1"
-		kind:       "Ingress"
-		metadata: {
-			name:      "default-wildcard"
-			namespace: "kourier-system"
-			annotations: {
-				"external-dns.alpha.kubernetes.io/hostname": "*.default.\(_domain)"
-			}
-		}
-
-		spec: {
-			ingressClassName: "traefik"
-			rules: [{
-				host: "wildcard.default.\(_domain)"
-				http: paths: [{
-					path:     "/"
-					pathType: "Prefix"
-					backend: service: {
-						name: "kourier-internal"
-						port: number: 80
-					}
-				}]
-			}]
-		}
-	}
 }
 
 // https://artifacthub.io/packages/helm/external-secrets-operator/external-secrets
