@@ -5,7 +5,14 @@ function main {
 
 	case "${1-}" in
 	sync | get | wait | terminate-op | resources | logs | diff)
-		exec env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app "$1" "$(app list | tail -n +2 | awk '{print $1}' | fzf --query="${2-}" --select-1 || true)"
+		case "${2-}" in
+		/*)
+			exec env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app "$1" "$(app list | tail -n +2 | awk '{print $1}' | fzf --query="${2#/}" --select-1 || true)"
+			;;
+		*)
+			exec env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app "$1" "${2-}"
+			;;
+		esac
 		;;
 	*)
 		exec env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app "$@"
