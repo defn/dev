@@ -417,7 +417,7 @@ kustomize: "karpenter": #Kustomize & {
 // https://github.com/knative/serving/releases
 kustomize: "knative": #Kustomize & {
 	resource: "knative-serving": {
-		url: "https://github.com/knative/serving/releases/download/knative-v1.10.0/serving-core.yaml"
+		url: "https://github.com/knative/serving/releases/download/knative-v1.11.0/serving-core.yaml"
 	}
 
 	psm: "namespace-knative-serving": core.#Namespace & {
@@ -433,24 +433,6 @@ kustomize: "knative": #Kustomize & {
 		kind:       "Deployment"
 		metadata: {
 			name:      "webhook"
-			namespace: "knative-serving"
-		}
-	}
-
-	psm: "deployment-domainmappingwebhook": apps.#Deployment & {
-		apiVersion: "apps/v1"
-		kind:       "Deployment"
-		metadata: {
-			name:      "domainmapping-webhook"
-			namespace: "knative-serving"
-		}
-	}
-
-	psm: "deployment-domain-mapping": apps.#Deployment & {
-		apiVersion: "apps/v1"
-		kind:       "Deployment"
-		metadata: {
-			name:      "domain-mapping"
 			namespace: "knative-serving"
 		}
 	}
