@@ -36,7 +36,7 @@ local_resource(
 
 # frontend
 local_resource(
-    "pnpm",
+    "frontend",
     serve_cmd=[
         "bash",
         "-c",
