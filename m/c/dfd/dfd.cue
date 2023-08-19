@@ -10,7 +10,7 @@ _domain: "dev.amanihavam.defn.run"
 
 cluster_type: "k3d"
 cluster_name: "dfd"
-vclusters: [0]
+vclusters: []
 
 env: (#Transform & {
 	transformer: #TransformK3D
@@ -76,7 +76,6 @@ env: (#Transform & {
 
 			// experimental
 			"coder": [100, ""]
-			"hello": [100, ""]
 		}
 	}
 }).outputs
