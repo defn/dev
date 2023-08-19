@@ -76,6 +76,7 @@ env: (#Transform & {
 
 			// experimental
 			"coder": [100, ""]
+			"hello": [100, ""]
 		}
 	}
 }).outputs
