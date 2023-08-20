@@ -7,9 +7,9 @@ provider "kubernetes" {
   config_path = "~/.kube/config"
 }
 
-resource "kubernetes_persistent_volume_claim" "home" {
+resource "kubernetes_persistent_volume_claim" "nix" {
   metadata {
-    name      = "coder-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}-home"
+    name      = "coder-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}-nix"
     namespace = var.namespace
 
     labels = {
@@ -43,7 +43,7 @@ resource "kubernetes_persistent_volume_claim" "home" {
 resource "kubernetes_deployment" "main" {
   count = data.coder_workspace.me.start_count
   depends_on = [
-    kubernetes_persistent_volume_claim.home
+    kubernetes_persistent_volume_claim.nix
   ]
 
   wait_for_rollout = false
@@ -89,7 +89,7 @@ resource "kubernetes_deployment" "main" {
 
         container {
           name              = "dev"
-          image             = "codercom/enterprise-base:ubuntu"
+          image             = "data.coder_parameter.docker_image.value"
           image_pull_policy = "Always"
           command           = ["sh", "-c", coder_agent.main.init_script]
           security_context {
@@ -101,25 +101,21 @@ resource "kubernetes_deployment" "main" {
           }
           resources {
             requests = {
-              "cpu"    = "250m"
-              "memory" = "512Mi"
-            }
-            limits = {
               "cpu"    = "${data.coder_parameter.cpu.value}"
               "memory" = "${data.coder_parameter.memory.value}Gi"
             }
           }
           volume_mount {
-            mount_path = "/home/coder"
-            name       = "home"
+            mount_path = "/nix"
+            name       = "nix"
             read_only  = false
           }
         }
 
         volume {
-          name = "home"
+          name = "nix"
           persistent_volume_claim {
-            claim_name = kubernetes_persistent_volume_claim.home.metadata.0.name
+            claim_name = kubernetes_persistent_volume_claim.nix.metadata.0.name
             read_only  = false
           }
         }
