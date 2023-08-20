@@ -17,17 +17,17 @@ No modules.
 
 ## Resources
 
-| Name                                                                                                                        | Type        |
-| --------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| [coder_agent.main](https://registry.terraform.io/providers/coder/coder/latest/docs/resources/agent)                         | resource    |
-| [coder_app.code-server](https://registry.terraform.io/providers/coder/coder/latest/docs/resources/app)                      | resource    |
-| [kubernetes_deployment.main](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/deployment) | resource    |
-| [coder_parameter.cpu](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter)               | data source |
-| [coder_parameter.docker_image](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter)      | data source |
-| [coder_parameter.memory](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter)            | data source |
-| [coder_parameter.nix_volume_size](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter)   | data source |
-| [coder_parameter.provider](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter)          | data source |
-| [coder_workspace.me](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/workspace)                | data source |
+| Name                                                                                                                            | Type        |
+| ------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| [coder_agent.main](https://registry.terraform.io/providers/coder/coder/latest/docs/resources/agent)                             | resource    |
+| [coder_app.code-server](https://registry.terraform.io/providers/coder/coder/latest/docs/resources/app)                          | resource    |
+| [kubernetes_stateful_set.main](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/stateful_set) | resource    |
+| [coder_parameter.cpu](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter)                   | data source |
+| [coder_parameter.docker_image](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter)          | data source |
+| [coder_parameter.memory](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter)                | data source |
+| [coder_parameter.nix_volume_size](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter)       | data source |
+| [coder_parameter.provider](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter)              | data source |
+| [coder_workspace.me](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/workspace)                    | data source |
 
 ## Inputs
 
