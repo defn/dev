@@ -42,7 +42,7 @@ local_resource(
         "-c",
         """
             cd ~/m/w
-            $(MAKE) install
+            make install
             npx pnpm dev
             """,
     ],
