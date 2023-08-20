@@ -68,7 +68,7 @@ resource "kubernetes_deployment" "main" {
   }
 
   spec {
-    replicas = 1
+    replicas = local.pod_count
     selector {
       match_labels = {
         "app.kubernetes.io/name" = "coder-workspace"
