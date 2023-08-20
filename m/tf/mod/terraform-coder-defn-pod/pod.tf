@@ -7,7 +7,7 @@ provider "kubernetes" {
   config_path = "~/.kube/config"
 }
 
-resource "kubernetes_deployment" "main" {
+resource "kubernetes_stateful_set" "main" {
   wait_for_rollout = false
 
   metadata {
@@ -30,7 +30,9 @@ resource "kubernetes_deployment" "main" {
   }
 
   spec {
-    replicas = local.pod_count * data.coder_workspace.me.start_count
+    service_name = "coder-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
+    replicas     = local.pod_count * data.coder_workspace.me.start_count
+
     selector {
       match_labels = {
         "app.kubernetes.io/name" = "coder-workspace"
@@ -67,6 +69,15 @@ resource "kubernetes_deployment" "main" {
               "memory" = "${data.coder_parameter.memory.value}Gi"
             }
           }
+          volume_mount {
+            mount_path = "/nix"
+            name       = "nix"
+            read_only  = false
+          }
+        }
+
+        volume {
+          name = "nix"
         }
       }
     }
