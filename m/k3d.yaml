@@ -1,11 +1,12 @@
+---
 apiVersion: k3d.io/v1alpha5
 kind: Simple
 servers: 1
 agents: 0
-#kubeAPI:
-#host: "${DEFN_DEV_HOST_API}"
-#hostIP: "${DEFN_DEV_HOST_IP}"
-#hostPort: "${DEFN_DEV_HOST_PORT}"
+# kubeAPI:
+# host: "${DEFN_DEV_HOST_API}"
+# hostIP: "${DEFN_DEV_HOST_IP}"
+# hostPort: "${DEFN_DEV_HOST_PORT}"
 network: dev
 image: quay.io/defn/dev:latest-k3d
 registries:
