@@ -93,6 +93,8 @@ resource "kubernetes_persistent_volume_claim" "main" {
     namespace = var.namespace
   }
 
+  wait_until_bound = false
+
   spec {
     storage_class_name = "local-path"
     access_modes       = ["ReadWriteOnce"]
