@@ -30,11 +30,11 @@ data "coder_parameter" "cpu" {
   display_name = "CPU"
   description  = "The number of CPUs to allocate to the workspace"
   type         = "number"
-  default      = "4"
+  default      = "1"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
   mutable      = true
   validation {
-    min = 4
+    min = 1
     max = 16
   }
 }
@@ -44,11 +44,11 @@ data "coder_parameter" "memory" {
   display_name = "Memory"
   description  = "The amount of memory to allocate to the workspace in GB"
   type         = "number"
-  default      = "8"
+  default      = "1"
   icon         = "/icon/memory.svg"
   mutable      = true
   validation {
-    min = 8
+    min = 1
     max = 64
   }
 }
