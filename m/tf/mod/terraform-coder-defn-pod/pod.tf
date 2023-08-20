@@ -53,7 +53,7 @@ resource "kubernetes_stateful_set" "main" {
 
         container {
           name              = "dev"
-          image             = "data.coder_parameter.docker_image.value"
+          image             = data.coder_parameter.docker_image.value
           image_pull_policy = "Always"
           command           = ["sh", "-c", coder_agent.main.init_script]
           security_context {
