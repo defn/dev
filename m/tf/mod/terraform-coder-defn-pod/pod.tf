@@ -78,7 +78,28 @@ resource "kubernetes_stateful_set" "main" {
 
         volume {
           name = "nix"
+          persistent_volume_claim {
+            claim_name = kubernetes_persistent_volume_claim.main.metadata[0].name
+          }
         }
+      }
+    }
+  }
+}
+
+resource "kubernetes_persistent_volume_claim" "main" {
+  metadata {
+    name      = "coder-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
+    namespace = var.namespace
+  }
+
+  spec {
+    storage_class_name = "local-path"
+    access_modes       = ["ReadWriteOnce"]
+
+    resources {
+      requests = {
+        storage = "1Gi"
       }
     }
   }
