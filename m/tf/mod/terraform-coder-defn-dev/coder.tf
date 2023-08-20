@@ -90,13 +90,13 @@ resource "coder_app" "web" {
   agent_id     = coder_agent.main.id
   slug         = "web"
   display_name = "web"
-  url          = "http://localhost:3000"
+  url          = "http://localhost:3002"
   icon         = "/icon/code.svg"
   subdomain    = true
   share        = "owner"
 
   healthcheck {
-    url       = "http://localhost:3000"
+    url       = "http://localhost:3002"
     interval  = 5
     threshold = 6
   }
