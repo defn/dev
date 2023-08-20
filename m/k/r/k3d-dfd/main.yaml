@@ -65,27 +65,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "100"
-  name: k3d-dfd-coder
-  namespace: argocd
-spec:
-  destination:
-    name: k3d-dfd
-  project: default
-  source:
-    path: m/k/r/k3d-dfd-coder
-    repoURL: https://github.com/defn/dev
-    targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions: []
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
     argocd.argoproj.io/sync-wave: "2"
   name: k3d-dfd-coredns
   namespace: argocd
