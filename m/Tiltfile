@@ -21,19 +21,6 @@ local_resource(
     ],
 )
 
-# buildkite
-local_resource(
-    "buildkite",
-    serve_cmd=[
-        "bash",
-        "-c",
-        """
-            cd ~/m
-            make ci timeout=9999
-            """,
-    ],
-)
-
 # frontend
 local_resource(
     "frontend",
