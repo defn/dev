@@ -81,6 +81,6 @@ data "coder_parameter" "nix_volume_size" {
   mutable      = true
   validation {
     min = 40
-    max = 100
+    max = 200
   }
 }
