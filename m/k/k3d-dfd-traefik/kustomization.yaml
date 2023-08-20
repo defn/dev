@@ -10,7 +10,7 @@ resources:
   - resource-serverstransport-insecure.yaml
   - resource-ingressroute-http-to-https.yaml
   - resource-middleware-http-to-https.yaml
-  - resource-certificate-defn-run-wildcard-traefik.yaml
+  - resource-certificate-dev-amanibhavam-defn-run-wildcard-traefik.yaml
 helmCharts:
   - releaseName: traefik
     namespace: traefik
