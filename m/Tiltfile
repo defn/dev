@@ -48,6 +48,19 @@ local_resource(
     ],
 )
 
+# coder
+local_resource(
+    "coder",
+    serve_cmd=[
+        "bash",
+        "-c",
+        """
+            cd ~/m
+            make dev
+            """,
+    ],
+)
+
 # api initial deploy
 # TODO replace with cue export
 k8s_yaml(local("cd cmd && make manifest"))
