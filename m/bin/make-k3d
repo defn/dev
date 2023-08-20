@@ -104,9 +104,11 @@ function main {
 	done
 
 	# wait until vclusters are done syncing
-	while true; do
-		if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 30 k3d-${nme}-vcluster-k3d-${nme}-vc${v}; then break; fi
-		sleep 5
+	for v in $(cd c/dfd && cue export --out json -e vclusters | jq -r '.[]'); do
+		while true; do
+			if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 30 k3d-${nme}-vcluster-k3d-${nme}-vc${v}; then break; fi
+			sleep 5
+		done
 	done
 
 	# wait until argocd is done syncing
