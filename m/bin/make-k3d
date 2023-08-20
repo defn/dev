@@ -11,7 +11,8 @@ function main {
 	# create k3d registry
 	k3d registry create registry --port 0.0.0.0:5000 || true
 
-	local restart=
+	local restarted
+	restarted=
 
 	if k3d cluster list dfd; then
 		# restart k3d
