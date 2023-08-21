@@ -7,4 +7,4 @@ push:
 	tar -cvh --exclude .terraform . | coder templates push -y --create -d - "$(template)"
 
 build:
-	env -u SSH_AUTH_SOCK earthly --push +build
+	env -u SSH_AUTH_SOCK earthly --push --no-output +build
