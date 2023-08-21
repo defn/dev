@@ -70,14 +70,14 @@ resource "kubernetes_stateful_set" "main" {
             }
           }
           volume_mount {
-            mount_path = "/nix"
-            name       = "nix"
+            mount_path = "/home/ubuntu"
+            name       = "home"
             read_only  = false
           }
         }
 
         volume {
-          name = "nix"
+          name = "home"
           persistent_volume_claim {
             claim_name = kubernetes_persistent_volume_claim.main.metadata[0].name
           }

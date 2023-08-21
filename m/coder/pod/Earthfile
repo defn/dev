@@ -33,9 +33,9 @@ pod:
 
     COPY --dir --chown=ubuntu:ubuntu +nix/nix /nix
 
-    RUN echo 1 && git clone https://github.com/defn/dev dev \
+    RUN echo 2 && git clone https://github.com/defn/dev dev \
         && mv dev/.git . \
         && rm -rf dev \
         && git reset --hard
 
-    RUN bash -c 'rm git remote -v && git pull && source .bashrc && make nix home'
+    RUN bash -c 'source .bashrc && make nix home'
