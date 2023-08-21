@@ -23,4 +23,5 @@ function main {
 	make install
 }
 
-main "$@"
+time main "$@"
+uptime
