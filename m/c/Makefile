@@ -5,7 +5,7 @@ list:
 	git diff pending.txt
 
 	cp images.txt images.txt.1
-	this-k3d-list-images dfd | sort >> images.txt.1
+	this-k3d-list-images dfd | grep -v 169.254.32.1 | sort >> images.txt.1
 	cat images.txt.1 | sort -u > images.txt
 	rm -f images.txt.1
 	git diff images.txt
