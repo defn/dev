@@ -14,26 +14,10 @@ image-pod:
     FROM +pod
     SAVE IMAGE --push ${image}
 
-nix:
-    FROM quay.io/defn/dev:latest
-
-    RUN git clone https://github.com/defn/dev dev \
-        && mv dev/.git . \
-        && rm -rf dev \
-        && git reset --hard
-
-    RUN make nix
-    
-    RUN bash -c 'source .bashrc && make home'
-    
-    SAVE ARTIFACT /nix nix
-
 pod:
     FROM quay.io/defn/dev:latest
 
-    COPY --dir --chown=ubuntu:ubuntu +nix/nix /nix
-
-    RUN echo 2 && git clone https://github.com/defn/dev dev \
+    RUN git clone https://github.com/defn/dev dev \
         && mv dev/.git . \
         && rm -rf dev \
         && git reset --hard
