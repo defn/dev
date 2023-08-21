@@ -30,10 +30,7 @@ No modules.
 | [aws_security_group.dev](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 | [coder_agent.main](https://registry.terraform.io/providers/coder/coder/latest/docs/resources/agent) | resource |
 | [coder_app.code-server](https://registry.terraform.io/providers/coder/coder/latest/docs/resources/app) | resource |
-| [coder_app.docs](https://registry.terraform.io/providers/coder/coder/latest/docs/resources/app) | resource |
-| [coder_app.storybook](https://registry.terraform.io/providers/coder/coder/latest/docs/resources/app) | resource |
 | [coder_app.tilt](https://registry.terraform.io/providers/coder/coder/latest/docs/resources/app) | resource |
-| [coder_app.web](https://registry.terraform.io/providers/coder/coder/latest/docs/resources/app) | resource |
 | [digitalocean_droplet.workspace](https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/droplet) | resource |
 | [digitalocean_volume.nix_volume](https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/volume) | resource |
 | [docker_container.workspace](https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/resources/container) | resource |
