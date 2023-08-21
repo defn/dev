@@ -16,15 +16,7 @@ function main {
 	sudo install -d -m 0700 -o ubuntu -g ubuntu /nix /nix
 
 	ssh -o StrictHostKeyChecking=no git@github.com true || true
-
-	if [[ ! -d "/nix/home/.git/." ]]; then
-		git clone http://github.com/defn/dev dev
-		mv dev/.git .
-		rm -rf dev
-		git reset --hard
-	else
-		git pull
-	fi
+	git pull
 
 	cd
 	source .bash_profile
