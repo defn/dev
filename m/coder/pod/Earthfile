@@ -1,0 +1,41 @@
+VERSION 0.7
+
+build:
+    ARG image=169.254.32.1/dfd
+    BUILD +build-pod --image=${image}
+
+build-pod:
+    ARG image
+    BUILD +image-pod --image=${image}
+
+image-pod:
+    ARG image
+
+    FROM +pod
+    SAVE IMAGE --push ${image}
+
+nix:
+    FROM quay.io/defn/dev:latest
+
+    RUN git clone https://github.com/defn/dev dev \
+        && mv dev/.git . \
+        && rm -rf dev \
+        && git reset --hard
+
+    RUN make nix
+    
+    RUN bash -c 'source .bashrc && make home'
+    
+    SAVE ARTIFACT /nix nix
+
+pod:
+    FROM quay.io/defn/dev:latest
+
+    COPY --dir --chown=ubuntu:ubuntu +nix/nix /nix
+
+    RUN echo 1 && git clone https://github.com/defn/dev dev \
+        && mv dev/.git . \
+        && rm -rf dev \
+        && git reset --hard
+
+    RUN bash -c 'rm git remote -v && git pull && source .bashrc && make nix home'
