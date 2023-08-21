@@ -55,7 +55,7 @@ resource "kubernetes_stateful_set" "main" {
           name              = "dev"
           image             = data.coder_parameter.docker_image.value
           image_pull_policy = "Always"
-          command           = ["sh", "-c", coder_agent.main.init_script]
+          command           = ["bash", "-c", coder_agent.main.init_script]
           security_context {
             run_as_user = "1000"
           }
@@ -69,39 +69,7 @@ resource "kubernetes_stateful_set" "main" {
               "memory" = "${data.coder_parameter.memory.value}Gi"
             }
           }
-          volume_mount {
-            mount_path = "/home/ubuntu"
-            name       = "home"
-            read_only  = false
-          }
         }
-
-        volume {
-          name = "home"
-          persistent_volume_claim {
-            claim_name = kubernetes_persistent_volume_claim.main.metadata[0].name
-          }
-        }
-      }
-    }
-  }
-}
-
-resource "kubernetes_persistent_volume_claim" "main" {
-  metadata {
-    name      = "coder-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
-    namespace = var.namespace
-  }
-
-  wait_until_bound = false
-
-  spec {
-    storage_class_name = "local-path"
-    access_modes       = ["ReadWriteOnce"]
-
-    resources {
-      requests = {
-        storage = "1Gi"
       }
     }
   }
