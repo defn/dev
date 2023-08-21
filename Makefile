@@ -126,6 +126,7 @@ install:
 	$(MAKE) nix
 	$(MAKE) install-inner
 	git rev-parse HEAD > bin/nix/.head
+	@mark finished
 
 install-inner:
 	$(MAKE) symlinks
