@@ -20,7 +20,7 @@ data "coder_parameter" "docker_image" {
   name         = "docker_image"
   display_name = "Docker image"
   description  = "The docker image to use for the workspace"
-  default      = "quay.io/defn/dev:latest"
+  default      = "19.254.32.1/dfd"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/docker.svg"
   mutable      = true
 }
