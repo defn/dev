@@ -1,7 +1,7 @@
 VERSION 0.7
 
 build:
-    ARG image=169.254.32.1/dfd
+    ARG image=169.254.32.1:5000/dfd
     BUILD +build-pod --image=${image}
 
 build-pod:
