@@ -19,16 +19,37 @@ function main {
 	if [[ ! -x "/usr/local/bin/bazel" ]]; then
 		case "$(uname -m)" in
 		aarch64)
-			sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-arm64
+			sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.18.0/bazelisk-linux-arm64
 			;;
 		*)
-			sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64
+			sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.18.0/bazelisk-linux-amd64
 			;;
 		esac
 	fi
 
 	sudo chmod 755 /usr/local/bin/bazelisk
 	sudo ln -nfs bazelisk /usr/local/bin/bazel
+
+	echo '{ "insecure-registries" : ["169.254.32.1:5000"] }' | sudo tee /etc/docker/daemon.json
+
+	echo fs.inotify.max_user_instances=10000 | sudo tee /etc/sysctl.d/99-dfd.conf
+
+	sudo mkdir -p /etc/systemd/network
+	pushd /etc/systemd/network
+	for a in 1; do
+		(
+			echo [NetDev]
+			echo Name=dummy$a
+			echo Kind=dummy
+		) | sudo tee dummy$a.netdev
+		(
+			echo [Match]
+			echo Name=dummy$a
+			echo
+			echo [Network]
+			echo Address=169.254.32.$a/32
+		) | sudo tee dummy$a.network
+	done
 }
 
 main "$@"
