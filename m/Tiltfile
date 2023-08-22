@@ -33,3 +33,16 @@ local_resource(
             """,
     ],
 )
+
+# tailscaled
+local_resource(
+    "tailscaled",
+    serve_cmd=[
+        "bash",
+        "-c",
+        """
+            cd
+            sudo $(which tailscaled)
+            """,
+    ],
+)
