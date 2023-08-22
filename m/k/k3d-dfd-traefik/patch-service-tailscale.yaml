@@ -9,4 +9,3 @@ metadata:
     external-dns.alpha.kubernetes.io/hostname: traefik.dev.amanibhavam.defn.run
 spec:
   type: LoadBalancer
-  loadBalancerClass: tailscale

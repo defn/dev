@@ -1014,8 +1014,8 @@ kustomize: "traefik": #KustomizeHelm & {
 		}
 
 		spec: {
-			type:              "LoadBalancer"
-			loadBalancerClass: "tailscale"
+			type: "LoadBalancer"
+			//loadBalancerClass: "tailscale"
 		}
 	}
 
