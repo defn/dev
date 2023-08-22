@@ -175,27 +175,6 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
-        tailscale: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: k3d-dfd-tailscale
-            annotations:
-              argocd.argoproj.io/sync-wave: "30"
-          spec:
-            project: default
-            destination:
-              name: k3d-dfd
-            source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/k3d-dfd-tailscale
-              targetRevision: main
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
         issuer: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
