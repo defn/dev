@@ -48,17 +48,17 @@
       },
       "locked": {
         "dir": "m/pkg/cilium",
-        "lastModified": 1692065536,
-        "narHash": "sha256-qUECgaKs5n2v56AtA6kuMoHQ+On6SLj0d8XKYWmACAY=",
+        "lastModified": 1692667035,
+        "narHash": "sha256-bbOUVbA+15Yp1dSpPnnG61W9nnd7BMo51vZxAHAVdlI=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "cca875091ed180daf07197d2f0ae047b278e6c13",
+        "rev": "a7ec6fd89a9be221f2ab6df3e91bbc6b09d36be5",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cilium",
         "owner": "defn",
-        "ref": "pkg-cilium-0.15.5-2",
+        "ref": "pkg-cilium-0.15.6-1",
         "repo": "dev",
         "type": "github"
       }
@@ -643,17 +643,17 @@
       },
       "locked": {
         "dir": "m/pkg/k3d",
-        "lastModified": 1692066413,
-        "narHash": "sha256-YthzlPUwzmk9b9HN+JkX6EoBob03nmbsi2bOpDFSqZw=",
+        "lastModified": 1692667098,
+        "narHash": "sha256-dJ9NzoTB77P2pNCKFSuN8cA1HozW4vzq7mtevtLhLj8=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "de1612870279f12ce22e2d55a71822e88aa6e006",
+        "rev": "7ba46ca0d4db3896a3e14b6b3a3a941a7358dc0e",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/k3d",
         "owner": "defn",
-        "ref": "pkg-k3d-5.5.2-2",
+        "ref": "pkg-k3d-5.6.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1305,17 +1305,17 @@
       },
       "locked": {
         "dir": "m/pkg/stern",
-        "lastModified": 1692116399,
-        "narHash": "sha256-/+qEBZP2nCEjOITtr1ayLSY9sfDLlmRuw/cV4XIdM4g=",
+        "lastModified": 1692667117,
+        "narHash": "sha256-wAzPeeHsqN0C5JKWSgTvCIb9hZAir5VdqcxbzhzGKGc=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "1c866ccbc40cfd31608cde40952d6ae64d850c6c",
+        "rev": "68ae4c688f83a9ae08672d643591de0dfeb5a5ca",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/stern",
         "owner": "defn",
-        "ref": "pkg-stern-1.25.0-10",
+        "ref": "pkg-stern-1.26.0-1",
         "repo": "dev",
         "type": "github"
       }
