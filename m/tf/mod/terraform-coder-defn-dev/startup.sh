@@ -13,25 +13,6 @@ exec >>/tmp/dfd-startup.log 2>&1
 #sudo swapon /mnt/swap || true
 
 function main {
-	sudo mkdir -p /etc/systemd/network
-	pushd /etc/systemd/network
-	for a in 1; do
-		(
-			echo [NetDev]
-			echo Name=dummy$a
-			echo Kind=dummy
-		) | sudo tee dummy$a.netdev
-		(
-			echo [Match]
-			echo Name=dummy$a
-			echo
-			echo [Network]
-			echo Address=169.254.32.$a/32
-		) | sudo tee dummy$a.network
-	done
-	sudo systemctl restart systemd-networkd
-	sleep 5
-
 	sudo install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
 	sudo install -d -m 0700 -o ubuntu -g ubuntu /nix /nix
 

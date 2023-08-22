@@ -8,9 +8,6 @@ function main {
 	nme="$1"
 	shift
 
-	# bump
-	sudo sysctl -w fs.inotify.max_user_instances=10000
-
 	# create k3d registry
 	k3d registry create registry --port 0.0.0.0:5000 || true
 
@@ -26,8 +23,6 @@ function main {
 		# deploy k3d
 		env KUBECONFIG=$HOME/.kube/config k3d cluster delete ${nme} || true
 		rm -vf ~/.kube/config*
-		echo '{ "insecure-registries" : ["169.254.32.1:5000"] }' | sudo tee /etc/docker/daemon.json
-		sudo systemctl restart docker
 		env KUBECONFIG=$HOME/.kube/config k3d cluster create ${nme} --config k3d.yaml
 		docker update --restart=no k3d-${nme}-server-0
 
@@ -61,10 +56,6 @@ function main {
 	env KUBECONFIG=$HOME/.kube/config.argocd kubectl -n argocd rollout status deployment/argocd-repo-server
 
 	if [[ -z ${restarted-} ]]; then
-		# needed for argocd password generation
-		sudo apt update
-		sudo apt install -y apache2-utils
-
 		# patch argocd admin password
 		kubectl --context k3d-${nme}-argocd patch secret argocd-secret -p '{"stringData": { "admin.password": "'$(htpasswd -bnBC 10 "" admin | tr -d ':\n')'"}}'
 
@@ -81,7 +72,6 @@ function main {
 			if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 60 k3d-${nme} >/dev/null 2>&1; then break; fi
 			sleep 30
 		done &
-
 	fi
 
 	for v in $(cd c/dfd && cue export --out json -e vclusters | jq -r '.[]'); do
