@@ -122,6 +122,11 @@ perms:
 ci dev:
 	cd m && b server defn-org-sso env FLY_API_TOKEN=$$(pass FLY_API_TOKEN) DIGITALOCEAN_TOKEN=$$(pass DIGITALOCEAN_TOKEN) bash -c 'cd; cd m; $(MAKE) $@'
 
+reinstall:
+	cd m && b clean
+	this-nix-gc
+	$(MAKE) install
+
 install:
 	$(MAKE) nix
 	$(MAKE) install-inner
