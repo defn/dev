@@ -9,7 +9,7 @@ function main {
 	shift
 
 	# bump
-	sysctl -w fs.inotify.max_user_instances=10000
+	sudo sysctl -w fs.inotify.max_user_instances=10000
 
 	# create k3d registry
 	k3d registry create registry --port 0.0.0.0:5000 || true
