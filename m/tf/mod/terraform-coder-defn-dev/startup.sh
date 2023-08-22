@@ -30,6 +30,7 @@ function main {
 		) | sudo tee dummy$a.network
 	done
 	sudo systemctl restart systemd-networkd
+	sleep 5
 
 	sudo install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
 	sudo install -d -m 0700 -o ubuntu -g ubuntu /nix /nix
