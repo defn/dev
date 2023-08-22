@@ -47,9 +47,8 @@ env: (#Transform & {
 
 			// ~~~~~ Wave 30 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			//
-			// external dns, vpn, issuer
+			// external dns, issuer
 			"external-dns": [30, ""]
-			"tailscale": [30, ""]
 			"issuer": [30, ""]
 
 			// ~~~~~ Wave 40 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
