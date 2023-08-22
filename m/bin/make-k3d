@@ -63,8 +63,8 @@ function main {
 		sudo apt install -y apache2-utils
 
 		# bump
-		sudo sysctl -w fs.inotify.max_user_instances=1000
-		docker exec -i k3d-${nme}-server-0 sysctl -w fs.inotify.max_user_instances=1000
+		sudo sysctl -w fs.inotify.max_user_instances=10000
+		docker exec -i k3d-${nme}-server-0 sysctl -w fs.inotify.max_user_instances=10000
 
 		# patch argocd admin password
 		kubectl --context k3d-${nme}-argocd patch secret argocd-secret -p '{"stringData": { "admin.password": "'$(htpasswd -bnBC 10 "" admin | tr -d ':\n')'"}}'
