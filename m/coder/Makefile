@@ -8,6 +8,7 @@ push:
 
 build:
 	env -u SSH_AUTH_SOCK earthly --push --no-output +build
+	$(MAKE) reset
 
 reset:
 	 earthly prune --reset
