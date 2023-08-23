@@ -8,7 +8,7 @@ kind: ServiceAccount
 metadata:
   labels:
     app: netdata
-    chart: netdata-3.7.68
+    chart: netdata-3.7.69
     heritage: Helm
     release: netdata
   name: netdata
@@ -19,7 +19,7 @@ kind: ClusterRole
 metadata:
   labels:
     app: netdata
-    chart: netdata-3.7.68
+    chart: netdata-3.7.69
     heritage: Helm
     release: netdata
   name: netdata
@@ -50,7 +50,7 @@ kind: ClusterRoleBinding
 metadata:
   labels:
     app: netdata
-    chart: netdata-3.7.68
+    chart: netdata-3.7.69
     heritage: Helm
     release: netdata
   name: netdata
@@ -313,7 +313,7 @@ kind: ConfigMap
 metadata:
   labels:
     app: netdata
-    chart: netdata-3.7.68
+    chart: netdata-3.7.69
     heritage: Helm
     release: netdata
   name: netdata-child-sd-config-map
@@ -357,7 +357,7 @@ kind: ConfigMap
 metadata:
   labels:
     app: netdata
-    chart: netdata-3.7.68
+    chart: netdata-3.7.69
     heritage: Helm
     release: netdata
   name: netdata-conf-child
@@ -413,7 +413,7 @@ kind: ConfigMap
 metadata:
   labels:
     app: netdata
-    chart: netdata-3.7.68
+    chart: netdata-3.7.69
     heritage: Helm
     release: netdata
   name: netdata-conf-k8s-state
@@ -456,7 +456,7 @@ kind: ConfigMap
 metadata:
   labels:
     app: netdata
-    chart: netdata-3.7.68
+    chart: netdata-3.7.69
     heritage: Helm
     release: netdata
   name: netdata-conf-parent
@@ -467,7 +467,7 @@ kind: Service
 metadata:
   labels:
     app: netdata
-    chart: netdata-3.7.68
+    chart: netdata-3.7.69
     heritage: Helm
     release: netdata
     role: parent
@@ -490,7 +490,7 @@ kind: PersistentVolumeClaim
 metadata:
   labels:
     app: netdata
-    chart: netdata-3.7.68
+    chart: netdata-3.7.69
     heritage: Helm
     release: netdata
     role: k8sState
@@ -508,7 +508,7 @@ kind: PersistentVolumeClaim
 metadata:
   labels:
     app: netdata
-    chart: netdata-3.7.68
+    chart: netdata-3.7.69
     heritage: Helm
     release: netdata
     role: parent
@@ -526,7 +526,7 @@ kind: PersistentVolumeClaim
 metadata:
   labels:
     app: netdata
-    chart: netdata-3.7.68
+    chart: netdata-3.7.69
     heritage: Helm
     release: netdata
     role: parent
@@ -544,7 +544,7 @@ kind: Deployment
 metadata:
   labels:
     app: netdata
-    chart: netdata-3.7.68
+    chart: netdata-3.7.69
     heritage: Helm
     release: netdata
     role: k8sState
@@ -561,7 +561,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: d44fb6f935d23252a5a5a5c3d8a71258d30c71d69ebfe0c0f5e3d656364cfb59
+        checksum/config: 25a8959dc41df454168719530bf10caf26797cca9af3e5f966438db54843c7ac
         container.apparmor.security.beta.kubernetes.io/netdata: unconfined
       labels:
         app: netdata
@@ -646,7 +646,7 @@ kind: Deployment
 metadata:
   labels:
     app: netdata
-    chart: netdata-3.7.68
+    chart: netdata-3.7.69
     heritage: Helm
     release: netdata
     role: parent
@@ -664,7 +664,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: d44fb6f935d23252a5a5a5c3d8a71258d30c71d69ebfe0c0f5e3d656364cfb59
+        checksum/config: 25a8959dc41df454168719530bf10caf26797cca9af3e5f966438db54843c7ac
       labels:
         app: netdata
         release: netdata
@@ -754,7 +754,7 @@ kind: DaemonSet
 metadata:
   labels:
     app: netdata
-    chart: netdata-3.7.68
+    chart: netdata-3.7.69
     heritage: Helm
     release: netdata
     role: child
@@ -769,7 +769,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: d44fb6f935d23252a5a5a5c3d8a71258d30c71d69ebfe0c0f5e3d656364cfb59
+        checksum/config: 25a8959dc41df454168719530bf10caf26797cca9af3e5f966438db54843c7ac
         container.apparmor.security.beta.kubernetes.io/netdata: unconfined
       labels:
         app: netdata
@@ -863,7 +863,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: spec.nodeName
-        image: netdata/agent-sd:v0.2.8
+        image: netdata/agent-sd:v0.2.9
         imagePullPolicy: Always
         name: sd
         resources:

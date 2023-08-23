@@ -9,7 +9,7 @@
     argoworkflows.url = github:defn/dev/pkg-argoworkflows-3.4.10-1?dir=m/pkg/argoworkflows;
     argocd.url = github:defn/dev/pkg-argocd-2.8.1-1?dir=m/pkg/argocd;
     kn.url = github:defn/dev/pkg-kn-1.11.0-2?dir=m/pkg/kn;
-    vcluster.url = github:defn/dev/pkg-vcluster-0.15.5-2?dir=m/pkg/vcluster;
+    vcluster.url = github:defn/dev/pkg-vcluster-0.15.6-1?dir=m/pkg/vcluster;
     kubevirt.url = github:defn/dev/pkg-kubevirt-1.0.0-3?dir=m/pkg/kubevirt;
     cilium.url = github:defn/dev/pkg-cilium-0.15.6-1?dir=m/pkg/cilium;
     hubble.url = github:defn/dev/pkg-hubble-0.12.0-3?dir=m/pkg/hubble;
