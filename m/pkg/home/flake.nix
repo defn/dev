@@ -31,7 +31,8 @@
         inputs.az.defaultPackage.${ctx.system}
       ]
       ++ ctx.commands
-      ++ (ctx.pkgs.lib.mapAttrsToList (name: value: (packages ctx).${name}) config.clusters);
+      ++ (ctx.pkgs.lib.mapAttrsToList (name: value: (packages ctx).${name}) config.clusters)
+      ++ (with (packages ctx); [ bazel dev ]);
     };
 
     packages = ctx: rec {
@@ -40,9 +41,61 @@
           (defaultPackage ctx)
         ];
       };
-    };
+
+      bazel = ctx.pkgs.writeShellScriptBin "bazel" ''
+        exec bazelisk "$@"
+      '';
+
+      dev = ctx.pkgs.writeShellScriptBin "dev" ''
+        eval "$(direnv hook bash)"
+        source ${ctx.pkgs.nix-direnv}/share/nix-direnv/direnvrc
+        direnv allow
+        _direnv_hook
+        exec bash
+      '';
+    } // (ctx.pkgs.lib.mapAttrs
+      (nme: value: ctx.pkgs.writeShellScriptBin nme ''
+        set -efu
+
+        cd "./$(git rev-parse --show-cdup)m"
+
+        case "''${1:-}" in
+          root)
+            docker exec -ti -u root -w /home/ubuntu k3d-${nme}-server-0 bash
+            ;;
+          shell)
+            docker exec -ti -u ubuntu -w /home/ubuntu k3d-${nme} -server-0 bash
+            ;;
+          stop)
+            k3d cluster stop ${nme}
+            ;;
+          start)
+            k3d cluster start ${nme}
+            ;;
+          "")
+            k3d cluster list ${nme}
+            ;;
+          cache)
+            (this-k3d-list-images ${nme}; ssh root@$host /bin/ctr -n k8s.io images list  | awk '{print $1}' | grep -v sha256 | grep -v ^REF) | sort -u | this-k3d-save-images
+            ;;
+          server)
+            kubectl --context k3d-${nme} config view -o jsonpath='{.clusters[?(@.name == "k3d-${nme}")]}' --raw | jq -r '.cluster.server'
+            ;;
+          ca)
+            kubectl --context k3d-${nme} config view -o jsonpath='{.clusters[?(@.name == "k3d-${nme}")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d'
+            ;;
+          *)
+            kubectl --context k3d-${nme} "$@"
+            ;;
+        esac
+      '')
+      config.clusters);
 
     scripts = { system }: {
+      k3d-registry = ''
+        k3d registry create registry --port 0.0.0.0:5000
+      '';
+
       k3d-list-images = ''
         set -efu
 
@@ -72,11 +125,26 @@
         echo RELOADAGENT | gpg-connect-agent
       '';
 
+      login = ''
+        if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then mark kubernetes; this-kubeconfig; this-argocd-login || true; fi
+        this-github-login
+        echo
+      '';
+
       github-login = ''
         mark github
         if ! gh auth status; then
           echo Y | gh auth login -p https -h github.com -w
         fi
+      '';
+
+      home-repos = ''
+        for a in ~ ~/.dotfiles ~/.password-store; do (echo; echo "$a"; cd "$a" && git pull) || true; done
+      '';
+
+      all-repos = ''
+        this-home-repos
+        git pull
       '';
 
       nix-gc = ''
@@ -136,6 +204,18 @@
         set +a
 
         buildkite-agent start --tracing-backend opentelemetry
+      '';
+
+      dev = ''
+        docker pull quay.io/defn/dev:latest-nix
+        code --folder-uri "vscode-remote://dev-container+$(pwd | perl -pe 's{\s+}{}g' | xxd -p)$(pwd | sed "s#$HOME#/home/ubuntu#")"
+      '';
+
+      up = ''
+        eval "$(direnv hook bash)"
+        _direnv_hook
+        if ! test -e /var/run/utmp; then sudo touch /var/run/utmp; fi
+        pass hello
       '';
 
       acme-issue = ''
