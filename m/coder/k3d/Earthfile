@@ -61,10 +61,9 @@ k3d:
 
     RUN mkdir -p /var/lib/rancher/k3s/agent/etc/containerd
     COPY k3d-config.toml var/lib/rancher/k3s/agent/etc/containerd/config.toml
-    COPY k3s-wrapper.sh /bin/k3s-wrapper.sh
+    RUN mv /bin/k3s /bin/k3s-real && for a in kubectl k3s-server k3s-secrets-encrypt k3s-etcd-snapshot k3s-completion k3s-certificate k3s-agent crictl ctr; do ln -nfs k3s-real /bin/$a; done
+    COPY k3s-wrapper.sh /bin/k3s
 
     RUN cp /nix/store/*bash-interactive*/bin//bash /bin/bash
     RUN sed 's#/bin/sh#/bin/bash#' -i /etc/passwd
     RUN /bin/bash -c "ln -nfsv /nix/store/*tailscale*/bin/* /bin/"
-
-    ENTRYPOINT ["/bin/k3s-wrapper.sh"]

@@ -34,7 +34,7 @@ volumes:
   - volume: /var/run/docker.sock:/var/run/docker.sock
     nodeFilters:
       - server:0
-  - volume: /nix/k3s:/var/lib/rancher/k3s/storage@all
+  - volume: /nix/k3s:/var/lib/rancher/k3s/storage
     nodeFilters:
       - server:0
   - volume: dfd-containerd:/var/lib/rancher/k3s/agent/containerd/io.containerd.content.v1.content
