@@ -31,8 +31,7 @@
         inputs.az.defaultPackage.${ctx.system}
       ]
       ++ ctx.commands
-      ++ (ctx.pkgs.lib.mapAttrsToList (name: value: (packages ctx).${name}) config.clusters)
-      ++ (with (packages ctx); [ bazel dev ]);
+      ++ (ctx.pkgs.lib.mapAttrsToList (name: value: (packages ctx).${name}) config.clusters);
     };
 
     packages = ctx: rec {
@@ -41,18 +40,6 @@
           (defaultPackage ctx)
         ];
       };
-
-      bazel = ctx.pkgs.writeShellScriptBin "bazel" ''
-        exec bazelisk "$@"
-      '';
-
-      dev = ctx.pkgs.writeShellScriptBin "dev" ''
-        eval "$(direnv hook bash)"
-        source ${ctx.pkgs.nix-direnv}/share/nix-direnv/direnvrc
-        direnv allow
-        _direnv_hook
-        exec bash
-      '';
     } // (ctx.pkgs.lib.mapAttrs
       (nme: value: ctx.pkgs.writeShellScriptBin nme ''
         set -efu
