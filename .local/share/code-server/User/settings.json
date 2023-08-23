@@ -1,4 +1,6 @@
 {
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
   "files.autoSave": "afterDelay",
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
@@ -13,7 +15,12 @@
   "terminal.integrated.profiles.linux": {
     "dev": {
       "path": "bash",
-      "args": ["--init-file", "~/.bash_entrypoint", "-s", "${workspaceFolder}"]
+      "args": [
+        "--init-file",
+        "~/.bash_entrypoint",
+        "-s",
+        "${workspaceFolder}"
+      ]
     }
   },
   "terminal.integrated.env.linux": {
