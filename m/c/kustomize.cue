@@ -613,7 +613,6 @@ kustomize: "cert-manager": #KustomizeHelm & {
 			multiNamespaceMode: enabled: false
 
 			service: type: "LoadBalancer"
-			//service: loadBalancerClass: "tailscale"
 		}
 	}
 
@@ -722,93 +721,6 @@ kustomize: "cilium": #KustomizeHelm & {
 					}
 				}]
 			}]
-		}
-	}
-}
-
-// https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/manifests/operator.yaml
-kustomize: "tailscale": #Kustomize & {
-	resource: "tailscale": {
-		url: "https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/manifests/operator.yaml"
-	}
-
-	jsp: "secret-operator-oauth-remove": {
-		target: {
-			version:   "v1"
-			kind:      "Secret"
-			name:      "operator-oauth"
-			namespace: "tailscale"
-		}
-		patches: [{
-			op:    "replace"
-			path:  "/metadata/name"
-			value: "not-used"
-		}]
-	}
-
-	jsp: "deployment-operator-increase-logging": {
-		target: {
-			kind:      "Deployment"
-			name:      "operator"
-			namespace: "tailscale"
-		}
-		patches: [{
-			op:    "replace"
-			path:  "/spec/template/spec/containers/0/env/2/value"
-			value: "dev"
-		}, {
-			op:   "replace"
-			path: "/spec/template/spec/containers/0/volumeMounts/0"
-			value: {
-				mountPath: "/not-used"
-				name:      "not-used"
-				readOnly:  true
-			}
-		}, {
-			op:   "add"
-			path: "/spec/template/spec/containers/0/volumeMounts/1"
-			value: {
-				mountPath: "/oauth"
-				name:      "oauth"
-				readOnly:  true
-			}
-		}, {
-			op:   "replace"
-			path: "/spec/template/spec/volumes/0"
-			value: {
-				name: "not-used"
-				secret: secretName: "not-used"
-			}
-		}, {
-			op:   "add"
-			path: "/spec/template/spec/volumes/1"
-			value: {
-				name: "oauth"
-				secret: secretName: "operator-oauth-custom"
-			}
-		}]
-	}
-
-	resource: "externalsecret-tailscale": {
-		apiVersion: "external-secrets.io/v1beta1"
-		kind:       "ExternalSecret"
-		metadata: {
-			name:      "operator-oauth-custom"
-			namespace: "tailscale"
-		}
-		spec: {
-			refreshInterval: "1h"
-			secretStoreRef: {
-				kind: "ClusterSecretStore"
-				name: cluster_name
-			}
-			dataFrom: [{
-				extract: key: "\(cluster_type)-\(cluster_name)"
-			}]
-			target: {
-				name:           "operator-oauth-custom"
-				creationPolicy: "Owner"
-			}
 		}
 	}
 }
