@@ -37,7 +37,10 @@ volumes:
   - volume: /nix/k3s:/var/lib/rancher/k3s/storage
     nodeFilters:
       - server:0
-  - volume: dfd-containerd:/var/lib/rancher/k3s/agent/containerd/io.containerd.content.v1.content
+  - volume: /nix/k3s-containerd:/var/lib/rancher/k3s/agent/containerd/io.containerd.content.v1.content
+    nodeFilters:
+      - server:0
+  - volume: /nix/k3s-tailscale:/var/lib/tailscale
     nodeFilters:
       - server:0
 #  - volume: defn-dev-work:/mnt/work
