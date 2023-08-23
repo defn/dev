@@ -17,25 +17,29 @@ image-k3d:
     FROM +k3d --K3S=${K3S}
     SAVE IMAGE --push ${image}
 
-nix:
+home:
     FROM quay.io/defn/dev:latest
 
-    RUN curl -L https://releases.nixos.org/nix/nix-2.17.0/install > nix-install && bash nix-install --no-daemon && rm -f nix-install
-
-    SAVE ARTIFACT /nix nix
-
-home:
-    FROM +nix
-
     USER root
+
     RUN apt update && apt install -y git
 
     USER ubuntu
+
+    RUN curl -L https://releases.nixos.org/nix/nix-2.17.0/install > nix-install \
+        && bash nix-install --no-daemon \
+        && rm -f nix-install
+
     RUN git clone https://github.com/defn/dev dev \
         && mv dev/.git . \
         && rm -rf dev \
         && git reset --hard
 
+    RUN . ~/.nix-profile/etc/profile.d/nix.sh \
+        && cd m/pkg \
+        && for a in tailscale shell; do (cd $a && nix build); done
+
+    SAVE ARTIFACT /nix nix
     SAVE ARTIFACT /home/ubuntu ubuntu
 
 k3d:
@@ -50,17 +54,17 @@ k3d:
         && install -d -m 0700 -o root -g root /root \
         && mkdir -p /home && install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
 
-    RUN install -d -m 0700 -o ubuntu -g ubuntu /cache \
-        && ln -nfs /bin/env /usr/bin/env
+    RUN ln -nfs /bin/env /usr/bin/env
 
     RUN mkdir -p /var/lib/rancher/k3s/agent/etc/containerd
     COPY k3d-config.toml var/lib/rancher/k3s/agent/etc/containerd/config.toml
+    COPY k3s-wrapper.sh /bin/k3s-wrapper.sh
 
-    #COPY k3s-wrapper.sh /bin/k3s-wrapper.sh
-    #ENTRYPOINT ["/bin/k3s-wrapper.sh"]
-
-    COPY --dir --chown=ubuntu:ubuntu +nix/nix /nix
+    COPY --dir --chown=ubuntu:ubuntu +home/nix /nix
     COPY --dir --chown=ubuntu:ubuntu +home/ubuntu /home
 
-    # must be last because /bin/bash doesn't exist yet
+    RUN cp /nix/store/*bash-interactive*/bin//bash /bin/bash
     RUN sed 's#/bin/sh#/bin/bash#' -i /etc/passwd
+    RUN /bin/bash -c "ln -nfsv /nix/store/*tailscale*/bin/* /bin/"
+
+    ENTRYPOINT ["/bin/k3s-wrapper.sh"]
