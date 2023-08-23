@@ -37,6 +37,15 @@ function main {
 	sudo ln -nfs /nix/home "$HOME"
 	ssh -o StrictHostKeyChecking=no git@github.com true || true
 
+	case "$(git remote get-url origin)" in
+	http*)
+		git remote rm origin
+		git remote add origin git@github.com:defn/dev
+		git fetch origin
+		git branch --set-upstream-to=origin/main main
+		;;
+	esac
+
 	# persist daemon data
 	for d in docker tailscale; do
 		if test -d "/nix/${d}"; then
