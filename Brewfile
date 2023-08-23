@@ -10,6 +10,9 @@ brew "fzf"
 brew "bazelisk"
 brew "util-linux"
 
+tap "homebrew/cask-fonts"
+cask "font-fira-code"
+
 cask "divvy"
 cask "docker"
 cask "google-chrome"
