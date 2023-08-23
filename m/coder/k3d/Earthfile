@@ -47,6 +47,9 @@ k3d:
 
     FROM rancher/k3s:v${K3S}
 
+    COPY --dir --chown=ubuntu:ubuntu +home/nix /nix
+    COPY --dir --chown=ubuntu:ubuntu +home/ubuntu /home
+
     RUN echo root:x:0: >> /etc/group \
         && echo ubuntu:x:1000: >> /etc/group \
         && echo root:x:0:0:root:/root:/bin/sh >> /etc/passwd \
@@ -59,9 +62,6 @@ k3d:
     RUN mkdir -p /var/lib/rancher/k3s/agent/etc/containerd
     COPY k3d-config.toml var/lib/rancher/k3s/agent/etc/containerd/config.toml
     COPY k3s-wrapper.sh /bin/k3s-wrapper.sh
-
-    COPY --dir --chown=ubuntu:ubuntu +home/nix /nix
-    COPY --dir --chown=ubuntu:ubuntu +home/ubuntu /home
 
     RUN cp /nix/store/*bash-interactive*/bin//bash /bin/bash
     RUN sed 's#/bin/sh#/bin/bash#' -i /etc/passwd

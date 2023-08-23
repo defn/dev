@@ -6,7 +6,7 @@ tailscaled --statedir=/var/lib/tailscale &
 
 container_ip=$(ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | cut -d' ' -f1)
 
-tailscale up --authkey="${TSKEY}"
+tailscale up
 
 while true; do
 	ts_ip=$(tailscale ip -4 || true)
