@@ -12,6 +12,11 @@ exec >>/tmp/dfd-startup.log 2>&1
 #sudo mkswap /mnt/swap
 #sudo swapon /mnt/swap || true
 
+if [[ "$(lsblk /dev/nvme0n1p1 | tail -1 | awk '{print $NF}')" == 1 ]]; then
+	sudo growpart /dev/nvme0n1 1
+	sudo resize2fs /dev/nvme0n1p1
+fi
+
 function main {
 	sudo install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
 	sudo install -d -m 0700 -o ubuntu -g ubuntu /nix /nix
