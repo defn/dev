@@ -217,7 +217,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.23.6"
+		version: "6.24.0"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -575,7 +575,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 	helm: {
 		release: "vcluster"
 		name:    "vcluster"
-		version: "0.15.5"
+		version: "0.15.6"
 		repo:    "https://charts.loft.sh"
 
 		values: {
@@ -995,7 +995,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "2.1.0"
+		version:   "2.1.1"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {

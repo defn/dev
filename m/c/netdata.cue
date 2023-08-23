@@ -11,7 +11,7 @@ kustomize: "netdata": #KustomizeHelm & {
 	helm: {
 		release: "netdata"
 		name:    "netdata"
-		version: "3.7.68"
+		version: "3.7.69"
 		repo:    "https://netdata.github.io/helmchart"
 		values: {
 			ingress: enabled: false
