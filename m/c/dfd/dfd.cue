@@ -158,7 +158,6 @@ kustomize: "hello": #Kustomize & {
 				namespace: _app_ns
 			}
 			spec: {
-				deployments: annotations: "linkerd.io/inject": "enabled"
 				template: spec: {
 					containerConcurrency: 0
 					containers: [{

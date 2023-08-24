@@ -6,9 +6,6 @@ metadata:
   name: bye
   namespace: default
 spec:
-  deployments:
-    annotations:
-      linkerd.io/inject: enabled
   template:
     spec:
       containerConcurrency: 0
