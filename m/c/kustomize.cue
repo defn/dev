@@ -16,20 +16,6 @@ cluster_type: string
 cluster_name: string
 vclusters: [...int]
 
-kustomize: "coredns": #Kustomize & {
-	resource: "configmap-coredns": core.#ConfigMap & {
-		apiVersion: "v1"
-		kind:       "ConfigMap"
-		metadata: name:      "coredns-custom"
-		metadata: namespace: "kube-system"
-		data: "ts.net.server": """
-			  ts.net {
-			    forward . 100.100.100.100
-			   }
-			"""
-	}
-}
-
 kustomize: "argo-cd": #Kustomize & {
 	namespace: "argocd"
 

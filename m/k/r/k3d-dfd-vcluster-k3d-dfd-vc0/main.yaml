@@ -2,6 +2,27 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  name: vcluster-k3d-dfd-vc0-cert-manager
+  namespace: argocd
+spec:
+  destination:
+    name: vcluster-k3d-dfd-vc0
+  project: default
+  source:
+    path: m/k/r/vcluster-k3d-dfd-vc0-cert-manager
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
     argocd.argoproj.io/sync-wave: "100"
   name: vcluster-k3d-dfd-vc0-emojivoto
   namespace: argocd
@@ -24,7 +45,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-wave: "2"
   name: vcluster-k3d-dfd-vc0-kyverno
   namespace: argocd
 spec:
@@ -41,3 +62,24 @@ spec:
       selfHeal: true
     syncOptions:
     - ServerSideApply=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  name: vcluster-k3d-dfd-vc0-pod-identity
+  namespace: argocd
+spec:
+  destination:
+    name: vcluster-k3d-dfd-vc0
+  project: default
+  source:
+    path: m/k/r/vcluster-k3d-dfd-vc0-pod-identity
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []

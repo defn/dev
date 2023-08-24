@@ -6,27 +6,6 @@ helmCharts:
   - releaseName: bootstrap
     valuesInline:
       anyResources:
-        coredns: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: k3d-dfd-coredns
-            annotations:
-              argocd.argoproj.io/sync-wave: "2"
-          spec:
-            project: default
-            destination:
-              name: k3d-dfd
-            source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/k3d-dfd-coredns
-              targetRevision: main
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
         kyverno: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
@@ -64,27 +43,6 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               path: m/k/r/k3d-dfd-cert-manager
-              targetRevision: main
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        netdata: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: k3d-dfd-netdata
-            annotations:
-              argocd.argoproj.io/sync-wave: "2"
-          spec:
-            project: default
-            destination:
-              name: k3d-dfd
-            source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/k3d-dfd-netdata
               targetRevision: main
             syncPolicy:
               automated:

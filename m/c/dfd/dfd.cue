@@ -29,10 +29,8 @@ env: (#Transform & {
 			// ~~~~~ Wave 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			//
 			// essentials
-			"coredns": [2, ""]
 			"kyverno": [2, "", "ServerSideApply=true"]
 			"cert-manager": [2, ""]
-			"netdata": [2, ""]
 			"pod-identity": [2, ""]
 
 			// ~~~~~ Wave 10 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -88,7 +86,9 @@ env: (#Transform & {
 			instance_types: []
 			parent: env[cluster_name]
 			bootstrap: {
-				"kyverno": [3, "", "ServerSideApply=true"]
+				"kyverno": [2, "", "ServerSideApply=true"]
+				"cert-manager": [2, ""]
+				"pod-identity": [2, ""]
 				"emojivoto": [100, "", "ServerSideApply=true"]
 			}
 		}
