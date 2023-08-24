@@ -5,4 +5,4 @@ kind: Namespace
 metadata:
   name: k3d-dfd-vc0
   annotations:
-    linkerd.io/inject: enabled
+    linkerd.io/inject: disabled

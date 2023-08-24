@@ -622,7 +622,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 		metadata: {
 			name: _in.vc_name
 			annotations: {
-				"linkerd.io/inject": "enabled"
+				"linkerd.io/inject": "disabled"
 			}
 		}
 	}
