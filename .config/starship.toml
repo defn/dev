@@ -13,3 +13,11 @@ disabled = true
 [terraform]
 
 disabled = true
+
+[docker_context]
+
+disabled = true
+
+[cmake]
+
+disabled = true
