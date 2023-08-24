@@ -10,7 +10,7 @@ _domain:      "dev.amanibhavam.defn.run"
 
 cluster_type: "k3d"
 cluster_name: "dfd"
-vclusters: []
+vclusters: [0]
 
 env: (#Transform & {
 	transformer: #TransformK3D
