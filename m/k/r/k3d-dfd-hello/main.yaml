@@ -1,12 +1,12 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  metadata:
-    annotations:
-      linkerd.io/inject: enabled
   name: bye
   namespace: default
 spec:
+  deployments:
+    annotations:
+      linkerd.io/inject: enabled
   template:
     spec:
       containerConcurrency: 0
@@ -22,12 +22,12 @@ spec:
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  metadata:
-    annotations:
-      linkerd.io/inject: enabled
   name: hello
   namespace: default
 spec:
+  deployments:
+    annotations:
+      linkerd.io/inject: enabled
   template:
     spec:
       containerConcurrency: 0
