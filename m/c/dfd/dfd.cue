@@ -69,7 +69,6 @@ env: (#Transform & {
 
 			// experimental
 			"hello": [100, ""]
-			"emojivoto": [100, ""]
 		}
 	}
 }).outputs
