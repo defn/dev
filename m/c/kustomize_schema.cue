@@ -24,18 +24,17 @@ kustomize: [NAME=string]: _name: NAME
 }
 
 #Cluster: {
-	domain_zone: string | *"defn.run"
-	domain_name: string | *"dev.amanibhavam.defn.run"
-	domain_slug: string | *"dev-amanibhavam-defn-run"
+	domain_zone: string
+	domain_name: string
+	domain_slug: string
 
+	issuer:           string
+	cloudflare_email: string
+
+	cluster_name: string
+
+	vclusters:   [...int] | *[]
 	name_suffix: string | *""
-
-	issuer:           string | *"zerossl-production"
-	cloudflare_email: string | *"cloudflare@defn.us"
-
-	cluster_type: string | *"k3d"
-	cluster_name: string | *"dfd"
-	vclusters:    [...int] | *[0, 1]
 }
 
 #Kustomize: {

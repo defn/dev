@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  name: k3d-dfd-manual-env-cert-manager-crds
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-manual-env
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-manual-env-cert-manager-crds
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  name: k3d-dfd-manual-env-cilium-bootstrap
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-manual-env
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-manual-env-cilium-bootstrap
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []

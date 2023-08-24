@@ -1,31 +1,53 @@
 package c
 
+import (
+	"strings"
+)
+
 infra: {
-	dfd: #Cluster & {
+	[NAME=string]: _base & {
+		if strings.HasPrefix(NAME, "vc") {
+			cluster_name: "\(parent.cluster_name)-\(NAME)"
+			name_suffix:  "-\(NAME)"
+		}
 	}
 
-	vc0: #Cluster & {
-		name_suffix: "-vc0"
+	_base: {
+		domain_zone: "defn.run"
+		domain_name: "dev.amanibhavam.defn.run"
+		domain_slug: "dev-amanibhavam-defn-run"
+
+		issuer:           "zerossl-production"
+		cloudflare_email: "cloudflare@defn.us"
 	}
 
-	vc1: #Cluster & {
-		name_suffix: "-vc1"
+	parent: {
+		cluster_name: "k3d-dfd"
+		vclusters: [0, 1]
 	}
+
+	dfd: parent
+	vc0: {}
+	vc1: {}
 }
+
+kustomize: [string]: cluster: infra.dfd
 
 env: (#Transform & {
 	transformer: #TransformK3D
 
-	inputs: "\(infra.dfd.cluster_name)-bootstrap": bootstrap: {
-		"cilium-bootstrap": [1, ""]
-		"cert-manager-crds": [1, ""]
+	inputs: "\(infra.dfd.cluster_name)-manual": {
+		bootstrap: {
+			"cilium-bootstrap": [1, ""]
+			"cert-manager-crds": [1, ""]
+		}
 	}
 }).outputs
 
 env: (#Transform & {
 	transformer: #TransformK3D
 
-	inputs: "\(infra.dfd.cluster_name)": {
+	inputs: "\(infra.dfd.cluster_name)-cluster": {
 		bootstrap: {
 			// ~~~~~ Wave 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			//
@@ -62,10 +84,10 @@ env: (#Transform & {
 			// cluster.vclusters
 			for v in infra.dfd.vclusters {
 				// vcluster
-				"\(infra["vc\(v)"].cluster_type)-\(infra["vc\(v)"].cluster_name)-vc\(v)": [100, ""]
+				"\(infra.dfd.cluster_name)-vc\(v)": [100, ""]
 
-				// vcluster workloads
-				"vcluster-\(infra["vc\(v)"].cluster_type)-\(infra["vc\(v)"].cluster_name)-vc\(v)": [101, ""]
+				// vcluster workload
+				"\(infra["vc\(v)"].cluster_name)-workload": [101, ""]
 			}
 
 			// experimental
@@ -79,9 +101,9 @@ env: (#Transform & {
 
 	inputs: {
 		for v in infra.dfd.vclusters {
-			"\(infra["vc\(v)"].cluster_type)-\(infra["vc\(v)"].cluster_name)-vc\(v)": {
+			"\(infra["vc\(v)"].cluster_name)": {
 				instance_types: []
-				parent: env[infra.dfd.cluster_name]
+				parent: env["\(infra.dfd.cluster_name)-cluster"]
 				bootstrap: {
 					"kyverno": [2, "", "ServerSideApply=true"]
 					"cert-manager": [2, ""]
@@ -98,7 +120,7 @@ kustomize: (#Transform & {
 
 	inputs: {
 		for v in infra.dfd.vclusters {
-			"\(infra["vc\(v)"].cluster_type)-\(infra["vc\(v)"].cluster_name)-vc\(v)": {
+			"\(infra["vc\(v)"].cluster_name)-vcluster": {
 				vc_index:   v
 				vc_machine: infra["vc\(v)"].cluster_name
 			}

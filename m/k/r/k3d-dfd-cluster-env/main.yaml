@@ -1,0 +1,357 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: k3d-dfd-cluster-env-argo-cd
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-cluster-env
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cluster-env-argo-cd
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  name: k3d-dfd-cluster-env-cert-manager
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-cluster-env
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cluster-env-cert-manager
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: k3d-dfd-cluster-env-cilium
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-cluster-env
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cluster-env-cilium
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "30"
+  name: k3d-dfd-cluster-env-external-dns
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-cluster-env
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cluster-env-external-dns
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "11"
+  name: k3d-dfd-cluster-env-external-secrets
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-cluster-env
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cluster-env-external-secrets
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: k3d-dfd-cluster-env-hello
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-cluster-env
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cluster-env-hello
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "30"
+  name: k3d-dfd-cluster-env-issuer
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-cluster-env
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cluster-env-issuer
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "101"
+  name: k3d-dfd-cluster-env-k3d-dfd-vc0-env
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-cluster-env
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cluster-env-k3d-dfd-vc0-env
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: k3d-dfd-cluster-env-k3d-dfd-vc0-vcluster
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-cluster-env
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cluster-env-k3d-dfd-vc0-vcluster
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "101"
+  name: k3d-dfd-cluster-env-k3d-dfd-vc1-env
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-cluster-env
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cluster-env-k3d-dfd-vc1-env
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: k3d-dfd-cluster-env-k3d-dfd-vc1-vcluster
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-cluster-env
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cluster-env-k3d-dfd-vc1-vcluster
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "40"
+  name: k3d-dfd-cluster-env-knative
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-cluster-env
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cluster-env-knative
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "40"
+  name: k3d-dfd-cluster-env-kourier
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-cluster-env
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cluster-env-kourier
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  name: k3d-dfd-cluster-env-kyverno
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-cluster-env
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cluster-env-kyverno
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - ServerSideApply=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+  name: k3d-dfd-cluster-env-pod-identity
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-cluster-env
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cluster-env-pod-identity
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "12"
+  name: k3d-dfd-cluster-env-secrets
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-cluster-env
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cluster-env-secrets
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "40"
+  name: k3d-dfd-cluster-env-traefik
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-cluster-env
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cluster-env-traefik
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []

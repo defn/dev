@@ -2,14 +2,17 @@ package c
 
 import (
 	"encoding/yaml"
-	"strings"
 )
 
 #TransformEnvToAnyResource: {
 	from: {
 		#Input
 
-		type: string
+		// TODO why is this needed
+		vc_name:    string
+		vc_machine: string
+		vc_index:   int
+		type:       string
 	}
 
 	to: #KustomizeHelm & {
@@ -35,7 +38,6 @@ import (
 	from: {
 		#Input
 
-		type: string
 		bootstrap: [string]: [int, ...string]
 	}
 
@@ -46,13 +48,11 @@ import (
 	_in: #TransformEnvToBootstrapMachine.from
 
 	machine_name: string | *_in.name
-	machine_type: string | *_in.type
 
 	apps: [string]: #BootstrapApp
 	apps: {
 		for _app_name, _app in _in.bootstrap {
 			"\(_app_name)": #BootstrapApp & {
-				machine_type:     ctx.machine_type
 				machine_name:     ctx.machine_name
 				app_name:         _app_name
 				app_wave:         _app[0]
@@ -64,7 +64,6 @@ import (
 }
 
 #BootstrapApp: {
-	machine_type:     string
 	machine_name:     string
 	app_name:         string
 	app_namespace:    string
@@ -77,12 +76,7 @@ import (
 
 		metadata: {
 			namespace: "argocd"
-			if app_name =~ "^\(machine_type)-\(machine_name)-" {
-				name: "\(app_name)"
-			}
-			if app_name !~ "^\(machine_type)-\(machine_name)-" {
-				name: "\(machine_type)-\(machine_name)-\(app_name)"
-			}
+			name:      "\(machine_name)-\(app_name)"
 			annotations: "argocd.argoproj.io/sync-wave": "\(app_wave)"
 		}
 
@@ -90,7 +84,7 @@ import (
 			project: "default"
 
 			destination: {
-				name: "\(machine_type)-\(machine_name)"
+				name: machine_name
 				if app_namespace != "" {
 					namespace: app_namespace
 				}
@@ -99,12 +93,7 @@ import (
 			source: {
 				repoURL:        "https://github.com/defn/dev"
 				targetRevision: "main"
-				if strings.HasPrefix(app_name, "\(machine_type)-\(machine_name)") {
-					path: "m/k/r/\(app_name)"
-				}
-				if !strings.HasPrefix(app_name, "\(machine_type)-\(machine_name)") {
-					path: "m/k/r/\(machine_type)-\(machine_name)-\(app_name)"
-				}
+				path:           "m/k/r/\(machine_name)-\(app_name)"
 			}
 
 			syncPolicy: {
@@ -120,17 +109,16 @@ import (
 
 // Machine
 #Machine: {
-	type: string
 	name: string
 
-	destination: string | *"\(type)-\(name)"
+	destination: string | *name
 
 	bootstrap: [string]: [int, ...string]
 	env: #EnvApp
 	env: {
-		// ex: k/k3d-dgd
+		// ex: k/k3d-dfd
 		// ex: k/vcluster-dfd-vc0
-		spec: source: path: "m/k/r/\(type)-\(name)"
+		spec: source: path: "m/k/r/\(name)"
 
 		spec: "destination": "name": destination
 	}
@@ -178,12 +166,11 @@ import (
 
 	#Machine
 
-	type:      "k3d"
 	name:      _in.name
 	bootstrap: _in.bootstrap
 
 	// ex: k3d-dfd
-	env: metadata: name: "\(type)-\(ctx.name)"
+	env: metadata: name: ctx.name
 }
 
 // VCluster Machine
@@ -203,9 +190,8 @@ import (
 
 	#Machine
 
-	type:           "vcluster"
 	name:           _in.name
-	destination:    "\(parent.type)-\(parent.name)"
+	destination:    parent.name
 	bootstrap:      _in.bootstrap
 	instance_types: _in.instance_types
 	parent:         #K3D & _in.parent
@@ -213,5 +199,5 @@ import (
 	instance_types: [...string] | *["t3.medium", "t3a.medium"]
 
 	// ex: vcluster-k3d-dfd-vc1
-	env: metadata: name: "\(type)-\(ctx.name)"
+	env: metadata: name: ctx.name
 }

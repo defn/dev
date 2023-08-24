@@ -238,7 +238,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 				name: cluster.cluster_name
 			}
 			dataFrom: [{
-				extract: key: "\(cluster.cluster_type)-\(cluster.cluster_name)"
+				extract: key: cluster.cluster_name
 			}]
 			target: {
 				name:           "external-dns"
@@ -546,6 +546,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 		vc_name:    string | *from.name
 		vc_machine: string | *from.name
 		vc_index:   int | *0
+		type:       string
 	}
 
 	to: #KustomizeVCluster
@@ -741,7 +742,7 @@ kustomize: "issuer": #Kustomize & {
 				name: cluster.cluster_name
 			}
 			dataFrom: [{
-				extract: key: "\(cluster.cluster_type)-\(cluster.cluster_name)"
+				extract: key: cluster.cluster_name
 			}]
 			target: {
 				name:           cluster.issuer
@@ -1064,7 +1065,7 @@ kustomize: "coder": #KustomizeHelm & {
 				name: cluster.cluster_name
 			}
 			dataFrom: [{
-				extract: key: "\(cluster.cluster_type)-\(cluster.cluster_name)"
+				extract: key: cluster.cluster_name
 			}]
 			target: {
 				name:           "coder"
