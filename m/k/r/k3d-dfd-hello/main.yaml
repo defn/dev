@@ -12,6 +12,9 @@ spec:
         name: whoami
         ports:
         - containerPort: 80
+      metadata:
+        annotations:
+          linkerd.io/inject: enabled
   traffic:
   - latestRevision: true
     percent: 100
@@ -30,6 +33,9 @@ spec:
         name: whoami
         ports:
         - containerPort: 80
+      metadata:
+        annotations:
+          linkerd.io/inject: enabled
   traffic:
   - latestRevision: true
     percent: 100
