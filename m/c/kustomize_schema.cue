@@ -28,6 +28,8 @@ kustomize: [NAME=string]: _name: NAME
 	domain_name: string | *"dev.amanibhavam.defn.run"
 	domain_slug: string | *"dev-amanibhavam-defn-run"
 
+	name_suffix: string | *""
+
 	issuer:           string | *"zerossl-production"
 	cloudflare_email: string | *"cloudflare@defn.us"
 
