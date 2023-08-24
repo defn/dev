@@ -1108,7 +1108,7 @@ kustomize: "emojivoto": #Kustomize & {
 					path:     "/"
 					pathType: "Prefix"
 					backend: service: {
-						name: "emojivoto"
+						name: "web-svc"
 						port: number: 80
 					}
 				}]

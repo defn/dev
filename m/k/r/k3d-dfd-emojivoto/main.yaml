@@ -238,7 +238,7 @@ spec:
       paths:
       - backend:
           service:
-            name: emojivoto
+            name: web-svc
             port:
               number: 80
         path: /
