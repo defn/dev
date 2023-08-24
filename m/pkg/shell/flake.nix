@@ -14,6 +14,7 @@
         openssh
         screen
         powerline-go
+        starship
         less
         groff
         bashInteractive
