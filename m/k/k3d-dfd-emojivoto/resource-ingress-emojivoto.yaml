@@ -18,6 +18,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: emojivoto
+                name: web-svc
                 port:
                   number: 80
