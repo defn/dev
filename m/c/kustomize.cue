@@ -616,6 +616,17 @@ kustomize: "cert-manager": #KustomizeHelm & {
 		}
 	}
 
+	psm: "namespace-vcluster": {
+		apiVersion: "v1"
+		kind:       "Namespace"
+		metadata: {
+			name: _in.vc_name
+			annotations: {
+				"linkerd.io/inject": "enabled"
+			}
+		}
+	}
+
 	resource: "namespace-vcluster": core.#Namespace & {
 		apiVersion: "v1"
 		kind:       "Namespace"
