@@ -1,6 +1,9 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
+  metadata:
+    annotations:
+      linkerd.io/inject: enabled
   name: bye
   namespace: default
 spec:
@@ -12,9 +15,6 @@ spec:
         name: whoami
         ports:
         - containerPort: 80
-      metadata:
-        annotations:
-          linkerd.io/inject: enabled
   traffic:
   - latestRevision: true
     percent: 100
@@ -22,6 +22,9 @@ spec:
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
+  metadata:
+    annotations:
+      linkerd.io/inject: enabled
   name: hello
   namespace: default
 spec:
@@ -33,9 +36,6 @@ spec:
         name: whoami
         ports:
         - containerPort: 80
-      metadata:
-        annotations:
-          linkerd.io/inject: enabled
   traffic:
   - latestRevision: true
     percent: 100
