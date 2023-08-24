@@ -9,3 +9,7 @@ disabled = true
 [buf]
 
 disabled = true
+
+[terraform]
+
+disabled = true
