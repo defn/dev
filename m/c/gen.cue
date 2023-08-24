@@ -23,8 +23,7 @@ lookup: {
 gen: "k": {
 	for ename, e in env {
 		let ekname = "\(e.type)-\(ename)"
-
-		let ekmize = kustomize[ekname]
+		let ekmize = (( kustomize[ekname] ) & {cluster: domain_name: "bastard"})
 
 		"\(ekname)/kustomization.yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(ekmize.out)
 

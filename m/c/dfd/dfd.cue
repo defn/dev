@@ -1,11 +1,22 @@
 package c
 
+infra: {
+	dfd: #Cluster & {
+	}
+
+	vc0: #Cluster & {
+		name_suffix: "-vc0"
+	}
+
+	vc1: #Cluster & {
+		name_suffix: "-vc1"
+	}
+}
+
 env: (#Transform & {
 	transformer: #TransformK3D
 
-	cluster: #Cluster
-
-	inputs: "\(cluster.cluster_name)-bootstrap": bootstrap: {
+	inputs: "\(infra.dfd.cluster_name)-bootstrap": bootstrap: {
 		"cilium-bootstrap": [1, ""]
 		"cert-manager-crds": [1, ""]
 	}
@@ -14,9 +25,7 @@ env: (#Transform & {
 env: (#Transform & {
 	transformer: #TransformK3D
 
-	cluster: #Cluster
-
-	inputs: "\(cluster.cluster_name)": {
+	inputs: "\(infra.dfd.cluster_name)": {
 		bootstrap: {
 			// ~~~~~ Wave 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			//
@@ -51,12 +60,12 @@ env: (#Transform & {
 			"argo-cd": [100, ""]
 
 			// cluster.vclusters
-			for v in cluster.vclusters {
+			for v in infra.dfd.vclusters {
 				// vcluster
-				"\(cluster.cluster_type)-\(cluster.cluster_name)-vc\(v)": [100, ""]
+				"\(infra["vc\(v)"].cluster_type)-\(infra["vc\(v)"].cluster_name)-vc\(v)": [100, ""]
 
 				// vcluster workloads
-				"vcluster-\(cluster.cluster_type)-\(cluster.cluster_name)-vc\(v)": [101, ""]
+				"vcluster-\(infra["vc\(v)"].cluster_type)-\(infra["vc\(v)"].cluster_name)-vc\(v)": [101, ""]
 			}
 
 			// experimental
@@ -68,22 +77,18 @@ env: (#Transform & {
 env: (#Transform & {
 	transformer: #TransformVCluster
 
-	cluster: #Cluster
-
 	inputs: {
-		[string]: {
-			instance_types: []
-			parent: env[cluster.cluster_name]
-			bootstrap: {
-				"kyverno": [2, "", "ServerSideApply=true"]
-				"cert-manager": [2, ""]
-				"pod-identity": [10, ""]
-				"emojivoto": [100, "", "ServerSideApply=true"]
+		for v in infra.dfd.vclusters {
+			"\(infra["vc\(v)"].cluster_type)-\(infra["vc\(v)"].cluster_name)-vc\(v)": {
+				instance_types: []
+				parent: env[infra["vc\(v)"].cluster_name]
+				bootstrap: {
+					"kyverno": [2, "", "ServerSideApply=true"]
+					"cert-manager": [2, ""]
+					"pod-identity": [10, ""]
+					"emojivoto": [100, "", "ServerSideApply=true"]
+				}
 			}
-		}
-
-		for v in cluster.vclusters {
-			"\(cluster.cluster_type)-\(cluster.cluster_name)-vc\(v)": {}
 		}
 	}
 }).outputs
@@ -91,12 +96,12 @@ env: (#Transform & {
 kustomize: (#Transform & {
 	transformer: #TransformKustomizeVCluster
 
-	cluster: #Cluster
-
 	inputs: {
-		[string]: vc_machine: cluster.cluster_name
-		for v in cluster.vclusters {
-			"\(cluster.cluster_type)-\(cluster.cluster_name)-vc\(v)": vc_index: v
+		for v in infra.dfd.vclusters {
+			"\(infra["vc\(v)"].cluster_type)-\(infra["vc\(v)"].cluster_name)-vc\(v)": {
+				vc_index:   v
+				vc_machine: infra["vc\(v)"].cluster_name
+			}
 		}
 	}
 }).outputs
