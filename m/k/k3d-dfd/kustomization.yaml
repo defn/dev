@@ -343,6 +343,48 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
+        k3d-dfd-vc0: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-dfd-vc0
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: k3d-dfd
+            source:
+              repoURL: https://github.com/defn/dev
+              path: m/k/r/k3d-dfd-vc0
+              targetRevision: main
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        vcluster-k3d-dfd-vc0: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-dfd-vcluster-k3d-dfd-vc0
+            annotations:
+              argocd.argoproj.io/sync-wave: "101"
+          spec:
+            project: default
+            destination:
+              name: k3d-dfd
+            source:
+              repoURL: https://github.com/defn/dev
+              path: m/k/r/k3d-dfd-vcluster-k3d-dfd-vc0
+              targetRevision: main
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
     name: any-resource
     version: 0.1.0
     repo: https://kiwigrid.github.io

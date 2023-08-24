@@ -1,0 +1,40 @@
+#ManagedBy: cue
+
+patches:
+  - path: jsonp-service-vcluster-lb.yaml
+    target:
+      group: ""
+      version: v1
+      kind: Service
+      name: vcluster-lb
+      namespace: k3d-dfd-vc0
+namespace: k3d-dfd-vc0
+resources:
+  - resource-namespace-vcluster.yaml
+helmCharts:
+  - releaseName: vcluster
+    namespace: k3d-dfd-vc0
+    valuesInline:
+      vcluster:
+        image: rancher/k3s:v1.26.7-k3s1
+      syncer:
+        extraArgs:
+          - --tls-san=vcluster.k3d-dfd-vc0.svc.cluster.local
+      sync:
+        pods:
+          ephemeralContainers: true
+        persistentvolumes:
+          enabled: true
+        ingresses:
+          enabled: true
+        nodes:
+          enabled: true
+      fallbackHostDns: true
+      multiNamespaceMode:
+        enabled: false
+      service:
+        type: LoadBalancer
+    name: vcluster
+    version: 0.15.6
+    repo: https://charts.loft.sh
+    includeCRDs: true
