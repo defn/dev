@@ -7,9 +7,7 @@ bootstrap: (#Transform & {
 
 	inputs: {
 		for _env_name, _env in env {
-			"\(_env_name)": {
-				name:      _env_name
-				type:      _env.type
+			"\(_env_name)-env": {
 				bootstrap: _env.bootstrap
 			}
 		}
@@ -21,11 +19,7 @@ kustomize: (#Transform & {
 
 	inputs: {
 		for _env_name, _env in env {
-			"\(_env_name)": {
-				name:  _env_name
-				type:  _env.type
-				label: "\(type)-\(name)"
-			}
+			"\(_env_name)-env": {}
 		}
 	}
 }).outputs
