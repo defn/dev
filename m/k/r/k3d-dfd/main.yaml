@@ -107,7 +107,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "10"
+    argocd.argoproj.io/sync-wave: "11"
   name: k3d-dfd-external-secrets
   namespace: argocd
 spec:
@@ -234,7 +234,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "10"
   name: k3d-dfd-pod-identity
   namespace: argocd
 spec:
@@ -255,7 +255,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "20"
+    argocd.argoproj.io/sync-wave: "12"
   name: k3d-dfd-secrets
   namespace: argocd
 spec:

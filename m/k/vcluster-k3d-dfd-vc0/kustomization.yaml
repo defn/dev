@@ -56,7 +56,7 @@ helmCharts:
             namespace: argocd
             name: vcluster-k3d-dfd-vc0-pod-identity
             annotations:
-              argocd.argoproj.io/sync-wave: "2"
+              argocd.argoproj.io/sync-wave: "10"
           spec:
             project: default
             destination:

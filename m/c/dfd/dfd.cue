@@ -31,17 +31,13 @@ env: (#Transform & {
 			// essentials
 			"kyverno": [2, "", "ServerSideApply=true"]
 			"cert-manager": [2, ""]
-			"pod-identity": [2, ""]
 
 			// ~~~~~ Wave 10 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			//
 			// external secrets
-			"external-secrets": [10, ""]
-
-			// ~~~~~ Wave 20 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			//
-			// secrets store
-			"secrets": [20, ""]
+			"pod-identity": [10, ""]
+			"external-secrets": [11, ""]
+			"secrets": [12, ""]
 
 			// ~~~~~ Wave 30 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			//
@@ -88,7 +84,7 @@ env: (#Transform & {
 			bootstrap: {
 				"kyverno": [2, "", "ServerSideApply=true"]
 				"cert-manager": [2, ""]
-				"pod-identity": [2, ""]
+				"pod-identity": [10, ""]
 				"emojivoto": [100, "", "ServerSideApply=true"]
 			}
 		}
