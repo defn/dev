@@ -575,7 +575,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 	helm: {
 		release: "vcluster"
 		name:    "vcluster"
-		version: "0.15.6"
+		version: "0.15.5"
 		repo:    "https://charts.loft.sh"
 
 		values: {

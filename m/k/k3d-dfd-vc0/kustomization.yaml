@@ -36,6 +36,6 @@ helmCharts:
       service:
         type: LoadBalancer
     name: vcluster
-    version: 0.15.6
+    version: 0.15.5
     repo: https://charts.loft.sh
     includeCRDs: true
