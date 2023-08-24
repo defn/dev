@@ -159,6 +159,7 @@ kustomize: "hello": #Kustomize & {
 			}
 			spec: {
 				template: spec: {
+					metadata: annotations: "linkerd.io/inject": "enabled"
 					containerConcurrency: 0
 					containers: [{
 						name:  "whoami"
