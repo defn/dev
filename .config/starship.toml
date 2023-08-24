@@ -1,3 +1,11 @@
 [nodejs]
 
-symbol = "node "
+disabled = true
+
+[golang]
+
+disabled = true
+
+[buf]
+
+disabled = true
