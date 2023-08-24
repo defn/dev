@@ -18,9 +18,11 @@ helmCharts:
     valuesInline:
       vcluster:
         image: rancher/k3s:v1.26.7-k3s1
-      syncer:
-        extraArgs:
-          - --tls-san=vcluster.k3d-dfd-vc0.svc.cluster.local
+      fallbackHostDns: true
+      multiNamespaceMode:
+        enabled: false
+      service:
+        type: LoadBalancer
       sync:
         pods:
           ephemeralContainers: true
@@ -30,11 +32,11 @@ helmCharts:
           enabled: true
         nodes:
           enabled: true
-      fallbackHostDns: true
-      multiNamespaceMode:
-        enabled: false
-      service:
-        type: LoadBalancer
+        serviceaccounts:
+          enabled: true
+      syncer:
+        extraArgs:
+          - --tls-san=vcluster.k3d-dfd-vc0.svc.cluster.local
     name: vcluster
     version: 0.15.5
     repo: https://charts.loft.sh

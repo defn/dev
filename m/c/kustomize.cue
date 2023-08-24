@@ -567,17 +567,22 @@ kustomize: "cert-manager": #KustomizeHelm & {
 		values: {
 			vcluster: image: "rancher/k3s:v1.26.7-k3s1"
 
-			syncer: extraArgs: [
-				"--tls-san=vcluster.\(_in.vc_name).svc.cluster.local",
-				//"--enforce-toleration=env=\(_in.vc_name):NoSchedule",
-			]
+			fallbackHostDns: true
+			multiNamespaceMode: enabled: false
+			service: type:               "LoadBalancer"
 
 			sync: {
 				pods: ephemeralContainers:  true
 				persistentvolumes: enabled: true
 				ingresses: enabled:         true
 				nodes: enabled:             true
+				serviceaccounts: enabled:   true
 			}
+
+			syncer: extraArgs: [
+				"--tls-san=vcluster.\(_in.vc_name).svc.cluster.local",
+				//"--enforce-toleration=env=\(_in.vc_name):NoSchedule",
+			]
 
 			//sync: nodes: nodeSelector: "env=\(_in.vc_machine)"
 
@@ -594,11 +599,6 @@ kustomize: "cert-manager": #KustomizeHelm & {
 			//		values: [_in.vc_machine]
 			//	}]
 			//}]
-
-			fallbackHostDns: true
-			multiNamespaceMode: enabled: false
-
-			service: type: "LoadBalancer"
 		}
 	}
 
