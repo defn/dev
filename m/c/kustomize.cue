@@ -1092,7 +1092,7 @@ kustomize: "emojivoto": #Kustomize & {
 		apiVersion: "networking.k8s.io/v1"
 		kind:       "Ingress"
 		metadata: {
-			name: "coder"
+			name: "emojivoto"
 			annotations: {
 				"external-dns.alpha.kubernetes.io/hostname":        "emojivoto.\(_domain)"
 				"traefik.ingress.kubernetes.io/router.tls":         "true"
