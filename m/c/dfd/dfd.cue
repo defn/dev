@@ -81,7 +81,7 @@ env: (#Transform & {
 		for v in infra.dfd.vclusters {
 			"\(infra["vc\(v)"].cluster_type)-\(infra["vc\(v)"].cluster_name)-vc\(v)": {
 				instance_types: []
-				parent: env[infra["vc\(v)"].cluster_name]
+				parent: env[infra.dfd.cluster_name]
 				bootstrap: {
 					"kyverno": [2, "", "ServerSideApply=true"]
 					"cert-manager": [2, ""]
