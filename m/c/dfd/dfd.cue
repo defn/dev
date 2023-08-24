@@ -156,9 +156,9 @@ kustomize: "hello": #Kustomize & {
 				//labels: "networking.knative.dev/visibility": "cluster-local"
 				name:      f
 				namespace: _app_ns
-				metadata: annotations: "linkerd.io/inject": "enabled"
 			}
 			spec: {
+				deployments: annotations: "linkerd.io/inject": "enabled"
 				template: spec: {
 					containerConcurrency: 0
 					containers: [{

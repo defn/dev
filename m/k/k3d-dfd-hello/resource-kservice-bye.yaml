@@ -5,10 +5,10 @@ kind: Service
 metadata:
   name: bye
   namespace: default
-  metadata:
+spec:
+  deployments:
     annotations:
       linkerd.io/inject: enabled
-spec:
   template:
     spec:
       containerConcurrency: 0
