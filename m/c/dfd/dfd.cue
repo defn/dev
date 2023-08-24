@@ -1,21 +1,11 @@
 package c
 
-_issuer:           "zerossl-production"
-_cloudflare_email: "cloudflare@defn.us"
-
-_domain_name: "defn.run"
-
-_domain_slug: "dev-amanibhavam-defn-run"
-_domain:      "dev.amanibhavam.defn.run"
-
-cluster_type: "k3d"
-cluster_name: "dfd"
-vclusters: [0, 1]
-
 env: (#Transform & {
 	transformer: #TransformK3D
 
-	inputs: "\(cluster_name)-bootstrap": bootstrap: {
+	cluster: #Cluster
+
+	inputs: "\(cluster.cluster_name)-bootstrap": bootstrap: {
 		"cilium-bootstrap": [1, ""]
 		"cert-manager-crds": [1, ""]
 	}
@@ -24,7 +14,9 @@ env: (#Transform & {
 env: (#Transform & {
 	transformer: #TransformK3D
 
-	inputs: "\(cluster_name)": {
+	cluster: #Cluster
+
+	inputs: "\(cluster.cluster_name)": {
 		bootstrap: {
 			// ~~~~~ Wave 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			//
@@ -58,13 +50,13 @@ env: (#Transform & {
 			"cilium": [100, ""]
 			"argo-cd": [100, ""]
 
-			// vclusters
-			for v in vclusters {
+			// cluster.vclusters
+			for v in cluster.vclusters {
 				// vcluster
-				"\(cluster_type)-\(cluster_name)-vc\(v)": [100, ""]
+				"\(cluster.cluster_type)-\(cluster.cluster_name)-vc\(v)": [100, ""]
 
 				// vcluster workloads
-				"vcluster-\(cluster_type)-\(cluster_name)-vc\(v)": [101, ""]
+				"vcluster-\(cluster.cluster_type)-\(cluster.cluster_name)-vc\(v)": [101, ""]
 			}
 
 			// experimental
@@ -76,10 +68,12 @@ env: (#Transform & {
 env: (#Transform & {
 	transformer: #TransformVCluster
 
+	cluster: #Cluster
+
 	inputs: {
 		[string]: {
 			instance_types: []
-			parent: env[cluster_name]
+			parent: env[cluster.cluster_name]
 			bootstrap: {
 				"kyverno": [2, "", "ServerSideApply=true"]
 				"cert-manager": [2, ""]
@@ -88,8 +82,8 @@ env: (#Transform & {
 			}
 		}
 
-		for v in vclusters {
-			"\(cluster_type)-\(cluster_name)-vc\(v)": {}
+		for v in cluster.vclusters {
+			"\(cluster.cluster_type)-\(cluster.cluster_name)-vc\(v)": {}
 		}
 	}
 }).outputs
@@ -97,19 +91,23 @@ env: (#Transform & {
 kustomize: (#Transform & {
 	transformer: #TransformKustomizeVCluster
 
+	cluster: #Cluster
+
 	inputs: {
-		[string]: vc_machine: cluster_name
-		for v in vclusters {
-			"\(cluster_type)-\(cluster_name)-vc\(v)": vc_index: v
+		[string]: vc_machine: cluster.cluster_name
+		for v in cluster.vclusters {
+			"\(cluster.cluster_type)-\(cluster.cluster_name)-vc\(v)": vc_index: v
 		}
 	}
 }).outputs
 
 kustomize: "secrets": #Kustomize & {
+	cluster: #Cluster
+
 	resource: "cluster-secret-store": {
 		apiVersion: "external-secrets.io/v1beta1"
 		kind:       "ClusterSecretStore"
-		metadata: name: cluster_name
+		metadata: name: cluster.cluster_name
 		spec: provider: aws: {
 			service: "SecretsManager"
 			region:  "us-west-2"
@@ -121,16 +119,18 @@ kustomize: "hello": #Kustomize & {
 	_app_ns: "default"
 	_funcs: ["hello", "bye"]
 
-	resource: "ingressroute-\(_domain)": {
+	cluster: #Cluster
+
+	resource: "ingressroute-\(cluster.domain_name)": {
 		apiVersion: "traefik.containo.us/v1alpha1"
 		kind:       "IngressRoute"
 		metadata: {
-			name:      _domain
+			name:      cluster.domain_name
 			namespace: _app_ns
 		}
 		spec: entryPoints: ["websecure"]
 		spec: routes: [{
-			match: "HostRegexp(`{subdomain:[a-z0-9-]+}.default.\(_domain)`)"
+			match: "HostRegexp(`{subdomain:[a-z0-9-]+}.default.\(cluster.domain_name)`)"
 			kind:  "Rule"
 			services: [{
 				name:      "kourier-internal"

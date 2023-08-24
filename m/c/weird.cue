@@ -462,6 +462,8 @@ kustomize: "defn": #Kustomize & {
 
 // https://artifacthub.io/packages/helm/backstage/backstage
 kustomize: "backstage": #KustomizeHelm & {
+	cluster: #Cluster
+
 	namespace: "backstage"
 
 	helm: {
@@ -489,7 +491,7 @@ kustomize: "backstage": #KustomizeHelm & {
 		metadata: {
 			name: "backstage"
 			annotations: {
-				"external-dns.alpha.kubernetes.io/hostname":        "backstage.\(_domain)"
+				"external-dns.alpha.kubernetes.io/hostname":        "backstage.\(cluster.domain_name)"
 				"traefik.ingress.kubernetes.io/router.tls":         "true"
 				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
 			}
@@ -498,7 +500,7 @@ kustomize: "backstage": #KustomizeHelm & {
 		spec: {
 			ingressClassName: "traefik"
 			rules: [{
-				host: "backstage.\(_domain)"
+				host: "backstage.\(cluster.domain_name)"
 				http: paths: [{
 					path:     "/"
 					pathType: "Prefix"
@@ -522,21 +524,21 @@ kustomize: "backstage": #KustomizeHelm & {
 			path: "/spec/template/spec/containers/0/env/-"
 			value: {
 				name:  "APP_CONFIG_app_baseUrl"
-				value: "https://backstage.\(_domain)"
+				value: "https://backstage.\(cluster.domain_name)"
 			}
 		}, {
 			op:   "add"
 			path: "/spec/template/spec/containers/0/env/-"
 			value: {
 				name:  "APP_CONFIG_backend_baseUrl"
-				value: "https://backstage.\(_domain)"
+				value: "https://backstage.\(cluster.domain_name)"
 			}
 		}, {
 			op:   "add"
 			path: "/spec/template/spec/containers/0/env/-"
 			value: {
 				name:  "APP_CONFIG_organization_name"
-				value: _domain
+				value: cluster.domain_name
 			}
 		}]
 	}
