@@ -24,19 +24,21 @@ gen: "k": {
 	for ename, e in env {
 		let ekname = "\(e.type)-\(ename)"
 
-		"\(ekname)/kustomization.yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(kustomize[ekname].out)
+		let ekmize = kustomize[ekname]
 
-		for rname, r in kustomize[ekname].resource {
+		"\(ekname)/kustomization.yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(ekmize.out)
+
+		for rname, r in ekmize.resource {
 			if r.kind != "" {
 				"\(ekname)/resource-\(rname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(r)
 			}
 		}
 
-		for pname, p in kustomize[ekname].psm {
+		for pname, p in ekmize.psm {
 			"\(ekname)/patch-\(pname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(p)
 		}
 
-		for jname, j in kustomize[ekname].jsp {
+		for jname, j in ekmize.jsp {
 			"\(ekname)/jsonp-\(jname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(j.patches)
 		}
 

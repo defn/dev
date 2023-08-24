@@ -23,6 +23,19 @@ kustomize: [NAME=string]: _name: NAME
 	...
 }
 
+#Cluster: {
+	domain_zone: string | *"defn.run"
+	domain_name: string | *"dev.amanibhavam.defn.run"
+	domain_slug: string | *"dev-amanibhavam-defn-run"
+
+	issuer:           string | *"zerossl-production"
+	cloudflare_email: string | *"cloudflare@defn.us"
+
+	cluster_type: string | *"k3d"
+	cluster_name: string | *"dfd"
+	vclusters:    [...int] | *[0, 1]
+}
+
 #Kustomize: {
 	_name: string
 	app: "\(_name)": {}
@@ -35,6 +48,8 @@ kustomize: [NAME=string]: _name: NAME
 
 	resource: {...} | *{}
 	resource: [string]: #Resource
+
+	cluster: #Cluster
 
 	out: {
 		if kns != "" {

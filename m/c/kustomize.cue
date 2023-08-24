@@ -6,17 +6,9 @@ import (
 	rbac "k8s.io/api/rbac/v1"
 )
 
-_issuer:           string
-_domain:           string
-_domain_name:      string
-_domain_slug:      string
-_cloudflare_email: string
-
-cluster_type: string
-cluster_name: string
-vclusters: [...int]
-
 kustomize: "argo-cd": #Kustomize & {
+	cluster: #Cluster
+
 	namespace: "argocd"
 
 	resource: "namespace-argocd": core.#Namespace & {
@@ -37,7 +29,7 @@ kustomize: "argo-cd": #Kustomize & {
 		metadata: {
 			name: "argo-cd"
 			annotations: {
-				"external-dns.alpha.kubernetes.io/hostname":        "argocd.\(_domain)"
+				"external-dns.alpha.kubernetes.io/hostname":        "argocd.\(cluster.domain_name)"
 				"traefik.ingress.kubernetes.io/router.tls":         "true"
 				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
 			}
@@ -46,7 +38,7 @@ kustomize: "argo-cd": #Kustomize & {
 		spec: {
 			ingressClassName: "traefik"
 			rules: [{
-				host: "argocd.\(_domain)"
+				host: "argocd.\(cluster.domain_name)"
 				http: paths: [{
 					path:     "/"
 					pathType: "Prefix"
@@ -198,6 +190,8 @@ kustomize: "kyverno": #KustomizeHelm & {
 
 // https://artifacthub.io/packages/helm/bitnami/external-dns
 kustomize: "external-dns": #KustomizeHelm & {
+	cluster: #Cluster
+
 	namespace: "external-dns"
 
 	helm: {
@@ -213,11 +207,11 @@ kustomize: "external-dns": #KustomizeHelm & {
 			]
 			provider: "cloudflare"
 			cloudflare: {
-				email:   _cloudflare_email
+				email:   cluster.cloudflare_email
 				proxied: false
 			}
 			domainFilters: [
-				_domain_name,
+				cluster.domain_zone,
 			]
 		}
 	}
@@ -241,10 +235,10 @@ kustomize: "external-dns": #KustomizeHelm & {
 			refreshInterval: "1h"
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: cluster_name
+				name: cluster.cluster_name
 			}
 			dataFrom: [{
-				extract: key: "\(cluster_type)-\(cluster_name)"
+				extract: key: "\(cluster.cluster_type)-\(cluster.cluster_name)"
 			}]
 			target: {
 				name:           "external-dns"
@@ -256,6 +250,8 @@ kustomize: "external-dns": #KustomizeHelm & {
 
 // https://github.com/knative-sandbox/net-kourier/releases
 kustomize: "kourier": #Kustomize & {
+	cluster: #Cluster
+
 	resource: "kourier": {
 		url: "https://github.com/knative-sandbox/net-kourier/releases/download/knative-v1.11.1/kourier.yaml"
 	}
@@ -277,14 +273,14 @@ kustomize: "kourier": #Kustomize & {
 			name:      "default-wildcard"
 			namespace: "kourier-system"
 			annotations: {
-				"external-dns.alpha.kubernetes.io/hostname": "*.default.\(_domain)"
+				"external-dns.alpha.kubernetes.io/hostname": "*.default.\(cluster.domain_name)"
 			}
 		}
 
 		spec: {
 			ingressClassName: "traefik"
 			rules: [{
-				host: "wildcard.default.\(_domain)"
+				host: "wildcard.default.\(cluster.domain_name)"
 				http: paths: [{
 					path:     "/"
 					pathType: "Prefix"
@@ -402,6 +398,8 @@ kustomize: "karpenter": #Kustomize & {
 
 // https://github.com/knative/serving/releases
 kustomize: "knative": #Kustomize & {
+	cluster: #Cluster
+
 	resource: "knative-serving": {
 		url: "https://github.com/knative/serving/releases/download/knative-v1.11.0/serving-core.yaml"
 	}
@@ -470,7 +468,7 @@ kustomize: "knative": #Kustomize & {
 			name:      "config-domain"
 			namespace: "knative-serving"
 		}
-		data: "\(_domain)": ""
+		data: "\(cluster.domain_name)": ""
 	}
 
 	psm: "config-map-config-features": core.#ConfigMap & {
@@ -505,6 +503,8 @@ kustomize: "cert-manager-crds": #Kustomize & {
 }
 
 kustomize: "cert-manager": #KustomizeHelm & {
+	cluster: #Cluster
+
 	helm: {
 		release:   "cert-manager"
 		name:      "cert-manager"
@@ -513,7 +513,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 		repo:      "https://charts.jetstack.io"
 		values: {
 			ingressShim: {
-				defaultIssuerName: _issuer
+				defaultIssuerName: cluster.issuer
 				defaultIssuerKind: "ClusterIssuer"
 			}
 
@@ -667,6 +667,8 @@ kustomize: "cilium-bootstrap": #KustomizeHelm & {
 }
 
 kustomize: "cilium": #KustomizeHelm & {
+	cluster: #Cluster
+
 	namespace: "kube-system"
 
 	helm: {
@@ -699,7 +701,7 @@ kustomize: "cilium": #KustomizeHelm & {
 		metadata: {
 			name: "hubble-ui"
 			annotations: {
-				"external-dns.alpha.kubernetes.io/hostname":        "hubble.\(_domain)"
+				"external-dns.alpha.kubernetes.io/hostname":        "hubble.\(cluster.domain_name)"
 				"traefik.ingress.kubernetes.io/router.tls":         "true"
 				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
 			}
@@ -708,7 +710,7 @@ kustomize: "cilium": #KustomizeHelm & {
 		spec: {
 			ingressClassName: "traefik"
 			rules: [{
-				host: "hubble.\(_domain)"
+				host: "hubble.\(cluster.domain_name)"
 				http: paths: [{
 					path:     "/"
 					pathType: "Prefix"
@@ -723,33 +725,35 @@ kustomize: "cilium": #KustomizeHelm & {
 }
 
 kustomize: "issuer": #Kustomize & {
-	resource: "externalsecret-\(_issuer)": {
+	cluster: #Cluster
+
+	resource: "externalsecret-\(cluster.issuer)": {
 		apiVersion: "external-secrets.io/v1beta1"
 		kind:       "ExternalSecret"
 		metadata: {
-			name:      _issuer
+			name:      cluster.issuer
 			namespace: "cert-manager"
 		}
 		spec: {
 			refreshInterval: "1h"
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: cluster_name
+				name: cluster.cluster_name
 			}
 			dataFrom: [{
-				extract: key: "\(cluster_type)-\(cluster_name)"
+				extract: key: "\(cluster.cluster_type)-\(cluster.cluster_name)"
 			}]
 			target: {
-				name:           _issuer
+				name:           cluster.issuer
 				creationPolicy: "Owner"
 			}
 		}
 	}
 
-	resource: "clusterpolicy-clusterissuer-\(_issuer)": {
+	resource: "clusterpolicy-clusterissuer-\(cluster.issuer)": {
 		apiVersion: "kyverno.io/v1"
 		kind:       "ClusterPolicy"
-		metadata: name: "\(_issuer)-clusterissuer"
+		metadata: name: "\(cluster.issuer)-clusterissuer"
 		spec: {
 			generateExistingOnPolicyUpdate: true
 			rules: [{
@@ -757,7 +761,7 @@ kustomize: "issuer": #Kustomize & {
 				match: any: [{
 					resources: {
 						names: [
-							_issuer,
+							cluster.issuer,
 						]
 						kinds: [
 							"Secret",
@@ -771,17 +775,17 @@ kustomize: "issuer": #Kustomize & {
 					synchronize: true
 					apiVersion:  "cert-manager.io/v1"
 					kind:        "ClusterIssuer"
-					name:        _issuer
+					name:        cluster.issuer
 					data: spec: acme: {
 						server: "https://acme.zerossl.com/v2/DV90"
 						email:  "{{request.object.data.zerossl_email | base64_decode(@)}}"
 
-						privateKeySecretRef: name: "\(_issuer)-acme"
+						privateKeySecretRef: name: "\(cluster.issuer)-acme"
 
 						externalAccountBinding: {
 							keyID: "{{request.object.data.zerossl_eab_kid | base64_decode(@)}}"
 							keySecretRef: {
-								name: _issuer
+								name: cluster.issuer
 								key:  "zerossl_eab_hmac"
 							}
 						}
@@ -791,7 +795,7 @@ kustomize: "issuer": #Kustomize & {
 							dns01: cloudflare: {
 								email: "{{request.object.data.cloudflare_email | base64_decode(@)}}"
 								apiTokenSecretRef: {
-									name: _issuer
+									name: cluster.issuer
 									key:  "cloudflare_api_token"
 								}
 							}
@@ -806,6 +810,8 @@ kustomize: "issuer": #Kustomize & {
 // https://doc.traefik.io/traefik/routing/providers/kubernetes-ingress/
 // https://artifacthub.io/packages/helm/traefik/traefik
 kustomize: "traefik": #KustomizeHelm & {
+	cluster: #Cluster
+
 	namespace: "traefik"
 
 	helm: {
@@ -845,7 +851,7 @@ kustomize: "traefik": #KustomizeHelm & {
 			namespace: "traefik"
 		}
 
-		spec: defaultCertificate: secretName: "\(_domain_slug)-wildcard"
+		spec: defaultCertificate: secretName: "\(cluster.domain_slug)-wildcard"
 	}
 
 	resource: "serverstransport-insecure": {
@@ -867,7 +873,7 @@ kustomize: "traefik": #KustomizeHelm & {
 		}
 		spec: entryPoints: ["web"]
 		spec: routes: [{
-			match: "HostRegexp(`{subdomain:[a-z0-9-]+}.\(_domain)`)"
+			match: "HostRegexp(`{subdomain:[a-z0-9-]+}.\(cluster.domain_name)`)"
 			kind:  "Rule"
 			services: [{
 				name: "noop@internal"
@@ -888,7 +894,7 @@ kustomize: "traefik": #KustomizeHelm & {
 		}
 		spec: entryPoints: ["websecure"]
 		spec: routes: [{
-			match: "Host(`traefik.\(_domain)`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
+			match: "Host(`traefik.\(cluster.domain_name)`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
 			kind:  "Rule"
 			services: [{
 				name: "api@internal"
@@ -918,7 +924,7 @@ kustomize: "traefik": #KustomizeHelm & {
 			name:      "traefik"
 			namespace: "traefik"
 			annotations: {
-				"external-dns.alpha.kubernetes.io/hostname": "traefik.\(_domain)"
+				"external-dns.alpha.kubernetes.io/hostname": "traefik.\(cluster.domain_name)"
 			}
 		}
 
@@ -927,21 +933,21 @@ kustomize: "traefik": #KustomizeHelm & {
 		}
 	}
 
-	resource: "certificate-\(_domain_slug)-wildcard-traefik": {
+	resource: "certificate-\(cluster.domain_slug)-wildcard-traefik": {
 		apiVersion: "cert-manager.io/v1"
 		kind:       "Certificate"
 		metadata: {
-			name:      "\(_domain_slug)-wildcard"
+			name:      "\(cluster.domain_slug)-wildcard"
 			namespace: "traefik"
 		}
 		spec: {
-			secretName: "\(_domain_slug)-wildcard"
+			secretName: "\(cluster.domain_slug)-wildcard"
 			dnsNames: [
-				"*.\(_domain)",
-				"*.default.\(_domain)",
+				"*.\(cluster.domain_name)",
+				"*.default.\(cluster.domain_name)",
 			]
 			issuerRef: {
-				name:  _issuer
+				name:  cluster.issuer
 				kind:  "ClusterIssuer"
 				group: "cert-manager.io"
 			}
@@ -986,6 +992,8 @@ kustomize: "ubuntu": #Kustomize & {
 
 // https://artifacthub.io/packages/helm/coder-v2/coder
 kustomize: "coder": #KustomizeHelm & {
+	cluster: #Cluster
+
 	namespace: "coder"
 
 	helm: {
@@ -1000,7 +1008,7 @@ kustomize: "coder": #KustomizeHelm & {
 
 				env: [{
 					name:  "CODER_ACCESS_URL"
-					value: "https://coder.\(_domain)"
+					value: "https://coder.\(cluster.domain_name)"
 				}]
 			}
 		}
@@ -1020,7 +1028,7 @@ kustomize: "coder": #KustomizeHelm & {
 		metadata: {
 			name: "coder"
 			annotations: {
-				"external-dns.alpha.kubernetes.io/hostname":        "coder.\(_domain)"
+				"external-dns.alpha.kubernetes.io/hostname":        "coder.\(cluster.domain_name)"
 				"traefik.ingress.kubernetes.io/router.tls":         "true"
 				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
 			}
@@ -1029,7 +1037,7 @@ kustomize: "coder": #KustomizeHelm & {
 		spec: {
 			ingressClassName: "traefik"
 			rules: [{
-				host: "coder.\(_domain)"
+				host: "coder.\(cluster.domain_name)"
 				http: paths: [{
 					path:     "/"
 					pathType: "Prefix"
@@ -1053,10 +1061,10 @@ kustomize: "coder": #KustomizeHelm & {
 			refreshInterval: "1h"
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: cluster_name
+				name: cluster.cluster_name
 			}
 			dataFrom: [{
-				extract: key: "\(cluster_type)-\(cluster_name)"
+				extract: key: "\(cluster.cluster_type)-\(cluster.cluster_name)"
 			}]
 			target: {
 				name:           "coder"
@@ -1068,6 +1076,8 @@ kustomize: "coder": #KustomizeHelm & {
 
 // linkerd emojivoto
 kustomize: "emojivoto": #Kustomize & {
+	cluster: #Cluster
+
 	namespace: "emojivoto"
 
 	resource: "emojivoto": {
@@ -1091,7 +1101,7 @@ kustomize: "emojivoto": #Kustomize & {
 		metadata: {
 			name: "emojivoto"
 			annotations: {
-				"external-dns.alpha.kubernetes.io/hostname":        "emojivoto.\(_domain)"
+				"external-dns.alpha.kubernetes.io/hostname":        "emojivoto.\(cluster.domain_name)"
 				"traefik.ingress.kubernetes.io/router.tls":         "true"
 				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
 			}
@@ -1100,7 +1110,7 @@ kustomize: "emojivoto": #Kustomize & {
 		spec: {
 			ingressClassName: "traefik"
 			rules: [{
-				host: "emojivoto.\(_domain)"
+				host: "emojivoto.\(cluster.domain_name)"
 				http: paths: [{
 					path:     "/"
 					pathType: "Prefix"
