@@ -84,10 +84,10 @@ env: (#Transform & {
 			// cluster.vclusters
 			for v in infra.dfd.vclusters {
 				// vcluster
-				"\(infra.dfd.cluster_name)-vc\(v)": [100, ""]
+				"\(infra.dfd.cluster_name)-vc\(v)-vcluster": [100, ""]
 
 				// vcluster workload
-				"\(infra["vc\(v)"].cluster_name)-workload": [101, ""]
+				"\(infra["vc\(v)"].cluster_name)-env": [101, ""]
 			}
 
 			// experimental
