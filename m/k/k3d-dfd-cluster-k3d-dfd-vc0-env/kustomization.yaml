@@ -11,17 +11,17 @@ helmCharts:
           kind: Application
           metadata:
             namespace: argocd
-            name: k3d-dfd-vc0-env-kyverno
+            name: k3d-dfd-vc0-kyverno
             annotations:
               argocd.argoproj.io/sync-wave: "2"
           spec:
             project: default
             destination:
-              name: k3d-dfd-vc0-env
+              name: k3d-dfd-vc0
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/r/k3d-dfd-vc0-env-kyverno
+              path: m/k/r/k3d-dfd-vc0-kyverno
             syncPolicy:
               automated:
                 prune: true
@@ -33,17 +33,17 @@ helmCharts:
           kind: Application
           metadata:
             namespace: argocd
-            name: k3d-dfd-vc0-env-cert-manager
+            name: k3d-dfd-vc0-cert-manager
             annotations:
               argocd.argoproj.io/sync-wave: "2"
           spec:
             project: default
             destination:
-              name: k3d-dfd-vc0-env
+              name: k3d-dfd-vc0
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/r/k3d-dfd-vc0-env-cert-manager
+              path: m/k/r/k3d-dfd-vc0-cert-manager
             syncPolicy:
               automated:
                 prune: true
@@ -54,17 +54,17 @@ helmCharts:
           kind: Application
           metadata:
             namespace: argocd
-            name: k3d-dfd-vc0-env-pod-identity
+            name: k3d-dfd-vc0-pod-identity
             annotations:
               argocd.argoproj.io/sync-wave: "10"
           spec:
             project: default
             destination:
-              name: k3d-dfd-vc0-env
+              name: k3d-dfd-vc0
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/r/k3d-dfd-vc0-env-pod-identity
+              path: m/k/r/k3d-dfd-vc0-pod-identity
             syncPolicy:
               automated:
                 prune: true
@@ -75,17 +75,17 @@ helmCharts:
           kind: Application
           metadata:
             namespace: argocd
-            name: k3d-dfd-vc0-env-emojivoto
+            name: k3d-dfd-vc0-emojivoto
             annotations:
               argocd.argoproj.io/sync-wave: "100"
           spec:
             project: default
             destination:
-              name: k3d-dfd-vc0-env
+              name: k3d-dfd-vc0
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/r/k3d-dfd-vc0-env-emojivoto
+              path: m/k/r/k3d-dfd-vc0-emojivoto
             syncPolicy:
               automated:
                 prune: true

@@ -8,7 +8,8 @@ bootstrap: (#Transform & {
 	inputs: {
 		for _env_name, _env in env {
 			"\(_env_name)-env": {
-				bootstrap: _env.bootstrap
+				machine_name: _env_name
+				bootstrap:    _env.bootstrap
 			}
 		}
 	}

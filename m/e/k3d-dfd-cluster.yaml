@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://github.com/defn/dev
     targetRevision: main
-    path: m/k/r/k3d-dfd-cluster
+    path: m/k/r/k3d-dfd-cluster-env
   syncPolicy:
     automated:
       prune: true

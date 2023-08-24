@@ -3,14 +3,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "2"
-  name: k3d-dfd-vc1-env-cert-manager
+  name: k3d-dfd-vc1-cert-manager
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-vc1-env
+    name: k3d-dfd-vc1
   project: default
   source:
-    path: m/k/r/k3d-dfd-vc1-env-cert-manager
+    path: m/k/r/k3d-dfd-vc1-cert-manager
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -24,14 +24,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: k3d-dfd-vc1-env-emojivoto
+  name: k3d-dfd-vc1-emojivoto
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-vc1-env
+    name: k3d-dfd-vc1
   project: default
   source:
-    path: m/k/r/k3d-dfd-vc1-env-emojivoto
+    path: m/k/r/k3d-dfd-vc1-emojivoto
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -46,14 +46,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "2"
-  name: k3d-dfd-vc1-env-kyverno
+  name: k3d-dfd-vc1-kyverno
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-vc1-env
+    name: k3d-dfd-vc1
   project: default
   source:
-    path: m/k/r/k3d-dfd-vc1-env-kyverno
+    path: m/k/r/k3d-dfd-vc1-kyverno
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -68,14 +68,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "10"
-  name: k3d-dfd-vc1-env-pod-identity
+  name: k3d-dfd-vc1-pod-identity
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-vc1-env
+    name: k3d-dfd-vc1
   project: default
   source:
-    path: m/k/r/k3d-dfd-vc1-env-pod-identity
+    path: m/k/r/k3d-dfd-vc1-pod-identity
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:

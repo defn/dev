@@ -11,17 +11,17 @@ helmCharts:
           kind: Application
           metadata:
             namespace: argocd
-            name: k3d-dfd-manual-env-cilium-bootstrap
+            name: k3d-dfd-manual-cilium-bootstrap
             annotations:
               argocd.argoproj.io/sync-wave: "1"
           spec:
             project: default
             destination:
-              name: k3d-dfd-manual-env
+              name: k3d-dfd-manual
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/r/k3d-dfd-manual-env-cilium-bootstrap
+              path: m/k/r/k3d-dfd-manual-cilium-bootstrap
             syncPolicy:
               automated:
                 prune: true
@@ -32,17 +32,17 @@ helmCharts:
           kind: Application
           metadata:
             namespace: argocd
-            name: k3d-dfd-manual-env-cert-manager-crds
+            name: k3d-dfd-manual-cert-manager-crds
             annotations:
               argocd.argoproj.io/sync-wave: "1"
           spec:
             project: default
             destination:
-              name: k3d-dfd-manual-env
+              name: k3d-dfd-manual
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/r/k3d-dfd-manual-env-cert-manager-crds
+              path: m/k/r/k3d-dfd-manual-cert-manager-crds
             syncPolicy:
               automated:
                 prune: true
