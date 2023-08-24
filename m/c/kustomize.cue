@@ -1077,6 +1077,17 @@ kustomize: "emojivoto": #Kustomize & {
 		url: "https://run.linkerd.io/emojivoto.yml"
 	}
 
+	psm: "namespace-emojivoto": {
+		apiVersion: "v1"
+		kind:       "Namespace"
+		metadata: {
+			name: "emojivoto"
+			annotations: {
+				"linkerd.io/inject": "enabled"
+			}
+		}
+	}
+
 	resource: "ingress-emojivoto": {
 		apiVersion: "networking.k8s.io/v1"
 		kind:       "Ingress"
