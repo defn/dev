@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://github.com/defn/dev
     targetRevision: main
-    path: m/k/r/k3d-dfd-vc1
+    path: m/k/r/k3d-dfd-vc1-env
   syncPolicy:
     automated:
       prune: true

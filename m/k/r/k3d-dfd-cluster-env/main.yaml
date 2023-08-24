@@ -3,14 +3,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: k3d-dfd-cluster-env-argo-cd
+  name: k3d-dfd-cluster-argo-cd
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-cluster-env
+    name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/r/k3d-dfd-cluster-env-argo-cd
+    path: m/k/r/k3d-dfd-cluster-argo-cd
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -24,14 +24,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "2"
-  name: k3d-dfd-cluster-env-cert-manager
+  name: k3d-dfd-cluster-cert-manager
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-cluster-env
+    name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/r/k3d-dfd-cluster-env-cert-manager
+    path: m/k/r/k3d-dfd-cluster-cert-manager
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -45,14 +45,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: k3d-dfd-cluster-env-cilium
+  name: k3d-dfd-cluster-cilium
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-cluster-env
+    name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/r/k3d-dfd-cluster-env-cilium
+    path: m/k/r/k3d-dfd-cluster-cilium
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -66,14 +66,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "30"
-  name: k3d-dfd-cluster-env-external-dns
+  name: k3d-dfd-cluster-external-dns
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-cluster-env
+    name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/r/k3d-dfd-cluster-env-external-dns
+    path: m/k/r/k3d-dfd-cluster-external-dns
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -87,14 +87,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "11"
-  name: k3d-dfd-cluster-env-external-secrets
+  name: k3d-dfd-cluster-external-secrets
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-cluster-env
+    name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/r/k3d-dfd-cluster-env-external-secrets
+    path: m/k/r/k3d-dfd-cluster-external-secrets
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -108,14 +108,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: k3d-dfd-cluster-env-hello
+  name: k3d-dfd-cluster-hello
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-cluster-env
+    name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/r/k3d-dfd-cluster-env-hello
+    path: m/k/r/k3d-dfd-cluster-hello
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -129,14 +129,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "30"
-  name: k3d-dfd-cluster-env-issuer
+  name: k3d-dfd-cluster-issuer
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-cluster-env
+    name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/r/k3d-dfd-cluster-env-issuer
+    path: m/k/r/k3d-dfd-cluster-issuer
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -150,14 +150,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "101"
-  name: k3d-dfd-cluster-env-k3d-dfd-vc0-env
+  name: k3d-dfd-cluster-k3d-dfd-vc0-env
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-cluster-env
+    name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/r/k3d-dfd-cluster-env-k3d-dfd-vc0-env
+    path: m/k/r/k3d-dfd-cluster-k3d-dfd-vc0-env
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -171,14 +171,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: k3d-dfd-cluster-env-k3d-dfd-vc0-vcluster
+  name: k3d-dfd-cluster-k3d-dfd-vc0-vcluster
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-cluster-env
+    name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/r/k3d-dfd-cluster-env-k3d-dfd-vc0-vcluster
+    path: m/k/r/k3d-dfd-cluster-k3d-dfd-vc0-vcluster
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -192,14 +192,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "101"
-  name: k3d-dfd-cluster-env-k3d-dfd-vc1-env
+  name: k3d-dfd-cluster-k3d-dfd-vc1-env
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-cluster-env
+    name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/r/k3d-dfd-cluster-env-k3d-dfd-vc1-env
+    path: m/k/r/k3d-dfd-cluster-k3d-dfd-vc1-env
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -213,14 +213,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: k3d-dfd-cluster-env-k3d-dfd-vc1-vcluster
+  name: k3d-dfd-cluster-k3d-dfd-vc1-vcluster
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-cluster-env
+    name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/r/k3d-dfd-cluster-env-k3d-dfd-vc1-vcluster
+    path: m/k/r/k3d-dfd-cluster-k3d-dfd-vc1-vcluster
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -234,14 +234,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "40"
-  name: k3d-dfd-cluster-env-knative
+  name: k3d-dfd-cluster-knative
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-cluster-env
+    name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/r/k3d-dfd-cluster-env-knative
+    path: m/k/r/k3d-dfd-cluster-knative
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -255,14 +255,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "40"
-  name: k3d-dfd-cluster-env-kourier
+  name: k3d-dfd-cluster-kourier
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-cluster-env
+    name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/r/k3d-dfd-cluster-env-kourier
+    path: m/k/r/k3d-dfd-cluster-kourier
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -276,14 +276,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "2"
-  name: k3d-dfd-cluster-env-kyverno
+  name: k3d-dfd-cluster-kyverno
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-cluster-env
+    name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/r/k3d-dfd-cluster-env-kyverno
+    path: m/k/r/k3d-dfd-cluster-kyverno
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -298,14 +298,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "10"
-  name: k3d-dfd-cluster-env-pod-identity
+  name: k3d-dfd-cluster-pod-identity
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-cluster-env
+    name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/r/k3d-dfd-cluster-env-pod-identity
+    path: m/k/r/k3d-dfd-cluster-pod-identity
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -319,14 +319,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "12"
-  name: k3d-dfd-cluster-env-secrets
+  name: k3d-dfd-cluster-secrets
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-cluster-env
+    name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/r/k3d-dfd-cluster-env-secrets
+    path: m/k/r/k3d-dfd-cluster-secrets
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -340,14 +340,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "40"
-  name: k3d-dfd-cluster-env-traefik
+  name: k3d-dfd-cluster-traefik
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-cluster-env
+    name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/r/k3d-dfd-cluster-env-traefik
+    path: m/k/r/k3d-dfd-cluster-traefik
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:

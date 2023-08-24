@@ -38,22 +38,21 @@ import (
 	from: {
 		#Input
 
+		machine_name: string
 		bootstrap: [string]: [int, ...string]
 	}
 
 	to: #BootstrapMachine
 }
 
-#BootstrapMachine: ctx={
+#BootstrapMachine: {
 	_in: #TransformEnvToBootstrapMachine.from
-
-	machine_name: string | *_in.name
 
 	apps: [string]: #BootstrapApp
 	apps: {
 		for _app_name, _app in _in.bootstrap {
 			"\(_app_name)": #BootstrapApp & {
-				machine_name:     ctx.machine_name
+				machine_name:     _in.machine_name
 				app_name:         _app_name
 				app_wave:         _app[0]
 				app_namespace:    _app[1]
@@ -118,7 +117,7 @@ import (
 	env: {
 		// ex: k/k3d-dfd
 		// ex: k/vcluster-dfd-vc0
-		spec: source: path: "m/k/r/\(name)"
+		spec: source: path: "m/k/r/\(name)-env"
 
 		spec: "destination": "name": destination
 	}
