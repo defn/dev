@@ -1,6 +1,7 @@
 #ManagedBy: cue
 
 patches:
+  - path: patch-namespace-vcluster.yaml
   - path: jsonp-service-vcluster-lb.yaml
     target:
       group: ""
