@@ -87,16 +87,14 @@ env: (#Transform & {
 		[string]: {
 			instance_types: []
 			parent: env[cluster_name]
-		}
-		"\(cluster_type)-\(cluster_name)-vc0": {
 			bootstrap: {
 				"kyverno": [3, "", "ServerSideApply=true"]
+				"emojivoto": [100, "", "ServerSideApply=true"]
 			}
 		}
-		"\(cluster_type)-\(cluster_name)-vc1": {
-			bootstrap: {
-				"kyverno": [3, "", "ServerSideApply=true"]
-			}
+
+		for v in vclusters {
+			"\(cluster_type)-\(cluster_name)-vc\(v)": {}
 		}
 	}
 }).outputs
