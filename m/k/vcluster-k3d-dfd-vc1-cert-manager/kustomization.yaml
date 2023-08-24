@@ -1,0 +1,20 @@
+#ManagedBy: cue
+
+patches: []
+resources:
+  - https://github.com/cert-manager/cert-manager/releases/download/v1.12.3/cert-manager.crds.yaml
+  - resource-namespace-cert-manager.yaml
+  - resource-clusterissuer-cilium.yaml
+helmCharts:
+  - releaseName: cert-manager
+    namespace: cert-manager
+    valuesInline:
+      ingressShim:
+        defaultIssuerName: zerossl-production
+        defaultIssuerKind: ClusterIssuer
+      global:
+        logLevel: 4
+    name: cert-manager
+    version: 1.12.3
+    repo: https://charts.jetstack.io
+    includeCRDs: true
