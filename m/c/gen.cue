@@ -2,19 +2,15 @@ package c
 
 import (
 	"encoding/yaml"
-	"strings"
 )
+
+infra: [string]: #Cluster
 
 lookup: {
 	for ename, e in env {
 		"\(ename)": {
 			for kname, _ in e.bootstrap {
-				if strings.HasPrefix(kname, "\(e.type)-\(ename)") {
-					"\(kname)": kname
-				}
-				if !strings.HasPrefix(kname, "\(e.type)-\(ename)") {
-					"\(kname)": "\(e.type)-\(ename)-\(kname)"
-				}
+				"\(kname)": "\(ename)-\(kname)"
 			}
 		}
 	}
@@ -22,8 +18,9 @@ lookup: {
 
 gen: "k": {
 	for ename, e in env {
-		let ekname = "\(e.type)-\(ename)"
-		let ekmize = (( kustomize[ekname] ) & {cluster: domain_name: "bastard"})
+		// environment app names are suffixed with -env
+		let ekname = "\(ename)-env"
+		let ekmize = kustomize[ekname]
 
 		"\(ekname)/kustomization.yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(ekmize.out)
 
