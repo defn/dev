@@ -1,12 +1,15 @@
 #ManagedBy: cue
 
 patches: []
-namespace: external-dns
 resources:
   - resource-namespace-external-dns.yaml
   - resource-externalsecret-external-dns.yaml
+namespace: external-dns
 helmCharts:
   - releaseName: external-dns
+    name: external-dns
+    version: 6.24.0
+    repo: https://charts.bitnami.com/bitnami
     namespace: external-dns
     valuesInline:
       logLevel: debug
@@ -19,7 +22,4 @@ helmCharts:
         proxied: false
       domainFilters:
         - defn.run
-    name: external-dns
-    version: 6.24.0
-    repo: https://charts.bitnami.com/bitnami
     includeCRDs: true

@@ -1102,7 +1102,7 @@ kustomize: "emojivoto": #Kustomize & {
 		metadata: {
 			name: "emojivoto"
 			annotations: {
-				"external-dns.alpha.kubernetes.io/hostname":        "emojivoto.\(cluster.domain_name)"
+				"external-dns.alpha.kubernetes.io/hostname":        "emojivoto\(cluster.name_suffix)\(cluster.domain_name)"
 				"traefik.ingress.kubernetes.io/router.tls":         "true"
 				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
 			}

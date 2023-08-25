@@ -8,7 +8,7 @@ infra: {
 	[NAME=string]: _base & {
 		if strings.HasPrefix(NAME, "vc") {
 			cluster_name: "\(parent.cluster_name)-\(NAME)"
-			name_suffix:  "-\(NAME)"
+			name_suffix:  "-\(NAME)."
 		}
 	}
 
@@ -25,13 +25,14 @@ infra: {
 		cluster_name: "k3d-dfd"
 		vclusters: [0, 1]
 	}
+	dfd:    parent
+	manual: parent
 
-	dfd: parent
 	vc0: {}
 	vc1: {}
 }
 
-kustomize: [string]: cluster: infra.dfd
+kustomize: [string]: cluster: #Cluster | *infra.dfd
 
 env: (#Transform & {
 	transformer: #TransformK3D
