@@ -11,7 +11,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: emojivoto.dev.amanibhavam.defn.run
+    - host: emojivoto-vc1.dev.amanibhavam.defn.run
       http:
         paths:
           - path: /

@@ -233,7 +233,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: emojivoto.dev.amanibhavam.defn.run
+  - host: emojivoto-vc0.dev.amanibhavam.defn.run
     http:
       paths:
       - backend:
