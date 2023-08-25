@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/argocd",
-        "lastModified": 1692746942,
-        "narHash": "sha256-+QOBeAH7Qg7DYCjhJ1w9bhHd5WIADmGR6JioLxuJWOY=",
+        "lastModified": 1692989163,
+        "narHash": "sha256-zT0FjhPu8UrrLwPHFJ03DXMKolnJs2JJF4qjpIrzE40=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "1a64209cb75193626721c7bea5ca6692e876f584",
+        "rev": "cf8af78cfad1d1d59899e476cc711025656584f6",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/argocd",
         "owner": "defn",
-        "ref": "pkg-argocd-2.8.1-1",
+        "ref": "pkg-argocd-2.8.2-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1347,17 +1347,17 @@
       },
       "locked": {
         "dir": "m/pkg/vcluster",
-        "lastModified": 1692814316,
-        "narHash": "sha256-fr6HM2ibKRJo/rVV8uvT5k6Cj4vo3ttUqolXX3mIqIE=",
+        "lastModified": 1692989240,
+        "narHash": "sha256-N21YicJGHqMTa2/nGmMVoZdHJ4uLRCqNy+UACYzQVvs=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "36fa86205e2745516508f61bf4f0bdc06e16dc01",
+        "rev": "2cc3138474d92d9d7f4024fa54a365c31016b412",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/vcluster",
         "owner": "defn",
-        "ref": "pkg-vcluster-0.15.6-1",
+        "ref": "pkg-vcluster-0.15.7-1",
         "repo": "dev",
         "type": "github"
       }
