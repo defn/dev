@@ -10,7 +10,7 @@ kind: ServiceAccount
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.5
+    chart: vcluster-0.15.7
     heritage: Helm
     release: vcluster
   name: vc-vcluster
@@ -21,7 +21,7 @@ kind: ServiceAccount
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.5
+    chart: vcluster-0.15.7
     heritage: Helm
     release: vcluster
   name: vc-workload-vcluster
@@ -32,7 +32,7 @@ kind: Role
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.5
+    chart: vcluster-0.15.7
     heritage: Helm
     release: vcluster
   name: vcluster
@@ -123,7 +123,7 @@ kind: ClusterRole
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.5
+    chart: vcluster-0.15.7
     heritage: Helm
     release: vcluster
   name: vc-vcluster-v-k3d-dfd-vc1-vcluster
@@ -181,7 +181,7 @@ kind: RoleBinding
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.5
+    chart: vcluster-0.15.7
     heritage: Helm
     release: vcluster
   name: vcluster
@@ -200,7 +200,7 @@ kind: ClusterRoleBinding
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.5
+    chart: vcluster-0.15.7
     heritage: Helm
     release: vcluster
   name: vc-vcluster-v-k3d-dfd-vc1-vcluster
@@ -228,21 +228,21 @@ data:
     \ kind: ClusterRole\n  name: system:coredns\nsubjects:\n  - kind: ServiceAccount\n
     \   name: coredns\n    namespace: kube-system\n---\napiVersion: v1\nkind: ConfigMap\nmetadata:\n
     \ name: coredns\n  namespace: kube-system\ndata:\n  Corefile: |-\n    .:1053 {\n
-    \       errors {\n            stacktrace\n        }\n        health\n        ready\n
-    \       rewrite name regex .*\\.nodes\\.vcluster\\.com kubernetes.default.svc.cluster.local\n
-    \       kubernetes cluster.local in-addr.arpa ip6.arpa {\n            pods insecure\n
-    \           fallthrough cluster.local in-addr.arpa ip6.arpa\n        }\n        hosts
-    /etc/NodeHosts {\n            ttl 60\n            reload 15s\n            fallthrough\n
-    \       }\n        prometheus :9153\n        forward . {{.HOST_CLUSTER_DNS}}\n
-    \       cache 30\n        loop\n        loadbalance\n    }\n  \n    import /etc/coredns/custom/*.server\n
-    \ NodeHosts: \"\"\n---\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name:
-    coredns\n  namespace: kube-system\n  labels:\n    k8s-app: kube-dns\n    kubernetes.io/name:
-    \"CoreDNS\"\nspec:\n  replicas: 1\n  strategy:\n    type: RollingUpdate\n    rollingUpdate:\n
-    \     maxUnavailable: 1\n  selector:\n    matchLabels:\n      k8s-app: kube-dns\n
-    \ template:\n    metadata:\n      labels:\n        k8s-app: kube-dns\n    spec:\n
-    \     priorityClassName: \"system-cluster-critical\"\n      serviceAccountName:
-    coredns\n      nodeSelector:\n        kubernetes.io/os: linux\n      topologySpreadConstraints:\n
-    \       - maxSkew: 1\n          topologyKey: kubernetes.io/hostname\n          whenUnsatisfiable:
+    \       errors\n        health\n        ready\n        rewrite name regex .*\\.nodes\\.vcluster\\.com
+    kubernetes.default.svc.cluster.local\n        kubernetes cluster.local in-addr.arpa
+    ip6.arpa {\n            pods insecure\n            fallthrough cluster.local in-addr.arpa
+    ip6.arpa\n        }\n        hosts /etc/NodeHosts {\n            ttl 60\n            reload
+    15s\n            fallthrough\n        }\n        prometheus :9153\n        forward
+    . {{.HOST_CLUSTER_DNS}}\n        cache 30\n        loop\n        loadbalance\n
+    \   }\n  \n    import /etc/coredns/custom/*.server\n  NodeHosts: \"\"\n---\napiVersion:
+    apps/v1\nkind: Deployment\nmetadata:\n  name: coredns\n  namespace: kube-system\n
+    \ labels:\n    k8s-app: kube-dns\n    kubernetes.io/name: \"CoreDNS\"\nspec:\n
+    \ replicas: 1\n  strategy:\n    type: RollingUpdate\n    rollingUpdate:\n      maxUnavailable:
+    1\n  selector:\n    matchLabels:\n      k8s-app: kube-dns\n  template:\n    metadata:\n
+    \     labels:\n        k8s-app: kube-dns\n    spec:\n      priorityClassName:
+    \"system-cluster-critical\"\n      serviceAccountName: coredns\n      nodeSelector:\n
+    \       kubernetes.io/os: linux\n      topologySpreadConstraints:\n        - maxSkew:
+    1\n          topologyKey: kubernetes.io/hostname\n          whenUnsatisfiable:
     DoNotSchedule\n          labelSelector:\n            matchLabels:\n              k8s-app:
     kube-dns\n      containers:\n        - name: coredns\n          image: {{.IMAGE}}\n
     \         imagePullPolicy: IfNotPresent\n          resources:\n            limits:\n
@@ -256,27 +256,27 @@ data:
     dns-tcp\n              protocol: TCP\n            - containerPort: 9153\n              name:
     metrics\n              protocol: TCP\n          securityContext:\n            runAsNonRoot:
     true\n            runAsUser: {{.RUN_AS_USER}}\n            runAsGroup: {{.RUN_AS_GROUP}}\n
-    \           allowPrivilegeEscalation: false\n            capabilities:\n              drop:\n
-    \               - ALL\n            readOnlyRootFilesystem: true\n          livenessProbe:\n
-    \           httpGet:\n              path: /health\n              port: 8080\n
-    \             scheme: HTTP\n            initialDelaySeconds: 60\n            periodSeconds:
-    10\n            timeoutSeconds: 1\n            successThreshold: 1\n            failureThreshold:
-    3\n          readinessProbe:\n            httpGet:\n              path: /ready\n
-    \             port: 8181\n              scheme: HTTP\n            initialDelaySeconds:
-    0\n            periodSeconds: 2\n            timeoutSeconds: 1\n            successThreshold:
-    1\n            failureThreshold: 3\n      dnsPolicy: Default\n      volumes:\n
-    \       - name: config-volume\n          configMap:\n            name: coredns\n
-    \           items:\n              - key: Corefile\n                path: Corefile\n
-    \             - key: NodeHosts\n                path: NodeHosts\n        - name:
-    custom-config-volume\n          configMap:\n            name: coredns-custom\n
-    \           optional: true\n---\napiVersion: v1\nkind: Service\nmetadata:\n  name:
-    kube-dns\n  namespace: kube-system\n  annotations:\n    prometheus.io/port: \"9153\"\n
-    \   prometheus.io/scrape: \"true\"\n  labels:\n    k8s-app: kube-dns\n    kubernetes.io/cluster-service:
-    \"true\"\n    kubernetes.io/name: \"CoreDNS\"\nspec:\n  selector:\n    k8s-app:
-    kube-dns\n  type: ClusterIP\n  ports:\n    - name: dns\n      port: 53\n      targetPort:
-    1053\n      protocol: UDP\n    - name: dns-tcp\n      port: 53\n      targetPort:
-    1053\n      protocol: TCP\n    - name: metrics\n      port: 9153\n      protocol:
-    TCP"
+    \           allowPrivilegeEscalation: false\n            capabilities:\n              add:\n
+    \               - NET_BIND_SERVICE\n            readOnlyRootFilesystem: true\n
+    \         livenessProbe:\n            httpGet:\n              path: /health\n
+    \             port: 8080\n              scheme: HTTP\n            initialDelaySeconds:
+    60\n            periodSeconds: 10\n            timeoutSeconds: 1\n            successThreshold:
+    1\n            failureThreshold: 3\n          readinessProbe:\n            httpGet:\n
+    \             path: /ready\n              port: 8181\n              scheme: HTTP\n
+    \           initialDelaySeconds: 0\n            periodSeconds: 2\n            timeoutSeconds:
+    1\n            successThreshold: 1\n            failureThreshold: 3\n      dnsPolicy:
+    Default\n      volumes:\n        - name: config-volume\n          configMap:\n
+    \           name: coredns\n            items:\n              - key: Corefile\n
+    \               path: Corefile\n              - key: NodeHosts\n                path:
+    NodeHosts\n        - name: custom-config-volume\n          configMap:\n            name:
+    coredns-custom\n            optional: true\n---\napiVersion: v1\nkind: Service\nmetadata:\n
+    \ name: kube-dns\n  namespace: kube-system\n  annotations:\n    prometheus.io/port:
+    \"9153\"\n    prometheus.io/scrape: \"true\"\n  labels:\n    k8s-app: kube-dns\n
+    \   kubernetes.io/cluster-service: \"true\"\n    kubernetes.io/name: \"CoreDNS\"\nspec:\n
+    \ selector:\n    k8s-app: kube-dns\n  type: ClusterIP\n  ports:\n    - name: dns\n
+    \     port: 53\n      targetPort: 1053\n      protocol: UDP\n    - name: dns-tcp\n
+    \     port: 53\n      targetPort: 1053\n      protocol: TCP\n    - name: metrics\n
+    \     port: 9153\n      protocol: TCP"
 kind: ConfigMap
 metadata:
   name: vcluster-coredns
@@ -289,7 +289,7 @@ kind: ConfigMap
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.5
+    chart: vcluster-0.15.7
     heritage: Helm
     release: vcluster
   name: vcluster-init-manifests
@@ -300,7 +300,7 @@ kind: Service
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.5
+    chart: vcluster-0.15.7
     heritage: Helm
     release: vcluster
   name: vcluster
@@ -325,7 +325,7 @@ kind: Service
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.5
+    chart: vcluster-0.15.7
     heritage: Helm
     release: vcluster
   name: vcluster-headless
@@ -346,7 +346,7 @@ kind: Service
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.5
+    chart: vcluster-0.15.7
     heritage: Helm
     release: vcluster
   name: vcluster-lb
@@ -367,7 +367,7 @@ kind: StatefulSet
 metadata:
   labels:
     app: vcluster
-    chart: vcluster-0.15.5
+    chart: vcluster-0.15.7
     heritage: Helm
     release: vcluster
   name: vcluster
@@ -419,6 +419,7 @@ spec:
           name: data
       - args:
         - --name=vcluster
+        - --kube-config=/data/k3s-config/kube-config.yaml
         - --service-account=vc-workload-vcluster
         - --kube-config-context-name=my-vcluster
         - --leader-elect=false
@@ -440,7 +441,7 @@ spec:
           value: '---'
         - name: VCLUSTER_TELEMETRY_CONFIG
           value: '{"disabled":"false","instanceCreator":"helm","instanceCreatorUID":""}'
-        image: ghcr.io/loft-sh/vcluster:0.15.5
+        image: ghcr.io/loft-sh/vcluster:0.15.7
         livenessProbe:
           failureThreshold: 60
           httpGet:

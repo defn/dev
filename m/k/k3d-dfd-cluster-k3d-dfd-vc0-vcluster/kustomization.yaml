@@ -38,6 +38,6 @@ helmCharts:
         extraArgs:
           - --tls-san=vcluster.k3d-dfd-vc0-vcluster.svc.cluster.local
     name: vcluster
-    version: 0.15.5
+    version: 0.15.7
     repo: https://charts.loft.sh
     includeCRDs: true

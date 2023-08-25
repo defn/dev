@@ -197,7 +197,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.24.0"
+		version: "6.24.1"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -301,7 +301,7 @@ kustomize: "external-secrets": #KustomizeHelm & {
 	helm: {
 		release: "external-secrets"
 		name:    "external-secrets"
-		version: "0.9.3"
+		version: "0.9.4"
 		repo:    "https://charts.external-secrets.io"
 		values: {
 			webhook: create:        false
@@ -562,7 +562,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 	helm: {
 		release: "vcluster"
 		name:    "vcluster"
-		version: "0.15.5"
+		version: "0.15.7"
 		repo:    "https://charts.loft.sh"
 
 		values: {
@@ -1001,7 +1001,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "2.1.1"
+		version:   "2.1.3"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {
