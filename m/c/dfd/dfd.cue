@@ -4,6 +4,10 @@ import (
 	"strings"
 )
 
+infra_name: "dfd"
+
+kustomize: [string]: cluster: #Cluster | *infra[infra_name]
+
 infra: {
 	[NAME=string]: _base & {
 		if strings.HasPrefix(NAME, "vc") {
@@ -22,22 +26,26 @@ infra: {
 	}
 
 	parent: {
-		cluster_name: "k3d-dfd"
+		cluster_name: "k3d-\(infra_name)"
 		vclusters: [0, 1]
 	}
-	dfd:    parent
-	manual: parent
 
-	vc0: {}
-	vc1: {}
+	"\(infra_name)":                  parent
+	"\(parent.cluster_name)-cluster": parent
+
+	manual:                          parent
+	"\(parent.cluster_name)-manual": manual
+
+	for v in parent.vclusters {
+		"vc\(v)": {}
+		"\(parent.cluster_name)-vc\(v)": infra["vc\(v)"]
+	}
 }
-
-kustomize: [string]: cluster: #Cluster | *infra.dfd
 
 env: (#Transform & {
 	transformer: #TransformK3D
 
-	inputs: "\(infra.dfd.cluster_name)-manual": {
+	inputs: "\(infra.parent.cluster_name)-manual": {
 		bootstrap: {
 			"cilium-bootstrap": [1, ""]
 			"cert-manager-crds": [1, ""]
@@ -48,7 +56,7 @@ env: (#Transform & {
 env: (#Transform & {
 	transformer: #TransformK3D
 
-	inputs: "\(infra.dfd.cluster_name)-cluster": {
+	inputs: "\(infra.parent.cluster_name)-cluster": {
 		bootstrap: {
 			// ~~~~~ Wave 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			//
@@ -83,9 +91,9 @@ env: (#Transform & {
 			"argo-cd": [100, ""]
 
 			// cluster.vclusters
-			for v in infra.dfd.vclusters {
+			for v in infra.parent.vclusters {
 				// vcluster
-				"\(infra.dfd.cluster_name)-vc\(v)-vcluster": [100, ""]
+				"\(infra.parent.cluster_name)-vc\(v)-vcluster": [100, ""]
 
 				// vcluster workload
 				"\(infra["vc\(v)"].cluster_name)-env": [101, ""]
@@ -101,10 +109,10 @@ env: (#Transform & {
 	transformer: #TransformVCluster
 
 	inputs: {
-		for v in infra.dfd.vclusters {
+		for v in infra.parent.vclusters {
 			"\(infra["vc\(v)"].cluster_name)": {
 				instance_types: []
-				parent: env["\(infra.dfd.cluster_name)-cluster"]
+				parent: env["\(infra.parent.cluster_name)-cluster"]
 				bootstrap: {
 					"kyverno": [2, "", "ServerSideApply=true"]
 					"cert-manager": [2, ""]
@@ -120,7 +128,7 @@ kustomize: (#Transform & {
 	transformer: #TransformKustomizeVCluster
 
 	inputs: {
-		for v in infra.dfd.vclusters {
+		for v in infra.parent.vclusters {
 			"\(infra["vc\(v)"].cluster_name)-vcluster": {
 				vc_index:   v
 				vc_machine: infra["vc\(v)"].cluster_name

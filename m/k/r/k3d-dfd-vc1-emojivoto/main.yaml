@@ -225,7 +225,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: emojivoto.dev.amanibhavam.defn.run
+    external-dns.alpha.kubernetes.io/hostname: emojivoto-vc1.dev.amanibhavam.defn.run
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
   name: emojivoto
