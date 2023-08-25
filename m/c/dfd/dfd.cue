@@ -110,12 +110,11 @@ env: (#Transform & {
 
 	inputs: {
 		for v in infra.parent.vclusters {
-			"\(infra["vc\(v)"].cluster_name)": {
+			"\(infra.parent.cluster_name)-vc\(v)": {
 				instance_types: []
 				parent: env["\(infra.parent.cluster_name)-cluster"]
 				bootstrap: {
 					"kyverno": [2, "", "ServerSideApply=true"]
-					"cert-manager": [2, ""]
 					"pod-identity": [10, ""]
 					"emojivoto": [100, "", "ServerSideApply=true"]
 				}

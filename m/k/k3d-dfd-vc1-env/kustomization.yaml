@@ -28,27 +28,6 @@ helmCharts:
                 selfHeal: true
               syncOptions:
                 - ServerSideApply=true
-        cert-manager: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: k3d-dfd-vc1-cert-manager
-            annotations:
-              argocd.argoproj.io/sync-wave: "2"
-          spec:
-            project: default
-            destination:
-              name: k3d-dfd-vc1
-            source:
-              repoURL: https://github.com/defn/dev
-              targetRevision: main
-              path: m/k/r/k3d-dfd-vc1-cert-manager
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
         pod-identity: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
