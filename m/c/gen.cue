@@ -69,7 +69,7 @@ gen: "k": {
 		(#ConcreteKustomize & {input: {
 			"ename":   ename
 			bootstrap: e.bootstrap
-			cluster:   infra.dfd
+			cluster:   infra[ename]
 		}}).output
 	}
 }
