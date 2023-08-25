@@ -27,17 +27,17 @@
       },
       "locked": {
         "dir": "m/pkg/buildifier",
-        "lastModified": 1692298714,
-        "narHash": "sha256-tO+8ZWqX980bpanZzmWPMOQ5HzOq2kgvqowxgQugr7A=",
+        "lastModified": 1692989218,
+        "narHash": "sha256-eMN8/zOeYQU/FSLrZWE2IdycJpBvT4gZh27FPfJ1etQ=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "81524cf5fbc799589ba3c6641272cdfb6a425a77",
+        "rev": "579c0d44e77a976c7afb90742b53221695787112",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buildifier",
         "owner": "defn",
-        "ref": "pkg-buildifier-6.3.2-1",
+        "ref": "pkg-buildifier-6.3.3-1",
         "repo": "dev",
         "type": "github"
       }
