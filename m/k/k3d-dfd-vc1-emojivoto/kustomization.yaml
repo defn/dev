@@ -2,7 +2,7 @@
 
 patches:
   - path: patch-namespace-emojivoto.yaml
-namespace: emojivoto
 resources:
   - https://run.linkerd.io/emojivoto.yml
   - resource-ingress-emojivoto.yaml
+namespace: emojivoto

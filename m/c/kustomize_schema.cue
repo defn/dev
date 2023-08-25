@@ -34,7 +34,7 @@ kustomize: [NAME=string]: _name: NAME
 	cluster_name: string
 
 	vclusters:   [...int] | *[]
-	name_suffix: string | *""
+	name_suffix: string | *"."
 }
 
 #Kustomize: {

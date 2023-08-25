@@ -3,7 +3,6 @@
 patches:
   - path: patch-ingressroute-traefik-dashboard.yaml
   - path: patch-service-tailscale.yaml
-namespace: traefik
 resources:
   - resource-namespace-traefik.yaml
   - resource-tlsstore-traefik.yaml
@@ -11,8 +10,12 @@ resources:
   - resource-ingressroute-http-to-https.yaml
   - resource-middleware-http-to-https.yaml
   - resource-certificate-dev-amanibhavam-defn-run-wildcard-traefik.yaml
+namespace: traefik
 helmCharts:
   - releaseName: traefik
+    name: traefik
+    version: 24.0.0
+    repo: https://traefik.github.io/charts
     namespace: traefik
     valuesInline:
       logs:
@@ -28,7 +31,4 @@ helmCharts:
         kubernetesCRD:
           allowExternalNameServices: true
           allowCrossNamespace: true
-    name: traefik
-    version: 24.0.0
-    repo: https://traefik.github.io/charts
     includeCRDs: true

@@ -1,10 +1,13 @@
 #ManagedBy: cue
 
 patches: []
-namespace: kube-system
 resources: []
+namespace: kube-system
 helmCharts:
   - releaseName: cilium
+    name: cilium
+    version: 1.14.1
+    repo: https://helm.cilium.io
     namespace: kube-system
     valuesInline:
       operator:
@@ -21,7 +24,4 @@ helmCharts:
               name: cilium-ca
               kind: ClusterIssuer
               group: cert-manager.io
-    name: cilium
-    version: 1.14.1
-    repo: https://helm.cilium.io
     includeCRDs: true
