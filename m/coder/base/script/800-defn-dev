@@ -36,20 +36,23 @@ function main {
 
 	sudo mkdir -p /etc/systemd/network
 	pushd /etc/systemd/network
-	for a in 1; do
-		(
-			echo [NetDev]
-			echo Name=dummy$a
-			echo Kind=dummy
-		) | sudo tee dummy$a.netdev
-		(
-			echo [Match]
-			echo Name=dummy$a
-			echo
-			echo [Network]
-			echo Address=169.254.32.$a/32
-		) | sudo tee dummy$a.network
-	done
+
+	local a
+	a=1
+
+	(
+		echo "[NetDev]"
+		echo Name=dummy"$a"
+		echo Kind=dummy
+	) | sudo tee dummy"$a".netdev
+
+	(
+		echo "[Match]"
+		echo Name=dummy"$a"
+		echo
+		echo "[Network]"
+		echo Address=169.254.32."$a"/32
+	) | sudo tee dummy"$a".network
 }
 
 main "$@"
