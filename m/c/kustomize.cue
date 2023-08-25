@@ -1111,7 +1111,7 @@ kustomize: "emojivoto": #Kustomize & {
 		spec: {
 			ingressClassName: "traefik"
 			rules: [{
-				host: "emojivoto.\(cluster.domain_name)"
+				host: "emojivoto\(cluster.name_suffix)\(cluster.domain_name)"
 				http: paths: [{
 					path:     "/"
 					pathType: "Prefix"
