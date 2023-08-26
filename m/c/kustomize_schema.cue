@@ -37,7 +37,8 @@ kustomize: [NAME=string]: _name: NAME
 
 	bootstrap: [string]: #BootstrapConfig
 
-	vclusters:   [...string] | *[]
+	vclusters: [...string] | *[]
+	vcluster: {...}
 	name_suffix: string | *"."
 }
 

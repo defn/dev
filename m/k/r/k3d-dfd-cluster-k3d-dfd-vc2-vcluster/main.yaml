@@ -3,7 +3,7 @@ kind: Namespace
 metadata:
   annotations:
     linkerd.io/inject: disabled
-  name: k3d-dfd-vc0-vcluster
+  name: k3d-dfd-vc2-vcluster
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -14,7 +14,7 @@ metadata:
     heritage: Helm
     release: vcluster
   name: vc-vcluster
-  namespace: k3d-dfd-vc0-vcluster
+  namespace: k3d-dfd-vc2-vcluster
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -25,7 +25,7 @@ metadata:
     heritage: Helm
     release: vcluster
   name: vc-workload-vcluster
-  namespace: k3d-dfd-vc0-vcluster
+  namespace: k3d-dfd-vc2-vcluster
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -36,7 +36,7 @@ metadata:
     heritage: Helm
     release: vcluster
   name: vcluster
-  namespace: k3d-dfd-vc0-vcluster
+  namespace: k3d-dfd-vc2-vcluster
 rules:
 - apiGroups:
   - ""
@@ -126,7 +126,7 @@ metadata:
     chart: vcluster-0.15.7
     heritage: Helm
     release: vcluster
-  name: vc-vcluster-v-k3d-dfd-vc0-vcluster
+  name: vc-vcluster-v-k3d-dfd-vc2-vcluster
 rules:
 - apiGroups:
   - ""
@@ -185,7 +185,7 @@ metadata:
     heritage: Helm
     release: vcluster
   name: vcluster
-  namespace: k3d-dfd-vc0-vcluster
+  namespace: k3d-dfd-vc2-vcluster
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -193,7 +193,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: vc-vcluster
-  namespace: k3d-dfd-vc0-vcluster
+  namespace: k3d-dfd-vc2-vcluster
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -203,15 +203,15 @@ metadata:
     chart: vcluster-0.15.7
     heritage: Helm
     release: vcluster
-  name: vc-vcluster-v-k3d-dfd-vc0-vcluster
+  name: vc-vcluster-v-k3d-dfd-vc2-vcluster
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: vc-vcluster-v-k3d-dfd-vc0-vcluster
+  name: vc-vcluster-v-k3d-dfd-vc2-vcluster
 subjects:
 - kind: ServiceAccount
   name: vc-vcluster
-  namespace: k3d-dfd-vc0-vcluster
+  namespace: k3d-dfd-vc2-vcluster
 ---
 apiVersion: v1
 data:
@@ -280,7 +280,7 @@ data:
 kind: ConfigMap
 metadata:
   name: vcluster-coredns
-  namespace: k3d-dfd-vc0-vcluster
+  namespace: k3d-dfd-vc2-vcluster
 ---
 apiVersion: v1
 data:
@@ -293,7 +293,7 @@ metadata:
     heritage: Helm
     release: vcluster
   name: vcluster-init-manifests
-  namespace: k3d-dfd-vc0-vcluster
+  namespace: k3d-dfd-vc2-vcluster
 ---
 apiVersion: v1
 kind: Service
@@ -304,7 +304,7 @@ metadata:
     heritage: Helm
     release: vcluster
   name: vcluster
-  namespace: k3d-dfd-vc0-vcluster
+  namespace: k3d-dfd-vc2-vcluster
 spec:
   ports:
   - name: https
@@ -329,7 +329,7 @@ metadata:
     heritage: Helm
     release: vcluster
   name: vcluster-headless
-  namespace: k3d-dfd-vc0-vcluster
+  namespace: k3d-dfd-vc2-vcluster
 spec:
   clusterIP: None
   ports:
@@ -350,11 +350,11 @@ metadata:
     heritage: Helm
     release: vcluster
   name: vcluster-lb
-  namespace: k3d-dfd-vc0-vcluster
+  namespace: k3d-dfd-vc2-vcluster
 spec:
   ports:
   - name: https
-    port: 8443
+    port: 8445
     protocol: TCP
     targetPort: 8443
   selector:
@@ -371,7 +371,7 @@ metadata:
     heritage: Helm
     release: vcluster
   name: vcluster
-  namespace: k3d-dfd-vc0-vcluster
+  namespace: k3d-dfd-vc2-vcluster
 spec:
   replicas: 1
   selector:
@@ -402,7 +402,7 @@ spec:
             configMapKeyRef:
               key: cidr
               name: vc-cidr-vcluster
-        image: rancher/k3s:v1.25.12-k3s1
+        image: rancher/k3s:v1.27.4-k3s1
         name: vcluster
         resources:
           limits:
@@ -427,7 +427,7 @@ spec:
         - --sync=nodes
         - --sync=persistentvolumes
         - --sync=serviceaccounts
-        - --tls-san=vcluster.k3d-dfd-vc0-vcluster.svc.cluster.local
+        - --tls-san=vcluster.k3d-dfd-vc2-vcluster.svc.cluster.local
         env:
         - name: POD_IP
           valueFrom:

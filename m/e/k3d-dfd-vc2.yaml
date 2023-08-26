@@ -1,20 +1,19 @@
+# ManagedBy: cue
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "100"
-  name: k3d-dfd-vc1-emojivoto
   namespace: argocd
+  name: k3d-dfd-vc2
 spec:
-  destination:
-    name: k3d-dfd-vc1
   project: default
+  destination:
+    name: k3d-dfd-cluster
   source:
-    path: m/k/r/k3d-dfd-vc1-emojivoto
     repoURL: https://github.com/defn/dev
     targetRevision: main
+    path: m/k/r/k3d-dfd-vc2-env
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-    syncOptions: []

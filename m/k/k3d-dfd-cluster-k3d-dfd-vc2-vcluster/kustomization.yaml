@@ -8,16 +8,16 @@ patches:
       version: v1
       kind: Service
       name: vcluster-lb
-      namespace: k3d-dfd-vc0-vcluster
-namespace: k3d-dfd-vc0-vcluster
+      namespace: k3d-dfd-vc2-vcluster
+namespace: k3d-dfd-vc2-vcluster
 resources:
   - resource-namespace-vcluster.yaml
 helmCharts:
   - releaseName: vcluster
-    namespace: k3d-dfd-vc0-vcluster
+    namespace: k3d-dfd-vc2-vcluster
     valuesInline:
       vcluster:
-        image: rancher/k3s:v1.25.12-k3s1
+        image: rancher/k3s:v1.27.4-k3s1
       fallbackHostDns: true
       multiNamespaceMode:
         enabled: false
@@ -36,7 +36,7 @@ helmCharts:
           enabled: true
       syncer:
         extraArgs:
-          - --tls-san=vcluster.k3d-dfd-vc0-vcluster.svc.cluster.local
+          - --tls-san=vcluster.k3d-dfd-vc2-vcluster.svc.cluster.local
     name: vcluster
     version: 0.15.7
     repo: https://charts.loft.sh
