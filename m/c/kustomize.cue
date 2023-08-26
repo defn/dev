@@ -21,13 +21,13 @@ infra: {
 		}
 	}
 
-	parent: {
+	"\(infra_name)": {
 		cluster_name: "k3d-\(infra_name)"
 		vclusters: [...string]
 		bootstrap: [string]: #BootstrapConfig
 	}
 
-	"\(infra_name)":                  parent
+	parent:                           infra[infra_name]
 	"\(parent.cluster_name)-cluster": parent
 
 	manual:                          parent

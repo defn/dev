@@ -13,7 +13,7 @@ infra: {
 		cloudflare_email: "cloudflare@defn.us"
 	}
 
-	parent: bootstrap: {
+	dfd: bootstrap: {
 		// essentials
 		"kyverno": [2, "", "ServerSideApply=true"]
 		"cert-manager": [2, ""]
@@ -36,7 +36,7 @@ infra: {
 		"hello": [100, ""]
 	}
 
-	parent: vclusters: ["vc0", "vc1"]
+	dfd: vclusters: ["vc0", "vc1"]
 
 	vc0: bootstrap: {
 		// essentials
