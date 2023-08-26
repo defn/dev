@@ -1,6 +1,7 @@
 package c
 
 infra_name: "dfd"
+infra_vclusters: [0, 1, 2]
 
 infra: {
 	_base: {
@@ -39,28 +40,16 @@ infra: {
 		"hello": [100, ""]
 	}
 
+	vc0: vcluster: k3s_version: "rancher/k3s:v1.25.12-k3s1"
 	vc0: bootstrap: {
 		"emojivoto": [100, ""]
 	}
 
-	dfd: vclusters: ["vc0", "vc1", "vc2"]
+	vc1: vcluster: k3s_version: "rancher/k3s:v1.26.7-k3s1"
 	vc1: bootstrap: vc0.bootstrap
+
+	vc2: vcluster: k3s_version: "rancher/k3s:v1.27.4-k3s1"
 	vc2: bootstrap: vc0.bootstrap
-
-	vc0: vcluster: {
-		vc_index:    0
-		k3s_version: "rancher/k3s:v1.25.12-k3s1"
-	}
-
-	vc1: vcluster: {
-		vc_index:    1
-		k3s_version: "rancher/k3s:v1.26.7-k3s1"
-	}
-
-	vc2: vcluster: {
-		vc_index:    2
-		k3s_version: "rancher/k3s:v1.27.4-k3s1"
-	}
 }
 
 kustomize: "hello": #Kustomize & {

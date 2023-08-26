@@ -9,6 +9,7 @@ import (
 )
 
 infra_name: string
+infra_vclusters: [...int]
 
 infra: {
 	_base: {}
@@ -23,6 +24,12 @@ infra: {
 		}
 	}
 
+	parent: vclusters: [
+		for i in infra_vclusters {
+			"vc\(i)"
+		},
+	]
+
 	"\(infra_name)": {
 		cluster_name: "k3d-\(infra_name)"
 		bootstrap: [string]: #BootstrapConfig
@@ -30,7 +37,7 @@ infra: {
 	}
 
 	for i, v in parent.vclusters {
-		"\(v)": {}
+		"\(v)": vcluster: vc_index: i
 		"\(infra[v].cluster_name)": infra[v]
 	}
 
