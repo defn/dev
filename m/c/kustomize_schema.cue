@@ -35,6 +35,8 @@ kustomize: [NAME=string]: _name: NAME
 
 	secrets_region: string
 
+	bootstrap: [string]: #BootstrapConfig
+
 	vclusters:   [...string] | *[]
 	name_suffix: string | *"."
 }

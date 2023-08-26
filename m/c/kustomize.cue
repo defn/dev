@@ -25,7 +25,7 @@ env: (#Transform & {
 	transformer: #TransformK3D
 
 	inputs: "\(infra.parent.cluster_name)-cluster": {
-		bootstrap: cluster_bootstrap & {
+		bootstrap: infra.parent.bootstrap & {
 			for v in infra.parent.vclusters {
 				// bootstrapped
 				"cilium": [100, ""]
@@ -60,7 +60,7 @@ env: (#Transform & {
 			"\(infra[v].cluster_name)": {
 				instance_types: []
 				parent:    env["\(infra.parent.cluster_name)-cluster"]
-				bootstrap: vcluster_bootstrap
+				bootstrap: infra[v].bootstrap
 			}
 		}
 	}
