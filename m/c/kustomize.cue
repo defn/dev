@@ -23,20 +23,22 @@ infra: {
 
 	"\(infra_name)": {
 		cluster_name: "k3d-\(infra_name)"
-		vclusters: [...string]
 		bootstrap: [string]: #BootstrapConfig
+		vclusters: [...string]
 	}
-
-	parent:                           infra[infra_name]
-	"\(parent.cluster_name)-cluster": parent
-
-	manual:                          parent
-	"\(parent.cluster_name)-manual": manual
 
 	for i, v in parent.vclusters {
 		"\(v)": {}
 		"\(infra[v].cluster_name)": infra[v]
 	}
+
+	parent: infra[infra_name]
+
+	"\(parent.cluster_name)-cluster": parent
+
+	manual: parent
+
+	"\(parent.cluster_name)-manual": manual
 }
 
 env: (#Transform & {
