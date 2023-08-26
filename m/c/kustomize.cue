@@ -6,6 +6,80 @@ import (
 	rbac "k8s.io/api/rbac/v1"
 )
 
+infra_name: string
+
+env: (#Transform & {
+	transformer: #TransformK3D
+
+	inputs: "\(infra.parent.cluster_name)-manual": {
+		bootstrap: {
+			"cilium-bootstrap": [1, ""]
+			"cert-manager-crds": [1, ""]
+		}
+	}
+}).outputs
+
+kustomize: [string]: cluster: #Cluster | *infra[infra_name]
+
+env: (#Transform & {
+	transformer: #TransformK3D
+
+	inputs: "\(infra.parent.cluster_name)-cluster": {
+		bootstrap: cluster_bootstrap & {
+			for v in infra.parent.vclusters {
+				// bootstrapped
+				"cilium": [100, ""]
+				"argo-cd": [100, ""]
+
+				// vclusters
+				"\(infra[v].cluster_name)-vcluster": [100, ""]
+				"\(infra[v].cluster_name)-env": [101, ""]
+			}
+		}
+	}
+}).outputs
+
+kustomize: (#Transform & {
+	transformer: #TransformKustomizeVCluster
+
+	inputs: {
+		for i, v in infra.parent.vclusters {
+			"\(infra[v].cluster_name)-vcluster": {
+				vc_index:   i
+				vc_machine: infra[v].cluster_name
+			}
+		}
+	}
+}).outputs
+
+env: (#Transform & {
+	transformer: #TransformVCluster
+
+	inputs: {
+		for v in infra.parent.vclusters {
+			"\(infra[v].cluster_name)": {
+				instance_types: []
+				parent:    env["\(infra.parent.cluster_name)-cluster"]
+				bootstrap: vcluster_bootstrap
+			}
+		}
+	}
+}).outputs
+
+kustomize: "secrets": #Kustomize & {
+	cluster: #Cluster
+
+	resource: "cluster-secret-store": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ClusterSecretStore"
+		metadata: name: cluster.cluster_name
+		spec: provider: aws: {
+			service: "SecretsManager"
+			region:  cluster.secrets_region
+		}
+	}
+}
+
 kustomize: "argo-cd": #Kustomize & {
 	cluster: #Cluster
 

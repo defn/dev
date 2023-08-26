@@ -33,7 +33,9 @@ kustomize: [NAME=string]: _name: NAME
 
 	cluster_name: string
 
-	vclusters:   [...int] | *[]
+	secrets_region: string
+
+	vclusters:   [...string] | *[]
 	name_suffix: string | *"."
 }
 

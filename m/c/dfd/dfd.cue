@@ -6,8 +6,6 @@ import (
 
 infra_name: "dfd"
 
-kustomize: [string]: cluster: #Cluster | *infra[infra_name]
-
 infra: {
 	[NAME=string]: _base & {
 		if strings.HasPrefix(NAME, "vc") {
@@ -21,13 +19,14 @@ infra: {
 		domain_name: "dev.amanibhavam.defn.run"
 		domain_slug: "dev-amanibhavam-defn-run"
 
+		secrets_region:   "us-west-2"
 		issuer:           "zerossl-production"
 		cloudflare_email: "cloudflare@defn.us"
 	}
 
 	parent: {
 		cluster_name: "k3d-\(infra_name)"
-		vclusters: [0, 1]
+		vclusters: ["vc0", "vc1"]
 	}
 
 	"\(infra_name)":                  parent
@@ -36,118 +35,60 @@ infra: {
 	manual:                          parent
 	"\(parent.cluster_name)-manual": manual
 
-	for v in parent.vclusters {
-		"vc\(v)": {}
-		"\(parent.cluster_name)-vc\(v)": infra["vc\(v)"]
+	for i, v in parent.vclusters {
+		"\(v)": {}
+		"\(infra[v].cluster_name)": infra[v]
 	}
 }
 
-env: (#Transform & {
-	transformer: #TransformK3D
+cluster_bootstrap: {
+	// ~~~~~ Wave 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//
+	// essentials
+	"kyverno": [2, "", "ServerSideApply=true"]
+	"cert-manager": [2, ""]
 
-	inputs: "\(infra.parent.cluster_name)-manual": {
-		bootstrap: {
-			"cilium-bootstrap": [1, ""]
-			"cert-manager-crds": [1, ""]
-		}
-	}
-}).outputs
+	// ~~~~~ Wave 10 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//
+	// external secrets
+	"pod-identity": [10, ""]
+	"external-secrets": [11, ""]
+	"secrets": [12, ""]
 
-env: (#Transform & {
-	transformer: #TransformK3D
+	// ~~~~~ Wave 30 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//
+	// external dns, issuer
+	"external-dns": [30, ""]
+	"issuer": [30, ""]
 
-	inputs: "\(infra.parent.cluster_name)-cluster": {
-		bootstrap: {
-			// ~~~~~ Wave 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			//
-			// essentials
-			"kyverno": [2, "", "ServerSideApply=true"]
-			"cert-manager": [2, ""]
+	// ~~~~~ Wave 40 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//
+	// traefik, functions
+	"knative": [40, ""]
+	"kourier": [40, ""]
+	"traefik": [40, ""]
 
-			// ~~~~~ Wave 10 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			//
-			// external secrets
-			"pod-identity": [10, ""]
-			"external-secrets": [11, ""]
-			"secrets": [12, ""]
+	// ~~~~~ Wave 100+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//
+	// applications
+	"hello": [100, ""]
+}
 
-			// ~~~~~ Wave 30 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			//
-			// external dns, issuer
-			"external-dns": [30, ""]
-			"issuer": [30, ""]
+vcluster_bootstrap: {
+	// ~~~~~ Wave 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//
+	// essentials
+	"kyverno": [2, "", "ServerSideApply=true"]
 
-			// ~~~~~ Wave 40 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			//
-			// traefik, functions
-			"knative": [40, ""]
-			"kourier": [40, ""]
-			"traefik": [40, ""]
+	// ~~~~~ Wave 10 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//
+	// external secrets
+	"pod-identity": [10, ""]
 
-			// ~~~~~ Wave 100+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			//
-			// bootstrapped
-			"cilium": [100, ""]
-			"argo-cd": [100, ""]
-
-			// cluster.vclusters
-			for v in infra.parent.vclusters {
-				// vcluster
-				"\(infra.parent.cluster_name)-vc\(v)-vcluster": [100, ""]
-
-				// vcluster workload
-				"\(infra["vc\(v)"].cluster_name)-env": [101, ""]
-			}
-
-			// experimental
-			"hello": [100, ""]
-		}
-	}
-}).outputs
-
-env: (#Transform & {
-	transformer: #TransformVCluster
-
-	inputs: {
-		for v in infra.parent.vclusters {
-			"\(infra.parent.cluster_name)-vc\(v)": {
-				instance_types: []
-				parent: env["\(infra.parent.cluster_name)-cluster"]
-				bootstrap: {
-					"kyverno": [2, "", "ServerSideApply=true"]
-					"pod-identity": [10, ""]
-					"emojivoto": [100, "", "ServerSideApply=true"]
-				}
-			}
-		}
-	}
-}).outputs
-
-kustomize: (#Transform & {
-	transformer: #TransformKustomizeVCluster
-
-	inputs: {
-		for v in infra.parent.vclusters {
-			"\(infra["vc\(v)"].cluster_name)-vcluster": {
-				vc_index:   v
-				vc_machine: infra["vc\(v)"].cluster_name
-			}
-		}
-	}
-}).outputs
-
-kustomize: "secrets": #Kustomize & {
-	cluster: #Cluster
-
-	resource: "cluster-secret-store": {
-		apiVersion: "external-secrets.io/v1beta1"
-		kind:       "ClusterSecretStore"
-		metadata: name: cluster.cluster_name
-		spec: provider: aws: {
-			service: "SecretsManager"
-			region:  "us-west-2"
-		}
-	}
+	// ~~~~~ Wave 100+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//
+	// applications
+	"emojivoto": [100, "", "ServerSideApply=true"]
 }
 
 kustomize: "hello": #Kustomize & {
