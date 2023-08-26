@@ -73,4 +73,4 @@ za:
 warudo:
 	k3d cluster delete dfd || true
 	bin/make-k3d
-	cd coder/pod && $(MAKE) up
+	cd coder/pod && $(MAKE) down up
