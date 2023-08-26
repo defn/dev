@@ -33,6 +33,8 @@ function make_dfd {
 	local restarted
 	restarted=
 
+	k3d cluster delete dfd
+
 	if k3d cluster list dfd; then
 		# restart k3d
 		env KUBECONFIG=$HOME/.kube/config k3d cluster stop ${nme} || true
