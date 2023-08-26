@@ -6,6 +6,27 @@ helmCharts:
   - releaseName: bootstrap
     valuesInline:
       anyResources:
+        cert-manager-crds: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-dfd-manual-cert-manager-crds
+            annotations:
+              argocd.argoproj.io/sync-wave: "1"
+          spec:
+            project: default
+            destination:
+              name: k3d-dfd-manual
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/k/r/k3d-dfd-manual-cert-manager-crds
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
         linkerd-crds: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
@@ -43,27 +64,6 @@ helmCharts:
               repoURL: https://github.com/defn/dev
               targetRevision: main
               path: m/k/r/k3d-dfd-manual-cilium-bootstrap
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        cert-manager-crds: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: k3d-dfd-manual-cert-manager-crds
-            annotations:
-              argocd.argoproj.io/sync-wave: "1"
-          spec:
-            project: default
-            destination:
-              name: k3d-dfd-manual
-            source:
-              repoURL: https://github.com/defn/dev
-              targetRevision: main
-              path: m/k/r/k3d-dfd-manual-cert-manager-crds
             syncPolicy:
               automated:
                 prune: true
