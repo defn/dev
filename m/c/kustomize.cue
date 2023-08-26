@@ -18,6 +18,8 @@ infra: {
 			cluster_name: "\(parent.cluster_name)-\(NAME)"
 			name_suffix:  "-\(NAME)."
 			bootstrap: [string]: #BootstrapConfig
+
+			vcluster: vc_machine: cluster_name
 		}
 	}
 
@@ -77,10 +79,7 @@ kustomize: (#Transform & {
 
 	inputs: {
 		for i, v in infra.parent.vclusters {
-			"\(infra[v].cluster_name)-vcluster": {
-				vc_index:   i
-				vc_machine: infra[v].cluster_name
-			}
+			"\(infra[v].cluster_name)-vcluster": infra[v].vcluster
 		}
 	}
 }).outputs
@@ -711,7 +710,9 @@ kustomize: "cert-manager": #KustomizeHelm & {
 		vc_name:    string | *from.name
 		vc_machine: string | *from.name
 		vc_index:   int | *0
-		type:       string
+
+		type:        string
+		k3s_version: string
 	}
 
 	to: #KustomizeVCluster
@@ -731,7 +732,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 		repo:    "https://charts.loft.sh"
 
 		values: {
-			vcluster: image: "rancher/k3s:v1.26.7-k3s1"
+			vcluster: image: _in.k3s_version
 
 			fallbackHostDns: true
 			multiNamespaceMode: enabled: false

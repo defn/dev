@@ -11,17 +11,17 @@ helmCharts:
           kind: Application
           metadata:
             namespace: argocd
-            name: k3d-dfd-vc1-emojivoto
+            name: k3d-dfd-vc2-emojivoto
             annotations:
               argocd.argoproj.io/sync-wave: "100"
           spec:
             project: default
             destination:
-              name: k3d-dfd-vc1
+              name: k3d-dfd-vc2
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/r/k3d-dfd-vc1-emojivoto
+              path: m/k/r/k3d-dfd-vc2-emojivoto
             syncPolicy:
               automated:
                 prune: true

@@ -39,17 +39,28 @@ infra: {
 		"hello": [100, ""]
 	}
 
-	dfd: vclusters: ["vc0", "vc1"]
-
 	vc0: bootstrap: {
-		// essentials
-		"linkerd-crds": [2, ""]
-
-		// applications
-		"emojivoto": [100, "", "ServerSideApply=true"]
+		"emojivoto": [100, ""]
 	}
 
+	dfd: vclusters: ["vc0", "vc1", "vc2"]
 	vc1: bootstrap: vc0.bootstrap
+	vc2: bootstrap: vc0.bootstrap
+
+	vc0: vcluster: {
+		vc_index:    0
+		k3s_version: "rancher/k3s:v1.25.12-k3s1"
+	}
+
+	vc1: vcluster: {
+		vc_index:    1
+		k3s_version: "rancher/k3s:v1.26.7-k3s1"
+	}
+
+	vc2: vcluster: {
+		vc_index:    2
+		k3s_version: "rancher/k3s:v1.27.4-k3s1"
+	}
 }
 
 kustomize: "hello": #Kustomize & {

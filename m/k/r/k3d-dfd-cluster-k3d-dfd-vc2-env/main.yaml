@@ -3,14 +3,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: k3d-dfd-vc1-emojivoto
+  name: k3d-dfd-vc2-emojivoto
   namespace: argocd
 spec:
   destination:
-    name: k3d-dfd-vc1
+    name: k3d-dfd-vc2
   project: default
   source:
-    path: m/k/r/k3d-dfd-vc1-emojivoto
+    path: m/k/r/k3d-dfd-vc2-emojivoto
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
