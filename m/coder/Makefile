@@ -3,7 +3,7 @@ template := $(shell basename $(shell pwd))
 dir ?= /home/ubuntu/m
 name ?= pod
 
-pueckh:
+push:
 	tf fmt
 	tf docs
 	ls -d mod/*/ | runmany 'cd $$1 && tf fmt && tf docs'
@@ -27,3 +27,7 @@ up-inner:
 
 down:
 	coder delete --yes "$(name)" || true
+
+image:
+	cd base && $(MAKE) docker
+	cd pod && $(MAKE) build
