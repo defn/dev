@@ -66,3 +66,13 @@ data "coder_parameter" "nix_volume_size" {
     max = 100
   }
 }
+
+data "coder_parameter" "workdir" {
+  name         = "workdir"
+  display_name = "Working directory"
+  description  = "Working directory"
+  type         = "string"
+  default      = "/home/${local.username}/m"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
+  mutable      = true
+}

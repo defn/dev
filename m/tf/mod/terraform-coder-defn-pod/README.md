@@ -27,6 +27,7 @@ No modules.
 | [coder_parameter.memory](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter)            | data source |
 | [coder_parameter.nix_volume_size](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter)   | data source |
 | [coder_parameter.provider](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter)          | data source |
+| [coder_parameter.workdir](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter)           | data source |
 | [coder_workspace.me](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/workspace)                | data source |
 
 ## Inputs
