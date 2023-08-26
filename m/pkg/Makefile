@@ -2,6 +2,7 @@ SHELL := /bin/bash
 
 list:
 	$(MAKE) list_vendor_updates
+	@echo
 
 build:
 	true	
