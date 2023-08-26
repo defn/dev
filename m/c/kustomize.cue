@@ -70,12 +70,14 @@ env: (#Transform & {
 	inputs: "\(infra.parent.cluster_name)-cluster": {
 		bootstrap: infra.parent.bootstrap & {
 			for v in infra.parent.vclusters {
+				// vclusters
+				"\(infra[v].cluster_name)-vcluster": [30, ""]
+
 				// bootstrapped
 				"cilium": [100, ""]
 				"argo-cd": [100, ""]
 
-				// vclusters
-				"\(infra[v].cluster_name)-vcluster": [100, ""]
+				// vcluster workloads
 				"\(infra[v].cluster_name)-env": [101, ""]
 			}
 		}

@@ -170,7 +170,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "100"
+    argocd.argoproj.io/sync-wave: "30"
   name: k3d-dfd-cluster-k3d-dfd-vc0-vcluster
   namespace: argocd
 spec:
@@ -212,7 +212,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "100"
+    argocd.argoproj.io/sync-wave: "30"
   name: k3d-dfd-cluster-k3d-dfd-vc1-vcluster
   namespace: argocd
 spec:
@@ -254,7 +254,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "100"
+    argocd.argoproj.io/sync-wave: "30"
   name: k3d-dfd-cluster-k3d-dfd-vc2-vcluster
   namespace: argocd
 spec:
