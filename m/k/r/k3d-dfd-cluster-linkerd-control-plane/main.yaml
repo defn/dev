@@ -451,7 +451,7 @@ data:
       issuer:
         clockSkewAllowance: 20s
         issuanceLifetime: 24h0m0s
-        scheme: ""
+        scheme: kubernetes.io/tls
         tls:
           crtPEM: ""
       serviceAccountTokenProjection: true
@@ -1190,7 +1190,7 @@ spec:
         - -identity-trust-domain=cluster.local
         - -identity-issuance-lifetime=24h0m0s
         - -identity-clock-skew-allowance=20s
-        - -identity-scheme=
+        - -identity-scheme=kubernetes.io/tls
         - -enable-pprof=false
         env:
         - name: LINKERD_DISABLED
@@ -1752,7 +1752,7 @@ spec:
             seccompProfile:
               type: RuntimeDefault
           serviceAccountName: linkerd-heartbeat
-  schedule: 41 02 * * *
+  schedule: 10 03 * * *
   successfulJobsHistoryLimit: 0
 ---
 apiVersion: admissionregistration.k8s.io/v1
