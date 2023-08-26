@@ -70,3 +70,4 @@ bazel-ignore:
 int:
 	k3d cluster delete dfd || true
 	bin/make-k3d
+	cd coder/pod && $(MAKE) up
