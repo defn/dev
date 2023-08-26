@@ -25,7 +25,7 @@ infra: {
 		"secrets": [12, ""]
 
 		// service mesh
-		"linkerd-control-plane": [30, ""]
+		//"linkerd-control-plane": [30, ""]
 
 		// external dns, certs issuer
 		"external-dns": [30, ""]
