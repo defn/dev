@@ -74,5 +74,6 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "git.suggestSmartCommit": false,
-  "trunk.showWhatsNew": false
+  "trunk.showWhatsNew": false,
+  "security.workspace.trust.untrustedFiles": "open"
 }
