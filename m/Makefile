@@ -4,7 +4,7 @@ build:
 	../bin/b pass build //cmd/cli:cli
 	cp -f bazel-bin/cmd/cli/cli_/cli /tmp/cli
 
-image za:
+image:
 	cp -f bazel-bin/cmd/cli/cli_/cli cli.bin
 	docker build -t $(tag) .
 	rm -f cli.bin
@@ -67,7 +67,10 @@ bazel-ignore:
 	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1.direnv}' | sort >> .bazelignore
 	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1result}' | sort >> .bazelignore
 
-int warudo:
+za:
+	cd coder && $(MAKE) image
+
+warudo:
 	k3d cluster delete dfd || true
 	bin/make-k3d
 	cd coder/pod && $(MAKE) up
