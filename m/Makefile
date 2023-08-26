@@ -68,7 +68,7 @@ bazel-ignore:
 	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1result}' | sort >> .bazelignore
 
 za:
-	cd coder && $(MAKE) image reset
+	cd coder && $(MAKE) image
 
 warudo:
 	k3d cluster delete dfd || true
