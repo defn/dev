@@ -16,14 +16,17 @@ infra: {
 	dfd: bootstrap: {
 		// essentials
 		"kyverno": [2, "", "ServerSideApply=true"]
-		"cert-manager": [2, ""]
+		"linkerd-crds": [2, ""]
 
 		// external secrets
 		"pod-identity": [10, ""]
 		"external-secrets": [11, ""]
 		"secrets": [12, ""]
 
-		// external dns, issuer
+		// service mesh
+		"linkerd-control-plane": [30, ""]
+
+		// external dns, certs issuer
 		"external-dns": [30, ""]
 		"issuer": [30, ""]
 
@@ -40,10 +43,7 @@ infra: {
 
 	vc0: bootstrap: {
 		// essentials
-		"kyverno": [2, "", "ServerSideApply=true"]
-
-		// external secrets
-		"pod-identity": [10, ""]
+		"linkerd-crds": [2, ""]
 
 		// applications
 		"emojivoto": [100, "", "ServerSideApply=true"]

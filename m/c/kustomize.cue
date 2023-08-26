@@ -295,6 +295,55 @@ kustomize: "kyverno": #KustomizeHelm & {
 	}
 }
 
+// https://artifacthub.io/packages/helm/linkerd2/linkerd-crds
+kustomize: "linkerd-crds": #KustomizeHelm & {
+	cluster: #Cluster
+
+	namespace: "linkerd"
+
+	helm: {
+		release: "linkerd-crds"
+		name:    "linkerd-crds"
+		version: "1.8.0"
+		repo:    "https://helm.linkerd.io/stable"
+		values: {}
+	}
+
+	resource: "namespace-linkerd": core.#Namespace & {
+		apiVersion: "v1"
+		kind:       "Namespace"
+		metadata: {
+			name: "linkerd"
+		}
+	}
+}
+
+// https://artifacthub.io/packages/helm/linkerd2/linkerd-control-plane
+kustomize: "linkerd-control-plane": #KustomizeHelm & {
+	cluster: #Cluster
+
+	namespace: "linkerd"
+
+	helm: {
+		release: "linkerd-control-plane"
+		name:    "linkerd-control-plane"
+		version: "1.15.0"
+		repo:    "https://helm.linkerd.io/stable"
+		values: {
+			identity: externalCA: true
+			identity: issuer: scheme: ""
+
+			proxyInjector: externalSecret:    true
+			profileValidator: externalSecret: true
+			policyValidator: externalSecret:  true
+
+			proxyInjector: injectCaFrom:    "linkerd/proxy_injector"
+			profileValidator: injectCaFrom: "linkerd/profile_validator"
+			policyValidator: injectCaFrom:  "linkerd/policy_validator"
+		}
+	}
+}
+
 // https://artifacthub.io/packages/helm/bitnami/external-dns
 kustomize: "external-dns": #KustomizeHelm & {
 	cluster: #Cluster

@@ -28,12 +28,12 @@ helmCharts:
                 selfHeal: true
               syncOptions:
                 - ServerSideApply=true
-        cert-manager: |
+        linkerd-crds: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
           metadata:
             namespace: argocd
-            name: k3d-dfd-cluster-cert-manager
+            name: k3d-dfd-cluster-linkerd-crds
             annotations:
               argocd.argoproj.io/sync-wave: "2"
           spec:
@@ -43,7 +43,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/r/k3d-dfd-cluster-cert-manager
+              path: m/k/r/k3d-dfd-cluster-linkerd-crds
             syncPolicy:
               automated:
                 prune: true
@@ -107,6 +107,27 @@ helmCharts:
               repoURL: https://github.com/defn/dev
               targetRevision: main
               path: m/k/r/k3d-dfd-cluster-secrets
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        linkerd-control-plane: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-dfd-cluster-linkerd-control-plane
+            annotations:
+              argocd.argoproj.io/sync-wave: "30"
+          spec:
+            project: default
+            destination:
+              name: k3d-dfd-cluster
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/k/r/k3d-dfd-cluster-linkerd-control-plane
             syncPolicy:
               automated:
                 prune: true
