@@ -34,12 +34,14 @@ import (
 	}
 }
 
+#BootstrapConfig: [int, ...string]
+
 #TransformEnvToBootstrapMachine: {
 	from: {
 		#Input
 
 		machine_name: string
-		bootstrap: [string]: [int, ...string]
+		bootstrap: [string]: #BootstrapConfig
 	}
 
 	to: #BootstrapMachine
