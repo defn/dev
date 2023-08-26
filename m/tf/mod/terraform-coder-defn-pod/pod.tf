@@ -7,7 +7,7 @@ provider "kubernetes" {
   config_path = "~/.kube/config"
 }
 
-resource "kubernetes_stateful_set" "main" {
+resource "kubernetes_deployment" "main" {
   wait_for_rollout = false
 
   metadata {
@@ -30,8 +30,7 @@ resource "kubernetes_stateful_set" "main" {
   }
 
   spec {
-    service_name = "coder-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
-    replicas     = local.pod_count * data.coder_workspace.me.start_count
+    replicas = local.pod_count * data.coder_workspace.me.start_count
 
     selector {
       match_labels = {
