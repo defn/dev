@@ -14,34 +14,24 @@ infra: {
 	}
 
 	parent: bootstrap: {
-		// ~~~~~ Wave 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		//
 		// essentials
 		"kyverno": [2, "", "ServerSideApply=true"]
 		"cert-manager": [2, ""]
 
-		// ~~~~~ Wave 10 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		//
 		// external secrets
 		"pod-identity": [10, ""]
 		"external-secrets": [11, ""]
 		"secrets": [12, ""]
 
-		// ~~~~~ Wave 30 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		//
 		// external dns, issuer
 		"external-dns": [30, ""]
 		"issuer": [30, ""]
 
-		// ~~~~~ Wave 40 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		//
 		// traefik, functions
 		"knative": [40, ""]
 		"kourier": [40, ""]
 		"traefik": [40, ""]
 
-		// ~~~~~ Wave 100+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		//
 		// applications
 		"hello": [100, ""]
 	}
@@ -49,18 +39,12 @@ infra: {
 	parent: vclusters: ["vc0", "vc1"]
 
 	vc0: bootstrap: {
-		// ~~~~~ Wave 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		//
 		// essentials
 		"kyverno": [2, "", "ServerSideApply=true"]
 
-		// ~~~~~ Wave 10 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		//
 		// external secrets
 		"pod-identity": [10, ""]
 
-		// ~~~~~ Wave 100+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		//
 		// applications
 		"emojivoto": [100, "", "ServerSideApply=true"]
 	}
