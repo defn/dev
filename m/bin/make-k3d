@@ -15,7 +15,7 @@ function make_vc {
 		i="${v#vc}"
 		# wait until vcluster is ready
 		while true; do
-			if vcluster --context k3d-${infra_name} connect vcluster -n "k3d-${infra_name}-${v}-vcluster" --server=$(kubectl --context k3d-${infra_name} get nodes -o json | jq -r '.items[].metadata.annotations["k3s.io/internal-ip"]'):$((8443 + i)) --insecure --update-current=false --kube-config-context-name k3d-${infra_name}-"${v}" --kube-config "$HOME"/.kube/config.vc"${v}"; then
+			if vcluster --context k3d-${infra_name} connect vcluster -n "k3d-${infra_name}-${v}-vcluster" --server=$(kubectl --context k3d-${infra_name} get nodes -o json | jq -r '.items[].metadata.annotations["k3s.io/internal-ip"]'):$((8443 + i)) --insecure --update-current=false --kube-config-context-name k3d-${infra_name}-"${v}" --kube-config "$HOME"/.kube/config."${v}"; then
 				break
 			fi
 			sleep 5
@@ -23,7 +23,7 @@ function make_vc {
 
 		# add vcluster to argocd
 		while true; do
-			if env KUBECONFIG="$HOME/.kube/config.argocd:$HOME/.kube/config.vc${v}" argocd --kube-context k3d-${infra_name}-argocd cluster --core add "k3d-${infra_name}-${v}" --yes; then break; fi
+			if env KUBECONFIG="$HOME/.kube/config.argocd:$HOME/.kube/config.${v}" argocd --kube-context k3d-${infra_name}-argocd cluster --core add "k3d-${infra_name}-${v}" --yes; then break; fi
 			sleep 5
 		done
 	done
