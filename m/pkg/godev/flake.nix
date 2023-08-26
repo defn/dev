@@ -4,28 +4,29 @@
     cosign.url = github:defn/dev/pkg-cosign-2.1.1-3?dir=m/pkg/cosign;
     goreleaser.url = github:defn/dev/pkg-goreleaser-1.20.0-2?dir=m/pkg/goreleaser;
     # https://github.com/NixOS/nixpkgs/commits/release-23.05
-    latest.url = github:NixOS/nixpkgs?rev=3fe694c4156b84dac12627685c7ae592a71e2206;
-  };
+    # using the latest commit from main
+    latest.url = github:NixOS/nixpkgs?rev=cbc976a97c3372e1eec5db021db994b85e098d12
+      };
 
-  outputs = inputs: inputs.goreleaser.inputs.pkg.main rec {
-    src = ./.;
+    outputs = inputs: inputs.goreleaser.inputs.pkg.main rec {
+      src = ./.;
 
-    defaultPackage = ctx: ctx.wrap.nullBuilder {
-      propagatedBuildInputs =
-        with (import inputs.latest { system = ctx.system; }); [
-          gcc
-          gotools
-          go-tools
-          golangci-lint
-          go-outline
-          gopkgs
-          delve
-          gopls
-          go_1_20
-          inputs.buf.defaultPackage.${ctx.system}
-          inputs.cosign.defaultPackage.${ctx.system}
-          inputs.goreleaser.defaultPackage.${ctx.system}
-        ];
+      defaultPackage = ctx: ctx.wrap.nullBuilder {
+        propagatedBuildInputs =
+          with (import inputs.latest { system = ctx.system; }); [
+            gcc
+            gotools
+            go-tools
+            golangci-lint
+            go-outline
+            gopkgs
+            delve
+            gopls
+            go_1_20
+            inputs.buf.defaultPackage.${ctx.system}
+            inputs.cosign.defaultPackage.${ctx.system}
+            inputs.goreleaser.defaultPackage.${ctx.system}
+          ];
+      };
     };
-  };
-}
+  }
