@@ -4,9 +4,40 @@ import (
 	core "k8s.io/api/core/v1"
 	apps "k8s.io/api/apps/v1"
 	rbac "k8s.io/api/rbac/v1"
+
+	"strings"
 )
 
 infra_name: string
+
+infra: {
+	_base: {}
+
+	[NAME=string]: _base & {
+		if strings.HasPrefix(NAME, "vc") {
+			cluster_name: "\(parent.cluster_name)-\(NAME)"
+			name_suffix:  "-\(NAME)."
+			bootstrap: [string]: #BootstrapConfig
+		}
+	}
+
+	parent: {
+		cluster_name: "k3d-\(infra_name)"
+		vclusters: [...string]
+		bootstrap: [string]: #BootstrapConfig
+	}
+
+	"\(infra_name)":                  parent
+	"\(parent.cluster_name)-cluster": parent
+
+	manual:                          parent
+	"\(parent.cluster_name)-manual": manual
+
+	for i, v in parent.vclusters {
+		"\(v)": {}
+		"\(infra[v].cluster_name)": infra[v]
+	}
+}
 
 env: (#Transform & {
 	transformer: #TransformK3D
