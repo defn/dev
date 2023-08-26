@@ -6,12 +6,12 @@ helmCharts:
   - releaseName: bootstrap
     valuesInline:
       anyResources:
-        kyverno: |
+        linkerd-crds: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
           metadata:
             namespace: argocd
-            name: k3d-dfd-vc1-kyverno
+            name: k3d-dfd-vc1-linkerd-crds
             annotations:
               argocd.argoproj.io/sync-wave: "2"
           spec:
@@ -21,29 +21,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/r/k3d-dfd-vc1-kyverno
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions:
-                - ServerSideApply=true
-        pod-identity: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: k3d-dfd-vc1-pod-identity
-            annotations:
-              argocd.argoproj.io/sync-wave: "10"
-          spec:
-            project: default
-            destination:
-              name: k3d-dfd-vc1
-            source:
-              repoURL: https://github.com/defn/dev
-              targetRevision: main
-              path: m/k/r/k3d-dfd-vc1-pod-identity
+              path: m/k/r/k3d-dfd-vc1-linkerd-crds
             syncPolicy:
               automated:
                 prune: true

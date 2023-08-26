@@ -25,36 +25,14 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "2"
-  name: k3d-dfd-vc0-kyverno
+  name: k3d-dfd-vc0-linkerd-crds
   namespace: argocd
 spec:
   destination:
     name: k3d-dfd-vc0
   project: default
   source:
-    path: m/k/r/k3d-dfd-vc0-kyverno
-    repoURL: https://github.com/defn/dev
-    targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-    - ServerSideApply=true
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "10"
-  name: k3d-dfd-vc0-pod-identity
-  namespace: argocd
-spec:
-  destination:
-    name: k3d-dfd-vc0
-  project: default
-  source:
-    path: m/k/r/k3d-dfd-vc0-pod-identity
+    path: m/k/r/k3d-dfd-vc0-linkerd-crds
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
