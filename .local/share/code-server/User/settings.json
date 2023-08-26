@@ -26,7 +26,7 @@
   "terminal.integrated.env.linux": {
     "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
   },
-  "workbench.colorTheme": "Default Dark+",
+  "workbench.colorTheme": "Default Dark Modern",
   "workbench.editor.untitled.hint": "hidden",
   "workbench.startupEditor": "none",
   "go.survey.prompt": false,
