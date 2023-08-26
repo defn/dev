@@ -17,7 +17,13 @@ reset:
 	 earthly prune --reset
 
 up:
-	#coder delete --yes "$(name)" || true
-	#coder create --yes --template pod --parameter workdir=$(dir),provider=pod,docker_image=169.254.32.1:5000/dfd,cpu=1,memory=1,nix_volume_size=40 "$(name)"
-	set -x; while true; do if curl -sSL $$(cat /home/ubuntu/.config/coderv2/url)/api/v2/users/$$(coder list |tail -1 | awk '{print $$1}' | cut -d/ -f1)/workspace/$(name) -H "Coder-Session-Token: $$(cat /home/ubuntu/.config/coderv2/session)" | jq -r '.latest_build.resources[].agents[].apps[] | select(.display_name == "code-server") | .health' | grep healthy; then break; fi; sleep 1; done
-	open $$(curl -sSL $$(cat /home/ubuntu/.config/coderv2/url)/api/v2/debug/health -H "Coder-Session-Token: $$(cat /home/ubuntu/.config/coderv2/session)" | jq -r '.access_url.access_url' | sed "s#//#//cs--main--$(name)--$$(coder list |tail -1 | awk '{print $$1}' | cut -d/ -f1)--#")?folder=/home/ubuntu/m
+	@bash -c "time $(MAKE) up-inner"
+
+up-inner:
+	@coder create --yes --template pod --parameter workdir=$(dir),provider=pod,docker_image=169.254.32.1:5000/dfd,cpu=1,memory=1,nix_volume_size=40 "$(name)"
+	@echo
+	@while true; do if curl -sSL $$(cat /home/ubuntu/.config/coderv2/url)/api/v2/users/$$(coder list |tail -1 | awk '{print $$1}' | cut -d/ -f1)/workspace/$(name) -H "Coder-Session-Token: $$(cat /home/ubuntu/.config/coderv2/session)" | jq -r '.latest_build.resources[].agents[].apps[] | select(.display_name == "code-server") | .health' | grep healthy; then break; fi; date; sleep 5; done
+	@open "$$(curl -sSL $$(cat /home/ubuntu/.config/coderv2/url)/api/v2/debug/health -H "Coder-Session-Token: $$(cat /home/ubuntu/.config/coderv2/session)" | jq -r '.access_url.access_url' | sed "s#//#//cs--main--$(name)--$$(coder list |tail -1 | awk '{print $$1}' | cut -d/ -f1)--#")?folder=/home/ubuntu/m"
+
+down:
+	coder delete --yes "$(name)" || true
