@@ -18,6 +18,7 @@ infra: {
 		// essentials
 		"kyverno": [2, "", "ServerSideApply=true"]
 		"linkerd-crds": [2, ""]
+		"cert-manager": [2, ""]
 
 		// external secrets
 		"pod-identity": [10, ""]
