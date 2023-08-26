@@ -22,7 +22,7 @@
           gopkgs
           delve
           gopls
-          go_1_20
+          go_1_21
           inputs.buf.defaultPackage.${ctx.system}
           inputs.cosign.defaultPackage.${ctx.system}
           inputs.goreleaser.defaultPackage.${ctx.system}
