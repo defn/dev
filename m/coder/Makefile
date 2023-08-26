@@ -29,5 +29,6 @@ down:
 	coder delete --yes "$(name)" || true
 
 image:
-	cd base && $(MAKE) docker
+	cd base && $(MAKE) build
+	cd k3d && $(MAKE) build
 	cd pod && $(MAKE) build

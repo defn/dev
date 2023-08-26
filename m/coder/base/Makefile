@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
 build:
-	$(MAKE) aws
+	$(MAKE) docker
 
 aws:
 	packer init $@.pkr.hcl
