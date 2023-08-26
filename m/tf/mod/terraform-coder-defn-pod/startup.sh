@@ -5,6 +5,8 @@ function main {
 
 	set -ex
 
+	setsid code-server --auth none --port 13337 1>>/tmp/stdout.log 2>>/tmp/stderr.log &
+
 	sudo chmod g-s /home/ubuntu
 
 	sudo install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
@@ -13,8 +15,7 @@ function main {
 	ssh -o StrictHostKeyChecking=no git@github.com true || true
 	git pull
 
-	setsid code-server --auth none --port 13337 &
+	date
 }
 
 time main "$@"
-uptime
