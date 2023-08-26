@@ -1,35 +1,8 @@
 package c
 
-import (
-	"strings"
-)
-
 infra_name: "dfd"
 
 infra: {
-	[NAME=string]: _base & {
-		if strings.HasPrefix(NAME, "vc") {
-			cluster_name: "\(parent.cluster_name)-\(NAME)"
-			name_suffix:  "-\(NAME)."
-			bootstrap: {
-				// ~~~~~ Wave 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-				//
-				// essentials
-				"kyverno": [2, "", "ServerSideApply=true"]
-
-				// ~~~~~ Wave 10 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-				//
-				// external secrets
-				"pod-identity": [10, ""]
-
-				// ~~~~~ Wave 100+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-				//
-				// applications
-				"emojivoto": [100, "", "ServerSideApply=true"]
-			}
-		}
-	}
-
 	_base: {
 		domain_zone: "defn.run"
 		domain_name: "dev.amanibhavam.defn.run"
@@ -40,53 +13,59 @@ infra: {
 		cloudflare_email: "cloudflare@defn.us"
 	}
 
-	parent: {
-		cluster_name: "k3d-\(infra_name)"
-		vclusters: ["vc0", "vc1"]
-		bootstrap: {
-			// ~~~~~ Wave 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			//
-			// essentials
-			"kyverno": [2, "", "ServerSideApply=true"]
-			"cert-manager": [2, ""]
+	parent: bootstrap: {
+		// ~~~~~ Wave 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		//
+		// essentials
+		"kyverno": [2, "", "ServerSideApply=true"]
+		"cert-manager": [2, ""]
 
-			// ~~~~~ Wave 10 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			//
-			// external secrets
-			"pod-identity": [10, ""]
-			"external-secrets": [11, ""]
-			"secrets": [12, ""]
+		// ~~~~~ Wave 10 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		//
+		// external secrets
+		"pod-identity": [10, ""]
+		"external-secrets": [11, ""]
+		"secrets": [12, ""]
 
-			// ~~~~~ Wave 30 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			//
-			// external dns, issuer
-			"external-dns": [30, ""]
-			"issuer": [30, ""]
+		// ~~~~~ Wave 30 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		//
+		// external dns, issuer
+		"external-dns": [30, ""]
+		"issuer": [30, ""]
 
-			// ~~~~~ Wave 40 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			//
-			// traefik, functions
-			"knative": [40, ""]
-			"kourier": [40, ""]
-			"traefik": [40, ""]
+		// ~~~~~ Wave 40 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		//
+		// traefik, functions
+		"knative": [40, ""]
+		"kourier": [40, ""]
+		"traefik": [40, ""]
 
-			// ~~~~~ Wave 100+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			//
-			// applications
-			"hello": [100, ""]
-		}
+		// ~~~~~ Wave 100+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		//
+		// applications
+		"hello": [100, ""]
 	}
 
-	"\(infra_name)":                  parent
-	"\(parent.cluster_name)-cluster": parent
+	parent: vclusters: ["vc0", "vc1"]
 
-	manual:                          parent
-	"\(parent.cluster_name)-manual": manual
+	vc0: bootstrap: {
+		// ~~~~~ Wave 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		//
+		// essentials
+		"kyverno": [2, "", "ServerSideApply=true"]
 
-	for i, v in parent.vclusters {
-		"\(v)": {}
-		"\(infra[v].cluster_name)": infra[v]
+		// ~~~~~ Wave 10 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		//
+		// external secrets
+		"pod-identity": [10, ""]
+
+		// ~~~~~ Wave 100+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		//
+		// applications
+		"emojivoto": [100, "", "ServerSideApply=true"]
 	}
+
+	vc1: bootstrap: vc0.bootstrap
 }
 
 kustomize: "hello": #Kustomize & {
