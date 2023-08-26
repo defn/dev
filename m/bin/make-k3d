@@ -58,7 +58,7 @@ function make_dfd {
 		kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-manual-cert-manager-crds/main.yaml
 		kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-manual-cilium-bootstrap/main.yaml
 		kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-manual-linkerd-crds/main.yaml
-		kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-argo-cd/main.yaml
+		kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-cluster-argo-cd/main.yaml
 
 		# dedicated kubectl config for argocd
 		cp $HOME/.kube/config $HOME/.kube/config.argocd
