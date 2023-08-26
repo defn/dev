@@ -314,6 +314,15 @@ kustomize: "linkerd-crds": #KustomizeHelm & {
 		kind:       "Namespace"
 		metadata: {
 			name: "linkerd"
+			labels: {
+				"linkerd.io/is-control-plane":          "true"
+				"linkerd.io/control-plane-ns":          "linkerd"
+				"config.linkerd.io/admission-webhooks": "disabled"
+			}
+
+			annotations: {
+				"linkerd.io/inject": "disabled"
+			}
 		}
 	}
 }
@@ -331,7 +340,7 @@ kustomize: "linkerd-control-plane": #KustomizeHelm & {
 		repo:    "https://helm.linkerd.io/stable"
 		values: {
 			identity: externalCA: true
-			identity: issuer: scheme: ""
+			identity: issuer: scheme: "kubernetes.io/tls"
 
 			proxyInjector: externalSecret:    true
 			profileValidator: externalSecret: true

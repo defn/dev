@@ -13,7 +13,7 @@ helmCharts:
       identity:
         externalCA: true
         issuer:
-          scheme: ""
+          scheme: kubernetes.io/tls
       proxyInjector:
         externalSecret: true
         injectCaFrom: linkerd/proxy_injector
