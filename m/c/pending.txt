@@ -10,5 +10,7 @@ https://artifacthub.io/packages/helm/external-secrets-operator/external-secrets/
 https://artifacthub.io/packages/helm/jkroepke/amazon-eks-pod-identity-webhook/1.2.0
 https://artifacthub.io/packages/helm/kedacore/keda/2.11.2
 https://artifacthub.io/packages/helm/kyverno/kyverno/3.0.5
+https://artifacthub.io/packages/helm/linkerd2/linkerd-control-plane/1.15.0
+https://artifacthub.io/packages/helm/linkerd2/linkerd-crds/1.8.0
 https://artifacthub.io/packages/helm/loft/vcluster/0.15.7
 https://artifacthub.io/packages/helm/traefik/traefik/24.0.0
