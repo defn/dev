@@ -1,6 +1,0 @@
-#ManagedBy: cue
-
-metadata:
-  name: k3d-dfd-vc2-vcluster
-kind: Namespace
-apiVersion: v1

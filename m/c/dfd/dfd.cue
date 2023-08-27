@@ -1,7 +1,7 @@
 package c
 
 infra_name: "dfd"
-infra_vclusters: [0, 1, 2]
+infra_vclusters: [0, 1]
 
 infra: {
 	_base: {
