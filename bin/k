@@ -5,7 +5,18 @@ function main {
 		local config
 		config="$1"
 		shift
-		env KUBECONFIG="${HOME}/.kube/config.${config}" kubectl "$@"
+
+		export KUBECONFIG="${HOME}/.kube/config.${config}"
+		
+		case "${1:-}" in
+			x)
+				shift
+				exec "$@"
+				;;
+			*)
+				kubectl "$@"
+				;;
+		esac
 	else
 		exec kubectl "$@"
 	fi
