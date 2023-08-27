@@ -1,14 +1,23 @@
 step certificate create root.linkerd.cluster.local ca.crt ca.key --profile root-ca --no-password --insecure
 for a in 0 1 2; do step certificate create identity.linkerd.cluster.local vc$a.crt vc$a.key --profile intermediate-ca --not-after 8760h --no-password --insecure --ca ca.crt --ca-key ca.key; done
+step certificate create identity.linkerd.cluster.local cluster.crt cluster.key --profile intermediate-ca --not-after 8760h --no-password --insecure --ca ca.crt --ca-key ca.key
 
 for a in 0 1 2; do k vc$a x linkerd install --crds | k vc$a apply -f -; done
 for a in 0 1 2; do k vc$a x linkerd install --identity-trust-anchors-file ca.crt --identity-issuer-certificate-file vc$a.crt --identity-issuer-key-file vc$a.key | k vc$a apply -f -; done
 for a in 0 1 2; do k vc$a x linkerd check; done
 
+linkerd install --crds | k apply -f -
+linkerd install --identity-trust-anchors-file ca.crt --identity-issuer-certificate-file cluster.crt --identity-issuer-key-file cluster.key | k apply -f -
+linkerd check
+
 for a in 0 1 2; do k vc$a x linkerd --context k3d-dfd-vc$a viz install | k vc$a apply -f -; done
+linkerd --context k3d-dfd viz install | k apply -f -; done
 
 for a in 0 1 2; do k vc$a x linkerd multicluster install --gateway=false | k vc$a apply -f -; done
 for a in 0 1 2; do k vc$a x linkerd multicluster check; done
+
+linkerd multicluster install --gateway=false | k apply -f -
+linkerd multicluster check
   
 k vc0 x linkerd --context=k3d-dfd-vc0 multicluster link --cluster-name k3d-dfd-vc0 --gateway=false | k vc1 apply -f -
 k vc0 x linkerd --context=k3d-dfd-vc0 multicluster link --cluster-name k3d-dfd-vc0 --gateway=false | k vc2 apply -f -
@@ -16,6 +25,10 @@ k vc1 x linkerd --context=k3d-dfd-vc1 multicluster link --cluster-name k3d-dfd-v
 k vc1 x linkerd --context=k3d-dfd-vc1 multicluster link --cluster-name k3d-dfd-vc1 --gateway=false | k vc2 apply -f -
 k vc2 x linkerd --context=k3d-dfd-vc2 multicluster link --cluster-name k3d-dfd-vc1 --gateway=false | k vc0 apply -f -
 k vc2 x linkerd --context=k3d-dfd-vc2 multicluster link --cluster-name k3d-dfd-vc1 --gateway=false | k vc1 apply -f -
+
+k vc0 x linkerd --context=k3d-dfd-vc0 multicluster link --cluster-name k3d-dfd-vc0 --gateway=false | k apply -f -
+k vc1 x linkerd --context=k3d-dfd-vc1 multicluster link --cluster-name k3d-dfd-vc1 --gateway=false | k apply -f -
+k vc2 x linkerd --context=k3d-dfd-vc2 multicluster link --cluster-name k3d-dfd-vc2 --gateway=false | k apply -f -
 
 k vc0 create ns mc-demo
 cat slow.yaml | k vc0 x linkerd --context k3d-dfd-vc0 inject - | k vc0 apply -f -
