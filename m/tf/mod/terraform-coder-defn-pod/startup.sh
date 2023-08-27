@@ -20,7 +20,7 @@ function main {
 		git remote rm origin
 		git remote add origin git@github.com:defn/dev
 		git fetch origin
-		git branch --set-upstream-to=origin/main main
+		git branch --set-upstream-to=origin/${source_rev} ${source_rev}
 		;;
 	esac
 
