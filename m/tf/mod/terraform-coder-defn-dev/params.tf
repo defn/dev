@@ -2,7 +2,6 @@ locals {
   fly_count        = data.coder_parameter.provider.value == "fly" ? 1 : 0
   aws_ec2_count    = data.coder_parameter.provider.value == "aws-ec2" ? 1 : 0
   do_droplet_count = data.coder_parameter.provider.value == "do-droplet" ? 1 : 0
-  docker_count     = data.coder_parameter.provider.value == "docker" ? 1 : 0
 }
 
 data "coder_parameter" "provider" {
@@ -26,11 +25,6 @@ data "coder_parameter" "provider" {
   option {
     name  = "Fly"
     value = "fly"
-  }
-
-  option {
-    name  = "Docker"
-    value = "docker"
   }
 }
 

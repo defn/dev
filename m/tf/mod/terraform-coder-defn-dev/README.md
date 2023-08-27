@@ -10,7 +10,6 @@ No requirements.
 | <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
 | <a name="provider_coder"></a> [coder](#provider\_coder) | n/a |
 | <a name="provider_digitalocean"></a> [digitalocean](#provider\_digitalocean) | n/a |
-| <a name="provider_docker"></a> [docker](#provider\_docker) | n/a |
 | <a name="provider_fly"></a> [fly](#provider\_fly) | n/a |
 
 ## Modules
@@ -33,8 +32,6 @@ No modules.
 | [coder_app.tilt](https://registry.terraform.io/providers/coder/coder/latest/docs/resources/app) | resource |
 | [digitalocean_droplet.workspace](https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/droplet) | resource |
 | [digitalocean_volume.nix_volume](https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/volume) | resource |
-| [docker_container.workspace](https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/resources/container) | resource |
-| [docker_image.main](https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/resources/image) | resource |
 | [fly_app.workspace](https://registry.terraform.io/providers/fly-apps/fly/latest/docs/resources/app) | resource |
 | [fly_machine.workspace](https://registry.terraform.io/providers/fly-apps/fly/latest/docs/resources/machine) | resource |
 | [fly_volume.nix_volume](https://registry.terraform.io/providers/fly-apps/fly/latest/docs/resources/volume) | resource |
