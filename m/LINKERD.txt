@@ -33,6 +33,9 @@ k vc2 x linkerd --context=k3d-dfd-vc2 multicluster link --cluster-name k3d-dfd-v
 k vc0 create ns mc-demo
 cat slow.yaml | k vc0 x linkerd --context k3d-dfd-vc0 inject - | k vc0 apply -f -
 
+k create ns mc-demo
+cat slow.yaml | linkerd --context k3d-dfd inject - | k apply -f -
+
 k vc1 create ns mc-demo
 cat bb.yaml | k vc1 x linkerd --context k3d-dfd-vc1 inject - | k vc1 apply -f -
 k vc1 -n mc-demo label svc/bb mirror.linkerd.io/exported=remote-discovery
