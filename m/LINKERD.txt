@@ -7,6 +7,10 @@
   592  k vc1 x linkerd check
   593  k vc2 x linkerd check
 
+  654  k vc0 x linkerd --context k3d-dfd-vc1 viz install | k vc0 apply -f -
+  653  k vc1 x linkerd --context k3d-dfd-vc1 viz install | k vc1 apply -f -
+  656  k vc2 x linkerd --context k3d-dfd-vc2 viz install | k vc2 apply -f -
+
   601  for a in 0 1 2; do k vc$a x linkerd multicluster install --gateway=false | k vc$a apply -f -; done
   607  k vc0 x linkerd multicluster check
   607  k vc1 x linkerd multicluster check
@@ -14,18 +18,16 @@
   
   603  k vc0 x linkerd --context=k3d-dfd-vc0 multicluster link --cluster-name k3d-dfd-vc0 --gateway=false | k vc1 apply -f -
   604  k vc0 x linkerd --context=k3d-dfd-vc0 multicluster link --cluster-name k3d-dfd-vc0 --gateway=false | k vc2 apply -f -
+  606  k vc1 x linkerd --context=k3d-dfd-vc1 multicluster link --cluster-name k3d-dfd-vc1 --gateway=false | k vc0 apply -f -
   606  k vc1 x linkerd --context=k3d-dfd-vc1 multicluster link --cluster-name k3d-dfd-vc1 --gateway=false | k vc2 apply -f -
+  606  k vc2 x linkerd --context=k3d-dfd-vc1 multicluster link --cluster-name k3d-dfd-vc1 --gateway=false | k vc0 apply -f -
+  606  k vc2 x linkerd --context=k3d-dfd-vc1 multicluster link --cluster-name k3d-dfd-vc1 --gateway=false | k vc1 apply -f -
+
   640  k vc0 create ns mc-demo
-  641  k vc0 -n mc-demo label svc/bb mirror.linkerd.io/exported=remote-discovery
   642  cat slow.yaml | k vc0 x linkerd --context k3d-dfd-vc0 inject - | k vc0 apply -f -
 
+  640  k vc1 create ns mc-demo
   648  cat bb.yaml | k vc1 x linkerd --context k3d-dfd-vc1 inject - | k vc1 apply -f -
   649  k vc1 -n mc-demo label svc/bb mirror.linkerd.io/exported=remote-discovery
 
-  654  k vc0 x linkerd --context k3d-dfd-vc1 viz install | k vc0 apply -f -
-  653  k vc1 x linkerd --context k3d-dfd-vc1 viz install | k vc1 apply -f -
-  656  k vc2 x linkerd --context k3d-dfd-vc2 viz install | k vc2 apply -f -
-
-  680  k vc1 x linkerd --context k3d-dfd-vc1  multicluster link --cluster-name=k3d-dfd-vc1 --gateway=false | k vc0 apply -f -
-  
   700  k vc1 x linkerd --context k3d-dfd-vc1  viz stat -n mc-demo deploy
