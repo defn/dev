@@ -10,7 +10,7 @@ resource "coder_agent" "main" {
   arch                   = "amd64"
   os                     = "linux"
   startup_script_timeout = 180
-  startup_script         = file("${path.module}/startup.sh")
+  startup_script         = "workdir=${data.coder_parameter.workdir.value}}; source_rev=${data.coder_parameter.source_rev.value}}; ${file("${path.module}/startup.sh")}"
 
   env = {
     GIT_AUTHOR_NAME     = data.coder_workspace.me.owner
