@@ -1,0 +1,17 @@
+  583  step certificate create root.linkerd.cluster.local ca.crt ca.key --profile root-ca --no-password --insecure
+  584  for a in 0 1 2; do step certificate create identity.linkerd.cluster.local vc$a.crt cc$a.key --profile intermediate-ca --not-after 8760h --no-password --insecure --ca ca.crt --ca-key ca.key; done
+
+  585  for a in 0 1 2; do k vc$a x linkerd install --crds | k vc$a apply -f -; done
+  590  for a in 0 1 2; do k vc$a x linkerd install --identity-trust-anchors-file ca.crt --identity-issuer-certificate-file vc$a.crt --identity-issuer-key-file vc$a.key | k vc$a apply -f -; done
+  591  k vc0 x linkerd check
+  592  k vc1 x linkerd check
+  593  k vc2 x linkerd check
+
+  601  for a in 0 1 2; do k vc$a x linkerd multicluster install --gateway=false | k vc$a apply -f -; done
+  607  k vc0 x linkerd multicluster check
+  607  k vc1 x linkerd multicluster check
+  607  k vc2 x linkerd multicluster check
+  
+  603  k vc0 x linkerd --context=k3d-dfd-vc0 multicluster link --cluster-name k3d-dfd-vc0 --gateway=false | k vc1 apply -f -
+  604  k vc0 x linkerd --context=k3d-dfd-vc0 multicluster link --cluster-name k3d-dfd-vc0 --gateway=false | k vc2 apply -f -
+  606  k vc1 x linkerd --context=k3d-dfd-vc1 multicluster link --cluster-name k3d-dfd-vc1 --gateway=false | k vc2 apply -f -
