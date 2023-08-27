@@ -15,6 +15,12 @@ function main {
 	sudo install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
 	sudo install -d -m 0700 -o ubuntu -g ubuntu /nix /nix
 
+	git fetch
+	if [[ -n "${source_rev}" ]]; then
+		git checkout "${source_rev}"
+	fi
+	git pull
+
 	case "$(git remote get-url origin)" in
 	http*)
 		git remote rm origin
@@ -23,12 +29,6 @@ function main {
 		git branch --set-upstream-to=origin/${source_rev} ${source_rev}
 		;;
 	esac
-
-	if [[ -n "${source_rev}" ]]; then
-		git checkout "${source_rev}"
-	fi
-
-	git pull
 
 	if [[ -n "${workdir}" ]]; then
 		cd "${workdir}"
