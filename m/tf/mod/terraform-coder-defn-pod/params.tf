@@ -76,3 +76,13 @@ data "coder_parameter" "workdir" {
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
   mutable      = true
 }
+
+data "coder_parameter" "source_rev" {
+  name         = "source_rev"
+  display_name = "Source revision"
+  description  = "Souce revision"
+  type         = "string"
+  default      = "main"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
+  mutable      = true
+}

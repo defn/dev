@@ -43,6 +43,9 @@ resource "kubernetes_deployment" "main" {
         labels = {
           "app.kubernetes.io/name" = "coder-workspace"
         }
+        annotations = {
+          "linkerd.io/inject" = "enabled"
+        }
       }
       spec {
         security_context {
@@ -64,7 +67,7 @@ resource "kubernetes_deployment" "main" {
           }
           resources {
             requests = {
-              "cpu"    = "${data.coder_parameter.cpu.value}"
+              //"cpu"    = "${data.coder_parameter.cpu.value}"
               "memory" = "${data.coder_parameter.memory.value}Gi"
             }
           }

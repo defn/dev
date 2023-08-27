@@ -24,7 +24,39 @@ function main {
 		;;
 	esac
 
-	git pull || true
+	local workdir
+	local source_rev
+
+	case "$#" in
+		1)
+			workdir="$1"
+			shift
+			;;
+		2)
+			workdir="$1"
+			shift
+			source_rev="$1"
+			shift
+			;;
+		0)
+			workdir=
+			source_rev=
+			;;
+		*)
+			workdir=
+			source_rev=
+			;;
+	esac
+
+	if [[ -n "${source_rev}" ]]; then
+		git checkout "${source_rev}"
+	fi
+
+	git pull
+
+	if [[ -n "${workdir}" ]]; then
+		cd "${workdir}"
+	fi
 
 	date
 }
