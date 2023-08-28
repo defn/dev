@@ -71,3 +71,5 @@ uptime
 cd ~/m
 ~/bin/nix/tilt up &
 bin/make-k3d || true
+
+exit 0
