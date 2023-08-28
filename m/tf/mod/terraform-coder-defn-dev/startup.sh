@@ -12,6 +12,8 @@ exec >>/tmp/dfd-startup.log 2>&1
 #sudo mkswap /mnt/swap
 #sudo swapon /mnt/swap || true
 
+sudo sysctl -w fs.inotify.max_user_instances=10000
+
 if [[ "$(lsblk /dev/nvme0n1p1 | tail -1 | awk '{print $NF}')" == 1 ]]; then
 	sudo growpart /dev/nvme0n1 1
 	sudo resize2fs /dev/nvme0n1p1
