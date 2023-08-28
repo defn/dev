@@ -34,8 +34,8 @@ def go_deps():
     go_repository(
         name = "com_github_aws_jsii_runtime_go",
         importpath = "github.com/aws/jsii-runtime-go",
-        sum = "h1:C8BMeDgDz4IcDvgKFPMDt2OUGsTiANVu/YZGtwUoJqE=",
-        version = "v1.87.0",
+        sum = "h1:1qJ9Ane+oxTt1c3xkpDE5YIv53MzKDKYcAr70lAxT/Q=",
+        version = "v1.88.0",
     )
     go_repository(
         name = "com_github_aymanbagabas_go_osc52_v2",
@@ -65,8 +65,8 @@ def go_deps():
     go_repository(
         name = "com_github_cdktf_cdktf_provider_aws_go_aws_v16",
         importpath = "github.com/cdktf/cdktf-provider-aws-go/aws/v16",
-        sum = "h1:/ZR4JL25R63N87H9YMakv4q+PMm6Ka0bPg66gRhVGXo=",
-        version = "v16.0.7",
+        sum = "h1:7KeOfdxXDXAEtZnn4TnCTqWmcPe4pP5+jYf3XHWKpFQ=",
+        version = "v16.0.9",
     )
 
     go_repository(
@@ -96,8 +96,8 @@ def go_deps():
     go_repository(
         name = "com_github_charmbracelet_lipgloss",
         importpath = "github.com/charmbracelet/lipgloss",
-        sum = "h1:17WMwi7N1b1rVWOjMT+rCh7sQkvDU75B2hbZpc5Kc1E=",
-        version = "v0.7.1",
+        sum = "h1:IS00fk4XAHcf8uZKc3eHeMUTCxUH6NkaTrdyCQk84RU=",
+        version = "v0.8.0",
     )
     go_repository(
         name = "com_github_chenzhuoyu_base64x",
@@ -272,8 +272,8 @@ def go_deps():
     go_repository(
         name = "com_github_go_playground_validator_v10",
         importpath = "github.com/go-playground/validator/v10",
-        sum = "h1:nDU5XeOKtB3GEa+uB7GNYwhVKsgjAR7VgKoNB6ryXfw=",
-        version = "v10.15.0",
+        sum = "h1:BSe8uhN+xQ4r5guV/ywQI4gO59C2raYcGffYWZEjZzM=",
+        version = "v10.15.1",
     )
     go_repository(
         name = "com_github_go_quicktest_qt",
@@ -375,8 +375,8 @@ def go_deps():
     go_repository(
         name = "com_github_google_uuid",
         importpath = "github.com/google/uuid",
-        sum = "h1:t6JiXgmwXMjEs8VusXIJk2BXHsn+wx8BZdTaoZ5fu7I=",
-        version = "v1.3.0",
+        sum = "h1:KjJaJ9iWZ3jOFZIf1Lqf4laDRCasjl0BCmnEGxkdLb4=",
+        version = "v1.3.1",
     )
     go_repository(
         name = "com_github_googleapis_enterprise_certificate_proxy",
@@ -447,8 +447,8 @@ def go_deps():
     go_repository(
         name = "com_github_hashicorp_terraform_cdk_go_cdktf",
         importpath = "github.com/hashicorp/terraform-cdk-go/cdktf",
-        sum = "h1:VtehUlxej6l1TV9NRjO5jHlikMfV39Qj6bTsR4ps5do=",
-        version = "v0.17.3",
+        sum = "h1:3fK+YbYQF8s06Oe45fOFarCg3P4rsdIOoNh68p7fVAg=",
+        version = "v0.18.0",
     )
     go_repository(
         name = "com_github_ianlancetaylor_demangle",
@@ -780,8 +780,8 @@ def go_deps():
     go_repository(
         name = "com_github_yuin_goldmark",
         importpath = "github.com/yuin/goldmark",
-        sum = "h1:IJznPe8wOzfIKETmMkd06F8nXkmlhaHqFRM9l1hAGsU=",
-        version = "v1.5.5",
+        sum = "h1:COmQAWTCcGetChm3Ig7G/t8AFAN00t+o8Mt4cf7JpwA=",
+        version = "v1.5.6",
     )
     go_repository(
         name = "com_google_cloud_go",

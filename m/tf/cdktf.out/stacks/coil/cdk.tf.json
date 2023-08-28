@@ -3,7 +3,7 @@
     "metadata": {
       "backend": "s3",
       "stackName": "coil",
-      "version": "0.17.3"
+      "version": "0.18.0"
     },
     "outputs": {
     }
@@ -230,7 +230,7 @@
     "required_providers": {
       "aws": {
         "source": "aws",
-        "version": "5.12.0"
+        "version": "5.13.1"
       }
     }
   }

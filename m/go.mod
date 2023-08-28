@@ -5,13 +5,13 @@ go 1.20
 require (
 	cuelang.org/go v0.6.0
 	github.com/aws/constructs-go/constructs/v10 v10.2.69
-	github.com/aws/jsii-runtime-go v1.87.0
-	github.com/cdktf/cdktf-provider-aws-go/aws/v16 v16.0.7
+	github.com/aws/jsii-runtime-go v1.88.0
+	github.com/cdktf/cdktf-provider-aws-go/aws/v16 v16.0.9
 	github.com/charmbracelet/bubbles v0.16.1
 	github.com/charmbracelet/bubbletea v0.24.2
-	github.com/charmbracelet/lipgloss v0.7.1
+	github.com/charmbracelet/lipgloss v0.8.0
 	github.com/gin-gonic/gin v1.9.1
-	github.com/hashicorp/terraform-cdk-go/cdktf v0.17.3
+	github.com/hashicorp/terraform-cdk-go/cdktf v0.18.0
 	github.com/spf13/cobra v1.7.0
 	github.com/spf13/viper v1.16.0
 	google.golang.org/protobuf v1.31.0
@@ -33,9 +33,9 @@ require (
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-playground/validator/v10 v10.15.0 // indirect
+	github.com/go-playground/validator/v10 v10.15.1 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
-	github.com/google/uuid v1.3.0 // indirect
+	github.com/google/uuid v1.3.1 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
@@ -67,7 +67,7 @@ require (
 	github.com/subosito/gotenv v1.6.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.11 // indirect
-	github.com/yuin/goldmark v1.5.5 // indirect
+	github.com/yuin/goldmark v1.5.6 // indirect
 	golang.org/x/arch v0.4.0 // indirect
 	golang.org/x/crypto v0.12.0 // indirect
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
