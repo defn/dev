@@ -249,6 +249,7 @@ kind: Ingress
 metadata:
   annotations:
     external-dns.alpha.kubernetes.io/hostname: emojivoto-ts-vc1.dev.amanibhavam.defn.run
+    tailscale.com/funnel: "true"
   name: emojivoto-tailscale
   namespace: emojivoto
 spec:

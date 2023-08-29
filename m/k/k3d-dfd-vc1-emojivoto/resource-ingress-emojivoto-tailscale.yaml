@@ -6,6 +6,7 @@ metadata:
   name: emojivoto-tailscale
   annotations:
     external-dns.alpha.kubernetes.io/hostname: emojivoto-ts-vc1.dev.amanibhavam.defn.run
+    tailscale.com/funnel: "true"
 spec:
   ingressClassName: tailscale
   rules:
