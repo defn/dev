@@ -1161,7 +1161,7 @@ kustomize: "traefik": #KustomizeHelm & {
 		}
 		spec: entryPoints: ["websecure"]
 		spec: routes: [{
-			match: "Host(`traefik.\(cluster.domain_name)`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
+			match: "Host(`traefik.\(cluster.domain_name)`) || Host(`traefik.tail3884f.ts.net`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
 			kind:  "Rule"
 			services: [{
 				name: "api@internal"
