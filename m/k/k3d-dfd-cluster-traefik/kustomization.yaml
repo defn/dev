@@ -7,7 +7,6 @@ resources:
   - resource-namespace-traefik.yaml
   - resource-tlsstore-traefik.yaml
   - resource-serverstransport-insecure.yaml
-  - resource-ingressroute-http-to-https.yaml
   - resource-middleware-http-to-https.yaml
   - resource-ingress-tailscale.yaml
   - resource-certificate-dev-amanibhavam-defn-run-wildcard-traefik.yaml
