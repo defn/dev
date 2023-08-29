@@ -3,7 +3,7 @@
   outputs = inputs: inputs.pkg.downloadMain rec {
     src = ./.;
 
-    url_template = input: "https://github.com/isaaguilar/terraform-operator-cli/releases/download/${input.vendor}/tfo-${input.vendor}-${input.os}-${input.arch}.tgz";
+    url_template = input: "https://github.com/isaaguilar/terraform-operator-cli/releases/download/v${input.vendor}/tfo-v${input.vendor}-${input.os}-${input.arch}.tgz";
 
     installPhase = pkg: ''
       install -m 0755 -d $out $out/bin
@@ -18,22 +18,22 @@
       "x86_64-linux" = {
         os = "linux";
         arch = "amd64";
-        sha256 = "sha256-mo1MdrrAKyjnx+VN4HbUZgDtaGdMRhuXOkLcFMkS+s8="; # x86_64-linux
+        sha256 = "sha256-aaaaarrAKyjnx+VN4HbUZgDtaGdMRhuXOkLcFMkS+s8="; # x86_64-linux
       };
       "aarch64-linux" = {
         os = "linux";
         arch = "arm64";
-        sha256 = "sha256-Ohb1qQFenXmF+uldfyalM5hR6thI+NghTJ0yCs89Zcc="; # aarch64-linux
+        sha256 = "sha256-aaaaaQFenXmF+uldfyalM5hR6thI+NghTJ0yCs89Zcc="; # aarch64-linux
       };
       "x86_64-darwin" = {
         os = "darwin";
         arch = "amd64";
-        sha256 = "sha256-+gF08VK9fKfeFzMjBNPAZB4RLDuX29vhrZ5p3KKxypA="; # x86_64-darwin
+        sha256 = "sha256-aaaaaVK9fKfeFzMjBNPAZB4RLDuX29vhrZ5p3KKxypA="; # x86_64-darwin
       };
       "aarch64-darwin" = {
         os = "darwin";
         arch = "amd64"; # no arm64 macos
-        sha256 = "sha256-+gF08VK9fKfeFzMjBNPAZB4RLDuX29vhrZ5p3KKxypA="; # aarch64-darwin
+        sha256 = "sha256-aaaaaVK9fKfeFzMjBNPAZB4RLDuX29vhrZ5p3KKxypA="; # aarch64-darwin
       };
     };
   };
