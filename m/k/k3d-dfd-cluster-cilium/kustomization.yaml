@@ -3,6 +3,7 @@
 patches: []
 resources:
   - resource-ingress-hubble-ui.yaml
+  - resource-ingress-hubble-ui-tailscale.yaml
 namespace: kube-system
 helmCharts:
   - releaseName: cilium
