@@ -1,5 +1,5 @@
 {
-  inputs.pkg.url = github:defn/dev/pkg-pkg-0.0.7?dir=m/pkg/pkg;
+  inputs.pkg.url = github:defn/dev/pkg-pkg-0.0.12?dir=m/pkg/pkg;
   outputs = inputs: inputs.pkg.downloadMain rec {
     src = ./.;
 
@@ -23,27 +23,30 @@
     '';
 
     downloads = {
-      options = pkg: { dontUnpack = true; dontFixup = true; };
+      options = pkg: {
+        dontUnpack = true;
+        dontFixup = true;
+      };
 
-      "x86_64-linux" = rec {
+      "x86_64-linux" = {
         os = "linux";
         arch = "amd64";
-        sha256 = "sha256-fkiz2R9EutwbTCvURu8cSuTIJIQNWUvTU88gy6X9HO8="; # x86_64-linux
+        sha256 = "sha256-bNa1iYmWaHCMpPiRjQ0nAeVBcTW0BSGjC87IZ7m8/R0="; # x86_64-linux
       };
-      "aarch64-linux" = rec {
+      "aarch64-linux" = {
         os = "linux";
         arch = "arm64";
-        sha256 = "sha256-5FO1dtDbleTpt/URuzefawsKc5JNpnhlWHXCwpW5Vic="; # aarch64-linux
+        sha256 = "sha256-1FO4i7FXeat60z+M851VsRhxdppjjduz0klrfcHOmY8="; # aarch64-linux
       };
-      "x86_64-darwin" = rec {
+      "x86_64-darwin" = {
         os = "darwin";
         arch = "amd64";
-        sha256 = "sha256-lcZJ5FBzBb96EEmXkzJ7d1AvTj5UaLRODImGYBdafvQ="; # x86_64-darwin
+        sha256 = "sha256-xm6dDVTSnSILE5mj5uvioj7nbeET3hX1UVMNLLn9MyE="; # x86_64-darwin
       };
-      "aarch64-darwin" = rec {
+      "aarch64-darwin" = {
         os = "darwin";
         arch = "amd64";
-        sha256 = "sha256-lcZJ5FBzBb96EEmXkzJ7d1AvTj5UaLRODImGYBdafvQ="; # aarch64-darwin
+        sha256 = "sha256-xm6dDVTSnSILE5mj5uvioj7nbeET3hX1UVMNLLn9MyE="; # aarch64-darwin
       };
     };
   };
