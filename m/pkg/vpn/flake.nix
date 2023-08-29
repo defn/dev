@@ -10,7 +10,7 @@
     defaultPackage = ctx: ctx.wrap.nullBuilder {
       propagatedBuildInputs = with ctx.pkgs; [
         inputs.tailscale.defaultPackage.${ctx.system}
-        inputs.cloudflare.defaultPackage.${ctx.system}
+        inputs.cloudflared.defaultPackage.${ctx.system}
         easyrsa
         openvpn
         wireguard-tools
