@@ -5043,7 +5043,7 @@ spec:
     service:
       name: traefik
       port:
-        number: 80
+        number: 443
   ingressClassName: tailscale
   tls:
   - hosts:
@@ -5120,6 +5120,7 @@ metadata:
 spec:
   entryPoints:
   - websecure
+  - web
   routes:
   - kind: Rule
     match: Host(`traefik.dev.amanibhavam.defn.run`) || Host(`traefik.tail3884f.ts.net`)
