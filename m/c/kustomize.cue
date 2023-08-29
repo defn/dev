@@ -905,25 +905,18 @@ kustomize: "cilium": #KustomizeHelm & {
 		kind:       "Ingress"
 		metadata: {
 			name: "hubble-ui-ts"
-			annotations: {
-				"external-dns.alpha.kubernetes.io/hostname": "hubble-ts.\(cluster.domain_name)"
-				"tailscale.com/funnel":                      "true"
-			}
+			annotations: "tailscale.com/funnel": "true"
 		}
 
 		spec: {
 			ingressClassName: "tailscale"
-			rules: [{
-				host: "hubble-ts.\(cluster.domain_name)"
-				http: paths: [{
-					path:     "/"
-					pathType: "Prefix"
-					backend: service: {
-						name: "hubble-ui"
-						port: number: 80
-					}
-				}]
+			tls: [{
+				hosts: ["hubble"]
 			}]
+			defaultBackend: service: {
+				name: "hubble-ui"
+				port: number: 80
+			}
 		}
 	}
 }
