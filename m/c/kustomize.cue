@@ -1396,6 +1396,7 @@ kustomize: "emojivoto": #Kustomize & {
 			name: "emojivoto-tailscale"
 			annotations: {
 				"external-dns.alpha.kubernetes.io/hostname": "emojivoto-ts\(cluster.name_suffix)\(cluster.domain_name)"
+				"tailscale.com/funnel":                      "true"
 			}
 		}
 
