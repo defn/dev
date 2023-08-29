@@ -1423,17 +1423,17 @@
       },
       "locked": {
         "dir": "m/pkg/tfo",
-        "lastModified": 1692116438,
-        "narHash": "sha256-oAb8HiNQlR9c2jRmZHPESLLFTaXeNKfQ4/fclzSvU1A=",
+        "lastModified": 1693352413,
+        "narHash": "sha256-h5SxgQyLUCTn8jdANGQ82gUMxp6iJs2SEYkUgKqLh0E=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "d93e61c306a68bde1d0af6b9237e61acb5bba956",
+        "rev": "3f08a0b5219898a076080ac4af676a189ef39634",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/tfo",
         "owner": "defn",
-        "ref": "pkg-tfo-1.3.0-3",
+        "ref": "pkg-tfo-2.0.0-1",
         "repo": "dev",
         "type": "github"
       }

@@ -14,7 +14,7 @@
     linkerd.url = github:defn/dev/pkg-linkerd-2.14.0-2?dir=m/pkg/linkerd;
     cilium.url = github:defn/dev/pkg-cilium-0.15.6-1?dir=m/pkg/cilium;
     hubble.url = github:defn/dev/pkg-hubble-0.12.0-3?dir=m/pkg/hubble;
-    tfo.url = github:defn/dev/pkg-tfo-1.3.0-3?dir=m/pkg/tfo;
+    tfo.url = github:defn/dev/pkg-tfo-2.0.0-1?dir=m/pkg/tfo;
   };
 
   outputs = inputs: inputs.kubectl.inputs.pkg.main rec {
