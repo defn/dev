@@ -899,6 +899,33 @@ kustomize: "cilium": #KustomizeHelm & {
 			}]
 		}
 	}
+
+	resource: "ingress-hubble-ui-tailscale": {
+		apiVersion: "networking.k8s.io/v1"
+		kind:       "Ingress"
+		metadata: {
+			name: "hubble-ui-ts"
+			annotations: {
+				"external-dns.alpha.kubernetes.io/hostname": "hubble-ts.\(cluster.domain_name)"
+				"tailscale.com/funnel":                      "true"
+			}
+		}
+
+		spec: {
+			ingressClassName: "tailscale"
+			rules: [{
+				host: "hubble-ts.\(cluster.domain_name)"
+				http: paths: [{
+					path:     "/"
+					pathType: "Prefix"
+					backend: service: {
+						name: "hubble-ui"
+						port: number: 80
+					}
+				}]
+			}]
+		}
+	}
 }
 
 // https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/manifests/operator.yaml
@@ -1389,30 +1416,4 @@ kustomize: "emojivoto": #Kustomize & {
 		}
 	}
 
-	resource: "ingress-emojivoto-tailscale": {
-		apiVersion: "networking.k8s.io/v1"
-		kind:       "Ingress"
-		metadata: {
-			name: "emojivoto-tailscale"
-			annotations: {
-				"external-dns.alpha.kubernetes.io/hostname": "emojivoto-ts\(cluster.name_suffix)\(cluster.domain_name)"
-				"tailscale.com/funnel":                      "true"
-			}
-		}
-
-		spec: {
-			ingressClassName: "tailscale"
-			rules: [{
-				host: "emojivoto-ts\(cluster.name_suffix)\(cluster.domain_name)"
-				http: paths: [{
-					path:     "/"
-					pathType: "Prefix"
-					backend: service: {
-						name: "web-svc"
-						port: number: 80
-					}
-				}]
-			}]
-		}
-	}
 }

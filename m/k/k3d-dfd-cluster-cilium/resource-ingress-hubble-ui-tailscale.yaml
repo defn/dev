@@ -3,20 +3,20 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: emojivoto-tailscale
+  name: hubble-ui-ts
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: emojivoto-ts-vc1.dev.amanibhavam.defn.run
+    external-dns.alpha.kubernetes.io/hostname: hubble-ts.dev.amanibhavam.defn.run
     tailscale.com/funnel: "true"
 spec:
   ingressClassName: tailscale
   rules:
-    - host: emojivoto-ts-vc1.dev.amanibhavam.defn.run
+    - host: hubble-ts.dev.amanibhavam.defn.run
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: web-svc
+                name: hubble-ui
                 port:
                   number: 80

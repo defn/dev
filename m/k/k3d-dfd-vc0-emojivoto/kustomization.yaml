@@ -5,5 +5,4 @@ patches:
 resources:
   - https://run.linkerd.io/emojivoto.yml
   - resource-ingress-emojivoto.yaml
-  - resource-ingress-emojivoto-tailscale.yaml
 namespace: emojivoto
