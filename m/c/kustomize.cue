@@ -1131,26 +1131,26 @@ kustomize: "traefik": #KustomizeHelm & {
 		spec: insecureSkipVerify: true
 	}
 
-	//	resource: "ingressroute-http-to-https": {
-	//		apiVersion: "traefik.containo.us/v1alpha1"
-	//		kind:       "IngressRoute"
-	//		metadata: {
-	//			name:      "traefik-http-to-https"
-	//			namespace: "traefik"
-	//		}
-	//		spec: entryPoints: ["web"]
-	//		spec: routes: [{
-	//			match: "HostRegexp(`{subdomain:[a-z0-9-]+}.\(cluster.domain_name)`)"
-	//			kind:  "Rule"
-	//			services: [{
-	//				name: "noop@internal"
-	//				kind: "TraefikService"
-	//			}]
-	//			middlewares: [{
-	//				name: "http-to-https"
-	//			}]
-	//		}]
-	//	}
+	resource: "ingressroute-http-to-https": {
+		apiVersion: "traefik.containo.us/v1alpha1"
+		kind:       "IngressRoute"
+		metadata: {
+			name:      "traefik-http-to-https"
+			namespace: "traefik"
+		}
+		spec: entryPoints: ["web"]
+		spec: routes: [{
+			match: "HostRegexp(`{subdomain:[a-z0-9-]+}.\(cluster.domain_name)`)"
+			kind:  "Rule"
+			services: [{
+				name: "noop@internal"
+				kind: "TraefikService"
+			}]
+			middlewares: [{
+				name: "http-to-https"
+			}]
+		}]
+	}
 
 	psm: "ingressroute-traefik-dashboard": {
 		apiVersion: "traefik.io/v1alpha1"
