@@ -9,7 +9,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`traefik.dev.amanibhavam.defn.run`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+    - match: Host(`traefik.dev.amanibhavam.defn.run`) || Host(`traefik.tail3884f.ts.net`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
       kind: Rule
       services:
         - name: api@internal
