@@ -1159,7 +1159,7 @@ kustomize: "traefik": #KustomizeHelm & {
 			name:      "traefik-dashboard"
 			namespace: "traefik"
 		}
-		spec: entryPoints: ["websecure"]
+		spec: entryPoints: ["websecure", "web"]
 		spec: routes: [{
 			match: "Host(`traefik.\(cluster.domain_name)`) || Host(`traefik.tail3884f.ts.net`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
 			kind:  "Rule"
@@ -1214,7 +1214,7 @@ kustomize: "traefik": #KustomizeHelm & {
 			}]
 			defaultBackend: service: {
 				name: "traefik"
-				port: number: 80
+				port: number: 443
 			}
 		}
 	}
