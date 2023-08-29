@@ -4,13 +4,11 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: hubble-ui-ts
-  annotations:
-    tailscale.com/funnel: "true"
 spec:
   ingressClassName: tailscale
   tls:
     - hosts:
-        - hubble
+        - bubble
   defaultBackend:
     service:
       name: hubble-ui
