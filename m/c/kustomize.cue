@@ -900,24 +900,6 @@ kustomize: "cilium": #KustomizeHelm & {
 		}
 	}
 
-	resource: "ingress-hubble-ui-tailscale": {
-		apiVersion: "networking.k8s.io/v1"
-		kind:       "Ingress"
-		metadata: {
-			name: "hubble-ui-ts"
-		}
-
-		spec: {
-			ingressClassName: "tailscale"
-			tls: [{
-				hosts: ["bubble"]
-			}]
-			defaultBackend: service: {
-				name: "hubble-ui"
-				port: number: 80
-			}
-		}
-	}
 }
 
 // https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/manifests/operator.yaml
@@ -1215,6 +1197,25 @@ kustomize: "traefik": #KustomizeHelm & {
 
 		spec: {
 			type: "LoadBalancer"
+		}
+	}
+
+	resource: "ingress-tailscale": {
+		apiVersion: "networking.k8s.io/v1"
+		kind:       "Ingress"
+		metadata: {
+			name: "traefik-tailscale"
+		}
+
+		spec: {
+			ingressClassName: "tailscale"
+			tls: [{
+				hosts: ["traefik"]
+			}]
+			defaultBackend: service: {
+				name: "traefik"
+				port: number: 80
+			}
 		}
 	}
 

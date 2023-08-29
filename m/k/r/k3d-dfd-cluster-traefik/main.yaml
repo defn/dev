@@ -5034,6 +5034,22 @@ spec:
   secretName: dev-amanibhavam-defn-run-wildcard
 ---
 apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: traefik-tailscale
+  namespace: traefik
+spec:
+  defaultBackend:
+    service:
+      name: traefik
+      port:
+        number: 80
+  ingressClassName: tailscale
+  tls:
+  - hosts:
+    - traefik
+---
+apiVersion: networking.k8s.io/v1
 kind: IngressClass
 metadata:
   annotations:
