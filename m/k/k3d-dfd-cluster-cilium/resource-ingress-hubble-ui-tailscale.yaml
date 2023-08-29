@@ -5,18 +5,14 @@ kind: Ingress
 metadata:
   name: hubble-ui-ts
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: hubble-ts.dev.amanibhavam.defn.run
     tailscale.com/funnel: "true"
 spec:
   ingressClassName: tailscale
-  rules:
-    - host: hubble-ts.dev.amanibhavam.defn.run
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: hubble-ui
-                port:
-                  number: 80
+  tls:
+    - hosts:
+        - hubble
+  defaultBackend:
+    service:
+      name: hubble-ui
+      port:
+        number: 80
