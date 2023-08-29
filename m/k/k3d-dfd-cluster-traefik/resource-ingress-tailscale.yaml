@@ -3,14 +3,14 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: hubble-ui-ts
+  name: traefik-tailscale
 spec:
   ingressClassName: tailscale
   tls:
     - hosts:
-        - bubble
+        - traefik
   defaultBackend:
     service:
-      name: hubble-ui
+      name: traefik
       port:
         number: 80
