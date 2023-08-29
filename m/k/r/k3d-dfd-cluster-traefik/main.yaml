@@ -5064,23 +5064,6 @@ spec:
   controller: traefik.io/ingress-controller
 ---
 apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: traefik-http-to-https
-  namespace: traefik
-spec:
-  entryPoints:
-  - web
-  routes:
-  - kind: Rule
-    match: HostRegexp(`{subdomain:[a-z0-9-]+}.dev.amanibhavam.defn.run`)
-    middlewares:
-    - name: http-to-https
-    services:
-    - kind: TraefikService
-      name: noop@internal
----
-apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: http-to-https
