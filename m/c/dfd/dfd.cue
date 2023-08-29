@@ -36,6 +36,7 @@ infra: {
 		"knative": [40, ""]
 		"kourier": [40, ""]
 		"traefik": [40, ""]
+		"tailscale": [40, ""]
 
 		// applications
 		"hello": [100, ""]
