@@ -1388,4 +1388,30 @@ kustomize: "emojivoto": #Kustomize & {
 			}]
 		}
 	}
+
+	resource: "ingress-emojivoto-tailscale": {
+		apiVersion: "networking.k8s.io/v1"
+		kind:       "Ingress"
+		metadata: {
+			name: "emojivoto-tailscale"
+			annotations: {
+				"external-dns.alpha.kubernetes.io/hostname": "emojivoto-ts\(cluster.name_suffix)\(cluster.domain_name)"
+			}
+		}
+
+		spec: {
+			ingressClassName: "tailscale"
+			rules: [{
+				host: "emojivoto-ts\(cluster.name_suffix)\(cluster.domain_name)"
+				http: paths: [{
+					path:     "/"
+					pathType: "Prefix"
+					backend: service: {
+						name: "web-svc"
+						port: number: 80
+					}
+				}]
+			}]
+		}
+	}
 }
