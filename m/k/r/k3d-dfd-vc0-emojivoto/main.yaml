@@ -243,3 +243,24 @@ spec:
               number: 80
         path: /
         pathType: Prefix
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: emojivoto-ts-vc0.dev.amanibhavam.defn.run
+  name: emojivoto-tailscale
+  namespace: emojivoto
+spec:
+  ingressClassName: tailscale
+  rules:
+  - host: emojivoto-ts-vc0.dev.amanibhavam.defn.run
+    http:
+      paths:
+      - backend:
+          service:
+            name: web-svc
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
