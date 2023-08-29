@@ -905,13 +905,12 @@ kustomize: "cilium": #KustomizeHelm & {
 		kind:       "Ingress"
 		metadata: {
 			name: "hubble-ui-ts"
-			annotations: "tailscale.com/funnel": "true"
 		}
 
 		spec: {
 			ingressClassName: "tailscale"
 			tls: [{
-				hosts: ["hubble"]
+				hosts: ["bubble"]
 			}]
 			defaultBackend: service: {
 				name: "hubble-ui"
