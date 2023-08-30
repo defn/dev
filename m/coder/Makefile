@@ -49,4 +49,4 @@ down:
 init:
 	direnv allow
 	bash -c 'eval "$$(direnv hook bash)"; _direnv_hook'
-	code --install-extension vscodevim.vim
+	for a in vscodevim.vim golang.Go bazelbuild.vscode-bazel; do code --install-extension $$a; done
