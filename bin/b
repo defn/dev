@@ -37,13 +37,13 @@ function bazel {
 	build | test | run)
 		# shellcheck disable=SC2065
 		if test -x /usr/bin/xcrun >/dev/null; then
-			command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "${cmd}" --macos_sdk_version="$(/usr/bin/xcrun -show-sdk-version || true)" "$@"
+			command bazel "${cmd}" --macos_sdk_version="$(/usr/bin/xcrun -show-sdk-version || true)" "$@"
 		else
-			command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "${cmd}" "$@"
+			command bazel "${cmd}" "$@"
 		fi
 		;;
 	*)
-		command bazel --host_jvm_args=-DBAZEL_TRACK_SOURCE_DIRECTORIES=1 "${cmd}" "$@"
+		command bazel "${cmd}" "$@"
 		;;
 	esac
 }
