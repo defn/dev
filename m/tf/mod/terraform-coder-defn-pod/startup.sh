@@ -33,6 +33,7 @@ function main {
 		git branch --set-upstream-to=origin/${source_rev} ${source_rev}
 		;;
 	esac
+	git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
 
 	if [[ -n "${workdir}" ]]; then
 		cd "${workdir}"
