@@ -7,10 +7,10 @@ export DEBIAN_FRONTEND=noninteractive
 if [[ ! -x "/usr/local/bin/bazel" ]]; then
 	case "$(uname -m)" in
 	aarch64)
-		sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-arm64
+		sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.18.0/bazelisk-linux-arm64
 		;;
 	*)
-		sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64
+		sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.18.0/bazelisk-linux-amd64
 		;;
 	esac
 	sudo chmod 755 /usr/local/bin/bazelisk
@@ -30,6 +30,10 @@ function bazel {
 	shift
 
 	case "${cmd}" in
+	watch)
+		if [[ "$#" == 0 ]]; then set -- . ; fi
+		command ibazel build "$@"
+		;;
 	build | test | run)
 		# shellcheck disable=SC2065
 		if test -x /usr/bin/xcrun >/dev/null; then
