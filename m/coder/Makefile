@@ -2,6 +2,9 @@ template := $(shell basename $(shell pwd))
 
 run:
 	$(MAKE) init
+	bash -c 'eval "$$(direnv hook bash)"; _direnv_hook; $(MAKE) run-inner'
+
+run-inner:
 	tilt up
 
 push:
@@ -45,4 +48,5 @@ down:
 
 init:
 	direnv allow
+	bash -c 'eval "$$(direnv hook bash)"; _direnv_hook'
 	code --install-extension vscodevim.vim
