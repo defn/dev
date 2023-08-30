@@ -288,12 +288,20 @@ function main {
 			run)
 				shift
 
-				if [[ -z ${1-} ]]; then
-					rule="$("$0" | grep __ | fzf --select-1)"
-				else
-					rule="$("$0" | fzf --query="${1}" --select-1)"
-					shift
-				fi
+				case "${1:-}" in
+					"")
+						rule="$("$0" | grep _ | fzf --select-1)"
+						;;
+					/*)
+						rule="$("$0" | fzf --query="${1#/}" --select-1)"
+						;;
+					*)
+						rule="$1"
+						shift
+						;;
+				esac
+
+				if [[ "$#" -gt 0 ]]; then shift; fi
 
 				# shellcheck disable=SC2086
 				bazel run ${bopts} "${rule}" -- "$@"
