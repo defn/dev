@@ -23,5 +23,3 @@ pod:
         && git reset --hard
 
     RUN bash -c 'source .bashrc && make nix home'
-
-    RUN bash -c 'source .bashrc && code --install-extension vscodevim.vim'
