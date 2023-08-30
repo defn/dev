@@ -33,7 +33,7 @@ up-inner:
 	@open "$$(curl -sSL $$(cat /home/ubuntu/.config/coderv2/url)/api/v2/debug/health -H "Coder-Session-Token: $$(cat /home/ubuntu/.config/coderv2/session)" | jq -r '.access_url.access_url' | sed "s#//#//cs--main--$(name)--$$(coder list |tail -1 | awk '{print $$1}' | cut -d/ -f1)--#")?folder=$(dir)"
 
 up-restart:
-	coder restart "$(name)"
+	coder restart --yes "$(name)"
 
 up-create:
 	coder create --yes --template pod --parameter workdir=$(dir),source_rev=$(rev),provider=$(provider),docker_image=169.254.32.1:5000/dfd,cpu=1,memory=1,nix_volume_size=40 "$(name)"
