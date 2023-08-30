@@ -24,6 +24,7 @@ function main {
 		git checkout "${source_rev}"
 	fi
 	git pull
+	source .bash_profile
 
 	case "$(git remote get-url origin)" in
 	http*)
