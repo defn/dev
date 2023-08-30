@@ -5,7 +5,7 @@ run:
 	bash -c 'eval "$$(direnv hook bash)"; _direnv_hook; $(MAKE) run-inner'
 
 run-inner:
-	tilt up
+	tilt up --stream
 
 push:
 	tf fmt
