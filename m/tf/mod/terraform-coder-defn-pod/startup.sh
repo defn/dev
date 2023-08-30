@@ -38,7 +38,6 @@ function main {
 
 	if [[ -n ${workdir} ]]; then
 		cd "${workdir}"
-		make init
 	fi
 
 	date
