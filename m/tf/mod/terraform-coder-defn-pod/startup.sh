@@ -20,7 +20,7 @@ function main {
 	fi
 
 	git fetch
-	if [[ -n "${source_rev}" ]]; then
+	if [[ -n ${source_rev} ]]; then
 		git checkout "${source_rev}"
 	fi
 	git pull
@@ -35,7 +35,7 @@ function main {
 	esac
 	git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
 
-	if [[ -n "${workdir}" ]]; then
+	if [[ -n ${workdir} ]]; then
 		cd "${workdir}"
 		make init
 	fi
