@@ -41,3 +41,4 @@ down:
 
 init:
 	direnv allow
+	code --install-extension vscodevim.vim
