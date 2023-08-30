@@ -40,3 +40,6 @@ up-create:
 
 down:
 	coder delete --yes "$(name)" || true
+
+init:
+	direnv allow
