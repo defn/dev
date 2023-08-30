@@ -83,9 +83,6 @@ fi
 # direnv
 export DIRENV_LOG_FORMAT=
 
-eval "$(direnv hook bash)"
-_direnv_hook
-
 # precommit
 export PRE_COMMIT_ALLOW_NO_CONFIG=1
 
