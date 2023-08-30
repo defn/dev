@@ -1,1 +1,5 @@
-{}
+[{
+    "regex": "^whatever",
+    "command": "true",
+    "args":    []
+}]
