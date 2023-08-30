@@ -15,6 +15,10 @@ function main {
 	sudo install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
 	sudo install -d -m 0700 -o ubuntu -g ubuntu /nix /nix
 
+	if [[ "$(df -klh /nix | tail -1 | awk '{print $NF}')" == "/" ]]; then
+		sudo ln -nfs ~ /nix/home
+	fi
+
 	git fetch
 	if [[ -n "${source_rev}" ]]; then
 		git checkout "${source_rev}"
