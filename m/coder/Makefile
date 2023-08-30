@@ -1,6 +1,7 @@
 template := $(shell basename $(shell pwd))
 
 run:
+	$(MAKE) init
 	tilt up
 
 push:
