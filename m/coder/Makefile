@@ -1,5 +1,8 @@
 template := $(shell basename $(shell pwd))
 
+run:
+	tilt up
+
 push:
 	tf fmt
 	tf docs
@@ -41,3 +44,4 @@ down:
 
 init:
 	direnv allow
+	code --install-extension vscodevim.vim
