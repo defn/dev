@@ -8,14 +8,8 @@ load("ext://restart_process", "custom_build_with_restart")
 # local registry
 default_registry("169.254.32.1:5000")
 
-# hello
+# bazel
 local_resource(
-    "hello",
-    serve_cmd=[
-        "bash",
-        "-c",
-        """
-            sleep infinity
-        """,
-    ],
+    "bazel",
+    serve_cmd=["b", "watch"],
 )
