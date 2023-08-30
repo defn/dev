@@ -17,9 +17,7 @@ image:
 	cd k3d && $(MAKE) build
 	cd pod && $(MAKE) build
 
-provider ?= pod
-
-name ?= $(shell basename $(shell pwd))
+workspace ?= $(shell basename $(shell pwd))
 dir ?= $(shell pwd)
 rev ?= $(shell git branch --show-current)
 
@@ -29,17 +27,17 @@ up:
 up-inner:
 	$(MAKE) up-restart || $(MAKE) up-create
 	@echo
-	@while true; do if curl -sSL $$(cat /home/ubuntu/.config/coderv2/url)/api/v2/users/$$(coder list |tail -1 | awk '{print $$1}' | cut -d/ -f1)/workspace/$(name) -H "Coder-Session-Token: $$(cat /home/ubuntu/.config/coderv2/session)" | jq -r '.latest_build.resources[].agents[].apps[] | select(.display_name == "code-server") | .health' | grep healthy; then break; fi; date; sleep 5; done
-	@open "$$(curl -sSL $$(cat /home/ubuntu/.config/coderv2/url)/api/v2/debug/health -H "Coder-Session-Token: $$(cat /home/ubuntu/.config/coderv2/session)" | jq -r '.access_url.access_url' | sed "s#//#//cs--main--$(name)--$$(coder list |tail -1 | awk '{print $$1}' | cut -d/ -f1)--#")?folder=$(dir)"
+	@while true; do if curl -sSL $$(cat /home/ubuntu/.config/coderv2/url)/api/v2/users/$$(coder list |tail -1 | awk '{print $$1}' | cut -d/ -f1)/workspace/$(workspace) -H "Coder-Session-Token: $$(cat /home/ubuntu/.config/coderv2/session)" | jq -r '.latest_build.resources[].agents[].apps[] | select(.display_name == "code-server") | .health' | grep healthy; then break; fi; date; sleep 5; done
+	@open "$$(curl -sSL $$(cat /home/ubuntu/.config/coderv2/url)/api/v2/debug/health -H "Coder-Session-Token: $$(cat /home/ubuntu/.config/coderv2/session)" | jq -r '.access_url.access_url' | sed "s#//#//cs--main--$(workspace)--$$(coder list |tail -1 | awk '{print $$1}' | cut -d/ -f1)--#")?folder=$(dir)"
 
 up-restart:
-	coder restart --yes "$(name)"
+	coder restart --yes "$(workspace)"
 
 up-create:
-	coder create --yes --template pod --parameter workdir=$(dir),source_rev=$(rev),provider=$(provider),docker_image=169.254.32.1:5000/dfd,cpu=1,memory=1,nix_volume_size=40 "$(name)"
+	coder create --yes --template pod --parameter workdir=$(dir),source_rev=$(rev),provider=pod,docker_image=169.254.32.1:5000/dfd,cpu=1,memory=1,nix_volume_size=40 "$(workspace)"
 
 down:
-	coder delete --yes "$(name)" || true
+	coder delete --yes "$(workspace)" || true
 
 init:
 	direnv allow
