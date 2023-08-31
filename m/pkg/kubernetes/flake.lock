@@ -48,17 +48,17 @@
       },
       "locked": {
         "dir": "m/pkg/cilium",
-        "lastModified": 1692667035,
-        "narHash": "sha256-bbOUVbA+15Yp1dSpPnnG61W9nnd7BMo51vZxAHAVdlI=",
+        "lastModified": 1693502750,
+        "narHash": "sha256-MPE67m+mKBEbABV2fkzrcLRbvPfXpo2nmtVt6AlHc/M=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "a7ec6fd89a9be221f2ab6df3e91bbc6b09d36be5",
+        "rev": "1a97ae1de32da1deb1ce30af77e1508a3626884d",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cilium",
         "owner": "defn",
-        "ref": "pkg-cilium-0.15.6-1",
+        "ref": "pkg-cilium-0.15.7-1",
         "repo": "dev",
         "type": "github"
       }
