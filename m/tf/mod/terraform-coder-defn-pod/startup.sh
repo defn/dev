@@ -37,13 +37,13 @@ function main {
 	git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
 
 	mkdir -p ~/.kube
-	touch ~/.kube/config
+	rm -f ~/.kube/config
+	vcluster connect -n "$(uname -n | cut -d- -f1-3)" vcluster --kube-config ~/.kube/config --kube-config-context-name "$(uname -n | cut -d- -f1-3)" --server "$(k get svc vcluster -o json | jq -r '.spec.clusterIP'):443"
 
 	if [[ -n ${workdir} ]]; then
 		cd "${workdir}"
 	fi
 
-	env | sort | grep -i code
 	make || true
 }
 
