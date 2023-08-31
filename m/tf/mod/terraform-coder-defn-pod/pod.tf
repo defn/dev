@@ -21,6 +21,19 @@ resource "helm_release" "main" {
   version    = "0.15.7"
 }
 
+resource "kubernetes_role" "main" {
+  metadata {
+    name = "admin"
+  }
+
+  rule {
+    api_groups     = [""]
+    resources      = ["*"]
+    resource_names = ["*"]
+    verbs          = ["*"]
+  }
+}
+
 resource "kubernetes_role_binding" "main" {
   metadata {
     name      = "coder-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
