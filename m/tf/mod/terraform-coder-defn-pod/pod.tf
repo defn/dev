@@ -21,10 +21,9 @@ resource "helm_release" "main" {
   version    = "0.15.7"
 }
 
-resource "kubernetes_role_binding" "main" {
+resource "kubernetes_cluster_role_binding" "main" {
   metadata {
-    name      = "coder-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
-    namespace = local.ns
+    name = "dfd-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
   }
 
   role_ref {
@@ -44,7 +43,7 @@ resource "kubernetes_deployment" "main" {
   wait_for_rollout = false
 
   metadata {
-    name      = "coder-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
+    name      = "dfd-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
     namespace = local.ns
 
     labels = {
