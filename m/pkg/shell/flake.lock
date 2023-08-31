@@ -162,17 +162,17 @@
       },
       "locked": {
         "dir": "m/pkg/zellij",
-        "lastModified": 1693232871,
-        "narHash": "sha256-2aT3fixqDxuqsG9Cg0Z3UHqz2mnQp1lBCyetsyVZGc4=",
+        "lastModified": 1693502770,
+        "narHash": "sha256-06iJ8B4LM6DEOXlJQKEJ4U91/9NL1ZQJkL3pb1JjT2Y=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "e150b17c4bd8bd93e8aae5a09d5e55d8c087fba8",
+        "rev": "757af57aa111ca18cbaa39908f3c9f0d2025f7b3",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/zellij",
         "owner": "defn",
-        "ref": "pkg-zellij-0.38.0-1",
+        "ref": "pkg-zellij-0.38.1-1",
         "repo": "dev",
         "type": "github"
       }
