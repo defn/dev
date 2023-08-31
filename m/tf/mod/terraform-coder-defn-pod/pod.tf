@@ -23,7 +23,8 @@ resource "helm_release" "main" {
 
 resource "kubernetes_role" "main" {
   metadata {
-    name = "admin"
+    name      = "admin"
+    namespace = local.ns
   }
 
   rule {
