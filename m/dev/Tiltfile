@@ -13,3 +13,26 @@ local_resource(
     "bazel",
     serve_cmd=["b", "watch"],
 )
+
+
+# api initial deploy
+allow_k8s_contexts('dfd-amanibhavam-dev')
+k8s_yaml(local("cat deploy.yaml"))
+
+# api service selected from deploy
+k8s_resource("api", resource_deps=["cli"])
+
+# api builds when cmd/, command/ changes
+local_resource(name="cli", cmd="make build", deps=["./cmd", "./commandi"])
+
+# api updates when api builds
+custom_build_with_restart(
+    ref="api",
+    command="make image tag=$EXPECTED_REF",
+    deps=["/tmp/cli"],
+    trigger=["/tmp/cli"],
+    entrypoint=["/cli"],
+    live_update=[
+        sync("/tmp/cli", "/app"),
+    ],
+)

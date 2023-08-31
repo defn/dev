@@ -1,2 +1,0 @@
-manifest:
-	@cat cli.yaml	
