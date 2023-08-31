@@ -6,7 +6,6 @@ run:
 
 run-inner:
 	screen -S tilt -d -m tilt up --stream
-	screen -DRR tilt
 
 push:
 	tf fmt
