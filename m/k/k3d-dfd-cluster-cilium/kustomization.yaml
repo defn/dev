@@ -1,0 +1,30 @@
+#ManagedBy: cue
+
+patches: []
+resources:
+  - resource-ingress-hubble-ui.yaml
+namespace: kube-system
+helmCharts:
+  - releaseName: cilium
+    name: cilium
+    version: 1.14.0
+    repo: https://helm.cilium.io
+    namespace: kube-system
+    valuesInline:
+      operator:
+        replicas: 1
+      envoy:
+        enabled: true
+      hubble:
+        relay:
+          enabled: true
+        ui:
+          enabled: true
+        tls:
+          auto:
+            method: certmanager
+            certManagerIssuerRef:
+              name: cilium-ca
+              kind: ClusterIssuer
+              group: cert-manager.io
+    includeCRDs: true
