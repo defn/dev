@@ -36,6 +36,9 @@ function main {
 	esac
 	git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
 
+	mkdir -p ~/.kube
+	touch ~/.kube/config
+
 	if [[ -n ${workdir} ]]; then
 		cd "${workdir}"
 	fi
