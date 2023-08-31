@@ -23,27 +23,27 @@ resource "helm_release" "main" {
 
   set {
     name  = "sync.pods.ephemeralContainers"
-    value = true
+    value = "true"
   }
 
   set {
     name  = "sync.persistentvolumes.enabled"
-    value = true
+    value = "true"
   }
 
   set {
     name  = "sync.ingresses.enabled"
-    value = true
+    value = "true"
   }
 
   set {
     name  = "sync.nodes.enabled"
-    value = true
+    value = "true"
   }
 
   set {
     name  = "ync.serviceaccounts.enabled"
-    value = true
+    value = "true"
   }
 }
 
