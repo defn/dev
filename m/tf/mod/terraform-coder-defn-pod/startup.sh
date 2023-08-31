@@ -40,7 +40,8 @@ function main {
 		cd "${workdir}"
 	fi
 
-	make
+	env | sort | grep -i code
+	make || true
 }
 
 time main "$@"
