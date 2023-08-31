@@ -73,8 +73,8 @@ resource "kubernetes_deployment" "main" {
     namespace = local.ns
 
     labels = {
-      "app.kubernetes.io/name"     = "coder-workspace"
-      "app.kubernetes.io/instance" = "coder-workspace-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
+      "app.kubernetes.io/name"     = "dfd-workspace"
+      "app.kubernetes.io/instance" = "dfd-workspace-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
       "app.kubernetes.io/part-of"  = "coder"
       "com.coder.resource"         = "true"
       "com.coder.workspace.id"     = data.coder_workspace.me.id
@@ -92,14 +92,14 @@ resource "kubernetes_deployment" "main" {
 
     selector {
       match_labels = {
-        "app.kubernetes.io/name" = "coder-workspace"
+        "app.kubernetes.io/name" = "dfd-workspace"
       }
     }
 
     template {
       metadata {
         labels = {
-          "app.kubernetes.io/name" = "coder-workspace"
+          "app.kubernetes.io/name" = "dfd-workspace"
         }
         annotations = {
           "linkerd.io/inject" = "enabled"
@@ -112,7 +112,7 @@ resource "kubernetes_deployment" "main" {
         }
 
         container {
-          name              = "dev"
+          name              = "coder-agent"
           image             = data.coder_parameter.docker_image.value
           image_pull_policy = "Always"
           command           = ["bash", "-c", coder_agent.main.init_script]
@@ -126,11 +126,14 @@ resource "kubernetes_deployment" "main" {
             value = coder_agent.main.token
           }
 
-          resources {
-            requests = {
-              //"cpu"    = "${data.coder_parameter.cpu.value}"
-              "memory" = "${data.coder_parameter.memory.value}Gi"
-            }
+          env {
+            name  = "DFD_OWNER"
+            value = lower(data.coder_workspace.me.owner)
+          }
+
+          env {
+            name  = "DFD_NAME"
+            value = lower(data.coder_workspace.me.name)
           }
 
           volume_mount {
