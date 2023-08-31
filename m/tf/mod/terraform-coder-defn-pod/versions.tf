@@ -3,6 +3,9 @@ terraform {
     coder = {
       source = "coder/coder"
     }
+    helm = {
+      source = "hashicorp/helm"
+    }
     kubernetes = {
       source = "hashicorp/kubernetes"
     }

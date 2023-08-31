@@ -1,10 +1,18 @@
-variable "namespace" {
-  type        = string
-  description = "The Kubernetes namespace to create workspaces in (must exist prior to creating workspaces)"
-}
-
 provider "kubernetes" {
   config_path = "~/.kube/config"
+}
+
+resource "kubernetes_namespace" "main" {
+  metadata {
+    name = local.ns
+  }
+}
+
+resource "helm_release" "main" {
+  name       = "vcluster"
+  repository = "https://charts.loft.sh"
+  chart      = "vcluster"
+  version    = "0.15.7"
 }
 
 resource "kubernetes_deployment" "main" {
@@ -12,7 +20,7 @@ resource "kubernetes_deployment" "main" {
 
   metadata {
     name      = "coder-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
-    namespace = var.namespace
+    namespace = local.ns
 
     labels = {
       "app.kubernetes.io/name"     = "coder-workspace"

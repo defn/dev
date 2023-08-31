@@ -1,4 +1,3 @@
 module "workspace" {
-  source    = "./mod/terraform-coder-defn-pod"
-  namespace = "default"
+  source = "./mod/terraform-coder-defn-pod"
 }
