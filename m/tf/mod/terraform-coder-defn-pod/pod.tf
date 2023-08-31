@@ -116,20 +116,38 @@ resource "kubernetes_deployment" "main" {
           image             = data.coder_parameter.docker_image.value
           image_pull_policy = "Always"
           command           = ["bash", "-c", coder_agent.main.init_script]
+
           security_context {
             run_as_user = "1000"
           }
+
           env {
             name  = "CODER_AGENT_TOKEN"
             value = coder_agent.main.token
           }
+
           resources {
             requests = {
               //"cpu"    = "${data.coder_parameter.cpu.value}"
               "memory" = "${data.coder_parameter.memory.value}Gi"
             }
           }
+
+          volume_mount {
+            mount_path = "/var/run/docker.sock"
+            name       = "docker"
+            read_only  = false
+          }
+
         }
+
+        volume {
+          name = "docker"
+          host_path {
+            path = "/var/run/docker.sock"
+          }
+        }
+
       }
     }
   }
