@@ -40,7 +40,7 @@ function main {
 		cd "${workdir}"
 	fi
 
-	date
+	make
 }
 
 time main "$@"
