@@ -52,6 +52,10 @@ function main {
 	set -efu -o pipefail
 
 	case "${1-}" in
+	open)
+		shift
+		open "http://localhost:$1"
+		;;
 	forward)
 		shift
 		local remote
