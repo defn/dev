@@ -23,12 +23,12 @@ k8s_yaml(local("cat deploy.yaml"))
 k8s_resource("api", resource_deps=["cli"])
 
 # api builds when cmd/, command/ changes
-local_resource(name="cli", cmd="make build", deps=["./cmd", "./commandi"])
+local_resource(name="cli", cmd="cd .. && make build", deps=["../cmd", "../command"])
 
 # api updates when api builds
 custom_build_with_restart(
     ref="api",
-    command="make image tag=$EXPECTED_REF",
+    command="cd .. && make image tag=$EXPECTED_REF",
     deps=["/tmp/cli"],
     trigger=["/tmp/cli"],
     entrypoint=["/cli"],

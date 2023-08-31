@@ -26,13 +26,13 @@ kind: Ingress
 metadata:
   name: api
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: api.defn.run
+    external-dns.alpha.kubernetes.io/hostname: api.dev.amanibhavam.defn.run
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
   ingressClassName: traefik
   rules:
-    - host: api.defn.run
+    - host: api.dev.amanibhavam.defn.run
       http:
         paths:
           - path: /
