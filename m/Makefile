@@ -74,7 +74,7 @@ za:
 	docker rm -f k3d-registry
 	this-prune
 	bin/make-k3d init
-	cd coder && $(MAKE) image
+	cd coder && ( $(MAKE) image || $(MAKE) image )
 
 warudo:
 	k3d cluster delete dfd || true
