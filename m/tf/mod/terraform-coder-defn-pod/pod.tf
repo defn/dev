@@ -21,6 +21,25 @@ resource "helm_release" "main" {
   version    = "0.15.7"
 }
 
+resource "kubernetes_role_binding" "main" {
+  metadata {
+    name      = "coder-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
+    namespace = local.ns
+  }
+
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "Role"
+    name      = "admin"
+  }
+
+  subject {
+    kind      = "ServiceAccount"
+    name      = "default"
+    namespace = local.ns
+  }
+}
+
 resource "kubernetes_deployment" "main" {
   wait_for_rollout = false
 
