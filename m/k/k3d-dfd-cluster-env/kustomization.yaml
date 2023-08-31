@@ -280,6 +280,48 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
+        cilium: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-dfd-cluster-cilium
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: k3d-dfd-cluster
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/k/r/k3d-dfd-cluster-cilium
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        argo-cd: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-dfd-cluster-argo-cd
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: k3d-dfd-cluster
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/k/r/k3d-dfd-cluster-argo-cd
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
     name: any-resource
     version: 0.1.0
     repo: https://kiwigrid.github.io
