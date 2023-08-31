@@ -20,6 +20,31 @@ resource "helm_release" "main" {
   repository = "https://charts.loft.sh"
   chart      = "vcluster"
   version    = "0.15.7"
+
+  set {
+    name  = "sync.pods.ephemeralContainers"
+    value = true
+  }
+
+  set {
+    name  = "sync.persistentvolumes.enabled"
+    value = true
+  }
+
+  set {
+    name  = "sync.ingresses.enabled"
+    value = true
+  }
+
+  set {
+    name  = "sync.nodes.enabled"
+    value = true
+  }
+
+  set {
+    name  = "ync.serviceaccounts.enabled"
+    value = true
+  }
 }
 
 resource "kubernetes_cluster_role_binding" "main" {
