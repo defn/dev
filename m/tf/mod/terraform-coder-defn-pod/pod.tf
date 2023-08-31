@@ -16,6 +16,7 @@ resource "kubernetes_namespace" "main" {
 
 resource "helm_release" "main" {
   name       = "vcluster"
+  namespace  = local.ns
   repository = "https://charts.loft.sh"
   chart      = "vcluster"
   version    = "0.15.7"
@@ -23,7 +24,7 @@ resource "helm_release" "main" {
 
 resource "kubernetes_cluster_role_binding" "main" {
   metadata {
-    name = "dfd-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
+    name = local.ns
   }
 
   role_ref {
@@ -43,7 +44,7 @@ resource "kubernetes_deployment" "main" {
   wait_for_rollout = false
 
   metadata {
-    name      = "dfd-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
+    name      = local.ns
     namespace = local.ns
 
     labels = {
