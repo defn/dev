@@ -25,6 +25,7 @@ No modules.
 | [helm_release.main](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release)                       | resource    |
 | [kubernetes_deployment.main](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/deployment)     | resource    |
 | [kubernetes_namespace.main](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace)       | resource    |
+| [kubernetes_role.main](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/role)                 | resource    |
 | [kubernetes_role_binding.main](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/role_binding) | resource    |
 | [coder_parameter.cpu](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter)                   | data source |
 | [coder_parameter.docker_image](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter)          | data source |
