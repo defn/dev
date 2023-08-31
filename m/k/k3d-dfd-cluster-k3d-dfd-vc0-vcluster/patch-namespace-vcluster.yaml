@@ -1,8 +1,0 @@
-#ManagedBy: cue
-
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: k3d-dfd-vc0-vcluster
-  annotations:
-    linkerd.io/inject: disabled
