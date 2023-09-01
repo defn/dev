@@ -15,7 +15,6 @@ tap "homebrew/cask-fonts"
 cask "font-fira-code"
 
 cask "divvy"
-cask "docker"
 cask "google-chrome"
 cask "visual-studio-code"
 cask "balenaetcher"
