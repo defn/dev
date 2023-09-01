@@ -16,7 +16,8 @@ resource "kubernetes_namespace" "main" {
 
 resource "kubernetes_service_account" "main" {
   metadata {
-    name = local.ns
+    name      = local.ns
+    namespace = local.ns
     annotations = {
       "eks.amazonaws.com/role-arn" = "arn:aws:iam::510430971399:role/ro"
     }
