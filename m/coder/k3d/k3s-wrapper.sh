@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -exu
+set -eu
 
 if [[ ${1-} != server ]]; then
 	exec /bin/k3s-real "$@"
