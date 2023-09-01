@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/awscli",
-        "lastModified": 1693421642,
-        "narHash": "sha256-hao1yB/CTc0PiYyoGn9/42vYB6Y4GTH5GB0irJN+qlg=",
+        "lastModified": 1693594438,
+        "narHash": "sha256-kMUJ3YCq0XjNzagZ31LH9RnYOeMwICkM7+WaYYXtyUs=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "fce678062ec64fa8e9241c7cfcb163225866202e",
+        "rev": "bad05f58759c7c77bf2645593d13d46453c581f4",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/awscli",
         "owner": "defn",
-        "ref": "pkg-awscli-2.13.14-1",
+        "ref": "pkg-awscli-2.13.15-1",
         "repo": "dev",
         "type": "github"
       }
@@ -314,17 +314,17 @@
       },
       "locked": {
         "dir": "m/pkg/flyctl",
-        "lastModified": 1693528522,
-        "narHash": "sha256-HvmBsGqIhECOKZNlHULZWX10ipqP2UQDgn3RxTigguU=",
+        "lastModified": 1693594448,
+        "narHash": "sha256-Ql6oTW9su0xgyMZFV6+4cBgvN/dTUBpB5ewqfnN7x7M=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "8b8718a31946fdbfa532709dd20298b9711cf0f8",
+        "rev": "ef45a1b227350fa5401f56bfc2d13fc4bd9e2b6f",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/flyctl",
         "owner": "defn",
-        "ref": "pkg-flyctl-0.1.86-1",
+        "ref": "pkg-flyctl-0.1.87-1",
         "repo": "dev",
         "type": "github"
       }

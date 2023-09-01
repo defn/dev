@@ -14,6 +14,16 @@ resource "kubernetes_namespace" "main" {
   }
 }
 
+resource "kubernetes_service_account" "main" {
+  metadata {
+    name      = local.ns
+    namespace = local.ns
+    annotations = {
+      "eks.amazonaws.com/role-arn" = "arn:aws:iam::510430971399:role/ro"
+    }
+  }
+}
+
 resource "helm_release" "main" {
   name       = "vcluster"
   namespace  = local.ns
@@ -42,7 +52,7 @@ resource "helm_release" "main" {
   }
 
   set {
-    name  = "ync.serviceaccounts.enabled"
+    name  = "sync.serviceaccounts.enabled"
     value = "true"
   }
 }
@@ -60,7 +70,7 @@ resource "kubernetes_cluster_role_binding" "main" {
 
   subject {
     kind      = "ServiceAccount"
-    name      = "default"
+    name      = local.ns
     namespace = local.ns
   }
 }
@@ -105,11 +115,14 @@ resource "kubernetes_deployment" "main" {
           "linkerd.io/inject" = "enabled"
         }
       }
+
       spec {
         security_context {
           run_as_user = 1000
           fs_group    = 1000
         }
+
+        service_account_name = local.ns
 
         container {
           name              = "coder-agent"
