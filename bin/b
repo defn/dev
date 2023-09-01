@@ -187,7 +187,6 @@ function main {
 
 		local tmp_dot
 		tmp_dot="$(mktemp -d -t graphiz-XXXXXX || true)"
-		set -x
 		"$0"query --noimplicit_deps "deps(${rule})" --output graph >"${tmp_dot}/graph.in" && dot -Tpng <"${tmp_dot}/graph.in" >"${tmp_dot}/graph.png" && code "${tmp_dot}/graph.png"
 		;;
 	*)
