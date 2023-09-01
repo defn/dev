@@ -37,6 +37,7 @@ docker.io/netdata/netdata:v1.42.1
 docker.io/prom/prometheus:v2.43.0
 docker.io/rancher/k3s:v1.25.12-k3s1
 docker.io/rancher/k3s:v1.26.7-k3s1
+docker.io/rancher/k3s:v1.27.3-k3s1
 docker.io/rancher/k3s:v1.27.4-k3s1
 docker.io/rancher/klipper-lb:v0.4.4
 docker.io/rancher/local-path-provisioner:v0.0.24
@@ -90,6 +91,7 @@ quay.io/jetstack/cert-manager-controller:v1.12.3
 quay.io/jetstack/cert-manager-webhook:v1.12.3
 rancher/k3s:v1.25.12-k3s1
 rancher/k3s:v1.26.7-k3s1
+rancher/k3s:v1.27.3-k3s1
 rancher/k3s:v1.27.4-k3s1
 rancher/klipper-lb:v0.4.4
 rancher/local-path-provisioner:v0.0.24
