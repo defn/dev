@@ -1802,6 +1802,15 @@ spec:
 
     --BOUNDARY
 ---
+apiVersion: karpenter.sh/v1alpha5
+kind: Provisioner
+metadata:
+  name: default
+  namespace: karpenter
+spec:
+  providerRef:
+    name: default
+---
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:

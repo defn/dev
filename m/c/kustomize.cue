@@ -604,6 +604,13 @@ kustomize: "karpenter": #Kustomize & {
 		}
 	}
 
+	resource: "provisioner-default": {
+		apiVersion: "karpenter.sh/v1alpha5"
+		kind:       "Provisioner"
+		metadata: name: "default"
+		spec: providerRef: name: "default"
+	}
+
 	resource: "awsnodetemplate-default": {
 		apiVersion: "karpenter.k8s.aws/v1alpha1"
 		kind:       "AWSNodeTemplate"
