@@ -1734,7 +1734,7 @@ spec:
         name: nginx-container
         resources:
           requests:
-            cpu: 8000m
+            cpu: 7000m
 ---
 apiVersion: policy/v1
 kind: PodDisruptionBudget

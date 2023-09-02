@@ -596,7 +596,7 @@ kustomize: "karpenter": #Kustomize & {
 					image: "nginx:latest"
 					resources: {
 						requests: {
-							cpu: "8000m"
+							cpu: "7000m"
 						}
 					}
 				}]
