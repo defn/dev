@@ -1110,7 +1110,7 @@ data:
   # https://github.com/uber-go/zap/blob/aa3e73ec0896f8b066ddf668597a02f89628ee50/config.go
   zap-logger-config: |
     {
-      "level": "error",
+      "level": "debug",
       "development": false,
       "disableStacktrace": true,
       "disableCaller": true,
@@ -1148,7 +1148,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
 data:  
     "aws.clusterEndpoint": ""
-    "aws.clusterName": ""
+    "aws.clusterName": "k3d-dfd"
     "aws.defaultInstanceProfile": ""
     "aws.enableENILimitedPodDensity": "true"
     "aws.enablePodENI": "false"
@@ -1462,7 +1462,7 @@ spec:
         app.kubernetes.io/name: karpenter
         app.kubernetes.io/instance: karpenter
       annotations:
-        checksum/settings: 50fc1c60b8c211510a9b3c4b95f0bc30d7c5ab09723548859450f01086136dbb
+        checksum/settings: 32227bd68a69686181aabc92e55e2fb90964115a408393dbe7bbe315a91bb5a7
     spec:
       serviceAccountName: karpenter
       securityContext:
@@ -1494,10 +1494,6 @@ spec:
                   containerName: controller
                   divisor: "0"
                   resource: limits.memory
-            - name: AWS_REGION
-              value: us-west-1
-            - name: AWS_NODE_NAME_CONVENTION
-              value: resource-name
           ports:
             - name: http-metrics
               containerPort: 8000
