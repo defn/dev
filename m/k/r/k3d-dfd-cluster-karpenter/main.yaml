@@ -1763,7 +1763,7 @@ spec:
     755 /tmp/dfd\n\n# download chamber\ncurl -o /tmp/chamber -sSL \\\n\thttps://github.com/segmentio/chamber/releases/download/v2.13.3/chamber-v2.13.3-linux-amd64\nchmod
     755 /tmp/chamber\n\n# docker exec -ti  k3d-dfd-server-0 cat /var/lib/rancher/k3s/server/agent-token\n/tmp/dfd
     node create \"$instance\" --role agent --image quay.io/defn/dev:latest-k3d --cluster
-    https://100.113.122.80:6443 \\\n\t--k3s-arg \"TAILSCALE_AUTHKEY=$(/tmp/chamber
+    https://100.78.243.106:6443 \\\n\t--k3s-arg \"TAILSCALE_AUTHKEY=$(/tmp/chamber
     -b secretsmanager read --quiet k3d-dfd tailscale_authkey)=TAILSCALE_AUTHKEY\"
     \\\n\t--token K10a5501ccdd507b442c851c11172bbc3f9f1ac46895c169153d448f6b9826d7978::server:poPkbSDCfsqXUPsJOTFl\n\n--BOUNDARY\n"
 ---
