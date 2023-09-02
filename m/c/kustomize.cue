@@ -571,6 +571,15 @@ kustomize: "karpenter": #Kustomize & {
 			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::510430971399:role/ro"
 		}
 	}
+
+	psm: "deployment-karpenter": {
+		apiVersion: "apps/v1"
+		kind:       "Deployment"
+		metadata: {
+			name: "karpenter"
+		}
+		spec: replicas: 1
+	}
 }
 
 // https://github.com/knative/serving/releases
