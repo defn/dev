@@ -562,6 +562,15 @@ kustomize: "karpenter": #Kustomize & {
 			"aws.clusterName": cluster.cluster_name
 		}
 	}
+
+	psm: "serviceaccount-karpenter": {
+		apiVersion: "v1"
+		kind:       "ServiceAccount"
+		metadata: {
+			name: "karpenter"
+			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::510430971399:role/ro"
+		}
+	}
 }
 
 // https://github.com/knative/serving/releases

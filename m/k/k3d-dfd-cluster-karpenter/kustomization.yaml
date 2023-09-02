@@ -2,6 +2,7 @@
 
 patches:
   - path: patch-config-map-karpenter-global-settings.yaml
+  - path: patch-serviceaccount-karpenter.yaml
 resources:
   - karpenter.yaml
   - resource-namespace-karpenter.yaml
