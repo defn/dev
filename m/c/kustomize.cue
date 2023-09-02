@@ -610,10 +610,12 @@ kustomize: "karpenter": #Kustomize & {
 		metadata: name: "default"
 		spec: {
 			amiFamily: "Custom"
-			amiSelector: "karpenter.sh/discovery": "k3d-dfd"
+
+			amiSelector: "karpenter.sh/discovery":           cluster.cluster_name
+			subnetSelector: "karpenter.sh/discovery":        cluster.cluster_name
+			securityGroupSelector: "karpenter.sh/discovery": cluster.cluster_name
+
 			instanceProfile: "coder-amanibhavam-dev"
-			subnetSelector: "karpenter.sh/discovery":        "k3d-dfd"
-			securityGroupSelector: "karpenter.sh/discovery": "k3d-dfd"
 			blockDeviceMappings: [{
 				deviceName: "/dev/sda1"
 				ebs: {
