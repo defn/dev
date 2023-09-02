@@ -605,7 +605,7 @@ kustomize: "karpenter": #Kustomize & {
 	}
 
 	resource: "awsnodetemplate-default": {
-		apiVersion: "karpenter.k8s.aws/v1alpha1"
+		apiVersion: "karpenter.sh/v1alpha5"
 		kind:       "AWSNodeTemplate"
 		metadata: name: "default"
 		spec: {
