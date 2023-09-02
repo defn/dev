@@ -1590,6 +1590,10 @@ spec:
               containerName: controller
               divisor: "0"
               resource: limits.memory
+        - name: AWS_REGION
+          value: us-west-2
+        - name: AWS_NODE_NAME_CONVENTION
+          value: resource-name
         image: public.ecr.aws/karpenter/controller:v0.29.0@sha256:3009f10487d9338f77c325adee3c208513cd06c7f191653327ef3a44006bf9c8
         imagePullPolicy: IfNotPresent
         livenessProbe:
@@ -1673,7 +1677,7 @@ spec:
       app.kubernetes.io/instance: karpenter
       app.kubernetes.io/name: karpenter
 ---
-apiVersion: karpenter.k8s.aws/v1alpha1
+apiVersion: karpenter.sh/v1alpha5
 kind: AWSNodeTemplate
 metadata:
   name: default

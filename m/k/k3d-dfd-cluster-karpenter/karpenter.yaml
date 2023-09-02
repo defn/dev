@@ -1494,6 +1494,10 @@ spec:
                   containerName: controller
                   divisor: "0"
                   resource: limits.memory
+            - name: AWS_REGION
+              value: us-west-2
+            - name: AWS_NODE_NAME_CONVENTION
+              value: resource-name
           ports:
             - name: http-metrics
               containerPort: 8000
