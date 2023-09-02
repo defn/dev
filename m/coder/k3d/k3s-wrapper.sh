@@ -1,5 +1,11 @@
 #!/bin/bash
 
+mount bpffs -t bpf /sys/fs/bpf
+mount --make-shared /sys/fs/bpf
+mkdir -p /run/cilium/cgroupv2
+mount -t cgroup2 none /run/cilium/cgroupv2
+mount --make-shared /run/cilium/cgroupv2
+
 set -eu
 
 case "${1-}" in
@@ -11,14 +17,6 @@ case "${1-}" in
     exit $?
     ;;
 esac
-
-set +e
-mount bpffs -t bpf /sys/fs/bpf
-mount --make-shared /sys/fs/bpf
-mkdir -p /run/cilium/cgroupv2
-mount -t cgroup2 none /run/cilium/cgroupv2
-mount --make-shared /run/cilium/cgroupv2
-set -e
 
 tailscaled --statedir=/var/lib/tailscale &
 
