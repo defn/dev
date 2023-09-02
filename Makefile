@@ -109,7 +109,7 @@ login:
 
 symlinks:
 	$(MARK) configure symlinks
-	bash -x bin/persist-cache
+	bin/persist-cache
 
 perms:
 	$(MARK) configure permissions
