@@ -2,18 +2,24 @@
 
 set -eu
 
-if [[ ${1-} != server ]]; then
-	exec /bin/k3s-real "$@"
-  exit $?
-fi
+case "${1-}" in
+  server|agent)
+    true
+    ;;
+  *)
+    exec /bin/k3s-real "$@"
+    exit $?
+    ;;
+esac
 
 tailscaled --statedir=/var/lib/tailscale &
 
 container_ip=$(ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | cut -d' ' -f1)
 
-env | grep ^TAILSCALE_AUTHKEY= | cut -d= -f2- > /tmp/.tsauthkey
-tailscale up --authkey=file:/tmp/.tsauthkey
-rm -f /tmp/.tsauthkey
+tsauthkey="$*"
+tsauthkey="${tsauthkey##*TAILSCALE_AUTHKEY=}"
+tsauthkey="${tsauthkey%%=TAILSCALE_AUTHKEY*}"
+tailscale up --authkey="${tsauthkey}"
 
 while true; do
   ts_ip=$(tailscale ip -4 || true)
@@ -21,5 +27,8 @@ while true; do
   sleep 1
 done
 
-exec /bin/k3s-real "$@" --node-ip "${ts_ip}" --node-external-ip "${ts_ip}" --flannel-iface=tailscale0
+# strip out tsauthkey
+k3sargs="$*"
+k3sargs="${k3sargs/TAILSCALE_AUTHKEY=*=TAILSCALEAUTHKEY}"
+exec /bin/k3s-real $k3sargs --node-ip "${ts_ip}" --node-external-ip "${ts_ip}" --flannel-iface=tailscale0
 

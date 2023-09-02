@@ -55,7 +55,7 @@ function make_dfd {
 		rm -vf ~/.kube/config*
 		env KUBECONFIG=$HOME/.kube/config \
 		dfd cluster create ${nme} --config k3d.yaml \
-			--env TAILSCALE_AUTHKEY="$(chamber -b secretsmanager read --quiet k3d-${nme} tailscale_authkey)@all" \
+			--k3s-arg "TAILSCALE_AUTHKEY=$(chamber -b secretsmanager read --quiet k3d-${nme} tailscale_authkey)=TAILSCALE_AUTHKEY@all" \
 			--token K10a5501ccdd507b442c851c11172bbc3f9f1ac46895c169153d448f6b9826d7978::server:poPkbSDCfsqXUPsJOTFl
 		docker update --restart=no k3d-${nme}-server-0
 
