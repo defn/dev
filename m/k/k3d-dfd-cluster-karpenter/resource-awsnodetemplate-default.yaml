@@ -34,7 +34,6 @@ spec:
 
     # docker	
     apt install -y docker.io
-    docker pull quay.io/defn/dev:latest-k3d
 
     # download forked k3d
     curl -o /tmp/dfd -sSL \
@@ -46,9 +45,15 @@ spec:
     	https://github.com/segmentio/chamber/releases/download/v2.13.3/chamber-v2.13.3-linux-amd64
     chmod 755 /tmp/chamber
 
-    # docker exec -ti  k3d-dfd-server-0 cat /var/lib/rancher/k3s/server/agent-token
+    # docker exec -ti k3d-dfd-server-0 cat /var/lib/rancher/k3s/server/agent-token
     /tmp/dfd node create "$instance" --role agent --image quay.io/defn/dev:latest-k3d --cluster https://100.78.243.106:6443 \
     	--k3s-arg "TAILSCALE_AUTHKEY=$(/tmp/chamber -b secretsmanager read --quiet k3d-dfd tailscale_authkey)=TAILSCALE_AUTHKEY" \
     	--token K1012f65cd50b62701a4ae9d841890ed08da8b47fdce13a3fa0cf8aaae8cec1fea3::server:poPkbSDCfsqXUPsJOTFl
+
+    docker exec -i ${instance} mount bpffs -t bpf /sys/fs/bpf
+    docker exec -i ${instance} mount --make-shared /sys/fs/bpf
+    docker exec -i ${instance} mkdir -p /run/cilium/cgroupv2
+    docker exec -i ${instance} mount -t cgroup2 none /run/cilium/cgroupv2
+    docker exec -i ${instance} mount --make-shared /run/cilium/cgroupv2
 
     --BOUNDARY
