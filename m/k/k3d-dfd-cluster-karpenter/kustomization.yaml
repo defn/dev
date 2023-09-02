@@ -1,6 +1,7 @@
 #ManagedBy: cue
 
-patches: []
+patches:
+  - path: patch-config-map-karpenter-global-settings.yaml
 resources:
   - karpenter.yaml
   - resource-namespace-karpenter.yaml

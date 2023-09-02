@@ -536,6 +536,8 @@ kustomize: "pod-identity": #KustomizeHelm & {
 
 // gen_karpenter.sh
 kustomize: "karpenter": #Kustomize & {
+	cluster: #Cluster
+
 	namespace: "karpenter"
 
 	resource: "karpenter": {
@@ -547,6 +549,17 @@ kustomize: "karpenter": #Kustomize & {
 		kind:       "Namespace"
 		metadata: {
 			name: "karpenter"
+		}
+	}
+
+	psm: "config-map-karpenter-global-settings": core.#ConfigMap & {
+		apiVersion: "v1"
+		kind:       "ConfigMap"
+		metadata: {
+			name: "karpenter-global-settings"
+		}
+		data: {
+			"aws.clusterName": cluster.cluster_name
 		}
 	}
 }

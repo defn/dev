@@ -1,0 +1,8 @@
+#ManagedBy: cue
+
+metadata:
+  name: karpenter-global-settings
+data:
+  aws.clusterName: k3d-dfd
+kind: ConfigMap
+apiVersion: v1

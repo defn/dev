@@ -78,6 +78,7 @@ index.docker.io/containous/whoami
 netdata/agent-sd:v0.2.8
 netdata/netdata:v1.42.1
 prom/prometheus:v2.43.0
+public.ecr.aws/karpenter/controller:v0.29.0
 quay.io/argoproj/argocd:v2.7.10
 quay.io/argoproj/argocd:v2.8.2
 quay.io/cilium/cilium-envoy:v1.25.9-f039e2bd380b7eef2f2feea5750676bb36133699

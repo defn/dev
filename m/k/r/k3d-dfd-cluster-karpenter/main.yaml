@@ -1428,7 +1428,7 @@ data:
   loglevel.webhook: error
   zap-logger-config: |
     {
-      "level": "error",
+      "level": "debug",
       "development": false,
       "disableStacktrace": true,
       "disableCaller": true,
@@ -1464,7 +1464,7 @@ metadata:
 apiVersion: v1
 data:
   aws.clusterEndpoint: ""
-  aws.clusterName: ""
+  aws.clusterName: k3d-dfd
   aws.defaultInstanceProfile: ""
   aws.enableENILimitedPodDensity: "true"
   aws.enablePodENI: "false"
@@ -1588,10 +1588,6 @@ spec:
               containerName: controller
               divisor: "0"
               resource: limits.memory
-        - name: AWS_REGION
-          value: us-west-1
-        - name: AWS_NODE_NAME_CONVENTION
-          value: resource-name
         image: public.ecr.aws/karpenter/controller:v0.29.0@sha256:3009f10487d9338f77c325adee3c208513cd06c7f191653327ef3a44006bf9c8
         imagePullPolicy: IfNotPresent
         livenessProbe:
