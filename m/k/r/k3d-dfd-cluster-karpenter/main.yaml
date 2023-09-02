@@ -7,7 +7,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: awsnodetemplates.karpenter.k8s.aws
 spec:
   group: karpenter.k8s.aws
@@ -320,8 +320,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: machines.karpenter.sh
 spec:
   group: karpenter.sh
@@ -675,8 +674,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: provisioners.karpenter.sh
 spec:
   group: karpenter.sh
@@ -689,7 +687,15 @@ spec:
     singular: provisioner
   scope: Cluster
   versions:
-  - name: v1alpha5
+  - additionalPrinterColumns:
+    - jsonPath: .spec.providerRef.name
+      name: Template
+      type: string
+    - jsonPath: .spec.weight
+      name: Weight
+      priority: 1
+      type: string
+    name: v1alpha5
     schema:
       openAPIV3Schema:
         description: Provisioner is the Schema for the Provisioners API
@@ -1054,8 +1060,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.29.0
-    helm.sh/chart: karpenter-v0.29.0
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
   name: karpenter
   namespace: karpenter
 ---
@@ -1066,8 +1072,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.29.0
-    helm.sh/chart: karpenter-v0.29.0
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
   name: karpenter
   namespace: karpenter
 rules:
@@ -1140,8 +1146,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.29.0
-    helm.sh/chart: karpenter-v0.29.0
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
   name: karpenter-dns
   namespace: karpenter
 rules:
@@ -1155,14 +1161,41 @@ rules:
   - get
 ---
 apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    app.kubernetes.io/instance: karpenter
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: karpenter
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
+  name: karpenter-lease
+  namespace: karpenter
+rules:
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - delete
+---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.29.0
-    helm.sh/chart: karpenter-v0.29.0
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
   name: karpenter
 rules:
 - apiGroups:
@@ -1192,6 +1225,7 @@ rules:
 - apiGroups:
   - karpenter.k8s.aws
   resources:
+  - awsnodetemplates
   - awsnodetemplates/status
   verbs:
   - patch
@@ -1204,8 +1238,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.29.0
-    helm.sh/chart: karpenter-v0.29.0
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
   name: karpenter-admin
 rules:
@@ -1242,8 +1276,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.29.0
-    helm.sh/chart: karpenter-v0.29.0
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
   name: karpenter-core
 rules:
 - apiGroups:
@@ -1309,12 +1343,20 @@ rules:
 - apiGroups:
   - karpenter.sh
   resources:
-  - provisioners/status
   - machines
   - machines/status
   verbs:
   - create
   - delete
+  - update
+  - patch
+- apiGroups:
+  - karpenter.sh
+  resources:
+  - provisioners
+  - provisioners/status
+  verbs:
+  - update
   - patch
 - apiGroups:
   - ""
@@ -1354,8 +1396,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.29.0
-    helm.sh/chart: karpenter-v0.29.0
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
   name: karpenter
   namespace: karpenter
 roleRef:
@@ -1374,8 +1416,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.29.0
-    helm.sh/chart: karpenter-v0.29.0
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
   name: karpenter-dns
   namespace: karpenter
 roleRef:
@@ -1388,14 +1430,34 @@ subjects:
   namespace: karpenter
 ---
 apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/instance: karpenter
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: karpenter
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
+  name: karpenter-lease
+  namespace: karpenter
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: karpenter-lease
+subjects:
+- kind: ServiceAccount
+  name: karpenter
+  namespace: karpenter
+---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   labels:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.29.0
-    helm.sh/chart: karpenter-v0.29.0
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
   name: karpenter
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -1413,8 +1475,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.29.0
-    helm.sh/chart: karpenter-v0.29.0
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
   name: karpenter-core
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -1458,13 +1520,16 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.29.0
-    helm.sh/chart: karpenter-v0.29.0
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
   name: config-logging
   namespace: karpenter
 ---
 apiVersion: v1
 data:
+  aws.assumeRoleARN: ""
+  aws.assumeRoleDuration: 15m
+  aws.clusterCABundle: ""
   aws.clusterEndpoint: https://kubernetes.default.svc.cluster.local:443
   aws.clusterName: k3d-dfd
   aws.defaultInstanceProfile: ""
@@ -1482,8 +1547,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.29.0
-    helm.sh/chart: karpenter-v0.29.0
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
   name: karpenter-global-settings
   namespace: karpenter
 ---
@@ -1494,8 +1559,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.29.0
-    helm.sh/chart: karpenter-v0.29.0
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
   name: karpenter-cert
   namespace: karpenter
 ---
@@ -1506,8 +1571,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.29.0
-    helm.sh/chart: karpenter-v0.29.0
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
   name: karpenter
   namespace: karpenter
 spec:
@@ -1532,8 +1597,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.29.0
-    helm.sh/chart: karpenter-v0.29.0
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
   name: karpenter
   namespace: karpenter
 spec:
@@ -1549,7 +1614,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/settings: 50fc1c60b8c211510a9b3c4b95f0bc30d7c5ab09723548859450f01086136dbb
+        checksum/settings: 1dd4c8a2c8ae811cb31ea2dc16ec935df8cb835e8f4b3c050f789b3fa06a4abc
       labels:
         app.kubernetes.io/instance: karpenter
         app.kubernetes.io/name: karpenter
@@ -1594,7 +1659,7 @@ spec:
           value: us-west-2
         - name: AWS_NODE_NAME_CONVENTION
           value: resource-name
-        image: public.ecr.aws/karpenter/controller:v0.29.0@sha256:3009f10487d9338f77c325adee3c208513cd06c7f191653327ef3a44006bf9c8
+        image: public.ecr.aws/karpenter/controller:v0.30.0@sha256:3d436ece23d17263edbaa2314281f3ac1c2b0d3fb9dfa531cb30509659d8a7c3
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -1617,13 +1682,25 @@ spec:
           httpGet:
             path: /readyz
             port: http
+          initialDelaySeconds: 5
           timeoutSeconds: 30
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
       dnsPolicy: Default
       nodeSelector:
         kubernetes.io/os: linux
       priorityClassName: system-cluster-critical
       securityContext:
-        fsGroup: 1000
+        fsGroup: 65536
+        runAsGroup: 65536
+        runAsNonRoot: true
+        runAsUser: 65536
+        seccompProfile:
+          type: RuntimeDefault
       serviceAccountName: karpenter
       tolerations:
       - key: CriticalAddonsOnly
@@ -1666,8 +1743,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.29.0
-    helm.sh/chart: karpenter-v0.29.0
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
   name: karpenter
   namespace: karpenter
 spec:
@@ -1677,7 +1754,7 @@ spec:
       app.kubernetes.io/instance: karpenter
       app.kubernetes.io/name: karpenter
 ---
-apiVersion: karpenter.sh/v1alpha5
+apiVersion: karpenter.k8s.aws/v1alpha1
 kind: AWSNodeTemplate
 metadata:
   name: default
@@ -1732,8 +1809,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.29.0
-    helm.sh/chart: karpenter-v0.29.0
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
   name: defaulting.webhook.karpenter.k8s.aws
 webhooks:
 - admissionReviewVersions:
@@ -1776,8 +1853,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.29.0
-    helm.sh/chart: karpenter-v0.29.0
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
   name: validation.webhook.config.karpenter.sh
 webhooks:
 - admissionReviewVersions:
@@ -1801,8 +1878,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.29.0
-    helm.sh/chart: karpenter-v0.29.0
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
   name: validation.webhook.karpenter.k8s.aws
 webhooks:
 - admissionReviewVersions:
@@ -1845,8 +1922,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.29.0
-    helm.sh/chart: karpenter-v0.29.0
+    app.kubernetes.io/version: 0.30.0
+    helm.sh/chart: karpenter-v0.30.0
   name: validation.webhook.karpenter.sh
 webhooks:
 - admissionReviewVersions:
