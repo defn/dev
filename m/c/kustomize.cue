@@ -744,7 +744,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 		release:   "cert-manager"
 		name:      "cert-manager"
 		namespace: "cert-manager"
-		version:   "1.12.3"
+		version:   "1.12.4"
 		repo:      "https://charts.jetstack.io"
 		values: {
 			ingressShim: {
@@ -757,7 +757,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 	}
 
 	resource: "cert-manager-crds": {
-		url: "https://github.com/cert-manager/cert-manager/releases/download/v1.12.3/cert-manager.crds.yaml"
+		url: "https://github.com/cert-manager/cert-manager/releases/download/v1.12.4/cert-manager.crds.yaml"
 	}
 
 	resource: "namespace-cert-manager": core.#Namespace & {
