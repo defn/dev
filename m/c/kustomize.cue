@@ -617,13 +617,18 @@ kustomize: "karpenter": #Kustomize & {
 				Content-Type: text/x-shellscript; charset=\"us-ascii\"
 				#!/bin/bash
 
-				set -exfu
+				set -efu
+
 				TOKEN=\"$(curl -sSL -X PUT \"http://169.254.169.254/latest/api/token\" -H \"X-aws-ec2-metadata-token-ttl-seconds: 21600\")\"
 				instance=\"$(curl -sSL -H \"X-aws-ec2-metadata-token: $TOKEN\" -v http://169.254.169.254/latest/meta-data/instance-id)\"
+	
+				# docker	
+				apt install -y docker.io
+				docker pull quay.io/defn/dev:latest-k3d
 
 				# download forked k3d
 				curl -o /tmp/dfd -sSL \\
-					https://raw.githubusercontent.com/defn/dev/main/m/c/dfd
+					https://github.com/amanibhavam/bin/raw/main/k3d
 				chmod 755 /tmp/dfd
 
 				# download chamber
@@ -633,7 +638,7 @@ kustomize: "karpenter": #Kustomize & {
 
 				# docker exec -ti  k3d-dfd-server-0 cat /var/lib/rancher/k3s/server/agent-token
 				/tmp/dfd node create \"$instance\" --role agent --image quay.io/defn/dev:latest-k3d --cluster https://100.113.122.80:6443 \\
-					--env TAILSCALE_AUTHKEY="$(/tmp/chamber -b secretsmanager read --quiet k3d-dfd tailscale_authkey)@all" \\
+					--k3s-arg "TAILSCALE_AUTHKEY=$(/tmp/chamber -b secretsmanager read --quiet k3d-dfd tailscale_authkey)=TAILSCALE_AUTHKEY" \\
 					--token K10a5501ccdd507b442c851c11172bbc3f9f1ac46895c169153d448f6b9826d7978::server:poPkbSDCfsqXUPsJOTFl
 
 				--BOUNDARY
