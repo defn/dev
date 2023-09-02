@@ -80,11 +80,23 @@ resource "aws_security_group" "dev" {
   vpc_id = aws_default_vpc.default[count.index].id
 
   egress {
+    description = "allow vpc ingress"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["172.31.32.0/20"]
+  }
+
+  egress {
     description = "allow all egress"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    "karpenter.sh/discovery" = "k3d-dfd"
   }
 }
 
