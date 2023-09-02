@@ -582,28 +582,6 @@ kustomize: "karpenter": #Kustomize & {
 		spec: replicas: 1
 	}
 
-	resource: "deployment-nginx": {
-		apiVersion: "apps/v1"
-		kind:       "Deployment"
-		metadata: name: "nginx-deployment"
-		spec: {
-			replicas: 1
-			selector: matchLabels: app: "nginx"
-			template: {
-				metadata: labels: app: "nginx"
-				spec: containers: [{
-					name:  "nginx-container"
-					image: "nginx:latest"
-					resources: {
-						requests: {
-							cpu: "7000m"
-						}
-					}
-				}]
-			}
-		}
-	}
-
 	resource: "provisioner-default": {
 		apiVersion: "karpenter.sh/v1alpha5"
 		kind:       "Provisioner"

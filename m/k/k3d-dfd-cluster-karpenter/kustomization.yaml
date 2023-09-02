@@ -7,7 +7,6 @@ patches:
 resources:
   - karpenter.yaml
   - resource-namespace-karpenter.yaml
-  - resource-deployment-nginx.yaml
   - resource-provisioner-default.yaml
   - resource-awsnodetemplate-default.yaml
 namespace: karpenter
