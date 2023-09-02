@@ -14,7 +14,7 @@ function main {
 	out="$1"
 	shift
 
-	"${flake_helm}" template karpenter --namespace default --version v0.29.0 --include-crds -f "${karpenter_values}" oci://public.ecr.aws/karpenter/karpenter | tail -n +3 >"${out}"
+	"${flake_helm}" template karpenter --namespace default --version v0.30.0 --include-crds -f "${karpenter_values}" oci://public.ecr.aws/karpenter/karpenter | tail -n +3 >"${out}"
 }
 
 main "$@"
