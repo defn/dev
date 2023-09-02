@@ -1768,7 +1768,7 @@ spec:
     ebs:
       deleteOnTermination: true
       encrypted: true
-      volumeSize: 30Gi
+      volumeSize: 40Gi
       volumeType: gp3
   instanceProfile: coder-amanibhavam-dev
   securityGroupSelector:
