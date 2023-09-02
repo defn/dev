@@ -28,21 +28,10 @@ spec:
     #!/bin/bash
 
     set -exfu
-    mkdir ~/tmp
-    cd ~/tmp
-
-    echo ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDqGiNI0Co9JAKytfce4UVhEJj+HMaoZ7TFiLg8SBeRDxV+OLma9rqDVkVqrxW5rkGMco3/Xhm/uGu+rkODJD/aZD/1fpzEsNUQIKhP9VXlVx98CMYOMCXTrgXZGdNPs0CzIb0TDI3W1tOGAA0VOZL+DGb/pUFiWeADLA9GiA8qnhahQp6yCNf8zpt3ATawSOGDLttB+PQPvwwUGMozihCcn84Kbf2Q0aQEl5J0kPLQTgBTJ1pPjTqBmkBWhP1KKAEDz3ziUmFF2eoZax7B+VXYlI6nPeETqFWkke6/EVLRqOXC4nYXKUbX2HloiEGkv4ifzzuGyS2Tdiysx0dthVcv cardno:8 624 146 > authorized_keys
-    install -m 0600 -o ubuntu -g ubuntu authorized_keys ~ubuntu/.ssh/authorized_keys
-    rm -f authorized_keys
-
     TOKEN="$(curl -sSL -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")"
     instance="$(curl -sSL -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/instance-id)"
 
-    echo FROM quay.io/defn/dev:latest-k3d > Dockerfile
-    echo ENV DEFN_DEV_TSKEY=_TSKEY_ >> Dockerfile
-    docker build -t k3d-control .
-    rm -f Dockerfile
-
-    env DEFN_DEV_PRIVILEGED=true k3d node create "$instance" --role agent --image k3d-control --cluster https://100.106.117.83:6443 --token _K3STOKEN_
+    # docker exec -ti  k3d-dfd-server-0 cat /var/lib/rancher/k3s/server/agent-token
+    k3d node create "$instance" --role agent --image quay.io/defn/dev:latest-k3d --cluster https://100.123.125.88:6443 --token K10a5501ccdd507b442c851c11172bbc3f9f1ac46895c169153d448f6b9826d7978::server:poPkbSDCfsqXUPsJOTFl
 
     --BOUNDARY
