@@ -626,7 +626,7 @@ kustomize: "karpenter": #Kustomize & {
 			blockDeviceMappings: [{
 				deviceName: "/dev/sda1"
 				ebs: {
-					volumeSize:          "30Gi"
+					volumeSize:          "40Gi"
 					volumeType:          "gp3"
 					encrypted:           true
 					deleteOnTermination: true
