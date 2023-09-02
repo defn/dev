@@ -619,6 +619,8 @@ kustomize: "karpenter": #Kustomize & {
 
 				set -efu
 
+				sysctl -w fs.inotify.max_user_instances=10000
+
 				TOKEN="$(curl -sSL -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")"
 				instance="$(curl -sSL -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/instance-id)"
 
