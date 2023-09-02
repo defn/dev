@@ -11,7 +11,9 @@ tailscaled --statedir=/var/lib/tailscale &
 
 container_ip=$(ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | cut -d' ' -f1)
 
-tailscale up
+env | grep ^TAILSCALE_AUTHKEY= | cut -d= -f2- > /tmp/.tsauthkey
+tailscale up --authkey=file:/tmp/.tsauthkey
+rm -f /tmp/.tsauthkey
 
 while true; do
   ts_ip=$(tailscale ip -4 || true)
