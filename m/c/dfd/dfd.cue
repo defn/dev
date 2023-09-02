@@ -25,6 +25,9 @@ infra: {
 		"external-secrets": [11, ""]
 		"secrets": [12, ""]
 
+		// scaling
+		"karpenter": [20, ""]
+
 		// service mesh
 		//"linkerd-control-plane": [30, ""]
 

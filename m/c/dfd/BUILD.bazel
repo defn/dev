@@ -28,9 +28,9 @@ copy_files(
     name = "outputs_karpenter",
     gen = {
         # ignore key, not used if prefix is present
-        "k/karpenter/karpenter.yaml": "generate_karpenter",
+        "k/k3d-dfd-cluster-karpenter/karpenter.yaml": "generate_karpenter",
     },
-    prefix = "k/karpenter/karpenter.yaml",
+    prefix = "k/k3d-dfd-cluster-karpenter/karpenter.yaml",
 )
 
 # kustomize configuration
