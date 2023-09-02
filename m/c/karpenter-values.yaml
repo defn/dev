@@ -1,5 +1,5 @@
 logLevel: error
-clusterName: k3d-global
+clusterName: k3d-dfd
 clusterEndpoint: https://kubernetes.default.svc.cluster.local
 controller:
   env:

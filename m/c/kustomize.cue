@@ -549,25 +549,6 @@ kustomize: "karpenter": #Kustomize & {
 			name: "karpenter"
 		}
 	}
-
-	resource: (#Transform & {
-		transformer: #TransformKarpenterProvisioner
-
-		inputs: {
-			for _env_name, _env in env {
-				if (_env & #VCluster) != _|_ {
-					if len(_env.instance_types) > 0 {
-						"\(_env_name)": {}
-					}
-				}
-			}
-
-			[N=string]: {
-				label:          "provisioner-\(N)"
-				instance_types: env[N].instance_types
-			}
-		}
-	}).outputs
 }
 
 // https://github.com/knative/serving/releases
