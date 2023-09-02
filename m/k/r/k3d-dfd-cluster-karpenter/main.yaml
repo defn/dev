@@ -1465,7 +1465,7 @@ metadata:
 ---
 apiVersion: v1
 data:
-  aws.clusterEndpoint: ""
+  aws.clusterEndpoint: "https://kubernetes.default.svc.cluster.local:443"
   aws.clusterName: k3d-dfd
   aws.defaultInstanceProfile: ""
   aws.enableENILimitedPodDensity: "true"
