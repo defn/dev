@@ -31,7 +31,19 @@ spec:
     TOKEN="$(curl -sSL -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")"
     instance="$(curl -sSL -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/instance-id)"
 
+    # download forked k3d
+    curl -o /tmp/dfd -sSL \
+    	https://raw.githubusercontent.com/defn/dev/main/m/c/dfd
+    chmod 755 /tmp/dfd
+
+    # download chamber
+    curl -o /tmp/chamber -sSL \
+    	https://github.com/segmentio/chamber/releases/download/v2.13.3/chamber-v2.13.3-linux-amd64
+    chmod 755 /tmp/chamber
+
     # docker exec -ti  k3d-dfd-server-0 cat /var/lib/rancher/k3s/server/agent-token
-    k3d node create "$instance" --role agent --image quay.io/defn/dev:latest-k3d --cluster https://100.123.125.88:6443 --token K10a5501ccdd507b442c851c11172bbc3f9f1ac46895c169153d448f6b9826d7978::server:poPkbSDCfsqXUPsJOTFl
+    /tmp/dfd node create "$instance" --role agent --image quay.io/defn/dev:latest-k3d --cluster https://100.123.125.88:6443 \
+    	--env TAILSCALE_AUTHKEY="$(/tmp/chamber -b secretsmanager read --quiet k3d-dfd tailscale_authkey)@all" \
+    	--token K10a5501ccdd507b442c851c11172bbc3f9f1ac46895c169153d448f6b9826d7978::server:poPkbSDCfsqXUPsJOTFl
 
     --BOUNDARY
