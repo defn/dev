@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -ex
+set -e
 
 exec 3>&1
 tail -f /tmp/dfd-startup.log 1>&3 &
@@ -47,6 +47,7 @@ function main {
 		git branch --set-upstream-to=origin/main main
 		;;
 	esac
+	git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
 
 	# persist daemon data
 	for d in docker tailscale; do
