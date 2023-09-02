@@ -1,3 +1,4 @@
 settings:
   aws:
     clusterName: k3d-dfd
+    defaultInstanceProfile: k3d-dfd
