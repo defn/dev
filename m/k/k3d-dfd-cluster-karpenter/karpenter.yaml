@@ -1148,8 +1148,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
 data:  
     "aws.clusterEndpoint": ""
-    "aws.clusterName": "k3d-dfd"
-    "aws.defaultInstanceProfile": "k3d-dfd"
+    "aws.clusterName": ""
+    "aws.defaultInstanceProfile": ""
     "aws.enableENILimitedPodDensity": "true"
     "aws.enablePodENI": "false"
     "aws.interruptionQueueName": ""
@@ -1462,7 +1462,7 @@ spec:
         app.kubernetes.io/name: karpenter
         app.kubernetes.io/instance: karpenter
       annotations:
-        checksum/settings: 16fba4fefc40641923ea4a9eb40eecab6fc5e283bd137120220f517d83fadebe
+        checksum/settings: 50fc1c60b8c211510a9b3c4b95f0bc30d7c5ab09723548859450f01086136dbb
     spec:
       serviceAccountName: karpenter
       securityContext:
