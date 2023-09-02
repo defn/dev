@@ -4,6 +4,8 @@ set -eu
 cd ~/m
 
 infra_name="dfd"
+# TODO remove
+nme="${infra_name}"
 
 function make_init {
 	# create k3d registry
@@ -29,6 +31,15 @@ function make_vc {
 	done
 }
 
+function make_down {
+	k3d cluster delete dfd
+}
+
+function make_up {
+	make_down
+	make_dfd
+}
+
 function make_dfd {
 	local restarted
 	restarted=
@@ -42,7 +53,9 @@ function make_dfd {
 		# deploy k3d
 		env KUBECONFIG=$HOME/.kube/config k3d cluster delete ${nme} || true
 		rm -vf ~/.kube/config*
-		env KUBECONFIG=$HOME/.kube/config k3d cluster create ${nme} --config k3d.yaml --token K10a5501ccdd507b442c851c11172bbc3f9f1ac46895c169153d448f6b9826d7978::server:poPkbSDCfsqXUPsJOTFl
+		env KUBECONFIG=$HOME/.kube/config k3d cluster create ${nme} --config k3d.yaml \
+			--env TAILSCALE_AUTHKEY="$(chamber -b secretsmanager read --quiet k3d-${nme} tailscale_authkey)@server:0" \
+			--token K10a5501ccdd507b442c851c11172bbc3f9f1ac46895c169153d448f6b9826d7978::server:poPkbSDCfsqXUPsJOTFl
 		docker update --restart=no k3d-${nme}-server-0
 
 		(cd c/${nme} && make secrets)
@@ -101,11 +114,11 @@ function make_dfd {
 }
 
 function main {
-	local nme
-	nme="$1"
+	local cmd
+	cmd="$1"
 	shift
 
-	"make_${nme}"
+	"make_${cmd}"
 }
 
 time main "${1:-${infra_name}}"
