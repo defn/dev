@@ -37,10 +37,10 @@ home:
 
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
         && cd m/pkg \
-        && for a in tailscale shell; do (cd $a && nix build); done
+        && for a in tailscale awscli shell; do (cd $a && nix build); done
 
     SAVE ARTIFACT /nix nix
-    SAVE ARTIFACT /home/ubuntu ubuntu
+    SAVE ARTIFACT /home home
 
 k3d:
     ARG K3S
@@ -48,7 +48,7 @@ k3d:
     FROM rancher/k3s:v${K3S}
 
     COPY --dir --chown=ubuntu:ubuntu +home/nix /nix
-    COPY --dir --chown=ubuntu:ubuntu +home/ubuntu /home
+    COPY --dir --chown=ubuntu:ubuntu +home/home /home
 
     RUN echo root:x:0: >> /etc/group \
         && echo ubuntu:x:1000: >> /etc/group \
@@ -66,4 +66,5 @@ k3d:
 
     RUN cp /nix/store/*bash-interactive*/bin//bash /bin/bash
     RUN sed 's#/bin/sh#/bin/bash#' -i /etc/passwd
-    RUN /bin/bash -c "ln -nfsv /nix/store/*tailscale*/bin/* /bin/"
+    RUN /bin/bash -c "ln -nfsv /nix/store/*tailscale*/bin/tailscale* /bin/"
+    RUN /bin/bash -c "ln -nfsv /nix/store/*awscli*/bin/aws /bin/"
