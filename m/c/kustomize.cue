@@ -640,12 +640,6 @@ kustomize: "karpenter": #Kustomize & {
 					--k3s-arg "TAILSCALE_AUTHKEY=$(/tmp/chamber -b secretsmanager read --quiet k3d-dfd tailscale_authkey)=TAILSCALE_AUTHKEY" \\
 					--token K1012f65cd50b62701a4ae9d841890ed08da8b47fdce13a3fa0cf8aaae8cec1fea3::server:poPkbSDCfsqXUPsJOTFl
 
-				docker exec -i ${instance} mount bpffs -t bpf /sys/fs/bpf
-				docker exec -i ${instance} mount --make-shared /sys/fs/bpf
-				docker exec -i ${instance} mkdir -p /run/cilium/cgroupv2
-				docker exec -i ${instance} mount -t cgroup2 none /run/cilium/cgroupv2
-				docker exec -i ${instance} mount --make-shared /run/cilium/cgroupv2
-
 				--BOUNDARY
 
 				"""

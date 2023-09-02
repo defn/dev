@@ -12,6 +12,14 @@ case "${1-}" in
     ;;
 esac
 
+set +e
+mount bpffs -t bpf /sys/fs/bpf
+mount --make-shared /sys/fs/bpf
+mkdir -p /run/cilium/cgroupv2
+mount -t cgroup2 none /run/cilium/cgroupv2
+mount --make-shared /run/cilium/cgroupv2
+set -e
+
 tailscaled --statedir=/var/lib/tailscale &
 
 container_ip=$(ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | cut -d' ' -f1)
