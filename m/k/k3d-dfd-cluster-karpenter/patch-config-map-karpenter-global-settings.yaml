@@ -4,5 +4,6 @@ metadata:
   name: karpenter-global-settings
 data:
   aws.clusterName: k3d-dfd
+  aws.clusterEndpoint: https://kubernetes.default.svc.cluster.local:443
 kind: ConfigMap
 apiVersion: v1
