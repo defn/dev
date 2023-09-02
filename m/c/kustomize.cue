@@ -559,7 +559,8 @@ kustomize: "karpenter": #Kustomize & {
 			name: "karpenter-global-settings"
 		}
 		data: {
-			"aws.clusterName": cluster.cluster_name
+			"aws.clusterName":     cluster.cluster_name
+			"aws.clusterEndpoint": "https://kubernetes.default.svc.cluster.local:443"
 		}
 	}
 
