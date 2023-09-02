@@ -15,6 +15,7 @@ esac
 set +e
 mount bpffs -t bpf /sys/fs/bpf
 mount --make-shared /sys/fs/bpf
+mount --make-shared /sys
 mkdir -p /run/cilium/cgroupv2
 mount -t cgroup2 none /run/cilium/cgroupv2
 mount --make-shared /run/cilium/cgroupv2
