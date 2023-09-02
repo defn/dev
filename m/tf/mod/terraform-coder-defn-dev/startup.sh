@@ -14,6 +14,9 @@ exec >>/tmp/dfd-startup.log 2>&1
 
 sudo sysctl -w fs.inotify.max_user_instances=10000
 
+sudo mount bpffs -t bpf /sys/fs/bpf
+sudo mount --make-shared /sys/fs/bpf
+
 if [[ "$(lsblk /dev/nvme0n1p1 | tail -1 | awk '{print $NF}')" == 1 ]]; then
 	sudo growpart /dev/nvme0n1 1
 	sudo resize2fs /dev/nvme0n1p1
