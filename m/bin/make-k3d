@@ -42,7 +42,7 @@ function make_dfd {
 		# deploy k3d
 		env KUBECONFIG=$HOME/.kube/config k3d cluster delete ${nme} || true
 		rm -vf ~/.kube/config*
-		env KUBECONFIG=$HOME/.kube/config k3d cluster create ${nme} --config k3d.yaml
+		env KUBECONFIG=$HOME/.kube/config k3d cluster create ${nme} --config k3d.yaml --token K10a5501ccdd507b442c851c11172bbc3f9f1ac46895c169153d448f6b9826d7978::server:poPkbSDCfsqXUPsJOTFl
 		docker update --restart=no k3d-${nme}-server-0
 
 		(cd c/${nme} && make secrets)
