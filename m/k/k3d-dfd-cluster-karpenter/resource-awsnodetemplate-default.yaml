@@ -8,11 +8,11 @@ spec:
   amiFamily: Custom
   amiSelector:
     karpenter.sh/discovery: k3d-dfd
-  instanceProfile: coder-amanibhavam-dev
   subnetSelector:
     karpenter.sh/discovery: k3d-dfd
   securityGroupSelector:
     karpenter.sh/discovery: k3d-dfd
+  instanceProfile: coder-amanibhavam-dev
   blockDeviceMappings:
     - deviceName: /dev/sda1
       ebs:
