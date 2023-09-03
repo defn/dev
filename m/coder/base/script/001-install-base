@@ -18,8 +18,6 @@ function main {
 		apt-get clean && apt purge -y nano &&
 		rm -f /usr/bin/gs
 
-	docker pull quay.io/defn/dev:latest-k3d 
-
 	apt update && apt upgrade -y
 
 	ln -sf /usr/share/zoneinfo/UTC /etc/localtime &&
