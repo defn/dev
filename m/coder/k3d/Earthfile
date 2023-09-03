@@ -37,7 +37,7 @@ home:
 
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
         && cd m/pkg \
-        && for a in tailscale shell; do (cd $a && nix build); done
+        && for a in tailscale util-linux shell; do (cd $a && nix build); done
 
     SAVE ARTIFACT /nix nix
     SAVE ARTIFACT /home home
@@ -66,4 +66,6 @@ k3d:
 
     RUN cp /nix/store/*bash-interactive*/bin//bash /bin/bash
     RUN sed 's#/bin/sh#/bin/bash#' -i /etc/passwd
-    RUN /bin/bash -c "ln -nfsv /nix/store/*tailscale*/bin/tailscale* /bin/"
+    RUN /bin/bash -c "ln -nfsv /nix/store/*util-linux*/bin/* /bin/"
+    RUN /bin/bash -c "ln -nfsv /nix/store/*tailscale*/bin/* /bin/"
+    RUN /bin/bash -c "ln -nfsv /nix/store/*bash*inter*/bin/* /bin/"
