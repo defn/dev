@@ -5,26 +5,28 @@ analytics_settings(False)
 
 load("ext://restart_process", "custom_build_with_restart")
 
+# local k8s
+allow_k8s_contexts('dfd-amanibhavam-dev')
+
 # local registry
 default_registry("169.254.32.1:5000")
 
+# hook build
+local_resource(name="hook-build", cmd="true", deps=["./hooks"])
+
 # hook initial deploy
-allow_k8s_contexts('dfd-amanibhavam-dev')
 k8s_yaml(local("cat main.yaml"))
 
-# hook updates
-local_resource(name="hook-update", cmd="true", deps=["./hooks"])
-
 # hook service selected from deploy
-k8s_resource("hook-example", resource_deps=["hook-update"])
+k8s_resource("hook", resource_deps=["hook-build"])
 
 # hook updates when hook updates
 custom_build_with_restart(
-    ref="hook-example",
+    ref="hook",
     command="make build image=$EXPECTED_REF",
+    entrypoint=["/shell-operator"],
     deps=["./hooks"],
     trigger=["./hooks"],
-    entrypoint=["/shell-operator"],
     live_update=[
         sync("./hooks", "/hooks"),
     ],
