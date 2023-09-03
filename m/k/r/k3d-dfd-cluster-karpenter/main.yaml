@@ -1758,9 +1758,8 @@ spec:
     fs.inotify.max_user_instances=10000\n\nTOKEN=\"$(curl -sSL -X PUT \"http://169.254.169.254/latest/api/token\"
     -H \"X-aws-ec2-metadata-token-ttl-seconds: 21600\")\"\ninstance=\"$(curl -sSL
     -H \"X-aws-ec2-metadata-token: $TOKEN\" -v http://169.254.169.254/latest/meta-data/instance-id)\"\n\n#
-    docker\t\napt install -y docker.io\n\n# download forked k3d\ncurl -o /tmp/dfd
-    -sSL \\\n\thttps://github.com/amanibhavam/bin/raw/main/k3d\nchmod 755 /tmp/dfd\n\n#
-    download chamber\ncurl -o /tmp/chamber -sSL \\\n\thttps://github.com/segmentio/chamber/releases/download/v2.13.3/chamber-v2.13.3-linux-amd64\nchmod
+    download forked k3d\ncurl -o /tmp/dfd -sSL \\\n\thttps://github.com/amanibhavam/bin/raw/main/k3d\nchmod
+    755 /tmp/dfd\n\n# download chamber\ncurl -o /tmp/chamber -sSL \\\n\thttps://github.com/segmentio/chamber/releases/download/v2.13.3/chamber-v2.13.3-linux-amd64\nchmod
     755 /tmp/chamber\n\n# docker exec -ti k3d-dfd-server-0 cat /var/lib/rancher/k3s/server/agent-token\n/tmp/dfd
     node create \"$instance\" --role agent --image quay.io/defn/dev:latest-k3d --cluster
     https://100.78.72.138:6443 \\\n\t--k3s-arg \"TAILSCALE_AUTHKEY=$(/tmp/chamber
