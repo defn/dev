@@ -14,9 +14,11 @@ function main {
 	export DEBIAN_FRONTEND=noninteractive
 
 	apt-get update && apt-get upgrade -y &&
-		apt-get install -y --no-install-recommends lsb-release tzdata locales ca-certificates iproute2 sudo curl build-essential openssh-client rsync git git-lfs fzf jq gettext direnv apache2-utils &&
+		apt-get install -y --no-install-recommends lsb-release tzdata locales ca-certificates iproute2 sudo curl build-essential openssh-client rsync git git-lfs fzf jq gettext direnv apache2-utils docker.io &&
 		apt-get clean && apt purge -y nano &&
 		rm -f /usr/bin/gs
+
+	docker pull quay.io/defn/dev:latest-k3d 
 
 	apt update && apt upgrade -y
 
@@ -30,6 +32,8 @@ function main {
 		install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
 
 	chown -R ubuntu:ubuntu /home/ubuntu && chmod u+s /usr/bin/sudo
+
+	usermod -aG docker ubuntu
 }
 
 main "$@"
