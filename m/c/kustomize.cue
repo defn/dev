@@ -612,9 +612,9 @@ kustomize: "karpenter": #Kustomize & {
 			}]
 			userData: """
 				MIME-Version: 1.0
-				Content-Type: multipart/mixed; boundary=\"BOUNDARY\"
+				Content-Type: multipart/mixed; boundary="BOUNDARY"
 				--BOUNDARY
-				Content-Type: text/x-shellscript; charset=\"us-ascii\"
+				Content-Type: text/x-shellscript; charset="us-ascii"
 				#!/bin/bash
 
 				set -efu
@@ -623,9 +623,6 @@ kustomize: "karpenter": #Kustomize & {
 
 				TOKEN="$(curl -sSL -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")"
 				instance="$(curl -sSL -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/instance-id)"
-
-				# docker	
-				apt install -y docker.io
 
 				# download forked k3d
 				curl -o /tmp/dfd -sSL \\
