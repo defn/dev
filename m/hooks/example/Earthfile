@@ -1,0 +1,18 @@
+VERSION 0.7
+
+build:
+    ARG image=quay.io/defn/dev:latest-hook-example
+    BUILD +build-operator --image=${image}
+
+build-operator:
+    ARG image
+    BUILD +image-operator --image=${image}
+
+image-operator:
+    ARG image
+
+    FROM quay.io/defn/dev:latest-shell-operator
+
+    COPY hooks /hooks
+
+    SAVE IMAGE --push ${image}
