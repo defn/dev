@@ -582,6 +582,22 @@ kustomize: "karpenter": #Kustomize & {
 		spec: replicas: 1
 	}
 
+	resource: "cluster-role-binding-admin": rbac.#ClusterRoleBinding & {
+		apiVersion: "rbac.authorization.k8s.io/v1"
+		kind:       "ClusterRoleBinding"
+		metadata: name: "karpenter-admin"
+		roleRef: {
+			apiGroup: "rbac.authorization.k8s.io"
+			kind:     "ClusterRole"
+			name:     "admin"
+		}
+		subjects: [{
+			kind:      "ServiceAccount"
+			name:      "karpenter"
+			namespace: "karpenter"
+		}]
+	}
+
 	resource: "provisioner-default": {
 		apiVersion: "karpenter.sh/v1alpha5"
 		kind:       "Provisioner"
