@@ -1754,17 +1754,18 @@ spec:
   subnetSelector:
     karpenter.sh/discovery: k3d-dfd
   userData: "MIME-Version: 1.0\nContent-Type: multipart/mixed; boundary=\"BOUNDARY\"\n--BOUNDARY\nContent-Type:
-    text/x-shellscript; charset=\"us-ascii\"\n#!/bin/bash\n\nset -efu\n\nTOKEN=\"$(curl
-    -sSL -X PUT \"http://169.254.169.254/latest/api/token\" -H \"X-aws-ec2-metadata-token-ttl-seconds:
-    21600\")\"\ninstance=\"$(curl -sSL -H \"X-aws-ec2-metadata-token: $TOKEN\" -v
-    http://169.254.169.254/latest/meta-data/instance-id)\"\n\n# docker\t\napt install
-    -y docker.io\n\n# download forked k3d\ncurl -o /tmp/dfd -sSL \\\n\thttps://github.com/amanibhavam/bin/raw/main/k3d\nchmod
-    755 /tmp/dfd\n\n# download chamber\ncurl -o /tmp/chamber -sSL \\\n\thttps://github.com/segmentio/chamber/releases/download/v2.13.3/chamber-v2.13.3-linux-amd64\nchmod
+    text/x-shellscript; charset=\"us-ascii\"\n#!/bin/bash\n\nset -efu\n\nsysctl -w
+    fs.inotify.max_user_instances=10000\n\nTOKEN=\"$(curl -sSL -X PUT \"http://169.254.169.254/latest/api/token\"
+    -H \"X-aws-ec2-metadata-token-ttl-seconds: 21600\")\"\ninstance=\"$(curl -sSL
+    -H \"X-aws-ec2-metadata-token: $TOKEN\" -v http://169.254.169.254/latest/meta-data/instance-id)\"\n\n#
+    docker\t\napt install -y docker.io\n\n# download forked k3d\ncurl -o /tmp/dfd
+    -sSL \\\n\thttps://github.com/amanibhavam/bin/raw/main/k3d\nchmod 755 /tmp/dfd\n\n#
+    download chamber\ncurl -o /tmp/chamber -sSL \\\n\thttps://github.com/segmentio/chamber/releases/download/v2.13.3/chamber-v2.13.3-linux-amd64\nchmod
     755 /tmp/chamber\n\n# docker exec -ti k3d-dfd-server-0 cat /var/lib/rancher/k3s/server/agent-token\n/tmp/dfd
     node create \"$instance\" --role agent --image quay.io/defn/dev:latest-k3d --cluster
-    https://100.78.243.106:6443 \\\n\t--k3s-arg \"TAILSCALE_AUTHKEY=$(/tmp/chamber
+    https://100.78.72.138:6443 \\\n\t--k3s-arg \"TAILSCALE_AUTHKEY=$(/tmp/chamber
     -b secretsmanager read --quiet k3d-dfd tailscale_authkey)=TAILSCALE_AUTHKEY\"
-    \\\n\t--token K1012f65cd50b62701a4ae9d841890ed08da8b47fdce13a3fa0cf8aaae8cec1fea3::server:poPkbSDCfsqXUPsJOTFl\n\n--BOUNDARY\n"
+    \\\n\t--token K10cd85f951cd5de76aaaedbe0c75ffc0dfde000145aa60b9a363e9af8302dc0ebf::server:poPkbSDCfsqXUPsJOTFl\n\n--BOUNDARY\n"
 ---
 apiVersion: karpenter.sh/v1alpha5
 kind: Provisioner
