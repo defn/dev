@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hook-example
+  name: hook
   labels:
-    app: hook-example
+    app: hook
 spec:
   selector:
     matchLabels:
-      app: hook-example
+      app: hook
   template:
     metadata:
       labels:
-        app: hook-example
+        app: hook
     spec:
       containers:
         - name: shell-operator
           command: ["/bin/tini", "--", "/shell-operator"]
           args: ["start"]
-          image: hook-example
+          image: hook
           imagePullPolicy: Always
