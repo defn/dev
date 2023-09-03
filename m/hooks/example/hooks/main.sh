@@ -1,13 +1,30 @@
 #!/usr/bin/env bash
 
-set -exfu
+set -efu
 
 function config {
-  jq -n '{configVersion: "v1", onStartup: 1}'
+  jq -n '{
+    configVersion: "v1",
+    onStartup: 1,
+    kubernetes: [{
+      apiVersion: "v1",
+      kind: "Pod",
+      executeHookOnEvent: [
+        "Added"
+      ]
+    }]
+  }'
 }
 
 function main {
-  echo "OnStartup shell hook"
+  echo "=========================================================="
+  echo $BINDING_CONTEXT_PATH
+  cat $BINDING_CONTEXT_PATH | jq -cr '.[] | keys'
+  echo "=========================================================="
+  cat $BINDING_CONTEXT_PATH | jq -cr '.[] | "\(.type)"'
+  cat $BINDING_CONTEXT_PATH | jq -cr '.[] | "\(.binding)"'
+  cat $BINDING_CONTEXT_PATH | jq -cr '.[] | "\(.objects//[] | .[].object.metadata | "\(.namespace) \(.name)")"'
+  echo "=========================================================="
 }
 
 function route {
