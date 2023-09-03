@@ -1,10 +1,21 @@
----
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: shell-operator
+  name: hook-example
+  labels:
+    app: hook-example
 spec:
-  containers:
-  - name: shell-operator
-    image: quay.io/defn/dev:latest-hook-example
-    imagePullPolicy: Always
+  selector:
+    matchLabels:
+      app: hook-example
+  template:
+    metadata:
+      labels:
+        app: hook-example
+    spec:
+      containers:
+        - name: shell-operator
+          command: ["/bin/tini", "--", "/shell-operator"]
+          args: ["start"]
+          image: hook-example
+          imagePullPolicy: Always
