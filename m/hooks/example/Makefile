@@ -1,9 +1,6 @@
 build:
-	env -u SSH_AUTH_SOCK earthly --push --no-output +build
-
-deploy:
-	-kubectl delete pod shell-operator
-	kubectl apply -f main.yaml
+	env -u SSH_AUTH_SOCK earthly --push --no-output +build --image=$(image)
+	docker pull $(image)
 
 log:
-	stern shell-operator
+	stern hook-

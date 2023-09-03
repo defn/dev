@@ -2,8 +2,23 @@
 
 set -exfu
 
-if [[ "${1:-}" == "--config" ]] ; then
+function config {
   jq -n '{configVersion: "v1", onStartup: 1}'
-else
+}
+
+function main {
   echo "OnStartup shell hook"
-fi
+}
+
+function route {
+  case "${1:-}" in
+    --config)
+      config
+      ;;
+    *)
+      main
+      ;;
+  esac
+}
+
+route "$@"
