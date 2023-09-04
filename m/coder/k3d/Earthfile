@@ -38,7 +38,7 @@ home:
     RUN . ~/.nix-profile/etc/profile.d/nix.sh \
         && mkdir -p /nix/bin \
         && cd m/pkg \
-        && for a in tailscale util-linux k3d shell; do \
+        && for a in tailscale util-linux k3d nix shell; do \
             (cd $a && nix develop --command bash -c \
                 'for b in $(IFS=:; for a in $PATH; do echo $a; done | grep /nix/store | tac); do find $b -type f; done | xargs | while read -r bins; do ln -nfs $bins /nix/bin/; done'); \
             done
