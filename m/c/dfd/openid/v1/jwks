@@ -1,0 +1,12 @@
+{
+  "keys": [
+    {
+      "use": "sig",
+      "kty": "RSA",
+      "kid": "hJNGPsj-ipwO0QcNvEJGv8-HDzT0J_HsQEsSfXXd-OE",
+      "alg": "RS256",
+      "n": "5BjxCsSZrNR0QWuxJtJHD4wGyHq4zfhTi5vHLozA2nVPHiTudRdbri2J6hUp8vkORI_TKI6nFzQvR_bOrlt_5aBjiSQqDhtZm_nKYofIEATZuftnCd7vYqmzByX7i9qBkp68EYyVYPaL1W5-Ys5OyWn27VOt4EeqWVPmi6jC4cj3Q8Zn7kv7F5hsrEZU25pobVtXglZm5zXYFgNsH6PRaKmAZJstwAXU9mskq-rIshxcc8CPwoMKg8ONEzI6I8W0BPJl9660w4U7Jbrb_X3u6JeNGRp3VtILWbd_AVmJbEWwDM7vGa8_zUHICUzJqu0sUU4lAEIj3sRXIFnONDfPQQ",
+      "e": "AQAB"
+    }
+  ]
+}
