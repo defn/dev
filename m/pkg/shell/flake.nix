@@ -21,6 +21,8 @@
         jq
         coreutils
         findutils
+        gnumake
+        git
         bashInteractive
       ];
     };
