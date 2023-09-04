@@ -44,8 +44,8 @@ openid/.well-known/openid-configuration:
 	rm -vf system.*
 	mkdir -p openid/.well-known
 	cue export -e discovery --out=json | jq . > openid/.well-known/openid-configuration
-	git add openid
-	git commit -m "update oidc provider"
+	-git add openid
+	-git commit -m "update oidc provider"
 	git push
 
 k3d-secrets: ca.key ca.crt openid/.well-known/openid-configuration
