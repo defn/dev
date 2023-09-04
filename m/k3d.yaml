@@ -6,7 +6,7 @@ agents: 0
 kubeAPI:
   hostPort: "6443"
   hostIP: "100.126.227.138"
-  host: "coder-amanibhavam-dev"
+  host: "k3d-dfd-server-0"
 network: dfd
 image: quay.io/defn/dev:latest-k3d
 registries:

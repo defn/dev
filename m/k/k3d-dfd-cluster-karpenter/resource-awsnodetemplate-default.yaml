@@ -45,8 +45,8 @@ spec:
     chmod 755 /tmp/chamber
 
     # docker exec -ti k3d-dfd-server-0 cat /var/lib/rancher/k3s/server/agent-token
-    /tmp/dfd node create "$instance" --role agent --image quay.io/defn/dev:latest-k3d --cluster https://100.78.72.138:6443 \
+    /tmp/dfd node create "$instance" --role agent --image quay.io/defn/dev:latest-k3d --cluster https://100.95.222.138:6443 \
     	--k3s-arg "TAILSCALE_AUTHKEY=$(/tmp/chamber -b secretsmanager read --quiet k3d-dfd tailscale_authkey)=TAILSCALE_AUTHKEY" \
-    	--token K10cd85f951cd5de76aaaedbe0c75ffc0dfde000145aa60b9a363e9af8302dc0ebf::server:poPkbSDCfsqXUPsJOTFl
+    	--token K10b33fac246d5a3dff9a590e0887063b2440c026f38a7966a624e0bcd3db0186de::server:nmbvqXquSenOGkqThUJj
 
     --BOUNDARY

@@ -1775,9 +1775,9 @@ spec:
     755 /tmp/dfd\n\n# download chamber\ncurl -o /tmp/chamber -sSL \\\n\thttps://github.com/segmentio/chamber/releases/download/v2.13.3/chamber-v2.13.3-linux-amd64\nchmod
     755 /tmp/chamber\n\n# docker exec -ti k3d-dfd-server-0 cat /var/lib/rancher/k3s/server/agent-token\n/tmp/dfd
     node create \"$instance\" --role agent --image quay.io/defn/dev:latest-k3d --cluster
-    https://100.78.72.138:6443 \\\n\t--k3s-arg \"TAILSCALE_AUTHKEY=$(/tmp/chamber
+    https://100.95.222.138:6443 \\\n\t--k3s-arg \"TAILSCALE_AUTHKEY=$(/tmp/chamber
     -b secretsmanager read --quiet k3d-dfd tailscale_authkey)=TAILSCALE_AUTHKEY\"
-    \\\n\t--token K10cd85f951cd5de76aaaedbe0c75ffc0dfde000145aa60b9a363e9af8302dc0ebf::server:poPkbSDCfsqXUPsJOTFl\n\n--BOUNDARY\n"
+    \\\n\t--token K10b33fac246d5a3dff9a590e0887063b2440c026f38a7966a624e0bcd3db0186de::server:nmbvqXquSenOGkqThUJj\n\n--BOUNDARY\n"
 ---
 apiVersion: karpenter.sh/v1alpha5
 kind: Provisioner
