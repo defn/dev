@@ -76,6 +76,7 @@ k3d:
     RUN cp /nix/bin/bash /bin/bash
 
     USER ubuntu
+    RUN bash -c 'cd && source .bash_profile && /nix/bin/make nix'
     RUN --no-cache cd && /nix/bin/git pull
 
     USER root
