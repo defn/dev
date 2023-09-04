@@ -15,8 +15,8 @@ function main {
 
 		make nix
 
-		cd m/pkg/chamber && nix develop --command true
-		cd m/pkg/k3sup && nix develop --command true
+		(cd m/pkg/chamber && nix develop --command true)
+		(cd m/pkg/k3sup && nix develop --command true)
 
 		exit $?
 	fi
