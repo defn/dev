@@ -12,6 +12,7 @@ variable "scripts" {
   default = [
     "script/000-install-bare",
     "script/001-install-base",
+    "script/800-defn-dev",
     "script/999-update"
   ]
 }
@@ -57,13 +58,15 @@ source "amazon-ebs" "this" {
   }
 
   run_tags = {
-    Name      = "Packer"
-    ManagedBy = "Packer"
+    Name                     = "Packer"
+    ManagedBy                = "Packer"
+    "karpenter.sh/discovery" = "k3d-dfd"
   }
 
   run_volume_tags = {
-    Name      = "Packer"
-    ManagedBy = "Packer"
+    Name                     = "Packer"
+    ManagedBy                = "Packer"
+    "karpenter.sh/discovery" = "k3d-dfd"
   }
 
   snapshot_tags = {
