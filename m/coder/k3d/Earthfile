@@ -25,6 +25,7 @@ home:
     RUN apt update && apt install -y git
 
     USER ubuntu
+    WORKDIR /home/ubuntu
 
     RUN curl -L https://releases.nixos.org/nix/nix-2.17.0/install > nix-install \
         && bash nix-install --no-daemon \
@@ -59,7 +60,7 @@ k3d:
         && mkdir -p /home && install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
 
     COPY --dir --chown=ubuntu:ubuntu +home/nix /nix
-    COPY --dir --chown=ubuntu:ubuntu +home/home /home
+    COPY --dir --chown=ubuntu:ubuntu +home/home /
 
     RUN ln -nfs /bin/env /usr/bin/env
 
