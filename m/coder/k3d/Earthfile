@@ -75,4 +75,7 @@ k3d:
     RUN /bin/bash -c "ln -nfsv /nix/store/*tailscale*/bin/* /bin/"
     RUN cp /nix/bin/bash /bin/bash
 
-    RUN --no-cache /nix/bin/git pull
+    USER ubuntu
+    RUN --no-cache cd && /nix/bin/git pull
+
+    USER root
