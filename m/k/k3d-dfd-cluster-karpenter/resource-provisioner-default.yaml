@@ -30,8 +30,7 @@ spec:
       operator: Gt
       values:
         - !!binary Mg==
-  consolidation:
-    enabled: true
   limits:
     resources:
       cpu: !!binary OA==
+  ttlSecondsAfterEmpty: 1

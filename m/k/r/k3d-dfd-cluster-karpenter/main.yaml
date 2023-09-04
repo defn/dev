@@ -1785,8 +1785,6 @@ metadata:
   name: default
   namespace: karpenter
 spec:
-  consolidation:
-    enabled: true
   limits:
     resources:
       cpu: "8"
@@ -1815,6 +1813,7 @@ spec:
     operator: Gt
     values:
     - "2"
+  ttlSecondsAfterEmpty: 1
 ---
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
