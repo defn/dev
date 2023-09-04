@@ -1797,7 +1797,6 @@ spec:
     operator: In
     values:
     - spot
-  ttlSecondsAfterEmpty: 30
 ---
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
