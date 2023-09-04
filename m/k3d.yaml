@@ -89,3 +89,4 @@ options:
   kubeconfig:
     updateDefaultKubeconfig: true
     switchCurrentContext: false
+--disable=traefik
