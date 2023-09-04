@@ -4,6 +4,8 @@ kind: Simple
 servers: 1
 agents: 0
 kubeAPI:
+  hostPort: "6443"
+  hostIP: "127.0.0.1"
   host: "k3d-dfd-server-0"
 network: dfd
 image: quay.io/defn/dev:latest-k3d
