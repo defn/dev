@@ -1,6 +1,6 @@
 . ~/.bashrc_path
 BASE_PATH="${PATH}"
-PATH="${BASE_PATH}:${HOME}/bin/blackhole:/nix/bin"
+PATH="${BASE_PATH}:${HOME}/bin/blackhole"
 
 if [[ -r /etc/profile.d/bash_completion.sh ]]; then
     source /etc/profile.d/bash_completion.sh
