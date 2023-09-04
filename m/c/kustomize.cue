@@ -1502,3 +1502,12 @@ kustomize: "emojivoto": #Kustomize & {
 	}
 
 }
+
+// https://github.com/GalleyBytes/terraform-operator/releases
+kustomize: "tfo": #Kustomize & {
+	namespace: "tf-system"
+
+	resource: "tfo": {
+		url: "https://raw.githubusercontent.com/GalleyBytes/terraform-operator/master/deploy/bundles/v0.13.3/v0.13.3.yaml"
+	}
+}
