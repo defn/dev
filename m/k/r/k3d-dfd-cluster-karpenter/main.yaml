@@ -1795,13 +1795,13 @@ spec:
     -u ubuntu bash <<'EOF'\ncd\nsource .bash_profile\n\ninfra_name=dfd\nsudo $(which
     tailscale) up --auth-key \"$(cd m/pkg/chamber && nix develop --command chamber
     -b secretsmanager read --quiet k3d-${infra_name} tailscale_authkey)\"\n\nssh-keygen
-    -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y >/dev/null 2>&1\ncp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys\n\nwhile
-    true; do\n\tts_ip=$(tailscale ip -4 || true)\n\tif test -n \"${ts_ip}\"; then
-    break; fi\n\tsleep 1\ndone\n\ncontainer_ip=$(/sbin/ifconfig ens5 | grep 'inet
-    ' | awk '{print $2}')\n\nTOKEN=\"$(curl -sSL -X PUT \"http://169.254.169.254/latest/api/token\"
-    -H \"X-aws-ec2-metadata-token-ttl-seconds: 21600\")\"\ninstance=\"$(curl -sSL
-    -H \"X-aws-ec2-metadata-token: $TOKEN\" -v http://169.254.169.254/latest/meta-data/instance-id)\"\naz=\"$(curl
-    -sSL -H \"X-aws-ec2-metadata-token: $TOKEN\" -v http://169.254.169.254/latest/meta-data/placement/availability-zone)\"\n\n(cd
+    -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y >/dev/null 2>&1\ncp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys\n\nTOKEN=\"$(curl
+    -sSL -X PUT \"http://169.254.169.254/latest/api/token\" -H \"X-aws-ec2-metadata-token-ttl-seconds:
+    21600\")\"\ninstance=\"$(curl -sSL -H \"X-aws-ec2-metadata-token: $TOKEN\" -v
+    http://169.254.169.254/latest/meta-data/instance-id)\"\naz=\"$(curl -sSL -H \"X-aws-ec2-metadata-token:
+    $TOKEN\" -v http://169.254.169.254/latest/meta-data/placement/availability-zone)\"\n\ncontainer_ip=$(/sbin/ifconfig
+    ens5 | grep 'inet ' | awk '{print $2}')\n\nwhile true; do\n\tts_ip=$(tailscale
+    ip -4 || true)\n\tif test -n \"${ts_ip}\"; then break; fi\n\tsleep 1\ndone\n\n(cd
     m/pkg/k3sup && nix develop --command k3sup join --user ubuntu --server-host coder-amanibhavam-dev
     --server-user ubuntu --k3s-extra-args \"--kubelet-arg provider-id=aws:///${az}/${instance}
     --node-ip ${container_ip} --node-external-ip ${ts_ip}\")\nEOF\n\n# download forked
