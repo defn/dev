@@ -1773,10 +1773,10 @@ spec:
     -H \"X-aws-ec2-metadata-token: $TOKEN\" -v http://169.254.169.254/latest/meta-data/instance-id)\"\n\n#
     download forked k3d\ncurl -o /tmp/dfd -sSL \\\n\thttps://github.com/amanibhavam/bin/raw/main/k3d\nchmod
     755 /tmp/dfd\n\n# download chamber\ncurl -o /tmp/chamber -sSL \\\n\thttps://github.com/segmentio/chamber/releases/download/v2.13.3/chamber-v2.13.3-linux-amd64\nchmod
-    755 /tmp/chamber\n\n# docker exec -ti k3d-dfd-server-0 cat /var/lib/rancher/k3s/server/agent-token\n/tmp/dfd
-    node create \"$instance\" --role agent --image quay.io/defn/dev:latest-k3d --cluster
-    https://100.95.222.138:6443 \\\n\t--k3s-arg \"TAILSCALE_AUTHKEY=$(/tmp/chamber
-    -b secretsmanager read --quiet k3d-dfd tailscale_authkey)=TAILSCALE_AUTHKEY\"
+    755 /tmp/chamber\n\n# docker exec -ti k3d-dfd-server-0 cat /var/lib/rancher/k3s/server/agent-token\n#
+    --cluster k3d-dfd-server-0\n/tmp/dfd node create \"$instance\" --role agent --image
+    quay.io/defn/dev:latest-k3d --cluster https://100.95.222.138:6443 \\\n\t--k3s-arg
+    \"TAILSCALE_AUTHKEY=$(/tmp/chamber -b secretsmanager read --quiet k3d-dfd tailscale_authkey)=TAILSCALE_AUTHKEY\"
     \\\n\t--token K10b33fac246d5a3dff9a590e0887063b2440c026f38a7966a624e0bcd3db0186de::server:nmbvqXquSenOGkqThUJj\n\n--BOUNDARY\n"
 ---
 apiVersion: karpenter.sh/v1alpha5
@@ -1785,8 +1785,19 @@ metadata:
   name: default
   namespace: karpenter
 spec:
+  consolidation:
+    enabled: true
+  limits:
+    resources:
+      cpu: 8
   providerRef:
     name: default
+  requirements:
+  - key: karpenter.sh/capacity-type
+    operator: In
+    values:
+    - spot
+  ttlSecondsAfterEmpty: 30
 ---
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
