@@ -1696,8 +1696,6 @@ spec:
               resource: limits.memory
         - name: AWS_REGION
           value: us-west-2
-        - name: AWS_NODE_NAME_CONVENTION
-          value: resource-name
         image: public.ecr.aws/karpenter/controller:v0.30.0@sha256:3d436ece23d17263edbaa2314281f3ac1c2b0d3fb9dfa531cb30509659d8a7c3
         imagePullPolicy: IfNotPresent
         livenessProbe:
