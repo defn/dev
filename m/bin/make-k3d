@@ -32,7 +32,8 @@ function make_vc {
 }
 
 function make_down {
-	k3d cluster delete dfd
+	#k3d cluster delete dfd
+	true
 }
 
 function make_up {
