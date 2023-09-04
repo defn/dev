@@ -695,6 +695,26 @@ kustomize: "karpenter": #Kustomize & {
 				TOKEN="$(curl -sSL -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")"
 				instance="$(curl -sSL -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/instance-id)"
 
+				cat <<'EOF'
+				cd
+
+				infra_name=dfd
+				tailscale up --auth-key "$(cd m/pkg/chamber && nix develop --command chamber -b secretsmanager read --quiet k3d-${infra_name} tailscale_authkey)"
+
+				ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y >/dev/null 2>&1
+				cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
+
+				while true; do
+					ts_ip=$(tailscale ip -4 || true)
+					if test -n "${ts_ip}"; then break; fi
+					sleep 1
+				done
+
+				container_ip=$(/sbin/ifconfig ens5 | grep 'inet ' | awk '{print $2}')
+
+				(cd m/pkg/k3sup && nix develop --command k3sup join --user ubuntu --server-host coder-amanibhavam-dev --server-user ubuntu --k3s-version v1.26.7-k3s1 --k3s-extra-args "--node-ip ${container_ip} --node-external-ip ${ts_ip}")
+				EOF | sudo -u ubuntu bash
+
 				# download forked k3d
 				#curl -o /tmp/dfd -sSL \\
 				#	https://github.com/amanibhavam/bin/raw/main/k3d
