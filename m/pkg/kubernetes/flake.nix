@@ -1,6 +1,7 @@
 {
   inputs = {
     kubectl.url = github:defn/dev/pkg-kubectl-1.26.7-5?dir=m/pkg/kubectl;
+    k3sup.url = github:defn/dev/pkg-k3sup-0.13.0-3?dir=m/pkg/k3sup;
     k3d.url = github:defn/dev/pkg-k3d-5.6.0-1?dir=m/pkg/k3d;
     dfd.url = github:defn/dev/pkg-dfd-0.0.2?dir=m/pkg/dfd;
     k9s.url = github:defn/dev/pkg-k9s-0.27.4-5?dir=m/pkg/k9s;
@@ -26,6 +27,7 @@
         let
           flakeInputs = [
             inputs.kubectl.defaultPackage.${ctx.system}
+            inputs.k3sup.defaultPackage.${ctx.system}
             inputs.k3d.defaultPackage.${ctx.system}
             inputs.dfd.defaultPackage.${ctx.system}
             inputs.k9s.defaultPackage.${ctx.system}
