@@ -3,11 +3,7 @@ apiVersion: k3d.io/v1alpha5
 kind: Simple
 servers: 1
 agents: 0
-kubeAPI:
-  hostPort: "6443"
-  hostIP: "100.126.227.138"
-  host: "k3d-dfd-server-0"
-network: dfd
+network: host
 image: quay.io/defn/dev:latest-k3d
 registries:
   config: |
