@@ -4,7 +4,7 @@
 PATH="/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin"
 
 # bootstrap
-PATH="/opt/homebrew/bin:/nix/var/nix/profiles/default/bin:$PATH"
+PATH="/opt/homebrew/bin:/nix/var/nix/profiles/default/bin:/nix/bin:$PATH"
 
 # macos
 PATH="/System/Cryptexes/App/usr/bin:/Library/Apple/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:$PATH"
