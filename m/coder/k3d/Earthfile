@@ -68,8 +68,8 @@ k3d:
     RUN mv /bin/k3s /bin/k3s-real && for a in kubectl k3s-server k3s-secrets-encrypt k3s-etcd-snapshot k3s-completion k3s-certificate k3s-agent k3s-token crictl ctr containerd; do ln -nfs k3s-real /bin/$a; done
     COPY k3s-wrapper.sh /bin/k3s
 
-    RUN cp /nix/store/*bash-interactive*/bin//bash /bin/bash
+    RUN cp /nix/bin/bash /bin/bash
     RUN sed 's#/bin/sh#/bin/bash#' -i /etc/passwd
     RUN /bin/bash -c "ln -nfsv /nix/store/*util-linux*/bin/* /bin/"
     RUN /bin/bash -c "ln -nfsv /nix/store/*tailscale*/bin/* /bin/"
-    RUN /bin/bash -c "ln -nfsv /nix/store/*bash*inter*/bin/* /bin/"
+    RUN cp /nix/bin/bash /bin/bash
