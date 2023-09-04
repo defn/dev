@@ -625,8 +625,8 @@ kustomize: "karpenter": #Kustomize & {
 				operator: "Gt"
 				values: [ '2']
 			}]
-			consolidation: enabled: true
 			limits: resources: cpu: '8'
+			ttlSecondsAfterEmpty: 1
 		}
 	}
 
