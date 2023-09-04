@@ -1777,7 +1777,7 @@ spec:
     node create \"$instance\" --role agent --image quay.io/defn/dev:latest-k3d --cluster
     https://k3d-dfd-server-0:6443 \\\n\t--k3s-arg \"TAILSCALE_AUTHKEY=$(/tmp/chamber
     -b secretsmanager read --quiet k3d-dfd tailscale_authkey)=TAILSCALE_AUTHKEY\"
-    \\\n\t--token K108072eb1f81a269ff4cfd234d016df2f0548360c3dd80c3bee67d99ce05d1c82c::server:PCVGcyoSUYdAQYlkVtMn\n\n--BOUNDARY\n"
+    \\\n\t--token K10a97e6cf4aa4ee65f80b2e65aeff5c5cac70e1f3005c4bdd6fcf2a2783a2ee82a::server:EDrQtPPokKDRkJNXfBKx\n\n--BOUNDARY\n"
 ---
 apiVersion: karpenter.sh/v1alpha5
 kind: Provisioner
