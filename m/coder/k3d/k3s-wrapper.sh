@@ -36,4 +36,5 @@ done
 # strip out tsauthkey
 k3sargs="$*"
 k3sargs="${k3sargs/TAILSCALE_AUTHKEY=*=TAILSCALE_AUTHKEY}"
-/bin/k3s-real $k3sargs --node-ip "${container_ip}" --node-external-ip "${ts_ip}" --flannel-iface=tailscale0
+#/bin/k3s-real $k3sargs --node-ip "${container_ip}" --node-external-ip "${ts_ip}" --flannel-iface=tailscale0
+/bin/k3s-real $k3sargs --node-ip "${ts_ip}" --node-external-ip "${ts_ip}" --flannel-iface=tailscale0
