@@ -697,6 +697,7 @@ kustomize: "karpenter": #Kustomize & {
 
 				cat | sudo -u ubuntu bash <<'EOF'
 				cd
+				source .bash_profile
 
 				infra_name=dfd
 				tailscale up --auth-key "$(cd m/pkg/chamber && nix develop --command chamber -b secretsmanager read --quiet k3d-${infra_name} tailscale_authkey)"
