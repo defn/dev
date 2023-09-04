@@ -51,15 +51,15 @@ k3d:
 
     FROM rancher/k3s:v${K3S}
 
-    COPY --dir --chown=ubuntu:ubuntu +home/nix /nix
-    COPY --dir --chown=ubuntu:ubuntu +home/home /home
-
     RUN echo root:x:0: >> /etc/group \
         && echo ubuntu:x:1000: >> /etc/group \
         && echo root:x:0:0:root:/root:/bin/sh >> /etc/passwd \
         && echo ubuntu:x:1000:1000:root:/home/ubuntu:/bin/sh >> /etc/passwd \
         && install -d -m 0700 -o root -g root /root \
         && mkdir -p /home && install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
+
+    COPY --dir --chown=ubuntu:ubuntu +home/nix /nix
+    COPY --dir --chown=ubuntu:ubuntu +home/home /home
 
     RUN ln -nfs /bin/env /usr/bin/env
 
