@@ -17,6 +17,10 @@
         starship
         less
         groff
+        direnv
+        jq
+        coreutils
+        findutils
         bashInteractive
       ];
     };
