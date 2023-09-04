@@ -49,9 +49,9 @@ openid/.well-known/openid-configuration:
 	git push
 
 k3d-secrets: ca.key ca.crt openid/.well-known/openid-configuration
-	kubectl --context k3d-dfd create namespace cert-manager
-	kubectl --context k3d-dfd create secret generic -n kube-system cilium-ca --from-file=ca.key --from-file=ca.crt
-	kubectl --context k3d-dfd create secret generic -n cert-manager cilium-ca --from-file=tls.key=ca.key --from-file=tls.crt=ca.crt
+	-kubectl --context k3d-dfd create namespace cert-manager
+	-kubectl --context k3d-dfd create secret generic -n kube-system cilium-ca --from-file=ca.key --from-file=ca.crt
+	-kubectl --context k3d-dfd create secret generic -n cert-manager cilium-ca --from-file=tls.key=ca.key --from-file=tls.crt=ca.crt
 
 ca.key ca.crt:
 	step certificate create cilium-ca ca.crt ca.key --profile root-ca --not-after 8760h --no-password --insecure --kty RSA --size 4096 --force

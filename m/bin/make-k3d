@@ -32,8 +32,11 @@ function make_vc {
 }
 
 function make_down {
-	#k3d cluster delete dfd
-	true
+	if true; then
+		/usr/local/bin/k3s-uninstall.sh
+	else
+		k3d cluster delete dfd
+	fi
 }
 
 function make_up {
@@ -62,10 +65,10 @@ function make_dfd {
 			dfd cluster create ${nme} --config k3d.yaml \
 				--k3s-arg "TAILSCALE_AUTHKEY=$(chamber -b secretsmanager read --quiet k3d-${nme} tailscale_authkey)=TAILSCALE_AUTHKEY@all"
 			docker update --restart=no k3d-${nme}-server-0
-
-			(cd c/${nme} && make secrets)
 		fi
 	fi
+
+	(cd c/${nme} && make secrets)
 
 	if [[ -z "${restarted-}" ]]; then
 		kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-manual-cert-manager-crds/main.yaml
@@ -121,5 +124,5 @@ function main {
 	"make_${cmd}"
 }
 
-time main "${1:-${infra_name}}"
+time main "${1:-up}"
 uptime
