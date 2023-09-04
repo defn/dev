@@ -2,7 +2,6 @@ package c
 
 import (
 	core "k8s.io/api/core/v1"
-	batch "k8s.io/api/batch/v1"
 	apps "k8s.io/api/apps/v1"
 	rbac "k8s.io/api/rbac/v1"
 )
@@ -349,76 +348,6 @@ kustomize: "caddy": #KustomizeHelm & {
 		spec: {
 			type:              "LoadBalancer"
 			loadBalancerClass: "tailscale"
-		}
-	}
-}
-
-// https://github.com/isaaguilar/terraform-operator/releases
-kustomize: "tfo": #Kustomize & {
-	namespace: "tf-system"
-
-	resource: "tfo": {
-		url: "https://raw.githubusercontent.com/GalleyBytes/terraform-operator/v0.12.1/deploy/bundles/v0.12.0/v0.12.0.yaml"
-	}
-}
-
-kustomize: "bonchon": #Kustomize & {
-	for chicken in ["rocky", "rosie"] {
-		resource: "pre-sync-hook-dry-brine-\(chicken)-chicken": batch.#Job & {
-			apiVersion: "batch/v1"
-			kind:       "Job"
-			metadata: {
-				name:      "dry-brine-\(chicken)-chicken"
-				namespace: "default"
-				annotations: "argocd.argoproj.io/hook": "PreSync"
-			}
-
-			spec: backoffLimit: 0
-			spec: template: spec: {
-				serviceAccountName: "default"
-				containers: [{
-					name:  "meh"
-					image: "defn/dev:kubectl"
-					command: ["bash", "-c"]
-					args: ["""
-                    test "completed" == "$(kubectl get tf "\(chicken)" -o json | jq -r '.status.phase')"
-                    """]
-				}]
-				restartPolicy: "Never"
-			}
-		}
-	}
-
-	resource: "tfo-demo-bonchon": {
-		apiVersion: "tf.isaaguilar.com/v1alpha2"
-		kind:       "Terraform"
-
-		metadata: {
-			name:      "bonchon"
-			namespace: "default"
-		}
-
-		spec: {
-			terraformVersion: "1.0.0"
-			terraformModule: source: "https://github.com/defn/dev/m.git//tf/fried-chicken?ref=main"
-
-			serviceAccount: "default"
-			scmAuthMethods: []
-
-			ignoreDelete:       true
-			keepLatestPodsOnly: true
-
-			outputsToOmit: ["0"]
-
-			backend: """
-				terraform {
-				    backend "kubernetes" {
-				        in_cluster_config = true
-				        secret_suffix     = "bonchon"
-				        namespace         = "default"
-				    }
-				}
-				"""
 		}
 	}
 }
