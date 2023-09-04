@@ -1,8 +1,8 @@
 VERSION 0.7
 
 build:
-    ARG K3S=1.26.7-k3s1
-    ARG image=quay.io/defn/dev:latest-k3d
+    ARG K3S
+    ARG image
     BUILD +build-k3d --image=${image} --K3S=${K3S}
 
 build-k3d:
