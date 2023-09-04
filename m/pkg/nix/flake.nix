@@ -9,6 +9,7 @@
     defaultPackage = ctx: ctx.wrap.nullBuilder {
       propagatedBuildInputs = with ctx.pkgs; [
         direnv
+        nix
         nix-direnv
         nixpkgs-fmt
       ];
