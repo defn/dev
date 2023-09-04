@@ -18,12 +18,12 @@ case "${1-}" in
     ;;
 esac
 
-tailscaled --statedir=/var/lib/tailscale &
+#tailscaled --statedir=/var/lib/tailscale &
 
-tsauthkey="$*"
-tsauthkey="${tsauthkey##*TAILSCALE_AUTHKEY=}"
-tsauthkey="${tsauthkey%%=TAILSCALE_AUTHKEY*}"
-tailscale up --authkey="${tsauthkey}"
+#tsauthkey="$*"
+#tsauthkey="${tsauthkey##*TAILSCALE_AUTHKEY=}"
+#tsauthkey="${tsauthkey%%=TAILSCALE_AUTHKEY*}"
+#tailscale up --authkey="${tsauthkey}"
 
 while true; do
   ts_ip=$(tailscale ip -4 || true)
