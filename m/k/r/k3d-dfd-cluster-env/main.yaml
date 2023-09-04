@@ -65,7 +65,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "30"
+    argocd.argoproj.io/sync-wave: "20"
   name: k3d-dfd-cluster-external-dns
   namespace: argocd
 spec:
@@ -128,7 +128,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "30"
+    argocd.argoproj.io/sync-wave: "20"
   name: k3d-dfd-cluster-issuer
   namespace: argocd
 spec:

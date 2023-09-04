@@ -182,7 +182,7 @@ helmCharts:
             namespace: argocd
             name: k3d-dfd-cluster-external-dns
             annotations:
-              argocd.argoproj.io/sync-wave: "30"
+              argocd.argoproj.io/sync-wave: "20"
           spec:
             project: default
             destination:
@@ -203,7 +203,7 @@ helmCharts:
             namespace: argocd
             name: k3d-dfd-cluster-issuer
             annotations:
-              argocd.argoproj.io/sync-wave: "30"
+              argocd.argoproj.io/sync-wave: "20"
           spec:
             project: default
             destination:

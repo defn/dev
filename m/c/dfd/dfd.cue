@@ -36,11 +36,11 @@ infra: {
 		"tfo": [20, ""]
 
 		// service mesh
-		//"linkerd-control-plane": [30, ""]
+		//"linkerd-control-plane": [20, ""]
 
 		// external dns, certs issuer
-		"external-dns": [30, ""]
-		"issuer": [30, ""]
+		"external-dns": [20, ""]
+		"issuer": [20, ""]
 
 		// traefik, functions
 		"knative": [40, ""]
