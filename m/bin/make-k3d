@@ -33,7 +33,7 @@ function make_vc {
 
 function make_down {
 	if true; then
-		/usr/local/bin/k3s-uninstall.sh
+		/usr/local/bin/k3s-uninstall.sh || true
 	else
 		k3d cluster delete dfd
 	fi
