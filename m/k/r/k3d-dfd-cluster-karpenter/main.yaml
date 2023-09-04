@@ -1803,7 +1803,7 @@ spec:
     -H \"X-aws-ec2-metadata-token: $TOKEN\" -v http://169.254.169.254/latest/meta-data/instance-id)\"\naz=\"$(curl
     -sSL -H \"X-aws-ec2-metadata-token: $TOKEN\" -v http://169.254.169.254/latest/meta-data/placement/availability-zone)\"\n\n(cd
     m/pkg/k3sup && nix develop --command k3sup join --user ubuntu --server-host coder-amanibhavam-dev
-    --server-user ubuntu --k3s-extra-args \"--kubelet-arg provider-id=aws://${az}/${instance}
+    --server-user ubuntu --k3s-extra-args \"--kubelet-arg provider-id=aws:///${az}/${instance}
     --node-ip ${container_ip} --node-external-ip ${ts_ip}\")\nEOF\n\n# download forked
     k3d\n#curl -o /tmp/dfd -sSL \\\n#\thttps://github.com/amanibhavam/bin/raw/main/k3d\n#chmod
     755 /tmp/dfd\n\n# download chamber\n#curl -o /tmp/chamber -sSL \\\n#\thttps://github.com/segmentio/chamber/releases/download/v2.13.3/chamber-v2.13.3-linux-amd64\n#chmod
