@@ -611,7 +611,6 @@ kustomize: "karpenter": #Kustomize & {
 			}]
 			consolidation: enabled: true
 			limits: resources: cpu: 8
-			ttlSecondsAfterEmpty: 30
 		}
 	}
 

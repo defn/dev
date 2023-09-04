@@ -17,4 +17,3 @@ spec:
   limits:
     resources:
       cpu: 8
-  ttlSecondsAfterEmpty: 30
