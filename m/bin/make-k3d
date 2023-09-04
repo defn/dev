@@ -4,8 +4,6 @@ set -eu
 cd ~/m
 
 infra_name="dfd"
-# TODO remove
-nme="${infra_name}"
 
 function make_init {
 	# create k3d registry
@@ -13,7 +11,7 @@ function make_init {
 }
 
 function make_vc {
-	for v in $(cd c/dfd && cue export --out json -e infra.parent.vclusters | jq -r '.[]'); do
+	for v in $(cd c/${infra_name} && cue export --out json -e infra.parent.vclusters | jq -r '.[]'); do
 		i="${v#vc}"
 		# wait until vcluster is ready
 		while true; do
@@ -35,59 +33,54 @@ function make_down {
 	if true; then
 		/usr/local/bin/k3s-uninstall.sh || true
 	else
-		k3d cluster delete dfd
+		k3d cluster delete ${infra_name}
 	fi
 }
 
 function make_up {
-	make_down
-	make_dfd
-}
-
-function make_dfd {
 	local restarted
 	restarted=
 
 	rm -vf ~/.kube/config*
 
 	if true; then
-		k3sup install --local --context k3d-${nme} --local-path ~/.kube/config --merge \
-			--k3s-extra-args "--node-ip 172.31.38.198 --node-external-ip $(tailscale ip -4) --disable-network-policy --disable=traefik --flannel-backend=none --kube-apiserver-arg=--service-account-issuer=https://raw.githubusercontent.com/defn/dev/main/m/c/dfd/openid --kube-apiserver-arg=--api-audiences=https://kubernetes.default.svc.cluster.local,sts.amazonaws.com --tls-san=k3d-${nme}" 
+		k3sup install --local --context k3d-${infra_name} --local-path ~/.kube/config --merge \
+			--k3s-extra-args "--node-ip 172.31.38.198 --node-external-ip $(tailscale ip -4) --disable-network-policy --disable=traefik --flannel-backend=none --kube-apiserver-arg=--service-account-issuer=https://raw.githubusercontent.com/defn/dev/main/m/c/${infra_name}/openid --kube-apiserver-arg=--api-audiences=https://kubernetes.default.svc.cluster.local,sts.amazonaws.com --tls-san=k3d-${infra_name}" 
 	else
-		if k3d cluster list dfd; then
+		if k3d cluster list ${infra_name}; then
 			# restart k3d
-			env KUBECONFIG=$HOME/.kube/config k3d cluster stop ${nme} || true
-			env KUBECONFIG=$HOME/.kube/config k3d cluster start ${nme}
+			env KUBECONFIG=$HOME/.kube/config k3d cluster stop ${infra_name} || true
+			env KUBECONFIG=$HOME/.kube/config k3d cluster start ${infra_name}
 			restarted=1
 		else
 			# deploy k3d
-			env KUBECONFIG=$HOME/.kube/config k3d cluster delete ${nme} || true
+			env KUBECONFIG=$HOME/.kube/config k3d cluster delete ${infra_name} || true
 			env KUBECONFIG=$HOME/.kube/config \
-			dfd cluster create ${nme} --config k3d.yaml \
-				--k3s-arg "TAILSCALE_AUTHKEY=$(chamber -b secretsmanager read --quiet k3d-${nme} tailscale_authkey)=TAILSCALE_AUTHKEY@all"
-			docker update --restart=no k3d-${nme}-server-0
+			dfd cluster create ${infra_name} --config k3d.yaml \
+				--k3s-arg "TAILSCALE_AUTHKEY=$(chamber -b secretsmanager read --quiet k3d-${infra_name} tailscale_authkey)=TAILSCALE_AUTHKEY@all"
+			docker update --restart=no k3d-${infra_name}-server-0
 		fi
 	fi
 
-	(cd c/${nme} && make secrets)
+	(cd c/${infra_name} && make secrets)
 
 	if [[ -z "${restarted-}" ]]; then
-		kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-manual-cert-manager-crds/main.yaml
-		kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-manual-linkerd-crds/main.yaml
-		kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-manual-cilium-bootstrap/main.yaml
-		kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-cluster-argo-cd/main.yaml
+		kubectl --context k3d-${infra_name} apply -f k/r/k3d-${infra_name}-manual-cert-manager-crds/main.yaml
+		kubectl --context k3d-${infra_name} apply -f k/r/k3d-${infra_name}-manual-linkerd-crds/main.yaml
+		kubectl --context k3d-${infra_name} apply -f k/r/k3d-${infra_name}-manual-cilium-bootstrap/main.yaml
+		kubectl --context k3d-${infra_name} apply -f k/r/k3d-${infra_name}-cluster-argo-cd/main.yaml
 	fi
 
 	# dedicated kubectl config for argocd
 	cp $HOME/.kube/config $HOME/.kube/config.argocd
 	(
 		export KUBECONFIG=$HOME/.kube/config.argocd
-		eval "$(kubectl config view -o json | jq -r --arg cluster k3d-${nme} --arg namespace argocd '.contexts[] | select(.name == $cluster).context | "kubectl config set-context \(.cluster)-argocd --cluster=\(.cluster) --user=\(.user) --namespace=\($namespace)"')"
-		kubectl config use-context k3d-${nme}-argocd
+		eval "$(kubectl config view -o json | jq -r --arg cluster k3d-${infra_name} --arg namespace argocd '.contexts[] | select(.name == $cluster).context | "kubectl config set-context \(.cluster)-argocd --cluster=\(.cluster) --user=\(.user) --namespace=\($namespace)"')"
+		kubectl config use-context k3d-${infra_name}-argocd
 	)
 
 	# switch back to the default config
-	kubectl config use-context k3d-${nme}
+	kubectl config use-context k3d-${infra_name}
 
 	env KUBECONFIG=$HOME/.kube/config.argocd kubectl -n argocd rollout status deployment/argocd-server
 	env KUBECONFIG=$HOME/.kube/config.argocd kubectl -n argocd rollout status deployment/argocd-repo-server
@@ -98,18 +91,18 @@ function make_dfd {
 
 		# add k3d to argocd
 		while true; do
-			if env KUBECONFIG=$HOME/.kube/config.argocd argocd cluster add k3d-${nme} --name k3d-${nme}-cluster --yes --core --in-cluster; then
+			if env KUBECONFIG=$HOME/.kube/config.argocd argocd cluster add k3d-${infra_name} --name k3d-${infra_name}-cluster --yes --core --in-cluster; then
 				break
 			fi
 			sleep 5
 		done
 
 		# deploy the cluster app-of-apps
-		kubectl --context k3d-${nme} apply -f e/k3d-${nme}-cluster.yaml
+		kubectl --context k3d-${infra_name} apply -f e/k3d-${infra_name}-cluster.yaml
 
 		# background app-of-apps syncing
 		while true; do
-			if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 60 k3d-${nme}-cluster >/dev/null 2>&1; then break; fi
+			if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 60 k3d-${infra_name}-cluster >/dev/null 2>&1; then break; fi
 			sleep 30
 		done &
 	fi
