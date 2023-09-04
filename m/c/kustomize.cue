@@ -602,7 +602,17 @@ kustomize: "karpenter": #Kustomize & {
 		apiVersion: "karpenter.sh/v1alpha5"
 		kind:       "Provisioner"
 		metadata: name: "default"
-		spec: providerRef: name: "default"
+		spec: {
+			providerRef: name: "default"
+			requirements: [{
+				key:      "karpenter.sh/capacity-type"
+				operator: "In"
+				values: ["spot"]
+			}]
+			consolidation: enabled: true
+			limits: resources: cpu: 8
+			ttlSecondsAfterEmpty: 30
+		}
 	}
 
 	resource: "awsnodetemplate-default": {
