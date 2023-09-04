@@ -48,6 +48,8 @@ function make_dfd {
 	local restarted
 	restarted=
 
+	rm -vf ~/.kube/config*
+
 	if true; then
 		k3sup install --local --context k3d-${nme} --local-path ~/.kube/config --merge \
 			--k3s-extra-args "--node-ip 172.31.38.198 --node-external-ip $(tailscale ip -4) --disable-network-policy --disable=traefik --flannel-backend=none --kube-apiserver-arg=--service-account-issuer=https://raw.githubusercontent.com/defn/dev/main/m/c/dfd/openid --kube-apiserver-arg=--api-audiences=https://kubernetes.default.svc.cluster.local,sts.amazonaws.com --tls-san=k3d-${nme}" 
@@ -60,7 +62,6 @@ function make_dfd {
 		else
 			# deploy k3d
 			env KUBECONFIG=$HOME/.kube/config k3d cluster delete ${nme} || true
-			rm -vf ~/.kube/config*
 			env KUBECONFIG=$HOME/.kube/config \
 			dfd cluster create ${nme} --config k3d.yaml \
 				--k3s-arg "TAILSCALE_AUTHKEY=$(chamber -b secretsmanager read --quiet k3d-${nme} tailscale_authkey)=TAILSCALE_AUTHKEY@all"
