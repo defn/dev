@@ -692,25 +692,23 @@ kustomize: "karpenter": #Kustomize & {
 
 				set -efu
 
-				sysctl -w fs.inotify.max_user_instances=10000
-
 				TOKEN="$(curl -sSL -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")"
 				instance="$(curl -sSL -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/instance-id)"
 
 				# download forked k3d
-				curl -o /tmp/dfd -sSL \\
-					https://github.com/amanibhavam/bin/raw/main/k3d
-				chmod 755 /tmp/dfd
+				#curl -o /tmp/dfd -sSL \\
+				#	https://github.com/amanibhavam/bin/raw/main/k3d
+				#chmod 755 /tmp/dfd
 
 				# download chamber
-				curl -o /tmp/chamber -sSL \\
-					https://github.com/segmentio/chamber/releases/download/v2.13.3/chamber-v2.13.3-linux-amd64
-				chmod 755 /tmp/chamber
+				#curl -o /tmp/chamber -sSL \\
+				#	https://github.com/segmentio/chamber/releases/download/v2.13.3/chamber-v2.13.3-linux-amd64
+				#chmod 755 /tmp/chamber
 
 				# docker exec -ti k3d-dfd-server-0 cat /var/lib/rancher/k3s/server/agent-token
-				/tmp/dfd node create "$instance" --role agent --image quay.io/defn/dev:latest-k3d --cluster https://k3d-dfd-server-0:6443 \\
-					--k3s-arg "TAILSCALE_AUTHKEY=$(/tmp/chamber -b secretsmanager read --quiet k3d-dfd tailscale_authkey)=TAILSCALE_AUTHKEY" \\
-					--token K10a97e6cf4aa4ee65f80b2e65aeff5c5cac70e1f3005c4bdd6fcf2a2783a2ee82a::server:EDrQtPPokKDRkJNXfBKx
+				#/tmp/dfd node create "$instance" --role agent --image quay.io/defn/dev:latest-k3d --cluster https://k3d-dfd-server-0:6443 \\
+				#	--k3s-arg "TAILSCALE_AUTHKEY=$(/tmp/chamber -b secretsmanager read --quiet k3d-dfd tailscale_authkey)=TAILSCALE_AUTHKEY" \\
+				#	--token K10a97e6cf4aa4ee65f80b2e65aeff5c5cac70e1f3005c4bdd6fcf2a2783a2ee82a::server:EDrQtPPokKDRkJNXfBKx
 
 				--BOUNDARY
 
