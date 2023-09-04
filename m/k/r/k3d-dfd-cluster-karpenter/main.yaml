@@ -1484,6 +1484,19 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
+  name: karpenter-boot-strapper
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:boot-strapper
+subjects:
+- kind: ServiceAccount
+  name: karpenter
+  namespace: karpenter
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
   labels:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
@@ -1495,6 +1508,19 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: karpenter-core
+subjects:
+- kind: ServiceAccount
+  name: karpenter
+  namespace: karpenter
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: karpenter-node
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:node
 subjects:
 - kind: ServiceAccount
   name: karpenter

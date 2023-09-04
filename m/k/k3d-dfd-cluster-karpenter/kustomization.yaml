@@ -8,6 +8,8 @@ resources:
   - karpenter.yaml
   - resource-namespace-karpenter.yaml
   - resource-cluster-role-binding-admin.yaml
+  - resource-cluster-role-binding-node.yaml
+  - resource-cluster-role-binding-boot-strapper.yaml
   - resource-provisioner-default.yaml
   - resource-awsnodetemplate-default.yaml
 namespace: karpenter
