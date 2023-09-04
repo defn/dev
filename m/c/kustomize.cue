@@ -695,7 +695,7 @@ kustomize: "karpenter": #Kustomize & {
 				TOKEN="$(curl -sSL -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")"
 				instance="$(curl -sSL -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/instance-id)"
 
-				cat <<'EOF'
+				cat | sudo -u ubuntu bash <<'EOF'
 				cd
 
 				infra_name=dfd
@@ -713,7 +713,7 @@ kustomize: "karpenter": #Kustomize & {
 				container_ip=$(/sbin/ifconfig ens5 | grep 'inet ' | awk '{print $2}')
 
 				(cd m/pkg/k3sup && nix develop --command k3sup join --user ubuntu --server-host coder-amanibhavam-dev --server-user ubuntu --k3s-version v1.26.7-k3s1 --k3s-extra-args "--node-ip ${container_ip} --node-external-ip ${ts_ip}")
-				EOF | sudo -u ubuntu bash
+				EOF
 
 				# download forked k3d
 				#curl -o /tmp/dfd -sSL \\
