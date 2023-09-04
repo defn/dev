@@ -56,5 +56,5 @@ cobra-cli add start
 
 ```
 rm -f ~/.kube/config
-k3sup install --local --context k3d-dfd --local-path ~/.kube/config --merge --k3s-extra-args "--node-ip 172.31.38.198 --node-external-ip $(tailscale ip -4) --disable-network-policy --disable=traefik --flannel-backend=none --kube-apiserver-arg=--service-account-issuer=https://raw.githubusercontent.com/defn/dev/main/m/c/dfd/openid --kube-apiserver-arg=--api-audiences=https://kubernetes.default.svc.cluster.local,sts.amazonaws.com" 
+k3sup install --local --context k3d-dfd --local-path ~/.kube/config --merge --k3s-extra-args "--node-ip 172.31.38.198 --node-external-ip $(tailscale ip -4) --disable-network-policy --disable=traefik --flannel-backend=none --kube-apiserver-arg=--service-account-issuer=https://raw.githubusercontent.com/defn/dev/main/m/c/dfd/openid --kube-apiserver-arg=--api-audiences=https://kubernetes.default.svc.cluster.local,sts.amazonaws.com --tls-san=k3d-dfd" 
 ```

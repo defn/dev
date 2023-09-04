@@ -44,21 +44,26 @@ function make_dfd {
 	local restarted
 	restarted=
 
-	if k3d cluster list dfd; then
-		# restart k3d
-		env KUBECONFIG=$HOME/.kube/config k3d cluster stop ${nme} || true
-		env KUBECONFIG=$HOME/.kube/config k3d cluster start ${nme}
-		restarted=1
+	if true; then
+		k3sup install --local --context k3d-${nme} --local-path ~/.kube/config --merge \
+			--k3s-extra-args "--node-ip 172.31.38.198 --node-external-ip $(tailscale ip -4) --disable-network-policy --disable=traefik --flannel-backend=none --kube-apiserver-arg=--service-account-issuer=https://raw.githubusercontent.com/defn/dev/main/m/c/dfd/openid --kube-apiserver-arg=--api-audiences=https://kubernetes.default.svc.cluster.local,sts.amazonaws.com --tls-san=k3d-${nme}" 
 	else
-		# deploy k3d
-		env KUBECONFIG=$HOME/.kube/config k3d cluster delete ${nme} || true
-		rm -vf ~/.kube/config*
-		env KUBECONFIG=$HOME/.kube/config \
-		dfd cluster create ${nme} --config k3d.yaml \
-			--k3s-arg "TAILSCALE_AUTHKEY=$(chamber -b secretsmanager read --quiet k3d-${nme} tailscale_authkey)=TAILSCALE_AUTHKEY@all"
-		docker update --restart=no k3d-${nme}-server-0
+		if k3d cluster list dfd; then
+			# restart k3d
+			env KUBECONFIG=$HOME/.kube/config k3d cluster stop ${nme} || true
+			env KUBECONFIG=$HOME/.kube/config k3d cluster start ${nme}
+			restarted=1
+		else
+			# deploy k3d
+			env KUBECONFIG=$HOME/.kube/config k3d cluster delete ${nme} || true
+			rm -vf ~/.kube/config*
+			env KUBECONFIG=$HOME/.kube/config \
+			dfd cluster create ${nme} --config k3d.yaml \
+				--k3s-arg "TAILSCALE_AUTHKEY=$(chamber -b secretsmanager read --quiet k3d-${nme} tailscale_authkey)=TAILSCALE_AUTHKEY@all"
+			docker update --restart=no k3d-${nme}-server-0
 
-		(cd c/${nme} && make secrets)
+			(cd c/${nme} && make secrets)
+		fi
 	fi
 
 	if [[ -z "${restarted-}" ]]; then
@@ -66,15 +71,15 @@ function make_dfd {
 		kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-manual-linkerd-crds/main.yaml
 		kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-manual-cilium-bootstrap/main.yaml
 		kubectl --context k3d-${nme} apply -f k/r/k3d-${nme}-cluster-argo-cd/main.yaml
-
-		# dedicated kubectl config for argocd
-		cp $HOME/.kube/config $HOME/.kube/config.argocd
-		(
-			export KUBECONFIG=$HOME/.kube/config.argocd
-			eval "$(kubectl config view -o json | jq -r --arg cluster k3d-${nme} --arg namespace argocd '.contexts[] | select(.name == $cluster).context | "kubectl config set-context \(.cluster)-argocd --cluster=\(.cluster) --user=\(.user) --namespace=\($namespace)"')"
-			kubectl config use-context k3d-${nme}-argocd
-		)
 	fi
+
+	# dedicated kubectl config for argocd
+	cp $HOME/.kube/config $HOME/.kube/config.argocd
+	(
+		export KUBECONFIG=$HOME/.kube/config.argocd
+		eval "$(kubectl config view -o json | jq -r --arg cluster k3d-${nme} --arg namespace argocd '.contexts[] | select(.name == $cluster).context | "kubectl config set-context \(.cluster)-argocd --cluster=\(.cluster) --user=\(.user) --namespace=\($namespace)"')"
+		kubectl config use-context k3d-${nme}-argocd
+	)
 
 	# switch back to the default config
 	kubectl config use-context k3d-${nme}
@@ -84,7 +89,7 @@ function make_dfd {
 
 	if [[ -z "${restarted-}" ]]; then
 		# patch argocd admin password
-		kubectl --context k3d-${nme}-argocd patch secret argocd-secret -p '{"stringData": { "admin.password": "'$(htpasswd -bnBC 10 "" admin | tr -d ':\n')'"}}'
+		env KUBECONFIG=$HOME/.kube/config.argocd kubectl patch secret argocd-secret -p '{"stringData": { "admin.password": "'$(htpasswd -bnBC 10 "" admin | tr -d ':\n')'"}}'
 
 		# add k3d to argocd
 		while true; do
