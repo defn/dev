@@ -661,8 +661,7 @@ kustomize: "karpenter": #Kustomize & {
 				chmod 755 /tmp/chamber
 
 				# docker exec -ti k3d-dfd-server-0 cat /var/lib/rancher/k3s/server/agent-token
-				# --cluster k3d-dfd-server-0
-				/tmp/dfd node create "$instance" --role agent --image quay.io/defn/dev:latest-k3d --cluster https://100.95.222.138:6443 \\
+				/tmp/dfd node create "$instance" --role agent --image quay.io/defn/dev:latest-k3d --cluster https://k3d-dfd-server-0:6443 \\
 					--k3s-arg "TAILSCALE_AUTHKEY=$(/tmp/chamber -b secretsmanager read --quiet k3d-dfd tailscale_authkey)=TAILSCALE_AUTHKEY" \\
 					--token K108072eb1f81a269ff4cfd234d016df2f0548360c3dd80c3bee67d99ce05d1c82c::server:PCVGcyoSUYdAQYlkVtMn
 
