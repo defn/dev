@@ -25,14 +25,13 @@ esac
 #tsauthkey="${tsauthkey%%=TAILSCALE_AUTHKEY*}"
 #tailscale up --authkey="${tsauthkey}"
 
-#while true; do
-#  ts_ip=$(tailscale ip -4 || true)
-#  if test -n "${ts_ip}"; then break; fi
-#  sleep 1
-#done
+while true; do
+  ts_ip=$(tailscale ip -4 || true)
+  if test -n "${ts_ip}"; then break; fi
+  sleep 1
+done
 
-container_ip=$(ifconfig ens5 | grep 'inet addr:' | cut -d: -f2 | cut -d' ' -f1)
-ts_ip=$(ifconfig tailscale0 | grep 'inet addr:' | cut -d: -f2 | cut -d' ' -f1)
+container_ip=$(ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | cut -d' ' -f1)
 
 # strip out tsauthkey
 k3sargs="$*"
