@@ -608,9 +608,25 @@ kustomize: "karpenter": #Kustomize & {
 				key:      "karpenter.sh/capacity-type"
 				operator: "In"
 				values: ["spot"]
+			}, {
+				key:      "kubernetes.io/os"
+				operator: "In"
+				values: ["linux"]
+			}, {
+				key:      "kubernetes.io/arch"
+				operator: "In"
+				values: ["amd64"]
+			}, {
+				key:      "karpenter.k8s.aws/instance-category"
+				operator: "In"
+				values: [ "c", "m", "r"]
+			}, {
+				key:      "karpenter.k8s.aws/instance-generation"
+				operator: "Gt"
+				values: [ '2']
 			}]
 			consolidation: enabled: true
-			limits: resources: cpu: 8
+			limits: resources: cpu: '8'
 		}
 	}
 
