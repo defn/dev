@@ -51,7 +51,7 @@ spec:
     	sleep 1
     done
 
-    (cd m/pkg/k3sup && nix develop --command k3sup join --user ubuntu --server-host coder-amanibhavam-dev --server-user ubuntu --k3s-extra-args "--disable-cloud-controller --kubelet-arg cloud-provider=external --kubelet-arg provider-id=aws:///${az}/${instance} --node-ip ${container_ip} --node-external-ip ${ts_ip}")
+    (cd m/pkg/k3sup && nix develop --command k3sup join --user ubuntu --server-host coder-amanibhavam-dev --server-user ubuntu --k3s-extra-args "--kubelet-arg provider-id=aws:///${az}/${instance} --node-ip ${container_ip} --node-external-ip ${ts_ip}")
     EOF
 
     # download forked k3d
