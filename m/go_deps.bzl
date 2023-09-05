@@ -28,8 +28,8 @@ def go_deps():
     go_repository(
         name = "com_github_aws_constructs_go_constructs_v10",
         importpath = "github.com/aws/constructs-go/constructs/v10",
-        sum = "h1:XW89VuKlwwzgU77Nyzj30SPn2SFtDYkzfF+QN84b5bQ=",
-        version = "v10.2.69",
+        sum = "h1:CuKeOwf27CzGUt8XxOZStFSOVZ7An5XpCzxvqUk8zW4=",
+        version = "v10.2.70",
     )
     go_repository(
         name = "com_github_aws_jsii_runtime_go",
@@ -272,8 +272,8 @@ def go_deps():
     go_repository(
         name = "com_github_go_playground_validator_v10",
         importpath = "github.com/go-playground/validator/v10",
-        sum = "h1:BSe8uhN+xQ4r5guV/ywQI4gO59C2raYcGffYWZEjZzM=",
-        version = "v10.15.1",
+        sum = "h1:S+sSpunYjNPDuXkWbK+x+bA7iXiW296KG4dL3X7xUZo=",
+        version = "v10.15.3",
     )
     go_repository(
         name = "com_github_go_quicktest_qt",
@@ -640,8 +640,8 @@ def go_deps():
     go_repository(
         name = "com_github_pelletier_go_toml_v2",
         importpath = "github.com/pelletier/go-toml/v2",
-        sum = "h1:uH2qQXheeefCCkuBBSLi7jCiSmj3VRh2+Goq2N7Xxu0=",
-        version = "v2.0.9",
+        sum = "h1:FnwAJ4oYMvbT/34k9zzHuZNrhlz48GB3/s6at6/MHO4=",
+        version = "v2.1.0",
     )
 
     go_repository(
@@ -671,8 +671,8 @@ def go_deps():
     go_repository(
         name = "com_github_protocolbuffers_txtpbfmt",
         importpath = "github.com/protocolbuffers/txtpbfmt",
-        sum = "h1:8SXWXWZNgCQbk7h0RWYK6BAWEQPQhFzLRvEoal4skDo=",
-        version = "v0.0.0-20230730201308-0c31dbd32b9f",
+        sum = "h1:KBIhjdYooZphqLiY1RYNM3bTJKbBJ7oJg5xwMUBcoog=",
+        version = "v0.0.0-20230830074515-d9d085e6be90",
     )
     go_repository(
         name = "com_github_rivo_uniseg",
@@ -973,8 +973,8 @@ def go_deps():
     go_repository(
         name = "org_golang_x_arch",
         importpath = "golang.org/x/arch",
-        sum = "h1:A8WCeEWhLwPBKNbFi5Wv5UTCBx5zzubnXDlMOFAzFMc=",
-        version = "v0.4.0",
+        sum = "h1:jpGode6huXQxcskEIpOCvrU+tzo81b6+oFLUYXWtH/Y=",
+        version = "v0.5.0",
     )
     go_repository(
         name = "org_golang_x_crypto",
@@ -1033,20 +1033,20 @@ def go_deps():
     go_repository(
         name = "org_golang_x_sys",
         importpath = "golang.org/x/sys",
-        sum = "h1:eG7RXZHdqOJ1i+0lgLgCpSXAp6M3LYlAo6osgSi0xOM=",
-        version = "v0.11.0",
+        sum = "h1:CM0HF96J0hcLAwsHPJZjfdNzs0gftsLfgKt57wWHJ0o=",
+        version = "v0.12.0",
     )
     go_repository(
         name = "org_golang_x_term",
         importpath = "golang.org/x/term",
-        sum = "h1:F9tnn/DA/Im8nCwm+fX+1/eBwi4qFjRT++MhtVC4ZX0=",
-        version = "v0.11.0",
+        sum = "h1:/ZfYdc3zq+q02Rv9vGqTeSItdzZTSNDmfTi0mBAuidU=",
+        version = "v0.12.0",
     )
     go_repository(
         name = "org_golang_x_text",
         importpath = "golang.org/x/text",
-        sum = "h1:k+n5B8goJNdU7hSvEtMUz3d1Q6D/XW4COJSJR6fN0mc=",
-        version = "v0.12.0",
+        sum = "h1:ablQoSUd0tRdKxZewP80B+BaqeKJuVhuRxj/dkrun3k=",
+        version = "v0.13.0",
     )
     go_repository(
         name = "org_golang_x_time",

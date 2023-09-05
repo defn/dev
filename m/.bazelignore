@@ -1,6 +1,7 @@
 
 tf
 node_modules
+dev/.direnv
 pkg/acme/.direnv
 pkg/argocd/.direnv
 pkg/argorollouts/.direnv
@@ -17,6 +18,7 @@ pkg/caddy/.direnv
 pkg/chamber/.direnv
 pkg/cilium/.direnv
 pkg/cloud/.direnv
+pkg/cloudflared/.direnv
 pkg/cloudnuke/.direnv
 pkg/coder-compat/.direnv
 pkg/coder/.direnv
@@ -27,6 +29,7 @@ pkg/cue/.direnv
 pkg/dapr/.direnv
 pkg/dev/.direnv
 pkg/development/.direnv
+pkg/dfd/.direnv
 pkg/earthly/.direnv
 pkg/flyctl/.direnv
 pkg/gh/.direnv
@@ -44,12 +47,14 @@ pkg/hubble/.direnv
 pkg/hugo/.direnv
 pkg/ibazel/.direnv
 pkg/k3d/.direnv
+pkg/k3sup/.direnv
 pkg/k9s/.direnv
 pkg/kn/.direnv
 pkg/kubectl/.direnv
 pkg/kubernetes/.direnv
 pkg/kubevirt/.direnv
 pkg/kustomize/.direnv
+pkg/linkerd/.direnv
 pkg/localdev/.direnv
 pkg/nix/.direnv
 pkg/nodedev/.direnv
@@ -75,6 +80,7 @@ pkg/vcluster/.direnv
 pkg/vhs/.direnv
 pkg/vpn/.direnv
 pkg/zellij/.direnv
+dev/result
 pkg/acme/result
 pkg/argocd/result
 pkg/argorollouts/result
@@ -91,6 +97,7 @@ pkg/caddy/result
 pkg/chamber/result
 pkg/cilium/result
 pkg/cloud/result
+pkg/cloudflared/result
 pkg/cloudnuke/result
 pkg/coder-compat/result
 pkg/coder/result
@@ -101,6 +108,7 @@ pkg/cue/result
 pkg/dapr/result
 pkg/dev/result
 pkg/development/result
+pkg/dfd/result
 pkg/earthly/result
 pkg/flyctl/result
 pkg/gh/result
@@ -118,12 +126,14 @@ pkg/hubble/result
 pkg/hugo/result
 pkg/ibazel/result
 pkg/k3d/result
+pkg/k3sup/result
 pkg/k9s/result
 pkg/kn/result
 pkg/kubectl/result
 pkg/kubernetes/result
 pkg/kubevirt/result
 pkg/kustomize/result
+pkg/linkerd/result
 pkg/localdev/result
 pkg/nix/result
 pkg/nodedev/result
