@@ -635,7 +635,13 @@ kustomize: "karpenter": #Kustomize & {
 		kind:       "Provisioner"
 		metadata: name: "default"
 		spec: {
-			providerRef: name: "default"
+			providerRef: name:      "default"
+			consolidation: enabled: true
+			startupTaints: [{
+				key:    "node.cilium.io/agent-not-ready"
+				value:  "true"
+				effect: "NoExecute"
+			}]
 			requirements: [{
 				key:      "karpenter.sh/capacity-type"
 				operator: "In"
@@ -658,7 +664,6 @@ kustomize: "karpenter": #Kustomize & {
 				values: [ '2']
 			}]
 			limits: resources: cpu: '8'
-			ttlSecondsAfterEmpty: 1
 		}
 	}
 
