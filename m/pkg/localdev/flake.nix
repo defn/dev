@@ -3,7 +3,7 @@
     tilt.url = github:defn/dev/pkg-tilt-0.33.5-1?dir=m/pkg/tilt;
     gh.url = github:defn/dev/pkg-gh-2.33.0-1?dir=m/pkg/gh;
     earthly.url = github:defn/dev/pkg-earthly-0.7.17-1?dir=m/pkg/earthly;
-    oras.url = github:defn/dev/pkg-oras-1.0.1-2?dir=m/pkg/oras;
+    oras.url = github:defn/dev/pkg-oras-1.1.0-1?dir=m/pkg/oras;
     buildkite.url = github:defn/dev/pkg-buildkite-3.53.0-1?dir=m/pkg/buildkite;
     bk.url = github:defn/dev/pkg-bk-2.0.0-12?dir=m/pkg/bk;
     buildevents.url = github:defn/dev/pkg-buildevents-0.15.0-2?dir=m/pkg/buildevents;

@@ -843,17 +843,17 @@
       },
       "locked": {
         "dir": "m/pkg/oras",
-        "lastModified": 1692116346,
-        "narHash": "sha256-jCQg3MVbf0l64sa5n/k1eHt6ZXCh3WaLqhrizeoGwIQ=",
+        "lastModified": 1693882473,
+        "narHash": "sha256-jrIZD8Pu2csiQixbIPJ9m1TWeiI48IxnG67BE9evIDE=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "c3fa85470ed8555ee902c1aca09dbc4cbb11a629",
+        "rev": "b963f6bea0600ca4ada0a97cac1f25b03199d38a",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/oras",
         "owner": "defn",
-        "ref": "pkg-oras-1.0.1-2",
+        "ref": "pkg-oras-1.1.0-1",
         "repo": "dev",
         "type": "github"
       }
