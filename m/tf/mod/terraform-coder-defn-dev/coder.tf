@@ -43,6 +43,12 @@ resource "coder_agent" "main" {
   startup_script_timeout = 180
   startup_script         = file("${path.module}/startup.sh")
 
+  display_apps {
+    vscode          = true
+    vscode_insiders = false
+    ssh_helper      = false
+  }
+
   env = {
     GIT_AUTHOR_NAME     = data.coder_workspace.me.owner
     GIT_COMMITTER_NAME  = data.coder_workspace.me.owner
