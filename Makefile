@@ -38,6 +38,12 @@ macos:
 build:
 	env -u SSH_AUTH_SOCK earthly +build
 
+cache:
+	$(MARK) cache
+	set -xeo pipefail; for n in $(flakes); do \
+		mark $$n; \
+		(cd m/pkg/$$n && ~/bin/b build && nix build && n cache defn); \
+		done; \
 home:
 	$(MARK) home
 	if [[ "$$(git rev-parse HEAD)" != "$$(cat bin/nix/.head)" ]]; then \
