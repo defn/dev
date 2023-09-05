@@ -55,3 +55,6 @@ k3d-secrets: ca.key ca.crt openid/.well-known/openid-configuration
 
 ca.key ca.crt:
 	step certificate create cilium-ca ca.crt ca.key --profile root-ca --not-after 8760h --no-password --insecure --kty RSA --size 4096 --force
+
+label:
+	kubectl get nodes -o json | jq -r '.items[].metadata.name' | runmany 'kubectl label --overwrite node $$1 node.kubernetes.io/instance-type=t3.medium'
