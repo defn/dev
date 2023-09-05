@@ -46,3 +46,19 @@ local_resource(
             """,
     ],
 )
+
+# hacks
+local_resource(
+    "hacks",
+    serve_cmd=[
+        "bash",
+        "-c",
+        """
+            while true; do
+                cd ~/m/c/dfd
+                make label
+                sleep 30
+            done
+            """,
+    ],
+)
