@@ -71,7 +71,7 @@ bazel-ignore:
 	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1result}' | sort >> .bazelignore
 
 za:
-	k3d cluster delete dfd || true
+	bin/make-k3d down
 	sudo rm -rf /nix/k3s /nix/k3s-containerd
 	docker rm -f k3d-registry
 	this-prune
@@ -79,6 +79,6 @@ za:
 	cd coder && ( $(MAKE) image || $(MAKE) image )
 
 warudo:
-	k3d cluster delete dfd || true
-	bin/make-k3d
+	bin/make-k3d down
+	bin/make-k3d up
 	cd dev && $(MAKE) down up
