@@ -29,6 +29,7 @@ local_resource(
         "-c",
         """
             cd ~/m
+            pkill -f [c]oder/postgres/bin/bin/postgres || true
             make dev
             """,
     ],
