@@ -302,6 +302,22 @@ kustomize: "kyverno": #KustomizeHelm & {
 			verbs: [ "create", "update", "patch", "delete"]
 		}]
 	}
+
+	resource: "clusterrole-background-controller-node": {
+		apiVersion: "rbac.authorization.k8s.io/v1"
+		kind:       "ClusterRole"
+		metadata: name: "kyverno:background-controller:node"
+		metadata: labels: {
+			"app.kubernetes.io/component": "background-controller"
+			"app.kubernetes.io/instance":  "kyverno"
+			"app.kubernetes.io/part-of":   "kyverno"
+		}
+		rules: [{
+			apiGroups: [""]
+			resources: ["nodes"]
+			verbs: [ "update", "patch"]
+		}]
+	}
 }
 
 // https://artifacthub.io/packages/helm/linkerd2/linkerd-crds
