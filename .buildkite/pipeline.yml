@@ -8,3 +8,5 @@ steps:
     command: cd m && ../bin/b build
   - name: test
     command: cd m && ../bin/b test
+  - name: cache
+    command: cd && make cache
