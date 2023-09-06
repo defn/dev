@@ -71,6 +71,7 @@ bazel-ignore:
 	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1result}' | sort >> .bazelignore
 
 za:
+	pass hello
 	bin/make-k3d down
 	sudo rm -rf /nix/k3s /nix/k3s-containerd
 	docker rm -f k3d-registry
