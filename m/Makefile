@@ -82,4 +82,3 @@ za:
 warudo:
 	bin/make-k3d down
 	bin/make-k3d up
-	cd dev && $(MAKE) down up
