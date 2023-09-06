@@ -32,6 +32,7 @@ up:
 	@bash -c "time $(MAKE) up-inner"
 
 up-inner:
+	# json.latest_build.resources[4].agents[0].apps[0].slug = "code-server"
 	$(MAKE) up-restart || $(MAKE) up-create
 	@echo
 	@while true; do if curl -sSL $$(cat $$HOME/.config/coderv2/url)/api/v2/users/$$(coder list |tail -1 | awk '{print $$1}' | cut -d/ -f1)/workspace/$(workspace) -H "Coder-Session-Token: $$(cat $$HOME/.config/coderv2/session)" | jq -r '(.latest_build.resources[].agents//[])[].apps[] | select(.display_name == "code-server") | .health' | grep healthy; then break; fi; date; sleep 5; done
