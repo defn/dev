@@ -44,7 +44,7 @@ resource "coder_agent" "main" {
   startup_script         = file("${path.module}/startup.sh")
 
   display_apps {
-    vscode          = true
+    vscode          = false
     vscode_insiders = false
     ssh_helper      = false
   }
