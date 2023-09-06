@@ -81,8 +81,8 @@ password-store:
 	$(MARK) configure password-store
 	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
 		if ! test -d ~/work/password-store/.git/.; then \
-			rm -rf ~/work/pssword-store
-			mkdir -p ~/work/password-store
+			rm -rf ~/work/pssword-store; \
+			mkdir -p ~/work/password-store; \
 			git clone git@github.com:$${GIT_AUTHOR_NAME}/password-store ~/work/password-store; \
 		fi; \
 	fi
