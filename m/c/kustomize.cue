@@ -1009,7 +1009,7 @@ kustomize: "cilium-bootstrap": #KustomizeHelm & {
 		version:   "1.14.1"
 		repo:      "https://helm.cilium.io"
 		values: {
-			kubeProxyReplacement: true
+			kubeProxyReplacement: "strict"
 			loadBalancer: algorithm: "maglev"
 			k8sServiceHost: "100.126.227.138"
 			k8sServicePort: 6443
@@ -1043,7 +1043,7 @@ kustomize: "cilium": #KustomizeHelm & {
 		version:   "1.14.1"
 		repo:      "https://helm.cilium.io"
 		values: {
-			kubeProxyReplacement: true
+			kubeProxyReplacement: "strict"
 			loadBalancer: algorithm: "maglev"
 			k8sServiceHost: "100.126.227.138"
 			k8sServicePort: 6443
