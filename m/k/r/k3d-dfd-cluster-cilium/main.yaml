@@ -1046,7 +1046,7 @@ spec:
         - name: KUBERNETES_SERVICE_HOST
           value: 100.126.227.138
         - name: KUBERNETES_SERVICE_PORT
-          value: "443"
+          value: "6443"
         image: quay.io/cilium/operator-generic:v1.14.0@sha256:3014d4bcb8352f0ddef90fa3b5eb1bbf179b91024813a90a0066eb4517ba93c9
         imagePullPolicy: IfNotPresent
         livenessProbe:
@@ -1305,7 +1305,7 @@ spec:
         - name: KUBERNETES_SERVICE_HOST
           value: 100.126.227.138
         - name: KUBERNETES_SERVICE_PORT
-          value: "443"
+          value: "6443"
         image: quay.io/cilium/cilium:v1.14.0@sha256:5a94b561f4651fcfd85970a50bc78b201cfbd6e2ab1a03848eab25a82832653a
         imagePullPolicy: IfNotPresent
         lifecycle:
@@ -1420,7 +1420,7 @@ spec:
         - name: KUBERNETES_SERVICE_HOST
           value: 100.126.227.138
         - name: KUBERNETES_SERVICE_PORT
-          value: "443"
+          value: "6443"
         image: quay.io/cilium/cilium:v1.14.0@sha256:5a94b561f4651fcfd85970a50bc78b201cfbd6e2ab1a03848eab25a82832653a
         imagePullPolicy: IfNotPresent
         name: config
@@ -1524,7 +1524,7 @@ spec:
         - name: KUBERNETES_SERVICE_HOST
           value: 100.126.227.138
         - name: KUBERNETES_SERVICE_PORT
-          value: "443"
+          value: "6443"
         image: quay.io/cilium/cilium:v1.14.0@sha256:5a94b561f4651fcfd85970a50bc78b201cfbd6e2ab1a03848eab25a82832653a
         imagePullPolicy: IfNotPresent
         name: clean-cilium-state
@@ -1720,7 +1720,7 @@ spec:
         - name: KUBERNETES_SERVICE_HOST
           value: 100.126.227.138
         - name: KUBERNETES_SERVICE_PORT
-          value: "443"
+          value: "6443"
         image: quay.io/cilium/cilium-envoy:v1.25.9-f039e2bd380b7eef2f2feea5750676bb36133699@sha256:023d09eeb8a44ae99b489f4af7ffed8b8b54f19a532e0bc6ab4c1e4b31acaab1
         imagePullPolicy: IfNotPresent
         livenessProbe:

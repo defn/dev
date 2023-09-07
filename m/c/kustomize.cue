@@ -1018,7 +1018,7 @@ kustomize: "cilium-bootstrap": #KustomizeHelm & {
 		values: {
 			kubeProxyReplacement: true
 			k8sServiceHost:       "100.126.227.138"
-			k8sServicePort:       443
+			k8sServicePort:       6443
 			operator: replicas: 1
 			hubble: {
 				relay: enabled: true
@@ -1050,7 +1050,7 @@ kustomize: "cilium": #KustomizeHelm & {
 		values: {
 			kubeProxyReplacement: true
 			k8sServiceHost:       "100.126.227.138"
-			k8sServicePort:       443
+			k8sServicePort:       6443
 			operator: replicas: 1
 			envoy: enabled:     true
 			hubble: {
