@@ -451,9 +451,7 @@ apiVersion: v1
 data:
   agent-not-ready-taint-key: node.cilium.io/agent-not-ready
   arping-refresh-period: 30s
-  auto-create-cilium-node-resource: "true"
   auto-direct-node-routes: "false"
-  aws-enable-prefix-delegation: "true"
   bpf-lb-algorithm: maglev
   bpf-lb-external-clusterip: "false"
   bpf-lb-map-max: "65536"
@@ -473,13 +471,11 @@ data:
   custom-cni-conf: "false"
   debug: "false"
   disable-cnp-status-updates: "true"
-  ec2-api-endpoint: ""
   egress-gateway-reconciliation-trigger-interval: 1s
   enable-auto-protect-node-port-range: "true"
   enable-bgp-control-plane: "false"
   enable-bpf-clock-probe: "false"
   enable-endpoint-health-checking: "true"
-  enable-endpoint-routes: "true"
   enable-health-check-nodeport: "true"
   enable-health-checking: "true"
   enable-hubble: "true"
@@ -501,7 +497,6 @@ data:
   enable-vtep: "false"
   enable-well-known-identities: "false"
   enable-xt-socket-fallback: "true"
-  eni-tags: '{}'
   external-envoy-proxy: "true"
   hubble-disable-tls: "false"
   hubble-listen-address: :4244
@@ -549,7 +544,6 @@ data:
   tofqdns-proxy-response-max-delay: 100ms
   tunnel-protocol: vxlan
   unmanaged-pod-watcher-interval: "15"
-  update-ec2-adapter-limit-via-api: "true"
   vtep-cidr: ""
   vtep-endpoint: ""
   vtep-mac: ""
@@ -1032,7 +1026,7 @@ spec:
         - --config-dir=/tmp/cilium/config-map
         - --debug=$(CILIUM_DEBUG)
         command:
-        - cilium-operator-aws
+        - cilium-operator-generic
         env:
         - name: K8S_NODE_NAME
           valueFrom:
@@ -1050,29 +1044,11 @@ spec:
               key: debug
               name: cilium-config
               optional: true
-        - name: AWS_ACCESS_KEY_ID
-          valueFrom:
-            secretKeyRef:
-              key: AWS_ACCESS_KEY_ID
-              name: cilium-aws
-              optional: true
-        - name: AWS_SECRET_ACCESS_KEY
-          valueFrom:
-            secretKeyRef:
-              key: AWS_SECRET_ACCESS_KEY
-              name: cilium-aws
-              optional: true
-        - name: AWS_DEFAULT_REGION
-          valueFrom:
-            secretKeyRef:
-              key: AWS_DEFAULT_REGION
-              name: cilium-aws
-              optional: true
         - name: KUBERNETES_SERVICE_HOST
           value: 100.126.227.138
         - name: KUBERNETES_SERVICE_PORT
           value: "6443"
-        image: quay.io/cilium/operator-aws:v1.14.1@sha256:ff57964aefd903456745e53a4697a4f6a026d8fffdb06f53f624a23d23ade37a
+        image: quay.io/cilium/operator-generic:v1.14.1@sha256:e061de0a930534c7e3f8feda8330976367971238ccafff42659f104effd4b5f7
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -1334,31 +1310,6 @@ spec:
         image: quay.io/cilium/cilium:v1.14.1@sha256:edc1d05ea1365c4a8f6ac6982247d5c145181704894bb698619c3827b6963a72
         imagePullPolicy: IfNotPresent
         lifecycle:
-          postStart:
-            exec:
-              command:
-              - bash
-              - -c
-              - |
-                set -o errexit
-                set -o pipefail
-                set -o nounset
-
-                # When running in AWS ENI mode, it's likely that 'aws-node' has
-                # had a chance to install SNAT iptables rules. These can result
-                # in dropped traffic, so we should attempt to remove them.
-                # We do it using a 'postStart' hook since this may need to run
-                # for nodes which might have already been init'ed but may still
-                # have dangling rules. This is safe because there are no
-                # dependencies on anything that is part of the startup script
-                # itself, and can be safely run multiple times per node (e.g. in
-                # case of a restart).
-                if [[ "$(iptables-save | grep -c AWS-SNAT-CHAIN)" != "0" ]];
-                then
-                    echo 'Deleting iptables rules created by the AWS CNI VPC plugin'
-                    iptables-save | grep -v AWS-SNAT-CHAIN | iptables-restore
-                fi
-                echo 'Done!'
           preStop:
             exec:
               command:
