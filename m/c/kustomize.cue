@@ -726,8 +726,7 @@ kustomize: "karpenter": #Kustomize & {
 				TOKEN="$(curl -sSL -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")"
 				instance="$(curl -sSL -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/instance-id)"
 				az="$(curl -sSL -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/placement/availability-zone)"
-
-				container_ip=$(/sbin/ifconfig ens5 | grep 'inet ' | awk '{print $2}')
+				container_ip="$(curl -sSL -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/local-ipv4)"
 
 				(cd m/pkg/k3sup && nix develop --command k3sup join --user ubuntu --server-host coder-amanibhavam-dev --server-user ubuntu --k3s-extra-args "--kubelet-arg provider-id=aws:///${az}/${instance} --node-ip ${container_ip}")
 				EOF
