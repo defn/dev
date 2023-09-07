@@ -21,9 +21,9 @@ helmCharts:
       envoy:
         enabled: true
       hubble:
-        relay:
-          enabled: true
         ui:
+          enabled: true
+        relay:
           enabled: true
         tls:
           auto:
