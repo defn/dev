@@ -10,6 +10,26 @@ function make_init {
 	k3d registry create registry --port 0.0.0.0:5000 || true
 }
 
+function make_linkerd {
+	# CA
+	step certificate create root.linkerd.cluster.local ca.crt ca.key --profile root-ca --no-password --insecure
+
+	# signing cluster
+	step certificate create identity.linkerd.cluster.local cluster.crt cluster.key --profile intermediate-ca --not-after 8760h --no-password --insecure --ca ca.crt --ca-key ca.key
+
+	# install linkerd cluster
+	linkerd --context k3d-${infra_name} install --crds | k --context k3d-${infra_name} apply -f -
+	linkerd --context k3d-${infra_name} install --identity-trust-anchors-file ca.crt --identity-issuer-certificate-file cluster.crt --identity-issuer-key-file cluster.key | k --context k3d-${infra_name} apply -f -
+	linkerd --context k3d-${infra_name} check
+
+	# install viz cluster
+	linkerd --context k3d-${infra_name} viz install --set dashboard.enforcedHostRegexp=^ | k --context k3d-${infra_name} apply -f -
+
+	# install mc cluster
+	linkerd --context k3d-${infra_name} multicluster install --gateway=false | k --context k3d-${infra_name} apply -f -
+	linkerd --context k3d-${infra_name} multicluster check
+}
+
 function make_vc {
 	for v in $(cd c/${infra_name} && cue export --out json -e infra.parent.vclusters | jq -r '.[]'); do
 		i="${v#vc}"
