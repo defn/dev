@@ -1021,9 +1021,10 @@ kustomize: "cilium-bootstrap": #KustomizeHelm & {
 			k8sServiceHost: "100.126.227.138"
 			k8sServicePort: 6443
 			operator: replicas: 1
+			envoy: enabled:     true
 			hubble: {
-				relay: enabled: true
 				ui: enabled:    false
+				relay: enabled: true
 				tls: auto: {
 					method: "certmanager"
 					certManagerIssuerRef: {
@@ -1056,8 +1057,8 @@ kustomize: "cilium": #KustomizeHelm & {
 			operator: replicas: 1
 			envoy: enabled:     true
 			hubble: {
-				relay: enabled: true
 				ui: enabled:    true
+				relay: enabled: true
 				tls: auto: {
 					method: "certmanager"
 					certManagerIssuerRef: {
