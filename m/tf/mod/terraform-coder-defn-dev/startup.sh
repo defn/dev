@@ -13,6 +13,7 @@ exec >>/tmp/dfd-startup.log 2>&1
 #sudo swapon /mnt/swap || true
 
 sudo sysctl -w fs.inotify.max_user_instances=10000
+sudo sysctl -w fs.inotify.max_user_watches=524288
 
 #sudo mount bpffs -t bpf /sys/fs/bpf
 #sudo mount --make-shared /sys/fs/bpf
