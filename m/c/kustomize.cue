@@ -387,7 +387,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.24.1"
+		version: "6.24.2"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -1045,7 +1045,7 @@ kustomize: "cilium": #KustomizeHelm & {
 		release:   "cilium"
 		name:      "cilium"
 		namespace: "kube-system"
-		version:   "1.14.0"
+		version:   "1.14.1"
 		repo:      "https://helm.cilium.io"
 		values: {
 			kubeProxyReplacement: true
@@ -1482,7 +1482,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "2.1.4"
+		version:   "2.1.5"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {
