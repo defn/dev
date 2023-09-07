@@ -1799,12 +1799,13 @@ spec:
     -sSL -X PUT \"http://169.254.169.254/latest/api/token\" -H \"X-aws-ec2-metadata-token-ttl-seconds:
     21600\")\"\ninstance=\"$(curl -sSL -H \"X-aws-ec2-metadata-token: $TOKEN\" -v
     http://169.254.169.254/latest/meta-data/instance-id)\"\naz=\"$(curl -sSL -H \"X-aws-ec2-metadata-token:
-    $TOKEN\" -v http://169.254.169.254/latest/meta-data/placement/availability-zone)\"\n\ncontainer_ip=$(/sbin/ifconfig
-    ens5 | grep 'inet ' | awk '{print $2}')\n\n(cd m/pkg/k3sup && nix develop --command
-    k3sup join --user ubuntu --server-host coder-amanibhavam-dev --server-user ubuntu
-    --k3s-extra-args \"--kubelet-arg provider-id=aws:///${az}/${instance} --node-ip
-    ${container_ip}\")\nEOF\n\n# download forked k3d\n#curl -o /tmp/dfd -sSL \\\n#\thttps://github.com/amanibhavam/bin/raw/main/k3d\n#chmod
-    755 /tmp/dfd\n\n# download chamber\n#curl -o /tmp/chamber -sSL \\\n#\thttps://github.com/segmentio/chamber/releases/download/v2.13.3/chamber-v2.13.3-linux-amd64\n#chmod
+    $TOKEN\" -v http://169.254.169.254/latest/meta-data/placement/availability-zone)\"\ncontainer_ip=\"$(curl
+    -sSL -H \"X-aws-ec2-metadata-token: $TOKEN\" -v http://169.254.169.254/latest/meta-data/local-ipv4)\"\n\n(cd
+    m/pkg/k3sup && nix develop --command k3sup join --user ubuntu --server-host coder-amanibhavam-dev
+    --server-user ubuntu --k3s-extra-args \"--kubelet-arg provider-id=aws:///${az}/${instance}
+    --node-ip ${container_ip}\")\nEOF\n\n# download forked k3d\n#curl -o /tmp/dfd
+    -sSL \\\n#\thttps://github.com/amanibhavam/bin/raw/main/k3d\n#chmod 755 /tmp/dfd\n\n#
+    download chamber\n#curl -o /tmp/chamber -sSL \\\n#\thttps://github.com/segmentio/chamber/releases/download/v2.13.3/chamber-v2.13.3-linux-amd64\n#chmod
     755 /tmp/chamber\n\n# docker exec -ti k3d-dfd-server-0 cat /var/lib/rancher/k3s/server/agent-token\n#/tmp/dfd
     node create \"$instance\" --role agent --image quay.io/defn/dev:latest-k3d --cluster
     https://k3d-dfd-server-0:6443 \\\n#\t--k3s-arg \"TAILSCALE_AUTHKEY=$(/tmp/chamber
