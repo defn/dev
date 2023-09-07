@@ -11,6 +11,9 @@ helmCharts:
     repo: https://helm.cilium.io
     namespace: kube-system
     valuesInline:
+      kubeProxyReplacement: true
+      k8sServiceHost: 100.126.227.138
+      k8sServicePort: 443
       operator:
         replicas: 1
       envoy:
