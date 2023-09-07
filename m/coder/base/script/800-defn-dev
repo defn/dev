@@ -48,7 +48,10 @@ function main {
 
 	echo '{ "insecure-registries" : ["169.254.32.1:5000"] }' | sudo tee /etc/docker/daemon.json
 
-	echo fs.inotify.max_user_instances=10000 | sudo tee /etc/sysctl.d/99-dfd.conf
+	(
+		echo fs.inotify.max_user_instances=10000
+		echo fs.inotify.max_user_watches=524288 
+	) | sudo tee /etc/sysctl.d/99-dfd.conf
 
 	sudo mkdir -p /etc/systemd/network
 	pushd /etc/systemd/network
