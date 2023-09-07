@@ -1011,10 +1011,6 @@ kustomize: "cilium-bootstrap": #KustomizeHelm & {
 		values: {
 			kubeProxyReplacement: true
 			loadBalancer: algorithm: "maglev"
-			eni: {
-				enabled:                   true
-				awsEnablePrefixDelegation: true
-			}
 			k8sServiceHost: "100.126.227.138"
 			k8sServicePort: 6443
 			operator: replicas: 1
@@ -1049,10 +1045,6 @@ kustomize: "cilium": #KustomizeHelm & {
 		values: {
 			kubeProxyReplacement: true
 			loadBalancer: algorithm: "maglev"
-			eni: {
-				enabled:                   true
-				awsEnablePrefixDelegation: true
-			}
 			k8sServiceHost: "100.126.227.138"
 			k8sServicePort: 6443
 			operator: replicas: 1
