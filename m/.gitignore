@@ -6,3 +6,8 @@ cover.out
 cue.mod/pkg
 manifest.json
 charts
+
+ca.crt
+ca.key
+cluster.crt
+cluster.key
