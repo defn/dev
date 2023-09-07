@@ -8,9 +8,11 @@ mount --make-shared /run/cilium/cgroupv2
 
 set -eu
 
+mode=
+
 case "${1-}" in
   server|agent)
-    true
+    mode="$1"
     ;;
   *)
     exec /bin/k3s-real "$@"
@@ -37,4 +39,11 @@ container_ip=$(ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | cut -d' ' -f1)
 k3sargs="$*"
 k3sargs="${k3sargs/TAILSCALE_AUTHKEY=*=TAILSCALE_AUTHKEY}"
 
-/bin/k3s-real $k3sargs --node-ip "${container_ip}" --node-external-ip "${ts_ip}"
+case "${mode}" in
+  agent)
+    exec /bin/k3s-real $k3sargs --node-ip "${container_ip}"
+    ;;
+  *)
+    exec /bin/k3s-real $k3sargs --node-ip "${container_ip}" --node-external-ip "${ts_ip}"
+    ;;
+esac
