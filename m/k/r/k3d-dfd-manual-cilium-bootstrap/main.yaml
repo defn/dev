@@ -446,7 +446,7 @@ data:
   ipam-cilium-node-update-rate: 15s
   k8s-client-burst: "10"
   k8s-client-qps: "5"
-  kube-proxy-replacement: "true"
+  kube-proxy-replacement: strict
   kube-proxy-replacement-healthz-bind-address: ""
   mesh-auth-enabled: "true"
   mesh-auth-gc-interval: 5m0s
