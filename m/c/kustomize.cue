@@ -729,13 +729,7 @@ kustomize: "karpenter": #Kustomize & {
 
 				container_ip=$(/sbin/ifconfig ens5 | grep 'inet ' | awk '{print $2}')
 
-				while true; do
-					ts_ip=$(tailscale ip -4 || true)
-					if test -n "${ts_ip}"; then break; fi
-					sleep 1
-				done
-
-				(cd m/pkg/k3sup && nix develop --command k3sup join --user ubuntu --server-host coder-amanibhavam-dev --server-user ubuntu --k3s-extra-args "--kubelet-arg provider-id=aws:///${az}/${instance} --node-ip ${container_ip} --node-external-ip ${ts_ip}")
+				(cd m/pkg/k3sup && nix develop --command k3sup join --user ubuntu --server-host coder-amanibhavam-dev --server-user ubuntu --k3s-extra-args "--kubelet-arg provider-id=aws:///${az}/${instance} --node-ip ${container_ip}")
 				EOF
 
 				# download forked k3d
