@@ -1,24 +1,43 @@
+# CA
 step certificate create root.linkerd.cluster.local ca.crt ca.key --profile root-ca --no-password --insecure
-for a in 0 1; do step certificate create identity.linkerd.cluster.local vc$a.crt vc$a.key --profile intermediate-ca --not-after 8760h --no-password --insecure --ca ca.crt --ca-key ca.key; done
+
+# signing cluster
 step certificate create identity.linkerd.cluster.local cluster.crt cluster.key --profile intermediate-ca --not-after 8760h --no-password --insecure --ca ca.crt --ca-key ca.key
 
-for a in 0 1; do k vc$a x linkerd install --crds | k vc$a apply -f -; done
-for a in 0 1; do k vc$a x linkerd install --identity-trust-anchors-file ca.crt --identity-issuer-certificate-file vc$a.crt --identity-issuer-key-file vc$a.key | k vc$a apply -f -; done
-for a in 0 1; do k vc$a x linkerd check; done
-
+# install linkerd cluster
 linkerd install --crds | k apply -f -
 linkerd install --identity-trust-anchors-file ca.crt --identity-issuer-certificate-file cluster.crt --identity-issuer-key-file cluster.key | k apply -f -
 linkerd check
 
-for a in 0 1; do k vc$a x linkerd --context k3d-dfd-vc$a viz install --set dashboard.enforcedHostRegexp=^ | k vc$a apply -f -; done
-linkerd --context k3d-dfd viz install --set dashboard.enforcedHostRegexp=^ | k apply -f -; done
+# install viz cluster
+linkerd --context k3d-dfd viz install --set dashboard.enforcedHostRegexp=^ | k apply -f -
 
-for a in 0 1; do k vc$a x linkerd multicluster install --gateway=false | k vc$a apply -f -; done
-for a in 0 1; do k vc$a x linkerd multicluster check; done
-
+# install mc cluster
 linkerd multicluster install --gateway=false | k apply -f -
 linkerd multicluster check
   
+
+
+
+# signing vc
+for a in 0 1; do step certificate create identity.linkerd.cluster.local vc$a.crt vc$a.key --profile intermediate-ca --not-after 8760h --no-password --insecure --ca ca.crt --ca-key ca.key; done
+
+# install linkerd vc
+for a in 0 1; do k vc$a x linkerd install --crds | k vc$a apply -f -; done
+for a in 0 1; do k vc$a x linkerd install --identity-trust-anchors-file ca.crt --identity-issuer-certificate-file vc$a.crt --identity-issuer-key-file vc$a.key | k vc$a apply -f -; done
+for a in 0 1; do k vc$a x linkerd check; done
+
+# install viz vc
+for a in 0 1; do k vc$a x linkerd --context k3d-dfd-vc$a viz install --set dashboard.enforcedHostRegexp=^ | k vc$a apply -f -; done
+
+# install mc vc
+for a in 0 1; do k vc$a x linkerd multicluster install --gateway=false | k vc$a apply -f -; done
+for a in 0 1; do k vc$a x linkerd multicluster check; done
+
+
+
+
+# mc linking
 k vc0 x linkerd --context=k3d-dfd-vc0 multicluster link --cluster-name k3d-dfd-vc0 --gateway=false | k vc1 apply -f -
 k vc0 x linkerd --context=k3d-dfd-vc0 multicluster link --cluster-name k3d-dfd-vc0 --gateway=false | k apply -f -
 
