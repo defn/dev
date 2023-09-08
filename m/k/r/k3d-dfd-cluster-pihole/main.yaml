@@ -96,6 +96,24 @@ spec:
     release: pihole
   type: ClusterIP
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: pihole
+    chart: pihole-2.18.0
+    component: ""
+    heritage: Helm
+    release: pihole
+  name: pihole
+  namespace: pihole
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -197,8 +215,9 @@ spec:
       hostNetwork: false
       hostname: null
       volumes:
-      - emptyDir: {}
-        name: config
+      - name: config
+        persistentVolumeClaim:
+          claimName: pihole
       - configMap:
           defaultMode: 420
           name: pihole-custom-dnsmasq

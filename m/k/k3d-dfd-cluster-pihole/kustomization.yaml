@@ -17,6 +17,8 @@ helmCharts:
         policy: None
         nameservers:
           - 10.0.0.60
+      persistentVolumeClaim:
+        enabled: true
       serviceDns:
         type: ClusterIP
       serviceDhcp:
