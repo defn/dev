@@ -1,0 +1,12 @@
+#ManagedBy: cue
+
+patches: []
+resources: []
+helmCharts:
+  - releaseName: trust-manager
+    name: trust-manager
+    version: 0.6.0
+    repo: https://charts.jetstack.io
+    namespace: cert-manager
+    valuesInline: {}
+    includeCRDs: true
