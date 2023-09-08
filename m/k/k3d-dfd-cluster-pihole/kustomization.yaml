@@ -1,0 +1,18 @@
+#ManagedBy: cue
+
+patches: []
+resources:
+  - resource-namespace-pihole.yaml
+namespace: pihole
+helmCharts:
+  - releaseName: pihole
+    name: pihole
+    version: 2.18.0
+    repo: https://mojo2600.github.io/pihole-kubernetes
+    namespace: pihole
+    valuesInline:
+      podDnsConfig:
+        enabled: false
+      serviceDns:
+        type: ClusterIP
+    includeCRDs: true

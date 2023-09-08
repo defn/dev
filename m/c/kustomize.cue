@@ -1555,3 +1555,30 @@ kustomize: "tfo": #Kustomize & {
 		url: "https://raw.githubusercontent.com/GalleyBytes/terraform-operator/master/deploy/bundles/v0.13.3/v0.13.3.yaml"
 	}
 }
+
+// https://artifacthub.io/packages/helm/mojo2600/pihole
+kustomize: "pihole": #KustomizeHelm & {
+	cluster: #Cluster
+
+	namespace: "pihole"
+
+	helm: {
+		release:   "pihole"
+		name:      "pihole"
+		namespace: "pihole"
+		version:   "2.18.0"
+		repo:      "https://mojo2600.github.io/pihole-kubernetes"
+		values: {
+			podDnsConfig: enabled: false
+			serviceDns: type:      "ClusterIP"
+		}
+	}
+
+	resource: "namespace-pihole": core.#Namespace & {
+		apiVersion: "v1"
+		kind:       "Namespace"
+		metadata: {
+			name: "pihole"
+		}
+	}
+}
