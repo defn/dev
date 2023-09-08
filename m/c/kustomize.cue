@@ -896,6 +896,20 @@ kustomize: "cert-manager": #KustomizeHelm & {
 	}
 }
 
+// https://artifacthub.io/packages/helm/cert-manager/trust-manager
+kustomize: "trust-manager": #KustomizeHelm & {
+	cluster: #Cluster
+
+	helm: {
+		release:   "trust-manager"
+		name:      "trust-manager"
+		namespace: "cert-manager"
+		version:   "0.6.0"
+		repo:      "https://charts.jetstack.io"
+		values: {}
+	}
+}
+
 // https://artifacthub.io/packages/helm/loft/vcluster
 #TransformKustomizeVCluster: {
 	from: {
@@ -1009,10 +1023,6 @@ kustomize: "cilium-bootstrap": #KustomizeHelm & {
 		version:   "1.14.1"
 		repo:      "https://helm.cilium.io"
 		values: {
-			kubeProxyReplacement: "strict"
-			loadBalancer: algorithm: "maglev"
-			k8sServiceHost: "100.126.227.138"
-			k8sServicePort: 6443
 			operator: replicas: 1
 			envoy: enabled:     true
 			hubble: {
@@ -1043,10 +1053,6 @@ kustomize: "cilium": #KustomizeHelm & {
 		version:   "1.14.1"
 		repo:      "https://helm.cilium.io"
 		values: {
-			kubeProxyReplacement: "strict"
-			loadBalancer: algorithm: "maglev"
-			k8sServiceHost: "100.126.227.138"
-			k8sServicePort: 6443
 			operator: replicas: 1
 			envoy: enabled:     true
 			hubble: {
