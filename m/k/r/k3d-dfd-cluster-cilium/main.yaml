@@ -1847,7 +1847,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: hubble.dev.amanibhavam.defn.run
+    external-dns.alpha.kubernetes.io/internal-hostname: hubble.dev.amanibhavam.defn.run
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
   name: hubble-ui
