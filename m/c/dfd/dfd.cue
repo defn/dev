@@ -24,7 +24,7 @@ infra: {
 		"linkerd-crds": [2, ""]
 		"cert-manager": [2, ""]
 
-		"trust-manager": [10, ""]
+		//"trust-manager": [10, ""]
 
 		// external secrets
 		"pod-identity": [10, ""]
