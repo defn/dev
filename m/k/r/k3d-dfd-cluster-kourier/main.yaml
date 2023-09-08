@@ -602,7 +602,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: '*.default.dev.amanibhavam.defn.run'
+    external-dns.alpha.kubernetes.io/internal-hostname: '*.default.dev.amanibhavam.defn.run'
   name: default-wildcard
   namespace: kourier-system
 spec:
