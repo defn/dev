@@ -190,11 +190,6 @@ spec:
         - mountPath: /etc/addn-hosts
           name: custom-dnsmasq
           subPath: addn-hosts
-      dnsConfig:
-        nameservers:
-        - 127.0.0.1
-        - 8.8.8.8
-      dnsPolicy: None
       hostNetwork: false
       hostname: null
       volumes:
