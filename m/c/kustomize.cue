@@ -943,7 +943,7 @@ kustomize: "trust-manager": #KustomizeHelm & {
 
 			fallbackHostDns: true
 			multiNamespaceMode: enabled: false
-			service: type:               "LoadBalancer"
+			service: type:               "ClusterIP"
 
 			sync: {
 				pods: ephemeralContainers:  true
@@ -1386,7 +1386,7 @@ kustomize: "traefik": #KustomizeHelm & {
 		}
 
 		spec: {
-			type: "LoadBalancer"
+			type: "ClusterIP"
 		}
 	}
 
