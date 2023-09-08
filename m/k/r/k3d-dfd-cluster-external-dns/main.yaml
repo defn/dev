@@ -209,6 +209,11 @@ spec:
         - --metrics-address=:7979
         - --log-level=debug
         - --log-format=text
+        - --publish-internal-services
+        - --service-type-filter=ClusterIP
+        - --service-type-filter=NodePort
+        - --service-type-filter=LoadBalancer
+        - --service-type-filter=ExternalName
         - --domain-filter=defn.run
         - --policy=upsert-only
         - --provider=cloudflare
