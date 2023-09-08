@@ -1024,7 +1024,11 @@ kustomize: "cilium-bootstrap": #KustomizeHelm & {
 		repo:      "https://helm.cilium.io"
 		values: {
 			operator: replicas: 1
-			envoy: enabled:     true
+			kubeProxyReplacement: "strict"
+			loadBalancer: algorithm: "maglev"
+			k8sServiceHost: "100.126.227.138"
+			k8sServicePort: 6443
+			envoy: enabled: true
 			hubble: {
 				ui: enabled:    false
 				relay: enabled: true
@@ -1054,7 +1058,11 @@ kustomize: "cilium": #KustomizeHelm & {
 		repo:      "https://helm.cilium.io"
 		values: {
 			operator: replicas: 1
-			envoy: enabled:     true
+			kubeProxyReplacement: "strict"
+			loadBalancer: algorithm: "maglev"
+			k8sServiceHost: "100.126.227.138"
+			k8sServicePort: 6443
+			envoy: enabled: true
 			hubble: {
 				ui: enabled:    true
 				relay: enabled: true

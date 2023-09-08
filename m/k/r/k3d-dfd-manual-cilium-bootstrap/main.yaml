@@ -386,6 +386,7 @@ data:
   agent-not-ready-taint-key: node.cilium.io/agent-not-ready
   arping-refresh-period: 30s
   auto-direct-node-routes: "false"
+  bpf-lb-algorithm: maglev
   bpf-lb-external-clusterip: "false"
   bpf-lb-map-max: "65536"
   bpf-lb-sock: "false"
@@ -409,10 +410,8 @@ data:
   enable-bgp-control-plane: "false"
   enable-bpf-clock-probe: "false"
   enable-endpoint-health-checking: "true"
-  enable-external-ips: "false"
   enable-health-check-nodeport: "true"
   enable-health-checking: "true"
-  enable-host-port: "false"
   enable-hubble: "true"
   enable-ipv4: "true"
   enable-ipv4-big-tcp: "false"
@@ -425,7 +424,6 @@ data:
   enable-l2-neigh-discovery: "true"
   enable-l7-proxy: "true"
   enable-local-redirect-policy: "false"
-  enable-node-port: "false"
   enable-policy: default
   enable-remote-node-identity: "true"
   enable-sctp: "false"
@@ -448,7 +446,7 @@ data:
   ipam-cilium-node-update-rate: 15s
   k8s-client-burst: "10"
   k8s-client-qps: "5"
-  kube-proxy-replacement: "false"
+  kube-proxy-replacement: strict
   kube-proxy-replacement-healthz-bind-address: ""
   mesh-auth-enabled: "true"
   mesh-auth-gc-interval: 5m0s
@@ -941,6 +939,10 @@ spec:
               key: debug
               name: cilium-config
               optional: true
+        - name: KUBERNETES_SERVICE_HOST
+          value: 100.126.227.138
+        - name: KUBERNETES_SERVICE_PORT
+          value: "6443"
         image: quay.io/cilium/operator-generic:v1.14.1@sha256:e061de0a930534c7e3f8feda8330976367971238ccafff42659f104effd4b5f7
         imagePullPolicy: IfNotPresent
         livenessProbe:
@@ -1129,6 +1131,10 @@ spec:
               fieldPath: metadata.namespace
         - name: CILIUM_CLUSTERMESH_CONFIG
           value: /var/lib/cilium/clustermesh/
+        - name: KUBERNETES_SERVICE_HOST
+          value: 100.126.227.138
+        - name: KUBERNETES_SERVICE_PORT
+          value: "6443"
         image: quay.io/cilium/cilium:v1.14.1@sha256:edc1d05ea1365c4a8f6ac6982247d5c145181704894bb698619c3827b6963a72
         imagePullPolicy: IfNotPresent
         lifecycle:
@@ -1240,6 +1246,10 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: metadata.namespace
+        - name: KUBERNETES_SERVICE_HOST
+          value: 100.126.227.138
+        - name: KUBERNETES_SERVICE_PORT
+          value: "6443"
         image: quay.io/cilium/cilium:v1.14.1@sha256:edc1d05ea1365c4a8f6ac6982247d5c145181704894bb698619c3827b6963a72
         imagePullPolicy: IfNotPresent
         name: config
@@ -1340,6 +1350,10 @@ spec:
               key: clean-cilium-bpf-state
               name: cilium-config
               optional: true
+        - name: KUBERNETES_SERVICE_HOST
+          value: 100.126.227.138
+        - name: KUBERNETES_SERVICE_PORT
+          value: "6443"
         image: quay.io/cilium/cilium:v1.14.1@sha256:edc1d05ea1365c4a8f6ac6982247d5c145181704894bb698619c3827b6963a72
         imagePullPolicy: IfNotPresent
         name: clean-cilium-state
@@ -1532,6 +1546,10 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: metadata.namespace
+        - name: KUBERNETES_SERVICE_HOST
+          value: 100.126.227.138
+        - name: KUBERNETES_SERVICE_PORT
+          value: "6443"
         image: quay.io/cilium/cilium-envoy:v1.25.9-f039e2bd380b7eef2f2feea5750676bb36133699@sha256:023d09eeb8a44ae99b489f4af7ffed8b8b54f19a532e0bc6ab4c1e4b31acaab1
         imagePullPolicy: IfNotPresent
         livenessProbe:
