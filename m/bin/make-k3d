@@ -35,7 +35,7 @@ function make_vc {
 		i="${v#vc}"
 		# wait until vcluster is ready
 		while true; do
-			if vcluster --context k3d-${infra_name} connect vcluster -n "k3d-${infra_name}-${v}-vcluster" --server=$(kubectl --context k3d-${infra_name} k get -n k3d-${infra_name}-${v}-vcluster svc vcluster -o json | jq -r '.spec.clusterIP'):443 --update-current=false --kube-config-context-name k3d-${infra_name}-"${v}" --kube-config "$HOME"/.kube/config."${v}"; then
+			if vcluster --context k3d-${infra_name} connect vcluster -n "k3d-${infra_name}-${v}-vcluster" --server=$(kubectl get --context k3d-${infra_name} -n k3d-${infra_name}-${v}-vcluster svc vcluster -o json | jq -r '.spec.clusterIP'):443 --update-current=false --kube-config-context-name k3d-${infra_name}-"${v}" --kube-config "$HOME"/.kube/config."${v}"; then
 				break
 			fi
 			sleep 5
