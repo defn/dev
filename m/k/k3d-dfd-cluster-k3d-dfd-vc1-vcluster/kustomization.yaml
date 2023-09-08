@@ -2,13 +2,6 @@
 
 patches:
   - path: patch-namespace-vcluster.yaml
-  - path: jsonp-service-vcluster-lb.yaml
-    target:
-      group: ""
-      version: v1
-      kind: Service
-      name: vcluster-lb
-      namespace: k3d-dfd-vc1-vcluster
 namespace: k3d-dfd-vc1-vcluster
 resources:
   - resource-namespace-vcluster.yaml

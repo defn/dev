@@ -709,21 +709,6 @@ kustomize: "karpenter": #Kustomize & {
 				(cd m/pkg/k3sup && nix develop --command k3sup join --user ubuntu --server-host coder-amanibhavam-dev --server-user ubuntu --k3s-extra-args "--kubelet-arg provider-id=aws:///${az}/${instance} --node-ip ${container_ip}")
 				EOF
 
-				# download forked k3d
-				#curl -o /tmp/dfd -sSL \\
-				#	https://github.com/amanibhavam/bin/raw/main/k3d
-				#chmod 755 /tmp/dfd
-
-				# download chamber
-				#curl -o /tmp/chamber -sSL \\
-				#	https://github.com/segmentio/chamber/releases/download/v2.13.3/chamber-v2.13.3-linux-amd64
-				#chmod 755 /tmp/chamber
-
-				# docker exec -ti k3d-dfd-server-0 cat /var/lib/rancher/k3s/server/agent-token
-				#/tmp/dfd node create "$instance" --role agent --image quay.io/defn/dev:latest-k3d --cluster https://k3d-dfd-server-0:6443 \\
-				#	--k3s-arg "TAILSCALE_AUTHKEY=$(/tmp/chamber -b secretsmanager read --quiet k3d-dfd tailscale_authkey)=TAILSCALE_AUTHKEY" \\
-				#	--token K10a97e6cf4aa4ee65f80b2e65aeff5c5cac70e1f3005c4bdd6fcf2a2783a2ee82a::server:EDrQtPPokKDRkJNXfBKx
-
 				--BOUNDARY
 
 				"""
@@ -970,22 +955,6 @@ kustomize: "trust-manager": #KustomizeHelm & {
 		metadata: {
 			name: _in.vc_name
 		}
-	}
-
-	jsp: "service-vcluster-lb": {
-		target: {
-			group:     ""
-			version:   "v1"
-			kind:      "Service"
-			name:      "vcluster-lb"
-			namespace: _in.vc_name
-		}
-
-		patches: [{
-			op:    "replace"
-			path:  "/spec/ports/0/port"
-			value: 6443
-		}]
 	}
 }
 

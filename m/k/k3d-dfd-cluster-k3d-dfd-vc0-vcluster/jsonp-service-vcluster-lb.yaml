@@ -1,5 +1,0 @@
-#ManagedBy: cue
-
-- op: replace
-  path: /spec/ports/0/port
-  value: 6443
