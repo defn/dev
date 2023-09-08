@@ -1390,22 +1390,30 @@ kustomize: "traefik": #KustomizeHelm & {
 		}
 	}
 
-	resource: "ingress-tailscale": {
+	resource: "ingress-traefik": {
 		apiVersion: "networking.k8s.io/v1"
 		kind:       "Ingress"
 		metadata: {
-			name: "traefik-tailscale"
+			name:      "traefik"
+			namespace: "traefik"
+			annotations: {
+				"external-dns.alpha.kubernetes.io/internal-hostname": "traefik.\(cluster.domain_name)"
+			}
 		}
 
 		spec: {
-			ingressClassName: "tailscale"
-			tls: [{
-				hosts: ["traefik"]
+			ingressClassName: "traefik"
+			rules: [{
+				host: "traefik.\(cluster.domain_name)"
+				http: paths: [{
+					path:     "/"
+					pathType: "Prefix"
+					backend: service: {
+						name: "traefik"
+						port: number: 443
+					}
+				}]
 			}]
-			defaultBackend: service: {
-				name: "traefik"
-				port: number: 443
-			}
 		}
 	}
 

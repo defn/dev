@@ -5036,18 +5036,23 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: traefik-tailscale
+  annotations:
+    external-dns.alpha.kubernetes.io/internal-hostname: traefik.dev.amanibhavam.defn.run
+  name: traefik
   namespace: traefik
 spec:
-  defaultBackend:
-    service:
-      name: traefik
-      port:
-        number: 443
-  ingressClassName: tailscale
-  tls:
-  - hosts:
-    - traefik
+  ingressClassName: traefik
+  rules:
+  - host: traefik.dev.amanibhavam.defn.run
+    http:
+      paths:
+      - backend:
+          service:
+            name: traefik
+            port:
+              number: 443
+        path: /
+        pathType: Prefix
 ---
 apiVersion: networking.k8s.io/v1
 kind: IngressClass
