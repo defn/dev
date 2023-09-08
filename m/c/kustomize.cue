@@ -1387,6 +1387,9 @@ kustomize: "traefik": #KustomizeHelm & {
 		metadata: {
 			name:      "traefik"
 			namespace: "traefik"
+			annotations: {
+				"external-dns.alpha.kubernetes.io/internal-hostname": "*.\(cluster.domain_name)"
+			}
 		}
 
 		spec: {

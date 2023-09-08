@@ -5,5 +5,7 @@ kind: Service
 metadata:
   name: traefik
   namespace: traefik
+  annotations:
+    external-dns.alpha.kubernetes.io/internal-hostname: '*.dev.amanibhavam.defn.run'
 spec:
   type: ClusterIP
