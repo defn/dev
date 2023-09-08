@@ -1012,8 +1012,7 @@ kustomize: "trust-manager": #KustomizeHelm & {
 	}
 }
 
-// https://artifacthub.io/packages/helm/cilium/cilium
-kustomize: "cilium-bootstrap": #KustomizeHelm & {
+cilium_common: {
 	namespace: "kube-system"
 
 	helm: {
@@ -1028,9 +1027,10 @@ kustomize: "cilium-bootstrap": #KustomizeHelm & {
 			loadBalancer: algorithm: "maglev"
 			k8sServiceHost: "100.116.45.18"
 			k8sServicePort: 6443
-			envoy: enabled: true
+			bpf: lbExternalClusterIP: true
+			envoy: enabled:           true
 			hubble: {
-				ui: enabled:    false
+				ui: enabled:    bool | *false
 				relay: enabled: true
 				tls: auto: {
 					method: "certmanager"
@@ -1045,36 +1045,21 @@ kustomize: "cilium-bootstrap": #KustomizeHelm & {
 	}
 }
 
+// https://artifacthub.io/packages/helm/cilium/cilium
+kustomize: "cilium-bootstrap": #KustomizeHelm & {
+	cluster: #Cluster
+
+	cilium_common
+}
+
 kustomize: "cilium": #KustomizeHelm & {
 	cluster: #Cluster
 
-	namespace: "kube-system"
+	cilium_common
 
 	helm: {
-		release:   "cilium"
-		name:      "cilium"
-		namespace: "kube-system"
-		version:   "1.14.1"
-		repo:      "https://helm.cilium.io"
 		values: {
-			operator: replicas: 1
-			kubeProxyReplacement: "strict"
-			loadBalancer: algorithm: "maglev"
-			k8sServiceHost: "100.116.45.18"
-			k8sServicePort: 6443
-			envoy: enabled: true
-			hubble: {
-				ui: enabled:    true
-				relay: enabled: true
-				tls: auto: {
-					method: "certmanager"
-					certManagerIssuerRef: {
-						name:  "cilium-ca"
-						kind:  "ClusterIssuer"
-						group: "cert-manager.io"
-					}
-				}
-			}
+			hubble: ui: enabled: true
 		}
 	}
 
@@ -1105,7 +1090,6 @@ kustomize: "cilium": #KustomizeHelm & {
 			}]
 		}
 	}
-
 }
 
 // https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/manifests/operator.yaml
