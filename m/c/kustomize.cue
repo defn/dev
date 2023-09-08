@@ -145,9 +145,8 @@ kustomize: "argo-cd": #Kustomize & {
 		metadata: {
 			name: "argo-cd"
 			annotations: {
-				"external-dns.alpha.kubernetes.io/internal-hostname": "argocd.\(cluster.domain_name)"
-				"traefik.ingress.kubernetes.io/router.tls":           "true"
-				"traefik.ingress.kubernetes.io/router.entrypoints":   "websecure"
+				"traefik.ingress.kubernetes.io/router.tls":         "true"
+				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
 			}
 		}
 
@@ -1076,9 +1075,8 @@ kustomize: "cilium": #KustomizeHelm & {
 		metadata: {
 			name: "hubble-ui"
 			annotations: {
-				"external-dns.alpha.kubernetes.io/internal-hostname": "hubble.\(cluster.domain_name)"
-				"traefik.ingress.kubernetes.io/router.tls":           "true"
-				"traefik.ingress.kubernetes.io/router.entrypoints":   "websecure"
+				"traefik.ingress.kubernetes.io/router.tls":         "true"
+				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
 			}
 		}
 
@@ -1403,9 +1401,6 @@ kustomize: "traefik": #KustomizeHelm & {
 		metadata: {
 			name:      "traefik"
 			namespace: "traefik"
-			annotations: {
-				"external-dns.alpha.kubernetes.io/internal-hostname": "traefik.\(cluster.domain_name)"
-			}
 		}
 
 		spec: {
@@ -1519,9 +1514,8 @@ kustomize: "coder": #KustomizeHelm & {
 		metadata: {
 			name: "coder"
 			annotations: {
-				"external-dns.alpha.kubernetes.io/internal-hostname": "coder.\(cluster.domain_name)"
-				"traefik.ingress.kubernetes.io/router.tls":           "true"
-				"traefik.ingress.kubernetes.io/router.entrypoints":   "websecure"
+				"traefik.ingress.kubernetes.io/router.tls":         "true"
+				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
 			}
 		}
 
@@ -1592,9 +1586,8 @@ kustomize: "emojivoto": #Kustomize & {
 		metadata: {
 			name: "emojivoto"
 			annotations: {
-				"external-dns.alpha.kubernetes.io/internal-hostname": "emojivoto\(cluster.name_suffix)\(cluster.domain_name)"
-				"traefik.ingress.kubernetes.io/router.tls":           "true"
-				"traefik.ingress.kubernetes.io/router.entrypoints":   "websecure"
+				"traefik.ingress.kubernetes.io/router.tls":         "true"
+				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
 			}
 		}
 

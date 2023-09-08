@@ -5036,8 +5036,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    external-dns.alpha.kubernetes.io/internal-hostname: traefik.dev.amanibhavam.defn.run
   name: traefik
   namespace: traefik
 spec:

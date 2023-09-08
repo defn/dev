@@ -5,8 +5,6 @@ kind: Ingress
 metadata:
   name: traefik
   namespace: traefik
-  annotations:
-    external-dns.alpha.kubernetes.io/internal-hostname: traefik.dev.amanibhavam.defn.run
 spec:
   ingressClassName: traefik
   rules:
