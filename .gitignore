@@ -9,7 +9,7 @@ snap
 /.trunk
 node_modules
 .profile
-.bash_history
+.bash_history*
 .bash_logout
 .viminfo
 .vim/plugged
