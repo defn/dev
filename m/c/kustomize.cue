@@ -1028,12 +1028,10 @@ cilium_common: {
 		version:   "1.14.1"
 		repo:      "https://helm.cilium.io"
 		values: {
-			operator: replicas: 1
-			kubeProxyReplacement: "strict"
-			loadBalancer: algorithm: "maglev"
-			k8sServiceHost: "100.116.45.18"
-			k8sServicePort: 6443
+			operator: replicas:       1
+			loadBalancer: algorithm:  "maglev"
 			bpf: lbExternalClusterIP: true
+			bpf: masquerade:          true
 			envoy: enabled:           true
 			hubble: {
 				ui: enabled:    bool | *false
