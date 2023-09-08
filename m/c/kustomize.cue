@@ -1373,20 +1373,17 @@ kustomize: "traefik": #KustomizeHelm & {
 		}
 	}
 
-	psm: "service-tailscale": {
+	psm: "service-traefik": {
 		apiVersion: "v1"
 		kind:       "Service"
 
 		metadata: {
 			name:      "traefik"
 			namespace: "traefik"
-			annotations: {
-				"external-dns.alpha.kubernetes.io/internal-hostname": "traefik.\(cluster.domain_name)"
-			}
 		}
 
 		spec: {
-			type: "ClusterIP"
+			type: "NodePort"
 		}
 	}
 

@@ -4865,8 +4865,6 @@ subjects:
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    external-dns.alpha.kubernetes.io/internal-hostname: traefik.dev.amanibhavam.defn.run
   labels:
     app.kubernetes.io/instance: traefik-traefik
     app.kubernetes.io/managed-by: Helm
@@ -4887,7 +4885,7 @@ spec:
   selector:
     app.kubernetes.io/instance: traefik-traefik
     app.kubernetes.io/name: traefik
-  type: ClusterIP
+  type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
