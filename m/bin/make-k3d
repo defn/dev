@@ -50,48 +50,23 @@ function make_vc {
 }
 
 function make_down {
-	if true; then
-		/usr/local/bin/k3s-uninstall.sh || true
-	else
-		k3d cluster delete ${infra_name}
-	fi
+	/usr/local/bin/k3s-uninstall.sh || true
 }
 
 function make_up {
-	local restarted
-	restarted=
-
 	rm -vf ~/.kube/config*
 
-	if true; then
-		local TOKEN="$(curl -sSL -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")"
-		local container_ip="$(curl -sSL -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/local-ipv4)"
-		k3sup install --local --context k3d-${infra_name} --local-path ~/.kube/config --merge \
-			--k3s-extra-args "--node-ip "${container_ip}" --node-external-ip $(tailscale ip -4) --disable-network-policy --disable=traefik --flannel-backend=none --kube-apiserver-arg=--service-account-issuer=https://raw.githubusercontent.com/defn/dev/main/m/c/${infra_name}/openid --kube-apiserver-arg=--api-audiences=https://kubernetes.default.svc.cluster.local,sts.amazonaws.com --tls-san=k3d-${infra_name}" 
-	else
-		if k3d cluster list ${infra_name}; then
-			# restart k3d
-			env KUBECONFIG=$HOME/.kube/config k3d cluster stop ${infra_name} || true
-			env KUBECONFIG=$HOME/.kube/config k3d cluster start ${infra_name}
-			restarted=1
-		else
-			# deploy k3d
-			env KUBECONFIG=$HOME/.kube/config k3d cluster delete ${infra_name} || true
-			env KUBECONFIG=$HOME/.kube/config \
-			dfd cluster create ${infra_name} --config k3d.yaml \
-				--k3s-arg "TAILSCALE_AUTHKEY=$(chamber -b secretsmanager read --quiet k3d-${infra_name} tailscale_authkey)=TAILSCALE_AUTHKEY@all"
-			docker update --restart=no k3d-${infra_name}-server-0
-		fi
-	fi
+	local TOKEN="$(curl -sSL -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")"
+	local container_ip="$(curl -sSL -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/local-ipv4)"
+	k3sup install --local --context k3d-${infra_name} --local-path ~/.kube/config --merge \
+		--k3s-extra-args "--node-ip "${container_ip}" --disable-network-policy --disable=traefik --flannel-backend=none --kube-apiserver-arg=--service-account-issuer=https://raw.githubusercontent.com/defn/dev/main/m/c/${infra_name}/openid --kube-apiserver-arg=--api-audiences=https://kubernetes.default.svc.cluster.local,sts.amazonaws.com --tls-san=k3d-${infra_name}" 
 
 	(cd c/${infra_name} && make secrets)
 
-	if [[ -z "${restarted-}" ]]; then
-		kubectl --context k3d-${infra_name} apply -f k/r/k3d-${infra_name}-manual-cert-manager-crds/main.yaml
-		kubectl --context k3d-${infra_name} apply -f k/r/k3d-${infra_name}-manual-linkerd-crds/main.yaml
-		kubectl --context k3d-${infra_name} apply -f k/r/k3d-${infra_name}-manual-cilium-bootstrap/main.yaml
-		kubectl --context k3d-${infra_name} apply -f k/r/k3d-${infra_name}-cluster-argo-cd/main.yaml
-	fi
+	kubectl --context k3d-${infra_name} apply -f k/r/k3d-${infra_name}-manual-cert-manager-crds/main.yaml
+	kubectl --context k3d-${infra_name} apply -f k/r/k3d-${infra_name}-manual-linkerd-crds/main.yaml
+	kubectl --context k3d-${infra_name} apply -f k/r/k3d-${infra_name}-manual-cilium-bootstrap/main.yaml
+	kubectl --context k3d-${infra_name} apply -f k/r/k3d-${infra_name}-cluster-argo-cd/main.yaml
 
 	# dedicated kubectl config for argocd
 	cp $HOME/.kube/config $HOME/.kube/config.argocd
@@ -107,27 +82,25 @@ function make_up {
 	env KUBECONFIG=$HOME/.kube/config.argocd kubectl -n argocd rollout status deployment/argocd-server
 	env KUBECONFIG=$HOME/.kube/config.argocd kubectl -n argocd rollout status deployment/argocd-repo-server
 
-	if [[ -z "${restarted-}" ]]; then
-		# patch argocd admin password
-		env KUBECONFIG=$HOME/.kube/config.argocd kubectl patch secret argocd-secret -p '{"stringData": { "admin.password": "'$(htpasswd -bnBC 10 "" admin | tr -d ':\n')'"}}'
+	# patch argocd admin password
+	env KUBECONFIG=$HOME/.kube/config.argocd kubectl patch secret argocd-secret -p '{"stringData": { "admin.password": "'$(htpasswd -bnBC 10 "" admin | tr -d ':\n')'"}}'
 
-		# add k3d to argocd
-		while true; do
-			if env KUBECONFIG=$HOME/.kube/config.argocd argocd cluster add k3d-${infra_name} --name k3d-${infra_name}-cluster --yes --core --in-cluster; then
-				break
-			fi
-			sleep 5
-		done
+	# add k3d to argocd
+	while true; do
+		if env KUBECONFIG=$HOME/.kube/config.argocd argocd cluster add k3d-${infra_name} --name k3d-${infra_name}-cluster --yes --core --in-cluster; then
+			break
+		fi
+		sleep 5
+	done
 
-		# deploy the cluster app-of-apps
-		kubectl --context k3d-${infra_name} apply -f e/k3d-${infra_name}-cluster.yaml
+	# deploy the cluster app-of-apps
+	kubectl --context k3d-${infra_name} apply -f e/k3d-${infra_name}-cluster.yaml
 
-		# background app-of-apps syncing
-		while true; do
-			if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 60 k3d-${infra_name}-cluster >/dev/null 2>&1; then break; fi
-			sleep 30
-		done &
-	fi
+	# background app-of-apps syncing
+	while true; do
+		if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 60 k3d-${infra_name}-cluster >/dev/null 2>&1; then break; fi
+		sleep 30
+	done &
 
 	make_vc
 }
