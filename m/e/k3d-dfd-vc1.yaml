@@ -1,0 +1,19 @@
+# ManagedBy: cue
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: argocd
+  name: k3d-dfd-vc1
+spec:
+  project: default
+  destination:
+    name: k3d-dfd-cluster
+  source:
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+    path: m/k/r/k3d-dfd-vc1-env
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

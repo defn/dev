@@ -9,7 +9,7 @@ import (
 )
 
 infra_name: string
-infra_vclusters: [...int]
+infra_vclusters: [...string]
 
 infra: {
 	_base: {}
@@ -25,8 +25,8 @@ infra: {
 	}
 
 	parent: vclusters: [
-		for i in infra_vclusters {
-			"vc\(i)"
+		for v in infra_vclusters {
+			"\(v)"
 		},
 	]
 
@@ -37,7 +37,6 @@ infra: {
 	}
 
 	for i, v in parent.vclusters {
-		"\(v)": vcluster: vc_index: i
 		"\(infra[v].cluster_name)": infra[v]
 	}
 
@@ -895,7 +894,6 @@ kustomize: "trust-manager": #KustomizeHelm & {
 		#Input
 		vc_name:    string | *from.name
 		vc_machine: string | *from.name
-		vc_index:   int | *0
 
 		type:        string
 		k3s_version: string
@@ -986,7 +984,7 @@ kustomize: "trust-manager": #KustomizeHelm & {
 		patches: [{
 			op:    "replace"
 			path:  "/spec/ports/0/port"
-			value: 8443 + _in.vc_index
+			value: 6443
 		}]
 	}
 }
