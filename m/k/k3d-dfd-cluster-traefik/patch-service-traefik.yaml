@@ -6,4 +6,4 @@ metadata:
   name: traefik
   namespace: traefik
 spec:
-  type: NodePort
+  type: ClusterIP

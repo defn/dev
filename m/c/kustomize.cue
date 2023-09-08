@@ -1390,7 +1390,7 @@ kustomize: "traefik": #KustomizeHelm & {
 		}
 
 		spec: {
-			type: "NodePort"
+			type: "ClusterIP"
 		}
 	}
 
