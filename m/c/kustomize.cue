@@ -1572,6 +1572,7 @@ kustomize: "pihole": #KustomizeHelm & {
 			podDnsConfig: enabled: false
 			serviceDns: type:      "ClusterIP"
 			serviceDhcp: enabled:  false
+			serviceWeb: https: enabled: false
 		}
 	}
 
@@ -1580,6 +1581,33 @@ kustomize: "pihole": #KustomizeHelm & {
 		kind:       "Namespace"
 		metadata: {
 			name: "pihole"
+		}
+	}
+
+	resource: "ingress-pihole-web": {
+		apiVersion: "networking.k8s.io/v1"
+		kind:       "Ingress"
+		metadata: {
+			name: "pihole-web"
+			annotations: {
+				"traefik.ingress.kubernetes.io/router.tls":         "true"
+				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
+			}
+		}
+
+		spec: {
+			ingressClassName: "traefik"
+			rules: [{
+				host: "pihole.\(cluster.domain_name)"
+				http: paths: [{
+					path:     "/"
+					pathType: "Prefix"
+					backend: service: {
+						name: "pihole-web"
+						port: number: 80
+					}
+				}]
+			}]
 		}
 	}
 }

@@ -3,6 +3,7 @@
 patches: []
 resources:
   - resource-namespace-pihole.yaml
+  - resource-ingress-pihole-web.yaml
 namespace: pihole
 helmCharts:
   - releaseName: pihole
