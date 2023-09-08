@@ -17,4 +17,7 @@ helmCharts:
         type: ClusterIP
       serviceDhcp:
         enabled: false
+      serviceWeb:
+        https:
+          enabled: false
     includeCRDs: true
