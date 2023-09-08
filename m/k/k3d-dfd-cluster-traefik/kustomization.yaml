@@ -2,7 +2,7 @@
 
 patches:
   - path: patch-ingressroute-traefik-dashboard.yaml
-  - path: patch-service-tailscale.yaml
+  - path: patch-service-traefik.yaml
 resources:
   - resource-namespace-traefik.yaml
   - resource-tlsstore-traefik.yaml
