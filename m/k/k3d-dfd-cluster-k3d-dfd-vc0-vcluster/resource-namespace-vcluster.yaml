@@ -1,0 +1,6 @@
+#ManagedBy: cue
+
+metadata:
+  name: k3d-dfd-vc0-vcluster
+kind: Namespace
+apiVersion: v1
