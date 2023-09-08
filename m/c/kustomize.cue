@@ -395,6 +395,13 @@ kustomize: "external-dns": #KustomizeHelm & {
 				"service",
 				"ingress",
 			]
+			publishInternalServices: true
+			serviceTypeFilter: [
+				"ClusterIP",
+				"NodePort",
+				"LoadBalancer",
+				"ExternalName",
+			]
 			provider: "cloudflare"
 			cloudflare: {
 				email:   cluster.cloudflare_email

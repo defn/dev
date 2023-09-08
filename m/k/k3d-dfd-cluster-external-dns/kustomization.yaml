@@ -16,6 +16,12 @@ helmCharts:
       sources:
         - service
         - ingress
+      publishInternalServices: true
+      serviceTypeFilter:
+        - ClusterIP
+        - NodePort
+        - LoadBalancer
+        - ExternalName
       provider: cloudflare
       cloudflare:
         email: cloudflare@defn.us
