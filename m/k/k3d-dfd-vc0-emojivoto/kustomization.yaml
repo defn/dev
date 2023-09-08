@@ -1,0 +1,8 @@
+#ManagedBy: cue
+
+patches:
+  - path: patch-namespace-emojivoto.yaml
+resources:
+  - https://run.linkerd.io/emojivoto.yml
+  - resource-ingress-emojivoto.yaml
+namespace: emojivoto
