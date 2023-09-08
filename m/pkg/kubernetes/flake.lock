@@ -27,17 +27,17 @@
       },
       "locked": {
         "dir": "m/pkg/argoworkflows",
-        "lastModified": 1692147822,
-        "narHash": "sha256-r6RdXDsSJSnA5HVybRvab+TIjlaIS7cZxW4jtqVqeIc=",
+        "lastModified": 1694204205,
+        "narHash": "sha256-q1Lkoh6h17J3GknrMzOE//asd4ic0+DCPCygG/4N4Vk=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "f956d662c0714bb1cac437a3187e93916d029cfb",
+        "rev": "cdeb168ae2f7c4710f222cea33085efdcdca8f91",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/argoworkflows",
         "owner": "defn",
-        "ref": "pkg-argoworkflows-3.4.10-1",
+        "ref": "pkg-argoworkflows-3.4.11-1",
         "repo": "dev",
         "type": "github"
       }
