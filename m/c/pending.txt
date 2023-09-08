@@ -2,8 +2,9 @@ https://artifacthub.io/packages/helm/alekc/caddy/0.3.2
 https://artifacthub.io/packages/helm/argo/argo-workflows/0.33.1
 https://artifacthub.io/packages/helm/backstage/backstage/1.2.0
 https://artifacthub.io/packages/helm/bitnami/external-dns/6.24.2
-https://artifacthub.io/packages/helm/bitnami/nginx/15.2.0
+https://artifacthub.io/packages/helm/bitnami/nginx/15.2.1
 https://artifacthub.io/packages/helm/cert-manager/cert-manager/1.12.4
+https://artifacthub.io/packages/helm/cert-manager/trust-manager/0.6.0
 https://artifacthub.io/packages/helm/cilium/cilium/1.15.0-pre.0
 https://artifacthub.io/packages/helm/coder-v2/coder/2.1.5
 https://artifacthub.io/packages/helm/external-secrets-operator/external-secrets/0.9.4

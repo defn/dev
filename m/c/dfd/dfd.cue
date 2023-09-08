@@ -5,7 +5,7 @@ import (
 )
 
 infra_name: "dfd"
-infra_vclusters: []
+infra_vclusters: [0, 1]
 
 infra: {
 	_base: {
@@ -23,6 +23,8 @@ infra: {
 		"kyverno": [2, "", "ServerSideApply=true"]
 		"linkerd-crds": [2, ""]
 		"cert-manager": [2, ""]
+
+		"trust-manager": [10, ""]
 
 		// external secrets
 		"pod-identity": [10, ""]
@@ -52,16 +54,13 @@ infra: {
 		"hello": [100, ""]
 	}
 
-	vc0: vcluster: k3s_version: "rancher/k3s:v1.25.12-k3s1"
+	vc0: vcluster: k3s_version: "rancher/k3s:v1.27.5-k3s1"
 	vc0: bootstrap: {
 		"emojivoto": [100, ""]
 	}
 
-	vc1: vcluster: k3s_version: "rancher/k3s:v1.26.7-k3s1"
+	vc1: vcluster: k3s_version: vc0.vcluster.k3s_version
 	vc1: bootstrap: vc0.bootstrap
-
-	vc2: vcluster: k3s_version: "rancher/k3s:v1.27.4-k3s1"
-	vc2: bootstrap: vc0.bootstrap
 }
 
 kustomize: "hello": #Kustomize & {
