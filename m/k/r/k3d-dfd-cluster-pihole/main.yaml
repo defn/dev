@@ -41,28 +41,6 @@ metadata:
     chart: pihole-2.18.0
     heritage: Helm
     release: pihole
-  name: pihole-dhcp
-  namespace: pihole
-spec:
-  externalTrafficPolicy: Local
-  ports:
-  - name: client-udp
-    port: 67
-    protocol: UDP
-    targetPort: client-udp
-  selector:
-    app: pihole
-    release: pihole
-  type: NodePort
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: pihole
-    chart: pihole-2.18.0
-    heritage: Helm
-    release: pihole
   name: pihole-dns-tcp
   namespace: pihole
 spec:

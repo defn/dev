@@ -15,4 +15,6 @@ helmCharts:
         enabled: false
       serviceDns:
         type: ClusterIP
+      serviceDhcp:
+        enabled: false
     includeCRDs: true

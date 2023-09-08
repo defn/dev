@@ -1571,6 +1571,7 @@ kustomize: "pihole": #KustomizeHelm & {
 		values: {
 			podDnsConfig: enabled: false
 			serviceDns: type:      "ClusterIP"
+			serviceDhcp: enabled:  false
 		}
 	}
 
