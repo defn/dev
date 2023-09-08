@@ -192,8 +192,7 @@ spec:
           subPath: addn-hosts
       dnsConfig:
         nameservers:
-        - 127.0.0.1
-        - 8.8.8.8
+        - 10.0.0.60
       dnsPolicy: None
       hostNetwork: false
       hostname: null
