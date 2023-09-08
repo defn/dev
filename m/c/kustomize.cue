@@ -1574,8 +1574,9 @@ kustomize: "pihole": #KustomizeHelm & {
 				policy:  "None"
 				nameservers: [ "10.0.0.60"]
 			}
-			serviceDns: type:     "ClusterIP"
-			serviceDhcp: enabled: false
+			persistentVolumeClaim: enabled: true
+			serviceDns: type:               "ClusterIP"
+			serviceDhcp: enabled:           false
 			serviceWeb: https: enabled: false
 		}
 	}
