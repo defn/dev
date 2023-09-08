@@ -13,7 +13,7 @@ helmCharts:
     namespace: pihole
     valuesInline:
       podDnsConfig:
-        enabled: false
+        enabled: true
       serviceDns:
         type: ClusterIP
       serviceDhcp:
