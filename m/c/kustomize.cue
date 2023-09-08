@@ -1026,7 +1026,7 @@ kustomize: "cilium-bootstrap": #KustomizeHelm & {
 			operator: replicas: 1
 			kubeProxyReplacement: "strict"
 			loadBalancer: algorithm: "maglev"
-			k8sServiceHost: "100.126.227.138"
+			k8sServiceHost: "100.116.45.18"
 			k8sServicePort: 6443
 			envoy: enabled: true
 			hubble: {
@@ -1060,7 +1060,7 @@ kustomize: "cilium": #KustomizeHelm & {
 			operator: replicas: 1
 			kubeProxyReplacement: "strict"
 			loadBalancer: algorithm: "maglev"
-			k8sServiceHost: "100.126.227.138"
+			k8sServiceHost: "100.116.45.18"
 			k8sServicePort: 6443
 			envoy: enabled: true
 			hubble: {
