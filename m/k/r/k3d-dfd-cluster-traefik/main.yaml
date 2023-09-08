@@ -4866,7 +4866,8 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    external-dns.alpha.kubernetes.io/internal-hostname: '*.dev.amanibhavam.defn.run'
+    external-dns.alpha.kubernetes.io/internal-hostname: '*.dev.amanibhavam.defn.run,
+      *.default.dev.amanibhavam.defn.run'
   labels:
     app.kubernetes.io/instance: traefik-traefik
     app.kubernetes.io/managed-by: Helm
