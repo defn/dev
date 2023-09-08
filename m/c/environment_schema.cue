@@ -11,7 +11,6 @@ import (
 		// TODO why is this needed
 		vc_name:    string
 		vc_machine: string
-		vc_index:   int
 		type:       string
 	}
 
