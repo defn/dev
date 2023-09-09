@@ -62,6 +62,7 @@ function make_up {
 	set -x
 	# thumbprint echo | openssl s_client -servername $HOST -showcerts -connect $HOST:443 2> /dev/null | sed -n -e '/BEGIN/h' -e '/BEGIN/,/END/H' -e '$x' -e '$p' | tail +2 | openssl x509 -fingerprint -noout | sed -e "s/.*=//" -e "s/://g" | tr "ABCDEF" "abcdef"
 	k3sup install --local --context k3d-${infra_name} --local-path ~/.kube/config --merge \
+		--k3s-version "$(cd c/${infra_name} && cue export --out json -e infra.vc0.vcluster.k3s_version | jq -r . | cut -d: -f2)" \
 		--k3s-extra-args "--node-ip "${container_ip}" --disable-network-policy --disable=traefik --flannel-backend=none --kube-apiserver-arg=--service-account-issuer=$(cd c/${infra_name} && cue export --out json -e discovery_url | jq -r .)/openid --kube-apiserver-arg=--api-audiences=https://kubernetes.default.svc.cluster.local,sts.amazonaws.com --tls-san=k3d-${infra_name}" 
 
 	# gvisor
