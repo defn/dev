@@ -1,6 +1,7 @@
 #ManagedBy: cue
 
-patches: []
+patches:
+  - path: patch-service-mastodon-apache.yaml
 resources:
   - resource-namespace-pihole.yaml
 namespace: mastodon

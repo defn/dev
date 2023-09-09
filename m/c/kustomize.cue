@@ -1693,4 +1693,14 @@ kustomize: "mastodon": #KustomizeHelm & {
 			name: "mastodon"
 		}
 	}
+
+	psm: "service-mastodon-apache": {
+		apiVersion: "v1"
+		kind:       "Service"
+		metadata: {
+			name:      "mastodon-apache"
+			namespace: "mastodon"
+		}
+		spec: type: "ClusterIP"
+	}
 }
