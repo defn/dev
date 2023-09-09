@@ -21,7 +21,6 @@ reset:
 
 image:
 	cd base && $(MAKE) build
-	cd k3d && $(MAKE) build
 	cd pod && $(MAKE) build
 
 workspace ?= $(shell basename $(shell pwd))
