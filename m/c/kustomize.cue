@@ -1703,7 +1703,7 @@ kustomize: "mastodon": #KustomizeHelm & {
 		}
 		spec: {
 			type:                  "ClusterIP"
-			externalTrafficPolicy: "Local"
+			externalTrafficPolicy: null
 		}
 	}
 }
