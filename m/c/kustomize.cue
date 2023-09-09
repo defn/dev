@@ -1569,15 +1569,13 @@ kustomize: "pihole": #KustomizeHelm & {
 		version:   "2.18.0"
 		repo:      "https://mojo2600.github.io/pihole-kubernetes"
 		values: {
-			podDnsConfig: {
-				enabled: true
-				policy:  "None"
-				nameservers: [ "10.43.0.10" ]
-			}
+			podDnsConfig: enabled:          false
 			persistentVolumeClaim: enabled: true
 			serviceDns: type:               "ClusterIP"
 			serviceDhcp: enabled:           false
 			serviceWeb: https: enabled: false
+			DNS1: "10.43.0.10"
+			DNS2: "10.43.0.10"
 		}
 	}
 
