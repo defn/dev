@@ -12,6 +12,7 @@ spec:
       labels:
         app: nginx
     spec:
+      runtimeClassName: gvisor
       containers:
       - name: nginx-container
         image: nginx:latest

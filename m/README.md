@@ -70,8 +70,25 @@ cobra-cli add start
 
 sudo vi /var/lib/rancher/k3s/agent/etc/containerd/config.toml
 
-[plugins.cri.containerd.runtimes.runsc]
-  runtime_type = "io.containerd.runsc.v1"
+[plugins."io.containerd.runtime.v1.linux"]
+
+shim_debug = true
+
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+
+runtime_type = "io.containerd.runc.v2"
+
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runsc]
+
+runtime_type = "io.containerd.runsc.v1"
 
 sudo systemctl restart k3s
+
+cat<<EOF | kubectl apply -f -
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+    name: gvisor
+handler: runsc
+EOF
 ```
