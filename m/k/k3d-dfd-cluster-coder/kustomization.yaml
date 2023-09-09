@@ -42,11 +42,11 @@ helmCharts:
           - name: CODER_SECURE_AUTH_COOKIE
             value: "true"
           - name: CODER_OAUTH2_GITHUB_ALLOW_SIGNUPS
-            value: "false"
+            value: "true"
           - name: CODER_OAUTH2_GITHUB_ALLOWED_ORGS
             value: defn
           - name: CODER_OAUTH2_GITHUB_ALLOWED_TEAMS
-            value: defn/dev
+            value: defn/class
           - name: CODER_OAUTH2_GITHUB_CLIENT_ID
             valueFrom:
               secretKeyRef:

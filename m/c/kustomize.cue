@@ -1469,13 +1469,13 @@ kustomize: "coder": #KustomizeHelm & {
 					value: "true"
 				}, {
 					name:  "CODER_OAUTH2_GITHUB_ALLOW_SIGNUPS"
-					value: "false"
+					value: "true"
 				}, {
 					name:  "CODER_OAUTH2_GITHUB_ALLOWED_ORGS"
 					value: "defn"
 				}, {
 					name:  "CODER_OAUTH2_GITHUB_ALLOWED_TEAMS"
-					value: "defn/dev"
+					value: "defn/class"
 				}, {
 					// https://github.com/organizations/defn/settings/applications
 					name: "CODER_OAUTH2_GITHUB_CLIENT_ID"
