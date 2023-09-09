@@ -1451,7 +1451,7 @@ kustomize: "coder": #KustomizeHelm & {
 					value: "false"
 				}, {
 					name:  "CODER_DERP_SERVER_ENABLE"
-					value: "true"
+					value: "false"
 				}, {
 					name:  "CODER_DISABLE_PASSWORD_AUTH"
 					value: "true"
