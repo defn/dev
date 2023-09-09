@@ -34,8 +34,10 @@ infra: {
 		// scaling
 		"karpenter": [20, ""]
 
-		// terraform
+		// workflows
 		"tfo": [20, ""]
+		"argo-workflows": [20, ""]
+		"argo-events": [20, ""]
 
 		// service mesh
 		//"linkerd-control-plane": [20, ""]
