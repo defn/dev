@@ -37,6 +37,7 @@ docker.io/library/redis:7.0.11-alpine
 docker.io/library/traefik:v2.10.4
 docker.io/netdata/agent-sd:v0.2.8
 docker.io/netdata/netdata:v1.42.1
+docker.io/pihole/pihole:2023.05.2
 docker.io/prom/prometheus:v2.43.0
 docker.io/rancher/k3s:v1.25.12-k3s1
 docker.io/rancher/k3s:v1.26.7-k3s1
@@ -83,6 +84,7 @@ index.docker.io/containous/whoami
 netdata/agent-sd:v0.2.8
 netdata/netdata:v1.42.1
 nginx:latest
+pihole/pihole:2023.05.2
 prom/prometheus:v2.43.0
 public.ecr.aws/karpenter/controller:v0.29.0
 public.ecr.aws/karpenter/controller:v0.30.0
