@@ -1572,7 +1572,7 @@ kustomize: "pihole": #KustomizeHelm & {
 			podDnsConfig: {
 				enabled: true
 				policy:  "None"
-				nameservers: [ "10.0.0.60"]
+				nameservers: [ "10.43.0.10" ]
 			}
 			persistentVolumeClaim: enabled: true
 			serviceDns: type:               "ClusterIP"
