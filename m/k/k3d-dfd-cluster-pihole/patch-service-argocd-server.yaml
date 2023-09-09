@@ -1,0 +1,8 @@
+#ManagedBy: cue
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: pihole-dns
+spec:
+  clusterIP: 10.43.53.53

@@ -1572,6 +1572,7 @@ kustomize: "pihole": #KustomizeHelm & {
 			podDnsConfig: enabled:          false
 			persistentVolumeClaim: enabled: true
 			serviceDns: type:               "ClusterIP"
+			serviceDns: mixedService:       true
 			serviceDhcp: enabled:           false
 			serviceWeb: https: enabled: false
 			DNS1: "10.43.0.10"
@@ -1612,5 +1613,14 @@ kustomize: "pihole": #KustomizeHelm & {
 				}]
 			}]
 		}
+	}
+
+	psm: "service-argocd-server": {
+		apiVersion: "v1"
+		kind:       "Service"
+		metadata: {
+			name: "pihole-dns"
+		}
+		spec: clusterIP: "10.43.53.53"
 	}
 }
