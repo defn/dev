@@ -7,3 +7,4 @@ metadata:
   namespace: mastodon
 spec:
   type: ClusterIP
+  externalTrafficPolicy: Local
