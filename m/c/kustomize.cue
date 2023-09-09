@@ -1451,10 +1451,10 @@ kustomize: "coder": #KustomizeHelm & {
 					value: "false"
 				}, {
 					name:  "CODER_DERP_SERVER_ENABLE"
-					value: "false"
+					value: "true"
 				}, {
 					name:  "CODER_DISABLE_PASSWORD_AUTH"
-					value: "true"
+					value: "false"
 				}, {
 					name:  "CODER_STRICT_TRANSPORT_SECURITY"
 					value: "60"
