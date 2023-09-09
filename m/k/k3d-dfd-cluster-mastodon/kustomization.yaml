@@ -4,6 +4,7 @@ patches:
   - path: patch-service-mastodon-apache.yaml
 resources:
   - resource-namespace-pihole.yaml
+  - resource-ingress-mastodon-apache.yaml
 namespace: mastodon
 helmCharts:
   - releaseName: mastodon
@@ -11,5 +12,8 @@ helmCharts:
     version: 2.1.3
     repo: https://charts.bitnami.com/bitnami
     namespace: mastodon
-    valuesInline: {}
+    valuesInline:
+      adminUsername: admin
+      adminPassword: admin
+      webDomain: mastodon.dev.amanibhavam.defn.run
     includeCRDs: true

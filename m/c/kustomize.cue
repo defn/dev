@@ -1683,6 +1683,9 @@ kustomize: "mastodon": #KustomizeHelm & {
 		version:   "2.1.3"
 		repo:      "https://charts.bitnami.com/bitnami"
 		values: {
+			adminUsername: "admin"
+			adminPassword: "admin"
+			webDomain:     "mastodon.\(cluster.domain_name)"
 		}
 	}
 
@@ -1704,6 +1707,33 @@ kustomize: "mastodon": #KustomizeHelm & {
 		spec: {
 			type:                  "ClusterIP"
 			externalTrafficPolicy: null
+		}
+	}
+
+	resource: "ingress-mastodon-apache": {
+		apiVersion: "networking.k8s.io/v1"
+		kind:       "Ingress"
+		metadata: {
+			name: "mastodon-apache"
+			annotations: {
+				"traefik.ingress.kubernetes.io/router.tls":         "true"
+				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
+			}
+		}
+
+		spec: {
+			ingressClassName: "traefik"
+			rules: [{
+				host: "mastodon.\(cluster.domain_name)"
+				http: paths: [{
+					path:     "/"
+					pathType: "Prefix"
+					backend: service: {
+						name: "mastodon-apache"
+						port: number: 80
+					}
+				}]
+			}]
 		}
 	}
 }
