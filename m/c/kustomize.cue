@@ -1683,10 +1683,12 @@ kustomize: "mastodon": #KustomizeHelm & {
 		version:   "2.1.3"
 		repo:      "https://charts.bitnami.com/bitnami"
 		values: {
-			adminUser:     "defn"
-			adminPassword: "adminadmin"
-			adminEmail:    "iam@defn.sh"
-			webDomain:     "mastodon.\(cluster.domain_name)"
+			initJob: createAdmin: true
+			adminUser:          "defn"
+			adminPassword:      "adminadmin"
+			adminEmail:         "iam@defn.sh"
+			webDomain:          "mastodon.\(cluster.domain_name)"
+			useSecureWebSocket: true
 		}
 	}
 
