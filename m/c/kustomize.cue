@@ -1674,8 +1674,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 kustomize: "mastodon": #KustomizeHelm & {
 	cluster: #Cluster
 
-	// . /opt/bitnami/scripts/mastodon-env.sh
-	// tootctl accounts  modify defn --reset-password
+	// k exec -ti -n mastodon deploy/mastodon-web -- bash -c '. /opt/bitnami/scripts/mastodon-env.sh; tootctl accounts  modify defn --reset-password'
 	namespace: "mastodon"
 
 	helm: {
