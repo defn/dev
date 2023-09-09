@@ -10,6 +10,7 @@ spec:
   dnsNames:
     - '*.dev.amanibhavam.defn.run'
     - '*.default.dev.amanibhavam.defn.run'
+    - '*.coder.dev.amanibhavam.defn.run'
   issuerRef:
     name: zerossl-production
     kind: ClusterIssuer
