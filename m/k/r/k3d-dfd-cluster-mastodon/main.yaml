@@ -120,7 +120,7 @@ data:
   SMTP_REPLY_TO: ""
   SMTP_SERVER: ""
   SMTP_TLS: "false"
-  STREAMING_API_BASE_URL: ws://mastodon.dev.amanibhavam.defn.run
+  STREAMING_API_BASE_URL: wss://mastodon.dev.amanibhavam.defn.run
   WEB_DOMAIN: mastodon.dev.amanibhavam.defn.run
 kind: ConfigMap
 metadata:
@@ -368,9 +368,9 @@ metadata:
 ---
 apiVersion: v1
 data:
-  MASTODON_ADMIN_PASSWORD: YWRtaW4=
-  OTP_SECRET: OHdBT0xISGs3aA==
-  SECRET_KEY_BASE: STFvUmpPajRRUQ==
+  MASTODON_ADMIN_PASSWORD: YWRtaW5hZG1pbg==
+  OTP_SECRET: YjNieUN1SHF4bA==
+  SECRET_KEY_BASE: dk5GUjFwTVZ0cg==
 kind: Secret
 metadata:
   labels:
@@ -384,7 +384,7 @@ metadata:
 ---
 apiVersion: v1
 data:
-  root-password: OEptS3VVTU5uZg==
+  root-password: VlFqWWNDaXUxSA==
   root-user: YWRtaW4=
 kind: Secret
 metadata:
@@ -399,8 +399,8 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  password: ZlF2UXpvR3Nwdg==
-  postgres-password: NkZZckRJM1BHbA==
+  password: MENwUHg0ajJicA==
+  postgres-password: Z2hwclgwcng3Zg==
 kind: Secret
 metadata:
   labels:
@@ -414,7 +414,7 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  redis-password: QXJ4RUw4bllyNw==
+  redis-password: eWNEZVFtTmJGZg==
 kind: Secret
 metadata:
   labels:
@@ -906,7 +906,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/credentials-secret: 4cd8788ee2067ee01062aa89ed582a395708e5a1b93b0b344d0fa7bc9a7db99c
+        checksum/credentials-secret: 91a1937831154fe9225ad7857305db5b85cfed387e882c9137c3a494c3be28ea
       labels:
         app.kubernetes.io/instance: mastodon
         app.kubernetes.io/managed-by: Helm
@@ -2434,7 +2434,7 @@ spec:
         checksum/configmap: 86bcc953bb473748a3d3dc60b7c11f34e60c93519234d4c37f42e22ada559d47
         checksum/health: aff24913d801436ea469d8d374b2ddb3ec4c43ee7ab24663d5f8ff1a1b6991a9
         checksum/scripts: 560c33ff34d845009b51830c332aa05fa211444d1877d3526d3599be7543aaa5
-        checksum/secret: 3eb5b3f4c2c76ce4a5dceacc9eb799c1837b65244883120cd5072edfa9397d03
+        checksum/secret: ee364984f517695182d3e4ff7527e0678ab6323b81109c240e41a72fb50946e5
       labels:
         app.kubernetes.io/component: master
         app.kubernetes.io/instance: mastodon
