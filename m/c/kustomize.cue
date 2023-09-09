@@ -1624,3 +1624,48 @@ kustomize: "pihole": #KustomizeHelm & {
 		spec: clusterIP: "10.43.53.53"
 	}
 }
+
+// https://artifacthub.io/packages/helm/argo/argo-events
+kustomize: "argo-events": #KustomizeHelm & {
+	namespace: "argo-events"
+
+	helm: {
+		release: "argo-events"
+		name:    "argo-events"
+		version: "2.4.1"
+		repo:    "https://argoproj.github.io/argo-helm"
+	}
+
+	resource: "namespace-argo-events": core.#Namespace & {
+		apiVersion: "v1"
+		kind:       "Namespace"
+		metadata: {
+			name: "argo-events"
+		}
+	}
+}
+
+// https://artifacthub.io/packages/helm/argo/argo-workflows
+kustomize: "argo-workflows": #KustomizeHelm & {
+	helm: {
+		release:   "argo-workflows"
+		name:      "argo-workflows"
+		namespace: "argo-workflows"
+		version:   "0.33.2"
+		repo:      "https://argoproj.github.io/argo-helm"
+		values: {
+			controller: workflowNamespaces: [
+				"argo-workflows",
+				"defn",
+			]
+		}
+	}
+
+	resource: "namespace-argo-workflows": core.#Namespace & {
+		apiVersion: "v1"
+		kind:       "Namespace"
+		metadata: {
+			name: "argo-workflows"
+		}
+	}
+}

@@ -1,0 +1,6 @@
+#ManagedBy: cue
+
+metadata:
+  name: argo-events
+kind: Namespace
+apiVersion: v1
