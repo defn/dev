@@ -12,13 +12,12 @@ spec:
       labels:
         app: nginx
     spec:
-      runtimeClassName: gvisor
       containers:
       - name: nginx-container
         image: nginx:latest
         resources:
           requests:
-            cpu: "7000m"
+            cpu: "100m"
 ---
 apiVersion: v1
 kind: Service
