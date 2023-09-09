@@ -1551,6 +1551,22 @@ kustomize: "coder": #KustomizeHelm & {
 			}
 		}
 	}
+
+	resource: "cluster-role-binding-admin": rbac.#ClusterRoleBinding & {
+		apiVersion: "rbac.authorization.k8s.io/v1"
+		kind:       "ClusterRoleBinding"
+		metadata: name: "coder"
+		roleRef: {
+			apiGroup: "rbac.authorization.k8s.io"
+			kind:     "ClusterRole"
+			name:     "cluster-admin"
+		}
+		subjects: [{
+			kind:      "ServiceAccount"
+			name:      "coder"
+			namespace: "coder"
+		}]
+	}
 }
 
 // linkerd emojivoto
