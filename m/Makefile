@@ -73,7 +73,6 @@ bazel-ignore:
 za:
 	pass hello
 	this-prune
-	cd && $(MAKE) reinstall
 	cd coder && ( $(MAKE) image || $(MAKE) image )
 
 warudo:
