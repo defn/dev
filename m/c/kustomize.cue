@@ -1669,3 +1669,28 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		}
 	}
 }
+
+// https://artifacthub.io/packages/helm/bitnami/mastodon
+kustomize: "mastodon": #KustomizeHelm & {
+	cluster: #Cluster
+
+	namespace: "mastodon"
+
+	helm: {
+		release:   "mastodon"
+		name:      "mastodon"
+		namespace: "mastodon"
+		version:   "2.1.3"
+		repo:      "https://charts.bitnami.com/bitnami"
+		values: {
+		}
+	}
+
+	resource: "namespace-pihole": core.#Namespace & {
+		apiVersion: "v1"
+		kind:       "Namespace"
+		metadata: {
+			name: "mastodon"
+		}
+	}
+}
