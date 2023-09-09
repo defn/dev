@@ -21,20 +21,6 @@ local_resource(
     ],
 )
 
-# coder
-local_resource(
-    "coder",
-    serve_cmd=[
-        "bash",
-        "-c",
-        """
-            cd ~/m
-            pkill -f [c]oder/postgres/bin/bin/postgres || true
-            make dev
-            """,
-    ],
-)
-
 # tailscaled
 local_resource(
     "tailscaled",
@@ -43,7 +29,7 @@ local_resource(
         "-c",
         """
             cd
-            sudo $(which tailscaled)
+            exec sudo $(which tailscaled)
             """,
     ],
 )
