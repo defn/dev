@@ -1474,14 +1474,21 @@ kustomize: "coder": #KustomizeHelm & {
 					name:  "CODER_OAUTH2_GITHUB_ALLOWED_ORGS"
 					value: "defn"
 				}, {
-					name:  "CODER_OAUTH2_GITHUB_CLIENT_ID"
-					value: "defn"
-				}, {
-					name:  "CODER_OAUTH2_GITHUB_CLIENT_SECRET"
-					value: "defn"
-				}, {
 					name:  "CODER_OAUTH2_GITHUB_ALLOWED_TEAMS"
 					value: "defn/dev"
+				}, {
+					// https://github.com/organizations/defn/settings/applications
+					name: "CODER_OAUTH2_GITHUB_CLIENT_ID"
+					valueFrom: secretKeyRef: {
+						name: "coder"
+						key:  "coder_oauth2_github_client_id"
+					}
+				}, {
+					name: "CODER_OAUTH2_GITHUB_CLIENT_SECRET"
+					valueFrom: secretKeyRef: {
+						name: "coder"
+						key:  "coder_oauth2_github_client_secret"
+					}
 				}]
 			}
 		}
