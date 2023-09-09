@@ -12,8 +12,8 @@ spec:
     - match: HostRegexp(`{subdomain:[a-z0-9-]+}.coder.dev.amanibhavam.defn.run`)
       kind: Rule
       services:
-        - name: traefik
-          namespace: traefik
+        - name: coder
+          namespace: coder
           kind: Service
           port: 80
           scheme: http

@@ -4,9 +4,9 @@ patches: []
 resources:
   - resource-namespace-coder.yaml
   - resource-ingress-coder.yaml
+  - resource-ingressroute-coder-wildcard.yaml
   - resource-externalsecret-coder.yaml
   - resource-cluster-role-binding-admin.yaml
-  - resource-ingressroute-coder-wildcard.yaml
 namespace: coder
 helmCharts:
   - releaseName: coder

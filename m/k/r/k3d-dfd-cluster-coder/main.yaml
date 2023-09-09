@@ -294,7 +294,7 @@ spec:
     match: HostRegexp(`{subdomain:[a-z0-9-]+}.coder.dev.amanibhavam.defn.run`)
     services:
     - kind: Service
-      name: traefik
-      namespace: traefik
+      name: coder
+      namespace: coder
       port: 80
       scheme: http
