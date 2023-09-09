@@ -72,11 +72,8 @@ bazel-ignore:
 
 za:
 	pass hello
-	bin/make-k3d down
-	sudo rm -rf /nix/k3s /nix/k3s-containerd
-	docker rm -f k3d-registry
 	this-prune
-	bin/make-k3d init
+	$(MAKE) reinstall
 	cd coder && ( $(MAKE) image || $(MAKE) image )
 
 warudo:
