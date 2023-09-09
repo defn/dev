@@ -76,5 +76,4 @@ za:
 	cd coder && ( $(MAKE) image || $(MAKE) image )
 
 warudo:
-	bin/make-k3d down
 	bin/make-k3d up
