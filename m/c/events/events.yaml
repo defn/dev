@@ -1,3 +1,35 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: demo
+  annotations:
+    eks.amazonaws.com/role-arn: "arn:aws:iam::510430971399:role/ro"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: demo
+rules:
+- apiGroups: [""]
+  resources: ["configmaps"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["batch"]
+  resources: ["jobs"]
+  verbs: ["create", "get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: demo
+subjects:
+- kind: ServiceAccount
+  name: demo
+roleRef:
+  kind: Role
+  name: demo
+  apiGroup: rbac.authorization.k8s.io
+---
 apiVersion: argoproj.io/v1alpha1
 kind: EventBus
 metadata:
@@ -6,23 +38,15 @@ spec:
   jetstream:
     version: latest
 ---
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: my-events
-  annotations:
-    eks.amazonaws.com/role-arn: "arn:aws:iam::319951235442:role/meh"
-    eks.amazonaws.com/audience: "sts.amazonaws.com"
-    eks.amazonaws.com/sts-regional-endpoints: "true"
-    eks.amazonaws.com/token-expiration: "86400"
----
 apiVersion: argoproj.io/v1alpha1
 kind: EventSource
 metadata:
-  name: default
+  name: demo
 spec:
+  template:
+    serviceAccountName: demo
   resource:
-    example:
+    demo:
       namespace: default
       group: ""
       version: v1
@@ -33,12 +57,14 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
-  name: default
+  name: demo
 spec:
+  template:
+    serviceAccountName: demo
   dependencies:
     - name: input
-      eventSourceName: default
-      eventName: example
+      eventSourceName: demo
+      eventName: demo
   triggers:
     - template:
         name: run-this
@@ -56,15 +82,15 @@ spec:
                 ttlSecondsAfterFinished: 60
                 template:
                   spec:
-                    serviceAccountName: my-events
+                    serviceAccountName: demo
                     containers:
                       - name: workspace
-                        image: 169.254.32.1:5000/workspace
+                        image: ubuntu
                         command:
                           - bash
                           - -c
                         args:
-                          - "echo hello"
+                          - "echo hello this gets replaced"
                     restartPolicy: Never
           parameters:
             - src:

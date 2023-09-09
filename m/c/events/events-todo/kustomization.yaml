@@ -1,6 +1,0 @@
-#ManagedBy: cue
-
-patches: []
-namespace: default
-resources:
-  - events.yaml
