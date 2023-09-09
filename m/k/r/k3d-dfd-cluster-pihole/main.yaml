@@ -210,7 +210,7 @@ spec:
           subPath: addn-hosts
       dnsConfig:
         nameservers:
-        - 10.0.0.60
+        - 10.43.0.10
       dnsPolicy: None
       hostNetwork: false
       hostname: null
