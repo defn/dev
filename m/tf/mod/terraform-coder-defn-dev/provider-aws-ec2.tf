@@ -2,12 +2,12 @@ locals {
   aws = {
     region            = "us-west-2"
     availability_zone = "us-west-2a"
-    instance_type     = "m6id.2xlarge"
+    instance_type     = "m6id.xlarge"
     root_volume_size  = data.coder_parameter.nix_volume_size.value
   }
 
   owners     = ["self"]
-  ami_filter = ["base-*"]
+  ami_filter = ["coder-*"]
 }
 
 provider "aws" {
