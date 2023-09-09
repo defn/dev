@@ -350,9 +350,9 @@ metadata:
 ---
 apiVersion: v1
 data:
-  MASTODON_ADMIN_PASSWORD: UElWTDNkZTFzNw==
-  OTP_SECRET: Q3lKWWVBVzM4ZQ==
-  SECRET_KEY_BASE: eHdkcWF6OVF0dw==
+  MASTODON_ADMIN_PASSWORD: VHNrVWpWTUlOcw==
+  OTP_SECRET: a2NFajhSTmV6Ng==
+  SECRET_KEY_BASE: dWxNS1h4Wlh3cA==
 kind: Secret
 metadata:
   labels:
@@ -366,7 +366,7 @@ metadata:
 ---
 apiVersion: v1
 data:
-  root-password: ZGhFY2dnNVJUWg==
+  root-password: bVdXUnFMZUhUYQ==
   root-user: YWRtaW4=
 kind: Secret
 metadata:
@@ -381,8 +381,8 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  password: dXBlT3Fwc2dFQQ==
-  postgres-password: NFFpWDB3RHJUcA==
+  password: MURaUElmeTJ6eg==
+  postgres-password: dFZ0Y2xRQml2ZA==
 kind: Secret
 metadata:
   labels:
@@ -396,7 +396,7 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  redis-password: VUxQd01LdkZ6SA==
+  redis-password: eWRhVEpLaVlsMQ==
 kind: Secret
 metadata:
   labels:
@@ -447,7 +447,7 @@ spec:
     app.kubernetes.io/instance: mastodon
     app.kubernetes.io/name: apache
   sessionAffinity: None
-  type: LoadBalancer
+  type: ClusterIP
 ---
 apiVersion: v1
 kind: Service
@@ -889,7 +889,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/credentials-secret: 58b57a639d455c52f946cf863deb7c416aecd1d52aef3d8eb7320156ce5f045f
+        checksum/credentials-secret: 57229dae6f16cd43a194ea4dcdf723b355d98aaafbcdb1ddf90b9a00880c6bce
       labels:
         app.kubernetes.io/instance: mastodon
         app.kubernetes.io/managed-by: Helm
@@ -1719,7 +1719,7 @@ spec:
         checksum/configmap: 86bcc953bb473748a3d3dc60b7c11f34e60c93519234d4c37f42e22ada559d47
         checksum/health: aff24913d801436ea469d8d374b2ddb3ec4c43ee7ab24663d5f8ff1a1b6991a9
         checksum/scripts: 560c33ff34d845009b51830c332aa05fa211444d1877d3526d3599be7543aaa5
-        checksum/secret: ba54273d46f5527889952d8da6ddb9fff4e54abc85baa6d90c1bf8abc2b8a137
+        checksum/secret: fec2661babfb3a2992e45807f8520da94bc14fc1e0f562670151f7f9e2f9a18d
       labels:
         app.kubernetes.io/component: master
         app.kubernetes.io/instance: mastodon
