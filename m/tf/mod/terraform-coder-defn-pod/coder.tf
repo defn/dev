@@ -13,7 +13,7 @@ resource "coder_agent" "main" {
   startup_script         = "workdir=${data.coder_parameter.workdir.value}; source_rev=${data.coder_parameter.source_rev.value}; ${file("${path.module}/startup.sh")}"
 
   display_apps {
-    vscode          = true
+    vscode          = false
     vscode_insiders = false
     ssh_helper      = false
   }
