@@ -350,9 +350,9 @@ metadata:
 ---
 apiVersion: v1
 data:
-  MASTODON_ADMIN_PASSWORD: N1Y0R1A2QzQ0NQ==
-  OTP_SECRET: ekk4VGJHTGdYdQ==
-  SECRET_KEY_BASE: Vzd1VEpkQmdkVw==
+  MASTODON_ADMIN_PASSWORD: Z0NxN042WnNXdQ==
+  OTP_SECRET: UTFYR0NLY29XOQ==
+  SECRET_KEY_BASE: MFhXNkwwd21aVA==
 kind: Secret
 metadata:
   labels:
@@ -366,7 +366,7 @@ metadata:
 ---
 apiVersion: v1
 data:
-  root-password: TUJOQkZRcEZ4Wg==
+  root-password: d1dPaVdUa3lhRg==
   root-user: YWRtaW4=
 kind: Secret
 metadata:
@@ -381,8 +381,8 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  password: eml6b3IzeVlqZQ==
-  postgres-password: UWRkN1h3Rk5Ibg==
+  password: SHFwSFVNWEZZUA==
+  postgres-password: TUlrM01qWDVtdw==
 kind: Secret
 metadata:
   labels:
@@ -396,7 +396,7 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  redis-password: Y0RwbHJSOUZQZQ==
+  redis-password: aHo5ZHRiODZUZQ==
 kind: Secret
 metadata:
   labels:
@@ -434,7 +434,6 @@ metadata:
   name: mastodon-apache
   namespace: mastodon
 spec:
-  externalTrafficPolicy: Local
   loadBalancerSourceRanges: []
   ports:
   - name: http
@@ -889,7 +888,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/credentials-secret: 0b0d6b0f2b3973f05d55c3c92b10432271ed2a49256f2935599729db2808ae36
+        checksum/credentials-secret: 9ec96ef3d30ae9a7cdc5664c228de4859ab476cb80d906322a63c86ad0c868b4
       labels:
         app.kubernetes.io/instance: mastodon
         app.kubernetes.io/managed-by: Helm
@@ -1719,7 +1718,7 @@ spec:
         checksum/configmap: 86bcc953bb473748a3d3dc60b7c11f34e60c93519234d4c37f42e22ada559d47
         checksum/health: aff24913d801436ea469d8d374b2ddb3ec4c43ee7ab24663d5f8ff1a1b6991a9
         checksum/scripts: 560c33ff34d845009b51830c332aa05fa211444d1877d3526d3599be7543aaa5
-        checksum/secret: dd6968363fd53ca20b7f5611c41f4b85e3ed7b4d61571989dda1664c3829ceaf
+        checksum/secret: bc595b2673841039b592c3d6fa6f7413d64a235485e1ed217157c602ab8163ce
       labels:
         app.kubernetes.io/component: master
         app.kubernetes.io/instance: mastodon
