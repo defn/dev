@@ -54,6 +54,7 @@ infra: {
 		// applications
 		"hello": [100, ""]
 		"pihole": [100, ""]
+		"coder": [100, ""]
 	}
 
 	vc0: vcluster: k3s_version: "rancher/k3s:v1.27.5-k3s1"

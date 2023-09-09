@@ -1,0 +1,22 @@
+#ManagedBy: cue
+
+patches: []
+resources:
+  - resource-namespace-coder.yaml
+  - resource-ingress-coder.yaml
+  - resource-externalsecret-coder.yaml
+namespace: coder
+helmCharts:
+  - releaseName: coder
+    name: coder
+    version: 2.1.5
+    repo: https://helm.coder.com/v2
+    namespace: coder
+    valuesInline:
+      coder:
+        service:
+          type: ClusterIP
+        env:
+          - name: CODER_ACCESS_URL
+            value: https://coder.dev.amanibhavam.defn.run
+    includeCRDs: true
