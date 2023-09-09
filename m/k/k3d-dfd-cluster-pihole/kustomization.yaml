@@ -13,10 +13,7 @@ helmCharts:
     namespace: pihole
     valuesInline:
       podDnsConfig:
-        enabled: true
-        policy: None
-        nameservers:
-          - 10.43.0.10
+        enabled: false
       persistentVolumeClaim:
         enabled: true
       serviceDns:
@@ -26,4 +23,6 @@ helmCharts:
       serviceWeb:
         https:
           enabled: false
+      DNS1: 10.43.0.10
+      DNS2: 10.43.0.10
     includeCRDs: true
