@@ -13,5 +13,5 @@ helmCharts:
       controller:
         workflowNamespaces:
           - argo-workflows
-          - defn
+          - default
     includeCRDs: true

@@ -1656,7 +1656,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		values: {
 			controller: workflowNamespaces: [
 				"argo-workflows",
-				"defn",
+				"default",
 			]
 		}
 	}
