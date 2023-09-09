@@ -385,27 +385,6 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
-        mastodon: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: k3d-dfd-cluster-mastodon
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: k3d-dfd-cluster
-            source:
-              repoURL: https://github.com/defn/dev
-              targetRevision: main
-              path: m/k/r/k3d-dfd-cluster-mastodon
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
         cilium: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
