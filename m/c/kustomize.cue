@@ -1324,7 +1324,7 @@ kustomize: "traefik": #KustomizeHelm & {
 			name:      "traefik"
 			namespace: "traefik"
 			annotations: {
-				"external-dns.alpha.kubernetes.io/internal-hostname": "*.\(cluster.domain_name), *.default.\(cluster.domain_name)"
+				"external-dns.alpha.kubernetes.io/internal-hostname": "*.\(cluster.domain_name), *.default.\(cluster.domain_name), *.coder.\(cluster.domain_name)"
 			}
 		}
 
@@ -1433,6 +1433,54 @@ kustomize: "coder": #KustomizeHelm & {
 				env: [{
 					name:  "CODER_ACCESS_URL"
 					value: "https://coder.\(cluster.domain_name)"
+				}, {
+					name:  "CODER_WILDCARD_ACCESS_URL"
+					value: "*.coder.\(cluster.domain_name)"
+				}, {
+					name:  "CODER_REDIRECT_TO_ACCESS_URL"
+					value: "false"
+				}, {
+					name:  "CODER_UPDATE_CHECK"
+					value: "false"
+				}, {
+					name:  "CODER_TELEMETRY_ENABLE"
+					value: "false"
+				}, {
+					name:  "CODER_TELEMETRY_TRACE"
+					value: "false"
+				}, {
+					name:  "CODER_DERP_SERVER_ENABLE"
+					value: "true"
+				}, {
+					name:  "CODER_DISABLE_PASSWORD_AUTH"
+					value: "true"
+				}, {
+					name:  "CODER_STRICT_TRANSPORT_SECURITY"
+					value: "60"
+				}, {
+					name:  "CODER_SCALETEST_JOB_TIMEOUT"
+					value: "10m"
+				}, {
+					name:  "CODER_ENABLE_TERRAFORM_DEBUG_MODE"
+					value: "true"
+				}, {
+					name:  "CODER_SECURE_AUTH_COOKIE"
+					value: "true"
+				}, {
+					name:  "CODER_OAUTH2_GITHUB_ALLOW_SIGNUPS"
+					value: "false"
+				}, {
+					name:  "CODER_OAUTH2_GITHUB_ALLOWED_ORGS"
+					value: "defn"
+				}, {
+					name:  "CODER_OAUTH2_GITHUB_CLIENT_ID"
+					value: "defn"
+				}, {
+					name:  "CODER_OAUTH2_GITHUB_CLIENT_SECRET"
+					value: "defn"
+				}, {
+					name:  "CODER_OAUTH2_GITHUB_ALLOWED_TEAMS"
+					value: "defn/dev"
 				}]
 			}
 		}
