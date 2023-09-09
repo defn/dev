@@ -1,6 +1,7 @@
 #ManagedBy: cue
 
-patches: []
+patches:
+  - path: patch-service-argocd-server.yaml
 resources:
   - resource-namespace-pihole.yaml
   - resource-ingress-pihole-web.yaml
@@ -18,6 +19,7 @@ helmCharts:
         enabled: true
       serviceDns:
         type: ClusterIP
+        mixedService: true
       serviceDhcp:
         enabled: false
       serviceWeb:

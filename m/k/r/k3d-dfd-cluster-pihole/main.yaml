@@ -41,31 +41,15 @@ metadata:
     chart: pihole-2.18.0
     heritage: Helm
     release: pihole
-  name: pihole-dns-tcp
+  name: pihole-dns
   namespace: pihole
 spec:
+  clusterIP: 10.43.53.53
   ports:
   - name: dns
     port: 53
     protocol: TCP
     targetPort: dns
-  selector:
-    app: pihole
-    release: pihole
-  type: ClusterIP
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: pihole
-    chart: pihole-2.18.0
-    heritage: Helm
-    release: pihole
-  name: pihole-dns-udp
-  namespace: pihole
-spec:
-  ports:
   - name: dns-udp
     port: 53
     protocol: UDP
