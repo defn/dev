@@ -1701,6 +1701,9 @@ kustomize: "mastodon": #KustomizeHelm & {
 			name:      "mastodon-apache"
 			namespace: "mastodon"
 		}
-		spec: type: "ClusterIP"
+		spec: {
+			type:                  "ClusterIP"
+			externalTrafficPolicy: "Local"
+		}
 	}
 }
