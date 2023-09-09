@@ -987,7 +987,7 @@ metadata:
     app.kubernetes.io/part-of: argo-workflows
     helm.sh/chart: argo-workflows-0.33.2
   name: argo-workflows-workflow
-  namespace: defn
+  namespace: default
 rules:
 - apiGroups:
   - ""
@@ -1429,7 +1429,7 @@ metadata:
     app.kubernetes.io/part-of: argo-workflows
     helm.sh/chart: argo-workflows-0.33.2
   name: argo-workflows-workflow
-  namespace: defn
+  namespace: default
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -1437,7 +1437,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: argo-workflow
-  namespace: defn
+  namespace: default
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
