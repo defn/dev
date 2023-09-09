@@ -1,3 +1,3 @@
 package c
 
-discovery_url: "https://raw.githubusercontent.com/defn/dev/main/m/c/dfd"
+discovery_url: "https://coder-amanibhavam-dev.tail3884f.ts.net"
