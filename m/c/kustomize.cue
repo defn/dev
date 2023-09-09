@@ -1683,8 +1683,9 @@ kustomize: "mastodon": #KustomizeHelm & {
 		version:   "2.1.3"
 		repo:      "https://charts.bitnami.com/bitnami"
 		values: {
-			adminUsername: "admin"
-			adminPassword: "admin"
+			adminUser:     "defn"
+			adminPassword: "adminadmin"
+			adminEmail:    "iam@defn.sh"
 			webDomain:     "mastodon.\(cluster.domain_name)"
 		}
 	}

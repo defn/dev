@@ -96,8 +96,8 @@ data:
   ES_PORT: "9200"
   LOCAL_DOMAIN: ""
   LOCAL_HTTPS: "true"
-  MASTODON_ADMIN_EMAIL: user@changeme.com
-  MASTODON_ADMIN_USERNAME: user
+  MASTODON_ADMIN_EMAIL: iam@defn.sh
+  MASTODON_ADMIN_USERNAME: defn
   NODE_ENV: production
   RAILS_ENV: production
   REDIS_HOST: mastodon-redis-master
@@ -369,8 +369,8 @@ metadata:
 apiVersion: v1
 data:
   MASTODON_ADMIN_PASSWORD: YWRtaW4=
-  OTP_SECRET: TlZLOXpzMWVhZA==
-  SECRET_KEY_BASE: NjlHSUxtT0d0TA==
+  OTP_SECRET: OHdBT0xISGs3aA==
+  SECRET_KEY_BASE: STFvUmpPajRRUQ==
 kind: Secret
 metadata:
   labels:
@@ -384,7 +384,7 @@ metadata:
 ---
 apiVersion: v1
 data:
-  root-password: bjFTdG1sMEpaVA==
+  root-password: OEptS3VVTU5uZg==
   root-user: YWRtaW4=
 kind: Secret
 metadata:
@@ -399,8 +399,8 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  password: TGU1c0YzQ2ZzZA==
-  postgres-password: WUtCdk1FTE54Rg==
+  password: ZlF2UXpvR3Nwdg==
+  postgres-password: NkZZckRJM1BHbA==
 kind: Secret
 metadata:
   labels:
@@ -414,7 +414,7 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  redis-password: c212bzNuYXRKbQ==
+  redis-password: QXJ4RUw4bllyNw==
 kind: Secret
 metadata:
   labels:
@@ -906,7 +906,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/credentials-secret: cc6ebcd2eedde57b2fab7763423045be1b94f2d92ee87b1d8b9162e966a6c5c7
+        checksum/credentials-secret: 4cd8788ee2067ee01062aa89ed582a395708e5a1b93b0b344d0fa7bc9a7db99c
       labels:
         app.kubernetes.io/instance: mastodon
         app.kubernetes.io/managed-by: Helm
@@ -2434,7 +2434,7 @@ spec:
         checksum/configmap: 86bcc953bb473748a3d3dc60b7c11f34e60c93519234d4c37f42e22ada559d47
         checksum/health: aff24913d801436ea469d8d374b2ddb3ec4c43ee7ab24663d5f8ff1a1b6991a9
         checksum/scripts: 560c33ff34d845009b51830c332aa05fa211444d1877d3526d3599be7543aaa5
-        checksum/secret: 3ab5e8ac5265187734e12110f06e1dfe4cec9cac445462b9cd3ac9f8e8315f80
+        checksum/secret: 3eb5b3f4c2c76ce4a5dceacc9eb799c1837b65244883120cd5072edfa9397d03
       labels:
         app.kubernetes.io/component: master
         app.kubernetes.io/instance: mastodon

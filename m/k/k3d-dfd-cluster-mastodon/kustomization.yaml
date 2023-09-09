@@ -13,7 +13,8 @@ helmCharts:
     repo: https://charts.bitnami.com/bitnami
     namespace: mastodon
     valuesInline:
-      adminUsername: admin
+      adminUser: defn
       adminPassword: admin
+      adminEmail: iam@defn.sh
       webDomain: mastodon.dev.amanibhavam.defn.run
     includeCRDs: true
