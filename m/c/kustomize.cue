@@ -1369,6 +1369,7 @@ kustomize: "traefik": #KustomizeHelm & {
 			dnsNames: [
 				"*.\(cluster.domain_name)",
 				"*.default.\(cluster.domain_name)",
+				"*.coder.\(cluster.domain_name)",
 			]
 			issuerRef: {
 				name:  cluster.issuer
