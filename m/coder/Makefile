@@ -50,3 +50,6 @@ init:
 	direnv allow
 	bash -c 'eval "$$(direnv hook bash)"; _direnv_hook'
 	for a in vscodevim.vim golang.Go bazelbuild.vscode-bazel; do code --install-extension $$a; done
+
+login:
+	coder login https://coder.dev.amanibhavam.defn.run
