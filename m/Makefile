@@ -78,13 +78,8 @@ za:
 warudo:
 	bin/make-k3d up
 
-coder-admin:
+coder-admin2:
 	k exec -n coder -ti deploy/coder -- bash -c 'coder server create-admin-user --email iam+admin@defn.sh --password admin --username admin --postgres-url postgresql://coder:$$(cat ~/.config/coderv2/postgres/password)@localhost:$$(cat ~/.config/coderv2/postgres/port)/?sslmode=disable'
 
-
-
-
-
-
-
-
+coder-admin:
+	coder login --first-user-email iam+admin@defn.sh --first-user-password admin --first-user-username Admin123@@@ --first-user-trial=false https://coder.dev.amanibhavam.defn.run
