@@ -88,3 +88,6 @@ coder-admin:
 
 index.html: index.cue
 	cue eval --out json -e html | jq -r . | prettier --stdin-filepath index.html > index.html
+
+tutorial:
+	@echo Slay the Dragon

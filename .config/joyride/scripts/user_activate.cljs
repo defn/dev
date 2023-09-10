@@ -1,7 +1,7 @@
 (ns workspace-activate
   (:require ["vscode" :as vscode]
             [joyride.core :as joyride]
-            [meh]))
+            [dfd]))
 
 (defonce !db (atom {:disposables []}))
 
@@ -32,7 +32,7 @@
       (fn [doc]
         (doto (joyride/output-channel)
           (.appendLine (str (.-languageId doc) (.-fileName doc)))))))
-    (meh/main))
+    (dfd/main))
 
 (when (= (joyride/invoked-script) joyride/*file*)
   (main))
