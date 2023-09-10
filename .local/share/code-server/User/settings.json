@@ -75,5 +75,12 @@
   "git.suggestSmartCommit": false,
   "trunk.showWhatsNew": false,
   "security.workspace.trust.untrustedFiles": "open",
-  "workbench.colorTheme": "Default Dark Modern"
+  "workbench.colorTheme": "Default Dark Modern",
+  "calva.prettyPrintingOptions": {
+    "printEngine": "pprint",
+    "enabled": true,
+    "width": 120,
+    "maxLength": 50
+  },
+  "calva.paredit.defaultKeyMap": "strict"
 }
