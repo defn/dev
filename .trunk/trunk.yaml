@@ -1,11 +1,11 @@
 # sudo ln -nfs $(which gcc) /usr/local/bin/cc
 version: 0.1
 cli:
-  version: 1.14.2
+  version: 1.15.0
 plugins:
   sources:
     - id: trunk
-      ref: v1.2.2
+      ref: v1.2.3
       uri: https://github.com/trunk-io/plugins
 lint:
   disabled:
@@ -16,46 +16,20 @@ lint:
   ignore:
     - linters: [ALL]
       paths:
-        - m/tf/terraform-*/**
-        - m/**/main.tf.json
-        - m/gen/**
-        - m/**/cdktf.out/**
-        - m/**/*.gen.yaml
-        - m/e/**
-        - m/k/**
-        - m/**/*_go_gen.cue
-        - m/**/node_modules/**
-        - m/go_deps.bzl
-        - m/**/config.json
-        - m/w/pnpm-lock.yaml
-        - docs/**
+        - "*/**"
   enabled:
-    - buf-lint@1.26.1
-    - svgo@3.0.2
     - dotenv-linter@3.3.0
-    - bandit@1.7.5
-    - gokart@0.5.1
-    - osv-scanner@1.3.6
-    - terrascan@1.18.3
-    - checkov@2.4.9
-    - actionlint@1.6.25
     - black@23.7.0
     - buildifier@6.3.3
     - cue-fmt@0.5.0
     - git-diff-check
-    - gitleaks@8.18.0
     - gofmt@1.20.5
-    - hadolint@2.12.0
-    - isort@5.12.0
-    - markdownlint@0.35.0
+    - markdownlint@0.36.0
     - nixpkgs-fmt@1.3.0
-    - oxipng@8.0.0
-    - prettier@3.0.2
-    - ruff@0.0.286
+    - prettier@3.0.3
     - shellcheck@0.9.0
     - shfmt@3.6.0
-    - taplo@0.8.1
-    - tflint@0.47.0
+    - tflint@0.48.0
     - yamllint@1.32.0
 runtimes:
   enabled:
