@@ -23,17 +23,14 @@
       (.push disposable)))
 
 (defn- main []
-  (println "Hello World, from my-main workspace_activate.cljs script")
   (clear-disposables!)
   (push-disposable
-   ;; It might surprise you to see how often and when this happens,
-   ;; and when it doesn't happen.
-   (vscode/workspace.onDidOpenTextDocument
-    (fn [doc]
-      (println "[Joyride example]"
-               (.-languageId doc)
-               "document opened:"
-               (.-fileName doc))))))
+    ;; It might surprise you to see how often and when this happens,
+    ;; and when it doesn't happen.
+    (vscode/workspace.onDidOpenTextDocument
+      (fn [doc]
+        (doto (joyride/output-channel)
+          (.appendLine (str (.-languageId doc) (.-fileName doc))))))))
 
 (when (= (joyride/invoked-script) joyride/*file*)
   (main))

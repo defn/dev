@@ -13,7 +13,13 @@
                                           "index.html"))
           data (vscode/workspace.fs.readFile uri)
           html (.decode (js/TextDecoder. "utf-8") data)]
-    (set! (.. panel -webview -html) (str html))))
+    (set! (.. panel -webview -html) (str html))
+    (doto (joyride/output-channel)
+      (.appendLine "==============================================================")
+      (.appendLine (str "Invoked script: " (joyride/invoked-script)))
+      (.appendLine "=============================================================="))
+    (path/join vscode/workspace.rootPath)))
+
 
 (when (= (joyride/invoked-script) joyride/*file*)
   (main))
