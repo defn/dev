@@ -2,5 +2,10 @@
     {
         "key": "ctrl+w",
         "command": "workbench.action.closeActiveEditor"
+    },
+    {
+        "key": "shift-ctrl+z 1",
+        "command": "joyride.runWorkspaceScript",
+        "args": "dfd/meh.cljs"
     }
 ]
