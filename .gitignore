@@ -188,3 +188,4 @@ graph.png
 .matplotlib
 .tfo
 .pki*
+.lvm_history
