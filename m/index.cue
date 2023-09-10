@@ -112,23 +112,25 @@ package m
 #Online: {
 	input: #Input
 
-	if input.last_seen == "Online" {
-		html: """
-			    <div class="mt-1 flex items-center gap-x-1.5">
-			        <div class="flex-none rounded-full bg-emerald-500/20 p-1">
-			            <div class="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
-			        </div>
-			        <p class="text-xs leading-5 text-gray-500">Online</p>
-			    </div>
+	html: {
+		if input.last_seen == "Online" {
 			"""
-	}
+			<div class="mt-1 flex items-center gap-x-1.5">
+                <div class="flex-none rounded-full bg-emerald-500/20 p-1">
+                    <div class="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                </div>
+                <p class="text-xs leading-5 text-gray-500">Online</p>
+            </div>
+            """
+		}
 
-	if input.last_seen != "Online" {
-		html: """
+		if input.last_seen != "Online" {
+			"""
             <p class="mt-1 text-xs leading-5 text-gray-500">
                 Last seen <time datetime="2023-01-23T13:23Z">\(input.last_seen)</time>
             </p>
-        """
+            """
+		}
 	}
 }
 
