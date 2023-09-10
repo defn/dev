@@ -6,6 +6,6 @@
     {
         "key": "shift-ctrl+z",
         "command": "joyride.runWorkspaceScript",
-        "args": "dfd/meh.cljs"
+        "args": "meh.cljs"
     }
 ]

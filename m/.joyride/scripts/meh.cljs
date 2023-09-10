@@ -1,4 +1,4 @@
-(ns dfd.meh
+(ns meh
   (:require ["path" :as path]
             ["vscode" :as vscode]
             [joyride.core :as joyride]
