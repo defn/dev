@@ -146,9 +146,8 @@ install:
 install-inner:
 	$(MAKE) symlinks
 	$(MAKE) perms
-	$(MAKE) home
-
 	. ~/.bash_profile && $(MAKE) install-innermost
+	$(MAKE) home
 
 install-innermost:
 	git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
