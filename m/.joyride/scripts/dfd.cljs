@@ -5,26 +5,31 @@
             [promesa.core :as p]))
 
 (defn main []
-  (p/let [terminal (vscode/window.createTerminal #js {:name "tutorial"})
-          panel (vscode/window.createWebviewPanel "tutorial" "Tutorial" vscode/ViewColumn.One #js {:enableScripts true})
-          uri (vscode/Uri.file (path/join vscode/workspace.rootPath "index.html"))
-          data (vscode/workspace.fs.readFile uri)
-          html (.decode (js/TextDecoder. "utf-8") data)]
-
     (doto (joyride/output-channel)
       (.appendLine "==============================================================")
       (.appendLine (str "Invoked script: " (joyride/invoked-script)))
       (.appendLine "=============================================================="))
 
-    (set! (.. panel -webview -html) (str html))
 
-    (doto terminal
-      (.show true)
-      (.sendText "make index.html"))
+    (p/let [doc (vscode/workspace.openTextDocument (path/join vscode/workspace.rootPath "index.cue"))
+            meh (vscode/window.showTextDocument doc #js {:preview false, :preserveFocus false, :viewColumn: vscode/ViewColumn.One})]
 
-    (p/-> (vscode/workspace.openTextDocument (path/join vscode/workspace.rootPath "index.cue"))
-          (vscode/window.showTextDocument #js {:preview false, :preserveFocus false}))
-  ))
+      (vscode/commands.executeCommand "workbench.action.splitEditor")
+
+      (p/let [panel (vscode/window.createWebviewPanel "tutorial" "Tutorial" vscode/ViewColumn.Two #js {:enableScripts true})
+              uri (vscode/Uri.file (path/join vscode/workspace.rootPath "index.html"))
+              data (vscode/workspace.fs.readFile uri)
+              html (.decode (js/TextDecoder. "utf-8") data)]
+
+        (set! (.. panel -webview -html) (str html))))
+
+    (p/let [terminal (vscode/window.createTerminal #js {:name "tutorial"})]
+
+      (doto terminal
+        (.show true)
+        (.sendText "make index.html")))
+
+  )
 
 (when (= (joyride/invoked-script) joyride/*file*)
   (main))
