@@ -53,8 +53,23 @@ function main {
 	esac
 	git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
 
+	# mount ephemeral storage
+	if [[ "$(lsblk /dev/nvme1n1 -no fstype)" != "ext4" ]]; then
+		yes | sudo mkfs.ext4 /dev/nvme1n1
+	fi
+
+	if [[ "$(df /mnt/docker | tail -1 | awk '{print $NF}')" == / ]]; then
+		echo '/dev/nvme1n1 /mnt/docker ext4 defaults,nofail 0 2' | sudo tee -a /etc/fstab
+		sudo mount /mnt/docker
+	fi
+
+	sudo systemctl stop docker || true
+	sudo rm -rf /var/lib/docker
+	sudo ln -nfs /mnt/docker /var/lib/docker
+	sudo systemctl start docker
+
 	# persist daemon data
-	for d in docker tailscale; do
+	for d in tailscale; do
 		if test -d "/nix/${d}"; then
 			sudo rm -rf "/var/lib/${d}"
 		elif test -d "/var/lib/${d}"; then
