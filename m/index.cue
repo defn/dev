@@ -23,11 +23,11 @@ import (
 }
 
 people: [{
-	name:      "Leslie Alexander"
-	email:     "leslie.alexander@example.com"
-	last_seen: "3h ago"
-	title:     "Co-Founder / CEO"
-	profile:   "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+	name:      "Tom Cook"
+	email:     "tom.cook@example.com"
+	last_seen: "Online"
+	title:     "Director of Product"
+	profile:   "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
 }, {
 	name:      "Michael Foster"
 	email:     "michael.foster@example.com"
@@ -41,6 +41,12 @@ people: [{
 	title:     "Business Relations"
 	profile:   "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
 }, {
+	name:      "Leslie Alexander"
+	email:     "leslie.alexander@example.com"
+	last_seen: "3h ago"
+	title:     "Co-Founder / CEO"
+	profile:   "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+}, {
 	name:      "Lindsay Walton"
 	email:     "lindsay.walton@example.com"
 	last_seen: "3h ago"
@@ -52,12 +58,6 @@ people: [{
 	last_seen: "3h ago"
 	title:     "Designer"
 	profile:   "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-}, {
-	name:      "Tom Cook"
-	email:     "tom.cook@example.com"
-	last_seen: "Online"
-	title:     "Director of Product"
-	profile:   "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
 }]
 
 #Body: {
