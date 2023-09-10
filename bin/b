@@ -31,7 +31,7 @@ function bazel {
 
 	case "${cmd}" in
 	watch)
-		if [[ "$#" == 0 ]]; then set -- . ; fi
+		if [[ $# == 0 ]]; then set -- .; fi
 		command ibazel build "$@"
 		;;
 	build | test | run)
@@ -291,20 +291,20 @@ function main {
 			run)
 				shift
 
-				case "${1:-}" in
-					"")
-						rule="$("$0" | grep _ | fzf --select-1)"
-						;;
-					/*)
-						rule="$("$0" | fzf --query="${1#/}" --select-1)"
-						;;
-					*)
-						rule="$1"
-						shift
-						;;
+				case "${1-}" in
+				"")
+					rule="$("$0" | grep _ | fzf --select-1)"
+					;;
+				/*)
+					rule="$("$0" | fzf --query="${1#/}" --select-1)"
+					;;
+				*)
+					rule="$1"
+					shift
+					;;
 				esac
 
-				if [[ "$#" -gt 0 ]]; then shift; fi
+				if [[ $# -gt 0 ]]; then shift; fi
 
 				# shellcheck disable=SC2086
 				bazel run ${bopts} "${rule}" -- "$@"

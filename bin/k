@@ -7,15 +7,15 @@ function main {
 		shift
 
 		export KUBECONFIG="${HOME}/.kube/config.${config}"
-		
-		case "${1:-}" in
-			x)
-				shift
-				exec "$@"
-				;;
-			*)
-				kubectl "$@"
-				;;
+
+		case "${1-}" in
+		x)
+			shift
+			exec "$@"
+			;;
+		*)
+			kubectl "$@"
+			;;
 		esac
 	else
 		exec kubectl "$@"
