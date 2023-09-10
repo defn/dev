@@ -6,11 +6,11 @@
 
 (defn main []
   (p/let [panel (vscode/window.createWebviewPanel
-                 "Hello!" "dfd"
+                 "" "Tutorial"
                  vscode/ViewColumn.One
                  #js {:enableScripts true})
           uri (vscode/Uri.file (path/join vscode/workspace.rootPath
-                                          ".joyride" "scripts" "dfd" "index.html"))
+                                          "index.html"))
           data (vscode/workspace.fs.readFile uri)
           html (.decode (js/TextDecoder. "utf-8") data)]
     (set! (.. panel -webview -html) (str html))))

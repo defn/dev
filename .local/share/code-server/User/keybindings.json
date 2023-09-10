@@ -4,7 +4,7 @@
         "command": "workbench.action.closeActiveEditor"
     },
     {
-        "key": "shift-ctrl+z 1",
+        "key": "shift-ctrl+z",
         "command": "joyride.runWorkspaceScript",
         "args": "dfd/meh.cljs"
     }
