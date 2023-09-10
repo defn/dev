@@ -1454,7 +1454,7 @@ kustomize: "coder": #KustomizeHelm & {
 					value: "true"
 				}, {
 					name:  "CODER_DISABLE_PASSWORD_AUTH"
-					value: "false"
+					value: "true"
 				}, {
 					name:  "CODER_STRICT_TRANSPORT_SECURITY"
 					value: "60"
