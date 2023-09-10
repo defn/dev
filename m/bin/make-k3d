@@ -7,7 +7,7 @@ infra_name="dfd"
 
 function make_init {
 	# create k3d registry
-	k3d registry create registry --port 0.0.0.0:5000 || true
+	docker run -d -p 5000:5000 --restart=always --name registry registry:2 || true
 }
 
 function make_linkerd {
