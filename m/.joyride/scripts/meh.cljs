@@ -21,7 +21,6 @@
     (let [terminal (vscode/window.createTerminal #js {:name "dfd"})]
         (.show terminal true)
         (.sendText terminal "make"))
-    (path/join vscode/workspace.rootPath)
   ))
 
 (when (= (joyride/invoked-script) joyride/*file*)
