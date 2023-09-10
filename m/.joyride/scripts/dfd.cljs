@@ -14,6 +14,7 @@
     (p/let [doc (vscode/workspace.openTextDocument (path/join vscode/workspace.rootPath "index.cue"))
             meh (vscode/window.showTextDocument doc #js {:preview false, :preserveFocus false, :viewColumn: vscode/ViewColumn.One})]
 
+      (comment "TODO does this execute async? if so, then it's not guaranteed the tutorial loads in column two")
       (vscode/commands.executeCommand "workbench.action.moveEditorToPreviousGroup")
 
       (p/let [panel (vscode/window.createWebviewPanel "tutorial" "Tutorial" vscode/ViewColumn.Two #js {:enableScripts true})
