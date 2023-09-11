@@ -72,7 +72,6 @@ bazel-ignore:
 
 za:
 	pass hello
-	this-prune
 	$(MAKE) ci
 	cd .. && $(MAKE) install
 	cd coder && ( $(MAKE) image || $(MAKE) image )
