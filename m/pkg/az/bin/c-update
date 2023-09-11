@@ -4,7 +4,6 @@ function main {
 	set -efu
 
 	git pull
-	hof mod vendor cue
 	return $?
 }
 
