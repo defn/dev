@@ -33,7 +33,7 @@ source "amazon-ebs" "this" {
   ssh_username                = "ubuntu"
 
   spot_price    = "auto"
-  instance_type = "t3.xlarge"
+  instance_type = "m6id.xlarge"
   region        = "us-west-2"
 
   launch_block_device_mappings {
