@@ -17,8 +17,13 @@ html: #HTML
 
 #Head: {"""
 	<head>
-	<script src="https://cdn.tailwindcss.com"></script>
-	<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+		<script src="https://cdn.tailwindcss.com"></script>
+		<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+	    <style>
+			body {
+				font-family: Inter;
+			}
+		</style>
 	</head>
 	"""
 }
