@@ -74,6 +74,7 @@ za:
 	pass hello
 	$(MAKE) ci
 	cd .. && $(MAKE) install
+	bin/make-k3d init || true
 	cd coder && ( $(MAKE) image || $(MAKE) image )
 
 warudo:
