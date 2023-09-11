@@ -4,81 +4,114 @@ import (
 	"strings"
 )
 
-html: #HTML
+people: [{
+	name:      "Tom Cook"
+	email:     "tom.cook@example.com"
+	last_seen: "Online"
+	title:     "Director of Product"
+	profile:   "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+}, {
+	name:      "Michael Foster"
+	email:     "michael.foster@example.com"
+	last_seen: "3h ago"
+	title:     "Co-Founder / CTO"
+	profile:   "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+}, {
+	name:      "Dries Vincent"
+	email:     "dries.vincent@example.com"
+	last_seen: "Online"
+	title:     "Business Relations"
+	profile:   "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+}, {
+	name:      "Leslie Alexander"
+	email:     "leslie.alexander@example.com"
+	last_seen: "3h ago"
+	title:     "Co-Founder / CEO"
+	profile:   "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+}, {
+	name:      "Lindsay Walton"
+	email:     "lindsay.walton@example.com"
+	last_seen: "3h ago"
+	title:     "Front-end Developer"
+	profile:   "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+}, {
+	name:      "Courtney Henry"
+	email:     "courtney.henry@example.com"
+	last_seen: "3h ago"
+	title:     "Designer"
+	profile:   "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+}]
 
-#HTML: {"""
-	<!doctype html>
-	<html>
-	\(#Head)
-	\(#Body)
-	</html>
+#Content: string | *{
+	_people: {
+		strings.Join([
+			for p in people {
+				(#Person & {input: p}).html
+			},
+		], "")
+	}
 	"""
+    <body class="bg-white">
+        <ul role="list" class="divide-y divide-gray-100">
+            \(_people)
+        </ul>
+    </body>
+    """
 }
 
-#Head: {"""
-	<head>
-		<script src="https://cdn.tailwindcss.com"></script>
-		<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-	    <style>
-			body {
-				font-family: Inter;
+#Person: {
+	input: {
+		profile:   string
+		name:      string
+		email:     string
+		title:     string
+		last_seen: string
+	}
+
+	#Online: {
+		html: {
+			if input.last_seen == "Online" {
+				"""
+					<div class="mt-1 flex items-center gap-x-1.5">
+					    <div class="flex-none rounded-full bg-emerald-500/20 p-1">
+					        <div class="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+					    </div>
+					    <p class="text-xs leading-5 text-gray-500">Online</p>
+					</div>
+					"""
 			}
-		</style>
-	</head>
-	"""
-}
 
-#Body: {"""
-	\(#Page)
-	"""
-}
+			if input.last_seen != "Online" {
+				"""
+                    <p class="mt-1 text-xs leading-5 text-gray-500">
+                        Last seen <time datetime="2023-01-23T13:23Z">\(input.last_seen)</time>
+                    </p>
+                """
+			}
+		}
+	}
 
-#Content: {string}
-
-#Page: {"""
-	<div class="bg-white px-6 py-6 lg:px-8">
-		<div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">\(#Content)</div>
-	</div>
-	"""
-}
-
-#Title: {
-	title:   string
-	content: string
-	html:    """
-		<h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">\(title)</h1>
-		<p class="mt-6 text-xl leading-8">\(content)</p>
-		"""
-}
-
-#Section: {
-	title:   string
-	content: string
-	html:    """
-		<div class="mt-10 max-w-2xl">
-			<h2 class="mt-16 text-2xl font-bold tracking-tight text-gray-900">\(title)</h2>
-			\(content)
-		</div>
-		"""
-}
-
-#List: {
-	items: [...{
-		title:   string
-		content: string
-	}]
-	items_content: [
-		for ele in items {"""
-			<li class="flex gap-x-3">
-				<svg class="mt-1 h-5 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-					<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
-				</svg>
-				<span><strong class="font-semibold text-gray-900">\(ele.title)</strong> \(ele.content)</span>
-			</li>
-			"""
-		},
-	]
 	html: """
-		<ul role="list" class="mt-8 max-w-xl space-y-8 text-gray-600">\(strings.Join(items_content, ""))</ul>
-		"""
+    <li class="flex justify-between gap-x-6 py-5">
+    <div class="flex min-w-0 gap-x-4">
+        <img
+        class="h-12 w-12 flex-none rounded-full bg-gray-50"
+        src="\(input.profile)"
+        alt=""
+        />
+        <div class="min-w-0 flex-auto">
+        <p class="text-sm font-semibold leading-6 text-gray-900">
+            \(input.name)
+        </p>
+        <p class="mt-1 truncate text-xs leading-5 text-gray-500">
+            \(input.email)
+        </p>
+        </div>
+    </div>
+    <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+        <p class="text-sm leading-6 text-gray-900">\(input.title)</p>
+        \(#Online.html)
+    </div>
+    </li>
+    """
 }
