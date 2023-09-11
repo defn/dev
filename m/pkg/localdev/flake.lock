@@ -86,28 +86,6 @@
         "type": "github"
       }
     },
-    "dev_11": {
-      "inputs": {
-        "flake-utils": "flake-utils_11",
-        "nixpkgs": "nixpkgs_11"
-      },
-      "locked": {
-        "dir": "m/pkg/dev",
-        "lastModified": 1691869221,
-        "narHash": "sha256-QV3p1P2tlTGuLL9XME9RFXh2d2/yO7jpqsKhV3CXUE0=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "48989a8305b411a0ccce199f8569043626abde96",
-        "type": "github"
-      },
-      "original": {
-        "dir": "m/pkg/dev",
-        "owner": "defn",
-        "ref": "pkg-dev-0.0.10",
-        "repo": "dev",
-        "type": "github"
-      }
-    },
     "dev_2": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -322,22 +300,6 @@
       }
     },
     "flake-utils_10": {
-      "locked": {
-        "lastModified": 1652776076,
-        "narHash": "sha256-gzTw/v1vj4dOVbpBSJX4J0DwUR6LIyXo7/SuuTJp1kM=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "04c1b180862888302ddfb2e3ad9eaa63afc60cf8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "04c1b180862888302ddfb2e3ad9eaa63afc60cf8",
-        "type": "github"
-      }
-    },
-    "flake-utils_11": {
       "locked": {
         "lastModified": 1652776076,
         "narHash": "sha256-gzTw/v1vj4dOVbpBSJX4J0DwUR6LIyXo7/SuuTJp1kM=",
@@ -618,22 +580,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_11": {
-      "locked": {
-        "lastModified": 1691831739,
-        "narHash": "sha256-6e12VCvA7jOjhzJ1adLiUV1GTPXGBcCfhggsDwiuNB4=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "3fe694c4156b84dac12627685c7ae592a71e2206",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "3fe694c4156b84dac12627685c7ae592a71e2206",
-        "type": "github"
-      }
-    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1691831739,
@@ -807,27 +753,6 @@
     "pkg_10": {
       "inputs": {
         "dev": "dev_10"
-      },
-      "locked": {
-        "dir": "m/pkg/pkg",
-        "lastModified": 1692061434,
-        "narHash": "sha256-3ET3NgIBZVe+59zx5c3c4rv+wbSpGP8tvSw1Dpi1/Us=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "71fd24a88e85a7011e01f1fa1c9c93228673f87c",
-        "type": "github"
-      },
-      "original": {
-        "dir": "m/pkg/pkg",
-        "owner": "defn",
-        "ref": "pkg-pkg-0.0.12",
-        "repo": "dev",
-        "type": "github"
-      }
-    },
-    "pkg_11": {
-      "inputs": {
-        "dev": "dev_11"
       },
       "locked": {
         "dir": "m/pkg/pkg",
@@ -1025,34 +950,12 @@
         "honeyvent": "honeyvent",
         "hugo": "hugo",
         "oras": "oras",
-        "temporal": "temporal",
         "tilt": "tilt"
-      }
-    },
-    "temporal": {
-      "inputs": {
-        "pkg": "pkg_10"
-      },
-      "locked": {
-        "dir": "m/pkg/temporal",
-        "lastModified": 1692116420,
-        "narHash": "sha256-QYsjYPh/Ms3GgH9HJ7Bdltwft1yg3R486hEuLJwuJ3E=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "c3a444f5d6d2128ccb26e174a15321a7f38d76a5",
-        "type": "github"
-      },
-      "original": {
-        "dir": "m/pkg/temporal",
-        "owner": "defn",
-        "ref": "pkg-temporal-0.10.5-2",
-        "repo": "dev",
-        "type": "github"
       }
     },
     "tilt": {
       "inputs": {
-        "pkg": "pkg_11"
+        "pkg": "pkg_10"
       },
       "locked": {
         "dir": "m/pkg/tilt",
