@@ -47,7 +47,7 @@ cache:
 
 home:
 	$(MARK) home
-	if [[ "$$(git rev-parse HEAD)" != "$$(cat bin/nix/.head)" ]]; then \
+	if [[ "$$(git log m/pkg | head -1 | awk '{print $$2}')" != "$$(cat bin/nix/.head)" ]]; then \
 		set -xeo pipefail; for n in $(flakes); do \
 			mark $$n; \
 			(cd m/pkg/$$n && ~/bin/b build && nix build); \
@@ -140,7 +140,7 @@ reinstall:
 install:
 	$(MAKE) nix
 	$(MAKE) install-inner
-	git rev-parse HEAD > bin/nix/.head
+	git log m/pkg | head -1 | awk '{print $$2}' > bin/nix/.head
 	@mark finished
 
 install-inner:
@@ -152,7 +152,7 @@ install-inner:
 install-innermost:
 	git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
 	git config diff.lfs.textconv cat
-	if [[ "$$(git rev-parse HEAD)" != "$$(cat bin/nix/.head)" ]]; then $(MAKE) dotfiles; fi
+	if [[ "$$(git log m/pkg | head -1 | awk '{print $$2}')" != "$$(cat bin/nix/.head)" ]]; then $(MAKE) dotfiles; fi
 	$(MAKE) password-store
 	$(MAKE) gpg
 
