@@ -23,7 +23,7 @@ ci:
 dev:
 # rm -rf ~/Library/App*/coderv2/postgres
 	pass hello
-	coder server --disable-password-auth --oauth2-github-allow-signups --oauth2-github-allowed-orgs $$(pass coder_oauth2-github-allowed-orgs) --oauth2-github-allowed-teams $$(pass coder_oauth2-github-allowed-teams) --oauth2-github-client-id $$(pass coder_oauth2-github-client-id) --oauth2-github-client-secret $$(pass coder_oauth2-github-client-secret)
+	coder server --disable-password-auth --oauth2-github-allow-signups --oauth2-github-allowed-orgs $$(pass coder_oauth2-github-allowed-orgs) --oauth2-github-allowed-teams $$(pass coder_oauth2-github-allowed-teams) --oauth2-github-client-id $$(pass coder_oauth2-github-client-id) --oauth2-github-client-secret $$(pass coder_oauth2-github-client-secret) --access-url https://immanent.tail3884f.ts.net
 
 cdktf:
 	npm install
