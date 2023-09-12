@@ -64,11 +64,11 @@ case "$(uname -s)" in
 		;;
 	Linux)
 		if [[ -z "${SSH_AUTH_SOCK:-}" ]]; then
-			echo export SSH_AUTH_SOCK=$HOME/.ssh/S.ssh-agent
-			unset SSH_AUTH_SOCK
+			export SSH_AUTH_SOCK=$HOME/.ssh/S.ssh-agent
 		fi
 		;;
 esac
+unset SSH_AUTH_SOCK
 
 # aws-vault
 export AWS_VAULT_BACKEND=pass
