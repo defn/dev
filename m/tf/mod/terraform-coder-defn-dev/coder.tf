@@ -76,18 +76,3 @@ resource "coder_app" "code-server" {
   }
 }
 
-resource "coder_app" "tilt" {
-  agent_id     = coder_agent.main.id
-  slug         = "tilt"
-  display_name = "tilt"
-  url          = "http://localhost:10350"
-  icon         = "/icon/code.svg"
-  subdomain    = false
-  share        = "owner"
-
-  healthcheck {
-    url       = "http://localhost:10350"
-    interval  = 5
-    threshold = 6
-  }
-}
