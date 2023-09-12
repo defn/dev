@@ -19,7 +19,7 @@ lint:
         - "*/**"
   enabled:
     - dotenv-linter@3.3.0
-    - black@23.7.0
+    - black@23.9.1
     - buildifier@6.3.3
     - cue-fmt@0.5.0
     - git-diff-check
