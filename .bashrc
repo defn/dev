@@ -64,7 +64,8 @@ case "$(uname -s)" in
 		;;
 	Linux)
 		if [[ -z "${SSH_AUTH_SOCK:-}" ]]; then
-			export SSH_AUTH_SOCK=$HOME/.ssh/S.ssh-agent
+			echo export SSH_AUTH_SOCK=$HOME/.ssh/S.ssh-agent
+			unset SSH_AUTH_SOCK
 		fi
 		;;
 esac
