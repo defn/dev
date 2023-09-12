@@ -66,7 +66,7 @@ resource "coder_app" "code-server" {
   display_name = "code-server"
   url          = "http://localhost:13337/?folder=/home/${local.username}/m"
   icon         = "/icon/code.svg"
-  subdomain    = true
+  subdomain    = false
   share        = "owner"
 
   healthcheck {
@@ -82,7 +82,7 @@ resource "coder_app" "tilt" {
   display_name = "tilt"
   url          = "http://localhost:10350"
   icon         = "/icon/code.svg"
-  subdomain    = true
+  subdomain    = false
   share        = "owner"
 
   healthcheck {
