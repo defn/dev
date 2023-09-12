@@ -21,19 +21,6 @@ local_resource(
     ],
 )
 
-# tailscaled
-local_resource(
-    "tailscaled",
-    serve_cmd=[
-        "bash",
-        "-c",
-        """
-            cd
-            exec sudo $(which tailscaled)
-            """,
-    ],
-)
-
 # hacks
 local_resource(
     "hacks",
