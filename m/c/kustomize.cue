@@ -385,7 +385,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.24.3"
+		version: "6.25.0"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -818,7 +818,7 @@ kustomize: "knative": #Kustomize & {
 // https://artifacthub.io/packages/helm/cert-manager/cert-manager
 kustomize: "cert-manager-crds": #Kustomize & {
 	resource: "cert-manager-crds": {
-		url: "https://github.com/cert-manager/cert-manager/releases/download/v1.12.3/cert-manager.crds.yaml"
+		url: "https://github.com/cert-manager/cert-manager/releases/download/v1.13.0/cert-manager.crds.yaml"
 	}
 }
 
@@ -829,7 +829,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 		release:   "cert-manager"
 		name:      "cert-manager"
 		namespace: "cert-manager"
-		version:   "1.12.4"
+		version:   "1.13.0"
 		repo:      "https://charts.jetstack.io"
 		values: {
 			ingressShim: {
@@ -842,7 +842,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 	}
 
 	resource: "cert-manager-crds": {
-		url: "https://github.com/cert-manager/cert-manager/releases/download/v1.12.4/cert-manager.crds.yaml"
+		url: "https://github.com/cert-manager/cert-manager/releases/download/v1.13.0/cert-manager.crds.yaml"
 	}
 
 	resource: "namespace-cert-manager": core.#Namespace & {
@@ -1744,7 +1744,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.33.2"
+		version:   "0.33.3"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [
