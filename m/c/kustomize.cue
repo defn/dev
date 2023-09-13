@@ -1833,4 +1833,18 @@ kustomize: "mastodon": #KustomizeHelm & {
 			}]
 		}
 	}
+
+	psm: "job-mastodon-init": {
+		apiVersion: "batch/v1"
+		kind:       "Job"
+		metadata: {
+			name:      "mastodon-init"
+			namespace: "mastodon"
+			annotations: {
+				"argocd.argoproj.io/hook":               "Sync"
+				"argocd.argoproj.io/sync-wave":          "0"
+				"argocd.argoproj.io/hook-delete-policy": "BeforeHookCreation,HookSucceeded"
+			}
+		}
+	}
 }

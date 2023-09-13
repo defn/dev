@@ -369,8 +369,8 @@ metadata:
 apiVersion: v1
 data:
   MASTODON_ADMIN_PASSWORD: YWRtaW5hZG1pbg==
-  OTP_SECRET: cjAxM2lBY2RyNQ==
-  SECRET_KEY_BASE: SmE1aDZSU3lBcA==
+  OTP_SECRET: N2JwWEp0Y3RjRA==
+  SECRET_KEY_BASE: YnE1WmthZ05SVQ==
 kind: Secret
 metadata:
   labels:
@@ -384,7 +384,7 @@ metadata:
 ---
 apiVersion: v1
 data:
-  root-password: RWxnSFo5amRCRA==
+  root-password: NW0wWkFPaW1ydA==
   root-user: YWRtaW4=
 kind: Secret
 metadata:
@@ -399,8 +399,8 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  password: RzhkREgzeVAwVg==
-  postgres-password: YkI3V0xxOWxmTw==
+  password: a2pPQmpkYVlUNg==
+  postgres-password: T09QV1JHOHpsVg==
 kind: Secret
 metadata:
   labels:
@@ -414,7 +414,7 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  redis-password: aE01S2NWYWoxRg==
+  redis-password: a1pSSVB1WWpDaA==
 kind: Secret
 metadata:
   labels:
@@ -906,7 +906,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/credentials-secret: 29f18e4ba7a2fb5c0d46ec026d1b660b375f3586550c18ee9c805cc556310d41
+        checksum/credentials-secret: d58b6331c0dadc3ab7081fa2c9d83309b8f81bc92f75531db2612b118fff7060
       labels:
         app.kubernetes.io/instance: mastodon
         app.kubernetes.io/managed-by: Helm
@@ -2434,7 +2434,7 @@ spec:
         checksum/configmap: 86bcc953bb473748a3d3dc60b7c11f34e60c93519234d4c37f42e22ada559d47
         checksum/health: aff24913d801436ea469d8d374b2ddb3ec4c43ee7ab24663d5f8ff1a1b6991a9
         checksum/scripts: 560c33ff34d845009b51830c332aa05fa211444d1877d3526d3599be7543aaa5
-        checksum/secret: 8198459485e108c5db952b3747ca64e8277c3b5ffd4530fb4229dcef26df619a
+        checksum/secret: a8132c9c29a99115c61849d3e000fa860189801cfccccb5b13f38734db918144
       labels:
         app.kubernetes.io/component: master
         app.kubernetes.io/instance: mastodon
@@ -2575,6 +2575,9 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation,HookSucceeded
+    argocd.argoproj.io/sync-wave: "0"
     helm.sh/hook: post-install, pre-upgrade
     helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
     helm.sh/hook-weight: "10"
