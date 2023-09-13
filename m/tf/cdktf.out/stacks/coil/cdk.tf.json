@@ -27,7 +27,7 @@
   "provider": {
     "aws": [
       {
-        "profile": "coil",
+        "profile": "coil-org-sso",
         "region": "us-east-1"
       }
     ]

@@ -27,7 +27,7 @@
   "provider": {
     "aws": [
       {
-        "profile": "gyre",
+        "profile": "gyre-org-sso",
         "region": "us-east-2"
       }
     ]
