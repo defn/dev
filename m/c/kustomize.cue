@@ -1777,7 +1777,6 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 #Pattern: "mastodon": #KustomizeHelm & {
 	cluster: #Cluster
 
-	// k exec -ti -n mastodon deploy/mastodon-web -- bash -c '. /opt/bitnami/scripts/mastodon-env.sh; tootctl accounts  modify defn --reset-password'
 	namespace: string
 
 	helm: {
@@ -1857,4 +1856,5 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			}
 		}
 	}
+	// k exec -ti -n mastodon deploy/mastodon-web -- bash -c '. /opt/bitnami/scripts/mastodon-env.sh; tootctl accounts  modify defn --reset-password'
 }

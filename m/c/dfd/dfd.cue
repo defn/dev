@@ -5,7 +5,7 @@ import (
 )
 
 infra_name: "dfd"
-infra_vclusters: ["vc0", "vc1"]
+infra_vclusters: []
 
 infra: {
 	_base: {
