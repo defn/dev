@@ -2,6 +2,7 @@
 
 patches:
   - path: patch-service-mastodon-apache.yaml
+  - path: patch-job-mastodon-init.yaml
 resources:
   - resource-namespace-pihole.yaml
   - resource-ingress-mastodon-apache.yaml
