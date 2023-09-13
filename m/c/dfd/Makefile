@@ -32,18 +32,14 @@ clean:
 	rm -f system.admin.key system.admin.pem system.ca.pem
 	rm -f openid/.well-known/openid-configuration
 
-openid: openid/.well-known/openid-configuration
-	@true
-
-openid/.well-known/openid-configuration:
+irsa:
 	sudo cat /etc/rancher/k3s/k3s.yaml | awk -F': ' '/client-certificate-data/ {print $$2}' | base64 -d > system.admin.pem && chmod 600 system.admin.pem
 	sudo cat /etc/rancher/k3s/k3s.yaml | awk -F': ' '/client-key-data/ {print $$2}' | base64 -d > system.admin.key && chmod 600 system.admin.key
 	sudo cat /etc/rancher/k3s/k3s.yaml | awk -F': ' '/certificate-authority-data/ {print $$2}' | base64 -d > system.ca.pem && chmod 600 system.ca.pem
-	mkdir -p openid/v1
-	curl -sSL --cert system.admin.pem --key system.admin.key --cacert system.ca.pem ${k3s_url}/openid/v1/jwks | jq . > openid/v1/jwks
-	rm -vf system.*
 	mkdir -p openid/.well-known
+	curl -sSL --cert system.admin.pem --key system.admin.key --cacert system.ca.pem ${k3s_url}/openid/v1/jwks | jq . > openid/.well-known/jwks.json
 	cue export -e discovery --out=json | jq . > openid/.well-known/openid-configuration
+	rm -vf system.*
 
 k3d-secrets: ca.key ca.crt openid/.well-known/openid-configuration
 	-kubectl --context k3d-dfd create namespace cert-manager
