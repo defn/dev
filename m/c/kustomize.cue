@@ -1763,19 +1763,29 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 	}
 }
 
+#Pattern: [string]: {...}
+
 // https://artifacthub.io/packages/helm/bitnami/mastodon
-kustomize: "mastodon": #KustomizeHelm & {
+kustomize: "mastodon": #Pattern["mastodon"] & {
+	namespace: "mastodon"
+}
+
+kustomize: "famfan": #Pattern["mastodon"] & {
+	namespace: "famfan"
+}
+
+#Pattern: "mastodon": #KustomizeHelm & {
 	cluster: #Cluster
 
 	// k exec -ti -n mastodon deploy/mastodon-web -- bash -c '. /opt/bitnami/scripts/mastodon-env.sh; tootctl accounts  modify defn --reset-password'
-	namespace: "mastodon"
+	namespace: string
 
 	helm: {
-		release:   "mastodon"
-		name:      "mastodon"
-		namespace: "mastodon"
-		version:   "2.1.3"
-		repo:      "https://charts.bitnami.com/bitnami"
+		release:     "mastodon"
+		name:        "mastodon"
+		"namespace": namespace
+		version:     "2.1.3"
+		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
 			adminUser:          "defn"
@@ -1786,11 +1796,11 @@ kustomize: "mastodon": #KustomizeHelm & {
 		}
 	}
 
-	resource: "namespace-pihole": core.#Namespace & {
+	resource: "namespace": core.#Namespace & {
 		apiVersion: "v1"
 		kind:       "Namespace"
 		metadata: {
-			name: "mastodon"
+			name: namespace
 		}
 	}
 
@@ -1798,8 +1808,8 @@ kustomize: "mastodon": #KustomizeHelm & {
 		apiVersion: "v1"
 		kind:       "Service"
 		metadata: {
-			name:      "mastodon-apache"
-			namespace: "mastodon"
+			name:        "mastodon-apache"
+			"namespace": namespace
 		}
 		spec: {
 			type:                  "ClusterIP"
@@ -1838,8 +1848,8 @@ kustomize: "mastodon": #KustomizeHelm & {
 		apiVersion: "batch/v1"
 		kind:       "Job"
 		metadata: {
-			name:      "mastodon-init"
-			namespace: "mastodon"
+			name:        "mastodon-init"
+			"namespace": namespace
 			annotations: {
 				"argocd.argoproj.io/hook":               "Sync"
 				"argocd.argoproj.io/sync-wave":          "0"
