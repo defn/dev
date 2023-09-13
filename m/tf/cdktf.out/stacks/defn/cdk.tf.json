@@ -27,7 +27,7 @@
   "provider": {
     "aws": [
       {
-        "profile": "defn",
+        "profile": "defn-org-sso",
         "region": "us-east-2"
       }
     ]
