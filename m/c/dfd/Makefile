@@ -26,6 +26,7 @@ list:
 
 secrets:
 	$(MAKE) clean
+	$(MAKE) irsa
 	$(MAKE) k3d-secrets
 
 clean:
@@ -41,7 +42,7 @@ irsa:
 	cue export -e discovery --out=json | jq . > openid/.well-known/openid-configuration
 	rm -vf system.*
 
-k3d-secrets: ca.key ca.crt openid/.well-known/openid-configuration
+k3d-secrets: ca.key ca.crt
 	-kubectl --context k3d-dfd create namespace cert-manager
 	-kubectl --context k3d-dfd create secret generic -n kube-system cilium-ca --from-file=ca.key --from-file=ca.crt
 	-kubectl --context k3d-dfd create secret generic -n cert-manager cilium-ca --from-file=tls.key=ca.key --from-file=tls.crt=ca.crt
