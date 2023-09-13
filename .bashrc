@@ -58,17 +58,12 @@ export CODER_TELEMETRY=false
 export EDITOR=vim
 
 # ssh-agent
+unset SSH_AUTH_SOCK
 case "$(uname -s)" in
 	Darwin)
 		export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
 		;;
-	Linux)
-		if [[ -z "${SSH_AUTH_SOCK:-}" ]]; then
-			export SSH_AUTH_SOCK=$HOME/.ssh/S.ssh-agent
-		fi
-		;;
 esac
-unset SSH_AUTH_SOCK
 
 # aws-vault
 export AWS_VAULT_BACKEND=pass
