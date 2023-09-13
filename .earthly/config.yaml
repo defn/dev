@@ -10,6 +10,6 @@ global:
         [registry."169.254.32.1:5000"]
           http = true
           insecure = true
-    org: defn
+    org: amanibhavam
 satellite:
     name: dfd
