@@ -27,7 +27,7 @@
   "provider": {
     "aws": [
       {
-        "profile": "curl",
+        "profile": "curl-org-sso",
         "region": "us-west-2"
       }
     ]

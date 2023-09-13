@@ -27,7 +27,7 @@
   "provider": {
     "aws": [
       {
-        "profile": "helix",
+        "profile": "helix-org-sso",
         "region": "us-east-2"
       }
     ]

@@ -27,7 +27,7 @@
   "provider": {
     "aws": [
       {
-        "profile": "spiral",
+        "profile": "spiral-org-sso",
         "region": "us-west-2"
       }
     ]

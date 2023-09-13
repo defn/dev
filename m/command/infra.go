@@ -146,7 +146,7 @@ func AwsOrganizationStack(scope constructs.Construct, org *AwsOrganization) cdkt
 	aws.NewAwsProvider(stack,
 		js("aws"), &aws.AwsProviderConfig{
 			Region:  js(org.Region),
-			Profile: js(org.Name),
+			Profile: js(fmt.Sprintf("%s-org-sso", org.Name)),
 		})
 
 	organizationsorganization.NewOrganizationsOrganization(stack,

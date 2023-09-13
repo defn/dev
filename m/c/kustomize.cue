@@ -385,7 +385,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.24.3"
+		version: "6.25.0"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -818,7 +818,7 @@ kustomize: "knative": #Kustomize & {
 // https://artifacthub.io/packages/helm/cert-manager/cert-manager
 kustomize: "cert-manager-crds": #Kustomize & {
 	resource: "cert-manager-crds": {
-		url: "https://github.com/cert-manager/cert-manager/releases/download/v1.12.3/cert-manager.crds.yaml"
+		url: "https://github.com/cert-manager/cert-manager/releases/download/v1.13.0/cert-manager.crds.yaml"
 	}
 }
 
@@ -829,7 +829,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 		release:   "cert-manager"
 		name:      "cert-manager"
 		namespace: "cert-manager"
-		version:   "1.12.4"
+		version:   "1.13.0"
 		repo:      "https://charts.jetstack.io"
 		values: {
 			ingressShim: {
@@ -842,7 +842,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 	}
 
 	resource: "cert-manager-crds": {
-		url: "https://github.com/cert-manager/cert-manager/releases/download/v1.12.4/cert-manager.crds.yaml"
+		url: "https://github.com/cert-manager/cert-manager/releases/download/v1.13.0/cert-manager.crds.yaml"
 	}
 
 	resource: "namespace-cert-manager": core.#Namespace & {
@@ -1744,7 +1744,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.33.2"
+		version:   "0.33.3"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [
@@ -1763,19 +1763,28 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 	}
 }
 
+#Pattern: [string]: {...}
+
 // https://artifacthub.io/packages/helm/bitnami/mastodon
-kustomize: "mastodon": #KustomizeHelm & {
+kustomize: "mastodon": #Pattern["mastodon"] & {
+	namespace: "mastodon"
+}
+
+kustomize: "famfan": #Pattern["mastodon"] & {
+	namespace: "famfan"
+}
+
+#Pattern: "mastodon": #KustomizeHelm & {
 	cluster: #Cluster
 
-	// k exec -ti -n mastodon deploy/mastodon-web -- bash -c '. /opt/bitnami/scripts/mastodon-env.sh; tootctl accounts  modify defn --reset-password'
-	namespace: "mastodon"
+	namespace: string
 
 	helm: {
-		release:   "mastodon"
-		name:      "mastodon"
-		namespace: "mastodon"
-		version:   "2.1.3"
-		repo:      "https://charts.bitnami.com/bitnami"
+		release:     "mastodon"
+		name:        "mastodon"
+		"namespace": namespace
+		version:     "2.1.3"
+		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
 			adminUser:          "defn"
@@ -1786,11 +1795,11 @@ kustomize: "mastodon": #KustomizeHelm & {
 		}
 	}
 
-	resource: "namespace-pihole": core.#Namespace & {
+	resource: "namespace": core.#Namespace & {
 		apiVersion: "v1"
 		kind:       "Namespace"
 		metadata: {
-			name: "mastodon"
+			name: namespace
 		}
 	}
 
@@ -1798,8 +1807,8 @@ kustomize: "mastodon": #KustomizeHelm & {
 		apiVersion: "v1"
 		kind:       "Service"
 		metadata: {
-			name:      "mastodon-apache"
-			namespace: "mastodon"
+			name:        "mastodon-apache"
+			"namespace": namespace
 		}
 		spec: {
 			type:                  "ClusterIP"
@@ -1833,4 +1842,19 @@ kustomize: "mastodon": #KustomizeHelm & {
 			}]
 		}
 	}
+
+	psm: "job-mastodon-init": {
+		apiVersion: "batch/v1"
+		kind:       "Job"
+		metadata: {
+			name:        "mastodon-init"
+			"namespace": namespace
+			annotations: {
+				"argocd.argoproj.io/hook":               "Sync"
+				"argocd.argoproj.io/sync-wave":          "0"
+				"argocd.argoproj.io/hook-delete-policy": "BeforeHookCreation,HookSucceeded"
+			}
+		}
+	}
+	// k exec -ti -n mastodon deploy/mastodon-web -- bash -c '. /opt/bitnami/scripts/mastodon-env.sh; tootctl accounts  modify defn --reset-password'
 }

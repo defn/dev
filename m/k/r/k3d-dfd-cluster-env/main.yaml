@@ -171,6 +171,27 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
+  name: k3d-dfd-cluster-famfan
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-cluster
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cluster-famfan
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
   name: k3d-dfd-cluster-hello
   namespace: argocd
 spec:
@@ -200,90 +221,6 @@ spec:
   project: default
   source:
     path: m/k/r/k3d-dfd-cluster-issuer
-    repoURL: https://github.com/defn/dev
-    targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions: []
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "101"
-  name: k3d-dfd-cluster-k3d-dfd-vc0-env
-  namespace: argocd
-spec:
-  destination:
-    name: k3d-dfd-cluster
-  project: default
-  source:
-    path: m/k/r/k3d-dfd-cluster-k3d-dfd-vc0-env
-    repoURL: https://github.com/defn/dev
-    targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions: []
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "30"
-  name: k3d-dfd-cluster-k3d-dfd-vc0-vcluster
-  namespace: argocd
-spec:
-  destination:
-    name: k3d-dfd-cluster
-  project: default
-  source:
-    path: m/k/r/k3d-dfd-cluster-k3d-dfd-vc0-vcluster
-    repoURL: https://github.com/defn/dev
-    targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions: []
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "101"
-  name: k3d-dfd-cluster-k3d-dfd-vc1-env
-  namespace: argocd
-spec:
-  destination:
-    name: k3d-dfd-cluster
-  project: default
-  source:
-    path: m/k/r/k3d-dfd-cluster-k3d-dfd-vc1-env
-    repoURL: https://github.com/defn/dev
-    targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions: []
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "30"
-  name: k3d-dfd-cluster-k3d-dfd-vc1-vcluster
-  namespace: argocd
-spec:
-  destination:
-    name: k3d-dfd-cluster
-  project: default
-  source:
-    path: m/k/r/k3d-dfd-cluster-k3d-dfd-vc1-vcluster
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -390,6 +327,27 @@ spec:
   project: default
   source:
     path: m/k/r/k3d-dfd-cluster-linkerd-crds
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: k3d-dfd-cluster-mastodon
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-cluster
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cluster-mastodon
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
