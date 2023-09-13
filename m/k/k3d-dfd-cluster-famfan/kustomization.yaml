@@ -3,13 +3,13 @@
 patches:
   - path: patch-service-mastodon-apache.yaml
   - path: patch-job-mastodon-init.yaml
-namespace: mastodon
+namespace: famfan
 resources:
   - resource-namespace.yaml
   - resource-ingress-mastodon-apache.yaml
 helmCharts:
   - releaseName: mastodon
-    namespace: mastodon
+    namespace: famfan
     valuesInline:
       initJob:
         createAdmin: true
