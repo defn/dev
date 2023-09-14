@@ -41,6 +41,7 @@ function main {
 		yes | sudo mkfs.ext4 /dev/nvme1n1
 	fi
 
+  mkdir -p /mnt/docker
 	if [[ "$(df /mnt/docker | tail -1 | awk '{print $NF}')" == / ]]; then
 		echo '/dev/nvme1n1 /mnt/docker ext4 defaults,nofail 0 2' | sudo tee -a /etc/fstab
 		sudo mount /mnt/docker
