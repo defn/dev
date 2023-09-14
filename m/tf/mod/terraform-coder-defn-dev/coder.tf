@@ -5,8 +5,6 @@ locals {
 
   coder_name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
 
-  auth = local.aws_ec2_count == 1 ? "aws-instance-identity" : null
-
   user_data = <<EOT
 Content-Type: multipart/mixed; boundary="//"
 MIME-Version: 1.0
@@ -29,14 +27,13 @@ Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment; filename="userdata.txt"
 
 #!/bin/bash
-(setsid sudo -u ${local.username} bash -c 'cd && (git pull || true) && cd m && bin/user-data.sh ${data.coder_workspace.me.access_url}') &
-
+(setsid sudo -u ${local.username} bash -c 'cd && (git pull || true) && cd m && bin/user-data.sh ${data.coder_workspace.me.access_url} ${coder_agent.main.token}') &
 --//--
 EOT
 }
 
 resource "coder_agent" "main" {
-  auth = local.auth
+  auth = "token"
 
   arch                   = "amd64"
   os                     = "linux"
