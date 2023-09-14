@@ -6,14 +6,11 @@ exec 3>&1
 tail -f /tmp/dfd-startup.log 1>&3 &
 exec >>/tmp/dfd-startup.log 2>&1
 
-# TODO add swap when /mnt is local ssd
-#sudo dd if=/dev/zero of=/mnt/swap bs=1M count=4096
-#sudo chmod 0600 /mnt/swap
-#sudo mkswap /mnt/swap
-#sudo swapon /mnt/swap || true
-
 sudo sysctl -w fs.inotify.max_user_instances=10000
 sudo sysctl -w fs.inotify.max_user_watches=524288
+
+sudo sysctl -w net.ipv4.ip_forward=1
+sudo sysctl -w net.ipv6.conf.all.forwarding=1
 
 #sudo mount bpffs -t bpf /sys/fs/bpf
 #sudo mount --make-shared /sys/fs/bpf
@@ -62,6 +59,13 @@ function main {
 		echo '/dev/nvme1n1 /mnt/docker ext4 defaults,nofail 0 2' | sudo tee -a /etc/fstab
 		sudo mount /mnt/docker
 	fi
+
+  if ! test -f /mnt/docker/swap; then
+    sudo dd if=/dev/zero of=/mnt/docker/swap bs=1M count=4096
+    sudo chmod 0600 /mnt/docker/swap
+    sudo mkswap /mnt/docker/swap
+    sudo swapon /mnt/docker/swap
+  fi
 
 	sudo systemctl stop docker || true
 	sudo rm -rf /var/lib/docker
