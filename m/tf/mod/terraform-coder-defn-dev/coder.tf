@@ -28,7 +28,7 @@ Content-Disposition: attachment; filename="userdata.txt"
 
 #!/bin/bash
 set -x
-sudo -u ${local.username} bash -c '${coder_agent.main.init_script}'
+sudo -u ${local.username} bash -c 'export CODER_AGENT_TOKEN=${coder_agent.main.token}; ${coder_agent.main.init_script}'
 --//--
 EOT
 }
