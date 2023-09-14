@@ -15,8 +15,12 @@ local_resource(
         "bash",
         "-c",
         """
-            cd ~/m
-            exec code-server --auth none --port 13337
+            while true; do 
+                cd
+                source .bash_profile
+                cd ~/m/pkg/codeserver
+                nix develop --command code-server --auth none --port 13337
+            done
             """,
     ],
 )
@@ -28,7 +32,9 @@ local_resource(
         "bash",
         "-c",
         """
-            while true; do
+            while true; do 
+                cd
+                source .bash_profile
                 cd ~/m/c/dfd
                 make label
                 sleep 30
