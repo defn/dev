@@ -86,7 +86,6 @@ password-store:
 			git clone git@github.com:$${GIT_AUTHOR_NAME}/password-store ~/work/password-store; \
 		fi; \
 	fi
-	mkdir -p ~/work/password-store/aws-vault
 
 gpg:
 	$(MARK) configure gpg
