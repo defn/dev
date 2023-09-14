@@ -19,7 +19,9 @@ No resources.
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_tsauthkey"></a> [tsauthkey](#input\_tsauthkey) | n/a | `string` | `""` | no |
 
 ## Outputs
 

@@ -27,6 +27,7 @@ No modules.
 | [aws_security_group.dev](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 | [coder_agent.main](https://registry.terraform.io/providers/coder/coder/latest/docs/resources/agent) | resource |
 | [coder_app.code-server](https://registry.terraform.io/providers/coder/coder/latest/docs/resources/app) | resource |
+| [coder_metadata.main](https://registry.terraform.io/providers/coder/coder/latest/docs/resources/metadata) | resource |
 | [aws_ami.ubuntu](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
 | [coder_parameter.instance_type](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter) | data source |
 | [coder_parameter.nix_volume_size](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter) | data source |
@@ -35,7 +36,9 @@ No modules.
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_tsauthkey"></a> [tsauthkey](#input\_tsauthkey) | n/a | `any` | n/a | yes |
 
 ## Outputs
 
