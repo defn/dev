@@ -16,7 +16,7 @@ function main {
 		make nix
 
 		(cd m/pkg/coder && nix develop --command true)
-		(cd m/pkg/code-server && nix develop --command true)
+		(cd m/pkg/codeserver && nix develop --command true)
 		(cd m/pkg/chamber && nix develop --command true)
 		(cd m/pkg/k3sup && nix develop --command true)
 
