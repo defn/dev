@@ -20,7 +20,7 @@ reset:
 	 earthly prune --reset
 
 image:
-	cd base && $(MAKE) build
+	cd docker && $(MAKE) build
 	cd pod && $(MAKE) build
 
 workspace ?= $(shell basename $(shell pwd))
