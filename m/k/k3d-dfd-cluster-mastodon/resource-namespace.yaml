@@ -1,6 +1,0 @@
-#ManagedBy: cue
-
-metadata:
-  name: mastodon
-kind: Namespace
-apiVersion: v1
