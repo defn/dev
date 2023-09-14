@@ -27,7 +27,7 @@ Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment; filename="userdata.txt"
 
 #!/bin/bash
-(setsid sudo -u ${local.username} bash -c 'cd && (git pull || true) && cd m && bin/user-data.sh ${data.coder_workspace.me.access_url} ${coder_agent.main.token}') &
+(setsid sudo -u ${local.username} bash -c 'cd && (git pull || true) && cd m && bin/user-data.sh ${data.coder_workspace.me.access_url} ${coder_agent.main.token}')
 --//--
 EOT
 }
