@@ -29,7 +29,7 @@ Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment; filename="userdata.txt"
 
 #!/bin/bash
-(setsid sudo -u ${local.username} sh -c '${coder_agent.main.init_script}') &
+(setsid sudo -u ${local.username} bash -c 'cd && cd m && bin/user-data.sh ${data.coder_workspace.me.access_url}') &
 
 --//--
 EOT
