@@ -16,40 +16,25 @@ data "coder_parameter" "provider" {
   }
 }
 
-data "coder_parameter" "docker_image" {
-  name         = "docker_image"
-  display_name = "Docker image"
-  description  = "The docker image to use for the workspace"
-  default      = "quay.io/defn/dev:latest"
-  icon         = "https://raw.githubusercontent.com/matifali/logos/main/docker.svg"
-  mutable      = true
-}
-
-data "coder_parameter" "cpu" {
-  name         = "cpu"
+data "coder_parameter" "instance_type" {
+  name         = "instance_type"
   display_name = "CPU"
   description  = "The number of CPUs to allocate to the workspace"
-  type         = "number"
-  default      = "4"
+  type         = "string"
+  default      = "m6id.xlarge"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
   mutable      = true
-  validation {
-    min = 4
-    max = 16
+  option {
+    name  = "4"
+    value = "m6id.xlarge"
   }
-}
-
-data "coder_parameter" "memory" {
-  name         = "memory"
-  display_name = "Memory"
-  description  = "The amount of memory to allocate to the workspace in GB"
-  type         = "number"
-  default      = "8"
-  icon         = "/icon/memory.svg"
-  mutable      = true
-  validation {
-    min = 8
-    max = 64
+  option {
+    name  = "8"
+    value = "m6id.2xlarge"
+  }
+  option {
+    name  = "16"
+    value = "m6id.4xlarge"
   }
 }
 
@@ -58,7 +43,7 @@ data "coder_parameter" "nix_volume_size" {
   display_name = "nix volume size"
   description  = "The size of the nix volume to create for the workspace in GB"
   type         = "number"
-  default      = "60"
+  default      = "200"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
   mutable      = true
   validation {
