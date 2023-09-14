@@ -1,4 +1,4 @@
 SHELL := /bin/bash
 
 docker:
-	earthly --push +build
+	earthly --no-cache --push +build
