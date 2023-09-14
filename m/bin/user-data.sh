@@ -9,4 +9,4 @@ cd
 source .bash_profile
 
 cd ~/m/pkg/coder
-nix develop --command coder agent
+exec nix develop --command coder agent
