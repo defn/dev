@@ -1,5 +1,43 @@
+variable "tsauthkey" {}
+
 locals {
   aws_ec2_count = data.coder_parameter.provider.value == "aws-ec2" ? 1 : 0
+
+  username = "ubuntu"
+
+  coder_name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+
+  user_data = <<EOT
+Content-Type: multipart/mixed; boundary="//"
+MIME-Version: 1.0
+
+--//
+Content-Type: text/cloud-config; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="cloud-config.txt"
+
+#cloud-config
+hostname: ${local.coder_name}
+cloud_final_modules:
+- [scripts-user, always]
+
+--//
+Content-Type: text/x-shellscript; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="userdata.txt"
+
+#!/bin/bash
+set -x
+sudo tailscale up --accept-dns=true --advertise-routes 10.43.0.0/16 --operator ubuntu --ssh --authkey "${var.tsauthkey}"
+sudo install -d -m 0755 ~ubuntu/m/c/dfd/openid
+tailscale serve https /openid ~/m/c/dfd/openid
+tailscale serve status
+
+exec sudo -H -E -u ${local.username} bash -c 'cd && (git pull || true) && cd m && bin/user-data.sh ${data.coder_workspace.me.access_url}'
+--//--
+EOT
 }
 
 data "coder_parameter" "provider" {

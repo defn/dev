@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-export CODER_AGENT_AUTH="token"
+export CODER_AGENT_AUTH="aws-instance-identity"
 export CODER_AGENT_URL="$1"; shift
-export CODER_AGENT_TOKEN="$1"; shift
 
 cd
 set +x

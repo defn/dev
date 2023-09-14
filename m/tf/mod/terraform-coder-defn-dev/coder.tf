@@ -1,40 +1,7 @@
 data "coder_workspace" "me" {}
 
-locals {
-  username = "ubuntu"
-
-  coder_name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
-
-  user_data = <<EOT
-Content-Type: multipart/mixed; boundary="//"
-MIME-Version: 1.0
-
---//
-Content-Type: text/cloud-config; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="cloud-config.txt"
-
-#cloud-config
-hostname: ${local.coder_name}
-cloud_final_modules:
-- [scripts-user, always]
-
---//
-Content-Type: text/x-shellscript; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="userdata.txt"
-
-#!/bin/bash
-set -x
-sudo -u ${local.username} bash -c 'export CODER_AGENT_TOKEN=${coder_agent.main.token}; ${coder_agent.main.init_script}'
---//--
-EOT
-}
-
 resource "coder_agent" "main" {
-  auth = "token"
+  auth = "aws-instance-identity"
 
   arch                   = "amd64"
   os                     = "linux"
@@ -55,6 +22,19 @@ resource "coder_agent" "main" {
 
     LOCAL_ARCHIVE = "/usr/lib/locale/locale-archive"
     LC_ALL        = "C.UTF-8"
+  }
+}
+
+resource "coder_metadata" "main" {
+  count       = local.aws_ec2_count
+  resource_id = aws_instance.dev[count.index].id
+  item {
+    key   = "instance type"
+    value = aws_instance.dev[count.index].instance_type
+  }
+  item {
+    key   = "disk"
+    value = "${aws_instance.dev[count.index].root_block_device[0].volume_size} GiB"
   }
 }
 
