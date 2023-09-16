@@ -63,7 +63,7 @@ resource "aws_iam_instance_profile" "dev" {
 }
 
 resource "aws_secretsmanager_secret" "dev" {
-  name = "local.coder_name-${aws_instance.dev.id}"
+  name = "${local.coder_name}-${aws_instance.dev.id}"
 }
 
 resource "aws_secretsmanager_secret_version" "dev" {
@@ -142,10 +142,6 @@ resource "aws_instance" "dev" {
   tags = {
     Name              = local.coder_name
     Coder_Provisioned = "true"
-  }
-
-  lifecycle {
-    ignore_changes = [ami, user_data]
   }
 }
 
