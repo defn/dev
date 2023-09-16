@@ -1790,7 +1790,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			adminUser:          "defn"
 			adminPassword:      "adminadmin"
 			adminEmail:         "iam@defn.sh"
-			webDomain:          "mastodon.\(cluster.domain_name)"
+			webDomain:          "\(namespace).\(cluster.domain_name)"
 			useSecureWebSocket: true
 		}
 	}
@@ -1830,7 +1830,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		spec: {
 			ingressClassName: "traefik"
 			rules: [{
-				host: "mastodon.\(cluster.domain_name)"
+				host: "\(namespace).\(cluster.domain_name)"
 				http: paths: [{
 					path:     "/"
 					pathType: "Prefix"

@@ -10,7 +10,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: mastodon.dev.amanibhavam.defn.run
+    - host: famfan.dev.amanibhavam.defn.run
       http:
         paths:
           - path: /

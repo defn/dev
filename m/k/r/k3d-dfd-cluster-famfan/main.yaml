@@ -46,11 +46,11 @@ apiVersion: v1
 data:
   mastodon-vhost.conf: |-
     <VirtualHost 127.0.0.1:8080 _default_:8080>
-      ServerName mastodon.dev.amanibhavam.defn.run
+      ServerName famfan.dev.amanibhavam.defn.run
       ServerAlias *
       <Location "/">
         ProxyPass http://mastodon-web:80/
-        ProxyPassReverse mastodon.dev.amanibhavam.defn.run
+        ProxyPassReverse famfan.dev.amanibhavam.defn.run
         ProxyPreserveHost on
         Order allow,deny
         Allow from all
@@ -63,13 +63,13 @@ data:
         RewriteRule /api/(.*)           ws://mastodon-streaming:80/api/$1 [P,L]
         RewriteCond %{HTTP:Upgrade} !=websocket [NC]
         RewriteRule /api/(.*)           http://mastodon-streaming:80/api/$1 [P,L]
-        ProxyPassReverse mastodon.dev.amanibhavam.defn.run
+        ProxyPassReverse famfan.dev.amanibhavam.defn.run
         Order allow,deny
         Allow from all
       </Location>
       <Location "/s3storage">
         ProxyPass http://mastodon-minio:80/s3storage/
-        ProxyPassReverse mastodon.dev.amanibhavam.defn.run
+        ProxyPassReverse famfan.dev.amanibhavam.defn.run
         Order allow,deny
         Allow from all
       </Location>
@@ -103,7 +103,7 @@ data:
   RAILS_ENV: production
   REDIS_HOST: mastodon-redis-master
   REDIS_PORT: "6379"
-  S3_ALIAS_HOST: mastodon.dev.amanibhavam.defn.run/s3storage
+  S3_ALIAS_HOST: famfan.dev.amanibhavam.defn.run/s3storage
   S3_BUCKET: s3storage
   S3_ENABLED: "true"
   S3_ENDPOINT: http://mastodon-minio
@@ -121,8 +121,8 @@ data:
   SMTP_REPLY_TO: ""
   SMTP_SERVER: ""
   SMTP_TLS: "false"
-  STREAMING_API_BASE_URL: wss://mastodon.dev.amanibhavam.defn.run
-  WEB_DOMAIN: mastodon.dev.amanibhavam.defn.run
+  STREAMING_API_BASE_URL: wss://famfan.dev.amanibhavam.defn.run
+  WEB_DOMAIN: famfan.dev.amanibhavam.defn.run
 kind: ConfigMap
 metadata:
   labels:
@@ -370,8 +370,8 @@ metadata:
 apiVersion: v1
 data:
   MASTODON_ADMIN_PASSWORD: YWRtaW5hZG1pbg==
-  OTP_SECRET: UXRrMEl1UVdJag==
-  SECRET_KEY_BASE: NEtpeVhMNVE5Uw==
+  OTP_SECRET: NWlDdUI4R3U0ZA==
+  SECRET_KEY_BASE: aUlYZnM2OWpQSw==
 kind: Secret
 metadata:
   labels:
@@ -385,7 +385,7 @@ metadata:
 ---
 apiVersion: v1
 data:
-  root-password: NkZyTWxvU0h3bw==
+  root-password: dUdKdDI5cktEcg==
   root-user: YWRtaW4=
 kind: Secret
 metadata:
@@ -400,8 +400,8 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  password: U2FuZXRzakpyOA==
-  postgres-password: aENFTFpRM0VIeQ==
+  password: VTBVejFaNVJSag==
+  postgres-password: S0kwRlRzUUZ6eQ==
 kind: Secret
 metadata:
   labels:
@@ -415,7 +415,7 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  redis-password: eG9ubmN1eHJDZw==
+  redis-password: YlBsdnk5bDZ3Vw==
 kind: Secret
 metadata:
   labels:
@@ -907,7 +907,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/credentials-secret: 6eba93a9dfcd7f4f8180bd72fdda7057da8da7fa7521f76ae627955df82b9234
+        checksum/credentials-secret: 97b974fc4d43a71961625220b845b04e1a63992e410a2736e3c03ebea1471a34
       labels:
         app.kubernetes.io/instance: mastodon
         app.kubernetes.io/managed-by: Helm
@@ -2435,7 +2435,7 @@ spec:
         checksum/configmap: 86bcc953bb473748a3d3dc60b7c11f34e60c93519234d4c37f42e22ada559d47
         checksum/health: aff24913d801436ea469d8d374b2ddb3ec4c43ee7ab24663d5f8ff1a1b6991a9
         checksum/scripts: 560c33ff34d845009b51830c332aa05fa211444d1877d3526d3599be7543aaa5
-        checksum/secret: c30807d6daad8796664f891ee3fd463b5a273fdb1b71ca518c374fd729a4d51f
+        checksum/secret: 4da8aa20c1c2cc754772ad4d27a99d6b9640bb89767539c891423eac7da10b2c
       labels:
         app.kubernetes.io/component: master
         app.kubernetes.io/instance: mastodon
@@ -2842,7 +2842,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: mastodon.dev.amanibhavam.defn.run
+  - host: famfan.dev.amanibhavam.defn.run
     http:
       paths:
       - backend:
