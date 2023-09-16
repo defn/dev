@@ -19,6 +19,6 @@ helmCharts:
       webDomain: mastodon.dev.amanibhavam.defn.run
       useSecureWebSocket: true
     name: mastodon
-    version: 2.1.3
+    version: 2.1.4
     repo: https://charts.bitnami.com/bitnami
     includeCRDs: true
