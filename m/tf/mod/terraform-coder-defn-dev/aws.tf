@@ -79,7 +79,7 @@ resource "aws_security_group" "dev" {
 
   vpc_id = aws_default_vpc.default[count.index].id
 
-  egress {
+  ingress {
     description = "allow vpc ingress"
     from_port   = 0
     to_port     = 0
@@ -87,12 +87,22 @@ resource "aws_security_group" "dev" {
     cidr_blocks = ["172.31.32.0/20"]
   }
 
+  ingress {
+    description      = "allow wireguard udp"
+    from_port        = 41641
+    to_port          = 41641
+    protocol         = "udp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
   egress {
-    description = "allow all egress"
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    description      = "allow all egress"
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
   }
 
   tags = {

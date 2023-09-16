@@ -82,5 +82,6 @@
     "width": 120,
     "maxLength": 50
   },
-  "calva.paredit.defaultKeyMap": "strict"
+  "calva.paredit.defaultKeyMap": "strict",
+  "window.zoomLevel": 1
 }
