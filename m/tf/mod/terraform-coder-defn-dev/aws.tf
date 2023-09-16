@@ -63,7 +63,7 @@ resource "aws_iam_instance_profile" "dev" {
 }
 
 resource "aws_secretsmanager_secret" "dev" {
-  name = local.coder_name
+  name = "local.coder_name-${aws_instance.dev.id}"
 }
 
 resource "aws_secretsmanager_secret_version" "dev" {
@@ -147,17 +147,9 @@ resource "aws_instance" "dev" {
   lifecycle {
     ignore_changes = [ami, user_data]
   }
-
-  depends_on = [
-    aws_secretsmanager_secret.dev
-  ]
 }
 
 resource "aws_ec2_instance_state" "dev" {
   instance_id = aws_instance.dev.id
   state       = data.coder_workspace.me.transition == "start" ? "running" : "stopped"
-
-  depends_on = [
-    aws_secretsmanager_secret.dev
-  ]
 }
