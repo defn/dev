@@ -15,6 +15,7 @@ function main {
 
 		make nix
 
+		(cd m/pkg/awscli && nix develop --command true)
 		(cd m/pkg/coder && nix develop --command true)
 		(cd m/pkg/codeserver && nix develop --command true)
 		(cd m/pkg/chamber && nix develop --command true)
