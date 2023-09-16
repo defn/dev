@@ -19,10 +19,10 @@ while [[ -z "${CODER_AGENT_TOKEN}" ]]; do
         cd ~/m/pkg/coder
         nix develop --command true
         cd ~/m/pkg/awscli
-        nix develop --command bash -c "aws secretsmanager get-secret-value --secret-id "${DFD_WORKSPACE_NAME}-${instance_id}" | jq -r '.SecretString | fromjson | .coder_agent_token' > /tmp/.coder-token" || true
+        nix develop --command bash -c "aws secretsmanager get-secret-value --secret-id "${DFD_WORKSPACE_NAME}-${instance_id}" | jq -r '.SecretString | fromjson | .coder_agent-token' > /tmp/.coder-token" || true
     )
-    CODER_AGENT_TOKEN="$(cat /tmp/.coder_token)"
-    echo rm -f /tmp/.coder_token
+    CODER_AGENT_TOKEN="$(cat /tmp/.coder-token)"
+    echo rm -f /tmp/.coder-token
     if [[ -z "${CODER_AGENT_TOKEN}" ]]; then
         sleep 5
     fi
