@@ -60,6 +60,7 @@ function main {
 	sudo systemctl start docker
 
 	cd
+	git branch --set-upstream-to=origin/main main
 	source .bash_profile
 	make install
 }
