@@ -1,7 +1,8 @@
 data "coder_workspace" "me" {}
 
 resource "coder_agent" "main" {
-  auth = "aws-instance-identity"
+  #auth = "aws-instance-identity"
+  auth = "token"
 
   arch                   = "amd64"
   os                     = "linux"
@@ -27,14 +28,14 @@ resource "coder_agent" "main" {
 
 resource "coder_metadata" "main" {
   count       = local.aws_ec2_count
-  resource_id = aws_instance.dev[count.index].id
+  resource_id = aws_instance.dev.id
   item {
     key   = "instance type"
-    value = aws_instance.dev[count.index].instance_type
+    value = aws_instance.dev.instance_type
   }
   item {
     key   = "disk"
-    value = "${aws_instance.dev[count.index].root_block_device[0].volume_size} GiB"
+    value = "${aws_instance.dev.root_block_device[0].volume_size} GiB"
   }
 }
 

@@ -35,7 +35,7 @@ sudo install -d -m 0755 ~ubuntu/m/c/dfd/openid
 tailscale serve https /openid ~/m/c/dfd/openid
 tailscale serve status
 
-exec sudo -H -E -u ${local.username} bash -c 'cd && (git pull || true) && cd m && bin/user-data.sh ${data.coder_workspace.me.access_url}'
+exec sudo -H -E -u ${local.username} bash -c 'cd && (git pull || true) && cd m && bin/user-data.sh ${data.coder_workspace.me.access_url} ${local.coder_name}'
 --//--
 EOT
 }
