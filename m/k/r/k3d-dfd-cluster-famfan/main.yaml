@@ -12,7 +12,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: mastodon
     app.kubernetes.io/part-of: mastodon
-    helm.sh/chart: mastodon-2.1.3
+    helm.sh/chart: mastodon-2.1.4
   name: mastodon
   namespace: famfan
 ---
@@ -45,12 +45,13 @@ metadata:
 apiVersion: v1
 data:
   mastodon-vhost.conf: |-
-    <VirtualHost VirtualHost 127.0.0.1:8080 _default_:8080>
+    <VirtualHost 127.0.0.1:8080 _default_:8080>
       ServerName mastodon.dev.amanibhavam.defn.run
       ServerAlias *
       <Location "/">
         ProxyPass http://mastodon-web:80/
         ProxyPassReverse mastodon.dev.amanibhavam.defn.run
+        ProxyPreserveHost on
         Order allow,deny
         Allow from all
       </Location>
@@ -80,7 +81,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: mastodon
     app.kubernetes.io/part-of: mastodon
-    helm.sh/chart: mastodon-2.1.3
+    helm.sh/chart: mastodon-2.1.4
   name: mastodon-apache-mastodon-vhost
   namespace: famfan
 ---
@@ -129,7 +130,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: mastodon
     app.kubernetes.io/part-of: mastodon
-    helm.sh/chart: mastodon-2.1.3
+    helm.sh/chart: mastodon-2.1.4
   name: mastodon-default
   namespace: famfan
 ---
@@ -184,7 +185,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: mastodon
     app.kubernetes.io/part-of: mastodon
-    helm.sh/chart: mastodon-2.1.3
+    helm.sh/chart: mastodon-2.1.4
   name: mastodon-init-scripts
   namespace: famfan
 ---
@@ -369,8 +370,8 @@ metadata:
 apiVersion: v1
 data:
   MASTODON_ADMIN_PASSWORD: YWRtaW5hZG1pbg==
-  OTP_SECRET: amh3Y25VUHhIOQ==
-  SECRET_KEY_BASE: TXU1c2NKckkyTA==
+  OTP_SECRET: VDA5cWNlQU5yUg==
+  SECRET_KEY_BASE: alBPOUhrRGNjSg==
 kind: Secret
 metadata:
   labels:
@@ -378,13 +379,13 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: mastodon
     app.kubernetes.io/part-of: mastodon
-    helm.sh/chart: mastodon-2.1.3
+    helm.sh/chart: mastodon-2.1.4
   name: mastodon-default
   namespace: famfan
 ---
 apiVersion: v1
 data:
-  root-password: V2d2MnRGdWJ3ZQ==
+  root-password: bWdhMTBtTXZ1Rg==
   root-user: YWRtaW4=
 kind: Secret
 metadata:
@@ -399,8 +400,8 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  password: RlpndlA4NVk2bQ==
-  postgres-password: ODJqWWNFbUFpWQ==
+  password: eXpQT0IwMHAxUQ==
+  postgres-password: dlBkZk9KOGVVNA==
 kind: Secret
 metadata:
   labels:
@@ -414,7 +415,7 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  redis-password: SEljdllkOHhTUQ==
+  redis-password: NmdaUkFnb0o3cQ==
 kind: Secret
 metadata:
   labels:
@@ -437,7 +438,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: mastodon
     app.kubernetes.io/part-of: mastodon
-    helm.sh/chart: mastodon-2.1.3
+    helm.sh/chart: mastodon-2.1.4
   name: mastodon-smtp
   namespace: famfan
 ---
@@ -731,7 +732,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: mastodon
     app.kubernetes.io/part-of: mastodon
-    helm.sh/chart: mastodon-2.1.3
+    helm.sh/chart: mastodon-2.1.4
   name: mastodon-streaming
   namespace: famfan
 spec:
@@ -757,7 +758,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: mastodon
     app.kubernetes.io/part-of: mastodon
-    helm.sh/chart: mastodon-2.1.3
+    helm.sh/chart: mastodon-2.1.4
   name: mastodon-web
   namespace: famfan
 spec:
@@ -906,7 +907,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/credentials-secret: b4d73620a95b789b9877711023f58d25fd605e3d043bf1b59445f7f7dcaebef1
+        checksum/credentials-secret: cba15be83529b2002d206a7fa19f950314e10ea455f27459d4b781f26eadf8c5
       labels:
         app.kubernetes.io/instance: mastodon
         app.kubernetes.io/managed-by: Helm
@@ -1006,7 +1007,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: mastodon
     app.kubernetes.io/part-of: mastodon
-    helm.sh/chart: mastodon-2.1.3
+    helm.sh/chart: mastodon-2.1.4
   name: mastodon-sidekiq
   namespace: famfan
 spec:
@@ -1025,7 +1026,7 @@ spec:
         app.kubernetes.io/instance: mastodon
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: mastodon
-        helm.sh/chart: mastodon-2.1.3
+        helm.sh/chart: mastodon-2.1.4
     spec:
       affinity:
         nodeAffinity: null
@@ -1207,7 +1208,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: mastodon
     app.kubernetes.io/part-of: mastodon
-    helm.sh/chart: mastodon-2.1.3
+    helm.sh/chart: mastodon-2.1.4
   name: mastodon-streaming
   namespace: famfan
 spec:
@@ -1226,7 +1227,7 @@ spec:
         app.kubernetes.io/instance: mastodon
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: mastodon
-        helm.sh/chart: mastodon-2.1.3
+        helm.sh/chart: mastodon-2.1.4
     spec:
       affinity:
         nodeAffinity: null
@@ -1418,7 +1419,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: mastodon
     app.kubernetes.io/part-of: mastodon
-    helm.sh/chart: mastodon-2.1.3
+    helm.sh/chart: mastodon-2.1.4
   name: mastodon-web
   namespace: famfan
 spec:
@@ -1437,7 +1438,7 @@ spec:
         app.kubernetes.io/instance: mastodon
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: mastodon
-        helm.sh/chart: mastodon-2.1.3
+        helm.sh/chart: mastodon-2.1.4
     spec:
       affinity:
         nodeAffinity: null
@@ -2434,7 +2435,7 @@ spec:
         checksum/configmap: 86bcc953bb473748a3d3dc60b7c11f34e60c93519234d4c37f42e22ada559d47
         checksum/health: aff24913d801436ea469d8d374b2ddb3ec4c43ee7ab24663d5f8ff1a1b6991a9
         checksum/scripts: 560c33ff34d845009b51830c332aa05fa211444d1877d3526d3599be7543aaa5
-        checksum/secret: 8eaae125b90a38a3b800d391d43a79c04e80004800bf2a3b187be32b7c67162e
+        checksum/secret: 06db3a38effb9bebca311bfdf07a1885f11e42696088b8bf1f534e5ff0b21b02
       labels:
         app.kubernetes.io/component: master
         app.kubernetes.io/instance: mastodon
@@ -2586,7 +2587,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: mastodon
     app.kubernetes.io/part-of: mastodon
-    helm.sh/chart: mastodon-2.1.3
+    helm.sh/chart: mastodon-2.1.4
   name: mastodon-init
   namespace: famfan
 spec:
@@ -2598,7 +2599,7 @@ spec:
         app.kubernetes.io/instance: mastodon
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: mastodon
-        helm.sh/chart: mastodon-2.1.3
+        helm.sh/chart: mastodon-2.1.4
     spec:
       containers:
       - args:
