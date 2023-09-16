@@ -16,7 +16,7 @@ helmCharts:
       adminUser: defn
       adminPassword: adminadmin
       adminEmail: iam@defn.sh
-      webDomain: mastodon.dev.amanibhavam.defn.run
+      webDomain: famfan.dev.amanibhavam.defn.run
       useSecureWebSocket: true
     name: mastodon
     version: 2.1.4
