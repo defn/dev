@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: famfan
+  name: mastodon
 ---
 apiVersion: v1
 automountServiceAccountToken: true
@@ -14,7 +14,7 @@ metadata:
     app.kubernetes.io/part-of: mastodon
     helm.sh/chart: mastodon-2.1.4
   name: mastodon
-  namespace: famfan
+  namespace: mastodon
 ---
 apiVersion: v1
 automountServiceAccountToken: true
@@ -26,7 +26,7 @@ metadata:
     app.kubernetes.io/name: minio
     helm.sh/chart: minio-12.8.2
   name: mastodon-minio
-  namespace: famfan
+  namespace: mastodon
 secrets:
 - name: mastodon-minio
 ---
@@ -40,7 +40,7 @@ metadata:
     app.kubernetes.io/name: redis
     helm.sh/chart: redis-18.0.2
   name: mastodon-redis
-  namespace: famfan
+  namespace: mastodon
 ---
 apiVersion: v1
 data:
@@ -83,7 +83,7 @@ metadata:
     app.kubernetes.io/part-of: mastodon
     helm.sh/chart: mastodon-2.1.4
   name: mastodon-apache-mastodon-vhost
-  namespace: famfan
+  namespace: mastodon
 ---
 apiVersion: v1
 data:
@@ -132,7 +132,7 @@ metadata:
     app.kubernetes.io/part-of: mastodon
     helm.sh/chart: mastodon-2.1.4
   name: mastodon-default
-  namespace: famfan
+  namespace: mastodon
 ---
 apiVersion: v1
 data:
@@ -187,7 +187,7 @@ metadata:
     app.kubernetes.io/part-of: mastodon
     helm.sh/chart: mastodon-2.1.4
   name: mastodon-init-scripts
-  namespace: famfan
+  namespace: mastodon
 ---
 apiVersion: v1
 data: null
@@ -200,7 +200,7 @@ metadata:
     app.kubernetes.io/name: minio
     helm.sh/chart: minio-12.8.2
   name: mastodon-minio-provisioning
-  namespace: famfan
+  namespace: mastodon
 ---
 apiVersion: v1
 data:
@@ -231,7 +231,7 @@ metadata:
     app.kubernetes.io/name: redis
     helm.sh/chart: redis-18.0.2
   name: mastodon-redis-configuration
-  namespace: famfan
+  namespace: mastodon
 ---
 apiVersion: v1
 data:
@@ -337,7 +337,7 @@ metadata:
     app.kubernetes.io/name: redis
     helm.sh/chart: redis-18.0.2
   name: mastodon-redis-health
-  namespace: famfan
+  namespace: mastodon
 ---
 apiVersion: v1
 data:
@@ -365,13 +365,13 @@ metadata:
     app.kubernetes.io/name: redis
     helm.sh/chart: redis-18.0.2
   name: mastodon-redis-scripts
-  namespace: famfan
+  namespace: mastodon
 ---
 apiVersion: v1
 data:
   MASTODON_ADMIN_PASSWORD: YWRtaW5hZG1pbg==
-  OTP_SECRET: UXRrMEl1UVdJag==
-  SECRET_KEY_BASE: NEtpeVhMNVE5Uw==
+  OTP_SECRET: UTJqNXptcFJLcw==
+  SECRET_KEY_BASE: MExuaHZYZ0hscQ==
 kind: Secret
 metadata:
   labels:
@@ -381,11 +381,11 @@ metadata:
     app.kubernetes.io/part-of: mastodon
     helm.sh/chart: mastodon-2.1.4
   name: mastodon-default
-  namespace: famfan
+  namespace: mastodon
 ---
 apiVersion: v1
 data:
-  root-password: NkZyTWxvU0h3bw==
+  root-password: a081MHNmNGdsNQ==
   root-user: YWRtaW4=
 kind: Secret
 metadata:
@@ -395,13 +395,13 @@ metadata:
     app.kubernetes.io/name: minio
     helm.sh/chart: minio-12.8.2
   name: mastodon-minio
-  namespace: famfan
+  namespace: mastodon
 type: Opaque
 ---
 apiVersion: v1
 data:
-  password: U2FuZXRzakpyOA==
-  postgres-password: aENFTFpRM0VIeQ==
+  password: V3NTSExiR0FOUw==
+  postgres-password: dkhzUUdpZFhTSQ==
 kind: Secret
 metadata:
   labels:
@@ -410,12 +410,12 @@ metadata:
     app.kubernetes.io/name: postgresql
     helm.sh/chart: postgresql-12.10.1
   name: mastodon-postgresql
-  namespace: famfan
+  namespace: mastodon
 type: Opaque
 ---
 apiVersion: v1
 data:
-  redis-password: eG9ubmN1eHJDZw==
+  redis-password: bVZpcGExdUhWVQ==
 kind: Secret
 metadata:
   labels:
@@ -424,7 +424,7 @@ metadata:
     app.kubernetes.io/name: redis
     helm.sh/chart: redis-18.0.2
   name: mastodon-redis
-  namespace: famfan
+  namespace: mastodon
 type: Opaque
 ---
 apiVersion: v1
@@ -440,7 +440,7 @@ metadata:
     app.kubernetes.io/part-of: mastodon
     helm.sh/chart: mastodon-2.1.4
   name: mastodon-smtp
-  namespace: famfan
+  namespace: mastodon
 ---
 apiVersion: v1
 kind: Service
@@ -451,7 +451,7 @@ metadata:
     app.kubernetes.io/name: apache
     helm.sh/chart: apache-9.6.5
   name: mastodon-apache
-  namespace: famfan
+  namespace: mastodon
 spec:
   loadBalancerSourceRanges: []
   ports:
@@ -477,7 +477,7 @@ metadata:
     app.kubernetes.io/name: elasticsearch
     helm.sh/chart: elasticsearch-19.11.0
   name: mastodon-elasticsearch
-  namespace: famfan
+  namespace: mastodon
 spec:
   ports:
   - name: tcp-rest-api
@@ -504,7 +504,7 @@ metadata:
     app.kubernetes.io/name: elasticsearch
     helm.sh/chart: elasticsearch-19.11.0
   name: mastodon-elasticsearch-coordinating-hl
-  namespace: famfan
+  namespace: mastodon
 spec:
   clusterIP: None
   ports:
@@ -531,7 +531,7 @@ metadata:
     app.kubernetes.io/name: elasticsearch
     helm.sh/chart: elasticsearch-19.11.0
   name: mastodon-elasticsearch-data-hl
-  namespace: famfan
+  namespace: mastodon
 spec:
   clusterIP: None
   ports:
@@ -558,7 +558,7 @@ metadata:
     app.kubernetes.io/name: elasticsearch
     helm.sh/chart: elasticsearch-19.11.0
   name: mastodon-elasticsearch-ingest-hl
-  namespace: famfan
+  namespace: mastodon
 spec:
   clusterIP: None
   ports:
@@ -585,7 +585,7 @@ metadata:
     app.kubernetes.io/name: elasticsearch
     helm.sh/chart: elasticsearch-19.11.0
   name: mastodon-elasticsearch-master-hl
-  namespace: famfan
+  namespace: mastodon
 spec:
   clusterIP: None
   ports:
@@ -611,7 +611,7 @@ metadata:
     app.kubernetes.io/name: minio
     helm.sh/chart: minio-12.8.2
   name: mastodon-minio
-  namespace: famfan
+  namespace: mastodon
 spec:
   ports:
   - name: minio-api
@@ -637,7 +637,7 @@ metadata:
     app.kubernetes.io/name: postgresql
     helm.sh/chart: postgresql-12.10.1
   name: mastodon-postgresql
-  namespace: famfan
+  namespace: mastodon
 spec:
   ports:
   - name: tcp-postgresql
@@ -663,7 +663,7 @@ metadata:
     app.kubernetes.io/name: postgresql
     helm.sh/chart: postgresql-12.10.1
   name: mastodon-postgresql-hl
-  namespace: famfan
+  namespace: mastodon
 spec:
   clusterIP: None
   ports:
@@ -686,7 +686,7 @@ metadata:
     app.kubernetes.io/name: redis
     helm.sh/chart: redis-18.0.2
   name: mastodon-redis-headless
-  namespace: famfan
+  namespace: mastodon
 spec:
   clusterIP: None
   ports:
@@ -708,7 +708,7 @@ metadata:
     app.kubernetes.io/name: redis
     helm.sh/chart: redis-18.0.2
   name: mastodon-redis-master
-  namespace: famfan
+  namespace: mastodon
 spec:
   internalTrafficPolicy: Cluster
   ports:
@@ -734,7 +734,7 @@ metadata:
     app.kubernetes.io/part-of: mastodon
     helm.sh/chart: mastodon-2.1.4
   name: mastodon-streaming
-  namespace: famfan
+  namespace: mastodon
 spec:
   ports:
   - name: http
@@ -760,7 +760,7 @@ metadata:
     app.kubernetes.io/part-of: mastodon
     helm.sh/chart: mastodon-2.1.4
   name: mastodon-web
-  namespace: famfan
+  namespace: mastodon
 spec:
   ports:
   - name: http
@@ -784,7 +784,7 @@ metadata:
     app.kubernetes.io/name: minio
     helm.sh/chart: minio-12.8.2
   name: mastodon-minio
-  namespace: famfan
+  namespace: mastodon
 spec:
   accessModes:
   - ReadWriteOnce
@@ -801,7 +801,7 @@ metadata:
     app.kubernetes.io/name: apache
     helm.sh/chart: apache-9.6.5
   name: mastodon-apache
-  namespace: famfan
+  namespace: mastodon
 spec:
   replicas: 1
   revisionHistoryLimit: 10
@@ -896,7 +896,7 @@ metadata:
     app.kubernetes.io/name: minio
     helm.sh/chart: minio-12.8.2
   name: mastodon-minio
-  namespace: famfan
+  namespace: mastodon
 spec:
   selector:
     matchLabels:
@@ -907,7 +907,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/credentials-secret: 6eba93a9dfcd7f4f8180bd72fdda7057da8da7fa7521f76ae627955df82b9234
+        checksum/credentials-secret: 7a0ff27ba7f3ae05566f1881031ccf4981c886ea921e449361800e2831d851c3
       labels:
         app.kubernetes.io/instance: mastodon
         app.kubernetes.io/managed-by: Helm
@@ -1009,7 +1009,7 @@ metadata:
     app.kubernetes.io/part-of: mastodon
     helm.sh/chart: mastodon-2.1.4
   name: mastodon-sidekiq
-  namespace: famfan
+  namespace: mastodon
 spec:
   replicas: 1
   selector:
@@ -1210,7 +1210,7 @@ metadata:
     app.kubernetes.io/part-of: mastodon
     helm.sh/chart: mastodon-2.1.4
   name: mastodon-streaming
-  namespace: famfan
+  namespace: mastodon
 spec:
   replicas: 1
   selector:
@@ -1421,7 +1421,7 @@ metadata:
     app.kubernetes.io/part-of: mastodon
     helm.sh/chart: mastodon-2.1.4
   name: mastodon-web
-  namespace: famfan
+  namespace: mastodon
 spec:
   replicas: 1
   selector:
@@ -1707,7 +1707,7 @@ metadata:
     app.kubernetes.io/name: elasticsearch
     helm.sh/chart: elasticsearch-19.11.0
   name: mastodon-elasticsearch-coordinating
-  namespace: famfan
+  namespace: mastodon
 spec:
   podManagementPolicy: Parallel
   replicas: 1
@@ -1751,7 +1751,7 @@ spec:
         - name: ELASTICSEARCH_HTTP_PORT_NUMBER
           value: "9200"
         - name: ELASTICSEARCH_CLUSTER_HOSTS
-          value: mastodon-elasticsearch-master-hl.famfan.svc.cluster.local,mastodon-elasticsearch-coordinating-hl.famfan.svc.cluster.local,mastodon-elasticsearch-data-hl.famfan.svc.cluster.local,mastodon-elasticsearch-ingest-hl.famfan.svc.cluster.local,
+          value: mastodon-elasticsearch-master-hl.mastodon.svc.cluster.local,mastodon-elasticsearch-coordinating-hl.mastodon.svc.cluster.local,mastodon-elasticsearch-data-hl.mastodon.svc.cluster.local,mastodon-elasticsearch-ingest-hl.mastodon.svc.cluster.local,
         - name: ELASTICSEARCH_TOTAL_NODES
           value: "2"
         - name: ELASTICSEARCH_CLUSTER_MASTER_HOSTS
@@ -1759,7 +1759,7 @@ spec:
         - name: ELASTICSEARCH_MINIMUM_MASTER_NODES
           value: "1"
         - name: ELASTICSEARCH_ADVERTISED_HOSTNAME
-          value: $(MY_POD_NAME).mastodon-elasticsearch-coordinating-hl.famfan.svc.cluster.local
+          value: $(MY_POD_NAME).mastodon-elasticsearch-coordinating-hl.mastodon.svc.cluster.local
         - name: ELASTICSEARCH_HEAP_SIZE
           value: 128m
         image: docker.io/bitnami/elasticsearch:8.9.1-debian-11-r2
@@ -1843,7 +1843,7 @@ metadata:
     app.kubernetes.io/name: elasticsearch
     helm.sh/chart: elasticsearch-19.11.0
   name: mastodon-elasticsearch-data
-  namespace: famfan
+  namespace: mastodon
 spec:
   podManagementPolicy: Parallel
   replicas: 1
@@ -1887,7 +1887,7 @@ spec:
         - name: ELASTICSEARCH_CLUSTER_NAME
           value: elastic
         - name: ELASTICSEARCH_CLUSTER_HOSTS
-          value: mastodon-elasticsearch-master-hl.famfan.svc.cluster.local,mastodon-elasticsearch-coordinating-hl.famfan.svc.cluster.local,mastodon-elasticsearch-data-hl.famfan.svc.cluster.local,mastodon-elasticsearch-ingest-hl.famfan.svc.cluster.local,
+          value: mastodon-elasticsearch-master-hl.mastodon.svc.cluster.local,mastodon-elasticsearch-coordinating-hl.mastodon.svc.cluster.local,mastodon-elasticsearch-data-hl.mastodon.svc.cluster.local,mastodon-elasticsearch-ingest-hl.mastodon.svc.cluster.local,
         - name: ELASTICSEARCH_TOTAL_NODES
           value: "2"
         - name: ELASTICSEARCH_CLUSTER_MASTER_HOSTS
@@ -1895,7 +1895,7 @@ spec:
         - name: ELASTICSEARCH_MINIMUM_MASTER_NODES
           value: "1"
         - name: ELASTICSEARCH_ADVERTISED_HOSTNAME
-          value: $(MY_POD_NAME).mastodon-elasticsearch-data-hl.famfan.svc.cluster.local
+          value: $(MY_POD_NAME).mastodon-elasticsearch-data-hl.mastodon.svc.cluster.local
         - name: ELASTICSEARCH_HEAP_SIZE
           value: 1024m
         image: docker.io/bitnami/elasticsearch:8.9.1-debian-11-r2
@@ -1986,7 +1986,7 @@ metadata:
     app.kubernetes.io/name: elasticsearch
     helm.sh/chart: elasticsearch-19.11.0
   name: mastodon-elasticsearch-ingest
-  namespace: famfan
+  namespace: mastodon
 spec:
   podManagementPolicy: Parallel
   replicas: 1
@@ -2030,7 +2030,7 @@ spec:
         - name: ELASTICSEARCH_CLUSTER_NAME
           value: elastic
         - name: ELASTICSEARCH_CLUSTER_HOSTS
-          value: mastodon-elasticsearch-master-hl.famfan.svc.cluster.local,mastodon-elasticsearch-coordinating-hl.famfan.svc.cluster.local,mastodon-elasticsearch-data-hl.famfan.svc.cluster.local,mastodon-elasticsearch-ingest-hl.famfan.svc.cluster.local,
+          value: mastodon-elasticsearch-master-hl.mastodon.svc.cluster.local,mastodon-elasticsearch-coordinating-hl.mastodon.svc.cluster.local,mastodon-elasticsearch-data-hl.mastodon.svc.cluster.local,mastodon-elasticsearch-ingest-hl.mastodon.svc.cluster.local,
         - name: ELASTICSEARCH_TOTAL_NODES
           value: "2"
         - name: ELASTICSEARCH_CLUSTER_MASTER_HOSTS
@@ -2038,7 +2038,7 @@ spec:
         - name: ELASTICSEARCH_MINIMUM_MASTER_NODES
           value: "1"
         - name: ELASTICSEARCH_ADVERTISED_HOSTNAME
-          value: $(MY_POD_NAME).mastodon-elasticsearch-ingest-hl.famfan.svc.cluster.local
+          value: $(MY_POD_NAME).mastodon-elasticsearch-ingest-hl.mastodon.svc.cluster.local
         - name: ELASTICSEARCH_HEAP_SIZE
           value: 128m
         image: docker.io/bitnami/elasticsearch:8.9.1-debian-11-r2
@@ -2122,7 +2122,7 @@ metadata:
     app.kubernetes.io/name: elasticsearch
     helm.sh/chart: elasticsearch-19.11.0
   name: mastodon-elasticsearch-master
-  namespace: famfan
+  namespace: mastodon
 spec:
   podManagementPolicy: Parallel
   replicas: 1
@@ -2166,7 +2166,7 @@ spec:
         - name: ELASTICSEARCH_CLUSTER_NAME
           value: elastic
         - name: ELASTICSEARCH_CLUSTER_HOSTS
-          value: mastodon-elasticsearch-master-hl.famfan.svc.cluster.local,mastodon-elasticsearch-coordinating-hl.famfan.svc.cluster.local,mastodon-elasticsearch-data-hl.famfan.svc.cluster.local,mastodon-elasticsearch-ingest-hl.famfan.svc.cluster.local,
+          value: mastodon-elasticsearch-master-hl.mastodon.svc.cluster.local,mastodon-elasticsearch-coordinating-hl.mastodon.svc.cluster.local,mastodon-elasticsearch-data-hl.mastodon.svc.cluster.local,mastodon-elasticsearch-ingest-hl.mastodon.svc.cluster.local,
         - name: ELASTICSEARCH_TOTAL_NODES
           value: "2"
         - name: ELASTICSEARCH_CLUSTER_MASTER_HOSTS
@@ -2174,7 +2174,7 @@ spec:
         - name: ELASTICSEARCH_MINIMUM_MASTER_NODES
           value: "1"
         - name: ELASTICSEARCH_ADVERTISED_HOSTNAME
-          value: $(MY_POD_NAME).mastodon-elasticsearch-master-hl.famfan.svc.cluster.local
+          value: $(MY_POD_NAME).mastodon-elasticsearch-master-hl.mastodon.svc.cluster.local
         - name: ELASTICSEARCH_HEAP_SIZE
           value: 128m
         image: docker.io/bitnami/elasticsearch:8.9.1-debian-11-r2
@@ -2262,7 +2262,7 @@ metadata:
     app.kubernetes.io/name: postgresql
     helm.sh/chart: postgresql-12.10.1
   name: mastodon-postgresql
-  namespace: famfan
+  namespace: mastodon
 spec:
   replicas: 1
   selector:
@@ -2420,7 +2420,7 @@ metadata:
     app.kubernetes.io/name: redis
     helm.sh/chart: redis-18.0.2
   name: mastodon-redis-master
-  namespace: famfan
+  namespace: mastodon
 spec:
   replicas: 1
   selector:
@@ -2435,7 +2435,7 @@ spec:
         checksum/configmap: 86bcc953bb473748a3d3dc60b7c11f34e60c93519234d4c37f42e22ada559d47
         checksum/health: aff24913d801436ea469d8d374b2ddb3ec4c43ee7ab24663d5f8ff1a1b6991a9
         checksum/scripts: 560c33ff34d845009b51830c332aa05fa211444d1877d3526d3599be7543aaa5
-        checksum/secret: c30807d6daad8796664f891ee3fd463b5a273fdb1b71ca518c374fd729a4d51f
+        checksum/secret: be8cdc3c7908adfe9798db8a400ae5f6c680f3d8e37f62f36c1f2dda66d2c36e
       labels:
         app.kubernetes.io/component: master
         app.kubernetes.io/instance: mastodon
@@ -2589,7 +2589,7 @@ metadata:
     app.kubernetes.io/part-of: mastodon
     helm.sh/chart: mastodon-2.1.4
   name: mastodon-init
-  namespace: famfan
+  namespace: mastodon
 spec:
   backoffLimit: 10
   template:
@@ -2710,7 +2710,7 @@ metadata:
     app.kubernetes.io/name: minio
     helm.sh/chart: minio-12.8.2
   name: mastodon-minio-provisioning
-  namespace: famfan
+  namespace: mastodon
 spec:
   parallelism: 1
   template:
@@ -2838,7 +2838,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
   name: mastodon-apache
-  namespace: famfan
+  namespace: mastodon
 spec:
   ingressClassName: traefik
   rules:

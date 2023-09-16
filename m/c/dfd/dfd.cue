@@ -55,6 +55,7 @@ infra: {
 		"hello": [100, ""]
 		"pihole": [100, ""]
 		"coder": [100, ""]
+		"mastodon": [100, ""]
 		"famfan": [100, ""]
 	}
 
