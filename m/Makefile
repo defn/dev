@@ -20,11 +20,18 @@ ci:
 	env BUILDKITE_AGENT_DISCONNECT_AFTER_IDLE_TIMEOUT=$(timeout) buildkite-agent start --build-path ~/work/buildkite-agent --plugins-path ~/work/buildkite-plugins --token "$$(pass BUILDKITE_AGENT_TOKEN)"
 
 .PHONY: dev
+dev-clean:
+	rm -rf ~/Library/App*/coderv2/postgres
+
+dev-init:
+	coder login https://immanent.tail3884f.ts.net --first-user-username="admin" --first-user-email="iam+admin@defn.sh" --first-user-password="Admin123456789,,," --first-user-trial=false
+
 dev:
-# rm -rf ~/Library/App*/coderv2/postgres
-# coder login https://immanent.tail3884f.ts.net --first-user-username="admin" --first-user-email="iam+admin@defn.sh" --first-user-password="Admin123456789,,," --first-user-trial=false
 	pass hello
-	coder server --oauth2-github-allow-signups --oauth2-github-allowed-orgs $$(pass coder_oauth2-github-allowed-orgs) --oauth2-github-allowed-teams $$(pass coder_oauth2-github-allowed-teams) --oauth2-github-client-id $$(pass coder_oauth2-github-client-id) --oauth2-github-client-secret $$(pass coder_oauth2-github-client-secret) --access-url https://immanent.tail3884f.ts.net
+	coder server --oauth2-github-allow-signups \
+		--oauth2-github-allowed-orgs $$(pass coder_oauth2-github-allowed-orgs) --oauth2-github-allowed-teams $$(pass coder_oauth2-github-allowed-teams) \
+		--oauth2-github-client-id $$(pass coder_oauth2-github-client-id) --oauth2-github-client-secret $$(pass coder_oauth2-github-client-secret) \
+		--access-url https://immanent.tail3884f.ts.net
 
 cdktf:
 	npm install
