@@ -18,6 +18,7 @@ todo:
 
 ci:
 	env BUILDKITE_AGENT_DISCONNECT_AFTER_IDLE_TIMEOUT=$(timeout) buildkite-agent start --build-path ~/work/buildkite-agent --plugins-path ~/work/buildkite-plugins --token "$$(pass BUILDKITE_AGENT_TOKEN)"
+	cd && $(MAKE) install
 
 .PHONY: dev
 dev-clean:
@@ -81,7 +82,6 @@ bazel-ignore:
 za:
 	pass hello
 	$(MAKE) ci
-	cd .. && $(MAKE) install
 	bin/make-k3d init || true
 	cd coder && ( $(MAKE) image || $(MAKE) image )
 
