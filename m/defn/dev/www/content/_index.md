@@ -36,4 +36,8 @@ Upgrade brew packages
 env -u SUDO_ASKPASS brew upgrade
 ```
 
+### Lessons
+
+[m/dev](https://coder.dev.amanibhavam.defn.run/templates/pod/workspace?mode=auto&param.workdir=/home/ubuntu/m/dev)
+
 <a rel="me" href="https://hachyderm.io/@defn">Mastodon</a>
