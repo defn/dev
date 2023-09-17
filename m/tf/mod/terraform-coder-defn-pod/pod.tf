@@ -15,6 +15,7 @@ resource "kubernetes_service_account" "main" {
 }
 
 resource "helm_release" "main" {
+  count      = 0
   name       = "vcluster"
   namespace  = local.ns
   repository = "https://charts.loft.sh"
