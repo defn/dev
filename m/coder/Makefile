@@ -5,7 +5,7 @@ run:
 	bash -c 'eval "$$(direnv hook bash)"; _direnv_hook; $(MAKE) run-inner'
 
 run-inner:
-	screen -S tilt -d -m tilt up --stream
+	echo screen -S tilt -d -m tilt up --stream
 
 push:
 	tf fmt
