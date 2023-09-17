@@ -14,7 +14,7 @@ push:
 	tar -cvh --exclude .terraform . | coder templates push -y --create -d - "$(template)"
 
 build:
-	earthly --no-cache --push --no-output +build
+	earthly --push --no-output +build
 
 reset:
 	 earthly prune --reset
