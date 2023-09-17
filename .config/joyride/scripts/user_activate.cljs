@@ -26,14 +26,14 @@
 
 (defn- tutorial []
   ;; open tutorial.cue
-  (p/let [doc (vscode/workspace.openTextDocument (path/join vscode/workspace.rootPath "tutorial.cue"))
+  (p/let [doc (vscode/workspace.openTextDocument (path/join vscode/workspace.rootPath "lesson" "tutorial.cue"))
           meh (vscode/window.showTextDocument doc #js {:preview false, :preserveFocus false, :viewColumn: vscode/ViewColumn.One})]
     ;; split editor TODO does this execute async? if so, then it's not guaranteed the tutorial loads in column two
     (vscode/commands.executeCommand "workbench.action.moveEditorToPreviousGroup")
 
     ;; open tutorial.html
     (p/let [panel (vscode/window.createWebviewPanel "tutorial" "tutorial" vscode/ViewColumn.Two #js {:enableScripts true})
-            uri (vscode/Uri.file (path/join vscode/workspace.rootPath "tutorial.html"))
+            uri (vscode/Uri.file (path/join vscode/workspace.rootPath "lesson" "tutorial.html"))
             data (vscode/workspace.fs.readFile uri)
             html (.decode (js/TextDecoder. "utf-8") data)]
       (set! (.. panel -webview -html) (str html))))
