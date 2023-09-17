@@ -18,7 +18,7 @@ todo:
 
 ci:
 	cd defn/dev/www && $(MAKE) build
-	git add docs
+	cd && git add docs
 	git commit -m 'update docs' || true
 	git push
 	env BUILDKITE_AGENT_DISCONNECT_AFTER_IDLE_TIMEOUT=$(timeout) buildkite-agent start --build-path ~/work/buildkite-agent --plugins-path ~/work/buildkite-plugins --token "$$(pass BUILDKITE_AGENT_TOKEN)"
