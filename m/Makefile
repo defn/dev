@@ -83,7 +83,7 @@ za:
 	pass hello
 	$(MAKE) ci
 	bin/make-k3d init || true
-	cd coder/pod & $(MAKE) build
+	cd coder/pod && $(MAKE) build
 
 warudo:
 	bin/make-k3d up
