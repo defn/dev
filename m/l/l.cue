@@ -47,7 +47,7 @@ html: #HTML
 	html: string | *content.html
 }
 
-#PageContent: {
+#PageContent: #Content & {
 	content: html: string
 	html: """
 		<div class="mx-auto max-w-3xl text-base text-gray-700">
@@ -56,7 +56,7 @@ html: #HTML
 		"""
 }
 
-#TitleContent: {
+#TitleContent: #Content & {
 	title: string
 	desc:  string
 	html:  """
@@ -65,7 +65,7 @@ html: #HTML
 		"""
 }
 
-#SectionContent: {
+#SectionContent: #Content & {
 	title: string
 	content: {
 		html: string
@@ -79,7 +79,7 @@ html: #HTML
 		"""
 }
 
-#ListContent: {
+#ListContent: #Content & {
 	items: [...{
 		title: string
 		desc:  string
