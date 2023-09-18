@@ -1,6 +1,6 @@
 package l
 
-#Page: content: (#Tutorial & {
+#Page: content: #Tutorial & {
 	title: "Tutorial"
 	steps: [{
 		title:   "Change to lesson directory"
@@ -15,4 +15,4 @@ package l
 		title:   "Edit slides.md file, change \"Welcome to Slidev\".  Then watch slide-show update."
 		desc: ""
 	}]
-})
+}
