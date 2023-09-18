@@ -50,7 +50,7 @@ people: [{
 			},
 		], "")
 	}
-"""
+	"""
 <body class="bg-white">
 	<div style="font-family: concourse_2_caps"
 	<ul role="list" class="divide-y divide-gray-100">
