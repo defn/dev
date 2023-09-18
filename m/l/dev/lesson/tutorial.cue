@@ -10,7 +10,7 @@ package l
           title:   "Change to lesson directory"
           content: "cd lesson"
         }, {
-          title:   "Instal npm packages"
+          title:   "Install npm packages"
           content: "npm install"
         }, {
           title:   "Run the slide-show.  This command will launch a browser to the slide-show."
