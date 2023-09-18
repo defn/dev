@@ -15,57 +15,54 @@ html: #HTML
 """
 
 #Head: """
-<head>
+	<head>
 	<script src="https://cdn.tailwindcss.com"></script>
 	<script src="https://unpkg.com/@phosphor-icons/web"></script>
-
+	
 	<link rel="stylesheet" type="text/css" href="https://defn.github.io/webfonts/concourse_2_caps.css" />
 	<link rel="stylesheet" type="text/css" href="https://defn.github.io/webfonts/concourse_3.css" />
 	<link rel="stylesheet" type="text/css" href="https://defn.github.io/webfonts/valkyrie_a.css" />
 	<link rel="stylesheet" type="text/css" href="https://defn.github.io/webfonts/hermes_maia_4.css" />
-
+	
 	<style>
 		body {
 			font-family: valkyrie_a;
 		}
 	</style>
-</head>
-"""
+	</head>
+	"""
 
 #Body: """
-<body class="bg-white px-6 lg:px-8">
-\(#Page.html)
-</body >
-"""
+	<body class="bg-white px-6 lg:px-8">
+	\(#PageContent.html)
+	</body >
+	"""
 
-#Page: {
+#PageContent: {
 	content: {
 		html: string
 		...
 	}
-	html:    """
-<div class="mx-auto max-w-3xl text-base text-gray-700">
-\(content.html)
-</div>
-"""
+	html: """
+		<div class="mx-auto max-w-3xl text-base text-gray-700">
+		\(content.html)
+		</div>
+		"""
 }
 
-#Title: {
-	title:   string
-	desc: string
-	html:    """
+#TitleContent: {
+	title: string
+	desc:  string
+	html:  """
 		<h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">\(title)</h1>
 		<p class="mt-6 text-xl leading-8">\(desc)</p>
 		"""
 }
 
-#Section: {
-	title:   string
-	content: {
-		html: string
-		...
-	}
-	html:    """
+#SectionContent: {
+	title: string
+	content: html: string
+	html: """
 		<div class="mt-10 max-w-2xl">
 			<h2 class="text-2xl font-bold tracking-tight text-gray-900">\(title)</h2>
 			\(content.html)
@@ -73,10 +70,10 @@ html: #HTML
 		"""
 }
 
-#List: {
+#ListContent: {
 	items: [...{
-		title:   string
-		desc: string
+		title: string
+		desc:  string
 	}]
 	items_html: [
 		for ele in items {"""
@@ -94,11 +91,11 @@ html: #HTML
 		"""
 }
 
-#Tutorial: {
+#TutorialContent: {
 	title: string
-	steps: #List.items
-	html:  (#Section & {
+	steps: #ListContent.items
+	html:  (#SectionContent & {
 		"title": title
-		content: (#List & {items: steps})
+		content: (#ListContent & {items: steps})
 	}).html
 }
