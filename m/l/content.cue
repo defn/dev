@@ -4,6 +4,7 @@ import (
 	"strings"
 )
 
+// Content decorates content
 #Content: {
 	...
 	content: {
@@ -12,7 +13,7 @@ import (
 	}
 	html: string | *content.html
 }
-
+// PageContent decorates a page
 #PageContent: #Content & {
 	content: html: string
 	html: """
@@ -22,6 +23,7 @@ import (
 		"""
 }
 
+// TitleContent decorates a title
 #TitleContent: #Content & {
 	title: string
 	desc:  string
@@ -31,6 +33,7 @@ import (
 		"""
 }
 
+// SectionContent decorates a section
 #SectionContent: #Content & {
 	title: string
 	content: html: string
@@ -42,6 +45,7 @@ import (
 		"""
 }
 
+// ListContent decorates a list
 #ListContent: #Content & {
 	items: [...{
 		title: string
@@ -66,6 +70,7 @@ import (
 		"""
 }
 
+// TutorialContent decores a Tutorial Section
 #TutorialContent: #Content & {
 	title: string
 	steps: #ListContent.items
