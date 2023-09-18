@@ -6,47 +6,46 @@ import (
 
 html: #HTML
 
-#HTML: {"""
-	<!doctype html>
-	<html>
-	\(#Head)
-	\(#Body)
-	</html>
-	"""
-}
+#HTML: """
+<!doctype html>
+<html>
+\(#Head)
+\(#Body)
+</html>
+"""
 
-#Head: {"""
-	<head>
-		<script src="https://cdn.tailwindcss.com"></script>
-		<script src="https://unpkg.com/@phosphor-icons/web"></script>
+#Head: """
+<head>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-		<link rel="stylesheet" type="text/css" href="https://defn.github.io/webfonts/concourse_2_caps.css" />
-		<link rel="stylesheet" type="text/css" href="https://defn.github.io/webfonts/concourse_3.css" />
-		<link rel="stylesheet" type="text/css" href="https://defn.github.io/webfonts/valkyrie_a.css" />
-		<link rel="stylesheet" type="text/css" href="https://defn.github.io/webfonts/hermes_maia_4.css" />
+	<link rel="stylesheet" type="text/css" href="https://defn.github.io/webfonts/concourse_2_caps.css" />
+	<link rel="stylesheet" type="text/css" href="https://defn.github.io/webfonts/concourse_3.css" />
+	<link rel="stylesheet" type="text/css" href="https://defn.github.io/webfonts/valkyrie_a.css" />
+	<link rel="stylesheet" type="text/css" href="https://defn.github.io/webfonts/hermes_maia_4.css" />
 
-	    <style>
-			body {
-				font-family: valkyrie_a;
-			}
-		</style>
-	</head>
-	"""
-}
+	<style>
+		body {
+			font-family: valkyrie_a;
+		}
+	</style>
+</head>
+"""
 
 #Body: """
 <body class="bg-white px-6 lg:px-8">
-\(#Page)
+\(#Page.html)
 </body >
 """
 
-#Content: {string}
-
-#Page: """
+#Page: {
+	content: string
+	html:    """
 <div class="mx-auto max-w-3xl text-base text-gray-700">
 \(#Content)
 </div>
 """
+}
 
 #Title: {
 	title:   string
@@ -87,4 +86,13 @@ html: #HTML
 	html: """
 		<ul role="list" class="mt-8 max-w-xl space-y-8 text-gray-600">\(strings.Join(items_content, ""))</ul>
 		"""
+}
+
+#Tutorial: {
+	title: string
+	steps: #List.items
+	html:  (#Section & {
+		"title": title
+		content: (#List & {items: steps}).html
+	}).html
 }
