@@ -2,7 +2,8 @@
   (:require ["path" :as path]
             ["vscode" :as vscode]
             [joyride.core :as joyride]
-            [promesa.core :as p]))
+            [promesa.core :as p]
+            [tutorial :as tutorial]))
 
 (defonce !db (atom {:disposables []}))
 
@@ -24,9 +25,9 @@
       .-subscriptions
       (.push disposable)))
 
-(defn- tutorial []
+(defn- open-tutorial []
   ;; open tutorial.cue
-  (p/let [doc (vscode/workspace.openTextDocument (path/join vscode/workspace.rootPath "lesson" "tutorial.cue"))
+  (p/let [doc (vscode/workspace.openTextDocument (path/join vscode/workspace.rootPath tutorial.tutorial_filename))
           meh (vscode/window.showTextDocument doc #js {:preview false, :preserveFocus false, :viewColumn: vscode/ViewColumn.One})]
     ;; split editor TODO does this execute async? if so, then it's not guaranteed the tutorial loads in column two
     (vscode/commands.executeCommand "workbench.action.moveEditorToPreviousGroup")
@@ -45,7 +46,7 @@
       (.sendText "make tutorial"))))
 
 (defn- main []
-  (tutorial)
+  (open-tutorial)
   (clear-disposables!)
   (push-disposable
     ;; It might surprise you to see how often and when this happens,
