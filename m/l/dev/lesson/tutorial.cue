@@ -1,6 +1,6 @@
 package l
 
-#PageContent: content: #TutorialContent & {
+page: content: #TutorialContent & {
 	title: "Tutorial"
 	steps: [{
 		title: "Change to lesson directory"

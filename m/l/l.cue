@@ -6,6 +6,8 @@ import (
 
 html: #HTML
 
+page: #PageContent
+
 #HTML: """
 <!doctype html>
 <html>
@@ -34,7 +36,7 @@ html: #HTML
 
 #Body: """
 	<body class="bg-white px-6 lg:px-8">
-	\(#PageContent.html)
+	\(page.html)
 	</body >
 	"""
 
