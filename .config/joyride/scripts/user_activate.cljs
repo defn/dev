@@ -33,7 +33,7 @@
     (vscode/commands.executeCommand "workbench.action.moveEditorToPreviousGroup")
 
     ;; open tutorial.html
-    (p/let [panel (vscode/window.createWebviewPanel "tutorial" "tutorial" vscode/ViewColumn.Two #js {:enableScripts true})
+    (p/let [panel (vscode/window.createWebviewPanel "Tutorial" "Tutorial" vscode/ViewColumn.Two #js {:enableScripts true})
             uri (vscode/Uri.file (path/join vscode/workspace.rootPath tutorial.tutorial_webpage))
             data (vscode/workspace.fs.readFile uri)
             html (.decode (js/TextDecoder. "utf-8") data)]
