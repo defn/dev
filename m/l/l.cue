@@ -38,6 +38,15 @@ html: #HTML
 	</body >
 	"""
 
+#Content: {
+	...
+	content: {
+		...
+		html: string
+	}
+	html: string | *content.html
+}
+
 #PageContent: {
 	content: html: string
 	html: """
@@ -94,12 +103,11 @@ html: #HTML
 		"""
 }
 
-#TutorialContent: {
+#TutorialContent: #Content & {
 	title: string
 	steps: #ListContent.items
 	content:  #SectionContent & {
 		"title": title
 		content: (#ListContent & {items: steps})
 	}
-	html: content.html
 }
