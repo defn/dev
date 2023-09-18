@@ -39,10 +39,7 @@ html: #HTML
 	"""
 
 #PageContent: {
-	content: {
-		html: string
-		...
-	}
+	content: html: string
 	html: """
 		<div class="mx-auto max-w-3xl text-base text-gray-700">
 		\(content.html)
@@ -61,7 +58,10 @@ html: #HTML
 
 #SectionContent: {
 	title: string
-	content: html: string
+	content: {
+		html: string
+		...
+	}
 	html: """
 		<div class="mt-10 max-w-2xl">
 			<h2 class="text-2xl font-bold tracking-tight text-gray-900">\(title)</h2>
@@ -75,27 +75,31 @@ html: #HTML
 		title: string
 		desc:  string
 	}]
-	items_html: [
-		for ele in items {"""
-			<li class="flex gap-x-3">
-				<svg class="mt-1 h-5 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-					<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
-				</svg>
-				<span><strong class="font-semibold text-gray-900">\(ele.title)</strong> \(ele.desc)</span>
-			</li>
-			"""
-		},
-	]
+	content: {
+		items_html: [
+			for ele in items {"""
+				<li class="flex gap-x-3">
+					<svg class="mt-1 h-5 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+						<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+					</svg>
+					<span><strong class="font-semibold text-gray-900">\(ele.title)</strong> \(ele.desc)</span>
+				</li>
+				"""
+			},
+		]
+		html: strings.Join(items_html, "")
+	}
 	html: """
-		<ul role="list" class="mt-8 max-w-xl space-y-8 text-gray-600">\(strings.Join(items_html, ""))</ul>
+		<ul role="list" class="mt-8 max-w-xl space-y-8 text-gray-600">\(content.html)</ul>
 		"""
 }
 
 #TutorialContent: {
 	title: string
 	steps: #ListContent.items
-	html:  (#SectionContent & {
+	content:  #SectionContent & {
 		"title": title
 		content: (#ListContent & {items: steps})
-	}).html
+	}
+	html: content.html
 }
