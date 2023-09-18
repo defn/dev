@@ -34,19 +34,19 @@ html: #HTML
 	"""
 }
 
-#Body: {"""
-	\(#Page)
-	"""
-}
+#Body: """
+<body class="bg-white px-6 lg:px-8">
+\(#Page)
+</body >
+"""
 
 #Content: {string}
 
-#Page: {"""
-	<div class="bg-white px-6 py-6 lg:px-8">
-		<div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">\(#Content)</div>
-	</div>
-	"""
-}
+#Page: """
+<div class="mx-auto max-w-3xl text-base text-gray-700">
+\(#Content)
+</div>
+"""
 
 #Title: {
 	title:   string
@@ -62,7 +62,7 @@ html: #HTML
 	content: string
 	html:    """
 		<div class="mt-10 max-w-2xl">
-			<h2 class="mt-16 text-2xl font-bold tracking-tight text-gray-900">\(title)</h2>
+			<h2 class="text-2xl font-bold tracking-tight text-gray-900">\(title)</h2>
 			\(content)
 		</div>
 		"""

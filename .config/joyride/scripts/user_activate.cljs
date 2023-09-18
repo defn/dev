@@ -40,7 +40,7 @@
       (set! (.. panel -webview -html) (str html))))
 
   ;; run command in terminal TODO bug opens a new terminal every time
-  (comment p/let [terminal (vscode/window.createTerminal #js {:name "tutorial"})]
+  (comment p/let [terminal (vscode/window.createTerminal #js {:name "Tutorial"})]
     (doto terminal
       (.show true)
       (.sendText "make tutorial"))))

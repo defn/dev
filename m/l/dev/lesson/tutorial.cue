@@ -1,32 +1,26 @@
 package l
 
-direction: """
-change directory to the lesson:<br>
-<pre>
-cd lesson
-</pre>
-<br>
-
-run command:<br>
-<pre>
-npm install
-</pre>
-<br>
-
-run command:<br>
-<pre>
-npm run dev -- --remote
-</pre>
-<br>
-
-edit slides.md and watch the slides website update<br><br>
-"""
-
 #Content: {
 	"""
-    \((#Title & {
-		title: "Tutorial"
-		content: direction
+   \((#Section & {
+		title:   "Tutorial"
+		content: """
+      \((#List & {
+        items: [{
+          title:   "Change to lesson directory"
+          content: "cd lesson"
+        }, {
+          title:   "Instal npm packages"
+          content: "npm install"
+        }, {
+          title:   "Run the slide-show.  This command will launch a browser to the slide-show."
+          content: "npm run dev -- --remote"
+        }, {
+          title:   "Edit slides.md file, then watch slide-show update."
+          content: ""
+        }]
+      }).html)
+      """
 	}).html)
   """
 }
