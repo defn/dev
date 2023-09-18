@@ -16,7 +16,7 @@ package l
           title:   "Run the slide-show.  This command will launch a browser to the slide-show."
           content: "npm run dev -- --remote"
         }, {
-          title:   "Edit slides.md file, then watch slide-show update."
+          title:   "Edit slides.md file, change \"Welcome to Slidev\".  Then watch slide-show update."
           content: ""
         }]
       }).html)
