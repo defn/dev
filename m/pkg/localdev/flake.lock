@@ -449,17 +449,17 @@
       },
       "locked": {
         "dir": "m/pkg/gh",
-        "lastModified": 1694048341,
-        "narHash": "sha256-DrLxByHCuB5EOr/qc1b/Y3sYsHUcGvbnX6Br1HpMmzs=",
+        "lastModified": 1695147589,
+        "narHash": "sha256-nyQsPnigHbMwn/fE5Mf0NEkYLGdKmEM5dt5ps2ntIOQ=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "a9b7c96895dc3b8aaf911b434b14bf7893c6dca8",
+        "rev": "ece0af4e76fd19e2030ef00c71b250bb1b204605",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/gh",
         "owner": "defn",
-        "ref": "pkg-gh-2.34.0-1",
+        "ref": "pkg-gh-2.35.0-1",
         "repo": "dev",
         "type": "github"
       }
