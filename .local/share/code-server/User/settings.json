@@ -83,5 +83,6 @@
     "maxLength": 50
   },
   "calva.paredit.defaultKeyMap": "strict",
-  "window.zoomLevel": 1
+  "window.zoomLevel": 1,
+  "git.detectSubmodules": false
 }
