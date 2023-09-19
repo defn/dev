@@ -9,6 +9,7 @@
   "dependencies": {
     "@slidev/cli": "^0.43.4",
     "@slidev/theme-default": "latest",
-    "@slidev/theme-seriph": "^0.21.3"
+    "@slidev/theme-seriph": "^0.21.3",
+    "vite-svg-loader": "^4.0.0"
   }
 }
