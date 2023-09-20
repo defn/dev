@@ -3,8 +3,8 @@ package l
 page: content: #TutorialContent & {
 	title: "Tutorial"
 	steps: [{
-		title: "Change to lesson directory"
-		desc:  "cd lesson"
+		title: "Change to workshop directory"
+		desc:  "cd workshop"
 	}, {
 		title: "Install npm packages"
 		desc:  "npm install"
