@@ -51,7 +51,7 @@ export HOF_TELEMETRY_DISABLED=1
 #export DISPLAY=1
 
 # kubectl
-export KUBECONFIG="$HOME/.kube/config:$HOME/.kube/config.argocd:$HOME/.kube/config.vc0"
+if [[ -z "${KUBECONFIG:-}" ]]; then export KUBECONFIG="$HOME/.kube/config:$HOME/.kube/config.argocd:$HOME/.kube/config.vc0"; fi
 
 # editor
 export CODER_TELEMETRY=false
@@ -146,9 +146,9 @@ function vi {
 	if [[ -n "${VSCODE_GIT_ASKPASS_MAIN:-}" ]]; then
 		local code
 
-    code="${VSCODE_GIT_ASKPASS_MAIN%/extensions/*}/bin/remote-cli/code-linux.sh" 
+    code="${VSCODE_GIT_ASKPASS_MAIN%/extensions/*}/bin/remote-cli/code-linux.sh"
     if [[ ! -x "$code" ]]; then
-      code="${VSCODE_GIT_ASKPASS_MAIN%/extensions/*}/bin/remote-cli/code" 
+      code="${VSCODE_GIT_ASKPASS_MAIN%/extensions/*}/bin/remote-cli/code"
     fi
 
     if [[ ! -x "$code" ]]; then
