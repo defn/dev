@@ -76,6 +76,9 @@ if [[ "Linux" == "$(uname -s)" ]]; then
 	export LC_ALL=C.UTF-8
 fi
 
+# storybook
+export STORYBOOK_DISABLE_TELEMETRY=1
+
 # direnv
 export DIRENV_LOG_FORMAT=
 
