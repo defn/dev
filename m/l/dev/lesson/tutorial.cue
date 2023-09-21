@@ -3,7 +3,7 @@ package l
 page: content: #TutorialContent & {
 	title: "Tutorial"
 	steps: [{
-		title: "Change to workshop directory"
+		title: "Change to workshop <a href=\"/?folder=/home/ubuntu/m/l/dev/lesson\">directory</a>"
 		desc:  "cd workshop"
 	}, {
 		title: "Install npm packages"
