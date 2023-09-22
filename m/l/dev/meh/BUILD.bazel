@@ -10,6 +10,14 @@ go_library(
 
 go_binary(
     name = "dev",
-    embed = [":dev_lib"],
+    embed = [":meh_lib"],
     visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "meh_lib",
+    srcs = ["dev.go"],
+    importpath = "github.com/defn/dev/m/l/dev/meh",
+    visibility = ["//visibility:private"],
+    deps = ["//command"],
 )
