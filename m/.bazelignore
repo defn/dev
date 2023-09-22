@@ -1,7 +1,7 @@
 
 tf
 node_modules
-dev/.direnv
+l/dev/meh/.direnv
 pkg/acme/.direnv
 pkg/argocd/.direnv
 pkg/argorollouts/.direnv
@@ -71,7 +71,7 @@ pkg/vcluster/.direnv
 pkg/vhs/.direnv
 pkg/vpn/.direnv
 pkg/zellij/.direnv
-dev/result
+l/dev/meh/result
 pkg/acme/result
 pkg/argocd/result
 pkg/argorollouts/result

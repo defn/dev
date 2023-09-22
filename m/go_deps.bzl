@@ -59,8 +59,8 @@ def go_deps():
     go_repository(
         name = "com_github_bytedance_sonic",
         importpath = "github.com/bytedance/sonic",
-        sum = "h1:qtNZduETEIWJVIyDl01BeNxur2rW9OwTQ/yBqFRkKEk=",
-        version = "v1.10.0",
+        sum = "h1:7a1wuFXL1cMy7a3f7/VFcEtriuXQnUBhtoVfOZiaysc=",
+        version = "v1.10.1",
     )
     go_repository(
         name = "com_github_cdktf_cdktf_provider_aws_go_aws_v16",
@@ -272,8 +272,8 @@ def go_deps():
     go_repository(
         name = "com_github_go_playground_validator_v10",
         importpath = "github.com/go-playground/validator/v10",
-        sum = "h1:S+sSpunYjNPDuXkWbK+x+bA7iXiW296KG4dL3X7xUZo=",
-        version = "v10.15.3",
+        sum = "h1:zMXza4EpOdooxPel5xDqXEdXG5r+WggpvnAKMsalBjs=",
+        version = "v10.15.4",
     )
     go_repository(
         name = "com_github_go_quicktest_qt",
