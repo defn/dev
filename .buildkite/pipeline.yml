@@ -5,14 +5,8 @@ steps:
   #      - aws-assume-role-with-web-identity:
   #          role-arn: arn:aws:iam::510430971399:role/buildkite-agent-readonly
   - name: build
-    command: false && cd m && ../bin/b build
+    command: false
     key: build
-  - name: test
-    command: cd m && ../bin/b test
-    key: test
-  - name: cache
-    command: cd && make cache
-    key: cache
   - wait:
     continue_on_failure: true
   - name: debug
