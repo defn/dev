@@ -5,8 +5,21 @@ steps:
   #      - aws-assume-role-with-web-identity:
   #          role-arn: arn:aws:iam::510430971399:role/buildkite-agent-readonly
   - name: build
-    command: cd m && ../bin/b build
+    command: cd m && ../bin/b build && false
+    key: build
   - name: test
     command: cd m && ../bin/b test
+    key: test
   - name: cache
     command: cd && make cache
+    key: cache
+  - wait:
+    continue_on_failure: true
+  - name: debug
+    command: |
+      for s in build test cache; do
+        if [[ $(buildkite-agent step get "outcome" --step "$s") == "hard_failed" ]]; then
+          buildkite-agent annotate 'job $s failed' --style 'error'
+          exec env - HOME=$HOME USER=$USER PATH=$PATH $(which code-server) --auth none
+        fi
+      done
