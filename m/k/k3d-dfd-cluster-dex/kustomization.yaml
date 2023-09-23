@@ -11,5 +11,10 @@ helmCharts:
     version: 0.15.3
     repo: https://charts.dexidp.io
     namespace: dex
-    valuesInline: {}
+    valuesInline:
+      config:
+        issuer: http://dex.dev.amanibhavam.defn.run
+        storage:
+          type: memory
+        enablePasswordDB: "true"
     includeCRDs: true

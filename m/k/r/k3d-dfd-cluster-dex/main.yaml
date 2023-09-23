@@ -94,7 +94,7 @@ subjects:
 ---
 apiVersion: v1
 data:
-  config.yaml: e30=
+  config.yaml: ZW5hYmxlUGFzc3dvcmREQjogInRydWUiCmlzc3VlcjogaHR0cDovL2RleC5kZXYuYW1hbmliaGF2YW0uZGVmbi5ydW4Kc3RvcmFnZToKICB0eXBlOiBtZW1vcnk=
 kind: Secret
 metadata:
   labels:
@@ -156,7 +156,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: 1d0a46b11cb1db5ac3c984e9798000420b26b6b0d9f7af3f60e2848413988f48
+        checksum/config: 149bc7e7b2965e0be34791675a10d0752c103ec5806eac9a15d341930f6c21e3
       labels:
         app.kubernetes.io/instance: dex
         app.kubernetes.io/name: dex
