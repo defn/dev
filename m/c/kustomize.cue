@@ -1858,3 +1858,24 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 	}
 	// k exec -ti -n mastodon deploy/mastodon-web -- bash -c '. /opt/bitnami/scripts/mastodon-env.sh; tootctl accounts  modify defn --reset-password'
 }
+
+// https://artifacthub.io/packages/helm/headlamp/headlamp
+kustomize: "headlamp": #KustomizeHelm & {
+	helm: {
+		release:   "headlamp"
+		name:      "headlamp"
+		namespace: "headlamp"
+		version:   "0.15.0"
+		repo:      "https://headlamp-k8s.github.io/headlamp"
+		values: {
+		}
+	}
+
+	resource: "namespace-headlamp": core.#Namespace & {
+		apiVersion: "v1"
+		kind:       "Namespace"
+		metadata: {
+			name: "headlamp"
+		}
+	}
+}
