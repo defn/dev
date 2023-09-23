@@ -1996,7 +1996,7 @@ kustomize: "dex": #KustomizeHelm & {
 			config: {
 				issuer: "http://dex.\(cluster.domain_name)"
 				storage: type: "memory"
-				enablePasswordDB: "true"
+				enablePasswordDB: true
 			}
 		}
 	}
