@@ -1861,6 +1861,8 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 
 // https://artifacthub.io/packages/helm/headlamp/headlamp
 kustomize: "headlamp": #KustomizeHelm & {
+	cluster: #Cluster
+
 	namespace: "headlamp"
 
 	helm: {
@@ -1878,6 +1880,33 @@ kustomize: "headlamp": #KustomizeHelm & {
 		kind:       "Namespace"
 		metadata: {
 			name: "headlamp"
+		}
+	}
+
+	resource: "ingress-headlamp": {
+		apiVersion: "networking.k8s.io/v1"
+		kind:       "Ingress"
+		metadata: {
+			name: "headlmap"
+			annotations: {
+				"traefik.ingress.kubernetes.io/router.tls":         "true"
+				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
+			}
+		}
+
+		spec: {
+			ingressClassName: "traefik"
+			rules: [{
+				host: "headlamp.\(cluster.domain_name)"
+				http: paths: [{
+					path:     "/"
+					pathType: "Prefix"
+					backend: service: {
+						name: "headlamp"
+						port: number: 80
+					}
+				}]
+			}]
 		}
 	}
 }
