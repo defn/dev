@@ -59,6 +59,7 @@ infra: {
 		"pihole": [100, ""]
 		"coder": [100, ""]
 		"headlamp": [100, ""]
+		"dex": [100, ""]
 	}
 
 	vc0: vcluster: k3s_version: "rancher/k3s:v1.27.5-k3s1"

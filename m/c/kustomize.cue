@@ -1979,3 +1979,55 @@ kustomize: "headlamp": #KustomizeHelm & {
 		}]
 	}
 }
+
+// https://artifacthub.io/packages/helm/dex/dex
+kustomize: "dex": #KustomizeHelm & {
+	cluster: #Cluster
+
+	namespace: "dex"
+
+	helm: {
+		release:   "dex"
+		name:      "dex"
+		namespace: "dex"
+		version:   "0.15.3"
+		repo:      "https://charts.dexidp.io"
+		values: {
+		}
+	}
+
+	resource: "namespace-dex": core.#Namespace & {
+		apiVersion: "v1"
+		kind:       "Namespace"
+		metadata: {
+			name: "dex"
+		}
+	}
+
+	resource: "ingress-dex": {
+		apiVersion: "networking.k8s.io/v1"
+		kind:       "Ingress"
+		metadata: {
+			name: "headlmap"
+			annotations: {
+				"traefik.ingress.kubernetes.io/router.tls":         "true"
+				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
+			}
+		}
+
+		spec: {
+			ingressClassName: "traefik"
+			rules: [{
+				host: "dex.\(cluster.domain_name)"
+				http: paths: [{
+					path:     "/"
+					pathType: "Prefix"
+					backend: service: {
+						name: "dex"
+						port: number: 80
+					}
+				}]
+			}]
+		}
+	}
+}

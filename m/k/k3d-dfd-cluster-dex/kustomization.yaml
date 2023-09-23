@@ -1,0 +1,15 @@
+#ManagedBy: cue
+
+patches: []
+resources:
+  - resource-namespace-dex.yaml
+  - resource-ingress-dex.yaml
+namespace: dex
+helmCharts:
+  - releaseName: dex
+    name: dex
+    version: 0.15.3
+    repo: https://charts.dexidp.io
+    namespace: dex
+    valuesInline: {}
+    includeCRDs: true
