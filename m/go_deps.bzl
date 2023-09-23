@@ -34,8 +34,8 @@ def go_deps():
     go_repository(
         name = "com_github_aws_jsii_runtime_go",
         importpath = "github.com/aws/jsii-runtime-go",
-        sum = "h1:1qJ9Ane+oxTt1c3xkpDE5YIv53MzKDKYcAr70lAxT/Q=",
-        version = "v1.88.0",
+        sum = "h1:1HKw9LyE8lOM9iMiSzVOUAVeUInTNhOyoxQrVVRbSFk=",
+        version = "v1.89.0",
     )
     go_repository(
         name = "com_github_aymanbagabas_go_osc52_v2",
@@ -63,10 +63,10 @@ def go_deps():
         version = "v1.10.1",
     )
     go_repository(
-        name = "com_github_cdktf_cdktf_provider_aws_go_aws_v16",
-        importpath = "github.com/cdktf/cdktf-provider-aws-go/aws/v16",
-        sum = "h1:7KeOfdxXDXAEtZnn4TnCTqWmcPe4pP5+jYf3XHWKpFQ=",
-        version = "v16.0.9",
+        name = "com_github_cdktf_cdktf_provider_aws_go_aws_v17",
+        importpath = "github.com/cdktf/cdktf-provider-aws-go/aws/v17",
+        sum = "h1:d7TUwlN4B9Jm+oGdBA7TCCDYF+qPVYIaOaIm1YF65Y8=",
+        version = "v17.0.6",
     )
 
     go_repository(
@@ -145,8 +145,8 @@ def go_deps():
     go_repository(
         name = "com_github_cockroachdb_apd_v3",
         importpath = "github.com/cockroachdb/apd/v3",
-        sum = "h1:79kHCn4tO0VGu3W0WujYrMjBDk8a2H4KEUYcXf7whcg=",
-        version = "v3.2.0",
+        sum = "h1:U+8j7t0axsIgvQUqthuNm82HIrYXodOV2iWLWtEaIwg=",
+        version = "v3.2.1",
     )
 
     go_repository(
@@ -707,8 +707,8 @@ def go_deps():
     go_repository(
         name = "com_github_spf13_afero",
         importpath = "github.com/spf13/afero",
-        sum = "h1:stMpOSZFs//0Lv29HduCmli3GUfpFoF3Y1Q/aXj/wVM=",
-        version = "v1.9.5",
+        sum = "h1:EaGW2JJh15aKOejeuJ+wpFSHnbd7GE6Wvp3TsNhb6LY=",
+        version = "v1.10.0",
     )
     go_repository(
         name = "com_github_spf13_cast",
