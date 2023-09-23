@@ -1068,6 +1068,10 @@ kustomize: "tailscale": #Kustomize & {
 			path:  "/spec/template/spec/containers/0/env/2/value"
 			value: "dev"
 		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/containers/0/env/8/value"
+			value: "true"
+		}, {
 			op:   "replace"
 			path: "/spec/template/spec/containers/0/volumeMounts/0"
 			value: {
@@ -1120,6 +1124,33 @@ kustomize: "tailscale": #Kustomize & {
 				name:           "operator-oauth-custom"
 				creationPolicy: "Owner"
 			}
+		}
+	}
+
+	resource: "clusterrole-tailscale-auth-proxy": {
+		apiVersion: "rbac.authorization.k8s.io/v1"
+		kind:       "ClusterRole"
+		metadata: name: "tailscale-auth-proxy"
+		rules: [{
+			apiGroups: [""]
+			resources: ["users"]
+			verbs: ["impersonate"]
+		}]
+	}
+
+	resource: "clusterrolebinding-tailscale-auth-proxy": {
+		apiVersion: "rbac.authorization.k8s.io/v1"
+		kind:       "ClusterRoleBinding"
+		metadata: name: "tailscale-auth-proxy"
+		subjects: [{
+			kind:      "ServiceAccount"
+			name:      "operator"
+			namespace: "tailscale"
+		}]
+		roleRef: {
+			kind:     "ClusterRole"
+			name:     "tailscale-auth-proxy"
+			apiGroup: "rbac.authorization.k8s.io"
 		}
 	}
 }

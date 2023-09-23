@@ -4,6 +4,9 @@
   path: /spec/template/spec/containers/0/env/2/value
   value: dev
 - op: replace
+  path: /spec/template/spec/containers/0/env/8/value
+  value: "true"
+- op: replace
   path: /spec/template/spec/containers/0/volumeMounts/0
   value:
     mountPath: /not-used

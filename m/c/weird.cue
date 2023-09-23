@@ -2,8 +2,6 @@ package c
 
 import (
 	core "k8s.io/api/core/v1"
-	apps "k8s.io/api/apps/v1"
-	rbac "k8s.io/api/rbac/v1"
 )
 
 kustomize: (#Transform & {
@@ -52,107 +50,6 @@ kustomize: "keda": #KustomizeHelm & {
 		metadata: {
 			name: "keda"
 		}
-	}
-}
-
-kustomize: "dev": #Kustomize & {
-	namespace: "default"
-
-	resource: "statefulset-dev": apps.#StatefulSet & {
-		apiVersion: "apps/v1"
-		kind:       "StatefulSet"
-		metadata: {
-			name:      "dev"
-			namespace: "default"
-		}
-		spec: {
-			serviceName: "dev"
-			replicas:    1
-			selector: matchLabels: app: "dev"
-			template: {
-				metadata: labels: app: "dev"
-				spec: {
-					volumes: [{
-						name: "work"
-						emptyDir: {}
-					}]
-					containers: [{
-						name:            "code-server"
-						image:           "169.254.32.1:5000/workspace"
-						imagePullPolicy: "Always"
-						command: [
-							"/usr/bin/tini",
-							"--",
-						]
-						args: [
-							"bash",
-							"-c",
-							"exec ~/bin/e code-server --bind-addr 0.0.0.0:8888 --disable-telemetry",
-						]
-						tty: true
-						env: [{
-							name:  "PASSWORD"
-							value: "admin"
-						}]
-						securityContext: privileged: true
-						volumeMounts: [{
-							mountPath: "/work"
-							name:      "work"
-						}]
-					}]
-				}
-			}
-		}
-	}
-
-	resource: "service-dev": core.#Service & {
-		apiVersion: "v1"
-		kind:       "Service"
-		metadata: {
-			name:      "dev"
-			namespace: "default"
-		}
-		spec: {
-			ports: [{
-				port:       80
-				protocol:   "TCP"
-				targetPort: 8888
-			}]
-			selector: app: "dev"
-			type: "ClusterIP"
-		}
-	}
-
-	resource: "cluster-role-binding-admin": rbac.#ClusterRoleBinding & {
-		apiVersion: "rbac.authorization.k8s.io/v1"
-		kind:       "ClusterRoleBinding"
-		metadata: name: "dev-admin"
-		roleRef: {
-			apiGroup: "rbac.authorization.k8s.io"
-			kind:     "ClusterRole"
-			name:     "cluster-admin"
-		}
-		subjects: [{
-			kind:      "ServiceAccount"
-			name:      "default"
-			namespace: "default"
-		}]
-	}
-
-	resource: "cluster-role-binding-delegator": rbac.#ClusterRoleBinding & {
-		apiVersion: "rbac.authorization.k8s.io/v1"
-		kind:       "ClusterRoleBinding"
-		metadata: name: "dev-delegator"
-		roleRef: {
-			apiGroup: "rbac.authorization.k8s.io"
-			kind:     "ClusterRole"
-			name:     "system:auth-delegator"
-		}
-		subjects: [{
-			kind:      "ServiceAccount"
-			name:      "default"
-			namespace: "default"
-		}]
 	}
 }
 
