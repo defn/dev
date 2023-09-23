@@ -1918,14 +1918,14 @@ kustomize: "headlamp": #KustomizeHelm & {
 		}
 	}
 
-	resource: "cluster-role-binding-headlamp-readonly": rbac.#ClusterRoleBinding & {
+	resource: "cluster-role-binding-headlamp-admin": rbac.#ClusterRoleBinding & {
 		apiVersion: "rbac.authorization.k8s.io/v1"
 		kind:       "ClusterRoleBinding"
-		metadata: name: "headlamp-admin-readonly"
+		metadata: name: "headlamp-admin-binding"
 		roleRef: {
 			apiGroup: "rbac.authorization.k8s.io"
 			kind:     "ClusterRole"
-			name:     "readonly"
+			name:     "cluster-admin"
 		}
 		subjects: [{
 			kind:      "ServiceAccount"
