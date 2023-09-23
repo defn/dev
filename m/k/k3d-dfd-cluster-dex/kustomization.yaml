@@ -13,7 +13,7 @@ helmCharts:
     namespace: dex
     valuesInline:
       config:
-        issuer: http://dex.dev.amanibhavam.defn.run
+        issuer: https://dex.dev.amanibhavam.defn.run
         storage:
           type: memory
         enablePasswordDB: true
