@@ -1994,7 +1994,7 @@ kustomize: "dex": #KustomizeHelm & {
 		repo:      "https://charts.dexidp.io"
 		values: {
 			config: {
-				issuer: "http://dex.\(cluster.domain_name)"
+				issuer: "https://dex.\(cluster.domain_name)"
 				storage: type: "memory"
 				enablePasswordDB: true
 			}
