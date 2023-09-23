@@ -1895,17 +1895,15 @@ kustomize: "headlamp": #KustomizeHelm & {
 		}
 
 		spec: {
-			ingressClassName: "traefik"
-			rules: [{
-				host: "headlamp.\(cluster.domain_name)"
-				http: paths: [{
-					path:     "/"
-					pathType: "Prefix"
-					backend: service: {
-						name: "headlamp"
-						port: number: 80
-					}
-				}]
+			ingressClassName: "tailscale"
+			defaultBackend: service: {
+				name: "headlamp"
+				port: number: 80
+			}
+			tls: [{
+				hosts: [
+					"headlamp",
+				]
 			}]
 		}
 	}
