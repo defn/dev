@@ -11,7 +11,7 @@ if [[ ! -x "/usr/local/bin/bazel" ]]; then
 		;;
 	*)
 		sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.18.0/bazelisk-linux-amd64
-		;;w
+		;;
 	esac
 	sudo chmod 755 /usr/local/bin/bazelisk
 	sudo ln -nfs bazelisk /usr/local/bin/bazel
