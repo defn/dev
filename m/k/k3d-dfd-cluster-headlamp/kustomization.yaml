@@ -5,7 +5,7 @@ resources:
   - resource-namespace-headlamp.yaml
   - resource-ingress-headlamp.yaml
   - resource-serviceaccount-headlamp-admin.yaml
-  - resource-cluster-role-binding-headlamp-admin.yaml
+  - resource-cluster-role-binding-headlamp-readonly.yaml
 namespace: headlamp
 helmCharts:
   - releaseName: headlamp
