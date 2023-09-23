@@ -31,6 +31,9 @@ infra: {
 		"external-secrets": [11, ""]
 		"secrets": [12, ""]
 
+		// tailscale
+		"tailscale": [20, ""]
+
 		// scaling
 		"karpenter": [20, ""]
 

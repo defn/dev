@@ -403,6 +403,27 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "20"
+  name: k3d-dfd-cluster-tailscale
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-cluster
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cluster-tailscale
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "20"
   name: k3d-dfd-cluster-tfo
   namespace: argocd
 spec:
