@@ -2029,7 +2029,7 @@ kustomize: "dex": #KustomizeHelm & {
 					pathType: "Prefix"
 					backend: service: {
 						name: "dex"
-						port: number: 80
+						port: number: 5556
 					}
 				}]
 			}]
