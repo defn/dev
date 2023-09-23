@@ -1993,6 +1993,11 @@ kustomize: "dex": #KustomizeHelm & {
 		version:   "0.15.3"
 		repo:      "https://charts.dexidp.io"
 		values: {
+			config: {
+				issuer: "http://dex.\(cluster.domain_name)"
+				storage: type: "memory"
+				enablePasswordDB: "true"
+			}
 		}
 	}
 
