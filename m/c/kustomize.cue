@@ -1934,7 +1934,7 @@ kustomize: "headlamp": #KustomizeHelm & {
 		apiVersion: "networking.k8s.io/v1"
 		kind:       "Ingress"
 		metadata: {
-			name: "headlmap"
+			name: "headlamp"
 			annotations: {
 				"traefik.ingress.kubernetes.io/router.tls":         "true"
 				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
@@ -2008,7 +2008,7 @@ kustomize: "dex": #KustomizeHelm & {
 		apiVersion: "networking.k8s.io/v1"
 		kind:       "Ingress"
 		metadata: {
-			name: "headlmap"
+			name: "dex"
 			annotations: {
 				"traefik.ingress.kubernetes.io/router.tls":         "true"
 				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
