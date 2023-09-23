@@ -1160,7 +1160,7 @@ kustomize: "tailscale": #Kustomize & {
 		metadata: name: "tailscale-admins"
 		subjects: [{
 			kind:     "Group"
-			name:     "tag:k8s-admins"
+			name:     "tag:k8s-admin"
 			apiGroup: "rbac.authorization.k8s.io"
 		}]
 		roleRef: {
