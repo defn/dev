@@ -9,5 +9,6 @@ rules:
       - ""
     resources:
       - users
+      - groups
     verbs:
       - impersonate

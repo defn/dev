@@ -1133,7 +1133,7 @@ kustomize: "tailscale": #Kustomize & {
 		metadata: name: "tailscale-auth-proxy"
 		rules: [{
 			apiGroups: [""]
-			resources: ["users"]
+			resources: ["users", "groups"]
 			verbs: ["impersonate"]
 		}]
 	}
