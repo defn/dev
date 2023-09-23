@@ -64,7 +64,6 @@
     "**/.trunk/*plugins/": true,
     "**/.trunk/*notifications/": true
   },
-  "editor.defaultFormatter": "trunk.io",
   "trunk.showWhatsNewMessage": false,
   "files.associations": {
     "Makefile": "makefile"
