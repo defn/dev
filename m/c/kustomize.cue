@@ -1997,6 +1997,28 @@ kustomize: "dex": #KustomizeHelm & {
 				issuer: "https://dex.\(cluster.domain_name)"
 				storage: type: "memory"
 				enablePasswordDB: true
+
+				connectors: [{
+					type: "github"
+					id:   "github"
+					name: "GitHub"
+					config: {
+						clientID:     "$GITHUB_CLIENT_ID"
+						clientSecret: "$GITHUB_CLIENT_SECRET"
+						redirectURI:  "https://dex.dev.amanibhavam.defn.run/callback"
+
+						orgs: [{
+							name: "defn"
+							teams: [
+								"class",
+							]
+						}]
+
+						teamNameField: "slug"
+						loadAllGroups: false
+						useLoginAsID:  false
+					}
+				}]
 			}
 		}
 	}
