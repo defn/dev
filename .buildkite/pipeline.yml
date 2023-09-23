@@ -4,6 +4,13 @@ steps:
   #    plugins:
   #      - aws-assume-role-with-web-identity:
   #          role-arn: arn:aws:iam::510430971399:role/buildkite-agent-readonly
+  - name: build
+    command: |
+      cd m
+      if ! b build; then
+        (sleep 10 && echo "$${VSCODE_PROXY_URI}?folder=$$(pwd)" | sed "s#{{port}}#8080#" | xargs open) &
+        env - HOME=$$HOME USER=$$USER PATH=$$PATH $$(which code-server) --auth none
+      fi
   - name: cache
     command: |
       if ! env CACHIX_AUTH_TOKEN=$$(pass CACHIX_AUTH_TOKEN) make cache; then
