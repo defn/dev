@@ -39,6 +39,19 @@
             html (.decode (js/TextDecoder. "utf-8") data)]
       (set! (.. panel -webview -html) (str html))))
 
+    ;; open url
+    ;; (vscode/commands.executeCommand "simpleBrowser.show" "https://8000--main--dev--amanibhavam.coder.dev.amanibhavam.defn.run/")
+
+  ;; run command in terminal TODO bug opens a new terminal every time
+  (comment p/let [terminal (vscode/window.createTerminal #js {:name "Tutorial"})]
+
+    ;; open tutorial.html
+    (p/let [panel (vscode/window.createWebviewPanel "Tutorial" "Tutorial" vscode/ViewColumn.Two #js {:enableScripts true})
+            uri (vscode/Uri.file (path/join vscode/workspace.rootPath tutorial.tutorial_webpage))
+            data (vscode/workspace.fs.readFile uri)
+            html (.decode (js/TextDecoder. "utf-8") data)]
+      (set! (.. panel -webview -html) (str html))))
+
   ;; run command in terminal TODO bug opens a new terminal every time
   (comment p/let [terminal (vscode/window.createTerminal #js {:name "Tutorial"})]
     (doto terminal
