@@ -220,6 +220,6 @@ spec:
           service:
             name: dex
             port:
-              number: 80
+              number: 5556
         path: /
         pathType: Prefix
