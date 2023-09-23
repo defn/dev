@@ -7,6 +7,8 @@ import (
 )
 
 func main() {
-	fmt.Println("xcoolboxxans")
+	fmt.Println("================================================================")
+	fmt.Println(" starting")
+	fmt.Println("================================================================")
 	command.Execute()
 }
