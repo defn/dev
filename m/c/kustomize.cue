@@ -1162,6 +1162,10 @@ kustomize: "tailscale": #Kustomize & {
 			kind:     "Group"
 			name:     "tag:k8s-admin"
 			apiGroup: "rbac.authorization.k8s.io"
+		}, {
+			kind:     "Group"
+			name:     "tag:amanibhavam"
+			apiGroup: "rbac.authorization.k8s.io"
 		}]
 		roleRef: {
 			kind:     "ClusterRole"
