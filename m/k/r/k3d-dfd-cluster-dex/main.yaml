@@ -94,7 +94,7 @@ subjects:
 ---
 apiVersion: v1
 data:
-  config.yaml: ZW5hYmxlUGFzc3dvcmREQjogdHJ1ZQppc3N1ZXI6IGh0dHBzOi8vZGV4LmRldi5hbWFuaWJoYXZhbS5kZWZuLnJ1bgpzdG9yYWdlOgogIHR5cGU6IG1lbW9yeQ==
+  config.yaml: Y29ubmVjdG9yczoKLSBjb25maWc6CiAgICBjbGllbnRJRDogJEdJVEhVQl9DTElFTlRfSUQKICAgIGNsaWVudFNlY3JldDogJEdJVEhVQl9DTElFTlRfU0VDUkVUCiAgICBsb2FkQWxsR3JvdXBzOiBmYWxzZQogICAgb3JnczoKICAgIC0gbmFtZTogZGVmbgogICAgICB0ZWFtczoKICAgICAgLSBjbGFzcwogICAgcmVkaXJlY3RVUkk6IGh0dHBzOi8vZGV4LmRldi5hbWFuaWJoYXZhbS5kZWZuLnJ1bi9jYWxsYmFjawogICAgdGVhbU5hbWVGaWVsZDogc2x1ZwogICAgdXNlTG9naW5Bc0lEOiBmYWxzZQogIGlkOiBnaXRodWIKICBuYW1lOiBHaXRIdWIKICB0eXBlOiBnaXRodWIKZW5hYmxlUGFzc3dvcmREQjogdHJ1ZQppc3N1ZXI6IGh0dHBzOi8vZGV4LmRldi5hbWFuaWJoYXZhbS5kZWZuLnJ1bgpzdG9yYWdlOgogIHR5cGU6IG1lbW9yeQ==
 kind: Secret
 metadata:
   labels:
@@ -156,7 +156,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: 891f047daf645ebb7b6fdc2bf6f81a4808e3060291f1edc542bea05f8d4ec28f
+        checksum/config: 45424f5822f22c447091deb2b67f74460e498e3929a50fcebee4d6660df2a4e2
       labels:
         app.kubernetes.io/instance: dex
         app.kubernetes.io/name: dex
