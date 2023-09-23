@@ -5,8 +5,8 @@ go 1.20
 require (
 	cuelang.org/go v0.6.0
 	github.com/aws/constructs-go/constructs/v10 v10.2.70
-	github.com/aws/jsii-runtime-go v1.88.0
-	github.com/cdktf/cdktf-provider-aws-go/aws/v16 v16.0.9
+	github.com/aws/jsii-runtime-go v1.89.0
+	github.com/cdktf/cdktf-provider-aws-go/aws/v17 v17.0.6
 	github.com/charmbracelet/bubbles v0.16.1
 	github.com/charmbracelet/bubbletea v0.24.2
 	github.com/charmbracelet/lipgloss v0.8.0
@@ -24,7 +24,7 @@ require (
 	github.com/bytedance/sonic v1.10.1 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20230717121745-296ad89f973d // indirect
 	github.com/chenzhuoyu/iasm v0.9.0 // indirect
-	github.com/cockroachdb/apd/v3 v3.2.0 // indirect
+	github.com/cockroachdb/apd/v3 v3.2.1 // indirect
 	github.com/containerd/console v1.0.4-0.20230313162750-1ae8d489ac81 // indirect
 	github.com/emicklei/proto v1.12.1 // indirect
 	github.com/fatih/color v1.15.0 // indirect
@@ -60,7 +60,7 @@ require (
 	github.com/protocolbuffers/txtpbfmt v0.0.0-20230830074515-d9d085e6be90 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
 	github.com/sahilm/fuzzy v0.1.0 // indirect
-	github.com/spf13/afero v1.9.5 // indirect
+	github.com/spf13/afero v1.10.0 // indirect
 	github.com/spf13/cast v1.5.1 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect

@@ -15,16 +15,16 @@ import (
 	"github.com/aws/jsii-runtime-go"
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 
-	"github.com/cdktf/cdktf-provider-aws-go/aws/v16/dataawsssoadmininstances"
-	"github.com/cdktf/cdktf-provider-aws-go/aws/v16/identitystoregroup"
-	"github.com/cdktf/cdktf-provider-aws-go/aws/v16/identitystoregroupmembership"
-	"github.com/cdktf/cdktf-provider-aws-go/aws/v16/identitystoreuser"
-	"github.com/cdktf/cdktf-provider-aws-go/aws/v16/organizationsaccount"
-	"github.com/cdktf/cdktf-provider-aws-go/aws/v16/organizationsorganization"
-	aws "github.com/cdktf/cdktf-provider-aws-go/aws/v16/provider"
-	"github.com/cdktf/cdktf-provider-aws-go/aws/v16/ssoadminaccountassignment"
-	"github.com/cdktf/cdktf-provider-aws-go/aws/v16/ssoadminmanagedpolicyattachment"
-	"github.com/cdktf/cdktf-provider-aws-go/aws/v16/ssoadminpermissionset"
+	"github.com/cdktf/cdktf-provider-aws-go/aws/v17/dataawsssoadmininstances"
+	"github.com/cdktf/cdktf-provider-aws-go/aws/v17/identitystoregroup"
+	"github.com/cdktf/cdktf-provider-aws-go/aws/v17/identitystoregroupmembership"
+	"github.com/cdktf/cdktf-provider-aws-go/aws/v17/identitystoreuser"
+	"github.com/cdktf/cdktf-provider-aws-go/aws/v17/organizationsaccount"
+	"github.com/cdktf/cdktf-provider-aws-go/aws/v17/organizationsorganization"
+	aws "github.com/cdktf/cdktf-provider-aws-go/aws/v17/provider"
+	"github.com/cdktf/cdktf-provider-aws-go/aws/v17/ssoadminaccountassignment"
+	"github.com/cdktf/cdktf-provider-aws-go/aws/v17/ssoadminmanagedpolicyattachment"
+	"github.com/cdktf/cdktf-provider-aws-go/aws/v17/ssoadminpermissionset"
 )
 
 //go:embed infra.cue
