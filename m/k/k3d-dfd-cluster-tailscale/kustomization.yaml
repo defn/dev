@@ -15,3 +15,5 @@ patches:
 resources:
   - https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/manifests/operator.yaml
   - resource-externalsecret-tailscale.yaml
+  - resource-clusterrole-tailscale-auth-proxy.yaml
+  - resource-clusterrolebinding-tailscale-auth-proxy.yaml
