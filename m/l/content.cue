@@ -13,14 +13,11 @@ import (
 	}
 	html: string | *content.html
 }
+
 // PageContent decorates a page
 #PageContent: #Content & {
 	content: html: string
-	html: """
-		<div class="mx-auto max-w-3xl text-base text-gray-700">
-		\(content.html)
-		</div>
-		"""
+	html: content.html
 }
 
 // TitleContent decorates a title
@@ -66,15 +63,17 @@ import (
 		html: strings.Join(items_html, "")
 	}
 	html: """
+		<div class="mx-auto max-w-3xl text-base text-gray-700">
 		<ul role="list" class="mt-8 max-w-xl space-y-8 text-gray-600">\(content.html)</ul>
+		</div>
 		"""
 }
 
 // TutorialContent decores a Tutorial Section
 #TutorialContent: #Content & {
-	title: string
-	steps: #ListContent.items
-	content:  #SectionContent & {
+	title:   string
+	steps:   #ListContent.items
+	content: #SectionContent & {
 		"title": title
 		content: (#ListContent & {items: steps})
 	}

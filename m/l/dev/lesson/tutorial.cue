@@ -1,6 +1,10 @@
 package l
 
-page: content: #TutorialContent & {
+page: content: html: """
+	<iframe src="https://8000--main--dev--amanibhavam.coder.dev.amanibhavam.defn.run/html/" frameborder="0"></iframe>
+	"""
+
+oldpage: content: #TutorialContent & {
 	title: "Tutorial"
 	steps: [{
 		title: "Change to workshop <a href=\"/?folder=/home/ubuntu/m/l/dev/lesson\">directory</a>"
