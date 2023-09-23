@@ -1153,6 +1153,22 @@ kustomize: "tailscale": #Kustomize & {
 			apiGroup: "rbac.authorization.k8s.io"
 		}
 	}
+
+	resource: "clusterrolebinding-tailscale-admins": {
+		apiVersion: "rbac.authorization.k8s.io/v1"
+		kind:       "ClusterRoleBinding"
+		metadata: name: "tailscale-admins"
+		subjects: [{
+			kind:     "Group"
+			name:     "tag:k8s-admins"
+			apiGroup: "rbac.authorization.k8s.io"
+		}]
+		roleRef: {
+			kind:     "ClusterRole"
+			name:     "cluster-admin"
+			apiGroup: "rbac.authorization.k8s.io"
+		}
+	}
 }
 
 kustomize: "issuer": #Kustomize & {
