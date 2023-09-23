@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-# fuck off
-analytics_settings(False)
-
 load("ext://restart_process", "custom_build_with_restart")
+
+# local kubernetes
+allow_k8s_contexts("dfd")
 
 # local registry
 default_registry("169.254.32.1:5000")
@@ -14,25 +14,27 @@ local_resource(
     serve_cmd=["b", "watch"],
 )
 
+cli_build = "../bazel-bin/dev/dev_/dev"
+cli_release = "/tmp/cli"
+cli_entrypoint = "/cli"
 
 # api initial deploy
-allow_k8s_contexts('dfd-amanibhavam-dev')
 k8s_yaml(local("cat deploy.yaml"))
 
-# api service selected from deploy
-k8s_resource("api", resource_deps=["cli"])
-
 # api builds when cmd/, command/ changes
-local_resource(name="cli", cmd="cd .. && make build", deps=["../cmd", "../command"])
+local_resource(name="cli", cmd="sudo cp ../bazel-bin/dev/dev_/dev /tmp/cli && sudo chmod 755 /tmp/cli", deps=[cli_build])
+
+# api service selected from deploy
+k8s_resource("api")
 
 # api updates when api builds
 custom_build_with_restart(
     ref="api",
     command="cd .. && make image tag=$EXPECTED_REF",
-    deps=["/tmp/cli"],
-    trigger=["/tmp/cli"],
-    entrypoint=["/cli"],
+    deps=[cli_release],
+    trigger=[cli_release],
+    entrypoint=[cli_entrypoint],
     live_update=[
-        sync("/tmp/cli", "/app"),
+        sync(cli_release, cli_entrypoint),
     ],
 )
