@@ -22,7 +22,9 @@ cli_entrypoint = "/cli"
 k8s_yaml(local("cat deploy.yaml"))
 
 # api builds when cmd/, command/ changes
-local_resource(name="cli", cmd="sudo cp ../bazel-bin/dev/dev_/dev /tmp/cli && sudo chmod 755 /tmp/cli", deps=[cli_build])
+local_resource(name="cli", 
+    cmd="if test -f {build}; then sudo cp {build} {release} && sudo chmod 755 {release}; fi".format(build=cli_build, release=cli_release), 
+    deps=[cli_build])
 
 # api service selected from deploy
 k8s_resource("api")
