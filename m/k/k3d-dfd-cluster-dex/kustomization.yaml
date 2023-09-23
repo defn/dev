@@ -16,5 +16,5 @@ helmCharts:
         issuer: http://dex.dev.amanibhavam.defn.run
         storage:
           type: memory
-        enablePasswordDB: "true"
+        enablePasswordDB: true
     includeCRDs: true
