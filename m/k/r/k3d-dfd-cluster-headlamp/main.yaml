@@ -15,6 +15,12 @@ metadata:
   name: headlamp
   namespace: headlamp
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: headlamp-admin
+  namespace: headlamp
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -32,6 +38,19 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: headlamp
+  namespace: headlamp
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: headlamp-admin-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: headlamp-admin
   namespace: headlamp
 ---
 apiVersion: v1
