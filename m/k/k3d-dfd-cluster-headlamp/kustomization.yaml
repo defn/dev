@@ -3,6 +3,7 @@
 patches: []
 resources:
   - resource-namespace-headlamp.yaml
+namespace: headlamp
 helmCharts:
   - releaseName: headlamp
     name: headlamp

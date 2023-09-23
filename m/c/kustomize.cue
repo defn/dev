@@ -1861,6 +1861,8 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 
 // https://artifacthub.io/packages/helm/headlamp/headlamp
 kustomize: "headlamp": #KustomizeHelm & {
+	namespace: "headlamp"
+
 	helm: {
 		release:   "headlamp"
 		name:      "headlamp"
