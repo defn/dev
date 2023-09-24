@@ -9,13 +9,13 @@ allow_k8s_contexts('dfd')
 default_registry("169.254.32.1:5000")
 
 # hook build
-local_resource(name="hook-build", cmd="./hooks/main.sh --config", deps=["./hooks"])
+local_resource(name="hook-config", cmd="./hooks/main.sh --config", deps=["./hooks"])
 
 # hook initial deploy
-k8s_yaml(local("cat main.yaml"))
+k8s_yaml(local("bash -c \"cat main.yaml | sed \\\"s#NAMESPACE#$(echo $HOSTNAME | cut -d- -f1-3)#\\\"\""))
 
 # hook service selected from deploy
-k8s_resource("hook", resource_deps=["hook-build"])
+k8s_resource("hook", resource_deps=["hook-config"])
 
 # hook updates when hook updates
 custom_build_with_restart(
