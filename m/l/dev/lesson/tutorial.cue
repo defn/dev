@@ -9,9 +9,6 @@ page: content: html: """
 tutorial: #TutorialContent & {
 	title: "Tutorial"
 	steps: [{
-		title: "Change to workshop <a href=\"/?folder=/home/ubuntu/m/l/dev/lesson\">directory</a>"
-		desc:  "cd workshop"
-	}, {
 		title: "Run the slide-show with Tilt"
 		desc:  "tilt up"
 	}, {
