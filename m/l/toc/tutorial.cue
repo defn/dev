@@ -1,7 +1,7 @@
 package l
 
 page: content: #TutorialContent & {
-	title: "Tutorial Table of Contents"
+	title: "Table of Contents"
 	steps: [{
 		title: "<a href=\"/?folder=/home/ubuntu/m/l/dev\">m/l/dev</a>"
 		desc: "Slide-show using sli.dev"

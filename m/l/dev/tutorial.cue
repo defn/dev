@@ -7,7 +7,7 @@ page: content: html: """
 	"""
 
 tutorial: #TutorialContent & {
-	title: "Tutorial"
+	title: "Tutorial : <a href=\"/?folder=/home/ubuntu/m\">TOC</a>"
 	steps: [{
 		title: "Run the slide-show with Tilt"
 		desc:  "tilt up"
