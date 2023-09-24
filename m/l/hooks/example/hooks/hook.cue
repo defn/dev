@@ -1,0 +1,13 @@
+package hook
+
+config: {
+configVersion: "v1"
+onStartup:     1
+kubernetes: [{
+	apiVersion: "v1"
+	kind:       "ConfigMap"
+	executeHookOnEvent: [
+		"Added",
+	]
+}]
+}

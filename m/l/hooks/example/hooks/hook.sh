@@ -3,17 +3,7 @@
 set -efu
 
 function config {
-  jq -n '{
-    configVersion: "v1",
-    onStartup: 1,
-    kubernetes: [{
-      apiVersion: "v1",
-      kind: "ConfigMap",
-      executeHookOnEvent: [
-        "Added"
-      ]
-    }]
-  }'
+  cat config.json
 }
 
 function hook {
