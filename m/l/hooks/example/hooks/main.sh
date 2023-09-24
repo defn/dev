@@ -8,7 +8,7 @@ function config {
     onStartup: 1,
     kubernetes: [{
       apiVersion: "v1",
-      kind: "Pod",
+      kind: "ConfigMap",
       executeHookOnEvent: [
         "Added"
       ]
