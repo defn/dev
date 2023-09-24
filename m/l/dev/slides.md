@@ -5,7 +5,6 @@ class: text-center
 highlighter: shiki
 lineNumbers: false
 transition: slide-left
-title: Welcome to Slidev
 mdc: true
 fonts:
   sans: 'valkyrie_a'
