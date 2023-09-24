@@ -16,7 +16,7 @@ function config {
   }'
 }
 
-function main {
+function hook {
   echo "=========================================================="
   cat $BINDING_CONTEXT_PATH | jq -cr '.[] | "objects: \(.objects//[] | .[].object.metadata | "\(.namespace) \(.name)")"'
   cat $BINDING_CONTEXT_PATH | jq -cr '.[] | "keys: \(keys)"'
@@ -25,15 +25,11 @@ function main {
   echo "=========================================================="
 }
 
-function route {
+function main {
   case "${1:-}" in
-    --config)
-      config
-      ;;
-    *)
-      main
-      ;;
+    --config) config ;;
+    *) hook ;;
   esac
 }
 
-route "$@"
+main "$@"
