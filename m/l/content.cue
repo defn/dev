@@ -23,7 +23,7 @@ import (
 // TitleContent decorates a title
 #TitleContent: #Content & {
 	title: string
-	desc:  string
+	desc:  string | *""
 	html:  """
 		<h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">\(title)</h1>
 		<p class="mt-6 text-xl leading-8">\(desc)</p>
@@ -46,7 +46,7 @@ import (
 #ListContent: #Content & {
 	items: [...{
 		title: string
-		desc:  string
+		desc:  string | *""
 	}]
 	content: {
 		items_html: [
