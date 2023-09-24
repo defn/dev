@@ -18,7 +18,7 @@ spec:
       containers:
         - name: shell-operator
           command: ["/bin/tini", "--", "/shell-operator"]
-          args: ["start"]
+          args: ["start", "--log-type=color"]
           image: hook
           imagePullPolicy: Always
 ---
