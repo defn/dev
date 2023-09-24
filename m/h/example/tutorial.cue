@@ -14,10 +14,10 @@ tutorial: #TutorialContent & {
 		desc:  "Press s to stream logs.  This mode will no longer open the web UI."
 	}, {
 		title: "Edit hook.sh file to change the shell-operator"
-		desc: "Tilt will Live Update in the \"hook\" resource."
+		desc:  "Tilt will Live Update in the \"hook\" resource."
 	}, {
 		title: "Edit deploy.yaml file to change Kubernetes deployment."
-		desc: "Then restart the (Tilt) resource in Tilt web UI."
+		desc:  "Then restart the (Tilt) resource in Tilt web UI."
 	}, {
 		title: "Get a shell in the operator pod."
 		desc:  "kubectl exec -ti deploy/hook -- bash"
