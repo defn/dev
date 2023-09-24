@@ -18,12 +18,13 @@ function config {
 
 function main {
   echo "=========================================================="
-  echo $BINDING_CONTEXT_PATH
-  cat $BINDING_CONTEXT_PATH | jq -cr '.[] | keys'
+  cat $BINDING_CONTEXT_PATH | jq -cr '.[] | "objects: \(.objects//[] | .[].object.metadata | "\(.namespace) \(.name)")"'
   echo "=========================================================="
-  cat $BINDING_CONTEXT_PATH | jq -cr '.[] | "\(.type)"'
-  cat $BINDING_CONTEXT_PATH | jq -cr '.[] | "\(.binding)"'
-  cat $BINDING_CONTEXT_PATH | jq -cr '.[] | "\(.objects//[] | .[].object.metadata | "\(.namespace) \(.name)")"'
+  cat $BINDING_CONTEXT_PATH | jq -cr '.[] | "keys: \(keys)"'
+  cat $BINDING_CONTEXT_PATH | jq -cr '.[] | "type: \(.type)"'
+  cat $BINDING_CONTEXT_PATH | jq -cr '.[] | "binding: \(.binding)"'
+  echo "=========================================================="
+  echo "binding context path: $BINDING_CONTEXT_PATH"
   echo "=========================================================="
 }
 
