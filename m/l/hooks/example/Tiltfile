@@ -10,16 +10,16 @@ default_registry("169.254.32.1:5000")
 
 local_resource(name="tutorial", cmd="cue eval --out json -e html | jq -r . > tutorial.html", deps=["tutorial.cue"])
 
-# hook build
-local_resource(name="hook-config", cmd="./hooks/hook.sh --config", deps=["./hooks"])
-
 # hook initial deploy
 k8s_yaml(local("bash -c \"cat deploy.yaml | sed \\\"s#NAMESPACE#$(echo $HOSTNAME | cut -d- -f1-3)#\\\"\""))
 
-# hook service selected from deploy
+# hook build
+local_resource(name="hook-config", cmd="true", deps=["./hooks"])
+
+# hook service
 k8s_resource("hook", resource_deps=["hook-config"])
 
-# hook updates when hook updates
+# hook live update
 custom_build_with_restart(
     ref="hook",
     command="make build image=$EXPECTED_REF",
