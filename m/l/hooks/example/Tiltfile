@@ -8,6 +8,8 @@ allow_k8s_contexts('dfd')
 # local registry
 default_registry("169.254.32.1:5000")
 
+local_resource(name="tutorial", cmd="cue eval --out json -e html | jq -r . > tutorial.html", deps=["tutorial.cue"])
+
 # hook build
 local_resource(name="hook-config", cmd="./hooks/main.sh --config", deps=["./hooks"])
 
