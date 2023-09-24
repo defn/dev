@@ -14,10 +14,10 @@ local_resource(name="tutorial", cmd="cue eval --out json -e html | jq -r . > tut
 k8s_yaml(local("bash -c \"cat deploy.yaml | sed \\\"s#NAMESPACE#$(echo $HOSTNAME | cut -d- -f1-3)#\\\"\""))
 
 # hook build
-local_resource(name="hook-config", cmd="true", deps=["./hooks"])
+local_resource(name="hook-build", cmd="true", deps=["./hooks"])
 
 # hook service
-k8s_resource("hook", resource_deps=["hook-config"])
+k8s_resource("hook", resource_deps=["hook-build"])
 
 # hook live update
 custom_build_with_restart(

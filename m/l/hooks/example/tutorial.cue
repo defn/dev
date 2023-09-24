@@ -13,10 +13,10 @@ tutorial: #TutorialContent & {
 		title: "Open the Tilt web UI by pressing the space bar while in the shell panel."
 		desc:  "Press s to stream logs.  This mode will no longer open the web UI."
 	}, {
-		title: "Edit main.sh file to change the shell-operator"
+		title: "Edit hook.sh file to change the shell-operator"
 		desc: "Tilt will Live Update in the \"hook\" resource."
 	}, {
-		title: "Edit main.yaml file to change Kubernetes deployment."
+		title: "Edit deploy.yaml file to change Kubernetes deployment."
 		desc: "Then restart the (Tilt) resource in Tilt web UI."
 	}, {
 		title: "Get a shell in the operator pod."
