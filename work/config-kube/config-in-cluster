@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Config
+clusters:
+  - name: dfd
+    cluster:
+      certificate-authority: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      server: https://kubernetes.default.svc.cluster.local
+contexts:
+  - name: dfd
+    context:
+      cluster: dfd
+      user: dfd
+current-context: dfd
+users:
+  - name: dfd
+    user:
+      tokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
