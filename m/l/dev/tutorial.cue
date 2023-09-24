@@ -12,10 +12,10 @@ tutorial: #TutorialContent & {
 		title: "Run the slide-show with Tilt"
 		desc:  "tilt up"
 	}, {
-		title: "One the slide-show is running, cick on retry below to load the slide-show",
-		desc:  ""
+		title: "Load the slide-show"
+		desc: "Once the slide-show is running, cick on retry below to load the slide-show",
 	}, {
-		title: "Edit slides.md file, change \"Welcome to Slidev\".  Then watch slide-show update."
-		desc:  ""
+		title: "Edit slides.md file, change \"Welcome to Slidev\"."
+		desc: "Watch slide-show update."
 	}]
 }
