@@ -19,7 +19,7 @@ tutorial: #TutorialContent & {
 		title: "Edit deploy.yaml file to change Kubernetes deployment."
 		desc:  "Then restart the (Tilt) resource in Tilt web UI."
 	}, {
-		title: "Get a shell in the operator pod."
-		desc:  "kubectl exec -ti deploy/hook -- bash"
+		title: "Run a comand in the operator pod."
+		desc:  "kubectl exec -ti deploy/hook -- /shell-operator queue list"
 	}]
 }
