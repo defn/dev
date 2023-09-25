@@ -58,7 +58,7 @@ home:
 	sudo -A ln -nfs ~/bin/nix/go /usr/local/bin/
 	sudo -A ln -nfs /home/ubuntu/.nix-profile/bin/nix-instantiate /usr/local/bin/
 	if test -x /opt/homebrew/opt/util-linux/bin/flock; then ln -nfs /opt/homebrew/opt/util-linux/bin/flock bin/nix/; fi
-	ln -nfs .nix-profile/bin/nix bin/nix/nix
+	ln -nfs ~/.nix-profile/bin/nix bin/nix/nix
 
 dotfiles:
 	$(MARK) configure dotfiles
