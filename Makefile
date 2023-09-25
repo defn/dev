@@ -197,6 +197,7 @@ nix-Darwin:
 
 # https://github.com/NixOS/nixpkgs/blob/9f0d9ad45c4bd998c46ba1cbe0eb0dd28c6288a5/pkgs/tools/package-management/nix/default.nix
 # look for the stable version
+# nix profile install nixpkgs/9f0d9ad45c4bd998c46ba1cbe0eb0dd28c6288a5#nix
 nix-Linux-bootstrap:
 	sh <(curl -L https://releases.nixos.org/nix/nix-2.17.0/install) --no-daemon
 	git checkout .bash_profile
