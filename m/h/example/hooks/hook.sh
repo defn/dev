@@ -46,48 +46,63 @@ function ctx_filter_result {
   context "$i" | jq '.filterResult'
 }
 
+function handler {
+  local i
+  local event
+  i="$1"; shift
+  event="$1"; shift
+  
+  echo "====[ $i / $(index) ]======================================================"
+  echo "Event: ${event}"
+  case "${event}" in
+    onStart*)
+      echo "Binding : $(ctx_binding "$i")"
+      ;;
+    Synchronization*)
+      echo "Binding : $(ctx_binding "$i"), Type: $(ctx_type "$i")"
+      objects "$i" | jq -c 'map(.object.kind)'
+      ;;
+    Schedule*)
+      echo "Binding : $(ctx_binding "$i"), Type: $(ctx_type "$i")"
+      objects "$i" | jq -c 'map(.object.kind)'
+      ;;
+    Group*)
+      echo "Binding : $(ctx_binding "$i"), Type: $(ctx_type "$i")"
+      objects "$i" | jq -c 'map(.object.kind)'
+      ;;
+    Event_Added*)
+      echo "Binding : $(ctx_binding "$i"), Type: $(ctx_type "$i"), WatchEvent: $(ctx_watch_event "$i")"
+      echo "FilterResult: $(ctx_filter_result "$i")"
+      obj "$i" | jq -c '.metadata'
+      ;;
+    Event_Modified*)
+      echo "Binding : $(ctx_binding "$i"), Type: $(ctx_type "$i"), WatchEvent: $(ctx_watch_event "$i")"
+      echo "FilterResult: $(ctx_filter_result "$i")"
+      obj "$i" | jq -c '.metadata'
+      ;;
+    Event_Deleted*)
+      echo "Binding : $(ctx_binding "$i"), Type: $(ctx_type "$i"), WatchEvent: $(ctx_watch_event "$i")"
+      echo "FilterResult: $(ctx_filter_result "$i")"
+      obj "$i" | jq -c '.metadata'
+      ;;
+    *)
+      echo "Unknown type: $(ctx_type "$i")"
+      objects "$i" | jq -cr .
+      ;;
+  esac
+  echo "================================================================"
+}
+
 function hook {
   for i in $(index); do
-    echo "====[ $i / $(index) ]======================================================"
     case "$(ctx_type "$i")" in
-      null)
-        echo "Binding : $(ctx_binding "$i")"
-        ;;
-      Synchronization)
-        echo "Binding : $(ctx_binding "$i"), Type: $(ctx_type "$i")"
-        objects "$i" | jq -c 'map(.object.kind)'
-        ;;
-      Event)
-        echo "Binding : $(ctx_binding "$i"), Type: $(ctx_type "$i"), WatchEvent: $(ctx_watch_event "$i")"
-        echo "FilterResult: $(ctx_filter_result "$i")"
-        case "$(ctx_watch_event "$i")" in
-          Added)
-            obj "$i" | jq -c '.metadata'
-            ;;
-          Modified)
-            obj "$i" | jq -c '.metadata'
-            ;;
-          Deleted)
-            obj "$i" | jq -c '.metadata'
-            ;;
-          *)
-            echo "Unknown watch event: $(ctx_watch_event "$i")"
-            objects "$i" | jq -cr .
-            ;;
-        esac
-        ;;
-      Group*)
-        objects "$i" | jq -cr .
-        ;;
-      Schedule)
-        objects "$i" | jq -cr .
-        ;;
-      *)
-        echo "Unknown type: $(ctx_type "$i")"
-        objects "$i" | jq -cr .
-        ;;
+      null)            handler "$i" "onStart" ;;
+      Synchronization) handler "$i" "$(ctx_type "$i")_$(ctx_binding "$i")" ;;
+      Schedule)        handler "$i" "$(ctx_type "$i")_$(ctx_binding "$i")" ;;
+      Group*)          handler "$i" "$(ctx_type "$i")_$(ctx_binding "$i")" ;;
+      Event)           handler "$i" "$(ctx_type "$i")_$(ctx_watch_event "$i")_$(ctx_binding "$i")" ;;
+      *)               handler "$i" "Unknown" ;;
     esac
-    echo "================================================================"
   done
 }
 
