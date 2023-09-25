@@ -55,38 +55,32 @@ function handler {
   echo "====[ $i / $(index) ]======================================================"
   echo "Event: ${event}"
   case "${event}" in
-    onStart*)
-      echo "Binding : $(ctx_binding "$i")"
+    Start)
+      true
       ;;
     Synchronization*)
-      echo "Binding : $(ctx_binding "$i"), Type: $(ctx_type "$i")"
       objects "$i" | jq -c 'map(.object.kind)'
       ;;
     Schedule*)
-      echo "Binding : $(ctx_binding "$i"), Type: $(ctx_type "$i")"
       objects "$i" | jq -c 'map(.object.kind)'
       ;;
     Group*)
-      echo "Binding : $(ctx_binding "$i"), Type: $(ctx_type "$i")"
       objects "$i" | jq -c 'map(.object.kind)'
       ;;
     Event_Added*)
-      echo "Binding : $(ctx_binding "$i"), Type: $(ctx_type "$i"), WatchEvent: $(ctx_watch_event "$i")"
       echo "FilterResult: $(ctx_filter_result "$i")"
       obj "$i" | jq -c '.metadata'
       ;;
     Event_Modified*)
-      echo "Binding : $(ctx_binding "$i"), Type: $(ctx_type "$i"), WatchEvent: $(ctx_watch_event "$i")"
       echo "FilterResult: $(ctx_filter_result "$i")"
       obj "$i" | jq -c '.metadata'
       ;;
     Event_Deleted*)
-      echo "Binding : $(ctx_binding "$i"), Type: $(ctx_type "$i"), WatchEvent: $(ctx_watch_event "$i")"
       echo "FilterResult: $(ctx_filter_result "$i")"
       obj "$i" | jq -c '.metadata'
       ;;
     *)
-      echo "Unknown type: $(ctx_type "$i")"
+      echo "UnknownType: $(ctx_type "$i")"
       objects "$i" | jq -cr .
       ;;
   esac
@@ -96,11 +90,11 @@ function handler {
 function hook {
   for i in $(index); do
     case "$(ctx_type "$i")" in
-      null)            handler "$i" "onStart" ;;
-      Synchronization) handler "$i" "$(ctx_type "$i")_$(ctx_binding "$i")" ;;
-      Schedule)        handler "$i" "$(ctx_type "$i")_$(ctx_binding "$i")" ;;
-      Group*)          handler "$i" "$(ctx_type "$i")_$(ctx_binding "$i")" ;;
-      Event)           handler "$i" "$(ctx_type "$i")_$(ctx_watch_event "$i")_$(ctx_binding "$i")" ;;
+      null)            handler "$i" "Start" ;;
+      Synchronization) handler "$i" "$(ctx_type "$i")/$(ctx_binding "$i")" ;;
+      Schedule)        handler "$i" "$(ctx_type "$i")/$(ctx_binding "$i")" ;;
+      Group*)          handler "$i" "$(ctx_type "$i")/$(ctx_binding "$i")" ;;
+      Event)           handler "$i" "$(ctx_type "$i")_$(ctx_watch_event "$i")/$(ctx_binding "$i")" ;;
       *)               handler "$i" "Unknown" ;;
     esac
   done
