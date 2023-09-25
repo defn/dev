@@ -17,6 +17,7 @@ hooks: "hook": config: {
 		kind:       "Pod"
 		executeHookOnEvent: [
 			"Added",
+			"Modified",
 			"Deleted" 
 		]
 	}]
