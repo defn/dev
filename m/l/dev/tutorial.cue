@@ -10,7 +10,7 @@ tutorial: #TutorialContent & {
 	title: "Tutorial : <a href=\"/?folder=/home/ubuntu/m\">TOC</a>"
 	steps: [{
 		title: "Run the slide-show with Tilt"
-		desc:  "tilt up"
+		desc:  "tilt up --stream --port 0"
 	}, {
 		title: "Load the slide-show"
 		desc: "Once the slide-show is running, cick on retry below to load the slide-show",
