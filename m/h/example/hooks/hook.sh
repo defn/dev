@@ -30,7 +30,7 @@ function hook {
       onStartup)
         echo "Starting..."
         ;;
-      ConfigMap|Pod)
+      *)
         echo "Type: $(ctx_type "$i")"
         case "$(ctx_type "$i")" in
           Synchronization)
@@ -58,9 +58,6 @@ function hook {
             echo "Unknown type: $(ctx_type "$i")"
             ;;
         esac
-        ;;
-      *)
-        echo "Unknown binding: $(ctx_binding "$i")"
         ;;
     esac
     echo "================================================================"

@@ -20,5 +20,23 @@ hooks: "hook": config: {
 			"Modified",
 			"Deleted" 
 		]
+	}, {
+		name: "Secret"
+		apiVersion: "v1"
+		kind:       "Secret"
+		executeHookOnEvent: [
+			"Added",
+			"Modified",
+			"Deleted" 
+		]
+	}, {
+		name: "Namespace"
+		apiVersion: "v1"
+		kind:       "Namespace"
+		executeHookOnEvent: [
+			"Added",
+			"Modified",
+			"Deleted" 
+		]
 	}]
 }
