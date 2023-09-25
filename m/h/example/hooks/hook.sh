@@ -25,26 +25,29 @@ function ctx_watch_event {
 function hook {
   for i in $(ctx_index); do
     echo "====[ $i / $(ctx_index) ]======================================================"
+    echo "Binding : $(ctx_binding "$i")"
     case "$(ctx_binding "$i")" in
       onStartup)
         echo "Starting..."
         ;;
-      ConfigMap|Pod|kubernetes)
+      ConfigMap|Pod)
+        echo "Type: $(ctx_type "$i")"
         case "$(ctx_type "$i")" in
           Synchronization)
             cat $BINDING_CONTEXT_PATH | jq -cr --arg i "$i" '.[$i | tonumber] | .objects | map(.object.kind)'
             ;;
           Event)
+            echo "WatchEvent: $(ctx_watch_event "$i")"
             case "$(ctx_watch_event "$i")" in
               Added)
-                cat $BINDING_CONTEXT_PATH | jq -cr --arg i "$i" '.[$i | tonumber] | .object | del(.object.metadata.managedFields)'
+                cat $BINDING_CONTEXT_PATH | jq -r --arg i "$i" '.[$i | tonumber] | .object | del(.metadata.managedFields) | .metadata'
                 ;;
               Modified)
-                cat $BINDING_CONTEXT_PATH | jq -cr --arg i "$i" '.[$i | tonumber] | .object | del(.object.metadata.managedFields)'
+                cat $BINDING_CONTEXT_PATH | jq -r --arg i "$i" '.[$i | tonumber] | .object | del(.metadata.managedFields) | .metadata'
                 echo $KUBERNETES_PATCH_PATH
                 ;;
               Deleted)
-                cat $BINDING_CONTEXT_PATH | jq -cr --arg i "$i" '.[$i | tonumber] | .object | del(.object.metadata.managedFields)'
+                cat $BINDING_CONTEXT_PATH | jq -r --arg i "$i" '.[$i | tonumber] | .object | del(.metadata.managedFields) | .metadata'
                 ;;
               *)
                 echo "Unknown watch event: $(ctx_watch_event "$i")"
