@@ -162,17 +162,17 @@
       },
       "locked": {
         "dir": "m/pkg/ibazel",
-        "lastModified": 1695675896,
-        "narHash": "sha256-q8AqgdRo4kafWkd234NJ0XPf4/ay+rWhMNmIvXEUthM=",
+        "lastModified": 1692066386,
+        "narHash": "sha256-qN5iXmok8IRs0nHcPQjJNO5B7S7u//NN0YsPhkz0wd0=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "b4a3e8dc1dc59ec4308628924f3afb6a4b9d7b8f",
+        "rev": "e4095e73b81e2d2a435b58e979e2a09ea6a40e80",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/ibazel",
         "owner": "defn",
-        "ref": "pkg-ibazel-0.23.7-4",
+        "ref": "pkg-ibazel-0.23.7-2",
         "repo": "dev",
         "type": "github"
       }
