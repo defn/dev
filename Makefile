@@ -43,7 +43,7 @@ cache:
 	set -xeo pipefail; for n in $(flakes); do \
 		mark $$n; \
 		(cd m/pkg/$$n && ~/bin/b build && nix build && n cache defn); \
-		done 
+		done
 
 home:
 	$(MARK) home
@@ -58,6 +58,7 @@ home:
 	sudo -A ln -nfs ~/bin/nix/go /usr/local/bin/
 	sudo -A ln -nfs /home/ubuntu/.nix-profile/bin/nix-instantiate /usr/local/bin/
 	if test -x /opt/homebrew/opt/util-linux/bin/flock; then ln -nfs /opt/homebrew/opt/util-linux/bin/flock bin/nix/; fi
+	ln -nfs .nix-profile/bin/nix bin/nix/nix
 
 dotfiles:
 	$(MARK) configure dotfiles
@@ -194,6 +195,8 @@ nix-Darwin:
 	sudo cp .config/nix/nix.conf /etc/nix/
 	sudo launchctl start org.nixos.nix-daemon
 
+# https://github.com/NixOS/nixpkgs/blob/9f0d9ad45c4bd998c46ba1cbe0eb0dd28c6288a5/pkgs/tools/package-management/nix/default.nix
+# look for the stable version
 nix-Linux-bootstrap:
 	sh <(curl -L https://releases.nixos.org/nix/nix-2.17.0/install) --no-daemon
 	git checkout .bash_profile
