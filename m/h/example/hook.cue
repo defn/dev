@@ -38,5 +38,32 @@ hooks: "hook": config: {
 			"Modified",
 			"Deleted" 
 		]
+	}, {
+		name: "Deployment"
+		apiVersion: "apps/v1"
+		kind:       "Deployment"
+		executeHookOnEvent: [
+			"Added",
+			"Modified",
+			"Deleted" 
+		]
+	}, {
+		name: "ReplicatSet"
+		apiVersion: "apps/v1"
+		kind:       "ReplicaSet"
+		executeHookOnEvent: [
+			"Added",
+			"Modified",
+			"Deleted" 
+		]
+	}, {
+		name: "DaemonSet"
+		apiVersion: "apps/v1"
+		kind:       "DaemonSet"
+		executeHookOnEvent: [
+			"Added",
+			"Modified",
+			"Deleted" 
+		]
 	}]
 }
