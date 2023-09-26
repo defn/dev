@@ -4,6 +4,7 @@
     "kubernetes": [
         {
             "name": "ConfigMap",
+            "queue": "configmap",
             "apiVersion": "v1",
             "kind": "ConfigMap",
             "executeHookOnEvent": [
@@ -13,6 +14,7 @@
         },
         {
             "name": "Pod",
+            "queue": "pod",
             "apiVersion": "v1",
             "kind": "Pod",
             "executeHookOnEvent": [
@@ -23,6 +25,7 @@
         },
         {
             "name": "Secret",
+            "queue": "secret",
             "apiVersion": "v1",
             "kind": "Secret",
             "executeHookOnEvent": [
@@ -33,6 +36,7 @@
         },
         {
             "name": "Namespace",
+            "queue": "namespace",
             "apiVersion": "v1",
             "kind": "Namespace",
             "executeHookOnEvent": [
@@ -43,6 +47,7 @@
         },
         {
             "name": "Deployment",
+            "queue": "deployment:",
             "apiVersion": "apps/v1",
             "kind": "Deployment",
             "executeHookOnEvent": [
@@ -52,7 +57,8 @@
             ]
         },
         {
-            "name": "ReplicatSet",
+            "name": "ReplicaSet",
+            "queue": "replicaset",
             "apiVersion": "apps/v1",
             "kind": "ReplicaSet",
             "executeHookOnEvent": [
@@ -63,6 +69,7 @@
         },
         {
             "name": "DaemonSet",
+            "queue": "daemonset",
             "apiVersion": "apps/v1",
             "kind": "DaemonSet",
             "executeHookOnEvent": [

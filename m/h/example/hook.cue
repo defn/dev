@@ -5,6 +5,7 @@ hooks: "hook": config: {
 	onStartup:     1
 	kubernetes: [{
 		name: "ConfigMap"
+		queue: "configmap"
 		apiVersion: "v1"
 		kind:       "ConfigMap"
 		executeHookOnEvent: [
@@ -13,6 +14,7 @@ hooks: "hook": config: {
 		]
 	}, {
 		name: "Pod"
+		queue: "pod"
 		apiVersion: "v1"
 		kind:       "Pod"
 		executeHookOnEvent: [
@@ -22,6 +24,7 @@ hooks: "hook": config: {
 		]
 	}, {
 		name: "Secret"
+		queue: "secret"
 		apiVersion: "v1"
 		kind:       "Secret"
 		executeHookOnEvent: [
@@ -31,6 +34,7 @@ hooks: "hook": config: {
 		]
 	}, {
 		name: "Namespace"
+		queue: "namespace"
 		apiVersion: "v1"
 		kind:       "Namespace"
 		executeHookOnEvent: [
@@ -40,6 +44,7 @@ hooks: "hook": config: {
 		]
 	}, {
 		name: "Deployment"
+		queue: "deployment:"
 		apiVersion: "apps/v1"
 		kind:       "Deployment"
 		executeHookOnEvent: [
@@ -48,7 +53,8 @@ hooks: "hook": config: {
 			"Deleted" 
 		]
 	}, {
-		name: "ReplicatSet"
+		name: "ReplicaSet"
+		queue: "replicaset"
 		apiVersion: "apps/v1"
 		kind:       "ReplicaSet"
 		executeHookOnEvent: [
@@ -58,6 +64,7 @@ hooks: "hook": config: {
 		]
 	}, {
 		name: "DaemonSet"
+		queue: "daemonset"
 		apiVersion: "apps/v1"
 		kind:       "DaemonSet"
 		executeHookOnEvent: [
