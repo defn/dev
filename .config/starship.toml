@@ -32,5 +32,5 @@ disabled = true
 
 [custom.lockdown]
 command = 'if test "$(defaults read .GlobalPreferences.plist LDMGlobalEnabled)" != "1"; then echo not-locked-down; fi'
-when = ''' true '''
+when = ''' test "$(uname -s)" == "Darwin" '''
 format = '[$output]($style) '
