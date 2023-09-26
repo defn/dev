@@ -67,17 +67,9 @@ function handler {
     Group*)
       objects "$i" | jq -c 'map(.object.kind)'
       ;;
-    Event_Added*)
+    Event*)
       echo "FilterResult: $(ctx_filter_result "$i")"
-      obj "$i" | jq -c '.metadata'
-      ;;
-    Event_Modified*)
-      echo "FilterResult: $(ctx_filter_result "$i")"
-      obj "$i" | jq -c '.metadata'
-      ;;
-    Event_Deleted*)
-      echo "FilterResult: $(ctx_filter_result "$i")"
-      obj "$i" | jq -c '.metadata'
+      obj "$i" | jq '"Info: \(.kind) \(.metadata.namespace) \(.metadata.name)"'
       ;;
     *)
       echo "UnknownType: $(ctx_type "$i")"
