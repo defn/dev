@@ -11,5 +11,4 @@ if test -f ~/.bash_profile; then
 fi
 
 
-~/.bash_entrypoint
 export TMOUT=3600
