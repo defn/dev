@@ -15,6 +15,9 @@ page: content: #TutorialContent & {
 		title: "Run CI"
 		desc: "make ci"
 	}, {
+		title: "Run Za Warudo"
+		desc: "cd m; make za"
+	}, {
 		title: "Run Teacher's Coder"
 		desc: "make dev"
 	}]
