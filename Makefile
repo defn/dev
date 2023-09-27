@@ -2,8 +2,8 @@ SHELL := /bin/bash
 
 flakes ?= home oci nix secrets utils vpn acme godev nodedev localdev development cloud kubernetes remotedev shell
 
-nix-ignore:
-	@true
+build:
+	cd m/home && $(MAKE) build
 
 menu: # This menu
 	@perl -ne 'printf("%20s: %s\n","$$1","$$2") if m{^([\w+-]+):[^#]+#\s(.+)$$}' $(shell ls -d Makefile2>/dev/null)
@@ -34,9 +34,6 @@ macos:
 #	-docker context create host --docker host=unix:///var/run/docker.sock
 #	-docker network create dev
 #	docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock ubuntu chown 1000:1000 /var/run/docker.sock
-
-build:
-	env -u SSH_AUTH_SOCK earthly +build
 
 cache:
 	$(MARK) cache
