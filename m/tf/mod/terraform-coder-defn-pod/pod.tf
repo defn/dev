@@ -132,6 +132,11 @@ resource "kubernetes_deployment" "main" {
           }
 
           env {
+            name  = "CODER_PROC_MEMNICE_ENABLE"
+            value = "1"
+          }
+
+          env {
             name  = "DFD_OWNER"
             value = lower(data.coder_workspace.me.owner)
           }
