@@ -385,7 +385,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.26.0"
+		version: "6.26.1"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -815,10 +815,12 @@ kustomize: "knative": #Kustomize & {
 	}
 }
 
+cert_manager_version: "1.13.1"
+
 // https://artifacthub.io/packages/helm/cert-manager/cert-manager
 kustomize: "cert-manager-crds": #Kustomize & {
 	resource: "cert-manager-crds": {
-		url: "https://github.com/cert-manager/cert-manager/releases/download/v1.13.0/cert-manager.crds.yaml"
+		url: "https://github.com/cert-manager/cert-manager/releases/download/v\(cert_manager_version)/cert-manager.crds.yaml"
 	}
 }
 
@@ -829,7 +831,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 		release:   "cert-manager"
 		name:      "cert-manager"
 		namespace: "cert-manager"
-		version:   "1.13.0"
+		version:   cert_manager_version
 		repo:      "https://charts.jetstack.io"
 		values: {
 			ingressShim: {
@@ -842,7 +844,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 	}
 
 	resource: "cert-manager-crds": {
-		url: "https://github.com/cert-manager/cert-manager/releases/download/v1.13.0/cert-manager.crds.yaml"
+		url: "https://github.com/cert-manager/cert-manager/releases/download/v\(cert_manager_version)/cert-manager.crds.yaml"
 	}
 
 	resource: "namespace-cert-manager": core.#Namespace & {
@@ -1472,7 +1474,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "2.1.5"
+		version:   "2.2.0"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {
@@ -1830,7 +1832,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "2.1.4"
+		version:     "2.1.8"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true

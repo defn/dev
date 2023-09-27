@@ -11,7 +11,7 @@ namespace: coder
 helmCharts:
   - releaseName: coder
     name: coder
-    version: 2.1.5
+    version: 2.2.0
     repo: https://helm.coder.com/v2
     namespace: coder
     valuesInline:
