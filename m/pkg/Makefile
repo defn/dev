@@ -1,10 +1,10 @@
 SHELL := /bin/bash
 
+build:
+	cue eval --out json -e html | jq -r . > tutorial.html
+
 list:
 	$(MAKE) list_vendor_updates
-
-build:
-	true	
 
 update:
 	$(MAKE) update_flakes
