@@ -14,10 +14,21 @@ helmCharts:
       initJob:
         createAdmin: true
       adminUser: defn
-      adminPassword: adminadmin
       adminEmail: iam@defn.sh
       webDomain: mastodon.dev.amanibhavam.defn.run
       useSecureWebSocket: true
+      existingSecret: mastodon-default
+      smtp:
+        existingSecret: mastodon-smtp
+      redis:
+        auth:
+          existingSecret: mastodon-redis
+      postgresql:
+        auth:
+          existingSecret: mastodon-postgresql
+      minio:
+        auth:
+          existingSecret: mastodon-minio
     name: mastodon
     version: 2.1.8
     repo: https://charts.bitnami.com/bitnami

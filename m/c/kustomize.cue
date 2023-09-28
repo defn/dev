@@ -1837,10 +1837,14 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		values: {
 			initJob: createAdmin: true
 			adminUser:          "defn"
-			adminPassword:      "adminadmin"
 			adminEmail:         "iam@defn.sh"
 			webDomain:          "\(namespace).\(cluster.domain_name)"
 			useSecureWebSocket: true
+			existingSecret:     "mastodon-default"
+			smtp: existingSecret: "mastodon-smtp"
+			redis: auth: existingSecret:      "mastodon-redis"
+			postgresql: auth: existingSecret: "mastodon-postgresql"
+			minio: auth: existingSecret:      "mastodon-minio"
 		}
 	}
 
