@@ -1927,13 +1927,13 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			}
 			data: [{
 				secretKey: "MASTODON_ADMIN_PASSWORD"
-				remoteRef: key: "mastodon_admin_password"
+				remoteRef: key: "\(namespace)_admin_password"
 			}, {
 				secretKey: "OTP_SECRET"
-				remoteRef: key: "mastodon_otp_secret"
+				remoteRef: key: "\(namespace)_otp_secret"
 			}, {
 				secretKey: "SECRET_KEY_BASE"
-				remoteRef: key: "mastodon_secret_key_base"
+				remoteRef: key: "\(namespace)_secret_key_base"
 			}]
 		}
 	}
@@ -1954,10 +1954,10 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			}
 			data: [{
 				secretKey: "login"
-				remoteRef: key: "mastodon_smtp_login"
+				remoteRef: key: "\(namespace)_smtp_login"
 			}, {
 				secretKey: "password"
-				remoteRef: key: "mastodon_smtp_password"
+				remoteRef: key: "\(namespace)_smtp_password"
 			}]
 		}
 	}
@@ -1978,10 +1978,10 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			}
 			data: [{
 				secretKey: "root-password"
-				remoteRef: key: "mastodon_minio_root_password"
+				remoteRef: key: "\(namespace)_minio_root_password"
 			}, {
 				secretKey: "root-user"
-				remoteRef: key: "mastodon_minio_root_user"
+				remoteRef: key: "\(namespace)_minio_root_user"
 			}]
 		}
 	}
@@ -2002,10 +2002,10 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			}
 			data: [{
 				secretKey: "password"
-				remoteRef: key: "mastodon_postgresql_password"
+				remoteRef: key: "\(namespace)_postgresql_password"
 			}, {
 				secretKey: "postgresql-password"
-				remoteRef: key: "mastodon_postgresql_postgres_password"
+				remoteRef: key: "\(namespace)_postgresql_postgres_password"
 			}]
 		}
 	}
@@ -2026,7 +2026,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			}
 			data: [{
 				secretKey: "redis-password"
-				remoteRef: key: "mastodon_redis_password"
+				remoteRef: key: "\(namespace)_redis_password"
 			}]
 		}
 	}
