@@ -25,13 +25,16 @@ ci:
 	env BUILDKITE_AGENT_DISCONNECT_AFTER_IDLE_TIMEOUT=$(timeout) buildkite-agent start --build-path ~/work/buildkite-agent --plugins-path ~/work/buildkite-plugins --token "$$(pass BUILDKITE_AGENT_TOKEN)"
 	cd && $(MAKE) install
 
-.PHONY: dev
-dev-clean:
+teacher-clean:
 	rm -rf ~/Library/App*/coderv2/postgres
 
-dev-init:
+teacher-init:
 	coder login https://immanent.tail3884f.ts.net --first-user-username="admin" --first-user-email="iam+admin@defn.sh" --first-user-password="Admin123456789,,," --first-user-trial=false
 
+class-init:
+	coder login https://coder.dev.amanibhavam.defn.run --first-user-username="admin" --first-user-email="iam+admin@defn.sh" --first-user-password="Admin123456789,,," --first-user-trial=false
+
+.PHONY: dev
 dev:
 	pass hello
 	coder server --oauth2-github-allow-signups \
