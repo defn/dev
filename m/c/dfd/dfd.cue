@@ -35,7 +35,7 @@ infra: {
 		"tailscale": [20, ""]
 
 		// scaling
-		"karpenter": [20, ""]
+		//"karpenter": [20, ""]
 
 		// workflows
 		"tfo": [20, ""]
@@ -60,6 +60,7 @@ infra: {
 		"coder": [100, ""]
 		"headlamp": [100, ""]
 		"dex": [100, ""]
+		"mastodon": [100, ""]
 	}
 
 	vc0: vcluster: k3s_version: "rancher/k3s:v1.27.5-k3s1"

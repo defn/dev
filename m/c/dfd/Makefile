@@ -7,13 +7,15 @@ PKCS_KEY := sa-signer-pkcs8.pub
 k3s_url := $(shell cat ~/.kube/config | grep server: | awk '{print $$NF}')
 
 build:
+# docs
+	cd lesson && $(MAKE) build
 # fmt
 	cue fmt .. .
 # remove everything
 	rm -rf ../../k/*/
 	rm -rf ../../e/*.yaml
 # helm generates ./k/k3d-dfd-cluster-karpenter/karpenter.yaml
-	b run outputs_karpenter__update
+	#b run outputs_karpenter__update
 # cue ./c/ generates kustomize ./k/
 	b run outputs_kustomize__update
 # kustomize ./k/ generates ./k/r/ release yaml
