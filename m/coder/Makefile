@@ -1,5 +1,8 @@
 template := $(shell basename $(shell pwd))
 
+build:
+	cue eval --out json -e html | jq -r . > tutorial.html
+
 run:
 	$(MAKE) init
 	bash -c 'eval "$$(direnv hook bash)"; _direnv_hook; $(MAKE) run-inner'
@@ -13,15 +16,11 @@ push:
 	ls -d mod/*/ | runmany 'cd $$1 && tf fmt && tf docs'
 	tar -cvh --exclude .terraform . | coder templates push -y --create -d - "$(template)"
 
-build:
+image:
 	earthly --push --no-output +build
 
 reset:
 	 earthly prune --reset
-
-image:
-	cd docker && $(MAKE) build
-	cd pod && $(MAKE) build
 
 workspace ?= $(shell basename $(shell pwd))
 dir ?= $(shell pwd)
