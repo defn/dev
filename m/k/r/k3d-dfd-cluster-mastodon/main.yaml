@@ -2868,7 +2868,7 @@ spec:
   - remoteRef:
       key: k3d-dfd
       property: mastodon_postgresql_postgres_password
-    secretKey: postgresql-password
+    secretKey: postgres-password
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore

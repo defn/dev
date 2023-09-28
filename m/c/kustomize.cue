@@ -2012,7 +2012,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 				remoteRef: key:      cluster.cluster_name
 				remoteRef: property: "\(namespace)_postgresql_password"
 			}, {
-				secretKey: "postgresql-password"
+				secretKey: "postgres-password"
 				remoteRef: key:      cluster.cluster_name
 				remoteRef: property: "\(namespace)_postgresql_postgres_password"
 			}]
