@@ -254,27 +254,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "20"
-  name: k3d-dfd-cluster-karpenter
-  namespace: argocd
-spec:
-  destination:
-    name: k3d-dfd-cluster
-  project: default
-  source:
-    path: m/k/r/k3d-dfd-cluster-karpenter
-    repoURL: https://github.com/defn/dev
-    targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions: []
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
     argocd.argoproj.io/sync-wave: "40"
   name: k3d-dfd-cluster-knative
   namespace: argocd
@@ -348,6 +327,27 @@ spec:
   project: default
   source:
     path: m/k/r/k3d-dfd-cluster-linkerd-crds
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: k3d-dfd-cluster-mastodon
+  namespace: argocd
+spec:
+  destination:
+    name: k3d-dfd-cluster
+  project: default
+  source:
+    path: m/k/r/k3d-dfd-cluster-mastodon
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
