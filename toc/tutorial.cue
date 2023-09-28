@@ -1,6 +1,12 @@
 package l
 
-page: content: #TutorialContent & {
+page: content: html: """
+	\(tutorial.html)
+	<br>
+	<iframe height="500px" src="https://whimsical.com/tri-deca-hexa-gong-6gVrJoZV7XQ9HhXpCzxrzp"/>
+	"""
+
+tutorial: #TutorialContent & {
 	title: "Table of Contents"
 	steps: [{
 		title: "<a href=\"/?folder=/home/ubuntu\">/home/ubuntu</a>"
