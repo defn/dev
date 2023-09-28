@@ -2875,7 +2875,7 @@ spec:
     name: k3d-dfd
   target:
     creationPolicy: Owner
-    name: mastodon-minio
+    name: mastodon-postgresql
 ---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
