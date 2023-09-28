@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/awscli",
-        "lastModified": 1695427254,
-        "narHash": "sha256-LWjbTnahIJZZyMCn/1XD/2YyKQuqrdzQg9BqYIFahzQ=",
+        "lastModified": 1695859879,
+        "narHash": "sha256-H0+YsUEkLwbOdmMWR274hnbwvZoZHc0Ey66N4qlxvbo=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "c8a1e0cf3feef2f0ee5fbff2595987c2e015f91e",
+        "rev": "594706b0dae10155e01cd3a69805b7b58bdbeea6",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/awscli",
         "owner": "defn",
-        "ref": "pkg-awscli-2.13.21-1",
+        "ref": "pkg-awscli-2.13.22-1",
         "repo": "dev",
         "type": "github"
       }
@@ -529,17 +529,17 @@
       },
       "locked": {
         "dir": "m/pkg/step",
-        "lastModified": 1692116393,
-        "narHash": "sha256-HMZ22pG4ed4e5JY2EHnk7vLi/nU53UvqaZ1I/7xMdxM=",
+        "lastModified": 1695831734,
+        "narHash": "sha256-CK7uI6Zi1dQh0xtiOWHPXktio63MRzRsivoesW1xfIg=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "3cb24285f46c87951f3ef9e3d45e745f0698f58c",
+        "rev": "67e4fc184adb937ec8ee67c487fb8860487a4392",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/step",
         "owner": "defn",
-        "ref": "pkg-step-0.24.4-5",
+        "ref": "pkg-step-0.25.0-1",
         "repo": "dev",
         "type": "github"
       }
