@@ -10,5 +10,6 @@ if test -f ~/.bash_profile; then
     cd - >/dev/null
 fi
 
+export workdir="${WORKDIR}"
 
 export TMOUT=3600
