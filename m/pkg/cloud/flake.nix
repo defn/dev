@@ -3,8 +3,8 @@
     terraform.url = github:defn/dev/pkg-terraform-1.5.7-3?dir=m/pkg/terraform;
     terraformdocs.url = github:defn/dev/pkg-terraformdocs-0.16.0-2?dir=m/pkg/terraformdocs;
     packer.url = github:defn/dev/pkg-packer-1.9.4-1?dir=m/pkg/packer;
-    step.url = github:defn/dev/pkg-step-0.24.4-5?dir=m/pkg/step;
-    awscli.url = github:defn/dev/pkg-awscli-2.13.21-1?dir=m/pkg/awscli;
+    step.url = github:defn/dev/pkg-step-0.25.0-1?dir=m/pkg/step;
+    awscli.url = github:defn/dev/pkg-awscli-2.13.22-1?dir=m/pkg/awscli;
     chamber.url = github:defn/dev/pkg-chamber-2.13.3-2?dir=m/pkg/chamber;
   };
 
