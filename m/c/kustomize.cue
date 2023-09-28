@@ -1910,6 +1910,126 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		}
 	}
 	// k exec -ti -n mastodon deploy/mastodon-web -- bash -c '. /opt/bitnami/scripts/mastodon-env.sh; tootctl accounts  modify defn --reset-password'
+
+	resource: "externalsecret-default": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: name: "mastodon-default"
+		spec: {
+			refreshInterval: "1h"
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: cluster.cluster_name
+			}
+			target: {
+				name:           "mastodon-default"
+				creationPolicy: "Owner"
+			}
+			data: [{
+				secretKey: "MASTODON_ADMIN_PASSWORD"
+				remoteRef: key: "mastodon_admin_password"
+			}, {
+				secretKey: "OTP_SECRET"
+				remoteRef: key: "mastodon_otp_secret"
+			}, {
+				secretKey: "SECRET_KEY_BASE"
+				remoteRef: key: "mastodon_secret_key_base"
+			}]
+		}
+	}
+
+	resource: "externalsecret-smtp": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: name: "mastodon-smtp"
+		spec: {
+			refreshInterval: "1h"
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: cluster.cluster_name
+			}
+			target: {
+				name:           "mastodon-smtp"
+				creationPolicy: "Owner"
+			}
+			data: [{
+				secretKey: "login"
+				remoteRef: key: "mastodon_smtp_login"
+			}, {
+				secretKey: "password"
+				remoteRef: key: "mastodon_smtp_password"
+			}]
+		}
+	}
+
+	resource: "externalsecret-minio": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: name: "mastodon-minio"
+		spec: {
+			refreshInterval: "1h"
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: cluster.cluster_name
+			}
+			target: {
+				name:           "mastodon-minio"
+				creationPolicy: "Owner"
+			}
+			data: [{
+				secretKey: "root-password"
+				remoteRef: key: "mastodon_minio_root_password"
+			}, {
+				secretKey: "root-user"
+				remoteRef: key: "mastodon_minio_root_user"
+			}]
+		}
+	}
+
+	resource: "externalsecret-postgresql": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: name: "mastodon-postgresql"
+		spec: {
+			refreshInterval: "1h"
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: cluster.cluster_name
+			}
+			target: {
+				name:           "mastodon-minio"
+				creationPolicy: "Owner"
+			}
+			data: [{
+				secretKey: "password"
+				remoteRef: key: "mastodon_postgresql_password"
+			}, {
+				secretKey: "postgresql-password"
+				remoteRef: key: "mastodon_postgresql_postgres_password"
+			}]
+		}
+	}
+
+	resource: "externalsecret-redis": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: name: "mastodon-redis"
+		spec: {
+			refreshInterval: "1h"
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: cluster.cluster_name
+			}
+			target: {
+				name:           "mastodon-redis"
+				creationPolicy: "Owner"
+			}
+			data: [{
+				secretKey: "redis-password"
+				remoteRef: key: "mastodon_redis_password"
+			}]
+		}
+	}
 }
 
 // https://artifacthub.io/packages/helm/headlamp/headlamp

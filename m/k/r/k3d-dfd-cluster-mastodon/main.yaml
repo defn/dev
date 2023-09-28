@@ -2804,6 +2804,111 @@ spec:
           name: mastodon-minio-provisioning
         name: minio-provisioning
 ---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: mastodon-default
+  namespace: mastodon
+spec:
+  data:
+  - remoteRef:
+      key: mastodon_admin_password
+    secretKey: MASTODON_ADMIN_PASSWORD
+  - remoteRef:
+      key: mastodon_otp_secret
+    secretKey: OTP_SECRET
+  - remoteRef:
+      key: mastodon_secret_key_base
+    secretKey: SECRET_KEY_BASE
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: k3d-dfd
+  target:
+    creationPolicy: Owner
+    name: mastodon-default
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: mastodon-minio
+  namespace: mastodon
+spec:
+  data:
+  - remoteRef:
+      key: mastodon_minio_root_password
+    secretKey: root-password
+  - remoteRef:
+      key: mastodon_minio_root_user
+    secretKey: root-user
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: k3d-dfd
+  target:
+    creationPolicy: Owner
+    name: mastodon-minio
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: mastodon-postgresql
+  namespace: mastodon
+spec:
+  data:
+  - remoteRef:
+      key: mastodon_postgresql_password
+    secretKey: password
+  - remoteRef:
+      key: mastodon_postgresql_postgres_password
+    secretKey: postgresql-password
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: k3d-dfd
+  target:
+    creationPolicy: Owner
+    name: mastodon-minio
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: mastodon-redis
+  namespace: mastodon
+spec:
+  data:
+  - remoteRef:
+      key: mastodon_redis_password
+    secretKey: redis-password
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: k3d-dfd
+  target:
+    creationPolicy: Owner
+    name: mastodon-redis
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: mastodon-smtp
+  namespace: mastodon
+spec:
+  data:
+  - remoteRef:
+      key: mastodon_smtp_login
+    secretKey: login
+  - remoteRef:
+      key: mastodon_smtp_password
+    secretKey: password
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: k3d-dfd
+  target:
+    creationPolicy: Owner
+    name: mastodon-smtp
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
