@@ -2004,7 +2004,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 				name: cluster.cluster_name
 			}
 			target: {
-				name:           "mastodon-minio"
+				name:           "mastodon-postgresql"
 				creationPolicy: "Owner"
 			}
 			data: [{
