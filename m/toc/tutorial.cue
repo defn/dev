@@ -2,8 +2,6 @@ package l
 
 page: content: html: """
 	\(tutorial.html)
-	<br>
-	<iframe height="500px" src="https://whimsical.com/tri-deca-hexa-gong-6gVrJoZV7XQ9HhXpCzxrzp"/>
 	"""
 
 tutorial: #TutorialContent & {
