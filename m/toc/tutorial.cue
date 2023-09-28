@@ -10,7 +10,10 @@ tutorial: #TutorialContent & {
 		title: "<a href=\"/?folder=/home/ubuntu\">/home/ubuntu</a>"
 		desc: "$HOME directory"
 	}, {
-		title: "<a href=\"/?folder=/home/ubuntu/m/l/dev\">m/l/dev</a>"
+		title: "<a href=\"/?folder=/home/ubuntu/m\">m</a>"
+		desc: "Monorepo root"
+	}, {
+		title: "<a href=\"/?folder=/home/ubuntu/m/s/dev\">m/s/dev</a>"
 		desc: "Slide-show using sli.dev"
 	}, {
 		title: "<a href=\"/?folder=/home/ubuntu/m/h/example\">m/h/example</a>"
@@ -18,5 +21,14 @@ tutorial: #TutorialContent & {
 	}, {
 		title: "<a href=\"/?folder=/home/ubuntu/m/pkg\">m/pkg</a>"
 		desc: "nix flakes"
+	}, {
+		title: "<a href=\"/?folder=/home/ubuntu/m/c\">m/c</a>"
+		desc: "Kubernetes configuration"
+	}, {
+		title: "<a href=\"/?folder=/home/ubuntu/m/coder/aws\">m/coder/aws</a>"
+		desc: "Coder AWS AMI image"
+	}, {
+		title: "<a href=\"/?folder=/home/ubuntu/m/coder/pod\">m/coder/pod</a>"
+		desc: "Coder Docker image"
 	}]
 }
