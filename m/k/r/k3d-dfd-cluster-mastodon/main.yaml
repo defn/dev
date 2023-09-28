@@ -2812,13 +2812,16 @@ metadata:
 spec:
   data:
   - remoteRef:
-      key: mastodon_admin_password
+      key: k3d-dfd
+      property: mastodon_admin_password
     secretKey: MASTODON_ADMIN_PASSWORD
   - remoteRef:
-      key: mastodon_otp_secret
+      key: k3d-dfd
+      property: mastodon_otp_secret
     secretKey: OTP_SECRET
   - remoteRef:
-      key: mastodon_secret_key_base
+      key: k3d-dfd
+      property: mastodon_secret_key_base
     secretKey: SECRET_KEY_BASE
   refreshInterval: 1h
   secretStoreRef:
@@ -2836,10 +2839,12 @@ metadata:
 spec:
   data:
   - remoteRef:
-      key: mastodon_minio_root_password
+      key: k3d-dfd
+      property: mastodon_minio_root_password
     secretKey: root-password
   - remoteRef:
-      key: mastodon_minio_root_user
+      key: k3d-dfd
+      property: mastodon_minio_root_user
     secretKey: root-user
   refreshInterval: 1h
   secretStoreRef:
@@ -2857,10 +2862,12 @@ metadata:
 spec:
   data:
   - remoteRef:
-      key: mastodon_postgresql_password
+      key: k3d-dfd
+      property: mastodon_postgresql_password
     secretKey: password
   - remoteRef:
-      key: mastodon_postgresql_postgres_password
+      key: k3d-dfd
+      property: mastodon_postgresql_postgres_password
     secretKey: postgresql-password
   refreshInterval: 1h
   secretStoreRef:
@@ -2878,7 +2885,8 @@ metadata:
 spec:
   data:
   - remoteRef:
-      key: mastodon_redis_password
+      key: k3d-dfd
+      property: mastodon_redis_password
     secretKey: redis-password
   refreshInterval: 1h
   secretStoreRef:
@@ -2896,10 +2904,12 @@ metadata:
 spec:
   data:
   - remoteRef:
-      key: mastodon_smtp_login
+      key: k3d-dfd
+      property: mastodon_smtp_login
     secretKey: login
   - remoteRef:
-      key: mastodon_smtp_password
+      key: k3d-dfd
+      property: mastodon_smtp_password
     secretKey: password
   refreshInterval: 1h
   secretStoreRef:

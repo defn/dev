@@ -1927,13 +1927,16 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			}
 			data: [{
 				secretKey: "MASTODON_ADMIN_PASSWORD"
-				remoteRef: key: "\(namespace)_admin_password"
+				remoteRef: key:      cluster.cluster_name
+				remoteRef: property: "\(namespace)_admin_password"
 			}, {
 				secretKey: "OTP_SECRET"
-				remoteRef: key: "\(namespace)_otp_secret"
+				remoteRef: key:      cluster.cluster_name
+				remoteRef: property: "\(namespace)_otp_secret"
 			}, {
 				secretKey: "SECRET_KEY_BASE"
-				remoteRef: key: "\(namespace)_secret_key_base"
+				remoteRef: key:      cluster.cluster_name
+				remoteRef: property: "\(namespace)_secret_key_base"
 			}]
 		}
 	}
@@ -1954,10 +1957,12 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			}
 			data: [{
 				secretKey: "login"
-				remoteRef: key: "\(namespace)_smtp_login"
+				remoteRef: key:      cluster.cluster_name
+				remoteRef: property: "\(namespace)_smtp_login"
 			}, {
 				secretKey: "password"
-				remoteRef: key: "\(namespace)_smtp_password"
+				remoteRef: key:      cluster.cluster_name
+				remoteRef: property: "\(namespace)_smtp_password"
 			}]
 		}
 	}
@@ -1978,10 +1983,12 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			}
 			data: [{
 				secretKey: "root-password"
-				remoteRef: key: "\(namespace)_minio_root_password"
+				remoteRef: key:      cluster.cluster_name
+				remoteRef: property: "\(namespace)_minio_root_password"
 			}, {
 				secretKey: "root-user"
-				remoteRef: key: "\(namespace)_minio_root_user"
+				remoteRef: key:      cluster.cluster_name
+				remoteRef: property: "\(namespace)_minio_root_user"
 			}]
 		}
 	}
@@ -2002,10 +2009,12 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			}
 			data: [{
 				secretKey: "password"
-				remoteRef: key: "\(namespace)_postgresql_password"
+				remoteRef: key:      cluster.cluster_name
+				remoteRef: property: "\(namespace)_postgresql_password"
 			}, {
 				secretKey: "postgresql-password"
-				remoteRef: key: "\(namespace)_postgresql_postgres_password"
+				remoteRef: key:      cluster.cluster_name
+				remoteRef: property: "\(namespace)_postgresql_postgres_password"
 			}]
 		}
 	}
@@ -2026,7 +2035,8 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			}
 			data: [{
 				secretKey: "redis-password"
-				remoteRef: key: "\(namespace)_redis_password"
+				remoteRef: key:      cluster.cluster_name
+				remoteRef: property: "\(namespace)_redis_password"
 			}]
 		}
 	}
