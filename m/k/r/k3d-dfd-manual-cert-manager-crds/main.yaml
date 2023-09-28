@@ -5,7 +5,7 @@ metadata:
     app: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/version: v1.13.0
+    app.kubernetes.io/version: v1.13.1
   name: certificaterequests.cert-manager.io
 spec:
   group: cert-manager.io
@@ -267,7 +267,7 @@ metadata:
     app: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/version: v1.13.0
+    app.kubernetes.io/version: v1.13.1
   name: certificates.cert-manager.io
 spec:
   group: cert-manager.io
@@ -820,7 +820,7 @@ metadata:
     app: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/version: v1.13.0
+    app.kubernetes.io/version: v1.13.1
   name: challenges.acme.cert-manager.io
 spec:
   group: acme.cert-manager.io
@@ -2904,7 +2904,7 @@ metadata:
     app: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/version: v1.13.0
+    app.kubernetes.io/version: v1.13.1
   name: clusterissuers.cert-manager.io
 spec:
   group: cert-manager.io
@@ -5624,7 +5624,7 @@ metadata:
     app: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/version: v1.13.0
+    app.kubernetes.io/version: v1.13.1
   name: issuers.cert-manager.io
 spec:
   group: cert-manager.io
@@ -8343,7 +8343,7 @@ metadata:
     app: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/version: v1.13.0
+    app.kubernetes.io/version: v1.13.1
   name: orders.acme.cert-manager.io
 spec:
   group: acme.cert-manager.io
