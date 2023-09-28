@@ -639,17 +639,17 @@
       },
       "locked": {
         "dir": "m/pkg/helm",
-        "lastModified": 1692066150,
-        "narHash": "sha256-IvUHVHb3TzESqd/YO+Ar+kg//02RGdX543JxebLWdrc=",
+        "lastModified": 1695859970,
+        "narHash": "sha256-UD4dNWvqHtUXF+AhhtUpCAlwP3QJ96Vom6f5g2efQ6k=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "a87528099e87de8909f361df1d9e79ec0f21561a",
+        "rev": "20ea1db8f57d7fc9311e081edd1b87738eca2463",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/helm",
         "owner": "defn",
-        "ref": "pkg-helm-3.12.3-2",
+        "ref": "pkg-helm-3.13.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1423,17 +1423,17 @@
       },
       "locked": {
         "dir": "m/pkg/tfo",
-        "lastModified": 1693352413,
-        "narHash": "sha256-h5SxgQyLUCTn8jdANGQ82gUMxp6iJs2SEYkUgKqLh0E=",
+        "lastModified": 1695860016,
+        "narHash": "sha256-r3NY5UhDeX1/jjAXypJwduqOdIhGnOMpoQ+Q6JILfEU=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "3f08a0b5219898a076080ac4af676a189ef39634",
+        "rev": "a27585d6568765ddea7e60e62402b69e1faffc7f",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/tfo",
         "owner": "defn",
-        "ref": "pkg-tfo-2.0.0-1",
+        "ref": "pkg-tfo-2.1.0-1",
         "repo": "dev",
         "type": "github"
       }
