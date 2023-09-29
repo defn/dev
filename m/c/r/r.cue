@@ -9,20 +9,20 @@ import (
 )
 
 // by kind
-kk: r
+kk: r.res
 kk: "namespace": [NS=string]: [RES=string]:   core.#Namespace
 kk: "deployment": [string]: [string]:         apps.#Deployment
 kk: "statefulset": [string]: [string]:        apps.#StatefulSet
 kk: "daemonset": [string]: [string]:          apps.#DaemonSet
-kk: "clustekkolebinding": [string]: [string]: rbac.#ClustekkoleBinding
-kk: "clustekkole": [string]: [string]:        rbac.#Clustekkole
+kk: "clusterrolebinding": [string]: [string]: rbac.#ClusterRoleBinding
+kk: "clustekrole": [string]: [string]:        rbac.#ClusterRole
 kk: "rolebinding": [string]: [string]:        rbac.#RoleBinding
 kk: "role": [string]: [string]:               rbac.#Role
 
 // by namespace
 nn: [NS=string]: [KIND=string]: [RES=string]: {...}
 nn: {
-	for kname, k in kk.res
+	for kname, k in kk
 	for nname, ns in k
 	for rname, r in ns {
 		"\(nname)": "\(kname)": "\(rname)": r
@@ -31,7 +31,7 @@ nn: {
 
 // flatten resources into a map
 resources: {
-	for kname, k in kk.res
+	for kname, k in kk
 	for nname, ns in k
 	for rname, r in ns {
 		"\(nname)-\(kname)-\(rname)": r
