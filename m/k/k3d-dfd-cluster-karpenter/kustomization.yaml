@@ -1,0 +1,15 @@
+#ManagedBy: cue
+
+patches:
+  - path: patch-config-map-karpenter-global-settings.yaml
+  - path: patch-serviceaccount-karpenter.yaml
+  - path: patch-deployment-karpenter.yaml
+resources:
+  - karpenter.yaml
+  - resource-namespace-karpenter.yaml
+  - resource-cluster-role-binding-admin.yaml
+  - resource-cluster-role-binding-node.yaml
+  - resource-cluster-role-binding-boot-strapper.yaml
+  - resource-provisioner-default.yaml
+  - resource-awsnodetemplate-default.yaml
+namespace: karpenter

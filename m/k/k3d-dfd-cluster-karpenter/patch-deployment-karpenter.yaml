@@ -1,0 +1,8 @@
+#ManagedBy: cue
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: karpenter
+spec:
+  replicas: 1

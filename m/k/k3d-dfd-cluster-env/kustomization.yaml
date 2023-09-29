@@ -175,6 +175,27 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
+        karpenter: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: k3d-dfd-cluster-karpenter
+            annotations:
+              argocd.argoproj.io/sync-wave: "20"
+          spec:
+            project: default
+            destination:
+              name: k3d-dfd-cluster
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/k/r/k3d-dfd-cluster-karpenter
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
         tfo: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application

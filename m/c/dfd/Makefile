@@ -15,7 +15,7 @@ build:
 	rm -rf ../../k/*/
 	rm -rf ../../e/*.yaml
 # helm generates ./k/k3d-dfd-cluster-karpenter/karpenter.yaml
-	#b run outputs_karpenter__update
+	b run outputs_karpenter__update
 # cue ./c/ generates kustomize ./k/
 	b run outputs_kustomize__update
 # kustomize ./k/ generates ./k/r/ release yaml

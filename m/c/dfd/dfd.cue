@@ -35,7 +35,7 @@ infra: {
 		"tailscale": [20, ""]
 
 		// scaling
-		//"karpenter": [20, ""]
+		"karpenter": [20, ""]
 
 		// workflows
 		"tfo": [20, ""]
