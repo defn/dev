@@ -16,8 +16,8 @@ resources: {
 // get images for Deployments, Daemonsets
 images_m: {
 	for rname, r in resources
-	if r.kind == "Deployment" || r.kind == "DaemonSet" || r.kind == "ReplicaSet" {
-		for c in r.spec.template.spec.containers {
+	if r.kind == "Deployment" || r.kind == "DaemonSet" || r.kind == "StatefulSet" || r.kind == "Job" || r.kind == "CronJob" {
+		for c in *r.spec.template.spec.containers | r.spec.jobTemplate.spec.template.spec.containers {
 			"\(c.image)": {}
 		}
 	}

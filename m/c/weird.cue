@@ -40,7 +40,7 @@ kustomize: "keda": #KustomizeHelm & {
 	helm: {
 		release: "keda"
 		name:    "keda"
-		version: "2.11.2"
+		version: "2.12.0"
 		repo:    "https://kedacore.github.io/charts"
 	}
 
