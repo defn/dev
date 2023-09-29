@@ -26,6 +26,8 @@ build:
 	(echo package r; cue import ../../k/r/*/main.yaml -p kube -l '"res"' -l 'strings.ToLower(kind)' -l 'strings.ToLower(*metadata.namespace | "cluster")' -l metadata.name --outfile - \
 		| grep -v '^package ') > ../../k/r/dfd.cue
 	git add ../../k/r/dfd.cue
+# generate lists
+	cd ../ && $(MAKE) list
 
 list:
 	true
