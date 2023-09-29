@@ -6,6 +6,9 @@ page: content: #TutorialContent & {
 		title: "Update the list of Docker images and helm chart versions"
 		desc:  "make list"
 	}, {
+		title: "Cache images in images.txt to local registry"
+		desc:  "make cache"
+	}, {
 		title: "Update the Helm chart versions in file kustomize.cue, then regenerate YAML."
 		desc:  "(cd dfd && make)"
 	}, {
