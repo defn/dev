@@ -8,20 +8,30 @@ import (
 	"github.com/defn/dev/m/k/r"
 )
 
-rr: r
+// by kind
+kk: r
+kk: "namespace": [NS=string]: [RES=string]:   core.#Namespace
+kk: "deployment": [string]: [string]:         apps.#Deployment
+kk: "statefulset": [string]: [string]:        apps.#StatefulSet
+kk: "daemonset": [string]: [string]:          apps.#DaemonSet
+kk: "clustekkolebinding": [string]: [string]: rbac.#ClustekkoleBinding
+kk: "clustekkole": [string]: [string]:        rbac.#Clustekkole
+kk: "rolebinding": [string]: [string]:        rbac.#RoleBinding
+kk: "role": [string]: [string]:               rbac.#Role
 
-rr: "namespace": [string]: [string]: core.#Namespace
-rr: "deployment": [string]: [string]: apps.#Deployment
-rr: "statefulset": [string]: [string]: apps.#StatefulSet
-rr: "daemonset": [string]: [string]: apps.#DaemonSet
-rr: "clusterrolebinding": [string]: [string]: rbac.#ClusterRoleBinding
-rr: "clusterrole": [string]: [string]: rbac.#ClusterRole
-rr: "rolebinding": [string]: [string]: rbac.#RoleBinding
-rr: "role": [string]: [string]: rbac.#Role
+// by namespace
+nn: [NS=string]: [KIND=string]: [RES=string]: {...}
+nn: {
+	for kname, k in kk.res
+	for nname, ns in k
+	for rname, r in ns {
+		"\(nname)": "\(kname)": "\(rname)": r
+	}
+}
 
 // flatten resources into a map
 resources: {
-	for kname, k in rr.res
+	for kname, k in kk.res
 	for nname, ns in k
 	for rname, r in ns {
 		"\(nname)-\(kname)-\(rname)": r
