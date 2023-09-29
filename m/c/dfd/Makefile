@@ -22,6 +22,9 @@ build:
 	(cd ../../k && b run outputs_release__update)
 # add generated to git
 	../make_add_generated.sh
+# make one big cue config
+	cd ../../k/r && (echo package r; cue import */main.yaml -p kube -l '"res"' -l 'strings.ToLower(kind)' -l 'strings.ToLower(*metadata.namespace | "cluster")' -l metadata.name --outfile - \
+		| grep -v '^package ') > dfd.cue
 
 list:
 	true
