@@ -7,10 +7,7 @@ list:
 	@(cd .. && git grep artifacthub) | awk '{print $$2}' | runmany 'curl -sSL https://artifacthub.io/api/v1/$${1#https://artifacthub.io/}/feed/rss 2>/dev/null | grep 'artifacthub.io/packages/helm/' | grep -v -E "beta|snapshot" | head -1 | cut -d">" -f2 | cut -d"<" -f1' | sort -u > pending.txt
 	git diff pending.txt
 
-	cp images.txt images.txt.1
-	this-k3d-list-images dfd | grep -v 169.254.32.1 | sort >> images.txt.1
-	cat images.txt.1 | sort -u > images.txt
-	rm -f images.txt.1
+	(cd r && cue eval -e images | jq -r .[] | sort) > images.txt
 	git diff images.txt
 
 cache:
