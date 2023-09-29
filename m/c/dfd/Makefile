@@ -23,8 +23,9 @@ build:
 # add generated to git
 	../make_add_generated.sh
 # make one big cue config
-	cd ../../k/r && (echo package r; cue import */main.yaml -p kube -l '"res"' -l 'strings.ToLower(kind)' -l 'strings.ToLower(*metadata.namespace | "cluster")' -l metadata.name --outfile - \
-		| grep -v '^package ') > dfd.cue
+	(echo package r; cue import ../../k/r/*/main.yaml -p kube -l '"res"' -l 'strings.ToLower(kind)' -l 'strings.ToLower(*metadata.namespace | "cluster")' -l metadata.name --outfile - \
+		| grep -v '^package ') > ../../k/r/dfd.cue
+	git add ../../k/r/dfd.cue
 
 list:
 	true
