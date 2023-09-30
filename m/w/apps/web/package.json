@@ -11,13 +11,13 @@
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^2.0.3",
-    "@sveltejs/kit": "^1.25.0",
+    "@sveltejs/kit": "^1.25.1",
     "@tailwindcss/nesting": "0.0.0-insiders.565cd3e",
     "autoprefixer": "^10.4.16",
     "eslint-config-custom": "workspace:*",
     "flowbite": "^1.8.1",
-    "flowbite-svelte": "^0.44.15",
-    "postcss": "^8.4.30",
+    "flowbite-svelte": "^0.44.17",
+    "postcss": "^8.4.31",
     "postcss-load-config": "^4.0.1",
     "svelte": "^4.2.1",
     "svelte-check": "^3.5.2",
@@ -27,7 +27,7 @@
     "typescript": "^5.2.2",
     "ui": "workspace:*",
     "vite": "^4.4.9",
-    "vitest": "^0.34.5"
+    "vitest": "^0.34.6"
   },
   "type": "module",
   "dependencies": {
