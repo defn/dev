@@ -1,7 +1,7 @@
 package l
 
 page: content: #TutorialContent & {
-	title: "Tutorial : <a href=\"/?folder=/home/ubuntu/m\">TOC</a>"
+	title: "Tutorial : <a href=\"/?folder=/home/ubuntu\">TOC</a>"
 	steps: [{
 		title: "Update the list of Docker images and helm chart versions"
 		desc:  "make list"
