@@ -27,6 +27,7 @@ build:
 		| grep -v '^package ') > ../../k/r/dfd.cue
 	perl -pe 's{^\s*\w+:\s+null\s*}{}; s{data: null,}{}' -i ../../k/r/dfd.cue 
 	git add ../../k/r/dfd.cue
+	(cd ../r && cue eval >/dev/null)
 # generate lists
 	cd ../ && $(MAKE) list
 
