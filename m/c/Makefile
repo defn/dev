@@ -11,7 +11,7 @@ list:
 	git diff images.txt
 
 cache:
-	cat images.txt | this-k3d-save-images
+	cat images.txt | runmany 8 'echo $$(echo $$1 | perl -pe 's{[:@].*$$}{}')@$$(skopeo inspect docker://$${1%%@sha256*} | jq -r '.Digest')' | this-k3d-save-images
 
 helm_add:
 	(cd .. && git grep repo: kustomize.cue) | cut -d'"' -f2 | sort -u | while read -r repo; do helm repo add $$(echo $$repo | cut -d/ -f3- | perl -pe 's{\s+$$}{}; s{\W+}{-}g') $$repo; done
