@@ -2,11 +2,12 @@ bitnami/kubectl:1.26.4
 bitnami/kubectl:latest
 docker.io/amazon/amazon-eks-pod-identity-webhook:v0.4.0
 docker.io/bitnami/apache:2.4.57-debian-11-r36
-docker.io/bitnami/elasticsearch:8.10.0-debian-11-r0
+docker.io/bitnami/elasticsearch:8.10.2-debian-11-r6
 docker.io/bitnami/external-dns:0.13.6-debian-11-r11
 docker.io/bitnami/mastodon:4.2.0-debian-11-r0
 docker.io/bitnami/minio:2023.9.23-debian-11-r0
-docker.io/bitnami/postgresql:15.4.0-debian-11-r45
+docker.io/bitnami/os-shell:11-debian-11-r77
+docker.io/bitnami/postgresql:16.0.0-debian-11-r3
 docker.io/bitnami/redis:7.2.1-debian-11-r0
 docker.io/envoyproxy/envoy:v1.24-latest
 docker.io/traefik:v2.10.4
@@ -23,6 +24,7 @@ ghcr.io/headlamp-k8s/headlamp:v0.19.1
 ghcr.io/kyverno/background-controller:v1.10.3
 ghcr.io/kyverno/cleanup-controller:v1.10.3
 ghcr.io/kyverno/kyverno:v1.10.3
+ghcr.io/kyverno/kyvernopre:v1.10.3
 ghcr.io/kyverno/reports-controller:v1.10.3
 pihole/pihole:2023.05.2
 public.ecr.aws/karpenter/controller:v0.31.0@sha256:d29767fa9c5c0511a3812397c932f5735234f03a7a875575422b712d15e54a77
@@ -39,6 +41,7 @@ quay.io/cilium/operator-generic:v1.14.1@sha256:e061de0a930534c7e3f8feda833097636
 quay.io/jetstack/cert-manager-cainjector:v1.13.1
 quay.io/jetstack/cert-manager-controller:v1.13.1
 quay.io/jetstack/cert-manager-ctl:v1.13.1
+quay.io/jetstack/cert-manager-package-debian:20210119.0
 quay.io/jetstack/cert-manager-webhook:v1.13.1
 quay.io/jetstack/trust-manager:v0.6.0
 redis:7.0.11-alpine
