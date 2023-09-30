@@ -6,7 +6,7 @@ require (
 	cuelang.org/go v0.6.0
 	github.com/aws/constructs-go/constructs/v10 v10.2.70
 	github.com/aws/jsii-runtime-go v1.89.0
-	github.com/cdktf/cdktf-provider-aws-go/aws/v17 v17.0.6
+	github.com/cdktf/cdktf-provider-aws-go/aws/v17 v17.0.8
 	github.com/charmbracelet/bubbles v0.16.1
 	github.com/charmbracelet/bubbletea v0.24.2
 	github.com/charmbracelet/lipgloss v0.8.0

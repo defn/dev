@@ -62,7 +62,7 @@ update:
 	$(MAKE) cdktf
 	$(MAKE) build
 	cd tf && cli infra
-	cd tf && source ./.envrc && cd stacks && runmany 'cd $$1 && tf upgrade && tf plan' */
+	cd tf && source ./.envrc && cd stacks && runmany 'cd $$1 && tf upgrade && tf locks && tf plan' */
 
 regen:
 	@mark defn.dev protos
