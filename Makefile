@@ -3,7 +3,7 @@ SHELL := /bin/bash
 flakes ?= home oci nix secrets utils vpn acme godev nodedev localdev development cloud kubernetes remotedev shell
 
 build:
-	cd m/home && $(MAKE) build
+	cd m/home&& $(MAKE) build
 
 menu: # This menu
 	@perl -ne 'printf("%20s: %s\n","$$1","$$2") if m{^([\w+-]+):[^#]+#\s(.+)$$}' $(shell ls -d Makefile2>/dev/null)
