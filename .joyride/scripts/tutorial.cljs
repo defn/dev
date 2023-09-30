@@ -1,5 +1,5 @@
 (ns tutorial)
 
-(def tutorial_filename "README.md")
+(def tutorial_filename "m/toc/tutorial.cue")
 
-(def tutorial_webpage "m/home/tutorial.html")
+(def tutorial_webpage "m/toc/tutorial.html")
