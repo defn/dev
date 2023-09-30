@@ -7,7 +7,7 @@ page: content: html: """
 	"""
 
 tutorial: #TutorialContent & {
-	title: "Tutorial : <a href=\"/?folder=/home/ubuntu/m\">TOC</a>"
+	title: "Tutorial : <a href=\"/?folder=/home/ubuntu\">TOC</a>"
 	steps: [{
 		title: "Run the slide-show with Tilt"
 		desc:  "tilt up --stream --port 0"

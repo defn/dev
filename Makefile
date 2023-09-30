@@ -125,9 +125,6 @@ perms:
 	-if ! test -f ~/.kube/config; then touch ~/.kube/config; fi
 	-chmod 0600 ~/.kube/config
 
-ci dev:
-	cd m && b server defn-org-sso bash -c 'cd; cd m; $(MAKE) $@'
-
 reinstall:
 	rm -f bin/nix/.head
 	cd m && b clean

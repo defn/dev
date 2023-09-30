@@ -5,7 +5,7 @@ page: content: html: """
 	"""
 
 tutorial: #TutorialContent & {
-	title: "Tutorial : <a href=\"/?folder=/home/ubuntu/m\">TOC</a>"
+	title: "Tutorial : <a href=\"/?folder=/home/ubuntu\">TOC</a>"
 	steps: [{
 		title: "Run Tilt to build and deploy the shell-controller."
 		desc:  "tilt up"
