@@ -1,7 +1,7 @@
 timeout ?= 5
 
 build:
-	cd toc && $(MAKE) build
+	cd home && $(MAKE) build
 	../bin/b pass build //cmd/cli:cli
 	cp -f bazel-bin/cmd/cli/cli_/cli /tmp/cli
 
