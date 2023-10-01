@@ -15,7 +15,7 @@ sudo sysctl -w net.ipv6.conf.all.forwarding=1
 #sudo mount bpffs -t bpf /sys/fs/bpf
 #sudo mount --make-shared /sys/fs/bpf
 
-if [[ "$(lsblk /dev/nvme0n1p1 | tail -1 | awk '{print $NF}')" == 1 ]]; then
+if [[ "$(lsblk /dev/nvme0n1p1 | tail -1 | awk '{print $NF}')" == "/" ]]; then
 	sudo growpart /dev/nvme0n1 1
 	sudo resize2fs /dev/nvme0n1p1
 fi
