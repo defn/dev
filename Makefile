@@ -3,7 +3,7 @@ SHELL := /bin/bash
 flakes ?= home oci nix secrets utils vpn acme godev nodedev localdev development cloud kubernetes remotedev shell
 
 build:
-	cd m/home && $(MAKE) build
+	cd m/toc & $(MAKE) build
 
 menu: # This menu
 	@perl -ne 'printf("%20s: %s\n","$$1","$$2") if m{^([\w+-]+):[^#]+#\s(.+)$$}' $(shell ls -d Makefile2>/dev/null)
@@ -124,9 +124,6 @@ perms:
 	-chmod 0700 ~/.gnupg/. ~/.gnupg2/.
 	-if ! test -f ~/.kube/config; then touch ~/.kube/config; fi
 	-chmod 0600 ~/.kube/config
-
-ci dev:
-	cd m && b server defn-org-sso bash -c 'cd; cd m; $(MAKE) $@'
 
 reinstall:
 	rm -f bin/nix/.head

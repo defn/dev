@@ -10,7 +10,7 @@ go_library(
 
 go_binary(
     name = "dev",
-    embed = [":meh_lib"],
+    embed = [":dev_lib"],
     visibility = ["//visibility:public"],
 )
 

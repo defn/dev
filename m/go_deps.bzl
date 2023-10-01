@@ -65,8 +65,8 @@ def go_deps():
     go_repository(
         name = "com_github_cdktf_cdktf_provider_aws_go_aws_v17",
         importpath = "github.com/cdktf/cdktf-provider-aws-go/aws/v17",
-        sum = "h1:d7TUwlN4B9Jm+oGdBA7TCCDYF+qPVYIaOaIm1YF65Y8=",
-        version = "v17.0.6",
+        sum = "h1:Ou5ZSVdpwdsqTE6sU+UtjI1oja14cbCgTpWx+hNv/CY=",
+        version = "v17.0.8",
     )
 
     go_repository(

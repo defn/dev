@@ -71,6 +71,9 @@ images_m: {
 		for c in *r.spec.template.spec.containers | r.spec.jobTemplate.spec.template.spec.containers {
 			"\(c.image)": {}
 		}
+		for c in *r.spec.template.spec.initContainers | *r.spec.jobTemplate.spec.template.spec.initContainers | [] {
+			"\(c.image)": {}
+		}
 	}
 }
 

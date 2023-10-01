@@ -12,7 +12,9 @@ install:
 list:
 	cd .. && npm outdated
 	npx pnpm outdated
+	for a in defn docs web; do (cd apps/$$a && npx pnpm outdated); done
 
 upgrade:
 	cd .. && npm upgrade
 	npx pnpm upgrade
+	for a in defn docs web; do (cd apps/$$a && npx pnpm upgrade); done

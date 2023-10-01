@@ -1,7 +1,7 @@
 timeout ?= 5
 
 build:
-	cd toc && $(MAKE) build
+	cd home && $(MAKE) build
 	../bin/b pass build //cmd/cli:cli
 	cp -f bazel-bin/cmd/cli/cli_/cli /tmp/cli
 
@@ -17,7 +17,9 @@ all:
 todo:
 	@(bazel cquery //... --output=files | grep -v ^bazel-; git ls-files .) | sort | uniq -c | grep '^ *1 ' | awk '{print $$2}'
 
-ci:
+ci: 
+	b server defn-org-sso $(MAKE) ci_inner 
+ci_inner:
 	cd defn/dev/www && $(MAKE) build
 	cd && git add docs
 	git commit -m 'update docs' || true
@@ -35,7 +37,9 @@ class-init:
 	coder login https://coder.dev.amanibhavam.defn.run --first-user-username="admin" --first-user-email="iam+admin@defn.sh" --first-user-password="Admin123456789,,," --first-user-trial=false
 
 .PHONY: dev
-dev:
+dev: 
+	b server defn-org-sso $(MAKE) dev_inner 
+dev_inner:
 	pass hello
 	coder server --oauth2-github-allow-signups \
 		--oauth2-github-allowed-orgs $$(pass coder_oauth2-github-allowed-orgs) --oauth2-github-allowed-teams $$(pass coder_oauth2-github-allowed-teams) \
@@ -58,7 +62,7 @@ update:
 	$(MAKE) cdktf
 	$(MAKE) build
 	cd tf && cli infra
-	cd tf && source ./.envrc && cd stacks && runmany 'cd $$1 && tf upgrade && tf plan' */
+	cd tf && source ./.envrc && cd stacks && runmany 'cd $$1 && tf upgrade && tf locks && tf plan' */
 
 regen:
 	@mark defn.dev protos
@@ -91,7 +95,7 @@ za:
 	pass hello
 	$(MAKE) ci
 	bin/make-k3d init || true
-	cd coder/pod && $(MAKE) build
+	cd coder/pod && $(MAKE) image
 
 warudo:
 	bin/make-k3d up
