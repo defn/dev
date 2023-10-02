@@ -10,11 +10,11 @@ import (
 	autoscaling "k8s.io/api/autoscaling/v2"
 	admissionregistration "k8s.io/api/admissionregistration/v1"
 
-	"github.com/defn/dev/m/k/r"
+	"github.com/defn/dev/m/k/y"
 )
 
 // by kind
-kk: r.res
+kk: y.res
 kk: "deployment": [string]: [string]: [string]:  apps.#Deployment & {apiVersion:  "apps/v1"}
 kk: "statefulset": [string]: [string]: [string]: apps.#StatefulSet & {apiVersion: "apps/v1"}
 kk: "daemonset": [string]: [string]: [string]:   apps.#DaemonSet & {apiVersion:   "apps/v1"}

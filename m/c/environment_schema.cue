@@ -93,7 +93,7 @@ import (
 			source: {
 				repoURL:        "https://github.com/defn/dev"
 				targetRevision: "main"
-				path:           "m/k/r/\(machine_name)-\(app_name)"
+				path:           "m/k/y/\(machine_name)-\(app_name)"
 			}
 
 			syncPolicy: {
@@ -118,7 +118,7 @@ import (
 	env: {
 		// ex: k/k3d-dfd
 		// ex: k/vcluster-dfd-vc0
-		spec: source: path: "m/k/r/\(name)-env"
+		spec: source: path: "m/k/y/\(name)-env"
 
 		spec: "destination": "name": destination
 	}
