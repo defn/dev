@@ -1,9 +1,9 @@
-apiVersion: external-secrets.io/v1beta1
-kind: ClusterSecretStore
-metadata:
-  name: k3d-dfd
 spec:
   provider:
     aws:
       region: us-west-2
       service: SecretsManager
+apiVersion: external-secrets.io/v1beta1
+kind: ClusterSecretStore
+metadata:
+  name: k3d-dfd
