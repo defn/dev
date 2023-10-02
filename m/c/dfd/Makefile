@@ -24,7 +24,7 @@ build:
 	../make_add_generated.sh
 # make one big cue config
 	rm -f ../../k/y/dfd.cue
-	(echo package y; for r in ../../k/y/*/main.yaml; do echo $$r 1>&2; (cue import $$r -p r --with-context -l '"res"' -l 'strings.ToLower(data.kind)' -l 'path.Dir(path.Rel("/home/ubuntu/m/k/y",filename))' -l 'strings.ToLower(*data.metadata.namespace | "cluster")' -l data.metadata.name --outfile - \
+	(echo package y; for r in ../../k/y/*/main.yaml; do echo $$r 1>&2; (cue import $$r -p r --with-context -l '"res"' -l 'strings.ToLower(data.kind)' -l 'path.Dir(path.Rel("$(shell cd ../../k/y && pwd)",filename))' -l 'strings.ToLower(*data.metadata.namespace | "cluster")' -l data.metadata.name --outfile - \
 		| grep -v '^package '); done) > ../../k/y/dfd.cue
 	perl -pe 's{^\s*\w+:\s+null\s*}{}; s{data: null,}{}' -i ../../k/y/dfd.cue 
 	git add ../../k/y
