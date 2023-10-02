@@ -18,16 +18,16 @@ build:
 	b run outputs_karpenter__update
 # cue ./c/ generates kustomize ./k/
 	b run outputs_kustomize__update
-# kustomize ./k/ generates ./k/r/ release yaml
+# kustomize ./k/ generates ./k/y/ release yaml
 	(cd ../../k && b run outputs_release__update)
 # add generated to git
 	../make_add_generated.sh
 # make one big cue config
-	rm -f ../../k/r/dfd.cue
-	(echo package r; for r in ../../k/r/*/main.yaml; do echo $$r 1>&2; (cue import $$r -p r --with-context -l '"res"' -l 'strings.ToLower(data.kind)' -l 'path.Dir(path.Rel("/home/ubuntu/m/k/r",filename))' -l 'strings.ToLower(*data.metadata.namespace | "cluster")' -l data.metadata.name --outfile - \
-		| grep -v '^package '); done) > ../../k/r/dfd.cue
-	perl -pe 's{^\s*\w+:\s+null\s*}{}; s{data: null,}{}' -i ../../k/r/dfd.cue 
-	git add ../../k/r/dfd.cue
+	rm -f ../../k/y/dfd.cue
+	(echo package r; for r in ../../k/y/*/main.yaml; do echo $$r 1>&2; (cue import $$r -p r --with-context -l '"res"' -l 'strings.ToLower(data.kind)' -l 'path.Dir(path.Rel("/home/ubuntu/m/k/y",filename))' -l 'strings.ToLower(*data.metadata.namespace | "cluster")' -l data.metadata.name --outfile - \
+		| grep -v '^package '); done) > ../../k/y/dfd.cue
+	perl -pe 's{^\s*\w+:\s+null\s*}{}; s{data: null,}{}' -i ../../k/y/dfd.cue 
+	git add ../../k/y/dfd.cue
 	(cd ../r && cue eval >/dev/null)
 # generate lists
 	cd ../ && $(MAKE) list
