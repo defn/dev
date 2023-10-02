@@ -22344,7 +22344,36 @@ metadata:
   namespace: kyverno
 ---
 spec:
-  jobTemplate: {}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - image: 169.254.32.1:5000/bitnami/kubectl@sha256:a0a972324d937b2c2f7207af29d1abd6ce3f7fd5ea73357036a67ab24f34cc92
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  COUNT=$(kubectl get admissionreports.kyverno.io -A | wc -l)
+                  if [ "$COUNT" -gt 10000 ]; then
+                    echo "too many reports found ($COUNT), cleaning up..."
+                    kubectl delete admissionreports.kyverno.io -A -l='!audit.kyverno.io/report.aggregate'
+                  else
+                    echo "($COUNT) reports found, no clean up needed"
+                  fi
+              name: cleanup
+              securityContext:
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop:
+                    - ALL
+                privileged: false
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
+          restartPolicy: OnFailure
+          serviceAccountName: kyverno-cleanup-jobs
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
   schedule: '*/10 * * * *'
@@ -22363,7 +22392,36 @@ metadata:
   namespace: kyverno
 ---
 spec:
-  jobTemplate: {}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - image: 169.254.32.1:5000/bitnami/kubectl@sha256:a0a972324d937b2c2f7207af29d1abd6ce3f7fd5ea73357036a67ab24f34cc92
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  COUNT=$(kubectl get clusteradmissionreports.kyverno.io -A | wc -l)
+                  if [ "$COUNT" -gt 10000 ]; then
+                    echo "too many reports found ($COUNT), cleaning up..."
+                    kubectl delete clusteradmissionreports.kyverno.io -A -l='!audit.kyverno.io/report.aggregate'
+                  else
+                    echo "($COUNT) reports found, no clean up needed"
+                  fi
+              name: cleanup
+              securityContext:
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop:
+                    - ALL
+                privileged: false
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
+          restartPolicy: OnFailure
+          serviceAccountName: kyverno-cleanup-jobs
   concurrencyPolicy: Forbid
   failedJobsHistoryLimit: 1
   schedule: '*/10 * * * *'
