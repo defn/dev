@@ -21,7 +21,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-manual-cert-manager-crds
+              path: m/k/r/k3d-dfd-manual-cert-manager-crds
             syncPolicy:
               automated:
                 prune: true
@@ -42,7 +42,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-manual-linkerd-crds
+              path: m/k/r/k3d-dfd-manual-linkerd-crds
             syncPolicy:
               automated:
                 prune: true
@@ -63,7 +63,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-manual-cilium-bootstrap
+              path: m/k/r/k3d-dfd-manual-cilium-bootstrap
             syncPolicy:
               automated:
                 prune: true
