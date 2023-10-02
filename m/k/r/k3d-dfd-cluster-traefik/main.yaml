@@ -1,12 +1,3 @@
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  labels:
-    app.kubernetes.io/instance: traefik-traefik
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-24.0.0
-  name: traefik-traefik
 rules:
   - apiGroups:
       - extensions
@@ -52,6 +43,15 @@ rules:
       - get
       - list
       - watch
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/instance: traefik-traefik
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: traefik
+    helm.sh/chart: traefik-24.0.0
+  name: traefik-traefik
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding

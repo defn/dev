@@ -1,13 +1,3 @@
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  labels:
-    app.kubernetes.io/instance: kyverno
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.0.5
-    helm.sh/chart: kyverno-3.0.5
-  name: kyverno-cleanup-jobs
 rules:
   - apiGroups:
       - kyverno.io
@@ -18,6 +8,16 @@ rules:
       - list
       - deletecollection
       - delete
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/instance: kyverno
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kyverno
+    app.kubernetes.io/version: 3.0.5
+    helm.sh/chart: kyverno-3.0.5
+  name: kyverno-cleanup-jobs
 ---
 aggregationRule:
   clusterRoleSelectors:
@@ -36,19 +36,7 @@ metadata:
     app.kubernetes.io/version: 3.0.5
     helm.sh/chart: kyverno-3.0.5
   name: kyverno:admission-controller
-rules: []
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  labels:
-    app.kubernetes.io/component: admission-controller
-    app.kubernetes.io/instance: kyverno
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.0.5
-    helm.sh/chart: kyverno-3.0.5
-  name: kyverno:admission-controller:core
 rules:
   - apiGroups:
       - admissionregistration.k8s.io
@@ -135,6 +123,17 @@ rules:
       - get
       - list
       - watch
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/component: admission-controller
+    app.kubernetes.io/instance: kyverno
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kyverno
+    app.kubernetes.io/version: 3.0.5
+    helm.sh/chart: kyverno-3.0.5
+  name: kyverno:admission-controller:core
 ---
 aggregationRule:
   clusterRoleSelectors:
@@ -153,16 +152,7 @@ metadata:
     app.kubernetes.io/version: 3.0.5
     helm.sh/chart: kyverno-3.0.5
   name: kyverno:background-controller
-rules: []
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  labels:
-    app.kubernetes.io/component: background-controller
-    app.kubernetes.io/instance: kyverno
-    app.kubernetes.io/part-of: kyverno
-  name: kyverno:background-controller:cert-manager
 rules:
   - apiGroups:
       - cert-manager.io
@@ -173,18 +163,15 @@ rules:
       - update
       - patch
       - delete
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/component: background-controller
     app.kubernetes.io/instance: kyverno
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.0.5
-    helm.sh/chart: kyverno-3.0.5
-  name: kyverno:background-controller:core
+  name: kyverno:background-controller:cert-manager
+---
 rules:
   - apiGroups:
       - '*'
@@ -250,15 +237,18 @@ rules:
       - update
       - patch
       - delete
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/component: background-controller
     app.kubernetes.io/instance: kyverno
+    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-  name: kyverno:background-controller:node
+    app.kubernetes.io/version: 3.0.5
+    helm.sh/chart: kyverno-3.0.5
+  name: kyverno:background-controller:core
+---
 rules:
   - apiGroups:
       - ""
@@ -267,6 +257,14 @@ rules:
     verbs:
       - update
       - patch
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/component: background-controller
+    app.kubernetes.io/instance: kyverno
+    app.kubernetes.io/part-of: kyverno
+  name: kyverno:background-controller:node
 ---
 aggregationRule:
   clusterRoleSelectors:
@@ -285,19 +283,7 @@ metadata:
     app.kubernetes.io/version: 3.0.5
     helm.sh/chart: kyverno-3.0.5
   name: kyverno:cleanup-controller
-rules: []
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  labels:
-    app.kubernetes.io/component: cleanup-controller
-    app.kubernetes.io/instance: kyverno
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.0.5
-    helm.sh/chart: kyverno-3.0.5
-  name: kyverno:cleanup-controller:core
 rules:
   - apiGroups:
       - admissionregistration.k8s.io
@@ -360,7 +346,34 @@ rules:
       - subjectaccessreviews
     verbs:
       - create
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/component: cleanup-controller
+    app.kubernetes.io/instance: kyverno
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kyverno
+    app.kubernetes.io/version: 3.0.5
+    helm.sh/chart: kyverno-3.0.5
+  name: kyverno:cleanup-controller:core
 ---
+rules:
+  - apiGroups:
+      - kyverno.io
+    resources:
+      - cleanuppolicies
+      - clustercleanuppolicies
+      - policies
+      - clusterpolicies
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -373,14 +386,13 @@ metadata:
     helm.sh/chart: kyverno-3.0.5
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
   name: kyverno:rbac:admin:policies
+---
 rules:
   - apiGroups:
-      - kyverno.io
+      - wgpolicyk8s.io
     resources:
-      - cleanuppolicies
-      - clustercleanuppolicies
-      - policies
-      - clusterpolicies
+      - policyreports
+      - clusterpolicyreports
     verbs:
       - create
       - delete
@@ -389,7 +401,6 @@ rules:
       - patch
       - update
       - watch
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -402,12 +413,15 @@ metadata:
     helm.sh/chart: kyverno-3.0.5
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
   name: kyverno:rbac:admin:policyreports
+---
 rules:
   - apiGroups:
-      - wgpolicyk8s.io
+      - kyverno.io
     resources:
-      - policyreports
-      - clusterpolicyreports
+      - admissionreports
+      - clusteradmissionreports
+      - backgroundscanreports
+      - clusterbackgroundscanreports
     verbs:
       - create
       - delete
@@ -416,7 +430,6 @@ rules:
       - patch
       - update
       - watch
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -429,14 +442,12 @@ metadata:
     helm.sh/chart: kyverno-3.0.5
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
   name: kyverno:rbac:admin:reports
+---
 rules:
   - apiGroups:
       - kyverno.io
     resources:
-      - admissionreports
-      - clusteradmissionreports
-      - backgroundscanreports
-      - clusterbackgroundscanreports
+      - updaterequests
     verbs:
       - create
       - delete
@@ -445,7 +456,6 @@ rules:
       - patch
       - update
       - watch
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -458,32 +468,7 @@ metadata:
     helm.sh/chart: kyverno-3.0.5
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
   name: kyverno:rbac:admin:updaterequests
-rules:
-  - apiGroups:
-      - kyverno.io
-    resources:
-      - updaterequests
-    verbs:
-      - create
-      - delete
-      - get
-      - list
-      - patch
-      - update
-      - watch
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  labels:
-    app.kubernetes.io/component: rbac
-    app.kubernetes.io/instance: kyverno
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.0.5
-    helm.sh/chart: kyverno-3.0.5
-    rbac.authorization.k8s.io/aggregate-to-view: "true"
-  name: kyverno:rbac:view:policies
 rules:
   - apiGroups:
       - kyverno.io
@@ -496,7 +481,29 @@ rules:
       - get
       - list
       - watch
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/instance: kyverno
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kyverno
+    app.kubernetes.io/version: 3.0.5
+    helm.sh/chart: kyverno-3.0.5
+    rbac.authorization.k8s.io/aggregate-to-view: "true"
+  name: kyverno:rbac:view:policies
 ---
+rules:
+  - apiGroups:
+      - wgpolicyk8s.io
+    resources:
+      - policyreports
+      - clusterpolicyreports
+    verbs:
+      - get
+      - list
+      - watch
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -509,29 +516,7 @@ metadata:
     helm.sh/chart: kyverno-3.0.5
     rbac.authorization.k8s.io/aggregate-to-view: "true"
   name: kyverno:rbac:view:policyreports
-rules:
-  - apiGroups:
-      - wgpolicyk8s.io
-    resources:
-      - policyreports
-      - clusterpolicyreports
-    verbs:
-      - get
-      - list
-      - watch
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  labels:
-    app.kubernetes.io/component: rbac
-    app.kubernetes.io/instance: kyverno
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.0.5
-    helm.sh/chart: kyverno-3.0.5
-    rbac.authorization.k8s.io/aggregate-to-view: "true"
-  name: kyverno:rbac:view:reports
 rules:
   - apiGroups:
       - kyverno.io
@@ -544,7 +529,28 @@ rules:
       - get
       - list
       - watch
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/instance: kyverno
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kyverno
+    app.kubernetes.io/version: 3.0.5
+    helm.sh/chart: kyverno-3.0.5
+    rbac.authorization.k8s.io/aggregate-to-view: "true"
+  name: kyverno:rbac:view:reports
 ---
+rules:
+  - apiGroups:
+      - kyverno.io
+    resources:
+      - updaterequests
+    verbs:
+      - get
+      - list
+      - watch
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -557,15 +563,6 @@ metadata:
     helm.sh/chart: kyverno-3.0.5
     rbac.authorization.k8s.io/aggregate-to-view: "true"
   name: kyverno:rbac:view:updaterequests
-rules:
-  - apiGroups:
-      - kyverno.io
-    resources:
-      - updaterequests
-    verbs:
-      - get
-      - list
-      - watch
 ---
 aggregationRule:
   clusterRoleSelectors:
@@ -584,19 +581,7 @@ metadata:
     app.kubernetes.io/version: 3.0.5
     helm.sh/chart: kyverno-3.0.5
   name: kyverno:reports-controller
-rules: []
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  labels:
-    app.kubernetes.io/component: reports-controller
-    app.kubernetes.io/instance: kyverno
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.0.5
-    helm.sh/chart: kyverno-3.0.5
-  name: kyverno:reports-controller:core
 rules:
   - apiGroups:
       - '*'
@@ -646,6 +631,17 @@ rules:
     verbs:
       - create
       - patch
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/component: reports-controller
+    app.kubernetes.io/instance: kyverno
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kyverno
+    app.kubernetes.io/version: 3.0.5
+    helm.sh/chart: kyverno-3.0.5
+  name: kyverno:reports-controller:core
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -23306,18 +23302,6 @@ metadata:
   name: kyverno-reports-controller-metrics
   namespace: kyverno
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  labels:
-    app.kubernetes.io/component: admission-controller
-    app.kubernetes.io/instance: kyverno
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.0.5
-    helm.sh/chart: kyverno-3.0.5
-  name: kyverno:admission-controller
-  namespace: kyverno
 rules:
   - apiGroups:
       - ""
@@ -23362,19 +23346,19 @@ rules:
       - watch
       - patch
       - update
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   labels:
-    app.kubernetes.io/component: background-controller
+    app.kubernetes.io/component: admission-controller
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
     app.kubernetes.io/version: 3.0.5
     helm.sh/chart: kyverno-3.0.5
-  name: kyverno:background-controller
+  name: kyverno:admission-controller
   namespace: kyverno
+---
 rules:
   - apiGroups:
       - ""
@@ -23397,19 +23381,19 @@ rules:
       - get
       - patch
       - update
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   labels:
-    app.kubernetes.io/component: cleanup-controller
+    app.kubernetes.io/component: background-controller
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
     app.kubernetes.io/version: 3.0.5
     helm.sh/chart: kyverno-3.0.5
-  name: kyverno:cleanup-controller
+  name: kyverno:background-controller
   namespace: kyverno
+---
 rules:
   - apiGroups:
       - ""
@@ -23443,19 +23427,19 @@ rules:
       - get
       - patch
       - update
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   labels:
-    app.kubernetes.io/component: reports-controller
+    app.kubernetes.io/component: cleanup-controller
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
     app.kubernetes.io/version: 3.0.5
     helm.sh/chart: kyverno-3.0.5
-  name: kyverno:reports-controller
+  name: kyverno:cleanup-controller
   namespace: kyverno
+---
 rules:
   - apiGroups:
       - ""
@@ -23478,6 +23462,18 @@ rules:
       - get
       - patch
       - update
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    app.kubernetes.io/component: reports-controller
+    app.kubernetes.io/instance: kyverno
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kyverno
+    app.kubernetes.io/version: 3.0.5
+    helm.sh/chart: kyverno-3.0.5
+  name: kyverno:reports-controller
+  namespace: kyverno
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding

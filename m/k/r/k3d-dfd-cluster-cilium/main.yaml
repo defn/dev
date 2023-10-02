@@ -1,9 +1,3 @@
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  labels:
-    app.kubernetes.io/part-of: cilium
-  name: cilium
 rules:
   - apiGroups:
       - networking.k8s.io
@@ -102,13 +96,13 @@ rules:
       - ciliuml2announcementpolicies/status
     verbs:
       - patch
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/part-of: cilium
-  name: cilium-operator
+  name: cilium
+---
 rules:
   - apiGroups:
       - ""
@@ -293,13 +287,13 @@ rules:
       - create
       - get
       - update
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/part-of: cilium
-  name: hubble-ui
+  name: cilium-operator
+---
 rules:
   - apiGroups:
       - networking.k8s.io
@@ -338,6 +332,12 @@ rules:
       - get
       - list
       - watch
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/part-of: cilium
+  name: hubble-ui
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -1684,13 +1684,6 @@ metadata:
   name: hubble-ui
   namespace: kube-system
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  labels:
-    app.kubernetes.io/part-of: cilium
-  name: cilium-config-agent
-  namespace: kube-system
 rules:
   - apiGroups:
       - ""
@@ -1700,6 +1693,13 @@ rules:
       - get
       - list
       - watch
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    app.kubernetes.io/part-of: cilium
+  name: cilium-config-agent
+  namespace: kube-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding

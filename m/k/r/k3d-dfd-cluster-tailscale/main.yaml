@@ -1,7 +1,3 @@
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: tailscale-auth-proxy
 rules:
   - apiGroups:
       - ""
@@ -10,11 +6,11 @@ rules:
       - groups
     verbs:
       - impersonate
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: tailscale-operator
+  name: tailscale-auth-proxy
+---
 rules:
   - apiGroups:
       - ""
@@ -31,6 +27,10 @@ rules:
       - ingresses/status
     verbs:
       - '*'
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: tailscale-operator
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -154,11 +154,6 @@ metadata:
   name: operator-oauth-custom
   namespace: tailscale
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: operator
-  namespace: tailscale
 rules:
   - apiGroups:
       - ""
@@ -172,12 +167,12 @@ rules:
       - statefulsets
     verbs:
       - '*'
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: proxies
+  name: operator
   namespace: tailscale
+---
 rules:
   - apiGroups:
       - ""
@@ -185,6 +180,11 @@ rules:
       - secrets
     verbs:
       - '*'
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: proxies
+  namespace: tailscale
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding

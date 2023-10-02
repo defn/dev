@@ -58,7 +58,14 @@ cached_resources: {
 	for fname, f in resources 
 	for rname, r in f {
 		"\(fname)": "\(rname)": {
-			(except & {input: r, exclude: {spec: true}}).output
+			(except & {input: r, exclude: {rules: true, spec: true}}).output
+
+      // rules:
+      if r.rules != _|_ {
+        if len(r.rules) > 0 {
+          rules: r.rules
+        }
+      }
 
 			// spec:
 			if r.spec != _|_ {spec: {

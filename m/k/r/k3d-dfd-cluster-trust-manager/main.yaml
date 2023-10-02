@@ -128,17 +128,6 @@ metadata:
   name: trust-manager
   namespace: cert-manager
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  labels:
-    app.kubernetes.io/instance: trust-manager
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: trust-manager
-    app.kubernetes.io/version: v0.6.0
-    helm.sh/chart: trust-manager-v0.6.0
-  name: trust-manager
-  namespace: cert-manager
 rules:
   - apiGroups:
       - ""
@@ -158,6 +147,17 @@ rules:
       - update
       - watch
       - list
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    app.kubernetes.io/instance: trust-manager
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: trust-manager
+    app.kubernetes.io/version: v0.6.0
+    helm.sh/chart: trust-manager-v0.6.0
+  name: trust-manager
+  namespace: cert-manager
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -235,16 +235,6 @@ metadata:
   name: trust-manager
   namespace: cert-manager
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  labels:
-    app.kubernetes.io/instance: trust-manager
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: trust-manager
-    app.kubernetes.io/version: v0.6.0
-    helm.sh/chart: trust-manager-v0.6.0
-  name: trust-manager
 rules:
   - apiGroups:
       - trust.cert-manager.io
@@ -292,6 +282,16 @@ rules:
     verbs:
       - create
       - patch
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/instance: trust-manager
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: trust-manager
+    app.kubernetes.io/version: v0.6.0
+    helm.sh/chart: trust-manager-v0.6.0
+  name: trust-manager
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
