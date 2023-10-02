@@ -149,17 +149,6 @@ metadata:
   name: argo-events-events-webhook
   namespace: argo-events
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  labels:
-    app.kubernetes.io/component: controller-manager
-    app.kubernetes.io/instance: argo-events
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: argo-events-controller-manager
-    app.kubernetes.io/part-of: argo-events
-    helm.sh/chart: argo-events-2.4.1
-  name: argo-events-controller-manager
 rules:
   - apiGroups:
       - ""
@@ -241,6 +230,17 @@ rules:
       - update
       - patch
       - delete
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/component: controller-manager
+    app.kubernetes.io/instance: argo-events
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: argo-events-controller-manager
+    app.kubernetes.io/part-of: argo-events
+    helm.sh/chart: argo-events-2.4.1
+  name: argo-events-controller-manager
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding

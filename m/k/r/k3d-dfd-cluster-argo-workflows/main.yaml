@@ -179,18 +179,6 @@ metadata:
   name: argo-workflows-workflow-controller
   namespace: argo-workflows
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  labels:
-    app.kubernetes.io/component: workflow-controller
-    app.kubernetes.io/instance: argo-workflows
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: argo-workflows-workflow-controller
-    app.kubernetes.io/part-of: argo-workflows
-    helm.sh/chart: argo-workflows-0.33.3
-  name: argo-workflows-workflow
-  namespace: argo-workflows
 rules:
   - apiGroups:
       - ""
@@ -234,6 +222,18 @@ rules:
       - workflowartifactgctasks/status
     verbs:
       - patch
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    app.kubernetes.io/component: workflow-controller
+    app.kubernetes.io/instance: argo-workflows
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: argo-workflows-workflow-controller
+    app.kubernetes.io/part-of: argo-workflows
+    helm.sh/chart: argo-workflows-0.33.3
+  name: argo-workflows-workflow
+  namespace: argo-workflows
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -305,18 +305,6 @@ metadata:
   name: argo-workflows-workflow-controller
   namespace: argo-workflows
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  labels:
-    app.kubernetes.io/component: server
-    app.kubernetes.io/instance: argo-workflows
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: argo-workflows-server
-    app.kubernetes.io/part-of: argo-workflows
-    helm.sh/chart: argo-workflows-0.33.3
-    rbac.authorization.k8s.io/aggregate-to-admin: "true"
-  name: argo-workflows-admin
 rules:
   - apiGroups:
       - argoproj.io
@@ -342,7 +330,6 @@ rules:
       - patch
       - update
       - watch
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -353,8 +340,9 @@ metadata:
     app.kubernetes.io/name: argo-workflows-server
     app.kubernetes.io/part-of: argo-workflows
     helm.sh/chart: argo-workflows-0.33.3
-    rbac.authorization.k8s.io/aggregate-to-edit: "true"
-  name: argo-workflows-edit
+    rbac.authorization.k8s.io/aggregate-to-admin: "true"
+  name: argo-workflows-admin
+---
 rules:
   - apiGroups:
       - argoproj.io
@@ -378,7 +366,6 @@ rules:
       - patch
       - update
       - watch
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -389,7 +376,9 @@ metadata:
     app.kubernetes.io/name: argo-workflows-server
     app.kubernetes.io/part-of: argo-workflows
     helm.sh/chart: argo-workflows-0.33.3
-  name: argo-workflows-server
+    rbac.authorization.k8s.io/aggregate-to-edit: "true"
+  name: argo-workflows-edit
+---
 rules:
   - apiGroups:
       - ""
@@ -447,7 +436,6 @@ rules:
       - update
       - patch
       - delete
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -458,7 +446,8 @@ metadata:
     app.kubernetes.io/name: argo-workflows-server
     app.kubernetes.io/part-of: argo-workflows
     helm.sh/chart: argo-workflows-0.33.3
-  name: argo-workflows-server-cluster-template
+  name: argo-workflows-server
+---
 rules:
   - apiGroups:
       - argoproj.io
@@ -472,19 +461,18 @@ rules:
       - update
       - patch
       - delete
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
-    app.kubernetes.io/component: workflow-controller
+    app.kubernetes.io/component: server
     app.kubernetes.io/instance: argo-workflows
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: argo-workflows-workflow-controller
+    app.kubernetes.io/name: argo-workflows-server
     app.kubernetes.io/part-of: argo-workflows
     helm.sh/chart: argo-workflows-0.33.3
-    rbac.authorization.k8s.io/aggregate-to-view: "true"
-  name: argo-workflows-view
+  name: argo-workflows-server-cluster-template
+---
 rules:
   - apiGroups:
       - argoproj.io
@@ -503,7 +491,6 @@ rules:
       - get
       - list
       - watch
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -514,7 +501,9 @@ metadata:
     app.kubernetes.io/name: argo-workflows-workflow-controller
     app.kubernetes.io/part-of: argo-workflows
     helm.sh/chart: argo-workflows-0.33.3
-  name: argo-workflows-workflow-controller
+    rbac.authorization.k8s.io/aggregate-to-view: "true"
+  name: argo-workflows-view
+---
 rules:
   - apiGroups:
       - ""
@@ -647,7 +636,28 @@ rules:
       - secrets
     verbs:
       - get
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/component: workflow-controller
+    app.kubernetes.io/instance: argo-workflows
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: argo-workflows-workflow-controller
+    app.kubernetes.io/part-of: argo-workflows
+    helm.sh/chart: argo-workflows-0.33.3
+  name: argo-workflows-workflow-controller
 ---
+rules:
+  - apiGroups:
+      - argoproj.io
+    resources:
+      - clusterworkflowtemplates
+      - clusterworkflowtemplates/finalizers
+    verbs:
+      - get
+      - list
+      - watch
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -659,16 +669,6 @@ metadata:
     app.kubernetes.io/part-of: argo-workflows
     helm.sh/chart: argo-workflows-0.33.3
   name: argo-workflows-workflow-controller-cluster-template
-rules:
-  - apiGroups:
-      - argoproj.io
-    resources:
-      - clusterworkflowtemplates
-      - clusterworkflowtemplates/finalizers
-    verbs:
-      - get
-      - list
-      - watch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -1645,18 +1645,6 @@ kind: Namespace
 metadata:
   name: argo-workflows
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  labels:
-    app.kubernetes.io/component: workflow-controller
-    app.kubernetes.io/instance: argo-workflows
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: argo-workflows-workflow-controller
-    app.kubernetes.io/part-of: argo-workflows
-    helm.sh/chart: argo-workflows-0.33.3
-  name: argo-workflows-workflow
-  namespace: default
 rules:
   - apiGroups:
       - ""
@@ -1700,6 +1688,18 @@ rules:
       - workflowartifactgctasks/status
     verbs:
       - patch
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    app.kubernetes.io/component: workflow-controller
+    app.kubernetes.io/instance: argo-workflows
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: argo-workflows-workflow-controller
+    app.kubernetes.io/part-of: argo-workflows
+    helm.sh/chart: argo-workflows-0.33.3
+  name: argo-workflows-workflow
+  namespace: default
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
