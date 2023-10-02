@@ -3,7 +3,6 @@ list:
 	cue export --out json  -e cached_resources | jq -S > b.json
 
 diff:
-	$(MAKE) list
 	diff a.json b.json | grep '^[<>]'
 
 cache:

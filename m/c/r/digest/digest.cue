@@ -39,14 +39,16 @@ cached_image: {
 }
 
 uncached_resources: {
-	for rname, r in resources {
-		"\(rname)": r
+	for fname, f in resources 
+	for rname, r in f {
+		"\(fname)": "\(rname)": r
 	}
 }
 
 cached_resources: {
-	for rname, r in resources {
-		"\(rname)": {
+	for fname, f in resources 
+	for rname, r in f {
+		"\(fname)": "\(rname)": {
 			(except & {input: r, exclude: {spec: true}}).output
 
 			// spec:
