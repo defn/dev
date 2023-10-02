@@ -46,6 +46,8 @@ uncached_resources: {
 	}
 }
 
+cache: [string]: string
+
 cached_yaml: {
 	for fname, f in cached_resources {
 		"\(fname)/main.yaml": yaml.MarshalStream([ for s in list.SortStrings([ for rname, r in f { rname } ]) { f[s] } ])

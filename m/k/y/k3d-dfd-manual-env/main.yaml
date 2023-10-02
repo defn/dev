@@ -10,7 +10,7 @@ spec:
     name: k3d-dfd-manual
   project: default
   source:
-    path: m/k/r/k3d-dfd-manual-cert-manager-crds
+    path: m/k/y/k3d-dfd-manual-cert-manager-crds
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -31,7 +31,7 @@ spec:
     name: k3d-dfd-manual
   project: default
   source:
-    path: m/k/r/k3d-dfd-manual-cilium-bootstrap
+    path: m/k/y/k3d-dfd-manual-cilium-bootstrap
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -52,7 +52,7 @@ spec:
     name: k3d-dfd-manual
   project: default
   source:
-    path: m/k/r/k3d-dfd-manual-linkerd-crds
+    path: m/k/y/k3d-dfd-manual-linkerd-crds
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
