@@ -3,6 +3,7 @@ package r
 import (
 	"list"
 	"strings"
+	"encoding/yaml"
 )
 
 image_digests: [
@@ -42,6 +43,12 @@ uncached_resources: {
 	for fname, f in resources 
 	for rname, r in f {
 		"\(fname)": "\(rname)": r
+	}
+}
+
+cached_yaml: {
+	for fname, f in cached_resources {
+		"\(fname)/main.yaml": yaml.MarshalStream([ for s in list.SortStrings([ for rname, r in f { rname } ]) { f[s] } ])
 	}
 }
 
