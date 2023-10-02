@@ -10,6 +10,6 @@ page: content: #TutorialContent & {
 		desc:  "(cd dfd && make)"
 	}, {
 		title: "View the YAML diff"
-		desc:  "git diff --cached ../k/y"
+		desc:  "git diff --cached ../k/y ../k/r"
 	}]
 }
