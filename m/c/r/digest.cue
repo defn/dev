@@ -87,27 +87,27 @@ cached_resources: {
 					(except & {input: r.spec.jobTemplate, exclude: {spec: true}}).output
 
 					// spec: jobTemplate: spec
-					if r.spect.jobTemplate.spec != _|_ {spec: {
+					if r.spec.jobTemplate.spec != _|_ {spec: {
 						(except & {input: r.spec.jobTemplate.spec, exclude: {template: true}}).output
 
 						// spec: jobTemplate: spec: template
 						if r.spec.jobTemplate.spec.template != _|_ {template: {
-							(except & {input: r.spec.template, exclude: {spec: true}}).output
+							(except & {input: r.spec.jobTemplate.spec.template, exclude: {spec: true}}).output
 
-							// spec: template: spec
-							if r.spec.template.spec != _|_ {spec: {
-								(except & {input: r.spec.template.spec, exclude: {containers: true, initContainers: true}}).output
+							// spec: jobTemplate: spec: template: spec 
+							if r.spec.jobTemplate.spec.template.spec != _|_ {spec: {
+								(except & {input: r.spec.jobTemplate.spec.template.spec, exclude: {containers: true, initContainers: true}}).output
 
-								// spec: template: spec: initContainers
-								if r.spec.template.spec.initContainers != _|_ {initContainers: [
-									for c in r.spec.template.spec.initContainers {
+								// spec: jobTemplate: spec: template: spec: initContainers
+								if r.spec.jobTemplate.spec.template.spec.initContainers != _|_ {initContainers: [
+									for c in r.spec.jobTemplate.spec.tempate.spec.initContainers {
 										(cached_image & {"c": c}).output
 									},
 								]}
 
-								// spec: template: spec: containers
-								if r.spec.template.spec.containers != _|_ {containers: [
-									for c in r.spec.template.spec.containers {
+								// spec: jobTemplate: spec: template: spec: containers
+								if r.spec.jobTemplate.spec.template.spec.containers != _|_ {containers: [
+									for c in r.spec.jobTemplate.spec.template.spec.containers {
 										(cached_image & {"c": c}).output
 									},
 								]}
