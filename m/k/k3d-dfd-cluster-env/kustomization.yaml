@@ -21,7 +21,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-kyverno
+              path: m/k/r/k3d-dfd-cluster-kyverno
             syncPolicy:
               automated:
                 prune: true
@@ -43,7 +43,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-linkerd-crds
+              path: m/k/r/k3d-dfd-cluster-linkerd-crds
             syncPolicy:
               automated:
                 prune: true
@@ -64,7 +64,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-cert-manager
+              path: m/k/r/k3d-dfd-cluster-cert-manager
             syncPolicy:
               automated:
                 prune: true
@@ -85,7 +85,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-trust-manager
+              path: m/k/r/k3d-dfd-cluster-trust-manager
             syncPolicy:
               automated:
                 prune: true
@@ -106,7 +106,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-pod-identity
+              path: m/k/r/k3d-dfd-cluster-pod-identity
             syncPolicy:
               automated:
                 prune: true
@@ -127,7 +127,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-external-secrets
+              path: m/k/r/k3d-dfd-cluster-external-secrets
             syncPolicy:
               automated:
                 prune: true
@@ -148,7 +148,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-secrets
+              path: m/k/r/k3d-dfd-cluster-secrets
             syncPolicy:
               automated:
                 prune: true
@@ -169,7 +169,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-tailscale
+              path: m/k/r/k3d-dfd-cluster-tailscale
             syncPolicy:
               automated:
                 prune: true
@@ -190,7 +190,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-karpenter
+              path: m/k/r/k3d-dfd-cluster-karpenter
             syncPolicy:
               automated:
                 prune: true
@@ -211,7 +211,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-tfo
+              path: m/k/r/k3d-dfd-cluster-tfo
             syncPolicy:
               automated:
                 prune: true
@@ -232,7 +232,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-argo-workflows
+              path: m/k/r/k3d-dfd-cluster-argo-workflows
             syncPolicy:
               automated:
                 prune: true
@@ -253,7 +253,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-argo-events
+              path: m/k/r/k3d-dfd-cluster-argo-events
             syncPolicy:
               automated:
                 prune: true
@@ -274,7 +274,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-external-dns
+              path: m/k/r/k3d-dfd-cluster-external-dns
             syncPolicy:
               automated:
                 prune: true
@@ -295,7 +295,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-issuer
+              path: m/k/r/k3d-dfd-cluster-issuer
             syncPolicy:
               automated:
                 prune: true
@@ -316,7 +316,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-knative
+              path: m/k/r/k3d-dfd-cluster-knative
             syncPolicy:
               automated:
                 prune: true
@@ -337,7 +337,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-kourier
+              path: m/k/r/k3d-dfd-cluster-kourier
             syncPolicy:
               automated:
                 prune: true
@@ -358,7 +358,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-traefik
+              path: m/k/r/k3d-dfd-cluster-traefik
             syncPolicy:
               automated:
                 prune: true
@@ -379,7 +379,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-hello
+              path: m/k/r/k3d-dfd-cluster-hello
             syncPolicy:
               automated:
                 prune: true
@@ -400,7 +400,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-pihole
+              path: m/k/r/k3d-dfd-cluster-pihole
             syncPolicy:
               automated:
                 prune: true
@@ -421,7 +421,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-coder
+              path: m/k/r/k3d-dfd-cluster-coder
             syncPolicy:
               automated:
                 prune: true
@@ -442,7 +442,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-headlamp
+              path: m/k/r/k3d-dfd-cluster-headlamp
             syncPolicy:
               automated:
                 prune: true
@@ -463,7 +463,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-dex
+              path: m/k/r/k3d-dfd-cluster-dex
             syncPolicy:
               automated:
                 prune: true
@@ -484,7 +484,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-mastodon
+              path: m/k/r/k3d-dfd-cluster-mastodon
             syncPolicy:
               automated:
                 prune: true
@@ -505,7 +505,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-cilium
+              path: m/k/r/k3d-dfd-cluster-cilium
             syncPolicy:
               automated:
                 prune: true
@@ -526,7 +526,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/y/k3d-dfd-cluster-argo-cd
+              path: m/k/r/k3d-dfd-cluster-argo-cd
             syncPolicy:
               automated:
                 prune: true

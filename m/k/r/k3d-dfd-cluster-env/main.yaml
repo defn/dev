@@ -3,7 +3,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-argo-cd
+    path: m/k/r/k3d-dfd-cluster-argo-cd
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -24,7 +24,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-argo-events
+    path: m/k/r/k3d-dfd-cluster-argo-events
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -45,7 +45,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-argo-workflows
+    path: m/k/r/k3d-dfd-cluster-argo-workflows
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -66,7 +66,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-cert-manager
+    path: m/k/r/k3d-dfd-cluster-cert-manager
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -87,7 +87,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-cilium
+    path: m/k/r/k3d-dfd-cluster-cilium
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -108,7 +108,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-coder
+    path: m/k/r/k3d-dfd-cluster-coder
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -129,7 +129,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-dex
+    path: m/k/r/k3d-dfd-cluster-dex
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -150,7 +150,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-external-dns
+    path: m/k/r/k3d-dfd-cluster-external-dns
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -171,7 +171,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-external-secrets
+    path: m/k/r/k3d-dfd-cluster-external-secrets
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -192,7 +192,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-headlamp
+    path: m/k/r/k3d-dfd-cluster-headlamp
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -213,7 +213,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-hello
+    path: m/k/r/k3d-dfd-cluster-hello
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -234,7 +234,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-issuer
+    path: m/k/r/k3d-dfd-cluster-issuer
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -255,7 +255,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-karpenter
+    path: m/k/r/k3d-dfd-cluster-karpenter
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -276,7 +276,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-knative
+    path: m/k/r/k3d-dfd-cluster-knative
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -297,7 +297,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-kourier
+    path: m/k/r/k3d-dfd-cluster-kourier
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -318,7 +318,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-kyverno
+    path: m/k/r/k3d-dfd-cluster-kyverno
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -340,7 +340,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-linkerd-crds
+    path: m/k/r/k3d-dfd-cluster-linkerd-crds
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -361,7 +361,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-mastodon
+    path: m/k/r/k3d-dfd-cluster-mastodon
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -382,7 +382,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-pihole
+    path: m/k/r/k3d-dfd-cluster-pihole
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -403,7 +403,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-pod-identity
+    path: m/k/r/k3d-dfd-cluster-pod-identity
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -424,7 +424,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-secrets
+    path: m/k/r/k3d-dfd-cluster-secrets
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -445,7 +445,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-tailscale
+    path: m/k/r/k3d-dfd-cluster-tailscale
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -466,7 +466,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-tfo
+    path: m/k/r/k3d-dfd-cluster-tfo
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -487,7 +487,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-traefik
+    path: m/k/r/k3d-dfd-cluster-traefik
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -508,7 +508,7 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
-    path: m/k/y/k3d-dfd-cluster-trust-manager
+    path: m/k/r/k3d-dfd-cluster-trust-manager
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
