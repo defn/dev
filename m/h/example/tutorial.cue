@@ -7,7 +7,10 @@ page: content: html: """
 tutorial: #TutorialContent & {
 	title: "Tutorial : <a href=\"/?folder=/home/ubuntu\">TOC</a>"
 	steps: [{
-		title: "Run Tilt to build and deploy the shell-controller."
+		title: "Configure kubeconfig for in-cluster Kubernetes"
+		desc:  "cp ~/.kube/config-in-cluster ~/.kube/config"
+	}, {
+		title: "Run Tilt to build and deploy the shell-controller.  Press space to open Tilt web UI."
 		desc:  "tilt up"
 	}, {
 		title: "Open the Tilt web UI by pressing the space bar while in the shell panel."
