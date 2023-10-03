@@ -1423,17 +1423,17 @@
       },
       "locked": {
         "dir": "m/pkg/tfo",
-        "lastModified": 1695860016,
-        "narHash": "sha256-r3NY5UhDeX1/jjAXypJwduqOdIhGnOMpoQ+Q6JILfEU=",
+        "lastModified": 1696348161,
+        "narHash": "sha256-gSEXe069wvFoHY2B7Jp87tl9M0q7WfTeg/9Jmqen3NU=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "a27585d6568765ddea7e60e62402b69e1faffc7f",
+        "rev": "1cfc312b6728c518617368c5ef4016f8e97e8912",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/tfo",
         "owner": "defn",
-        "ref": "pkg-tfo-2.1.0-1",
+        "ref": "pkg-tfo-2.1.1-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1444,17 +1444,17 @@
       },
       "locked": {
         "dir": "m/pkg/vcluster",
-        "lastModified": 1692989240,
-        "narHash": "sha256-N21YicJGHqMTa2/nGmMVoZdHJ4uLRCqNy+UACYzQVvs=",
+        "lastModified": 1696348170,
+        "narHash": "sha256-wFvSgv/VmB+boT6A4XIA42CMv0hvFXBzYsD601IrYTs=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "2cc3138474d92d9d7f4024fa54a365c31016b412",
+        "rev": "6db9ed10b9b1942766af161f1abcb3cb95249ee7",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/vcluster",
         "owner": "defn",
-        "ref": "pkg-vcluster-0.15.7-1",
+        "ref": "pkg-vcluster-0.16.0-1",
         "repo": "dev",
         "type": "github"
       }
