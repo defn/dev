@@ -31,6 +31,7 @@ build:
 # generate lists
 	cd ../ && $(MAKE) list
 # generate k/r
+	cd ../r && $(MAKE) digest
 	cd ../r/digest && $(MAKE) release
 	git add ../../k/r
 

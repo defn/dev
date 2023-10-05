@@ -2,7 +2,7 @@ package r
 
 cache: "bitnami/kubectl:1.26.4": "bitnami/kubectl@sha256:a0a972324d937b2c2f7207af29d1abd6ce3f7fd5ea73357036a67ab24f34cc92"
 
-cache: "bitnami/kubectl:latest": "bitnami/kubectl@sha256:4680f8718a442eaaa65cf2da26c9a0f3720fd82ca72cb3bec98bb5b0c461abd9"
+cache: "bitnami/kubectl:latest": "bitnami/kubectl@sha256:0b28a0ae15893822f211bb8501d192c7b52d1920c32e4b43734aa6d94d51477f"
 
 cache: "busybox:1.35": "busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094"
 
@@ -16,7 +16,7 @@ cache: "docker.io/bitnami/apache:2.4.57-debian-11-r36": "docker.io/bitnami/apach
 
 cache: "docker.io/bitnami/elasticsearch:8.10.2-debian-11-r6": "docker.io/bitnami/elasticsearch@sha256:169efab21c4508790d7d1831b5018ac8ed47e4f6f13c1f6d45635f5564fdf4e3"
 
-cache: "docker.io/bitnami/external-dns:0.13.6-debian-11-r11": "docker.io/bitnami/external-dns@sha256:7f79262e68e02cca5e83f569b66c133972fcde24a352f9c5934854dcb801e992"
+cache: "docker.io/bitnami/external-dns:0.13.6-debian-11-r26": "docker.io/bitnami/external-dns@sha256:80f02728bc2407e2e05a0c398f72b73449343bba16ef78885caa0fb3f6343143"
 
 cache: "docker.io/bitnami/mastodon:4.2.0-debian-11-r0": "docker.io/bitnami/mastodon@sha256:8533513b38a7dff5d60282e0f86ee28f116e91cdbdbe1b552d505f3e355b46d2"
 
