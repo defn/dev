@@ -21,10 +21,9 @@ type TerraformAwsIamRoleConfig struct {
 	// This is for some rare cases where resources want additional configuration of tags
 	// and therefore take a list of maps with tag key, value, and additional configuration.
 	//
-	// [object Object]
 	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	AdditionalTagMap *map[string]*string `field:"optional" json:"additionalTagMap" yaml:"additionalTagMap"`
-	// The IAM action to be granted by the AssumeRole policy sts:AssumeRole,sts:TagSession.
+	// The IAM action to be granted by the AssumeRole policy sts:AssumeRole sts:TagSession.
 	AssumeRoleActions *[]*string `field:"optional" json:"assumeRoleActions" yaml:"assumeRoleActions"`
 	// List of conditions for the assume role policy.
 	AssumeRoleConditions interface{} `field:"optional" json:"assumeRoleConditions" yaml:"assumeRoleConditions"`
@@ -41,8 +40,6 @@ type TerraformAwsIamRoleConfig struct {
 	// Leave string and numeric variables as `null` to use default value.
 	// Individual variable settings (non-null) override settings in context object,
 	// except for attributes, tags, and additional_tag_map, which are merged.
-	//
-	// [object Object].
 	Context interface{} `field:"optional" json:"context" yaml:"context"`
 	// Delimiter to be used between ID elements.
 	//
@@ -52,8 +49,8 @@ type TerraformAwsIamRoleConfig struct {
 	//
 	// Map of maps. Keys are names of descriptors. Values are maps of the form
 	// `{
-	// format = string
-	// labels = list(string)
+	//    format = string
+	//    labels = list(string)
 	// }`
 	// (Type is `any` so the map values can later be enhanced to provide additional options.)
 	// `format` is a Terraform format string to be passed to the `format()` function.
@@ -61,8 +58,6 @@ type TerraformAwsIamRoleConfig struct {
 	// Label values will be normalized before being passed to `format()` so they will be
 	// identical to how they appear in `id`.
 	// Default is `{}` (`descriptors` output will be empty).
-	//
-	// [object Object].
 	DescriptorFormats interface{} `field:"optional" json:"descriptorFormats" yaml:"descriptorFormats"`
 	// Set to false to prevent the module from creating any resources.
 	Enabled *bool `field:"optional" json:"enabled" yaml:"enabled"`
@@ -94,10 +89,10 @@ type TerraformAwsIamRoleConfig struct {
 	// Default is to include all labels.
 	// Tags with empty values will not be included in the `tags` output.
 	// Set to `[]` to suppress all generated tags.
-	// *Notes:**
-	// The value of the `name` tag, if included, will be the `id`, not the `name`.
-	// Unlike other `null-label` inputs, the initial setting of `labels_as_tags` cannot be
-	// changed in later chained modules. Attempts to change it will be silently ignored.
+	// **Notes:**
+	//   The value of the `name` tag, if included, will be the `id`, not the `name`.
+	//   Unlike other `null-label` inputs, the initial setting of `labels_as_tags` cannot be
+	//   changed in later chained modules. Attempts to change it will be silently ignored.
 	//
 	// default.
 	LabelsAsTags *[]*string `field:"optional" json:"labelsAsTags" yaml:"labelsAsTags"`
@@ -113,7 +108,7 @@ type TerraformAwsIamRoleConfig struct {
 	// The maximum session duration (in seconds) for the role.
 	//
 	// Can have a value from 1 hour to 12 hours
-	// 3600.
+	// 3,600.
 	MaxSessionDuration *float64 `field:"optional" json:"maxSessionDuration" yaml:"maxSessionDuration"`
 	// ID element.
 	//
@@ -140,7 +135,7 @@ type TerraformAwsIamRoleConfig struct {
 	PolicyDocuments *[]*string `field:"optional" json:"policyDocuments" yaml:"policyDocuments"`
 	// The name of the IAM policy that is visible in the IAM policy manager.
 	PolicyName *string `field:"optional" json:"policyName" yaml:"policyName"`
-	// Map of service name as key and a list of ARNs to allow assuming the role as value (e.g. map(`AWS`, list(`arn:aws:iam:::role/admin`))) [object Object] The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}.
+	// Map of service name as key and a list of ARNs to allow assuming the role as value (e.g. map(`AWS`, list(`arn:aws:iam:::role/admin`))) The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}.
 	Principals *map[string]*[]*string `field:"optional" json:"principals" yaml:"principals"`
 	// Terraform regular expression (regex) string.
 	//
@@ -153,7 +148,6 @@ type TerraformAwsIamRoleConfig struct {
 	Stage *string `field:"optional" json:"stage" yaml:"stage"`
 	// Additional tags (e.g. `{'BusinessUnit': 'XYZ'}`). Neither the tag keys nor the tag values will be modified by this module.
 	//
-	// [object Object]
 	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	Tags *map[string]*string `field:"optional" json:"tags" yaml:"tags"`
 	// Enable/disable tags on IAM roles and policies true.
