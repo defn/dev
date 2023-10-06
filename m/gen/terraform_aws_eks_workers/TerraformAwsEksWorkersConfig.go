@@ -36,7 +36,6 @@ type TerraformAwsEksWorkersConfig struct {
 	// Additional tags for appending to tags_as_list_of_maps.
 	//
 	// Not added to `tags`.
-	// [object Object]
 	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	AdditionalTagMap *map[string]*string `field:"optional" json:"additionalTagMap" yaml:"additionalTagMap"`
 	// Additional commands to execute on each worker node after joining the EKS cluster (after executing the `bootstrap.sh` script). For mot info, see https://kubedex.com/90-days-of-aws-eks-in-production.
@@ -49,7 +48,7 @@ type TerraformAwsEksWorkersConfig struct {
 	AssociatePublicIpAddress *bool `field:"optional" json:"associatePublicIpAddress" yaml:"associatePublicIpAddress"`
 	// Additional attributes (e.g. `1`).
 	Attributes *[]*string `field:"optional" json:"attributes" yaml:"attributes"`
-	// Additional tags only for the autoscaling group, e.g. "k8s.io/cluster-autoscaler/node-template/taint/dedicated" = "ci-cd:NoSchedule". [object Object] The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}.
+	// Additional tags only for the autoscaling group, e.g. "k8s.io/cluster-autoscaler/node-template/taint/dedicated" = "ci-cd:NoSchedule". The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}.
 	AutoscalingGroupTags *map[string]*string `field:"optional" json:"autoscalingGroupTags" yaml:"autoscalingGroupTags"`
 	// Whether to create `aws_autoscaling_policy` and `aws_cloudwatch_metric_alarm` resources to control Auto Scaling true.
 	AutoscalingPoliciesEnabled *bool `field:"optional" json:"autoscalingPoliciesEnabled" yaml:"autoscalingPoliciesEnabled"`
@@ -71,8 +70,6 @@ type TerraformAwsEksWorkersConfig struct {
 	// Leave string and numeric variables as `null` to use default value.
 	// Individual variable settings (non-null) override settings in context object,
 	// except for attributes, tags, and additional_tag_map, which are merged.
-	//
-	// [object Object].
 	Context interface{} `field:"optional" json:"context" yaml:"context"`
 	// The number of periods over which data is compared to the specified threshold 2.
 	CpuUtilizationHighEvaluationPeriods *float64 `field:"optional" json:"cpuUtilizationHighEvaluationPeriods" yaml:"cpuUtilizationHighEvaluationPeriods"`
@@ -119,7 +116,14 @@ type TerraformAwsEksWorkersConfig struct {
 	// A list of metrics to collect.
 	//
 	// The allowed values are `GroupMinSize`, `GroupMaxSize`, `GroupDesiredCapacity`, `GroupInServiceInstances`, `GroupPendingInstances`, `GroupStandbyInstances`, `GroupTerminatingInstances`, `GroupTotalInstances`
-	// GroupMinSize,GroupMaxSize,GroupDesiredCapacity,GroupInServiceInstances,GroupPendingInstances,GroupStandbyInstances,GroupTerminatingInstances,GroupTotalInstances.
+	// GroupMinSize
+	// GroupMaxSize
+	// GroupDesiredCapacity
+	// GroupInServiceInstances
+	// GroupPendingInstances
+	// GroupStandbyInstances
+	// GroupTerminatingInstances
+	// GroupTotalInstances.
 	EnabledMetrics *[]*string `field:"optional" json:"enabledMetrics" yaml:"enabledMetrics"`
 	// Enable/disable detailed monitoring true.
 	EnableMonitoring *bool `field:"optional" json:"enableMonitoring" yaml:"enableMonitoring"`
@@ -252,7 +256,7 @@ type TerraformAwsEksWorkersConfig struct {
 	//
 	// The allowed values are `Launch`, `Terminate`, `HealthCheck`, `ReplaceUnhealthy`, `AZRebalance`, `AlarmNotification`, `ScheduledActions`, `AddToLoadBalancer`. Note that if you suspend either the `Launch` or `Terminate` process types, it can prevent your autoscaling group from functioning properly.
 	SuspendedProcesses *[]*string `field:"optional" json:"suspendedProcesses" yaml:"suspendedProcesses"`
-	// Additional tags (e.g. `map('BusinessUnit','XYZ')` [object Object] The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}.
+	// Additional tags (e.g. `map('BusinessUnit','XYZ')` The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}.
 	Tags *map[string]*string `field:"optional" json:"tags" yaml:"tags"`
 	// A list of aws_alb_target_group ARNs, for use with Application Load Balancing.
 	TargetGroupArns *[]*string `field:"optional" json:"targetGroupArns" yaml:"targetGroupArns"`

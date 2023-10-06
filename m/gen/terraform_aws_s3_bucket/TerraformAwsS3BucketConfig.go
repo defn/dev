@@ -25,10 +25,9 @@ type TerraformAwsS3BucketConfig struct {
 	// This is for some rare cases where resources want additional configuration of tags
 	// and therefore take a list of maps with tag key, value, and additional configuration.
 	//
-	// [object Object]
 	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	AdditionalTagMap *map[string]*string `field:"optional" json:"additionalTagMap" yaml:"additionalTagMap"`
-	// List of actions the user is permitted to perform on the S3 bucket s3:PutObject,s3:PutObjectAcl,s3:GetObject,s3:DeleteObject,s3:ListBucket,s3:ListBucketMultipartUploads,s3:GetBucketLocation,s3:AbortMultipartUpload.
+	// List of actions the user is permitted to perform on the S3 bucket s3:PutObject s3:PutObjectAcl s3:GetObject s3:DeleteObject s3:ListBucket s3:ListBucketMultipartUploads s3:GetBucketLocation s3:AbortMultipartUpload.
 	AllowedBucketActions *[]*string `field:"optional" json:"allowedBucketActions" yaml:"allowedBucketActions"`
 	// Set to `true` to prevent uploads of unencrypted objects to S3 bucket.
 	AllowEncryptedUploadsOnly *bool `field:"optional" json:"allowEncryptedUploadsOnly" yaml:"allowEncryptedUploadsOnly"`
@@ -61,8 +60,6 @@ type TerraformAwsS3BucketConfig struct {
 	// Leave string and numeric variables as `null` to use default value.
 	// Individual variable settings (non-null) override settings in context object,
 	// except for attributes, tags, and additional_tag_map, which are merged.
-	//
-	// [object Object].
 	Context interface{} `field:"optional" json:"context" yaml:"context"`
 	// Specifies the allowed headers, methods, origins and exposed headers when using CORS on this bucket.
 	CorsConfiguration interface{} `field:"optional" json:"corsConfiguration" yaml:"corsConfiguration"`
@@ -74,8 +71,8 @@ type TerraformAwsS3BucketConfig struct {
 	//
 	// Map of maps. Keys are names of descriptors. Values are maps of the form
 	// `{
-	// format = string
-	// labels = list(string)
+	//    format = string
+	//    labels = list(string)
 	// }`
 	// (Type is `any` so the map values can later be enhanced to provide additional options.)
 	// `format` is a Terraform format string to be passed to the `format()` function.
@@ -83,8 +80,6 @@ type TerraformAwsS3BucketConfig struct {
 	// Label values will be normalized before being passed to `format()` so they will be
 	// identical to how they appear in `id`.
 	// Default is `{}` (`descriptors` output will be empty).
-	//
-	// [object Object].
 	DescriptorFormats interface{} `field:"optional" json:"descriptorFormats" yaml:"descriptorFormats"`
 	// Set to false to prevent the module from creating any resources.
 	Enabled *bool `field:"optional" json:"enabled" yaml:"enabled"`
@@ -130,10 +125,10 @@ type TerraformAwsS3BucketConfig struct {
 	// Default is to include all labels.
 	// Tags with empty values will not be included in the `tags` output.
 	// Set to `[]` to suppress all generated tags.
-	// *Notes:**
-	// The value of the `name` tag, if included, will be the `id`, not the `name`.
-	// Unlike other `null-label` inputs, the initial setting of `labels_as_tags` cannot be
-	// changed in later chained modules. Attempts to change it will be silently ignored.
+	// **Notes:**
+	//   The value of the `name` tag, if included, will be the `id`, not the `name`.
+	//   Unlike other `null-label` inputs, the initial setting of `labels_as_tags` cannot be
+	//   changed in later chained modules. Attempts to change it will be silently ignored.
 	//
 	// default.
 	LabelsAsTags *[]*string `field:"optional" json:"labelsAsTags" yaml:"labelsAsTags"`
@@ -239,7 +234,6 @@ type TerraformAwsS3BucketConfig struct {
 	StoreAccessKeyInSsm *bool `field:"optional" json:"storeAccessKeyInSsm" yaml:"storeAccessKeyInSsm"`
 	// Additional tags (e.g. `{'BusinessUnit': 'XYZ'}`). Neither the tag keys nor the tag values will be modified by this module.
 	//
-	// [object Object]
 	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	Tags *map[string]*string `field:"optional" json:"tags" yaml:"tags"`
 	// ID element _(Rarely used, not included by default)_.
