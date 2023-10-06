@@ -30,6 +30,7 @@
             inputs.honeytail.defaultPackage.${ctx.system}
             inputs.hugo.defaultPackage.${ctx.system}
             skopeo
+            postgresql
           ];
         in
         flakeInputs;
