@@ -899,7 +899,7 @@ kustomize: "trust-manager": #KustomizeHelm & {
 	helm: {
 		release: "vcluster"
 		name:    "vcluster"
-		version: "0.16.1"
+		version: "0.16.2"
 		repo:    "https://charts.loft.sh"
 
 		values: {
