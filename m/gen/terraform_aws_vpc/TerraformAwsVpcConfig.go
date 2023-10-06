@@ -19,7 +19,6 @@ type TerraformAwsVpcConfig struct {
 	// This is for some rare cases where resources want additional configuration of tags
 	// and therefore take a list of maps with tag key, value, and additional configuration.
 	//
-	// [object Object]
 	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	AdditionalTagMap *map[string]*string `field:"optional" json:"additionalTagMap" yaml:"additionalTagMap"`
 	// When `true`, assign AWS generated IPv6 CIDR block to the VPC.
@@ -40,8 +39,6 @@ type TerraformAwsVpcConfig struct {
 	// Leave string and numeric variables as `null` to use default value.
 	// Individual variable settings (non-null) override settings in context object,
 	// except for attributes, tags, and additional_tag_map, which are merged.
-	//
-	// [object Object].
 	Context interface{} `field:"optional" json:"context" yaml:"context"`
 	// When `true`, manage the default network acl and remove all rules, disabling all ingress and egress.
 	//
@@ -66,8 +63,8 @@ type TerraformAwsVpcConfig struct {
 	//
 	// Map of maps. Keys are names of descriptors. Values are maps of the form
 	// `{
-	// format = string
-	// labels = list(string)
+	//    format = string
+	//    labels = list(string)
 	// }`
 	// (Type is `any` so the map values can later be enhanced to provide additional options.)
 	// `format` is a Terraform format string to be passed to the `format()` function.
@@ -75,8 +72,6 @@ type TerraformAwsVpcConfig struct {
 	// Label values will be normalized before being passed to `format()` so they will be
 	// identical to how they appear in `id`.
 	// Default is `{}` (`descriptors` output will be empty).
-	//
-	// [object Object].
 	DescriptorFormats interface{} `field:"optional" json:"descriptorFormats" yaml:"descriptorFormats"`
 	// Set `true` to enable [DNS hostnames](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-hostnames) in the VPC true.
 	DnsHostnamesEnabled *bool `field:"optional" json:"dnsHostnamesEnabled" yaml:"dnsHostnamesEnabled"`
@@ -102,8 +97,6 @@ type TerraformAwsVpcConfig struct {
 	//
 	// `ipv4_cidr_block` can be set explicitly, or set to `null` with the CIDR block derived from `ipv4_ipam_pool_id` using `ipv4_netmask_length`.
 	// Map keys must be known at `plan` time, and are only used to track changes.
-	//
-	// [object Object].
 	Ipv4AdditionalCidrBlockAssociations interface{} `field:"optional" json:"ipv4AdditionalCidrBlockAssociations" yaml:"ipv4AdditionalCidrBlockAssociations"`
 	// Timeouts (in `go` duration format) for creating and destroying IPv4 CIDR block associations.
 	Ipv4CidrBlockAssociationTimeouts interface{} `field:"optional" json:"ipv4CidrBlockAssociationTimeouts" yaml:"ipv4CidrBlockAssociationTimeouts"`
@@ -121,8 +114,6 @@ type TerraformAwsVpcConfig struct {
 	//
 	// `ipv6_cidr_block` can be set explicitly, or set to `null` with the CIDR block derived from `ipv6_ipam_pool_id` using `ipv6_netmask_length`.
 	// Map keys must be known at `plan` time and are used solely to prevent unnecessary changes.
-	//
-	// [object Object].
 	Ipv6AdditionalCidrBlockAssociations interface{} `field:"optional" json:"ipv6AdditionalCidrBlockAssociations" yaml:"ipv6AdditionalCidrBlockAssociations"`
 	// Timeouts (in `go` duration format) for creating and destroying IPv6 CIDR block associations.
 	Ipv6CidrBlockAssociationTimeouts interface{} `field:"optional" json:"ipv6CidrBlockAssociationTimeouts" yaml:"ipv6CidrBlockAssociationTimeouts"`
@@ -153,10 +144,10 @@ type TerraformAwsVpcConfig struct {
 	// Default is to include all labels.
 	// Tags with empty values will not be included in the `tags` output.
 	// Set to `[]` to suppress all generated tags.
-	// *Notes:**
-	// The value of the `name` tag, if included, will be the `id`, not the `name`.
-	// Unlike other `null-label` inputs, the initial setting of `labels_as_tags` cannot be
-	// changed in later chained modules. Attempts to change it will be silently ignored.
+	// **Notes:**
+	//   The value of the `name` tag, if included, will be the `id`, not the `name`.
+	//   Unlike other `null-label` inputs, the initial setting of `labels_as_tags` cannot be
+	//   changed in later chained modules. Attempts to change it will be silently ignored.
 	//
 	// default.
 	LabelsAsTags *[]*string `field:"optional" json:"labelsAsTags" yaml:"labelsAsTags"`
@@ -188,7 +179,6 @@ type TerraformAwsVpcConfig struct {
 	Stage *string `field:"optional" json:"stage" yaml:"stage"`
 	// Additional tags (e.g. `{'BusinessUnit': 'XYZ'}`). Neither the tag keys nor the tag values will be modified by this module.
 	//
-	// [object Object]
 	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	Tags *map[string]*string `field:"optional" json:"tags" yaml:"tags"`
 	// ID element _(Rarely used, not included by default)_.

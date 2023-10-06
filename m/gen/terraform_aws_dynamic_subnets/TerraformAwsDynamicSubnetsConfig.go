@@ -21,7 +21,6 @@ type TerraformAwsDynamicSubnetsConfig struct {
 	// This is for some rare cases where resources want additional configuration of tags
 	// and therefore take a list of maps with tag key, value, and additional configuration.
 	//
-	// [object Object]
 	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	AdditionalTagMap *map[string]*string `field:"optional" json:"additionalTagMap" yaml:"additionalTagMap"`
 	// ID element.
@@ -66,8 +65,6 @@ type TerraformAwsDynamicSubnetsConfig struct {
 	// Leave string and numeric variables as `null` to use default value.
 	// Individual variable settings (non-null) override settings in context object,
 	// except for attributes, tags, and additional_tag_map, which are merged.
-	//
-	// [object Object].
 	Context interface{} `field:"optional" json:"context" yaml:"context"`
 	// Delimiter to be used between ID elements.
 	//
@@ -77,8 +74,8 @@ type TerraformAwsDynamicSubnetsConfig struct {
 	//
 	// Map of maps. Keys are names of descriptors. Values are maps of the form
 	// `{
-	// format = string
-	// labels = list(string)
+	//    format = string
+	//    labels = list(string)
 	// }`
 	// (Type is `any` so the map values can later be enhanced to provide additional options.)
 	// `format` is a Terraform format string to be passed to the `format()` function.
@@ -86,8 +83,6 @@ type TerraformAwsDynamicSubnetsConfig struct {
 	// Label values will be normalized before being passed to `format()` so they will be
 	// identical to how they appear in `id`.
 	// Default is `{}` (`descriptors` output will be empty).
-	//
-	// [object Object].
 	DescriptorFormats interface{} `field:"optional" json:"descriptorFormats" yaml:"descriptorFormats"`
 	// Set to false to prevent the module from creating any resources.
 	Enabled *bool `field:"optional" json:"enabled" yaml:"enabled"`
@@ -168,10 +163,10 @@ type TerraformAwsDynamicSubnetsConfig struct {
 	// Default is to include all labels.
 	// Tags with empty values will not be included in the `tags` output.
 	// Set to `[]` to suppress all generated tags.
-	// *Notes:**
-	// The value of the `name` tag, if included, will be the `id`, not the `name`.
-	// Unlike other `null-label` inputs, the initial setting of `labels_as_tags` cannot be
-	// changed in later chained modules. Attempts to change it will be silently ignored.
+	// **Notes:**
+	//   The value of the `name` tag, if included, will be the `id`, not the `name`.
+	//   Unlike other `null-label` inputs, the initial setting of `labels_as_tags` cannot be
+	//   changed in later chained modules. Attempts to change it will be silently ignored.
 	//
 	// default.
 	LabelsAsTags *[]*string `field:"optional" json:"labelsAsTags" yaml:"labelsAsTags"`
@@ -267,7 +262,7 @@ type TerraformAwsDynamicSubnetsConfig struct {
 	//
 	// true.
 	PrivateRouteTableEnabled *bool `field:"optional" json:"privateRouteTableEnabled" yaml:"privateRouteTableEnabled"`
-	// Additional tags to be added to private subnets [object Object] The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}.
+	// Additional tags to be added to private subnets The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}.
 	PrivateSubnetsAdditionalTags *map[string]*string `field:"optional" json:"privateSubnetsAdditionalTags" yaml:"privateSubnetsAdditionalTags"`
 	// If false, do not create private subnets (or NAT gateways or instances) true.
 	PrivateSubnetsEnabled *bool `field:"optional" json:"privateSubnetsEnabled" yaml:"privateSubnetsEnabled"`
@@ -306,7 +301,7 @@ type TerraformAwsDynamicSubnetsConfig struct {
 	// If `false` (and `public_route_table_enabled` is `true`), a single network route table will be created and it will be associated with every public subnet.
 	// If not set, it will be set to the value of `public_dns64_nat64_enabled`.
 	PublicRouteTablePerSubnetEnabled *bool `field:"optional" json:"publicRouteTablePerSubnetEnabled" yaml:"publicRouteTablePerSubnetEnabled"`
-	// Additional tags to be added to public subnets [object Object] The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}.
+	// Additional tags to be added to public subnets The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}.
 	PublicSubnetsAdditionalTags *map[string]*string `field:"optional" json:"publicSubnetsAdditionalTags" yaml:"publicSubnetsAdditionalTags"`
 	// If false, do not create public subnets.
 	//
@@ -358,7 +353,6 @@ type TerraformAwsDynamicSubnetsConfig struct {
 	SubnetTypeTagValueFormat *string `field:"optional" json:"subnetTypeTagValueFormat" yaml:"subnetTypeTagValueFormat"`
 	// Additional tags (e.g. `{'BusinessUnit': 'XYZ'}`). Neither the tag keys nor the tag values will be modified by this module.
 	//
-	// [object Object]
 	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	Tags *map[string]*string `field:"optional" json:"tags" yaml:"tags"`
 	// ID element _(Rarely used, not included by default)_.

@@ -19,7 +19,6 @@ type TerraformAwsDefnAccountConfig struct {
 	// This is for some rare cases where resources want additional configuration of tags
 	// and therefore take a list of maps with tag key, value, and additional configuration.
 	//
-	// [object Object]
 	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	AdditionalTagMap *map[string]*string `field:"optional" json:"additionalTagMap" yaml:"additionalTagMap"`
 	// ID element.
@@ -35,8 +34,6 @@ type TerraformAwsDefnAccountConfig struct {
 	// Leave string and numeric variables as `null` to use default value.
 	// Individual variable settings (non-null) override settings in context object,
 	// except for attributes, tags, and additional_tag_map, which are merged.
-	//
-	// [object Object].
 	Context interface{} `field:"optional" json:"context" yaml:"context"`
 	// Delimiter to be used between ID elements.
 	//
@@ -46,8 +43,8 @@ type TerraformAwsDefnAccountConfig struct {
 	//
 	// Map of maps. Keys are names of descriptors. Values are maps of the form
 	// `{
-	// format = string
-	// labels = list(string)
+	//    format = string
+	//    labels = list(string)
 	// }`
 	// (Type is `any` so the map values can later be enhanced to provide additional options.)
 	// `format` is a Terraform format string to be passed to the `format()` function.
@@ -55,8 +52,6 @@ type TerraformAwsDefnAccountConfig struct {
 	// Label values will be normalized before being passed to `format()` so they will be
 	// identical to how they appear in `id`.
 	// Default is `{}` (`descriptors` output will be empty).
-	//
-	// [object Object].
 	DescriptorFormats interface{} `field:"optional" json:"descriptorFormats" yaml:"descriptorFormats"`
 	// Set to false to prevent the module from creating any resources.
 	Enabled *bool `field:"optional" json:"enabled" yaml:"enabled"`
@@ -86,10 +81,10 @@ type TerraformAwsDefnAccountConfig struct {
 	// Default is to include all labels.
 	// Tags with empty values will not be included in the `tags` output.
 	// Set to `[]` to suppress all generated tags.
-	// *Notes:**
-	// The value of the `name` tag, if included, will be the `id`, not the `name`.
-	// Unlike other `null-label` inputs, the initial setting of `labels_as_tags` cannot be
-	// changed in later chained modules. Attempts to change it will be silently ignored.
+	// **Notes:**
+	//   The value of the `name` tag, if included, will be the `id`, not the `name`.
+	//   Unlike other `null-label` inputs, the initial setting of `labels_as_tags` cannot be
+	//   changed in later chained modules. Attempts to change it will be silently ignored.
 	//
 	// default.
 	LabelsAsTags *[]*string `field:"optional" json:"labelsAsTags" yaml:"labelsAsTags"`
@@ -121,7 +116,6 @@ type TerraformAwsDefnAccountConfig struct {
 	Stage *string `field:"optional" json:"stage" yaml:"stage"`
 	// Additional tags (e.g. `{'BusinessUnit': 'XYZ'}`). Neither the tag keys nor the tag values will be modified by this module.
 	//
-	// [object Object]
 	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	Tags *map[string]*string `field:"optional" json:"tags" yaml:"tags"`
 	// ID element _(Rarely used, not included by default)_.

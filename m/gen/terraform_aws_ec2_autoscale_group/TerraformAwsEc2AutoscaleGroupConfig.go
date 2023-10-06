@@ -27,7 +27,6 @@ type TerraformAwsEc2AutoscaleGroupConfig struct {
 	// This is for some rare cases where resources want additional configuration of tags
 	// and therefore take a list of maps with tag key, value, and additional configuration.
 	//
-	// [object Object]
 	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	AdditionalTagMap *map[string]*string `field:"optional" json:"additionalTagMap" yaml:"additionalTagMap"`
 	// Associate a public IP address with an instance in a VPC.
@@ -53,8 +52,6 @@ type TerraformAwsEc2AutoscaleGroupConfig struct {
 	// Leave string and numeric variables as `null` to use default value.
 	// Individual variable settings (non-null) override settings in context object,
 	// except for attributes, tags, and additional_tag_map, which are merged.
-	//
-	// [object Object].
 	Context interface{} `field:"optional" json:"context" yaml:"context"`
 	// The number of periods over which data is compared to the specified threshold 2.
 	CpuUtilizationHighEvaluationPeriods *float64 `field:"optional" json:"cpuUtilizationHighEvaluationPeriods" yaml:"cpuUtilizationHighEvaluationPeriods"`
@@ -80,7 +77,7 @@ type TerraformAwsEc2AutoscaleGroupConfig struct {
 	CpuUtilizationLowThresholdPercent *float64 `field:"optional" json:"cpuUtilizationLowThresholdPercent" yaml:"cpuUtilizationLowThresholdPercent"`
 	// Customize the credit specification of the instances.
 	CreditSpecification interface{} `field:"optional" json:"creditSpecification" yaml:"creditSpecification"`
-	// Map of custom CloudWatch alarms configurations [object Object].
+	// Map of custom CloudWatch alarms configurations.
 	CustomAlarms interface{} `field:"optional" json:"customAlarms" yaml:"customAlarms"`
 	// Enable or disable cpu and memory Cloudwatch alarms true.
 	DefaultAlarmsEnabled *bool `field:"optional" json:"defaultAlarmsEnabled" yaml:"defaultAlarmsEnabled"`
@@ -94,8 +91,8 @@ type TerraformAwsEc2AutoscaleGroupConfig struct {
 	//
 	// Map of maps. Keys are names of descriptors. Values are maps of the form
 	// `{
-	// format = string
-	// labels = list(string)
+	//    format = string
+	//    labels = list(string)
 	// }`
 	// (Type is `any` so the map values can later be enhanced to provide additional options.)
 	// `format` is a Terraform format string to be passed to the `format()` function.
@@ -103,8 +100,6 @@ type TerraformAwsEc2AutoscaleGroupConfig struct {
 	// Label values will be normalized before being passed to `format()` so they will be
 	// identical to how they appear in `id`.
 	// Default is `{}` (`descriptors` output will be empty).
-	//
-	// [object Object].
 	DescriptorFormats interface{} `field:"optional" json:"descriptorFormats" yaml:"descriptorFormats"`
 	// The number of Amazon EC2 instances that should be running in the group, if not set will use `min_size` as value.
 	DesiredCapacity *float64 `field:"optional" json:"desiredCapacity" yaml:"desiredCapacity"`
@@ -119,7 +114,14 @@ type TerraformAwsEc2AutoscaleGroupConfig struct {
 	// A list of metrics to collect.
 	//
 	// The allowed values are `GroupMinSize`, `GroupMaxSize`, `GroupDesiredCapacity`, `GroupInServiceInstances`, `GroupPendingInstances`, `GroupStandbyInstances`, `GroupTerminatingInstances`, `GroupTotalInstances`
-	// GroupMinSize,GroupMaxSize,GroupDesiredCapacity,GroupInServiceInstances,GroupPendingInstances,GroupStandbyInstances,GroupTerminatingInstances,GroupTotalInstances.
+	// GroupMinSize
+	// GroupMaxSize
+	// GroupDesiredCapacity
+	// GroupInServiceInstances
+	// GroupPendingInstances
+	// GroupStandbyInstances
+	// GroupTerminatingInstances
+	// GroupTotalInstances.
 	EnabledMetrics *[]*string `field:"optional" json:"enabledMetrics" yaml:"enabledMetrics"`
 	// Enable/disable detailed monitoring true.
 	EnableMonitoring *bool `field:"optional" json:"enableMonitoring" yaml:"enableMonitoring"`
@@ -179,10 +181,10 @@ type TerraformAwsEc2AutoscaleGroupConfig struct {
 	// Default is to include all labels.
 	// Tags with empty values will not be included in the `tags` output.
 	// Set to `[]` to suppress all generated tags.
-	// *Notes:**
-	// The value of the `name` tag, if included, will be the `id`, not the `name`.
-	// Unlike other `null-label` inputs, the initial setting of `labels_as_tags` cannot be
-	// changed in later chained modules. Attempts to change it will be silently ignored.
+	// **Notes:**
+	//   The value of the `name` tag, if included, will be the `id`, not the `name`.
+	//   Unlike other `null-label` inputs, the initial setting of `labels_as_tags` cannot be
+	//   changed in later chained modules. Attempts to change it will be silently ignored.
 	//
 	// default.
 	LabelsAsTags *[]*string `field:"optional" json:"labelsAsTags" yaml:"labelsAsTags"`
@@ -306,13 +308,13 @@ type TerraformAwsEc2AutoscaleGroupConfig struct {
 	SuspendedProcesses *[]*string `field:"optional" json:"suspendedProcesses" yaml:"suspendedProcesses"`
 	// Additional tags (e.g. `{'BusinessUnit': 'XYZ'}`). Neither the tag keys nor the tag values will be modified by this module.
 	//
-	// [object Object]
 	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	Tags *map[string]*string `field:"optional" json:"tags" yaml:"tags"`
 	// List of tag specification resource types to tag.
 	//
 	// Valid values are instance, volume, elastic-gpu and spot-instances-request.
-	// instance,volume.
+	// instance
+	// volume.
 	TagSpecificationsResourceTypes *[]*string `field:"optional" json:"tagSpecificationsResourceTypes" yaml:"tagSpecificationsResourceTypes"`
 	// A list of aws_alb_target_group ARNs, for use with Application Load Balancing.
 	TargetGroupArns *[]*string `field:"optional" json:"targetGroupArns" yaml:"targetGroupArns"`
