@@ -189,3 +189,4 @@ graph.png
 .tfo
 .pki*
 .lvm_history
+.psql_history
