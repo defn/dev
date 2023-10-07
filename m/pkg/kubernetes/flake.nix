@@ -12,7 +12,7 @@
     vcluster.url = github:defn/dev/pkg-vcluster-0.16.1-1?dir=m/pkg/vcluster;
     kubevirt.url = github:defn/dev/pkg-kubevirt-1.0.0-3?dir=m/pkg/kubevirt;
     linkerd.url = github:defn/dev/pkg-linkerd-2.14.1-1?dir=m/pkg/linkerd;
-    cilium.url = github:defn/dev/pkg-cilium-0.15.9-1?dir=m/pkg/cilium;
+    cilium.url = github:defn/dev/pkg-cilium-0.15.10-1?dir=m/pkg/cilium;
     hubble.url = github:defn/dev/pkg-hubble-0.12.0-3?dir=m/pkg/hubble;
     tfo.url = github:defn/dev/pkg-tfo-2.1.1-1?dir=m/pkg/tfo;
   };
