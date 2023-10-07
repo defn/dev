@@ -3,6 +3,7 @@
 patches: []
 resources:
   - resource-namespace-coder.yaml
+  - resource-postgresql.yaml
   - resource-ingress-coder.yaml
   - resource-ingressroute-coder-wildcard.yaml
   - resource-externalsecret-coder.yaml
