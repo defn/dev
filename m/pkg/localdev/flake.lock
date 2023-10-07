@@ -27,17 +27,17 @@
       },
       "locked": {
         "dir": "m/pkg/buildkite",
-        "lastModified": 1694759809,
-        "narHash": "sha256-3tkG6NsJcX3aQpDGh0a7fPzgu5xD3eBnY4FwtXuj69o=",
+        "lastModified": 1696556642,
+        "narHash": "sha256-07gmB6Zg/EXcvmj2zWnvYCXghbUxQd8j2iCYM2fYFOY=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "54f9602fce10707a165301e73f198b6d631aa61b",
+        "rev": "c76574dbe5868c5fad050abadca4418cff8b33d1",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buildkite",
         "owner": "defn",
-        "ref": "pkg-buildkite-3.55.0-1",
+        "ref": "pkg-buildkite-3.56.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -268,17 +268,17 @@
       },
       "locked": {
         "dir": "m/pkg/earthly",
-        "lastModified": 1695252591,
-        "narHash": "sha256-lQC4C9VFF+8S65rIvhdhvlsEIjeAgXAEKSx/gACakto=",
+        "lastModified": 1696387516,
+        "narHash": "sha256-7R6Uu94p1Q0mCpYgL9ESCUGTFxFCKCS4zFEJfruaAmU=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "a58a2810fd78971788144945093ebd00c67bf238",
+        "rev": "21a7b5362bc0528ba2503bd31f1f82a96d563ce8",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/earthly",
         "owner": "defn",
-        "ref": "pkg-earthly-0.7.19-1",
+        "ref": "pkg-earthly-0.7.20-1",
         "repo": "dev",
         "type": "github"
       }
@@ -449,17 +449,17 @@
       },
       "locked": {
         "dir": "m/pkg/gh",
-        "lastModified": 1695147589,
-        "narHash": "sha256-nyQsPnigHbMwn/fE5Mf0NEkYLGdKmEM5dt5ps2ntIOQ=",
+        "lastModified": 1696348148,
+        "narHash": "sha256-UMRtVQF8xSLpGM7RkTwTVXMP7XBvGoGOGnLZ/KqWo8M=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "ece0af4e76fd19e2030ef00c71b250bb1b204605",
+        "rev": "194dbf4b444a3f1e94012d24118c1fcfef81cffd",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/gh",
         "owner": "defn",
-        "ref": "pkg-gh-2.35.0-1",
+        "ref": "pkg-gh-2.36.0-1",
         "repo": "dev",
         "type": "github"
       }

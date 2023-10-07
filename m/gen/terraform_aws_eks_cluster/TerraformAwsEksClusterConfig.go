@@ -23,7 +23,6 @@ type TerraformAwsEksClusterConfig struct {
 	// This is for some rare cases where resources want additional configuration of tags
 	// and therefore take a list of maps with tag key, value, and additional configuration.
 	//
-	// [object Object]
 	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	AdditionalTagMap *map[string]*string `field:"optional" json:"additionalTagMap" yaml:"additionalTagMap"`
 	// Manages [`aws_eks_addon`](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_addon) resources.
@@ -89,8 +88,6 @@ type TerraformAwsEksClusterConfig struct {
 	// Leave string and numeric variables as `null` to use default value.
 	// Individual variable settings (non-null) override settings in context object,
 	// except for attributes, tags, and additional_tag_map, which are merged.
-	//
-	// [object Object].
 	Context interface{} `field:"optional" json:"context" yaml:"context"`
 	// Set `false` to use existing `eks_cluster_service_role_arn` instead of creating one true.
 	CreateEksServiceRole *bool `field:"optional" json:"createEksServiceRole" yaml:"createEksServiceRole"`
@@ -112,8 +109,8 @@ type TerraformAwsEksClusterConfig struct {
 	//
 	// Map of maps. Keys are names of descriptors. Values are maps of the form
 	// `{
-	// format = string
-	// labels = list(string)
+	//    format = string
+	//    labels = list(string)
 	// }`
 	// (Type is `any` so the map values can later be enhanced to provide additional options.)
 	// `format` is a Terraform format string to be passed to the `format()` function.
@@ -121,8 +118,6 @@ type TerraformAwsEksClusterConfig struct {
 	// Label values will be normalized before being passed to `format()` so they will be
 	// identical to how they appear in `id`.
 	// Default is `{}` (`descriptors` output will be empty).
-	//
-	// [object Object].
 	DescriptorFormats interface{} `field:"optional" json:"descriptorFormats" yaml:"descriptorFormats"`
 	// URL of a dummy API server for the Kubernetes server to use when the real one is unknown.
 	//
@@ -209,10 +204,10 @@ type TerraformAwsEksClusterConfig struct {
 	// Default is to include all labels.
 	// Tags with empty values will not be included in the `tags` output.
 	// Set to `[]` to suppress all generated tags.
-	// *Notes:**
-	// The value of the `name` tag, if included, will be the `id`, not the `name`.
-	// Unlike other `null-label` inputs, the initial setting of `labels_as_tags` cannot be
-	// changed in later chained modules. Attempts to change it will be silently ignored.
+	// **Notes:**
+	//   The value of the `name` tag, if included, will be the `id`, not the `name`.
+	//   Unlike other `null-label` inputs, the initial setting of `labels_as_tags` cannot be
+	//   changed in later chained modules. Attempts to change it will be silently ignored.
 	//
 	// default.
 	LabelsAsTags *[]*string `field:"optional" json:"labelsAsTags" yaml:"labelsAsTags"`
@@ -223,7 +218,7 @@ type TerraformAwsEksClusterConfig struct {
 	// Set this to `title` and set `delimiter` to `""` to yield Pascal Case IDs.
 	// Default value: `lower`.
 	LabelValueCase *string `field:"optional" json:"labelValueCase" yaml:"labelValueCase"`
-	// shell to use for local_exec /bin/sh,-c.
+	// shell to use for local_exec /bin/sh -c.
 	LocalExecInterpreter *[]*string `field:"optional" json:"localExecInterpreter" yaml:"localExecInterpreter"`
 	// Flag to enable/disable the ingress and egress rules for the EKS managed Security Group true.
 	ManagedSecurityGroupRulesEnabled *bool `field:"optional" json:"managedSecurityGroupRulesEnabled" yaml:"managedSecurityGroupRulesEnabled"`
@@ -272,7 +267,6 @@ type TerraformAwsEksClusterConfig struct {
 	Stage *string `field:"optional" json:"stage" yaml:"stage"`
 	// Additional tags (e.g. `{'BusinessUnit': 'XYZ'}`). Neither the tag keys nor the tag values will be modified by this module.
 	//
-	// [object Object]
 	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	Tags *map[string]*string `field:"optional" json:"tags" yaml:"tags"`
 	// ID element _(Rarely used, not included by default)_.

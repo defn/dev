@@ -385,7 +385,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.26.2"
+		version: "6.26.3"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -899,7 +899,7 @@ kustomize: "trust-manager": #KustomizeHelm & {
 	helm: {
 		release: "vcluster"
 		name:    "vcluster"
-		version: "0.15.7"
+		version: "0.16.2"
 		repo:    "https://charts.loft.sh"
 
 		values: {
@@ -1474,7 +1474,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "2.2.0"
+		version:   "2.2.1"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {
@@ -1538,6 +1538,12 @@ kustomize: "coder": #KustomizeHelm & {
 						name: "coder"
 						key:  "coder_oauth2_github_client_secret"
 					}
+				}, {
+					name: "CODER_PG_CONNECTION_URL"
+					valueFrom: secretKeyRef: {
+						name: "coder"
+						key:  "coder_pg_connection_url"
+					}
 				}]
 			}
 		}
@@ -1548,6 +1554,25 @@ kustomize: "coder": #KustomizeHelm & {
 		kind:       "Namespace"
 		metadata: {
 			name: "coder"
+		}
+	}
+
+	resource: "postgresql": {
+		apiVersion: "acid.zalan.do/v1"
+		kind:       "postgresql"
+		metadata: {
+			name: "coder-db"
+		}
+		spec: {
+			teamId: "coder"
+			volume: size: "10Gi"
+			numberOfInstances: 1
+			users: coder: [
+				"superuser",
+				"createdb",
+			]
+			databases: coder:    "coder"
+			postgresql: version: "15"
 		}
 	}
 
@@ -2191,6 +2216,29 @@ kustomize: "dex": #KustomizeHelm & {
 					}
 				}]
 			}]
+		}
+	}
+}
+
+kustomize: "postgres-operator": #KustomizeHelm & {
+	cluster: #Cluster
+
+	namespace: "postgres-operator"
+
+	helm: {
+		release:   "postgres-operator"
+		name:      "postgres-operator"
+		namespace: "postgres-operator"
+		version:   "1.10.1"
+		repo:      "https://opensource.zalando.com/postgres-operator/charts/postgres-operator"
+		values: {}
+	}
+
+	resource: "namespace": core.#Namespace & {
+		apiVersion: "v1"
+		kind:       "Namespace"
+		metadata: {
+			name: "postgres-operator"
 		}
 	}
 }

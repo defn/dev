@@ -2,7 +2,7 @@ package r
 
 cache: "bitnami/kubectl:1.26.4": "bitnami/kubectl@sha256:a0a972324d937b2c2f7207af29d1abd6ce3f7fd5ea73357036a67ab24f34cc92"
 
-cache: "bitnami/kubectl:latest": "bitnami/kubectl@sha256:4680f8718a442eaaa65cf2da26c9a0f3720fd82ca72cb3bec98bb5b0c461abd9"
+cache: "bitnami/kubectl:latest": "bitnami/kubectl@sha256:0b28a0ae15893822f211bb8501d192c7b52d1920c32e4b43734aa6d94d51477f"
 
 cache: "busybox:1.35": "busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094"
 
@@ -16,7 +16,7 @@ cache: "docker.io/bitnami/apache:2.4.57-debian-11-r36": "docker.io/bitnami/apach
 
 cache: "docker.io/bitnami/elasticsearch:8.10.2-debian-11-r6": "docker.io/bitnami/elasticsearch@sha256:169efab21c4508790d7d1831b5018ac8ed47e4f6f13c1f6d45635f5564fdf4e3"
 
-cache: "docker.io/bitnami/external-dns:0.13.6-debian-11-r11": "docker.io/bitnami/external-dns@sha256:7f79262e68e02cca5e83f569b66c133972fcde24a352f9c5934854dcb801e992"
+cache: "docker.io/bitnami/external-dns:0.13.6-debian-11-r26": "docker.io/bitnami/external-dns@sha256:80f02728bc2407e2e05a0c398f72b73449343bba16ef78885caa0fb3f6343143"
 
 cache: "docker.io/bitnami/mastodon:4.2.0-debian-11-r0": "docker.io/bitnami/mastodon@sha256:8533513b38a7dff5d60282e0f86ee28f116e91cdbdbe1b552d505f3e355b46d2"
 
@@ -44,7 +44,7 @@ cache: "gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:987f53e3ead
 
 cache: "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:7b138c73fcaaf0b9bb2d414b8a89a780f8c09371d24c6f57969be1694acf4aaa": "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:88909e3318a73dbb14036424c24710f37ed1ff7fd82dbd79ac9ad602296b4fc9"
 
-cache: "ghcr.io/coder/coder:v2.2.0": "ghcr.io/coder/coder@sha256:3f2db92ea4ed10673a9bdbcfc6dd77d30a8b7752f6eb36611aa026a5770e91d5"
+cache: "ghcr.io/coder/coder:v2.2.1": "ghcr.io/coder/coder@sha256:22a5d869c2a49c95915c33a8a1dd7e970a4f687bf1cdf1cb9d943e76acb65c30"
 
 cache: "ghcr.io/dexidp/dex:v2.37.0": "ghcr.io/dexidp/dex@sha256:f579d00721b0d842328c43a562f50343c54b0048ef2d58d6b54e750c21fc7938"
 
@@ -101,5 +101,7 @@ cache: "quay.io/jetstack/cert-manager-webhook:v1.13.1": "quay.io/jetstack/cert-m
 cache: "quay.io/jetstack/trust-manager:v0.6.0": "quay.io/jetstack/trust-manager@sha256:525e2f3ab66e4f0a54db1c81f648119c4cce6cfa6d73dea98b82e8293c9fd054"
 
 cache: "redis:7.0.11-alpine": "redis@sha256:121bac949fb5f623b9fa0b4e4c9fb358ffd045966e754cfa3eb9963f3af2fe3b"
+
+cache: "registry.opensource.zalan.do/acid/postgres-operator:v1.10.1": "registry.opensource.zalan.do/acid/postgres-operator@sha256:8ced77e97e0876b2e1dbc8ef3ee6c9cc26df18c20b5f6c188a7799096be097df"
 
 cache: "tailscale/k8s-operator:unstable": "tailscale/k8s-operator@sha256:b7b14505604bf5d910f35f057ad63c74644ce6eb74ecab36e6270b22541e8667"
