@@ -11,7 +11,7 @@ namespace: coder
 helmCharts:
   - releaseName: coder
     name: coder
-    version: 2.2.0
+    version: 2.2.1
     repo: https://helm.coder.com/v2
     namespace: coder
     valuesInline:
@@ -59,4 +59,9 @@ helmCharts:
               secretKeyRef:
                 name: coder
                 key: coder_oauth2_github_client_secret
+          - name: CODER_PG_CONNECTION_URL
+            valueFrom:
+              secretKeyRef:
+                name: coder
+                key: coder_pg_connection_url
     includeCRDs: true
