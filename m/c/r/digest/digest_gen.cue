@@ -44,7 +44,7 @@ cache: "gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:987f53e3ead
 
 cache: "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:7b138c73fcaaf0b9bb2d414b8a89a780f8c09371d24c6f57969be1694acf4aaa": "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:88909e3318a73dbb14036424c24710f37ed1ff7fd82dbd79ac9ad602296b4fc9"
 
-cache: "ghcr.io/coder/coder:v2.2.0": "ghcr.io/coder/coder@sha256:3f2db92ea4ed10673a9bdbcfc6dd77d30a8b7752f6eb36611aa026a5770e91d5"
+cache: "ghcr.io/coder/coder:v2.2.1": "ghcr.io/coder/coder@sha256:22a5d869c2a49c95915c33a8a1dd7e970a4f687bf1cdf1cb9d943e76acb65c30"
 
 cache: "ghcr.io/dexidp/dex:v2.37.0": "ghcr.io/dexidp/dex@sha256:f579d00721b0d842328c43a562f50343c54b0048ef2d58d6b54e750c21fc7938"
 

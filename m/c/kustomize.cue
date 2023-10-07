@@ -1474,7 +1474,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "2.2.0"
+		version:   "2.2.1"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {
@@ -1537,6 +1537,12 @@ kustomize: "coder": #KustomizeHelm & {
 					valueFrom: secretKeyRef: {
 						name: "coder"
 						key:  "coder_oauth2_github_client_secret"
+					}
+				}, {
+					name: "CODER_PG_CONNECTION_URL"
+					valueFrom: secretKeyRef: {
+						name: "coder"
+						key:  "coder_pg_connection_url"
 					}
 				}]
 			}
