@@ -61,6 +61,7 @@ infra: {
 		"headlamp": [100, ""]
 		"dex": [100, ""]
 		"mastodon": [100, ""]
+		"postgres-operator": [100, ""]
 	}
 
 	vc0: vcluster: k3s_version: "rancher/k3s:v1.27.5-k3s1"

@@ -102,4 +102,6 @@ cache: "quay.io/jetstack/trust-manager:v0.6.0": "quay.io/jetstack/trust-manager@
 
 cache: "redis:7.0.11-alpine": "redis@sha256:121bac949fb5f623b9fa0b4e4c9fb358ffd045966e754cfa3eb9963f3af2fe3b"
 
+cache: "registry.opensource.zalan.do/acid/postgres-operator:v1.10.1": "registry.opensource.zalan.do/acid/postgres-operator@sha256:8ced77e97e0876b2e1dbc8ef3ee6c9cc26df18c20b5f6c188a7799096be097df"
+
 cache: "tailscale/k8s-operator:unstable": "tailscale/k8s-operator@sha256:b7b14505604bf5d910f35f057ad63c74644ce6eb74ecab36e6270b22541e8667"
