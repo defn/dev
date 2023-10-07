@@ -10,7 +10,7 @@ page: content: #TutorialContent & {
 		desc:  "make za"
 	}, {
 		title: "Run Teacher Coder"
-		desc:  "make dev"
+		desc:  "make teacher"
 	}, {
 		title: "Initialize Class Coder"
 		desc:  "make class-init"
