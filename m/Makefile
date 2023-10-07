@@ -37,7 +37,7 @@ class-init:
 	coder login https://coder.dev.amanibhavam.defn.run --first-user-username="admin" --first-user-email="iam+admin@defn.sh" --first-user-password="Admin123456789,,," --first-user-trial=false
 
 .PHONY: dev
-dev: 
+teacher: 
 	b server defn-org-sso $(MAKE) dev_inner 
 dev_inner:
 	pass hello
