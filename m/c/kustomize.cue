@@ -1557,6 +1557,25 @@ kustomize: "coder": #KustomizeHelm & {
 		}
 	}
 
+	resource: "postgresql": {
+		apiVersion: "acid.zalan.do/v1"
+		kind:       "postgresql"
+		metadata: {
+			name: "coder-db"
+		}
+		spec: {
+			teamId: "coder"
+			volume: size: "10Gi"
+			numberOfInstances: 1
+			users: coder: [
+				"superuser",
+				"createdb",
+			]
+			databases: coder:    "coder"
+			postgresql: version: "15"
+		}
+	}
+
 	resource: "ingress-coder": {
 		apiVersion: "networking.k8s.io/v1"
 		kind:       "Ingress"

@@ -247,6 +247,25 @@ spec:
       terminationGracePeriodSeconds: 60
       volumes: []
 ---
+apiVersion: acid.zalan.do/v1
+kind: postgresql
+metadata:
+  name: coder-db
+  namespace: coder
+spec:
+  databases:
+    coder: coder
+  numberOfInstances: 1
+  postgresql:
+    version: "15"
+  teamId: coder
+  users:
+    coder:
+    - superuser
+    - createdb
+  volume:
+    size: 10Gi
+---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
