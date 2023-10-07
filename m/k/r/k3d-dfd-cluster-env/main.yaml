@@ -424,6 +424,27 @@ spec:
     name: k3d-dfd-cluster
   project: default
   source:
+    path: m/k/r/k3d-dfd-cluster-postgres-operator
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: k3d-dfd-cluster-postgres-operator
+  namespace: argocd
+---
+spec:
+  destination:
+    name: k3d-dfd-cluster
+  project: default
+  source:
     path: m/k/r/k3d-dfd-cluster-secrets
     repoURL: https://github.com/defn/dev
     targetRevision: main

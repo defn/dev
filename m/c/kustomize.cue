@@ -2200,3 +2200,26 @@ kustomize: "dex": #KustomizeHelm & {
 		}
 	}
 }
+
+kustomize: "postgres-operator": #KustomizeHelm & {
+	cluster: #Cluster
+
+	namespace: "postgres-operator"
+
+	helm: {
+		release:   "postgres-operator"
+		name:      "postgres-operator"
+		namespace: "postgres-operator"
+		version:   "1.10.1"
+		repo:      "https://opensource.zalando.com/postgres-operator/charts/postgres-operator"
+		values: {}
+	}
+
+	resource: "namespace": core.#Namespace & {
+		apiVersion: "v1"
+		kind:       "Namespace"
+		metadata: {
+			name: "postgres-operator"
+		}
+	}
+}
