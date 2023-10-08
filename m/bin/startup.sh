@@ -3,8 +3,8 @@
 set -e
 
 exec 3>&1
-tail -f /tmp/dfd-startup.log 1>&3 &
 exec >>/tmp/dfd-startup.log 2>&1
+tail -f /tmp/dfd-startup.log 1>&3 &
 
 function main {
 	sudo install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
