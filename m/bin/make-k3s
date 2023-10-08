@@ -3,7 +3,7 @@
 set -eu
 cd ~/m
 
-infra_name="dfd"
+infra_name="$(cd ~/m/c/$(uname -n) && cue eval -e infra_name | jq -r .)"
 
 function make_init {
 	# create k3s registry
@@ -18,16 +18,16 @@ function make_linkerd {
 	step certificate create identity.linkerd.cluster.local cluster.crt cluster.key --profile intermediate-ca --not-after 8760h --no-password --insecure --ca ca.crt --ca-key ca.key
 
 	# install linkerd cluster
-	linkerd --context k3d-${infra_name} install --crds | k --context k3d-${infra_name} apply -f -
-	linkerd --context k3d-${infra_name} install --identity-trust-anchors-file ca.crt --identity-issuer-certificate-file cluster.crt --identity-issuer-key-file cluster.key | k --context k3d-${infra_name} apply -f -
-	linkerd --context k3d-${infra_name} check
+	linkerd --context ${infra_name} install --crds | k --context ${infra_name} apply -f -
+	linkerd --context ${infra_name} install --identity-trust-anchors-file ca.crt --identity-issuer-certificate-file cluster.crt --identity-issuer-key-file cluster.key | k --context ${infra_name} apply -f -
+	linkerd --context ${infra_name} check
 
 	# install viz cluster
-	linkerd --context k3d-${infra_name} viz install --set dashboard.enforcedHostRegexp=^ | k --context k3d-${infra_name} apply -f -
+	linkerd --context ${infra_name} viz install --set dashboard.enforcedHostRegexp=^ | k --context ${infra_name} apply -f -
 
 	# install mc cluster
-	linkerd --context k3d-${infra_name} multicluster install --gateway=false | k --context k3d-${infra_name} apply -f -
-	linkerd --context k3d-${infra_name} multicluster check
+	linkerd --context ${infra_name} multicluster install --gateway=false | k --context ${infra_name} apply -f -
+	linkerd --context ${infra_name} multicluster check
 }
 
 function make_vc {
@@ -35,7 +35,7 @@ function make_vc {
 		i="${v#vc}"
 		# wait until vcluster is ready
 		while true; do
-			if vcluster --context k3d-${infra_name} connect vcluster -n "k3d-${infra_name}-${v}-vcluster" --server=$(kubectl get --context k3d-${infra_name} -n k3d-${infra_name}-${v}-vcluster svc vcluster -o json | jq -r '.spec.clusterIP'):443 --update-current=false --kube-config-context-name k3d-${infra_name}-"${v}" --kube-config "$HOME"/.kube/config."${v}"; then
+			if vcluster --context ${infra_name} connect vcluster -n "${infra_name}-${v}-vcluster" --server=$(kubectl get --context ${infra_name} -n ${infra_name}-${v}-vcluster svc vcluster -o json | jq -r '.spec.clusterIP'):443 --update-current=false --kube-config-context-name ${infra_name}-"${v}" --kube-config "$HOME"/.kube/config."${v}"; then
 				break
 			fi
 			sleep 5
@@ -43,7 +43,7 @@ function make_vc {
 
 		# add vcluster to argocd
 		while true; do
-			if env KUBECONFIG="$HOME/.kube/config.argocd:$HOME/.kube/config.${v}" argocd --kube-context k3d-${infra_name}-argocd cluster --core add "k3d-${infra_name}-${v}" --yes; then break; fi
+			if env KUBECONFIG="$HOME/.kube/config.argocd:$HOME/.kube/config.${v}" argocd --kube-context ${infra_name}-argocd cluster --core add "${infra_name}-${v}" --yes; then break; fi
 			sleep 5
 		done
 	done
@@ -65,71 +65,29 @@ function make_up {
 	# TODO this should be in the AMI or karpenter
 	sudo mkdir -p /etc/rancher/k3s
 	sudo cp registries.yaml /etc/rancher/k3s/
-	k3sup install --local --context k3d-${infra_name} --local-path ~/.kube/config --merge \
+	k3sup install --local --context ${infra_name} --local-path ~/.kube/config --merge \
 		--k3s-version "$(cd c/${infra_name} && cue export --out json -e infra.vc0.vcluster.k3s_version | jq -r . | cut -d: -f2 | sed 's#-#+#')" \
-		--k3s-extra-args "--node-ip "${container_ip}" --disable-network-policy --disable=traefik --flannel-backend=none --kube-apiserver-arg=--service-account-issuer=$(cd c/${infra_name} && cue export --out json -e discovery_url | jq -r .)/openid --kube-apiserver-arg=--api-audiences=https://kubernetes.default.svc.cluster.local,sts.amazonaws.com --tls-san=k3d-${infra_name}" 
-
-	# gvisor
-	if false; then
-		(
-			set -e
-			ARCH=$(uname -m)
-			URL=https://storage.googleapis.com/gvisor/releases/release/latest/${ARCH}
-			wget ${URL}/runsc ${URL}/runsc.sha512 ${URL}/containerd-shim-runsc-v1 ${URL}/containerd-shim-runsc-v1.sha512
-			sha512sum -c runsc.sha512 -c containerd-shim-runsc-v1.sha512
-			set +f
-			rm -f *.sha512
-			set -f
-			chmod a+rx runsc containerd-shim-runsc-v1
-			sudo mv runsc containerd-shim-runsc-v1 /usr/local/bin
-		)
-
-		cat<<EOF | tee -a /var/lib/rancher/k3s/agent/etc/containerd/config.toml
-
-[plugins."io.containerd.runtime.v1.linux"]
-
-shim_debug = true
-
-[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
-
-runtime_type = "io.containerd.runc.v2"
-
-[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runsc]
-
-runtime_type = "io.containerd.runsc.v1"
-
-EOF
-
-		sudo systemctl restart k3s
-
-		cat<<EOF | kubectl apply -f -
-apiVersion: node.k8s.io/v1
-kind: RuntimeClass
-metadata:
-    name: gvisor
-handler: runsc
-EOF
-	fi
+		--k3s-extra-args "--node-ip "${container_ip}" --disable-network-policy --disable=traefik --flannel-backend=none --kube-apiserver-arg=--service-account-issuer=$(cd c/${infra_name} && cue export --out json -e discovery_url | jq -r .)/openid --kube-apiserver-arg=--api-audiences=https://kubernetes.default.svc.cluster.local,sts.amazonaws.com --tls-san=${infra_name}" 
 
 	# oidc
 	(cd c/${infra_name} && make secrets)
 
-	kubectl --context k3d-${infra_name} apply -f k/r/k3d-${infra_name}-manual-cert-manager-crds/main.yaml
-	kubectl --context k3d-${infra_name} apply -f k/r/k3d-${infra_name}-manual-linkerd-crds/main.yaml
-	kubectl --context k3d-${infra_name} apply -f k/r/k3d-${infra_name}-manual-cilium-bootstrap/main.yaml
-	kubectl --context k3d-${infra_name} create ns argocd
-	kubectl --context k3d-${infra_name} apply -f k/r/k3d-${infra_name}-cluster-argo-cd/main.yaml
+	kubectl --context ${infra_name} apply -f k/r/${infra_name}-manual-cert-manager-crds/main.yaml
+	kubectl --context ${infra_name} apply -f k/r/${infra_name}-manual-linkerd-crds/main.yaml
+	kubectl --context ${infra_name} apply -f k/r/${infra_name}-manual-cilium-bootstrap/main.yaml
+	kubectl --context ${infra_name} create ns argocd
+	kubectl --context ${infra_name} apply -f k/r/${infra_name}-cluster-argo-cd/main.yaml
 
 	# dedicated kubectl config for argocd
 	cp $HOME/.kube/config $HOME/.kube/config.argocd
 	(
 		export KUBECONFIG=$HOME/.kube/config.argocd
-		eval "$(kubectl config view -o json | jq -r --arg cluster k3d-${infra_name} --arg namespace argocd '.contexts[] | select(.name == $cluster).context | "kubectl config set-context \(.cluster)-argocd --cluster=\(.cluster) --user=\(.user) --namespace=\($namespace)"')"
-		kubectl config use-context k3d-${infra_name}-argocd
+		eval "$(kubectl config view -o json | jq -r --arg cluster ${infra_name} --arg namespace argocd '.contexts[] | select(.name == $cluster).context | "kubectl config set-context \(.cluster)-argocd --cluster=\(.cluster) --user=\(.user) --namespace=\($namespace)"')"
+		kubectl config use-context ${infra_name}-argocd
 	)
 
 	# switch back to the default config
-	kubectl config use-context k3d-${infra_name}
+	kubectl config use-context ${infra_name}
 
 	env KUBECONFIG=$HOME/.kube/config.argocd kubectl -n argocd rollout status deployment/argocd-server
 	env KUBECONFIG=$HOME/.kube/config.argocd kubectl -n argocd rollout status deployment/argocd-repo-server
@@ -139,18 +97,18 @@ EOF
 
 	# add k3s to argocd
 	while true; do
-		if env KUBECONFIG=$HOME/.kube/config.argocd argocd cluster add k3d-${infra_name} --name k3d-${infra_name}-cluster --yes --core --in-cluster; then
+		if env KUBECONFIG=$HOME/.kube/config.argocd argocd cluster add ${infra_name} --name ${infra_name}-cluster --yes --core --in-cluster; then
 			break
 		fi
 		sleep 5
 	done
 
 	# deploy the cluster app-of-apps
-	kubectl --context k3d-${infra_name} apply -f e/k3d-${infra_name}-cluster.yaml
+	kubectl --context ${infra_name} apply -f e/${infra_name}-cluster.yaml
 
 	# background app-of-apps syncing
 	while true; do
-		if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 60 k3d-${infra_name}-cluster >/dev/null 2>&1; then break; fi
+		if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 60 ${infra_name}-cluster >/dev/null 2>&1; then break; fi
 		sleep 30
 	done &
 
