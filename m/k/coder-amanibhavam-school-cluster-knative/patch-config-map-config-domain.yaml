@@ -1,0 +1,9 @@
+#ManagedBy: cue
+
+metadata:
+  name: config-domain
+  namespace: knative-serving
+data:
+  school.amanibhavam.defn.run: ""
+kind: ConfigMap
+apiVersion: v1

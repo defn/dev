@@ -1,0 +1,31 @@
+#ManagedBy: cue
+
+patches: []
+resources:
+  - resource-namespace-external-dns.yaml
+  - resource-externalsecret-external-dns.yaml
+namespace: external-dns
+helmCharts:
+  - releaseName: external-dns
+    name: external-dns
+    version: 6.26.3
+    repo: https://charts.bitnami.com/bitnami
+    namespace: external-dns
+    valuesInline:
+      logLevel: debug
+      sources:
+        - service
+        - ingress
+      publishInternalServices: true
+      serviceTypeFilter:
+        - ClusterIP
+        - NodePort
+        - LoadBalancer
+        - ExternalName
+      provider: cloudflare
+      cloudflare:
+        email: cloudflare@defn.us
+        proxied: false
+      domainFilters:
+        - defn.run
+    includeCRDs: true

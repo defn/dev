@@ -45,17 +45,6 @@ kk: "mutatingwebhookconfiguration": [string]: [string]: [string]:   admissionreg
 
 kk: "poddisruptionbudget": [string]: [string]: [string]: policy.#PodDisruptionBudget & {apiVersion: "policy/v1"}
 
-// by namespace
-nn: [NS=string]: [KIND=string]: [RES=string]: {...}
-nn: {
-	for kname, k in kk
-	for fname, f in k
-	for nname, ns in f
-	for rname, r in ns {
-		"\(nname)": "\(kname)": "\(rname)": r
-	}
-}
-
 // flatten resources into a map
 resources: {
 	for kname, k in kk
