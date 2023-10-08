@@ -4,7 +4,7 @@ import (
 	batch "k8s.io/api/batch/v1"
 )
 
-infra_name: "dfd"
+infra_name: "k3d-dfd"
 infra_vclusters: []
 
 infra: {
@@ -18,7 +18,7 @@ infra: {
 		cloudflare_email: "cloudflare@defn.us"
 	}
 
-	dfd: bootstrap: {
+	"\(infra_name)": bootstrap: {
 		// essentials
 		"kyverno": [2, "", "ServerSideApply=true"]
 		"linkerd-crds": [2, ""]
