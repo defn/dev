@@ -94,11 +94,11 @@ bazel-ignore:
 za:
 	pass hello
 	$(MAKE) ci
-	bin/make-k3d init || true
+	bin/make-k3s init || true
 	cd coder/class && $(MAKE) image
 
 warudo:
-	bin/make-k3d up
+	bin/make-k3s up
 
 coder-login:
 	coder login https://coder.dev.amanibhavam.defn.run

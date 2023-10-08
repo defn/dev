@@ -6,7 +6,7 @@ cd ~/m
 infra_name="dfd"
 
 function make_init {
-	# create k3d registry
+	# create k3s registry
 	docker run -d -p 5000:5000 --restart=always --name registry registry:2 || true
 }
 
@@ -136,7 +136,7 @@ EOF
 	# patch argocd admin password
 	env KUBECONFIG=$HOME/.kube/config.argocd kubectl patch secret argocd-secret -p '{"stringData": { "admin.password": "'$(htpasswd -bnBC 10 "" admin | tr -d ':\n')'"}}'
 
-	# add k3d to argocd
+	# add k3s to argocd
 	while true; do
 		if env KUBECONFIG=$HOME/.kube/config.argocd argocd cluster add k3d-${infra_name} --name k3d-${infra_name}-cluster --yes --core --in-cluster; then
 			break

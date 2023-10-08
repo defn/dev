@@ -40,63 +40,9 @@
           (defaultPackage ctx)
         ];
       };
-    } // (ctx.pkgs.lib.mapAttrs
-      (nme: value: ctx.pkgs.writeShellScriptBin nme ''
-        set -efu
-
-        cd "./$(git rev-parse --show-cdup)m"
-
-        case "''${1:-}" in
-          root)
-            docker exec -ti -u root -w /home/ubuntu k3d-${nme}-server-0 bash
-            ;;
-          shell)
-            docker exec -ti -u ubuntu -w /home/ubuntu k3d-${nme} -server-0 bash
-            ;;
-          stop)
-            k3d cluster stop ${nme}
-            ;;
-          start)
-            k3d cluster start ${nme}
-            ;;
-          "")
-            k3d cluster list ${nme}
-            ;;
-          cache)
-            (this-k3d-list-images ${nme}; ssh root@$host /bin/ctr -n k8s.io images list  | awk '{print $1}' | grep -v sha256 | grep -v ^REF) | sort -u | this-k3d-save-images
-            ;;
-          server)
-            kubectl --context k3d-${nme} config view -o jsonpath='{.clusters[?(@.name == "k3d-${nme}")]}' --raw | jq -r '.cluster.server'
-            ;;
-          ca)
-            kubectl --context k3d-${nme} config view -o jsonpath='{.clusters[?(@.name == "k3d-${nme}")]}' --raw | jq -r '.cluster["certificate-authority-data"] | @base64d'
-            ;;
-          *)
-            kubectl --context k3d-${nme} "$@"
-            ;;
-        esac
-      '')
-      config.clusters);
+    };
 
     scripts = { system }: {
-      k3d-registry = ''
-        k3d registry create registry --port 0.0.0.0:5000
-      '';
-
-      k3d-list-images = ''
-        set -efu
-
-        name=$1; shift
-
-        (kubectl --context k3d-$name get pods --all-namespaces -o json | gron | grep '\.image ='  | cut -d'"' -f2 | grep -v 169.254.32.1:5000/ | grep -v /defn/dev: | grep -v /workspace:latest) | sed 's#@.*##' | grep -v ^sha256 | sort -u
-      '';
-
-      k3d-save-images = ''
-        set -exfu
-
-        runmany 4 'skopeo copy docker://$1 docker://169.254.32.1:5000/''${1#*/} --multi-arch all --dest-tls-verify=false --insecure-policy'
-      '';
-
       build = ''
         touch /tmp/cache-priv-key.pem
         chmod 600 /tmp/cache-priv-key.pem
@@ -137,15 +83,6 @@
       nix-gc = ''
         nix profile wipe-history
         nix-store --gc
-      '';
-
-      ec2 = ''
-        pass hello
-        cat etc/ec2-user-data.template \
-          | sed 's#_CONTROLIP_#'$(host k3d-control.$(wait-tailscale-domain | cut -d. -f2-) | awk '{print $NF}')'#' \
-          | sed 's#_TSKEY_#'$(pass k3d-control-tskey)'#' \
-          | sed 's#_K3STOKEN_#'$(docker --context host exec k3d-control-server-0 cat /var/lib/rancher/k3s/server/node-token)'#' \
-          | control apply -f -
       '';
 
       prune = ''
