@@ -31,7 +31,7 @@ infra: {
 	]
 
 	"\(infra_name)": {
-		cluster_name: "k3d-\(infra_name)"
+		cluster_name: infra_name
 		bootstrap: [string]: #BootstrapConfig
 		vclusters: [...string]
 	}
@@ -50,7 +50,7 @@ infra: {
 }
 
 env: (#Transform & {
-	transformer: #TransformK3D
+	transformer: #TransformK3S
 
 	inputs: "\(infra.parent.cluster_name)-manual": {
 		bootstrap: {
@@ -64,7 +64,7 @@ env: (#Transform & {
 kustomize: [string]: cluster: #Cluster | *infra[infra_name]
 
 env: (#Transform & {
-	transformer: #TransformK3D
+	transformer: #TransformK3S
 
 	inputs: "\(infra.parent.cluster_name)-cluster": {
 		bootstrap: infra.parent.bootstrap & {
@@ -696,7 +696,7 @@ kustomize: "karpenter": #Kustomize & {
 				source .bash_profile
 
 				infra_name=dfd
-				sudo $(which tailscale) up --auth-key "$(cd m/pkg/chamber && nix develop --command chamber -b secretsmanager read --quiet k3d-${infra_name} tailscale_authkey)"
+				sudo $(which tailscale) up --auth-key "$(cd m/pkg/chamber && nix develop --command chamber -b secretsmanager read --quiet ${infra_name} tailscale_authkey)"
 
 				ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y >/dev/null 2>&1
 				cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys

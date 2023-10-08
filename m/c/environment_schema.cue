@@ -151,18 +151,18 @@ import (
 	}
 }
 
-// K3D Machine
-#TransformK3D: {
+// K3S Machine
+#TransformK3S: {
 	from: {
 		#Input
 		bootstrap: [string]: [int, ...string]
 	}
 
-	to: #K3D
+	to: #K3S
 }
 
-#K3D: ctx={
-	_in: #TransformK3D.from
+#K3S: ctx={
+	_in: #TransformK3S.from
 
 	#Machine
 
@@ -179,7 +179,7 @@ import (
 		#Input
 		bootstrap: [string]: [int, ...string]
 		instance_types: [...string]
-		parent: #K3D
+		parent: #K3S
 	}
 
 	to: #VCluster
@@ -194,7 +194,7 @@ import (
 	destination:    parent.name
 	bootstrap:      _in.bootstrap
 	instance_types: _in.instance_types
-	parent:         #K3D & _in.parent
+	parent:         #K3S & _in.parent
 
 	instance_types: [...string] | *["t3.medium", "t3a.medium"]
 
