@@ -117,6 +117,7 @@ EOF
 	kubectl --context k3d-${infra_name} apply -f k/r/k3d-${infra_name}-manual-cert-manager-crds/main.yaml
 	kubectl --context k3d-${infra_name} apply -f k/r/k3d-${infra_name}-manual-linkerd-crds/main.yaml
 	kubectl --context k3d-${infra_name} apply -f k/r/k3d-${infra_name}-manual-cilium-bootstrap/main.yaml
+	kubectl --context k3d-${infra_name} create ns argocd
 	kubectl --context k3d-${infra_name} apply -f k/r/k3d-${infra_name}-cluster-argo-cd/main.yaml
 
 	# dedicated kubectl config for argocd
