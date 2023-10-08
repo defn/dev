@@ -29,5 +29,5 @@ while [[ -z "${CODER_AGENT_TOKEN}" ]]; do
 done
 
 cd ~/m/pkg/coder
-(setsid nix develop --command coder agent) & || true
+(setsid nix develop --command coder agent) || true &
 
