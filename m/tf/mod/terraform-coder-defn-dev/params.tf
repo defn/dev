@@ -30,6 +30,9 @@ Content-Disposition: attachment; filename="userdata.txt"
 
 #!/bin/bash
 set -x
+echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
+echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
+sudo sysctl -p /etc/sysctl.d/99-tailscale.conf
 sudo tailscale up --accept-dns=true --advertise-routes 10.43.0.0/16 --operator ubuntu --ssh --authkey "${var.tsauthkey}"
 sudo install -d -m 0755 ~ubuntu/m/c/dfd/openid
 tailscale serve https /openid ~/m/c/dfd/openid
