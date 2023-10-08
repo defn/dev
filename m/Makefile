@@ -30,20 +30,21 @@ teacher-clean:
 	rm -rf ~/Library/App*/coderv2/postgres
 
 teacher-init:
-	coder login https://immanent.tail3884f.ts.net --first-user-username="admin" --first-user-email="iam+admin@defn.sh" --first-user-password="Admin123456789,,," --first-user-trial=false
+	coder login https://$(shell tailscale cert 2>&1 | grep 'For domain'  | cut -d'"' -f2) --first-user-username="admin" --first-user-email="iam+admin@defn.sh" --first-user-password="Admin123456789,,," --first-user-trial=false
 
 class-init:
 	coder login https://coder.dev.amanibhavam.defn.run --first-user-username="admin" --first-user-email="iam+admin@defn.sh" --first-user-password="Admin123456789,,," --first-user-trial=false
 
-.PHONY: dev
 teacher: 
-	b server defn-org-sso $(MAKE) dev_inner 
-dev_inner:
 	pass hello
+	tailscale serve https / http://127.0.0.1:3000
+	b server defn-org-sso $(MAKE) dev_inner 
+
+dev_inner:
 	coder server --oauth2-github-allow-signups \
 		--oauth2-github-allowed-orgs $$(pass coder_oauth2-github-allowed-orgs) --oauth2-github-allowed-teams $$(pass coder_oauth2-github-allowed-teams) \
 		--oauth2-github-client-id $$(pass coder_oauth2-github-client-id) --oauth2-github-client-secret $$(pass coder_oauth2-github-client-secret) \
-		--access-url https://immanent.tail3884f.ts.net
+		--access-url https://$(shell tailscale cert 2>&1 | grep 'For domain'  | cut -d'"' -f2)
 
 cdktf:
 	npm install
