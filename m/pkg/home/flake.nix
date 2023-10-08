@@ -6,12 +6,6 @@
   outputs = inputs: inputs.az.inputs.cue.inputs.pkg.main rec {
     src = ./.;
 
-    config = rec {
-      clusters = {
-        dfd = { };
-      };
-    };
-
     apps = ctx: {
       tailscale = {
         type = "app";
@@ -30,8 +24,7 @@
 
         inputs.az.defaultPackage.${ctx.system}
       ]
-      ++ ctx.commands
-      ++ (ctx.pkgs.lib.mapAttrsToList (name: value: (packages ctx).${name}) config.clusters);
+      ++ ctx.commands;
     };
 
     packages = ctx: rec {
