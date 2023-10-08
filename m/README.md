@@ -16,7 +16,7 @@ backgroundColor: "#fff"
 # More Beans
 
 [Prev: Cool Beans](#1)
-[Next: Ths ain't a Raisin](#3)
+[Next: This ain't a Raisin](#3)
 
 ---
 
