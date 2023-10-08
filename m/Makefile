@@ -1,7 +1,8 @@
 timeout ?= 5
 
 build:
-	cd home && $(MAKE) build
+	npm install
+	npx @marp-team/marp-cli README.md --bespoke.osc false -o tutorial.html
 	../bin/b pass build //cmd/cli:cli
 	cp -f bazel-bin/cmd/cli/cli_/cli /tmp/cli
 
