@@ -6,20 +6,6 @@ exec 3>&1
 tail -f /tmp/dfd-startup.log 1>&3 &
 exec >>/tmp/dfd-startup.log 2>&1
 
-sudo sysctl -w fs.inotify.max_user_instances=10000
-sudo sysctl -w fs.inotify.max_user_watches=524288
-
-sudo sysctl -w net.ipv4.ip_forward=1
-sudo sysctl -w net.ipv6.conf.all.forwarding=1
-
-#sudo mount bpffs -t bpf /sys/fs/bpf
-#sudo mount --make-shared /sys/fs/bpf
-
-if [[ "$(lsblk /dev/nvme0n1p1 | tail -1 | awk '{print $NF}')" == "/" ]]; then
-	sudo growpart /dev/nvme0n1 1
-	sudo resize2fs /dev/nvme0n1p1
-fi
-
 function main {
 	sudo install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
 	sudo install -d -m 0700 -o ubuntu -g ubuntu /nix /nix
@@ -36,10 +22,16 @@ function main {
 	esac
 	git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
 
-	# mount ephemeral storage
-	if [[ "$(lsblk /dev/nvme1n1 -no fstype)" != "ext4" ]]; then
-		yes | sudo mkfs.ext4 /dev/nvme1n1
-	fi
+  if [[ "$(lsblk /dev/nvme0n1p1 | tail -1 | awk '{print $NF}')" == "/" ]]; then
+    if sudo growpart /dev/nvme0n1 1; then
+      sudo resize2fs /dev/nvme0n1p1 || true
+    f
+
+    # mount ephemeral storage
+    if [[ "$(lsblk /dev/nvme1n1 -no fstype)" != "ext4" ]]; then
+      yes | sudo mkfs.ext4 /dev/nvme1n1
+    fi
+  fi
 
   sudo mkdir -p /mnt/docker
 	if [[ "$(df /mnt/docker | tail -1 | awk '{print $NF}')" == / ]]; then
