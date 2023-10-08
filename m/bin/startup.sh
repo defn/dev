@@ -25,7 +25,7 @@ function main {
   if [[ "$(lsblk /dev/nvme0n1p1 | tail -1 | awk '{print $NF}')" == "/" ]]; then
     if sudo growpart /dev/nvme0n1 1; then
       sudo resize2fs /dev/nvme0n1p1 || true
-    f
+    fi
 
     # mount ephemeral storage
     if [[ "$(lsblk /dev/nvme1n1 -no fstype)" != "ext4" ]]; then
