@@ -1,5 +1,8 @@
 ---
 marp: true
+paginate: true
+_paginate: false
+backgroundColor: "#fff"
 ---
 
 # Cool Beans
