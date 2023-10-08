@@ -9,6 +9,7 @@ vimdiff:
 	vimdiff a.json b.json
 
 cache:
+	cd ~/m && bin/make-k3s init
 	cue export --out json -e image_digests | jq -r '.[]' | runmany 4 2 'set -x; skopeo copy docker://$${2} docker://169.254.32.1:5000/$${2} --multi-arch all --dest-tls-verify=false --insecure-policy'
 
 release:
