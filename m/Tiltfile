@@ -1,8 +1,5 @@
 #!/usr/bin/env python
 
-# fuck off
-analytics_settings(False)
-
 load("ext://restart_process", "custom_build_with_restart")
 
 # local registry
@@ -20,24 +17,6 @@ local_resource(
                 source .bash_profile
                 cd ~/m/pkg/codeserver
                 nix develop --command code-server --auth none --port 13337
-            done
-            """,
-    ],
-)
-
-# hacks
-local_resource(
-    "hacks",
-    serve_cmd=[
-        "bash",
-        "-c",
-        """
-            while true; do 
-                cd
-                source .bash_profile
-                cd ~/m/c/dfd
-                make label
-                sleep 30
             done
             """,
     ],
