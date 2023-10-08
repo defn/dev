@@ -1,9 +1,5 @@
 package c
 
-import (
-	batch "k8s.io/api/batch/v1"
-)
-
 infra_name: "k3d-dfd"
 infra_vclusters: []
 
@@ -131,7 +127,7 @@ kustomize: "hello": #Kustomize & {
 
 kustomize: "bonchon": #Kustomize & {
 	for chicken in ["rocky", "rosie"] {
-		resource: "pre-sync-hook-dry-brine-\(chicken)-chicken": batch.#Job & {
+		resource: "pre-sync-hook-dry-brine-\(chicken)-chicken": {
 			apiVersion: "batch/v1"
 			kind:       "Job"
 			metadata: {
