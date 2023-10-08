@@ -4,6 +4,8 @@ PRIV_KEY := sa-signer.key
 PUB_KEY := sa-signer.key.pub
 PKCS_KEY := sa-signer-pkcs8.pub
 
+INFRA_NAME := $(shell cue eval -e infra_name | jq -r .)
+
 k3s_url := $(shell cat ~/.kube/config | grep server: | awk '{print $$NF}')
 
 build:
@@ -12,14 +14,16 @@ build:
 # fmt
 	cue fmt .. .
 # remove everything
-	rm -rf ../../k/*/
-	rm -rf ../../e/*.yaml
+	rm -rf ../../e/$(INFRA_NAME)-*.yaml
+	rm -rf ../../k/$(INFRA_NAME)-*
+	rm -rf ../../k/y/$(INFRA_NAME)-*
+	rm -rf ../../k/r/$(INFRA_NAME)-*
 # helm generates ./k/$CLUSTER-cluster-karpenter/karpenter.yaml
 	b run outputs_karpenter__update
 # cue ./c/ generates kustomize ./k/
 	b run outputs_kustomize__update
 # kustomize ./k/ generates ./k/y/ release yaml
-	(cd ../../k && b run outputs_release__update && mv r y)
+	(cd ../../k && b run outputs_release__update && mv r/$(INFRA_NAME)-* y/)
 # add generated to git
 	../make_add_generated.sh
 # make one big cue config
@@ -33,6 +37,7 @@ build:
 # generate k/r
 	cd ../r && $(MAKE) digest
 	cd ../r/digest && $(MAKE) release
+	rm -rf ../../k/r/y
 	git add ../../k/r
 
 list:
