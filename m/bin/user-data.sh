@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+
+exec 3>&1
+exec >>/tmp/dfd-user-data.log 2>&1
+tail -f /tmp/dfd-user-data.log 1>&3 &
+
 #export CODER_AGENT_AUTH="aws-instance-identity"
 export CODER_AGENT_AUTH="token"
 export CODER_AGENT_URL="$1"; shift
@@ -29,5 +34,5 @@ while [[ -z "${CODER_AGENT_TOKEN}" ]]; do
 done
 
 cd ~/m/pkg/coder
-(setsid nix develop --command coder agent) || true &
+exec nix develop --command coder agent
 
