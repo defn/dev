@@ -11,8 +11,12 @@ function main {
 	out="$1"
 	shift
 
-	kustomize build --enable-helm "${app}" >"${out}"
-	rm -rf "${app}/charts"
+	if test -e "${app}/kustomization.yaml"; then
+		kustomize build --enable-helm "${app}" >"${out}"
+		rm -rf "${app}/charts"
+	else
+		touch "${out}"
+	fi
 }
 
 main "$@"
