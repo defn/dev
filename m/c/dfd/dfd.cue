@@ -2,18 +2,12 @@ package c
 
 infra_name: "k3d-dfd"
 infra_vclusters: []
+infra_base: {
+	domain_name: "dev.amanibhavam.defn.run"
+	domain_slug: "dev-amanibhavam-defn-run"
+}
 
 infra: {
-	_base: {
-		domain_zone: "defn.run"
-		domain_name: "dev.amanibhavam.defn.run"
-		domain_slug: "dev-amanibhavam-defn-run"
-
-		secrets_region:   "us-west-2"
-		issuer:           "zerossl-production"
-		cloudflare_email: "cloudflare@defn.us"
-	}
-
 	"\(infra_name)": bootstrap: {
 		// essentials
 		"kyverno": [2, "", "ServerSideApply=true"]
