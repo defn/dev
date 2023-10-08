@@ -23,7 +23,7 @@ build:
 # cue ./c/ generates kustomize ./k/
 	b run outputs_kustomize__update
 # kustomize ./k/ generates ./k/y/ release yaml
-	(cd ../../k && b run outputs_release__update && mv r/$(INFRA_NAME)-* y/)
+	(cd ../../k && b run outputs_release__update && mv r/$(INFRA_NAME)-* y/ && git checkout r && rm -rf r/y)
 # add generated to git
 	../make_add_generated.sh
 # make one big cue config
@@ -32,9 +32,10 @@ build:
 		| grep -v '^package '); done) > ../../k/y/cluster.cue
 	perl -pe 's{^\s*\w+:\s+null\s*}{}; s{data: null,}{}' -i ../../k/y/cluster.cue
 	git add ../../k/y
-# generate lists
-	cd ../ && $(MAKE) list
+
+release:
 # generate k/r
+	rm -rf ../../k/r/$(INFRA_NAME)-*
 	cd ../r && $(MAKE) digest
 	cd ../r/digest && $(MAKE) release
 	rm -rf ../../k/r/y
