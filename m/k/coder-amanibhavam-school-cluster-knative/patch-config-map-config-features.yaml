@@ -1,0 +1,10 @@
+#ManagedBy: cue
+
+metadata:
+  name: config-features
+  namespace: knative-serving
+data:
+  kubernetes.podspec-affinity: enabled
+  kubernetes.podspec-tolerations: enabled
+kind: ConfigMap
+apiVersion: v1

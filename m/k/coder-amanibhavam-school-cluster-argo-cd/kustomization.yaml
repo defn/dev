@@ -1,0 +1,11 @@
+#ManagedBy: cue
+
+patches:
+  - path: patch-service-argocd-server.yaml
+  - path: patch-configmap-argocd-cmd-params-cm.yaml
+  - path: patch-configmap-argocd-cm.yaml
+resources:
+  - resource-namespace-argocd.yaml
+  - https://raw.githubusercontent.com/argoproj/argo-cd/v2.8.2/manifests/install.yaml
+  - resource-ingress-argo-cd.yaml
+namespace: argocd

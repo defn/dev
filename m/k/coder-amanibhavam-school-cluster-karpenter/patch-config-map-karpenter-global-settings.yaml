@@ -1,0 +1,9 @@
+#ManagedBy: cue
+
+metadata:
+  name: karpenter-global-settings
+data:
+  aws.clusterName: coder-amanibhavam-school
+  aws.clusterEndpoint: https://kubernetes.default.svc.cluster.local:443
+kind: ConfigMap
+apiVersion: v1

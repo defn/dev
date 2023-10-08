@@ -1,0 +1,6 @@
+#ManagedBy: cue
+
+metadata:
+  name: karpenter
+kind: Namespace
+apiVersion: v1

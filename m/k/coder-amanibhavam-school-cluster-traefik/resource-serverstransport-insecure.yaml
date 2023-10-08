@@ -1,0 +1,9 @@
+#ManagedBy: cue
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: ServersTransport
+metadata:
+  name: insecure
+  namespace: traefik
+spec:
+  insecureSkipVerify: true

@@ -1,0 +1,34 @@
+#ManagedBy: cue
+
+patches: []
+resources: []
+namespace: kube-system
+helmCharts:
+  - releaseName: cilium
+    name: cilium
+    version: 1.14.1
+    repo: https://helm.cilium.io
+    namespace: kube-system
+    valuesInline:
+      operator:
+        replicas: 1
+      loadBalancer:
+        algorithm: maglev
+      bpf:
+        lbExternalClusterIP: true
+        masquerade: true
+      envoy:
+        enabled: true
+      hubble:
+        ui:
+          enabled: false
+        relay:
+          enabled: true
+        tls:
+          auto:
+            method: certmanager
+            certManagerIssuerRef:
+              name: cilium-ca
+              kind: ClusterIssuer
+              group: cert-manager.io
+    includeCRDs: true

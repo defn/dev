@@ -1,0 +1,6 @@
+#ManagedBy: cue
+
+patches: []
+resources:
+  - resource-externalsecret-zerossl-production.yaml
+  - resource-clusterpolicy-clusterissuer-zerossl-production.yaml

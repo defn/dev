@@ -1,3 +1,10 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  name: k3d-dfd-manual-cert-manager-crds
+  namespace: argocd
 spec:
   destination:
     name: k3d-dfd-manual
@@ -11,14 +18,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "1"
-  name: k3d-dfd-manual-cert-manager-crds
+  name: k3d-dfd-manual-cilium-bootstrap
   namespace: argocd
----
 spec:
   destination:
     name: k3d-dfd-manual
@@ -32,14 +39,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "1"
-  name: k3d-dfd-manual-cilium-bootstrap
+  name: k3d-dfd-manual-linkerd-crds
   namespace: argocd
----
 spec:
   destination:
     name: k3d-dfd-manual
@@ -53,10 +60,3 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"
-  name: k3d-dfd-manual-linkerd-crds
-  namespace: argocd

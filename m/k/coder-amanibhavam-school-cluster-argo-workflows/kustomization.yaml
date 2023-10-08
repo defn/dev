@@ -1,0 +1,17 @@
+#ManagedBy: cue
+
+patches: []
+resources:
+  - resource-namespace-argo-workflows.yaml
+helmCharts:
+  - releaseName: argo-workflows
+    name: argo-workflows
+    version: 0.33.3
+    repo: https://argoproj.github.io/argo-helm
+    namespace: argo-workflows
+    valuesInline:
+      controller:
+        workflowNamespaces:
+          - argo-workflows
+          - default
+    includeCRDs: true
