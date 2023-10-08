@@ -10,11 +10,10 @@ import (
 
 infra_name: string
 infra_vclusters: [...string]
+infra_base: {...}
 
 infra: {
-	_base: {}
-
-	[NAME=string]: _base & {
+	[NAME=string]: infra_base & {
 		if strings.HasPrefix(NAME, "vc") {
 			cluster_name: "\(parent.cluster_name)-\(NAME)"
 			name_suffix:  "-\(NAME)."
@@ -695,7 +694,7 @@ kustomize: "karpenter": #Kustomize & {
 				cd
 				source .bash_profile
 
-				infra_name=dfd
+				infra_name=\(infra_name)
 				sudo $(which tailscale) up --auth-key "$(cd m/pkg/chamber && nix develop --command chamber -b secretsmanager read --quiet ${infra_name} tailscale_authkey)"
 
 				ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y >/dev/null 2>&1

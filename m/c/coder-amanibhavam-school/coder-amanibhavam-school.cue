@@ -2,18 +2,12 @@ package c
 
 infra_name: "coder-amanibhavam-school"
 infra_vclusters: []
+infra_base: {
+	domain_name: "school.amanibhavam.defn.run"
+	domain_slug: "school-amanibhavam-defn-run"
+}
 
 infra: {
-	_base: {
-		domain_zone: "defn.run"
-		domain_name: "school.amanibhavam.defn.run"
-		domain_slug: "school-amanibhavam-defn-run"
-
-		secrets_region:   "us-west-2"
-		issuer:           "zerossl-production"
-		cloudflare_email: "cloudflare@defn.us"
-	}
-
 	"\(infra_name)": bootstrap: {
 		// essentials
 		"kyverno": [2, "", "ServerSideApply=true"]
