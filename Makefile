@@ -122,7 +122,7 @@ perms:
 	if [[ "Linux" == "$(shell uname -s)" ]]; then if test -S /var/run/docker.sock; then sudo chgrp ubuntu /var/run/docker.sock; sudo chmod 770 /var/run/docker.sock; fi; fi
 	if test -S /run/containerd/containerd.sock; then sudo chgrp ubuntu /run/containerd/containerd.sock; sudo chmod 770 /run/containerd/containerd.sock; fi
 	-chmod 0700 ~/.gnupg/. ~/.gnupg2/.
-	-if ! test -f ~/.kube/config; then touch ~/.kube/config; fi
+	-if ! test -f ~/.kube/config; then mkdir -p ~/.kube; touch ~/.kube/config; fi
 	-chmod 0600 ~/.kube/config
 
 reinstall:
