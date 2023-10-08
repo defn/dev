@@ -1,9 +1,5 @@
 package c
 
-import (
-	batch "k8s.io/api/batch/v1"
-)
-
 infra_name: "coder-amanibhavam-school"
 infra_vclusters: []
 
