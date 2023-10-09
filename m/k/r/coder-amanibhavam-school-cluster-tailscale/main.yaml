@@ -144,7 +144,7 @@ spec:
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
-    name: coder-amanibhavam-school
+    name: coder-amanibhavam-school-cluster
   target:
     creationPolicy: Owner
     name: operator-oauth-custom
