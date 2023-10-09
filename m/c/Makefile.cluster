@@ -14,10 +14,9 @@ build:
 # fmt
 	cue fmt .. .
 # remove everything
-	rm -rf ../../e/$(INFRA_NAME)-*.yaml
+	rm -rf ../../e/$(INFRA_NAME)-*
 	rm -rf ../../k/$(INFRA_NAME)-*
-	rm -rf ../../k/y/$(INFRA_NAME)-*
-	rm -rf ../../k/r/$(INFRA_NAME)-*
+	rm -rf ../../k/*/$(INFRA_NAME)-*
 # helm generates ./k/$CLUSTER-cluster-karpenter/karpenter.yaml
 	b run outputs_karpenter__update
 # cue ./c/ generates kustomize ./k/
@@ -26,14 +25,14 @@ build:
 	(cd ../../k && b run outputs_release__update && mv r/$(INFRA_NAME)-* y/ && git checkout r && rm -rf r/y)
 # add generated to git
 	../make_add_generated.sh
+
+release:
 # make one big cue config
 	rm -f ../../k/y/cluster.cue
 	(echo package y; for r in ../../k/y/*/main.yaml; do echo $$r 1>&2; (cue import $$r -p r --with-context -l '"res"' -l 'strings.ToLower(data.kind)' -l 'path.Dir(path.Rel("$(shell cd ../../k/y && pwd)",filename))' -l 'strings.ToLower(*data.metadata.namespace | "cluster")' -l data.metadata.name --outfile - \
 		| grep -v '^package '); done) > ../../k/y/cluster.cue
 	perl -pe 's{^\s*\w+:\s+null\s*}{}; s{data: null,}{}' -i ../../k/y/cluster.cue
 	git add ../../k/y
-
-release:
 # generate k/r
 	rm -rf ../../k/r/$(INFRA_NAME)-*
 	cd ../r && $(MAKE) digest

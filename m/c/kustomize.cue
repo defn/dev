@@ -8,9 +8,22 @@ import (
 	"strings"
 )
 
-infra_name: string
+infra_name:        string
+infra_alt_name:    string
+infra_account_id:  string
+infra_k3s_version: string
+
+infra_base: {
+	domain_zone: string
+	domain_name: string
+	domain_slug: string
+
+	secrets_region:   string
+	issuer:           string
+	cloudflare_email: string
+}
+
 infra_vclusters: [...string]
-infra_base: {...}
 
 infra: {
 	[NAME=string]: infra_base & {
@@ -490,7 +503,7 @@ kustomize: "external-secrets": #KustomizeHelm & {
 		metadata: {
 			name:      "external-secrets"
 			namespace: "external-secrets"
-			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::510430971399:role/ro"
+			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_account_id):role/\(infra_alt_name)"
 		}
 	}
 
@@ -562,7 +575,7 @@ kustomize: "karpenter": #Kustomize & {
 		kind:       "ServiceAccount"
 		metadata: {
 			name: "karpenter"
-			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::510430971399:role/ro"
+			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_account_id):role/\(infra_alt_name)"
 		}
 	}
 
@@ -671,7 +684,7 @@ kustomize: "karpenter": #Kustomize & {
 			subnetSelector: "karpenter.sh/discovery":        cluster.cluster_name
 			securityGroupSelector: "karpenter.sh/discovery": cluster.cluster_name
 
-			instanceProfile: infra_name
+			instanceProfile: infra_alt_name
 			blockDeviceMappings: [{
 				deviceName: "/dev/sda1"
 				ebs: {
@@ -1458,7 +1471,7 @@ kustomize: "ubuntu": #Kustomize & {
 		kind:       "ServiceAccount"
 		metadata: {
 			name: "ubuntu"
-			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::510430971399:role/ro"
+			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_account_id):role/\(infra_alt_name)"
 		}
 	}
 }
