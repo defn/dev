@@ -22965,7 +22965,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/bitnami/kubectl@sha256:0b28a0ae15893822f211bb8501d192c7b52d1920c32e4b43734aa6d94d51477f
+        - image: 169.254.32.1:5000/bitnami/kubectl@sha256:99497d60ea497aba03097780a69e253ea9cccce8911acae58d3f2bce485e000d
           command:
             - sh
             - -c

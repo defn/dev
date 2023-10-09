@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: headlamp
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: headlamp
-    app.kubernetes.io/version: 0.19.1
-    helm.sh/chart: headlamp-0.15.0
+    app.kubernetes.io/version: 0.20.1
+    helm.sh/chart: headlamp-0.16.0
   name: headlamp-admin
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -39,7 +39,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/ghcr.io/headlamp-k8s/headlamp@sha256:bb15916c96306cd14f1c9c09c639d01d1d1fb854fd770bf99f3e7a9deb584753
+        - image: 169.254.32.1:5000/ghcr.io/headlamp-k8s/headlamp@sha256:db0310cf5abef3ffd5aa87509b1f61a150ee705808c5b29704149101653d418b
           args:
             - -in-cluster
             - -plugins-dir=/headlamp/plugins
@@ -81,8 +81,8 @@ metadata:
     app.kubernetes.io/instance: headlamp
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: headlamp
-    app.kubernetes.io/version: 0.19.1
-    helm.sh/chart: headlamp-0.15.0
+    app.kubernetes.io/version: 0.20.1
+    helm.sh/chart: headlamp-0.16.0
   name: headlamp
   namespace: headlamp
 ---
@@ -129,8 +129,8 @@ metadata:
     app.kubernetes.io/instance: headlamp
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: headlamp
-    app.kubernetes.io/version: 0.19.1
-    helm.sh/chart: headlamp-0.15.0
+    app.kubernetes.io/version: 0.20.1
+    helm.sh/chart: headlamp-0.16.0
   name: headlamp
   namespace: headlamp
 ---
@@ -141,8 +141,8 @@ metadata:
     app.kubernetes.io/instance: headlamp
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: headlamp
-    app.kubernetes.io/version: 0.19.1
-    helm.sh/chart: headlamp-0.15.0
+    app.kubernetes.io/version: 0.20.1
+    helm.sh/chart: headlamp-0.16.0
   name: headlamp
   namespace: headlamp
 ---
