@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -ex
 
 exec 3>&1
 exec >>/tmp/dfd-startup.log 2>&1
@@ -22,34 +22,43 @@ function main {
 	esac
 	git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
 
+  local root_disk
+  local docker_disk
   if [[ "$(lsblk /dev/nvme0n1p1 | tail -1 | awk '{print $NF}')" == "/" ]]; then
-    if sudo growpart /dev/nvme0n1 1; then
-      sudo resize2fs /dev/nvme0n1p1 || true
-    fi
-
-    # mount ephemeral storage
-    if [[ "$(lsblk /dev/nvme1n1 -no fstype)" != "ext4" ]]; then
-      yes | sudo mkfs.ext4 /dev/nvme1n1
-    fi
+    root_disk=nvme0n1
+    docker_disk=nvme1n1
+  else
+    root_disk=nvme1n1
+    docker_disk=nvme0n1
   fi
+
+  if sudo growpart /dev/${root_disk} 1; then
+    sudo resize2fs /dev/${root_disk}p1 || true
+  fi
+
+  # mount ephemeral storage
+  if [[ "$(lsblk /dev/${docker_disk} -no fstype)" != "ext4" ]]; then
+    yes | sudo mkfs.ext4 /dev/${docker_disk}
+  fi
+
+  sudo systemctl stop docker || true
 
   sudo mkdir -p /mnt/docker
 	if [[ "$(df /mnt/docker | tail -1 | awk '{print $NF}')" == / ]]; then
-		echo '/dev/nvme1n1 /mnt/docker ext4 defaults,nofail 0 2' | sudo tee -a /etc/fstab
+		echo '/dev/${docker_disk} /mnt/docker ext4 defaults,nofail 0 2' | sudo tee -a /etc/fstab
 		sudo mount /mnt/docker
 	fi
+	sudo rm -rf /var/lib/docker
+	sudo ln -nfs /mnt/docker /var/lib/docker
+
+	sudo systemctl start docker
 
   if ! test -f /mnt/docker/swap; then
     sudo dd if=/dev/zero of=/mnt/docker/swap bs=1M count=8192
     sudo chmod 0600 /mnt/docker/swap
     sudo mkswap /mnt/docker/swap
     sudo swapon /mnt/docker/swap
-  fi
-
-	sudo systemctl stop docker || true
-	sudo rm -rf /var/lib/docker
-	sudo ln -nfs /mnt/docker /var/lib/docker
-	sudo systemctl start docker
+  fi &
 
 	cd
 	git branch --set-upstream-to=origin/main main
