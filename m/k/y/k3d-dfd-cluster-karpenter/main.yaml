@@ -1055,7 +1055,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::510430971399:role/coder-amanibhavam-dev
+    eks.amazonaws.com/role-arn: arn:aws:iam::510430971399:role/coder-amanibhavam-dev-cluster
   labels:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm

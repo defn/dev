@@ -503,7 +503,7 @@ kustomize: "external-secrets": #KustomizeHelm & {
 		metadata: {
 			name:      "external-secrets"
 			namespace: "external-secrets"
-			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_account_id):role/\(infra_alt_name)"
+			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_account_id):role/\(infra_alt_name)-cluster"
 		}
 	}
 
@@ -575,7 +575,7 @@ kustomize: "karpenter": #Kustomize & {
 		kind:       "ServiceAccount"
 		metadata: {
 			name: "karpenter"
-			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_account_id):role/\(infra_alt_name)"
+			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_account_id):role/\(infra_alt_name)-cluster"
 		}
 	}
 
@@ -1471,7 +1471,7 @@ kustomize: "ubuntu": #Kustomize & {
 		kind:       "ServiceAccount"
 		metadata: {
 			name: "ubuntu"
-			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_account_id):role/\(infra_alt_name)"
+			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_account_id):role/\(infra_alt_name)-cluster"
 		}
 	}
 }
