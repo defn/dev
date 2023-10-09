@@ -1,7 +1,7 @@
 apiVersion: external-secrets.io/v1beta1
 kind: ClusterSecretStore
 metadata:
-  name: coder-amanibhavam-school
+  name: coder-amanibhavam-school-cluster
 spec:
   provider:
     aws:
