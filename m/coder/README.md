@@ -4,4 +4,5 @@ mkdir -p ~/m/c/$(uname -n)/openid && tailscale serve https /openid ~/m/c/$(uname
 add oidc identity provider
 create CLUSTER-cluster iam role
 make secrets
+update postgres coder secret
 ```
