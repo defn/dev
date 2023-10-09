@@ -278,7 +278,7 @@ spec:
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
-    name: coder-amanibhavam-school-cluster
+    name: coder-amanibhavam-school
   target:
     creationPolicy: Owner
     name: coder
