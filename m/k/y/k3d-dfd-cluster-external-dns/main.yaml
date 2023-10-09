@@ -12,7 +12,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
     app.kubernetes.io/version: 0.13.6
-    helm.sh/chart: external-dns-6.26.3
+    helm.sh/chart: external-dns-6.26.4
   name: external-dns
   namespace: external-dns
 ---
@@ -24,7 +24,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
     app.kubernetes.io/version: 0.13.6
-    helm.sh/chart: external-dns-6.26.3
+    helm.sh/chart: external-dns-6.26.4
   name: external-dns-external-dns
 rules:
 - apiGroups:
@@ -138,7 +138,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
     app.kubernetes.io/version: 0.13.6
-    helm.sh/chart: external-dns-6.26.3
+    helm.sh/chart: external-dns-6.26.4
   name: external-dns-external-dns
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -157,7 +157,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
     app.kubernetes.io/version: 0.13.6
-    helm.sh/chart: external-dns-6.26.3
+    helm.sh/chart: external-dns-6.26.4
   name: external-dns
   namespace: external-dns
 spec:
@@ -180,7 +180,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
     app.kubernetes.io/version: 0.13.6
-    helm.sh/chart: external-dns-6.26.3
+    helm.sh/chart: external-dns-6.26.4
   name: external-dns
   namespace: external-dns
 spec:
@@ -196,7 +196,7 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: external-dns
         app.kubernetes.io/version: 0.13.6
-        helm.sh/chart: external-dns-6.26.3
+        helm.sh/chart: external-dns-6.26.4
     spec:
       affinity:
         nodeAffinity: null
@@ -243,7 +243,7 @@ spec:
         - name: CF_API_EMAIL
           value: cloudflare@defn.us
         envFrom: null
-        image: docker.io/bitnami/external-dns:0.13.6-debian-11-r26
+        image: docker.io/bitnami/external-dns:0.13.6-debian-11-r28
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 2
