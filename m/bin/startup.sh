@@ -61,6 +61,4 @@ time main "$@"
 uptime
 
 cd ~/m
-~/bin/nix/tilt up &
-
-exit 0
+exec ~/bin/nix/tilt up
