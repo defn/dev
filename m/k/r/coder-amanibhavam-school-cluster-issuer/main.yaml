@@ -1,7 +1,7 @@
 spec:
   dataFrom:
     - extract:
-        key: coder-amanibhavam-school
+        key: coder-amanibhavam-school-cluster
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore

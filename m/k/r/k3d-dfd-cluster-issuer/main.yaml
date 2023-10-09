@@ -1,7 +1,7 @@
 spec:
   dataFrom:
     - extract:
-        key: k3d-dfd
+        key: coder-amanibhavam-dev-cluster
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore

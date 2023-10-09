@@ -9,6 +9,7 @@ infra_base: {
 }
 
 infra: {
+	"\(infra_name)": cluster_alt_name: infra_alt_name
 	"\(infra_name)": bootstrap: {
 		// essentials
 		"kyverno": [2, "", "ServerSideApply=true"]

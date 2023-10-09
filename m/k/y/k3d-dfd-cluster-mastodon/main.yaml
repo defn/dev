@@ -2812,15 +2812,15 @@ metadata:
 spec:
   data:
   - remoteRef:
-      key: k3d-dfd
+      key: coder-amanibhavam-dev-cluster
       property: mastodon_admin_password
     secretKey: MASTODON_ADMIN_PASSWORD
   - remoteRef:
-      key: k3d-dfd
+      key: coder-amanibhavam-dev-cluster
       property: mastodon_otp_secret
     secretKey: OTP_SECRET
   - remoteRef:
-      key: k3d-dfd
+      key: coder-amanibhavam-dev-cluster
       property: mastodon_secret_key_base
     secretKey: SECRET_KEY_BASE
   refreshInterval: 1h
@@ -2839,11 +2839,11 @@ metadata:
 spec:
   data:
   - remoteRef:
-      key: k3d-dfd
+      key: coder-amanibhavam-dev-cluster
       property: mastodon_minio_root_password
     secretKey: root-password
   - remoteRef:
-      key: k3d-dfd
+      key: coder-amanibhavam-dev-cluster
       property: mastodon_minio_root_user
     secretKey: root-user
   refreshInterval: 1h
@@ -2862,11 +2862,11 @@ metadata:
 spec:
   data:
   - remoteRef:
-      key: k3d-dfd
+      key: coder-amanibhavam-dev-cluster
       property: mastodon_postgresql_password
     secretKey: password
   - remoteRef:
-      key: k3d-dfd
+      key: coder-amanibhavam-dev-cluster
       property: mastodon_postgresql_postgres_password
     secretKey: postgres-password
   refreshInterval: 1h
@@ -2885,7 +2885,7 @@ metadata:
 spec:
   data:
   - remoteRef:
-      key: k3d-dfd
+      key: coder-amanibhavam-dev-cluster
       property: mastodon_redis_password
     secretKey: redis-password
   refreshInterval: 1h
@@ -2904,11 +2904,11 @@ metadata:
 spec:
   data:
   - remoteRef:
-      key: k3d-dfd
+      key: coder-amanibhavam-dev-cluster
       property: mastodon_smtp_login
     secretKey: login
   - remoteRef:
-      key: k3d-dfd
+      key: coder-amanibhavam-dev-cluster
       property: mastodon_smtp_password
     secretKey: password
   refreshInterval: 1h

@@ -445,7 +445,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 				name: cluster.cluster_name
 			}
 			dataFrom: [{
-				extract: key: cluster.cluster_name
+				extract: key: "\(cluster.cluster_alt_name)-cluster"
 			}]
 			target: {
 				name:           "external-dns"
@@ -1132,7 +1132,7 @@ kustomize: "tailscale": #Kustomize & {
 				name: cluster.cluster_name
 			}
 			dataFrom: [{
-				extract: key: cluster.cluster_name
+				extract: key: "\(cluster.cluster_alt_name)-cluster"
 			}]
 			target: {
 				name:           "operator-oauth-custom"
@@ -1202,7 +1202,7 @@ kustomize: "issuer": #Kustomize & {
 				name: cluster.cluster_name
 			}
 			dataFrom: [{
-				extract: key: cluster.cluster_name
+				extract: key: "\(cluster.cluster_alt_name)-cluster"
 			}]
 			target: {
 				name:           cluster.issuer
@@ -1650,7 +1650,7 @@ kustomize: "coder": #KustomizeHelm & {
 				name: cluster.cluster_name
 			}
 			dataFrom: [{
-				extract: key: cluster.cluster_name
+				extract: key: "\(cluster.cluster_alt_name)-cluster"
 			}]
 			target: {
 				name:           "coder"
@@ -1964,15 +1964,15 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			}
 			data: [{
 				secretKey: "MASTODON_ADMIN_PASSWORD"
-				remoteRef: key:      cluster.cluster_name
+				remoteRef: key: "\(cluster.cluster_alt_name)-cluster"
 				remoteRef: property: "\(namespace)_admin_password"
 			}, {
 				secretKey: "OTP_SECRET"
-				remoteRef: key:      cluster.cluster_name
+				remoteRef: key: "\(cluster.cluster_alt_name)-cluster"
 				remoteRef: property: "\(namespace)_otp_secret"
 			}, {
 				secretKey: "SECRET_KEY_BASE"
-				remoteRef: key:      cluster.cluster_name
+				remoteRef: key: "\(cluster.cluster_alt_name)-cluster"
 				remoteRef: property: "\(namespace)_secret_key_base"
 			}]
 		}
@@ -1994,11 +1994,11 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			}
 			data: [{
 				secretKey: "login"
-				remoteRef: key:      cluster.cluster_name
+				remoteRef: key: "\(cluster.cluster_alt_name)-cluster"
 				remoteRef: property: "\(namespace)_smtp_login"
 			}, {
 				secretKey: "password"
-				remoteRef: key:      cluster.cluster_name
+				remoteRef: key: "\(cluster.cluster_alt_name)-cluster"
 				remoteRef: property: "\(namespace)_smtp_password"
 			}]
 		}
@@ -2020,11 +2020,11 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			}
 			data: [{
 				secretKey: "root-password"
-				remoteRef: key:      cluster.cluster_name
+				remoteRef: key: "\(cluster.cluster_alt_name)-cluster"
 				remoteRef: property: "\(namespace)_minio_root_password"
 			}, {
 				secretKey: "root-user"
-				remoteRef: key:      cluster.cluster_name
+				remoteRef: key: "\(cluster.cluster_alt_name)-cluster"
 				remoteRef: property: "\(namespace)_minio_root_user"
 			}]
 		}
@@ -2046,11 +2046,11 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			}
 			data: [{
 				secretKey: "password"
-				remoteRef: key:      cluster.cluster_name
+				remoteRef: key: "\(cluster.cluster_alt_name)-cluster"
 				remoteRef: property: "\(namespace)_postgresql_password"
 			}, {
 				secretKey: "postgres-password"
-				remoteRef: key:      cluster.cluster_name
+				remoteRef: key: "\(cluster.cluster_alt_name)-cluster"
 				remoteRef: property: "\(namespace)_postgresql_postgres_password"
 			}]
 		}
@@ -2072,7 +2072,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			}
 			data: [{
 				secretKey: "redis-password"
-				remoteRef: key:      cluster.cluster_name
+				remoteRef: key: "\(cluster.cluster_alt_name)-cluster"
 				remoteRef: property: "\(namespace)_redis_password"
 			}]
 		}
