@@ -10667,7 +10667,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::510430971399:role/ro
+    eks.amazonaws.com/role-arn: arn:aws:iam::510430971399:role/coder-amanibhavam-school
   labels:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
