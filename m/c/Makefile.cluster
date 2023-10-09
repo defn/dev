@@ -36,11 +36,10 @@ release:
 	rm -rf ../../k/r/y
 	git add ../../k/r
 
-
 secrets:
 	$(MAKE) clean
 	$(MAKE) irsa
-	$(MAKE) k3d-secrets
+	$(MAKE) k3s-secrets
 
 clean:
 	rm -f system.admin.key system.admin.pem system.ca.pem
@@ -55,10 +54,10 @@ irsa:
 	cue export -e discovery --out=json | jq . > openid/.well-known/openid-configuration
 	rm -vf system.*
 
-k3d-secrets: ca.key ca.crt
-	-kubectl --context k3d-dfd create namespace cert-manager
-	-kubectl --context k3d-dfd create secret generic -n kube-system cilium-ca --from-file=ca.key --from-file=ca.crt
-	-kubectl --context k3d-dfd create secret generic -n cert-manager cilium-ca --from-file=tls.key=ca.key --from-file=tls.crt=ca.crt
+k3s-secrets: ca.key ca.crt
+	-kubectl --context $(shell uname -n) create namespace cert-manager
+	-kubectl --context $(shell uname -n) create secret generic -n kube-system cilium-ca --from-file=ca.key --from-file=ca.crt
+	-kubectl --context $(shell uname -n) create secret generic -n cert-manager cilium-ca --from-file=tls.key=ca.key --from-file=tls.crt=ca.crt
 
 ca.key ca.crt:
 	step certificate create cilium-ca ca.crt ca.key --profile root-ca --not-after 8760h --no-password --insecure --kty RSA --size 4096 --force
