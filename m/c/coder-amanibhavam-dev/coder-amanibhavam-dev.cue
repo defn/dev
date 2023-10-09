@@ -1,6 +1,7 @@
 package c
 
-infra_name: "k3d-dfd"
+infra_name:     "k3d-dfd"
+infra_alt_name: "coder-amanibhavam-dev"
 infra_vclusters: []
 infra_base: {
 	domain_name: "dev.amanibhavam.defn.run"
