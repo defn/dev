@@ -125,7 +125,7 @@ kustomize: "secrets": #Kustomize & {
 	resource: "cluster-secret-store": {
 		apiVersion: "external-secrets.io/v1beta1"
 		kind:       "ClusterSecretStore"
-		metadata: name: "\(cluster.cluster_name)-cluster"
+		metadata: name: cluster.cluster_name
 		spec: provider: aws: {
 			service: "SecretsManager"
 			region:  cluster.secrets_region
@@ -442,7 +442,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 			refreshInterval: "1h"
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: "\(cluster.cluster_name)-cluster"
+				name: cluster.cluster_name
 			}
 			dataFrom: [{
 				extract: key: cluster.cluster_name
@@ -1129,7 +1129,7 @@ kustomize: "tailscale": #Kustomize & {
 			refreshInterval: "1h"
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: "\(cluster.cluster_name)-cluster"
+				name: cluster.cluster_name
 			}
 			dataFrom: [{
 				extract: key: cluster.cluster_name
@@ -1199,7 +1199,7 @@ kustomize: "issuer": #Kustomize & {
 			refreshInterval: "1h"
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: "\(cluster.cluster_name)-cluster"
+				name: cluster.cluster_name
 			}
 			dataFrom: [{
 				extract: key: cluster.cluster_name
@@ -1647,7 +1647,7 @@ kustomize: "coder": #KustomizeHelm & {
 			refreshInterval: "1h"
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: "\(cluster.cluster_name)-cluster"
+				name: cluster.cluster_name
 			}
 			dataFrom: [{
 				extract: key: cluster.cluster_name
@@ -1956,7 +1956,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			refreshInterval: "1h"
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: "\(cluster.cluster_name)-cluster"
+				name: cluster.cluster_name
 			}
 			target: {
 				name:           "mastodon-default"
@@ -1986,7 +1986,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			refreshInterval: "1h"
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: "\(cluster.cluster_name)-cluster"
+				name: cluster.cluster_name
 			}
 			target: {
 				name:           "mastodon-smtp"
@@ -2012,7 +2012,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			refreshInterval: "1h"
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: "\(cluster.cluster_name)-cluster"
+				name: cluster.cluster_name
 			}
 			target: {
 				name:           "mastodon-minio"
@@ -2038,7 +2038,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			refreshInterval: "1h"
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: "\(cluster.cluster_name)-cluster"
+				name: cluster.cluster_name
 			}
 			target: {
 				name:           "mastodon-postgresql"
@@ -2064,7 +2064,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			refreshInterval: "1h"
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: "\(cluster.cluster_name)-cluster"
+				name: cluster.cluster_name
 			}
 			target: {
 				name:           "mastodon-redis"
