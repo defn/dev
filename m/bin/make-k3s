@@ -66,7 +66,7 @@ function make_up {
 	sudo mkdir -p /etc/rancher/k3s
 	sudo cp registries.yaml /etc/rancher/k3s/
 	k3sup install --local --context ${infra_name} --local-path ~/.kube/config --merge \
-		--k3s-version "$(cd c/${infra_name} && cue export --out json -e infra.vc0.vcluster.k3s_version | jq -r . | cut -d: -f2 | sed 's#-#+#')" \
+		--k3s-version "$(cd c/${infra_name} && cue export --out json -e infra_k3s_version | jq -r . | cut -d: -f2 | sed 's#-#+#')" \
 		--k3s-extra-args "--node-ip "${container_ip}" --disable-network-policy --disable=traefik --flannel-backend=none --kube-apiserver-arg=--service-account-issuer=$(cd c/${infra_name} && cue export --out json -e discovery_url | jq -r .)/openid --kube-apiserver-arg=--api-audiences=https://kubernetes.default.svc.cluster.local,sts.amazonaws.com --tls-san=${infra_name}" 
 
 	# oidc
@@ -111,8 +111,6 @@ function make_up {
 		if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 60 ${infra_name}-cluster >/dev/null 2>&1; then break; fi
 		sleep 30
 	done &
-
-	make_vc
 }
 
 function main {
