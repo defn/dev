@@ -41,7 +41,7 @@ infra: {
 		"traefik": [40, ""]
 
 		// applications
-		"coder": [100, ""]
+		//"coder": [100, ""]
 		"headlamp": [100, ""]
 		"postgres-operator": [100, ""]
 	}
