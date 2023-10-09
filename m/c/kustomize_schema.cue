@@ -32,6 +32,7 @@ kustomize: [NAME=string]: _name: NAME
 	cloudflare_email: string
 
 	cluster_name: string
+	cluster_alt_name: string | *cluster_name
 
 	secrets_region: string
 
