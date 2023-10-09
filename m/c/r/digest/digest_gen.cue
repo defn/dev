@@ -2,7 +2,7 @@ package r
 
 cache: "bitnami/kubectl:1.26.4": "bitnami/kubectl@sha256:a0a972324d937b2c2f7207af29d1abd6ce3f7fd5ea73357036a67ab24f34cc92"
 
-cache: "bitnami/kubectl:latest": "bitnami/kubectl@sha256:0b28a0ae15893822f211bb8501d192c7b52d1920c32e4b43734aa6d94d51477f"
+cache: "bitnami/kubectl:latest": "bitnami/kubectl@sha256:99497d60ea497aba03097780a69e253ea9cccce8911acae58d3f2bce485e000d"
 
 cache: "busybox:1.35": "busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094"
 
@@ -16,7 +16,7 @@ cache: "docker.io/bitnami/apache:2.4.57-debian-11-r36": "docker.io/bitnami/apach
 
 cache: "docker.io/bitnami/elasticsearch:8.10.2-debian-11-r6": "docker.io/bitnami/elasticsearch@sha256:169efab21c4508790d7d1831b5018ac8ed47e4f6f13c1f6d45635f5564fdf4e3"
 
-cache: "docker.io/bitnami/external-dns:0.13.6-debian-11-r26": "docker.io/bitnami/external-dns@sha256:80f02728bc2407e2e05a0c398f72b73449343bba16ef78885caa0fb3f6343143"
+cache: "docker.io/bitnami/external-dns:0.13.6-debian-11-r28": "docker.io/bitnami/external-dns@sha256:1d2f576397e2dd13f48503189cc11cf8490e8b58402d830f29e2e44982159ebd"
 
 cache: "docker.io/bitnami/mastodon:4.2.0-debian-11-r0": "docker.io/bitnami/mastodon@sha256:8533513b38a7dff5d60282e0f86ee28f116e91cdbdbe1b552d505f3e355b46d2"
 
@@ -52,7 +52,7 @@ cache: "ghcr.io/external-secrets/external-secrets:v0.9.4": "ghcr.io/external-sec
 
 cache: "ghcr.io/galleybytes/terraform-operator:v0.13.3": "ghcr.io/galleybytes/terraform-operator@sha256:8e49058207e8e0ed8327c673fb84aa2ed25f7db665a8b932d3716066560be274"
 
-cache: "ghcr.io/headlamp-k8s/headlamp:v0.19.1": "ghcr.io/headlamp-k8s/headlamp@sha256:bb15916c96306cd14f1c9c09c639d01d1d1fb854fd770bf99f3e7a9deb584753"
+cache: "ghcr.io/headlamp-k8s/headlamp:v0.20.1": "ghcr.io/headlamp-k8s/headlamp@sha256:db0310cf5abef3ffd5aa87509b1f61a150ee705808c5b29704149101653d418b"
 
 cache: "ghcr.io/kyverno/background-controller:v1.10.3": "ghcr.io/kyverno/background-controller@sha256:24e3336f1a22384d0835079598ce015e22cffb9bac26c09cae1099e919a0297c"
 
