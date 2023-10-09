@@ -385,6 +385,27 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
+        postgres-operator: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-school-cluster-postgres-operator
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-school-cluster
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/k/r/coder-amanibhavam-school-cluster-postgres-operator
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
         cilium: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
