@@ -54,3 +54,9 @@ ca.key ca.crt:
 
 label:
 	kubectl get nodes -o json | jq -r '.items[].metadata.name' | runmany 'kubectl label --overwrite node $$1 node.kubernetes.io/instance-type=t3.medium'
+
+up:
+	cd ../.. && bin/make-k3s up
+
+down:
+	cd ../.. && bin/make-k3s down
