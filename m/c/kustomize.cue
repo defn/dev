@@ -671,7 +671,7 @@ kustomize: "karpenter": #Kustomize & {
 			subnetSelector: "karpenter.sh/discovery":        cluster.cluster_name
 			securityGroupSelector: "karpenter.sh/discovery": cluster.cluster_name
 
-			instanceProfile: "coder-amanibhavam-dev"
+			instanceProfile: infra_name
 			blockDeviceMappings: [{
 				deviceName: "/dev/sda1"
 				ebs: {
@@ -705,7 +705,7 @@ kustomize: "karpenter": #Kustomize & {
 				az="$(curl -sSL -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/placement/availability-zone)"
 				container_ip="$(curl -sSL -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/local-ipv4)"
 
-				(cd m/pkg/k3sup && nix develop --command k3sup join --user ubuntu --server-host coder-amanibhavam-dev --server-user ubuntu --k3s-extra-args "--kubelet-arg provider-id=aws:///${az}/${instance} --node-ip ${container_ip}")
+				(cd m/pkg/k3sup && nix develop --command k3sup join --user ubuntu --server-host ${infra_name} --server-user ubuntu --k3s-extra-args "--kubelet-arg provider-id=aws:///${az}/${instance} --node-ip ${container_ip}")
 				EOF
 
 				--BOUNDARY
