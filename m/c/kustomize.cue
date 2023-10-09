@@ -397,7 +397,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.26.3"
+		version: "6.26.4"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -2089,7 +2089,7 @@ kustomize: "headlamp": #KustomizeHelm & {
 		release:   "headlamp"
 		name:      "headlamp"
 		namespace: "headlamp"
-		version:   "0.15.0"
+		version:   "0.16.0"
 		repo:      "https://headlamp-k8s.github.io/headlamp"
 		values: {
 		}
