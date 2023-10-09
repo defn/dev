@@ -9,10 +9,6 @@ INFRA_NAME := $(shell cue eval -e infra_name | jq -r .)
 k3s_url := $(shell cat ~/.kube/config | grep server: | awk '{print $$NF}')
 
 build:
-# docs
-	cd lesson && $(MAKE) build
-# fmt
-	cue fmt .. .
 # remove everything
 	rm -rf ../../e/$(INFRA_NAME)-*
 	rm -rf ../../k/$(INFRA_NAME)-*
@@ -40,8 +36,6 @@ release:
 	rm -rf ../../k/r/y
 	git add ../../k/r
 
-list:
-	true
 
 secrets:
 	$(MAKE) clean
