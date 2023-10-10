@@ -1,19 +1,16 @@
 package c
 
+teacher_handle: "amanibhavam"
+teacher_env: "dev"
 infra_name:     "k3d-dfd"
-infra_alt_name: "coder-amanibhavam-dev"
-infra_vclusters: []
-infra_base: {
-	domain_name: "dev.amanibhavam.defn.run"
-	domain_slug: "dev-amanibhavam-defn-run"
-}
+infra_alt_name: "coder-\(teacher_handle)-\(teacher_env)"
 
 infra: {
 	"\(infra_name)": cluster_alt_name: infra_alt_name
+
 	"\(infra_name)": bootstrap: {
 		// essentials
 		"kyverno": [2, "", "ServerSideApply=true"]
-		"linkerd-crds": [2, ""]
 		"cert-manager": [2, ""]
 
 		"trust-manager": [10, ""]
@@ -34,9 +31,6 @@ infra: {
 		"argo-workflows": [20, ""]
 		"argo-events": [20, ""]
 
-		// service mesh
-		//"linkerd-control-plane": [20, ""]
-
 		// external dns, certs issuer
 		"external-dns": [20, ""]
 		"issuer": [20, ""]
@@ -47,13 +41,13 @@ infra: {
 		"traefik": [40, ""]
 
 		// applications
+		"headlamp": [100, ""]
+		"postgres-operator": [100, ""]
+		"coder": [100, ""]
 		"hello": [100, ""]
 		"pihole": [100, ""]
-		"coder": [100, ""]
-		"headlamp": [100, ""]
 		"dex": [100, ""]
 		"mastodon": [100, ""]
-		"postgres-operator": [100, ""]
 	}
 
 	vc0: vcluster: k3s_version: "rancher/k3s:v1.27.5-k3s1"
