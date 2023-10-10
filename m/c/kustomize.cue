@@ -987,6 +987,10 @@ cilium_common: {
 			bpf: lbExternalClusterIP: true
 			bpf: masquerade:          true
 			envoy: enabled:           true
+			cluster: {
+				name: infra_cilium_name
+				id: infra_cilium_id
+			}
 			hubble: {
 				ui: enabled:    bool | *false
 				relay: enabled: true

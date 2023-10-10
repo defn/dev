@@ -401,9 +401,9 @@ metadata:
   namespace: kube-system
 ---
 spec:
-  commonName: '*.default.hubble-grpc.cilium.io'
+  commonName: '*.coder-amanibhavam-school.hubble-grpc.cilium.io'
   dnsNames:
-    - '*.default.hubble-grpc.cilium.io'
+    - '*.coder-amanibhavam-school.hubble-grpc.cilium.io'
   duration: 26280h0m0s
   issuerRef:
     group: cert-manager.io
@@ -430,8 +430,8 @@ data:
   bpf-root: /sys/fs/bpf
   cgroup-root: /run/cilium/cgroupv2
   cilium-endpoint-gc-interval: 5m0s
-  cluster-id: "0"
-  cluster-name: default
+  cluster-id: "2"
+  cluster-name: coder-amanibhavam-school
   cluster-pool-ipv4-cidr: 10.0.0.0/8
   cluster-pool-ipv4-mask-size: "24"
   cni-exclusive: "true"
@@ -846,7 +846,7 @@ metadata:
 ---
 apiVersion: v1
 data:
-  config.yaml: "cluster-name: default\npeer-service: \"hubble-peer.kube-system.svc.cluster.local:443\"\nlisten-address: :4245\ngops: true\ngops-port: \"9893\"\ndial-timeout: \nretry-timeout: \nsort-buffer-len-max: \nsort-buffer-drain-timeout: \ntls-hubble-client-cert-file: /var/lib/hubble-relay/tls/client.crt\ntls-hubble-client-key-file: /var/lib/hubble-relay/tls/client.key\ntls-hubble-server-ca-files: /var/lib/hubble-relay/tls/hubble-server-ca.crt\ndisable-server-tls: true\n"
+  config.yaml: "cluster-name: coder-amanibhavam-school\npeer-service: \"hubble-peer.kube-system.svc.cluster.local:443\"\nlisten-address: :4245\ngops: true\ngops-port: \"9893\"\ndial-timeout: \nretry-timeout: \nsort-buffer-len-max: \nsort-buffer-drain-timeout: \ntls-hubble-client-cert-file: /var/lib/hubble-relay/tls/client.crt\ntls-hubble-client-key-file: /var/lib/hubble-relay/tls/client.key\ntls-hubble-server-ca-files: /var/lib/hubble-relay/tls/hubble-server-ca.crt\ndisable-server-tls: true\n"
 kind: ConfigMap
 metadata:
   name: hubble-relay-config
