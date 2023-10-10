@@ -94,7 +94,6 @@ bazel-ignore:
 za:
 	pass hello
 	$(MAKE) ci
-	bin/make-k3s init || true
 	cd coder/class && $(MAKE) image
 
 coder-login:

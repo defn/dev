@@ -57,7 +57,7 @@ iam:
 			--policy-arn arn:aws:iam::aws:policy/AdministratorAccess || true)
 
 up:
-	bin/make-k3s up
+	cd .. && bin/make-k3s up
 
 down:
-	bin/make-k3s down
+	cd .. && bin/make-k3s down
