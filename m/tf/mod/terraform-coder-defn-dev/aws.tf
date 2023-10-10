@@ -59,7 +59,7 @@ resource "aws_iam_role_policy_attachment" "secretsmanager" {
 
 resource "aws_iam_role_policy_attachment" "admin" {
   role       = aws_iam_role.dev.name
-  policy_arn = "arn:aws:iam::aws:policy/Administrator"
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
 
 resource "aws_iam_instance_profile" "dev" {
