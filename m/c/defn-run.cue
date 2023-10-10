@@ -11,3 +11,5 @@ infra_base: {
 	issuer:           "zerossl-production"
 	cloudflare_email: "cloudflare@defn.us"
 }
+
+discovery_url: string | *"https://\(infra_alt_name).tail3884f.ts.net"
