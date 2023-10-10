@@ -19,6 +19,9 @@ helmCharts:
         masquerade: true
       envoy:
         enabled: true
+      cluster:
+        name: coder-amanibhavam-school
+        id: 2
       hubble:
         ui:
           enabled: false

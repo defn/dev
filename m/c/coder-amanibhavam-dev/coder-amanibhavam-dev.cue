@@ -4,6 +4,10 @@ teacher_handle: "amanibhavam"
 teacher_env:    "dev"
 infra_name:     "k3d-dfd"
 infra_alt_name: "coder-\(teacher_handle)-\(teacher_env)"
+infra_cilium_name: "default"
+infra_cilium_id: 0
+infra_pod_cidr: "10.42.0.0/16"
+infra_service_cidr: "10.43.0.0/16"
 
 infra: {
 	"\(infra_name)": cluster_alt_name: infra_alt_name

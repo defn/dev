@@ -49,6 +49,10 @@ infra_name: string | *"coder-\(teacher_handle)-\(teacher_env)"
 
 infra_pod_cidr:     string
 infra_service_cidr: string
+infra_cilium_name: string | *infra_name
+infra_cilium_id: int
+infra_cilium_id: >= 0
+infra_cilium_id: <= 255
 
 infra_vclusters: []
 
