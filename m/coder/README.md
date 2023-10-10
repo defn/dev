@@ -1,4 +1,8 @@
 ```
+once:
+- create c/CLUSTER/ cue cnfig
+- create secrets for CLUSTER
+
 automate:
 update postgres coder secret
 
