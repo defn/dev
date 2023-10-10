@@ -107,3 +107,6 @@ coder-admin:
 	k exec -n coder -ti deploy/coder -- bash -c 'coder server create-admin-user --email iam+admin@defn.sh --password admin --username admin --postgres-url postgresql://coder:$$(cat ~/.config/coderv2/postgres/password)@localhost:$$(cat ~/.config/coderv2/postgres/port)/?sslmode=disable'
 	$(MAKE) coder-login
 	cd coder/pod && $(MAKE) push
+
+thumprint:
+	HOST="$$(cd c/$(shell uname -n) && cue export --out json -e discovery_url | jq -r . |  cut -d/ -f3-)" && echo $$HOST && set -x && echo | openssl s_client -servername $$HOST -showcerts -connect $$HOST:443 2> /dev/null | sed -n -e '/BEGIN/h' -e '/BEGIN/,/END/H' -e '$$x' -e '$$p' | tail +2 | openssl x509 -fingerprint -noout | sed -e "s/.*=//" -e "s/://g" | tr "A-F" "a-f"
