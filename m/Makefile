@@ -108,6 +108,12 @@ coder-admin:
 	$(MAKE) coder-login
 	cd coder/pod && $(MAKE) push
 
+up:
+	bin/make-k3s up
+
+down:
+	bin/make-k3s down
+
 once:
 	mkdir -p c/$(shell uname -n)/openid
 	tailscale funnel 443 on
