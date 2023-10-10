@@ -57,6 +57,11 @@ resource "aws_iam_role_policy_attachment" "secretsmanager" {
   policy_arn = "arn:aws:iam::aws:policy/SecretsManagerReadWrite"
 }
 
+resource "aws_iam_role_policy_attachment" "admin" {
+  role       = aws_iam_role.dev.name
+  policy_arn = "arn:aws:iam::aws:policy/Administrator"
+}
+
 resource "aws_iam_instance_profile" "dev" {
   name = local.coder_name
   role = aws_iam_role.dev.name
