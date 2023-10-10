@@ -28,7 +28,7 @@ cache: "docker.io/bitnami/postgresql:16.0.0-debian-11-r3": "docker.io/bitnami/po
 
 cache: "docker.io/bitnami/redis:7.2.1-debian-11-r0": "docker.io/bitnami/redis@sha256:fa288394f402388bf487028817bacfdd1569172e6498250141afed0e51fde33a"
 
-cache: "docker.io/envoyproxy/envoy:v1.24-latest": "docker.io/envoyproxy/envoy@sha256:4ca38be2e19f680f0b51c7ec27c57963c50a8a48ecd97ae33cab353d0af0b0d2"
+cache: "docker.io/envoyproxy/envoy:v1.24-latest": "docker.io/envoyproxy/envoy@sha256:079b133366a9909f0f48b396c538f235c7b214f84aa45f3d32404ff616022281"
 
 cache: "docker.io/traefik:v2.10.4": "docker.io/traefik@sha256:2392cd9aadfd514b0112186904e7a36fcb6a301fc1e637bab4ad2746877cde96"
 
