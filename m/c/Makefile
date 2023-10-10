@@ -56,6 +56,9 @@ iam:
 			--role-name $${OPENID_HOST}-cluster \
 			--policy-arn arn:aws:iam::aws:policy/AdministratorAccess || true)
 
+last:
+	tailscale up --advertise-routes=$$(kubectl get -n traefik svc traefik -o json | jq -r '.spec.clusterIP')/32 --accept-routes --ssh
+
 up:
 	cd .. && bin/make-k3s up
 
