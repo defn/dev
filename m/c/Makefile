@@ -28,3 +28,36 @@ release:
 	cd ./r/digest && $(MAKE) release
 	rm -rf ../k/r/y
 	git add ../k/r
+
+once:
+	mkdir -p ./$(shell uname -n)/openid
+	tailscale funnel 443 on
+	tailscale serve https /openid $(shell pwd)/$(shell uname -n)/openid
+	tailscale serve status
+	cd ./r/digest && $(MAKE) cache
+	$(MAKE) iam
+
+iam:
+	PAGER= HOST="$$(tailscale funnel status | grep ^#  | grep https:// | head -1 | cut -d/ -f3-)" \
+		&& set -x \
+		&& (echo \
+			| openssl s_client -servername $$HOST -showcerts -connect $$HOST:443 2> /dev/null \
+			| sed -n -e '/BEGIN/h' -e '/BEGIN/,/END/H' -e '$$x' -e '$$p' \
+			| tail +2 \
+			| openssl x509 -fingerprint -noout \
+			| sed -e "s/.*=//" -e "s/://g" \
+			| tr "A-F" "a-f") \
+		&& OPENID_HOST=$${HOST%%.*} \
+		&& (aws iam create-role \
+			--role-name $${OPENID_HOST}-cluster \
+			--assume-role-policy-document \
+			file://<(env ACCOUNT_ID=$(shell  aws sts get-caller-identity | jq -r '.Account') OPENID=$${HOST}/openid envsubst <trust-policy.json) || true) \
+		&& (aws iam attach-role-policy \
+			--role-name $${OPENID_HOST}-cluster \
+			--policy-arn arn:aws:iam::aws:policy/AdministratorAccess || true)
+
+up:
+	bin/make-k3s up
+
+down:
+	bin/make-k3s down
