@@ -993,6 +993,16 @@ cilium_common: {
 			}
 			clustermesh: {
 				useAPIServer: true
+				apiserver: {
+					tls: auto: {
+						method: "certmanager"
+						certManagerIssuerRef: {
+							group: "cert-manager.io"
+							kind: "ClusterIssuer"
+							name: "cilium-ca"
+						}
+					}
+				}
 			}
 			hubble: {
 				ui: enabled:    bool | *false
