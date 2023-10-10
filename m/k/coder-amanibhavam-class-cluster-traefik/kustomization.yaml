@@ -1,0 +1,35 @@
+#ManagedBy: cue
+
+patches:
+  - path: patch-ingressroute-traefik-dashboard.yaml
+  - path: patch-service-traefik.yaml
+resources:
+  - resource-namespace-traefik.yaml
+  - resource-tlsstore-traefik.yaml
+  - resource-serverstransport-insecure.yaml
+  - resource-ingressroute-http-to-https.yaml
+  - resource-middleware-http-to-https.yaml
+  - resource-ingress-traefik.yaml
+  - resource-certificate-class-amanibhavam-defn-run-wildcard-traefik.yaml
+namespace: traefik
+helmCharts:
+  - releaseName: traefik
+    name: traefik
+    version: 24.0.0
+    repo: https://traefik.github.io/charts
+    namespace: traefik
+    valuesInline:
+      logs:
+        general:
+          level: DEBUG
+        access:
+          enabled: true
+      providers:
+        kubernetesIngress:
+          publishedService:
+            enabled: true
+          allowExternalNameServices: true
+        kubernetesCRD:
+          allowExternalNameServices: true
+          allowCrossNamespace: true
+    includeCRDs: true

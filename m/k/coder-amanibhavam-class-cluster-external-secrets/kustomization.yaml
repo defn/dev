@@ -1,0 +1,20 @@
+#ManagedBy: cue
+
+patches:
+  - path: patch-serviceaccount-external-secrets.yaml
+resources:
+  - resource-namespace-external-secrets.yaml
+  - resource-cluster-role-binding-delegator.yaml
+namespace: external-secrets
+helmCharts:
+  - releaseName: external-secrets
+    name: external-secrets
+    version: 0.9.4
+    repo: https://charts.external-secrets.io
+    namespace: external-secrets
+    valuesInline:
+      webhook:
+        create: false
+      certController:
+        create: false
+    includeCRDs: true

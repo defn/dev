@@ -1,0 +1,17 @@
+#ManagedBy: cue
+
+patches: []
+resources:
+  - resource-namespace-headlamp.yaml
+  - resource-ingress-headlamp.yaml
+  - resource-serviceaccount-headlamp-admin.yaml
+  - resource-cluster-role-binding-headlamp-admin.yaml
+namespace: headlamp
+helmCharts:
+  - releaseName: headlamp
+    name: headlamp
+    version: 0.16.0
+    repo: https://headlamp-k8s.github.io/headlamp
+    namespace: headlamp
+    valuesInline: {}
+    includeCRDs: true
