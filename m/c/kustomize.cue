@@ -991,6 +991,9 @@ cilium_common: {
 				name: infra_cilium_name
 				id: infra_cilium_id
 			}
+			clustermesh: {
+				useAPIServer: true
+			}
 			hubble: {
 				ui: enabled:    bool | *false
 				relay: enabled: true
