@@ -1,11 +1,7 @@
 package c
 
-infra_name: "coder-amanibhavam-school"
-infra_vclusters: []
-infra_base: {
-	domain_name: "school.amanibhavam.defn.run"
-	domain_slug: "school-amanibhavam-defn-run"
-}
+teacher_handle: "amanibhavam"
+teacher_env: "school"
 
 infra: {
 	"\(infra_name)": bootstrap: {

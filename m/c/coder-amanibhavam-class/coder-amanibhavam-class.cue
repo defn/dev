@@ -1,11 +1,7 @@
 package c
 
-infra_name: "coder-amanibhavam-class"
-infra_vclusters: []
-infra_base: {
-	domain_name: "class.amanibhavam.defn.run"
-	domain_slug: "class-amanibhavam-defn-run"
-}
+teacher_handle: "amanibhavam"
+teacher_env: "class"
 
 infra: {
 	"\(infra_name)": bootstrap: {
@@ -41,8 +37,8 @@ infra: {
 		"traefik": [40, ""]
 
 		// applications
-		//"coder": [100, ""]
 		"headlamp": [100, ""]
 		"postgres-operator": [100, ""]
+		//"coder": [100, ""]
 	}
 }
