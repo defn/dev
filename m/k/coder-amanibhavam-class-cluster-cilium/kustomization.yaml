@@ -23,6 +23,8 @@ helmCharts:
       cluster:
         name: coder-amanibhavam-class
         id: 1
+      clustermesh:
+        useAPIServer: true
       hubble:
         ui:
           enabled: true

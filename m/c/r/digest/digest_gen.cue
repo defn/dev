@@ -80,6 +80,8 @@ cache: "quay.io/cilium/cilium-envoy:v1.25.9-f039e2bd380b7eef2f2feea5750676bb3613
 
 cache: "quay.io/cilium/cilium:v1.14.1@sha256:edc1d05ea1365c4a8f6ac6982247d5c145181704894bb698619c3827b6963a72": "quay.io/cilium/cilium@sha256:edc1d05ea1365c4a8f6ac6982247d5c145181704894bb698619c3827b6963a72"
 
+cache: "quay.io/cilium/clustermesh-apiserver:v1.14.1@sha256:a7353669b1f7cb96cd600d98c7dd12e909d876843a7a272a1bc407e114ed225c": "quay.io/cilium/clustermesh-apiserver@sha256:a7353669b1f7cb96cd600d98c7dd12e909d876843a7a272a1bc407e114ed225c"
+
 cache: "quay.io/cilium/hubble-relay:v1.14.1@sha256:db30e85a7abc10589ce2a97d61ee18696a03dc5ea04d44b4d836d88bd75b59d8": "quay.io/cilium/hubble-relay@sha256:db30e85a7abc10589ce2a97d61ee18696a03dc5ea04d44b4d836d88bd75b59d8"
 
 cache: "quay.io/cilium/hubble-ui-backend:v0.12.0@sha256:8a79a1aad4fc9c2aa2b3e4379af0af872a89fcec9d99e117188190671c66fc2e": "quay.io/cilium/hubble-ui-backend@sha256:8a79a1aad4fc9c2aa2b3e4379af0af872a89fcec9d99e117188190671c66fc2e"
@@ -87,6 +89,8 @@ cache: "quay.io/cilium/hubble-ui-backend:v0.12.0@sha256:8a79a1aad4fc9c2aa2b3e437
 cache: "quay.io/cilium/hubble-ui:v0.12.0@sha256:1c876cfa1d5e35bc91e1025c9314f922041592a88b03313c22c1f97a5d2ba88f": "quay.io/cilium/hubble-ui@sha256:1c876cfa1d5e35bc91e1025c9314f922041592a88b03313c22c1f97a5d2ba88f"
 
 cache: "quay.io/cilium/operator-generic:v1.14.1@sha256:e061de0a930534c7e3f8feda8330976367971238ccafff42659f104effd4b5f7": "quay.io/cilium/operator-generic@sha256:e061de0a930534c7e3f8feda8330976367971238ccafff42659f104effd4b5f7"
+
+cache: "quay.io/coreos/etcd:v3.5.4@sha256:795d8660c48c439a7c3764c2330ed9222ab5db5bb524d8d0607cac76f7ba82a3": "quay.io/coreos/etcd@sha256:795d8660c48c439a7c3764c2330ed9222ab5db5bb524d8d0607cac76f7ba82a3"
 
 cache: "quay.io/jetstack/cert-manager-cainjector:v1.13.1": "quay.io/jetstack/cert-manager-cainjector@sha256:72072d492b43d7fd4f818bdc1d7e617c3ccbfe27c46c57a29eb6991d13ede572"
 
