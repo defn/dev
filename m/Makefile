@@ -136,7 +136,7 @@ iam:
 		&& (aws iam create-role \
 			--role-name $${OPENID_HOST}-cluster \
 			--assume-role-policy-document \
-			file://<(env ACCOUNT_ID=$(shell  aws sts get-caller-identity | jq -r '.Account') OPENID=$${OPENID_HOST}/openid envsubst <trust-policy.json) || true) \
+			file://<(env ACCOUNT_ID=$(shell  aws sts get-caller-identity | jq -r '.Account') OPENID=$${HOST}/openid envsubst <trust-policy.json) || true) \
 		&& (aws iam attach-role-policy \
-			--role-name $${OPENID_HOST} \
+			--role-name $${OPENID_HOST}-cluster \
 			--policy-arn arn:aws:iam::aws:policy/AdministratorAccess || true)
