@@ -108,5 +108,13 @@ coder-admin:
 	$(MAKE) coder-login
 	cd coder/pod && $(MAKE) push
 
-thumprint:
-	HOST="$$(cd c/$(shell uname -n) && cue export --out json -e discovery_url | jq -r . |  cut -d/ -f3-)" && echo $$HOST && set -x && echo | openssl s_client -servername $$HOST -showcerts -connect $$HOST:443 2> /dev/null | sed -n -e '/BEGIN/h' -e '/BEGIN/,/END/H' -e '$$x' -e '$$p' | tail +2 | openssl x509 -fingerprint -noout | sed -e "s/.*=//" -e "s/://g" | tr "A-F" "a-f"
+once:
+	mkdir -p c/$(shell uname -n)/openid
+	tailscale funnel 443 on
+	tailscale serve https /openid $(shell pwd)/c/$(shell uname -n)/openid
+	tailscale serve status
+	cd c/r/digest && $(MAKE) cache
+	$(MAKE) thumbprint
+
+thumbprint:
+	HOST="$$(tailscale funnel status | grep ^#  | grep https:// | head -1 | cut -d/ -f3-)" && echo $$HOST && set -x && echo | openssl s_client -servername $$HOST -showcerts -connect $$HOST:443 2> /dev/null | sed -n -e '/BEGIN/h' -e '/BEGIN/,/END/H' -e '$$x' -e '$$p' | tail +2 | openssl x509 -fingerprint -noout | sed -e "s/.*=//" -e "s/://g" | tr "A-F" "a-f"

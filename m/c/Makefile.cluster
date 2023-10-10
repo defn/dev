@@ -23,10 +23,6 @@ build:
 	../make_add_generated.sh
 
 secrets:
-	mkdir -p openid
-	tailscale serve https /openid $(shell pwd)/openid
-	tailscale funnel 443 on
-	tailscale serve status
 	$(MAKE) clean
 	$(MAKE) irsa
 	$(MAKE) k3s-secrets
