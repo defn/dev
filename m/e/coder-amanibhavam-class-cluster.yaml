@@ -1,0 +1,19 @@
+# ManagedBy: cue
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: argocd
+  name: coder-amanibhavam-class-cluster
+spec:
+  project: default
+  destination:
+    name: coder-amanibhavam-class-cluster
+  source:
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+    path: m/k/r/coder-amanibhavam-class-cluster-env
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
