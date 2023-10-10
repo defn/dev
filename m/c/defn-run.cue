@@ -47,6 +47,9 @@ infra_k3s_version: "rancher/k3s:v1.27.5-k3s1"
 
 infra_name: string | *"coder-\(teacher_handle)-\(teacher_env)"
 
+infra_pod_cidr:     string
+infra_service_cidr: string
+
 infra_vclusters: []
 
 infra_base: {
