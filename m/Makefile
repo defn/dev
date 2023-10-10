@@ -114,7 +114,23 @@ once:
 	tailscale serve https /openid $(shell pwd)/c/$(shell uname -n)/openid
 	tailscale serve status
 	cd c/r/digest && $(MAKE) cache
-	$(MAKE) thumbprint
+	$(MAKE) iam
 
-thumbprint:
-	HOST="$$(tailscale funnel status | grep ^#  | grep https:// | head -1 | cut -d/ -f3-)" && echo $$HOST && set -x && echo | openssl s_client -servername $$HOST -showcerts -connect $$HOST:443 2> /dev/null | sed -n -e '/BEGIN/h' -e '/BEGIN/,/END/H' -e '$$x' -e '$$p' | tail +2 | openssl x509 -fingerprint -noout | sed -e "s/.*=//" -e "s/://g" | tr "A-F" "a-f"
+iam:
+	PAGER= HOST="$$(tailscale funnel status | grep ^#  | grep https:// | head -1 | cut -d/ -f3-)" \
+		&& set -x \
+		&& (echo \
+			| openssl s_client -servername $$HOST -showcerts -connect $$HOST:443 2> /dev/null \
+			| sed -n -e '/BEGIN/h' -e '/BEGIN/,/END/H' -e '$$x' -e '$$p' \
+			| tail +2 \
+			| openssl x509 -fingerprint -noout \
+			| sed -e "s/.*=//" -e "s/://g" \
+			| tr "A-F" "a-f") \
+		&& OPENID_HOST=$${HOST%%.*} \
+		&& (aws iam create-role \
+			--role-name $${OPENID_HOST}-cluster \
+			--assume-role-policy-document \
+			file://<(env ACCOUNT_ID=$(shell  aws sts get-caller-identity | jq -r '.Account') OPENID=$${OPENID_HOST}/openid envsubst <trust-policy.json) || true) \
+		&& (aws iam attach-role-policy \
+			--role-name $${OPENID_HOST} \
+			--policy-arn arn:aws:iam::aws:policy/AdministratorAccess || true)

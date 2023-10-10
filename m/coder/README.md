@@ -1,10 +1,4 @@
 ```
-one time:
-
-clean up funnel hostname
-add oidc identity provider as part of make secrets when funnel is opened
-create CLUSTER-cluster iam role
-
 automate:
 update postgres coder secret
 
