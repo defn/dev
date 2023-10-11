@@ -7,7 +7,7 @@ namespace: kube-system
 helmCharts:
   - releaseName: cilium
     name: cilium
-    version: 1.14.1
+    version: 1.14.2
     repo: https://helm.cilium.io
     namespace: kube-system
     valuesInline:

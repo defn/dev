@@ -29,13 +29,19 @@ release:
 	rm -rf ../k/r/y
 	git add ../k/r
 
+cache:
+	cd ./r/digest && $(MAKE) cache
+
 once:
+	$(MAKE) cache
+	$(MAKE) tailscale
+	$(MAKE) iam
+
+tailscale:
 	mkdir -p ./$(shell uname -n)/openid
 	tailscale funnel 443 on
 	tailscale serve https /openid $(shell pwd)/$(shell uname -n)/openid
 	tailscale serve status
-	cd ./r/digest && $(MAKE) cache
-	$(MAKE) iam
 
 iam:
 	PAGER= HOST="$$(tailscale funnel status | grep ^#  | grep https:// | head -1 | cut -d/ -f3-)" \
