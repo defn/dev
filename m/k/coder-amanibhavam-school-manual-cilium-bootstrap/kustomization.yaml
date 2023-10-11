@@ -3,6 +3,11 @@
 patches: []
 resources: []
 namespace: kube-system
+commonLabels:
+  app.kubernetes.io/managed-by: Helm
+commonAnnotations:
+  meta.helm.sh/release-name: cilium
+  meta.helm.sh/release-namespace: kube-system
 helmCharts:
   - releaseName: cilium
     name: cilium

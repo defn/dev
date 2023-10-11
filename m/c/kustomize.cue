@@ -975,10 +975,19 @@ kustomize: "trust-manager": #KustomizeHelm & {
 cilium_common: {
 	namespace: "kube-system"
 
+	commonLabels: {
+		"app.kubernetes.io/managed-by": "Helm"
+	}
+
+	commonAnnotations: {
+		"meta.helm.sh/release-name": "cilium"
+		"meta.helm.sh/release-namespace": namespace
+	}
+
 	helm: {
 		release:   "cilium"
 		name:      "cilium"
-		namespace: "kube-system"
+		"namespace": namespace
 		version:   "1.14.2"
 		repo:      "https://helm.cilium.io"
 		values: {
