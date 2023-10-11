@@ -5,6 +5,8 @@ resources:
   - resource-namespace-external-dns.yaml
   - resource-externalsecret-external-dns.yaml
 namespace: external-dns
+commonLabels: {}
+commonAnnotations: {}
 helmCharts:
   - releaseName: external-dns
     name: external-dns

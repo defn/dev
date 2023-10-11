@@ -4,6 +4,8 @@ patches: []
 resources:
   - resource-namespace.yaml
 namespace: postgres-operator
+commonLabels: {}
+commonAnnotations: {}
 helmCharts:
   - releaseName: postgres-operator
     name: postgres-operator

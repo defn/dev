@@ -13,3 +13,5 @@ resources:
   - resource-provisioner-default.yaml
   - resource-awsnodetemplate-default.yaml
 namespace: karpenter
+commonLabels: {}
+commonAnnotations: {}
