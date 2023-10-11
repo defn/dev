@@ -80,7 +80,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/tailscale/k8s-operator@sha256:b7b14505604bf5d910f35f057ad63c74644ce6eb74ecab36e6270b22541e8667
+        - image: 169.254.32.1:5000/tailscale/k8s-operator@sha256:c05702fadae0be24b44535a2fd8ec4bc6f449f78ce2973ef63e0bd4f36eff841
           env:
             - name: OPERATOR_HOSTNAME
               value: tailscale-operator
