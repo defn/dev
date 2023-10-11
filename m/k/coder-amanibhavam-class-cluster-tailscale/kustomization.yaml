@@ -18,3 +18,5 @@ resources:
   - resource-clusterrole-tailscale-auth-proxy.yaml
   - resource-clusterrolebinding-tailscale-auth-proxy.yaml
   - resource-clusterrolebinding-tailscale-admins.yaml
+commonLabels: {}
+commonAnnotations: {}
