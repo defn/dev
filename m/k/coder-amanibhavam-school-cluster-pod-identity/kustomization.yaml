@@ -3,6 +3,8 @@
 patches: []
 resources: []
 namespace: kube-system
+commonLabels: {}
+commonAnnotations: {}
 helmCharts:
   - releaseName: pod-identity
     name: amazon-eks-pod-identity-webhook

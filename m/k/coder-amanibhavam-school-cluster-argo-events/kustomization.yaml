@@ -4,6 +4,8 @@ patches: []
 resources:
   - resource-namespace-argo-events.yaml
 namespace: argo-events
+commonLabels: {}
+commonAnnotations: {}
 helmCharts:
   - releaseName: argo-events
     name: argo-events

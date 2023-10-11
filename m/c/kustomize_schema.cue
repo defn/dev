@@ -56,6 +56,9 @@ kustomize: [NAME=string]: _name: NAME
 	resource: {...} | *{}
 	resource: [string]: #Resource
 
+	commonLabels: [string]: string
+	commonAnnotations: [string]: string
+
 	cluster: #Cluster
 
 	out: {
@@ -86,6 +89,14 @@ kustomize: [NAME=string]: _name: NAME
 		]
 
 		helmCharts?: [...{...}]
+
+		if commonLabels != _|_ {
+			"commonLabels": commonLabels
+		}
+
+		if commonAnnotations != _|_ {
+			"commonAnnotations": commonAnnotations
+		}
 	}
 }
 

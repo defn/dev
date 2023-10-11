@@ -12,6 +12,8 @@ resources:
   - resource-ingress-traefik.yaml
   - resource-certificate-school-amanibhavam-defn-run-wildcard-traefik.yaml
 namespace: traefik
+commonLabels: {}
+commonAnnotations: {}
 helmCharts:
   - releaseName: traefik
     name: traefik
