@@ -84,8 +84,6 @@ cache: "quay.io/cilium/cilium:v1.14.1@sha256:edc1d05ea1365c4a8f6ac6982247d5c1451
 
 cache: "quay.io/cilium/cilium:v1.14.2@sha256:6263f3a3d5d63b267b538298dbeb5ae87da3efacf09a2c620446c873ba807d35": "quay.io/cilium/cilium@sha256:6263f3a3d5d63b267b538298dbeb5ae87da3efacf09a2c620446c873ba807d35"
 
-cache: "quay.io/cilium/clustermesh-apiserver:v1.14.1@sha256:a7353669b1f7cb96cd600d98c7dd12e909d876843a7a272a1bc407e114ed225c": "quay.io/cilium/clustermesh-apiserver@sha256:a7353669b1f7cb96cd600d98c7dd12e909d876843a7a272a1bc407e114ed225c"
-
 cache: "quay.io/cilium/clustermesh-apiserver:v1.14.2@sha256:0650beac6633a483261640b6539c9609f5a761f4ab4504fd1e6ffe7f2bb82e9a": "quay.io/cilium/clustermesh-apiserver@sha256:0650beac6633a483261640b6539c9609f5a761f4ab4504fd1e6ffe7f2bb82e9a"
 
 cache: "quay.io/cilium/hubble-relay:v1.14.1@sha256:db30e85a7abc10589ce2a97d61ee18696a03dc5ea04d44b4d836d88bd75b59d8": "quay.io/cilium/hubble-relay@sha256:db30e85a7abc10589ce2a97d61ee18696a03dc5ea04d44b4d836d88bd75b59d8"
