@@ -1,6 +1,6 @@
 {
   "slug": "pkg-helm",
   "ghrepo": "helm/helm",
-  "vendor": "3.12.3",
-  "revision": "4"
+  "vendor": "3.13.1",
+  "revision": "0"
 }
