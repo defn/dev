@@ -1,6 +1,8 @@
 #ManagedBy: cue
 
 patches: []
+commonLabels: {}
+commonAnnotations: {}
 resources: []
 helmCharts:
   - releaseName: bootstrap

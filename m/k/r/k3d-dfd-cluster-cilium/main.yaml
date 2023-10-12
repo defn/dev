@@ -296,6 +296,73 @@ metadata:
 ---
 rules:
   - apiGroups:
+      - cilium.io
+    resources:
+      - ciliumnodes
+      - ciliumendpoints
+      - ciliumidentities
+    verbs:
+      - create
+  - apiGroups:
+      - cilium.io
+    resources:
+      - ciliumexternalworkloads/status
+      - ciliumnodes
+      - ciliumidentities
+    verbs:
+      - update
+  - apiGroups:
+      - cilium.io
+    resources:
+      - ciliumendpoints
+      - ciliumendpoints/status
+    verbs:
+      - patch
+  - apiGroups:
+      - cilium.io
+    resources:
+      - ciliumidentities
+      - ciliumexternalworkloads
+      - ciliumendpoints
+      - ciliumnodes
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - apiextensions.k8s.io
+    resources:
+      - customresourcedefinitions
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - endpoints
+      - namespaces
+      - services
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - discovery.k8s.io
+    resources:
+      - endpointslices
+    verbs:
+      - get
+      - list
+      - watch
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/part-of: cilium
+  name: clustermesh-apiserver
+---
+rules:
+  - apiGroups:
       - networking.k8s.io
     resources:
       - networkpolicies
@@ -374,6 +441,21 @@ kind: ClusterRoleBinding
 metadata:
   labels:
     app.kubernetes.io/part-of: cilium
+  name: clustermesh-apiserver
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: clustermesh-apiserver
+subjects:
+  - kind: ServiceAccount
+    name: clustermesh-apiserver
+    namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/part-of: cilium
   name: hubble-ui
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -383,6 +465,57 @@ subjects:
   - kind: ServiceAccount
     name: hubble-ui
     namespace: kube-system
+---
+spec:
+  commonName: admin-default
+  dnsNames:
+    - localhost
+  duration: 26280h0m0s
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: cilium-ca
+  secretName: clustermesh-apiserver-admin-cert
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: clustermesh-apiserver-admin-cert
+  namespace: kube-system
+---
+spec:
+  commonName: remote
+  duration: 26280h0m0s
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: cilium-ca
+  secretName: clustermesh-apiserver-remote-cert
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: clustermesh-apiserver-remote-cert
+  namespace: kube-system
+---
+spec:
+  commonName: clustermesh-apiserver.cilium.io
+  dnsNames:
+    - clustermesh-apiserver.cilium.io
+    - '*.mesh.cilium.io'
+    - clustermesh-apiserver.kube-system.svc
+  duration: 26280h0m0s
+  ipAddresses:
+    - 127.0.0.1
+    - "::1"
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: cilium-ca
+  secretName: clustermesh-apiserver-server-cert
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: clustermesh-apiserver-server-cert
+  namespace: kube-system
 ---
 spec:
   commonName: '*.hubble-relay.cilium.io'
@@ -864,7 +997,7 @@ spec:
   template:
     spec:
       initContainers:
-        - image: 169.254.32.1:5000/quay.io/cilium/cilium@sha256:edc1d05ea1365c4a8f6ac6982247d5c145181704894bb698619c3827b6963a72
+        - image: 169.254.32.1:5000/quay.io/cilium/cilium@sha256:6263f3a3d5d63b267b538298dbeb5ae87da3efacf09a2c620446c873ba807d35
           command:
             - cilium
             - build-config
@@ -885,7 +1018,7 @@ spec:
           volumeMounts:
             - mountPath: /tmp
               name: tmp
-        - image: 169.254.32.1:5000/quay.io/cilium/cilium@sha256:edc1d05ea1365c4a8f6ac6982247d5c145181704894bb698619c3827b6963a72
+        - image: 169.254.32.1:5000/quay.io/cilium/cilium@sha256:6263f3a3d5d63b267b538298dbeb5ae87da3efacf09a2c620446c873ba807d35
           command:
             - sh
             - -ec
@@ -917,7 +1050,7 @@ spec:
               name: hostproc
             - mountPath: /hostbin
               name: cni-path
-        - image: 169.254.32.1:5000/quay.io/cilium/cilium@sha256:edc1d05ea1365c4a8f6ac6982247d5c145181704894bb698619c3827b6963a72
+        - image: 169.254.32.1:5000/quay.io/cilium/cilium@sha256:6263f3a3d5d63b267b538298dbeb5ae87da3efacf09a2c620446c873ba807d35
           command:
             - sh
             - -ec
@@ -947,7 +1080,7 @@ spec:
               name: hostproc
             - mountPath: /hostbin
               name: cni-path
-        - image: 169.254.32.1:5000/quay.io/cilium/cilium@sha256:edc1d05ea1365c4a8f6ac6982247d5c145181704894bb698619c3827b6963a72
+        - image: 169.254.32.1:5000/quay.io/cilium/cilium@sha256:6263f3a3d5d63b267b538298dbeb5ae87da3efacf09a2c620446c873ba807d35
           args:
             - mount | grep "/sys/fs/bpf type bpf" || mount -t bpf bpf /sys/fs/bpf
           command:
@@ -963,7 +1096,7 @@ spec:
             - mountPath: /sys/fs/bpf
               mountPropagation: Bidirectional
               name: bpf-maps
-        - image: 169.254.32.1:5000/quay.io/cilium/cilium@sha256:edc1d05ea1365c4a8f6ac6982247d5c145181704894bb698619c3827b6963a72
+        - image: 169.254.32.1:5000/quay.io/cilium/cilium@sha256:6263f3a3d5d63b267b538298dbeb5ae87da3efacf09a2c620446c873ba807d35
           command:
             - /init-container.sh
           env:
@@ -1006,7 +1139,7 @@ spec:
               name: cilium-cgroup
             - mountPath: /var/run/cilium
               name: cilium-run
-        - image: 169.254.32.1:5000/quay.io/cilium/cilium@sha256:edc1d05ea1365c4a8f6ac6982247d5c145181704894bb698619c3827b6963a72
+        - image: 169.254.32.1:5000/quay.io/cilium/cilium@sha256:6263f3a3d5d63b267b538298dbeb5ae87da3efacf09a2c620446c873ba807d35
           command:
             - /install-plugin.sh
           imagePullPolicy: IfNotPresent
@@ -1027,7 +1160,7 @@ spec:
             - mountPath: /host/opt/cni/bin
               name: cni-path
       containers:
-        - image: 169.254.32.1:5000/quay.io/cilium/cilium@sha256:edc1d05ea1365c4a8f6ac6982247d5c145181704894bb698619c3827b6963a72
+        - image: 169.254.32.1:5000/quay.io/cilium/cilium@sha256:6263f3a3d5d63b267b538298dbeb5ae87da3efacf09a2c620446c873ba807d35
           args:
             - --config-dir=/tmp/cilium/config-map
           command:
@@ -1265,7 +1398,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/quay.io/cilium/cilium-envoy@sha256:023d09eeb8a44ae99b489f4af7ffed8b8b54f19a532e0bc6ab4c1e4b31acaab1
+        - image: 169.254.32.1:5000/quay.io/cilium/cilium-envoy@sha256:52541e1726041b050c5d475b3c527ca4b8da487a0bbb0309f72247e8127af0ec
           args:
             - -c /var/run/cilium/envoy/bootstrap-config.json
             - --base-id 0
@@ -1407,7 +1540,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/quay.io/cilium/operator-generic@sha256:e061de0a930534c7e3f8feda8330976367971238ccafff42659f104effd4b5f7
+        - image: 169.254.32.1:5000/quay.io/cilium/operator-generic@sha256:52f70250dea22e506959439a7c4ea31b10fe8375db62f5c27ab746e3a2af866d
           args:
             - --config-dir=/tmp/cilium/config-map
             - --debug=$(CILIUM_DEBUG)
@@ -1507,8 +1640,199 @@ metadata:
 spec:
   template:
     spec:
+      initContainers:
+        - image: 169.254.32.1:5000/quay.io/coreos/etcd@sha256:795d8660c48c439a7c3764c2330ed9222ab5db5bb524d8d0607cac76f7ba82a3
+          args:
+            - |
+              rm -rf /var/run/etcd/*;
+              /usr/local/bin/etcd --data-dir=/var/run/etcd --name=clustermesh-apiserver --listen-client-urls=http://127.0.0.1:2379 --advertise-client-urls=http://127.0.0.1:2379 --initial-cluster-token=clustermesh-apiserver --initial-cluster-state=new --auto-compaction-retention=1 &
+
+              # The following key needs to be created before that the cilium agents
+              # have the possibility of connecting to etcd.
+              etcdctl put cilium/.has-cluster-config true
+
+              etcdctl user add root --no-password;
+              etcdctl user grant-role root root;
+              etcdctl user add admin-default --no-password;
+              etcdctl user grant-role admin-default root;
+              etcdctl user add externalworkload --no-password;
+              etcdctl role add externalworkload;
+              etcdctl role grant-permission externalworkload --from-key read '';
+              etcdctl role grant-permission externalworkload readwrite --prefix cilium/state/noderegister/v1/;
+              etcdctl role grant-permission externalworkload readwrite --prefix cilium/.initlock/;
+              etcdctl user grant-role externalworkload externalworkload;
+              etcdctl user add remote --no-password;
+              etcdctl role add remote;
+              etcdctl role grant-permission remote --from-key read '';
+              etcdctl user grant-role remote remote;
+              etcdctl auth enable;
+              exit
+          command:
+            - /bin/sh
+            - -c
+          env:
+            - name: ETCDCTL_API
+              value: "3"
+            - name: HOSTNAME_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          imagePullPolicy: IfNotPresent
+          name: etcd-init
+          terminationMessagePolicy: FallbackToLogsOnError
+          volumeMounts:
+            - mountPath: /var/run/etcd
+              name: etcd-data-dir
       containers:
-        - image: 169.254.32.1:5000/quay.io/cilium/hubble-relay@sha256:db30e85a7abc10589ce2a97d61ee18696a03dc5ea04d44b4d836d88bd75b59d8
+        - image: 169.254.32.1:5000/quay.io/coreos/etcd@sha256:795d8660c48c439a7c3764c2330ed9222ab5db5bb524d8d0607cac76f7ba82a3
+          args:
+            - --data-dir=/var/run/etcd
+            - --name=clustermesh-apiserver
+            - --client-cert-auth
+            - --trusted-ca-file=/var/lib/etcd-secrets/ca.crt
+            - --cert-file=/var/lib/etcd-secrets/tls.crt
+            - --key-file=/var/lib/etcd-secrets/tls.key
+            - --listen-client-urls=https://127.0.0.1:2379,https://[$(HOSTNAME_IP)]:2379
+            - --advertise-client-urls=https://[$(HOSTNAME_IP)]:2379
+            - --initial-cluster-token=clustermesh-apiserver
+            - --auto-compaction-retention=1
+          command:
+            - /usr/local/bin/etcd
+          env:
+            - name: ETCDCTL_API
+              value: "3"
+            - name: HOSTNAME_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          imagePullPolicy: IfNotPresent
+          name: etcd
+          ports:
+            - containerPort: 2379
+              name: etcd
+              protocol: TCP
+          terminationMessagePolicy: FallbackToLogsOnError
+          volumeMounts:
+            - mountPath: /var/lib/etcd-secrets
+              name: etcd-server-secrets
+              readOnly: true
+            - mountPath: /var/run/etcd
+              name: etcd-data-dir
+        - image: 169.254.32.1:5000/quay.io/cilium/clustermesh-apiserver@sha256:0650beac6633a483261640b6539c9609f5a761f4ab4504fd1e6ffe7f2bb82e9a
+          args:
+            - --cluster-name=$(CLUSTER_NAME)
+            - --cluster-id=$(CLUSTER_ID)
+            - --kvstore-opt
+            - etcd.config=/var/lib/cilium/etcd-config.yaml
+            - --enable-external-workloads=false
+            - --prometheus-serve-addr=:9962
+          command:
+            - /usr/bin/clustermesh-apiserver
+          env:
+            - name: CLUSTER_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: cluster-name
+                  name: cilium-config
+            - name: CLUSTER_ID
+              valueFrom:
+                configMapKeyRef:
+                  key: cluster-id
+                  name: cilium-config
+                  optional: true
+            - name: IDENTITY_ALLOCATION_MODE
+              valueFrom:
+                configMapKeyRef:
+                  key: identity-allocation-mode
+                  name: cilium-config
+            - name: ENABLE_K8S_ENDPOINT_SLICE
+              valueFrom:
+                configMapKeyRef:
+                  key: enable-k8s-endpoint-slice
+                  name: cilium-config
+                  optional: true
+          imagePullPolicy: IfNotPresent
+          name: apiserver
+          ports:
+            - containerPort: 9962
+              name: apiserv-metrics
+              protocol: TCP
+          terminationMessagePolicy: FallbackToLogsOnError
+          volumeMounts:
+            - mountPath: /var/lib/cilium/etcd-secrets
+              name: etcd-admin-client
+              readOnly: true
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  k8s-app: clustermesh-apiserver
+              topologyKey: kubernetes.io/hostname
+      automountServiceAccountToken: true
+      nodeSelector:
+        kubernetes.io/os: linux
+      priorityClassName: system-cluster-critical
+      restartPolicy: Always
+      serviceAccount: clustermesh-apiserver
+      serviceAccountName: clustermesh-apiserver
+      volumes:
+        - name: etcd-server-secrets
+          projected:
+            defaultMode: 256
+            sources:
+              - secret:
+                  items:
+                    - key: tls.crt
+                      path: tls.crt
+                    - key: tls.key
+                      path: tls.key
+                    - key: ca.crt
+                      path: ca.crt
+                  name: clustermesh-apiserver-server-cert
+        - name: etcd-admin-client
+          projected:
+            defaultMode: 256
+            sources:
+              - secret:
+                  items:
+                    - key: tls.crt
+                      path: tls.crt
+                    - key: tls.key
+                      path: tls.key
+                    - key: ca.crt
+                      path: ca.crt
+                  name: clustermesh-apiserver-admin-cert
+        - emptyDir: {}
+          name: etcd-data-dir
+    metadata:
+      labels:
+        app.kubernetes.io/name: clustermesh-apiserver
+        app.kubernetes.io/part-of: cilium
+        k8s-app: clustermesh-apiserver
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: clustermesh-apiserver
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: clustermesh-apiserver
+    app.kubernetes.io/part-of: cilium
+    k8s-app: clustermesh-apiserver
+  name: clustermesh-apiserver
+  namespace: kube-system
+---
+spec:
+  template:
+    spec:
+      containers:
+        - image: 169.254.32.1:5000/quay.io/cilium/hubble-relay@sha256:a89030b31f333e8fb1c10d2473250399a1a537c27d022cd8becc1a65d1bef1d6
           args:
             - serve
           command:
@@ -1742,6 +2066,48 @@ metadata:
   namespace: kube-system
 ---
 spec:
+  ports:
+    - nodePort: 32379
+      port: 2379
+  selector:
+    k8s-app: clustermesh-apiserver
+  type: NodePort
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: clustermesh-apiserver
+    app.kubernetes.io/part-of: cilium
+    k8s-app: clustermesh-apiserver
+  name: clustermesh-apiserver
+  namespace: kube-system
+---
+spec:
+  clusterIP: None
+  ports:
+    - name: apiserv-metrics
+      port: 9962
+      protocol: TCP
+      targetPort: apiserv-metrics
+    - name: kvmesh-metrics
+      port: 9964
+      protocol: TCP
+      targetPort: kvmesh-metrics
+  selector:
+    k8s-app: clustermesh-apiserver
+  type: ClusterIP
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/component: metrics
+    app.kubernetes.io/name: clustermesh-apiserver
+    app.kubernetes.io/part-of: cilium
+    k8s-app: clustermesh-apiserver
+  name: clustermesh-apiserver-metrics
+  namespace: kube-system
+---
+spec:
   internalTrafficPolicy: Local
   ports:
     - name: peer-service
@@ -1812,6 +2178,12 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: cilium-operator
+  namespace: kube-system
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: clustermesh-apiserver
   namespace: kube-system
 ---
 apiVersion: v1

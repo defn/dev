@@ -7,6 +7,8 @@ resources:
   - resource-serviceaccount-headlamp-admin.yaml
   - resource-cluster-role-binding-headlamp-admin.yaml
 namespace: headlamp
+commonLabels: {}
+commonAnnotations: {}
 helmCharts:
   - releaseName: headlamp
     name: headlamp

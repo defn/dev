@@ -4,3 +4,5 @@ patches: []
 resources:
   - https://raw.githubusercontent.com/GalleyBytes/terraform-operator/master/deploy/bundles/v0.13.3/v0.13.3.yaml
 namespace: tf-system
+commonLabels: {}
+commonAnnotations: {}

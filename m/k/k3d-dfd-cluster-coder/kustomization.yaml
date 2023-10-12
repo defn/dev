@@ -9,10 +9,12 @@ resources:
   - resource-externalsecret-coder.yaml
   - resource-cluster-role-binding-admin.yaml
 namespace: coder
+commonLabels: {}
+commonAnnotations: {}
 helmCharts:
   - releaseName: coder
     name: coder
-    version: 2.2.1
+    version: 2.3.0
     repo: https://helm.coder.com/v2
     namespace: coder
     valuesInline:
@@ -38,6 +40,8 @@ helmCharts:
             value: "false"
           - name: CODER_STRICT_TRANSPORT_SECURITY
             value: "60"
+          - name: CODER_EXPERIMENTS
+            value: dashboard_theme
           - name: CODER_SCALETEST_JOB_TIMEOUT
             value: 10m
           - name: CODER_ENABLE_TERRAFORM_DEBUG_MODE

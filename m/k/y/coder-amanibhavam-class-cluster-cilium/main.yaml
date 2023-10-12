@@ -1,77 +1,43 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
-  labels:
-    app.kubernetes.io/managed-by: Helm
   name: cilium
   namespace: kube-system
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
-  labels:
-    app.kubernetes.io/managed-by: Helm
   name: cilium-envoy
   namespace: kube-system
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
-  labels:
-    app.kubernetes.io/managed-by: Helm
   name: cilium-operator
   namespace: kube-system
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
-  labels:
-    app.kubernetes.io/managed-by: Helm
   name: clustermesh-apiserver
   namespace: kube-system
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
-  labels:
-    app.kubernetes.io/managed-by: Helm
   name: hubble-relay
   namespace: kube-system
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
-  labels:
-    app.kubernetes.io/managed-by: Helm
   name: hubble-ui
   namespace: kube-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
   labels:
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: cilium
   name: cilium-config-agent
   namespace: kube-system
@@ -88,11 +54,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
   labels:
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: cilium
   name: cilium
 rules:
@@ -197,11 +159,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
   labels:
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: cilium
   name: cilium-operator
 rules:
@@ -392,11 +350,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
   labels:
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: cilium
   name: clustermesh-apiserver
 rules:
@@ -463,11 +417,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
   labels:
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: cilium
   name: hubble-ui
 rules:
@@ -512,11 +462,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
   labels:
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: cilium
   name: cilium-config-agent
   namespace: kube-system
@@ -532,11 +478,7 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
   labels:
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: cilium
   name: cilium
 roleRef:
@@ -551,11 +493,7 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
   labels:
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: cilium
   name: cilium-operator
 roleRef:
@@ -570,11 +508,7 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
   labels:
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: cilium
   name: clustermesh-apiserver
 roleRef:
@@ -589,11 +523,7 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
   labels:
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: cilium
   name: hubble-ui
 roleRef:
@@ -713,11 +643,6 @@ data:
   write-cni-conf-when-ready: /host/etc/cni/net.d/05-cilium.conflist
 kind: ConfigMap
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
-  labels:
-    app.kubernetes.io/managed-by: Helm
   name: cilium-config
   namespace: kube-system
 ---
@@ -1035,11 +960,6 @@ data:
     }
 kind: ConfigMap
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
-  labels:
-    app.kubernetes.io/managed-by: Helm
   name: cilium-envoy-config
   namespace: kube-system
 ---
@@ -1052,11 +972,6 @@ data:
     true\n"
 kind: ConfigMap
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
-  labels:
-    app.kubernetes.io/managed-by: Helm
   name: hubble-relay-config
   namespace: kube-system
 ---
@@ -1078,11 +993,6 @@ data:
     $uri/ /index.html /index.html;\n        }\n    }\n}"
 kind: ConfigMap
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
-  labels:
-    app.kubernetes.io/managed-by: Helm
   name: hubble-ui-nginx
   namespace: kube-system
 ---
@@ -1090,12 +1000,9 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
     prometheus.io/port: "9964"
     prometheus.io/scrape: "true"
   labels:
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cilium-envoy
     app.kubernetes.io/part-of: cilium
     io.cilium/app: proxy
@@ -1110,18 +1017,13 @@ spec:
     protocol: TCP
     targetPort: envoy-metrics
   selector:
-    app.kubernetes.io/managed-by: Helm
     k8s-app: cilium-envoy
   type: ClusterIP
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
   labels:
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: clustermesh-apiserver
     app.kubernetes.io/part-of: cilium
     k8s-app: clustermesh-apiserver
@@ -1132,19 +1034,14 @@ spec:
   - nodePort: 32379
     port: 2379
   selector:
-    app.kubernetes.io/managed-by: Helm
     k8s-app: clustermesh-apiserver
   type: NodePort
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
   labels:
     app.kubernetes.io/component: metrics
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: clustermesh-apiserver
     app.kubernetes.io/part-of: cilium
     k8s-app: clustermesh-apiserver
@@ -1162,18 +1059,13 @@ spec:
     protocol: TCP
     targetPort: kvmesh-metrics
   selector:
-    app.kubernetes.io/managed-by: Helm
     k8s-app: clustermesh-apiserver
   type: ClusterIP
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
   labels:
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: hubble-peer
     app.kubernetes.io/part-of: cilium
     k8s-app: cilium
@@ -1187,17 +1079,12 @@ spec:
     protocol: TCP
     targetPort: 4244
   selector:
-    app.kubernetes.io/managed-by: Helm
     k8s-app: cilium
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
   labels:
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: hubble-relay
     app.kubernetes.io/part-of: cilium
     k8s-app: hubble-relay
@@ -1209,18 +1096,13 @@ spec:
     protocol: TCP
     targetPort: 4245
   selector:
-    app.kubernetes.io/managed-by: Helm
     k8s-app: hubble-relay
   type: ClusterIP
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
   labels:
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: hubble-ui
     app.kubernetes.io/part-of: cilium
     k8s-app: hubble-ui
@@ -1232,18 +1114,13 @@ spec:
     port: 80
     targetPort: 8081
   selector:
-    app.kubernetes.io/managed-by: Helm
     k8s-app: hubble-ui
   type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
   labels:
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cilium-operator
     app.kubernetes.io/part-of: cilium
     io.cilium/app: operator
@@ -1254,7 +1131,6 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/managed-by: Helm
       io.cilium/app: operator
       name: cilium-operator
   strategy:
@@ -1264,11 +1140,8 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      annotations:
-        meta.helm.sh/release-name: cilium
-        meta.helm.sh/release-namespace: kube-system
+      annotations: null
       labels:
-        app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: cilium-operator
         app.kubernetes.io/part-of: cilium
         io.cilium/app: operator
@@ -1279,7 +1152,6 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
               matchLabels:
-                app.kubernetes.io/managed-by: Helm
                 io.cilium/app: operator
             topologyKey: kubernetes.io/hostname
       automountServiceAccountToken: true
@@ -1350,11 +1222,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
   labels:
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: clustermesh-apiserver
     app.kubernetes.io/part-of: cilium
     k8s-app: clustermesh-apiserver
@@ -1364,7 +1232,6 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/managed-by: Helm
       k8s-app: clustermesh-apiserver
   strategy:
     rollingUpdate:
@@ -1372,11 +1239,8 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      annotations:
-        meta.helm.sh/release-name: cilium
-        meta.helm.sh/release-namespace: kube-system
+      annotations: null
       labels:
-        app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: clustermesh-apiserver
         app.kubernetes.io/part-of: cilium
         k8s-app: clustermesh-apiserver
@@ -1386,7 +1250,6 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
               matchLabels:
-                app.kubernetes.io/managed-by: Helm
                 k8s-app: clustermesh-apiserver
             topologyKey: kubernetes.io/hostname
       automountServiceAccountToken: true
@@ -1551,11 +1414,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
   labels:
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: hubble-relay
     app.kubernetes.io/part-of: cilium
     k8s-app: hubble-relay
@@ -1565,7 +1424,6 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/managed-by: Helm
       k8s-app: hubble-relay
   strategy:
     rollingUpdate:
@@ -1573,11 +1431,8 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      annotations:
-        meta.helm.sh/release-name: cilium
-        meta.helm.sh/release-namespace: kube-system
+      annotations: null
       labels:
-        app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: hubble-relay
         app.kubernetes.io/part-of: cilium
         k8s-app: hubble-relay
@@ -1587,7 +1442,6 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
               matchLabels:
-                app.kubernetes.io/managed-by: Helm
                 k8s-app: cilium
             topologyKey: kubernetes.io/hostname
       automountServiceAccountToken: false
@@ -1656,11 +1510,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
   labels:
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: hubble-ui
     app.kubernetes.io/part-of: cilium
     k8s-app: hubble-ui
@@ -1670,7 +1520,6 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/managed-by: Helm
       k8s-app: hubble-ui
   strategy:
     rollingUpdate:
@@ -1678,11 +1527,8 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      annotations:
-        meta.helm.sh/release-name: cilium
-        meta.helm.sh/release-namespace: kube-system
+      annotations: null
       labels:
-        app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: hubble-ui
         app.kubernetes.io/part-of: cilium
         k8s-app: hubble-ui
@@ -1731,11 +1577,7 @@ spec:
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
   labels:
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cilium-agent
     app.kubernetes.io/part-of: cilium
     k8s-app: cilium
@@ -1744,7 +1586,6 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/managed-by: Helm
       k8s-app: cilium
   template:
     metadata:
@@ -1753,10 +1594,7 @@ spec:
         container.apparmor.security.beta.kubernetes.io/cilium-agent: unconfined
         container.apparmor.security.beta.kubernetes.io/clean-cilium-state: unconfined
         container.apparmor.security.beta.kubernetes.io/mount-cgroup: unconfined
-        meta.helm.sh/release-name: cilium
-        meta.helm.sh/release-namespace: kube-system
       labels:
-        app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: cilium-agent
         app.kubernetes.io/part-of: cilium
         k8s-app: cilium
@@ -2140,11 +1978,7 @@ spec:
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
   labels:
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cilium-envoy
     app.kubernetes.io/part-of: cilium
     k8s-app: cilium-envoy
@@ -2154,18 +1988,14 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/managed-by: Helm
       k8s-app: cilium-envoy
   template:
     metadata:
       annotations:
         container.apparmor.security.beta.kubernetes.io/cilium-envoy: unconfined
-        meta.helm.sh/release-name: cilium
-        meta.helm.sh/release-namespace: kube-system
         prometheus.io/port: "9964"
         prometheus.io/scrape: "true"
       labels:
-        app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: cilium-envoy
         app.kubernetes.io/part-of: cilium
         k8s-app: cilium-envoy
@@ -2290,11 +2120,6 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
-  labels:
-    app.kubernetes.io/managed-by: Helm
   name: clustermesh-apiserver-admin-cert
   namespace: kube-system
 spec:
@@ -2311,11 +2136,6 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
-  labels:
-    app.kubernetes.io/managed-by: Helm
   name: clustermesh-apiserver-remote-cert
   namespace: kube-system
 spec:
@@ -2330,11 +2150,6 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
-  labels:
-    app.kubernetes.io/managed-by: Helm
   name: clustermesh-apiserver-server-cert
   namespace: kube-system
 spec:
@@ -2356,11 +2171,6 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
-  labels:
-    app.kubernetes.io/managed-by: Helm
   name: hubble-relay-client-certs
   namespace: kube-system
 spec:
@@ -2377,11 +2187,6 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
-  labels:
-    app.kubernetes.io/managed-by: Helm
   name: hubble-server-certs
   namespace: kube-system
 spec:
@@ -2399,12 +2204,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    meta.helm.sh/release-name: cilium
-    meta.helm.sh/release-namespace: kube-system
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
-  labels:
-    app.kubernetes.io/managed-by: Helm
   name: hubble-ui
   namespace: kube-system
 spec:

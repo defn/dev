@@ -5,10 +5,12 @@ resources:
   - resource-namespace-external-dns.yaml
   - resource-externalsecret-external-dns.yaml
 namespace: external-dns
+commonLabels: {}
+commonAnnotations: {}
 helmCharts:
   - releaseName: external-dns
     name: external-dns
-    version: 6.26.4
+    version: 6.26.5
     repo: https://charts.bitnami.com/bitnami
     namespace: external-dns
     valuesInline:
