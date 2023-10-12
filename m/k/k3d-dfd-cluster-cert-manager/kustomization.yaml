@@ -5,6 +5,8 @@ resources:
   - https://github.com/cert-manager/cert-manager/releases/download/v1.13.1/cert-manager.crds.yaml
   - resource-namespace-cert-manager.yaml
   - resource-clusterissuer-cilium.yaml
+commonLabels: {}
+commonAnnotations: {}
 helmCharts:
   - releaseName: cert-manager
     name: cert-manager

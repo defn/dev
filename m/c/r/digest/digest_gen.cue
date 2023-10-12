@@ -2,31 +2,31 @@ package r
 
 cache: "bitnami/kubectl:1.26.4": "bitnami/kubectl@sha256:a0a972324d937b2c2f7207af29d1abd6ce3f7fd5ea73357036a67ab24f34cc92"
 
-cache: "bitnami/kubectl:latest": "bitnami/kubectl@sha256:99497d60ea497aba03097780a69e253ea9cccce8911acae58d3f2bce485e000d"
+cache: "bitnami/kubectl:latest": "bitnami/kubectl@sha256:e03a6602b1c306e101b5f8c3da36289174c012f5791c687175b928c546603b4b"
 
 cache: "busybox:1.35": "busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094"
 
 cache: "containous/whoami:latest": "containous/whoami@sha256:7d6a3c8f91470a23ef380320609ee6e69ac68d20bc804f3a1c6065fb56cfa34e"
 
-cache: "curlimages/curl": "curlimages/curl@sha256:961cf9e2a1939ea380b3f16e313a581b5d4681dd9dc4b1ace060eb396a71df0d"
+cache: "curlimages/curl": "curlimages/curl@sha256:4a3396ae573c44932d06ba33f8696db4429c419da87cbdc82965ee96a37dd0af"
 
 cache: "docker.io/amazon/amazon-eks-pod-identity-webhook:v0.4.0": "docker.io/amazon/amazon-eks-pod-identity-webhook@sha256:69ba0ed032cfa4d72621037c2836d464f401fde1fa993adf34e79335ec4c56ac"
 
 cache: "docker.io/bitnami/apache:2.4.57-debian-11-r36": "docker.io/bitnami/apache@sha256:3f55fea96631a7fb83e25c13a262da0f9b8a9294a913c5bbd14a08bc587139ee"
 
-cache: "docker.io/bitnami/elasticsearch:8.10.2-debian-11-r6": "docker.io/bitnami/elasticsearch@sha256:169efab21c4508790d7d1831b5018ac8ed47e4f6f13c1f6d45635f5564fdf4e3"
+cache: "docker.io/bitnami/elasticsearch:8.10.3-debian-11-r0": "docker.io/bitnami/elasticsearch@sha256:37b6a1938cbaa01e3e73bdf5d6934dcc695596230f24f60f320d3d297be3ed54"
 
-cache: "docker.io/bitnami/external-dns:0.13.6-debian-11-r28": "docker.io/bitnami/external-dns@sha256:1d2f576397e2dd13f48503189cc11cf8490e8b58402d830f29e2e44982159ebd"
+cache: "docker.io/bitnami/external-dns:0.13.6-debian-11-r30": "docker.io/bitnami/external-dns@sha256:498943fa9410c5510fde1a1c189e131df8b412605d6c3d47a18fdeaed119fa59"
 
-cache: "docker.io/bitnami/mastodon:4.2.0-debian-11-r0": "docker.io/bitnami/mastodon@sha256:8533513b38a7dff5d60282e0f86ee28f116e91cdbdbe1b552d505f3e355b46d2"
+cache: "docker.io/bitnami/mastodon:4.2.1-debian-11-r0": "docker.io/bitnami/mastodon@sha256:5919a09661705338c369101c9a499d307f666b2659b6ddefb0c4eb204a9b8c1a"
 
-cache: "docker.io/bitnami/minio:2023.9.23-debian-11-r0": "docker.io/bitnami/minio@sha256:e68107d5c20f7c3aef0a6a80cd069777367df928279f78189dc8002c4cd909b6"
+cache: "docker.io/bitnami/minio:2023.9.30-debian-11-r2": "docker.io/bitnami/minio@sha256:8526aff1207c5f4f95d3abfb92c55077fe0ae6b2edc1af95bd42352e1cd1172a"
 
-cache: "docker.io/bitnami/os-shell:11-debian-11-r77": "docker.io/bitnami/os-shell@sha256:4131b59e175d99571661ddcda248c949d021a54c44994794c823b1f2091d81d6"
+cache: "docker.io/bitnami/os-shell:11-debian-11-r89": "docker.io/bitnami/os-shell@sha256:932a4add118a1ce53b0103573f5b46c0636c8f14e6791eb70f5714b0068ed0cc"
 
-cache: "docker.io/bitnami/postgresql:16.0.0-debian-11-r3": "docker.io/bitnami/postgresql@sha256:b8a21df9b7475ed346da778081f66f869a3e8d12325ced985bca493df4851cfe"
+cache: "docker.io/bitnami/postgresql:16.0.0-debian-11-r10": "docker.io/bitnami/postgresql@sha256:2ad9d134d8697fc9f40ca9f2f19fb906f5f68d931630452e11a9df16e84e4848"
 
-cache: "docker.io/bitnami/redis:7.2.1-debian-11-r0": "docker.io/bitnami/redis@sha256:fa288394f402388bf487028817bacfdd1569172e6498250141afed0e51fde33a"
+cache: "docker.io/bitnami/redis:7.2.1-debian-11-r24": "docker.io/bitnami/redis@sha256:0897825c35d5aa1c3407438732c23b8a346033856667a1eddb0332e12ae46773"
 
 cache: "docker.io/envoyproxy/envoy:v1.24-latest": "docker.io/envoyproxy/envoy@sha256:079b133366a9909f0f48b396c538f235c7b214f84aa45f3d32404ff616022281"
 
@@ -44,7 +44,7 @@ cache: "gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:987f53e3ead
 
 cache: "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:7b138c73fcaaf0b9bb2d414b8a89a780f8c09371d24c6f57969be1694acf4aaa": "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:88909e3318a73dbb14036424c24710f37ed1ff7fd82dbd79ac9ad602296b4fc9"
 
-cache: "ghcr.io/coder/coder:v2.2.1": "ghcr.io/coder/coder@sha256:22a5d869c2a49c95915c33a8a1dd7e970a4f687bf1cdf1cb9d943e76acb65c30"
+cache: "ghcr.io/coder/coder:v2.3.0": "ghcr.io/coder/coder@sha256:d167dbe9513c8b4eb42962d31dbea0378f6720b5d09f0f8b4a39b9f26a6f2584"
 
 cache: "ghcr.io/dexidp/dex:v2.37.0": "ghcr.io/dexidp/dex@sha256:f579d00721b0d842328c43a562f50343c54b0048ef2d58d6b54e750c21fc7938"
 
@@ -78,23 +78,15 @@ cache: "quay.io/argoproj/workflow-controller:v3.4.11": "quay.io/argoproj/workflo
 
 cache: "quay.io/cilium/cilium-envoy:v1.25.9-e198a2824d309024cb91fb6a984445e73033291d@sha256:52541e1726041b050c5d475b3c527ca4b8da487a0bbb0309f72247e8127af0ec": "quay.io/cilium/cilium-envoy@sha256:52541e1726041b050c5d475b3c527ca4b8da487a0bbb0309f72247e8127af0ec"
 
-cache: "quay.io/cilium/cilium-envoy:v1.25.9-f039e2bd380b7eef2f2feea5750676bb36133699@sha256:023d09eeb8a44ae99b489f4af7ffed8b8b54f19a532e0bc6ab4c1e4b31acaab1": "quay.io/cilium/cilium-envoy@sha256:023d09eeb8a44ae99b489f4af7ffed8b8b54f19a532e0bc6ab4c1e4b31acaab1"
-
-cache: "quay.io/cilium/cilium:v1.14.1@sha256:edc1d05ea1365c4a8f6ac6982247d5c145181704894bb698619c3827b6963a72": "quay.io/cilium/cilium@sha256:edc1d05ea1365c4a8f6ac6982247d5c145181704894bb698619c3827b6963a72"
-
 cache: "quay.io/cilium/cilium:v1.14.2@sha256:6263f3a3d5d63b267b538298dbeb5ae87da3efacf09a2c620446c873ba807d35": "quay.io/cilium/cilium@sha256:6263f3a3d5d63b267b538298dbeb5ae87da3efacf09a2c620446c873ba807d35"
 
 cache: "quay.io/cilium/clustermesh-apiserver:v1.14.2@sha256:0650beac6633a483261640b6539c9609f5a761f4ab4504fd1e6ffe7f2bb82e9a": "quay.io/cilium/clustermesh-apiserver@sha256:0650beac6633a483261640b6539c9609f5a761f4ab4504fd1e6ffe7f2bb82e9a"
-
-cache: "quay.io/cilium/hubble-relay:v1.14.1@sha256:db30e85a7abc10589ce2a97d61ee18696a03dc5ea04d44b4d836d88bd75b59d8": "quay.io/cilium/hubble-relay@sha256:db30e85a7abc10589ce2a97d61ee18696a03dc5ea04d44b4d836d88bd75b59d8"
 
 cache: "quay.io/cilium/hubble-relay:v1.14.2@sha256:a89030b31f333e8fb1c10d2473250399a1a537c27d022cd8becc1a65d1bef1d6": "quay.io/cilium/hubble-relay@sha256:a89030b31f333e8fb1c10d2473250399a1a537c27d022cd8becc1a65d1bef1d6"
 
 cache: "quay.io/cilium/hubble-ui-backend:v0.12.0@sha256:8a79a1aad4fc9c2aa2b3e4379af0af872a89fcec9d99e117188190671c66fc2e": "quay.io/cilium/hubble-ui-backend@sha256:8a79a1aad4fc9c2aa2b3e4379af0af872a89fcec9d99e117188190671c66fc2e"
 
 cache: "quay.io/cilium/hubble-ui:v0.12.0@sha256:1c876cfa1d5e35bc91e1025c9314f922041592a88b03313c22c1f97a5d2ba88f": "quay.io/cilium/hubble-ui@sha256:1c876cfa1d5e35bc91e1025c9314f922041592a88b03313c22c1f97a5d2ba88f"
-
-cache: "quay.io/cilium/operator-generic:v1.14.1@sha256:e061de0a930534c7e3f8feda8330976367971238ccafff42659f104effd4b5f7": "quay.io/cilium/operator-generic@sha256:e061de0a930534c7e3f8feda8330976367971238ccafff42659f104effd4b5f7"
 
 cache: "quay.io/cilium/operator-generic:v1.14.2@sha256:52f70250dea22e506959439a7c4ea31b10fe8375db62f5c27ab746e3a2af866d": "quay.io/cilium/operator-generic@sha256:52f70250dea22e506959439a7c4ea31b10fe8375db62f5c27ab746e3a2af866d"
 
@@ -116,4 +108,4 @@ cache: "redis:7.0.11-alpine": "redis@sha256:121bac949fb5f623b9fa0b4e4c9fb358ffd0
 
 cache: "registry.opensource.zalan.do/acid/postgres-operator:v1.10.1": "registry.opensource.zalan.do/acid/postgres-operator@sha256:8ced77e97e0876b2e1dbc8ef3ee6c9cc26df18c20b5f6c188a7799096be097df"
 
-cache: "tailscale/k8s-operator:unstable": "tailscale/k8s-operator@sha256:c05702fadae0be24b44535a2fd8ec4bc6f449f78ce2973ef63e0bd4f36eff841"
+cache: "tailscale/k8s-operator:unstable": "tailscale/k8s-operator@sha256:831255414643c59325211b5c6ed29a68def8a33ad2f692044183a016541138ad"

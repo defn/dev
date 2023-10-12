@@ -4,6 +4,8 @@ patches:
   - path: patch-service-mastodon-apache.yaml
   - path: patch-job-mastodon-init.yaml
 namespace: mastodon
+commonLabels: {}
+commonAnnotations: {}
 resources:
   - resource-namespace.yaml
   - resource-ingress-mastodon-apache.yaml
@@ -35,6 +37,6 @@ helmCharts:
         auth:
           existingSecret: mastodon-minio
     name: mastodon
-    version: 3.0.0
+    version: 3.0.4
     repo: https://charts.bitnami.com/bitnami
     includeCRDs: true

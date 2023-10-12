@@ -3,10 +3,12 @@
 patches: []
 resources: []
 namespace: kube-system
+commonLabels: {}
+commonAnnotations: {}
 helmCharts:
   - releaseName: cilium
     name: cilium
-    version: 1.14.1
+    version: 1.14.2
     repo: https://helm.cilium.io
     namespace: kube-system
     valuesInline:
@@ -22,6 +24,16 @@ helmCharts:
       cluster:
         name: default
         id: 0
+      clustermesh:
+        useAPIServer: true
+        apiserver:
+          tls:
+            auto:
+              method: certmanager
+              certManagerIssuerRef:
+                group: cert-manager.io
+                kind: ClusterIssuer
+                name: cilium-ca
       hubble:
         ui:
           enabled: false

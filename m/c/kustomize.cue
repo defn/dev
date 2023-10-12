@@ -397,7 +397,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.26.4"
+		version: "6.26.5"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -911,7 +911,7 @@ kustomize: "trust-manager": #KustomizeHelm & {
 	helm: {
 		release: "vcluster"
 		name:    "vcluster"
-		version: "0.16.2"
+		version: "0.16.3"
 		repo:    "https://charts.loft.sh"
 
 		values: {
@@ -974,15 +974,6 @@ kustomize: "trust-manager": #KustomizeHelm & {
 
 cilium_common: {
 	namespace: "kube-system"
-
-	commonLabels: {
-		"app.kubernetes.io/managed-by": "Helm"
-	}
-
-	commonAnnotations: {
-		"meta.helm.sh/release-name": "cilium"
-		"meta.helm.sh/release-namespace": namespace
-	}
 
 	helm: {
 		release:   "cilium"
@@ -1512,7 +1503,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "2.2.1"
+		version:   "2.3.0"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {
@@ -1545,6 +1536,9 @@ kustomize: "coder": #KustomizeHelm & {
 				}, {
 					name:  "CODER_STRICT_TRANSPORT_SECURITY"
 					value: "60"
+				}, {
+					name:  "CODER_EXPERIMENTS"
+					value: "dashboard_theme"
 				}, {
 					name:  "CODER_SCALETEST_JOB_TIMEOUT"
 					value: "10m"
@@ -1895,7 +1889,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "3.0.0"
+		version:     "3.0.4"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
