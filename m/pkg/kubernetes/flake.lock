@@ -639,17 +639,17 @@
       },
       "locked": {
         "dir": "m/pkg/helm",
-        "lastModified": 1695954911,
-        "narHash": "sha256-4vRtFccIAnMvb1rZgWH9Jqi8sAWy40HNjhRi7YOkiBk=",
+        "lastModified": 1697128019,
+        "narHash": "sha256-ncmEWcgQYXAr3Gc2LxaEyiINwKuA9KCf0lJzxOtdorA=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "2c8edbb039c761cff731729fd53829ac592da514",
+        "rev": "d6776f5198e0151987952a780a398a1762fcd887",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/helm",
         "owner": "defn",
-        "ref": "pkg-helm-3.12.3-4",
+        "ref": "pkg-helm-3.13.1-1",
         "repo": "dev",
         "type": "github"
       }
@@ -660,17 +660,17 @@
       },
       "locked": {
         "dir": "m/pkg/hubble",
-        "lastModified": 1697040712,
-        "narHash": "sha256-5kEUt5w1uuUxIQtbLpsMHmlhduczHOJ07cZLsFtE9Yc=",
+        "lastModified": 1697128029,
+        "narHash": "sha256-zWV0oCxqDEtjQML+biD+Qhje8rpAl+oXfJNAB8nZy5c=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "7e7a3b36184d8e9c2f91b49b753767011486c579",
+        "rev": "fe0b40b8c3c7741d20d9214cd1cd9aa3196731d2",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/hubble",
         "owner": "defn",
-        "ref": "pkg-hubble-0.12.1-1",
+        "ref": "pkg-hubble-0.12.2-1",
         "repo": "dev",
         "type": "github"
       }
