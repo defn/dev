@@ -190,3 +190,5 @@ graph.png
 .pki*
 .lvm_history
 .psql_history
+.nx
+.qt 
