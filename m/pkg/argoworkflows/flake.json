@@ -2,5 +2,5 @@
   "slug": "pkg-argoworkflows",
   "ghrepo": "argoproj/argo-workflows",
   "vendor": "3.5.0",
-  "revision": "0"
+  "revision": "1"
 }
