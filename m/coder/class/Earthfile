@@ -23,5 +23,5 @@ pod:
         && git reset --hard
 
     RUN bash -c 'source .bashrc && ~/bin/persist-cache && make nix home'
-    RUN bash -c 'source .bashrc && for e in vscodevim.vim tamasfe.even-better-toml jnoortheen.nix-ide hashicorp.terraform golang.go esbenp.prettier-vscode bazelbuild.vscode-bazel cuelang.cue pbkit.vscode-pbkit marp-team.marp-vscode; do bin/nix/code-server serve-local --force --install-extension $e; done'
+    RUN bash -c 'source .bashrc && for e in vscodevim.vim tamasfe.even-better-toml jnoortheen.nix-ide hashicorp.terraform golang.go esbenp.prettier-vscode bazelbuild.vscode-bazel cuelang.cue marp-team.marp-vscode; do bin/nix/code-server serve-local --force --install-extension $e; done'
     RUN --no-cache bash -c "git pull && source .bashrc && ~/bin/persist-cache && make home"
