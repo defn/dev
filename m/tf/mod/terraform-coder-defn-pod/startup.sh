@@ -41,9 +41,6 @@ function main {
 	#vcluster connect -n "$(uname -n | cut -d- -f1-3)" vcluster --kube-config ~/.kube/config --kube-config-context-name "$(uname -n | cut -d- -f1-3)" --server "$(k get svc vcluster -o json | jq -r '.spec.clusterIP'):443"
 	#k config set-context --current --namespace default
 
-	cd
-	make install
-
 	if [[ -n ${workdir} ]]; then
 		cd "${workdir}"
 	fi
