@@ -74,8 +74,8 @@ resource "kubernetes_deployment" "main" {
     namespace = local.ns
 
     labels = {
-      "app.kubernetes.io/name"     = "dfd-workspace"
-      "app.kubernetes.io/instance" = "dfd-workspace-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
+      "app.kubernetes.io/name"     = local.ns
+      "app.kubernetes.io/instance" = local.ns
       "app.kubernetes.io/part-of"  = "coder"
       "com.coder.resource"         = "true"
       "com.coder.workspace.id"     = data.coder_workspace.me.id
@@ -93,14 +93,14 @@ resource "kubernetes_deployment" "main" {
 
     selector {
       match_labels = {
-        "app.kubernetes.io/name" = "dfd-workspace"
+        "app.kubernetes.io/name" = local.ns
       }
     }
 
     template {
       metadata {
         labels = {
-          "app.kubernetes.io/name" = "dfd-workspace"
+          "app.kubernetes.io/name" = local.ns
         }
         annotations = {
           "linkerd.io/inject" = "enabled"

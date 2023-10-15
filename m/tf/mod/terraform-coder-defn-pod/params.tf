@@ -1,6 +1,6 @@
 locals {
   pod_count = data.coder_parameter.provider.value == "pod" ? 1 : 0
-  ns        = "dfd-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
+  ns        = "coder-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
 }
 
 data "coder_parameter" "provider" {
