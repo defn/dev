@@ -17,12 +17,6 @@ second_ = $(word 2, $(subst _, ,$@))
 
 MARK = $(shell which mark || echo echo)
 
-update:
-	cd m/pkg && $(MAKE) update
-	cd m/pkg && n upgrade && n all update pkg deps
-	cd m/pkg && n upgrade && n all update pkg deps || true
-	$(MAKE) install
-
 macos:
 	$(MARK) macos
 	-$(shell which gpg-agent) --daemon --pinentry-program $$(which pinentry-mac)
