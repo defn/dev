@@ -723,17 +723,17 @@
       },
       "locked": {
         "dir": "m/pkg/kn",
-        "lastModified": 1692066468,
-        "narHash": "sha256-rcgsDD5HIt7Pvykk115CiVbFVZKcboJKwQCbW1c22mg=",
+        "lastModified": 1697573035,
+        "narHash": "sha256-bePgpk+jSyUdWZJcysJvtGju65SaxOwkh3J2cFDljPo=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "659ebf064fb913e549686df116b3fa6f4f49db51",
+        "rev": "03256dbedf4d873de00fa8d99dc250fcf7f79f0e",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kn",
         "owner": "defn",
-        "ref": "pkg-kn-1.11.0-2",
+        "ref": "pkg-kn-1.11.1-1",
         "repo": "dev",
         "type": "github"
       }
