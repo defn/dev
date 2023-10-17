@@ -8,7 +8,7 @@
     stern.url = github:defn/dev/pkg-stern-1.26.0-1?dir=m/pkg/stern;
     argoworkflows.url = github:defn/dev/pkg-argoworkflows-3.5.0-1?dir=m/pkg/argoworkflows;
     argocd.url = github:defn/dev/pkg-argocd-2.8.4-1?dir=m/pkg/argocd;
-    kn.url = github:defn/dev/pkg-kn-1.11.0-2?dir=m/pkg/kn;
+    kn.url = github:defn/dev/pkg-kn-1.11.1-1?dir=m/pkg/kn;
     vcluster.url = github:defn/dev/pkg-vcluster-0.16.3-1?dir=m/pkg/vcluster;
     kubevirt.url = github:defn/dev/pkg-kubevirt-1.0.0-3?dir=m/pkg/kubevirt;
     linkerd.url = github:defn/dev/pkg-linkerd-2.14.1-1?dir=m/pkg/linkerd;
