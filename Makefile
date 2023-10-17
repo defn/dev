@@ -151,7 +151,7 @@ nix:
 	(. ~/.nix-profile/etc/profile.d/nix.sh && which nix) || $(MAKE) nix-$(shell uname -s)
 	. ~/.nix-profile/etc/profile.d/nix.sh && (which cachix || nix profile install nixpkgs#cachix)
 	. ~/.nix-profile/etc/profile.d/nix.sh && (test -f "$$HOME/.nix-profile/share/nix-direnv/direnvrc" || nix profile install nixpkgs#nix-direnv)
-	. ~/.nix-profile/etc/profile.d/nix.sh && nix profile install nixpkgs/9f0d9ad45c4bd998c46ba1cbe0eb0dd28c6288a5#nix
+	. ~/.nix-profile/etc/profile.d/nix.sh && nix profile install nixpkgs/9f0d9ad45c4bd998c46ba1cbe0eb0dd28c6288a5#nix || true
 
 nix-reinstall:
 	rm -rf .nix-* .local/state/nix
