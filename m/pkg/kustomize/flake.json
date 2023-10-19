@@ -1,6 +1,6 @@
 {
   "slug": "pkg-kustomize",
   "ghrepo": "kubernetes-sigs/kustomize",
-  "vendor": "5.0.3",
-  "revision": "5"
+  "vendor": "5.2.1",
+  "revision": "0"
 }
