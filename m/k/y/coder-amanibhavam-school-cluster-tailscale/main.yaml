@@ -196,6 +196,8 @@ spec:
           value: tag:k8s
         - name: APISERVER_PROXY
           value: "true"
+        - name: PROXY_FIREWALL_MODE
+          value: auto
         image: tailscale/k8s-operator:unstable
         name: operator
         resources:
