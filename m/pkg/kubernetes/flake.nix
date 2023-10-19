@@ -4,7 +4,7 @@
     k3sup.url = github:defn/dev/pkg-k3sup-0.13.1-1?dir=m/pkg/k3sup;
     k9s.url = github:defn/dev/pkg-k9s-0.27.4-5?dir=m/pkg/k9s;
     helm.url = github:defn/dev/pkg-helm-3.13.1-1?dir=m/pkg/helm;
-    kustomize.url = github:defn/dev/pkg-kustomize-5.0.3-5?dir=m/pkg/kustomize;
+    kustomize.url = github:defn/dev/pkg-kustomize-5.2.1-1?dir=m/pkg/kustomize;
     stern.url = github:defn/dev/pkg-stern-1.26.0-1?dir=m/pkg/stern;
     argoworkflows.url = github:defn/dev/pkg-argoworkflows-3.5.0-1?dir=m/pkg/argoworkflows;
     argocd.url = github:defn/dev/pkg-argocd-2.8.4-1?dir=m/pkg/argocd;
