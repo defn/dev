@@ -786,17 +786,17 @@
       },
       "locked": {
         "dir": "m/pkg/kustomize",
-        "lastModified": 1692066642,
-        "narHash": "sha256-aZ14Tzh4jXT5Q2kKjQQNOD8S7cmQCqs4DGqSpp4WvjE=",
+        "lastModified": 1697748946,
+        "narHash": "sha256-J2jXWvMA6iot4ghLfLlmE67vrjfrkaImXy+XyOaRffQ=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "2a570b435676ada19cbdf5ee316407341aeac4ea",
+        "rev": "a32ecf91bee94f168a0b0bfec9f29e3750f238d8",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kustomize",
         "owner": "defn",
-        "ref": "pkg-kustomize-5.0.3-5",
+        "ref": "pkg-kustomize-5.2.1-1",
         "repo": "dev",
         "type": "github"
       }
