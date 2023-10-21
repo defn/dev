@@ -75,3 +75,6 @@ up:
 
 down:
 	cd .. && bin/make-k3s down
+
+test:
+	cilium connectivity test --multi-cluster $(to) --context $$(uname -n) --test '!/node-to-node-encryption'
