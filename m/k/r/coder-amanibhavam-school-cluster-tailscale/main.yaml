@@ -80,7 +80,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/tailscale/k8s-operator@sha256:831255414643c59325211b5c6ed29a68def8a33ad2f692044183a016541138ad
+        - image: 169.254.32.1:5000/tailscale/k8s-operator@sha256:e5a60eb28d5a2f24ee699756b616aa35e4aaf72a89093fa019c8feac7e2880a9
           env:
             - name: OPERATOR_HOSTNAME
               value: tailscale-operator
@@ -102,6 +102,8 @@ spec:
               value: tag:k8s
             - name: APISERVER_PROXY
               value: "true"
+            - name: PROXY_FIREWALL_MODE
+              value: auto
           name: operator
           resources:
             requests:

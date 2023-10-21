@@ -12,27 +12,6 @@ cue_export(
     visibility = ["//visibility:public"],
 )
 
-# karpenter configuration
-genrule(
-    name = "karpenter",
-    outs = ["generate_karpenter"],
-    cmd = "$(location //c:gen_karpenter_script) $(location //pkg/helm:flake_helm) $(location //c:gen_karpenter_values) $@",
-    tools = [
-        "//c:gen_karpenter_script",
-        "//c:gen_karpenter_values",
-        "//pkg/helm:flake_helm",
-    ],
-)
-
-copy_files(
-    name = "outputs_karpenter",
-    gen = {
-        # ignore key, not used if prefix is present
-        "k/coder-amanibhavam-school-cluster-karpenter/karpenter.yaml": "generate_karpenter",
-    },
-    prefix = "k/coder-amanibhavam-school-cluster-karpenter/karpenter.yaml",
-)
-
 # kustomize configuration
 genrule(
     name = "kustomize",

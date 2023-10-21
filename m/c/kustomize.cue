@@ -481,7 +481,7 @@ kustomize: "external-secrets": #KustomizeHelm & {
 	helm: {
 		release: "external-secrets"
 		name:    "external-secrets"
-		version: "0.9.4"
+		version: "0.9.6"
 		repo:    "https://charts.external-secrets.io"
 		values: {
 			webhook: create:        false
@@ -540,14 +540,23 @@ kustomize: "pod-identity": #KustomizeHelm & {
 	}
 }
 
-// gen_karpenter.sh
-kustomize: "karpenter": #Kustomize & {
+kustomize: "karpenter": #KustomizeHelm & {
 	cluster: #Cluster
 
 	namespace: "karpenter"
 
-	resource: "karpenter": {
-		url: "karpenter.yaml"
+	helm: {
+		release:   "karpenter"
+		name:      "karpenter"
+		namespace: "karpenter"
+		version:   "v0.31.1"
+		repo:      "oci://public.ecr.aws/karpenter"
+		values: {
+			controller: env: [{
+				name: "AWS_REGION"
+				value: "us-west-2"
+			}]
+		}
 	}
 
 	resource: "namespace-karpenter": core.#Namespace & {
@@ -563,6 +572,7 @@ kustomize: "karpenter": #Kustomize & {
 		kind:       "ConfigMap"
 		metadata: {
 			name: "karpenter-global-settings"
+namespace: "karpenter"
 		}
 		data: {
 			"aws.clusterName":     cluster.cluster_name
@@ -570,20 +580,22 @@ kustomize: "karpenter": #Kustomize & {
 		}
 	}
 
-	psm: "serviceaccount-karpenter": {
-		apiVersion: "v1"
-		kind:       "ServiceAccount"
-		metadata: {
-			name: "karpenter"
-			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_account_id):role/\(infra_alt_name)-cluster"
-		}
-	}
+psm: "serviceaccount-karpenter": {
+apiVersion: "v1"
+kind:       "ServiceAccount"
+metadata: {
+name: "karpenter"
+namespace: "karpenter"
+annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_account_id):role/\(infra_alt_name)-cluster"
+}
+}
 
 	psm: "deployment-karpenter": {
 		apiVersion: "apps/v1"
 		kind:       "Deployment"
 		metadata: {
 			name: "karpenter"
+namespace: "karpenter"
 		}
 		spec: replicas: 1
 	}
@@ -911,7 +923,7 @@ kustomize: "trust-manager": #KustomizeHelm & {
 	helm: {
 		release: "vcluster"
 		name:    "vcluster"
-		version: "0.16.3"
+		version: "0.16.4"
 		repo:    "https://charts.loft.sh"
 
 		values: {
@@ -1503,7 +1515,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "2.3.0"
+		version:   "2.3.2"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {
@@ -1850,7 +1862,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.33.3"
+		version:   "0.36.1"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [
@@ -1889,7 +1901,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "3.0.4"
+		version:     "3.0.5"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true

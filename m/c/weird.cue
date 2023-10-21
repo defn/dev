@@ -53,42 +53,6 @@ kustomize: "keda": #KustomizeHelm & {
 	}
 }
 
-// gen_karpenter.sh
-kustomize: "karpenter": #Kustomize & {
-	namespace: "karpenter"
-
-	resource: "karpenter": {
-		url: "karpenter.yaml"
-	}
-
-	resource: "namespace-karpenter": core.#Namespace & {
-		apiVersion: "v1"
-		kind:       "Namespace"
-		metadata: {
-			name: "karpenter"
-		}
-	}
-
-	resource: (#Transform & {
-		transformer: #TransformKarpenterProvisioner
-
-		inputs: {
-			for _env_name, _env in env {
-				if (_env & #VCluster) != _|_ {
-					if len(_env.instance_types) > 0 {
-						"\(_env_name)": {}
-					}
-				}
-			}
-
-			[N=string]: {
-				label:          "provisioner-\(N)"
-				instance_types: env[N].instance_types
-			}
-		}
-	}).outputs
-}
-
 // https://artifacthub.io/packages/helm/bitnami/nginx
 kustomize: "nginx": #KustomizeHelm & {
 	namespace: "nginx"
