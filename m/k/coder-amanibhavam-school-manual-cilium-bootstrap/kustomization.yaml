@@ -8,16 +8,13 @@ commonAnnotations: {}
 helmCharts:
   - releaseName: cilium
     name: cilium
-    version: 1.14.2
+    version: 1.14.3
     repo: https://helm.cilium.io
     namespace: kube-system
     valuesInline:
       operator:
         replicas: 1
-      loadBalancer:
-        algorithm: maglev
       bpf:
-        lbExternalClusterIP: true
         masquerade: true
       envoy:
         enabled: true
@@ -34,6 +31,10 @@ helmCharts:
                 group: cert-manager.io
                 kind: ClusterIssuer
                 name: cilium-ca
+      encryption:
+        enabled: true
+        type: wireguard
+        nodeEncryption: true
       hubble:
         ui:
           enabled: false

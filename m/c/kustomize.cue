@@ -991,12 +991,10 @@ cilium_common: {
 		release:   "cilium"
 		name:      "cilium"
 		"namespace": namespace
-		version:   "1.14.2"
+		version:   "1.14.3"
 		repo:      "https://helm.cilium.io"
 		values: {
 			operator: replicas:       1
-			loadBalancer: algorithm:  "maglev"
-			bpf: lbExternalClusterIP: true
 			bpf: masquerade:          true
 			envoy: enabled:           true
 			cluster: {
@@ -1015,6 +1013,11 @@ cilium_common: {
 						}
 					}
 				}
+			}
+			encryption: {
+				enabled: true
+				type: "wireguard"
+				nodeEncryption: true
 			}
 			hubble: {
 				ui: enabled:    bool | *false
