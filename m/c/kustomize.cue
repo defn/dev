@@ -997,6 +997,7 @@ cilium_common: {
 			operator: replicas:       1
 			bpf: masquerade:          true
 			envoy: enabled:           true
+			nodePort: enabled: true
 			cluster: {
 				name: infra_cilium_name
 				id: infra_cilium_id

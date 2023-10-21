@@ -19,6 +19,8 @@ helmCharts:
         masquerade: true
       envoy:
         enabled: true
+      nodePort:
+        enabled: true
       cluster:
         name: coder-amanibhavam-class
         id: 1
