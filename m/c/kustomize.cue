@@ -995,6 +995,7 @@ cilium_common: {
 		repo:      "https://helm.cilium.io"
 		values: {
 			operator: replicas:       1
+			bpf: masquerade:          true
 			envoy: enabled:           true
 			nodePort: enabled: true
 			cluster: {
