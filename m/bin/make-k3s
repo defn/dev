@@ -114,9 +114,14 @@ function make_up {
 
 	# background app-of-apps syncing
 	while true; do
+		# dont do this, see if argocd can deal
+		break
 		if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 60 ${infra_name}-cluster >/dev/null 2>&1; then break; fi
 		sleep 30
 	done &
+
+	# k9s, show all pods
+	k9s -A
 }
 
 function main {
