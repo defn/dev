@@ -53,6 +53,9 @@ export HOF_TELEMETRY_DISABLED=1
 # kubectl
 if [[ -z "${KUBECONFIG:-}" ]]; then export KUBECONFIG="$HOME/.kube/config:$HOME/.kube/config.argocd:$HOME/.kube/config.vc0"; fi
 
+# cilium
+export CILIUM_CLI_MODE=classic
+
 # editor
 export CODER_TELEMETRY=false
 export EDITOR=vim
