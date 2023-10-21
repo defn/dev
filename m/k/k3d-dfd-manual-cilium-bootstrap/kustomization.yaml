@@ -13,7 +13,10 @@ helmCharts:
     valuesInline:
       operator:
         replicas: 1
+      loadBalancer:
+        algorithm: maglev
       bpf:
+        lbExternalClusterIP: true
         masquerade: true
       envoy:
         enabled: true

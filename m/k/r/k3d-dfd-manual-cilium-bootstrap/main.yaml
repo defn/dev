@@ -1106,7 +1106,8 @@ data:
   agent-not-ready-taint-key: node.cilium.io/agent-not-ready
   arping-refresh-period: 30s
   auto-direct-node-routes: "false"
-  bpf-lb-external-clusterip: "false"
+  bpf-lb-algorithm: maglev
+  bpf-lb-external-clusterip: "true"
   bpf-lb-map-max: "65536"
   bpf-lb-sock: "false"
   bpf-map-dynamic-size-ratio: "0.0025"
