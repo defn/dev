@@ -44,7 +44,7 @@ tailscale:
 	tailscale serve status
 
 iam:
-	PAGER= HOST="$$(tailscale funnel status | grep ^#  | grep https:// | head -1 | cut -d/ -f3-)" \
+	env AWS_PAGER= HOST="$$(tailscale funnel status | grep ^#  | grep https:// | head -1 | cut -d/ -f3-)" \
 		&& set -x \
 		&& (echo \
 			| openssl s_client -servername $$HOST -showcerts -connect $$HOST:443 2> /dev/null \
