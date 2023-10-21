@@ -33,6 +33,7 @@ cache:
 	cd ./r/digest && $(MAKE) cache
 
 once:
+	cd .. && bin/make-k3s init
 	$(MAKE) cache
 	$(MAKE) tailscale
 	$(MAKE) iam
