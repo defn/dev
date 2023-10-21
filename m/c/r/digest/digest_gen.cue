@@ -14,15 +14,15 @@ cache: "docker.io/amazon/amazon-eks-pod-identity-webhook:v0.4.0": "docker.io/ama
 
 cache: "docker.io/bitnami/apache:2.4.57-debian-11-r36": "docker.io/bitnami/apache@sha256:3f55fea96631a7fb83e25c13a262da0f9b8a9294a913c5bbd14a08bc587139ee"
 
-cache: "docker.io/bitnami/elasticsearch:8.10.3-debian-11-r0": "docker.io/bitnami/elasticsearch@sha256:37b6a1938cbaa01e3e73bdf5d6934dcc695596230f24f60f320d3d297be3ed54"
+cache: "docker.io/bitnami/elasticsearch:8.10.3-debian-11-r1": "docker.io/bitnami/elasticsearch@sha256:225e44b090363b89efd83d118a7486b0d123e25557c48894649f65e2ec67192e"
 
 cache: "docker.io/bitnami/external-dns:0.13.6-debian-11-r30": "docker.io/bitnami/external-dns@sha256:498943fa9410c5510fde1a1c189e131df8b412605d6c3d47a18fdeaed119fa59"
 
-cache: "docker.io/bitnami/mastodon:4.2.1-debian-11-r0": "docker.io/bitnami/mastodon@sha256:5919a09661705338c369101c9a499d307f666b2659b6ddefb0c4eb204a9b8c1a"
+cache: "docker.io/bitnami/mastodon:4.2.1-debian-11-r1": "docker.io/bitnami/mastodon@sha256:b49f3b0c50039d0aa65af5d336cfefd0e2e47305b9a00b66cb1100d58963591f"
 
 cache: "docker.io/bitnami/minio:2023.9.30-debian-11-r2": "docker.io/bitnami/minio@sha256:8526aff1207c5f4f95d3abfb92c55077fe0ae6b2edc1af95bd42352e1cd1172a"
 
-cache: "docker.io/bitnami/os-shell:11-debian-11-r89": "docker.io/bitnami/os-shell@sha256:932a4add118a1ce53b0103573f5b46c0636c8f14e6791eb70f5714b0068ed0cc"
+cache: "docker.io/bitnami/os-shell:11-debian-11-r90": "docker.io/bitnami/os-shell@sha256:dd9b8c7d847ddab8453476cc06f6b3b4ff42514722276e7d1a4e68d3fe9cb4f9"
 
 cache: "docker.io/bitnami/postgresql:16.0.0-debian-11-r10": "docker.io/bitnami/postgresql@sha256:2ad9d134d8697fc9f40ca9f2f19fb906f5f68d931630452e11a9df16e84e4848"
 
@@ -44,11 +44,11 @@ cache: "gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:987f53e3ead
 
 cache: "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:7b138c73fcaaf0b9bb2d414b8a89a780f8c09371d24c6f57969be1694acf4aaa": "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:f19babdc636bbeed43138f1b668df827daf8c575189caadabd898b20ac72f9c8"
 
-cache: "ghcr.io/coder/coder:v2.3.0": "ghcr.io/coder/coder@sha256:d167dbe9513c8b4eb42962d31dbea0378f6720b5d09f0f8b4a39b9f26a6f2584"
+cache: "ghcr.io/coder/coder:v2.3.2": "ghcr.io/coder/coder@sha256:3dd16b8a8dce0fc39a2f5d131f37b628fc404d985b4f759befe85e95834fc59f"
 
 cache: "ghcr.io/dexidp/dex:v2.37.0": "ghcr.io/dexidp/dex@sha256:f579d00721b0d842328c43a562f50343c54b0048ef2d58d6b54e750c21fc7938"
 
-cache: "ghcr.io/external-secrets/external-secrets:v0.9.4": "ghcr.io/external-secrets/external-secrets@sha256:16cb35c8c4122defbb51eaea88b0b485ead89ba968265c2c6ef69365a81ea83f"
+cache: "ghcr.io/external-secrets/external-secrets:v0.9.6": "ghcr.io/external-secrets/external-secrets@sha256:1ab00edae47117799eb0e1b4ec7c13db54f2cebfb419632eb032656c2e5a194f"
 
 cache: "ghcr.io/galleybytes/terraform-operator:v0.13.3": "ghcr.io/galleybytes/terraform-operator@sha256:8e49058207e8e0ed8327c673fb84aa2ed25f7db665a8b932d3716066560be274"
 
@@ -72,9 +72,9 @@ cache: "quay.io/argoproj/argo-events:v1.8.1": "quay.io/argoproj/argo-events@sha2
 
 cache: "quay.io/argoproj/argocd:v2.8.2": "quay.io/argoproj/argocd@sha256:14e293cd7e35169c45ec51cccdabb80da72c434d7e16d60d3de2ce3a23f08c4b"
 
-cache: "quay.io/argoproj/argocli:v3.4.11": "quay.io/argoproj/argocli@sha256:e00dceff9736a0b128cbbbbc6de551c3e48359893afa63f5d2c584e99a7cf329"
+cache: "quay.io/argoproj/argocli:v3.5.0": "quay.io/argoproj/argocli@sha256:842fd4235a7ef09d07d22bc11c719ca0035a82446590582c4c897ca4af3947ff"
 
-cache: "quay.io/argoproj/workflow-controller:v3.4.11": "quay.io/argoproj/workflow-controller@sha256:44a6e6f6c2aaae21f987cdb9037949bf14e82e27f25202f8a543c5520eda0070"
+cache: "quay.io/argoproj/workflow-controller:v3.5.0": "quay.io/argoproj/workflow-controller@sha256:e7bd56db18dce6ac6e6fbc335f7df1cd79c6b7305165289cec6d55ef4c039ecc"
 
 cache: "quay.io/cilium/cilium-envoy:v1.25.9-e198a2824d309024cb91fb6a984445e73033291d@sha256:52541e1726041b050c5d475b3c527ca4b8da487a0bbb0309f72247e8127af0ec": "quay.io/cilium/cilium-envoy@sha256:52541e1726041b050c5d475b3c527ca4b8da487a0bbb0309f72247e8127af0ec"
 
