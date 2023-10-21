@@ -1048,27 +1048,6 @@ subjects:
     namespace: cilium-spire
 ---
 spec:
-  ingressClassName: traefik
-  rules:
-    - host: hubble.school.amanibhavam.defn.run
-      http:
-        paths:
-          - backend:
-              service:
-                name: hubble-ui
-                port:
-                  number: 80
-            path: /
-            pathType: Prefix
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.tls: "true"
-  name: hubble-ui
----
-spec:
   controller: cilium.io/ingress-controller
 apiVersion: networking.k8s.io/v1
 kind: IngressClass
@@ -2660,6 +2639,28 @@ subsets:
       - ip: 192.192.192.192
     ports:
       - port: 9999
+---
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: hubble.school.amanibhavam.defn.run
+      http:
+        paths:
+          - backend:
+              service:
+                name: hubble-ui
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  name: hubble-ui
+  namespace: kube-system
 ---
 rules:
   - apiGroups:
