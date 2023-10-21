@@ -993,6 +993,8 @@ cilium_common: {
 		repo:      "https://helm.cilium.io"
 		values: {
 			operator: replicas:       1
+			loadBalancer: algorithm:  "maglev"
+			bpf: lbExternalClusterIP: true
 			bpf: masquerade:          true
 			envoy: enabled:           true
 			ingressController: enabled: true
