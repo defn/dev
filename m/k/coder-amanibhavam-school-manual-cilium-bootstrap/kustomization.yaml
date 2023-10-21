@@ -2,7 +2,6 @@
 
 patches: []
 resources: []
-namespace: kube-system
 commonLabels: {}
 commonAnnotations: {}
 helmCharts:
@@ -10,7 +9,6 @@ helmCharts:
     name: cilium
     version: 1.14.3
     repo: https://helm.cilium.io
-    namespace: kube-system
     valuesInline:
       operator:
         replicas: 1
@@ -18,7 +16,13 @@ helmCharts:
         masquerade: true
       envoy:
         enabled: true
+      hostFirewall:
+        enabled: true
+      hostPort:
+        enabled: true
       nodePort:
+        enabled: true
+      ingressController:
         enabled: true
       cluster:
         name: coder-amanibhavam-school
@@ -33,6 +37,10 @@ helmCharts:
                 group: cert-manager.io
                 kind: ClusterIssuer
                 name: cilium-ca
+      authentication:
+        mutual:
+          spire:
+            enabled: true
       encryption:
         enabled: true
         type: wireguard

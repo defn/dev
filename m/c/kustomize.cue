@@ -985,19 +985,19 @@ kustomize: "trust-manager": #KustomizeHelm & {
 }
 
 cilium_common: {
-	namespace: "kube-system"
-
 	helm: {
 		release:   "cilium"
 		name:      "cilium"
-		"namespace": namespace
 		version:   "1.14.3"
 		repo:      "https://helm.cilium.io"
 		values: {
 			operator: replicas:       1
 			bpf: masquerade:          true
 			envoy: enabled:           true
+			hostFirewall: enabled: true
+			hostPort: enabled: true
 			nodePort: enabled: true
+			ingressController: enabled: true
 			cluster: {
 				name: infra_cilium_name
 				id: infra_cilium_id
@@ -1014,6 +1014,9 @@ cilium_common: {
 						}
 					}
 				}
+			}
+			authentication: {
+				mutual: spire: enabled: true
 			}
 			encryption: {
 				enabled: true
