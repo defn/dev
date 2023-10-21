@@ -47,7 +47,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: cilium-operator
-    namespace: default
+    namespace: kube-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -63,7 +63,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: cilium
-    namespace: default
+    namespace: kube-system
 ---
 apiVersion: v1
 data:
@@ -402,9 +402,9 @@ spec:
               AGENT_SPIFFE_ID="spiffe://spiffe.cilium/ns/cilium-spire/sa/spire-agent"
               AGENT_SELECTORS="-selector k8s_psat:agent_ns:cilium-spire -selector k8s_psat:agent_sa:spire-agent"
               CILIUM_AGENT_SPIFFE_ID="spiffe://spiffe.cilium/cilium-agent"
-              CILIUM_AGENT_SELECTORS="-selector k8s:ns:default -selector k8s:sa:cilium"
+              CILIUM_AGENT_SELECTORS="-selector k8s:ns:kube-system -selector k8s:sa:cilium"
               CILIUM_OPERATOR_SPIFFE_ID="spiffe://spiffe.cilium/cilium-operator"
-              CILIUM_OPERATOR_SELECTORS="-selector k8s:ns:default -selector k8s:sa:cilium-operator"
+              CILIUM_OPERATOR_SELECTORS="-selector k8s:ns:kube-system -selector k8s:sa:cilium-operator"
 
               while pgrep spire-server > /dev/null;
               do
@@ -974,7 +974,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: cilium
-    namespace: default
+    namespace: kube-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -989,7 +989,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: cilium-operator
-    namespace: default
+    namespace: kube-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -1004,7 +1004,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: clustermesh-apiserver
-    namespace: default
+    namespace: kube-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -1019,7 +1019,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: hubble-ui
-    namespace: default
+    namespace: kube-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -1099,7 +1099,21 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: clustermesh-apiserver-admin-cert
-  namespace: default
+  namespace: kube-system
+---
+spec:
+  commonName: externalworkload
+  duration: 26280h0m0s
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: cilium-ca
+  secretName: clustermesh-apiserver-client-cert
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: clustermesh-apiserver-client-cert
+  namespace: kube-system
 ---
 spec:
   commonName: remote
@@ -1113,14 +1127,14 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: clustermesh-apiserver-remote-cert
-  namespace: default
+  namespace: kube-system
 ---
 spec:
   commonName: clustermesh-apiserver.cilium.io
   dnsNames:
     - clustermesh-apiserver.cilium.io
     - '*.mesh.cilium.io'
-    - clustermesh-apiserver.default.svc
+    - clustermesh-apiserver.kube-system.svc
   duration: 26280h0m0s
   ipAddresses:
     - 127.0.0.1
@@ -1134,7 +1148,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: clustermesh-apiserver-server-cert
-  namespace: default
+  namespace: kube-system
 ---
 spec:
   commonName: '*.hubble-relay.cilium.io'
@@ -1150,7 +1164,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: hubble-relay-client-certs
-  namespace: default
+  namespace: kube-system
 ---
 spec:
   commonName: '*.coder-amanibhavam-class.hubble-grpc.cilium.io'
@@ -1166,7 +1180,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: hubble-server-certs
-  namespace: default
+  namespace: kube-system
 ---
 apiVersion: v1
 data:
@@ -1294,7 +1308,7 @@ data:
 kind: ConfigMap
 metadata:
   name: cilium-config
-  namespace: default
+  namespace: kube-system
 ---
 apiVersion: v1
 data:
@@ -1611,15 +1625,15 @@ data:
 kind: ConfigMap
 metadata:
   name: cilium-envoy-config
-  namespace: default
+  namespace: kube-system
 ---
 apiVersion: v1
 data:
-  config.yaml: "cluster-name: coder-amanibhavam-class\npeer-service: \"hubble-peer.default.svc.cluster.local:443\"\nlisten-address: :4245\ngops: true\ngops-port: \"9893\"\ndial-timeout: \nretry-timeout: \nsort-buffer-len-max: \nsort-buffer-drain-timeout: \ntls-hubble-client-cert-file: /var/lib/hubble-relay/tls/client.crt\ntls-hubble-client-key-file: /var/lib/hubble-relay/tls/client.key\ntls-hubble-server-ca-files: /var/lib/hubble-relay/tls/hubble-server-ca.crt\ndisable-server-tls: true\n"
+  config.yaml: "cluster-name: coder-amanibhavam-class\npeer-service: \"hubble-peer.kube-system.svc.cluster.local:443\"\nlisten-address: :4245\ngops: true\ngops-port: \"9893\"\ndial-timeout: \nretry-timeout: \nsort-buffer-len-max: \nsort-buffer-drain-timeout: \ntls-hubble-client-cert-file: /var/lib/hubble-relay/tls/client.crt\ntls-hubble-client-key-file: /var/lib/hubble-relay/tls/client.key\ntls-hubble-server-ca-files: /var/lib/hubble-relay/tls/hubble-server-ca.crt\ndisable-server-tls: true\n"
 kind: ConfigMap
 metadata:
   name: hubble-relay-config
-  namespace: default
+  namespace: kube-system
 ---
 apiVersion: v1
 data:
@@ -1627,7 +1641,7 @@ data:
 kind: ConfigMap
 metadata:
   name: hubble-ui-nginx
-  namespace: default
+  namespace: kube-system
 ---
 spec:
   template:
@@ -2035,7 +2049,7 @@ metadata:
     app.kubernetes.io/part-of: cilium
     k8s-app: cilium
   name: cilium
-  namespace: default
+  namespace: kube-system
 ---
 spec:
   template:
@@ -2177,7 +2191,7 @@ metadata:
     k8s-app: cilium-envoy
     name: cilium-envoy
   name: cilium-envoy
-  namespace: default
+  namespace: kube-system
 ---
 spec:
   template:
@@ -2285,7 +2299,7 @@ metadata:
     io.cilium/app: operator
     name: cilium-operator
   name: cilium-operator
-  namespace: default
+  namespace: kube-system
 ---
 spec:
   template:
@@ -2374,7 +2388,7 @@ spec:
             - --cluster-id=$(CLUSTER_ID)
             - --kvstore-opt
             - etcd.config=/var/lib/cilium/etcd-config.yaml
-            - --enable-external-workloads=false
+            - --enable-external-workloads=true
             - --prometheus-serve-addr=:9962
           command:
             - /usr/bin/clustermesh-apiserver
@@ -2476,7 +2490,7 @@ metadata:
     app.kubernetes.io/part-of: cilium
     k8s-app: clustermesh-apiserver
   name: clustermesh-apiserver
-  namespace: default
+  namespace: kube-system
 ---
 spec:
   template:
@@ -2570,7 +2584,7 @@ metadata:
     app.kubernetes.io/part-of: cilium
     k8s-app: hubble-relay
   name: hubble-relay
-  namespace: default
+  namespace: kube-system
 ---
 spec:
   template:
@@ -2634,13 +2648,13 @@ metadata:
     app.kubernetes.io/part-of: cilium
     k8s-app: hubble-ui
   name: hubble-ui
-  namespace: default
+  namespace: kube-system
 ---
 apiVersion: v1
 kind: Endpoints
 metadata:
   name: cilium-ingress
-  namespace: default
+  namespace: kube-system
 subsets:
   - addresses:
       - ip: 192.192.192.192
@@ -2662,7 +2676,7 @@ metadata:
   labels:
     app.kubernetes.io/part-of: cilium
   name: cilium-config-agent
-  namespace: default
+  namespace: kube-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -2670,7 +2684,7 @@ metadata:
   labels:
     app.kubernetes.io/part-of: cilium
   name: cilium-config-agent
-  namespace: default
+  namespace: kube-system
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -2678,7 +2692,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: cilium
-    namespace: default
+    namespace: kube-system
 ---
 spec:
   clusterIP: None
@@ -2702,7 +2716,7 @@ metadata:
     io.cilium/app: proxy
     k8s-app: cilium-envoy
   name: cilium-envoy
-  namespace: default
+  namespace: kube-system
 ---
 spec:
   ports:
@@ -2719,7 +2733,7 @@ metadata:
   labels:
     cilium.io/ingress: "true"
   name: cilium-ingress
-  namespace: default
+  namespace: kube-system
 ---
 spec:
   ports:
@@ -2736,7 +2750,7 @@ metadata:
     app.kubernetes.io/part-of: cilium
     k8s-app: clustermesh-apiserver
   name: clustermesh-apiserver
-  namespace: default
+  namespace: kube-system
 ---
 spec:
   clusterIP: None
@@ -2761,7 +2775,7 @@ metadata:
     app.kubernetes.io/part-of: cilium
     k8s-app: clustermesh-apiserver
   name: clustermesh-apiserver-metrics
-  namespace: default
+  namespace: kube-system
 ---
 spec:
   internalTrafficPolicy: Local
@@ -2780,7 +2794,7 @@ metadata:
     app.kubernetes.io/part-of: cilium
     k8s-app: cilium
   name: hubble-peer
-  namespace: default
+  namespace: kube-system
 ---
 spec:
   ports:
@@ -2798,7 +2812,7 @@ metadata:
     app.kubernetes.io/part-of: cilium
     k8s-app: hubble-relay
   name: hubble-relay
-  namespace: default
+  namespace: kube-system
 ---
 spec:
   ports:
@@ -2816,40 +2830,40 @@ metadata:
     app.kubernetes.io/part-of: cilium
     k8s-app: hubble-ui
   name: hubble-ui
-  namespace: default
+  namespace: kube-system
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: cilium
-  namespace: default
+  namespace: kube-system
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: cilium-envoy
-  namespace: default
+  namespace: kube-system
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: cilium-operator
-  namespace: default
+  namespace: kube-system
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: clustermesh-apiserver
-  namespace: default
+  namespace: kube-system
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: hubble-relay
-  namespace: default
+  namespace: kube-system
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: hubble-ui
-  namespace: default
+  namespace: kube-system
