@@ -2875,6 +2875,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
   name: hubble-ui
+  namespace: kube-system
 spec:
   ingressClassName: traefik
   rules:

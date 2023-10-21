@@ -1064,6 +1064,7 @@ kustomize: "cilium": #KustomizeHelm & {
 		kind:       "Ingress"
 		metadata: {
 			name: "hubble-ui"
+			namespace: "kube-system"
 			annotations: {
 				"traefik.ingress.kubernetes.io/router.tls":         "true"
 				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
