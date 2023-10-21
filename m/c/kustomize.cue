@@ -988,6 +988,7 @@ cilium_common: {
 	helm: {
 		release:   "cilium"
 		name:      "cilium"
+		namespace: "kube-system"
 		version:   "1.14.3"
 		repo:      "https://helm.cilium.io"
 		values: {
@@ -998,6 +999,7 @@ cilium_common: {
 			hostPort: enabled: true
 			nodePort: enabled: true
 			ingressController: enabled: true
+			externalWorkloads: enabled: true
 			cluster: {
 				name: infra_cilium_name
 				id: infra_cilium_id

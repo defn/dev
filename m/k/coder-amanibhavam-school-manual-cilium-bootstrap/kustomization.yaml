@@ -9,6 +9,7 @@ helmCharts:
     name: cilium
     version: 1.14.3
     repo: https://helm.cilium.io
+    namespace: kube-system
     valuesInline:
       operator:
         replicas: 1
@@ -23,6 +24,8 @@ helmCharts:
       nodePort:
         enabled: true
       ingressController:
+        enabled: true
+      externalWorkloads:
         enabled: true
       cluster:
         name: coder-amanibhavam-school
