@@ -17,16 +17,16 @@ helmCharts:
         masquerade: true
       envoy:
         enabled: true
-      hostFirewall:
-        enabled: true
-      hostPort:
-        enabled: true
-      nodePort:
-        enabled: true
       ingressController:
         enabled: true
       externalWorkloads:
         enabled: true
+      hostFirewall:
+        enabled: false
+      hostPort:
+        enabled: false
+      nodePort:
+        enabled: false
       cluster:
         name: coder-amanibhavam-school
         id: 2

@@ -995,11 +995,11 @@ cilium_common: {
 			operator: replicas:       1
 			bpf: masquerade:          true
 			envoy: enabled:           true
-			hostFirewall: enabled: true
-			hostPort: enabled: true
-			nodePort: enabled: true
 			ingressController: enabled: true
 			externalWorkloads: enabled: true
+			hostFirewall: enabled: false
+			hostPort: enabled: false
+			nodePort: enabled: false
 			cluster: {
 				name: infra_cilium_name
 				id: infra_cilium_id
