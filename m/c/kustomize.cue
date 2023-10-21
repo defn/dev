@@ -1023,7 +1023,7 @@ cilium_common: {
 			encryption: {
 				enabled: true
 				type: "wireguard"
-				nodeEncryption: true
+				nodeEncryption: false
 			}
 			hubble: {
 				ui: enabled:    bool | *false
