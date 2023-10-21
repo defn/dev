@@ -82,5 +82,6 @@
     "maxLength": 50
   },
   "calva.paredit.defaultKeyMap": "strict",
-  "git.detectSubmodules": false
+  "git.detectSubmodules": false,
+  "workbench.editor.empty.hint": "hidden"
 }
