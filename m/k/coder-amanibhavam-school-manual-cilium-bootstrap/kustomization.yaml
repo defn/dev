@@ -14,8 +14,6 @@ helmCharts:
     valuesInline:
       operator:
         replicas: 1
-      bpf:
-        masquerade: true
       envoy:
         enabled: true
       nodePort:
