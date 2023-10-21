@@ -11,8 +11,11 @@ helm_add:
 	(cd .. && git grep repo: kustomize.cue) | cut -d'"' -f2 | sort -u | while read -r repo; do helm repo add $$(echo $$repo | cut -d/ -f3- | perl -pe 's{\s+$$}{}; s{\W+}{-}g') $$repo; done
 	helm repo update
 
-release-all:
+build-all:
 	for a in coder-*/; do (cd $$a && make); done
+
+release-all:
+	$(MAKE) build-all
 	$(MAKE) release
 
 release:

@@ -18,6 +18,8 @@ helmCharts:
         masquerade: true
       envoy:
         enabled: true
+      nodePort:
+        enabled: true
       cluster:
         name: default
         id: 0
