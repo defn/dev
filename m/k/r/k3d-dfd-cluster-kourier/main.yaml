@@ -179,7 +179,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:23d90ddc037772107d96ba429e706130666ac036ef3b1ebdb3671ca73c8a1d5d
+        - image: 169.254.32.1:5000/gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:4e54025fd3b835228afd37f115fea685064c1351f45b67b85891ca532e319187
           env:
             - name: CERTS_SECRET_NAMESPACE
               value: ""
@@ -402,7 +402,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/docker.io/envoyproxy/envoy@sha256:079b133366a9909f0f48b396c538f235c7b214f84aa45f3d32404ff616022281
+        - image: 169.254.32.1:5000/docker.io/envoyproxy/envoy@sha256:ad8d9e40a0fcc8e14633395516768826ce7d32b3bfd3973d7884820df11cb942
           args:
             - --base-id 1
             - -c /tmp/config/envoy-bootstrap.yaml

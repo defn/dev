@@ -5,7 +5,6 @@ patches:
   - path: patch-serviceaccount-karpenter.yaml
   - path: patch-deployment-karpenter.yaml
 resources:
-  - karpenter.yaml
   - resource-namespace-karpenter.yaml
   - resource-cluster-role-binding-admin.yaml
   - resource-cluster-role-binding-node.yaml
@@ -15,3 +14,15 @@ resources:
 namespace: karpenter
 commonLabels: {}
 commonAnnotations: {}
+helmCharts:
+  - releaseName: karpenter
+    name: karpenter
+    version: v0.31.1
+    repo: oci://public.ecr.aws/karpenter
+    namespace: karpenter
+    valuesInline:
+      controller:
+        env:
+          - name: AWS_REGION
+            value: us-west-2
+    includeCRDs: true

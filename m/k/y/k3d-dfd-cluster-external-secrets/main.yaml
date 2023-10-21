@@ -7,7 +7,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: acraccesstokens.generators.external-secrets.io
 spec:
   conversion:
@@ -190,7 +190,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: clusterexternalsecrets.external-secrets.io
 spec:
   conversion:
@@ -701,6 +701,10 @@ spec:
                   - type
                   type: object
                 type: array
+              externalSecretName:
+                description: ExternalSecretName is the name of the ExternalSecrets
+                  created by the ClusterExternalSecret
+                type: string
               failedNamespaces:
                 description: Failed namespaces are the namespaces that failed to apply
                   an ExternalSecret
@@ -737,7 +741,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: clustersecretstores.external-secrets.io
 spec:
   conversion:
@@ -2996,11 +3000,98 @@ spec:
                             - apiKeyRef
                             - userRef
                             type: object
-                        required:
-                        - apikey
+                          jwt:
+                            properties:
+                              account:
+                                type: string
+                              secretRef:
+                                description: Optional SecretRef that refers to a key
+                                  in a Secret resource containing JWT token to authenticate
+                                  with Conjur using the JWT authentication method.
+                                properties:
+                                  key:
+                                    description: The key of the entry in the Secret
+                                      resource's `data` field to be used. Some instances
+                                      of this field may be defaulted, in others it
+                                      may be required.
+                                    type: string
+                                  name:
+                                    description: The name of the Secret resource being
+                                      referred to.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the resource being referred
+                                      to. Ignored if referent is not cluster-scoped.
+                                      cluster-scoped defaults to the namespace of
+                                      the referent.
+                                    type: string
+                                type: object
+                              serviceAccountRef:
+                                description: Optional ServiceAccountRef specifies
+                                  the Kubernetes service account for which to request
+                                  a token for with the `TokenRequest` API.
+                                properties:
+                                  audiences:
+                                    description: Audience specifies the `aud` claim
+                                      for the service account token If the service
+                                      account uses a well-known annotation for e.g.
+                                      IRSA or GCP Workload Identity then this audiences
+                                      will be appended to the list
+                                    items:
+                                      type: string
+                                    type: array
+                                  name:
+                                    description: The name of the ServiceAccount resource
+                                      being referred to.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the resource being referred
+                                      to. Ignored if referent is not cluster-scoped.
+                                      cluster-scoped defaults to the namespace of
+                                      the referent.
+                                    type: string
+                                required:
+                                - name
+                                type: object
+                              serviceID:
+                                description: The conjur authn jwt webservice id
+                                type: string
+                            required:
+                            - account
+                            - serviceID
+                            type: object
                         type: object
                       caBundle:
                         type: string
+                      caProvider:
+                        description: Used to provide custom certificate authority
+                          (CA) certificates for a secret store. The CAProvider points
+                          to a Secret or ConfigMap resource that contains a PEM-encoded
+                          certificate.
+                        properties:
+                          key:
+                            description: The key where the CA certificate can be found
+                              in the Secret or ConfigMap.
+                            type: string
+                          name:
+                            description: The name of the object located at the provider
+                              type.
+                            type: string
+                          namespace:
+                            description: The namespace the Provider type is in. Can
+                              only be defined when used in a ClusterSecretStore.
+                            type: string
+                          type:
+                            description: The type of provider to use such as "Secret",
+                              or "ConfigMap".
+                            enum:
+                            - Secret
+                            - ConfigMap
+                            type: string
+                        required:
+                        - name
+                        - type
+                        type: object
                       url:
                         type: string
                     required:
@@ -4671,7 +4762,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: ecrauthorizationtokens.generators.external-secrets.io
 spec:
   conversion:
@@ -4834,7 +4925,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: externalsecrets.external-secrets.io
 spec:
   conversion:
@@ -5559,7 +5650,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: fakes.generators.external-secrets.io
 spec:
   conversion:
@@ -5626,7 +5717,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: gcraccesstokens.generators.external-secrets.io
 spec:
   conversion:
@@ -5751,7 +5842,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: passwords.generators.external-secrets.io
 spec:
   conversion:
@@ -5837,7 +5928,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: pushsecrets.external-secrets.io
 spec:
   conversion:
@@ -5912,6 +6003,11 @@ spec:
                       - remoteRef
                       - secretKey
                       type: object
+                    metadata:
+                      description: Metadata is metadata attached to the secret. The
+                        structure of metadata is provider specific, please look it
+                        up in the provider documentation.
+                      x-kubernetes-preserve-unknown-fields: true
                   required:
                   - match
                   type: object
@@ -6064,6 +6160,11 @@ spec:
                         - remoteRef
                         - secretKey
                         type: object
+                      metadata:
+                        description: Metadata is metadata attached to the secret.
+                          The structure of metadata is provider specific, please look
+                          it up in the provider documentation.
+                        x-kubernetes-preserve-unknown-fields: true
                     required:
                     - match
                     type: object
@@ -6086,7 +6187,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: secretstores.external-secrets.io
 spec:
   conversion:
@@ -8345,11 +8446,98 @@ spec:
                             - apiKeyRef
                             - userRef
                             type: object
-                        required:
-                        - apikey
+                          jwt:
+                            properties:
+                              account:
+                                type: string
+                              secretRef:
+                                description: Optional SecretRef that refers to a key
+                                  in a Secret resource containing JWT token to authenticate
+                                  with Conjur using the JWT authentication method.
+                                properties:
+                                  key:
+                                    description: The key of the entry in the Secret
+                                      resource's `data` field to be used. Some instances
+                                      of this field may be defaulted, in others it
+                                      may be required.
+                                    type: string
+                                  name:
+                                    description: The name of the Secret resource being
+                                      referred to.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the resource being referred
+                                      to. Ignored if referent is not cluster-scoped.
+                                      cluster-scoped defaults to the namespace of
+                                      the referent.
+                                    type: string
+                                type: object
+                              serviceAccountRef:
+                                description: Optional ServiceAccountRef specifies
+                                  the Kubernetes service account for which to request
+                                  a token for with the `TokenRequest` API.
+                                properties:
+                                  audiences:
+                                    description: Audience specifies the `aud` claim
+                                      for the service account token If the service
+                                      account uses a well-known annotation for e.g.
+                                      IRSA or GCP Workload Identity then this audiences
+                                      will be appended to the list
+                                    items:
+                                      type: string
+                                    type: array
+                                  name:
+                                    description: The name of the ServiceAccount resource
+                                      being referred to.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the resource being referred
+                                      to. Ignored if referent is not cluster-scoped.
+                                      cluster-scoped defaults to the namespace of
+                                      the referent.
+                                    type: string
+                                required:
+                                - name
+                                type: object
+                              serviceID:
+                                description: The conjur authn jwt webservice id
+                                type: string
+                            required:
+                            - account
+                            - serviceID
+                            type: object
                         type: object
                       caBundle:
                         type: string
+                      caProvider:
+                        description: Used to provide custom certificate authority
+                          (CA) certificates for a secret store. The CAProvider points
+                          to a Secret or ConfigMap resource that contains a PEM-encoded
+                          certificate.
+                        properties:
+                          key:
+                            description: The key where the CA certificate can be found
+                              in the Secret or ConfigMap.
+                            type: string
+                          name:
+                            description: The name of the object located at the provider
+                              type.
+                            type: string
+                          namespace:
+                            description: The namespace the Provider type is in. Can
+                              only be defined when used in a ClusterSecretStore.
+                            type: string
+                          type:
+                            description: The type of provider to use such as "Secret",
+                              or "ConfigMap".
+                            enum:
+                            - Secret
+                            - ConfigMap
+                            type: string
+                        required:
+                        - name
+                        - type
+                        type: object
                       url:
                         type: string
                     required:
@@ -10020,7 +10208,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: vaultdynamicsecrets.generators.external-secrets.io
 spec:
   conversion:
@@ -10672,8 +10860,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.4
-    helm.sh/chart: external-secrets-0.9.4
+    app.kubernetes.io/version: v0.9.6
+    helm.sh/chart: external-secrets-0.9.6
   name: external-secrets
   namespace: external-secrets
 ---
@@ -10684,8 +10872,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.4
-    helm.sh/chart: external-secrets-0.9.4
+    app.kubernetes.io/version: v0.9.6
+    helm.sh/chart: external-secrets-0.9.6
   name: external-secrets-leaderelection
   namespace: external-secrets
 rules:
@@ -10722,8 +10910,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.4
-    helm.sh/chart: external-secrets-0.9.4
+    app.kubernetes.io/version: v0.9.6
+    helm.sh/chart: external-secrets-0.9.6
   name: external-secrets-controller
 rules:
 - apiGroups:
@@ -10830,8 +11018,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.4
-    helm.sh/chart: external-secrets-0.9.4
+    app.kubernetes.io/version: v0.9.6
+    helm.sh/chart: external-secrets-0.9.6
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
   name: external-secrets-edit
@@ -10872,8 +11060,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.4
-    helm.sh/chart: external-secrets-0.9.4
+    app.kubernetes.io/version: v0.9.6
+    helm.sh/chart: external-secrets-0.9.6
     servicebinding.io/controller: "true"
   name: external-secrets-servicebindings
 rules:
@@ -10893,8 +11081,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.4
-    helm.sh/chart: external-secrets-0.9.4
+    app.kubernetes.io/version: v0.9.6
+    helm.sh/chart: external-secrets-0.9.6
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
     rbac.authorization.k8s.io/aggregate-to-view: "true"
@@ -10932,8 +11120,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.4
-    helm.sh/chart: external-secrets-0.9.4
+    app.kubernetes.io/version: v0.9.6
+    helm.sh/chart: external-secrets-0.9.6
   name: external-secrets-leaderelection
   namespace: external-secrets
 roleRef:
@@ -10952,8 +11140,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.4
-    helm.sh/chart: external-secrets-0.9.4
+    app.kubernetes.io/version: v0.9.6
+    helm.sh/chart: external-secrets-0.9.6
   name: external-secrets-controller
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -10984,8 +11172,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.4
-    helm.sh/chart: external-secrets-0.9.4
+    app.kubernetes.io/version: v0.9.6
+    helm.sh/chart: external-secrets-0.9.6
   name: external-secrets
   namespace: external-secrets
 spec:
@@ -10999,13 +11187,16 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/instance: external-secrets
+        app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: external-secrets
+        app.kubernetes.io/version: v0.9.6
+        helm.sh/chart: external-secrets-0.9.6
     spec:
       automountServiceAccountToken: true
       containers:
       - args:
         - --concurrent=1
-        image: ghcr.io/external-secrets/external-secrets:v0.9.4
+        image: ghcr.io/external-secrets/external-secrets:v0.9.6
         imagePullPolicy: IfNotPresent
         name: external-secrets
         ports:

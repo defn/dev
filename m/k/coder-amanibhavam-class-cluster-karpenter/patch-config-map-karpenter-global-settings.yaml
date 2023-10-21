@@ -2,6 +2,7 @@
 
 metadata:
   name: karpenter-global-settings
+  namespace: karpenter
 data:
   aws.clusterName: coder-amanibhavam-class
   aws.clusterEndpoint: https://kubernetes.default.svc.cluster.local:443
