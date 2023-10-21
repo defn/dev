@@ -576,6 +576,7 @@ data:
   enable-auto-protect-node-port-range: "true"
   enable-bgp-control-plane: "false"
   enable-bpf-clock-probe: "false"
+  enable-bpf-masquerade: "true"
   enable-endpoint-health-checking: "true"
   enable-external-ips: "false"
   enable-health-check-nodeport: "true"
