@@ -1,0 +1,19 @@
+#ManagedBy: cue
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: class.amanibhavam.defn.run
+  namespace: default
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: HostRegexp(`{subdomain:[a-z0-9-]+}.default.class.amanibhavam.defn.run`)
+      kind: Rule
+      services:
+        - name: kourier-internal
+          namespace: kourier-system
+          kind: Service
+          port: 80
+          scheme: http

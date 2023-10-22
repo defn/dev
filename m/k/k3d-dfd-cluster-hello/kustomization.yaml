@@ -1,9 +1,0 @@
-#ManagedBy: cue
-
-patches: []
-resources:
-  - resource-ingressroute-dev.amanibhavam.defn.run.yaml
-  - resource-kservice-hello.yaml
-  - resource-kservice-bye.yaml
-commonLabels: {}
-commonAnnotations: {}
