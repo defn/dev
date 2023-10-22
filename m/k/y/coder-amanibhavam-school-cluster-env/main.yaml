@@ -298,27 +298,6 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-pihole
-  namespace: argocd
-spec:
-  destination:
-    name: coder-amanibhavam-school-cluster
-  project: default
-  source:
-    path: m/k/r/coder-amanibhavam-school-cluster-pihole
-    repoURL: https://github.com/defn/dev
-    targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions: []
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-school-cluster-pod-identity
   namespace: argocd
 spec:
