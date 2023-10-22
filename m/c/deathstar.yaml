@@ -96,3 +96,15 @@ spec:
             http:
               - method: "GET"
                 path: "/v1/"
+    - fromEndpoints:
+        - matchLabels:
+            class: spaceship
+            io.cilium.k8s.policy.cluster: coder-amanibhavam-district
+      toPorts:
+        - ports:
+            - port: "80"
+              protocol: TCP
+          rules:
+            http:
+              - method: "GET"
+                path: "/v1/"
