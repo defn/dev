@@ -24,6 +24,10 @@ helmCharts:
         enabled: true
       externalWorkloads:
         enabled: true
+      hostPort:
+        enabled: false
+      nodePort:
+        enabled: false
       cluster:
         name: default
         id: 0
