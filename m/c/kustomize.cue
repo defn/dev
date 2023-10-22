@@ -1026,7 +1026,8 @@ cilium_common: {
 			encryption: {
 				enabled: true
 				type: "wireguard"
-				nodeEncryption: true
+				// nodeEncryption makes tailscale subnet routing unhappy
+				nodeEncryption: false
 			}
 			hubble: {
 				ui: enabled:    bool | *false
