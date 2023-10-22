@@ -27,6 +27,7 @@ spec:
   template:
     metadata:
       labels:
+        name: xwing
         org: alliance
         class: spaceship
     spec:
