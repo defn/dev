@@ -48,8 +48,9 @@ function main {
 		echo "/dev/${docker_disk} /mnt/docker ext4 defaults,nofail 0 2" | sudo tee -a /etc/fstab
 		sudo mount /mnt/docker
 	fi
-	sudo rm -rf /var/lib/docker
-	sudo ln -nfs /mnt/docker /var/lib/docker
+	#sudo rm -rf /var/lib/docker
+	#sudo ln -nfs /mnt/docker /var/lib/docker
+  sudo mkdir -p /var/lib/dockem
 
 	sudo systemctl start docker
 
