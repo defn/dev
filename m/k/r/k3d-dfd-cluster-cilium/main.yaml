@@ -1219,6 +1219,7 @@ data:
   enable-well-known-identities: "false"
   enable-wireguard: "true"
   enable-xt-socket-fallback: "true"
+  encrypt-node: "true"
   enforce-ingress-https: "true"
   external-envoy-proxy: "true"
   hubble-disable-tls: "false"

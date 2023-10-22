@@ -51,7 +51,7 @@ helmCharts:
       encryption:
         enabled: true
         type: wireguard
-        nodeEncryption: false
+        nodeEncryption: true
       hubble:
         ui:
           enabled: true
