@@ -38,7 +38,6 @@ teacher_bootstrap: {
 	// applications
 	"headlamp": [100, ""]
 	"postgres-operator": [100, ""]
-	"coder": [100, ""]
 	"pihole": [100, ""]
 	"hello": [100, ""]
 }
