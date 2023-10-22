@@ -86,7 +86,7 @@ test:
 
 test-mesh:
 	kubectl --context $$(uname -n) delete ns cilium-test || true
-	kubectl --context $(to) delete ns cilium-test
+	kubectl --context $(to) delete ns cilium-test || true
 	cilium connectivity test --context $$(uname -n) --multi-cluster $(to) --test '!/node-to-node-encryption'
 	kubectl --context $$(uname -n) delete ns cilium-test || true
 	kubectl --context $(to) delete ns cilium-test
