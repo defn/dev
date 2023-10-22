@@ -2160,6 +2160,33 @@ kustomize: "headlamp": #KustomizeHelm & {
 		}
 
 		spec: {
+			ingressClassName: "traefik"
+			rules: [{
+				host: "headlamp.\(cluster.domain_name)"
+				http: paths: [{
+					path:     "/"
+					pathType: "Prefix"
+					backend: service: {
+						name: "headlamp"
+						port: number: 80
+					}
+				}]
+			}]
+		}
+	}
+
+	#resource: "ingress-headlamp": {
+		apiVersion: "networking.k8s.io/v1"
+		kind:       "Ingress"
+		metadata: {
+			name: "headlamp"
+			annotations: {
+				"traefik.ingress.kubernetes.io/router.tls":         "true"
+				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
+			}
+		}
+
+		spec: {
 			ingressClassName: "tailscale"
 			defaultBackend: service: {
 				name: "headlamp"

@@ -144,12 +144,15 @@ metadata:
   name: headlamp
   namespace: headlamp
 spec:
-  defaultBackend:
-    service:
-      name: headlamp
-      port:
-        number: 80
-  ingressClassName: tailscale
-  tls:
-  - hosts:
-    - headlamp
+  ingressClassName: traefik
+  rules:
+  - host: headlamp.school.amanibhavam.defn.run
+    http:
+      paths:
+      - backend:
+          service:
+            name: headlamp
+            port:
+              number: 80
+        path: /
+        pathType: Prefix

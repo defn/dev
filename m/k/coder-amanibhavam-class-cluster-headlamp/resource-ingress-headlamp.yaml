@@ -8,12 +8,15 @@ metadata:
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
-  ingressClassName: tailscale
-  defaultBackend:
-    service:
-      name: headlamp
-      port:
-        number: 80
-  tls:
-    - hosts:
-        - headlamp
+  ingressClassName: traefik
+  rules:
+    - host: headlamp.class.amanibhavam.defn.run
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: headlamp
+                port:
+                  number: 80
