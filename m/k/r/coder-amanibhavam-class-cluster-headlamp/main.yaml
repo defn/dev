@@ -87,15 +87,18 @@ metadata:
   namespace: headlamp
 ---
 spec:
-  defaultBackend:
-    service:
-      name: headlamp
-      port:
-        number: 80
-  ingressClassName: tailscale
-  tls:
-    - hosts:
-        - headlamp
+  ingressClassName: traefik
+  rules:
+    - host: headlamp.class.amanibhavam.defn.run
+      http:
+        paths:
+          - backend:
+              service:
+                name: headlamp
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
