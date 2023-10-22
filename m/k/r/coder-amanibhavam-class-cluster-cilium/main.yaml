@@ -1081,7 +1081,7 @@ data:
   enable-external-ips: "false"
   enable-health-check-nodeport: "true"
   enable-health-checking: "true"
-  enable-host-port: "true"
+  enable-host-port: "false"
   enable-hubble: "true"
   enable-ipv4: "true"
   enable-ipv4-big-tcp: "false"
