@@ -1,0 +1,35 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: deathstar
+  annotations:
+    io.cilium/global-service: 'true'
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+  selector:
+    org: empire
+    class: deathstar
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xwing
+spec:
+  selector:
+    matchLabels:
+      org: alliance
+      class: spaceship
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        org: alliance
+        class: spaceship
+    spec:
+      containers:
+        - name: spaceship
+          image: docker.io/tgraf/netperf:v1.0
+          imagePullPolicy: IfNotPresent
