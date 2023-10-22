@@ -1000,8 +1000,8 @@ cilium_common: {
 			//ingressController: enabled: true
 			//externalWorkloads: enabled: true
 			//hostFirewall: enabled: false
-			//hostPort: enabled: false
-			//nodePort: enabled: false
+			hostPort: enabled: false
+			nodePort: enabled: false
 			cluster: {
 				name: infra_cilium_name
 				id: infra_cilium_id
