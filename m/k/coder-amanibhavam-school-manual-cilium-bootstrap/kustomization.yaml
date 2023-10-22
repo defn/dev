@@ -20,8 +20,9 @@ helmCharts:
         masquerade: true
       envoy:
         enabled: true
+      kubeProxyReplacement: false
       nodePort:
-        enabled: true
+        enabled: false
       hostPort:
         enabled: false
       hostFirewall:

@@ -997,7 +997,8 @@ cilium_common: {
 			bpf: lbExternalClusterIP: true
 			bpf: masquerade:          true
 			envoy: enabled:           true
-			nodePort: enabled: true
+			kubeProxyReplacement: false
+			nodePort: enabled: false
 			hostPort: enabled: false
 			hostFirewall: enabled: false
 			ingressController: enabled: false
