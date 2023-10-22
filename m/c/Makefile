@@ -108,3 +108,9 @@ status:
 	kubectl exec -ti -n kube-system ds/cilium -- cilium-health status
 	cilium status
 	cilium clustermesh status
+
+visit:
+	kubectl exec -ti deploy/spaceship -- curl -XGET deathstar.default.svc.cluster.local/v1
+
+attack:
+	kubectl exec -ti deploy/xwing -- curl -XPUT -H 'X-Has-Force: True' deathstar.default.svc.cluster.local/v1/exhaust-port
