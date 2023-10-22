@@ -30,8 +30,6 @@ cache: "docker.io/bitnami/redis:7.2.1-debian-11-r24": "docker.io/bitnami/redis@s
 
 cache: "docker.io/envoyproxy/envoy:v1.24-latest": "docker.io/envoyproxy/envoy@sha256:ad8d9e40a0fcc8e14633395516768826ce7d32b3bfd3973d7884820df11cb942"
 
-cache: "docker.io/library/busybox:1.35.0@sha256:223ae047b1065bd069aac01ae3ac8088b3ca4a527827e283b85112f29385fb1b": "docker.io/library/busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094"
-
 cache: "docker.io/traefik:v2.10.4": "docker.io/traefik@sha256:2392cd9aadfd514b0112186904e7a36fcb6a301fc1e637bab4ad2746877cde96"
 
 cache: "gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:941af346142848b92ec256ce75691d6b1e83632180a9dcb05f3ef7e7e51acfc9": "gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:4e54025fd3b835228afd37f115fea685064c1351f45b67b85891ca532e319187"
@@ -65,10 +63,6 @@ cache: "ghcr.io/kyverno/kyverno:v1.10.3": "ghcr.io/kyverno/kyverno@sha256:2e8ba9
 cache: "ghcr.io/kyverno/kyvernopre:v1.10.3": "ghcr.io/kyverno/kyvernopre@sha256:4022f4b828418df94f61627bdc0852207986c095be9dbff686b57cb22b4c20ad"
 
 cache: "ghcr.io/kyverno/reports-controller:v1.10.3": "ghcr.io/kyverno/reports-controller@sha256:b0fbfe5a7250fadd120ffbb6dd4cb70e575bddc165da76b46e3b7dab4d275141"
-
-cache: "ghcr.io/spiffe/spire-agent:1.6.3@sha256:8eef9857bf223181ecef10d9bbcd2f7838f3689e9bd2445bede35066a732e823": "ghcr.io/spiffe/spire-agent@sha256:8eef9857bf223181ecef10d9bbcd2f7838f3689e9bd2445bede35066a732e823"
-
-cache: "ghcr.io/spiffe/spire-server:1.6.3@sha256:f4bc49fb0bd1d817a6c46204cc7ce943c73fb0a5496a78e0e4dc20c9a816ad7f": "ghcr.io/spiffe/spire-server@sha256:f4bc49fb0bd1d817a6c46204cc7ce943c73fb0a5496a78e0e4dc20c9a816ad7f"
 
 cache: "pihole/pihole:2023.05.2": "pihole/pihole@sha256:8bc45afe1625487aef62859a5bf02f3d7b3429e480f4e29e4689635ab86ec312"
 
