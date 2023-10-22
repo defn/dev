@@ -50,7 +50,9 @@ helmCharts:
       authentication:
         mutual:
           spire:
-            enabled: true
+            enabled: false
+            install:
+              enabled: false
       encryption:
         enabled: true
         type: wireguard

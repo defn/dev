@@ -1022,7 +1022,10 @@ cilium_common: {
 				}
 			}
 			authentication: {
-				mutual: spire: enabled: true
+				mutual: spire: {
+					enabled: false
+					install: enabled: false
+				}
 			}
 			encryption: {
 				enabled: true
