@@ -21,14 +21,6 @@ helmCharts:
         masquerade: true
       envoy:
         enabled: true
-      ingressController:
-        enabled: true
-      externalWorkloads:
-        enabled: true
-      hostPort:
-        enabled: false
-      nodePort:
-        enabled: false
       cluster:
         name: default
         id: 0
@@ -44,14 +36,6 @@ helmCharts:
                 group: cert-manager.io
                 kind: ClusterIssuer
                 name: cilium-ca
-      authentication:
-        mutual:
-          spire:
-            enabled: true
-      encryption:
-        enabled: true
-        type: wireguard
-        nodeEncryption: false
       hubble:
         ui:
           enabled: true
