@@ -84,3 +84,6 @@ test:
 
 restart-cilium:
 	kubectl -n kube-system rollout restart ds cilium 
+
+restart-clustermesh:
+	kubectl -n kube-system rollout restart deploy clustermesh-apiserver
