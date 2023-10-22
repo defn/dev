@@ -20,10 +20,6 @@ helmCharts:
         masquerade: true
       envoy:
         enabled: true
-      ingressController:
-        enabled: true
-      externalWorkloads:
-        enabled: true
       cluster:
         name: coder-amanibhavam-school
         id: 2

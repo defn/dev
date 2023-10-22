@@ -1,11 +1,6 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: cilium-secrets
----
-apiVersion: v1
-kind: Namespace
-metadata:
   name: cilium-spire
 ---
 apiVersion: v1
@@ -49,41 +44,6 @@ kind: ServiceAccount
 metadata:
   name: hubble-relay
   namespace: kube-system
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  labels:
-    app.kubernetes.io/part-of: cilium
-  name: cilium-ingress-secrets
-  namespace: cilium-secrets
-rules:
-- apiGroups:
-  - ""
-  resources:
-  - secrets
-  verbs:
-  - get
-  - list
-  - watch
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  labels:
-    app.kubernetes.io/part-of: cilium
-  name: cilium-operator-ingress-secrets
-  namespace: cilium-secrets
-rules:
-- apiGroups:
-  - ""
-  resources:
-  - secrets
-  verbs:
-  - create
-  - delete
-  - update
-  - patch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -271,7 +231,6 @@ rules:
   - ""
   resources:
   - namespaces
-  - secrets
   verbs:
   - get
   - list
@@ -285,10 +244,6 @@ rules:
   - get
   - list
   - watch
-  - create
-  - update
-  - delete
-  - patch
 - apiGroups:
   - cilium.io
   resources:
@@ -417,21 +372,6 @@ rules:
   - create
   - get
   - update
-- apiGroups:
-  - networking.k8s.io
-  resources:
-  - ingresses
-  - ingressclasses
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - networking.k8s.io
-  resources:
-  - ingresses/status
-  verbs:
-  - update
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -538,38 +478,6 @@ rules:
   - nodes/proxy
   verbs:
   - get
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  labels:
-    app.kubernetes.io/part-of: cilium
-  name: cilium-operator-ingress-secrets
-  namespace: cilium-secrets
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: cilium-operator-ingress-secrets
-subjects:
-- kind: ServiceAccount
-  name: cilium-operator
-  namespace: kube-system
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  labels:
-    app.kubernetes.io/part-of: cilium
-  name: cilium-secrets
-  namespace: cilium-secrets
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: cilium-ingress-secrets
-subjects:
-- kind: ServiceAccount
-  name: cilium
-  namespace: kube-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -837,14 +745,11 @@ data:
   enable-bpf-clock-probe: "false"
   enable-bpf-masquerade: "true"
   enable-endpoint-health-checking: "true"
-  enable-envoy-config: "true"
   enable-external-ips: "false"
   enable-health-check-nodeport: "true"
   enable-health-checking: "true"
   enable-host-port: "false"
   enable-hubble: "true"
-  enable-ingress-controller: "true"
-  enable-ingress-secrets-sync: "true"
   enable-ipv4: "true"
   enable-ipv4-big-tcp: "false"
   enable-ipv4-masquerade: "true"
@@ -866,7 +771,6 @@ data:
   enable-wireguard: "true"
   enable-xt-socket-fallback: "true"
   encrypt-node: "true"
-  enforce-ingress-https: "true"
   external-envoy-proxy: "true"
   hubble-disable-tls: "false"
   hubble-listen-address: :4244
@@ -877,11 +781,6 @@ data:
   identity-allocation-mode: crd
   identity-gc-interval: 15m0s
   identity-heartbeat-timeout: 30m0s
-  ingress-default-lb-mode: dedicated
-  ingress-lb-annotation-prefixes: service.beta.kubernetes.io service.kubernetes.io
-    cloud.google.com
-  ingress-secrets-namespace: cilium-secrets
-  ingress-shared-lb-service-name: cilium-ingress
   install-no-conntrack-iptables-rules: "false"
   ipam: cluster-pool
   ipam-cilium-node-update-rate: 15s
@@ -1266,17 +1165,6 @@ metadata:
   namespace: kube-system
 ---
 apiVersion: v1
-kind: Endpoints
-metadata:
-  name: cilium-ingress
-  namespace: kube-system
-subsets:
-- addresses:
-  - ip: 192.192.192.192
-  ports:
-  - port: 9999
----
-apiVersion: v1
 kind: Service
 metadata:
   name: spire-server
@@ -1314,25 +1202,6 @@ spec:
   selector:
     k8s-app: cilium-envoy
   type: ClusterIP
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    cilium.io/ingress: "true"
-  name: cilium-ingress
-  namespace: kube-system
-spec:
-  ports:
-  - name: http
-    nodePort: null
-    port: 80
-    protocol: TCP
-  - name: https
-    nodePort: null
-    port: 443
-    protocol: TCP
-  type: LoadBalancer
 ---
 apiVersion: v1
 kind: Service
@@ -1595,7 +1464,7 @@ spec:
         - --cluster-id=$(CLUSTER_ID)
         - --kvstore-opt
         - etcd.config=/var/lib/cilium/etcd-config.yaml
-        - --enable-external-workloads=true
+        - --enable-external-workloads=false
         - --prometheus-serve-addr=:9962
         command:
         - /usr/bin/clustermesh-apiserver
@@ -2617,20 +2486,6 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: clustermesh-apiserver-client-cert
-  namespace: kube-system
-spec:
-  commonName: externalworkload
-  duration: 26280h0m0s
-  issuerRef:
-    group: cert-manager.io
-    kind: ClusterIssuer
-    name: cilium-ca
-  secretName: clustermesh-apiserver-client-cert
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
   name: clustermesh-apiserver-remote-cert
   namespace: kube-system
 spec:
@@ -2694,10 +2549,3 @@ spec:
     kind: ClusterIssuer
     name: cilium-ca
   secretName: hubble-server-certs
----
-apiVersion: networking.k8s.io/v1
-kind: IngressClass
-metadata:
-  name: cilium
-spec:
-  controller: cilium.io/ingress-controller
