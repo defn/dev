@@ -87,3 +87,6 @@ restart-cilium:
 
 restart-clustermesh:
 	kubectl -n kube-system rollout restart deploy clustermesh-apiserver
+
+token:
+	@kubectl create token headlamp-admin -n headlamp
