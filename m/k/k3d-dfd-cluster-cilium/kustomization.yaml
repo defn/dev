@@ -27,6 +27,8 @@ helmCharts:
       clustermesh:
         useAPIServer: true
         apiserver:
+          service:
+            type: LoadBalancer
           tls:
             auto:
               method: certmanager
@@ -34,6 +36,14 @@ helmCharts:
                 group: cert-manager.io
                 kind: ClusterIssuer
                 name: cilium-ca
+      authentication:
+        mutual:
+          spire:
+            enabled: true
+      encryption:
+        enabled: true
+        type: wireguard
+        nodeEncryption: false
       hubble:
         ui:
           enabled: true
