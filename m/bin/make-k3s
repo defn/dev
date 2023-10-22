@@ -103,7 +103,7 @@ function make_up {
 
 	# add k3s to argocd
 	while true; do
-		if env KUBECONFIG=$HOME/.kube/config.argocd argocd cluster add ${infra_name} --name ${infra_name}-cluster --yes --core --in-cluster; then
+		if env KUBECONFIG=$HOME/.kube/config.argocd argocd cluster add ${infra_name} --yes --core --in-cluster --kube-context ${infra_name}-argocd --name ${infra_name}-cluster --upsert; then
 			break
 		fi
 		sleep 5
@@ -119,6 +119,9 @@ function make_up {
 		if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 60 ${infra_name}-cluster >/dev/null 2>&1; then break; fi
 		sleep 30
 	done &
+
+	# last minute things
+	make last
 
 	# k9s, show all pods
 	k9s -A
