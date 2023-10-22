@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: deathstar
   annotations:
-    io.cilium/global-service: 'true'
+    io.cilium/global-service: "true"
 spec:
   type: ClusterIP
   ports:
@@ -20,6 +20,7 @@ metadata:
 spec:
   selector:
     matchLabels:
+      name: xwing
       org: alliance
       class: spaceship
   replicas: 3
