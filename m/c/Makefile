@@ -80,7 +80,16 @@ down:
 	cd .. && bin/make-k3s down
 
 test:
-	cilium connectivity test --multi-cluster $(to) --context $$(uname -n) --test '!/node-to-node-encryption'
+	kubectl --context $$(uname -n) delete ns cilium-test || true
+	cilium connectivity test --context $$(uname -n) --test '!/(node|pod)-to-(node|pod)-encryption'
+	kubectl --context $$(uname -n) delete ns cilium-test || true
+
+test-mesh:
+	kubectl --context $$(uname -n) delete ns cilium-test || true
+	kubectl --context $(to) delete ns cilium-test
+	cilium connectivity test --context $$(uname -n) --multi-cluster $(to) --test '!/node-to-node-encryption'
+	kubectl --context $$(uname -n) delete ns cilium-test || true
+	kubectl --context $(to) delete ns cilium-test
 
 restart-cilium:
 	kubectl -n kube-system rollout restart ds cilium 
