@@ -1009,6 +1009,7 @@ cilium_common: {
 			clustermesh: {
 				useAPIServer: true
 				apiserver: {
+					service: type: "LoadBalancer"
 					tls: auto: {
 						method: "certmanager"
 						certManagerIssuerRef: {
