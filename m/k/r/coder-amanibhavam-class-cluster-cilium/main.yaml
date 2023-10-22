@@ -123,7 +123,7 @@ spec:
   template:
     spec:
       initContainers:
-        - image: not-found-docker.io/library/busybox:1.35.0@sha256:223ae047b1065bd069aac01ae3ac8088b3ca4a527827e283b85112f29385fb1b
+        - image: 169.254.32.1:5000/docker.io/library/busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094
           command:
             - /bin/sh
             - -c
@@ -160,7 +160,7 @@ spec:
               done
           name: init
       containers:
-        - image: not-found-ghcr.io/spiffe/spire-agent:1.6.3@sha256:8eef9857bf223181ecef10d9bbcd2f7838f3689e9bd2445bede35066a732e823
+        - image: 169.254.32.1:5000/ghcr.io/spiffe/spire-agent@sha256:8eef9857bf223181ecef10d9bbcd2f7838f3689e9bd2445bede35066a732e823
           args:
             - -config
             - /run/spire/config/agent.conf
@@ -306,7 +306,7 @@ spec:
   template:
     spec:
       containers:
-        - image: not-found-docker.io/library/busybox:1.35.0@sha256:223ae047b1065bd069aac01ae3ac8088b3ca4a527827e283b85112f29385fb1b
+        - image: 169.254.32.1:5000/docker.io/library/busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094
           command:
             - /bin/sh
             - -c
@@ -360,7 +360,7 @@ spec:
                 sleep 30;
               done
           name: cilium-init
-        - image: not-found-ghcr.io/spiffe/spire-server:1.6.3@sha256:f4bc49fb0bd1d817a6c46204cc7ce943c73fb0a5496a78e0e4dc20c9a816ad7f
+        - image: 169.254.32.1:5000/ghcr.io/spiffe/spire-server@sha256:f4bc49fb0bd1d817a6c46204cc7ce943c73fb0a5496a78e0e4dc20c9a816ad7f
           args:
             - -config
             - /run/spire/config/server.conf
