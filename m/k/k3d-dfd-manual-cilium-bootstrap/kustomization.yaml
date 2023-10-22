@@ -20,6 +20,10 @@ helmCharts:
         masquerade: true
       envoy:
         enabled: true
+      ingressController:
+        enabled: true
+      externalWorkloads:
+        enabled: true
       cluster:
         name: default
         id: 0
