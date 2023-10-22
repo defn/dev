@@ -16,29 +16,6 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deathstar
-spec:
-  selector:
-    matchLabels:
-      name: deathstar
-      org: empire
-      class: deathstar
-  replicas: 3
-  template:
-    metadata:
-      labels:
-        name: deathstar
-        org: empire
-        class: deathstar
-    spec:
-      containers:
-        - name: deathstar
-          image: docker.io/cilium/starwars:v1.0
-          imagePullPolicy: IfNotPresent
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
   name: spaceship
 spec:
   selector:
@@ -59,6 +36,29 @@ spec:
           image: docker.io/tgraf/netperf:v1.0
           imagePullPolicy: IfNotPresent
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deathstar
+spec:
+  selector:
+    matchLabels:
+      name: deathstar
+      org: empire
+      class: deathstar
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        name: deathstar
+        org: empire
+        class: deathstar
+    spec:
+      containers:
+        - name: deathstar
+          image: docker.io/cilium/starwars:v1.0
+          imagePullPolicy: IfNotPresent
+---
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
@@ -68,12 +68,10 @@ spec:
     matchLabels:
       class: deathstar
       org: empire
-      io.cilium.k8s.policy.cluster: coder-amanibhavam-school
   ingress:
     - fromEndpoints:
         - matchLabels:
-            class: spaceship
-            io.cilium.k8s.policy.cluster: coder-amanibhavam-class
+            org: alliance
       toPorts:
         - ports:
             - port: "80"
@@ -86,20 +84,7 @@ spec:
                   - "X-Has-Force: True"
     - fromEndpoints:
         - matchLabels:
-            class: spaceship
-            io.cilium.k8s.policy.cluster: coder-amanibhavam-school
-      toPorts:
-        - ports:
-            - port: "80"
-              protocol: TCP
-          rules:
-            http:
-              - method: "GET"
-                path: "/v1/"
-    - fromEndpoints:
-        - matchLabels:
-            class: spaceship
-            io.cilium.k8s.policy.cluster: coder-amanibhavam-district
+            org: empire
       toPorts:
         - ports:
             - port: "80"
