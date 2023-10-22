@@ -997,11 +997,11 @@ cilium_common: {
 			bpf: lbExternalClusterIP: true
 			bpf: masquerade:          true
 			envoy: enabled:           true
-			//ingressController: enabled: true
-			//externalWorkloads: enabled: true
-			//hostFirewall: enabled: false
-			hostPort: enabled: false
-			nodePort: enabled: false
+			hostPort: enabled: true
+			nodePort: enabled: true
+			ingressController: enabled: false
+			externalWorkloads: enabled: false
+			hostFirewall: enabled: false
 			cluster: {
 				name: infra_cilium_name
 				id: infra_cilium_id
