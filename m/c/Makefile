@@ -18,6 +18,9 @@ release-all:
 	$(MAKE) build-all
 	$(MAKE) release digest=$(digest)
 
+digest:
+	cd ./r && $(MAKE) digest
+
 release:
 # make one big cue config
 	rm -f ../k/y/cluster.cue
@@ -27,7 +30,7 @@ release:
 	git add ../k/y
 # generate k/r
 	rm -rf ../k/r
-	if test -n "$(digest)"; then cd ./r && $(MAKE) digest; fi
+	if test -n "$(digest)"; then $(MAKE) digest; fi
 	cd ./r/digest && $(MAKE) release
 	rm -rf ../k/r/y
 	git add ../k/r
