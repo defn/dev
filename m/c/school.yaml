@@ -20,6 +20,7 @@ metadata:
 spec:
   selector:
     matchLabels:
+      name: deathstar
       org: empire
       class: deathstar
   replicas: 3
@@ -42,6 +43,7 @@ metadata:
 spec:
   selector:
     matchLabels:
+      name: spaceship
       org: empire
       class: spaceship
   replicas: 4
