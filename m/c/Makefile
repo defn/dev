@@ -91,6 +91,9 @@ test-mesh:
 	kubectl --context $$(uname -n) delete ns cilium-test || true
 	kubectl --context $(to) delete ns cilium-test
 
+connect:
+	cilium clustermesh connect --context $$(uname -n) --destination-context $(to) --destination-endpoint $(endpoint)
+
 restart-cilium:
 	kubectl -n kube-system rollout restart ds cilium 
 
@@ -99,3 +102,9 @@ restart-clustermesh:
 
 token:
 	@kubectl create token headlamp-admin -n headlamp
+
+status:
+	kubectl exec -ti -n kube-system ds/cilium -- cilium status
+	kubectl exec -ti -n kube-system ds/cilium -- cilium-health status
+	cilium status
+	cilium clustermesh status
