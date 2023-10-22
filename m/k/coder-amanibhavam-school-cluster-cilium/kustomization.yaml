@@ -27,6 +27,8 @@ helmCharts:
       clustermesh:
         useAPIServer: true
         apiserver:
+          service:
+            type: LoadBalancer
           tls:
             auto:
               method: certmanager
