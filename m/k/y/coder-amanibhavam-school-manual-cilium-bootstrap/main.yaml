@@ -1,4 +1,21 @@
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: cilium-spire
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: spire-agent
+  namespace: cilium-spire
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: spire-server
+  namespace: cilium-spire
+---
+apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: cilium
@@ -27,6 +44,21 @@ kind: ServiceAccount
 metadata:
   name: hubble-relay
   namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: spire-server
+  namespace: cilium-spire
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - patch
+  - get
+  - list
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -409,6 +441,73 @@ rules:
   - watch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: spire-agent
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - nodes
+  - nodes/proxy
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: spire-server
+rules:
+- apiGroups:
+  - authentication.k8s.io
+  resources:
+  - tokenreviews
+  verbs:
+  - create
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  resources:
+  - nodes
+  - nodes/proxy
+  verbs:
+  - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: spire-server
+  namespace: cilium-spire
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: spire-server
+subjects:
+- kind: ServiceAccount
+  name: spire-server
+  namespace: cilium-spire
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: spire-server-pod
+  namespace: cilium-spire
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: spire-server-pod
+subjects:
+- kind: ServiceAccount
+  name: spire-server
+  namespace: cilium-spire
+---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   labels:
@@ -469,6 +568,153 @@ subjects:
   name: clustermesh-apiserver
   namespace: kube-system
 ---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: spire-agent
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: spire-agent
+subjects:
+- kind: ServiceAccount
+  name: spire-agent
+  namespace: cilium-spire
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: spire-server
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: spire-server
+subjects:
+- kind: ServiceAccount
+  name: spire-server
+  namespace: cilium-spire
+---
+apiVersion: v1
+data:
+  agent.conf: |
+    agent {
+      data_dir = "/run/spire"
+      log_level = "ERROR"
+      server_address = "spire-server"
+      server_port = "8081"
+      socket_path = "/run/spire/sockets/agent/agent.sock"
+      admin_socket_path = "/run/spire/sockets/admin.sock"
+      trust_bundle_path = "/run/spire/bundle/bundle.crt"
+      trust_domain = "spiffe.cilium"
+      authorized_delegates = [
+        "spiffe://spiffe.cilium/cilium-agent",
+      ]
+    }
+
+    plugins {
+      NodeAttestor "k8s_psat" {
+        plugin_data {
+          cluster = "coder-amanibhavam-school"
+        }
+      }
+
+      KeyManager "memory" {
+        plugin_data {
+        }
+      }
+
+      WorkloadAttestor "k8s" {
+        plugin_data {
+          skip_kubelet_verification = true
+        }
+      }
+    }
+
+    health_checks {
+      listener_enabled = true
+      bind_address = "0.0.0.0"
+      bind_port = "4251"
+      live_path = "/live"
+      ready_path = "/ready"
+    }
+kind: ConfigMap
+metadata:
+  name: spire-agent
+  namespace: cilium-spire
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spire-bundle
+  namespace: cilium-spire
+---
+apiVersion: v1
+data:
+  server.conf: |
+    server {
+      bind_address = "0.0.0.0"
+      bind_port = "8081"
+      socket_path = "/tmp/spire-server/private/api.sock"
+      trust_domain = "spiffe.cilium"
+      data_dir = "/run/spire/data"
+      log_level = "INFO"
+      ca_key_type = "rsa-4096"
+
+      ca_subject = {
+        country = ["US"],
+        organization = ["SPIRE"],
+        common_name = "Cilium SPIRE CA",
+      }
+
+      admin_ids = [
+        "spiffe://spiffe.cilium/cilium-operator",
+      ]
+    }
+
+    plugins {
+      DataStore "sql" {
+        plugin_data {
+          database_type = "sqlite3"
+          connection_string = "/run/spire/data/datastore.sqlite3"
+        }
+      }
+
+      NodeAttestor "k8s_psat" {
+        plugin_data {
+          clusters = {
+            "coder-amanibhavam-school" = {
+              use_token_review_api_validation = true
+              service_account_allow_list = ["cilium-spire:spire-agent"]
+            }
+          }
+        }
+      }
+
+      KeyManager "disk" {
+        plugin_data {
+          keys_path = "/run/spire/data/keys.json"
+        }
+      }
+
+      Notifier "k8sbundle" {
+        plugin_data {
+          namespace = "cilium-spire"
+        }
+      }
+    }
+
+    health_checks {
+      listener_enabled = true
+      bind_address = "0.0.0.0"
+      bind_port = "8080"
+      live_path = "/live"
+      ready_path = "/ready"
+    }
+kind: ConfigMap
+metadata:
+  name: spire-server
+  namespace: cilium-spire
+---
 apiVersion: v1
 data:
   agent-not-ready-taint-key: node.cilium.io/agent-not-ready
@@ -522,7 +768,9 @@ data:
   enable-svc-source-range-check: "true"
   enable-vtep: "false"
   enable-well-known-identities: "false"
+  enable-wireguard: "true"
   enable-xt-socket-fallback: "true"
+  encrypt-node: "true"
   external-envoy-proxy: "true"
   hubble-disable-tls: "false"
   hubble-listen-address: :4244
@@ -542,8 +790,15 @@ data:
   kube-proxy-replacement-healthz-bind-address: ""
   mesh-auth-enabled: "true"
   mesh-auth-gc-interval: 5m0s
+  mesh-auth-mutual-enabled: "true"
+  mesh-auth-mutual-listener-port: "4250"
   mesh-auth-queue-size: "1024"
   mesh-auth-rotated-identities-queue-size: "1024"
+  mesh-auth-spiffe-trust-domain: spiffe.cilium
+  mesh-auth-spire-admin-socket: /run/spire/sockets/admin.sock
+  mesh-auth-spire-agent-socket: /run/spire/sockets/agent/agent.sock
+  mesh-auth-spire-server-address: spire-server.cilium-spire.svc:8081
+  mesh-auth-spire-server-connection-timeout: 30s
   monitor-aggregation: medium
   monitor-aggregation-flags: all
   monitor-aggregation-interval: 5s
@@ -912,6 +1167,21 @@ metadata:
 apiVersion: v1
 kind: Service
 metadata:
+  name: spire-server
+  namespace: cilium-spire
+spec:
+  ports:
+  - name: grpc
+    port: 8081
+    protocol: TCP
+    targetPort: grpc
+  selector:
+    app: spire-server
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
   annotations:
     prometheus.io/port: "9964"
     prometheus.io/scrape: "true"
@@ -1099,6 +1369,9 @@ spec:
         - mountPath: /tmp/cilium/config-map
           name: cilium-config-path
           readOnly: true
+        - mountPath: /run/spire/sockets/agent
+          name: spire-agent-socket
+          readOnly: true
       hostNetwork: true
       nodeSelector:
         kubernetes.io/os: linux
@@ -1112,6 +1385,10 @@ spec:
       - configMap:
           name: cilium-config
         name: cilium-config-path
+      - hostPath:
+          path: /run/spire/sockets/agent
+          type: DirectoryOrCreate
+        name: spire-agent-socket
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -1402,6 +1679,245 @@ spec:
               name: hubble-relay-client-certs
 ---
 apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: spire-server
+  name: spire-server
+  namespace: cilium-spire
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spire-server
+  serviceName: spire-server
+  template:
+    metadata:
+      labels:
+        app: spire-server
+    spec:
+      containers:
+      - command:
+        - /bin/sh
+        - -c
+        - |
+          # shellcheck disable=SC2086
+          # shellcheck disable=SC2139
+          set -e
+
+          echo "Waiting for spire process to start"
+          while ! pgrep spire-server > /dev/null; do sleep 5; done
+
+          SPIRE_SERVER_ROOT_PATH="/proc/$(pgrep spire-server)/root"
+
+          alias spire_server="${SPIRE_SERVER_ROOT_PATH}/opt/spire/bin/spire-server"
+          SOCKET_PATH="${SPIRE_SERVER_ROOT_PATH}/tmp/spire-server/private/api.sock"
+          SOCKET_FLAG="-socketPath ${SOCKET_PATH}"
+
+          echo "Checking spire-server status"
+          while ! spire_server entry show ${SOCKET_FLAG} &> /dev/null; do
+            echo "Waiting for spire-server to start..."
+            sleep 5
+          done
+
+          echo "Spire Server is up, initializing cilium spire entries..."
+
+          AGENT_SPIFFE_ID="spiffe://spiffe.cilium/ns/cilium-spire/sa/spire-agent"
+          AGENT_SELECTORS="-selector k8s_psat:agent_ns:cilium-spire -selector k8s_psat:agent_sa:spire-agent"
+          CILIUM_AGENT_SPIFFE_ID="spiffe://spiffe.cilium/cilium-agent"
+          CILIUM_AGENT_SELECTORS="-selector k8s:ns:kube-system -selector k8s:sa:cilium"
+          CILIUM_OPERATOR_SPIFFE_ID="spiffe://spiffe.cilium/cilium-operator"
+          CILIUM_OPERATOR_SELECTORS="-selector k8s:ns:kube-system -selector k8s:sa:cilium-operator"
+
+          while pgrep spire-server > /dev/null;
+          do
+            echo "Ensuring agent entry"
+            if spire_server entry show ${SOCKET_FLAG} -spiffeID $AGENT_SPIFFE_ID $AGENT_SELECTORS | grep -q "Found 0 entries" &> /dev/null; then
+              spire_server entry create ${SOCKET_FLAG} -spiffeID $AGENT_SPIFFE_ID $AGENT_SELECTORS -node
+            fi
+
+            echo "Ensuring cilium-agent entry (required for the delegated identity to work)"
+            if spire_server entry show ${SOCKET_FLAG} -spiffeID $CILIUM_AGENT_SPIFFE_ID $CILIUM_AGENT_SELECTORS | grep -q "Found 0 entries" &> /dev/null; then
+              spire_server entry create ${SOCKET_FLAG} -spiffeID $CILIUM_AGENT_SPIFFE_ID -parentID $AGENT_SPIFFE_ID $CILIUM_AGENT_SELECTORS
+            fi
+
+            echo "Ensuring cilium-operator entry (required for creating SPIFFE identities)"
+            if spire_server entry show ${SOCKET_FLAG} -spiffeID $CILIUM_OPERATOR_SPIFFE_ID $CILIUM_OPERATOR_SELECTORS | grep -q "Found 0 entries" &> /dev/null; then
+              spire_server entry create ${SOCKET_FLAG} -spiffeID $CILIUM_OPERATOR_SPIFFE_ID -parentID $AGENT_SPIFFE_ID $CILIUM_OPERATOR_SELECTORS
+            fi
+
+            echo "Cilium Spire entries are initialized successfully or already in-sync"
+            sleep 30;
+          done
+        image: docker.io/library/busybox:1.35.0@sha256:223ae047b1065bd069aac01ae3ac8088b3ca4a527827e283b85112f29385fb1b
+        name: cilium-init
+      - args:
+        - -config
+        - /run/spire/config/server.conf
+        image: ghcr.io/spiffe/spire-server:1.6.3@sha256:f4bc49fb0bd1d817a6c46204cc7ce943c73fb0a5496a78e0e4dc20c9a816ad7f
+        livenessProbe:
+          failureThreshold: 2
+          httpGet:
+            path: /live
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 60
+          timeoutSeconds: 3
+        name: spire-server
+        ports:
+        - containerPort: 8081
+          name: grpc
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        volumeMounts:
+        - mountPath: /run/spire/config
+          name: spire-config
+          readOnly: true
+        - mountPath: /run/spire/data
+          name: spire-data
+          readOnly: false
+        - mountPath: /tmp/spire-server/private
+          name: spire-server-socket
+          readOnly: false
+      serviceAccountName: spire-server
+      shareProcessNamespace: true
+      volumes:
+      - configMap:
+          name: spire-server
+        name: spire-config
+      - hostPath:
+          path: /var/run/spire-server/sockets
+          type: DirectoryOrCreate
+        name: spire-server-socket
+  volumeClaimTemplates:
+  - metadata:
+      name: spire-data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+      storageClassName: null
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: spire-agent
+  name: spire-agent
+  namespace: cilium-spire
+spec:
+  selector:
+    matchLabels:
+      app: spire-agent
+  template:
+    metadata:
+      labels:
+        app: spire-agent
+      namespace: cilium-spire
+    spec:
+      containers:
+      - args:
+        - -config
+        - /run/spire/config/agent.conf
+        env:
+        - name: MY_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        image: ghcr.io/spiffe/spire-agent:1.6.3@sha256:8eef9857bf223181ecef10d9bbcd2f7838f3689e9bd2445bede35066a732e823
+        livenessProbe:
+          failureThreshold: 2
+          httpGet:
+            path: /live
+            port: 4251
+          initialDelaySeconds: 15
+          periodSeconds: 60
+          timeoutSeconds: 3
+        name: spire-agent
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 4251
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        volumeMounts:
+        - mountPath: /run/spire/config
+          name: spire-config
+          readOnly: true
+        - mountPath: /run/spire/bundle
+          name: spire-bundle
+        - mountPath: /run/spire/sockets
+          name: spire-agent-socket
+          readOnly: false
+        - mountPath: /var/run/secrets/tokens
+          name: spire-agent
+      dnsPolicy: ClusterFirstWithHostNet
+      hostNetwork: true
+      hostPID: true
+      initContainers:
+      - command:
+        - /bin/sh
+        - -c
+        - |
+          set -e
+
+          echo "Waiting for spire server to be reachable to start"
+          ADDR="spire-server.cilium-spire.svc:8081"
+          CONN_TIMEOUT="3"
+          TIMEOUT="60"
+
+          call_tcp_endpoint_with_timeout() {
+              local addr="$1"
+              local timeout="$2"
+
+              nc -z "$addr" -w "$timeout" &> /dev/null
+          }
+
+          # wait for SPIRE server to be reachable till $TIMEOUT is reached
+          start_time=$(date +%s)
+          while true; do
+              if call_tcp_endpoint_with_timeout "$ADDR" "$CONN_TIMEOUT"; then
+                  echo "SPIRE server is reachable"
+                  break
+              fi
+
+              if [ $(( $(date +%s) - start_time )) -gt "$TIMEOUT" ]; then
+                  echo "Timed out waiting for spire server to be reachable"
+                  exit 1
+              fi
+
+              echo "Waiting for spire server to be reachable"
+              sleep 1
+          done
+        image: docker.io/library/busybox:1.35.0@sha256:223ae047b1065bd069aac01ae3ac8088b3ca4a527827e283b85112f29385fb1b
+        name: init
+      serviceAccountName: spire-agent
+      volumes:
+      - configMap:
+          name: spire-agent
+        name: spire-config
+      - configMap:
+          name: spire-bundle
+        name: spire-bundle
+      - hostPath:
+          path: /run/spire/sockets
+          type: DirectoryOrCreate
+        name: spire-agent-socket
+      - name: spire-agent
+        projected:
+          sources:
+          - serviceAccountToken:
+              audience: spire-server
+              expirationSeconds: 600
+              path: spire-agent
+---
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   labels:
@@ -1520,6 +2036,9 @@ spec:
           successThreshold: 1
         terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:
+        - mountPath: /run/spire/sockets
+          name: spire-agent-socket
+          readOnly: false
         - mountPath: /var/run/cilium/envoy/sockets
           name: envoy-sockets
           readOnly: false
@@ -1754,6 +2273,10 @@ spec:
           path: /run/xtables.lock
           type: FileOrCreate
         name: xtables-lock
+      - hostPath:
+          path: /run/spire/sockets
+          type: DirectoryOrCreate
+        name: spire-agent-socket
       - hostPath:
           path: /var/run/cilium/envoy/sockets
           type: DirectoryOrCreate

@@ -1020,14 +1020,13 @@ cilium_common: {
 					}
 				}
 			}
-			#authentication: {
+			authentication: {
 				mutual: spire: enabled: true
 			}
-			#encryption: {
+			encryption: {
 				enabled: true
 				type: "wireguard"
-				// nodeEncryption makes tailscale subnet routing unhappy
-				nodeEncryption: false
+				nodeEncryption: true
 			}
 			hubble: {
 				ui: enabled:    bool | *false
