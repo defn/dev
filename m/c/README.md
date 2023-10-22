@@ -13,5 +13,8 @@ env KUBECONFIG=$HOME/.kube/config.argocd argocd cluster add $(uname -n) --yes --
 k apply -f ../e/HOSTNAME-cluster.yaml
 ?? app sync /cluster
 ?? delete external-secrets-operator pod for irsa - detect when irsa pods haven't been mutated by irsa controller
+?? delete karpenter pod for irsa - detect when irsa pods haven't been mutated by irsa controller
 ?? make identity provider - this should be automated
+?? argocd password is not set, patched
+make last
 ```
