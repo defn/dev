@@ -16,7 +16,7 @@ build-all:
 
 release-all:
 	$(MAKE) build-all
-	$(MAKE) release
+	$(MAKE) release digest=$(digest)
 
 release:
 # make one big cue config
@@ -27,7 +27,7 @@ release:
 	git add ../k/y
 # generate k/r
 	rm -rf ../k/r
-	cd ./r && $(MAKE) digest
+	if test -n "$(digest)"; then cd ./r && $(MAKE) digest; fi
 	cd ./r/digest && $(MAKE) release
 	rm -rf ../k/r/y
 	git add ../k/r

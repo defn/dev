@@ -1020,10 +1020,10 @@ cilium_common: {
 					}
 				}
 			}
-			#authentication: {
+			authentication: {
 				mutual: spire: enabled: true
 			}
-			#encryption: {
+			encryption: {
 				enabled: true
 				type: "wireguard"
 				nodeEncryption: false
