@@ -5,54 +5,55 @@ teacher_env:    string
 
 teacher_bootstrap: {
 	// essentials
-	"kyverno": [2, "", "ServerSideApply=true"]
-	"cert-manager": [2, ""]
+	"kyverno": [100, "", "ServerSideApply=true"]
+	"cert-manager": [100, ""]
 
-	"trust-manager": [10, ""]
+	"trust-manager": [100, ""]
 
 	// external secrets
-	"pod-identity": [10, ""]
-	"external-secrets": [11, ""]
-	"secrets": [12, ""]
+	"pod-identity": [100, ""]
+	"external-secrets": [100, ""]
+	"secrets": [100, ""]
 
 	// tailscale
-	"tailscale": [20, ""]
+	"tailscale": [100, ""]
 
 	// scaling
-	"karpenter": [20, ""]
+	"karpenter": [100, ""]
 
 	// workflows
-	"tfo": [20, ""]
-	"argo-workflows": [20, ""]
-	"argo-events": [20, ""]
+	"tfo": [100, ""]
+	"argo-workflows": [100, ""]
+	"argo-events": [100, ""]
 
 	// external dns, certs issuer
-	"external-dns": [20, ""]
-	"issuer": [20, ""]
+	"external-dns": [100, ""]
+	"issuer": [100, ""]
 
 	// traefik, functions
-	"knative": [40, ""]
-	"kourier": [40, ""]
-	"traefik": [40, ""]
+	"knative": [100, ""]
+	"kourier": [100, ""]
+	"traefik": [100, ""]
 
 	// applications
 	"headlamp": [100, ""]
 	"postgres-operator": [100, ""]
-	//"coder": [100, ""]
+	"coder": [100, ""]
+	"hello": [100, ""]
 }
 
-infra_alt_name:    string | *infra_name
-infra_account_id:  "510430971399"
-infra_k3s_version: "rancher/k3s:v1.27.5-k3s1"
+infra_account_id:       "510430971399"
+infra_k3s_version:      "rancher/k3s:v1.27.5-k3s1"
+infra_tailscale_domain: "tail3884f.ts.net"
 
 infra_name: string | *"coder-\(teacher_handle)-\(teacher_env)"
 
 infra_pod_cidr:     string
 infra_service_cidr: string
-infra_cilium_name: string | *infra_name
-infra_cilium_id: int
-infra_cilium_id: >= 0
-infra_cilium_id: <= 255
+infra_cilium_name:  string | *infra_name
+infra_cilium_id:    int
+infra_cilium_id:    >=0
+infra_cilium_id:    <=255
 
 infra_vclusters: []
 
@@ -71,4 +72,60 @@ infra_base: {
 
 infra: "\(infra_name)": bootstrap: {...} | *teacher_bootstrap
 
-discovery_url: string | *"https://\(infra_alt_name).tail3884f.ts.net"
+discovery_url: string | *"https://\(infra_name).\(infra_tailscale_domain)"
+
+kustomize: "hello": #Kustomize & {
+	#app_ns: "default"
+	#funcs: ["hello", "bye"]
+
+	cluster: #Cluster
+
+	resource: "ingressroute-\(cluster.domain_name)": {
+		apiVersion: "traefik.containo.us/v1alpha1"
+		kind:       "IngressRoute"
+		metadata: {
+			name:      cluster.domain_name
+			namespace: #app_ns
+		}
+		spec: entryPoints: ["websecure"]
+		spec: routes: [{
+			match: "HostRegexp(`{subdomain:[a-z0-9-]+}.default.\(cluster.domain_name)`)"
+			kind:  "Rule"
+			services: [{
+				name:      "kourier-internal"
+				namespace: "kourier-system"
+				kind:      "Service"
+				port:      80
+				scheme:    "http"
+			}]
+		}]
+	}
+
+	for f in #funcs {
+		resource: "kservice-\(f)": {
+			apiVersion: "serving.knative.dev/v1"
+			kind:       "Service"
+			metadata: {
+				//labels: "networking.knative.dev/visibility": "cluster-local"
+				name:      f
+				namespace: #app_ns
+			}
+			spec: {
+				template: spec: {
+					containerConcurrency: 0
+					containers: [{
+						name:  "whoami"
+						image: "containous/whoami:latest"
+						ports: [{
+							containerPort: 80
+						}]
+					}]
+				}
+				traffic: [{
+					latestRevision: true
+					percent:        100
+				}]
+			}
+		}
+	}
+}

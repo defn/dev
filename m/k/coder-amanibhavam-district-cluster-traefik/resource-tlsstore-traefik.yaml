@@ -1,0 +1,10 @@
+#ManagedBy: cue
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: TLSStore
+metadata:
+  name: default
+  namespace: traefik
+spec:
+  defaultCertificate:
+    secretName: district-amanibhavam-defn-run-wildcard

@@ -36,7 +36,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "20"
+    argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-school-cluster-argo-events
   namespace: argocd
 ---
@@ -57,7 +57,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "20"
+    argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-school-cluster-argo-workflows
   namespace: argocd
 ---
@@ -78,7 +78,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-school-cluster-cert-manager
   namespace: argocd
 ---
@@ -108,6 +108,27 @@ spec:
     name: coder-amanibhavam-school-cluster
   project: default
   source:
+    path: m/k/r/coder-amanibhavam-school-cluster-coder
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: coder-amanibhavam-school-cluster-coder
+  namespace: argocd
+---
+spec:
+  destination:
+    name: coder-amanibhavam-school-cluster
+  project: default
+  source:
     path: m/k/r/coder-amanibhavam-school-cluster-external-dns
     repoURL: https://github.com/defn/dev
     targetRevision: main
@@ -120,7 +141,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "20"
+    argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-school-cluster-external-dns
   namespace: argocd
 ---
@@ -141,7 +162,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "11"
+    argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-school-cluster-external-secrets
   namespace: argocd
 ---
@@ -171,6 +192,27 @@ spec:
     name: coder-amanibhavam-school-cluster
   project: default
   source:
+    path: m/k/r/coder-amanibhavam-school-cluster-hello
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: coder-amanibhavam-school-cluster-hello
+  namespace: argocd
+---
+spec:
+  destination:
+    name: coder-amanibhavam-school-cluster
+  project: default
+  source:
     path: m/k/r/coder-amanibhavam-school-cluster-issuer
     repoURL: https://github.com/defn/dev
     targetRevision: main
@@ -183,7 +225,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "20"
+    argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-school-cluster-issuer
   namespace: argocd
 ---
@@ -204,7 +246,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "20"
+    argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-school-cluster-karpenter
   namespace: argocd
 ---
@@ -225,7 +267,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "40"
+    argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-school-cluster-knative
   namespace: argocd
 ---
@@ -246,7 +288,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "40"
+    argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-school-cluster-kourier
   namespace: argocd
 ---
@@ -268,8 +310,29 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-school-cluster-kyverno
+  namespace: argocd
+---
+spec:
+  destination:
+    name: coder-amanibhavam-school-cluster
+  project: default
+  source:
+    path: m/k/r/coder-amanibhavam-school-cluster-pihole
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: coder-amanibhavam-school-cluster-pihole
   namespace: argocd
 ---
 spec:
@@ -289,7 +352,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "10"
+    argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-school-cluster-pod-identity
   namespace: argocd
 ---
@@ -331,7 +394,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "12"
+    argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-school-cluster-secrets
   namespace: argocd
 ---
@@ -352,7 +415,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "20"
+    argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-school-cluster-tailscale
   namespace: argocd
 ---
@@ -373,7 +436,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "20"
+    argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-school-cluster-tfo
   namespace: argocd
 ---
@@ -394,7 +457,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "40"
+    argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-school-cluster-traefik
   namespace: argocd
 ---
@@ -415,6 +478,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "10"
+    argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-school-cluster-trust-manager
   namespace: argocd

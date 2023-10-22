@@ -57,7 +57,7 @@ helmCharts:
             namespace: argocd
             name: coder-amanibhavam-class-cluster-kyverno
             annotations:
-              argocd.argoproj.io/sync-wave: "2"
+              argocd.argoproj.io/sync-wave: "100"
           spec:
             project: default
             destination:
@@ -79,7 +79,7 @@ helmCharts:
             namespace: argocd
             name: coder-amanibhavam-class-cluster-cert-manager
             annotations:
-              argocd.argoproj.io/sync-wave: "2"
+              argocd.argoproj.io/sync-wave: "100"
           spec:
             project: default
             destination:
@@ -100,7 +100,7 @@ helmCharts:
             namespace: argocd
             name: coder-amanibhavam-class-cluster-trust-manager
             annotations:
-              argocd.argoproj.io/sync-wave: "10"
+              argocd.argoproj.io/sync-wave: "100"
           spec:
             project: default
             destination:
@@ -121,7 +121,7 @@ helmCharts:
             namespace: argocd
             name: coder-amanibhavam-class-cluster-pod-identity
             annotations:
-              argocd.argoproj.io/sync-wave: "10"
+              argocd.argoproj.io/sync-wave: "100"
           spec:
             project: default
             destination:
@@ -142,7 +142,7 @@ helmCharts:
             namespace: argocd
             name: coder-amanibhavam-class-cluster-external-secrets
             annotations:
-              argocd.argoproj.io/sync-wave: "11"
+              argocd.argoproj.io/sync-wave: "100"
           spec:
             project: default
             destination:
@@ -163,7 +163,7 @@ helmCharts:
             namespace: argocd
             name: coder-amanibhavam-class-cluster-secrets
             annotations:
-              argocd.argoproj.io/sync-wave: "12"
+              argocd.argoproj.io/sync-wave: "100"
           spec:
             project: default
             destination:
@@ -184,7 +184,7 @@ helmCharts:
             namespace: argocd
             name: coder-amanibhavam-class-cluster-tailscale
             annotations:
-              argocd.argoproj.io/sync-wave: "20"
+              argocd.argoproj.io/sync-wave: "100"
           spec:
             project: default
             destination:
@@ -205,7 +205,7 @@ helmCharts:
             namespace: argocd
             name: coder-amanibhavam-class-cluster-karpenter
             annotations:
-              argocd.argoproj.io/sync-wave: "20"
+              argocd.argoproj.io/sync-wave: "100"
           spec:
             project: default
             destination:
@@ -226,7 +226,7 @@ helmCharts:
             namespace: argocd
             name: coder-amanibhavam-class-cluster-tfo
             annotations:
-              argocd.argoproj.io/sync-wave: "20"
+              argocd.argoproj.io/sync-wave: "100"
           spec:
             project: default
             destination:
@@ -247,7 +247,7 @@ helmCharts:
             namespace: argocd
             name: coder-amanibhavam-class-cluster-argo-workflows
             annotations:
-              argocd.argoproj.io/sync-wave: "20"
+              argocd.argoproj.io/sync-wave: "100"
           spec:
             project: default
             destination:
@@ -268,7 +268,7 @@ helmCharts:
             namespace: argocd
             name: coder-amanibhavam-class-cluster-argo-events
             annotations:
-              argocd.argoproj.io/sync-wave: "20"
+              argocd.argoproj.io/sync-wave: "100"
           spec:
             project: default
             destination:
@@ -289,7 +289,7 @@ helmCharts:
             namespace: argocd
             name: coder-amanibhavam-class-cluster-external-dns
             annotations:
-              argocd.argoproj.io/sync-wave: "20"
+              argocd.argoproj.io/sync-wave: "100"
           spec:
             project: default
             destination:
@@ -310,7 +310,7 @@ helmCharts:
             namespace: argocd
             name: coder-amanibhavam-class-cluster-issuer
             annotations:
-              argocd.argoproj.io/sync-wave: "20"
+              argocd.argoproj.io/sync-wave: "100"
           spec:
             project: default
             destination:
@@ -331,7 +331,7 @@ helmCharts:
             namespace: argocd
             name: coder-amanibhavam-class-cluster-knative
             annotations:
-              argocd.argoproj.io/sync-wave: "40"
+              argocd.argoproj.io/sync-wave: "100"
           spec:
             project: default
             destination:
@@ -352,7 +352,7 @@ helmCharts:
             namespace: argocd
             name: coder-amanibhavam-class-cluster-kourier
             annotations:
-              argocd.argoproj.io/sync-wave: "40"
+              argocd.argoproj.io/sync-wave: "100"
           spec:
             project: default
             destination:
@@ -373,7 +373,7 @@ helmCharts:
             namespace: argocd
             name: coder-amanibhavam-class-cluster-traefik
             annotations:
-              argocd.argoproj.io/sync-wave: "40"
+              argocd.argoproj.io/sync-wave: "100"
           spec:
             project: default
             destination:
@@ -424,6 +424,69 @@ helmCharts:
               repoURL: https://github.com/defn/dev
               targetRevision: main
               path: m/k/r/coder-amanibhavam-class-cluster-postgres-operator
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        coder: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-class-cluster-coder
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-class-cluster
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/k/r/coder-amanibhavam-class-cluster-coder
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        pihole: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-class-cluster-pihole
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-class-cluster
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/k/r/coder-amanibhavam-class-cluster-pihole
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        hello: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-class-cluster-hello
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-class-cluster
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/k/r/coder-amanibhavam-class-cluster-hello
             syncPolicy:
               automated:
                 prune: true

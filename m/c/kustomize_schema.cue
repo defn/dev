@@ -31,8 +31,7 @@ kustomize: [NAME=string]: _name: NAME
 	issuer:           string
 	cloudflare_email: string
 
-	cluster_name:     string
-	cluster_alt_name: string | *cluster_name
+	cluster_name: string
 
 	secrets_region: string
 
@@ -56,7 +55,7 @@ kustomize: [NAME=string]: _name: NAME
 	resource: {...} | *{}
 	resource: [string]: #Resource
 
-	commonLabels: [string]: string
+	commonLabels: [string]:      string
 	commonAnnotations: [string]: string
 
 	cluster: #Cluster

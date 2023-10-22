@@ -1,0 +1,17 @@
+#ManagedBy: cue
+
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: district-amanibhavam-defn-run-wildcard
+  namespace: traefik
+spec:
+  secretName: district-amanibhavam-defn-run-wildcard
+  dnsNames:
+    - '*.district.amanibhavam.defn.run'
+    - '*.default.district.amanibhavam.defn.run'
+    - '*.coder.district.amanibhavam.defn.run'
+  issuerRef:
+    name: zerossl-production
+    kind: ClusterIssuer
+    group: cert-manager.io

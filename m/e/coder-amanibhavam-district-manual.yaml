@@ -1,0 +1,19 @@
+# ManagedBy: cue
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: argocd
+  name: coder-amanibhavam-district-manual
+spec:
+  project: default
+  destination:
+    name: coder-amanibhavam-district-manual
+  source:
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+    path: m/k/r/coder-amanibhavam-district-manual-env
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

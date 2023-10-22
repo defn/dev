@@ -9,7 +9,6 @@ import (
 )
 
 infra_name:        string
-infra_alt_name:    string
 infra_account_id:  string
 infra_k3s_version: string
 
@@ -445,7 +444,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 				name: cluster.cluster_name
 			}
 			dataFrom: [{
-				extract: key: "\(cluster.cluster_alt_name)-cluster"
+				extract: key: "\(cluster.cluster_name)-cluster"
 			}]
 			target: {
 				name:           "external-dns"
@@ -503,7 +502,7 @@ kustomize: "external-secrets": #KustomizeHelm & {
 		metadata: {
 			name:      "external-secrets"
 			namespace: "external-secrets"
-			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_account_id):role/\(infra_alt_name)-cluster"
+			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_account_id):role/\(infra_name)-cluster"
 		}
 	}
 
@@ -553,7 +552,7 @@ kustomize: "karpenter": #KustomizeHelm & {
 		repo:      "oci://public.ecr.aws/karpenter"
 		values: {
 			controller: env: [{
-				name: "AWS_REGION"
+				name:  "AWS_REGION"
 				value: "us-west-2"
 			}]
 		}
@@ -571,8 +570,8 @@ kustomize: "karpenter": #KustomizeHelm & {
 		apiVersion: "v1"
 		kind:       "ConfigMap"
 		metadata: {
-			name: "karpenter-global-settings"
-namespace: "karpenter"
+			name:      "karpenter-global-settings"
+			namespace: "karpenter"
 		}
 		data: {
 			"aws.clusterName":     cluster.cluster_name
@@ -580,22 +579,22 @@ namespace: "karpenter"
 		}
 	}
 
-psm: "serviceaccount-karpenter": {
-apiVersion: "v1"
-kind:       "ServiceAccount"
-metadata: {
-name: "karpenter"
-namespace: "karpenter"
-annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_account_id):role/\(infra_alt_name)-cluster"
-}
-}
+	psm: "serviceaccount-karpenter": {
+		apiVersion: "v1"
+		kind:       "ServiceAccount"
+		metadata: {
+			name:      "karpenter"
+			namespace: "karpenter"
+			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_account_id):role/\(infra_name)-cluster"
+		}
+	}
 
 	psm: "deployment-karpenter": {
 		apiVersion: "apps/v1"
 		kind:       "Deployment"
 		metadata: {
-			name: "karpenter"
-namespace: "karpenter"
+			name:      "karpenter"
+			namespace: "karpenter"
 		}
 		spec: replicas: 1
 	}
@@ -696,7 +695,7 @@ namespace: "karpenter"
 			subnetSelector: "karpenter.sh/discovery":        cluster.cluster_name
 			securityGroupSelector: "karpenter.sh/discovery": cluster.cluster_name
 
-			instanceProfile: infra_alt_name
+			instanceProfile: infra_name
 			blockDeviceMappings: [{
 				deviceName: "/dev/sda1"
 				ebs: {
@@ -998,14 +997,14 @@ cilium_common: {
 			bpf: masquerade:          true
 			envoy: enabled:           true
 			kubeProxyReplacement: false
-			nodePort: enabled: false
-			hostPort: enabled: false
-			hostFirewall: enabled: false
+			nodePort: enabled:          false
+			hostPort: enabled:          false
+			hostFirewall: enabled:      false
 			ingressController: enabled: false
 			externalWorkloads: enabled: false
 			cluster: {
 				name: infra_cilium_name
-				id: infra_cilium_id
+				id:   infra_cilium_id
 			}
 			clustermesh: {
 				useAPIServer: true
@@ -1015,8 +1014,8 @@ cilium_common: {
 						method: "certmanager"
 						certManagerIssuerRef: {
 							group: "cert-manager.io"
-							kind: "ClusterIssuer"
-							name: "cilium-ca"
+							kind:  "ClusterIssuer"
+							name:  "cilium-ca"
 						}
 					}
 				}
@@ -1028,8 +1027,8 @@ cilium_common: {
 				}
 			}
 			encryption: {
-				enabled: true
-				type: "wireguard"
+				enabled:        true
+				type:           "wireguard"
 				nodeEncryption: true
 			}
 			hubble: {
@@ -1070,7 +1069,7 @@ kustomize: "cilium": #KustomizeHelm & {
 		apiVersion: "networking.k8s.io/v1"
 		kind:       "Ingress"
 		metadata: {
-			name: "hubble-ui"
+			name:      "hubble-ui"
 			namespace: "kube-system"
 			annotations: {
 				"traefik.ingress.kubernetes.io/router.tls":         "true"
@@ -1178,7 +1177,7 @@ kustomize: "tailscale": #Kustomize & {
 				name: cluster.cluster_name
 			}
 			dataFrom: [{
-				extract: key: "\(cluster.cluster_alt_name)-cluster"
+				extract: key: "\(cluster.cluster_name)-cluster"
 			}]
 			target: {
 				name:           "operator-oauth-custom"
@@ -1248,7 +1247,7 @@ kustomize: "issuer": #Kustomize & {
 				name: cluster.cluster_name
 			}
 			dataFrom: [{
-				extract: key: "\(cluster.cluster_alt_name)-cluster"
+				extract: key: "\(cluster.cluster_name)-cluster"
 			}]
 			target: {
 				name:           cluster.issuer
@@ -1517,7 +1516,7 @@ kustomize: "ubuntu": #Kustomize & {
 		kind:       "ServiceAccount"
 		metadata: {
 			name: "ubuntu"
-			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_account_id):role/\(infra_alt_name)-cluster"
+			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_account_id):role/\(infra_name)-cluster"
 		}
 	}
 }
@@ -1699,7 +1698,7 @@ kustomize: "coder": #KustomizeHelm & {
 				name: cluster.cluster_name
 			}
 			dataFrom: [{
-				extract: key: "\(cluster.cluster_alt_name)-cluster"
+				extract: key: "\(cluster.cluster_name)-cluster"
 			}]
 			target: {
 				name:           "coder"
@@ -2013,15 +2012,15 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			}
 			data: [{
 				secretKey: "MASTODON_ADMIN_PASSWORD"
-				remoteRef: key:      "\(cluster.cluster_alt_name)-cluster"
+				remoteRef: key:      "\(cluster.cluster_name)-cluster"
 				remoteRef: property: "\(namespace)_admin_password"
 			}, {
 				secretKey: "OTP_SECRET"
-				remoteRef: key:      "\(cluster.cluster_alt_name)-cluster"
+				remoteRef: key:      "\(cluster.cluster_name)-cluster"
 				remoteRef: property: "\(namespace)_otp_secret"
 			}, {
 				secretKey: "SECRET_KEY_BASE"
-				remoteRef: key:      "\(cluster.cluster_alt_name)-cluster"
+				remoteRef: key:      "\(cluster.cluster_name)-cluster"
 				remoteRef: property: "\(namespace)_secret_key_base"
 			}]
 		}
@@ -2043,11 +2042,11 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			}
 			data: [{
 				secretKey: "login"
-				remoteRef: key:      "\(cluster.cluster_alt_name)-cluster"
+				remoteRef: key:      "\(cluster.cluster_name)-cluster"
 				remoteRef: property: "\(namespace)_smtp_login"
 			}, {
 				secretKey: "password"
-				remoteRef: key:      "\(cluster.cluster_alt_name)-cluster"
+				remoteRef: key:      "\(cluster.cluster_name)-cluster"
 				remoteRef: property: "\(namespace)_smtp_password"
 			}]
 		}
@@ -2069,11 +2068,11 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			}
 			data: [{
 				secretKey: "root-password"
-				remoteRef: key:      "\(cluster.cluster_alt_name)-cluster"
+				remoteRef: key:      "\(cluster.cluster_name)-cluster"
 				remoteRef: property: "\(namespace)_minio_root_password"
 			}, {
 				secretKey: "root-user"
-				remoteRef: key:      "\(cluster.cluster_alt_name)-cluster"
+				remoteRef: key:      "\(cluster.cluster_name)-cluster"
 				remoteRef: property: "\(namespace)_minio_root_user"
 			}]
 		}
@@ -2095,11 +2094,11 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			}
 			data: [{
 				secretKey: "password"
-				remoteRef: key:      "\(cluster.cluster_alt_name)-cluster"
+				remoteRef: key:      "\(cluster.cluster_name)-cluster"
 				remoteRef: property: "\(namespace)_postgresql_password"
 			}, {
 				secretKey: "postgres-password"
-				remoteRef: key:      "\(cluster.cluster_alt_name)-cluster"
+				remoteRef: key:      "\(cluster.cluster_name)-cluster"
 				remoteRef: property: "\(namespace)_postgresql_postgres_password"
 			}]
 		}
@@ -2121,7 +2120,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			}
 			data: [{
 				secretKey: "redis-password"
-				remoteRef: key:      "\(cluster.cluster_alt_name)-cluster"
+				remoteRef: key:      "\(cluster.cluster_name)-cluster"
 				remoteRef: property: "\(namespace)_redis_password"
 			}]
 		}

@@ -1,0 +1,6 @@
+#ManagedBy: cue
+
+metadata:
+  name: pihole
+kind: Namespace
+apiVersion: v1

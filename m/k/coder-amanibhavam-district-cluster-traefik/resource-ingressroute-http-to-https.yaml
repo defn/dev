@@ -1,0 +1,18 @@
+#ManagedBy: cue
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-http-to-https
+  namespace: traefik
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: HostRegexp(`{subdomain:[a-z0-9-]+}.district.amanibhavam.defn.run`)
+      kind: Rule
+      services:
+        - name: noop@internal
+          kind: TraefikService
+      middlewares:
+        - name: http-to-https
