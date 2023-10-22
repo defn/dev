@@ -22,8 +22,14 @@ helmCharts:
       envoy:
         enabled: true
       hostPort:
-        enabled: false
+        enabled: true
       nodePort:
+        enabled: true
+      ingressController:
+        enabled: false
+      externalWorkloads:
+        enabled: false
+      hostFirewall:
         enabled: false
       cluster:
         name: coder-amanibhavam-school

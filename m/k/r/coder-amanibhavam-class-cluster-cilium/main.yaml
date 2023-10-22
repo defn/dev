@@ -1081,7 +1081,7 @@ data:
   enable-external-ips: "false"
   enable-health-check-nodeport: "true"
   enable-health-checking: "true"
-  enable-host-port: "false"
+  enable-host-port: "true"
   enable-hubble: "true"
   enable-ipv4: "true"
   enable-ipv4-big-tcp: "false"
@@ -1094,7 +1094,7 @@ data:
   enable-l2-neigh-discovery: "true"
   enable-l7-proxy: "true"
   enable-local-redirect-policy: "false"
-  enable-node-port: "false"
+  enable-node-port: "true"
   enable-policy: default
   enable-remote-node-identity: "true"
   enable-sctp: "false"
