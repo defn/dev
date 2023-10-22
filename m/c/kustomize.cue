@@ -997,8 +997,8 @@ cilium_common: {
 			bpf: lbExternalClusterIP: true
 			bpf: masquerade:          true
 			envoy: enabled:           true
-			//ingressController: enabled: true
-			//externalWorkloads: enabled: true
+			ingressController: enabled: true
+			externalWorkloads: enabled: true
 			//hostFirewall: enabled: false
 			//hostPort: enabled: false
 			//nodePort: enabled: false
