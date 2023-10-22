@@ -16,83 +16,22 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deathstar
+  name: xwing
 spec:
   selector:
     matchLabels:
-      name: deathstar
-      org: empire
-      class: deathstar
+      name: xwing
+      org: alliance
+      class: spaceship
   replicas: 3
   template:
     metadata:
       labels:
-        name: deathstar
-        org: empire
-        class: deathstar
-    spec:
-      containers:
-        - name: deathstar
-          image: docker.io/cilium/starwars:v1.0
-          imagePullPolicy: IfNotPresent
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: spaceship
-spec:
-  selector:
-    matchLabels:
-      name: spaceship
-      org: empire
-      class: spaceship
-  replicas: 4
-  template:
-    metadata:
-      labels:
-        name: spaceship
-        org: empire
+        name: xwing
+        org: alliance
         class: spaceship
     spec:
       containers:
         - name: spaceship
           image: docker.io/tgraf/netperf:v1.0
           imagePullPolicy: IfNotPresent
----
-apiVersion: "cilium.io/v2"
-kind: CiliumNetworkPolicy
-metadata:
-  name: "deathstar-api-protection"
-spec:
-  endpointSelector:
-    matchLabels:
-      class: deathstar
-      org: empire
-      io.cilium.k8s.policy.cluster: coder-amanibhavam-school
-  ingress:
-    - fromEndpoints:
-        - matchLabels:
-            class: spaceship
-            io.cilium.k8s.policy.cluster: coder-amanibhavam-class
-      toPorts:
-        - ports:
-            - port: "80"
-              protocol: TCP
-          rules:
-            http:
-              - method: "PUT"
-                path: "/v1/exhaust-port$"
-                headers:
-                  - "X-Has-Force: True"
-    - fromEndpoints:
-        - matchLabels:
-            class: spaceship
-            io.cilium.k8s.policy.cluster: coder-amanibhavam-school
-      toPorts:
-        - ports:
-            - port: "80"
-              protocol: TCP
-          rules:
-            http:
-              - method: "GET"
-                path: "/v1/"
