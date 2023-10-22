@@ -110,7 +110,7 @@ status:
 	cilium clustermesh status
 
 xwing-visit:
-	kubectl exec -ti deploy/xwing-- curl -XGET deathstar.default.svc.cluster.local/v1/
+	kubectl exec -ti deploy/xwing -- curl -XGET deathstar.default.svc.cluster.local/v1/
 
 visit:
 	kubectl exec -ti deploy/spaceship -- curl -XGET deathstar.default.svc.cluster.local/v1/
