@@ -1006,6 +1006,7 @@ cilium_common: {
 				name: infra_cilium_name
 				id:   infra_cilium_id
 			}
+			ipam: operator: clusterPoolIPv4PodCIDRList: "{\(infra_pod_cidr)}"
 			clustermesh: {
 				useAPIServer: true
 				apiserver: {
