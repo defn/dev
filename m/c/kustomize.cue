@@ -1036,6 +1036,7 @@ cilium_common: {
 				ui: enabled:    bool | *false
 				relay: enabled: true
 				tls: auto: {
+					enabled: true
 					method: "certmanager"
 					certManagerIssuerRef: {
 						name:  "cilium-ca"

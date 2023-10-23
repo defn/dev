@@ -66,6 +66,7 @@ helmCharts:
           enabled: true
         tls:
           auto:
+            enabled: true
             method: certmanager
             certManagerIssuerRef:
               name: cilium-ca

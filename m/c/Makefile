@@ -94,6 +94,7 @@ test-mesh:
 connect:
 	cilium clustermesh connect --context $$(uname -n) --destination-context $(to) --destination-endpoint $(endpoint)
 
+# https://github.com/cilium/cilium/issues/13766
 restart-cilium:
 	kubectl -n kube-system rollout restart deploy cilium-operator
 	kubectl -n kube-system rollout restart ds cilium 
