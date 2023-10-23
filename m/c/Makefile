@@ -98,6 +98,7 @@ restart-cilium:
 	kubectl -n kube-system rollout restart deploy cilium-operator
 	kubectl -n kube-system rollout restart ds cilium 
 	kubectl -n kube-system rollout restart deploy hubble-relay
+	kubectl -n kube-system rollout restart deploy hubble-ui
 	kubectl -n kube-system rollout restart deploy clustermesh-apiserver
 
 token:
