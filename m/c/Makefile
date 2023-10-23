@@ -12,7 +12,8 @@ helm_add:
 	helm repo update
 
 build-all:
-	for a in coder-*/; do (cd $$a && make); done
+# cant run in parallel due to git
+	runmany 1 'cd $$1 && make' coder-*/
 
 release-all:
 	$(MAKE) build-all
