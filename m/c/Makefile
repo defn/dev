@@ -95,9 +95,9 @@ connect:
 	cilium clustermesh connect --context $$(uname -n) --destination-context $(to) --destination-endpoint $(endpoint)
 
 restart-cilium:
+	kubectl -n kube-system rollout restart deploy cilium-operator
 	kubectl -n kube-system rollout restart ds cilium 
-
-restart-clustermesh:
+	kubectl -n kube-system rollout restart deploy hubble-relay
 	kubectl -n kube-system rollout restart deploy clustermesh-apiserver
 
 token:
