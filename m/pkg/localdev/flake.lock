@@ -470,17 +470,17 @@
       },
       "locked": {
         "dir": "m/pkg/honeymarker",
-        "lastModified": 1692066248,
-        "narHash": "sha256-AExjRr02U0DgGilZkjwaR543dQs4VrqZg0spq03JebA=",
+        "lastModified": 1698075010,
+        "narHash": "sha256-eInKQjTxbO2scjLQjhqP6RilM5B5d6HqSEzaRIECZU8=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "aac47feffd072770dca51d7ff27fe03528ac13de",
+        "rev": "598b115ef307f417bbdf072da4fb6d503ff8244c",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/honeymarker",
         "owner": "defn",
-        "ref": "pkg-honeymarker-0.2.10-11",
+        "ref": "pkg-honeymarker-0.2.11-1",
         "repo": "dev",
         "type": "github"
       }
