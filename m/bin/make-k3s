@@ -78,8 +78,7 @@ function make_up {
 	# oidc
 	(cd c/${infra_name} && make secrets)
 
-	kubectl --context ${infra_name} apply -f k/r/${infra_name}-manual-cert-manager-crds/main.yaml
-	kubectl --context ${infra_name} apply -f k/r/${infra_name}-manual-linkerd-crds/main.yaml
+	kubectl --context ${infra_name} replace -f k/r/${infra_name}-crds.yaml
 	kubectl --context ${infra_name} apply -f k/r/${infra_name}-manual-cilium-bootstrap/main.yaml
 	kubectl --context ${infra_name} create ns argocd || true
 	kubectl --context ${infra_name} apply -f k/r/${infra_name}-cluster-argo-cd/main.yaml
