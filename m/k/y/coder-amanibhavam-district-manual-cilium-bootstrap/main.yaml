@@ -485,7 +485,7 @@ data:
   cilium-endpoint-gc-interval: 5m0s
   cluster-id: "250"
   cluster-name: coder-amanibhavam-district
-  cluster-pool-ipv4-cidr: '{10.250.0.0/17}'
+  cluster-pool-ipv4-cidr: 10.250.0.0/17
   cluster-pool-ipv4-mask-size: "24"
   cni-exclusive: "true"
   cni-log-file: /var/run/cilium/cilium-cni.log
