@@ -72,6 +72,7 @@ spec:
     - fromEndpoints:
         - matchLabels:
             org: alliance
+            io.cilium.k8s.policy.cluster: coder-amanibhavam-class
       toPorts:
         - ports:
             - port: "80"
