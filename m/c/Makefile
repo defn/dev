@@ -107,6 +107,7 @@ token:
 status:
 	kubectl exec -ti -n kube-system ds/cilium -- cilium status
 	kubectl exec -ti -n kube-system ds/cilium -- cilium-health status
+	kubectl exec -ti -n kube-system ds/cilium -- hubble status
 	cilium status
 	cilium clustermesh status
 
