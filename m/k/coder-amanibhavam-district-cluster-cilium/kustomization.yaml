@@ -37,7 +37,7 @@ helmCharts:
         id: 250
       ipam:
         operator:
-          clusterPoolIPv4PodCIDRList: '{10.250.0.0/17}'
+          clusterPoolIPv4PodCIDRList: 10.250.0.0/17
       clustermesh:
         useAPIServer: true
         apiserver:
