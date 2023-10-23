@@ -65,8 +65,6 @@ env: (#Transform & {
 
 	inputs: "\(infra.parent.cluster_name)-manual": {
 		bootstrap: {
-			"cert-manager-crds": [1, ""]
-			"linkerd-crds": [1, ""]
 			"cilium-bootstrap": [1, ""]
 		}
 	}
