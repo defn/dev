@@ -8,29 +8,11 @@ cache: "busybox:1.35": "busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2
 
 cache: "containous/whoami:latest": "containous/whoami@sha256:7d6a3c8f91470a23ef380320609ee6e69ac68d20bc804f3a1c6065fb56cfa34e"
 
-cache: "curlimages/curl": "curlimages/curl@sha256:4a3396ae573c44932d06ba33f8696db4429c419da87cbdc82965ee96a37dd0af"
-
 cache: "docker.io/amazon/amazon-eks-pod-identity-webhook:v0.4.0": "docker.io/amazon/amazon-eks-pod-identity-webhook@sha256:69ba0ed032cfa4d72621037c2836d464f401fde1fa993adf34e79335ec4c56ac"
-
-cache: "docker.io/bitnami/apache:2.4.57-debian-11-r36": "docker.io/bitnami/apache@sha256:3f55fea96631a7fb83e25c13a262da0f9b8a9294a913c5bbd14a08bc587139ee"
-
-cache: "docker.io/bitnami/elasticsearch:8.10.3-debian-11-r1": "docker.io/bitnami/elasticsearch@sha256:225e44b090363b89efd83d118a7486b0d123e25557c48894649f65e2ec67192e"
 
 cache: "docker.io/bitnami/external-dns:0.13.6-debian-11-r30": "docker.io/bitnami/external-dns@sha256:498943fa9410c5510fde1a1c189e131df8b412605d6c3d47a18fdeaed119fa59"
 
-cache: "docker.io/bitnami/mastodon:4.2.1-debian-11-r1": "docker.io/bitnami/mastodon@sha256:b49f3b0c50039d0aa65af5d336cfefd0e2e47305b9a00b66cb1100d58963591f"
-
-cache: "docker.io/bitnami/minio:2023.9.30-debian-11-r2": "docker.io/bitnami/minio@sha256:8526aff1207c5f4f95d3abfb92c55077fe0ae6b2edc1af95bd42352e1cd1172a"
-
-cache: "docker.io/bitnami/os-shell:11-debian-11-r90": "docker.io/bitnami/os-shell@sha256:dd9b8c7d847ddab8453476cc06f6b3b4ff42514722276e7d1a4e68d3fe9cb4f9"
-
-cache: "docker.io/bitnami/postgresql:16.0.0-debian-11-r10": "docker.io/bitnami/postgresql@sha256:2ad9d134d8697fc9f40ca9f2f19fb906f5f68d931630452e11a9df16e84e4848"
-
-cache: "docker.io/bitnami/redis:7.2.1-debian-11-r24": "docker.io/bitnami/redis@sha256:0897825c35d5aa1c3407438732c23b8a346033856667a1eddb0332e12ae46773"
-
 cache: "docker.io/envoyproxy/envoy:v1.24-latest": "docker.io/envoyproxy/envoy@sha256:ad8d9e40a0fcc8e14633395516768826ce7d32b3bfd3973d7884820df11cb942"
-
-cache: "docker.io/library/busybox:1.35.0@sha256:223ae047b1065bd069aac01ae3ac8088b3ca4a527827e283b85112f29385fb1b": "docker.io/library/busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094"
 
 cache: "docker.io/traefik:v2.10.4": "docker.io/traefik@sha256:2392cd9aadfd514b0112186904e7a36fcb6a301fc1e637bab4ad2746877cde96"
 
@@ -45,8 +27,6 @@ cache: "gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:b11dbc
 cache: "gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:987f53e3ead58627e3022c8ccbb199ed71b965f10c59485bab8015ecf18b44af": "gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:298cae811495970a09a36f420205fb37af3be3f6d927d96176b5fafd5e7daccb"
 
 cache: "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:7b138c73fcaaf0b9bb2d414b8a89a780f8c09371d24c6f57969be1694acf4aaa": "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:f19babdc636bbeed43138f1b668df827daf8c575189caadabd898b20ac72f9c8"
-
-cache: "ghcr.io/coder/coder:v2.3.2": "ghcr.io/coder/coder@sha256:3dd16b8a8dce0fc39a2f5d131f37b628fc404d985b4f759befe85e95834fc59f"
 
 cache: "ghcr.io/dexidp/dex:v2.37.0": "ghcr.io/dexidp/dex@sha256:f579d00721b0d842328c43a562f50343c54b0048ef2d58d6b54e750c21fc7938"
 
@@ -65,12 +45,6 @@ cache: "ghcr.io/kyverno/kyverno:v1.10.3": "ghcr.io/kyverno/kyverno@sha256:2e8ba9
 cache: "ghcr.io/kyverno/kyvernopre:v1.10.3": "ghcr.io/kyverno/kyvernopre@sha256:4022f4b828418df94f61627bdc0852207986c095be9dbff686b57cb22b4c20ad"
 
 cache: "ghcr.io/kyverno/reports-controller:v1.10.3": "ghcr.io/kyverno/reports-controller@sha256:b0fbfe5a7250fadd120ffbb6dd4cb70e575bddc165da76b46e3b7dab4d275141"
-
-cache: "ghcr.io/spiffe/spire-agent:1.6.3@sha256:8eef9857bf223181ecef10d9bbcd2f7838f3689e9bd2445bede35066a732e823": "ghcr.io/spiffe/spire-agent@sha256:8eef9857bf223181ecef10d9bbcd2f7838f3689e9bd2445bede35066a732e823"
-
-cache: "ghcr.io/spiffe/spire-server:1.6.3@sha256:f4bc49fb0bd1d817a6c46204cc7ce943c73fb0a5496a78e0e4dc20c9a816ad7f": "ghcr.io/spiffe/spire-server@sha256:f4bc49fb0bd1d817a6c46204cc7ce943c73fb0a5496a78e0e4dc20c9a816ad7f"
-
-cache: "pihole/pihole:2023.05.2": "pihole/pihole@sha256:8bc45afe1625487aef62859a5bf02f3d7b3429e480f4e29e4689635ab86ec312"
 
 cache: "public.ecr.aws/karpenter/controller:v0.31.1@sha256:be5da7cb9181c2969280e869c465927de278e17d56762bfa5eeb4b21e5c9762e": "public.ecr.aws/karpenter/controller@sha256:be5da7cb9181c2969280e869c465927de278e17d56762bfa5eeb4b21e5c9762e"
 
