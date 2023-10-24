@@ -3,27 +3,6 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "1"
-  name: coder-amanibhavam-class-manual-cert-manager-crds
-  namespace: argocd
-spec:
-  destination:
-    name: coder-amanibhavam-class-manual
-  project: default
-  source:
-    path: m/k/r/coder-amanibhavam-class-manual-cert-manager-crds
-    repoURL: https://github.com/defn/dev
-    targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions: []
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"
   name: coder-amanibhavam-class-manual-cilium-bootstrap
   namespace: argocd
 spec:
@@ -32,27 +11,6 @@ spec:
   project: default
   source:
     path: m/k/r/coder-amanibhavam-class-manual-cilium-bootstrap
-    repoURL: https://github.com/defn/dev
-    targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions: []
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"
-  name: coder-amanibhavam-class-manual-linkerd-crds
-  namespace: argocd
-spec:
-  destination:
-    name: coder-amanibhavam-class-manual
-  project: default
-  source:
-    path: m/k/r/coder-amanibhavam-class-manual-linkerd-crds
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:

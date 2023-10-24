@@ -8,48 +8,6 @@ helmCharts:
   - releaseName: bootstrap
     valuesInline:
       anyResources:
-        cert-manager-crds: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-manual-cert-manager-crds
-            annotations:
-              argocd.argoproj.io/sync-wave: "1"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-manual
-            source:
-              repoURL: https://github.com/defn/dev
-              targetRevision: main
-              path: m/k/r/coder-amanibhavam-district-manual-cert-manager-crds
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        linkerd-crds: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-manual-linkerd-crds
-            annotations:
-              argocd.argoproj.io/sync-wave: "1"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-manual
-            source:
-              repoURL: https://github.com/defn/dev
-              targetRevision: main
-              path: m/k/r/coder-amanibhavam-district-manual-linkerd-crds
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
         cilium-bootstrap: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
