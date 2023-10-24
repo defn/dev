@@ -4,6 +4,9 @@ build:
 	../bin/b pass build //cmd/cli:cli
 	cp -f bazel-bin/cmd/cli/cli_/cli /tmp/cli
 
+all:
+	make build update upgrade regen build update
+
 image:
 	cp -f bazel-bin/cmd/cli/cli_/cli cli.bin
 	docker build -t $(tag) .
