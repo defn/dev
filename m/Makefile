@@ -8,6 +8,7 @@ all:
 	$(MAKE) build update upgrade regen build update
 	cd c && $(MAKE) crd digest release-all
 	b pass build //...
+	$(MAKE) za
 
 image:
 	cp -f bazel-bin/cmd/cli/cli_/cli cli.bin
