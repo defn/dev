@@ -5,16 +5,15 @@ build:
 	cp -f bazel-bin/cmd/cli/cli_/cli /tmp/cli
 
 all:
-	make build update upgrade regen build update
+	$(MAKE) build update upgrade regen build update
+	cd c && $(MAKE) crd digest release-all
+	b pass build //...
 
 image:
 	cp -f bazel-bin/cmd/cli/cli_/cli cli.bin
 	docker build -t $(tag) .
 	rm -f cli.bin
 	docker push $(tag)
-
-all:
-	b pass build //...
 
 todo:
 	@(bazel cquery //... --output=files | grep -v ^bazel-; git ls-files .) | sort | uniq -c | grep '^ *1 ' | awk '{print $$2}'
