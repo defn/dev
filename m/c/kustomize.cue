@@ -144,7 +144,7 @@ kustomize: "argo-cd": #Kustomize & {
 	}
 
 	resource: "argo-cd": {
-		url: "https://raw.githubusercontent.com/argoproj/argo-cd/v2.8.2/manifests/install.yaml"
+		url: "https://raw.githubusercontent.com/argoproj/argo-cd/v2.8.4/manifests/install.yaml"
 	}
 
 	resource: "ingress-argo-cd": {
@@ -457,7 +457,7 @@ kustomize: "kourier": #Kustomize & {
 	cluster: #Cluster
 
 	resource: "kourier": {
-		url: "https://github.com/knative-sandbox/net-kourier/releases/download/knative-v1.11.1/kourier.yaml"
+		url: "https://github.com/knative-sandbox/net-kourier/releases/download/knative-v1.11.3/kourier.yaml"
 	}
 
 	psm: "service-kourier-set-cluster-ip": {
@@ -478,7 +478,7 @@ kustomize: "external-secrets": #KustomizeHelm & {
 	helm: {
 		release: "external-secrets"
 		name:    "external-secrets"
-		version: "0.9.6"
+		version: "0.9.7"
 		repo:    "https://charts.external-secrets.io"
 		values: {
 			webhook: create:        false
@@ -742,7 +742,7 @@ kustomize: "knative": #Kustomize & {
 	cluster: #Cluster
 
 	resource: "knative-serving": {
-		url: "https://github.com/knative/serving/releases/download/knative-v1.11.0/serving-core.yaml"
+		url: "https://github.com/knative/serving/releases/download/knative-v1.11.3/serving-core.yaml"
 	}
 
 	psm: "namespace-knative-serving": core.#Namespace & {
@@ -1324,7 +1324,7 @@ kustomize: "traefik": #KustomizeHelm & {
 		release:   "traefik"
 		name:      "traefik"
 		namespace: "traefik"
-		version:   "24.0.0"
+		version:   "25.0.0"
 		repo:      "https://traefik.github.io/charts"
 		values: {
 			logs: general: level:  "DEBUG"
@@ -1779,7 +1779,7 @@ kustomize: "tfo": #Kustomize & {
 	namespace: "tf-system"
 
 	resource: "tfo": {
-		url: "https://raw.githubusercontent.com/GalleyBytes/terraform-operator/master/deploy/bundles/v0.13.3/v0.13.3.yaml"
+		url: "https://raw.githubusercontent.com/GalleyBytes/terraform-operator/master/deploy/bundles/v0.14.0/v0.14.0.yaml"
 	}
 }
 
@@ -1878,7 +1878,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.36.1"
+		version:   "0.37.0"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [

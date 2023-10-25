@@ -67,7 +67,7 @@ metadata:
   labels:
     app.kubernetes.io/component: net-kourier
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/version: 1.11.3
     networking.knative.dev/ingress-provider: kourier
   name: net-kourier
 ---
@@ -77,7 +77,7 @@ metadata:
   labels:
     app.kubernetes.io/component: net-kourier
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/version: 1.11.3
     networking.knative.dev/ingress-provider: kourier
   name: net-kourier
 roleRef:
@@ -95,7 +95,7 @@ metadata:
   labels:
     app.kubernetes.io/component: net-kourier
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/version: 1.11.3
     networking.knative.dev/ingress-provider: kourier
   name: kourier-system
 ---
@@ -170,7 +170,7 @@ metadata:
   labels:
     app.kubernetes.io/component: net-kourier
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/version: 1.11.3
     networking.knative.dev/ingress-provider: kourier
   name: config-kourier
   namespace: knative-serving
@@ -179,7 +179,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:4e54025fd3b835228afd37f115fea685064c1351f45b67b85891ca532e319187
+        - image: 169.254.32.1:5000/gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:5820e5ee865bdf823e6e237a57707c1e68151a052fe02eaf0c5f3ec32f1a0d7a
           env:
             - name: CERTS_SECRET_NAMESPACE
               value: ""
@@ -254,7 +254,7 @@ metadata:
   labels:
     app.kubernetes.io/component: net-kourier
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/version: 1.11.3
     networking.knative.dev/ingress-provider: kourier
   name: net-kourier-controller
   namespace: knative-serving
@@ -274,7 +274,7 @@ metadata:
   labels:
     app.kubernetes.io/component: net-kourier
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/version: 1.11.3
     networking.knative.dev/ingress-provider: kourier
   name: net-kourier-controller
   namespace: knative-serving
@@ -285,7 +285,7 @@ metadata:
   labels:
     app.kubernetes.io/component: net-kourier
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/version: 1.11.3
     networking.knative.dev/ingress-provider: kourier
   name: net-kourier
   namespace: knative-serving
@@ -393,7 +393,7 @@ metadata:
   labels:
     app.kubernetes.io/component: net-kourier
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/version: 1.11.3
     networking.knative.dev/ingress-provider: kourier
   name: kourier-bootstrap
   namespace: kourier-system
@@ -503,7 +503,7 @@ metadata:
   labels:
     app.kubernetes.io/component: net-kourier
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/version: 1.11.3
     networking.knative.dev/ingress-provider: kourier
   name: 3scale-kourier-gateway
   namespace: kourier-system
@@ -528,7 +528,7 @@ metadata:
   labels:
     app.kubernetes.io/component: net-kourier
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/version: 1.11.3
     networking.knative.dev/ingress-provider: kourier
   name: 3scale-kourier-gateway
   namespace: kourier-system
@@ -544,7 +544,7 @@ metadata:
   labels:
     app.kubernetes.io/component: net-kourier
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/version: 1.11.3
     networking.knative.dev/ingress-provider: kourier
   name: 3scale-kourier-gateway-pdb
   namespace: kourier-system
@@ -568,7 +568,7 @@ metadata:
   labels:
     app.kubernetes.io/component: net-kourier
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/version: 1.11.3
     networking.knative.dev/ingress-provider: kourier
   name: kourier
   namespace: kourier-system
@@ -592,7 +592,7 @@ metadata:
   labels:
     app.kubernetes.io/component: net-kourier
     app.kubernetes.io/name: knative-serving
-    app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/version: 1.11.3
     networking.knative.dev/ingress-provider: kourier
   name: kourier-internal
   namespace: kourier-system

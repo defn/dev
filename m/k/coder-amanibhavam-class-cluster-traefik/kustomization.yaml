@@ -17,7 +17,7 @@ commonAnnotations: {}
 helmCharts:
   - releaseName: traefik
     name: traefik
-    version: 24.0.0
+    version: 25.0.0
     repo: https://traefik.github.io/charts
     namespace: traefik
     valuesInline:

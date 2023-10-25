@@ -136,7 +136,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/quay.io/argoproj/argocd@sha256:14e293cd7e35169c45ec51cccdabb80da72c434d7e16d60d3de2ce3a23f08c4b
+        - image: 169.254.32.1:5000/quay.io/argoproj/argocd@sha256:f02d31d4b115d79de3dc45ebeec3a3107b9178d980e69d9dc2b26019d43f3e09
           args:
             - /usr/local/bin/argocd-applicationset-controller
           env:
@@ -327,7 +327,7 @@ spec:
   template:
     spec:
       initContainers:
-        - image: 169.254.32.1:5000/quay.io/argoproj/argocd@sha256:14e293cd7e35169c45ec51cccdabb80da72c434d7e16d60d3de2ce3a23f08c4b
+        - image: 169.254.32.1:5000/quay.io/argoproj/argocd@sha256:f02d31d4b115d79de3dc45ebeec3a3107b9178d980e69d9dc2b26019d43f3e09
           command:
             - /bin/cp
             - -n
@@ -429,7 +429,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/quay.io/argoproj/argocd@sha256:14e293cd7e35169c45ec51cccdabb80da72c434d7e16d60d3de2ce3a23f08c4b
+        - image: 169.254.32.1:5000/quay.io/argoproj/argocd@sha256:f02d31d4b115d79de3dc45ebeec3a3107b9178d980e69d9dc2b26019d43f3e09
           args:
             - /usr/local/bin/argocd-notifications
           env:
@@ -561,7 +561,7 @@ spec:
   template:
     spec:
       initContainers:
-        - image: 169.254.32.1:5000/quay.io/argoproj/argocd@sha256:14e293cd7e35169c45ec51cccdabb80da72c434d7e16d60d3de2ce3a23f08c4b
+        - image: 169.254.32.1:5000/quay.io/argoproj/argocd@sha256:f02d31d4b115d79de3dc45ebeec3a3107b9178d980e69d9dc2b26019d43f3e09
           command:
             - /bin/cp
             - -n
@@ -581,7 +581,7 @@ spec:
             - mountPath: /var/run/argocd
               name: var-files
       containers:
-        - image: 169.254.32.1:5000/quay.io/argoproj/argocd@sha256:14e293cd7e35169c45ec51cccdabb80da72c434d7e16d60d3de2ce3a23f08c4b
+        - image: 169.254.32.1:5000/quay.io/argoproj/argocd@sha256:f02d31d4b115d79de3dc45ebeec3a3107b9178d980e69d9dc2b26019d43f3e09
           args:
             - /usr/local/bin/argocd-repo-server
           env:
@@ -711,6 +711,18 @@ spec:
                   key: reposerver.streamed.manifest.max.extracted.size
                   name: argocd-cmd-params-cm
                   optional: true
+            - name: ARGOCD_REPO_SERVER_HELM_MANIFEST_MAX_EXTRACTED_SIZE
+              valueFrom:
+                configMapKeyRef:
+                  key: reposerver.helm.manifest.max.extracted.size
+                  name: argocd-cmd-params-cm
+                  optional: true
+            - name: ARGOCD_REPO_SERVER_DISABLE_HELM_MANIFEST_MAX_EXTRACTED_SIZE
+              valueFrom:
+                configMapKeyRef:
+                  key: reposerver.disable.helm.manifest.max.extracted.size
+                  name: argocd-cmd-params-cm
+                  optional: true
             - name: ARGOCD_GIT_MODULES_ENABLED
               valueFrom:
                 configMapKeyRef:
@@ -836,7 +848,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/quay.io/argoproj/argocd@sha256:14e293cd7e35169c45ec51cccdabb80da72c434d7e16d60d3de2ce3a23f08c4b
+        - image: 169.254.32.1:5000/quay.io/argoproj/argocd@sha256:f02d31d4b115d79de3dc45ebeec3a3107b9178d980e69d9dc2b26019d43f3e09
           args:
             - /usr/local/bin/argocd-server
           env:
@@ -1903,7 +1915,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/quay.io/argoproj/argocd@sha256:14e293cd7e35169c45ec51cccdabb80da72c434d7e16d60d3de2ce3a23f08c4b
+        - image: 169.254.32.1:5000/quay.io/argoproj/argocd@sha256:f02d31d4b115d79de3dc45ebeec3a3107b9178d980e69d9dc2b26019d43f3e09
           args:
             - /usr/local/bin/argocd-application-controller
           env:
@@ -2164,6 +2176,18 @@ rules:
       - get
       - list
       - watch
+  - apiGroups:
+      - batch
+    resources:
+      - jobs
+    verbs:
+      - create
+  - apiGroups:
+      - argoproj.io
+    resources:
+      - workflows
+    verbs:
+      - create
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:

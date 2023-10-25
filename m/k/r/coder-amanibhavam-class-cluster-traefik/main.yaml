@@ -50,7 +50,7 @@ metadata:
     app.kubernetes.io/instance: traefik-traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-24.0.0
+    helm.sh/chart: traefik-25.0.0
   name: traefik-traefik
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -60,7 +60,7 @@ metadata:
     app.kubernetes.io/instance: traefik-traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-24.0.0
+    helm.sh/chart: traefik-25.0.0
   name: traefik-traefik
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -3696,7 +3696,7 @@ metadata:
     app.kubernetes.io/instance: traefik-traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-24.0.0
+    helm.sh/chart: traefik-25.0.0
   name: traefik
 ---
 apiVersion: v1
@@ -3724,7 +3724,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/docker.io/traefik@sha256:2392cd9aadfd514b0112186904e7a36fcb6a301fc1e637bab4ad2746877cde96
+        - image: 169.254.32.1:5000/docker.io/traefik@sha256:948978f7ec62f137a79f8af7044a1785bd7868706ef2c8cba9c88db688d08661
           args:
             - --global.checknewversion
             - --global.sendanonymoususage
@@ -3824,7 +3824,7 @@ spec:
         app.kubernetes.io/instance: traefik-traefik
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: traefik
-        helm.sh/chart: traefik-24.0.0
+        helm.sh/chart: traefik-25.0.0
   minReadySeconds: 0
   replicas: 1
   selector:
@@ -3843,7 +3843,7 @@ metadata:
     app.kubernetes.io/instance: traefik-traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-24.0.0
+    helm.sh/chart: traefik-25.0.0
   name: traefik
   namespace: traefik
 ---
@@ -3884,7 +3884,7 @@ metadata:
     app.kubernetes.io/instance: traefik-traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-24.0.0
+    helm.sh/chart: traefik-25.0.0
   name: traefik-dashboard
   namespace: traefik
 ---
@@ -3946,7 +3946,7 @@ metadata:
     app.kubernetes.io/instance: traefik-traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-24.0.0
+    helm.sh/chart: traefik-25.0.0
   name: traefik
   namespace: traefik
 ---
@@ -3957,7 +3957,7 @@ metadata:
     app.kubernetes.io/instance: traefik-traefik
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-24.0.0
+    helm.sh/chart: traefik-25.0.0
   name: traefik
   namespace: traefik
 ---

@@ -20,18 +20,6 @@ kustomize: (#Transform & {
 //		url: "events.yaml"
 //	}
 //}
-//
-//kustomize: "demo1": #Kustomize & {
-//	resource: "demo": {
-//		url: "https://bit.ly/demokuma"
-//	}
-//}
-//
-//kustomize: "demo2": #Kustomize & {
-//	resource: "demo": {
-//		url: "https://raw.githubusercontent.com/kumahq/kuma-counter-demo/master/demo.yaml"
-//	}
-//}
 
 // https://artifacthub.io/packages/helm/kedacore/keda
 kustomize: "keda": #KustomizeHelm & {
