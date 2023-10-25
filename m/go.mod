@@ -5,7 +5,7 @@ go 1.20
 require (
 	cuelang.org/go v0.6.0
 	github.com/aws/constructs-go/constructs/v10 v10.3.0
-	github.com/aws/jsii-runtime-go v1.90.0
+	github.com/aws/jsii-runtime-go v1.91.0
 	github.com/cdktf/cdktf-provider-aws-go/aws/v17 v17.0.11
 	github.com/charmbracelet/bubbles v0.16.1
 	github.com/charmbracelet/bubbletea v0.24.2
