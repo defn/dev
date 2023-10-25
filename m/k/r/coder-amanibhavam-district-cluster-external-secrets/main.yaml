@@ -102,8 +102,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.6
-    helm.sh/chart: external-secrets-0.9.6
+    app.kubernetes.io/version: v0.9.7
+    helm.sh/chart: external-secrets-0.9.7
   name: external-secrets-controller
 ---
 rules:
@@ -142,8 +142,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.6
-    helm.sh/chart: external-secrets-0.9.6
+    app.kubernetes.io/version: v0.9.7
+    helm.sh/chart: external-secrets-0.9.7
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
   name: external-secrets-edit
@@ -164,8 +164,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.6
-    helm.sh/chart: external-secrets-0.9.6
+    app.kubernetes.io/version: v0.9.7
+    helm.sh/chart: external-secrets-0.9.7
     servicebinding.io/controller: "true"
   name: external-secrets-servicebindings
 ---
@@ -201,8 +201,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.6
-    helm.sh/chart: external-secrets-0.9.6
+    app.kubernetes.io/version: v0.9.7
+    helm.sh/chart: external-secrets-0.9.7
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
     rbac.authorization.k8s.io/aggregate-to-view: "true"
@@ -215,8 +215,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.6
-    helm.sh/chart: external-secrets-0.9.6
+    app.kubernetes.io/version: v0.9.7
+    helm.sh/chart: external-secrets-0.9.7
   name: external-secrets-controller
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -8416,7 +8416,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/ghcr.io/external-secrets/external-secrets@sha256:1ab00edae47117799eb0e1b4ec7c13db54f2cebfb419632eb032656c2e5a194f
+        - image: 169.254.32.1:5000/ghcr.io/external-secrets/external-secrets@sha256:f10d2b5f293f94c9516210da1727cf78ef8c094ea72ecebb2984ad03517952c1
           args:
             - --concurrent=1
           imagePullPolicy: IfNotPresent
@@ -8443,8 +8443,8 @@ spec:
         app.kubernetes.io/instance: external-secrets
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: external-secrets
-        app.kubernetes.io/version: v0.9.6
-        helm.sh/chart: external-secrets-0.9.6
+        app.kubernetes.io/version: v0.9.7
+        helm.sh/chart: external-secrets-0.9.7
   replicas: 1
   revisionHistoryLimit: 10
   selector:
@@ -8458,8 +8458,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.6
-    helm.sh/chart: external-secrets-0.9.6
+    app.kubernetes.io/version: v0.9.7
+    helm.sh/chart: external-secrets-0.9.7
   name: external-secrets
   namespace: external-secrets
 ---
@@ -8496,8 +8496,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.6
-    helm.sh/chart: external-secrets-0.9.6
+    app.kubernetes.io/version: v0.9.7
+    helm.sh/chart: external-secrets-0.9.7
   name: external-secrets-leaderelection
   namespace: external-secrets
 ---
@@ -8508,8 +8508,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.6
-    helm.sh/chart: external-secrets-0.9.6
+    app.kubernetes.io/version: v0.9.7
+    helm.sh/chart: external-secrets-0.9.7
   name: external-secrets-leaderelection
   namespace: external-secrets
 roleRef:
@@ -8530,7 +8530,7 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.6
-    helm.sh/chart: external-secrets-0.9.6
+    app.kubernetes.io/version: v0.9.7
+    helm.sh/chart: external-secrets-0.9.7
   name: external-secrets
   namespace: external-secrets
