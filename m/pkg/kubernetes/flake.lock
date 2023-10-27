@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/argocd",
-        "lastModified": 1694655765,
-        "narHash": "sha256-8+Pop3C3CSwtUM+FzFDXKINqn21bejjvrv8RcYBbw1o=",
+        "lastModified": 1698429692,
+        "narHash": "sha256-HGNGfCeDHaBs19Pvxv3NyPje7do3k2Mevb09aWeyUNU=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "09092f3d043356edc833720c93204b7f0d9b3cbe",
+        "rev": "d14b8808372f8150ba502c0ad440fd7aa3d1f74f",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/argocd",
         "owner": "defn",
-        "ref": "pkg-argocd-2.8.4-1",
+        "ref": "pkg-argocd-2.8.5-1",
         "repo": "dev",
         "type": "github"
       }
@@ -681,17 +681,17 @@
       },
       "locked": {
         "dir": "m/pkg/k3sup",
-        "lastModified": 1694759829,
-        "narHash": "sha256-f8XRtn65tgDiEKrafV/J+c2mz8TsQ2Sa3JUgvSS1Us8=",
+        "lastModified": 1698429710,
+        "narHash": "sha256-iW/SBjY2p4ZYV6PcRxWHvU0cuRSGINtFz28r4jLO13Y=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "d55e815edd814b5b91eb94dcfa7a9c45871ed86b",
+        "rev": "dcc35f7399bee7184e3a9c48440157177074e978",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/k3sup",
         "owner": "defn",
-        "ref": "pkg-k3sup-0.13.1-1",
+        "ref": "pkg-k3sup-0.13.3-1",
         "repo": "dev",
         "type": "github"
       }
