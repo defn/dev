@@ -68,6 +68,10 @@ data "coder_parameter" "instance_type" {
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
   mutable      = true
   option {
+    name  = "2"
+    value = "m6id.large"
+  }
+  option {
     name  = "4"
     value = "m6id.xlarge"
   }
@@ -86,11 +90,11 @@ data "coder_parameter" "nix_volume_size" {
   display_name = "nix volume size"
   description  = "The size of the nix volume to create for the workspace in GB"
   type         = "number"
-  default      = "200"
+  default      = "100"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
   mutable      = true
   validation {
-    min = 40
+    min = 100
     max = 200
   }
 }
