@@ -92,6 +92,13 @@ test-mesh:
 	kubectl --context $$(uname -n) delete ns cilium-test || true
 	kubectl --context $(to) delete ns cilium-test
 
+start-mesh:
+	runmany 3 'coder restart -y $$1' district school class
+	for a in district school class; do ssh coder.$$a bash -c '"cd m/c && cilium clustermesh status --wait"'; done
+
+stop-mesh:
+	runmany 3 'coder stop -y $$1' district school class
+
 connect:
 	cilium clustermesh connect --context $$(uname -n) --destination-context $(to) --destination-endpoint $(endpoint)
 
