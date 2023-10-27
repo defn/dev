@@ -377,8 +377,8 @@ def go_deps():
     go_repository(
         name = "com_github_google_uuid",
         importpath = "github.com/google/uuid",
-        sum = "h1:KjJaJ9iWZ3jOFZIf1Lqf4laDRCasjl0BCmnEGxkdLb4=",
-        version = "v1.3.1",
+        sum = "h1:MtMxsa51/r9yyhkyLsVeVt0B+BGQZzpQiTQ4eHZ8bc4=",
+        version = "v1.4.0",
     )
     go_repository(
         name = "com_github_googleapis_enterprise_certificate_proxy",
@@ -713,8 +713,8 @@ def go_deps():
     go_repository(
         name = "com_github_protocolbuffers_txtpbfmt",
         importpath = "github.com/protocolbuffers/txtpbfmt",
-        sum = "h1:032+c5tDken97aley+aOw+CvQjLwdqhdIv8NqlNejaY=",
-        version = "v0.0.0-20231016165630-1072508f7daa",
+        sum = "h1:014O62zIzQwvoD7Ekj3ePDF5bv9Xxy0w6AZk0qYbjUk=",
+        version = "v0.0.0-20231025115547-084445ff1adf",
     )
     go_repository(
         name = "com_github_rivo_uniseg",

@@ -88,4 +88,4 @@ cache: "redis:7.0.11-alpine": "redis@sha256:121bac949fb5f623b9fa0b4e4c9fb358ffd0
 
 cache: "registry.opensource.zalan.do/acid/postgres-operator:v1.10.1": "registry.opensource.zalan.do/acid/postgres-operator@sha256:8ced77e97e0876b2e1dbc8ef3ee6c9cc26df18c20b5f6c188a7799096be097df"
 
-cache: "tailscale/k8s-operator:unstable": "tailscale/k8s-operator@sha256:2148927074139e23dc8b5154a7a6325a6ea059f0c34f88683dc818f3f5f4d7d7"
+cache: "tailscale/k8s-operator:unstable": "tailscale/k8s-operator@sha256:5a80994a432d42cc081f01439d69fdf1b4dfd5bb9e00ca16e1aefb9db878dfad"
