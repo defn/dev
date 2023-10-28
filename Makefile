@@ -17,6 +17,10 @@ second_ = $(word 2, $(subst _, ,$@))
 
 MARK = $(shell which mark || echo echo)
 
+macos-reinstall:
+	sudo rm -rf /Library/Developer/CommandLineTools
+	/usr/bin/xcode-select --install
+
 macos:
 	$(MARK) macos
 	-$(shell which gpg-agent) --daemon --pinentry-program $$(which pinentry-mac)
