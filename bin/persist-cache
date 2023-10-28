@@ -22,10 +22,10 @@ function cache {
 
 	if [[ "Linux" == "$(uname -s || true)" ]]; then
 		if test -d /workspaces; then
-			sudo install -d -m 0755 -o $(id -un) -o $(id -gn) /workspaces
+			sudo install -d -m 0755 -o $(id -un) -g $(id -gn) /workspaces
 			ln -nfs /workspaces ~/work
 		elif test -d /work; then
-			sudo install -d -m 0755 -o $(id -un) -o $(id -gn) /work
+			sudo install -d -m 0755 -o $(id -un) -g $(id -gn) /work
 			ln -nfs /work ~/work
 		else
 			mkdir -p work

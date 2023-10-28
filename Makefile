@@ -86,7 +86,7 @@ gpg:
 	if [[ "$(shell uname -s)" == "Darwin" ]]; then $(MAKE) macos; fi
 	if test -d /run/user; then \
 		sudo rm -rf /run/user/1000/gnupg; \
-		sudo install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000; \
+		sudo install -d -m 0700 -o $$(id -un) -g $$(id -gn) /run/user/1000; \
 		ln -nfs ~/.gnupg /run/user/1000/gnupg; \
 		fi
 	pkill dirmngr 2>/dev/null || true
