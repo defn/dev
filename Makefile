@@ -49,7 +49,7 @@ home:
 			(cd m/pkg/$$n && ~/bin/b out flake_path) | (cd ~/bin/nix && tar xfz -); \
 			done; \
 	fi
-	rm -f bin/nix/{gcc,cc,ld}
+	rm -f bin/nix/{gcc,cc,ld,clang}
 	sudo -A ln -nfs ~/bin/nix/go /usr/local/bin/
 	sudo -A ln -nfs /home/ubuntu/.nix-profile/bin/nix-instantiate /usr/local/bin/
 	if test -x /opt/homebrew/opt/util-linux/bin/flock; then ln -nfs /opt/homebrew/opt/util-linux/bin/flock bin/nix/; fi
