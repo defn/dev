@@ -22,15 +22,15 @@ function cache {
 
 	if [[ "Linux" == "$(uname -s || true)" ]]; then
 		if test -d /workspaces; then
-			sudo install -d -m 0755 -o ubuntu -g ubuntu /workspaces
+			sudo install -d -m 0755 -o $(id -un) -o $(id -gn) /workspaces
 			ln -nfs /workspaces ~/work
 		elif test -d /work; then
-			sudo install -d -m 0755 -o ubuntu -g ubuntu /work
+			sudo install -d -m 0755 -o $(id -un) -o $(id -gn) /work
 			ln -nfs /work ~/work
 		else
 			mkdir -p work
 		fi
-		sudo chown ubuntu:ubuntu ~/work/.
+		sudo chown $(id -un):$(id -gn) ~/work/.
 	fi
 
 	persist ~/work/config-gh ~/.config/gh
