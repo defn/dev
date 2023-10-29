@@ -35,19 +35,6 @@ teacher: {
 	}
 }
 
-infra_account_id:       "510430971399"
-infra_k3s_version:      "rancher/k3s:v1.27.5-k3s1"
-infra_tailscale_domain: "tail3884f.ts.net"
-
-infra_name: string | *"coder-\(teacher.handle)-\(teacher.env)"
-
-infra_pod_cidr:     string
-infra_service_cidr: string
-infra_cilium_name:  string | *infra_name
-infra_cilium_id:    int
-infra_cilium_id:    >=0
-infra_cilium_id:    <=255
-
 infra_config: {
 	cluster_name: infra_name
 	name_suffix:  "."
@@ -79,9 +66,17 @@ infra_config: {
 			"iss",
 		]
 	}
-}
 
-infra: (infra_name): bootstrap: {...} | *teacher.bootstrap
+	infra_account_id:       "510430971399"
+	infra_k3s_version:      "rancher/k3s:v1.27.5-k3s1"
+	infra_tailscale_domain: "tail3884f.ts.net"
+
+	infra_name: "coder-\(teacher.handle)-\(teacher.env)"
+
+	infra_cilium_name: infra_name
+
+	bootstrap: teacher.bootstrap
+}
 
 kustomize: "hello": #Kustomize & {
 	#app_ns: "default"

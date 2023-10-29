@@ -20,6 +20,19 @@ kustomize: [NAME=string]: _name: NAME
 }
 
 #Cluster: {
+	infra_name:        string
+	infra_account_id:  string
+	infra_k3s_version: string
+
+	infra_tailscale_domain: string
+
+	infra_pod_cidr:     string
+	infra_service_cidr: string
+	infra_cilium_name:  string
+	infra_cilium_id:    int
+	infra_cilium_id:    >=0
+	infra_cilium_id:    <=255
+
 	cluster_name: string
 	name_suffix:  string
 

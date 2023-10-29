@@ -1,17 +1,13 @@
 package c
 
-infra_name:        string
-infra_account_id:  string
-infra_k3s_version: string
-
 infra_config: #Cluster
 
 infra: {
 	[NAME=string]: infra_config
 
-	(infra_name): {}
+	(infra_config.infra_name): {}
 
-	parent: infra[infra_name]
+	parent: infra[infra_config.infra_name]
 
 	"\(parent.cluster_name)-cluster": parent
 
@@ -30,7 +26,7 @@ env: (#Transform & {
 	}
 }).outputs
 
-kustomize: [string]: cluster: #Cluster | *infra[infra_name]
+kustomize: [string]: cluster: #Cluster | *infra[infra_config.infra_name]
 
 env: (#Transform & {
 	transformer: #TransformK3S
@@ -428,7 +424,7 @@ kustomize: "external-secrets": #KustomizeHelm & {
 		metadata: {
 			name:      "external-secrets"
 			namespace: "external-secrets"
-			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_account_id):role/\(infra_name)-cluster"
+			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_config.infra_account_id):role/\(infra_config.infra_name)-cluster"
 		}
 	}
 
@@ -511,7 +507,7 @@ kustomize: "karpenter": #KustomizeHelm & {
 		metadata: {
 			name:      "karpenter"
 			namespace: "karpenter"
-			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_account_id):role/\(infra_name)-cluster"
+			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_config.infra_account_id):role/\(infra_config.infra_name)-cluster"
 		}
 	}
 
@@ -621,7 +617,7 @@ kustomize: "karpenter": #KustomizeHelm & {
 			subnetSelector: "karpenter.sh/discovery":        cluster.cluster_name
 			securityGroupSelector: "karpenter.sh/discovery": cluster.cluster_name
 
-			instanceProfile: infra_name
+			instanceProfile: infra_config.infra_name
 			blockDeviceMappings: [{
 				deviceName: "/dev/sda1"
 				ebs: {
@@ -644,7 +640,7 @@ kustomize: "karpenter": #KustomizeHelm & {
 				cd
 				source .bash_profile
 
-				infra_name=\(infra_name)
+				infra_name=\(infra_config.infra_name)
 				sudo $(which tailscale) up --auth-key "$(cd m/pkg/chamber && nix develop --command chamber -b secretsmanager read --quiet ${infra_name} tailscale_authkey)"
 
 				ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y >/dev/null 2>&1
@@ -844,10 +840,10 @@ cilium_common: {
 			ingressController: enabled: false
 			externalWorkloads: enabled: false
 			cluster: {
-				name: infra_cilium_name
-				id:   infra_cilium_id
+				name: infra_config.infra_cilium_name
+				id:   infra_config.infra_cilium_id
 			}
-			ipam: operator: clusterPoolIPv4PodCIDRList: infra_pod_cidr
+			ipam: operator: clusterPoolIPv4PodCIDRList: infra_config.infra_pod_cidr
 			clustermesh: {
 				useAPIServer: true
 				apiserver: {
@@ -1359,7 +1355,7 @@ kustomize: "ubuntu": #Kustomize & {
 		kind:       "ServiceAccount"
 		metadata: {
 			name: "ubuntu"
-			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_account_id):role/\(infra_name)-cluster"
+			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(infra_config.infra_account_id):role/\(infra_config.infra_name)-cluster"
 		}
 	}
 }
