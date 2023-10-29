@@ -1,0 +1,53 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: bye
+  namespace: default
+spec:
+  template:
+    spec:
+      containerConcurrency: 0
+      containers:
+      - image: containous/whoami:latest
+        name: whoami
+        ports:
+        - containerPort: 80
+  traffic:
+  - latestRevision: true
+    percent: 100
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: hello
+  namespace: default
+spec:
+  template:
+    spec:
+      containerConcurrency: 0
+      containers:
+      - image: containous/whoami:latest
+        name: whoami
+        ports:
+        - containerPort: 80
+  traffic:
+  - latestRevision: true
+    percent: 100
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: district.amanibhavam.defn.run
+  namespace: default
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - kind: Rule
+    match: HostRegexp(`{subdomain:[a-z0-9-]+}.default.district.amanibhavam.defn.run`)
+    services:
+    - kind: Service
+      name: kourier-internal
+      namespace: kourier-system
+      port: 80
+      scheme: http

@@ -219,6 +219,48 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
+        argo-workflows: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-argo-workflows
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/k/r/coder-amanibhavam-district-cluster-argo-workflows
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        argo-events: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-argo-events
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/k/r/coder-amanibhavam-district-cluster-argo-events
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
         external-dns: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
@@ -340,6 +382,48 @@ helmCharts:
               repoURL: https://github.com/defn/dev
               targetRevision: main
               path: m/k/r/coder-amanibhavam-district-cluster-headlamp
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        postgres-operator: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-postgres-operator
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/k/r/coder-amanibhavam-district-cluster-postgres-operator
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        hello: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-hello
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/k/r/coder-amanibhavam-district-cluster-hello
             syncPolicy:
               automated:
                 prune: true

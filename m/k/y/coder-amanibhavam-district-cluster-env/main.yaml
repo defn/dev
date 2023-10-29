@@ -24,6 +24,48 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
+  name: coder-amanibhavam-district-cluster-argo-events
+  namespace: argocd
+spec:
+  destination:
+    name: coder-amanibhavam-district-cluster
+  project: default
+  source:
+    path: m/k/r/coder-amanibhavam-district-cluster-argo-events
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: coder-amanibhavam-district-cluster-argo-workflows
+  namespace: argocd
+spec:
+  destination:
+    name: coder-amanibhavam-district-cluster
+  project: default
+  source:
+    path: m/k/r/coder-amanibhavam-district-cluster-argo-workflows
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-district-cluster-cert-manager
   namespace: argocd
 spec:
@@ -116,6 +158,27 @@ spec:
   project: default
   source:
     path: m/k/r/coder-amanibhavam-district-cluster-headlamp
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: coder-amanibhavam-district-cluster-hello
+  namespace: argocd
+spec:
+  destination:
+    name: coder-amanibhavam-district-cluster
+  project: default
+  source:
+    path: m/k/r/coder-amanibhavam-district-cluster-hello
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:
@@ -243,6 +306,27 @@ spec:
   project: default
   source:
     path: m/k/r/coder-amanibhavam-district-cluster-pod-identity
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: coder-amanibhavam-district-cluster-postgres-operator
+  namespace: argocd
+spec:
+  destination:
+    name: coder-amanibhavam-district-cluster
+  project: default
+  source:
+    path: m/k/r/coder-amanibhavam-district-cluster-postgres-operator
     repoURL: https://github.com/defn/dev
     targetRevision: main
   syncPolicy:

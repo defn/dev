@@ -22,8 +22,8 @@ teacher_bootstrap: {
 
 	// workflows
 	"tfo": [100, ""]
-	//"argo-workflows": [100, ""]
-	//"argo-events": [100, ""]
+	"argo-workflows": [100, ""]
+	"argo-events": [100, ""]
 
 	// external dns, certs issuer
 	"external-dns": [100, ""]
@@ -36,8 +36,8 @@ teacher_bootstrap: {
 
 	// applications
 	"headlamp": [100, ""]
-	//"postgres-operator": [100, ""]
-	//"hello": [100, ""]
+	"postgres-operator": [100, ""]
+	"hello": [100, ""]
 }
 
 infra_account_id:       "510430971399"
