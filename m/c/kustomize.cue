@@ -5,27 +5,24 @@ class: #Cluster
 infra: {
 	[NAME=string]: class
 
-	#name: class.infra_name
-	#config: class
-
-	(#name): {}
-	"\(#config.cluster_name)-cluster": #config
-	"\(#config.cluster_name)-manual": #config
+	(class.cluster_name): {}
+	"\(class.cluster_name)-cluster": {}
+	"\(class.cluster_name)-manual": {}
 }
 
-kustomize: [string]: cluster: infra.#config
+kustomize: [string]: cluster: class
 
 env: (#Transform & {
 	transformer: #TransformK3S
 
-	inputs: "\(infra.#config.cluster_name)-manual": {
+	inputs: "\(class.cluster_name)-manual": {
 		bootstrap: {
 			"cilium-bootstrap": [1, ""]
 		}
 	}
 
-	inputs: "\(infra.#config.cluster_name)-cluster": {
-		bootstrap: infra.#config.bootstrap & {
+	inputs: "\(class.cluster_name)-cluster": {
+		bootstrap: class.bootstrap & {
 			"cilium": [100, ""]
 			"argo-cd": [100, ""]
 		}
@@ -416,7 +413,7 @@ kustomize: "external-secrets": #KustomizeHelm & {
 		metadata: {
 			name:      "external-secrets"
 			namespace: "external-secrets"
-			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(class.infra_account_id):role/\(class.infra_name)-cluster"
+			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(class.infra_account_id):role/\(class.cluster_name)-cluster"
 		}
 	}
 
@@ -499,7 +496,7 @@ kustomize: "karpenter": #KustomizeHelm & {
 		metadata: {
 			name:      "karpenter"
 			namespace: "karpenter"
-			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(class.infra_account_id):role/\(class.infra_name)-cluster"
+			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(class.infra_account_id):role/\(class.cluster_name)-cluster"
 		}
 	}
 
@@ -609,7 +606,7 @@ kustomize: "karpenter": #KustomizeHelm & {
 			subnetSelector: "karpenter.sh/discovery":        cluster.cluster_name
 			securityGroupSelector: "karpenter.sh/discovery": cluster.cluster_name
 
-			instanceProfile: class.infra_name
+			instanceProfile: class.cluster_name
 			blockDeviceMappings: [{
 				deviceName: "/dev/sda1"
 				ebs: {
@@ -632,8 +629,8 @@ kustomize: "karpenter": #KustomizeHelm & {
 				cd
 				source .bash_profile
 
-				infra_name=\(class.infra_name)
-				sudo $(which tailscale) up --auth-key "$(cd m/pkg/chamber && nix develop --command chamber -b secretsmanager read --quiet ${infra_name} tailscale_authkey)"
+				cluster_name=\(class.cluster_name)
+				sudo $(which tailscale) up --auth-key "$(cd m/pkg/chamber && nix develop --command chamber -b secretsmanager read --quiet ${cluster_name} tailscale_authkey)"
 
 				ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y >/dev/null 2>&1
 				cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
@@ -643,7 +640,7 @@ kustomize: "karpenter": #KustomizeHelm & {
 				az="$(curl -sSL -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/placement/availability-zone)"
 				container_ip="$(curl -sSL -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/local-ipv4)"
 
-				(cd m/pkg/k3sup && nix develop --command k3sup join --user ubuntu --server-host ${infra_name} --server-user ubuntu --k3s-extra-args "--kubelet-arg provider-id=aws:///${az}/${instance} --node-ip ${container_ip}")
+				(cd m/pkg/k3sup && nix develop --command k3sup join --user ubuntu --server-host ${cluster_name} --server-user ubuntu --k3s-extra-args "--kubelet-arg provider-id=aws:///${az}/${instance} --node-ip ${container_ip}")
 				EOF
 
 				--BOUNDARY
@@ -1347,7 +1344,7 @@ kustomize: "ubuntu": #Kustomize & {
 		kind:       "ServiceAccount"
 		metadata: {
 			name: "ubuntu"
-			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(class.infra_account_id):role/\(class.infra_name)-cluster"
+			annotations: "eks.amazonaws.com/role-arn": "arn:aws:iam::\(class.infra_account_id):role/\(class.cluster_name)-cluster"
 		}
 	}
 }
