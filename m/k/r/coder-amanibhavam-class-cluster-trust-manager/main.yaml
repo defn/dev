@@ -23,7 +23,7 @@ spec:
   template:
     spec:
       initContainers:
-        - image: not-found-quay.io/jetstack/cert-manager-package-debian:20210119.0
+        - image: 169.254.32.1:5000/quay.io/jetstack/cert-manager-package-debian@sha256:9218c9771c1b56763812ef859d1df4d05375be09e1505a1e5eff61643e94c555
           args:
             - /copyandmaybepause
             - /debian-package
@@ -44,7 +44,7 @@ spec:
               name: packages
               readOnly: false
       containers:
-        - image: not-found-quay.io/jetstack/trust-manager:v0.6.0
+        - image: 169.254.32.1:5000/quay.io/jetstack/trust-manager@sha256:525e2f3ab66e4f0a54db1c81f648119c4cce6cfa6d73dea98b82e8293c9fd054
           args:
             - --log-level=1
             - --metrics-port=9402

@@ -19,7 +19,7 @@ spec:
   template:
     spec:
       containers:
-        - image: not-found-quay.io/argoproj/argocli:v3.5.0
+        - image: 169.254.32.1:5000/quay.io/argoproj/argocli@sha256:842fd4235a7ef09d07d22bc11c719ca0035a82446590582c4c897ca4af3947ff
           args:
             - server
             - --configmap=argo-workflows-workflow-controller-configmap
@@ -101,7 +101,7 @@ spec:
   template:
     spec:
       containers:
-        - image: not-found-quay.io/argoproj/workflow-controller:v3.5.0
+        - image: 169.254.32.1:5000/quay.io/argoproj/workflow-controller@sha256:e7bd56db18dce6ac6e6fbc335f7df1cd79c6b7305165289cec6d55ef4c039ecc
           args:
             - --configmap
             - argo-workflows-workflow-controller-configmap

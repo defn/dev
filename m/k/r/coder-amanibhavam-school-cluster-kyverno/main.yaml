@@ -22345,7 +22345,7 @@ spec:
       template:
         spec:
           containers:
-            - image: not-found-bitnami/kubectl:1.26.4
+            - image: 169.254.32.1:5000/bitnami/kubectl@sha256:a0a972324d937b2c2f7207af29d1abd6ce3f7fd5ea73357036a67ab24f34cc92
               command:
                 - /bin/sh
                 - -c
@@ -22393,7 +22393,7 @@ spec:
       template:
         spec:
           containers:
-            - image: not-found-bitnami/kubectl:1.26.4
+            - image: 169.254.32.1:5000/bitnami/kubectl@sha256:a0a972324d937b2c2f7207af29d1abd6ce3f7fd5ea73357036a67ab24f34cc92
               command:
                 - /bin/sh
                 - -c
@@ -22439,7 +22439,7 @@ spec:
   template:
     spec:
       initContainers:
-        - image: not-found-ghcr.io/kyverno/kyvernopre:v1.10.3
+        - image: 169.254.32.1:5000/ghcr.io/kyverno/kyvernopre@sha256:4022f4b828418df94f61627bdc0852207986c095be9dbff686b57cb22b4c20ad
           args:
             - --loggingFormat=text
             - --v=2
@@ -22480,7 +22480,7 @@ spec:
             seccompProfile:
               type: RuntimeDefault
       containers:
-        - image: not-found-ghcr.io/kyverno/kyverno:v1.10.3
+        - image: 169.254.32.1:5000/ghcr.io/kyverno/kyverno@sha256:2e8ba9281d587a7eac78b4cfbb877c57fd3b948d13547192e950b00f961b1a4e
           args:
             - --backgroundServiceAccountName=system:serviceaccount:kyverno:kyverno-background-controller
             - --servicePort=443
@@ -22628,7 +22628,7 @@ spec:
   template:
     spec:
       containers:
-        - image: not-found-ghcr.io/kyverno/background-controller:v1.10.3
+        - image: 169.254.32.1:5000/ghcr.io/kyverno/background-controller@sha256:24e3336f1a22384d0835079598ce015e22cffb9bac26c09cae1099e919a0297c
           args:
             - --disableMetrics=false
             - --otelConfig=prometheus
@@ -22724,7 +22724,7 @@ spec:
   template:
     spec:
       containers:
-        - image: not-found-ghcr.io/kyverno/cleanup-controller:v1.10.3
+        - image: 169.254.32.1:5000/ghcr.io/kyverno/cleanup-controller@sha256:980a225c1ed668c7c0bc327c3c7f55e2913c3584e099571f93d17bedd4b64020
           args:
             - --servicePort=443
             - --disableMetrics=false
@@ -22852,7 +22852,7 @@ spec:
   template:
     spec:
       containers:
-        - image: not-found-ghcr.io/kyverno/reports-controller:v1.10.3
+        - image: 169.254.32.1:5000/ghcr.io/kyverno/reports-controller@sha256:b0fbfe5a7250fadd120ffbb6dd4cb70e575bddc165da76b46e3b7dab4d275141
           args:
             - --disableMetrics=false
             - --otelConfig=prometheus
@@ -22965,7 +22965,7 @@ spec:
   template:
     spec:
       containers:
-        - image: not-found-bitnami/kubectl:latest
+        - image: 169.254.32.1:5000/bitnami/kubectl@sha256:1364cda0798b2c44f327265397fbd34a32e66d80328d6e50a2d10377d7e2ff6d
           command:
             - sh
             - -c
@@ -22996,7 +22996,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: not-found-busybox:1.35
+    - image: 169.254.32.1:5000/busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094
       command:
         - /bin/sh
         - -c
@@ -23040,7 +23040,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: not-found-busybox:1.35
+    - image: 169.254.32.1:5000/busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094
       command:
         - /bin/sh
         - -c
@@ -23084,7 +23084,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: not-found-busybox:1.35
+    - image: 169.254.32.1:5000/busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094
       command:
         - /bin/sh
         - -c
@@ -23128,7 +23128,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: not-found-busybox:1.35
+    - image: 169.254.32.1:5000/busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094
       command:
         - /bin/sh
         - -c
@@ -23172,7 +23172,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: not-found-busybox:1.35
+    - image: 169.254.32.1:5000/busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094
       command:
         - /bin/sh
         - -c
@@ -23216,7 +23216,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: not-found-busybox:1.35
+    - image: 169.254.32.1:5000/busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094
       command:
         - /bin/sh
         - -c
@@ -23260,7 +23260,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: not-found-busybox:1.35
+    - image: 169.254.32.1:5000/busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094
       command:
         - /bin/sh
         - -c
