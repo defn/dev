@@ -5,8 +5,6 @@ import (
 )
 
 teacher: {
-	handle: string
-	env:    string
 	bootstrap: {
 		// essentials
 		"kyverno": [100, "", "ServerSideApply=true"]
@@ -36,12 +34,15 @@ teacher: {
 }
 
 class: {
+	handle: string
+	env:    string
+
 	cluster_name: infra_name
 	name_suffix:  "."
 
 	domain_zone: "defn.run"
-	domain_name: "\(teacher.env).\(teacher.handle).\(domain_zone)"
-	domain_slug: "\(teacher.env)-\(teacher.handle)-\(strings.Replace(domain_zone, ".", "-", -1))"
+	domain_name: "\(env).\(handle).\(domain_zone)"
+	domain_slug: "\(env)-\(handle)-\(strings.Replace(domain_zone, ".", "-", -1))"
 
 	secrets_region:   "us-west-2"
 	issuer:           "zerossl-production"
@@ -71,7 +72,7 @@ class: {
 	infra_k3s_version:      "rancher/k3s:v1.27.5-k3s1"
 	infra_tailscale_domain: "tail3884f.ts.net"
 
-	infra_name: "coder-\(teacher.handle)-\(teacher.env)"
+	infra_name: "coder-\(handle)-\(env)"
 
 	infra_cilium_name: infra_name
 
