@@ -1,8 +1,6 @@
 package c
 
 teacher: {
-	handle: "amanibhavam"
-	env:    "district"
 	bootstrap: {
 		// workflows
 		"tfo": [100, ""]
@@ -17,6 +15,8 @@ teacher: {
 }
 
 class: {
+	handle: "amanibhavam"
+	env:    "district"
 	infra_cilium_id:    250
 	infra_pod_cidr:     "10.250.0.0/17"
 	infra_service_cidr: "10.250.128.0/17"
