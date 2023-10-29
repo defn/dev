@@ -1,13 +1,5 @@
 package c
 
-import (
-	core "k8s.io/api/core/v1"
-	apps "k8s.io/api/apps/v1"
-	rbac "k8s.io/api/rbac/v1"
-
-	"strings"
-)
-
 infra_name:        string
 infra_account_id:  string
 infra_k3s_version: string
@@ -82,7 +74,7 @@ kustomize: "argo-cd": #Kustomize & {
 
 	namespace: "argocd"
 
-	resource: "namespace-argocd": core.#Namespace & {
+	resource: "namespace-argocd": {
 		apiVersion: "v1"
 		kind:       "Namespace"
 		metadata: {
@@ -132,7 +124,7 @@ kustomize: "argo-cd": #Kustomize & {
 		}
 	}
 
-	psm: "configmap-argocd-cmd-params-cm": core.#ConfigMap & {
+	psm: "configmap-argocd-cmd-params-cm": {
 		apiVersion: "v1"
 		kind:       "ConfigMap"
 		metadata: name: "argocd-cmd-params-cm"
@@ -141,7 +133,7 @@ kustomize: "argo-cd": #Kustomize & {
 		}
 	}
 
-	psm: "configmap-argocd-cm": core.#ConfigMap & {
+	psm: "configmap-argocd-cm": {
 		apiVersion: "v1"
 		kind:       "ConfigMap"
 		metadata: name: "argocd-cm"
@@ -233,7 +225,7 @@ kustomize: "kyverno": #KustomizeHelm & {
 		}
 	}
 
-	resource: "namespace-kyverno": core.#Namespace & {
+	resource: "namespace-kyverno": {
 		apiVersion: "v1"
 		kind:       "Namespace"
 		metadata: {
@@ -288,7 +280,7 @@ kustomize: "linkerd-crds": #KustomizeHelm & {
 		values: {}
 	}
 
-	resource: "namespace-linkerd": core.#Namespace & {
+	resource: "namespace-linkerd": {
 		apiVersion: "v1"
 		kind:       "Namespace"
 		metadata: {
@@ -367,7 +359,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 		}
 	}
 
-	resource: "namespace-external-dns": core.#Namespace & {
+	resource: "namespace-external-dns": {
 		apiVersion: "v1"
 		kind:       "Namespace"
 		metadata: {
@@ -433,7 +425,7 @@ kustomize: "external-secrets": #KustomizeHelm & {
 		}
 	}
 
-	resource: "namespace-external-secrets": core.#Namespace & {
+	resource: "namespace-external-secrets": {
 		apiVersion: "v1"
 		kind:       "Namespace"
 		metadata: {
@@ -451,7 +443,7 @@ kustomize: "external-secrets": #KustomizeHelm & {
 		}
 	}
 
-	resource: "cluster-role-binding-delegator": rbac.#ClusterRoleBinding & {
+	resource: "cluster-role-binding-delegator": {
 		apiVersion: "rbac.authorization.k8s.io/v1"
 		kind:       "ClusterRoleBinding"
 		metadata: name: "external-secrets-delegator"
@@ -503,7 +495,7 @@ kustomize: "karpenter": #KustomizeHelm & {
 		}
 	}
 
-	resource: "namespace-karpenter": core.#Namespace & {
+	resource: "namespace-karpenter": {
 		apiVersion: "v1"
 		kind:       "Namespace"
 		metadata: {
@@ -511,7 +503,7 @@ kustomize: "karpenter": #KustomizeHelm & {
 		}
 	}
 
-	psm: "config-map-karpenter-global-settings": core.#ConfigMap & {
+	psm: "config-map-karpenter-global-settings": {
 		apiVersion: "v1"
 		kind:       "ConfigMap"
 		metadata: {
@@ -544,7 +536,7 @@ kustomize: "karpenter": #KustomizeHelm & {
 		spec: replicas: 1
 	}
 
-	resource: "cluster-role-binding-admin": rbac.#ClusterRoleBinding & {
+	resource: "cluster-role-binding-admin": {
 		apiVersion: "rbac.authorization.k8s.io/v1"
 		kind:       "ClusterRoleBinding"
 		metadata: name: "karpenter-admin"
@@ -560,7 +552,7 @@ kustomize: "karpenter": #KustomizeHelm & {
 		}]
 	}
 
-	resource: "cluster-role-binding-node": rbac.#ClusterRoleBinding & {
+	resource: "cluster-role-binding-node": {
 		apiVersion: "rbac.authorization.k8s.io/v1"
 		kind:       "ClusterRoleBinding"
 		metadata: name: "karpenter-node"
@@ -576,7 +568,7 @@ kustomize: "karpenter": #KustomizeHelm & {
 		}]
 	}
 
-	resource: "cluster-role-binding-boot-strapper": rbac.#ClusterRoleBinding & {
+	resource: "cluster-role-binding-boot-strapper": {
 		apiVersion: "rbac.authorization.k8s.io/v1"
 		kind:       "ClusterRoleBinding"
 		metadata: name: "karpenter-boot-strapper"
@@ -692,7 +684,7 @@ kustomize: "knative": #Kustomize & {
 		url: "https://github.com/knative/serving/releases/download/knative-v1.11.3/serving-core.yaml"
 	}
 
-	psm: "namespace-knative-serving": core.#Namespace & {
+	psm: "namespace-knative-serving": {
 		apiVersion: "v1"
 		kind:       "Namespace"
 		metadata: {
@@ -700,7 +692,7 @@ kustomize: "knative": #Kustomize & {
 		}
 	}
 
-	psm: "deployment-webhook": apps.#Deployment & {
+	psm: "deployment-webhook": {
 		apiVersion: "apps/v1"
 		kind:       "Deployment"
 		metadata: {
@@ -709,7 +701,7 @@ kustomize: "knative": #Kustomize & {
 		}
 	}
 
-	psm: "deployment-controller": apps.#Deployment & {
+	psm: "deployment-controller": {
 		apiVersion: "apps/v1"
 		kind:       "Deployment"
 		metadata: {
@@ -718,7 +710,7 @@ kustomize: "knative": #Kustomize & {
 		}
 	}
 
-	psm: "deployment-autoscaler": apps.#Deployment & {
+	psm: "deployment-autoscaler": {
 		apiVersion: "apps/v1"
 		kind:       "Deployment"
 		metadata: {
@@ -727,7 +719,7 @@ kustomize: "knative": #Kustomize & {
 		}
 	}
 
-	psm: "deployment-activator": apps.#Deployment & {
+	psm: "deployment-activator": {
 		apiVersion: "apps/v1"
 		kind:       "Deployment"
 		metadata: {
@@ -736,7 +728,7 @@ kustomize: "knative": #Kustomize & {
 		}
 	}
 
-	psm: "config-map-config-defaults": core.#ConfigMap & {
+	psm: "config-map-config-defaults": {
 		apiVersion: "v1"
 		kind:       "ConfigMap"
 		metadata: {
@@ -749,7 +741,7 @@ kustomize: "knative": #Kustomize & {
 		}
 	}
 
-	psm: "config-map-config-domain": core.#ConfigMap & {
+	psm: "config-map-config-domain": {
 		apiVersion: "v1"
 		kind:       "ConfigMap"
 		metadata: {
@@ -759,7 +751,7 @@ kustomize: "knative": #Kustomize & {
 		data: (cluster.domain_name): ""
 	}
 
-	psm: "config-map-config-features": core.#ConfigMap & {
+	psm: "config-map-config-features": {
 		apiVersion: "v1"
 		kind:       "ConfigMap"
 		metadata: {
@@ -772,7 +764,7 @@ kustomize: "knative": #Kustomize & {
 		}
 	}
 
-	psm: "config-map-config-network": core.#ConfigMap & {
+	psm: "config-map-config-network": {
 		apiVersion: "v1"
 		kind:       "ConfigMap"
 		metadata: {
@@ -815,7 +807,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 		url: "https://github.com/cert-manager/cert-manager/releases/download/v\(cert_manager_version)/cert-manager.crds.yaml"
 	}
 
-	resource: "namespace-cert-manager": core.#Namespace & {
+	resource: "namespace-cert-manager": {
 		apiVersion: "v1"
 		kind:       "Namespace"
 		metadata: name: "cert-manager"
@@ -1203,7 +1195,7 @@ kustomize: "traefik": #KustomizeHelm & {
 		}
 	}
 
-	resource: "namespace-traefik": core.#Namespace & {
+	resource: "namespace-traefik": {
 		apiVersion: "v1"
 		kind:       "Namespace"
 		metadata: {
@@ -1471,7 +1463,7 @@ kustomize: "coder": #KustomizeHelm & {
 		}
 	}
 
-	resource: "namespace-coder": core.#Namespace & {
+	resource: "namespace-coder": {
 		apiVersion: "v1"
 		kind:       "Namespace"
 		metadata: {
@@ -1569,7 +1561,7 @@ kustomize: "coder": #KustomizeHelm & {
 		}
 	}
 
-	resource: "cluster-role-binding-admin": rbac.#ClusterRoleBinding & {
+	resource: "cluster-role-binding-admin": {
 		apiVersion: "rbac.authorization.k8s.io/v1"
 		kind:       "ClusterRoleBinding"
 		metadata: name: "coder"
@@ -1669,7 +1661,7 @@ kustomize: "pihole": #KustomizeHelm & {
 		}
 	}
 
-	resource: "namespace-pihole": core.#Namespace & {
+	resource: "namespace-pihole": {
 		apiVersion: "v1"
 		kind:       "Namespace"
 		metadata: {
@@ -1725,7 +1717,7 @@ kustomize: "argo-events": #KustomizeHelm & {
 		repo:    "https://argoproj.github.io/argo-helm"
 	}
 
-	resource: "namespace-argo-events": core.#Namespace & {
+	resource: "namespace-argo-events": {
 		apiVersion: "v1"
 		kind:       "Namespace"
 		metadata: {
@@ -1750,7 +1742,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		}
 	}
 
-	resource: "namespace-argo-workflows": core.#Namespace & {
+	resource: "namespace-argo-workflows": {
 		apiVersion: "v1"
 		kind:       "Namespace"
 		metadata: {
@@ -1795,7 +1787,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		}
 	}
 
-	resource: "namespace": core.#Namespace & {
+	resource: "namespace": {
 		apiVersion: "v1"
 		kind:       "Namespace"
 		metadata: {
@@ -2005,7 +1997,7 @@ kustomize: "headlamp": #KustomizeHelm & {
 		}
 	}
 
-	resource: "namespace-headlamp": core.#Namespace & {
+	resource: "namespace-headlamp": {
 		apiVersion: "v1"
 		kind:       "Namespace"
 		metadata: {
@@ -2073,7 +2065,7 @@ kustomize: "headlamp": #KustomizeHelm & {
 		}
 	}
 
-	resource: "cluster-role-binding-headlamp-admin": rbac.#ClusterRoleBinding & {
+	resource: "cluster-role-binding-headlamp-admin": {
 		apiVersion: "rbac.authorization.k8s.io/v1"
 		kind:       "ClusterRoleBinding"
 		metadata: name: "headlamp-admin-binding"
@@ -2133,7 +2125,7 @@ kustomize: "dex": #KustomizeHelm & {
 		}
 	}
 
-	resource: "namespace-dex": core.#Namespace & {
+	resource: "namespace-dex": {
 		apiVersion: "v1"
 		kind:       "Namespace"
 		metadata: {
@@ -2183,7 +2175,7 @@ kustomize: "postgres-operator": #KustomizeHelm & {
 		values: {}
 	}
 
-	resource: "namespace": core.#Namespace & {
+	resource: "namespace": {
 		apiVersion: "v1"
 		kind:       "Namespace"
 		metadata: {

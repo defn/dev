@@ -1,9 +1,5 @@
 package c
 
-import (
-	batch "k8s.io/api/batch/v1"
-)
-
 kustomize: [string]: #KustomizeHelm | #Kustomize
 kustomize: [NAME=string]: _name: NAME
 
@@ -216,7 +212,7 @@ kustomize: [NAME=string]: _name: NAME
 		}
 	}
 
-	resource: "pre-sync-hook-hatch-egg": batch.#Job & {
+	resource: "pre-sync-hook-hatch-egg": {
 		apiVersion: "batch/v1"
 		kind:       "Job"
 		metadata: {

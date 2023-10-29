@@ -1,6 +1,6 @@
 #ManagedBy: cue
 
+apiVersion: v1
+kind: Namespace
 metadata:
   name: headlamp
-kind: Namespace
-apiVersion: v1
