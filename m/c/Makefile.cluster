@@ -4,7 +4,7 @@ PRIV_KEY := sa-signer.key
 PUB_KEY := sa-signer.key.pub
 PKCS_KEY := sa-signer-pkcs8.pub
 
-INFRA_NAME := $(shell cue export --out json -e infra_name | jq -r .)
+INFRA_NAME := $(shell cue export --out json -e infra_config.infra_name | jq -r .)
 
 k3s_url := $(shell cat ~/.kube/config | grep server: | awk '{print $$NF}')
 
