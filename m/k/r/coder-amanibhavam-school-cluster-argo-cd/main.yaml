@@ -136,7 +136,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/quay.io/argoproj/argocd@sha256:f02d31d4b115d79de3dc45ebeec3a3107b9178d980e69d9dc2b26019d43f3e09
+        - image: not-found-quay.io/argoproj/argocd:v2.8.4
           args:
             - /usr/local/bin/argocd-applicationset-controller
           env:
@@ -327,7 +327,7 @@ spec:
   template:
     spec:
       initContainers:
-        - image: 169.254.32.1:5000/quay.io/argoproj/argocd@sha256:f02d31d4b115d79de3dc45ebeec3a3107b9178d980e69d9dc2b26019d43f3e09
+        - image: not-found-quay.io/argoproj/argocd:v2.8.4
           command:
             - /bin/cp
             - -n
@@ -350,7 +350,7 @@ spec:
             - mountPath: /tmp
               name: dexconfig
       containers:
-        - image: 169.254.32.1:5000/ghcr.io/dexidp/dex@sha256:f579d00721b0d842328c43a562f50343c54b0048ef2d58d6b54e750c21fc7938
+        - image: not-found-ghcr.io/dexidp/dex:v2.37.0
           command:
             - /shared/argocd-dex
             - rundex
@@ -429,7 +429,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/quay.io/argoproj/argocd@sha256:f02d31d4b115d79de3dc45ebeec3a3107b9178d980e69d9dc2b26019d43f3e09
+        - image: not-found-quay.io/argoproj/argocd:v2.8.4
           args:
             - /usr/local/bin/argocd-notifications
           env:
@@ -504,7 +504,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/redis@sha256:121bac949fb5f623b9fa0b4e4c9fb358ffd045966e754cfa3eb9963f3af2fe3b
+        - image: not-found-redis:7.0.11-alpine
           args:
             - --save
             - ""
@@ -561,7 +561,7 @@ spec:
   template:
     spec:
       initContainers:
-        - image: 169.254.32.1:5000/quay.io/argoproj/argocd@sha256:f02d31d4b115d79de3dc45ebeec3a3107b9178d980e69d9dc2b26019d43f3e09
+        - image: not-found-quay.io/argoproj/argocd:v2.8.4
           command:
             - /bin/cp
             - -n
@@ -581,7 +581,7 @@ spec:
             - mountPath: /var/run/argocd
               name: var-files
       containers:
-        - image: 169.254.32.1:5000/quay.io/argoproj/argocd@sha256:f02d31d4b115d79de3dc45ebeec3a3107b9178d980e69d9dc2b26019d43f3e09
+        - image: not-found-quay.io/argoproj/argocd:v2.8.4
           args:
             - /usr/local/bin/argocd-repo-server
           env:
@@ -848,7 +848,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/quay.io/argoproj/argocd@sha256:f02d31d4b115d79de3dc45ebeec3a3107b9178d980e69d9dc2b26019d43f3e09
+        - image: not-found-quay.io/argoproj/argocd:v2.8.4
           args:
             - /usr/local/bin/argocd-server
           env:
@@ -1915,7 +1915,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/quay.io/argoproj/argocd@sha256:f02d31d4b115d79de3dc45ebeec3a3107b9178d980e69d9dc2b26019d43f3e09
+        - image: not-found-quay.io/argoproj/argocd:v2.8.4
           args:
             - /usr/local/bin/argocd-application-controller
           env:

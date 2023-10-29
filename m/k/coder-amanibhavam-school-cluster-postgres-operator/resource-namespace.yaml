@@ -1,6 +1,0 @@
-#ManagedBy: cue
-
-metadata:
-  name: postgres-operator
-kind: Namespace
-apiVersion: v1

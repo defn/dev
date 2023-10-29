@@ -24,48 +24,6 @@ spec:
     name: coder-amanibhavam-school-cluster
   project: default
   source:
-    path: m/k/r/coder-amanibhavam-school-cluster-argo-events
-    repoURL: https://github.com/defn/dev
-    targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions: []
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-argo-events
-  namespace: argocd
----
-spec:
-  destination:
-    name: coder-amanibhavam-school-cluster
-  project: default
-  source:
-    path: m/k/r/coder-amanibhavam-school-cluster-argo-workflows
-    repoURL: https://github.com/defn/dev
-    targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions: []
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-argo-workflows
-  namespace: argocd
----
-spec:
-  destination:
-    name: coder-amanibhavam-school-cluster
-  project: default
-  source:
     path: m/k/r/coder-amanibhavam-school-cluster-cert-manager
     repoURL: https://github.com/defn/dev
     targetRevision: main
@@ -143,48 +101,6 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-school-cluster-external-secrets
-  namespace: argocd
----
-spec:
-  destination:
-    name: coder-amanibhavam-school-cluster
-  project: default
-  source:
-    path: m/k/r/coder-amanibhavam-school-cluster-headlamp
-    repoURL: https://github.com/defn/dev
-    targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions: []
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-headlamp
-  namespace: argocd
----
-spec:
-  destination:
-    name: coder-amanibhavam-school-cluster
-  project: default
-  source:
-    path: m/k/r/coder-amanibhavam-school-cluster-hello
-    repoURL: https://github.com/defn/dev
-    targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions: []
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-hello
   namespace: argocd
 ---
 spec:
@@ -319,27 +235,6 @@ spec:
     name: coder-amanibhavam-school-cluster
   project: default
   source:
-    path: m/k/r/coder-amanibhavam-school-cluster-postgres-operator
-    repoURL: https://github.com/defn/dev
-    targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions: []
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-postgres-operator
-  namespace: argocd
----
-spec:
-  destination:
-    name: coder-amanibhavam-school-cluster
-  project: default
-  source:
     path: m/k/r/coder-amanibhavam-school-cluster-secrets
     repoURL: https://github.com/defn/dev
     targetRevision: main
@@ -354,48 +249,6 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-school-cluster-secrets
-  namespace: argocd
----
-spec:
-  destination:
-    name: coder-amanibhavam-school-cluster
-  project: default
-  source:
-    path: m/k/r/coder-amanibhavam-school-cluster-tailscale
-    repoURL: https://github.com/defn/dev
-    targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions: []
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-tailscale
-  namespace: argocd
----
-spec:
-  destination:
-    name: coder-amanibhavam-school-cluster
-  project: default
-  source:
-    path: m/k/r/coder-amanibhavam-school-cluster-tfo
-    repoURL: https://github.com/defn/dev
-    targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions: []
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-tfo
   namespace: argocd
 ---
 spec:

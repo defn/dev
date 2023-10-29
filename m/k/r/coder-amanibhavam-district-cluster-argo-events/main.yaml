@@ -45,7 +45,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/quay.io/argoproj/argo-events@sha256:3c8d787908189604975ca87f480e0f60c93fdfb89bbf944a0c449d888e9368e7
+        - image: not-found-quay.io/argoproj/argo-events:v1.8.1
           args:
             - controller
           env:

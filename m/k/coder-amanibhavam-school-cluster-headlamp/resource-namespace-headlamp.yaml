@@ -1,6 +1,0 @@
-#ManagedBy: cue
-
-metadata:
-  name: headlamp
-kind: Namespace
-apiVersion: v1

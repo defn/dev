@@ -8,48 +8,6 @@ helmCharts:
   - releaseName: bootstrap
     valuesInline:
       anyResources:
-        cilium: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-school-cluster-cilium
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-school-cluster
-            source:
-              repoURL: https://github.com/defn/dev
-              targetRevision: main
-              path: m/k/r/coder-amanibhavam-school-cluster-cilium
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        argo-cd: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-school-cluster-argo-cd
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-school-cluster
-            source:
-              repoURL: https://github.com/defn/dev
-              targetRevision: main
-              path: m/k/r/coder-amanibhavam-school-cluster-argo-cd
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
         kyverno: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
@@ -177,27 +135,6 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
-        tailscale: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-school-cluster-tailscale
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-school-cluster
-            source:
-              repoURL: https://github.com/defn/dev
-              targetRevision: main
-              path: m/k/r/coder-amanibhavam-school-cluster-tailscale
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
         karpenter: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
@@ -214,69 +151,6 @@ helmCharts:
               repoURL: https://github.com/defn/dev
               targetRevision: main
               path: m/k/r/coder-amanibhavam-school-cluster-karpenter
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        tfo: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-school-cluster-tfo
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-school-cluster
-            source:
-              repoURL: https://github.com/defn/dev
-              targetRevision: main
-              path: m/k/r/coder-amanibhavam-school-cluster-tfo
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        argo-workflows: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-school-cluster-argo-workflows
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-school-cluster
-            source:
-              repoURL: https://github.com/defn/dev
-              targetRevision: main
-              path: m/k/r/coder-amanibhavam-school-cluster-argo-workflows
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        argo-events: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-school-cluster-argo-events
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-school-cluster
-            source:
-              repoURL: https://github.com/defn/dev
-              targetRevision: main
-              path: m/k/r/coder-amanibhavam-school-cluster-argo-events
             syncPolicy:
               automated:
                 prune: true
@@ -387,12 +261,12 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
-        headlamp: |
+        cilium: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
           metadata:
             namespace: argocd
-            name: coder-amanibhavam-school-cluster-headlamp
+            name: coder-amanibhavam-school-cluster-cilium
             annotations:
               argocd.argoproj.io/sync-wave: "100"
           spec:
@@ -402,18 +276,18 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/r/coder-amanibhavam-school-cluster-headlamp
+              path: m/k/r/coder-amanibhavam-school-cluster-cilium
             syncPolicy:
               automated:
                 prune: true
                 selfHeal: true
               syncOptions: []
-        postgres-operator: |
+        argo-cd: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
           metadata:
             namespace: argocd
-            name: coder-amanibhavam-school-cluster-postgres-operator
+            name: coder-amanibhavam-school-cluster-argo-cd
             annotations:
               argocd.argoproj.io/sync-wave: "100"
           spec:
@@ -423,28 +297,7 @@ helmCharts:
             source:
               repoURL: https://github.com/defn/dev
               targetRevision: main
-              path: m/k/r/coder-amanibhavam-school-cluster-postgres-operator
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        hello: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-school-cluster-hello
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-school-cluster
-            source:
-              repoURL: https://github.com/defn/dev
-              targetRevision: main
-              path: m/k/r/coder-amanibhavam-school-cluster-hello
+              path: m/k/r/coder-amanibhavam-school-cluster-argo-cd
             syncPolicy:
               automated:
                 prune: true
