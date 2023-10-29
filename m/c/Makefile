@@ -1,5 +1,7 @@
 SHELL := /bin/bash
 
+app ?= district school class
+
 build:
 	cd $(shell uname -n) && $(MAKE) build
 
@@ -93,18 +95,18 @@ test-mesh:
 	kubectl --context $(to) delete ns cilium-test
 
 restart-mesh:
-	runmany 3 'coder restart -y $$1' district school class
+	runmany 3 'coder restart -y $$1' $(app)
 	$(MAKE) wait-mesh
 
 start-mesh:
-	runmany 3 'coder start -y $$1' district school class
+	runmany 3 'coder start -y $$1' $(app)
 	$(MAKE) wait-mesh
 
 wait-mesh:
-	for a in district school class; do ssh coder.$$a bash -c '"cd m/c && cilium clustermesh status --wait"'; done
+	for a in $(app); do ssh coder.$$a bash -c '"cd m/c && cilium clustermesh status --wait"'; done
 
 stop-mesh:
-	runmany 3 'coder stop -y $$1' district school class
+	runmany 3 'coder stop -y $$1' $(app)
 
 connect:
 	cilium clustermesh connect --context $$(uname -n) --destination-context $(to) --destination-endpoint $(endpoint)
