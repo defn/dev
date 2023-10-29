@@ -50,7 +50,7 @@ infra_cilium_id:    <=255
 
 infra_config: {
 	cluster_name: infra_name
-	name_suffix: "."
+	name_suffix:  "."
 
 	domain_zone: "defn.run"
 	domain_name: "\(teacher.env).\(teacher.handle).\(domain_zone)"
@@ -59,11 +59,29 @@ infra_config: {
 	secrets_region:   "us-west-2"
 	issuer:           "zerossl-production"
 	cloudflare_email: "cloudflare@defn.us"
+
+	discovery_url: "https://\(infra_name).\(infra_tailscale_domain)"
+	discovery: {
+		issuer:                 discovery_url
+		jwks_uri:               "\(discovery_url)/openid/.well-known/jwks.json"
+		authorization_endpoint: "urn:kubernetes:programmatic_authorization"
+		response_types_supported: [
+			"id_token",
+		]
+		subject_types_supported: [
+			"public",
+		]
+		id_token_signing_alg_values_supported: [
+			"RS256",
+		]
+		claims_supported: [
+			"sub",
+			"iss",
+		]
+	}
 }
 
 infra: (infra_name): bootstrap: {...} | *teacher.bootstrap
-
-discovery_url: string | *"https://\(infra_name).\(infra_tailscale_domain)"
 
 kustomize: "hello": #Kustomize & {
 	#app_ns: "default"

@@ -35,7 +35,7 @@ irsa:
 	sudo cat /etc/rancher/k3s/k3s.yaml | awk -F': ' '/certificate-authority-data/ {print $$2}' | base64 -d > system.ca.pem && chmod 600 system.ca.pem
 	mkdir -p openid/.well-known
 	curl -sSL --cert system.admin.pem --key system.admin.key --cacert system.ca.pem ${k3s_url}/openid/v1/jwks | jq . > openid/.well-known/jwks.json
-	cue export -e discovery --out=json | jq . > openid/.well-known/openid-configuration
+	cue export -e infra_config.discovery --out=json | jq . > openid/.well-known/openid-configuration
 	rm -vf system.*
 
 k3s-secrets: ca.key ca.crt
