@@ -5,35 +5,31 @@ infra_config: #Cluster
 infra: {
 	[NAME=string]: infra_config
 
-	(infra_config.infra_name): {}
+	#name: infra_config.infra_name
+	#config: infra_config
 
-	parent: infra[infra_config.infra_name]
-
-	"\(parent.cluster_name)-cluster": parent
-
-	manual: parent
-
-	"\(parent.cluster_name)-manual": manual
+	(#name): {}
+	"\(#config.cluster_name)-cluster": #config
+	"\(#config.cluster_name)-manual": #config
 }
+
+kustomize: [string]: cluster: infra.#config
 
 env: (#Transform & {
 	transformer: #TransformK3S
 
-	inputs: "\(infra.parent.cluster_name)-manual": {
+	inputs: "\(infra.#config.cluster_name)-manual": {
 		bootstrap: {
 			"cilium-bootstrap": [1, ""]
 		}
 	}
 }).outputs
 
-kustomize: [string]: cluster: #Cluster | *infra[infra_config.infra_name]
-
 env: (#Transform & {
 	transformer: #TransformK3S
 
-	inputs: "\(infra.parent.cluster_name)-cluster": {
-		bootstrap: infra.parent.bootstrap & {
-			// bootstrapped
+	inputs: "\(infra.#config.cluster_name)-cluster": {
+		bootstrap: infra.#config.bootstrap & {
 			"cilium": [100, ""]
 			"argo-cd": [100, ""]
 		}
