@@ -21,19 +21,31 @@ kustomize: [NAME=string]: _name: NAME
 
 #Cluster: {
 	cluster_name: string
-	name_suffix: string
+	name_suffix:  string
 
 	domain_zone: string
 	domain_name: string
 	domain_slug: string
 
-	secrets_region: string
+	secrets_region:   string
 	issuer:           string
 	cloudflare_email: string
 
 	cluster_name: string
 
 	bootstrap: [string]: #BootstrapConfig
+
+	discovery_url: string
+
+	discovery: {
+		issuer:                 string
+		jwks_uri:               string
+		authorization_endpoint: string
+		response_types_supported: [...string]
+		subject_types_supported: [...string]
+		id_token_signing_alg_values_supported: [...string]
+		claims_supported: [...string]
+	}
 }
 
 #Kustomize: {
