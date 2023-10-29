@@ -69,7 +69,7 @@ infra_base: {
 	cloudflare_email: "cloudflare@defn.us"
 }
 
-infra: "\(infra_name)": bootstrap: {...} | *teacher_bootstrap
+infra: (infra_name): bootstrap: {...} | *teacher_bootstrap
 
 discovery_url: string | *"https://\(infra_name).\(infra_tailscale_domain)"
 
