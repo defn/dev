@@ -20,20 +20,20 @@ kustomize: [NAME=string]: _name: NAME
 }
 
 #Cluster: {
+	cluster_name: string
+	name_suffix: string
+
 	domain_zone: string
 	domain_name: string
 	domain_slug: string
 
+	secrets_region: string
 	issuer:           string
 	cloudflare_email: string
 
 	cluster_name: string
 
-	secrets_region: string
-
 	bootstrap: [string]: #BootstrapConfig
-
-	name_suffix: string | *"."
 }
 
 #Kustomize: {

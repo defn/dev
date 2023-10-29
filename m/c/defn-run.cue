@@ -49,8 +49,10 @@ infra_cilium_id:    >=0
 infra_cilium_id:    <=255
 
 infra_config: {
-	domain_zone: "defn.run"
+	cluster_name: infra_name
+	name_suffix: "."
 
+	domain_zone: "defn.run"
 	domain_name: "\(teacher.env).\(teacher.handle).\(domain_zone)"
 	domain_slug: "\(teacher.env)-\(teacher.handle)-\(strings.Replace(domain_zone, ".", "-", -1))"
 
@@ -60,9 +62,6 @@ infra_config: {
 }
 
 infra: (infra_name): bootstrap: {...} | *teacher.bootstrap
-infra: (infra_name): bootstrap: infra_workloads
-
-infra_workloads: {...}
 
 discovery_url: string | *"https://\(infra_name).\(infra_tailscale_domain)"
 
