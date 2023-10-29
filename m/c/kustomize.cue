@@ -4,23 +4,12 @@ infra_name:        string
 infra_account_id:  string
 infra_k3s_version: string
 
-infra_config: {
-	domain_zone: string
-	domain_name: string
-	domain_slug: string
-
-	secrets_region:   string
-	issuer:           string
-	cloudflare_email: string
-}
+infra_config: #Cluster
 
 infra: {
 	[NAME=string]: infra_config
 
-	(infra_name): {
-		cluster_name: infra_name
-		bootstrap: [string]: #BootstrapConfig
-	}
+	(infra_name): {}
 
 	parent: infra[infra_name]
 
