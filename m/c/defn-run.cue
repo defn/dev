@@ -20,11 +20,6 @@ teacher_bootstrap: {
 	// scaling
 	"karpenter": [100, ""]
 
-	// workflows
-	"tfo": [100, ""]
-	"argo-workflows": [100, ""]
-	"argo-events": [100, ""]
-
 	// external dns, certs issuer
 	"external-dns": [100, ""]
 	"issuer": [100, ""]
@@ -33,11 +28,6 @@ teacher_bootstrap: {
 	"knative": [100, ""]
 	"kourier": [100, ""]
 	"traefik": [100, ""]
-
-	// applications
-	"headlamp": [100, ""]
-	"postgres-operator": [100, ""]
-	"hello": [100, ""]
 }
 
 infra_account_id:       "510430971399"
@@ -69,6 +59,9 @@ infra_base: {
 }
 
 infra: (infra_name): bootstrap: {...} | *teacher_bootstrap
+infra: (infra_name): bootstrap: infra_workloads
+
+infra_workloads: {...}
 
 discovery_url: string | *"https://\(infra_name).\(infra_tailscale_domain)"
 
