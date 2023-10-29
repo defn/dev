@@ -117,7 +117,6 @@ import (
 	env: #EnvApp
 	env: {
 		// ex: k/k3d-dfd
-		// ex: k/vcluster-dfd-vc0
 		spec: source: path: "m/k/r/\(name)-env"
 
 		spec: "destination": "name": destination
@@ -170,34 +169,5 @@ import (
 	bootstrap: _in.bootstrap
 
 	// ex: k3d-dfd
-	env: metadata: name: ctx.name
-}
-
-// VCluster Machine
-#TransformVCluster: {
-	from: {
-		#Input
-		bootstrap: [string]: [int, ...string]
-		instance_types: [...string]
-		parent: #K3S
-	}
-
-	to: #VCluster
-}
-
-#VCluster: ctx={
-	_in: #TransformVCluster.from
-
-	#Machine
-
-	name:           _in.name
-	destination:    parent.name
-	bootstrap:      _in.bootstrap
-	instance_types: _in.instance_types
-	parent:         #K3S & _in.parent
-
-	instance_types: [...string] | *["t3.medium", "t3a.medium"]
-
-	// ex: vcluster-k3d-dfd-vc1
 	env: metadata: name: ctx.name
 }

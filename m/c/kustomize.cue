@@ -12,7 +12,7 @@ infra_name:        string
 infra_account_id:  string
 infra_k3s_version: string
 
-infra_base: {
+infra_config: {
 	domain_zone: string
 	domain_name: string
 	domain_slug: string
@@ -22,33 +22,12 @@ infra_base: {
 	cloudflare_email: string
 }
 
-infra_vclusters: [...string]
-
 infra: {
-	[NAME=string]: infra_base & {
-		if strings.HasPrefix(NAME, "vc") {
-			cluster_name: "\(parent.cluster_name)-\(NAME)"
-			name_suffix:  "-\(NAME)."
-			bootstrap: [string]: #BootstrapConfig
-
-			vcluster: vc_machine: cluster_name
-		}
-	}
-
-	parent: vclusters: [
-		for v in infra_vclusters {
-			"\(v)"
-		},
-	]
+	[NAME=string]: infra_config
 
 	(infra_name): {
 		cluster_name: infra_name
 		bootstrap: [string]: #BootstrapConfig
-		vclusters: [...string]
-	}
-
-	for i, v in parent.vclusters {
-		(infra[v].cluster_name): infra[v]
 	}
 
 	parent: infra[infra_name]
@@ -80,38 +59,6 @@ env: (#Transform & {
 			// bootstrapped
 			"cilium": [100, ""]
 			"argo-cd": [100, ""]
-
-			for v in infra.parent.vclusters {
-				// vclusters
-				"\(infra[v].cluster_name)-vcluster": [30, ""]
-
-				// vcluster workloads
-				"\(infra[v].cluster_name)-env": [101, ""]
-			}
-		}
-	}
-}).outputs
-
-kustomize: (#Transform & {
-	transformer: #TransformKustomizeVCluster
-
-	inputs: {
-		for i, v in infra.parent.vclusters {
-			"\(infra[v].cluster_name)-vcluster": infra[v].vcluster
-		}
-	}
-}).outputs
-
-env: (#Transform & {
-	transformer: #TransformVCluster
-
-	inputs: {
-		for v in infra.parent.vclusters {
-			(infra[v].cluster_name): {
-				instance_types: []
-				parent:    env["\(infra.parent.cluster_name)-cluster"]
-				bootstrap: infra[v].bootstrap
-			}
 		}
 	}
 }).outputs
@@ -893,91 +840,6 @@ kustomize: "trust-manager": #KustomizeHelm & {
 		version:   "0.6.0"
 		repo:      "https://charts.jetstack.io"
 		values: {}
-	}
-}
-
-// https://artifacthub.io/packages/helm/loft/vcluster
-#TransformKustomizeVCluster: {
-	from: {
-		#Input
-		vc_name:    string | *from.name
-		vc_machine: string | *from.name
-
-		type:        string
-		k3s_version: string
-	}
-
-	to: #KustomizeVCluster
-}
-
-#KustomizeVCluster: {
-	_in: #TransformKustomizeVCluster.from
-
-	#KustomizeHelm
-
-	namespace: _in.name
-
-	helm: {
-		release: "vcluster"
-		name:    "vcluster"
-		version: "0.16.4"
-		repo:    "https://charts.loft.sh"
-
-		values: {
-			vcluster: image: _in.k3s_version
-
-			fallbackHostDns: true
-			multiNamespaceMode: enabled: false
-			service: type:               "ClusterIP"
-
-			sync: {
-				pods: ephemeralContainers:  true
-				persistentvolumes: enabled: true
-				ingresses: enabled:         true
-				nodes: enabled:             true
-				serviceaccounts: enabled:   true
-			}
-
-			syncer: extraArgs: [
-				"--tls-san=vcluster.\(_in.vc_name).svc.cluster.local",
-				//"--enforce-toleration=env=\(_in.vc_name):NoSchedule",
-			]
-
-			//sync: nodes: nodeSelector: "env=\(_in.vc_machine)"
-
-			//tolerations: [{
-			//	key:      "env"
-			//	value:    _in.vc_machine
-			//	operator: "Equal"
-			//}]
-
-			//affinity: nodeAffinity: requiredDuringSchedulingIgnoredDuringExecution: nodeSelectorTerms: [{
-			//	matchExpressions: [{
-			//		key:      "env"
-			//		operator: "In"
-			//		values: [_in.vc_machine]
-			//	}]
-			//}]
-		}
-	}
-
-	psm: "namespace-vcluster": {
-		apiVersion: "v1"
-		kind:       "Namespace"
-		metadata: {
-			name: _in.vc_name
-			annotations: {
-				"linkerd.io/inject": "disabled"
-			}
-		}
-	}
-
-	resource: "namespace-vcluster": core.#Namespace & {
-		apiVersion: "v1"
-		kind:       "Namespace"
-		metadata: {
-			name: _in.vc_name
-		}
 	}
 }
 
