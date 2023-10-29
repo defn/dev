@@ -8416,7 +8416,7 @@ spec:
   template:
     spec:
       containers:
-        - image: not-found-ghcr.io/external-secrets/external-secrets:v0.9.7
+        - image: 169.254.32.1:5000/ghcr.io/external-secrets/external-secrets@sha256:f10d2b5f293f94c9516210da1727cf78ef8c094ea72ecebb2984ad03517952c1
           args:
             - --concurrent=1
           imagePullPolicy: IfNotPresent

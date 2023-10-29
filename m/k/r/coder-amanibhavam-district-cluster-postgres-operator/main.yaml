@@ -1633,7 +1633,7 @@ spec:
   template:
     spec:
       containers:
-        - image: not-found-registry.opensource.zalan.do/acid/postgres-operator:v1.10.1
+        - image: 169.254.32.1:5000/registry.opensource.zalan.do/acid/postgres-operator@sha256:8ced77e97e0876b2e1dbc8ef3ee6c9cc26df18c20b5f6c188a7799096be097df
           env:
             - name: POSTGRES_OPERATOR_CONFIGURATION_OBJECT
               value: postgres-operator

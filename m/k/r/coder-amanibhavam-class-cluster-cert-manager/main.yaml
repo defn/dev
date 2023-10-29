@@ -30,7 +30,7 @@ spec:
   template:
     spec:
       containers:
-        - image: not-found-quay.io/jetstack/cert-manager-controller:v1.13.1
+        - image: 169.254.32.1:5000/quay.io/jetstack/cert-manager-controller@sha256:6b83f55bd99e1824a73938ebd09f7cd7330cdeaf945036f7ecffa4553bc18f26
           args:
             - --v=4
             - --cluster-resource-namespace=$(POD_NAMESPACE)
@@ -103,7 +103,7 @@ spec:
   template:
     spec:
       containers:
-        - image: not-found-quay.io/jetstack/cert-manager-cainjector:v1.13.1
+        - image: 169.254.32.1:5000/quay.io/jetstack/cert-manager-cainjector@sha256:72072d492b43d7fd4f818bdc1d7e617c3ccbfe27c46c57a29eb6991d13ede572
           args:
             - --v=4
             - --leader-election-namespace=kube-system
@@ -160,7 +160,7 @@ spec:
   template:
     spec:
       containers:
-        - image: not-found-quay.io/jetstack/cert-manager-webhook:v1.13.1
+        - image: 169.254.32.1:5000/quay.io/jetstack/cert-manager-webhook@sha256:48ea4a77dfa793b11a1e9b724f63b3480abe87a91b63ed21fcc0e63972ea0c9f
           args:
             - --v=4
             - --secure-port=10250
@@ -249,7 +249,7 @@ spec:
   template:
     spec:
       containers:
-        - image: not-found-quay.io/jetstack/cert-manager-ctl:v1.13.1
+        - image: 169.254.32.1:5000/quay.io/jetstack/cert-manager-ctl@sha256:c10bde7ff9ad016d3f65938059fc1d1779c2ad940df4b0f0ef98e8ed3a2324df
           args:
             - check
             - api
