@@ -1,9 +1,9 @@
 #ManagedBy: cue
 
+apiVersion: v1
+kind: ConfigMap
 metadata:
   name: config-network
   namespace: knative-serving
 data:
   ingress.class: kourier.ingress.networking.knative.dev
-kind: ConfigMap
-apiVersion: v1

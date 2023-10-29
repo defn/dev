@@ -1,5 +1,9 @@
 package c
 
+import (
+	"strings"
+)
+
 teacher_handle: string
 teacher_env:    string
 
@@ -43,13 +47,11 @@ infra_cilium_id:    int
 infra_cilium_id:    >=0
 infra_cilium_id:    <=255
 
-infra_base: {
-	domain_name: "\(teacher_env).\(teacher_handle).defn.run"
-	domain_slug: "\(teacher_env)-\(teacher_handle)-defn-run"
-}
-
 infra_config: {
 	domain_zone: "defn.run"
+
+	domain_name: "\(teacher_env).\(teacher_handle).\(domain_zone)"
+	domain_slug: "\(teacher_env)-\(teacher_handle)-\(strings.Replace(domain_zone, ".", "-", -1))"
 
 	secrets_region:   "us-west-2"
 	issuer:           "zerossl-production"
