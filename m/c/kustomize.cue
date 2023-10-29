@@ -23,10 +23,6 @@ env: (#Transform & {
 			"cilium-bootstrap": [1, ""]
 		}
 	}
-}).outputs
-
-env: (#Transform & {
-	transformer: #TransformK3S
 
 	inputs: "\(infra.#config.cluster_name)-cluster": {
 		bootstrap: infra.#config.bootstrap & {
