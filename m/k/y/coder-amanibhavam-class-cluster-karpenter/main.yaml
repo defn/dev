@@ -1801,8 +1801,8 @@ spec:
     cd
     source .bash_profile
 
-    infra_name=coder-amanibhavam-class
-    sudo $(which tailscale) up --auth-key "$(cd m/pkg/chamber && nix develop --command chamber -b secretsmanager read --quiet ${infra_name} tailscale_authkey)"
+    cluster_name=coder-amanibhavam-class
+    sudo $(which tailscale) up --auth-key "$(cd m/pkg/chamber && nix develop --command chamber -b secretsmanager read --quiet ${cluster_name} tailscale_authkey)"
 
     ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa <<<y >/dev/null 2>&1
     cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
@@ -1812,7 +1812,7 @@ spec:
     az="$(curl -sSL -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/placement/availability-zone)"
     container_ip="$(curl -sSL -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/local-ipv4)"
 
-    (cd m/pkg/k3sup && nix develop --command k3sup join --user ubuntu --server-host ${infra_name} --server-user ubuntu --k3s-extra-args "--kubelet-arg provider-id=aws:///${az}/${instance} --node-ip ${container_ip}")
+    (cd m/pkg/k3sup && nix develop --command k3sup join --user ubuntu --server-host ${cluster_name} --server-user ubuntu --k3s-extra-args "--kubelet-arg provider-id=aws:///${az}/${instance} --node-ip ${container_ip}")
     EOF
 
     --BOUNDARY

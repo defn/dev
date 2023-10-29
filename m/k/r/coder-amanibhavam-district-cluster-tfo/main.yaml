@@ -1742,7 +1742,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/ghcr.io/galleybytes/terraform-operator@sha256:d93a996d405064a3d1dd897ac61b796cc115a3c3c577c955d48359b0f1489b08
+        - image: not-found-ghcr.io/galleybytes/terraform-operator:v0.14.0
           args:
             - --zap-log-level=debug
             - --zap-encoder=console

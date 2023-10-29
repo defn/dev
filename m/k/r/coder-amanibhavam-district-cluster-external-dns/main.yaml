@@ -140,7 +140,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/docker.io/bitnami/external-dns@sha256:498943fa9410c5510fde1a1c189e131df8b412605d6c3d47a18fdeaed119fa59
+        - image: not-found-docker.io/bitnami/external-dns:0.13.6-debian-11-r30
           args:
             - --metrics-address=:7979
             - --log-level=debug

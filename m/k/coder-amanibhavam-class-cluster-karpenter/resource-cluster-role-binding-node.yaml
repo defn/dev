@@ -1,14 +1,14 @@
 #ManagedBy: cue
 
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
 metadata:
   name: karpenter-node
-subjects:
-  - kind: ServiceAccount
-    name: karpenter
-    namespace: karpenter
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: system:node
-kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
+subjects:
+  - kind: ServiceAccount
+    name: karpenter
+    namespace: karpenter

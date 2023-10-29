@@ -5803,7 +5803,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:3116c382f238d6dca14e50b1077139502291b4d91a2a27b54ad86a0b99c6242a
+        - image: not-found-gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:3116c382f238d6dca14e50b1077139502291b4d91a2a27b54ad86a0b99c6242a
           env:
             - name: GOGC
               value: "500"
@@ -5895,7 +5895,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:25384f07333fcfba3a3ab0d184814677c333f37115dae49a688c9e9b9c9ccdb1
+        - image: not-found-gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:25384f07333fcfba3a3ab0d184814677c333f37115dae49a688c9e9b9c9ccdb1
           env:
             - name: POD_NAME
               valueFrom:
@@ -5990,7 +5990,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:e9cf2d643fd80ff095c5074223cd7797aa69733f28468b1a924cbf1730cd429b
+        - image: not-found-gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:e9cf2d643fd80ff095c5074223cd7797aa69733f28468b1a924cbf1730cd429b
           env:
             - name: POD_NAME
               valueFrom:
@@ -6077,7 +6077,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:65d22d6aa04863281dbb1f987d12e280db74286eb033a5940549efc0e62e1cd0
+        - image: not-found-gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:65d22d6aa04863281dbb1f987d12e280db74286eb033a5940549efc0e62e1cd0
           env:
             - name: POD_NAME
               valueFrom:
@@ -6220,7 +6220,7 @@ metadata:
   namespace: knative-serving
 ---
 spec:
-  image: 169.254.32.1:5000/knative-releases/knative.dev/serving/cmd/queue@sha256:1bfc20a721e40c7b1aa4e6d632e0ca9b2514f409ca9844fd81d7409e45cc4265
+  image: not-found-gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:1bfc20a721e40c7b1aa4e6d632e0ca9b2514f409ca9844fd81d7409e45cc4265
 apiVersion: caching.internal.knative.dev/v1alpha1
 kind: Image
 metadata:

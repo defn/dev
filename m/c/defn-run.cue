@@ -37,7 +37,7 @@ class: {
 	handle: string
 	env:    string
 
-	cluster_name: infra_name
+	cluster_name: "coder-\(handle)-\(env)"
 	name_suffix:  "."
 
 	domain_zone: "defn.run"
@@ -48,7 +48,7 @@ class: {
 	issuer:           "zerossl-production"
 	cloudflare_email: "cloudflare@defn.us"
 
-	discovery_url: "https://\(infra_name).\(infra_tailscale_domain)"
+	discovery_url: "https://\(cluster_name).\(infra_tailscale_domain)"
 	discovery: {
 		issuer:                 discovery_url
 		jwks_uri:               "\(discovery_url)/openid/.well-known/jwks.json"
@@ -72,9 +72,7 @@ class: {
 	infra_k3s_version:      "rancher/k3s:v1.27.5-k3s1"
 	infra_tailscale_domain: "tail3884f.ts.net"
 
-	infra_name: "coder-\(handle)-\(env)"
-
-	infra_cilium_name: infra_name
+	infra_cilium_name: cluster_name
 
 	bootstrap: teacher.bootstrap
 }

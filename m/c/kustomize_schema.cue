@@ -22,7 +22,6 @@ kustomize: [NAME=string]: _name: NAME
 #Cluster: {
 	handle: string
 	env: string
-	infra_name:        string
 	infra_account_id:  string
 	infra_k3s_version: string
 

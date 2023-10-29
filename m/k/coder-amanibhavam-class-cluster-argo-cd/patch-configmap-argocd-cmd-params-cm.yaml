@@ -1,8 +1,8 @@
 #ManagedBy: cue
 
+apiVersion: v1
+kind: ConfigMap
 metadata:
   name: argocd-cmd-params-cm
 data:
   server.insecure: "true"
-kind: ConfigMap
-apiVersion: v1
