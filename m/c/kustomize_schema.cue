@@ -44,7 +44,7 @@ kustomize: [NAME=string]: _name: NAME
 
 #Kustomize: {
 	_name: string
-	app: "\(_name)": {}
+	app: (_name): {}
 
 	namespace: string | *""
 	let kns = namespace

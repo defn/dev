@@ -25,7 +25,7 @@ import (
 			values: {
 				anyResources: {
 					for _app_name, _app in bootstrap[_in.name].apps {
-						"\(_app_name)": yaml.Marshal(_app.application)
+						(_app_name): yaml.Marshal(_app.application)
 					}
 				}
 			}
@@ -52,7 +52,7 @@ import (
 	apps: [string]: #BootstrapApp
 	apps: {
 		for _app_name, _app in _in.bootstrap {
-			"\(_app_name)": #BootstrapApp & {
+			(_app_name): #BootstrapApp & {
 				machine_name:     _in.machine_name
 				app_name:         _app_name
 				app_wave:         _app[0]

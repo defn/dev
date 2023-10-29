@@ -36,7 +36,7 @@ package c
 		// "resource:" or "kustomizes"
 
 		for _from in inputs {
-			"\(_from.label)": (transformer & {
+			(_from.label): (transformer & {
 				from: _from
 			}).to
 		}

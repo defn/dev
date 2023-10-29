@@ -51,45 +51,45 @@ resources: {
 	for fname, f in k
 	for nname, ns in f
 	for rname, r in ns {
-		"\(fname)": "\(nname)--\(kname)--\(rname)": r
+		(fname): "\(nname)--\(kname)--\(rname)": r
 	}
 }
 
 images_m: {
-	for fname, f in resources 
+	for fname, f in resources
 	for rname, r in f {
 		if r.spec.jobTemplate.spec.template.spec.containers != _|_ {
 			for c in r.spec.jobTemplate.spec.template.spec.containers {
-				"\(c.image)": {}
+				(c.image): {}
 			}
 		}
 
 		if r.spec.jobTemplate.spec.template.spec.initContainers != _|_ {
 			for c in r.spec.jobTemplate.spec.template.spec.initContainers {
-				"\(c.image)": {}
+				(c.image): {}
 			}
 		}
 
 		if r.spec.template.spec.containers != _|_ {
 			for c in r.spec.template.spec.containers {
-				"\(c.image)": {}
+				(c.image): {}
 			}
 		}
 
 		if r.spec.template.spec.initContainers != _|_ {
 			for c in r.spec.template.spec.initContainers {
-				"\(c.image)": {}
+				(c.image): {}
 			}
 		}
 
 		if r.spec.containers != _|_ {
 			for c in r.spec.containers {
-				"\(c.image)": {}
+				(c.image): {}
 			}
 		}
 
 		if r.spec.image != _|_ {
-			"\(r.spec.image)": {}
+			(r.spec.image): {}
 		}
 
 	}
@@ -99,4 +99,3 @@ images_m: {
 images: [
 	for i, _ in images_m {i},
 ]
-

@@ -19,7 +19,7 @@ except: {
 	output: {
 		for n in [ for n, _ in input {n}] {
 			if exclude[n] == _|_ && input[n] != _|_ {
-				"\(n)": *input[n] | _|_
+				(n): *input[n] | _|_
 			}
 		}
 	}
@@ -40,9 +40,9 @@ cached_image: {
 }
 
 uncached_resources: {
-	for fname, f in resources 
+	for fname, f in resources
 	for rname, r in f {
-		"\(fname)": "\(rname)": r
+		(fname): (rname): r
 	}
 }
 
@@ -50,22 +50,22 @@ cache: [string]: string
 
 cached_yaml: {
 	for fname, f in cached_resources {
-		"\(fname)/main.yaml": yaml.MarshalStream([ for s in list.SortStrings([ for rname, r in f { rname } ]) { f[s] } ])
+		"\(fname)/main.yaml": yaml.MarshalStream([ for s in list.SortStrings([ for rname, r in f {rname}]) {f[s]}])
 	}
 }
 
 cached_resources: {
-	for fname, f in resources 
+	for fname, f in resources
 	for rname, r in f {
-		"\(fname)": "\(rname)": {
+		(fname): (rname): {
 			(except & {input: r, exclude: {rules: true, spec: true}}).output
 
-      // rules:
-      if r.rules != _|_ {
-        if len(r.rules) > 0 {
-          rules: r.rules
-        }
-      }
+			// rules:
+			if r.rules != _|_ {
+				if len(r.rules) > 0 {
+					rules: r.rules
+				}
+			}
 
 			// spec:
 			if r.spec != _|_ {spec: {
