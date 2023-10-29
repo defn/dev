@@ -15,7 +15,7 @@ teacher_bootstrap: {
 	"secrets": [100, ""]
 
 	// tailscale
-	"tailscale": [100, ""]
+	//"tailscale": [100, ""]
 
 	// scaling
 	"karpenter": [100, ""]

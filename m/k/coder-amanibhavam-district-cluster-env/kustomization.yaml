@@ -177,27 +177,6 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
-        tailscale: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-tailscale
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: https://github.com/defn/dev
-              targetRevision: main
-              path: m/k/r/coder-amanibhavam-district-cluster-tailscale
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
         karpenter: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
