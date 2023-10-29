@@ -1,7 +1,9 @@
 package c
 
-teacher_handle: "amanibhavam"
-teacher_env:    "class"
+teacher: {
+	handle: "amanibhavam"
+	env:    "class"
+}
 
 infra_cilium_id:    1
 infra_pod_cidr:     "10.200.0.0/19"

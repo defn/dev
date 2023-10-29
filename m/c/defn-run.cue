@@ -4,41 +4,42 @@ import (
 	"strings"
 )
 
-teacher_handle: string
-teacher_env:    string
+teacher: {
+	handle: string
+	env:    string
+	bootstrap: {
+		// essentials
+		"kyverno": [100, "", "ServerSideApply=true"]
+		"cert-manager": [100, ""]
+		"trust-manager": [100, ""]
 
-teacher_bootstrap: {
-	// essentials
-	"kyverno": [100, "", "ServerSideApply=true"]
-	"cert-manager": [100, ""]
-	"trust-manager": [100, ""]
+		// external secrets
+		"pod-identity": [100, ""]
+		"external-secrets": [100, ""]
+		"secrets": [100, ""]
 
-	// external secrets
-	"pod-identity": [100, ""]
-	"external-secrets": [100, ""]
-	"secrets": [100, ""]
+		// tailscale
+		//"tailscale": [100, ""]
 
-	// tailscale
-	//"tailscale": [100, ""]
+		// scaling
+		"karpenter": [100, ""]
 
-	// scaling
-	"karpenter": [100, ""]
+		// external dns, certs issuer
+		"external-dns": [100, ""]
+		"issuer": [100, ""]
 
-	// external dns, certs issuer
-	"external-dns": [100, ""]
-	"issuer": [100, ""]
-
-	// traefik, functions
-	"knative": [100, ""]
-	"kourier": [100, ""]
-	"traefik": [100, ""]
+		// traefik, functions
+		"knative": [100, ""]
+		"kourier": [100, ""]
+		"traefik": [100, ""]
+	}
 }
 
 infra_account_id:       "510430971399"
 infra_k3s_version:      "rancher/k3s:v1.27.5-k3s1"
 infra_tailscale_domain: "tail3884f.ts.net"
 
-infra_name: string | *"coder-\(teacher_handle)-\(teacher_env)"
+infra_name: string | *"coder-\(teacher.handle)-\(teacher.env)"
 
 infra_pod_cidr:     string
 infra_service_cidr: string
@@ -50,15 +51,15 @@ infra_cilium_id:    <=255
 infra_config: {
 	domain_zone: "defn.run"
 
-	domain_name: "\(teacher_env).\(teacher_handle).\(domain_zone)"
-	domain_slug: "\(teacher_env)-\(teacher_handle)-\(strings.Replace(domain_zone, ".", "-", -1))"
+	domain_name: "\(teacher.env).\(teacher.handle).\(domain_zone)"
+	domain_slug: "\(teacher.env)-\(teacher.handle)-\(strings.Replace(domain_zone, ".", "-", -1))"
 
 	secrets_region:   "us-west-2"
 	issuer:           "zerossl-production"
 	cloudflare_email: "cloudflare@defn.us"
 }
 
-infra: (infra_name): bootstrap: {...} | *teacher_bootstrap
+infra: (infra_name): bootstrap: {...} | *teacher.bootstrap
 infra: (infra_name): bootstrap: infra_workloads
 
 infra_workloads: {...}
