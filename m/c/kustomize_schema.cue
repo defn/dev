@@ -4,7 +4,7 @@ import (
 	batch "k8s.io/api/batch/v1"
 )
 
-kustomize: [string]: #KustomizeHelm | #KustomizeVCluster | #Kustomize
+kustomize: [string]: #KustomizeHelm | #Kustomize
 kustomize: [NAME=string]: _name: NAME
 
 #Helm: {
@@ -37,8 +37,6 @@ kustomize: [NAME=string]: _name: NAME
 
 	bootstrap: [string]: #BootstrapConfig
 
-	vclusters: [...string] | *[]
-	vcluster: {...}
 	name_suffix: string | *"."
 }
 

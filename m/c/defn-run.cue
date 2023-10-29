@@ -43,14 +43,12 @@ infra_cilium_id:    int
 infra_cilium_id:    >=0
 infra_cilium_id:    <=255
 
-infra_vclusters: []
-
 infra_base: {
 	domain_name: "\(teacher_env).\(teacher_handle).defn.run"
 	domain_slug: "\(teacher_env)-\(teacher_handle)-defn-run"
 }
 
-infra_base: {
+infra_config: {
 	domain_zone: "defn.run"
 
 	secrets_region:   "us-west-2"
