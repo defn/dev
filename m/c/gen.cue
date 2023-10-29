@@ -8,9 +8,9 @@ infra: [string]: #Cluster
 
 lookup: {
 	for ename, e in env {
-		"\(ename)": {
+		(ename): {
 			for kname, _ in e.bootstrap {
-				"\(kname)": "\(ename)-\(kname)"
+				(kname): "\(ename)-\(kname)"
 			}
 		}
 	}

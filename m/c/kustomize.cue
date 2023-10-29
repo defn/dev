@@ -41,14 +41,14 @@ infra: {
 		},
 	]
 
-	"\(infra_name)": {
+	(infra_name): {
 		cluster_name: infra_name
 		bootstrap: [string]: #BootstrapConfig
 		vclusters: [...string]
 	}
 
 	for i, v in parent.vclusters {
-		"\(infra[v].cluster_name)": infra[v]
+		(infra[v].cluster_name): infra[v]
 	}
 
 	parent: infra[infra_name]
@@ -107,7 +107,7 @@ env: (#Transform & {
 
 	inputs: {
 		for v in infra.parent.vclusters {
-			"\(infra[v].cluster_name)": {
+			(infra[v].cluster_name): {
 				instance_types: []
 				parent:    env["\(infra.parent.cluster_name)-cluster"]
 				bootstrap: infra[v].bootstrap
@@ -809,7 +809,7 @@ kustomize: "knative": #Kustomize & {
 			name:      "config-domain"
 			namespace: "knative-serving"
 		}
-		data: "\(cluster.domain_name)": ""
+		data: (cluster.domain_name): ""
 	}
 
 	psm: "config-map-config-features": core.#ConfigMap & {
@@ -1035,7 +1035,7 @@ cilium_common: {
 				relay: enabled: true
 				tls: auto: {
 					enabled: true
-					method: "certmanager"
+					method:  "certmanager"
 					certManagerIssuerRef: {
 						name:  "cilium-ca"
 						kind:  "ClusterIssuer"
