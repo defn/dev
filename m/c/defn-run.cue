@@ -35,7 +35,7 @@ teacher: {
 	}
 }
 
-infra_config: {
+class: {
 	cluster_name: infra_name
 	name_suffix:  "."
 
