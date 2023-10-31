@@ -109,7 +109,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
     app.kubernetes.io/version: 0.13.6
-    helm.sh/chart: external-dns-6.27.0
+    helm.sh/chart: external-dns-6.28.0
   name: external-dns-external-dns
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -120,7 +120,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
     app.kubernetes.io/version: 0.13.6
-    helm.sh/chart: external-dns-6.27.0
+    helm.sh/chart: external-dns-6.28.0
   name: external-dns-external-dns
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -198,6 +198,17 @@ spec:
           resources:
             limits: {}
             requests: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: true
+            runAsUser: 1001
+            seccompProfile:
+              type: RuntimeDefault
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -210,7 +221,6 @@ spec:
               weight: 1
       securityContext:
         fsGroup: 1001
-        runAsUser: 1001
       serviceAccountName: external-dns
     metadata:
       labels:
@@ -218,7 +228,7 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: external-dns
         app.kubernetes.io/version: 0.13.6
-        helm.sh/chart: external-dns-6.27.0
+        helm.sh/chart: external-dns-6.28.0
   replicas: 1
   selector:
     matchLabels:
@@ -232,7 +242,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
     app.kubernetes.io/version: 0.13.6
-    helm.sh/chart: external-dns-6.27.0
+    helm.sh/chart: external-dns-6.28.0
   name: external-dns
   namespace: external-dns
 ---
@@ -272,7 +282,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
     app.kubernetes.io/version: 0.13.6
-    helm.sh/chart: external-dns-6.27.0
+    helm.sh/chart: external-dns-6.28.0
   name: external-dns
   namespace: external-dns
 ---
@@ -285,6 +295,6 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
     app.kubernetes.io/version: 0.13.6
-    helm.sh/chart: external-dns-6.27.0
+    helm.sh/chart: external-dns-6.28.0
   name: external-dns
   namespace: external-dns
