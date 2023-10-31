@@ -1,8 +1,8 @@
 {
   "dependencies": {
-    "@marp-team/marp-cli": "^3.3.1",
-    "@mermaid-js/mermaid-cli": "^10.4.0",
+    "@marp-team/marp-cli": "^3.4.0",
+    "@mermaid-js/mermaid-cli": "^10.6.0",
     "cdktf-cli": "^0.19.0",
-    "pnpm": "^8.7.5"
+    "pnpm": "^8.10.0"
   }
 }
