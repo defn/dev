@@ -7,7 +7,7 @@ function main {
 		set -- .
 	fi
 
-	exec terraform fmt "$@"
+	exec tofu fmt "$@"
 }
 
 # shellcheck disable=SC1091
