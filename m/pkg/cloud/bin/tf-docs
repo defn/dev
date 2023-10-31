@@ -7,7 +7,7 @@ function main {
 		set -- .
 	fi
 
-	exec terraform-docs markdown table --output-file README.md --output-mode inject "$@"
+	exec tofu-docs markdown table --output-file README.md --output-mode inject "$@"
 }
 
 # shellcheck disable=SC1091

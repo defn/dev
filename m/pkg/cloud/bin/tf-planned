@@ -3,7 +3,7 @@
 function main {
 	set -efu
 
-	exec terraform show .plan
+	exec tofu show .plan
 }
 
 # shellcheck disable=SC1091

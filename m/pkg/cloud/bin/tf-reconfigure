@@ -3,7 +3,7 @@
 function main {
 	set -efu
 
-	terraform init -reconfigure
+	tofu init -reconfigure
 }
 
 # shellcheck disable=SC1091

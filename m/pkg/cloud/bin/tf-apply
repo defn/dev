@@ -3,7 +3,7 @@
 function main {
 	set -efu
 
-	terraform apply .plan
+	tofu apply .plan
 	rm -f .plan
 }
 

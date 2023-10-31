@@ -3,7 +3,7 @@
 function main {
 	set -efu
 
-	exec terraform get -update "$@"
+	exec tofu get -update "$@"
 }
 
 # shellcheck disable=SC1091
