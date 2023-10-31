@@ -1,4 +1,5 @@
 spec:
+  commonName: trust-manager.cert-manager.svc
   dnsNames:
     - trust-manager.cert-manager.svc
   issuerRef:
@@ -14,8 +15,8 @@ metadata:
     app.kubernetes.io/instance: trust-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: trust-manager
-    app.kubernetes.io/version: v0.6.0
-    helm.sh/chart: trust-manager-v0.6.0
+    app.kubernetes.io/version: v0.7.0
+    helm.sh/chart: trust-manager-v0.7.0
   name: trust-manager
   namespace: cert-manager
 ---
@@ -44,7 +45,7 @@ spec:
               name: packages
               readOnly: false
       containers:
-        - image: 169.254.32.1:5000/quay.io/jetstack/trust-manager@sha256:525e2f3ab66e4f0a54db1c81f648119c4cce6cfa6d73dea98b82e8293c9fd054
+        - image: 169.254.32.1:5000/quay.io/jetstack/trust-manager@sha256:bcc75013a52f6d784a376ac4693cd5b051e847f0ad2015f5063fca5477021323
           args:
             - --log-level=1
             - --metrics-port=9402
@@ -109,8 +110,8 @@ metadata:
     app.kubernetes.io/instance: trust-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: trust-manager
-    app.kubernetes.io/version: v0.6.0
-    helm.sh/chart: trust-manager-v0.6.0
+    app.kubernetes.io/version: v0.7.0
+    helm.sh/chart: trust-manager-v0.7.0
   name: trust-manager
   namespace: cert-manager
 ---
@@ -123,8 +124,8 @@ metadata:
     app.kubernetes.io/instance: trust-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: trust-manager
-    app.kubernetes.io/version: v0.6.0
-    helm.sh/chart: trust-manager-v0.6.0
+    app.kubernetes.io/version: v0.7.0
+    helm.sh/chart: trust-manager-v0.7.0
   name: trust-manager
   namespace: cert-manager
 ---
@@ -154,8 +155,8 @@ metadata:
     app.kubernetes.io/instance: trust-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: trust-manager
-    app.kubernetes.io/version: v0.6.0
-    helm.sh/chart: trust-manager-v0.6.0
+    app.kubernetes.io/version: v0.7.0
+    helm.sh/chart: trust-manager-v0.7.0
   name: trust-manager
   namespace: cert-manager
 ---
@@ -166,8 +167,8 @@ metadata:
     app.kubernetes.io/instance: trust-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: trust-manager
-    app.kubernetes.io/version: v0.6.0
-    helm.sh/chart: trust-manager-v0.6.0
+    app.kubernetes.io/version: v0.7.0
+    helm.sh/chart: trust-manager-v0.7.0
   name: trust-manager
   namespace: cert-manager
 roleRef:
@@ -196,8 +197,8 @@ metadata:
     app.kubernetes.io/instance: trust-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: trust-manager
-    app.kubernetes.io/version: v0.6.0
-    helm.sh/chart: trust-manager-v0.6.0
+    app.kubernetes.io/version: v0.7.0
+    helm.sh/chart: trust-manager-v0.7.0
   name: trust-manager
   namespace: cert-manager
 ---
@@ -218,8 +219,8 @@ metadata:
     app.kubernetes.io/instance: trust-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: trust-manager
-    app.kubernetes.io/version: v0.6.0
-    helm.sh/chart: trust-manager-v0.6.0
+    app.kubernetes.io/version: v0.7.0
+    helm.sh/chart: trust-manager-v0.7.0
   name: trust-manager-metrics
   namespace: cert-manager
 ---
@@ -230,8 +231,8 @@ metadata:
     app.kubernetes.io/instance: trust-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: trust-manager
-    app.kubernetes.io/version: v0.6.0
-    helm.sh/chart: trust-manager-v0.6.0
+    app.kubernetes.io/version: v0.7.0
+    helm.sh/chart: trust-manager-v0.7.0
   name: trust-manager
   namespace: cert-manager
 ---
@@ -255,6 +256,12 @@ rules:
     resources:
       - bundles/status
     verbs:
+      - patch
+  - apiGroups:
+      - trust.cert-manager.io
+    resources:
+      - bundles
+    verbs:
       - update
   - apiGroups:
       - ""
@@ -265,6 +272,7 @@ rules:
       - list
       - create
       - update
+      - patch
       - watch
       - delete
   - apiGroups:
@@ -289,8 +297,8 @@ metadata:
     app.kubernetes.io/instance: trust-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: trust-manager
-    app.kubernetes.io/version: v0.6.0
-    helm.sh/chart: trust-manager-v0.6.0
+    app.kubernetes.io/version: v0.7.0
+    helm.sh/chart: trust-manager-v0.7.0
   name: trust-manager
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -300,8 +308,8 @@ metadata:
     app.kubernetes.io/instance: trust-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: trust-manager
-    app.kubernetes.io/version: v0.6.0
-    helm.sh/chart: trust-manager-v0.6.0
+    app.kubernetes.io/version: v0.7.0
+    helm.sh/chart: trust-manager-v0.7.0
   name: trust-manager
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -407,6 +415,15 @@ spec:
                           required:
                             - key
                           type: object
+                        pkcs12:
+                          description: PKCS12 requests a PKCS12-formatted binary trust bundle to be written to the target. The bundle is created without a password.
+                          properties:
+                            key:
+                              description: Key is the key of the entry in the object's `data` field to be used.
+                              type: string
+                          required:
+                            - key
+                          type: object
                       type: object
                     configMap:
                       description: ConfigMap is the target ConfigMap in Namespaces that all Bundle source data will be synced to.
@@ -425,6 +442,15 @@ spec:
                             type: string
                           description: MatchLabels matches on the set of labels that must be present on a Namespace for the Bundle target to be synced there.
                           type: object
+                      type: object
+                    secret:
+                      description: Secret is the target Secret that all Bundle source data will be synced to. Using Secrets as targets is only supported if enabled at trust-manager startup. By default, trust-manager has no permissions for writing to secrets and can only read secrets in the trust namespace.
+                      properties:
+                        key:
+                          description: Key is the key of the entry in the object's `data` field to be used.
+                          type: string
+                      required:
+                        - key
                       type: object
                   type: object
               required:
@@ -464,6 +490,9 @@ spec:
                       - type
                     type: object
                   type: array
+                  x-kubernetes-list-map-keys:
+                    - type
+                  x-kubernetes-list-type: map
                 defaultCAVersion:
                   description: DefaultCAPackageVersion, if set and non-empty, indicates the version information which was retrieved when the set of default CAs was requested in the bundle source. This should only be set if useDefaultCAs was set to "true" on a source, and will be the same for the same version of a bundle with identical certificates.
                   type: string
@@ -475,6 +504,15 @@ spec:
                       properties:
                         jks:
                           description: JKS requests a JKS-formatted binary trust bundle to be written to the target. The bundle is created with the hardcoded password "changeit".
+                          properties:
+                            key:
+                              description: Key is the key of the entry in the object's `data` field to be used.
+                              type: string
+                          required:
+                            - key
+                          type: object
+                        pkcs12:
+                          description: PKCS12 requests a PKCS12-formatted binary trust bundle to be written to the target. The bundle is created without a password.
                           properties:
                             key:
                               description: Key is the key of the entry in the object's `data` field to be used.
@@ -501,6 +539,15 @@ spec:
                           description: MatchLabels matches on the set of labels that must be present on a Namespace for the Bundle target to be synced there.
                           type: object
                       type: object
+                    secret:
+                      description: Secret is the target Secret that all Bundle source data will be synced to. Using Secrets as targets is only supported if enabled at trust-manager startup. By default, trust-manager has no permissions for writing to secrets and can only read secrets in the trust namespace.
+                      properties:
+                        key:
+                          description: Key is the key of the entry in the object's `data` field to be used.
+                          type: string
+                      required:
+                        - key
+                      type: object
                   type: object
               type: object
           required:
@@ -514,7 +561,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.13.0
   name: bundles.trust.cert-manager.io
 ---
 apiVersion: admissionregistration.k8s.io/v1
@@ -527,8 +574,8 @@ metadata:
     app.kubernetes.io/instance: trust-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: trust-manager
-    app.kubernetes.io/version: v0.6.0
-    helm.sh/chart: trust-manager-v0.6.0
+    app.kubernetes.io/version: v0.7.0
+    helm.sh/chart: trust-manager-v0.7.0
   name: trust-manager
 webhooks:
   - admissionReviewVersions:

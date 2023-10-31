@@ -307,7 +307,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.27.0"
+		version: "6.28.0"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -391,7 +391,7 @@ kustomize: "external-secrets": #KustomizeHelm & {
 	helm: {
 		release: "external-secrets"
 		name:    "external-secrets"
-		version: "0.9.7"
+		version: "0.9.8"
 		repo:    "https://charts.external-secrets.io"
 		values: {
 			webhook: create:        false
@@ -749,7 +749,7 @@ kustomize: "knative": #Kustomize & {
 	}
 }
 
-cert_manager_version: "1.13.1"
+cert_manager_version: "1.13.2"
 
 // https://artifacthub.io/packages/helm/cert-manager/cert-manager
 kustomize: "cert-manager-crds": #Kustomize & {
@@ -803,7 +803,7 @@ kustomize: "trust-manager": #KustomizeHelm & {
 		release:   "trust-manager"
 		name:      "trust-manager"
 		namespace: "cert-manager"
-		version:   "0.6.0"
+		version:   "0.7.0"
 		repo:      "https://charts.jetstack.io"
 		values: {}
 	}
@@ -1359,7 +1359,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "2.3.2"
+		version:   "2.3.3"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {
@@ -1745,7 +1745,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "3.0.5"
+		version:     "3.1.0"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
