@@ -838,8 +838,8 @@ def go_deps():
     go_repository(
         name = "com_github_yuin_goldmark",
         importpath = "github.com/yuin/goldmark",
-        sum = "h1:COmQAWTCcGetChm3Ig7G/t8AFAN00t+o8Mt4cf7JpwA=",
-        version = "v1.5.6",
+        sum = "h1:boZcn2GTjpsynOsC0iJHnBWa4Bi0qzfJjthwauItG68=",
+        version = "v1.6.0",
     )
     go_repository(
         name = "com_google_cloud_go",
