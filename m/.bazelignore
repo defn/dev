@@ -53,6 +53,7 @@ pkg/localdev/.direnv
 pkg/nix/.direnv
 pkg/nodedev/.direnv
 pkg/oci/.direnv
+pkg/opentofu/.direnv
 pkg/oras/.direnv
 pkg/packer/.direnv
 pkg/pkg/.direnv
@@ -123,6 +124,7 @@ pkg/localdev/result
 pkg/nix/result
 pkg/nodedev/result
 pkg/oci/result
+pkg/opentofu/result
 pkg/oras/result
 pkg/packer/result
 pkg/pkg/result
