@@ -17,4 +17,6 @@ helmCharts:
         ingress:
           hosts:
             core: harbor.district.amanibhavam.defn.run
+        tls:
+          enabled: false
     includeCRDs: true
