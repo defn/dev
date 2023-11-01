@@ -2187,4 +2187,9 @@ kustomize: "harbor": #KustomizeHelm & {
 			name: "harbor"
 		}
 	}
+
+	// external secrets
+	// https://github.com/goharbor/harbor-helm/blob/96428e03ea28c7eeb7e02454ac7f38295e3b98af/templates/core/core-secret.yaml
+	// https://github.com/goharbor/harbor-helm/blob/96428e03ea28c7eeb7e02454ac7f38295e3b98af/templates/registry/registry-secret.yaml
+	// https://github.com/goharbor/harbor-helm/blob/96428e03ea28c7eeb7e02454ac7f38295e3b98af/templates/jobservice/jobservice-secrets.yaml
 }
