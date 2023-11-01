@@ -2172,9 +2172,11 @@ kustomize: "harbor": #KustomizeHelm & {
 		values: {
 			expose: {
 				ingress: hosts: core: "harbor.\(cluster.domain_name)"
-				tls: enabled: false
+				tls: enabled: true
+				tls: certSource: "none"
 			}
 			trivy: enabled: false
+			secretKey: "move-to-external-secrets"
 		}
 	}
 

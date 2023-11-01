@@ -18,5 +18,9 @@ helmCharts:
           hosts:
             core: harbor.district.amanibhavam.defn.run
         tls:
-          enabled: false
+          enabled: true
+          certSource: none
+      trivy:
+        enabled: false
+      secretKey: move-to-external-secrets
     includeCRDs: true
