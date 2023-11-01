@@ -1,0 +1,16 @@
+#ManagedBy: cue
+
+patches: []
+resources:
+  - resource-namespace-harbor.yaml
+namespace: harbor
+commonLabels: {}
+commonAnnotations: {}
+helmCharts:
+  - releaseName: harbor
+    name: harbor
+    version: 1.13.0
+    repo: https://helm.goharbor.io
+    namespace: harbor
+    valuesInline: {}
+    includeCRDs: true

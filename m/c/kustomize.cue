@@ -2157,3 +2157,27 @@ kustomize: "postgres-operator": #KustomizeHelm & {
 		}
 	}
 }
+
+// https://artifacthub.io/packages/helm/harbor/harbor
+kustomize: "harbor": #KustomizeHelm & {
+	cluster: #Cluster
+
+	namespace: "harbor"
+
+	helm: {
+		release: "harbor"
+		name:    "harbor"
+		version: "1.13.0"
+		repo:    "https://helm.goharbor.io"
+		values: {
+		}
+	}
+
+	resource: "namespace-harbor": {
+		apiVersion: "v1"
+		kind:       "Namespace"
+		metadata: {
+			name: "harbor"
+		}
+	}
+}
