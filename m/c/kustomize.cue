@@ -2170,6 +2170,7 @@ kustomize: "harbor": #KustomizeHelm & {
 		version: "1.13.0"
 		repo:    "https://helm.goharbor.io"
 		values: {
+			expose: ingress: hosts: core: "harbor.\(cluster.domain_name)"
 		}
 	}
 

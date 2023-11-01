@@ -12,5 +12,9 @@ helmCharts:
     version: 1.13.0
     repo: https://helm.goharbor.io
     namespace: harbor
-    valuesInline: {}
+    valuesInline:
+      expose:
+        ingress:
+          hosts:
+            core: harbor.district.amanibhavam.defn.run
     includeCRDs: true
