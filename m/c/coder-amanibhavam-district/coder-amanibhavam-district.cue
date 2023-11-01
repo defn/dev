@@ -2,6 +2,9 @@ package c
 
 teacher: {
 	bootstrap: {
+		// build
+		"harbor": [100, ""]
+
 		// workflows
 		"tfo": [100, ""]
 		"argo-workflows": [100, ""]

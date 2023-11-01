@@ -16,17 +16,17 @@ cache: "docker.io/envoyproxy/envoy:v1.24-latest": "docker.io/envoyproxy/envoy@sh
 
 cache: "docker.io/traefik:v2.10.5": "docker.io/traefik@sha256:948978f7ec62f137a79f8af7044a1785bd7868706ef2c8cba9c88db688d08661"
 
-cache: "gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:54c8c164ec635001d2f7d25a462b7210f36568fec3de678f35e6c9eedb2918b0": "gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:5820e5ee865bdf823e6e237a57707c1e68151a052fe02eaf0c5f3ec32f1a0d7a"
+cache: "gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:54c8c164ec635001d2f7d25a462b7210f36568fec3de678f35e6c9eedb2918b0": "gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:05b81f0e5fa149acca2888dce6c14a9d74e33adae566736bf21b57a1b0d9ae87"
 
-cache: "gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:3116c382f238d6dca14e50b1077139502291b4d91a2a27b54ad86a0b99c6242a": "gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:3116c382f238d6dca14e50b1077139502291b4d91a2a27b54ad86a0b99c6242a"
+cache: "gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:3116c382f238d6dca14e50b1077139502291b4d91a2a27b54ad86a0b99c6242a": "gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:e07f7aeeef1b0559e11e0f3ce81c0b7f412faabb0c346a00577785f399a0f41b"
 
-cache: "gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:25384f07333fcfba3a3ab0d184814677c333f37115dae49a688c9e9b9c9ccdb1": "gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:25384f07333fcfba3a3ab0d184814677c333f37115dae49a688c9e9b9c9ccdb1"
+cache: "gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:25384f07333fcfba3a3ab0d184814677c333f37115dae49a688c9e9b9c9ccdb1": "gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:786e8f654df537cc8382892022c6c49cb92d0a514b782cbf97067d9c263e60ce"
 
-cache: "gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:e9cf2d643fd80ff095c5074223cd7797aa69733f28468b1a924cbf1730cd429b": "gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:e9cf2d643fd80ff095c5074223cd7797aa69733f28468b1a924cbf1730cd429b"
+cache: "gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:e9cf2d643fd80ff095c5074223cd7797aa69733f28468b1a924cbf1730cd429b": "gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:f693c0d53736b9c02ece191cb0aa5e86af8c59eeb0b648c0349fcb7acb9944f0"
 
-cache: "gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:1bfc20a721e40c7b1aa4e6d632e0ca9b2514f409ca9844fd81d7409e45cc4265": "gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:1bfc20a721e40c7b1aa4e6d632e0ca9b2514f409ca9844fd81d7409e45cc4265"
+cache: "gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:1bfc20a721e40c7b1aa4e6d632e0ca9b2514f409ca9844fd81d7409e45cc4265": "gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:f27169aef65817a7caa38d603355e66971bb9cb4647e115a4a346d635bff5475"
 
-cache: "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:65d22d6aa04863281dbb1f987d12e280db74286eb033a5940549efc0e62e1cd0": "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:65d22d6aa04863281dbb1f987d12e280db74286eb033a5940549efc0e62e1cd0"
+cache: "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:65d22d6aa04863281dbb1f987d12e280db74286eb033a5940549efc0e62e1cd0": "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:bbb7143c00e20ba65efbc44ac2d8c7c6c3efe469ab848efbc1b9fa44d19e82fd"
 
 cache: "ghcr.io/dexidp/dex:v2.37.0": "ghcr.io/dexidp/dex@sha256:f579d00721b0d842328c43a562f50343c54b0048ef2d58d6b54e750c21fc7938"
 
@@ -45,6 +45,22 @@ cache: "ghcr.io/kyverno/kyverno:v1.10.3": "ghcr.io/kyverno/kyverno@sha256:2e8ba9
 cache: "ghcr.io/kyverno/kyvernopre:v1.10.3": "ghcr.io/kyverno/kyvernopre@sha256:4022f4b828418df94f61627bdc0852207986c095be9dbff686b57cb22b4c20ad"
 
 cache: "ghcr.io/kyverno/reports-controller:v1.10.3": "ghcr.io/kyverno/reports-controller@sha256:b0fbfe5a7250fadd120ffbb6dd4cb70e575bddc165da76b46e3b7dab4d275141"
+
+cache: "goharbor/harbor-core:v2.9.0": "goharbor/harbor-core@sha256:6412d679fdc3fd8834eb768e4c4ed6443e29718eb92476097b0f88eaab73cd23"
+
+cache: "goharbor/harbor-db:v2.9.0": "goharbor/harbor-db@sha256:cff528fada933112112b502bbc042de6870e84395c076ad1b873416930d4d8fe"
+
+cache: "goharbor/harbor-jobservice:v2.9.0": "goharbor/harbor-jobservice@sha256:39435daedd0c80e923b1a558a8f67c5fb9d2e68476c6b5782287ea2464f0eccc"
+
+cache: "goharbor/harbor-portal:v2.9.0": "goharbor/harbor-portal@sha256:2809c5735a70b33a6c7eccbad1cd6f6c171bc5c0ea5da9bcc6463e7749662c02"
+
+cache: "goharbor/harbor-registryctl:v2.9.0": "goharbor/harbor-registryctl@sha256:cce272836449c500ec6b0c4c05072ef6aaf26ca7f057c715d12f38f4d4c0cdef"
+
+cache: "goharbor/redis-photon:v2.9.0": "goharbor/redis-photon@sha256:182e0164ff3ea80a7a939c2d5267aa977ad7ce648fb4ebe6230f1a4218873ead"
+
+cache: "goharbor/registry-photon:v2.9.0": "goharbor/registry-photon@sha256:8a26e8cb78628a24b42547e2bc832b65198b36106cfe22a033c39e95ad4390de"
+
+cache: "goharbor/trivy-adapter-photon:v2.9.0": "goharbor/trivy-adapter-photon@sha256:dc5b882a7db4ed9aff1ba9df19342d580ea25db875a70b87bf5ea92109ee9a29"
 
 cache: "public.ecr.aws/karpenter/controller:v0.31.1@sha256:be5da7cb9181c2969280e869c465927de278e17d56762bfa5eeb4b21e5c9762e": "public.ecr.aws/karpenter/controller@sha256:be5da7cb9181c2969280e869c465927de278e17d56762bfa5eeb4b21e5c9762e"
 
