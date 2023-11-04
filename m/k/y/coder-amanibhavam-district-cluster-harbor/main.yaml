@@ -35,7 +35,7 @@ data:
   REGISTRY_URL: http://harbor-registry:5000
   TOKEN_SERVICE_URL: http://harbor-core:80/service/token
   TRIVY_ADAPTER_URL: http://harbor-trivy:8080
-  WITH_TRIVY: "false"
+  WITH_TRIVY: "true"
   app.conf: |
     appname = Harbor
     runmode = prod
@@ -245,14 +245,14 @@ metadata:
 ---
 apiVersion: v1
 data:
-  CSRF_KEY: T2FRRmxzbW5LcE04SGVHMnloQ29HYmt2c2VDWHlzM3Q=
+  CSRF_KEY: d01RdmVLdDZqV3ZGdHBqY2FLZFl2WVkxbWlpNFduSjY=
   HARBOR_ADMIN_PASSWORD: SGFyYm9yMTIzNDU=
   POSTGRESQL_PASSWORD: Y2hhbmdlaXQ=
   REGISTRY_CREDENTIAL_PASSWORD: aGFyYm9yX3JlZ2lzdHJ5X3Bhc3N3b3Jk
-  secret: b0V1U2NDN1MzeUpjeFVtNA==
-  secretKey: bW92ZS10by1leHRlcm5hbC1zZWNyZXRz
-  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURIekNDQWdlZ0F3SUJBZ0lRWTF3WElCMFhRU3VJano5UmorL2VsekFOQmdrcWhraUc5dzBCQVFzRkFEQWEKTVJnd0ZnWURWUVFERXc5b1lYSmliM0l0ZEc5clpXNHRZMkV3SGhjTk1qTXhNVEF4TURneE9UTXdXaGNOTWpReApNRE14TURneE9UTXdXakFhTVJnd0ZnWURWUVFERXc5b1lYSmliM0l0ZEc5clpXNHRZMkV3Z2dFaU1BMEdDU3FHClNJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUURKaGVqOFQxWXNscnIrcVE1L00rLzJNMnYrNVZMNkJiNVcKZDh0L2swa3FHQVNMU3BvSjRYd01yam5FOXhEamxEQzkrWVRoZHpUeHdNaWMwMnorR2VNZUJjT3dYWDJSRDhQdAoxUUFZK1IvNGVibXBYK0cwWUZoaGFGWGZqeVNlcWhNTGN6ZVljaTI0ZWdZWTMwRENOdkFXTERPNDNrR215ZFlnClE0R3pyT1A1USs4ajZTNmFpN3JOQ3IwSEpUTXFzb1d6MlRITjdvR3FneE1EMHNuYjJRNUp0U0RDdGRPZ0NIZk0KaS85d2RtajAySFVFaDdSVkhPSlJCbStKbXdrVjRhb2g5TXJXbVExeHFHYkdmSFoyVVdSSWllUFphc1ZBUGZWYwpVa3VpRlUxd3NZTDJadTJkUk9tQ2g3ZUFObHFHMnRTTDhZYmVJeDgvcWJMMlpvb1hERVBOQWdNQkFBR2pZVEJmCk1BNEdBMVVkRHdFQi93UUVBd0lDcERBZEJnTlZIU1VFRmpBVUJnZ3JCZ0VGQlFjREFRWUlLd1lCQlFVSEF3SXcKRHdZRFZSMFRBUUgvQkFVd0F3RUIvekFkQmdOVkhRNEVGZ1FVN1J3V200aWxMY3Jia3Ztd2kzSHg5MS9CZGZFdwpEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBSzNsUWVHRVJ6RGIxMUJYVlZwcldpb1BIMk03d1pxQzlVU0FmZFFTCkxzZStVanZkS1J2dU9yUjlOc2dGSk9SdkhaeHY2dEZ1Y2lmMjcweXp6K2NqVXRMKzUrd2wwcitJb1hkblVLekQKeFdaNDRZUG1mODVmWDg2VjRacFd6WnpCdnF0SWlMTHVrbG10ejQyWEU5Smh5RHBzZkpzOGtOc0NxSHVBMnBXNApZbzFQOWREdDlaWGVab3NiWHNVU0c3eDI4eEVzd0ZJMDIxalBvb0Y4RDFuSzlsdWh2aWlBTy92MEVDNE00c2dXCm1RK3VZaHlPYlVFcEFWUmNCTkg3cS9RZnlzUnhUV2ErUXdvOXRxSlp2eHIwaEJtaW5jcVV0SkVvd2MxUEhiV2gKQll4VSs0MVJsQzVSVk1YZXBvZmJYZUpCQnpiVkNUMDN5NnVyc3RnaDE3MVdFUGs9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
-  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcFFJQkFBS0NBUUVBeVlYby9FOVdMSmE2L3FrT2Z6UHY5ak5yL3VWUytnVytWbmZMZjVOSktoZ0VpMHFhCkNlRjhESzQ1eFBjUTQ1UXd2Zm1FNFhjMDhjREluTk5zL2huakhnWERzRjE5a1EvRDdkVUFHUGtmK0htNXFWL2gKdEdCWVlXaFYzNDhrbnFvVEMzTTNtSEl0dUhvR0dOOUF3amJ3Rml3enVONUJwc25XSUVPQnM2emorVVB2SStrdQptb3U2elFxOUJ5VXpLcktGczlreHplNkJxb01UQTlMSjI5a09TYlVnd3JYVG9BaDN6SXYvY0habzlOaDFCSWUwClZSemlVUVp2aVpzSkZlR3FJZlRLMXBrTmNhaG14bngyZGxGa1NJbmoyV3JGUUQzMVhGSkxvaFZOY0xHQzltYnQKblVUcGdvZTNnRFphaHRyVWkvR0czaU1mUDZteTltYUtGd3hEelFJREFRQUJBb0lCQVFDSTk3SGQ0eEpmNWVhYwpkVXk4R2hITFZUSGVvZ0RlbkE2OCtGamdrYnVWbDVObkZNSlRXdVVVUFVwWVc5QW56YTIvUVJzV253M21EakNMCm5vdWl2UGVIalVWdTFtd2tyd0ZzNFd0YWplQXo0by9VMWEwekNwU25SK0d0dTcyWTlXRlNVL0lDZEFBdE5RcDEKMXk5TmtVZG0ybzRnNVRiYjVLemJhdVo1dDFXUE1XOG5kenU0SkNtUVpFb3VVNktIUkYwOFk4RVU3WlBNejdGcwpRa04yaDc3aGsveWFLcnZtMkhtQ09vOHZsd3FsekJrUHNoajRUNDNGR1doaE5TSXBYWENRaXdEV3JSdjl6MHRWCkhUdzRBcGsweEhONjVIN2dMNXpLdGdMdGpVZnNBTk0wUzUyUVFFalV3QndVdk9VY0lWM3dwZkJPdmNtUjU0VksKSGs3cld0ZWxBb0dCQU9ybWJpcnRHTzM2NDEva1B6Q3lGV3dCZFdyZzl1c2R3dE41UDMzOWNxNXdIYXlWTFdRVwoxdk8xVE0xWUlzVjU0bHpNMGRLVkhFeXNPOGpYdFIyZHFSQnllTnRBdGtVa1JyTSt2L2tGY2U4Vk9nOFpYZmR6CjF3UERSQzdtc1NCREdXK0xveVRMYTQvUDZFNWVEaVM2eTdBSFhObDB0cXRadzljRkZrZXRvYnRQQW9HQkFOdWYKK0JGZGh4elJ6RnZGUzBLSDFybW41cXlBYU1ETHI3TlUzL1J4VThrUm9NdzkvelZFVStCMDUxdWxsbEtZS0tqbQpkSElNdkpPcHRGbGJOdzYwQXhnQ29Gd2JaUmo5QzN4amdoRTJnck9kRURVZnV2K3hOQXZTRy9pUHNCK3RHUzVXCkpRalp4UVdaRTVTM09zSGwxcTVqZ3dLMWEwZExuTDlJZkFUUWk5Z2pBb0dBTlBiYUZsRzVra2RFcDJWMm5nczUKYTAzMDVMRnUyMXF0aUROSmpxWHNDc3I2MWVRWkJQMWxZRFFiNmgwYVVmNkdmTGd1QTFaZHVDZ0pudUtNVXU0dQpwYWU1K20zZjZ6MGZ0K0RKTm1QMDZaeVdwN3JuaGhrWGZTQzFLZ0lZSkJjZEVCcWpJWFBBZi8rMytKdWFnc3VmCmk4Uk5PamJuelVFRE9HTk1QOE0xdVY4Q2dZRUFoQThoaTllUU9jMFJNNUZqbXFLeGc3c280a3JvTWgySURhNFkKYUJTSXk5dDBzN3NIclJEajJwQ1EyVE90T3diUlZCWVdxTWx0enVCNVdFMlh3cGlOVDYrc214WEI2WSttaTJvTwpPS2x0Vi9FMllLc3V0emJuVThCSUgyTFBCWTBCR2pLa1hEa04xanJnWWtqMjVNWitHeWd0QzhEb3U5c0VhcVI4CkppejhHYjhDZ1lFQXpDS2I0TFMzVnVzNFZJYmc2YzQrTHRxQUV0TGNzbng5RUJaTnpJZ1A0NlBteXdvRWVXTE4KNXBUVnByQVJES2cwSFo5eEcrcUZuQzJ0V2Y0RVovYVJFd21xejlkcjl2MGoybG95dzd4RGd1U3BkRXFCd3ZiVQpQVnRFbjZzbW4xc3dEdXB0Q1ovNzdibWJWK3loNlY3OWVaaGRoWFFCQXpha1hPYktCbHp1UnBZPQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=
+  secret: NDB6WDV5N2RubWtUb3JaaA==
+  secretKey: bm90LWEtc2VjdXJlLWtleQ==
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURIekNDQWdlZ0F3SUJBZ0lRS3gxWHhpaHRweSt4anlVMUlKZHVCVEFOQmdrcWhraUc5dzBCQVFzRkFEQWEKTVJnd0ZnWURWUVFERXc5b1lYSmliM0l0ZEc5clpXNHRZMkV3SGhjTk1qTXhNVEEwTURFeU56RTFXaGNOTWpReApNVEF6TURFeU56RTFXakFhTVJnd0ZnWURWUVFERXc5b1lYSmliM0l0ZEc5clpXNHRZMkV3Z2dFaU1BMEdDU3FHClNJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUURKZGZQYzFIZGtNUkV6VkZ0QkpOV3g4cWJOa0JCZjI0bHIKWDVRdnBJRzFlMGJKRXFmazdMbHRHMjFiWi96QlhRdW1Tek1QOW5NYlVFYTJqVzUvVVhnSUxNZ3VOWE53MUpqUwpWU0R1V04wL0lqQ2YyTFluT0dzajl3dGhrdHNwYzJxTjArVFRUc1N5ajdHamRML3JDWkpLeTZDczBNRnNaQXlxCkxvU1hMZWQwZEdiUEsrTGt5NWtDYVRXMUpldjRSVXVPdVdHYTQvQmZPNXl6N2w0ZjJQN1VqMHlBZWdvcWpnaTcKZUlvVStEaktCTm9DZXhPaS9IT0dUNElwcStadG1POVAwaHBaNkJDVmpmMU5IRHBhSDkwcDl0OTM0WERnZ1hBcgpJRkUyRFNydkFoVTFvQTBtaHJ0NGdqSVo3WTAyWlRYRlQyYklNN0p4Y29qZit0ZTg3dHJiQWdNQkFBR2pZVEJmCk1BNEdBMVVkRHdFQi93UUVBd0lDcERBZEJnTlZIU1VFRmpBVUJnZ3JCZ0VGQlFjREFRWUlLd1lCQlFVSEF3SXcKRHdZRFZSMFRBUUgvQkFVd0F3RUIvekFkQmdOVkhRNEVGZ1FVUGlKejM1R1E1Z29lTEV2Qk5Nd0dTQldMbHhNdwpEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBR0wyS2ZlUmhNUm01SzJMU1A2NVRkYVdkUytzWjMrb3FHNFhnamZ0Ci9CekNIeTcvbTJZb2E5VWN3azh1WHRlNWowblN6NDNObFo1bjRja2o0WjFSR3RpalViN2VLRTJBN1JhaUpQM24KWk5qSWp5enhOekIrSHRVSlI3MHZFN25QSHMyVGNMdnJDOVhQcy83YXVzaDVNVlowVjc1Z0ppVTNqb1IwL1QrVAp2VW1xNWlydmFVOWFrRDZBa3l3aktyWDFUNGNvV1BNN3c4SUtLMDN3RStZLy9zSEcwWE1Oc1VwenZKVnJCZkRJCitlZjRkNmk5WHJ5NFpDL3NTelNVRlhVaUprM28vc3RSRGQwVXJ0NWhiWHJEMDhacUsvRE1wNERTL0pJVEtrVDYKcmNuOTZmWG1aeDJEN0FSdEtSYXhuTW85cFNTeEQ4YXZwSUdVVTJWTURudW9ZZGc9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBeVhYejNOUjNaREVSTTFSYlFTVFZzZkttelpBUVg5dUphMStVTDZTQnRYdEd5UktuCjVPeTViUnR0VzJmOHdWMExwa3N6RC9aekcxQkd0bzF1ZjFGNENDeklMalZ6Y05TWTBsVWc3bGpkUHlJd245aTIKSnpockkvY0xZWkxiS1hOcWpkUGswMDdFc28reG8zUy82d21TU3N1Z3JOREJiR1FNcWk2RWx5M25kSFJtenl2aQo1TXVaQW1rMXRTWHIrRVZManJsaG11UHdYenVjcys1ZUg5aisxSTlNZ0hvS0tvNEl1M2lLRlBnNHlnVGFBbnNUCm92eHpoaytDS2F2bWJaanZUOUlhV2VnUWxZMzlUUnc2V2gvZEtmYmZkK0Z3NElGd0t5QlJOZzBxN3dJVk5hQU4KSm9hN2VJSXlHZTJOTm1VMXhVOW15RE95Y1hLSTMvclh2TzdhMndJREFRQUJBb0lCQVFDK2FhejNnUjNqWmZraQo4YzFha2kwa2h2dWZlVlh3dERoN2N4aEZ1NUFaYnc0bGlHdUdGVFRoYWpYL1doYnMwRHZ0amxBUisxY3Fic0tYClVyQW95R0RTSVRtSGExL1VPaXpEU0ZEYTFzVXZJZXFoZXB3WUQ5dzhYd2l6emJFMXlXL2g0Mi81UlE3bTBxZ00KblpHejNoVVdlc1kvOFFPUXBqUE9PaTk2RUpvZVZ5TnZLeDk1ZGVaZjh3a3FqZHhxZ0g2WFdUWGJJWXowZ1JWcwpERVhtYi85dWx1ZkZ5a0JaT0JDc2hzYUUzS1pwaWV3TWRjQzlqYkxMMjhzYnJ4S1NSbEhVODRMQ1hNWnB6K2tiCnVpbzhOZmVrNVU3MXZOOU1oeUNpdDFIRC9mRWEvUUJFM1NKcjVtZEd0dWhOZ2doK3hZNG8xdFdldE4yN3pLTUQKaGVGYnBzbjVBb0dCQU00WU1sZ3dHRmZmTEdLbXpPbVpYS0tPSk1PNmZudElyenBNYmxjNERoWldkaXhYK0NPeQpscEROWm13QnNqbzRRcHRtaVdiRHpDa08vcnVOM3kxanFHWXJFR0daMXQwS1oxU3ZMVFR6cFRsWitZa1hmTVlXCjBOL2pUTkwyUkRWc3pzZ3lyTzEvT1ZmYmMybU12QWZiam9FcVZ2eFN0cTFUNUhqd2Vqa2VoMlpIQW9HQkFQbysKZ2psc1RMcFRScU95QzMrRkI4cmEzWGs2dEkwWWNPamRqVFBoVHdHa2ZyRk45cExjQjNKS1UzeDl4Nmt2TFV5TQpNTVU0b1N0aWgzSHU0N2lROWF3aGlqczVhdFhLdnVWZS9WRVVSSmRnbVByK3pBN2J6RXBEUlo2THc2R2pIMEZxClZMQzdlS055NEpjMlNuN2dGK2ZEbUp4Y1UxOGlVSDM1eGQrN3hHek5Bb0dBYXhZdGlwOHE5dld5ZFd3Z1N6engKNGxFamowUW5GbDRWRnFEQ01MV2l0RDZtMXJHNjhLbUtES0Y5bDU5bUFWUmNYNnp1dGlRRXdFelhWWk1KSk9lRQpoOW5XZ0RCVWNiUkhMcng3SytseHI1UXQwZXNQWFVwYnJBbktVRSsvNzFhak4ya0ZhNzVRaUhNeHkrVmhpbCt0Cjh6V1J6emdYVFlhcXo2QjhrWk5vWFY4Q2dZQVBmNjJiRnQwTnNUaXZ6TWd2aHJLNzJxQmE4TXJiN2thWDlaalkKUEwwaThlZ3kzUXhIZmo4cjBmU253amFLZ1BTQ1NEQ0JGb2ZNNHhaV2RTQS9meUxvSFUrdGFWbjNrYzRPOExvcAp1bUtoS1lkd0REWGhPYlhHWjdJNUpwamdPdlVsblF0UHd0eXU2dCtFSGdXeEkvbjNEY00yOC9UcDhIc2h3a1dDCkhPUUdoUUtCZ1FDOGx2eU1Ca1NVTnpGUk1BdVN4QUNIVWpZYlYzMWY3RCs1cVZFSVJBM2hnUFEzaG9QeEZvRTUKYnZMMmJNcGkwNloyZDRzMXUyTXpjMFFXeVpUT2dkTEs2Qmd1bEQ4RkxOakhxN296dzJDTU5OTXhpTVFIV05NdgpMTjNsbnFYZllVRUEvK0pQWjIwV1Y5T2Jpb29iMTVCL3ROUlB4WnVHZWFSUzVtR1pBMUxiSXc9PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=
 kind: Secret
 metadata:
   labels:
@@ -280,7 +280,7 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  JOBSERVICE_SECRET: NGwwTUQ0dGxEV3REdnUxSA==
+  JOBSERVICE_SECRET: a1BuSXFzaXBrQWZDSnhWdA==
   REGISTRY_CREDENTIAL_PASSWORD: aGFyYm9yX3JlZ2lzdHJ5X3Bhc3N3b3Jk
 kind: Secret
 metadata:
@@ -295,7 +295,7 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  REGISTRY_HTTP_SECRET: WVhDQWVoREREeW9KNU16dg==
+  REGISTRY_HTTP_SECRET: Q245aHBZUTkyTTlSZ0hnVg==
   REGISTRY_REDIS_PASSWORD: ""
 kind: Secret
 metadata:
@@ -310,7 +310,7 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  REGISTRY_HTPASSWD: aGFyYm9yX3JlZ2lzdHJ5X3VzZXI6JDJhJDEwJFQ2RWJQd25xZHVNVE40TVF5enZMNk9KTUxDSTd3Z0p1bFZnQWVySDJDM3dyYTZOSzNWek0u
+  REGISTRY_HTPASSWD: aGFyYm9yX3JlZ2lzdHJ5X3VzZXI6JDJhJDEwJHEwMlo4aWJNZy9RSXZSR0kwdmFnamUvelAudHRSUU1HT3dKZTBsbEZYSzlJbXFaN3IvN1FD
 kind: Secret
 metadata:
   labels:
@@ -332,6 +332,21 @@ metadata:
     heritage: Helm
     release: harbor
   name: harbor-registryctl
+  namespace: harbor
+type: Opaque
+---
+apiVersion: v1
+data:
+  gitHubToken: ""
+  redisURL: cmVkaXM6Ly9oYXJib3ItcmVkaXM6NjM3OS81P2lkbGVfdGltZW91dF9zZWNvbmRzPTMw
+kind: Secret
+metadata:
+  labels:
+    app: harbor
+    chart: harbor
+    heritage: Helm
+    release: harbor
+  name: harbor-trivy
   namespace: harbor
 type: Opaque
 ---
@@ -452,6 +467,26 @@ spec:
     release: harbor
 ---
 apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: harbor
+    chart: harbor
+    heritage: Helm
+    release: harbor
+  name: harbor-trivy
+  namespace: harbor
+spec:
+  ports:
+  - name: http-trivy
+    port: 8080
+    protocol: TCP
+  selector:
+    app: harbor
+    component: trivy
+    release: harbor
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   annotations:
@@ -513,9 +548,9 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/configmap: b4e9cf4a05a880ce45505e1e5a00e9d6329abdea11c5b3c9e6d047c3b2a8f6fc
-        checksum/secret: a26650b0a449150b71d17adca8e7339e5e245437263647cf1d8db93cca155a1f
-        checksum/secret-jobservice: d1862ebe461235748ae3dcc5d59b1ffc9f43c6bd74aa42c934bde178909c1867
+        checksum/configmap: c8548a620a464d3c00e1a2e878d013f2f9f974c21f7f8a290777e45f948f2d72
+        checksum/secret: bc3375c54ae4e0ed3e69dc8586174eb174c8692c4ef241477b9bbc351313df1e
+        checksum/secret-jobservice: 68c5fff151abfc2be6b94215a561a0bd65349312726cf48658e8c1e6aed4cc4a
       labels:
         app: harbor
         component: core
@@ -631,8 +666,8 @@ spec:
       annotations:
         checksum/configmap: cc0e1292cee3c8425c958aeee30046a701a7b3e32ce7b5d3751cceebea93e2f3
         checksum/configmap-env: 52de7676d9ac66bda6ec9e57e3274d89d9b22ddea971c927ebb81964b680f5df
-        checksum/secret: d93742fff3c634feab7ee31fcc3cf5860847d62b0d8cb4cac12a60f5a3d22b2a
-        checksum/secret-core: 8aa349cc19c3da4bdc82eb6e8b3f6afd1c5e03b05cdbc12d2711c00e7daf232d
+        checksum/secret: abcfde2f6c2f94b7e979c9a692529433a7bd79a199ac1752ae0b27655b618793
+        checksum/secret-core: f5e81fb9900e61630593c8c1cad39e9abf567511d59fb016430ab042086d3200
       labels:
         app: harbor
         chart: harbor
@@ -777,9 +812,9 @@ spec:
     metadata:
       annotations:
         checksum/configmap: 1dd422c1f80f9b0e00e1a2297e956c1da3fb1d6bc24892179accf38bc1e3be96
-        checksum/secret: d916a5019fc60007ac819ddeb387834a8c2f01ae8c98ab87423eb4d57b0030fe
-        checksum/secret-core: 49e1353579e93ae776481fb5ab2f273c370d80d5002cff8f123fe94d985c3866
-        checksum/secret-jobservice: 74f1df9c42a69eb9a86555a269085d828403b9f5fdadbd8f7073db245c855351
+        checksum/secret: 4b9049f0eecdb73a8b4871b3099295ddec3c4dda6d7cf2c8193f14cb89979da4
+        checksum/secret-core: 3e0b1462c5480b0fff0e28eb3bf47dcd39af0b9c17e28d7048abadfdfe30ae2e
+        checksum/secret-jobservice: 345e5067e3d06ab8d9ccf4dd0ef8656e94168b147d2a41091acc7d003906ebc6
       labels:
         app: harbor
         chart: harbor
@@ -1071,6 +1106,149 @@ spec:
       resources:
         requests:
           storage: 1Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: harbor
+    chart: harbor
+    component: trivy
+    heritage: Helm
+    release: harbor
+  name: harbor-trivy
+  namespace: harbor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: harbor
+      component: trivy
+      release: harbor
+  serviceName: harbor-trivy
+  template:
+    metadata:
+      annotations:
+        checksum/secret: 81105cb33a8cb2937d69d3a39d46a94953951b6154c8518d288852bcf66b4d6d
+      labels:
+        app: harbor
+        chart: harbor
+        component: trivy
+        heritage: Helm
+        release: harbor
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - env:
+        - name: HTTP_PROXY
+          value: ""
+        - name: HTTPS_PROXY
+          value: ""
+        - name: NO_PROXY
+          value: harbor-core,harbor-jobservice,harbor-database,harbor-registry,harbor-portal,harbor-trivy,harbor-exporter,127.0.0.1,localhost,.local,.internal
+        - name: SCANNER_LOG_LEVEL
+          value: info
+        - name: SCANNER_TRIVY_CACHE_DIR
+          value: /home/scanner/.cache/trivy
+        - name: SCANNER_TRIVY_REPORTS_DIR
+          value: /home/scanner/.cache/reports
+        - name: SCANNER_TRIVY_DEBUG_MODE
+          value: "false"
+        - name: SCANNER_TRIVY_VULN_TYPE
+          value: os,library
+        - name: SCANNER_TRIVY_TIMEOUT
+          value: 5m0s
+        - name: SCANNER_TRIVY_GITHUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: gitHubToken
+              name: harbor-trivy
+        - name: SCANNER_TRIVY_SEVERITY
+          value: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
+        - name: SCANNER_TRIVY_IGNORE_UNFIXED
+          value: "false"
+        - name: SCANNER_TRIVY_SKIP_UPDATE
+          value: "false"
+        - name: SCANNER_TRIVY_OFFLINE_SCAN
+          value: "false"
+        - name: SCANNER_TRIVY_SECURITY_CHECKS
+          value: vuln
+        - name: SCANNER_TRIVY_INSECURE
+          value: "false"
+        - name: SCANNER_API_SERVER_ADDR
+          value: :8080
+        - name: SCANNER_REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              key: redisURL
+              name: harbor-trivy
+        - name: SCANNER_STORE_REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              key: redisURL
+              name: harbor-trivy
+        - name: SCANNER_JOB_QUEUE_REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              key: redisURL
+              name: harbor-trivy
+        image: goharbor/trivy-adapter-photon:v2.9.0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /probe/healthy
+            port: api-server
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+        name: trivy
+        ports:
+        - containerPort: 8080
+          name: api-server
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /probe/ready
+            port: api-server
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+        resources:
+          limits:
+            cpu: 1
+            memory: 1Gi
+          requests:
+            cpu: 200m
+            memory: 512Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          privileged: false
+        volumeMounts:
+        - mountPath: /home/scanner/.cache
+          name: data
+          readOnly: false
+          subPath: null
+      securityContext:
+        fsGroup: 10000
+        runAsUser: 10000
+  volumeClaimTemplates:
+  - metadata:
+      annotations: null
+      labels:
+        app: harbor
+        chart: harbor
+        heritage: Helm
+        release: harbor
+      name: data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 5Gi
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
