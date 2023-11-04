@@ -21,6 +21,9 @@ release-all:
 	$(MAKE) build-all
 	$(MAKE) release digest=$(digest)
 
+all:
+	$(MAKE) release-all digest=1
+
 digest:
 	cd ./r && $(MAKE) digest
 
