@@ -307,7 +307,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.28.0"
+		version: "6.28.1"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -1706,7 +1706,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.37.0"
+		version:   "0.38.0"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [
@@ -1745,7 +1745,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "3.1.0"
+		version:     "3.2.0"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
@@ -2167,7 +2167,7 @@ kustomize: "harbor": #KustomizeHelm & {
 	helm: {
 		release: "harbor"
 		name:    "harbor"
-		version: "1.13.0"
+		version: "1.13.1"
 		repo:    "https://helm.goharbor.io"
 		values: {
 			expose: {

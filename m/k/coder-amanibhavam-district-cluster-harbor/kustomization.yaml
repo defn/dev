@@ -9,7 +9,7 @@ commonAnnotations: {}
 helmCharts:
   - releaseName: harbor
     name: harbor
-    version: 1.13.0
+    version: 1.13.1
     repo: https://helm.goharbor.io
     namespace: harbor
     valuesInline:

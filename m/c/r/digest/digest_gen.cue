@@ -46,21 +46,21 @@ cache: "ghcr.io/kyverno/kyvernopre:v1.10.3": "ghcr.io/kyverno/kyvernopre@sha256:
 
 cache: "ghcr.io/kyverno/reports-controller:v1.10.3": "ghcr.io/kyverno/reports-controller@sha256:b0fbfe5a7250fadd120ffbb6dd4cb70e575bddc165da76b46e3b7dab4d275141"
 
-cache: "goharbor/harbor-core:v2.9.0": "goharbor/harbor-core@sha256:6412d679fdc3fd8834eb768e4c4ed6443e29718eb92476097b0f88eaab73cd23"
+cache: "goharbor/harbor-core:v2.9.1": "goharbor/harbor-core@sha256:ee70dcf6e7c5a3c1d65a6898eb7d3816cbe760f7971a79e1fed2d529abb12ccd"
 
-cache: "goharbor/harbor-db:v2.9.0": "goharbor/harbor-db@sha256:cff528fada933112112b502bbc042de6870e84395c076ad1b873416930d4d8fe"
+cache: "goharbor/harbor-db:v2.9.1": "goharbor/harbor-db@sha256:9342cc7628537ab8b662b0eb48c044ffc914bb355c346e1b437477ff526a2887"
 
-cache: "goharbor/harbor-jobservice:v2.9.0": "goharbor/harbor-jobservice@sha256:39435daedd0c80e923b1a558a8f67c5fb9d2e68476c6b5782287ea2464f0eccc"
+cache: "goharbor/harbor-jobservice:v2.9.1": "goharbor/harbor-jobservice@sha256:19cdee359cb86dc9817752486134c5436329ca9271d84313fa126a0f90c18c6f"
 
-cache: "goharbor/harbor-portal:v2.9.0": "goharbor/harbor-portal@sha256:2809c5735a70b33a6c7eccbad1cd6f6c171bc5c0ea5da9bcc6463e7749662c02"
+cache: "goharbor/harbor-portal:v2.9.1": "goharbor/harbor-portal@sha256:a316b664ec90ca500ad8fc578911c04a0b6727357726c753cbb041d774875a05"
 
-cache: "goharbor/harbor-registryctl:v2.9.0": "goharbor/harbor-registryctl@sha256:cce272836449c500ec6b0c4c05072ef6aaf26ca7f057c715d12f38f4d4c0cdef"
+cache: "goharbor/harbor-registryctl:v2.9.1": "goharbor/harbor-registryctl@sha256:34a53c772e9557d777a03fa95f96d38205e4befaf8a2b1bb995d5878cc4d5e84"
 
-cache: "goharbor/redis-photon:v2.9.0": "goharbor/redis-photon@sha256:182e0164ff3ea80a7a939c2d5267aa977ad7ce648fb4ebe6230f1a4218873ead"
+cache: "goharbor/redis-photon:v2.9.1": "goharbor/redis-photon@sha256:ccbd16fb581dd84bb5146d1e99f854c1371d878814d05bde32d759447c75d266"
 
-cache: "goharbor/registry-photon:v2.9.0": "goharbor/registry-photon@sha256:8a26e8cb78628a24b42547e2bc832b65198b36106cfe22a033c39e95ad4390de"
+cache: "goharbor/registry-photon:v2.9.1": "goharbor/registry-photon@sha256:8cf8425cec71afd35192460867b63801578ba68f7d72735013a29c7c0e9e7910"
 
-cache: "goharbor/trivy-adapter-photon:v2.9.0": "goharbor/trivy-adapter-photon@sha256:dc5b882a7db4ed9aff1ba9df19342d580ea25db875a70b87bf5ea92109ee9a29"
+cache: "goharbor/trivy-adapter-photon:v2.9.1": "goharbor/trivy-adapter-photon@sha256:48dbd3e6d45705574adb91115f202fbe88968e58b0a7191f8d9567a3722bfda3"
 
 cache: "public.ecr.aws/karpenter/controller:v0.31.1@sha256:be5da7cb9181c2969280e869c465927de278e17d56762bfa5eeb4b21e5c9762e": "public.ecr.aws/karpenter/controller@sha256:be5da7cb9181c2969280e869c465927de278e17d56762bfa5eeb4b21e5c9762e"
 
@@ -68,9 +68,9 @@ cache: "quay.io/argoproj/argo-events:v1.8.1": "quay.io/argoproj/argo-events@sha2
 
 cache: "quay.io/argoproj/argocd:v2.8.4": "quay.io/argoproj/argocd@sha256:f02d31d4b115d79de3dc45ebeec3a3107b9178d980e69d9dc2b26019d43f3e09"
 
-cache: "quay.io/argoproj/argocli:v3.5.0": "quay.io/argoproj/argocli@sha256:842fd4235a7ef09d07d22bc11c719ca0035a82446590582c4c897ca4af3947ff"
+cache: "quay.io/argoproj/argocli:v3.5.1": "quay.io/argoproj/argocli@sha256:82cbdc300b3fe3702dc399c9fb841978f47975a84e929e76290094a1accb587f"
 
-cache: "quay.io/argoproj/workflow-controller:v3.5.0": "quay.io/argoproj/workflow-controller@sha256:e7bd56db18dce6ac6e6fbc335f7df1cd79c6b7305165289cec6d55ef4c039ecc"
+cache: "quay.io/argoproj/workflow-controller:v3.5.1": "quay.io/argoproj/workflow-controller@sha256:f15bc5577b7bedc46625f212ec6ccb1668621eb6e84f76b923647744d357c7ee"
 
 cache: "quay.io/cilium/cilium-envoy:v1.25.10-f71a313bd0daee41470af31ce6ea20c750fe35dd@sha256:bfa1e919ed02afc66e9ff36c1fd9148237fc8b8560a0b44d89acf144b0ffb08c": "quay.io/cilium/cilium-envoy@sha256:bfa1e919ed02afc66e9ff36c1fd9148237fc8b8560a0b44d89acf144b0ffb08c"
 

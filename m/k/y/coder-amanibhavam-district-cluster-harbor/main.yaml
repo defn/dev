@@ -245,14 +245,14 @@ metadata:
 ---
 apiVersion: v1
 data:
-  CSRF_KEY: NlE0ZFZDcFBRVVJ2MzdjY3JoNlMzZ25JYmZ1UHV6eWk=
+  CSRF_KEY: SkxYWDB3bHVaT0hyMVhORzFITmk5WldJOWhDRXF6RHI=
   HARBOR_ADMIN_PASSWORD: SGFyYm9yMTIzNDU=
   POSTGRESQL_PASSWORD: Y2hhbmdlaXQ=
   REGISTRY_CREDENTIAL_PASSWORD: aGFyYm9yX3JlZ2lzdHJ5X3Bhc3N3b3Jk
-  secret: SW9OZjNnNGF1c2J4MXN1Yw==
+  secret: R3Jkamt0UmhLYkZoU0FDRA==
   secretKey: bm90LWEtc2VjdXJlLWtleQ==
-  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURJRENDQWdpZ0F3SUJBZ0lSQUxZaGxGUVVhei9WWnljY1IvSEFYSTB3RFFZSktvWklodmNOQVFFTEJRQXcKR2pFWU1CWUdBMVVFQXhNUGFHRnlZbTl5TFhSdmEyVnVMV05oTUI0WERUSXpNVEV3TkRJeU5ETXdPRm9YRFRJMApNVEV3TXpJeU5ETXdPRm93R2pFWU1CWUdBMVVFQXhNUGFHRnlZbTl5TFhSdmEyVnVMV05oTUlJQklqQU5CZ2txCmhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBd2M4Tk80K2xVeUV4ZUNZOEgyMW1KaVcydEUzVU4vbnUKUjlzSnltcUJGWTQ1QW84ZWI3SThIQmg1dW9qbzAwcGtKazJTa3ViS294dmo4QkR2SFNIbFNtam9NdHNtT0loSwpEc1R1V0xRQUh0ZkliMHNyUzNUZDF4SzVYV25RbkZVTFZZcG1QQ1YxUTZrQXdPckVvNUY3N2FFUkJZRmViV0pKCnlmOENVQ0djNlIyOXJzZ1Rha2c5ZlBXSGhNSElJbG1xMFFrUG43TXhQdXYwRDdGS0dlY0RxNDQreDNwMDRGQzIKNmh6MisyeWJhL2kvWXd4NysySXVXdEFsd056aEUrNVQzT09lamozaEJXa000Vlc5aGk2NW1jelRLOVVQTHl3MApzMDJjOUxwYlJoUWFxbkpmNXUySWF2dGxFTXFwSFBGRmZWU2hZdkxOcWZ1d0VUOGpxR1RzY1FJREFRQUJvMkV3Clh6QU9CZ05WSFE4QkFmOEVCQU1DQXFRd0hRWURWUjBsQkJZd0ZBWUlLd1lCQlFVSEF3RUdDQ3NHQVFVRkJ3TUMKTUE4R0ExVWRFd0VCL3dRRk1BTUJBZjh3SFFZRFZSME9CQllFRk4ybXJTdjJjUGN2Yko1V1BhbXRaTlJ3cmw4RwpNQTBHQ1NxR1NJYjNEUUVCQ3dVQUE0SUJBUUFnNHV1SjhOcTlpTzVPbWpySWNKM0hUV2ppZnlxalQ0WW5wa2FmCnZQUTdnTHJ5SVhIVWREYi9JRnJReXRjTCsrY1haOWJ5K3NCZ0V4OXRPZzVlZzlGOXZEVHlyUkV6MWJzR0NDdisKVUJCcG1RVFdPL1E3bEV3dUdrcjY2TEFoUkNKYkVBYVV1bTF2Mi82VW5uOERYRktlYzRueFdxaDJiWG1wOFAxLwpyK1ZFQjRHWHBDMjljZjI0K0JNSlFwRU85TmFJYm9lOUFJOXJjUGtwcWFOWWJiTjFJeU1xSGFpdXVEVHJWVWgvCmtYQjRJNytxVVZwU3FvOXZOL1huUHk4UmpxekxyeHdNR1BTU3pKSTY4eCthTXJPZ0YrRFIyZHdJWjN2TlZWYVUKRjEwWFlzQWpFQ2tjY0hVQzNZYnNKd2dTUmRtVTMySG9BQkZtUXlqRXl5elZGNGxLCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
-  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcFFJQkFBS0NBUUVBd2M4Tk80K2xVeUV4ZUNZOEgyMW1KaVcydEUzVU4vbnVSOXNKeW1xQkZZNDVBbzhlCmI3SThIQmg1dW9qbzAwcGtKazJTa3ViS294dmo4QkR2SFNIbFNtam9NdHNtT0loS0RzVHVXTFFBSHRmSWIwc3IKUzNUZDF4SzVYV25RbkZVTFZZcG1QQ1YxUTZrQXdPckVvNUY3N2FFUkJZRmViV0pKeWY4Q1VDR2M2UjI5cnNnVApha2c5ZlBXSGhNSElJbG1xMFFrUG43TXhQdXYwRDdGS0dlY0RxNDQreDNwMDRGQzI2aHoyKzJ5YmEvaS9Zd3g3CisySXVXdEFsd056aEUrNVQzT09lamozaEJXa000Vlc5aGk2NW1jelRLOVVQTHl3MHMwMmM5THBiUmhRYXFuSmYKNXUySWF2dGxFTXFwSFBGRmZWU2hZdkxOcWZ1d0VUOGpxR1RzY1FJREFRQUJBb0lCQVFEQWNneTl1K0Y2TGxlawo2cktBc216Z0xFckR0eFNua0xHZkFFMDBoWlV3QmsxdDBSZHo2aFB1QWcrOXZmMFM4YWVJc1RaK1VGV2VxUzhwClRtZGhFaXRRTytOMXZFNnpqQUdkc01iTHBkRUl6MVBqejB4cVhOMTdsc2doamRUcnB6YmQ5ZE9XbmN0WEtCWHIKZWpOUUNFSjZyNWpyVW82bEp4Z0dVQVhIODlpUFVKSndOSUpDQWM4UEZzclkzbU1WdTdhWXJyUFB4UHdoeWNZMwpJVHNUcGRESjdBNlczbUVmQWlOSktpMXJKa3JSRmZPN1JMc20vYkI3d3lpVmtNeFN3YXBTUXlWZGtWVElXZVZ4CmdKcHZocWVlTlpmaWwvSzhRbHVHdjFwV0oxTWQyV0xCdHo3Y0ZCcE1XbDE1ekhvaWhUTkQ1SUZEeFk2ZW42bU4KQmljZGlVN0JBb0dCQU5sMzFoV1VUN3Zra1JULy9QS3ZndDdPeWVPQURnRFBNcHhpTWhUSkhVNVJYa2NGSHl5TwpwNXh3ajBGcjAwYmFxWWgxazk4U2JIWXlHbUhOamp6Ui9ORXd4NFAzNTNYdHdZQUpNRm9TUUVsRGJwYkF4SmQ2CnlPdVdaaXVyVnVKYVFhd1NQeUY0ditEU2hBMmVlRUhwSkJQaHFUZHV4ZXlsci9pNXpSNFlaNnNWQW9HQkFPUW0KREs5V1p6ZDJTVS9TdzcrTFhBOGlkOFZVZDA0V09wLzZnaVJoZXM4a3l5NGxKOWZtUk9BVlZDZVBITDY4dEd2Mwpqa1ZvQVNrK2RUT1hMN3JTOEE3OFRyM3pLb1hlRld4Nmx6d1ZEdDk1TTUyOXdUZjVxcTJjWVorL1hjMTJqems1Ck1vaVVGdEFzN1hIVmtzcjRFb2hxajJaMW5xY1ArbTBaV3IrYWwrTHRBb0dCQUpyL3JlZ3RrSE1VWTAvN2NOZXMKdnZOOW9pbnpvSWQxSnRhTnFySmo4ZTViVW4zK0tZMEJsSGVOUnAzVGM0QWg1QW50KzlwWDhGU0NPNG1RRUJ4TApjdzNLM2JteTNSZVJ3WVEzaUczNmFqV055V25MdFpOZUlZekE0c3VuVU1MK242WThUeURWUnJYQWRmeWJBWTNBCjFVVVNaeUNxWkluYVFrVmVjTk5OZzc1TkFvR0FDZmxEMnJKclJyaHNFZ3BEdG03d01sVXVhVGo5RWpQVWtrUFEKUnFqZ1JvZjBQZXN2NTdkUVVYOTlNMUdGVHkxT3NkMmJvWnNmV2Q4NkhteEFrT2xCeDFYdVYwMTNFVzBaQUtvSApUSUFiSzFmUUV0aEZ4eDJxQVhieHFac2pEYVZlTTRFMW5WVGovbXZJWVk2Vm9UdmhDNGVsQnpTakgraUo2UlVQCnE0cWxreTBDZ1lFQTFPTCtha3Y0enUySVpkc0EwazBDT2FyQldPRWxCYmdDcUwzeVRLMDIxb3dNVy9LdlQ1aGkKTUQ2VlQvcUZYYVVEY2ZYUjRLU3R4UGY0a0o1aEhWelNUQXpqclpTcEdXamMrcVNobnF1eTJMSC9KZnVzWmp5Zgpxa0EwVUNMTVozVWNEdGZCTTlGSjlWeWY1VDBCK3d4eGRHYm9BVWQ4TG9IemJocG03UDhMSi9nPQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURJRENDQWdpZ0F3SUJBZ0lSQVBvNGNLV2tZOEErcmk4SSswSkYvckl3RFFZSktvWklodmNOQVFFTEJRQXcKR2pFWU1CWUdBMVVFQXhNUGFHRnlZbTl5TFhSdmEyVnVMV05oTUI0WERUSXpNVEV3TkRJek16RTFNRm9YRFRJMApNVEV3TXpJek16RTFNRm93R2pFWU1CWUdBMVVFQXhNUGFHRnlZbTl5TFhSdmEyVnVMV05oTUlJQklqQU5CZ2txCmhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBcXNxWEVyQXJFYXpUVEdNOER1STVHOTE2MlhYRnl0T0gKSzJyWENJNFlneWQvSVc3UmZpUEF2bXE0dFg1ZlI4MllzcExEcFRVYmsxK09WWDFpd2lsT2FvOFZIUE5SdzBqUgpLUzdqb0pHNWNWWUM3UWtZamNtOE5RSXZydlRhRmR0S0ZyY1crdGgvWXdCQThyS2p5bFgrcnVFUDM1MmlGTWxYCmUvTzJnL1pod3FralVyd0JGNElZVXJ5NmRFYnRKYUpaNk9va05FeFNOL3IrQVNqZGdPUzA4cGZ1SDNWSTBsTXkKRjJTNk9rYVdTS1BpdWlvaTk0NDJ1MTJPSThkUlBKOGtLcTBHWkdXVlFuaXBEVjBCTXNXQlljR2FCNFl6ZFg3VgpwMkE3cEFIZVVxZnB6bUhPejFlNGNJVGZEaWdPUnQzYkVXOVpNd3M0N21wcVczbURVTDVoNFFJREFRQUJvMkV3Clh6QU9CZ05WSFE4QkFmOEVCQU1DQXFRd0hRWURWUjBsQkJZd0ZBWUlLd1lCQlFVSEF3RUdDQ3NHQVFVRkJ3TUMKTUE4R0ExVWRFd0VCL3dRRk1BTUJBZjh3SFFZRFZSME9CQllFRkxxaU11bGpiNUtDZUllbjFMUktqeldiTzBTNwpNQTBHQ1NxR1NJYjNEUUVCQ3dVQUE0SUJBUUNMZUZQY2FaYU5jRFZ2VHU4WmFqU3B6b0M4VGhVR3kwUWx2d1hKCjlEMTliVnhFV052bzNCYW4xWm5iL08razRLRHRDNm9RQzhxK3hOSk1LNVcxdmFyOEtQc3BtUktkYThocGVkeG0KeE9nT0lHNys2ZGZBTE9aNUM2Sy9XN011dFl6OXZhL0tkVGg1Sm9VOTFpUGhFODJHTHhuallkZ2tMSnVtMzJDdgpKNHRtRURyQUtzNytDT3I4RTd5TW8ySFk2bVFXd3paTlhHRnJzQkZoeUJKd085WnUxVjhISG1jcE1uNmdJSXRiCk9tZnlIWGk5eFpydnIzUlJkdGQ5NWxlSklZaEhkOHJ1UWQ3SGd0dEh0cjV0NnlnOTlRaU1FTG1IbDNDenlUYkcKZDNqUkJFT2ZiMXVHa1pxQ1hTUW9jZ2tUeVVEYnppTlU0TmU2ZVhrSnMyRUtQUmZmCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBcXNxWEVyQXJFYXpUVEdNOER1STVHOTE2MlhYRnl0T0hLMnJYQ0k0WWd5ZC9JVzdSCmZpUEF2bXE0dFg1ZlI4MllzcExEcFRVYmsxK09WWDFpd2lsT2FvOFZIUE5SdzBqUktTN2pvSkc1Y1ZZQzdRa1kKamNtOE5RSXZydlRhRmR0S0ZyY1crdGgvWXdCQThyS2p5bFgrcnVFUDM1MmlGTWxYZS9PMmcvWmh3cWtqVXJ3QgpGNElZVXJ5NmRFYnRKYUpaNk9va05FeFNOL3IrQVNqZGdPUzA4cGZ1SDNWSTBsTXlGMlM2T2thV1NLUGl1aW9pCjk0NDJ1MTJPSThkUlBKOGtLcTBHWkdXVlFuaXBEVjBCTXNXQlljR2FCNFl6ZFg3VnAyQTdwQUhlVXFmcHptSE8KejFlNGNJVGZEaWdPUnQzYkVXOVpNd3M0N21wcVczbURVTDVoNFFJREFRQUJBb0lCQURra2RTMU1nZXgwL1hFMgpWbmJJVzhFbDloOWgxeDZJYlZZcWRlMm4xUzIwZmtXS1ZVODEyUndjaXRZMmhOeDZQbGVvNFFxYVhUS09xd21SClhRU0hXM1F0a1N2UmdRNnNnMGFiS0krbGtmMElnUXdibWZwK2Y1amd0V0Y5REtaNWF5MTBicHpZNks0UC9LcjIKOS9RUGw1bWROWGxrdlVEbEtIOFJTSVNZWDVjSUFoZ2xsSVJmcUNOTERRNXdmeExUNFFiL2lPOUIwUEExWW8zeQpuYTlhUmU2WEdqcmkyM2ZhUk14T3FxanpJZkx5TkVXRDdzd3R4YjN2Ni9VdGdaTG9pUDIyZHdDT0g2bGlKLzhzCnVLcU9nZ29sNHRTZjRWVkNYR25xVFBMTEVhZm1xN1htb2IrUmJPenZWQkU3RjlUYzBQZnExc2crdGZaL1ZOU0QKN1VDS213RUNnWUVBMUgzYlY3U2orQk1WMGhaY3FhZzVhTEFIT1VQQTZJTDdXNm1PT1dEc3J5TTZUT2VQcG9iMgpxRzYrTGJ2bjU1akdlNnc2NkxKb2dRRW54RjlTMlhPRllTNmR2ZTZrWGJuS0VzZ2hWYkxTdjVhTTRReTc2M3FjClpHeStXSDBmbzU5RWJCTEVpZ29KcldCd3phRFpOd2gvUTBWVjlwSVBXeTBxUWpKM2pndkcwcEVDZ1lFQXpjTHYKenVZYkFYTkc3eXJ2WlFwVU9IME0vdDhYM0xUZHluRTZteUtxa1JWOGEwcUtoMnZ6STVPZVNJQ1hMZXZjaGozdApyczlIelZaOFBLa3pLUWc2QldtOThpaEorZ0FNNU9BRFl0ZW1UU3pZZ0UxLy9qUVNvUmYrNUkxRE1vMUcvQzNpCjRUUCtscDl2SEVvNzdTaUhqUnNoVSszTTN4dFZFQ3R0WHlzMm9sRUNnWUEwdDRDcVVxdDNTU3pac1NpT0Fxa3oKZXJCZ0dab0xWU3VOQXhUQTBYWUd3VU9lZnJoWnhSUCtsM0xoSDhRWjVnSWYvb3VpM1ZnbDRTWi9obktrZGc5NgpHN21RdkZyVTBkbjdMT0Z3Ukd3YWtmd2pmU2hGOUdaR1YrQWxUZTJDaDJuUE1oekdibFVXU1YzUzlmdk50bkwwCk9vaG9JclppbFdMdGgxMjN4TjR2c1FLQmdBdWplaU1PMnZvekJoRWpNWlZhaHpjR3c4UnE1Qk9rMjJMSEV0U1IKbW1wSWQ5Z3R5RFl1d2ZzQ0w1TFVTemphdlllT1d6Sm5JUjJaUmIrOHBsc3N6dk5kYnRRU3VWUjl5anpyK3VVTgpZNmU3NEtjcE94TXE2TjdaMTU0ZjYyd2hsNkZPQ3laSDVaK3Bkd1Izb25vZ3I4SW9oYk1Vb1dFQlQ4ZHhYV2RqCnIxeHhBb0dCQUs1N3J6UkFEMHpDRHh0SmNyTitXWnQ0WHpuYkxnOWJBUjhPOUJwQW56bk01bnM5dlgzWFQ3aFMKYVlrWmxldWgvdEgrcytJa010UGMyR2NjUVNHQjVVZGtLbmpZL0gzemxwdlZKb1dlMEtYYXU5TWU2akRiWFBJRwpjc1JSZWhuMkdzWXRtMDJXMjFGVVora2htNWY4UStFWGFrMWs4dERsb1B0S1AycHFuZHVTCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
 kind: Secret
 metadata:
   labels:
@@ -280,7 +280,7 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  JOBSERVICE_SECRET: bjRRREdWbUxwYjVsaE5VbQ==
+  JOBSERVICE_SECRET: anJPS2p6ckFNTnVhek9Edw==
   REGISTRY_CREDENTIAL_PASSWORD: aGFyYm9yX3JlZ2lzdHJ5X3Bhc3N3b3Jk
 kind: Secret
 metadata:
@@ -295,7 +295,7 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  REGISTRY_HTTP_SECRET: R1VTdDJ3Z2JQYml5T3hoVA==
+  REGISTRY_HTTP_SECRET: SVU3Mlp1TXkxbTJodEJyVQ==
   REGISTRY_REDIS_PASSWORD: ""
 kind: Secret
 metadata:
@@ -310,7 +310,7 @@ type: Opaque
 ---
 apiVersion: v1
 data:
-  REGISTRY_HTPASSWD: aGFyYm9yX3JlZ2lzdHJ5X3VzZXI6JDJhJDEwJGJxR3VJQlNyMW93LmJaWTZHckdiQmVDVzByMGRyajJ5Zjc4MkJjZmdvUmJNRzZqMXZ4a3Rx
+  REGISTRY_HTPASSWD: aGFyYm9yX3JlZ2lzdHJ5X3VzZXI6JDJhJDEwJExONGQ5UE9aYkdvTDN5QVRxNEM0b09rMW9KLjRaU3o3cFYwOEVGTkl3YS8zeXVOU253dGRH
 kind: Secret
 metadata:
   labels:
@@ -549,8 +549,8 @@ spec:
     metadata:
       annotations:
         checksum/configmap: c8548a620a464d3c00e1a2e878d013f2f9f974c21f7f8a290777e45f948f2d72
-        checksum/secret: 2a9134bc3f500d658f302233ae478257ae677f6e69353c9e196740965c51a499
-        checksum/secret-jobservice: 61720b16b55a7be238bde535132e0b5d3dc0ad3c0ce327e094d84f40e4542e23
+        checksum/secret: cbc67b3643ac63d54309647e6d38ef2aa8881895967493791917c280f7428732
+        checksum/secret-jobservice: 9e7bc6e158e68537e8f569ef51c08cfa927f2977fcccdbc74e76409a59337193
       labels:
         app: harbor
         component: core
@@ -574,7 +574,7 @@ spec:
             name: harbor-core
         - secretRef:
             name: harbor-core
-        image: goharbor/harbor-core:v2.9.0
+        image: goharbor/harbor-core:v2.9.1
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 2
@@ -666,8 +666,8 @@ spec:
       annotations:
         checksum/configmap: cc0e1292cee3c8425c958aeee30046a701a7b3e32ce7b5d3751cceebea93e2f3
         checksum/configmap-env: 52de7676d9ac66bda6ec9e57e3274d89d9b22ddea971c927ebb81964b680f5df
-        checksum/secret: 87408fb1aaa027c4d14b1780c061ec522a08f2bd47f0b88059366be457ebc29b
-        checksum/secret-core: 947bcec491c20eee2a9a2ada68ce13f83bebd873f504c87cbbf21c55e4396636
+        checksum/secret: 3e51ccf055f9ffa6a4bf580b2451058b6a51b042d24145191355508cb6175b38
+        checksum/secret-core: b48551186b8136bcc27380c8ba3f0f4ae9c44449dc2fa6c4616ba3df337914f1
       labels:
         app: harbor
         chart: harbor
@@ -688,7 +688,7 @@ spec:
             name: harbor-jobservice-env
         - secretRef:
             name: harbor-jobservice
-        image: goharbor/harbor-jobservice:v2.9.0
+        image: goharbor/harbor-jobservice:v2.9.1
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -756,7 +756,7 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-      - image: goharbor/harbor-portal:v2.9.0
+      - image: goharbor/harbor-portal:v2.9.1
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -812,9 +812,9 @@ spec:
     metadata:
       annotations:
         checksum/configmap: 1dd422c1f80f9b0e00e1a2297e956c1da3fb1d6bc24892179accf38bc1e3be96
-        checksum/secret: b328b4cb89b4a336b547022d27fc80e87f3fc60ba7e86a069568167fd3196eb8
-        checksum/secret-core: 6c978e31a6e2f991a8ea3a36972f55b8aa0d4a5d8339fd84594cd34747b0a8e2
-        checksum/secret-jobservice: 2cd56177cc60ac837e01f14f3357dc0fd4cebe945969629530e89b12ed4617a2
+        checksum/secret: 9a1f54a0522252fe73c46a80128e623568fe8d8c7f923f33198994be70b7745f
+        checksum/secret-core: b42001ec47e00c5a1814677a6a7143f5af8b322bf77d55e0a3177ae90f1ad0a4
+        checksum/secret-jobservice: 0251dc5c307cf641a763da735302a88401be256362abb17f2a6fcd9abf8a8352
       labels:
         app: harbor
         chart: harbor
@@ -831,7 +831,7 @@ spec:
         envFrom:
         - secretRef:
             name: harbor-registry
-        image: goharbor/registry-photon:v2.9.0
+        image: goharbor/registry-photon:v2.9.1
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -879,7 +879,7 @@ spec:
             name: harbor-registry
         - secretRef:
             name: harbor-registryctl
-        image: goharbor/harbor-registryctl:v2.9.0
+        image: goharbor/harbor-registryctl:v2.9.1
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -965,7 +965,7 @@ spec:
         envFrom:
         - secretRef:
             name: harbor-database
-        image: goharbor/harbor-db:v2.9.0
+        image: goharbor/harbor-db:v2.9.1
         imagePullPolicy: IfNotPresent
         livenessProbe:
           exec:
@@ -996,7 +996,7 @@ spec:
           /var/lib/postgresql/data/pgdata/ || true'
         command:
         - /bin/sh
-        image: goharbor/harbor-db:v2.9.0
+        image: goharbor/harbor-db:v2.9.1
         imagePullPolicy: IfNotPresent
         name: data-migrator
         volumeMounts:
@@ -1008,7 +1008,7 @@ spec:
         - chmod -R 700 /var/lib/postgresql/data/pgdata || true
         command:
         - /bin/sh
-        image: goharbor/harbor-db:v2.9.0
+        image: goharbor/harbor-db:v2.9.1
         imagePullPolicy: IfNotPresent
         name: data-permissions-ensurer
         volumeMounts:
@@ -1070,7 +1070,7 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-      - image: goharbor/redis-photon:v2.9.0
+      - image: goharbor/redis-photon:v2.9.1
         imagePullPolicy: IfNotPresent
         livenessProbe:
           initialDelaySeconds: 300
@@ -1192,7 +1192,7 @@ spec:
             secretKeyRef:
               key: redisURL
               name: harbor-trivy
-        image: goharbor/trivy-adapter-photon:v2.9.0
+        image: goharbor/trivy-adapter-photon:v2.9.1
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 10
