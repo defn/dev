@@ -21,6 +21,5 @@ helmCharts:
           enabled: true
           certSource: none
       trivy:
-        enabled: false
-      secretKey: move-to-external-secrets
+        enabled: true
     includeCRDs: true
