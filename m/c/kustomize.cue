@@ -2175,8 +2175,7 @@ kustomize: "harbor": #KustomizeHelm & {
 				tls: enabled: true
 				tls: certSource: "none"
 			}
-			trivy: enabled: false
-			secretKey: "move-to-external-secrets"
+			trivy: enabled: true
 		}
 	}
 
