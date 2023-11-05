@@ -1,12 +1,12 @@
 global:
-    disable_analytics: true
-    disable_log_sharing: true
-    secret_provider: earthly-secret-provider
-    cache_size_pct: 70
-    local_registry_host: "tcp://127.0.0.1:8371"
-    buildkit_additional_args:
-        - "--dns=1.1.1.1"
-    buildkit_additional_config: |
-        [registry."169.254.32.1:5000"]
-          http = true
-          insecure = true
+  disable_analytics: true
+  disable_log_sharing: true
+  #secret_provider: earthly-secret-provider
+  cache_size_pct: 70
+  local_registry_host: "tcp://127.0.0.1:8371"
+  buildkit_additional_args:
+    - "--dns=1.1.1.1"
+  buildkit_additional_config: |
+    [registry."169.254.32.1:5000"]
+      http = true
+      insecure = true
