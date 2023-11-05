@@ -3,6 +3,7 @@
 patches: []
 resources:
   - resource-namespace-buildkite.yaml
+  - resource-externalsecret-buildkite.yaml
 namespace: buildkite
 commonLabels: {}
 commonAnnotations: {}
