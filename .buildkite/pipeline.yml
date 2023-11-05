@@ -5,8 +5,15 @@ steps:
   #      - aws-assume-role-with-web-identity:
   #          role-arn: arn:aws:iam::510430971399:role/buildkite-agent-readonly
   - name: cache
-    command: |
-      if ! env CACHIX_AUTH_TOKEN=$$(pass CACHIX_AUTH_TOKEN) make cache; then
-        (sleep 10 && echo "$${VSCODE_PROXY_URI}?folder=$$(pwd)" | sed "s#{{port}}#8080#" | xargs open) &
-        env - HOME=$$HOME USER=$$USER PATH=$$PATH $$(which code-server) --auth none
-      fi
+    #    command: |
+    #      if ! env CACHIX_AUTH_TOKEN=$$(pass CACHIX_AUTH_TOKEN) make cache; then
+    #        (sleep 10 && echo "$${VSCODE_PROXY_URI}?folder=$$(pwd)" | sed "s#{{port}}#8080#" | xargs open) &
+    #        env - HOME=$$HOME USER=$$USER PATH=$$PATH $$(which code-server) --auth none
+    #      fi
+    kubernetes:
+      podSpec:
+        containers:
+          - image: 169.254.32.1:5000/dfd
+            command: [echo]
+            args:
+              - "Hello, world!"
