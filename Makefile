@@ -11,7 +11,6 @@ ci:
 	@ps axf; echo
 	@pwd; echo
 	@id -a; echo
-	@find /tmp/meh
 
 menu: # This menu
 	@perl -ne 'printf("%20s: %s\n","$$1","$$2") if m{^([\w+-]+):[^#]+#\s(.+)$$}' $(shell ls -d Makefile2>/dev/null)

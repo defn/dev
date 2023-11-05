@@ -26,4 +26,11 @@ pod:
     RUN bash -c 'source .bashrc && for e in vscodevim.vim tamasfe.even-better-toml jnoortheen.nix-ide hashicorp.terraform golang.go esbenp.prettier-vscode bazelbuild.vscode-bazel cuelang.cue marp-team.marp-vscode; do bin/nix/code-server serve-local --force --install-extension $e; done'
     RUN bash -c 'source .bashrc && cd ~/m && ~/bin/persist-cache && go install golang.org/x/tools/gopls@latest && go install honnef.co/go/tools/cmd/staticcheck@latest && cd && git checkout .'
 
-    RUN --no-cache bash -c 'git pull'
+    USER root
+    RUN install -d -m 0755 -o root -g root  /cache
+    RUN install -d -m 0755 -o ubuntu -g ubuntu /cache/git
+
+    USER ubuntu
+    RUN --no-cache git clone --mirror -v -- https://github.com/defn/dev.git /cache/git/https---github-com-defn-dev-git
+
+    RUN --no-cache git pull
