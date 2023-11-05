@@ -1,7 +1,7 @@
 steps:
   - label: kubernetes
     env:
-      BUILDKITE_GIT_MIRRORS_PATH: "/tmp/meh"
+      BUILDKITE_GIT_MIRRORS_PATH: "/cache/git"
     plugins:
       - kubernetes:
           podSpec:
