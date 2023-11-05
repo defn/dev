@@ -27,7 +27,8 @@ pod:
     RUN bash -c 'source .bashrc && cd ~/m && ~/bin/persist-cache && go install golang.org/x/tools/gopls@latest && go install honnef.co/go/tools/cmd/staticcheck@latest && cd && git checkout .'
 
     USER root
-    RUN mkdir -p /workspace/build/buildkite/defn/dev
+    RUN install -d -o ubuntu -g ubuntu -m 0755 /workspace/build/buildkite/defn/dev
+
     USER ubuntu
     RUN --no-cache bash -c 'cd /workspace/build/buildkite/defn/dev && git clone -v -- https://github.com/defn/dev.git .'
     RUN --no-cache bash -c "git pull && source .bashrc && ~/bin/persist-cache && make home"
