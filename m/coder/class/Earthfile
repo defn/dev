@@ -2,12 +2,12 @@ VERSION 0.7
 
 buildkite:
     FROM ghcr.io/buildkite/agent-stack-k8s/agent:0.7.0
-    ARG image=169.254.32.1:5000/dfd
+    ARG image=169.254.32.1:5000/dfd:buildkite
     RUN --no-cache git clone --mirror -v -- https://github.com/defn/dev.git /cache/git/https---github-com-defn-dev-git
     SAVE IMAGE --push ${image}
 
 build:
-    ARG image=169.254.32.1:5000/dfd
+    ARG image=169.254.32.1:5000/dfd:dev
     BUILD +build-pod --image=${image}
 
 build-pod:
