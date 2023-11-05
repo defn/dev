@@ -1,28 +1,31 @@
 VERSION 0.7
 
 buildkite:
-    FROM ghcr.io/buildkite/agent-stack-k8s/agent:0.7.0
     ARG image=169.254.32.1:5000/dfd:buildkite
     ENV BUILDKITE_GIT_MIRRORS_PATH=/cache/git
     ENV BUILDKITE_GIT_MIRRORS_SKIP_UPDATE=1
+
+    FROM ghcr.io/buildkite/agent-stack-k8s/agent:0.7.0
     RUN --no-cache git clone --mirror -v -- https://github.com/defn/dev.git ${BUILDKITE_GIT_MIRRORS_PATH}/https---github-com-defn-dev-git
     SAVE IMAGE --push ${image}
 
 build:
-    ARG image=169.254.32.1:5000/dfd:dev
-    BUILD +build-pod --image=${image}
+    ARG image=169.254.32.1:5000/dfd:class
+    BUILD +build-class --image=${image}
 
-build-pod:
+build-class:
     ARG image
-    BUILD +image-pod --image=${image}
+    BUILD +image-class --image=${image}
 
-image-pod:
+image-class:
     ARG image
+    ENV BUILDKITE_GIT_MIRRORS_PATH=/cache/git
+    ENV BUILDKITE_GIT_MIRRORS_SKIP_UPDATE=1
 
-    FROM +pod
+    FROM +class
     SAVE IMAGE --push ${image}
 
-pod:
+class:
     FROM quay.io/defn/dev:latest
 
     RUN git clone https://github.com/defn/dev dev \
