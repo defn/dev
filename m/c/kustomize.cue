@@ -22,10 +22,7 @@ env: (#Transform & {
 	}
 
 	inputs: "\(class.cluster_name)-cluster": {
-		bootstrap: class.bootstrap & {
-			"cilium": [100, ""]
-			"argo-cd": [100, ""]
-		}
+		bootstrap: class.bootstrap
 	}
 }).outputs
 
@@ -918,6 +915,19 @@ kustomize: "cilium": #KustomizeHelm & {
 					}
 				}]
 			}]
+		}
+	}
+}
+
+// https://artifacthub.io/packages/helm/cilium/tetragon
+kustomize: "tetragon": #KustomizeHelm & {
+	helm: {
+		release:   "tetragon"
+		name:      "tetragon"
+		namespace: "kube-system"
+		version:   "1.0.0"
+		repo:      "https://helm.cilium.io"
+		values: {
 		}
 	}
 }

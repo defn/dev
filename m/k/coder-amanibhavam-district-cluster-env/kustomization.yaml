@@ -8,6 +8,69 @@ helmCharts:
   - releaseName: bootstrap
     valuesInline:
       anyResources:
+        cilium: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-cilium
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/k/r/coder-amanibhavam-district-cluster-cilium
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        tetragon: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-tetragon
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/k/r/coder-amanibhavam-district-cluster-tetragon
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        argo-cd: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-argo-cd
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/k/r/coder-amanibhavam-district-cluster-argo-cd
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
         kyverno: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
@@ -403,48 +466,6 @@ helmCharts:
               repoURL: https://github.com/defn/dev
               targetRevision: main
               path: m/k/r/coder-amanibhavam-district-cluster-hello
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        cilium: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-cilium
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: https://github.com/defn/dev
-              targetRevision: main
-              path: m/k/r/coder-amanibhavam-district-cluster-cilium
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        argo-cd: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-argo-cd
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: https://github.com/defn/dev
-              targetRevision: main
-              path: m/k/r/coder-amanibhavam-district-cluster-argo-cd
             syncPolicy:
               automated:
                 prune: true
