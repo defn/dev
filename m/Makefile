@@ -20,12 +20,17 @@ todo:
 
 ci: 
 	b server defn-org-sso $(MAKE) ci_inner 
-ci_inner:
+
+ci_web:
 	cd defn/dev/www && $(MAKE) build
 	cd && git add docs
 	git commit -m 'update docs' || true
 	git push
-	env BUILDKITE_AGENT_DISCONNECT_AFTER_IDLE_TIMEOUT=$(timeout) buildkite-agent start --build-path ~/work/buildkite-agent --plugins-path ~/work/buildkite-plugins --token "$$(pass BUILDKITE_AGENT_TOKEN)"
+
+ci_inner:
+	$(MAKE) ci_web
+#	env BUILDKITE_AGENT_DISCONNECT_AFTER_IDLE_TIMEOUT=$(timeout) buildkite-agent start --build-path ~/work/buildkite-agent --plugins-path ~/work/buildkite-plugins --token "$$(pass BUILDKITE_AGENT_TOKEN)"
+	cd && env CACHIX_AUTH_TOKEN=$$(pass CACHIX_AUTH_TOKEN) make cache
 	cd && $(MAKE) install
 
 teacher-clean:
