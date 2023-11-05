@@ -31,4 +31,4 @@ pod:
 
     USER ubuntu
     RUN --no-cache bash -c 'git clone -v -- https://github.com/defn/dev.git /workspace/build/buildkite/defn/dev'
-    RUN --no-cache bash -c "git pull && source .bashrc && ~/bin/persist-cache && make home"
+    RUN --no-cache bash -c "git pull'
