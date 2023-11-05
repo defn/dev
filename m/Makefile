@@ -95,7 +95,6 @@ bazel-ignore:
 
 za:
 	pass hello
-	$(MAKE) ci
 	cd coder/class && $(MAKE) image
 
 coder-login:
