@@ -12,6 +12,7 @@ ci:
 	@pwd; echo
 	@id -a; echo
 	@find /cache
+	@git clone -v --reference /cache/git2/https---github-com-defn-dev-git -- https://github.com/defn/dev.git mehmeh
 
 menu: # This menu
 	@perl -ne 'printf("%20s: %s\n","$$1","$$2") if m{^([\w+-]+):[^#]+#\s(.+)$$}' $(shell ls -d Makefile2>/dev/null)
