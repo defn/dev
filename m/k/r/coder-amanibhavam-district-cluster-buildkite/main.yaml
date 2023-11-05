@@ -3,8 +3,12 @@ data:
   config.yaml: |
     agent-token-secret: buildkite
     namespace: buildkite
+    cluster-uuid: bd52647a-d3d5-4c15-9b3f-3b5f566ce6e3
+    debug: true
     image: ghcr.io/buildkite/agent-stack-k8s/agent:0.7.0
     org: defn
+    tags:
+    - queue=default
 kind: ConfigMap
 metadata:
   name: buildkite-config
@@ -49,7 +53,7 @@ spec:
           name: config
     metadata:
       annotations:
-        checksum/config: 128d446011981568cd199a2f3fb79b7c21231ba016b19542eeef66320f8b8ac0
+        checksum/config: 9f83b25b26980e486e6fb9c45ece6cf634fdb33830fd236584bff9e2650df26f
         checksum/secrets: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
       labels:
         app: buildkite
