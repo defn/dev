@@ -20,6 +20,7 @@ helmCharts:
         debug: true
         tags:
           - queue=default
+        image: 169.254.32.1:5000/dfd:buildkite
         max-in-flight: 100
       agentStackSecret: buildkite
     includeCRDs: true

@@ -465,7 +465,7 @@ kustomize: "buildkite": #KustomizeHelm & {
 				"cluster-uuid": "bd52647a-d3d5-4c15-9b3f-3b5f566ce6e3"
 				debug: true
 				tags: ["queue=default"]
-				//image: "169.254.32.1:5000/dfd"
+				image: "169.254.32.1:5000/dfd:buildkite"
 				"max-in-flight": 100
 			}
 			agentStackSecret: "buildkite"

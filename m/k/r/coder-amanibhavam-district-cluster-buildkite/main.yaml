@@ -5,7 +5,7 @@ data:
     namespace: buildkite
     cluster-uuid: bd52647a-d3d5-4c15-9b3f-3b5f566ce6e3
     debug: true
-    image: ghcr.io/buildkite/agent-stack-k8s/agent:0.7.0
+    image: 169.254.32.1:5000/dfd:buildkite
     max-in-flight: 100
     org: defn
     tags:
@@ -54,7 +54,7 @@ spec:
           name: config
     metadata:
       annotations:
-        checksum/config: 887a610f6c3409199f3d0568f193b60d5f47b67d3d2f7175380a48a2b1a6cdf9
+        checksum/config: cf93b95ce28fa60a51fbfba377f13ce5b2c76d9b148e3aac152c73b70fe8d5d5
         checksum/secrets: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
       labels:
         app: buildkite
