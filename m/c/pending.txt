@@ -5,6 +5,7 @@ https://artifacthub.io/packages/helm/bitnami/mastodon/3.2.0
 https://artifacthub.io/packages/helm/cert-manager/cert-manager/1.13.2
 https://artifacthub.io/packages/helm/cert-manager/trust-manager/0.7.0
 https://artifacthub.io/packages/helm/cilium/cilium/1.15.0-pre.2
+https://artifacthub.io/packages/helm/cilium/tetragon/1.0.0
 https://artifacthub.io/packages/helm/coder-v2/coder/2.3.3
 https://artifacthub.io/packages/helm/dex/dex/0.15.3
 https://artifacthub.io/packages/helm/external-secrets-operator/external-secrets/0.9.8
