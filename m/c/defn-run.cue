@@ -33,6 +33,9 @@ teacher: {
 		"knative": [100, ""]
 		"kourier": [100, ""]
 		"traefik": [100, ""]
+
+		// builds
+		"buildkite": [100, ""]
 	}
 }
 

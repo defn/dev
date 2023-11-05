@@ -1,0 +1,18 @@
+#ManagedBy: cue
+
+patches: []
+resources: []
+namespace: buildkite
+commonLabels: {}
+commonAnnotations: {}
+helmCharts:
+  - releaseName: buildkite
+    name: agent-stack-k8s
+    version: 0.7.0
+    repo: oci://ghcr.io/buildkite/helm
+    namespace: buildkite
+    valuesInline:
+      config:
+        org: defn
+      agentStackSecret: buildkite
+    includeCRDs: true
