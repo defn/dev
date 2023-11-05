@@ -17,6 +17,7 @@ push:
 	tar -cvh --exclude .terraform . | coder templates push -y --create -d - "$(template)"
 
 image:
+	earthly --push --no-output +buildkite
 	earthly --push --no-output +build
 
 reset:
