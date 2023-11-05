@@ -472,6 +472,31 @@ kustomize: "buildkite": #KustomizeHelm & {
 			name: "buildkite"
 		}
 	}
+
+	resource: "externalsecret-buildkite": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: {
+			name:      "buildkite"
+			namespace: "buildkite"
+		}
+		spec: {
+			refreshInterval: "1h"
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: cluster.cluster_name
+			}
+			data: [{
+				secretKey: "BUILDKITE_TOKEN"
+				remoteRef: key:      "\(cluster.cluster_name)-cluster"
+				remoteRef: property: secretKey
+			}, {
+				secretKey: "BUILDKITE_AGENT_TOKEN"
+				remoteRef: key:      "\(cluster.cluster_name)-cluster"
+				remoteRef: property: secretKey
+			}]
+		}
+	}
 }
 
 kustomize: "karpenter": #KustomizeHelm & {

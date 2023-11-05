@@ -111,3 +111,23 @@ spec:
       - configMap:
           name: buildkite-config
         name: config
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: buildkite
+  namespace: buildkite
+spec:
+  data:
+  - remoteRef:
+      key: coder-amanibhavam-district-cluster
+      property: BUILDKITE_TOKEN
+    secretKey: BUILDKITE_TOKEN
+  - remoteRef:
+      key: coder-amanibhavam-district-cluster
+      property: BUILDKITE_AGENT_TOKEN
+    secretKey: BUILDKITE_AGENT_TOKEN
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: coder-amanibhavam-district
