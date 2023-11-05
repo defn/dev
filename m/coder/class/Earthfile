@@ -27,10 +27,10 @@ pod:
     RUN bash -c 'source .bashrc && cd ~/m && ~/bin/persist-cache && go install golang.org/x/tools/gopls@latest && go install honnef.co/go/tools/cmd/staticcheck@latest && cd && git checkout .'
 
     USER root
-    RUN install -d -m 0755 -o root -g root  /cache
+    RUN install -d -m 0755 -o ubuntu -g ubuntu /cache
     RUN install -d -m 0755 -o ubuntu -g ubuntu /cache/git
 
     USER ubuntu
-    RUN --no-cache git clone --mirror -v -- https://github.com/defn/dev.git /cache/git/https---github-com-defn-dev-git
+    RUN --no-cache bash -c 'mkdir /cache/git/https---github-com-defn-dev-git && cd /cache/git/https---github-com-defn-dev-git && git clone --mirror -v -- https://github.com/defn/dev.git .'
 
     RUN --no-cache git pull
