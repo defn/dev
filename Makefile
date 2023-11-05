@@ -5,6 +5,13 @@ flakes ?= home oci nix secrets utils vpn acme godev nodedev localdev development
 build:
 	cd m/toc & $(MAKE) build
 
+ci:
+	@echo "+++ Results"
+	@echo
+	@ps axuf; echo
+	@pwd; echo
+	@id -a; echo
+
 menu: # This menu
 	@perl -ne 'printf("%20s: %s\n","$$1","$$2") if m{^([\w+-]+):[^#]+#\s(.+)$$}' $(shell ls -d Makefile2>/dev/null)
 

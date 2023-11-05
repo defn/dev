@@ -5,9 +5,9 @@ steps:
           podSpec:
             containers:
               - image: 169.254.32.1:5000/dfd
-                command: [echo]
+                command: [make]
                 args:
-                  - "Hello, world!"
+                  - ci
                 securityContext:
                   runAsNonRoot: true
                   runAsUser: 1000
