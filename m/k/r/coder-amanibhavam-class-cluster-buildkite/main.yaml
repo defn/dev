@@ -3,8 +3,13 @@ data:
   config.yaml: |
     agent-token-secret: buildkite
     namespace: buildkite
-    image: ghcr.io/buildkite/agent-stack-k8s/agent:0.7.0
+    cluster-uuid: bd52647a-d3d5-4c15-9b3f-3b5f566ce6e3
+    debug: true
+    image: 169.254.32.1:5000/dfd
+    max-in-flight: 100
     org: defn
+    tags:
+    - queue=default
 kind: ConfigMap
 metadata:
   name: buildkite-config
@@ -49,7 +54,7 @@ spec:
           name: config
     metadata:
       annotations:
-        checksum/config: 128d446011981568cd199a2f3fb79b7c21231ba016b19542eeef66320f8b8ac0
+        checksum/config: 5e5632e3921bab3742aa38437fc857e9a9dcef7ef2b47337420f233860d45d47
         checksum/secrets: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
       labels:
         app: buildkite
@@ -58,6 +63,26 @@ spec:
       app: buildkite
 apiVersion: apps/v1
 kind: Deployment
+metadata:
+  name: buildkite
+  namespace: buildkite
+---
+spec:
+  data:
+    - remoteRef:
+        key: coder-amanibhavam-class-cluster
+        property: BUILDKITE_TOKEN
+      secretKey: BUILDKITE_TOKEN
+    - remoteRef:
+        key: coder-amanibhavam-class-cluster
+        property: BUILDKITE_AGENT_TOKEN
+      secretKey: BUILDKITE_AGENT_TOKEN
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: coder-amanibhavam-class
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
 metadata:
   name: buildkite
   namespace: buildkite
@@ -106,3 +131,8 @@ kind: ServiceAccount
 metadata:
   name: buildkite-controller
   namespace: buildkite
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: buildkite
