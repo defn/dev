@@ -3,16 +3,30 @@ env:
   BUILDKITE_GIT_MIRRORS_SKIP_UPDATE: "1"
 
 steps:
-  - label: kubernetes
+  - label: build cli
     plugins:
       - kubernetes:
           podSpec:
             containers:
               - image: 169.254.32.1:5000/dfd:class
                 imagePullPolicy: Always
-                command: [make]
+                command: [bash, -c]
                 args:
-                  - ci
+                  - "make ci"
+                securityContext:
+                  runAsNonRoot: true
+                  runAsUser: 1000
+                  runAsGroup: 1000
+  - label: build cue
+    plugins:
+      - kubernetes:
+          podSpec:
+            containers:
+              - image: 169.254.32.1:5000/dfd:class
+                imagePullPolicy: Always
+                command: [bash, -c]
+                args:
+                  - "cd m/c && make build release"
                 securityContext:
                   runAsNonRoot: true
                   runAsUser: 1000
