@@ -23,6 +23,7 @@ release-all:
 
 all:
 	$(MAKE) crd release-all digest=1
+	git grep not-used ../k/r
 
 digest:
 	cd ./r && $(MAKE) digest

@@ -28,6 +28,8 @@ cache: "gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:1bfc20a721e
 
 cache: "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:65d22d6aa04863281dbb1f987d12e280db74286eb033a5940549efc0e62e1cd0": "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:f34273747638f8de1a239c923958307b3f9cd7907556863373ebe15fdb2fd306"
 
+cache: "ghcr.io/buildkite/agent-stack-k8s/controller:0.7.0@sha256:6d747da4f3898b092010fcdc382fc59dc3d90c5478d41e0a01eb9b6f53a9d91f": "ghcr.io/buildkite/agent-stack-k8s/controller@sha256:6d747da4f3898b092010fcdc382fc59dc3d90c5478d41e0a01eb9b6f53a9d91f"
+
 cache: "ghcr.io/dexidp/dex:v2.37.0": "ghcr.io/dexidp/dex@sha256:f579d00721b0d842328c43a562f50343c54b0048ef2d58d6b54e750c21fc7938"
 
 cache: "ghcr.io/external-secrets/external-secrets:v0.9.8": "ghcr.io/external-secrets/external-secrets@sha256:12353dc3aa781f5b25a89b0f1b9fe259cff8117d41872e7722227c122e940ced"

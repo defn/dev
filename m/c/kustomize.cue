@@ -447,6 +447,23 @@ kustomize: "pod-identity": #KustomizeHelm & {
 	}
 }
 
+// https://github.com/buildkite/agent-stack-k8s
+kustomize: "buildkite": #KustomizeHelm & {
+	namespace: "buildkite"
+
+	helm: {
+		release:   "buildkite"
+		name:      "agent-stack-k8s"
+		namespace: "buildkite"
+		version:   "0.7.0"
+		repo:      "oci://ghcr.io/buildkite/helm"
+		values: {
+			config: org: "defn"
+			agentStackSecret: "buildkite"
+		}
+	}
+}
+
 kustomize: "karpenter": #KustomizeHelm & {
 	cluster: #Cluster
 
@@ -2182,7 +2199,7 @@ kustomize: "harbor": #KustomizeHelm & {
 		values: {
 			expose: {
 				ingress: hosts: core: "harbor.\(cluster.domain_name)"
-				tls: enabled: true
+				tls: enabled:    true
 				tls: certSource: "none"
 			}
 			trivy: enabled: true

@@ -20,8 +20,8 @@ kustomize: [NAME=string]: _name: NAME
 }
 
 #Cluster: {
-	handle: string
-	env: string
+	handle:            string
+	env:               string
 	infra_account_id:  string
 	infra_k3s_version: string
 
