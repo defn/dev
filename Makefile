@@ -8,7 +8,7 @@ build:
 ci:
 	@echo "+++ Results"
 	@echo
-	@ps axuf; echo
+	@ps axf; echo
 	@pwd; echo
 	@id -a; echo
 
