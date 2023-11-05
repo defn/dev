@@ -460,7 +460,12 @@ kustomize: "buildkite": #KustomizeHelm & {
 		version:   "0.7.0"
 		repo:      "oci://ghcr.io/buildkite/helm"
 		values: {
-			config: org: "defn"
+			config: {
+				org: "defn"
+				"cluster-uuid": "bd52647a-d3d5-4c15-9b3f-3b5f566ce6e3"
+				debug: true
+				tags: ["queue=default"]
+			}
 			agentStackSecret: "buildkite"
 		}
 	}

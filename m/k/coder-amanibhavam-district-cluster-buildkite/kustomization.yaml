@@ -16,5 +16,9 @@ helmCharts:
     valuesInline:
       config:
         org: defn
+        cluster-uuid: bd52647a-d3d5-4c15-9b3f-3b5f566ce6e3
+        debug: true
+        tags:
+          - queue=default
       agentStackSecret: buildkite
     includeCRDs: true
