@@ -1,7 +1,8 @@
 #ManagedBy: cue
 
 patches: []
-resources: []
+resources:
+  - resource-namespace-buildkite.yaml
 namespace: buildkite
 commonLabels: {}
 commonAnnotations: {}

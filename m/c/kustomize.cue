@@ -449,6 +449,8 @@ kustomize: "pod-identity": #KustomizeHelm & {
 
 // https://github.com/buildkite/agent-stack-k8s
 kustomize: "buildkite": #KustomizeHelm & {
+	cluster: #Cluster
+
 	namespace: "buildkite"
 
 	helm: {
@@ -460,6 +462,14 @@ kustomize: "buildkite": #KustomizeHelm & {
 		values: {
 			config: org: "defn"
 			agentStackSecret: "buildkite"
+		}
+	}
+
+	resource: "namespace-buildkite": {
+		apiVersion: "v1"
+		kind:       "Namespace"
+		metadata: {
+			name: "buildkite"
 		}
 	}
 }
