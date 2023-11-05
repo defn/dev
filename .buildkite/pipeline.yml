@@ -26,7 +26,7 @@ steps:
                 imagePullPolicy: Always
                 command: [bash, -c]
                 args:
-                  - "'cd m/c && make build-all'"
+                  - "'cd && source .bash_profile && cd m/c && make build-all'"
                 securityContext:
                   runAsNonRoot: true
                   runAsUser: 1000
