@@ -2,10 +2,11 @@ VERSION 0.7
 
 buildkite:
     ARG image=169.254.32.1:5000/dfd:buildkite
+    FROM ghcr.io/buildkite/agent-stack-k8s/agent:0.7.0
+
     ENV BUILDKITE_GIT_MIRRORS_PATH=/cache/git
     ENV BUILDKITE_GIT_MIRRORS_SKIP_UPDATE=1
 
-    FROM ghcr.io/buildkite/agent-stack-k8s/agent:0.7.0
     RUN --no-cache git clone --mirror -v -- https://github.com/defn/dev.git ${BUILDKITE_GIT_MIRRORS_PATH}/https---github-com-defn-dev-git
     SAVE IMAGE --push ${image}
 
@@ -19,10 +20,11 @@ build-class:
 
 image-class:
     ARG image
+    FROM +class
+
     ENV BUILDKITE_GIT_MIRRORS_PATH=/cache/git
     ENV BUILDKITE_GIT_MIRRORS_SKIP_UPDATE=1
 
-    FROM +class
     SAVE IMAGE --push ${image}
 
 class:
