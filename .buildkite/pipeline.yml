@@ -1,5 +1,7 @@
 steps:
   - label: kubernetes
+    env:
+      BUILDKITE_GIT_MIRRORS_PATH: "/tmp/meh"
     plugins:
       - kubernetes:
           podSpec:
