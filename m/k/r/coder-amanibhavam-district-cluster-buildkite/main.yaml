@@ -106,3 +106,8 @@ kind: ServiceAccount
 metadata:
   name: buildkite-controller
   namespace: buildkite
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: buildkite
