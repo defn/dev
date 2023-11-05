@@ -7,6 +7,9 @@ import (
 teacher: {
 	bootstrap: {
 		// essentials
+		"cilium": [100, ""]
+		"tetragon": [100, ""]
+		"argo-cd": [100, ""]
 		"kyverno": [100, "", "ServerSideApply=true"]
 		"cert-manager": [100, ""]
 		"trust-manager": [100, ""]
