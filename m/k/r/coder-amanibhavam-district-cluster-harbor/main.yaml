@@ -686,8 +686,8 @@ spec:
       secretKey: secret
     - remoteRef:
         key: coder-amanibhavam-district-cluster
-        property: seretKey
-      secretKey: seretKey
+        property: secretKey
+      secretKey: secretKey
     - remoteRef:
         decodingStrategy: Base64
         key: coder-amanibhavam-district-cluster
@@ -796,7 +796,11 @@ metadata:
   namespace: harbor
 ---
 spec:
-  data: []
+  data:
+    - remoteRef:
+        key: coder-amanibhavam-district-cluster
+        property: hello
+      secretKey: hello
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
