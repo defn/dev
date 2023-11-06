@@ -2240,7 +2240,7 @@ kustomize: "postgres-operator": #KustomizeHelm & {
 				remoteRef: {
 					key:      input.secret
 					property: secretKey
-					if key == "tls.crt" || key == "tls.key" {
+					if property == "tls.crt" || property == "tls.key" {
 						decodingStrategy: "Base64"
 					}
 				}
@@ -2494,7 +2494,7 @@ kustomize: "harbor": #KustomizeHelm & {
 			(#external_secrets_data & {input: {
 				secret: "\(cluster.cluster_name)-cluster"
 				keys: ["CSRF_KEY", "POSTGRESQL_PASSWORD", "REGISTRY_CREDENTIAL_PASSWORD", "secret", "seretKey", "tls.crt", "tls.key"]
-			}})
+			}}).output
 		}
 	}
 
@@ -2521,7 +2521,7 @@ kustomize: "harbor": #KustomizeHelm & {
 			(#external_secrets_data & {input: {
 				secret: "\(cluster.cluster_name)-cluster"
 				keys: ["JOBSERVICE_SECRET", "REGISTRY_CREDENTIAL_PASSWORD"]
-			}})
+			}}).output
 		}
 	}
 
@@ -2548,7 +2548,7 @@ kustomize: "harbor": #KustomizeHelm & {
 			(#external_secrets_data & {input: {
 				secret: "\(cluster.cluster_name)-cluster"
 				keys: ["REGISTRY_HTTP_SECRET", "REGISTRY_REDIS_PASSWORD"]
-			}})
+			}}).output
 		}
 	}
 
@@ -2575,7 +2575,7 @@ kustomize: "harbor": #KustomizeHelm & {
 			(#external_secrets_data & {input: {
 				secret: "\(cluster.cluster_name)-cluster"
 				keys: ["REGISTRY_HTPASSWD"]
-			}})
+			}}).output
 		}
 	}
 
@@ -2598,7 +2598,10 @@ kustomize: "harbor": #KustomizeHelm & {
 			}
 
 			refreshInterval: "1h"
-			data: []
+			(#external_secrets_data & {input: {
+				secret: "\(cluster.cluster_name)-cluster"
+				keys: []
+			}}).output
 		}
 	}
 
@@ -2625,7 +2628,7 @@ kustomize: "harbor": #KustomizeHelm & {
 			(#external_secrets_data & {input: {
 				secret: "\(cluster.cluster_name)-cluster"
 				keys: ["gitHubToken", "redisURL"]
-			}})
+			}}).output
 		}
 	}
 
@@ -2652,8 +2655,7 @@ kustomize: "harbor": #KustomizeHelm & {
 			(#external_secrets_data & {input: {
 				secret: "\(cluster.cluster_name)-cluster"
 				keys: ["POSTGRES_PASSWORD"]
-			}})
+			}}).output
 		}
 	}
-
 }
