@@ -1560,8 +1560,11 @@ kustomize: "coder": #KustomizeHelm & {
 					kind:        "Secret"
 					name:        "coder.coder-db.connection-url"
 					namespace:   "coder"
-					stringData: {
-						"coder_pg_connection_url": "postgresql://{{request.object.data.username | base64_decode(@)}}:{{request.object.data.password | base64_decode(@)}}@coder-db:5432/coder?sslmode=require "
+					data: {
+						type: "Opaque"
+						stringData: {
+							"coder_pg_connection_url": "postgresql://{{request.object.data.username | base64_decode(@)}}:{{request.object.data.password | base64_decode(@)}}@coder-db:5432/coder?sslmode=require"
+						}
 					}
 				}
 			}]
