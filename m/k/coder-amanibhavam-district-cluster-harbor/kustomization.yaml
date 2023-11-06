@@ -1,8 +1,65 @@
 #ManagedBy: cue
 
-patches: []
+patches:
+  - path: jsonp-deployment-harbor-registry.yaml
+    target:
+      version: v1
+      kind: Deployment
+      name: harbor-registry
+  - path: jsonp-deployment-harbor-core.yaml
+    target:
+      kind: Deployment
+      name: harbor-core
+  - path: jsonp-deployment-harbor-jobservice.yaml
+    target:
+      kind: Deployment
+      name: harbor-jobservice
+  - path: jsonp-statefulset-harbor-trivy.yaml
+    target:
+      kind: StatefulSet
+      name: harbor-trivy
+  - path: jsonp-statefulset-harbor-database.yaml
+    target:
+      kind: StatefulSet
+      name: harbor-database
+  - path: jsonp-secret-harbor-core.yaml
+    target:
+      kind: Secret
+      name: harbor-core
+  - path: jsonp-secret-harbor-jobservice.yaml
+    target:
+      kind: Secret
+      name: harbor-jobservice
+  - path: jsonp-secret-harbor-registry.yaml
+    target:
+      kind: Secret
+      name: harbor-registry
+  - path: jsonp-secret-harbor-registry-htpasswd.yaml
+    target:
+      kind: Secret
+      name: harbor-registry-htpasswd
+  - path: jsonp-secret-harbor-registryctl.yaml
+    target:
+      kind: Secret
+      name: harbor-registryctl
+  - path: jsonp-secret-harbor-trivy.yaml
+    target:
+      kind: Secret
+      name: harbor-trivy
+  - path: jsonp-secret-harbor-database.yaml
+    target:
+      kind: Secret
+      name: harbor-database
 resources:
   - resource-namespace-harbor.yaml
+  - resource-externalsecret-harbor-admin.yaml
+  - resource-externalsecret-harbor-core.yaml
+  - resource-externalsecret-harbor-jobservice.yaml
+  - resource-externalsecret-harbor-registry.yaml
+  - resource-externalsecret-harbor-registry-htpasswd.yaml
+  - resource-externalsecret-harbor-registryctl.yaml
+  - resource-externalsecret-harbor-trivy.yaml
+  - resource-externalsecret-harbor-database.yaml
 namespace: harbor
 commonLabels: {}
 commonAnnotations: {}
@@ -20,6 +77,9 @@ helmCharts:
         tls:
           enabled: true
           certSource: none
+      externalURL: https://harbor.district.amanibhavam.defn.run
+      existingSecretAdminPassword: external-harbor-admin
+      existingSecretAdminPasswordKey: harbor_admin_password
       trivy:
         enabled: true
     includeCRDs: true

@@ -12,7 +12,7 @@ data:
   CORE_LOCAL_URL: http://127.0.0.1:8080
   CORE_URL: http://harbor-core:80
   DATABASE_TYPE: postgresql
-  EXT_ENDPOINT: https://core.harbor.domain
+  EXT_ENDPOINT: https://harbor.district.amanibhavam.defn.run
   HTTP_PROXY: ""
   HTTPS_PROXY: ""
   JOBSERVICE_URL: http://harbor-jobservice
@@ -252,17 +252,22 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: secret
-                  name: harbor-core
+                  name: external-harbor-core
             - name: JOBSERVICE_SECRET
               valueFrom:
                 secretKeyRef:
                   key: JOBSERVICE_SECRET
-                  name: harbor-jobservice
+                  name: external-harbor-jobservice
+            - name: HARBOR_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: harbor_admin_password
+                  name: external-harbor-admin
           envFrom:
             - configMapRef:
                 name: harbor-core
             - secretRef:
-                name: harbor-core
+                name: external-harbor-core
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 2
@@ -320,18 +325,18 @@ spec:
             items:
               - key: secretKey
                 path: key
-            secretName: harbor-core
+            secretName: external-harbor-core
         - name: token-service-private-key
           secret:
-            secretName: harbor-core
+            secretName: external-harbor-core
         - name: ca-download
         - emptyDir: {}
           name: psc
     metadata:
       annotations:
-        checksum/configmap: c8548a620a464d3c00e1a2e878d013f2f9f974c21f7f8a290777e45f948f2d72
-        checksum/secret: f0af0568521b7ffee581c5a1338f1af818b0462fb52b9593dcd3840006badc2d
-        checksum/secret-jobservice: bba1902ff1bd9d0ffd9c9d8f1aa826da2df007b62e835c67e4fd6c3feec6a72f
+        checksum/configmap: d1ac6f3afbe79d73141d586627234519352376404b0319f83b7aa9c4a45d8ba8
+        checksum/secret: ""
+        checksum/secret-jobservice: ""
       labels:
         app: harbor
         component: core
@@ -365,12 +370,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: secret
-                  name: harbor-core
+                  name: external-harbor-core
           envFrom:
             - configMapRef:
                 name: harbor-jobservice-env
             - secretRef:
-                name: harbor-jobservice
+                name: external-harbor-jobservice
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
@@ -411,8 +416,8 @@ spec:
       annotations:
         checksum/configmap: cc0e1292cee3c8425c958aeee30046a701a7b3e32ce7b5d3751cceebea93e2f3
         checksum/configmap-env: 52de7676d9ac66bda6ec9e57e3274d89d9b22ddea971c927ebb81964b680f5df
-        checksum/secret: 120fa04a033ac5e69680e720225ad89f0f92b3bddf28974a2d854bd48e5e6779
-        checksum/secret-core: b121b3979a6be84255f1a5ad743a74a523d462f9e52445ecf9d55af3e54b5f31
+        checksum/secret: ""
+        checksum/secret-core: ""
       labels:
         app: harbor
         chart: harbor
@@ -511,7 +516,7 @@ spec:
             - /etc/registry/config.yml
           envFrom:
             - secretRef:
-                name: harbor-registry
+                name: external-harbor-registry
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
@@ -546,19 +551,19 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: secret
-                  name: harbor-core
+                  name: external-harbor-core
             - name: JOBSERVICE_SECRET
               valueFrom:
                 secretKeyRef:
                   key: JOBSERVICE_SECRET
-                  name: harbor-jobservice
+                  name: external-harbor-jobservice
           envFrom:
             - configMapRef:
                 name: harbor-registryctl
             - secretRef:
-                name: harbor-registry
+                name: external-harbor-registry
             - secretRef:
-                name: harbor-registryctl
+                name: external-harbor-registryctl
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
@@ -598,7 +603,7 @@ spec:
             items:
               - key: REGISTRY_HTPASSWD
                 path: passwd
-            secretName: harbor-registry-htpasswd
+            secretName: external-harbor-registry-htpasswd
         - configMap:
             name: harbor-registry
           name: registry-config
@@ -608,9 +613,9 @@ spec:
     metadata:
       annotations:
         checksum/configmap: 1dd422c1f80f9b0e00e1a2297e956c1da3fb1d6bc24892179accf38bc1e3be96
-        checksum/secret: e3a0c8fd8cfe4a914f8ddd33a8ca1548ccc713153cc8d2983e8b36ac754a41ca
-        checksum/secret-core: 1e68f824fd09a1ef29a825f75302d7ec9a40eebf50f4663d6ccdde0bcd69bfb1
-        checksum/secret-jobservice: ba253e12d5d23af05198bc0750501a8f33cf9eccf19b3cfceac62ceeeefcd841
+        checksum/secret: ""
+        checksum/secret-core: ""
+        checksum/secret-jobservice: ""
       labels:
         app: harbor
         chart: harbor
@@ -636,6 +641,255 @@ metadata:
     heritage: Helm
     release: harbor
   name: harbor-registry
+  namespace: harbor
+---
+spec:
+  data:
+    - remoteRef:
+        key: coder-amanibhavam-district-cluster
+        property: coder-amanibhavam-district-cluster
+      secretKey: coder-amanibhavam-district-cluster
+    - remoteRef:
+        key: coder-amanibhavam-district-cluster
+        property:
+          - harbor_admin_password
+          - harbor_postgres_password
+      secretKey:
+        - harbor_admin_password
+        - harbor_postgres_password
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: secrets-manager
+  target:
+    creationPolicy: Owner
+    name: external-harbor-admin
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: harbor-admin
+  namespace: harbor
+---
+spec:
+  input:
+    keys:
+      - CSRF_KEY
+      - POSTGRESQL_PASSWORD
+      - REGISTRY_CREDENTIAL_PASSWORD
+      - secret
+      - seretKey
+      - tls.crt
+      - tls.key
+    secret: coder-amanibhavam-district-cluster
+  output:
+    data:
+      - remoteRef:
+          key: coder-amanibhavam-district-cluster
+          property: coder-amanibhavam-district-cluster
+        secretKey: coder-amanibhavam-district-cluster
+      - remoteRef:
+          key: coder-amanibhavam-district-cluster
+          property:
+            - CSRF_KEY
+            - POSTGRESQL_PASSWORD
+            - REGISTRY_CREDENTIAL_PASSWORD
+            - secret
+            - seretKey
+            - tls.crt
+            - tls.key
+        secretKey:
+          - CSRF_KEY
+          - POSTGRESQL_PASSWORD
+          - REGISTRY_CREDENTIAL_PASSWORD
+          - secret
+          - seretKey
+          - tls.crt
+          - tls.key
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: secrets-manager
+  target:
+    creationPolicy: Owner
+    name: external-harbor-core
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: harbor-core
+  namespace: harbor
+---
+spec:
+  input:
+    keys:
+      - POSTGRES_PASSWORD
+    secret: coder-amanibhavam-district-cluster
+  output:
+    data:
+      - remoteRef:
+          key: coder-amanibhavam-district-cluster
+          property: coder-amanibhavam-district-cluster
+        secretKey: coder-amanibhavam-district-cluster
+      - remoteRef:
+          key: coder-amanibhavam-district-cluster
+          property:
+            - POSTGRES_PASSWORD
+        secretKey:
+          - POSTGRES_PASSWORD
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: secrets-manager
+  target:
+    creationPolicy: Owner
+    name: external-harbor-database
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: harbor-database
+  namespace: harbor
+---
+spec:
+  input:
+    keys:
+      - JOBSERVICE_SECRET
+      - REGISTRY_CREDENTIAL_PASSWORD
+    secret: coder-amanibhavam-district-cluster
+  output:
+    data:
+      - remoteRef:
+          key: coder-amanibhavam-district-cluster
+          property: coder-amanibhavam-district-cluster
+        secretKey: coder-amanibhavam-district-cluster
+      - remoteRef:
+          key: coder-amanibhavam-district-cluster
+          property:
+            - JOBSERVICE_SECRET
+            - REGISTRY_CREDENTIAL_PASSWORD
+        secretKey:
+          - JOBSERVICE_SECRET
+          - REGISTRY_CREDENTIAL_PASSWORD
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: secrets-manager
+  target:
+    creationPolicy: Owner
+    name: external-harbor-jobservice
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: harbor-jobservice
+  namespace: harbor
+---
+spec:
+  input:
+    keys:
+      - REGISTRY_HTTP_SECRET
+      - REGISTRY_REDIS_PASSWORD
+    secret: coder-amanibhavam-district-cluster
+  output:
+    data:
+      - remoteRef:
+          key: coder-amanibhavam-district-cluster
+          property: coder-amanibhavam-district-cluster
+        secretKey: coder-amanibhavam-district-cluster
+      - remoteRef:
+          key: coder-amanibhavam-district-cluster
+          property:
+            - REGISTRY_HTTP_SECRET
+            - REGISTRY_REDIS_PASSWORD
+        secretKey:
+          - REGISTRY_HTTP_SECRET
+          - REGISTRY_REDIS_PASSWORD
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: secrets-manager
+  target:
+    creationPolicy: Owner
+    name: external-harbor-registry
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: harbor-registry
+  namespace: harbor
+---
+spec:
+  input:
+    keys:
+      - REGISTRY_HTPASSWD
+    secret: coder-amanibhavam-district-cluster
+  output:
+    data:
+      - remoteRef:
+          key: coder-amanibhavam-district-cluster
+          property: coder-amanibhavam-district-cluster
+        secretKey: coder-amanibhavam-district-cluster
+      - remoteRef:
+          key: coder-amanibhavam-district-cluster
+          property:
+            - REGISTRY_HTPASSWD
+        secretKey:
+          - REGISTRY_HTPASSWD
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: secrets-manager
+  target:
+    creationPolicy: Owner
+    name: external-harbor-registry-htpasswd
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: harbor-registry-htpasswd
+  namespace: harbor
+---
+spec:
+  data: []
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: secrets-manager
+  target:
+    creationPolicy: Owner
+    name: external-harbor-registryctl
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: harbor-registryctl
+  namespace: harbor
+---
+spec:
+  input:
+    keys:
+      - gitHubToken
+      - redisURL
+    secret: coder-amanibhavam-district-cluster
+  output:
+    data:
+      - remoteRef:
+          key: coder-amanibhavam-district-cluster
+          property: coder-amanibhavam-district-cluster
+        secretKey: coder-amanibhavam-district-cluster
+      - remoteRef:
+          key: coder-amanibhavam-district-cluster
+          property:
+            - gitHubToken
+            - redisURL
+        secretKey:
+          - gitHubToken
+          - redisURL
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: secrets-manager
+  target:
+    creationPolicy: Owner
+    name: external-harbor-trivy
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: harbor-trivy
   namespace: harbor
 ---
 spec:
@@ -745,15 +999,6 @@ metadata:
   namespace: harbor
 ---
 apiVersion: v1
-data:
-  CSRF_KEY: VEpQeVhieVJ5czVCM1I4SFdjTHFZeVFrMlJ5UG9KTFI=
-  HARBOR_ADMIN_PASSWORD: SGFyYm9yMTIzNDU=
-  POSTGRESQL_PASSWORD: Y2hhbmdlaXQ=
-  REGISTRY_CREDENTIAL_PASSWORD: aGFyYm9yX3JlZ2lzdHJ5X3Bhc3N3b3Jk
-  secret: ZlRYMWxib3l6TXdRMGxhbQ==
-  secretKey: bm90LWEtc2VjdXJlLWtleQ==
-  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURJRENDQWdpZ0F3SUJBZ0lSQUwyVi9Qb1J0VWRJVFNWM3dyNVQzbnd3RFFZSktvWklodmNOQVFFTEJRQXcKR2pFWU1CWUdBMVVFQXhNUGFHRnlZbTl5TFhSdmEyVnVMV05oTUI0WERUSXpNVEV3TlRFM05USTBOMW9YRFRJMApNVEV3TkRFM05USTBOMW93R2pFWU1CWUdBMVVFQXhNUGFHRnlZbTl5TFhSdmEyVnVMV05oTUlJQklqQU5CZ2txCmhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBMVNxbnQvODE1aFVjaDZQQ0pUblFjZUg0N1BLKzNHRTEKaWJsUjJYRmd4dCtxSjdqdDdBUnkxVkErQmFSZ2ZmbkMvUmdPdkRvSlZTZ1M2cDBrYktpK1JBbFgzRmdHSnJkQQpjTFR5SkluL2dqVTNXM3YrOE9NejNkRDBPZlNzU2Z1K2RJakpHZFE0OGx0RXU1OTRYYUFiSEtUcW5UdXozdWlWCnJiUVVpd0h5dnQvS2tWZjJUc0xNb1YrT0Y4Mmx4TnZ4WGtaVzdTQ29SaHFPdzB1eXZ3aU1RK0Q4UnhjWFlBYzYKM1NEaGNrbWo5K1lvTnQ2Y1lVSFBQdVhFVXFKMkg0bXVZWUkyQm0xMitFWlJtREZPVHlNUVJOdHdmRDg5VEV1ZgphVU14N0FReVBQSFpwWk1lMzVlY1QrT0p6WDI4L2Q0VnZNK3V4WE9DV0tneFJKN1ZzZUZxR1FJREFRQUJvMkV3Clh6QU9CZ05WSFE4QkFmOEVCQU1DQXFRd0hRWURWUjBsQkJZd0ZBWUlLd1lCQlFVSEF3RUdDQ3NHQVFVRkJ3TUMKTUE4R0ExVWRFd0VCL3dRRk1BTUJBZjh3SFFZRFZSME9CQllFRkdnT0VVbVZrd01nSFh0QTNvdkJ4SUtLd0NPTApNQTBHQ1NxR1NJYjNEUUVCQ3dVQUE0SUJBUUEzN25BV0F2K2p6SW1UT1BnTW1aRFNsOEFLMit2cXlmWE5kQkFEClBUNTY1T3JLYnB4RVlwYTZrKzVNYmt0M0Q5bzFqSVIyN0p6Y0kzcnVEai9yUDBydEtoYzRkcDFySkFreTk4aWQKNHdReWliZnZFZzNSb3VZMDJrKzdIb0hYeFFHaGlmN3VIVEEvSjFNWVFyU0l2MzdIRWx6US9JUmx1bFhvcUJ1MApVNVFpWTl0K2RWbndNekhyaWkyTlNIcUExcGRUWjlIcWtjRUtXcmdjeks5TmR4ak1jL3dmT1BYYzRRTXhTeDV2Cll5REl5RFZ4Snh6bzVVRTA0YnRQOEw5V3NsbnYzWEMvVDVVb2VKR1pnVFk3VFg5VW9yeEZ4a1BKQXE4VWdHdmYKRHFUZ2xhUkNHa2tCbkg0L3lyTmJzdnBTdVJ0eXBqaHNVOEhSZmVKMldhdnFRSE53Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
-  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb1FJQkFBS0NBUUVBMVNxbnQvODE1aFVjaDZQQ0pUblFjZUg0N1BLKzNHRTFpYmxSMlhGZ3h0K3FKN2p0CjdBUnkxVkErQmFSZ2ZmbkMvUmdPdkRvSlZTZ1M2cDBrYktpK1JBbFgzRmdHSnJkQWNMVHlKSW4vZ2pVM1czdisKOE9NejNkRDBPZlNzU2Z1K2RJakpHZFE0OGx0RXU1OTRYYUFiSEtUcW5UdXozdWlWcmJRVWl3SHl2dC9La1ZmMgpUc0xNb1YrT0Y4Mmx4TnZ4WGtaVzdTQ29SaHFPdzB1eXZ3aU1RK0Q4UnhjWFlBYzYzU0RoY2ttajkrWW9OdDZjCllVSFBQdVhFVXFKMkg0bXVZWUkyQm0xMitFWlJtREZPVHlNUVJOdHdmRDg5VEV1ZmFVTXg3QVF5UFBIWnBaTWUKMzVlY1QrT0p6WDI4L2Q0VnZNK3V4WE9DV0tneFJKN1ZzZUZxR1FJREFRQUJBb0lCQVFDb1RucUlVNUFaN3pkTQpmV2JQLzVydUlBNXIvNm5rMVRmeFd3b2VGbC9rQmpzU0MvaUc3bWhBdG8rUjR0eHcrdUFTOTRqQzQwdjFHYVA5CjdEOFRNQlN5SVhKbXZuVjA0aUdXRzdoSVUxRVRYTE10bjNTR2U4MjY2TDI4ZU13RHlpbnhWd0w1U3MvL3cwSTgKcGNmaW5JUnJsR2JONkpLM2dJcVYwT2FiYnRsY0RHTmpBZm9VaWxxMmpBV3F4Z3MvTXJJdWxIU0NUYXEweWpWdgpnUXNPVlpTK3lNM2VTUWNxYU4veVZsbDA3anJmREFkVFRoZXZlZDJNZWxheFpiTzlSUE5DWTdQbXpralFHdEEvCi9IaWZZNjZ1N0VldGl3bjRueGhWRCs2ZmV4d05scWFZNFkvVVkra204bXNFVVl2VXdrdVF6TEpDeTl0bmN2cm4KalMzeUt5dUJBb0dCQU4rQUsySUNLekNKeEs0Vk9iaVd0N2tPeU5mOTVkaE9rblJYc2FOa1hMSlgxem45bzNUYQpjcHZLS0txYmpnaTk3ZWRTaDcvYjR5WUtWZHdTb0pnNW5wWENiK3YrU0dqbzErRTZFaW1CdHJSMGc0UVlCWWZ4Cll2bzlOQlN2OWxoVnJPOHpEQlBFZkIybllLZXh2bUJpVmRVT1l6N3NteGJVcmpUSWFKbEJEYmN4QW9HQkFQUXAKek5rT0F0M2tiUk9Ud2tjcWlrUk9jcmhZTjJEOXJUb1c4MUp3THlJb0F4RWdrOHBTS3Vqc0JjNDUyQ3NXdGVjawpBU2lpQ1hBZ1RhZ1ZtTVVTa0kxbGkwS1MyM2NVbCtRVHRjckpTN0lxcUVQa0dJRVpHcGxFbmNiMSt6akk4WWhQCk1WM25ueXBjZTVJOWFBcGR6d0lFbElaZXJpRVB3SEp0VnZtaFVmZHBBb0dBTjBEdWVMcGtod2xvTUVsYkRjRmwKQmtFYmNocDQyak1DamZTb0crYlI2OTAvZmp5d1RsRTdDRHpBTlAxajdkRldvVnVMNStpcWpWcjh3djF2Nm5KRQpQRzNuVVlaNXpFWFVLUUE4UVRxcU9vNmJmT3FiWTNKUHIrRzFvRytvRFVxUkNFbXNjSzZncUl3YW54cVlJQ2Z2ClpFNjhSbkFrSDA3UkNvZUpKR29xdytFQ2dZQTVxU2wwVlFlK1NUU3RPK2JVa2FwSGlWTTBUN2o4VWN3My9MV0gKMFhDQUczemw3WkNaWmlBMkU0OG5iYWVzUFZmRjkwM0N2OG1Femt3b2xya1dTVlVUMzFnczU2dW1pcGw0Um1OWApPWVNEMWVrWTUyUVdFTXlrUjMwUFFJWU1tZi9ZVmdOdGpzYWE1VzVWVWVVaEZaaE9mTEJxcnk5bUpXY29Yc1A4CmZlbHlpUUovWUpCTVh1djlRN1FIazNIUmVSenIwYlprODNSWTUxNnpjTlhSd0ZTZXlyTmo1N21ueE5pQkhKdjAKblg0YTBxUnA5U24vbUVURGJUL2dvb3N6R0lWZlJzM2R6ME5iNzZtalZ1NEZlVUNKc0R1RTYwL21oMzhkN3RQZQp2V0ZwTzcvYkZzbzJTeUM4Z2Fld2o5eWNBSjh3QTk3cWIwbDE3ekJzbHNEUXpoUm9MUT09Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
 kind: Secret
 metadata:
   labels:
@@ -761,65 +1006,7 @@ metadata:
     chart: harbor
     heritage: Helm
     release: harbor
-  name: harbor-core
-  namespace: harbor
-type: Opaque
----
-apiVersion: v1
-data:
-  POSTGRES_PASSWORD: Y2hhbmdlaXQ=
-kind: Secret
-metadata:
-  labels:
-    app: harbor
-    chart: harbor
-    heritage: Helm
-    release: harbor
-  name: harbor-database
-  namespace: harbor
-type: Opaque
----
-apiVersion: v1
-data:
-  JOBSERVICE_SECRET: TXJEUjdubDdhRU1lS2ZwMQ==
-  REGISTRY_CREDENTIAL_PASSWORD: aGFyYm9yX3JlZ2lzdHJ5X3Bhc3N3b3Jk
-kind: Secret
-metadata:
-  labels:
-    app: harbor
-    chart: harbor
-    heritage: Helm
-    release: harbor
-  name: harbor-jobservice
-  namespace: harbor
-type: Opaque
----
-apiVersion: v1
-data:
-  REGISTRY_HTTP_SECRET: VGJQZEtMTFY5eWNjN2JRcA==
-  REGISTRY_REDIS_PASSWORD: ""
-kind: Secret
-metadata:
-  labels:
-    app: harbor
-    chart: harbor
-    heritage: Helm
-    release: harbor
-  name: harbor-registry
-  namespace: harbor
-type: Opaque
----
-apiVersion: v1
-data:
-  REGISTRY_HTPASSWD: aGFyYm9yX3JlZ2lzdHJ5X3VzZXI6JDJhJDEwJHc1NXJQaFJEQ2dRdGVkZG9HNHoyMXUudnRlOWdTMjl2Z3pWWndFNXFrZUUxUGdrTUJ1Zm5t
-kind: Secret
-metadata:
-  labels:
-    app: harbor
-    chart: harbor
-    heritage: Helm
-    release: harbor
-  name: harbor-registry-htpasswd
+  name: ignore-core
   namespace: harbor
 type: Opaque
 ---
@@ -831,14 +1018,11 @@ metadata:
     chart: harbor
     heritage: Helm
     release: harbor
-  name: harbor-registryctl
+  name: ignore-database
   namespace: harbor
 type: Opaque
 ---
 apiVersion: v1
-data:
-  gitHubToken: ""
-  redisURL: cmVkaXM6Ly9oYXJib3ItcmVkaXM6NjM3OS81P2lkbGVfdGltZW91dF9zZWNvbmRzPTMw
 kind: Secret
 metadata:
   labels:
@@ -846,7 +1030,55 @@ metadata:
     chart: harbor
     heritage: Helm
     release: harbor
-  name: harbor-trivy
+  name: ignore-jobservice
+  namespace: harbor
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    app: harbor
+    chart: harbor
+    heritage: Helm
+    release: harbor
+  name: ignore-registry
+  namespace: harbor
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    app: harbor
+    chart: harbor
+    heritage: Helm
+    release: harbor
+  name: ignore-registry-htpasswd
+  namespace: harbor
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    app: harbor
+    chart: harbor
+    heritage: Helm
+    release: harbor
+  name: ignore-registryctl
+  namespace: harbor
+type: Opaque
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    app: harbor
+    chart: harbor
+    heritage: Helm
+    release: harbor
+  name: ignore-trivy
   namespace: harbor
 type: Opaque
 ---
@@ -1019,7 +1251,7 @@ spec:
               value: /var/lib/postgresql/data/pgdata
           envFrom:
             - secretRef:
-                name: harbor-database
+                name: external-harbor-database
           imagePullPolicy: IfNotPresent
           livenessProbe:
             exec:
@@ -1186,7 +1418,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: gitHubToken
-                  name: harbor-trivy
+                  name: external-harbor-trivy
             - name: SCANNER_TRIVY_SEVERITY
               value: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
             - name: SCANNER_TRIVY_IGNORE_UNFIXED
@@ -1205,17 +1437,17 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: redisURL
-                  name: harbor-trivy
+                  name: external-harbor-trivy
             - name: SCANNER_STORE_REDIS_URL
               valueFrom:
                 secretKeyRef:
                   key: redisURL
-                  name: harbor-trivy
+                  name: external-harbor-trivy
             - name: SCANNER_JOB_QUEUE_REDIS_URL
               valueFrom:
                 secretKeyRef:
                   key: redisURL
-                  name: harbor-trivy
+                  name: external-harbor-trivy
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 10
