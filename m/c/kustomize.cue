@@ -2493,7 +2493,7 @@ kustomize: "harbor": #KustomizeHelm & {
 
 			(#external_secrets_data & {input: {
 				secret: "\(cluster.cluster_name)-cluster"
-				keys: ["CSRF_KEY", "POSTGRESQL_PASSWORD", "REGISTRY_CREDENTIAL_PASSWORD", "secret", "seretKey", "tls.crt", "tls.key"]
+				keys: ["CSRF_KEY", "POSTGRESQL_PASSWORD", "REGISTRY_CREDENTIAL_PASSWORD", "secret", "secretKey", "tls.crt", "tls.key"]
 			}}).output
 		}
 	}
@@ -2600,7 +2600,7 @@ kustomize: "harbor": #KustomizeHelm & {
 			refreshInterval: "1h"
 			(#external_secrets_data & {input: {
 				secret: "\(cluster.cluster_name)-cluster"
-				keys: []
+				keys: ["hello"]
 			}}).output
 		}
 	}
