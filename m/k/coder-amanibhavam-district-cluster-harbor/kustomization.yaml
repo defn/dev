@@ -1,19 +1,23 @@
 #ManagedBy: cue
 
 patches:
+  - path: jsonp-deployment-harbor-core.yaml
+    target:
+      kind: Deployment
+      name: harbor-core
+  - path: jsonp-deployment-harbor-port.yaml
+    target:
+      kind: Deployment
+      name: harbor-port
+  - path: jsonp-deployment-harbor-jobservice.yaml
+    target:
+      kind: Deployment
+      name: harbor-jobservice
   - path: jsonp-deployment-harbor-registry.yaml
     target:
       version: v1
       kind: Deployment
       name: harbor-registry
-  - path: jsonp-deployment-harbor-core.yaml
-    target:
-      kind: Deployment
-      name: harbor-core
-  - path: jsonp-deployment-harbor-jobservice.yaml
-    target:
-      kind: Deployment
-      name: harbor-jobservice
   - path: jsonp-statefulset-harbor-trivy.yaml
     target:
       kind: StatefulSet
@@ -22,6 +26,10 @@ patches:
     target:
       kind: StatefulSet
       name: harbor-database
+  - path: jsonp-statefulset-harbor-redis.yaml
+    target:
+      kind: StatefulSet
+      name: harbor-redis
   - path: jsonp-secret-harbor-core.yaml
     target:
       kind: Secret

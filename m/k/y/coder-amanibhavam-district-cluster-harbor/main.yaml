@@ -511,7 +511,6 @@ metadata:
     chart: harbor
     component: core
     heritage: Helm
-    name: harbor-core
     release: harbor
   name: harbor-core
   namespace: harbor
@@ -532,6 +531,7 @@ spec:
       labels:
         app: harbor
         component: core
+        name: harbor-core
         release: harbor
     spec:
       automountServiceAccountToken: false
@@ -631,7 +631,6 @@ metadata:
     chart: harbor
     component: jobservice
     heritage: Helm
-    name: harbor-jobservice
     release: harbor
   name: harbor-jobservice
   namespace: harbor
@@ -657,6 +656,7 @@ spec:
         chart: harbor
         component: jobservice
         heritage: Helm
+        name: harbor-jobservice
         release: harbor
     spec:
       automountServiceAccountToken: false
@@ -779,7 +779,6 @@ metadata:
     chart: harbor
     component: registry
     heritage: Helm
-    name: harbor-registry
     release: harbor
   name: harbor-registry
   namespace: harbor
@@ -805,6 +804,7 @@ spec:
         chart: harbor
         component: registry
         heritage: Helm
+        name: harbor-registry
         release: harbor
     spec:
       automountServiceAccountToken: false
@@ -920,7 +920,6 @@ metadata:
     chart: harbor
     component: database
     heritage: Helm
-    name: harbor-database
     release: harbor
   name: harbor-database
   namespace: harbor
@@ -941,6 +940,7 @@ spec:
         chart: harbor
         component: database
         heritage: Helm
+        name: harbor-database
         release: harbor
     spec:
       automountServiceAccountToken: false
@@ -1052,6 +1052,7 @@ spec:
         chart: harbor
         component: redis
         heritage: Helm
+        name: harbor-redis
         release: harbor
     spec:
       automountServiceAccountToken: false
@@ -1101,7 +1102,6 @@ metadata:
     chart: harbor
     component: trivy
     heritage: Helm
-    name: harbor-trivy
     release: harbor
   name: harbor-trivy
   namespace: harbor
@@ -1122,6 +1122,7 @@ spec:
         chart: harbor
         component: trivy
         heritage: Helm
+        name: harbor-trivy
         release: harbor
     spec:
       automountServiceAccountToken: false

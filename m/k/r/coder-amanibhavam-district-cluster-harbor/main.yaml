@@ -340,6 +340,7 @@ spec:
       labels:
         app: harbor
         component: core
+        name: harbor-core
         release: harbor
   replicas: 1
   revisionHistoryLimit: 10
@@ -356,7 +357,6 @@ metadata:
     chart: harbor
     component: core
     heritage: Helm
-    name: harbor-core
     release: harbor
   name: harbor-core
   namespace: harbor
@@ -424,6 +424,7 @@ spec:
         chart: harbor
         component: jobservice
         heritage: Helm
+        name: harbor-jobservice
         release: harbor
   replicas: 1
   revisionHistoryLimit: 10
@@ -442,7 +443,6 @@ metadata:
     chart: harbor
     component: jobservice
     heritage: Helm
-    name: harbor-jobservice
     release: harbor
   name: harbor-jobservice
   namespace: harbor
@@ -623,6 +623,7 @@ spec:
         chart: harbor
         component: registry
         heritage: Helm
+        name: harbor-registry
         release: harbor
   replicas: 1
   revisionHistoryLimit: 10
@@ -641,7 +642,6 @@ metadata:
     chart: harbor
     component: registry
     heritage: Helm
-    name: harbor-registry
     release: harbor
   name: harbor-registry
   namespace: harbor
@@ -1239,6 +1239,7 @@ spec:
         chart: harbor
         component: database
         heritage: Helm
+        name: harbor-database
         release: harbor
   replicas: 1
   selector:
@@ -1269,7 +1270,6 @@ metadata:
     chart: harbor
     component: database
     heritage: Helm
-    name: harbor-database
     release: harbor
   name: harbor-database
   namespace: harbor
@@ -1305,6 +1305,7 @@ spec:
         chart: harbor
         component: redis
         heritage: Helm
+        name: harbor-redis
         release: harbor
   replicas: 1
   selector:
@@ -1446,6 +1447,7 @@ spec:
         chart: harbor
         component: trivy
         heritage: Helm
+        name: harbor-trivy
         release: harbor
   replicas: 1
   selector:
@@ -1476,7 +1478,6 @@ metadata:
     chart: harbor
     component: trivy
     heritage: Helm
-    name: harbor-trivy
     release: harbor
   name: harbor-trivy
   namespace: harbor

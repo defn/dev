@@ -2302,6 +2302,87 @@ kustomize: "harbor": #KustomizeHelm & {
 		}
 	}
 
+
+	jsp: "deployment-harbor-core": {
+		target: {
+			kind: "Deployment"
+			name: "harbor-core"
+		}
+		patches: [{
+			op:    "replace"
+			path:  "/spec/template/metadata/labels/name"
+			value: "harbor-core"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/metadata/annotations/checksum~1secret"
+			value: ""
+		}, {
+			op:    "replace"
+			path:  "/spec/template/metadata/annotations/checksum~1secret-jobservice"
+			value: ""
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/containers/0/env/0/valueFrom/secretKeyRef/name"
+			value: "external-harbor-core"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/containers/0/env/1/valueFrom/secretKeyRef/name"
+			value: "external-harbor-jobservice"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/containers/0/envFrom/1/secretRef/name"
+			value: "external-harbor-core"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/volumes/1/secret/secretName"
+			value: "external-harbor-core"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/volumes/2/secret/secretName"
+			value: "external-harbor-core"
+		}]
+	}
+
+	jsp: "deployment-harbor-port": {
+		target: {
+			kind: "Deployment"
+			name: "harbor-port"
+		}
+		patches: [{
+			op:    "replace"
+			path:  "/spec/template/metadata/labels/name"
+			value: "harbor-port"
+		}]
+	}
+
+	jsp: "deployment-harbor-jobservice": {
+		target: {
+			kind: "Deployment"
+			name: "harbor-jobservice"
+		}
+		patches: [{
+			op:    "replace"
+			path:  "/spec/template/metadata/labels/name"
+			value: "harbor-jobservice"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/metadata/annotations/checksum~1secret"
+			value: ""
+		}, {
+			op:    "replace"
+			path:  "/spec/template/metadata/annotations/checksum~1secret-core"
+			value: ""
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/containers/0/env/0/valueFrom/secretKeyRef/name"
+			value: "external-harbor-core"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/containers/0/envFrom/1/secretRef/name"
+			value: "external-harbor-jobservice"
+		}]
+	}
+
 	jsp: "deployment-harbor-registry": {
 		target: {
 			version: "v1"
@@ -2310,7 +2391,7 @@ kustomize: "harbor": #KustomizeHelm & {
 		}
 		patches: [{
 			op:    "replace"
-			path:  "/metadata/labels/name"
+			path:  "/spec/template/metadata/labels/name"
 			value: "harbor-registry"
 		}, {
 			op:    "replace"
@@ -2351,74 +2432,6 @@ kustomize: "harbor": #KustomizeHelm & {
 		}]
 	}
 
-	jsp: "deployment-harbor-core": {
-		target: {
-			kind: "Deployment"
-			name: "harbor-core"
-		}
-		patches: [{
-			op:    "replace"
-			path:  "/metadata/labels/name"
-			value: "harbor-core"
-		}, {
-			op:    "replace"
-			path:  "/spec/template/metadata/annotations/checksum~1secret"
-			value: ""
-		}, {
-			op:    "replace"
-			path:  "/spec/template/metadata/annotations/checksum~1secret-jobservice"
-			value: ""
-		}, {
-			op:    "replace"
-			path:  "/spec/template/spec/containers/0/env/0/valueFrom/secretKeyRef/name"
-			value: "external-harbor-core"
-		}, {
-			op:    "replace"
-			path:  "/spec/template/spec/containers/0/env/1/valueFrom/secretKeyRef/name"
-			value: "external-harbor-jobservice"
-		}, {
-			op:    "replace"
-			path:  "/spec/template/spec/containers/0/envFrom/1/secretRef/name"
-			value: "external-harbor-core"
-		}, {
-			op:    "replace"
-			path:  "/spec/template/spec/volumes/1/secret/secretName"
-			value: "external-harbor-core"
-		}, {
-			op:    "replace"
-			path:  "/spec/template/spec/volumes/2/secret/secretName"
-			value: "external-harbor-core"
-		}]
-	}
-
-	jsp: "deployment-harbor-jobservice": {
-		target: {
-			kind: "Deployment"
-			name: "harbor-jobservice"
-		}
-		patches: [{
-			op:    "replace"
-			path:  "/metadata/labels/name"
-			value: "harbor-jobservice"
-		}, {
-			op:    "replace"
-			path:  "/spec/template/metadata/annotations/checksum~1secret"
-			value: ""
-		}, {
-			op:    "replace"
-			path:  "/spec/template/metadata/annotations/checksum~1secret-core"
-			value: ""
-		}, {
-			op:    "replace"
-			path:  "/spec/template/spec/containers/0/env/0/valueFrom/secretKeyRef/name"
-			value: "external-harbor-core"
-		}, {
-			op:    "replace"
-			path:  "/spec/template/spec/containers/0/envFrom/1/secretRef/name"
-			value: "external-harbor-jobservice"
-		}]
-	}
-
 	jsp: "statefulset-harbor-trivy": {
 		target: {
 			kind: "StatefulSet"
@@ -2426,7 +2439,7 @@ kustomize: "harbor": #KustomizeHelm & {
 		}
 		patches: [{
 			op:    "replace"
-			path:  "/metadata/labels/name"
+			path:  "/spec/template/metadata/labels/name"
 			value: "harbor-trivy"
 		}, {
 			op:    "replace"
@@ -2454,12 +2467,24 @@ kustomize: "harbor": #KustomizeHelm & {
 		}
 		patches: [{
 			op:    "replace"
-			path:  "/metadata/labels/name"
+			path:  "/spec/template/metadata/labels/name"
 			value: "harbor-database"
 		}, {
 			op:    "replace"
 			path:  "/spec/template/spec/containers/0/envFrom/0/secretRef/name"
 			value: "external-harbor-database"
+		}]
+	}
+
+	jsp: "statefulset-harbor-redis": {
+		target: {
+			kind: "StatefulSet"
+			name: "harbor-redis"
+		}
+		patches: [{
+			op:    "replace"
+			path:  "/spec/template/metadata/labels/name"
+			value: "harbor-redis"
 		}]
 	}
 
