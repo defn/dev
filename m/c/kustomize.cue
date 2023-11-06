@@ -2234,7 +2234,7 @@ kustomize: "postgres-operator": #KustomizeHelm & {
 		keys: [...string]
 	}
 	output: data: [
-		for a in input {
+		for a in input.keys {
 			{
 				secretKey: a
 				remoteRef: {
@@ -2263,7 +2263,7 @@ kustomize: "harbor": #KustomizeHelm & {
 			expose: {
 				ingress: hosts: core: "harbor.\(cluster.domain_name)"
 				tls: {
-					enabled:    false
+					enabled: true
 					certSource: "none"
 				}
 			}
