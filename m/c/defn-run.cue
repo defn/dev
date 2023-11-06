@@ -36,6 +36,7 @@ teacher: {
 
 		// builds
 		"buildkite": [100, ""]
+		"coder": [100, ""]
 	}
 }
 

@@ -24,7 +24,7 @@ release-all:
 
 all:
 	$(MAKE) crd release-all digest=1
-	!git grep not-used ../k/r
+	if ! git grep not-used ../k/r; then true; else false; fi
 
 digest:
 	cd ./r && $(MAKE) digest

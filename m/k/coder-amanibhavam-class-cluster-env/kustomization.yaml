@@ -345,6 +345,27 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
+        coder: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-class-cluster-coder
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-class-cluster
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/k/r/coder-amanibhavam-class-cluster-coder
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
     name: any-resource
     version: 0.1.0
     repo: https://kiwigrid.github.io
