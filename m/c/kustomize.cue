@@ -1498,7 +1498,7 @@ kustomize: "coder": #KustomizeHelm & {
 				}, {
 					name: "CODER_PG_CONNECTION_URL"
 					valueFrom: secretKeyRef: {
-						name: "coder"
+						name: "coder.coder-db.connection-url"
 						key:  "coder_pg_connection_url"
 					}
 				}]
@@ -1530,6 +1530,41 @@ kustomize: "coder": #KustomizeHelm & {
 			]
 			databases: coder:    "coder"
 			postgresql: version: "15"
+		}
+	}
+
+	resource: "clusterpolicy-create-secret-coder-connection-url": {
+		apiVersion: "kyverno.io/v1"
+		kind:       "ClusterPolicy"
+		metadata: name: "coder-connection-url"
+		spec: {
+			generateExistingOnPolicyUpdate: true
+			rules: [{
+				name: "create-secret-coder-connection-url"
+				match: any: [{
+					resources: {
+						names: [
+							"coder.coder-db.credentials.postgresql.acid.zalan.do",
+						]
+						kinds: [
+							"Secret",
+						]
+						namespaces: [
+							"coder",
+						]
+					}
+				}]
+				generate: {
+					synchronize: true
+					apiVersion:  "v1"
+					kind:        "Secret"
+					name:        "coder.coder-db.connection-url"
+					namespace:   "coder"
+					stringData: {
+						"coder_pg_connection_url": "postgresql://{{request.object.data.username | base64_decode(@)}}:{{request.object.data.password | base64_decode(@)}}@coder-db:5432/coder?sslmode=require "
+					}
+				}
+			}]
 		}
 	}
 
@@ -2263,7 +2298,7 @@ kustomize: "harbor": #KustomizeHelm & {
 			expose: {
 				ingress: hosts: core: "harbor.\(cluster.domain_name)"
 				tls: {
-					enabled: true
+					enabled:    true
 					certSource: "none"
 				}
 			}
@@ -2301,7 +2336,6 @@ kustomize: "harbor": #KustomizeHelm & {
 			}]
 		}
 	}
-
 
 	jsp: "deployment-harbor-core": {
 		target: {
