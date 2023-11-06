@@ -1,0 +1,14 @@
+#ManagedBy: cue
+
+- op: replace
+  path: /spec/template/metadata/annotations/checksum~1secret
+  value: ""
+- op: replace
+  path: /spec/template/metadata/annotations/checksum~1secret-core
+  value: ""
+- op: replace
+  path: /spec/template/spec/containers/0/env/0/valueFrom/secretKeyRef/name
+  value: external-harbor-core
+- op: replace
+  path: /spec/template/spec/containers/0/envFrom/1/secretRef/name
+  value: external-harbor-jobservice

@@ -1,0 +1,29 @@
+#ManagedBy: cue
+
+- op: replace
+  path: /spec/template/metadata/annotations/checksum~1secret
+  value: ""
+- op: replace
+  path: /spec/template/metadata/annotations/checksum~1secret-core
+  value: ""
+- op: replace
+  path: /spec/template/metadata/annotations/checksum~1secret-jobservice
+  value: ""
+- op: replace
+  path: /spec/template/spec/containers/0/envFrom/0/secretRef/name
+  value: external-harbor-registry
+- op: replace
+  path: /spec/template/spec/containers/1/env/0/valueFrom/secretKeyRef/name
+  value: external-harbor-core
+- op: replace
+  path: /spec/template/spec/containers/1/env/1/valueFrom/secretKeyRef/name
+  value: external-harbor-jobservice
+- op: replace
+  path: /spec/template/spec/containers/1/envFrom/1/secretRef/name
+  value: external-harbor-registry
+- op: replace
+  path: /spec/template/spec/containers/1/envFrom/2/secretRef/name
+  value: external-harbor-registryctl
+- op: replace
+  path: /spec/template/spec/volumes/0/secret/secretName
+  value: external-harbor-registry-htpasswd

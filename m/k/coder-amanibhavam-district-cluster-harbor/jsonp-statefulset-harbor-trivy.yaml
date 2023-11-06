@@ -1,0 +1,14 @@
+#ManagedBy: cue
+
+- op: replace
+  path: /spec/template/spec/containers/0/env/9/valueFrom/secretKeyRef/name
+  value: external-harbor-trivy
+- op: replace
+  path: /spec/template/spec/containers/0/env/17/valueFrom/secretKeyRef/name
+  value: external-harbor-trivy
+- op: replace
+  path: /spec/template/spec/containers/0/env/18/valueFrom/secretKeyRef/name
+  value: external-harbor-trivy
+- op: replace
+  path: /spec/template/spec/containers/0/env/19/valueFrom/secretKeyRef/name
+  value: external-harbor-trivy

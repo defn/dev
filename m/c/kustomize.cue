@@ -461,11 +461,11 @@ kustomize: "buildkite": #KustomizeHelm & {
 		repo:      "oci://ghcr.io/buildkite/helm"
 		values: {
 			config: {
-				org: "defn"
+				org:            "defn"
 				"cluster-uuid": "bd52647a-d3d5-4c15-9b3f-3b5f566ce6e3"
-				debug: true
+				debug:          true
 				tags: ["queue=default"]
-				image: "169.254.32.1:5000/dfd:buildkite"
+				image:           "169.254.32.1:5000/dfd:buildkite"
 				"max-in-flight": 100
 			}
 			agentStackSecret: "buildkite"
@@ -2228,6 +2228,27 @@ kustomize: "postgres-operator": #KustomizeHelm & {
 }
 
 // https://artifacthub.io/packages/helm/harbor/harbor
+#external_secrets_data: {
+	input: {
+		secret: string
+		keys: [...string]
+	}
+	output: data: [
+		for a in input {
+			{
+				secretKey: a
+				remoteRef: {
+					key:      input.secret
+					property: secretKey
+					if key == "tls.crt" || key == "tls.key" {
+						decodingStrategy: "Base64"
+					}
+				}
+			}
+		},
+	]
+}
+
 kustomize: "harbor": #KustomizeHelm & {
 	cluster: #Cluster
 
@@ -2241,9 +2262,16 @@ kustomize: "harbor": #KustomizeHelm & {
 		values: {
 			expose: {
 				ingress: hosts: core: "harbor.\(cluster.domain_name)"
-				tls: enabled:    true
-				tls: certSource: "none"
+				tls: {
+					enabled:    false
+					certSource: "none"
+				}
 			}
+			externalURL: "https://\(expose.ingress.hosts.core)"
+
+			existingSecretAdminPassword:    "external-harbor-admin"
+			existingSecretAdminPasswordKey: "harbor_admin_password"
+
 			trivy: enabled: true
 		}
 	}
@@ -2256,8 +2284,376 @@ kustomize: "harbor": #KustomizeHelm & {
 		}
 	}
 
-	// external secrets
-	// https://github.com/goharbor/harbor-helm/blob/96428e03ea28c7eeb7e02454ac7f38295e3b98af/templates/core/core-secret.yaml
-	// https://github.com/goharbor/harbor-helm/blob/96428e03ea28c7eeb7e02454ac7f38295e3b98af/templates/registry/registry-secret.yaml
-	// https://github.com/goharbor/harbor-helm/blob/96428e03ea28c7eeb7e02454ac7f38295e3b98af/templates/jobservice/jobservice-secrets.yaml
+	#secrets: ["core", "jobservice", "registry", "registry-htpasswd", "registryctl", "trivy", "database"]
+	for s in #secrets {
+		jsp: "secret-harbor-\(s)": {
+			target: {
+				kind: "Secret"
+				name: "harbor-\(s)"
+			}
+			patches: [{
+				op:    "replace"
+				path:  "/metadata/name"
+				value: "ignore-\(s)"
+			}, {
+				op:   "remove"
+				path: "/data"
+			}]
+		}
+	}
+
+	jsp: "deployment-harbor-registry": {
+		target: {
+			version: "v1"
+			kind:    "Deployment"
+			name:    "harbor-registry"
+		}
+		patches: [{
+			op:    "replace"
+			path:  "/spec/template/metadata/annotations/checksum~1secret"
+			value: ""
+			value: ""
+		}, {
+			op:    "replace"
+			path:  "/spec/template/metadata/annotations/checksum~1secret-core"
+			value: ""
+		}, {
+			op:    "replace"
+			path:  "/spec/template/metadata/annotations/checksum~1secret-jobservice"
+			value: ""
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/containers/0/envFrom/0/secretRef/name"
+			value: "external-harbor-registry"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/containers/1/env/0/valueFrom/secretKeyRef/name"
+			value: "external-harbor-core"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/containers/1/env/1/valueFrom/secretKeyRef/name"
+			value: "external-harbor-jobservice"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/containers/1/envFrom/1/secretRef/name"
+			value: "external-harbor-registry"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/containers/1/envFrom/2/secretRef/name"
+			value: "external-harbor-registryctl"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/volumes/0/secret/secretName"
+			value: "external-harbor-registry-htpasswd"
+		}]
+	}
+
+	jsp: "deployment-harbor-core": {
+		target: {
+			kind: "Deployment"
+			name: "harbor-core"
+		}
+		patches: [{
+			op:    "replace"
+			path:  "/spec/template/metadata/annotations/checksum~1secret"
+			value: ""
+		}, {
+			op:    "replace"
+			path:  "/spec/template/metadata/annotations/checksum~1secret-jobservice"
+			value: ""
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/containers/0/env/0/valueFrom/secretKeyRef/name"
+			value: "external-harbor-core"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/containers/0/env/1/valueFrom/secretKeyRef/name"
+			value: "external-harbor-jobservice"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/containers/0/envFrom/1/secretRef/name"
+			value: "external-harbor-core"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/volumes/1/secret/secretName"
+			value: "external-harbor-core"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/volumes/2/secret/secretName"
+			value: "external-harbor-core"
+		}]
+	}
+
+	jsp: "deployment-harbor-jobservice": {
+		target: {
+			kind: "Deployment"
+			name: "harbor-jobservice"
+		}
+		patches: [{
+			op:    "replace"
+			path:  "/spec/template/metadata/annotations/checksum~1secret"
+			value: ""
+		}, {
+			op:    "replace"
+			path:  "/spec/template/metadata/annotations/checksum~1secret-core"
+			value: ""
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/containers/0/env/0/valueFrom/secretKeyRef/name"
+			value: "external-harbor-core"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/containers/0/envFrom/1/secretRef/name"
+			value: "external-harbor-jobservice"
+		}]
+	}
+
+	jsp: "statefulset-harbor-trivy": {
+		target: {
+			kind: "StatefulSet"
+			name: "harbor-trivy"
+		}
+		patches: [{
+			op:    "replace"
+			path:  "/spec/template/spec/containers/0/env/9/valueFrom/secretKeyRef/name"
+			value: "external-harbor-trivy"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/containers/0/env/17/valueFrom/secretKeyRef/name"
+			value: "external-harbor-trivy"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/containers/0/env/18/valueFrom/secretKeyRef/name"
+			value: "external-harbor-trivy"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/containers/0/env/19/valueFrom/secretKeyRef/name"
+			value: "external-harbor-trivy"
+		}]
+	}
+
+	jsp: "statefulset-harbor-database": {
+		target: {
+			kind: "StatefulSet"
+			name: "harbor-database"
+		}
+		patches: [{
+			op:    "replace"
+			path:  "/spec/template/spec/containers/0/envFrom/0/secretRef/name"
+			value: "external-harbor-database"
+		}]
+	}
+
+	resource: "externalsecret-harbor-admin": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: {
+			name:      "harbor-admin"
+			namespace: "harbor"
+		}
+		spec: {
+			target: {
+				name:           "external-harbor-admin"
+				creationPolicy: "Owner"
+			}
+
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: "secrets-manager"
+			}
+
+			refreshInterval: "1h"
+
+			(#external_secrets_data & {input: {
+				secret: "\(cluster.cluster_name)-cluster"
+				keys: ["harbor_admin_password", "harbor_postgres_password"]
+			}}).output
+		}
+	}
+
+	resource: "externalsecret-harbor-core": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: {
+			name:      "harbor-core"
+			namespace: "harbor"
+		}
+		spec: {
+			target: {
+				name:           "external-harbor-core"
+				creationPolicy: "Owner"
+			}
+
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: "secrets-manager"
+			}
+
+			refreshInterval: "1h"
+
+			(#external_secrets_data & {input: {
+				secret: "\(cluster.cluster_name)-cluster"
+				keys: ["CSRF_KEY", "POSTGRESQL_PASSWORD", "REGISTRY_CREDENTIAL_PASSWORD", "secret", "seretKey", "tls.crt", "tls.key"]
+			}})
+		}
+	}
+
+	resource: "externalsecret-harbor-jobservice": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: {
+			name:      "harbor-jobservice"
+			namespace: "harbor"
+		}
+		spec: {
+			target: {
+				name:           "external-harbor-jobservice"
+				creationPolicy: "Owner"
+			}
+
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: "secrets-manager"
+			}
+
+			refreshInterval: "1h"
+
+			(#external_secrets_data & {input: {
+				secret: "\(cluster.cluster_name)-cluster"
+				keys: ["JOBSERVICE_SECRET", "REGISTRY_CREDENTIAL_PASSWORD"]
+			}})
+		}
+	}
+
+	resource: "externalsecret-harbor-registry": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: {
+			name:      "harbor-registry"
+			namespace: "harbor"
+		}
+		spec: {
+			target: {
+				name:           "external-harbor-registry"
+				creationPolicy: "Owner"
+			}
+
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: "secrets-manager"
+			}
+
+			refreshInterval: "1h"
+
+			(#external_secrets_data & {input: {
+				secret: "\(cluster.cluster_name)-cluster"
+				keys: ["REGISTRY_HTTP_SECRET", "REGISTRY_REDIS_PASSWORD"]
+			}})
+		}
+	}
+
+	resource: "externalsecret-harbor-registry-htpasswd": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: {
+			name:      "harbor-registry-htpasswd"
+			namespace: "harbor"
+		}
+		spec: {
+			target: {
+				name:           "external-harbor-registry-htpasswd"
+				creationPolicy: "Owner"
+			}
+
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: "secrets-manager"
+			}
+
+			refreshInterval: "1h"
+
+			(#external_secrets_data & {input: {
+				secret: "\(cluster.cluster_name)-cluster"
+				keys: ["REGISTRY_HTPASSWD"]
+			}})
+		}
+	}
+
+	resource: "externalsecret-harbor-registryctl": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: {
+			name:      "harbor-registryctl"
+			namespace: "harbor"
+		}
+		spec: {
+			target: {
+				name:           "external-harbor-registryctl"
+				creationPolicy: "Owner"
+			}
+
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: "secrets-manager"
+			}
+
+			refreshInterval: "1h"
+			data: []
+		}
+	}
+
+	resource: "externalsecret-harbor-trivy": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: {
+			name:      "harbor-trivy"
+			namespace: "harbor"
+		}
+		spec: {
+			target: {
+				name:           "external-harbor-trivy"
+				creationPolicy: "Owner"
+			}
+
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: "secrets-manager"
+			}
+
+			refreshInterval: "1h"
+
+			(#external_secrets_data & {input: {
+				secret: "\(cluster.cluster_name)-cluster"
+				keys: ["gitHubToken", "redisURL"]
+			}})
+		}
+	}
+
+	resource: "externalsecret-harbor-database": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: {
+			name:      "harbor-database"
+			namespace: "harbor"
+		}
+		spec: {
+			target: {
+				name:           "external-harbor-database"
+				creationPolicy: "Owner"
+			}
+
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: "secrets-manager"
+			}
+
+			refreshInterval: "1h"
+
+			(#external_secrets_data & {input: {
+				secret: "\(cluster.cluster_name)-cluster"
+				keys: ["POSTGRES_PASSWORD"]
+			}})
+		}
+	}
+
 }
