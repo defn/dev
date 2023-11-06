@@ -1,0 +1,19 @@
+#ManagedBy: cue
+
+apiVersion: acid.zalan.do/v1
+kind: postgresql
+metadata:
+  name: coder-db
+spec:
+  teamId: coder
+  volume:
+    size: 10Gi
+  numberOfInstances: 1
+  users:
+    coder:
+      - superuser
+      - createdb
+  databases:
+    coder: coder
+  postgresql:
+    version: "15"
