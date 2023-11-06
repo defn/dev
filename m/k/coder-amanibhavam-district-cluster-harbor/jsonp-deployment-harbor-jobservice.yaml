@@ -1,7 +1,7 @@
 #ManagedBy: cue
 
 - op: replace
-  path: /metadata/labels/name
+  path: /spec/template/metadata/labels/name
   value: harbor-jobservice
 - op: replace
   path: /spec/template/metadata/annotations/checksum~1secret
