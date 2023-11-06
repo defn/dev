@@ -1,6 +1,9 @@
 #ManagedBy: cue
 
 - op: replace
+  path: /metadata/labels/name
+  value: harbor-trivy
+- op: replace
   path: /spec/template/spec/containers/0/env/9/valueFrom/secretKeyRef/name
   value: external-harbor-trivy
 - op: replace

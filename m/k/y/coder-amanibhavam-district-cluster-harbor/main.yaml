@@ -511,6 +511,7 @@ metadata:
     chart: harbor
     component: core
     heritage: Helm
+    name: harbor-core
     release: harbor
   name: harbor-core
   namespace: harbor
@@ -630,6 +631,7 @@ metadata:
     chart: harbor
     component: jobservice
     heritage: Helm
+    name: harbor-jobservice
     release: harbor
   name: harbor-jobservice
   namespace: harbor
@@ -777,6 +779,7 @@ metadata:
     chart: harbor
     component: registry
     heritage: Helm
+    name: harbor-registry
     release: harbor
   name: harbor-registry
   namespace: harbor
@@ -917,6 +920,7 @@ metadata:
     chart: harbor
     component: database
     heritage: Helm
+    name: harbor-database
     release: harbor
   name: harbor-database
   namespace: harbor
@@ -1097,6 +1101,7 @@ metadata:
     chart: harbor
     component: trivy
     heritage: Helm
+    name: harbor-trivy
     release: harbor
   name: harbor-trivy
   namespace: harbor

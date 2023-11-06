@@ -1,6 +1,9 @@
 #ManagedBy: cue
 
 - op: replace
+  path: /metadata/labels/name
+  value: harbor-core
+- op: replace
   path: /spec/template/metadata/annotations/checksum~1secret
   value: ""
 - op: replace
