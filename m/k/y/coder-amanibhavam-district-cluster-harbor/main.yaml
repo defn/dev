@@ -1241,16 +1241,12 @@ spec:
   data:
   - remoteRef:
       key: coder-amanibhavam-district-cluster
-      property: coder-amanibhavam-district-cluster
-    secretKey: coder-amanibhavam-district-cluster
+      property: harbor_admin_password
+    secretKey: harbor_admin_password
   - remoteRef:
       key: coder-amanibhavam-district-cluster
-      property:
-      - harbor_admin_password
-      - harbor_postgres_password
-    secretKey:
-    - harbor_admin_password
-    - harbor_postgres_password
+      property: harbor_postgres_password
+    secretKey: harbor_postgres_password
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
@@ -1279,26 +1275,32 @@ spec:
     data:
     - remoteRef:
         key: coder-amanibhavam-district-cluster
-        property: coder-amanibhavam-district-cluster
-      secretKey: coder-amanibhavam-district-cluster
+        property: CSRF_KEY
+      secretKey: CSRF_KEY
     - remoteRef:
         key: coder-amanibhavam-district-cluster
-        property:
-        - CSRF_KEY
-        - POSTGRESQL_PASSWORD
-        - REGISTRY_CREDENTIAL_PASSWORD
-        - secret
-        - seretKey
-        - tls.crt
-        - tls.key
-      secretKey:
-      - CSRF_KEY
-      - POSTGRESQL_PASSWORD
-      - REGISTRY_CREDENTIAL_PASSWORD
-      - secret
-      - seretKey
-      - tls.crt
-      - tls.key
+        property: POSTGRESQL_PASSWORD
+      secretKey: POSTGRESQL_PASSWORD
+    - remoteRef:
+        key: coder-amanibhavam-district-cluster
+        property: REGISTRY_CREDENTIAL_PASSWORD
+      secretKey: REGISTRY_CREDENTIAL_PASSWORD
+    - remoteRef:
+        key: coder-amanibhavam-district-cluster
+        property: secret
+      secretKey: secret
+    - remoteRef:
+        key: coder-amanibhavam-district-cluster
+        property: seretKey
+      secretKey: seretKey
+    - remoteRef:
+        key: coder-amanibhavam-district-cluster
+        property: tls.crt
+      secretKey: tls.crt
+    - remoteRef:
+        key: coder-amanibhavam-district-cluster
+        property: tls.key
+      secretKey: tls.key
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
@@ -1321,14 +1323,8 @@ spec:
     data:
     - remoteRef:
         key: coder-amanibhavam-district-cluster
-        property: coder-amanibhavam-district-cluster
-      secretKey: coder-amanibhavam-district-cluster
-    - remoteRef:
-        key: coder-amanibhavam-district-cluster
-        property:
-        - POSTGRES_PASSWORD
-      secretKey:
-      - POSTGRES_PASSWORD
+        property: POSTGRES_PASSWORD
+      secretKey: POSTGRES_PASSWORD
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
@@ -1352,16 +1348,12 @@ spec:
     data:
     - remoteRef:
         key: coder-amanibhavam-district-cluster
-        property: coder-amanibhavam-district-cluster
-      secretKey: coder-amanibhavam-district-cluster
+        property: JOBSERVICE_SECRET
+      secretKey: JOBSERVICE_SECRET
     - remoteRef:
         key: coder-amanibhavam-district-cluster
-        property:
-        - JOBSERVICE_SECRET
-        - REGISTRY_CREDENTIAL_PASSWORD
-      secretKey:
-      - JOBSERVICE_SECRET
-      - REGISTRY_CREDENTIAL_PASSWORD
+        property: REGISTRY_CREDENTIAL_PASSWORD
+      secretKey: REGISTRY_CREDENTIAL_PASSWORD
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
@@ -1385,16 +1377,12 @@ spec:
     data:
     - remoteRef:
         key: coder-amanibhavam-district-cluster
-        property: coder-amanibhavam-district-cluster
-      secretKey: coder-amanibhavam-district-cluster
+        property: REGISTRY_HTTP_SECRET
+      secretKey: REGISTRY_HTTP_SECRET
     - remoteRef:
         key: coder-amanibhavam-district-cluster
-        property:
-        - REGISTRY_HTTP_SECRET
-        - REGISTRY_REDIS_PASSWORD
-      secretKey:
-      - REGISTRY_HTTP_SECRET
-      - REGISTRY_REDIS_PASSWORD
+        property: REGISTRY_REDIS_PASSWORD
+      secretKey: REGISTRY_REDIS_PASSWORD
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
@@ -1417,14 +1405,8 @@ spec:
     data:
     - remoteRef:
         key: coder-amanibhavam-district-cluster
-        property: coder-amanibhavam-district-cluster
-      secretKey: coder-amanibhavam-district-cluster
-    - remoteRef:
-        key: coder-amanibhavam-district-cluster
-        property:
-        - REGISTRY_HTPASSWD
-      secretKey:
-      - REGISTRY_HTPASSWD
+        property: REGISTRY_HTPASSWD
+      secretKey: REGISTRY_HTPASSWD
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
@@ -1463,16 +1445,12 @@ spec:
     data:
     - remoteRef:
         key: coder-amanibhavam-district-cluster
-        property: coder-amanibhavam-district-cluster
-      secretKey: coder-amanibhavam-district-cluster
+        property: gitHubToken
+      secretKey: gitHubToken
     - remoteRef:
         key: coder-amanibhavam-district-cluster
-        property:
-        - gitHubToken
-        - redisURL
-      secretKey:
-      - gitHubToken
-      - redisURL
+        property: redisURL
+      secretKey: redisURL
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
