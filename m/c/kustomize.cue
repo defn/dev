@@ -2310,8 +2310,11 @@ kustomize: "harbor": #KustomizeHelm & {
 		}
 		patches: [{
 			op:    "replace"
+			path:  "/metadata/labels/name"
+			value: "harbor-registry"
+		}, {
+			op:    "replace"
 			path:  "/spec/template/metadata/annotations/checksum~1secret"
-			value: ""
 			value: ""
 		}, {
 			op:    "replace"
@@ -2355,6 +2358,10 @@ kustomize: "harbor": #KustomizeHelm & {
 		}
 		patches: [{
 			op:    "replace"
+			path:  "/metadata/labels/name"
+			value: "harbor-core"
+		}, {
+			op:    "replace"
 			path:  "/spec/template/metadata/annotations/checksum~1secret"
 			value: ""
 		}, {
@@ -2391,6 +2398,10 @@ kustomize: "harbor": #KustomizeHelm & {
 		}
 		patches: [{
 			op:    "replace"
+			path:  "/metadata/labels/name"
+			value: "harbor-jobservice"
+		}, {
+			op:    "replace"
 			path:  "/spec/template/metadata/annotations/checksum~1secret"
 			value: ""
 		}, {
@@ -2415,6 +2426,10 @@ kustomize: "harbor": #KustomizeHelm & {
 		}
 		patches: [{
 			op:    "replace"
+			path:  "/metadata/labels/name"
+			value: "harbor-trivy"
+		}, {
+			op:    "replace"
 			path:  "/spec/template/spec/containers/0/env/9/valueFrom/secretKeyRef/name"
 			value: "external-harbor-trivy"
 		}, {
@@ -2438,6 +2453,10 @@ kustomize: "harbor": #KustomizeHelm & {
 			name: "harbor-database"
 		}
 		patches: [{
+			op:    "replace"
+			path:  "/metadata/labels/name"
+			value: "harbor-database"
+		}, {
 			op:    "replace"
 			path:  "/spec/template/spec/containers/0/envFrom/0/secretRef/name"
 			value: "external-harbor-database"
