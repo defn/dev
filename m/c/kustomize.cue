@@ -2459,7 +2459,7 @@ kustomize: "harbor": #KustomizeHelm & {
 
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: "secrets-manager"
+				name: cluster.cluster_name
 			}
 
 			refreshInterval: "1h"
@@ -2486,7 +2486,7 @@ kustomize: "harbor": #KustomizeHelm & {
 
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: "secrets-manager"
+				name: cluster.cluster_name
 			}
 
 			refreshInterval: "1h"
@@ -2513,7 +2513,7 @@ kustomize: "harbor": #KustomizeHelm & {
 
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: "secrets-manager"
+				name: cluster.cluster_name
 			}
 
 			refreshInterval: "1h"
@@ -2540,7 +2540,7 @@ kustomize: "harbor": #KustomizeHelm & {
 
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: "secrets-manager"
+				name: cluster.cluster_name
 			}
 
 			refreshInterval: "1h"
@@ -2567,7 +2567,7 @@ kustomize: "harbor": #KustomizeHelm & {
 
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: "secrets-manager"
+				name: cluster.cluster_name
 			}
 
 			refreshInterval: "1h"
@@ -2594,7 +2594,7 @@ kustomize: "harbor": #KustomizeHelm & {
 
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: "secrets-manager"
+				name: cluster.cluster_name
 			}
 
 			refreshInterval: "1h"
@@ -2620,7 +2620,7 @@ kustomize: "harbor": #KustomizeHelm & {
 
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: "secrets-manager"
+				name: cluster.cluster_name
 			}
 
 			refreshInterval: "1h"
@@ -2647,7 +2647,7 @@ kustomize: "harbor": #KustomizeHelm & {
 
 			secretStoreRef: {
 				kind: "ClusterSecretStore"
-				name: "secrets-manager"
+				name: cluster.cluster_name
 			}
 
 			refreshInterval: "1h"
