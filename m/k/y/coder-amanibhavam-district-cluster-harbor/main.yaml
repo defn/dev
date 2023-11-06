@@ -1250,7 +1250,7 @@ spec:
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
-    name: secrets-manager
+    name: coder-amanibhavam-district
   target:
     creationPolicy: Owner
     name: external-harbor-admin
@@ -1295,7 +1295,7 @@ spec:
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
-    name: secrets-manager
+    name: coder-amanibhavam-district
   target:
     creationPolicy: Owner
     name: external-harbor-core
@@ -1314,7 +1314,7 @@ spec:
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
-    name: secrets-manager
+    name: coder-amanibhavam-district
   target:
     creationPolicy: Owner
     name: external-harbor-database
@@ -1337,7 +1337,7 @@ spec:
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
-    name: secrets-manager
+    name: coder-amanibhavam-district
   target:
     creationPolicy: Owner
     name: external-harbor-jobservice
@@ -1360,7 +1360,7 @@ spec:
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
-    name: secrets-manager
+    name: coder-amanibhavam-district
   target:
     creationPolicy: Owner
     name: external-harbor-registry
@@ -1379,7 +1379,7 @@ spec:
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
-    name: secrets-manager
+    name: coder-amanibhavam-district
   target:
     creationPolicy: Owner
     name: external-harbor-registry-htpasswd
@@ -1394,7 +1394,7 @@ spec:
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
-    name: secrets-manager
+    name: coder-amanibhavam-district
   target:
     creationPolicy: Owner
     name: external-harbor-registryctl
@@ -1417,7 +1417,7 @@ spec:
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore
-    name: secrets-manager
+    name: coder-amanibhavam-district
   target:
     creationPolicy: Owner
     name: external-harbor-trivy
