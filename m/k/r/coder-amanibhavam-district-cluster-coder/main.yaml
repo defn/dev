@@ -17,6 +17,33 @@ metadata:
   name: coder
 ---
 spec:
+  generateExistingOnPolicyUpdate: true
+  rules:
+    - generate:
+        apiVersion: v1
+        kind: Secret
+        name: coder.coder-db.connection-url
+        namespace: coder
+        stringData:
+          coder_pg_connection_url: 'postgresql://{{request.object.data.username | base64_decode(@)}}:{{request.object.data.password | base64_decode(@)}}@coder-db:5432/coder?sslmode=require '
+        synchronize: true
+      match:
+        any:
+          - resources:
+              kinds:
+                - Secret
+              names:
+                - coder.coder-db.credentials.postgresql.acid.zalan.do
+              namespaces:
+                - coder
+      name: create-secret-coder-connection-url
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: coder-connection-url
+  namespace: coder
+---
+spec:
   template:
     spec:
       containers:
@@ -82,7 +109,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: coder_pg_connection_url
-                  name: coder
+                  name: coder.coder-db.connection-url
           imagePullPolicy: IfNotPresent
           lifecycle: {}
           livenessProbe:
