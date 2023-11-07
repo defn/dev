@@ -445,9 +445,9 @@ spec:
     name: coder-amanibhavam-district-cluster
   project: default
   source:
-    path: m/k/r/coder-amanibhavam-district-cluster-tetragon
-    repoURL: https://github.com/defn/dev
-    targetRevision: main
+    repoURL: harbor.district.amanibhavam.defn.run
+    targetRevision: "0.0.1"
+    chart: library/helm/coder-amanibhavam-district-cluster-tetragon
   syncPolicy:
     automated:
       prune: true
