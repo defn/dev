@@ -27,6 +27,6 @@ helmCharts:
       serviceWeb:
         https:
           enabled: false
-      DNS1: cluster.infra_cidr_16).128.10
-      DNS2: cluster.infra_cidr_16).128.10
+      DNS1: 10.200.128.10
+      DNS2: 10.200.128.10
     includeCRDs: true

@@ -1737,8 +1737,8 @@ kustomize: "pihole": #KustomizeHelm & {
 			serviceDns: mixedService:       true
 			serviceDhcp: enabled:           false
 			serviceWeb: https: enabled: false
-			DNS1: "cluster.infra_cidr_16).128.10"
-			DNS2: "cluster.infra_cidr_16).128.10"
+			DNS1: "\(cluster.infra_cidr_16).128.10"
+			DNS2: "\(cluster.infra_cidr_16).128.10"
 		}
 	}
 
