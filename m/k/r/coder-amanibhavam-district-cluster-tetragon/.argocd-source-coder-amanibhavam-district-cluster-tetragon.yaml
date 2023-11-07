@@ -1,8 +1,0 @@
-spec:
-  source:
-    targetRevision: "0.0.9"
-
-source:
-  targetRevision: "0.0.9"
-
-targetRevision: "0.0.9"

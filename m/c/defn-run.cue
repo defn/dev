@@ -6,38 +6,46 @@ import (
 
 teacher: {
 	bootstrap: {
+
 		// essentials
-		"cilium": [100, ""]
-		"tetragon": [100, ""]
-		"argo-cd": [100, ""]
-		"kyverno": [100, "", "ServerSideApply=true"]
-		"cert-manager": [100, ""]
-		"trust-manager": [100, ""]
+		"cilium": {}
+		"tetragon": {
+			app_repo:    "harbor.district.amanibhavam.defn.run"
+			app_type:    "chart"
+			app_def:     "library/helm/coder-amanibhavam-district-cluster-tetragon"
+			app_version: string | *"0.0.1"
+		}
+		"argo-cd": {}
+		"kyverno": {
+			app_sync_options: ["ServerSideApply=true"]
+		}
+		"cert-manager": {}
+		"trust-manager": {}
 
 		// external secrets
-		"pod-identity": [100, ""]
-		"external-secrets": [100, ""]
-		"secrets": [100, ""]
+		"pod-identity": {}
+		"external-secrets": {}
+		"secrets": {}
 
 		// tailscale
-		//"tailscale": [100, ""]
+		//"tailscale": {}
 
 		// scaling
-		"karpenter": [100, ""]
+		"karpenter": {}
 
 		// external dns, certs issuer
-		"external-dns": [100, ""]
-		"issuer": [100, ""]
+		"external-dns": {}
+		"issuer": {}
 
 		// traefik, functions
-		"knative": [100, ""]
-		"kourier": [100, ""]
-		"traefik": [100, ""]
+		"knative": {}
+		"kourier": {}
+		"traefik": {}
 
 		// builds
-		"buildkite": [100, ""]
-		"coder": [100, ""]
-		"pihole": [100, ""]
+		"buildkite": {}
+		"coder": {}
+		"pihole": {}
 	}
 }
 
