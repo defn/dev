@@ -446,7 +446,7 @@ spec:
   project: default
   source:
     repoURL: harbor.district.amanibhavam.defn.run
-    targetRevision: "*"
+    targetRevision: "0.0.5"
     chart: library/helm/coder-amanibhavam-district-cluster-tetragon
   syncPolicy:
     automated:
