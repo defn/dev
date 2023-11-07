@@ -27,6 +27,7 @@ kustomize: [NAME=string]: _name: NAME
 
 	infra_tailscale_domain: string
 
+	infra_cidr_16:     string
 	infra_pod_cidr:     string
 	infra_service_cidr: string
 	infra_cilium_name:  string
