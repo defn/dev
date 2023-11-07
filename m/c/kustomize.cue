@@ -17,7 +17,7 @@ env: (#Transform & {
 
 	inputs: "\(class.cluster_name)-manual": {
 		bootstrap: {
-			"cilium-bootstrap": [1, ""]
+			"cilium-bootstrap": {}
 		}
 	}
 

@@ -15,15 +15,15 @@ helmCharts:
             namespace: argocd
             name: coder-amanibhavam-district-manual-cilium-bootstrap
             annotations:
-              argocd.argoproj.io/sync-wave: "1"
+              argocd.argoproj.io/sync-wave: "100"
           spec:
             project: default
             destination:
               name: coder-amanibhavam-district-manual
             source:
               repoURL: https://github.com/defn/dev
-              targetRevision: main
               path: m/k/r/coder-amanibhavam-district-manual-cilium-bootstrap
+              targetRevision: main
             syncPolicy:
               automated:
                 prune: true

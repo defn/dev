@@ -33,7 +33,12 @@ import (
 	}
 }
 
-#BootstrapConfig: [int, ...string]
+#BootstrapConfig: {
+	app_wave:         int | *100
+	app_namespace:    string | *""
+	app_sync_options: [...] | *[]
+	...
+}
 
 #TransformEnvToBootstrapMachine: {
 	from: {
@@ -53,20 +58,23 @@ import (
 	apps: {
 		for _app_name, _app in _in.bootstrap {
 			(_app_name): #BootstrapApp & {
-				machine_name:     _in.machine_name
-				app_name:         _app_name
-				app_wave:         _app[0]
-				app_namespace:    _app[1]
-				app_sync_options: _app[2:]
-			}
+				machine_name: _in.machine_name
+				app_name:     _app_name
+			} & _app
 		}
 	}
 }
 
 #BootstrapApp: {
-	machine_name:     string
-	app_name:         string
-	app_namespace:    string
+	machine_name:  string
+	app_name:      string
+	app_namespace: string
+
+	app_version: string | *"main"
+	app_repo:    string | *"https://github.com/defn/dev"
+	app_type:    string | *"path"
+	app_def:     string | *"m/k/r/\(machine_name)-\(app_name)"
+
 	app_wave:         int
 	app_sync_options: [...string] | *[]
 
@@ -91,9 +99,9 @@ import (
 			}
 
 			source: {
-				repoURL:        "https://github.com/defn/dev"
-				targetRevision: "main"
-				path:           "m/k/r/\(machine_name)-\(app_name)"
+				repoURL:        app_repo
+				targetRevision: app_version
+				(app_type):     app_def
 			}
 
 			syncPolicy: {
@@ -113,7 +121,7 @@ import (
 
 	destination: string | *name
 
-	bootstrap: [string]: [int, ...string]
+	bootstrap: [string]: #BootstrapConfig
 	env: #EnvApp
 	env: {
 		// ex: k/k3d-dfd
@@ -154,7 +162,7 @@ import (
 #TransformK3S: {
 	from: {
 		#Input
-		bootstrap: [string]: [int, ...string]
+		bootstrap: [string]: #BootstrapConfig
 	}
 
 	to: #K3S
