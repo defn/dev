@@ -3,14 +3,14 @@ version ?= $(shell cat $(chart).version)
 
 build:
 	@rm -rf $(chart)/chart
-	@mkdir $(chart)/chart
+	@mkdir -p $(chart)/chart/templates
 	@echo "apiVersion: v2" > $(chart)/chart/Chart.yaml.tmp
 	@echo "type: application" >> $(chart)/chart/Chart.yaml.tmp
 	@echo "name: $(chart)" >> $(chart)/chart/Chart.yaml.tmp
 	@echo "appVersion: \"$(version)\"" >> $(chart)/chart/Chart.yaml.tmp
 	@echo "version: \"$(version)\"" >> $(chart)/chart/Chart.yaml.tmp
 	@mv -f $(chart)/chart/Chart.yaml.tmp $(chart)/chart/Chart.yaml
-	@cp -f $(chart)/main.yaml $(chart)/chart/
+	@cp -f $(chart)/main.yaml $(chart)/chart/templates/
 	helm package $(chart)/chart
 
 all-init:
