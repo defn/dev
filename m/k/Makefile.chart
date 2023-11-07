@@ -1,0 +1,35 @@
+chart ?= TODO
+version ?= $(shell cat $(chart).version)
+
+build:
+	@rm -rf $(chart)/chart
+	@mkdir $(chart)/chart
+	@echo "apiVersion: v2" > $(chart)/chart/Chart.yaml.tmp
+	@echo "type: application" >> $(chart)/chart/Chart.yaml.tmp
+	@echo "name: $(chart)" >> $(chart)/chart/Chart.yaml.tmp
+	@echo "appVersion: \"$(version)\"" >> $(chart)/chart/Chart.yaml.tmp
+	@echo "version: \"$(version)\"" >> $(chart)/chart/Chart.yaml.tmp
+	@mv -f $(chart)/chart/Chart.yaml.tmp $(chart)/chart/Chart.yaml
+	@cp -f $(chart)/main.yaml $(chart)/chart/
+	helm package $(chart)/chart
+
+all-init:
+	ls -d */ | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) -f ..//Makefile.chart init chart=$$1'
+
+all-build:
+	ls -d */ | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) -f ..//Makefile.chart build chart=$$1'
+
+all-push:
+	ls -d */ | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) -f ..//Makefile.chart push chart=$$1'
+
+init:
+	echo -n 0.0.1 > $(chart).version
+
+login:
+	helm registry login -u 'robot$$meh' harbor.district.amanibhavam.defn.run
+
+push:
+	helm push $(chart)-$(version).tgz oci://harbor.district.amanibhavam.defn.run/library/helm
+
+template:
+	helm template $(chart) oci://harbor.district.amanibhavam.defn.run/library/helm/$(chart) --version $(version)
