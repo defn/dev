@@ -366,6 +366,27 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
+        pihole: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-pihole
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: https://github.com/defn/dev
+              targetRevision: main
+              path: m/k/r/coder-amanibhavam-district-cluster-pihole
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
         harbor: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
