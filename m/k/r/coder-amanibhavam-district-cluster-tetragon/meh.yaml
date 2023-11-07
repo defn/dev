@@ -1,0 +1,12 @@
+apiVersion: v1
+data:
+  bump: "1"
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/instance: tetragon
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: tetragon-operator
+    helm.sh/chart: tetragon-1.0.0
+  name: defn
+  namespace: kube-system
