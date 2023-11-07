@@ -10,7 +10,7 @@
     argocd.url = github:defn/dev/pkg-argocd-2.9.0-1?dir=m/pkg/argocd;
     kn.url = github:defn/dev/pkg-kn-1.12.0-1?dir=m/pkg/kn;
     vcluster.url = github:defn/dev/pkg-vcluster-0.16.4-1?dir=m/pkg/vcluster;
-    kubevirt.url = github:defn/dev/pkg-kubevirt-1.0.0-3?dir=m/pkg/kubevirt;
+    kubevirt.url = github:defn/dev/pkg-kubevirt-1.1.0-1?dir=m/pkg/kubevirt;
     linkerd.url = github:defn/dev/pkg-linkerd-2.14.2-1?dir=m/pkg/linkerd;
     cilium.url = github:defn/dev/pkg-cilium-0.15.13-1?dir=m/pkg/cilium;
     hubble.url = github:defn/dev/pkg-hubble-0.12.2-1?dir=m/pkg/hubble;
