@@ -765,17 +765,17 @@
       },
       "locked": {
         "dir": "m/pkg/kubevirt",
-        "lastModified": 1692066616,
-        "narHash": "sha256-QDwyJ8p01onQ5N7qtFhKz54wrD2gEh7V8w1bDcwRF+k=",
+        "lastModified": 1699385635,
+        "narHash": "sha256-Q3rUsz45QX0B9r9Oq131o+8WVQeTfjpOi+VvDGFeDgA=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "f6597788134a01018bc578239332c2360d782a69",
+        "rev": "39ef9e831500f7443f1e52935210d0faccb312d9",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubevirt",
         "owner": "defn",
-        "ref": "pkg-kubevirt-1.0.0-3",
+        "ref": "pkg-kubevirt-1.1.0-1",
         "repo": "dev",
         "type": "github"
       }
