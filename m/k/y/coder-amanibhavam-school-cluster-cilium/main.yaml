@@ -549,9 +549,9 @@ data:
   bpf-root: /sys/fs/bpf
   cgroup-root: /run/cilium/cgroupv2
   cilium-endpoint-gc-interval: 5m0s
-  cluster-id: "2"
+  cluster-id: "200"
   cluster-name: coder-amanibhavam-school
-  cluster-pool-ipv4-cidr: 10.202.0.0/19
+  cluster-pool-ipv4-cidr: 10.200.0.0/17
   cluster-pool-ipv4-mask-size: "24"
   cni-exclusive: "true"
   cni-log-file: /var/run/cilium/cilium-cni.log

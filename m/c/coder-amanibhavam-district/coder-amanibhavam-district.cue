@@ -21,6 +21,7 @@ class: {
 	handle: "amanibhavam"
 	env:    "district"
 	infra_cilium_id:    250
-	infra_pod_cidr:     "10.250.0.0/17"
-	infra_service_cidr: "10.250.128.0/17"
+	infra_cidr_16: "10.\(infra_cilium_id)"
+	infra_pod_cidr:     "\(infra_cidr_16).0.0/17"
+	infra_service_cidr: "\(infra_cidr_16).128.0/17"
 }

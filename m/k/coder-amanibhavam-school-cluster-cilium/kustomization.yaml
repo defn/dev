@@ -34,10 +34,10 @@ helmCharts:
         enabled: false
       cluster:
         name: coder-amanibhavam-school
-        id: 2
+        id: 200
       ipam:
         operator:
-          clusterPoolIPv4PodCIDRList: 10.202.0.0/19
+          clusterPoolIPv4PodCIDRList: 10.200.0.0/17
       clustermesh:
         useAPIServer: true
         apiserver:
