@@ -37,6 +37,7 @@ teacher: {
 		// builds
 		"buildkite": [100, ""]
 		"coder": [100, ""]
+		"pihole": [100, ""]
 	}
 }
 

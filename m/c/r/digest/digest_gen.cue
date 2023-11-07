@@ -8,6 +8,8 @@ cache: "busybox:1.35": "busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2
 
 cache: "containous/whoami:latest": "containous/whoami@sha256:7d6a3c8f91470a23ef380320609ee6e69ac68d20bc804f3a1c6065fb56cfa34e"
 
+cache: "curlimages/curl": "curlimages/curl@sha256:4a3396ae573c44932d06ba33f8696db4429c419da87cbdc82965ee96a37dd0af"
+
 cache: "docker.io/amazon/amazon-eks-pod-identity-webhook:v0.4.0": "docker.io/amazon/amazon-eks-pod-identity-webhook@sha256:69ba0ed032cfa4d72621037c2836d464f401fde1fa993adf34e79335ec4c56ac"
 
 cache: "docker.io/bitnami/external-dns:0.13.6-debian-11-r30": "docker.io/bitnami/external-dns@sha256:498943fa9410c5510fde1a1c189e131df8b412605d6c3d47a18fdeaed119fa59"
@@ -65,6 +67,8 @@ cache: "goharbor/redis-photon:v2.9.1": "goharbor/redis-photon@sha256:ccbd16fb581
 cache: "goharbor/registry-photon:v2.9.1": "goharbor/registry-photon@sha256:8cf8425cec71afd35192460867b63801578ba68f7d72735013a29c7c0e9e7910"
 
 cache: "goharbor/trivy-adapter-photon:v2.9.1": "goharbor/trivy-adapter-photon@sha256:48dbd3e6d45705574adb91115f202fbe88968e58b0a7191f8d9567a3722bfda3"
+
+cache: "pihole/pihole:2023.05.2": "pihole/pihole@sha256:8bc45afe1625487aef62859a5bf02f3d7b3429e480f4e29e4689635ab86ec312"
 
 cache: "public.ecr.aws/karpenter/controller:v0.31.1@sha256:be5da7cb9181c2969280e869c465927de278e17d56762bfa5eeb4b21e5c9762e": "public.ecr.aws/karpenter/controller@sha256:be5da7cb9181c2969280e869c465927de278e17d56762bfa5eeb4b21e5c9762e"
 
