@@ -44,7 +44,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-tetragon
-              targetRevision: 0.0.9
+              targetRevision: 0.0.5
             syncPolicy:
               automated:
                 prune: true
