@@ -1,5 +1,5 @@
 chart ?= TODO
-version ?= $(shell cat $(chart).version)
+version ?= 0.0.1
 
 build:
 	@rm -rf $(chart)/chart
@@ -23,7 +23,7 @@ all-push:
 	ls -d */ | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) -f ..//Makefile.chart push chart=$$1'
 
 init:
-	echo -n 0.0.1 > $(chart).version
+	echo -n $(version) > $(chart).version
 
 login:
 	helm registry login -u 'robot$$meh' harbor.district.amanibhavam.defn.run
