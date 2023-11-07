@@ -1783,7 +1783,7 @@ kustomize: "pihole": #KustomizeHelm & {
 		metadata: {
 			name: "pihole-dns"
 		}
-		spec: clusterIP: "\(cluster.infra_cidr_16).128.53.53"
+		spec: clusterIP: "\(cluster.infra_cidr_16).128.53"
 	}
 }
 

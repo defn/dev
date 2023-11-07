@@ -197,7 +197,7 @@ metadata:
 type: Opaque
 ---
 spec:
-  clusterIP: 10.200.128.53.53
+  clusterIP: 10.200.128.53
   ports:
     - name: dns
       port: 53
