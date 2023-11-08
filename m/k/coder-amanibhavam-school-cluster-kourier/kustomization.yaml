@@ -3,6 +3,6 @@
 patches:
   - path: patch-service-kourier-set-cluster-ip.yaml
 resources:
-  - https://github.com/knative-sandbox/net-kourier/releases/download/knative-v1.11.3/kourier.yaml
+  - https://github.com/knative-extensions/net-kourier/releases/download/knative-v1.12.1/kourier.yaml
 commonLabels: {}
 commonAnnotations: {}

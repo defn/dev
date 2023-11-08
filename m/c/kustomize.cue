@@ -278,7 +278,7 @@ kustomize: "linkerd-control-plane": #KustomizeHelm & {
 	helm: {
 		release: "linkerd-control-plane"
 		name:    "linkerd-control-plane"
-		version: "1.15.0"
+		version: "1.16.4"
 		repo:    "https://helm.linkerd.io/stable"
 		values: {
 			identity: externalCA: true
@@ -304,7 +304,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.28.1"
+		version: "6.28.2"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -362,12 +362,12 @@ kustomize: "external-dns": #KustomizeHelm & {
 	}
 }
 
-// https://github.com/knative-sandbox/net-kourier/releases
+// https://github.com/knative-extensions/net-kourier/releases
 kustomize: "kourier": #Kustomize & {
 	cluster: #Cluster
 
 	resource: "kourier": {
-		url: "https://github.com/knative-sandbox/net-kourier/releases/download/knative-v1.11.3/kourier.yaml"
+		url: "https://github.com/knative-extensions/net-kourier/releases/download/knative-v1.12.1/kourier.yaml"
 	}
 
 	psm: "service-kourier-set-cluster-ip": {
@@ -711,7 +711,7 @@ kustomize: "knative": #Kustomize & {
 	cluster: #Cluster
 
 	resource: "knative-serving": {
-		url: "https://github.com/knative/serving/releases/download/knative-v1.11.3/serving-core.yaml"
+		url: "https://github.com/knative/serving/releases/download/knative-v1.11.4/serving-core.yaml"
 	}
 
 	psm: "namespace-knative-serving": {
