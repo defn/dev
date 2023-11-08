@@ -1,6 +1,6 @@
 {
   "slug": "pkg-linkerd",
   "ghrepo": "linkerd/linkerd2",
-  "vendor": "2.14.2",
-  "revision": "1"
+  "vendor": "2.14.3",
+  "revision": "0"
 }
