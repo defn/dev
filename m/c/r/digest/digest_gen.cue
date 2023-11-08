@@ -12,23 +12,23 @@ cache: "curlimages/curl": "curlimages/curl@sha256:4a3396ae573c44932d06ba33f8696d
 
 cache: "docker.io/amazon/amazon-eks-pod-identity-webhook:v0.4.0": "docker.io/amazon/amazon-eks-pod-identity-webhook@sha256:69ba0ed032cfa4d72621037c2836d464f401fde1fa993adf34e79335ec4c56ac"
 
-cache: "docker.io/bitnami/external-dns:0.13.6-debian-11-r30": "docker.io/bitnami/external-dns@sha256:498943fa9410c5510fde1a1c189e131df8b412605d6c3d47a18fdeaed119fa59"
+cache: "docker.io/bitnami/external-dns:0.14.0-debian-11-r0": "docker.io/bitnami/external-dns@sha256:94e5bc5bc9544334f9f39f3f4342ec905d38e494722a603f6c96a8e72a34bfd0"
 
-cache: "docker.io/envoyproxy/envoy:v1.24-latest": "docker.io/envoyproxy/envoy@sha256:ad8d9e40a0fcc8e14633395516768826ce7d32b3bfd3973d7884820df11cb942"
+cache: "docker.io/envoyproxy/envoy:v1.25-latest": "docker.io/envoyproxy/envoy@sha256:a63469b5d105cd94be9b7d7524a46786fca5e124599aa488078375ddb65da030"
 
 cache: "docker.io/traefik:v2.10.5": "docker.io/traefik@sha256:948978f7ec62f137a79f8af7044a1785bd7868706ef2c8cba9c88db688d08661"
 
-cache: "gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:54c8c164ec635001d2f7d25a462b7210f36568fec3de678f35e6c9eedb2918b0": "gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:05b81f0e5fa149acca2888dce6c14a9d74e33adae566736bf21b57a1b0d9ae87"
+cache: "gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:9cd4d69a708a8cf8e597efe3f511494d71cf8eab1b2fd85545097069ad47d3f6": "gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:9cd4d69a708a8cf8e597efe3f511494d71cf8eab1b2fd85545097069ad47d3f6"
 
-cache: "gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:3116c382f238d6dca14e50b1077139502291b4d91a2a27b54ad86a0b99c6242a": "gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:e33e77a990863a91df175c0d3cfa70f6314ad4c45d22ebbd198486187b8f2ab4"
+cache: "gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:e33e77a990863a91df175c0d3cfa70f6314ad4c45d22ebbd198486187b8f2ab4": "gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:e33e77a990863a91df175c0d3cfa70f6314ad4c45d22ebbd198486187b8f2ab4"
 
-cache: "gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:25384f07333fcfba3a3ab0d184814677c333f37115dae49a688c9e9b9c9ccdb1": "gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:dfed80655f88ec9f167f5b19243db3002598286842ad3017c30b9f0bbb826241"
+cache: "gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:dfed80655f88ec9f167f5b19243db3002598286842ad3017c30b9f0bbb826241": "gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:dfed80655f88ec9f167f5b19243db3002598286842ad3017c30b9f0bbb826241"
 
-cache: "gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:e9cf2d643fd80ff095c5074223cd7797aa69733f28468b1a924cbf1730cd429b": "gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:d8af89149e38391121712705e31e961b7c868fc66aa3b4e04b72e7e13c43b9b1"
+cache: "gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:d8af89149e38391121712705e31e961b7c868fc66aa3b4e04b72e7e13c43b9b1": "gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:d8af89149e38391121712705e31e961b7c868fc66aa3b4e04b72e7e13c43b9b1"
 
-cache: "gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:1bfc20a721e40c7b1aa4e6d632e0ca9b2514f409ca9844fd81d7409e45cc4265": "gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:e4d5c008cc16e5fc696f88745fd798f2a533b769c43ee33541e5d7a2f7433240"
+cache: "gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:e4d5c008cc16e5fc696f88745fd798f2a533b769c43ee33541e5d7a2f7433240": "gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:e4d5c008cc16e5fc696f88745fd798f2a533b769c43ee33541e5d7a2f7433240"
 
-cache: "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:65d22d6aa04863281dbb1f987d12e280db74286eb033a5940549efc0e62e1cd0": "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:f34273747638f8de1a239c923958307b3f9cd7907556863373ebe15fdb2fd306"
+cache: "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:f34273747638f8de1a239c923958307b3f9cd7907556863373ebe15fdb2fd306": "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:f34273747638f8de1a239c923958307b3f9cd7907556863373ebe15fdb2fd306"
 
 cache: "ghcr.io/buildkite/agent-stack-k8s/controller:0.7.0@sha256:6d747da4f3898b092010fcdc382fc59dc3d90c5478d41e0a01eb9b6f53a9d91f": "ghcr.io/buildkite/agent-stack-k8s/controller@sha256:6d747da4f3898b092010fcdc382fc59dc3d90c5478d41e0a01eb9b6f53a9d91f"
 
