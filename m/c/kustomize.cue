@@ -304,7 +304,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.28.2"
+		version: "6.28.4"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -1813,7 +1813,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.38.0"
+		version:   "0.39.0"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [
@@ -1852,7 +1852,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "3.2.0"
+		version:     "3.2.2"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
@@ -2072,7 +2072,7 @@ kustomize: "headlamp": #KustomizeHelm & {
 		release:   "headlamp"
 		name:      "headlamp"
 		namespace: "headlamp"
-		version:   "0.16.0"
+		version:   "0.17.1"
 		repo:      "https://headlamp-k8s.github.io/headlamp"
 		values: {
 		}

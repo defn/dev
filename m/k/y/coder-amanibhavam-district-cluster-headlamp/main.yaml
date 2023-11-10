@@ -10,8 +10,8 @@ metadata:
     app.kubernetes.io/instance: headlamp
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: headlamp
-    app.kubernetes.io/version: 0.20.1
-    helm.sh/chart: headlamp-0.16.0
+    app.kubernetes.io/version: 0.21.0
+    helm.sh/chart: headlamp-0.17.1
   name: headlamp
   namespace: headlamp
 ---
@@ -28,8 +28,8 @@ metadata:
     app.kubernetes.io/instance: headlamp
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: headlamp
-    app.kubernetes.io/version: 0.20.1
-    helm.sh/chart: headlamp-0.16.0
+    app.kubernetes.io/version: 0.21.0
+    helm.sh/chart: headlamp-0.17.1
   name: headlamp-admin
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -68,8 +68,8 @@ metadata:
     app.kubernetes.io/instance: headlamp
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: headlamp
-    app.kubernetes.io/version: 0.20.1
-    helm.sh/chart: headlamp-0.16.0
+    app.kubernetes.io/version: 0.21.0
+    helm.sh/chart: headlamp-0.17.1
   name: headlamp
   namespace: headlamp
 spec:
@@ -90,8 +90,8 @@ metadata:
     app.kubernetes.io/instance: headlamp
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: headlamp
-    app.kubernetes.io/version: 0.20.1
-    helm.sh/chart: headlamp-0.16.0
+    app.kubernetes.io/version: 0.21.0
+    helm.sh/chart: headlamp-0.17.1
   name: headlamp
   namespace: headlamp
 spec:
@@ -111,7 +111,7 @@ spec:
         - -in-cluster
         - -plugins-dir=/headlamp/plugins
         env: null
-        image: ghcr.io/headlamp-k8s/headlamp:v0.20.1
+        image: ghcr.io/headlamp-k8s/headlamp:v0.21.0
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:

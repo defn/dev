@@ -12,7 +12,7 @@ cache: "curlimages/curl": "curlimages/curl@sha256:4a3396ae573c44932d06ba33f8696d
 
 cache: "docker.io/amazon/amazon-eks-pod-identity-webhook:v0.4.0": "docker.io/amazon/amazon-eks-pod-identity-webhook@sha256:69ba0ed032cfa4d72621037c2836d464f401fde1fa993adf34e79335ec4c56ac"
 
-cache: "docker.io/bitnami/external-dns:0.14.0-debian-11-r0": "docker.io/bitnami/external-dns@sha256:94e5bc5bc9544334f9f39f3f4342ec905d38e494722a603f6c96a8e72a34bfd0"
+cache: "docker.io/bitnami/external-dns:0.14.0-debian-11-r1": "docker.io/bitnami/external-dns@sha256:27041c8a6b244a8f5c4914ac4a59219b189aeca12778d14d4672aacad5970fda"
 
 cache: "docker.io/envoyproxy/envoy:v1.25-latest": "docker.io/envoyproxy/envoy@sha256:a63469b5d105cd94be9b7d7524a46786fca5e124599aa488078375ddb65da030"
 
@@ -40,7 +40,7 @@ cache: "ghcr.io/external-secrets/external-secrets:v0.9.8": "ghcr.io/external-sec
 
 cache: "ghcr.io/galleybytes/terraform-operator:v0.14.0": "ghcr.io/galleybytes/terraform-operator@sha256:d93a996d405064a3d1dd897ac61b796cc115a3c3c577c955d48359b0f1489b08"
 
-cache: "ghcr.io/headlamp-k8s/headlamp:v0.20.1": "ghcr.io/headlamp-k8s/headlamp@sha256:db0310cf5abef3ffd5aa87509b1f61a150ee705808c5b29704149101653d418b"
+cache: "ghcr.io/headlamp-k8s/headlamp:v0.21.0": "ghcr.io/headlamp-k8s/headlamp@sha256:7a9587036bd29304f8f1387a7245556a3c479434670b2ca58e3624d44d2a68c9"
 
 cache: "ghcr.io/kyverno/background-controller:v1.10.3": "ghcr.io/kyverno/background-controller@sha256:24e3336f1a22384d0835079598ce015e22cffb9bac26c09cae1099e919a0297c"
 

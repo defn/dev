@@ -1,7 +1,7 @@
 https://artifacthub.io/packages/helm/argo/argo-events/2.4.1
-https://artifacthub.io/packages/helm/argo/argo-workflows/0.38.0
-https://artifacthub.io/packages/helm/bitnami/external-dns/6.28.2
-https://artifacthub.io/packages/helm/bitnami/mastodon/3.2.0
+https://artifacthub.io/packages/helm/argo/argo-workflows/0.39.0
+https://artifacthub.io/packages/helm/bitnami/external-dns/6.28.4
+https://artifacthub.io/packages/helm/bitnami/mastodon/3.2.2
 https://artifacthub.io/packages/helm/cert-manager/cert-manager/1.13.2
 https://artifacthub.io/packages/helm/cert-manager/trust-manager/0.7.0
 https://artifacthub.io/packages/helm/cilium/cilium/1.15.0-pre.2
@@ -10,9 +10,9 @@ https://artifacthub.io/packages/helm/coder-v2/coder/2.3.3
 https://artifacthub.io/packages/helm/dex/dex/0.15.3
 https://artifacthub.io/packages/helm/external-secrets-operator/external-secrets/0.9.8
 https://artifacthub.io/packages/helm/harbor/harbor/1.13.1
-https://artifacthub.io/packages/helm/headlamp/headlamp/0.16.0
+https://artifacthub.io/packages/helm/headlamp/headlamp/0.17.1
 https://artifacthub.io/packages/helm/jkroepke/amazon-eks-pod-identity-webhook/1.2.0
-https://artifacthub.io/packages/helm/kyverno/kyverno/3.1.0-rc.7
+https://artifacthub.io/packages/helm/kyverno/kyverno/3.1.0-rc.8
 https://artifacthub.io/packages/helm/linkerd2/linkerd-control-plane/1.16.4
 https://artifacthub.io/packages/helm/linkerd2/linkerd-crds/1.8.0
 https://artifacthub.io/packages/helm/mojo2600/pihole/2.18.0
