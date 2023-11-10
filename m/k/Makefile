@@ -18,7 +18,7 @@ all-init:
 	ls -d */ | grep \\- | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) init chart=$$1 revision=$(revision)'
 
 all-build:
-	ls -d */ | grep \\- | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) build chart=$$1'
+	ls -d */ | grep \\- | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) build chart=$$1; (echo package c; echo "teacher: bootstrap: \"$$(echo $$1 | cut -d- -f5-)\": app_version: \"0.0.$$(cat h/$$1-version)\"" ) > ../c/$$(echo $$1 | cut -d- -f1-3)/$$1-version.cue'
 
 all-push:
 	ls -d */ | grep \\- | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) push chart=$$1'
