@@ -12,7 +12,7 @@ commonAnnotations: {}
 helmCharts:
   - releaseName: headlamp
     name: headlamp
-    version: 0.16.0
+    version: 0.17.1
     repo: https://headlamp-k8s.github.io/headlamp
     namespace: headlamp
     valuesInline: {}
