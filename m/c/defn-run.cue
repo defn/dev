@@ -6,15 +6,15 @@ import (
 
 teacher: {
 	bootstrap: {
+		[NAME=string]: {
+			app_repo:    "harbor.district.amanibhavam.defn.run"
+			app_type:    "chart"
+			app_def:     "library/helm/coder-amanibhavam-district-cluster-\(NAME)"
+		}
 
 		// essentials
 		"cilium": {}
-		"tetragon": {
-			app_repo:    "harbor.district.amanibhavam.defn.run"
-			app_type:    "chart"
-			app_def:     "library/helm/coder-amanibhavam-district-cluster-tetragon"
-			app_version: string | *"0.0.1"
-		}
+		"tetragon": {}
 		"argo-cd": {}
 		"kyverno": {
 			app_sync_options: ["ServerSideApply=true"]

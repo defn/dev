@@ -1,5 +1,0 @@
-apiVersion: v2
-type: application
-name: coder-amanibhavam-class-cluster-cert-manager
-appVersion: "0.0.10"
-version: "0.0.10"

@@ -21,8 +21,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-school-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-school-cluster-cilium
+              repoURL: harbor.school.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-school-cluster-cilium
               targetRevision: main
             syncPolicy:
               automated:
@@ -42,9 +42,9 @@ helmCharts:
             destination:
               name: coder-amanibhavam-school-cluster
             source:
-              repoURL: harbor.district.amanibhavam.defn.run
-              chart: library/helm/coder-amanibhavam-district-cluster-tetragon
-              targetRevision: 0.0.5
+              repoURL: harbor.school.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-school-cluster-tetragon
+              targetRevision: main
             syncPolicy:
               automated:
                 prune: true
@@ -63,8 +63,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-school-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-school-cluster-argo-cd
+              repoURL: harbor.school.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-school-cluster-argo-cd
               targetRevision: main
             syncPolicy:
               automated:
@@ -84,8 +84,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-school-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-school-cluster-kyverno
+              repoURL: harbor.school.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-school-cluster-kyverno
               targetRevision: main
             syncPolicy:
               automated:
@@ -106,8 +106,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-school-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-school-cluster-cert-manager
+              repoURL: harbor.school.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-school-cluster-cert-manager
               targetRevision: main
             syncPolicy:
               automated:
@@ -127,8 +127,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-school-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-school-cluster-trust-manager
+              repoURL: harbor.school.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-school-cluster-trust-manager
               targetRevision: main
             syncPolicy:
               automated:
@@ -148,8 +148,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-school-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-school-cluster-pod-identity
+              repoURL: harbor.school.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-school-cluster-pod-identity
               targetRevision: main
             syncPolicy:
               automated:
@@ -169,8 +169,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-school-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-school-cluster-external-secrets
+              repoURL: harbor.school.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-school-cluster-external-secrets
               targetRevision: main
             syncPolicy:
               automated:
@@ -190,8 +190,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-school-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-school-cluster-secrets
+              repoURL: harbor.school.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-school-cluster-secrets
               targetRevision: main
             syncPolicy:
               automated:
@@ -211,8 +211,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-school-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-school-cluster-karpenter
+              repoURL: harbor.school.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-school-cluster-karpenter
               targetRevision: main
             syncPolicy:
               automated:
@@ -232,8 +232,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-school-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-school-cluster-external-dns
+              repoURL: harbor.school.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-school-cluster-external-dns
               targetRevision: main
             syncPolicy:
               automated:
@@ -253,8 +253,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-school-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-school-cluster-issuer
+              repoURL: harbor.school.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-school-cluster-issuer
               targetRevision: main
             syncPolicy:
               automated:
@@ -274,8 +274,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-school-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-school-cluster-knative
+              repoURL: harbor.school.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-school-cluster-knative
               targetRevision: main
             syncPolicy:
               automated:
@@ -295,8 +295,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-school-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-school-cluster-kourier
+              repoURL: harbor.school.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-school-cluster-kourier
               targetRevision: main
             syncPolicy:
               automated:
@@ -316,8 +316,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-school-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-school-cluster-traefik
+              repoURL: harbor.school.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-school-cluster-traefik
               targetRevision: main
             syncPolicy:
               automated:
@@ -337,8 +337,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-school-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-school-cluster-buildkite
+              repoURL: harbor.school.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-school-cluster-buildkite
               targetRevision: main
             syncPolicy:
               automated:
@@ -358,8 +358,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-school-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-school-cluster-coder
+              repoURL: harbor.school.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-school-cluster-coder
               targetRevision: main
             syncPolicy:
               automated:
@@ -379,8 +379,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-school-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-school-cluster-pihole
+              repoURL: harbor.school.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-school-cluster-pihole
               targetRevision: main
             syncPolicy:
               automated:

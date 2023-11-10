@@ -21,8 +21,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-cilium
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-cilium
               targetRevision: main
             syncPolicy:
               automated:
@@ -44,7 +44,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-tetragon
-              targetRevision: 0.0.5
+              targetRevision: main
             syncPolicy:
               automated:
                 prune: true
@@ -63,8 +63,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-argo-cd
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-argo-cd
               targetRevision: main
             syncPolicy:
               automated:
@@ -84,8 +84,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-kyverno
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-kyverno
               targetRevision: main
             syncPolicy:
               automated:
@@ -106,8 +106,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-cert-manager
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-cert-manager
               targetRevision: main
             syncPolicy:
               automated:
@@ -127,8 +127,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-trust-manager
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-trust-manager
               targetRevision: main
             syncPolicy:
               automated:
@@ -148,8 +148,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-pod-identity
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-pod-identity
               targetRevision: main
             syncPolicy:
               automated:
@@ -169,8 +169,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-external-secrets
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-external-secrets
               targetRevision: main
             syncPolicy:
               automated:
@@ -190,8 +190,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-secrets
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-secrets
               targetRevision: main
             syncPolicy:
               automated:
@@ -211,8 +211,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-karpenter
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-karpenter
               targetRevision: main
             syncPolicy:
               automated:
@@ -232,8 +232,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-external-dns
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-external-dns
               targetRevision: main
             syncPolicy:
               automated:
@@ -253,8 +253,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-issuer
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-issuer
               targetRevision: main
             syncPolicy:
               automated:
@@ -274,8 +274,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-knative
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-knative
               targetRevision: main
             syncPolicy:
               automated:
@@ -295,8 +295,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-kourier
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-kourier
               targetRevision: main
             syncPolicy:
               automated:
@@ -316,8 +316,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-traefik
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-traefik
               targetRevision: main
             syncPolicy:
               automated:
@@ -337,8 +337,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-buildkite
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-buildkite
               targetRevision: main
             syncPolicy:
               automated:
@@ -358,8 +358,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-coder
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-coder
               targetRevision: main
             syncPolicy:
               automated:
@@ -379,8 +379,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-pihole
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-pihole
               targetRevision: main
             syncPolicy:
               automated:
@@ -400,8 +400,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-harbor
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-harbor
               targetRevision: main
             syncPolicy:
               automated:
@@ -421,8 +421,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-tfo
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-tfo
               targetRevision: main
             syncPolicy:
               automated:
@@ -442,8 +442,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-argo-workflows
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-argo-workflows
               targetRevision: main
             syncPolicy:
               automated:
@@ -463,8 +463,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-argo-events
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-argo-events
               targetRevision: main
             syncPolicy:
               automated:
@@ -484,8 +484,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-headlamp
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-headlamp
               targetRevision: main
             syncPolicy:
               automated:
@@ -505,8 +505,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-postgres-operator
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-postgres-operator
               targetRevision: main
             syncPolicy:
               automated:
@@ -526,8 +526,8 @@ helmCharts:
             destination:
               name: coder-amanibhavam-district-cluster
             source:
-              repoURL: https://github.com/defn/dev
-              path: m/k/r/coder-amanibhavam-district-cluster-hello
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-hello
               targetRevision: main
             syncPolicy:
               automated:
