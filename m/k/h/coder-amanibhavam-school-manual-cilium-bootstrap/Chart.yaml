@@ -1,0 +1,5 @@
+apiVersion: v2
+type: application
+name: coder-amanibhavam-school-manual-cilium-bootstrap
+appVersion: "0.0.10"
+version: "0.0.10"
