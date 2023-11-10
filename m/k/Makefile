@@ -1,5 +1,6 @@
-chart ?= TODO
-version ?= 0.0.1
+chart ?=
+revision ?= $(cat $(chart).version)
+version ?= 0.0.$(revision)
 
 build:
 	@rm -rf $(chart)/chart
@@ -15,16 +16,16 @@ build:
 	helm package $(chart)/chart
 
 all-init:
-	ls -d */ | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) -f ..//Makefile.chart init chart=$$1'
+	ls -d */ | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) -f Makefile init chart=$$1 revision=$(revision)'
 
 all-build:
-	ls -d */ | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) -f ..//Makefile.chart build chart=$$1'
+	ls -d */ | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) -f Makefile build chart=$$1'
 
 all-push:
-	ls -d */ | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) -f ..//Makefile.chart push chart=$$1'
+	ls -d */ | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) -f Makefile push chart=$$1'
 
 init:
-	echo -n $(version) > $(chart).version
+	echo -n $(revision) > $(chart).version
 
 login:
 	helm registry login -u 'robot$$meh' harbor.district.amanibhavam.defn.run
