@@ -1,3 +1,5 @@
 r/crd/main.yaml
 r/.gitignore
-*.version
+crd.version
+r.version
+y.version
