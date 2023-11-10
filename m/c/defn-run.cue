@@ -7,9 +7,9 @@ import (
 teacher: {
 	bootstrap: {
 		[NAME=string]: {
-			app_repo:    "harbor.district.amanibhavam.defn.run"
+			app_repo:    "harbor.\(class.env).\(class.handle).defn.run"
 			app_type:    "chart"
-			app_def:     "library/helm/coder-amanibhavam-district-cluster-\(NAME)"
+			app_def:     "library/helm/coder-\(class.handle)-\(class.env)-cluster-\(NAME)"
 		}
 
 		// essentials

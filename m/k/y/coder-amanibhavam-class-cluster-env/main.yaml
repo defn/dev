@@ -12,7 +12,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-argo-cd
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: main
+    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true
@@ -33,7 +33,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-buildkite
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: main
+    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true
@@ -54,7 +54,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-cert-manager
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: main
+    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true
@@ -75,7 +75,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-cilium
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: main
+    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true
@@ -96,7 +96,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-coder
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: main
+    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true
@@ -117,7 +117,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-external-dns
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: main
+    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true
@@ -138,7 +138,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-external-secrets
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: main
+    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true
@@ -159,7 +159,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-issuer
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: main
+    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true
@@ -180,7 +180,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-karpenter
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: main
+    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true
@@ -201,7 +201,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-knative
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: main
+    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true
@@ -222,7 +222,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-kourier
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: main
+    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true
@@ -243,7 +243,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-kyverno
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: main
+    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true
@@ -265,7 +265,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-pihole
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: main
+    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true
@@ -286,7 +286,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-pod-identity
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: main
+    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true
@@ -307,7 +307,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-secrets
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: main
+    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true
@@ -328,7 +328,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-tetragon
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: main
+    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true
@@ -349,7 +349,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-traefik
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: main
+    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true
@@ -370,7 +370,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-trust-manager
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: main
+    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true

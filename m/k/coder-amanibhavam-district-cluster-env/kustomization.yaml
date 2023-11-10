@@ -23,7 +23,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-cilium
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -44,7 +44,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-tetragon
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -65,7 +65,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-argo-cd
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -86,7 +86,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-kyverno
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -108,7 +108,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-cert-manager
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -129,7 +129,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-trust-manager
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -150,7 +150,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-pod-identity
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -171,7 +171,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-external-secrets
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -192,7 +192,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-secrets
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -213,7 +213,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-karpenter
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -234,7 +234,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-external-dns
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -255,7 +255,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-issuer
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -276,7 +276,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-knative
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -297,7 +297,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-kourier
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -318,7 +318,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-traefik
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -339,7 +339,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-buildkite
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -360,7 +360,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-coder
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -381,70 +381,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-pihole
-              targetRevision: main
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        harbor: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-harbor
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: harbor.district.amanibhavam.defn.run
-              chart: library/helm/coder-amanibhavam-district-cluster-harbor
-              targetRevision: main
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        tfo: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-tfo
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: harbor.district.amanibhavam.defn.run
-              chart: library/helm/coder-amanibhavam-district-cluster-tfo
-              targetRevision: main
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        argo-workflows: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-argo-workflows
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: harbor.district.amanibhavam.defn.run
-              chart: library/helm/coder-amanibhavam-district-cluster-argo-workflows
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -465,7 +402,49 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-argo-events
-              targetRevision: main
+              targetRevision: 0.0.10
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        argo-workflows: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-argo-workflows
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-argo-workflows
+              targetRevision: 0.0.10
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        harbor: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-harbor
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-harbor
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -486,28 +465,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-headlamp
-              targetRevision: main
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        postgres-operator: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-postgres-operator
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: harbor.district.amanibhavam.defn.run
-              chart: library/helm/coder-amanibhavam-district-cluster-postgres-operator
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -528,7 +486,49 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-hello
-              targetRevision: main
+              targetRevision: 0.0.10
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        postgres-operator: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-postgres-operator
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-postgres-operator
+              targetRevision: 0.0.10
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        tfo: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-tfo
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-tfo
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
