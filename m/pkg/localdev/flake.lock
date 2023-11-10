@@ -27,17 +27,17 @@
       },
       "locked": {
         "dir": "m/pkg/buildkite",
-        "lastModified": 1698958232,
-        "narHash": "sha256-yfHCMw1VsDF5Br8hk7V1gpmD1CVH15LAYPzeCfbtglY=",
+        "lastModified": 1699579498,
+        "narHash": "sha256-jINCOk6ylw28McbDXkoY9rI2zSmCi4Zh5e44IVyPf5U=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "b971d75c85ad894b4b99d01e5ce75417925405b3",
+        "rev": "61ccd6e8b0d2ba8b8b67a73881b9218a4641fa78",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buildkite",
         "owner": "defn",
-        "ref": "pkg-buildkite-3.58.0-1",
+        "ref": "pkg-buildkite-3.59.0-1",
         "repo": "dev",
         "type": "github"
       }
