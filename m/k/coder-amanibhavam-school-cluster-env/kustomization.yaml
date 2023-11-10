@@ -23,7 +23,7 @@ helmCharts:
             source:
               repoURL: harbor.school.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-school-cluster-cilium
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -44,7 +44,7 @@ helmCharts:
             source:
               repoURL: harbor.school.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-school-cluster-tetragon
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -65,7 +65,7 @@ helmCharts:
             source:
               repoURL: harbor.school.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-school-cluster-argo-cd
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -86,7 +86,7 @@ helmCharts:
             source:
               repoURL: harbor.school.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-school-cluster-kyverno
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -108,7 +108,7 @@ helmCharts:
             source:
               repoURL: harbor.school.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-school-cluster-cert-manager
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -129,7 +129,7 @@ helmCharts:
             source:
               repoURL: harbor.school.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-school-cluster-trust-manager
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -150,7 +150,7 @@ helmCharts:
             source:
               repoURL: harbor.school.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-school-cluster-pod-identity
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -171,7 +171,7 @@ helmCharts:
             source:
               repoURL: harbor.school.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-school-cluster-external-secrets
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -192,7 +192,7 @@ helmCharts:
             source:
               repoURL: harbor.school.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-school-cluster-secrets
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -213,7 +213,7 @@ helmCharts:
             source:
               repoURL: harbor.school.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-school-cluster-karpenter
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -234,7 +234,7 @@ helmCharts:
             source:
               repoURL: harbor.school.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-school-cluster-external-dns
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -255,7 +255,7 @@ helmCharts:
             source:
               repoURL: harbor.school.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-school-cluster-issuer
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -276,7 +276,7 @@ helmCharts:
             source:
               repoURL: harbor.school.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-school-cluster-knative
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -297,7 +297,7 @@ helmCharts:
             source:
               repoURL: harbor.school.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-school-cluster-kourier
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -318,7 +318,7 @@ helmCharts:
             source:
               repoURL: harbor.school.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-school-cluster-traefik
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -339,7 +339,7 @@ helmCharts:
             source:
               repoURL: harbor.school.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-school-cluster-buildkite
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -360,7 +360,7 @@ helmCharts:
             source:
               repoURL: harbor.school.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-school-cluster-coder
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
@@ -381,7 +381,7 @@ helmCharts:
             source:
               repoURL: harbor.school.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-school-cluster-pihole
-              targetRevision: main
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
