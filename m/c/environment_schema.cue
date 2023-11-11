@@ -23,7 +23,7 @@ package c
 
 	apps: [string]: #BootstrapApp
 	apps: {
-		for _app_name, _app in _in.bootstrap 
+		for _app_name, _app in _in.bootstrap
 		if _app_name != "coder-\(class.handle)-\(class.env)-cluster-env" {
 			(_app_name): #BootstrapApp & {
 				machine_name: _in.machine_name
@@ -91,25 +91,21 @@ package c
 	destination: string | *name
 
 	bootstrap: [string]: #BootstrapConfig
-	env: #EnvApp
-	env: {
-		spec: project: "default"
-		spec: source: {
-			path:           "m/k/r/\(name)-env"
-			repoURL:        "https://github.com/defn/dev"
-			targetRevision: "main"
-		}
 
+	env: #MachineEnvApp & {
+		metadata: namespace: "argocd"
+		spec: project:       "default"
 		spec: "destination": "name": destination
 	}
 }
 
-#EnvApp: {
+// affects e/
+#MachineEnvApp: {
 	apiVersion: "argoproj.io/v1alpha1"
 	kind:       "Application"
 
 	metadata: {
-		namespace: "argocd"
+		namespace: string
 		name:      string
 	}
 
@@ -121,7 +117,6 @@ package c
 		source: {
 			repoURL:        string
 			targetRevision: string
-			path:           string
 		}
 
 		syncPolicy: automated: {
@@ -136,6 +131,10 @@ package c
 	from: {
 		#Input
 		bootstrap: [string]: #BootstrapConfig
+		app_repo:    string
+		app_type:    string
+		app_def:     string
+		app_version: string
 	}
 
 	to: #K3S
@@ -149,6 +148,12 @@ package c
 	name:      _in.name
 	bootstrap: _in.bootstrap
 
-	// ex: k3d-dfd
-	env: metadata: name: ctx.name
+	env: {
+		metadata: name: ctx.name
+		spec: source: {
+			(_in.app_type): _in.app_def
+			repoURL:        _in.app_repo
+			targetRevision: _in.app_version
+		}
+	}
 }

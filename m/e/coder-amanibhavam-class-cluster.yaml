@@ -10,9 +10,9 @@ spec:
   destination:
     name: coder-amanibhavam-class-cluster
   source:
-    repoURL: https://github.com/defn/dev
-    targetRevision: main
-    path: m/k/r/coder-amanibhavam-class-cluster-env
+    repoURL: harbor.class.amanibhavam.defn.run
+    chart: library/helm/coder-amanibhavam-class-cluster-env
+    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true

@@ -10,9 +10,9 @@ spec:
   destination:
     name: coder-amanibhavam-district-cluster
   source:
-    repoURL: https://github.com/defn/dev
-    targetRevision: main
-    path: m/k/r/coder-amanibhavam-district-cluster-env
+    repoURL: harbor.district.amanibhavam.defn.run
+    chart: library/helm/coder-amanibhavam-district-cluster-env
+    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true
