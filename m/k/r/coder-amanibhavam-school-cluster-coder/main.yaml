@@ -23,7 +23,7 @@ spec:
         apiVersion: v1
         data:
           stringData:
-            '{{`coder_pg_connection_url': postgresql://{{request.object.data.username | base64_decode(@)}}:{{request.object.data.password | base64_decode(@)}}@coder-db:5432/coder?sslmode=require`}}
+            coder_pg_connection_url: postgresql://{{`{{`}}request.object.data.username | base64_decode(@)}}:{{`{{`}}request.object.data.password | base64_decode(@)}}@coder-db:5432/coder?sslmode=require
           type: Opaque
         kind: Secret
         name: coder.coder-db.connection-url

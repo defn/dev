@@ -12,4 +12,8 @@ cache:
 	cue export --out json -e image_digests | jq -r '.[]' | runmany 4 2 'set -x; skopeo copy docker://$${2} docker://169.254.32.1:5000/$${2} --multi-arch all --dest-tls-verify=false --insecure-policy'
 
 release:
-	cue export --out json -e cached_yaml | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | while read -r fname data; do mkdir -p ../../../k/r/$$(dirname $$fname); echo "$$data" | base64 -d > ../../../k/r/$$fname; done
+	cue export --out json -e cached_yaml | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' \
+		| while read -r fname data; do \
+			mkdir -p ../../../k/r/$$(dirname $$fname); \
+			echo "$$data" | base64 -d | sed 's#{{#{{`{{`}}#g' > ../../../k/r/$$fname; \
+		done
