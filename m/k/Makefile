@@ -44,13 +44,15 @@ build:
 	@mv -f ../h/$(chart)/Chart.yaml.tmp ../h/$(chart)/Chart.yaml
 
 	if [[ "$$(cat ../h/$(chart)-sha1 2>/dev/null)" != "$$(find ../h/$(chart)/templates -name '*.yaml' | sort | xargs sha1sum)" ]]; then \
-		$(MAKE) sha1 bump chart=$(chart); \
 		diff <(cat ../h/$(chart)-sha1 2>/dev/null) <(find ../h/$(chart)/templates -name '*.yaml' | sort | xargs sha1sum); \
-		(cd ../h/ && mark bumped $(chart) && helm package $(chart)); \
-		$(MAKE) push chart=$(chart); \
+		$(MAKE) sha1 bump package push chart=$(chart); \
 	fi
 
+package:
+	cd ../h && helm package $(chart)
+
 push:
+	if ! test -f ../h/$(chart)-$(version).tgz; then $(MAKE) package chart=$(chart); fi
 	helm push ../h/$(chart)-$(version).tgz oci://harbor.district.amanibhavam.defn.run/library/helm
 
 template:
