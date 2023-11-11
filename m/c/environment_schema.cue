@@ -116,7 +116,6 @@ package c
 		destination: namespace?: string
 		source: {
 			repoURL:        string
-			targetRevision: string
 		}
 
 		syncPolicy: automated: {
@@ -134,7 +133,6 @@ package c
 		app_repo:    string
 		app_type:    string
 		app_def:     string
-		app_version: string
 	}
 
 	to: #K3S
@@ -153,7 +151,6 @@ package c
 		spec: source: {
 			(_in.app_type): _in.app_def
 			repoURL:        _in.app_repo
-			targetRevision: _in.app_version
 		}
 	}
 }

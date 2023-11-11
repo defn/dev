@@ -22,7 +22,6 @@ env: (#Transform & {
 		app_repo:    "harbor.\(class.env).\(class.handle).defn.run"
 		app_type:    "chart"
 		app_def:     "library/helm/coder-\(class.handle)-\(class.env)-cluster-env"
-		app_version: "0.0.10"
 	}
 }).outputs
 
