@@ -47,7 +47,7 @@ export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 # hof
 export HOF_TELEMETRY_DISABLED=1
 
-# fake xdisply
+# fake xdisplay
 #export DISPLAY=1
 
 # kubectl

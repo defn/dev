@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
 set -eu
+
 cd ~/m
 
-cluster_name="$(cd ~/m/c/$(uname -n) && cue eval -e class.cluster_name | jq -r .)"
-infra_pod_cidr="$(cd ~/m/c/$(uname -n) && cue eval -e class.infra_pod_cidr | jq -r .)"
-infra_service_cidr="$(cd ~/m/c/$(uname -n) && cue eval -e infra.infra_service_cidr | jq -r .)"
+cluster_name=
+infra_pod_cidr=
+infra_service_cidr=
 
 function make_init {
 	# create k3s registry
@@ -32,25 +33,6 @@ function make_linkerd {
 	linkerd --context ${cluster_name} multicluster check
 }
 
-function make_vc {
-	for v in $(cd c/${cluster_name} && cue export --out json -e infra.parent.vclusters | jq -r '.[]'); do
-		i="${v#vc}"
-		# wait until vcluster is ready
-		while true; do
-			if vcluster --context ${cluster_name} connect vcluster -n "${cluster_name}-${v}-vcluster" --server=$(kubectl get --context ${cluster_name} -n ${cluster_name}-${v}-vcluster svc vcluster -o json | jq -r '.spec.clusterIP'):443 --update-current=false --kube-config-context-name ${cluster_name}-"${v}" --kube-config "$HOME"/.kube/config."${v}"; then
-				break
-			fi
-			sleep 5
-		done
-
-		# add vcluster to argocd
-		while true; do
-			if env KUBECONFIG="$HOME/.kube/config.argocd:$HOME/.kube/config.${v}" argocd --kube-context ${cluster_name}-argocd cluster --core add "${cluster_name}-${v}" --yes; then break; fi
-			sleep 5
-		done
-	done
-}
-
 function make_down {
 	sudo ip link delete cilium_host || true
 	sudo ip link delete cilium_net || true
@@ -60,6 +42,17 @@ function make_down {
 	sudo ip6tables-save | grep -iv cilium | sudo ip6tables-restore
 
 	/usr/local/bin/k3s-uninstall.sh || true
+}
+
+function make_argocd {
+	kubectl config use-context ${cluster_name}
+
+	(
+		cp $HOME/.kube/config $HOME/.kube/config.argocd
+		export KUBECONFIG=$HOME/.kube/config.argocd
+		eval "$(kubectl config view -o json | jq -r --arg cluster ${cluster_name} --arg namespace argocd '.contexts[] | select(.name == $cluster).context | "kubectl config set-context \(.cluster)-argocd --cluster=\(.cluster) --user=\(.user) --namespace=\($namespace)"')"
+		kubectl config use-context ${cluster_name}-argocd
+	)
 }
 
 function make_up {
@@ -83,13 +76,7 @@ function make_up {
 	kubectl --context ${cluster_name} create ns argocd || true
 	kubectl --context ${cluster_name} apply -f k/r/${cluster_name}-cluster-argo-cd/main.yaml
 
-	# dedicated kubectl config for argocd
-	cp $HOME/.kube/config $HOME/.kube/config.argocd
-	(
-		export KUBECONFIG=$HOME/.kube/config.argocd
-		eval "$(kubectl config view -o json | jq -r --arg cluster ${cluster_name} --arg namespace argocd '.contexts[] | select(.name == $cluster).context | "kubectl config set-context \(.cluster)-argocd --cluster=\(.cluster) --user=\(.user) --namespace=\($namespace)"')"
-		kubectl config use-context ${cluster_name}-argocd
-	)
+	make_argocd
 
 	# switch back to the default config
 	kubectl config use-context ${cluster_name}
@@ -131,8 +118,37 @@ function main {
 	cmd="$1"
 	shift
 
+	if [[ -n "${1:-}" ]]; then
+		cluster_name="$1"
+		shift
+	else
+		cluster_name="$(cd ~/m/c/$(uname -n) && cue eval -e class.cluster_name | jq -r .)"
+	fi
+	infra_pod_cidr="$(cd ~/m/c/${cluster_name} && cue eval -e class.infra_pod_cidr | jq -r .)"
+	infra_service_cidr="$(cd ~/m/c/${cluster_name} && cue eval -e infra.infra_service_cidr | jq -r .)"
+
 	"make_${cmd}"
 }
 
-time main "${1}"
+time main "$@"
 uptime
+
+# archive
+function make_vc {
+	for v in $(cd c/${cluster_name} && cue export --out json -e infra.parent.vclusters | jq -r '.[]'); do
+		i="${v#vc}"
+		# wait until vcluster is ready
+		while true; do
+			if vcluster --context ${cluster_name} connect vcluster -n "${cluster_name}-${v}-vcluster" --server=$(kubectl get --context ${cluster_name} -n ${cluster_name}-${v}-vcluster svc vcluster -o json | jq -r '.spec.clusterIP'):443 --update-current=false --kube-config-context-name ${cluster_name}-"${v}" --kube-config "$HOME"/.kube/config."${v}"; then
+				break
+			fi
+			sleep 5
+		done
+
+		# add vcluster to argocd
+		while true; do
+			if env KUBECONFIG="$HOME/.kube/config.argocd:$HOME/.kube/config.${v}" argocd --kube-context ${cluster_name}-argocd cluster --core add "${cluster_name}-${v}" --yes; then break; fi
+			sleep 5
+		done
+	done
+}
