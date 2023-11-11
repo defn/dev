@@ -15,5 +15,5 @@ release:
 	cue export --out json -e cached_yaml | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' \
 		| while read -r fname data; do \
 			mkdir -p ../../../k/r/$$(dirname $$fname); \
-			echo "$$data" | base64 -d | sed 's#{{#{{`{{`}}#g' > ../../../k/r/$$fname; \
+			echo "$$data" | base64 -d | sed 's#{{#{{ "{{" }}#g' > ../../../k/r/$$fname; \
 		done
