@@ -35,7 +35,6 @@ build:
 	@mkdir -p ../h/$(chart)/templates
 
 	@cp -f r/$(chart)/*.yaml ../h/$(chart)/templates/
-	if [[ "$$(cat ../h/$(chart)-sha1 2>/dev/null)" != "$$(find ../$h/$(chart)/templates -name '*.yaml' | sort | xargs sha1sum)" ]]; then $(MAKE) sha1 bump chart=$(chart); fi
 
 	@echo "apiVersion: v2" > ../h/$(chart)/Chart.yaml.tmp
 	@echo "type: application" >> ../h/$(chart)/Chart.yaml.tmp
@@ -44,7 +43,11 @@ build:
 	@echo "version: \"$(version)\"" >> ../h/$(chart)/Chart.yaml.tmp
 	@mv -f ../h/$(chart)/Chart.yaml.tmp ../h/$(chart)/Chart.yaml
 
-	cd ../h/ && helm package $(chart)
+	if [[ "$$(cat ../h/$(chart)-sha1 2>/dev/null)" != "$$(find ../h/$(chart)/templates -name '*.yaml' | sort | xargs sha1sum)" ]]; then \
+		$(MAKE) sha1 bump chart=$(chart); \
+		diff <(cat ../h/$(chart)-sha1 2>/dev/null) <(find ../h/$(chart)/templates -name '*.yaml' | sort | xargs sha1sum); \
+		(cd ../h/ && mark bumped $(chart) && helm package $(chart)); \
+	fi
 
 push:
 	helm push ../h/$(chart)-$(version).tgz oci://harbor.district.amanibhavam.defn.run/library/helm
