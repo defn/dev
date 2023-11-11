@@ -34,7 +34,8 @@ cached_image: {
 			image: "169.254.32.1:5000/\(cache[c.image])"
 		}
 		if cache[c.image] == _|_ {
-			image: "not-found-\(c.image)"
+			//image: "not-found-\(c.image)"
+			image: "\(c.image)"
 		}
 	}
 }
@@ -78,7 +79,8 @@ cached_resources: {
 						"169.254.32.1:5000/\(strings.Join(list.Slice(_parts, 1, len(_parts)), "/"))"
 					}
 					if cache[r.spec.image] == _|_ {
-						"not-found-\(r.spec.image)"
+						//"not-found-\(r.spec.image)"
+						"\(r.spec.image)"
 					}
 				}}
 
