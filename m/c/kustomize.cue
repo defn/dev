@@ -9,9 +9,7 @@ class: #Cluster
 infra: {
 	[NAME=string]: class
 
-	(class.cluster_name): {}
 	"\(class.cluster_name)-cluster": {}
-	"\(class.cluster_name)-manual": {}
 }
 
 kustomize: [string]: cluster: class
@@ -20,7 +18,11 @@ env: (#Transform & {
 	transformer: #TransformK3S
 
 	inputs: "\(class.cluster_name)-cluster": {
-		bootstrap: class.bootstrap
+		bootstrap:   class.bootstrap
+		app_repo:    "harbor.\(class.env).\(class.handle).defn.run"
+		app_type:    "chart"
+		app_def:     "library/helm/coder-\(class.handle)-\(class.env)-cluster-env"
+		app_version: "0.0.10"
 	}
 }).outputs
 
