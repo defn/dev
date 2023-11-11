@@ -19,31 +19,21 @@ kustomize: [string]: cluster: class
 env: (#Transform & {
 	transformer: #TransformK3S
 
-	inputs: "\(class.cluster_name)-manual": {
-		bootstrap: {
-			"cilium-bootstrap": {}
-		}
-	}
-
 	inputs: "\(class.cluster_name)-cluster": {
 		bootstrap: class.bootstrap
 	}
 }).outputs
 
-kustomize: {
-	for ctype in ["cluster", "manual"] {
-		"coder-\(class.handle)-\(class.env)-\(ctype)-env": #KustomizeHelm & {
-			helm: {
-				release: "bootstrap"
-				name:    "any-resource"
-				version: "0.1.0"
-				repo:    "https://kiwigrid.github.io"
-				values: {
-					anyResources: {
-						for _app_name, _app in bootstrap["coder-\(class.handle)-\(class.env)-\(ctype)-env"].apps {
-							(_app_name): yaml.Marshal(_app.application)
-						}
-					}
+kustomize: "coder-\(class.handle)-\(class.env)-cluster-env": #KustomizeHelm & {
+	helm: {
+		release: "bootstrap"
+		name:    "any-resource"
+		version: "0.1.0"
+		repo:    "https://kiwigrid.github.io"
+		values: {
+			anyResources: {
+				for _app_name, _app in bootstrap["coder-\(class.handle)-\(class.env)-cluster-env"].apps {
+					(_app_name): yaml.Marshal(_app.application)
 				}
 			}
 		}

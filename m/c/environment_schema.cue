@@ -23,7 +23,8 @@ package c
 
 	apps: [string]: #BootstrapApp
 	apps: {
-		for _app_name, _app in _in.bootstrap {
+		for _app_name, _app in _in.bootstrap 
+		if _app_name != "coder-\(class.handle)-\(class.env)-cluster-env" {
 			(_app_name): #BootstrapApp & {
 				machine_name: _in.machine_name
 				app_name:     _app_name
@@ -32,15 +33,16 @@ package c
 	}
 }
 
+// part of -env applications, points to the helm chart
 #BootstrapApp: {
 	machine_name:  string
 	app_name:      string
 	app_namespace: string
 
-	app_version: string | *"main"
-	app_repo:    string | *"https://github.com/defn/dev"
-	app_type:    string | *"path"
-	app_def:     string | *"m/k/r/\(machine_name)-\(app_name)"
+	app_version: string
+	app_repo:    string
+	app_type:    string
+	app_def:     string
 
 	app_wave:         int
 	app_sync_options: [...string] | *[]

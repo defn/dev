@@ -23,7 +23,7 @@ release-all:
 	$(MAKE) release digest=$(digest)
 
 all:
-	$(MAKE) crd release-all digest=1
+	$(MAKE) crd release-all digest=
 	if ! git grep not-used ../k/r; then true; else false; fi
 
 digest:
