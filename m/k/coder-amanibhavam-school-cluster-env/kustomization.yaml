@@ -89,7 +89,7 @@ helmCharts:
             source:
               repoURL: harbor.school.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-school-cluster-kyverno
-              targetRevision: 0.0.10
+              targetRevision: 0.0.11
             syncPolicy:
               automated:
                 prune: true

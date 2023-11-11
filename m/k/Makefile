@@ -4,6 +4,9 @@ chart ?=
 revision ?= $(shell cat ../h/$(chart)-version)
 version ?= 0.0.$(revision)
 
+delivery:
+	$(MAKE) all-build
+
 all-init:
 	ls -d */ | grep \\- | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) init chart=$$1 revision=$(revision)'
 
@@ -28,28 +31,30 @@ bump:
 	mv -f ../h/$(chart)-version.tmp ../h/$(chart)-version
 
 sha1:
-	find ../h/$(chart)/templates -name '*.yaml' | sort | xargs sha1sum > ../h/$(chart)-sha1
+	find r/$(chart) -name '*.yaml' | sort | xargs sha1sum > ../h/$(chart)-sha1
 
 build:
-	@rm -rf ../h/$(chart)
-	@mkdir -p ../h/$(chart)/templates
-
-	@cp -f r/$(chart)/*.yaml ../h/$(chart)/templates/
-
-	@echo "apiVersion: v2" > ../h/$(chart)/Chart.yaml.tmp
-	@echo "type: application" >> ../h/$(chart)/Chart.yaml.tmp
-	@echo "name: $(chart)" >> ../h/$(chart)/Chart.yaml.tmp
-	@echo "appVersion: \"$(version)\"" >> ../h/$(chart)/Chart.yaml.tmp
-	@echo "version: \"$(version)\"" >> ../h/$(chart)/Chart.yaml.tmp
-	@mv -f ../h/$(chart)/Chart.yaml.tmp ../h/$(chart)/Chart.yaml
-
-	if [[ "$$(cat ../h/$(chart)-sha1 2>/dev/null)" != "$$(find ../h/$(chart)/templates -name '*.yaml' | sort | xargs sha1sum)" ]]; then \
-		diff <(cat ../h/$(chart)-sha1 2>/dev/null) <(find ../h/$(chart)/templates -name '*.yaml' | sort | xargs sha1sum); \
-		$(MAKE) sha1 bump package push chart=$(chart); \
+	@if [[ "$$(cat ../h/$(chart)-sha1 2>/dev/null)" != "$$(find r/$(chart) -name '*.yaml' | sort | xargs sha1sum)" ]]; then \
+		diff <(cat ../h/$(chart)-sha1 2>/dev/null) <(find r/$(chart) -name '*.yaml' | sort | xargs sha1sum); \
+		$(MAKE) sha1 bump chart=$(chart); \
+		$(MAKE) build-inner; \
 	fi
 
+build-inner:
+	rm -rf ../h/$(chart)
+	mkdir -p ../h/$(chart)/templates
+	cp -f r/$(chart)/*.yaml ../h/$(chart)/templates/
+	echo "apiVersion: v2" > ../h/$(chart)/Chart.yaml.tmp
+	echo "type: application" >> ../h/$(chart)/Chart.yaml.tmp
+	echo "name: $(chart)" >> ../h/$(chart)/Chart.yaml.tmp
+	echo "appVersion: \"$(version)\"" >> ../h/$(chart)/Chart.yaml.tmp
+	echo "version: \"$(version)\"" >> ../h/$(chart)/Chart.yaml.tmp
+	mv -f ../h/$(chart)/Chart.yaml.tmp ../h/$(chart)/Chart.yaml
+	mark $(chart)
+	$(MAKE) package push chart=$(chart)
+
 package:
-	cd ../h && helm package $(chart)
+	cd ../h && cat $(chart)/Chart.yaml && helm package $(chart)
 
 push:
 	if ! test -f ../h/$(chart)-$(version).tgz; then $(MAKE) package chart=$(chart); fi
