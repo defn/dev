@@ -24,7 +24,8 @@ lookup: {
 	}
 
 	output: {
-		for kname, _ in input.bootstrap {
+		for kname, _ in input.bootstrap
+		if kname !~ "env$" {
 			"\(lookup[input.ename][kname])/kustomization.yaml": "#ManagedBy: cue\n\n" + yaml.Marshal((kustomize[kname] & {cluster: input.cluster}).out)
 
 			for rname, r in (kustomize[kname] & {cluster: input.cluster}).resource {
