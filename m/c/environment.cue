@@ -14,13 +14,3 @@ bootstrap: (#Transform & {
 		}
 	}
 }).outputs
-
-kustomize: (#Transform & {
-	transformer: #TransformEnvToAnyResource
-
-	inputs: {
-		for _env_name, _env in env {
-			"\(_env_name)-env": {}
-		}
-	}
-}).outputs
