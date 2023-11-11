@@ -3,7 +3,7 @@
     cue.url = github:defn/dev/pkg-cue-0.6.0-2?dir=m/pkg/cue;
     gum.url = github:defn/dev/pkg-gum-0.11.0-2?dir=m/pkg/gum;
     glow.url = github:defn/dev/pkg-glow-1.5.1-5?dir=m/pkg/glow;
-    dyff.url = github:defn/dev/pkg-dyff-1.5.1-5?dir=m/pkg/dyff;
+    dyff.url = github:defn/dev/pkg-dyff-1.6.0-1?dir=m/pkg/dyff;
   };
 
   outputs = inputs: inputs.cue.inputs.pkg.main rec {
