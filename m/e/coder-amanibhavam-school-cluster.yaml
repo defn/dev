@@ -12,7 +12,6 @@ spec:
   source:
     repoURL: harbor.school.amanibhavam.defn.run
     chart: library/helm/coder-amanibhavam-school-cluster-env
-    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true

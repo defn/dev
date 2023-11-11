@@ -2,6 +2,8 @@ SHELL := /bin/bash
 
 app ?= district school class
 
+digest ?= 
+
 build:
 	cd $(shell uname -n) && $(MAKE) build
 	$(MAKE) release
@@ -27,7 +29,7 @@ delivery:
 	$(MAKE) all
 
 all:
-	$(MAKE) crd release-all digest=1
+	$(MAKE) crd release-all digest=$(digest)
 	if ! git grep not-used ../k/r; then true; else false; fi
 	cd ../k && $(MAKE) delivery
 
