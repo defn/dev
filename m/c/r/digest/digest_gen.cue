@@ -1,8 +1,8 @@
 package r
 
-cache: "bitnami/kubectl:1.26.10": "bitnami/kubectl@sha256:499e0b6a12bb59ca0c189c694f7553ace2e19cc816f754b6c7ea0e15372070c7"
-
 cache: "bitnami/kubectl:1.26.4": "bitnami/kubectl@sha256:a0a972324d937b2c2f7207af29d1abd6ce3f7fd5ea73357036a67ab24f34cc92"
+
+cache: "bitnami/kubectl:latest": "bitnami/kubectl@sha256:0defec793112fa610a850a991ed4ad849c853c54fb2136b95bcdf41ff6f96c38"
 
 cache: "busybox:1.35": "busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094"
 
@@ -42,15 +42,15 @@ cache: "ghcr.io/galleybytes/terraform-operator:v0.14.0": "ghcr.io/galleybytes/te
 
 cache: "ghcr.io/headlamp-k8s/headlamp:v0.21.0": "ghcr.io/headlamp-k8s/headlamp@sha256:7a9587036bd29304f8f1387a7245556a3c479434670b2ca58e3624d44d2a68c9"
 
-cache: "ghcr.io/kyverno/background-controller:v1.11.0": "ghcr.io/kyverno/background-controller@sha256:4d252900a7607cf424bc5586bdaa25c77b38daac7a9b1aeb07fff1c35767ad91"
+cache: "ghcr.io/kyverno/background-controller:v1.10.3": "ghcr.io/kyverno/background-controller@sha256:24e3336f1a22384d0835079598ce015e22cffb9bac26c09cae1099e919a0297c"
 
-cache: "ghcr.io/kyverno/cleanup-controller:v1.11.0": "ghcr.io/kyverno/cleanup-controller@sha256:79ff17544df21e41170532539864167c952a160c7150d751a2829d2834d02446"
+cache: "ghcr.io/kyverno/cleanup-controller:v1.10.3": "ghcr.io/kyverno/cleanup-controller@sha256:980a225c1ed668c7c0bc327c3c7f55e2913c3584e099571f93d17bedd4b64020"
 
-cache: "ghcr.io/kyverno/kyverno:v1.11.0": "ghcr.io/kyverno/kyverno@sha256:4c30afa85d83f4a55ab14642b0630ba51fde573717ba712721edd1408ab39e3a"
+cache: "ghcr.io/kyverno/kyverno:v1.10.3": "ghcr.io/kyverno/kyverno@sha256:2e8ba9281d587a7eac78b4cfbb877c57fd3b948d13547192e950b00f961b1a4e"
 
-cache: "ghcr.io/kyverno/kyvernopre:v1.11.0": "ghcr.io/kyverno/kyvernopre@sha256:5744bcdb88dfd820694cf74fee63089396f3a7b8fdeae147afb2f1a6c95f77c3"
+cache: "ghcr.io/kyverno/kyvernopre:v1.10.3": "ghcr.io/kyverno/kyvernopre@sha256:4022f4b828418df94f61627bdc0852207986c095be9dbff686b57cb22b4c20ad"
 
-cache: "ghcr.io/kyverno/reports-controller:v1.11.0": "ghcr.io/kyverno/reports-controller@sha256:76c32c188c56bbc2010bb4878e2d2bee6b90c9704a5d1589990901d7b04b704a"
+cache: "ghcr.io/kyverno/reports-controller:v1.10.3": "ghcr.io/kyverno/reports-controller@sha256:b0fbfe5a7250fadd120ffbb6dd4cb70e575bddc165da76b46e3b7dab4d275141"
 
 cache: "goharbor/harbor-core:v2.9.1": "goharbor/harbor-core@sha256:ee70dcf6e7c5a3c1d65a6898eb7d3816cbe760f7971a79e1fed2d529abb12ccd"
 
