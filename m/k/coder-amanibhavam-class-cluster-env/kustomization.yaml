@@ -258,7 +258,7 @@ helmCharts:
             source:
               repoURL: harbor.class.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-class-cluster-issuer
-              targetRevision: 0.0.13
+              targetRevision: 0.0.14
             syncPolicy:
               automated:
                 prune: true
@@ -279,7 +279,7 @@ helmCharts:
             source:
               repoURL: harbor.class.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-class-cluster-knative
-              targetRevision: 0.0.12
+              targetRevision: 0.0.13
             syncPolicy:
               automated:
                 prune: true
@@ -363,7 +363,7 @@ helmCharts:
             source:
               repoURL: harbor.class.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-class-cluster-coder
-              targetRevision: 0.0.13
+              targetRevision: 0.0.14
             syncPolicy:
               automated:
                 prune: true

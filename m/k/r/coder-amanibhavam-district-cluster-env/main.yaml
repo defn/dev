@@ -131,7 +131,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-coder
     repoURL: harbor.district.amanibhavam.defn.run
-    targetRevision: 0.0.13
+    targetRevision: 0.0.14
   syncPolicy:
     automated:
       prune: true
@@ -257,7 +257,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-issuer
     repoURL: harbor.district.amanibhavam.defn.run
-    targetRevision: 0.0.13
+    targetRevision: 0.0.14
   syncPolicy:
     automated:
       prune: true
@@ -299,7 +299,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-knative
     repoURL: harbor.district.amanibhavam.defn.run
-    targetRevision: 0.0.12
+    targetRevision: 0.0.13
   syncPolicy:
     automated:
       prune: true
