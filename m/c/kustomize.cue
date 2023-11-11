@@ -1197,12 +1197,12 @@ kustomize: "issuer": #Kustomize & {
 					name:        cluster.issuer
 					data: spec: acme: {
 						server: "https://acme.zerossl.com/v2/DV90"
-						email:  "{{request.object.data.zerossl_email | base64_decode(@)}}"
+						email:  "{{`{{request.object.data.zerossl_email | base64_decode(@)}}`}}"
 
 						privateKeySecretRef: name: "\(cluster.issuer)-acme"
 
 						externalAccountBinding: {
-							keyID: "{{request.object.data.zerossl_eab_kid | base64_decode(@)}}"
+							keyID: "{{`{{request.object.data.zerossl_eab_kid | base64_decode(@)}}`}}"
 							keySecretRef: {
 								name: cluster.issuer
 								key:  "zerossl_eab_hmac"
@@ -1212,7 +1212,7 @@ kustomize: "issuer": #Kustomize & {
 						solvers: [{
 							selector: {}
 							dns01: cloudflare: {
-								email: "{{request.object.data.cloudflare_email | base64_decode(@)}}"
+								email: "{{`{{request.object.data.cloudflare_email | base64_decode(@)}}`}}"
 								apiTokenSecretRef: {
 									name: cluster.issuer
 									key:  "cloudflare_api_token"
@@ -1579,7 +1579,7 @@ kustomize: "coder": #KustomizeHelm & {
 					data: {
 						type: "Opaque"
 						stringData: {
-							"coder_pg_connection_url": "postgresql://{{request.object.data.username | base64_decode(@)}}:{{request.object.data.password | base64_decode(@)}}@coder-db:5432/coder?sslmode=require"
+							"{{`coder_pg_connection_url": "postgresql://{{request.object.data.username | base64_decode(@)}}:{{request.object.data.password | base64_decode(@)}}@coder-db:5432/coder?sslmode=require`}}"
 						}
 					}
 				}
