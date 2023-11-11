@@ -1,11 +1,14 @@
 #ManagedBy: cue
 
 patches: []
+resources: []
 commonLabels: {}
 commonAnnotations: {}
-resources: []
 helmCharts:
   - releaseName: bootstrap
+    name: any-resource
+    version: 0.1.0
+    repo: https://kiwigrid.github.io
     valuesInline:
       anyResources:
         cilium-bootstrap: |
@@ -29,7 +32,4 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
-    name: any-resource
-    version: 0.1.0
-    repo: https://kiwigrid.github.io
     includeCRDs: true

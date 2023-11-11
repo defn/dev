@@ -1,38 +1,5 @@
 package c
 
-import (
-	"encoding/yaml"
-)
-
-#TransformEnvToAnyResource: {
-	from: {
-		#Input
-
-		// TODO why is this needed
-		vc_name:    string
-		vc_machine: string
-		type:       string
-	}
-
-	to: #KustomizeHelm & {
-		_in: from
-
-		helm: {
-			release: "bootstrap"
-			name:    "any-resource"
-			version: "0.1.0"
-			repo:    "https://kiwigrid.github.io"
-			values: {
-				anyResources: {
-					for _app_name, _app in bootstrap[_in.name].apps {
-						(_app_name): yaml.Marshal(_app.application)
-					}
-				}
-			}
-		}
-	}
-}
-
 #BootstrapConfig: {
 	app_wave:         int | *100
 	app_namespace:    string | *""
@@ -124,8 +91,12 @@ import (
 	bootstrap: [string]: #BootstrapConfig
 	env: #EnvApp
 	env: {
-		// ex: k/k3d-dfd
-		spec: source: path: "m/k/r/\(name)-env"
+		spec: project: "default"
+		spec: source: {
+			path:           "m/k/r/\(name)-env"
+			repoURL:        "https://github.com/defn/dev"
+			targetRevision: "main"
+		}
 
 		spec: "destination": "name": destination
 	}
@@ -141,13 +112,13 @@ import (
 	}
 
 	spec: {
-		project: "default"
+		project: string
 
 		destination: name:       string
 		destination: namespace?: string
 		source: {
-			repoURL:        "https://github.com/defn/dev"
-			targetRevision: "main"
+			repoURL:        string
+			targetRevision: string
 			path:           string
 		}
 

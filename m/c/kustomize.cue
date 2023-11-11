@@ -1,5 +1,9 @@
 package c
 
+import (
+	"encoding/yaml"
+)
+
 class: #Cluster
 
 infra: {
@@ -25,6 +29,26 @@ env: (#Transform & {
 		bootstrap: class.bootstrap
 	}
 }).outputs
+
+kustomize: {
+	for ctype in ["cluster", "manual"] {
+		"coder-\(class.handle)-\(class.env)-\(ctype)-env": #KustomizeHelm & {
+			helm: {
+				release: "bootstrap"
+				name:    "any-resource"
+				version: "0.1.0"
+				repo:    "https://kiwigrid.github.io"
+				values: {
+					anyResources: {
+						for _app_name, _app in bootstrap["coder-\(class.handle)-\(class.env)-\(ctype)-env"].apps {
+							(_app_name): yaml.Marshal(_app.application)
+						}
+					}
+				}
+			}
+		}
+	}
+}
 
 kustomize: "secrets": #Kustomize & {
 	cluster: #Cluster
