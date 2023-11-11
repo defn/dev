@@ -189,7 +189,7 @@ kustomize: "kyverno": #KustomizeHelm & {
 	helm: {
 		release: "kyverno"
 		name:    "kyverno"
-		version: "3.0.5"
+		version: "3.1.0"
 		repo:    "https://kyverno.github.io/kyverno"
 		values: {
 			replicaCount: 1
