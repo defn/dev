@@ -23,9 +23,9 @@ spec:
         data:
           spec:
             acme:
-              email: '{{request.object.data.zerossl_email | base64_decode(@)}}'
+              email: '{{`{{request.object.data.zerossl_email | base64_decode(@)}}`}}'
               externalAccountBinding:
-                keyID: '{{request.object.data.zerossl_eab_kid | base64_decode(@)}}'
+                keyID: '{{`{{request.object.data.zerossl_eab_kid | base64_decode(@)}}`}}'
                 keySecretRef:
                   key: zerossl_eab_hmac
                   name: zerossl-production
@@ -38,7 +38,7 @@ spec:
                       apiTokenSecretRef:
                         key: cloudflare_api_token
                         name: zerossl-production
-                      email: '{{request.object.data.cloudflare_email | base64_decode(@)}}'
+                      email: '{{`{{request.object.data.cloudflare_email | base64_decode(@)}}`}}'
                   selector: {}
         kind: ClusterIssuer
         name: zerossl-production
