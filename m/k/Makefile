@@ -47,6 +47,7 @@ build:
 		$(MAKE) sha1 bump chart=$(chart); \
 		diff <(cat ../h/$(chart)-sha1 2>/dev/null) <(find ../h/$(chart)/templates -name '*.yaml' | sort | xargs sha1sum); \
 		(cd ../h/ && mark bumped $(chart) && helm package $(chart)); \
+		$(MAKE) push chart=$(chart); \
 	fi
 
 push:
