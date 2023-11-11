@@ -68,7 +68,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-argo-cd
-              targetRevision: 0.0.11
+              targetRevision: 0.0.12
             syncPolicy:
               automated:
                 prune: true
@@ -89,7 +89,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-kyverno
-              targetRevision: 0.0.13
+              targetRevision: 0.0.14
             syncPolicy:
               automated:
                 prune: true
@@ -321,7 +321,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-traefik
-              targetRevision: 0.0.11
+              targetRevision: 0.0.12
             syncPolicy:
               automated:
                 prune: true
@@ -447,7 +447,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-harbor
-              targetRevision: 0.0.11
+              targetRevision: 0.0.12
             syncPolicy:
               automated:
                 prune: true
@@ -489,7 +489,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-hello
-              targetRevision: 0.0.11
+              targetRevision: 0.0.12
             syncPolicy:
               automated:
                 prune: true
