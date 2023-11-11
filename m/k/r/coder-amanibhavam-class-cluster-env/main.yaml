@@ -236,7 +236,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-kyverno
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: 0.0.11
+    targetRevision: 0.0.12
   syncPolicy:
     automated:
       prune: true

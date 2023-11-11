@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: harbor.district.amanibhavam.defn.run
     chart: library/helm/coder-amanibhavam-district-cluster-env
-    targetRevision: 0.0.10
+    targetRevision: 0.0.12
   syncPolicy:
     automated:
       prune: true

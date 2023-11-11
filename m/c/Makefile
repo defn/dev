@@ -22,10 +22,14 @@ release-all:
 	$(MAKE) build-all
 	$(MAKE) release digest=$(digest)
 
+delivery:
+	$(MAKE) all
+	$(MAKE) all
+
 all:
-	$(MAKE) crd release-all digest=
+	$(MAKE) crd release-all digest=1
 	if ! git grep not-used ../k/r; then true; else false; fi
-	cd ../k && $(MAKE) all-build
+	cd ../k && $(MAKE) delivery
 
 digest:
 	cd ./r && $(MAKE) digest
