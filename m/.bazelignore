@@ -27,6 +27,7 @@ pkg/cue/.direnv
 pkg/dapr/.direnv
 pkg/dev/.direnv
 pkg/development/.direnv
+pkg/dyff/.direnv
 pkg/earthly/.direnv
 pkg/gh/.direnv
 pkg/glow/.direnv
@@ -98,6 +99,7 @@ pkg/cue/result
 pkg/dapr/result
 pkg/dev/result
 pkg/development/result
+pkg/dyff/result
 pkg/earthly/result
 pkg/gh/result
 pkg/glow/result
