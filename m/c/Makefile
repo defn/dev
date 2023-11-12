@@ -4,6 +4,10 @@ app ?= district school class
 
 digest ?= 
 
+delivery:
+	$(MAKE) all digest=$(digest)
+	$(MAKE) all
+
 build:
 	cd $(shell uname -n) && $(MAKE) build
 	$(MAKE) release
@@ -23,10 +27,6 @@ build-all:
 release-all:
 	$(MAKE) build-all
 	$(MAKE) release digest=$(digest)
-
-delivery:
-	$(MAKE) all
-	$(MAKE) all
 
 all:
 	$(MAKE) crd release-all digest=$(digest)

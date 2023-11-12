@@ -68,7 +68,7 @@ helmCharts:
             source:
               repoURL: harbor.class.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-class-cluster-argo-cd
-              targetRevision: 0.0.12
+              targetRevision: 0.0.14
             syncPolicy:
               automated:
                 prune: true
@@ -342,7 +342,7 @@ helmCharts:
             source:
               repoURL: harbor.class.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-class-cluster-buildkite
-              targetRevision: 0.0.10
+              targetRevision: 0.0.11
             syncPolicy:
               automated:
                 prune: true

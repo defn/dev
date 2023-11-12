@@ -38,7 +38,7 @@ cache: "ghcr.io/dexidp/dex:v2.37.0": "ghcr.io/dexidp/dex@sha256:f579d00721b0d842
 
 cache: "ghcr.io/external-secrets/external-secrets:v0.9.8": "ghcr.io/external-secrets/external-secrets@sha256:12353dc3aa781f5b25a89b0f1b9fe259cff8117d41872e7722227c122e940ced"
 
-cache: "ghcr.io/galleybytes/terraform-operator:v0.14.0": "ghcr.io/galleybytes/terraform-operator@sha256:d93a996d405064a3d1dd897ac61b796cc115a3c3c577c955d48359b0f1489b08"
+cache: "ghcr.io/galleybytes/terraform-operator:v0.16.0": "ghcr.io/galleybytes/terraform-operator@sha256:22dc728858345330a1a34c13074b3c26e0540c89be0aa613a24694bebc1a3123"
 
 cache: "ghcr.io/headlamp-k8s/headlamp:v0.21.0": "ghcr.io/headlamp-k8s/headlamp@sha256:7a9587036bd29304f8f1387a7245556a3c479434670b2ca58e3624d44d2a68c9"
 
@@ -74,7 +74,7 @@ cache: "public.ecr.aws/karpenter/controller:v0.32.1@sha256:9b31039d45613ac22a104
 
 cache: "quay.io/argoproj/argo-events:v1.8.1": "quay.io/argoproj/argo-events@sha256:3c8d787908189604975ca87f480e0f60c93fdfb89bbf944a0c449d888e9368e7"
 
-cache: "quay.io/argoproj/argocd:v2.8.4": "quay.io/argoproj/argocd@sha256:f02d31d4b115d79de3dc45ebeec3a3107b9178d980e69d9dc2b26019d43f3e09"
+cache: "quay.io/argoproj/argocd:v2.9.0": "quay.io/argoproj/argocd@sha256:1be54db1f0f5d1c0da4c9b592f8ee1921aa7b5441a780dd90ca2cad135131816"
 
 cache: "quay.io/argoproj/argocli:v3.5.1": "quay.io/argoproj/argocli@sha256:82cbdc300b3fe3702dc399c9fb841978f47975a84e929e76290094a1accb587f"
 

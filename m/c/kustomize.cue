@@ -69,7 +69,7 @@ kustomize: "argo-cd": #Kustomize & {
 	}
 
 	resource: "argo-cd": {
-		url: "https://raw.githubusercontent.com/argoproj/argo-cd/v2.8.4/manifests/install.yaml"
+		url: "https://raw.githubusercontent.com/argoproj/argo-cd/v2.9.0/manifests/install.yaml"
 	}
 
 	resource: "ingress-argo-cd": {
@@ -481,7 +481,7 @@ kustomize: "buildkite": #KustomizeHelm & {
 				debug:          true
 				tags: ["queue=default"]
 				image:           "169.254.32.1:5000/dfd:buildkite"
-				"max-in-flight": 100
+				"max-in-flight": 0
 			}
 			agentStackSecret: "buildkite"
 		}
@@ -1729,7 +1729,7 @@ kustomize: "tfo": #Kustomize & {
 	namespace: "tf-system"
 
 	resource: "tfo": {
-		url: "https://raw.githubusercontent.com/GalleyBytes/terraform-operator/master/deploy/bundles/v0.14.0/v0.14.0.yaml"
+		url: "https://raw.githubusercontent.com/GalleyBytes/terraform-operator/master/deploy/bundles/v0.16.0/v0.16.0.yaml"
 	}
 }
 
