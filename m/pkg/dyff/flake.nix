@@ -14,9 +14,9 @@
 
 
       "x86_64-linux" = {
-        os = "linus";
+        os = "linux";
         arch = "amd64";
-        sha256 = "sha256-aaaaaG/E7jYcHRqF29RsJpNyt2xUE+Kpv9D3/lLGb3g="; # x86_64-linux
+        sha256 = "sha256-0hh5xIEPj5evntY3uDOagN+j+wib1Fz77qlbhjmyA+E="; # x86_64-linux
       };
       "aarch64-linux" = {
         os = "linux";
