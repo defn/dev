@@ -115,17 +115,17 @@
       },
       "locked": {
         "dir": "m/pkg/dyff",
-        "lastModified": 1699743852,
-        "narHash": "sha256-b8iurAIKI5CU63psRINT1WBCU2UDgmivfdw2T2vq1a4=",
+        "lastModified": 1699747633,
+        "narHash": "sha256-6X50FtGoEU96pXxPMVtM4Gm1JAifTCdMyL1U/YwS8cI=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "061fbaba72094804fac67bf3c680bbf8ea056486",
+        "rev": "0cce21a7ed74a0f94751c72cbcfcf5e6604a6cd0",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/dyff",
         "owner": "defn",
-        "ref": "pkg-dyff-1.6.0-1",
+        "ref": "pkg-dyff-1.6.0-2",
         "repo": "dev",
         "type": "github"
       }
