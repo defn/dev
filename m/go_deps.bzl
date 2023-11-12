@@ -1056,8 +1056,8 @@ def go_deps():
     go_repository(
         name = "org_golang_x_exp",
         importpath = "golang.org/x/exp",
-        sum = "h1:mchzmB1XO2pMaKFRqk/+MV3mgGG96aqaPXaMifQU47w=",
-        version = "v0.0.0-20231108232855-2478ac86f678",
+        sum = "h1:FRnLl4eNAQl8hwxVVC17teOw8kdjVDVAiFMtgUdTSRQ=",
+        version = "v0.0.0-20231110203233-9a3e6036ecaa",
     )
 
     go_repository(
