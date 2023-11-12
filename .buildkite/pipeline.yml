@@ -31,3 +31,17 @@ steps:
                   runAsNonRoot: true
                   runAsUser: 1000
                   runAsGroup: 1000
+  - label: build helm
+    plugins:
+      - kubernetes:
+          podSpec:
+            containers:
+              - image: 169.254.32.1:5000/dfd:class
+                imagePullPolicy: Always
+                command: [bash, -c]
+                args:
+                  - "'cd && source .bash_profile && cd m/k && make all-build'"
+                securityContext:
+                  runAsNonRoot: true
+                  runAsUser: 1000
+                  runAsGroup: 1000

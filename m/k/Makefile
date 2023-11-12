@@ -11,7 +11,10 @@ all-init:
 	ls -d */ | grep \\- | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) init chart=$$1 revision=$(revision)'
 
 all-sha1:
-	ls -d */ | grep \\- | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) sha1 chart=$$1'''
+	ls -d */ | grep \\- | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) sha1 chart=$$1'
+
+all-package:
+	ls -d */ | grep \\- | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) package chart=$$1'
 
 all-build:
 	ls -d */ | grep \\- | grep -v \\-env/ | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) build chart=$$1; (echo package c; echo "teacher: bootstrap: \"$$(echo $$1 | cut -d- -f5-)\": app_version: \"0.0.$$(cat ../h/$$1-version)\"" ) > ../c/$$(echo $$1 | cut -d- -f1-3)/$$1-version.cue'
@@ -54,7 +57,9 @@ build-inner:
 	$(MAKE) package push chart=$(chart)
 
 package:
-	cd ../h && cat $(chart)/Chart.yaml && helm package $(chart)
+	@if [[ "$$(cat ../h/$(chart)-sha1 2>/dev/null)" != "$$(find r/$(chart) -name '*.yaml' | sort | xargs sha1sum)" ]]; then \
+		cd ../h && cat $(chart)/Chart.yaml && helm package $(chart); \
+	fi
 
 push:
 	if ! test -f ../h/$(chart)-$(version).tgz; then $(MAKE) package chart=$(chart); fi
