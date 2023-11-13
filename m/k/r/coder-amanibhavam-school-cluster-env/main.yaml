@@ -26,7 +26,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-aws-node-termination-handler
     repoURL: harbor.school.amanibhavam.defn.run
-    targetRevision: 0.0.3
+    targetRevision: 0.0.4
   syncPolicy:
     automated:
       prune: true
