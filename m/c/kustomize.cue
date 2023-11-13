@@ -2813,7 +2813,7 @@ kustomize: "aws-node-termination-handler": #KustomizeHelm & {
 	namespace: "aws-node-termination-handler"
 
 	helm: {
-		release:   "aws-node-termination-handler"
+		release:   "aws-node-term"
 		name:      "aws-node-termination-handler"
 		namespace: "aws-node-termination-handler"
 		version:   "0.21.0"
