@@ -19,6 +19,9 @@ teacher: {
 		"kyverno": {
 			app_sync_options: ["ServerSideApply=true"]
 		}
+		"reloader": {}
+		"descheduler": {}
+		"aws-node-termination-handler": {}
 		"cert-manager": {}
 		"trust-manager": {}
 

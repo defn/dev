@@ -18,10 +18,10 @@ env: (#Transform & {
 	transformer: #TransformK3S
 
 	inputs: "\(class.cluster_name)-cluster": {
-		bootstrap:   class.bootstrap
-		app_repo:    "harbor.\(class.env).\(class.handle).defn.run"
-		app_type:    "chart"
-		app_def:     "library/helm/coder-\(class.handle)-\(class.env)-cluster-env"
+		bootstrap: class.bootstrap
+		app_repo:  "harbor.\(class.env).\(class.handle).defn.run"
+		app_type:  "chart"
+		app_def:   "library/helm/coder-\(class.handle)-\(class.env)-cluster-env"
 	}
 }).outputs
 
@@ -2752,6 +2752,81 @@ kustomize: "harbor": #KustomizeHelm & {
 				secret: "\(cluster.cluster_name)-cluster"
 				keys: ["POSTGRES_PASSWORD"]
 			}}).output
+		}
+	}
+}
+
+// https://artifacthub.io/packages/helm/stakater/reloader
+kustomize: "reloader": #KustomizeHelm & {
+	cluster: #Cluster
+
+	namespace: "reloader"
+
+	helm: {
+		release:   "reloader"
+		name:      "reloader"
+		namespace: "reloader"
+		version:   "1.0.51"
+		repo:      "https://stakater.github.io/stakater-charts"
+		values: {
+		}
+	}
+
+	resource: "namespace-reloader": {
+		apiVersion: "v1"
+		kind:       "Namespace"
+		metadata: {
+			name: "reloader"
+		}
+	}
+}
+
+// https://artifacthub.io/packages/helm/descheduler/descheduler
+kustomize: "descheduler": #KustomizeHelm & {
+	cluster: #Cluster
+
+	namespace: "descheduler"
+
+	helm: {
+		release:   "descheduler"
+		name:      "descheduler"
+		namespace: "descheduler"
+		version:   "0.28.0"
+		repo:      "https://kubernetes-sigs.github.io/descheduler"
+		values: {
+		}
+	}
+
+	resource: "namespace-descheduler": {
+		apiVersion: "v1"
+		kind:       "Namespace"
+		metadata: {
+			name: "descheduler"
+		}
+	}
+}
+
+// https://artifacthub.io/packages/helm/aws/aws-node-termination-handler
+kustomize: "aws-node-termination-handler": #KustomizeHelm & {
+	cluster: #Cluster
+
+	namespace: "aws-node-termination-handler"
+
+	helm: {
+		release:   "aws-node-termination-handler"
+		name:      "aws-node-termination-handler"
+		namespace: "aws-node-termination-handler"
+		version:   "0.21.0"
+		repo:      "https://aws.github.io/eks-charts"
+		values: {
+		}
+	}
+
+	resource: "namespace-aws-node-termination-handler": {
+		apiVersion: "v1"
+		kind:       "Namespace"
+		metadata: {
+			name: "aws-node-termination-handler"
 		}
 	}
 }

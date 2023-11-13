@@ -24,6 +24,27 @@ spec:
     name: coder-amanibhavam-class-cluster
   project: default
   source:
+    chart: library/helm/coder-amanibhavam-class-cluster-aws-node-termination-handler
+    repoURL: harbor.class.amanibhavam.defn.run
+    targetRevision: 0.0.2
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: coder-amanibhavam-class-cluster-aws-node-termination-handler
+  namespace: argocd
+---
+spec:
+  destination:
+    name: coder-amanibhavam-class-cluster
+  project: default
+  source:
     chart: library/helm/coder-amanibhavam-class-cluster-buildkite
     repoURL: harbor.class.amanibhavam.defn.run
     targetRevision: 0.0.11
@@ -101,6 +122,27 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-class-cluster-coder
+  namespace: argocd
+---
+spec:
+  destination:
+    name: coder-amanibhavam-class-cluster
+  project: default
+  source:
+    chart: library/helm/coder-amanibhavam-class-cluster-descheduler
+    repoURL: harbor.class.amanibhavam.defn.run
+    targetRevision: 0.0.2
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: coder-amanibhavam-class-cluster-descheduler
   namespace: argocd
 ---
 spec:
@@ -291,6 +333,27 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-class-cluster-pod-identity
+  namespace: argocd
+---
+spec:
+  destination:
+    name: coder-amanibhavam-class-cluster
+  project: default
+  source:
+    chart: library/helm/coder-amanibhavam-class-cluster-reloader
+    repoURL: harbor.class.amanibhavam.defn.run
+    targetRevision: 0.0.2
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: coder-amanibhavam-class-cluster-reloader
   namespace: argocd
 ---
 spec:

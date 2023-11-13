@@ -39,7 +39,7 @@ package c
 	app_name:      string
 	app_namespace: string
 
-	app_version: string
+	app_version: string | *"not-found"
 	app_repo:    string
 	app_type:    string
 	app_def:     string
@@ -115,7 +115,7 @@ package c
 		destination: name:       string
 		destination: namespace?: string
 		source: {
-			repoURL:        string
+			repoURL: string
 		}
 
 		syncPolicy: automated: {
@@ -130,9 +130,9 @@ package c
 	from: {
 		#Input
 		bootstrap: [string]: #BootstrapConfig
-		app_repo:    string
-		app_type:    string
-		app_def:     string
+		app_repo: string
+		app_type: string
+		app_def:  string
 	}
 
 	to: #K3S

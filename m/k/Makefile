@@ -54,7 +54,10 @@ build-inner:
 	echo "version: \"$(version)\"" >> ../h/$(chart)/Chart.yaml.tmp
 	mv -f ../h/$(chart)/Chart.yaml.tmp ../h/$(chart)/Chart.yaml
 	mark $(chart)
-	$(MAKE) package push chart=$(chart)
+	$(MAKE) package-always push chart=$(chart)
+
+package-always:
+	cd ../h && cat $(chart)/Chart.yaml && helm package $(chart); \
 
 package:
 	@if [[ "$$(cat ../h/$(chart)-sha1 2>/dev/null)" != "$$(find r/$(chart) -name '*.yaml' | sort | xargs sha1sum)" ]]; then \

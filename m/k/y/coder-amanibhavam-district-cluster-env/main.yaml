@@ -66,6 +66,27 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
+  name: coder-amanibhavam-district-cluster-aws-node-termination-handler
+  namespace: argocd
+spec:
+  destination:
+    name: coder-amanibhavam-district-cluster
+  project: default
+  source:
+    chart: library/helm/coder-amanibhavam-district-cluster-aws-node-termination-handler
+    repoURL: harbor.district.amanibhavam.defn.run
+    targetRevision: 0.0.2
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-district-cluster-buildkite
   namespace: argocd
 spec:
@@ -139,6 +160,27 @@ spec:
     chart: library/helm/coder-amanibhavam-district-cluster-coder
     repoURL: harbor.district.amanibhavam.defn.run
     targetRevision: 0.0.14
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: coder-amanibhavam-district-cluster-descheduler
+  namespace: argocd
+spec:
+  destination:
+    name: coder-amanibhavam-district-cluster
+  project: default
+  source:
+    chart: library/helm/coder-amanibhavam-district-cluster-descheduler
+    repoURL: harbor.district.amanibhavam.defn.run
+    targetRevision: 0.0.2
   syncPolicy:
     automated:
       prune: true
@@ -413,6 +455,27 @@ spec:
     chart: library/helm/coder-amanibhavam-district-cluster-postgres-operator
     repoURL: harbor.district.amanibhavam.defn.run
     targetRevision: 0.0.10
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: coder-amanibhavam-district-cluster-reloader
+  namespace: argocd
+spec:
+  destination:
+    name: coder-amanibhavam-district-cluster
+  project: default
+  source:
+    chart: library/helm/coder-amanibhavam-district-cluster-reloader
+    repoURL: harbor.district.amanibhavam.defn.run
+    targetRevision: 0.0.2
   syncPolicy:
     automated:
       prune: true

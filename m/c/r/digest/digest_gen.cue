@@ -52,6 +52,8 @@ cache: "ghcr.io/kyverno/kyvernopre:v1.10.3": "ghcr.io/kyverno/kyvernopre@sha256:
 
 cache: "ghcr.io/kyverno/reports-controller:v1.10.3": "ghcr.io/kyverno/reports-controller@sha256:b0fbfe5a7250fadd120ffbb6dd4cb70e575bddc165da76b46e3b7dab4d275141"
 
+cache: "ghcr.io/stakater/reloader:v1.0.51": "ghcr.io/stakater/reloader@sha256:ef0c75e91dcda583c9619b7ef2aa54aa3ffcf20ac0e959aa4460fd5074805702"
+
 cache: "goharbor/harbor-core:v2.9.1": "goharbor/harbor-core@sha256:ee70dcf6e7c5a3c1d65a6898eb7d3816cbe760f7971a79e1fed2d529abb12ccd"
 
 cache: "goharbor/harbor-db:v2.9.1": "goharbor/harbor-db@sha256:9342cc7628537ab8b662b0eb48c044ffc914bb355c346e1b437477ff526a2887"
@@ -69,6 +71,8 @@ cache: "goharbor/registry-photon:v2.9.1": "goharbor/registry-photon@sha256:8cf84
 cache: "goharbor/trivy-adapter-photon:v2.9.1": "goharbor/trivy-adapter-photon@sha256:48dbd3e6d45705574adb91115f202fbe88968e58b0a7191f8d9567a3722bfda3"
 
 cache: "pihole/pihole:2023.05.2": "pihole/pihole@sha256:8bc45afe1625487aef62859a5bf02f3d7b3429e480f4e29e4689635ab86ec312"
+
+cache: "public.ecr.aws/aws-ec2/aws-node-termination-handler:v1.19.0": "public.ecr.aws/aws-ec2/aws-node-termination-handler@sha256:844478ebd5b852e2575fa8a23afc2a2e3e44ee7b3c1467f37555bdf75cbd723b"
 
 cache: "public.ecr.aws/karpenter/controller:v0.32.1@sha256:9b31039d45613ac22a104b8d48eca9dcdeff93e525bd473c811dfd3502e58c69": "public.ecr.aws/karpenter/controller@sha256:9b31039d45613ac22a104b8d48eca9dcdeff93e525bd473c811dfd3502e58c69"
 
@@ -115,5 +119,7 @@ cache: "quay.io/jetstack/cert-manager-webhook:v1.13.2": "quay.io/jetstack/cert-m
 cache: "quay.io/jetstack/trust-manager:v0.7.0": "quay.io/jetstack/trust-manager@sha256:bcc75013a52f6d784a376ac4693cd5b051e847f0ad2015f5063fca5477021323"
 
 cache: "redis:7.0.11-alpine": "redis@sha256:121bac949fb5f623b9fa0b4e4c9fb358ffd045966e754cfa3eb9963f3af2fe3b"
+
+cache: "registry.k8s.io/descheduler/descheduler:v0.28.0": "registry.k8s.io/descheduler/descheduler@sha256:814571a3b9ecaac615c555ff77bf8fbbe6679182f3aadeab4ebe3fcbbb27a159"
 
 cache: "registry.opensource.zalan.do/acid/postgres-operator:v1.10.1": "registry.opensource.zalan.do/acid/postgres-operator@sha256:8ced77e97e0876b2e1dbc8ef3ee6c9cc26df18c20b5f6c188a7799096be097df"
