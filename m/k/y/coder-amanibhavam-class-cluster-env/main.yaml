@@ -24,16 +24,16 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-class-cluster-aws-node-termination-handler
+  name: coder-amanibhavam-class-cluster-aws-node-term
   namespace: argocd
 spec:
   destination:
     name: coder-amanibhavam-class-cluster
   project: default
   source:
-    chart: library/helm/coder-amanibhavam-class-cluster-aws-node-termination-handler
+    chart: library/helm/coder-amanibhavam-class-cluster-aws-node-term
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: 0.0.4
+    targetRevision: 0.0.1
   syncPolicy:
     automated:
       prune: true

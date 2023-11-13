@@ -2807,13 +2807,13 @@ kustomize: "descheduler": #KustomizeHelm & {
 }
 
 // https://artifacthub.io/packages/helm/aws/aws-node-termination-handler
-kustomize: "aws-node-termination-handler": #KustomizeHelm & {
+kustomize: "aws-node-term": #KustomizeHelm & {
 	cluster: #Cluster
 
 	namespace: "aws-node-termination-handler"
 
 	helm: {
-		release:   "term"
+		release:   "aws-node-term"
 		name:      "aws-node-termination-handler"
 		namespace: "aws-node-termination-handler"
 		version:   "0.21.0"

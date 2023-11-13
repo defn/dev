@@ -138,12 +138,12 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
-        aws-node-termination-handler: |
+        aws-node-term: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
           metadata:
             namespace: argocd
-            name: coder-amanibhavam-district-cluster-aws-node-termination-handler
+            name: coder-amanibhavam-district-cluster-aws-node-term
             annotations:
               argocd.argoproj.io/sync-wave: "100"
           spec:
@@ -152,8 +152,8 @@ helmCharts:
               name: coder-amanibhavam-district-cluster
             source:
               repoURL: harbor.district.amanibhavam.defn.run
-              chart: library/helm/coder-amanibhavam-district-cluster-aws-node-termination-handler
-              targetRevision: 0.0.4
+              chart: library/helm/coder-amanibhavam-district-cluster-aws-node-term
+              targetRevision: 0.0.1
             syncPolicy:
               automated:
                 prune: true
