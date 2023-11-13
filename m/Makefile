@@ -44,7 +44,7 @@ class-init:
 
 teacher: 
 	pass hello
-	tailscale serve https / http://127.0.0.1:3000
+	tailscale serve --bg http://127.0.0.1:3000
 	b server defn-org-sso $(MAKE) dev_inner 
 
 dev_inner:
