@@ -96,6 +96,69 @@ helmCharts:
                 selfHeal: true
               syncOptions:
                 - ServerSideApply=true
+        reloader: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-reloader
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-reloader
+              targetRevision: 0.0.2
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        descheduler: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-descheduler
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-descheduler
+              targetRevision: 0.0.2
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        aws-node-termination-handler: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-aws-node-termination-handler
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: harbor.district.amanibhavam.defn.run
+              chart: library/helm/coder-amanibhavam-district-cluster-aws-node-termination-handler
+              targetRevision: 0.0.2
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
         cert-manager: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application

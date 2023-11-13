@@ -1,0 +1,16 @@
+#ManagedBy: cue
+
+patches: []
+resources:
+  - resource-namespace-descheduler.yaml
+namespace: descheduler
+commonLabels: {}
+commonAnnotations: {}
+helmCharts:
+  - releaseName: descheduler
+    name: descheduler
+    version: 0.28.0
+    repo: https://kubernetes-sigs.github.io/descheduler
+    namespace: descheduler
+    valuesInline: {}
+    includeCRDs: true
