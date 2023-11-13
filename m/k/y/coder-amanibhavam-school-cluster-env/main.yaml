@@ -159,7 +159,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-external-secrets
     repoURL: harbor.school.amanibhavam.defn.run
-    targetRevision: 0.0.10
+    targetRevision: 0.0.12
   syncPolicy:
     automated:
       prune: true

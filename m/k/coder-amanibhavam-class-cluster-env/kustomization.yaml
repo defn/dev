@@ -216,7 +216,7 @@ helmCharts:
             source:
               repoURL: harbor.class.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-class-cluster-external-secrets
-              targetRevision: 0.0.10
+              targetRevision: 0.0.12
             syncPolicy:
               automated:
                 prune: true

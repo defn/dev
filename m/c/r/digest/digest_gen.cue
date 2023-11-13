@@ -36,7 +36,7 @@ cache: "ghcr.io/coder/coder:v2.3.3": "ghcr.io/coder/coder@sha256:d17a6337a4372a0
 
 cache: "ghcr.io/dexidp/dex:v2.37.0": "ghcr.io/dexidp/dex@sha256:f579d00721b0d842328c43a562f50343c54b0048ef2d58d6b54e750c21fc7938"
 
-cache: "ghcr.io/external-secrets/external-secrets:v0.9.8": "ghcr.io/external-secrets/external-secrets@sha256:12353dc3aa781f5b25a89b0f1b9fe259cff8117d41872e7722227c122e940ced"
+cache: "ghcr.io/external-secrets/external-secrets:v0.9.9": "ghcr.io/external-secrets/external-secrets@sha256:88d34938c949af80498b87cdbf6fcedf1d10a80190ff126adfcd9db964bfdf65"
 
 cache: "ghcr.io/galleybytes/terraform-operator:v0.16.0": "ghcr.io/galleybytes/terraform-operator@sha256:22dc728858345330a1a34c13074b3c26e0540c89be0aa613a24694bebc1a3123"
 
@@ -71,8 +71,6 @@ cache: "goharbor/registry-photon:v2.9.1": "goharbor/registry-photon@sha256:8cf84
 cache: "goharbor/trivy-adapter-photon:v2.9.1": "goharbor/trivy-adapter-photon@sha256:48dbd3e6d45705574adb91115f202fbe88968e58b0a7191f8d9567a3722bfda3"
 
 cache: "pihole/pihole:2023.05.2": "pihole/pihole@sha256:8bc45afe1625487aef62859a5bf02f3d7b3429e480f4e29e4689635ab86ec312"
-
-cache: "public.ecr.aws/aws-ec2/aws-node-termination-handler:v1.19.0": "public.ecr.aws/aws-ec2/aws-node-termination-handler@sha256:844478ebd5b852e2575fa8a23afc2a2e3e44ee7b3c1467f37555bdf75cbd723b"
 
 cache: "public.ecr.aws/karpenter/controller:v0.32.1@sha256:9b31039d45613ac22a104b8d48eca9dcdeff93e525bd473c811dfd3502e58c69": "public.ecr.aws/karpenter/controller@sha256:9b31039d45613ac22a104b8d48eca9dcdeff93e525bd473c811dfd3502e58c69"
 

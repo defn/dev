@@ -102,8 +102,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.8
-    helm.sh/chart: external-secrets-0.9.8
+    app.kubernetes.io/version: v0.9.9
+    helm.sh/chart: external-secrets-0.9.9
   name: external-secrets-controller
 ---
 rules:
@@ -142,8 +142,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.8
-    helm.sh/chart: external-secrets-0.9.8
+    app.kubernetes.io/version: v0.9.9
+    helm.sh/chart: external-secrets-0.9.9
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
   name: external-secrets-edit
@@ -164,8 +164,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.8
-    helm.sh/chart: external-secrets-0.9.8
+    app.kubernetes.io/version: v0.9.9
+    helm.sh/chart: external-secrets-0.9.9
     servicebinding.io/controller: "true"
   name: external-secrets-servicebindings
 ---
@@ -201,8 +201,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.8
-    helm.sh/chart: external-secrets-0.9.8
+    app.kubernetes.io/version: v0.9.9
+    helm.sh/chart: external-secrets-0.9.9
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
     rbac.authorization.k8s.io/aggregate-to-view: "true"
@@ -215,8 +215,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.8
-    helm.sh/chart: external-secrets-0.9.8
+    app.kubernetes.io/version: v0.9.9
+    helm.sh/chart: external-secrets-0.9.9
   name: external-secrets-controller
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -498,7 +498,7 @@ spec:
                             maxProperties: 1
                             properties:
                               generatorRef:
-                                description: GeneratorRef points to a generator custom resource in
+                                description: "GeneratorRef points to a generator custom resource. \n Deprecated: The generatorRef is not implemented in .data[]. this will be removed with v1."
                                 properties:
                                   apiVersion:
                                     default: generators.external-secrets.io/v1alpha1
@@ -642,7 +642,7 @@ spec:
                             maxProperties: 1
                             properties:
                               generatorRef:
-                                description: GeneratorRef points to a generator custom resource in
+                                description: GeneratorRef points to a generator custom resource.
                                 properties:
                                   apiVersion:
                                     default: generators.external-secrets.io/v1alpha1
@@ -1612,12 +1612,35 @@ spec:
                             - tenancy
                             - user
                           type: object
+                        compartment:
+                          description: Compartment is the vault compartment OCID. Required for PushSecret
+                          type: string
+                        encryptionKey:
+                          description: EncryptionKey is the OCID of the encryption key within the vault. Required for PushSecret
+                          type: string
                         principalType:
                           description: The type of principal to use for authentication. If left blank, the Auth struct will determine the principal type. This optional field must be specified if using workload identity.
                           type: string
                         region:
                           description: Region is the region where vault is located.
                           type: string
+                        serviceAccountRef:
+                          description: ServiceAccountRef specified the service account that should be used when authenticating with WorkloadIdentity.
+                          properties:
+                            audiences:
+                              description: Audience specifies the `aud` claim for the service account token If the service account uses a well-known annotation for e.g. IRSA or GCP Workload Identity then this audiences will be appended to the list
+                              items:
+                                type: string
+                              type: array
+                            name:
+                              description: The name of the ServiceAccount resource being referred to.
+                              type: string
+                            namespace:
+                              description: Namespace of the resource being referred to. Ignored if referent is not cluster-scoped. cluster-scoped defaults to the namespace of the referent.
+                              type: string
+                          required:
+                            - name
+                          type: object
                         vault:
                           description: Vault is the vault's OCID of the specific vault where secret is located.
                           type: string
@@ -3133,12 +3156,35 @@ spec:
                             - tenancy
                             - user
                           type: object
+                        compartment:
+                          description: Compartment is the vault compartment OCID. Required for PushSecret
+                          type: string
+                        encryptionKey:
+                          description: EncryptionKey is the OCID of the encryption key within the vault. Required for PushSecret
+                          type: string
                         principalType:
                           description: The type of principal to use for authentication. If left blank, the Auth struct will determine the principal type. This optional field must be specified if using workload identity.
                           type: string
                         region:
                           description: Region is the region where vault is located.
                           type: string
+                        serviceAccountRef:
+                          description: ServiceAccountRef specified the service account that should be used when authenticating with WorkloadIdentity.
+                          properties:
+                            audiences:
+                              description: Audience specifies the `aud` claim for the service account token If the service account uses a well-known annotation for e.g. IRSA or GCP Workload Identity then this audiences will be appended to the list
+                              items:
+                                type: string
+                              type: array
+                            name:
+                              description: The name of the ServiceAccount resource being referred to.
+                              type: string
+                            namespace:
+                              description: Namespace of the resource being referred to. Ignored if referent is not cluster-scoped. cluster-scoped defaults to the namespace of the referent.
+                              type: string
+                          required:
+                            - name
+                          type: object
                         vault:
                           description: Vault is the vault's OCID of the specific vault where secret is located.
                           type: string
@@ -4319,7 +4365,7 @@ spec:
                         maxProperties: 1
                         properties:
                           generatorRef:
-                            description: GeneratorRef points to a generator custom resource in
+                            description: "GeneratorRef points to a generator custom resource. \n Deprecated: The generatorRef is not implemented in .data[]. this will be removed with v1."
                             properties:
                               apiVersion:
                                 default: generators.external-secrets.io/v1alpha1
@@ -4463,7 +4509,7 @@ spec:
                         maxProperties: 1
                         properties:
                           generatorRef:
-                            description: GeneratorRef points to a generator custom resource in
+                            description: GeneratorRef points to a generator custom resource.
                             properties:
                               apiVersion:
                                 default: generators.external-secrets.io/v1alpha1
@@ -5860,12 +5906,35 @@ spec:
                             - tenancy
                             - user
                           type: object
+                        compartment:
+                          description: Compartment is the vault compartment OCID. Required for PushSecret
+                          type: string
+                        encryptionKey:
+                          description: EncryptionKey is the OCID of the encryption key within the vault. Required for PushSecret
+                          type: string
                         principalType:
                           description: The type of principal to use for authentication. If left blank, the Auth struct will determine the principal type. This optional field must be specified if using workload identity.
                           type: string
                         region:
                           description: Region is the region where vault is located.
                           type: string
+                        serviceAccountRef:
+                          description: ServiceAccountRef specified the service account that should be used when authenticating with WorkloadIdentity.
+                          properties:
+                            audiences:
+                              description: Audience specifies the `aud` claim for the service account token If the service account uses a well-known annotation for e.g. IRSA or GCP Workload Identity then this audiences will be appended to the list
+                              items:
+                                type: string
+                              type: array
+                            name:
+                              description: The name of the ServiceAccount resource being referred to.
+                              type: string
+                            namespace:
+                              description: Namespace of the resource being referred to. Ignored if referent is not cluster-scoped. cluster-scoped defaults to the namespace of the referent.
+                              type: string
+                          required:
+                            - name
+                          type: object
                         vault:
                           description: Vault is the vault's OCID of the specific vault where secret is located.
                           type: string
@@ -7381,12 +7450,35 @@ spec:
                             - tenancy
                             - user
                           type: object
+                        compartment:
+                          description: Compartment is the vault compartment OCID. Required for PushSecret
+                          type: string
+                        encryptionKey:
+                          description: EncryptionKey is the OCID of the encryption key within the vault. Required for PushSecret
+                          type: string
                         principalType:
                           description: The type of principal to use for authentication. If left blank, the Auth struct will determine the principal type. This optional field must be specified if using workload identity.
                           type: string
                         region:
                           description: Region is the region where vault is located.
                           type: string
+                        serviceAccountRef:
+                          description: ServiceAccountRef specified the service account that should be used when authenticating with WorkloadIdentity.
+                          properties:
+                            audiences:
+                              description: Audience specifies the `aud` claim for the service account token If the service account uses a well-known annotation for e.g. IRSA or GCP Workload Identity then this audiences will be appended to the list
+                              items:
+                                type: string
+                              type: array
+                            name:
+                              description: The name of the ServiceAccount resource being referred to.
+                              type: string
+                            namespace:
+                              description: Namespace of the resource being referred to. Ignored if referent is not cluster-scoped. cluster-scoped defaults to the namespace of the referent.
+                              type: string
+                          required:
+                            - name
+                          type: object
                         vault:
                           description: Vault is the vault's OCID of the specific vault where secret is located.
                           type: string
@@ -8564,7 +8656,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/ghcr.io/external-secrets/external-secrets@sha256:12353dc3aa781f5b25a89b0f1b9fe259cff8117d41872e7722227c122e940ced
+        - image: 169.254.32.1:5000/ghcr.io/external-secrets/external-secrets@sha256:88d34938c949af80498b87cdbf6fcedf1d10a80190ff126adfcd9db964bfdf65
           args:
             - --concurrent=1
           imagePullPolicy: IfNotPresent
@@ -8591,8 +8683,8 @@ spec:
         app.kubernetes.io/instance: external-secrets
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: external-secrets
-        app.kubernetes.io/version: v0.9.8
-        helm.sh/chart: external-secrets-0.9.8
+        app.kubernetes.io/version: v0.9.9
+        helm.sh/chart: external-secrets-0.9.9
   replicas: 1
   revisionHistoryLimit: 10
   selector:
@@ -8606,8 +8698,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.8
-    helm.sh/chart: external-secrets-0.9.8
+    app.kubernetes.io/version: v0.9.9
+    helm.sh/chart: external-secrets-0.9.9
   name: external-secrets
   namespace: external-secrets
 ---
@@ -8644,8 +8736,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.8
-    helm.sh/chart: external-secrets-0.9.8
+    app.kubernetes.io/version: v0.9.9
+    helm.sh/chart: external-secrets-0.9.9
   name: external-secrets-leaderelection
   namespace: external-secrets
 ---
@@ -8656,8 +8748,8 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.8
-    helm.sh/chart: external-secrets-0.9.8
+    app.kubernetes.io/version: v0.9.9
+    helm.sh/chart: external-secrets-0.9.9
   name: external-secrets-leaderelection
   namespace: external-secrets
 roleRef:
@@ -8678,7 +8770,7 @@ metadata:
     app.kubernetes.io/instance: external-secrets
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-secrets
-    app.kubernetes.io/version: v0.9.8
-    helm.sh/chart: external-secrets-0.9.8
+    app.kubernetes.io/version: v0.9.9
+    helm.sh/chart: external-secrets-0.9.9
   name: external-secrets
   namespace: external-secrets

@@ -194,7 +194,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-external-secrets
     repoURL: harbor.district.amanibhavam.defn.run
-    targetRevision: 0.0.10
+    targetRevision: 0.0.12
   syncPolicy:
     automated:
       prune: true
