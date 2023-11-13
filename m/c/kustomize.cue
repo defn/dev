@@ -403,7 +403,7 @@ kustomize: "external-secrets": #KustomizeHelm & {
 	helm: {
 		release: "external-secrets"
 		name:    "external-secrets"
-		version: "0.9.8"
+		version: "0.9.9"
 		repo:    "https://charts.external-secrets.io"
 		values: {
 			webhook: create:        false
