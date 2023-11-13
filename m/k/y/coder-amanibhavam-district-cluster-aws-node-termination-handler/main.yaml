@@ -7,26 +7,26 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   labels:
-    app.kubernetes.io/instance: aws-node-termination-handler
+    app.kubernetes.io/instance: aws-node-term
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: aws-node-termination-handler
-    app.kubernetes.io/part-of: aws-node-termination-handler
+    app.kubernetes.io/part-of: aws-node-term
     app.kubernetes.io/version: 1.19.0
     helm.sh/chart: aws-node-termination-handler-0.21.0
-  name: aws-node-termination-handler
+  name: aws-node-term-aws-node-termination-handler
   namespace: aws-node-termination-handler
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
-    app.kubernetes.io/instance: aws-node-termination-handler
+    app.kubernetes.io/instance: aws-node-term
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: aws-node-termination-handler
-    app.kubernetes.io/part-of: aws-node-termination-handler
+    app.kubernetes.io/part-of: aws-node-term
     app.kubernetes.io/version: 1.19.0
     helm.sh/chart: aws-node-termination-handler-0.21.0
-  name: aws-node-termination-handler
+  name: aws-node-term-aws-node-termination-handler
 rules:
 - apiGroups:
   - ""
@@ -67,20 +67,20 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   labels:
-    app.kubernetes.io/instance: aws-node-termination-handler
+    app.kubernetes.io/instance: aws-node-term
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: aws-node-termination-handler
-    app.kubernetes.io/part-of: aws-node-termination-handler
+    app.kubernetes.io/part-of: aws-node-term
     app.kubernetes.io/version: 1.19.0
     helm.sh/chart: aws-node-termination-handler-0.21.0
-  name: aws-node-termination-handler
+  name: aws-node-term-aws-node-termination-handler
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: aws-node-termination-handler
+  name: aws-node-term-aws-node-termination-handler
 subjects:
 - kind: ServiceAccount
-  name: aws-node-termination-handler
+  name: aws-node-term-aws-node-termination-handler
   namespace: aws-node-termination-handler
 ---
 apiVersion: apps/v1
@@ -88,26 +88,26 @@ kind: DaemonSet
 metadata:
   labels:
     app.kubernetes.io/component: daemonset
-    app.kubernetes.io/instance: aws-node-termination-handler
+    app.kubernetes.io/instance: aws-node-term
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: aws-node-termination-handler
-    app.kubernetes.io/part-of: aws-node-termination-handler
+    app.kubernetes.io/part-of: aws-node-term
     app.kubernetes.io/version: 1.19.0
     helm.sh/chart: aws-node-termination-handler-0.21.0
-  name: aws-node-termination-handler
+  name: aws-node-term-aws-node-termination-handler
   namespace: aws-node-termination-handler
 spec:
   selector:
     matchLabels:
       app.kubernetes.io/component: daemonset
-      app.kubernetes.io/instance: aws-node-termination-handler
+      app.kubernetes.io/instance: aws-node-term
       app.kubernetes.io/name: aws-node-termination-handler
       kubernetes.io/os: linux
   template:
     metadata:
       labels:
         app.kubernetes.io/component: daemonset
-        app.kubernetes.io/instance: aws-node-termination-handler
+        app.kubernetes.io/instance: aws-node-term
         app.kubernetes.io/name: aws-node-termination-handler
         k8s-app: aws-node-termination-handler
         kubernetes.io/os: linux
@@ -203,7 +203,7 @@ spec:
       priorityClassName: system-node-critical
       securityContext:
         fsGroup: 1000
-      serviceAccountName: aws-node-termination-handler
+      serviceAccountName: aws-node-term-aws-node-termination-handler
       tolerations:
       - operator: Exists
       volumes:
