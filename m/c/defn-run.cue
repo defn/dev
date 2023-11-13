@@ -21,7 +21,7 @@ teacher: {
 		}
 		"reloader": {}
 		"descheduler": {}
-		"aws-node-term": {}
+		//"aws-node-term": {}
 		"cert-manager": {}
 		"trust-manager": {}
 
