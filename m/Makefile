@@ -59,6 +59,7 @@ cdktf:
 
 upgrade:
 	npm install
+	npm upgrade
 	npm outdated
 	go get -u  ./...
 	go mod tidy
