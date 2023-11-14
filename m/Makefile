@@ -5,7 +5,7 @@ build:
 	cp -f bazel-bin/cmd/cli/cli_/cli /tmp/cli
 
 all:
-	$(MAKE) build update upgrade regen build update
+	$(MAKE) ci build update upgrade regen build update ci
 	cd c && $(MAKE) all
 	b pass build //...
 
@@ -25,7 +25,6 @@ ci_web:
 	cd defn/dev/www && $(MAKE) build
 	cd && git add docs
 	git commit -m 'update docs' || true
-	git push
 
 ci_inner:
 	$(MAKE) ci_web
