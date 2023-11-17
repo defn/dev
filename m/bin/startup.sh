@@ -67,4 +67,4 @@ time main "$@"
 uptime
 
 wait
-(cd ~/m && setsid ~/bin/nix/tilt up >/dev/null 2>&1 &) &
+(cd ~/m && exec setsid ~/bin/nix/tilt up >/dev/null 2>&1 &) &
