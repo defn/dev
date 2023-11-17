@@ -57,5 +57,5 @@ time main "$@"
 uptime
 
 cd ~/m
-nohup ~/bin/nix/tilt up > /tmp/startup.out &
+nohup ~/bin/nix/tilt up >/tmp/startup.out 2>&1 &
 disown
