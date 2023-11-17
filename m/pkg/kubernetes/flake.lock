@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/argocd",
-        "lastModified": 1699307991,
-        "narHash": "sha256-V2dTQ6KJgKGaHXTxjjCPCsbmUA15Pww5THUuyjq9C+g=",
+        "lastModified": 1700190151,
+        "narHash": "sha256-Ox7N8ucaWreyda60neSYwjzA2xM3TW2phPyQpMQgdfk=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "72e8cede1c5d9df017ca0d92a82c7c652e985282",
+        "rev": "8f2493119027a2b38c1b7c73de93f20ffd0536ce",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/argocd",
         "owner": "defn",
-        "ref": "pkg-argocd-2.9.0-1",
+        "ref": "pkg-argocd-2.9.1-1",
         "repo": "dev",
         "type": "github"
       }
@@ -48,17 +48,17 @@
       },
       "locked": {
         "dir": "m/pkg/cilium",
-        "lastModified": 1699324558,
-        "narHash": "sha256-o9LRkLqjYB8Gdhf5Iwu/vbru3828IWCFXUmiCV6ync8=",
+        "lastModified": 1700193563,
+        "narHash": "sha256-XrJB9HaqwhQC2VNdJ5zxDd4hMCUeuUhn/m3xBQKKgHI=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "219eeb76281e388ff3811082c2e33e9eeb73f5bb",
+        "rev": "bc6d3109e3ed9772c826af88bca2de350d6bce41",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cilium",
         "owner": "defn",
-        "ref": "pkg-cilium-0.15.13-1",
+        "ref": "pkg-cilium-0.15.14-1",
         "repo": "dev",
         "type": "github"
       }
@@ -807,17 +807,17 @@
       },
       "locked": {
         "dir": "m/pkg/linkerd",
-        "lastModified": 1699424052,
-        "narHash": "sha256-EmcSBoCLBvH9NM0uCFUYhxzpnwf7UvWBtKObMsTiRl0=",
+        "lastModified": 1700193599,
+        "narHash": "sha256-+gY54OhBMntZ+xDktKr2HvbUEtw/HVE2Xcymf0Dt7KU=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "3146ebed4d58d934f9a0fc66a5401eb057537e7a",
+        "rev": "47c0e7bb55e55a777bf90fcde89286bf04fe996c",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/linkerd",
         "owner": "defn",
-        "ref": "pkg-linkerd-2.14.3-1",
+        "ref": "pkg-linkerd-2.14.4-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1402,17 +1402,17 @@
       },
       "locked": {
         "dir": "m/pkg/stern",
-        "lastModified": 1692667117,
-        "narHash": "sha256-wAzPeeHsqN0C5JKWSgTvCIb9hZAir5VdqcxbzhzGKGc=",
+        "lastModified": 1700193631,
+        "narHash": "sha256-nnxVbokFpTfu3GOZkfoeuIKchhA1w52x6SejZvynxqM=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "68ae4c688f83a9ae08672d643591de0dfeb5a5ca",
+        "rev": "47adaa9f31090d802c038fbe7f155bc868b35488",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/stern",
         "owner": "defn",
-        "ref": "pkg-stern-1.26.0-1",
+        "ref": "pkg-stern-1.27.0-1",
         "repo": "dev",
         "type": "github"
       }
