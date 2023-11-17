@@ -59,5 +59,5 @@ uptime
 wait
 
 cd ~/m
-nohup ~/bin/nix/tilt up > /tmp/nohup.out &
+nohup ~/bin/nix/tilt up > /tmp/startup.out &
 disown
