@@ -38,12 +38,12 @@ function main {
 
 	sudo systemctl start docker
 
-  if ! test -f /mnt/docker/swap; then
-    sudo dd if=/dev/zero of=/mnt/docker/swap bs=1M count=8192
-    sudo chmod 0600 /mnt/docker/swap
-    sudo mkswap /mnt/docker/swap
-    sudo swapon /mnt/docker/swap
-  fi &
+#  if ! test -f /mnt/docker/swap; then
+#    sudo dd if=/dev/zero of=/mnt/docker/swap bs=1M count=8192
+#    sudo chmod 0600 /mnt/docker/swap
+#    sudo mkswap /mnt/docker/swap
+#    sudo swapon /mnt/docker/swap
+#  fi &
 
 	cd
 	git branch --set-upstream-to=origin/main main
