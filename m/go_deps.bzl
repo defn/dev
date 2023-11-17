@@ -34,8 +34,8 @@ def go_deps():
     go_repository(
         name = "com_github_aws_jsii_runtime_go",
         importpath = "github.com/aws/jsii-runtime-go",
-        sum = "h1:KJAgMbRY7/Cp2ocV5rIf4GmLBiFYYAMYVDeAebP2kfE=",
-        version = "v1.91.0",
+        sum = "h1:2Uk81AmgQ+p1tkRpcA01XXiqrXcaGIyTZS6HGY2ni6w=",
+        version = "v1.92.0",
     )
     go_repository(
         name = "com_github_aymanbagabas_go_osc52_v2",
