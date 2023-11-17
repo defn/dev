@@ -40,4 +40,5 @@ CODER_AGENT_TOKEN="$(cat /tmp/.coder-token)"
 echo rm -f /tmp/.coder-token
 
 cd ~/m/pkg/coder
-nix develop --command coder agent || true
+nohup nix develop --command coder agent > /tmp/user-data.log || true &
+disown
