@@ -1,6 +1,6 @@
 {
   "slug": "pkg-buildifier",
   "ghrepo": "bazelbuild/buildtools",
-  "vendor": "6.3.3",
-  "revision": "1"
+  "vendor": "6.4.0",
+  "revision": "0"
 }
