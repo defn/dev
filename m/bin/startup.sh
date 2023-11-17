@@ -6,18 +6,6 @@ function main {
 	sudo install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
 	sudo install -d -m 0700 -o ubuntu -g ubuntu /nix /nix
 
-	ssh -o StrictHostKeyChecking=no git@github.com true || true
-
-	case "$(git remote get-url origin)" in
-	http*)
-		git remote rm origin
-		git remote add origin git@github.com:defn/dev
-		git fetch origin
-		git branch --set-upstream-to=origin/main main
-		;;
-	esac
-	git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
-
   local root_disk
   local docker_disk
   if [[ "$(lsblk /dev/nvme0n1p1 | tail -1 | awk '{print $NF}')" == "/" ]]; then
@@ -59,7 +47,9 @@ function main {
 
 	cd
 	git branch --set-upstream-to=origin/main main
+  set +x
 	source .bash_profile
+  set -x
 	make install
 }
 
