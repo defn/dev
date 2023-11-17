@@ -4,6 +4,7 @@ set -ex
 
 exec 3>&1
 exec >>/tmp/dfd-startup.log 2>&1
+
 tail -f /tmp/dfd-startup.log 1>&3 &
 
 function main {
@@ -50,7 +51,7 @@ function main {
 	fi
 	#sudo rm -rf /var/lib/docker
 	#sudo ln -nfs /mnt/docker /var/lib/docker
-  sudo mkdir -p /var/lib/dockem
+  sudo mkdir -p /var/lib/docker
 
 	sudo systemctl start docker
 
@@ -70,5 +71,4 @@ function main {
 time main "$@"
 uptime
 
-cd ~/m
-exec ~/bin/nix/tilt up
+(cd ~/m && setsid ~/bin/nix/tilt up &) &
