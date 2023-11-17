@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/bazelisk",
-        "lastModified": 1692666993,
-        "narHash": "sha256-2+2FCNCDDDhQqxfJ3lywATdoKG8O379/grMMhShNevI=",
+        "lastModified": 1700193519,
+        "narHash": "sha256-p3cp3x29vhGJUsUTV5D16qGIilFyRpYZSWwPF0hMDvY=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "5c41fb25533ddf7622edd3f0367a193c5c3f636e",
+        "rev": "b19aa739d96bb2b7b5d87fb419e7b1d8a745bd16",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/bazelisk",
         "owner": "defn",
-        "ref": "pkg-bazelisk-1.18.0-1",
+        "ref": "pkg-bazelisk-1.19.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -27,17 +27,17 @@
       },
       "locked": {
         "dir": "m/pkg/buildifier",
-        "lastModified": 1692989218,
-        "narHash": "sha256-eMN8/zOeYQU/FSLrZWE2IdycJpBvT4gZh27FPfJ1etQ=",
+        "lastModified": 1700193548,
+        "narHash": "sha256-U8dX2tJl7XXaWSuYhAONN1zuUSOMNrZZAGdBYprzK8A=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "579c0d44e77a976c7afb90742b53221695787112",
+        "rev": "baf457733cae1e007ce30a3f0b47863c1bf029df",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buildifier",
         "owner": "defn",
-        "ref": "pkg-buildifier-6.3.3-1",
+        "ref": "pkg-buildifier-6.4.0-1",
         "repo": "dev",
         "type": "github"
       }
