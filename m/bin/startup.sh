@@ -47,7 +47,7 @@ function main {
   sudo mkdir -p /mnt/docker
 	if [[ "$(df /mnt/docker | tail -1 | awk '{print $NF}')" == / ]]; then
 		echo "/dev/${docker_disk} /mnt/docker ext4 defaults,nofail 0 2" | sudo tee -a /etc/fstab
-		sudo mount /mnt/docker
+		sudo mount /mnt/docker || true
 	fi
 	#sudo rm -rf /var/lib/docker
 	#sudo ln -nfs /mnt/docker /var/lib/docker
