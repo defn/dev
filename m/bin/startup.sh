@@ -56,8 +56,6 @@ function main {
 time main "$@"
 uptime
 
-wait
-
 cd ~/m
 nohup ~/bin/nix/tilt up > /tmp/startup.out &
 disown
