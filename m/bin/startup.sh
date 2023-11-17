@@ -71,4 +71,6 @@ function main {
 time main "$@"
 uptime
 
-(cd ~/m && setsid ~/bin/nix/tilt up &) &
+wait
+
+(cd ~/m && setsid ~/bin/nix/tilt up >/dev/null 2>&1 &) &
