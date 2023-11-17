@@ -1,6 +1,6 @@
 {
   "slug": "pkg-buf",
   "ghrepo": "bufbuild/buf",
-  "vendor": "1.28.0",
-  "revision": "1"
+  "vendor": "1.28.1",
+  "revision": "0"
 }
