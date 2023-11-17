@@ -46,6 +46,7 @@ function main {
 #  fi &
 
 	cd
+  git fetch
 	git branch --set-upstream-to=origin/main main
   set +x
 	source .bash_profile
