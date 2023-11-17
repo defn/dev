@@ -64,7 +64,7 @@ data "coder_parameter" "instance_type" {
   display_name = "CPU"
   description  = "The number of CPUs to allocate to the workspace"
   type         = "string"
-  default      = "m6id.xlarge"
+  default      = "m6id.large"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
   mutable      = true
   option {
@@ -90,7 +90,7 @@ data "coder_parameter" "nix_volume_size" {
   display_name = "nix volume size"
   description  = "The size of the nix volume to create for the workspace in GB"
   type         = "number"
-  default      = "100"
+  default      = "200"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
   mutable      = true
   validation {
