@@ -3,9 +3,8 @@
     buf.url = github:defn/dev/pkg-buf-1.28.1-1?dir=m/pkg/buf;
     cosign.url = github:defn/dev/pkg-cosign-2.2.1-1?dir=m/pkg/cosign;
     goreleaser.url = github:defn/dev/pkg-goreleaser-1.22.1-1?dir=m/pkg/goreleaser;
-    # https://github.com/NixOS/nixpkgs/commits/release-23.05
-    # using the latest commit from main
-    latest.url = github:NixOS/nixpkgs?rev=cbc976a97c3372e1eec5db021db994b85e098d12;
+    # https://github.com/NixOS/nixpkgs/commits/main
+    latest.url = github:NixOS/nixpkgs?rev=005617587ee2b7c003388b4539b9120ebcc90e44;
   };
 
   outputs = inputs: inputs.goreleaser.inputs.pkg.main rec {
