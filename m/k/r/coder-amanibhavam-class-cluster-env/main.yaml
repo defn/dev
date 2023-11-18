@@ -89,7 +89,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-coder
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: 0.0.14
+    targetRevision: 0.0.15
   syncPolicy:
     automated:
       prune: true
@@ -321,7 +321,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-reloader
     repoURL: harbor.class.amanibhavam.defn.run
-    targetRevision: 0.0.2
+    targetRevision: 0.0.3
   syncPolicy:
     automated:
       prune: true

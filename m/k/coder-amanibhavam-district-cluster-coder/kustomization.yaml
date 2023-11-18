@@ -15,7 +15,7 @@ commonAnnotations: {}
 helmCharts:
   - releaseName: coder
     name: coder
-    version: 2.3.3
+    version: 2.4.0
     repo: https://helm.coder.com/v2
     namespace: coder
     valuesInline:

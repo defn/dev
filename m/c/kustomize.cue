@@ -293,7 +293,7 @@ kustomize: "linkerd-control-plane": #KustomizeHelm & {
 	helm: {
 		release: "linkerd-control-plane"
 		name:    "linkerd-control-plane"
-		version: "1.16.4"
+		version: "1.16.5"
 		repo:    "https://helm.linkerd.io/stable"
 		values: {
 			identity: externalCA: true
@@ -1443,7 +1443,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "2.3.3"
+		version:   "2.4.0"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {
@@ -1828,7 +1828,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.39.0"
+		version:   "0.39.3"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [
@@ -1867,7 +1867,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "3.2.2"
+		version:     "3.2.3"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
@@ -2766,7 +2766,7 @@ kustomize: "reloader": #KustomizeHelm & {
 		release:   "reloader"
 		name:      "reloader"
 		namespace: "reloader"
-		version:   "1.0.51"
+		version:   "1.0.52"
 		repo:      "https://stakater.github.io/stakater-charts"
 		values: {
 		}
