@@ -4,6 +4,8 @@ chart ?=
 revision ?= $(shell cat ../h/$(chart)-version)
 version ?= 0.0.$(revision)
 
+registry ?= 169.254.32.1:5000
+
 delivery:
 	$(MAKE) all-build
 
@@ -27,7 +29,7 @@ init:
 	echo -n $(revision) > ../h/$(chart)-version
 
 login:
-	helm registry login -u 'robot$$meh' harbor.district.amanibhavam.defn.run
+	helm registry login -u 'robot$$meh' $(registry)
 
 bump:
 	echo $$(( $$(cat ../h/$(chart)-version) + 1)) > ../h/$(chart)-version.tmp
@@ -54,7 +56,7 @@ build-inner:
 	echo "version: \"$(version)\"" >> ../h/$(chart)/Chart.yaml.tmp
 	mv -f ../h/$(chart)/Chart.yaml.tmp ../h/$(chart)/Chart.yaml
 	mark $(chart)
-	$(MAKE) package-always chart=$(chart)
+	$(MAKE) package-always push chart=$(chart)
 
 package-always:
 	cd ../h && cat $(chart)/Chart.yaml && helm package $(chart); \
@@ -66,7 +68,7 @@ package:
 
 push:
 	if ! test -f ../h/$(chart)-$(version).tgz; then $(MAKE) package chart=$(chart); fi
-	helm push ../h/$(chart)-$(version).tgz oci://harbor.district.amanibhavam.defn.run/library/helm
+	helm push --insecure-skip-tls-verify ../h/$(chart)-$(version).tgz oci://$(registry)/library/helm
 
 template:
-	helm template $(chart) oci://harbor.district.amanibhavam.defn.run/library/helm/$(chart) --version $(version)
+	helm template --insecure-skip-tls-verify $(chart) oci://$(registry)/library/helm/$(chart) --version $(version)

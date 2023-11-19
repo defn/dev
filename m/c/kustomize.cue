@@ -19,7 +19,7 @@ env: (#Transform & {
 
 	inputs: "\(class.cluster_name)-cluster": {
 		bootstrap: class.bootstrap
-		app_repo:  "harbor.\(class.env).\(class.handle).defn.run"
+		app_repo:  "cache.defn.run:5000"
 		app_type:  "chart"
 		app_def:   "library/helm/coder-\(class.handle)-\(class.env)-cluster-env"
 	}
