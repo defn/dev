@@ -39,7 +39,7 @@ source "amazon-ebs" "this" {
   launch_block_device_mappings {
     encrypted             = true
     device_name           = "/dev/sda1"
-    volume_size           = 20
+    volume_size           = 25
     volume_type           = "gp3"
     delete_on_termination = true
   }

@@ -13,17 +13,9 @@ function main {
 		git reset --hard
 		source .bash_profile
 
-		make nix
-
-		(cd m/pkg/awscli && nix develop --command true)
-		(cd m/pkg/coder && nix develop --command true)
-		(cd m/pkg/codeserver && nix develop --command true)
-		(cd m/pkg/chamber && nix develop --command true)
-		(cd m/pkg/k3sup && nix develop --command true)
+		make install
 
 		(cd m && bin/make-k3s init)
-
-		#(cd m/pkg/az && nix develop --command bash -c "cd && cd m/c && make cache")
 
 		exit $?
 	fi
