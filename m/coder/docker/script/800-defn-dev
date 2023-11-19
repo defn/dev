@@ -23,6 +23,7 @@ function main {
 
 		cd m
 		bin/make-k3s init
+		cd c
 		make cache
 
 		exit $?
