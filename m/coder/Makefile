@@ -41,7 +41,7 @@ up-restart:
 	coder restart --yes "$(workspace)"
 
 up-create:
-	coder create --yes --template pod --parameter workdir=$(dir),source_rev=$(rev),provider=pod,docker_image=169.254.32.1:5000/dfd,cpu=1,memory=1,nix_volume_size=40 "$(workspace)"
+	coder create --yes --template pod --parameter workdir=$(dir),source_rev=$(rev),provider=pod,docker_image=cache.defn.run:5000/dfd,cpu=1,memory=1,nix_volume_size=40 "$(workspace)"
 
 down:
 	coder delete --yes "$(workspace)" || true
