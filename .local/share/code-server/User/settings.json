@@ -82,5 +82,7 @@
   },
   "calva.paredit.defaultKeyMap": "strict",
   "git.detectSubmodules": false,
-  "workbench.editor.empty.hint": "hidden"
+  "workbench.editor.empty.hint": "hidden",
+  "tailscale.portDiscovery.enabled": false,
+  "tailscale.ssh.defaultUsername": "ubuntu"
 }
