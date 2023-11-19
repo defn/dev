@@ -4,7 +4,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-argo-cd
-    repoURL: harbor.school.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.14
   syncPolicy:
     automated:
@@ -25,7 +25,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-buildkite
-    repoURL: harbor.school.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.11
   syncPolicy:
     automated:
@@ -46,7 +46,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-cert-manager
-    repoURL: harbor.school.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.10
   syncPolicy:
     automated:
@@ -67,7 +67,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-cilium
-    repoURL: harbor.school.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.10
   syncPolicy:
     automated:
@@ -88,7 +88,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-coder
-    repoURL: harbor.school.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.16
   syncPolicy:
     automated:
@@ -109,7 +109,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-descheduler
-    repoURL: harbor.school.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.2
   syncPolicy:
     automated:
@@ -130,7 +130,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-external-dns
-    repoURL: harbor.school.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.10
   syncPolicy:
     automated:
@@ -151,7 +151,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-external-secrets
-    repoURL: harbor.school.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.12
   syncPolicy:
     automated:
@@ -172,7 +172,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-issuer
-    repoURL: harbor.school.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.14
   syncPolicy:
     automated:
@@ -193,7 +193,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-karpenter
-    repoURL: harbor.school.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.10
   syncPolicy:
     automated:
@@ -214,7 +214,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-knative
-    repoURL: harbor.school.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.13
   syncPolicy:
     automated:
@@ -235,7 +235,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-kourier
-    repoURL: harbor.school.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.10
   syncPolicy:
     automated:
@@ -256,7 +256,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-kyverno
-    repoURL: harbor.school.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.15
   syncPolicy:
     automated:
@@ -278,7 +278,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-pihole
-    repoURL: harbor.school.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.10
   syncPolicy:
     automated:
@@ -299,7 +299,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-pod-identity
-    repoURL: harbor.school.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.10
   syncPolicy:
     automated:
@@ -320,7 +320,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-reloader
-    repoURL: harbor.school.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.4
   syncPolicy:
     automated:
@@ -341,7 +341,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-secrets
-    repoURL: harbor.school.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.10
   syncPolicy:
     automated:
@@ -362,7 +362,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-tetragon
-    repoURL: harbor.school.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.10
   syncPolicy:
     automated:
@@ -383,7 +383,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-traefik
-    repoURL: harbor.school.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.12
   syncPolicy:
     automated:
@@ -404,7 +404,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-trust-manager
-    repoURL: harbor.school.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.10
   syncPolicy:
     automated:
