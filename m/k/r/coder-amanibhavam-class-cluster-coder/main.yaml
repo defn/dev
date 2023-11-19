@@ -49,7 +49,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/ghcr.io/coder/coder@sha256:0218b84382d81b4a837703873633afb9b3769513723f47078bc8b4370d2e43ff
+        - image: cache.defn.run:5000/ghcr.io/coder/coder@sha256:0218b84382d81b4a837703873633afb9b3769513723f47078bc8b4370d2e43ff
           args:
             - server
           command:

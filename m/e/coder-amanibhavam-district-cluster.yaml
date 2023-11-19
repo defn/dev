@@ -10,9 +10,8 @@ spec:
   destination:
     name: coder-amanibhavam-district-cluster
   source:
-    repoURL: "cache.defn.run:5000"
+    repoURL: cache.defn.run:5000
     chart: library/helm/coder-amanibhavam-district-cluster-env
-    targetRevision: "0.0.38"
   syncPolicy:
     automated:
       prune: true

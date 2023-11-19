@@ -4,8 +4,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-argo-cd
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.14
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.15
   syncPolicy:
     automated:
       prune: true
@@ -25,8 +25,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-argo-events
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.10
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.11
   syncPolicy:
     automated:
       prune: true
@@ -46,8 +46,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-argo-workflows
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.11
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.12
   syncPolicy:
     automated:
       prune: true
@@ -67,8 +67,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-buildkite
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.11
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.12
   syncPolicy:
     automated:
       prune: true
@@ -88,8 +88,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-cert-manager
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.10
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.11
   syncPolicy:
     automated:
       prune: true
@@ -109,8 +109,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-cilium
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.10
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.11
   syncPolicy:
     automated:
       prune: true
@@ -130,8 +130,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-coder
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.16
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.17
   syncPolicy:
     automated:
       prune: true
@@ -151,8 +151,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-descheduler
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.2
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.3
   syncPolicy:
     automated:
       prune: true
@@ -172,8 +172,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-external-dns
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.10
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.11
   syncPolicy:
     automated:
       prune: true
@@ -193,8 +193,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-external-secrets
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.12
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.13
   syncPolicy:
     automated:
       prune: true
@@ -214,8 +214,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-harbor
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.12
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.13
   syncPolicy:
     automated:
       prune: true
@@ -235,8 +235,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-headlamp
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.10
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.11
   syncPolicy:
     automated:
       prune: true
@@ -256,8 +256,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-hello
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.12
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.13
   syncPolicy:
     automated:
       prune: true
@@ -277,7 +277,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-issuer
-    repoURL: "169.254.32.1:5000"
+    repoURL: cache.defn.run:5000
     targetRevision: 0.0.14
   syncPolicy:
     automated:
@@ -298,8 +298,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-karpenter
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.10
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.11
   syncPolicy:
     automated:
       prune: true
@@ -319,8 +319,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-knative
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.13
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.14
   syncPolicy:
     automated:
       prune: true
@@ -340,8 +340,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-kourier
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.10
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.11
   syncPolicy:
     automated:
       prune: true
@@ -361,8 +361,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-kyverno
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.15
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.16
   syncPolicy:
     automated:
       prune: true
@@ -383,8 +383,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-pihole
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.10
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.11
   syncPolicy:
     automated:
       prune: true
@@ -404,8 +404,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-pod-identity
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.10
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.11
   syncPolicy:
     automated:
       prune: true
@@ -425,8 +425,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-postgres-operator
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.10
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.11
   syncPolicy:
     automated:
       prune: true
@@ -446,8 +446,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-reloader
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.4
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.5
   syncPolicy:
     automated:
       prune: true
@@ -467,7 +467,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-secrets
-    repoURL: "169.254.32.1:5000"
+    repoURL: cache.defn.run:5000
     targetRevision: 0.0.10
   syncPolicy:
     automated:
@@ -488,8 +488,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-tetragon
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.10
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.11
   syncPolicy:
     automated:
       prune: true
@@ -509,8 +509,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-tfo
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.12
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.13
   syncPolicy:
     automated:
       prune: true
@@ -530,8 +530,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-traefik
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.12
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.13
   syncPolicy:
     automated:
       prune: true
@@ -551,8 +551,8 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-trust-manager
-    repoURL: "169.254.32.1:5000"
-    targetRevision: 0.0.10
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.11
   syncPolicy:
     automated:
       prune: true

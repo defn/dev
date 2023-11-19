@@ -8656,7 +8656,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/ghcr.io/external-secrets/external-secrets@sha256:88d34938c949af80498b87cdbf6fcedf1d10a80190ff126adfcd9db964bfdf65
+        - image: cache.defn.run:5000/ghcr.io/external-secrets/external-secrets@sha256:88d34938c949af80498b87cdbf6fcedf1d10a80190ff126adfcd9db964bfdf65
           args:
             - --concurrent=1
           imagePullPolicy: IfNotPresent

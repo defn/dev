@@ -136,7 +136,7 @@ spec:
       template:
         spec:
           containers:
-            - image: 169.254.32.1:5000/registry.k8s.io/descheduler/descheduler@sha256:814571a3b9ecaac615c555ff77bf8fbbe6679182f3aadeab4ebe3fcbbb27a159
+            - image: cache.defn.run:5000/registry.k8s.io/descheduler/descheduler@sha256:814571a3b9ecaac615c555ff77bf8fbbe6679182f3aadeab4ebe3fcbbb27a159
               args:
                 - --policy-config-file=/policy-dir/policy.yaml
                 - --v=3

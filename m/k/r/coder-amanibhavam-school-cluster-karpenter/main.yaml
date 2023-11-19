@@ -2561,7 +2561,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/public.ecr.aws/karpenter/controller@sha256:9b31039d45613ac22a104b8d48eca9dcdeff93e525bd473c811dfd3502e58c69
+        - image: cache.defn.run:5000/public.ecr.aws/karpenter/controller@sha256:9b31039d45613ac22a104b8d48eca9dcdeff93e525bd473c811dfd3502e58c69
           env:
             - name: KUBERNETES_MIN_VERSION
               value: "1.19.0-0"

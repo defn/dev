@@ -1748,7 +1748,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/ghcr.io/galleybytes/terraform-operator@sha256:22dc728858345330a1a34c13074b3c26e0540c89be0aa613a24694bebc1a3123
+        - image: cache.defn.run:5000/ghcr.io/galleybytes/terraform-operator@sha256:22dc728858345330a1a34c13074b3c26e0540c89be0aa613a24694bebc1a3123
           args:
             - --zap-log-level=debug
             - --zap-encoder=console

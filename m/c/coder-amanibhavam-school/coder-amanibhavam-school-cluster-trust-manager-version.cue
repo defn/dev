@@ -1,2 +1,2 @@
 package c
-teacher: bootstrap: "trust-manager": app_version: "0.0.10"
+teacher: bootstrap: "trust-manager": app_version: "0.0.11"

@@ -10,7 +10,7 @@ spec:
   destination:
     name: coder-amanibhavam-class-cluster
   source:
-    repoURL: "169.254.32.1:5000"
+    repoURL: cache.defn.run:5000
     chart: library/helm/coder-amanibhavam-class-cluster-env
   syncPolicy:
     automated:
