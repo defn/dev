@@ -7,7 +7,7 @@ import (
 teacher: {
 	bootstrap: {
 		[NAME=string]: {
-			app_repo: "harbor.\(class.env).\(class.handle).defn.run"
+			app_repo: "169.254.32.1:5000"
 			app_type: "chart"
 			app_def:  "library/helm/coder-\(class.handle)-\(class.env)-cluster-\(NAME)"
 		}
