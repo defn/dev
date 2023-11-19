@@ -1,20 +1,25 @@
+# https://docs.k3s.io/installation/private-registry
 # /etc/rancher/k3s/registries.yaml
 mirrors:
-  "169.254.32.1:5000":
+  "cache.defn.run:5000":
     endpoint:
-      - http://169.254.32.1:5000
+      - https://cache.defn.run:5000
   "docker.io":
     endpoint:
-      - http://169.254.32.1:5000
-  "gcr.io":
+      - https://cache.defn.run:5000
+  "gcr.io"
     endpoint:
-      - http://169.254.32.1:5000
+      - https://cache.defn.run:5000
   "ghcr.io":
     endpoint:
-      - http://169.254.32.1:5000
+      - https://cache.defn.run:5000
   "public.ecr.aws":
     endpoint:
-      - http://169.254.32.1:5000
+      - https://cache.defn.run:5000
   "quay.io":
     endpoint:
-      - http://169.254.32.1:5000
+      - https://cache.defn.run:5000
+configs:
+  "cache.defn.run:5000":
+    tls:
+      insecure_skip_verify: true
