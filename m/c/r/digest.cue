@@ -31,7 +31,7 @@ cached_image: {
 		(except & {input: c, exclude: {image: true}}).output
 
 		if cache[c.image] != _|_ {
-			image: "169.254.32.1:5000/\(cache[c.image])"
+			image: "cache.defn.run:5000/\(cache[c.image])"
 		}
 		if cache[c.image] == _|_ {
 			image: "not-found-\(c.image)"
@@ -75,7 +75,7 @@ cached_resources: {
 				if r.spec.image != _|_ {image: {
 					if cache[r.spec.image] != _|_ {
 						_parts: strings.Split(cache[r.spec.image], "/")
-						"169.254.32.1:5000/\(strings.Join(list.Slice(_parts, 1, len(_parts)), "/"))"
+						"cache.defn.run:5000/\(strings.Join(list.Slice(_parts, 1, len(_parts)), "/"))"
 					}
 					if cache[r.spec.image] == _|_ {
 						"not-found-\(r.spec.image)"

@@ -5,7 +5,7 @@ data:
     namespace: buildkite
     cluster-uuid: bd52647a-d3d5-4c15-9b3f-3b5f566ce6e3
     debug: true
-    image: 169.254.32.1:5000/dfd:buildkite
+    image: cache.defn.run:5000/dfd:buildkite
     max-in-flight: 0
     org: defn
     tags:
@@ -19,7 +19,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/ghcr.io/buildkite/agent-stack-k8s/controller@sha256:6d747da4f3898b092010fcdc382fc59dc3d90c5478d41e0a01eb9b6f53a9d91f
+        - image: cache.defn.run:5000/ghcr.io/buildkite/agent-stack-k8s/controller@sha256:6d747da4f3898b092010fcdc382fc59dc3d90c5478d41e0a01eb9b6f53a9d91f
           env:
             - name: CONFIG
               value: /etc/config.yaml
@@ -54,7 +54,7 @@ spec:
           name: config
     metadata:
       annotations:
-        checksum/config: bced207501b4eb766e3abbfed368403a7161431d37d03354efedef6ac5fa2d56
+        checksum/config: f633041f3ad3925d97c294b71cbac4ebef63eaec5636bc763d9effc035510d8b
         checksum/secrets: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
       labels:
         app: buildkite

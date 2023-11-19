@@ -22,7 +22,7 @@ cache:
 			*.*) true ;; \
 			*) proxy=harbor.district.amanibhavam.defn.run/docker/$$2 ;; \
 		esac; \
-		skopeo copy docker://$${proxy} docker://169.254.32.1:5000/$${2} --multi-arch all --dest-tls-verify=false --insecure-policy'
+		skopeo copy docker://$${proxy} docker://cache.defn.run:5000/$${2} --multi-arch all --dest-tls-verify=false --insecure-policy'
 
 release:
 	cue export --out json -e cached_yaml | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' \

@@ -140,7 +140,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/docker.io/bitnami/external-dns@sha256:27041c8a6b244a8f5c4914ac4a59219b189aeca12778d14d4672aacad5970fda
+        - image: cache.defn.run:5000/docker.io/bitnami/external-dns@sha256:27041c8a6b244a8f5c4914ac4a59219b189aeca12778d14d4672aacad5970fda
           args:
             - --metrics-address=:7979
             - --log-level=debug

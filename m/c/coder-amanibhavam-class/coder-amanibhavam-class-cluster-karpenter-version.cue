@@ -1,2 +1,2 @@
 package c
-teacher: bootstrap: "karpenter": app_version: "0.0.10"
+teacher: bootstrap: "karpenter": app_version: "0.0.11"

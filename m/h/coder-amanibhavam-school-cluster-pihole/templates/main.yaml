@@ -23,7 +23,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/pihole/pihole@sha256:8bc45afe1625487aef62859a5bf02f3d7b3429e480f4e29e4689635ab86ec312
+        - image: cache.defn.run:5000/pihole/pihole@sha256:8bc45afe1625487aef62859a5bf02f3d7b3429e480f4e29e4689635ab86ec312
           env:
             - name: WEB_PORT
               value: "80"
@@ -165,7 +165,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: 169.254.32.1:5000/curlimages/curl@sha256:4a3396ae573c44932d06ba33f8696db4429c419da87cbdc82965ee96a37dd0af
+    - image: cache.defn.run:5000/curlimages/curl@sha256:4a3396ae573c44932d06ba33f8696db4429c419da87cbdc82965ee96a37dd0af
       command:
         - sh
         - -c

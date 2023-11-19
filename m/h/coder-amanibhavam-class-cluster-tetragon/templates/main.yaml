@@ -173,7 +173,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/quay.io/cilium/hubble-export-stdout@sha256:80643871d46c2e01793cdc8e72550e599a66906d0b72475eb1e5a43082622779
+        - image: cache.defn.run:5000/quay.io/cilium/hubble-export-stdout@sha256:80643871d46c2e01793cdc8e72550e599a66906d0b72475eb1e5a43082622779
           args:
             - /var/run/cilium/tetragon/tetragon.log
           command:
@@ -186,7 +186,7 @@ spec:
           volumeMounts:
             - mountPath: /var/run/cilium/tetragon
               name: export-logs
-        - image: 169.254.32.1:5000/quay.io/cilium/tetragon@sha256:a680dca9b408434cea1cca015e6a14456f820506d2fd208a0c0588a9737d7cb5
+        - image: cache.defn.run:5000/quay.io/cilium/tetragon@sha256:a680dca9b408434cea1cca015e6a14456f820506d2fd208a0c0588a9737d7cb5
           args:
             - --config-dir=/etc/tetragon/tetragon.conf.d/
           env:
@@ -278,7 +278,7 @@ spec:
   template:
     spec:
       containers:
-        - image: 169.254.32.1:5000/quay.io/cilium/tetragon-operator@sha256:8fb722e4f0e983e00e926cb852461ba1f4f529c1a5b39358438c5fda37cf2848
+        - image: cache.defn.run:5000/quay.io/cilium/tetragon-operator@sha256:8fb722e4f0e983e00e926cb852461ba1f4f529c1a5b39358438c5fda37cf2848
           args:
             - serve
             - --config-dir=/etc/tetragon/operator.conf.d/
