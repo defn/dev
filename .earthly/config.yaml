@@ -7,6 +7,6 @@ global:
   buildkit_additional_args:
     - "--dns=1.1.1.1"
   buildkit_additional_config: |
-    [registry."169.254.32.1:5000"]
-      http = true
+    [registry."cache.defn.run:5000"]
+      http = false
       insecure = true
