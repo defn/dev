@@ -68,7 +68,7 @@ package:
 
 push:
 	if ! test -f ../h/$(chart)-$(version).tgz; then $(MAKE) package chart=$(chart); fi
-	helm push --plain-http ../h/$(chart)-$(version).tgz oci://$(registry)/library/helm
+	helm push --insecure-skip-tls-verify ../h/$(chart)-$(version).tgz oci://$(registry)/library/helm
 
 template:
-	helm template $(chart) oci://$(registry)/library/helm/$(chart) --version $(version)
+	helm template --insecure-skip-tls-verify $(chart) oci://$(registry)/library/helm/$(chart) --version $(version)
