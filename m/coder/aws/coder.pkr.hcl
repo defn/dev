@@ -10,18 +10,16 @@ packer {
 variable "scripts" {
   type = list(string)
   default = [
-    "script/000-install-bare",
-    "script/001-install-base",
-    "script/800-defn-dev",
+    "script/999-defn-dev",
     "script/999-update"
   ]
 }
 
 locals {
   timestamp = regex_replace(timestamp(), "[- TZ:]", "")
-  name      = "base"
-  owner     = "099720109477"
-  ami       = "ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"
+  name      = "coder"
+  owner     = "self"
+  ami       = "base-*"
 }
 
 source "amazon-ebs" "this" {
@@ -36,14 +34,6 @@ source "amazon-ebs" "this" {
   instance_type = "m6id.large"
   region        = "us-west-2"
 
-  launch_block_device_mappings {
-    encrypted             = true
-    device_name           = "/dev/sda1"
-    volume_size           = 25
-    volume_type           = "gp3"
-    delete_on_termination = true
-  }
-
   source_ami_filter {
     owners      = [local.owner]
     most_recent = true
@@ -51,24 +41,23 @@ source "amazon-ebs" "this" {
     filters = {
       name         = local.ami
       architecture = "x86_64"
-
-      root-device-type    = "ebs"
-      virtualization-type = "hvm"
     }
   }
 
   run_tags = {
-    Name      = "Packer"
-    ManagedBy = "Packer"
+    Name                     = "Packer"
+    ManagedBy                = "Packer"
+    "karpenter.sh/discovery" = "k3d-dfd"
   }
 
   run_volume_tags = {
-    Name      = "Packer"
-    ManagedBy = "Packer"
+    Name                     = "Packer"
+    ManagedBy                = "Packer"
+    "karpenter.sh/discovery" = "k3d-dfd"
   }
 
   snapshot_tags = {
-    Name      = "Packer base ${local.timestamp}"
+    Name      = "Packer coder ${local.timestamp}"
     ManagedBy = "Packer"
   }
 }
