@@ -19,7 +19,7 @@ variable "scripts" {
 
 locals {
   timestamp = regex_replace(timestamp(), "[- TZ:]", "")
-  name      = "coder"
+  name      = "base"
   owner     = "099720109477"
   ami       = "ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"
 }
@@ -33,7 +33,7 @@ source "amazon-ebs" "this" {
   ssh_username                = "ubuntu"
 
   spot_price    = "auto"
-  instance_type = "m6id.xlarge"
+  instance_type = "m6id.large"
   region        = "us-west-2"
 
   launch_block_device_mappings {
