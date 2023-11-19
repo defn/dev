@@ -23,7 +23,7 @@ function main {
 
 		(cd m && bin/make-k3s init)
 
-		(cd m/pkg/az && nix develop --command bash -c "cd && cd m/c && make cache")
+		#(cd m/pkg/az && nix develop --command bash -c "cd && cd m/c && make cache")
 
 		exit $?
 	fi
