@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+function main {
+	set -exfu
+
+	if [[ "$(whoami || true)" == "ubuntu" ]]; then
+		cd
+		git pull
+		source .bash_profile
+
+		make install
+
+		exit $?
+	fi
+}
+
+main "$@"
