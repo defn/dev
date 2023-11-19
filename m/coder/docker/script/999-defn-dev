@@ -6,7 +6,9 @@ function main {
 	if [[ "$(whoami || true)" == "ubuntu" ]]; then
 		cd
 		git pull
+		set +exfu
 		source .bash_profile
+		set -exfu
 
 		make install
 
