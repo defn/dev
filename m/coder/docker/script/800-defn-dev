@@ -21,10 +21,9 @@ function main {
 		(cd m/pkg/chamber && nix develop --command true)
 		(cd m/pkg/k3sup && nix develop --command true)
 
-		cd m
-		bin/make-k3s init
-		cd c
-		make cache
+		(cd m && bin/make-k3s init)
+
+		(cd m/pkg/az && nix develop --command bash -c "cd && cd m/c && make cache")
 
 		exit $?
 	fi
