@@ -89,7 +89,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-kyverno
-              targetRevision: 0.0.14
+              targetRevision: 0.0.15
             syncPolicy:
               automated:
                 prune: true
@@ -111,7 +111,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-reloader
-              targetRevision: 0.0.3
+              targetRevision: 0.0.4
             syncPolicy:
               automated:
                 prune: true
@@ -405,7 +405,7 @@ helmCharts:
             source:
               repoURL: harbor.district.amanibhavam.defn.run
               chart: library/helm/coder-amanibhavam-district-cluster-coder
-              targetRevision: 0.0.15
+              targetRevision: 0.0.16
             syncPolicy:
               automated:
                 prune: true
