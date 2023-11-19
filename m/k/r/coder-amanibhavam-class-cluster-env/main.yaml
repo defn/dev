@@ -4,7 +4,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-argo-cd
-    repoURL: harbor.class.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.14
   syncPolicy:
     automated:
@@ -25,7 +25,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-buildkite
-    repoURL: harbor.class.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.11
   syncPolicy:
     automated:
@@ -46,7 +46,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-cert-manager
-    repoURL: harbor.class.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.10
   syncPolicy:
     automated:
@@ -67,7 +67,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-cilium
-    repoURL: harbor.class.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.10
   syncPolicy:
     automated:
@@ -88,7 +88,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-coder
-    repoURL: harbor.class.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.16
   syncPolicy:
     automated:
@@ -109,7 +109,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-descheduler
-    repoURL: harbor.class.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.2
   syncPolicy:
     automated:
@@ -130,7 +130,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-external-dns
-    repoURL: harbor.class.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.10
   syncPolicy:
     automated:
@@ -151,7 +151,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-external-secrets
-    repoURL: harbor.class.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.12
   syncPolicy:
     automated:
@@ -172,7 +172,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-issuer
-    repoURL: harbor.class.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.14
   syncPolicy:
     automated:
@@ -193,7 +193,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-karpenter
-    repoURL: harbor.class.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.10
   syncPolicy:
     automated:
@@ -214,7 +214,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-knative
-    repoURL: harbor.class.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.13
   syncPolicy:
     automated:
@@ -235,7 +235,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-kourier
-    repoURL: harbor.class.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.10
   syncPolicy:
     automated:
@@ -256,7 +256,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-kyverno
-    repoURL: harbor.class.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.15
   syncPolicy:
     automated:
@@ -278,7 +278,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-pihole
-    repoURL: harbor.class.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.10
   syncPolicy:
     automated:
@@ -299,7 +299,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-pod-identity
-    repoURL: harbor.class.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.10
   syncPolicy:
     automated:
@@ -320,7 +320,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-reloader
-    repoURL: harbor.class.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.4
   syncPolicy:
     automated:
@@ -341,7 +341,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-secrets
-    repoURL: harbor.class.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.10
   syncPolicy:
     automated:
@@ -362,7 +362,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-tetragon
-    repoURL: harbor.class.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.10
   syncPolicy:
     automated:
@@ -383,7 +383,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-traefik
-    repoURL: harbor.class.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.12
   syncPolicy:
     automated:
@@ -404,7 +404,7 @@ spec:
   project: default
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-trust-manager
-    repoURL: harbor.class.amanibhavam.defn.run
+    repoURL: "169.254.32.1:5000"
     targetRevision: 0.0.10
   syncPolicy:
     automated:
