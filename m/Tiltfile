@@ -12,12 +12,10 @@ local_resource(
         "bash",
         "-c",
         """
-            while true; do 
-                cd
-                source .bash_profile
-                cd ~/m/pkg/codeserver
-                nix develop --command code-server --auth none --port 13337
-            done
-            """,
+            cd
+            source .bash_profile
+            cd ~/m/pkg/codeserver
+            exec nix develop --command code-server --auth none --port 13337
+        """,
     ],
 )
