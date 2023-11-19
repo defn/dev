@@ -11,6 +11,7 @@ vimdiff:
 cache:
 	cue export --out json -e image_digests | jq -r '.[]' | runmany 4 2 'proxy=$$2; \
 		case $$2 in \
+			*) true ;; \
 			docker.io*) proxy=harbor.district.amanibhavam.defn.run/docker/$${2#docker.io/} ;; \
 			quay.io*) proxy=harbor.district.amanibhavam.defn.run/quay/$${2#quay.io/} ;; \
 			gcr.io*) proxy=harbor.district.amanibhavam.defn.run/gcr/$${2#gcr.io/} ;; \
