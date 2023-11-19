@@ -7,7 +7,7 @@ mirrors:
   "docker.io":
     endpoint:
       - https://cache.defn.run:5000
-  "gcr.io"
+  "gcr.io":
     endpoint:
       - https://cache.defn.run:5000
   "ghcr.io":
