@@ -23,6 +23,7 @@
         fzf
         direnv
         bashInteractive
+        skopeo
       ];
 
       installPhase = ''
