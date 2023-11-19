@@ -11,6 +11,8 @@ infra_service_cidr=
 function make_init {
 	# create k3s registry
 	sudo docker run -d -p 5000:5000 --restart=always --name registry registry:2 || true
+	
+	#app repo add cache  --type helm --name 169.254.32.1:5000 --enable-oci --plaintext
 }
 
 function make_linkerd {

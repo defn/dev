@@ -4,6 +4,9 @@ function main {
 	set -efu -o pipefail
 
 	case "${1-}" in
+	repo)
+		exec env KUBECONFIG=$HOME/.kube/config.argocd argocd --core "$@"
+		;;
 	sync | get | wait | terminate-op | resources | logs | diff)
 		case "${2-}" in
 		/*)
