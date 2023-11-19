@@ -61,9 +61,7 @@ once:
 
 tailscale:
 	mkdir -p ./$(shell uname -n)/openid
-	tailscale funnel 443 on
-	tailscale serve https /openid $(shell pwd)/$(shell uname -n)/openid
-	tailscale serve status
+	sudo tailscale funnel --bg --https=443 --set-path /openid $(shell pwd)/$(shell uname -n)/openid
 
 iam:
 	AWS_PAGER= HOST="$$(tailscale funnel status | grep ^#  | grep https:// | head -1 | cut -d/ -f3-)" \
