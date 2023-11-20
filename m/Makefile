@@ -112,3 +112,10 @@ coder-admin:
 
 self-cert:
 	step certificate create --subtle --insecure --no-password --force --profile self-signed $$(uname -n) $$(uname -n).crt $$(uname -n).key
+
+
+once:
+	app repo add cache.defn.run:5000 --type helm --name cache --enable-oci --insecure-skip-server-verification
+	cd k && $(MAKE) all-push
+	cd c && $(MAKE) cache
+	$(MAKE) update-env env=$(env)
