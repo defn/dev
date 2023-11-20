@@ -21,7 +21,7 @@ data "coder_parameter" "docker_image" {
   name         = "docker_image"
   display_name = "Docker image"
   description  = "The docker image to use for the workspace"
-  default      = "cache.defn.run:5000/dfd"
+  default      = "cache.defn.run:5000/dfd:class"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/docker.svg"
   mutable      = true
 }
