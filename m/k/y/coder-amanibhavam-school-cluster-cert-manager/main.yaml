@@ -9872,6 +9872,8 @@ spec:
         - --default-issuer-name=zerossl-production
         - --default-issuer-kind=ClusterIssuer
         - --max-concurrent-challenges=60
+        - --dns01-recursive-nameservers-only=true
+        - --dns01-recursive-nameservers=1.1.1.1
         env:
         - name: POD_NAMESPACE
           valueFrom:
