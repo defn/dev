@@ -7,9 +7,9 @@
     kustomize.url = github:defn/dev/pkg-kustomize-5.2.1-1?dir=m/pkg/kustomize;
     stern.url = github:defn/dev/pkg-stern-1.27.0-1?dir=m/pkg/stern;
     argoworkflows.url = github:defn/dev/pkg-argoworkflows-3.5.0-1?dir=m/pkg/argoworkflows;
-    argocd.url = github:defn/dev/pkg-argocd-2.9.1-1?dir=m/pkg/argocd;
+    argocd.url = github:defn/dev/pkg-argocd-2.9.2-1?dir=m/pkg/argocd;
     kn.url = github:defn/dev/pkg-kn-1.12.0-1?dir=m/pkg/kn;
-    vcluster.url = github:defn/dev/pkg-vcluster-0.16.4-1?dir=m/pkg/vcluster;
+    vcluster.url = github:defn/dev/pkg-vcluster-0.17.0-1?dir=m/pkg/vcluster;
     kubevirt.url = github:defn/dev/pkg-kubevirt-1.1.0-1?dir=m/pkg/kubevirt;
     linkerd.url = github:defn/dev/pkg-linkerd-2.14.4-1?dir=m/pkg/linkerd;
     cilium.url = github:defn/dev/pkg-cilium-0.15.14-1?dir=m/pkg/cilium;
