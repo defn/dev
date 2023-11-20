@@ -823,12 +823,6 @@ kustomize: "knative": #Kustomize & {
 cert_manager_version: "1.13.2"
 
 // https://artifacthub.io/packages/helm/cert-manager/cert-manager
-kustomize: "cert-manager-crds": #Kustomize & {
-	resource: "cert-manager-crds": {
-		url: "https://github.com/cert-manager/cert-manager/releases/download/v\(cert_manager_version)/cert-manager.crds.yaml"
-	}
-}
-
 kustomize: "cert-manager": #KustomizeHelm & {
 	cluster: #Cluster
 
