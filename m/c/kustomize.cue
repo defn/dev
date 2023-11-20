@@ -846,7 +846,7 @@ kustomize: "cert-manager": #KustomizeHelm & {
 
 			global: logLevel: 4
 
-			dns01RecursiveNameservers: "1.1.1.1"
+			dns01RecursiveNameservers: "1.1.1.1:53"
 			dns01RecursiveNameserversOnly: true
 		}
 	}
