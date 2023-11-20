@@ -104,20 +104,7 @@ function make_up {
 
 	# deploy the cluster app-of-apps
 	kubectl --context ${cluster_name} apply -f e/${cluster_name}-cluster.yaml
-
-	# background app-of-apps syncing
-	while true; do
-		# dont do this, see if argocd can deal
-		break
-		if env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app sync --timeout 60 ${cluster_name}-cluster >/dev/null 2>&1; then break; fi
-		sleep 30
-	done &
-
-	# last minute things
-	make last
-
-	# k9s, show all pods
-	k9s -A
+	(cd c && make update-env env=$(echo ${cluster_name} | cut -d- -f3-))
 }
 
 function main {
