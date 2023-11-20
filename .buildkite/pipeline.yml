@@ -8,7 +8,7 @@ steps:
       - kubernetes:
           podSpec:
             containers:
-              - image: 169.254.32.1:5000/dfd:class
+              - image: cache.defn.run:5000/dfd:class
                 imagePullPolicy: Always
                 command: [bash, -c]
                 args:
