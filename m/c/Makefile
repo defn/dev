@@ -152,7 +152,7 @@ crd:
 	cd ../k/y && cue export --out json -e crds | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | while read -r domain crds; do echo "$$crds" | base64 -d > ../crd/$$domain.yaml; done
 
 update-env:
-	app set coder-amanibhavam-district-cluster --revision $$(helm show chart --insecure-skip-tls-verify oci://cache.defn.run:5000/library/helm/coder-amanibhavam-$(env)-cluster-env 2>/dev/null | grep ^version: | awk '{print $$2}')
+	app set coder-amanibhavam-$(env)-cluster --revision $$(helm show chart --insecure-skip-tls-verify oci://cache.defn.run:5000/library/helm/coder-amanibhavam-$(env)-cluster-env 2>/dev/null | grep ^version: | awk '{print $$2}')
 
 diff-chart:
 	h=oci://cache.defn.run:5000/library/helm/coder-amanibhavam-$(env)-cluster-$(app); dyff --color=on between <(helm template --insecure-skip-tls-verify $$h --version $(from) 2>/dev/null) <(helm template --insecure-skip-tls-verify $$h --version $(to) 2>/dev/null) | less -r
