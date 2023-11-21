@@ -40,6 +40,7 @@ package c
 	app_namespace: string
 
 	app_version: string | *"not-found"
+	app_cluster: string | *"not-found"
 	app_repo:    string
 	app_type:    string
 	app_def:     string
@@ -88,7 +89,7 @@ package c
 #Machine: {
 	name: string
 
-	destination: string | *name
+	destination: string
 
 	bootstrap: [string]: #BootstrapConfig
 
@@ -130,6 +131,7 @@ package c
 	from: {
 		#Input
 		bootstrap: [string]: #BootstrapConfig
+		app_cluster: string
 		app_repo: string
 		app_type: string
 		app_def:  string
@@ -145,6 +147,8 @@ package c
 
 	name:      _in.name
 	bootstrap: _in.bootstrap
+
+	destination: _in.app_cluster
 
 	env: {
 		metadata: name: ctx.name

@@ -57,6 +57,7 @@ teacher: {
 class: {
 	handle: string
 	env:    string
+	parent_env: string
 
 	cluster_name: "coder-\(handle)-\(env)"
 	name_suffix:  "."

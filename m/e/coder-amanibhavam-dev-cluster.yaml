@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   destination:
-    name: coder-amanibhavam-dev-cluster
+    name: coder-amanibhavam-district-cluster
   source:
     repoURL: cache.defn.run:5000
     chart: library/helm/coder-amanibhavam-dev-cluster-env
