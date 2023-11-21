@@ -119,5 +119,8 @@ once:
 	cd c && $(MAKE) cache
 	$(MAKE) update-env env=$(env)
 
-vc:
+vc-context:
 	env KUBECONFIG=$$HOME/.kube/config-in-cluster vcluster connect vcluster -n $$(uname -n | cut -d- -f1-3) --server=$$(env KUBECONFIG=$$HOME/.kube/config-in-cluster kubectl get -n $$(uname -n | cut -d- -f1-3) svc vcluster -o json | jq -r '.spec.clusterIP'):443 --update-current=false --kube-config-context-name $$(uname -n | cut -d- -f1-3) --kube-config "$$HOME/.kube/config"
+
+vc-argocd:
+	env KUBECONFIG=$$HOME/.kube/config-in-cluster:$$HOME/.kube/config argocd cluster --kube-context dfd --core add $$(uname -n | cut -d- -f1-3) --yes
