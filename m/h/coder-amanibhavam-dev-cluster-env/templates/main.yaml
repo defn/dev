@@ -1,6 +1,6 @@
 spec:
   destination:
-    name: coder-amanibhavam-dev-cluster
+    name: coder-amanibhavam-district-cluster
   project: default
   source:
     chart: library/helm/coder-amanibhavam-dev-cluster-kyverno
