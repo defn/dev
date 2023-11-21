@@ -11,48 +11,6 @@ helmCharts:
     repo: https://kiwigrid.github.io
     valuesInline:
       anyResources:
-        cilium: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-cilium
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-cilium
-              targetRevision: 0.0.11
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        tetragon: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-tetragon
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-tetragon
-              targetRevision: 0.0.11
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
         argo-cd: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
@@ -69,364 +27,6 @@ helmCharts:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-argo-cd
               targetRevision: 0.0.15
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        kyverno: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-kyverno
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-kyverno
-              targetRevision: 0.0.16
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions:
-                - ServerSideApply=true
-        reloader: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-reloader
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-reloader
-              targetRevision: 0.0.5
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        descheduler: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-descheduler
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-descheduler
-              targetRevision: 0.0.3
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        cert-manager: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-cert-manager
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-cert-manager
-              targetRevision: 0.0.13
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        trust-manager: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-trust-manager
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-trust-manager
-              targetRevision: 0.0.11
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        pod-identity: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-pod-identity
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-pod-identity
-              targetRevision: 0.0.11
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        external-secrets: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-external-secrets
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-external-secrets
-              targetRevision: 0.0.13
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        secrets: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-secrets
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-secrets
-              targetRevision: 0.0.10
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        karpenter: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-karpenter
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-karpenter
-              targetRevision: 0.0.11
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        external-dns: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-external-dns
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-external-dns
-              targetRevision: 0.0.11
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        issuer: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-issuer
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-issuer
-              targetRevision: 0.0.14
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        knative: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-knative
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-knative
-              targetRevision: 0.0.14
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        kourier: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-kourier
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-kourier
-              targetRevision: 0.0.11
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        traefik: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-traefik
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-traefik
-              targetRevision: 0.0.13
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        buildkite: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-buildkite
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-buildkite
-              targetRevision: 0.0.12
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        coder: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-coder
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-coder
-              targetRevision: 0.0.17
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        pihole: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-pihole
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-pihole
-              targetRevision: 0.0.11
             syncPolicy:
               automated:
                 prune: true
@@ -469,6 +69,153 @@ helmCharts:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-argo-workflows
               targetRevision: 0.0.12
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        buildkite: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-buildkite
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district-cluster-buildkite
+              targetRevision: 0.0.12
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        cert-manager: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-cert-manager
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district-cluster-cert-manager
+              targetRevision: 0.0.13
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        cilium: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-cilium
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district-cluster-cilium
+              targetRevision: 0.0.11
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        coder: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-coder
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district-cluster-coder
+              targetRevision: 0.0.17
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        descheduler: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-descheduler
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district-cluster-descheduler
+              targetRevision: 0.0.3
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        external-dns: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-external-dns
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district-cluster-external-dns
+              targetRevision: 0.0.11
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        external-secrets: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-external-secrets
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district-cluster-external-secrets
+              targetRevision: 0.0.13
             syncPolicy:
               automated:
                 prune: true
@@ -537,6 +284,154 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
+        issuer: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-issuer
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district-cluster-issuer
+              targetRevision: 0.0.14
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        karpenter: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-karpenter
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district-cluster-karpenter
+              targetRevision: 0.0.11
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        knative: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-knative
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district-cluster-knative
+              targetRevision: 0.0.14
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        kourier: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-kourier
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district-cluster-kourier
+              targetRevision: 0.0.11
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        kyverno: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-kyverno
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district-cluster-kyverno
+              targetRevision: 0.0.16
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions:
+                - ServerSideApply=true
+        pihole: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-pihole
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district-cluster-pihole
+              targetRevision: 0.0.11
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        pod-identity: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-pod-identity
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district-cluster-pod-identity
+              targetRevision: 0.0.11
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
         postgres-operator: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
@@ -552,6 +447,69 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-postgres-operator
+              targetRevision: 0.0.11
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        reloader: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-reloader
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district-cluster-reloader
+              targetRevision: 0.0.5
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        secrets: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-secrets
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district-cluster-secrets
+              targetRevision: 0.0.10
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        tetragon: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-tetragon
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district-cluster-tetragon
               targetRevision: 0.0.11
             syncPolicy:
               automated:
@@ -574,6 +532,48 @@ helmCharts:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-tfo
               targetRevision: 0.0.13
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        traefik: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-traefik
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district-cluster-traefik
+              targetRevision: 0.0.13
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        trust-manager: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-trust-manager
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district-cluster-trust-manager
+              targetRevision: 0.0.11
             syncPolicy:
               automated:
                 prune: true

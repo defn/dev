@@ -4,6 +4,46 @@ import (
 	"strings"
 )
 
+k3s_bootstrap: {
+	// essentials
+	"cilium": {}
+	"tetragon": {}
+	"argo-cd": {}
+	"kyverno": {
+		app_sync_options: ["ServerSideApply=true"]
+	}
+	"reloader": {}
+	"descheduler": {}
+	//"aws-node-term": {}
+	"cert-manager": {}
+	"trust-manager": {}
+
+	// external secrets
+	"pod-identity": {}
+	"external-secrets": {}
+	"secrets": {}
+
+	// tailscale
+	//"tailscale": {}
+
+	// scaling
+	"karpenter": {}
+
+	// external dns, certs issuer
+	"external-dns": {}
+	"issuer": {}
+
+	// traefik, functions
+	"knative": {}
+	"kourier": {}
+	"traefik": {}
+
+	// builds
+	"buildkite": {}
+	"coder": {}
+	"pihole": {}
+}
+
 teacher: {
 	bootstrap: {
 		[NAME=string]: {
@@ -11,44 +51,6 @@ teacher: {
 			app_type: "chart"
 			app_def:  "library/helm/coder-\(class.handle)-\(class.env)-cluster-\(NAME)"
 		}
-
-		// essentials
-		"cilium": {}
-		"tetragon": {}
-		"argo-cd": {}
-		"kyverno": {
-			app_sync_options: ["ServerSideApply=true"]
-		}
-		"reloader": {}
-		"descheduler": {}
-		//"aws-node-term": {}
-		"cert-manager": {}
-		"trust-manager": {}
-
-		// external secrets
-		"pod-identity": {}
-		"external-secrets": {}
-		"secrets": {}
-
-		// tailscale
-		//"tailscale": {}
-
-		// scaling
-		"karpenter": {}
-
-		// external dns, certs issuer
-		"external-dns": {}
-		"issuer": {}
-
-		// traefik, functions
-		"knative": {}
-		"kourier": {}
-		"traefik": {}
-
-		// builds
-		"buildkite": {}
-		"coder": {}
-		"pihole": {}
 	}
 }
 

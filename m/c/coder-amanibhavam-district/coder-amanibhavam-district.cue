@@ -1,20 +1,18 @@
 package c
 
-teacher: {
-	bootstrap: {
-		// build
-		"harbor": {}
+teacher: bootstrap: k3s_bootstrap & {
+	// build
+	"harbor": {}
 
-		// workflows
-		"tfo": {}
-		"argo-workflows": {}
-		"argo-events": {}
+	// workflows
+	"tfo": {}
+	"argo-workflows": {}
+	"argo-events": {}
 
-		// applications
-		"headlamp": {}
-		"postgres-operator": {}
-		"hello": {}
-	}
+	// applications
+	"headlamp": {}
+	"postgres-operator": {}
+	"hello": {}
 }
 
 class: {
