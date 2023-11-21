@@ -1,2 +1,2 @@
 package c
-teacher: bootstrap: "external-dns": app_version: "0.0.11"
+teacher: bootstrap: "external-dns": app_version: "0.0.12"
