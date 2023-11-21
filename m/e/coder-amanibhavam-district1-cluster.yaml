@@ -1,0 +1,18 @@
+# ManagedBy: cue
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: argocd
+  name: coder-amanibhavam-district1-cluster
+spec:
+  project: default
+  destination:
+    name: coder-amanibhavam-district-cluster
+  source:
+    repoURL: cache.defn.run:5000
+    chart: library/helm/coder-amanibhavam-district1-cluster-env
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

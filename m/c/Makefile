@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-app ?= district school class district0
+app ?= district school class district0 district1
 
 digest ?= 
 
