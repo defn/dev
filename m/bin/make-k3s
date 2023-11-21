@@ -9,6 +9,8 @@ infra_pod_cidr=
 infra_service_cidr=
 
 function make_init {
+	sudo docker rm -f registry
+	sudo rm -rf /tmp/certs
 	mkdir -p /tmp/certs
 	(cd /tmp/certs && step certificate create --subtle --insecure --no-password --force --profile self-signed $(uname -n) $(uname -n).crt $(uname -n).key)
 	sudo docker run -d -p 5000:5000 --restart=always --name registry \
