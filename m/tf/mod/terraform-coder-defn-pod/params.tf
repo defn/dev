@@ -54,6 +54,20 @@ data "coder_parameter" "memory" {
   }
 }
 
+data "coder_parameter" "vcluster" {
+  name         = "vcluster"
+  display_name = "VCluster"
+  description  = "Launch a vcluster"
+  type         = "number"
+  default      = "0"
+  icon         = "/icon/memory.svg"
+  mutable      = true
+  validation {
+    min = 0
+    max = 1
+  }
+}
+
 data "coder_parameter" "nix_volume_size" {
   name         = "nix_volume_size"
   display_name = "nix volume size"

@@ -15,12 +15,12 @@ resource "kubernetes_service_account" "main" {
 }
 
 resource "helm_release" "main" {
-  count      = 0
+  count      = data.coder_parameter.vcluster.value
   name       = "vcluster"
   namespace  = local.ns
   repository = "https://charts.loft.sh"
   chart      = "vcluster"
-  version    = "0.15.7"
+  version    = "0.17.0"
 
   set {
     name  = "sync.pods.ephemeralContainers"
