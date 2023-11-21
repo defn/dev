@@ -11,48 +11,6 @@ helmCharts:
     repo: https://kiwigrid.github.io
     valuesInline:
       anyResources:
-        cilium: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-school-cluster-cilium
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-school-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-school-cluster-cilium
-              targetRevision: 0.0.11
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        tetragon: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-school-cluster-tetragon
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-school-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-school-cluster-tetragon
-              targetRevision: 0.0.11
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
         argo-cd: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
@@ -74,12 +32,12 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
-        kyverno: |
+        buildkite: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
           metadata:
             namespace: argocd
-            name: coder-amanibhavam-school-cluster-kyverno
+            name: coder-amanibhavam-school-cluster-buildkite
             annotations:
               argocd.argoproj.io/sync-wave: "100"
           spec:
@@ -88,51 +46,8 @@ helmCharts:
               name: coder-amanibhavam-school-cluster
             source:
               repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-school-cluster-kyverno
-              targetRevision: 0.0.16
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions:
-                - ServerSideApply=true
-        reloader: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-school-cluster-reloader
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-school-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-school-cluster-reloader
-              targetRevision: 0.0.5
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        descheduler: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-school-cluster-descheduler
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-school-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-school-cluster-descheduler
-              targetRevision: 0.0.3
+              chart: library/helm/coder-amanibhavam-school-cluster-buildkite
+              targetRevision: 0.0.12
             syncPolicy:
               automated:
                 prune: true
@@ -159,12 +74,12 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
-        trust-manager: |
+        cilium: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
           metadata:
             namespace: argocd
-            name: coder-amanibhavam-school-cluster-trust-manager
+            name: coder-amanibhavam-school-cluster-cilium
             annotations:
               argocd.argoproj.io/sync-wave: "100"
           spec:
@@ -173,19 +88,19 @@ helmCharts:
               name: coder-amanibhavam-school-cluster
             source:
               repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-school-cluster-trust-manager
+              chart: library/helm/coder-amanibhavam-school-cluster-cilium
               targetRevision: 0.0.11
             syncPolicy:
               automated:
                 prune: true
                 selfHeal: true
               syncOptions: []
-        pod-identity: |
+        coder: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
           metadata:
             namespace: argocd
-            name: coder-amanibhavam-school-cluster-pod-identity
+            name: coder-amanibhavam-school-cluster-coder
             annotations:
               argocd.argoproj.io/sync-wave: "100"
           spec:
@@ -194,7 +109,49 @@ helmCharts:
               name: coder-amanibhavam-school-cluster
             source:
               repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-school-cluster-pod-identity
+              chart: library/helm/coder-amanibhavam-school-cluster-coder
+              targetRevision: 0.0.17
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        descheduler: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-school-cluster-descheduler
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-school-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-school-cluster-descheduler
+              targetRevision: 0.0.3
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        external-dns: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-school-cluster-external-dns
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-school-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-school-cluster-external-dns
               targetRevision: 0.0.11
             syncPolicy:
               automated:
@@ -222,12 +179,12 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
-        secrets: |
+        issuer: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
           metadata:
             namespace: argocd
-            name: coder-amanibhavam-school-cluster-secrets
+            name: coder-amanibhavam-school-cluster-issuer
             annotations:
               argocd.argoproj.io/sync-wave: "100"
           spec:
@@ -236,8 +193,8 @@ helmCharts:
               name: coder-amanibhavam-school-cluster
             source:
               repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-school-cluster-secrets
-              targetRevision: 0.0.10
+              chart: library/helm/coder-amanibhavam-school-cluster-issuer
+              targetRevision: 0.0.14
             syncPolicy:
               automated:
                 prune: true
@@ -259,48 +216,6 @@ helmCharts:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-karpenter
               targetRevision: 0.0.11
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        external-dns: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-school-cluster-external-dns
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-school-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-school-cluster-external-dns
-              targetRevision: 0.0.11
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        issuer: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-school-cluster-issuer
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-school-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-school-cluster-issuer
-              targetRevision: 0.0.14
             syncPolicy:
               automated:
                 prune: true
@@ -348,6 +263,133 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
+        kyverno: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-school-cluster-kyverno
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-school-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-school-cluster-kyverno
+              targetRevision: 0.0.16
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions:
+                - ServerSideApply=true
+        pihole: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-school-cluster-pihole
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-school-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-school-cluster-pihole
+              targetRevision: 0.0.11
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        pod-identity: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-school-cluster-pod-identity
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-school-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-school-cluster-pod-identity
+              targetRevision: 0.0.11
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        reloader: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-school-cluster-reloader
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-school-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-school-cluster-reloader
+              targetRevision: 0.0.5
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        secrets: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-school-cluster-secrets
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-school-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-school-cluster-secrets
+              targetRevision: 0.0.10
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        tetragon: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-school-cluster-tetragon
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-school-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-school-cluster-tetragon
+              targetRevision: 0.0.11
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
         traefik: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
@@ -369,12 +411,12 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
-        buildkite: |
+        trust-manager: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
           metadata:
             namespace: argocd
-            name: coder-amanibhavam-school-cluster-buildkite
+            name: coder-amanibhavam-school-cluster-trust-manager
             annotations:
               argocd.argoproj.io/sync-wave: "100"
           spec:
@@ -383,49 +425,7 @@ helmCharts:
               name: coder-amanibhavam-school-cluster
             source:
               repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-school-cluster-buildkite
-              targetRevision: 0.0.12
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        coder: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-school-cluster-coder
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-school-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-school-cluster-coder
-              targetRevision: 0.0.17
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        pihole: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-school-cluster-pihole
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-school-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-school-cluster-pihole
+              chart: library/helm/coder-amanibhavam-school-cluster-trust-manager
               targetRevision: 0.0.11
             syncPolicy:
               automated:
