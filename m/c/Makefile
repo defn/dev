@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-app ?= district school class
+app ?= district school class dev
 
 digest ?= 
 
