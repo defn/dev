@@ -109,7 +109,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
     app.kubernetes.io/version: 0.14.0
-    helm.sh/chart: external-dns-6.28.4
+    helm.sh/chart: external-dns-6.28.5
   name: external-dns-external-dns
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -120,7 +120,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
     app.kubernetes.io/version: 0.14.0
-    helm.sh/chart: external-dns-6.28.4
+    helm.sh/chart: external-dns-6.28.5
   name: external-dns-external-dns
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -228,7 +228,7 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: external-dns
         app.kubernetes.io/version: 0.14.0
-        helm.sh/chart: external-dns-6.28.4
+        helm.sh/chart: external-dns-6.28.5
   replicas: 1
   selector:
     matchLabels:
@@ -242,7 +242,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
     app.kubernetes.io/version: 0.14.0
-    helm.sh/chart: external-dns-6.28.4
+    helm.sh/chart: external-dns-6.28.5
   name: external-dns
   namespace: external-dns
 ---
@@ -282,7 +282,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
     app.kubernetes.io/version: 0.14.0
-    helm.sh/chart: external-dns-6.28.4
+    helm.sh/chart: external-dns-6.28.5
   name: external-dns
   namespace: external-dns
 ---
@@ -295,6 +295,6 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: external-dns
     app.kubernetes.io/version: 0.14.0
-    helm.sh/chart: external-dns-6.28.4
+    helm.sh/chart: external-dns-6.28.5
   name: external-dns
   namespace: external-dns
