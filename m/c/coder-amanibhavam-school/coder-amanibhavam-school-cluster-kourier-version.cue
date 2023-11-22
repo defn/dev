@@ -1,2 +1,2 @@
 package c
-teacher: bootstrap: "kourier": app_version: "0.0.12"
+teacher: bootstrap: "kourier": app_version: "0.0.13"

@@ -1,2 +1,2 @@
 package c
-teacher: bootstrap: "postgres-operator": app_version: "0.0.2"
+teacher: bootstrap: "postgres-operator": app_version: "0.0.3"
