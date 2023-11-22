@@ -236,7 +236,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-knative
-              targetRevision: 0.0.14
+              targetRevision: 0.0.15
             syncPolicy:
               automated:
                 prune: true
@@ -342,7 +342,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-reloader
-              targetRevision: 0.0.5
+              targetRevision: 0.0.6
             syncPolicy:
               automated:
                 prune: true
