@@ -1873,6 +1873,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 			adminEmail:         "iam@defn.sh"
 			webDomain:          "\(namespace).\(cluster.domain_name)"
 			useSecureWebSocket: true
+			forceHttpsS3Protocol: true
 			existingSecret:     "mastodon-default"
 			smtp: existingSecret: "mastodon-smtp"
 			redis: auth: existingSecret:      "mastodon-redis"

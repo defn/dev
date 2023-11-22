@@ -24,6 +24,7 @@ helmCharts:
       adminEmail: iam@defn.sh
       webDomain: mastodon.district.amanibhavam.defn.run
       useSecureWebSocket: true
+      forceHttpsS3Protocol: true
       existingSecret: mastodon-default
       smtp:
         existingSecret: mastodon-smtp

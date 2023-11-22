@@ -112,7 +112,7 @@ data:
   S3_ENABLED: "true"
   S3_ENDPOINT: http://mastodon-minio
   S3_HOSTNAME: mastodon-minio
-  S3_PROTOCOL: http
+  S3_PROTOCOL: https
   S3_REGION: us-east-1
   SMTP_AUTH_METHOD: plain
   SMTP_CA_FILE: /etc/ssl/certs/ca-certificates.crt
