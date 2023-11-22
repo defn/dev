@@ -1,5 +1,5 @@
 apiVersion: v2
 type: application
 name: coder-amanibhavam-school-cluster-descheduler
-appVersion: "0.0.4"
-version: "0.0.4"
+appVersion: "0.0.5"
+version: "0.0.5"
