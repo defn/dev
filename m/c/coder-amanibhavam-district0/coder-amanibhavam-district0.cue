@@ -4,6 +4,8 @@ teacher: bootstrap: {
 	"kyverno": {
 		app_sync_options: ["ServerSideApply=true"]
 	}
+	"postgres-operator": {}
+	"mastodon": {}
 }
 
 class: {
