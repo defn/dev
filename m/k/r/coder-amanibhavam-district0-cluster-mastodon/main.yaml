@@ -1369,6 +1369,10 @@ spec:
         key: coder-amanibhavam-district0-cluster
         property: mastodon_smtp_password
       secretKey: password
+    - remoteRef:
+        key: coder-amanibhavam-district0-cluster
+        property: mastodon_smtp_server
+      secretKey: server
   refreshInterval: 1h
   secretStoreRef:
     kind: ClusterSecretStore

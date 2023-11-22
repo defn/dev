@@ -26,7 +26,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district1-cluster-kyverno
-              targetRevision: 0.0.1
+              targetRevision: 0.0.2
             syncPolicy:
               automated:
                 prune: true
