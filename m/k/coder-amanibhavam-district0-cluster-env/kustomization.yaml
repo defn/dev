@@ -11,6 +11,27 @@ helmCharts:
     repo: https://kiwigrid.github.io
     valuesInline:
       anyResources:
+        external-secrets: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district0-cluster-external-secrets
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district0-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district0-cluster-external-secrets
+              targetRevision: 0.0.1
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
         kyverno: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
@@ -48,7 +69,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district0-cluster-mastodon
-              targetRevision: 0.0.1
+              targetRevision: 0.0.2
             syncPolicy:
               automated:
                 prune: true
