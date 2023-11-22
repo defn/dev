@@ -130,5 +130,6 @@ vc-argocd:
 vc:
 	$(MAKE) vc-context
 	$(MAKE) vc-argocd
+	cp $$HOME/.kube/config-in-cluster $$HOME/.kube/config.argocd
 	env KUBECONFIG=$$HOME/.kube/config-in-cluster kubectl apply -f e/$$(uname -n | cut -d- -f1-3)-cluster.yaml
 	cd c && env KUBECONFIG=$$HOME/.kube/config-in-cluster $(MAKE) update-env env=$$(uname -n | cut -d- -f3)
