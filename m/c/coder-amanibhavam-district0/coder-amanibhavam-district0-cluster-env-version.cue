@@ -1,2 +1,2 @@
 package c
-teacher: bootstrap: "coder-amanibhavam-district0-cluster-env": app_version: "0.0.6"
+teacher: bootstrap: "coder-amanibhavam-district0-cluster-env": app_version: "0.0.8"

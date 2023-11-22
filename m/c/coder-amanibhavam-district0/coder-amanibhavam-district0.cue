@@ -5,6 +5,7 @@ teacher: bootstrap: {
 		app_sync_options: ["ServerSideApply=true"]
 	}
 	"external-secrets": {}
+	"secrets": {}
 	"postgres-operator": {}
 	"mastodon": {}
 }

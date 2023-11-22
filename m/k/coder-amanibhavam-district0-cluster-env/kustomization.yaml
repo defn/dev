@@ -96,4 +96,25 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
+        secrets: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district0-cluster-secrets
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district0-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district0-cluster-secrets
+              targetRevision: 0.0.1
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
     includeCRDs: true

@@ -1,0 +1,7 @@
+#ManagedBy: cue
+
+patches: []
+resources:
+  - resource-cluster-secret-store.yaml
+commonLabels: {}
+commonAnnotations: {}
