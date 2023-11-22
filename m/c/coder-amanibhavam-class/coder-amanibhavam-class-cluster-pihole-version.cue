@@ -1,2 +1,2 @@
 package c
-teacher: bootstrap: "pihole": app_version: "0.0.11"
+teacher: bootstrap: "pihole": app_version: "0.0.12"

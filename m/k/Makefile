@@ -6,6 +6,8 @@ version ?= 0.0.$(revision)
 
 registry ?= 169.254.32.1:5000
 
+source ?= y
+
 delivery:
 	$(MAKE) all-build
 
@@ -36,11 +38,11 @@ bump:
 	mv -f ../h/$(chart)-version.tmp ../h/$(chart)-version
 
 sha1:
-	find r/$(chart) -name '*.yaml' | sort | xargs sha1sum > ../h/$(chart)-sha1
+	find $(source)/$(chart) -name '*.yaml' | sort | xargs sha1sum > ../h/$(chart)-sha1
 
 build:
-	@if [[ "$$(cat ../h/$(chart)-sha1 2>/dev/null)" != "$$(find r/$(chart) -name '*.yaml' | sort | xargs sha1sum)" ]]; then \
-		diff <(cat ../h/$(chart)-sha1 2>/dev/null) <(find r/$(chart) -name '*.yaml' | sort | xargs sha1sum); \
+	@if [[ "$$(cat ../h/$(chart)-sha1 2>/dev/null)" != "$$(find $(source)/$(chart) -name '*.yaml' | sort | xargs sha1sum)" ]]; then \
+		diff <(cat ../h/$(chart)-sha1 2>/dev/null) <(find $(source)/$(chart) -name '*.yaml' | sort | xargs sha1sum); \
 		$(MAKE) sha1 bump chart=$(chart); \
 		$(MAKE) build-inner; \
 	fi
@@ -48,7 +50,7 @@ build:
 build-inner:
 	rm -rf ../h/$(chart)
 	mkdir -p ../h/$(chart)/templates
-	cp -f r/$(chart)/*.yaml ../h/$(chart)/templates/
+	cp -f $(source)/$(chart)/*.yaml ../h/$(chart)/templates/
 	echo "apiVersion: v2" > ../h/$(chart)/Chart.yaml.tmp
 	echo "type: application" >> ../h/$(chart)/Chart.yaml.tmp
 	echo "name: $(chart)" >> ../h/$(chart)/Chart.yaml.tmp
@@ -62,7 +64,7 @@ package-always:
 	cd ../h && cat $(chart)/Chart.yaml && helm package $(chart); \
 
 package:
-	@if [[ "$$(cat ../h/$(chart)-sha1 2>/dev/null)" != "$$(find r/$(chart) -name '*.yaml' | sort | xargs sha1sum)" ]]; then \
+	@if [[ "$$(cat ../h/$(chart)-sha1 2>/dev/null)" != "$$(find $(source)/$(chart) -name '*.yaml' | sort | xargs sha1sum)" ]]; then \
 		cd ../h && cat $(chart)/Chart.yaml && helm package $(chart); \
 	fi
 

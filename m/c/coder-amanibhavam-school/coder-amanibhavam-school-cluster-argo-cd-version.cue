@@ -1,2 +1,2 @@
 package c
-teacher: bootstrap: "argo-cd": app_version: "0.0.15"
+teacher: bootstrap: "argo-cd": app_version: "0.0.16"
