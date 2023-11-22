@@ -55,7 +55,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district0-cluster-mastodon
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.5
+    targetRevision: 0.0.7
   syncPolicy:
     automated:
       prune: true
