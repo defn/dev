@@ -22,7 +22,7 @@ helmCharts:
         createAdmin: true
       adminUser: defn
       adminEmail: iam@defn.sh
-      webDomain: mastodon.district0.amanibhavam.defn.run
+      webDomain: mastodon.district.amanibhavam.defn.run
       useSecureWebSocket: true
       existingSecret: mastodon-default
       smtp:

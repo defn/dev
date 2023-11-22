@@ -63,8 +63,8 @@ class: {
 	name_suffix:  "."
 
 	domain_zone: "defn.run"
-	domain_name: "\(env).\(handle).\(domain_zone)"
-	domain_slug: "\(env)-\(handle)-\(strings.Replace(domain_zone, ".", "-", -1))"
+	domain_name: "\(parent_env).\(handle).\(domain_zone)"
+	domain_slug: "\(parent_env)-\(handle)-\(strings.Replace(domain_zone, ".", "-", -1))"
 
 	secrets_region:   "us-west-2"
 	issuer:           "zerossl-production"
