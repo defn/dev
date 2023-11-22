@@ -1,6 +1,6 @@
 package c
 
-teacher: bootstrap: k3s_bootstrap
+teacher: bootstrap: {}
 
 class: {
 	handle:             "amanibhavam"

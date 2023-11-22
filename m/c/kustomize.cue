@@ -1996,6 +1996,10 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 				secretKey: "password"
 				remoteRef: key:      "\(cluster.cluster_name)-cluster"
 				remoteRef: property: "\(namespace)_smtp_password"
+			}, {
+				secretKey: "server"
+				remoteRef: key:      "\(cluster.cluster_name)-cluster"
+				remoteRef: property: "\(namespace)_smtp_server"
 			}]
 		}
 	}
