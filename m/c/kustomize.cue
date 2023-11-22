@@ -1865,7 +1865,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "3.2.4"
+		version:     "3.2.5"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
