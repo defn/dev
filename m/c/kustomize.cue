@@ -294,7 +294,7 @@ kustomize: "linkerd-control-plane": #KustomizeHelm & {
 	helm: {
 		release: "linkerd-control-plane"
 		name:    "linkerd-control-plane"
-		version: "1.16.5"
+		version: "1.16.6"
 		repo:    "https://helm.linkerd.io/stable"
 		values: {
 			identity: externalCA: true
