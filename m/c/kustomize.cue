@@ -18,11 +18,11 @@ env: (#Transform & {
 	transformer: #TransformK3S
 
 	inputs: "\(class.cluster_name)-cluster": {
-		bootstrap: class.bootstrap
+		bootstrap:   class.bootstrap
 		app_cluster: "coder-\(class.handle)-\(class.parent_env)-cluster"
-		app_repo:  "cache.defn.run:5000"
-		app_type:  "chart"
-		app_def:   "library/helm/coder-\(class.handle)-\(class.env)-cluster-env"
+		app_repo:    "cache.defn.run:5000"
+		app_type:    "chart"
+		app_def:     "library/helm/coder-\(class.handle)-\(class.env)-cluster-env"
 	}
 }).outputs
 
@@ -1869,12 +1869,12 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
-			adminUser:          "defn"
-			adminEmail:         "iam@defn.sh"
-			webDomain:          "\(namespace).\(cluster.domain_name)"
-			useSecureWebSocket: true
+			adminUser:            "defn"
+			adminEmail:           "iam@defn.sh"
+			webDomain:            "\(namespace).\(cluster.domain_name)"
+			useSecureWebSocket:   true
 			forceHttpsS3Protocol: true
-			existingSecret:     "mastodon-default"
+			existingSecret:       "mastodon-default"
 			smtp: existingSecret: "mastodon-smtp"
 			redis: auth: existingSecret:      "mastodon-redis"
 			postgresql: auth: existingSecret: "mastodon-postgresql"

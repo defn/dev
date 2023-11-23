@@ -22,7 +22,7 @@ kustomize: [NAME=string]: _name: NAME
 #Cluster: {
 	handle:            string
 	env:               string
-	parent_env: string | *env
+	parent_env:        string | *env
 	infra_account_id:  string
 	infra_k3s_version: string
 
@@ -35,10 +35,10 @@ kustomize: [NAME=string]: _name: NAME
 	infra_pod_cidr:     string | *"\(infra_cidr_16).0.0/17"
 	infra_service_cidr: string | *"\(infra_cidr_16).128.0/17"
 
-	infra_cilium_name:  string
-	infra_cilium_id:    int | *0
-	infra_cilium_id:    >=0
-	infra_cilium_id:    <=255
+	infra_cilium_name: string
+	infra_cilium_id:   int | *0
+	infra_cilium_id:   >=0
+	infra_cilium_id:   <=255
 
 	cluster_name: string
 	name_suffix:  string

@@ -132,9 +132,9 @@ package c
 		#Input
 		bootstrap: [string]: #BootstrapConfig
 		app_cluster: string
-		app_repo: string
-		app_type: string
-		app_def:  string
+		app_repo:    string
+		app_type:    string
+		app_def:     string
 	}
 
 	to: #K3S
