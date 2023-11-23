@@ -6,7 +6,7 @@ version ?= 0.0.$(revision)
 
 registry ?= 169.254.32.1:5000
 
-source ?= y
+source ?= r
 
 delivery:
 	$(MAKE) all-build
