@@ -39,15 +39,18 @@ digest:
 	cd ./r && $(MAKE) digest
 
 release:
+	$(MAKE) release_k_y
+	$(MAKE) release_k_r
+
+release_k_y:
 # make one big cue config
 	rm -f ../k/y/cluster.cue
 	(echo package y; for r in ../k/y/*/main.yaml; do echo $$r 1>&2; (cue import $$r -p r --with-context -l '"res"' -l 'strings.ToLower(data.kind)' -l 'path.Dir(path.Rel("$(shell cd ../k/y && pwd)",filename))' -l 'strings.ToLower(*data.metadata.namespace | "cluster")' -l data.metadata.name --outfile - \
 		| grep -v '^package '); done) > ../k/y/cluster.cue
 	perl -pe 's{^\s*\w+:\s+null\s*}{}; s{data: null,}{}' -i ../k/y/cluster.cue
 	git add ../k/y
-#	$(MAKE) release_
 
-release_:
+release_k_r:
 # generate k/r
 	rm -rf ../k/r
 	if test -n "$(digest)"; then $(MAKE) digest; fi
