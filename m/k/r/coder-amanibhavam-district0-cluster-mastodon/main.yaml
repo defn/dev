@@ -7,11 +7,11 @@ apiVersion: v1
 data:
   mastodon-vhost.conf: |-
     <VirtualHost 127.0.0.1:8080 _default_:8080>
-      ServerName mastodon.district0.amanibhavam.defn.run
+      ServerName mastodon.district.amanibhavam.defn.run
       ServerAlias *
       <Location "/">
         ProxyPass http://mastodon-web:80/
-        ProxyPassReverse mastodon.district0.amanibhavam.defn.run
+        ProxyPassReverse mastodon.district.amanibhavam.defn.run
         ProxyPreserveHost on
         Order allow,deny
         Allow from all
@@ -24,13 +24,13 @@ data:
         RewriteRule /api/(.*)           ws://mastodon-streaming:80/api/$1 [P,L]
         RewriteCond %{HTTP:Upgrade} !=websocket [NC]
         RewriteRule /api/(.*)           http://mastodon-streaming:80/api/$1 [P,L]
-        ProxyPassReverse mastodon.district0.amanibhavam.defn.run
+        ProxyPassReverse mastodon.district.amanibhavam.defn.run
         Order allow,deny
         Allow from all
       </Location>
       <Location "/s3storage">
         ProxyPass http://mastodon-minio:80/s3storage/
-        ProxyPassReverse mastodon.district0.amanibhavam.defn.run
+        ProxyPassReverse mastodon.district.amanibhavam.defn.run
         Order allow,deny
         Allow from all
       </Location>
@@ -65,12 +65,12 @@ data:
   RAILS_ENV: production
   REDIS_HOST: mastodon-redis-master
   REDIS_PORT: "6379"
-  S3_ALIAS_HOST: mastodon.district0.amanibhavam.defn.run/s3storage
+  S3_ALIAS_HOST: mastodon.district.amanibhavam.defn.run/s3storage
   S3_BUCKET: s3storage
   S3_ENABLED: "true"
   S3_ENDPOINT: http://mastodon-minio
   S3_HOSTNAME: mastodon-minio
-  S3_PROTOCOL: http
+  S3_PROTOCOL: https
   S3_REGION: us-east-1
   SMTP_AUTH_METHOD: plain
   SMTP_CA_FILE: /etc/ssl/certs/ca-certificates.crt
@@ -82,8 +82,8 @@ data:
   SMTP_PORT: "587"
   SMTP_REPLY_TO: ""
   SMTP_TLS: "false"
-  STREAMING_API_BASE_URL: wss://mastodon.district0.amanibhavam.defn.run
-  WEB_DOMAIN: mastodon.district0.amanibhavam.defn.run
+  STREAMING_API_BASE_URL: wss://mastodon.district.amanibhavam.defn.run
+  WEB_DOMAIN: mastodon.district.amanibhavam.defn.run
 kind: ConfigMap
 metadata:
   labels:
@@ -1389,7 +1389,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: mastodon.district0.amanibhavam.defn.run
+    - host: mastodon.district.amanibhavam.defn.run
       http:
         paths:
           - backend:
