@@ -12,7 +12,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district0-cluster-external-secrets
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.3
+    targetRevision: 0.0.4
   syncPolicy:
     automated:
       prune: true
@@ -33,7 +33,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district0-cluster-kyverno
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.3
+    targetRevision: 0.0.4
   syncPolicy:
     automated:
       prune: true
@@ -55,7 +55,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district0-cluster-mastodon
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.9
+    targetRevision: 0.0.10
   syncPolicy:
     automated:
       prune: true
@@ -76,7 +76,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district0-cluster-postgres-operator
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.3
+    targetRevision: 0.0.4
   syncPolicy:
     automated:
       prune: true
@@ -97,7 +97,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district0-cluster-secrets
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.3
+    targetRevision: 0.0.4
   syncPolicy:
     automated:
       prune: true
