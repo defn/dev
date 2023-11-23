@@ -1,2 +1,2 @@
 package c
-teacher: bootstrap: "reloader": app_version: "0.0.9"
+teacher: bootstrap: "reloader": app_version: "0.0.10"

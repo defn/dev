@@ -8,6 +8,7 @@ teacher: bootstrap: {
 	"secrets": {}
 	"postgres-operator": {}
 	"mastodon": {}
+	"argo-cd": {}
 }
 
 class: {

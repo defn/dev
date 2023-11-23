@@ -1,3 +1,5 @@
+filter ?= ^
+
 list:
 	cue export --out json  -e uncached_resources | jq -S > a.json
 	cue export --out json  -e cached_resources | jq -S > b.json
@@ -9,7 +11,7 @@ vimdiff:
 	vimdiff a.json b.json
 
 cache:
-	cue export --out json -e image_digests | jq -r '.[]' | runmany 4 2 'proxy=$$2; \
+	cue export --out json -e image_digests | jq -r '.[]' | grep "$(filter)" | runmany 4 2 'proxy=$$2; \
 		case $$2 in \
 			*) true ;; \
 			docker.io*) proxy=harbor.district.amanibhavam.defn.run/docker/$${2#docker.io/} ;; \

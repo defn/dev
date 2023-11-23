@@ -10,8 +10,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: argocd.class.amanibhavam.defn.run
-      http:
+    - http:
         paths:
           - path: /
             pathType: Prefix
@@ -20,3 +19,4 @@ spec:
                 name: argocd-server
                 port:
                   number: 80
+      host: argocd.class.amanibhavam.defn.run

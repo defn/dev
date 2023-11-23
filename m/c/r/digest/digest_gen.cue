@@ -66,7 +66,7 @@ cache: "ghcr.io/kyverno/kyvernopre:v1.10.3": "ghcr.io/kyverno/kyvernopre@sha256:
 
 cache: "ghcr.io/kyverno/reports-controller:v1.10.3": "ghcr.io/kyverno/reports-controller@sha256:b0fbfe5a7250fadd120ffbb6dd4cb70e575bddc165da76b46e3b7dab4d275141"
 
-cache: "ghcr.io/stakater/reloader:v1.0.52": "ghcr.io/stakater/reloader@sha256:446f4b62bffe5759d14e80b93097cf30c26545c0d8e501aba2ce8067850f6c08"
+cache: "ghcr.io/stakater/reloader:v1.0.52": "ghcr.io/stakater/reloader@sha256:6cf64abeee4ee3132ac108f87b99166da013fc3ddc9ca34dac9b3be70d817c04"
 
 cache: "goharbor/harbor-core:v2.9.1": "goharbor/harbor-core@sha256:ee70dcf6e7c5a3c1d65a6898eb7d3816cbe760f7971a79e1fed2d529abb12ccd"
 
@@ -90,7 +90,7 @@ cache: "public.ecr.aws/karpenter/controller:v0.32.1@sha256:9b31039d45613ac22a104
 
 cache: "quay.io/argoproj/argo-events:v1.8.1": "quay.io/argoproj/argo-events@sha256:3c8d787908189604975ca87f480e0f60c93fdfb89bbf944a0c449d888e9368e7"
 
-cache: "quay.io/argoproj/argocd:v2.9.0": "quay.io/argoproj/argocd@sha256:1be54db1f0f5d1c0da4c9b592f8ee1921aa7b5441a780dd90ca2cad135131816"
+cache: "quay.io/argoproj/argocd:v2.9.2": "quay.io/argoproj/argocd@sha256:8576d347f30fa4c56a0129d1c0a0f5ed1e75662f0499f1ed7e917c405fd909dc"
 
 cache: "quay.io/argoproj/argocli:v3.5.1": "quay.io/argoproj/argocli@sha256:82cbdc300b3fe3702dc399c9fb841978f47975a84e929e76290094a1accb587f"
 

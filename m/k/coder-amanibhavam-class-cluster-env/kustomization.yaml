@@ -26,7 +26,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-argo-cd
-              targetRevision: 0.0.18
+              targetRevision: 0.0.19
             syncPolicy:
               automated:
                 prune: true
@@ -341,7 +341,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-reloader
-              targetRevision: 0.0.9
+              targetRevision: 0.0.10
             syncPolicy:
               automated:
                 prune: true
