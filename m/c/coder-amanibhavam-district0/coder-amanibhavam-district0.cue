@@ -11,8 +11,7 @@ teacher: bootstrap: {
 }
 
 class: {
-	handle:             "amanibhavam"
-	env:                "district0"
+	handle:     "amanibhavam"
+	env:        "district0"
 	parent_env: "district"
-
 }
