@@ -51,6 +51,7 @@ function cache {
 
 	# these can get big
 	if [[ "$(df -klh /mnt/docker | tail -1 | awk '{print $NF}')" == "/mnt/docker" ]]; then
+		sudo install -d -m 0700 -o ubuntu -g ubuntu /mnt/docker
 		persist /mnt/docker/go-mod ~/.cache/go-mod
 		persist /mnt/docker/bazel ~/.cache/bazel
 	else
