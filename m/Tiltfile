@@ -3,7 +3,7 @@
 load("ext://restart_process", "custom_build_with_restart")
 
 # local registry
-default_registry("169.254.32.1:5000")
+default_registry("cache.defn.run:5000")
 
 # code-server
 local_resource(
@@ -16,6 +16,23 @@ local_resource(
             source .bash_profile
             cd ~/m/pkg/codeserver
             exec nix develop --command code-server --auth none --port 13337
+        """,
+    ],
+)
+
+# swap
+local_resource(
+    "swap",
+    serve_cmd=[
+        "bash",
+        "-c",
+        """
+            if ! test -f /mnt/docker/swap; then
+                sudo dd if=/dev/zero of=/mnt/docker/swap bs=1M count=8192
+                sudo chmod 0600 /mnt/docker/swap
+                sudo mkswap /mnt/docker/swap
+                sudo swapon /mnt/docker/swap
+            fi
         """,
     ],
 )
