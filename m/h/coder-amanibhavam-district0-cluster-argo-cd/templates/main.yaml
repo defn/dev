@@ -1180,7 +1180,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: argocd-district.district.amanibhavam.defn.run
+    - host: argocd-district0.district.amanibhavam.defn.run
       http:
         paths:
           - backend:

@@ -12,7 +12,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-argo-cd
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.19
+    targetRevision: 0.0.20
   syncPolicy:
     automated:
       prune: true

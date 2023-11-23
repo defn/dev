@@ -5,7 +5,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district0-cluster-argo-cd
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.2
+    targetRevision: 0.0.4
   syncPolicy:
     automated:
       prune: true

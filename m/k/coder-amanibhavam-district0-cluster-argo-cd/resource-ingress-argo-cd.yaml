@@ -19,4 +19,4 @@ spec:
                 name: argocd-server
                 port:
                   number: 80
-      host: argocd-district.district.amanibhavam.defn.run
+      host: argocd-district0.district.amanibhavam.defn.run
