@@ -26,7 +26,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-argo-cd
-              targetRevision: 0.0.17
+              targetRevision: 0.0.18
             syncPolicy:
               automated:
                 prune: true
@@ -47,7 +47,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-buildkite
-              targetRevision: 0.0.14
+              targetRevision: 0.0.15
             syncPolicy:
               automated:
                 prune: true
@@ -68,7 +68,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-cert-manager
-              targetRevision: 0.0.15
+              targetRevision: 0.0.16
             syncPolicy:
               automated:
                 prune: true
@@ -89,7 +89,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-cilium
-              targetRevision: 0.0.13
+              targetRevision: 0.0.14
             syncPolicy:
               automated:
                 prune: true
@@ -110,7 +110,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-coder
-              targetRevision: 0.0.19
+              targetRevision: 0.0.20
             syncPolicy:
               automated:
                 prune: true
@@ -131,7 +131,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-descheduler
-              targetRevision: 0.0.5
+              targetRevision: 0.0.6
             syncPolicy:
               automated:
                 prune: true
@@ -152,7 +152,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-external-dns
-              targetRevision: 0.0.14
+              targetRevision: 0.0.15
             syncPolicy:
               automated:
                 prune: true
@@ -173,7 +173,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-external-secrets
-              targetRevision: 0.0.15
+              targetRevision: 0.0.16
             syncPolicy:
               automated:
                 prune: true
@@ -194,7 +194,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-issuer
-              targetRevision: 0.0.16
+              targetRevision: 0.0.17
             syncPolicy:
               automated:
                 prune: true
@@ -215,7 +215,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-karpenter
-              targetRevision: 0.0.13
+              targetRevision: 0.0.14
             syncPolicy:
               automated:
                 prune: true
@@ -236,7 +236,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-knative
-              targetRevision: 0.0.17
+              targetRevision: 0.0.18
             syncPolicy:
               automated:
                 prune: true
@@ -257,7 +257,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-kourier
-              targetRevision: 0.0.13
+              targetRevision: 0.0.14
             syncPolicy:
               automated:
                 prune: true
@@ -278,7 +278,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-kyverno
-              targetRevision: 0.0.18
+              targetRevision: 0.0.19
             syncPolicy:
               automated:
                 prune: true
@@ -299,7 +299,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-pihole
-              targetRevision: 0.0.13
+              targetRevision: 0.0.14
             syncPolicy:
               automated:
                 prune: true
@@ -320,7 +320,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-pod-identity
-              targetRevision: 0.0.13
+              targetRevision: 0.0.14
             syncPolicy:
               automated:
                 prune: true
@@ -341,7 +341,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-reloader
-              targetRevision: 0.0.8
+              targetRevision: 0.0.9
             syncPolicy:
               automated:
                 prune: true
@@ -362,7 +362,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-secrets
-              targetRevision: 0.0.12
+              targetRevision: 0.0.13
             syncPolicy:
               automated:
                 prune: true
@@ -383,7 +383,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-tetragon
-              targetRevision: 0.0.13
+              targetRevision: 0.0.14
             syncPolicy:
               automated:
                 prune: true
@@ -404,7 +404,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-traefik
-              targetRevision: 0.0.15
+              targetRevision: 0.0.16
             syncPolicy:
               automated:
                 prune: true
@@ -425,7 +425,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-trust-manager
-              targetRevision: 0.0.13
+              targetRevision: 0.0.14
             syncPolicy:
               automated:
                 prune: true
