@@ -18,7 +18,7 @@ function persist {
 }
 
 function cache {
-	if ! type -P sudo; then return 0; fi
+	if ! type -P sudo >/dev/null; then return 0; fi
 
 	if [[ "Linux" == "$(uname -s || true)" ]]; then
 		if test -d /workspaces; then
@@ -50,7 +50,7 @@ function cache {
 	persist ~/work/go-build ~/.cache/go-build
 
 	# these can get big
-	if [[ "$(df -klh /mnt/docker | tail -1 | awk '{print $NF}')" == "/mnt/docker" ]]; then
+	if [[ "$(df -klh /mnt/docker 2>/dev/null | tail -1 | awk '{print $NF}')" == "/mnt/docker" ]]; then
 		sudo install -d -m 0700 -o ubuntu -g ubuntu /mnt/docker
 		persist /mnt/docker/go-mod ~/.cache/go-mod
 		persist /mnt/docker/bazel ~/.cache/bazel
