@@ -46,11 +46,18 @@ function cache {
 	persist ~/work/terraform-d ~/.terraform.d
 	mkdir -p ~/.terraform.d/plugin-cache
 
-	persist ~/work/go-build ~/.cache/go-build
-	persist ~/work/go-mod ~/.cache/go-mod
 	persist ~/work/go ~/go
+	persist ~/work/go-build ~/.cache/go-build
 
-	persist ~/work/bazel ~/.cache/bazel
+	# these can get big
+	if [[ "$(df -klh /mnt/docker | tail -1 | awk '{print $NF}')" == "/mnt/docker" ]]; then
+		persist /mnt/docker/go-mod ~/.cache/go-mod
+		persist /mnt/docker/bazel ~/.cache/bazel
+	else
+		persist ~/work/go-mod ~/.cache/go-mod
+		persist ~/work/bazel ~/.cache/bazel
+	fi
+
 	persist ~/work/bazelisk ~/.cache/bazelisk
 
 	persist ~/work/config-coder ~/.config/coderv2
