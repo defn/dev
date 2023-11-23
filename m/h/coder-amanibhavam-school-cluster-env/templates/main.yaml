@@ -1,10 +1,3 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-argo-cd
-  namespace: argocd
 spec:
   destination:
     name: coder-amanibhavam-school-cluster
@@ -18,14 +11,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-buildkite
+  name: coder-amanibhavam-school-cluster-argo-cd
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-school-cluster
@@ -39,14 +32,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-cert-manager
+  name: coder-amanibhavam-school-cluster-buildkite
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-school-cluster
@@ -60,14 +53,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-cilium
+  name: coder-amanibhavam-school-cluster-cert-manager
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-school-cluster
@@ -81,14 +74,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-coder
+  name: coder-amanibhavam-school-cluster-cilium
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-school-cluster
@@ -102,14 +95,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-descheduler
+  name: coder-amanibhavam-school-cluster-coder
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-school-cluster
@@ -123,14 +116,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-external-dns
+  name: coder-amanibhavam-school-cluster-descheduler
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-school-cluster
@@ -144,14 +137,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-external-secrets
+  name: coder-amanibhavam-school-cluster-external-dns
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-school-cluster
@@ -165,14 +158,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-issuer
+  name: coder-amanibhavam-school-cluster-external-secrets
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-school-cluster
@@ -186,14 +179,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-karpenter
+  name: coder-amanibhavam-school-cluster-issuer
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-school-cluster
@@ -207,14 +200,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-knative
+  name: coder-amanibhavam-school-cluster-karpenter
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-school-cluster
@@ -228,14 +221,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-kourier
+  name: coder-amanibhavam-school-cluster-knative
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-school-cluster
@@ -249,14 +242,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-kyverno
+  name: coder-amanibhavam-school-cluster-kourier
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-school-cluster
@@ -270,15 +263,15 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-    - ServerSideApply=true
----
+      - ServerSideApply=true
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-pihole
+  name: coder-amanibhavam-school-cluster-kyverno
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-school-cluster
@@ -292,14 +285,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-pod-identity
+  name: coder-amanibhavam-school-cluster-pihole
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-school-cluster
@@ -313,14 +306,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-reloader
+  name: coder-amanibhavam-school-cluster-pod-identity
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-school-cluster
@@ -334,14 +327,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-secrets
+  name: coder-amanibhavam-school-cluster-reloader
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-school-cluster
@@ -355,14 +348,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-tetragon
+  name: coder-amanibhavam-school-cluster-secrets
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-school-cluster
@@ -376,14 +369,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-traefik
+  name: coder-amanibhavam-school-cluster-tetragon
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-school-cluster
@@ -397,14 +390,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-trust-manager
+  name: coder-amanibhavam-school-cluster-traefik
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-school-cluster
@@ -418,3 +411,10 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: coder-amanibhavam-school-cluster-trust-manager
+  namespace: argocd

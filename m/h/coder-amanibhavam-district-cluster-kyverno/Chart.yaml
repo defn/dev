@@ -1,5 +1,5 @@
 apiVersion: v2
 type: application
 name: coder-amanibhavam-district-cluster-kyverno
-appVersion: "0.0.18"
-version: "0.0.18"
+appVersion: "0.0.19"
+version: "0.0.19"

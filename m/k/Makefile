@@ -4,7 +4,7 @@ chart ?=
 revision ?= $(shell cat ../h/$(chart)-version)
 version ?= 0.0.$(revision)
 
-registry ?= 169.254.32.1:5000
+registry ?= cache.defn.run:5000
 
 source ?= r
 
@@ -67,6 +67,9 @@ package:
 	@if [[ "$$(cat ../h/$(chart)-sha1 2>/dev/null)" != "$$(find $(source)/$(chart) -name '*.yaml' | sort | xargs sha1sum)" ]]; then \
 		cd ../h && cat $(chart)/Chart.yaml && helm package $(chart); \
 	fi
+
+update-env:
+	cd ../c && $(MAKE) update-env
 
 push:
 	if ! test -f ../h/$(chart)-$(version).tgz; then $(MAKE) package chart=$(chart); fi
