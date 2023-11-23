@@ -70,7 +70,7 @@ kustomize: "argo-cd": #Kustomize & {
 	}
 
 	resource: "argo-cd": {
-		url: "https://raw.githubusercontent.com/argoproj/argo-cd/v2.9.0/manifests/install.yaml"
+		url: "https://raw.githubusercontent.com/argoproj/argo-cd/v2.9.2/manifests/install.yaml"
 	}
 
 	resource: "ingress-argo-cd": {
@@ -87,7 +87,12 @@ kustomize: "argo-cd": #Kustomize & {
 		spec: {
 			ingressClassName: "traefik"
 			rules: [{
-				host: "argocd.\(cluster.domain_name)"
+				if cluster.parent_env == cluster.env {
+					host: "argocd.\(cluster.domain_name)"
+				}
+				if cluster.parent_env != cluster.env {
+					host: "argocd-\(cluster.parent_env).\(cluster.domain_name)"
+				}
 				http: paths: [{
 					path:     "/"
 					pathType: "Prefix"
