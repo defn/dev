@@ -7,7 +7,6 @@ teacher: bootstrap: {
 	"external-secrets": {}
 	"secrets": {}
 	"postgres-operator": {}
-	"mastodon": {}
 	"argo-cd": {}
 }
 

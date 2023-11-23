@@ -67,27 +67,6 @@ spec:
     name: coder-amanibhavam-district0-cluster
   project: default
   source:
-    chart: library/helm/coder-amanibhavam-district0-cluster-mastodon
-    repoURL: cache.defn.run:5000
-    targetRevision: 0.0.10
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions: []
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district0-cluster-mastodon
-  namespace: argocd
----
-spec:
-  destination:
-    name: coder-amanibhavam-district0-cluster
-  project: default
-  source:
     chart: library/helm/coder-amanibhavam-district0-cluster-postgres-operator
     repoURL: cache.defn.run:5000
     targetRevision: 0.0.4
