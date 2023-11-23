@@ -91,7 +91,7 @@ kustomize: "argo-cd": #Kustomize & {
 					host: "argocd.\(cluster.domain_name)"
 				}
 				if cluster.parent_env != cluster.env {
-					host: "argocd-\(cluster.parent_env).\(cluster.domain_name)"
+					host: "argocd-\(cluster.env).\(cluster.domain_name)"
 				}
 				http: paths: [{
 					path:     "/"
