@@ -1,43 +1,10 @@
 #!/usr/bin/env python
 
-load("ext://restart_process", "custom_build_with_restart")
+load('../cue/Tiltfile', 'main')
 
-# local kubernetes
-allow_k8s_contexts("coder-amanibhavam-district0-cluster")
-
-# local registry
-default_registry("cache.defn.run:5000")
-
-# api initial deploy
-k8s_yaml(local("cat gen/deploy.yaml"))
-
-cli_build = "../../bazel-bin/c/dev/dev_/dev"
-cli_release = "gen/cli.bin"
-cli_entrypoint = "/cli"
-cli_service = "api"
-
-# bazel
-local_resource(
-    "bazel",
-    serve_cmd=["b", "watch"],
-)
-
-# bazel-to-api updates when bazel builds
-local_resource(name="bazel-to-workarea", 
-    cmd="if test -f {build}; then install -m 0755 -o ubuntu -g ubuntu {build} {release}; fi".format(build=cli_build, release=cli_release),
-    deps=[cli_build])
-
-# api service
-k8s_resource(cli_service)
-
-# updates api when bazel-to-api builds
-custom_build_with_restart(
-    ref=cli_service,
-    command="docker build -t $EXPECTED_REF . && docker push $EXPECTED_REF",
-    deps=[cli_release],
-    trigger=[cli_release],
-    entrypoint=[cli_entrypoint],
-    live_update=[
-        sync(cli_release, cli_entrypoint),
-    ],
-)
+main(context="coder-amanibhavam-district0-cluster",
+    registry="cache.defn.run:5000",
+    app_build = "../../bazel-bin/c/dev/dev_/dev",
+    app_release = "gen/cli.bin",
+    app_entrypoint = "/cli",
+    app_service = "api")
