@@ -23,3 +23,6 @@ deploy:
 
 init:
 	argocd --core repo add $(registry) --type helm --name cache --enable-oci --insecure-skip-server-verification
+
+all:
+	$(MAKE) bump build deploy
