@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+
+load("ext://restart_process", "custom_build_with_restart")
+
+def main(context, registry, app_build, app_release, app_entrypoint, app_service):
+    # local kubernetes
+    allow_k8s_contexts(context)
+
+    # local registry
+    default_registry(registry)
+
+    # app initial deploy
+    k8s_yaml(local("cat gen/deploy.yaml"))
+
+    # bazel
+    local_resource(
+        "bazel",
+        serve_cmd=["b", "watch"],
+    )
+
+    # bazel-to-app updates when bazel builds
+    local_resource(name="bazel-to-workarea", 
+        cmd="if test -f {build}; then install -m 0755 -o ubuntu -g ubuntu {build} {release}; fi".format(build=app_build, release=app_release),
+        deps=[app_build])
+
+    # app service
+    k8s_resource(app_service)
+
+    # updates app when bazel-to-app builds
+    custom_build_with_restart(
+        ref=app_service,
+        command="docker build -t $EXPECTED_REF . && docker push $EXPECTED_REF",
+        deps=[app_release],
+        trigger=[app_release],
+        entrypoint=[app_entrypoint],
+        live_update=[
+            sync(app_release, app_entrypoint),
+        ],
+    )
