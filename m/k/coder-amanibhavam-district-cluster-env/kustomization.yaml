@@ -278,7 +278,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-hello
-              targetRevision: 0.0.16
+              targetRevision: 0.0.1
             syncPolicy:
               automated:
                 prune: true

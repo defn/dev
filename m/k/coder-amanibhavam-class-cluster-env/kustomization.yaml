@@ -283,7 +283,8 @@ helmCharts:
               automated:
                 prune: true
                 selfHeal: true
-              syncOptions: []
+              syncOptions:
+                - ServerSideApply=true
         pihole: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
