@@ -6,7 +6,9 @@ domain ?= defn.run
 registry ?= cache.$(domain):5000
 
 build:
-	(echo package dev; echo 'version: "0.0.7"') > version.cue
+	echo $$(( $$(cat version) + 1 )) > version.tmp
+	mv version.tmp version
+	(echo package dev; echo "version: \"0.0.$$(cat version)\"") > version.cue
 	cue fmt .
 	cue export --out yaml -e 'output["Chart.yaml"]' > Chart.yaml
 	cue export --out yaml -e 'output["app.yaml"]' > app.yaml
