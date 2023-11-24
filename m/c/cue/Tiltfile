@@ -15,12 +15,12 @@ def main(context, registry, app_build, app_release, app_entrypoint, app_service)
     # bazel
     local_resource(
         "bazel",
-        serve_cmd=["b", "watch"],
+        serve_cmd="make watch"
     )
 
     # bazel-to-app updates when bazel builds
     local_resource(name="bazel-to-workarea", 
-        cmd="if test -f {build}; then install -m 0755 -o ubuntu -g ubuntu {build} {release}; fi".format(build=app_build, release=app_release),
+        cmd="make post-bazel build={build} release={release}".format(build=app_build, release=app_release),
         deps=[app_build])
 
     # app service
@@ -29,7 +29,7 @@ def main(context, registry, app_build, app_release, app_entrypoint, app_service)
     # updates app when bazel-to-app builds
     custom_build_with_restart(
         ref=app_service,
-        command="docker build -t $EXPECTED_REF . && docker push $EXPECTED_REF",
+        command="make image",
         deps=[app_release],
         trigger=[app_release],
         entrypoint=[app_entrypoint],

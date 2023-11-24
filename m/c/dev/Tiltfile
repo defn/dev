@@ -4,7 +4,7 @@ load('../cue/Tiltfile', 'main')
 
 main(context="coder-amanibhavam-district0-cluster",
     registry="cache.defn.run:5000",
-    app_build = "../../bazel-bin/c/dev/dev_/dev",
-    app_release = "gen/cli.bin",
+    app_service = "api",
     app_entrypoint = "/cli",
-    app_service = "api")
+    app_build = "../../bazel-bin/c/dev/dev_/dev",
+    app_release = "gen/cli.bin")
