@@ -15,7 +15,7 @@ var apiCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		r := gin.Default()
 		r.SetTrustedProxies(nil)
-		r.GET("/", func(c *gin.Context) {
+		r.GET("/api", func(c *gin.Context) {
 			c.JSON(http.StatusOK, gin.H{
 				"message": "pong",
 			})
