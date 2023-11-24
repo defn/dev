@@ -2,11 +2,10 @@ package dev
 
 import (
 	"encoding/yaml"
-	"strings"
 )
 
 output: {
-	"Chart.yaml": """
+	"chart/Chart.yaml": """
         # managed by Cue
         \(yaml.Marshal(chart))
         """
@@ -21,13 +20,9 @@ output: {
         """
 
 	for t, v in template {
-		"templates/\(t)": """
+		"chart/templates/\(t)": """
 			# managed by Cue
 			\(yaml.Marshal(v))
 			"""
 	}
 }
-
-output_filenames: strings.Join([
-			for o, _ in output {o},
-], " ")
