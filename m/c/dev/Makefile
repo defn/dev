@@ -8,9 +8,7 @@ registry ?= cache.$(domain):5000
 build:
 	cue export --out json -e app.output | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | while read -r f b; do base64 -d <<<"$$b" >"$$f"; done
 	rm -f *.tgz gen/*.tgz
-	helm package .
-	mv *.tgz gen/
-	helm push --insecure-skip-tls-verify gen/*.tgz oci://$(registry)/library/helm
+	cd gen && helm package ../chart && helm push --insecure-skip-tls-verify *.tgz oci://$(registry)/library/helm
 
 bump:
 	echo $$(( $$(cat version) + 1 )) > version.tmp
