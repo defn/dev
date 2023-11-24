@@ -1,9 +1,11 @@
-if [[ -n "${VSCODE_RESOLVING_ENVIRONMENT:-}" ]]; then
+#!/usr/bin/env bash
+
+if [[ -n ${VSCODE_RESOLVING_ENVIRONMENT-} ]]; then
 	return
 fi
 
 # vscode terminal init
-if [[ -z "${WORKDIR:-}" ]]; then
+if [[ -z ${WORKDIR-} ]]; then
 	source ~/.bash_entrypoint
 	return
 fi
@@ -51,7 +53,7 @@ export HOF_TELEMETRY_DISABLED=1
 #export DISPLAY=1
 
 # kubectl
-if [[ -z "${KUBECONFIG:-}" ]]; then export KUBECONFIG="$HOME/.kube/config"; fi
+if [[ -z ${KUBECONFIG-} ]]; then export KUBECONFIG="$HOME/.kube/config"; fi
 
 # cilium
 export CILIUM_CLI_MODE=classic
@@ -63,9 +65,9 @@ export EDITOR=vim
 # ssh-agent
 unset SSH_AUTH_SOCK
 case "$(uname -s)" in
-	Darwin)
-		export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
-		;;
+Darwin)
+	export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
+	;;
 esac
 
 # aws-vault
@@ -105,37 +107,37 @@ else
 	}
 
 	function update_ps1 {
-		ls -td /tmp/vscode-ssh-auth-sock* 2>/dev/null | tail -n +2 | xargs rm -f /tmp/.meh;
+		ls -td /tmp/vscode-ssh-auth-sock* 2>/dev/null | tail -n +2 | xargs rm -f /tmp/.meh
 		EXTRA=""
 
 		local slug=
 		if [[ -f flake.json ]]; then
 			slug="$(jq -r '.slug' flake.json)"
-			if [[ "$slug" == "null" ]]; then slug=""; fi
+			if [[ $slug == "null" ]]; then slug=""; fi
 		fi
 
 		local vendor=
 		if [[ -f flake.json ]]; then
 			vendor="$(jq -r '.vendor' flake.json)"
-			if [[ "$vendor" == "null" ]]; then vendor=""; fi
+			if [[ $vendor == "null" ]]; then vendor=""; fi
 		fi
 
 		local revision=
 		if [[ -f flake.json ]]; then
 			revision="$(jq -r '.revision' flake.json)"
-			if [[ "$revision" == "null" ]]; then revision=""; fi
+			if [[ $revision == "null" ]]; then revision=""; fi
 		fi
 
 		local version=
 		if [[ -f flake.json ]]; then
 			version="$(jq -r '.version' flake.json)"
-			if [[ "$version" == "null" ]]; then version=""; fi
+			if [[ $version == "null" ]]; then version=""; fi
 		fi
 
-		if [[ -n "${version:-}" ]]; then
-			EXTRA="${version:-}"
+		if [[ -n ${version-} ]]; then
+			EXTRA="${version-}"
 		else
-			EXTRA="${slug:-}${vendor:-}${revision:+${vendor:+-}${revision}}"
+			EXTRA="${slug-}${vendor-}${revision:+${vendor:+-}${revision}}"
 		fi
 		EXTRA="${EXTRA:- }"
 		PS1="$(render_ps1)"
@@ -149,23 +151,23 @@ fi
 
 # aliases
 function vi {
-	if [[ -n "${VSCODE_GIT_ASKPASS_MAIN:-}" ]]; then
+	if [[ -n ${VSCODE_GIT_ASKPASS_MAIN-} ]]; then
 		local code
 
-    code="${VSCODE_GIT_ASKPASS_MAIN%/extensions/*}/bin/remote-cli/code-linux.sh"
-    if [[ ! -x "$code" ]]; then
-      code="${VSCODE_GIT_ASKPASS_MAIN%/extensions/*}/bin/remote-cli/code"
-    fi
+		code="${VSCODE_GIT_ASKPASS_MAIN%/extensions/*}/bin/remote-cli/code-linux.sh"
+		if [[ ! -x $code ]]; then
+			code="${VSCODE_GIT_ASKPASS_MAIN%/extensions/*}/bin/remote-cli/code"
+		fi
 
-    if [[ ! -x "$code" ]]; then
-      code="$(type -P code || true)"
-    fi
+		if [[ ! -x $code ]]; then
+			code="$(type -P code || true)"
+		fi
 
-    if [[ ! -x "$code" ]]; then
-      command vi "$@"
-    else
-      "$code" "$@"
-    fi
+		if [[ ! -x $code ]]; then
+			command vi "$@"
+		else
+			"$code" "$@"
+		fi
 	else
 		command vi "$@"
 	fi

@@ -17,8 +17,8 @@ function make_init {
 		-v /opt/certs:/certs \
 		-e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/$(uname -n).crt \
 		-e REGISTRY_HTTP_TLS_KEY=/certs/$(uname -n).key \
-			registry:2 || true
-	
+		registry:2 || true
+
 	#app repo add cache.defn.run:5000 --type helm --name cache --enable-oci --insecure-skip-server-verification
 }
 
@@ -75,7 +75,7 @@ function make_up {
 	sudo cp registries.yaml /etc/rancher/k3s/
 	k3sup install --local --context ${cluster_name} --local-path ~/.kube/config --merge \
 		--k3s-version "$(cd c/${cluster_name} && cue export --out json -e class.infra_k3s_version | jq -r . | cut -d: -f2 | sed 's#-#+#')" \
-		--k3s-extra-args "--node-ip "${container_ip}" --disable-network-policy --disable=traefik --flannel-backend=none --kube-apiserver-arg=--service-account-issuer=$(cd c/${cluster_name} && cue export --out json -e class.discovery_url | jq -r .)/openid --kube-apiserver-arg=--api-audiences=https://kubernetes.default.svc.cluster.local,sts.amazonaws.com --tls-san=${cluster_name} --cluster-cidr=${infra_pod_cidr} --service-cidr=${infra_service_cidr} --kubelet-arg=eviction-hard=memory.available<500Mi -kubelet-arg=eviction-hard=nodefs.available<5%" 
+		--k3s-extra-args "--node-ip "${container_ip}" --disable-network-policy --disable=traefik --flannel-backend=none --kube-apiserver-arg=--service-account-issuer=$(cd c/${cluster_name} && cue export --out json -e class.discovery_url | jq -r .)/openid --kube-apiserver-arg=--api-audiences=https://kubernetes.default.svc.cluster.local,sts.amazonaws.com --tls-san=${cluster_name} --cluster-cidr=${infra_pod_cidr} --service-cidr=${infra_service_cidr} --kubelet-arg=eviction-hard=memory.available<500Mi -kubelet-arg=eviction-hard=nodefs.available<5%"
 
 	# oidc
 	(cd c/${cluster_name} && make secrets)
@@ -115,21 +115,21 @@ function main {
 	shift
 
 	case "${cmd}" in
-		init)
-			true
-			;;
-		*)
-			if [[ -n "${1:-}" ]]; then
-				cluster_name="$1"
-				shift
-			else
-				cluster_name="$(cd ~/m/c/$(uname -n)  && cue eval -e class.cluster_name | jq -r .)"
-			fi
-			infra_pod_cidr="$(cd ~/m/c/${cluster_name} && cue eval -e class.infra_pod_cidr | jq -r .)"
-			infra_service_cidr="$(cd ~/m/c/${cluster_name} && cue eval -e class.infra_service_cidr | jq -r .)"
-			;;
+	init)
+		true
+		;;
+	*)
+		if [[ -n ${1-} ]]; then
+			cluster_name="$1"
+			shift
+		else
+			cluster_name="$(cd ~/m/c/$(uname -n) && cue eval -e class.cluster_name | jq -r .)"
+		fi
+		infra_pod_cidr="$(cd ~/m/c/${cluster_name} && cue eval -e class.infra_pod_cidr | jq -r .)"
+		infra_service_cidr="$(cd ~/m/c/${cluster_name} && cue eval -e class.infra_service_cidr | jq -r .)"
+		;;
 	esac
-			
+
 	"make_${cmd}"
 }
 

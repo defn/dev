@@ -1,13 +1,15 @@
-export WORKDIR="${1:-${HOME:-}}"
+#!/usr/bin/env bash
 
-if [[ "${WORKDIR}" == '${workspaceFolder}' ]]; then
-    WORKDIR="${HOME:-}"
+export WORKDIR="${1:-${HOME-}}"
+
+if [[ ${WORKDIR} == '${workspaceFolder}' ]]; then
+	WORKDIR="${HOME-}"
 fi
 
-if test -f ~/.bash_profile; then 
-    cd >/dev/null
-    source .bash_profile
-    cd - >/dev/null
+if test -f ~/.bash_profile; then
+	cd >/dev/null
+	source .bash_profile
+	cd - >/dev/null
 fi
 
 export workdir="${WORKDIR}"
