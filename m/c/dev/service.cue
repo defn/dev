@@ -1,6 +1,6 @@
 package dev
 
-template: "service.yaml": {
+template: "service-www.yaml": {
 	apiVersion: "v1"
 	kind:       "Service"
 	metadata: {
@@ -14,6 +14,22 @@ template: "service.yaml": {
 			port:       80
 			targetPort: 80
 		}]
-		type: "LoadBalancer"
+	}
+}
+
+template: "service-api.yaml": {
+	apiVersion: "v1"
+	kind:       "Service"
+	metadata: {
+		name:      "api"
+		namespace: "nginx"
+	}
+	spec: {
+		selector: app: "api"
+		ports: [{
+			protocol:   "TCP"
+			port:       80
+			targetPort: 8080
+		}]
 	}
 }

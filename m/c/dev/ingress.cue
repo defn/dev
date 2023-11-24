@@ -23,6 +23,16 @@ template: "ingress.yaml": {
 				path:     "/"
 				pathType: "Prefix"
 			}]
+		}, {
+			host: "www.district.amanibhavam.defn.run"
+			http: paths: [{
+				backend: service: {
+					name: "api"
+					port: number: 80
+				}
+				path:     "/api"
+				pathType: "Prefix"
+			}]
 		}]
 	}
 }
