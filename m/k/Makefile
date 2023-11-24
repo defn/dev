@@ -4,7 +4,8 @@ chart ?=
 revision ?= $(shell cat ../h/$(chart)-version)
 version ?= 0.0.$(revision)
 
-registry ?= cache.defn.run:5000
+domain ?= defn.run
+registry ?= cache.$(domain):5000
 
 source ?= r
 
