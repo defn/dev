@@ -24,4 +24,3 @@ spec:
             - api
           ports:
             - containerPort: 8080
-

@@ -29,4 +29,3 @@ spec:
                   number: 80
             path: /api
             pathType: Prefix
-
