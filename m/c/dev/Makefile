@@ -6,8 +6,8 @@ domain ?= defn.run
 registry ?= cache.$(domain):5000
 
 build:
-	cue export --out yaml -e 'output["Chart.yaml"]' > Chart.yaml
-	cue export --out yaml -e 'output["app.yaml"]' > app.yaml
+	cue export --out text -e 'output["Chart.yaml"]' > Chart.yaml
+	cue export --out text -e 'output["app.yaml"]' > app.yaml
 	rm -f *.tgz
 	helm package .
 	helm push --insecure-skip-tls-verify *.tgz oci://$(registry)/library/helm
