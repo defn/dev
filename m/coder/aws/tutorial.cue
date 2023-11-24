@@ -7,6 +7,6 @@ page: content: #TutorialContent & {
 		desc:  "make image"
 	}, {
 		title: "Format Packer configs"
-		desc: "make fmt"
+		desc:  "make fmt"
 	}]
 }

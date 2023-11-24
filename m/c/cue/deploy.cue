@@ -4,7 +4,7 @@ deploy: {
 	apiVersion: "apps/v1"
 	kind:       "Deployment"
 	metadata: {
-		name: "api"
+		name:      "api"
 		namespace: "dev"
 		labels: app: "api"
 	}

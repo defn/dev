@@ -4,7 +4,7 @@ template: "deployment.yaml": {
 	apiVersion: "apps/v1"
 	kind:       "Deployment"
 	metadata: {
-		name:      "nginx"
+		name: "nginx"
 	}
 	spec: {
 		replicas: 3

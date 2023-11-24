@@ -12,8 +12,7 @@ teacher: bootstrap: k3s_bootstrap & {
 }
 
 class: {
-	handle:             "amanibhavam"
-	env:                "district"
-	infra_cilium_id:    250
-
+	handle:          "amanibhavam"
+	env:             "district"
+	infra_cilium_id: 250
 }

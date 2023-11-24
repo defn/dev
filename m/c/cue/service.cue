@@ -4,7 +4,7 @@ template: "service-www.yaml": {
 	apiVersion: "v1"
 	kind:       "Service"
 	metadata: {
-		name:      "nginx"
+		name: "nginx"
 	}
 	spec: {
 		selector: app: "nginx"
@@ -20,7 +20,7 @@ template: "service-api.yaml": {
 	apiVersion: "v1"
 	kind:       "Service"
 	metadata: {
-		name:      "api"
+		name: "api"
 	}
 	spec: {
 		selector: app: "api"

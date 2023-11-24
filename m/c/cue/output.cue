@@ -9,7 +9,7 @@ output: {
         # managed by Cue
         \(yaml.Marshal(chart))
         """
-	"gen/app.yaml": """
+	"gen/app.yaml":     """
         # managed by Cue
         \(yaml.Marshal(app))
         """

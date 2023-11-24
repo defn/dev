@@ -5,5 +5,5 @@ chart: {
 	type:       "application"
 	name:       string
 	appVersion: string | *version
-	version:  string
+	version:    string
 }
