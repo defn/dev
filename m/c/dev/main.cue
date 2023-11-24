@@ -15,6 +15,11 @@ output: {
         \(yaml.Marshal(app))
         """
 
+	"deploy.yaml": """
+        # managed by Cue
+        \(yaml.Marshal(deploy))
+        """
+
 	for t, v in template {
 		"templates/\(t)": """
 			# managed by Cue
