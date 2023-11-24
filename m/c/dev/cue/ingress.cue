@@ -9,7 +9,6 @@ template: "ingress.yaml": {
 			"traefik.ingress.kubernetes.io/router.tls":         "true"
 		}
 		name:      "nginx"
-		namespace: "nginx"
 	}
 	spec: {
 		ingressClassName: "traefik"

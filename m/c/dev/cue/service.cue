@@ -5,7 +5,6 @@ template: "service-www.yaml": {
 	kind:       "Service"
 	metadata: {
 		name:      "nginx"
-		namespace: "nginx"
 	}
 	spec: {
 		selector: app: "nginx"
@@ -22,7 +21,6 @@ template: "service-api.yaml": {
 	kind:       "Service"
 	metadata: {
 		name:      "api"
-		namespace: "nginx"
 	}
 	spec: {
 		selector: app: "api"

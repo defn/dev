@@ -5,7 +5,7 @@ deploy: {
 	kind:       "Deployment"
 	metadata: {
 		name: "api"
-		namespace: "nginx"
+		namespace: "dev"
 		labels: app: "api"
 	}
 	spec: {
