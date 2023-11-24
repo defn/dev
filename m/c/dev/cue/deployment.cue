@@ -5,7 +5,6 @@ template: "deployment.yaml": {
 	kind:       "Deployment"
 	metadata: {
 		name:      "nginx"
-		namespace: "nginx"
 	}
 	spec: {
 		replicas: 3

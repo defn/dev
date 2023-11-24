@@ -15,7 +15,7 @@ build:
 bump:
 	echo $$(( $$(cat version) + 1 )) > version.tmp
 	mv version.tmp version
-	(echo package dev; echo "version: \"0.0.$$(cat version)\"") > gen/version.cue
+	(echo package dev; echo "version: \"0.0.$$(cat version)\"") > cue/version.cue
 	cue fmt cue
 
 deploy:

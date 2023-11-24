@@ -8,10 +8,11 @@ spec:
   project: default
   destination:
     name: in-cluster
+    namespace: dev
   source:
     repoURL: cache.defn.run:5000
     chart: library/helm/dev
-    targetRevision: 0.0.16
+    targetRevision: 0.0.23
   syncPolicy:
     automated:
       prune: true
