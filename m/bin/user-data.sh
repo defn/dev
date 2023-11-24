@@ -2,20 +2,22 @@
 
 #export CODER_AGENT_AUTH="aws-instance-identity"
 export CODER_AGENT_AUTH="token"
-export CODER_AGENT_URL="$1"; shift
-export DFD_WORKSPACE_NAME="$1"; shift
+export CODER_AGENT_URL="$1"
+shift
+export DFD_WORKSPACE_NAME="$1"
+shift
 
 cd
 
 ssh -o StrictHostKeyChecking=no git@github.com true || true
 
 case "$(git remote get-url origin)" in
-	http*)
-		git remote rm origin
-		git remote add origin git@github.com:defn/dev
-		git fetch origin
-		git branch --set-upstream-to=origin/main main
-		;;
+http*)
+	git remote rm origin
+	git remote add origin git@github.com:defn/dev
+	git fetch origin
+	git branch --set-upstream-to=origin/main main
+	;;
 esac
 git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
 
