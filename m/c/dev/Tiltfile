@@ -15,7 +15,7 @@ local_resource(
 )
 
 cli_build = "../../bazel-bin/c/dev/dev_/dev"
-cli_release = "cli.bin"
+cli_release = "gen/cli.bin"
 cli_entrypoint = "/cli"
 
 # api initial deploy
