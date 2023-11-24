@@ -26,7 +26,7 @@ app: {
 		destination: name: "in-cluster"
 		source: {
 			repoURL:        "cache.defn.run:5000"
-			"chart":          "library/helm/\(chart.name)"
+			"chart":        "library/helm/\(chart.name)"
 			targetRevision: chart.version
 		}
 		syncPolicy: automated: {
