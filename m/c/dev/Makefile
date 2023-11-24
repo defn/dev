@@ -6,7 +6,7 @@ domain ?= defn.run
 registry ?= cache.$(domain):5000
 
 build:
-	for f in $$(cd cue && cue export --out text -e output_filenames); do (cd cue && cue export --out text -e 'output["'"$$f"'"]') > "$$f"; done
+	for f in $$(cue export --out text -e app.output_filenames); do (cue export --out text -e 'app.output["'"$$f"'"]') > "$$f"; done
 	rm -f *.tgz gen/*.tgz
 	helm package .
 	mv *.tgz gen/
@@ -15,8 +15,8 @@ build:
 bump:
 	echo $$(( $$(cat version) + 1 )) > version.tmp
 	mv version.tmp version
-	(echo package dev; echo "version: \"0.0.$$(cat version)\"") > cue/version.cue
-	cue fmt cue
+	(echo package dev; echo "chart: version: \"0.0.$$(cat version)\"") > version.cue
+	cue fmt .
 
 deploy:
 	kubectl apply -f gen/app.yaml
