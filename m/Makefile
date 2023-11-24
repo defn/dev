@@ -1,5 +1,8 @@
 timeout ?= 5
 
+env ?= $(shell uname -n | cut -d- -f3)
+domain ?= $(domain)
+
 build:
 	../bin/b pass build //cmd/cli:cli
 	cp -f bazel-bin/cmd/cli/cli_/cli /tmp/cli
@@ -39,7 +42,7 @@ teacher-init:
 	coder login https://$(shell tailscale cert 2>&1 | grep 'For domain'  | cut -d'"' -f2) --first-user-username="admin" --first-user-email="iam+admin@defn.sh" --first-user-password="Admin123456789,,," --first-user-trial=false
 
 class-init:
-	coder login https://coder.dev.amanibhavam.defn.run --first-user-username="admin" --first-user-email="iam+admin@defn.sh" --first-user-password="Admin123456789,,," --first-user-trial=false
+	coder login https://coder.$(env).$(GIT_AUTHOR_NAME).$(domain) --first-user-username="admin" --first-user-email="iam+admin@defn.sh" --first-user-password="Admin123456789,,," --first-user-trial=false
 
 teacher: 
 	pass hello
@@ -103,7 +106,7 @@ za:
 	cd coder/class && $(MAKE) image
 
 coder-login:
-	coder login https://coder.dev.amanibhavam.defn.run
+	coder login https://coder.$(env).$(GIT_AUTHOR_NAME).$(domain)
 
 coder-admin:
 	k exec -n coder -ti deploy/coder -- bash -c 'coder server create-admin-user --email iam+admin@defn.sh --password admin --username admin --postgres-url postgresql://coder:$$(cat ~/.config/coderv2/postgres/password)@localhost:$$(cat ~/.config/coderv2/postgres/port)/?sslmode=disable'
@@ -114,7 +117,7 @@ self-cert:
 	step certificate create --subtle --insecure --no-password --force --profile self-signed $$(uname -n) $$(uname -n).crt $$(uname -n).key
 
 once:
-	app repo add cache.defn.run:5000 --type helm --name cache --enable-oci --insecure-skip-server-verification
+	app repo add cache.$(domain):5000 --type helm --name cache --enable-oci --insecure-skip-server-verification
 	cd k && $(MAKE) all-push
 	cd c && $(MAKE) cache
 	$(MAKE) update-env env=$(env)
