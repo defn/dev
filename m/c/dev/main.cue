@@ -10,12 +10,12 @@ output: {
         # managed by Cue
         \(yaml.Marshal(chart))
         """
-	"app.yaml":   """
+	"gen/app.yaml": """
         # managed by Cue
         \(yaml.Marshal(app))
         """
 
-	"deploy.yaml": """
+	"gen/deploy.yaml": """
         # managed by Cue
         \(yaml.Marshal(deploy))
         """

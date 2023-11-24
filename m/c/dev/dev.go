@@ -8,7 +8,7 @@ import (
 
 func main() {
 	fmt.Println("================================================================")
-	fmt.Println(" starting")
+	fmt.Println(" starting 3")
 	fmt.Println("================================================================")
 	command.Execute()
 }

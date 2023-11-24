@@ -18,7 +18,7 @@ bump:
 	cue fmt .
 
 deploy:
-	kubectl apply -f app.yaml
+	kubectl apply -f gen/app.yaml
 
 init:
 	argocd --core repo add $(registry) --type helm --name cache --enable-oci --insecure-skip-server-verification

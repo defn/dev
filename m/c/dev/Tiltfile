@@ -3,10 +3,10 @@
 load("ext://restart_process", "custom_build_with_restart")
 
 # local kubernetes
-allow_k8s_contexts("dfd")
+allow_k8s_contexts("coder-amanibhavam-district0-cluster")
 
 # local registry
-default_registry("169.254.32.1:5000")
+default_registry("cache.defn.run:5000")
 
 # bazel
 local_resource(
@@ -14,12 +14,12 @@ local_resource(
     serve_cmd=["b", "watch"],
 )
 
-cli_build = "../bazel-bin/dev/dev_/dev"
-cli_release = "/tmp/cli"
+cli_build = "../../bazel-bin/c/dev/dev_/dev"
+cli_release = "cli.bin"
 cli_entrypoint = "/cli"
 
 # api initial deploy
-k8s_yaml(local("cat deploy.yaml"))
+k8s_yaml(local("cat gen/deploy.yaml"))
 
 # api builds when cmd/, command/ changes
 local_resource(name="cli", 
@@ -32,7 +32,7 @@ k8s_resource("api")
 # api updates when api builds
 custom_build_with_restart(
     ref="api",
-    command="cd .. && make image tag=$EXPECTED_REF",
+    command="docker build -t $EXPECTED_REF . && docker push $EXPECTED_REF",
     deps=[cli_release],
     trigger=[cli_release],
     entrypoint=[cli_entrypoint],
