@@ -50,7 +50,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: dev.district.amanibhavam.defn.run
+    - host: www.district.amanibhavam.defn.run
       http:
         paths:
           - backend:
