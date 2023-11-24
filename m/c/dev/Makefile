@@ -15,7 +15,7 @@ build:
 bump:
 	echo $$(( $$(cat version) + 1 )) > version.tmp
 	mv version.tmp version
-	(echo package dev; echo "chart: version: \"0.0.$$(cat version)\"") > version.cue
+	(echo package dev; echo "app: chart: version: \"0.0.$$(cat version)\"") > version.cue
 	cue fmt .
 
 deploy:

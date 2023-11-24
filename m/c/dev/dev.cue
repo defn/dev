@@ -5,9 +5,5 @@ import (
 )
 
 app: dev & {
-	"chart": chart
-}
-
-chart: {
-	name: "dev"
+	"chart": name: "dev"
 }

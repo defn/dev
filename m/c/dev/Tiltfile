@@ -24,7 +24,7 @@ local_resource(
 
 # bazel-to-api updates when bazel builds
 local_resource(name="bazel-to-workarea", 
-    cmd="if test -f {build}; then rm -rf {release} && sudo install -m 0755 -o ubuntu -g ubuntu {build} {release}; fi".format(build=cli_build, release=cli_release),
+    cmd="if test -f {build}; then install -m 0755 -o ubuntu -g ubuntu {build} {release}; fi".format(build=cli_build, release=cli_release),
     deps=[cli_build])
 
 # api service
