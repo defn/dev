@@ -1,5 +1,9 @@
 package dev
 
+import (
+	"encoding/yaml"
+)
+
 version: string
 
 chart: {
@@ -33,6 +37,12 @@ app: {
 }
 
 output: {
-	"Chart.yaml": chart
-	"app.yaml":   app
+	"Chart.yaml": """
+        # managed by Cue
+        \(yaml.Marshal(chart))
+        """
+	"app.yaml":   """
+        # managed by Cue
+        \(yaml.Marshal(app))
+        """
 }
