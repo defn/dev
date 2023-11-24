@@ -31,6 +31,7 @@
             inputs.hugo.defaultPackage.${ctx.system}
             skopeo
             postgresql
+            cookiecutter
           ];
         in
         flakeInputs;
