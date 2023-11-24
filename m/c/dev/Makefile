@@ -6,7 +6,7 @@ domain ?= defn.run
 registry ?= cache.$(domain):5000
 
 build:
-	for f in $$(cue export --out text -e app.output_filenames); do (cue export --out text -e 'app.output["'"$$f"'"]') > "$$f"; done
+	cue export --out json -e app.output | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | while read -r f b; do base64 -d <<<"$$b" >"$$f"; done
 	rm -f *.tgz gen/*.tgz
 	helm package .
 	mv *.tgz gen/
