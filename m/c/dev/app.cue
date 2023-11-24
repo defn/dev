@@ -1,19 +1,5 @@
 package dev
 
-import (
-	"encoding/yaml"
-)
-
-version: string
-
-chart: {
-	apiVersion: "v2"
-	type:       "application"
-	name:       "dev"
-	appVersion: "0.0.6"
-	"version":  version
-}
-
 app: {
 	apiVersion: "argoproj.io/v1alpha1"
 	kind:       "Application"
@@ -34,15 +20,4 @@ app: {
 			selfHeal: true
 		}
 	}
-}
-
-output: {
-	"Chart.yaml": """
-        # managed by Cue
-        \(yaml.Marshal(chart))
-        """
-	"app.yaml":   """
-        # managed by Cue
-        \(yaml.Marshal(app))
-        """
 }

@@ -1,0 +1,6 @@
+# managed by Cue
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nginx
+
