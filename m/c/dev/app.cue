@@ -19,15 +19,15 @@ app: {
 	kind:       "Application"
 	metadata: {
 		namespace: "argocd"
-		name:      "dev"
+		name:      chart.name
 	}
 	spec: {
 		project: "default"
 		destination: name: "in-cluster"
 		source: {
 			repoURL:        "cache.defn.run:5000"
-			chart:          "library/helm/dev"
-			targetRevision: version
+			"chart":          "library/helm/\(chart.name)"
+			targetRevision: chart.version
 		}
 		syncPolicy: automated: {
 			prune:    true
