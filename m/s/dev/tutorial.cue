@@ -13,9 +13,9 @@ tutorial: #TutorialContent & {
 		desc:  "tilt up --stream --port 0"
 	}, {
 		title: "Load the slide-show"
-		desc: "Once the slide-show is running, cick on retry below to load the slide-show",
+		desc:  "Once the slide-show is running, cick on retry below to load the slide-show"
 	}, {
 		title: "Edit slides.md file, change \"Welcome to Slidev\"."
-		desc: "Watch slide-show update."
+		desc:  "Watch slide-show update."
 	}]
 }

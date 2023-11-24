@@ -3,17 +3,29 @@
 load("ext://restart_process", "custom_build_with_restart")
 
 # local k8s
-allow_k8s_contexts('dfd')
+allow_k8s_contexts("dfd")
 
 # local registry
 default_registry("169.254.32.1:5000")
 
-local_resource(name="tutorial", cmd="cue eval --out json -e html | jq -r . > tutorial.html", deps=["tutorial.cue"])
+local_resource(
+    name="tutorial",
+    cmd="cue eval --out json -e html | jq -r . > tutorial.html",
+    deps=["tutorial.cue"],
+)
 
-local_resource(name="config", cmd="for h in hook; do cue export -p l --out json -e hooks.$h.config > hooks/$h.json; done", deps=["hook.cue"])
+local_resource(
+    name="config",
+    cmd="for h in hook; do cue export -p l --out json -e hooks.$h.config > hooks/$h.json; done",
+    deps=["hook.cue"],
+)
 
 # hook initial deploy
-k8s_yaml(local("bash -c \"cat deploy.yaml | sed \\\"s#NAMESPACE#$(echo $HOSTNAME | cut -d- -f1-3)#\\\"\""))
+k8s_yaml(
+    local(
+        'bash -c "cat deploy.yaml | sed \\"s#NAMESPACE#$(echo $HOSTNAME | cut -d- -f1-3)#\\""'
+    )
+)
 
 # hook build
 local_resource(name="hook-build", cmd="true", deps=["./hooks"])

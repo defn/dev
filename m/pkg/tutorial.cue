@@ -7,6 +7,6 @@ page: content: #TutorialContent & {
 		desc:  "make list"
 	}, {
 		title: "Bump flakes with vendor updates"
-		desc: "make update"
+		desc:  "make update"
 	}]
 }

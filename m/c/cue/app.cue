@@ -12,7 +12,7 @@ app: {
 	spec: {
 		project: "default"
 		destination: {
-			name: "in-cluster"
+			name:      "in-cluster"
 			namespace: app_ns
 		}
 		source: {

@@ -4,73 +4,73 @@ hooks: "hook": config: {
 	configVersion: "v1"
 	onStartup:     1
 	kubernetes: [{
-		name: "ConfigMap"
-		queue: "configmap"
+		name:       "ConfigMap"
+		queue:      "configmap"
 		apiVersion: "v1"
 		kind:       "ConfigMap"
 		executeHookOnEvent: [
 			"Added",
-			"Deleted" 
+			"Deleted",
 		]
 	}, {
-		name: "Pod"
-		queue: "pod"
+		name:       "Pod"
+		queue:      "pod"
 		apiVersion: "v1"
 		kind:       "Pod"
 		executeHookOnEvent: [
 			"Added",
 			"Modified",
-			"Deleted" 
+			"Deleted",
 		]
 	}, {
-		name: "Secret"
-		queue: "secret"
+		name:       "Secret"
+		queue:      "secret"
 		apiVersion: "v1"
 		kind:       "Secret"
 		executeHookOnEvent: [
 			"Added",
 			"Modified",
-			"Deleted" 
+			"Deleted",
 		]
 	}, {
-		name: "Namespace"
-		queue: "namespace"
+		name:       "Namespace"
+		queue:      "namespace"
 		apiVersion: "v1"
 		kind:       "Namespace"
 		executeHookOnEvent: [
 			"Added",
 			"Modified",
-			"Deleted" 
+			"Deleted",
 		]
 	}, {
-		name: "Deployment"
-		queue: "deployment:"
+		name:       "Deployment"
+		queue:      "deployment:"
 		apiVersion: "apps/v1"
 		kind:       "Deployment"
 		executeHookOnEvent: [
 			"Added",
 			"Modified",
-			"Deleted" 
+			"Deleted",
 		]
 	}, {
-		name: "ReplicaSet"
-		queue: "replicaset"
+		name:       "ReplicaSet"
+		queue:      "replicaset"
 		apiVersion: "apps/v1"
 		kind:       "ReplicaSet"
 		executeHookOnEvent: [
 			"Added",
 			"Modified",
-			"Deleted" 
+			"Deleted",
 		]
 	}, {
-		name: "DaemonSet"
-		queue: "daemonset"
+		name:       "DaemonSet"
+		queue:      "daemonset"
 		apiVersion: "apps/v1"
 		kind:       "DaemonSet"
 		executeHookOnEvent: [
 			"Added",
 			"Modified",
-			"Deleted" 
+			"Deleted",
 		]
 	}]
 }
