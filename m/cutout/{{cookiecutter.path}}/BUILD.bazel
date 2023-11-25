@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "dev_lib",
+    srcs = ["dev.go"],
+    importpath = "github.com/defn/dev/m/{{cookiecutter.path}}",
+    visibility = ["//visibility:private"],
+    deps = ["//command"],
+)
+
+go_binary(
+    name = "dev",
+    embed = [":dev_lib"],
+    visibility = ["//visibility:public"],
+)

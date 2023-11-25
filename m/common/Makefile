@@ -8,7 +8,10 @@ registry ?= cache.$(domain):5000
 build:
 	cue export --out json -e app.output | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | while read -r f b; do base64 -d <<<"$$b" >"$$f"; done
 	rm -f *.tgz gen/*.tgz
-	cd gen && helm package ../chart && helm push --insecure-skip-tls-verify *.tgz oci://$(registry)/library/helm
+	cd gen && helm package ../chart
+
+push:
+	helm push --insecure-skip-tls-verify *.tgz oci://$(registry)/library/helm
 
 image:
 	docker build -t $$EXPECTED_REF . && docker push $$EXPECTED_REF
@@ -28,8 +31,12 @@ bump:
 deploy:
 	kubectl apply -f gen/app.yaml
 
-init:
+repo:
 	argocd --core repo add $(registry) --type helm --name cache --enable-oci --insecure-skip-server-verification
+
+init:
+	mkdir -p chart/templates gen
+	$(MAKE) bump build
 
 all:
 	$(MAKE) bump build deploy

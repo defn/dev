@@ -1,4 +1,4 @@
-package dev
+package common
 
 chart: {
 	apiVersion: "v2"

@@ -1,4 +1,4 @@
-package dev
+package common
 
 import (
 	"encoding/yaml"

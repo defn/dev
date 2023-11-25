@@ -1,4 +1,4 @@
-package dev
+package common
 
 deploy: {
 	apiVersion: "apps/v1"

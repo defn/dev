@@ -1,4 +1,4 @@
-package dev
+package common
 
 app_ns: "dev"
 

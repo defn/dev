@@ -1,4 +1,4 @@
-package dev
+package common
 
 template: "deployment.yaml": {
 	apiVersion: "apps/v1"

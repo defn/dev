@@ -1,4 +1,4 @@
-package dev
+package common
 
 template: "ingress.yaml": {
 	apiVersion: "networking.k8s.io/v1"
