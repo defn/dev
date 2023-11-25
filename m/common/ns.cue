@@ -1,4 +1,4 @@
-package dev
+package common
 
 template: "ns.yaml": {
 	apiVersion: "v1"

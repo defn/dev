@@ -1,0 +1,19 @@
+# managed by Cue
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: argocd
+  name: dev
+spec:
+  project: default
+  destination:
+    name: in-cluster
+    namespace: dev
+  source:
+    repoURL: cache.defn.run:5000
+    chart: library/helm/dev
+    targetRevision: 0.0.3
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

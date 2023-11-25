@@ -1,0 +1,1 @@
+include {{cookiecutter.common}}/Makefile

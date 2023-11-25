@@ -1,8 +1,8 @@
 package dev
 
 import (
-	dev "github.com/defn/dev/m/c/cue:dev"
+	"github.com/defn/dev/m/common"
 )
 
-app: dev
+app: common
 app: chart: name: "dev"

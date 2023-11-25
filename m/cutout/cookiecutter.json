@@ -1,3 +1,5 @@
 {
-    "project_name": "TODO"
+    "project_name": "dev",
+    "common": "../../common",
+    "path": "src/dev"
 }
