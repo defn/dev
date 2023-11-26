@@ -1,7 +1,6 @@
 
 tf
 node_modules
-dev/.direnv
 pkg/acme/.direnv
 pkg/argocd/.direnv
 pkg/argorollouts/.direnv
@@ -73,7 +72,6 @@ pkg/vcluster/.direnv
 pkg/vhs/.direnv
 pkg/vpn/.direnv
 pkg/zellij/.direnv
-dev/result
 pkg/acme/result
 pkg/argocd/result
 pkg/argorollouts/result
@@ -145,3 +143,4 @@ pkg/vcluster/result
 pkg/vhs/result
 pkg/vpn/result
 pkg/zellij/result
+cutout/{{cookiecutter.path}}
