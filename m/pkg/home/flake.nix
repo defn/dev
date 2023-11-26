@@ -84,6 +84,7 @@
         	docker images | grep '<none>' | awk '{print $3}' | runmany 'docker rmi $1'
           docker system prune -f --volumes
         	earthly prune --reset
+          this-nix-gc
       '';
 
       wg-up = ''
