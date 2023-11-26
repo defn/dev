@@ -79,6 +79,7 @@
       '';
 
       prune = ''
+          docker exec -ti registry /bin/registry garbage-collect /etc/docker/registry/config.yml --delete-untagged=true || true
           docker system prune -f --volumes
         	docker images | grep '<none>' | awk '{print $3}' | runmany 'docker rmi $1'
           docker system prune -f --volumes
