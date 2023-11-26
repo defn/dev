@@ -11,3 +11,5 @@ ca.crt
 ca.key
 cluster.crt
 cluster.key
+
+cutout/{{cookiecutter.path}}/BUILD.bazel
