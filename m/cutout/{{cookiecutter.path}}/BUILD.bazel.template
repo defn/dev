@@ -10,14 +10,6 @@ go_library(
 
 go_binary(
     name = "{{cookiecutter.project_name}}",
-    embed = [":{{cookiecutter_path}}_lib"],
+    embed = [":{{cookiecutter.project_name}}_lib"],
     visibility = ["//visibility:public"],
-)
-
-go_library(
-    name = "{{cookiecutter_path}}_lib",
-    srcs = ["{{cookiecutter.project_name}}.go"],
-    importpath = "github.com/defn/dev/m/cutout/{{cookiecutter.path}}",
-    visibility = ["//visibility:private"],
-    deps = ["//command"],
 )
