@@ -1,0 +1,1 @@
+sudo apt install libfontconfig-dev libx11-dev libxcursor-dev libxkbcommon-dev libxext-dev libxi-dev libxinerama-dev libxrandr-dev
