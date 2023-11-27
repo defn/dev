@@ -1,0 +1,5 @@
+sudo apt install libfontconfig-dev libx11-dev libxcursor-dev libxkbcommon-dev libxext-dev libxi-dev libxinerama-dev libxrandr-dev
+  132  curl -sSL -O https://github.com/godotengine/godot/releases/download/3.5.3-stable/Godot_v3.5.3-stable_export_templates.tpz
+  138  unzip Godot_v3.5.3-stable_export_templates.tpz 
+  149  mkdir -p /home/ubuntu/.local/share/godot/templates/3.5.3.stable
+  150  mv templates/* /home/ubuntu/.local/share/godot/templates/3.5.3.stable/
