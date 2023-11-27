@@ -1,5 +1,10 @@
 build:
-	godot -v project.godot --export HTML5 index.html
+	rm -rf gen
+	mkdir gen
+	godot -v project.godot --export HTML5 gen/index.html
 
 serve:
-	python -m http.server
+	cd gen && python -m http.server
+
+all:
+	$(MAKE) build serve
