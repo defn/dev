@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "dev",
+    srcs = ["dev.go"],
+    importpath = "github.com/defn/dev/m/command/dev",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//command/root",
+        "@com_github_charmbracelet_bubbles//list",
+        "@com_github_charmbracelet_bubbletea//:bubbletea",
+        "@com_github_charmbracelet_lipgloss//:lipgloss",
+        "@com_github_spf13_cobra//:cobra",
+    ],
+)
