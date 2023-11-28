@@ -6,7 +6,7 @@
     helm.url = github:defn/dev/pkg-helm-3.13.2-1?dir=m/pkg/helm;
     kustomize.url = github:defn/dev/pkg-kustomize-5.2.1-1?dir=m/pkg/kustomize;
     stern.url = github:defn/dev/pkg-stern-1.27.0-1?dir=m/pkg/stern;
-    argoworkflows.url = github:defn/dev/pkg-argoworkflows-3.5.0-1?dir=m/pkg/argoworkflows;
+    argoworkflows.url = github:defn/dev/pkg-argoworkflows-3.5.2-1?dir=m/pkg/argoworkflows;
     argocd.url = github:defn/dev/pkg-argocd-2.9.2-1?dir=m/pkg/argocd;
     kn.url = github:defn/dev/pkg-kn-1.12.0-1?dir=m/pkg/kn;
     vcluster.url = github:defn/dev/pkg-vcluster-0.17.1-2?dir=m/pkg/vcluster;
