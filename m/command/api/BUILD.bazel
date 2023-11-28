@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "api",
+    srcs = ["api.go"],
+    importpath = "github.com/defn/dev/m/command/api",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//command/root",
+        "@com_github_gin_gonic_gin//:gin",
+        "@com_github_spf13_cobra//:cobra",
+    ],
+)

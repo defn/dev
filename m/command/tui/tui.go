@@ -11,6 +11,8 @@ import (
 
 	"github.com/charmbracelet/bubbles/list"
 	"github.com/charmbracelet/lipgloss"
+
+	root "github.com/defn/dev/m/command/root"
 )
 
 // tuiCmd represents the tui command
@@ -57,7 +59,7 @@ to quickly create a Cobra application.`,
 }
 
 func init() {
-	rootCmd.AddCommand(tuiCmd)
+	root.RootCmd.AddCommand(tuiCmd)
 }
 
 const listHeight = 14

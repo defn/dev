@@ -143,4 +143,4 @@ pkg/vcluster/result
 pkg/vhs/result
 pkg/vpn/result
 pkg/zellij/result
-cutout/{{cookiecutter.path}}
+cutout

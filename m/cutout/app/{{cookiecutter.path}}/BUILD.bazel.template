@@ -5,7 +5,12 @@ go_library(
     srcs = ["{{cookiecutter.project_name}}.go"],
     importpath = "github.com/defn/dev/m/{{cookiecutter.path}}",
     visibility = ["//visibility:private"],
-    deps = ["//command"],
+    deps = [
+        "//command/api",
+        "//command/infra",
+        "//command/root",
+        "//command/tui",
+    ],
 )
 
 go_binary(
