@@ -1,8 +1,8 @@
 {
   inputs = {
     tilt.url = github:defn/dev/pkg-tilt-0.33.6-1?dir=m/pkg/tilt;
-    gh.url = github:defn/dev/pkg-gh-2.39.1-1?dir=m/pkg/gh;
-    earthly.url = github:defn/dev/pkg-earthly-0.7.21-1?dir=m/pkg/earthly;
+    gh.url = github:defn/dev/pkg-gh-2.39.2-1?dir=m/pkg/gh;
+    earthly.url = github:defn/dev/pkg-earthly-0.7.22-1?dir=m/pkg/earthly;
     oras.url = github:defn/dev/pkg-oras-1.1.0-1?dir=m/pkg/oras;
     buildkite.url = github:defn/dev/pkg-buildkite-3.59.0-1?dir=m/pkg/buildkite;
     buildevents.url = github:defn/dev/pkg-buildevents-0.15.0-2?dir=m/pkg/buildevents;
