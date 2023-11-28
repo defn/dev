@@ -24,7 +24,7 @@ spec:
   template:
     spec:
       initContainers:
-        - image: cache.defn.run:5000/quay.io/jetstack/cert-manager-package-debian@sha256:9218c9771c1b56763812ef859d1df4d05375be09e1505a1e5eff61643e94c555
+        - image: cache.defn.run:5000/quay.io/jetstack/cert-manager-package-debian@sha256:aa3466521072e0f54666092acde1e394314d5f4247034ed1379a90919fa904a4
           args:
             - /copyandmaybepause
             - /debian-package

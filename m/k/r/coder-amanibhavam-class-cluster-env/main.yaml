@@ -321,7 +321,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-reloader
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.10
+    targetRevision: 0.0.11
   syncPolicy:
     automated:
       prune: true
@@ -405,7 +405,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-trust-manager
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.14
+    targetRevision: 0.0.15
   syncPolicy:
     automated:
       prune: true

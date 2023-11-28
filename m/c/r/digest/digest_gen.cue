@@ -12,21 +12,7 @@ cache: "curlimages/curl": "curlimages/curl@sha256:4a3396ae573c44932d06ba33f8696d
 
 cache: "docker.io/amazon/amazon-eks-pod-identity-webhook:v0.4.0": "docker.io/amazon/amazon-eks-pod-identity-webhook@sha256:69ba0ed032cfa4d72621037c2836d464f401fde1fa993adf34e79335ec4c56ac"
 
-cache: "docker.io/bitnami/apache:2.4.57-debian-11-r36": "docker.io/bitnami/apache@sha256:3f55fea96631a7fb83e25c13a262da0f9b8a9294a913c5bbd14a08bc587139ee"
-
-cache: "docker.io/bitnami/elasticsearch:8.11.1-debian-11-r0": "docker.io/bitnami/elasticsearch@sha256:4573d1566faad9e9e7a812fe8e0c46787d17459302be07af3a09a20fb9022253"
-
 cache: "docker.io/bitnami/external-dns:0.14.0-debian-11-r1": "docker.io/bitnami/external-dns@sha256:27041c8a6b244a8f5c4914ac4a59219b189aeca12778d14d4672aacad5970fda"
-
-cache: "docker.io/bitnami/mastodon:4.2.1-debian-11-r5": "docker.io/bitnami/mastodon@sha256:6dca8c509774bb38104c7887609dc5e16fc985c31dd8dfaa264a990fd93c0d15"
-
-cache: "docker.io/bitnami/minio:2023.11.20-debian-11-r0": "docker.io/bitnami/minio@sha256:621cfbe232809a5768bd23864567c3896a291c866a1952398be474a3b7f6fed8"
-
-cache: "docker.io/bitnami/os-shell:11-debian-11-r91": "docker.io/bitnami/os-shell@sha256:e16f7c6ff3200db826fac8fd3f4a9ba83d993172d1ab4b5c8d331b1404ff7623"
-
-cache: "docker.io/bitnami/postgresql:16.1.0-debian-11-r9": "docker.io/bitnami/postgresql@sha256:c4f432e06649998b7aa4f9d7321a313c8af11f6c65d6437b9050aabf6c968d14"
-
-cache: "docker.io/bitnami/redis:7.2.3-debian-11-r1": "docker.io/bitnami/redis@sha256:2f1e62f0ccd8f84daa0ee49e1eb7d9e24081d15f86d97ba3043952de2017ca75"
 
 cache: "docker.io/envoyproxy/envoy:v1.25-latest": "docker.io/envoyproxy/envoy@sha256:a63469b5d105cd94be9b7d7524a46786fca5e124599aa488078375ddb65da030"
 
@@ -66,7 +52,7 @@ cache: "ghcr.io/kyverno/kyvernopre:v1.10.3": "ghcr.io/kyverno/kyvernopre@sha256:
 
 cache: "ghcr.io/kyverno/reports-controller:v1.10.3": "ghcr.io/kyverno/reports-controller@sha256:b0fbfe5a7250fadd120ffbb6dd4cb70e575bddc165da76b46e3b7dab4d275141"
 
-cache: "ghcr.io/stakater/reloader:v1.0.52": "ghcr.io/stakater/reloader@sha256:6cf64abeee4ee3132ac108f87b99166da013fc3ddc9ca34dac9b3be70d817c04"
+cache: "ghcr.io/stakater/reloader:v1.0.52": "ghcr.io/stakater/reloader@sha256:a866d5a5f5bbf92ccc450ef680557a3e9f05cc40a5e86800c3d350dc25f1aaa9"
 
 cache: "goharbor/harbor-core:v2.9.1": "goharbor/harbor-core@sha256:ee70dcf6e7c5a3c1d65a6898eb7d3816cbe760f7971a79e1fed2d529abb12ccd"
 
@@ -92,9 +78,9 @@ cache: "quay.io/argoproj/argo-events:v1.8.1": "quay.io/argoproj/argo-events@sha2
 
 cache: "quay.io/argoproj/argocd:v2.9.2": "quay.io/argoproj/argocd@sha256:8576d347f30fa4c56a0129d1c0a0f5ed1e75662f0499f1ed7e917c405fd909dc"
 
-cache: "quay.io/argoproj/argocli:v3.5.1": "quay.io/argoproj/argocli@sha256:82cbdc300b3fe3702dc399c9fb841978f47975a84e929e76290094a1accb587f"
+cache: "quay.io/argoproj/argocli:v3.5.2": "quay.io/argoproj/argocli@sha256:026b30a353022d8909adb03816e9593ce95b99afe4581e401ec39606121a22b3"
 
-cache: "quay.io/argoproj/workflow-controller:v3.5.1": "quay.io/argoproj/workflow-controller@sha256:f15bc5577b7bedc46625f212ec6ccb1668621eb6e84f76b923647744d357c7ee"
+cache: "quay.io/argoproj/workflow-controller:v3.5.2": "quay.io/argoproj/workflow-controller@sha256:1c55865e168fcda8769fa1dfef0442cadb829e1f3b51aa305601b2cc34fe6c73"
 
 cache: "quay.io/cilium/cilium-envoy:v1.25.10-f71a313bd0daee41470af31ce6ea20c750fe35dd@sha256:bfa1e919ed02afc66e9ff36c1fd9148237fc8b8560a0b44d89acf144b0ffb08c": "quay.io/cilium/cilium-envoy@sha256:bfa1e919ed02afc66e9ff36c1fd9148237fc8b8560a0b44d89acf144b0ffb08c"
 
@@ -124,7 +110,7 @@ cache: "quay.io/jetstack/cert-manager-controller:v1.13.2": "quay.io/jetstack/cer
 
 cache: "quay.io/jetstack/cert-manager-ctl:v1.13.2": "quay.io/jetstack/cert-manager-ctl@sha256:4d9fce2c050eaadabedac997d9bd4a003341e9172c3f48fae299d94fa5f03435"
 
-cache: "quay.io/jetstack/cert-manager-package-debian:20210119.0": "quay.io/jetstack/cert-manager-package-debian@sha256:9218c9771c1b56763812ef859d1df4d05375be09e1505a1e5eff61643e94c555"
+cache: "quay.io/jetstack/cert-manager-package-debian:20210119.0": "quay.io/jetstack/cert-manager-package-debian@sha256:aa3466521072e0f54666092acde1e394314d5f4247034ed1379a90919fa904a4"
 
 cache: "quay.io/jetstack/cert-manager-webhook:v1.13.2": "quay.io/jetstack/cert-manager-webhook@sha256:0a9470447ebf1d3ff1c172e19268be12dc26125ff83320d456f6826c677c0ed2"
 

@@ -25,6 +25,8 @@ import (
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v17/ssoadminaccountassignment"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v17/ssoadminmanagedpolicyattachment"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v17/ssoadminpermissionset"
+
+	root "github.com/defn/dev/m/command/root"
 )
 
 //go:embed infra.cue
@@ -107,7 +109,7 @@ var infraCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(infraCmd)
+	root.RootCmd.AddCommand(infraCmd)
 
 	// Here you will define your flags and configuration settings.
 

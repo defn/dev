@@ -5,6 +5,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
+
+	root "github.com/defn/dev/m/command/root"
 )
 
 // apiCmd represents the api command
@@ -25,7 +27,7 @@ var apiCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(apiCmd)
+	root.RootCmd.AddCommand(apiCmd)
 
 	// Here you will define your flags and configuration settings.
 
