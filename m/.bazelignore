@@ -144,3 +144,7 @@ pkg/vhs/result
 pkg/vpn/result
 pkg/zellij/result
 cutout
+cutout/app/{{cookiecutter.path}}
+cutout/command/{{cookiecutter.path}}
+cutout/app
+cutout/command
