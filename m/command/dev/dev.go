@@ -141,7 +141,7 @@ func (m model) View() string {
 		return quitTextStyle.Render(fmt.Sprintf("%s? Sounds good to me.", m.choice))
 	}
 	if m.quitting {
-		return quitTextStyle.Render("Not hungry? That’s cool.")
+		return quitTextStyle.Render("Not hungry? That’s cool")
 	}
 	return "\n" + m.list.View()
 }
