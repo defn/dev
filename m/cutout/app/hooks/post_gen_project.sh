@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-mv BUILD.bazel.template BUILD.bazel
+for a in *.template; do mv "${a}" "${a%.template}"; done
