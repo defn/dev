@@ -1,3 +1,3 @@
 package c
 
-teacher: bootstrap: "knative": app_version: "0.0.18"
+teacher: bootstrap: "knative": app_version: "0.0.19"

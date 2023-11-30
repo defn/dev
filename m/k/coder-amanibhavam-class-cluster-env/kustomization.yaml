@@ -131,7 +131,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-descheduler
-              targetRevision: 0.0.6
+              targetRevision: 0.0.7
             syncPolicy:
               automated:
                 prune: true

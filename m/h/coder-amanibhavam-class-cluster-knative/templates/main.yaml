@@ -5803,7 +5803,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:4cdbe7acc718f55005c0fed4633e9e9feb64f03830132b5dd007e4088a0b2e9f
+        - image: cache.defn.run:5000/gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:fa098cdc8b4a07db03a1780a8873fd5d1dd480a22b28b061760825604c293832
           env:
             - name: GOGC
               value: "500"
@@ -5895,7 +5895,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:28f45751cac2090019a74ec2801d1f8cd18210ae55159cacd0c9baf74ccc9d7c
+        - image: cache.defn.run:5000/gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:3c3ddb0e507360710161b97f4a7073dc7d49a7f603412f78c18acac0511d615a
           env:
             - name: POD_NAME
               valueFrom:
@@ -5990,7 +5990,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:5d9b948e78bb4f54b602d98e02dedd291689b90295dadab10992f0d9ef2aa1d8
+        - image: cache.defn.run:5000/gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:e244b6003d986ae014c525dc84878afc63710c3d17d09af1abb47a607b7aeaa0
           env:
             - name: POD_NAME
               valueFrom:
@@ -6077,7 +6077,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:5e6d8f65e0e3c23c98e4a7b079a11364f76699b867b899fc97fc7f61018f6850
+        - image: cache.defn.run:5000/gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:3954804822783d159811d0e4c91619b0729b6897bfa37836ee6c56866e57cc8f
           env:
             - name: POD_NAME
               valueFrom:
@@ -6220,7 +6220,7 @@ metadata:
   namespace: knative-serving
 ---
 spec:
-  image: cache.defn.run:5000/knative-releases/knative.dev/serving/cmd/queue@sha256:7f1dd4cce2f85d31be8350420a528cc5c7d8b1bf5979ec77c29dc1293f82dc83
+  image: cache.defn.run:5000/knative-releases/knative.dev/serving/cmd/queue@sha256:d569f30abd31cbe105ba32b512a321dd82431b0a8e205bebf14538fddb4dfa54
 apiVersion: caching.internal.knative.dev/v1alpha1
 kind: Image
 metadata:
