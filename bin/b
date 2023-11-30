@@ -119,7 +119,7 @@ function main {
 			;;
 		esac
 		case "${account}" in
-			defn-org-sso)
+			defn-org)
 				true
 				;;
 			*)
