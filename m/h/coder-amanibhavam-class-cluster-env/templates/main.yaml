@@ -110,7 +110,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-descheduler
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.7
+    targetRevision: 0.0.8
   syncPolicy:
     automated:
       prune: true
@@ -215,7 +215,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-knative
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.18
+    targetRevision: 0.0.19
   syncPolicy:
     automated:
       prune: true
@@ -279,7 +279,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-pihole
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.14
+    targetRevision: 0.0.15
   syncPolicy:
     automated:
       prune: true
