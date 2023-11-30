@@ -118,14 +118,6 @@ function main {
 			account="$1"
 			;;
 		esac
-		case "${account}" in
-			defn-org)
-				true
-				;;
-			*)
-				account="${account}-sso-source"
-				;;
-		esac
 		shift
 		"$0" pass run //aws:aws__cli "${account}" -- aws-vault exec "${account}" -- "$@"
 		;;
