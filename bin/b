@@ -81,16 +81,9 @@ function main {
 			;;
 		*)
 			account="$1"
-			case "${account}" in
-			*-sso)
-				account="${account}-source"
-				;;
-			*)
-				true
-				;;
-			esac
 			;;
 		esac
+		account="${account}-sso-source"
 		url=$("$0" pass run //aws:aws__cli "${account}" aws-vault login "${account}" -- -s | sed 's#://#://us-east-1.#')
 		encoded_url=$(printf "%s" "$url" | python -c 'import sys; from urllib.parse import quote_plus; print(quote_plus(sys.stdin.read().strip()))')
 		open "https://signin.aws.amazon.com/oauth?Action=logout&redirect_uri=${encoded_url}"
@@ -105,16 +98,9 @@ function main {
 			;;
 		*)
 			account="$1"
-			case "${account}" in
-			*-sso)
-				account="${account}-source"
-				;;
-			*)
-				true
-				;;
-			esac
 			;;
 		esac
+		account="${account}-sso-source"
 		shift
 		"$0" pass run //aws:aws__cli "${account}" -- aws-vault exec --prompt=osascript --lazy --ecs-server "${account}" -- "$@"
 		;;
@@ -128,16 +114,9 @@ function main {
 			;;
 		*)
 			account="$1"
-			case "${account}" in
-			*-sso)
-				account="${account}-source"
-				;;
-			*)
-				true
-				;;
-			esac
 			;;
 		esac
+		account="${account}-sso-source"
 		shift
 		"$0" pass run //aws:aws__cli "${account}" -- aws-vault exec "${account}" -- "$@"
 		;;
@@ -157,16 +136,9 @@ function main {
 			;;
 		*)
 			account="$1"
-			case "${account}" in
-			*-sso)
-				account="${account}-source"
-				;;
-			*)
-				true
-				;;
-			esac
 			;;
 		esac
+		account="${account}-sso-source"
 		shift
 		"$0" pass run //aws:aws__cli "${account}" aws "$@"
 		;;
