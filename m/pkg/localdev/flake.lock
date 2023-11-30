@@ -27,17 +27,17 @@
       },
       "locked": {
         "dir": "m/pkg/buildkite",
-        "lastModified": 1699579498,
-        "narHash": "sha256-jINCOk6ylw28McbDXkoY9rI2zSmCi4Zh5e44IVyPf5U=",
+        "lastModified": 1701362567,
+        "narHash": "sha256-xppjYru7hTE52xN8On7bZT4VXcOjyOHeD+LMY3aNyAM=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "61ccd6e8b0d2ba8b8b67a73881b9218a4641fa78",
+        "rev": "350b81813e7f685dcd3c7482d1622728f90935ee",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buildkite",
         "owner": "defn",
-        "ref": "pkg-buildkite-3.59.0-1",
+        "ref": "pkg-buildkite-3.60.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -959,17 +959,17 @@
       },
       "locked": {
         "dir": "m/pkg/tilt",
-        "lastModified": 1701315816,
-        "narHash": "sha256-NiJ33G1UinxePVdXgb3l5iYj0yDvhwCHtn3Jlx2ilMA=",
+        "lastModified": 1701362590,
+        "narHash": "sha256-jC+0gBEkx/7csZIagVnv7DlUiY1Ku6qAyc1NLXbS3yc=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "a6575967f6a99ecdd56529d6981cb12291af4079",
+        "rev": "0c19e599140e8db0fc743f7e77cefe0a9a32e594",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/tilt",
         "owner": "defn",
-        "ref": "pkg-tilt-0.33.7-1",
+        "ref": "pkg-tilt-0.33.8-1",
         "repo": "dev",
         "type": "github"
       }
