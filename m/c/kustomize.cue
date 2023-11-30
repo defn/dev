@@ -1746,7 +1746,7 @@ kustomize: "pihole": #KustomizeHelm & {
 		release:   "pihole"
 		name:      "pihole"
 		namespace: "pihole"
-		version:   "2.18.0"
+		version:   "2.19.0"
 		repo:      "https://mojo2600.github.io/pihole-kubernetes"
 		values: {
 			podDnsConfig: enabled:          false

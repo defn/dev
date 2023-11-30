@@ -173,7 +173,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-descheduler
-              targetRevision: 0.0.7
+              targetRevision: 0.0.8
             syncPolicy:
               automated:
                 prune: true
@@ -341,7 +341,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-knative
-              targetRevision: 0.0.18
+              targetRevision: 0.0.19
             syncPolicy:
               automated:
                 prune: true
@@ -405,7 +405,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-pihole
-              targetRevision: 0.0.14
+              targetRevision: 0.0.15
             syncPolicy:
               automated:
                 prune: true
