@@ -12,6 +12,7 @@ all:
 	cd c && $(MAKE) all
 	b pass build //...
 
+
 image:
 	cp -f bazel-bin/cmd/cli/cli_/cli cli.bin
 	docker build -t $(tag) .
@@ -107,6 +108,11 @@ bazel-ignore:
 za:
 	pass hello
 	cd coder/class && $(MAKE) image
+
+warudo:
+	this-prune
+	$(MAKE) ci za
+	this-prune
 
 coder-login:
 	coder login https://coder.$(env).$(GIT_AUTHOR_NAME).$(domain)
