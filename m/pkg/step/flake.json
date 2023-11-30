@@ -2,5 +2,5 @@
   "slug": "pkg-step",
   "ghrepo": "smallstep/cli",
   "vendor": "0.25.1",
-  "revision": "0"
+  "revision": "1"
 }
