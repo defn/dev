@@ -23,7 +23,7 @@ todo:
 	@(bazel cquery //... --output=files | grep -v ^bazel-; git ls-files .) | sort | uniq -c | grep '^ *1 ' | awk '{print $$2}'
 
 ci: 
-	b server defn-org-sso $(MAKE) ci_inner 
+	b server defn-org $(MAKE) ci_inner 
 
 ci_web:
 	cd defn/dev/www && $(MAKE) build
