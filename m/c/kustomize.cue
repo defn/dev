@@ -2799,7 +2799,7 @@ kustomize: "descheduler": #KustomizeHelm & {
 		release:   "descheduler"
 		name:      "descheduler"
 		namespace: "descheduler"
-		version:   "0.28.0"
+		version:   "0.28.1"
 		repo:      "https://kubernetes-sigs.github.io/descheduler"
 		values: {
 		}
