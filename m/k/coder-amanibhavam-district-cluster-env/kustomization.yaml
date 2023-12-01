@@ -405,7 +405,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-pihole
-              targetRevision: 0.0.15
+              targetRevision: 0.0.17
             syncPolicy:
               automated:
                 prune: true
