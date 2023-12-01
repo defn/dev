@@ -1,3 +1,3 @@
 package c
 
-teacher: bootstrap: "kyverno": app_version: "0.0.4"
+teacher: bootstrap: "kyverno": app_version: "0.0.6"
