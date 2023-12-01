@@ -42,15 +42,15 @@ cache: "ghcr.io/galleybytes/terraform-operator:v0.16.0": "ghcr.io/galleybytes/te
 
 cache: "ghcr.io/headlamp-k8s/headlamp:v0.21.0": "ghcr.io/headlamp-k8s/headlamp@sha256:7a9587036bd29304f8f1387a7245556a3c479434670b2ca58e3624d44d2a68c9"
 
-cache: "ghcr.io/kyverno/background-controller:v1.10.3": "ghcr.io/kyverno/background-controller@sha256:24e3336f1a22384d0835079598ce015e22cffb9bac26c09cae1099e919a0297c"
+cache: "ghcr.io/kyverno/background-controller:v1.10.6": "ghcr.io/kyverno/background-controller@sha256:e624c35605f48fe6c3bf34a56ead31012a9ac1a5dd82732d44597ba2441739c5"
 
-cache: "ghcr.io/kyverno/cleanup-controller:v1.10.3": "ghcr.io/kyverno/cleanup-controller@sha256:980a225c1ed668c7c0bc327c3c7f55e2913c3584e099571f93d17bedd4b64020"
+cache: "ghcr.io/kyverno/cleanup-controller:v1.10.6": "ghcr.io/kyverno/cleanup-controller@sha256:7249670af666b18c103f3784b916e051878e4c3d76d7cf64fc413d5d5d689d85"
 
-cache: "ghcr.io/kyverno/kyverno:v1.10.3": "ghcr.io/kyverno/kyverno@sha256:2e8ba9281d587a7eac78b4cfbb877c57fd3b948d13547192e950b00f961b1a4e"
+cache: "ghcr.io/kyverno/kyverno:v1.10.6": "ghcr.io/kyverno/kyverno@sha256:902f8e245abd1e446738b5068ca8a8841f95c29b68f46c2550851885a764bfdc"
 
-cache: "ghcr.io/kyverno/kyvernopre:v1.10.3": "ghcr.io/kyverno/kyvernopre@sha256:4022f4b828418df94f61627bdc0852207986c095be9dbff686b57cb22b4c20ad"
+cache: "ghcr.io/kyverno/kyvernopre:v1.10.6": "ghcr.io/kyverno/kyvernopre@sha256:52163caa39388e1a315afbeb6fb2dace3ac71320d9f0a9638c4c63dbf16d6b92"
 
-cache: "ghcr.io/kyverno/reports-controller:v1.10.3": "ghcr.io/kyverno/reports-controller@sha256:b0fbfe5a7250fadd120ffbb6dd4cb70e575bddc165da76b46e3b7dab4d275141"
+cache: "ghcr.io/kyverno/reports-controller:v1.10.6": "ghcr.io/kyverno/reports-controller@sha256:9d4f04481b4906b14d46f366a94d7050629961c2ffcb48db0620a56cf283a2a7"
 
 cache: "ghcr.io/stakater/reloader:v1.0.52": "ghcr.io/stakater/reloader@sha256:a866d5a5f5bbf92ccc450ef680557a3e9f05cc40a5e86800c3d350dc25f1aaa9"
 
