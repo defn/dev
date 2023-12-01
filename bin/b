@@ -52,6 +52,28 @@ function main {
 	set -efu -o pipefail
 
 	case "${1-}" in
+	diff)
+		shift
+		env GIT_EXTERNAL_DIFF="b dyff" git diff "$@"
+		;;
+	dyff)
+		shift
+		shift # path
+		old="$1"; shift
+		shift # hex
+		shift # mode
+		new="$1"; shift
+		shift # hex
+		shift # mode
+		case "${old}" in 
+			*.yaml|*.yml)
+				dyff --color=yes between "${old}" "${new}" || true
+				;;
+			*)
+				diff "${old}" "${new}" || true
+				;;
+		esac
+		;;
 	open)
 		shift
 		open "http://localhost:$1"

@@ -286,7 +286,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-pihole
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.15
+    targetRevision: 0.0.17
   syncPolicy:
     automated:
       prune: true
