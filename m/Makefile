@@ -12,6 +12,7 @@ all:
 	cd c && $(MAKE) all
 	b pass build //...
 
+
 image:
 	cp -f bazel-bin/cmd/cli/cli_/cli cli.bin
 	docker build -t $(tag) .
@@ -22,7 +23,7 @@ todo:
 	@(bazel cquery //... --output=files | grep -v ^bazel-; git ls-files .) | sort | uniq -c | grep '^ *1 ' | awk '{print $$2}'
 
 ci: 
-	b server defn-org-sso $(MAKE) ci_inner 
+	b server defn-org $(MAKE) ci_inner 
 
 ci_web:
 	cd defn/dev/www && $(MAKE) build
@@ -107,6 +108,11 @@ bazel-ignore:
 za:
 	pass hello
 	cd coder/class && $(MAKE) image
+
+warudo:
+	this-prune
+	$(MAKE) ci za
+	this-prune
 
 coder-login:
 	coder login https://coder.$(env).$(GIT_AUTHOR_NAME).$(domain)

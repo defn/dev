@@ -32,7 +32,7 @@ release-all:
 
 all:
 	$(MAKE) crd release-all digest=$(digest)
-	if git grep --no-pager not-found ../h; then $(MAKE) digest release; fi
+	if env GIT_PAGER=cat git grep not-found ../h; then $(MAKE) digest release; fi
 	cd ../k && $(MAKE) delivery
 
 digest:
