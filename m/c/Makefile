@@ -7,8 +7,9 @@ digest ?=
 env ?= $(shell uname -n | cut -d- -f3)
 
 delivery:
-	$(MAKE) all digest=$(digest)
-	$(MAKE) all
+	$(MAKE) -j 2 crd release-all
+	cd ../k && $(MAKE) delivery
+	if env GIT_PAGER=cat git grep not-found ../h; then $(MAKE) digest release; fi
 
 build:
 	cd $(shell uname -n) && $(MAKE) build
@@ -29,11 +30,6 @@ build-all:
 release-all:
 	$(MAKE) build-all
 	$(MAKE) release digest=$(digest)
-
-all:
-	$(MAKE) crd release-all digest=$(digest)
-	if env GIT_PAGER=cat git grep not-found ../h; then $(MAKE) digest release; fi
-	cd ../k && $(MAKE) delivery
 
 digest:
 	cd ./r && $(MAKE) digest
