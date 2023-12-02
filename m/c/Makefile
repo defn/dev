@@ -7,9 +7,11 @@ digest ?=
 env ?= $(shell uname -n | cut -d- -f3)
 
 delivery:
-	$(MAKE) -j 2 crd release-all
+	$(MAKE) crd
+	$(MAKE) build-all release
+	if env GIT_PAGER=cat git grep not-found ../h; then $(MAKE) digest; fi
+	$(MAKE) build-all release
 	cd ../k && $(MAKE) delivery
-	if env GIT_PAGER=cat git grep not-found ../h; then $(MAKE) digest release; fi
 
 build:
 	cd $(shell uname -n) && $(MAKE) build
@@ -26,10 +28,6 @@ helm_add:
 build-all:
 # cant run in parallel due to git
 	runmany 1 'cd $$1 && make' coder-*/
-
-release-all:
-	$(MAKE) build-all
-	$(MAKE) release digest=$(digest)
 
 digest:
 	cd ./r && $(MAKE) digest

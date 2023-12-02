@@ -59,7 +59,6 @@ build-inner:
 	echo "appVersion: \"$(version)\"" >> ../h/$(chart)/Chart.yaml.tmp
 	echo "version: \"$(version)\"" >> ../h/$(chart)/Chart.yaml.tmp
 	mv -f ../h/$(chart)/Chart.yaml.tmp ../h/$(chart)/Chart.yaml
-	mark $(chart)
 	$(MAKE) package-always push chart=$(chart)
 
 package-always:
