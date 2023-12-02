@@ -257,7 +257,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-kyverno
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.21
+    targetRevision: 0.0.24
   syncPolicy:
     automated:
       prune: true
