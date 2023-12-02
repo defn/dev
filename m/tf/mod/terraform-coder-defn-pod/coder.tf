@@ -5,7 +5,7 @@ locals {
 
   prefix     = data.coder_parameter.prefix.value
   coder_name = "${local.prefix}-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
-  app        = local.app
+  app        = "cs"
 }
 
 resource "coder_agent" "main" {
