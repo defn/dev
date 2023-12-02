@@ -28,6 +28,11 @@ resource "coder_agent" "main" {
 
     LOCAL_ARCHIVE = "/usr/lib/locale/locale-archive"
     LC_ALL        = "C.UTF-8"
+
+    DFD_OWNER  = lower(data.coder_workspace.me.owner)
+    DFD_PREFIX = local.prefix
+    DFD_NAME   = lower(data.coder_workspace.me.name)
+    DFD_APP    = local.app
   }
 }
 
