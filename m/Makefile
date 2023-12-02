@@ -111,6 +111,7 @@ za:
 
 warudo:
 	this-prune
+	b clean
 	$(MAKE) ci za
 	this-prune
 
