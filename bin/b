@@ -77,7 +77,8 @@ function main {
 		;;
 	open)
 		shift
-		open "http://localhost:$1"
+		folder="$(cd "$1" && pwd -P)"; shift
+		open "${CODER_AGENT_URL/\/\//\/\/${DFD_APP}--${DFD_AGENT:-main}--${DFD_NAME}--${DFD_OWNER}.}?folder=$folder"
 		;;
 	forward)
 		shift
