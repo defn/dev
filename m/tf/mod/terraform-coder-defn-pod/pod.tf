@@ -127,33 +127,13 @@ resource "kubernetes_deployment" "main" {
           }
 
           env {
-            name  = "CODER_AGENT_TOKEN"
-            value = coder_agent.main.token
-          }
-
-          env {
             name  = "CODER_PROC_MEMNICE_ENABLE"
             value = "1"
           }
 
           env {
-            name  = "DFD_OWNER"
-            value = lower(data.coder_workspace.me.owner)
-          }
-
-          env {
-            name  = "DFD_PREFIX"
-            value = local.prefix
-          }
-
-          env {
-            name  = "DFD_NAME"
-            value = lower(data.coder_workspace.me.name)
-          }
-
-          env {
-            name  = "DFD_APP"
-            value = local.app
+            name  = "CODER_AGENT_TOKEN"
+            value = coder_agent.main.token
           }
 
           volume_mount {
