@@ -44,3 +44,8 @@ resource "coder_app" "code-server" {
     threshold = 6
   }
 }
+
+module "coder-login" {
+  source   = "https://registry.coder.com/modules/coder-login"
+  agent_id = coder_agent.main.id
+}
