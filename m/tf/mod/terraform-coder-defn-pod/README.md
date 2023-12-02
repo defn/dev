@@ -32,6 +32,7 @@ No requirements.
 | [coder_parameter.docker_image](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter) | data source |
 | [coder_parameter.memory](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter) | data source |
 | [coder_parameter.nix_volume_size](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter) | data source |
+| [coder_parameter.prefix](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter) | data source |
 | [coder_parameter.provider](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter) | data source |
 | [coder_parameter.source_rev](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter) | data source |
 | [coder_parameter.vcluster](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter) | data source |

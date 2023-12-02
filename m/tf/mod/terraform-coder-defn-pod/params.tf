@@ -1,6 +1,6 @@
 locals {
   pod_count = data.coder_parameter.provider.value == "pod" ? 1 : 0
-  ns        = "coder-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
+  ns        = "${local.prefix}-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
 }
 
 data "coder_parameter" "provider" {
@@ -95,9 +95,19 @@ data "coder_parameter" "workdir" {
 data "coder_parameter" "source_rev" {
   name         = "source_rev"
   display_name = "Source revision"
-  description  = "Souce revision"
+  description  = "Source revision"
   type         = "string"
   default      = "main"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
   mutable      = true
+}
+
+data "coder_parameter" "prefix" {
+  name         = "prefix"
+  display_name = "Workspace name prefix"
+  description  = "Workspace name prefix"
+  type         = "string"
+  default      = "coder"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
+  mutable      = false
 }

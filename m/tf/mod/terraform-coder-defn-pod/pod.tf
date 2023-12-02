@@ -142,8 +142,18 @@ resource "kubernetes_deployment" "main" {
           }
 
           env {
+            name  = "DFD_PREFIX"
+            value = local.prefix
+          }
+
+          env {
             name  = "DFD_NAME"
             value = lower(data.coder_workspace.me.name)
+          }
+
+          env {
+            name  = "DFD_APP"
+            value = local.app
           }
 
           volume_mount {

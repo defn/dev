@@ -3,7 +3,9 @@ data "coder_workspace" "me" {}
 locals {
   username = "ubuntu"
 
-  coder_name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+  prefix     = data.coder_parameter.prefix.value
+  coder_name = "${local.prefix}-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+  app        = local.app
 }
 
 resource "coder_agent" "main" {
@@ -31,7 +33,7 @@ resource "coder_agent" "main" {
 
 resource "coder_app" "code-server" {
   agent_id     = coder_agent.main.id
-  slug         = "cs"
+  slug         = local.app
   display_name = "code-server"
   url          = "http://localhost:13337/?folder=${data.coder_parameter.workdir.value}"
   icon         = "/icon/code.svg"
