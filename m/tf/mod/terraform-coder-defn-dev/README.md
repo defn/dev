@@ -12,7 +12,9 @@ No requirements.
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_coder-login"></a> [coder-login](#module\_coder-login) | https://registry.coder.com/modules/coder-login | n/a |
 
 ## Resources
 
