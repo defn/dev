@@ -7,18 +7,31 @@ digest ?=
 env ?= $(shell uname -n | cut -d- -f3)
 
 delivery:
-# M ../k/APP/kustomization.yaml
-# M ../k/y/APP/main.yaml
-# M ../k/r/APP/main.yaml
-# D ../k/r/APP/main.yaml
+# M k/APP/kustomization.yaml
+# M k/r/APP/main.yaml
+# M k/y/APP/main.yaml
+# images are original
 	$(MAKE) build-all
+
+# M k/y/cluster.cue updated
 	$(MAKE) release_k_y
+
+# M k/r/APP/main.yaml
+# images are rewritten to cache
+# images may have not-found
+# after git add, diff is much smaller
 	$(MAKE) release_k_r
-	if env GIT_PAGER=cat git grep not-found ../h; then $(MAKE) digest; fi
-	$(MAKE) build-all
-	$(MAKE) release_k_y
-	$(MAKE) release_k_r
-	cd ../k && $(MAKE) delivery
+
+# r/digest/digest_gen.cue
+# k/r/APP/main.yaml
+# images are now found, if missing
+	if env GIT_PAGER=cat git grep not-found ../k/r; then $(MAKE) digest build-all release_k_y release_k_r; fi
+
+# h/APP*
+# h/APP.tgz
+# ENV/APP-version.cue
+	$(MAKE) chart
+
 	$(MAKE) crd
 
 build:
@@ -28,6 +41,9 @@ build:
 list:
 	@(cd .. && git grep artifacthub) | awk '{print $$2}' | runmany 'curl -sSL https://artifacthub.io/api/v1/$${1#https://artifacthub.io/}/feed/rss 2>/dev/null | grep 'artifacthub.io/packages/helm/' | grep -v -E "beta|snapshot" | head -1 | cut -d">" -f2 | cut -d"<" -f1' | sort -u > pending.txt
 	git diff pending.txt
+
+chart:
+	cd ../k && $(MAKE) delivery
 
 helm_add:
 	(cd .. && git grep repo: kustomize.cue) | cut -d'"' -f2 | sort -u | while read -r repo; do helm repo add $$(echo $$repo | cut -d/ -f3- | perl -pe 's{\s+$$}{}; s{\W+}{-}g') $$repo; done
