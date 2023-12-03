@@ -1055,6 +1055,10 @@ spec:
     port: 9962
     protocol: TCP
     targetPort: apiserv-metrics
+  - name: kvmesh-metrics
+    port: 9964
+    protocol: TCP
+    targetPort: kvmesh-metrics
   selector:
     k8s-app: clustermesh-apiserver
   type: ClusterIP
@@ -1175,7 +1179,7 @@ spec:
               key: debug
               name: cilium-config
               optional: true
-        image: quay.io/cilium/operator-generic:v1.14.4@sha256:f0f05e4ba3bb1fe0e4b91144fa4fea637701aba02e6c00b23bd03b4a7e1dfd55
+        image: quay.io/cilium/operator-generic:v1.14.3@sha256:c9613277b72103ed36e9c0d16b9a17cafd507461d59340e432e3e9c23468b5e2
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -1317,7 +1321,7 @@ spec:
               key: enable-k8s-endpoint-slice
               name: cilium-config
               optional: true
-        image: quay.io/cilium/clustermesh-apiserver:v1.14.4@sha256:828a74eea2a15c4196633dc50e4b92ba3a5e3ed8418c2a33e255a9281a1ce42f
+        image: quay.io/cilium/clustermesh-apiserver:v1.14.3@sha256:a148485acda60f5aa9fc217ed2376ed93b7de9dd90706addeb361c6df928c192
         imagePullPolicy: IfNotPresent
         name: apiserver
         ports:
@@ -1447,7 +1451,7 @@ spec:
         - serve
         command:
         - hubble-relay
-        image: quay.io/cilium/hubble-relay:v1.14.4@sha256:ca81622fd9f04c1316bf4144bde5dbce613758810f6022f6c706b14c9c0815db
+        image: quay.io/cilium/hubble-relay:v1.14.3@sha256:3f5c425faca4f8a38e29d4f86db2aadd8f33c9f05debd78a2bb2a24dd9e565d8
         imagePullPolicy: IfNotPresent
         livenessProbe:
           tcpSocket:
@@ -1622,34 +1626,9 @@ spec:
               fieldPath: metadata.namespace
         - name: CILIUM_CLUSTERMESH_CONFIG
           value: /var/lib/cilium/clustermesh/
-        image: quay.io/cilium/cilium:v1.14.4@sha256:4981767b787c69126e190e33aee93d5a076639083c21f0e7c29596a519c64a2e
+        image: quay.io/cilium/cilium:v1.14.3@sha256:e5ca22526e01469f8d10c14e2339a82a13ad70d9a359b879024715540eef4ace
         imagePullPolicy: IfNotPresent
         lifecycle:
-          postStart:
-            exec:
-              command:
-              - bash
-              - -c
-              - |
-                set -o errexit
-                set -o pipefail
-                set -o nounset
-
-                # When running in AWS ENI mode, it's likely that 'aws-node' has
-                # had a chance to install SNAT iptables rules. These can result
-                # in dropped traffic, so we should attempt to remove them.
-                # We do it using a 'postStart' hook since this may need to run
-                # for nodes which might have already been init'ed but may still
-                # have dangling rules. This is safe because there are no
-                # dependencies on anything that is part of the startup script
-                # itself, and can be safely run multiple times per node (e.g. in
-                # case of a restart).
-                if [[ "$(iptables-save | grep -c 'AWS-SNAT-CHAIN|AWS-CONNMARK-CHAIN')" != "0" ]];
-                then
-                    echo 'Deleting iptables rules created by the AWS CNI VPC plugin'
-                    iptables-save | grep -v 'AWS-SNAT-CHAIN|AWS-CONNMARK-CHAIN' | iptables-restore
-                fi
-                echo 'Done!'
           preStop:
             exec:
               command:
@@ -1758,7 +1737,7 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: metadata.namespace
-        image: quay.io/cilium/cilium:v1.14.4@sha256:4981767b787c69126e190e33aee93d5a076639083c21f0e7c29596a519c64a2e
+        image: quay.io/cilium/cilium:v1.14.3@sha256:e5ca22526e01469f8d10c14e2339a82a13ad70d9a359b879024715540eef4ace
         imagePullPolicy: IfNotPresent
         name: config
         terminationMessagePolicy: FallbackToLogsOnError
@@ -1777,7 +1756,7 @@ spec:
           value: /run/cilium/cgroupv2
         - name: BIN_PATH
           value: /opt/cni/bin
-        image: quay.io/cilium/cilium:v1.14.4@sha256:4981767b787c69126e190e33aee93d5a076639083c21f0e7c29596a519c64a2e
+        image: quay.io/cilium/cilium:v1.14.3@sha256:e5ca22526e01469f8d10c14e2339a82a13ad70d9a359b879024715540eef4ace
         imagePullPolicy: IfNotPresent
         name: mount-cgroup
         securityContext:
@@ -1807,7 +1786,7 @@ spec:
         env:
         - name: BIN_PATH
           value: /opt/cni/bin
-        image: quay.io/cilium/cilium:v1.14.4@sha256:4981767b787c69126e190e33aee93d5a076639083c21f0e7c29596a519c64a2e
+        image: quay.io/cilium/cilium:v1.14.3@sha256:e5ca22526e01469f8d10c14e2339a82a13ad70d9a359b879024715540eef4ace
         imagePullPolicy: IfNotPresent
         name: apply-sysctl-overwrites
         securityContext:
@@ -1833,7 +1812,7 @@ spec:
         - /bin/bash
         - -c
         - --
-        image: quay.io/cilium/cilium:v1.14.4@sha256:4981767b787c69126e190e33aee93d5a076639083c21f0e7c29596a519c64a2e
+        image: quay.io/cilium/cilium:v1.14.3@sha256:e5ca22526e01469f8d10c14e2339a82a13ad70d9a359b879024715540eef4ace
         imagePullPolicy: IfNotPresent
         name: mount-bpf-fs
         securityContext:
@@ -1858,7 +1837,7 @@ spec:
               key: clean-cilium-bpf-state
               name: cilium-config
               optional: true
-        image: quay.io/cilium/cilium:v1.14.4@sha256:4981767b787c69126e190e33aee93d5a076639083c21f0e7c29596a519c64a2e
+        image: quay.io/cilium/cilium:v1.14.3@sha256:e5ca22526e01469f8d10c14e2339a82a13ad70d9a359b879024715540eef4ace
         imagePullPolicy: IfNotPresent
         name: clean-cilium-state
         resources:
@@ -1888,7 +1867,7 @@ spec:
           name: cilium-run
       - command:
         - /install-plugin.sh
-        image: quay.io/cilium/cilium:v1.14.4@sha256:4981767b787c69126e190e33aee93d5a076639083c21f0e7c29596a519c64a2e
+        image: quay.io/cilium/cilium:v1.14.3@sha256:e5ca22526e01469f8d10c14e2339a82a13ad70d9a359b879024715540eef4ace
         imagePullPolicy: IfNotPresent
         name: install-cni-binaries
         resources:
@@ -2050,7 +2029,7 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: metadata.namespace
-        image: quay.io/cilium/cilium-envoy:v1.26.6-ff0d5d3f77d610040e93c7c7a430d61a0c0b90c1@sha256:6b0f2591fef922bf17a46517d5152ea7d6270524bb0e307c77986986677dbcea
+        image: quay.io/cilium/cilium-envoy:v1.25.10-f71a313bd0daee41470af31ce6ea20c750fe35dd@sha256:bfa1e919ed02afc66e9ff36c1fd9148237fc8b8560a0b44d89acf144b0ffb08c
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 10
@@ -2204,8 +2183,6 @@ spec:
     group: cert-manager.io
     kind: ClusterIssuer
     name: cilium-ca
-  privateKey:
-    rotationPolicy: Always
   secretName: hubble-relay-client-certs
 ---
 apiVersion: cert-manager.io/v1
@@ -2222,8 +2199,6 @@ spec:
     group: cert-manager.io
     kind: ClusterIssuer
     name: cilium-ca
-  privateKey:
-    rotationPolicy: Always
   secretName: hubble-server-certs
 ---
 apiVersion: networking.k8s.io/v1
