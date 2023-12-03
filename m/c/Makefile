@@ -22,19 +22,21 @@ delivery:
 # after git add, diff is much smaller
 	$(MAKE) release_k_r
 
-# r/digest/digest_gen.cue
-# k/r/APP/main.yaml
+# M r/digest/digest_gen.cue
+# M k/r/APP/main.yaml
 # images are now found, if missing
 	if env GIT_PAGER=cat git grep not-found ../k/r; then $(MAKE) digest; fi
 
-# k/ENV/kustomization.yaml
-	$(MAKE) build-all release_k_y release_k_r
-
 # h/APP*
-# h/APP.tgz
 # ENV/APP-version.cue
 	$(MAKE) chart
 
+# M k/ENV/kustomization.yaml
+	$(MAKE) build-all release_k_y release_k_r
+	$(MAKE) chart
+
+# M k/r/crds.cue
+# M k/crd/ENV.yaml
 	$(MAKE) crd
 
 build:
