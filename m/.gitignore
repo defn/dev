@@ -13,4 +13,3 @@ cluster.crt
 cluster.key
 
 cutout/{{cookiecutter.path}}/BUILD.bazel
-h/*.tgz
