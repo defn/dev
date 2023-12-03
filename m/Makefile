@@ -48,7 +48,7 @@ class-init:
 teacher: 
 	pass hello
 	tailscale serve --bg http://127.0.0.1:3000
-	b server defn-org-sso $(MAKE) dev_inner 
+	b server defn-org $(MAKE) dev_inner 
 
 dev_inner:
 	coder server --oauth2-github-allow-signups \
