@@ -888,7 +888,7 @@ cilium_common: {
 		release:   "cilium"
 		name:      "cilium"
 		namespace: "kube-system"
-		version:   "1.14.3"
+		version:   "1.14.4"
 		repo:      "https://helm.cilium.io"
 		values: {
 			operator: replicas:       1
@@ -1677,7 +1677,7 @@ kustomize: "coder": #KustomizeHelm & {
 	}
 }
 
-// linkerd emojivoto
+// emojivoto
 kustomize: "emojivoto": #Kustomize & {
 	cluster: #Cluster
 
