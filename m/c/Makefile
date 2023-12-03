@@ -25,7 +25,10 @@ delivery:
 # r/digest/digest_gen.cue
 # k/r/APP/main.yaml
 # images are now found, if missing
-	if env GIT_PAGER=cat git grep not-found ../k/r; then $(MAKE) digest build-all release_k_y release_k_r; fi
+	if env GIT_PAGER=cat git grep not-found ../k/r; then $(MAKE) digest; fi
+
+# k/ENV/kustomization.yaml
+	$(MAKE) build-all release_k_y release_k_r
 
 # h/APP*
 # h/APP.tgz
