@@ -8,7 +8,7 @@ commonAnnotations: {}
 helmCharts:
   - releaseName: cilium
     name: cilium
-    version: 1.14.4
+    version: 1.14.3
     repo: https://helm.cilium.io
     namespace: kube-system
     valuesInline:
