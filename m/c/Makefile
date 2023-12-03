@@ -7,11 +7,19 @@ digest ?=
 env ?= $(shell uname -n | cut -d- -f3)
 
 delivery:
-	$(MAKE) crd
-	$(MAKE) build-all release
+# M ../k/APP/kustomization.yaml
+# M ../k/y/APP/main.yaml
+# M ../k/r/APP/main.yaml
+# D ../k/r/APP/main.yaml
+	$(MAKE) build-all
+	$(MAKE) release_k_y
+	$(MAKE) release_k_r
 	if env GIT_PAGER=cat git grep not-found ../h; then $(MAKE) digest; fi
-	$(MAKE) build-all release
+	$(MAKE) build-all
+	$(MAKE) release_k_y
+	$(MAKE) release_k_r
 	cd ../k && $(MAKE) delivery
+	$(MAKE) crd
 
 build:
 	cd $(shell uname -n) && $(MAKE) build
@@ -28,13 +36,12 @@ helm_add:
 build-all:
 # cant run in parallel due to git
 	runmany 1 'cd $$1 && make' coder-*/
+	rm -f ../k/r/y/main.yaml
+	rm -f ../k/r/Makefile/main.yaml
 
 digest:
 	cd ./r && $(MAKE) digest
 
-release:
-	$(MAKE) release_k_y
-	$(MAKE) release_k_r
 
 release_k_y:
 # make one big cue config
@@ -42,15 +49,14 @@ release_k_y:
 	(echo package y; for r in ../k/y/*/main.yaml; do echo $$r 1>&2; (cue import $$r -p r --with-context -l '"res"' -l 'strings.ToLower(data.kind)' -l 'path.Dir(path.Rel("$(shell cd ../k/y && pwd)",filename))' -l 'strings.ToLower(*data.metadata.namespace | "cluster")' -l data.metadata.name --outfile - \
 		| grep -v '^package '); done) > ../k/y/cluster.cue
 	perl -pe 's{^\s*\w+:\s+null\s*}{}; s{data: null,}{}' -i ../k/y/cluster.cue
-	git add ../k/y
+# git add ../k/y
 
 release_k_r:
 # generate k/r
-	rm -rf ../k/r
-	if test -n "$(digest)"; then $(MAKE) digest; fi
+# rm -rf ../k/r
 	cd ./r/digest && $(MAKE) release
-	rm -rf ../k/r/y
-	git add ../k/r
+# rm -rf ../k/r/y
+# git add ../k/r
 
 cache:
 	cd ./r/digest && $(MAKE) cache filter=$(filter)
