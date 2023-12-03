@@ -7,13 +7,6 @@ shift
 export DFD_WORKSPACE_NAME="$1"
 shift
 
-while true; do
-	if test -n "$(dig +short "cache.nixos.org" || true)"; then
-		break
-	fi
-	sleep 5
-done
-
 cd
 
 ssh -o StrictHostKeyChecking=no git@github.com true || true
