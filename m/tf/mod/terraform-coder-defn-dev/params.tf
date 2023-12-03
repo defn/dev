@@ -38,6 +38,13 @@ echo 'fs.inotify.max_user_instances = 10000' | sudo tee -a /etc/sysctl.d/99-dfd.
 echo 'fs.inotify.max_user_watches = 524288' | sudo tee -a /etc/sysctl.d/99-dfd.conf
 sudo sysctl -p /etc/sysctl.d/99-dfd.conf
 
+while true; do
+  if test -n "$(dig +short "cache.nixos.org" || true)"; then
+    break
+  fi
+  sleep 5
+done
+
 sudo tailscale up --accept-dns=true --accept-routes=true --operator ubuntu --ssh --authkey "${var.tsauthkey}"
 
 nohup sudo -H -E -u ${local.username} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${data.coder_workspace.me.access_url} ${local.coder_name}' >/tmp/cloud-init.log 2>&1 &
