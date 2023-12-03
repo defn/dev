@@ -35,7 +35,7 @@ helm_add:
 
 build-all:
 # cant run in parallel due to git
-	runmany 1 'cd $$1 && make' coder-*/
+	runmany $(shell nproc) 'cd $$1 && make' coder-*/
 	rm -f ../k/r/y/main.yaml
 	rm -f ../k/r/Makefile/main.yaml
 
