@@ -82,21 +82,21 @@ cache: "quay.io/argoproj/argocli:v3.5.2": "quay.io/argoproj/argocli@sha256:026b3
 
 cache: "quay.io/argoproj/workflow-controller:v3.5.2": "quay.io/argoproj/workflow-controller@sha256:1c55865e168fcda8769fa1dfef0442cadb829e1f3b51aa305601b2cc34fe6c73"
 
-cache: "quay.io/cilium/cilium-envoy:v1.26.6-ff0d5d3f77d610040e93c7c7a430d61a0c0b90c1@sha256:6b0f2591fef922bf17a46517d5152ea7d6270524bb0e307c77986986677dbcea": "quay.io/cilium/cilium-envoy@sha256:6b0f2591fef922bf17a46517d5152ea7d6270524bb0e307c77986986677dbcea"
+cache: "quay.io/cilium/cilium-envoy:v1.27.2-ab187719b71b513150f30209569695adf16ec869@sha256:2b590be37624547d638a578a3f31278d3be53a1a2649ba888a9f15771628521e": "quay.io/cilium/cilium-envoy@sha256:2b590be37624547d638a578a3f31278d3be53a1a2649ba888a9f15771628521e"
 
-cache: "quay.io/cilium/cilium:v1.14.4@sha256:4981767b787c69126e190e33aee93d5a076639083c21f0e7c29596a519c64a2e": "quay.io/cilium/cilium@sha256:4981767b787c69126e190e33aee93d5a076639083c21f0e7c29596a519c64a2e"
+cache: "quay.io/cilium/cilium:v1.15.0-pre.2@sha256:7f077c49ce091428b04de006d5f4cb01b8e32d63dc1d45fa3e372d624681e836": "quay.io/cilium/cilium@sha256:7f077c49ce091428b04de006d5f4cb01b8e32d63dc1d45fa3e372d624681e836"
 
-cache: "quay.io/cilium/clustermesh-apiserver:v1.14.4@sha256:828a74eea2a15c4196633dc50e4b92ba3a5e3ed8418c2a33e255a9281a1ce42f": "quay.io/cilium/clustermesh-apiserver@sha256:828a74eea2a15c4196633dc50e4b92ba3a5e3ed8418c2a33e255a9281a1ce42f"
+cache: "quay.io/cilium/clustermesh-apiserver:v1.15.0-pre.2@sha256:19539c7470f27431ee06e4d4bccad40ca206430e3b5f31c8c86cc96e71d85127": "quay.io/cilium/clustermesh-apiserver@sha256:19539c7470f27431ee06e4d4bccad40ca206430e3b5f31c8c86cc96e71d85127"
 
 cache: "quay.io/cilium/hubble-export-stdout:v1.0.3": "quay.io/cilium/hubble-export-stdout@sha256:80643871d46c2e01793cdc8e72550e599a66906d0b72475eb1e5a43082622779"
 
-cache: "quay.io/cilium/hubble-relay:v1.14.4@sha256:ca81622fd9f04c1316bf4144bde5dbce613758810f6022f6c706b14c9c0815db": "quay.io/cilium/hubble-relay@sha256:ca81622fd9f04c1316bf4144bde5dbce613758810f6022f6c706b14c9c0815db"
+cache: "quay.io/cilium/hubble-relay:v1.15.0-pre.2@sha256:74b20caf534472e274eb020e8ceaf4abfe8d6540c282cb648eb4e0420bccf782": "quay.io/cilium/hubble-relay@sha256:74b20caf534472e274eb020e8ceaf4abfe8d6540c282cb648eb4e0420bccf782"
 
 cache: "quay.io/cilium/hubble-ui-backend:v0.12.1@sha256:1f86f3400827a0451e6332262467f894eeb7caf0eb8779bd951e2caa9d027cbe": "quay.io/cilium/hubble-ui-backend@sha256:1f86f3400827a0451e6332262467f894eeb7caf0eb8779bd951e2caa9d027cbe"
 
 cache: "quay.io/cilium/hubble-ui:v0.12.1@sha256:9e5f81ee747866480ea1ac4630eb6975ff9227f9782b7c93919c081c33f38267": "quay.io/cilium/hubble-ui@sha256:9e5f81ee747866480ea1ac4630eb6975ff9227f9782b7c93919c081c33f38267"
 
-cache: "quay.io/cilium/operator-generic:v1.14.4@sha256:f0f05e4ba3bb1fe0e4b91144fa4fea637701aba02e6c00b23bd03b4a7e1dfd55": "quay.io/cilium/operator-generic@sha256:f0f05e4ba3bb1fe0e4b91144fa4fea637701aba02e6c00b23bd03b4a7e1dfd55"
+cache: "quay.io/cilium/operator-generic:v1.15.0-pre.2@sha256:e5506ddf0665307cf4012a9fbe3f1a51c722b63a12e7abd357119b7c2d1f68af": "quay.io/cilium/operator-generic@sha256:e5506ddf0665307cf4012a9fbe3f1a51c722b63a12e7abd357119b7c2d1f68af"
 
 cache: "quay.io/cilium/tetragon-operator:v1.0.0": "quay.io/cilium/tetragon-operator@sha256:8fb722e4f0e983e00e926cb852461ba1f4f529c1a5b39358438c5fda37cf2848"
 
