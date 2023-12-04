@@ -883,6 +883,7 @@ kustomize: "trust-manager": #KustomizeHelm & {
 	}
 }
 
+// https://artifacthub.io/packages/helm/cilium/cilium
 cilium_common: {
 	helm: {
 		release:   "cilium"
@@ -949,7 +950,6 @@ cilium_common: {
 	}
 }
 
-// https://artifacthub.io/packages/helm/cilium/cilium
 kustomize: "cilium-bootstrap": #KustomizeHelm & {
 	cluster: #Cluster
 
