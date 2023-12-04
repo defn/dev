@@ -40,6 +40,9 @@ rules:
     resources:
       - ciliumloadbalancerippools
       - ciliumbgppeeringpolicies
+      - ciliumbgpnodeconfigs
+      - ciliumbgpadvertisements
+      - ciliumbgppeerconfigs
       - ciliumclusterwideenvoyconfigs
       - ciliumclusterwidenetworkpolicies
       - ciliumegressgatewaypolicies
@@ -94,6 +97,7 @@ rules:
       - ciliumendpoints/status
       - ciliumendpoints
       - ciliuml2announcementpolicies/status
+      - ciliumbgpnodeconfigs/status
     verbs:
       - patch
 apiVersion: rbac.authorization.k8s.io/v1
@@ -217,6 +221,9 @@ rules:
     resources:
       - ciliumendpointslices
       - ciliumenvoyconfigs
+      - ciliumbgppeerconfigs
+      - ciliumbgpadvertisements
+      - ciliumbgpnodeconfigs
     verbs:
       - create
       - update
@@ -239,6 +246,11 @@ rules:
     resourceNames:
       - ciliumloadbalancerippools.cilium.io
       - ciliumbgppeeringpolicies.cilium.io
+      - ciliumbgpclusterconfigs.cilium.io
+      - ciliumbgppeerconfigs.cilium.io
+      - ciliumbgpadvertisements.cilium.io
+      - ciliumbgpnodeconfigs.cilium.io
+      - ciliumbgpnodeconfigoverrides.cilium.io
       - ciliumclusterwideenvoyconfigs.cilium.io
       - ciliumclusterwidenetworkpolicies.cilium.io
       - ciliumegressgatewaypolicies.cilium.io
@@ -263,6 +275,8 @@ rules:
     resources:
       - ciliumloadbalancerippools
       - ciliumpodippools
+      - ciliumbgpclusterconfigs
+      - ciliumbgpnodeconfigoverrides
     verbs:
       - get
       - list
@@ -584,6 +598,7 @@ data:
   enable-bpf-masquerade: "true"
   enable-endpoint-health-checking: "true"
   enable-external-ips: "false"
+  enable-health-check-loadbalancer-ip: "false"
   enable-health-check-nodeport: "true"
   enable-health-checking: "true"
   enable-host-port: "false"
@@ -599,6 +614,8 @@ data:
   enable-l2-neigh-discovery: "true"
   enable-l7-proxy: "true"
   enable-local-redirect-policy: "false"
+  enable-masquerade-to-route-source: "false"
+  enable-metrics: "true"
   enable-node-port: "false"
   enable-policy: default
   enable-remote-node-identity: "true"
@@ -636,6 +653,7 @@ data:
   node-port-bind-protection: "true"
   nodes-gc-interval: 5m0s
   operator-api-serve-addr: "127.0.0.1:9234"
+  operator-prometheus-serve-addr: :9963
   preallocate-bpf-maps: "false"
   procfs: /host/proc
   proxy-connect-timeout: "2"
@@ -660,6 +678,7 @@ data:
   vtep-endpoint: ""
   vtep-mac: ""
   vtep-mask: ""
+  wireguard-persistent-keepalive: 0s
   write-cni-conf-when-ready: /host/etc/cni/net.d/05-cilium.conflist
 kind: ConfigMap
 metadata:
@@ -993,7 +1012,7 @@ metadata:
 ---
 apiVersion: v1
 data:
-  nginx.conf: "server {\n    listen       8081;\n    listen       [::]:8081;\n    server_name  localhost;\n    root /app;\n    index index.html;\n    client_max_body_size 1G;\n\n    location / {\n        proxy_set_header Host $host;\n        proxy_set_header X-Real-IP $remote_addr;\n\n        # CORS\n        add_header Access-Control-Allow-Methods \"GET, POST, PUT, HEAD, DELETE, OPTIONS\";\n        add_header Access-Control-Allow-Origin *;\n        add_header Access-Control-Max-Age 1728000;\n        add_header Access-Control-Expose-Headers content-length,grpc-status,grpc-message;\n        add_header Access-Control-Allow-Headers range,keep-alive,user-agent,cache-control,content-type,content-transfer-encoding,x-accept-content-transfer-encoding,x-accept-response-streaming,x-user-agent,x-grpc-web,grpc-timeout;\n        if ($request_method = OPTIONS) {\n            return 204;\n        }\n        # /CORS\n\n        location /api {\n            proxy_http_version 1.1;\n            proxy_pass_request_headers on;\n            proxy_hide_header Access-Control-Allow-Origin;\n            proxy_pass http://127.0.0.1:8090;\n        }\n        location / {\n            # double `/index.html` is required here \n            try_files $uri $uri/ /index.html /index.html;\n        }\n    }\n}"
+  nginx.conf: "server {\n    listen       8081;\n    listen       [::]:8081;\n    server_name  localhost;\n    root /app;\n    index index.html;\n    client_max_body_size 1G;\n\n    location / {\n        proxy_set_header Host $host;\n        proxy_set_header X-Real-IP $remote_addr;\n\n        # CORS\n        add_header Access-Control-Allow-Methods \"GET, POST, PUT, HEAD, DELETE, OPTIONS\";\n        add_header Access-Control-Allow-Origin *;\n        add_header Access-Control-Max-Age 1728000;\n        add_header Access-Control-Expose-Headers content-length,grpc-status,grpc-message;\n        add_header Access-Control-Allow-Headers range,keep-alive,user-agent,cache-control,content-type,content-transfer-encoding,x-accept-content-transfer-encoding,x-accept-response-streaming,x-user-agent,x-grpc-web,grpc-timeout;\n        if ($request_method = OPTIONS) {\n            return 204;\n        }\n        # /CORS\n\n        location /api {\n            proxy_http_version 1.1;\n            proxy_pass_request_headers on;\n            proxy_hide_header Access-Control-Allow-Origin;\n            proxy_pass http://127.0.0.1:8090;\n        }\n        location / {\n            # double `/index.html` is required here \n            try_files $uri $uri/ /index.html /index.html;\n        }\n\n        # Liveness probe\n        location /healthz {\n            access_log off;\n            add_header Content-Type text/plain;\n            return 200 'ok';\n        }\n    }\n}"
 kind: ConfigMap
 metadata:
   name: hubble-ui-nginx
@@ -1003,9 +1022,9 @@ spec:
   template:
     spec:
       initContainers:
-        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:4981767b787c69126e190e33aee93d5a076639083c21f0e7c29596a519c64a2e
+        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:7f077c49ce091428b04de006d5f4cb01b8e32d63dc1d45fa3e372d624681e836
           command:
-            - cilium
+            - cilium-dbg
             - build-config
           env:
             - name: K8S_NODE_NAME
@@ -1024,7 +1043,7 @@ spec:
           volumeMounts:
             - mountPath: /tmp
               name: tmp
-        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:4981767b787c69126e190e33aee93d5a076639083c21f0e7c29596a519c64a2e
+        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:7f077c49ce091428b04de006d5f4cb01b8e32d63dc1d45fa3e372d624681e836
           command:
             - sh
             - -ec
@@ -1056,7 +1075,7 @@ spec:
               name: hostproc
             - mountPath: /hostbin
               name: cni-path
-        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:4981767b787c69126e190e33aee93d5a076639083c21f0e7c29596a519c64a2e
+        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:7f077c49ce091428b04de006d5f4cb01b8e32d63dc1d45fa3e372d624681e836
           command:
             - sh
             - -ec
@@ -1086,7 +1105,7 @@ spec:
               name: hostproc
             - mountPath: /hostbin
               name: cni-path
-        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:4981767b787c69126e190e33aee93d5a076639083c21f0e7c29596a519c64a2e
+        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:7f077c49ce091428b04de006d5f4cb01b8e32d63dc1d45fa3e372d624681e836
           args:
             - mount | grep "/sys/fs/bpf type bpf" || mount -t bpf bpf /sys/fs/bpf
           command:
@@ -1102,7 +1121,7 @@ spec:
             - mountPath: /sys/fs/bpf
               mountPropagation: Bidirectional
               name: bpf-maps
-        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:4981767b787c69126e190e33aee93d5a076639083c21f0e7c29596a519c64a2e
+        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:7f077c49ce091428b04de006d5f4cb01b8e32d63dc1d45fa3e372d624681e836
           command:
             - /init-container.sh
           env:
@@ -1116,6 +1135,12 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: clean-cilium-bpf-state
+                  name: cilium-config
+                  optional: true
+            - name: WRITE_CNI_CONF_WHEN_READY
+              valueFrom:
+                configMapKeyRef:
+                  key: write-cni-conf-when-ready
                   name: cilium-config
                   optional: true
           imagePullPolicy: IfNotPresent
@@ -1145,7 +1170,7 @@ spec:
               name: cilium-cgroup
             - mountPath: /var/run/cilium
               name: cilium-run
-        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:4981767b787c69126e190e33aee93d5a076639083c21f0e7c29596a519c64a2e
+        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:7f077c49ce091428b04de006d5f4cb01b8e32d63dc1d45fa3e372d624681e836
           command:
             - /install-plugin.sh
           imagePullPolicy: IfNotPresent
@@ -1166,7 +1191,7 @@ spec:
             - mountPath: /host/opt/cni/bin
               name: cni-path
       containers:
-        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:4981767b787c69126e190e33aee93d5a076639083c21f0e7c29596a519c64a2e
+        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:7f077c49ce091428b04de006d5f4cb01b8e32d63dc1d45fa3e372d624681e836
           args:
             - --config-dir=/tmp/cilium/config-map
           command:
@@ -1184,6 +1209,10 @@ spec:
                   fieldPath: metadata.namespace
             - name: CILIUM_CLUSTERMESH_CONFIG
               value: /var/lib/cilium/clustermesh/
+            - name: GOMEMLIMIT
+              valueFrom:
+                resourceFieldRef:
+                  resource: limits.memory
           imagePullPolicy: IfNotPresent
           lifecycle:
             postStart:
@@ -1429,14 +1458,14 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/quay.io/cilium/cilium-envoy@sha256:6b0f2591fef922bf17a46517d5152ea7d6270524bb0e307c77986986677dbcea
+        - image: cache.defn.run:5000/quay.io/cilium/cilium-envoy@sha256:2b590be37624547d638a578a3f31278d3be53a1a2649ba888a9f15771628521e
           args:
             - -c /var/run/cilium/envoy/bootstrap-config.json
             - --base-id 0
             - --log-level info
             - --log-format [%Y-%m-%d %T.%e][%t][%l][%n] [%g:%#] %v
           command:
-            - /usr/bin/cilium-envoy
+            - /usr/bin/cilium-envoy-starter
           env:
             - name: K8S_NODE_NAME
               valueFrom:
@@ -1499,6 +1528,9 @@ spec:
             - mountPath: /var/run/cilium/envoy/sockets
               name: envoy-sockets
               readOnly: false
+            - mountPath: /var/run/cilium/envoy/artifacts
+              name: envoy-artifacts
+              readOnly: true
             - mountPath: /var/run/cilium/envoy/
               name: envoy-config
               readOnly: true
@@ -1528,6 +1560,10 @@ spec:
             path: /var/run/cilium/envoy/sockets
             type: DirectoryOrCreate
           name: envoy-sockets
+        - hostPath:
+            path: /var/run/cilium/envoy/artifacts
+            type: DirectoryOrCreate
+          name: envoy-artifacts
         - configMap:
             defaultMode: 256
             items:
@@ -1571,7 +1607,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/quay.io/cilium/operator-generic@sha256:f0f05e4ba3bb1fe0e4b91144fa4fea637701aba02e6c00b23bd03b4a7e1dfd55
+        - image: cache.defn.run:5000/quay.io/cilium/operator-generic@sha256:e5506ddf0665307cf4012a9fbe3f1a51c722b63a12e7abd357119b7c2d1f68af
           args:
             - --config-dir=/tmp/cilium/config-map
             - --debug=$(CILIUM_DEBUG)
@@ -1605,6 +1641,11 @@ spec:
             periodSeconds: 10
             timeoutSeconds: 3
           name: cilium-operator
+          ports:
+            - containerPort: 9963
+              hostPort: 9963
+              name: prometheus
+              protocol: TCP
           readinessProbe:
             failureThreshold: 5
             httpGet:
@@ -1642,6 +1683,9 @@ spec:
             name: cilium-config
           name: cilium-config-path
     metadata:
+      annotations:
+        prometheus.io/port: "9963"
+        prometheus.io/scrape: "true"
       labels:
         app.kubernetes.io/name: cilium-operator
         app.kubernetes.io/part-of: cilium
@@ -1727,6 +1771,8 @@ spec:
             - --advertise-client-urls=https://[$(HOSTNAME_IP)]:2379
             - --initial-cluster-token=clustermesh-apiserver
             - --auto-compaction-retention=1
+            - --listen-metrics-urls=http://[$(HOSTNAME_IP)]:9963
+            - --metrics=basic
           command:
             - /usr/local/bin/etcd
           env:
@@ -1742,6 +1788,9 @@ spec:
             - containerPort: 2379
               name: etcd
               protocol: TCP
+            - containerPort: 9963
+              name: etcd-metrics
+              protocol: TCP
           terminationMessagePolicy: FallbackToLogsOnError
           volumeMounts:
             - mountPath: /var/lib/etcd-secrets
@@ -1749,7 +1798,7 @@ spec:
               readOnly: true
             - mountPath: /var/run/etcd
               name: etcd-data-dir
-        - image: cache.defn.run:5000/quay.io/cilium/clustermesh-apiserver@sha256:828a74eea2a15c4196633dc50e4b92ba3a5e3ed8418c2a33e255a9281a1ce42f
+        - image: cache.defn.run:5000/quay.io/cilium/clustermesh-apiserver@sha256:19539c7470f27431ee06e4d4bccad40ca206430e3b5f31c8c86cc96e71d85127
           args:
             - --cluster-name=$(CLUSTER_NAME)
             - --cluster-id=$(CLUSTER_ID)
@@ -1757,6 +1806,7 @@ spec:
             - etcd.config=/var/lib/cilium/etcd-config.yaml
             - --enable-external-workloads=false
             - --prometheus-serve-addr=:9962
+            - --controller-group-metrics=all
           command:
             - /usr/bin/clustermesh-apiserver
           env:
@@ -1807,6 +1857,7 @@ spec:
       restartPolicy: Always
       serviceAccount: clustermesh-apiserver
       serviceAccountName: clustermesh-apiserver
+      terminationGracePeriodSeconds: 30
       volumes:
         - name: etcd-server-secrets
           projected:
@@ -1863,7 +1914,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/quay.io/cilium/hubble-relay@sha256:ca81622fd9f04c1316bf4144bde5dbce613758810f6022f6c706b14c9c0815db
+        - image: cache.defn.run:5000/quay.io/cilium/hubble-relay@sha256:74b20caf534472e274eb020e8ceaf4abfe8d6540c282cb648eb4e0420bccf782
           args:
             - serve
           command:
@@ -1959,10 +2010,18 @@ spec:
       containers:
         - image: cache.defn.run:5000/quay.io/cilium/hubble-ui@sha256:9e5f81ee747866480ea1ac4630eb6975ff9227f9782b7c93919c081c33f38267
           imagePullPolicy: IfNotPresent
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8081
           name: frontend
           ports:
             - containerPort: 8081
               name: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8081
           terminationMessagePolicy: FallbackToLogsOnError
           volumeMounts:
             - mountPath: /etc/nginx/conf.d/default.conf
@@ -2119,6 +2178,10 @@ spec:
       port: 9962
       protocol: TCP
       targetPort: apiserv-metrics
+    - name: etcd-metrics
+      port: 9963
+      protocol: TCP
+      targetPort: etcd-metrics
   selector:
     k8s-app: clustermesh-apiserver
   type: ClusterIP

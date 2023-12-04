@@ -12,6 +12,7 @@ function main {
 	shift
 
 	if test -e "${app}/kustomization.yaml"; then
+		rm -rf "${app}/chart"
 		kustomize build --enable-helm "${app}" >"${out}"
 		rm -rf "${app}/charts"
 	else
