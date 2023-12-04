@@ -1,3 +1,3 @@
 package c
 
-teacher: bootstrap: "harbor": app_version: "0.0.17"
+teacher: bootstrap: "harbor": app_version: "0.0.100"
