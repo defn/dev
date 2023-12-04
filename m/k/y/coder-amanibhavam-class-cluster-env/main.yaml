@@ -75,7 +75,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-cilium
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.17
+    targetRevision: 0.0.19
   syncPolicy:
     automated:
       prune: true
