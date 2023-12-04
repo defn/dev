@@ -1,3 +1,3 @@
 package c
 
-teacher: bootstrap: "issuer": app_version: "0.0.17"
+teacher: bootstrap: "issuer": app_version: "0.0.18"
