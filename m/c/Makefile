@@ -55,14 +55,14 @@ helm_add:
 	helm repo update
 
 build-all:
-# cant run in parallel due to git
-	runmany $(shell nproc) 'cd $$1 && make' coder-*/
+# can't run in parallel without issues
+# maybe poblems with tracking directories in k/APP/*.yaml
+	runmany 1 'cd $$1 && make' coder-*/
 	rm -f ../k/r/y/main.yaml
 	rm -f ../k/r/Makefile/main.yaml
 
 digest:
 	cd ./r && $(MAKE) digest
-
 
 release_k_y:
 # make one big cue config

@@ -1,3 +1,3 @@
 package c
 
-teacher: bootstrap: "external-secrets": app_version: "0.0.5"
+teacher: bootstrap: "external-secrets": app_version: "0.0.100"
