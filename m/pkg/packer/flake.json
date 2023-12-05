@@ -2,5 +2,5 @@
   "slug": "pkg-packer",
   "ghrepo": "hashicorp/packer",
   "vendor": "1.9.5",
-  "revision": "0"
+  "revision": "1"
 }
