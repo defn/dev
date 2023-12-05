@@ -27,17 +27,17 @@
       },
       "locked": {
         "dir": "m/pkg/chamber",
-        "lastModified": 1697819522,
-        "narHash": "sha256-01wbcXZH0FxYNCIeNg004vWY7T4hcvn/BjurT4C1dAI=",
+        "lastModified": 1701791985,
+        "narHash": "sha256-ni5MPTnx7Xw4ZGqOM/y6SY9TxPCsRj7I21BAHKb+GxY=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "2c4c6d5c4f2ebe3696c55159045e73efc5955c6a",
+        "rev": "0d42ee9b21ede2a09d3d9229c502597ca5eb7180",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/chamber",
         "owner": "defn",
-        "ref": "pkg-chamber-2.13.4-1",
+        "ref": "pkg-chamber-2.13.5-1",
         "repo": "dev",
         "type": "github"
       }
@@ -372,17 +372,17 @@
       },
       "locked": {
         "dir": "m/pkg/packer",
-        "lastModified": 1692411860,
-        "narHash": "sha256-iQavAMnKYiQlALdEaoYCLYkR8mGjqK2ORga+RkfXepA=",
+        "lastModified": 1701792002,
+        "narHash": "sha256-/WyKzuBMRbzaMzgkn/MnZEVuTyNE/feQxuzj0BUuGr4=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "9d5b541157278f1249698dce6217359ba8595ce4",
+        "rev": "ad60a0db0cfa2812a7e58a0e3c0966304210dbaf",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/packer",
         "owner": "defn",
-        "ref": "pkg-packer-1.9.4-1",
+        "ref": "pkg-packer-1.9.5-1",
         "repo": "dev",
         "type": "github"
       }
