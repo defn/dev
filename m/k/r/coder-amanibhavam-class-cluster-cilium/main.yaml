@@ -572,6 +572,7 @@ data:
   agent-not-ready-taint-key: node.cilium.io/agent-not-ready
   arping-refresh-period: 30s
   auto-direct-node-routes: "false"
+  bpf-lb-acceleration: disabled
   bpf-lb-algorithm: maglev
   bpf-lb-external-clusterip: "true"
   bpf-lb-map-max: "65536"
@@ -587,10 +588,8 @@ data:
   cluster-pool-ipv4-mask-size: "24"
   cni-exclusive: "true"
   cni-log-file: /var/run/cilium/cilium-cni.log
-  cnp-node-status-gc-interval: 0s
   custom-cni-conf: "false"
   debug: "false"
-  disable-cnp-status-updates: "true"
   egress-gateway-reconciliation-trigger-interval: 1s
   enable-auto-protect-node-port-range: "true"
   enable-bgp-control-plane: "false"
@@ -628,6 +627,8 @@ data:
   encrypt-node: "true"
   external-envoy-proxy: "true"
   hubble-disable-tls: "false"
+  hubble-export-file-max-backups: "5"
+  hubble-export-file-max-size-mb: "10"
   hubble-listen-address: :4244
   hubble-socket-path: /var/run/cilium/hubble.sock
   hubble-tls-cert-file: /var/lib/cilium/tls/hubble/server.crt
@@ -639,10 +640,11 @@ data:
   install-no-conntrack-iptables-rules: "false"
   ipam: cluster-pool
   ipam-cilium-node-update-rate: 15s
-  k8s-client-burst: "10"
-  k8s-client-qps: "5"
+  k8s-client-burst: "20"
+  k8s-client-qps: "10"
   kube-proxy-replacement: "false"
   kube-proxy-replacement-healthz-bind-address: ""
+  max-connected-clusters: "255"
   mesh-auth-enabled: "true"
   mesh-auth-gc-interval: 5m0s
   mesh-auth-queue-size: "1024"
@@ -661,6 +663,7 @@ data:
   proxy-max-requests-per-connection: "0"
   remove-cilium-node-taints: "true"
   routing-mode: tunnel
+  service-no-backend-response: reject
   set-cilium-is-up-condition: "true"
   set-cilium-node-taints: "true"
   sidecar-istio-proxy-image: cilium/istio_proxy
@@ -725,7 +728,7 @@ data:
                                   "prefix": "/metrics"
                                 },
                                 "route": {
-                                  "cluster": "envoy-admin",
+                                  "cluster": "/envoy-admin",
                                   "prefix_rewrite": "/stats/prometheus"
                                 }
                               }
@@ -778,7 +781,7 @@ data:
                                   "prefix": "/healthz"
                                 },
                                 "route": {
-                                  "cluster": "envoy-admin",
+                                  "cluster": "/envoy-admin",
                                   "prefix_rewrite": "/ready"
                                 }
                               }
@@ -921,11 +924,11 @@ data:
             }
           },
           {
-            "name": "envoy-admin",
+            "name": "/envoy-admin",
             "type": "STATIC",
             "connectTimeout": "2s",
             "loadAssignment": {
-              "clusterName": "envoy-admin",
+              "clusterName": "/envoy-admin",
               "endpoints": [
                 {
                   "lbEndpoints": [
@@ -977,6 +980,14 @@ data:
           "resourceApiVersion": "V3"
         }
       },
+      "bootstrapExtensions": [
+        {
+          "name": "envoy.bootstrap.internal_listener",
+          "typed_config": {
+            "@type": "type.googleapis.com/envoy.extensions.bootstrap.internal_listener.v3.InternalListener"
+          }
+        }
+      ],
       "layeredRuntime": {
         "layers": [
           {
@@ -1022,7 +1033,7 @@ spec:
   template:
     spec:
       initContainers:
-        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:7f077c49ce091428b04de006d5f4cb01b8e32d63dc1d45fa3e372d624681e836
+        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:c09d3fc906f26edbc93494cc46e6616668d7931a05470f02b9f9a266c2cfc279
           command:
             - cilium-dbg
             - build-config
@@ -1043,7 +1054,7 @@ spec:
           volumeMounts:
             - mountPath: /tmp
               name: tmp
-        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:7f077c49ce091428b04de006d5f4cb01b8e32d63dc1d45fa3e372d624681e836
+        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:c09d3fc906f26edbc93494cc46e6616668d7931a05470f02b9f9a266c2cfc279
           command:
             - sh
             - -ec
@@ -1075,7 +1086,7 @@ spec:
               name: hostproc
             - mountPath: /hostbin
               name: cni-path
-        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:7f077c49ce091428b04de006d5f4cb01b8e32d63dc1d45fa3e372d624681e836
+        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:c09d3fc906f26edbc93494cc46e6616668d7931a05470f02b9f9a266c2cfc279
           command:
             - sh
             - -ec
@@ -1105,7 +1116,7 @@ spec:
               name: hostproc
             - mountPath: /hostbin
               name: cni-path
-        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:7f077c49ce091428b04de006d5f4cb01b8e32d63dc1d45fa3e372d624681e836
+        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:c09d3fc906f26edbc93494cc46e6616668d7931a05470f02b9f9a266c2cfc279
           args:
             - mount | grep "/sys/fs/bpf type bpf" || mount -t bpf bpf /sys/fs/bpf
           command:
@@ -1121,7 +1132,7 @@ spec:
             - mountPath: /sys/fs/bpf
               mountPropagation: Bidirectional
               name: bpf-maps
-        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:7f077c49ce091428b04de006d5f4cb01b8e32d63dc1d45fa3e372d624681e836
+        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:c09d3fc906f26edbc93494cc46e6616668d7931a05470f02b9f9a266c2cfc279
           command:
             - /init-container.sh
           env:
@@ -1170,7 +1181,7 @@ spec:
               name: cilium-cgroup
             - mountPath: /var/run/cilium
               name: cilium-run
-        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:7f077c49ce091428b04de006d5f4cb01b8e32d63dc1d45fa3e372d624681e836
+        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:c09d3fc906f26edbc93494cc46e6616668d7931a05470f02b9f9a266c2cfc279
           command:
             - /install-plugin.sh
           imagePullPolicy: IfNotPresent
@@ -1191,7 +1202,7 @@ spec:
             - mountPath: /host/opt/cni/bin
               name: cni-path
       containers:
-        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:7f077c49ce091428b04de006d5f4cb01b8e32d63dc1d45fa3e372d624681e836
+        - image: cache.defn.run:5000/quay.io/cilium/cilium@sha256:c09d3fc906f26edbc93494cc46e6616668d7931a05470f02b9f9a266c2cfc279
           args:
             - --config-dir=/tmp/cilium/config-map
           command:
@@ -1301,6 +1312,7 @@ spec:
               path: /healthz
               port: 9879
               scheme: HTTP
+            initialDelaySeconds: 5
             periodSeconds: 2
             successThreshold: 1
           terminationMessagePolicy: FallbackToLogsOnError
@@ -1458,7 +1470,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/quay.io/cilium/cilium-envoy@sha256:2b590be37624547d638a578a3f31278d3be53a1a2649ba888a9f15771628521e
+        - image: cache.defn.run:5000/quay.io/cilium/cilium-envoy@sha256:80de27c1d16ab92923cc0cd1fff90f2e7047a9abf3906fda712268d9cbc5b950
           args:
             - -c /var/run/cilium/envoy/bootstrap-config.json
             - --base-id 0
@@ -1521,6 +1533,7 @@ spec:
               path: /healthz
               port: 9878
               scheme: HTTP
+            initialDelaySeconds: 5
             periodSeconds: 2
             successThreshold: 1
           terminationMessagePolicy: FallbackToLogsOnError
@@ -1607,7 +1620,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/quay.io/cilium/operator-generic@sha256:e5506ddf0665307cf4012a9fbe3f1a51c722b63a12e7abd357119b7c2d1f68af
+        - image: cache.defn.run:5000/quay.io/cilium/operator-generic@sha256:01959fb5e0164fbe3f265f42da4e444d9511f716ac26210fea1080c948d4583e
           args:
             - --config-dir=/tmp/cilium/config-map
             - --debug=$(CILIUM_DEBUG)
@@ -1716,42 +1729,20 @@ spec:
   template:
     spec:
       initContainers:
-        - image: cache.defn.run:5000/quay.io/coreos/etcd@sha256:795d8660c48c439a7c3764c2330ed9222ab5db5bb524d8d0607cac76f7ba82a3
+        - image: cache.defn.run:5000/quay.io/cilium/clustermesh-apiserver@sha256:74f30ab524a07ffb3e74e2c0d5c34f7a03f1b090f45e3f4450db3d34800ada4d
           args:
-            - |
-              rm -rf /var/run/etcd/*;
-              /usr/local/bin/etcd --data-dir=/var/run/etcd --name=clustermesh-apiserver --listen-client-urls=http://127.0.0.1:2379 --advertise-client-urls=http://127.0.0.1:2379 --initial-cluster-token=clustermesh-apiserver --initial-cluster-state=new --auto-compaction-retention=1 &
-
-              # The following key needs to be created before that the cilium agents
-              # have the possibility of connecting to etcd.
-              etcdctl put cilium/.has-cluster-config true
-
-              etcdctl user add root --no-password;
-              etcdctl user grant-role root root;
-              etcdctl user add admin-coder-amanibhavam-class --no-password;
-              etcdctl user grant-role admin-coder-amanibhavam-class root;
-              etcdctl user add externalworkload --no-password;
-              etcdctl role add externalworkload;
-              etcdctl role grant-permission externalworkload --from-key read '';
-              etcdctl role grant-permission externalworkload readwrite --prefix cilium/state/noderegister/v1/;
-              etcdctl role grant-permission externalworkload readwrite --prefix cilium/.initlock/;
-              etcdctl user grant-role externalworkload externalworkload;
-              etcdctl user add remote --no-password;
-              etcdctl role add remote;
-              etcdctl role grant-permission remote --from-key read '';
-              etcdctl user grant-role remote remote;
-              etcdctl auth enable;
-              exit
+            - etcdinit
+            - --etcd-cluster-name=clustermesh-apiserver
+            - --etcd-initial-cluster-token=clustermesh-apiserver
+            - --etcd-data-dir=/var/run/etcd
           command:
-            - /bin/sh
-            - -c
+            - /usr/bin/clustermesh-apiserver
           env:
-            - name: ETCDCTL_API
-              value: "3"
-            - name: HOSTNAME_IP
+            - name: CILIUM_CLUSTER_NAME
               valueFrom:
-                fieldRef:
-                  fieldPath: status.podIP
+                configMapKeyRef:
+                  key: cluster-name
+                  name: cilium-config
           imagePullPolicy: IfNotPresent
           name: etcd-init
           terminationMessagePolicy: FallbackToLogsOnError
@@ -1759,7 +1750,7 @@ spec:
             - mountPath: /var/run/etcd
               name: etcd-data-dir
       containers:
-        - image: cache.defn.run:5000/quay.io/coreos/etcd@sha256:795d8660c48c439a7c3764c2330ed9222ab5db5bb524d8d0607cac76f7ba82a3
+        - image: cache.defn.run:5000/quay.io/cilium/clustermesh-apiserver@sha256:74f30ab524a07ffb3e74e2c0d5c34f7a03f1b090f45e3f4450db3d34800ada4d
           args:
             - --data-dir=/var/run/etcd
             - --name=clustermesh-apiserver
@@ -1774,7 +1765,7 @@ spec:
             - --listen-metrics-urls=http://[$(HOSTNAME_IP)]:9963
             - --metrics=basic
           command:
-            - /usr/local/bin/etcd
+            - /usr/bin/etcd
           env:
             - name: ETCDCTL_API
               value: "3"
@@ -1798,12 +1789,14 @@ spec:
               readOnly: true
             - mountPath: /var/run/etcd
               name: etcd-data-dir
-        - image: cache.defn.run:5000/quay.io/cilium/clustermesh-apiserver@sha256:19539c7470f27431ee06e4d4bccad40ca206430e3b5f31c8c86cc96e71d85127
+        - image: cache.defn.run:5000/quay.io/cilium/clustermesh-apiserver@sha256:74f30ab524a07ffb3e74e2c0d5c34f7a03f1b090f45e3f4450db3d34800ada4d
           args:
+            - clustermesh
             - --cluster-name=$(CLUSTER_NAME)
             - --cluster-id=$(CLUSTER_ID)
             - --kvstore-opt
             - etcd.config=/var/lib/cilium/etcd-config.yaml
+            - --max-connected-clusters=255
             - --enable-external-workloads=false
             - --prometheus-serve-addr=:9962
             - --controller-group-metrics=all
@@ -1914,22 +1907,24 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/quay.io/cilium/hubble-relay@sha256:74b20caf534472e274eb020e8ceaf4abfe8d6540c282cb648eb4e0420bccf782
+        - image: cache.defn.run:5000/quay.io/cilium/hubble-relay@sha256:95833c3375b48cf72d1c122da6ffed2f69bd7c6b76cd373f5a8455c0c527cc4b
           args:
             - serve
           command:
             - hubble-relay
           imagePullPolicy: IfNotPresent
           livenessProbe:
-            tcpSocket:
-              port: grpc
+            grpc:
+              port: 4222
+            timeoutSeconds: 3
           name: hubble-relay
           ports:
             - containerPort: 4245
               name: grpc
           readinessProbe:
-            tcpSocket:
-              port: grpc
+            grpc:
+              port: 4222
+            timeoutSeconds: 3
           securityContext:
             capabilities:
               drop:
@@ -1937,6 +1932,12 @@ spec:
             runAsGroup: 65532
             runAsNonRoot: true
             runAsUser: 65532
+          startupProbe:
+            failureThreshold: 20
+            grpc:
+              port: 4222
+            periodSeconds: 3
+            timeoutSeconds: 3
           terminationMessagePolicy: FallbackToLogsOnError
           volumeMounts:
             - mountPath: /etc/hubble-relay
