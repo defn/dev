@@ -89,7 +89,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-cilium
-              targetRevision: 0.0.100
+              targetRevision: 0.0.102
             syncPolicy:
               automated:
                 prune: true
