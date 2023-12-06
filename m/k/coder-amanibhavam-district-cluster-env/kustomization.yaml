@@ -68,7 +68,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-argo-workflows
-              targetRevision: 0.0.100
+              targetRevision: 0.0.101
             syncPolicy:
               automated:
                 prune: true
@@ -383,7 +383,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-kyverno
-              targetRevision: 0.0.100
+              targetRevision: 0.0.101
             syncPolicy:
               automated:
                 prune: true
@@ -552,7 +552,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-traefik
-              targetRevision: 0.0.100
+              targetRevision: 0.0.101
             syncPolicy:
               automated:
                 prune: true

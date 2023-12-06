@@ -22996,7 +22996,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: cache.defn.run:5000/busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094
+    - image: cache.defn.run:5000/busybox@sha256:713223f59872d6ee1ae186e2a5970cd2efbc1bacfe7553b316ecb6dd363dc941
       command:
         - /bin/sh
         - -c
@@ -23040,7 +23040,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: cache.defn.run:5000/busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094
+    - image: cache.defn.run:5000/busybox@sha256:713223f59872d6ee1ae186e2a5970cd2efbc1bacfe7553b316ecb6dd363dc941
       command:
         - /bin/sh
         - -c
@@ -23084,7 +23084,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: cache.defn.run:5000/busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094
+    - image: cache.defn.run:5000/busybox@sha256:713223f59872d6ee1ae186e2a5970cd2efbc1bacfe7553b316ecb6dd363dc941
       command:
         - /bin/sh
         - -c
@@ -23128,7 +23128,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: cache.defn.run:5000/busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094
+    - image: cache.defn.run:5000/busybox@sha256:713223f59872d6ee1ae186e2a5970cd2efbc1bacfe7553b316ecb6dd363dc941
       command:
         - /bin/sh
         - -c
@@ -23172,7 +23172,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: cache.defn.run:5000/busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094
+    - image: cache.defn.run:5000/busybox@sha256:713223f59872d6ee1ae186e2a5970cd2efbc1bacfe7553b316ecb6dd363dc941
       command:
         - /bin/sh
         - -c
@@ -23216,7 +23216,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: cache.defn.run:5000/busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094
+    - image: cache.defn.run:5000/busybox@sha256:713223f59872d6ee1ae186e2a5970cd2efbc1bacfe7553b316ecb6dd363dc941
       command:
         - /bin/sh
         - -c
@@ -23260,7 +23260,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: cache.defn.run:5000/busybox@sha256:7ae8447f3a7f5bccaa765926f25fc038e425cf1b2be6748727bbea9a13102094
+    - image: cache.defn.run:5000/busybox@sha256:713223f59872d6ee1ae186e2a5970cd2efbc1bacfe7553b316ecb6dd363dc941
       command:
         - /bin/sh
         - -c

@@ -264,7 +264,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-kyverno
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.100
+    targetRevision: 0.0.101
   syncPolicy:
     automated:
       prune: true
@@ -391,7 +391,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-traefik
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.100
+    targetRevision: 0.0.102
   syncPolicy:
     automated:
       prune: true
