@@ -1239,7 +1239,7 @@ kustomize: "traefik": #KustomizeHelm & {
 		release:   "traefik"
 		name:      "traefik"
 		namespace: "traefik"
-		version:   "25.0.0"
+		version:   "26.0.0"
 		repo:      "https://traefik.github.io/charts"
 		values: {
 			logs: general: level:  "DEBUG"
@@ -1831,7 +1831,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.39.5"
+		version:   "0.39.6"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [
@@ -1870,7 +1870,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "3.2.5"
+		version:     "3.2.7"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
