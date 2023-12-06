@@ -372,17 +372,17 @@
       },
       "locked": {
         "dir": "m/pkg/packer",
-        "lastModified": 1701792002,
-        "narHash": "sha256-/WyKzuBMRbzaMzgkn/MnZEVuTyNE/feQxuzj0BUuGr4=",
+        "lastModified": 1701825884,
+        "narHash": "sha256-LU9QHIEBoIBnYjcm5184UTmCSlL+z7yOpRWCOWB0HmQ=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "ad60a0db0cfa2812a7e58a0e3c0966304210dbaf",
+        "rev": "260ccd8b0a0ed456926cd35d2ec9933a0380cf1a",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/packer",
         "owner": "defn",
-        "ref": "pkg-packer-1.9.5-1",
+        "ref": "pkg-packer-1.10.0-1",
         "repo": "dev",
         "type": "github"
       }
