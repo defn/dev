@@ -27,17 +27,17 @@
       },
       "locked": {
         "dir": "m/pkg/cosign",
-        "lastModified": 1699385619,
-        "narHash": "sha256-4RNQs1cmtoU403zo4EU8lDXd2XLuT2T2Tee5GeLfj2M=",
+        "lastModified": 1701825865,
+        "narHash": "sha256-g/yEy+N6c7cAIJ9qAx0+HB+zr2PkiXCDAFI8x3evNRI=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "6e4ed0fd0e9306e18a265c2e48757ba00b12d1ff",
+        "rev": "0d134c6b41ea2dcbd718d177f8ad315d25097c66",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cosign",
         "owner": "defn",
-        "ref": "pkg-cosign-2.2.1-1",
+        "ref": "pkg-cosign-2.2.2-1",
         "repo": "dev",
         "type": "github"
       }
