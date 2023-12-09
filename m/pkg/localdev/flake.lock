@@ -449,17 +449,17 @@
       },
       "locked": {
         "dir": "m/pkg/gh",
-        "lastModified": 1701131991,
-        "narHash": "sha256-7pCac2Ort/4DbDuz4CJ3J5ZVsfJoXfdbnjMOh01zi84=",
+        "lastModified": 1702083514,
+        "narHash": "sha256-pXMP8vMo8IaVNrKKd7JDtx6i3E4G4kCyQifxfCmG+Qg=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "24a79df403d57f0218095de91b782161a6efde9a",
+        "rev": "22451150cff2c84a463d41385784b450662efd90",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/gh",
         "owner": "defn",
-        "ref": "pkg-gh-2.39.2-1",
+        "ref": "pkg-gh-2.40.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -959,17 +959,17 @@
       },
       "locked": {
         "dir": "m/pkg/tilt",
-        "lastModified": 1701362590,
-        "narHash": "sha256-jC+0gBEkx/7csZIagVnv7DlUiY1Ku6qAyc1NLXbS3yc=",
+        "lastModified": 1702083665,
+        "narHash": "sha256-ItqX/d/+hlV8DFIOEt2LAn8XYoL/lzQ+/XQ4y5Hq4uk=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "0c19e599140e8db0fc743f7e77cefe0a9a32e594",
+        "rev": "77f49c975ca1a22ccfd08926c12fc3522b225843",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/tilt",
         "owner": "defn",
-        "ref": "pkg-tilt-0.33.8-1",
+        "ref": "pkg-tilt-0.33.9-1",
         "repo": "dev",
         "type": "github"
       }
