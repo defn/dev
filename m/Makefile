@@ -110,6 +110,7 @@ za:
 	cd coder/class && $(MAKE) image
 
 warudo:
+	pass hello
 	this-prune
 	$(MAKE) ci za
 
