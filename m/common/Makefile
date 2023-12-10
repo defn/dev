@@ -1,17 +1,12 @@
 SHELL := /bin/bash
 
-chart ?=
-
-domain ?= defn.run
-registry ?= cache.$(domain):5000
-
 build:
 	cue export --out json -e app.output | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | while read -r f b; do base64 -d <<<"$$b" >"$$f"; done
 	rm -f *.tgz gen/*.tgz
 	cd gen && helm package ../chart
 
 push:
-	helm push --insecure-skip-tls-verify gen/*.tgz oci://$(registry)/library/helm
+	helm push --insecure-skip-tls-verify gen/*.tgz oci://$(DFD_REGISTRY)/library/helm
 
 image:
 	docker build -t $$EXPECTED_REF . && docker push $$EXPECTED_REF
