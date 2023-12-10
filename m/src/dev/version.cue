@@ -1,3 +1,3 @@
-package dev
+package app
 
-app: chart: version: "0.0.14"
+app: chart: version: "0.0.27"

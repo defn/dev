@@ -1,8 +1,6 @@
 package common
 
-app_ns: "dev"
-
-app: {
+argocd: {
 	apiVersion: "argoproj.io/v1alpha1"
 	kind:       "Application"
 	metadata: {
@@ -13,10 +11,10 @@ app: {
 		project: "default"
 		destination: {
 			name:      "in-cluster"
-			namespace: app_ns
+			namespace: metadata.name
 		}
 		source: {
-			repoURL:        value.registry,
+			repoURL:        value.registry
 			"chart":        "library/helm/\(chart.name)"
 			targetRevision: chart.version
 		}

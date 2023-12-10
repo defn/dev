@@ -4,16 +4,16 @@ deploy: {
 	apiVersion: "apps/v1"
 	kind:       "Deployment"
 	metadata: {
-		name:      "api"
+		name:      "app"
 		namespace: "dev"
-		labels: app: "api"
+		labels: app: "app"
 	}
 	spec: {
-		selector: matchLabels: app: "api"
+		selector: matchLabels: app: "app"
 		template: {
-			metadata: labels: app: "api"
+			metadata: labels: app: "app"
 			spec: containers: [{
-				image: "api"
+				image: "app"
 				name:  "cli"
 				command: ["/api"]
 				args: ["api"]

@@ -1,6 +1,7 @@
 SHELL := /bin/bash
 
 build:
+	rm -f chart/templates/*.yaml	
 	cue export --out json -e app.output | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | while read -r f b; do base64 -d <<<"$$b" >"$$f"; done
 	rm -f *.tgz gen/*.tgz
 	cd gen && helm package ../chart
@@ -21,11 +22,11 @@ watch:
 bump:
 	echo $$(( $$(cat version) + 1 )) > version.tmp
 	mv version.tmp version
-	(echo package dev; echo "app: chart: version: \"0.0.$$(cat version)\"") > version.cue
+	(echo package app; echo "app: chart: version: \"0.0.$$(cat version)\"") > version.cue
 	cue fmt .
 
 deploy:
-	kubectl apply -f gen/app.yaml
+	kubectl apply -f gen/argocd.yaml
 
 repo:
 	argocd --core repo add $(DFD_REGISTRY) --type helm --name cache --enable-oci --insecure-skip-server-verification

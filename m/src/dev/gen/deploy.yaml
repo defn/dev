@@ -2,21 +2,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api
+  name: app
   namespace: dev
   labels:
-    app: api
+    app: app
 spec:
   selector:
     matchLabels:
-      app: api
+      app: app
   template:
     metadata:
       labels:
-        app: api
+        app: app
     spec:
       containers:
-        - image: api
+        - image: app
           name: cli
           command:
             - /api

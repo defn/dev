@@ -7,7 +7,6 @@ os.putenv("DFD_CONTEXT", "{}-{}-{}-cluster".format(os.getenv("DFD_PREFIX"), os.g
 os.putenv("DFD_PARENT", "district.amanibhavam.defn.run")
 
 main(
-    app_service="api",
     app_entrypoint="/cli",
     app_build="../../bazel-bin/src/dev/dev_/dev",
     app_release="gen/cli.bin",

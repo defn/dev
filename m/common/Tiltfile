@@ -2,12 +2,18 @@
 
 load("ext://restart_process", "custom_build_with_restart")
 
-def main(app_build, app_release, app_entrypoint, app_service, context, registry, parent, env, host):
+def main(app_build, app_release, app_entrypoint, context, registry, parent, env, host, app_service="app"):
     # local kubernetes
     allow_k8s_contexts(context)
 
     # local registry
     default_registry(registry)
+
+    # deploy argocd app
+    local_resource(
+        name="argocd",
+        cmd="make all"
+    )
 
     # app initial deploy
     k8s_yaml(local("cat gen/deploy.yaml"))
@@ -42,3 +48,4 @@ def main(app_build, app_release, app_entrypoint, app_service, context, registry,
             sync(app_release, app_entrypoint),
         ],
     )
+
