@@ -8,9 +8,9 @@ ops_accounts: ["ops"]
 no_accounts: []
 
 input: organization: [N=string]: {
-	name:     N
-	prefix:   string | *"aws-"
-	domain:   string | *"defn.us"
-	admins:   [... {...}] | *aws_admins
+	name:   N
+	prefix: string | *"aws-"
+	domain: string | *"defn.us"
+	admins: [... {...}] | *aws_admins
 	accounts: [...string] | *no_accounts
 }
