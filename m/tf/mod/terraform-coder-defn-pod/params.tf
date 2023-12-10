@@ -1,6 +1,6 @@
 locals {
   pod_count = data.coder_parameter.provider.value == "pod" ? 1 : 0
-  ns        = "${local.prefix}-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}"
+  ns        = "${local.prefix}-${local.owner}-${local.name}"
 }
 
 data "coder_parameter" "provider" {
@@ -21,7 +21,7 @@ data "coder_parameter" "docker_image" {
   name         = "docker_image"
   display_name = "Docker image"
   description  = "The docker image to use for the workspace"
-  default      = "cache.defn.run:5000/dfd:class"
+  default      = "${local.registry}/dfd:class"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/docker.svg"
   mutable      = true
 }
