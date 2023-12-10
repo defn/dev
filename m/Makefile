@@ -1,7 +1,7 @@
 timeout ?= 5
 
 env ?= $(shell uname -n | cut -d- -f3)
-domain ?= $(domain)
+domain ?= defn.run
 
 build:
 	../bin/b pass build //cmd/cli:cli
@@ -149,3 +149,8 @@ vc:
 
 vc-init:
 	kubectl patch -n argocd secret argocd-secret -p '{"stringData": { "admin.password": "'$$(htpasswd -bnBC 10 "" admin | tr -d ':\n')'"}}'
+
+dev:
+	cp /home/ubuntu/.kube/config /home/ubuntu/.kube/config.argocd
+	env KUBECONFIG=$$HOME/.kube/config.argocd k config set-context --current --namespace argocd
+	app repo add cache.$(domain):5000 --type helm --name cache --enable-oci --insecure-skip-server-verification

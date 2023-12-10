@@ -11,7 +11,7 @@ build:
 	cd gen && helm package ../chart
 
 push:
-	helm push --insecure-skip-tls-verify *.tgz oci://$(registry)/library/helm
+	helm push --insecure-skip-tls-verify gen/*.tgz oci://$(registry)/library/helm
 
 image:
 	docker build -t $$EXPECTED_REF . && docker push $$EXPECTED_REF
@@ -40,4 +40,4 @@ init:
 	$(MAKE) bump build
 
 all:
-	$(MAKE) bump build deploy
+	$(MAKE) bump build push deploy
