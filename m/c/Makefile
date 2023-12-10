@@ -62,6 +62,7 @@ digest:
 build-all:
 # can't run in parallel without issues
 # maybe problems with tracking directories in k/APP/*.yaml
+	b clean
 	runmany 1 'cd $$1 && make' coder-*/
 	rm -f ../k/r/y/main.yaml
 	rm -f ../k/r/Makefile/main.yaml
