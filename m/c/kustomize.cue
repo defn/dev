@@ -299,7 +299,7 @@ kustomize: "linkerd-control-plane": #KustomizeHelm & {
 	helm: {
 		release: "linkerd-control-plane"
 		name:    "linkerd-control-plane"
-		version: "1.16.6"
+		version: "1.16.7"
 		repo:    "https://helm.linkerd.io/stable"
 		values: {
 			identity: externalCA: true
@@ -325,7 +325,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.28.5"
+		version: "6.28.6"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -1831,7 +1831,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.39.6"
+		version:   "0.39.8"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [
