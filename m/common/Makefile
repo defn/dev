@@ -28,7 +28,7 @@ deploy:
 	kubectl apply -f gen/app.yaml
 
 repo:
-	argocd --core repo add $(registry) --type helm --name cache --enable-oci --insecure-skip-server-verification
+	argocd --core repo add $(DFD_REGISTRY) --type helm --name cache --enable-oci --insecure-skip-server-verification
 
 init:
 	mkdir -p chart/templates gen

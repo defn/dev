@@ -2,7 +2,7 @@
 
 load("ext://restart_process", "custom_build_with_restart")
 
-def main(context, registry, app_build, app_release, app_entrypoint, app_service, host):
+def main(app_build, app_release, app_entrypoint, app_service, context, registry, parent, env, host):
     # local kubernetes
     allow_k8s_contexts(context)
 
@@ -26,7 +26,9 @@ def main(context, registry, app_build, app_release, app_entrypoint, app_service,
 
     # app service
     k8s_resource(app_service, links = [
-        link(host, app_service)
+        link("https://argocd-{}.{}".format(env, parent), "argocd"),
+        link(host, "app"),
+        link("{}/api".format(host), "/api")
     ])
 
     # updates app when bazel-to-app builds

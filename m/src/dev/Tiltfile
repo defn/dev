@@ -3,8 +3,8 @@
 load("../../common/Tiltfile", "main")
 
 os.putenv("DFD_REGISTRY", "cache.defn.run:5000")
-os.putenv("DFD_HOST", "www.district.amanibhavam.defn.run")
 os.putenv("DFD_CONTEXT", "{}-{}-{}-cluster".format(os.getenv("DFD_PREFIX"), os.getenv("DFD_OWNER"),os.getenv("DFD_NAME")))
+os.putenv("DFD_PARENT", "district.amanibhavam.defn.run")
 
 main(
     app_service="api",
@@ -13,5 +13,7 @@ main(
     app_release="gen/cli.bin",
     context=os.getenv("DFD_CONTEXT"),
     registry=os.getenv("DFD_REGISTRY"),
-    host=os.getenv("DFD_HOST")
+    parent=os.getenv("DFD_PARENT"),
+    env=os.getenv("DFD_NAME"),
+    host="dev.{}".format(os.getenv("DFD_PARENT"))
 )

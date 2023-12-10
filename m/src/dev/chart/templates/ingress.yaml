@@ -9,7 +9,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: www.district.amanibhavam.defn.run
+    - host: dev.district.amanibhavam.defn.run
       http:
         paths:
           - backend:
@@ -19,7 +19,7 @@ spec:
                   number: 80
             path: /
             pathType: Prefix
-    - host: www.district.amanibhavam.defn.run
+    - host: dev.district.amanibhavam.defn.run
       http:
         paths:
           - backend:
