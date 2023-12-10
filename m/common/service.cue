@@ -4,7 +4,7 @@ template: "service-www.yaml": {
 	apiVersion: "v1"
 	kind:       "Service"
 	metadata: {
-		name: "nginx"
+		name: "www"
 	}
 	spec: {
 		selector: app: "nginx"
@@ -16,14 +16,14 @@ template: "service-www.yaml": {
 	}
 }
 
-template: "service-api.yaml": {
+template: "service-app.yaml": {
 	apiVersion: "v1"
 	kind:       "Service"
 	metadata: {
-		name: "api"
+		name: "app"
 	}
 	spec: {
-		selector: app: "api"
+		selector: app: "app"
 		ports: [{
 			protocol:   "TCP"
 			port:       80

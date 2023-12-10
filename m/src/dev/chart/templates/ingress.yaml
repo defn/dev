@@ -14,7 +14,7 @@ spec:
         paths:
           - backend:
               service:
-                name: nginx
+                name: www
                 port:
                   number: 80
             path: /
@@ -24,7 +24,7 @@ spec:
         paths:
           - backend:
               service:
-                name: api
+                name: app
                 port:
                   number: 80
             path: /api

@@ -16,7 +16,7 @@ template: "ingress.yaml": {
 			host: value.host
 			http: paths: [{
 				backend: service: {
-					name: "nginx"
+					name: "www"
 					port: number: 80
 				}
 				path:     "/"
@@ -26,7 +26,7 @@ template: "ingress.yaml": {
 			host: value.host
 			http: paths: [{
 				backend: service: {
-					name: "api"
+					name: "app"
 					port: number: 80
 				}
 				path:     "/api"

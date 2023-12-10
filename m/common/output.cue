@@ -9,9 +9,9 @@ output: {
         # managed by Cue
         \(yaml.Marshal(chart))
         """
-	"gen/app.yaml":     """
+	"gen/argocd.yaml":     """
         # managed by Cue
-        \(yaml.Marshal(app))
+        \(yaml.Marshal(argocd))
         """
 
 	"gen/deploy.yaml": """
