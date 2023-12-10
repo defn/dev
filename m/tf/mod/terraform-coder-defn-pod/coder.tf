@@ -1,7 +1,11 @@
 data "coder_workspace" "me" {}
 
 locals {
+  owner    = lower(data.coder_workspace.me.owner)
+  name     = lower(data.coder_workspace.me.name)
   username = "ubuntu"
+  domain   = "defn.run"
+  parent   = "district"
 
   prefix     = data.coder_parameter.prefix.value
   coder_name = "${local.prefix}-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
@@ -21,22 +25,22 @@ resource "coder_agent" "main" {
   }
 
   env = {
-    GIT_AUTHOR_NAME     = lower(data.coder_workspace.me.owner)
-    GIT_COMMITTER_NAME  = lower(data.coder_workspace.me.owner)
+    GIT_AUTHOR_NAME     = local.owner
+    GIT_COMMITTER_NAME  = local.owner
     GIT_AUTHOR_EMAIL    = data.coder_workspace.me.owner_email
     GIT_COMMITTER_EMAIL = data.coder_workspace.me.owner_email
 
     LOCAL_ARCHIVE = "/usr/lib/locale/locale-archive"
     LC_ALL        = "C.UTF-8"
 
-    DFD_OWNER  = lower(data.coder_workspace.me.owner)
-    DFD_NAME   = lower(data.coder_workspace.me.name)
+    DFD_OWNER  = local.owner
+    DFD_NAME   = local.name
     DFD_PREFIX = local.prefix
     DFD_APP    = local.app
 
-    DFD_REGISTRY = "cache.defn.run:5000"
-    DFD_PARENT   = "district.${lower(data.coder_workspace.me.owner)}.defn.run"
-    DFD_CONTEXT  = "${local.prefix}-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}-cluster"
+    DFD_REGISTRY = "cache.${local.domain}:5000"
+    DFD_PARENT   = "${local.parent}.${local.owner}.${local.domain}"
+    DFD_CONTEXT  = "${local.prefix}-${local.owner}-${local.name}-cluster"
   }
 }
 
