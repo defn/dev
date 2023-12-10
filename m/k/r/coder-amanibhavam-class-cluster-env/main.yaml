@@ -131,7 +131,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-class-cluster-external-dns
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.105
+    targetRevision: 0.0.107
   syncPolicy:
     automated:
       prune: true
