@@ -1,3 +1,3 @@
 package c
 
-teacher: bootstrap: "secrets": app_version: "0.0.100"
+teacher: bootstrap: "secrets": app_version: "0.0.101"

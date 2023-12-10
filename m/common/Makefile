@@ -20,6 +20,7 @@ post-bazel:
 	if test -f $(build); then install -m 0755 -o ubuntu -g ubuntu $(build) $(release); fi
 
 watch:
+	b build
 	b watch
 
 bump:

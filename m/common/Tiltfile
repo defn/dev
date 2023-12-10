@@ -2,7 +2,6 @@
 
 load("ext://restart_process", "custom_build_with_restart")
 
-
 def main(context, registry, app_build, app_release, app_entrypoint, app_service):
     # local kubernetes
     allow_k8s_contexts(context)
