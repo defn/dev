@@ -13,7 +13,7 @@ template: "ingress.yaml": {
 	spec: {
 		ingressClassName: "traefik"
 		rules: [{
-			host: "www.district.amanibhavam.defn.run"
+			host: value.host
 			http: paths: [{
 				backend: service: {
 					name: "nginx"
@@ -23,7 +23,7 @@ template: "ingress.yaml": {
 				pathType: "Prefix"
 			}]
 		}, {
-			host: "www.district.amanibhavam.defn.run"
+			host: value.host
 			http: paths: [{
 				backend: service: {
 					name: "api"

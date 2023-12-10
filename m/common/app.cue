@@ -16,7 +16,7 @@ app: {
 			namespace: app_ns
 		}
 		source: {
-			repoURL:        "cache.defn.run:5000"
+			repoURL:        value.registry,
 			"chart":        "library/helm/\(chart.name)"
 			targetRevision: chart.version
 		}
