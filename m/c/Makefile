@@ -7,14 +7,24 @@ digest ?=
 env ?= $(shell uname -n | cut -d- -f3)
 
 delivery:
+	while true; do \
+		git add coder-*; \
+		$(MAKE) build-all release chart; \
+		if ! git diff coder-* | grep app_version:; then break; fi; \
+		done
+
+# M k/r/crds.cue
+# M k/crd/ENV.yaml
+	$(MAKE) crd
+
+deliver_inner:
 # M k/APP/kustomization.yaml
 # M k/r/APP/main.yaml
 # M k/y/APP/main.yaml
 # images are original
-	$(MAKE) build-all
 
 # M k/y/cluster.cue updated
-	$(MAKE) cluster_cue
+	$(MAKE) build-all
 
 # M k/r/APP/main.yaml
 # images are rewritten to cache
@@ -25,19 +35,11 @@ delivery:
 # M r/digest/digest_gen.cue
 # M k/r/APP/main.yaml
 # images are now found, if missing
-	if env GIT_PAGER=cat git grep not-found ../k/r; then $(MAKE) digest; fi
+	if env GIT_PAGER=cat git grep not-found ../k/r; then $(MAKE) digest release; fi
 
 # h/APP*
 # ENV/APP-version.cue
 	$(MAKE) chart
-
-# M k/ENV/kustomization.yaml
-	$(MAKE) build-all cluster_cue release
-	$(MAKE) chart
-
-# M k/r/crds.cue
-# M k/crd/ENV.yaml
-	$(MAKE) crd
 
 build:
 	cd $(shell uname -n) && $(MAKE) build
@@ -54,15 +56,16 @@ helm_add:
 	(cd .. && git grep repo: kustomize.cue) | cut -d'"' -f2 | sort -u | while read -r repo; do helm repo add $$(echo $$repo | cut -d/ -f3- | perl -pe 's{\s+$$}{}; s{\W+}{-}g') $$repo; done
 	helm repo update
 
+digest:
+	cd ./r && $(MAKE) digest
+
 build-all:
 # can't run in parallel without issues
-# maybe poblems with tracking directories in k/APP/*.yaml
+# maybe problems with tracking directories in k/APP/*.yaml
 	runmany 1 'cd $$1 && make' coder-*/
 	rm -f ../k/r/y/main.yaml
 	rm -f ../k/r/Makefile/main.yaml
-
-digest:
-	cd ./r && $(MAKE) digest
+	$(MAKE) cluster_cue
 
 cluster_cue:
 # make one big cue config
@@ -76,7 +79,7 @@ cluster_cue:
 release:
 # generate k/r
 # rm -rf ../k/r
-	cd ./r/digest && $(MAKE) release
+	(cd r/digest && cue export --out json -e cached_yaml) | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | ./release.py
 # rm -rf ../k/r/y
 # git add ../k/r
 

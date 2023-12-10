@@ -94,7 +94,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/ghcr.io/stakater/reloader@sha256:a866d5a5f5bbf92ccc450ef680557a3e9f05cc40a5e86800c3d350dc25f1aaa9
+        - image: cache.defn.run:5000/ghcr.io/stakater/reloader@sha256:131ccd982ca25c8e6cfe5e99dcac72c13b29e88d9a5e39761942770328e99c97
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 5
