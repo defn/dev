@@ -14,13 +14,13 @@ delivery:
 	$(MAKE) build-all
 
 # M k/y/cluster.cue updated
-	$(MAKE) release_k_y
+	$(MAKE) cluster_cue
 
 # M k/r/APP/main.yaml
 # images are rewritten to cache
 # images may have not-found
 # after git add, diff is much smaller
-	$(MAKE) release_k_r
+	$(MAKE) release
 
 # M r/digest/digest_gen.cue
 # M k/r/APP/main.yaml
@@ -32,7 +32,7 @@ delivery:
 	$(MAKE) chart
 
 # M k/ENV/kustomization.yaml
-	$(MAKE) build-all release_k_y release_k_r
+	$(MAKE) build-all cluster_cue release
 	$(MAKE) chart
 
 # M k/r/crds.cue
@@ -64,7 +64,7 @@ build-all:
 digest:
 	cd ./r && $(MAKE) digest
 
-release_k_y:
+cluster_cue:
 # make one big cue config
 	rm -f ../k/y/cluster.cue
 	(echo package y; for r in ../k/y/*/main.yaml; do echo $$r 1>&2; (cue import $$r -p r --with-context -l '"res"' -l 'strings.ToLower(data.kind)' -l 'path.Dir(path.Rel("$(shell cd ../k/y && pwd)",filename))' -l 'strings.ToLower(*data.metadata.namespace | "cluster")' -l data.metadata.name --outfile - \
@@ -73,7 +73,7 @@ release_k_y:
 	perl -pe 's{^\s*\w+:\s+null\s*}{}; s{data: null,}{}' -i ../k/y/cluster.cue
 # git add ../k/y
 
-release_k_r:
+release:
 # generate k/r
 # rm -rf ../k/r
 	cd ./r/digest && $(MAKE) release
