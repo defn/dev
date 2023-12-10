@@ -14,7 +14,7 @@ function main {
 	if test -e "${app}/kustomization.yaml"; then
 		rm -rf "${app}/chart"
 		kustomize build --enable-helm "${app}" >"${out}"
-		rm -rf "${app}/charts"
+		rm -rf "${app}/chart"
 	else
 		touch "${out}"
 	fi
