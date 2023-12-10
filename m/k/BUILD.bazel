@@ -16,13 +16,15 @@ exclude = [
 [
     genrule(
         name = "release_{}".format(k),
-        srcs = [k],
+        srcs = [
+            k,
+        ],
         outs = ["r/{}/main.yaml".format(k)],
         cmd = "$(location gen_release_script) $(location {}) $@".format(k),
         tools = ["gen_release_script"],
     )
     for k in glob(
-        ["coder-*"],
+        ["*"],
         exclude = exclude,
         exclude_directories = 0,
     )
@@ -33,7 +35,7 @@ copy_files(
     gen = {
         "r/{}/main.yaml".format(k): "r/{}/main.yaml".format(k)
         for k in glob(
-            ["coder-*"],
+            ["*"],
             exclude = exclude,
             exclude_directories = 0,
         )
