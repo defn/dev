@@ -10,7 +10,7 @@ def process_line(line):
     filename, encoded_data = line.split(' ', 1)
 
     # Prefix the filename
-    filename = os.path.join('../../../k/r', filename)
+    filename = os.path.join('../k/r', filename)
 
     # Create a directory with the filename if it doesn't exist
     os.makedirs(os.path.dirname(filename), exist_ok=True)

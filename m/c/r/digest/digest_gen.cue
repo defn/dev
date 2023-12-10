@@ -2,21 +2,21 @@ package r
 
 cache: "bitnami/kubectl:1.26.4": "bitnami/kubectl@sha256:a0a972324d937b2c2f7207af29d1abd6ce3f7fd5ea73357036a67ab24f34cc92"
 
-cache: "bitnami/kubectl:latest": "bitnami/kubectl@sha256:3252e5a2185582b84bb5f5fcae6b4907dcd6011144947d6d452761f3ccc249dd"
+cache: "bitnami/kubectl:latest": "bitnami/kubectl@sha256:6485a923f6f4ff3d42d871ce5bd45ee8f25a303c44972a4ad31ddd895082fc22"
 
 cache: "busybox:1.35": "busybox@sha256:713223f59872d6ee1ae186e2a5970cd2efbc1bacfe7553b316ecb6dd363dc941"
 
 cache: "containous/whoami:latest": "containous/whoami@sha256:7d6a3c8f91470a23ef380320609ee6e69ac68d20bc804f3a1c6065fb56cfa34e"
 
-cache: "curlimages/curl": "curlimages/curl@sha256:4a3396ae573c44932d06ba33f8696db4429c419da87cbdc82965ee96a37dd0af"
+cache: "curlimages/curl": "curlimages/curl@sha256:4bfa3e2c0164fb103fb9bfd4dc956facce32b6c5d47cc09fcec883ce9535d5ac"
 
 cache: "docker.io/amazon/amazon-eks-pod-identity-webhook:v0.4.0": "docker.io/amazon/amazon-eks-pod-identity-webhook@sha256:69ba0ed032cfa4d72621037c2836d464f401fde1fa993adf34e79335ec4c56ac"
 
 cache: "docker.io/bitnami/external-dns:0.14.0-debian-11-r1": "docker.io/bitnami/external-dns@sha256:27041c8a6b244a8f5c4914ac4a59219b189aeca12778d14d4672aacad5970fda"
 
-cache: "docker.io/envoyproxy/envoy:v1.25-latest": "docker.io/envoyproxy/envoy@sha256:a63469b5d105cd94be9b7d7524a46786fca5e124599aa488078375ddb65da030"
+cache: "docker.io/bitnami/external-dns:0.14.0-debian-11-r2": "docker.io/bitnami/external-dns@sha256:b5ef3e00a40dbf1e8d0fae9ac73c6d3bf612af53b7a693c36b62c9ce510bc08d"
 
-cache: "docker.io/traefik:v2.10.5": "docker.io/traefik@sha256:948978f7ec62f137a79f8af7044a1785bd7868706ef2c8cba9c88db688d08661"
+cache: "docker.io/envoyproxy/envoy:v1.25-latest": "docker.io/envoyproxy/envoy@sha256:a63469b5d105cd94be9b7d7524a46786fca5e124599aa488078375ddb65da030"
 
 cache: "docker.io/traefik:v2.10.6": "docker.io/traefik@sha256:1957e3314f435c85b3a19f7babd53c630996aa1af65d1f479d75539251b1e112"
 
@@ -54,7 +54,7 @@ cache: "ghcr.io/kyverno/kyvernopre:v1.10.6": "ghcr.io/kyverno/kyvernopre@sha256:
 
 cache: "ghcr.io/kyverno/reports-controller:v1.10.6": "ghcr.io/kyverno/reports-controller@sha256:9d4f04481b4906b14d46f366a94d7050629961c2ffcb48db0620a56cf283a2a7"
 
-cache: "ghcr.io/stakater/reloader:v1.0.52": "ghcr.io/stakater/reloader@sha256:a866d5a5f5bbf92ccc450ef680557a3e9f05cc40a5e86800c3d350dc25f1aaa9"
+cache: "ghcr.io/stakater/reloader:v1.0.52": "ghcr.io/stakater/reloader@sha256:131ccd982ca25c8e6cfe5e99dcac72c13b29e88d9a5e39761942770328e99c97"
 
 cache: "goharbor/harbor-core:v2.9.1": "goharbor/harbor-core@sha256:ee70dcf6e7c5a3c1d65a6898eb7d3816cbe760f7971a79e1fed2d529abb12ccd"
 
