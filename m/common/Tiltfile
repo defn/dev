@@ -15,13 +15,13 @@ def main(app_build, app_release, app_entrypoint, context, registry, parent, env,
         cmd="make all"
     )
 
-    # app initial deploy
+    # deploy this app
     k8s_yaml(local("cat gen/deploy.yaml"))
 
-    # bazel
+    # build this app
     local_resource("build", serve_cmd="make watch")
 
-    # bazel-to-app updates when bazel builds
+    # sync this app to workarea
     local_resource(
         name="build-to-workarea",
         cmd="make post-bazel build={build} release={release}".format(
@@ -37,7 +37,7 @@ def main(app_build, app_release, app_entrypoint, context, registry, parent, env,
         link("{}/api".format(host), "/api")
     ])
 
-    # updates app when bazel-to-app builds
+    # reload app service when workarea synced
     custom_build_with_restart(
         ref=app_service,
         command="make image",
@@ -48,4 +48,3 @@ def main(app_build, app_release, app_entrypoint, context, registry, parent, env,
             sync(app_release, app_entrypoint),
         ],
     )
-
