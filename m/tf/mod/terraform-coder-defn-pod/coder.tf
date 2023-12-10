@@ -21,8 +21,8 @@ resource "coder_agent" "main" {
   }
 
   env = {
-    GIT_AUTHOR_NAME     = data.coder_workspace.me.owner
-    GIT_COMMITTER_NAME  = data.coder_workspace.me.owner
+    GIT_AUTHOR_NAME     = lower(data.coder_workspace.me.owner)
+    GIT_COMMITTER_NAME  = lower(data.coder_workspace.me.owner)
     GIT_AUTHOR_EMAIL    = data.coder_workspace.me.owner_email
     GIT_COMMITTER_EMAIL = data.coder_workspace.me.owner_email
 
@@ -30,9 +30,13 @@ resource "coder_agent" "main" {
     LC_ALL        = "C.UTF-8"
 
     DFD_OWNER  = lower(data.coder_workspace.me.owner)
-    DFD_PREFIX = local.prefix
     DFD_NAME   = lower(data.coder_workspace.me.name)
+    DFD_PREFIX = local.prefix
     DFD_APP    = local.app
+
+    DFD_REGISTRY = "cache.defn.run:5000"
+    DFD_PARENT   = "district.${lower(data.coder_workspace.me.owner)}.defn.run"
+    DFD_CONTEXT  = "${local.prefix}-${lower(data.coder_workspace.me.owner)}-${lower(data.coder_workspace.me.name)}-cluster"
   }
 }
 
