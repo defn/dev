@@ -1,8 +1,8 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 
 go_library(
-    name = "dev_lib",
-    srcs = ["dev.go"],
+    name = "src--dev_lib",
+    srcs = ["src--dev.go"],
     importpath = "github.com/defn/dev/m/src/dev",
     visibility = ["//visibility:private"],
     deps = [
@@ -15,7 +15,7 @@ go_library(
 )
 
 go_binary(
-    name = "dev",
-    embed = [":dev_lib"],
+    name = "src--dev",
+    embed = [":src--dev_lib"],
     visibility = ["//visibility:public"],
 )

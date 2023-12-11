@@ -5,11 +5,11 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
-  name: nginx
+  name: app
 spec:
   ingressClassName: traefik
   rules:
-    - host: tolan.district.amanibhavam.defn.run
+    - host: src--dev.district.amanibhavam.defn.run
       http:
         paths:
           - backend:
@@ -19,7 +19,7 @@ spec:
                   number: 80
             path: /
             pathType: Prefix
-    - host: tolan.district.amanibhavam.defn.run
+    - host: src--dev.district.amanibhavam.defn.run
       http:
         paths:
           - backend:

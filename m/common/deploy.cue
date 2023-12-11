@@ -5,7 +5,7 @@ deploy: {
 	kind:       "Deployment"
 	metadata: {
 		name:      "app"
-		namespace: "dev"
+		namespace: chart.name
 		labels: app: "app"
 	}
 	spec: {

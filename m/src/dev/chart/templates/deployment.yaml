@@ -2,19 +2,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  name: www
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: nginx
+      app: www
   template:
     metadata:
       labels:
-        app: nginx
+        app: www
     spec:
       containers:
-        - name: nginx
+        - name: www
           image: nginx:latest
           ports:
             - containerPort: 80

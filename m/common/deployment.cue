@@ -4,15 +4,15 @@ template: "deployment.yaml": {
 	apiVersion: "apps/v1"
 	kind:       "Deployment"
 	metadata: {
-		name: "nginx"
+		name: "www"
 	}
 	spec: {
 		replicas: 3
-		selector: matchLabels: app: "nginx"
+		selector: matchLabels: app: "www"
 		template: {
-			metadata: labels: app: "nginx"
+			metadata: labels: app: "www"
 			spec: containers: [{
-				name:  "nginx"
+				name:  "www"
 				image: "nginx:latest"
 				ports: [{
 					containerPort: 80

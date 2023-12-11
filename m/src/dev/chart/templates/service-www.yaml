@@ -5,7 +5,7 @@ metadata:
   name: www
 spec:
   selector:
-    app: nginx
+    app: www
   ports:
     - protocol: TCP
       port: 80
