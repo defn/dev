@@ -7,7 +7,7 @@ template: "service-www.yaml": {
 		name: "www"
 	}
 	spec: {
-		selector: app: "nginx"
+		selector: app: "www"
 		ports: [{
 			protocol:   "TCP"
 			port:       80

@@ -5,6 +5,6 @@ load("../../common/Tiltfile", "main")
 main(
     app_entrypoint="/cli",
     app_release="gen/cli.bin",
-    app_build="../../bazel-bin/src/dev/dev_/dev",
-    host="dev"
+    app_build="../../bazel-bin/src/dev/src--dev_/src--dev",
+    host="src--dev"
 )

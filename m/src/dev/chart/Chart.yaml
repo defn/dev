@@ -1,6 +1,6 @@
 # managed by Cue
 apiVersion: v2
 type: application
-name: tolan
-appVersion: 0.0.34
-version: 0.0.34
+name: src--dev
+appVersion: 0.0.43
+version: 0.0.43

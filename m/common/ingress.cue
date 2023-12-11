@@ -8,7 +8,7 @@ template: "ingress.yaml": {
 			"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
 			"traefik.ingress.kubernetes.io/router.tls":         "true"
 		}
-		name: "nginx"
+		name: "app"
 	}
 	spec: {
 		ingressClassName: "traefik"
