@@ -3,10 +3,8 @@
 load("{{cookiecutter.common}}/Tiltfile", "main")
 
 main(
-    context="coder-amanibhavam-district0-cluster",
-    registry="cache.defn.run:5000",
-    app_service="api",
     app_entrypoint="/cli",
-    app_build="../../bazel-bin/{{cookiecutter.path}}/{{cookiecutter.project_name}}_/{{cookiecutter.project_name}}",
     app_release="gen/cli.bin",
+    app_build="../../bazel-bin/{{cookiecutter.path}}/{{cookiecutter.project_name}}_/{{cookiecutter.project_name}}",
+    host="{{cookiecutter.project_name}}"
 )
