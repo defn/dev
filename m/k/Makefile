@@ -53,6 +53,9 @@ build:
 		$(MAKE) build-inner; \
 	fi
 
+build-if-missing:
+	@if ! test -f ../h/$(chart)-$(version).tgz; then $(MAKE) build-inner; fi
+
 build-always:
 	$(MAKE) build-inner
 
