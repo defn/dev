@@ -2,7 +2,7 @@
 
 load("ext://restart_process", "custom_build_with_restart")
 
-def main(app_build, app_release, app_entrypoint, context, registry, parent, env, host, app_service="app"):
+def main(app_build, app_release, app_entrypoint, host, context=os.getenv("DFD_CONTEXT"), registry=os.getenv("DFD_REGISTRY"), parent=os.getenv("DFD_PARENT"), env=os.getenv("DFD_ENV"), app_service="app"):
     # local kubernetes
     allow_k8s_contexts(context)
 
@@ -33,8 +33,8 @@ def main(app_build, app_release, app_entrypoint, context, registry, parent, env,
     # app service
     k8s_resource(app_service, links = [
         link("https://argocd-{}.{}".format(env, parent), "argocd"),
-        link(host, "app"),
-        link("{}/api".format(host), "/api")
+        link("{}.{}".format(host, parent), "app"),
+        link("{}.{}/api".format(host, parent), "/api")
     ])
 
     # reload app service when workarea synced

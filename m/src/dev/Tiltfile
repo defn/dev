@@ -2,17 +2,9 @@
 
 load("../../common/Tiltfile", "main")
 
-os.putenv("DFD_REGISTRY", "cache.defn.run:5000")
-os.putenv("DFD_CONTEXT", "{}-{}-{}-cluster".format(os.getenv("DFD_PREFIX"), os.getenv("DFD_OWNER"),os.getenv("DFD_NAME")))
-os.putenv("DFD_PARENT", "district.amanibhavam.defn.run")
-
 main(
     app_entrypoint="/cli",
-    app_build="../../bazel-bin/src/dev/dev_/dev",
     app_release="gen/cli.bin",
-    context=os.getenv("DFD_CONTEXT"),
-    registry=os.getenv("DFD_REGISTRY"),
-    parent=os.getenv("DFD_PARENT"),
-    env=os.getenv("DFD_NAME"),
-    host="dev.{}".format(os.getenv("DFD_PARENT"))
+    app_build="../../bazel-bin/src/dev/dev_/dev",
+    host="dev"
 )
