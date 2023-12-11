@@ -11,8 +11,8 @@ def main(app_build, app_release, app_entrypoint, context, registry, parent, env,
 
     # deploy argocd app
     local_resource(
-        name="argocd",
-        cmd="make all"
+        name="deploy ",
+        cmd="make deploy"
     )
 
     # deploy this app

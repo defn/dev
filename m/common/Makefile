@@ -9,6 +9,9 @@ build:
 push:
 	helm push --insecure-skip-tls-verify gen/*.tgz oci://$(DFD_REGISTRY)/library/helm
 
+argocd:
+	kubectl apply -f gen/argocd.yaml
+
 image:
 	docker build -t $$EXPECTED_REF . && docker push $$EXPECTED_REF
 
@@ -25,15 +28,14 @@ bump:
 	(echo package app; echo "app: chart: version: \"0.0.$$(cat version)\"") > version.cue
 	cue fmt .
 
-deploy:
-	kubectl apply -f gen/argocd.yaml
-
 repo:
 	argocd --core repo add $(DFD_REGISTRY) --type helm --name cache --enable-oci --insecure-skip-server-verification
 
-init:
-	mkdir -p chart/templates gen
-	$(MAKE) bump build
+deploy:
+	$(MAKE) bump build push argocd
 
-all:
-	$(MAKE) bump build push deploy
+up:
+	cd ../../k && $(MAKE) all
+	cd ../../ && $(MAKE) vc dev
+	mkdir -p chart/templates gen
+	tilt up
