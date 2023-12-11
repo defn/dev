@@ -38,4 +38,4 @@ up:
 	cd ../../k && $(MAKE) all
 	cd ../../ && $(MAKE) vc dev
 	mkdir -p chart/templates gen
-	tilt up
+	tilt up --port=$$(comm -23 <(seq 10350 10399 | sort -n) <(netstat -antu | awk '{print $$4}' | grep -oP '\d+$$' | sort -n) 2>/dev/null | head -n 1)
