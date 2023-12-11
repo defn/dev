@@ -5,7 +5,7 @@ import (
 )
 
 app: common
-app: chart: name: "dev"
+app: chart: name: "tolan"
 
 app: value: {
 	registry: "cache.defn.run:5000"

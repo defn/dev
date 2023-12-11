@@ -3,16 +3,16 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   namespace: argocd
-  name: dev
+  name: tolan
 spec:
   project: default
   destination:
     name: in-cluster
-    namespace: dev
+    namespace: tolan
   source:
     repoURL: cache.defn.run:5000
-    chart: library/helm/dev
-    targetRevision: 0.0.31
+    chart: library/helm/tolan
+    targetRevision: 0.0.34
   syncPolicy:
     automated:
       prune: true

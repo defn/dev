@@ -8,10 +8,11 @@ build:
 	cp -f bazel-bin/cmd/cli/cli_/cli /tmp/cli
 
 all:
-	$(MAKE) ci build update upgrade regen build update ci
+	$(MAKE) update ci
+	$(MAKE) build update upgrade regen
+	$(MAKE) build update ci
 	cd c && $(MAKE) all
 	b pass build //...
-
 
 image:
 	cp -f bazel-bin/cmd/cli/cli_/cli cli.bin
@@ -69,11 +70,11 @@ upgrade:
 	go mod tidy
 
 update:
+	cd tf && source ./.envrc && cd stacks && runmany 'cd $$1 && tf upgrade && tf locks && tf plan' */
 	$(MAKE) bazel-ignore
 	$(MAKE) cdktf
 	$(MAKE) build
 	cd tf && cli infra
-	cd tf && source ./.envrc && cd stacks && runmany 'cd $$1 && tf upgrade && tf locks && tf plan' */
 
 regen:
 	@mark defn.dev protos

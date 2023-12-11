@@ -146,5 +146,7 @@ pkg/zellij/result
 cutout
 cutout/app/{{cookiecutter.path}}
 cutout/command/{{cookiecutter.path}}
+cutout/vcluster/{{cookiecutter.path}}
 cutout/app
 cutout/command
+cutout/vcluster

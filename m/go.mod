@@ -3,21 +3,22 @@ module github.com/defn/dev/m
 go 1.20
 
 require (
-	cuelang.org/go v0.6.0
+	cuelang.org/go v0.7.0
 	github.com/aws/constructs-go/constructs/v10 v10.3.0
-	github.com/aws/jsii-runtime-go v1.92.0
+	github.com/aws/jsii-runtime-go v1.93.0
 	github.com/cdktf/cdktf-provider-aws-go/aws/v17 v17.0.11
 	github.com/charmbracelet/bubbles v0.16.1
 	github.com/charmbracelet/bubbletea v0.24.2
 	github.com/charmbracelet/lipgloss v0.9.1
 	github.com/gin-gonic/gin v1.9.1
-	github.com/hashicorp/terraform-cdk-go/cdktf v0.19.1
+	github.com/hashicorp/terraform-cdk-go/cdktf v0.19.2
 	github.com/spf13/cobra v1.8.0
-	github.com/spf13/viper v1.17.0
+	github.com/spf13/viper v1.18.1
 	google.golang.org/protobuf v1.31.0
 )
 
 require (
+	cuelabs.dev/go/oci/ociregistry v0.0.0-20231205091233-3bb0ee105e4a // indirect
 	github.com/Masterminds/semver/v3 v3.2.1 // indirect
 	github.com/atotto/clipboard v0.1.4 // indirect
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
@@ -26,7 +27,7 @@ require (
 	github.com/chenzhuoyu/iasm v0.9.1 // indirect
 	github.com/cockroachdb/apd/v3 v3.2.1 // indirect
 	github.com/containerd/console v1.0.4-0.20230313162750-1ae8d489ac81 // indirect
-	github.com/emicklei/proto v1.12.2 // indirect
+	github.com/emicklei/proto v1.13.0 // indirect
 	github.com/fatih/color v1.16.0 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
@@ -56,10 +57,12 @@ require (
 	github.com/muesli/cancelreader v0.2.2 // indirect
 	github.com/muesli/reflow v0.3.0 // indirect
 	github.com/muesli/termenv v0.15.2 // indirect
+	github.com/opencontainers/go-digest v1.0.0 // indirect
+	github.com/opencontainers/image-spec v1.1.0-rc5 // indirect
 	github.com/pelletier/go-toml/v2 v2.1.0 // indirect
 	github.com/protocolbuffers/txtpbfmt v0.0.0-20231025115547-084445ff1adf // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
-	github.com/sagikazarmark/locafero v0.3.0 // indirect
+	github.com/sagikazarmark/locafero v0.4.0 // indirect
 	github.com/sagikazarmark/slog-shim v0.1.0 // indirect
 	github.com/sahilm/fuzzy v0.1.0 // indirect
 	github.com/sourcegraph/conc v0.3.0 // indirect
@@ -68,12 +71,12 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
-	github.com/ugorji/go/codec v1.2.11 // indirect
+	github.com/ugorji/go/codec v1.2.12 // indirect
 	github.com/yuin/goldmark v1.6.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/arch v0.6.0 // indirect
 	golang.org/x/crypto v0.16.0 // indirect
-	golang.org/x/exp v0.0.0-20231127185646-65229373498e // indirect
+	golang.org/x/exp v0.0.0-20231206192017-f3f8817b8deb // indirect
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
 	golang.org/x/mod v0.14.0 // indirect
 	golang.org/x/net v0.19.0 // indirect
