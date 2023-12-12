@@ -12,8 +12,6 @@ cache: "curlimages/curl": "curlimages/curl@sha256:4bfa3e2c0164fb103fb9bfd4dc956f
 
 cache: "docker.io/amazon/amazon-eks-pod-identity-webhook:v0.4.0": "docker.io/amazon/amazon-eks-pod-identity-webhook@sha256:69ba0ed032cfa4d72621037c2836d464f401fde1fa993adf34e79335ec4c56ac"
 
-cache: "docker.io/bitnami/external-dns:0.14.0-debian-11-r1": "docker.io/bitnami/external-dns@sha256:27041c8a6b244a8f5c4914ac4a59219b189aeca12778d14d4672aacad5970fda"
-
 cache: "docker.io/bitnami/external-dns:0.14.0-debian-11-r2": "docker.io/bitnami/external-dns@sha256:b5ef3e00a40dbf1e8d0fae9ac73c6d3bf612af53b7a693c36b62c9ce510bc08d"
 
 cache: "docker.io/envoyproxy/envoy:v1.25-latest": "docker.io/envoyproxy/envoy@sha256:a63469b5d105cd94be9b7d7524a46786fca5e124599aa488078375ddb65da030"
@@ -106,13 +104,21 @@ cache: "quay.io/cilium/tetragon:v1.0.0": "quay.io/cilium/tetragon@sha256:a680dca
 
 cache: "quay.io/jetstack/cert-manager-cainjector:v1.13.2": "quay.io/jetstack/cert-manager-cainjector@sha256:858fee0c4af069d0e87c08fd0943f0091434e05f945d222875fc1f3d36c41616"
 
+cache: "quay.io/jetstack/cert-manager-cainjector:v1.13.3": "quay.io/jetstack/cert-manager-cainjector@sha256:ac5154525f99bd0872671613741aac1b7dcb9c0df988571a7618155ddb6fabd2"
+
 cache: "quay.io/jetstack/cert-manager-controller:v1.13.2": "quay.io/jetstack/cert-manager-controller@sha256:9c67cf8c92d8693f9b726bec79c2a84d2cebeb217af6947355601dec4acfa966"
 
+cache: "quay.io/jetstack/cert-manager-controller:v1.13.3": "quay.io/jetstack/cert-manager-controller@sha256:2121d4250f5734ee097df243507d06536fc264140dba3425045a825ef597c79d"
+
 cache: "quay.io/jetstack/cert-manager-ctl:v1.13.2": "quay.io/jetstack/cert-manager-ctl@sha256:4d9fce2c050eaadabedac997d9bd4a003341e9172c3f48fae299d94fa5f03435"
+
+cache: "quay.io/jetstack/cert-manager-ctl:v1.13.3": "quay.io/jetstack/cert-manager-ctl@sha256:d0d12f721e01b19973c989646c96905bfca7a0ea5f7888d5e9b4adabb4fbc56c"
 
 cache: "quay.io/jetstack/cert-manager-package-debian:20210119.0": "quay.io/jetstack/cert-manager-package-debian@sha256:aa3466521072e0f54666092acde1e394314d5f4247034ed1379a90919fa904a4"
 
 cache: "quay.io/jetstack/cert-manager-webhook:v1.13.2": "quay.io/jetstack/cert-manager-webhook@sha256:0a9470447ebf1d3ff1c172e19268be12dc26125ff83320d456f6826c677c0ed2"
+
+cache: "quay.io/jetstack/cert-manager-webhook:v1.13.3": "quay.io/jetstack/cert-manager-webhook@sha256:f45b21f770bf4676c732f19e2ef17c34f46ac75873a5e0aa25703d808b2e5566"
 
 cache: "quay.io/jetstack/trust-manager:v0.7.0": "quay.io/jetstack/trust-manager@sha256:bcc75013a52f6d784a376ac4693cd5b051e847f0ad2015f5063fca5477021323"
 

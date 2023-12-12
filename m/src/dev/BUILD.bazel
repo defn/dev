@@ -15,7 +15,7 @@ go_library(
 )
 
 go_binary(
-    name = "src--dev",
+    name = "dev",
     embed = [":src--dev_lib"],
     visibility = ["//visibility:public"],
 )

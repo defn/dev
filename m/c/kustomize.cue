@@ -827,7 +827,7 @@ kustomize: "knative": #Kustomize & {
 	}
 }
 
-cert_manager_version: "1.13.2"
+cert_manager_version: "1.13.3"
 
 // https://artifacthub.io/packages/helm/cert-manager/cert-manager
 kustomize: "cert-manager": #KustomizeHelm & {

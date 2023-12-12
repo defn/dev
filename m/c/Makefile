@@ -9,7 +9,7 @@ env ?= $(shell uname -n | cut -d- -f3)
 delivery:
 	while true; do \
 		git add coder-*; \
-		$(MAKE) build-all release chart; \
+		$(MAKE) deliver_inner; \
 		if ! git diff coder-* | grep app_version:; then break; fi; \
 		done
 
