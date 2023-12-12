@@ -2,7 +2,7 @@
 
 load("ext://restart_process", "custom_build_with_restart")
 
-def main(app_build, app_release, app_entrypoint, host, context=os.getenv("DFD_CONTEXT"), registry=os.getenv("DFD_REGISTRY"), parent=os.getenv("DFD_PARENT"), env=os.getenv("DFD_ENV"), app_service="app"):
+def main(app_build, app_release, app_entrypoint, host, context=os.getenv("DFD_CONTEXT"), registry=os.getenv("DFD_REGISTRY"), parent=os.getenv("DFD_PARENT"), env=os.getenv("DFD_NAME"), app_service="app"):
     # local kubernetes
     allow_k8s_contexts(context)
 
