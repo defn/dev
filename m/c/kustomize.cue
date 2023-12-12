@@ -326,7 +326,6 @@ kustomize: "external-dns": #KustomizeHelm & {
 		release: "external-dns"
 		name:    "external-dns"
 		version: "6.28.6"
-		#version: "6.28.5"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "debug"
@@ -1447,7 +1446,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "2.4.0"
+		version:   "2.5.0"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {
@@ -1832,8 +1831,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.39.8"
-		#version:   "0.39.6"
+		version:   "0.39.9"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [
