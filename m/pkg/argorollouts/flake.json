@@ -1,6 +1,6 @@
 {
   "slug": "pkg-argorollouts",
   "ghrepo": "argoproj/argo-rollouts",
-  "vendor": "1.6.3",
-  "revision": "1"
+  "vendor": "1.6.4",
+  "revision": "0"
 }
