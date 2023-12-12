@@ -24,8 +24,9 @@
         gron
         fzf
         direnv
+        ffmpeg
+        ttyd
         bashInteractive
-        skopeo
       ];
 
       installPhase = ''
