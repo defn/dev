@@ -47,7 +47,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-cert-manager
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.101
+    targetRevision: 0.0.102
   syncPolicy:
     automated:
       prune: true
@@ -89,7 +89,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-coder
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.101
+    targetRevision: 0.0.102
   syncPolicy:
     automated:
       prune: true
@@ -236,7 +236,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-kourier
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.101
+    targetRevision: 0.0.102
   syncPolicy:
     automated:
       prune: true

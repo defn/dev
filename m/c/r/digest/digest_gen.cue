@@ -18,7 +18,7 @@ cache: "docker.io/envoyproxy/envoy:v1.25-latest": "docker.io/envoyproxy/envoy@sh
 
 cache: "docker.io/traefik:v2.10.6": "docker.io/traefik@sha256:1957e3314f435c85b3a19f7babd53c630996aa1af65d1f479d75539251b1e112"
 
-cache: "gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:9cd4d69a708a8cf8e597efe3f511494d71cf8eab1b2fd85545097069ad47d3f6": "gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:9cd4d69a708a8cf8e597efe3f511494d71cf8eab1b2fd85545097069ad47d3f6"
+cache: "gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:9cd4d69a708a8cf8e597efe3f511494d71cf8eab1b2fd85545097069ad47d3f6": "gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:cf15a0b3610d0fd92c174513c215ff9a83db54681c31025ef025d0b5d866812d"
 
 cache: "gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:e33e77a990863a91df175c0d3cfa70f6314ad4c45d22ebbd198486187b8f2ab4": "gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:fa098cdc8b4a07db03a1780a8873fd5d1dd480a22b28b061760825604c293832"
 
@@ -33,6 +33,8 @@ cache: "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:f34273747
 cache: "ghcr.io/buildkite/agent-stack-k8s/controller:0.7.0@sha256:6d747da4f3898b092010fcdc382fc59dc3d90c5478d41e0a01eb9b6f53a9d91f": "ghcr.io/buildkite/agent-stack-k8s/controller@sha256:6d747da4f3898b092010fcdc382fc59dc3d90c5478d41e0a01eb9b6f53a9d91f"
 
 cache: "ghcr.io/coder/coder:v2.4.0": "ghcr.io/coder/coder@sha256:0218b84382d81b4a837703873633afb9b3769513723f47078bc8b4370d2e43ff"
+
+cache: "ghcr.io/coder/coder:v2.5.0": "ghcr.io/coder/coder@sha256:216811eb38cec243055a1bba96a75ca5c201515746d351565874769e31e09ad6"
 
 cache: "ghcr.io/dexidp/dex:v2.37.0": "ghcr.io/dexidp/dex@sha256:f579d00721b0d842328c43a562f50343c54b0048ef2d58d6b54e750c21fc7938"
 
@@ -102,21 +104,13 @@ cache: "quay.io/cilium/tetragon-operator:v1.0.0": "quay.io/cilium/tetragon-opera
 
 cache: "quay.io/cilium/tetragon:v1.0.0": "quay.io/cilium/tetragon@sha256:a680dca9b408434cea1cca015e6a14456f820506d2fd208a0c0588a9737d7cb5"
 
-cache: "quay.io/jetstack/cert-manager-cainjector:v1.13.2": "quay.io/jetstack/cert-manager-cainjector@sha256:858fee0c4af069d0e87c08fd0943f0091434e05f945d222875fc1f3d36c41616"
-
 cache: "quay.io/jetstack/cert-manager-cainjector:v1.13.3": "quay.io/jetstack/cert-manager-cainjector@sha256:ac5154525f99bd0872671613741aac1b7dcb9c0df988571a7618155ddb6fabd2"
 
-cache: "quay.io/jetstack/cert-manager-controller:v1.13.2": "quay.io/jetstack/cert-manager-controller@sha256:9c67cf8c92d8693f9b726bec79c2a84d2cebeb217af6947355601dec4acfa966"
-
 cache: "quay.io/jetstack/cert-manager-controller:v1.13.3": "quay.io/jetstack/cert-manager-controller@sha256:2121d4250f5734ee097df243507d06536fc264140dba3425045a825ef597c79d"
-
-cache: "quay.io/jetstack/cert-manager-ctl:v1.13.2": "quay.io/jetstack/cert-manager-ctl@sha256:4d9fce2c050eaadabedac997d9bd4a003341e9172c3f48fae299d94fa5f03435"
 
 cache: "quay.io/jetstack/cert-manager-ctl:v1.13.3": "quay.io/jetstack/cert-manager-ctl@sha256:d0d12f721e01b19973c989646c96905bfca7a0ea5f7888d5e9b4adabb4fbc56c"
 
 cache: "quay.io/jetstack/cert-manager-package-debian:20210119.0": "quay.io/jetstack/cert-manager-package-debian@sha256:aa3466521072e0f54666092acde1e394314d5f4247034ed1379a90919fa904a4"
-
-cache: "quay.io/jetstack/cert-manager-webhook:v1.13.2": "quay.io/jetstack/cert-manager-webhook@sha256:0a9470447ebf1d3ff1c172e19268be12dc26125ff83320d456f6826c677c0ed2"
 
 cache: "quay.io/jetstack/cert-manager-webhook:v1.13.3": "quay.io/jetstack/cert-manager-webhook@sha256:f45b21f770bf4676c732f19e2ef17c34f46ac75873a5e0aa25703d808b2e5566"
 

@@ -160,7 +160,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:9cd4d69a708a8cf8e597efe3f511494d71cf8eab1b2fd85545097069ad47d3f6
+        - image: cache.defn.run:5000/gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:cf15a0b3610d0fd92c174513c215ff9a83db54681c31025ef025d0b5d866812d
           env:
             - name: CERTS_SECRET_NAMESPACE
               value: ""
