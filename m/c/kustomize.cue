@@ -2774,7 +2774,7 @@ kustomize: "reloader": #KustomizeHelm & {
 		release:   "reloader"
 		name:      "reloader"
 		namespace: "reloader"
-		version:   "1.0.52"
+		version:   "1.0.54"
 		repo:      "https://stakater.github.io/stakater-charts"
 		values: {
 		}
