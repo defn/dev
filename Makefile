@@ -1,5 +1,7 @@
 SHELL := /bin/bash
 
+NIX_VERSION := 2.19.2
+
 flakes ?= home oci nix secrets utils vpn acme godev nodedev localdev development cloud kubernetes remotedev shell
 
 build:
@@ -199,11 +201,11 @@ nix-Darwin:
 # look for the stable version
 # nix profile install nixpkgs/9f0d9ad45c4bd998c46ba1cbe0eb0dd28c6288a5#nix
 nix-Linux-bootstrap:
-	sh <(curl -L https://releases.nixos.org/nix/nix-2.18.1/install) --no-daemon
+	sh <(curl -L https://releases.nixos.org/nix/nix-$(NIX_VERSION)/install) --no-daemon
 	git checkout .bash_profile
 
 nix-Darwin-bootstrap:
-	sh <(curl -L https://releases.nixos.org/nix/nix-2.18.1/install) --darwin-use-unencrypted-nix-store-volume --daemon
+	sh <(curl -L https://releases.nixos.org/nix/nix-$(NIX_VERSION)/install) --darwin-use-unencrypted-nix-store-volume --daemon
 	git checkout .bash_profile
 
 build-site-default:
