@@ -48,17 +48,17 @@
       },
       "locked": {
         "dir": "m/pkg/cilium",
-        "lastModified": 1701825844,
-        "narHash": "sha256-egwOnNcFkoPx/kF7EJjYO92VYdctk66h6rtUVeQs/tQ=",
+        "lastModified": 1702497780,
+        "narHash": "sha256-ieW+w6Iw9RFvOx9nM7Z659YTEeebsgF3pYomNvGbjmY=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "31f6ecf0b40e59d9f9bd687a93fe349d4dc7104d",
+        "rev": "03ea116147a813e48d08ecfd3f0006846c7f3805",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cilium",
         "owner": "defn",
-        "ref": "pkg-cilium-0.15.17-1",
+        "ref": "pkg-cilium-0.15.18-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1444,17 +1444,17 @@
       },
       "locked": {
         "dir": "m/pkg/vcluster",
-        "lastModified": 1702083695,
-        "narHash": "sha256-aejEvSf9YNao1XRsD1uuTcez3T5N7VNxXV2hQbMbJWg=",
+        "lastModified": 1702498005,
+        "narHash": "sha256-RQZdOBFIooAd8UBUxApKpRfXSko9ExNh0Ysjr4e+ae4=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "cf83a03a3cd83856537213dac7cc636d9fbbe466",
+        "rev": "bb7b02ad71b6d665598e641f197401960b138dc3",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/vcluster",
         "owner": "defn",
-        "ref": "pkg-vcluster-0.18.0-1",
+        "ref": "pkg-vcluster-0.18.1-1",
         "repo": "dev",
         "type": "github"
       }
