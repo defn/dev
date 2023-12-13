@@ -474,17 +474,17 @@
       },
       "locked": {
         "dir": "m/pkg/vhs",
-        "lastModified": 1692116463,
-        "narHash": "sha256-WxTlB9wELQYPAklHDt9QmiWSnoEUIZH7ZMu1tbCf8kw=",
+        "lastModified": 1702426808,
+        "narHash": "sha256-ezjAG3QBLBSMlwBreUoh/ZBtClSzh+B9hhXnWBvd/Ac=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "f64be1b0ae49b526631cc86386b39f05ac3c15a1",
+        "rev": "4b7ce941a9afcea9aef3c923572e97013427ba8b",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/vhs",
         "owner": "defn",
-        "ref": "pkg-vhs-0.6.0-2",
+        "ref": "pkg-vhs-0.7.1-1",
         "repo": "dev",
         "type": "github"
       }
