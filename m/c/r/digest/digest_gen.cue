@@ -32,8 +32,6 @@ cache: "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:f34273747
 
 cache: "ghcr.io/buildkite/agent-stack-k8s/controller:0.7.0@sha256:6d747da4f3898b092010fcdc382fc59dc3d90c5478d41e0a01eb9b6f53a9d91f": "ghcr.io/buildkite/agent-stack-k8s/controller@sha256:6d747da4f3898b092010fcdc382fc59dc3d90c5478d41e0a01eb9b6f53a9d91f"
 
-cache: "ghcr.io/coder/coder:v2.4.0": "ghcr.io/coder/coder@sha256:0218b84382d81b4a837703873633afb9b3769513723f47078bc8b4370d2e43ff"
-
 cache: "ghcr.io/coder/coder:v2.5.0": "ghcr.io/coder/coder@sha256:216811eb38cec243055a1bba96a75ca5c201515746d351565874769e31e09ad6"
 
 cache: "ghcr.io/dexidp/dex:v2.37.0": "ghcr.io/dexidp/dex@sha256:f579d00721b0d842328c43a562f50343c54b0048ef2d58d6b54e750c21fc7938"
@@ -55,6 +53,8 @@ cache: "ghcr.io/kyverno/kyvernopre:v1.10.6": "ghcr.io/kyverno/kyvernopre@sha256:
 cache: "ghcr.io/kyverno/reports-controller:v1.10.6": "ghcr.io/kyverno/reports-controller@sha256:9d4f04481b4906b14d46f366a94d7050629961c2ffcb48db0620a56cf283a2a7"
 
 cache: "ghcr.io/stakater/reloader:v1.0.52": "ghcr.io/stakater/reloader@sha256:131ccd982ca25c8e6cfe5e99dcac72c13b29e88d9a5e39761942770328e99c97"
+
+cache: "ghcr.io/stakater/reloader:v1.0.54": "ghcr.io/stakater/reloader@sha256:32b3d38b8629558cc96f05a2dcb68f29cd81e3239c5b1b0ba51c84fb981c0756"
 
 cache: "goharbor/harbor-core:v2.9.1": "goharbor/harbor-core@sha256:ee70dcf6e7c5a3c1d65a6898eb7d3816cbe760f7971a79e1fed2d529abb12ccd"
 
