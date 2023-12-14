@@ -27,17 +27,17 @@
       },
       "locked": {
         "dir": "m/pkg/chamber",
-        "lastModified": 1701791985,
-        "narHash": "sha256-ni5MPTnx7Xw4ZGqOM/y6SY9TxPCsRj7I21BAHKb+GxY=",
+        "lastModified": 1702592172,
+        "narHash": "sha256-2c9p75R4QUKk9/83WrFiiw24T+2oi1OEBCiJyLAOK7k=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "0d42ee9b21ede2a09d3d9229c502597ca5eb7180",
+        "rev": "d5aea129e97a0c90e859077d7044a4f5c2a82b3c",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/chamber",
         "owner": "defn",
-        "ref": "pkg-chamber-2.13.5-1",
+        "ref": "pkg-chamber-2.13.6-1",
         "repo": "dev",
         "type": "github"
       }
