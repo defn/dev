@@ -889,7 +889,7 @@ cilium_common: {
 		release:   "cilium"
 		name:      "cilium"
 		namespace: "kube-system"
-		version:   "1.15.0-pre.3"
+		version:   "1.14.5"
 		repo:      "https://helm.cilium.io"
 		values: {
 			operator: replicas:       1
