@@ -142,6 +142,7 @@ function main {
 			account="$1"
 			;;
 		esac
+		account="${account}-sso-source"
 		shift
 		"$0" pass run //aws:aws__cli "${account}" -- aws-vault exec "${account}" -- "$@"
 		;;
