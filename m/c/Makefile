@@ -8,8 +8,8 @@ env ?= $(shell uname -n | cut -d- -f3)
 
 delivery:
 	while true; do \
-		$(MAKE) deliver_inner; \
-		if ! git diff coder-* | grep app_version:; then break; fi; \
+		$(MAKE) delivery_inner; \
+		if ! git diff coder-* | grep app_version:; then $(MAKE) delivery_inner; break; fi; \
 		git add -u coder-*; \
 		done
 
@@ -17,7 +17,7 @@ delivery:
 # M k/crd/ENV.yaml
 	$(MAKE) crd
 
-deliver_inner:
+delivery_inner:
 # M k/APP/kustomization.yaml
 # M k/r/APP/main.yaml
 # M k/y/APP/main.yaml

@@ -1002,7 +1002,7 @@ kustomize: "tetragon": #KustomizeHelm & {
 		release:   "tetragon"
 		name:      "tetragon"
 		namespace: "kube-system"
-		version:   "1.0.0"
+		version:   "1.0.1"
 		repo:      "https://helm.cilium.io"
 		values: {
 		}
@@ -1446,7 +1446,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "2.5.0"
+		version:   "2.5.1"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {
@@ -1831,7 +1831,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.40.0"
+		version:   "0.40.1"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [

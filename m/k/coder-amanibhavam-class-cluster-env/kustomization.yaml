@@ -110,7 +110,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-coder
-              targetRevision: 0.0.102
+              targetRevision: 0.0.103
             syncPolicy:
               automated:
                 prune: true
@@ -384,7 +384,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-tetragon
-              targetRevision: 0.0.101
+              targetRevision: 0.0.102
             syncPolicy:
               automated:
                 prune: true

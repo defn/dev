@@ -32,7 +32,7 @@ metadata:
     app.kubernetes.io/instance: tetragon
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: tetragon
-    helm.sh/chart: tetragon-1.0.0
+    helm.sh/chart: tetragon-1.0.1
   name: tetragon
 ---
 rules:
@@ -82,7 +82,7 @@ metadata:
     app.kubernetes.io/instance: tetragon
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: tetragon-operator
-    helm.sh/chart: tetragon-1.0.0
+    helm.sh/chart: tetragon-1.0.1
   name: tetragon-operator
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -92,7 +92,7 @@ metadata:
     app.kubernetes.io/instance: tetragon
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: tetragon
-    helm.sh/chart: tetragon-1.0.0
+    helm.sh/chart: tetragon-1.0.1
   name: tetragon
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -110,7 +110,7 @@ metadata:
     app.kubernetes.io/instance: tetragon
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: tetragon-operator
-    helm.sh/chart: tetragon-1.0.0
+    helm.sh/chart: tetragon-1.0.1
   name: tetragon-operator-rolebinding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -151,7 +151,7 @@ metadata:
     app.kubernetes.io/instance: tetragon
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: tetragon
-    helm.sh/chart: tetragon-1.0.0
+    helm.sh/chart: tetragon-1.0.1
   name: tetragon-config
   namespace: kube-system
 ---
@@ -165,7 +165,7 @@ metadata:
     app.kubernetes.io/instance: tetragon
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: tetragon-operator
-    helm.sh/chart: tetragon-1.0.0
+    helm.sh/chart: tetragon-1.0.1
   name: tetragon-operator-config
   namespace: kube-system
 ---
@@ -186,7 +186,7 @@ spec:
           volumeMounts:
             - mountPath: /var/run/cilium/tetragon
               name: export-logs
-        - image: cache.defn.run:5000/quay.io/cilium/tetragon@sha256:a680dca9b408434cea1cca015e6a14456f820506d2fd208a0c0588a9737d7cb5
+        - image: cache.defn.run:5000/quay.io/cilium/tetragon@sha256:5ad7eee8e1c0bd1e6a079014f02abd8d568d2355be59ccb33972c67e13588e83
           args:
             - --config-dir=/etc/tetragon/tetragon.conf.d/
           env:
@@ -253,12 +253,12 @@ spec:
           name: metadata-files
     metadata:
       annotations:
-        checksum/configmap: 82562e2ce97cc022bf9dd0cc3bd348e310440f213c1a80e01ec942c303fabad2
+        checksum/configmap: e031669de4a77b6529cd761c5234972944e766233882330feddbde38fb9b4327
       labels:
         app.kubernetes.io/instance: tetragon
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: tetragon
-        helm.sh/chart: tetragon-1.0.0
+        helm.sh/chart: tetragon-1.0.1
   selector:
     matchLabels:
       app.kubernetes.io/instance: tetragon
@@ -270,7 +270,7 @@ metadata:
     app.kubernetes.io/instance: tetragon
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: tetragon
-    helm.sh/chart: tetragon-1.0.0
+    helm.sh/chart: tetragon-1.0.1
   name: tetragon
   namespace: kube-system
 ---
@@ -278,7 +278,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/quay.io/cilium/tetragon-operator@sha256:8fb722e4f0e983e00e926cb852461ba1f4f529c1a5b39358438c5fda37cf2848
+        - image: cache.defn.run:5000/quay.io/cilium/tetragon-operator@sha256:fa3d90e5d05b2364d20c53543efd44dd930a3e345056f02d080d6c1687301697
           args:
             - serve
             - --config-dir=/etc/tetragon/operator.conf.d/
@@ -325,7 +325,7 @@ spec:
         app.kubernetes.io/instance: tetragon
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: tetragon-operator
-        helm.sh/chart: tetragon-1.0.0
+        helm.sh/chart: tetragon-1.0.1
   replicas: 1
   selector:
     matchLabels:
@@ -338,7 +338,7 @@ metadata:
     app.kubernetes.io/instance: tetragon
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: tetragon-operator
-    helm.sh/chart: tetragon-1.0.0
+    helm.sh/chart: tetragon-1.0.1
   name: tetragon-operator
   namespace: kube-system
 ---
@@ -352,7 +352,7 @@ spec:
     app.kubernetes.io/instance: tetragon
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: tetragon
-    helm.sh/chart: tetragon-1.0.0
+    helm.sh/chart: tetragon-1.0.1
   type: ClusterIP
 apiVersion: v1
 kind: Service
@@ -361,7 +361,7 @@ metadata:
     app.kubernetes.io/instance: tetragon
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: tetragon
-    helm.sh/chart: tetragon-1.0.0
+    helm.sh/chart: tetragon-1.0.1
   name: tetragon
   namespace: kube-system
 ---
@@ -372,7 +372,7 @@ metadata:
     app.kubernetes.io/instance: tetragon
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: tetragon
-    helm.sh/chart: tetragon-1.0.0
+    helm.sh/chart: tetragon-1.0.1
   name: tetragon
   namespace: kube-system
 ---
@@ -383,6 +383,6 @@ metadata:
     app.kubernetes.io/instance: tetragon
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: tetragon-operator
-    helm.sh/chart: tetragon-1.0.0
+    helm.sh/chart: tetragon-1.0.1
   name: tetragon-operator-service-account
   namespace: kube-system

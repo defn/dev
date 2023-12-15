@@ -49,7 +49,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/ghcr.io/coder/coder@sha256:216811eb38cec243055a1bba96a75ca5c201515746d351565874769e31e09ad6
+        - image: cache.defn.run:5000/ghcr.io/coder/coder@sha256:6b563afccf7ecd8b392bda49193b75416ece68f5a6fb9d26c9ca329f67a516fb
           args:
             - server
           command:
@@ -161,8 +161,8 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: coder
         app.kubernetes.io/part-of: coder
-        app.kubernetes.io/version: 2.5.0
-        helm.sh/chart: coder-2.5.0
+        app.kubernetes.io/version: 2.5.1
+        helm.sh/chart: coder-2.5.1
   replicas: 1
   selector:
     matchLabels:
@@ -176,8 +176,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: coder
     app.kubernetes.io/part-of: coder
-    app.kubernetes.io/version: 2.5.0
-    helm.sh/chart: coder-2.5.0
+    app.kubernetes.io/version: 2.5.1
+    helm.sh/chart: coder-2.5.1
   name: coder
   namespace: coder
 ---
@@ -336,8 +336,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: coder
     app.kubernetes.io/part-of: coder
-    app.kubernetes.io/version: 2.5.0
-    helm.sh/chart: coder-2.5.0
+    app.kubernetes.io/version: 2.5.1
+    helm.sh/chart: coder-2.5.1
   name: coder
   namespace: coder
 ---
@@ -349,7 +349,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: coder
     app.kubernetes.io/part-of: coder
-    app.kubernetes.io/version: 2.5.0
-    helm.sh/chart: coder-2.5.0
+    app.kubernetes.io/version: 2.5.1
+    helm.sh/chart: coder-2.5.1
   name: coder
   namespace: coder

@@ -7,7 +7,7 @@ commonAnnotations: {}
 helmCharts:
   - releaseName: tetragon
     name: tetragon
-    version: 1.0.0
+    version: 1.0.1
     repo: https://helm.cilium.io
     namespace: kube-system
     valuesInline: {}
