@@ -19,7 +19,6 @@ function make_init {
 		-e REGISTRY_HTTP_TLS_KEY=/certs/$(uname -n).key \
 		registry:2 || true
 
-	#app repo add cache.defn.run:5000 --type helm --name cache --enable-oci --insecure-skip-server-verification
 }
 
 function make_linkerd {
@@ -105,6 +104,7 @@ function make_up {
 	done
 
 	# deploy the cluster app-of-apps
+	app repo add cache.defn.run:5000 --type helm --name cache --enable-oci --insecure-skip-server-verification
 	kubectl --context ${cluster_name} apply -f e/${cluster_name}-cluster.yaml
 	(cd c && make update-env env=$(echo ${cluster_name} | cut -d- -f3-))
 }
