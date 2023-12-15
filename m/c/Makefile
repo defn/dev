@@ -8,9 +8,9 @@ env ?= $(shell uname -n | cut -d- -f3)
 
 delivery:
 	while true; do \
-		git add coder-*; \
 		$(MAKE) deliver_inner; \
 		if ! git diff coder-* | grep app_version:; then break; fi; \
+		git add -u coder-*; \
 		done
 
 # M k/r/crds.cue

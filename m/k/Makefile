@@ -22,7 +22,6 @@ all-package:
 	ls -d */ | grep \\- | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) package chart=$$1'
 
 all-build:
-	rm -vf ../c/*/*-version.cue
 	ls -d */ | grep \\- | grep -v \\-env/ | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) build chart=$$1; (echo package c; echo; echo "teacher: bootstrap: \"$$(echo $$1 | cut -d- -f5-)\": app_version: \"0.0.$$(cat ../h/$$1-version)\"" ) > ../c/$$(echo $$1 | cut -d- -f1-3)/$$1-version.cue'
 	ls -d */ | grep \\- | grep \\-env/ | sed 's#/$$##' | runmany $(shell nproc) '$(MAKE) build chart=$$1; (echo package c; echo; echo "teacher: bootstrap: \"$$1\": app_version: \"0.0.$$(cat ../h/$$1-version)\"" ) > ../c/$$(echo $$1 | cut -d- -f1-3)/$$1-version.cue'
 
