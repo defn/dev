@@ -11,8 +11,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: coder
     app.kubernetes.io/part-of: coder
-    app.kubernetes.io/version: 2.5.0
-    helm.sh/chart: coder-2.5.0
+    app.kubernetes.io/version: 2.5.1
+    helm.sh/chart: coder-2.5.1
   name: coder
   namespace: coder
 ---
@@ -97,8 +97,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: coder
     app.kubernetes.io/part-of: coder
-    app.kubernetes.io/version: 2.5.0
-    helm.sh/chart: coder-2.5.0
+    app.kubernetes.io/version: 2.5.1
+    helm.sh/chart: coder-2.5.1
   name: coder
   namespace: coder
 spec:
@@ -121,8 +121,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: coder
     app.kubernetes.io/part-of: coder
-    app.kubernetes.io/version: 2.5.0
-    helm.sh/chart: coder-2.5.0
+    app.kubernetes.io/version: 2.5.1
+    helm.sh/chart: coder-2.5.1
   name: coder
   namespace: coder
 spec:
@@ -139,8 +139,8 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: coder
         app.kubernetes.io/part-of: coder
-        app.kubernetes.io/version: 2.5.0
-        helm.sh/chart: coder-2.5.0
+        app.kubernetes.io/version: 2.5.1
+        helm.sh/chart: coder-2.5.1
     spec:
       affinity:
         podAntiAffinity:
@@ -217,7 +217,7 @@ spec:
             secretKeyRef:
               key: coder_pg_connection_url
               name: coder.coder-db.connection-url
-        image: ghcr.io/coder/coder:v2.5.0
+        image: ghcr.io/coder/coder:v2.5.1
         imagePullPolicy: IfNotPresent
         lifecycle: {}
         livenessProbe:

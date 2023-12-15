@@ -1,3 +1,3 @@
 package c
 
-teacher: bootstrap: "argo-workflows": app_version: "0.0.109"
+teacher: bootstrap: "argo-workflows": app_version: "0.0.110"
