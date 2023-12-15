@@ -135,23 +135,3 @@ function main {
 
 time main "$@"
 uptime
-
-# archive
-function make_vc {
-	for v in $(cd c/${cluster_name} && cue export --out json -e infra.parent.vclusters | jq -r '.[]'); do
-		i="${v#vc}"
-		# wait until vcluster is ready
-		while true; do
-			if vcluster --context ${cluster_name} connect vcluster -n "${cluster_name}-${v}-vcluster" --server=$(kubectl get --context ${cluster_name} -n ${cluster_name}-${v}-vcluster svc vcluster -o json | jq -r '.spec.clusterIP'):443 --update-current=false --kube-config-context-name ${cluster_name}-"${v}" --kube-config "$HOME"/.kube/config."${v}"; then
-				break
-			fi
-			sleep 5
-		done
-
-		# add vcluster to argocd
-		while true; do
-			if env KUBECONFIG="$HOME/.kube/config.argocd:$HOME/.kube/config.${v}" argocd --kube-context ${cluster_name}-argocd cluster --core add "${cluster_name}-${v}" --yes; then break; fi
-			sleep 5
-		done
-	done
-}
