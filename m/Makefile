@@ -173,9 +173,9 @@ k3s-up:
 	$(MAKE) k3s-wait
 
 k3s-restart-irsa:
-	kubectl rollout -n kube-system status deployment pod-identity-amazon-eks-pod-identity-webhook
-	kubectl rollout -n external-secrets restart deployment
-	kubectl rollout -n karpenter restart deployment
+	while ! kubectl rollout -n kube-system status deployment pod-identity-amazon-eks-pod-identity-webhook; do sleep 10; done
+	-kubectl rollout -n external-secrets restart deployment
+	-kubectl rollout -n karpenter restart deployment
 
 k3s-wait:
 	sudo ethtool -K "$$(ip route show 0/0 | cut -f5 -d' ')" rx-udp-gro-forwarding on rx-gro-list off
