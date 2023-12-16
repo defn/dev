@@ -41,7 +41,7 @@ function main {
 	sudo chmod 755 /usr/local/bin/bazelisk
 	sudo ln -nfs bazelisk /usr/local/bin/bazel
 
-	echo '{ "insecure-registries" : ["169.254.32.1:5000"] }' | sudo tee /etc/docker/daemon.json
+	echo '{ "insecure-registries" : ["169.254.32.1:5000", "cache.defn.run:5000"] }' | sudo tee /etc/docker/daemon.json
 
 	(
 		echo net.ipv4.ip_forward=1
