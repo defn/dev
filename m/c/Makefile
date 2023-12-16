@@ -114,12 +114,6 @@ iam:
 last:
 	tailscale up --advertise-routes=$$(kubectl get -n traefik svc traefik -o json | jq -r '.spec.clusterIP' | cut -d. -f1-2).0.0/16 --accept-routes --ssh
 
-up:
-	cd .. && bin/make-k3s up
-
-down:
-	cd .. && bin/make-k3s down
-
 test:
 	kubectl --context $$(uname -n) delete ns cilium-test || true
 	cilium connectivity test --context $$(uname -n) --test '!/(node|pod)-to-(node|pod)-encryption'
