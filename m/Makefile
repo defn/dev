@@ -162,6 +162,10 @@ k3s-init:
 	cd k && $(MAKE) cache
 	cd c && $(MAKE) cache
 
+k3s-recreate:
+	-bin/make-k3s down
+	$(MAKE) k3s-up
+
 k3s-up:
 	bin/make-k3s up
 	cd c && $(MAKE) iam
