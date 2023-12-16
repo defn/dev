@@ -158,5 +158,6 @@ dev:
 
 k3s-init:
 	bin/make-k3s init
-	cd c && $(MAKE) cache
+	cd c && $(MAKE) tailscale iam
 	cd k && $(MAKE) cache
+	cd c && $(MAKE) cache

@@ -87,12 +87,6 @@ release:
 cache:
 	cd ./r/digest && $(MAKE) cache filter=$(filter)
 
-once:
-	cd .. && bin/make-k3s init
-	$(MAKE) cache
-	$(MAKE) tailscale
-	$(MAKE) iam
-
 tailscale:
 	mkdir -p ./$(shell uname -n)/openid
 	sudo tailscale funnel --bg --https=443 --set-path /openid $(shell pwd)/$(shell uname -n)/openid
