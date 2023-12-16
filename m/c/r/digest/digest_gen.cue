@@ -4,7 +4,7 @@ cache: "bitnami/kubectl:1.26.4": "bitnami/kubectl@sha256:a0a972324d937b2c2f7207a
 
 cache: "bitnami/kubectl:latest": "bitnami/kubectl@sha256:6485a923f6f4ff3d42d871ce5bd45ee8f25a303c44972a4ad31ddd895082fc22"
 
-cache: "busybox:1.35": "busybox@sha256:713223f59872d6ee1ae186e2a5970cd2efbc1bacfe7553b316ecb6dd363dc941"
+cache: "busybox:1.35": "busybox@sha256:0fac7d303b1d9c0b4f5a596b7bd95525c94578f72146393f7a2534bfe3e4b2c0"
 
 cache: "containous/whoami:latest": "containous/whoami@sha256:7d6a3c8f91470a23ef380320609ee6e69ac68d20bc804f3a1c6065fb56cfa34e"
 
@@ -20,25 +20,35 @@ cache: "docker.io/traefik:v2.10.6": "docker.io/traefik@sha256:1957e3314f435c85b3
 
 cache: "gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:9cd4d69a708a8cf8e597efe3f511494d71cf8eab1b2fd85545097069ad47d3f6": "gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:cf15a0b3610d0fd92c174513c215ff9a83db54681c31025ef025d0b5d866812d"
 
+cache: "gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:cf15a0b3610d0fd92c174513c215ff9a83db54681c31025ef025d0b5d866812d": "gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:cf15a0b3610d0fd92c174513c215ff9a83db54681c31025ef025d0b5d866812d"
+
+cache: "gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:a27d61a2375f556df7ddd09959fb6d61123abc83813624f1b973e542949ac85b": "gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:fa098cdc8b4a07db03a1780a8873fd5d1dd480a22b28b061760825604c293832"
+
 cache: "gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:e33e77a990863a91df175c0d3cfa70f6314ad4c45d22ebbd198486187b8f2ab4": "gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:fa098cdc8b4a07db03a1780a8873fd5d1dd480a22b28b061760825604c293832"
+
+cache: "gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:27987e65a30ea1a94a1277bb4b2a85d8fa6801ffb4916206977cf0f0709d5805": "gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:3c3ddb0e507360710161b97f4a7073dc7d49a7f603412f78c18acac0511d615a"
 
 cache: "gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:dfed80655f88ec9f167f5b19243db3002598286842ad3017c30b9f0bbb826241": "gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:3c3ddb0e507360710161b97f4a7073dc7d49a7f603412f78c18acac0511d615a"
 
 cache: "gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:d8af89149e38391121712705e31e961b7c868fc66aa3b4e04b72e7e13c43b9b1": "gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:e244b6003d986ae014c525dc84878afc63710c3d17d09af1abb47a607b7aeaa0"
 
+cache: "gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:feb3eca1db6bd81ff0d2b2f0bee1ba2c1a5f726c8609f857fdb0e2cf742cfd27": "gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:e244b6003d986ae014c525dc84878afc63710c3d17d09af1abb47a607b7aeaa0"
+
+cache: "gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:b58cc95fb16a3341f8688b6250c7177a810e738d3979d2d25d17c38d16ee1e6f": "gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:d569f30abd31cbe105ba32b512a321dd82431b0a8e205bebf14538fddb4dfa54"
+
 cache: "gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:e4d5c008cc16e5fc696f88745fd798f2a533b769c43ee33541e5d7a2f7433240": "gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:d569f30abd31cbe105ba32b512a321dd82431b0a8e205bebf14538fddb4dfa54"
+
+cache: "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:f0557bc3f2bc1561b1709559456b919ea0c395ca607d2403cf609e4c3bfb6957": "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:3954804822783d159811d0e4c91619b0729b6897bfa37836ee6c56866e57cc8f"
 
 cache: "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:f34273747638f8de1a239c923958307b3f9cd7907556863373ebe15fdb2fd306": "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:3954804822783d159811d0e4c91619b0729b6897bfa37836ee6c56866e57cc8f"
 
 cache: "ghcr.io/buildkite/agent-stack-k8s/controller:0.7.0@sha256:6d747da4f3898b092010fcdc382fc59dc3d90c5478d41e0a01eb9b6f53a9d91f": "ghcr.io/buildkite/agent-stack-k8s/controller@sha256:6d747da4f3898b092010fcdc382fc59dc3d90c5478d41e0a01eb9b6f53a9d91f"
 
-cache: "ghcr.io/coder/coder:v2.5.0": "ghcr.io/coder/coder@sha256:216811eb38cec243055a1bba96a75ca5c201515746d351565874769e31e09ad6"
-
 cache: "ghcr.io/coder/coder:v2.5.1": "ghcr.io/coder/coder@sha256:6b563afccf7ecd8b392bda49193b75416ece68f5a6fb9d26c9ca329f67a516fb"
 
 cache: "ghcr.io/dexidp/dex:v2.37.0": "ghcr.io/dexidp/dex@sha256:f579d00721b0d842328c43a562f50343c54b0048ef2d58d6b54e750c21fc7938"
 
-cache: "ghcr.io/external-secrets/external-secrets:v0.9.9": "ghcr.io/external-secrets/external-secrets@sha256:88d34938c949af80498b87cdbf6fcedf1d10a80190ff126adfcd9db964bfdf65"
+cache: "ghcr.io/external-secrets/external-secrets:v0.9.10": "ghcr.io/external-secrets/external-secrets@sha256:604df80af3b5f494e1f4e683123352b3eff3e409845d72f22a12276c1a7dfc3c"
 
 cache: "ghcr.io/galleybytes/terraform-operator:v0.16.0": "ghcr.io/galleybytes/terraform-operator@sha256:22dc728858345330a1a34c13074b3c26e0540c89be0aa613a24694bebc1a3123"
 
@@ -72,13 +82,15 @@ cache: "goharbor/registry-photon:v2.9.1": "goharbor/registry-photon@sha256:8cf84
 
 cache: "goharbor/trivy-adapter-photon:v2.9.1": "goharbor/trivy-adapter-photon@sha256:48dbd3e6d45705574adb91115f202fbe88968e58b0a7191f8d9567a3722bfda3"
 
-cache: "pihole/pihole:2023.05.2": "pihole/pihole@sha256:8bc45afe1625487aef62859a5bf02f3d7b3429e480f4e29e4689635ab86ec312"
+cache: "pihole/pihole:2023.11.0": "pihole/pihole@sha256:24b1ef8f66d810faffefdb9b66850bbe2d55013506b892605acef414e210edeb"
 
 cache: "public.ecr.aws/karpenter/controller:v0.32.1@sha256:9b31039d45613ac22a104b8d48eca9dcdeff93e525bd473c811dfd3502e58c69": "public.ecr.aws/karpenter/controller@sha256:9b31039d45613ac22a104b8d48eca9dcdeff93e525bd473c811dfd3502e58c69"
 
 cache: "quay.io/argoproj/argo-events:v1.8.1": "quay.io/argoproj/argo-events@sha256:3c8d787908189604975ca87f480e0f60c93fdfb89bbf944a0c449d888e9368e7"
 
 cache: "quay.io/argoproj/argocd:v2.9.2": "quay.io/argoproj/argocd@sha256:8576d347f30fa4c56a0129d1c0a0f5ed1e75662f0499f1ed7e917c405fd909dc"
+
+cache: "quay.io/argoproj/argocd:v2.9.3": "quay.io/argoproj/argocd@sha256:dfc13f4b9ddbf25a88f7018667ee45e35a49520e2716242e3f65ef75f88c25ff"
 
 cache: "quay.io/argoproj/argocli:v3.5.2": "quay.io/argoproj/argocli@sha256:026b30a353022d8909adb03816e9593ce95b99afe4581e401ec39606121a22b3"
 
@@ -100,11 +112,7 @@ cache: "quay.io/cilium/hubble-ui:v0.12.1@sha256:9e5f81ee747866480ea1ac4630eb6975
 
 cache: "quay.io/cilium/operator-generic:v1.14.5@sha256:303f9076bdc73b3fc32aaedee64a14f6f44c8bb08ee9e3956d443021103ebe7a": "quay.io/cilium/operator-generic@sha256:303f9076bdc73b3fc32aaedee64a14f6f44c8bb08ee9e3956d443021103ebe7a"
 
-cache: "quay.io/cilium/tetragon-operator:v1.0.0": "quay.io/cilium/tetragon-operator@sha256:8fb722e4f0e983e00e926cb852461ba1f4f529c1a5b39358438c5fda37cf2848"
-
 cache: "quay.io/cilium/tetragon-operator:v1.0.1": "quay.io/cilium/tetragon-operator@sha256:fa3d90e5d05b2364d20c53543efd44dd930a3e345056f02d080d6c1687301697"
-
-cache: "quay.io/cilium/tetragon:v1.0.0": "quay.io/cilium/tetragon@sha256:a680dca9b408434cea1cca015e6a14456f820506d2fd208a0c0588a9737d7cb5"
 
 cache: "quay.io/cilium/tetragon:v1.0.1": "quay.io/cilium/tetragon@sha256:5ad7eee8e1c0bd1e6a079014f02abd8d568d2355be59ccb33972c67e13588e83"
 

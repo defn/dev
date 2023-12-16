@@ -70,7 +70,7 @@ kustomize: "argo-cd": #Kustomize & {
 	}
 
 	resource: "argo-cd": {
-		url: "https://raw.githubusercontent.com/argoproj/argo-cd/v2.9.2/manifests/install.yaml"
+		url: "https://raw.githubusercontent.com/argoproj/argo-cd/v2.9.3/manifests/install.yaml"
 	}
 
 	resource: "ingress-argo-cd": {
@@ -388,7 +388,7 @@ kustomize: "kourier": #Kustomize & {
 	cluster: #Cluster
 
 	resource: "kourier": {
-		url: "https://github.com/knative-extensions/net-kourier/releases/download/knative-v1.12.1/kourier.yaml"
+		url: "https://github.com/knative-extensions/net-kourier/releases/download/knative-v1.12.2/kourier.yaml"
 	}
 
 	psm: "service-kourier-set-cluster-ip": {
@@ -409,7 +409,7 @@ kustomize: "external-secrets": #KustomizeHelm & {
 	helm: {
 		release: "external-secrets"
 		name:    "external-secrets"
-		version: "0.9.9"
+		version: "0.9.10"
 		repo:    "https://charts.external-secrets.io"
 		values: {
 			webhook: create:        false
@@ -732,7 +732,7 @@ kustomize: "knative": #Kustomize & {
 	cluster: #Cluster
 
 	resource: "knative-serving": {
-		url: "https://github.com/knative/serving/releases/download/knative-v1.11.4/serving-core.yaml"
+		url: "https://github.com/knative/serving/releases/download/knative-v1.11.5/serving-core.yaml"
 	}
 
 	psm: "namespace-knative-serving": {
@@ -1746,7 +1746,7 @@ kustomize: "pihole": #KustomizeHelm & {
 		release:   "pihole"
 		name:      "pihole"
 		namespace: "pihole"
-		version:   "2.19.0"
+		version:   "2.20.0"
 		repo:      "https://mojo2600.github.io/pihole-kubernetes"
 		values: {
 			podDnsConfig: enabled:          false

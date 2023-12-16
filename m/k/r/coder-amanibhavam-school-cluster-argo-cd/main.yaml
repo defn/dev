@@ -136,7 +136,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/quay.io/argoproj/argocd@sha256:8576d347f30fa4c56a0129d1c0a0f5ed1e75662f0499f1ed7e917c405fd909dc
+        - image: cache.defn.run:5000/quay.io/argoproj/argocd@sha256:dfc13f4b9ddbf25a88f7018667ee45e35a49520e2716242e3f65ef75f88c25ff
           args:
             - /usr/local/bin/argocd-applicationset-controller
           env:
@@ -339,7 +339,7 @@ spec:
   template:
     spec:
       initContainers:
-        - image: cache.defn.run:5000/quay.io/argoproj/argocd@sha256:8576d347f30fa4c56a0129d1c0a0f5ed1e75662f0499f1ed7e917c405fd909dc
+        - image: cache.defn.run:5000/quay.io/argoproj/argocd@sha256:dfc13f4b9ddbf25a88f7018667ee45e35a49520e2716242e3f65ef75f88c25ff
           command:
             - /bin/cp
             - -n
@@ -441,7 +441,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/quay.io/argoproj/argocd@sha256:8576d347f30fa4c56a0129d1c0a0f5ed1e75662f0499f1ed7e917c405fd909dc
+        - image: cache.defn.run:5000/quay.io/argoproj/argocd@sha256:dfc13f4b9ddbf25a88f7018667ee45e35a49520e2716242e3f65ef75f88c25ff
           args:
             - /usr/local/bin/argocd-notifications
           env:
@@ -579,7 +579,7 @@ spec:
   template:
     spec:
       initContainers:
-        - image: cache.defn.run:5000/quay.io/argoproj/argocd@sha256:8576d347f30fa4c56a0129d1c0a0f5ed1e75662f0499f1ed7e917c405fd909dc
+        - image: cache.defn.run:5000/quay.io/argoproj/argocd@sha256:dfc13f4b9ddbf25a88f7018667ee45e35a49520e2716242e3f65ef75f88c25ff
           command:
             - /bin/cp
             - -n
@@ -599,7 +599,7 @@ spec:
             - mountPath: /var/run/argocd
               name: var-files
       containers:
-        - image: cache.defn.run:5000/quay.io/argoproj/argocd@sha256:8576d347f30fa4c56a0129d1c0a0f5ed1e75662f0499f1ed7e917c405fd909dc
+        - image: cache.defn.run:5000/quay.io/argoproj/argocd@sha256:dfc13f4b9ddbf25a88f7018667ee45e35a49520e2716242e3f65ef75f88c25ff
           args:
             - /usr/local/bin/argocd-repo-server
           env:
@@ -866,7 +866,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/quay.io/argoproj/argocd@sha256:8576d347f30fa4c56a0129d1c0a0f5ed1e75662f0499f1ed7e917c405fd909dc
+        - image: cache.defn.run:5000/quay.io/argoproj/argocd@sha256:dfc13f4b9ddbf25a88f7018667ee45e35a49520e2716242e3f65ef75f88c25ff
           args:
             - /usr/local/bin/argocd-server
           env:
@@ -1934,7 +1934,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/quay.io/argoproj/argocd@sha256:8576d347f30fa4c56a0129d1c0a0f5ed1e75662f0499f1ed7e917c405fd909dc
+        - image: cache.defn.run:5000/quay.io/argoproj/argocd@sha256:dfc13f4b9ddbf25a88f7018667ee45e35a49520e2716242e3f65ef75f88c25ff
           args:
             - /usr/local/bin/argocd-application-controller
           env:

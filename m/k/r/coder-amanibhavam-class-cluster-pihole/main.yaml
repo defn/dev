@@ -13,7 +13,7 @@ kind: ConfigMap
 metadata:
   labels:
     app: pihole
-    chart: pihole-2.19.0
+    chart: pihole-2.20.0
     heritage: Helm
     release: pihole
   name: pihole-custom-dnsmasq
@@ -23,7 +23,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/pihole/pihole@sha256:8bc45afe1625487aef62859a5bf02f3d7b3429e480f4e29e4689635ab86ec312
+        - image: cache.defn.run:5000/pihole/pihole@sha256:24b1ef8f66d810faffefdb9b66850bbe2d55013506b892605acef414e210edeb
           env:
             - name: WEB_PORT
               value: "80"
@@ -95,7 +95,7 @@ spec:
       annotations:
         checksum.config.adlists: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546
         checksum.config.blacklist: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546
-        checksum.config.dnsmasqConfig: f474ec9a33fcd045e325f5df29c5e0fd9d7547143b172e3c7f311fd2cc18ef3
+        checksum.config.dnsmasqConfig: b4df7631e8217671134998cf2bab12cb90c812b8bd46dfbe172fa9919b61b20
         checksum.config.regex: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546
         checksum.config.staticDhcpConfig: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546
         checksum.config.whitelist: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546
@@ -117,7 +117,7 @@ kind: Deployment
 metadata:
   labels:
     app: pihole
-    chart: pihole-2.19.0
+    chart: pihole-2.20.0
     heritage: Helm
     release: pihole
   name: pihole
@@ -156,7 +156,7 @@ kind: PersistentVolumeClaim
 metadata:
   labels:
     app: pihole
-    chart: pihole-2.19.0
+    chart: pihole-2.20.0
     component: ""
     heritage: Helm
     release: pihole
@@ -189,7 +189,7 @@ kind: Secret
 metadata:
   labels:
     app: pihole
-    chart: pihole-2.19.0
+    chart: pihole-2.20.0
     heritage: Helm
     release: pihole
   name: pihole-password
@@ -216,7 +216,7 @@ kind: Service
 metadata:
   labels:
     app: pihole
-    chart: pihole-2.19.0
+    chart: pihole-2.20.0
     heritage: Helm
     release: pihole
   name: pihole-dns
@@ -237,7 +237,7 @@ kind: Service
 metadata:
   labels:
     app: pihole
-    chart: pihole-2.19.0
+    chart: pihole-2.20.0
     heritage: Helm
     release: pihole
   name: pihole-web

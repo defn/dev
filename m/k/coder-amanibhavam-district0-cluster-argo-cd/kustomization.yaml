@@ -6,7 +6,7 @@ patches:
   - path: patch-configmap-argocd-cm.yaml
 resources:
   - resource-namespace-argocd.yaml
-  - https://raw.githubusercontent.com/argoproj/argo-cd/v2.9.2/manifests/install.yaml
+  - https://raw.githubusercontent.com/argoproj/argo-cd/v2.9.3/manifests/install.yaml
   - resource-ingress-argo-cd.yaml
 namespace: argocd
 commonLabels: {}
