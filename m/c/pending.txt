@@ -10,13 +10,13 @@ https://artifacthub.io/packages/helm/cilium/tetragon/1.0.1
 https://artifacthub.io/packages/helm/coder-v2/coder/2.5.1
 https://artifacthub.io/packages/helm/descheduler/descheduler/0.28.1
 https://artifacthub.io/packages/helm/dex/dex/0.15.3
-https://artifacthub.io/packages/helm/external-secrets-operator/external-secrets/0.9.9
+https://artifacthub.io/packages/helm/external-secrets-operator/external-secrets/0.9.10
 https://artifacthub.io/packages/helm/harbor/harbor/1.13.1
 https://artifacthub.io/packages/helm/headlamp/headlamp/0.17.1
 https://artifacthub.io/packages/helm/jkroepke/amazon-eks-pod-identity-webhook/1.2.0
 https://artifacthub.io/packages/helm/kyverno/kyverno/3.1.1
 https://artifacthub.io/packages/helm/linkerd2/linkerd-control-plane/1.16.7
 https://artifacthub.io/packages/helm/linkerd2/linkerd-crds/1.8.0
-https://artifacthub.io/packages/helm/mojo2600/pihole/2.19.0
+https://artifacthub.io/packages/helm/mojo2600/pihole/2.20.0
 https://artifacthub.io/packages/helm/stakater/reloader/1.0.54
 https://artifacthub.io/packages/helm/traefik/traefik/26.0.0

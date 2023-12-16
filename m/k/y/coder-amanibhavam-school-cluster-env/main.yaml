@@ -12,7 +12,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-argo-cd
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.101
+    targetRevision: 0.0.102
   syncPolicy:
     automated:
       prune: true
@@ -159,7 +159,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-external-secrets
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.101
+    targetRevision: 0.0.102
   syncPolicy:
     automated:
       prune: true
@@ -222,7 +222,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-knative
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.101
+    targetRevision: 0.0.102
   syncPolicy:
     automated:
       prune: true
@@ -243,7 +243,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-kourier
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.102
+    targetRevision: 0.0.103
   syncPolicy:
     automated:
       prune: true
@@ -264,7 +264,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-kyverno
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.103
+    targetRevision: 0.0.104
   syncPolicy:
     automated:
       prune: true
@@ -286,7 +286,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-pihole
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.102
+    targetRevision: 0.0.103
   syncPolicy:
     automated:
       prune: true

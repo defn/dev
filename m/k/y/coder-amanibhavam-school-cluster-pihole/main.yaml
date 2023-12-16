@@ -13,7 +13,7 @@ kind: ConfigMap
 metadata:
   labels:
     app: pihole
-    chart: pihole-2.19.0
+    chart: pihole-2.20.0
     heritage: Helm
     release: pihole
   name: pihole-custom-dnsmasq
@@ -26,7 +26,7 @@ kind: Secret
 metadata:
   labels:
     app: pihole
-    chart: pihole-2.19.0
+    chart: pihole-2.20.0
     heritage: Helm
     release: pihole
   name: pihole-password
@@ -38,7 +38,7 @@ kind: Service
 metadata:
   labels:
     app: pihole
-    chart: pihole-2.19.0
+    chart: pihole-2.20.0
     heritage: Helm
     release: pihole
   name: pihole-dns
@@ -64,7 +64,7 @@ kind: Service
 metadata:
   labels:
     app: pihole
-    chart: pihole-2.19.0
+    chart: pihole-2.20.0
     heritage: Helm
     release: pihole
   name: pihole-web
@@ -85,7 +85,7 @@ kind: PersistentVolumeClaim
 metadata:
   labels:
     app: pihole
-    chart: pihole-2.19.0
+    chart: pihole-2.20.0
     component: ""
     heritage: Helm
     release: pihole
@@ -103,7 +103,7 @@ kind: Deployment
 metadata:
   labels:
     app: pihole
-    chart: pihole-2.19.0
+    chart: pihole-2.20.0
     heritage: Helm
     release: pihole
   name: pihole
@@ -124,7 +124,7 @@ spec:
       annotations:
         checksum.config.adlists: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546
         checksum.config.blacklist: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546
-        checksum.config.dnsmasqConfig: f474ec9a33fcd045e325f5df29c5e0fd9d7547143b172e3c7f311fd2cc18ef3
+        checksum.config.dnsmasqConfig: b4df7631e8217671134998cf2bab12cb90c812b8bd46dfbe172fa9919b61b20
         checksum.config.regex: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546
         checksum.config.staticDhcpConfig: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546
         checksum.config.whitelist: 01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546
@@ -145,7 +145,7 @@ spec:
               name: pihole-password
         - name: PIHOLE_DNS_
           value: 10.200.128.10;10.200.128.10
-        image: pihole/pihole:2023.05.2
+        image: pihole/pihole:2023.11.0
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 10
