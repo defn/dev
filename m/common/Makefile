@@ -16,7 +16,7 @@ image:
 	docker build -t $$EXPECTED_REF . && docker push $$EXPECTED_REF
 
 post-bazel:
-	if test -f $(build); then install -m 0755 -o ubuntu -g ubuntu $(build) $(release); fi
+	if test -f $(build); then install -v -m 0755 -o ubuntu -g ubuntu $(build) $(release); fi
 
 watch:
 	b build

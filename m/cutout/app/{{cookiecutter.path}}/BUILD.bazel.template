@@ -15,7 +15,7 @@ go_library(
 )
 
 go_binary(
-    name = "{{cookiecutter.project_name}}",
+    name = "{{cookiecutter.package}}",
     embed = [":{{cookiecutter.project_name}}_lib"],
     visibility = ["//visibility:public"],
 )
