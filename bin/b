@@ -70,6 +70,9 @@ function main {
 				dyff --color=yes between "${old}" "${new}" || true
 				;;
 			*)
+				true
+				;;
+			meh)
 				echo diff "${old}" "${new}"
 				diff "${old}" "${new}" || true
 				;;
