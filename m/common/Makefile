@@ -16,7 +16,7 @@ image:
 	docker build -t $$EXPECTED_REF . && docker push $$EXPECTED_REF
 
 post-bazel:
-	if test -f $(build); then install -m 0755 -o ubuntu -g ubuntu $(build) $(release); fi
+	if test -f $(build); then install -v -m 0755 -o ubuntu -g ubuntu $(build) $(release); fi
 
 watch:
 	b build
@@ -35,7 +35,7 @@ deploy:
 	$(MAKE) bump build push argocd
 
 up:
-	cd ../../k && $(MAKE) all-build
 	cd ../../ && $(MAKE) vc dev
 	mkdir -p chart/templates gen
+	b build
 	tilt up --port=$$(comm -23 <(seq 10350 10399 | sort -n) <(netstat -antu | awk '{print $$4}' | grep -oP '\d+$$' | sort -n) 2>/dev/null | head -n 1)
