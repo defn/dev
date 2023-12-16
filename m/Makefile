@@ -161,3 +161,12 @@ k3s-init:
 	cd c && $(MAKE) tailscale iam
 	cd k && $(MAKE) cache
 	cd c && $(MAKE) cache
+
+k3s-up:
+	bin/make-k3s up
+	$(MAKE) k3s-wait
+
+k3s-wait:
+	sudo ethtool -K "$$(ip route show 0/0 | cut -f5 -d' ')" rx-udp-gro-forwarding on rx-gro-list off
+	while true; do if test -n "$$(kubectl get -n traefik svc traefik -o json | jq -r '.spec.clusterIP' | cut -d. -f1-2).0.0/16 --accept-routes --ssh"; then break; fi; sleep 5; done
+	tailscale up --advertise-routes=$$(kubectl get -n traefik svc traefik -o json | jq -r '.spec.clusterIP' | cut -d. -f1-2).0.0/16 --accept-routes --ssh
