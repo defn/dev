@@ -158,12 +158,13 @@ dev:
 
 k3s-init:
 	bin/make-k3s init
-	cd c && $(MAKE) tailscale iam
+	cd c && $(MAKE) tailscale
 	cd k && $(MAKE) cache
 	cd c && $(MAKE) cache
 
 k3s-up:
 	bin/make-k3s up
+	cd c && $(MAKE) iam
 	$(MAKE) k3s-restart-irsa
 	$(MAKE) k3s-wait
 
