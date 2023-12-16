@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: cache.defn.run:5000
     chart: library/helm/src--dev
-    targetRevision: 0.0.45
+    targetRevision: 0.0.46
   syncPolicy:
     automated:
       prune: true
