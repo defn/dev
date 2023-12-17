@@ -134,10 +134,16 @@ connect:
 # make connect from=coder-amanibhavam-class to=coder-amanibhavam-district endpoint=172.31.33.178:2379
 	cilium clustermesh connect --context $(from) --destination-context $(to) --destination-endpoint $(endpoint)
 
-cilium-status:
-	cilium status
+status:
+	@mark cilium
 	k exec -n kube-system -ti ds/cilium -- cilium status
+	@mark clustermesh
 	k exec -n kube-system -ti ds/cilium -- cilium-health status
+	@mark hubble
+	k exec -n kube-system ds/cilium -- hubble status
+	@mark cli
+	cilium status
+	cilium clustermesh status
 
 # https://github.com/cilium/cilium/issues/13766
 restart-cilium:
@@ -149,13 +155,6 @@ restart-cilium:
 
 token:
 	@kubectl create token headlamp-admin -n headlamp
-
-status:
-	kubectl exec -ti -n kube-system ds/cilium -- cilium status
-	kubectl exec -ti -n kube-system ds/cilium -- cilium-health status
-	kubectl exec -ti -n kube-system ds/cilium -- hubble status
-	cilium status
-	cilium clustermesh status
 
 xwing-visit:
 	kubectl exec -ti deploy/xwing -- curl -XGET deathstar.default.svc.cluster.local/v1/
