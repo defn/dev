@@ -237,7 +237,7 @@ kustomize: "kyverno": #KustomizeHelm & {
 		rules: [{
 			apiGroups: ["cert-manager.io"]
 			resources: ["clusterissuers"]
-			verbs: [ "create", "update", "patch", "delete"]
+			verbs: ["create", "update", "patch", "delete"]
 		}]
 	}
 
@@ -253,7 +253,7 @@ kustomize: "kyverno": #KustomizeHelm & {
 		rules: [{
 			apiGroups: [""]
 			resources: ["nodes"]
-			verbs: [ "update", "patch"]
+			verbs: ["update", "patch"]
 		}]
 	}
 }
@@ -662,11 +662,11 @@ kustomize: "karpenter": #KustomizeHelm & {
 			}, {
 				key:      "karpenter.k8s.aws/instance-category"
 				operator: "In"
-				values: [ "c", "m", "r"]
+				values: ["c", "m", "r"]
 			}, {
 				key:      "karpenter.k8s.aws/instance-generation"
 				operator: "Gt"
-				values: [ '2']
+				values: ['2']
 			}]
 			limits: resources: cpu: '8'
 		}

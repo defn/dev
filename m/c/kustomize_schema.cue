@@ -92,7 +92,7 @@ kustomize: [NAME=string]: _name: NAME
 		}
 
 		patches: [
-				for _psm_name, _psm in psm {
+			for _psm_name, _psm in psm {
 				path: "patch-\(_psm_name).yaml"
 			},
 		] + [
@@ -219,7 +219,7 @@ kustomize: [NAME=string]: _name: NAME
 			terraformModule: source: "https://github.com/ppm.git//app/tf/m/egg?ref=main"
 
 			taskOptions: [{
-				for: [ "*"]
+				for: ["*"]
 				env: [{
 					name:  "TF_VAR_egg"
 					value: _in.name
@@ -283,7 +283,7 @@ kustomize: [NAME=string]: _name: NAME
 			terraformModule: source: "https://github.com/defn/dev/m.git//tf/chicken?ref=main"
 
 			taskOptions: [{
-				for: [ "*"]
+				for: ["*"]
 				env: [{
 					name:  "TF_VAR_chicken"
 					value: _in.name

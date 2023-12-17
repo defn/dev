@@ -255,27 +255,6 @@ spec:
     name: coder-amanibhavam-district-cluster
   project: default
   source:
-    chart: library/helm/coder-amanibhavam-district-cluster-hello
-    repoURL: cache.defn.run:5000
-    targetRevision: 0.0.101
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions: []
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-hello
-  namespace: argocd
----
-spec:
-  destination:
-    name: coder-amanibhavam-district-cluster
-  project: default
-  source:
     chart: library/helm/coder-amanibhavam-district-cluster-issuer
     repoURL: cache.defn.run:5000
     targetRevision: 0.0.101
