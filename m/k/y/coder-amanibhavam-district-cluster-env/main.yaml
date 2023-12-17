@@ -306,7 +306,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-knative
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.102
+    targetRevision: 0.0.2
   syncPolicy:
     automated:
       prune: true
@@ -327,7 +327,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-kourier
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.103
+    targetRevision: 0.0.2
   syncPolicy:
     automated:
       prune: true

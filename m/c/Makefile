@@ -115,18 +115,23 @@ last:
 	tailscale up --advertise-routes=$$(kubectl get -n traefik svc traefik -o json | jq -r '.spec.clusterIP' | cut -d. -f1-2).0.0/16 --accept-routes --ssh
 
 test:
+# make test
 	kubectl --context $$(uname -n) delete ns cilium-test || true
-	cilium connectivity test --context $$(uname -n) # --test '!/(node|pod)-to-(node|pod)-encryption'
+	cilium connectivity test --debug --context $$(uname -n) # --test '!/(node|pod)-to-(node|pod)-encryption'
 	kubectl --context $$(uname -n) delete ns cilium-test || true
 
 test-mesh:
+# make test-mesh to=coder-amanibhavam-district
 	kubectl --context $$(uname -n) delete ns cilium-test || true
 	kubectl --context $(to) delete ns cilium-test || true
-	cilium connectivity test --context $$(uname -n) --multi-cluster $(to) # --test '!/node-to-node-encryption'
+	cilium connectivity test --debug --context $$(uname -n) --multi-cluster $(to) # --test '!/node-to-node-encryption'
 	kubectl --context $$(uname -n) delete ns cilium-test || true
 	kubectl --context $(to) delete ns cilium-test
 
 connect:
+# k get services -n kube-system clustermesh-apiserver
+# use external-IP
+# make connect to=coder-amanibhavam-district endpoint=172.31.33.178:2379
 	cilium clustermesh connect --context $$(uname -n) --destination-context $(to) --destination-endpoint $(endpoint)
 
 # https://github.com/cilium/cilium/issues/13766

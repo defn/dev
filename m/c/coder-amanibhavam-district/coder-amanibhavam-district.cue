@@ -1,9 +1,6 @@
 package c
 
 teacher: bootstrap: k3s_bootstrap & {
-	"knative": {}
-	"kourier": {}
-
 	"harbor": {}
 
 	"tfo": {}
