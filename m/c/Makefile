@@ -134,6 +134,11 @@ connect:
 # make connect to=coder-amanibhavam-district endpoint=172.31.33.178:2379
 	cilium clustermesh connect --context $$(uname -n) --destination-context $(to) --destination-endpoint $(endpoint)
 
+cilium-status:
+	cilium status
+	k exec -n kube-system -ti ds/cilium -- cilium status
+	k exec -n kube-system -ti ds/cilium -- cilium-health status
+
 # https://github.com/cilium/cilium/issues/13766
 restart-cilium:
 	kubectl -n kube-system rollout restart deploy cilium-operator
