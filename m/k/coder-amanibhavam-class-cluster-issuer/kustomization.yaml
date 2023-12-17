@@ -3,6 +3,10 @@
 patches: []
 resources:
   - resource-externalsecret-zerossl-production.yaml
+  - resource-externalsecret-letsencrypt-staging.yaml
+  - resource-externalsecret-letsencrypt-production.yaml
   - resource-clusterpolicy-clusterissuer-zerossl-production.yaml
+  - resource-clusterpolicy-clusterissuer-letsencrypt-staging.yaml
+  - resource-clusterpolicy-clusterissuer-letsencrypt-production.yaml
 commonLabels: {}
 commonAnnotations: {}

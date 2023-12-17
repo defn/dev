@@ -96,7 +96,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-cert-manager
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.102
+    targetRevision: 0.0.104
   syncPolicy:
     automated:
       prune: true
@@ -264,7 +264,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-issuer
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.101
+    targetRevision: 0.0.104
   syncPolicy:
     automated:
       prune: true
@@ -517,7 +517,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-traefik
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.102
+    targetRevision: 0.0.104
   syncPolicy:
     automated:
       prune: true

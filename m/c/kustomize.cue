@@ -1148,11 +1148,11 @@ kustomize: "tailscale": #Kustomize & {
 kustomize: "issuer": #Kustomize & {
 	cluster: #Cluster
 
-	resource: "externalsecret-\(cluster.issuer)": {
+	resource: "externalsecret-zerossl-production": {
 		apiVersion: "external-secrets.io/v1beta1"
 		kind:       "ExternalSecret"
 		metadata: {
-			name:      cluster.issuer
+			name:      "zerossl-production"
 			namespace: "cert-manager"
 		}
 		spec: {
@@ -1165,16 +1165,63 @@ kustomize: "issuer": #Kustomize & {
 				extract: key: "\(cluster.cluster_name)-cluster"
 			}]
 			target: {
-				name:           cluster.issuer
+				name:           "zerossl-production"
 				creationPolicy: "Owner"
 			}
 		}
 	}
 
-	resource: "clusterpolicy-clusterissuer-\(cluster.issuer)": {
-		apiVersion: "kyverno.io/v1"
-		kind:       "ClusterPolicy"
-		metadata: name: "\(cluster.issuer)-clusterissuer"
+	resource: "externalsecret-letsencrypt-staging": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: {
+			name:      "letsencrypt-staging"
+			namespace: "cert-manager"
+		}
+		spec: {
+			refreshInterval: "1h"
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: cluster.cluster_name
+			}
+			dataFrom: [{
+				extract: key: "\(cluster.cluster_name)-cluster"
+			}]
+			target: {
+				name:           "letsencrypt-staging"
+				creationPolicy: "Owner"
+			}
+		}
+	}
+
+	resource: "externalsecret-letsencrypt-production": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: {
+			name:      "letsencrypt-production"
+			namespace: "cert-manager"
+		}
+		spec: {
+			refreshInterval: "1h"
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: cluster.cluster_name
+			}
+			dataFrom: [{
+				extract: key: "\(cluster.cluster_name)-cluster"
+			}]
+			target: {
+				name:           "letsencrypt-production"
+				creationPolicy: "Owner"
+			}
+		}
+	}
+
+	resource: "clusterpolicy-clusterissuer-zerossl-production": {
+		#clusterissuer_name: "zerossl-production"
+		apiVersion:          "kyverno.io/v1"
+		kind:                "ClusterPolicy"
+		metadata: name: "\(#clusterissuer_name)-clusterissuer"
 		spec: {
 			generateExistingOnPolicyUpdate: true
 			rules: [{
@@ -1182,7 +1229,7 @@ kustomize: "issuer": #Kustomize & {
 				match: any: [{
 					resources: {
 						names: [
-							cluster.issuer,
+							#clusterissuer_name,
 						]
 						kinds: [
 							"Secret",
@@ -1196,17 +1243,17 @@ kustomize: "issuer": #Kustomize & {
 					synchronize: true
 					apiVersion:  "cert-manager.io/v1"
 					kind:        "ClusterIssuer"
-					name:        cluster.issuer
+					name:        #clusterissuer_name
 					data: spec: acme: {
 						server: "https://acme.zerossl.com/v2/DV90"
 						email:  "{{request.object.data.zerossl_email | base64_decode(@)}}"
 
-						privateKeySecretRef: name: "\(cluster.issuer)-acme"
+						privateKeySecretRef: name: "\(#clusterissuer_name)-acme"
 
 						externalAccountBinding: {
 							keyID: "{{request.object.data.zerossl_eab_kid | base64_decode(@)}}"
 							keySecretRef: {
-								name: cluster.issuer
+								name: #clusterissuer_name
 								key:  "zerossl_eab_hmac"
 							}
 						}
@@ -1216,7 +1263,105 @@ kustomize: "issuer": #Kustomize & {
 							dns01: cloudflare: {
 								email: "{{request.object.data.cloudflare_email | base64_decode(@)}}"
 								apiTokenSecretRef: {
-									name: cluster.issuer
+									name: #clusterissuer_name
+									key:  "cloudflare_api_token"
+								}
+							}
+						}]
+					}
+				}
+			}]
+		}
+	}
+
+	resource: "clusterpolicy-clusterissuer-letsencrypt-staging": {
+		#clusterissuer_name: "letsencrypt-staging"
+		apiVersion:          "kyverno.io/v1"
+		kind:                "ClusterPolicy"
+		metadata: name: "\(#clusterissuer_name)-clusterissuer"
+		spec: {
+			generateExistingOnPolicyUpdate: true
+			rules: [{
+				name: "create-cluster-issuer"
+				match: any: [{
+					resources: {
+						names: [
+							#clusterissuer_name,
+						]
+						kinds: [
+							"Secret",
+						]
+						namespaces: [
+							"cert-manager",
+						]
+					}
+				}]
+				generate: {
+					synchronize: true
+					apiVersion:  "cert-manager.io/v1"
+					kind:        "ClusterIssuer"
+					name:        #clusterissuer_name
+					data: spec: acme: {
+						server: "https://acme-staging-v02.api.letsencrypt.org/directory"
+						email:  "{{request.object.data.zerossl_email | base64_decode(@)}}"
+
+						privateKeySecretRef: name: "\(#clusterissuer_name)-acme"
+
+						solvers: [{
+							selector: {}
+							dns01: cloudflare: {
+								email: "{{request.object.data.cloudflare_email | base64_decode(@)}}"
+								apiTokenSecretRef: {
+									name: #clusterissuer_name
+									key:  "cloudflare_api_token"
+								}
+							}
+						}]
+					}
+				}
+			}]
+		}
+	}
+
+	resource: "clusterpolicy-clusterissuer-letsencrypt-production": {
+		#clusterissuer_name: "letsencrypt-production"
+		apiVersion:          "kyverno.io/v1"
+		kind:                "ClusterPolicy"
+		metadata: name: "\(#clusterissuer_name)-clusterissuer"
+		spec: {
+			generateExistingOnPolicyUpdate: true
+			rules: [{
+				name: "create-cluster-issuer"
+				match: any: [{
+					resources: {
+						names: [
+							#clusterissuer_name,
+						]
+						kinds: [
+							"Secret",
+						]
+						namespaces: [
+							"cert-manager",
+						]
+					}
+				}]
+				generate: {
+					synchronize: true
+					apiVersion:  "cert-manager.io/v1"
+					kind:        "ClusterIssuer"
+					name:        #clusterissuer_name
+					data: spec: acme: {
+						server: "https://acme-v02.api.letsencrypt.org/directory"
+						email:  "{{request.object.data.zerossl_email | base64_decode(@)}}"
+
+						privateKeySecretRef: name: "\(#clusterissuer_name)-acme"
+
+						solvers: [{
+							selector: {}
+							dns01: cloudflare: {
+								email: "{{request.object.data.cloudflare_email | base64_decode(@)}}"
+								apiTokenSecretRef: {
+									name: #clusterissuer_name
 									key:  "cloudflare_api_token"
 								}
 							}

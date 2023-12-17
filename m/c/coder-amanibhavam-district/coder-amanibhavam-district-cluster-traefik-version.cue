@@ -1,3 +1,3 @@
 package c
 
-teacher: bootstrap: "traefik": app_version: "0.0.102"
+teacher: bootstrap: "traefik": app_version: "0.0.104"

@@ -9869,7 +9869,7 @@ spec:
         - --cluster-resource-namespace=$(POD_NAMESPACE)
         - --leader-election-namespace=kube-system
         - --acme-http01-solver-image=quay.io/jetstack/cert-manager-acmesolver:v1.13.3
-        - --default-issuer-name=zerossl-production
+        - --default-issuer-name=letsencrypt-production
         - --default-issuer-kind=ClusterIssuer
         - --max-concurrent-challenges=60
         - --dns01-recursive-nameservers-only=true

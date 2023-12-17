@@ -15,7 +15,7 @@ helmCharts:
     namespace: cert-manager
     valuesInline:
       ingressShim:
-        defaultIssuerName: zerossl-production
+        defaultIssuerName: letsencrypt-production
         defaultIssuerKind: ClusterIssuer
       global:
         logLevel: 4

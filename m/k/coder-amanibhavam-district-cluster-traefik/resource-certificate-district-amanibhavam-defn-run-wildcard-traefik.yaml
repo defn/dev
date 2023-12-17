@@ -12,6 +12,6 @@ spec:
     - '*.default.district.amanibhavam.defn.run'
     - '*.coder.district.amanibhavam.defn.run'
   issuerRef:
-    name: zerossl-production
+    name: letsencrypt-production
     kind: ClusterIssuer
     group: cert-manager.io
