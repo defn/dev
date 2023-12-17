@@ -1,0 +1,39 @@
+#ManagedBy: cue
+
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: letsencrypt-production-clusterissuer
+spec:
+  generateExistingOnPolicyUpdate: true
+  rules:
+    - name: create-cluster-issuer
+      match:
+        any:
+          - resources:
+              names:
+                - letsencrypt-production
+              kinds:
+                - Secret
+              namespaces:
+                - cert-manager
+      generate:
+        synchronize: true
+        apiVersion: cert-manager.io/v1
+        kind: ClusterIssuer
+        name: letsencrypt-production
+        data:
+          spec:
+            acme:
+              server: https://acme-v02.api.letsencrypt.org/directory
+              email: '{{request.object.data.zerossl_email | base64_decode(@)}}'
+              privateKeySecretRef:
+                name: letsencrypt-production-acme
+              solvers:
+                - selector: {}
+                  dns01:
+                    cloudflare:
+                      email: '{{request.object.data.cloudflare_email | base64_decode(@)}}'
+                      apiTokenSecretRef:
+                        name: letsencrypt-production
+                        key: cloudflare_api_token

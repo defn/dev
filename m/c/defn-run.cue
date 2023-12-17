@@ -64,7 +64,8 @@ class: {
 	domain_slug: "\(parent_env)-\(handle)-\(strings.Replace(domain_zone, ".", "-", -1))"
 
 	secrets_region:   "us-west-2"
-	issuer:           "zerossl-production"
+	#issuer:          "zerossl-production"
+	issuer:           "letsencrypt-production"
 	cloudflare_email: "cloudflare@defn.us"
 
 	discovery_url: "https://\(cluster_name).\(infra_tailscale_domain)"
