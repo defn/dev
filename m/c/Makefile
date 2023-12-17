@@ -116,29 +116,15 @@ last:
 
 test:
 	kubectl --context $$(uname -n) delete ns cilium-test || true
-	cilium connectivity test --context $$(uname -n) --test '!/(node|pod)-to-(node|pod)-encryption'
+	cilium connectivity test --context $$(uname -n) # --test '!/(node|pod)-to-(node|pod)-encryption'
 	kubectl --context $$(uname -n) delete ns cilium-test || true
 
 test-mesh:
 	kubectl --context $$(uname -n) delete ns cilium-test || true
 	kubectl --context $(to) delete ns cilium-test || true
-	cilium connectivity test --context $$(uname -n) --multi-cluster $(to) --test '!/node-to-node-encryption'
+	cilium connectivity test --context $$(uname -n) --multi-cluster $(to) # --test '!/node-to-node-encryption'
 	kubectl --context $$(uname -n) delete ns cilium-test || true
 	kubectl --context $(to) delete ns cilium-test
-
-restart-mesh:
-	runmany 3 'coder restart -y $$1' $(app)
-	$(MAKE) wait-mesh
-
-start-mesh:
-	runmany 3 'coder start -y $$1' $(app)
-	$(MAKE) wait-mesh
-
-wait-mesh:
-	for a in $(app); do ssh coder.$$a bash -c '"cd m/c && cilium clustermesh status --wait"'; done
-
-stop-mesh:
-	runmany 3 'coder stop -y $$1' $(app)
 
 connect:
 	cilium clustermesh connect --context $$(uname -n) --destination-context $(to) --destination-endpoint $(endpoint)
