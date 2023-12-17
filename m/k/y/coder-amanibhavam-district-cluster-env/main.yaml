@@ -297,48 +297,6 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-knative
-  namespace: argocd
-spec:
-  destination:
-    name: coder-amanibhavam-district-cluster
-  project: default
-  source:
-    chart: library/helm/coder-amanibhavam-district-cluster-knative
-    repoURL: cache.defn.run:5000
-    targetRevision: 0.0.2
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions: []
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-kourier
-  namespace: argocd
-spec:
-  destination:
-    name: coder-amanibhavam-district-cluster
-  project: default
-  source:
-    chart: library/helm/coder-amanibhavam-district-cluster-kourier
-    repoURL: cache.defn.run:5000
-    targetRevision: 0.0.2
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions: []
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-district-cluster-kyverno
   namespace: argocd
 spec:
