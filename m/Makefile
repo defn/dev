@@ -171,14 +171,14 @@ k3s-up:
 	bin/make-k3s up
 	cd c && $(MAKE) iam
 	$(MAKE) k3s-restart-irsa
-	$(MAKE) k3s-wait
+	$(MAKE) k3s-advertise-traefik
 
 k3s-restart-irsa:
 	while ! kubectl rollout -n kube-system status deployment pod-identity-amazon-eks-pod-identity-webhook; do sleep 10; done
 	-kubectl rollout -n external-secrets restart deployment
 	-kubectl rollout -n karpenter restart deployment
 
-k3s-wait:
+k3s-advertise-traefik:
 	while ! kubectl rollout -n traefik status deployment traefik; do sleep 10; done
 	sudo ethtool -K "$$(ip route show 0/0 | cut -f5 -d' ')" rx-udp-gro-forwarding on rx-gro-list off
 	while true; do if test -n "$$(kubectl get -n traefik svc traefik -o json | jq -r '.spec.clusterIP' | cut -d. -f1-2).0.0/16 --accept-routes --ssh"; then break; fi; sleep 5; done
