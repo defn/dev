@@ -167,10 +167,13 @@ k3s-recreate:
 	-bin/make-k3s down
 	$(MAKE) k3s-up
 
+k3s-wait:
+	$(MAKE) k3s-restart-irsa
+
 k3s-up:
 	bin/make-k3s up
 	cd c && $(MAKE) iam
-	$(MAKE) k3s-restart-irsa
+	$(MAKE) wait
 	$(MAKE) k3s-advertise-traefik
 
 k3s-restart-irsa:
