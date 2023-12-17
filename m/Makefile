@@ -160,7 +160,7 @@ dev:
 ready:
 	cd k && $(MAKE) cache
 	$(MAKE) k3s-wait
-	$(MAKE) k3s-advertise-traefik:
+	$(MAKE) k3s-advertise-traefik
 
 k3s-init:
 	bin/make-k3s init
@@ -178,7 +178,7 @@ k3s-wait:
 k3s-up:
 	bin/make-k3s up
 	cd c && $(MAKE) iam
-	$(MAKE) wait
+	$(MAKE) k3s-wait
 	$(MAKE) k3s-advertise-traefik
 
 k3s-restart-irsa:
