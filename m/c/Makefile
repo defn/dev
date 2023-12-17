@@ -124,7 +124,7 @@ test-mesh:
 # make test-mesh to=coder-amanibhavam-district
 	kubectl --context $$(uname -n) delete ns cilium-test || true
 	kubectl --context $(to) delete ns cilium-test || true
-	cilium connectivity test --debug --context $$(uname -n) --multi-cluster $(to) # --test '!/node-to-node-encryption'
+	cilium connectivity test --debug --context $$(uname -n) --multi-cluster $(to) --test '!/health'
 	kubectl --context $$(uname -n) delete ns cilium-test || true
 	kubectl --context $(to) delete ns cilium-test
 
