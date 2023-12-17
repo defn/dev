@@ -131,8 +131,8 @@ test-mesh:
 connect:
 # k get services -n kube-system clustermesh-apiserver
 # use external-IP
-# make connect to=coder-amanibhavam-district endpoint=172.31.33.178:2379
-	cilium clustermesh connect --context $$(uname -n) --destination-context $(to) --destination-endpoint $(endpoint)
+# make connect from=coder-amanibhavam-class to=coder-amanibhavam-district endpoint=172.31.33.178:2379
+	cilium clustermesh connect --context $(from) --destination-context $(to) --destination-endpoint $(endpoint)
 
 cilium-status:
 	cilium status
