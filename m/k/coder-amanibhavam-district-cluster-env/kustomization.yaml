@@ -320,7 +320,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-knative
-              targetRevision: 0.0.102
+              targetRevision: 0.0.2
             syncPolicy:
               automated:
                 prune: true
@@ -341,7 +341,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-kourier
-              targetRevision: 0.0.103
+              targetRevision: 0.0.2
             syncPolicy:
               automated:
                 prune: true
