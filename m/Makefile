@@ -160,6 +160,7 @@ dev:
 ready:
 	cd k && $(MAKE) cache
 	$(MAKE) k3s-wait
+	$(MAKE) k3s-advertise-traefik:
 
 k3s-init:
 	bin/make-k3s init
