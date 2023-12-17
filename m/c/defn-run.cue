@@ -37,6 +37,7 @@ k3s_bootstrap: {
 	"traefik": {}
 
 	// builds
+	"postgres-operator": {}
 	"coder": {}
 }
 

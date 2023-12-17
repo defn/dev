@@ -243,6 +243,27 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
+        postgres-operator: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-class-cluster-postgres-operator
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-class-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-class-cluster-postgres-operator
+              targetRevision: 0.0.1
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
         reloader: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
