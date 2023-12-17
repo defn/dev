@@ -1,8 +1,0 @@
-#ManagedBy: cue
-
-patches:
-  - path: patch-service-kourier-set-cluster-ip.yaml
-resources:
-  - https://github.com/knative-extensions/net-kourier/releases/download/knative-v1.12.2/kourier.yaml
-commonLabels: {}
-commonAnnotations: {}
