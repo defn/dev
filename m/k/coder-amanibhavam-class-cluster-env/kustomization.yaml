@@ -32,27 +32,6 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
-        buildkite: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-class-cluster-buildkite
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-class-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-class-cluster-buildkite
-              targetRevision: 0.0.101
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
         cert-manager: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
@@ -221,48 +200,6 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
-        knative: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-class-cluster-knative
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-class-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-class-cluster-knative
-              targetRevision: 0.0.102
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
-        kourier: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-class-cluster-kourier
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-class-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-class-cluster-kourier
-              targetRevision: 0.0.103
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
         kyverno: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
@@ -285,27 +222,6 @@ helmCharts:
                 selfHeal: true
               syncOptions:
                 - ServerSideApply=true
-        pihole: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-class-cluster-pihole
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-class-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-class-cluster-pihole
-              targetRevision: 0.0.103
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
         pod-identity: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application

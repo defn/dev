@@ -34,14 +34,10 @@ k3s_bootstrap: {
 	"issuer": {}
 
 	// traefik, functions
-	"knative": {}
-	"kourier": {}
 	"traefik": {}
 
 	// builds
-	"buildkite": {}
 	"coder": {}
-	"pihole": {}
 }
 
 teacher: {

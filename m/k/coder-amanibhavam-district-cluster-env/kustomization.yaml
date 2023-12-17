@@ -263,27 +263,6 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
-        hello: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-district-cluster-hello
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-district-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-hello
-              targetRevision: 0.0.101
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
         issuer: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application

@@ -1,7 +1,0 @@
-#ManagedBy: cue
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: activator
-  namespace: knative-serving
