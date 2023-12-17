@@ -4,7 +4,6 @@ teacher: bootstrap: k3s_bootstrap & {
 	"knative": {}
 	"kourier": {}
 
-	"postgres-operator": {}
 	"harbor": {}
 
 	"tfo": {}

@@ -235,6 +235,27 @@ spec:
     name: coder-amanibhavam-school-cluster
   project: default
   source:
+    chart: library/helm/coder-amanibhavam-school-cluster-postgres-operator
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.1
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: coder-amanibhavam-school-cluster-postgres-operator
+  namespace: argocd
+---
+spec:
+  destination:
+    name: coder-amanibhavam-school-cluster
+  project: default
+  source:
     chart: library/helm/coder-amanibhavam-school-cluster-reloader
     repoURL: cache.defn.run:5000
     targetRevision: 0.0.103
