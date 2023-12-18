@@ -1009,12 +1009,12 @@ kustomize: "tetragon": #KustomizeHelm & {
 	}
 }
 
-// https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/manifests/operator.yaml
+// https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/deploy/manifests/operator.yaml
 kustomize: "tailscale": #Kustomize & {
 	cluster: #Cluster
 
 	resource: "tailscale": {
-		url: "https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/manifests/operator.yaml"
+		url: "https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/deploy/manifests/operator.yaml"
 	}
 
 	jsp: "secret-operator-oauth-remove": {
