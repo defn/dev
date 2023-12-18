@@ -117,7 +117,7 @@ last:
 test:
 # make test
 	kubectl --context $$(uname -n) delete ns cilium-test || true
-	cilium connectivity test --context $$(uname -n) --test '!/(node)-to-(node)-encryption' --test '!/no-unexpected-packet-drops'
+	cilium connectivity test --context $$(uname -n)
 	kubectl --context $$(uname -n) delete ns cilium-test || true
 
 test-mesh:
