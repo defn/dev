@@ -10,8 +10,6 @@ teacher: bootstrap: k3s_bootstrap & {
 	"headlamp": {}
 
 	"pihole": {}
-
-	"tailscale": {}
 }
 
 class: {

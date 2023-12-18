@@ -24,7 +24,7 @@ k3s_bootstrap: {
 	"secrets": {}
 
 	// tailscale
-	//"tailscale": {}
+	"tailscale": {}
 
 	// scaling
 	"karpenter": {}
