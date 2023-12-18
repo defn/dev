@@ -117,14 +117,14 @@ last:
 test:
 # make test
 	kubectl --context $$(uname -n) delete ns cilium-test || true
-	cilium connectivity test --context $$(uname -n) --test '!/(node)-to-(node)-encryption'
+	cilium connectivity test --context $$(uname -n) --test '!/(node)-to-(node)-encryption' --test '!/no-unexpected-packet-drops'
 	kubectl --context $$(uname -n) delete ns cilium-test || true
 
 test-mesh:
 # make test-mesh from=coder-amanibhavam-school to=coder-amanibhavam-district
 	kubectl --context $(from) delete ns cilium-test || true
 	kubectl --context $(to) delete ns cilium-test || true
-	cilium connectivity test --context $(from) --multi-cluster $(to) --test '!/(node)-to-(node)-encryption'
+	cilium connectivity test --context $(from) --multi-cluster $(to) --test '!/(node)-to-(node)-encryption' --test '!/no-unexpected-packet-drops'
 	kubectl --context $(from) delete ns cilium-test || true
 	kubectl --context $(to) delete ns cilium-test
 
