@@ -1,0 +1,22 @@
+#ManagedBy: cue
+
+patches:
+  - path: jsonp-secret-operator-oauth-remove.yaml
+    target:
+      version: v1
+      kind: Secret
+      name: operator-oauth
+      namespace: tailscale
+  - path: jsonp-deployment-operator-increase-logging.yaml
+    target:
+      kind: Deployment
+      name: operator
+      namespace: tailscale
+resources:
+  - https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/deploy/manifests/operator.yaml
+  - resource-externalsecret-tailscale.yaml
+  - resource-clusterrole-tailscale-auth-proxy.yaml
+  - resource-clusterrolebinding-tailscale-auth-proxy.yaml
+  - resource-clusterrolebinding-tailscale-admins.yaml
+commonLabels: {}
+commonAnnotations: {}

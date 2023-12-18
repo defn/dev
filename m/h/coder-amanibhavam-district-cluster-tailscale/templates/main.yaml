@@ -1,0 +1,247 @@
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - users
+      - groups
+    verbs:
+      - impersonate
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: tailscale-auth-proxy
+---
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - events
+      - services
+      - services/status
+    verbs:
+      - '*'
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingresses
+      - ingresses/status
+    verbs:
+      - '*'
+  - apiGroups:
+      - tailscale.com
+    resources:
+      - connectors
+      - connectors/status
+    verbs:
+      - get
+      - list
+      - watch
+      - update
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: tailscale-operator
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: tailscale-admins
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: tag:k8s-admin
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: tailscale-auth-proxy
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: tailscale-auth-proxy
+subjects:
+  - kind: ServiceAccount
+    name: operator
+    namespace: tailscale
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: tailscale-operator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: tailscale-operator
+subjects:
+  - kind: ServiceAccount
+    name: operator
+    namespace: tailscale
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tailscale
+---
+spec:
+  template:
+    spec:
+      containers:
+        - image: cache.defn.run:5000/tailscale/k8s-operator@sha256:ca248aec3f18b55529018afa9fd57d6fff0fbc8e187c2b6db3adb05efee71585
+          env:
+            - name: OPERATOR_HOSTNAME
+              value: tailscale-operator
+            - name: OPERATOR_SECRET
+              value: operator
+            - name: OPERATOR_LOGGING
+              value: dev
+            - name: OPERATOR_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: ENABLE_CONNECTOR
+              value: "false"
+            - name: CLIENT_ID_FILE
+              value: /oauth/client_id
+            - name: CLIENT_SECRET_FILE
+              value: /oauth/client_secret
+            - name: PROXY_IMAGE
+              value: tailscale/tailscale:unstable
+            - name: PROXY_TAGS
+              value: "true"
+            - name: APISERVER_PROXY
+              value: "false"
+            - name: PROXY_FIREWALL_MODE
+              value: auto
+          imagePullPolicy: Always
+          name: operator
+          volumeMounts:
+            - mountPath: /not-used
+              name: not-used
+              readOnly: true
+            - mountPath: /oauth
+              name: oauth
+              readOnly: true
+      nodeSelector:
+        kubernetes.io/os: linux
+      serviceAccountName: operator
+      volumes:
+        - name: not-used
+          secret:
+            secretName: not-used
+        - name: oauth
+          secret:
+            secretName: operator-oauth-custom
+    metadata:
+      labels:
+        app: operator
+  replicas: 1
+  selector:
+    matchLabels:
+      app: operator
+  strategy:
+    type: Recreate
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: operator
+  namespace: tailscale
+---
+spec:
+  dataFrom:
+    - extract:
+        key: coder-amanibhavam-district-cluster
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: coder-amanibhavam-district
+  target:
+    creationPolicy: Owner
+    name: operator-oauth-custom
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: operator-oauth-custom
+  namespace: tailscale
+---
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+    verbs:
+      - '*'
+  - apiGroups:
+      - apps
+    resources:
+      - statefulsets
+    verbs:
+      - '*'
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: operator
+  namespace: tailscale
+---
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+    verbs:
+      - '*'
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: proxies
+  namespace: tailscale
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: operator
+  namespace: tailscale
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: operator
+subjects:
+  - kind: ServiceAccount
+    name: operator
+    namespace: tailscale
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: proxies
+  namespace: tailscale
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: proxies
+subjects:
+  - kind: ServiceAccount
+    name: proxies
+    namespace: tailscale
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: not-used
+  namespace: tailscale
+stringData: {}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: operator
+  namespace: tailscale
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: proxies
+  namespace: tailscale

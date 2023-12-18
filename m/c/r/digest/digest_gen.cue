@@ -12,21 +12,7 @@ cache: "docker.io/amazon/amazon-eks-pod-identity-webhook:v0.4.0": "docker.io/ama
 
 cache: "docker.io/bitnami/external-dns:0.14.0-debian-11-r2": "docker.io/bitnami/external-dns@sha256:b5ef3e00a40dbf1e8d0fae9ac73c6d3bf612af53b7a693c36b62c9ce510bc08d"
 
-cache: "docker.io/envoyproxy/envoy:v1.25-latest": "docker.io/envoyproxy/envoy@sha256:a63469b5d105cd94be9b7d7524a46786fca5e124599aa488078375ddb65da030"
-
 cache: "docker.io/traefik:v2.10.6": "docker.io/traefik@sha256:1957e3314f435c85b3a19f7babd53c630996aa1af65d1f479d75539251b1e112"
-
-cache: "gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:cf15a0b3610d0fd92c174513c215ff9a83db54681c31025ef025d0b5d866812d": "gcr.io/knative-releases/knative.dev/net-kourier/cmd/kourier@sha256:cf15a0b3610d0fd92c174513c215ff9a83db54681c31025ef025d0b5d866812d"
-
-cache: "gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:a27d61a2375f556df7ddd09959fb6d61123abc83813624f1b973e542949ac85b": "gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:fa098cdc8b4a07db03a1780a8873fd5d1dd480a22b28b061760825604c293832"
-
-cache: "gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:27987e65a30ea1a94a1277bb4b2a85d8fa6801ffb4916206977cf0f0709d5805": "gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:3c3ddb0e507360710161b97f4a7073dc7d49a7f603412f78c18acac0511d615a"
-
-cache: "gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:feb3eca1db6bd81ff0d2b2f0bee1ba2c1a5f726c8609f857fdb0e2cf742cfd27": "gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:e244b6003d986ae014c525dc84878afc63710c3d17d09af1abb47a607b7aeaa0"
-
-cache: "gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:b58cc95fb16a3341f8688b6250c7177a810e738d3979d2d25d17c38d16ee1e6f": "gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:d569f30abd31cbe105ba32b512a321dd82431b0a8e205bebf14538fddb4dfa54"
-
-cache: "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:f0557bc3f2bc1561b1709559456b919ea0c395ca607d2403cf609e4c3bfb6957": "gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:3954804822783d159811d0e4c91619b0729b6897bfa37836ee6c56866e57cc8f"
 
 cache: "ghcr.io/buildkite/agent-stack-k8s/controller:0.7.0@sha256:6d747da4f3898b092010fcdc382fc59dc3d90c5478d41e0a01eb9b6f53a9d91f": "ghcr.io/buildkite/agent-stack-k8s/controller@sha256:6d747da4f3898b092010fcdc382fc59dc3d90c5478d41e0a01eb9b6f53a9d91f"
 
@@ -119,3 +105,5 @@ cache: "redis:7.0.11-alpine": "redis@sha256:121bac949fb5f623b9fa0b4e4c9fb358ffd0
 cache: "registry.k8s.io/descheduler/descheduler:v0.28.1": "registry.k8s.io/descheduler/descheduler@sha256:0bad561801345759824ddc498dfe026e22b14187476ed4f3c2fec90bc68fe57c"
 
 cache: "registry.opensource.zalan.do/acid/postgres-operator:v1.10.1": "registry.opensource.zalan.do/acid/postgres-operator@sha256:8ced77e97e0876b2e1dbc8ef3ee6c9cc26df18c20b5f6c188a7799096be097df"
+
+cache: "tailscale/k8s-operator:unstable": "tailscale/k8s-operator@sha256:ca248aec3f18b55529018afa9fd57d6fff0fbc8e187c2b6db3adb05efee71585"

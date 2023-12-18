@@ -1,16 +1,17 @@
 package c
 
 teacher: bootstrap: k3s_bootstrap & {
-	"harbor": {}
-
 	"tfo": {}
 	"argo-workflows": {}
 	"argo-events": {}
 	"buildkite": {}
+	"harbor": {}
 
 	"headlamp": {}
 
 	"pihole": {}
+
+	"tailscale": {}
 }
 
 class: {
