@@ -426,7 +426,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-tailscale
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.1
+    targetRevision: 0.0.5
   syncPolicy:
     automated:
       prune: true

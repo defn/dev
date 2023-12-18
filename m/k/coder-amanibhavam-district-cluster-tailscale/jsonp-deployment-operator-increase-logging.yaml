@@ -1,10 +1,13 @@
 #ManagedBy: cue
 
 - op: replace
+  path: /spec/template/spec/containers/0/env/0/value
+  value: coder-amanibhavam-district-proxy
+- op: replace
   path: /spec/template/spec/containers/0/env/2/value
   value: dev
 - op: replace
-  path: /spec/template/spec/containers/0/env/8/value
+  path: /spec/template/spec/containers/0/env/9/value
   value: "true"
 - op: replace
   path: /spec/template/spec/containers/0/volumeMounts/0
