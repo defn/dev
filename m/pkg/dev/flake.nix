@@ -1,8 +1,6 @@
 {
   inputs = {
-    # https://github.com/NixOS/nixpkgs/commits/release-23.05
-    nixpkgs.url = github:NixOS/nixpkgs?rev=3fe694c4156b84dac12627685c7ae592a71e2206;
-    flake-utils.url = github:numtide/flake-utils?rev=04c1b180862888302ddfb2e3ad9eaa63afc60cf8;
+    nixpkgs.url = github:NixOS/nixpkgs?rev=005617587ee2b7c003388b4539b9120ebcc90e44;
   };
 
   outputs = inputs:
@@ -100,7 +98,31 @@
             };
         };
 
-        eachDefaultSystem = inputs.flake-utils.lib.eachDefaultSystem;
+        defaultSystems = [
+          "aarch64-linux"
+          "aarch64-darwin"
+          "x86_64-darwin"
+          "x86_64-linux"
+        ];
+
+        eachSystem = systems: f:
+          let
+            op = attrs: system:
+              let
+                ret = f system;
+                op = attrs: key: attrs //
+                    {
+                      ${key} = (attrs.${key} or { })
+                        // { ${system} = ret.${key}; };
+                    }
+                ;
+              in
+              builtins.foldl' op attrs (builtins.attrNames ret);
+          in
+          builtins.foldl' op { } systems
+        ;
+
+        eachDefaultSystem = eachSystem defaultSystems;
 
         dev-inputs = inputs;
 
