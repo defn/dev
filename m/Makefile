@@ -191,3 +191,8 @@ k3s-advertise-traefik:
 	sudo ethtool -K "$$(ip route show 0/0 | cut -f5 -d' ')" rx-udp-gro-forwarding on rx-gro-list off
 	while true; do if test -n "$$(kubectl get -n traefik svc traefik -o json | jq -r '.spec.clusterIP')"; then break; fi; sleep 5; done
 	tailscale up --advertise-routes=$$(kubectl get -n traefik svc traefik -o json | jq -r '.spec.clusterIP')/32,$$(kubectl get -n traefik svc traefik -o json | jq -r '.spec.clusterIP' | cut -d. -f1-2).128.53/32  --accept-routes=true --ssh
+
+tailscale-kubeconfig:
+	tailscale configure kubeconfig coder-amanibhavam-$(env)-proxy
+	-kubectl config delete-context coder-amanibhavam-$(env)
+	kubectl config rename-context coder-amanibhavam-$(env)-proxy.$(shell tailscale cert 2>&1 | grep 'use ' | cut -d'"' -f2 | cut -d. -f2-) coder-amanibhavam-$(env)
