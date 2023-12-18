@@ -306,6 +306,27 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
+        tailscale: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-school-cluster-tailscale
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-school-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-school-cluster-tailscale
+              targetRevision: 0.0.1
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
         tetragon: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
