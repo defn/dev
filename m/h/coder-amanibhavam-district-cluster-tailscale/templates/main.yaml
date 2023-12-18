@@ -45,7 +45,7 @@ metadata:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: tailscale-admins
+  name: tailscale-admins-cluster-admin
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -53,7 +53,7 @@ roleRef:
 subjects:
   - apiGroup: rbac.authorization.k8s.io
     kind: Group
-    name: tag:k8s-admin
+    name: tailscale-admins
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -93,7 +93,7 @@ spec:
         - image: cache.defn.run:5000/tailscale/k8s-operator@sha256:ca248aec3f18b55529018afa9fd57d6fff0fbc8e187c2b6db3adb05efee71585
           env:
             - name: OPERATOR_HOSTNAME
-              value: tailscale-operator
+              value: coder-amanibhavam-district-proxy
             - name: OPERATOR_SECRET
               value: operator
             - name: OPERATOR_LOGGING
@@ -111,9 +111,9 @@ spec:
             - name: PROXY_IMAGE
               value: tailscale/tailscale:unstable
             - name: PROXY_TAGS
-              value: "true"
+              value: tag:k8s
             - name: APISERVER_PROXY
-              value: "false"
+              value: "true"
             - name: PROXY_FIREWALL_MODE
               value: auto
           imagePullPolicy: Always

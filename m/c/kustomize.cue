@@ -1013,22 +1013,12 @@ kustomize: "tetragon": #KustomizeHelm & {
 kustomize: "tailscale": #Kustomize & {
 	cluster: #Cluster
 
-	resource: "tailscale": {
+	resource: "tailscale-operator": {
 		url: "https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/deploy/manifests/operator.yaml"
 	}
 
-	jsp: "secret-operator-oauth-remove": {
-		target: {
-			version:   "v1"
-			kind:      "Secret"
-			name:      "operator-oauth"
-			namespace: "tailscale"
-		}
-		patches: [{
-			op:    "replace"
-			path:  "/metadata/name"
-			value: "not-used"
-		}]
+	resource: "tailscale-rbac": {
+		url: "https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/deploy/manifests/authproxy-rbac.yaml"
 	}
 
 	jsp: "deployment-operator-increase-logging": {
@@ -1039,11 +1029,15 @@ kustomize: "tailscale": #Kustomize & {
 		}
 		patches: [{
 			op:    "replace"
+			path:  "/spec/template/spec/containers/0/env/0/value"
+			value: "\(cluster.cluster_name)-proxy"
+		}, {
+			op:    "replace"
 			path:  "/spec/template/spec/containers/0/env/2/value"
 			value: "dev"
 		}, {
 			op:    "replace"
-			path:  "/spec/template/spec/containers/0/env/8/value"
+			path:  "/spec/template/spec/containers/0/env/9/value"
 			value: "true"
 		}, {
 			op:   "replace"
@@ -1078,6 +1072,20 @@ kustomize: "tailscale": #Kustomize & {
 		}]
 	}
 
+	jsp: "secret-operator-oauth-remove": {
+		target: {
+			version:   "v1"
+			kind:      "Secret"
+			name:      "operator-oauth"
+			namespace: "tailscale"
+		}
+		patches: [{
+			op:    "replace"
+			path:  "/metadata/name"
+			value: "not-used"
+		}]
+	}
+
 	resource: "externalsecret-tailscale": {
 		apiVersion: "external-secrets.io/v1beta1"
 		kind:       "ExternalSecret"
@@ -1101,40 +1109,13 @@ kustomize: "tailscale": #Kustomize & {
 		}
 	}
 
-	resource: "clusterrole-tailscale-auth-proxy": {
-		apiVersion: "rbac.authorization.k8s.io/v1"
-		kind:       "ClusterRole"
-		metadata: name: "tailscale-auth-proxy"
-		rules: [{
-			apiGroups: [""]
-			resources: ["users", "groups"]
-			verbs: ["impersonate"]
-		}]
-	}
-
-	resource: "clusterrolebinding-tailscale-auth-proxy": {
-		apiVersion: "rbac.authorization.k8s.io/v1"
-		kind:       "ClusterRoleBinding"
-		metadata: name: "tailscale-auth-proxy"
-		subjects: [{
-			kind:      "ServiceAccount"
-			name:      "operator"
-			namespace: "tailscale"
-		}]
-		roleRef: {
-			kind:     "ClusterRole"
-			name:     "tailscale-auth-proxy"
-			apiGroup: "rbac.authorization.k8s.io"
-		}
-	}
-
 	resource: "clusterrolebinding-tailscale-admins": {
 		apiVersion: "rbac.authorization.k8s.io/v1"
 		kind:       "ClusterRoleBinding"
-		metadata: name: "tailscale-admins"
+		metadata: name: "tailscale-admins-cluster-admin"
 		subjects: [{
 			kind:     "Group"
-			name:     "tag:k8s-admin"
+			name:     "tailscale-admins",
 			apiGroup: "rbac.authorization.k8s.io"
 		}]
 		roleRef: {
