@@ -4,7 +4,7 @@ app ?= district school class district0 district1
 
 digest ?= 
 
-env ?= $(shell uname -n | cut -d- -f3)
+env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
 
 delivery:
 	while true; do \

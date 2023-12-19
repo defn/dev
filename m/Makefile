@@ -1,6 +1,6 @@
 timeout ?= 5
 
-env ?= $(shell uname -n | cut -d- -f3)
+env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
 domain ?= defn.run
 
 build:
@@ -124,7 +124,7 @@ coder-admin:
 	cd coder/pod && $(MAKE) push
 
 self-cert:
-	step certificate create --subtle --insecure --no-password --force --profile self-signed $$(uname -n) $$(uname -n).crt $$(uname -n).key
+	step certificate create --subtle --insecure --no-password --force --profile self-signed $(env) $(env).crt $(env).key
 
 once:
 	app repo add cache.$(domain):5000 --type helm --name cache --enable-oci --insecure-skip-server-verification
@@ -133,12 +133,12 @@ once:
 	$(MAKE) update-env env=$(env)
 
 vc-context:
-	env KUBECONFIG=$$HOME/.kube/config-in-cluster vcluster connect vcluster -n $$(uname -n | cut -d- -f1-3) --server=$$(env KUBECONFIG=$$HOME/.kube/config-in-cluster kubectl get -n $$(uname -n | cut -d- -f1-3) svc vcluster -o json | jq -r '.spec.clusterIP'):443 --update-current=false --kube-config-context-name $$(uname -n | cut -d- -f1-3)-cluster --kube-config "$$HOME/.kube/config"
+	env KUBECONFIG=$$HOME/.kube/config-in-cluster vcluster connect vcluster -n $(env) --server=$$(env KUBECONFIG=$$HOME/.kube/config-in-cluster kubectl get -n $(env)) svc vcluster -o json | jq -r '.spec.clusterIP'):443 --update-current=false --kube-config-context-name $(env))-cluster --kube-config "$$HOME/.kube/config"
 	cp $$HOME/.kube/config-in-cluster $$HOME/.kube/config.argocd
 
 vc-argocd:
-	-env KUBECONFIG=$$HOME/.kube/config-in-cluster:$$HOME/.kube/config argocd cluster --kube-context dfd --core rm $$(uname -n | cut -d- -f1-3)-cluster --yes
-	env KUBECONFIG=$$HOME/.kube/config-in-cluster:$$HOME/.kube/config argocd cluster --kube-context dfd --core add $$(uname -n | cut -d- -f1-3)-cluster --yes --upsert
+	-env KUBECONFIG=$$HOME/.kube/config-in-cluster:$$HOME/.kube/config argocd cluster --kube-context dfd --core rm $(env)-cluster --yes
+	env KUBECONFIG=$$HOME/.kube/config-in-cluster:$$HOME/.kube/config argocd cluster --kube-context dfd --core add $(env)-cluster --yes --upsert
 
 vc-init:
 	kubectl patch -n argocd secret argocd-secret -p '{"stringData": { "admin.password": "'$$(htpasswd -bnBC 10 "" admin | tr -d ':\n')'"}}'
@@ -148,8 +148,8 @@ vc:
 	chmod 0600 ~/.kube/config
 	$(MAKE) vc-argocd
 	cp $$HOME/.kube/config-in-cluster $$HOME/.kube/config.argocd
-	env KUBECONFIG=$$HOME/.kube/config-in-cluster kubectl apply -f e/$$(uname -n | cut -d- -f1-3)-cluster.yaml
-	cd c && env KUBECONFIG=$$HOME/.kube/config-in-cluster $(MAKE) update-env env=$$(uname -n | cut -d- -f3)
+	env KUBECONFIG=$$HOME/.kube/config-in-cluster kubectl apply -f e/$(env)-cluster.yaml
+	cd c && env KUBECONFIG=$$HOME/.kube/config-in-cluster $(MAKE) update-env env=$(env)
 	$(MAKE) vc-init
 
 dev:
