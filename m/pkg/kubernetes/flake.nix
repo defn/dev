@@ -1,7 +1,7 @@
 {
   inputs = {
     kubectl.url = github:defn/dev/pkg-kubectl-1.26.7-6?dir=m/pkg/kubectl;
-    k3sup.url = github:defn/dev/pkg-k3sup-0.13.3-2?dir=m/pkg/k3sup;
+    k3sup.url = github:defn/dev/pkg-k3sup-0.13.4-1?dir=m/pkg/k3sup;
     k9s.url = github:defn/dev/pkg-k9s-0.29.1-2?dir=m/pkg/k9s;
     helm.url = github:defn/dev/pkg-helm-3.13.3-2?dir=m/pkg/helm;
     kustomize.url = github:defn/dev/pkg-kustomize-5.3.0-2?dir=m/pkg/kustomize;
