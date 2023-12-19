@@ -2,5 +2,5 @@
   "slug": "pkg-helm",
   "ghrepo": "helm/helm",
   "vendor": "3.13.3",
-  "revision": "1"
+  "revision": "2"
 }
