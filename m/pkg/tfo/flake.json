@@ -2,5 +2,5 @@
   "slug": "pkg-tfo",
   "ghrepo": "isaaguilar/terraform-operator-cli",
   "vendor": "2.2.0",
-  "revision": "1"
+  "revision": "2"
 }
