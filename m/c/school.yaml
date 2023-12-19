@@ -16,29 +16,6 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: spaceship
-spec:
-  selector:
-    matchLabels:
-      name: spaceship
-      org: empire
-      class: spaceship
-  replicas: 4
-  template:
-    metadata:
-      labels:
-        name: spaceship
-        org: empire
-        class: spaceship
-    spec:
-      containers:
-        - name: spaceship
-          image: docker.io/tgraf/netperf:v1.0
-          imagePullPolicy: IfNotPresent
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
   name: deathstar
 spec:
   selector:
@@ -62,7 +39,7 @@ spec:
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
-  name: "deathstar-api-protection"
+  name: "deathstar-blueprints"
 spec:
   endpointSelector:
     matchLabels:
@@ -72,7 +49,6 @@ spec:
     - fromEndpoints:
         - matchLabels:
             org: alliance
-            io.cilium.k8s.policy.cluster: coder-amanibhavam-class
       toPorts:
         - ports:
             - port: "80"
