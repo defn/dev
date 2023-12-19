@@ -128,6 +128,10 @@ test-mesh:
 	kubectl --context $(from) delete ns cilium-test || true
 	kubectl --context $(to) delete ns cilium-test
 
+start-all:
+	for a in school class; do coder start --yes $$a; done
+	for a in school class; do coder config-ssh --yes; ssh coder.$$a bash -c "'cd m && make ready'"; done
+
 test-all:
 	$(MAKE) test-mesh from=coder-amanibhavam-district to=coder-amanibhavam-school
 	$(MAKE) test-mesh from=coder-amanibhavam-district to=coder-amanibhavam-class
