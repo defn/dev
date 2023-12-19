@@ -124,9 +124,17 @@ test-mesh:
 # make test-mesh from=coder-amanibhavam-school to=coder-amanibhavam-district
 	kubectl --context $(from) delete ns cilium-test || true
 	kubectl --context $(to) delete ns cilium-test || true
-	cilium connectivity test --context $(from) --multi-cluster $(to) --test '!/(node)-to-(node)-encryption' --test '!/no-unexpected-packet-drops'
+	cilium connectivity test --context $(from) --multi-cluster $(to) --test '!/node-to-node-encryption' --test '!/no-unexpected-packet-drops'
 	kubectl --context $(from) delete ns cilium-test || true
 	kubectl --context $(to) delete ns cilium-test
+
+test-all:
+	$(MAKE) test-mesh from=coder-amanibhavam-district to=coder-amanibhavam-school
+	$(MAKE) test-mesh from=coder-amanibhavam-district to=coder-amanibhavam-class
+	$(MAKE) test-mesh from=coder-amanibhavam-class    to=coder-amanibhavam-district
+	$(MAKE) test-mesh from=coder-amanibhavam-class    to=coder-amanibhavam-school
+	$(MAKE) test-mesh from=coder-amanibhavam-school   to=coder-amanibhavam-district
+	$(MAKE) test-mesh from=coder-amanibhavam-school   to=coder-amanibhavam-class
 
 connect:
 # k get services -n kube-system clustermesh-apiserver
