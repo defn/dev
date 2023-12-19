@@ -39,6 +39,8 @@ function main {
 	mkdir -p ~/.kube
 	rm -f ~/.kube/config
 
+	make dotfiles password-store
+
 	if [[ -n ${workdir} ]]; then
 		cd "${workdir}"
 	fi
