@@ -179,3 +179,8 @@ function gs {
 
 # vscode browser
 export BROWSER="$(type -P browser || true)"
+
+# until ec2 env is updated
+export DFD_PREFIX="${DFD_PREFIX:-$(echo "${DFD_WORKSPACE_NAME}" | cut -d- -f1)}"
+export DFD_OWNER="${DFD_OWNER:-$(echo "${DFD_WORKSPACE_NAME}" | cut -d- -f2)}"
+export DFD_NAME="${DFD_NAME:-$(echo "${DFD_WORKSPACE_NAME}" | cut -d- -f3-)}"
