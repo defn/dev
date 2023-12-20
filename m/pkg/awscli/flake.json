@@ -1,6 +1,6 @@
 {
   "slug": "pkg-awscli",
   "ghrepo": "aws/aws-cli",
-  "vendor": "2.15.2",
-  "revision": "2"
+  "vendor": "2.15.3",
+  "revision": "0"
 }
