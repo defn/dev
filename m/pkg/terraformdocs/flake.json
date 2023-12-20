@@ -1,6 +1,6 @@
 {
   "slug": "pkg-terraformdocs",
   "ghrepo": "terraform-docs/terraform-docs",
-  "vendor": "0.16.0",
-  "revision": "3"
+  "vendor": "0.17.0",
+  "revision": "0"
 }
