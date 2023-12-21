@@ -3067,24 +3067,6 @@ kustomize: "spaceship": #Kustomize & {
 
 	resource: "service-deathstar": #resource["service-deathstar"]
 
-	resource: "service-deathstar": {
-		apiVersion: "v1"
-		kind:       "Service"
-		metadata: {
-			name: "deathstar"
-			annotations: "io.cilium/global-service": "true"
-		}
-		spec: {
-			type: "ClusterIP"
-			ports: [{
-				port: 80
-			}]
-			selector: {
-				org:   "empire"
-				class: "deathstar"
-			}
-		}
-	}
 	resource: "deployment-spaceship": {
 		apiVersion: "apps/v1"
 		kind:       "Deployment"
