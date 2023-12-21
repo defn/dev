@@ -1,0 +1,8 @@
+load("//b/nix:nix.bzl", "nix_flake")
+
+# nix flake
+nix_flake(
+    name = "flake",
+    cmds = ["go"],
+    visibility = ["//visibility:public"],
+)
