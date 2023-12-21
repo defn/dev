@@ -1,7 +1,5 @@
 SHELL := /bin/bash
 
-app ?= district school class district0 district1
-
 digest ?= 
 
 env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
@@ -9,8 +7,8 @@ env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
 delivery:
 	while true; do \
 		$(MAKE) delivery_inner; \
-		if ! git diff coder-* | grep app_version:; then $(MAKE) delivery_inner; break; fi; \
-		git add -u coder-*; \
+		if ! git diff $(env) | grep app_version:; then $(MAKE) delivery_inner; break; fi; \
+		git add -u $(env); \
 		done
 
 # M k/r/crds.cue
@@ -63,7 +61,7 @@ build-all:
 # can't run in parallel without issues
 # maybe problems with tracking directories in k/APP/*.yaml
 	b clean
-	runmany 1 'cd $$1 && make' coder-*/
+	runmany 1 'cd $$1 && make' $(env)
 	rm -f ../k/r/y/main.yaml
 	rm -f ../k/r/Makefile/main.yaml
 	$(MAKE) cluster_cue
@@ -80,7 +78,7 @@ cluster_cue:
 release:
 # generate k/r
 # rm -rf ../k/r
-	(cd r/digest && cue export --out json -e cached_yaml) | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | ./release.py
+	(cd r/digest && cue export --out json -e cached_yaml) | jq -r 'to_entries[] | "../k/r/\(.key) \(.value | @base64)"' | ./release.py
 # rm -rf ../k/r/y
 # git add ../k/r
 
@@ -198,7 +196,7 @@ spaceship-visit:
 	kubectl exec --context coder-amanibhavam-school -ti deploy/spaceship -- curl -XGET deathstar.default.svc.cluster.local/v1/
 
 crd:
-	cd ../k/y && cue export --out json -e crds | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | while read -r domain crds; do echo "$$crds" | base64 -d > ../crd/$$domain.yaml; done
+	cd ../k/y && cue export --out json -e crds | jq -r 'to_entries[] | "../crd/\(.key).yaml \(.value | @base64)"' | ../../c/release.py
 
 update-env:
 	app set $(env)-cluster --revision $$(helm show chart --insecure-skip-tls-verify oci://cache.defn.run:5000/library/helm/$(env)-cluster-env 2>/dev/null | grep ^version: | awk '{print $$2}')
