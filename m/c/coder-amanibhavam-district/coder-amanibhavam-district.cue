@@ -10,6 +10,8 @@ teacher: bootstrap: k3s_bootstrap & {
 	"headlamp": {}
 
 	"pihole": {}
+
+	"deathstar": {}
 }
 
 class: {

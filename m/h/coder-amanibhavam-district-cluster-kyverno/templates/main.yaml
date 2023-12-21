@@ -22965,7 +22965,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/bitnami/kubectl@sha256:6485a923f6f4ff3d42d871ce5bd45ee8f25a303c44972a4ad31ddd895082fc22
+        - image: cache.defn.run:5000/bitnami/kubectl@sha256:317347b84a0b23d7a674b289cedfebccd4822def4eec874baa54014a7957a316
           command:
             - sh
             - -c
@@ -22996,7 +22996,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: cache.defn.run:5000/busybox@sha256:0fac7d303b1d9c0b4f5a596b7bd95525c94578f72146393f7a2534bfe3e4b2c0
+    - image: cache.defn.run:5000/busybox@sha256:bc0fbba1438a3fe9207e841a19710e7f433cb09b6710c95cb139f5a17ea25616
       command:
         - /bin/sh
         - -c
@@ -23040,7 +23040,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: cache.defn.run:5000/busybox@sha256:0fac7d303b1d9c0b4f5a596b7bd95525c94578f72146393f7a2534bfe3e4b2c0
+    - image: cache.defn.run:5000/busybox@sha256:bc0fbba1438a3fe9207e841a19710e7f433cb09b6710c95cb139f5a17ea25616
       command:
         - /bin/sh
         - -c
@@ -23084,7 +23084,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: cache.defn.run:5000/busybox@sha256:0fac7d303b1d9c0b4f5a596b7bd95525c94578f72146393f7a2534bfe3e4b2c0
+    - image: cache.defn.run:5000/busybox@sha256:bc0fbba1438a3fe9207e841a19710e7f433cb09b6710c95cb139f5a17ea25616
       command:
         - /bin/sh
         - -c
@@ -23128,7 +23128,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: cache.defn.run:5000/busybox@sha256:0fac7d303b1d9c0b4f5a596b7bd95525c94578f72146393f7a2534bfe3e4b2c0
+    - image: cache.defn.run:5000/busybox@sha256:bc0fbba1438a3fe9207e841a19710e7f433cb09b6710c95cb139f5a17ea25616
       command:
         - /bin/sh
         - -c
@@ -23172,7 +23172,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: cache.defn.run:5000/busybox@sha256:0fac7d303b1d9c0b4f5a596b7bd95525c94578f72146393f7a2534bfe3e4b2c0
+    - image: cache.defn.run:5000/busybox@sha256:bc0fbba1438a3fe9207e841a19710e7f433cb09b6710c95cb139f5a17ea25616
       command:
         - /bin/sh
         - -c
@@ -23216,7 +23216,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: cache.defn.run:5000/busybox@sha256:0fac7d303b1d9c0b4f5a596b7bd95525c94578f72146393f7a2534bfe3e4b2c0
+    - image: cache.defn.run:5000/busybox@sha256:bc0fbba1438a3fe9207e841a19710e7f433cb09b6710c95cb139f5a17ea25616
       command:
         - /bin/sh
         - -c
@@ -23260,7 +23260,7 @@ metadata:
 ---
 spec:
   containers:
-    - image: cache.defn.run:5000/busybox@sha256:0fac7d303b1d9c0b4f5a596b7bd95525c94578f72146393f7a2534bfe3e4b2c0
+    - image: cache.defn.run:5000/busybox@sha256:bc0fbba1438a3fe9207e841a19710e7f433cb09b6710c95cb139f5a17ea25616
       command:
         - /bin/sh
         - -c

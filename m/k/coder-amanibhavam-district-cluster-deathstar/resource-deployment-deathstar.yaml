@@ -1,0 +1,24 @@
+#ManagedBy: cue
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deathstar
+spec:
+  selector:
+    matchLabels:
+      name: deathstar
+      org: empire
+      class: deathstar
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        name: deathstar
+        org: empire
+        class: deathstar
+    spec:
+      containers:
+        - name: deathstar
+          image: docker.io/cilium/starwars:v1.0
+          imagePullPolicy: IfNotPresent

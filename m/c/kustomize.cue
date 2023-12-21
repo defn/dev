@@ -1115,7 +1115,7 @@ kustomize: "tailscale": #Kustomize & {
 		metadata: name: "tailscale-admins-cluster-admin"
 		subjects: [{
 			kind:     "Group"
-			name:     "tailscale-admins",
+			name:     "tailscale-admins"
 			apiGroup: "rbac.authorization.k8s.io"
 		}]
 		roleRef: {
@@ -2961,6 +2961,187 @@ kustomize: "aws-node-term": #KustomizeHelm & {
 		kind:       "Namespace"
 		metadata: {
 			name: "aws-node-termination-handler"
+		}
+	}
+}
+
+#resource: "service-deathstar": {
+	apiVersion: "v1"
+	kind:       "Service"
+	metadata: {
+		name: "deathstar"
+		annotations: "io.cilium/global-service": "true"
+	}
+	spec: {
+		type: "ClusterIP"
+		ports: [{
+			port: 80
+		}]
+		selector: {
+			org:   "empire"
+			class: "deathstar"
+		}
+	}
+}
+
+kustomize: "deathstar": #Kustomize & {
+	cluster: #Cluster
+
+	namespace: "default"
+
+	resource: "service-deathstar": #resource["service-deathstar"]
+
+	resource: "deployment-deathstar": {
+		apiVersion: "apps/v1"
+		kind:       "Deployment"
+		metadata: name: "deathstar"
+		spec: {
+			selector: matchLabels: {
+				name:  "deathstar"
+				org:   "empire"
+				class: "deathstar"
+			}
+			replicas: 3
+			template: {
+				metadata: labels: {
+					name:  "deathstar"
+					org:   "empire"
+					class: "deathstar"
+				}
+				spec: containers: [{
+					name:            "deathstar"
+					image:           "docker.io/cilium/starwars:v1.0"
+					imagePullPolicy: "IfNotPresent"
+				}]
+			}
+		}
+	}
+
+	resource: "ciliumnetworkpolicy-deathstar-blueprints": {
+		apiVersion: "cilium.io/v2"
+		kind:       "CiliumNetworkPolicy"
+		metadata: name: "deathstar-blueprints"
+		spec: {
+			endpointSelector: matchLabels: {
+				class: "deathstar"
+				org:   "empire"
+			}
+			ingress: [{
+				fromEndpoints: [{
+					matchLabels: org: "alliance"
+				}]
+				toPorts: [{
+					ports: [{
+						port:     "80"
+						protocol: "TCP"
+					}]
+					rules: http: [{
+						method: "PUT"
+						path:   "/v1/exhaust-port$"
+						headers: ["X-Has-Force: True"]
+					}]
+				}]
+			}, {
+				fromEndpoints: [{
+					matchLabels: org: "empire"
+				}]
+				toPorts: [{
+					ports: [{
+						port:     "80"
+						protocol: "TCP"
+					}]
+					rules: http: [{
+						method: "GET"
+						path:   "/v1/"
+					}]
+				}]
+			}]
+		}
+	}
+}
+
+kustomize: "spaceship": #Kustomize & {
+	cluster: #Cluster
+
+	namespace: "default"
+
+	resource: "service-deathstar": #resource["service-deathstar"]
+
+	resource: "service-deathstar": {
+		apiVersion: "v1"
+		kind:       "Service"
+		metadata: {
+			name: "deathstar"
+			annotations: "io.cilium/global-service": "true"
+		}
+		spec: {
+			type: "ClusterIP"
+			ports: [{
+				port: 80
+			}]
+			selector: {
+				org:   "empire"
+				class: "deathstar"
+			}
+		}
+	}
+	resource: "deployment-spaceship": {
+		apiVersion: "apps/v1"
+		kind:       "Deployment"
+		metadata: name: "spaceship"
+		spec: {
+			selector: matchLabels: {
+				name:  "spaceship"
+				org:   "empire"
+				class: "spaceship"
+			}
+			replicas: 4
+			template: {
+				metadata: labels: {
+					name:  "spaceship"
+					org:   "empire"
+					class: "spaceship"
+				}
+				spec: containers: [{
+					name:            "spaceship"
+					image:           "docker.io/tgraf/netperf:v1.0"
+					imagePullPolicy: "IfNotPresent"
+				}]
+			}
+		}
+	}
+}
+
+kustomize: "xwing": #Kustomize & {
+	cluster: #Cluster
+
+	namespace: "default"
+
+	resource: "service-deathstar": #resource["service-deathstar"]
+
+	resource: "deployment-xwing": {
+		apiVersion: "apps/v1"
+		kind:       "Deployment"
+		metadata: name: "xwing"
+		spec: {
+			selector: matchLabels: {
+				name:  "xwing"
+				org:   "alliance"
+				class: "spaceship"
+			}
+			replicas: 3
+			template: {
+				metadata: labels: {
+					name:  "xwing"
+					org:   "alliance"
+					class: "spaceship"
+				}
+				spec: containers: [{
+					name:            "spaceship"
+					image:           "docker.io/tgraf/netperf:v1.0"
+					imagePullPolicy: "IfNotPresent"
+				}]
+			}
 		}
 	}
 }

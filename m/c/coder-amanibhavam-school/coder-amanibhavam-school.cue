@@ -1,6 +1,8 @@
 package c
 
-teacher: bootstrap: k3s_bootstrap
+teacher: bootstrap: k3s_bootstrap & {
+	"spaceship": {}
+}
 
 class: {
 	handle:          "amanibhavam"
