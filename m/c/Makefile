@@ -78,7 +78,7 @@ cluster_cue:
 release:
 # generate k/r
 # rm -rf ../k/r
-	(cd r/digest && cue export --out json -e cached_yaml) | jq -r 'to_entries[] | "../k/r/\(.key) \(.value | @base64)"' | ./release.py
+	(cd r/digest && cue export --out json -e cached_yaml) | jq -r 'to_entries[] | "../k/r/\(.key) \(.value | @base64) 1"' | ./release.py
 # rm -rf ../k/r/y
 # git add ../k/r
 
@@ -196,7 +196,7 @@ spaceship-visit:
 	kubectl exec --context coder-amanibhavam-school -ti deploy/spaceship -- curl -XGET deathstar.default.svc.cluster.local/v1/
 
 crd:
-	cd ../k/y && cue export --out json -e crds | jq -r 'to_entries[] | "../crd/\(.key).yaml \(.value | @base64)"' | ../../c/release.py
+	cd ../k/y && cue export --out json -e crds | jq -r 'to_entries[] | "../crd/\(.key).yaml \(.value | @base64) 0"' | ../../c/release.py
 
 update-env:
 	app set $(env)-cluster --revision $$(helm show chart --insecure-skip-tls-verify oci://cache.defn.run:5000/library/helm/$(env)-cluster-env 2>/dev/null | grep ^version: | awk '{print $$2}')

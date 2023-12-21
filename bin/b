@@ -39,6 +39,7 @@ function bazel {
 		if test -x /usr/bin/xcrun >/dev/null; then
 			command bazel "${cmd}" --macos_sdk_version="$(/usr/bin/xcrun -show-sdk-version || true)" "$@"
 		else
+			# --sandbox_debug
 			command bazel "${cmd}" "$@"
 		fi
 		;;

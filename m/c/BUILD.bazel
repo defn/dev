@@ -5,6 +5,12 @@ filegroup(
 )
 
 filegroup(
+    name = "release_py_script",
+    srcs = ["release.py"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
     name = "gen_kustomize_script",
     srcs = ["gen_kustomize.sh"],
     visibility = ["//visibility:public"],
