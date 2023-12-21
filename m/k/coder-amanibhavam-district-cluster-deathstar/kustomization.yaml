@@ -1,0 +1,10 @@
+#ManagedBy: cue
+
+patches: []
+resources:
+  - resource-service-deathstar.yaml
+  - resource-deployment-deathstar.yaml
+  - resource-ciliumnetworkpolicy-deathstar-blueprints.yaml
+namespace: default
+commonLabels: {}
+commonAnnotations: {}

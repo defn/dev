@@ -201,7 +201,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-kyverno
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.104
+    targetRevision: 0.0.105
   syncPolicy:
     automated:
       prune: true
@@ -298,6 +298,27 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
+  name: coder-amanibhavam-school-cluster-spaceship
+  namespace: argocd
+spec:
+  destination:
+    name: coder-amanibhavam-school-cluster
+  project: default
+  source:
+    chart: library/helm/coder-amanibhavam-school-cluster-spaceship
+    repoURL: cache.defn.run:5000
+    targetRevision: 0.0.1
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: []
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
   name: coder-amanibhavam-school-cluster-tailscale
   namespace: argocd
 spec:
@@ -307,7 +328,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-tailscale
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.1
+    targetRevision: 0.0.2
   syncPolicy:
     automated:
       prune: true

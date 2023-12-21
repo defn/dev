@@ -2,15 +2,19 @@ package r
 
 cache: "bitnami/kubectl:1.26.4": "bitnami/kubectl@sha256:a0a972324d937b2c2f7207af29d1abd6ce3f7fd5ea73357036a67ab24f34cc92"
 
-cache: "bitnami/kubectl:latest": "bitnami/kubectl@sha256:6485a923f6f4ff3d42d871ce5bd45ee8f25a303c44972a4ad31ddd895082fc22"
+cache: "bitnami/kubectl:latest": "bitnami/kubectl@sha256:317347b84a0b23d7a674b289cedfebccd4822def4eec874baa54014a7957a316"
 
-cache: "busybox:1.35": "busybox@sha256:0fac7d303b1d9c0b4f5a596b7bd95525c94578f72146393f7a2534bfe3e4b2c0"
+cache: "busybox:1.35": "busybox@sha256:bc0fbba1438a3fe9207e841a19710e7f433cb09b6710c95cb139f5a17ea25616"
 
 cache: "curlimages/curl": "curlimages/curl@sha256:4bfa3e2c0164fb103fb9bfd4dc956facce32b6c5d47cc09fcec883ce9535d5ac"
 
 cache: "docker.io/amazon/amazon-eks-pod-identity-webhook:v0.4.0": "docker.io/amazon/amazon-eks-pod-identity-webhook@sha256:69ba0ed032cfa4d72621037c2836d464f401fde1fa993adf34e79335ec4c56ac"
 
 cache: "docker.io/bitnami/external-dns:0.14.0-debian-11-r2": "docker.io/bitnami/external-dns@sha256:b5ef3e00a40dbf1e8d0fae9ac73c6d3bf612af53b7a693c36b62c9ce510bc08d"
+
+cache: "docker.io/cilium/starwars:v1.0": "docker.io/cilium/starwars@sha256:c66b1e508d462266c02a562e006168c3c4604eca6f3159d0d98f17fd9e9d512a"
+
+cache: "docker.io/tgraf/netperf:v1.0": "docker.io/tgraf/netperf@sha256:8e86f744bfea165fd4ce68caa05abc96500f40130b857773186401926af7e9e6"
 
 cache: "docker.io/traefik:v2.10.6": "docker.io/traefik@sha256:1957e3314f435c85b3a19f7babd53c630996aa1af65d1f479d75539251b1e112"
 
@@ -35,8 +39,6 @@ cache: "ghcr.io/kyverno/kyverno:v1.10.6": "ghcr.io/kyverno/kyverno@sha256:902f8e
 cache: "ghcr.io/kyverno/kyvernopre:v1.10.6": "ghcr.io/kyverno/kyvernopre@sha256:52163caa39388e1a315afbeb6fb2dace3ac71320d9f0a9638c4c63dbf16d6b92"
 
 cache: "ghcr.io/kyverno/reports-controller:v1.10.6": "ghcr.io/kyverno/reports-controller@sha256:9d4f04481b4906b14d46f366a94d7050629961c2ffcb48db0620a56cf283a2a7"
-
-cache: "ghcr.io/stakater/reloader:v1.0.54": "ghcr.io/stakater/reloader@sha256:32b3d38b8629558cc96f05a2dcb68f29cd81e3239c5b1b0ba51c84fb981c0756"
 
 cache: "ghcr.io/stakater/reloader:v1.0.56": "ghcr.io/stakater/reloader@sha256:caee7a2a0a603c85e4c43b682afea1fc28464be66b88acc04b9c9775754bece3"
 
@@ -108,4 +110,4 @@ cache: "registry.k8s.io/descheduler/descheduler:v0.28.1": "registry.k8s.io/desch
 
 cache: "registry.opensource.zalan.do/acid/postgres-operator:v1.10.1": "registry.opensource.zalan.do/acid/postgres-operator@sha256:8ced77e97e0876b2e1dbc8ef3ee6c9cc26df18c20b5f6c188a7799096be097df"
 
-cache: "tailscale/k8s-operator:unstable": "tailscale/k8s-operator@sha256:ca248aec3f18b55529018afa9fd57d6fff0fbc8e187c2b6db3adb05efee71585"
+cache: "tailscale/k8s-operator:unstable": "tailscale/k8s-operator@sha256:8d1adfe38dcbcdacabbb4fee2f03cfe41516d17be76967828a1f99b3b8dbe1bb"

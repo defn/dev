@@ -158,6 +158,27 @@ helmCharts:
                 prune: true
                 selfHeal: true
               syncOptions: []
+        deathstar: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-district-cluster-deathstar
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-district-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-district-cluster-deathstar
+              targetRevision: 0.0.1
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
         descheduler: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
@@ -320,7 +341,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-kyverno
-              targetRevision: 0.0.104
+              targetRevision: 0.0.105
             syncPolicy:
               automated:
                 prune: true
@@ -447,7 +468,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-tailscale
-              targetRevision: 0.0.5
+              targetRevision: 0.0.6
             syncPolicy:
               automated:
                 prune: true

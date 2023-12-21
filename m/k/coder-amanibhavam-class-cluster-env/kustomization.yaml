@@ -215,7 +215,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-kyverno
-              targetRevision: 0.0.104
+              targetRevision: 0.0.105
             syncPolicy:
               automated:
                 prune: true
@@ -321,7 +321,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-tailscale
-              targetRevision: 0.0.1
+              targetRevision: 0.0.2
             syncPolicy:
               automated:
                 prune: true
@@ -385,6 +385,27 @@ helmCharts:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-trust-manager
               targetRevision: 0.0.101
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        xwing: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-class-cluster-xwing
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-class-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-class-cluster-xwing
+              targetRevision: 0.0.1
             syncPolicy:
               automated:
                 prune: true
