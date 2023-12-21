@@ -172,14 +172,17 @@ restart-cilium:
 token:
 	@kubectl create token headlamp-admin -n headlamp
 
+xwing-attack:
+	kubectl exec --context coder-amanibhavam-class -ti deploy/xwing -- curl -XPUT -H 'X-Has-Force: True' deathstar.default.svc.cluster.local/v1/exhaust-port
+
 xwing-visit:
-	kubectl exec -ti deploy/xwing -- curl -XGET deathstar.default.svc.cluster.local/v1/
+	kubectl exec --context coder-amanibhavam-class -ti deploy/xwing -- curl -XGET deathstar.default.svc.cluster.local/v1/
 
-visit:
-	kubectl exec -ti deploy/spaceship -- curl -XGET deathstar.default.svc.cluster.local/v1/
+spaceship-attack:
+	kubectl exec --context coder-amanibhavam-school -ti deploy/xwing -- curl -XPUT -H 'X-Has-Force: True' deathstar.default.svc.cluster.local/v1/exhaust-port
 
-attack:
-	kubectl exec -ti deploy/xwing -- curl -XPUT -H 'X-Has-Force: True' deathstar.default.svc.cluster.local/v1/exhaust-port
+spaceship-visit:
+	kubectl exec --context coder-amanibhavam-school -ti deploy/spaceship -- curl -XGET deathstar.default.svc.cluster.local/v1/
 
 crd:
 	cd ../k/y && cue export --out json -e crds | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | while read -r domain crds; do echo "$$crds" | base64 -d > ../crd/$$domain.yaml; done
