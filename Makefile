@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 NIX_VERSION := 2.19.2
 
-flakes ?= home oci nix secrets utils vpn acme godev jsdev pydev localdev development cloud kubernetes remotedev shell
+flakes ?= home nix secrets utils development cloud kubernetes remotedev localdev godev jsdev pydev shell
 
 build:
 	cd m/toc & $(MAKE) build
