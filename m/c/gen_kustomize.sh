@@ -14,7 +14,11 @@ function main {
 	out="$1"
 	shift
 
-	jq --arg out "${out}" -r '.gen | to_entries[] | .key as $dir | .value | to_entries[] | "\($out)/\($dir)/\(.key) \(.value | @base64) 0"' <"${app}" | $release_py
+	local tmp="$(pwd)/tmp"
+	mkdir -p "${tmp}"
+	cat "${app}" | jq --arg out "${tmp}" -r '.gen | to_entries[] | .key as $dir | .value | to_entries[] | "\($out)/\($dir)/\(.key) \(.value | @base64) 0"' | $release_py
+	(cd "${tmp}" && tar cvfz - .) > "${out}"
+
 }
 
 main "$@"

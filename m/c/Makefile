@@ -7,8 +7,8 @@ env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
 delivery:
 	while true; do \
 		$(MAKE) delivery_inner; \
-		if ! git diff $(env) | grep app_version:; then $(MAKE) delivery_inner; break; fi; \
-		git add -u $(env); \
+		if ! git diff coder-* | grep app_version:; then $(MAKE) delivery_inner; break; fi; \
+		git add -u coder-*; \
 		done
 
 # M k/r/crds.cue
@@ -60,8 +60,7 @@ digest:
 build-all:
 # can't run in parallel without issues
 # maybe problems with tracking directories in k/APP/*.yaml
-	b clean
-	runmany 1 'cd $$1 && make' $(env)
+	runmany 1 'cd $$1 && make' coder-*
 	rm -f ../k/r/y/main.yaml
 	rm -f ../k/r/Makefile/main.yaml
 	$(MAKE) cluster_cue
