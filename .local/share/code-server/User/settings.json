@@ -84,5 +84,8 @@
   "git.detectSubmodules": false,
   "workbench.editor.empty.hint": "hidden",
   "tailscale.portDiscovery.enabled": false,
-  "tailscale.ssh.defaultUsername": "ubuntu"
+  "tailscale.ssh.defaultUsername": "ubuntu",
+  "[python]": {
+    "diffEditor.ignoreTrimWhitespace": false
+  }
 }
