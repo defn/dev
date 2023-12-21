@@ -215,13 +215,55 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-kyverno
-              targetRevision: 0.0.105
+              targetRevision: 0.0.106
             syncPolicy:
               automated:
                 prune: true
                 selfHeal: true
               syncOptions:
                 - ServerSideApply=true
+        linkerd-control-plane: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-class-cluster-linkerd-control-plane
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-class-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-class-cluster-linkerd-control-plane
+              targetRevision: 0.0.3
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
+        linkerd-crds: |
+          apiVersion: argoproj.io/v1alpha1
+          kind: Application
+          metadata:
+            namespace: argocd
+            name: coder-amanibhavam-class-cluster-linkerd-crds
+            annotations:
+              argocd.argoproj.io/sync-wave: "100"
+          spec:
+            project: default
+            destination:
+              name: coder-amanibhavam-class-cluster
+            source:
+              repoURL: cache.defn.run:5000
+              chart: library/helm/coder-amanibhavam-class-cluster-linkerd-crds
+              targetRevision: 0.0.1
+            syncPolicy:
+              automated:
+                prune: true
+                selfHeal: true
+              syncOptions: []
         pod-identity: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application

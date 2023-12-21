@@ -1,0 +1,28 @@
+#ManagedBy: cue
+
+patches: []
+resources: []
+namespace: linkerd
+commonLabels: {}
+commonAnnotations: {}
+helmCharts:
+  - releaseName: linkerd-control-plane
+    name: linkerd-control-plane
+    version: 1.16.8
+    repo: https://helm.linkerd.io/stable
+    namespace: linkerd
+    valuesInline:
+      identity:
+        externalCA: true
+        issuer:
+          scheme: kubernetes.io/tls
+      proxyInjector:
+        externalSecret: true
+        injectCaFrom: linkerd/proxy_injector
+      profileValidator:
+        externalSecret: true
+        injectCaFrom: linkerd/profile_validator
+      policyValidator:
+        externalSecret: true
+        injectCaFrom: linkerd/policy_validator
+    includeCRDs: true
