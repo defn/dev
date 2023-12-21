@@ -1,0 +1,5 @@
+apiVersion: v2
+type: application
+name: coder-amanibhavam-district-cluster-linkerd-crds
+appVersion: "0.0.1"
+version: "0.0.1"

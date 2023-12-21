@@ -4,7 +4,15 @@ cache: "bitnami/kubectl:1.26.4": "bitnami/kubectl@sha256:a0a972324d937b2c2f7207a
 
 cache: "bitnami/kubectl:latest": "bitnami/kubectl@sha256:317347b84a0b23d7a674b289cedfebccd4822def4eec874baa54014a7957a316"
 
-cache: "busybox:1.35": "busybox@sha256:bc0fbba1438a3fe9207e841a19710e7f433cb09b6710c95cb139f5a17ea25616"
+cache: "busybox:1.35": "busybox@sha256:c4c67b37cc42396b8a6f6829e3379e86364f642ce6a40604ea4f7c695db0e695"
+
+cache: "cr.l5d.io/linkerd/controller:stable-2.14.7": "cr.l5d.io/linkerd/controller@sha256:23cbbb51b221176cb1e1514602d43d8a2888fbcb8261704b66b6b6d116ffbcb3"
+
+cache: "cr.l5d.io/linkerd/policy-controller:stable-2.14.7": "cr.l5d.io/linkerd/policy-controller@sha256:c4de1fee6f2410a4030800ad08cd7fa945af0c677a0bb992bdcc6a2cccfff70d"
+
+cache: "cr.l5d.io/linkerd/proxy-init:v2.2.3": "cr.l5d.io/linkerd/proxy-init@sha256:1075bc22a4a8f0852311dc84c9db0552f1245d07fe4fdebd4bc6cf4566bcbc76"
+
+cache: "cr.l5d.io/linkerd/proxy:stable-2.14.7": "cr.l5d.io/linkerd/proxy@sha256:9893a5d2fcccf7b0845852d1f9ff3d21f867d55e07cdb53314946eece7ae7c59"
 
 cache: "curlimages/curl": "curlimages/curl@sha256:4bfa3e2c0164fb103fb9bfd4dc956facce32b6c5d47cc09fcec883ce9535d5ac"
 

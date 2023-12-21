@@ -5,38 +5,38 @@ import (
 )
 
 k3s_bootstrap: {
-	// essentials
-	"cilium": {}
-	"tetragon": {}
-	"argo-cd": {}
-	"kyverno": {
-		app_sync_options: ["ServerSideApply=true"]
-	}
+	// node management
 	"reloader": {}
 	"descheduler": {}
 	//"aws-node-term": {}
+	"karpenter": {}
+
+	// secrets
 	"cert-manager": {}
 	"trust-manager": {}
-
-	// external secrets
 	"pod-identity": {}
 	"external-secrets": {}
 	"secrets": {}
-
-	// tailscale
-	"tailscale": {}
-
-	// scaling
-	"karpenter": {}
-
-	// external dns, certs issuer
-	"external-dns": {}
 	"issuer": {}
 
-	// traefik, functions
-	"traefik": {}
+	// management
+	"cilium": {}
+	"tetragon": {}
+	"kyverno": {
+		app_sync_options: ["ServerSideApply=true"]
+	}
 
-	// builds
+	// traffic
+	"external-dns": {}
+	"tailscale": {}
+	"traefik": {}
+	"linkerd-crds": {}
+	"linkerd-control-plane": {}
+
+	// deploy
+	"argo-cd": {}
+
+	// development
 	"postgres-operator": {}
 	"coder": {}
 }
