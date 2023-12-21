@@ -14,6 +14,10 @@ disabled = true
 
 disabled = true
 
+[python]
+
+disabled = true
+
 [nix_shell]
 
 disabled = true
