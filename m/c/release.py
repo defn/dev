@@ -9,9 +9,6 @@ def process_line(line):
     # Split the line into filename and base64 encoded string
     filename, encoded_data = line.split(' ', 1)
 
-    # Prefix the filename
-    filename = os.path.join('../k/r', filename)
-
     # Create a directory with the filename if it doesn't exist
     os.makedirs(os.path.dirname(filename), exist_ok=True)
 
