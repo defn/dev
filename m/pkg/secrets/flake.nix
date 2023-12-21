@@ -1,6 +1,7 @@
 {
   inputs = {
     pkg.url = github:defn/dev/pkg-pkg-0.0.13?dir=m/pkg/pkg;
+    acme.url = github:defn/dev/pkg-acme-0.0.13?dir=m/pkg/acme;
   };
 
   outputs = inputs: inputs.pkg.main rec {
@@ -18,6 +19,7 @@
         gnupg
         pinentry
         aws-vault
+        inputs.acme.defaultPackage.${ctx.system}
       ];
     };
   };
