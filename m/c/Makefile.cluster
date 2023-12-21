@@ -15,6 +15,8 @@ build:
 #	rm -rf ../../k/*/$(INFRA_NAME)-*
 # cue ./c/ generates kustomize ./k/
 	b run outputs_kustomize__update
+	cat generate_kustomize | (cd ../.. && tar xvfz -)
+	rm -f generate_kustomize
 # kustomize ./k/ generates ./k/y/ release yaml
 	(cd ../../k && b run outputs_release__update && rsync -ia r/$(INFRA_NAME)-* y/ >/dev/null)
 
