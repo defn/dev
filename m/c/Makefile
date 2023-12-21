@@ -39,10 +39,6 @@ delivery_inner:
 # ENV/APP-version.cue
 	$(MAKE) chart
 
-build:
-	cd $(shell uname -n) && $(MAKE) build
-	$(MAKE) release
-
 list:
 	@(cd .. && git grep artifacthub) | awk '{print $$2}' | runmany 'curl -sSL https://artifacthub.io/api/v1/$${1#https://artifacthub.io/}/feed/rss 2>/dev/null | grep 'artifacthub.io/packages/helm/' | grep -v -E "beta|snapshot" | head -1 | cut -d">" -f2 | cut -d"<" -f1' | sort -u > pending.txt
 	git diff pending.txt
@@ -83,8 +79,8 @@ cache:
 	cd ./r/digest && $(MAKE) cache filter=$(filter)
 
 tailscale:
-	mkdir -p ./$(shell uname -n)/openid
-	sudo tailscale funnel --bg --https=443 --set-path /openid $(shell pwd)/$(shell uname -n)/openid
+	mkdir -p ./$(env)/openid
+	sudo tailscale funnel --bg --https=443 --set-path /openid $(shell pwd)/$(env)/openid
 
 iam:
 	AWS_PAGER= HOST="$$(tailscale funnel status | grep ^#  | grep https:// | head -1 | cut -d/ -f3-)" \
@@ -111,9 +107,9 @@ last:
 
 test:
 # make test
-	kubectl --context $$(uname -n) delete ns cilium-test || true
-	cilium connectivity test --context $$(uname -n)
-	kubectl --context $$(uname -n) delete ns cilium-test || true
+	kubectl --context $(env) delete ns cilium-test || true
+	cilium connectivity test --context $(env)
+	kubectl --context $(env) delete ns cilium-test || true
 
 test-mesh:
 # make test-mesh from=coder-amanibhavam-school to=coder-amanibhavam-district
