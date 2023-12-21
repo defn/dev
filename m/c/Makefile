@@ -128,13 +128,26 @@ test-mesh:
 	kubectl --context $(from) delete ns cilium-test || true
 	kubectl --context $(to) delete ns cilium-test
 
+start-school:
+	coder start --yes school
+
+start-class:
+	coder start --yes class
+
 start-all:
-	for a in school class; do coder start --yes $$a; done
-	for a in school class; do coder config-ssh --yes; ssh coder.$$a bash -c "'cd m && make ready'"; done
+	$(MAKE) -j 2 start-school start-class
+	coder config-ssh
+	for a in school class; do ssh coder.$$a bash -c "'cd m && make ready'"; done
 	cilium clustermesh status --wait
 
+stop-school:
+	coder stop --yes school || true
+
+stop-class:
+	coder stop --yes class || true
+
 stop-all:
-	for a in school class; do coder stop --yes $$a || true; done
+	$(MAKE) -j 2 stop-school stop-class
 
 test-all:
 	$(MAKE) test-mesh from=coder-amanibhavam-district to=coder-amanibhavam-school
