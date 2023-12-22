@@ -264,7 +264,7 @@ res: application: "coder-amanibhavam-class-cluster-env": argocd: "coder-amanibha
 		source: {
 			chart:          "library/helm/coder-amanibhavam-class-cluster-l5d-control"
 			repoURL:        "cache.defn.run:5000"
-			targetRevision: "0.0.6"
+			targetRevision: "0.0.8"
 		}
 		syncPolicy: {
 			automated: {

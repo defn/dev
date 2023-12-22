@@ -237,7 +237,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-l5d-control
-              targetRevision: 0.0.6
+              targetRevision: 0.0.8
             syncPolicy:
               automated:
                 prune: true
