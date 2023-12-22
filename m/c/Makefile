@@ -192,6 +192,7 @@ crd:
 	cd ../k/y && cue export --out json -e crds | jq -r 'to_entries[] | "../crd/\(.key).yaml \(.value | @base64) 0"' | ../../c/release.py
 
 update-env:
+# ensure no argocd-repo-server pods are in a non-Running state, the cli will pick any pod
 	app set $(env)-cluster --revision $$(helm show chart --insecure-skip-tls-verify oci://cache.defn.run:5000/library/helm/$(env)-cluster-env 2>/dev/null | grep ^version: | awk '{print $$2}')
 
 diff-chart:
