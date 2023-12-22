@@ -259,13 +259,13 @@ kustomize: "kyverno": #KustomizeHelm & {
 }
 
 // https://artifacthub.io/packages/helm/linkerd2/linkerd-crds
-kustomize: "linkerd-crds": #KustomizeHelm & {
+kustomize: "l5d-crds": #KustomizeHelm & {
 	cluster: #Cluster
 
 	namespace: "linkerd"
 
 	helm: {
-		release: "linkerd-crds"
+		release: "l5d-crds"
 		name:    "linkerd-crds"
 		version: "1.8.0"
 		repo:    "https://helm.linkerd.io/stable"
@@ -291,13 +291,13 @@ kustomize: "linkerd-crds": #KustomizeHelm & {
 }
 
 // https://artifacthub.io/packages/helm/linkerd2/linkerd-control-plane
-kustomize: "linkerd-control-plane": #KustomizeHelm & {
+kustomize: "l5d-control": #KustomizeHelm & {
 	cluster: #Cluster
 
 	namespace: "linkerd"
 
 	helm: {
-		release: "linkerd-control-plane"
+		release: "l5d-control"
 		name:    "linkerd-control-plane"
 		version: "1.16.8"
 		repo:    "https://helm.linkerd.io/stable"

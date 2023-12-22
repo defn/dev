@@ -1,3 +1,3 @@
 package c
 
-teacher: bootstrap: "tailscale": app_version: "0.0.2"
+teacher: bootstrap: "tailscale": app_version: "0.0.4"

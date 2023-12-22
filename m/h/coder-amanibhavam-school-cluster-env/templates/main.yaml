@@ -5,7 +5,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-argo-cd
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.102
+    targetRevision: 0.0.104
   syncPolicy:
     automated:
       prune: true
@@ -26,7 +26,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-cert-manager
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.104
+    targetRevision: 0.0.106
   syncPolicy:
     automated:
       prune: true
@@ -47,7 +47,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-cilium
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.104
+    targetRevision: 0.0.106
   syncPolicy:
     automated:
       prune: true
@@ -68,7 +68,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-coder
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.105
+    targetRevision: 0.0.107
   syncPolicy:
     automated:
       prune: true
@@ -89,7 +89,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-descheduler
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.101
+    targetRevision: 0.0.103
   syncPolicy:
     automated:
       prune: true
@@ -110,7 +110,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-external-dns
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.106
+    targetRevision: 0.0.108
   syncPolicy:
     automated:
       prune: true
@@ -131,7 +131,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-external-secrets
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.102
+    targetRevision: 0.0.104
   syncPolicy:
     automated:
       prune: true
@@ -152,7 +152,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-issuer
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.106
+    targetRevision: 0.0.108
   syncPolicy:
     automated:
       prune: true
@@ -173,7 +173,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-karpenter
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.101
+    targetRevision: 0.0.103
   syncPolicy:
     automated:
       prune: true
@@ -194,7 +194,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-kyverno
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.106
+    targetRevision: 0.0.108
   syncPolicy:
     automated:
       prune: true
@@ -214,9 +214,9 @@ spec:
     name: coder-amanibhavam-school-cluster
   project: default
   source:
-    chart: library/helm/coder-amanibhavam-school-cluster-linkerd-control-plane
+    chart: library/helm/coder-amanibhavam-school-cluster-l5d-control
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.2
+    targetRevision: 0.0.3
   syncPolicy:
     automated:
       prune: true
@@ -227,7 +227,7 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-linkerd-control-plane
+  name: coder-amanibhavam-school-cluster-l5d-control
   namespace: argocd
 ---
 spec:
@@ -235,9 +235,9 @@ spec:
     name: coder-amanibhavam-school-cluster
   project: default
   source:
-    chart: library/helm/coder-amanibhavam-school-cluster-linkerd-crds
+    chart: library/helm/coder-amanibhavam-school-cluster-l5d-crds
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.1
+    targetRevision: 0.0.3
   syncPolicy:
     automated:
       prune: true
@@ -248,7 +248,7 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-school-cluster-linkerd-crds
+  name: coder-amanibhavam-school-cluster-l5d-crds
   namespace: argocd
 ---
 spec:
@@ -258,7 +258,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-pod-identity
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.101
+    targetRevision: 0.0.103
   syncPolicy:
     automated:
       prune: true
@@ -279,7 +279,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-postgres-operator
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.1
+    targetRevision: 0.0.3
   syncPolicy:
     automated:
       prune: true
@@ -300,7 +300,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-reloader
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.104
+    targetRevision: 0.0.106
   syncPolicy:
     automated:
       prune: true
@@ -321,7 +321,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-secrets
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.101
+    targetRevision: 0.0.103
   syncPolicy:
     automated:
       prune: true
@@ -342,7 +342,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-spaceship
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.1
+    targetRevision: 0.0.3
   syncPolicy:
     automated:
       prune: true
@@ -363,7 +363,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-tailscale
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.2
+    targetRevision: 0.0.4
   syncPolicy:
     automated:
       prune: true
@@ -384,7 +384,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-tetragon
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.102
+    targetRevision: 0.0.104
   syncPolicy:
     automated:
       prune: true
@@ -405,7 +405,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-traefik
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.104
+    targetRevision: 0.0.106
   syncPolicy:
     automated:
       prune: true
@@ -426,7 +426,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-school-cluster-trust-manager
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.101
+    targetRevision: 0.0.103
   syncPolicy:
     automated:
       prune: true

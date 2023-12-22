@@ -1,3 +1,3 @@
 package c
 
-teacher: bootstrap: "cilium": app_version: "0.0.104"
+teacher: bootstrap: "cilium": app_version: "0.0.106"

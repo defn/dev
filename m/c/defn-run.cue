@@ -30,8 +30,8 @@ k3s_bootstrap: {
 	"external-dns": {}
 	"tailscale": {}
 	"traefik": {}
-	"linkerd-crds": {}
-	"linkerd-control-plane": {}
+	"l5d-crds": {}
+	"l5d-control": {}
 
 	// deploy
 	"argo-cd": {}

@@ -1,3 +1,3 @@
 package c
 
-teacher: bootstrap: "descheduler": app_version: "0.0.101"
+teacher: bootstrap: "descheduler": app_version: "0.0.103"
