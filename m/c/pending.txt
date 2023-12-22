@@ -14,7 +14,7 @@ https://artifacthub.io/packages/helm/external-secrets-operator/external-secrets/
 https://artifacthub.io/packages/helm/harbor/harbor/1.13.1
 https://artifacthub.io/packages/helm/headlamp/headlamp/0.17.1
 https://artifacthub.io/packages/helm/jkroepke/amazon-eks-pod-identity-webhook/1.2.0
-https://artifacthub.io/packages/helm/kyverno/kyverno/3.1.1
+https://artifacthub.io/packages/helm/kyverno/kyverno/3.1.2-rc.1
 https://artifacthub.io/packages/helm/linkerd2/linkerd-control-plane/1.16.8
 https://artifacthub.io/packages/helm/linkerd2/linkerd-crds/1.8.0
 https://artifacthub.io/packages/helm/mojo2600/pihole/2.20.0
