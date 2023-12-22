@@ -552,17 +552,17 @@
       },
       "locked": {
         "dir": "m/pkg/linkerd",
-        "lastModified": 1702945700,
-        "narHash": "sha256-sEixqL4qLHJPOiGQPKi12Ul92TIcmZ5YImZatrYydGA=",
+        "lastModified": 1703187647,
+        "narHash": "sha256-PMQlNIBYNNsOR2AFtb2QUPoYyi8RYHu2NVxTbGTj8Ck=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "d98f40f159e6d1b02bd88b9093a12a10e983400b",
+        "rev": "b95f161cb3c7f277e894ffd4ae637d846eb3ad4b",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/linkerd",
         "owner": "defn",
-        "ref": "pkg-linkerd-2.14.6-2",
+        "ref": "pkg-linkerd-2.14.7-3",
         "repo": "dev",
         "type": "github"
       }
