@@ -1,5 +1,5 @@
 apiVersion: v2
 type: application
 name: coder-amanibhavam-district-cluster-env
-appVersion: "0.0.141"
-version: "0.0.141"
+appVersion: "0.0.144"
+version: "0.0.144"

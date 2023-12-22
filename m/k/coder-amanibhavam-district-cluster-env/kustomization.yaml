@@ -26,7 +26,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-argo-cd
-              targetRevision: 0.0.102
+              targetRevision: 0.0.104
             syncPolicy:
               automated:
                 prune: true
@@ -47,7 +47,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-argo-events
-              targetRevision: 0.0.101
+              targetRevision: 0.0.103
             syncPolicy:
               automated:
                 prune: true
@@ -68,7 +68,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-argo-workflows
-              targetRevision: 0.0.110
+              targetRevision: 0.0.112
             syncPolicy:
               automated:
                 prune: true
@@ -89,7 +89,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-buildkite
-              targetRevision: 0.0.101
+              targetRevision: 0.0.103
             syncPolicy:
               automated:
                 prune: true
@@ -110,7 +110,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-cert-manager
-              targetRevision: 0.0.104
+              targetRevision: 0.0.106
             syncPolicy:
               automated:
                 prune: true
@@ -131,7 +131,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-cilium
-              targetRevision: 0.0.104
+              targetRevision: 0.0.106
             syncPolicy:
               automated:
                 prune: true
@@ -152,7 +152,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-coder
-              targetRevision: 0.0.105
+              targetRevision: 0.0.107
             syncPolicy:
               automated:
                 prune: true
@@ -173,7 +173,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-deathstar
-              targetRevision: 0.0.1
+              targetRevision: 0.0.3
             syncPolicy:
               automated:
                 prune: true
@@ -194,7 +194,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-descheduler
-              targetRevision: 0.0.101
+              targetRevision: 0.0.103
             syncPolicy:
               automated:
                 prune: true
@@ -215,7 +215,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-external-dns
-              targetRevision: 0.0.106
+              targetRevision: 0.0.108
             syncPolicy:
               automated:
                 prune: true
@@ -236,7 +236,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-external-secrets
-              targetRevision: 0.0.102
+              targetRevision: 0.0.104
             syncPolicy:
               automated:
                 prune: true
@@ -257,7 +257,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-harbor
-              targetRevision: 0.0.101
+              targetRevision: 0.0.103
             syncPolicy:
               automated:
                 prune: true
@@ -278,7 +278,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-headlamp
-              targetRevision: 0.0.101
+              targetRevision: 0.0.103
             syncPolicy:
               automated:
                 prune: true
@@ -299,7 +299,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-issuer
-              targetRevision: 0.0.106
+              targetRevision: 0.0.108
             syncPolicy:
               automated:
                 prune: true
@@ -320,7 +320,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-karpenter
-              targetRevision: 0.0.101
+              targetRevision: 0.0.103
             syncPolicy:
               automated:
                 prune: true
@@ -341,19 +341,19 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-kyverno
-              targetRevision: 0.0.106
+              targetRevision: 0.0.108
             syncPolicy:
               automated:
                 prune: true
                 selfHeal: true
               syncOptions:
                 - ServerSideApply=true
-        linkerd-control-plane: |
+        l5d-control: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
           metadata:
             namespace: argocd
-            name: coder-amanibhavam-district-cluster-linkerd-control-plane
+            name: coder-amanibhavam-district-cluster-l5d-control
             annotations:
               argocd.argoproj.io/sync-wave: "100"
           spec:
@@ -362,19 +362,19 @@ helmCharts:
               name: coder-amanibhavam-district-cluster
             source:
               repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-linkerd-control-plane
-              targetRevision: 0.0.3
+              chart: library/helm/coder-amanibhavam-district-cluster-l5d-control
+              targetRevision: 0.0.4
             syncPolicy:
               automated:
                 prune: true
                 selfHeal: true
               syncOptions: []
-        linkerd-crds: |
+        l5d-crds: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
           metadata:
             namespace: argocd
-            name: coder-amanibhavam-district-cluster-linkerd-crds
+            name: coder-amanibhavam-district-cluster-l5d-crds
             annotations:
               argocd.argoproj.io/sync-wave: "100"
           spec:
@@ -383,8 +383,8 @@ helmCharts:
               name: coder-amanibhavam-district-cluster
             source:
               repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-district-cluster-linkerd-crds
-              targetRevision: 0.0.1
+              chart: library/helm/coder-amanibhavam-district-cluster-l5d-crds
+              targetRevision: 0.0.3
             syncPolicy:
               automated:
                 prune: true
@@ -405,7 +405,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-pihole
-              targetRevision: 0.0.103
+              targetRevision: 0.0.105
             syncPolicy:
               automated:
                 prune: true
@@ -426,7 +426,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-pod-identity
-              targetRevision: 0.0.101
+              targetRevision: 0.0.103
             syncPolicy:
               automated:
                 prune: true
@@ -447,7 +447,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-postgres-operator
-              targetRevision: 0.0.101
+              targetRevision: 0.0.103
             syncPolicy:
               automated:
                 prune: true
@@ -468,7 +468,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-reloader
-              targetRevision: 0.0.104
+              targetRevision: 0.0.106
             syncPolicy:
               automated:
                 prune: true
@@ -489,7 +489,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-secrets
-              targetRevision: 0.0.101
+              targetRevision: 0.0.103
             syncPolicy:
               automated:
                 prune: true
@@ -510,7 +510,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-tailscale
-              targetRevision: 0.0.6
+              targetRevision: 0.0.8
             syncPolicy:
               automated:
                 prune: true
@@ -531,7 +531,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-tetragon
-              targetRevision: 0.0.102
+              targetRevision: 0.0.104
             syncPolicy:
               automated:
                 prune: true
@@ -552,7 +552,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-tfo
-              targetRevision: 0.0.101
+              targetRevision: 0.0.103
             syncPolicy:
               automated:
                 prune: true
@@ -573,7 +573,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-traefik
-              targetRevision: 0.0.104
+              targetRevision: 0.0.106
             syncPolicy:
               automated:
                 prune: true
@@ -594,7 +594,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-trust-manager
-              targetRevision: 0.0.101
+              targetRevision: 0.0.103
             syncPolicy:
               automated:
                 prune: true

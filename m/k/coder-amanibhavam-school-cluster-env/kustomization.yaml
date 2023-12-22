@@ -26,7 +26,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-argo-cd
-              targetRevision: 0.0.102
+              targetRevision: 0.0.104
             syncPolicy:
               automated:
                 prune: true
@@ -47,7 +47,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-cert-manager
-              targetRevision: 0.0.104
+              targetRevision: 0.0.106
             syncPolicy:
               automated:
                 prune: true
@@ -68,7 +68,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-cilium
-              targetRevision: 0.0.104
+              targetRevision: 0.0.106
             syncPolicy:
               automated:
                 prune: true
@@ -89,7 +89,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-coder
-              targetRevision: 0.0.105
+              targetRevision: 0.0.107
             syncPolicy:
               automated:
                 prune: true
@@ -110,7 +110,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-descheduler
-              targetRevision: 0.0.101
+              targetRevision: 0.0.103
             syncPolicy:
               automated:
                 prune: true
@@ -131,7 +131,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-external-dns
-              targetRevision: 0.0.106
+              targetRevision: 0.0.108
             syncPolicy:
               automated:
                 prune: true
@@ -152,7 +152,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-external-secrets
-              targetRevision: 0.0.102
+              targetRevision: 0.0.104
             syncPolicy:
               automated:
                 prune: true
@@ -173,7 +173,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-issuer
-              targetRevision: 0.0.106
+              targetRevision: 0.0.108
             syncPolicy:
               automated:
                 prune: true
@@ -194,7 +194,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-karpenter
-              targetRevision: 0.0.101
+              targetRevision: 0.0.103
             syncPolicy:
               automated:
                 prune: true
@@ -215,19 +215,19 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-kyverno
-              targetRevision: 0.0.106
+              targetRevision: 0.0.108
             syncPolicy:
               automated:
                 prune: true
                 selfHeal: true
               syncOptions:
                 - ServerSideApply=true
-        linkerd-control-plane: |
+        l5d-control: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
           metadata:
             namespace: argocd
-            name: coder-amanibhavam-school-cluster-linkerd-control-plane
+            name: coder-amanibhavam-school-cluster-l5d-control
             annotations:
               argocd.argoproj.io/sync-wave: "100"
           spec:
@@ -236,19 +236,19 @@ helmCharts:
               name: coder-amanibhavam-school-cluster
             source:
               repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-school-cluster-linkerd-control-plane
-              targetRevision: 0.0.3
+              chart: library/helm/coder-amanibhavam-school-cluster-l5d-control
+              targetRevision: 0.0.4
             syncPolicy:
               automated:
                 prune: true
                 selfHeal: true
               syncOptions: []
-        linkerd-crds: |
+        l5d-crds: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application
           metadata:
             namespace: argocd
-            name: coder-amanibhavam-school-cluster-linkerd-crds
+            name: coder-amanibhavam-school-cluster-l5d-crds
             annotations:
               argocd.argoproj.io/sync-wave: "100"
           spec:
@@ -257,8 +257,8 @@ helmCharts:
               name: coder-amanibhavam-school-cluster
             source:
               repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-school-cluster-linkerd-crds
-              targetRevision: 0.0.1
+              chart: library/helm/coder-amanibhavam-school-cluster-l5d-crds
+              targetRevision: 0.0.3
             syncPolicy:
               automated:
                 prune: true
@@ -279,7 +279,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-pod-identity
-              targetRevision: 0.0.101
+              targetRevision: 0.0.103
             syncPolicy:
               automated:
                 prune: true
@@ -300,7 +300,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-postgres-operator
-              targetRevision: 0.0.1
+              targetRevision: 0.0.3
             syncPolicy:
               automated:
                 prune: true
@@ -321,7 +321,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-reloader
-              targetRevision: 0.0.104
+              targetRevision: 0.0.106
             syncPolicy:
               automated:
                 prune: true
@@ -342,7 +342,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-secrets
-              targetRevision: 0.0.101
+              targetRevision: 0.0.103
             syncPolicy:
               automated:
                 prune: true
@@ -363,7 +363,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-spaceship
-              targetRevision: 0.0.1
+              targetRevision: 0.0.3
             syncPolicy:
               automated:
                 prune: true
@@ -384,7 +384,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-tailscale
-              targetRevision: 0.0.2
+              targetRevision: 0.0.4
             syncPolicy:
               automated:
                 prune: true
@@ -405,7 +405,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-tetragon
-              targetRevision: 0.0.102
+              targetRevision: 0.0.104
             syncPolicy:
               automated:
                 prune: true
@@ -426,7 +426,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-traefik
-              targetRevision: 0.0.104
+              targetRevision: 0.0.106
             syncPolicy:
               automated:
                 prune: true
@@ -447,7 +447,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-trust-manager
-              targetRevision: 0.0.101
+              targetRevision: 0.0.103
             syncPolicy:
               automated:
                 prune: true
