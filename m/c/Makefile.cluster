@@ -19,7 +19,8 @@ build:
 	cat generate_kustomize | (cd ../.. && tar xvfz -)
 	rm -f generate_kustomize
 # kustomize ./k/ generates ./k/y/ release yaml
-	(cd ../../k && b build && b run outputs_release__update && rsync -ia r/$(INFRA_NAME)-* y/ >/dev/null)
+# TODO remove the b clean once the build converts the directory inputs/outputs into an archive
+	(cd ../../k && b clean && b build && b run outputs_release__update && rsync -ia r/$(INFRA_NAME)-* y/ >/dev/null)
 
 secrets:
 	$(MAKE) clean

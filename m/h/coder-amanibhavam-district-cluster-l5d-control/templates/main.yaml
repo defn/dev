@@ -687,7 +687,7 @@ spec:
             linkerd.io/control-plane-component: heartbeat
             linkerd.io/workload-ns: linkerd
   concurrencyPolicy: Replace
-  schedule: 35 20 * * *
+  schedule: 19 17 * * *
   successfulJobsHistoryLimit: 0
 apiVersion: batch/v1
 kind: CronJob

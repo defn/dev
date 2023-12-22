@@ -1763,7 +1763,7 @@ spec:
             seccompProfile:
               type: RuntimeDefault
           serviceAccountName: linkerd-heartbeat
-  schedule: 35 20 * * *
+  schedule: 54 17 * * *
   successfulJobsHistoryLimit: 0
 ---
 apiVersion: admissionregistration.k8s.io/v1
