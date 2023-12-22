@@ -447,6 +447,7 @@ data:
     enablePodAntiAffinity: false
     enablePodDisruptionBudget: false
     enablePprof: false
+    heartbeatSchedule: 0 0 * * *
     identity:
       externalCA: true
       issuer:
@@ -1763,7 +1764,7 @@ spec:
             seccompProfile:
               type: RuntimeDefault
           serviceAccountName: linkerd-heartbeat
-  schedule: 54 17 * * *
+  schedule: 0 0 * * *
   successfulJobsHistoryLimit: 0
 ---
 apiVersion: admissionregistration.k8s.io/v1

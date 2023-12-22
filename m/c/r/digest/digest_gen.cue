@@ -2,7 +2,7 @@ package r
 
 cache: "bitnami/kubectl:1.26.4": "bitnami/kubectl@sha256:a0a972324d937b2c2f7207af29d1abd6ce3f7fd5ea73357036a67ab24f34cc92"
 
-cache: "bitnami/kubectl:latest": "bitnami/kubectl@sha256:317347b84a0b23d7a674b289cedfebccd4822def4eec874baa54014a7957a316"
+cache: "bitnami/kubectl:latest": "bitnami/kubectl@sha256:2023cdff9a4943983e3451e178ccf97b6db5cb9c2bfd852d319479d2ac56902f"
 
 cache: "busybox:1.35": "busybox@sha256:c4c67b37cc42396b8a6f6829e3379e86364f642ce6a40604ea4f7c695db0e695"
 
@@ -28,7 +28,7 @@ cache: "docker.io/traefik:v2.10.6": "docker.io/traefik@sha256:1957e3314f435c85b3
 
 cache: "ghcr.io/buildkite/agent-stack-k8s/controller:0.7.0@sha256:6d747da4f3898b092010fcdc382fc59dc3d90c5478d41e0a01eb9b6f53a9d91f": "ghcr.io/buildkite/agent-stack-k8s/controller@sha256:6d747da4f3898b092010fcdc382fc59dc3d90c5478d41e0a01eb9b6f53a9d91f"
 
-cache: "ghcr.io/coder/coder:v2.5.1": "ghcr.io/coder/coder@sha256:6b563afccf7ecd8b392bda49193b75416ece68f5a6fb9d26c9ca329f67a516fb"
+cache: "ghcr.io/coder/coder:v2.6.0": "ghcr.io/coder/coder@sha256:7a3691445ac889b3819ac918ed29176ce1549d5113ab4440c102fe4efe38a7b1"
 
 cache: "ghcr.io/dexidp/dex:v2.37.0": "ghcr.io/dexidp/dex@sha256:f579d00721b0d842328c43a562f50343c54b0048ef2d58d6b54e750c21fc7938"
 

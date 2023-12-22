@@ -455,6 +455,7 @@ data:
     enablePodAntiAffinity: false
     enablePodDisruptionBudget: false
     enablePprof: false
+    heartbeatSchedule: 0 0 * * *
     identity:
       externalCA: true
       issuer:
@@ -687,7 +688,7 @@ spec:
             linkerd.io/control-plane-component: heartbeat
             linkerd.io/workload-ns: linkerd
   concurrencyPolicy: Replace
-  schedule: 19 17 * * *
+  schedule: 0 0 * * *
   successfulJobsHistoryLimit: 0
 apiVersion: batch/v1
 kind: CronJob

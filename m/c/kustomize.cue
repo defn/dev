@@ -302,6 +302,8 @@ kustomize: "l5d-control": #KustomizeHelm & {
 		version: "1.16.8"
 		repo:    "https://helm.linkerd.io/stable"
 		values: {
+			heartbeatSchedule: "0 0 * * *"
+
 			identity: externalCA: true
 			identity: issuer: scheme: "kubernetes.io/tls"
 

@@ -12,6 +12,7 @@ helmCharts:
     repo: https://helm.linkerd.io/stable
     namespace: linkerd
     valuesInline:
+      heartbeatSchedule: 0 0 * * *
       identity:
         externalCA: true
         issuer:
