@@ -1,0 +1,258 @@
+package y
+
+res: serviceaccount: "coder-amanibhavam-class-cluster-pod-identity": "kube-system": "pod-identity-amazon-eks-pod-identity-webhook": {
+	apiVersion: "v1"
+	kind:       "ServiceAccount"
+	metadata: {
+		labels: {
+			"app.kubernetes.io/instance":   "pod-identity"
+			"app.kubernetes.io/managed-by": "Helm"
+			"app.kubernetes.io/name":       "amazon-eks-pod-identity-webhook"
+			"app.kubernetes.io/version":    "v0.4.0"
+			"helm.sh/chart":                "amazon-eks-pod-identity-webhook-1.2.0"
+		}
+		name:      "pod-identity-amazon-eks-pod-identity-webhook"
+		namespace: "kube-system"
+	}
+}
+res: clusterrole: "coder-amanibhavam-class-cluster-pod-identity": cluster: "pod-identity-amazon-eks-pod-identity-webhook": {
+	apiVersion: "rbac.authorization.k8s.io/v1"
+	kind:       "ClusterRole"
+	metadata: {
+		labels: {
+			"app.kubernetes.io/instance":   "pod-identity"
+			"app.kubernetes.io/managed-by": "Helm"
+			"app.kubernetes.io/name":       "amazon-eks-pod-identity-webhook"
+			"app.kubernetes.io/version":    "v0.4.0"
+			"helm.sh/chart":                "amazon-eks-pod-identity-webhook-1.2.0"
+		}
+		name: "pod-identity-amazon-eks-pod-identity-webhook"
+	}
+	rules: [{
+		apiGroups: [""]
+		resources: ["serviceaccounts"]
+		verbs: [
+			"get",
+			"watch",
+			"list",
+		]
+	}]
+}
+res: clusterrolebinding: "coder-amanibhavam-class-cluster-pod-identity": cluster: "pod-identity-amazon-eks-pod-identity-webhook": {
+	apiVersion: "rbac.authorization.k8s.io/v1"
+	kind:       "ClusterRoleBinding"
+	metadata: {
+		labels: {
+			"app.kubernetes.io/instance":   "pod-identity"
+			"app.kubernetes.io/managed-by": "Helm"
+			"app.kubernetes.io/name":       "amazon-eks-pod-identity-webhook"
+			"app.kubernetes.io/version":    "v0.4.0"
+			"helm.sh/chart":                "amazon-eks-pod-identity-webhook-1.2.0"
+		}
+		name: "pod-identity-amazon-eks-pod-identity-webhook"
+	}
+	roleRef: {
+		apiGroup: "rbac.authorization.k8s.io"
+		kind:     "ClusterRole"
+		name:     "pod-identity-amazon-eks-pod-identity-webhook"
+	}
+	subjects: [{
+		kind:      "ServiceAccount"
+		name:      "pod-identity-amazon-eks-pod-identity-webhook"
+		namespace: "kube-system"
+	}]
+}
+res: service: "coder-amanibhavam-class-cluster-pod-identity": "kube-system": "pod-identity-amazon-eks-pod-identity-webhook": {
+	apiVersion: "v1"
+	kind:       "Service"
+	metadata: {
+		labels: {
+			"app.kubernetes.io/instance":   "pod-identity"
+			"app.kubernetes.io/managed-by": "Helm"
+			"app.kubernetes.io/name":       "amazon-eks-pod-identity-webhook"
+			"app.kubernetes.io/version":    "v0.4.0"
+			"helm.sh/chart":                "amazon-eks-pod-identity-webhook-1.2.0"
+		}
+		name:      "pod-identity-amazon-eks-pod-identity-webhook"
+		namespace: "kube-system"
+	}
+	spec: {
+		ports: [{
+			name:       "https"
+			port:       8443
+			protocol:   "TCP"
+			targetPort: "https"
+		}, {
+			name:       "metrics"
+			port:       9999
+			protocol:   "TCP"
+			targetPort: "metrics"
+		}]
+		selector: {
+			"app.kubernetes.io/instance": "pod-identity"
+			"app.kubernetes.io/name":     "amazon-eks-pod-identity-webhook"
+		}
+		type: "ClusterIP"
+	}
+}
+res: deployment: "coder-amanibhavam-class-cluster-pod-identity": "kube-system": "pod-identity-amazon-eks-pod-identity-webhook": {
+	apiVersion: "apps/v1"
+	kind:       "Deployment"
+	metadata: {
+		labels: {
+			"app.kubernetes.io/instance":   "pod-identity"
+			"app.kubernetes.io/managed-by": "Helm"
+			"app.kubernetes.io/name":       "amazon-eks-pod-identity-webhook"
+			"app.kubernetes.io/version":    "v0.4.0"
+			"helm.sh/chart":                "amazon-eks-pod-identity-webhook-1.2.0"
+		}
+		name:      "pod-identity-amazon-eks-pod-identity-webhook"
+		namespace: "kube-system"
+	}
+	spec: {
+		replicas: 1
+		selector: matchLabels: {
+			"app.kubernetes.io/instance": "pod-identity"
+			"app.kubernetes.io/name":     "amazon-eks-pod-identity-webhook"
+		}
+		template: {
+			metadata: labels: {
+				"app.kubernetes.io/instance": "pod-identity"
+				"app.kubernetes.io/name":     "amazon-eks-pod-identity-webhook"
+			}
+			spec: {
+				containers: [{
+					command: [
+						"/webhook",
+						"--annotation-prefix=eks.amazonaws.com",
+						"--aws-default-region=us-east-1",
+						"--in-cluster=false",
+						"--logtostderr",
+						"--namespace=kube-system",
+						"--metrics-port=9999",
+						"--port=8443",
+						"--sts-regional-endpoint=true",
+						"--token-audience=sts.amazonaws.com",
+						"--token-expiration=86400",
+						"--token-mount-path=/var/run/secrets/eks.amazonaws.com/serviceaccount",
+						"--tls-cert=/etc/webhook/certs/tls.crt",
+						"--tls-key=/etc/webhook/certs/tls.key",
+					]
+					image:           "docker.io/amazon/amazon-eks-pod-identity-webhook:v0.4.0"
+					imagePullPolicy: "IfNotPresent"
+					livenessProbe: httpGet: {
+						path: "/healthz"
+						port: "metrics"
+					}
+					name: "amazon-eks-pod-identity-webhook"
+					ports: [{
+						containerPort: 8443
+						name:          "https"
+						protocol:      "TCP"
+					}, {
+						containerPort: 9999
+						name:          "metrics"
+						protocol:      "TCP"
+					}]
+					readinessProbe: httpGet: {
+						path: "/healthz"
+						port: "metrics"
+					}
+					resources: {
+						limits: {}
+						requests: {}
+					}
+					securityContext: {
+						readOnlyRootFilesystem: true
+						runAsGroup:             1
+						runAsNonRoot:           false
+						runAsUser:              65534
+					}
+					volumeMounts: [{
+						mountPath: "/etc/webhook/certs"
+						name:      "cert"
+						readOnly:  true
+					}]
+				}]
+				hostNetwork: false
+				securityContext: {}
+				serviceAccountName: "pod-identity-amazon-eks-pod-identity-webhook"
+				volumes: [{
+					name: "cert"
+					secret: secretName: "pod-identity-amazon-eks-pod-identity-webhook-cert"
+				}]
+			}
+		}
+	}
+}
+res: certificate: "coder-amanibhavam-class-cluster-pod-identity": "kube-system": "pod-identity-amazon-eks-pod-identity-webhook": {
+	apiVersion: "cert-manager.io/v1"
+	kind:       "Certificate"
+	metadata: {
+		name:      "pod-identity-amazon-eks-pod-identity-webhook"
+		namespace: "kube-system"
+	}
+	spec: {
+		commonName: "pod-identity-amazon-eks-pod-identity-webhook.kube-system.svc"
+		dnsNames: [
+			"pod-identity-amazon-eks-pod-identity-webhook",
+			"pod-identity-amazon-eks-pod-identity-webhook.kube-system",
+			"pod-identity-amazon-eks-pod-identity-webhook.kube-system.svc",
+			"pod-identity-amazon-eks-pod-identity-webhook.kube-system.svc.local",
+		]
+		duration: "2160h0m0s"
+		issuerRef: {
+			kind: "Issuer"
+			name: "pod-identity-amazon-eks-pod-identity-webhook"
+		}
+		renewBefore: "360h0m0s"
+		secretName:  "pod-identity-amazon-eks-pod-identity-webhook-cert"
+	}
+}
+res: issuer: "coder-amanibhavam-class-cluster-pod-identity": "kube-system": "pod-identity-amazon-eks-pod-identity-webhook": {
+	apiVersion: "cert-manager.io/v1"
+	kind:       "Issuer"
+	metadata: {
+		labels: {
+			"app.kubernetes.io/instance":   "pod-identity"
+			"app.kubernetes.io/managed-by": "Helm"
+			"app.kubernetes.io/name":       "amazon-eks-pod-identity-webhook"
+			"app.kubernetes.io/version":    "v0.4.0"
+			"helm.sh/chart":                "amazon-eks-pod-identity-webhook-1.2.0"
+		}
+		name:      "pod-identity-amazon-eks-pod-identity-webhook"
+		namespace: "kube-system"
+	}
+	spec: selfSigned: {}
+}
+res: mutatingwebhookconfiguration: "coder-amanibhavam-class-cluster-pod-identity": cluster: "pod-identity-amazon-eks-pod-identity-webhook": {
+	apiVersion: "admissionregistration.k8s.io/v1"
+	kind:       "MutatingWebhookConfiguration"
+	metadata: {
+		annotations: "cert-manager.io/inject-ca-from": "kube-system/pod-identity-amazon-eks-pod-identity-webhook"
+		name: "pod-identity-amazon-eks-pod-identity-webhook"
+	}
+	webhooks: [{
+		admissionReviewVersions: ["v1beta1"]
+		clientConfig: service: {
+			name:      "pod-identity-amazon-eks-pod-identity-webhook"
+			namespace: "kube-system"
+			path:      "/mutate"
+			port:      8443
+		}
+		failurePolicy: "Ignore"
+		name:          "pod-identity-webhook.amazonaws.com"
+		objectSelector: matchExpressions: [{
+			key:      "app.kubernetes.io/name"
+			operator: "NotIn"
+			values: ["amazon-eks-pod-identity-webhook"]
+		}]
+		rules: [{
+			apiGroups: [""]
+			apiVersions: ["v1"]
+			operations: ["CREATE"]
+			resources: ["pods"]
+		}]
+		sideEffects: "None"
+	}]
+}

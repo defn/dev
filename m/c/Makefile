@@ -11,28 +11,24 @@ delivery:
 		git add -u coder-*; \
 		done
 
-# M k/r/crds.cue
+# M k/y/crds.cue
 # M k/crd/ENV.yaml
 	$(MAKE) crd
 
 delivery_inner:
-# M k/APP/kustomization.yaml
-# M k/r/APP/main.yaml
-# M k/y/APP/main.yaml
-# images are original
-
 # M k/y/cluster.cue updated
-	$(MAKE) build-all
+# M k/y/APP/main.yaml
+# M k/APP/kustomization.yaml
+# images are original
+	$(MAKE) build
 
 # M k/r/APP/main.yaml
-# images are rewritten to cache
-# images may have not-found
-# after git add, diff is much smaller
+# images are rewritten to use cache URLs, which may not be found in the cache
 	$(MAKE) release
 
 # M r/digest/digest_gen.cue
 # M k/r/APP/main.yaml
-# images are now found, if missing
+# put missing images into the cache
 	if env GIT_PAGER=cat git grep not-found ../k/r; then $(MAKE) digest release; fi
 
 # h/APP*
@@ -53,27 +49,21 @@ helm_add:
 digest:
 	cd ./r && $(MAKE) digest
 
-build-all:
-	runmany $(shell nproc) 'cd $$1 && make' coder-*
-	rm -f ../k/r/y/main.yaml
-	rm -f ../k/r/Makefile/main.yaml
+build:
+	runmany 1 'cd $$1 && make' coder-*
 	$(MAKE) cluster_cue
 
 cluster_cue:
 # make one big cue config
-	rm -f ../k/y/cluster.cue
-	(echo package y; for r in ../k/y/*/main.yaml; do echo $$r 1>&2; (cue import $$r -p r --with-context -l '"res"' -l 'strings.ToLower(data.kind)' -l 'path.Dir(path.Rel("$(shell cd ../k/y && pwd)",filename))' -l 'strings.ToLower(*data.metadata.namespace | "cluster")' -l data.metadata.name --outfile - \
-		| grep -v '^package '); done) > ../k/y/cluster.cue
-# removes ANYTHING: null
-	perl -pe 's{^\s*\w+:\s+null\s*}{}; s{data: null,}{}' -i ../k/y/cluster.cue
-# git add ../k/y
+	(echo package y; for r in ../k/y/*/main.yaml; do \
+		echo $${r%%/main.yaml}.cue | sed 's#.*/##' 1>&2; \
+		(cue import $$r -p y --with-context \
+			-l '"res"' -l 'strings.ToLower(data.kind)' -l 'path.Dir(path.Rel("$(shell cd ../k/y && pwd)",filename))' -l 'strings.ToLower(*data.metadata.namespace | "cluster")' -l data.metadata.name --outfile - \
+		| perl -pe 's{^\s*\w+:\s+null\s*}{}') > k/$${r%%/main.yaml}.cue; done)
 
 release:
-# generate k/r
-# rm -rf ../k/r
-	(cd r/digest && cue export --out json -e cached_yaml) | jq -r 'to_entries[] | "../k/r/\(.key) \(.value | @base64) 1"' | ./release.py
-# rm -rf ../k/r/y
-# git add ../k/r
+# remove ANYTHING: null
+	(cd r/digest && cue export --out json -e cached_yaml) | jq -r 'to_entries[] | "../k/r/\(.key) \(.value | @base64) 1"' | grep -v -e '^\s*[\w-]+: null\s*$$' | ./release.py
 
 cache:
 	cd ./r/digest && $(MAKE) cache filter=$(filter)

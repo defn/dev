@@ -10,7 +10,7 @@ import (
 	autoscaling "k8s.io/api/autoscaling/v2"
 	admissionregistration "k8s.io/api/admissionregistration/v1"
 
-	"github.com/defn/dev/m/k/y"
+	"github.com/defn/dev/m/c/k/y"
 )
 
 // by kind

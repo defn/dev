@@ -9,20 +9,23 @@ filegroup(
 
 exclude = [
     "BUILD.bazel",
-    "r",
+    "Makefile",
+    "crd",
     "gen_release.sh",
+    "r",
+    "y",
 ]
 
 [
     genrule(
         name = "release_{}".format(k),
         srcs = [k],
-        outs = ["r/{}/main.yaml".format(k)],
+        outs = ["y/{}/main.yaml".format(k)],
         cmd = "$(location gen_release_script) $(location {}) $@".format(k),
         tools = ["gen_release_script"],
     )
     for k in glob(
-        ["coder-*"],
+        ["*-cluster-*"],
         exclude = exclude,
         exclude_directories = 0,
     )
@@ -31,7 +34,7 @@ exclude = [
 copy_files(
     name = "outputs_release",
     gen = {
-        "r/{}/main.yaml".format(k): "r/{}/main.yaml".format(k)
+        "y/{}/main.yaml".format(k): "y/{}/main.yaml".format(k)
         for k in glob(
             ["coder-*"],
             exclude = exclude,

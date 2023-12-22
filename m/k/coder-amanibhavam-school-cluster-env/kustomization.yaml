@@ -89,7 +89,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-coder
-              targetRevision: 0.0.107
+              targetRevision: 0.0.109
             syncPolicy:
               automated:
                 prune: true
@@ -215,7 +215,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-kyverno
-              targetRevision: 0.0.108
+              targetRevision: 0.0.109
             syncPolicy:
               automated:
                 prune: true
@@ -237,7 +237,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-l5d-control
-              targetRevision: 0.0.5
+              targetRevision: 0.0.6
             syncPolicy:
               automated:
                 prune: true

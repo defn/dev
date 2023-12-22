@@ -116,6 +116,7 @@ kustomize: [NAME=string]: _name: NAME
 		helmCharts?: [...{...}]
 
 		if commonLabels != _|_ {
+			// TODO convert to labels:, which has a different structure
 			"commonLabels": commonLabels
 		}
 

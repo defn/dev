@@ -1,10 +1,3 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-argo-cd
-  namespace: argocd
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -18,14 +11,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-argo-events
+  name: coder-amanibhavam-district-cluster-argo-cd
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -39,14 +32,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-argo-workflows
+  name: coder-amanibhavam-district-cluster-argo-events
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -60,14 +53,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-buildkite
+  name: coder-amanibhavam-district-cluster-argo-workflows
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -81,14 +74,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-cert-manager
+  name: coder-amanibhavam-district-cluster-buildkite
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -102,14 +95,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-cilium
+  name: coder-amanibhavam-district-cluster-cert-manager
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -123,14 +116,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-coder
+  name: coder-amanibhavam-district-cluster-cilium
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -138,20 +131,20 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-coder
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.107
+    targetRevision: 0.0.109
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-deathstar
+  name: coder-amanibhavam-district-cluster-coder
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -165,14 +158,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-descheduler
+  name: coder-amanibhavam-district-cluster-deathstar
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -186,14 +179,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-external-dns
+  name: coder-amanibhavam-district-cluster-descheduler
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -207,14 +200,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-external-secrets
+  name: coder-amanibhavam-district-cluster-external-dns
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -228,14 +221,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-harbor
+  name: coder-amanibhavam-district-cluster-external-secrets
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -249,14 +242,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-headlamp
+  name: coder-amanibhavam-district-cluster-harbor
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -270,14 +263,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-issuer
+  name: coder-amanibhavam-district-cluster-headlamp
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -291,14 +284,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-karpenter
+  name: coder-amanibhavam-district-cluster-issuer
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -312,14 +305,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-kyverno
+  name: coder-amanibhavam-district-cluster-karpenter
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -327,21 +320,21 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-kyverno
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.108
+    targetRevision: 0.0.109
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
-    - ServerSideApply=true
----
+      - ServerSideApply=true
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-l5d-control
+  name: coder-amanibhavam-district-cluster-kyverno
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -349,20 +342,20 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-l5d-control
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.5
+    targetRevision: 0.0.6
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-l5d-crds
+  name: coder-amanibhavam-district-cluster-l5d-control
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -376,14 +369,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-pihole
+  name: coder-amanibhavam-district-cluster-l5d-crds
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -397,14 +390,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-pod-identity
+  name: coder-amanibhavam-district-cluster-pihole
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -418,14 +411,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-postgres-operator
+  name: coder-amanibhavam-district-cluster-pod-identity
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -439,14 +432,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-reloader
+  name: coder-amanibhavam-district-cluster-postgres-operator
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -460,14 +453,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-secrets
+  name: coder-amanibhavam-district-cluster-reloader
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -481,14 +474,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-tailscale
+  name: coder-amanibhavam-district-cluster-secrets
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -502,14 +495,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-tetragon
+  name: coder-amanibhavam-district-cluster-tailscale
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -523,14 +516,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-tfo
+  name: coder-amanibhavam-district-cluster-tetragon
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -544,14 +537,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-traefik
+  name: coder-amanibhavam-district-cluster-tfo
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -565,14 +558,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district-cluster-trust-manager
+  name: coder-amanibhavam-district-cluster-traefik
   namespace: argocd
+---
 spec:
   destination:
     name: coder-amanibhavam-district-cluster
@@ -586,3 +579,10 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: coder-amanibhavam-district-cluster-trust-manager
+  namespace: argocd
