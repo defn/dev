@@ -1,3 +1,10 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+  name: coder-amanibhavam-district0-cluster-argo-cd
+  namespace: argocd
 spec:
   destination:
     name: coder-amanibhavam-district0-cluster
@@ -11,14 +18,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district0-cluster-argo-cd
+  name: coder-amanibhavam-district0-cluster-external-secrets
   namespace: argocd
----
 spec:
   destination:
     name: coder-amanibhavam-district0-cluster
@@ -32,14 +39,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district0-cluster-external-secrets
+  name: coder-amanibhavam-district0-cluster-kyverno
   namespace: argocd
----
 spec:
   destination:
     name: coder-amanibhavam-district0-cluster
@@ -53,15 +60,15 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-      - ServerSideApply=true
+    - ServerSideApply=true
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district0-cluster-kyverno
+  name: coder-amanibhavam-district0-cluster-postgres-operator
   namespace: argocd
----
 spec:
   destination:
     name: coder-amanibhavam-district0-cluster
@@ -75,14 +82,14 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district0-cluster-postgres-operator
+  name: coder-amanibhavam-district0-cluster-secrets
   namespace: argocd
----
 spec:
   destination:
     name: coder-amanibhavam-district0-cluster
@@ -96,10 +103,3 @@ spec:
       prune: true
       selfHeal: true
     syncOptions: []
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "100"
-  name: coder-amanibhavam-district0-cluster-secrets
-  namespace: argocd
