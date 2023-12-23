@@ -38,12 +38,12 @@ function main {
 	sudo mkdir -p /mnt/docker
 	sudo ln -nfs /mnt/docker /var/lib/docker
 
-	sudo systemctl start docker || true
-
 	cd
 	git fetch
 	git branch --set-upstream-to=origin/main main
 	git pull
+
+	while true; do if sudo systemctl start docker; then break; fi; sleep 10; done
 }
 
 time main "$@"
