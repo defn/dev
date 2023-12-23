@@ -87,5 +87,6 @@
   "tailscale.ssh.defaultUsername": "ubuntu",
   "[python]": {
     "diffEditor.ignoreTrimWhitespace": false
-  }
+  },
+  "remote.autoForwardPortsSource": "hybrid"
 }
