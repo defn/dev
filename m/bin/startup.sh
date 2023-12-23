@@ -38,14 +38,15 @@ function main {
 	sudo mkdir -p /mnt/docker
 	sudo ln -nfs /mnt/docker /var/lib/docker
 
-	cd
-	make install
+	while true; do if sudo systemctl start docker; then break; fi; sleep 10; done &
 
+	cd
 	git fetch
 	git branch --set-upstream-to=origin/main main
 	git pull
+	make install
 
-	while true; do if sudo systemctl start docker; then break; fi; sleep 10; done
+	wait
 }
 
 time main "$@"
