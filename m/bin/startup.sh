@@ -39,6 +39,8 @@ function main {
 	sudo ln -nfs /mnt/docker /var/lib/docker
 
 	cd
+	make install
+
 	git fetch
 	git branch --set-upstream-to=origin/main main
 	git pull
