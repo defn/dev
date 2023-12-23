@@ -38,7 +38,7 @@ function main {
 	sudo mkdir -p /mnt/docker
 	sudo ln -nfs /mnt/docker /var/lib/docker
 
-	sudo systemctl start docker
+	sudo systemctl start docker || true
 
 	cd
 	git fetch
