@@ -66,10 +66,3 @@ metadata:
 handler: runsc
 EOF
 ```
-
-## /mnt/docker
-
-```
-sudo mkfs.ext4 /dev/nvme1n1
-echo '/dev/nvme1n1 /mnt/docker ext4 defaults,nofail 0 2' | sudo tee -a /etc/fstab
-```
