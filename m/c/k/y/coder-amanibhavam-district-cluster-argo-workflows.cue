@@ -878,7 +878,7 @@ res: serviceaccount: "coder-amanibhavam-district-cluster-argo-workflows": "argo-
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "argo-workflows-server"
 			"app.kubernetes.io/part-of":    "argo-workflows"
-			"helm.sh/chart":                "argo-workflows-0.40.1"
+			"helm.sh/chart":                "argo-workflows-0.40.3"
 		}
 		name:      "argo-workflows-server"
 		namespace: "argo-workflows"
@@ -894,7 +894,7 @@ res: serviceaccount: "coder-amanibhavam-district-cluster-argo-workflows": "argo-
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "argo-workflows-workflow-controller"
 			"app.kubernetes.io/part-of":    "argo-workflows"
-			"helm.sh/chart":                "argo-workflows-0.40.1"
+			"helm.sh/chart":                "argo-workflows-0.40.3"
 		}
 		name:      "argo-workflows-workflow-controller"
 		namespace: "argo-workflows"
@@ -910,7 +910,7 @@ res: role: "coder-amanibhavam-district-cluster-argo-workflows": "argo-workflows"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "argo-workflows-workflow-controller"
 			"app.kubernetes.io/part-of":    "argo-workflows"
-			"helm.sh/chart":                "argo-workflows-0.40.1"
+			"helm.sh/chart":                "argo-workflows-0.40.3"
 		}
 		name:      "argo-workflows-workflow"
 		namespace: "argo-workflows"
@@ -970,7 +970,7 @@ res: role: "coder-amanibhavam-district-cluster-argo-workflows": default: "argo-w
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "argo-workflows-workflow-controller"
 			"app.kubernetes.io/part-of":    "argo-workflows"
-			"helm.sh/chart":                "argo-workflows-0.40.1"
+			"helm.sh/chart":                "argo-workflows-0.40.3"
 		}
 		name:      "argo-workflows-workflow"
 		namespace: "default"
@@ -1030,7 +1030,7 @@ res: clusterrole: "coder-amanibhavam-district-cluster-argo-workflows": cluster: 
 			"app.kubernetes.io/managed-by":                 "Helm"
 			"app.kubernetes.io/name":                       "argo-workflows-server"
 			"app.kubernetes.io/part-of":                    "argo-workflows"
-			"helm.sh/chart":                                "argo-workflows-0.40.1"
+			"helm.sh/chart":                                "argo-workflows-0.40.3"
 			"rbac.authorization.k8s.io/aggregate-to-admin": "true"
 		}
 		name: "argo-workflows-admin"
@@ -1077,7 +1077,7 @@ res: clusterrole: "coder-amanibhavam-district-cluster-argo-workflows": cluster: 
 			"app.kubernetes.io/managed-by":                "Helm"
 			"app.kubernetes.io/name":                      "argo-workflows-server"
 			"app.kubernetes.io/part-of":                   "argo-workflows"
-			"helm.sh/chart":                               "argo-workflows-0.40.1"
+			"helm.sh/chart":                               "argo-workflows-0.40.3"
 			"rbac.authorization.k8s.io/aggregate-to-edit": "true"
 		}
 		name: "argo-workflows-edit"
@@ -1124,7 +1124,7 @@ res: clusterrole: "coder-amanibhavam-district-cluster-argo-workflows": cluster: 
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "argo-workflows-server"
 			"app.kubernetes.io/part-of":    "argo-workflows"
-			"helm.sh/chart":                "argo-workflows-0.40.1"
+			"helm.sh/chart":                "argo-workflows-0.40.3"
 		}
 		name: "argo-workflows-server"
 	}
@@ -1198,7 +1198,7 @@ res: clusterrole: "coder-amanibhavam-district-cluster-argo-workflows": cluster: 
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "argo-workflows-server"
 			"app.kubernetes.io/part-of":    "argo-workflows"
-			"helm.sh/chart":                "argo-workflows-0.40.1"
+			"helm.sh/chart":                "argo-workflows-0.40.3"
 		}
 		name: "argo-workflows-server-cluster-template"
 	}
@@ -1226,7 +1226,7 @@ res: clusterrole: "coder-amanibhavam-district-cluster-argo-workflows": cluster: 
 			"app.kubernetes.io/managed-by":                "Helm"
 			"app.kubernetes.io/name":                      "argo-workflows-workflow-controller"
 			"app.kubernetes.io/part-of":                   "argo-workflows"
-			"helm.sh/chart":                               "argo-workflows-0.40.1"
+			"helm.sh/chart":                               "argo-workflows-0.40.3"
 			"rbac.authorization.k8s.io/aggregate-to-view": "true"
 		}
 		name: "argo-workflows-view"
@@ -1268,7 +1268,7 @@ res: clusterrole: "coder-amanibhavam-district-cluster-argo-workflows": cluster: 
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "argo-workflows-workflow-controller"
 			"app.kubernetes.io/part-of":    "argo-workflows"
-			"helm.sh/chart":                "argo-workflows-0.40.1"
+			"helm.sh/chart":                "argo-workflows-0.40.3"
 		}
 		name: "argo-workflows-workflow-controller"
 	}
@@ -1419,7 +1419,7 @@ res: clusterrole: "coder-amanibhavam-district-cluster-argo-workflows": cluster: 
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "argo-workflows-workflow-controller"
 			"app.kubernetes.io/part-of":    "argo-workflows"
-			"helm.sh/chart":                "argo-workflows-0.40.1"
+			"helm.sh/chart":                "argo-workflows-0.40.3"
 		}
 		name: "argo-workflows-workflow-controller-cluster-template"
 	}
@@ -1446,7 +1446,7 @@ res: rolebinding: "coder-amanibhavam-district-cluster-argo-workflows": "argo-wor
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "argo-workflows-workflow-controller"
 			"app.kubernetes.io/part-of":    "argo-workflows"
-			"helm.sh/chart":                "argo-workflows-0.40.1"
+			"helm.sh/chart":                "argo-workflows-0.40.3"
 		}
 		name:      "argo-workflows-workflow"
 		namespace: "argo-workflows"
@@ -1472,7 +1472,7 @@ res: rolebinding: "coder-amanibhavam-district-cluster-argo-workflows": default: 
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "argo-workflows-workflow-controller"
 			"app.kubernetes.io/part-of":    "argo-workflows"
-			"helm.sh/chart":                "argo-workflows-0.40.1"
+			"helm.sh/chart":                "argo-workflows-0.40.3"
 		}
 		name:      "argo-workflows-workflow"
 		namespace: "default"
@@ -1498,7 +1498,7 @@ res: clusterrolebinding: "coder-amanibhavam-district-cluster-argo-workflows": cl
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "argo-workflows-server"
 			"app.kubernetes.io/part-of":    "argo-workflows"
-			"helm.sh/chart":                "argo-workflows-0.40.1"
+			"helm.sh/chart":                "argo-workflows-0.40.3"
 		}
 		name: "argo-workflows-server"
 	}
@@ -1523,7 +1523,7 @@ res: clusterrolebinding: "coder-amanibhavam-district-cluster-argo-workflows": cl
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "argo-workflows-server"
 			"app.kubernetes.io/part-of":    "argo-workflows"
-			"helm.sh/chart":                "argo-workflows-0.40.1"
+			"helm.sh/chart":                "argo-workflows-0.40.3"
 		}
 		name: "argo-workflows-server-cluster-template"
 	}
@@ -1548,7 +1548,7 @@ res: clusterrolebinding: "coder-amanibhavam-district-cluster-argo-workflows": cl
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "argo-workflows-workflow-controller"
 			"app.kubernetes.io/part-of":    "argo-workflows"
-			"helm.sh/chart":                "argo-workflows-0.40.1"
+			"helm.sh/chart":                "argo-workflows-0.40.3"
 		}
 		name: "argo-workflows-workflow-controller"
 	}
@@ -1573,7 +1573,7 @@ res: clusterrolebinding: "coder-amanibhavam-district-cluster-argo-workflows": cl
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "argo-workflows-workflow-controller"
 			"app.kubernetes.io/part-of":    "argo-workflows"
-			"helm.sh/chart":                "argo-workflows-0.40.1"
+			"helm.sh/chart":                "argo-workflows-0.40.3"
 		}
 		name: "argo-workflows-workflow-controller-cluster-template"
 	}
@@ -1604,7 +1604,7 @@ res: configmap: "coder-amanibhavam-district-cluster-argo-workflows": "argo-workf
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "argo-workflows-cm"
 			"app.kubernetes.io/part-of":    "argo-workflows"
-			"helm.sh/chart":                "argo-workflows-0.40.1"
+			"helm.sh/chart":                "argo-workflows-0.40.3"
 		}
 		name:      "argo-workflows-workflow-controller-configmap"
 		namespace: "argo-workflows"
@@ -1621,7 +1621,7 @@ res: service: "coder-amanibhavam-district-cluster-argo-workflows": "argo-workflo
 			"app.kubernetes.io/name":       "argo-workflows-server"
 			"app.kubernetes.io/part-of":    "argo-workflows"
 			"app.kubernetes.io/version":    "v3.5.2"
-			"helm.sh/chart":                "argo-workflows-0.40.1"
+			"helm.sh/chart":                "argo-workflows-0.40.3"
 		}
 		name:      "argo-workflows-server"
 		namespace: "argo-workflows"
@@ -1650,7 +1650,7 @@ res: deployment: "coder-amanibhavam-district-cluster-argo-workflows": "argo-work
 			"app.kubernetes.io/name":       "argo-workflows-server"
 			"app.kubernetes.io/part-of":    "argo-workflows"
 			"app.kubernetes.io/version":    "v3.5.2"
-			"helm.sh/chart":                "argo-workflows-0.40.1"
+			"helm.sh/chart":                "argo-workflows-0.40.3"
 		}
 		name:      "argo-workflows-server"
 		namespace: "argo-workflows"
@@ -1670,7 +1670,7 @@ res: deployment: "coder-amanibhavam-district-cluster-argo-workflows": "argo-work
 				"app.kubernetes.io/name":       "argo-workflows-server"
 				"app.kubernetes.io/part-of":    "argo-workflows"
 				"app.kubernetes.io/version":    "v3.5.2"
-				"helm.sh/chart":                "argo-workflows-0.40.1"
+				"helm.sh/chart":                "argo-workflows-0.40.3"
 			}
 			spec: {
 				containers: [{
@@ -1747,7 +1747,7 @@ res: deployment: "coder-amanibhavam-district-cluster-argo-workflows": "argo-work
 			"app.kubernetes.io/name":       "argo-workflows-workflow-controller"
 			"app.kubernetes.io/part-of":    "argo-workflows"
 			"app.kubernetes.io/version":    "v3.5.2"
-			"helm.sh/chart":                "argo-workflows-0.40.1"
+			"helm.sh/chart":                "argo-workflows-0.40.3"
 		}
 		name:      "argo-workflows-workflow-controller"
 		namespace: "argo-workflows"
@@ -1767,7 +1767,7 @@ res: deployment: "coder-amanibhavam-district-cluster-argo-workflows": "argo-work
 				"app.kubernetes.io/name":       "argo-workflows-workflow-controller"
 				"app.kubernetes.io/part-of":    "argo-workflows"
 				"app.kubernetes.io/version":    "v3.5.2"
-				"helm.sh/chart":                "argo-workflows-0.40.1"
+				"helm.sh/chart":                "argo-workflows-0.40.3"
 			}
 			spec: {
 				containers: [{
