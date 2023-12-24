@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
 build:
-	cue eval --out json -e html | jq -r . > tutorial.html
+	$(MAKE) coder
 
 fmt: # Format packer configs
 	packer fmt -write=true .
