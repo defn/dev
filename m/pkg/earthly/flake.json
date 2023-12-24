@@ -2,5 +2,5 @@
   "slug": "pkg-earthly",
   "ghrepo": "earthly/earthly",
   "vendor": "0.7.23",
-  "revision": "2"
+  "revision": "3"
 }
