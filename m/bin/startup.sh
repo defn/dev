@@ -33,6 +33,8 @@ function main {
 		sudo mount /mnt || true
 	fi
 
+  sudo chown ubuntu:ubuntu /mnt/*
+
 	sudo install -d -m 0710 -o root -g root /mnt/docker
 	sudo rm -rf /var/lib/docker
 	sudo mkdir -p /mnt/docker
