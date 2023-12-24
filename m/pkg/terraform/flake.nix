@@ -1,7 +1,7 @@
 {
-  inputs.pkg.url = github:defn/dev/pkg-pkg-0.0.14?dir=m/pkg/pkg;
+  inputs.pkg.url = github:defn/dev/pkg-pkg-0.0.15?dir=m/pkg/pkg;
   outputs = inputs: inputs.pkg.downloadMain rec {
-    src = ./.;
+    src = builtins.path { path = ./.; name = "pkg-terraform"; };
 
     url_template = input: "https://releases.hashicorp.com/terraform/${input.vendor}/terraform_${input.vendor}_${input.os}_${input.arch}.zip";
 

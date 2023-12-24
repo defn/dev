@@ -1,7 +1,7 @@
 {
-  inputs.pkg.url = github:defn/dev/pkg-pkg-0.0.14?dir=m/pkg/pkg;
+  inputs.pkg.url = github:defn/dev/pkg-pkg-0.0.15?dir=m/pkg/pkg;
   outputs = inputs: inputs.pkg.downloadMain rec {
-    src = ./.;
+    src = builtins.path { path = ./.; name = "pkg-kubevirt"; };
 
     url_template = input: "https://github.com/kubevirt/kubevirt/releases/download/v${input.vendor}/virtctl-v${input.vendor}-${input.os}-${input.arch}";
 

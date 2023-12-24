@@ -1,12 +1,12 @@
 {
   inputs = {
-    pkg.url = github:defn/dev/pkg-pkg-0.0.14?dir=m/pkg/pkg;
-    acme.url = github:defn/dev/pkg-acme-3.0.7-2?dir=m/pkg/acme;
+    pkg.url = github:defn/dev/pkg-pkg-0.0.15?dir=m/pkg/pkg;
+    acme.url = github:defn/dev/pkg-acme-3.0.7-3?dir=m/pkg/acme;
     vpn.url = github:defn/dev/pkg-vpn-0.0.73?dir=m/pkg/vpn;
   };
 
   outputs = inputs: inputs.pkg.main rec {
-    src = ./.;
+    src = builtins.path { path = ./.; name = "pkg-secrets"; };
 
     packages = ctx: {
       pass = ctx.pkgs.writeShellScriptBin "pass" ''

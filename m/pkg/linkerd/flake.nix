@@ -1,7 +1,7 @@
 {
-  inputs.pkg.url = github:defn/dev/pkg-pkg-0.0.14?dir=m/pkg/pkg;
+  inputs.pkg.url = github:defn/dev/pkg-pkg-0.0.15?dir=m/pkg/pkg;
   outputs = inputs: inputs.pkg.downloadMain rec {
-    src = ./.;
+    src = builtins.path { path = ./.; name = "pkg-linkerd"; };
 
     url_template = input: "https://github.com/linkerd/linkerd2/releases/download/stable-${input.vendor}/linkerd2-cli-stable-${input.vendor}-${input.os}${input.arch}";
 

@@ -1,10 +1,10 @@
 {
   inputs = {
-    az.url = github:defn/dev/pkg-az-0.0.152?dir=m/pkg/az;
+    az.url = github:defn/dev/pkg-az-0.0.153?dir=m/pkg/az;
   };
 
   outputs = inputs: inputs.az.inputs.cue.inputs.pkg.main rec {
-    src = ./.;
+    src = builtins.path { path = ./.; name = "pkg-home"; };
 
     apps = ctx: {
       tailscale = {
