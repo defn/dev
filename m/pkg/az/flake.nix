@@ -1,6 +1,6 @@
 {
   inputs = {
-    cue.url = github:defn/dev/pkg-cue-0.7.0-2?dir=m/pkg/cue;
+    cue.url = github:defn/dev/pkg-cue-0.7.0-3?dir=m/pkg/cue;
     gum.url = github:defn/dev/pkg-gum-0.13.0-2?dir=m/pkg/gum;
     vhs.url = github:defn/dev/pkg-vhs-0.7.1-2?dir=m/pkg/vhs;
     glow.url = github:defn/dev/pkg-glow-1.5.1-6?dir=m/pkg/glow;

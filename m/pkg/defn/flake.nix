@@ -15,6 +15,7 @@
   };
 
   outputs = inputs: inputs.nix.inputs.pkg.main rec {
+    src = builtins.path { path = ./.; name = "pkg-defn"; };
 
     defaultPackage = ctx: ctx.wrap.nullBuilder {
       propagatedBuildInputs = with ctx.pkgs; [
