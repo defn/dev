@@ -15,11 +15,8 @@
   };
 
   outputs = inputs: inputs.nix.inputs.pkg.main rec {
-    src = ./.;
 
-    defaultPackage = ctx: ctx.wrap.bashBuilder {
-      inherit src;
-
+    defaultPackage = ctx: ctx.wrap.nullBuilder {
       propagatedBuildInputs = with ctx.pkgs; [
         inputs.nix.defaultPackage.${ctx.system}
         inputs.secrets.defaultPackage.${ctx.system}
