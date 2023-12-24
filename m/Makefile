@@ -109,8 +109,9 @@ bazel-ignore:
 docker:
 	cd i/docker && $(MAKE) build
 
+.PHONY: aws
 aws:
-	cd i/aws && $(MAKE) coder
+	cd i/aws && $(MAKE) build
 
 warudo:
 	pass hello

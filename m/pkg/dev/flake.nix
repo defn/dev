@@ -111,10 +111,10 @@
               let
                 ret = f system;
                 op = attrs: key: attrs //
-                    {
-                      ${key} = (attrs.${key} or { })
-                        // { ${system} = ret.${key}; };
-                    }
+                  {
+                    ${key} = (attrs.${key} or { })
+                      // { ${system} = ret.${key}; };
+                  }
                 ;
               in
               builtins.foldl' op attrs (builtins.attrNames ret);
@@ -193,7 +193,7 @@
     prelude // (prelude.main rec {
       inherit inputs;
 
-      src = ./.;
+      src = builtins.path { path = ./.; name = "pkg-dev"; };
 
       config = prelude.defaultConfig { inherit src; };
 

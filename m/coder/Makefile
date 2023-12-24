@@ -16,13 +16,6 @@ push:
 	ls -d mod/*/ | runmany 'cd $$1 && tf fmt && tf docs'
 	tar -cvh --exclude .terraform . | coder templates push -y --create -d - "$(template)"
 
-image:
-	earthly --push --no-output +buildkite
-	earthly --push --no-output +build
-
-reset:
-	 earthly prune --reset
-
 workspace ?= $(shell basename $(shell pwd))
 dir ?= $(shell pwd)
 rev ?= $(shell git branch --show-current)
