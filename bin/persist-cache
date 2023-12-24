@@ -12,8 +12,8 @@ function persist {
 		rm -rf "${d}" 2>/dev/null || sudo rm -rf "${d}"
 	fi
 
-	mkdir -p "${s}" 2>/dev/null || sudo mkdir -p "${s}"
-	mkdir -p "$(dirname "${d}")" 2>/dev/null || sudo mkdir -p "$(dirname "${d}")"
+  mkdir -p "${s}" 2>/dev/null || sudo install -d -D -o "$(id -un)" -g "$(id -gn)" "${s}"
+  mkdir -p "$(dirname "${d}")" 2>/dev/null || sudo install -d -D -o "$(id -un)" -g "$(id -gn)" "$(dirname "${d}")"
 	if [[ "$(readlink "${d}" || true)" != "${s}" ]]; then ln -nfs "${s}" "${d}" 2>/dev/null || sudo ln -nfs "${s}" "${d}"; fi
 }
 
