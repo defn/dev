@@ -2,5 +2,5 @@
   "slug": "pkg-cloudflared",
   "ghrepo": "cloudflare/cloudflared",
   "vendor": "2023.8.2",
-  "revision": "4"
+  "revision": "5"
 }
