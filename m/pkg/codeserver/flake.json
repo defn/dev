@@ -2,5 +2,5 @@
   "slug": "pkg-codeserver",
   "ghrepo": "coder/code-server",
   "vendor": "4.20.0",
-  "revision": "2"
+  "revision": "3"
 }
