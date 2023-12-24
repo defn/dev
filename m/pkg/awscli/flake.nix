@@ -1,8 +1,8 @@
 {
-  inputs.pkg.url = github:defn/dev/pkg-pkg-0.0.14?dir=m/pkg/pkg;
+  inputs.pkg.url = github:defn/dev/pkg-pkg-0.0.15?dir=m/pkg/pkg;
   outputs = inputs: inputs.pkg.downloadMain
     rec {
-      src = ./.;
+      src = builtins.path { path = ./.; name = "pkg-awscli"; };
 
       # https://raw.githubusercontent.com/aws/aws-cli/v2/CHANGELOG.rst
       url_template = input:

@@ -1,7 +1,7 @@
 {
-  inputs.pkg.url = github:defn/dev/pkg-pkg-0.0.14?dir=m/pkg/pkg;
+  inputs.pkg.url = github:defn/dev/pkg-pkg-0.0.15?dir=m/pkg/pkg;
   outputs = inputs: inputs.pkg.downloadMain {
-    src = ./.;
+    src = builtins.path { path = ./.; name = "pkg-oras"; };
 
     url_template = input: "https://github.com/oras-project/oras/releases/download/v${input.vendor}/oras_${input.vendor}_${input.os}_${input.arch}.tar.gz";
 
