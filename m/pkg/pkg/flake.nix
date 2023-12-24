@@ -96,7 +96,7 @@
       inherit main;
       inherit downloadMain;
     } // main rec {
-      src = ./.;
+      src = builtins.path { path = ./.; name = "pkg-pkg"; };
       defaultPackage = ctx: ctx.wrap.nullBuilder { };
     };
 }
