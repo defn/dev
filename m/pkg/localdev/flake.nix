@@ -1,15 +1,15 @@
 {
   inputs = {
-    tilt.url = github:defn/dev/pkg-tilt-0.33.10-3?dir=m/pkg/tilt;
-    gh.url = github:defn/dev/pkg-gh-2.40.1-3?dir=m/pkg/gh;
-    earthly.url = github:defn/dev/pkg-earthly-0.7.23-3?dir=m/pkg/earthly;
-    oras.url = github:defn/dev/pkg-oras-1.1.0-3?dir=m/pkg/oras;
-    buildkite.url = github:defn/dev/pkg-buildkite-3.61.0-3?dir=m/pkg/buildkite;
-    buildevents.url = github:defn/dev/pkg-buildevents-0.15.0-4?dir=m/pkg/buildevents;
-    honeyvent.url = github:defn/dev/pkg-honeyvent-1.1.3-13?dir=m/pkg/honeyvent;
-    honeymarker.url = github:defn/dev/pkg-honeymarker-0.2.11-3?dir=m/pkg/honeymarker;
-    honeytail.url = github:defn/dev/pkg-honeytail-1.8.3-11?dir=m/pkg/honeytail;
-    hugo.url = github:defn/dev/pkg-hugo-0.0.8?dir=m/pkg/hugo;
+    tilt.url = github:defn/dev/pkg-tilt-0.33.10-4?dir=m/pkg/tilt;
+    gh.url = github:defn/dev/pkg-gh-2.40.1-4?dir=m/pkg/gh;
+    earthly.url = github:defn/dev/pkg-earthly-0.7.23-4?dir=m/pkg/earthly;
+    oras.url = github:defn/dev/pkg-oras-1.1.0-4?dir=m/pkg/oras;
+    buildkite.url = github:defn/dev/pkg-buildkite-3.61.0-4?dir=m/pkg/buildkite;
+    buildevents.url = github:defn/dev/pkg-buildevents-0.15.0-5?dir=m/pkg/buildevents;
+    honeyvent.url = github:defn/dev/pkg-honeyvent-1.1.3-14?dir=m/pkg/honeyvent;
+    honeymarker.url = github:defn/dev/pkg-honeymarker-0.2.11-4?dir=m/pkg/honeymarker;
+    honeytail.url = github:defn/dev/pkg-honeytail-1.8.3-12?dir=m/pkg/honeytail;
+    hugo.url = github:defn/dev/pkg-hugo-0.0.9?dir=m/pkg/hugo;
   };
 
   outputs = inputs: inputs.tilt.inputs.pkg.main rec {

@@ -1,6 +1,6 @@
 {
   inputs = {
-    az.url = github:defn/dev/pkg-az-0.0.153?dir=m/pkg/az;
+    az.url = github:defn/dev/pkg-az-0.0.154?dir=m/pkg/az;
   };
 
   outputs = inputs: inputs.az.inputs.cue.inputs.pkg.main rec {
