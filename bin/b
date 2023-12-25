@@ -1,29 +1,6 @@
 #!/usr/bin/env bash
 
-bopts="--sandbox_writable_path=${HOME}/m/cue.mod/gen  --sandbox_writable_path=/nix --sandbox_writable_path=${HOME}/.cache/nix --sandbox_writable_path=${HOME}/.cache/helm --sandbox_writable_path=${HOME}/.cache/go-mod --sandbox_writable_path=${HOME}/.cache/go-build  --sandbox_writable_path=${HOME}/.earthly --sandbox_writable_path=${HOME}/m/k --sandbox_writable_path=${HOME}/work --action_env=HOME=${HOME} --test_env=HOME=${HOME}"
-
-export DEBIAN_FRONTEND=noninteractive
-
-if [[ ! -x "/usr/local/bin/bazel" ]]; then
-	case "$(uname -m)" in
-	aarch64)
-		sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.18.0/bazelisk-linux-arm64
-		;;
-	*)
-		sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.18.0/bazelisk-linux-amd64
-		;;
-	esac
-	sudo chmod 755 /usr/local/bin/bazelisk
-	sudo ln -nfs bazelisk /usr/local/bin/bazel
-fi
-
-if ! type -P fzf >/dev/null; then
-	sudo apt install -y fzf
-fi
-
-if ! type -P direnv >/dev/null; then
-	sudo apt install -y direnv
-fi
+bopts="--remote_cache=http://169.254.32.1:9090 --sandbox_writable_path=${HOME}/m/cue.mod/gen --sandbox_writable_path=/nix --sandbox_writable_path=${HOME}/.cache/nix --sandbox_writable_path=${HOME}/.cache/helm --sandbox_writable_path=${HOME}/.cache/go-mod --sandbox_writable_path=${HOME}/.cache/go-build --sandbox_writable_path=${HOME}/.earthly --sandbox_writable_path=${HOME}/m/k --sandbox_writable_path=${HOME}/work --action_env=HOME=${HOME} --test_env=HOME=${HOME}"
 
 function bazel {
 	local cmd="$1"
