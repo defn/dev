@@ -1,11 +1,6 @@
 locals {
   pod_count = data.coder_parameter.provider.value == "pod" ? 1 : 0
 
-  username = "ubuntu"
-
-  coder_name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
-
-  ns = "${local.prefix}-${local.owner}-${local.name}"
 }
 
 data "coder_parameter" "nix_volume_size" {

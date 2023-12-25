@@ -2,10 +2,6 @@ variable "tsauthkey" {}
 
 locals {
   aws_ec2_count = data.coder_parameter.provider.value == "aws-ec2" ? 1 : 0
-
-  username = "ubuntu"
-
-  coder_name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
 }
 
 data "coder_parameter" "nix_volume_size" {
