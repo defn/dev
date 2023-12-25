@@ -9,16 +9,7 @@ infra_pod_cidr=
 infra_service_cidr=
 
 function make_init {
-	sudo docker rm -f registry
-	sudo rm -rf /opt/certs
-	sudo install -d -m 0750 -o ubuntu -g ubuntu /opt/certs
-	(cd /opt/certs && step certificate create --subtle --insecure --no-password --force --profile self-signed $(uname -n) $(uname -n).crt $(uname -n).key)
-	sudo docker run -d -p 5000:5000 --restart=always --name registry \
-		-v /opt/certs:/certs \
-		-e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/$(uname -n).crt \
-		-e REGISTRY_HTTP_TLS_KEY=/certs/$(uname -n).key \
-		registry:2 || true
-
+	(cd cache && make init up)
 }
 
 function make_linkerd {
