@@ -117,7 +117,7 @@ aws:
 warudo:
 	pass hello
 	$(MAKE) ci
-	$(MAKE) -j 2 docker aws
+	$(MAKE) -j 2 docker #aws
 
 coder-login:
 	coder login https://coder.$(env).$(GIT_AUTHOR_NAME).$(domain)
