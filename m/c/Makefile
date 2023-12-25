@@ -6,7 +6,7 @@ env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
 
 delivery:
 	while true; do \
-		$(MAKE) delivery_inner; \
+		time $(MAKE) delivery_inner; \
 		if ! git diff coder-* | grep app_version:; then break; fi; \
 		git add -u coder-*; \
 		done
