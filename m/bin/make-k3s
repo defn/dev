@@ -40,8 +40,8 @@ function make_down {
 }
 
 function make_argocd {
-	env KUBECONFIG=$HOME/.kube/config k3sup install --local --context ${cluster_name} --print-config --skip-install > $HOME/.kube/config
-
+	rm -f $HOME/.kube/config
+	env KUBECONFIG=$HOME/.kube/config k3sup install --local --context ${cluster_name} --local-path ~/.kube/config --skip-install
 	env KUBECONFIG=$HOME/.kube/config kubectl config use-context ${cluster_name}
 
 	(
@@ -95,7 +95,7 @@ function make_up {
 	# deploy the cluster app-of-apps
 	app repo add cache.defn.run:5000 --type helm --name cache --enable-oci --insecure-skip-server-verification
 	kubectl --context ${cluster_name} apply -f e/${cluster_name}-cluster.yaml
-	(cd c && make update-env env=$(echo ${cluster_name} | cut -d- -f3-))
+	(cd c && make update-env)
 }
 
 function main {
