@@ -2,7 +2,7 @@ package r
 
 cache: "bitnami/kubectl:1.26.4": "bitnami/kubectl@sha256:a0a972324d937b2c2f7207af29d1abd6ce3f7fd5ea73357036a67ab24f34cc92"
 
-cache: "bitnami/kubectl:latest": "bitnami/kubectl@sha256:2023cdff9a4943983e3451e178ccf97b6db5cb9c2bfd852d319479d2ac56902f"
+cache: "bitnami/kubectl:latest": "bitnami/kubectl@sha256:0526f04eeff6a90fbeaa18302e0bd1e60ecdbffa2967d88700c7914c54e83a03"
 
 cache: "busybox:1.35": "busybox@sha256:c4c67b37cc42396b8a6f6829e3379e86364f642ce6a40604ea4f7c695db0e695"
 
@@ -68,7 +68,7 @@ cache: "goharbor/trivy-adapter-photon:v2.9.1": "goharbor/trivy-adapter-photon@sh
 
 cache: "pihole/pihole:2023.11.0": "pihole/pihole@sha256:24b1ef8f66d810faffefdb9b66850bbe2d55013506b892605acef414e210edeb"
 
-cache: "public.ecr.aws/karpenter/controller:v0.32.1@sha256:9b31039d45613ac22a104b8d48eca9dcdeff93e525bd473c811dfd3502e58c69": "public.ecr.aws/karpenter/controller@sha256:9b31039d45613ac22a104b8d48eca9dcdeff93e525bd473c811dfd3502e58c69"
+cache: "public.ecr.aws/karpenter/controller:v0.32.4@sha256:df145069be18291dd656e61b526625424bffc064bdc67109796d6256e3d2397b": "public.ecr.aws/karpenter/controller@sha256:df145069be18291dd656e61b526625424bffc064bdc67109796d6256e3d2397b"
 
 cache: "quay.io/argoproj/argo-events:v1.8.1": "quay.io/argoproj/argo-events@sha256:3c8d787908189604975ca87f480e0f60c93fdfb89bbf944a0c449d888e9368e7"
 

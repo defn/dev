@@ -14,7 +14,7 @@ res: application: "coder-amanibhavam-district1-cluster-env": argocd: "coder-aman
 		source: {
 			chart:          "library/helm/coder-amanibhavam-district1-cluster-kyverno"
 			repoURL:        "cache.defn.run:5000"
-			targetRevision: "0.0.109"
+			targetRevision: "0.0.110"
 		}
 		syncPolicy: {
 			automated: {
