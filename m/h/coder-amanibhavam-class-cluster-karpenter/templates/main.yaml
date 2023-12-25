@@ -41,8 +41,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
   name: karpenter
 ---
 rules:
@@ -103,8 +103,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
   name: karpenter-admin
 ---
@@ -253,8 +253,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
   name: karpenter-core
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -264,8 +264,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
   name: karpenter
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -309,8 +309,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
   name: karpenter-core
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -622,6 +622,8 @@ spec:
                       rule: self.all(x, has(x.tags) || has(x.id) || has(x.name))
                     - message: '''id'' is mutually exclusive, cannot be set with a combination of other fields in amiSelectorTerms'
                       rule: '!self.all(x, has(x.id) && (has(x.tags) || has(x.name) || has(x.owner)))'
+                    - message: '''owner'' cannot be set with ''tags'''
+                      rule: '!self.all(x, has(x.owner) && has(x.tags))'
                 blockDeviceMappings:
                   description: BlockDeviceMappings to be applied to provisioned nodes.
                   items:
@@ -691,12 +693,6 @@ spec:
                 detailedMonitoring:
                   description: DetailedMonitoring controls if detailed monitoring is enabled for instances that are launched
                   type: boolean
-                instanceProfile:
-                  description: InstanceProfile is the AWS entity that instances use. This field is mutually exclusive from role. The instance profile should already have a role assigned to it that Karpenter has PassRole permission on for instance launch using this instanceProfile to succeed.
-                  type: string
-                  x-kubernetes-validations:
-                    - message: instanceProfile cannot be empty
-                      rule: self != ''
                 metadataOptions:
                   default:
                     httpEndpoint: enabled
@@ -735,7 +731,7 @@ spec:
                       type: string
                   type: object
                 role:
-                  description: Role is the AWS identity that nodes use. This field is immutable. This field is mutually exclusive from instanceProfile. Marking this field as immutable avoids concerns around terminating managed instance profiles from running instances. This field may be made mutable in the future, assuming the correct garbage collection and drift handling is implemented for the old instance profiles on an update.
+                  description: Role is the AWS identity that nodes use. This field is immutable. Marking this field as immutable avoids concerns around terminating managed instance profiles from running instances. This field may be made mutable in the future, assuming the correct garbage collection and drift handling is implemented for the old instance profiles on an update.
                   type: string
                   x-kubernetes-validations:
                     - message: role cannot be empty
@@ -824,16 +820,13 @@ spec:
                   type: string
               required:
                 - amiFamily
+                - role
                 - securityGroupSelectorTerms
                 - subnetSelectorTerms
               type: object
               x-kubernetes-validations:
                 - message: amiSelectorTerms is required when amiFamily == 'Custom'
                   rule: 'self.amiFamily == ''Custom'' ? self.amiSelectorTerms.size() != 0 : true'
-                - message: must specify exactly one of ['role', 'instanceProfile']
-                  rule: (has(self.role) && !has(self.instanceProfile)) || (!has(self.role) && has(self.instanceProfile))
-                - message: changing from 'instanceProfile' to 'role' is not supported. You must delete and recreate this node class if you want to change this.
-                  rule: (has(oldSelf.role) && has(self.role)) || (has(oldSelf.instanceProfile) && has(self.instanceProfile))
             status:
               description: EC2NodeClassStatus contains the resolved state of the EC2NodeClass
               properties:
@@ -1395,9 +1388,9 @@ spec:
                         type: string
                         x-kubernetes-validations:
                           - message: label domain "kubernetes.io" is restricted
-                            rule: self in ["beta.kubernetes.io/instance-type", "failure-domain.beta.kubernetes.io/region", "beta.kubernetes.io/os", "beta.kubernetes.io/arch", "failure-domain.beta.kubernetes.io/zone", "topology.kubernetes.io/zone", "topology.kubernetes.io/region", "node.kubernetes.io/instance-type", "kubernetes.io/arch", "kubernetes.io/os", "node.kubernetes.io/windows-build"] || self.find("^([^/]+)").endsWith("node.kubernetes.io") || self.find("^([^/]+)").endsWith("node-restriction.kubernetes.io") || !self.find("^([^/]+)").endsWith("kubernetes.io")
+                            rule: self in ["beta.kubernetes.io/instance-type", "failure-domain.beta.kubernetes.io/region", "beta.kubernetes.io/os", "beta.kubernetes.io/arch", "failure-domain.beta.kubernetes.io/zone", "topology.kubernetes.io/zone", "topology.kubernetes.io/region", "node.kubernetes.io/instance-type", "kubernetes.io/arch", "kubernetes.io/os", "node.kubernetes.io/windows-build"] || self.startsWith("node.kubernetes.io/") || self.startsWith("node-restriction.kubernetes.io/") || !self.find("^([^/]+)").endsWith("kubernetes.io")
                           - message: label domain "k8s.io" is restricted
-                            rule: self.find("^([^/]+)").endsWith("kops.k8s.io") || !self.find("^([^/]+)").endsWith("k8s.io")
+                            rule: self.startsWith("kops.k8s.io/") || !self.find("^([^/]+)").endsWith("k8s.io")
                           - message: label domain "karpenter.sh" is restricted
                             rule: self in ["karpenter.sh/capacity-type", "karpenter.sh/nodepool"] || !self.find("^([^/]+)").endsWith("karpenter.sh")
                           - message: label "kubernetes.io/hostname" is restricted
@@ -1672,9 +1665,9 @@ spec:
                           type: object
                           x-kubernetes-validations:
                             - message: label domain "kubernetes.io" is restricted
-                              rule: self.all(x, x in ["beta.kubernetes.io/instance-type", "failure-domain.beta.kubernetes.io/region",  "beta.kubernetes.io/os", "beta.kubernetes.io/arch", "failure-domain.beta.kubernetes.io/zone", "topology.kubernetes.io/zone", "topology.kubernetes.io/region", "kubernetes.io/arch", "kubernetes.io/os", "node.kubernetes.io/windows-build"] || x.find("^([^/]+)").endsWith("node.kubernetes.io") || x.find("^([^/]+)").endsWith("node-restriction.kubernetes.io") || !x.find("^([^/]+)").endsWith("kubernetes.io"))
+                              rule: self.all(x, x in ["beta.kubernetes.io/instance-type", "failure-domain.beta.kubernetes.io/region",  "beta.kubernetes.io/os", "beta.kubernetes.io/arch", "failure-domain.beta.kubernetes.io/zone", "topology.kubernetes.io/zone", "topology.kubernetes.io/region", "kubernetes.io/arch", "kubernetes.io/os", "node.kubernetes.io/windows-build"] || x.startsWith("node.kubernetes.io") || x.startsWith("node-restriction.kubernetes.io") || !x.find("^([^/]+)").endsWith("kubernetes.io"))
                             - message: label domain "k8s.io" is restricted
-                              rule: self.all(x, x.find("^([^/]+)").endsWith("kops.k8s.io") || !x.find("^([^/]+)").endsWith("k8s.io"))
+                              rule: self.all(x, x.startsWith("kops.k8s.io") || !x.find("^([^/]+)").endsWith("k8s.io"))
                             - message: label domain "karpenter.sh" is restricted
                               rule: self.all(x, x in ["karpenter.sh/capacity-type", "karpenter.sh/nodepool"] || !x.find("^([^/]+)").endsWith("karpenter.sh"))
                             - message: label "karpenter.sh/nodepool" is restricted
@@ -1813,9 +1806,9 @@ spec:
                                 type: string
                                 x-kubernetes-validations:
                                   - message: label domain "kubernetes.io" is restricted
-                                    rule: self in ["beta.kubernetes.io/instance-type", "failure-domain.beta.kubernetes.io/region", "beta.kubernetes.io/os", "beta.kubernetes.io/arch", "failure-domain.beta.kubernetes.io/zone", "topology.kubernetes.io/zone", "topology.kubernetes.io/region", "node.kubernetes.io/instance-type", "kubernetes.io/arch", "kubernetes.io/os", "node.kubernetes.io/windows-build"] || self.find("^([^/]+)").endsWith("node.kubernetes.io") || self.find("^([^/]+)").endsWith("node-restriction.kubernetes.io") || !self.find("^([^/]+)").endsWith("kubernetes.io")
+                                    rule: self in ["beta.kubernetes.io/instance-type", "failure-domain.beta.kubernetes.io/region", "beta.kubernetes.io/os", "beta.kubernetes.io/arch", "failure-domain.beta.kubernetes.io/zone", "topology.kubernetes.io/zone", "topology.kubernetes.io/region", "node.kubernetes.io/instance-type", "kubernetes.io/arch", "kubernetes.io/os", "node.kubernetes.io/windows-build"] || self.startsWith("node.kubernetes.io/") || self.startsWith("node-restriction.kubernetes.io/") || !self.find("^([^/]+)").endsWith("kubernetes.io")
                                   - message: label domain "k8s.io" is restricted
-                                    rule: self.find("^([^/]+)").endsWith("kops.k8s.io") || !self.find("^([^/]+)").endsWith("k8s.io")
+                                    rule: self.startsWith("kops.k8s.io/") || !self.find("^([^/]+)").endsWith("k8s.io")
                                   - message: label domain "karpenter.sh" is restricted
                                     rule: self in ["karpenter.sh/capacity-type", "karpenter.sh/nodepool"] || !self.find("^([^/]+)").endsWith("karpenter.sh")
                                   - message: label "karpenter.sh/nodepool" is restricted
@@ -1929,8 +1922,6 @@ spec:
                         - nodeClassRef
                         - requirements
                       type: object
-                  required:
-                    - spec
                   type: object
                 weight:
                   description: Weight is the priority given to the provisioner during scheduling. A higher numerical weight indicates that this provisioner will be ordered ahead of other provisioners with lower weights. A provisioner with no weight will be treated as if it is a provisioner with a weight of 0.
@@ -1938,8 +1929,6 @@ spec:
                   maximum: 100
                   minimum: 1
                   type: integer
-              required:
-                - template
               type: object
             status:
               description: NodePoolStatus defines the observed state of NodePool
@@ -2270,8 +2259,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
   name: defaulting.webhook.karpenter.k8s.aws
 webhooks:
   - admissionReviewVersions:
@@ -2331,8 +2320,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
   name: validation.webhook.config.karpenter.sh
 webhooks:
   - admissionReviewVersions:
@@ -2356,8 +2345,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
   name: validation.webhook.karpenter.k8s.aws
 webhooks:
   - admissionReviewVersions:
@@ -2412,8 +2401,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
   name: validation.webhook.karpenter.sh
 webhooks:
   - admissionReviewVersions:
@@ -2444,6 +2433,7 @@ webhooks:
         operations:
           - CREATE
           - UPDATE
+          - DELETE
         resources:
           - nodeclaims
           - nodeclaims/status
@@ -2545,8 +2535,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
   name: config-logging
   namespace: karpenter
 ---
@@ -2562,8 +2552,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
   name: karpenter-global-settings
   namespace: karpenter
 ---
@@ -2571,7 +2561,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/public.ecr.aws/karpenter/controller@sha256:df145069be18291dd656e61b526625424bffc064bdc67109796d6256e3d2397b
+        - image: cache.defn.run:5000/public.ecr.aws/karpenter/controller@sha256:9b31039d45613ac22a104b8d48eca9dcdeff93e525bd473c811dfd3502e58c69
           env:
             - name: KUBERNETES_MIN_VERSION
               value: "1.19.0-0"
@@ -2690,7 +2680,7 @@ spec:
           name: config-logging
     metadata:
       annotations:
-        checksum/settings: fe3ae391dc54d2557d6bf7de2223e2345938037d2fcbe256a87d5ce45a40391a
+        checksum/settings: a2974026095d23629cb420e1654f09593727575a9cffe3eea9d747c1a62bd2cf
       labels:
         app.kubernetes.io/instance: karpenter
         app.kubernetes.io/name: karpenter
@@ -2710,8 +2700,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
   name: karpenter
   namespace: karpenter
 ---
@@ -2728,8 +2718,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
   name: karpenter
   namespace: karpenter
 ---
@@ -2851,8 +2841,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
   name: karpenter
   namespace: karpenter
 ---
@@ -2872,8 +2862,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
   name: karpenter-dns
   namespace: karpenter
 ---
@@ -2899,8 +2889,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
   name: karpenter-lease
   namespace: karpenter
 ---
@@ -2911,8 +2901,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
   name: karpenter
   namespace: karpenter
 roleRef:
@@ -2931,8 +2921,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
   name: karpenter-dns
   namespace: karpenter
 roleRef:
@@ -2951,8 +2941,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
   name: karpenter-lease
   namespace: karpenter
 roleRef:
@@ -2971,8 +2961,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
   name: karpenter-cert
   namespace: karpenter
 ---
@@ -3001,8 +2991,8 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
   name: karpenter
   namespace: karpenter
 ---
@@ -3015,7 +3005,7 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: karpenter
-    app.kubernetes.io/version: 0.32.4
-    helm.sh/chart: karpenter-v0.32.4
+    app.kubernetes.io/version: 0.32.1
+    helm.sh/chart: karpenter-v0.32.1
   name: karpenter
   namespace: karpenter

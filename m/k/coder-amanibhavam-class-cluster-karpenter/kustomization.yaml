@@ -17,7 +17,7 @@ commonAnnotations: {}
 helmCharts:
   - releaseName: karpenter
     name: karpenter
-    version: v0.32.4
+    version: v0.32.1
     repo: oci://public.ecr.aws/karpenter
     namespace: karpenter
     valuesInline:
