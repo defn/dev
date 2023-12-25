@@ -57,7 +57,7 @@ home:
 			mark $$n; \
 			(cd m/pkg/$$n && ~/bin/b build); \
 			(cd m/pkg/$$n && ~/bin/b out flake_path) | (cd ~/bin/nix && tar xfz -); \
-			(cd m/pkg/$$n && ~/bin/b out flake_store) | (cd / && tar xf -); \
+			(cd m/pkg/$$n && ~/bin/b out flake_store) | (cd / && sudo tar xf -); \
 			done; \
 	fi
 	rm -f bin/nix/{gcc,cc,ld,clang}
