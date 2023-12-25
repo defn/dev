@@ -1,8 +1,8 @@
 module "immanent-org" {
-    source = "../../mod/terraform-aws-defn-account"
-    context = module.this.context
+  source  = "../../mod/terraform-aws-defn-account"
+  context = module.this.context
 
-    providers = {
-        aws = aws.immanent-org
-    }
+  providers = {
+    aws = aws.immanent-org
+  }
 }

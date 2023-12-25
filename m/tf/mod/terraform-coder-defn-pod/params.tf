@@ -1,15 +1,65 @@
 locals {
   pod_count = data.coder_parameter.provider.value == "pod" ? 1 : 0
-  ns        = "${local.prefix}-${local.owner}-${local.name}"
+
+  username = "ubuntu"
+
+  coder_name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+
+  ns = "${local.prefix}-${local.owner}-${local.name}"
+}
+
+data "coder_parameter" "nix_volume_size" {
+  name         = "nix_volume_size"
+  display_name = "nix volume size"
+  description  = "The size of the nix volume to create for the workspace in GB"
+  type         = "number"
+  default      = "100"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
+  mutable      = true
+  validation {
+    min = 100
+    max = 200
+  }
+}
+
+data "coder_parameter" "workdir" {
+  name         = "workdir"
+  display_name = "Working directory"
+  description  = "Working directory"
+  type         = "string"
+  default      = "/home/${local.username}/m"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
+  mutable      = true
+}
+
+data "coder_parameter" "source_rev" {
+  name         = "source_rev"
+  display_name = "Source revision"
+  description  = "Source revision"
+  type         = "string"
+  default      = "main"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
+  mutable      = true
+}
+
+data "coder_parameter" "prefix" {
+  name         = "prefix"
+  display_name = "Workspace name prefix"
+  description  = "Workspace name prefix"
+  type         = "string"
+  default      = "coder"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
+  mutable      = false
 }
 
 data "coder_parameter" "provider" {
   name         = "provider"
   display_name = "Provider"
   description  = "The service provider to deploy the workspace in"
-  default      = "pod"
   icon         = "/emojis/1f30e.png"
   mutable      = true
+
+  default = "pod"
 
   option {
     name  = "Kubernetes Pod"
@@ -68,46 +118,3 @@ data "coder_parameter" "vcluster" {
   }
 }
 
-data "coder_parameter" "nix_volume_size" {
-  name         = "nix_volume_size"
-  display_name = "nix volume size"
-  description  = "The size of the nix volume to create for the workspace in GB"
-  type         = "number"
-  default      = "60"
-  icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
-  mutable      = true
-  validation {
-    min = 40
-    max = 100
-  }
-}
-
-data "coder_parameter" "workdir" {
-  name         = "workdir"
-  display_name = "Working directory"
-  description  = "Working directory"
-  type         = "string"
-  default      = "/home/${local.username}/m"
-  icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
-  mutable      = true
-}
-
-data "coder_parameter" "source_rev" {
-  name         = "source_rev"
-  display_name = "Source revision"
-  description  = "Source revision"
-  type         = "string"
-  default      = "main"
-  icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
-  mutable      = true
-}
-
-data "coder_parameter" "prefix" {
-  name         = "prefix"
-  display_name = "Workspace name prefix"
-  description  = "Workspace name prefix"
-  type         = "string"
-  default      = "coder"
-  icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
-  mutable      = false
-}

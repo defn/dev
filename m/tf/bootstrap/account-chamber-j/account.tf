@@ -1,8 +1,8 @@
 module "chamber-j" {
-    source = "../../mod/terraform-aws-defn-account"
-    context = module.this.context
+  source  = "../../mod/terraform-aws-defn-account"
+  context = module.this.context
 
-    providers = {
-        aws = aws.chamber-j
-    }
+  providers = {
+    aws = aws.chamber-j
+  }
 }

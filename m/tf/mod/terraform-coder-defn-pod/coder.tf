@@ -39,8 +39,9 @@ resource "coder_agent" "main" {
     DFD_APP    = local.app
 
     DFD_REGISTRY = "cache.${local.domain}:5000"
-    DFD_PARENT   = "${local.parent}.${local.owner}.${local.domain}"
     DFD_CONTEXT  = "${local.prefix}-${local.owner}-${local.name}-cluster"
+
+    DFD_PARENT = "${local.parent}.${local.owner}.${local.domain}"
   }
 }
 
@@ -50,8 +51,8 @@ resource "coder_app" "code-server" {
   display_name = "code-server"
   url          = "http://localhost:13337/?folder=${data.coder_parameter.workdir.value}"
   icon         = "/icon/code.svg"
-  subdomain    = true
   share        = "owner"
+  subdomain    = true
 
   healthcheck {
     url       = "http://localhost:13337/healthz"
