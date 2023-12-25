@@ -3,9 +3,9 @@
     nix.url = github:defn/dev/pkg-nix-0.0.54?dir=m/pkg/nix;
     secrets.url = github:defn/dev/pkg-secrets-0.0.60?dir=m/pkg/secrets;
     utils.url = github:defn/dev/pkg-utils-0.0.54?dir=m/pkg/utils;
-    development.url = github:defn/dev/pkg-development-0.0.80?dir=m/pkg/development;
+    development.url = github:defn/dev/pkg-development-0.0.81?dir=m/pkg/development;
     cloud.url = github:defn/dev/pkg-cloud-0.0.214?dir=m/pkg/cloud;
-    kubernetes.url = github:defn/dev/pkg-kubernetes-0.0.202?dir=m/pkg/kubernetes;
+    kubernetes.url = github:defn/dev/pkg-kubernetes-0.0.203?dir=m/pkg/kubernetes;
     remotedev.url = github:defn/dev/pkg-remotedev-0.0.31?dir=m/pkg/remotedev;
     localdev.url = github:defn/dev/pkg-localdev-0.0.212?dir=m/pkg/localdev;
     godev.url = github:defn/dev/pkg-godev-0.0.124?dir=m/pkg/godev;
