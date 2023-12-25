@@ -72,7 +72,7 @@ cache: "public.ecr.aws/karpenter/controller:v0.32.4@sha256:df145069be18291dd656e
 
 cache: "quay.io/argoproj/argo-events:v1.8.1": "quay.io/argoproj/argo-events@sha256:3c8d787908189604975ca87f480e0f60c93fdfb89bbf944a0c449d888e9368e7"
 
-cache: "quay.io/argoproj/argocd:v2.9.3": "quay.io/argoproj/argocd@sha256:dfc13f4b9ddbf25a88f7018667ee45e35a49520e2716242e3f65ef75f88c25ff"
+cache: "quay.io/argoproj/argocd:v2.10.0-rc1": "quay.io/argoproj/argocd@sha256:83b83d85899451dd069f37b03fdf1c965fd27facc1ab8101d1488bf6af148220"
 
 cache: "quay.io/argoproj/argocli:v3.5.2": "quay.io/argoproj/argocli@sha256:026b30a353022d8909adb03816e9593ce95b99afe4581e401ec39606121a22b3"
 
@@ -112,7 +112,7 @@ cache: "quay.io/jetstack/cert-manager-webhook:v1.13.3": "quay.io/jetstack/cert-m
 
 cache: "quay.io/jetstack/trust-manager:v0.7.0": "quay.io/jetstack/trust-manager@sha256:bcc75013a52f6d784a376ac4693cd5b051e847f0ad2015f5063fca5477021323"
 
-cache: "redis:7.0.11-alpine": "redis@sha256:121bac949fb5f623b9fa0b4e4c9fb358ffd045966e754cfa3eb9963f3af2fe3b"
+cache: "redis:7.0.14-alpine": "redis@sha256:45de526e9fbc1a4b183957ab93a448294181fae10ced9184fc6efe9956ca0ccc"
 
 cache: "registry.k8s.io/descheduler/descheduler:v0.28.1": "registry.k8s.io/descheduler/descheduler@sha256:0bad561801345759824ddc498dfe026e22b14187476ed4f3c2fec90bc68fe57c"
 
