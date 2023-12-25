@@ -11,7 +11,7 @@ services:
       - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/registry.crt
       - REGISTRY_HTTP_TLS_KEY=/certs/registry.key
     volumes:
-      - ${HOME}/registry/certs:/certs
+      - ${HOME}/work/registry/certs:/certs
   bazel-remote:
     image: quay.io/bazel-remote/bazel-remote:v2.4.3
     container_name: bazel-remote
