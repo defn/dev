@@ -1,8 +1,8 @@
 module "helix-net" {
-    source = "../../mod/terraform-aws-defn-account"
-    context = module.this.context
+  source  = "../../mod/terraform-aws-defn-account"
+  context = module.this.context
 
-    providers = {
-        aws = aws.helix-net
-    }
+  providers = {
+    aws = aws.helix-net
+  }
 }

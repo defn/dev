@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function main {
-	cd
+  cd
 	source .bash_profile
 
 	set -e
