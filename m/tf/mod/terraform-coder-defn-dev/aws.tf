@@ -8,6 +8,51 @@ locals {
 
   owners     = ["self"]
   ami_filter = ["coder-*"]
+
+  user_data = <<EOT
+Content-Type: multipart/mixed; boundary="//"
+MIME-Version: 1.0
+
+--//
+Content-Type: text/cloud-config; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="cloud-config.txt"
+
+#cloud-config
+hostname: ${local.coder_name}
+cloud_final_modules:
+- [scripts-user, always]
+
+--//
+Content-Type: text/x-shellscript; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="userdata.txt"
+
+#!/bin/bash
+
+set -x
+
+echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf
+echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf
+echo 'fs.inotify.max_user_instances = 10000' | sudo tee -a /etc/sysctl.d/99-dfd.conf
+echo 'fs.inotify.max_user_watches = 524288' | sudo tee -a /etc/sysctl.d/99-dfd.conf
+sudo sysctl -p /etc/sysctl.d/99-dfd.conf
+
+while true; do
+  if test -n "$(dig +short "cache.nixos.org" || true)"; then
+    break
+  fi
+  sleep 5
+done
+
+sudo tailscale up --accept-dns=true --accept-routes=true --operator ubuntu --ssh --authkey "${var.tsauthkey}"
+
+nohup sudo -H -E -u ${local.username} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${data.coder_workspace.me.access_url} ${local.coder_name}' >/tmp/cloud-init.log 2>&1 &
+disown
+--//--
+EOT
 }
 
 provider "aws" {
