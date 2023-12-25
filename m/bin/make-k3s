@@ -44,9 +44,9 @@ function make_down {
 }
 
 function make_argocd {
-	k3sup install --local --context ${cluster_name} --local-path ~/.kube/config --merge --skip-install
+	env KUBECONFIG=$HOME/.kube/config k3sup install --local --context ${cluster_name} --print-config --skip-install > $HOME/.kube/config
 
-	kubectl config use-context ${cluster_name}
+	env KUBECONFIG=$HOME/.kube/config kubectl config use-context ${cluster_name}
 
 	(
 		cp $HOME/.kube/config $HOME/.kube/config.argocd
