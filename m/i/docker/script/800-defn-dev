@@ -15,8 +15,6 @@ function main {
 
 		make install
 
-		(cd m && bin/make-k3s init)
-
 		exit $?
 	fi
 
