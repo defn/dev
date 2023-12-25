@@ -1,10 +1,11 @@
 data "coder_workspace" "me" {}
 
 locals {
-  owner    = lower(data.coder_workspace.me.owner)
-  name     = lower(data.coder_workspace.me.name)
+  owner  = lower(data.coder_workspace.me.owner)
+  name   = lower(data.coder_workspace.me.name)
+  domain = "defn.run"
+
   username = "ubuntu"
-  domain   = "defn.run"
 
   prefix     = data.coder_parameter.prefix.value
   coder_name = "${local.prefix}-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
