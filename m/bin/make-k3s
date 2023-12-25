@@ -8,10 +8,6 @@ cluster_name=
 infra_pod_cidr=
 infra_service_cidr=
 
-function make_init {
-	(cd cache && make init up)
-}
-
 function make_linkerd {
 	# CA
 	step certificate create root.linkerd.cluster.local ca.crt ca.key --profile root-ca --no-password --insecure
