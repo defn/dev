@@ -1379,17 +1379,17 @@
       },
       "locked": {
         "dir": "m/pkg/development",
-        "lastModified": 1703443658,
-        "narHash": "sha256-7WjVIeRI9ddUz0U2vdnZET5AtYpO9stjqc4W2yIg/nQ=",
+        "lastModified": 1703477335,
+        "narHash": "sha256-fDH9WaoseR1A7NhfrRRXsXFIAW3jtGtWZzMEX9Cnd8k=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "f98aca49154c36c90dac82eb46cbdfaff0f2e969",
+        "rev": "7dbba1931a00f028dc39caa5f295e708a1585d1e",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/development",
         "owner": "defn",
-        "ref": "pkg-development-0.0.80",
+        "ref": "pkg-development-0.0.81",
         "repo": "dev",
         "type": "github"
       }
@@ -1677,17 +1677,17 @@
       },
       "locked": {
         "dir": "m/pkg/k9s",
-        "lastModified": 1703442797,
-        "narHash": "sha256-bM3RtGfKvAwYzpgp4z7v7uUR/UmuUVL2K/sxNH6Lves=",
+        "lastModified": 1703446921,
+        "narHash": "sha256-7Qgish/x644OOzaVhTfQT674RV64V2Q59gp2TbEQqqE=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "88420a1da1f3f78ac80e4b9e7bd76e4f4ea12c6e",
+        "rev": "66d3b71b6022808c86a229925e1e1de5e1c8f70f",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/k9s",
         "owner": "defn",
-        "ref": "pkg-k9s-0.30.0-3",
+        "ref": "pkg-k9s-0.30.1-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1754,17 +1754,17 @@
       },
       "locked": {
         "dir": "m/pkg/kubernetes",
-        "lastModified": 1703445294,
-        "narHash": "sha256-zBQgkpmK6sYL7QyWS/5bj6iIk3Ex7/YJw6YkI3ls8WY=",
+        "lastModified": 1703447047,
+        "narHash": "sha256-+gaxwSxNOP5l7hN2QSzx6+O6IhiTTYaKEsf/25EzOdI=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "423e51431e627ad20c4d315e768637369c3a03e9",
+        "rev": "cdcaa929f3aba1a6e3a14a68f8c1c66830e3135d",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubernetes",
         "owner": "defn",
-        "ref": "pkg-kubernetes-0.0.202",
+        "ref": "pkg-kubernetes-0.0.203",
         "repo": "dev",
         "type": "github"
       }
@@ -2721,17 +2721,17 @@
       },
       "locked": {
         "dir": "m/pkg/oci",
-        "lastModified": 1703443037,
-        "narHash": "sha256-Q0zs9ptzpWhcc2vyrMeGd2xMBD4pa2Vu8uUekJEWWAI=",
+        "lastModified": 1703477266,
+        "narHash": "sha256-2hxbgneGdfRPvplYbksqt9CPeueW0BwW/CdQ4nAIiMc=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "77765c3481ed7fe68f243679ae9f6e8420ef7268",
+        "rev": "ddcf3121f3c2cbacad9856d3d32538332e6ef20d",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/oci",
         "owner": "defn",
-        "ref": "pkg-oci-0.0.54",
+        "ref": "pkg-oci-0.0.55",
         "repo": "dev",
         "type": "github"
       }
