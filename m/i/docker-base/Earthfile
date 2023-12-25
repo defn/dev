@@ -22,7 +22,6 @@ root:
     ENV DEBIAN_FRONTEND=noninteractive
 
     COPY --dir script script
-    RUN ls -ltrhd * */*
     RUN script/000-install-bare
     RUN script/001-install-base
     RUN script/999-update
