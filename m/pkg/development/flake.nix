@@ -3,7 +3,7 @@
     buildifier.url = github:defn/dev/pkg-buildifier-6.4.0-4?dir=m/pkg/buildifier;
     bazelisk.url = github:defn/dev/pkg-bazelisk-1.19.0-4?dir=m/pkg/bazelisk;
     ibazel.url = github:defn/dev/pkg-ibazel-0.24.0-4?dir=m/pkg/ibazel;
-    oci.url = github:defn/dev/pkg-oci-0.0.54?dir=m/pkg/oci;
+    oci.url = github:defn/dev/pkg-oci-0.0.55?dir=m/pkg/oci;
   };
 
   outputs = inputs: inputs.buildifier.inputs.pkg.main rec {
