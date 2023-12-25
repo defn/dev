@@ -194,7 +194,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-class-cluster-karpenter
-              targetRevision: 0.0.107
+              targetRevision: 0.0.108
             syncPolicy:
               automated:
                 prune: true
