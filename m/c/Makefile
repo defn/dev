@@ -50,7 +50,8 @@ digest:
 	cd ./r && $(MAKE) digest
 
 build:
-	runmany 1 'cd $$1 && make' coder-*
+	b build
+	runmany $(shell nproc) 'cd $$1 && make' coder-*
 	$(MAKE) cluster_cue
 
 cluster_cue:
