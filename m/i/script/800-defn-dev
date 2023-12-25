@@ -50,7 +50,6 @@ function main {
 		echo fs.inotify.max_user_watches=524288 
 	) | sudo tee /etc/sysctl.d/99-dfd.conf
 
-
 	sudo mkdir -p /etc/systemd/network
 	pushd /etc/systemd/network
 
