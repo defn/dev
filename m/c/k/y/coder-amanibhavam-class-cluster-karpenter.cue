@@ -438,9 +438,11 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-karpenter": clus
 									message: "'id' is mutually exclusive, cannot be set with a combination of other fields in amiSelectorTerms"
 
 									rule: "!self.all(x, has(x.id) && (has(x.tags) || has(x.name) || has(x.owner)))"
+								}, {
+									message: "'owner' cannot be set with 'tags'"
+									rule:    "!self.all(x, has(x.owner) && has(x.tags))"
 								}]
 							}
-
 							blockDeviceMappings: {
 								description: "BlockDeviceMappings to be applied to provisioned nodes."
 								items: {
@@ -559,15 +561,6 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-karpenter": clus
 
 								type: "boolean"
 							}
-							instanceProfile: {
-								description: "InstanceProfile is the AWS entity that instances use. This field is mutually exclusive from role. The instance profile should already have a role assigned to it that Karpenter has PassRole permission on for instance launch using this instanceProfile to succeed."
-
-								type: "string"
-								"x-kubernetes-validations": [{
-									message: "instanceProfile cannot be empty"
-									rule:    "self != ''"
-								}]
-							}
 							metadataOptions: {
 								default: {
 									httpEndpoint:            "enabled"
@@ -632,7 +625,7 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-karpenter": clus
 								type: "object"
 							}
 							role: {
-								description: "Role is the AWS identity that nodes use. This field is immutable. This field is mutually exclusive from instanceProfile. Marking this field as immutable avoids concerns around terminating managed instance profiles from running instances. This field may be made mutable in the future, assuming the correct garbage collection and drift handling is implemented for the old instance profiles on an update."
+								description: "Role is the AWS identity that nodes use. This field is immutable. Marking this field as immutable avoids concerns around terminating managed instance profiles from running instances. This field may be made mutable in the future, assuming the correct garbage collection and drift handling is implemented for the old instance profiles on an update."
 
 								type: "string"
 								"x-kubernetes-validations": [{
@@ -762,6 +755,7 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-karpenter": clus
 						}
 						required: [
 							"amiFamily",
+							"role",
 							"securityGroupSelectorTerms",
 							"subnetSelectorTerms",
 						]
@@ -769,13 +763,6 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-karpenter": clus
 						"x-kubernetes-validations": [{
 							message: "amiSelectorTerms is required when amiFamily == 'Custom'"
 							rule:    "self.amiFamily == 'Custom' ? self.amiSelectorTerms.size() != 0 : true"
-						}, {
-							message: "must specify exactly one of ['role', 'instanceProfile']"
-							rule:    "(has(self.role) && !has(self.instanceProfile)) || (!has(self.role) && has(self.instanceProfile))"
-						}, {
-							message: "changing from 'instanceProfile' to 'role' is not supported. You must delete and recreate this node class if you want to change this."
-
-							rule: "(has(oldSelf.role) && has(self.role)) || (has(oldSelf.instanceProfile) && has(self.instanceProfile))"
 						}]
 					}
 
@@ -1561,10 +1548,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-karpenter": clus
 											type:        "string"
 											"x-kubernetes-validations": [{
 												message: "label domain \"kubernetes.io\" is restricted"
-												rule:    "self in [\"beta.kubernetes.io/instance-type\", \"failure-domain.beta.kubernetes.io/region\", \"beta.kubernetes.io/os\", \"beta.kubernetes.io/arch\", \"failure-domain.beta.kubernetes.io/zone\", \"topology.kubernetes.io/zone\", \"topology.kubernetes.io/region\", \"node.kubernetes.io/instance-type\", \"kubernetes.io/arch\", \"kubernetes.io/os\", \"node.kubernetes.io/windows-build\"] || self.find(\"^([^/]+)\").endsWith(\"node.kubernetes.io\") || self.find(\"^([^/]+)\").endsWith(\"node-restriction.kubernetes.io\") || !self.find(\"^([^/]+)\").endsWith(\"kubernetes.io\")"
+												rule:    "self in [\"beta.kubernetes.io/instance-type\", \"failure-domain.beta.kubernetes.io/region\", \"beta.kubernetes.io/os\", \"beta.kubernetes.io/arch\", \"failure-domain.beta.kubernetes.io/zone\", \"topology.kubernetes.io/zone\", \"topology.kubernetes.io/region\", \"node.kubernetes.io/instance-type\", \"kubernetes.io/arch\", \"kubernetes.io/os\", \"node.kubernetes.io/windows-build\"] || self.startsWith(\"node.kubernetes.io/\") || self.startsWith(\"node-restriction.kubernetes.io/\") || !self.find(\"^([^/]+)\").endsWith(\"kubernetes.io\")"
 											}, {
 												message: "label domain \"k8s.io\" is restricted"
-												rule:    "self.find(\"^([^/]+)\").endsWith(\"kops.k8s.io\") || !self.find(\"^([^/]+)\").endsWith(\"k8s.io\")"
+												rule:    "self.startsWith(\"kops.k8s.io/\") || !self.find(\"^([^/]+)\").endsWith(\"k8s.io\")"
 											}, {
 												message: "label domain \"karpenter.sh\" is restricted"
 												rule:    "self in [\"karpenter.sh/capacity-type\", \"karpenter.sh/nodepool\"] || !self.find(\"^([^/]+)\").endsWith(\"karpenter.sh\")"
@@ -1951,10 +1938,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-karpenter": clus
 												type:          "object"
 												"x-kubernetes-validations": [{
 													message: "label domain \"kubernetes.io\" is restricted"
-													rule:    "self.all(x, x in [\"beta.kubernetes.io/instance-type\", \"failure-domain.beta.kubernetes.io/region\",  \"beta.kubernetes.io/os\", \"beta.kubernetes.io/arch\", \"failure-domain.beta.kubernetes.io/zone\", \"topology.kubernetes.io/zone\", \"topology.kubernetes.io/region\", \"kubernetes.io/arch\", \"kubernetes.io/os\", \"node.kubernetes.io/windows-build\"] || x.find(\"^([^/]+)\").endsWith(\"node.kubernetes.io\") || x.find(\"^([^/]+)\").endsWith(\"node-restriction.kubernetes.io\") || !x.find(\"^([^/]+)\").endsWith(\"kubernetes.io\"))"
+													rule:    "self.all(x, x in [\"beta.kubernetes.io/instance-type\", \"failure-domain.beta.kubernetes.io/region\",  \"beta.kubernetes.io/os\", \"beta.kubernetes.io/arch\", \"failure-domain.beta.kubernetes.io/zone\", \"topology.kubernetes.io/zone\", \"topology.kubernetes.io/region\", \"kubernetes.io/arch\", \"kubernetes.io/os\", \"node.kubernetes.io/windows-build\"] || x.startsWith(\"node.kubernetes.io\") || x.startsWith(\"node-restriction.kubernetes.io\") || !x.find(\"^([^/]+)\").endsWith(\"kubernetes.io\"))"
 												}, {
 													message: "label domain \"k8s.io\" is restricted"
-													rule:    "self.all(x, x.find(\"^([^/]+)\").endsWith(\"kops.k8s.io\") || !x.find(\"^([^/]+)\").endsWith(\"k8s.io\"))"
+													rule:    "self.all(x, x.startsWith(\"kops.k8s.io\") || !x.find(\"^([^/]+)\").endsWith(\"k8s.io\"))"
 												}, {
 													message: "label domain \"karpenter.sh\" is restricted"
 													rule:    "self.all(x, x in [\"karpenter.sh/capacity-type\", \"karpenter.sh/nodepool\"] || !x.find(\"^([^/]+)\").endsWith(\"karpenter.sh\"))"
@@ -2161,10 +2148,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-karpenter": clus
 															type:      "string"
 															"x-kubernetes-validations": [{
 																message: "label domain \"kubernetes.io\" is restricted"
-																rule:    "self in [\"beta.kubernetes.io/instance-type\", \"failure-domain.beta.kubernetes.io/region\", \"beta.kubernetes.io/os\", \"beta.kubernetes.io/arch\", \"failure-domain.beta.kubernetes.io/zone\", \"topology.kubernetes.io/zone\", \"topology.kubernetes.io/region\", \"node.kubernetes.io/instance-type\", \"kubernetes.io/arch\", \"kubernetes.io/os\", \"node.kubernetes.io/windows-build\"] || self.find(\"^([^/]+)\").endsWith(\"node.kubernetes.io\") || self.find(\"^([^/]+)\").endsWith(\"node-restriction.kubernetes.io\") || !self.find(\"^([^/]+)\").endsWith(\"kubernetes.io\")"
+																rule:    "self in [\"beta.kubernetes.io/instance-type\", \"failure-domain.beta.kubernetes.io/region\", \"beta.kubernetes.io/os\", \"beta.kubernetes.io/arch\", \"failure-domain.beta.kubernetes.io/zone\", \"topology.kubernetes.io/zone\", \"topology.kubernetes.io/region\", \"node.kubernetes.io/instance-type\", \"kubernetes.io/arch\", \"kubernetes.io/os\", \"node.kubernetes.io/windows-build\"] || self.startsWith(\"node.kubernetes.io/\") || self.startsWith(\"node-restriction.kubernetes.io/\") || !self.find(\"^([^/]+)\").endsWith(\"kubernetes.io\")"
 															}, {
 																message: "label domain \"k8s.io\" is restricted"
-																rule:    "self.find(\"^([^/]+)\").endsWith(\"kops.k8s.io\") || !self.find(\"^([^/]+)\").endsWith(\"k8s.io\")"
+																rule:    "self.startsWith(\"kops.k8s.io/\") || !self.find(\"^([^/]+)\").endsWith(\"k8s.io\")"
 															}, {
 																message: "label domain \"karpenter.sh\" is restricted"
 																rule:    "self in [\"karpenter.sh/capacity-type\", \"karpenter.sh/nodepool\"] || !self.find(\"^([^/]+)\").endsWith(\"karpenter.sh\")"
@@ -2337,7 +2324,6 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-karpenter": clus
 										type: "object"
 									}
 								}
-								required: ["spec"]
 								type: "object"
 							}
 							weight: {
@@ -2349,7 +2335,6 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-karpenter": clus
 								type:    "integer"
 							}
 						}
-						required: ["template"]
 						type: "object"
 					}
 					status: {
@@ -2808,8 +2793,8 @@ res: serviceaccount: "coder-amanibhavam-class-cluster-karpenter": karpenter: kar
 			"app.kubernetes.io/instance":   "karpenter"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "karpenter"
-			"app.kubernetes.io/version":    "0.32.4"
-			"helm.sh/chart":                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":    "0.32.1"
+			"helm.sh/chart":                "karpenter-v0.32.1"
 		}
 		name:      "karpenter"
 		namespace: "karpenter"
@@ -2823,8 +2808,8 @@ res: role: "coder-amanibhavam-class-cluster-karpenter": karpenter: karpenter: {
 			"app.kubernetes.io/instance":   "karpenter"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "karpenter"
-			"app.kubernetes.io/version":    "0.32.4"
-			"helm.sh/chart":                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":    "0.32.1"
+			"helm.sh/chart":                "karpenter-v0.32.1"
 		}
 		name:      "karpenter"
 		namespace: "karpenter"
@@ -2904,8 +2889,8 @@ res: role: "coder-amanibhavam-class-cluster-karpenter": karpenter: "karpenter-dn
 			"app.kubernetes.io/instance":   "karpenter"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "karpenter"
-			"app.kubernetes.io/version":    "0.32.4"
-			"helm.sh/chart":                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":    "0.32.1"
+			"helm.sh/chart":                "karpenter-v0.32.1"
 		}
 		name:      "karpenter-dns"
 		namespace: "karpenter"
@@ -2925,8 +2910,8 @@ res: role: "coder-amanibhavam-class-cluster-karpenter": karpenter: "karpenter-le
 			"app.kubernetes.io/instance":   "karpenter"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "karpenter"
-			"app.kubernetes.io/version":    "0.32.4"
-			"helm.sh/chart":                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":    "0.32.1"
+			"helm.sh/chart":                "karpenter-v0.32.1"
 		}
 		name:      "karpenter-lease"
 		namespace: "karpenter"
@@ -2953,8 +2938,8 @@ res: clusterrole: "coder-amanibhavam-class-cluster-karpenter": cluster: karpente
 			"app.kubernetes.io/instance":   "karpenter"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "karpenter"
-			"app.kubernetes.io/version":    "0.32.4"
-			"helm.sh/chart":                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":    "0.32.1"
+			"helm.sh/chart":                "karpenter-v0.32.1"
 		}
 		name: "karpenter"
 	}
@@ -3001,8 +2986,8 @@ res: clusterrole: "coder-amanibhavam-class-cluster-karpenter": cluster: "karpent
 			"app.kubernetes.io/instance":                   "karpenter"
 			"app.kubernetes.io/managed-by":                 "Helm"
 			"app.kubernetes.io/name":                       "karpenter"
-			"app.kubernetes.io/version":                    "0.32.4"
-			"helm.sh/chart":                                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":                    "0.32.1"
+			"helm.sh/chart":                                "karpenter-v0.32.1"
 			"rbac.authorization.k8s.io/aggregate-to-admin": "true"
 		}
 		name: "karpenter-admin"
@@ -3071,8 +3056,8 @@ res: clusterrole: "coder-amanibhavam-class-cluster-karpenter": cluster: "karpent
 			"app.kubernetes.io/instance":   "karpenter"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "karpenter"
-			"app.kubernetes.io/version":    "0.32.4"
-			"helm.sh/chart":                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":    "0.32.1"
+			"helm.sh/chart":                "karpenter-v0.32.1"
 		}
 		name: "karpenter-core"
 	}
@@ -3240,8 +3225,8 @@ res: rolebinding: "coder-amanibhavam-class-cluster-karpenter": karpenter: karpen
 			"app.kubernetes.io/instance":   "karpenter"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "karpenter"
-			"app.kubernetes.io/version":    "0.32.4"
-			"helm.sh/chart":                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":    "0.32.1"
+			"helm.sh/chart":                "karpenter-v0.32.1"
 		}
 		name:      "karpenter"
 		namespace: "karpenter"
@@ -3265,8 +3250,8 @@ res: rolebinding: "coder-amanibhavam-class-cluster-karpenter": karpenter: "karpe
 			"app.kubernetes.io/instance":   "karpenter"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "karpenter"
-			"app.kubernetes.io/version":    "0.32.4"
-			"helm.sh/chart":                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":    "0.32.1"
+			"helm.sh/chart":                "karpenter-v0.32.1"
 		}
 		name:      "karpenter-dns"
 		namespace: "karpenter"
@@ -3290,8 +3275,8 @@ res: rolebinding: "coder-amanibhavam-class-cluster-karpenter": karpenter: "karpe
 			"app.kubernetes.io/instance":   "karpenter"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "karpenter"
-			"app.kubernetes.io/version":    "0.32.4"
-			"helm.sh/chart":                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":    "0.32.1"
+			"helm.sh/chart":                "karpenter-v0.32.1"
 		}
 		name:      "karpenter-lease"
 		namespace: "karpenter"
@@ -3315,8 +3300,8 @@ res: clusterrolebinding: "coder-amanibhavam-class-cluster-karpenter": cluster: k
 			"app.kubernetes.io/instance":   "karpenter"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "karpenter"
-			"app.kubernetes.io/version":    "0.32.4"
-			"helm.sh/chart":                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":    "0.32.1"
+			"helm.sh/chart":                "karpenter-v0.32.1"
 		}
 		name: "karpenter"
 	}
@@ -3369,8 +3354,8 @@ res: clusterrolebinding: "coder-amanibhavam-class-cluster-karpenter": cluster: "
 			"app.kubernetes.io/instance":   "karpenter"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "karpenter"
-			"app.kubernetes.io/version":    "0.32.4"
-			"helm.sh/chart":                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":    "0.32.1"
+			"helm.sh/chart":                "karpenter-v0.32.1"
 		}
 		name: "karpenter-core"
 	}
@@ -3439,8 +3424,8 @@ res: configmap: "coder-amanibhavam-class-cluster-karpenter": karpenter: "config-
 			"app.kubernetes.io/instance":   "karpenter"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "karpenter"
-			"app.kubernetes.io/version":    "0.32.4"
-			"helm.sh/chart":                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":    "0.32.1"
+			"helm.sh/chart":                "karpenter-v0.32.1"
 		}
 		name:      "config-logging"
 		namespace: "karpenter"
@@ -3460,8 +3445,8 @@ res: configmap: "coder-amanibhavam-class-cluster-karpenter": karpenter: "karpent
 			"app.kubernetes.io/instance":   "karpenter"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "karpenter"
-			"app.kubernetes.io/version":    "0.32.4"
-			"helm.sh/chart":                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":    "0.32.1"
+			"helm.sh/chart":                "karpenter-v0.32.1"
 		}
 		name:      "karpenter-global-settings"
 		namespace: "karpenter"
@@ -3475,8 +3460,8 @@ res: secret: "coder-amanibhavam-class-cluster-karpenter": karpenter: "karpenter-
 			"app.kubernetes.io/instance":   "karpenter"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "karpenter"
-			"app.kubernetes.io/version":    "0.32.4"
-			"helm.sh/chart":                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":    "0.32.1"
+			"helm.sh/chart":                "karpenter-v0.32.1"
 		}
 		name:      "karpenter-cert"
 		namespace: "karpenter"
@@ -3490,8 +3475,8 @@ res: service: "coder-amanibhavam-class-cluster-karpenter": karpenter: karpenter:
 			"app.kubernetes.io/instance":   "karpenter"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "karpenter"
-			"app.kubernetes.io/version":    "0.32.4"
-			"helm.sh/chart":                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":    "0.32.1"
+			"helm.sh/chart":                "karpenter-v0.32.1"
 		}
 		name:      "karpenter"
 		namespace: "karpenter"
@@ -3528,8 +3513,8 @@ res: deployment: "coder-amanibhavam-class-cluster-karpenter": karpenter: karpent
 			"app.kubernetes.io/instance":   "karpenter"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "karpenter"
-			"app.kubernetes.io/version":    "0.32.4"
-			"helm.sh/chart":                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":    "0.32.1"
+			"helm.sh/chart":                "karpenter-v0.32.1"
 		}
 		name:      "karpenter"
 		namespace: "karpenter"
@@ -3544,7 +3529,7 @@ res: deployment: "coder-amanibhavam-class-cluster-karpenter": karpenter: karpent
 		strategy: rollingUpdate: maxUnavailable: 1
 		template: {
 			metadata: {
-				annotations: "checksum/settings": "fe3ae391dc54d2557d6bf7de2223e2345938037d2fcbe256a87d5ce45a40391a"
+				annotations: "checksum/settings": "a2974026095d23629cb420e1654f09593727575a9cffe3eea9d747c1a62bd2cf"
 				labels: {
 					"app.kubernetes.io/instance": "karpenter"
 					"app.kubernetes.io/name":     "karpenter"
@@ -3623,7 +3608,7 @@ res: deployment: "coder-amanibhavam-class-cluster-karpenter": karpenter: karpent
 						name:  "AWS_REGION"
 						value: "us-west-2"
 					}]
-					image:           "public.ecr.aws/karpenter/controller:v0.32.4@sha256:df145069be18291dd656e61b526625424bffc064bdc67109796d6256e3d2397b"
+					image:           "public.ecr.aws/karpenter/controller:v0.32.1@sha256:9b31039d45613ac22a104b8d48eca9dcdeff93e525bd473c811dfd3502e58c69"
 					imagePullPolicy: "IfNotPresent"
 					livenessProbe: {
 						httpGet: {
@@ -3706,8 +3691,8 @@ res: poddisruptionbudget: "coder-amanibhavam-class-cluster-karpenter": karpenter
 			"app.kubernetes.io/instance":   "karpenter"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "karpenter"
-			"app.kubernetes.io/version":    "0.32.4"
-			"helm.sh/chart":                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":    "0.32.1"
+			"helm.sh/chart":                "karpenter-v0.32.1"
 		}
 		name:      "karpenter"
 		namespace: "karpenter"
@@ -3825,8 +3810,8 @@ res: mutatingwebhookconfiguration: "coder-amanibhavam-class-cluster-karpenter": 
 			"app.kubernetes.io/instance":   "karpenter"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "karpenter"
-			"app.kubernetes.io/version":    "0.32.4"
-			"helm.sh/chart":                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":    "0.32.1"
+			"helm.sh/chart":                "karpenter-v0.32.1"
 		}
 		name: "defaulting.webhook.karpenter.k8s.aws"
 	}
@@ -3887,8 +3872,8 @@ res: validatingwebhookconfiguration: "coder-amanibhavam-class-cluster-karpenter"
 			"app.kubernetes.io/instance":   "karpenter"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "karpenter"
-			"app.kubernetes.io/version":    "0.32.4"
-			"helm.sh/chart":                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":    "0.32.1"
+			"helm.sh/chart":                "karpenter-v0.32.1"
 		}
 		name: "validation.webhook.config.karpenter.sh"
 	}
@@ -3913,8 +3898,8 @@ res: validatingwebhookconfiguration: "coder-amanibhavam-class-cluster-karpenter"
 			"app.kubernetes.io/instance":   "karpenter"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "karpenter"
-			"app.kubernetes.io/version":    "0.32.4"
-			"helm.sh/chart":                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":    "0.32.1"
+			"helm.sh/chart":                "karpenter-v0.32.1"
 		}
 		name: "validation.webhook.karpenter.k8s.aws"
 	}
@@ -3975,8 +3960,8 @@ res: validatingwebhookconfiguration: "coder-amanibhavam-class-cluster-karpenter"
 			"app.kubernetes.io/instance":   "karpenter"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "karpenter"
-			"app.kubernetes.io/version":    "0.32.4"
-			"helm.sh/chart":                "karpenter-v0.32.4"
+			"app.kubernetes.io/version":    "0.32.1"
+			"helm.sh/chart":                "karpenter-v0.32.1"
 		}
 		name: "validation.webhook.karpenter.sh"
 	}
@@ -4007,6 +3992,7 @@ res: validatingwebhookconfiguration: "coder-amanibhavam-class-cluster-karpenter"
 			operations: [
 				"CREATE",
 				"UPDATE",
+				"DELETE",
 			]
 			resources: [
 				"nodeclaims",

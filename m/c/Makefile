@@ -7,15 +7,15 @@ env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
 delivery:
 	while true; do \
 		$(MAKE) delivery_inner; \
-		if ! git diff coder-* | grep app_version:; then $(MAKE) delivery_inner; break; fi; \
+		if ! git diff coder-* | grep app_version:; then break; fi; \
 		git add -u coder-*; \
 		done
 
-# M k/y/crds.cue
 # M k/crd/ENV.yaml
 	$(MAKE) crd
 
 delivery_inner:
+	@mark delivery_inner
 # M k/y/cluster.cue updated
 # M k/y/APP/main.yaml
 # M k/APP/kustomization.yaml
@@ -29,7 +29,7 @@ delivery_inner:
 # M r/digest/digest_gen.cue
 # M k/r/APP/main.yaml
 # put missing images into the cache
-	if env GIT_PAGER=cat git grep not-found ../k/r; then $(MAKE) digest release; fi
+	if env GIT_PAGER=cat git grep image:.not-found ../k/r; then $(MAKE) digest release; fi
 
 # h/APP*
 # ENV/APP-version.cue

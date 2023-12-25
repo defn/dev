@@ -68,7 +68,7 @@ cache: "goharbor/trivy-adapter-photon:v2.9.1": "goharbor/trivy-adapter-photon@sh
 
 cache: "pihole/pihole:2023.11.0": "pihole/pihole@sha256:24b1ef8f66d810faffefdb9b66850bbe2d55013506b892605acef414e210edeb"
 
-cache: "public.ecr.aws/karpenter/controller:v0.32.4@sha256:df145069be18291dd656e61b526625424bffc064bdc67109796d6256e3d2397b": "public.ecr.aws/karpenter/controller@sha256:df145069be18291dd656e61b526625424bffc064bdc67109796d6256e3d2397b"
+cache: "public.ecr.aws/karpenter/controller:v0.32.1@sha256:9b31039d45613ac22a104b8d48eca9dcdeff93e525bd473c811dfd3502e58c69": "public.ecr.aws/karpenter/controller@sha256:9b31039d45613ac22a104b8d48eca9dcdeff93e525bd473c811dfd3502e58c69"
 
 cache: "quay.io/argoproj/argo-events:v1.8.1": "quay.io/argoproj/argo-events@sha256:3c8d787908189604975ca87f480e0f60c93fdfb89bbf944a0c449d888e9368e7"
 
