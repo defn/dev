@@ -116,9 +116,6 @@ res: clusterrole: "coder-amanibhavam-class-cluster-cilium": cluster: cilium: {
 		resources: [
 			"ciliumloadbalancerippools",
 			"ciliumbgppeeringpolicies",
-			"ciliumbgpnodeconfigs",
-			"ciliumbgpadvertisements",
-			"ciliumbgppeerconfigs",
 			"ciliumclusterwideenvoyconfigs",
 			"ciliumclusterwidenetworkpolicies",
 			"ciliumegressgatewaypolicies",
@@ -175,7 +172,6 @@ res: clusterrole: "coder-amanibhavam-class-cluster-cilium": cluster: cilium: {
 			"ciliumendpoints/status",
 			"ciliumendpoints",
 			"ciliuml2announcementpolicies/status",
-			"ciliumbgpnodeconfigs/status",
 		]
 		verbs: ["patch"]
 	}]
@@ -304,9 +300,6 @@ res: clusterrole: "coder-amanibhavam-class-cluster-cilium": cluster: "cilium-ope
 		resources: [
 			"ciliumendpointslices",
 			"ciliumenvoyconfigs",
-			"ciliumbgppeerconfigs",
-			"ciliumbgpadvertisements",
-			"ciliumbgpnodeconfigs",
 		]
 		verbs: [
 			"create",
@@ -331,11 +324,6 @@ res: clusterrole: "coder-amanibhavam-class-cluster-cilium": cluster: "cilium-ope
 		resourceNames: [
 			"ciliumloadbalancerippools.cilium.io",
 			"ciliumbgppeeringpolicies.cilium.io",
-			"ciliumbgpclusterconfigs.cilium.io",
-			"ciliumbgppeerconfigs.cilium.io",
-			"ciliumbgpadvertisements.cilium.io",
-			"ciliumbgpnodeconfigs.cilium.io",
-			"ciliumbgpnodeconfigoverrides.cilium.io",
 			"ciliumclusterwideenvoyconfigs.cilium.io",
 			"ciliumclusterwidenetworkpolicies.cilium.io",
 			"ciliumegressgatewaypolicies.cilium.io",
@@ -359,8 +347,6 @@ res: clusterrole: "coder-amanibhavam-class-cluster-cilium": cluster: "cilium-ope
 		resources: [
 			"ciliumloadbalancerippools",
 			"ciliumpodippools",
-			"ciliumbgpclusterconfigs",
-			"ciliumbgpnodeconfigoverrides",
 		]
 		verbs: [
 			"get",
@@ -602,7 +588,6 @@ res: configmap: "coder-amanibhavam-class-cluster-cilium": "kube-system": "cilium
 		"agent-not-ready-taint-key":                      "node.cilium.io/agent-not-ready"
 		"arping-refresh-period":                          "30s"
 		"auto-direct-node-routes":                        "false"
-		"bpf-lb-acceleration":                            "disabled"
 		"bpf-lb-algorithm":                               "maglev"
 		"bpf-lb-external-clusterip":                      "true"
 		"bpf-lb-map-max":                                 "65536"
@@ -618,8 +603,10 @@ res: configmap: "coder-amanibhavam-class-cluster-cilium": "kube-system": "cilium
 		"cluster-pool-ipv4-mask-size":                    "24"
 		"cni-exclusive":                                  "true"
 		"cni-log-file":                                   "/var/run/cilium/cilium-cni.log"
+		"cnp-node-status-gc-interval":                    "0s"
 		"custom-cni-conf":                                "false"
 		debug:                                            "false"
+		"disable-cnp-status-updates":                     "true"
 		"egress-gateway-reconciliation-trigger-interval": "1s"
 		"enable-auto-protect-node-port-range":            "true"
 		"enable-bgp-control-plane":                       "false"
@@ -627,7 +614,6 @@ res: configmap: "coder-amanibhavam-class-cluster-cilium": "kube-system": "cilium
 		"enable-bpf-masquerade":                          "true"
 		"enable-endpoint-health-checking":                "true"
 		"enable-external-ips":                            "false"
-		"enable-health-check-loadbalancer-ip":            "false"
 		"enable-health-check-nodeport":                   "true"
 		"enable-health-checking":                         "true"
 		"enable-host-port":                               "false"
@@ -643,8 +629,6 @@ res: configmap: "coder-amanibhavam-class-cluster-cilium": "kube-system": "cilium
 		"enable-l2-neigh-discovery":                      "true"
 		"enable-l7-proxy":                                "true"
 		"enable-local-redirect-policy":                   "false"
-		"enable-masquerade-to-route-source":              "false"
-		"enable-metrics":                                 "true"
 		"enable-node-port":                               "false"
 		"enable-policy":                                  "default"
 		"enable-remote-node-identity":                    "true"
@@ -657,8 +641,6 @@ res: configmap: "coder-amanibhavam-class-cluster-cilium": "kube-system": "cilium
 		"encrypt-node":                                   "true"
 		"external-envoy-proxy":                           "true"
 		"hubble-disable-tls":                             "false"
-		"hubble-export-file-max-backups":                 "5"
-		"hubble-export-file-max-size-mb":                 "10"
 		"hubble-listen-address":                          ":4244"
 		"hubble-socket-path":                             "/var/run/cilium/hubble.sock"
 		"hubble-tls-cert-file":                           "/var/lib/cilium/tls/hubble/server.crt"
@@ -670,11 +652,10 @@ res: configmap: "coder-amanibhavam-class-cluster-cilium": "kube-system": "cilium
 		"install-no-conntrack-iptables-rules":            "false"
 		ipam:                                             "cluster-pool"
 		"ipam-cilium-node-update-rate":                   "15s"
-		"k8s-client-burst":                               "20"
-		"k8s-client-qps":                                 "10"
+		"k8s-client-burst":                               "10"
+		"k8s-client-qps":                                 "5"
 		"kube-proxy-replacement":                         "false"
 		"kube-proxy-replacement-healthz-bind-address":    ""
-		"max-connected-clusters":                         "255"
 		"mesh-auth-enabled":                              "true"
 		"mesh-auth-gc-interval":                          "5m0s"
 		"mesh-auth-queue-size":                           "1024"
@@ -685,7 +666,6 @@ res: configmap: "coder-amanibhavam-class-cluster-cilium": "kube-system": "cilium
 		"node-port-bind-protection":                      "true"
 		"nodes-gc-interval":                              "5m0s"
 		"operator-api-serve-addr":                        "127.0.0.1:9234"
-		"operator-prometheus-serve-addr":                 ":9963"
 		"preallocate-bpf-maps":                           "false"
 		procfs:                                           "/host/proc"
 		"proxy-connect-timeout":                          "2"
@@ -693,7 +673,6 @@ res: configmap: "coder-amanibhavam-class-cluster-cilium": "kube-system": "cilium
 		"proxy-max-requests-per-connection":              "0"
 		"remove-cilium-node-taints":                      "true"
 		"routing-mode":                                   "tunnel"
-		"service-no-backend-response":                    "reject"
 		"set-cilium-is-up-condition":                     "true"
 		"set-cilium-node-taints":                         "true"
 		"sidecar-istio-proxy-image":                      "cilium/istio_proxy"
@@ -711,7 +690,6 @@ res: configmap: "coder-amanibhavam-class-cluster-cilium": "kube-system": "cilium
 		"vtep-endpoint":                                  ""
 		"vtep-mac":                                       ""
 		"vtep-mask":                                      ""
-		"wireguard-persistent-keepalive":                 "0s"
 		"write-cni-conf-when-ready":                      "/host/etc/cni/net.d/05-cilium.conflist"
 	}
 	kind: "ConfigMap"
@@ -1012,14 +990,6 @@ res: configmap: "coder-amanibhavam-class-cluster-cilium": "kube-system": "cilium
 		      \"resourceApiVersion\": \"V3\"
 		    }
 		  },
-		  \"bootstrapExtensions\": [
-		    {
-		      \"name\": \"envoy.bootstrap.internal_listener\",
-		      \"typed_config\": {
-		        \"@type\": \"type.googleapis.com/envoy.extensions.bootstrap.internal_listener.v3.InternalListener\"
-		      }
-		    }
-		  ],
 		  \"layeredRuntime\": {
 		    \"layers\": [
 		      {
@@ -1110,13 +1080,6 @@ res: configmap: "coder-amanibhavam-class-cluster-cilium": "kube-system": "hubble
 		            # double `/index.html` is required here 
 		            try_files $uri $uri/ /index.html /index.html;
 		        }
-
-		        # Liveness probe
-		        location /healthz {
-		            access_log off;
-		            add_header Content-Type text/plain;
-		            return 200 'ok';
-		        }
 		    }
 		}
 		"""
@@ -1196,11 +1159,6 @@ res: service: "coder-amanibhavam-class-cluster-cilium": "kube-system": "clusterm
 			port:       9962
 			protocol:   "TCP"
 			targetPort: "apiserv-metrics"
-		}, {
-			name:       "etcd-metrics"
-			port:       9963
-			protocol:   "TCP"
-			targetPort: "etcd-metrics"
 		}]
 		selector: "k8s-app": "clustermesh-apiserver"
 		type: "ClusterIP"
@@ -1301,10 +1259,6 @@ res: deployment: "coder-amanibhavam-class-cluster-cilium": "kube-system": "ciliu
 		}
 		template: {
 			metadata: {
-				annotations: {
-					"prometheus.io/port":   "9963"
-					"prometheus.io/scrape": "true"
-				}
 				labels: {
 					"app.kubernetes.io/name":    "cilium-operator"
 					"app.kubernetes.io/part-of": "cilium"
@@ -1344,7 +1298,7 @@ res: deployment: "coder-amanibhavam-class-cluster-cilium": "kube-system": "ciliu
 							optional: true
 						}
 					}]
-					image:           "quay.io/cilium/operator-generic:v1.15.0-rc.0@sha256:cc0800697151d9a68c9547c66e9d5f4a67537efd369cb10caf19e79748b24b02"
+					image:           "quay.io/cilium/operator-generic:v1.14.5@sha256:303f9076bdc73b3fc32aaedee64a14f6f44c8bb08ee9e3956d443021103ebe7a"
 					imagePullPolicy: "IfNotPresent"
 					livenessProbe: {
 						httpGet: {
@@ -1358,12 +1312,6 @@ res: deployment: "coder-amanibhavam-class-cluster-cilium": "kube-system": "ciliu
 						timeoutSeconds:      3
 					}
 					name: "cilium-operator"
-					ports: [{
-						containerPort: 9963
-						hostPort:      9963
-						name:          "prometheus"
-						protocol:      "TCP"
-					}]
 					readinessProbe: {
 						failureThreshold: 5
 						httpGet: {
@@ -1445,10 +1393,8 @@ res: deployment: "coder-amanibhavam-class-cluster-cilium": "kube-system": "clust
 						"--advertise-client-urls=https://[$(HOSTNAME_IP)]:2379",
 						"--initial-cluster-token=clustermesh-apiserver",
 						"--auto-compaction-retention=1",
-						"--listen-metrics-urls=http://[$(HOSTNAME_IP)]:9963",
-						"--metrics=basic",
 					]
-					command: ["/usr/bin/etcd"]
+					command: ["/usr/local/bin/etcd"]
 					env: [{
 						name:  "ETCDCTL_API"
 						value: "3"
@@ -1456,16 +1402,12 @@ res: deployment: "coder-amanibhavam-class-cluster-cilium": "kube-system": "clust
 						name: "HOSTNAME_IP"
 						valueFrom: fieldRef: fieldPath: "status.podIP"
 					}]
-					image:           "quay.io/cilium/clustermesh-apiserver:v1.15.0-rc.0@sha256:7a6be505270347b8e4076941b282ecd3c89cbdce68f50a3ba6e0bd5a60553c47"
+					image:           "quay.io/coreos/etcd:v3.5.4@sha256:795d8660c48c439a7c3764c2330ed9222ab5db5bb524d8d0607cac76f7ba82a3"
 					imagePullPolicy: "IfNotPresent"
 					name:            "etcd"
 					ports: [{
 						containerPort: 2379
 						name:          "etcd"
-						protocol:      "TCP"
-					}, {
-						containerPort: 9963
-						name:          "etcd-metrics"
 						protocol:      "TCP"
 					}]
 					terminationMessagePolicy: "FallbackToLogsOnError"
@@ -1479,15 +1421,12 @@ res: deployment: "coder-amanibhavam-class-cluster-cilium": "kube-system": "clust
 					}]
 				}, {
 					args: [
-						"clustermesh",
 						"--cluster-name=$(CLUSTER_NAME)",
 						"--cluster-id=$(CLUSTER_ID)",
 						"--kvstore-opt",
 						"etcd.config=/var/lib/cilium/etcd-config.yaml",
-						"--max-connected-clusters=255",
 						"--enable-external-workloads=false",
 						"--prometheus-serve-addr=:9962",
-						"--controller-group-metrics=all",
 					]
 					command: ["/usr/bin/clustermesh-apiserver"]
 					env: [{
@@ -1517,7 +1456,7 @@ res: deployment: "coder-amanibhavam-class-cluster-cilium": "kube-system": "clust
 							optional: true
 						}
 					}]
-					image:           "quay.io/cilium/clustermesh-apiserver:v1.15.0-rc.0@sha256:7a6be505270347b8e4076941b282ecd3c89cbdce68f50a3ba6e0bd5a60553c47"
+					image:           "quay.io/cilium/clustermesh-apiserver:v1.14.5@sha256:7eaa35cf5452c43b1f7d0cde0d707823ae7e49965bcb54c053e31ea4e04c3d96"
 					imagePullPolicy: "IfNotPresent"
 					name:            "apiserver"
 					ports: [{
@@ -1534,20 +1473,46 @@ res: deployment: "coder-amanibhavam-class-cluster-cilium": "kube-system": "clust
 				}]
 				initContainers: [{
 					args: [
-						"etcdinit",
-						"--etcd-cluster-name=clustermesh-apiserver",
-						"--etcd-initial-cluster-token=clustermesh-apiserver",
-						"--etcd-data-dir=/var/run/etcd",
+						"""
+		rm -rf /var/run/etcd/*;
+		/usr/local/bin/etcd --data-dir=/var/run/etcd --name=clustermesh-apiserver --listen-client-urls=http://127.0.0.1:2379 --advertise-client-urls=http://127.0.0.1:2379 --initial-cluster-token=clustermesh-apiserver --initial-cluster-state=new --auto-compaction-retention=1 &
+
+		# The following key needs to be created before that the cilium agents
+		# have the possibility of connecting to etcd.
+		etcdctl put cilium/.has-cluster-config true
+
+		etcdctl user add root --no-password;
+		etcdctl user grant-role root root;
+		etcdctl user add admin-coder-amanibhavam-class --no-password;
+		etcdctl user grant-role admin-coder-amanibhavam-class root;
+		etcdctl user add externalworkload --no-password;
+		etcdctl role add externalworkload;
+		etcdctl role grant-permission externalworkload --from-key read '';
+		etcdctl role grant-permission externalworkload readwrite --prefix cilium/state/noderegister/v1/;
+		etcdctl role grant-permission externalworkload readwrite --prefix cilium/.initlock/;
+		etcdctl user grant-role externalworkload externalworkload;
+		etcdctl user add remote --no-password;
+		etcdctl role add remote;
+		etcdctl role grant-permission remote --from-key read '';
+		etcdctl user grant-role remote remote;
+		etcdctl auth enable;
+		exit
+
+		""",
 					]
-					command: ["/usr/bin/clustermesh-apiserver"]
+
+					command: [
+						"/bin/sh",
+						"-c",
+					]
 					env: [{
-						name: "CILIUM_CLUSTER_NAME"
-						valueFrom: configMapKeyRef: {
-							key:  "cluster-name"
-							name: "cilium-config"
-						}
+						name:  "ETCDCTL_API"
+						value: "3"
+					}, {
+						name: "HOSTNAME_IP"
+						valueFrom: fieldRef: fieldPath: "status.podIP"
 					}]
-					image:                    "quay.io/cilium/clustermesh-apiserver:v1.15.0-rc.0@sha256:7a6be505270347b8e4076941b282ecd3c89cbdce68f50a3ba6e0bd5a60553c47"
+					image:                    "quay.io/coreos/etcd:v3.5.4@sha256:795d8660c48c439a7c3764c2330ed9222ab5db5bb524d8d0607cac76f7ba82a3"
 					imagePullPolicy:          "IfNotPresent"
 					name:                     "etcd-init"
 					terminationMessagePolicy: "FallbackToLogsOnError"
@@ -1557,11 +1522,10 @@ res: deployment: "coder-amanibhavam-class-cluster-cilium": "kube-system": "clust
 					}]
 				}]
 				nodeSelector: "kubernetes.io/os": "linux"
-				priorityClassName:             "system-cluster-critical"
-				restartPolicy:                 "Always"
-				serviceAccount:                "clustermesh-apiserver"
-				serviceAccountName:            "clustermesh-apiserver"
-				terminationGracePeriodSeconds: 30
+				priorityClassName:  "system-cluster-critical"
+				restartPolicy:      "Always"
+				serviceAccount:     "clustermesh-apiserver"
+				serviceAccountName: "clustermesh-apiserver"
 				volumes: [{
 					name: "etcd-server-secrets"
 					projected: {
@@ -1646,32 +1610,20 @@ res: deployment: "coder-amanibhavam-class-cluster-cilium": "kube-system": "hubbl
 				containers: [{
 					args: ["serve"]
 					command: ["hubble-relay"]
-					image:           "quay.io/cilium/hubble-relay:v1.15.0-rc.0@sha256:eb89a6c12bef00f62f393630958f58d769f0add5ba6fa914180ec21d845034ae"
+					image:           "quay.io/cilium/hubble-relay:v1.14.5@sha256:dbef89f924a927043d02b40c18e417c1ea0e8f58b44523b80fef7e3652db24d4"
 					imagePullPolicy: "IfNotPresent"
-					livenessProbe: {
-						grpc: port: 4222
-						timeoutSeconds: 3
-					}
+					livenessProbe: tcpSocket: port: "grpc"
 					name: "hubble-relay"
 					ports: [{
 						containerPort: 4245
 						name:          "grpc"
 					}]
-					readinessProbe: {
-						grpc: port: 4222
-						timeoutSeconds: 3
-					}
+					readinessProbe: tcpSocket: port: "grpc"
 					securityContext: {
 						capabilities: drop: ["ALL"]
 						runAsGroup:   65532
 						runAsNonRoot: true
 						runAsUser:    65532
-					}
-					startupProbe: {
-						failureThreshold: 20
-						grpc: port: 4222
-						periodSeconds:  3
-						timeoutSeconds: 3
 					}
 					terminationMessagePolicy: "FallbackToLogsOnError"
 					volumeMounts: [{
@@ -1756,19 +1708,11 @@ res: deployment: "coder-amanibhavam-class-cluster-cilium": "kube-system": "hubbl
 				containers: [{
 					image:           "quay.io/cilium/hubble-ui:v0.12.1@sha256:9e5f81ee747866480ea1ac4630eb6975ff9227f9782b7c93919c081c33f38267"
 					imagePullPolicy: "IfNotPresent"
-					livenessProbe: httpGet: {
-						path: "/healthz"
-						port: 8081
-					}
-					name: "frontend"
+					name:            "frontend"
 					ports: [{
 						containerPort: 8081
 						name:          "http"
 					}]
-					readinessProbe: httpGet: {
-						path: "/"
-						port: 8081
-					}
 					terminationMessagePolicy: "FallbackToLogsOnError"
 					volumeMounts: [{
 						mountPath: "/etc/nginx/conf.d/default.conf"
@@ -1864,11 +1808,8 @@ res: daemonset: "coder-amanibhavam-class-cluster-cilium": "kube-system": cilium:
 					}, {
 						name:  "CILIUM_CLUSTERMESH_CONFIG"
 						value: "/var/lib/cilium/clustermesh/"
-					}, {
-						name: "GOMEMLIMIT"
-						valueFrom: resourceFieldRef: resource: "limits.memory"
 					}]
-					image:           "quay.io/cilium/cilium:v1.15.0-rc.0@sha256:dfd696fb4325e996098607224cf379ccdbbe969634750fa10082e7ac31d0819a"
+					image:           "quay.io/cilium/cilium:v1.14.5@sha256:d3b287029755b6a47dee01420e2ea469469f1b174a2089c10af7e5e9289ef05b"
 					imagePullPolicy: "IfNotPresent"
 					lifecycle: {
 						postStart: exec: command: [
@@ -1888,10 +1829,10 @@ res: daemonset: "coder-amanibhavam-class-cluster-cilium": "kube-system": cilium:
 		# dependencies on anything that is part of the startup script
 		# itself, and can be safely run multiple times per node (e.g. in
 		# case of a restart).
-		if [[ \"$(iptables-save | grep -E -c 'AWS-SNAT-CHAIN|AWS-CONNMARK-CHAIN')\" != \"0\" ]];
+		if [[ \"$(iptables-save | grep -c 'AWS-SNAT-CHAIN|AWS-CONNMARK-CHAIN')\" != \"0\" ]];
 		then
 		    echo 'Deleting iptables rules created by the AWS CNI VPC plugin'
-		    iptables-save | grep -E -v 'AWS-SNAT-CHAIN|AWS-CONNMARK-CHAIN' | iptables-restore
+		    iptables-save | grep -v 'AWS-SNAT-CHAIN|AWS-CONNMARK-CHAIN' | iptables-restore
 		fi
 		echo 'Done!'
 
@@ -1968,9 +1909,8 @@ res: daemonset: "coder-amanibhavam-class-cluster-cilium": "kube-system": cilium:
 							port:   9879
 							scheme: "HTTP"
 						}
-						initialDelaySeconds: 5
-						periodSeconds:       2
-						successThreshold:    1
+						periodSeconds:    2
+						successThreshold: 1
 					}
 					terminationMessagePolicy: "FallbackToLogsOnError"
 					volumeMounts: [{
@@ -2016,7 +1956,7 @@ res: daemonset: "coder-amanibhavam-class-cluster-cilium": "kube-system": cilium:
 				hostNetwork: true
 				initContainers: [{
 					command: [
-						"cilium-dbg",
+						"cilium",
 						"build-config",
 					]
 					env: [{
@@ -2032,7 +1972,7 @@ res: daemonset: "coder-amanibhavam-class-cluster-cilium": "kube-system": cilium:
 							fieldPath:  "metadata.namespace"
 						}
 					}]
-					image:                    "quay.io/cilium/cilium:v1.15.0-rc.0@sha256:dfd696fb4325e996098607224cf379ccdbbe969634750fa10082e7ac31d0819a"
+					image:                    "quay.io/cilium/cilium:v1.14.5@sha256:d3b287029755b6a47dee01420e2ea469469f1b174a2089c10af7e5e9289ef05b"
 					imagePullPolicy:          "IfNotPresent"
 					name:                     "config"
 					terminationMessagePolicy: "FallbackToLogsOnError"
@@ -2059,7 +1999,7 @@ res: daemonset: "coder-amanibhavam-class-cluster-cilium": "kube-system": cilium:
 						name:  "BIN_PATH"
 						value: "/opt/cni/bin"
 					}]
-					image:           "quay.io/cilium/cilium:v1.15.0-rc.0@sha256:dfd696fb4325e996098607224cf379ccdbbe969634750fa10082e7ac31d0819a"
+					image:           "quay.io/cilium/cilium:v1.14.5@sha256:d3b287029755b6a47dee01420e2ea469469f1b174a2089c10af7e5e9289ef05b"
 					imagePullPolicy: "IfNotPresent"
 					name:            "mount-cgroup"
 					securityContext: {
@@ -2100,7 +2040,7 @@ res: daemonset: "coder-amanibhavam-class-cluster-cilium": "kube-system": cilium:
 						name:  "BIN_PATH"
 						value: "/opt/cni/bin"
 					}]
-					image:           "quay.io/cilium/cilium:v1.15.0-rc.0@sha256:dfd696fb4325e996098607224cf379ccdbbe969634750fa10082e7ac31d0819a"
+					image:           "quay.io/cilium/cilium:v1.14.5@sha256:d3b287029755b6a47dee01420e2ea469469f1b174a2089c10af7e5e9289ef05b"
 					imagePullPolicy: "IfNotPresent"
 					name:            "apply-sysctl-overwrites"
 					securityContext: {
@@ -2132,7 +2072,7 @@ res: daemonset: "coder-amanibhavam-class-cluster-cilium": "kube-system": cilium:
 						"-c",
 						"--",
 					]
-					image:           "quay.io/cilium/cilium:v1.15.0-rc.0@sha256:dfd696fb4325e996098607224cf379ccdbbe969634750fa10082e7ac31d0819a"
+					image:           "quay.io/cilium/cilium:v1.14.5@sha256:d3b287029755b6a47dee01420e2ea469469f1b174a2089c10af7e5e9289ef05b"
 					imagePullPolicy: "IfNotPresent"
 					name:            "mount-bpf-fs"
 					securityContext: privileged: true
@@ -2158,15 +2098,8 @@ res: daemonset: "coder-amanibhavam-class-cluster-cilium": "kube-system": cilium:
 							name:     "cilium-config"
 							optional: true
 						}
-					}, {
-						name: "WRITE_CNI_CONF_WHEN_READY"
-						valueFrom: configMapKeyRef: {
-							key:      "write-cni-conf-when-ready"
-							name:     "cilium-config"
-							optional: true
-						}
 					}]
-					image:           "quay.io/cilium/cilium:v1.15.0-rc.0@sha256:dfd696fb4325e996098607224cf379ccdbbe969634750fa10082e7ac31d0819a"
+					image:           "quay.io/cilium/cilium:v1.14.5@sha256:d3b287029755b6a47dee01420e2ea469469f1b174a2089c10af7e5e9289ef05b"
 					imagePullPolicy: "IfNotPresent"
 					name:            "clean-cilium-state"
 					securityContext: {
@@ -2198,7 +2131,7 @@ res: daemonset: "coder-amanibhavam-class-cluster-cilium": "kube-system": cilium:
 					}]
 				}, {
 					command: ["/install-plugin.sh"]
-					image:           "quay.io/cilium/cilium:v1.15.0-rc.0@sha256:dfd696fb4325e996098607224cf379ccdbbe969634750fa10082e7ac31d0819a"
+					image:           "quay.io/cilium/cilium:v1.14.5@sha256:d3b287029755b6a47dee01420e2ea469469f1b174a2089c10af7e5e9289ef05b"
 					imagePullPolicy: "IfNotPresent"
 					name:            "install-cni-binaries"
 					resources: requests: {
@@ -2391,7 +2324,7 @@ res: daemonset: "coder-amanibhavam-class-cluster-cilium": "kube-system": "cilium
 						"--log-level info",
 						"--log-format [%Y-%m-%d %T.%e][%t][%l][%n] [%g:%#] %v",
 					]
-					command: ["/usr/bin/cilium-envoy-starter"]
+					command: ["/usr/bin/cilium-envoy"]
 					env: [{
 						name: "K8S_NODE_NAME"
 						valueFrom: fieldRef: {
@@ -2405,7 +2338,7 @@ res: daemonset: "coder-amanibhavam-class-cluster-cilium": "kube-system": "cilium
 							fieldPath:  "metadata.namespace"
 						}
 					}]
-					image:           "quay.io/cilium/cilium-envoy:v1.27.2-f19708f3d0188fe39b7e024b4525b75a9eeee61f@sha256:80de27c1d16ab92923cc0cd1fff90f2e7047a9abf3906fda712268d9cbc5b950"
+					image:           "quay.io/cilium/cilium-envoy:v1.26.6-ad82c7c56e88989992fd25d8d67747de865c823b@sha256:992998398dadfff7117bfa9fdb7c9474fefab7f0237263f7c8114e106c67baca"
 					imagePullPolicy: "IfNotPresent"
 					livenessProbe: {
 						failureThreshold: 10
@@ -2459,19 +2392,14 @@ res: daemonset: "coder-amanibhavam-class-cluster-cilium": "kube-system": "cilium
 							port:   9878
 							scheme: "HTTP"
 						}
-						initialDelaySeconds: 5
-						periodSeconds:       2
-						successThreshold:    1
+						periodSeconds:    2
+						successThreshold: 1
 					}
 					terminationMessagePolicy: "FallbackToLogsOnError"
 					volumeMounts: [{
 						mountPath: "/var/run/cilium/envoy/sockets"
 						name:      "envoy-sockets"
 						readOnly:  false
-					}, {
-						mountPath: "/var/run/cilium/envoy/artifacts"
-						name:      "envoy-artifacts"
-						readOnly:  true
 					}, {
 						mountPath: "/var/run/cilium/envoy/"
 						name:      "envoy-config"
@@ -2498,12 +2426,6 @@ res: daemonset: "coder-amanibhavam-class-cluster-cilium": "kube-system": "cilium
 						type: "DirectoryOrCreate"
 					}
 					name: "envoy-sockets"
-				}, {
-					hostPath: {
-						path: "/var/run/cilium/envoy/artifacts"
-						type: "DirectoryOrCreate"
-					}
-					name: "envoy-artifacts"
 				}, {
 					configMap: {
 						defaultMode: 256
