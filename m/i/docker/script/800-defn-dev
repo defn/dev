@@ -14,6 +14,7 @@ function main {
 		source .bash_profile
 
 		make install
+		(cd m && b clean)
 
 		exit $?
 	fi

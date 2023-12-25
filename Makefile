@@ -56,7 +56,8 @@ home:
 		set -xeo pipefail; for n in $(flakes); do \
 			mark $$n; \
 			(cd m/pkg/$$n && ~/bin/b build); \
-			(cd m/pkg/$$n && ~/bin/b out flake_path) | (cd ~/bin/nix && tar xvfz -); \
+			(cd m/pkg/$$n && ~/bin/b out flake_path.tar.gz) | tar xfz - -C ~/bin/nix; \
+			(cd m/pkg/$$n && ~/bin/b out flake_nix_store.tar) | tar xvf - -C /; \
 			done; \
 	fi
 	rm -f bin/nix/{gcc,cc,ld,clang}
