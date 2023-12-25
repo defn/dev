@@ -370,6 +370,12 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 
 														type: "object"
 													}
+													components: {
+														description: "Components specifies a list of kustomize components to add to the kustomization before building"
+
+														items: type: "string"
+														type: "array"
+													}
 													forceCommonAnnotations: {
 														description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
 
@@ -746,6 +752,12 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 															description: "CommonLabels is a list of additional labels to add to rendered manifests"
 
 															type: "object"
+														}
+														components: {
+															description: "Components specifies a list of kustomize components to add to the kustomization before building"
+
+															items: type: "string"
+															type: "array"
 														}
 														forceCommonAnnotations: {
 															description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
@@ -1242,6 +1254,12 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 
 												type: "object"
 											}
+											components: {
+												description: "Components specifies a list of kustomize components to add to the kustomization before building"
+
+												items: type: "string"
+												type: "array"
+											}
 											forceCommonAnnotations: {
 												description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
 
@@ -1613,6 +1631,12 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 													description: "CommonLabels is a list of additional labels to add to rendered manifests"
 
 													type: "object"
+												}
+												components: {
+													description: "Components specifies a list of kustomize components to add to the kustomization before building"
+
+													items: type: "string"
+													type: "array"
 												}
 												forceCommonAnnotations: {
 													description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
@@ -2169,6 +2193,12 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 
 															type: "object"
 														}
+														components: {
+															description: "Components specifies a list of kustomize components to add to the kustomization before building"
+
+															items: type: "string"
+															type: "array"
+														}
 														forceCommonAnnotations: {
 															description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
 
@@ -2546,6 +2576,12 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																description: "CommonLabels is a list of additional labels to add to rendered manifests"
 
 																type: "object"
+															}
+															components: {
+																description: "Components specifies a list of kustomize components to add to the kustomization before building"
+
+																items: type: "string"
+																type: "array"
 															}
 															forceCommonAnnotations: {
 																description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
@@ -3082,6 +3118,12 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 
 																		type: "object"
 																	}
+																	components: {
+																		description: "Components specifies a list of kustomize components to add to the kustomization before building"
+
+																		items: type: "string"
+																		type: "array"
+																	}
 																	forceCommonAnnotations: {
 																		description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
 
@@ -3467,6 +3509,12 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																			description: "CommonLabels is a list of additional labels to add to rendered manifests"
 
 																			type: "object"
+																		}
+																		components: {
+																			description: "Components specifies a list of kustomize components to add to the kustomization before building"
+
+																			items: type: "string"
+																			type: "array"
 																		}
 																		forceCommonAnnotations: {
 																			description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
@@ -3998,6 +4046,12 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 
 																type: "object"
 															}
+															components: {
+																description: "Components specifies a list of kustomize components to add to the kustomization before building"
+
+																items: type: "string"
+																type: "array"
+															}
 															forceCommonAnnotations: {
 																description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
 
@@ -4381,6 +4435,12 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																	description: "CommonLabels is a list of additional labels to add to rendered manifests"
 
 																	type: "object"
+																}
+																components: {
+																	description: "Components specifies a list of kustomize components to add to the kustomization before building"
+
+																	items: type: "string"
+																	type: "array"
 																}
 																forceCommonAnnotations: {
 																	description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
@@ -4923,6 +4983,12 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 
 																type: "object"
 															}
+															components: {
+																description: "Components specifies a list of kustomize components to add to the kustomization before building"
+
+																items: type: "string"
+																type: "array"
+															}
 															forceCommonAnnotations: {
 																description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
 
@@ -5306,6 +5372,12 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																	description: "CommonLabels is a list of additional labels to add to rendered manifests"
 
 																	type: "object"
+																}
+																components: {
+																	description: "Components specifies a list of kustomize components to add to the kustomization before building"
+
+																	items: type: "string"
+																	type: "array"
 																}
 																forceCommonAnnotations: {
 																	description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
@@ -5779,6 +5851,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																					additionalProperties: type: "string"
 																					type: "object"
 																				}
+																				components: {
+																					items: type: "string"
+																					type: "array"
+																				}
 																				forceCommonAnnotations: type: "boolean"
 																				forceCommonLabels: type: "boolean"
 																				images: {
@@ -5986,6 +6062,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																					commonLabels: {
 																						additionalProperties: type: "string"
 																						type: "object"
+																					}
+																					components: {
+																						items: type: "string"
+																						type: "array"
 																					}
 																					forceCommonAnnotations: type: "boolean"
 																					forceCommonLabels: type: "boolean"
@@ -6372,6 +6452,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																					additionalProperties: type: "string"
 																					type: "object"
 																				}
+																				components: {
+																					items: type: "string"
+																					type: "array"
+																				}
 																				forceCommonAnnotations: type: "boolean"
 																				forceCommonLabels: type: "boolean"
 																				images: {
@@ -6579,6 +6663,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																					commonLabels: {
 																						additionalProperties: type: "string"
 																						type: "object"
+																					}
+																					components: {
+																						items: type: "string"
+																						type: "array"
 																					}
 																					forceCommonAnnotations: type: "boolean"
 																					forceCommonLabels: type: "boolean"
@@ -6963,6 +7051,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																					additionalProperties: type: "string"
 																					type: "object"
 																				}
+																				components: {
+																					items: type: "string"
+																					type: "array"
+																				}
 																				forceCommonAnnotations: type: "boolean"
 																				forceCommonLabels: type: "boolean"
 																				images: {
@@ -7170,6 +7262,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																					commonLabels: {
 																						additionalProperties: type: "string"
 																						type: "object"
+																					}
+																					components: {
+																						items: type: "string"
+																						type: "array"
 																					}
 																					forceCommonAnnotations: type: "boolean"
 																					forceCommonLabels: type: "boolean"
@@ -7537,6 +7633,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																					additionalProperties: type: "string"
 																					type: "object"
 																				}
+																				components: {
+																					items: type: "string"
+																					type: "array"
+																				}
 																				forceCommonAnnotations: type: "boolean"
 																				forceCommonLabels: type: "boolean"
 																				images: {
@@ -7744,6 +7844,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																					commonLabels: {
 																						additionalProperties: type: "string"
 																						type: "object"
+																					}
+																					components: {
+																						items: type: "string"
+																						type: "array"
 																					}
 																					forceCommonAnnotations: type: "boolean"
 																					forceCommonLabels: type: "boolean"
@@ -8137,6 +8241,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										additionalProperties: type: "string"
 																										type: "object"
 																									}
+																									components: {
+																										items: type: "string"
+																										type: "array"
+																									}
 																									forceCommonAnnotations: type: "boolean"
 																									forceCommonLabels: type: "boolean"
 																									images: {
@@ -8344,6 +8452,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										commonLabels: {
 																											additionalProperties: type: "string"
 																											type: "object"
+																										}
+																										components: {
+																											items: type: "string"
+																											type: "array"
 																										}
 																										forceCommonAnnotations: type: "boolean"
 																										forceCommonLabels: type: "boolean"
@@ -8730,6 +8842,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										additionalProperties: type: "string"
 																										type: "object"
 																									}
+																									components: {
+																										items: type: "string"
+																										type: "array"
+																									}
 																									forceCommonAnnotations: type: "boolean"
 																									forceCommonLabels: type: "boolean"
 																									images: {
@@ -8937,6 +9053,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										commonLabels: {
 																											additionalProperties: type: "string"
 																											type: "object"
+																										}
+																										components: {
+																											items: type: "string"
+																											type: "array"
 																										}
 																										forceCommonAnnotations: type: "boolean"
 																										forceCommonLabels: type: "boolean"
@@ -9321,6 +9441,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										additionalProperties: type: "string"
 																										type: "object"
 																									}
+																									components: {
+																										items: type: "string"
+																										type: "array"
+																									}
 																									forceCommonAnnotations: type: "boolean"
 																									forceCommonLabels: type: "boolean"
 																									images: {
@@ -9528,6 +9652,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										commonLabels: {
 																											additionalProperties: type: "string"
 																											type: "object"
+																										}
+																										components: {
+																											items: type: "string"
+																											type: "array"
 																										}
 																										forceCommonAnnotations: type: "boolean"
 																										forceCommonLabels: type: "boolean"
@@ -9895,6 +10023,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										additionalProperties: type: "string"
 																										type: "object"
 																									}
+																									components: {
+																										items: type: "string"
+																										type: "array"
+																									}
 																									forceCommonAnnotations: type: "boolean"
 																									forceCommonLabels: type: "boolean"
 																									images: {
@@ -10102,6 +10234,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										commonLabels: {
 																											additionalProperties: type: "string"
 																											type: "object"
+																										}
+																										components: {
+																											items: type: "string"
+																											type: "array"
 																										}
 																										forceCommonAnnotations: type: "boolean"
 																										forceCommonLabels: type: "boolean"
@@ -10475,6 +10611,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										additionalProperties: type: "string"
 																										type: "object"
 																									}
+																									components: {
+																										items: type: "string"
+																										type: "array"
+																									}
 																									forceCommonAnnotations: type: "boolean"
 																									forceCommonLabels: type: "boolean"
 																									images: {
@@ -10682,6 +10822,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										commonLabels: {
 																											additionalProperties: type: "string"
 																											type: "object"
+																										}
+																										components: {
+																											items: type: "string"
+																											type: "array"
 																										}
 																										forceCommonAnnotations: type: "boolean"
 																										forceCommonLabels: type: "boolean"
@@ -11244,6 +11388,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										additionalProperties: type: "string"
 																										type: "object"
 																									}
+																									components: {
+																										items: type: "string"
+																										type: "array"
+																									}
 																									forceCommonAnnotations: type: "boolean"
 																									forceCommonLabels: type: "boolean"
 																									images: {
@@ -11451,6 +11599,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										commonLabels: {
 																											additionalProperties: type: "string"
 																											type: "object"
+																										}
+																										components: {
+																											items: type: "string"
+																											type: "array"
 																										}
 																										forceCommonAnnotations: type: "boolean"
 																										forceCommonLabels: type: "boolean"
@@ -11999,6 +12151,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										additionalProperties: type: "string"
 																										type: "object"
 																									}
+																									components: {
+																										items: type: "string"
+																										type: "array"
+																									}
 																									forceCommonAnnotations: type: "boolean"
 																									forceCommonLabels: type: "boolean"
 																									images: {
@@ -12206,6 +12362,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										commonLabels: {
 																											additionalProperties: type: "string"
 																											type: "object"
+																										}
+																										components: {
+																											items: type: "string"
+																											type: "array"
 																										}
 																										forceCommonAnnotations: type: "boolean"
 																										forceCommonLabels: type: "boolean"
@@ -12594,6 +12754,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																					additionalProperties: type: "string"
 																					type: "object"
 																				}
+																				components: {
+																					items: type: "string"
+																					type: "array"
+																				}
 																				forceCommonAnnotations: type: "boolean"
 																				forceCommonLabels: type: "boolean"
 																				images: {
@@ -12801,6 +12965,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																					commonLabels: {
 																						additionalProperties: type: "string"
 																						type: "object"
+																					}
+																					components: {
+																						items: type: "string"
+																						type: "array"
 																					}
 																					forceCommonAnnotations: type: "boolean"
 																					forceCommonLabels: type: "boolean"
@@ -13194,6 +13362,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										additionalProperties: type: "string"
 																										type: "object"
 																									}
+																									components: {
+																										items: type: "string"
+																										type: "array"
+																									}
 																									forceCommonAnnotations: type: "boolean"
 																									forceCommonLabels: type: "boolean"
 																									images: {
@@ -13401,6 +13573,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										commonLabels: {
 																											additionalProperties: type: "string"
 																											type: "object"
+																										}
+																										components: {
+																											items: type: "string"
+																											type: "array"
 																										}
 																										forceCommonAnnotations: type: "boolean"
 																										forceCommonLabels: type: "boolean"
@@ -13787,6 +13963,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										additionalProperties: type: "string"
 																										type: "object"
 																									}
+																									components: {
+																										items: type: "string"
+																										type: "array"
+																									}
 																									forceCommonAnnotations: type: "boolean"
 																									forceCommonLabels: type: "boolean"
 																									images: {
@@ -13994,6 +14174,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										commonLabels: {
 																											additionalProperties: type: "string"
 																											type: "object"
+																										}
+																										components: {
+																											items: type: "string"
+																											type: "array"
 																										}
 																										forceCommonAnnotations: type: "boolean"
 																										forceCommonLabels: type: "boolean"
@@ -14378,6 +14562,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										additionalProperties: type: "string"
 																										type: "object"
 																									}
+																									components: {
+																										items: type: "string"
+																										type: "array"
+																									}
 																									forceCommonAnnotations: type: "boolean"
 																									forceCommonLabels: type: "boolean"
 																									images: {
@@ -14585,6 +14773,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										commonLabels: {
 																											additionalProperties: type: "string"
 																											type: "object"
+																										}
+																										components: {
+																											items: type: "string"
+																											type: "array"
 																										}
 																										forceCommonAnnotations: type: "boolean"
 																										forceCommonLabels: type: "boolean"
@@ -14952,6 +15144,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										additionalProperties: type: "string"
 																										type: "object"
 																									}
+																									components: {
+																										items: type: "string"
+																										type: "array"
+																									}
 																									forceCommonAnnotations: type: "boolean"
 																									forceCommonLabels: type: "boolean"
 																									images: {
@@ -15159,6 +15355,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										commonLabels: {
 																											additionalProperties: type: "string"
 																											type: "object"
+																										}
+																										components: {
+																											items: type: "string"
+																											type: "array"
 																										}
 																										forceCommonAnnotations: type: "boolean"
 																										forceCommonLabels: type: "boolean"
@@ -15532,6 +15732,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										additionalProperties: type: "string"
 																										type: "object"
 																									}
+																									components: {
+																										items: type: "string"
+																										type: "array"
+																									}
 																									forceCommonAnnotations: type: "boolean"
 																									forceCommonLabels: type: "boolean"
 																									images: {
@@ -15739,6 +15943,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										commonLabels: {
 																											additionalProperties: type: "string"
 																											type: "object"
+																										}
+																										components: {
+																											items: type: "string"
+																											type: "array"
 																										}
 																										forceCommonAnnotations: type: "boolean"
 																										forceCommonLabels: type: "boolean"
@@ -16301,6 +16509,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										additionalProperties: type: "string"
 																										type: "object"
 																									}
+																									components: {
+																										items: type: "string"
+																										type: "array"
+																									}
 																									forceCommonAnnotations: type: "boolean"
 																									forceCommonLabels: type: "boolean"
 																									images: {
@@ -16508,6 +16720,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										commonLabels: {
 																											additionalProperties: type: "string"
 																											type: "object"
+																										}
+																										components: {
+																											items: type: "string"
+																											type: "array"
 																										}
 																										forceCommonAnnotations: type: "boolean"
 																										forceCommonLabels: type: "boolean"
@@ -17056,6 +17272,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										additionalProperties: type: "string"
 																										type: "object"
 																									}
+																									components: {
+																										items: type: "string"
+																										type: "array"
+																									}
 																									forceCommonAnnotations: type: "boolean"
 																									forceCommonLabels: type: "boolean"
 																									images: {
@@ -17263,6 +17483,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																										commonLabels: {
 																											additionalProperties: type: "string"
 																											type: "object"
+																										}
+																										components: {
+																											items: type: "string"
+																											type: "array"
 																										}
 																										forceCommonAnnotations: type: "boolean"
 																										forceCommonLabels: type: "boolean"
@@ -17655,6 +17879,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																					additionalProperties: type: "string"
 																					type: "object"
 																				}
+																				components: {
+																					items: type: "string"
+																					type: "array"
+																				}
 																				forceCommonAnnotations: type: "boolean"
 																				forceCommonLabels: type: "boolean"
 																				images: {
@@ -17862,6 +18090,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																					commonLabels: {
 																						additionalProperties: type: "string"
 																						type: "object"
+																					}
+																					components: {
+																						items: type: "string"
+																						type: "array"
 																					}
 																					forceCommonAnnotations: type: "boolean"
 																					forceCommonLabels: type: "boolean"
@@ -18236,6 +18468,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																					additionalProperties: type: "string"
 																					type: "object"
 																				}
+																				components: {
+																					items: type: "string"
+																					type: "array"
+																				}
 																				forceCommonAnnotations: type: "boolean"
 																				forceCommonLabels: type: "boolean"
 																				images: {
@@ -18443,6 +18679,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																					commonLabels: {
 																						additionalProperties: type: "string"
 																						type: "object"
+																					}
+																					components: {
+																						items: type: "string"
+																						type: "array"
 																					}
 																					forceCommonAnnotations: type: "boolean"
 																					forceCommonLabels: type: "boolean"
@@ -19005,6 +19245,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																					additionalProperties: type: "string"
 																					type: "object"
 																				}
+																				components: {
+																					items: type: "string"
+																					type: "array"
+																				}
 																				forceCommonAnnotations: type: "boolean"
 																				forceCommonLabels: type: "boolean"
 																				images: {
@@ -19212,6 +19456,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																					commonLabels: {
 																						additionalProperties: type: "string"
 																						type: "object"
+																					}
+																					components: {
+																						items: type: "string"
+																						type: "array"
 																					}
 																					forceCommonAnnotations: type: "boolean"
 																					forceCommonLabels: type: "boolean"
@@ -19760,6 +20008,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																					additionalProperties: type: "string"
 																					type: "object"
 																				}
+																				components: {
+																					items: type: "string"
+																					type: "array"
+																				}
 																				forceCommonAnnotations: type: "boolean"
 																				forceCommonLabels: type: "boolean"
 																				images: {
@@ -19967,6 +20219,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																					commonLabels: {
 																						additionalProperties: type: "string"
 																						type: "object"
+																					}
+																					components: {
+																						items: type: "string"
+																						type: "array"
 																					}
 																					forceCommonAnnotations: type: "boolean"
 																					forceCommonLabels: type: "boolean"
@@ -20444,6 +20700,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																additionalProperties: type: "string"
 																type: "object"
 															}
+															components: {
+																items: type: "string"
+																type: "array"
+															}
 															forceCommonAnnotations: type: "boolean"
 															forceCommonLabels: type: "boolean"
 															images: {
@@ -20652,6 +20912,10 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 																	additionalProperties: type: "string"
 																	type: "object"
 																}
+																components: {
+																	items: type: "string"
+																	type: "array"
+																}
 																forceCommonAnnotations: type: "boolean"
 																forceCommonLabels: type: "boolean"
 																images: {
@@ -20824,6 +21088,7 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-argo-cd": cluste
 								]
 								type: "object"
 							}
+							templatePatch: type: "string"
 						}
 						required: [
 							"generators",
@@ -22388,8 +22653,15 @@ res: deployment: "coder-amanibhavam-class-cluster-argo-cd": argocd: "argocd-appl
 							name:     "argocd-cmd-params-cm"
 							optional: true
 						}
+					}, {
+						name: "ARGOCD_APPLICATIONSET_CONTROLLER_ENABLE_SCM_PROVIDERS"
+						valueFrom: configMapKeyRef: {
+							key:      "applicationsetcontroller.enable.scm.providers"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
 					}]
-					image:           "quay.io/argoproj/argocd:v2.9.3"
+					image:           "quay.io/argoproj/argocd:v2.10.0-rc1"
 					imagePullPolicy: "Always"
 					name:            "argocd-applicationset-controller"
 					ports: [{
@@ -22535,7 +22807,7 @@ res: deployment: "coder-amanibhavam-class-cluster-argo-cd": argocd: "argocd-dex-
 						"/usr/local/bin/argocd",
 						"/shared/argocd-dex",
 					]
-					image:           "quay.io/argoproj/argocd:v2.9.3"
+					image:           "quay.io/argoproj/argocd:v2.10.0-rc1"
 					imagePullPolicy: "Always"
 					name:            "copyutil"
 					securityContext: {
@@ -22622,8 +22894,15 @@ res: deployment: "coder-amanibhavam-class-cluster-argo-cd": argocd: "argocd-noti
 							name:     "argocd-cmd-params-cm"
 							optional: true
 						}
+					}, {
+						name: "ARGOCD_NOTIFICATION_CONTROLLER_SELF_SERVICE_NOTIFICATION_ENABLED"
+						valueFrom: configMapKeyRef: {
+							key:      "notificationscontroller.selfservice.enabled"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
 					}]
-					image:           "quay.io/argoproj/argocd:v2.9.3"
+					image:           "quay.io/argoproj/argocd:v2.10.0-rc1"
 					imagePullPolicy: "Always"
 					livenessProbe: tcpSocket: port: 9001
 					name: "argocd-notifications-controller"
@@ -22707,7 +22986,7 @@ res: deployment: "coder-amanibhavam-class-cluster-argo-cd": argocd: "argocd-redi
 						"--appendonly",
 						"no",
 					]
-					image:           "redis:7.0.11-alpine"
+					image:           "redis:7.0.14-alpine"
 					imagePullPolicy: "Always"
 					name:            "redis"
 					ports: [{
@@ -22875,6 +23154,20 @@ res: deployment: "coder-amanibhavam-class-cluster-argo-cd": argocd: "argocd-repo
 							optional: true
 						}
 					}, {
+						name: "ARGOCD_REPO_SERVER_OTLP_INSECURE"
+						valueFrom: configMapKeyRef: {
+							key:      "otlp.insecure"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
+						name: "ARGOCD_REPO_SERVER_OTLP_HEADERS"
+						valueFrom: configMapKeyRef: {
+							key:      "otlp.headers"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
 						name: "ARGOCD_REPO_SERVER_MAX_COMBINED_DIRECTORY_MANIFESTS_SIZE"
 						valueFrom: configMapKeyRef: {
 							key:      "reposerver.max.combined.directory.manifests.size"
@@ -22931,6 +23224,20 @@ res: deployment: "coder-amanibhavam-class-cluster-argo-cd": argocd: "argocd-repo
 							optional: true
 						}
 					}, {
+						name: "ARGOCD_GIT_LS_REMOTE_PARALLELISM_LIMIT"
+						valueFrom: configMapKeyRef: {
+							key:      "reposerver.git.lsremote.parallelism.limit"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
+						name: "ARGOCD_GIT_REQUEST_TIMEOUT"
+						valueFrom: configMapKeyRef: {
+							key:      "reposerver.git.request.timeout"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
 						name:  "HELM_CACHE_HOME"
 						value: "/helm-working-dir"
 					}, {
@@ -22940,7 +23247,7 @@ res: deployment: "coder-amanibhavam-class-cluster-argo-cd": argocd: "argocd-repo
 						name:  "HELM_DATA_HOME"
 						value: "/helm-working-dir"
 					}]
-					image:           "quay.io/argoproj/argocd:v2.9.3"
+					image:           "quay.io/argoproj/argocd:v2.10.0-rc1"
 					imagePullPolicy: "Always"
 					livenessProbe: {
 						failureThreshold: 3
@@ -23006,7 +23313,7 @@ res: deployment: "coder-amanibhavam-class-cluster-argo-cd": argocd: "argocd-repo
 						"/usr/local/bin/argocd",
 						"/var/run/argocd/argocd-cmp-server",
 					]
-					image: "quay.io/argoproj/argocd:v2.9.3"
+					image: "quay.io/argoproj/argocd:v2.10.0-rc1"
 					name:  "copyutil"
 					securityContext: {
 						allowPrivilegeEscalation: false
@@ -23323,6 +23630,20 @@ res: deployment: "coder-amanibhavam-class-cluster-argo-cd": argocd: "argocd-serv
 							optional: true
 						}
 					}, {
+						name: "ARGOCD_SERVER_OTLP_INSECURE"
+						valueFrom: configMapKeyRef: {
+							key:      "otlp.insecure"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
+						name: "ARGOCD_SERVER_OTLP_HEADERS"
+						valueFrom: configMapKeyRef: {
+							key:      "otlp.headers"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
 						name: "ARGOCD_APPLICATION_NAMESPACES"
 						valueFrom: configMapKeyRef: {
 							key:      "application.namespaces"
@@ -23336,8 +23657,22 @@ res: deployment: "coder-amanibhavam-class-cluster-argo-cd": argocd: "argocd-serv
 							name:     "argocd-cmd-params-cm"
 							optional: true
 						}
+					}, {
+						name: "ARGOCD_K8SCLIENT_RETRY_MAX"
+						valueFrom: configMapKeyRef: {
+							key:      "server.k8sclient.retry.max"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
+						name: "ARGOCD_K8SCLIENT_RETRY_BASE_BACKOFF"
+						valueFrom: configMapKeyRef: {
+							key:      "server.k8sclient.retry.base.backoff"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
 					}]
-					image:           "quay.io/argoproj/argocd:v2.9.3"
+					image:           "quay.io/argoproj/argocd:v2.10.0-rc1"
 					imagePullPolicy: "Always"
 					livenessProbe: {
 						httpGet: {
@@ -23488,6 +23823,13 @@ res: statefulset: "coder-amanibhavam-class-cluster-argo-cd": argocd: "argocd-app
 							optional: true
 						}
 					}, {
+						name: "ARGOCD_REPO_ERROR_GRACE_PERIOD_SECONDS"
+						valueFrom: configMapKeyRef: {
+							key:      "controller.repo.error.grace.period.seconds"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
 						name: "ARGOCD_APPLICATION_CONTROLLER_REPO_SERVER"
 						valueFrom: configMapKeyRef: {
 							key:      "repo.server"
@@ -23607,6 +23949,20 @@ res: statefulset: "coder-amanibhavam-class-cluster-argo-cd": argocd: "argocd-app
 							optional: true
 						}
 					}, {
+						name: "ARGOCD_APPLICATION_CONTROLLER_OTLP_INSECURE"
+						valueFrom: configMapKeyRef: {
+							key:      "otlp.insecure"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
+						name: "ARGOCD_APPLICATION_CONTROLLER_OTLP_HEADERS"
+						valueFrom: configMapKeyRef: {
+							key:      "otlp.headers"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
 						name: "ARGOCD_APPLICATION_NAMESPACES"
 						valueFrom: configMapKeyRef: {
 							key:      "application.namespaces"
@@ -23627,8 +23983,29 @@ res: statefulset: "coder-amanibhavam-class-cluster-argo-cd": argocd: "argocd-app
 							name:     "argocd-cmd-params-cm"
 							optional: true
 						}
+					}, {
+						name: "ARGOCD_K8SCLIENT_RETRY_MAX"
+						valueFrom: configMapKeyRef: {
+							key:      "controller.k8sclient.retry.max"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
+						name: "ARGOCD_K8SCLIENT_RETRY_BASE_BACKOFF"
+						valueFrom: configMapKeyRef: {
+							key:      "controller.k8sclient.retry.base.backoff"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
+						name: "ARGOCD_APPLICATION_CONTROLLER_SERVER_SIDE_DIFF"
+						valueFrom: configMapKeyRef: {
+							key:      "controller.diff.server.side"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
 					}]
-					image:           "quay.io/argoproj/argocd:v2.9.3"
+					image:           "quay.io/argoproj/argocd:v2.10.0-rc1"
 					imagePullPolicy: "Always"
 					name:            "argocd-application-controller"
 					ports: [{
