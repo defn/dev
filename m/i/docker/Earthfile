@@ -10,7 +10,7 @@ buildkite:
     RUN --no-cache git clone --mirror -v -- https://github.com/defn/dev.git ${BUILDKITE_GIT_MIRRORS_PATH}/https---github-com-defn-dev-git
     SAVE IMAGE --push ${image}
 
-aws:
+class:
     ARG image=cache.defn.run:5000/dfd:class
     BUILD +build-class --image=${image}
 
@@ -20,19 +20,20 @@ build-class:
 
 image-class:
     ARG image
-    FROM +class
+    FROM +core-class
 
     ENV BUILDKITE_GIT_MIRRORS_PATH=/cache/git
     ENV BUILDKITE_GIT_MIRRORS_SKIP_UPDATE=1
 
     SAVE IMAGE --push ${image}
 
-class:
+core-class:
     FROM quay.io/defn/dev:latest
 
-    COPY --dir script script
-    RUN script/800-defn-dev
-    RUN script/999-update
+    COPY script/800-defn-dev script/999-update .
+    RUN ./800-defn-dev
+    RUN ./999-update
+    RUN rm -f 800-defn-dev 999-update
 
     RUN bash -c 'source .bashrc && ~/bin/persist-cache && make nix home'
     RUN bash -c 'source .bashrc && for e in vscodevim.vim jnoortheen.nix-ide hashicorp.terraform golang.go esbenp.prettier-vscode bazelbuild.vscode-bazel cuelang.cue marp-team.marp-vscode; do bin/nix/code-server serve-local --force --install-extension $e; done'

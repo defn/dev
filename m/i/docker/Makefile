@@ -1,8 +1,8 @@
 build:
-	$(MAKE) -j 2 buildkite aws
+	$(MAKE) -j 2 buildkite class
 
 buildkite:
 	earthly --push --no-output +buildkite
 
-aws:
-	earthly --push --no-output +aws
+class:
+	earthly --push --no-output +class
