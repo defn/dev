@@ -55,7 +55,7 @@ home:
 	if [[ "$$(git log m/pkg | head -1 | awk '{print $$2}')" != "$$(cat bin/nix/.head)" ]]; then \
 		set -xeo pipefail; for n in $(flakes); do \
 			mark $$n; \
-			(cd m/pkg/$$n && ~/bin/b build && nix build); \
+			(cd m/pkg/$$n && ~/bin/b build); \
 			(cd m/pkg/$$n && ~/bin/b out flake_path) | (cd ~/bin/nix && tar xfz -); \
 			done; \
 	fi
