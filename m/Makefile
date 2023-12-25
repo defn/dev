@@ -167,7 +167,7 @@ ready:
 	$(MAKE) k3s-advertise-traefik
 
 k3s-init:
-	bin/make-k3s init
+	cd cache && $(MAKE) up
 	cd c && $(MAKE) tailscale
 	cd k && $(MAKE) cache
 	cd c && $(MAKE) cache
