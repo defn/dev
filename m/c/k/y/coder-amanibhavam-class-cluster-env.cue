@@ -214,7 +214,7 @@ res: application: "coder-amanibhavam-class-cluster-env": argocd: "coder-amanibha
 		source: {
 			chart:          "library/helm/coder-amanibhavam-class-cluster-karpenter"
 			repoURL:        "cache.defn.run:5000"
-			targetRevision: "0.0.105"
+			targetRevision: "0.0.107"
 		}
 		syncPolicy: {
 			automated: {

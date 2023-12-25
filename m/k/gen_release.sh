@@ -11,10 +11,9 @@ function main {
 	out="$1"
 	shift
 
-	if test -e "${app}/kustomization.yaml"; then
-		rm -rf "${app}/chart"
-		kustomize build --enable-helm "${app}" >"${out}"
-		rm -rf "${app}/chart"
+	if test -e "k/${app}/kustomization.yaml"; then
+		rm -rf "k/${app}/chart"
+		kustomize build --load-restrictor LoadRestrictionsNone --enable-helm "k/${app}" >"${out}"
 	else
 		touch "${out}"
 	fi
