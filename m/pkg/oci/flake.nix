@@ -9,6 +9,7 @@
     defaultPackage = ctx: ctx.wrap.nullBuilder {
       propagatedBuildInputs = with ctx.pkgs; [
         docker
+        docker-compose
         docker-credential-helpers
         skopeo
         dive
