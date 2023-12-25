@@ -179,7 +179,7 @@ spaceship-visit:
 	kubectl exec --context coder-amanibhavam-school -ti deploy/spaceship -- curl -XGET deathstar.default.svc.cluster.local/v1/
 
 crd:
-	cd ../k/y && cue export --out json -e crds | jq -r 'to_entries[] | "../crd/\(.key).yaml \(.value | @base64) 0"' | ../../c/release.py
+	(cd k/y && cue export --out json -e crds | jq -r 'to_entries[] | "../k/crd/\(.key).yaml \(.value | @base64) 0"') | ./release.py
 
 update-env:
 # ensure no argocd-repo-server pods are in a non-Running state, the cli will pick any pod
