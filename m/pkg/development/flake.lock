@@ -217,17 +217,17 @@
       },
       "locked": {
         "dir": "m/pkg/oci",
-        "lastModified": 1703443037,
-        "narHash": "sha256-Q0zs9ptzpWhcc2vyrMeGd2xMBD4pa2Vu8uUekJEWWAI=",
+        "lastModified": 1703477266,
+        "narHash": "sha256-2hxbgneGdfRPvplYbksqt9CPeueW0BwW/CdQ4nAIiMc=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "77765c3481ed7fe68f243679ae9f6e8420ef7268",
+        "rev": "ddcf3121f3c2cbacad9856d3d32538332e6ef20d",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/oci",
         "owner": "defn",
-        "ref": "pkg-oci-0.0.54",
+        "ref": "pkg-oci-0.0.55",
         "repo": "dev",
         "type": "github"
       }
