@@ -31,7 +31,7 @@ core-class:
     FROM quay.io/defn/dev:latest
 
     COPY script/800-defn-dev script/999-update .
-    RUN ./800-defn-dev
+    RUN --no-cache ./800-defn-dev
     RUN ./999-update
     RUN rm -f 800-defn-dev 999-update
 
