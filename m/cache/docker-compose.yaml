@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  registry:
+    image: registry:2
+    container_name: registry
+    ports:
+      - "5000:5000"
+    restart: always
+    environment:
+      - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/registry.crt
+      - REGISTRY_HTTP_TLS_KEY=/certs/registry.key
+    volumes:
+      - ${HOME}/registry/certs:/certs
+  bazel-remote:
+    image: quay.io/bazel-remote/bazel-remote:v2.4.3
+    container_name: bazel-remote
+    user: "1000:1000"
+    ports:
+      - "9090:8080"
+      - "9092:9092"
+    volumes:
+      - ${HOME}/work/bazel-cache:/data
+    command: --max_size 50
