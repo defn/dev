@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-bopts="--remote_cache=grpc://169.254.32.1:9092 --sandbox_writable_path=${HOME}/m/cue.mod/gen --sandbox_writable_path=/nix --sandbox_writable_path=${HOME}/.cache/nix --sandbox_writable_path=${HOME}/.cache/helm --sandbox_writable_path=${HOME}/.cache/go-mod --sandbox_writable_path=${HOME}/.cache/go-build --sandbox_writable_path=${HOME}/.earthly --sandbox_writable_path=${HOME}/m/k --sandbox_writable_path=${HOME}/work --action_env=HOME=${HOME} --test_env=HOME=${HOME}"
+bopts="--remote_cache=grpc://cache.defn.run:9092 --sandbox_writable_path=${HOME}/m/cue.mod/gen --sandbox_writable_path=/nix --sandbox_writable_path=${HOME}/.cache/nix --sandbox_writable_path=${HOME}/.cache/helm --sandbox_writable_path=${HOME}/.cache/go-mod --sandbox_writable_path=${HOME}/.cache/go-build --sandbox_writable_path=${HOME}/.earthly --sandbox_writable_path=${HOME}/m/k --sandbox_writable_path=${HOME}/work --action_env=HOME=${HOME} --test_env=HOME=${HOME}"
 
 function bazel {
 	local cmd="$1"
