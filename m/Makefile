@@ -35,7 +35,6 @@ ci_inner:
 	$(MAKE) ci_web
 #	env BUILDKITE_AGENT_DISCONNECT_AFTER_IDLE_TIMEOUT=$(timeout) buildkite-agent start --build-path ~/work/buildkite-agent --plugins-path ~/work/buildkite-plugins --token "$$(pass BUILDKITE_AGENT_TOKEN)"
 	cd && env CACHIX_AUTH_TOKEN=$$(pass CACHIX_AUTH_TOKEN) make cache
-	cd && $(MAKE) install
 
 teacher-clean:
 	rm -rf ~/Library/App*/coderv2/postgres
