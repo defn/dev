@@ -24,6 +24,7 @@ pkg/coredns/.direnv
 pkg/cosign/.direnv
 pkg/cue/.direnv
 pkg/dapr/.direnv
+pkg/defn/.direnv
 pkg/dev/.direnv
 pkg/development/.direnv
 pkg/dyff/.direnv
@@ -41,6 +42,7 @@ pkg/honeyvent/.direnv
 pkg/hubble/.direnv
 pkg/hugo/.direnv
 pkg/ibazel/.direnv
+pkg/jsdev/.direnv
 pkg/k3sup/.direnv
 pkg/k9s/.direnv
 pkg/kn/.direnv
@@ -51,12 +53,12 @@ pkg/kustomize/.direnv
 pkg/linkerd/.direnv
 pkg/localdev/.direnv
 pkg/nix/.direnv
-pkg/nodedev/.direnv
 pkg/oci/.direnv
 pkg/opentofu/.direnv
 pkg/oras/.direnv
 pkg/packer/.direnv
 pkg/pkg/.direnv
+pkg/pydev/.direnv
 pkg/remotedev/.direnv
 pkg/secrets/.direnv
 pkg/shell/.direnv
@@ -95,6 +97,7 @@ pkg/coredns/result
 pkg/cosign/result
 pkg/cue/result
 pkg/dapr/result
+pkg/defn/result
 pkg/dev/result
 pkg/development/result
 pkg/dyff/result
@@ -112,6 +115,7 @@ pkg/honeyvent/result
 pkg/hubble/result
 pkg/hugo/result
 pkg/ibazel/result
+pkg/jsdev/result
 pkg/k3sup/result
 pkg/k9s/result
 pkg/kn/result
@@ -122,12 +126,12 @@ pkg/kustomize/result
 pkg/linkerd/result
 pkg/localdev/result
 pkg/nix/result
-pkg/nodedev/result
 pkg/oci/result
 pkg/opentofu/result
 pkg/oras/result
 pkg/packer/result
 pkg/pkg/result
+pkg/pydev/result
 pkg/remotedev/result
 pkg/secrets/result
 pkg/shell/result

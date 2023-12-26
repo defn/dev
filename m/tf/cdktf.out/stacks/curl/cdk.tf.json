@@ -3,7 +3,7 @@
     "metadata": {
       "backend": "s3",
       "stackName": "curl",
-      "version": "0.19.1"
+      "version": "0.19.2"
     },
     "outputs": {
     }

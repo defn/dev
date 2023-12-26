@@ -1,14 +1,14 @@
-package m
+package tf
 
 import (
-	"github.com/defn/dev/m/command"
+	"github.com/defn/dev/m/command/infra"
 )
 
-input: organization: [NAME=string]: command.#AwsOrganization & {
+input: organization: [NAME=string]: infra.#AwsOrganization & {
 	name: NAME
 }
 
-input: kubernetes: [NAME=string]: command.#KubernetesCluster & {
+input: kubernetes: [NAME=string]: infra.#KubernetesCluster & {
 	name: NAME
 }
 

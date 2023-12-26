@@ -1,4 +1,4 @@
-package command
+package infra
 
 #AwsAdmin: {
 	name:  string

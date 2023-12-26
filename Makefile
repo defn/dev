@@ -53,17 +53,18 @@ cache:
 
 home:
 	$(MARK) home
+	rm -rf ~/bin/nix.tmp
+	mkdir -p ~/bin/nix.tmp ~/bin/nix
 	set -xeo pipefail; for n in $(flakes); do \
 		mark $$n; \
 		(cd m/pkg/$$n && ~/bin/b build); \
-		(cd m/pkg/$$n && ~/bin/b out flake_path) | (cd ~/bin/nix && tar xfz -); \
+		(cd m/pkg/$$n && ~/bin/b out flake_path) | (cd ~/bin/nix.tmp && tar xfz -); \
 		(cd m/pkg/$$n && ~/bin/b out flake_store) | (cd / && sudo tar xf -); \
-		done; \
-	rm -f bin/nix/{gcc,cc,ld,clang}
-	sudo -A ln -nfs ~/bin/nix/go /usr/local/bin/
-	sudo -A ln -nfs /home/ubuntu/.nix-profile/bin/nix-instantiate /usr/local/bin/
-	if test -x /opt/homebrew/opt/util-linux/bin/flock; then ln -nfs /opt/homebrew/opt/util-linux/bin/flock bin/nix/; fi
-	ln -nfs ~/.nix-profile/bin/nix bin/nix/nix
+		done
+	rsync -ia --delete ~/bin/nix.tmp/. ~/bin/nix/.
+	rm -rf ~/bin/nix.tmp
+	sudo -A ln -nfs ~/bin/nix/go ~/.nix-profile/bin/nix-instantiate /usr/local/bin/
+	ln -nfs ~/.nix-profile/bin/nix bin/nix/
 
 dotfiles:
 	$(MARK) configure dotfiles
