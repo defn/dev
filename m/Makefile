@@ -178,6 +178,7 @@ ready:
 	$(MAKE) k3s-restart-irsa
 	$(MAKE) k3s-advertise-traefik
 
+.PHONY: cache
 cache:
 	cd cache && $(MAKE) up
 	cd k && $(MAKE) cache

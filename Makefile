@@ -141,6 +141,7 @@ reinstall:
 	$(MAKE) install
 
 install:
+	sudo true
 	$(MAKE) nix
 	$(MAKE) install-inner
 	git log m/pkg | head -1 | awk '{print $$2}' > bin/nix/.head
