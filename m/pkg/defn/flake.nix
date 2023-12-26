@@ -5,10 +5,10 @@
     utils.url = github:defn/dev/pkg-utils-0.0.54?dir=m/pkg/utils;
     development.url = github:defn/dev/pkg-development-0.0.81?dir=m/pkg/development;
     cloud.url = github:defn/dev/pkg-cloud-0.0.214?dir=m/pkg/cloud;
-    kubernetes.url = github:defn/dev/pkg-kubernetes-0.0.203?dir=m/pkg/kubernetes;
+    kubernetes.url = github:defn/dev/pkg-kubernetes-0.0.204?dir=m/pkg/kubernetes;
     remotedev.url = github:defn/dev/pkg-remotedev-0.0.31?dir=m/pkg/remotedev;
     localdev.url = github:defn/dev/pkg-localdev-0.0.212?dir=m/pkg/localdev;
-    godev.url = github:defn/dev/pkg-godev-0.0.124?dir=m/pkg/godev;
+    godev.url = github:defn/dev/pkg-godev-0.0.125?dir=m/pkg/godev;
     jsdev.url = github:defn/dev/pkg-jsdev-0.0.62?dir=m/pkg/jsdev;
     pydev.url = github:defn/dev/pkg-pydev-0.0.125?dir=m/pkg/pydev;
     shell.url = github:defn/dev/pkg-shell-0.0.63?dir=m/pkg/shell;
