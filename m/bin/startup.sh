@@ -41,15 +41,16 @@ function main {
 	sudo mkdir -p /mnt/docker
 	sudo ln -nfs /mnt/docker /var/lib/docker
 
-	while true; do if sudo systemctl start docker; then break; fi; sleep 10; done &
+	while true; do if sudo systemctl start docker; then break; fi; sleep 10; done
 
 	cd
 	git fetch
 	git branch --set-upstream-to=origin/main main
 	git pull
-	make install
 
-	wait
+	(cd m/cache && make init up)
+
+	make install
 }
 
 time main "$@"
