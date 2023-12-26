@@ -6,7 +6,7 @@ function main {
 
 	set -e
 
-  bin/startup.sh
+  	m/bin/startup.sh
 
 	ssh -o StrictHostKeyChecking=no git@github.com true || true &
 
