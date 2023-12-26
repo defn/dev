@@ -14,7 +14,7 @@ function main {
 						curl -sSL "https://$(cat ~/.config/gh/hosts.yml | yq -r '.["github.com"].user'):$(gh auth token)@api.github.com/repos/${repo}/git/refs/tags" \
 							>"/tmp/tags/${repo}/tags.json"
 					fi
-					echo "${repo}" "${tag}" "$(cat "/tmp/tags/${repo}/tags.json" | jq -r '.[].ref' | grep refs/tags | perl -pe 's{refs/tags/}{}' | grep "^${prefix}" | egrep -v '[-](rc|beta)' | tail -1)"
+					echo "${repo}" "${tag}" "$(cat "/tmp/tags/${repo}/tags.json" | jq -r '.[].ref' | grep refs/tags | perl -pe 's{refs/tags/}{}' | grep "^${prefix}" | egrep -v '[-](beta)' | tail -1)"
 				done | while read -r repo tag latest; do
 				if [[ -n ${latest} ]]; then
 					echo "${repo} ${tag} ${latest}" 1>&2
