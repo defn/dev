@@ -52,14 +52,12 @@ cache:
 
 home:
 	$(MARK) home
-	if [[ "$$(git log m/pkg | head -1 | awk '{print $$2}')" != "$$(cat bin/nix/.head)" ]]; then \
-		set -xeo pipefail; for n in $(flakes); do \
-			mark $$n; \
-			(cd m/pkg/$$n && ~/bin/b build); \
-			(cd m/pkg/$$n && ~/bin/b out flake_path) | (cd ~/bin/nix && tar xfz -); \
-			(cd m/pkg/$$n && ~/bin/b out flake_store) | (cd / && sudo tar xf -); \
-			done; \
-	fi
+	set -xeo pipefail; for n in $(flakes); do \
+		mark $$n; \
+		(cd m/pkg/$$n && ~/bin/b build); \
+		(cd m/pkg/$$n && ~/bin/b out flake_path) | (cd ~/bin/nix && tar xfz -); \
+		(cd m/pkg/$$n && ~/bin/b out flake_store) | (cd / && sudo tar xf -); \
+		done; \
 	rm -f bin/nix/{gcc,cc,ld,clang}
 	sudo -A ln -nfs ~/bin/nix/go /usr/local/bin/
 	sudo -A ln -nfs /home/ubuntu/.nix-profile/bin/nix-instantiate /usr/local/bin/
@@ -144,7 +142,6 @@ install:
 	sudo true
 	$(MAKE) nix
 	$(MAKE) install-inner
-	git log m/pkg | head -1 | awk '{print $$2}' > bin/nix/.head
 	@mark finished
 
 install-inner:
@@ -156,7 +153,7 @@ install-inner:
 install-innermost:
 	git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
 	git config diff.lfs.textconv cat
-	if [[ "$$(git log m/pkg | head -1 | awk '{print $$2}')" != "$$(cat bin/nix/.head)" ]]; then $(MAKE) dotfiles; fi
+	$(MAKE) dotfiles
 	$(MAKE) password-store
 	$(MAKE) gpg
 
