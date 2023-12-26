@@ -14,6 +14,7 @@ brew "starship"
 tap "homebrew/cask-fonts"
 cask "font-fira-code"
 
+cask "docker"
 cask "divvy"
 cask "google-chrome"
 cask "visual-studio-code"
