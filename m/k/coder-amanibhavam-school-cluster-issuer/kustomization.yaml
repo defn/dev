@@ -8,5 +8,5 @@ resources:
   - resource-clusterpolicy-clusterissuer-zerossl-production.yaml
   - resource-clusterpolicy-clusterissuer-letsencrypt-staging.yaml
   - resource-clusterpolicy-clusterissuer-letsencrypt-production.yaml
-commonLabels: {}
+labels: []
 commonAnnotations: {}

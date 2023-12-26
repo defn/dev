@@ -5,7 +5,7 @@ resources:
   - resource-namespace-buildkite.yaml
   - resource-externalsecret-buildkite.yaml
 namespace: buildkite
-commonLabels: {}
+labels: []
 commonAnnotations: {}
 helmCharts:
   - releaseName: buildkite

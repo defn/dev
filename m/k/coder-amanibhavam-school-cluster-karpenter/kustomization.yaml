@@ -12,7 +12,7 @@ resources:
   - resource-provisioner-default.yaml
   - resource-awsnodetemplate-default.yaml
 namespace: karpenter
-commonLabels: {}
+labels: []
 commonAnnotations: {}
 helmCharts:
   - releaseName: karpenter

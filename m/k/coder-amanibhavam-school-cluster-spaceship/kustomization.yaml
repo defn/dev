@@ -5,5 +5,5 @@ resources:
   - resource-service-deathstar.yaml
   - resource-deployment-spaceship.yaml
 namespace: default
-commonLabels: {}
+labels: []
 commonAnnotations: {}

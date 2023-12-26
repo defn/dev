@@ -6,7 +6,7 @@ resources:
   - resource-clusterrole-background-controller-clusterissuers.yaml
   - resource-clusterrole-background-controller-node.yaml
 namespace: kyverno
-commonLabels: {}
+labels: []
 commonAnnotations: {}
 helmCharts:
   - releaseName: kyverno

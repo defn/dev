@@ -117,7 +117,12 @@ kustomize: [NAME=string]: _name: NAME
 
 		if commonLabels != _|_ {
 			// TODO convert to labels:, which has a different structure
-			"commonLabels": commonLabels
+			"labels": [
+				for k, v in commonLabels {
+					includeSelectors: true
+					pairs: (k): v
+				},
+			]
 		}
 
 		if commonAnnotations != _|_ {

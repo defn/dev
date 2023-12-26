@@ -9,5 +9,5 @@ resources:
   - https://raw.githubusercontent.com/argoproj/argo-cd/v2.10.0-rc1/manifests/install.yaml
   - resource-ingress-argo-cd.yaml
 namespace: argocd
-commonLabels: {}
+labels: []
 commonAnnotations: {}

@@ -4,7 +4,7 @@ patches: []
 resources:
   - resource-namespace-reloader.yaml
 namespace: reloader
-commonLabels: {}
+labels: []
 commonAnnotations: {}
 helmCharts:
   - releaseName: reloader

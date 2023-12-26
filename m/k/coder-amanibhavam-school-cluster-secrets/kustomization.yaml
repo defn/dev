@@ -3,5 +3,5 @@
 patches: []
 resources:
   - resource-cluster-secret-store.yaml
-commonLabels: {}
+labels: []
 commonAnnotations: {}

@@ -6,7 +6,7 @@ resources:
   - resource-namespace-external-secrets.yaml
   - resource-cluster-role-binding-delegator.yaml
 namespace: external-secrets
-commonLabels: {}
+labels: []
 commonAnnotations: {}
 helmCharts:
   - releaseName: external-secrets

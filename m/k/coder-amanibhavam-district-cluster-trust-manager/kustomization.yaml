@@ -2,7 +2,7 @@
 
 patches: []
 resources: []
-commonLabels: {}
+labels: []
 commonAnnotations: {}
 helmCharts:
   - releaseName: trust-manager

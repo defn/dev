@@ -12,7 +12,7 @@ resources:
   - resource-ingress-traefik.yaml
   - resource-certificate-school-amanibhavam-defn-run-wildcard-traefik.yaml
 namespace: traefik
-commonLabels: {}
+labels: []
 commonAnnotations: {}
 helmCharts:
   - releaseName: traefik

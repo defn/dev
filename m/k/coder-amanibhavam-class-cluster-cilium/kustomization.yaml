@@ -3,7 +3,7 @@
 patches: []
 resources:
   - resource-ingress-hubble-ui.yaml
-commonLabels: {}
+labels: []
 commonAnnotations: {}
 helmCharts:
   - releaseName: cilium
