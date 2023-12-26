@@ -26,6 +26,7 @@
         direnv
         ffmpeg
         ttyd
+        ncdu
         bashInteractive
       ];
 
