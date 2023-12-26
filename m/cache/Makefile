@@ -4,4 +4,4 @@ init:
 	cd ~/work/registry/certs && step certificate create --subtle --insecure --no-password --force --profile self-signed $(shell uname -n) registry.crt registry.key
 
 up:
-	docker-compose up -d
+	docker compose up -d
