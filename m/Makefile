@@ -164,31 +164,26 @@ dev:
 init:
 	cd && $(MAKE) install
 	cd && ./.dotfiles/bootstrap
-	$(MAKE) k3s-init
+	cd c && $(MAKE) tailscale
+	$(MAKE) cache
+
+up:
+	bin/make-k3s up
+	cd c && $(MAKE) iam
+	$(MAKE) ready
 
 ready:
-	cd k && $(MAKE) cache
-	$(MAKE) k3s-wait
+	$(MAKE) k3s-restart-irsa
 	$(MAKE) k3s-advertise-traefik
 
-k3s-init:
+cache:
 	cd cache && $(MAKE) up
-	cd c && $(MAKE) tailscale
 	cd k && $(MAKE) cache
 	cd c && $(MAKE) cache
 
-k3s-up:
-	bin/make-k3s up
-	cd c && $(MAKE) iam
-	$(MAKE) k3s-wait
-	$(MAKE) k3s-advertise-traefik
-
-k3s-recreate:
+recreate:
 	-bin/make-k3s down
-	$(MAKE) k3s-up
-
-k3s-wait:
-	$(MAKE) k3s-restart-irsa
+	$(MAKE) up
 
 k3s-restart-irsa:
 	while ! kubectl rollout -n kube-system status deployment pod-identity-amazon-eks-pod-identity-webhook; do sleep 10; done
