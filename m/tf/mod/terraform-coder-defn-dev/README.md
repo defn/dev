@@ -37,10 +37,7 @@ No requirements.
 | [aws_ami.ubuntu](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami) | data source |
 | [coder_parameter.instance_type](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter) | data source |
 | [coder_parameter.nix_volume_size](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter) | data source |
-| [coder_parameter.prefix](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter) | data source |
 | [coder_parameter.provider](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter) | data source |
-| [coder_parameter.source_rev](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter) | data source |
-| [coder_parameter.workdir](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/parameter) | data source |
 | [coder_workspace.me](https://registry.terraform.io/providers/coder/coder/latest/docs/data-sources/workspace) | data source |
 
 ## Inputs
