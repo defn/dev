@@ -1,4 +1,4 @@
-package m
+package tf
 
 aws_admins: [...{...}] | *[]
 

@@ -196,3 +196,4 @@ Google*
 .cookiecutter_replay
 My*Drive
 .pnpm-state
+bin/nix*
