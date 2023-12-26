@@ -47,7 +47,7 @@ while true; do
   sleep 5
 done
 
-sudo tailscale up --accept-dns=true --accept-routes=true --operator ubuntu --ssh --authkey "${var.tsauthkey}"
+sudo tailscale up --accept-dns=true --accept-routes=true --operator ubuntu --ssh --authkey "${var.tsauthkey}" --reset
 
 nohup sudo -H -E -u ${local.username} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${data.coder_workspace.me.access_url} ${local.coder_name}' >/tmp/cloud-init.log 2>&1 &
 disown
