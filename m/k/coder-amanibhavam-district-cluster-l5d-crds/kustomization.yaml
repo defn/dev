@@ -4,7 +4,7 @@ patches: []
 resources:
   - resource-namespace-linkerd.yaml
 namespace: linkerd
-commonLabels: {}
+labels: []
 commonAnnotations: {}
 helmCharts:
   - releaseName: l5d-crds

@@ -3,7 +3,7 @@
 patches: []
 resources: []
 namespace: kube-system
-commonLabels: {}
+labels: []
 commonAnnotations: {}
 helmCharts:
   - releaseName: pod-identity

@@ -3,7 +3,7 @@
 patches: []
 resources: []
 namespace: linkerd
-commonLabels: {}
+labels: []
 commonAnnotations: {}
 helmCharts:
   - releaseName: l5d-control

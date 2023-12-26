@@ -6,5 +6,5 @@ resources:
   - resource-deployment-deathstar.yaml
   - resource-ciliumnetworkpolicy-deathstar-blueprints.yaml
 namespace: default
-commonLabels: {}
+labels: []
 commonAnnotations: {}

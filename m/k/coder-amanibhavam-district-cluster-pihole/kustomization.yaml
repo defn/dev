@@ -6,7 +6,7 @@ resources:
   - resource-namespace-pihole.yaml
   - resource-ingress-pihole-web.yaml
 namespace: pihole
-commonLabels: {}
+labels: []
 commonAnnotations: {}
 helmCharts:
   - releaseName: pihole

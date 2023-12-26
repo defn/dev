@@ -10,7 +10,7 @@ resources:
   - resource-externalsecret-coder.yaml
   - resource-cluster-role-binding-admin.yaml
 namespace: coder
-commonLabels: {}
+labels: []
 commonAnnotations: {}
 helmCharts:
   - releaseName: coder
