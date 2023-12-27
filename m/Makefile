@@ -80,17 +80,18 @@ regen:
 	@mark defn.dev protos
 	cd defn/dev && $(MAKE)
 
+# TODO fix for bazel 7
 	@mark gazelle-buf-update-repos
-	b pass run //:gazelle-buf-update-repos
+	echo b pass run //:gazelle-buf-update-repos
 
 	@mark gazelle-update-repos
-	b pass run //:gazelle-update-repos
+	echo b pass run //:gazelle-update-repos
 
 	@mark gazelle-buf
-	b pass run //:gazelle-buf
+	echo b pass run //:gazelle-buf
 
 	@mark gazelle
-	b pass run //:gazelle
+	echo b pass run //:gazelle
 
 watch:
 	$(MAKE) build
