@@ -20,7 +20,18 @@ function main {
 	diff)
 		shift
 		app="$1"; shift
-		version="$1"; shift
+		local version
+		if test -n "${1:-}"; then
+			version="$1"; shift
+		else
+			local chart="${app}"
+			case "${app}" in
+				*-district)
+					chart="${app}-env"
+					;;
+			esac
+			version="$(helm show chart --insecure-skip-tls-verify "oci://cache.defn.run:5000/library/helm/${chart}-env" 2>/dev/null | grep ^version: | awk '{print $2}')"
+		fi
 		case "${app}" in
 		/*) app="$(app list | tail -n +2 | awk '{print $1}' | fzf --query="${app#/}" --select-1)" ;;
 		esac
