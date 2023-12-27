@@ -152,7 +152,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-external-secrets
-              targetRevision: 0.0.104
+              targetRevision: 0.0.105
             syncPolicy:
               automated:
                 prune: true

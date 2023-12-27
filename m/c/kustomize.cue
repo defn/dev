@@ -411,7 +411,7 @@ kustomize: "external-secrets": #KustomizeHelm & {
 	helm: {
 		release: "external-secrets"
 		name:    "external-secrets"
-		version: "0.9.10"
+		version: "0.9.11"
 		repo:    "https://charts.external-secrets.io"
 		values: {
 			webhook: create:        false
@@ -1998,7 +1998,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "3.2.7"
+		version:     "3.2.8"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true

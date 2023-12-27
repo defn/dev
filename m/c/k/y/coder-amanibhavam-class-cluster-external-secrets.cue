@@ -7011,6 +7011,124 @@ res: customresourcedefinition: "coder-amanibhavam-class-cluster-external-secrets
 								required: ["secret"]
 								type: "object"
 							}
+							template: {
+								description: "Template defines a blueprint for the created Secret resource."
+								properties: {
+									data: {
+										additionalProperties: type: "string"
+										type: "object"
+									}
+									engineVersion: {
+										default:     "v2"
+										description: "EngineVersion specifies the template engine version that should be used to compile/execute the template specified in .data and .templateFrom[]."
+
+										enum: [
+											"v1",
+											"v2",
+										]
+										type: "string"
+									}
+									mergePolicy: {
+										default: "Replace"
+										enum: [
+											"Replace",
+											"Merge",
+										]
+										type: "string"
+									}
+									metadata: {
+										description: "ExternalSecretTemplateMetadata defines metadata fields for the Secret blueprint."
+
+										properties: {
+											annotations: {
+												additionalProperties: type: "string"
+												type: "object"
+											}
+											labels: {
+												additionalProperties: type: "string"
+												type: "object"
+											}
+										}
+										type: "object"
+									}
+									templateFrom: {
+										items: {
+											properties: {
+												configMap: {
+													properties: {
+														items: {
+															items: {
+																properties: {
+																	key: type: "string"
+																	templateAs: {
+																		default: "Values"
+																		enum: [
+																			"Values",
+																			"KeysAndValues",
+																		]
+																		type: "string"
+																	}
+																}
+																required: ["key"]
+																type: "object"
+															}
+															type: "array"
+														}
+														name: type: "string"
+													}
+													required: [
+														"items",
+														"name",
+													]
+													type: "object"
+												}
+												literal: type: "string"
+												secret: {
+													properties: {
+														items: {
+															items: {
+																properties: {
+																	key: type: "string"
+																	templateAs: {
+																		default: "Values"
+																		enum: [
+																			"Values",
+																			"KeysAndValues",
+																		]
+																		type: "string"
+																	}
+																}
+																required: ["key"]
+																type: "object"
+															}
+															type: "array"
+														}
+														name: type: "string"
+													}
+													required: [
+														"items",
+														"name",
+													]
+													type: "object"
+												}
+												target: {
+													default: "Data"
+													enum: [
+														"Data",
+														"Annotations",
+														"Labels",
+													]
+													type: "string"
+												}
+											}
+											type: "object"
+										}
+										type: "array"
+									}
+									type: type: "string"
+								}
+								type: "object"
+							}
 						}
 						required: [
 							"secretStoreRefs",
@@ -12292,8 +12410,8 @@ res: serviceaccount: "coder-amanibhavam-class-cluster-external-secrets": "extern
 			"app.kubernetes.io/instance":   "external-secrets"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "external-secrets"
-			"app.kubernetes.io/version":    "v0.9.10"
-			"helm.sh/chart":                "external-secrets-0.9.10"
+			"app.kubernetes.io/version":    "v0.9.11"
+			"helm.sh/chart":                "external-secrets-0.9.11"
 		}
 		name:      "external-secrets"
 		namespace: "external-secrets"
@@ -12307,8 +12425,8 @@ res: role: "coder-amanibhavam-class-cluster-external-secrets": "external-secrets
 			"app.kubernetes.io/instance":   "external-secrets"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "external-secrets"
-			"app.kubernetes.io/version":    "v0.9.10"
-			"helm.sh/chart":                "external-secrets-0.9.10"
+			"app.kubernetes.io/version":    "v0.9.11"
+			"helm.sh/chart":                "external-secrets-0.9.11"
 		}
 		name:      "external-secrets-leaderelection"
 		namespace: "external-secrets"
@@ -12345,8 +12463,8 @@ res: clusterrole: "coder-amanibhavam-class-cluster-external-secrets": cluster: "
 			"app.kubernetes.io/instance":   "external-secrets"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "external-secrets"
-			"app.kubernetes.io/version":    "v0.9.10"
-			"helm.sh/chart":                "external-secrets-0.9.10"
+			"app.kubernetes.io/version":    "v0.9.11"
+			"helm.sh/chart":                "external-secrets-0.9.11"
 		}
 		name: "external-secrets-controller"
 	}
@@ -12462,8 +12580,8 @@ res: clusterrole: "coder-amanibhavam-class-cluster-external-secrets": cluster: "
 			"app.kubernetes.io/instance":                   "external-secrets"
 			"app.kubernetes.io/managed-by":                 "Helm"
 			"app.kubernetes.io/name":                       "external-secrets"
-			"app.kubernetes.io/version":                    "v0.9.10"
-			"helm.sh/chart":                                "external-secrets-0.9.10"
+			"app.kubernetes.io/version":                    "v0.9.11"
+			"helm.sh/chart":                                "external-secrets-0.9.11"
 			"rbac.authorization.k8s.io/aggregate-to-admin": "true"
 			"rbac.authorization.k8s.io/aggregate-to-edit":  "true"
 		}
@@ -12511,8 +12629,8 @@ res: clusterrole: "coder-amanibhavam-class-cluster-external-secrets": cluster: "
 			"app.kubernetes.io/instance":   "external-secrets"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "external-secrets"
-			"app.kubernetes.io/version":    "v0.9.10"
-			"helm.sh/chart":                "external-secrets-0.9.10"
+			"app.kubernetes.io/version":    "v0.9.11"
+			"helm.sh/chart":                "external-secrets-0.9.11"
 			"servicebinding.io/controller": "true"
 		}
 		name: "external-secrets-servicebindings"
@@ -12535,8 +12653,8 @@ res: clusterrole: "coder-amanibhavam-class-cluster-external-secrets": cluster: "
 			"app.kubernetes.io/instance":                   "external-secrets"
 			"app.kubernetes.io/managed-by":                 "Helm"
 			"app.kubernetes.io/name":                       "external-secrets"
-			"app.kubernetes.io/version":                    "v0.9.10"
-			"helm.sh/chart":                                "external-secrets-0.9.10"
+			"app.kubernetes.io/version":                    "v0.9.11"
+			"helm.sh/chart":                                "external-secrets-0.9.11"
 			"rbac.authorization.k8s.io/aggregate-to-admin": "true"
 			"rbac.authorization.k8s.io/aggregate-to-edit":  "true"
 			"rbac.authorization.k8s.io/aggregate-to-view":  "true"
@@ -12581,8 +12699,8 @@ res: rolebinding: "coder-amanibhavam-class-cluster-external-secrets": "external-
 			"app.kubernetes.io/instance":   "external-secrets"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "external-secrets"
-			"app.kubernetes.io/version":    "v0.9.10"
-			"helm.sh/chart":                "external-secrets-0.9.10"
+			"app.kubernetes.io/version":    "v0.9.11"
+			"helm.sh/chart":                "external-secrets-0.9.11"
 		}
 		name:      "external-secrets-leaderelection"
 		namespace: "external-secrets"
@@ -12606,8 +12724,8 @@ res: clusterrolebinding: "coder-amanibhavam-class-cluster-external-secrets": clu
 			"app.kubernetes.io/instance":   "external-secrets"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "external-secrets"
-			"app.kubernetes.io/version":    "v0.9.10"
-			"helm.sh/chart":                "external-secrets-0.9.10"
+			"app.kubernetes.io/version":    "v0.9.11"
+			"helm.sh/chart":                "external-secrets-0.9.11"
 		}
 		name: "external-secrets-controller"
 	}
@@ -12645,8 +12763,8 @@ res: deployment: "coder-amanibhavam-class-cluster-external-secrets": "external-s
 			"app.kubernetes.io/instance":   "external-secrets"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "external-secrets"
-			"app.kubernetes.io/version":    "v0.9.10"
-			"helm.sh/chart":                "external-secrets-0.9.10"
+			"app.kubernetes.io/version":    "v0.9.11"
+			"helm.sh/chart":                "external-secrets-0.9.11"
 		}
 		name:      "external-secrets"
 		namespace: "external-secrets"
@@ -12663,8 +12781,8 @@ res: deployment: "coder-amanibhavam-class-cluster-external-secrets": "external-s
 				"app.kubernetes.io/instance":   "external-secrets"
 				"app.kubernetes.io/managed-by": "Helm"
 				"app.kubernetes.io/name":       "external-secrets"
-				"app.kubernetes.io/version":    "v0.9.10"
-				"helm.sh/chart":                "external-secrets-0.9.10"
+				"app.kubernetes.io/version":    "v0.9.11"
+				"helm.sh/chart":                "external-secrets-0.9.11"
 			}
 			spec: {
 				automountServiceAccountToken: true
@@ -12673,7 +12791,7 @@ res: deployment: "coder-amanibhavam-class-cluster-external-secrets": "external-s
 						"--concurrent=1",
 						"--metrics-addr=:8080",
 					]
-					image:           "ghcr.io/external-secrets/external-secrets:v0.9.10"
+					image:           "ghcr.io/external-secrets/external-secrets:v0.9.11"
 					imagePullPolicy: "IfNotPresent"
 					name:            "external-secrets"
 					ports: [{

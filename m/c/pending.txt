@@ -2,7 +2,7 @@ https://artifacthub.io/packages/helm/argo/argo-events/2.4.1
 https://artifacthub.io/packages/helm/argo/argo-workflows/0.40.3
 https://artifacthub.io/packages/helm/aws/aws-node-termination-handler/0.21.0
 https://artifacthub.io/packages/helm/bitnami/external-dns/6.28.6
-https://artifacthub.io/packages/helm/bitnami/mastodon/3.2.7
+https://artifacthub.io/packages/helm/bitnami/mastodon/3.2.8
 https://artifacthub.io/packages/helm/cert-manager/cert-manager/1.13.3
 https://artifacthub.io/packages/helm/cert-manager/trust-manager/0.7.0
 https://artifacthub.io/packages/helm/cilium/cilium/1.15.0-rc.0
@@ -10,7 +10,7 @@ https://artifacthub.io/packages/helm/cilium/tetragon/1.0.1
 https://artifacthub.io/packages/helm/coder-v2/coder/2.6.0
 https://artifacthub.io/packages/helm/descheduler/descheduler/0.28.1
 https://artifacthub.io/packages/helm/dex/dex/0.15.3
-https://artifacthub.io/packages/helm/external-secrets-operator/external-secrets/0.9.10
+https://artifacthub.io/packages/helm/external-secrets-operator/external-secrets/0.9.11
 https://artifacthub.io/packages/helm/harbor/harbor/1.13.1
 https://artifacthub.io/packages/helm/headlamp/headlamp/0.17.1
 https://artifacthub.io/packages/helm/jkroepke/amazon-eks-pod-identity-webhook/1.2.0
