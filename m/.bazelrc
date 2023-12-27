@@ -1,3 +1,5 @@
+common --enable_bzlmod
+
 run --ui_event_filters=-info,-stdout,-stderr
 run --noshow_progress
 run --noshow_loading_progress
