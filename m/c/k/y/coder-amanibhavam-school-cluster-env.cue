@@ -364,7 +364,7 @@ res: application: "coder-amanibhavam-school-cluster-env": argocd: "coder-amanibh
 		source: {
 			chart:          "library/helm/coder-amanibhavam-school-cluster-reloader"
 			repoURL:        "cache.defn.run:5000"
-			targetRevision: "0.0.106"
+			targetRevision: "0.0.107"
 		}
 		syncPolicy: {
 			automated: {

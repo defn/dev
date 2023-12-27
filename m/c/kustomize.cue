@@ -2062,7 +2062,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "3.2.8"
+		version:     "4.0.0"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
@@ -2966,7 +2966,7 @@ kustomize: "reloader": #KustomizeHelm & {
 		release:   "reloader"
 		name:      "reloader"
 		namespace: "reloader"
-		version:   "1.0.56"
+		version:   "1.0.58"
 		repo:      "https://stakater.github.io/stakater-charts"
 		values: {
 		}

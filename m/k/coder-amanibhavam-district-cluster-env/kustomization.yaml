@@ -468,7 +468,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-reloader
-              targetRevision: 0.0.106
+              targetRevision: 0.0.107
             syncPolicy:
               automated:
                 prune: true
