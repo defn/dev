@@ -28065,8 +28065,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.0.8
-    helm.sh/chart: kyverno-3.0.8
+    app.kubernetes.io/version: 3.0.9
+    helm.sh/chart: kyverno-3.0.9
   name: admissionreports.kyverno.io
 spec:
   group: kyverno.io
@@ -28319,8 +28319,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.0.8
-    helm.sh/chart: kyverno-3.0.8
+    app.kubernetes.io/version: 3.0.9
+    helm.sh/chart: kyverno-3.0.9
   name: backgroundscanreports.kyverno.io
 spec:
   group: kyverno.io
@@ -28547,8 +28547,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.0.8
-    helm.sh/chart: kyverno-3.0.8
+    app.kubernetes.io/version: 3.0.9
+    helm.sh/chart: kyverno-3.0.9
   name: cleanuppolicies.kyverno.io
 spec:
   group: kyverno.io
@@ -29295,8 +29295,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.0.8
-    helm.sh/chart: kyverno-3.0.8
+    app.kubernetes.io/version: 3.0.9
+    helm.sh/chart: kyverno-3.0.9
   name: clusteradmissionreports.kyverno.io
 spec:
   group: kyverno.io
@@ -29549,8 +29549,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.0.8
-    helm.sh/chart: kyverno-3.0.8
+    app.kubernetes.io/version: 3.0.9
+    helm.sh/chart: kyverno-3.0.9
   name: clusterbackgroundscanreports.kyverno.io
 spec:
   group: kyverno.io
@@ -29777,8 +29777,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.0.8
-    helm.sh/chart: kyverno-3.0.8
+    app.kubernetes.io/version: 3.0.9
+    helm.sh/chart: kyverno-3.0.9
   name: clustercleanuppolicies.kyverno.io
 spec:
   group: kyverno.io
@@ -30525,8 +30525,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.0.8
-    helm.sh/chart: kyverno-3.0.8
+    app.kubernetes.io/version: 3.0.9
+    helm.sh/chart: kyverno-3.0.9
   name: clusterpolicies.kyverno.io
 spec:
   group: kyverno.io
@@ -39467,8 +39467,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.0.8
-    helm.sh/chart: kyverno-3.0.8
+    app.kubernetes.io/version: 3.0.9
+    helm.sh/chart: kyverno-3.0.9
   name: clusterpolicyreports.wgpolicyk8s.io
 spec:
   group: wgpolicyk8s.io
@@ -39737,8 +39737,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.0.8
-    helm.sh/chart: kyverno-3.0.8
+    app.kubernetes.io/version: 3.0.9
+    helm.sh/chart: kyverno-3.0.9
   name: policies.kyverno.io
 spec:
   group: kyverno.io
@@ -48679,8 +48679,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.0.8
-    helm.sh/chart: kyverno-3.0.8
+    app.kubernetes.io/version: 3.0.9
+    helm.sh/chart: kyverno-3.0.9
   name: policyexceptions.kyverno.io
 spec:
   group: kyverno.io
@@ -49036,8 +49036,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.0.8
-    helm.sh/chart: kyverno-3.0.8
+    app.kubernetes.io/version: 3.0.9
+    helm.sh/chart: kyverno-3.0.9
   name: policyreports.wgpolicyk8s.io
 spec:
   group: wgpolicyk8s.io
@@ -49306,8 +49306,8 @@ metadata:
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: kyverno
-    app.kubernetes.io/version: 3.0.8
-    helm.sh/chart: kyverno-3.0.8
+    app.kubernetes.io/version: 3.0.9
+    helm.sh/chart: kyverno-3.0.9
   name: updaterequests.kyverno.io
 spec:
   group: kyverno.io

@@ -143,7 +143,7 @@ spec:
         - image: cache.defn.run:5000/docker.io/bitnami/external-dns@sha256:b5ef3e00a40dbf1e8d0fae9ac73c6d3bf612af53b7a693c36b62c9ce510bc08d
           args:
             - --metrics-address=:7979
-            - --log-level=debug
+            - --log-level=info
             - --log-format=text
             - --publish-internal-services
             - --service-type-filter=ClusterIP

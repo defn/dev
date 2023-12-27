@@ -14,7 +14,7 @@ res: application: "coder-amanibhavam-school-cluster-env": argocd: "coder-amanibh
 		source: {
 			chart:          "library/helm/coder-amanibhavam-school-cluster-argo-cd"
 			repoURL:        "cache.defn.run:5000"
-			targetRevision: "0.0.107"
+			targetRevision: "0.0.122"
 		}
 		syncPolicy: {
 			automated: {
@@ -139,7 +139,7 @@ res: application: "coder-amanibhavam-school-cluster-env": argocd: "coder-amanibh
 		source: {
 			chart:          "library/helm/coder-amanibhavam-school-cluster-external-dns"
 			repoURL:        "cache.defn.run:5000"
-			targetRevision: "0.0.108"
+			targetRevision: "0.0.109"
 		}
 		syncPolicy: {
 			automated: {
@@ -239,7 +239,7 @@ res: application: "coder-amanibhavam-school-cluster-env": argocd: "coder-amanibh
 		source: {
 			chart:          "library/helm/coder-amanibhavam-school-cluster-kyverno"
 			repoURL:        "cache.defn.run:5000"
-			targetRevision: "0.0.110"
+			targetRevision: "0.0.111"
 		}
 		syncPolicy: {
 			automated: {
