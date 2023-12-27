@@ -28,14 +28,25 @@ function main {
 		exec env KUBECTL_EXTERNAL_DIFF="dyff between --color=on --truecolor=on " KUBECONFIG=$HOME/.kube/config.argocd argocd --core app diff "${app}" --revision "${version}" "$@"
 		;;
 	sync | get | wait | terminate-op | resources | logs | diff)
-		case "${2-}" in
-		/*)
-			exec env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app "$1" "$(app list | tail -n +2 | awk '{print $1}' | fzf --query="${2#/}" --select-1 || true)"
-			;;
-		*)
-			exec env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app "$1" "${2-}"
-			;;
+		cmd="$1"; shift
+		app="$1"; shift
+		case "${app}" in
+		/*) app="$(app list | tail -n +2 | awk '{print $1}' | fzf --query="${app#/}" --select-1)" ;;
 		esac
+		
+		exec env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app "${cmd}" "${app}" "$@"
+		;;
+	dry-run)
+		cmd="sync"; 
+		shift
+		app="$1"; shift
+		version="$1"; shift
+		case "${app}" in
+		/*) app="$(app list | tail -n +2 | awk '{print $1}' | fzf --query="${app#/}" --select-1)" ;;
+		esac
+		
+		exec env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app "${cmd}" "${app}" \
+			--local "${version}" --dry-run --output=json "$@" | awk '/^{/ {flag=1} flag {print}' | gron | grep -v sync.manifests | grep syncResult.resources | grep message | gron -u | jq -r '.status.operationState.syncResult.resources[].message'
 		;;
 	*)
 		exec env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app "$@"
