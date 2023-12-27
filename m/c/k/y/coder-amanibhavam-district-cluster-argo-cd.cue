@@ -22098,7 +22098,7 @@ res: configmap: "coder-amanibhavam-district-cluster-argo-cd": argocd: "argocd-cm
 			    id: github
 			    name: GitHub
 			    config:
-			      clientID: b53d65c678448ac93daf
+			      clientID: $dex-github-oidc:clientID
 			      clientSecret: $dex-github-oidc:clientSecret
 			      orgs:
 			        - name: defn

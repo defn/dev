@@ -178,7 +178,7 @@ kustomize: "argo-cd": #Kustomize & {
 				id:   "github"
 				name: "GitHub"
 				config: {
-					clientID:     "b53d65c678448ac93daf" // "$dex-github-oidc:clientID"
+					clientID:     "$dex-github-oidc:clientID"
 					clientSecret: "$dex-github-oidc:clientSecret"
 					orgs: [{
 						name: "defn"
