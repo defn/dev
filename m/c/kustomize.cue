@@ -135,6 +135,19 @@ kustomize: "argo-cd": #Kustomize & {
 
 			"application.resourceTrackingMethod": "annotation"
 
+			#connectors: [{
+				type: "github"
+				id: "github"
+				name: "GitHub"
+				config: {
+					clientId: "$dex-github-oidc.clientID"
+					clientSecret: "$dex-github-oidc.clientSecret"
+					orgs: [ "defn" ]
+				}
+			}]
+
+			"dex.config": yaml.Marshal(#connectors)
+
 			"resource.customizations.health.networking.k8s.io_Ingress": """
 				hs = {}
 				hs.status = "Healthy"

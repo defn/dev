@@ -7,6 +7,15 @@ metadata:
 data:
   kustomize.buildOptions: --enable-helm
   application.resourceTrackingMethod: annotation
+  dex.config: |
+    - type: github
+      id: github
+      name: GitHub
+      config:
+        clientId: $dex-github-oidc.clientID
+        clientSecret: $dex-github-oidc.clientSecret
+        orgs:
+          - defn
   resource.customizations.health.networking.k8s.io_Ingress: |-
     hs = {}
     hs.status = "Healthy"
