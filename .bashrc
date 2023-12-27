@@ -94,59 +94,6 @@ export PRE_COMMIT_ALLOW_NO_CONFIG=1
 if type -P starship >/dev/null; then
 	# starship
 	eval "$(starship init bash)"
-else
-	# powerline-go
-	function render_ps1 {
-		if type -P powerline-go >/dev/null; then
-			powerline-go --colorize-hostname -mode flat -newline \
-				-modules host,ssh,cwd,perms,gitlite,load,exit,venv,kube,shell-var \
-				-shell-var EXTRA
-		else
-			echo '$ '
-		fi
-	}
-
-	function update_ps1 {
-		ls -td /tmp/vscode-ssh-auth-sock* 2>/dev/null | tail -n +2 | xargs rm -f /tmp/.meh
-		EXTRA=""
-
-		local slug=
-		if [[ -f flake.json ]]; then
-			slug="$(jq -r '.slug' flake.json)"
-			if [[ $slug == "null" ]]; then slug=""; fi
-		fi
-
-		local vendor=
-		if [[ -f flake.json ]]; then
-			vendor="$(jq -r '.vendor' flake.json)"
-			if [[ $vendor == "null" ]]; then vendor=""; fi
-		fi
-
-		local revision=
-		if [[ -f flake.json ]]; then
-			revision="$(jq -r '.revision' flake.json)"
-			if [[ $revision == "null" ]]; then revision=""; fi
-		fi
-
-		local version=
-		if [[ -f flake.json ]]; then
-			version="$(jq -r '.version' flake.json)"
-			if [[ $version == "null" ]]; then version=""; fi
-		fi
-
-		if [[ -n ${version-} ]]; then
-			EXTRA="${version-}"
-		else
-			EXTRA="${slug-}${vendor-}${revision:+${vendor:+-}${revision}}"
-		fi
-		EXTRA="${EXTRA:- }"
-		PS1="$(render_ps1)"
-	}
-
-	export EXTRA="${EXTRA:- }"
-	if tty >/dev/null; then
-		PROMPT_COMMAND="_direnv_hook;update_ps1"
-	fi
 fi
 
 # aliases
