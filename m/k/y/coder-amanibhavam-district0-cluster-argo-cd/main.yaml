@@ -21058,6 +21058,7 @@ metadata:
 ---
 apiVersion: v1
 data:
+  redis.compression: none
   server.insecure: "true"
 kind: ConfigMap
 metadata:
