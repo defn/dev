@@ -23,7 +23,7 @@ resource "helm_release" "main" {
   namespace  = local.ns
   repository = "https://charts.loft.sh"
   chart      = "vcluster"
-  version    = "0.17.1"
+  version    = "0.18.1"
 
   set {
     name  = "sync.pods.ephemeralContainers"
