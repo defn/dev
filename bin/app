@@ -7,6 +7,19 @@ function main {
 	repo)
 		exec env KUBECONFIG=$HOME/.kube/config.argocd argocd --core "$@"
 		;;
+	diff)
+		shift
+		app="$1"; shift
+		version="$1"; shift
+		case "${app}" in
+		/*)
+			exec env KUBECTL_EXTERNAL_DIFF="dyff between --color=on --truecolor=on " KUBECONFIG=$HOME/.kube/config.argocd argocd --core app diff "$(app list | tail -n +2 | awk '{print $1}' | fzf --query="${app#/}" --select-1 || true)" --revision "${version}"
+			;;
+		*)
+			exec env KUBECTL_EXTERNAL_DIFF="dyff between --color=on --truecolor=on " KUBECONFIG=$HOME/.kube/config.argocd argocd --core app diff "${app}" --revision "${version}" "$@"
+			;;
+		esac
+		;;
 	sync | get | wait | terminate-op | resources | logs | diff)
 		case "${2-}" in
 		/*)
