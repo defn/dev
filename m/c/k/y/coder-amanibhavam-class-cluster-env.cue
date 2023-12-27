@@ -164,7 +164,7 @@ res: application: "coder-amanibhavam-class-cluster-env": argocd: "coder-amanibha
 		source: {
 			chart:          "library/helm/coder-amanibhavam-class-cluster-external-secrets"
 			repoURL:        "cache.defn.run:5000"
-			targetRevision: "0.0.104"
+			targetRevision: "0.0.105"
 		}
 		syncPolicy: {
 			automated: {

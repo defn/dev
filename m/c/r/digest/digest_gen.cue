@@ -32,7 +32,7 @@ cache: "ghcr.io/coder/coder:v2.6.0": "ghcr.io/coder/coder@sha256:7a3691445ac889b
 
 cache: "ghcr.io/dexidp/dex:v2.37.0": "ghcr.io/dexidp/dex@sha256:f579d00721b0d842328c43a562f50343c54b0048ef2d58d6b54e750c21fc7938"
 
-cache: "ghcr.io/external-secrets/external-secrets:v0.9.10": "ghcr.io/external-secrets/external-secrets@sha256:604df80af3b5f494e1f4e683123352b3eff3e409845d72f22a12276c1a7dfc3c"
+cache: "ghcr.io/external-secrets/external-secrets:v0.9.11": "ghcr.io/external-secrets/external-secrets@sha256:5660a29f1bfbf3666ebd99f692cea46fb12fa209db4fa460a97fd8c00f991671"
 
 cache: "ghcr.io/galleybytes/terraform-operator:v0.16.0": "ghcr.io/galleybytes/terraform-operator@sha256:22dc728858345330a1a34c13074b3c26e0540c89be0aa613a24694bebc1a3123"
 
