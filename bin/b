@@ -4,7 +4,8 @@ source ~/.bash_profile
 
 bazel_cache="${DFD_CACHE:-cache.defn.run}"
 
-bopts="--remote_cache=grpc://${bazel_cache}:9092 --noincompatible_disallow_unsound_directory_outputs --noincompatible_sandbox_hermetic_tmp --action_env=HOME=${HOME} --test_env=HOME=${HOME} --sandbox_writable_path=${HOME}/m/cue.mod/gen --sandbox_writable_path=/nix --sandbox_writable_path=${HOME}/.cache/nix --sandbox_writable_path=${HOME}/.cache/helm --sandbox_writable_path=${HOME}/.cache/go-mod --sandbox_writable_path=${HOME}/.cache/go-build --sandbox_writable_path=${HOME}/.earthly --sandbox_writable_path=${HOME}/m/k --sandbox_writable_path=${HOME}/work"
+# bazel 7: --noincompatible_disallow_unsound_directory_outputs
+bopts="--remote_cache=grpc://${bazel_cache}:9092 --noincompatible_sandbox_hermetic_tmp --action_env=HOME=${HOME} --test_env=HOME=${HOME} --sandbox_writable_path=${HOME}/m/cue.mod/gen --sandbox_writable_path=/nix --sandbox_writable_path=${HOME}/.cache/nix --sandbox_writable_path=${HOME}/.cache/helm --sandbox_writable_path=${HOME}/.cache/go-mod --sandbox_writable_path=${HOME}/.cache/go-build --sandbox_writable_path=${HOME}/.earthly --sandbox_writable_path=${HOME}/m/k --sandbox_writable_path=${HOME}/work"
 
 function bazel {
 	local cmd="$1"
