@@ -2,7 +2,7 @@ https://artifacthub.io/packages/helm/argo/argo-events/2.4.1
 https://artifacthub.io/packages/helm/argo/argo-workflows/0.40.3
 https://artifacthub.io/packages/helm/aws/aws-node-termination-handler/0.21.0
 https://artifacthub.io/packages/helm/bitnami/external-dns/6.28.6
-https://artifacthub.io/packages/helm/bitnami/mastodon/3.2.8
+https://artifacthub.io/packages/helm/bitnami/mastodon/4.0.0
 https://artifacthub.io/packages/helm/cert-manager/cert-manager/1.13.3
 https://artifacthub.io/packages/helm/cert-manager/trust-manager/0.7.0
 https://artifacthub.io/packages/helm/cilium/cilium/1.15.0-rc.0
@@ -18,5 +18,5 @@ https://artifacthub.io/packages/helm/kyverno/kyverno/3.1.2-rc.1
 https://artifacthub.io/packages/helm/linkerd2/linkerd-control-plane/1.16.8
 https://artifacthub.io/packages/helm/linkerd2/linkerd-crds/1.8.0
 https://artifacthub.io/packages/helm/mojo2600/pihole/2.20.0
-https://artifacthub.io/packages/helm/stakater/reloader/1.0.56
+https://artifacthub.io/packages/helm/stakater/reloader/1.0.58
 https://artifacthub.io/packages/helm/traefik/traefik/26.0.0

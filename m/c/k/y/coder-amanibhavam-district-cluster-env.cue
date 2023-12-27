@@ -539,7 +539,7 @@ res: application: "coder-amanibhavam-district-cluster-env": argocd: "coder-amani
 		source: {
 			chart:          "library/helm/coder-amanibhavam-district-cluster-reloader"
 			repoURL:        "cache.defn.run:5000"
-			targetRevision: "0.0.106"
+			targetRevision: "0.0.107"
 		}
 		syncPolicy: {
 			automated: {

@@ -48,7 +48,7 @@ cache: "ghcr.io/kyverno/kyvernopre:v1.10.7": "ghcr.io/kyverno/kyvernopre@sha256:
 
 cache: "ghcr.io/kyverno/reports-controller:v1.10.7": "ghcr.io/kyverno/reports-controller@sha256:8cd609d9f3baaf2091ac1c4b7bd510a086f2f8e0ad6b94997c632c758073cb25"
 
-cache: "ghcr.io/stakater/reloader:v1.0.56": "ghcr.io/stakater/reloader@sha256:caee7a2a0a603c85e4c43b682afea1fc28464be66b88acc04b9c9775754bece3"
+cache: "ghcr.io/stakater/reloader:v1.0.58": "ghcr.io/stakater/reloader@sha256:0507e308573c2cd83a6ab12f154dcd10c1776e26e091d6fc54fd02f5a45c624d"
 
 cache: "goharbor/harbor-core:v2.9.1": "goharbor/harbor-core@sha256:ee70dcf6e7c5a3c1d65a6898eb7d3816cbe760f7971a79e1fed2d529abb12ccd"
 

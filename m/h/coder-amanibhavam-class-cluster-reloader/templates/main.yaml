@@ -58,7 +58,7 @@ metadata:
   labels:
     app: reloader-reloader
     app.kubernetes.io/managed-by: Helm
-    chart: reloader-1.0.56
+    chart: reloader-1.0.58
     heritage: Helm
     release: reloader
   name: reloader-reloader-role
@@ -72,7 +72,7 @@ metadata:
   labels:
     app: reloader-reloader
     app.kubernetes.io/managed-by: Helm
-    chart: reloader-1.0.56
+    chart: reloader-1.0.58
     heritage: Helm
     release: reloader
   name: reloader-reloader-role-binding
@@ -94,7 +94,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/ghcr.io/stakater/reloader@sha256:caee7a2a0a603c85e4c43b682afea1fc28464be66b88acc04b9c9775754bece3
+        - image: cache.defn.run:5000/ghcr.io/stakater/reloader@sha256:0507e308573c2cd83a6ab12f154dcd10c1776e26e091d6fc54fd02f5a45c624d
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 5
@@ -127,12 +127,12 @@ spec:
       labels:
         app: reloader-reloader
         app.kubernetes.io/managed-by: Helm
-        chart: reloader-1.0.56
+        chart: reloader-1.0.58
         group: com.stakater.platform
         heritage: Helm
         provider: stakater
         release: reloader
-        version: v1.0.56
+        version: v1.0.58
   replicas: 1
   revisionHistoryLimit: 2
   selector:
@@ -148,12 +148,12 @@ metadata:
   labels:
     app: reloader-reloader
     app.kubernetes.io/managed-by: Helm
-    chart: reloader-1.0.56
+    chart: reloader-1.0.58
     group: com.stakater.platform
     heritage: Helm
     provider: stakater
     release: reloader
-    version: v1.0.56
+    version: v1.0.58
   name: reloader-reloader
   namespace: reloader
 ---
@@ -166,7 +166,7 @@ metadata:
   labels:
     app: reloader-reloader
     app.kubernetes.io/managed-by: Helm
-    chart: reloader-1.0.56
+    chart: reloader-1.0.58
     heritage: Helm
     release: reloader
   name: reloader-reloader
