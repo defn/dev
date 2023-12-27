@@ -7,3 +7,5 @@ metadata:
 data:
   server.insecure: "true"
   redis.compression: none
+  server.log.level: info
+  exec.enabled: "true"

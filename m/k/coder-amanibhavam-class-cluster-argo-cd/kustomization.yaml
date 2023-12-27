@@ -3,11 +3,13 @@
 patches:
   - path: patch-service-argocd-server.yaml
   - path: patch-configmap-argocd-cmd-params-cm.yaml
+  - path: patch-configmap-argocd-rbac-cm.yaml
   - path: patch-configmap-argocd-cm.yaml
 resources:
   - resource-namespace-argocd.yaml
   - https://raw.githubusercontent.com/argoproj/argo-cd/v2.10.0-rc1/manifests/install.yaml
   - resource-ingress-argo-cd.yaml
+  - resource-externalsecret-dex-github-oidc.yaml
 namespace: argocd
 labels: []
 commonAnnotations: {}

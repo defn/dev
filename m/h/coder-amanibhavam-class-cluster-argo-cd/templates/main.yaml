@@ -1,6 +1,19 @@
 apiVersion: v1
 data:
+  admin.enabled: "false"
   application.resourceTrackingMethod: annotation
+  dex.config: |
+    connectors:
+      - type: github
+        id: github
+        name: GitHub
+        config:
+          clientID: $dex-github-oidc:clientID
+          clientSecret: $dex-github-oidc:clientSecret
+          orgs:
+            - name: defn
+              teams:
+                - dev
   kustomize.buildOptions: --enable-helm
   resource.customizations.health.argoproj.io_Application: |-
     hs = {}
@@ -50,6 +63,7 @@ data:
   resource.customizations.ignoreDifferences.kyverno.io_ClusterPolicy: |
     jqPathExpressions:
       - .spec.rules[] | select(.name|test("autogen-."))
+  url: https://argocd.class.amanibhavam.defn.run
 kind: ConfigMap
 metadata:
   labels:
@@ -60,8 +74,10 @@ metadata:
 ---
 apiVersion: v1
 data:
+  exec.enabled: "true"
   redis.compression: none
   server.insecure: "true"
+  server.log.level: info
 kind: ConfigMap
 metadata:
   labels:
@@ -90,6 +106,9 @@ metadata:
   namespace: argocd
 ---
 apiVersion: v1
+data:
+  policy.csv: g, defn:dev, role:admin
+  policy.default: ""
 kind: ConfigMap
 metadata:
   labels:
@@ -1236,6 +1255,28 @@ metadata:
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
   name: argocd-server
+  namespace: argocd
+---
+spec:
+  data:
+    - remoteRef:
+        key: coder-amanibhavam-class-cluster
+        property: dex_github_client_id
+      secretKey: clientID
+    - remoteRef:
+        key: coder-amanibhavam-class-cluster
+        property: dex_github_client_secret
+      secretKey: clientSecret
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: coder-amanibhavam-class
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  labels:
+    app.kubernetes.io/part-of: argocd
+  name: dex-github-oidc
   namespace: argocd
 ---
 spec:

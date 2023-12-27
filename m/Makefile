@@ -143,9 +143,6 @@ vc-argocd:
 	-env KUBECONFIG=$$HOME/.kube/config-in-cluster:$$HOME/.kube/config argocd cluster --kube-context dfd --core rm $(env)-cluster --yes
 	env KUBECONFIG=$$HOME/.kube/config-in-cluster:$$HOME/.kube/config argocd cluster --kube-context dfd --core add $(env)-cluster --yes --upsert
 
-vc-init:
-	kubectl patch -n argocd secret argocd-secret -p '{"stringData": { "admin.password": "'$$(htpasswd -bnBC 10 "" admin | tr -d ':\n')'"}}'
-
 vc:
 	$(MAKE) vc-context
 	chmod 0600 ~/.kube/config
@@ -153,7 +150,6 @@ vc:
 	cp $$HOME/.kube/config-in-cluster $$HOME/.kube/config.argocd
 	env KUBECONFIG=$$HOME/.kube/config-in-cluster kubectl apply -f e/$(env)-cluster.yaml
 	cd c && env KUBECONFIG=$$HOME/.kube/config-in-cluster $(MAKE) update-env env=$(env)
-	$(MAKE) vc-init
 
 dev:
 	cp /home/ubuntu/.kube/config /home/ubuntu/.kube/config.argocd

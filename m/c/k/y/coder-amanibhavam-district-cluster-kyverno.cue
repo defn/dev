@@ -15,8 +15,8 @@ res: customresourcedefinition: "coder-amanibhavam-district-cluster-kyverno": clu
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "admissionreports.kyverno.io"
 	}
@@ -365,8 +365,8 @@ res: customresourcedefinition: "coder-amanibhavam-district-cluster-kyverno": clu
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "backgroundscanreports.kyverno.io"
 	}
@@ -681,8 +681,8 @@ res: customresourcedefinition: "coder-amanibhavam-district-cluster-kyverno": clu
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "cleanuppolicies.kyverno.io"
 	}
@@ -1740,8 +1740,8 @@ res: customresourcedefinition: "coder-amanibhavam-district-cluster-kyverno": clu
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "clusteradmissionreports.kyverno.io"
 	}
@@ -2091,8 +2091,8 @@ res: customresourcedefinition: "coder-amanibhavam-district-cluster-kyverno": clu
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "clusterbackgroundscanreports.kyverno.io"
 	}
@@ -2407,8 +2407,8 @@ res: customresourcedefinition: "coder-amanibhavam-district-cluster-kyverno": clu
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "clustercleanuppolicies.kyverno.io"
 	}
@@ -3466,8 +3466,8 @@ res: customresourcedefinition: "coder-amanibhavam-district-cluster-kyverno": clu
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "clusterpolicies.kyverno.io"
 	}
@@ -16574,8 +16574,8 @@ res: customresourcedefinition: "coder-amanibhavam-district-cluster-kyverno": clu
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "clusterpolicyreports.wgpolicyk8s.io"
 	}
@@ -16956,8 +16956,8 @@ res: customresourcedefinition: "coder-amanibhavam-district-cluster-kyverno": clu
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "policies.kyverno.io"
 	}
@@ -30065,8 +30065,8 @@ res: customresourcedefinition: "coder-amanibhavam-district-cluster-kyverno": clu
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "policyexceptions.kyverno.io"
 	}
@@ -30568,8 +30568,8 @@ res: customresourcedefinition: "coder-amanibhavam-district-cluster-kyverno": clu
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "policyreports.wgpolicyk8s.io"
 	}
@@ -30949,8 +30949,8 @@ res: customresourcedefinition: "coder-amanibhavam-district-cluster-kyverno": clu
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "updaterequests.kyverno.io"
 	}
@@ -31376,8 +31376,8 @@ res: serviceaccount: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyv
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-admission-controller"
 		namespace: "kyverno"
@@ -31392,8 +31392,8 @@ res: serviceaccount: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyv
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-background-controller"
 		namespace: "kyverno"
@@ -31408,8 +31408,8 @@ res: serviceaccount: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyv
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-cleanup-controller"
 		namespace: "kyverno"
@@ -31423,8 +31423,8 @@ res: serviceaccount: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyv
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-cleanup-jobs"
 		namespace: "kyverno"
@@ -31439,8 +31439,8 @@ res: serviceaccount: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyv
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-reports-controller"
 		namespace: "kyverno"
@@ -31455,8 +31455,8 @@ res: role: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno:admis
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno:admission-controller"
 		namespace: "kyverno"
@@ -31518,8 +31518,8 @@ res: role: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno:backg
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno:background-controller"
 		namespace: "kyverno"
@@ -31557,8 +31557,8 @@ res: role: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno:clean
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno:cleanup-controller"
 		namespace: "kyverno"
@@ -31607,8 +31607,8 @@ res: role: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno:repor
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno:reports-controller"
 		namespace: "kyverno"
@@ -31645,8 +31645,8 @@ res: clusterrole: "coder-amanibhavam-district-cluster-kyverno": cluster: "kyvern
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "kyverno-cleanup-jobs"
 	}
@@ -31679,8 +31679,8 @@ res: clusterrole: "coder-amanibhavam-district-cluster-kyverno": cluster: "kyvern
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "kyverno:admission-controller"
 	}
@@ -31694,8 +31694,8 @@ res: clusterrole: "coder-amanibhavam-district-cluster-kyverno": cluster: "kyvern
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "kyverno:admission-controller:core"
 	}
@@ -31810,8 +31810,8 @@ res: clusterrole: "coder-amanibhavam-district-cluster-kyverno": cluster: "kyvern
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "kyverno:background-controller"
 	}
@@ -31847,8 +31847,8 @@ res: clusterrole: "coder-amanibhavam-district-cluster-kyverno": cluster: "kyvern
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "kyverno:background-controller:core"
 	}
@@ -31964,8 +31964,8 @@ res: clusterrole: "coder-amanibhavam-district-cluster-kyverno": cluster: "kyvern
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "kyverno:cleanup-controller"
 	}
@@ -31979,8 +31979,8 @@ res: clusterrole: "coder-amanibhavam-district-cluster-kyverno": cluster: "kyvern
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "kyverno:cleanup-controller:core"
 	}
@@ -32058,8 +32058,8 @@ res: clusterrole: "coder-amanibhavam-district-cluster-kyverno": cluster: "kyvern
 			"app.kubernetes.io/instance":                   "kyverno"
 			"app.kubernetes.io/managed-by":                 "Helm"
 			"app.kubernetes.io/part-of":                    "kyverno"
-			"app.kubernetes.io/version":                    "3.0.8"
-			"helm.sh/chart":                                "kyverno-3.0.8"
+			"app.kubernetes.io/version":                    "3.0.9"
+			"helm.sh/chart":                                "kyverno-3.0.9"
 			"rbac.authorization.k8s.io/aggregate-to-admin": "true"
 		}
 		name: "kyverno:rbac:admin:policies"
@@ -32092,8 +32092,8 @@ res: clusterrole: "coder-amanibhavam-district-cluster-kyverno": cluster: "kyvern
 			"app.kubernetes.io/instance":                   "kyverno"
 			"app.kubernetes.io/managed-by":                 "Helm"
 			"app.kubernetes.io/part-of":                    "kyverno"
-			"app.kubernetes.io/version":                    "3.0.8"
-			"helm.sh/chart":                                "kyverno-3.0.8"
+			"app.kubernetes.io/version":                    "3.0.9"
+			"helm.sh/chart":                                "kyverno-3.0.9"
 			"rbac.authorization.k8s.io/aggregate-to-admin": "true"
 		}
 		name: "kyverno:rbac:admin:policyreports"
@@ -32124,8 +32124,8 @@ res: clusterrole: "coder-amanibhavam-district-cluster-kyverno": cluster: "kyvern
 			"app.kubernetes.io/instance":                   "kyverno"
 			"app.kubernetes.io/managed-by":                 "Helm"
 			"app.kubernetes.io/part-of":                    "kyverno"
-			"app.kubernetes.io/version":                    "3.0.8"
-			"helm.sh/chart":                                "kyverno-3.0.8"
+			"app.kubernetes.io/version":                    "3.0.9"
+			"helm.sh/chart":                                "kyverno-3.0.9"
 			"rbac.authorization.k8s.io/aggregate-to-admin": "true"
 		}
 		name: "kyverno:rbac:admin:reports"
@@ -32158,8 +32158,8 @@ res: clusterrole: "coder-amanibhavam-district-cluster-kyverno": cluster: "kyvern
 			"app.kubernetes.io/instance":                   "kyverno"
 			"app.kubernetes.io/managed-by":                 "Helm"
 			"app.kubernetes.io/part-of":                    "kyverno"
-			"app.kubernetes.io/version":                    "3.0.8"
-			"helm.sh/chart":                                "kyverno-3.0.8"
+			"app.kubernetes.io/version":                    "3.0.9"
+			"helm.sh/chart":                                "kyverno-3.0.9"
 			"rbac.authorization.k8s.io/aggregate-to-admin": "true"
 		}
 		name: "kyverno:rbac:admin:updaterequests"
@@ -32187,8 +32187,8 @@ res: clusterrole: "coder-amanibhavam-district-cluster-kyverno": cluster: "kyvern
 			"app.kubernetes.io/instance":                  "kyverno"
 			"app.kubernetes.io/managed-by":                "Helm"
 			"app.kubernetes.io/part-of":                   "kyverno"
-			"app.kubernetes.io/version":                   "3.0.8"
-			"helm.sh/chart":                               "kyverno-3.0.8"
+			"app.kubernetes.io/version":                   "3.0.9"
+			"helm.sh/chart":                               "kyverno-3.0.9"
 			"rbac.authorization.k8s.io/aggregate-to-view": "true"
 		}
 		name: "kyverno:rbac:view:policies"
@@ -32217,8 +32217,8 @@ res: clusterrole: "coder-amanibhavam-district-cluster-kyverno": cluster: "kyvern
 			"app.kubernetes.io/instance":                  "kyverno"
 			"app.kubernetes.io/managed-by":                "Helm"
 			"app.kubernetes.io/part-of":                   "kyverno"
-			"app.kubernetes.io/version":                   "3.0.8"
-			"helm.sh/chart":                               "kyverno-3.0.8"
+			"app.kubernetes.io/version":                   "3.0.9"
+			"helm.sh/chart":                               "kyverno-3.0.9"
 			"rbac.authorization.k8s.io/aggregate-to-view": "true"
 		}
 		name: "kyverno:rbac:view:policyreports"
@@ -32245,8 +32245,8 @@ res: clusterrole: "coder-amanibhavam-district-cluster-kyverno": cluster: "kyvern
 			"app.kubernetes.io/instance":                  "kyverno"
 			"app.kubernetes.io/managed-by":                "Helm"
 			"app.kubernetes.io/part-of":                   "kyverno"
-			"app.kubernetes.io/version":                   "3.0.8"
-			"helm.sh/chart":                               "kyverno-3.0.8"
+			"app.kubernetes.io/version":                   "3.0.9"
+			"helm.sh/chart":                               "kyverno-3.0.9"
 			"rbac.authorization.k8s.io/aggregate-to-view": "true"
 		}
 		name: "kyverno:rbac:view:reports"
@@ -32275,8 +32275,8 @@ res: clusterrole: "coder-amanibhavam-district-cluster-kyverno": cluster: "kyvern
 			"app.kubernetes.io/instance":                  "kyverno"
 			"app.kubernetes.io/managed-by":                "Helm"
 			"app.kubernetes.io/part-of":                   "kyverno"
-			"app.kubernetes.io/version":                   "3.0.8"
-			"helm.sh/chart":                               "kyverno-3.0.8"
+			"app.kubernetes.io/version":                   "3.0.9"
+			"helm.sh/chart":                               "kyverno-3.0.9"
 			"rbac.authorization.k8s.io/aggregate-to-view": "true"
 		}
 		name: "kyverno:rbac:view:updaterequests"
@@ -32307,8 +32307,8 @@ res: clusterrole: "coder-amanibhavam-district-cluster-kyverno": cluster: "kyvern
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "kyverno:reports-controller"
 	}
@@ -32322,8 +32322,8 @@ res: clusterrole: "coder-amanibhavam-district-cluster-kyverno": cluster: "kyvern
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "kyverno:reports-controller:core"
 	}
@@ -32392,8 +32392,8 @@ res: rolebinding: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyvern
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno:admission-controller"
 		namespace: "kyverno"
@@ -32418,8 +32418,8 @@ res: rolebinding: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyvern
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno:background-controller"
 		namespace: "kyverno"
@@ -32444,8 +32444,8 @@ res: rolebinding: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyvern
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno:cleanup-controller"
 		namespace: "kyverno"
@@ -32470,8 +32470,8 @@ res: rolebinding: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyvern
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno:reports-controller"
 		namespace: "kyverno"
@@ -32495,8 +32495,8 @@ res: clusterrolebinding: "coder-amanibhavam-district-cluster-kyverno": cluster: 
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "kyverno-cleanup-jobs"
 	}
@@ -32520,8 +32520,8 @@ res: clusterrolebinding: "coder-amanibhavam-district-cluster-kyverno": cluster: 
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "kyverno:admission-controller"
 	}
@@ -32545,8 +32545,8 @@ res: clusterrolebinding: "coder-amanibhavam-district-cluster-kyverno": cluster: 
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "kyverno:background-controller"
 	}
@@ -32570,8 +32570,8 @@ res: clusterrolebinding: "coder-amanibhavam-district-cluster-kyverno": cluster: 
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "kyverno:cleanup-controller"
 	}
@@ -32595,8 +32595,8 @@ res: clusterrolebinding: "coder-amanibhavam-district-cluster-kyverno": cluster: 
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name: "kyverno:reports-controller"
 	}
@@ -32629,8 +32629,8 @@ res: configmap: "coder-amanibhavam-district-cluster-kyverno": kyverno: kyverno: 
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno"
 		namespace: "kyverno"
@@ -32646,8 +32646,8 @@ res: configmap: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno-
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-metrics"
 		namespace: "kyverno"
@@ -32662,8 +32662,8 @@ res: service: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno-ba
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-background-controller-metrics"
 		namespace: "kyverno"
@@ -32692,8 +32692,8 @@ res: service: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno-cl
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-cleanup-controller"
 		namespace: "kyverno"
@@ -32722,8 +32722,8 @@ res: service: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno-cl
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-cleanup-controller-metrics"
 		namespace: "kyverno"
@@ -32752,8 +32752,8 @@ res: service: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno-re
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-reports-controller-metrics"
 		namespace: "kyverno"
@@ -32782,8 +32782,8 @@ res: service: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno-sv
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-svc"
 		namespace: "kyverno"
@@ -32812,8 +32812,8 @@ res: service: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno-sv
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-svc-metrics"
 		namespace: "kyverno"
@@ -32842,8 +32842,8 @@ res: deployment: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-admission-controller"
 		namespace: "kyverno"
@@ -32867,8 +32867,8 @@ res: deployment: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno
 				"app.kubernetes.io/instance":   "kyverno"
 				"app.kubernetes.io/managed-by": "Helm"
 				"app.kubernetes.io/part-of":    "kyverno"
-				"app.kubernetes.io/version":    "3.0.8"
-				"helm.sh/chart":                "kyverno-3.0.8"
+				"app.kubernetes.io/version":    "3.0.9"
+				"helm.sh/chart":                "kyverno-3.0.9"
 			}
 			spec: {
 				affinity: podAntiAffinity: preferredDuringSchedulingIgnoredDuringExecution: [{
@@ -32927,7 +32927,7 @@ res: deployment: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno
 						name:  "KYVERNO_DEPLOYMENT"
 						value: "kyverno-admission-controller"
 					}]
-					image:           "ghcr.io/kyverno/kyverno:v1.10.6"
+					image:           "ghcr.io/kyverno/kyverno:v1.10.7"
 					imagePullPolicy: "IfNotPresent"
 					livenessProbe: {
 						failureThreshold: 2
@@ -33018,7 +33018,7 @@ res: deployment: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno
 						name:  "KYVERNO_SVC"
 						value: "kyverno-svc"
 					}]
-					image:           "ghcr.io/kyverno/kyvernopre:v1.10.6"
+					image:           "ghcr.io/kyverno/kyvernopre:v1.10.7"
 					imagePullPolicy: "IfNotPresent"
 					name:            "kyverno-pre"
 					resources: {
@@ -33058,8 +33058,8 @@ res: deployment: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-background-controller"
 		namespace: "kyverno"
@@ -33083,8 +33083,8 @@ res: deployment: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno
 				"app.kubernetes.io/instance":   "kyverno"
 				"app.kubernetes.io/managed-by": "Helm"
 				"app.kubernetes.io/part-of":    "kyverno"
-				"app.kubernetes.io/version":    "3.0.8"
-				"helm.sh/chart":                "kyverno-3.0.8"
+				"app.kubernetes.io/version":    "3.0.9"
+				"helm.sh/chart":                "kyverno-3.0.9"
 			}
 			spec: {
 				affinity: podAntiAffinity: preferredDuringSchedulingIgnoredDuringExecution: [{
@@ -33122,7 +33122,7 @@ res: deployment: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno
 						name: "KYVERNO_NAMESPACE"
 						valueFrom: fieldRef: fieldPath: "metadata.namespace"
 					}]
-					image: "ghcr.io/kyverno/background-controller:v1.10.6"
+					image: "ghcr.io/kyverno/background-controller:v1.10.7"
 					name:  "controller"
 					ports: [{
 						containerPort: 9443
@@ -33164,8 +33164,8 @@ res: deployment: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-cleanup-controller"
 		namespace: "kyverno"
@@ -33189,8 +33189,8 @@ res: deployment: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno
 				"app.kubernetes.io/instance":   "kyverno"
 				"app.kubernetes.io/managed-by": "Helm"
 				"app.kubernetes.io/part-of":    "kyverno"
-				"app.kubernetes.io/version":    "3.0.8"
-				"helm.sh/chart":                "kyverno-3.0.8"
+				"app.kubernetes.io/version":    "3.0.9"
+				"helm.sh/chart":                "kyverno-3.0.9"
 			}
 			spec: {
 				affinity: podAntiAffinity: preferredDuringSchedulingIgnoredDuringExecution: [{
@@ -33234,7 +33234,7 @@ res: deployment: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno
 						name:  "KYVERNO_SVC"
 						value: "kyverno-cleanup-controller"
 					}]
-					image: "ghcr.io/kyverno/cleanup-controller:v1.10.6"
+					image: "ghcr.io/kyverno/cleanup-controller:v1.10.7"
 					livenessProbe: {
 						failureThreshold: 2
 						httpGet: {
@@ -33310,8 +33310,8 @@ res: deployment: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-reports-controller"
 		namespace: "kyverno"
@@ -33335,8 +33335,8 @@ res: deployment: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno
 				"app.kubernetes.io/instance":   "kyverno"
 				"app.kubernetes.io/managed-by": "Helm"
 				"app.kubernetes.io/part-of":    "kyverno"
-				"app.kubernetes.io/version":    "3.0.8"
-				"helm.sh/chart":                "kyverno-3.0.8"
+				"app.kubernetes.io/version":    "3.0.9"
+				"helm.sh/chart":                "kyverno-3.0.9"
 			}
 			spec: {
 				affinity: podAntiAffinity: preferredDuringSchedulingIgnoredDuringExecution: [{
@@ -33386,7 +33386,7 @@ res: deployment: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno
 						name:  "TUF_ROOT"
 						value: "/.sigstore"
 					}]
-					image: "ghcr.io/kyverno/reports-controller:v1.10.6"
+					image: "ghcr.io/kyverno/reports-controller:v1.10.7"
 					name:  "controller"
 					ports: [{
 						containerPort: 9443
@@ -33436,8 +33436,8 @@ res: cronjob: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno-cl
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-cleanup-admission-reports"
 		namespace: "kyverno"
@@ -33491,8 +33491,8 @@ res: cronjob: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno-cl
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-cleanup-cluster-admission-reports"
 		namespace: "kyverno"
@@ -33550,8 +33550,8 @@ res: job: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno-hook-p
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-hook-pre-delete"
 		namespace: "kyverno"
@@ -33589,8 +33589,8 @@ res: pod: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno-admiss
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-admission-controller-liveness"
 		namespace: "kyverno"
@@ -33639,8 +33639,8 @@ res: pod: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno-admiss
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-admission-controller-metrics"
 		namespace: "kyverno"
@@ -33689,8 +33689,8 @@ res: pod: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno-admiss
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-admission-controller-readiness"
 		namespace: "kyverno"
@@ -33739,8 +33739,8 @@ res: pod: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno-cleanu
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-cleanup-controller-liveness"
 		namespace: "kyverno"
@@ -33789,8 +33789,8 @@ res: pod: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno-cleanu
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-cleanup-controller-metrics"
 		namespace: "kyverno"
@@ -33839,8 +33839,8 @@ res: pod: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno-cleanu
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-cleanup-controller-readiness"
 		namespace: "kyverno"
@@ -33889,8 +33889,8 @@ res: pod: "coder-amanibhavam-district-cluster-kyverno": kyverno: "kyverno-report
 			"app.kubernetes.io/instance":   "kyverno"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/part-of":    "kyverno"
-			"app.kubernetes.io/version":    "3.0.8"
-			"helm.sh/chart":                "kyverno-3.0.8"
+			"app.kubernetes.io/version":    "3.0.9"
+			"helm.sh/chart":                "kyverno-3.0.9"
 		}
 		name:      "kyverno-reports-controller-metrics"
 		namespace: "kyverno"

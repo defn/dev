@@ -121,11 +121,49 @@ kustomize: "argo-cd": #Kustomize & {
 		kind:       "ConfigMap"
 		metadata: name: "argocd-cmd-params-cm"
 		data: {
-			"server.insecure": "true"
+			"server.insecure":   "true"
 			"redis.compression": "none"
+			"server.log.level":  "info"
+			"exec.enabled":      "true"
 		}
 	}
 
+	psm: "configmap-argocd-rbac-cm": {
+		apiVersion: "v1"
+		kind:       "ConfigMap"
+		metadata: name: "argocd-rbac-cm"
+		data: {
+			"policy.default": ""
+			"policy.csv": """
+				g, defn:dev, role:admin
+				"""
+		}
+	}
+
+	resource: "externalsecret-dex-github-oidc": {
+		apiVersion: "external-secrets.io/v1beta1"
+		kind:       "ExternalSecret"
+		metadata: {
+			name: "dex-github-oidc"
+			labels: "app.kubernetes.io/part-of": "argocd"
+		}
+		spec: {
+			refreshInterval: "1h"
+			secretStoreRef: {
+				kind: "ClusterSecretStore"
+				name: cluster.cluster_name
+			}
+			data: [{
+				secretKey: "clientID"
+				remoteRef: key:      "\(cluster.cluster_name)-cluster"
+				remoteRef: property: "dex_github_client_id"
+			}, {
+				secretKey: "clientSecret"
+				remoteRef: key:      "\(cluster.cluster_name)-cluster"
+				remoteRef: property: "dex_github_client_secret"
+			}]
+		}
+	}
 	psm: "configmap-argocd-cm": {
 		apiVersion: "v1"
 		kind:       "ConfigMap"
@@ -134,6 +172,31 @@ kustomize: "argo-cd": #Kustomize & {
 			"kustomize.buildOptions": "--enable-helm"
 
 			"application.resourceTrackingMethod": "annotation"
+
+			#connectors: connectors: [{
+				type: "github"
+				id:   "github"
+				name: "GitHub"
+				config: {
+					clientID:     "$dex-github-oidc:clientID"
+					clientSecret: "$dex-github-oidc:clientSecret"
+					orgs: [{
+						name: "defn"
+						teams: ["dev"]
+					}]
+				}
+			}]
+
+			"admin.enabled": "false"
+
+			"dex.config": yaml.Marshal(#connectors)
+
+			if cluster.parent_env == cluster.env {
+				url: "https://argocd.\(cluster.domain_name)"
+			}
+			if cluster.parent_env != cluster.env {
+				url: "https://argocd-\(cluster.env).\(cluster.domain_name)"
+			}
 
 			"resource.customizations.health.networking.k8s.io_Ingress": """
 				hs = {}
@@ -211,7 +274,7 @@ kustomize: "kyverno": #KustomizeHelm & {
 	helm: {
 		release: "kyverno"
 		name:    "kyverno"
-		version: "3.0.8"
+		version: "3.0.9"
 		repo:    "https://kyverno.github.io/kyverno"
 		values: {
 			replicaCount: 1
@@ -331,7 +394,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 		version: "6.28.6"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
-			logLevel: "debug"
+			logLevel: "info"
 			sources: [
 				"service",
 				"ingress",
@@ -1999,7 +2062,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "3.2.8"
+		version:     "4.0.0"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
@@ -2903,7 +2966,7 @@ kustomize: "reloader": #KustomizeHelm & {
 		release:   "reloader"
 		name:      "reloader"
 		namespace: "reloader"
-		version:   "1.0.56"
+		version:   "1.0.58"
 		repo:      "https://stakater.github.io/stakater-charts"
 		values: {
 		}

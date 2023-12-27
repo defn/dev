@@ -14,7 +14,7 @@ res: application: "coder-amanibhavam-class-cluster-env": argocd: "coder-amanibha
 		source: {
 			chart:          "library/helm/coder-amanibhavam-class-cluster-argo-cd"
 			repoURL:        "cache.defn.run:5000"
-			targetRevision: "0.0.106"
+			targetRevision: "0.0.123"
 		}
 		syncPolicy: {
 			automated: {
@@ -139,7 +139,7 @@ res: application: "coder-amanibhavam-class-cluster-env": argocd: "coder-amanibha
 		source: {
 			chart:          "library/helm/coder-amanibhavam-class-cluster-external-dns"
 			repoURL:        "cache.defn.run:5000"
-			targetRevision: "0.0.110"
+			targetRevision: "0.0.111"
 		}
 		syncPolicy: {
 			automated: {
@@ -239,7 +239,7 @@ res: application: "coder-amanibhavam-class-cluster-env": argocd: "coder-amanibha
 		source: {
 			chart:          "library/helm/coder-amanibhavam-class-cluster-kyverno"
 			repoURL:        "cache.defn.run:5000"
-			targetRevision: "0.0.110"
+			targetRevision: "0.0.111"
 		}
 		syncPolicy: {
 			automated: {
@@ -364,7 +364,7 @@ res: application: "coder-amanibhavam-class-cluster-env": argocd: "coder-amanibha
 		source: {
 			chart:          "library/helm/coder-amanibhavam-class-cluster-reloader"
 			repoURL:        "cache.defn.run:5000"
-			targetRevision: "0.0.106"
+			targetRevision: "0.0.107"
 		}
 		syncPolicy: {
 			automated: {

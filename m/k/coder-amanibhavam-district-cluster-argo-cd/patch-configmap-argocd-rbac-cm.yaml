@@ -1,0 +1,9 @@
+#ManagedBy: cue
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-rbac-cm
+data:
+  policy.default: ""
+  policy.csv: g, defn:dev, role:admin

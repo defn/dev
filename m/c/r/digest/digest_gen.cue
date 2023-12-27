@@ -38,17 +38,17 @@ cache: "ghcr.io/galleybytes/terraform-operator:v0.16.0": "ghcr.io/galleybytes/te
 
 cache: "ghcr.io/headlamp-k8s/headlamp:v0.21.0": "ghcr.io/headlamp-k8s/headlamp@sha256:7a9587036bd29304f8f1387a7245556a3c479434670b2ca58e3624d44d2a68c9"
 
-cache: "ghcr.io/kyverno/background-controller:v1.10.6": "ghcr.io/kyverno/background-controller@sha256:e624c35605f48fe6c3bf34a56ead31012a9ac1a5dd82732d44597ba2441739c5"
+cache: "ghcr.io/kyverno/background-controller:v1.10.7": "ghcr.io/kyverno/background-controller@sha256:531bc8d25e4aa658832991910a07a5ac0ca068e78ac7b653ad9073dfdc63ff8d"
 
-cache: "ghcr.io/kyverno/cleanup-controller:v1.10.6": "ghcr.io/kyverno/cleanup-controller@sha256:7249670af666b18c103f3784b916e051878e4c3d76d7cf64fc413d5d5d689d85"
+cache: "ghcr.io/kyverno/cleanup-controller:v1.10.7": "ghcr.io/kyverno/cleanup-controller@sha256:eae20b9125fc4f63f46d35841d7ac131167510aa629b6da2385c859471dab1ca"
 
-cache: "ghcr.io/kyverno/kyverno:v1.10.6": "ghcr.io/kyverno/kyverno@sha256:902f8e245abd1e446738b5068ca8a8841f95c29b68f46c2550851885a764bfdc"
+cache: "ghcr.io/kyverno/kyverno:v1.10.7": "ghcr.io/kyverno/kyverno@sha256:a76ec260bdac78be64aff22d1ec76a180d3b2fe4026738407f1a7e535d21192b"
 
-cache: "ghcr.io/kyverno/kyvernopre:v1.10.6": "ghcr.io/kyverno/kyvernopre@sha256:52163caa39388e1a315afbeb6fb2dace3ac71320d9f0a9638c4c63dbf16d6b92"
+cache: "ghcr.io/kyverno/kyvernopre:v1.10.7": "ghcr.io/kyverno/kyvernopre@sha256:49fe4eb4cfa7b699d0b77c88b75afbff76ce5e052662fbd8c6025eda4e0e2375"
 
-cache: "ghcr.io/kyverno/reports-controller:v1.10.6": "ghcr.io/kyverno/reports-controller@sha256:9d4f04481b4906b14d46f366a94d7050629961c2ffcb48db0620a56cf283a2a7"
+cache: "ghcr.io/kyverno/reports-controller:v1.10.7": "ghcr.io/kyverno/reports-controller@sha256:8cd609d9f3baaf2091ac1c4b7bd510a086f2f8e0ad6b94997c632c758073cb25"
 
-cache: "ghcr.io/stakater/reloader:v1.0.56": "ghcr.io/stakater/reloader@sha256:caee7a2a0a603c85e4c43b682afea1fc28464be66b88acc04b9c9775754bece3"
+cache: "ghcr.io/stakater/reloader:v1.0.58": "ghcr.io/stakater/reloader@sha256:0507e308573c2cd83a6ab12f154dcd10c1776e26e091d6fc54fd02f5a45c624d"
 
 cache: "goharbor/harbor-core:v2.9.1": "goharbor/harbor-core@sha256:ee70dcf6e7c5a3c1d65a6898eb7d3816cbe760f7971a79e1fed2d529abb12ccd"
 
