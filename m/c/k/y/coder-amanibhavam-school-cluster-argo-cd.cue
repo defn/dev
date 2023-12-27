@@ -22090,16 +22090,20 @@ res: clusterrolebinding: "coder-amanibhavam-school-cluster-argo-cd": cluster: "a
 res: configmap: "coder-amanibhavam-school-cluster-argo-cd": argocd: "argocd-cm": {
 	apiVersion: "v1"
 	data: {
+		"admin.enabled":                      "false"
 		"application.resourceTrackingMethod": "annotation"
 		"dex.config": """
-			- type: github
-			  id: github
-			  name: GitHub
-			  config:
-			    clientId: $dex-github-oidc.clientID
-			    clientSecret: $dex-github-oidc.clientSecret
-			    orgs:
-			      - defn
+			connectors:
+			  - type: github
+			    id: github
+			    name: GitHub
+			    config:
+			      clientID: b53d65c678448ac93daf
+			      clientSecret: $dex-github-oidc:clientSecret
+			      orgs:
+			        - name: defn
+			          teams:
+			            - dev
 
 			"""
 
@@ -22169,8 +22173,9 @@ res: configmap: "coder-amanibhavam-school-cluster-argo-cd": argocd: "argocd-cm":
 			  - .spec.rules[] | select(.name|test(\"autogen-.\"))
 
 			"""
-	}
 
+		url: "https://argocd.school.amanibhavam.defn.run"
+	}
 	kind: "ConfigMap"
 	metadata: {
 		labels: {
@@ -22184,8 +22189,10 @@ res: configmap: "coder-amanibhavam-school-cluster-argo-cd": argocd: "argocd-cm":
 res: configmap: "coder-amanibhavam-school-cluster-argo-cd": argocd: "argocd-cmd-params-cm": {
 	apiVersion: "v1"
 	data: {
+		"exec.enabled":      "true"
 		"redis.compression": "none"
 		"server.insecure":   "true"
+		"server.log.level":  "info"
 	}
 	kind: "ConfigMap"
 	metadata: {
@@ -22224,7 +22231,11 @@ res: configmap: "coder-amanibhavam-school-cluster-argo-cd": argocd: "argocd-noti
 }
 res: configmap: "coder-amanibhavam-school-cluster-argo-cd": argocd: "argocd-rbac-cm": {
 	apiVersion: "v1"
-	kind:       "ConfigMap"
+	data: {
+		"policy.csv":     "g, defn:dev, role:admin"
+		"policy.default": ""
+	}
+	kind: "ConfigMap"
 	metadata: {
 		labels: {
 			"app.kubernetes.io/name":    "argocd-rbac-cm"
@@ -24072,6 +24083,35 @@ res: statefulset: "coder-amanibhavam-school-cluster-argo-cd": argocd: "argocd-ap
 					}
 				}]
 			}
+		}
+	}
+}
+res: externalsecret: "coder-amanibhavam-school-cluster-argo-cd": argocd: "dex-github-oidc": {
+	apiVersion: "external-secrets.io/v1beta1"
+	kind:       "ExternalSecret"
+	metadata: {
+		labels: "app.kubernetes.io/part-of": "argocd"
+		name:      "dex-github-oidc"
+		namespace: "argocd"
+	}
+	spec: {
+		data: [{
+			remoteRef: {
+				key:      "coder-amanibhavam-school-cluster"
+				property: "dex_github_client_id"
+			}
+			secretKey: "clientID"
+		}, {
+			remoteRef: {
+				key:      "coder-amanibhavam-school-cluster"
+				property: "dex_github_client_secret"
+			}
+			secretKey: "clientSecret"
+		}]
+		refreshInterval: "1h"
+		secretStoreRef: {
+			kind: "ClusterSecretStore"
+			name: "coder-amanibhavam-school"
 		}
 	}
 }

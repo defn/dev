@@ -82,7 +82,8 @@ function make_up {
 	env KUBECONFIG=$HOME/.kube/config.argocd kubectl -n argocd rollout status deployment/argocd-repo-server
 
 	# patch argocd admin password
-	env KUBECONFIG=$HOME/.kube/config.argocd kubectl patch secret argocd-secret -p '{"stringData": { "admin.password": "'$(htpasswd -bnBC 10 "" admin | tr -d ':\n')'"}}'
+	# not needed if dex is configured
+	# env KUBECONFIG=$HOME/.kube/config.argocd kubectl patch secret argocd-secret -p '{"stringData": { "admin.password": "'$(htpasswd -bnBC 10 "" admin | tr -d ':\n')'"}}'
 
 	# add k3s to argocd
 	while true; do

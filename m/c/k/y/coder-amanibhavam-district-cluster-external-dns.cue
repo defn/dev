@@ -249,7 +249,7 @@ res: deployment: "coder-amanibhavam-district-cluster-external-dns": "external-dn
 				containers: [{
 					args: [
 						"--metrics-address=:7979",
-						"--log-level=debug",
+						"--log-level=info",
 						"--log-format=text",
 						"--publish-internal-services",
 						"--service-type-filter=ClusterIP",

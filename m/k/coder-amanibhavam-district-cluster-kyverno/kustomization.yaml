@@ -11,7 +11,7 @@ commonAnnotations: {}
 helmCharts:
   - releaseName: kyverno
     name: kyverno
-    version: 3.0.8
+    version: 3.0.9
     repo: https://kyverno.github.io/kyverno
     namespace: kyverno
     valuesInline:

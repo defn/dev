@@ -7,15 +7,19 @@ metadata:
 data:
   kustomize.buildOptions: --enable-helm
   application.resourceTrackingMethod: annotation
+  admin.enabled: "false"
   dex.config: |
-    - type: github
-      id: github
-      name: GitHub
-      config:
-        clientId: $dex-github-oidc.clientID
-        clientSecret: $dex-github-oidc.clientSecret
-        orgs:
-          - defn
+    connectors:
+      - type: github
+        id: github
+        name: GitHub
+        config:
+          clientID: b53d65c678448ac93daf
+          clientSecret: $dex-github-oidc:clientSecret
+          orgs:
+            - name: defn
+              teams:
+                - dev
   resource.customizations.health.networking.k8s.io_Ingress: |-
     hs = {}
     hs.status = "Healthy"
@@ -61,6 +65,7 @@ data:
   resource.customizations.ignoreDifferences.apps_Deployment: |
     jsonPointers:
       - /spec/template/spec/tolerations
+  url: https://argocd.district.amanibhavam.defn.run
   resource.customizations.ignoreDifferences.kyverno.io_ClusterPolicy: |
     jqPathExpressions:
       - .spec.rules[] | select(.name|test("autogen-."))
