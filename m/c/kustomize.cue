@@ -122,6 +122,7 @@ kustomize: "argo-cd": #Kustomize & {
 		metadata: name: "argocd-cmd-params-cm"
 		data: {
 			"server.insecure": "true"
+			"redis.compression": "none"
 		}
 	}
 

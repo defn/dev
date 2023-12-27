@@ -22171,7 +22171,10 @@ res: configmap: "coder-amanibhavam-district0-cluster-argo-cd": argocd: "argocd-c
 }
 res: configmap: "coder-amanibhavam-district0-cluster-argo-cd": argocd: "argocd-cmd-params-cm": {
 	apiVersion: "v1"
-	data: "server.insecure": "true"
+	data: {
+		"redis.compression": "none"
+		"server.insecure":   "true"
+	}
 	kind: "ConfigMap"
 	metadata: {
 		labels: {

@@ -26,7 +26,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-argo-cd
-              targetRevision: 0.0.105
+              targetRevision: 0.0.106
             syncPolicy:
               automated:
                 prune: true
