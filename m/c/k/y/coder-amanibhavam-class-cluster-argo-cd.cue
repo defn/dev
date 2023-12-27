@@ -22091,7 +22091,19 @@ res: configmap: "coder-amanibhavam-class-cluster-argo-cd": argocd: "argocd-cm": 
 	apiVersion: "v1"
 	data: {
 		"application.resourceTrackingMethod": "annotation"
-		"kustomize.buildOptions":             "--enable-helm"
+		"dex.config": """
+			- type: github
+			  id: github
+			  name: GitHub
+			  config:
+			    clientId: $dex-github-oidc.clientID
+			    clientSecret: $dex-github-oidc.clientSecret
+			    orgs:
+			      - defn
+
+			"""
+
+		"kustomize.buildOptions": "--enable-helm"
 		"resource.customizations.health.argoproj.io_Application": """
 			hs = {}
 			hs.status = \"Progressing\"

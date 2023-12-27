@@ -20999,6 +20999,15 @@ subjects:
 apiVersion: v1
 data:
   application.resourceTrackingMethod: annotation
+  dex.config: |
+    - type: github
+      id: github
+      name: GitHub
+      config:
+        clientId: $dex-github-oidc.clientID
+        clientSecret: $dex-github-oidc.clientSecret
+        orgs:
+          - defn
   kustomize.buildOptions: --enable-helm
   resource.customizations.health.argoproj.io_Application: |-
     hs = {}
