@@ -77,18 +77,6 @@ update:
 	cd tf && cli infra
 
 regen:
-	@mark defn.dev protos
-	cd defn/dev && $(MAKE)
-
-	@mark gazelle-buf-update-repos
-	b pass run //:gazelle-buf-update-repos
-
-	@mark gazelle-update-repos
-	b pass run //:gazelle-update-repos
-
-	@mark gazelle-buf
-	b pass run //:gazelle-buf
-
 	@mark gazelle
 	b pass run //:gazelle
 
