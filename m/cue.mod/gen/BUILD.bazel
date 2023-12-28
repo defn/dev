@@ -58,6 +58,6 @@ genrule(
         "//b/lib:lib_sh",
     ],
     outs = ["meh.txt"],
-    cmd = "$(location meh_sh) app=$(location app) jq=$(location //pkg/az:flake_jq) $@ rest ing",
+    cmd = "$(location meh_sh) app=$(location app) jq=$(location //pkg/az:flake_jq) $@",
     tools = ["meh_sh"],
 )
