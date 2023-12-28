@@ -12,16 +12,16 @@ cue_export(
 )
 
 filegroup(
-    name = "make_k8s_cue_script",
-    srcs = ["make_k8s_cue.sh"],
-)
-
-filegroup(
     name = "k8s_go_mod",
     srcs = [
         "go.mod",
         "go.sum",
     ],
+)
+
+filegroup(
+    name = "make_k8s_cue_script",
+    srcs = ["make_k8s_cue.sh"],
 )
 
 genrule(
@@ -43,4 +43,21 @@ copy_files(
     gen = {
         "cue.mod/gen.tgz": "cue.mod/gen.tgz",
     },
+)
+
+filegroup(
+    name = "meh_sh",
+    srcs = ["meh.sh"],
+)
+
+genrule(
+    name = "meh_main",
+    srcs = [
+        "app",
+        "//pkg/az:flake_jq",
+        "//b/lib:lib_sh",
+    ],
+    outs = ["meh.txt"],
+    cmd = "$(location meh_sh) app=$(location app) jq=$(location //pkg/az:flake_jq) $@ rest ing",
+    tools = ["meh_sh"],
 )
