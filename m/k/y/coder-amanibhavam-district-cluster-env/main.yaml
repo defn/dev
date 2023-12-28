@@ -264,7 +264,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-headlamp
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.103
+    targetRevision: 0.0.104
   syncPolicy:
     automated:
       prune: true
