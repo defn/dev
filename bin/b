@@ -19,14 +19,10 @@ function bazel {
 		;;
 	build | test | run | query | cquery)
 		# shellcheck disable=SC2065
-		if test -x /usr/bin/xcrun >/dev/null; then
-			command bazel "${cmd}" --macos_sdk_version="$(/usr/bin/xcrun -show-sdk-version || true)" "$@"
+		if [[ -n "${DEBUG:=}" ]]; then
+			command bazel "${cmd}" --sandbox_debug --verbose_failures "$@"
 		else
-			if [[ -n "${DEBUG:=}" ]]; then
-				command bazel "${cmd}" --sandbox_debug --verbose_failures "$@"
-			else
-				command bazel "${cmd}" "$@"
-			fi
+			command bazel "${cmd}" "$@"
 		fi
 		;;
 	*)
