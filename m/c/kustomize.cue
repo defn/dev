@@ -2287,7 +2287,7 @@ kustomize: "headlamp": #KustomizeHelm & {
 		release:   "headlamp"
 		name:      "headlamp"
 		namespace: "headlamp"
-		version:   "0.17.1"
+		version:   "0.18.0"
 		repo:      "https://headlamp-k8s.github.io/headlamp"
 		values: {
 		}

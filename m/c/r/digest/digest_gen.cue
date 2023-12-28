@@ -36,7 +36,7 @@ cache: "ghcr.io/external-secrets/external-secrets:v0.9.11": "ghcr.io/external-se
 
 cache: "ghcr.io/galleybytes/terraform-operator:v0.16.0": "ghcr.io/galleybytes/terraform-operator@sha256:22dc728858345330a1a34c13074b3c26e0540c89be0aa613a24694bebc1a3123"
 
-cache: "ghcr.io/headlamp-k8s/headlamp:v0.21.0": "ghcr.io/headlamp-k8s/headlamp@sha256:7a9587036bd29304f8f1387a7245556a3c479434670b2ca58e3624d44d2a68c9"
+cache: "ghcr.io/headlamp-k8s/headlamp:v0.22.0": "ghcr.io/headlamp-k8s/headlamp@sha256:3c6da859a989f285b2fd2ac2f4763d1884d54a51e4405301e5324e0b2b70bd67"
 
 cache: "ghcr.io/kyverno/background-controller:v1.10.7": "ghcr.io/kyverno/background-controller@sha256:531bc8d25e4aa658832991910a07a5ac0ca068e78ac7b653ad9073dfdc63ff8d"
 
