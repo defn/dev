@@ -16,8 +16,11 @@ filegroup(
             exclude_directories = 1,
         ),
         outs = ["y/{}/main.yaml".format(k)],
-        cmd = "$(location gen_release_script) {} $@".format(k),
-        tools = ["gen_release_script"],
+        cmd = "$(location gen_release_script) app={} $@".format(k),
+        tools = [
+            "gen_release_script",
+            "//b/lib:lib_sh",
+        ],
     )
     for k in glob(
         ["*-cluster-*"],
