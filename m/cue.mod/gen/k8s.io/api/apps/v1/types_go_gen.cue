@@ -16,6 +16,7 @@ import (
 #DeprecatedRollbackTo:           "deprecated.deployment.rollback.to"
 #DeprecatedTemplateGeneration:   "deprecated.daemonset.template.generation"
 #StatefulSetPodNameLabel:        "statefulset.kubernetes.io/pod-name"
+#PodIndexLabel:                  "apps.kubernetes.io/pod-index"
 
 // StatefulSet represents a set of pods with consistent identities.
 // Identities are defined as:
@@ -168,7 +169,7 @@ import (
 	// If unset, defaults to 0. Replica indices will be in the range:
 	//   [0, .spec.replicas).
 	// +optional
-	start: int32 @go(Start) @protobuf(1,varint,opt)
+	start?: int32 @go(Start) @protobuf(1,varint,opt)
 }
 
 // A StatefulSetSpec is the specification of a StatefulSet.
@@ -301,7 +302,7 @@ import (
 
 	// Total number of available pods (ready for at least minReadySeconds) targeted by this statefulset.
 	// +optional
-	availableReplicas: int32 @go(AvailableReplicas) @protobuf(11,varint,opt)
+	availableReplicas?: int32 @go(AvailableReplicas) @protobuf(11,varint,opt)
 }
 
 #StatefulSetConditionType: string

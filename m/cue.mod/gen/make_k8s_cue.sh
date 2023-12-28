@@ -23,20 +23,19 @@ function main {
 	out="${shome}/$1"
 	shift
 
-	# TODO hacky
 	local dst="cue.mod/gen"
 	local desired="k8s.io"
 
 	pushd "${dst}"
 	export GOMODCACHE="${HOME}/.cache/go-mod"
+	export GOROOT="$(go env GOROOT)"
 
 	for p in $("${flake_jq}" -r '.k8s.apis[]' "${app_config}"); do
 		"${flake_go}" get "${p}"
 		"${flake-cue}" get go "${p}"
 	done
 
-	mkdir -p "${out}/${dst}"
-	rsync -ia "${dst}/${desired}" "${out}/${dst}/"
+	tar cvfz - -C "${dst}" "${desired}" > "${out}"
 }
 
 main "$@"

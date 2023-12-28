@@ -32,7 +32,7 @@ genrule(
         "//pkg/az:flake_jq",
         "//pkg/godev:flake_go",
     ],
-    outs = ["cue.mod/gen"],
+    outs = ["cue.mod/gen.tgz"],
     cmd = "$(location make_k8s_cue_script) $(location app) $(location //pkg/az:flake_jq) $(location //pkg/godev:flake_go) $@",
     tools = ["make_k8s_cue_script"],
 )
@@ -41,6 +41,6 @@ copy_files(
     name = "outputs_k8s_cue_schema",
     dir = ".",
     gen = {
-        "cue.mod/gen": "cue.mod/gen",
+        "cue.mod/gen.tgz": "cue.mod/gen.tgz",
     },
 )
