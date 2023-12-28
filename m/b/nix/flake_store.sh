@@ -1,16 +1,9 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 function main {
-	local dir
-	local out
+	local dir="${in[dir]}"
 
-	dir="$1"
-	shift
-
-	out="$(pwd)/$1"
-	shift
+	local out="${shome}/${out}"
 
 	cd "${dir}"
 
@@ -27,4 +20,4 @@ function main {
 	tar cf "${out}" $(nix-store --query --requisites --include-outputs result || true)
 }
 
-main "$@"
+source b/lib/lib.sh
