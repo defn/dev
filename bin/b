@@ -6,6 +6,8 @@ bazel_cache="${DFD_CACHE:-cache.defn.run}"
 
 bopts="--remote_cache=grpc://${bazel_cache}:9092 --noincompatible_disallow_unsound_directory_outputs --noincompatible_sandbox_hermetic_tmp --action_env=HOME=${HOME} --test_env=HOME=${HOME} --sandbox_writable_path=${HOME}/m/cue.mod/gen --sandbox_writable_path=/nix --sandbox_writable_path=${HOME}/.cache/nix --sandbox_writable_path=${HOME}/.cache/helm --sandbox_writable_path=${HOME}/.cache/go-mod --sandbox_writable_path=${HOME}/.cache/go-build --sandbox_writable_path=${HOME}/.earthly --sandbox_writable_path=${HOME}/m/k --sandbox_writable_path=${HOME}/work"
 
+echo "$bopts" >> /tmp/bopts
+
 function bazel {
 	local cmd="$1"
 	shift
@@ -15,13 +17,16 @@ function bazel {
 		if [[ $# == 0 ]]; then set -- .; fi
 		command ibazel build "$@"
 		;;
-	build | test | run)
+	build | test | run | query | cquery)
 		# shellcheck disable=SC2065
 		if test -x /usr/bin/xcrun >/dev/null; then
 			command bazel "${cmd}" --macos_sdk_version="$(/usr/bin/xcrun -show-sdk-version || true)" "$@"
 		else
-			# --sandbox_debug
-			command bazel "${cmd}" "$@"
+			if [[ -n "${DEBUG:=}" ]]; then
+				command bazel "${cmd}" --sandbox_debug --verbose_failures "$@"
+			else
+				command bazel "${cmd}" "$@"
+			fi
 		fi
 		;;
 	*)
@@ -222,9 +227,9 @@ function main {
 				fi
 
 				local w
-				w="$(bazel info workspace)"
+				w="$(command bazel info workspace)"
 
-				bazel cquery "${rule}" --output=files | grep bazel-out/
+				command bazel cquery $bopts "${rule}" --output=files | grep bazel-out/
 				;;
 			in)
 				shift
@@ -246,11 +251,11 @@ function main {
 				rule=":$("$0" | fzf --query="${1-}" --select-1)"
 
 				local w
-				w="$(bazel info workspace)"
+				w="$(command bazel info workspace)"
 
 				local out
 				# shellcheck disable=SC2310
-				out="$(bazel cquery "${rule}" --output=files | grep bazel-out/ | sed "s#^#${w}/#" || true)"
+				out="$(command bazel cquery $bopts "${rule}" --output=files | grep bazel-out/ | sed "s#^#${w}/#" || true)"
 
 				cat "${out}"
 				;;

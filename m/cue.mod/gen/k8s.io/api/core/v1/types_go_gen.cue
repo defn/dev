@@ -401,6 +401,17 @@ import (
 	// This field influences the scheduling of pods that use this volume.
 	// +optional
 	nodeAffinity?: null | #VolumeNodeAffinity @go(NodeAffinity,*VolumeNodeAffinity) @protobuf(9,bytes,opt)
+
+	// Name of VolumeAttributesClass to which this persistent volume belongs. Empty value
+	// is not allowed. When this field is not set, it indicates that this volume does not belong to any
+	// VolumeAttributesClass. This field is mutable and can be changed by the CSI driver
+	// after a volume has been updated successfully to a new class.
+	// For an unbound PersistentVolume, the volumeAttributesClassName will be matched with unbound
+	// PersistentVolumeClaims during the binding process.
+	// This is an alpha field and requires enabling VolumeAttributesClass feature.
+	// +featureGate=VolumeAttributesClass
+	// +optional
+	volumeAttributesClassName?: null | string @go(VolumeAttributesClassName,*string) @protobuf(10,bytes,opt)
 }
 
 // VolumeNodeAffinity defines constraints that limit what nodes this volume can be accessed from.
@@ -459,6 +470,13 @@ import (
 	// for machine parsing and tidy display in the CLI.
 	// +optional
 	reason?: string @go(Reason) @protobuf(3,bytes,opt)
+
+	// lastPhaseTransitionTime is the time the phase transitioned from one to another
+	// and automatically resets to current time everytime a volume phase transitions.
+	// This is an alpha field and requires enabling PersistentVolumeLastPhaseTransitionTime feature.
+	// +featureGate=PersistentVolumeLastPhaseTransitionTime
+	// +optional
+	lastPhaseTransitionTime?: null | metav1.#Time @go(LastPhaseTransitionTime,*metav1.Time) @protobuf(4,bytes,opt)
 }
 
 // PersistentVolumeList is a list of PersistentVolume items.
@@ -528,7 +546,7 @@ import (
 	// status field of the claim.
 	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources
 	// +optional
-	resources?: #ResourceRequirements @go(Resources) @protobuf(2,bytes,opt)
+	resources?: #VolumeResourceRequirements @go(Resources) @protobuf(2,bytes,opt)
 
 	// volumeName is the binding reference to the PersistentVolume backing this claim.
 	// +optional
@@ -580,6 +598,22 @@ import (
 	// (Alpha) Using the namespace field of dataSourceRef requires the CrossNamespaceVolumeDataSource feature gate to be enabled.
 	// +optional
 	dataSourceRef?: null | #TypedObjectReference @go(DataSourceRef,*TypedObjectReference) @protobuf(8,bytes,opt)
+
+	// volumeAttributesClassName may be used to set the VolumeAttributesClass used by this claim.
+	// If specified, the CSI driver will create or update the volume with the attributes defined
+	// in the corresponding VolumeAttributesClass. This has a different purpose than storageClassName,
+	// it can be changed after the claim is created. An empty string value means that no VolumeAttributesClass
+	// will be applied to the claim but it's not allowed to reset this field to empty string once it is set.
+	// If unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass
+	// will be set by the persistentvolume controller if it exists.
+	// If the resource referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be
+	// set to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource
+	// exists.
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#volumeattributesclass
+	// (Alpha) Using this field requires the VolumeAttributesClass feature gate to be enabled.
+	// +featureGate=VolumeAttributesClass
+	// +optional
+	volumeAttributesClassName?: null | string @go(VolumeAttributesClassName,*string) @protobuf(9,bytes,opt)
 }
 
 #TypedObjectReference: {
@@ -608,7 +642,9 @@ import (
 
 #enumPersistentVolumeClaimConditionType:
 	#PersistentVolumeClaimResizing |
-	#PersistentVolumeClaimFileSystemResizePending
+	#PersistentVolumeClaimFileSystemResizePending |
+	#PersistentVolumeClaimVolumeModifyVolumeError |
+	#PersistentVolumeClaimVolumeModifyingVolume
 
 // PersistentVolumeClaimResizing - a user trigger resize of pvc has been started
 #PersistentVolumeClaimResizing: #PersistentVolumeClaimConditionType & "Resizing"
@@ -616,36 +652,80 @@ import (
 // PersistentVolumeClaimFileSystemResizePending - controller resize is finished and a file system resize is pending on node
 #PersistentVolumeClaimFileSystemResizePending: #PersistentVolumeClaimConditionType & "FileSystemResizePending"
 
+// Applying the target VolumeAttributesClass encountered an error
+#PersistentVolumeClaimVolumeModifyVolumeError: #PersistentVolumeClaimConditionType & "ModifyVolumeError"
+
+// Volume is being modified
+#PersistentVolumeClaimVolumeModifyingVolume: #PersistentVolumeClaimConditionType & "ModifyingVolume"
+
 // +enum
-#PersistentVolumeClaimResizeStatus: string // #enumPersistentVolumeClaimResizeStatus
+// When a controller receives persistentvolume claim update with ClaimResourceStatus for a resource
+// that it does not recognizes, then it should ignore that update and let other controllers
+// handle it.
+#ClaimResourceStatus: string // #enumClaimResourceStatus
 
-#enumPersistentVolumeClaimResizeStatus:
-	#PersistentVolumeClaimNoExpansionInProgress |
-	#PersistentVolumeClaimControllerExpansionInProgress |
-	#PersistentVolumeClaimControllerExpansionFailed |
-	#PersistentVolumeClaimNodeExpansionPending |
-	#PersistentVolumeClaimNodeExpansionInProgress |
-	#PersistentVolumeClaimNodeExpansionFailed
+#enumClaimResourceStatus:
+	#PersistentVolumeClaimControllerResizeInProgress |
+	#PersistentVolumeClaimControllerResizeFailed |
+	#PersistentVolumeClaimNodeResizePending |
+	#PersistentVolumeClaimNodeResizeInProgress |
+	#PersistentVolumeClaimNodeResizeFailed
 
-// When expansion is complete, the empty string is set by resize controller or kubelet.
-#PersistentVolumeClaimNoExpansionInProgress: #PersistentVolumeClaimResizeStatus & ""
+// State set when resize controller starts resizing the volume in control-plane.
+#PersistentVolumeClaimControllerResizeInProgress: #ClaimResourceStatus & "ControllerResizeInProgress"
 
-// State set when resize controller starts expanding the volume in control-plane
-#PersistentVolumeClaimControllerExpansionInProgress: #PersistentVolumeClaimResizeStatus & "ControllerExpansionInProgress"
-
-// State set when expansion has failed in resize controller with a terminal error.
-// Transient errors such as timeout should not set this status and should leave ResizeStatus
+// State set when resize has failed in resize controller with a terminal error.
+// Transient errors such as timeout should not set this status and should leave allocatedResourceStatus
 // unmodified, so as resize controller can resume the volume expansion.
-#PersistentVolumeClaimControllerExpansionFailed: #PersistentVolumeClaimResizeStatus & "ControllerExpansionFailed"
+#PersistentVolumeClaimControllerResizeFailed: #ClaimResourceStatus & "ControllerResizeFailed"
 
-// State set when resize controller has finished expanding the volume but further expansion is needed on the node.
-#PersistentVolumeClaimNodeExpansionPending: #PersistentVolumeClaimResizeStatus & "NodeExpansionPending"
+// State set when resize controller has finished resizing the volume but further resizing of volume
+// is needed on the node.
+#PersistentVolumeClaimNodeResizePending: #ClaimResourceStatus & "NodeResizePending"
 
-// State set when kubelet starts expanding the volume.
-#PersistentVolumeClaimNodeExpansionInProgress: #PersistentVolumeClaimResizeStatus & "NodeExpansionInProgress"
+// State set when kubelet starts resizing the volume.
+#PersistentVolumeClaimNodeResizeInProgress: #ClaimResourceStatus & "NodeResizeInProgress"
 
-// State set when expansion has failed in kubelet with a terminal error. Transient errors don't set NodeExpansionFailed.
-#PersistentVolumeClaimNodeExpansionFailed: #PersistentVolumeClaimResizeStatus & "NodeExpansionFailed"
+// State set when resizing has failed in kubelet with a terminal error. Transient errors don't set NodeResizeFailed
+#PersistentVolumeClaimNodeResizeFailed: #ClaimResourceStatus & "NodeResizeFailed"
+
+// +enum
+// New statuses can be added in the future. Consumers should check for unknown statuses and fail appropriately
+#PersistentVolumeClaimModifyVolumeStatus: string // #enumPersistentVolumeClaimModifyVolumeStatus
+
+#enumPersistentVolumeClaimModifyVolumeStatus:
+	#PersistentVolumeClaimModifyVolumePending |
+	#PersistentVolumeClaimModifyVolumeInProgress |
+	#PersistentVolumeClaimModifyVolumeInfeasible
+
+// Pending indicates that the PersistentVolumeClaim cannot be modified due to unmet requirements, such as
+// the specified VolumeAttributesClass not existing
+#PersistentVolumeClaimModifyVolumePending: #PersistentVolumeClaimModifyVolumeStatus & "Pending"
+
+// InProgress indicates that the volume is being modified
+#PersistentVolumeClaimModifyVolumeInProgress: #PersistentVolumeClaimModifyVolumeStatus & "InProgress"
+
+// Infeasible indicates that the request has been rejected as invalid by the CSI driver. To
+// resolve the error, a valid VolumeAttributesClass needs to be specified
+#PersistentVolumeClaimModifyVolumeInfeasible: #PersistentVolumeClaimModifyVolumeStatus & "Infeasible"
+
+// ModifyVolumeStatus represents the status object of ControllerModifyVolume operation
+#ModifyVolumeStatus: {
+	// targetVolumeAttributesClassName is the name of the VolumeAttributesClass the PVC currently being reconciled
+	targetVolumeAttributesClassName?: string @go(TargetVolumeAttributesClassName) @protobuf(1,bytes,opt)
+
+	// status is the status of the ControllerModifyVolume operation. It can be in any of following states:
+	//  - Pending
+	//    Pending indicates that the PersistentVolumeClaim cannot be modified due to unmet requirements, such as
+	//    the specified VolumeAttributesClass not existing.
+	//  - InProgress
+	//    InProgress indicates that the volume is being modified.
+	//  - Infeasible
+	//   Infeasible indicates that the request has been rejected as invalid by the CSI driver. To
+	// 	  resolve the error, a valid VolumeAttributesClass needs to be specified.
+	// Note: New statuses can be added in the future. Consumers should check for unknown statuses and fail appropriately.
+	status: #PersistentVolumeClaimModifyVolumeStatus @go(Status) @protobuf(2,bytes,opt,casttype=PersistentVolumeClaimModifyVolumeStatus)
+}
 
 // PersistentVolumeClaimCondition contains details about state of pvc
 #PersistentVolumeClaimCondition: {
@@ -693,25 +773,85 @@ import (
 	// +patchStrategy=merge
 	conditions?: [...#PersistentVolumeClaimCondition] @go(Conditions,[]PersistentVolumeClaimCondition) @protobuf(4,bytes,rep)
 
-	// allocatedResources is the storage resource within AllocatedResources tracks the capacity allocated to a PVC. It may
-	// be larger than the actual capacity when a volume expansion operation is requested.
+	// allocatedResources tracks the resources allocated to a PVC including its capacity.
+	// Key names follow standard Kubernetes label syntax. Valid values are either:
+	// 	* Un-prefixed keys:
+	//		- storage - the capacity of the volume.
+	//	* Custom resources must use implementation-defined prefixed names such as "example.com/my-custom-resource"
+	// Apart from above values - keys that are unprefixed or have kubernetes.io prefix are considered
+	// reserved and hence may not be used.
+	//
+	// Capacity reported here may be larger than the actual capacity when a volume expansion operation
+	// is requested.
 	// For storage quota, the larger value from allocatedResources and PVC.spec.resources is used.
 	// If allocatedResources is not set, PVC.spec.resources alone is used for quota calculation.
 	// If a volume expansion capacity request is lowered, allocatedResources is only
 	// lowered if there are no expansion operations in progress and if the actual volume capacity
 	// is equal or lower than the requested capacity.
+	//
+	// A controller that receives PVC update with previously unknown resourceName
+	// should ignore the update for the purpose it was designed. For example - a controller that
+	// only is responsible for resizing capacity of the volume, should ignore PVC updates that change other valid
+	// resources associated with PVC.
+	//
 	// This is an alpha field and requires enabling RecoverVolumeExpansionFailure feature.
 	// +featureGate=RecoverVolumeExpansionFailure
 	// +optional
 	allocatedResources?: #ResourceList @go(AllocatedResources) @protobuf(5,bytes,rep,casttype=ResourceList,castkey=ResourceName)
 
-	// resizeStatus stores status of resize operation.
-	// ResizeStatus is not set by default but when expansion is complete resizeStatus is set to empty
-	// string by resize controller or kubelet.
+	// allocatedResourceStatuses stores status of resource being resized for the given PVC.
+	// Key names follow standard Kubernetes label syntax. Valid values are either:
+	// 	* Un-prefixed keys:
+	//		- storage - the capacity of the volume.
+	//	* Custom resources must use implementation-defined prefixed names such as "example.com/my-custom-resource"
+	// Apart from above values - keys that are unprefixed or have kubernetes.io prefix are considered
+	// reserved and hence may not be used.
+	//
+	// ClaimResourceStatus can be in any of following states:
+	//	- ControllerResizeInProgress:
+	//		State set when resize controller starts resizing the volume in control-plane.
+	// 	- ControllerResizeFailed:
+	//		State set when resize has failed in resize controller with a terminal error.
+	//	- NodeResizePending:
+	//		State set when resize controller has finished resizing the volume but further resizing of
+	//		volume is needed on the node.
+	//	- NodeResizeInProgress:
+	//		State set when kubelet starts resizing the volume.
+	//	- NodeResizeFailed:
+	//		State set when resizing has failed in kubelet with a terminal error. Transient errors don't set
+	//		NodeResizeFailed.
+	// For example: if expanding a PVC for more capacity - this field can be one of the following states:
+	// 	- pvc.status.allocatedResourceStatus['storage'] = "ControllerResizeInProgress"
+	//      - pvc.status.allocatedResourceStatus['storage'] = "ControllerResizeFailed"
+	//      - pvc.status.allocatedResourceStatus['storage'] = "NodeResizePending"
+	//      - pvc.status.allocatedResourceStatus['storage'] = "NodeResizeInProgress"
+	//      - pvc.status.allocatedResourceStatus['storage'] = "NodeResizeFailed"
+	// When this field is not set, it means that no resize operation is in progress for the given PVC.
+	//
+	// A controller that receives PVC update with previously unknown resourceName or ClaimResourceStatus
+	// should ignore the update for the purpose it was designed. For example - a controller that
+	// only is responsible for resizing capacity of the volume, should ignore PVC updates that change other valid
+	// resources associated with PVC.
+	//
 	// This is an alpha field and requires enabling RecoverVolumeExpansionFailure feature.
 	// +featureGate=RecoverVolumeExpansionFailure
+	// +mapType=granular
 	// +optional
-	resizeStatus?: null | #PersistentVolumeClaimResizeStatus @go(ResizeStatus,*PersistentVolumeClaimResizeStatus) @protobuf(6,bytes,opt,casttype=PersistentVolumeClaimResizeStatus)
+	allocatedResourceStatuses?: {[string]: #ClaimResourceStatus} @go(AllocatedResourceStatuses,map[ResourceName]ClaimResourceStatus) @protobuf(7,bytes,rep)
+
+	// currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using.
+	// When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim
+	// This is an alpha field and requires enabling VolumeAttributesClass feature.
+	// +featureGate=VolumeAttributesClass
+	// +optional
+	currentVolumeAttributesClassName?: null | string @go(CurrentVolumeAttributesClassName,*string) @protobuf(8,bytes,opt)
+
+	// ModifyVolumeStatus represents the status object of ControllerModifyVolume operation.
+	// When this is unset, there is no ModifyVolume operation being attempted.
+	// This is an alpha field and requires enabling VolumeAttributesClass feature.
+	// +featureGate=VolumeAttributesClass
+	// +optional
+	modifyVolumeStatus?: null | #ModifyVolumeStatus @go(ModifyVolumeStatus,*ModifyVolumeStatus) @protobuf(9,bytes,opt)
 }
 
 // +enum
@@ -1958,11 +2098,45 @@ import (
 	path: string @go(Path) @protobuf(3,bytes,opt)
 }
 
+// ClusterTrustBundleProjection describes how to select a set of
+// ClusterTrustBundle objects and project their contents into the pod
+// filesystem.
+#ClusterTrustBundleProjection: {
+	// Select a single ClusterTrustBundle by object name.  Mutually-exclusive
+	// with signerName and labelSelector.
+	// +optional
+	name?: null | string @go(Name,*string) @protobuf(1,bytes,rep)
+
+	// Select all ClusterTrustBundles that match this signer name.
+	// Mutually-exclusive with name.  The contents of all selected
+	// ClusterTrustBundles will be unified and deduplicated.
+	// +optional
+	signerName?: null | string @go(SignerName,*string) @protobuf(2,bytes,rep)
+
+	// Select all ClusterTrustBundles that match this label selector.  Only has
+	// effect if signerName is set.  Mutually-exclusive with name.  If unset,
+	// interpreted as "match nothing".  If set but empty, interpreted as "match
+	// everything".
+	// +optional
+	labelSelector?: null | metav1.#LabelSelector @go(LabelSelector,*metav1.LabelSelector) @protobuf(3,bytes,rep)
+
+	// If true, don't block pod startup if the referenced ClusterTrustBundle(s)
+	// aren't available.  If using name, then the named ClusterTrustBundle is
+	// allowed not to exist.  If using signerName, then the combination of
+	// signerName and labelSelector is allowed to match zero
+	// ClusterTrustBundles.
+	// +optional
+	optional?: null | bool @go(Optional,*bool) @protobuf(5,varint,opt)
+
+	// Relative path from the volume root to write the bundle.
+	path: string @go(Path) @protobuf(4,bytes,rep)
+}
+
 // Represents a projected volume source
 #ProjectedVolumeSource: {
 	// sources is the list of volume projections
 	// +optional
-	sources: [...#VolumeProjection] @go(Sources,[]VolumeProjection) @protobuf(1,bytes,rep)
+	sources?: [...#VolumeProjection] @go(Sources,[]VolumeProjection) @protobuf(1,bytes,rep)
 
 	// defaultMode are the mode bits used to set permissions on created files by default.
 	// Must be an octal value between 0000 and 0777 or a decimal value between 0 and 511.
@@ -1991,6 +2165,24 @@ import (
 	// serviceAccountToken is information about the serviceAccountToken data to project
 	// +optional
 	serviceAccountToken?: null | #ServiceAccountTokenProjection @go(ServiceAccountToken,*ServiceAccountTokenProjection) @protobuf(4,bytes,opt)
+
+	// ClusterTrustBundle allows a pod to access the `.spec.trustBundle` field
+	// of ClusterTrustBundle objects in an auto-updating file.
+	//
+	// Alpha, gated by the ClusterTrustBundleProjection feature gate.
+	//
+	// ClusterTrustBundle objects can either be selected by name, or by the
+	// combination of signer name and a label selector.
+	//
+	// Kubelet performs aggressive normalization of the PEM contents written
+	// into the pod filesystem.  Esoteric PEM features such as inter-block
+	// comments and block headers are stripped.  Certificates are deduplicated.
+	// The ordering of certificates within the file is arbitrary, and Kubelet
+	// may change the order over time.
+	//
+	// +featureGate=ClusterTrustBundleProjection
+	// +optional
+	clusterTrustBundle?: null | #ClusterTrustBundleProjection @go(ClusterTrustBundle,*ClusterTrustBundleProjection) @protobuf(5,bytes,opt)
 }
 
 #ProjectedVolumeSourceDefaultMode: int32 & 0o644
@@ -2090,10 +2282,8 @@ import (
 	// nodeExpandSecretRef is a reference to the secret object containing
 	// sensitive information to pass to the CSI driver to complete the CSI
 	// NodeExpandVolume call.
-	// This is a beta field which is enabled default by CSINodeExpandSecret feature gate.
 	// This field is optional, may be omitted if no secret is required. If the
 	// secret object contains more than one secret, all secrets are passed.
-	// +featureGate=CSINodeExpandSecret
 	// +optional
 	nodeExpandSecretRef?: null | #SecretReference @go(NodeExpandSecretRef,*SecretReference) @protobuf(10,bytes,opt)
 }
@@ -2498,6 +2688,12 @@ import (
 	command?: [...string] @go(Command,[]string) @protobuf(1,bytes,rep)
 }
 
+// SleepAction describes a "sleep" action.
+#SleepAction: {
+	// Seconds is the number of seconds to sleep.
+	seconds: int64 @go(Seconds) @protobuf(1,bytes,opt)
+}
+
 // Probe describes a health check to be performed against a container to determine whether it is
 // alive or ready to receive traffic.
 #Probe: {
@@ -2665,6 +2861,21 @@ import (
 	claims?: [...#ResourceClaim] @go(Claims,[]ResourceClaim) @protobuf(3,bytes,opt)
 }
 
+// VolumeResourceRequirements describes the storage resource requirements for a volume.
+#VolumeResourceRequirements: {
+	// Limits describes the maximum amount of compute resources allowed.
+	// More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+	// +optional
+	limits?: #ResourceList @go(Limits) @protobuf(1,bytes,rep,casttype=ResourceList,castkey=ResourceName)
+
+	// Requests describes the minimum amount of compute resources required.
+	// If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+	// otherwise to an implementation-defined value. Requests cannot exceed Limits.
+	// More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+	// +optional
+	requests?: #ResourceList @go(Requests) @protobuf(2,bytes,rep,casttype=ResourceList,castkey=ResourceName)
+}
+
 // ResourceClaim references one entry in PodSpec.ResourceClaims.
 #ResourceClaim: {
 	// Name must match the name of one entry in pod.spec.resourceClaims of
@@ -2761,6 +2972,25 @@ import (
 	// +optional
 	// +listType=atomic
 	resizePolicy?: [...#ContainerResizePolicy] @go(ResizePolicy,[]ContainerResizePolicy) @protobuf(23,bytes,rep)
+
+	// RestartPolicy defines the restart behavior of individual containers in a pod.
+	// This field may only be set for init containers, and the only allowed value is "Always".
+	// For non-init containers or when this field is not specified,
+	// the restart behavior is defined by the Pod's restart policy and the container type.
+	// Setting the RestartPolicy as "Always" for the init container will have the following effect:
+	// this init container will be continually restarted on
+	// exit until all regular containers have terminated. Once all regular
+	// containers have completed, all init containers with restartPolicy "Always"
+	// will be shut down. This lifecycle differs from normal init containers and
+	// is often referred to as a "sidecar" container. Although this init
+	// container still starts in the init container sequence, it does not wait
+	// for the container to complete before proceeding to the next init
+	// container. Instead, the next init container starts immediately after this
+	// init container is started, or after any startupProbe has successfully
+	// completed.
+	// +featureGate=SidecarContainers
+	// +optional
+	restartPolicy?: null | #ContainerRestartPolicy @go(RestartPolicy,*ContainerRestartPolicy) @protobuf(24,bytes,opt,casttype=ContainerRestartPolicy)
 
 	// Pod volumes to mount into the container's filesystem.
 	// Cannot be updated.
@@ -2896,6 +3126,11 @@ import (
 	// lifecycle hooks will fail in runtime when tcp handler is specified.
 	// +optional
 	tcpSocket?: null | #TCPSocketAction @go(TCPSocket,*TCPSocketAction) @protobuf(3,bytes,opt)
+
+	// Sleep represents the duration that the container should sleep before being terminated.
+	// +featureGate=PodLifecycleSleepAction
+	// +optional
+	sleep?: null | #SleepAction @go(Sleep,*SleepAction) @protobuf(4,bytes,opt)
 }
 
 // Lifecycle describes actions that the management system should take in response to container lifecycle
@@ -3113,7 +3348,8 @@ import (
 	#PodInitialized |
 	#PodReady |
 	#PodScheduled |
-	#DisruptionTarget
+	#DisruptionTarget |
+	#PodReadyToStartContainers
 
 // ContainersReady indicates whether all containers in the pod are ready.
 #ContainersReady: #PodConditionType & "ContainersReady"
@@ -3131,6 +3367,10 @@ import (
 // DisruptionTarget indicates the pod is about to be terminated due to a
 // disruption (such as preemption, eviction API or garbage-collection).
 #DisruptionTarget: #PodConditionType & "DisruptionTarget"
+
+// PodReadyToStartContainers pod sandbox is successfully configured and
+// the pod is ready to launch containers.
+#PodReadyToStartContainers: #PodConditionType & "PodReadyToStartContainers"
 
 // PodReasonUnschedulable reason in PodScheduled PodCondition means that the scheduler
 // can't schedule the pod right now, for example due to insufficient resources in the cluster.
@@ -3216,6 +3456,15 @@ import (
 #RestartPolicyAlways:    #RestartPolicy & "Always"
 #RestartPolicyOnFailure: #RestartPolicy & "OnFailure"
 #RestartPolicyNever:     #RestartPolicy & "Never"
+
+// ContainerRestartPolicy is the restart policy for a single container.
+// This may only be set for init containers and only allowed value is "Always".
+#ContainerRestartPolicy: string // #enumContainerRestartPolicy
+
+#enumContainerRestartPolicy:
+	#ContainerRestartPolicyAlways
+
+#ContainerRestartPolicyAlways: #ContainerRestartPolicy & "Always"
 
 // DNSPolicy defines how a pod's DNS will be configured.
 // +enum
@@ -3418,6 +3667,7 @@ import (
 // a pod of the set of pods is running
 #PodAffinityTerm: {
 	// A label query over a set of resources, in this case pods.
+	// If it's null, this PodAffinityTerm matches with no Pods.
 	// +optional
 	labelSelector?: null | metav1.#LabelSelector @go(LabelSelector,*metav1.LabelSelector) @protobuf(1,bytes,opt)
 
@@ -3442,6 +3692,32 @@ import (
 	// An empty selector ({}) matches all namespaces.
 	// +optional
 	namespaceSelector?: null | metav1.#LabelSelector @go(NamespaceSelector,*metav1.LabelSelector) @protobuf(4,bytes,opt)
+
+	// MatchLabelKeys is a set of pod label keys to select which pods will
+	// be taken into consideration. The keys are used to lookup values from the
+	// incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)`
+	// to select the group of existing pods which pods will be taken into consideration
+	// for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+	// pod labels will be ignored. The default value is empty.
+	// The same key is forbidden to exist in both MatchLabelKeys and LabelSelector.
+	// Also, MatchLabelKeys cannot be set when LabelSelector isn't set.
+	// This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+	// +listType=atomic
+	// +optional
+	matchLabelKeys?: [...string] @go(MatchLabelKeys,[]string) @protobuf(5,bytes,opt)
+
+	// MismatchLabelKeys is a set of pod label keys to select which pods will
+	// be taken into consideration. The keys are used to lookup values from the
+	// incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)`
+	// to select the group of existing pods which pods will be taken into consideration
+	// for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
+	// pod labels will be ignored. The default value is empty.
+	// The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector.
+	// Also, MismatchLabelKeys cannot be set when LabelSelector isn't set.
+	// This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+	// +listType=atomic
+	// +optional
+	mismatchLabelKeys?: [...string] @go(MismatchLabelKeys,[]string) @protobuf(6,bytes,opt)
 }
 
 // Node affinity is a group of node affinity scheduling rules.
@@ -3930,20 +4206,32 @@ import (
 	//
 	// The template will be used to create a new ResourceClaim, which will
 	// be bound to this pod. When this pod is deleted, the ResourceClaim
-	// will also be deleted. The name of the ResourceClaim will be <pod
-	// name>-<resource name>, where <resource name> is the
-	// PodResourceClaim.Name. Pod validation will reject the pod if the
-	// concatenated name is not valid for a ResourceClaim (e.g. too long).
-	//
-	// An existing ResourceClaim with that name that is not owned by the
-	// pod will not be used for the pod to avoid using an unrelated
-	// resource by mistake. Scheduling and pod startup are then blocked
-	// until the unrelated ResourceClaim is removed.
+	// will also be deleted. The pod name and resource name, along with a
+	// generated component, will be used to form a unique name for the
+	// ResourceClaim, which will be recorded in pod.status.resourceClaimStatuses.
 	//
 	// This field is immutable and no changes will be made to the
 	// corresponding ResourceClaim by the control plane after creating the
 	// ResourceClaim.
 	resourceClaimTemplateName?: null | string @go(ResourceClaimTemplateName,*string) @protobuf(2,bytes,opt)
+}
+
+// PodResourceClaimStatus is stored in the PodStatus for each PodResourceClaim
+// which references a ResourceClaimTemplate. It stores the generated name for
+// the corresponding ResourceClaim.
+#PodResourceClaimStatus: {
+	// Name uniquely identifies this resource claim inside the pod.
+	// This must match the name of an entry in pod.spec.resourceClaims,
+	// which implies that the string must be a DNS_LABEL.
+	name: string @go(Name) @protobuf(1,bytes)
+
+	// ResourceClaimName is the name of the ResourceClaim that was
+	// generated for the Pod in the namespace of the Pod. It this is
+	// unset, then generating a ResourceClaim was not necessary. The
+	// pod.spec.resourceClaims entry can be ignored in this case.
+	//
+	// +optional
+	resourceClaimName?: null | string @go(ResourceClaimName,*string) @protobuf(2,bytes,opt)
 }
 
 // OSName is the set of OS'es that can be used in OS.
@@ -4270,7 +4558,7 @@ import (
 	// localhostProfile indicates a profile defined in a file on the node should be used.
 	// The profile must be preconfigured on the node to work.
 	// Must be a descending path, relative to the kubelet's configured seccomp profile location.
-	// Must only be set if type is "Localhost".
+	// Must be set if type is "Localhost". Must NOT be set for any other type.
 	// +optional
 	localhostProfile?: null | string @go(LocalhostProfile,*string) @protobuf(2,bytes,opt)
 }
@@ -4344,12 +4632,15 @@ import (
 	value?: null | string @go(Value,*string) @protobuf(2,bytes,opt)
 }
 
-// IP address information for entries in the (plural) PodIPs field.
-// Each entry includes:
-//
-//	IP: An IP address allocated to the pod. Routable at least within the cluster.
+// PodIP represents a single IP address allocated to the pod.
 #PodIP: {
-	// ip is an IP address (IPv4 or IPv6) assigned to the pod
+	// IP is the IP address assigned to the pod
+	ip?: string @go(IP) @protobuf(1,bytes,opt)
+}
+
+// HostIP represents a single IP address allocated to the host.
+#HostIP: {
+	// IP is the IP address assigned to the host
 	ip?: string @go(IP) @protobuf(1,bytes,opt)
 }
 
@@ -4430,6 +4721,14 @@ import (
 	// +optional
 	// +listType=atomic
 	resizePolicy?: [...#ContainerResizePolicy] @go(ResizePolicy,[]ContainerResizePolicy) @protobuf(23,bytes,rep)
+
+	// Restart policy for the container to manage the restart behavior of each
+	// container within a pod.
+	// This may only be set for init containers. You cannot set this field on
+	// ephemeral containers.
+	// +featureGate=SidecarContainers
+	// +optional
+	restartPolicy?: null | #ContainerRestartPolicy @go(RestartPolicy,*ContainerRestartPolicy) @protobuf(24,bytes,opt,casttype=ContainerRestartPolicy)
 
 	// Pod volumes to mount into the container's filesystem. Subpath mounts are not allowed for ephemeral containers.
 	// Cannot be updated.
@@ -4587,11 +4886,23 @@ import (
 	// +optional
 	nominatedNodeName?: string @go(NominatedNodeName) @protobuf(11,bytes,opt)
 
-	// IP address of the host to which the pod is assigned. Empty if not yet scheduled.
+	// hostIP holds the IP address of the host to which the pod is assigned. Empty if the pod has not started yet.
+	// A pod can be assigned to a node that has a problem in kubelet which in turns mean that HostIP will
+	// not be updated even if there is a node is assigned to pod
 	// +optional
 	hostIP?: string @go(HostIP) @protobuf(5,bytes,opt)
 
-	// IP address allocated to the pod. Routable at least within the cluster.
+	// hostIPs holds the IP addresses allocated to the host. If this field is specified, the first entry must
+	// match the hostIP field. This list is empty if the pod has not started yet.
+	// A pod can be assigned to a node that has a problem in kubelet which in turns means that HostIPs will
+	// not be updated even if there is a node is assigned to this pod.
+	// +optional
+	// +patchStrategy=merge
+	// +patchMergeKey=ip
+	// +listType=atomic
+	hostIPs?: [...#HostIP] @go(HostIPs,[]HostIP) @protobuf(16,bytes,rep)
+
+	// podIP address allocated to the pod. Routable at least within the cluster.
 	// Empty if not yet allocated.
 	// +optional
 	podIP?: string @go(PodIP) @protobuf(6,bytes,opt)
@@ -4636,6 +4947,15 @@ import (
 	// +featureGate=InPlacePodVerticalScaling
 	// +optional
 	resize?: #PodResizeStatus @go(Resize) @protobuf(14,bytes,opt,casttype=PodResizeStatus)
+
+	// Status of resource claims.
+	// +patchMergeKey=name
+	// +patchStrategy=merge,retainKeys
+	// +listType=map
+	// +listMapKey=name
+	// +featureGate=DynamicResourceAllocation
+	// +optional
+	resourceClaimStatuses?: [...#PodResourceClaimStatus] @go(ResourceClaimStatuses,[]PodResourceClaimStatus) @protobuf(15,bytes,rep)
 }
 
 // PodStatusResult is a wrapper for PodStatus returned by kubelet that can be encode/decoded
@@ -5028,6 +5348,15 @@ import (
 	// +optional
 	hostname?: string @go(Hostname) @protobuf(2,bytes,opt)
 
+	// IPMode specifies how the load-balancer IP behaves, and may only be specified when the ip field is specified.
+	// Setting this to "VIP" indicates that traffic is delivered to the node with
+	// the destination set to the load-balancer's IP and port.
+	// Setting this to "Proxy" indicates that traffic is delivered to the node or pod with
+	// the destination set to the node's IP and node port or the pod's IP and port.
+	// Service implementations may use this information to adjust traffic routing.
+	// +optional
+	ipMode?: null | #LoadBalancerIPMode @go(IPMode,*LoadBalancerIPMode) @protobuf(3,bytes,opt)
+
 	// Ports is a list of records of service ports
 	// If used, every port defined in the service should have an entry in it
 	// +listType=atomic
@@ -5042,13 +5371,17 @@ import (
 
 #enumIPFamily:
 	#IPv4Protocol |
-	#IPv6Protocol
+	#IPv6Protocol |
+	#IPFamilyUnknown
 
 // IPv4Protocol indicates that this IP is IPv4 protocol
 #IPv4Protocol: #IPFamily & "IPv4"
 
 // IPv6Protocol indicates that this IP is IPv6 protocol
 #IPv6Protocol: #IPFamily & "IPv6"
+
+// IPFamilyUnknown indicates that this IP is unknown protocol
+#IPFamilyUnknown: #IPFamily & ""
 
 // IPFamilyPolicy represents the dual-stack-ness requested or required by a Service
 // +enum
@@ -5193,10 +5526,9 @@ import (
 	// This feature depends on whether the underlying cloud-provider supports specifying
 	// the loadBalancerIP when a load balancer is created.
 	// This field will be ignored if the cloud-provider does not support the feature.
-	// Deprecated: This field was under-specified and its meaning varies across implementations,
-	// and it cannot support dual-stack.
-	// As of Kubernetes v1.24, users are encouraged to use implementation-specific annotations when available.
-	// This field may be removed in a future API version.
+	// Deprecated: This field was under-specified and its meaning varies across implementations.
+	// Using it is non-portable and it may not support dual-stack.
+	// Users are encouraged to use implementation-specific annotations when available.
 	// +optional
 	loadBalancerIP?: string @go(LoadBalancerIP) @protobuf(8,bytes,opt)
 
@@ -5339,10 +5671,19 @@ import (
 	protocol?: #Protocol @go(Protocol) @protobuf(2,bytes,opt,casttype=Protocol)
 
 	// The application protocol for this port.
+	// This is used as a hint for implementations to offer richer behavior for protocols that they understand.
 	// This field follows standard Kubernetes label syntax.
-	// Un-prefixed names are reserved for IANA standard service names (as per
+	// Valid values are either:
+	//
+	// * Un-prefixed protocol names - reserved for IANA standard service names (as per
 	// RFC-6335 and https://www.iana.org/assignments/service-names).
-	// Non-standard protocols should use prefixed names such as
+	//
+	// * Kubernetes-defined prefixed names:
+	//   * 'kubernetes.io/h2c' - HTTP/2 prior knowledge over cleartext as described in https://www.rfc-editor.org/rfc/rfc9113.html#name-starting-http-2-with-prior-
+	//   * 'kubernetes.io/ws'  - WebSocket over cleartext as described in https://www.rfc-editor.org/rfc/rfc6455
+	//   * 'kubernetes.io/wss' - WebSocket over TLS as described in https://www.rfc-editor.org/rfc/rfc6455
+	//
+	// * Other protocols should use implementation-defined prefixed names such as
 	// mycompany.com/my-custom-protocol.
 	// +optional
 	appProtocol?: null | string @go(AppProtocol,*string) @protobuf(6,bytes,opt)
@@ -5575,7 +5916,9 @@ import (
 	// RFC-6335 and https://www.iana.org/assignments/service-names).
 	//
 	// * Kubernetes-defined prefixed names:
-	//   * 'kubernetes.io/h2c' - HTTP/2 over cleartext as described in https://www.rfc-editor.org/rfc/rfc7540
+	//   * 'kubernetes.io/h2c' - HTTP/2 prior knowledge over cleartext as described in https://www.rfc-editor.org/rfc/rfc9113.html#name-starting-http-2-with-prior-
+	//   * 'kubernetes.io/ws'  - WebSocket over cleartext as described in https://www.rfc-editor.org/rfc/rfc6455
+	//   * 'kubernetes.io/wss' - WebSocket over TLS as described in https://www.rfc-editor.org/rfc/rfc6455
 	//
 	// * Other protocols should use implementation-defined prefixed names such as
 	// mycompany.com/my-custom-protocol.
@@ -5883,7 +6226,7 @@ import (
 	// Names by which this image is known.
 	// e.g. ["kubernetes.example/hyperkube:v1.0.7", "cloud-vendor.registry.example/cloud-vendor/hyperkube:v1.0.7"]
 	// +optional
-	names: [...string] @go(Names,[]string) @protobuf(1,bytes,rep)
+	names?: [...string] @go(Names,[]string) @protobuf(1,bytes,rep)
 
 	// The size of the image in bytes.
 	// +optional
@@ -6595,11 +6938,11 @@ import (
 
 	// Name of the controller that emitted this Event, e.g. `kubernetes.io/kubelet`.
 	// +optional
-	reportingComponent: string @go(ReportingController) @protobuf(14,bytes,opt)
+	reportingComponent?: string @go(ReportingController) @protobuf(14,bytes,opt)
 
 	// ID of the controller instance, e.g. `kubelet-xyzf`.
 	// +optional
-	reportingInstance: string @go(ReportingInstance) @protobuf(15,bytes,opt)
+	reportingInstance?: string @go(ReportingInstance) @protobuf(15,bytes,opt)
 }
 
 // EventSeries contain information on series of events, i.e. thing that was/is happening
@@ -7362,12 +7705,9 @@ import (
 	runAsUserName?: null | string @go(RunAsUserName,*string) @protobuf(3,bytes,opt)
 
 	// HostProcess determines if a container should be run as a 'Host Process' container.
-	// This field is alpha-level and will only be honored by components that enable the
-	// WindowsHostProcessContainers feature flag. Setting this field without the feature
-	// flag will result in errors when validating the Pod. All of a Pod's containers must
-	// have the same effective HostProcess value (it is not allowed to have a mix of HostProcess
-	// containers and non-HostProcess containers).  In addition, if HostProcess is true
-	// then HostNetwork must also be set to true.
+	// All of a Pod's containers must have the same effective HostProcess value
+	// (it is not allowed to have a mix of HostProcess containers and non-HostProcess containers).
+	// In addition, if HostProcess is true then HostNetwork must also be set to true.
 	// +optional
 	hostProcess?: null | bool @go(HostProcess,*bool) @protobuf(4,bytes,opt)
 }
@@ -7483,3 +7823,18 @@ import (
 	// +kubebuilder:validation:MaxLength=316
 	error?: null | string @go(Error,*string) @protobuf(3,bytes,opt)
 }
+
+// LoadBalancerIPMode represents the mode of the LoadBalancer ingress IP
+#LoadBalancerIPMode: string // #enumLoadBalancerIPMode
+
+#enumLoadBalancerIPMode:
+	#LoadBalancerIPModeVIP |
+	#LoadBalancerIPModeProxy
+
+// LoadBalancerIPModeVIP indicates that traffic is delivered to the node with
+// the destination set to the load-balancer's IP and port.
+#LoadBalancerIPModeVIP: #LoadBalancerIPMode & "VIP"
+
+// LoadBalancerIPModeProxy indicates that traffic is delivered to the node or pod with
+// the destination set to the node's IP and port or the pod's IP and port.
+#LoadBalancerIPModeProxy: #LoadBalancerIPMode & "Proxy"
