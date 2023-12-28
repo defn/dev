@@ -19,18 +19,21 @@ filegroup(
 genrule(
     name = "aws_config_cfg",
     srcs = [
-        "app_config",
+        "config",
         "template_account",
         "template_org",
     ],
     outs = ["aws_config.txt"],
-    cmd = "$(location aws_config_script) $(location app_config) $(location template_org) $(location template_account) $@",
-    tools = ["aws_config_script"],
+    cmd = "$(location aws_config_script) config=$(location config) template_org=$(location template_org) template_account=$(location template_account) $@",
+    tools = [
+        "aws_config_script",
+        "//b/lib:lib_sh",
+    ],
 )
 
 # app configuration
 cue_export(
-    name = "app_config",
+    name = "config",
     cues = glob(["*.cue"]),
 )
 
@@ -54,9 +57,9 @@ sh_binary(
     name = "aws__list_accounts",
     srcs = ["aws_list_accounts.sh"],
     args = [
-        "$(location app_config)",
+        "$(location config)",
     ],
     data = [
-        "app_config",
+        "config",
     ],
 )
