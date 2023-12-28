@@ -1,16 +1,9 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 function main {
-	local dir
-	local out
+	local dir="${in[dir]}"
 
-	dir="$1"
-	shift
-
-	bin_out="$(pwd)/$1"
-	shift
+	local out="${shome}/${out}"
 
 	cd "${dir}"
 
@@ -26,11 +19,10 @@ function main {
 
 	cd ..
 	mkdir nix_bin
-	(for a in $(cat .path | tr : "\n" | perl -e 'print reverse <>'); do for b in "${a}"/*; do if test -x "${b}"; then if [[ "$(readlink "bin/nix/$b{##*/}" || true)" != "${b}" ]]; then ln -nfs "${b}" nix_bin/; fi; fi; done; done)
+	(set +f; for a in $(cat .path | tr : "\n" | perl -e 'print reverse <>'); do for b in "${a}"/*; do if test -x "${b}"; then if [[ "$(readlink "bin/nix/$b{##*/}" || true)" != "${b}" ]]; then ln -nfs "${b}" nix_bin/; fi; fi; done; done)
 
 	cd nix_bin
-	ls -ltrhd *
-	tar cfz "${bin_out}" .
+	tar cfz "${out}" .
 }
 
-main "$@"
+source b/lib/lib.sh

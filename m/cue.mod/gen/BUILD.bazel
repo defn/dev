@@ -1,19 +1,14 @@
 load("//b/cue:cue.bzl", "cue_export")
 load("//b/out:out.bzl", "copy_files")
 
-# app configuration
+# config configuration
 cue_export(
-    name = "app",
+    name = "config",
     srcs = [
         "//pkg/cue:flake_cue",
     ],
     cues = glob(["*.cue"]),
     visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "make_k8s_cue_script",
-    srcs = ["make_k8s_cue.sh"],
 )
 
 filegroup(
@@ -24,17 +19,26 @@ filegroup(
     ],
 )
 
+filegroup(
+    name = "make_k8s_cue_script",
+    srcs = ["make_k8s_cue.sh"],
+)
+
 genrule(
     name = "gen_k8s_cue_schema",
     srcs = [
-        "app",
+        "config",
         "k8s_go_mod",
-        "//pkg/az:flake_jq",
-        "//pkg/godev:flake_go",
     ],
     outs = ["cue.mod/gen.tgz"],
-    cmd = "$(location make_k8s_cue_script) $(location app) $(location //pkg/az:flake_jq) $(location //pkg/godev:flake_go) $@",
-    tools = ["make_k8s_cue_script"],
+    cmd = "$(location make_k8s_cue_script) config=$(location config) jq=$(location //pkg/az:flake_jq) cue=$(location //pkg/cue:flake_cue) go=$(location //pkg/godev:flake_go) $@",
+    tools = [
+        "make_k8s_cue_script",
+        "//pkg/az:flake_jq",
+        "//pkg/cue:flake_cue",
+        "//pkg/godev:flake_go",
+        "//b/lib:lib_sh",
+    ],
 )
 
 copy_files(
@@ -43,4 +47,21 @@ copy_files(
     gen = {
         "cue.mod/gen.tgz": "cue.mod/gen.tgz",
     },
+)
+
+filegroup(
+    name = "meh_sh",
+    srcs = ["meh.sh"],
+)
+
+genrule(
+    name = "meh_main",
+    srcs = [
+        "config",
+        "//pkg/az:flake_jq",
+        "//b/lib:lib_sh",
+    ],
+    outs = ["meh.txt"],
+    cmd = "$(location meh_sh) config=$(location config) jq=$(location //pkg/az:flake_jq) $@",
+    tools = ["meh_sh"],
 )

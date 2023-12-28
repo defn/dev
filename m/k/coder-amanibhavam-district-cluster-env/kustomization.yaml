@@ -131,7 +131,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-cilium
-              targetRevision: 0.0.108
+              targetRevision: 0.0.110
             syncPolicy:
               automated:
                 prune: true
@@ -278,7 +278,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-headlamp
-              targetRevision: 0.0.103
+              targetRevision: 0.0.104
             syncPolicy:
               automated:
                 prune: true

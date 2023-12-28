@@ -139,7 +139,7 @@ res: application: "coder-amanibhavam-district-cluster-env": argocd: "coder-amani
 		source: {
 			chart:          "library/helm/coder-amanibhavam-district-cluster-cilium"
 			repoURL:        "cache.defn.run:5000"
-			targetRevision: "0.0.108"
+			targetRevision: "0.0.110"
 		}
 		syncPolicy: {
 			automated: {
@@ -314,7 +314,7 @@ res: application: "coder-amanibhavam-district-cluster-env": argocd: "coder-amani
 		source: {
 			chart:          "library/helm/coder-amanibhavam-district-cluster-headlamp"
 			repoURL:        "cache.defn.run:5000"
-			targetRevision: "0.0.103"
+			targetRevision: "0.0.104"
 		}
 		syncPolicy: {
 			automated: {

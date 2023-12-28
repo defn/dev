@@ -1,41 +1,27 @@
 #!/usr/bin/env bash
 
-set -eufo pipefail
-
 function main {
-	local app_config
-	local flake_jq
-	local flake_go
-	local out
+	local config="${shome}/${in[config]}"
+	local jq="${shome}/${in[jq]}"
+	local cue="${shome}/${in[cue]}"
+	local go="${shome}/${in[go]}"
+	local out="${shome}/${out}"
 
-	local shome
-	shome="$(pwd)"
+	# TODO how to guess the workarea, cue.mod/gen
+	local workarea="cue.mod/gen"
+	local ns="k8s.io"
 
-	app_config="${shome}/$1"
-	shift
+	cd "${workarea}"
 
-	flake_jq="${shome}/$1"
-	shift
-
-	flake_go="${shome}/$1"
-	shift
-
-	out="${shome}/$1"
-	shift
-
-	local dst="cue.mod/gen"
-	local desired="k8s.io"
-
-	pushd "${dst}"
 	export GOMODCACHE="${HOME}/.cache/go-mod"
-	export GOROOT="$(go env GOROOT)"
 
-	for p in $("${flake_jq}" -r '.k8s.apis[]' "${app_config}"); do
-		"${flake_go}" get "${p}"
-		"${flake-cue}" get go "${p}"
+	for pkg in $("${jq}" -r '.k8s.apis[]' "${config}"); do
+		# TODO figure out how to use ${go}
+		"go" get "${pkg}"
+		"${cue}" get go "${pkg}"
 	done
 
-	tar cvfz - -C "${dst}" "${desired}" > "${out}"
+	tar cvfz - -C "${workarea}" "${ns}" > "${out}"
 }
 
-main "$@"
+source b/lib/lib.sh

@@ -19,10 +19,11 @@ genrule(
         "config",
     ],
     outs = ["generate_kustomize"],
-    cmd = "$(location //c:gen_kustomize_script) $(location //c:release_py_script) $(location config) $@",
+    cmd = "$(location //c:gen_kustomize_script) release=$(location //c:release_py_script) config=$(location config) $@",
     tools = [
         "//c:gen_kustomize_script",
         "//c:release_py_script",
+        "//b/lib:lib_sh"
     ],
 )
 

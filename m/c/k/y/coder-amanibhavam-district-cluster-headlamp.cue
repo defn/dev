@@ -13,8 +13,8 @@ res: serviceaccount: "coder-amanibhavam-district-cluster-headlamp": headlamp: he
 			"app.kubernetes.io/instance":   "headlamp"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "headlamp"
-			"app.kubernetes.io/version":    "0.21.0"
-			"helm.sh/chart":                "headlamp-0.17.1"
+			"app.kubernetes.io/version":    "0.22.0"
+			"helm.sh/chart":                "headlamp-0.18.0"
 		}
 		name:      "headlamp"
 		namespace: "headlamp"
@@ -36,8 +36,8 @@ res: clusterrolebinding: "coder-amanibhavam-district-cluster-headlamp": cluster:
 			"app.kubernetes.io/instance":   "headlamp"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "headlamp"
-			"app.kubernetes.io/version":    "0.21.0"
-			"helm.sh/chart":                "headlamp-0.17.1"
+			"app.kubernetes.io/version":    "0.22.0"
+			"helm.sh/chart":                "headlamp-0.18.0"
 		}
 		name: "headlamp-admin"
 	}
@@ -84,8 +84,8 @@ res: service: "coder-amanibhavam-district-cluster-headlamp": headlamp: headlamp:
 			"app.kubernetes.io/instance":   "headlamp"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "headlamp"
-			"app.kubernetes.io/version":    "0.21.0"
-			"helm.sh/chart":                "headlamp-0.17.1"
+			"app.kubernetes.io/version":    "0.22.0"
+			"helm.sh/chart":                "headlamp-0.18.0"
 		}
 		name:      "headlamp"
 		namespace: "headlamp"
@@ -112,8 +112,8 @@ res: deployment: "coder-amanibhavam-district-cluster-headlamp": headlamp: headla
 			"app.kubernetes.io/instance":   "headlamp"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "headlamp"
-			"app.kubernetes.io/version":    "0.21.0"
-			"helm.sh/chart":                "headlamp-0.17.1"
+			"app.kubernetes.io/version":    "0.22.0"
+			"helm.sh/chart":                "headlamp-0.18.0"
 		}
 		name:      "headlamp"
 		namespace: "headlamp"
@@ -135,7 +135,7 @@ res: deployment: "coder-amanibhavam-district-cluster-headlamp": headlamp: headla
 						"-in-cluster",
 						"-plugins-dir=/headlamp/plugins",
 					]
-					image:           "ghcr.io/headlamp-k8s/headlamp:v0.21.0"
+					image:           "ghcr.io/headlamp-k8s/headlamp:v0.22.0"
 					imagePullPolicy: "IfNotPresent"
 					livenessProbe: httpGet: {
 						path: "/"

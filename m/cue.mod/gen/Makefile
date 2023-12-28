@@ -9,5 +9,8 @@ update:
 get: # get k8s go packages
 	$(MAKE) make_update_k8s_go
 
+meh:
+	b build meh_main && b out meh_main
+
 make_%:
 	./$@.sh
