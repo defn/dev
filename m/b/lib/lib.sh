@@ -10,6 +10,8 @@ process_in=true
 
 out=
 
+shome="$(pwd)"
+
 function parse_args {
 	# Loop through each argument
 	for arg in "$@"; do
