@@ -1,24 +1,15 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 function main {
-	local release_py
-	local app
-	local out
-
-	release_py="$1"
-	shift
-	app="$1"
-	shift
-	out="$1"
-	shift
+	local release="${in[release]}"
+	local config="${in[config]}"
 
 	local tmp="$(pwd)/tmp"
 	mkdir -p "${tmp}"
-	cat "${app}" | jq --arg out "${tmp}" -r '.gen | to_entries[] | .key as $dir | .value | to_entries[] | "\($out)/\($dir)/\(.key) \(.value | @base64) 0"' | $release_py
+	cat "${config}" | jq --arg out "${tmp}" -r '.gen | to_entries[] | .key as $dir | .value | to_entries[] | "\($out)/\($dir)/\(.key) \(.value | @base64) 0"' \
+		| $release
 	(cd "${tmp}" && tar cvfz - .) > "${out}"
 
 }
 
-main "$@"
+source b/lib/lib.sh
