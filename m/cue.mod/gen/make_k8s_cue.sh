@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function main {
-	local app="${shome}/${in[app]}"
+	local config="${shome}/${in[config]}"
 	local jq="${shome}/${in[jq]}"
 	local cue="${shome}/${in[cue]}"
 	local go="${shome}/${in[go]}"
@@ -15,7 +15,7 @@ function main {
 
 	export GOMODCACHE="${HOME}/.cache/go-mod"
 
-	for pkg in $("${jq}" -r '.k8s.apis[]' "${app}"); do
+	for pkg in $("${jq}" -r '.k8s.apis[]' "${config}"); do
 		# TODO figure out how to use ${go}
 		"go" get "${pkg}"
 		"${cue}" get go "${pkg}"
