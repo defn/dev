@@ -33,11 +33,14 @@ def nix_flake(name, srcs = [], cmds = [], flake = None, visibility = None):
     native.genrule(
         name = "{}_store".format(name),
         srcs = [
-            flake_store_script,
             flake_config,
         ],
+        tools = [
+            flake_store_script,
+            "//b/lib:lib_sh"
+        ],
         outs = ["{}_nix_store.tar".format(name)],
-        cmd = "$(location //{}:{}) {} $@".format(flake_store_script.package, flake_store_script.name, dir),
+        cmd = "$(location //{}:{}) dir={} $@".format(flake_store_script.package, flake_store_script.name, dir),
         visibility = visibility,
     )
 
@@ -47,11 +50,14 @@ def nix_flake(name, srcs = [], cmds = [], flake = None, visibility = None):
         native.genrule(
             name = "{}_{}".format(name, c),
             srcs = [
-                flake_which_script,
                 flake_config,
             ],
+            tools = [
+                flake_which_script,
+                "//b/lib:lib_sh"
+            ],
             outs = ["{}_{}_bin".format(name, c)],
-            cmd = "$(location //{}:{}) {} $@ which {}".format(flake_which_script.package, flake_which_script.name, dir, c),
+            cmd = "$(location //{}:{}) dir={} $@ which {}".format(flake_which_script.package, flake_which_script.name, dir, c),
             visibility = visibility,
         )
 
@@ -60,10 +66,13 @@ def nix_flake(name, srcs = [], cmds = [], flake = None, visibility = None):
     native.genrule(
         name = "{}_path".format(name),
         srcs = [
-            flake_path_script,
             flake_config,
         ],
+        tools = [
+            flake_path_script,
+            "//b/lib:lib_sh"
+        ],
         outs = ["{}_path.tar.gz".format(name)],
-        cmd = "$(location //{}:{}) {} $@".format(flake_path_script.package, flake_path_script.name, dir),
+        cmd = "$(location //{}:{}) dir={} $@".format(flake_path_script.package, flake_path_script.name, dir),
         visibility = visibility,
     )
