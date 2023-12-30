@@ -16,7 +16,7 @@ image:
 	docker build -t $$EXPECTED_REF . && docker push $$EXPECTED_REF
 
 post-bazel:
-	if test -f $(build); then install -v -m 0755 -o ubuntu -g ubuntu $(build) $(release); fi
+	if test -f $(build); then install -v -m 0755 -o ubuntu -g ubuntu $(build) $(release);  mkdir -p store; rsync -ia $$(ldd $(release) | grep /nix/store | awk '{print $$3}' | cut -d/ -f1-4 | sort -u) store/; fi
 
 watch:
 	b build
