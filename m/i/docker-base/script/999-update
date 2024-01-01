@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+function main {
+	set -exfu
+
+	if [[ "$(whoami || true)" == "ubuntu" ]]; then
+		exec sudo "$0" "$@"
+		return $?
+	fi
+
+	export DEBIAN_FRONTEND=noninteractive
+
+	apt-get update
+	apt-get upgrade -y
+
+	sync
+}
+
+main "$@"

@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+function main {
+	set -exfu
+
+	if [[ "$(whoami || true)" == "ubuntu" ]]; then
+		exec sudo "$0" "$@"
+		return $?
+	fi
+
+	tee /etc/apt/apt.conf.d/local <<EOF
+DPkg::Lock::Timeout "-1";
+Dpkg::Options {
+   "--force-confdef";
+   "--force-confold";
+};
+EOF
+
+	(
+		echo "Update-Manager::Never-Include-Phased-Updates;"
+		echo "APT::Get::Never-Include-Phased-Updates: True;"
+	) >/etc/apt/apt.conf.d/99-Phased-Updates
+
+	while ! apt-get update; do
+		sleep 1
+	done
+
+	apt purge --auto-remove -y unattended-upgrades
+}
+
+main "$@"
