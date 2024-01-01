@@ -30,7 +30,7 @@ image-class:
 core-class:
     FROM quay.io/defn/dev:latest
 
-    COPY script/800-defn-dev script/999-update .
+    COPY script/800-defn-dev .
     RUN ./800-defn-dev
 
     RUN bash -c 'source .bashrc && ~/bin/persist-cache && make nix home'
