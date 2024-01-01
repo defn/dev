@@ -1,27 +1,22 @@
 #!/usr/bin/env bash
 
 function main {
+	set -x
 	case "${VSCODE_GIT_ASKPASS_MAIN-}" in
 	/Application* | "")
 		if test -x "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"; then
 			exec "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" "$@"
 		fi
-		exec "$(find /nix/store/*codeserver* -name code-linux.sh | head -1)" "$@"
 		;;
 	*/.vscode-server/bin/*)
 		exec "${VSCODE_GIT_ASKPASS_MAIN%%extensions/*}"/bin/remote-cli/code "$@"
 		;;
-	/tmp/code-server/lib/*)
+	/tmp/code-server/lib/*|/nix/store/*codeserver*)
 		exec "${VSCODE_GIT_ASKPASS_MAIN%%extensions/*}/bin/remote-cli/code-linux.sh" "$@"
-		;;
-	/nix/store/*codeserver*)
-		exec "${VSCODE_GIT_ASKPASS_MAIN%%extensions/*}/bin/remote-cli/code-linux.sh" "$@"
-		;;
-	*)
-		echo "TODO: find where code is on this platform: ${VSCODE_GIT_ASKPASS_MAIN-}" 1>&2
-		exit 1
 		;;
 	esac
+	
+	exec "$(find /nix/store/*codeserver* -name code-linux.sh | head -1)" "$@"
 }
 
 main "$@"
