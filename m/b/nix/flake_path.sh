@@ -15,7 +15,7 @@ function main {
 	git add --intent-to-add .
 
 	# shellcheck disable=SC2016
-	nix develop --ignore-environment --command env | grep ^PATH= | cut -d= -f2- >../.path
+	nix develop --ignore-environment --command env "github:defn/dev?dir=${dir}&rev=$(git log -1 --format=%H -- ${dir})" | grep ^PATH= | cut -d= -f2- >../.path
 
 	cd ..
 	mkdir nix_bin
