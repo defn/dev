@@ -37,4 +37,4 @@ core-class:
     RUN bash -c 'source .bashrc && cd ~/m && ~/bin/persist-cache && go install golang.org/x/tools/gopls@latest && go install honnef.co/go/tools/cmd/staticcheck@latest && cd && git checkout .'
 
     RUN --no-cache git pull
-    RUN bash -c 'source .bashrc && make home && ~/bin/b clean'
+    RUN bash -c 'source .bashrc && make home && cd ~/m && ~/bin/b clean'
