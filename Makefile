@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-NIX_VERSION := 2.19.2
+NIX_VERSION := 2.18.1
 
 flakes ?= home nix secrets utils development cloud kubernetes remotedev localdev godev jsdev pydev shell
 
@@ -63,8 +63,6 @@ home:
 		done
 	rsync -ia --delete ~/bin/nix.tmp/. ~/bin/nix/.
 	rm -rf ~/bin/nix.tmp
-	sudo -A ln -nfs ~/bin/nix/go ~/.nix-profile/bin/nix-instantiate /usr/local/bin/
-	ln -nfs ~/.nix-profile/bin/nix bin/nix/
 
 dotfiles:
 	$(MARK) configure dotfiles
