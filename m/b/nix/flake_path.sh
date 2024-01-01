@@ -12,7 +12,8 @@ function main {
 
 	cd nix
 	git init --quiet
-	git add --intent-to-add .
+	git add .
+	git commit -m 'meh' >/dev/null
 
 	# shellcheck disable=SC2016
 	nix develop --ignore-environment --command env "github:defn/dev?dir=${dir}&rev=$(git log -1 --format=%H -- ${dir})" | grep ^PATH= | cut -d= -f2- >../.path
