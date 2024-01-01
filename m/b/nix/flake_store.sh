@@ -15,7 +15,7 @@ function main {
 	git add --intent-to-add .
 
 	nix build
-	if type -P attic; then attic push defn result; fi
+	if type -P attic; then attic push --ignore-upstream-cache-filter defn result; fi
 
 	# shellcheck disable=SC2046
 	tar cfz "${out}" $(nix-store --query --requisites --include-outputs result || true)
