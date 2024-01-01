@@ -55,11 +55,11 @@ home:
 	$(MARK) home
 	rm -rf ~/bin/nix.tmp
 	mkdir -p ~/bin/nix.tmp ~/bin/nix
-	set -xeo pipefail; for n in $(flakes); do \
+	set -eo pipefail; for n in $(flakes); do \
 		mark $$n; \
 		(cd m/pkg/$$n && ~/bin/b build); \
 		(cd m/pkg/$$n && ~/bin/b out flake_path) | (cd ~/bin/nix.tmp && tar xfz -); \
-		(cd m/pkg/$$n && ~/bin/b out flake_store) | (cd / && sudo -A tar xfz -); \
+		for a in ~/bin/nix.tmp/*; do if ! test -f $$a; then mark installing $$n; (cd m/pkg/$$n && ~/bin/b out flake_store) | (cd / && sudo -A tar xfz -); break; fi; done; \
 		done
 	rsync -ia --delete ~/bin/nix.tmp/. ~/bin/nix/.
 	rm -rf ~/bin/nix.tmp
