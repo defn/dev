@@ -16,7 +16,7 @@ function main {
 		;;
 	esac
 	
-	exec "$(find /nix/store/*codeserver* -name code-linux.sh | head -1)" "$@"
+	exec code-server "$@"
 }
 
 main "$@"
