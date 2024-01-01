@@ -31,13 +31,11 @@ core-class:
     FROM quay.io/defn/dev:latest
 
     COPY script/800-defn-dev script/999-update .
-    RUN --no-cache ./800-defn-dev
-    RUN ./999-update
-    RUN rm -f 800-defn-dev 999-update
+    RUN ./800-defn-dev
 
     RUN bash -c 'source .bashrc && ~/bin/persist-cache && make nix home'
     RUN bash -c 'source .bashrc && for e in vscodevim.vim jnoortheen.nix-ide hashicorp.terraform golang.go esbenp.prettier-vscode bazelbuild.vscode-bazel cuelang.cue marp-team.marp-vscode; do bin/nix/code-server serve-local --force --install-extension $e; done'
     RUN bash -c 'source .bashrc && cd ~/m && ~/bin/persist-cache && go install golang.org/x/tools/gopls@latest && go install honnef.co/go/tools/cmd/staticcheck@latest && cd && git checkout .'
 
     RUN --no-cache git pull
-    RUN bash -c 'source .bashrc && make install'
+    RUN bash -c 'source .bashrc && make home'
