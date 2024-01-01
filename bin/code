@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 function main {
-	set -x
 	case "${VSCODE_GIT_ASKPASS_MAIN-}" in
 	/Application* | "")
 		if test -x "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"; then
