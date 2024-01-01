@@ -36,6 +36,8 @@ deploy:
 
 up:
 	cd ../../ && $(MAKE) vc dev
+# TODO why doesnt ArgoCD create this namespace?
+	kubectl create ns kyverno || true
 	mkdir -p chart/templates gen
 	b build
 	tilt up --port=$$(comm -23 <(seq 10350 10399 | sort -n) <(netstat -antu | awk '{print $$4}' | grep -oP '\d+$$' | sort -n) 2>/dev/null | head -n 1)
