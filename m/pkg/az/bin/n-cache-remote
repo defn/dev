@@ -3,7 +3,7 @@
 function main {
 	set -efu
 
-	attic push defn "$@"
+	attic push --ignore-upstream-cache-filter defn "$@"
 }
 
 # shellcheck disable=SC1091
