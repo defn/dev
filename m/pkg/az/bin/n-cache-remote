@@ -3,7 +3,7 @@
 function main {
 	set -efu
 
-	cachix push "$@"
+	attic push defn "$@"
 }
 
 # shellcheck disable=SC1091
