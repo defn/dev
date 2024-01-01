@@ -60,6 +60,7 @@ home:
 		(cd m/pkg/$$n && ~/bin/b build); \
 		(cd m/pkg/$$n && ~/bin/b out flake_path) | (cd ~/bin/nix.tmp && tar xfz -); \
 		(cd m/pkg/$$n && ~/bin/b out flake_store) | (cd / && sudo -A tar xfz -); \
+		(cd m/pkg/$$n && nix build) ; \
 		done
 	rsync -ia --delete ~/bin/nix.tmp/. ~/bin/nix/.
 	rm -rf ~/bin/nix.tmp
