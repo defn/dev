@@ -10,14 +10,14 @@ build:
 	runmany $(shell nproc) 'cd $$1 && make' coder-*
 # M ../k/y/APP/main.yaml
 	(cd ../k && b build && b run outputs_release__update)
-
 # M k/y/APP.cue updated
 	$(MAKE) cluster_cue
+
 # M ../k/r/APP/main.yaml
 	$(MAKE) release
 # M r/digest/digest_gen.cue
 # M ../k/r/APP/main.yaml
-	if env GIT_PAGER=cat git grep image:.[n]ot-found ../k/r; then $(MAKE) digest release; fi
+	if env GIT_PAGER=cat git grep image:.[n]ot-found ../k/r; then (cd ./r && $(MAKE) digest); $(MAKE) release; fi
 
 #
 # make chart
@@ -37,9 +37,6 @@ list:
 helm_add:
 	(cd .. && git grep repo: kustomize.cue) | cut -d'"' -f2 | sort -u | while read -r repo; do helm repo add $$(echo $$repo | cut -d/ -f3- | perl -pe 's{\s+$$}{}; s{\W+}{-}g') $$repo; done
 	helm repo update
-
-digest:
-	cd ./r && $(MAKE) digest
 
 cluster_cue:
 # make one big cue config
