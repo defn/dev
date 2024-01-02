@@ -9,17 +9,13 @@ INFRA_NAME := $(shell cue export --out json -e class.cluster_name | jq -r .)
 k3s_url := $(shell cat ~/.kube/config | grep server: | awk '{print $$NF}')
 
 build:
-# remove everything
-#	rm -rf ../../e/$(INFRA_NAME)-*
-#	rm -rf ../../k/$(INFRA_NAME)-*
-#	rm -rf ../../k/*/$(INFRA_NAME)-*
-# cue ./c/ generates kustomize ./k/
 	b build
+# ?? generate_kustomize
 	b run outputs_kustomize__update
+# ../../k/APP/kustomization.yaml
+# ../../e/ENV.yaml
 	cat generate_kustomize | (cd ../.. && tar xvfz -)
 	rm -f generate_kustomize
-# kustomize ./k/ generates ./k/y/ release yaml
-	(cd ../../k && b build && b run outputs_release__update)
 
 secrets:
 	$(MAKE) clean
