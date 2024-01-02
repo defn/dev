@@ -7,24 +7,21 @@ env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
 build:
 # M ../k/APP/kustomization.yaml
 # M ../e/ENV.yaml
-	runmany $(shell nproc) 'cd $$1 && make' coder-*
+	runmany $(shell nproc) 'cd $$1 && $(MAKE)' coder-*
 # M ../k/y/APP/main.yaml
 	(cd ../k && b build && b run outputs_release__update)
 # M k/y/APP.cue updated
 	(cd k/y && $(MAKE) cluster_cue)
 
 # M ../k/r/APP/main.yaml
-	$(MAKE) release
+	(cd ../k/r && $(MAKE) release)
 # M r/digest/digest_gen.cue
 # M ../k/r/APP/main.yaml
-	if env GIT_PAGER=cat git grep image:.[n]ot-found ../k/r; then (cd ./r && $(MAKE) digest); $(MAKE) release; fi
+	if env GIT_PAGER=cat git grep image:.[n]ot-found ../k/r; then (cd ./r && $(MAKE) digest); (cd ../../k/r && $(MAKE) release); fi
 
-#
-# make chart
-#
 # h/APP*
 # ENV/APP-version.cue
-	cd ../k && $(MAKE) delivery
+	cd ../k && $(MAKE) chart
 
 crd:
 # M k/crd/ENV.yaml
@@ -37,10 +34,6 @@ list:
 helm_add:
 	(cd .. && git grep repo: kustomize.cue) | cut -d'"' -f2 | sort -u | while read -r repo; do helm repo add $$(echo $$repo | cut -d/ -f3- | perl -pe 's{\s+$$}{}; s{\W+}{-}g') $$repo; done
 	helm repo update
-
-release:
-# remove ANYTHING: null
-	(cd ./r && cue export --out json -e cached_yaml) | jq -r 'to_entries[] | "../k/r/\(.key) \(.value | @base64) 1"' | grep -v -e '^\s*[\w-]+: null\s*$$' | ./release.py
 
 cache:
 	cd ./r && $(MAKE) cache filter=$(filter)
@@ -158,6 +151,3 @@ spaceship-visit:
 update-env:
 # ensure no argocd-repo-server pods are in a non-Running state, the cli will pick any pod
 	app set $(env)-cluster --revision $$(helm show chart --insecure-skip-tls-verify oci://cache.defn.run:5000/library/helm/$(env)-cluster-env 2>/dev/null | grep ^version: | awk '{print $$2}')
-
-diff-chart:
-	h=oci://cache.defn.run:5000/library/helm/$(env)-cluster-$(app); dyff --color=on between <(helm template --insecure-skip-tls-verify $$h --version $(from) 2>/dev/null) <(helm template --insecure-skip-tls-verify $$h --version $(to) 2>/dev/null) | less -r

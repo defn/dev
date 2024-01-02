@@ -9,7 +9,7 @@ registry ?= cache.$(domain):5000
 
 source ?= r
 
-delivery:
+chart:
 	$(MAKE) all-build
 
 all-init:
