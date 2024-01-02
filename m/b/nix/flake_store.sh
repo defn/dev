@@ -12,9 +12,10 @@ function main {
 
 	cd nix
 	git init --quiet
+	git config user.email "you@example.com"
+    git config user.name "Your Name"
 	git add .
-	git config --global user.email "you@example.com"
-    git config --global user.name "Your Name"
+	git commit -m 'for the build'
 
 	nix build
 	if type -P attic; then (attic push --ignore-upstream-cache-filter defn result || true); fi
