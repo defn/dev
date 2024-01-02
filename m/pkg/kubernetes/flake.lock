@@ -426,17 +426,17 @@
       },
       "locked": {
         "dir": "m/pkg/k3sup",
-        "lastModified": 1703442784,
-        "narHash": "sha256-2n3r7zWPqoRbOjgAU9a74GyWojNMA66attmDNSKp9t4=",
+        "lastModified": 1704234881,
+        "narHash": "sha256-so8V3uEFuoAl88C86ums8tMQYVeb46/cEOq1vFn8UGE=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "bbfcf69930cb32c50f5750051eb06c9a962f03c0",
+        "rev": "aa01bb148dbde696efc70d1a25db54a69a119a44",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/k3sup",
         "owner": "defn",
-        "ref": "pkg-k3sup-0.13.4-3",
+        "ref": "pkg-k3sup-0.13.5-1",
         "repo": "dev",
         "type": "github"
       }
