@@ -110,7 +110,7 @@ spec:
   source:
     chart: library/helm/coder-amanibhavam-district-cluster-cilium
     repoURL: cache.defn.run:5000
-    targetRevision: 0.0.112
+    targetRevision: 0.0.114
   syncPolicy:
     automated:
       prune: true
