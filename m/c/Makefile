@@ -11,7 +11,7 @@ build:
 # M ../k/y/APP/main.yaml
 	(cd ../k && b build && b run outputs_release__update)
 # M k/y/APP.cue updated
-	$(MAKE) cluster_cue
+	(cd k/y && $(MAKE) cluster_cue)
 
 # M ../k/r/APP/main.yaml
 	$(MAKE) release
@@ -38,20 +38,12 @@ helm_add:
 	(cd .. && git grep repo: kustomize.cue) | cut -d'"' -f2 | sort -u | while read -r repo; do helm repo add $$(echo $$repo | cut -d/ -f3- | perl -pe 's{\s+$$}{}; s{\W+}{-}g') $$repo; done
 	helm repo update
 
-cluster_cue:
-# make one big cue config
-	(echo package y; for r in ../k/y/*/main.yaml; do \
-		echo $${r%%/main.yaml}.cue | sed 's#.*/##' 1>&2; \
-		(cue import $$r -p y --with-context \
-			-l '"res"' -l 'strings.ToLower(data.kind)' -l 'path.Dir(path.Rel("$(shell cd ../k/y && pwd)",filename))' -l 'strings.ToLower(*data.metadata.namespace | "cluster")' -l data.metadata.name --outfile - \
-		| perl -pe 's{^\s*\w+:\s+null\s*}{}') > k/$${r%%/main.yaml}.cue; done)
-
 release:
 # remove ANYTHING: null
-	(cd r/digest && cue export --out json -e cached_yaml) | jq -r 'to_entries[] | "../k/r/\(.key) \(.value | @base64) 1"' | grep -v -e '^\s*[\w-]+: null\s*$$' | ./release.py
+	(cd ./r && cue export --out json -e cached_yaml) | jq -r 'to_entries[] | "../k/r/\(.key) \(.value | @base64) 1"' | grep -v -e '^\s*[\w-]+: null\s*$$' | ./release.py
 
 cache:
-	cd ./r/digest && $(MAKE) cache filter=$(filter)
+	cd ./r && $(MAKE) cache filter=$(filter)
 
 tailscale:
 	mkdir -p ./$(env)/openid
