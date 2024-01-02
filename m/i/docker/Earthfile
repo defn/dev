@@ -31,7 +31,6 @@ core-class:
     FROM quay.io/defn/dev:latest
 
     COPY script/800-defn-dev .
-    RUN git config --global user.email "you@example.com" && git config --global user.name "Your Name"
     RUN ./800-defn-dev && rm -f ./800-defn-dev
 
     RUN bash -c 'source .bashrc && for e in vscodevim.vim jnoortheen.nix-ide hashicorp.terraform golang.go esbenp.prettier-vscode bazelbuild.vscode-bazel cuelang.cue marp-team.marp-vscode; do bin/nix/code-server serve-local --force --install-extension $e; done'

@@ -12,7 +12,9 @@ function main {
 
 	cd nix
 	git init --quiet
-	git add --intent-to-add .
+	git add .
+	git config --global user.email "you@example.com"
+    git config --global user.name "Your Name"
 
 	nix build
 	if type -P attic; then (attic push --ignore-upstream-cache-filter defn result || true); fi
