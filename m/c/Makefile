@@ -4,43 +4,35 @@ digest ?=
 
 env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
 
-delivery:
-	while true; do \
-		time $(MAKE) delivery_inner; \
-		if ! git diff coder-* | grep app_version:; then break; fi; \
-		git add -u coder-*; \
-		done
+build:
+# M ../k/APP/kustomization.yaml
+# M ../e/ENV.yaml
+	runmany $(shell nproc) 'cd $$1 && make' coder-*
+# M ../k/y/APP/main.yaml
+	(cd ../k && b build && b run outputs_release__update)
 
-# M k/crd/ENV.yaml
-	$(MAKE) crd
-
-delivery_inner:
-	@mark delivery_inner
-# M k/y/cluster.cue updated
-# M k/y/APP/main.yaml
-# M k/APP/kustomization.yaml
-# images are original
-	$(MAKE) build
-
-# M k/r/APP/main.yaml
-# images are rewritten to use cache URLs, which may not be found in the cache
+# M k/y/APP.cue updated
+	$(MAKE) cluster_cue
+# M ../k/r/APP/main.yaml
 	$(MAKE) release
-
 # M r/digest/digest_gen.cue
-# M k/r/APP/main.yaml
-# put missing images into the cache
-	if env GIT_PAGER=cat git grep image:.not-found ../k/r; then $(MAKE) digest release; fi
+# M ../k/r/APP/main.yaml
+	if env GIT_PAGER=cat git grep image:.[n]ot-found ../k/r; then $(MAKE) digest release; fi
 
+#
+# make chart
+#
 # h/APP*
 # ENV/APP-version.cue
-	$(MAKE) chart
+	cd ../k && $(MAKE) delivery
+
+crd:
+# M k/crd/ENV.yaml
+	(cd k/y && cue export --out json -e crds | jq -r 'to_entries[] | "../k/crd/\(.key).yaml \(.value | @base64) 0"') | ./release.py
 
 list:
 	@(cd .. && git grep artifacthub) | awk '{print $$2}' | runmany 'curl -sSL https://artifacthub.io/api/v1/$${1#https://artifacthub.io/}/feed/rss 2>/dev/null | grep 'artifacthub.io/packages/helm/' | grep -v -E "beta|snapshot" | head -1 | cut -d">" -f2 | cut -d"<" -f1' | sort -u > pending.txt
 	git diff pending.txt
-
-chart:
-	cd ../k && $(MAKE) delivery
 
 helm_add:
 	(cd .. && git grep repo: kustomize.cue) | cut -d'"' -f2 | sort -u | while read -r repo; do helm repo add $$(echo $$repo | cut -d/ -f3- | perl -pe 's{\s+$$}{}; s{\W+}{-}g') $$repo; done
@@ -48,11 +40,6 @@ helm_add:
 
 digest:
 	cd ./r && $(MAKE) digest
-
-build:
-	b build
-	runmany $(shell nproc) 'cd $$1 && make' coder-*
-	$(MAKE) cluster_cue
 
 cluster_cue:
 # make one big cue config
@@ -178,9 +165,6 @@ spaceship-attack:
 
 spaceship-visit:
 	kubectl exec --context coder-amanibhavam-school -ti deploy/spaceship -- curl -XGET deathstar.default.svc.cluster.local/v1/
-
-crd:
-	(cd k/y && cue export --out json -e crds | jq -r 'to_entries[] | "../k/crd/\(.key).yaml \(.value | @base64) 0"') | ./release.py
 
 update-env:
 # ensure no argocd-repo-server pods are in a non-Running state, the cli will pick any pod
