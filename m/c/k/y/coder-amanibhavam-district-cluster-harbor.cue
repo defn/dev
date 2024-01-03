@@ -665,7 +665,7 @@ res: deployment: "coder-amanibhavam-district-cluster-harbor": harbor: "harbor-co
 					}, {
 						secretRef: name: "external-harbor-core"
 					}]
-					image:           "goharbor/harbor-core:v2.9.1"
+					image:           "goharbor/harbor-core:v2.10.0"
 					imagePullPolicy: "IfNotPresent"
 					livenessProbe: {
 						failureThreshold: 2
@@ -810,7 +810,7 @@ res: deployment: "coder-amanibhavam-district-cluster-harbor": harbor: "harbor-jo
 					}, {
 						secretRef: name: "external-harbor-jobservice"
 					}]
-					image:           "goharbor/harbor-jobservice:v2.9.1"
+					image:           "goharbor/harbor-jobservice:v2.10.0"
 					imagePullPolicy: "IfNotPresent"
 					livenessProbe: {
 						httpGet: {
@@ -893,7 +893,7 @@ res: deployment: "coder-amanibhavam-district-cluster-harbor": harbor: "harbor-po
 			spec: {
 				automountServiceAccountToken: false
 				containers: [{
-					image:           "goharbor/harbor-portal:v2.9.1"
+					image:           "goharbor/harbor-portal:v2.10.0"
 					imagePullPolicy: "IfNotPresent"
 					livenessProbe: {
 						httpGet: {
@@ -985,7 +985,7 @@ res: deployment: "coder-amanibhavam-district-cluster-harbor": harbor: "harbor-re
 					envFrom: [{
 						secretRef: name: "external-harbor-registry"
 					}]
-					image:           "goharbor/registry-photon:v2.9.1"
+					image:           "goharbor/registry-photon:v2.10.0"
 					imagePullPolicy: "IfNotPresent"
 					livenessProbe: {
 						httpGet: {
@@ -1044,7 +1044,7 @@ res: deployment: "coder-amanibhavam-district-cluster-harbor": harbor: "harbor-re
 					}, {
 						secretRef: name: "external-harbor-registryctl"
 					}]
-					image:           "goharbor/harbor-registryctl:v2.9.1"
+					image:           "goharbor/harbor-registryctl:v2.10.0"
 					imagePullPolicy: "IfNotPresent"
 					livenessProbe: {
 						httpGet: {
@@ -1151,7 +1151,7 @@ res: statefulset: "coder-amanibhavam-district-cluster-harbor": harbor: "harbor-d
 					envFrom: [{
 						secretRef: name: "external-harbor-database"
 					}]
-					image:           "goharbor/harbor-db:v2.9.1"
+					image:           "goharbor/harbor-db:v2.10.0"
 					imagePullPolicy: "IfNotPresent"
 					livenessProbe: {
 						exec: command: ["/docker-healthcheck.sh"]
@@ -1181,7 +1181,7 @@ res: statefulset: "coder-amanibhavam-district-cluster-harbor": harbor: "harbor-d
 					]
 
 					command: ["/bin/sh"]
-					image:           "goharbor/harbor-db:v2.9.1"
+					image:           "goharbor/harbor-db:v2.10.0"
 					imagePullPolicy: "IfNotPresent"
 					name:            "data-migrator"
 					volumeMounts: [{
@@ -1194,7 +1194,7 @@ res: statefulset: "coder-amanibhavam-district-cluster-harbor": harbor: "harbor-d
 						"chmod -R 700 /var/lib/postgresql/data/pgdata || true",
 					]
 					command: ["/bin/sh"]
-					image:           "goharbor/harbor-db:v2.9.1"
+					image:           "goharbor/harbor-db:v2.10.0"
 					imagePullPolicy: "IfNotPresent"
 					name:            "data-permissions-ensurer"
 					volumeMounts: [{
@@ -1267,7 +1267,7 @@ res: statefulset: "coder-amanibhavam-district-cluster-harbor": harbor: "harbor-r
 			spec: {
 				automountServiceAccountToken: false
 				containers: [{
-					image:           "goharbor/redis-photon:v2.9.1"
+					image:           "goharbor/redis-photon:v2.10.0"
 					imagePullPolicy: "IfNotPresent"
 					livenessProbe: {
 						initialDelaySeconds: 300
@@ -1419,7 +1419,7 @@ res: statefulset: "coder-amanibhavam-district-cluster-harbor": harbor: "harbor-t
 							name: "external-harbor-trivy"
 						}
 					}]
-					image:           "goharbor/trivy-adapter-photon:v2.9.1"
+					image:           "goharbor/trivy-adapter-photon:v2.10.0"
 					imagePullPolicy: "IfNotPresent"
 					livenessProbe: {
 						failureThreshold: 10

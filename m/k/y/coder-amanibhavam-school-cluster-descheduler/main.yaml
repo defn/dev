@@ -10,8 +10,8 @@ metadata:
     app.kubernetes.io/instance: descheduler
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: descheduler
-    app.kubernetes.io/version: 0.28.1
-    helm.sh/chart: descheduler-0.28.1
+    app.kubernetes.io/version: 0.29.0
+    helm.sh/chart: descheduler-0.29.0
   name: descheduler
   namespace: descheduler
 ---
@@ -22,8 +22,8 @@ metadata:
     app.kubernetes.io/instance: descheduler
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: descheduler
-    app.kubernetes.io/version: 0.28.1
-    helm.sh/chart: descheduler-0.28.1
+    app.kubernetes.io/version: 0.29.0
+    helm.sh/chart: descheduler-0.29.0
   name: descheduler
 rules:
 - apiGroups:
@@ -80,8 +80,8 @@ metadata:
     app.kubernetes.io/instance: descheduler
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: descheduler
-    app.kubernetes.io/version: 0.28.1
-    helm.sh/chart: descheduler-0.28.1
+    app.kubernetes.io/version: 0.29.0
+    helm.sh/chart: descheduler-0.29.0
   name: descheduler
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -137,8 +137,8 @@ metadata:
     app.kubernetes.io/instance: descheduler
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: descheduler
-    app.kubernetes.io/version: 0.28.1
-    helm.sh/chart: descheduler-0.28.1
+    app.kubernetes.io/version: 0.29.0
+    helm.sh/chart: descheduler-0.29.0
   name: descheduler
   namespace: descheduler
 ---
@@ -149,8 +149,8 @@ metadata:
     app.kubernetes.io/instance: descheduler
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: descheduler
-    app.kubernetes.io/version: 0.28.1
-    helm.sh/chart: descheduler-0.28.1
+    app.kubernetes.io/version: 0.29.0
+    helm.sh/chart: descheduler-0.29.0
   name: descheduler
   namespace: descheduler
 spec:
@@ -160,7 +160,7 @@ spec:
       template:
         metadata:
           annotations:
-            checksum/config: ed43f2840092caad68581ac8ab976a49a6e0a711a0a62ad94355c72009110f87
+            checksum/config: 13835baebbbcdb83c9614705d835f215659241e412dec6bb0e606fd003e4273c
           labels:
             app.kubernetes.io/instance: descheduler
             app.kubernetes.io/name: descheduler
@@ -172,7 +172,7 @@ spec:
             - --v=3
             command:
             - /bin/descheduler
-            image: registry.k8s.io/descheduler/descheduler:v0.28.1
+            image: registry.k8s.io/descheduler/descheduler:v0.29.0
             imagePullPolicy: IfNotPresent
             livenessProbe:
               failureThreshold: 3

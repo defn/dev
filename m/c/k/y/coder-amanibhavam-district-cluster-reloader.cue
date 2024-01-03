@@ -16,7 +16,7 @@ res: serviceaccount: "coder-amanibhavam-district-cluster-reloader": reloader: "r
 		labels: {
 			app:                            "reloader-reloader"
 			"app.kubernetes.io/managed-by": "Helm"
-			chart:                          "reloader-1.0.58"
+			chart:                          "reloader-1.0.60"
 			heritage:                       "Helm"
 			release:                        "reloader"
 		}
@@ -35,7 +35,7 @@ res: clusterrole: "coder-amanibhavam-district-cluster-reloader": cluster: "reloa
 		labels: {
 			app:                            "reloader-reloader"
 			"app.kubernetes.io/managed-by": "Helm"
-			chart:                          "reloader-1.0.58"
+			chart:                          "reloader-1.0.60"
 			heritage:                       "Helm"
 			release:                        "reloader"
 		}
@@ -108,7 +108,7 @@ res: clusterrolebinding: "coder-amanibhavam-district-cluster-reloader": cluster:
 		labels: {
 			app:                            "reloader-reloader"
 			"app.kubernetes.io/managed-by": "Helm"
-			chart:                          "reloader-1.0.58"
+			chart:                          "reloader-1.0.60"
 			heritage:                       "Helm"
 			release:                        "reloader"
 		}
@@ -136,12 +136,12 @@ res: deployment: "coder-amanibhavam-district-cluster-reloader": reloader: "reloa
 		labels: {
 			app:                            "reloader-reloader"
 			"app.kubernetes.io/managed-by": "Helm"
-			chart:                          "reloader-1.0.58"
+			chart:                          "reloader-1.0.60"
 			group:                          "com.stakater.platform"
 			heritage:                       "Helm"
 			provider:                       "stakater"
 			release:                        "reloader"
-			version:                        "v1.0.58"
+			version:                        "v1.0.60"
 		}
 		name:      "reloader-reloader"
 		namespace: "reloader"
@@ -157,16 +157,16 @@ res: deployment: "coder-amanibhavam-district-cluster-reloader": reloader: "reloa
 			metadata: labels: {
 				app:                            "reloader-reloader"
 				"app.kubernetes.io/managed-by": "Helm"
-				chart:                          "reloader-1.0.58"
+				chart:                          "reloader-1.0.60"
 				group:                          "com.stakater.platform"
 				heritage:                       "Helm"
 				provider:                       "stakater"
 				release:                        "reloader"
-				version:                        "v1.0.58"
+				version:                        "v1.0.60"
 			}
 			spec: {
 				containers: [{
-					image:           "ghcr.io/stakater/reloader:v1.0.58"
+					image:           "ghcr.io/stakater/reloader:v1.0.60"
 					imagePullPolicy: "IfNotPresent"
 					livenessProbe: {
 						failureThreshold: 5

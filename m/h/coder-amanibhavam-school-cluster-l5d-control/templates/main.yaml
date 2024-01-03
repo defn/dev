@@ -475,7 +475,7 @@ data:
     kubeAPI:
       clientBurst: 200
       clientQPS: 100
-    linkerdVersion: stable-2.14.7
+    linkerdVersion: stable-2.14.8
     networkValidator:
       connectAddr: 1.1.1.1:20001
       enableSecurityContext: true
@@ -639,7 +639,7 @@ data:
 kind: ConfigMap
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.14.7
+    linkerd.io/created-by: linkerd/helm stable-2.14.8
   labels:
     linkerd.io/control-plane-component: controller
     linkerd.io/control-plane-ns: linkerd
@@ -652,7 +652,7 @@ spec:
       template:
         spec:
           containers:
-            - image: cache.defn.run:5000/cr.l5d.io/linkerd/controller@sha256:23cbbb51b221176cb1e1514602d43d8a2888fbcb8261704b66b6b6d116ffbcb3
+            - image: cache.defn.run:5000/cr.l5d.io/linkerd/controller@sha256:c488b1fe849b7c7d90c9ef14d1e5777f2fd7567abb50535d493ce0fcdf49bd4a
               args:
                 - heartbeat
                 - -controller-namespace=linkerd
@@ -683,7 +683,7 @@ spec:
           serviceAccountName: linkerd-heartbeat
         metadata:
           annotations:
-            linkerd.io/created-by: linkerd/helm stable-2.14.7
+            linkerd.io/created-by: linkerd/helm stable-2.14.8
           labels:
             linkerd.io/control-plane-component: heartbeat
             linkerd.io/workload-ns: linkerd
@@ -694,11 +694,11 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.14.7
+    linkerd.io/created-by: linkerd/helm stable-2.14.8
   labels:
     app.kubernetes.io/name: heartbeat
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.14.7
+    app.kubernetes.io/version: stable-2.14.8
     linkerd.io/control-plane-component: heartbeat
     linkerd.io/control-plane-ns: linkerd
   name: linkerd-heartbeat
@@ -746,7 +746,7 @@ spec:
             - mountPath: /run
               name: linkerd-proxy-init-xtables-lock
       containers:
-        - image: cache.defn.run:5000/cr.l5d.io/linkerd/proxy@sha256:9893a5d2fcccf7b0845852d1f9ff3d21f867d55e07cdb53314946eece7ae7c59
+        - image: cache.defn.run:5000/cr.l5d.io/linkerd/proxy@sha256:71bf90a31c998313a00b77ea1692d2e6fbd7d975d02009d40e205e4a3f736c31
           env:
             - name: _pod_name
               valueFrom:
@@ -876,7 +876,7 @@ spec:
               name: linkerd-identity-end-entity
             - mountPath: /var/run/secrets/tokens
               name: linkerd-identity-token
-        - image: cache.defn.run:5000/cr.l5d.io/linkerd/controller@sha256:23cbbb51b221176cb1e1514602d43d8a2888fbcb8261704b66b6b6d116ffbcb3
+        - image: cache.defn.run:5000/cr.l5d.io/linkerd/controller@sha256:c488b1fe849b7c7d90c9ef14d1e5777f2fd7567abb50535d493ce0fcdf49bd4a
           args:
             - destination
             - -addr=:8086
@@ -916,7 +916,7 @@ spec:
             runAsUser: 2103
             seccompProfile:
               type: RuntimeDefault
-        - image: cache.defn.run:5000/cr.l5d.io/linkerd/controller@sha256:23cbbb51b221176cb1e1514602d43d8a2888fbcb8261704b66b6b6d116ffbcb3
+        - image: cache.defn.run:5000/cr.l5d.io/linkerd/controller@sha256:c488b1fe849b7c7d90c9ef14d1e5777f2fd7567abb50535d493ce0fcdf49bd4a
           args:
             - sp-validator
             - -log-level=info
@@ -953,7 +953,7 @@ spec:
             - mountPath: /var/run/linkerd/tls
               name: sp-tls
               readOnly: true
-        - image: cache.defn.run:5000/cr.l5d.io/linkerd/policy-controller@sha256:c4de1fee6f2410a4030800ad08cd7fa945af0c677a0bb992bdcc6a2cccfff70d
+        - image: cache.defn.run:5000/cr.l5d.io/linkerd/policy-controller@sha256:05b0c694497a1a0f8eff3c6cf09183f91d2bbb5be520d631e81a2e0b76e2e5aa
           args:
             - --admin-addr=0.0.0.0:9990
             - --control-plane-namespace=linkerd
@@ -1032,8 +1032,8 @@ spec:
         checksum/config: 1f1a44f2579b39bf1fed5399c918123b6f7da3862455553e5d5183c2b22a7af1
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
         config.linkerd.io/default-inbound-policy: all-unauthenticated
-        linkerd.io/created-by: linkerd/helm stable-2.14.7
-        linkerd.io/proxy-version: stable-2.14.7
+        linkerd.io/created-by: linkerd/helm stable-2.14.8
+        linkerd.io/proxy-version: stable-2.14.8
         linkerd.io/trust-root-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
       labels:
         linkerd.io/control-plane-component: destination
@@ -1054,11 +1054,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.14.7
+    linkerd.io/created-by: linkerd/helm stable-2.14.8
   labels:
     app.kubernetes.io/name: destination
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.14.7
+    app.kubernetes.io/version: stable-2.14.8
     linkerd.io/control-plane-component: destination
     linkerd.io/control-plane-ns: linkerd
   name: linkerd-destination
@@ -1106,7 +1106,7 @@ spec:
             - mountPath: /run
               name: linkerd-proxy-init-xtables-lock
       containers:
-        - image: cache.defn.run:5000/cr.l5d.io/linkerd/controller@sha256:23cbbb51b221176cb1e1514602d43d8a2888fbcb8261704b66b6b6d116ffbcb3
+        - image: cache.defn.run:5000/cr.l5d.io/linkerd/controller@sha256:c488b1fe849b7c7d90c9ef14d1e5777f2fd7567abb50535d493ce0fcdf49bd4a
           args:
             - identity
             - -log-level=info
@@ -1154,7 +1154,7 @@ spec:
               name: identity-issuer
             - mountPath: /var/run/linkerd/identity/trust-roots/
               name: trust-roots
-        - image: cache.defn.run:5000/cr.l5d.io/linkerd/proxy@sha256:9893a5d2fcccf7b0845852d1f9ff3d21f867d55e07cdb53314946eece7ae7c59
+        - image: cache.defn.run:5000/cr.l5d.io/linkerd/proxy@sha256:71bf90a31c998313a00b77ea1692d2e6fbd7d975d02009d40e205e4a3f736c31
           env:
             - name: _pod_name
               valueFrom:
@@ -1308,8 +1308,8 @@ spec:
       annotations:
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
         config.linkerd.io/default-inbound-policy: all-unauthenticated
-        linkerd.io/created-by: linkerd/helm stable-2.14.7
-        linkerd.io/proxy-version: stable-2.14.7
+        linkerd.io/created-by: linkerd/helm stable-2.14.8
+        linkerd.io/proxy-version: stable-2.14.8
         linkerd.io/trust-root-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
       labels:
         linkerd.io/control-plane-component: identity
@@ -1330,11 +1330,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.14.7
+    linkerd.io/created-by: linkerd/helm stable-2.14.8
   labels:
     app.kubernetes.io/name: identity
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.14.7
+    app.kubernetes.io/version: stable-2.14.8
     linkerd.io/control-plane-component: identity
     linkerd.io/control-plane-ns: linkerd
   name: linkerd-identity
@@ -1382,7 +1382,7 @@ spec:
             - mountPath: /run
               name: linkerd-proxy-init-xtables-lock
       containers:
-        - image: cache.defn.run:5000/cr.l5d.io/linkerd/proxy@sha256:9893a5d2fcccf7b0845852d1f9ff3d21f867d55e07cdb53314946eece7ae7c59
+        - image: cache.defn.run:5000/cr.l5d.io/linkerd/proxy@sha256:71bf90a31c998313a00b77ea1692d2e6fbd7d975d02009d40e205e4a3f736c31
           env:
             - name: _pod_name
               valueFrom:
@@ -1512,7 +1512,7 @@ spec:
               name: linkerd-identity-end-entity
             - mountPath: /var/run/secrets/tokens
               name: linkerd-identity-token
-        - image: cache.defn.run:5000/cr.l5d.io/linkerd/controller@sha256:23cbbb51b221176cb1e1514602d43d8a2888fbcb8261704b66b6b6d116ffbcb3
+        - image: cache.defn.run:5000/cr.l5d.io/linkerd/controller@sha256:c488b1fe849b7c7d90c9ef14d1e5777f2fd7567abb50535d493ce0fcdf49bd4a
           args:
             - proxy-injector
             - -log-level=info
@@ -1588,8 +1588,8 @@ spec:
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
         config.linkerd.io/default-inbound-policy: all-unauthenticated
         config.linkerd.io/opaque-ports: "8443"
-        linkerd.io/created-by: linkerd/helm stable-2.14.7
-        linkerd.io/proxy-version: stable-2.14.7
+        linkerd.io/created-by: linkerd/helm stable-2.14.8
+        linkerd.io/proxy-version: stable-2.14.8
         linkerd.io/trust-root-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
       labels:
         linkerd.io/control-plane-component: proxy-injector
@@ -1608,11 +1608,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.14.7
+    linkerd.io/created-by: linkerd/helm stable-2.14.8
   labels:
     app.kubernetes.io/name: proxy-injector
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.14.7
+    app.kubernetes.io/version: stable-2.14.8
     linkerd.io/control-plane-component: proxy-injector
     linkerd.io/control-plane-ns: linkerd
   name: linkerd-proxy-injector
@@ -1631,7 +1631,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.14.7
+    linkerd.io/created-by: linkerd/helm stable-2.14.8
   name: ext-namespace-metadata-linkerd-config
   namespace: linkerd
 ---
@@ -1717,7 +1717,7 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.14.7
+    linkerd.io/created-by: linkerd/helm stable-2.14.8
   labels:
     linkerd.io/control-plane-component: destination
     linkerd.io/control-plane-ns: linkerd
@@ -1736,7 +1736,7 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.14.7
+    linkerd.io/created-by: linkerd/helm stable-2.14.8
   labels:
     linkerd.io/control-plane-component: destination
     linkerd.io/control-plane-ns: linkerd
@@ -1755,7 +1755,7 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.14.7
+    linkerd.io/created-by: linkerd/helm stable-2.14.8
   labels:
     linkerd.io/control-plane-component: identity
     linkerd.io/control-plane-ns: linkerd
@@ -1774,7 +1774,7 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.14.7
+    linkerd.io/created-by: linkerd/helm stable-2.14.8
   labels:
     linkerd.io/control-plane-component: identity
     linkerd.io/control-plane-ns: linkerd
@@ -1793,7 +1793,7 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.14.7
+    linkerd.io/created-by: linkerd/helm stable-2.14.8
   labels:
     linkerd.io/control-plane-component: destination
     linkerd.io/control-plane-ns: linkerd
@@ -1812,7 +1812,7 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.14.7
+    linkerd.io/created-by: linkerd/helm stable-2.14.8
   labels:
     linkerd.io/control-plane-component: destination
     linkerd.io/control-plane-ns: linkerd
@@ -1832,7 +1832,7 @@ kind: Service
 metadata:
   annotations:
     config.linkerd.io/opaque-ports: "443"
-    linkerd.io/created-by: linkerd/helm stable-2.14.7
+    linkerd.io/created-by: linkerd/helm stable-2.14.8
   labels:
     linkerd.io/control-plane-component: proxy-injector
     linkerd.io/control-plane-ns: linkerd
@@ -1851,7 +1851,7 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.14.7
+    linkerd.io/created-by: linkerd/helm stable-2.14.8
   labels:
     linkerd.io/control-plane-component: destination
     linkerd.io/control-plane-ns: linkerd

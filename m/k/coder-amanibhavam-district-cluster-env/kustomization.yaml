@@ -194,7 +194,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-descheduler
-              targetRevision: 0.0.103
+              targetRevision: 0.0.104
             syncPolicy:
               automated:
                 prune: true
@@ -257,7 +257,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-harbor
-              targetRevision: 0.0.103
+              targetRevision: 0.0.104
             syncPolicy:
               automated:
                 prune: true
@@ -363,7 +363,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-l5d-control
-              targetRevision: 0.0.8
+              targetRevision: 0.0.9
             syncPolicy:
               automated:
                 prune: true
@@ -468,7 +468,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-reloader
-              targetRevision: 0.0.107
+              targetRevision: 0.0.108
             syncPolicy:
               automated:
                 prune: true
@@ -510,7 +510,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-district-cluster-tailscale
-              targetRevision: 0.0.8
+              targetRevision: 0.0.9
             syncPolicy:
               automated:
                 prune: true

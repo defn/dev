@@ -13,8 +13,8 @@ res: serviceaccount: "coder-amanibhavam-class-cluster-descheduler": descheduler:
 			"app.kubernetes.io/instance":   "descheduler"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "descheduler"
-			"app.kubernetes.io/version":    "0.28.1"
-			"helm.sh/chart":                "descheduler-0.28.1"
+			"app.kubernetes.io/version":    "0.29.0"
+			"helm.sh/chart":                "descheduler-0.29.0"
 		}
 		name:      "descheduler"
 		namespace: "descheduler"
@@ -28,8 +28,8 @@ res: clusterrole: "coder-amanibhavam-class-cluster-descheduler": cluster: desche
 			"app.kubernetes.io/instance":   "descheduler"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "descheduler"
-			"app.kubernetes.io/version":    "0.28.1"
-			"helm.sh/chart":                "descheduler-0.28.1"
+			"app.kubernetes.io/version":    "0.29.0"
+			"helm.sh/chart":                "descheduler-0.29.0"
 		}
 		name: "descheduler"
 	}
@@ -87,8 +87,8 @@ res: clusterrolebinding: "coder-amanibhavam-class-cluster-descheduler": cluster:
 			"app.kubernetes.io/instance":   "descheduler"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "descheduler"
-			"app.kubernetes.io/version":    "0.28.1"
-			"helm.sh/chart":                "descheduler-0.28.1"
+			"app.kubernetes.io/version":    "0.29.0"
+			"helm.sh/chart":                "descheduler-0.29.0"
 		}
 		name: "descheduler"
 	}
@@ -151,8 +151,8 @@ res: configmap: "coder-amanibhavam-class-cluster-descheduler": descheduler: desc
 			"app.kubernetes.io/instance":   "descheduler"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "descheduler"
-			"app.kubernetes.io/version":    "0.28.1"
-			"helm.sh/chart":                "descheduler-0.28.1"
+			"app.kubernetes.io/version":    "0.29.0"
+			"helm.sh/chart":                "descheduler-0.29.0"
 		}
 		name:      "descheduler"
 		namespace: "descheduler"
@@ -166,8 +166,8 @@ res: cronjob: "coder-amanibhavam-class-cluster-descheduler": descheduler: desche
 			"app.kubernetes.io/instance":   "descheduler"
 			"app.kubernetes.io/managed-by": "Helm"
 			"app.kubernetes.io/name":       "descheduler"
-			"app.kubernetes.io/version":    "0.28.1"
-			"helm.sh/chart":                "descheduler-0.28.1"
+			"app.kubernetes.io/version":    "0.29.0"
+			"helm.sh/chart":                "descheduler-0.29.0"
 		}
 		name:      "descheduler"
 		namespace: "descheduler"
@@ -176,7 +176,7 @@ res: cronjob: "coder-amanibhavam-class-cluster-descheduler": descheduler: desche
 		concurrencyPolicy: "Forbid"
 		jobTemplate: spec: template: {
 			metadata: {
-				annotations: "checksum/config": "ed43f2840092caad68581ac8ab976a49a6e0a711a0a62ad94355c72009110f87"
+				annotations: "checksum/config": "13835baebbbcdb83c9614705d835f215659241e412dec6bb0e606fd003e4273c"
 				labels: {
 					"app.kubernetes.io/instance": "descheduler"
 					"app.kubernetes.io/name":     "descheduler"
@@ -190,7 +190,7 @@ res: cronjob: "coder-amanibhavam-class-cluster-descheduler": descheduler: desche
 						"--v=3",
 					]
 					command: ["/bin/descheduler"]
-					image:           "registry.k8s.io/descheduler/descheduler:v0.28.1"
+					image:           "registry.k8s.io/descheduler/descheduler:v0.29.0"
 					imagePullPolicy: "IfNotPresent"
 					livenessProbe: {
 						failureThreshold: 3

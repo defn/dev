@@ -246,7 +246,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/goharbor/harbor-core@sha256:ee70dcf6e7c5a3c1d65a6898eb7d3816cbe760f7971a79e1fed2d529abb12ccd
+        - image: cache.defn.run:5000/goharbor/harbor-core@sha256:deb1e0c390771e2d835913b1306598596466fd2b782ffd6626067d6f3cfa4cc1
           env:
             - name: CORE_SECRET
               valueFrom:
@@ -365,7 +365,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/goharbor/harbor-jobservice@sha256:19cdee359cb86dc9817752486134c5436329ca9271d84313fa126a0f90c18c6f
+        - image: cache.defn.run:5000/goharbor/harbor-jobservice@sha256:bc65169ad4137d892ec481c930bdd1f07326cafc7b9367bee9ebddb2b08a7d42
           env:
             - name: CORE_SECRET
               valueFrom:
@@ -451,7 +451,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/goharbor/harbor-portal@sha256:a316b664ec90ca500ad8fc578911c04a0b6727357726c753cbb041d774875a05
+        - image: cache.defn.run:5000/goharbor/harbor-portal@sha256:ac1382afbbce74e196bec839ac1b10caf95664f9c831e83dbd240859ca3db0df
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
@@ -512,7 +512,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/goharbor/registry-photon@sha256:8cf8425cec71afd35192460867b63801578ba68f7d72735013a29c7c0e9e7910
+        - image: cache.defn.run:5000/goharbor/registry-photon@sha256:720af7db57976fd4f19a3d541812362c5199cc9c277595394754f566a7cdabf5
           args:
             - serve
             - /etc/registry/config.yml
@@ -547,7 +547,7 @@ spec:
             - mountPath: /etc/registry/config.yml
               name: registry-config
               subPath: config.yml
-        - image: cache.defn.run:5000/goharbor/harbor-registryctl@sha256:34a53c772e9557d777a03fa95f96d38205e4befaf8a2b1bb995d5878cc4d5e84
+        - image: cache.defn.run:5000/goharbor/harbor-registryctl@sha256:78c2ff95fa1fcd0160b0dda57e48c7dfc5c9d63f40568d677f7fa2ea56814412
           env:
             - name: CORE_SECRET
               valueFrom:
@@ -1170,7 +1170,7 @@ spec:
   template:
     spec:
       initContainers:
-        - image: cache.defn.run:5000/goharbor/harbor-db@sha256:9342cc7628537ab8b662b0eb48c044ffc914bb355c346e1b437477ff526a2887
+        - image: cache.defn.run:5000/goharbor/harbor-db@sha256:bd3ed7a8783a3c71b20bc0e2f5fbe8417dc97b032b1229e47b360bd58521b4f8
           args:
             - -c
             - '[ -e /var/lib/postgresql/data/postgresql.conf ] && [ ! -d /var/lib/postgresql/data/pgdata ] && mkdir -m 0700 /var/lib/postgresql/data/pgdata && mv /var/lib/postgresql/data/* /var/lib/postgresql/data/pgdata/ || true'
@@ -1181,7 +1181,7 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: database-data
-        - image: cache.defn.run:5000/goharbor/harbor-db@sha256:9342cc7628537ab8b662b0eb48c044ffc914bb355c346e1b437477ff526a2887
+        - image: cache.defn.run:5000/goharbor/harbor-db@sha256:bd3ed7a8783a3c71b20bc0e2f5fbe8417dc97b032b1229e47b360bd58521b4f8
           args:
             - -c
             - chmod -R 700 /var/lib/postgresql/data/pgdata || true
@@ -1193,7 +1193,7 @@ spec:
             - mountPath: /var/lib/postgresql/data
               name: database-data
       containers:
-        - image: cache.defn.run:5000/goharbor/harbor-db@sha256:9342cc7628537ab8b662b0eb48c044ffc914bb355c346e1b437477ff526a2887
+        - image: cache.defn.run:5000/goharbor/harbor-db@sha256:bd3ed7a8783a3c71b20bc0e2f5fbe8417dc97b032b1229e47b360bd58521b4f8
           env:
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
@@ -1278,7 +1278,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/goharbor/redis-photon@sha256:ccbd16fb581dd84bb5146d1e99f854c1371d878814d05bde32d759447c75d266
+        - image: cache.defn.run:5000/goharbor/redis-photon@sha256:24726436248456e9cc60144a4ab414f28af1a6f6aeb6b481e115353c3b8a6e81
           imagePullPolicy: IfNotPresent
           livenessProbe:
             initialDelaySeconds: 300
@@ -1344,7 +1344,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/goharbor/trivy-adapter-photon@sha256:48dbd3e6d45705574adb91115f202fbe88968e58b0a7191f8d9567a3722bfda3
+        - image: cache.defn.run:5000/goharbor/trivy-adapter-photon@sha256:a01397526477046dac29a0d973984c9d518bc1913436879955e4e6ce747ead84
           env:
             - name: HTTP_PROXY
               value: ""
