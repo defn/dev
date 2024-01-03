@@ -46,7 +46,7 @@ class-init:
 	coder login https://coder.$(env).$(GIT_AUTHOR_NAME).$(domain) --first-user-username="admin" --first-user-email="iam+admin@defn.sh" --first-user-password="Admin123456789,,," --first-user-trial=false
 
 teacher: 
-	pass hello
+	$(MAKE) hello
 	tailscale serve --bg http://127.0.0.1:3000
 	b server defn-org $(MAKE) dev_inner 
 
@@ -102,7 +102,7 @@ aws:
 	cd i/teacher && $(MAKE) build
 
 warudo:
-	pass hello
+	$(MAKE) hello
 	$(MAKE) -j 2 docker # aws
 
 coder-login:
@@ -185,3 +185,6 @@ tailscale-kubeconfig:
 	tailscale configure kubeconfig $(env)-proxy
 	-kubectl config delete-context $(env)
 	kubectl config rename-context $(env)-proxy.$(shell tailscale cert 2>&1 | grep 'use ' | cut -d'"' -f2 | cut -d. -f2-) $(env)
+
+hello:
+	test "$$(pass hello)" == hello
