@@ -363,7 +363,7 @@ kustomize: "l5d-control": #KustomizeHelm & {
 	helm: {
 		release: "l5d-control"
 		name:    "linkerd-control-plane"
-		version: "1.16.8"
+		version: "1.16.9"
 		repo:    "https://helm.linkerd.io/stable"
 		values: {
 			heartbeatSchedule: "0 0 * * *"
@@ -544,7 +544,7 @@ kustomize: "buildkite": #KustomizeHelm & {
 		release:   "buildkite"
 		name:      "agent-stack-k8s"
 		namespace: "buildkite"
-		version:   "11111"
+		version:   "0.7.0"
 		repo:      "oci://ghcr.io/buildkite/helm"
 		values: {
 			config: {
@@ -2062,7 +2062,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "4.0.0"
+		version:     "4.0.1"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
@@ -2966,7 +2966,7 @@ kustomize: "reloader": #KustomizeHelm & {
 		release:   "reloader"
 		name:      "reloader"
 		namespace: "reloader"
-		version:   "1.0.58"
+		version:   "1.0.60"
 		repo:      "https://stakater.github.io/stakater-charts"
 		values: {
 		}

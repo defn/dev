@@ -52,7 +52,7 @@ res: role: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "ext-names
 	apiVersion: "rbac.authorization.k8s.io/v1"
 	kind:       "Role"
 	metadata: {
-		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.7"
+		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.8"
 		name:      "ext-namespace-metadata-linkerd-config"
 		namespace: "linkerd"
 	}
@@ -527,7 +527,7 @@ res: configmap: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "link
 			kubeAPI:
 			  clientBurst: 200
 			  clientQPS: 100
-			linkerdVersion: stable-2.14.7
+			linkerdVersion: stable-2.14.8
 			networkValidator:
 			  connectAddr: 1.1.1.1:20001
 			  enableSecurityContext: true
@@ -694,7 +694,7 @@ res: configmap: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "link
 
 	kind: "ConfigMap"
 	metadata: {
-		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.7"
+		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.8"
 		labels: {
 			"linkerd.io/control-plane-component": "controller"
 			"linkerd.io/control-plane-ns":        "linkerd"
@@ -707,7 +707,7 @@ res: service: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "linker
 	apiVersion: "v1"
 	kind:       "Service"
 	metadata: {
-		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.7"
+		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.8"
 		labels: {
 			"linkerd.io/control-plane-component": "destination"
 			"linkerd.io/control-plane-ns":        "linkerd"
@@ -729,7 +729,7 @@ res: service: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "linker
 	apiVersion: "v1"
 	kind:       "Service"
 	metadata: {
-		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.7"
+		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.8"
 		labels: {
 			"linkerd.io/control-plane-component": "destination"
 			"linkerd.io/control-plane-ns":        "linkerd"
@@ -751,7 +751,7 @@ res: service: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "linker
 	apiVersion: "v1"
 	kind:       "Service"
 	metadata: {
-		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.7"
+		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.8"
 		labels: {
 			"linkerd.io/control-plane-component": "identity"
 			"linkerd.io/control-plane-ns":        "linkerd"
@@ -773,7 +773,7 @@ res: service: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "linker
 	apiVersion: "v1"
 	kind:       "Service"
 	metadata: {
-		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.7"
+		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.8"
 		labels: {
 			"linkerd.io/control-plane-component": "identity"
 			"linkerd.io/control-plane-ns":        "linkerd"
@@ -795,7 +795,7 @@ res: service: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "linker
 	apiVersion: "v1"
 	kind:       "Service"
 	metadata: {
-		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.7"
+		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.8"
 		labels: {
 			"linkerd.io/control-plane-component": "destination"
 			"linkerd.io/control-plane-ns":        "linkerd"
@@ -817,7 +817,7 @@ res: service: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "linker
 	apiVersion: "v1"
 	kind:       "Service"
 	metadata: {
-		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.7"
+		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.8"
 		labels: {
 			"linkerd.io/control-plane-component": "destination"
 			"linkerd.io/control-plane-ns":        "linkerd"
@@ -841,7 +841,7 @@ res: service: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "linker
 	metadata: {
 		annotations: {
 			"config.linkerd.io/opaque-ports": "443"
-			"linkerd.io/created-by":          "linkerd/helm stable-2.14.7"
+			"linkerd.io/created-by":          "linkerd/helm stable-2.14.8"
 		}
 		labels: {
 			"linkerd.io/control-plane-component": "proxy-injector"
@@ -864,7 +864,7 @@ res: service: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "linker
 	apiVersion: "v1"
 	kind:       "Service"
 	metadata: {
-		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.7"
+		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.8"
 		labels: {
 			"linkerd.io/control-plane-component": "destination"
 			"linkerd.io/control-plane-ns":        "linkerd"
@@ -886,11 +886,11 @@ res: deployment: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "lin
 	apiVersion: "apps/v1"
 	kind:       "Deployment"
 	metadata: {
-		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.7"
+		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.8"
 		labels: {
 			"app.kubernetes.io/name":             "destination"
 			"app.kubernetes.io/part-of":          "Linkerd"
-			"app.kubernetes.io/version":          "stable-2.14.7"
+			"app.kubernetes.io/version":          "stable-2.14.8"
 			"linkerd.io/control-plane-component": "destination"
 			"linkerd.io/control-plane-ns":        "linkerd"
 		}
@@ -914,8 +914,8 @@ res: deployment: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "lin
 					"checksum/config":                                "1f1a44f2579b39bf1fed5399c918123b6f7da3862455553e5d5183c2b22a7af1"
 					"cluster-autoscaler.kubernetes.io/safe-to-evict": "true"
 					"config.linkerd.io/default-inbound-policy":       "all-unauthenticated"
-					"linkerd.io/created-by":                          "linkerd/helm stable-2.14.7"
-					"linkerd.io/proxy-version":                       "stable-2.14.7"
+					"linkerd.io/created-by":                          "linkerd/helm stable-2.14.8"
+					"linkerd.io/proxy-version":                       "stable-2.14.8"
 					"linkerd.io/trust-root-sha256":                   "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 				}
 				labels: {
@@ -1045,7 +1045,7 @@ res: deployment: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "lin
 						name:  "LINKERD2_PROXY_POLICY_SVC_NAME"
 						value: "linkerd-destination.linkerd.serviceaccount.identity.linkerd.cluster.local"
 					}]
-					image:           "cr.l5d.io/linkerd/proxy:stable-2.14.7"
+					image:           "cr.l5d.io/linkerd/proxy:stable-2.14.8"
 					imagePullPolicy: "IfNotPresent"
 					lifecycle: postStart: exec: command: [
 						"/usr/lib/linkerd/linkerd-await",
@@ -1104,7 +1104,7 @@ res: deployment: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "lin
 						"-default-opaque-ports=25,587,3306,4444,5432,6379,9300,11211",
 						"-enable-pprof=false",
 					]
-					image:           "cr.l5d.io/linkerd/controller:stable-2.14.7"
+					image:           "cr.l5d.io/linkerd/controller:stable-2.14.8"
 					imagePullPolicy: "IfNotPresent"
 					livenessProbe: {
 						httpGet: {
@@ -1143,7 +1143,7 @@ res: deployment: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "lin
 						"-log-format=plain",
 						"-enable-pprof=false",
 					]
-					image:           "cr.l5d.io/linkerd/controller:stable-2.14.7"
+					image:           "cr.l5d.io/linkerd/controller:stable-2.14.8"
 					imagePullPolicy: "IfNotPresent"
 					livenessProbe: {
 						httpGet: {
@@ -1197,7 +1197,7 @@ res: deployment: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "lin
 						"--default-opaque-ports=25,587,3306,4444,5432,6379,9300,11211",
 						"--probe-networks=0.0.0.0/0",
 					]
-					image:           "cr.l5d.io/linkerd/policy-controller:stable-2.14.7"
+					image:           "cr.l5d.io/linkerd/policy-controller:stable-2.14.8"
 					imagePullPolicy: "IfNotPresent"
 					livenessProbe: httpGet: {
 						path: "/live"
@@ -1313,11 +1313,11 @@ res: deployment: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "lin
 	apiVersion: "apps/v1"
 	kind:       "Deployment"
 	metadata: {
-		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.7"
+		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.8"
 		labels: {
 			"app.kubernetes.io/name":             "identity"
 			"app.kubernetes.io/part-of":          "Linkerd"
-			"app.kubernetes.io/version":          "stable-2.14.7"
+			"app.kubernetes.io/version":          "stable-2.14.8"
 			"linkerd.io/control-plane-component": "identity"
 			"linkerd.io/control-plane-ns":        "linkerd"
 		}
@@ -1340,8 +1340,8 @@ res: deployment: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "lin
 				annotations: {
 					"cluster-autoscaler.kubernetes.io/safe-to-evict": "true"
 					"config.linkerd.io/default-inbound-policy":       "all-unauthenticated"
-					"linkerd.io/created-by":                          "linkerd/helm stable-2.14.7"
-					"linkerd.io/proxy-version":                       "stable-2.14.7"
+					"linkerd.io/created-by":                          "linkerd/helm stable-2.14.8"
+					"linkerd.io/proxy-version":                       "stable-2.14.8"
 					"linkerd.io/trust-root-sha256":                   "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 				}
 				labels: {
@@ -1370,7 +1370,7 @@ res: deployment: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "lin
 						name:  "LINKERD_DISABLED"
 						value: "linkerd-await cannot block the identity controller"
 					}]
-					image:           "cr.l5d.io/linkerd/controller:stable-2.14.7"
+					image:           "cr.l5d.io/linkerd/controller:stable-2.14.8"
 					imagePullPolicy: "IfNotPresent"
 					livenessProbe: {
 						httpGet: {
@@ -1531,7 +1531,7 @@ res: deployment: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "lin
 						name:  "LINKERD2_PROXY_POLICY_SVC_NAME"
 						value: "linkerd-destination.linkerd.serviceaccount.identity.linkerd.cluster.local"
 					}]
-					image:           "cr.l5d.io/linkerd/proxy:stable-2.14.7"
+					image:           "cr.l5d.io/linkerd/proxy:stable-2.14.8"
 					imagePullPolicy: "IfNotPresent"
 					livenessProbe: {
 						httpGet: {
@@ -1649,11 +1649,11 @@ res: deployment: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "lin
 	apiVersion: "apps/v1"
 	kind:       "Deployment"
 	metadata: {
-		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.7"
+		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.8"
 		labels: {
 			"app.kubernetes.io/name":             "proxy-injector"
 			"app.kubernetes.io/part-of":          "Linkerd"
-			"app.kubernetes.io/version":          "stable-2.14.7"
+			"app.kubernetes.io/version":          "stable-2.14.8"
 			"linkerd.io/control-plane-component": "proxy-injector"
 			"linkerd.io/control-plane-ns":        "linkerd"
 		}
@@ -1674,8 +1674,8 @@ res: deployment: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "lin
 					"cluster-autoscaler.kubernetes.io/safe-to-evict": "true"
 					"config.linkerd.io/default-inbound-policy":       "all-unauthenticated"
 					"config.linkerd.io/opaque-ports":                 "8443"
-					"linkerd.io/created-by":                          "linkerd/helm stable-2.14.7"
-					"linkerd.io/proxy-version":                       "stable-2.14.7"
+					"linkerd.io/created-by":                          "linkerd/helm stable-2.14.8"
+					"linkerd.io/proxy-version":                       "stable-2.14.8"
 					"linkerd.io/trust-root-sha256":                   "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 				}
 				labels: {
@@ -1805,7 +1805,7 @@ res: deployment: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "lin
 						name:  "LINKERD2_PROXY_POLICY_SVC_NAME"
 						value: "linkerd-destination.linkerd.serviceaccount.identity.linkerd.cluster.local"
 					}]
-					image:           "cr.l5d.io/linkerd/proxy:stable-2.14.7"
+					image:           "cr.l5d.io/linkerd/proxy:stable-2.14.8"
 					imagePullPolicy: "IfNotPresent"
 					lifecycle: postStart: exec: command: [
 						"/usr/lib/linkerd/linkerd-await",
@@ -1858,7 +1858,7 @@ res: deployment: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "lin
 						"-linkerd-namespace=linkerd",
 						"-enable-pprof=false",
 					]
-					image:           "cr.l5d.io/linkerd/controller:stable-2.14.7"
+					image:           "cr.l5d.io/linkerd/controller:stable-2.14.8"
 					imagePullPolicy: "IfNotPresent"
 					livenessProbe: {
 						httpGet: {
@@ -1982,11 +1982,11 @@ res: cronjob: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "linker
 	apiVersion: "batch/v1"
 	kind:       "CronJob"
 	metadata: {
-		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.7"
+		annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.8"
 		labels: {
 			"app.kubernetes.io/name":             "heartbeat"
 			"app.kubernetes.io/part-of":          "Linkerd"
-			"app.kubernetes.io/version":          "stable-2.14.7"
+			"app.kubernetes.io/version":          "stable-2.14.8"
 			"linkerd.io/control-plane-component": "heartbeat"
 			"linkerd.io/control-plane-ns":        "linkerd"
 		}
@@ -1997,7 +1997,7 @@ res: cronjob: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "linker
 		concurrencyPolicy: "Replace"
 		jobTemplate: spec: template: {
 			metadata: {
-				annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.7"
+				annotations: "linkerd.io/created-by": "linkerd/helm stable-2.14.8"
 				labels: {
 					"linkerd.io/control-plane-component": "heartbeat"
 					"linkerd.io/workload-ns":             "linkerd"
@@ -2016,7 +2016,7 @@ res: cronjob: "coder-amanibhavam-district-cluster-l5d-control": linkerd: "linker
 						name:  "LINKERD_DISABLED"
 						value: "the heartbeat controller does not use the proxy"
 					}]
-					image:           "cr.l5d.io/linkerd/controller:stable-2.14.7"
+					image:           "cr.l5d.io/linkerd/controller:stable-2.14.8"
 					imagePullPolicy: "IfNotPresent"
 					name:            "heartbeat"
 					securityContext: {

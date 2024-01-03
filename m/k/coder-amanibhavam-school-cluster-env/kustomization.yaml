@@ -110,7 +110,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-descheduler
-              targetRevision: 0.0.103
+              targetRevision: 0.0.104
             syncPolicy:
               automated:
                 prune: true
@@ -237,7 +237,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-l5d-control
-              targetRevision: 0.0.8
+              targetRevision: 0.0.9
             syncPolicy:
               automated:
                 prune: true
@@ -321,7 +321,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-reloader
-              targetRevision: 0.0.107
+              targetRevision: 0.0.108
             syncPolicy:
               automated:
                 prune: true
@@ -384,7 +384,7 @@ helmCharts:
             source:
               repoURL: cache.defn.run:5000
               chart: library/helm/coder-amanibhavam-school-cluster-tailscale
-              targetRevision: 0.0.4
+              targetRevision: 0.0.5
             syncPolicy:
               automated:
                 prune: true

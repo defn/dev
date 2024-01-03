@@ -90,7 +90,7 @@ spec:
   template:
     spec:
       containers:
-        - image: cache.defn.run:5000/tailscale/k8s-operator@sha256:8d1adfe38dcbcdacabbb4fee2f03cfe41516d17be76967828a1f99b3b8dbe1bb
+        - image: cache.defn.run:5000/tailscale/k8s-operator@sha256:41de34fa6fa077c326bbdcf5655fa2b98d74277ef6019d980f6c91acaa5baa9b
           env:
             - name: OPERATOR_HOSTNAME
               value: coder-amanibhavam-class-proxy

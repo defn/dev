@@ -17,7 +17,8 @@ build:
 	(cd ../k/r && $(MAKE) release)
 # M r/digest/digest_gen.cue
 # M ../k/r/APP/main.yaml
-	if env GIT_PAGER=cat git grep image:.[n]ot-found ../k/r; then (cd ./r && $(MAKE) digest); (cd ../../k/r && $(MAKE) release); fi
+	(cd ../k/r && $(MAKE) release-digested)
+	if env GIT_PAGER=cat git grep image:.[n]ot-found ../k/r; then (cd ./r && $(MAKE) digest); (pwd && cd ../../k/r && $(MAKE) release); fi
 
 # h/APP*
 # ENV/APP-version.cue

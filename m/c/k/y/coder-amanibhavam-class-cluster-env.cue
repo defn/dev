@@ -114,7 +114,7 @@ res: application: "coder-amanibhavam-class-cluster-env": argocd: "coder-amanibha
 		source: {
 			chart:          "library/helm/coder-amanibhavam-class-cluster-descheduler"
 			repoURL:        "cache.defn.run:5000"
-			targetRevision: "0.0.103"
+			targetRevision: "0.0.104"
 		}
 		syncPolicy: {
 			automated: {
@@ -264,7 +264,7 @@ res: application: "coder-amanibhavam-class-cluster-env": argocd: "coder-amanibha
 		source: {
 			chart:          "library/helm/coder-amanibhavam-class-cluster-l5d-control"
 			repoURL:        "cache.defn.run:5000"
-			targetRevision: "0.0.8"
+			targetRevision: "0.0.9"
 		}
 		syncPolicy: {
 			automated: {
@@ -364,7 +364,7 @@ res: application: "coder-amanibhavam-class-cluster-env": argocd: "coder-amanibha
 		source: {
 			chart:          "library/helm/coder-amanibhavam-class-cluster-reloader"
 			repoURL:        "cache.defn.run:5000"
-			targetRevision: "0.0.107"
+			targetRevision: "0.0.108"
 		}
 		syncPolicy: {
 			automated: {
@@ -414,7 +414,7 @@ res: application: "coder-amanibhavam-class-cluster-env": argocd: "coder-amanibha
 		source: {
 			chart:          "library/helm/coder-amanibhavam-class-cluster-tailscale"
 			repoURL:        "cache.defn.run:5000"
-			targetRevision: "0.0.4"
+			targetRevision: "0.0.5"
 		}
 		syncPolicy: {
 			automated: {

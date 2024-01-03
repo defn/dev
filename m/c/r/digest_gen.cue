@@ -6,13 +6,13 @@ cache: "bitnami/kubectl:latest": "bitnami/kubectl@sha256:0526f04eeff6a90fbeaa183
 
 cache: "busybox:1.35": "busybox@sha256:c4c67b37cc42396b8a6f6829e3379e86364f642ce6a40604ea4f7c695db0e695"
 
-cache: "cr.l5d.io/linkerd/controller:stable-2.14.7": "cr.l5d.io/linkerd/controller@sha256:23cbbb51b221176cb1e1514602d43d8a2888fbcb8261704b66b6b6d116ffbcb3"
+cache: "cr.l5d.io/linkerd/controller:stable-2.14.8": "cr.l5d.io/linkerd/controller@sha256:c488b1fe849b7c7d90c9ef14d1e5777f2fd7567abb50535d493ce0fcdf49bd4a"
 
-cache: "cr.l5d.io/linkerd/policy-controller:stable-2.14.7": "cr.l5d.io/linkerd/policy-controller@sha256:c4de1fee6f2410a4030800ad08cd7fa945af0c677a0bb992bdcc6a2cccfff70d"
+cache: "cr.l5d.io/linkerd/policy-controller:stable-2.14.8": "cr.l5d.io/linkerd/policy-controller@sha256:05b0c694497a1a0f8eff3c6cf09183f91d2bbb5be520d631e81a2e0b76e2e5aa"
 
 cache: "cr.l5d.io/linkerd/proxy-init:v2.2.3": "cr.l5d.io/linkerd/proxy-init@sha256:1075bc22a4a8f0852311dc84c9db0552f1245d07fe4fdebd4bc6cf4566bcbc76"
 
-cache: "cr.l5d.io/linkerd/proxy:stable-2.14.7": "cr.l5d.io/linkerd/proxy@sha256:9893a5d2fcccf7b0845852d1f9ff3d21f867d55e07cdb53314946eece7ae7c59"
+cache: "cr.l5d.io/linkerd/proxy:stable-2.14.8": "cr.l5d.io/linkerd/proxy@sha256:71bf90a31c998313a00b77ea1692d2e6fbd7d975d02009d40e205e4a3f736c31"
 
 cache: "curlimages/curl": "curlimages/curl@sha256:4bfa3e2c0164fb103fb9bfd4dc956facce32b6c5d47cc09fcec883ce9535d5ac"
 
@@ -48,23 +48,23 @@ cache: "ghcr.io/kyverno/kyvernopre:v1.10.7": "ghcr.io/kyverno/kyvernopre@sha256:
 
 cache: "ghcr.io/kyverno/reports-controller:v1.10.7": "ghcr.io/kyverno/reports-controller@sha256:8cd609d9f3baaf2091ac1c4b7bd510a086f2f8e0ad6b94997c632c758073cb25"
 
-cache: "ghcr.io/stakater/reloader:v1.0.58": "ghcr.io/stakater/reloader@sha256:0507e308573c2cd83a6ab12f154dcd10c1776e26e091d6fc54fd02f5a45c624d"
+cache: "ghcr.io/stakater/reloader:v1.0.60": "ghcr.io/stakater/reloader@sha256:7f43dd19d8e6be1ac819223e7d312eb604f1f7a9cc877a7457fb55f8d0375fcc"
 
-cache: "goharbor/harbor-core:v2.9.1": "goharbor/harbor-core@sha256:ee70dcf6e7c5a3c1d65a6898eb7d3816cbe760f7971a79e1fed2d529abb12ccd"
+cache: "goharbor/harbor-core:v2.10.0": "goharbor/harbor-core@sha256:deb1e0c390771e2d835913b1306598596466fd2b782ffd6626067d6f3cfa4cc1"
 
-cache: "goharbor/harbor-db:v2.9.1": "goharbor/harbor-db@sha256:9342cc7628537ab8b662b0eb48c044ffc914bb355c346e1b437477ff526a2887"
+cache: "goharbor/harbor-db:v2.10.0": "goharbor/harbor-db@sha256:bd3ed7a8783a3c71b20bc0e2f5fbe8417dc97b032b1229e47b360bd58521b4f8"
 
-cache: "goharbor/harbor-jobservice:v2.9.1": "goharbor/harbor-jobservice@sha256:19cdee359cb86dc9817752486134c5436329ca9271d84313fa126a0f90c18c6f"
+cache: "goharbor/harbor-jobservice:v2.10.0": "goharbor/harbor-jobservice@sha256:bc65169ad4137d892ec481c930bdd1f07326cafc7b9367bee9ebddb2b08a7d42"
 
-cache: "goharbor/harbor-portal:v2.9.1": "goharbor/harbor-portal@sha256:a316b664ec90ca500ad8fc578911c04a0b6727357726c753cbb041d774875a05"
+cache: "goharbor/harbor-portal:v2.10.0": "goharbor/harbor-portal@sha256:ac1382afbbce74e196bec839ac1b10caf95664f9c831e83dbd240859ca3db0df"
 
-cache: "goharbor/harbor-registryctl:v2.9.1": "goharbor/harbor-registryctl@sha256:34a53c772e9557d777a03fa95f96d38205e4befaf8a2b1bb995d5878cc4d5e84"
+cache: "goharbor/harbor-registryctl:v2.10.0": "goharbor/harbor-registryctl@sha256:78c2ff95fa1fcd0160b0dda57e48c7dfc5c9d63f40568d677f7fa2ea56814412"
 
-cache: "goharbor/redis-photon:v2.9.1": "goharbor/redis-photon@sha256:ccbd16fb581dd84bb5146d1e99f854c1371d878814d05bde32d759447c75d266"
+cache: "goharbor/redis-photon:v2.10.0": "goharbor/redis-photon@sha256:24726436248456e9cc60144a4ab414f28af1a6f6aeb6b481e115353c3b8a6e81"
 
-cache: "goharbor/registry-photon:v2.9.1": "goharbor/registry-photon@sha256:8cf8425cec71afd35192460867b63801578ba68f7d72735013a29c7c0e9e7910"
+cache: "goharbor/registry-photon:v2.10.0": "goharbor/registry-photon@sha256:720af7db57976fd4f19a3d541812362c5199cc9c277595394754f566a7cdabf5"
 
-cache: "goharbor/trivy-adapter-photon:v2.9.1": "goharbor/trivy-adapter-photon@sha256:48dbd3e6d45705574adb91115f202fbe88968e58b0a7191f8d9567a3722bfda3"
+cache: "goharbor/trivy-adapter-photon:v2.10.0": "goharbor/trivy-adapter-photon@sha256:a01397526477046dac29a0d973984c9d518bc1913436879955e4e6ce747ead84"
 
 cache: "pihole/pihole:2023.11.0": "pihole/pihole@sha256:24b1ef8f66d810faffefdb9b66850bbe2d55013506b892605acef414e210edeb"
 
@@ -114,8 +114,8 @@ cache: "quay.io/jetstack/trust-manager:v0.7.0": "quay.io/jetstack/trust-manager@
 
 cache: "redis:7.0.14-alpine": "redis@sha256:45de526e9fbc1a4b183957ab93a448294181fae10ced9184fc6efe9956ca0ccc"
 
-cache: "registry.k8s.io/descheduler/descheduler:v0.28.1": "registry.k8s.io/descheduler/descheduler@sha256:0bad561801345759824ddc498dfe026e22b14187476ed4f3c2fec90bc68fe57c"
+cache: "registry.k8s.io/descheduler/descheduler:v0.29.0": "registry.k8s.io/descheduler/descheduler@sha256:227389ece22ac74f7c1de9922270e3a6fde38c0351bb1919ee08f3dd83470005"
 
 cache: "registry.opensource.zalan.do/acid/postgres-operator:v1.10.1": "registry.opensource.zalan.do/acid/postgres-operator@sha256:8ced77e97e0876b2e1dbc8ef3ee6c9cc26df18c20b5f6c188a7799096be097df"
 
-cache: "tailscale/k8s-operator:unstable": "tailscale/k8s-operator@sha256:8d1adfe38dcbcdacabbb4fee2f03cfe41516d17be76967828a1f99b3b8dbe1bb"
+cache: "tailscale/k8s-operator:unstable": "tailscale/k8s-operator@sha256:41de34fa6fa077c326bbdcf5655fa2b98d74277ef6019d980f6c91acaa5baa9b"

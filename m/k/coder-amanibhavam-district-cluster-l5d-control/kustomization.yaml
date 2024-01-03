@@ -8,7 +8,7 @@ commonAnnotations: {}
 helmCharts:
   - releaseName: l5d-control
     name: linkerd-control-plane
-    version: 1.16.8
+    version: 1.16.9
     repo: https://helm.linkerd.io/stable
     namespace: linkerd
     valuesInline:
