@@ -44,11 +44,10 @@ macos:
 #	docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock ubuntu chown 1000:1000 /var/run/docker.sock
 
 cache:
-# less essential since bazel-cache is used
 	$(MARK) cache
-	set -xeo pipefail; for n in $(flakes); do \
+	set -eo pipefail; for n in $(flakes); do \
 		mark $$n; \
-		(cd m/pkg/$$n && ~/bin/b build && nix build && n cache defn); \
+		(cd m/pkg/$$n && nix build && n cache && b build); \
 		done
 
 home:
