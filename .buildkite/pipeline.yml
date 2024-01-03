@@ -33,7 +33,7 @@ steps:
                   runAsGroup: 1000
                 volumeMounts:
                   - name: docker-socket
-      mountPath: /var/run/docker.sock
+                    mountPath: /var/run/docker.sock
             volumes:
               - name: docker-socket
                 hostPath:
