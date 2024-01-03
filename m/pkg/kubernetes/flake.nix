@@ -2,7 +2,7 @@
   inputs = {
     kubectl.url = github:defn/dev/pkg-kubectl-1.26.7-8?dir=m/pkg/kubectl;
     k3sup.url = github:defn/dev/pkg-k3sup-0.13.5-1?dir=m/pkg/k3sup;
-    k9s.url = github:defn/dev/pkg-k9s-0.30.6-2?dir=m/pkg/k9s;
+    k9s.url = github:defn/dev/pkg-k9s-0.30.8-1?dir=m/pkg/k9s;
     helm.url = github:defn/dev/pkg-helm-3.13.3-4?dir=m/pkg/helm;
     kustomize.url = github:defn/dev/pkg-kustomize-5.3.0-4?dir=m/pkg/kustomize;
     stern.url = github:defn/dev/pkg-stern-1.27.0-4?dir=m/pkg/stern;
@@ -10,8 +10,8 @@
     argocd.url = github:defn/dev/pkg-argocd-2.10.0-rc1-5?dir=m/pkg/argocd;
     kn.url = github:defn/dev/pkg-kn-1.12.0-4?dir=m/pkg/kn;
     vcluster.url = github:defn/dev/pkg-vcluster-0.18.1-4?dir=m/pkg/vcluster;
-    kubevirt.url = github:defn/dev/pkg-kubevirt-1.1.0-4?dir=m/pkg/kubevirt;
-    linkerd.url = github:defn/dev/pkg-linkerd-2.14.7-5?dir=m/pkg/linkerd;
+    kubevirt.url = github:defn/dev/pkg-kubevirt-1.1.1-1?dir=m/pkg/kubevirt;
+    linkerd.url = github:defn/dev/pkg-linkerd-2.14.8-1?dir=m/pkg/linkerd;
     cilium.url = github:defn/dev/pkg-cilium-0.15.19-4?dir=m/pkg/cilium;
     hubble.url = github:defn/dev/pkg-hubble-0.12.3-4?dir=m/pkg/hubble;
     tfo.url = github:defn/dev/pkg-tfo-2.2.0-4?dir=m/pkg/tfo;
