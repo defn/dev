@@ -12,7 +12,7 @@ steps:
                 imagePullPolicy: Always
                 command: [bash, -c]
                 args:
-                  - "'cd m && b build'"
+                  - "'cd m && ../bin/b build'"
                 securityContext:
                   runAsNonRoot: true
                   runAsUser: 1000
