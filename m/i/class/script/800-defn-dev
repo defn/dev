@@ -17,7 +17,8 @@ function main {
 		git config --global user.email "you@example.com"
 		git config --global user.name "Your Name"
 		make install flakes=az
-		
+		make home flakes=az
+
 		git config --global user.email "you@example.com"
 		git config --global user.name "Your Name"
 		make home
