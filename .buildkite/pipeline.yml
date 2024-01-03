@@ -3,7 +3,7 @@ env:
   BUILDKITE_GIT_MIRRORS_SKIP_UPDATE: "1"
 
 steps:
-  - label: build cli
+  - label: bazel build
     plugins:
       - kubernetes:
           podSpec:
@@ -12,35 +12,7 @@ steps:
                 imagePullPolicy: Always
                 command: [bash, -c]
                 args:
-                  - "'make ci'"
-                securityContext:
-                  runAsNonRoot: true
-                  runAsUser: 1000
-                  runAsGroup: 1000
-  - label: build cue
-    plugins:
-      - kubernetes:
-          podSpec:
-            containers:
-              - image: cache.defn.run:5000/dfd:class
-                imagePullPolicy: Always
-                command: [bash, -c]
-                args:
-                  - "'cd && source .bash_profile && cd m/c && make build-all'"
-                securityContext:
-                  runAsNonRoot: true
-                  runAsUser: 1000
-                  runAsGroup: 1000
-  - label: build helm
-    plugins:
-      - kubernetes:
-          podSpec:
-            containers:
-              - image: cache.defn.run:5000/dfd:class
-                imagePullPolicy: Always
-                command: [bash, -c]
-                args:
-                  - "'cd && source .bash_profile && cd m/k && make all-build'"
+                  - "'cd m && b build'"
                 securityContext:
                   runAsNonRoot: true
                   runAsUser: 1000
