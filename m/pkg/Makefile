@@ -12,6 +12,7 @@ update:
 upgrade:
 	n upgrade && n all update pkg deps
 	n upgrade && n all update pkg deps || true
+	git commit -f -m "finished upgrade"
 
 %:
 	./make_$@.sh
