@@ -19,7 +19,7 @@ function main {
 
 	nix build
 	local cmd_attic="$(type -P attic ~/bin/nix/attic | head -1)"
-	if type -P "${cmd_attic}"; then ("${cmd_attic}" push --ignore-upstream-cache-filter defn result || true); fi
+	if type -P "${cmd_attic}"; then ("${cmd_attic}" push --ignore-upstream-cache-filter defn2 result || true); fi
 
 	# shellcheck disable=SC2046
 	tar cfz "${out}" $(nix-store --query --requisites --include-outputs result || true)
