@@ -1,5 +1,0 @@
-default-server = "local"
-
-[servers.local]
-endpoint = "http://cache.defn.run:8080"
-token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjczOTUwNzksInN1YiI6InJvb3QiLCJodHRwczovL2p3dC5hdHRpYy5ycy92MSI6eyJjYWNoZXMiOnsiKiI6eyJyIjoxLCJ3IjoxLCJkIjoxLCJjYyI6MSwiY3IiOjEsImNxIjoxLCJjZCI6MX19fX0.TQaK1H-pT1pAppjqFUTzvF6C8FD9qkg981TdUL4SOvA"
