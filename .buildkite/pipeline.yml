@@ -12,7 +12,7 @@ steps:
                 imagePullPolicy: Always
                 command: [bash, -c]
                 args:
-                  - "'git config user.email you@example.com && git config user.name YourName' && cd m && ../bin/b build"
+                  - "'git config --global user.email you@example.com && git config --global user.name YourName' && cd m && ../bin/b build"
                 securityContext:
                   runAsNonRoot: true
                   runAsUser: 1000
