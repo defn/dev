@@ -447,17 +447,17 @@
       },
       "locked": {
         "dir": "m/pkg/k9s",
-        "lastModified": 1703900998,
-        "narHash": "sha256-wK2fzFyFs7EDopz7n+OQ07bGorKWM33fkHLthKKLKCk=",
+        "lastModified": 1704311773,
+        "narHash": "sha256-SBb4nKrZOi5qysYjZAb8N8j/hY1gfR8kHbEezBAR7UE=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "b746d287b75df4e8a3696a0db81afa95d800354c",
+        "rev": "1d8890716789c32910991b0cf084a86edced1e77",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/k9s",
         "owner": "defn",
-        "ref": "pkg-k9s-0.30.6-2",
+        "ref": "pkg-k9s-0.30.8-1",
         "repo": "dev",
         "type": "github"
       }
@@ -510,17 +510,17 @@
       },
       "locked": {
         "dir": "m/pkg/kubevirt",
-        "lastModified": 1703442921,
-        "narHash": "sha256-anHtxBSLgWiSx7nxZHiBIoTS1xQ7xMbSD5lNlSD5qHU=",
+        "lastModified": 1704311791,
+        "narHash": "sha256-j6CcgKwVnbM2sBuUzcfm+Ajgrl2C2vpFlBuEdII5+gw=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "19f1cbf0bbc51a7bad825aba5e6c070d7bc5952e",
+        "rev": "775ff755db3a293d788b826fd77ccd4bb85e6131",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubevirt",
         "owner": "defn",
-        "ref": "pkg-kubevirt-1.1.0-4",
+        "ref": "pkg-kubevirt-1.1.1-1",
         "repo": "dev",
         "type": "github"
       }
@@ -552,17 +552,17 @@
       },
       "locked": {
         "dir": "m/pkg/linkerd",
-        "lastModified": 1703442939,
-        "narHash": "sha256-Hm/XoY1iRZUZb9Dh/KFzf9b1599pUgsXex2x9ZHDFS0=",
+        "lastModified": 1704311806,
+        "narHash": "sha256-9BbD5yPamRN0Jwg3/dVP996kazqXMqvDbiFeSnErWAs=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "653f57b40c7e54318776c3fa50e9e63f8f27a303",
+        "rev": "00f4c40622922dc270c946834f8e61115f7973fc",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/linkerd",
         "owner": "defn",
-        "ref": "pkg-linkerd-2.14.7-5",
+        "ref": "pkg-linkerd-2.14.8-1",
         "repo": "dev",
         "type": "github"
       }
