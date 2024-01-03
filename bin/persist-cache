@@ -70,6 +70,8 @@ function cache {
 	persist ~/work/vscode-server/CachedExtensionVSIXs ~/.vscode-server/data/CachedExtensionVSIXs
 
 	mkdir -p ~/.cache/helm
+
+	mkdir ~/work/nix-cache
 }
 
 cache "$@"
