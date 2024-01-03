@@ -18,7 +18,8 @@ function main {
 	git commit -m 'for the build'
 
 	nix build
-	if type -P attic; then (attic push --ignore-upstream-cache-filter defn result || true); fi
+	local cmd_attic="$(type -P attic ~/bin/nix/attic | head -1)"
+	if type -x "${cmd_attic}"; then ("${cmd_attic}" push --ignore-upstream-cache-filter defn result || true); fi
 
 	# shellcheck disable=SC2046
 	tar cfz "${out}" $(nix-store --query --requisites --include-outputs result || true)
