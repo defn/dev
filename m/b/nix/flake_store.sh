@@ -18,7 +18,7 @@ function main {
 	git commit -m 'for the build'
 
 	nix build
-	local cmd_attic="$(type -P attic ~/bin/nix/attic | head -1)"
+	local cmd_attic="$(set +f; type -P attic ~/bin/nix/attic /nix/store/*attic*/bin/attic | head -1)"
 	if type -P "${cmd_attic}"; then (set -x; "${cmd_attic}" push --ignore-upstream-cache-filter defn2 result || true); fi
 
 	# shellcheck disable=SC2046
