@@ -71,7 +71,7 @@ function cache {
 
 	mkdir -p ~/.cache/helm
 
-	mkdir -p ~/work/nix-cache
+	mkdir -p ~/work/nix-cache ~/work/bazel-cache
 }
 
 cache "$@"
