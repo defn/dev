@@ -28,7 +28,7 @@ image-class:
     SAVE IMAGE --push ${image}
 
 core-class:
-    FROM quay.io/defn/dev:latest
+    FROM cache.defn.run:5000/dfd:base
 
     COPY script/800-defn-dev .
     RUN ./800-defn-dev && rm -f ./800-defn-dev

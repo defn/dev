@@ -544,7 +544,7 @@ kustomize: "buildkite": #KustomizeHelm & {
 		release:   "buildkite"
 		name:      "agent-stack-k8s"
 		namespace: "buildkite"
-		version:   "0.7.0"
+		version:   "11111"
 		repo:      "oci://ghcr.io/buildkite/helm"
 		values: {
 			config: {
@@ -2510,7 +2510,7 @@ kustomize: "harbor": #KustomizeHelm & {
 	helm: {
 		release: "harbor"
 		name:    "harbor"
-		version: "1.13.1"
+		version: "1.14.0"
 		repo:    "https://helm.goharbor.io"
 		values: {
 			expose: {
@@ -2991,7 +2991,7 @@ kustomize: "descheduler": #KustomizeHelm & {
 		release:   "descheduler"
 		name:      "descheduler"
 		namespace: "descheduler"
-		version:   "0.28.1"
+		version:   "0.29.0"
 		repo:      "https://kubernetes-sigs.github.io/descheduler"
 		values: {
 		}

@@ -1,7 +1,7 @@
 VERSION 0.7
 
 build:
-    ARG image=quay.io/defn/dev:latest
+    ARG image=cache.defn.run:5000/dfd:base
     BUILD --platform=linux/amd64 +root --image=${image}
     #BUILD --platform=linux/arm64 +root --image=${image}
 
