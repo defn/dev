@@ -24,8 +24,8 @@ steps:
               - name: docker-socket
                 hostPath:
                   path: /var/run/docker.sock
+  - wait
   - label: bazel-build
-    depends_on: earthly-image
     plugins:
       - kubernetes:
           podSpec:
