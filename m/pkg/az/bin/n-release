@@ -7,7 +7,7 @@ function main {
 	if ! n cut "$*"; then
 		if [[ -n ${1-} ]]; then
 			git add -u .
-			git commit -m "$*"
+			git commit -m "$* [skip ci]"
 			n cut "$*"
 		fi
 	fi
