@@ -187,4 +187,4 @@ tailscale-kubeconfig:
 	kubectl config rename-context $(env)-proxy.$(shell tailscale cert 2>&1 | grep 'use ' | cut -d'"' -f2 | cut -d. -f2-) $(env)
 
 hello:
-	test "$$(pass hello)" == hello
+	test "$$(pass hello)" == world
