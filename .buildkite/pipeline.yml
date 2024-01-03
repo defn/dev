@@ -3,20 +3,6 @@ env:
   BUILDKITE_GIT_MIRRORS_SKIP_UPDATE: "1"
 
 steps:
-  - label: bazel build
-    plugins:
-      - kubernetes:
-          podSpec:
-            containers:
-              - image: cache.defn.run:5000/dfd:class
-                imagePullPolicy: Always
-                command: [bash, -c]
-                args:
-                  - "'git config --global user.email you@example.com && git config --global user.name YourName' && cd m && env DFD_CI_BAZEL_OPTIONS=--remote_download_minimal ../bin/b build"
-                securityContext:
-                  runAsNonRoot: true
-                  runAsUser: 1000
-                  runAsGroup: 1000
   - label: earthy image
     plugins:
       - kubernetes:
@@ -38,3 +24,18 @@ steps:
               - name: docker-socket
                 hostPath:
                   path: /var/run/docker.sock
+  - label: bazel build
+    depends_on: "earthly image"
+    plugins:
+      - kubernetes:
+          podSpec:
+            containers:
+              - image: cache.defn.run:5000/dfd:class
+                imagePullPolicy: Always
+                command: [bash, -c]
+                args:
+                  - "'git config --global user.email you@example.com && git config --global user.name YourName' && cd m && env DFD_CI_BAZEL_OPTIONS=--remote_download_minimal ../bin/b build"
+                securityContext:
+                  runAsNonRoot: true
+                  runAsUser: 1000
+                  runAsGroup: 1000
