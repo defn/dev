@@ -3,7 +3,7 @@ env:
   BUILDKITE_GIT_MIRRORS_SKIP_UPDATE: "1"
 
 steps:
-  - label: earthy image
+  - label: earthy-image
     plugins:
       - kubernetes:
           podSpec:
@@ -24,8 +24,8 @@ steps:
               - name: docker-socket
                 hostPath:
                   path: /var/run/docker.sock
-  - label: bazel build
-    depends_on: "earthly image"
+  - label: bazel-build
+    depends_on: earthly-image
     plugins:
       - kubernetes:
           podSpec:
