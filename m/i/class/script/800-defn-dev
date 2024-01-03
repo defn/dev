@@ -5,6 +5,7 @@ function main {
 
 	if [[ "$(whoami || true)" == "ubuntu" ]]; then
 		sudo "$0" "$@"
+		set +x
 
 		cd
 		git clone https://github.com/defn/dev
