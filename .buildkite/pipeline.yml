@@ -17,3 +17,17 @@ steps:
                   runAsNonRoot: true
                   runAsUser: 1000
                   runAsGroup: 1000
+  - label: earthy image
+    plugins:
+      - kubernetes:
+          podSpec:
+            containers:
+              - image: cache.defn.run:5000/dfd:class
+                imagePullPolicy: Always
+                command: [bash, -c]
+                args:
+                  - "'cd m && make docker'"
+                securityContext:
+                  runAsNonRoot: true
+                  runAsUser: 1000
+                  runAsGroup: 1000
