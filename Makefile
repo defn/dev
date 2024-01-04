@@ -157,7 +157,7 @@ install-innermost:
 	$(MAKE) gpg
 
 nix:
-# TODO macOS: ln -nfs  /nix/var/nix/profiles/default ~/.nix-profile
+# TODO macOS nix profile install nixpkgs#nix
 	(. ~/.nix-profile/etc/profile.d/nix.sh && which nix) || $(MAKE) nix-$(shell uname -s)
 	. ~/.nix-profile/etc/profile.d/nix.sh && (test -f "$$HOME/.nix-profile/share/nix-direnv/direnvrc" || nix profile install nixpkgs#nix-direnv)
 
