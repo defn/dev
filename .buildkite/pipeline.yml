@@ -3,7 +3,29 @@ env:
   BUILDKITE_GIT_MIRRORS_SKIP_UPDATE: "1"
 
 steps:
-  - label: bazel build
+  - label: earthy-image
+    plugins:
+      - kubernetes:
+          podSpec:
+            containers:
+              - image: cache.defn.run:5000/dfd:class
+                imagePullPolicy: Always
+                command: [bash, -c]
+                args:
+                  - "'source ~/.bash_profile && cd m && make docker'"
+                securityContext:
+                  runAsNonRoot: true
+                  runAsUser: 1000
+                  runAsGroup: 1000
+                volumeMounts:
+                  - name: docker-socket
+                    mountPath: /var/run/docker.sock
+            volumes:
+              - name: docker-socket
+                hostPath:
+                  path: /var/run/docker.sock
+  - wait
+  - label: bazel-build
     plugins:
       - kubernetes:
           podSpec:

@@ -50,6 +50,10 @@ cache:
 		(cd m/pkg/$$n && nix build && n cache && b build); \
 		done
 
+rehome:
+	this-nix-gc
+	$(MAKE) home
+
 home:
 	$(MARK) home
 	rm -rf ~/bin/nix.tmp
@@ -130,12 +134,6 @@ perms:
 	-chmod 0700 ~/.gnupg/. ~/.gnupg2/.
 	-if ! test -f ~/.kube/config; then mkdir -p ~/.kube; touch ~/.kube/config; fi
 	-chmod 0600 ~/.kube/config
-
-reinstall:
-	rm -f bin/nix/.head
-	cd m && b clean
-	this-nix-gc
-	$(MAKE) install
 
 install:
 	sudo true
