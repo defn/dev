@@ -1,5 +1,0 @@
-apiVersion: v2
-type: application
-name: coder-amanibhavam-class-cluster-l5d-control
-appVersion: "0.0.9"
-version: "0.0.9"

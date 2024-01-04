@@ -250,31 +250,6 @@ res: application: "coder-amanibhavam-school-cluster-env": argocd: "coder-amanibh
 		}
 	}
 }
-res: application: "coder-amanibhavam-school-cluster-env": argocd: "coder-amanibhavam-school-cluster-l5d-control": {
-	apiVersion: "argoproj.io/v1alpha1"
-	kind:       "Application"
-	metadata: {
-		annotations: "argocd.argoproj.io/sync-wave": "100"
-		name:      "coder-amanibhavam-school-cluster-l5d-control"
-		namespace: "argocd"
-	}
-	spec: {
-		destination: name: "coder-amanibhavam-school-cluster"
-		project: "default"
-		source: {
-			chart:          "library/helm/coder-amanibhavam-school-cluster-l5d-control"
-			repoURL:        "cache.defn.run:5000"
-			targetRevision: "0.0.9"
-		}
-		syncPolicy: {
-			automated: {
-				prune:    true
-				selfHeal: true
-			}
-			syncOptions: []
-		}
-	}
-}
 res: application: "coder-amanibhavam-school-cluster-env": argocd: "coder-amanibhavam-school-cluster-l5d-crds": {
 	apiVersion: "argoproj.io/v1alpha1"
 	kind:       "Application"
