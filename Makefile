@@ -157,6 +157,7 @@ install-innermost:
 	$(MAKE) gpg
 
 nix:
+# TODO macOS: ln -nfs  /nix/var/nix/profiles/default ~/.nix-profile
 	(. ~/.nix-profile/etc/profile.d/nix.sh && which nix) || $(MAKE) nix-$(shell uname -s)
 	. ~/.nix-profile/etc/profile.d/nix.sh && (test -f "$$HOME/.nix-profile/share/nix-direnv/direnvrc" || nix profile install nixpkgs#nix-direnv)
 
@@ -189,13 +190,12 @@ nix-Darwin:
 
 # https://github.com/NixOS/nixpkgs/blob/9f0d9ad45c4bd998c46ba1cbe0eb0dd28c6288a5/pkgs/tools/package-management/nix/default.nix
 # look for the stable version
-# nix profile install nixpkgs/9f0d9ad45c4bd998c46ba1cbe0eb0dd28c6288a5#nix
 nix-Linux-bootstrap:
 	sh <(curl -L https://releases.nixos.org/nix/nix-$(NIX_VERSION)/install) --no-daemon
 	git checkout .bash_profile
 
 nix-Darwin-bootstrap:
-	true
+	ln -nfs  /nix/var/nix/profiles/default ~/.nix-profile
 
 build-site-default:
 
