@@ -400,31 +400,6 @@ res: application: "coder-amanibhavam-district-cluster-env": argocd: "coder-amani
 		}
 	}
 }
-res: application: "coder-amanibhavam-district-cluster-env": argocd: "coder-amanibhavam-district-cluster-l5d-control": {
-	apiVersion: "argoproj.io/v1alpha1"
-	kind:       "Application"
-	metadata: {
-		annotations: "argocd.argoproj.io/sync-wave": "100"
-		name:      "coder-amanibhavam-district-cluster-l5d-control"
-		namespace: "argocd"
-	}
-	spec: {
-		destination: name: "coder-amanibhavam-district-cluster"
-		project: "default"
-		source: {
-			chart:          "library/helm/coder-amanibhavam-district-cluster-l5d-control"
-			repoURL:        "cache.defn.run:5000"
-			targetRevision: "0.0.9"
-		}
-		syncPolicy: {
-			automated: {
-				prune:    true
-				selfHeal: true
-			}
-			syncOptions: []
-		}
-	}
-}
 res: application: "coder-amanibhavam-district-cluster-env": argocd: "coder-amanibhavam-district-cluster-l5d-crds": {
 	apiVersion: "argoproj.io/v1alpha1"
 	kind:       "Application"

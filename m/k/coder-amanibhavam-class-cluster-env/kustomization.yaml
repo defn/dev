@@ -222,27 +222,6 @@ helmCharts:
                 selfHeal: true
               syncOptions:
                 - ServerSideApply=true
-        l5d-control: |
-          apiVersion: argoproj.io/v1alpha1
-          kind: Application
-          metadata:
-            namespace: argocd
-            name: coder-amanibhavam-class-cluster-l5d-control
-            annotations:
-              argocd.argoproj.io/sync-wave: "100"
-          spec:
-            project: default
-            destination:
-              name: coder-amanibhavam-class-cluster
-            source:
-              repoURL: cache.defn.run:5000
-              chart: library/helm/coder-amanibhavam-class-cluster-l5d-control
-              targetRevision: 0.0.9
-            syncPolicy:
-              automated:
-                prune: true
-                selfHeal: true
-              syncOptions: []
         l5d-crds: |
           apiVersion: argoproj.io/v1alpha1
           kind: Application

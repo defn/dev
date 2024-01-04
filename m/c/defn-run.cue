@@ -31,7 +31,7 @@ k3s_bootstrap: {
 	"tailscale": {}
 	"traefik": {}
 	"l5d-crds": {}
-	"l5d-control": {}
+	//"l5d-control": {}
 
 	// deploy
 	"argo-cd": {}
