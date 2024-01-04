@@ -156,9 +156,6 @@ install-innermost:
 	$(MAKE) password-store
 	$(MAKE) gpg
 
-nix-Darwin-upgrade:
-	sudo -i sh -c 'nix-channel --update && nix-env -iA nixpkgs.nix && launchctl remove org.nixos.nix-daemon && launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist'
-
 nix:
 	(. ~/.nix-profile/etc/profile.d/nix.sh && which nix) || $(MAKE) nix-$(shell uname -s)
 	. ~/.nix-profile/etc/profile.d/nix.sh && (test -f "$$HOME/.nix-profile/share/nix-direnv/direnvrc" || nix profile install nixpkgs#nix-direnv)
@@ -188,11 +185,7 @@ nix-Linux:
 	export LC_ALL=C.UTF-8 && if ! type -P nix; then $(MAKE) nix-Linux-bootstrap; fi
 
 nix-Darwin:
-	if ! type -P nix; then $(MAKE) nix-Darwin-bootstrap; fi
-	sudo ln -nfs /nix/var/nix/profiles/default/etc ~/.nix-profile/etc
-	sudo launchctl stop org.nixos.nix-daemon
-	sudo cp .config/nix/nix.conf /etc/nix/
-	sudo launchctl start org.nixos.nix-daemon
+	true
 
 # https://github.com/NixOS/nixpkgs/blob/9f0d9ad45c4bd998c46ba1cbe0eb0dd28c6288a5/pkgs/tools/package-management/nix/default.nix
 # look for the stable version
@@ -202,8 +195,7 @@ nix-Linux-bootstrap:
 	git checkout .bash_profile
 
 nix-Darwin-bootstrap:
-	sh <(curl -L https://releases.nixos.org/nix/nix-$(NIX_VERSION)/install) --darwin-use-unencrypted-nix-store-volume --daemon
-	git checkout .bash_profile
+	true
 
 build-site-default:
 
