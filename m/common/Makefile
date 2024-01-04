@@ -2,6 +2,7 @@ SHELL := /bin/bash
 
 build:
 	rm -f chart/templates/*.yaml	
+	cue eval >/dev/null
 	cue export --out json -e app.output | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | while read -r f b; do base64 -d <<<"$$b" >"$$f"; done
 	rm -f *.tgz gen/*.tgz
 	cd gen && helm package ../chart
