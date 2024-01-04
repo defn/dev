@@ -39,4 +39,4 @@ core-class:
     RUN git config --global user.email "you@example.com"
     RUN git config --global user.name "Your Name"
     RUN --no-cache git pull
-    RUN bash -c 'source .bashrc && make home'
+    RUN bash -c 'source .bashrc && make home && git checkout .'
