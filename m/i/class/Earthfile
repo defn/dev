@@ -36,5 +36,7 @@ core-class:
     RUN bash -c 'source .bashrc && for e in vscodevim.vim jnoortheen.nix-ide hashicorp.terraform golang.go esbenp.prettier-vscode bazelbuild.vscode-bazel cuelang.cue marp-team.marp-vscode; do bin/nix/code-server serve-local --force --install-extension $e; done'
     RUN bash -c 'source .bashrc && cd ~/m && ~/bin/persist-cache && go install golang.org/x/tools/gopls@latest && go install honnef.co/go/tools/cmd/staticcheck@latest && cd && git checkout .'
 
+    RUN git config --global user.email "you@example.com"
+    RUN git config --global user.name "Your Name"
     RUN --no-cache git pull
     RUN bash -c 'source .bashrc && make home'
