@@ -15,7 +15,7 @@ genrule(
     outs = ["kustomize_bundler.tgz"],
     cmd = "$(location //c:gen_kustomize_bundle_sh) config=$(location config) $@",
     tools = [
-        "//b/lib:lib_sh",
         "//c:gen_kustomize_bundle_sh",
+        "//b/lib:lib_sh",
     ],
 )
