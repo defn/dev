@@ -53,7 +53,7 @@ steps:
                 imagePullPolicy: Always
                 command: [bash, -c]
                 args:
-                  - "'cd && git fetch && git reset --hard $BUILDKITE_COMMIT && source .bash_profile && cd m/i/class && make class'"
+                  - "'cd && git fetch && git reset --hard $BUILDKITE_COMMIT && source .bash_profile && cd m/i/class && make class-latest'"
                 securityContext:
                   runAsNonRoot: true
                   runAsUser: 1000
