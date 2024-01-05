@@ -61,4 +61,4 @@ latest-class:
     CACHE /home/ubuntu/work
 
     RUN --no-cache git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git pull
-    RUN bash -c 'source .bash_profile && make home && git checkout .'
+    RUN bash -c 'source .bash_profile && (set +f; ls -ltrhd ~/bin/nix/.head* || true) && make home && git checkout .'
