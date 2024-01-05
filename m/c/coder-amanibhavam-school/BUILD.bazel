@@ -6,7 +6,7 @@ cue_export(
     name = "config",
     srcs = [
         "//c:common",
-        "//cue.mod/gen/k8s.io:k8s_cue",
+        "//cue.mod/gen/k8s.io:k8s_io",
     ],
     cues = glob(["*.cue"]) + ["//c:common"],
     visibility = ["//visibility:public"],

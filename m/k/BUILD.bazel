@@ -40,6 +40,12 @@ filegroup(
 )
 
 filegroup(
+    name = "gen_helm_chart_sh",
+    srcs = ["gen_helm_chart.sh"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
     name = "gen_deploy_crd_sh",
     srcs = ["gen_deploy_crd.sh"],
     visibility = ["//visibility:public"],
@@ -52,7 +58,7 @@ filegroup(
 )
 
 filegroup(
-    name = "all_kustomize_build_sh",
+    name = "all_kustomize_build",
     srcs = [
         "kustomize_build_{}".format(k)
         for k in cluster_apps
@@ -61,7 +67,7 @@ filegroup(
 )
 
 filegroup(
-    name = "all_cue_import_sh",
+    name = "all_cue_import",
     srcs = [
         "cue_import_{}".format(k)
         for k in cluster_apps
@@ -70,10 +76,28 @@ filegroup(
 )
 
 filegroup(
-    name = "all_deploy_yaml_sh",
+    name = "all_deploy_yaml",
     srcs = [
         "deploy_yaml_{}".format(k)
         for k in cluster_apps
+    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "all_helm_chart",
+    srcs = [
+        "helm_chart_{}".format(k)
+        for k in cluster_apps
+    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "all_crd",
+    srcs = [
+        "deploy_crd_{}".format(c)
+        for c in clusters
     ],
     visibility = ["//visibility:public"],
 )
@@ -123,6 +147,22 @@ filegroup(
         cmd = "$(location gen_deploy_yaml_sh) $@ $(location cue_import_{})".format(k),
         tools = [
             "gen_deploy_yaml_sh",
+            "//b/lib:lib_sh",
+        ],
+    )
+    for k in cluster_apps
+]
+
+[
+    genrule(
+        name = "helm_chart_{}".format(k),
+        srcs = [
+            "deploy_yaml_{}".format(k),
+        ],
+        outs = ["{}-chart.tgz".format(k)],
+        cmd = "$(location gen_helm_chart_sh) app=$(location deploy_yaml_{}) $@".format(k),
+        tools = [
+            "gen_helm_chart_sh",
             "//b/lib:lib_sh",
         ],
     )
