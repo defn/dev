@@ -5,14 +5,28 @@ env: {
 	BUILDKITE_GIT_MIRRORS_SKIP_UPDATE: "1"
 }
 
+#RunAsUbuntu: securityContext: {
+	runAsNonRoot: true
+	runAsUser:    1000
+	runAsGroup:   1000
+}
+
+#BashContainer: {
+	imagePullPolicy: "Always"
+
+	command: ["bash", "-c"]
+
+	#RunAsUbuntu
+}
+
 steps: [{
 	label: "buildkite-docker-image"
 	plugins: [{
 		kubernetes: podSpec: {
 			containers: [{
-				image:           "cache.defn.run:5000/dfd:class-latest"
-				imagePullPolicy: "Always"
-				command: ["bash", "-c"]
+				#BashContainer
+
+				image: "cache.defn.run:5000/dfd:class-latest"
 				args: ["""
 					'set -e
 					cd
@@ -22,11 +36,7 @@ steps: [{
 					cd m/i/class
 					make buildkite'
 					"""]
-				securityContext: {
-					runAsNonRoot: true
-					runAsUser:    1000
-					runAsGroup:   1000
-				}
+
 				volumeMounts: [{
 					name:      "docker-socket"
 					mountPath: "/var/run/docker.sock"
@@ -43,9 +53,9 @@ steps: [{
 	plugins: [{
 		kubernetes: podSpec: {
 			containers: [{
-				image:           "cache.defn.run:5000/dfd:class-latest"
-				imagePullPolicy: "Always"
-				command: ["bash", "-c"]
+				#BashContainer
+
+				image: "cache.defn.run:5000/dfd:class-latest"
 				args: ["""
 					'set -e
 					cd
@@ -62,11 +72,7 @@ steps: [{
 					echo --- bazel again
 					../bin/b build'
 					"""]
-				securityContext: {
-					runAsNonRoot: true
-					runAsUser:    1000
-					runAsGroup:   1000
-				}
+
 				volumeMounts: [{
 					name:      "work"
 					mountPath: "/home/ubuntu/work"
@@ -84,9 +90,9 @@ steps: [{
 	plugins: [{
 		kubernetes: podSpec: {
 			containers: [{
-				image:           "cache.defn.run:5000/dfd:class-latest"
-				imagePullPolicy: "Always"
-				command: ["bash", "-c"]
+				#BashContainer
+
+				image: "cache.defn.run:5000/dfd:class-latest"
 				args: ["""
 					'set -e
 					cd
@@ -96,11 +102,7 @@ steps: [{
 					cd m/i/class
 					make class-latest'
 					"""]
-				securityContext: {
-					runAsNonRoot: true
-					runAsUser:    1000
-					runAsGroup:   1000
-				}
+
 				volumeMounts: [{
 					name:      "docker-socket"
 					mountPath: "/var/run/docker.sock"
@@ -116,20 +118,15 @@ steps: [{
 	label: "load-class-docker-image"
 	plugins: [{
 		kubernetes: podSpec: containers: [{
-			image:           "cache.defn.run:5000/dfd:class-latest"
-			imagePullPolicy: "Always"
-			command: ["bash", "-c"]
+			#BashContainer
+
+			image: "cache.defn.run:5000/dfd:class-latest"
 			args: ["""
 				'set -e
 				cd
 				echo --- git log
 				git log | head'
 				"""]
-			securityContext: {
-				runAsNonRoot: true
-				runAsUser:    1000
-				runAsGroup:   1000
-			}
 		}]
 	}]
 	depends_on: ["latest-class-docker-image"]
