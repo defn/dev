@@ -1,9 +1,25 @@
-load("//b/out:out.bzl", "copy_files")
-
 cluster_apps = glob(
     ["*-cluster-*"],
     exclude_directories = 0,
 )
+
+clusters_apps_parent_list = [
+    "-".join(k.split("-")[:3])
+    for k in glob(
+        ["*-cluster-*"],
+        exclude_directories = 0,
+    )
+]
+
+clusters_apps_parent = {
+    clusters_apps_parent_list[i]: 1
+    for i in range(
+        0,
+        len(clusters_apps_parent_list),
+    )
+}
+
+clusters = list(clusters_apps_parent.keys())
 
 filegroup(
     name = "gen_kustomize_build_sh",
@@ -20,6 +36,12 @@ filegroup(
 filegroup(
     name = "gen_deploy_yaml_sh",
     srcs = ["gen_deploy_yaml.sh"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "gen_deploy_crd_sh",
+    srcs = ["gen_deploy_crd.sh"],
     visibility = ["//visibility:public"],
 )
 
@@ -98,11 +120,39 @@ filegroup(
             "//cue.mod/gen/k8s.io:k8s_io",
         ],
         outs = ["{}-deploy.yaml".format(k)],
-        cmd = "$(location gen_deploy_yaml_sh) app=$(location cue_import_{}) $@".format(k),
+        cmd = "$(location gen_deploy_yaml_sh) $@ $(location cue_import_{})".format(k),
         tools = [
             "gen_deploy_yaml_sh",
             "//b/lib:lib_sh",
         ],
     )
     for k in cluster_apps
+]
+
+[
+    genrule(
+        name = "deploy_crd_{}".format(c),
+        srcs = [
+            "deploy_cue",
+            "//cue.mod:cue_mod",
+            "//cue.mod/gen/k8s.io:k8s_io",
+        ] + [
+            "cue_import_{}".format(k)
+            for k in cluster_apps
+            if k.startswith("{}-".format(c))
+        ],
+        outs = ["{}-crd.yaml".format(c)],
+        cmd = "$(location gen_deploy_crd_sh) $@ {}".format(
+            " ".join([
+                "$(location cue_import_{})".format(k)
+                for k in cluster_apps
+                if k.startswith("{}-".format(c))
+            ]),
+        ),
+        tools = [
+            "gen_deploy_crd_sh",
+            "//b/lib:lib_sh",
+        ],
+    )
+    for c in clusters
 ]

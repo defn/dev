@@ -11,6 +11,8 @@ import (
 	admissionregistration "k8s.io/api/admissionregistration/v1"
 )
 
+res: [string]: [string]: [string]: [string]: {...}
+
 // by kind
 xx: res
 

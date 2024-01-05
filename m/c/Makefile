@@ -18,10 +18,6 @@ build:
 # ENV/APP-version.cue
 	cd ../k && $(MAKE) chart
 
-crd:
-# M k/crd/ENV.yaml
-	(cd k/y && cue export --out json -e crds | jq -r 'to_entries[] | "../k/crd/\(.key).yaml \(.value | @base64) 0"') | ./release.py
-
 list:
 	@(cd .. && git grep artifacthub) | awk '{print $$2}' | runmany 'curl -sSL https://artifacthub.io/api/v1/$${1#https://artifacthub.io/}/feed/rss 2>/dev/null | grep 'artifacthub.io/packages/helm/' | grep -v -E "beta|snapshot" | head -1 | cut -d">" -f2 | cut -d"<" -f1' | sort -u > pending.txt
 	git diff pending.txt
