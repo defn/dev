@@ -13,7 +13,7 @@
       install -m 0755 -d $out $out/bin
       case "$src" in
         *.tgz)
-          tar xvfz $src
+          tar xfz $src
           install -m 0755 cloudflared $out/bin/cloudflared
           ;;
         *)

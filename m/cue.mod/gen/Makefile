@@ -3,7 +3,7 @@ SHELL := /bin/bash
 update:
 	b build
 	b run outputs_gen_cue_mod_gen_tgz__copy
-	tar xvfz cue.mod/gen.tgz
+	tar xfz cue.mod/gen.tgz
 	rm -f cue.mod/gen.tgz
 
 get: # get k8s go packages

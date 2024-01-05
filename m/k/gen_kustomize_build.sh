@@ -4,7 +4,7 @@ function main {
 	local app="${in[app]}"
 	local bundle="${in[bundle]}"
 
-	tar xvfz "${bundle}"
+	tar xfz "${bundle}"
 	kustomize build --load-restrictor LoadRestrictionsNone --enable-helm "k/${app}" >"${out}"
 }
 
