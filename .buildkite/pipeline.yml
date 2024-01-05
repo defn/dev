@@ -148,7 +148,7 @@
                                 {
                                     "image": "cache.defn.run:5000/dfd:class-latest",
                                     "args": [
-                                        "'set -e\ncd\necho --- git log\ngit log | head'"
+                                        "'set -e\ncd\necho --- git log\ngit log | head'\ndu -sh ~/work ~/work/*"
                                     ],
                                     "imagePullPolicy": "Always",
                                     "securityContext": {
