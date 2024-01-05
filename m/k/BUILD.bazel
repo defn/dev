@@ -185,9 +185,14 @@ filegroup(
             ["{}/*.yaml".format(k)],
             exclude = [],
             exclude_directories = 1,
-        ),
+        ) + [
+            "//c/{}:kustomize_bundle_tgz".format("-".join(k.split("-")[:3])),
+        ],
         outs = ["{}.yaml".format(k)],
-        cmd = "$(location gen_kustomize_build_sh) app=k/{} $@".format(k),
+        cmd = "$(location gen_kustomize_build_sh) app={} bundle=$(location //c/{}:kustomize_bundle_tgz) $@".format(
+            k,
+            "-".join(k.split("-")[:3]),
+        ),
         tools = [
             "gen_kustomize_build_sh",
             "//b/lib:lib_sh",
