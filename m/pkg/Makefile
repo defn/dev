@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
-build:
-	cue eval --out json -e html | jq -r . > tutorial.html
+all:
+	$(MAKE) udate upgrade	
 
 list:
 	$(MAKE) list_vendor_updates
