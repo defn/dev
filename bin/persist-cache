@@ -30,9 +30,10 @@ function cache {
 		else
 			mkdir -p work
 		fi
-		ls -ld ~/work ~/work/*
+		sudo chown 755 ~/work
+		sudo chown 755 ~/work/.
+		sudo chown $(id -un):$(id -gn) ~/work
 		sudo chown $(id -un):$(id -gn) ~/work/.
-		chown 755 ~/work/.
 	fi
 
 	persist ~/work/config-gh ~/.config/gh
