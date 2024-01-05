@@ -24,6 +24,20 @@ steps:
               - name: docker-socket
                 hostPath:
                   path: /var/run/docker.sock
+  - label: bazel-build
+    plugins:
+      - kubernetes:
+          podSpec:
+            containers:
+              - image: cache.defn.run:5000/dfd:class
+                imagePullPolicy: Always
+                command: [bash, -c]
+                args:
+                  - "'cd && git fetch && git reset --hard $BUILDKITE_COMMIT && source .bash_profile && git config --global user.email you@example.com && git config --global user.name YourName && cd m && echo --- bazel && env DFD_CI_BAZEL_OPTIONS=--remote_download_minimal ../bin/b build'"
+                securityContext:
+                  runAsNonRoot: true
+                  runAsUser: 1000
+                  runAsGroup: 1000
   - wait
   - label: class-docker-image
     plugins:
@@ -46,18 +60,3 @@ steps:
               - name: docker-socket
                 hostPath:
                   path: /var/run/docker.sock
-  - wait
-  - label: bazel-build
-    plugins:
-      - kubernetes:
-          podSpec:
-            containers:
-              - image: cache.defn.run:5000/dfd:class
-                imagePullPolicy: Always
-                command: [bash, -c]
-                args:
-                  - "'cd && git fetch && git reset --hard $BUILDKITE_COMMIT && source .bash_profile && git config --global user.email you@example.com && git config --global user.name YourName && cd m && echo --- bazel && env DFD_CI_BAZEL_OPTIONS=--remote_download_minimal ../bin/b build'"
-                securityContext:
-                  runAsNonRoot: true
-                  runAsUser: 1000
-                  runAsGroup: 1000
