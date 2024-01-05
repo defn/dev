@@ -38,6 +38,12 @@ steps:
                   runAsNonRoot: true
                   runAsUser: 1000
                   runAsGroup: 1000
+                volumeMounts:
+                  - name: work
+                    mountPath: /home/ubuntu/work
+            volumes:
+              - name: work
+                emptyDir: {}
   - label: class-docker-image
     plugins:
       - kubernetes:
