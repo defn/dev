@@ -33,7 +33,7 @@ steps:
                 imagePullPolicy: Always
                 command: [bash, -c]
                 args:
-                  - "'cd && git fetch && git reset --hard $BUILDKITE_COMMIT && source .bash_profile && git config --global user.email you@example.com && git config --global user.name YourName && bin/persist-cache && cd m && echo --- bazel && env DFD_CI_BAZEL_OPTIONS=--remote_download_minimal ../bin/b build'"
+                  - "'cd && git fetch && git reset --hard $BUILDKITE_COMMIT && source .bash_profile && git config --global user.email you@example.com && git config --global user.name YourName && bin/persist-cache && cd m && echo --- bazel && export DFD_CI_BAZEL_OPTIONS=--remote_download_minimal && ../bin/b build && echo -- bazel again && ../bin/b build'"
                 securityContext:
                   runAsNonRoot: true
                   runAsUser: 1000
