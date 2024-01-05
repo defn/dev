@@ -1,41 +1,40 @@
 load("//b/out:out.bzl", "copy_files")
 
+cluster_apps = glob(
+    ["*-cluster-*"],
+    exclude = [],
+    exclude_directories = 0,
+)
+
 filegroup(
-    name = "gen_release_script",
-    srcs = ["gen_release.sh"],
+    name = "gen_kustomize_build_sh",
+    srcs = ["gen_kustomize_build.sh"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "all_kustomize_build_sh",
+    srcs = [
+        "kustomize_build_{}".format(k)
+        for k in cluster_apps
+    ],
     visibility = ["//visibility:public"],
 )
 
 [
     genrule(
-        name = "release_{}".format(k),
+        name = "kustomize_build_{}".format(k),
         srcs = glob(
             ["{}/*.yaml".format(k)],
             exclude = [],
             exclude_directories = 1,
         ),
         outs = ["y/{}/main.yaml".format(k)],
-        cmd = "$(location gen_release_script) app={} $@".format(k),
+        cmd = "$(location gen_kustomize_build_sh) app={} $@".format(k),
         tools = [
-            "gen_release_script",
+            "gen_kustomize_build_sh",
             "//b/lib:lib_sh",
         ],
     )
-    for k in glob(
-        ["*-cluster-*"],
-        exclude = [],
-        exclude_directories = 0,
-    )
+    for k in cluster_apps
 ]
-
-copy_files(
-    name = "outputs_release",
-    gen = {
-        "y/{}/main.yaml".format(k): "y/{}/main.yaml".format(k)
-        for k in glob(
-            ["*-cluster-*"],
-            exclude = [],
-            exclude_directories = 0,
-        )
-    },
-)
