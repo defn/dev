@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
 all:
-	$(MAKE) udate upgrade	
+	$(MAKE) update upgrade	
 
 list:
 	$(MAKE) list_vendor_updates
