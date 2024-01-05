@@ -17,7 +17,7 @@
           unzip $src
           ;;
         *.tar.gz)
-          tar xvfz $src
+          tar xfz $src
           ;;
       esac
 
