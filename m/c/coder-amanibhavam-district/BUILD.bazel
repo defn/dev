@@ -18,7 +18,7 @@ genrule(
     srcs = [
         "config",
     ],
-    outs = ["generate_kustomize"],
+    outs = ["kustomize.tgz"],
     cmd = "$(location //c:gen_kustomize_script) release=$(location //c:release_py_script) config=$(location config) $@",
     tools = [
         "//c:gen_kustomize_script",
@@ -28,9 +28,9 @@ genrule(
 )
 
 copy_files(
-    name = "outputs_kustomize",
+    name = "outputs_kustomize_tgz",
     dir = ".",
     gen = {
-        "generate_kustomize": "generate_kustomize",
+        "kustomize.tgz": "kustomize.tgz",
     },
 )
