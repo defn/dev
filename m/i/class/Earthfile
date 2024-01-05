@@ -32,7 +32,7 @@ core-class:
     FROM cache.defn.run:5000/dfd:base
 
     CACHE /home/ubuntu/work
-    RUN sudo chown ubuntu:ubuntu /home/ubuntu/work
+    RUN sudo chown ubuntu:ubuntu /home/ubuntu/work && chmod 755 /home/ubuntu/work
 
     COPY script/800-defn-dev .
     RUN ./800-defn-dev && rm -f ./800-defn-dev
