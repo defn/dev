@@ -1,7 +1,7 @@
 buildkite:
 	@echo --- earthly
-	earthly --push --no-output +buildkite
+	earthly --ci --push --no-output +buildkite
 
 class:
 	@echo --- earthly 
-	earthly --push --no-output +class
+	earthly --ci --push --no-output +class
