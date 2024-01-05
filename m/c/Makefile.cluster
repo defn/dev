@@ -8,15 +8,6 @@ INFRA_NAME := $(shell cue export --out json -e class.cluster_name | jq -r .)
 
 k3s_url := $(shell cat ~/.kube/config | grep server: | awk '{print $$NF}')
 
-build:
-	b build
-# ?? generate_kustomize
-	b run outputs_kustomize__update
-# ../../k/APP/kustomization.yaml
-# ../../e/ENV.yaml
-	cat generate_kustomize | (cd ../.. && tar xvfz -)
-	rm -f generate_kustomize
-
 secrets:
 	$(MAKE) clean
 	$(MAKE) irsa

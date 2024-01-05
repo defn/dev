@@ -8,7 +8,7 @@ function main {
 	mkdir -p "${tmp}"
 	cat "${config}" | jq --arg out "${tmp}" -r '.gen | to_entries[] | .key as $dir | .value | to_entries[] | "\($out)/\($dir)/\(.key) \(.value | @base64) 0"' \
 		| $release
-	(cd "${tmp}" && tar cvfz - .) > "${out}"
+	(cd "${tmp}" && tar cfz - .) > "${out}"
 
 }
 
