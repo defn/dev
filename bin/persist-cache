@@ -30,6 +30,7 @@ function cache {
 		else
 			mkdir -p work
 		fi
+		ls -ld ~/work ~/work/*
 		sudo chown $(id -un):$(id -gn) ~/work/.
 		chown 755 ~/work/.
 	fi
