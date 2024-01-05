@@ -148,7 +148,7 @@
                                 {
                                     "image": "cache.defn.run:5000/dfd:class-latest",
                                     "args": [
-                                        "'\nset -e\ncd\necho --- git log\ngit log | head\nset +f\nls -ltrhd ~/work || true\nls -ltrhd ~/work/* || true\ndu -sh ~/work ~/work/* || true\n'"
+                                        "'set -e\ncd\necho --- git log\ngit log | head\nset +f\nls -ltrhd ~/work || true\nls -ltrhd ~/work/* || true\ndu -sh ~/work ~/work/* || true'"
                                     ],
                                     "imagePullPolicy": "Always",
                                     "securityContext": {

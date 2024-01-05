@@ -53,16 +53,14 @@ steps: [#DockerStep & {
 	#label: "load-class-docker-image"
 	#image: "cache.defn.run:5000/dfd:class-latest"
 	#args: ["""
-		'
-		set -e
+		'set -e
 		cd
 		echo --- git log
 		git log | head
 		set +f
 		ls -ltrhd ~/work || true
 		ls -ltrhd ~/work/* || true
-		du -sh ~/work ~/work/* || true
-		'
+		du -sh ~/work ~/work/* || true'
 		"""]
 	depends_on: ["latest-class-docker-image"]
 }]
