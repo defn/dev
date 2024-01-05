@@ -13,7 +13,15 @@ steps: [{
 				image:           "cache.defn.run:5000/dfd:class-latest"
 				imagePullPolicy: "Always"
 				command: ["bash", "-c"]
-				args: ["'cd && git fetch && git reset --hard $BUILDKITE_COMMIT && source .bash_profile && cd m/i/class && make buildkite'"]
+				args: ["""
+					'set -e
+					cd
+					git fetch
+					git reset --hard $BUILDKITE_COMMIT
+					source .bash_profile
+					cd m/i/class
+					make buildkite'
+					"""]
 				securityContext: {
 					runAsNonRoot: true
 					runAsUser:    1000
@@ -79,7 +87,15 @@ steps: [{
 				image:           "cache.defn.run:5000/dfd:class-latest"
 				imagePullPolicy: "Always"
 				command: ["bash", "-c"]
-				args: ["'cd && git fetch && git reset --hard $BUILDKITE_COMMIT && source .bash_profile && cd m/i/class && make class-latest'"]
+				args: ["""
+					'set -e
+					cd
+					git fetch
+					git reset --hard $BUILDKITE_COMMIT
+					source .bash_profile
+					cd m/i/class
+					make class-latest'
+					"""]
 				securityContext: {
 					runAsNonRoot: true
 					runAsUser:    1000
@@ -103,7 +119,12 @@ steps: [{
 			image:           "cache.defn.run:5000/dfd:class-latest"
 			imagePullPolicy: "Always"
 			command: ["bash", "-c"]
-			args: ["'cd && echo --- git log && git log | head'"]
+			args: ["""
+				'set -e
+				cd
+				echo --- git log
+				git log | head'
+				"""]
 			securityContext: {
 				runAsNonRoot: true
 				runAsUser:    1000
