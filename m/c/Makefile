@@ -8,10 +8,10 @@ build:
 # M ../k/APP/kustomization.yaml
 # M ../e/ENV.yaml
 	runmany $(shell nproc) 'cd $$1 && $(MAKE)' coder-*
-# M ../k/y/APP/main.yaml
+# M ../k/y/APP/main.yaml (Bazel)
+# M ../k/y/APP.cue (Bazel)
+# TODO make c/k/y/APP.cue
 	(cd ../k && b build)
-# M k/y/APP.cue updated
-	(cd k/y && $(MAKE) cluster_cue)
 
 # M ../k/r/APP/main.yaml
 	(cd ../k/r && $(MAKE) release)

@@ -13,9 +13,24 @@ filegroup(
 )
 
 filegroup(
+    name = "gen_cue_import_sh",
+    srcs = ["gen_cue_import.sh"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
     name = "all_kustomize_build_sh",
     srcs = [
         "kustomize_build_{}".format(k)
+        for k in cluster_apps
+    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "all_cue_import_sh",
+    srcs = [
+        "cue_import_{}".format(k)
         for k in cluster_apps
     ],
     visibility = ["//visibility:public"],
@@ -29,10 +44,24 @@ filegroup(
             exclude = [],
             exclude_directories = 1,
         ),
-        outs = ["y/{}/main.yaml".format(k)],
-        cmd = "$(location gen_kustomize_build_sh) app={} $@".format(k),
+        outs = ["{}.yaml".format(k)],
+        cmd = "$(location gen_kustomize_build_sh) app=k/{} $@".format(k),
         tools = [
             "gen_kustomize_build_sh",
+            "//b/lib:lib_sh",
+        ],
+    )
+    for k in cluster_apps
+]
+
+[
+    genrule(
+        name = "cue_import_{}".format(k),
+        srcs = ["kustomize_build_{}".format(k)],
+        outs = ["{}.cue".format(k)],
+        cmd = "$(location gen_cue_import_sh) app=$(location kustomize_build_{}) $@".format(k),
+        tools = [
+            "gen_cue_import_sh",
             "//b/lib:lib_sh",
         ],
     )
