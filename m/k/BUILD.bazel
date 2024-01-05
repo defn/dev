@@ -1,6 +1,5 @@
 load("//b/out:out.bzl", "copy_files")
 
-# release configuration
 filegroup(
     name = "gen_release_script",
     srcs = ["gen_release.sh"],

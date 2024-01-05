@@ -25,7 +25,7 @@ def copy_files(name, gen, dir = None, prefix = None, visibility = None):
 
     write_file(
         name = "{}_gen_script".format(name),
-        out = "{}_update.sh".format(name),
+        out = "{}_copy.sh".format(name),
         content = [
             "#!/usr/bin/env bash",
             "cd $BUILD_WORKSPACE_DIRECTORY",
@@ -43,8 +43,8 @@ def copy_files(name, gen, dir = None, prefix = None, visibility = None):
     )
 
     native.sh_binary(
-        name = "{}__update".format(name),
-        srcs = ["{}_update.sh".format(name)],
+        name = "{}__copy".format(name),
+        srcs = ["{}_copy.sh".format(name)],
         data = _GENERATED.values(),
         visibility = visibility,
     )

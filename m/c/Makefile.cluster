@@ -10,12 +10,12 @@ k3s_url := $(shell cat ~/.kube/config | grep server: | awk '{print $$NF}')
 
 build:
 	b build
-# ?? generate_kustomize
-	b run outputs_kustomize__update
+# ?? kustomize.tgz
+	b run outputs_kustomize_tgz__copy
 # ../../k/APP/kustomization.yaml
 # ../../e/ENV.yaml
-	cat generate_kustomize | (cd ../.. && tar xvfz -)
-	rm -f generate_kustomize
+	cat kustomize.tgz | (cd ../.. && tar xvfz -)
+	rm -f kustomize.tgz
 
 secrets:
 	$(MAKE) clean

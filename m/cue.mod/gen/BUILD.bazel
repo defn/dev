@@ -25,7 +25,7 @@ filegroup(
 )
 
 genrule(
-    name = "gen_k8s_cue_schema",
+    name = "gen_cue_mod_gen_tgz",
     srcs = [
         "config",
         "k8s_go_mod",
@@ -42,7 +42,7 @@ genrule(
 )
 
 copy_files(
-    name = "outputs_k8s_cue_schema",
+    name = "outputs_gen_cue_mod_gen_tgz",
     dir = ".",
     gen = {
         "cue.mod/gen.tgz": "cue.mod/gen.tgz",

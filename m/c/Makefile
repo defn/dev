@@ -9,7 +9,7 @@ build:
 # M ../e/ENV.yaml
 	runmany $(shell nproc) 'cd $$1 && $(MAKE)' coder-*
 # M ../k/y/APP/main.yaml
-	(cd ../k && b build && b run outputs_release__update)
+	(cd ../k && b build)
 # M k/y/APP.cue updated
 	(cd k/y && $(MAKE) cluster_cue)
 

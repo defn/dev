@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 update:
 	b build
-	b run outputs_k8s_cue_schema__update
+	b run outputs_gen_cue_mod_gen_tgz__copy
 	tar xvfz cue.mod/gen.tgz
 	rm -f cue.mod/gen.tgz
 
