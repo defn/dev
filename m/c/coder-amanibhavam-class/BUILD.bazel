@@ -8,7 +8,7 @@ cue_export(
 )
 
 genrule(
-    name = "kustomize_bundle",
+    name = "kustomize_bundle_tgz",
     srcs = [
         "config",
     ],
@@ -19,4 +19,5 @@ genrule(
         "//c:decode_base64_py",
         "//c:gen_kustomize_bundle_sh",
     ],
+    visibility = ["//visibility:public"],
 )
