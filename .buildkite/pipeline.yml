@@ -19,7 +19,7 @@
                                         "-c"
                                     ],
                                     "args": [
-                                        "'cd && git fetch && git reset --hard $BUILDKITE_COMMIT && source .bash_profile && cd m/i/class && make buildkite'"
+                                        "'set -e\ncd\ngit fetch\ngit reset --hard $BUILDKITE_COMMIT\nsource .bash_profile\ncd m/i/class\nmake buildkite'"
                                     ],
                                     "securityContext": {
                                         "runAsNonRoot": true,
@@ -104,7 +104,7 @@
                                         "-c"
                                     ],
                                     "args": [
-                                        "'cd && git fetch && git reset --hard $BUILDKITE_COMMIT && source .bash_profile && cd m/i/class && make class-latest'"
+                                        "'set -e\ncd\ngit fetch\ngit reset --hard $BUILDKITE_COMMIT\nsource .bash_profile\ncd m/i/class\nmake class-latest'"
                                     ],
                                     "securityContext": {
                                         "runAsNonRoot": true,
@@ -147,7 +147,7 @@
                                         "-c"
                                     ],
                                     "args": [
-                                        "'cd && echo --- git log && git log | head'"
+                                        "'set -e\ncd\necho --- git log\ngit log | head'"
                                     ],
                                     "securityContext": {
                                         "runAsNonRoot": true,
