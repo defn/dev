@@ -3,7 +3,7 @@ env:
   BUILDKITE_GIT_MIRRORS_SKIP_UPDATE: "1"
 
 steps:
-  - label: earthy-image
+  - label: buildkite-docker-image
     plugins:
       - kubernetes:
           podSpec:
@@ -12,7 +12,7 @@ steps:
                 imagePullPolicy: Always
                 command: [bash, -c]
                 args:
-                  - "'source ~/.bash_profile && cd m && make docker'"
+                  - "'source ~/.bash_profile && cd m/i/class && make buildkite'"
                 securityContext:
                   runAsNonRoot: true
                   runAsUser: 1000
@@ -24,7 +24,28 @@ steps:
               - name: docker-socket
                 hostPath:
                   path: /var/run/docker.sock
-  - wait
+  - label: class-docker-image
+    plugins:
+      - kubernetes:
+          podSpec:
+            containers:
+              - image: cache.defn.run:5000/dfd:class
+                imagePullPolicy: Always
+                command: [bash, -c]
+                args:
+                  - "'source ~/.bash_profile && cd m/i/class && make class'"
+                securityContext:
+                  runAsNonRoot: true
+                  runAsUser: 1000
+                  runAsGroup: 1000
+                volumeMounts:
+                  - name: docker-socket
+                    mountPath: /var/run/docker.sock
+            volumes:
+              - name: docker-socket
+                hostPath:
+                  path: /var/run/docker.sock
+  #- wait
   - label: bazel-build
     plugins:
       - kubernetes:
@@ -34,7 +55,7 @@ steps:
                 imagePullPolicy: Always
                 command: [bash, -c]
                 args:
-                  - "'git config --global user.email you@example.com && git config --global user.name YourName' && cd && cd m && env DFD_CI_BAZEL_OPTIONS=--remote_download_minimal ../bin/b build"
+                  - "'git config --global user.email you@example.com && git config --global user.name YourName' && cd m && env DFD_CI_BAZEL_OPTIONS=--remote_download_minimal ../bin/b build"
                 securityContext:
                   runAsNonRoot: true
                   runAsUser: 1000

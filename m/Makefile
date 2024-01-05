@@ -94,17 +94,6 @@ bazel-ignore:
 	git ls-files | grep '{{cookiecutter' | perl -pe 's{\}\}/.*}{\}\}}' | sort -u >> .bazelignore
 	git ls-files | grep '{{cookiecutter' | perl -pe 's{/\{\{.*}{}' | sort -u >> .bazelignore
 
-docker:
-	cd i/class && $(MAKE) build
-
-.PHONY: aws
-aws:
-	cd i/teacher && $(MAKE) build
-
-warudo:
-	$(MAKE) hello
-	$(MAKE) -j 2 docker # aws
-
 coder-login:
 	coder login https://coder.$(env).$(GIT_AUTHOR_NAME).$(domain)
 
