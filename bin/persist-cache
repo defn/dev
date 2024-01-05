@@ -2,8 +2,6 @@
 
 set -efu -o pipefail
 
-set -x
-
 function persist {
 	local s="$1"
 	shift
