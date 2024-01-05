@@ -1,5 +1,0 @@
-#ManagedBy: cue
-
-- op: replace
-  path: /spec/template/metadata/labels/name
-  value: harbor-redis

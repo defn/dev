@@ -1,8 +1,0 @@
-#ManagedBy: cue
-
-- op: replace
-  path: /spec/template/metadata/labels/name
-  value: harbor-database
-- op: replace
-  path: /spec/template/spec/containers/0/envFrom/0/secretRef/name
-  value: external-harbor-database
