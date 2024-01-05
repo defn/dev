@@ -13,14 +13,10 @@
                             "containers": [
                                 {
                                     "image": "cache.defn.run:5000/dfd:class-latest",
-                                    "imagePullPolicy": "Always",
-                                    "command": [
-                                        "bash",
-                                        "-c"
-                                    ],
                                     "args": [
                                         "'set -e\ncd\ngit fetch\ngit reset --hard $BUILDKITE_COMMIT\nsource .bash_profile\ncd m/i/class\nmake buildkite'"
                                     ],
+                                    "imagePullPolicy": "Always",
                                     "securityContext": {
                                         "runAsNonRoot": true,
                                         "runAsUser": 1000,
@@ -31,6 +27,10 @@
                                             "name": "docker-socket",
                                             "mountPath": "/var/run/docker.sock"
                                         }
+                                    ],
+                                    "command": [
+                                        "bash",
+                                        "-c"
                                     ]
                                 }
                             ],
@@ -56,14 +56,10 @@
                             "containers": [
                                 {
                                     "image": "cache.defn.run:5000/dfd:class-latest",
-                                    "imagePullPolicy": "Always",
-                                    "command": [
-                                        "bash",
-                                        "-c"
-                                    ],
                                     "args": [
                                         "'set -e\ncd\ngit fetch\ngit reset --hard $BUILDKITE_COMMIT\nsource .bash_profile\ngit config --global user.email you@example.com\ngit config --global user.name YourName\nbin/persist-cache\ncd m\necho --- bazel\nexport DFD_CI_BAZEL_OPTIONS=--remote_download_minimal\n../bin/b build\necho --- bazel again\n../bin/b build'"
                                     ],
+                                    "imagePullPolicy": "Always",
                                     "securityContext": {
                                         "runAsNonRoot": true,
                                         "runAsUser": 1000,
@@ -74,6 +70,10 @@
                                             "name": "work",
                                             "mountPath": "/home/ubuntu/work"
                                         }
+                                    ],
+                                    "command": [
+                                        "bash",
+                                        "-c"
                                     ]
                                 }
                             ],
@@ -98,14 +98,10 @@
                             "containers": [
                                 {
                                     "image": "cache.defn.run:5000/dfd:class-latest",
-                                    "imagePullPolicy": "Always",
-                                    "command": [
-                                        "bash",
-                                        "-c"
-                                    ],
                                     "args": [
                                         "'set -e\ncd\ngit fetch\ngit reset --hard $BUILDKITE_COMMIT\nsource .bash_profile\ncd m/i/class\nmake class-latest'"
                                     ],
+                                    "imagePullPolicy": "Always",
                                     "securityContext": {
                                         "runAsNonRoot": true,
                                         "runAsUser": 1000,
@@ -116,6 +112,10 @@
                                             "name": "docker-socket",
                                             "mountPath": "/var/run/docker.sock"
                                         }
+                                    ],
+                                    "command": [
+                                        "bash",
+                                        "-c"
                                     ]
                                 }
                             ],
@@ -142,18 +142,18 @@
                                 {
                                     "image": "cache.defn.run:5000/dfd:class-latest",
                                     "imagePullPolicy": "Always",
-                                    "command": [
-                                        "bash",
-                                        "-c"
-                                    ],
-                                    "args": [
-                                        "'set -e\ncd\necho --- git log\ngit log | head'"
-                                    ],
                                     "securityContext": {
                                         "runAsNonRoot": true,
                                         "runAsUser": 1000,
                                         "runAsGroup": 1000
-                                    }
+                                    },
+                                    "args": [
+                                        "'set -e\ncd\necho --- git log\ngit log | head'"
+                                    ],
+                                    "command": [
+                                        "bash",
+                                        "-c"
+                                    ]
                                 }
                             ]
                         }
