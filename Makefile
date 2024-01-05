@@ -62,7 +62,7 @@ home:
 		mark $$n; \
 		(cd m/pkg/$$n && ~/bin/b build flake_path); \
 		(cd m/pkg/$$n && ~/bin/b out flake_path) | (cd ~/bin/nix.tmp && tar xfz -); \
-		for a in ~/bin/nix.tmp/*; do if ! test -e $$a; then mark not found $$a; (set -x; cd m/pkg/$$n && ~/bin/b build flake_store && (~/bin/b out flake_store | (cd / && sudo -A tar xfz - --skip-old-files))); break; fi; done; \
+		for a in ~/bin/nix.tmp/*; do if ! test -e $$a; then mark not found $$a $$(ls -ld $$a); (set -x; cd m/pkg/$$n && ~/bin/b build flake_store && (~/bin/b out flake_store | (cd / && sudo -A tar xfz - --skip-old-files))); break; fi; done; \
 		done
 	rsync -ia --delete ~/bin/nix.tmp/. ~/bin/nix/.
 	rm -rf ~/bin/nix.tmp
