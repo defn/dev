@@ -59,7 +59,7 @@ home:
 	for n in $(flakes); do \
 		if [[ "$$(git log -1 --format=%H -- m/pkg/$$n)" != "$$(cat ~/bin/nix/.head-$$n 2>/dev/null || true)" ]]; then \
 			git log -1 --format=%H -- m/pkg/$$n; \
-			cat ~/bin/nix/.head-$$n || true; \	
+			cat ~/bin/nix/.head-$$n || true; \
 			rm -rf ~/bin/nix.tmp; \
 			mkdir -p ~/bin/nix.tmp ~/bin/nix; \
 			set -eo pipefail; for n in $(flakes); do \
