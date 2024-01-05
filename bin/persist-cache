@@ -18,6 +18,8 @@ function persist {
 }
 
 function cache {
+	set -x
+
 	if ! type -P sudo >/dev/null; then return 0; fi
 
 	if [[ "Linux" == "$(uname -s || true)" ]]; then
