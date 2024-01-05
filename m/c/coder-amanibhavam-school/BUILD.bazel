@@ -8,14 +8,15 @@ cue_export(
 )
 
 genrule(
-    name = "gen_kustomize_bundle",
+    name = "kustomize_bundle",
     srcs = [
         "config",
     ],
-    outs = ["kustomize_bundler.tgz"],
-    cmd = "$(location //c:gen_kustomize_bundle_sh) config=$(location config) $@",
+    outs = ["kustomize_bundle.tgz"],
+    cmd = "$(location //c:gen_kustomize_bundle_sh) config=$(location config) decode=$(location //c:decode_base64_py) $@",
     tools = [
-        "//c:gen_kustomize_bundle_sh",
         "//b/lib:lib_sh",
+        "//c:decode_base64_py",
+        "//c:gen_kustomize_bundle_sh",
     ],
 )

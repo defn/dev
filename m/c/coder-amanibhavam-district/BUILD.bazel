@@ -8,7 +8,7 @@ cue_export(
 )
 
 genrule(
-    name = "gen_kustomize_bundle",
+    name = "kustomize_bundle",
     srcs = [
         "config",
     ],
