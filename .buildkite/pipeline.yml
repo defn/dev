@@ -24,6 +24,7 @@ steps:
               - name: docker-socket
                 hostPath:
                   path: /var/run/docker.sock
+  - wait
   - label: class-docker-image
     plugins:
       - kubernetes:
@@ -45,7 +46,7 @@ steps:
               - name: docker-socket
                 hostPath:
                   path: /var/run/docker.sock
-  #- wait
+  - wait
   - label: bazel-build
     plugins:
       - kubernetes:

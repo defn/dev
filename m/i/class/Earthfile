@@ -7,7 +7,8 @@ buildkite:
     ENV BUILDKITE_GIT_MIRRORS_PATH=/cache/git
     ENV BUILDKITE_GIT_MIRRORS_SKIP_UPDATE=1
 
-    RUN --no-cache git clone --mirror -v -- https://github.com/defn/dev.git ${BUILDKITE_GIT_MIRRORS_PATH}/https---github-com-defn-dev-git
+    RUN git clone --mirror -v -- https://github.com/defn/dev.git ${BUILDKITE_GIT_MIRRORS_PATH}/https---github-com-defn-dev-git
+    RUN --no-cache cd ${BUILDKITE_GIT_MIRRORS_PATH}/https---github-com-defn-dev-git && git pull
     SAVE IMAGE --push ${image}
 
 class:
