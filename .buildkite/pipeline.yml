@@ -8,7 +8,7 @@ steps:
       - kubernetes:
           podSpec:
             containers:
-              - image: cache.defn.run:5000/dfd:class
+              - image: cache.defn.run:5000/dfd:class-latest
                 imagePullPolicy: Always
                 command: [bash, -c]
                 args:
@@ -29,7 +29,7 @@ steps:
       - kubernetes:
           podSpec:
             containers:
-              - image: cache.defn.run:5000/dfd:class
+              - image: cache.defn.run:5000/dfd:class-latest
                 imagePullPolicy: Always
                 command: [bash, -c]
                 args:
@@ -49,7 +49,7 @@ steps:
       - kubernetes:
           podSpec:
             containers:
-              - image: cache.defn.run:5000/dfd:class
+              - image: cache.defn.run:5000/dfd:class-latest
                 imagePullPolicy: Always
                 command: [bash, -c]
                 args:
@@ -71,7 +71,7 @@ steps:
       - kubernetes:
           podSpec:
             containers:
-              - image: cache.defn.run:5000/dfd:class
+              - image: cache.defn.run:5000/dfd:class-latest
                 imagePullPolicy: Always
                 command: [bash, -c]
                 args:
