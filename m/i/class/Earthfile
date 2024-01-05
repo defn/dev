@@ -13,18 +13,33 @@ buildkite:
 
 class:
     ARG image=cache.defn.run:5000/dfd:class
-    BUILD +build-class --image=${image}
+    BUILD +build-class-core --image=${image}
+    BUILD +build-class-core --image=${image}-latest
 
-build-class:
+class-latest:
+    ARG image=cache.defn.run:5000/dfd:class
+    BUILD +build-class-latest --image=${image}-latest
+
+build-class-core:
     ARG image
-    BUILD +image-class --image=${image}
+    BUILD +image-class-core --image=${image}
 
-image-class:
+build-class-latest:
+    ARG image
+    BUILD +image-class-latest --image=${image}
+
+image-class-core:
     ARG image
     FROM +core-class
 
     ENV BUILDKITE_GIT_MIRRORS_PATH=/cache/git
     ENV BUILDKITE_GIT_MIRRORS_SKIP_UPDATE=1
+
+    SAVE IMAGE --push ${image}
+
+image-class-latest:
+    ARG image
+    FROM +latest-class
 
     SAVE IMAGE --push ${image}
 
@@ -40,7 +55,10 @@ core-class:
     RUN bash -c 'source .bash_profile && for e in vscodevim.vim jnoortheen.nix-ide hashicorp.terraform golang.go esbenp.prettier-vscode bazelbuild.vscode-bazel cuelang.cue marp-team.marp-vscode; do bin/nix/code-server serve-local --force --install-extension $e; done'
     RUN bash -c 'source .bash_profile && cd ~/m && ~/bin/persist-cache && go install golang.org/x/tools/gopls@latest && go install honnef.co/go/tools/cmd/staticcheck@latest && cd && git checkout .'
 
-    RUN git config --global user.email "you@example.com"
-    RUN git config --global user.name "Your Name"
-    RUN --no-cache git pull
+latest-class:
+    FROM cache.defn.run:5000/dfd:class-latest
+
+    CACHE /home/ubuntu/work
+
+    RUN --no-cache git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git pull
     RUN bash -c 'source .bash_profile && make home && git checkout .'

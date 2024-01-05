@@ -5,3 +5,4 @@ buildkite:
 class:
 	@echo --- earthly 
 	earthly --ci --push --no-output +class
+	earthly --ci --push --no-output +class-latest
