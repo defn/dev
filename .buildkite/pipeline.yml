@@ -60,3 +60,18 @@ steps:
               - name: docker-socket
                 hostPath:
                   path: /var/run/docker.sock
+  - wait
+  - label: load-class-docker-image
+    plugins:
+      - kubernetes:
+          podSpec:
+            containers:
+              - image: cache.defn.run:5000/dfd:class
+                imagePullPolicy: Always
+                command: [bash, -c]
+                args:
+                  - "'true'"
+                securityContext:
+                  runAsNonRoot: true
+                  runAsUser: 1000
+                  runAsGroup: 1000
