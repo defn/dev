@@ -5,7 +5,7 @@ filegroup(
 )
 
 filegroup(
-    name = "gen_kustomize_script",
-    srcs = ["gen_kustomize.sh"],
+    name = "gen_kustomize_bundle_sh",
+    srcs = ["gen_kustomize_bundle.sh"],
     visibility = ["//visibility:public"],
 )
