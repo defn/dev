@@ -8,7 +8,7 @@ buildkite:
     ENV BUILDKITE_GIT_MIRRORS_SKIP_UPDATE=1
 
     RUN git clone --mirror -v -- https://github.com/defn/dev.git ${BUILDKITE_GIT_MIRRORS_PATH}/https---github-com-defn-dev-git
-    RUN --no-cache cd ${BUILDKITE_GIT_MIRRORS_PATH}/https---github-com-defn-dev-git && git fetch origin
+    RUN --no-cache cd ${BUILDKITE_GIT_MIRRORS_PATH}/https---github-com-defn-dev-git && git fetch origin && git merge origin main
     SAVE IMAGE --push ${image}
 
 class:
