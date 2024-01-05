@@ -4,16 +4,6 @@ digest ?=
 
 env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
 
-build:
-# M ../k/APP/kustomization.yaml
-# M ../e/ENV.yaml
-	runmany $(shell nproc) 'cd $$1 && $(MAKE)' coder-*
-	(cd ../k && b build)
-
-# M r/digest/digest_gen.cue
-# M ../k/r/APP/main.yaml
-#	(cd ../k/r && $(MAKE) release-digested)
-
 list:
 	@(cd .. && git grep artifacthub) | awk '{print $$2}' | runmany 'curl -sSL https://artifacthub.io/api/v1/$${1#https://artifacthub.io/}/feed/rss 2>/dev/null | grep 'artifacthub.io/packages/helm/' | grep -v -E "beta|snapshot" | head -1 | cut -d">" -f2 | cut -d"<" -f1' | sort -u > pending.txt
 	git diff pending.txt

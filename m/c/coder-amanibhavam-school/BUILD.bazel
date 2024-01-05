@@ -1,36 +1,21 @@
 load("//b/cue:cue.bzl", "cue_export")
-load("//b/out:out.bzl", "copy_files")
 
-# app configuration
 cue_export(
     name = "config",
-    srcs = [
-        "//c:common",
-        "//cue.mod/gen/k8s.io:k8s_io",
-    ],
+    srcs = ["//c:common"],
     cues = glob(["*.cue"]) + ["//c:common"],
     visibility = ["//visibility:public"],
 )
 
-# kustomize configuration
 genrule(
-    name = "kustomize",
+    name = "gen_kustomize_bundle",
     srcs = [
         "config",
     ],
-    outs = ["kustomize.tgz"],
-    cmd = "$(location //c:gen_kustomize_script) release=$(location //c:release_py_script) config=$(location config) $@",
+    outs = ["kustomize_bundler.tgz"],
+    cmd = "$(location //c:gen_kustomize_bundle_sh) config=$(location config) $@",
     tools = [
-        "//c:gen_kustomize_script",
-        "//c:release_py_script",
-        "//b/lib:lib_sh"
+        "//b/lib:lib_sh",
+        "//c:gen_kustomize_bundle_sh",
     ],
-)
-
-copy_files(
-    name = "outputs_kustomize_tgz",
-    dir = ".",
-    gen = {
-        "kustomize.tgz": "kustomize.tgz",
-    },
 )
