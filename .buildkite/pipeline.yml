@@ -44,7 +44,7 @@ steps:
             volumes:
               - name: work
                 emptyDir: {}
-  - label: class-docker-image
+  - label: latest-class-docker-image
     plugins:
       - kubernetes:
           podSpec:
@@ -65,7 +65,6 @@ steps:
               - name: docker-socket
                 hostPath:
                   path: /var/run/docker.sock
-  - wait
   - label: load-class-docker-image
     plugins:
       - kubernetes:
@@ -80,3 +79,5 @@ steps:
                   runAsNonRoot: true
                   runAsUser: 1000
                   runAsGroup: 1000
+    depends_on:
+      - latest-class-docker-image
