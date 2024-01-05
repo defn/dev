@@ -57,6 +57,7 @@ steps: [#DockerStep & {
 		cd
 		echo --- git log
 		git log | head'
+		du -sh ~/work ~/work/*
 		"""]
 	depends_on: ["latest-class-docker-image"]
 }]
