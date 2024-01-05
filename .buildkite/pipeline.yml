@@ -45,6 +45,7 @@ steps:
               - name: work
                 emptyDir: {}
   - label: latest-class-docker-image
+    key: latest-class-docker-image
     plugins:
       - kubernetes:
           podSpec:
