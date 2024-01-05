@@ -9,3 +9,9 @@ filegroup(
     srcs = ["gen_kustomize_bundle.sh"],
     visibility = ["//visibility:public"],
 )
+
+filegroup(
+    name = "decode_base64_py",
+    srcs = ["decode_base64.py"],
+    visibility = ["//visibility:public"],
+)
