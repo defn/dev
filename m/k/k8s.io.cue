@@ -1,4 +1,4 @@
-package r
+package k
 
 import (
 	core "k8s.io/api/core/v1"
@@ -9,12 +9,10 @@ import (
 	networking "k8s.io/api/networking/v1"
 	autoscaling "k8s.io/api/autoscaling/v2"
 	admissionregistration "k8s.io/api/admissionregistration/v1"
-
-	"github.com/defn/dev/m/c/k/y"
 )
 
 // by kind
-xx: y.res
+xx: res
 
 xx: "deployment": [string]: [string]: [string]:  apps.#Deployment & {apiVersion:  "apps/v1"}
 xx: "statefulset": [string]: [string]: [string]: apps.#StatefulSet & {apiVersion: "apps/v1"}
@@ -46,7 +44,7 @@ xx: "mutatingwebhookconfiguration": [string]: [string]: [string]:   admissionreg
 
 xx: "poddisruptionbudget": [string]: [string]: [string]: policy.#PodDisruptionBudget & {apiVersion: "policy/v1"}
 
-kk: y.res
+kk: res
 
 // flatten resources into a map
 resources: {

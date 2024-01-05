@@ -8,17 +8,11 @@ build:
 # M ../k/APP/kustomization.yaml
 # M ../e/ENV.yaml
 	runmany $(shell nproc) 'cd $$1 && $(MAKE)' coder-*
-# M ../k/y/APP/main.yaml (Bazel)
-# M ../k/y/APP.cue (Bazel)
-# TODO make c/k/y/APP.cue
 	(cd ../k && b build)
 
-# M ../k/r/APP/main.yaml
-	(cd ../k/r && $(MAKE) release)
 # M r/digest/digest_gen.cue
 # M ../k/r/APP/main.yaml
-	(cd ../k/r && $(MAKE) release-digested)
-	if env GIT_PAGER=cat git grep image:.[n]ot-found ../k/r; then (cd ./r && $(MAKE) digest); (pwd && cd ../../k/r && $(MAKE) release); fi
+#	(cd ../k/r && $(MAKE) release-digested)
 
 # h/APP*
 # ENV/APP-version.cue

@@ -4,7 +4,7 @@ function main {
 	local app="${in[app]}"
 
 	(
-		cue import "${app}" -p y --with-context \
+		cue import "${app}" -p k --with-context \
 			-l '"res"' -l 'strings.ToLower(data.kind)' \
 			-l "\"$(basename ${app} .yaml)\"" \
 			-l 'strings.ToLower(*data.metadata.namespace | "cluster")' \

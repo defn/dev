@@ -2,7 +2,6 @@ load("//b/out:out.bzl", "copy_files")
 
 cluster_apps = glob(
     ["*-cluster-*"],
-    exclude = [],
     exclude_directories = 0,
 )
 
@@ -19,6 +18,18 @@ filegroup(
 )
 
 filegroup(
+    name = "gen_cached_yaml_sh",
+    srcs = ["gen_cached_yaml.sh"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "cached_cue",
+    srcs = glob(["*.cue"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
     name = "all_kustomize_build_sh",
     srcs = [
         "kustomize_build_{}".format(k)
@@ -31,6 +42,15 @@ filegroup(
     name = "all_cue_import_sh",
     srcs = [
         "cue_import_{}".format(k)
+        for k in cluster_apps
+    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "all_cached_yaml_sh",
+    srcs = [
+        "cached_yaml_{}".format(k)
         for k in cluster_apps
     ],
     visibility = ["//visibility:public"],
@@ -62,6 +82,25 @@ filegroup(
         cmd = "$(location gen_cue_import_sh) app=$(location kustomize_build_{}) $@".format(k),
         tools = [
             "gen_cue_import_sh",
+            "//b/lib:lib_sh",
+        ],
+    )
+    for k in cluster_apps
+]
+
+[
+    genrule(
+        name = "cached_yaml_{}".format(k),
+        srcs = [
+            "cue_import_{}".format(k),
+            "cached_cue",
+            "//cue.mod:cue_mod",
+            "//cue.mod/gen/k8s.io:k8s_io",
+        ],
+        outs = ["{}-cached.yaml".format(k)],
+        cmd = "$(location gen_cached_yaml_sh) app=$(location cue_import_{}) $@".format(k),
+        tools = [
+            "gen_cached_yaml_sh",
             "//b/lib:lib_sh",
         ],
     )
