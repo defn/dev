@@ -6,6 +6,7 @@
     "steps": [
         {
             "label": "buildkite-docker-image",
+            "key": "buildkite-docker-image",
             "plugins": [
                 {
                     "kubernetes": {
@@ -45,10 +46,12 @@
                         }
                     }
                 }
-            ]
+            ],
+            "depends_on": []
         },
         {
             "label": "bazel-build",
+            "key": "bazel-build",
             "plugins": [
                 {
                     "kubernetes": {
@@ -86,7 +89,8 @@
                         }
                     }
                 }
-            ]
+            ],
+            "depends_on": []
         },
         {
             "label": "latest-class-docker-image",
@@ -130,10 +134,12 @@
                         }
                     }
                 }
-            ]
+            ],
+            "depends_on": []
         },
         {
             "label": "load-class-docker-image",
+            "key": "load-class-docker-image",
             "plugins": [
                 {
                     "kubernetes": {
@@ -141,21 +147,23 @@
                             "containers": [
                                 {
                                     "image": "cache.defn.run:5000/dfd:class-latest",
+                                    "args": [
+                                        "'set -e\ncd\necho --- git log\ngit log | head'"
+                                    ],
                                     "imagePullPolicy": "Always",
                                     "securityContext": {
                                         "runAsNonRoot": true,
                                         "runAsUser": 1000,
                                         "runAsGroup": 1000
                                     },
-                                    "args": [
-                                        "'set -e\ncd\necho --- git log\ngit log | head'"
-                                    ],
+                                    "volumeMounts": [],
                                     "command": [
                                         "bash",
                                         "-c"
                                     ]
                                 }
-                            ]
+                            ],
+                            "volumes": []
                         }
                     }
                 }
