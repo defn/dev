@@ -18,6 +18,8 @@ function persist {
 }
 
 function cache {
+	set -x
+
 	if ! type -P sudo >/dev/null; then return 0; fi
 
 	if [[ "Linux" == "$(uname -s || true)" ]]; then
@@ -35,6 +37,8 @@ function cache {
 		sudo chown $(id -un):$(id -gn) ~/work
 		sudo chown $(id -un):$(id -gn) ~/work/.
 	fi
+
+	(set +f; ls -ld ~/work ~/work/. ~/work/* || true)
 
 	persist ~/work/config-gh ~/.config/gh
 
