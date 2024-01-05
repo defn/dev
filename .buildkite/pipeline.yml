@@ -69,7 +69,7 @@ steps:
                 imagePullPolicy: Always
                 command: [bash, -c]
                 args:
-                  - "'true'"
+                  - "'cd && git log | head'"
                 securityContext:
                   runAsNonRoot: true
                   runAsUser: 1000
