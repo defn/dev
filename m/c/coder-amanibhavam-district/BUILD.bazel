@@ -12,7 +12,7 @@ genrule(
     srcs = [
         "config",
     ],
-    outs = ["kustomize_bundler.tgz"],
+    outs = ["kustomize_bundle.tgz"],
     cmd = "$(location //c:gen_kustomize_bundle_sh) config=$(location config) decode=$(location //c:decode_base64_py) $@",
     tools = [
         "//b/lib:lib_sh",
