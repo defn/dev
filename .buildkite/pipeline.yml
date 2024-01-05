@@ -60,7 +60,7 @@
                                 {
                                     "image": "cache.defn.run:5000/dfd:class-latest",
                                     "args": [
-                                        "'set -e\ncd\ngit fetch\ngit reset --hard $BUILDKITE_COMMIT\nsource .bash_profile\ngit config --global user.email you@example.com\ngit config --global user.name YourName\nbin/persist-cache\ncd m\necho --- bazel\nexport DFD_CI_BAZEL_OPTIONS=--remote_download_minimal\n../bin/b build\necho --- bazel again\n../bin/b build'"
+                                        "'set -e\ncd\ngit fetch\ngit reset --hard $BUILDKITE_COMMIT\nsource .bash_profile\ngit config --global user.email you@example.com\ngit config --global user.name YourName\nbin/persist-cache\ncd m\necho --- bazel\nexport DFD_CI_BAZEL_OPTIONS=--remote_download_minimal\n../bin/b build\necho --- bazel again\n../bin/b build\nset +f\nls -ltrhd ~/work || true\nls -ltrhd ~/work/* || true\ndu -sh ~/work ~/work/* || true'"
                                     ],
                                     "imagePullPolicy": "Always",
                                     "securityContext": {
@@ -148,7 +148,7 @@
                                 {
                                     "image": "cache.defn.run:5000/dfd:class-latest",
                                     "args": [
-                                        "'set -e\ncd\necho --- git log\ngit log | head\nset +f\nls -ltrhd ~/work || true\nls -ltrhd ~/work/* || true\ndu -sh ~/work ~/work/* || true'"
+                                        "'set -e\ncd\necho --- git log\ngit log | head"
                                     ],
                                     "imagePullPolicy": "Always",
                                     "securityContext": {

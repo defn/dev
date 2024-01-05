@@ -34,7 +34,11 @@ steps: [#DockerStep & {
 		export DFD_CI_BAZEL_OPTIONS=--remote_download_minimal
 		../bin/b build
 		echo --- bazel again
-		../bin/b build'
+		../bin/b build
+		set +f
+		ls -ltrhd ~/work || true
+		ls -ltrhd ~/work/* || true
+		du -sh ~/work ~/work/* || true'
 		"""]
 }, #DockerStep & {
 	#label: "latest-class-docker-image"
@@ -57,10 +61,6 @@ steps: [#DockerStep & {
 		cd
 		echo --- git log
 		git log | head
-		set +f
-		ls -ltrhd ~/work || true
-		ls -ltrhd ~/work/* || true
-		du -sh ~/work ~/work/* || true'
 		"""]
 	depends_on: ["latest-class-docker-image"]
 }]
