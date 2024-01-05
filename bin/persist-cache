@@ -36,8 +36,6 @@ function cache {
 		sudo chown $(id -un):$(id -gn) ~/work/.
 	fi
 
-	(set +f; ls -ld ~/work ~/work/. ~/work/* || true)
-
 	persist ~/work/config-gh ~/.config/gh
 
 	persist ~/work/config-gcloud ~/.config/gcloud
