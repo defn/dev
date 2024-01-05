@@ -46,6 +46,7 @@ function cache {
 	persist ~/work/local-gh ~/.local/share/gh
 
 	persist ~/work/terraform-d ~/.terraform.d
+	ls -ld ~/work ~/work/*
 	mkdir -p ~/.terraform.d/plugin-cache
 
 	persist ~/work/go ~/go
