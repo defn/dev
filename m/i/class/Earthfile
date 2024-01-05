@@ -43,4 +43,4 @@ core-class:
     RUN git config --global user.email "you@example.com"
     RUN git config --global user.name "Your Name"
     RUN --no-cache git pull
-    RUN bash -c 'source .bash_profile && make home && (cd m && b build) && git checkout .'
+    RUN bash -c 'source .bash_profile && make home && git checkout .'
