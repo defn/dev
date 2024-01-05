@@ -9,7 +9,7 @@ buildkite:
 
     RUN git clone --mirror -v -- https://github.com/defn/dev.git ${BUILDKITE_GIT_MIRRORS_PATH}/https---github-com-defn-dev-git
     RUN --no-cache cd ${BUILDKITE_GIT_MIRRORS_PATH}/https---github-com-defn-dev-git && git fetch origin
-    SAVE IMAGE --ci --push ${image}
+    SAVE IMAGE --push ${image}
 
 class:
     ARG image=cache.defn.run:5000/dfd:class
@@ -26,7 +26,7 @@ image-class:
     ENV BUILDKITE_GIT_MIRRORS_PATH=/cache/git
     ENV BUILDKITE_GIT_MIRRORS_SKIP_UPDATE=1
 
-    SAVE IMAGE --ci --push ${image}
+    SAVE IMAGE --push ${image}
 
 core-class:
     FROM cache.defn.run:5000/dfd:base
