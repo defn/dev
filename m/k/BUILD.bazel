@@ -1,42 +1,279 @@
-load("//b/out:out.bzl", "copy_files")
+cluster_apps = [
+    "coder-amanibhavam-class-cluster-argo-cd",
+    "coder-amanibhavam-class-cluster-cert-manager",
+    "coder-amanibhavam-class-cluster-cilium",
+    "coder-amanibhavam-class-cluster-coder",
+    "coder-amanibhavam-class-cluster-descheduler",
+    "coder-amanibhavam-class-cluster-env",
+    "coder-amanibhavam-class-cluster-external-dns",
+    "coder-amanibhavam-class-cluster-external-secrets",
+    "coder-amanibhavam-class-cluster-issuer",
+    "coder-amanibhavam-class-cluster-karpenter",
+    "coder-amanibhavam-class-cluster-kyverno",
+    "coder-amanibhavam-class-cluster-l5d-crds",
+    "coder-amanibhavam-class-cluster-pod-identity",
+    "coder-amanibhavam-class-cluster-postgres-operator",
+    "coder-amanibhavam-class-cluster-reloader",
+    "coder-amanibhavam-class-cluster-secrets",
+    "coder-amanibhavam-class-cluster-tailscale",
+    "coder-amanibhavam-class-cluster-tetragon",
+    "coder-amanibhavam-class-cluster-traefik",
+    "coder-amanibhavam-class-cluster-trust-manager",
+    "coder-amanibhavam-class-cluster-xwing",
+    "coder-amanibhavam-district-cluster-argo-cd",
+    "coder-amanibhavam-district-cluster-argo-events",
+    "coder-amanibhavam-district-cluster-argo-workflows",
+    "coder-amanibhavam-district-cluster-buildkite",
+    "coder-amanibhavam-district-cluster-cert-manager",
+    "coder-amanibhavam-district-cluster-cilium",
+    "coder-amanibhavam-district-cluster-coder",
+    "coder-amanibhavam-district-cluster-deathstar",
+    "coder-amanibhavam-district-cluster-descheduler",
+    "coder-amanibhavam-district-cluster-env",
+    "coder-amanibhavam-district-cluster-external-dns",
+    "coder-amanibhavam-district-cluster-external-secrets",
+    "coder-amanibhavam-district-cluster-harbor",
+    "coder-amanibhavam-district-cluster-headlamp",
+    "coder-amanibhavam-district-cluster-issuer",
+    "coder-amanibhavam-district-cluster-karpenter",
+    "coder-amanibhavam-district-cluster-kyverno",
+    "coder-amanibhavam-district-cluster-l5d-crds",
+    "coder-amanibhavam-district-cluster-pihole",
+    "coder-amanibhavam-district-cluster-pod-identity",
+    "coder-amanibhavam-district-cluster-postgres-operator",
+    "coder-amanibhavam-district-cluster-reloader",
+    "coder-amanibhavam-district-cluster-secrets",
+    "coder-amanibhavam-district-cluster-tailscale",
+    "coder-amanibhavam-district-cluster-tetragon",
+    "coder-amanibhavam-district-cluster-tfo",
+    "coder-amanibhavam-district-cluster-traefik",
+    "coder-amanibhavam-district-cluster-trust-manager",
+    "coder-amanibhavam-district0-cluster-argo-cd",
+    "coder-amanibhavam-district0-cluster-env",
+    "coder-amanibhavam-district0-cluster-external-secrets",
+    "coder-amanibhavam-district0-cluster-kyverno",
+    "coder-amanibhavam-district0-cluster-postgres-operator",
+    "coder-amanibhavam-district0-cluster-secrets",
+    "coder-amanibhavam-district1-cluster-env",
+    "coder-amanibhavam-district1-cluster-kyverno",
+    "coder-amanibhavam-school-cluster-argo-cd",
+    "coder-amanibhavam-school-cluster-cert-manager",
+    "coder-amanibhavam-school-cluster-cilium",
+    "coder-amanibhavam-school-cluster-coder",
+    "coder-amanibhavam-school-cluster-descheduler",
+    "coder-amanibhavam-school-cluster-env",
+    "coder-amanibhavam-school-cluster-external-dns",
+    "coder-amanibhavam-school-cluster-external-secrets",
+    "coder-amanibhavam-school-cluster-issuer",
+    "coder-amanibhavam-school-cluster-karpenter",
+    "coder-amanibhavam-school-cluster-kyverno",
+    "coder-amanibhavam-school-cluster-l5d-crds",
+    "coder-amanibhavam-school-cluster-pod-identity",
+    "coder-amanibhavam-school-cluster-postgres-operator",
+    "coder-amanibhavam-school-cluster-reloader",
+    "coder-amanibhavam-school-cluster-secrets",
+    "coder-amanibhavam-school-cluster-spaceship",
+    "coder-amanibhavam-school-cluster-tailscale",
+    "coder-amanibhavam-school-cluster-tetragon",
+    "coder-amanibhavam-school-cluster-traefik",
+    "coder-amanibhavam-school-cluster-trust-manager",
+]
 
-# release configuration
+clusters_apps_parent_list = [
+    "-".join(k.split("-")[:3])
+    for k in glob(
+        ["*-cluster-*"],
+        exclude_directories = 0,
+    )
+]
+
+clusters_apps_parent = {
+    clusters_apps_parent_list[i]: 1
+    for i in range(
+        0,
+        len(clusters_apps_parent_list),
+    )
+}
+
+clusters = list(clusters_apps_parent.keys())
+
 filegroup(
-    name = "gen_release_script",
-    srcs = ["gen_release.sh"],
+    name = "gen_kustomize_build_sh",
+    srcs = ["gen_kustomize_build.sh"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "gen_cue_import_sh",
+    srcs = ["gen_cue_import.sh"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "gen_deploy_yaml_sh",
+    srcs = ["gen_deploy_yaml.sh"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "gen_helm_chart_sh",
+    srcs = ["gen_helm_chart.sh"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "gen_deploy_crd_sh",
+    srcs = ["gen_deploy_crd.sh"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "deploy_cue",
+    srcs = glob(["*.cue"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "all_kustomize_build",
+    srcs = [
+        "kustomize_build_{}".format(k)
+        for k in cluster_apps
+    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "all_cue_import",
+    srcs = [
+        "cue_import_{}".format(k)
+        for k in cluster_apps
+    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "all_deploy_yaml",
+    srcs = [
+        "deploy_yaml_{}".format(k)
+        for k in cluster_apps
+    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "all_helm_chart",
+    srcs = [
+        "helm_chart_{}".format(k)
+        for k in cluster_apps
+    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "all_crd",
+    srcs = [
+        "deploy_crd_{}".format(c)
+        for c in clusters
+    ],
     visibility = ["//visibility:public"],
 )
 
 [
     genrule(
-        name = "release_{}".format(k),
+        name = "kustomize_build_{}".format(k),
         srcs = glob(
             ["{}/*.yaml".format(k)],
             exclude = [],
             exclude_directories = 1,
+        ) + [
+            "//c/{}:kustomize_bundle_tgz".format("-".join(k.split("-")[:3])),
+        ],
+        outs = ["{}.yaml".format(k)],
+        cmd = "$(location gen_kustomize_build_sh) app={} bundle=$(location //c/{}:kustomize_bundle_tgz) $@".format(
+            k,
+            "-".join(k.split("-")[:3]),
         ),
-        outs = ["y/{}/main.yaml".format(k)],
-        cmd = "$(location gen_release_script) app={} $@".format(k),
         tools = [
-            "gen_release_script",
+            "gen_kustomize_build_sh",
             "//b/lib:lib_sh",
         ],
     )
-    for k in glob(
-        ["*-cluster-*"],
-        exclude = [],
-        exclude_directories = 0,
-    )
+    for k in cluster_apps
 ]
 
-copy_files(
-    name = "outputs_release",
-    gen = {
-        "y/{}/main.yaml".format(k): "y/{}/main.yaml".format(k)
-        for k in glob(
-            ["*-cluster-*"],
-            exclude = [],
-            exclude_directories = 0,
-        )
-    },
-)
+[
+    genrule(
+        name = "cue_import_{}".format(k),
+        srcs = ["kustomize_build_{}".format(k)],
+        outs = ["{}.cue".format(k)],
+        cmd = "$(location gen_cue_import_sh) app=$(location kustomize_build_{}) $@".format(k),
+        tools = [
+            "gen_cue_import_sh",
+            "//b/lib:lib_sh",
+        ],
+    )
+    for k in cluster_apps
+]
+
+[
+    genrule(
+        name = "deploy_yaml_{}".format(k),
+        srcs = [
+            "cue_import_{}".format(k),
+            "deploy_cue",
+            "//cue.mod:cue_mod",
+            "//cue.mod/gen/k8s.io:k8s_io",
+        ],
+        outs = ["{}-deploy.yaml".format(k)],
+        cmd = "$(location gen_deploy_yaml_sh) $@ $(location cue_import_{})".format(k),
+        tools = [
+            "gen_deploy_yaml_sh",
+            "//b/lib:lib_sh",
+        ],
+    )
+    for k in cluster_apps
+]
+
+[
+    genrule(
+        name = "helm_chart_{}".format(k),
+        srcs = [
+            "deploy_yaml_{}".format(k),
+        ],
+        outs = ["{}-chart.tgz".format(k)],
+        cmd = "$(location gen_helm_chart_sh) app=$(location deploy_yaml_{}) $@".format(k),
+        tools = [
+            "gen_helm_chart_sh",
+            "//b/lib:lib_sh",
+        ],
+    )
+    for k in cluster_apps
+]
+
+[
+    genrule(
+        name = "deploy_crd_{}".format(c),
+        srcs = [
+            "deploy_cue",
+            "//cue.mod:cue_mod",
+            "//cue.mod/gen/k8s.io:k8s_io",
+        ] + [
+            "cue_import_{}".format(k)
+            for k in cluster_apps
+            if k.startswith("{}-".format(c))
+        ],
+        outs = ["{}-crd.yaml".format(c)],
+        cmd = "$(location gen_deploy_crd_sh) $@ {}".format(
+            " ".join([
+                "$(location cue_import_{})".format(k)
+                for k in cluster_apps
+                if k.startswith("{}-".format(c))
+            ]),
+        ),
+        tools = [
+            "gen_deploy_crd_sh",
+            "//b/lib:lib_sh",
+        ],
+    )
+    for c in clusters
+]

@@ -1,9 +1,0 @@
-#ManagedBy: cue
-
-patches: []
-resources:
-  - resource-service-deathstar.yaml
-  - resource-deployment-xwing.yaml
-namespace: default
-labels: []
-commonAnnotations: {}

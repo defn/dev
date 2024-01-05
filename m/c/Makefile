@@ -4,30 +4,6 @@ digest ?=
 
 env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
 
-build:
-# M ../k/APP/kustomization.yaml
-# M ../e/ENV.yaml
-	runmany $(shell nproc) 'cd $$1 && $(MAKE)' coder-*
-# M ../k/y/APP/main.yaml
-	(cd ../k && b build && b run outputs_release__update)
-# M k/y/APP.cue updated
-	(cd k/y && $(MAKE) cluster_cue)
-
-# M ../k/r/APP/main.yaml
-	(cd ../k/r && $(MAKE) release)
-# M r/digest/digest_gen.cue
-# M ../k/r/APP/main.yaml
-	(cd ../k/r && $(MAKE) release-digested)
-	if env GIT_PAGER=cat git grep image:.[n]ot-found ../k/r; then (cd ./r && $(MAKE) digest); (pwd && cd ../../k/r && $(MAKE) release); fi
-
-# h/APP*
-# ENV/APP-version.cue
-	cd ../k && $(MAKE) chart
-
-crd:
-# M k/crd/ENV.yaml
-	(cd k/y && cue export --out json -e crds | jq -r 'to_entries[] | "../k/crd/\(.key).yaml \(.value | @base64) 0"') | ./release.py
-
 list:
 	@(cd .. && git grep artifacthub) | awk '{print $$2}' | runmany 'curl -sSL https://artifacthub.io/api/v1/$${1#https://artifacthub.io/}/feed/rss 2>/dev/null | grep 'artifacthub.io/packages/helm/' | grep -v -E "beta|snapshot" | head -1 | cut -d">" -f2 | cut -d"<" -f1' | sort -u > pending.txt
 	git diff pending.txt
