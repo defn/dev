@@ -1,4 +1,4 @@
 SHELL := /bin/bash
 
 build:
-	earthly --no-cache --no-output --push +build
+	earthly --ci --no-cache --no-output --push +build
