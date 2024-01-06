@@ -8,19 +8,17 @@ function main {
 	mkdir chart
 	tar xfz "${app}" -C chart
 
-	local bumped_version
-	bumped_version=
 	(
 		set +f
 		cd chart/*/
 		local version="$(helm show chart --insecure-skip-tls-verify "oci://${registry}/${name}" 2>/dev/null | grep ^version: | awk '{print $2}')"
-		bumped_version="${version%.*}.$(( ${version##*.} + 1))"
+		local bumped_version="${version%.*}.$(( ${version##*.} + 1))"
 
 		sed "s#^version: .*#version: ${bumped_version}#" -i Chart.yaml
 		sed "s#^appVersion: .*#version: ${bumped_version}#" -i Chart.yaml
 	)
-
-	local chart="${name}-${bumped_version}.tgz"
+	
+	local chart="${name}.tgz"
 
 	(
 		set +f
