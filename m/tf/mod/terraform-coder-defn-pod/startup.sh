@@ -41,8 +41,10 @@ function main {
   	bin/persist-cache
 
 	if [[ -n ${workdir} ]]; then
-		cd "${workdir}"
-    	screen -S up -d -m make up || true
+		(
+			cd "${workdir}"
+    		screen -S up -d -m make up || true
+		) &
 	fi
 
 	make dotfiles password-store
