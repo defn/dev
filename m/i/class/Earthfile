@@ -20,11 +20,11 @@ class-init:
 
 class-latest:
     ARG image=cache.defn.run:5000/dfd:class-latest
-    BUILD +build-class --image=${image}
+    BUILD +latest-class --image=${image}
 
 class-buildkite-latest:
     ARG image=cache.defn.run:5000/dfd:class-buildkite-latest
-    BUILD +build-class-buildkite --image=${image}
+    BUILD +buildkite-latest-class --image=${image}
 
 build-class:
     ARG image
