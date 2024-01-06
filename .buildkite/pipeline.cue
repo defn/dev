@@ -66,7 +66,7 @@ steps: [#DockerStep & {
 		cd
 		echo --- git log
 		git log | head
-		du -sh ~/work/.
+		du -sh ~/work/. || true
 		'
 		"""]
 	depends_on: ["build-class-latest-image"]
