@@ -5,7 +5,7 @@ set -ex
 function main {
 	sudo install -d -m 0700 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
 	sudo install -d -m 0700 -o ubuntu -g ubuntu /nix /nix
-  sudo install -d -m 1777 -o ubuntu -g ubuntu /tmp/uscreens
+	sudo install -d -m 1777 -o ubuntu -g ubuntu /tmp/uscreens
 
 	local root_disk
 	local mnt_disk
@@ -34,7 +34,7 @@ function main {
 		sudo mount /mnt || true
 	fi
 
-  sudo chown ubuntu:ubuntu /mnt/*
+	sudo chown ubuntu:ubuntu /mnt/*
 
 	sudo install -d -m 0710 -o root -g root /mnt/docker
 	sudo rm -rf /var/lib/docker
@@ -50,12 +50,14 @@ function main {
 
 	(cd m/cache && make init up)
 
-	bin/persist-cache
 	make install
 }
 
 time main "$@"
 uptime
+
+cd
+bin/persist-cache
 
 cd ~/m
 nohup ~/bin/nix/tilt up >/tmp/startup.out 2>&1 &
