@@ -21,7 +21,7 @@ steps: [#DockerStep & {
 		"""]
 }, #DockerStep & {
 	#label: "bazel-build"
-	#image: "cache.defn.run:5000/dfd:class-buildkite"
+	#image: "cache.defn.run:5000/dfd:class-buildkite-latest"
 	#args: ["""
 		'
 		set -e
@@ -44,6 +44,20 @@ steps: [#DockerStep & {
 		'
 		"""]
 }, #DockerStep & {
+	#label: "latest-buildkite-class-docker-image"
+	#image: "cache.defn.run:5000/dfd:class-buildkite-latest"
+	#args: ["""
+		'
+		set -e
+		cd
+		git fetch
+		git reset --hard $BUILDKITE_COMMIT
+		source .bash_profile
+		cd m/i/class
+		make class-buildkite-latest
+		'
+		"""]
+}, #DockerStep & {
 	#label: "latest-class-docker-image"
 	#image: "cache.defn.run:5000/dfd:class-latest"
 	#args: ["""
@@ -57,7 +71,6 @@ steps: [#DockerStep & {
 		make class-latest
 		'
 		"""]
-
 }, #BashStep & {
 	#label: "load-class-docker-image"
 	#image: "cache.defn.run:5000/dfd:class-latest"

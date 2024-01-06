@@ -2,10 +2,11 @@ buildkite:
 	@echo --- earthly
 	earthly --ci --push --no-output +buildkite
 
-class:
+class-init:
 	@echo --- earthly 
-	earthly --ci --push --no-output +class
+	earthly --ci --push --no-output +class-init
 
-class-latest:
+class:
 	@echo --- earthly
 	earthly --ci --push --no-output +class-latest
+	earthly --ci --push --no-output +class-buildkite-latest
