@@ -9,19 +9,22 @@ steps: [#DockerStep & {
 	#label: "buildkite-docker-image"
 	#image: "cache.defn.run:5000/dfd:class-latest"
 	#args: ["""
-		'set -e
+		'
+		set -e
 		cd
 		git fetch
 		git reset --hard $BUILDKITE_COMMIT
 		source .bash_profile
 		cd m/i/class
-		make buildkite'
+		make buildkite
+		'
 		"""]
 }, #WorkStep & {
 	#label: "bazel-build"
 	#image: "cache.defn.run:5000/dfd:class-latest"
 	#args: ["""
-		'set -e
+		'
+		set -e
 		cd
 		git fetch
 		git reset --hard $BUILDKITE_COMMIT
@@ -38,29 +41,34 @@ steps: [#DockerStep & {
 		set +f
 		ls -ltrhd ~/work || true
 		ls -ltrhd ~/work/* || true
-		du -sh ~/work ~/work/* || true'
+		du -sh ~/work ~/work/* || true
+		'
 		"""]
 }, #DockerStep & {
 	#label: "latest-class-docker-image"
 	#image: "cache.defn.run:5000/dfd:class-latest"
 	#args: ["""
-		'set -e
+		'
+		set -e
 		cd
 		git fetch
 		git reset --hard $BUILDKITE_COMMIT
 		source .bash_profile
 		cd m/i/class
-		make class-latest'
+		make class-latest
+		'
 		"""]
 
 }, #BashStep & {
 	#label: "load-class-docker-image"
 	#image: "cache.defn.run:5000/dfd:class-latest"
 	#args: ["""
-		'set -e
+		'
+		set -e
 		cd
 		echo --- git log
 		git log | head
+		'
 		"""]
 	depends_on: ["latest-class-docker-image"]
 }]
