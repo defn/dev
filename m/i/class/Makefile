@@ -10,7 +10,10 @@ class:
 	@echo --- earthly
 	earthly --ci --push --no-output +class-latest
 
+class-buildkite:
+	@echo --- earthly
+	earthly --ci --push --no-output +class-buildkite-latest
+
 buildkite:
 	@echo --- earthly
 	earthly --ci --push --no-output +buildkite
-	earthly --ci --push --no-output +class-buildkite-latest
