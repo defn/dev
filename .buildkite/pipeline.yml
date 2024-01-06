@@ -70,8 +70,8 @@
                                     },
                                     "volumeMounts": [
                                         {
-                                            "name": "work",
-                                            "mountPath": "/home/ubuntu/work"
+                                            "name": "docker-socket",
+                                            "mountPath": "/var/run/docker.sock"
                                         }
                                     ],
                                     "command": [
@@ -82,8 +82,10 @@
                             ],
                             "volumes": [
                                 {
-                                    "name": "work",
-                                    "emptyDir": {}
+                                    "name": "docker-socket",
+                                    "hostPath": {
+                                        "path": "/var/run/docker.sock"
+                                    }
                                 }
                             ]
                         }
