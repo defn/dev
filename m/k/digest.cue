@@ -34,7 +34,7 @@ cached_image: {
 			image: "cache.defn.run:5000/\(cache[c.image])"
 		}
 		if cache[c.image] == _|_ {
-			image: "not-found-\(c.image)"
+			image: "\(c.image)"
 		}
 	}
 }
