@@ -1,4 +1,8 @@
 class-init:
+	@echo --- pruning
+	this-prune
+	@echo --- base
+	cd ../base && $(MAKE)
 	@echo --- earthly 
 	earthly --ci --push --no-output +class-init
 
