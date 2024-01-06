@@ -10,7 +10,7 @@ steps: [#DockerStep & {
 	#image: "cache.defn.run:5000/dfd:class-buildkite-latest"
 	#args: ["""
 		'
-		set -e
+		set -
 		cd
 		git fetch
 		git reset --hard $BUILDKITE_COMMIT
@@ -66,6 +66,7 @@ steps: [#DockerStep & {
 		cd
 		echo --- git log
 		git log | head
+		du -sh ~/work/.
 		'
 		"""]
 	depends_on: ["build-class-latest-image"]
@@ -78,6 +79,7 @@ steps: [#DockerStep & {
 		cd
 		echo --- git log
 		git log | head
+		du -sh ~/work/.
 		'
 		"""]
 	depends_on: ["build-class-buildkite-latest-image"]
