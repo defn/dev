@@ -21,7 +21,7 @@ steps: [#DockerStep & {
 		"""]
 }, #WorkStep & {
 	#label: "bazel-build"
-	#image: "cache.defn.run:5000/dfd:class-latest"
+	#image: "cache.defn.run:5000/dfd:class-buildkite"
 	#args: ["""
 		'
 		set -e
