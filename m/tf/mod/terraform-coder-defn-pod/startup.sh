@@ -38,11 +38,13 @@ function main {
 
 	mkdir -p ~/.kube
 	rm -f ~/.kube/config
+  bin/persist-cache
 
 	make dotfiles password-store
 
 	if [[ -n ${workdir} ]]; then
 		cd "${workdir}"
+    screen -S up -d -m make up || true
 	fi
 }
 
