@@ -15,6 +15,7 @@ class:
     ARG image=cache.defn.run:5000/dfd:class
     BUILD +build-class-core --image=${image}
     BUILD +build-class-core --image=${image}-latest
+    BUILD +build-class-buildkite --image=${image}-buildkite
 
 class-latest:
     ARG image=cache.defn.run:5000/dfd:class
@@ -28,18 +29,28 @@ build-class-latest:
     ARG image
     BUILD +image-class-latest --image=${image}
 
+build-class-buildkite:
+    ARG image
+    BUILD +image-class-buildkite core --image=${image}
+
 image-class-core:
     ARG image
     FROM +core-class
-
-    ENV BUILDKITE_GIT_MIRRORS_PATH=/cache/git
-    ENV BUILDKITE_GIT_MIRRORS_SKIP_UPDATE=1
 
     SAVE IMAGE --push ${image}
 
 image-class-latest:
     ARG image
     FROM +latest-class
+
+    SAVE IMAGE --push ${image}
+
+image-class-buildkite:
+    ARG image
+    FROM +buildkite-class
+
+    ENV BUILDKITE_GIT_MIRRORS_PATH=/cache/git
+    ENV BUILDKITE_GIT_MIRRORS_SKIP_UPDATE=1
 
     SAVE IMAGE --push ${image}
 
@@ -62,3 +73,8 @@ latest-class:
 
     RUN --no-cache git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git pull
     RUN bash -c 'source .bash_profile && make home && git checkout .'
+
+buildkite-class:
+    FROM cache.defn.run:5000/dfd:class-latest
+
+    RUN cd && source .bash_profile && cd m && b build
