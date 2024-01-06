@@ -151,8 +151,8 @@ install:
 	@mark finished
 
 install-inner:
-	$(MAKE) symlinks
-	$(MAKE) perms
+	bin/persist--cache
+	$(MAKE) symlinks perms
 	. ~/.bash_profile && $(MAKE) install-innermost
 	$(MAKE) home
 
