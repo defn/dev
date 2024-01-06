@@ -17,8 +17,5 @@ all-build:
 login:
 	helm registry login -u 'robot$$meh' $(registry)
 
-push:
-	helm push --insecure-skip-tls-verify ../h/$(chart)-$(version).tgz oci://$(registry)/library/helm
-
 template:
 	helm template --insecure-skip-tls-verify $(chart) oci://$(registry)/library/helm/$(chart) --version $(version)
