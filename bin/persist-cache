@@ -63,7 +63,6 @@ function cache {
 
 	persist ~/work/bazelisk ~/.cache/bazelisk
 
-	persist ~/work/config-coder ~/.config/coderv2
 	persist ~/work/code-server-cache/extensions ~/.local/share/code-server/extensions
 	persist ~/work/vscode-cache/extensions ~/.vscode-server/extensions
 
