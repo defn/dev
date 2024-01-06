@@ -71,6 +71,12 @@ resource "coder_app" "tilt" {
   icon         = "/icon/code.svg"
   share        = "owner"
   subdomain    = true
+
+  healthcheck {
+    url       = "http://localhost:10350"
+    interval  = 5
+    threshold = 6
+  }
 }
 
 module "coder-login" {
