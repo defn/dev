@@ -67,32 +67,6 @@ steps: [#DockerStep & {
 		make buildkite
 		'
 		"""]
-}, #BashStep & {
-	#label: "load-class-latest-image"
-	#image: "cache.defn.run:5000/dfd:class-latest"
-	#args: ["""
-		'
-		set -e
-		cd
-		echo --- git log
-		git log | head
-		du -sh ~/work/. || true
-		'
-		"""]
-	depends_on: ["build-class-latest-image"]
-}, #BashStep & {
-	#label: "load-class-buildkite-latest-image"
-	#image: "cache.defn.run:5000/dfd:class-buildkite-latest"
-	#args: ["""
-		'
-		set -e
-		cd
-		echo --- git log
-		git log | head
-		du -sh ~/work/.
-		'
-		"""]
-	depends_on: ["build-class-buildkite-latest-image"]
 }]
 
 #RunAsUbuntu: securityContext: {
