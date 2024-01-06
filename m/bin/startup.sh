@@ -47,10 +47,10 @@ function main {
 	git fetch
 	git branch --set-upstream-to=origin/main main
 	git pull
-	bin/persist-cache
 
 	(cd m/cache && make init up)
 
+	bin/persist-cache
 	make install
 }
 
