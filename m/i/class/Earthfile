@@ -85,6 +85,7 @@ class:
     RUN bash -c 'source .bash_profile && cd ~/m && ~/bin/persist-cache && go install golang.org/x/tools/gopls@latest && go install honnef.co/go/tools/cmd/staticcheck@latest && cd && git checkout .'
 
 latest-class:
+    ARG image
     FROM cache.defn.run:5000/dfd:class-latest
 
     CACHE /home/ubuntu/work
@@ -102,6 +103,7 @@ buildkite-class:
     RUN bash -c 'source .bash_profile && cd m && b build'
 
 buildkite-latest-class:
+    ARG image
     FROM cache.defn.run:5000/dfd:class-buildkite-latest
 
     RUN bin/persist-cache
