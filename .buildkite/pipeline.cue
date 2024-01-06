@@ -39,7 +39,7 @@ steps: [#DockerStep & {
 		../bin/b build
 		echo --- bazel again
 		../bin/b build
-		(set +f; du -sh ~/work ~/work/*)
+		(set +f; ls -ld ~/work ~/work/. ~/work/* || true; du -sh ~/work ~/work/*)
 		echo
 		'
 		"""]
