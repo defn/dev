@@ -16,18 +16,17 @@ function main {
 
 		sed "s#^version: .*#version: ${bumped_version}#" -i Chart.yaml
 		sed "s#^appVersion: .*#version: ${bumped_version}#" -i Chart.yaml
+
+		cd ..
+		helm package */
+
+		cd ..
+		cp */*.tgz chart.tgz
 	)
 	
-	local chart="${name}.tgz"
+	helm push --insecure-skip-tls-verify chart.tgz "oci://${registry}"
 
-	(
-		set +f
-		tar cfz "${chart}" -C chart/*/ .
-	)
-
-	helm push --insecure-skip-tls-verify "${chart}" "oci://${registry}"
-
-	cp "${chart}" "${out}"
+	cp chart.tgz "${out}"
 }
 
 source b/lib/lib.sh
