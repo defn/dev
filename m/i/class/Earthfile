@@ -18,6 +18,14 @@ class-init:
     BUILD +build-class-buildkite --image=${image}-buildkite
     BUILD +build-class-buildkite --image=${image}-buildkite-latest
 
+class-latest:
+    ARG image=cache.defn.run:5000/dfd:class-latest
+    BUILD +build-class --image=${image}
+
+class-buildkite-latest:
+    ARG image=cache.defn.run:5000/dfd:class-buildkite-latest
+    BUILD +build-class-buildkite --image=${image}
+
 build-class:
     ARG image
     BUILD +image-class --image=${image}
