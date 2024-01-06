@@ -101,4 +101,5 @@ buildkite-class:
 buildkite-latest-class:
     FROM cache.defn.run:5000/dfd:class-buildkite-latest
 
+    RUN bin/persist-cache
     RUN --no-cache bash -c 'source .bash_profile && cd m && b build'
