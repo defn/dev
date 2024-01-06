@@ -58,9 +58,54 @@
                         "podSpec": {
                             "containers": [
                                 {
-                                    "image": "cache.defn.run:5000/dfd:class-buildkite",
+                                    "image": "cache.defn.run:5000/dfd:class-buildkite-latest",
                                     "args": [
                                         "'\nset -e\ncd\ngit fetch\ngit reset --hard $BUILDKITE_COMMIT\nsource .bash_profile\ngit config --global user.email you@example.com\ngit config --global user.name YourName\nbin/persist-cache\ncd m\ndu -sh ~/work\necho --- bazel\nexport DFD_CI_BAZEL_OPTIONS=--remote_download_minimal\n../bin/b build\necho --- bazel again\n../bin/b build\n(set +f; ls -ld ~/work ~/work/. ~/work/* || true; du -sh ~/work ~/work/*)\necho\n'"
+                                    ],
+                                    "imagePullPolicy": "Always",
+                                    "securityContext": {
+                                        "runAsNonRoot": true,
+                                        "runAsUser": 1000,
+                                        "runAsGroup": 1000
+                                    },
+                                    "volumeMounts": [
+                                        {
+                                            "name": "docker-socket",
+                                            "mountPath": "/var/run/docker.sock"
+                                        }
+                                    ],
+                                    "command": [
+                                        "bash",
+                                        "-c"
+                                    ]
+                                }
+                            ],
+                            "volumes": [
+                                {
+                                    "name": "docker-socket",
+                                    "hostPath": {
+                                        "path": "/var/run/docker.sock"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "depends_on": []
+        },
+        {
+            "label": "latest-buildkite-class-docker-image",
+            "key": "latest-buildkite-class-docker-image",
+            "plugins": [
+                {
+                    "kubernetes": {
+                        "podSpec": {
+                            "containers": [
+                                {
+                                    "image": "cache.defn.run:5000/dfd:class-buildkite-latest",
+                                    "args": [
+                                        "'\nset -e\ncd\ngit fetch\ngit reset --hard $BUILDKITE_COMMIT\nsource .bash_profile\ncd m/i/class\nmake class-buildkite-latest\n'"
                                     ],
                                     "imagePullPolicy": "Always",
                                     "securityContext": {
