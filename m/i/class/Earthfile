@@ -37,6 +37,9 @@ image-class-core:
     ARG image
     FROM +core-class
 
+    ENV BUILDKITE_GIT_MIRRORS_PATH=/cache/git
+    ENV BUILDKITE_GIT_MIRRORS_SKIP_UPDATE=1
+
     SAVE IMAGE --push ${image}
 
 image-class-latest:
