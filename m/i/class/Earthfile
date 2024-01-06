@@ -31,7 +31,7 @@ build-class-latest:
 
 build-class-buildkite:
     ARG image
-    BUILD +image-class-buildkite core --image=${image}
+    BUILD +image-class-buildkite --image=${image}
 
 image-class-core:
     ARG image
@@ -77,4 +77,5 @@ latest-class:
 buildkite-class:
     FROM cache.defn.run:5000/dfd:class-latest
 
-    RUN cd && source .bash_profile && cd m && b build
+    RUN bin/persist-cache
+    RUN bash -c 'source .bash_profile && cd m && b build'
