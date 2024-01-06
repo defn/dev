@@ -1,188 +1,146 @@
-{
-    "env": {
-        "BUILDKITE_GIT_MIRRORS_PATH": "/cache/git",
-        "BUILDKITE_GIT_MIRRORS_SKIP_UPDATE": "1"
-    },
-    "steps": [
-        {
-            "label": "bazel-build",
-            "key": "bazel-build",
-            "plugins": [
-                {
-                    "kubernetes": {
-                        "podSpec": {
-                            "containers": [
-                                {
-                                    "image": "cache.defn.run:5000/dfd:class-buildkite-latest",
-                                    "args": [
-                                        "'\nset -\ncd\ngit fetch\ngit reset --hard $BUILDKITE_COMMIT\nsource .bash_profile\ngit config --global user.email you@example.com\ngit config --global user.name YourName\nbin/persist-cache\ncd m\necho --- bazel\nexport DFD_CI_BAZEL_OPTIONS=--remote_download_minimal\n../bin/b build\necho\n'"
-                                    ],
-                                    "imagePullPolicy": "Always",
-                                    "securityContext": {
-                                        "runAsNonRoot": true,
-                                        "runAsUser": 1000,
-                                        "runAsGroup": 1000
-                                    },
-                                    "volumeMounts": [
-                                        {
-                                            "name": "docker-socket",
-                                            "mountPath": "/var/run/docker.sock"
-                                        }
-                                    ],
-                                    "command": [
-                                        "bash",
-                                        "-c"
-                                    ]
-                                }
-                            ],
-                            "volumes": [
-                                {
-                                    "name": "docker-socket",
-                                    "hostPath": {
-                                        "path": "/var/run/docker.sock"
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            ],
-            "depends_on": []
-        },
-        {
-            "label": "build-class-latest-image",
-            "key": "build-class-latest-image",
-            "plugins": [
-                {
-                    "kubernetes": {
-                        "podSpec": {
-                            "containers": [
-                                {
-                                    "image": "cache.defn.run:5000/dfd:class-latest",
-                                    "args": [
-                                        "'\nset -e\ncd\ngit fetch\ngit reset --hard $BUILDKITE_COMMIT\nsource .bash_profile\ncd m/i/class\nmake class\n'"
-                                    ],
-                                    "imagePullPolicy": "Always",
-                                    "securityContext": {
-                                        "runAsNonRoot": true,
-                                        "runAsUser": 1000,
-                                        "runAsGroup": 1000
-                                    },
-                                    "volumeMounts": [
-                                        {
-                                            "name": "docker-socket",
-                                            "mountPath": "/var/run/docker.sock"
-                                        }
-                                    ],
-                                    "command": [
-                                        "bash",
-                                        "-c"
-                                    ]
-                                }
-                            ],
-                            "volumes": [
-                                {
-                                    "name": "docker-socket",
-                                    "hostPath": {
-                                        "path": "/var/run/docker.sock"
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            ],
-            "depends_on": []
-        },
-        {
-            "label": "build-class-buildkite-latest-image",
-            "key": "build-class-buildkite-latest-image",
-            "plugins": [
-                {
-                    "kubernetes": {
-                        "podSpec": {
-                            "containers": [
-                                {
-                                    "image": "cache.defn.run:5000/dfd:class-latest",
-                                    "args": [
-                                        "'\nset -e\ncd\ngit fetch\ngit reset --hard $BUILDKITE_COMMIT\nsource .bash_profile\ncd m/i/class\nmake class-buildkite\n'"
-                                    ],
-                                    "imagePullPolicy": "Always",
-                                    "securityContext": {
-                                        "runAsNonRoot": true,
-                                        "runAsUser": 1000,
-                                        "runAsGroup": 1000
-                                    },
-                                    "volumeMounts": [
-                                        {
-                                            "name": "docker-socket",
-                                            "mountPath": "/var/run/docker.sock"
-                                        }
-                                    ],
-                                    "command": [
-                                        "bash",
-                                        "-c"
-                                    ]
-                                }
-                            ],
-                            "volumes": [
-                                {
-                                    "name": "docker-socket",
-                                    "hostPath": {
-                                        "path": "/var/run/docker.sock"
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            ],
-            "depends_on": []
-        },
-        {
-            "label": "build-buildkite-image",
-            "key": "build-buildkite-image",
-            "plugins": [
-                {
-                    "kubernetes": {
-                        "podSpec": {
-                            "containers": [
-                                {
-                                    "image": "cache.defn.run:5000/dfd:class-latest",
-                                    "args": [
-                                        "'\nset -e\ncd\ngit fetch\ngit reset --hard $BUILDKITE_COMMIT\nsource .bash_profile\ncd m/i/class\nmake buildkite\n'"
-                                    ],
-                                    "imagePullPolicy": "Always",
-                                    "securityContext": {
-                                        "runAsNonRoot": true,
-                                        "runAsUser": 1000,
-                                        "runAsGroup": 1000
-                                    },
-                                    "volumeMounts": [
-                                        {
-                                            "name": "docker-socket",
-                                            "mountPath": "/var/run/docker.sock"
-                                        }
-                                    ],
-                                    "command": [
-                                        "bash",
-                                        "-c"
-                                    ]
-                                }
-                            ],
-                            "volumes": [
-                                {
-                                    "name": "docker-socket",
-                                    "hostPath": {
-                                        "path": "/var/run/docker.sock"
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            ],
-            "depends_on": []
-        }
-    ]
-}
+env:
+  BUILDKITE_GIT_MIRRORS_PATH: /cache/git
+  BUILDKITE_GIT_MIRRORS_SKIP_UPDATE: "1"
+steps:
+  - label: bazel-build
+    key: bazel-build
+    plugins:
+      - kubernetes:
+          podSpec:
+            containers:
+              - image: cache.defn.run:5000/dfd:class-buildkite-latest
+                args:
+                  - |-
+                    '
+                    set -
+                    cd
+                    git fetch
+                    git reset --hard $BUILDKITE_COMMIT
+                    source .bash_profile
+                    git config --global user.email you@example.com
+                    git config --global user.name YourName
+                    bin/persist-cache
+                    cd m
+                    echo --- bazel
+                    export DFD_CI_BAZEL_OPTIONS=--remote_download_minimal
+                    ../bin/b build
+                    echo
+                    '
+                imagePullPolicy: Always
+                securityContext:
+                  runAsNonRoot: true
+                  runAsUser: 1000
+                  runAsGroup: 1000
+                volumeMounts:
+                  - name: docker-socket
+                    mountPath: /var/run/docker.sock
+                command:
+                  - bash
+                  - -c
+            volumes:
+              - name: docker-socket
+                hostPath:
+                  path: /var/run/docker.sock
+    depends_on: []
+  - label: build-class-latest-image
+    key: build-class-latest-image
+    plugins:
+      - kubernetes:
+          podSpec:
+            containers:
+              - image: cache.defn.run:5000/dfd:class-latest
+                args:
+                  - |-
+                    '
+                    set -e
+                    cd
+                    git fetch
+                    git reset --hard $BUILDKITE_COMMIT
+                    source .bash_profile
+                    cd m/i/class
+                    make class
+                    '
+                imagePullPolicy: Always
+                securityContext:
+                  runAsNonRoot: true
+                  runAsUser: 1000
+                  runAsGroup: 1000
+                volumeMounts:
+                  - name: docker-socket
+                    mountPath: /var/run/docker.sock
+                command:
+                  - bash
+                  - -c
+            volumes:
+              - name: docker-socket
+                hostPath:
+                  path: /var/run/docker.sock
+    depends_on: []
+  - label: build-class-buildkite-latest-image
+    key: build-class-buildkite-latest-image
+    plugins:
+      - kubernetes:
+          podSpec:
+            containers:
+              - image: cache.defn.run:5000/dfd:class-latest
+                args:
+                  - |-
+                    '
+                    set -e
+                    cd
+                    git fetch
+                    git reset --hard $BUILDKITE_COMMIT
+                    source .bash_profile
+                    cd m/i/class
+                    make class-buildkite
+                    '
+                imagePullPolicy: Always
+                securityContext:
+                  runAsNonRoot: true
+                  runAsUser: 1000
+                  runAsGroup: 1000
+                volumeMounts:
+                  - name: docker-socket
+                    mountPath: /var/run/docker.sock
+                command:
+                  - bash
+                  - -c
+            volumes:
+              - name: docker-socket
+                hostPath:
+                  path: /var/run/docker.sock
+    depends_on: []
+  - label: build-buildkite-image
+    key: build-buildkite-image
+    plugins:
+      - kubernetes:
+          podSpec:
+            containers:
+              - image: cache.defn.run:5000/dfd:class-latest
+                args:
+                  - |-
+                    '
+                    set -e
+                    cd
+                    git fetch
+                    git reset --hard $BUILDKITE_COMMIT
+                    source .bash_profile
+                    cd m/i/class
+                    make buildkite
+                    '
+                imagePullPolicy: Always
+                securityContext:
+                  runAsNonRoot: true
+                  runAsUser: 1000
+                  runAsGroup: 1000
+                volumeMounts:
+                  - name: docker-socket
+                    mountPath: /var/run/docker.sock
+                command:
+                  - bash
+                  - -c
+            volumes:
+              - name: docker-socket
+                hostPath:
+                  path: /var/run/docker.sock
+    depends_on: []
