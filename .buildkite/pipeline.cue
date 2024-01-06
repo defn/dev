@@ -25,6 +25,7 @@ steps: [#DockerStep & {
 	#args: ["""
 		'
 		set -e
+		set +f
 		cd
 		git fetch
 		git reset --hard $BUILDKITE_COMMIT
@@ -33,15 +34,14 @@ steps: [#DockerStep & {
 		git config --global user.name YourName
 		bin/persist-cache
 		cd m
+		du -sh ~/work ~/work/* || true
 		echo --- bazel
 		export DFD_CI_BAZEL_OPTIONS=--remote_download_minimal
 		../bin/b build
 		echo --- bazel again
 		../bin/b build
-		set +f
-		ls -ltrhd ~/work || true
-		ls -ltrhd ~/work/* || true
 		du -sh ~/work ~/work/* || true
+		echo
 		'
 		"""]
 }, #DockerStep & {
