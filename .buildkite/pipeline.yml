@@ -60,7 +60,7 @@
                                 {
                                     "image": "cache.defn.run:5000/dfd:class-latest",
                                     "args": [
-                                        "'\nset -e\ncd\ngit fetch\ngit reset --hard $BUILDKITE_COMMIT\nsource .bash_profile\ngit config --global user.email you@example.com\ngit config --global user.name YourName\nbin/persist-cache\ncd m\necho --- bazel\nexport DFD_CI_BAZEL_OPTIONS=--remote_download_minimal\n../bin/b build\necho --- bazel again\n../bin/b build\nset +f\nls -ltrhd ~/work || true\nls -ltrhd ~/work/* || true\ndu -sh ~/work ~/work/* || true\n'"
+                                        "'\nset -e\nset +f\ncd\ngit fetch\ngit reset --hard $BUILDKITE_COMMIT\nsource .bash_profile\ngit config --global user.email you@example.com\ngit config --global user.name YourName\nbin/persist-cache\ncd m\ndu -sh ~/work ~/work/* || true\necho --- bazel\nexport DFD_CI_BAZEL_OPTIONS=--remote_download_minimal\n../bin/b build\necho --- bazel again\n../bin/b build\ndu -sh ~/work ~/work/* || true\necho\n'"
                                     ],
                                     "imagePullPolicy": "Always",
                                     "securityContext": {
