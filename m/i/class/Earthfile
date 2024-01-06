@@ -21,10 +21,12 @@ class-init:
 class-latest:
     ARG image=cache.defn.run:5000/dfd:class-latest
     BUILD +latest-class --image=${image}
+    SAVE IMAGE --push ${image}
 
 class-buildkite-latest:
     ARG image=cache.defn.run:5000/dfd:class-buildkite-latest
     BUILD +buildkite-latest-class --image=${image}
+    SAVE IMAGE --push ${image}
 
 build-class:
     ARG image
@@ -96,10 +98,12 @@ buildkite-class:
     FROM cache.defn.run:5000/dfd:class-latest
 
     RUN bin/persist-cache
+    RUN --no-cache git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git pull
     RUN bash -c 'source .bash_profile && cd m && b build'
 
 buildkite-latest-class:
     FROM cache.defn.run:5000/dfd:class-buildkite-latest
 
     RUN bin/persist-cache
-    RUN --no-cache bash -c 'source .bash_profile && cd m && b build'
+    RUN --no-cache git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git pull
+    RUN bash -c 'source .bash_profile && cd m && b build'
