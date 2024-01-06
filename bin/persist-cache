@@ -36,13 +36,15 @@ function cache {
 		sudo chown $(id -un):$(id -gn) ~/work/.
 	fi
 
-	persist ~/work/config-gh ~/.config/gh
+	#persist ~/work/config-coderv2 ~/.config/coderv2
 
-	persist ~/work/config-gcloud ~/.config/gcloud
+	#persist ~/work/config-gh ~/.config/gh
+
+	#persist ~/work/config-gcloud ~/.config/gcloud
+
+	#persist ~/work/config-temporalite ~/.config/temporalite
 
 	persist ~/work/config-precommit ~/.cache/pre-commit
-
-	persist ~/work/config-temporalite ~/.config/temporalite
 
 	persist ~/work/local-gh ~/.local/share/gh
 
