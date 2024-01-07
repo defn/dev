@@ -13,7 +13,10 @@ function main {
 		git reset --hard
 		source .bash_profile
 
+		git config --global user.email "you@example.com"
+		git config --global user.name "Your Name"
 		make install
+		git checkout .
 
 		exit $?
 	fi
