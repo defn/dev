@@ -22,11 +22,11 @@ services:
     volumes:
       - ${HOME}/work/bazel-cache:/data
     command: --max_size 50
-  attic:
-    image: ghcr.io/zhaofengli/attic:bdafd64910bb2b861cf90fa15f1fc93318b6fbf6
-    container_name: attic
-    ports:
-      - "8080:8080"
-    volumes:
-      - ${HOME}/work/attic:/var/empty/.local/share/attic
-    command: [--mode, monolithic]
+#  attic:
+#    image: ghcr.io/zhaofengli/attic:bdafd64910bb2b861cf90fa15f1fc93318b6fbf6
+#    container_name: attic
+#    ports:
+#      - "8080:8080"
+#    volumes:
+#      - ${HOME}/work/attic:/var/empty/.local/share/attic
+#    command: [--mode, monolithic]
