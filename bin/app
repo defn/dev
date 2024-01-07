@@ -18,6 +18,7 @@ function main {
 		exec env KUBECTL_EXTERNAL_DIFF="dyff between --color=on --truecolor=on " KUBECONFIG=$HOME/.kube/config.argocd argocd --core app diff "${app}" --server-side-generate --local "${version}"
 		;;
 	diff)
+		set -x
 		shift
 		app="$1"; shift
 		local version
@@ -26,7 +27,7 @@ function main {
 		else
 			local chart="${app}"
 			case "${app}" in
-				*-district)
+				*-cluster)
 					chart="${app}-env"
 					;;
 			esac

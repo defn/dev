@@ -1,3 +1,0 @@
-package c
-
-teacher: bootstrap: "argo-events": app_version: "0.0.103"
