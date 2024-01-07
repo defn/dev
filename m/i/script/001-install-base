@@ -14,7 +14,7 @@ function main {
 	export DEBIAN_FRONTEND=noninteractive
 
 	apt-get update && apt-get upgrade -y &&
-		apt-get install -y --no-install-recommends lsb-release tzdata locales ca-certificates iproute2 sudo curl build-essential openssh-client rsync git git-lfs fzf jq gettext direnv ncdu apache2-utils docker.io &&
+		apt-get install -y --no-install-recommends lsb-release tzdata locales ca-certificates iproute2 sudo curl build-essential openssh-client rsync git git-lfs fzf jq gettext direnv ncdu apache2-utils fontconfig docker.io &&
 		apt-get clean && apt purge -y nano &&
 		rm -f /usr/bin/gs
 
