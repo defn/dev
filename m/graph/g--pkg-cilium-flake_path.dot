@@ -1,0 +1,18 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/cilium:flake_path"
+  "//pkg/cilium:flake_path" -> "//pkg/cilium:flake_config"
+  "//pkg/cilium:flake_path" -> "//b/nix:flake_path_script"
+  "//pkg/cilium:flake_path" -> "//b/lib:lib_sh"
+  "//pkg/cilium:flake_path" -> "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//b/lib:lib_sh"
+  "//b/lib:lib_sh" -> "//b/lib:lib.sh"
+  "//b/lib:lib.sh"
+  "//pkg/cilium:flake_config"
+  "//pkg/cilium:flake_config" -> "//pkg/cilium:flake.nix\n//pkg/cilium:flake.json\n//pkg/cilium:flake.lock"
+  "//pkg/cilium:flake.nix\n//pkg/cilium:flake.json\n//pkg/cilium:flake.lock"
+  "//b/nix:flake_path_script"
+  "//b/nix:flake_path_script" -> "//b/nix:flake_path.sh"
+  "//b/nix:flake_path.sh"
+  "@bazel_tools//tools/genrule:genrule-setup.sh"
+}

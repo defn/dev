@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/glow:flake_config"
+  "//pkg/glow:flake_config" -> "//pkg/glow:flake.json\n//pkg/glow:flake.lock\n//pkg/glow:flake.nix"
+  "//pkg/glow:flake.json\n//pkg/glow:flake.lock\n//pkg/glow:flake.nix"
+}

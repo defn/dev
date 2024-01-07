@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/acme:flake_config"
+  "//pkg/acme:flake_config" -> "//pkg/acme:flake.nix\n//pkg/acme:flake.json\n//pkg/acme:flake.lock"
+  "//pkg/acme:flake.nix\n//pkg/acme:flake.json\n//pkg/acme:flake.lock"
+}

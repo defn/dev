@@ -1,0 +1,18 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/argorollouts:flake_store"
+  "//pkg/argorollouts:flake_store" -> "//pkg/argorollouts:flake_config"
+  "//pkg/argorollouts:flake_store" -> "//b/nix:flake_store_script"
+  "//pkg/argorollouts:flake_store" -> "//b/lib:lib_sh"
+  "//pkg/argorollouts:flake_store" -> "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//b/lib:lib_sh"
+  "//b/lib:lib_sh" -> "//b/lib:lib.sh"
+  "//b/lib:lib.sh"
+  "//b/nix:flake_store_script"
+  "//b/nix:flake_store_script" -> "//b/nix:flake_store.sh"
+  "//b/nix:flake_store.sh"
+  "//pkg/argorollouts:flake_config"
+  "//pkg/argorollouts:flake_config" -> "//pkg/argorollouts:flake.nix\n//pkg/argorollouts:flake.json\n//pkg/argorollouts:flake.lock"
+  "//pkg/argorollouts:flake.nix\n//pkg/argorollouts:flake.json\n//pkg/argorollouts:flake.lock"
+  "@bazel_tools//tools/genrule:genrule-setup.sh"
+}

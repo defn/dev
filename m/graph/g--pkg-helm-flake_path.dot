@@ -1,0 +1,18 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/helm:flake_path"
+  "//pkg/helm:flake_path" -> "//pkg/helm:flake_config"
+  "//pkg/helm:flake_path" -> "//b/nix:flake_path_script"
+  "//pkg/helm:flake_path" -> "//b/lib:lib_sh"
+  "//pkg/helm:flake_path" -> "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//b/lib:lib_sh"
+  "//b/lib:lib_sh" -> "//b/lib:lib.sh"
+  "//b/lib:lib.sh"
+  "//b/nix:flake_path_script"
+  "//b/nix:flake_path_script" -> "//b/nix:flake_path.sh"
+  "//b/nix:flake_path.sh"
+  "//pkg/helm:flake_config"
+  "//pkg/helm:flake_config" -> "//pkg/helm:flake.nix\n//pkg/helm:flake.lock\n//pkg/helm:flake.json"
+  "//pkg/helm:flake.nix\n//pkg/helm:flake.lock\n//pkg/helm:flake.json"
+}

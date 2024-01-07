@@ -1,0 +1,22 @@
+digraph mygraph {
+  node [shape=box];
+  "//aws:config"
+  "//aws:config" -> "//aws:aws-org.cue\n//aws:aws-account.cue\n//aws:main.cue"
+  "//aws:config" -> "//pkg/cue:flake_cue"
+  "//pkg/cue:flake_cue"
+  "//pkg/cue:flake_cue" -> "//pkg/cue:flake_config"
+  "//pkg/cue:flake_cue" -> "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//pkg/cue:flake_cue" -> "//b/lib:lib_sh"
+  "//pkg/cue:flake_cue" -> "//b/nix:flake_which_script"
+  "//b/nix:flake_which_script"
+  "//b/nix:flake_which_script" -> "//b/nix:flake_which.sh"
+  "//b/nix:flake_which.sh"
+  "//b/lib:lib_sh"
+  "//b/lib:lib_sh" -> "//b/lib:lib.sh"
+  "//b/lib:lib.sh"
+  "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//pkg/cue:flake_config"
+  "//pkg/cue:flake_config" -> "//pkg/cue:flake.lock\n//pkg/cue:flake.nix\n//pkg/cue:flake.json"
+  "//pkg/cue:flake.lock\n//pkg/cue:flake.nix\n//pkg/cue:flake.json"
+  "//aws:aws-org.cue\n//aws:aws-account.cue\n//aws:main.cue"
+}

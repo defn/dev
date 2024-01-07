@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/dapr:flake_config"
+  "//pkg/dapr:flake_config" -> "//pkg/dapr:flake.lock\n//pkg/dapr:flake.json\n//pkg/dapr:flake.nix"
+  "//pkg/dapr:flake.lock\n//pkg/dapr:flake.json\n//pkg/dapr:flake.nix"
+}

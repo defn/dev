@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/awscli:flake_config"
+  "//pkg/awscli:flake_config" -> "//pkg/awscli:flake.nix\n//pkg/awscli:flake.lock\n//pkg/awscli:flake.json"
+  "//pkg/awscli:flake.nix\n//pkg/awscli:flake.lock\n//pkg/awscli:flake.json"
+}

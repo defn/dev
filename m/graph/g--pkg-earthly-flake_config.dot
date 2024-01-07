@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/earthly:flake_config"
+  "//pkg/earthly:flake_config" -> "//pkg/earthly:flake.nix\n//pkg/earthly:flake.lock\n//pkg/earthly:flake.json"
+  "//pkg/earthly:flake.nix\n//pkg/earthly:flake.lock\n//pkg/earthly:flake.json"
+}

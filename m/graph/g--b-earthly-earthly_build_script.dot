@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//b/earthly:earthly_build_script"
+  "//b/earthly:earthly_build_script" -> "//b/earthly:earthly_build.sh"
+  "//b/earthly:earthly_build.sh"
+}

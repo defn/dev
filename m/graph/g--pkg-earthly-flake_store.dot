@@ -1,0 +1,18 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/earthly:flake_store"
+  "//pkg/earthly:flake_store" -> "//pkg/earthly:flake_config"
+  "//pkg/earthly:flake_store" -> "//b/nix:flake_store_script"
+  "//pkg/earthly:flake_store" -> "//b/lib:lib_sh"
+  "//pkg/earthly:flake_store" -> "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//b/lib:lib_sh"
+  "//b/lib:lib_sh" -> "//b/lib:lib.sh"
+  "//b/lib:lib.sh"
+  "//b/nix:flake_store_script"
+  "//b/nix:flake_store_script" -> "//b/nix:flake_store.sh"
+  "//b/nix:flake_store.sh"
+  "//pkg/earthly:flake_config"
+  "//pkg/earthly:flake_config" -> "//pkg/earthly:flake.lock\n//pkg/earthly:flake.json\n//pkg/earthly:flake.nix"
+  "//pkg/earthly:flake.lock\n//pkg/earthly:flake.json\n//pkg/earthly:flake.nix"
+}

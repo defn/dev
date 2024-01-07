@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/helm:flake_config"
+  "//pkg/helm:flake_config" -> "//pkg/helm:flake.json\n//pkg/helm:flake.lock\n//pkg/helm:flake.nix"
+  "//pkg/helm:flake.json\n//pkg/helm:flake.lock\n//pkg/helm:flake.nix"
+}

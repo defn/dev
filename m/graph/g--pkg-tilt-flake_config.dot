@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/tilt:flake_config"
+  "//pkg/tilt:flake_config" -> "//pkg/tilt:flake.nix\n//pkg/tilt:flake.lock\n//pkg/tilt:flake.json"
+  "//pkg/tilt:flake.nix\n//pkg/tilt:flake.lock\n//pkg/tilt:flake.json"
+}

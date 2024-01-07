@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//b/nix:flake_which_script"
+  "//b/nix:flake_which_script" -> "//b/nix:flake_which.sh"
+  "//b/nix:flake_which.sh"
+}

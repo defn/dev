@@ -1,0 +1,18 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/cosign:flake_path"
+  "//pkg/cosign:flake_path" -> "//pkg/cosign:flake_config"
+  "//pkg/cosign:flake_path" -> "//b/nix:flake_path_script"
+  "//pkg/cosign:flake_path" -> "//b/lib:lib_sh"
+  "//pkg/cosign:flake_path" -> "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//pkg/cosign:flake_config"
+  "//pkg/cosign:flake_config" -> "//pkg/cosign:flake.nix\n//pkg/cosign:flake.json\n//pkg/cosign:flake.lock"
+  "//b/lib:lib_sh"
+  "//b/lib:lib_sh" -> "//b/lib:lib.sh"
+  "//pkg/cosign:flake.nix\n//pkg/cosign:flake.json\n//pkg/cosign:flake.lock"
+  "//b/lib:lib.sh"
+  "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//b/nix:flake_path_script"
+  "//b/nix:flake_path_script" -> "//b/nix:flake_path.sh"
+  "//b/nix:flake_path.sh"
+}

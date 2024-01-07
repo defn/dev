@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/stern:flake_config"
+  "//pkg/stern:flake_config" -> "//pkg/stern:flake.lock\n//pkg/stern:flake.json\n//pkg/stern:flake.nix"
+  "//pkg/stern:flake.lock\n//pkg/stern:flake.json\n//pkg/stern:flake.nix"
+}

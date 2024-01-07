@@ -1,0 +1,40 @@
+dots = glob(
+    ["*.dot"],
+    exclude_directories = 0,
+)
+
+filegroup(
+    name = "gen_dot_to_png_sh",
+    srcs = ["gen_dot_to_png.sh"],
+    visibility = ["//visibility:public"],
+)
+
+[
+    filegroup(
+        name = "dot_{}".format(d[1]),
+        srcs = [d[0]],
+        visibility = ["//visibility:public"],
+    )
+    for dfile in dots
+    for d in [[
+        dfile,
+        dfile.replace(":", "-").replace("/", "-"),
+    ]]
+]
+
+[
+    genrule(
+        name = "dot_to_png_{}".format(d),
+        srcs = [
+            "dot_{}".format(d),
+        ],
+        outs = ["{}.png".format(d)],
+        cmd = "$(location gen_dot_to_png_sh) app=$(location dot_{}) $@".format(d),
+        tools = [
+            "gen_dot_to_png_sh",
+            "//b/lib:lib_sh",
+        ],
+    )
+    for dfile in dots
+    for d in [dfile.replace(":", "-")]
+]

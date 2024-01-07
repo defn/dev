@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//c:decode_base64_py"
+  "//c:decode_base64_py" -> "//c:decode_base64.py"
+  "//c:decode_base64.py"
+}

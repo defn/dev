@@ -1,0 +1,18 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/dapr:flake_path"
+  "//pkg/dapr:flake_path" -> "//pkg/dapr:flake_config"
+  "//pkg/dapr:flake_path" -> "//b/nix:flake_path_script"
+  "//pkg/dapr:flake_path" -> "//b/lib:lib_sh"
+  "//pkg/dapr:flake_path" -> "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//b/lib:lib_sh"
+  "//b/lib:lib_sh" -> "//b/lib:lib.sh"
+  "//pkg/dapr:flake_config"
+  "//pkg/dapr:flake_config" -> "//pkg/dapr:flake.json\n//pkg/dapr:flake.nix\n//pkg/dapr:flake.lock"
+  "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//b/nix:flake_path_script"
+  "//b/nix:flake_path_script" -> "//b/nix:flake_path.sh"
+  "//b/nix:flake_path.sh"
+  "//b/lib:lib.sh"
+  "//pkg/dapr:flake.json\n//pkg/dapr:flake.nix\n//pkg/dapr:flake.lock"
+}

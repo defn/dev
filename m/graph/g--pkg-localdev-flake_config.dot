@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/localdev:flake_config"
+  "//pkg/localdev:flake_config" -> "//pkg/localdev:flake.lock\n//pkg/localdev:flake.json\n//pkg/localdev:flake.nix"
+  "//pkg/localdev:flake.lock\n//pkg/localdev:flake.json\n//pkg/localdev:flake.nix"
+}

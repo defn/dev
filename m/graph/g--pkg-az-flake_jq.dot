@@ -1,0 +1,22 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/az:flake_jq"
+  "//pkg/az:flake_jq" -> "//pkg/az:flake_config"
+  "//pkg/az:flake_jq" -> "//b/nix:flake_which_script"
+  "//pkg/az:flake_jq" -> "//b/lib:lib_sh"
+  "//pkg/az:flake_jq" -> "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//b/lib:lib_sh"
+  "//b/lib:lib_sh" -> "//b/lib:lib.sh"
+  "//b/lib:lib.sh"
+  "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//pkg/az:flake_config"
+  "//pkg/az:flake_config" -> "//pkg/az:flake.json\n//pkg/az:flake.lock\n//pkg/az:flake.nix"
+  "//pkg/az:flake_config" -> "//pkg/az:scripts"
+  "//pkg/az:flake.json\n//pkg/az:flake.lock\n//pkg/az:flake.nix"
+  "//b/nix:flake_which_script"
+  "//b/nix:flake_which_script" -> "//b/nix:flake_which.sh"
+  "//b/nix:flake_which.sh"
+  "//pkg/az:scripts"
+  "//pkg/az:scripts" -> "//pkg/az:bin/n-bump\n//pkg/az:bin/n-diff\n//pkg/az:bin/n-init\n//pkg/az:bin/n-stores\n//pkg/az:bin/n-all\n//pkg/az:bin/n-cache\n//pkg/az:bin/n\n//pkg/az:bin/n-push\n//pkg/az:bin/n-cut\n//pkg/az:bin/c\n//pkg/az:bin/n-release\n//pkg/az:bin/n-cache-local\n//pkg/az:bin/c-version\n//pkg/az:bin/c-update\n//pkg/az:bin/n-log\n//pkg/az:bin/this\n//pkg/az:bin/n-latest\n//pkg/az:bin/n-pending\n//pkg/az:bin/n-test\n//pkg/az:bin/n-cache-remote\n//pkg/az:bin/n-tag\n//pkg/az:bin/n-sha\n...and 5 more items"
+  "//pkg/az:bin/n-bump\n//pkg/az:bin/n-diff\n//pkg/az:bin/n-init\n//pkg/az:bin/n-stores\n//pkg/az:bin/n-all\n//pkg/az:bin/n-cache\n//pkg/az:bin/n\n//pkg/az:bin/n-push\n//pkg/az:bin/n-cut\n//pkg/az:bin/c\n//pkg/az:bin/n-release\n//pkg/az:bin/n-cache-local\n//pkg/az:bin/c-version\n//pkg/az:bin/c-update\n//pkg/az:bin/n-log\n//pkg/az:bin/this\n//pkg/az:bin/n-latest\n//pkg/az:bin/n-pending\n//pkg/az:bin/n-test\n//pkg/az:bin/n-cache-remote\n//pkg/az:bin/n-tag\n//pkg/az:bin/n-sha\n...and 5 more items"
+}

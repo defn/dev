@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/terraform:flake_config"
+  "//pkg/terraform:flake_config" -> "//pkg/terraform:flake.json\n//pkg/terraform:flake.lock\n//pkg/terraform:flake.nix"
+  "//pkg/terraform:flake.json\n//pkg/terraform:flake.lock\n//pkg/terraform:flake.nix"
+}

@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/pydev:flake_config"
+  "//pkg/pydev:flake_config" -> "//pkg/pydev:flake.lock\n//pkg/pydev:flake.nix\n//pkg/pydev:flake.json"
+  "//pkg/pydev:flake.lock\n//pkg/pydev:flake.nix\n//pkg/pydev:flake.json"
+}

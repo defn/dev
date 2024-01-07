@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/cue:flake_config"
+  "//pkg/cue:flake_config" -> "//pkg/cue:flake.lock\n//pkg/cue:flake.json\n//pkg/cue:flake.nix"
+  "//pkg/cue:flake.lock\n//pkg/cue:flake.json\n//pkg/cue:flake.nix"
+}

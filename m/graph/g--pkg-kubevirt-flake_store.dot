@@ -1,0 +1,18 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/kubevirt:flake_store"
+  "//pkg/kubevirt:flake_store" -> "//pkg/kubevirt:flake_config"
+  "//pkg/kubevirt:flake_store" -> "//b/nix:flake_store_script"
+  "//pkg/kubevirt:flake_store" -> "//b/lib:lib_sh"
+  "//pkg/kubevirt:flake_store" -> "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//b/nix:flake_store_script"
+  "//b/nix:flake_store_script" -> "//b/nix:flake_store.sh"
+  "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//pkg/kubevirt:flake_config"
+  "//pkg/kubevirt:flake_config" -> "//pkg/kubevirt:flake.nix\n//pkg/kubevirt:flake.json\n//pkg/kubevirt:flake.lock"
+  "//pkg/kubevirt:flake.nix\n//pkg/kubevirt:flake.json\n//pkg/kubevirt:flake.lock"
+  "//b/lib:lib_sh"
+  "//b/lib:lib_sh" -> "//b/lib:lib.sh"
+  "//b/lib:lib.sh"
+  "//b/nix:flake_store.sh"
+}

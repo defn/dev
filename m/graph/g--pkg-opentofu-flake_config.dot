@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/opentofu:flake_config"
+  "//pkg/opentofu:flake_config" -> "//pkg/opentofu:flake.nix\n//pkg/opentofu:flake.json\n//pkg/opentofu:flake.lock"
+  "//pkg/opentofu:flake.nix\n//pkg/opentofu:flake.json\n//pkg/opentofu:flake.lock"
+}

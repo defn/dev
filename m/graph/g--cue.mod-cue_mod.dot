@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//cue.mod:cue_mod"
+  "//cue.mod:cue_mod" -> "//cue.mod:module.cue"
+  "//cue.mod:module.cue"
+}

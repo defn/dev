@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/vcluster:flake_config"
+  "//pkg/vcluster:flake_config" -> "//pkg/vcluster:flake.json\n//pkg/vcluster:flake.lock\n//pkg/vcluster:flake.nix"
+  "//pkg/vcluster:flake.json\n//pkg/vcluster:flake.lock\n//pkg/vcluster:flake.nix"
+}

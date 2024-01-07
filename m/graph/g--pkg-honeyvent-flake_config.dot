@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/honeyvent:flake_config"
+  "//pkg/honeyvent:flake_config" -> "//pkg/honeyvent:flake.nix\n//pkg/honeyvent:flake.json\n//pkg/honeyvent:flake.lock"
+  "//pkg/honeyvent:flake.nix\n//pkg/honeyvent:flake.json\n//pkg/honeyvent:flake.lock"
+}

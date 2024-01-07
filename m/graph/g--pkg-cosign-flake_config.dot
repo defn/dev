@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/cosign:flake_config"
+  "//pkg/cosign:flake_config" -> "//pkg/cosign:flake.json\n//pkg/cosign:flake.nix\n//pkg/cosign:flake.lock"
+  "//pkg/cosign:flake.json\n//pkg/cosign:flake.nix\n//pkg/cosign:flake.lock"
+}
