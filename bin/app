@@ -9,8 +9,10 @@ function main {
 		;;
 	local)
 		shift
-		app="$1"; shift
-		version="$1"; shift
+		app="$1"
+		shift
+		version="$1"
+		shift
 		case "${app}" in
 		/*) app="$(app list | tail -n +2 | awk '{print $1}' | fzf --query="${app#/}" --select-1)" ;;
 		esac
@@ -19,43 +21,49 @@ function main {
 		;;
 	diff)
 		shift
-		app="$1"; shift
+		app="$1"
+		shift
 		local version
-		if test -n "${1:-}"; then
-			version="$1"; shift
+		if test -n "${1-}"; then
+			version="$1"
+			shift
 		else
 			local chart="${app}"
 			case "${app}" in
-				*-cluster)
-					chart="${app}-env"
-					;;
+			*-cluster)
+				chart="${app}-env"
+				;;
 			esac
 			version="$(helm show chart --insecure-skip-tls-verify "oci://cache.defn.run:5000/library/helm/${chart}" 2>/dev/null | grep ^version: | awk '{print $2}')"
 		fi
 		case "${app}" in
 		/*) app="$(app list | tail -n +2 | awk '{print $1}' | fzf --query="${app#/}" --select-1)" ;;
 		esac
-		
+
 		exec env KUBECTL_EXTERNAL_DIFF="dyff between --color=on --truecolor=on " KUBECONFIG=$HOME/.kube/config.argocd argocd --core app diff "${app}" --revision "${version}" "$@"
 		;;
 	sync | get | wait | terminate-op | resources | logs | diff)
-		cmd="$1"; shift
-		app="$1"; shift
+		cmd="$1"
+		shift
+		app="$1"
+		shift
 		case "${app}" in
 		/*) app="$(app list | tail -n +2 | awk '{print $1}' | fzf --query="${app#/}" --select-1)" ;;
 		esac
-		
+
 		exec env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app "${cmd}" "${app}" "$@"
 		;;
 	dry-run)
-		cmd="sync"; 
+		cmd="sync"
 		shift
-		app="$1"; shift
-		version="$1"; shift
+		app="$1"
+		shift
+		version="$1"
+		shift
 		case "${app}" in
 		/*) app="$(app list | tail -n +2 | awk '{print $1}' | fzf --query="${app#/}" --select-1)" ;;
 		esac
-		
+
 		exec env KUBECONFIG=$HOME/.kube/config.argocd argocd --core app "${cmd}" "${app}" \
 			--local "${version}" --dry-run --output=json "$@" | awk '/^{/ {flag=1} flag {print}' | gron | grep -v sync.manifests | grep syncResult.resources | grep message | gron -u | jq -r '.status.operationState.syncResult.resources[].message'
 		;;

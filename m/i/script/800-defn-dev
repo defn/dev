@@ -34,8 +34,8 @@ function main {
 
 	if [[ ! -x "/usr/local/bin/bazel" ]]; then
 		case "$(uname -m)" in
-			aarch64) sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.19.0/bazelisk-linux-arm64 ;;
-			*) sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.19.0/bazelisk-linux-amd64 ;;
+		aarch64) sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.19.0/bazelisk-linux-arm64 ;;
+		*) sudo curl -sSL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/v1.19.0/bazelisk-linux-amd64 ;;
 		esac
 	fi
 
@@ -48,7 +48,7 @@ function main {
 		echo net.ipv4.ip_forward=1
 		echo net.ipv6.conf.all.forwarding=1
 		echo fs.inotify.max_user_instances=10000
-		echo fs.inotify.max_user_watches=524288 
+		echo fs.inotify.max_user_watches=524288
 	) | sudo tee /etc/sysctl.d/99-dfd.conf
 
 	sudo mkdir -p /etc/systemd/network

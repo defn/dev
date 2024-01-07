@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function main {
-  cd
+	cd
 	source .bash_profile
 
 	set -e
@@ -38,12 +38,12 @@ function main {
 
 	mkdir -p ~/.kube
 	rm -f ~/.kube/config
-  	bin/persist-cache
+	bin/persist-cache
 
 	if [[ -n ${workdir} ]]; then
 		(
 			cd "${workdir}"
-    		screen -S up -d -m make up || true
+			screen -S up -d -m make up || true
 		) &
 	fi
 

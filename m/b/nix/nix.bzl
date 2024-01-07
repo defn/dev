@@ -37,7 +37,7 @@ def nix_flake(name, srcs = [], cmds = [], flake = None, visibility = None):
         ],
         tools = [
             flake_store_script,
-            "//b/lib:lib_sh"
+            "//b/lib:lib_sh",
         ],
         outs = ["{}_nix_store.tar".format(name)],
         cmd = "$(location //{}:{}) dir={} $@".format(flake_store_script.package, flake_store_script.name, dir),
@@ -54,7 +54,7 @@ def nix_flake(name, srcs = [], cmds = [], flake = None, visibility = None):
             ],
             tools = [
                 flake_which_script,
-                "//b/lib:lib_sh"
+                "//b/lib:lib_sh",
             ],
             outs = ["{}_{}_bin".format(name, c)],
             cmd = "$(location //{}:{}) dir={} $@ which {}".format(flake_which_script.package, flake_which_script.name, dir, c),
@@ -70,7 +70,7 @@ def nix_flake(name, srcs = [], cmds = [], flake = None, visibility = None):
         ],
         tools = [
             flake_path_script,
-            "//b/lib:lib_sh"
+            "//b/lib:lib_sh",
         ],
         outs = ["{}_path.tar.gz".format(name)],
         cmd = "$(location //{}:{}) dir={} $@".format(flake_path_script.package, flake_path_script.name, dir),

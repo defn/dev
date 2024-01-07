@@ -18,9 +18,9 @@ function parse_args {
 		# Check if we should still process key-value pairs
 		if [ "$process_in" = true ]; then
 			# Check if the argument is in the form of key=value
-			if [[ "$arg" == *=* ]]; then
+			if [[ $arg == *=* ]]; then
 				# Split the argument into key and value
-				IFS='=' read -r -a parts <<< "$arg"
+				IFS='=' read -r -a parts <<<"$arg"
 
 				# Extract key and value
 				key="${parts[0]}"
@@ -45,7 +45,7 @@ function lib_main {
 	parse_args "$@"
 	out="${args[0]}"
 	args=("${args[@]:1}")
-    main "${args[@]}"
+	main "${args[@]}"
 }
 
 lib_main "$@"

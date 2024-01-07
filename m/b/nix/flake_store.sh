@@ -13,7 +13,7 @@ function main {
 	cd nix
 	git init --quiet
 	git config user.email "you@example.com"
-    git config user.name "Your Name"
+	git config user.name "Your Name"
 	git add .
 	git commit -m 'for the build'
 
