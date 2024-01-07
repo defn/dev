@@ -21,7 +21,7 @@ function main {
 		"${cue}" get go "${pkg}"
 	done
 
-	tar cfz - -C "${workarea}" "${ns}" > "${out}"
+	tar cfz - -C "${workarea}" "${ns}" >"${out}"
 }
 
 source b/lib/lib.sh

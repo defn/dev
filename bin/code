@@ -10,11 +10,11 @@ function main {
 	*/.vscode-server/bin/*)
 		exec "${VSCODE_GIT_ASKPASS_MAIN%%extensions/*}"/bin/remote-cli/code "$@"
 		;;
-	/tmp/code-server/lib/*|/nix/store/*codeserver*)
+	/tmp/code-server/lib/* | /nix/store/*codeserver*)
 		exec "${VSCODE_GIT_ASKPASS_MAIN%%extensions/*}/bin/remote-cli/code-linux.sh" "$@"
 		;;
 	esac
-	
+
 	exec code-server "$@"
 }
 

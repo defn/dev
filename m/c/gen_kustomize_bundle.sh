@@ -6,9 +6,9 @@ function main {
 
 	local tmp="$(pwd)/tmp"
 	mkdir -p "${tmp}"
-	cat "${config}" \
-		| jq --arg out "${tmp}" -r '.gen | to_entries[] | .key as $dir | .value | to_entries[] | "\($out)/\($dir)/\(.key) \(.value | @base64)"' \
-		| "${decode}"
+	cat "${config}" |
+		jq --arg out "${tmp}" -r '.gen | to_entries[] | .key as $dir | .value | to_entries[] | "\($out)/\($dir)/\(.key) \(.value | @base64)"' |
+		"${decode}"
 
 	tar cfz "${out}" -C "${tmp}" .
 }
