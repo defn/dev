@@ -8,6 +8,7 @@ reset:
 	this-prune
 	@echo --- base
 	cd ../base && $(MAKE)
+	$(MAKE) buildkite
 
 class:
 	@echo --- earthly 
