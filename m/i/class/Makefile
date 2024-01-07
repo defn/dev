@@ -5,6 +5,7 @@ all:
 
 reset:
 	@echo --- pruning
+	cd ../cache && docker compose down && $(MAKE) up
 	this-prune
 	@echo --- base
 	cd ../base && $(MAKE)
