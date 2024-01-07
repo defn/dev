@@ -24,7 +24,7 @@ class:
     RUN sudo chown ubuntu:ubuntu /home/ubuntu/work && chmod 755 /home/ubuntu/work
     COPY script/800-defn-dev .
     RUN ./800-defn-dev && rm -f ./800-defn-dev
-    RUN --no-cache git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git pull
+    RUN git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git pull
 
     SAVE IMAGE --push ${image}-latest
     SAVE IMAGE --push ${image}-buildkite-latest
@@ -35,6 +35,7 @@ class-latest:
 
     CACHE /home/ubuntu/work
 
+    RUN --no-cache git pull
     RUN bash -c 'source .bash_profile && make home'
     RUN git checkout .
 
@@ -44,6 +45,7 @@ class-buildkite-latest:
     ARG image=cache.defn.run:5000/dfd:class-buildkite-latest
     FROM ${image}
 
+    RUN --no-cache git pull
     RUN bash -c 'source .bash_profile && for e in ${vsextensions}; do bin/nix/code-server serve-local --force --install-extension $e; done'
     RUN bash -c 'source .bash_profile && mkdir work && bin/persist-cache && cd m && go install golang.org/x/tools/gopls@latest && go install honnef.co/go/tools/cmd/staticcheck@latest'
     RUN bash -c 'source .bash_profile && make home && cd m && b build'
