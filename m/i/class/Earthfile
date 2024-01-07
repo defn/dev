@@ -47,7 +47,7 @@ class-buildkite-latest:
     RUN bash -c 'source .bash_profile && for e in ${vsextensions}; do bin/nix/code-server serve-local --force --install-extension $e; done'
     RUN bash -c 'source .bash_profile && cd ~/m && ~/bin/persist-cache && go install golang.org/x/tools/gopls@latest && go install honnef.co/go/tools/cmd/staticcheck@latest'
 
-    RUN bash -c 'source .bash_profile && bin/persist-cache && make home && cd m && b build'
+    RUN bash -c 'source .bash_profile && mkdir work && bin/persist-cache && make home && cd m && b build'
     RUN git checkout .
 
     SAVE IMAGE --push ${image}
