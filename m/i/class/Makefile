@@ -3,11 +3,13 @@ all:
 	$(MAKE) class-latest
 	$(MAKE) class-buildkite-latest
 
-class:
+reset:
 	@echo --- pruning
 	this-prune
 	@echo --- base
 	cd ../base && $(MAKE)
+
+class:
 	@echo --- earthly 
 	earthly --ci --push --no-output +class
 
