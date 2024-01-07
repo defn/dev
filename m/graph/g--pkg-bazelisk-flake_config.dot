@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/bazelisk:flake_config"
+  "//pkg/bazelisk:flake_config" -> "//pkg/bazelisk:flake.lock\n//pkg/bazelisk:flake.json\n//pkg/bazelisk:flake.nix"
+  "//pkg/bazelisk:flake.lock\n//pkg/bazelisk:flake.json\n//pkg/bazelisk:flake.nix"
+}

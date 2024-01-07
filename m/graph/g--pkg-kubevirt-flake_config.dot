@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/kubevirt:flake_config"
+  "//pkg/kubevirt:flake_config" -> "//pkg/kubevirt:flake.json\n//pkg/kubevirt:flake.lock\n//pkg/kubevirt:flake.nix"
+  "//pkg/kubevirt:flake.json\n//pkg/kubevirt:flake.lock\n//pkg/kubevirt:flake.nix"
+}

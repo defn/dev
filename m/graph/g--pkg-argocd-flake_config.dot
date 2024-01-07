@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/argocd:flake_config"
+  "//pkg/argocd:flake_config" -> "//pkg/argocd:flake.lock\n//pkg/argocd:flake.nix\n//pkg/argocd:flake.json"
+  "//pkg/argocd:flake.lock\n//pkg/argocd:flake.nix\n//pkg/argocd:flake.json"
+}

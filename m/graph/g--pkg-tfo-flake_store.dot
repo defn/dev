@@ -1,0 +1,18 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/tfo:flake_store"
+  "//pkg/tfo:flake_store" -> "//pkg/tfo:flake_config"
+  "//pkg/tfo:flake_store" -> "//b/nix:flake_store_script"
+  "//pkg/tfo:flake_store" -> "//b/lib:lib_sh"
+  "//pkg/tfo:flake_store" -> "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//b/lib:lib_sh"
+  "//b/lib:lib_sh" -> "//b/lib:lib.sh"
+  "//b/nix:flake_store_script"
+  "//b/nix:flake_store_script" -> "//b/nix:flake_store.sh"
+  "//b/nix:flake_store.sh"
+  "//pkg/tfo:flake_config"
+  "//pkg/tfo:flake_config" -> "//pkg/tfo:flake.lock\n//pkg/tfo:flake.json\n//pkg/tfo:flake.nix"
+  "//b/lib:lib.sh"
+  "//pkg/tfo:flake.lock\n//pkg/tfo:flake.json\n//pkg/tfo:flake.nix"
+}

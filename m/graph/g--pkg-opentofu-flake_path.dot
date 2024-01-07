@@ -1,0 +1,18 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/opentofu:flake_path"
+  "//pkg/opentofu:flake_path" -> "//pkg/opentofu:flake_config"
+  "//pkg/opentofu:flake_path" -> "//b/nix:flake_path_script"
+  "//pkg/opentofu:flake_path" -> "//b/lib:lib_sh"
+  "//pkg/opentofu:flake_path" -> "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//b/lib:lib_sh"
+  "//b/lib:lib_sh" -> "//b/lib:lib.sh"
+  "//b/lib:lib.sh"
+  "//b/nix:flake_path_script"
+  "//b/nix:flake_path_script" -> "//b/nix:flake_path.sh"
+  "//b/nix:flake_path.sh"
+  "//pkg/opentofu:flake_config"
+  "//pkg/opentofu:flake_config" -> "//pkg/opentofu:flake.lock\n//pkg/opentofu:flake.json\n//pkg/opentofu:flake.nix"
+  "//pkg/opentofu:flake.lock\n//pkg/opentofu:flake.json\n//pkg/opentofu:flake.nix"
+}

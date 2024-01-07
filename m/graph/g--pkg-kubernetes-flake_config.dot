@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/kubernetes:flake_config"
+  "//pkg/kubernetes:flake_config" -> "//pkg/kubernetes:flake.json\n//pkg/kubernetes:flake.lock\n//pkg/kubernetes:flake.nix"
+  "//pkg/kubernetes:flake.json\n//pkg/kubernetes:flake.lock\n//pkg/kubernetes:flake.nix"
+}

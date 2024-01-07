@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/vhs:flake_config"
+  "//pkg/vhs:flake_config" -> "//pkg/vhs:flake.json\n//pkg/vhs:flake.lock\n//pkg/vhs:flake.nix"
+  "//pkg/vhs:flake.json\n//pkg/vhs:flake.lock\n//pkg/vhs:flake.nix"
+}

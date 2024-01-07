@@ -1,0 +1,22 @@
+digraph mygraph {
+  node [shape=box];
+  "//cue.mod/gen:config"
+  "//cue.mod/gen:config" -> "//cue.mod/gen:main.cue"
+  "//cue.mod/gen:config" -> "//pkg/cue:flake_cue"
+  "//pkg/cue:flake_cue"
+  "//pkg/cue:flake_cue" -> "//pkg/cue:flake_config"
+  "//pkg/cue:flake_cue" -> "//b/nix:flake_which_script"
+  "//pkg/cue:flake_cue" -> "//b/lib:lib_sh"
+  "//pkg/cue:flake_cue" -> "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//b/nix:flake_which_script"
+  "//b/nix:flake_which_script" -> "//b/nix:flake_which.sh"
+  "//pkg/cue:flake_config"
+  "//pkg/cue:flake_config" -> "//pkg/cue:flake.nix\n//pkg/cue:flake.json\n//pkg/cue:flake.lock"
+  "//pkg/cue:flake.nix\n//pkg/cue:flake.json\n//pkg/cue:flake.lock"
+  "//cue.mod/gen:main.cue"
+  "//b/lib:lib_sh"
+  "//b/lib:lib_sh" -> "//b/lib:lib.sh"
+  "//b/lib:lib.sh"
+  "//b/nix:flake_which.sh"
+}

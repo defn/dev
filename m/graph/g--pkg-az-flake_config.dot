@@ -1,0 +1,10 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/az:flake_config"
+  "//pkg/az:flake_config" -> "//pkg/az:flake.json\n//pkg/az:flake.nix\n//pkg/az:flake.lock"
+  "//pkg/az:flake_config" -> "//pkg/az:scripts"
+  "//pkg/az:flake.json\n//pkg/az:flake.nix\n//pkg/az:flake.lock"
+  "//pkg/az:scripts"
+  "//pkg/az:scripts" -> "//pkg/az:bin/n-cache-local\n//pkg/az:bin/n-release\n//pkg/az:bin/n\n//pkg/az:bin/sub\n//pkg/az:bin/n-bump\n//pkg/az:bin/n-cache-remote\n//pkg/az:bin/n-all\n//pkg/az:bin/n-log\n//pkg/az:bin/shflags\n//pkg/az:bin/this\n//pkg/az:bin/c\n//pkg/az:bin/n-cache\n//pkg/az:bin/c-version\n//pkg/az:bin/n-cut\n//pkg/az:bin/n-reset\n//pkg/az:bin/n-sha\n//pkg/az:bin/n-tag\n//pkg/az:bin/n-upgrade\n//pkg/az:bin/n-diff\n//pkg/az:bin/n-pending\n//pkg/az:bin/c-update\n//pkg/az:bin/n-stores\n...and 5 more items"
+  "//pkg/az:bin/n-cache-local\n//pkg/az:bin/n-release\n//pkg/az:bin/n\n//pkg/az:bin/sub\n//pkg/az:bin/n-bump\n//pkg/az:bin/n-cache-remote\n//pkg/az:bin/n-all\n//pkg/az:bin/n-log\n//pkg/az:bin/shflags\n//pkg/az:bin/this\n//pkg/az:bin/c\n//pkg/az:bin/n-cache\n//pkg/az:bin/c-version\n//pkg/az:bin/n-cut\n//pkg/az:bin/n-reset\n//pkg/az:bin/n-sha\n//pkg/az:bin/n-tag\n//pkg/az:bin/n-upgrade\n//pkg/az:bin/n-diff\n//pkg/az:bin/n-pending\n//pkg/az:bin/c-update\n//pkg/az:bin/n-stores\n...and 5 more items"
+}

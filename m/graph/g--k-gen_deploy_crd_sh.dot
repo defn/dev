@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//k:gen_deploy_crd_sh"
+  "//k:gen_deploy_crd_sh" -> "//k:gen_deploy_crd.sh"
+  "//k:gen_deploy_crd.sh"
+}

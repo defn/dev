@@ -1,0 +1,18 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/honeyvent:flake_store"
+  "//pkg/honeyvent:flake_store" -> "//pkg/honeyvent:flake_config"
+  "//pkg/honeyvent:flake_store" -> "//b/nix:flake_store_script"
+  "//pkg/honeyvent:flake_store" -> "//b/lib:lib_sh"
+  "//pkg/honeyvent:flake_store" -> "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//b/lib:lib_sh"
+  "//b/lib:lib_sh" -> "//b/lib:lib.sh"
+  "//b/lib:lib.sh"
+  "//b/nix:flake_store_script"
+  "//b/nix:flake_store_script" -> "//b/nix:flake_store.sh"
+  "//b/nix:flake_store.sh"
+  "//pkg/honeyvent:flake_config"
+  "//pkg/honeyvent:flake_config" -> "//pkg/honeyvent:flake.json\n//pkg/honeyvent:flake.lock\n//pkg/honeyvent:flake.nix"
+  "//pkg/honeyvent:flake.json\n//pkg/honeyvent:flake.lock\n//pkg/honeyvent:flake.nix"
+  "@bazel_tools//tools/genrule:genrule-setup.sh"
+}

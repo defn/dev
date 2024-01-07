@@ -1,0 +1,10 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/tailscale:flake_config"
+  "//pkg/tailscale:flake_config" -> "//pkg/tailscale:flake.lock\n//pkg/tailscale:flake.nix\n//pkg/tailscale:flake.json"
+  "//pkg/tailscale:flake_config" -> "//pkg/tailscale:etc"
+  "//pkg/tailscale:etc"
+  "//pkg/tailscale:etc" -> "//pkg/tailscale:etc/tailscale-darwin"
+  "//pkg/tailscale:etc/tailscale-darwin"
+  "//pkg/tailscale:flake.lock\n//pkg/tailscale:flake.nix\n//pkg/tailscale:flake.json"
+}

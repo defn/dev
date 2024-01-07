@@ -1,0 +1,18 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/terraformdocs:flake_store"
+  "//pkg/terraformdocs:flake_store" -> "//pkg/terraformdocs:flake_config"
+  "//pkg/terraformdocs:flake_store" -> "//b/nix:flake_store_script"
+  "//pkg/terraformdocs:flake_store" -> "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//pkg/terraformdocs:flake_store" -> "//b/lib:lib_sh"
+  "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//pkg/terraformdocs:flake_config"
+  "//pkg/terraformdocs:flake_config" -> "//pkg/terraformdocs:flake.lock\n//pkg/terraformdocs:flake.nix\n//pkg/terraformdocs:flake.json"
+  "//pkg/terraformdocs:flake.lock\n//pkg/terraformdocs:flake.nix\n//pkg/terraformdocs:flake.json"
+  "//b/nix:flake_store_script"
+  "//b/nix:flake_store_script" -> "//b/nix:flake_store.sh"
+  "//b/nix:flake_store.sh"
+  "//b/lib:lib_sh"
+  "//b/lib:lib_sh" -> "//b/lib:lib.sh"
+  "//b/lib:lib.sh"
+}

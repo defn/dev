@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/chamber:flake_config"
+  "//pkg/chamber:flake_config" -> "//pkg/chamber:flake.nix\n//pkg/chamber:flake.lock\n//pkg/chamber:flake.json"
+  "//pkg/chamber:flake.nix\n//pkg/chamber:flake.lock\n//pkg/chamber:flake.json"
+}

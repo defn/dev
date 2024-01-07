@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//aws:template_account"
+  "//aws:template_account" -> "//aws:template_account.txt"
+  "//aws:template_account.txt"
+}

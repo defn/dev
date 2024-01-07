@@ -1,0 +1,18 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/gum:flake_store"
+  "//pkg/gum:flake_store" -> "//pkg/gum:flake_config"
+  "//pkg/gum:flake_store" -> "//b/nix:flake_store_script"
+  "//pkg/gum:flake_store" -> "//b/lib:lib_sh"
+  "//pkg/gum:flake_store" -> "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//b/lib:lib_sh"
+  "//b/lib:lib_sh" -> "//b/lib:lib.sh"
+  "//pkg/gum:flake_config"
+  "//pkg/gum:flake_config" -> "//pkg/gum:flake.json\n//pkg/gum:flake.lock\n//pkg/gum:flake.nix"
+  "//pkg/gum:flake.json\n//pkg/gum:flake.lock\n//pkg/gum:flake.nix"
+  "//b/nix:flake_store_script"
+  "//b/nix:flake_store_script" -> "//b/nix:flake_store.sh"
+  "//b/nix:flake_store.sh"
+  "//b/lib:lib.sh"
+}

@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//graph:gen_dot_to_png_sh"
+  "//graph:gen_dot_to_png_sh" -> "//graph:gen_dot_to_png.sh"
+  "//graph:gen_dot_to_png.sh"
+}

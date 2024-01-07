@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/tailscale:etc"
+  "//pkg/tailscale:etc" -> "//pkg/tailscale:etc/tailscale-darwin"
+  "//pkg/tailscale:etc/tailscale-darwin"
+}

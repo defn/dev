@@ -1,0 +1,18 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/honeytail:flake_store"
+  "//pkg/honeytail:flake_store" -> "//pkg/honeytail:flake_config"
+  "//pkg/honeytail:flake_store" -> "//b/nix:flake_store_script"
+  "//pkg/honeytail:flake_store" -> "//b/lib:lib_sh"
+  "//pkg/honeytail:flake_store" -> "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//pkg/honeytail:flake_config"
+  "//pkg/honeytail:flake_config" -> "//pkg/honeytail:flake.nix\n//pkg/honeytail:flake.json\n//pkg/honeytail:flake.lock"
+  "//pkg/honeytail:flake.nix\n//pkg/honeytail:flake.json\n//pkg/honeytail:flake.lock"
+  "//b/lib:lib_sh"
+  "//b/lib:lib_sh" -> "//b/lib:lib.sh"
+  "//b/lib:lib.sh"
+  "//b/nix:flake_store_script"
+  "//b/nix:flake_store_script" -> "//b/nix:flake_store.sh"
+  "//b/nix:flake_store.sh"
+  "@bazel_tools//tools/genrule:genrule-setup.sh"
+}

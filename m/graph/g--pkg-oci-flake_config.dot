@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/oci:flake_config"
+  "//pkg/oci:flake_config" -> "//pkg/oci:flake.json\n//pkg/oci:flake.nix\n//pkg/oci:flake.lock"
+  "//pkg/oci:flake.json\n//pkg/oci:flake.nix\n//pkg/oci:flake.lock"
+}

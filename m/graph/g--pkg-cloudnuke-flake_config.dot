@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/cloudnuke:flake_config"
+  "//pkg/cloudnuke:flake_config" -> "//pkg/cloudnuke:flake.json\n//pkg/cloudnuke:flake.nix\n//pkg/cloudnuke:flake.lock"
+  "//pkg/cloudnuke:flake.json\n//pkg/cloudnuke:flake.nix\n//pkg/cloudnuke:flake.lock"
+}

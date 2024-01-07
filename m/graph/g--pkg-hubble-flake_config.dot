@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/hubble:flake_config"
+  "//pkg/hubble:flake_config" -> "//pkg/hubble:flake.json\n//pkg/hubble:flake.lock\n//pkg/hubble:flake.nix"
+  "//pkg/hubble:flake.json\n//pkg/hubble:flake.lock\n//pkg/hubble:flake.nix"
+}

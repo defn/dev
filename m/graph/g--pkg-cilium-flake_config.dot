@@ -1,0 +1,6 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/cilium:flake_config"
+  "//pkg/cilium:flake_config" -> "//pkg/cilium:flake.lock\n//pkg/cilium:flake.nix\n//pkg/cilium:flake.json"
+  "//pkg/cilium:flake.lock\n//pkg/cilium:flake.nix\n//pkg/cilium:flake.json"
+}

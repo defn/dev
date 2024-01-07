@@ -1,0 +1,18 @@
+digraph mygraph {
+  node [shape=box];
+  "//pkg/awscli:flake_path"
+  "//pkg/awscli:flake_path" -> "//pkg/awscli:flake_config"
+  "//pkg/awscli:flake_path" -> "//b/nix:flake_path_script"
+  "//pkg/awscli:flake_path" -> "//b/lib:lib_sh"
+  "//pkg/awscli:flake_path" -> "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//b/lib:lib_sh"
+  "//b/lib:lib_sh" -> "//b/lib:lib.sh"
+  "//b/nix:flake_path_script"
+  "//b/nix:flake_path_script" -> "//b/nix:flake_path.sh"
+  "//b/nix:flake_path.sh"
+  "//pkg/awscli:flake_config"
+  "//pkg/awscli:flake_config" -> "//pkg/awscli:flake.json\n//pkg/awscli:flake.lock\n//pkg/awscli:flake.nix"
+  "//pkg/awscli:flake.json\n//pkg/awscli:flake.lock\n//pkg/awscli:flake.nix"
+  "@bazel_tools//tools/genrule:genrule-setup.sh"
+  "//b/lib:lib.sh"
+}
