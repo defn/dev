@@ -27,7 +27,6 @@ class-init:
     RUN bash -c 'source .bash_profile && for e in ${vsextensions}; do bin/nix/code-server serve-local --force --install-extension $e; done'
     RUN bash -c 'source .bash_profile && cd ~/m && ~/bin/persist-cache && go install golang.org/x/tools/gopls@latest && go install honnef.co/go/tools/cmd/staticcheck@latest && cd && git checkout .'
 
-    SAVE IMAGE --push ${image}
     SAVE IMAGE --push ${image}-latest
     SAVE IMAGE --push ${image}-buildkite-latest
 
