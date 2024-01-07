@@ -1,4 +1,4 @@
-all
+all:
 	$(MAKE) class
 	$(MAKE) class-latest
 	$(MAKE) class-buildkite-latest
