@@ -39,8 +39,8 @@ package c
 	app_name:      string
 	app_namespace: string
 
-	app_version: string | *"not-found"
-	app_cluster: string | *"not-found"
+	app_version: string | *"app-version-not-found"
+	app_cluster: string | *"app-cluster-not-found"
 	app_repo:    string
 	app_type:    string
 	app_def:     string
