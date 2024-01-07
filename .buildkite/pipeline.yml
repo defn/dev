@@ -42,8 +42,8 @@ steps:
                 hostPath:
                   path: /var/run/docker.sock
     depends_on: []
-  - label: build-class-latest-image
-    key: build-class-latest-image
+  - label: build-class-latest
+    key: build-class-latest
     plugins:
       - kubernetes:
           podSpec:
@@ -58,7 +58,7 @@ steps:
                     git reset --hard $BUILDKITE_COMMIT
                     source .bash_profile
                     cd m/i/class
-                    make class
+                    make class-latest
                     '
                 imagePullPolicy: Always
                 securityContext:
@@ -76,8 +76,8 @@ steps:
                 hostPath:
                   path: /var/run/docker.sock
     depends_on: []
-  - label: build-class-buildkite-latest-image
-    key: build-class-buildkite-latest-image
+  - label: build-class-buildkite-latest
+    key: build-class-buildkite-latest
     plugins:
       - kubernetes:
           podSpec:
@@ -92,7 +92,7 @@ steps:
                     git reset --hard $BUILDKITE_COMMIT
                     source .bash_profile
                     cd m/i/class
-                    make class-buildkite
+                    make class-buildkite-latest
                     '
                 imagePullPolicy: Always
                 securityContext:
@@ -110,8 +110,8 @@ steps:
                 hostPath:
                   path: /var/run/docker.sock
     depends_on: []
-  - label: build-buildkite-image
-    key: build-buildkite-image
+  - label: build-buildkite
+    key: build-buildkite
     plugins:
       - kubernetes:
           podSpec:

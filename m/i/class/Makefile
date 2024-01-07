@@ -1,16 +1,16 @@
-class-init:
+class:
 	@echo --- pruning
 	this-prune
 	@echo --- base
 	cd ../base && $(MAKE)
 	@echo --- earthly 
-	earthly --ci --push --no-output +class-init
+	earthly --ci --push --no-output +class
 
-class:
+class-latest:
 	@echo --- earthly
 	earthly --ci --push --no-output +class-latest
 
-class-buildkite:
+class-buildkite-latest:
 	@echo --- earthly
 	earthly --ci --push --no-output +class-buildkite-latest
 
