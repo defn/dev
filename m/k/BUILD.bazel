@@ -231,10 +231,11 @@ filegroup(
             "//cue.mod/gen/k8s.io:k8s_io",
         ],
         outs = ["{}.yaml".format(k)],
-        cmd = "$(location gen_deploy_yaml_sh) $@ $(location cue_import_{})".format(k),
+        cmd = "$(location gen_deploy_yaml_sh) cue=$(location //pkg/cue:flake_cue) $@ $(location cue_import_{})".format(k),
         tools = [
             "gen_deploy_yaml_sh",
             "//b/lib:lib_sh",
+            "//pkg/cue:flake_cue",
         ],
     )
     for k in cluster_apps
