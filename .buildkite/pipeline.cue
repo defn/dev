@@ -41,7 +41,7 @@ steps: [#DockerStep & {
 		"""]
 }, #DockerStep & {
 	#label: "build-class-buildkite-latest"
-	#image: "cache.defn.run:5000/dfd:class-latest"
+	#image: "cache.defn.run:5000/dfd:class-buildkite-latest"
 	#args: ["""
 		'
 		set -e
