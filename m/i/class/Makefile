@@ -1,3 +1,8 @@
+all
+	$(MAKE) class
+	$(MAKE) class-latest
+	$(MAKE) class-buildkite-latest
+
 class:
 	@echo --- pruning
 	this-prune
