@@ -6,6 +6,8 @@ build:
 	cue export --out json -e app.output | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | while read -r f b; do base64 -d <<<"$$b" >"$$f"; done
 	rm -f *.tgz gen/*.tgz
 	cd gen && helm package ../chart
+	git add chart/Chart.yaml gen version*
+	git commit --allow-empty -m "update"
 
 push:
 	helm push --insecure-skip-tls-verify gen/*.tgz oci://$(DFD_REGISTRY)/library/helm
