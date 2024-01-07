@@ -23,8 +23,8 @@ class:
 
     RUN sudo chown ubuntu:ubuntu /home/ubuntu/work && chmod 755 /home/ubuntu/work
     COPY script/800-defn-dev .
-    RUN --no-cache git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git pull
     RUN ./800-defn-dev && rm -f ./800-defn-dev
+    RUN --no-cache git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git pull
 
     SAVE IMAGE --push ${image}-latest
     SAVE IMAGE --push ${image}-buildkite-latest
