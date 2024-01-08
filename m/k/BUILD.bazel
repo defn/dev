@@ -131,6 +131,12 @@ filegroup(
 )
 
 filegroup(
+    name = "gen_image_digest_sh",
+    srcs = ["gen_image_digest.sh"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
     name = "deploy_cue",
     srcs = glob(["*.cue"]),
     visibility = ["//visibility:public"],
@@ -213,6 +219,26 @@ filegroup(
         tools = [
             "gen_cue_import_sh",
             "//b/lib:lib_sh",
+        ],
+    )
+    for k in cluster_apps
+]
+
+[
+    genrule(
+        name = "image_digest_{}".format(k),
+        srcs = [
+            "cue_import_{}".format(k),
+            "deploy_cue",
+            "//cue.mod:cue_mod",
+            "//cue.mod/gen/k8s.io:k8s_io",
+        ],
+        outs = ["image_digest_{}.cue".format(k)],
+        cmd = "$(location gen_image_digest_sh) app=$(location cue_import_{}) cue=$(location //pkg/cue:flake_cue) $@".format(k),
+        tools = [
+            "gen_image_digest_sh",
+            "//b/lib:lib_sh",
+            "//pkg/cue:flake_cue",
         ],
     )
     for k in cluster_apps
