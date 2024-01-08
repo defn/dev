@@ -234,29 +234,31 @@ filegroup(
 ]
 
 [
-    genrule(
-        name = "deploy_crd_{}".format(c),
-        srcs = [
-            "deploy_cue",
-            "//cue.mod:cue_mod",
-            "//cue.mod/gen/k8s.io:k8s_io",
-        ] + [
-            "cue_import_{}".format(k)
-            for k in cluster_apps
-            if k.startswith("{}-".format(c))
-        ],
-        outs = ["{}-crd.yaml".format(c)],
-        cmd = "$(location gen_deploy_crd_sh) $@ {}".format(
-            " ".join([
-                "$(location cue_import_{})".format(k)
+    [
+        genrule(
+            name = "deploy_crd_{}".format(c),
+            srcs = [
+                "deploy_cue",
+                "//cue.mod:cue_mod",
+                "//cue.mod/gen/k8s.io:k8s_io",
+            ] + [
+                "cue_import_{}".format(k)
                 for k in cluster_apps
                 if k.startswith("{}-".format(c))
-            ]),
+            ],
+            outs = ["{}-crd.yaml".format(c)],
+            cmd = "$(location gen_deploy_crd_sh) $@ {}".format(
+                " ".join([
+                    "$(location cue_import_{})".format(k)
+                    for k in cluster_apps
+                    if k.startswith("{}-".format(c))
+                ]),
+            ),
+            tools = [
+                "gen_deploy_crd_sh",
+                "//b/lib:lib_sh",
+            ],
         ),
-        tools = [
-            "gen_deploy_crd_sh",
-            "//b/lib:lib_sh",
-        ],
-    )
+    ]
     for c in clusters
 ]
