@@ -193,12 +193,13 @@ filegroup(
             name = "deploy_yaml_{}".format(k),
             srcs = [
                 "cue_import_{}".format(k),
+                "image_digest_{}".format(k),
                 "deploy_cue",
                 "//cue.mod:cue_mod",
                 "//cue.mod/gen/k8s.io:k8s_io",
             ],
             outs = ["{}.yaml".format(k)],
-            cmd = "$(location gen_deploy_yaml_sh) cue=$(location //pkg/cue:flake_cue) $@ $(location cue_import_{})".format(k),
+            cmd = "$(location gen_deploy_yaml_sh) cue=$(location //pkg/cue:flake_cue) $@ $(location cue_import_{}) $(location image_digest_{})".format(k, k),
             tools = [
                 "gen_deploy_yaml_sh",
                 "//b/lib:lib_sh",

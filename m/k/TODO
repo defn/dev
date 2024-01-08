@@ -1,3 +1,0 @@
-install fontconfg
-bazel query 'deps(coder-amanibhava-district-cluster-env)' --output graph > graph.in
-bazel query 'deps(push_helm_chart_coder-amanibhavam-district-cluster-env)' --output graph > graph.in
