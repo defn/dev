@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# count: 3
+# count: 4
 
 function main {
 	local app="${in[app]}"
@@ -15,11 +15,11 @@ function main {
 		cd chart/*/
 		local version
 		local bumped_version
-		version="$(helm show chart --insecure-skip-tls-verify "oci://${registry}/${name}" 2>/dev/null | grep ^version: | awk '{print $2}')"
+		version="$(helm show chart --insecure-skip-tls-verify "oci://${registry}/${name}" 2>/dev/null | grep ^version: | awk '{print $2}' || true)"
 		if [[ -z "${version}" ]]; then
 			version="0.0.0"
 		fi
-		bump_version="${version%.*}.$((${version##*.} + 1))"
+		bumped_version="${version%.*}.$((${version##*.} + 1))"
 
 		sed "s#^version: .*#version: ${bumped_version}#" -i Chart.yaml
 		sed "s#^appVersion: .*#version: ${bumped_version}#" -i Chart.yaml
