@@ -81,10 +81,7 @@ cluster_apps = [
 
 clusters_apps_parent_list = [
     "-".join(k.split("-")[:3])
-    for k in glob(
-        ["*-cluster-*"],
-        exclude_directories = 0,
-    )
+    for k in cluster_apps
 ]
 
 clusters_apps_parent = {
