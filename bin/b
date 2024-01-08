@@ -189,12 +189,18 @@ function main {
 			build)
 				shift
 
-				if [[ $# == 0 ]]; then
+				case "${1-}" in
+				"")
 					rule="/..."
-				else
-					rule="$("$0" | fzf --query="$1" --select-1)"
+					;;
+				/*)
+					rule="$("$0" | fzf --query="${1#/}" --select-1)"
+					;;
+				*)
+					rule="$1"
 					shift
-				fi
+					;;
+				esac
 
 				# shellcheck disable=SC2086
 				bazel build ${bopts} "${rule}"

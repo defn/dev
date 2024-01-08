@@ -10,12 +10,20 @@ function main {
 		"${cue}" export --out json -e images "${app}" k/*.cue | jq -r '.[]' \
 			| sort -u \
 			| runmany 8 'echo cache: \"$1\": \"$(echo $1 | perl -pe '"'"'s{[:@].*$}{}'"'"')@$(skopeo inspect docker://${1%%@sha256*} | jq -r .Digest)\"' \
-			| sort \
 			| while read -r l; do
-				echo
 				echo "$l"
 			done
-	) >"${out}"
+	) >image_digest.cue
+
+	cat image_digest.cue
+
+	(
+		set +f
+		cue export --out json -e image_digests "${app}" k/*.cue image_digest.cue | jq -r '.[]' \
+			| runmany 4 2 'proxy=$2; skopeo copy docker://${proxy} docker://cache.defn.run:5000/${2} --multi-arch all --dest-tls-verify=false --insecure-policy'
+	)
+
+	mv image_digest.cue "${out}"
 }
 
 source b/lib/lib.sh
