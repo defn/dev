@@ -9,7 +9,7 @@ function main {
 	local out="$1"; shift
 
 	cat "${cue_import}" | grep -v 'targetRevision: "app-version-not-found"' > cue_import.cue
-	touch cue_versions.cue
+	echo package k > cue_versions.cue
 
 	for h in "$@"; do
 		mkdir chart
@@ -19,7 +19,8 @@ function main {
 		local name=$(set +f; grep ^name: chart/*/Chart.yaml | awk '{print $2}' | cut -d- -f5-)
 		local version=$(set +f; grep ^version: chart/*/Chart.yaml | awk '{print $2}')
 
-		echo "res: application: \"${cluster}-cluster-env\": argocd: \"${cluster}-cluster-${name}\": spec: source: targetRevision: \"${version}\"" >> cue_versions.cue
+		echo "app_versions: \"${cluster}-cluster-env\": \"${cluster}-cluster-${name}\": \"${version}\"" >> cue_versions.cue
+		echo "res: application: [ENV=string]: argocd: [APP=string]: spec: source: targetRevision: app_versions[ENV][APP]" >> cue_versions.cue
 
 		rm -rf chart
 	done
