@@ -104,6 +104,12 @@ filegroup(
 )
 
 filegroup(
+    name = "gen_env_yaml_sh",
+    srcs = ["gen_env_yaml.sh"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
     name = "gen_helm_chart_sh",
     srcs = ["gen_helm_chart.sh"],
     visibility = ["//visibility:public"],
@@ -213,11 +219,23 @@ genrule(
                 ":cue_import_{}".format(k),
                 ":image_digest_{}".format(k),
                 ":deploy_cue",
+            ] + [
+                "push_helm_chart_{}".format(k)
+                for k in cluster["-".join(k.split("-")[:3])]
+                if not k.endswith("-env")
             ],
             outs = ["{}.yaml".format(k)],
-            cmd = "$(location :gen_deploy_yaml_sh) cue=$(location //pkg/cue:flake_cue) _ $(location :cue_import_{}) $(location :image_digest_{}) $@".format(k, k),
+            cmd = "$(location :gen_env_yaml_sh) cue=$(location //pkg/cue:flake_cue) _ $(location :cue_import_{}) $(location :image_digest_{}) $@ {}".format(
+                k,
+                k,
+                " ".join([
+                    "$(location push_helm_chart_{})".format(k)
+                    for k in cluster["-".join(k.split("-")[:3])]
+                    if not k.endswith("-env")
+                ]),
+            ),
             tools = [
-                ":gen_deploy_yaml_sh",
+                ":gen_env_yaml_sh",
                 "//b/lib:lib_sh",
                 "//pkg/cue:flake_cue",
             ],
