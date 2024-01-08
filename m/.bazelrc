@@ -13,3 +13,18 @@ cquery --noshow_loading_progress
 info --ui_event_filters=-info
 info --noshow_progress
 info --noshow_loading_progress
+
+build --verbose_failures
+build --remote_cache=grpc://cache.defn.run:9092
+build --noincompatible_sandbox_hermetic_tmp
+build --action_env=HOME=/home/ubuntu
+build --test_env=HOME=/home/ubuntu
+build --sandbox_writable_path=/nix
+build --sandbox_writable_path=/home/ubuntu/.cache/nix
+build --sandbox_writable_path=/home/ubuntu/.cache/helm
+build --sandbox_writable_path=/home/ubuntu/.cache/go-mod
+build --sandbox_writable_path=/home/ubuntu/.cache/go-build
+build --sandbox_writable_path=/home/ubuntu/.earthly
+build --sandbox_writable_path=/home/ubuntu/m/cue.mod/gen
+build --sandbox_writable_path=/home/ubuntu/m/k
+build --sandbox_writable_path=/home/ubuntu/work
