@@ -17,12 +17,6 @@ function main {
 
 	cat image_digest.cue
 
-	(
-		set +f
-		cue export --out json -e image_digests "${app}" k/*.cue image_digest.cue | jq -r '.[]' \
-			| runmany 4 2 'proxy=$2; skopeo copy docker://${proxy} docker://cache.defn.run:5000/${2} --multi-arch all --dest-tls-verify=false --insecure-policy'
-	)
-
 	mv image_digest.cue "${out}"
 }
 
