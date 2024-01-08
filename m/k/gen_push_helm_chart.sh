@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# count: 1
+
 function main {
 	local app="${in[app]}"
 	local name="${in[name]}"

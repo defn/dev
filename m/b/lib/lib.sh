@@ -46,6 +46,8 @@ function lib_main {
 	out="${args[0]}"
 	args=("${args[@]:1}")
 	main "${args[@]}"
+
+	echo "Date run: $(date)"
 }
 
 lib_main "$@"
