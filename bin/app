@@ -34,15 +34,21 @@ function main {
 				chart="${app}-env"
 				;;
 			esac
-			version="$(helm show chart --insecure-skip-tls-verify "oci://cache.defn.run:5000/library/helm/${chart}" 2>/dev/null | grep ^version: | awk '{print $2}')"
+			version="$(helm show chart --insecure-skip-tls-verify "oci://cache.defn.run:5000/library/helm/${chart}" 2>/dev/null | grep ^version: | awk '{print $2}' || true)"
 		fi
+
+		if [[ -z "${version}" ]]; then
+			echo "ERROR: version not found" 1>&2
+			exit 1
+		fi
+
 		case "${app}" in
 		/*) app="$(app list | tail -n +2 | awk '{print $1}' | fzf --query="${app#/}" --select-1)" ;;
 		esac
 
 		exec env KUBECTL_EXTERNAL_DIFF="dyff between --color=on --truecolor=on " KUBECONFIG=$HOME/.kube/config.argocd argocd --core app diff "${app}" --revision "${version}" "$@"
 		;;
-	sync | get | wait | terminate-op | resources | logs | diff)
+	sync | get | wait | terminate-op | resources | logs)
 		cmd="$1"
 		shift
 		app="$1"
