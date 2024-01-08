@@ -245,7 +245,18 @@ function main {
 			out)
 				shift
 
-				rule=":$("$0" | fzf --query="${1-}" --select-1)"
+				case "${1-}" in
+				"")
+					rule="$("$0" | grep _ | fzf --select-1)"
+					;;
+				/*)
+					rule="$("$0" | fzf --query="${1#/}" --select-1)"
+					;;
+				*)
+					rule="$1"
+					shift
+					;;
+				esac
 
 				local w
 				w="$(command bazel info workspace)"
