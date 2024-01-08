@@ -391,7 +391,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.28.6"
+		version: "6.29.0"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "info"
