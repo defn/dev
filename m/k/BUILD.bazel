@@ -142,157 +142,94 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-filegroup(
-    name = "all_kustomize_build",
-    srcs = [
-        "kustomize_build_{}".format(k)
-        for k in cluster_apps
-    ],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "all_cue_import",
-    srcs = [
-        "cue_import_{}".format(k)
-        for k in cluster_apps
-    ],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "all_deploy_yaml",
-    srcs = [
-        "deploy_yaml_{}".format(k)
-        for k in cluster_apps
-    ],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "all_helm_chart",
-    srcs = [
-        "helm_chart_{}".format(k)
-        for k in cluster_apps
-    ],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "all_crd",
-    srcs = [
-        "deploy_crd_{}".format(c)
-        for c in clusters
-    ],
-    visibility = ["//visibility:public"],
-)
-
 [
-    genrule(
-        name = "kustomize_build_{}".format(k),
-        srcs = glob(
-            ["{}/*.yaml".format(k)],
-            exclude = [],
-            exclude_directories = 1,
-        ) + [
-            "//c/{}:kustomize_bundle_tgz".format("-".join(k.split("-")[:3])),
-        ],
-        outs = ["{}-kustomized-build.yaml".format(k)],
-        cmd = "$(location gen_kustomize_build_sh) app={} bundle=$(location //c/{}:kustomize_bundle_tgz) $@".format(
-            k,
-            "-".join(k.split("-")[:3]),
+    [
+        genrule(
+            name = "kustomize_build_{}".format(k),
+            srcs = glob(
+                ["{}/*.yaml".format(k)],
+                exclude = [],
+                exclude_directories = 1,
+            ) + [
+                "//c/{}:kustomize_bundle_tgz".format("-".join(k.split("-")[:3])),
+            ],
+            outs = ["{}-kustomized-build.yaml".format(k)],
+            cmd = "$(location gen_kustomize_build_sh) app={} bundle=$(location //c/{}:kustomize_bundle_tgz) $@".format(
+                k,
+                "-".join(k.split("-")[:3]),
+            ),
+            tools = [
+                "gen_kustomize_build_sh",
+                "//b/lib:lib_sh",
+            ],
         ),
-        tools = [
-            "gen_kustomize_build_sh",
-            "//b/lib:lib_sh",
-        ],
-    )
-    for k in cluster_apps
-]
-
-[
-    genrule(
-        name = "cue_import_{}".format(k),
-        srcs = ["kustomize_build_{}".format(k)],
-        outs = ["{}.cue".format(k)],
-        cmd = "$(location gen_cue_import_sh) app=$(location kustomize_build_{}) $@".format(k),
-        tools = [
-            "gen_cue_import_sh",
-            "//b/lib:lib_sh",
-        ],
-    )
-    for k in cluster_apps
-]
-
-[
-    genrule(
-        name = "image_digest_{}".format(k),
-        srcs = [
-            "cue_import_{}".format(k),
-            "deploy_cue",
-            "//cue.mod:cue_mod",
-            "//cue.mod/gen/k8s.io:k8s_io",
-        ],
-        outs = ["image_digest_{}.cue".format(k)],
-        cmd = "$(location gen_image_digest_sh) app=$(location cue_import_{}) cue=$(location //pkg/cue:flake_cue) $@".format(k),
-        tools = [
-            "gen_image_digest_sh",
-            "//b/lib:lib_sh",
-            "//pkg/cue:flake_cue",
-        ],
-    )
-    for k in cluster_apps
-]
-
-[
-    genrule(
-        name = "deploy_yaml_{}".format(k),
-        srcs = [
-            "cue_import_{}".format(k),
-            "deploy_cue",
-            "//cue.mod:cue_mod",
-            "//cue.mod/gen/k8s.io:k8s_io",
-        ],
-        outs = ["{}.yaml".format(k)],
-        cmd = "$(location gen_deploy_yaml_sh) cue=$(location //pkg/cue:flake_cue) $@ $(location cue_import_{})".format(k),
-        tools = [
-            "gen_deploy_yaml_sh",
-            "//b/lib:lib_sh",
-            "//pkg/cue:flake_cue",
-        ],
-    )
-    for k in cluster_apps
-]
-
-[
-    genrule(
-        name = "helm_chart_{}".format(k),
-        srcs = [
-            "deploy_yaml_{}".format(k),
-        ],
-        outs = ["{}-chart.tgz".format(k)],
-        cmd = "$(location gen_helm_chart_sh) app=$(location deploy_yaml_{}) $@".format(k),
-        tools = [
-            "gen_helm_chart_sh",
-            "//b/lib:lib_sh",
-        ],
-    )
-    for k in cluster_apps
-]
-
-[
-    genrule(
-        name = "push_helm_chart_{}".format(k),
-        srcs = [
-            "helm_chart_{}".format(k),
-        ],
-        outs = ["{}-deploy-chart.tgz".format(k)],
-        cmd = "$(location gen_push_helm_chart_sh) app=$(location helm_chart_{}) registry=cache.defn.run:5000/library/helm name={} $@".format(k, k),
-        tools = [
-            "gen_push_helm_chart_sh",
-            "//b/lib:lib_sh",
-        ],
-    )
+        genrule(
+            name = "cue_import_{}".format(k),
+            srcs = ["kustomize_build_{}".format(k)],
+            outs = ["{}.cue".format(k)],
+            cmd = "$(location gen_cue_import_sh) app=$(location kustomize_build_{}) $@".format(k),
+            tools = [
+                "gen_cue_import_sh",
+                "//b/lib:lib_sh",
+            ],
+        ),
+        genrule(
+            name = "image_digest_{}".format(k),
+            srcs = [
+                "cue_import_{}".format(k),
+                "deploy_cue",
+                "//cue.mod:cue_mod",
+                "//cue.mod/gen/k8s.io:k8s_io",
+            ],
+            outs = ["image_digest_{}.cue".format(k)],
+            cmd = "$(location gen_image_digest_sh) app=$(location cue_import_{}) cue=$(location //pkg/cue:flake_cue) $@".format(k),
+            tools = [
+                "gen_image_digest_sh",
+                "//b/lib:lib_sh",
+                "//pkg/cue:flake_cue",
+            ],
+        ),
+        genrule(
+            name = "deploy_yaml_{}".format(k),
+            srcs = [
+                "cue_import_{}".format(k),
+                "deploy_cue",
+                "//cue.mod:cue_mod",
+                "//cue.mod/gen/k8s.io:k8s_io",
+            ],
+            outs = ["{}.yaml".format(k)],
+            cmd = "$(location gen_deploy_yaml_sh) cue=$(location //pkg/cue:flake_cue) $@ $(location cue_import_{})".format(k),
+            tools = [
+                "gen_deploy_yaml_sh",
+                "//b/lib:lib_sh",
+                "//pkg/cue:flake_cue",
+            ],
+        ),
+        genrule(
+            name = "helm_chart_{}".format(k),
+            srcs = [
+                "deploy_yaml_{}".format(k),
+            ],
+            outs = ["{}-chart.tgz".format(k)],
+            cmd = "$(location gen_helm_chart_sh) app=$(location deploy_yaml_{}) $@".format(k),
+            tools = [
+                "gen_helm_chart_sh",
+                "//b/lib:lib_sh",
+            ],
+        ),
+        genrule(
+            name = "push_helm_chart_{}".format(k),
+            srcs = [
+                "helm_chart_{}".format(k),
+            ],
+            outs = ["{}-deploy-chart.tgz".format(k)],
+            cmd = "$(location gen_push_helm_chart_sh) app=$(location helm_chart_{}) registry=cache.defn.run:5000/library/helm name={} $@".format(k, k),
+            tools = [
+                "gen_push_helm_chart_sh",
+                "//b/lib:lib_sh",
+            ],
+        ),
+    ]
     for k in cluster_apps
 ]
 
