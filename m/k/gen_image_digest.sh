@@ -17,6 +17,11 @@ function main {
 
 	cat image_digest.cue
 
+	if grep '@"$' image_digest.cue; then
+		echo "ERROR: digest not found" 1>&2
+		return 1
+	fi
+
 	mv image_digest.cue "${out}"
 }
 
