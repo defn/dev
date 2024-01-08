@@ -128,10 +128,36 @@ filegroup(
 )
 
 filegroup(
+    name = "gen_app_versions_sh",
+    srcs = ["gen_app_versions.sh"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
     name = "deploy_cue",
     srcs = glob(["*.cue"]) + [
         "//cue.mod:cue_mod",
         "//cue.mod/gen/k8s.io:k8s_io",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+genrule(
+    name = "app_versions",
+    srcs = [
+        "push_helm_chart_{}".format(k)
+        for k in cluster_apps
+    ],
+    outs = ["app_versions.cue"],
+    cmd = "$(location :gen_app_versions_sh) $@ {}".format(
+        " ".join([
+            "$(location push_helm_chart_{})".format(k)
+            for k in cluster_apps
+        ]),
+    ),
+    tools = [
+        ":gen_app_versions_sh",
+        "//b/lib:lib_sh",
     ],
     visibility = ["//visibility:public"],
 )
