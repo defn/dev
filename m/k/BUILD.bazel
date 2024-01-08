@@ -79,20 +79,11 @@ cluster_apps = [
     "coder-amanibhavam-school-cluster-trust-manager",
 ]
 
-clusters_apps_parent_list = [
-    "-".join(k.split("-")[:3])
-    for k in cluster_apps
-]
-
-clusters_apps_parent = {
-    clusters_apps_parent_list[i]: 1
-    for i in range(
-        0,
-        len(clusters_apps_parent_list),
-    )
+cluster = {
+    c: [k for k in cluster_apps if k.startswith(c)]
+    for c_ in cluster_apps
+    for c in ["-".join(c_.split("-")[:3])]
 }
-
-clusters = list(clusters_apps_parent.keys())
 
 filegroup(
     name = "gen_kustomize_build_sh",
@@ -138,7 +129,10 @@ filegroup(
 
 filegroup(
     name = "deploy_cue",
-    srcs = glob(["*.cue"]),
+    srcs = glob(["*.cue"]) + [
+        "//cue.mod:cue_mod",
+        "//cue.mod/gen/k8s.io:k8s_io",
+    ],
     visibility = ["//visibility:public"],
 )
 
@@ -178,8 +172,6 @@ filegroup(
             srcs = [
                 ":cue_import_{}".format(k),
                 ":deploy_cue",
-                "//cue.mod:cue_mod",
-                "//cue.mod/gen/k8s.io:k8s_io",
             ],
             outs = ["image_digest_{}.cue".format(k)],
             cmd = "$(location :gen_image_digest_sh) app=$(location :cue_import_{}) cue=$(location //pkg/cue:flake_cue) $@".format(k),
@@ -195,11 +187,23 @@ filegroup(
                 ":cue_import_{}".format(k),
                 ":image_digest_{}".format(k),
                 ":deploy_cue",
-                "//cue.mod:cue_mod",
-                "//cue.mod/gen/k8s.io:k8s_io",
             ],
             outs = ["{}.yaml".format(k)],
-            cmd = "$(location :gen_deploy_yaml_sh) cue=$(location //pkg/cue:flake_cue) $@ $(location :cue_import_{}) $(location :image_digest_{})".format(k, k),
+            cmd = "$(location :gen_deploy_yaml_sh) cue=$(location //pkg/cue:flake_cue) _ $(location :cue_import_{}) $(location :image_digest_{}) $@".format(k, k),
+            tools = [
+                ":gen_deploy_yaml_sh",
+                "//b/lib:lib_sh",
+                "//pkg/cue:flake_cue",
+            ],
+        ) if k.endswith("-env") else genrule(
+            name = "deploy_yaml_{}".format(k),
+            srcs = [
+                ":cue_import_{}".format(k),
+                ":image_digest_{}".format(k),
+                ":deploy_cue",
+            ],
+            outs = ["{}.yaml".format(k)],
+            cmd = "$(location :gen_deploy_yaml_sh) cue=$(location //pkg/cue:flake_cue) _ $(location :cue_import_{}) $(location :image_digest_{}) $@".format(k, k),
             tools = [
                 ":gen_deploy_yaml_sh",
                 "//b/lib:lib_sh",
@@ -240,8 +244,6 @@ filegroup(
             name = "deploy_crd_{}".format(c),
             srcs = [
                 "deploy_cue",
-                "//cue.mod:cue_mod",
-                "//cue.mod/gen/k8s.io:k8s_io",
             ] + [
                 "cue_import_{}".format(k)
                 for k in cluster_apps
@@ -261,5 +263,5 @@ filegroup(
             ],
         ),
     ]
-    for c in clusters
+    for c in list(cluster.keys())
 ]
