@@ -38,4 +38,4 @@ build --remote_timeout=3600
 build --remote_cache=grpcs://defn.buildbuddy.io
 #build --remote_cache=grpc://cache.defn.run:9092
 
-try-import .bazelrc-buildbuddy
+try-import ~/.bazelrc-buildbuddy
