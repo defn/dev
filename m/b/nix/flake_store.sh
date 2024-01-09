@@ -17,6 +17,8 @@ function main {
 	git add .
 	git commit -m 'for the build'
 
+	nix flake lock
+	git diff flake.lock || true
 	nix build
 
 	# shellcheck disable=SC2046

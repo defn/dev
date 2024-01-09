@@ -5,20 +5,14 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "dir": "m/pkg/dev",
-        "lastModified": 1703440183,
-        "narHash": "sha256-XRdrsSlAF4fzKEXGfcpJiF9763BCKozaA2RbjfXWqDg=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "931956c3d299656c773c90d26ad412c4c3b290c3",
-        "type": "github"
+        "lastModified": 1,
+        "narHash": "sha256-UkAEorfxRdHclhWnw6P6//Iy1DMe84+qZQL1wvyIqc4=",
+        "path": "./p/dev",
+        "type": "path"
       },
       "original": {
-        "dir": "m/pkg/dev",
-        "owner": "defn",
-        "ref": "pkg-dev-0.0.12",
-        "repo": "dev",
-        "type": "github"
+        "path": "./p/dev",
+        "type": "path"
       }
     },
     "nixpkgs": {
@@ -42,20 +36,14 @@
         "dev": "dev"
       },
       "locked": {
-        "dir": "m/pkg/pkg",
-        "lastModified": 1703441814,
-        "narHash": "sha256-COTwiD7CDp1CUeRbkKO1L+ZpDO/OqeijDKFa5tZqLHY=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "0cc1dd088a3ff4d0c6077f6d325be3032061c656",
-        "type": "github"
+        "lastModified": 1,
+        "narHash": "sha256-YS+2NXiXvgwUUyPb39fDFGPgCm3PeO9PulVERrp9Ugg=",
+        "path": "./p/pkg",
+        "type": "path"
       },
       "original": {
-        "dir": "m/pkg/pkg",
-        "owner": "defn",
-        "ref": "pkg-pkg-0.0.15",
-        "repo": "dev",
-        "type": "github"
+        "path": "./p/pkg",
+        "type": "path"
       }
     },
     "root": {
