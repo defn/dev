@@ -15,7 +15,6 @@ info --noshow_progress
 info --noshow_loading_progress
 
 build --verbose_failures
-build --remote_cache=grpc://cache.defn.run:9092
 build --noincompatible_sandbox_hermetic_tmp
 build --action_env=HOME=/home/ubuntu
 build --test_env=HOME=/home/ubuntu
@@ -28,3 +27,14 @@ build --sandbox_writable_path=/home/ubuntu/.earthly
 build --sandbox_writable_path=/home/ubuntu/m/cue.mod/gen
 build --sandbox_writable_path=/home/ubuntu/m/k
 build --sandbox_writable_path=/home/ubuntu/work
+
+build --experimental_remote_cache_compression 
+build --legacy_important_outputs
+
+build --bes_results_url=https://defn.buildbuddy.io/invocation/
+build --bes_backend=grpcs://defn.buildbuddy.io
+build --remote_timeout=3600
+build --remote_cache=grpcs://defn.buildbuddy.io
+#build --remote_cache=grpc://cache.defn.run:9092
+
+try-import .bazelrc-buildbuddy
