@@ -30,6 +30,7 @@ build --sandbox_writable_path=/home/ubuntu/work
 
 build --experimental_remote_cache_compression 
 build --legacy_important_outputs
+build --noslim_profile --experimental_profile_include_target_label --experimental_profile_include_primary_output 
 
 build --bes_results_url=https://defn.buildbuddy.io/invocation/
 build --bes_backend=grpcs://defn.buildbuddy.io
