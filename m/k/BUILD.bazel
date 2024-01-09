@@ -154,18 +154,41 @@ filegroup(
 [
     [
         genrule(
+            name = "kustomize_bundle_tgz_{}".format(k),
+            srcs = [
+                "//c/{}:config".format("-".join(k.split("-")[:3])),
+            ],
+            outs = ["kustomize_bundle.tgz_{}".format(k)],
+            cmd = "$(location //c:gen_kustomize_bundle_sh) config=$(location //c/{}:config) decode=$(location //c:decode_base64_py) prefix={}/ $@".format(
+                "-".join(k.split("-")[:3]),
+                k,
+            ),
+            tools = [
+                "//b/lib:lib_sh",
+                "//c:decode_base64_py",
+                "//c:gen_kustomize_bundle_sh",
+            ],
+            visibility = ["//visibility:public"],
+        ),
+    ]
+    for k in cluster_apps
+]
+
+[
+    [
+        genrule(
             name = "kustomize_build_{}".format(k),
             srcs = glob(
                 ["{}/*.yaml".format(k)],
                 exclude = [],
                 exclude_directories = 1,
             ) + [
-                "//c/{}:kustomize_bundle_tgz".format("-".join(k.split("-")[:3])),
+                ":kustomize_bundle_tgz_{}".format(k),
             ],
             outs = ["{}-kustomized-build.yaml".format(k)],
-            cmd = "$(location :gen_kustomize_build_sh) app={} bundle=$(location //c/{}:kustomize_bundle_tgz) $@".format(
+            cmd = "$(location :gen_kustomize_build_sh) app={} bundle=$(location :kustomize_bundle_tgz_{}) $@".format(
                 k,
-                "-".join(k.split("-")[:3]),
+                k,
             ),
             tools = [
                 ":gen_kustomize_build_sh",
