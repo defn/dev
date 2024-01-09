@@ -37,6 +37,8 @@ services:
       - 23232:23232
       - 23233:23233
       - 9418:9418
+    volumes:
+      - ${HOME}/work/soft-serve:/soft-serve
     restart: unless-stopped
 #  attic:
 #    image: ghcr.io/zhaofengli/attic:bdafd64910bb2b861cf90fa15f1fc93318b6fbf6
