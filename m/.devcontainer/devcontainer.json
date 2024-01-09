@@ -1,9 +1,8 @@
 {
-  "image": "quay.io/defn/dev:latest-nix",
+  "image": "quay.io/defn/dev:class-buildkite-latest",
   "mounts": [
     "source=work,target=/workspaces",
     "source=nix,target=/nix",
-    "source=nix-cache,target=/cache",
     "source=home,target=/home/ubuntu",
     "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
   ],
