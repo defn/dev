@@ -3,10 +3,10 @@
 load("ext://restart_process", "custom_build_with_restart")
 
 # local k8s
-allow_k8s_contexts("dfd")
+allow_k8s_contexts('coder-amanibhavam-district0-cluster')
 
 # local registry
-default_registry("169.254.32.1:5000")
+default_registry("cache.defn.run:5000")
 
 local_resource(
     name="tutorial",
@@ -23,7 +23,7 @@ local_resource(
 # hook initial deploy
 k8s_yaml(
     local(
-        'bash -c "cat deploy.yaml | sed \\"s#NAMESPACE#$(echo $HOSTNAME | cut -d- -f1-3)#\\""'
+        'bash -c "cat deploy.yaml"'
     )
 )
 
