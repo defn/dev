@@ -25,49 +25,51 @@ steps: [#DockerStep & {
 		echo
 		'
 		"""]
-}, #DockerStep & {
-	#label: "build-class-latest"
-	#image: "cache.defn.run:5000/dfd:class-latest"
-	#args: ["""
-		'
-		set -e
-		cd
-		git fetch
-		git reset --hard $BUILDKITE_COMMIT
-		source .bash_profile
-		cd m/i/class
-		make class-latest
-		'
-		"""]
-}, #DockerStep & {
-	#label: "build-class-buildkite-latest"
-	#image: "cache.defn.run:5000/dfd:class-buildkite-latest"
-	#args: ["""
-		'
-		set -e
-		cd
-		git fetch
-		git reset --hard $BUILDKITE_COMMIT
-		source .bash_profile
-		cd m/i/class
-		make class-buildkite-latest
-		'
-		"""]
-}, #DockerStep & {
-	#label: "build-buildkite"
-	#image: "cache.defn.run:5000/dfd:class-latest"
-	#args: ["""
-		'
-		set -e
-		cd
-		git fetch
-		git reset --hard $BUILDKITE_COMMIT
-		source .bash_profile
-		cd m/i/class
-		make buildkite
-		'
-		"""]
-}]
+},
+	#WaitStep,
+	#DockerStep & {
+		#label: "build-class-latest"
+		#image: "cache.defn.run:5000/dfd:class-latest"
+		#args: ["""
+			'
+			set -e
+			cd
+			git fetch
+			git reset --hard $BUILDKITE_COMMIT
+			source .bash_profile
+			cd m/i/class
+			make class-latest
+			'
+			"""]
+	}, #DockerStep & {
+		#label: "build-class-buildkite-latest"
+		#image: "cache.defn.run:5000/dfd:class-buildkite-latest"
+		#args: ["""
+			'
+			set -e
+			cd
+			git fetch
+			git reset --hard $BUILDKITE_COMMIT
+			source .bash_profile
+			cd m/i/class
+			make class-buildkite-latest
+			'
+			"""]
+	}, #DockerStep & {
+		#label: "build-buildkite"
+		#image: "cache.defn.run:5000/dfd:class-latest"
+		#args: ["""
+			'
+			set -e
+			cd
+			git fetch
+			git reset --hard $BUILDKITE_COMMIT
+			source .bash_profile
+			cd m/i/class
+			make buildkite
+			'
+			"""]
+	}]
 
 #RunAsUbuntu: securityContext: {
 	runAsNonRoot: true
@@ -82,6 +84,8 @@ steps: [#DockerStep & {
 
 	#RunAsUbuntu
 }
+
+#WaitStep: "wait"
 
 #BashStep: {
 	#label: string

@@ -42,6 +42,7 @@ steps:
                 hostPath:
                   path: /var/run/docker.sock
     depends_on: []
+  - wait
   - label: build-class-latest
     key: build-class-latest
     plugins:
