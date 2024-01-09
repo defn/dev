@@ -29,6 +29,7 @@
             inputs.honeymarker.defaultPackage.${ctx.system}
             inputs.honeytail.defaultPackage.${ctx.system}
             inputs.hugo.defaultPackage.${ctx.system}
+            redis
             skopeo
             postgresql
             cookiecutter
