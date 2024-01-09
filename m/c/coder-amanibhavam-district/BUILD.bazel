@@ -2,26 +2,7 @@ load("//b/cue:cue.bzl", "cue_export")
 
 cue_export(
     name = "config",
-    srcs = [
-        "//c:common",
-    ],
-    cues = glob(["*.cue"]) + [
-        "//c:common",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-genrule(
-    name = "kustomize_bundle_tgz",
-    srcs = [
-        ":config",
-    ],
-    outs = ["kustomize_bundle.tgz"],
-    cmd = "$(location //c:gen_kustomize_bundle_sh) config=$(location :config) decode=$(location //c:decode_base64_py) $@",
-    tools = [
-        "//b/lib:lib_sh",
-        "//c:decode_base64_py",
-        "//c:gen_kustomize_bundle_sh",
-    ],
+    srcs = ["//c:common"],
+    cues = glob(["*.cue"]) + ["//c:common"],
     visibility = ["//visibility:public"],
 )

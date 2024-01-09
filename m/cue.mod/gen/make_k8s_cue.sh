@@ -21,7 +21,7 @@ function main {
 		"${cue}" get go "${pkg}"
 	done
 
-	tar cfz - -C "${workarea}" "${ns}" >"${out}"
+	tar cfz - --numeric-owner --mtime='1970-01-01 00:00:00' -C "${workarea}" "${ns}" >"${out}"
 }
 
 source b/lib/lib.sh
