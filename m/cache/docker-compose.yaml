@@ -6,12 +6,12 @@ services:
     container_name: registry
     ports:
       - "5000:5000"
-    restart: always
     environment:
       - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/registry.crt
       - REGISTRY_HTTP_TLS_KEY=/certs/registry.key
     volumes:
       - ${HOME}/work/registry/certs:/certs
+    restart: unless-stopped
   bazel-remote:
     image: quay.io/bazel-remote/bazel-remote:v2.4.3
     container_name: bazel-remote
@@ -22,6 +22,22 @@ services:
     volumes:
       - ${HOME}/work/bazel-cache:/data
     command: --max_size 50
+    restart: unless-stopped
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+  soft-serve:
+    image: charmcli/soft-serve:latest
+    container_name: soft-serve
+    ports:
+      - 23231:23231
+      - 23232:23232
+      - 23233:23233
+      - 9418:9418
+    restart: unless-stopped
 #  attic:
 #    image: ghcr.io/zhaofengli/attic:bdafd64910bb2b861cf90fa15f1fc93318b6fbf6
 #    container_name: attic
