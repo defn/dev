@@ -142,6 +142,15 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+filegroup(
+    name = "all_cue_import",
+    srcs = [
+        "cue_import_{}".format(k)
+        for k in cluster_apps
+    ],
+    visibility = ["//visibility:public"],
+)
+
 [
     [
         genrule(
