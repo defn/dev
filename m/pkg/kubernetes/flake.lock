@@ -447,17 +447,17 @@
       },
       "locked": {
         "dir": "m/pkg/k9s",
-        "lastModified": 1704311773,
-        "narHash": "sha256-SBb4nKrZOi5qysYjZAb8N8j/hY1gfR8kHbEezBAR7UE=",
+        "lastModified": 1704773321,
+        "narHash": "sha256-9jfOOUHpfKXtJkMCUWwaaA+tT6b+6D3J/PNzTd+sVzo=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "1d8890716789c32910991b0cf084a86edced1e77",
+        "rev": "3bc7c3f10eaa55c7dff9e6fc517665777b8b1d35",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/k9s",
         "owner": "defn",
-        "ref": "pkg-k9s-0.30.8-1",
+        "ref": "pkg-k9s-0.31.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1147,17 +1147,17 @@
       },
       "locked": {
         "dir": "m/pkg/stern",
-        "lastModified": 1703443152,
-        "narHash": "sha256-g7qES+OtB+ROsO6rhM/Kz5xxs9e+MjK1ruw75pmfKJE=",
+        "lastModified": 1704773334,
+        "narHash": "sha256-d+faArCp5HKAIGHMxiN/FQ1pAu4YZkdkmLcWJ/VB/Sg=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "512238dcfd29d8190377fda34583b6567f358d57",
+        "rev": "a18c25e8df26d25d784a18a604c057edd57c7da1",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/stern",
         "owner": "defn",
-        "ref": "pkg-stern-1.27.0-4",
+        "ref": "pkg-stern-1.28.0-1",
         "repo": "dev",
         "type": "github"
       }

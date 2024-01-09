@@ -2,10 +2,10 @@
   inputs = {
     kubectl.url = github:defn/dev/pkg-kubectl-1.26.7-8?dir=m/pkg/kubectl;
     k3sup.url = github:defn/dev/pkg-k3sup-0.13.5-1?dir=m/pkg/k3sup;
-    k9s.url = github:defn/dev/pkg-k9s-0.30.8-1?dir=m/pkg/k9s;
+    k9s.url = github:defn/dev/pkg-k9s-0.31.0-1?dir=m/pkg/k9s;
     helm.url = github:defn/dev/pkg-helm-3.13.3-4?dir=m/pkg/helm;
     kustomize.url = github:defn/dev/pkg-kustomize-5.3.0-4?dir=m/pkg/kustomize;
-    stern.url = github:defn/dev/pkg-stern-1.27.0-4?dir=m/pkg/stern;
+    stern.url = github:defn/dev/pkg-stern-1.28.0-1?dir=m/pkg/stern;
     argoworkflows.url = github:defn/dev/pkg-argoworkflows-3.5.2-4?dir=m/pkg/argoworkflows;
     argocd.url = github:defn/dev/pkg-argocd-2.10.0-rc1-5?dir=m/pkg/argocd;
     kn.url = github:defn/dev/pkg-kn-1.12.0-4?dir=m/pkg/kn;
