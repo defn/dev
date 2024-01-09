@@ -36,7 +36,7 @@ class-latest:
     CACHE /home/ubuntu/work
 
     RUN --no-cache bash -c 'git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git pull'
-    RUN bash -c 'source .bash_profile && make home'
+    RUN bash -c 'source .bash_profile && mkdir -p work && bin/persist-cache && make home'
     RUN git checkout .
 
     SAVE IMAGE --push ${image}
