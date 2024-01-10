@@ -143,15 +143,6 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-filegroup(
-    name = "all_cue_import",
-    srcs = [
-        "cue_import_{}".format(k)
-        for k in cluster_apps
-    ],
-    visibility = ["//visibility:public"],
-)
-
 [
     [
         genrule(
@@ -312,6 +303,15 @@ filegroup(
                 "gen_deploy_crd_sh",
                 "//b/lib:lib_sh",
             ],
+        ),
+        filegroup(
+            name = c,
+            srcs = [
+                "push_helm_chart_{}".format(k)
+                for k in cluster_apps
+                if k.startswith("{}-".format(c))
+            ],
+            visibility = ["//visibility:public"],
         ),
     ]
     for c in list(cluster.keys())
