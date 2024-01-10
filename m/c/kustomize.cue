@@ -3219,13 +3219,13 @@ kustomize: "buildbuddy": #KustomizeHelm & {
 				cache_api_url:   "grpcs://buildbuddy.\(cluster.domain_name)"
 			}
 		}
+	}
 
-		resource: "namespace-buildbuddy": {
-			apiVersion: "v1"
-			kind:       "Namespace"
-			metadata: {
-				name: "buildbuddy"
-			}
+	resource: "namespace-buildbuddy": {
+		apiVersion: "v1"
+		kind:       "Namespace"
+		metadata: {
+			name: "buildbuddy"
 		}
 	}
 }
