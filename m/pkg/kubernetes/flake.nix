@@ -15,6 +15,7 @@
     cilium.url = github:defn/dev/pkg-cilium-0.15.19-4?dir=m/pkg/cilium;
     hubble.url = github:defn/dev/pkg-hubble-0.12.3-4?dir=m/pkg/hubble;
     tfo.url = github:defn/dev/pkg-tfo-2.2.0-4?dir=m/pkg/tfo;
+    mirrord.url = github:defn/dev/pkg-mirrord-3.82.0-5?dir=m/pkg/mirrord;
   };
 
   outputs = inputs: inputs.kubectl.inputs.pkg.main rec {
@@ -39,6 +40,7 @@
             inputs.cilium.defaultPackage.${ctx.system}
             inputs.hubble.defaultPackage.${ctx.system}
             inputs.tfo.defaultPackage.${ctx.system}
+            inputs.mirrord.defaultPackage.${ctx.system}
           ];
         in
         flakeInputs;
