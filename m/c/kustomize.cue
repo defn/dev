@@ -391,7 +391,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.29.0"
+		version: "6.29.1"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "info"
@@ -2966,7 +2966,7 @@ kustomize: "reloader": #KustomizeHelm & {
 		release:   "reloader"
 		name:      "reloader"
 		namespace: "reloader"
-		version:   "1.0.60"
+		version:   "1.0.62"
 		repo:      "https://stakater.github.io/stakater-charts"
 		values: {
 		}
