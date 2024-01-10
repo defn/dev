@@ -15,12 +15,7 @@
   "terminal.integrated.profiles.linux": {
     "dev": {
       "path": "bash",
-      "args": [
-        "--init-file",
-        "~/.bash_entrypoint",
-        "-s",
-        "${workspaceFolder}"
-      ]
+      "args": ["--init-file", "~/.bash_entrypoint", "-s", "${workspaceFolder}"]
     }
   },
   "terminal.integrated.env.linux": {
@@ -88,5 +83,7 @@
   "[python]": {
     "diffEditor.ignoreTrimWhitespace": false
   },
-  "remote.autoForwardPortsSource": "hybrid"
+  "remote.autoForwardPortsSource": "hybrid",
+  "bazel.buildifierFixOnFormat": true,
+  "bazel.enableCodeLens": true
 }
