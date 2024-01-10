@@ -468,17 +468,17 @@
       },
       "locked": {
         "dir": "m/pkg/k9s",
-        "lastModified": 1704830093,
-        "narHash": "sha256-CWfSa/omDHTSGxi1ZJJbOE2k5T34r8Sr1a1qnH3Mnfs=",
+        "lastModified": 1704910931,
+        "narHash": "sha256-/d8dUQ1Erh2JYH7vE4Dx+Sps1tY+lZi0AwdMrNENQ40=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "e687682e0c28eb3b7af4469d70f8ab3aa6620f8b",
+        "rev": "642bfa2a256bc7734fa21c0b371b84656f0f45e5",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/k9s",
         "owner": "defn",
-        "ref": "pkg-k9s-0.31.2-1",
+        "ref": "pkg-k9s-0.31.3-1",
         "repo": "dev",
         "type": "github"
       }
