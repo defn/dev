@@ -6,6 +6,7 @@ teacher: bootstrap: k3s_bootstrap & {
 	"argo-events": {}
 	"buildkite": {}
 	"harbor": {}
+	"buildbuddy": {}
 
 	"headlamp": {}
 

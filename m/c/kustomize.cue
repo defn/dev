@@ -3193,3 +3193,39 @@ kustomize: "xwing": #Kustomize & {
 		}
 	}
 }
+
+// https://github.com/buildbuddy-io/buildbuddy-helm/tree/master/charts/buildbuddy
+kustomize: "buildbuddy": #KustomizeHelm & {
+	cluster: #Cluster
+
+	namespace: "ldbuddyreloader"
+
+	helm: {
+		release:   "buildbuddy"
+		name:      "buildbuddy"
+		namespace: "buildbuddy"
+		version:   "0.0.199"
+		repo:      "https://helm.buildbuddy.io"
+		values: {
+			mysql: {
+				enabled:       true
+				mysqlUser:     "admin"
+				mysqlPassword: "admin"
+			}
+
+			config: app: {
+				build_buddy_url: "https://buildbuddy.\(cluster.domain_name)"
+				events_api_url:  "grpcs://buildbuddy.\(cluster.domain_name)"
+				cache_api_url:   "grpcs://buildbuddy.\(cluster.domain_name)"
+			}
+		}
+
+		resource: "namespace-buildbuddy": {
+			apiVersion: "v1"
+			kind:       "Namespace"
+			metadata: {
+				name: "buildbuddy"
+			}
+		}
+	}
+}
