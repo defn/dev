@@ -3228,4 +3228,40 @@ kustomize: "buildbuddy": #KustomizeHelm & {
 			name: "buildbuddy"
 		}
 	}
+
+	psm: "service-buildbuddy": {
+		apiVersion: "v1"
+		kind:       "Service"
+		metadata: {
+			name:      "buildbuddy"
+		}
+		spec: type: "ClusterIP"
+	}
+
+	resource: "ingress-buildbuddy": {
+		apiVersion: "networking.k8s.io/v1"
+		kind:       "Ingress"
+		metadata: {
+			name:      "buildbuddy"
+			annotations: {
+				"traefik.ingress.kubernetes.io/router.tls":         "true"
+				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
+			}
+		}
+
+		spec: {
+			ingressClassName: "traefik"
+			rules: [{
+				host: "buildbuddy.\(cluster.domain_name)"
+				http: paths: [{
+					path:     "/"
+					pathType: "Prefix"
+					backend: service: {
+						name: "buildbuddy"
+						port: number: 80
+					}
+				}]
+			}]
+		}
+	}
 }
