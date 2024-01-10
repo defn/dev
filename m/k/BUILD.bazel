@@ -23,6 +23,7 @@ cluster_apps = [
     "coder-amanibhavam-district-cluster-argo-cd",
     "coder-amanibhavam-district-cluster-argo-events",
     "coder-amanibhavam-district-cluster-argo-workflows",
+    "coder-amanibhavam-district-cluster-buildbuddy",
     "coder-amanibhavam-district-cluster-buildkite",
     "coder-amanibhavam-district-cluster-cert-manager",
     "coder-amanibhavam-district-cluster-cilium",
