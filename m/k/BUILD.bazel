@@ -81,7 +81,7 @@ cluster_apps = [
 ]
 
 cluster = {
-    c: [k for k in cluster_apps if k.startswith(c)]
+    c: [k for k in cluster_apps if k.startswith("{}-".format(c))]
     for c_ in cluster_apps
     for c in ["-".join(c_.split("-")[:3])]
 }
@@ -148,11 +148,11 @@ filegroup(
         genrule(
             name = "kustomize_bundle_tgz_{}".format(k),
             srcs = [
-                "//c/{}:config".format("-".join(k.split("-")[:3])),
+                "//c/{}:config".format(c),
             ],
             outs = ["kustomize_bundle.tgz_{}".format(k)],
             cmd = "$(location //c:gen_kustomize_bundle_sh) config=$(location //c/{}:config) decode=$(location //c:decode_base64_py) prefix={}/ $@".format(
-                "-".join(k.split("-")[:3]),
+                c,
                 k,
             ),
             tools = [
@@ -164,6 +164,7 @@ filegroup(
         ),
     ]
     for k in cluster_apps
+    for c in ["-".join(k.split("-")[:3])]
 ]
 
 [
@@ -219,7 +220,7 @@ filegroup(
                 ":deploy_cue",
             ] + [
                 "push_helm_chart_{}".format(k)
-                for k in cluster["-".join(k.split("-")[:3])]
+                for k in cluster[c]
                 if not k.endswith("-env")
             ],
             outs = ["{}.yaml".format(k)],
@@ -228,7 +229,7 @@ filegroup(
                 k,
                 " ".join([
                     "$(location push_helm_chart_{})".format(k)
-                    for k in cluster["-".join(k.split("-")[:3])]
+                    for k in cluster[c]
                     if not k.endswith("-env")
                 ]),
             ),
@@ -278,6 +279,7 @@ filegroup(
         ),
     ]
     for k in cluster_apps
+    for c in ["-".join(k.split("-")[:3])]
 ]
 
 [
