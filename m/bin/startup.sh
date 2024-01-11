@@ -34,8 +34,7 @@ function main {
 		sudo mount /mnt || true
 	fi
 
-	sudo chown ubuntu:ubuntu /mnt/*
-
+	(set +f; sudo chown ubuntu:ubuntu /mnt/* || true)
 	sudo install -d -m 0710 -o root -g root /mnt/docker
 	sudo rm -rf /var/lib/docker
 	sudo mkdir -p /mnt/docker
@@ -52,6 +51,8 @@ function main {
 	git pull
 
 	(cd m/cache && make init up)
+
+	make install
 }
 
 time main "$@"
