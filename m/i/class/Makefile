@@ -25,4 +25,5 @@ class-buildkite-latest:
 
 buildkite:
 	@echo --- earthly
+	docker ps || sudo docker ps
 	earthly --ci --push --no-output +buildkite
