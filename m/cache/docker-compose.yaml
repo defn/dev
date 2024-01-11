@@ -11,6 +11,7 @@ services:
       - REGISTRY_HTTP_TLS_KEY=/certs/registry.key
     volumes:
       - ${HOME}/work/registry/certs:/certs
+      - ${HOME}/work/registry/images:/var/lib/registry
     restart: unless-stopped
   bazel-remote:
     image: quay.io/bazel-remote/bazel-remote:v2.4.3
