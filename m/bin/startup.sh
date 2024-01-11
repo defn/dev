@@ -49,18 +49,20 @@ function main {
 	git fetch
 	git branch --set-upstream-to=origin/main main
 	git pull
-
-	(cd m/cache && make init up)
-
-	make install
 }
 
 time main "$@"
 uptime
 
 cd
+source .bash_profile
 bin/persist-cache
+cd m
 
-cd ~/m
+(cd cache && make init up)
+
+if kubectl get ns; then
+	$(MAKE) ready
+fi
 nohup ~/bin/nix/tilt up >/tmp/startup.out 2>&1 &
 disown
