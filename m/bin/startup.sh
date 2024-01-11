@@ -62,7 +62,7 @@ cd m
 (cd cache && make init up)
 
 if kubectl get ns; then
-	$(MAKE) ready
+	make ready
 fi
 nohup ~/bin/nix/tilt up >/tmp/startup.out 2>&1 &
 disown
