@@ -61,5 +61,8 @@ cd
 bin/persist-cache
 
 cd ~/m
+if kubectl get ns; then
+	$(MAKE) ready
+fi
 nohup ~/bin/nix/tilt up >/tmp/startup.out 2>&1 &
 disown
