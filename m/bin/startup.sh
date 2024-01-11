@@ -52,8 +52,6 @@ function main {
 	git pull
 
 	(cd m/cache && make init up)
-
-	make install
 }
 
 time main "$@"
