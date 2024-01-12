@@ -41,6 +41,14 @@ services:
     volumes:
       - ${HOME}/work/soft-serve:/soft-serve
     restart: unless-stopped
+  squid:
+    image: sameersbn/squid:latest
+    container_name: squid
+    ports:
+      - "3128:3128"
+    volumes:
+      - ${HOME}/work/squid:/var/spool/squid
+
 # https://nixos.wiki/wiki/FAQ/Private_Cache_Proxy
   nginx:
     image: nginx:latest
