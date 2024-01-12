@@ -1,7 +1,5 @@
 SHELL := /bin/bash
 
-digest ?= 
-
 env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
 
 list:
@@ -125,6 +123,3 @@ spaceship-attack:
 spaceship-visit:
 	kubectl exec --context coder-amanibhavam-school -ti deploy/spaceship -- curl -XGET deathstar.default.svc.cluster.local/v1/
 
-update-env:
-# ensure no argocd-repo-server pods are in a non-Running state, the cli will pick any pod
-	app set $(env)-cluster --revision $$(helm show chart --insecure-skip-tls-verify oci://cache.defn.run:5000/library/helm/$(env)-cluster-env 2>/dev/null | grep ^version: | awk '{print $$2}')
