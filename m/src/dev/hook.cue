@@ -1,4 +1,4 @@
-package l
+package app
 
 hooks: "hook": config: {
 	configVersion: "v1"
