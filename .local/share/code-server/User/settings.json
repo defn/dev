@@ -84,6 +84,5 @@
     "diffEditor.ignoreTrimWhitespace": false
   },
   "remote.autoForwardPortsSource": "hybrid",
-  "bazel.buildifierFixOnFormat": true,
-  "bazel.enableCodeLens": true
+  "bazel.buildifierFixOnFormat": true
 }
