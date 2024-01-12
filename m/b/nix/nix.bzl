@@ -15,11 +15,11 @@ def nix_flake(name, srcs = [], cmds = [], flake = None, visibility = None):
 
     native.filegroup(
         name = "{}_config".format(name),
-        srcs = [
+        srcs = srcs + [
             "flake.json",
             "flake.lock",
             "flake.nix",
-        ] + srcs,
+        ],
         visibility = visibility,
     )
 
@@ -66,6 +66,7 @@ def nix_flake(name, srcs = [], cmds = [], flake = None, visibility = None):
     native.genrule(
         name = "{}_path".format(name),
         srcs = [
+            "{}_store".format(name),
             flake_config,
         ],
         tools = [
