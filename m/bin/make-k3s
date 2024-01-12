@@ -96,7 +96,7 @@ function make_up {
 	# deploy the cluster app-of-apps
 	app repo add cache.defn.run:5000 --type helm --name cache --enable-oci --insecure-skip-server-verification
 	kubectl --context ${cluster_name} apply -f e/${cluster_name}-cluster.yaml
-	(cd c && make update-env)
+	(cd k && make update)
 }
 
 function main {
