@@ -41,6 +41,17 @@ services:
     volumes:
       - ${HOME}/work/soft-serve:/soft-serve
     restart: unless-stopped
+# https://nixos.wiki/wiki/FAQ/Private_Cache_Proxy
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "8888:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ${HOME}/work/nginx:/data/nginx
+    restart: unless-stopped
+
 #  attic:
 #    image: ghcr.io/zhaofengli/attic:bdafd64910bb2b861cf90fa15f1fc93318b6fbf6
 #    container_name: attic
