@@ -47,24 +47,5 @@ services:
     ports:
       - "3128:3128"
     volumes:
+      - ./squid.conf:/etc/squid/squid.conf
       - ${HOME}/work/squid:/var/spool/squid
-
-# https://nixos.wiki/wiki/FAQ/Private_Cache_Proxy
-  nginx:
-    image: nginx:latest
-    container_name: nginx
-    ports:
-      - "8888:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - ${HOME}/work/nginx:/data/nginx
-    restart: unless-stopped
-
-#  attic:
-#    image: ghcr.io/zhaofengli/attic:bdafd64910bb2b861cf90fa15f1fc93318b6fbf6
-#    container_name: attic
-#    ports:
-#      - "8080:8080"
-#    volumes:
-#      - ${HOME}/work/attic:/var/empty/.local/share/attic
-#    command: [--mode, monolithic]
