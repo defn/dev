@@ -2,5 +2,5 @@
 apiVersion: v2
 type: application
 name: src--dev
-appVersion: 0.0.69
-version: 0.0.69
+appVersion: 0.0.70
+version: 0.0.70
