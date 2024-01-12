@@ -1,4 +1,4 @@
-package l
+package app
 
 page: content: html: """
 	\(tutorial.html)
