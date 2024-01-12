@@ -27,6 +27,8 @@
         ffmpeg
         ttyd
         ncdu
+        nload
+        cookiecutter
         bashInteractive
       ];
 
