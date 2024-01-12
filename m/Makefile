@@ -109,7 +109,7 @@ once:
 	app repo add cache.$(domain):5000 --type helm --name cache --enable-oci --insecure-skip-server-verification
 	cd k && $(MAKE) all-push
 	cd c && $(MAKE) cache
-	cd k && $(MAKE) update-env env=$(env)
+	cd k && $(MAKE) update env=$(env)
 
 vc-context:
 	env KUBECONFIG=$$HOME/.kube/config-in-cluster vcluster connect vcluster -n $(env) --server=$$(env KUBECONFIG=$$HOME/.kube/config-in-cluster kubectl get -n $(env) svc vcluster -o json | jq -r '.spec.clusterIP'):443 --update-current=false --kube-config-context-name $(env)-cluster --kube-config "$$HOME/.kube/config"
@@ -125,7 +125,7 @@ vc:
 	$(MAKE) vc-argocd
 	cp $$HOME/.kube/config-in-cluster $$HOME/.kube/config.argocd
 	env KUBECONFIG=$$HOME/.kube/config-in-cluster kubectl apply -f e/$(env)-cluster.yaml
-	cd k && env KUBECONFIG=$$HOME/.kube/config-in-cluster $(MAKE) update-env env=$(env)
+	cd k && env KUBECONFIG=$$HOME/.kube/config-in-cluster $(MAKE) update env=$(env)
 
 dev:
 	cp /home/ubuntu/.kube/config /home/ubuntu/.kube/config.argocd
