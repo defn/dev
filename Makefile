@@ -52,6 +52,7 @@ cache:
 
 rehome:
 	this-nix-gc
+	rm -f bin/nix/.head-*
 	$(MAKE) home
 
 home:
