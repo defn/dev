@@ -605,6 +605,7 @@ kustomize: "karpenter": #KustomizeHelm & {
 		version:   "v0.33.0"
 		repo:      "oci://public.ecr.aws/karpenter"
 		values: {
+			settings: clusterName: cluster.cluster_name,
 			controller: env: [{
 				name:  "AWS_REGION"
 				value: "us-west-2"
@@ -3235,7 +3236,7 @@ kustomize: "buildbuddy": #KustomizeHelm & {
 		apiVersion: "v1"
 		kind:       "Service"
 		metadata: {
-			name:      "buildbuddy"
+			name: "buildbuddy"
 		}
 		spec: type: "ClusterIP"
 	}
@@ -3244,7 +3245,7 @@ kustomize: "buildbuddy": #KustomizeHelm & {
 		apiVersion: "networking.k8s.io/v1"
 		kind:       "Ingress"
 		metadata: {
-			name:      "buildbuddy"
+			name: "buildbuddy"
 			annotations: {
 				"traefik.ingress.kubernetes.io/router.tls":         "true"
 				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
