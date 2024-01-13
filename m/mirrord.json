@@ -1,0 +1,16 @@
+{
+    "feature": {
+      "env": true,
+      "fs": {
+        "mode": "localwithoverrides",
+        "read_write": [],
+        "read_only": [],
+        "local": [],
+        "not_found": []
+      },
+      "network": true
+    },
+    "operator": false,
+    "telemetry": false
+  }
+  
