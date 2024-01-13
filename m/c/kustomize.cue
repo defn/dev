@@ -605,7 +605,10 @@ kustomize: "karpenter": #KustomizeHelm & {
 		version:   "v0.33.0"
 		repo:      "oci://public.ecr.aws/karpenter"
 		values: {
-			settings: clusterName: cluster.cluster_name,
+			settings: {
+				clusterName:     cluster.cluster_name
+				clusterEndpoint: "https://kubernetes.default.svc.cluster.local:443"
+			}
 			controller: env: [{
 				name:  "AWS_REGION"
 				value: "us-west-2"
