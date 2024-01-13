@@ -1,0 +1,12 @@
+plugins:
+  mirrord:
+    shortCut: m
+    description: Mirror Pod
+    confirm: false
+    scopes:
+      - pod
+    command: bash
+    background: false
+    args:
+      - -c
+      - "exec 2>/tmp/mirrord.log; set -x; screen -m mirrord exec -f ~/m/mirrord.json --context $CONTEXT -n $NAMESPACE -t pod/$COL-NAME -- bash -i"
