@@ -3121,6 +3121,21 @@ kustomize: "deathstar": #Kustomize & {
 						path:   "/v1/"
 					}]
 				}]
+			}, {
+				fromEndpoints: [{
+					matchLabels: app: "mirrord"
+				}]
+				toPorts: [{
+					ports: [{
+						port:     "80"
+						protocol: "TCP"
+					}]
+					rules: http: [{
+						method: "PUT"
+						path:   "/v1/exhaust-port$"
+						headers: ["X-Has-Mirrord: True"]
+					}]
+				}]
 			}]
 		}
 	}
