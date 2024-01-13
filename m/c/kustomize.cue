@@ -1938,7 +1938,7 @@ kustomize: "pihole": #KustomizeHelm & {
 		release:   "pihole"
 		name:      "pihole"
 		namespace: "pihole"
-		version:   "2.20.0"
+		version:   "2.21.0"
 		repo:      "https://mojo2600.github.io/pihole-kubernetes"
 		values: {
 			podDnsConfig: enabled:          false
@@ -2062,7 +2062,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "4.0.1"
+		version:     "4.0.4"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
