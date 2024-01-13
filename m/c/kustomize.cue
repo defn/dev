@@ -593,6 +593,7 @@ kustomize: "buildkite": #KustomizeHelm & {
 	}
 }
 
+// https://github.com/aws/karpenter-provider-aws/releases
 kustomize: "karpenter": #KustomizeHelm & {
 	cluster: #Cluster
 
