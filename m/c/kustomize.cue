@@ -602,7 +602,7 @@ kustomize: "karpenter": #KustomizeHelm & {
 		release:   "karpenter"
 		name:      "karpenter"
 		namespace: "karpenter"
-		version:   "v0.32.4"
+		version:   "v0.33.0"
 		repo:      "oci://public.ecr.aws/karpenter"
 		values: {
 			controller: env: [{
@@ -617,19 +617,6 @@ kustomize: "karpenter": #KustomizeHelm & {
 		kind:       "Namespace"
 		metadata: {
 			name: "karpenter"
-		}
-	}
-
-	psm: "config-map-karpenter-global-settings": {
-		apiVersion: "v1"
-		kind:       "ConfigMap"
-		metadata: {
-			name:      "karpenter-global-settings"
-			namespace: "karpenter"
-		}
-		data: {
-			"aws.clusterName":     cluster.cluster_name
-			"aws.clusterEndpoint": "https://kubernetes.default.svc.cluster.local:443"
 		}
 	}
 
