@@ -13,6 +13,12 @@ services:
       - ${HOME}/work/registry/certs:/certs
       - ${HOME}/work/registry/images:/var/lib/registry
     restart: unless-stopped
+  bes-tunnel:
+    image: alpine/socat
+    container_name: bes-tunnel
+    command: TCP-LISTEN:1985,fork,reuseaddr TCP:10.250.217.203:1985
+    ports:
+      - "1985:1985"
   bazel-remote:
     image: quay.io/bazel-remote/bazel-remote:v2.4.3
     container_name: bazel-remote
