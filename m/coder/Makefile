@@ -10,7 +10,7 @@ workspace ?= $(shell basename $(shell pwd))
 dir ?= $(shell pwd)
 rev ?= $(shell git branch --show-current)
 
-up:
+class:
 	@bash -c "time $(MAKE) up-inner"
 
 up-inner:
