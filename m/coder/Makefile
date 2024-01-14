@@ -3,20 +3,13 @@ template := $(shell basename $(shell pwd))
 build:
 	cue eval --out json -e html | jq -r . > tutorial.html
 
-run:
-	$(MAKE) init
-	bash -c 'eval "$$(direnv hook bash)"; _direnv_hook; $(MAKE) run-inner'
-
-run-inner:
-	echo screen -S tilt -d -m tilt up --stream
-
 push:
 	tf fmt
 	tf docs
 	ls -d mod/*/ | runmany 'cd $$1 && tf fmt && tf docs'
 	tar -cvh --exclude .terraform . | coder templates push -y --create -d - "$(template)"
 
-workspace ?= $(shell basename $(shell pwd))
+workspace ?= 
 dir ?= $(shell pwd)
 rev ?= $(shell git branch --show-current)
 
@@ -38,11 +31,3 @@ up-create:
 
 down:
 	coder delete --yes "$(workspace)" || true
-
-init:
-	direnv allow
-	bash -c 'eval "$$(direnv hook bash)"; _direnv_hook'
-	for a in vscodevim.vim golang.Go bazelbuild.vscode-bazel; do code serve-local --force --install-extension $$a; done
-
-login:
-	coder login https://coder.dev.amanibhavam.defn.run
