@@ -177,3 +177,6 @@ tailscale-kubeconfig:
 
 hello:
 	test "$$(pass hello)" == world
+
+token:
+	@kubectl create token headlamp-admin -n headlamp
