@@ -23,6 +23,7 @@
         gnumake
         git
         netcat-gnu
+        socat
         bashInteractive
       ];
     };
