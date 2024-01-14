@@ -68,10 +68,12 @@ function make_up {
 	# oidc
 	(cd c/${cluster_name} && make secrets)
 
-	kubectl --context ${cluster_name} apply --server-side -f k/crd/${cluster_name}.yaml
-	kubectl --context ${cluster_name} apply -f k/r/${cluster_name}-cluster-cilium/main.yaml
+	(cd k && b build)
+  	b out //k:deploy_crd_${cluster_name} | kubectl --context ${cluster_name} apply --server-side -f -
 	kubectl --context ${cluster_name} create ns argocd || true
-	kubectl --context ${cluster_name} apply -f k/r/${cluster_name}-cluster-argo-cd/main.yaml
+	kubectl --context ${cluster_name} create ns kyverno || true
+	(cd k && b out deploy_yaml_${cluster_name}-cluster-cilium) | kubectl --context ${cluster_name} apply -f -
+	(cd k && b out deploy_yaml_${cluster_name}-cluster-argo-cd) | kubectl --context ${cluster_name} apply -f -
 
 	make_argocd
 

@@ -10,9 +10,6 @@ helm_add:
 	(cd .. && git grep repo: kustomize.cue) | cut -d'"' -f2 | sort -u | while read -r repo; do helm repo add $$(echo $$repo | cut -d/ -f3- | perl -pe 's{\s+$$}{}; s{\W+}{-}g') $$repo; done
 	helm repo update
 
-cache:
-	cd ./r && $(MAKE) cache filter=$(filter)
-
 tailscale:
 	mkdir -p ./$(env)/openid
 	sudo tailscale funnel --bg --https=443 --set-path /openid $(shell pwd)/$(env)/openid

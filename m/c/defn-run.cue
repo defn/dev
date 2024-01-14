@@ -44,7 +44,7 @@ k3s_bootstrap: {
 teacher: {
 	bootstrap: {
 		[NAME=string]: {
-			app_repo: "cache.defn.run:5000"
+			app_repo: "coder-amanibhavam-district.tail3884f.ts.net:5000"
 			app_type: "chart"
 			app_def:  "library/helm/coder-\(class.handle)-\(class.env)-cluster-\(NAME)"
 		}
