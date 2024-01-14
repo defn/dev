@@ -19,7 +19,7 @@ up-inner:
 	$(MAKE) up-create
 	@echo
 	@while true; do if curl -sSL $$(cat $$HOME/.config/coderv2/url)/api/v2/users/$$(coder list |tail -1 | awk '{print $$1}' | cut -d/ -f1)/workspace/$(workspace) -H "Coder-Session-Token: $$(cat $$HOME/.config/coderv2/session)" | jq -r '(.latest_build.resources[].agents//[])[].apps[] | select(.display_name == "code-server") | .health' | grep ^healthy; then break; fi; date; sleep 5; done
-	@set -x; open "$$(curl -sSL $$(cat $$HOME/.config/coderv2/url)/api/v2/debug/health -H "Coder-Session-Token: $$(cat $$HOME/.config/coderv2/session)" | jq -r '.access_url.access_url' | sed "s#//#//cs--main--$(workspace)--$$(coder list |tail -1 | awk '{print $$1}' | cut -d/ -f1).#")?folder=$(shell echo $(dir) | sed 's#$(HOME)#/home/ubuntu#')"
+	@open "$$(curl -sSL $$(cat $$HOME/.config/coderv2/url)/api/v2/debug/health -H "Coder-Session-Token: $$(cat $$HOME/.config/coderv2/session)" | jq -r '.access_url.access_url' | sed "s#//#//cs--main--$(workspace)--$$(coder list |tail -1 | awk '{print $$1}' | cut -d/ -f1).#")?folder=$(shell echo $(dir) | sed 's#$(HOME)#/home/ubuntu#')"
 
 up-restart:
 	coder restart --yes "$(workspace)"
