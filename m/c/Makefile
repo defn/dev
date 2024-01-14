@@ -62,7 +62,7 @@ start-class:
 
 start-all:
 	$(MAKE) -j 2 start-school start-class
-	coder config-ssh
+	coder config-ssh --yes
 	for a in school class; do ssh coder.$$a bash -c "'cd m && make ready'"; done
 	cilium clustermesh status --wait
 
