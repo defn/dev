@@ -108,9 +108,6 @@ restart-cilium:
 	kubectl -n kube-system rollout restart deploy hubble-ui
 	kubectl -n kube-system rollout restart deploy clustermesh-apiserver
 
-token:
-	@kubectl create token headlamp-admin -n headlamp
-
 xwing-attack:
 	kubectl exec --context coder-amanibhavam-class -ti deploy/xwing -- curl -XPUT -H 'X-Has-Force: True' deathstar.default.svc.cluster.local/v1/exhaust-port
 
