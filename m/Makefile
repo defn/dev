@@ -139,8 +139,6 @@ init:
 
 up:
 	bin/make-k3s up
-# dunno why kyverno application isn't create the ns
-	k create ns kyverno || true
 	cd c && $(MAKE) iam
 	$(MAKE) ready
 
