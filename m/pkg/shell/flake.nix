@@ -22,6 +22,7 @@
         findutils
         gnumake
         git
+        netcat-gnu
         bashInteractive
       ];
     };
