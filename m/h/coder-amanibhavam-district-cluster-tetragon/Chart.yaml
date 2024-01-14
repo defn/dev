@@ -1,5 +1,0 @@
-apiVersion: v2
-type: application
-name: coder-amanibhavam-district-cluster-tetragon
-appVersion: "0.0.104"
-version: "0.0.104"

@@ -1,5 +1,0 @@
-apiVersion: v2
-type: application
-name: coder-amanibhavam-district-cluster-tailscale
-appVersion: "0.0.9"
-version: "0.0.9"

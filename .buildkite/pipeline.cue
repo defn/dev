@@ -10,7 +10,7 @@ branches: "main"
 steps: [
 	#DockerStep & {
 		#label: "bazel-build"
-		#image: "cache.defn.run:5000/dfd:class-buildkite-latest"
+		#image: "coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:class-buildkite-latest"
 		#args: ["""
 			'
 			set -
@@ -32,7 +32,7 @@ steps: [
 	#WaitStep,
 	#DockerStep & {
 		#label: "build-class-buildkite-latest"
-		#image: "cache.defn.run:5000/dfd:class-buildkite-latest"
+		#image: "coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:class-buildkite-latest"
 		#args: ["""
 			'
 			set -e
@@ -48,7 +48,7 @@ steps: [
 	#WaitStep,
 	#DockerStep & {
 		#label: "build-class-latest"
-		#image: "cache.defn.run:5000/dfd:class-latest"
+		#image: "coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:class-latest"
 		#args: ["""
 			'
 			set -e
@@ -62,7 +62,7 @@ steps: [
 			"""]
 	}, #DockerStep & {
 		#label: "build-buildkite"
-		#image: "cache.defn.run:5000/dfd:class-latest"
+		#image: "coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:class-latest"
 		#args: ["""
 			'
 			set -e

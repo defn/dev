@@ -5,6 +5,9 @@ global:
   cache_size_pct: 50
   local_registry_host: "tcp://127.0.0.1:8371"
   buildkit_additional_config: |
+    [registry."coder-amanibhavam-district.tail3884f.ts.net:5000"]
+      http = false
+      insecure = true
     [registry."cache.defn.run:5000"]
       http = false
       insecure = true

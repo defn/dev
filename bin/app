@@ -34,7 +34,7 @@ function main {
 				chart="${app}-env"
 				;;
 			esac
-			version="$(helm show chart --insecure-skip-tls-verify "oci://cache.defn.run:5000/library/helm/${chart}" 2>/dev/null | grep ^version: | awk '{print $2}' || true)"
+			version="$(helm show chart --insecure-skip-tls-verify "oci://coder-amanibhavam-district.tail3884f.ts.net:5000/library/helm/${chart}" 2>/dev/null | grep ^version: | awk '{print $2}' || true)"
 		fi
 
 		if [[ -z "${version}" ]]; then
