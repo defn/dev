@@ -66,7 +66,7 @@ data "coder_parameter" "docker_image" {
   name         = "docker_image"
   display_name = "Docker image"
   description  = "The docker image to use for the workspace"
-  default      = "cache.defn.run:5000/dfd:class-buildkite-latest"
+  default      = "coder-amanibhavam-district.tail3884f.ts.net::5000/dfd:class-buildkite-latest"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/docker.svg"
   mutable      = true
 }

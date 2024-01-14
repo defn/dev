@@ -1,5 +1,0 @@
-apiVersion: v2
-type: application
-name: coder-amanibhavam-school-cluster-external-dns
-appVersion: "0.0.109"
-version: "0.0.109"

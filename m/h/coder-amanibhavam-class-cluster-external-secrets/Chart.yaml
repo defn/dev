@@ -1,5 +1,0 @@
-apiVersion: v2
-type: application
-name: coder-amanibhavam-class-cluster-external-secrets
-appVersion: "0.0.105"
-version: "0.0.105"

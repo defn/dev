@@ -1,25 +1,25 @@
 # https://docs.k3s.io/installation/private-registry
 # /etc/rancher/k3s/registries.yaml
 mirrors:
-  "cache.defn.run:5000":
+  "coder-amanibhavam-district.tail3884f.ts.net:5000":
     endpoint:
-      - https://cache.defn.run:5000
+      - https://coder-amanibhavam-district.tail3884f.ts.net:5000
   "docker.io":
     endpoint:
-      - https://cache.defn.run:5000
+      - https://coder-amanibhavam-district.tail3884f.ts.net:5000
   "gcr.io":
     endpoint:
-      - https://cache.defn.run:5000
+      - https://coder-amanibhavam-district.tail3884f.ts.net:5000
   "ghcr.io":
     endpoint:
-      - https://cache.defn.run:5000
+      - https://coder-amanibhavam-district.tail3884f.ts.net:5000
   "public.ecr.aws":
     endpoint:
-      - https://cache.defn.run:5000
+      - https://coder-amanibhavam-district.tail3884f.ts.net:5000
   "quay.io":
     endpoint:
-      - https://cache.defn.run:5000
+      - https://coder-amanibhavam-district.tail3884f.ts.net:5000
 configs:
-  "cache.defn.run:5000":
+  "coder-amanibhavam-district.tail3884f.ts.net:5000":
     tls:
       insecure_skip_verify: true

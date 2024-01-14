@@ -1,5 +1,0 @@
-apiVersion: v2
-type: application
-name: coder-amanibhavam-class-cluster-aws-node-termination-handler
-appVersion: "0.0.4"
-version: "0.0.4"

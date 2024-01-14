@@ -1,5 +1,0 @@
-apiVersion: v2
-type: application
-name: coder-amanibhavam-district-cluster-argo-cd
-appVersion: "0.0.123"
-version: "0.0.123"

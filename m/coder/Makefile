@@ -25,7 +25,7 @@ up-restart:
 	coder restart --yes "$(workspace)"
 
 up-create:
-	coder create --yes --template class --parameter workdir=$(dir),source_rev=$(rev),prefix=coder,vcluster=1,provider=pod,docker_image=cache.defn.run:5000/dfd:class-buildkite-latest,cpu=1,memory=1,nix_volume_size=100 "$(workspace)"
+	coder create --yes --template class --parameter workdir=$(dir),source_rev=$(rev),prefix=coder,vcluster=1,provider=pod,docker_image=coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:class-buildkite-latest,cpu=1,memory=1,nix_volume_size=100 "$(workspace)"
 
 down:
 	coder delete --yes "$(workspace)"

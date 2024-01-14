@@ -10,7 +10,7 @@ spec:
     name: in-cluster
     namespace: src--dev
   source:
-    repoURL: cache.defn.run:5000
+    repoURL: coder-amanibhavam-district.tail3884f.ts.net:5000
     chart: library/helm/src--dev
     targetRevision: 0.0.75
   syncPolicy:
