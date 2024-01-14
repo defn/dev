@@ -1,15 +1,12 @@
 template := $(shell basename $(shell pwd))
 
-build:
-	cue eval --out json -e html | jq -r . > tutorial.html
-
 push:
 	tf fmt
 	tf docs
 	ls -d mod/*/ | runmany 'cd $$1 && tf fmt && tf docs'
 	tar -cvh --exclude .terraform . | coder templates push -y --create -d - "$(template)"
 
-workspace ?= 
+workspace ?= $(shell basename $(shell pwd))
 dir ?= $(shell pwd)
 rev ?= $(shell git branch --show-current)
 
