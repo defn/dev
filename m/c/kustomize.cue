@@ -20,7 +20,7 @@ env: (#Transform & {
 	inputs: "\(class.cluster_name)-cluster": {
 		bootstrap:   class.bootstrap
 		app_cluster: "coder-\(class.handle)-\(class.parent_env)-cluster"
-		app_repo:    "cache.defn.run:5000"
+		app_repo:    "coder-amanibhavam-district.tail3884f.ts.net:5000"
 		app_type:    "chart"
 		app_def:     "library/helm/coder-\(class.handle)-\(class.env)-cluster-env"
 	}
@@ -552,7 +552,7 @@ kustomize: "buildkite": #KustomizeHelm & {
 				"cluster-uuid": "bd52647a-d3d5-4c15-9b3f-3b5f566ce6e3"
 				debug:          true
 				tags: ["queue=default"]
-				image:           "cache.defn.run:5000/dfd:buildkite"
+				image:           "coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:buildkite"
 				"max-in-flight": 0
 			}
 			agentStackSecret: "buildkite"
