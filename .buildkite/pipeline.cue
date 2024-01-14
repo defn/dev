@@ -96,7 +96,6 @@ steps: [
 	#key:   string | *#label
 	#image: string
 	#args: [...string]
-	#depends_on: [...string]
 	#volumeMounts: [...{...}]
 	#volumes: [...{...}]
 
@@ -115,7 +114,6 @@ steps: [
 			volumes: #volumes
 		}
 	}]
-	depends_on: #depends_on
 }
 
 #DockerStep: #BashStep & {
