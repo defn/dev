@@ -10,8 +10,8 @@ template:
 
 cache:
 	cue export --out json -e image_digests | jq -r '.[]' | grep "$(filter)" | runmany 4 2 'proxy=$$2; \
-		skopeo copy docker://$${proxy} docker://cache.defn.run:5000/$${2} --multi-arch all --dest-tls-verify=false --insecure-policy'
+		skopeo copy docker://$${proxy} docker://coder-amanibhavam-district.tail3884f.ts.net:5000/$${2} --multi-arch all --dest-tls-verify=false --insecure-policy'
 
 update:
 # ensure no argocd-repo-server pods are in a non-Running state, the cli will pick any pod
-	app set $(env)-cluster --revision $$(helm show chart --insecure-skip-tls-verify oci://cache.defn.run:5000/library/helm/$(env)-cluster-env 2>/dev/null | grep ^version: | awk '{print $$2}')
+	app set $(env)-cluster --revision $$(helm show chart --insecure-skip-tls-verify oci://coder-amanibhavam-district.tail3884f.ts.net:5000/library/helm/$(env)-cluster-env 2>/dev/null | grep ^version: | awk '{print $$2}')
