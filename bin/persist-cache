@@ -65,17 +65,12 @@ function cache {
 
 	persist ~/work/bazelisk ~/.cache/bazelisk
 
-	persist ~/work/code-server-cache/extensions ~/.local/share/code-server/extensions
-	persist ~/work/vscode-cache/extensions ~/.vscode-server/extensions
-
 	persist ~/work/direnv-allow ~/.local/share/direnv
 	persist ~/work/direnv-home ~/.direnv
 
-	persist ~/work/vscode-server/CachedExtensionVSIXs ~/.vscode-server/data/CachedExtensionVSIXs
-
 	mkdir -p ~/.cache/helm
-
 	mkdir -p ~/work/bazel-cache
+	mkdir -p ~/work/squid
 }
 
 cache "$@"
