@@ -43,40 +43,6 @@ steps:
                   path: /var/run/docker.sock
     depends_on: []
   - wait
-  - label: build-class-latest
-    key: build-class-latest
-    plugins:
-      - kubernetes:
-          podSpec:
-            containers:
-              - image: cache.defn.run:5000/dfd:class-latest
-                args:
-                  - |-
-                    '
-                    set -e
-                    cd
-                    git fetch
-                    git reset --hard $BUILDKITE_COMMIT
-                    source .bash_profile
-                    cd m/i/class
-                    make class-latest
-                    '
-                imagePullPolicy: Always
-                securityContext:
-                  runAsNonRoot: true
-                  runAsUser: 1000
-                  runAsGroup: 1000
-                volumeMounts:
-                  - name: docker-socket
-                    mountPath: /var/run/docker.sock
-                command:
-                  - bash
-                  - -c
-            volumes:
-              - name: docker-socket
-                hostPath:
-                  path: /var/run/docker.sock
-    depends_on: []
   - label: build-class-buildkite-latest
     key: build-class-buildkite-latest
     plugins:
@@ -94,6 +60,41 @@ steps:
                     source .bash_profile
                     cd m/i/class
                     make class-buildkite-latest
+                    '
+                imagePullPolicy: Always
+                securityContext:
+                  runAsNonRoot: true
+                  runAsUser: 1000
+                  runAsGroup: 1000
+                volumeMounts:
+                  - name: docker-socket
+                    mountPath: /var/run/docker.sock
+                command:
+                  - bash
+                  - -c
+            volumes:
+              - name: docker-socket
+                hostPath:
+                  path: /var/run/docker.sock
+    depends_on: []
+  - wait
+  - label: build-class-latest
+    key: build-class-latest
+    plugins:
+      - kubernetes:
+          podSpec:
+            containers:
+              - image: cache.defn.run:5000/dfd:class-latest
+                args:
+                  - |-
+                    '
+                    set -e
+                    cd
+                    git fetch
+                    git reset --hard $BUILDKITE_COMMIT
+                    source .bash_profile
+                    cd m/i/class
+                    make class-latest
                     '
                 imagePullPolicy: Always
                 securityContext:

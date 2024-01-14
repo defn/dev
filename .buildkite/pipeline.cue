@@ -5,27 +5,44 @@ env: {
 	BUILDKITE_GIT_MIRRORS_SKIP_UPDATE: "1"
 }
 
-steps: [#DockerStep & {
-	#label: "bazel-build"
-	#image: "cache.defn.run:5000/dfd:class-buildkite-latest"
-	#args: ["""
-		'
-		set -
-		cd
-		git fetch
-		git reset --hard $BUILDKITE_COMMIT
-		source .bash_profile
-		git config --global user.email you@example.com
-		git config --global user.name YourName
-		bin/persist-cache
-		cd m
-		echo --- bazel
-		export DFD_CI_BAZEL_OPTIONS=--remote_download_minimal
-		../bin/b build
-		echo
-		'
-		"""]
-},
+steps: [
+	#DockerStep & {
+		#label: "bazel-build"
+		#image: "cache.defn.run:5000/dfd:class-buildkite-latest"
+		#args: ["""
+			'
+			set -
+			cd
+			git fetch
+			git reset --hard $BUILDKITE_COMMIT
+			source .bash_profile
+			git config --global user.email you@example.com
+			git config --global user.name YourName
+			bin/persist-cache
+			cd m
+			echo --- bazel
+			export DFD_CI_BAZEL_OPTIONS=--remote_download_minimal
+			../bin/b build
+			echo
+			'
+			"""]
+	},
+	#WaitStep,
+	#DockerStep & {
+		#label: "build-class-buildkite-latest"
+		#image: "cache.defn.run:5000/dfd:class-buildkite-latest"
+		#args: ["""
+			'
+			set -e
+			cd
+			git fetch
+			git reset --hard $BUILDKITE_COMMIT
+			source .bash_profile
+			cd m/i/class
+			make class-buildkite-latest
+			'
+			"""]
+	},
 	#WaitStep,
 	#DockerStep & {
 		#label: "build-class-latest"
@@ -42,20 +59,6 @@ steps: [#DockerStep & {
 			'
 			"""]
 	}, #DockerStep & {
-		#label: "build-class-buildkite-latest"
-		#image: "cache.defn.run:5000/dfd:class-buildkite-latest"
-		#args: ["""
-			'
-			set -e
-			cd
-			git fetch
-			git reset --hard $BUILDKITE_COMMIT
-			source .bash_profile
-			cd m/i/class
-			make class-buildkite-latest
-			'
-			"""]
-	}, #DockerStep & {
 		#label: "build-buildkite"
 		#image: "cache.defn.run:5000/dfd:class-latest"
 		#args: ["""
@@ -69,7 +72,8 @@ steps: [#DockerStep & {
 			make buildkite
 			'
 			"""]
-	}]
+	},
+]
 
 #RunAsUbuntu: securityContext: {
 	runAsNonRoot: true
