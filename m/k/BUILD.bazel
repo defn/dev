@@ -246,7 +246,7 @@ filegroup(
                 ":deploy_cue",
             ],
             outs = ["{}.yaml".format(k)],
-            cmd = "$(location :gen_deploy_yaml_sh) cue=$(location //pkg/cue:flake_cue) _ $(location :cue_import_{}) $(location :image_digest_{}) $@".format(k, k),
+            cmd = "$(location :gen_deploy_yaml_sh) cue=$(location //pkg/cue:flake_cue) registry=coder-amanibhavam-district.tail3884f.ts.net:5000 _ $(location :cue_import_{}) $(location :image_digest_{}) $@".format(k, k),
             tools = [
                 ":gen_deploy_yaml_sh",
                 "//b/lib:lib_sh",
@@ -271,7 +271,7 @@ filegroup(
                 ":helm_chart_{}".format(k),
             ],
             outs = ["{}-deploy-chart.tgz".format(k)],
-            cmd = "$(location :gen_push_helm_chart_sh) app=$(location :helm_chart_{}) registry=cache.defn.run:5000/library/helm name={} $@".format(k, k),
+            cmd = "$(location :gen_push_helm_chart_sh) app=$(location :helm_chart_{}) registry=coder-amanibhavam-district.tail3884f.ts.net:5000/library/helm name={} $@".format(k, k),
             tools = [
                 ":gen_push_helm_chart_sh",
                 "//b/lib:lib_sh",
