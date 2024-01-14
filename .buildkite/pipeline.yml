@@ -1,6 +1,7 @@
 env:
   BUILDKITE_GIT_MIRRORS_PATH: /cache/git
   BUILDKITE_GIT_MIRRORS_SKIP_UPDATE: "1"
+branches: main
 steps:
   - label: bazel-build
     key: bazel-build

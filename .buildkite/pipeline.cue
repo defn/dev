@@ -5,6 +5,8 @@ env: {
 	BUILDKITE_GIT_MIRRORS_SKIP_UPDATE: "1"
 }
 
+branches: "main"
+
 steps: [
 	#DockerStep & {
 		#label: "bazel-build"
