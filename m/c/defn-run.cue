@@ -89,7 +89,7 @@ class: {
 	}
 
 	infra_account_id:       "510430971399"
-	infra_k3s_version:      "rancher/k3s:v1.27.8-k3s2"
+	infra_k3s_version:      "rancher/k3s:v1.27.9-k3s1"
 	infra_tailscale_domain: "tail3884f.ts.net"
 
 	infra_cilium_name: cluster_name
