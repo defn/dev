@@ -4,7 +4,7 @@
 
 function main {
 	local cue="${shome}/${in[cue]}"
-	local registry="$1"; shift
+	local registry="${in[registry]}"
 
 	local cue_import="$1"; shift
 	local image_digest="$1"; shift
