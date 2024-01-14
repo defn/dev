@@ -2,9 +2,9 @@
     "feature": {
       "env": true,
       "fs": {
-        "mode": "localwithoverrides",
+        "mode": "read",
         "read_write": [],
-        "read_only": [],
+        "read_only": ["^/etc/."],
         "local": [],
         "not_found": []
       },
