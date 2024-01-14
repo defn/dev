@@ -39,5 +39,5 @@ build --noslim_profile --experimental_profile_include_target_label --experimenta
 #build --remote_timeout=3600
 
 build --bes_results_url=https://buildbuddy.district.amanibhavam.defn.run/invocation
-build --bes_backend=grpc://10.250.217.203:1985
-build --remote_cache=grpc://100.78.177.55:9092
+build --bes_backend=grpc://buildbuddy.ldbuddyreloader.svc.cluster.local:1985
+build --remote_cache=grpc://coder-amanibhavam-district:9092
