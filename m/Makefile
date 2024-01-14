@@ -124,8 +124,7 @@ vc:
 	chmod 0600 ~/.kube/config
 	$(MAKE) vc-argocd
 	cp $$HOME/.kube/config-in-cluster $$HOME/.kube/config.argocd
-	env KUBECONFIG=$$HOME/.kube/config-in-cluster kubectl apply -f e/$(env)-cluster.yaml
-	cd k && env KUBECONFIG=$$HOME/.kube/config-in-cluster $(MAKE) update env=$(env)
+	if env KUBECONFIG=$$HOME/.kube/config-in-cluster kubectl apply -f e/$(env)-cluster.yaml; then cd k && env KUBECONFIG=$$HOME/.kube/config-in-cluster $(MAKE) update env=$(env); fi
 
 dev:
 	cp /home/ubuntu/.kube/config /home/ubuntu/.kube/config.argocd
