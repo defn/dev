@@ -4,8 +4,6 @@ global:
   #secret_provider: earthly-secret-provider
   cache_size_pct: 50
   local_registry_host: "tcp://127.0.0.1:8371"
-  buildkit_additional_args:
-    - "--dns=1.1.1.1"
   buildkit_additional_config: |
     [registry."cache.defn.run:5000"]
       http = false
