@@ -9,4 +9,4 @@ plugins:
     background: false
     args:
       - -c
-      - "exec 2>/tmp/mirrord.log; set -x; screen -m mirrord exec -f ~/m/mirrord.json --context $CONTEXT -n $NAMESPACE -t pod/$COL-NAME -- bash -i"
+      - "exec 2>/tmp/mirrord.log; set -x; exec screen -m mirrord exec -f ~/m/mirrord.json --context $CONTEXT -n $NAMESPACE -t pod/$COL-NAME -- bash -i"
