@@ -1,4 +1,6 @@
 all:
+	cd ../base && $(MAKE)
+	$(MAKE) buildkite
 	$(MAKE) class
 	$(MAKE) class-latest
 	$(MAKE) class-buildkite-latest
@@ -8,9 +10,6 @@ reset:
 	sudo chown ubuntu:ubuntu /var/run/docker.sock
 	cd ../../cache && docker compose down && $(MAKE) up
 	this-prune
-	@echo --- base
-	cd ../base && $(MAKE)
-	$(MAKE) buildkite
 
 class:
 	@echo --- earthly 
