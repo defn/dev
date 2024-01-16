@@ -27,17 +27,17 @@
       },
       "locked": {
         "dir": "m/pkg/argoworkflows",
-        "lastModified": 1704951606,
-        "narHash": "sha256-K/ZKhUeG14bBLypxxwuV7HC2mk8u+rhgc4+nZj7hL5k=",
+        "lastModified": 1705433931,
+        "narHash": "sha256-spHLMWGBtaEebOfSpsYCSDBK5qLg4d9CtMIh8uhutCI=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "8a0fd7fdcdfe0b0bcba6c48804e19bf9978121b9",
+        "rev": "db00872f4cc04845b2feb59821d953d90ecfa068",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/argoworkflows",
         "owner": "defn",
-        "ref": "pkg-argoworkflows-3.5.3-1",
+        "ref": "pkg-argoworkflows-3.5.4-1",
         "repo": "dev",
         "type": "github"
       }
@@ -426,17 +426,17 @@
       },
       "locked": {
         "dir": "m/pkg/hubble",
-        "lastModified": 1703442740,
-        "narHash": "sha256-NjxL6K67J/a2oZYsVscRIalH3EVF9zq1UxxDNV1L1xU=",
+        "lastModified": 1705433980,
+        "narHash": "sha256-mihmULVMNgVwjYhqjzpmIj3B1LlSF5dm9xS5OWSfWPQ=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "e0eeff90ee0ce76ad738e810b8beaa459eff1f91",
+        "rev": "93269ae83a3e4f03d972d059ff9d47c27f6a6c22",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/hubble",
         "owner": "defn",
-        "ref": "pkg-hubble-0.12.3-4",
+        "ref": "pkg-hubble-0.13.0-1",
         "repo": "dev",
         "type": "github"
       }
