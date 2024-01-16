@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# bump: 1
+# bump: 2
 
 function main {
 	local cue="${shome}/${in[cue]}"
