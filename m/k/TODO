@@ -3,3 +3,4 @@ argocd: add repository and clusters as secrets in cue
 oidc: put oidc well known endpoint in terraformed s3 bucket
 tailscale funnel: stop using it
 tailsale serve: use it to serve docker-compose services with TLS
+packages: apt install isollinux xorriso
