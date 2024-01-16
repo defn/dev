@@ -1,0 +1,2 @@
+coredns: forward ts.net to 100.100.100.100, then restart coredn
+argocd: add repository and clusters as secrets in cue
