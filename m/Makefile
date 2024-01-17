@@ -3,16 +3,11 @@ timeout ?= 5
 env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
 domain ?= defn.run
 
-build:
-	../bin/b pass build //cmd/cli:cli
-	cp -f bazel-bin/cmd/cli/cli_/cli /tmp/cli
-
 all:
-	$(MAKE) update ci
-	$(MAKE) build update upgrade regen
-	$(MAKE) build update ci
-	cd c && $(MAKE) all
-	b pass build //...
+	$(MAKE) build update upgrade regen build
+
+build:
+	b build
 
 image:
 	cp -f bazel-bin/cmd/cli/cli_/cli cli.bin
@@ -63,17 +58,19 @@ cdktf:
 	$(MAKE) regen
 
 upgrade:
+	rm -rf node_modules
+	go get $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1')
+	go mod tidy
 	npm install
 	npm upgrade
 	npm outdated
-	go get -u  ./...
-	go mod tidy
 
 update:
 	cd tf && source ./.envrc && cd stacks && runmany 'cd $$1 && tf upgrade && tf locks && tf plan' */
 	$(MAKE) bazel-ignore
 	$(MAKE) cdktf
 	$(MAKE) build
+	#cd tf && env SYNTH_HCL_OUTPUT=true cli infra && terraform fmt cdktf.out/stacks/*
 	cd tf && cli infra
 
 regen:
