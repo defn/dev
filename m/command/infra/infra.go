@@ -15,13 +15,14 @@ import (
 	"github.com/aws/jsii-runtime-go"
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 
+	aws "github.com/cdktf/cdktf-provider-aws-go/aws/v17/provider"
+
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v17/dataawsssoadmininstances"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v17/identitystoregroup"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v17/identitystoregroupmembership"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v17/identitystoreuser"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v17/organizationsaccount"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v17/organizationsorganization"
-	aws "github.com/cdktf/cdktf-provider-aws-go/aws/v17/provider"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v17/ssoadminaccountassignment"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v17/ssoadminmanagedpolicyattachment"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v17/ssoadminpermissionset"
@@ -75,53 +76,6 @@ type AwsProps struct {
 	Kubernetes map[string]KubernetesCluster `json:"kubernetes"`
 }
 
-// infraCmd represents the infra command
-var infraCmd = &cobra.Command{
-	Use:   "infra",
-	Short: "Generates Terraform configs from CUE",
-	Long:  `Generates Terraform configs from CUE.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		aws_props := LoadUserAwsProps()
-
-		fmt.Printf("%v\n", aws_props)
-
-		app := cdktf.NewApp(nil)
-
-		app.Node().SetContext(js("excludeStackIdFromLogicalIds"), "true")
-		app.Node().SetContext(js("allowSepCharsInLogicalIds"), "true")
-
-		for _, org := range aws_props.Organization {
-			aws_org_stack := AwsOrganizationStack(app, &org)
-
-			cdktf.NewS3Backend(aws_org_stack, &cdktf.S3BackendConfig{
-				Bucket:        js("dfn-defn-terraform-state"),
-				Key:           js("stacks/" + org.Name + "/terraform.tfstate"),
-				Encrypt:       jstrue(),
-				Region:        js("us-east-1"),
-				Profile:       js("defn-org-sso"),
-				DynamodbTable: js("dfn-defn-terraform-state-lock"),
-			})
-		}
-
-		// Emit cdk.tf.json
-		app.Synth()
-	},
-}
-
-func init() {
-	root.RootCmd.AddCommand(infraCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// infraCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// infraCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-}
-
 // alias
 func js(s string) *string {
 	return jsii.String(s)
@@ -140,6 +94,50 @@ func jsf(s string, a ...any) *string {
 //lint:ignore U1000 utility
 func jstrue() *bool {
 	return jsii.Bool(true)
+}
+
+// infraCmd represents the infra command
+var infraCmd = &cobra.Command{
+	Use:   "infra",
+	Short: "Generates Terraform configs from CUE",
+	Long:  `Generates Terraform configs from CUE.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		aws_props := LoadUserAwsProps()
+
+		fmt.Printf("%v\n", aws_props)
+
+		app := cdktf.NewApp(&cdktf.AppConfig{
+		})
+
+		for _, org := range aws_props.Organization {
+			aws_org_stack := AwsOrganizationStack(app, &org)
+
+			cdktf.NewS3Backend(aws_org_stack, &cdktf.S3BackendConfig{
+				Bucket:        js("dfn-defn-terraform-state"),
+				Key:           js("stacks/" + org.Name + "/terraform.tfstate"),
+				Encrypt:       jstrue(),
+				Region:        js("us-east-1"),
+				Profile:       js("defn-org-sso"),
+				DynamodbTable: js("dfn-defn-terraform-state-lock"),
+			})
+		}
+
+		app.Synth()
+	},
+}
+
+func init() {
+	root.RootCmd.AddCommand(infraCmd)
+
+	// Here you will define your flags and configuration settings.
+
+	// Cobra supports Persistent Flags which will work for this command
+	// and all subcommands, e.g.:
+	// infraCmd.PersistentFlags().String("foo", "", "A help for foo")
+
+	// Cobra supports local flags which will only run when this command
+	// is called directly, e.g.:
+	// infraCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
 func AwsOrganizationStack(scope constructs.Construct, org *AwsOrganization) cdktf.TerraformStack {

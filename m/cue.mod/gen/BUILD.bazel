@@ -34,10 +34,10 @@ genrule(
     cmd = "$(location make_k8s_cue_script) config=$(location config) jq=$(location //pkg/az:flake_jq) cue=$(location //pkg/cue:flake_cue) go=$(location //pkg/godev:flake_go) $@",
     tools = [
         "make_k8s_cue_script",
+        "//b/lib:lib_sh",
         "//pkg/az:flake_jq",
         "//pkg/cue:flake_cue",
         "//pkg/godev:flake_go",
-        "//b/lib:lib_sh",
     ],
 )
 

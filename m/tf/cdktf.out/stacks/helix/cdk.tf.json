@@ -1,9 +1,9 @@
-{
+t di{
   "//": {
     "metadata": {
       "backend": "s3",
       "stackName": "helix",
-      "version": "0.19.2"
+      "version": "0.20.1"
     },
     "outputs": {
     }
