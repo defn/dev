@@ -1,0 +1,247 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "s3",
+      "stackName": "helix",
+      "version": "0.20.1"
+    },
+    "outputs": {
+    }
+  },
+  "data": {
+    "aws_ssoadmin_instances": {
+      "sso_instance": {
+        "//": {
+          "metadata": {
+            "path": "helix/sso_instance",
+            "uniqueId": "sso_instance"
+          }
+        }
+      }
+    }
+  },
+  "resource": {
+    "aws_identitystore_group": {
+      "administrators_sso_group": {
+        "//": {
+          "metadata": {
+            "path": "helix/administrators_sso_group",
+            "uniqueId": "administrators_sso_group"
+          }
+        }
+      }
+    },
+    "aws_organizations_account": {
+      "dev": {
+        "//": {
+          "metadata": {
+            "path": "helix/dev",
+            "uniqueId": "dev"
+          }
+        }
+      },
+      "dmz": {
+        "//": {
+          "metadata": {
+            "path": "helix/dmz",
+            "uniqueId": "dmz"
+          }
+        }
+      },
+      "helix": {
+        "//": {
+          "metadata": {
+            "path": "helix/helix",
+            "uniqueId": "helix"
+          }
+        }
+      },
+      "hub": {
+        "//": {
+          "metadata": {
+            "path": "helix/hub",
+            "uniqueId": "hub"
+          }
+        }
+      },
+      "lib": {
+        "//": {
+          "metadata": {
+            "path": "helix/lib",
+            "uniqueId": "lib"
+          }
+        }
+      },
+      "log": {
+        "//": {
+          "metadata": {
+            "path": "helix/log",
+            "uniqueId": "log"
+          }
+        }
+      },
+      "net": {
+        "//": {
+          "metadata": {
+            "path": "helix/net",
+            "uniqueId": "net"
+          }
+        }
+      },
+      "ops": {
+        "//": {
+          "metadata": {
+            "path": "helix/ops",
+            "uniqueId": "ops"
+          }
+        }
+      },
+      "pub": {
+        "//": {
+          "metadata": {
+            "path": "helix/pub",
+            "uniqueId": "pub"
+          }
+        }
+      },
+      "sec": {
+        "//": {
+          "metadata": {
+            "path": "helix/sec",
+            "uniqueId": "sec"
+          }
+        }
+      }
+    },
+    "aws_organizations_organization": {
+      "organization": {
+        "//": {
+          "metadata": {
+            "path": "helix/organization",
+            "uniqueId": "organization"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_account_assignment": {
+      "dev_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "helix/dev_admin_sso_account_assignment",
+            "uniqueId": "dev_admin_sso_account_assignment"
+          }
+        }
+      },
+      "dmz_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "helix/dmz_admin_sso_account_assignment",
+            "uniqueId": "dmz_admin_sso_account_assignment"
+          }
+        }
+      },
+      "helix_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "helix/helix_admin_sso_account_assignment",
+            "uniqueId": "helix_admin_sso_account_assignment"
+          }
+        }
+      },
+      "hub_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "helix/hub_admin_sso_account_assignment",
+            "uniqueId": "hub_admin_sso_account_assignment"
+          }
+        }
+      },
+      "lib_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "helix/lib_admin_sso_account_assignment",
+            "uniqueId": "lib_admin_sso_account_assignment"
+          }
+        }
+      },
+      "log_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "helix/log_admin_sso_account_assignment",
+            "uniqueId": "log_admin_sso_account_assignment"
+          }
+        }
+      },
+      "net_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "helix/net_admin_sso_account_assignment",
+            "uniqueId": "net_admin_sso_account_assignment"
+          }
+        }
+      },
+      "ops_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "helix/ops_admin_sso_account_assignment",
+            "uniqueId": "ops_admin_sso_account_assignment"
+          }
+        }
+      },
+      "pub_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "helix/pub_admin_sso_account_assignment",
+            "uniqueId": "pub_admin_sso_account_assignment"
+          }
+        }
+      },
+      "sec_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "helix/sec_admin_sso_account_assignment",
+            "uniqueId": "sec_admin_sso_account_assignment"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_managed_policy_attachment": {
+      "admin_sso_managed_policy_attachment": {
+        "//": {
+          "metadata": {
+            "path": "helix/admin_sso_managed_policy_attachment",
+            "uniqueId": "admin_sso_managed_policy_attachment"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_permission_set": {
+      "admin_sso_permission_set": {
+        "//": {
+          "metadata": {
+            "path": "helix/admin_sso_permission_set",
+            "uniqueId": "admin_sso_permission_set"
+          }
+        }
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "s3": {
+        "bucket": "dfn-defn-terraform-state",
+        "dynamodb_table": "dfn-defn-terraform-state-lock",
+        "encrypt": true,
+        "key": "stacks/helix/terraform.tfstate",
+        "profile": "defn-org-sso",
+        "region": "us-east-1"
+      }
+    },
+    "required_providers": {
+      "aws": {
+        "source": "aws",
+        "version": "5.21.0"
+      }
+    }
+  }
+}
