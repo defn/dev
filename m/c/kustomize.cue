@@ -1060,7 +1060,7 @@ kustomize: "tetragon": #KustomizeHelm & {
 		release:   "tetragon"
 		name:      "tetragon"
 		namespace: "kube-system"
-		version:   "1.0.1"
+		version:   "1.0.2"
 		repo:      "https://helm.cilium.io"
 		values: {
 		}
@@ -2015,7 +2015,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.40.6"
+		version:   "0.40.7"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [
@@ -2958,7 +2958,7 @@ kustomize: "reloader": #KustomizeHelm & {
 		release:   "reloader"
 		name:      "reloader"
 		namespace: "reloader"
-		version:   "1.0.62"
+		version:   "1.0.63"
 		repo:      "https://stakater.github.io/stakater-charts"
 		values: {
 		}
