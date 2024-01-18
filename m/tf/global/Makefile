@@ -4,3 +4,6 @@ config:
 
 init:
 	b exec defn-org tf init
+
+plan:
+	time env AWS_REGION=us-east-1 b exec defn-org tf plan
