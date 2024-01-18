@@ -1,7 +1,7 @@
 module "s3-fogg-security" {
   source     = "../mod/terraform-aws-s3-bucket"
   context    = module.this.context
-  attributes = [ "fogg-security" ]
+  attributes = ["fogg-security"]
 
   providers = {
     aws = aws.fogg-security

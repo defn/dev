@@ -1,7 +1,7 @@
 module "s3-curl-lib" {
   source     = "../mod/terraform-aws-s3-bucket"
   context    = module.this.context
-  attributes = [ "curl-lib" ]
+  attributes = ["curl-lib"]
 
   providers = {
     aws = aws.curl-lib

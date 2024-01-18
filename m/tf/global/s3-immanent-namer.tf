@@ -1,7 +1,7 @@
 module "s3-immanent-namer" {
   source     = "../mod/terraform-aws-s3-bucket"
   context    = module.this.context
-  attributes = [ "immanent-namer" ]
+  attributes = ["immanent-namer"]
 
   providers = {
     aws = aws.immanent-namer

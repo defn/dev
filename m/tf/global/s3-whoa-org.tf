@@ -1,7 +1,7 @@
 module "s3-whoa-org" {
   source     = "../mod/terraform-aws-s3-bucket"
   context    = module.this.context
-  attributes = [ "whoa-org" ]
+  attributes = ["whoa-org"]
 
   providers = {
     aws = aws.whoa-org

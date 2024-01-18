@@ -1,7 +1,7 @@
 module "s3-curl-org" {
   source     = "../mod/terraform-aws-s3-bucket"
   context    = module.this.context
-  attributes = [ "curl-org" ]
+  attributes = ["curl-org"]
 
   providers = {
     aws = aws.curl-org

@@ -1,7 +1,7 @@
 module "s3-immanent-chanter" {
   source     = "../mod/terraform-aws-s3-bucket"
   context    = module.this.context
-  attributes = [ "immanent-chanter" ]
+  attributes = ["immanent-chanter"]
 
   providers = {
     aws = aws.immanent-chanter

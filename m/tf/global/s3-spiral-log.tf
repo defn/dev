@@ -1,7 +1,7 @@
 module "s3-spiral-log" {
   source     = "../mod/terraform-aws-s3-bucket"
   context    = module.this.context
-  attributes = [ "spiral-log" ]
+  attributes = ["spiral-log"]
 
   providers = {
     aws = aws.spiral-log
