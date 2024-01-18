@@ -1,7 +1,7 @@
 module "s3-spiral-net" {
   source     = "../mod/terraform-aws-s3-bucket"
   context    = module.this.context
-  attributes = [ "spiral-net" ]
+  attributes = ["spiral-net"]
 
   providers = {
     aws = aws.spiral-net

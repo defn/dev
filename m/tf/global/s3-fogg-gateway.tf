@@ -1,7 +1,7 @@
 module "s3-fogg-gateway" {
   source     = "../mod/terraform-aws-s3-bucket"
   context    = module.this.context
-  attributes = [ "fogg-gateway" ]
+  attributes = ["fogg-gateway"]
 
   providers = {
     aws = aws.fogg-gateway

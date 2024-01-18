@@ -1,7 +1,7 @@
 module "s3-chamber-i" {
   source     = "../mod/terraform-aws-s3-bucket"
   context    = module.this.context
-  attributes = [ "chamber-i" ]
+  attributes = ["chamber-i"]
 
   providers = {
     aws = aws.chamber-i

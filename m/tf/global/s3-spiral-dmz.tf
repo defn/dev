@@ -1,7 +1,7 @@
 module "s3-spiral-dmz" {
   source     = "../mod/terraform-aws-s3-bucket"
   context    = module.this.context
-  attributes = [ "spiral-dmz" ]
+  attributes = ["spiral-dmz"]
 
   providers = {
     aws = aws.spiral-dmz

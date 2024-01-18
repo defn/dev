@@ -1,7 +1,7 @@
 module "s3-gyre-org" {
   source     = "../mod/terraform-aws-s3-bucket"
   context    = module.this.context
-  attributes = [ "gyre-org" ]
+  attributes = ["gyre-org"]
 
   providers = {
     aws = aws.gyre-org

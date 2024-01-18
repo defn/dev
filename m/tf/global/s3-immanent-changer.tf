@@ -1,7 +1,7 @@
 module "s3-immanent-changer" {
   source     = "../mod/terraform-aws-s3-bucket"
   context    = module.this.context
-  attributes = [ "immanent-changer" ]
+  attributes = ["immanent-changer"]
 
   providers = {
     aws = aws.immanent-changer

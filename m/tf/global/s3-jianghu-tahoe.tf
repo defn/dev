@@ -1,7 +1,7 @@
 module "s3-jianghu-tahoe" {
   source     = "../mod/terraform-aws-s3-bucket"
   context    = module.this.context
-  attributes = [ "jianghu-tahoe" ]
+  attributes = ["jianghu-tahoe"]
 
   providers = {
     aws = aws.jianghu-tahoe

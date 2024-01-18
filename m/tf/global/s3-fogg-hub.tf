@@ -1,7 +1,7 @@
 module "s3-fogg-hub" {
   source     = "../mod/terraform-aws-s3-bucket"
   context    = module.this.context
-  attributes = [ "fogg-hub" ]
+  attributes = ["fogg-hub"]
 
   providers = {
     aws = aws.fogg-hub

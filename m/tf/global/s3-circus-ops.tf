@@ -1,7 +1,7 @@
 module "s3-circus-ops" {
   source     = "../mod/terraform-aws-s3-bucket"
   context    = module.this.context
-  attributes = [ "circus-ops" ]
+  attributes = ["circus-ops"]
 
   providers = {
     aws = aws.circus-ops

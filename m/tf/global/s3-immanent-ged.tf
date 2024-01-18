@@ -1,7 +1,7 @@
 module "s3-immanent-ged" {
   source     = "../mod/terraform-aws-s3-bucket"
   context    = module.this.context
-  attributes = [ "immanent-ged" ]
+  attributes = ["immanent-ged"]
 
   providers = {
     aws = aws.immanent-ged
