@@ -468,17 +468,17 @@
       },
       "locked": {
         "dir": "m/pkg/k9s",
-        "lastModified": 1705108096,
-        "narHash": "sha256-UWGLKRRPhNvgRu+FORlOKUlaGdKqXlfsVkJ3/EUDfng=",
+        "lastModified": 1705617855,
+        "narHash": "sha256-X4GduKKPhkxsF1yH8/65CM85nRPK2vo3lx5pzJTbEJk=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "3cf3bc662fc065c7e6cb3bc2c4dde5cb5008eff1",
+        "rev": "83cc4dc69fe32be845fa07068dee31a1b4c03eb0",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/k9s",
         "owner": "defn",
-        "ref": "pkg-k9s-0.31.5-1",
+        "ref": "pkg-k9s-0.31.7-1",
         "repo": "dev",
         "type": "github"
       }
@@ -594,17 +594,17 @@
       },
       "locked": {
         "dir": "m/pkg/mirrord",
-        "lastModified": 1705002194,
-        "narHash": "sha256-f4PsnkptUAg1Em38DWWVDI2KjGnKD5rlQVI5cIuQGvs=",
+        "lastModified": 1705617873,
+        "narHash": "sha256-ImyorOyF9VhzuT5EMnl7hmS9jQb9YnpJBVWRrlJY+7Q=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "561ac98c3e721a4d9a04d9ca2276333283a32e72",
+        "rev": "0af54e5408abae300ca67672bcb089953b50986a",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/mirrord",
         "owner": "defn",
-        "ref": "pkg-mirrord-3.83.0-1",
+        "ref": "pkg-mirrord-3.84.0-1",
         "repo": "dev",
         "type": "github"
       }
