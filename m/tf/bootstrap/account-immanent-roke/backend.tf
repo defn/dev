@@ -7,7 +7,6 @@ terraform {
     key            = "immanent-roke/bootstrap/account-immanent-roke/terraform.tfstate"
     dynamodb_table = "dfn-defn-terraform-state-lock"
     profile        = "defn-org-sso"
-    role_arn       = ""
     encrypt        = "true"
   }
 }

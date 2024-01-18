@@ -7,7 +7,6 @@ terraform {
     key            = "immanent-changer/bootstrap/account-immanent-changer/terraform.tfstate"
     dynamodb_table = "dfn-defn-terraform-state-lock"
     profile        = "defn-org-sso"
-    role_arn       = ""
     encrypt        = "true"
   }
 }

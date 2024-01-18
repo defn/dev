@@ -7,7 +7,6 @@ terraform {
     key            = "whoa-secrets/bootstrap/account-whoa-secrets/terraform.tfstate"
     dynamodb_table = "dfn-defn-terraform-state-lock"
     profile        = "defn-org-sso"
-    role_arn       = ""
     encrypt        = "true"
   }
 }

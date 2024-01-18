@@ -7,7 +7,6 @@ terraform {
     key            = "chamber-2/bootstrap/account-chamber-2/terraform.tfstate"
     dynamodb_table = "dfn-defn-terraform-state-lock"
     profile        = "defn-org-sso"
-    role_arn       = ""
     encrypt        = "true"
   }
 }

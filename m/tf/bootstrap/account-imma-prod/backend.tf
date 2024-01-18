@@ -7,7 +7,6 @@ terraform {
     key            = "imma-prod/bootstrap/account-imma-prod/terraform.tfstate"
     dynamodb_table = "dfn-defn-terraform-state-lock"
     profile        = "defn-org-sso"
-    role_arn       = ""
     encrypt        = "true"
   }
 }
