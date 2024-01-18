@@ -11,7 +11,7 @@ require (
 	github.com/charmbracelet/bubbletea v0.24.2
 	github.com/charmbracelet/lipgloss v0.9.1
 	github.com/gin-gonic/gin v1.9.1
-	github.com/hashicorp/terraform-cdk-go/cdktf v0.20.1
+	github.com/hashicorp/terraform-cdk-go/cdktf v0.21.0-pre.21
 	github.com/spf13/cobra v1.8.0
 	github.com/spf13/viper v1.18.2
 	google.golang.org/protobuf v1.31.0

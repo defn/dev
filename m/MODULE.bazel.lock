@@ -1092,9 +1092,9 @@
       "general": {
         "bzlTransitiveDigest": "zP01muRk4s4xWGK3gNPXOyDMQkOPsIhu99akeKWFFQ0=",
         "accumulatedFileDigests": {
-          "@@//:go.mod": "56d54ed0500f778475d7090d01ba2c1fa7a17d9346d1a11fe7f847626007ba29",
+          "@@//:go.mod": "5c7fedbef5029ef89ed0c623c49ac707e2bfeca0b42f367a0a5f46db66f1f03e",
           "@@rules_go~0.44.0//:go.mod": "15454724af1504c4ce1782c2a7f423d596a1d8490125eb7c5bd9c95fea1991f0",
-          "@@//:go.sum": "a5cc66410a67dae8f674add3572dc5cdb836603f35f1da2971de9d1ece90d285",
+          "@@//:go.sum": "007ce87adc8384aa4a2a06c03879a193b995ff48ccb6ca0d59c40a958e54cbfc",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@rules_go~0.44.0//:go.sum": "b5938730bf7d3581421928b0385d99648dd9634becead96fca0594ac491b2f49",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d"
@@ -2428,9 +2428,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:8AUFajWAaSJCoPeD8/5cvx7von66x90/sVQYkjmSOB4=",
+              "sum": "h1:DskL0+X59jbE0QLYpK0wpbeJp8Hwv8UWvm/j+Uz8y+0=",
               "replace": "",
-              "version": "v0.20.1"
+              "version": "v0.21.0-pre.21"
             }
           },
           "org_golang_x_arch": {
