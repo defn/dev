@@ -7,7 +7,6 @@ terraform {
     key            = "fogg-security/bootstrap/account-fogg-security/terraform.tfstate"
     dynamodb_table = "dfn-defn-terraform-state-lock"
     profile        = "defn-org-sso"
-    role_arn       = ""
     encrypt        = "true"
   }
 }

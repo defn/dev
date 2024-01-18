@@ -7,7 +7,6 @@ terraform {
     key            = "helix-dmz/bootstrap/account-helix-dmz/terraform.tfstate"
     dynamodb_table = "dfn-defn-terraform-state-lock"
     profile        = "defn-org-sso"
-    role_arn       = ""
     encrypt        = "true"
   }
 }

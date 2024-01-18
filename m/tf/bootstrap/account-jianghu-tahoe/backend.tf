@@ -7,7 +7,6 @@ terraform {
     key            = "jianghu-tahoe/bootstrap/account-jianghu-tahoe/terraform.tfstate"
     dynamodb_table = "dfn-defn-terraform-state-lock"
     profile        = "defn-org-sso"
-    role_arn       = ""
     encrypt        = "true"
   }
 }

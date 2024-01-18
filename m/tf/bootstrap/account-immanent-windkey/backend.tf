@@ -7,7 +7,6 @@ terraform {
     key            = "immanent-windkey/bootstrap/account-immanent-windkey/terraform.tfstate"
     dynamodb_table = "dfn-defn-terraform-state-lock"
     profile        = "defn-org-sso"
-    role_arn       = ""
     encrypt        = "true"
   }
 }
