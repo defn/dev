@@ -1,10 +1,10 @@
 {
   inputs = {
-    terraform.url = github:defn/dev/pkg-terraform-1.6.6-4?dir=m/pkg/terraform;
+    terraform.url = github:defn/dev/pkg-terraform-1.7.0-1?dir=m/pkg/terraform;
     terraformdocs.url = github:defn/dev/pkg-terraformdocs-0.17.0-3?dir=m/pkg/terraformdocs;
     packer.url = github:defn/dev/pkg-packer-1.10.0-4?dir=m/pkg/packer;
     step.url = github:defn/dev/pkg-step-0.25.1-4?dir=m/pkg/step;
-    awscli.url = github:defn/dev/pkg-awscli-2.15.10-1?dir=m/pkg/awscli;
+    awscli.url = github:defn/dev/pkg-awscli-2.15.11-1?dir=m/pkg/awscli;
     chamber.url = github:defn/dev/pkg-chamber-2.13.6-4?dir=m/pkg/chamber;
   };
 
