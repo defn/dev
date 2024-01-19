@@ -1,9 +1,9 @@
 terraform-aws-dynamic-subnets:2.4.1
 terraform-aws-eks-cluster:3.0.0
 terraform-aws-eks-workers:0.18.4
-terraform-aws-vpc:2.1.0
+terraform-aws-vpc:2.1.1
 terraform-null-label:0.25.0
-terraform-aws-ec2-autoscale-group:0.35.1
+terraform-aws-ec2-autoscale-group:0.39.0
 terraform-aws-iam-role:0.19.0
-terraform-aws-tfstate-backend:1.1.1
-terraform-aws-s3-bucket:4.0.0
+terraform-aws-tfstate-backend:1.4.0
+terraform-aws-s3-bucket:4.0.1
