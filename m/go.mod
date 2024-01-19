@@ -8,10 +8,10 @@ require (
 	cuelang.org/go v0.7.0
 	github.com/aws/constructs-go/constructs/v10 v10.3.0
 	github.com/aws/jsii-runtime-go v1.94.0
+	github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.2.0
 	github.com/charmbracelet/bubbles v0.16.1
 	github.com/charmbracelet/bubbletea v0.24.2
 	github.com/charmbracelet/lipgloss v0.9.1
-	github.com/defn/cdktf-provider-aws-go v0.0.1
 	github.com/gin-gonic/gin v1.9.1
 	github.com/hashicorp/terraform-cdk-go/cdktf v0.20.1
 	github.com/spf13/cobra v1.8.0
