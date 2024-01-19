@@ -193,6 +193,10 @@ function main {
 				"")
 					rule="/..."
 					;;
+				//*)
+					rule="$1"
+					shift
+					;;
 				/*)
 					rule="$("$0" | fzf --query="${1#/}" --select-1)"
 					;;
@@ -298,6 +302,10 @@ function main {
 				case "${1-}" in
 				"")
 					rule="$("$0" | grep _ | fzf --select-1)"
+					;;
+				//*)
+					rule="$1"
+					shift
 					;;
 				/*)
 					rule="$("$0" | fzf --query="${1#/}" --select-1)"

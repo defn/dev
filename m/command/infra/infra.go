@@ -28,6 +28,8 @@ import (
 	"github.com/defn/cdktf-provider-aws-go/gen/aws/ssoadminpermissionset"
 
 	root "github.com/defn/dev/m/command/root"
+
+	aws_eks_cluster "github.com/defn/dev/m/tf/gen/terraform_aws_eks_cluster"
 )
 
 //go:embed infra.cue
@@ -270,6 +272,13 @@ func AwsOrganizationStack(scope constructs.Construct, org *AwsOrganization) cdkt
 				TargetType:       js("AWS_ACCOUNT"),
 			})
 	}
+
+	aws_eks_cluster.NewTerraformAwsEksCluster(stack,
+		jsf("cool"),
+		&aws_eks_cluster.TerraformAwsEksClusterConfig{
+			SubnetIds: &[]*string{js("meh")},
+			VpcId: js("meh"),
+		})
 
 	return stack
 }

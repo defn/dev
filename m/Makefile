@@ -55,7 +55,7 @@ dev_inner:
 
 cdktf:
 	npm install
-	npx cdktf get
+	cd tf && npx cdktf get
 	$(MAKE) regen
 
 upgrade:
@@ -82,11 +82,14 @@ watch:
 
 bazel-ignore:
 	echo > .bazelignore
-	echo tf >> .bazelignore
+	echo tf/mod >> .bazelignore
+	echo tf/bootstrap>> .bazelignore
+	echo tf/global >> .bazelignore
+	echo tf/stacks >> .bazelignore
 	echo node_modules >> .bazelignore
+	echo cutout >> .bazelignore
 	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1.direnv}' | sort >> .bazelignore
 	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1result}' | sort >> .bazelignore
-	echo cutout >> .bazelignore
 	git ls-files | grep '{{cookiecutter' | perl -pe 's{\}\}/.*}{\}\}}' | sort -u >> .bazelignore
 	git ls-files | grep '{{cookiecutter' | perl -pe 's{/\{\{.*}{}' | sort -u >> .bazelignore
 

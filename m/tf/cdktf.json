@@ -1,5 +1,48 @@
 {
   "language": "go",
   "app": "cli infra",
-  "projectId": "cff35a27-fbee-4c22-8a14-35f6c6d14031"
+  "codeMakerOutput": "gen",
+  "projectId": "cff35a27-fbee-4c22-8a14-35f6c6d14031",
+  "terraformModules": [
+    {
+      "name": "terraform_aws_defn_account",
+      "source": "./mod/terraform-aws-defn-account"
+    },
+    {
+      "name": "terraform_aws_dynamic_subnets",
+      "source": "./mod/terraform-aws-dynamic-subnets"
+    },
+    {
+      "name": "terraform_aws_ec2_autoscale_group",
+      "source": "./mod/terraform-aws-ec2-autoscale-group"
+    },
+    {
+      "name": "terraform_aws_eks_cluster",
+      "source": "./mod/terraform-aws-eks-cluster"
+    },
+    {
+      "name": "terraform_aws_eks_workers",
+      "source": "./mod/terraform-aws-eks-workers"
+    },
+    {
+      "name": "terraform_aws_iam_role",
+      "source": "./mod/terraform-aws-iam-role"
+    },
+    {
+      "name": "terraform_aws_s3_bucket",
+      "source": "./mod/terraform-aws-s3-bucket"
+    },
+    {
+      "name": "terraform_aws_tfstate_backend",
+      "source": "./mod/terraform-aws-tfstate-backend"
+    },
+    {
+      "name": "terraform_aws_vpc",
+      "source": "./mod/terraform-aws-vpc"
+    },
+    {
+      "name": "terraform_null_label",
+      "source": "./mod/terraform-null-label"
+    }
+  ]
 }
