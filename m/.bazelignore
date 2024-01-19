@@ -2,7 +2,7 @@
 tf/mod
 tf/bootstrap
 tf/global
-tf/stacks
+tf/cdktf.out
 node_modules
 cutout
 pkg/acme/.direnv
