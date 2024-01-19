@@ -4,6 +4,7 @@ env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
 domain ?= defn.run
 
 all:
+	$(MAKE) bazel-ignore
 	$(MAKE) build update upgrade regen build
 
 build:
@@ -66,12 +67,10 @@ upgrade:
 	npm outdated
 
 update:
-	cd tf && source ./.envrc && cd stacks && runmany 'cd $$1 && tf upgrade && tf locks && tf plan' */
-	$(MAKE) bazel-ignore
+# cd tf && env SYNTH_HCL_OUTPUT=true cli infra && terraform fmt cdktf.out/stacks/*
 	$(MAKE) cdktf
-	$(MAKE) build
-	#cd tf && env SYNTH_HCL_OUTPUT=true cli infra && terraform fmt cdktf.out/stacks/*
 	cd tf && cli infra
+	cd tf && cd stacks && runmany 'cd $$1 && tf upgrade && tf locks' */
 
 regen:
 	@mark gazelle
