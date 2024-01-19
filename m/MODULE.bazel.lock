@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 3,
-  "moduleFileHash": "07fd35ab9476a9691524b20ec17f40d4c076ce9437d613bd4461ef5f88df65cf",
+  "moduleFileHash": "0b0318db6b69f7d9521cd1eef9bcc02470cf9bebbc4b0ae27a02598cbb779773",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -72,7 +72,7 @@
             "column": 24
           },
           "imports": {
-            "com_github_defn_cdktf_provider_aws_go": "com_github_defn_cdktf_provider_aws_go",
+            "com_github_cdktf_cdktf_provider_aws_go_aws_v19": "com_github_cdktf_cdktf_provider_aws_go_aws_v19",
             "com_github_aws_constructs_go_constructs_v10": "com_github_aws_constructs_go_constructs_v10",
             "com_github_aws_jsii_runtime_go": "com_github_aws_jsii_runtime_go",
             "com_github_charmbracelet_bubbles": "com_github_charmbracelet_bubbles",
@@ -1092,9 +1092,9 @@
       "general": {
         "bzlTransitiveDigest": "zP01muRk4s4xWGK3gNPXOyDMQkOPsIhu99akeKWFFQ0=",
         "accumulatedFileDigests": {
-          "@@//:go.mod": "57f51b454335be7ce14537cc3523042c25ae63fcdeae8b4cd20ef0819e384be0",
+          "@@//:go.mod": "61503c4c7f57f09548571ed959774a9b0485bb4ae5d5ca5fe66420e430b8c8e6",
           "@@rules_go~0.44.0//:go.mod": "15454724af1504c4ce1782c2a7f423d596a1d8490125eb7c5bd9c95fea1991f0",
-          "@@//:go.sum": "f05667749f04eb70607e64e88a7b4e2681d819b48830033e84a78f53522f1c42",
+          "@@//:go.sum": "3d7a059a5290f343b6c1c165876f01bc2019508f78339144ca7fa3be823eb445",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@rules_go~0.44.0//:go.sum": "b5938730bf7d3581421928b0385d99648dd9634becead96fca0594ac491b2f49",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d"
@@ -1373,22 +1373,6 @@
               "version": "v1.7.0-rc.1"
             }
           },
-          "com_github_defn_cdktf_provider_aws_go": {
-            "bzlFile": "@@gazelle~0.35.0//internal:go_repository.bzl",
-            "ruleClassName": "go_repository",
-            "attributes": {
-              "name": "gazelle~0.35.0~go_deps~com_github_defn_cdktf_provider_aws_go",
-              "importpath": "github.com/defn/cdktf-provider-aws-go",
-              "build_directives": [],
-              "build_file_generation": "auto",
-              "build_extra_args": [],
-              "patches": [],
-              "patch_args": [],
-              "sum": "h1:ABS1qq+Osihik8PPqnkoc0tK5iBrukRu5lq4JqBXT1E=",
-              "replace": "",
-              "version": "v0.0.1"
-            }
-          },
           "com_github_chenzhuoyu_iasm": {
             "bzlFile": "@@gazelle~0.35.0//internal:go_repository.bzl",
             "ruleClassName": "go_repository",
@@ -1435,6 +1419,22 @@
               "sum": "h1:LWAJwfNvjQZCFIDKWYQaM62NcYeYViCmWIwmOStowAI=",
               "replace": "",
               "version": "v2.1.1"
+            }
+          },
+          "com_github_cdktf_cdktf_provider_aws_go_aws_v19": {
+            "bzlFile": "@@gazelle~0.35.0//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "name": "gazelle~0.35.0~go_deps~com_github_cdktf_cdktf_provider_aws_go_aws_v19",
+              "importpath": "github.com/cdktf/cdktf-provider-aws-go/aws/v19",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:cY2KkHVnSyWTKAu0EHn69hAPi3xiiWY0o7oy3NHmNDA=",
+              "replace": "",
+              "version": "v19.2.0"
             }
           },
           "com_github_opencontainers_image_spec": {
@@ -2506,10 +2506,10 @@
                 "org_cuelang_go": "cuelang.org/go",
                 "com_github_aws_constructs_go_constructs_v10": "github.com/aws/constructs-go/constructs/v10",
                 "com_github_aws_jsii_runtime_go": "github.com/aws/jsii-runtime-go",
+                "com_github_cdktf_cdktf_provider_aws_go_aws_v19": "github.com/cdktf/cdktf-provider-aws-go/aws/v19",
                 "com_github_charmbracelet_bubbles": "github.com/charmbracelet/bubbles",
                 "com_github_charmbracelet_bubbletea": "github.com/charmbracelet/bubbletea",
                 "com_github_charmbracelet_lipgloss": "github.com/charmbracelet/lipgloss",
-                "com_github_defn_cdktf_provider_aws_go": "github.com/defn/cdktf-provider-aws-go",
                 "com_github_gin_gonic_gin": "github.com/gin-gonic/gin",
                 "com_github_hashicorp_terraform_cdk_go_cdktf": "github.com/hashicorp/terraform-cdk-go/cdktf",
                 "com_github_spf13_cobra": "github.com/spf13/cobra",
@@ -2725,10 +2725,10 @@
             "org_cuelang_go",
             "com_github_aws_constructs_go_constructs_v10",
             "com_github_aws_jsii_runtime_go",
+            "com_github_cdktf_cdktf_provider_aws_go_aws_v19",
             "com_github_charmbracelet_bubbles",
             "com_github_charmbracelet_bubbletea",
             "com_github_charmbracelet_lipgloss",
-            "com_github_defn_cdktf_provider_aws_go",
             "com_github_gin_gonic_gin",
             "com_github_hashicorp_terraform_cdk_go_cdktf",
             "com_github_spf13_cobra",

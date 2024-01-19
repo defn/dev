@@ -4,7 +4,7 @@ build:
 	runmany 'if test -d $$1; then rm -rf $$1/terraform-*; for a in mod/terraform-*; do ln -nfs ../../../../../../$$a $$1/; done; fi' cdktf.out/stacks/*/assets/*/*
 
 upgrade:
-	runmany 'cd $$1 && tf upgrade && tf locks' stacks/*/
+	runmany 'cd $$1 && tf upgrade && tf locks' cdktf.out/stacks/*/
 
 update:
 # sync upstream, reduce surface area of maintenance, keep readme, license for attribution

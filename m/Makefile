@@ -70,7 +70,6 @@ update:
 # cd tf && env SYNTH_HCL_OUTPUT=true cli infra && terraform fmt cdktf.out/stacks/*
 	$(MAKE) cdktf
 	cd tf && $(MAKE) build upgrade
-	cd tf && cd stacks && runmany 'cd $$1 && tf upgrade && tf locks' */
 
 regen:
 	@mark gazelle
