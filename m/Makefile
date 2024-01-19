@@ -69,7 +69,7 @@ upgrade:
 update:
 # cd tf && env SYNTH_HCL_OUTPUT=true cli infra && terraform fmt cdktf.out/stacks/*
 	$(MAKE) cdktf
-	cd tf && cli infra
+	cd tf && $(MAKE) build upgrade
 	cd tf && cd stacks && runmany 'cd $$1 && tf upgrade && tf locks' */
 
 regen:
@@ -85,7 +85,7 @@ bazel-ignore:
 	echo tf/mod >> .bazelignore
 	echo tf/bootstrap>> .bazelignore
 	echo tf/global >> .bazelignore
-	echo tf/stacks >> .bazelignore
+	echo tf/cdktf.out >> .bazelignore
 	echo node_modules >> .bazelignore
 	echo cutout >> .bazelignore
 	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1.direnv}' | sort >> .bazelignore

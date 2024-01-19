@@ -14,7 +14,7 @@ data "aws_iam_policy_document" "resource_full_access" {
 }
 
 module "terraform_role" {
-  source = "./mod/terraform-aws-iam-role"
+  source = "../terraform-aws-iam-role"
 
   context = module.this.context
 
