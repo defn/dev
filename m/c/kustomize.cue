@@ -363,7 +363,7 @@ kustomize: "l5d-control": #KustomizeHelm & {
 	helm: {
 		release: "l5d-control"
 		name:    "linkerd-control-plane"
-		version: "1.16.9"
+		version: "1.16.10"
 		repo:    "https://helm.linkerd.io/stable"
 		values: {
 			heartbeatSchedule: "0 0 * * *"
@@ -391,7 +391,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.30.0"
+		version: "6.31.0"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "info"
@@ -935,7 +935,7 @@ kustomize: "trust-manager": #KustomizeHelm & {
 		release:   "trust-manager"
 		name:      "trust-manager"
 		namespace: "cert-manager"
-		version:   "0.7.0"
+		version:   "0.8.0"
 		repo:      "https://charts.jetstack.io"
 		values: {}
 	}
@@ -1630,7 +1630,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "2.6.0"
+		version:   "2.7.0"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {
@@ -2054,7 +2054,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "4.1.0"
+		version:     "4.1.1"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
