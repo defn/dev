@@ -13,9 +13,6 @@ input: kubernetes: [NAME=string]: infra.#KubernetesCluster & {
 }
 
 input: organization: {
-	defn: {
-		region: "us-east-2"
-	}
 	gyre: {
 		region:   "us-east-2"
 		accounts: ops_accounts
@@ -40,6 +37,9 @@ input: organization: {
 }
 
 #meh: {
+	defn: {
+		region: "us-east-2"
+	}
 	vault: {
 		region: "us-east-2"
 	}
