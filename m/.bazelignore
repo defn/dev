@@ -1,6 +1,10 @@
 
-tf
+tf/mod
+tf/bootstrap
+tf/global
+tf/stacks
 node_modules
+cutout
 pkg/acme/.direnv
 pkg/argocd/.direnv
 pkg/argorollouts/.direnv
@@ -149,7 +153,6 @@ pkg/vcluster/result
 pkg/vhs/result
 pkg/vpn/result
 pkg/zellij/result
-cutout
 cutout/app/{{cookiecutter.path}}
 cutout/command/{{cookiecutter.path}}
 cutout/vcluster/{{cookiecutter.path}}
