@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"crypto/tls"
+	"time"
 
 	"github.com/botanica-consulting/wiredialer"
 )
@@ -32,4 +33,6 @@ func main() {
 	defer resp.Body.Close()
 
 	io.Copy(os.Stdout, resp.Body)
+
+	time.Sleep(2 * time.Second)
 }
