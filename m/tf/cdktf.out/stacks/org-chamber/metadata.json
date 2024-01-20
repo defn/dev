@@ -2,7 +2,7 @@
   "//": {
     "metadata": {
       "backend": "s3",
-      "stackName": "circus",
+      "stackName": "org-chamber",
       "version": "0.20.1"
     },
     "outputs": {
@@ -13,7 +13,7 @@
       "sso_instance": {
         "//": {
           "metadata": {
-            "path": "circus/sso_instance",
+            "path": "org-chamber/sso_instance",
             "uniqueId": "sso_instance"
           }
         }
@@ -25,18 +25,18 @@
       "administrators_sso_group": {
         "//": {
           "metadata": {
-            "path": "circus/administrators_sso_group",
+            "path": "org-chamber/administrators_sso_group",
             "uniqueId": "administrators_sso_group"
           }
         }
       }
     },
     "aws_organizations_account": {
-      "circus": {
+      "chamber": {
         "//": {
           "metadata": {
-            "path": "circus/circus",
-            "uniqueId": "circus"
+            "path": "org-chamber/chamber",
+            "uniqueId": "chamber"
           }
         }
       }
@@ -45,18 +45,18 @@
       "organization": {
         "//": {
           "metadata": {
-            "path": "circus/organization",
+            "path": "org-chamber/organization",
             "uniqueId": "organization"
           }
         }
       }
     },
     "aws_ssoadmin_account_assignment": {
-      "circus_admin_sso_account_assignment": {
+      "chamber_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "circus/circus_admin_sso_account_assignment",
-            "uniqueId": "circus_admin_sso_account_assignment"
+            "path": "org-chamber/chamber_admin_sso_account_assignment",
+            "uniqueId": "chamber_admin_sso_account_assignment"
           }
         }
       }
@@ -65,7 +65,7 @@
       "admin_sso_managed_policy_attachment": {
         "//": {
           "metadata": {
-            "path": "circus/admin_sso_managed_policy_attachment",
+            "path": "org-chamber/admin_sso_managed_policy_attachment",
             "uniqueId": "admin_sso_managed_policy_attachment"
           }
         }
@@ -75,7 +75,7 @@
       "admin_sso_permission_set": {
         "//": {
           "metadata": {
-            "path": "circus/admin_sso_permission_set",
+            "path": "org-chamber/admin_sso_permission_set",
             "uniqueId": "admin_sso_permission_set"
           }
         }
@@ -88,7 +88,7 @@
         "bucket": "dfn-defn-terraform-state",
         "dynamodb_table": "dfn-defn-terraform-state-lock",
         "encrypt": true,
-        "key": "stacks/circus/terraform.tfstate",
+        "key": "stacks/chamber/terraform.tfstate",
         "profile": "defn-org-sso",
         "region": "us-east-1"
       }

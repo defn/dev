@@ -2,7 +2,7 @@
   "//": {
     "metadata": {
       "backend": "s3",
-      "stackName": "fogg",
+      "stackName": "org-gyre",
       "version": "0.20.1"
     },
     "outputs": {
@@ -13,7 +13,7 @@
       "sso_instance": {
         "//": {
           "metadata": {
-            "path": "fogg/sso_instance",
+            "path": "org-gyre/sso_instance",
             "uniqueId": "sso_instance"
           }
         }
@@ -25,18 +25,26 @@
       "administrators_sso_group": {
         "//": {
           "metadata": {
-            "path": "fogg/administrators_sso_group",
+            "path": "org-gyre/administrators_sso_group",
             "uniqueId": "administrators_sso_group"
           }
         }
       }
     },
     "aws_organizations_account": {
-      "fogg": {
+      "gyre": {
         "//": {
           "metadata": {
-            "path": "fogg/fogg",
-            "uniqueId": "fogg"
+            "path": "org-gyre/gyre",
+            "uniqueId": "gyre"
+          }
+        }
+      },
+      "ops": {
+        "//": {
+          "metadata": {
+            "path": "org-gyre/ops",
+            "uniqueId": "ops"
           }
         }
       }
@@ -45,18 +53,26 @@
       "organization": {
         "//": {
           "metadata": {
-            "path": "fogg/organization",
+            "path": "org-gyre/organization",
             "uniqueId": "organization"
           }
         }
       }
     },
     "aws_ssoadmin_account_assignment": {
-      "fogg_admin_sso_account_assignment": {
+      "gyre_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "fogg/fogg_admin_sso_account_assignment",
-            "uniqueId": "fogg_admin_sso_account_assignment"
+            "path": "org-gyre/gyre_admin_sso_account_assignment",
+            "uniqueId": "gyre_admin_sso_account_assignment"
+          }
+        }
+      },
+      "ops_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-gyre/ops_admin_sso_account_assignment",
+            "uniqueId": "ops_admin_sso_account_assignment"
           }
         }
       }
@@ -65,7 +81,7 @@
       "admin_sso_managed_policy_attachment": {
         "//": {
           "metadata": {
-            "path": "fogg/admin_sso_managed_policy_attachment",
+            "path": "org-gyre/admin_sso_managed_policy_attachment",
             "uniqueId": "admin_sso_managed_policy_attachment"
           }
         }
@@ -75,7 +91,7 @@
       "admin_sso_permission_set": {
         "//": {
           "metadata": {
-            "path": "fogg/admin_sso_permission_set",
+            "path": "org-gyre/admin_sso_permission_set",
             "uniqueId": "admin_sso_permission_set"
           }
         }
@@ -88,7 +104,7 @@
         "bucket": "dfn-defn-terraform-state",
         "dynamodb_table": "dfn-defn-terraform-state-lock",
         "encrypt": true,
-        "key": "stacks/fogg/terraform.tfstate",
+        "key": "stacks/gyre/terraform.tfstate",
         "profile": "defn-org-sso",
         "region": "us-east-1"
       }

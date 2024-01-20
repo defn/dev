@@ -27,7 +27,7 @@ import (
 )
 
 func AwsOrganizationStack(scope constructs.Construct, org *infra.AwsOrganization) cdktf.TerraformStack {
-	stack := cdktf.NewTerraformStack(scope, infra.Js(org.Name))
+	stack := cdktf.NewTerraformStack(scope, infra.Js(fmt.Sprintf("org-%s", org.Name)))
 
 	aws.NewAwsProvider(stack,
 		infra.Js("aws"), &aws.AwsProviderConfig{
@@ -169,6 +169,7 @@ func init() {
 		Use:   "infra",
 		Short: "Generates Terraform configs from CUE",
 		Long:  `Generates Terraform configs from CUE.`,
+
 		Run: func(cmd *cobra.Command, args []string) {
 			app := cdktf.NewApp(&cdktf.AppConfig{})
 

@@ -2,7 +2,7 @@
   "//": {
     "metadata": {
       "backend": "s3",
-      "stackName": "spiral",
+      "stackName": "org-spiral",
       "version": "0.20.1"
     },
     "outputs": {
@@ -13,7 +13,7 @@
       "sso_instance": {
         "//": {
           "metadata": {
-            "path": "spiral/sso_instance",
+            "path": "org-spiral/sso_instance",
             "uniqueId": "sso_instance"
           }
         }
@@ -25,7 +25,7 @@
       "administrators_sso_group": {
         "//": {
           "metadata": {
-            "path": "spiral/administrators_sso_group",
+            "path": "org-spiral/administrators_sso_group",
             "uniqueId": "administrators_sso_group"
           }
         }
@@ -35,7 +35,7 @@
       "dev": {
         "//": {
           "metadata": {
-            "path": "spiral/dev",
+            "path": "org-spiral/dev",
             "uniqueId": "dev"
           }
         }
@@ -43,7 +43,7 @@
       "dmz": {
         "//": {
           "metadata": {
-            "path": "spiral/dmz",
+            "path": "org-spiral/dmz",
             "uniqueId": "dmz"
           }
         }
@@ -51,7 +51,7 @@
       "hub": {
         "//": {
           "metadata": {
-            "path": "spiral/hub",
+            "path": "org-spiral/hub",
             "uniqueId": "hub"
           }
         }
@@ -59,7 +59,7 @@
       "lib": {
         "//": {
           "metadata": {
-            "path": "spiral/lib",
+            "path": "org-spiral/lib",
             "uniqueId": "lib"
           }
         }
@@ -67,7 +67,7 @@
       "log": {
         "//": {
           "metadata": {
-            "path": "spiral/log",
+            "path": "org-spiral/log",
             "uniqueId": "log"
           }
         }
@@ -75,7 +75,7 @@
       "net": {
         "//": {
           "metadata": {
-            "path": "spiral/net",
+            "path": "org-spiral/net",
             "uniqueId": "net"
           }
         }
@@ -83,7 +83,7 @@
       "ops": {
         "//": {
           "metadata": {
-            "path": "spiral/ops",
+            "path": "org-spiral/ops",
             "uniqueId": "ops"
           }
         }
@@ -91,7 +91,7 @@
       "pub": {
         "//": {
           "metadata": {
-            "path": "spiral/pub",
+            "path": "org-spiral/pub",
             "uniqueId": "pub"
           }
         }
@@ -99,7 +99,7 @@
       "sec": {
         "//": {
           "metadata": {
-            "path": "spiral/sec",
+            "path": "org-spiral/sec",
             "uniqueId": "sec"
           }
         }
@@ -107,7 +107,7 @@
       "spiral": {
         "//": {
           "metadata": {
-            "path": "spiral/spiral",
+            "path": "org-spiral/spiral",
             "uniqueId": "spiral"
           }
         }
@@ -117,7 +117,7 @@
       "organization": {
         "//": {
           "metadata": {
-            "path": "spiral/organization",
+            "path": "org-spiral/organization",
             "uniqueId": "organization"
           }
         }
@@ -127,7 +127,7 @@
       "dev_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "spiral/dev_admin_sso_account_assignment",
+            "path": "org-spiral/dev_admin_sso_account_assignment",
             "uniqueId": "dev_admin_sso_account_assignment"
           }
         }
@@ -135,7 +135,7 @@
       "dmz_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "spiral/dmz_admin_sso_account_assignment",
+            "path": "org-spiral/dmz_admin_sso_account_assignment",
             "uniqueId": "dmz_admin_sso_account_assignment"
           }
         }
@@ -143,7 +143,7 @@
       "hub_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "spiral/hub_admin_sso_account_assignment",
+            "path": "org-spiral/hub_admin_sso_account_assignment",
             "uniqueId": "hub_admin_sso_account_assignment"
           }
         }
@@ -151,7 +151,7 @@
       "lib_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "spiral/lib_admin_sso_account_assignment",
+            "path": "org-spiral/lib_admin_sso_account_assignment",
             "uniqueId": "lib_admin_sso_account_assignment"
           }
         }
@@ -159,7 +159,7 @@
       "log_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "spiral/log_admin_sso_account_assignment",
+            "path": "org-spiral/log_admin_sso_account_assignment",
             "uniqueId": "log_admin_sso_account_assignment"
           }
         }
@@ -167,7 +167,7 @@
       "net_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "spiral/net_admin_sso_account_assignment",
+            "path": "org-spiral/net_admin_sso_account_assignment",
             "uniqueId": "net_admin_sso_account_assignment"
           }
         }
@@ -175,7 +175,7 @@
       "ops_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "spiral/ops_admin_sso_account_assignment",
+            "path": "org-spiral/ops_admin_sso_account_assignment",
             "uniqueId": "ops_admin_sso_account_assignment"
           }
         }
@@ -183,7 +183,7 @@
       "pub_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "spiral/pub_admin_sso_account_assignment",
+            "path": "org-spiral/pub_admin_sso_account_assignment",
             "uniqueId": "pub_admin_sso_account_assignment"
           }
         }
@@ -191,7 +191,7 @@
       "sec_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "spiral/sec_admin_sso_account_assignment",
+            "path": "org-spiral/sec_admin_sso_account_assignment",
             "uniqueId": "sec_admin_sso_account_assignment"
           }
         }
@@ -199,7 +199,7 @@
       "spiral_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "spiral/spiral_admin_sso_account_assignment",
+            "path": "org-spiral/spiral_admin_sso_account_assignment",
             "uniqueId": "spiral_admin_sso_account_assignment"
           }
         }
@@ -209,7 +209,7 @@
       "admin_sso_managed_policy_attachment": {
         "//": {
           "metadata": {
-            "path": "spiral/admin_sso_managed_policy_attachment",
+            "path": "org-spiral/admin_sso_managed_policy_attachment",
             "uniqueId": "admin_sso_managed_policy_attachment"
           }
         }
@@ -219,7 +219,7 @@
       "admin_sso_permission_set": {
         "//": {
           "metadata": {
-            "path": "spiral/admin_sso_permission_set",
+            "path": "org-spiral/admin_sso_permission_set",
             "uniqueId": "admin_sso_permission_set"
           }
         }
