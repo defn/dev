@@ -1,0 +1,39 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "s3",
+      "stackName": "acc-helix-dmz",
+      "version": "0.20.1"
+    },
+    "outputs": {
+    }
+  },
+  "module": {
+    "helix-dmz": {
+      "//": {
+        "metadata": {
+          "path": "acc-helix-dmz/helix-dmz",
+          "uniqueId": "helix-dmz"
+        }
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "s3": {
+        "bucket": "dfn-defn-terraform-state",
+        "dynamodb_table": "dfn-defn-terraform-state-lock",
+        "encrypt": true,
+        "key": "helix-dmz/bootstrap/account-helix-dmz/terraform.tfstate",
+        "profile": "defn-org-sso",
+        "region": "us-east-1"
+      }
+    },
+    "required_providers": {
+      "aws": {
+        "source": "aws",
+        "version": "5.33.0"
+      }
+    }
+  }
+}

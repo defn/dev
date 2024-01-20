@@ -1,0 +1,39 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "s3",
+      "stackName": "acc-fogg-home",
+      "version": "0.20.1"
+    },
+    "outputs": {
+    }
+  },
+  "module": {
+    "fogg-home": {
+      "//": {
+        "metadata": {
+          "path": "acc-fogg-home/fogg-home",
+          "uniqueId": "fogg-home"
+        }
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "s3": {
+        "bucket": "dfn-defn-terraform-state",
+        "dynamodb_table": "dfn-defn-terraform-state-lock",
+        "encrypt": true,
+        "key": "fogg-home/bootstrap/account-fogg-home/terraform.tfstate",
+        "profile": "defn-org-sso",
+        "region": "us-east-1"
+      }
+    },
+    "required_providers": {
+      "aws": {
+        "source": "aws",
+        "version": "5.33.0"
+      }
+    }
+  }
+}

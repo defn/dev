@@ -1,0 +1,39 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "s3",
+      "stackName": "acc-chamber-r",
+      "version": "0.20.1"
+    },
+    "outputs": {
+    }
+  },
+  "module": {
+    "chamber-r": {
+      "//": {
+        "metadata": {
+          "path": "acc-chamber-r/chamber-r",
+          "uniqueId": "chamber-r"
+        }
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "s3": {
+        "bucket": "dfn-defn-terraform-state",
+        "dynamodb_table": "dfn-defn-terraform-state-lock",
+        "encrypt": true,
+        "key": "chamber-r/bootstrap/account-chamber-r/terraform.tfstate",
+        "profile": "defn-org-sso",
+        "region": "us-east-1"
+      }
+    },
+    "required_providers": {
+      "aws": {
+        "source": "aws",
+        "version": "5.33.0"
+      }
+    }
+  }
+}

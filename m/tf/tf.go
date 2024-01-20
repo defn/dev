@@ -28,7 +28,7 @@ import (
 	"github.com/defn/dev/m/tf/gen/terraform_aws_defn_account"
 )
 
-func AwsOrganizationStack(scope constructs.Construct, org *infra.AwsOrganization, backend *infra.AwsBackend) cdktf.TerraformStack {
+func AwsOrganizationStack(scope constructs.Construct, backend *infra.AwsBackend, org *infra.AwsOrganization) cdktf.TerraformStack {
 	stack := cdktf.NewTerraformStack(scope, infra.Js(fmt.Sprintf("org-%s", org.Name)))
 
 	cdktf.NewS3Backend(stack, &cdktf.S3BackendConfig{
@@ -172,7 +172,7 @@ func AwsOrganizationStack(scope constructs.Construct, org *infra.AwsOrganization
 	return stack
 }
 
-func AwsAccountStack(scope constructs.Construct, acc *infra.AwsAccount, backend *infra.AwsBackend) cdktf.TerraformStack {
+func AwsAccountStack(scope constructs.Construct, backend *infra.AwsBackend, acc *infra.AwsAccount) cdktf.TerraformStack {
 	stack := cdktf.NewTerraformStack(scope, infra.Js(fmt.Sprintf("acc-%s", acc.Name)))
 
 	cdktf.NewS3Backend(stack, &cdktf.S3BackendConfig{
@@ -216,12 +216,39 @@ func init() {
 			app := cdktf.NewApp(&cdktf.AppConfig{})
 
 			for _, org := range site.Organization {
-				AwsOrganizationStack(app, &org, &site.Backend)
+				AwsOrganizationStack(app, &site.Backend, &org)
 			}
 
-			AwsAccountStack(app, &infra.AwsAccount{
-				Name: "chamber-a",
-			}, &site.Backend)
+			accounts := []string{"chamber-1", "chamber-2", "chamber-3",
+				"chamber-4", "chamber-5", "chamber-6", "chamber-7", "chamber-8",
+				"chamber-9", "chamber-a", "chamber-b", "chamber-c", "chamber-d",
+				"chamber-e", "chamber-f", "chamber-g", "chamber-h", "chamber-i",
+				"chamber-j", "chamber-k", "chamber-l", "chamber-m", "chamber-n",
+				"chamber-o", "chamber-org", "chamber-p", "chamber-q", "chamber-r",
+				"chamber-s", "chamber-t", "chamber-u", "chamber-v", "chamber-w",
+				"chamber-x", "chamber-y", "chamber-z", "circus-audit", "circus-ops",
+				"circus-org", "circus-transit", "coil-hub", "coil-lib", "coil-net",
+				"coil-org", "curl-hub", "curl-lib", "curl-net", "curl-org",
+				"defn-org", "fogg-asset", "fogg-circus", "fogg-data",
+				"fogg-gateway", "fogg-home", "fogg-hub", "fogg-org", "fogg-post",
+				"fogg-sandbox", "fogg-security", "gyre-ops", "gyre-org",
+				"helix-dev", "helix-dmz", "helix-hub", "helix-lib", "helix-log",
+				"helix-net", "helix-ops", "helix-org", "helix-pub", "helix-sec",
+				"imma-amanibhavam", "imma-dev", "imma-dgwyn", "imma-org",
+				"imma-prod", "imma-tolan", "immanent-changer", "immanent-chanter",
+				"immanent-doorkeeper", "immanent-ged", "immanent-hand",
+				"immanent-herbal", "immanent-namer", "immanent-org",
+				"immanent-patterner", "immanent-roke", "immanent-summoner",
+				"immanent-windkey", "jianghu-klamath", "jianghu-org",
+				"jianghu-tahoe", "spiral-dev", "spiral-dmz", "spiral-hub",
+				"spiral-lib", "spiral-log", "spiral-net", "spiral-ops",
+				"spiral-org", "spiral-pub", "spiral-sec", "vault-org", "whoa-dev",
+				"whoa-org", "whoa-prod", "whoa-secrets"}
+			for i := 0; i < len(accounts); i++ {
+				AwsAccountStack(app, &site.Backend, &infra.AwsAccount{
+					Name: accounts[i],
+				})
+			}
 
 			app.Synth()
 		},
