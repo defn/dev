@@ -1,6 +1,16 @@
 package tf
 
-full_accounts: ["ops", "net", "lib", "hub", "log", "sec", "pub", "dev", "dmz"]
+full_accounts: [
+	"ops", // operation teams, coder, argocd
+	"sec", // security teams
+	"net", // network, vpc
+	"log", // logging, s3
+	"lib", // artifacts, s3, harbor
+	"pub", // public resources, elb, s3
+	"dmz", // ci/cd, webhooks, buildkite, atlantism bazel-cache
+	"hub", // shared services
+	"dev", // development environment, frontend, backend, database
+]
 env_accounts: ["net", "lib", "hub"]
 ops_accounts: ["ops"]
 
