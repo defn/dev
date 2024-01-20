@@ -1,6 +1,9 @@
 build:
+	b build
 	cdktf synth --hcl
+# cdktf synth --hcl has a bug with Encrypt bool undefined
 	runmany 'perl -pe "s{undefined}{true} if m{encrypt\s+=\s+undefined}" -i $$1' cdktf.out/stacks/*/cdk.tf
+# symlink to modules to eliminate module copies in git
 	runmany 'if test -d $$1; then rm -rf $$1/terraform-*; for a in mod/terraform-*; do ln -nfs ../../../../../../$$a $$1/; done; fi' cdktf.out/stacks/*/assets/*/*
 
 upgrade:

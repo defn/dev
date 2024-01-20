@@ -31,9 +31,6 @@ import (
 	// aws_eks_cluster "github.com/defn/dev/m/tf/gen/terraform_aws_eks_cluster"
 )
 
-//go:embed tf.cue
-var infra_schema string
-
 type AwsAdmin struct {
 	Name  string `json:"name"`
 	Email string `json:"email"`
@@ -124,20 +121,6 @@ var infraCmd = &cobra.Command{
 
 		app.Synth()
 	},
-}
-
-func init() {
-	root.RootCmd.AddCommand(infraCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// infraCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// infraCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
 func AwsOrganizationStack(scope constructs.Construct, org *AwsOrganization) cdktf.TerraformStack {
@@ -284,7 +267,11 @@ func AwsOrganizationStack(scope constructs.Construct, org *AwsOrganization) cdkt
 	return stack
 }
 
+//go:embed tf.cue
+var infra_schema string
+
 func LoadUserAwsProps() AwsProps {
+
 	ctx := cuecontext.New()
 
 	user_schema := ctx.CompileString(infra_schema)
@@ -298,6 +285,10 @@ func LoadUserAwsProps() AwsProps {
 	user_input.LookupPath(cue.ParsePath("input")).Decode(&aws_props)
 
 	return aws_props
+}
+
+func init() {
+	root.RootCmd.AddCommand(infraCmd)
 }
 
 func main() {
