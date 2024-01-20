@@ -9,6 +9,7 @@ go_library(
     deps = [
         "//command/infra",
         "//command/root",
+        "//tf/gen/terraform_aws_defn_account",
         "@com_github_aws_constructs_go_constructs_v10//:constructs",
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//dataawsssoadmininstances",
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//identitystoregroup",

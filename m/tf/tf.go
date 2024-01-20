@@ -24,10 +24,21 @@ import (
 
 	infra "github.com/defn/dev/m/command/infra"
 	root "github.com/defn/dev/m/command/root"
+
+	"github.com/defn/dev/m/tf/gen/terraform_aws_defn_account"
 )
 
-func AwsOrganizationStack(scope constructs.Construct, org *infra.AwsOrganization) cdktf.TerraformStack {
+func AwsOrganizationStack(scope constructs.Construct, org *infra.AwsOrganization, backend *infra.AwsBackend) cdktf.TerraformStack {
 	stack := cdktf.NewTerraformStack(scope, infra.Js(fmt.Sprintf("org-%s", org.Name)))
+
+	cdktf.NewS3Backend(stack, &cdktf.S3BackendConfig{
+		Key:           infra.Js(fmt.Sprintf("stacks/%s/terraform.tfstate", org.Name)),
+		Encrypt:       infra.Jstrue(),
+		Bucket:        &backend.Bucket,
+		Region:        &backend.Region,
+		Profile:       &backend.Profile,
+		DynamodbTable: &backend.Lock,
+	})
 
 	aws.NewAwsProvider(stack,
 		infra.Js("aws"), &aws.AwsProviderConfig{
@@ -161,6 +172,36 @@ func AwsOrganizationStack(scope constructs.Construct, org *infra.AwsOrganization
 	return stack
 }
 
+func AwsAccountStack(scope constructs.Construct, acc *infra.AwsAccount, backend *infra.AwsBackend) cdktf.TerraformStack {
+	stack := cdktf.NewTerraformStack(scope, infra.Js(fmt.Sprintf("acc-%s", acc.Name)))
+
+	cdktf.NewS3Backend(stack, &cdktf.S3BackendConfig{
+		Key:           infra.Js(fmt.Sprintf("%s/bootstrap/account-%s/terraform.tfstate", acc.Name, acc.Name)),
+		Encrypt:       infra.Jstrue(),
+		Bucket:        &backend.Bucket,
+		Region:        &backend.Region,
+		Profile:       &backend.Profile,
+		DynamodbTable: &backend.Lock,
+	})
+
+	provider := aws.NewAwsProvider(stack,
+		infra.Js("aws"), &aws.AwsProviderConfig{
+			Alias:   infra.Js(acc.Name),
+			Profile: infra.Js(fmt.Sprintf("%s-sso", acc.Name)),
+		})
+	providers := append(make([]interface{}, 0), provider)
+
+	terraform_aws_defn_account.NewTerraformAwsDefnAccount(stack,
+		infra.Js(acc.Name), &terraform_aws_defn_account.TerraformAwsDefnAccountConfig{
+			Providers: &providers,
+			Namespace: infra.Js("dfn"),
+			Stage:     infra.Js("defn"),
+			Name:      infra.Js("terraform"),
+		})
+
+	return stack
+}
+
 //go:embed tf.cue
 var infra_schema string
 
@@ -171,21 +212,16 @@ func init() {
 		Long:  `Generates Terraform configs from CUE.`,
 
 		Run: func(cmd *cobra.Command, args []string) {
+			site := infra.LoadUserAwsProps(infra_schema)
 			app := cdktf.NewApp(&cdktf.AppConfig{})
 
-			site := infra.LoadUserAwsProps(infra_schema)
 			for _, org := range site.Organization {
-				aws_org_stack := AwsOrganizationStack(app, &org)
-
-				cdktf.NewS3Backend(aws_org_stack, &cdktf.S3BackendConfig{
-					Key:           infra.Js("stacks/" + org.Name + "/terraform.tfstate"),
-					Encrypt:       infra.Jstrue(),
-					Bucket:        &site.Backend.Bucket,
-					Region:        &site.Backend.Region,
-					Profile:       &site.Backend.Profile,
-					DynamodbTable: &site.Backend.Lock,
-				})
+				AwsOrganizationStack(app, &org, &site.Backend)
 			}
+
+			AwsAccountStack(app, &infra.AwsAccount{
+				Name: "chamber-a",
+			}, &site.Backend)
 
 			app.Synth()
 		},
