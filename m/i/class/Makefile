@@ -17,17 +17,12 @@ reset:
 class:
 	@echo --- earthly 
 	sudo chown ubuntu:ubuntu /var/run/docker.sock
-	earthly --ci --push --no-output --allow-privileged --secret tsauthkey +class
-
-class-latest:
-	@echo --- earthly
-	sudo chown ubuntu:ubuntu /var/run/docker.sock
-	earthly --ci --push --no-output --allow-privileged --secret tsauthkey +class-latest
+	earthly --ci --push --no-output +class
 
 class-buildkite-latest:
 	@echo --- earthly
 	sudo chown ubuntu:ubuntu /var/run/docker.sock
-	earthly --ci --push --no-output --allow-privileged --secret tsauthkey +class-buildkite-latest
+	earthly --ci --push --no-output +class-buildkite-latest
 
 buildkite:
 	@echo --- earthly

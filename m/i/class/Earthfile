@@ -23,23 +23,11 @@ class:
 
     RUN sudo chown ubuntu:ubuntu /home/ubuntu/work && chmod 755 /home/ubuntu/work
     COPY script/800-defn-dev .
-    RUN --privileged --secret tsauthkey bash -c "sudo apt update && sudo apt install -y screen dnsutils && curl -fsSL https://tailscale.com/install.sh | sudo sh && screen -d -m sudo /usr/sbin/tailscaled && sudo /usr/bin/tailscale up --authkey ${tsauthkey} && ./800-defn-dev && rm -f ./800-defn-dev /var/lib/tailscale"
+    RUN bash -c "./800-defn-dev && rm -f ./800-defn-dev"
     RUN git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git pull
 
     SAVE IMAGE --push ${image}-latest
     SAVE IMAGE --push ${image}-buildkite-latest
-
-class-latest:
-    ARG image=cache.defn.run:5000/dfd:class-latest
-    FROM ${image}
-
-    CACHE /home/ubuntu/work
-
-    RUN --no-cache bash -c 'git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git pull'
-    RUN --privileged --secret tsauthkey bash -c 'sudo sh && screen -d -m sudo /usr/sbin/tailscaled && sudo /usr/bin/tailscale up --authkey ${tsauthkey} && source .bash_profile && mkdir -p work && bin/persist-cache && make home && rm -rf /var/lib/tailscale'
-    RUN git checkout .
-
-    SAVE IMAGE --push ${image}
 
 class-buildkite-latest:
     ARG image=cache.defn.run:5000/dfd:class-buildkite-latest
@@ -49,7 +37,7 @@ class-buildkite-latest:
     RUN bash -c 'source .bash_profile && mkdir -p work && bin/persist-cache && cd m && go install golang.org/x/tools/gopls@latest && go install honnef.co/go/tools/cmd/staticcheck@latest'
 
     RUN --no-cache bash -c 'git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git pull'
-    RUN --privileged --secret tsauthkey bash -c 'sudo sh && screen -d -m sudo /usr/sbin/tailscaled && sudo /usr/bin/tailscale up --authkey ${tsauthkey} && source .bash_profile && make home && cd m && b build && rm -rf /var/lib/tailscale'
+    RUN bash -c 'source .bash_profile && make home && cd m && b build'
     RUN git checkout .
 
     SAVE IMAGE --push ${image}
