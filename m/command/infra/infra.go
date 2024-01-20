@@ -17,6 +17,13 @@ type AwsAdmin struct {
 	Email string `json:"email"`
 }
 
+type AwsBackend struct {
+	Lock    string `json:"lock"`
+	Bucket  string `json:"bucket"`
+	Region  string `json:"region"`
+	Profile string `json:"profile"`
+}
+
 type AwsOrganization struct {
 	Name     string     `json:"name"`
 	Region   string     `json:"region"`
@@ -26,33 +33,9 @@ type AwsOrganization struct {
 	Admins   []AwsAdmin `json:"admins"`
 }
 
-type KubernetesCluster struct {
-	Name   string
-	Region string `json:"region"`
-
-	NodeGroup map[string]KubernetesNodeGroup `json:"nodegroup"`
-
-	VPC struct {
-		CIDRs []string `json:"cidrs"`
-	} `json:"vpc"`
-}
-
-type KubernetesNodeGroup struct {
-	Name string
-
-	InstanceTypes []string `json:"instance_types"`
-
-	AZ map[string]AWSVPCNetwork `json:"az"`
-}
-
-type AWSVPCNetwork struct {
-	Network string `json:"network"`
-}
-
 type AwsProps struct {
+	Backend      AwsBackend                 `json:"backend"`
 	Organization map[string]AwsOrganization `json:"organization"`
-
-	Kubernetes map[string]KubernetesCluster `json:"kubernetes"`
 }
 
 // alias

@@ -5,6 +5,13 @@ package infra
 	email: string
 }
 
+#AwsBackend: {
+	lock: string
+	bucket: string
+	region: string
+	profile: string
+}
+
 #AwsOrganization: {
 	name:   string
 	region: string
@@ -14,23 +21,9 @@ package infra
 	admins: [...#AwsAdmin]
 }
 
-#KubernetesCluster: {
-	name:   string
-	region: string
-	nodegroup: [NAME=string]: {
-		name: string | *NAME
-		instance_types: [...string]
-		az: [string]: network: string
-	}
-	vpc: cidrs: [...string]
-}
-
 #AwsProps: {
+	backend: #AwsBackend
 	organization: [N=string]: #AwsOrganization & {
-		name: N
-	}
-
-	kubernetes: [N=string]: #KubernetesCluster & {
 		name: N
 	}
 }
