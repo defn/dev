@@ -1,0 +1,39 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "s3",
+      "stackName": "acc-curl-lib",
+      "version": "0.20.1"
+    },
+    "outputs": {
+    }
+  },
+  "module": {
+    "curl-lib": {
+      "//": {
+        "metadata": {
+          "path": "acc-curl-lib/curl-lib",
+          "uniqueId": "curl-lib"
+        }
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "s3": {
+        "bucket": "dfn-defn-terraform-state",
+        "dynamodb_table": "dfn-defn-terraform-state-lock",
+        "encrypt": true,
+        "key": "curl-lib/bootstrap/account-curl-lib/terraform.tfstate",
+        "profile": "defn-org-sso",
+        "region": "us-east-1"
+      }
+    },
+    "required_providers": {
+      "aws": {
+        "source": "aws",
+        "version": "5.33.0"
+      }
+    }
+  }
+}
