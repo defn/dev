@@ -29,6 +29,9 @@ steps: [
 			'
 			"""]
 	},
+]
+
+#no: [
 	#WaitStep,
 	#DockerStep & {
 		#label: "build-class-buildkite-latest"
