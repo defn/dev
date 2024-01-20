@@ -1,19 +1,11 @@
 package tf
 
-import (
-	"github.com/defn/dev/m/command/infra"
-)
-
 input: {
-	backend: infra.#AwsBackend & {
+	backend: {
 		lock:    "dfn-defn-terraform-state-lock"
 		bucket:  "dfn-defn-terraform-state"
 		region:  "us-east-1"
 		profile: "defn-org-sso"
-	}
-
-	organization: [NAME=string]: infra.#AwsOrganization & {
-		name: NAME
 	}
 
 	organization: {
