@@ -2,6 +2,9 @@ all:
 	cd ../base && $(MAKE)
 	$(MAKE) buildkite
 	$(MAKE) class
+	$(MAKE) latest
+
+latest:
 	$(MAKE) class-latest
 	$(MAKE) class-buildkite-latest
 
