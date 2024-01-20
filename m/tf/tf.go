@@ -7,12 +7,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"cuelang.org/go/cue"
-	"cuelang.org/go/cue/cuecontext"
-	"cuelang.org/go/cue/load"
-
 	"github.com/aws/constructs-go/constructs/v10"
-	"github.com/aws/jsii-runtime-go"
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 
 	aws "github.com/cdktf/cdktf-provider-aws-go/aws/v19/provider"
@@ -27,190 +22,98 @@ import (
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/ssoadminmanagedpolicyattachment"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/ssoadminpermissionset"
 
+	infra "github.com/defn/dev/m/command/infra"
 	root "github.com/defn/dev/m/command/root"
-	// aws_eks_cluster "github.com/defn/dev/m/tf/gen/terraform_aws_eks_cluster"
 )
 
-type AwsAdmin struct {
-	Name  string `json:"name"`
-	Email string `json:"email"`
-}
-
-type AwsOrganization struct {
-	Name     string     `json:"name"`
-	Region   string     `json:"region"`
-	Prefix   string     `json:"prefix"`
-	Domain   string     `json:"domain"`
-	Accounts []string   `json:"accounts"`
-	Admins   []AwsAdmin `json:"admins"`
-}
-
-type KubernetesCluster struct {
-	Name   string
-	Region string `json:"region"`
-
-	NodeGroup map[string]KubernetesNodeGroup `json:"nodegroup"`
-
-	VPC struct {
-		CIDRs []string `json:"cidrs"`
-	} `json:"vpc"`
-}
-
-type KubernetesNodeGroup struct {
-	Name string
-
-	InstanceTypes []string `json:"instance_types"`
-
-	AZ map[string]AWSVPCNetwork `json:"az"`
-}
-
-type AWSVPCNetwork struct {
-	Network string `json:"network"`
-}
-
-type AwsProps struct {
-	Organization map[string]AwsOrganization `json:"organization"`
-
-	Kubernetes map[string]KubernetesCluster `json:"kubernetes"`
-}
-
-// alias
-func js(s string) *string {
-	return jsii.String(s)
-}
-
-//lint:ignore U1000 utility
-func jsn(v float64) *float64 {
-	return jsii.Number(v)
-}
-
-//lint:ignore U1000 utility
-func jsf(s string, a ...any) *string {
-	return js(fmt.Sprintf(s, a...))
-}
-
-//lint:ignore U1000 utility
-func jstrue() *bool {
-	return jsii.Bool(true)
-}
-
-// infraCmd represents the infra command
-var infraCmd = &cobra.Command{
-	Use:   "infra",
-	Short: "Generates Terraform configs from CUE",
-	Long:  `Generates Terraform configs from CUE.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		aws_props := LoadUserAwsProps()
-
-		fmt.Printf("%v\n", aws_props)
-
-		app := cdktf.NewApp(&cdktf.AppConfig{})
-
-		for _, org := range aws_props.Organization {
-			aws_org_stack := AwsOrganizationStack(app, &org)
-
-			cdktf.NewS3Backend(aws_org_stack, &cdktf.S3BackendConfig{
-				Bucket:        js("dfn-defn-terraform-state"),
-				Key:           js("stacks/" + org.Name + "/terraform.tfstate"),
-				Encrypt:       jstrue(),
-				Region:        js("us-east-1"),
-				Profile:       js("defn-org-sso"),
-				DynamodbTable: js("dfn-defn-terraform-state-lock"),
-			})
-		}
-
-		app.Synth()
-	},
-}
-
-func AwsOrganizationStack(scope constructs.Construct, org *AwsOrganization) cdktf.TerraformStack {
-	stack := cdktf.NewTerraformStack(scope, js(org.Name))
+func AwsOrganizationStack(scope constructs.Construct, org *infra.AwsOrganization) cdktf.TerraformStack {
+	stack := cdktf.NewTerraformStack(scope, infra.Js(org.Name))
 
 	aws.NewAwsProvider(stack,
-		js("aws"), &aws.AwsProviderConfig{
-			Region:  js(org.Region),
-			Profile: js(fmt.Sprintf("%s-org-sso", org.Name)),
+		infra.Js("aws"), &aws.AwsProviderConfig{
+			Region:  infra.Js(org.Region),
+			Profile: infra.Js(fmt.Sprintf("%s-org-sso", org.Name)),
 		})
 
 	organizationsorganization.NewOrganizationsOrganization(stack,
-		js("organization"),
+		infra.Js("organization"),
 		&organizationsorganization.OrganizationsOrganizationConfig{
-			FeatureSet: js("ALL"),
+			FeatureSet: infra.Js("ALL"),
 			EnabledPolicyTypes: &[]*string{
-				js("SERVICE_CONTROL_POLICY"),
-				js("TAG_POLICY")},
+				infra.Js("SERVICE_CONTROL_POLICY"),
+				infra.Js("TAG_POLICY")},
 			AwsServiceAccessPrincipals: &[]*string{
-				js("cloudtrail.amazonaws.com"),
-				js("config.amazonaws.com"),
-				js("ram.amazonaws.com"),
-				js("ssm.amazonaws.com"),
-				js("sso.amazonaws.com"),
-				js("tagpolicies.tag.amazonaws.com")},
+				infra.Js("cloudtrail.amazonaws.com"),
+				infra.Js("config.amazonaws.com"),
+				infra.Js("ram.amazonaws.com"),
+				infra.Js("ssm.amazonaws.com"),
+				infra.Js("sso.amazonaws.com"),
+				infra.Js("tagpolicies.tag.amazonaws.com")},
 		})
 
 	// Lookup pre-enabled AWS SSO instance
 	ssoadmin_instance := dataawsssoadmininstances.NewDataAwsSsoadminInstances(stack,
-		js("sso_instance"),
+		infra.Js("sso_instance"),
 		&dataawsssoadmininstances.DataAwsSsoadminInstancesConfig{})
 
 	ssoadmin_instance_arn := cdktf.NewTerraformLocal(stack,
-		js("sso_instance_arn"),
+		infra.Js("sso_instance_arn"),
 		ssoadmin_instance.Arns())
 
 	ssoadmin_permission_set := ssoadminpermissionset.NewSsoadminPermissionSet(stack,
-		js("admin_sso_permission_set"),
+		infra.Js("admin_sso_permission_set"),
 		&ssoadminpermissionset.SsoadminPermissionSetConfig{
-			Name:            js("Administrator"),
-			InstanceArn:     js(cdktf.Fn_Element(ssoadmin_instance_arn.Expression(), jsn(0)).(string)),
-			SessionDuration: js("PT2H"),
-			Tags:            &map[string]*string{"ManagedBy": js("Terraform")},
+			Name:            infra.Js("Administrator"),
+			InstanceArn:     infra.Js(cdktf.Fn_Element(ssoadmin_instance_arn.Expression(), infra.Jsn(0)).(string)),
+			SessionDuration: infra.Js("PT2H"),
+			Tags:            &map[string]*string{"ManagedBy": infra.Js("Terraform")},
 		})
 
 	sso_permission_set_admin := ssoadminmanagedpolicyattachment.NewSsoadminManagedPolicyAttachment(stack,
-		js("admin_sso_managed_policy_attachment"),
+		infra.Js("admin_sso_managed_policy_attachment"),
 		&ssoadminmanagedpolicyattachment.SsoadminManagedPolicyAttachmentConfig{
 			InstanceArn:      ssoadmin_permission_set.InstanceArn(),
 			PermissionSetArn: ssoadmin_permission_set.Arn(),
-			ManagedPolicyArn: js("arn:aws:iam::aws:policy/AdministratorAccess"),
+			ManagedPolicyArn: infra.Js("arn:aws:iam::aws:policy/AdministratorAccess"),
 		})
 
 	ssoadmin_instance_isid := cdktf.NewTerraformLocal(stack,
-		js("sso_instance_isid"),
+		infra.Js("sso_instance_isid"),
 		ssoadmin_instance.IdentityStoreIds())
 
 	// Create Administrators group
 	identitystore_group := identitystoregroup.NewIdentitystoreGroup(stack,
-		js("administrators_sso_group"),
+		infra.Js("administrators_sso_group"),
 		&identitystoregroup.IdentitystoreGroupConfig{
-			DisplayName:     js("Administrators"),
-			IdentityStoreId: js(cdktf.Fn_Element(ssoadmin_instance_isid.Expression(), jsn(0)).(string)),
+			DisplayName:     infra.Js("Administrators"),
+			IdentityStoreId: infra.Js(cdktf.Fn_Element(ssoadmin_instance_isid.Expression(), infra.Jsn(0)).(string)),
 		})
 
 	// Create initial users in the Administrators group
 	for _, adm := range org.Admins {
 		identitystore_user := identitystoreuser.NewIdentitystoreUser(stack,
-			jsf("admin_sso_user_%s", adm.Name),
+			infra.Jsf("admin_sso_user_%s", adm.Name),
 			&identitystoreuser.IdentitystoreUserConfig{
-				DisplayName: js(adm.Name),
-				UserName:    js(adm.Name),
+				DisplayName: infra.Js(adm.Name),
+				UserName:    infra.Js(adm.Name),
 				Name: &identitystoreuser.IdentitystoreUserName{
-					GivenName:  js(adm.Name),
-					FamilyName: js(adm.Name),
+					GivenName:  infra.Js(adm.Name),
+					FamilyName: infra.Js(adm.Name),
 				},
 				Emails: &identitystoreuser.IdentitystoreUserEmails{
-					Primary: jstrue(),
-					Type:    js("work"),
-					Value:   js(adm.Email),
+					Primary: infra.Jstrue(),
+					Type:    infra.Js("work"),
+					Value:   infra.Js(adm.Email),
 				},
-				IdentityStoreId: js(cdktf.Fn_Element(ssoadmin_instance_isid.Expression(), jsn(0)).(string)),
+				IdentityStoreId: infra.Js(cdktf.Fn_Element(ssoadmin_instance_isid.Expression(), infra.Jsn(0)).(string)),
 			})
 
 		identitystoregroupmembership.NewIdentitystoreGroupMembership(stack,
-			jsf("admin_sso_user_%s_membership", adm.Name),
+			infra.Jsf("admin_sso_user_%s_membership", adm.Name),
 			&identitystoregroupmembership.IdentitystoreGroupMembershipConfig{
 				MemberId:        identitystore_user.UserId(),
 				GroupId:         identitystore_group.GroupId(),
-				IdentityStoreId: js(cdktf.Fn_Element(ssoadmin_instance_isid.Expression(), jsn(0)).(string)),
+				IdentityStoreId: infra.Js(cdktf.Fn_Element(ssoadmin_instance_isid.Expression(), infra.Jsn(0)).(string)),
 			})
 	}
 
@@ -223,46 +126,37 @@ func AwsOrganizationStack(scope constructs.Construct, org *AwsOrganization) cdkt
 			// The master organization account can't set
 			// iam_user_access_to_billing, role_name
 			organizations_account_config = organizationsaccount.OrganizationsAccountConfig{
-				Name:  js(acct),
-				Email: jsf("%s%s@%s", org.Prefix, org.Name, org.Domain),
-				Tags:  &map[string]*string{"ManagedBy": js("Terraform")},
+				Name:  infra.Js(acct),
+				Email: infra.Jsf("%s%s@%s", org.Prefix, org.Name, org.Domain),
+				Tags:  &map[string]*string{"ManagedBy": infra.Js("Terraform")},
 			}
 		} else {
 			// Organization account
 			organizations_account_config = organizationsaccount.OrganizationsAccountConfig{
-				Name:                   js(acct),
-				Email:                  jsf("%s%s+%s@%s", org.Prefix, org.Name, acct, org.Domain),
-				Tags:                   &map[string]*string{"ManagedBy": js("Terraform")},
-				IamUserAccessToBilling: js("ALLOW"),
-				RoleName:               js("OrganizationAccountAccessRole"),
+				Name:                   infra.Js(acct),
+				Email:                  infra.Jsf("%s%s+%s@%s", org.Prefix, org.Name, acct, org.Domain),
+				Tags:                   &map[string]*string{"ManagedBy": infra.Js("Terraform")},
+				IamUserAccessToBilling: infra.Js("ALLOW"),
+				RoleName:               infra.Js("OrganizationAccountAccessRole"),
 			}
 		}
 
 		organizations_account := organizationsaccount.NewOrganizationsAccount(stack,
-			js(acct),
+			infra.Js(acct),
 			&organizations_account_config)
 
 		// Organization accounts grant Administrator permission set to the Administrators group
 		ssoadminaccountassignment.NewSsoadminAccountAssignment(stack,
-			jsf("%s_admin_sso_account_assignment", acct),
+			infra.Jsf("%s_admin_sso_account_assignment", acct),
 			&ssoadminaccountassignment.SsoadminAccountAssignmentConfig{
 				InstanceArn:      sso_permission_set_admin.InstanceArn(),
 				PermissionSetArn: sso_permission_set_admin.PermissionSetArn(),
 				PrincipalId:      identitystore_group.GroupId(),
-				PrincipalType:    js("GROUP"),
+				PrincipalType:    infra.Js("GROUP"),
 				TargetId:         organizations_account.Id(),
-				TargetType:       js("AWS_ACCOUNT"),
+				TargetType:       infra.Js("AWS_ACCOUNT"),
 			})
 	}
-
-	/*
-		aws_eks_cluster.NewTerraformAwsEksCluster(stack,
-			jsf("cool"),
-			&aws_eks_cluster.TerraformAwsEksClusterConfig{
-				SubnetIds: &[]*string{js("meh")},
-				VpcId: js("meh"),
-			})
-	*/
 
 	return stack
 }
@@ -270,21 +164,29 @@ func AwsOrganizationStack(scope constructs.Construct, org *AwsOrganization) cdkt
 //go:embed tf.cue
 var infra_schema string
 
-func LoadUserAwsProps() AwsProps {
+var infraCmd = &cobra.Command{
+	Use:   "infra",
+	Short: "Generates Terraform configs from CUE",
+	Long:  `Generates Terraform configs from CUE.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		app := cdktf.NewApp(&cdktf.AppConfig{})
 
-	ctx := cuecontext.New()
+		site := infra.LoadUserAwsProps(infra_schema)
+		for _, org := range site.Organization {
+			aws_org_stack := AwsOrganizationStack(app, &org)
 
-	user_schema := ctx.CompileString(infra_schema)
+			cdktf.NewS3Backend(aws_org_stack, &cdktf.S3BackendConfig{
+				Bucket:        infra.Js("dfn-defn-terraform-state"),
+				Key:           infra.Js("stacks/" + org.Name + "/terraform.tfstate"),
+				Encrypt:       infra.Jstrue(),
+				Region:        infra.Js("us-east-1"),
+				Profile:       infra.Js("defn-org-sso"),
+				DynamodbTable: infra.Js("dfn-defn-terraform-state-lock"),
+			})
+		}
 
-	user_input_instance := load.Instances([]string{"."}, nil)[0]
-	user_input := ctx.BuildInstance(user_input_instance)
-
-	user_schema.Unify(user_input)
-
-	var aws_props AwsProps
-	user_input.LookupPath(cue.ParsePath("input")).Decode(&aws_props)
-
-	return aws_props
+		app.Synth()
+	},
 }
 
 func init() {
