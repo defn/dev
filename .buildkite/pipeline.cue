@@ -9,28 +9,6 @@ branches: "main"
 
 steps: [
 	#DockerStep & {
-		#label: "bazel-build"
-		#image: "coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:class-buildkite-latest"
-		#args: ["""
-			'
-			set -
-			cd
-			git fetch
-			git reset --hard $BUILDKITE_COMMIT
-			source .bash_profile
-			git config --global user.email you@example.com
-			git config --global user.name YourName
-			bin/persist-cache
-			cd m
-			echo --- bazel
-			export DFD_CI_BAZEL_OPTIONS=--remote_download_minimal
-			../bin/b build
-			echo
-			'
-			"""]
-	},
-	#WaitStep,
-	#DockerStep & {
 		#label: "build-class-buildkite-latest"
 		#image: "coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:class-buildkite-latest"
 		#args: ["""
