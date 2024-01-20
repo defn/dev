@@ -23,7 +23,7 @@ class:
 
     RUN sudo chown ubuntu:ubuntu /home/ubuntu/work && chmod 755 /home/ubuntu/work
     COPY script/800-defn-dev .
-    RUN ./800-defn-dev && rm -f ./800-defn-dev
+    RUN --privileged --secret tsauthkey bash -c "sudo apt update && sudo apt install -y screen dnsutils && curl -fsSL https://tailscale.com/install.sh | sudo sh && screen -d -m sudo /usr/sbin/tailscaled && sleep 5 && sudo /usr/bin/tailscale up --authkey ${tsauthkey} && tailscale ip && dig coder-amanibhavam-district.tail3884f.ts.net && curl -v http://coder-amanibhavam-district.tail3884f.ts.net:9092 && sleep 30 && ./800-defn-dev && rm -f ./800-defn-dev /var/lib/tailscale"
     RUN git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git pull
 
     SAVE IMAGE --push ${image}-latest
