@@ -164,33 +164,31 @@ func AwsOrganizationStack(scope constructs.Construct, org *infra.AwsOrganization
 //go:embed tf.cue
 var infra_schema string
 
-var infraCmd = &cobra.Command{
-	Use:   "infra",
-	Short: "Generates Terraform configs from CUE",
-	Long:  `Generates Terraform configs from CUE.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		app := cdktf.NewApp(&cdktf.AppConfig{})
-
-		site := infra.LoadUserAwsProps(infra_schema)
-		for _, org := range site.Organization {
-			aws_org_stack := AwsOrganizationStack(app, &org)
-
-			cdktf.NewS3Backend(aws_org_stack, &cdktf.S3BackendConfig{
-				Bucket:        infra.Js("dfn-defn-terraform-state"),
-				Key:           infra.Js("stacks/" + org.Name + "/terraform.tfstate"),
-				Encrypt:       infra.Jstrue(),
-				Region:        infra.Js("us-east-1"),
-				Profile:       infra.Js("defn-org-sso"),
-				DynamodbTable: infra.Js("dfn-defn-terraform-state-lock"),
-			})
-		}
-
-		app.Synth()
-	},
-}
-
 func init() {
-	root.RootCmd.AddCommand(infraCmd)
+	root.RootCmd.AddCommand(&cobra.Command{
+		Use:   "infra",
+		Short: "Generates Terraform configs from CUE",
+		Long:  `Generates Terraform configs from CUE.`,
+		Run: func(cmd *cobra.Command, args []string) {
+			app := cdktf.NewApp(&cdktf.AppConfig{})
+
+			site := infra.LoadUserAwsProps(infra_schema)
+			for _, org := range site.Organization {
+				aws_org_stack := AwsOrganizationStack(app, &org)
+
+				cdktf.NewS3Backend(aws_org_stack, &cdktf.S3BackendConfig{
+					Key:           infra.Js("stacks/" + org.Name + "/terraform.tfstate"),
+					Encrypt:       infra.Jstrue(),
+					Bucket:        &site.Backend.Bucket,
+					Region:        &site.Backend.Region,
+					Profile:       &site.Backend.Profile,
+					DynamodbTable: &site.Backend.Lock,
+				})
+			}
+
+			app.Synth()
+		},
+	})
 }
 
 func main() {
