@@ -63,6 +63,27 @@
         "type": "github"
       }
     },
+    "dev_3": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "dir": "m/pkg/dev",
+        "lastModified": 1703440183,
+        "narHash": "sha256-XRdrsSlAF4fzKEXGfcpJiF9763BCKozaA2RbjfXWqDg=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "931956c3d299656c773c90d26ad412c4c3b290c3",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/dev",
+        "owner": "defn",
+        "ref": "pkg-dev-0.0.12",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1700284104,
@@ -80,6 +101,22 @@
       }
     },
     "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1700284104,
+        "narHash": "sha256-oNsJfAyAuBCTkusesiK0LWuO59F6vEGcP4wwa7kc1ZA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "005617587ee2b7c003388b4539b9120ebcc90e44",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "005617587ee2b7c003388b4539b9120ebcc90e44",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1700284104,
         "narHash": "sha256-oNsJfAyAuBCTkusesiK0LWuO59F6vEGcP4wwa7kc1ZA=",
@@ -137,10 +174,32 @@
         "type": "github"
       }
     },
+    "pkg_3": {
+      "inputs": {
+        "dev": "dev_3"
+      },
+      "locked": {
+        "dir": "m/pkg/pkg",
+        "lastModified": 1703441814,
+        "narHash": "sha256-COTwiD7CDp1CUeRbkKO1L+ZpDO/OqeijDKFa5tZqLHY=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "0cc1dd088a3ff4d0c6077f6d325be3032061c656",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/pkg",
+        "owner": "defn",
+        "ref": "pkg-pkg-0.0.15",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "cloudflared": "cloudflared",
-        "tailscale": "tailscale"
+        "tailscale": "tailscale",
+        "wireproxy": "wireproxy"
       }
     },
     "tailscale": {
@@ -160,6 +219,27 @@
         "dir": "m/pkg/tailscale",
         "owner": "defn",
         "ref": "pkg-tailscale-1.58.0-1",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
+    "wireproxy": {
+      "inputs": {
+        "pkg": "pkg_3"
+      },
+      "locked": {
+        "dir": "m/pkg/wireproxy",
+        "lastModified": 1705786892,
+        "narHash": "sha256-RULj+lLwK/UJPS59gO+UKpGOxQQMJtNnsFP+EPk0+BU=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "95f16ad191851f75d33a5160040d080373af10a2",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/wireproxy",
+        "owner": "defn",
+        "ref": "pkg-wireproxy-1.0.6-2",
         "repo": "dev",
         "type": "github"
       }
