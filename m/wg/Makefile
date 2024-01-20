@@ -1,5 +1,5 @@
 wiredialer:
-	go run main.go | jq .
+	go run main.go wg1.conf https://kubernetes.default.svc.cluster.local:443
 
 proxy:
 	wireproxy --config wg2.conf
