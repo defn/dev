@@ -1,5 +1,9 @@
 package tf
 
+full_accounts: ["ops", "net", "lib", "hub", "log", "sec", "pub", "dev", "dmz"]
+env_accounts: ["net", "lib", "hub"]
+ops_accounts: ["ops"]
+
 input: {
 	backend: {
 		lock:    "dfn-defn-terraform-state-lock"
