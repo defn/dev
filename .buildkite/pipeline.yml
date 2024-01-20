@@ -43,6 +43,41 @@ steps:
                 hostPath:
                   path: /var/run/docker.sock
   - wait
+  - label: test-iam
+    key: test-iam
+    plugins:
+      - kubernetes:
+          podSpec:
+            containers:
+              - image: coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:class-buildkite-latest
+                args:
+                  - |-
+                    '
+                    set -
+                    cd
+                    git fetch
+                    git reset --hard $BUILDKITE_COMMIT
+                    source .bash_profile
+                    git config --global user.email you@example.com
+                    git config --global user.name YourName
+                    aws sts get-caller-identity
+                    '
+                imagePullPolicy: Always
+                securityContext:
+                  runAsNonRoot: true
+                  runAsUser: 1000
+                  runAsGroup: 1000
+                volumeMounts:
+                  - name: docker-socket
+                    mountPath: /var/run/docker.sock
+                command:
+                  - bash
+                  - -c
+            volumes:
+              - name: docker-socket
+                hostPath:
+                  path: /var/run/docker.sock
+  - wait
   - label: build-class-buildkite-latest
     key: build-class-buildkite-latest
     plugins:

@@ -31,6 +31,23 @@ steps: [
 	},
 	#WaitStep,
 	#DockerStep & {
+		#label: "test-iam"
+		#image: "coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:class-buildkite-latest"
+		#args: ["""
+			'
+			set -
+			cd
+			git fetch
+			git reset --hard $BUILDKITE_COMMIT
+			source .bash_profile
+			git config --global user.email you@example.com
+			git config --global user.name YourName
+			aws sts get-caller-identity
+			'
+			"""]
+	},
+	#WaitStep,
+	#DockerStep & {
 		#label: "build-class-buildkite-latest"
 		#image: "coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:class-buildkite-latest"
 		#args: ["""
