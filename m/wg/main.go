@@ -12,7 +12,7 @@ import (
 
 func main() {
 	// Create a new Dialer based on a WireGuard configuration file
-	d, err := wiredialer.NewDialerFromFile("wg1.conf")
+	d, err := wiredialer.NewDialerFromFile(os.Args[1])
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
@@ -27,7 +27,7 @@ func main() {
 	}
 
 	// Make a request
-	resp, err := client.Get("https://kubernetes.default.svc.cluster.local:443")
+	resp, err := client.Get(os.Args[2])
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
