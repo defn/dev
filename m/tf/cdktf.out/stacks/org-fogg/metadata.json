@@ -2,7 +2,7 @@
   "//": {
     "metadata": {
       "backend": "s3",
-      "stackName": "chamber",
+      "stackName": "org-fogg",
       "version": "0.20.1"
     },
     "outputs": {
@@ -13,7 +13,7 @@
       "sso_instance": {
         "//": {
           "metadata": {
-            "path": "chamber/sso_instance",
+            "path": "org-fogg/sso_instance",
             "uniqueId": "sso_instance"
           }
         }
@@ -25,18 +25,18 @@
       "administrators_sso_group": {
         "//": {
           "metadata": {
-            "path": "chamber/administrators_sso_group",
+            "path": "org-fogg/administrators_sso_group",
             "uniqueId": "administrators_sso_group"
           }
         }
       }
     },
     "aws_organizations_account": {
-      "chamber": {
+      "fogg": {
         "//": {
           "metadata": {
-            "path": "chamber/chamber",
-            "uniqueId": "chamber"
+            "path": "org-fogg/fogg",
+            "uniqueId": "fogg"
           }
         }
       }
@@ -45,18 +45,18 @@
       "organization": {
         "//": {
           "metadata": {
-            "path": "chamber/organization",
+            "path": "org-fogg/organization",
             "uniqueId": "organization"
           }
         }
       }
     },
     "aws_ssoadmin_account_assignment": {
-      "chamber_admin_sso_account_assignment": {
+      "fogg_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "chamber/chamber_admin_sso_account_assignment",
-            "uniqueId": "chamber_admin_sso_account_assignment"
+            "path": "org-fogg/fogg_admin_sso_account_assignment",
+            "uniqueId": "fogg_admin_sso_account_assignment"
           }
         }
       }
@@ -65,7 +65,7 @@
       "admin_sso_managed_policy_attachment": {
         "//": {
           "metadata": {
-            "path": "chamber/admin_sso_managed_policy_attachment",
+            "path": "org-fogg/admin_sso_managed_policy_attachment",
             "uniqueId": "admin_sso_managed_policy_attachment"
           }
         }
@@ -75,7 +75,7 @@
       "admin_sso_permission_set": {
         "//": {
           "metadata": {
-            "path": "chamber/admin_sso_permission_set",
+            "path": "org-fogg/admin_sso_permission_set",
             "uniqueId": "admin_sso_permission_set"
           }
         }
@@ -88,7 +88,7 @@
         "bucket": "dfn-defn-terraform-state",
         "dynamodb_table": "dfn-defn-terraform-state-lock",
         "encrypt": true,
-        "key": "stacks/chamber/terraform.tfstate",
+        "key": "stacks/fogg/terraform.tfstate",
         "profile": "defn-org-sso",
         "region": "us-east-1"
       }

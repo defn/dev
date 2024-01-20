@@ -2,7 +2,7 @@
   "//": {
     "metadata": {
       "backend": "s3",
-      "stackName": "vault",
+      "stackName": "org-imma",
       "version": "0.20.1"
     },
     "outputs": {
@@ -13,7 +13,7 @@
       "sso_instance": {
         "//": {
           "metadata": {
-            "path": "vault/sso_instance",
+            "path": "org-imma/sso_instance",
             "uniqueId": "sso_instance"
           }
         }
@@ -25,18 +25,18 @@
       "administrators_sso_group": {
         "//": {
           "metadata": {
-            "path": "vault/administrators_sso_group",
+            "path": "org-imma/administrators_sso_group",
             "uniqueId": "administrators_sso_group"
           }
         }
       }
     },
     "aws_organizations_account": {
-      "vault": {
+      "imma": {
         "//": {
           "metadata": {
-            "path": "vault/vault",
-            "uniqueId": "vault"
+            "path": "org-imma/imma",
+            "uniqueId": "imma"
           }
         }
       }
@@ -45,18 +45,18 @@
       "organization": {
         "//": {
           "metadata": {
-            "path": "vault/organization",
+            "path": "org-imma/organization",
             "uniqueId": "organization"
           }
         }
       }
     },
     "aws_ssoadmin_account_assignment": {
-      "vault_admin_sso_account_assignment": {
+      "imma_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "vault/vault_admin_sso_account_assignment",
-            "uniqueId": "vault_admin_sso_account_assignment"
+            "path": "org-imma/imma_admin_sso_account_assignment",
+            "uniqueId": "imma_admin_sso_account_assignment"
           }
         }
       }
@@ -65,7 +65,7 @@
       "admin_sso_managed_policy_attachment": {
         "//": {
           "metadata": {
-            "path": "vault/admin_sso_managed_policy_attachment",
+            "path": "org-imma/admin_sso_managed_policy_attachment",
             "uniqueId": "admin_sso_managed_policy_attachment"
           }
         }
@@ -75,7 +75,7 @@
       "admin_sso_permission_set": {
         "//": {
           "metadata": {
-            "path": "vault/admin_sso_permission_set",
+            "path": "org-imma/admin_sso_permission_set",
             "uniqueId": "admin_sso_permission_set"
           }
         }
@@ -88,7 +88,7 @@
         "bucket": "dfn-defn-terraform-state",
         "dynamodb_table": "dfn-defn-terraform-state-lock",
         "encrypt": true,
-        "key": "stacks/vault/terraform.tfstate",
+        "key": "stacks/imma/terraform.tfstate",
         "profile": "defn-org-sso",
         "region": "us-east-1"
       }

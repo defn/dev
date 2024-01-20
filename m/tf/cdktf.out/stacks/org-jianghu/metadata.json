@@ -2,7 +2,7 @@
   "//": {
     "metadata": {
       "backend": "s3",
-      "stackName": "jianghu",
+      "stackName": "org-jianghu",
       "version": "0.20.1"
     },
     "outputs": {
@@ -13,7 +13,7 @@
       "sso_instance": {
         "//": {
           "metadata": {
-            "path": "jianghu/sso_instance",
+            "path": "org-jianghu/sso_instance",
             "uniqueId": "sso_instance"
           }
         }
@@ -25,7 +25,7 @@
       "administrators_sso_group": {
         "//": {
           "metadata": {
-            "path": "jianghu/administrators_sso_group",
+            "path": "org-jianghu/administrators_sso_group",
             "uniqueId": "administrators_sso_group"
           }
         }
@@ -35,7 +35,7 @@
       "jianghu": {
         "//": {
           "metadata": {
-            "path": "jianghu/jianghu",
+            "path": "org-jianghu/jianghu",
             "uniqueId": "jianghu"
           }
         }
@@ -45,7 +45,7 @@
       "organization": {
         "//": {
           "metadata": {
-            "path": "jianghu/organization",
+            "path": "org-jianghu/organization",
             "uniqueId": "organization"
           }
         }
@@ -55,7 +55,7 @@
       "jianghu_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "jianghu/jianghu_admin_sso_account_assignment",
+            "path": "org-jianghu/jianghu_admin_sso_account_assignment",
             "uniqueId": "jianghu_admin_sso_account_assignment"
           }
         }
@@ -65,7 +65,7 @@
       "admin_sso_managed_policy_attachment": {
         "//": {
           "metadata": {
-            "path": "jianghu/admin_sso_managed_policy_attachment",
+            "path": "org-jianghu/admin_sso_managed_policy_attachment",
             "uniqueId": "admin_sso_managed_policy_attachment"
           }
         }
@@ -75,7 +75,7 @@
       "admin_sso_permission_set": {
         "//": {
           "metadata": {
-            "path": "jianghu/admin_sso_permission_set",
+            "path": "org-jianghu/admin_sso_permission_set",
             "uniqueId": "admin_sso_permission_set"
           }
         }

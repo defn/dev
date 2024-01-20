@@ -2,7 +2,7 @@
   "//": {
     "metadata": {
       "backend": "s3",
-      "stackName": "helix",
+      "stackName": "org-helix",
       "version": "0.20.1"
     },
     "outputs": {
@@ -13,7 +13,7 @@
       "sso_instance": {
         "//": {
           "metadata": {
-            "path": "helix/sso_instance",
+            "path": "org-helix/sso_instance",
             "uniqueId": "sso_instance"
           }
         }
@@ -25,7 +25,7 @@
       "administrators_sso_group": {
         "//": {
           "metadata": {
-            "path": "helix/administrators_sso_group",
+            "path": "org-helix/administrators_sso_group",
             "uniqueId": "administrators_sso_group"
           }
         }
@@ -35,7 +35,7 @@
       "dev": {
         "//": {
           "metadata": {
-            "path": "helix/dev",
+            "path": "org-helix/dev",
             "uniqueId": "dev"
           }
         }
@@ -43,7 +43,7 @@
       "dmz": {
         "//": {
           "metadata": {
-            "path": "helix/dmz",
+            "path": "org-helix/dmz",
             "uniqueId": "dmz"
           }
         }
@@ -51,7 +51,7 @@
       "helix": {
         "//": {
           "metadata": {
-            "path": "helix/helix",
+            "path": "org-helix/helix",
             "uniqueId": "helix"
           }
         }
@@ -59,7 +59,7 @@
       "hub": {
         "//": {
           "metadata": {
-            "path": "helix/hub",
+            "path": "org-helix/hub",
             "uniqueId": "hub"
           }
         }
@@ -67,7 +67,7 @@
       "lib": {
         "//": {
           "metadata": {
-            "path": "helix/lib",
+            "path": "org-helix/lib",
             "uniqueId": "lib"
           }
         }
@@ -75,7 +75,7 @@
       "log": {
         "//": {
           "metadata": {
-            "path": "helix/log",
+            "path": "org-helix/log",
             "uniqueId": "log"
           }
         }
@@ -83,7 +83,7 @@
       "net": {
         "//": {
           "metadata": {
-            "path": "helix/net",
+            "path": "org-helix/net",
             "uniqueId": "net"
           }
         }
@@ -91,7 +91,7 @@
       "ops": {
         "//": {
           "metadata": {
-            "path": "helix/ops",
+            "path": "org-helix/ops",
             "uniqueId": "ops"
           }
         }
@@ -99,7 +99,7 @@
       "pub": {
         "//": {
           "metadata": {
-            "path": "helix/pub",
+            "path": "org-helix/pub",
             "uniqueId": "pub"
           }
         }
@@ -107,7 +107,7 @@
       "sec": {
         "//": {
           "metadata": {
-            "path": "helix/sec",
+            "path": "org-helix/sec",
             "uniqueId": "sec"
           }
         }
@@ -117,7 +117,7 @@
       "organization": {
         "//": {
           "metadata": {
-            "path": "helix/organization",
+            "path": "org-helix/organization",
             "uniqueId": "organization"
           }
         }
@@ -127,7 +127,7 @@
       "dev_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "helix/dev_admin_sso_account_assignment",
+            "path": "org-helix/dev_admin_sso_account_assignment",
             "uniqueId": "dev_admin_sso_account_assignment"
           }
         }
@@ -135,7 +135,7 @@
       "dmz_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "helix/dmz_admin_sso_account_assignment",
+            "path": "org-helix/dmz_admin_sso_account_assignment",
             "uniqueId": "dmz_admin_sso_account_assignment"
           }
         }
@@ -143,7 +143,7 @@
       "helix_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "helix/helix_admin_sso_account_assignment",
+            "path": "org-helix/helix_admin_sso_account_assignment",
             "uniqueId": "helix_admin_sso_account_assignment"
           }
         }
@@ -151,7 +151,7 @@
       "hub_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "helix/hub_admin_sso_account_assignment",
+            "path": "org-helix/hub_admin_sso_account_assignment",
             "uniqueId": "hub_admin_sso_account_assignment"
           }
         }
@@ -159,7 +159,7 @@
       "lib_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "helix/lib_admin_sso_account_assignment",
+            "path": "org-helix/lib_admin_sso_account_assignment",
             "uniqueId": "lib_admin_sso_account_assignment"
           }
         }
@@ -167,7 +167,7 @@
       "log_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "helix/log_admin_sso_account_assignment",
+            "path": "org-helix/log_admin_sso_account_assignment",
             "uniqueId": "log_admin_sso_account_assignment"
           }
         }
@@ -175,7 +175,7 @@
       "net_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "helix/net_admin_sso_account_assignment",
+            "path": "org-helix/net_admin_sso_account_assignment",
             "uniqueId": "net_admin_sso_account_assignment"
           }
         }
@@ -183,7 +183,7 @@
       "ops_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "helix/ops_admin_sso_account_assignment",
+            "path": "org-helix/ops_admin_sso_account_assignment",
             "uniqueId": "ops_admin_sso_account_assignment"
           }
         }
@@ -191,7 +191,7 @@
       "pub_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "helix/pub_admin_sso_account_assignment",
+            "path": "org-helix/pub_admin_sso_account_assignment",
             "uniqueId": "pub_admin_sso_account_assignment"
           }
         }
@@ -199,7 +199,7 @@
       "sec_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "helix/sec_admin_sso_account_assignment",
+            "path": "org-helix/sec_admin_sso_account_assignment",
             "uniqueId": "sec_admin_sso_account_assignment"
           }
         }
@@ -209,7 +209,7 @@
       "admin_sso_managed_policy_attachment": {
         "//": {
           "metadata": {
-            "path": "helix/admin_sso_managed_policy_attachment",
+            "path": "org-helix/admin_sso_managed_policy_attachment",
             "uniqueId": "admin_sso_managed_policy_attachment"
           }
         }
@@ -219,7 +219,7 @@
       "admin_sso_permission_set": {
         "//": {
           "metadata": {
-            "path": "helix/admin_sso_permission_set",
+            "path": "org-helix/admin_sso_permission_set",
             "uniqueId": "admin_sso_permission_set"
           }
         }

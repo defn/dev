@@ -1,4 +1,5 @@
 build:
+	cue eval -c >/dev/null
 	b build
 	cdktf synth --hcl
 # cdktf synth --hcl has a bug with Encrypt bool undefined

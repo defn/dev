@@ -2,7 +2,7 @@
   "//": {
     "metadata": {
       "backend": "s3",
-      "stackName": "coil",
+      "stackName": "org-curl",
       "version": "0.20.1"
     },
     "outputs": {
@@ -13,7 +13,7 @@
       "sso_instance": {
         "//": {
           "metadata": {
-            "path": "coil/sso_instance",
+            "path": "org-curl/sso_instance",
             "uniqueId": "sso_instance"
           }
         }
@@ -25,25 +25,25 @@
       "administrators_sso_group": {
         "//": {
           "metadata": {
-            "path": "coil/administrators_sso_group",
+            "path": "org-curl/administrators_sso_group",
             "uniqueId": "administrators_sso_group"
           }
         }
       }
     },
     "aws_organizations_account": {
-      "coil": {
+      "curl": {
         "//": {
           "metadata": {
-            "path": "coil/coil",
-            "uniqueId": "coil"
+            "path": "org-curl/curl",
+            "uniqueId": "curl"
           }
         }
       },
       "hub": {
         "//": {
           "metadata": {
-            "path": "coil/hub",
+            "path": "org-curl/hub",
             "uniqueId": "hub"
           }
         }
@@ -51,7 +51,7 @@
       "lib": {
         "//": {
           "metadata": {
-            "path": "coil/lib",
+            "path": "org-curl/lib",
             "uniqueId": "lib"
           }
         }
@@ -59,7 +59,7 @@
       "net": {
         "//": {
           "metadata": {
-            "path": "coil/net",
+            "path": "org-curl/net",
             "uniqueId": "net"
           }
         }
@@ -69,25 +69,25 @@
       "organization": {
         "//": {
           "metadata": {
-            "path": "coil/organization",
+            "path": "org-curl/organization",
             "uniqueId": "organization"
           }
         }
       }
     },
     "aws_ssoadmin_account_assignment": {
-      "coil_admin_sso_account_assignment": {
+      "curl_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "coil/coil_admin_sso_account_assignment",
-            "uniqueId": "coil_admin_sso_account_assignment"
+            "path": "org-curl/curl_admin_sso_account_assignment",
+            "uniqueId": "curl_admin_sso_account_assignment"
           }
         }
       },
       "hub_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "coil/hub_admin_sso_account_assignment",
+            "path": "org-curl/hub_admin_sso_account_assignment",
             "uniqueId": "hub_admin_sso_account_assignment"
           }
         }
@@ -95,7 +95,7 @@
       "lib_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "coil/lib_admin_sso_account_assignment",
+            "path": "org-curl/lib_admin_sso_account_assignment",
             "uniqueId": "lib_admin_sso_account_assignment"
           }
         }
@@ -103,7 +103,7 @@
       "net_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "coil/net_admin_sso_account_assignment",
+            "path": "org-curl/net_admin_sso_account_assignment",
             "uniqueId": "net_admin_sso_account_assignment"
           }
         }
@@ -113,7 +113,7 @@
       "admin_sso_managed_policy_attachment": {
         "//": {
           "metadata": {
-            "path": "coil/admin_sso_managed_policy_attachment",
+            "path": "org-curl/admin_sso_managed_policy_attachment",
             "uniqueId": "admin_sso_managed_policy_attachment"
           }
         }
@@ -123,7 +123,7 @@
       "admin_sso_permission_set": {
         "//": {
           "metadata": {
-            "path": "coil/admin_sso_permission_set",
+            "path": "org-curl/admin_sso_permission_set",
             "uniqueId": "admin_sso_permission_set"
           }
         }
@@ -136,7 +136,7 @@
         "bucket": "dfn-defn-terraform-state",
         "dynamodb_table": "dfn-defn-terraform-state-lock",
         "encrypt": true,
-        "key": "stacks/coil/terraform.tfstate",
+        "key": "stacks/curl/terraform.tfstate",
         "profile": "defn-org-sso",
         "region": "us-east-1"
       }
