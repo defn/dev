@@ -29,9 +29,6 @@ steps: [
 			'
 			"""]
 	},
-]
-
-#no: [
 	#WaitStep,
 	#DockerStep & {
 		#label: "build-class-buildkite-latest"
@@ -47,25 +44,9 @@ steps: [
 			make class-buildkite-latest
 			'
 			"""]
-	},
-	#WaitStep,
-	#DockerStep & {
-		#label: "build-class-latest"
-		#image: "coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:class-latest"
-		#args: ["""
-			'
-			set -e
-			cd
-			git fetch
-			git reset --hard $BUILDKITE_COMMIT
-			source .bash_profile
-			cd m/i/class
-			make class-latest
-			'
-			"""]
 	}, #DockerStep & {
 		#label: "build-buildkite"
-		#image: "coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:class-latest"
+		#image: "coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:class-buildkite-latest"
 		#args: ["""
 			'
 			set -e
