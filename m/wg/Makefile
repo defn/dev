@@ -1,5 +1,8 @@
 wiredialer:
 	go run main.go | jq .
 
-wgproxy:
+proxy:
 	./wireproxy --config wg0.conf
+
+client:
+	curl -s -k -H "Authorization: Bearer $$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://127.0.0.1:25565/api/v1/namespaces | jq -r '.items[].metadata.name' | sort
