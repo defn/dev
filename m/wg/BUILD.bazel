@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "wg_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/defn/dev/m/wg",
+    visibility = ["//visibility:private"],
+    deps = ["@com_github_botanica_consulting_wiredialer//:wiredialer"],
+)
+
+go_binary(
+    name = "wg",
+    embed = [":wg_lib"],
+    visibility = ["//visibility:public"],
+)
