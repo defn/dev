@@ -5,13 +5,14 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"crypto/tls"
 
 	"github.com/botanica-consulting/wiredialer"
 )
 
 func main() {
 	// Create a new Dialer based on a WireGuard configuration file
-	d, err := wiredialer.NewDialerFromFile("wg0.conf")
+	d, err := wiredialer.NewDialerFromFile("wg1.conf")
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
@@ -21,11 +22,12 @@ func main() {
 	client := &http.Client{
 		Transport: &http.Transport{
 			DialContext: d.DialContext,
+			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 		},
 	}
 
 	// Make a request
-	resp, err := client.Get("http://ifconfig.co/city")
+	resp, err := client.Get("https://kubernetes.default.svc.cluster.local:443")
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
