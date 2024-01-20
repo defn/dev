@@ -33,6 +33,10 @@ type AwsOrganization struct {
 	Admins   []AwsAdmin `json:"admins"`
 }
 
+type AwsAccount struct {
+	Name string `json:"name"`
+}
+
 type AwsProps struct {
 	Backend      AwsBackend                 `json:"backend"`
 	Organization map[string]AwsOrganization `json:"organization"`
@@ -56,6 +60,11 @@ func Jsf(s string, a ...any) *string {
 //lint:ignore U1000 utility
 func Jstrue() *bool {
 	return jsii.Bool(true)
+}
+
+//lint:ignore U1000 utility
+func Jsbool(b bool) *bool {
+	return jsii.Bool(b)
 }
 
 func LoadUserAwsProps(infra_schema string) AwsProps {
