@@ -5,7 +5,6 @@ all:
 	$(MAKE) latest
 
 latest:
-	$(MAKE) class-latest
 	$(MAKE) class-buildkite-latest
 
 reset:
