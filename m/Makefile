@@ -60,7 +60,7 @@ cdktf:
 
 upgrade:
 	rm -rf node_modules
-	go get $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1')
+	set -x; go get $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1')
 	go mod tidy
 	npm install
 	npm upgrade
