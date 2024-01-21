@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//pkg/gh:flake_config"
-  "//pkg/gh:flake_config" -> "//pkg/gh:flake.lock\n//pkg/gh:flake.nix\n//pkg/gh:flake.json"
-  "//pkg/gh:flake.lock\n//pkg/gh:flake.nix\n//pkg/gh:flake.json"
-}

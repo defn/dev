@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//k:gen_deploy_yaml_sh"
-  "//k:gen_deploy_yaml_sh" -> "//k:gen_deploy_yaml.sh"
-  "//k:gen_deploy_yaml.sh"
-}

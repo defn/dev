@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//k:gen_cue_import_sh"
-  "//k:gen_cue_import_sh" -> "//k:gen_cue_import.sh"
-  "//k:gen_cue_import.sh"
-}

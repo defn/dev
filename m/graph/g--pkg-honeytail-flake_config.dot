@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//pkg/honeytail:flake_config"
-  "//pkg/honeytail:flake_config" -> "//pkg/honeytail:flake.nix\n//pkg/honeytail:flake.lock\n//pkg/honeytail:flake.json"
-  "//pkg/honeytail:flake.nix\n//pkg/honeytail:flake.lock\n//pkg/honeytail:flake.json"
-}

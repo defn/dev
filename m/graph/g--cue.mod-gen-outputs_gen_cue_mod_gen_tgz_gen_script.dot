@@ -1,9 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//cue.mod/gen:outputs_gen_cue_mod_gen_tgz_gen_script"
-  "//cue.mod/gen:outputs_gen_cue_mod_gen_tgz_gen_script" -> "@bazel_tools//src/conditions:host_windows"
-  "@bazel_tools//src/conditions:host_windows"
-  "@bazel_tools//src/conditions:host_windows" -> "@bazel_tools//src/conditions:host_windows_arm64_constraint\n@bazel_tools//src/conditions:host_windows_x64_constraint"
-  [label="@@bazel_tools//src/conditions:host_windows_arm64_constraint//conditions:default"];
-  "@bazel_tools//src/conditions:host_windows_arm64_constraint\n@bazel_tools//src/conditions:host_windows_x64_constraint"
-}

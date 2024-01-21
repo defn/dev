@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//pkg/vpn:flake_config"
-  "//pkg/vpn:flake_config" -> "//pkg/vpn:flake.nix\n//pkg/vpn:flake.json\n//pkg/vpn:flake.lock"
-  "//pkg/vpn:flake.nix\n//pkg/vpn:flake.json\n//pkg/vpn:flake.lock"
-}

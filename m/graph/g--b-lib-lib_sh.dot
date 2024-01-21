@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//b/lib:lib_sh"
-  "//b/lib:lib_sh" -> "//b/lib:lib.sh"
-  "//b/lib:lib.sh"
-}

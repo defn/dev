@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//pkg/tfo:flake_config"
-  "//pkg/tfo:flake_config" -> "//pkg/tfo:flake.nix\n//pkg/tfo:flake.lock\n//pkg/tfo:flake.json"
-  "//pkg/tfo:flake.nix\n//pkg/tfo:flake.lock\n//pkg/tfo:flake.json"
-}

@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//cue.mod/gen:make_k8s_cue_script"
-  "//cue.mod/gen:make_k8s_cue_script" -> "//cue.mod/gen:make_k8s_cue.sh"
-  "//cue.mod/gen:make_k8s_cue.sh"
-}

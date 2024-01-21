@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//pkg/remotedev:flake_config"
-  "//pkg/remotedev:flake_config" -> "//pkg/remotedev:flake.lock\n//pkg/remotedev:flake.nix\n//pkg/remotedev:flake.json"
-  "//pkg/remotedev:flake.lock\n//pkg/remotedev:flake.nix\n//pkg/remotedev:flake.json"
-}

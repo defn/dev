@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//cue.mod/gen:meh_sh"
-  "//cue.mod/gen:meh_sh" -> "//cue.mod/gen:meh.sh"
-  "//cue.mod/gen:meh.sh"
-}

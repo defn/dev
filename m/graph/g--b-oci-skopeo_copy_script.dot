@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//b/oci:skopeo_copy_script"
-  "//b/oci:skopeo_copy_script" -> "//b/oci:skopeo_copy.sh"
-  "//b/oci:skopeo_copy.sh"
-}

@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//b/nix:flake_store_script"
-  "//b/nix:flake_store_script" -> "//b/nix:flake_store.sh"
-  "//b/nix:flake_store.sh"
-}

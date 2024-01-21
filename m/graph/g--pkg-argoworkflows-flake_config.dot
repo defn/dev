@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//pkg/argoworkflows:flake_config"
-  "//pkg/argoworkflows:flake_config" -> "//pkg/argoworkflows:flake.lock\n//pkg/argoworkflows:flake.json\n//pkg/argoworkflows:flake.nix"
-  "//pkg/argoworkflows:flake.lock\n//pkg/argoworkflows:flake.json\n//pkg/argoworkflows:flake.nix"
-}

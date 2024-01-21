@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//pkg/honeymarker:flake_config"
-  "//pkg/honeymarker:flake_config" -> "//pkg/honeymarker:flake.json\n//pkg/honeymarker:flake.nix\n//pkg/honeymarker:flake.lock"
-  "//pkg/honeymarker:flake.json\n//pkg/honeymarker:flake.nix\n//pkg/honeymarker:flake.lock"
-}

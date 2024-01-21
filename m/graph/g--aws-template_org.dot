@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//aws:template_org"
-  "//aws:template_org" -> "//aws:template_org.txt"
-  "//aws:template_org.txt"
-}

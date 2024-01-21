@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//cue.mod/gen:k8s_go_mod"
-  "//cue.mod/gen:k8s_go_mod" -> "//cue.mod/gen:go.sum\n//cue.mod/gen:go.mod"
-  "//cue.mod/gen:go.sum\n//cue.mod/gen:go.mod"
-}
