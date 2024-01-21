@@ -1,17 +1,17 @@
 syntax = "proto3";
 
-// $schema: defn.dev.demo.v1.Pet
+// $schema: defn.dev.pets.v1.Pet
 // $title: Cool pet
 // $description: So many cool pets
-// $location: https://defn.dev/demo/pet/v1
+// $location: https://defn.dev/pets/pet/v1
 
 // Description of package
-package defn.dev.demo.v1;
+package defn.dev.pets.v1;
 
-option go_package="github.com/defn/dev/m/defn/dev/demo/v1";
+option go_package="github.com/defn/dev/m/defn/dev/pets/v1";
 
 // <!-- crd generation tags
-// +cue-gen:Pet:groupName:demo.defn.dev
+// +cue-gen:Pet:groupName:pets.defn.dev
 // +cue-gen:Pet:version:v1
 // +cue-gen:Pet:storageVersion
 // +cue-gen:Pet:subresource:status
@@ -21,7 +21,7 @@ option go_package="github.com/defn/dev/m/defn/dev/demo/v1";
 //
 // <!-- go code generation tags
 // +kubetype-gen
-// +kubetype-gen:groupVersion=demo.defn.dev/v1
+// +kubetype-gen:groupVersion=pets.defn.dev/v1
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->

@@ -1,0 +1,42 @@
+load("//b/out:out.bzl", "copy_files")
+
+filegroup(
+    name = "make_crds_cue_gen_script",
+    srcs = ["make_crds_cue_gen.sh"],
+)
+
+filegroup(
+    name = "cue_yaml",
+    srcs = ["cue.yaml"],
+)
+
+filegroup(
+    name = "go_mod",
+    srcs = [
+        "go.mod",
+        "go.sum",
+    ],
+)
+
+filegroup(
+    name = "protos",
+    srcs = [
+        "//defn/dev/legumes/v1:bean.proto",
+        "//defn/dev/legumes/v1:pea.proto",
+        "//defn/dev/pets/v1:pet.proto",
+    ],
+)
+
+genrule(
+    name = "gen_crds_cue_gen",
+    srcs = [
+        "make_crds_cue_gen_script",
+        "cue_yaml",
+        "go_mod",
+        "protos",
+        "//defn/dev/cue-gen:build_cue_gen_binary",
+    ],
+    outs = ["customresourcedefinitions.gen.yaml"],
+    cmd = "$(location make_crds_cue_gen_script) $(location cue_yaml) $(location //defn/dev/cue-gen:build_cue_gen_binary) $@",
+    tools = ["make_crds_cue_gen_script"],
+)
