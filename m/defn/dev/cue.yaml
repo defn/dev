@@ -1,7 +1,0 @@
-module: github.com/defn/dev/m/defn/dev
-
-openapi:
-  fieldFilter: min.*|max.*
-
-crd:
-  dir: crds
