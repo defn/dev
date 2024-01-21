@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//k:gen_push_helm_chart_sh"
-  "//k:gen_push_helm_chart_sh" -> "//k:gen_push_helm_chart.sh"
-  "//k:gen_push_helm_chart.sh"
-}

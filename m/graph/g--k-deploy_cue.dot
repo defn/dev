@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//k:deploy_cue"
-  "//k:deploy_cue" -> "//k:crds.cue\n//k:digest.cue\n//k:k8s.io.cue"
-  "//k:crds.cue\n//k:digest.cue\n//k:k8s.io.cue"
-}

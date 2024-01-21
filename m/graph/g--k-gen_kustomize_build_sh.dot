@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//k:gen_kustomize_build_sh"
-  "//k:gen_kustomize_build_sh" -> "//k:gen_kustomize_build.sh"
-  "//k:gen_kustomize_build.sh"
-}

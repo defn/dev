@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//pkg/ibazel:flake_config"
-  "//pkg/ibazel:flake_config" -> "//pkg/ibazel:flake.json\n//pkg/ibazel:flake.nix\n//pkg/ibazel:flake.lock"
-  "//pkg/ibazel:flake.json\n//pkg/ibazel:flake.nix\n//pkg/ibazel:flake.lock"
-}

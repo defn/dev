@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//pkg/buildkite:flake_config"
-  "//pkg/buildkite:flake_config" -> "//pkg/buildkite:flake.lock\n//pkg/buildkite:flake.nix\n//pkg/buildkite:flake.json"
-  "//pkg/buildkite:flake.lock\n//pkg/buildkite:flake.nix\n//pkg/buildkite:flake.json"
-}

@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//pkg/buildifier:flake_config"
-  "//pkg/buildifier:flake_config" -> "//pkg/buildifier:flake.lock\n//pkg/buildifier:flake.json\n//pkg/buildifier:flake.nix"
-  "//pkg/buildifier:flake.lock\n//pkg/buildifier:flake.json\n//pkg/buildifier:flake.nix"
-}

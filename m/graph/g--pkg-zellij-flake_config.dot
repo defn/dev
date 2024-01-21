@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//pkg/zellij:flake_config"
-  "//pkg/zellij:flake_config" -> "//pkg/zellij:flake.lock\n//pkg/zellij:flake.nix\n//pkg/zellij:flake.json"
-  "//pkg/zellij:flake.lock\n//pkg/zellij:flake.nix\n//pkg/zellij:flake.json"
-}

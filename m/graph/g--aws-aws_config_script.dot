@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//aws:aws_config_script"
-  "//aws:aws_config_script" -> "//aws:aws_config.sh"
-  "//aws:aws_config.sh"
-}

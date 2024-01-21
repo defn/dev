@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//pkg/kubectl:flake_config"
-  "//pkg/kubectl:flake_config" -> "//pkg/kubectl:flake.lock\n//pkg/kubectl:flake.nix\n//pkg/kubectl:flake.json"
-  "//pkg/kubectl:flake.lock\n//pkg/kubectl:flake.nix\n//pkg/kubectl:flake.json"
-}

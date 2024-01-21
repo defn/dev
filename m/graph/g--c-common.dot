@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//c:common"
-  "//c:common" -> "//c:external.cue\n//c:environment.cue\n//c:kustomize_schema.cue\n//c:environment_schema.cue\n//c:kustomize.cue\n//c:defn-run.cue\n//c:transform_schema.cue\n//c:gen.cue"
-  "//c:external.cue\n//c:environment.cue\n//c:kustomize_schema.cue\n//c:environment_schema.cue\n//c:kustomize.cue\n//c:defn-run.cue\n//c:transform_schema.cue\n//c:gen.cue"
-}

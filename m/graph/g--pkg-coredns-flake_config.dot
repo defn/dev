@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//pkg/coredns:flake_config"
-  "//pkg/coredns:flake_config" -> "//pkg/coredns:flake.lock\n//pkg/coredns:flake.nix\n//pkg/coredns:flake.json"
-  "//pkg/coredns:flake.lock\n//pkg/coredns:flake.nix\n//pkg/coredns:flake.json"
-}

@@ -1,6 +1,0 @@
-digraph mygraph {
-  node [shape=box];
-  "//pkg/oras:flake_config"
-  "//pkg/oras:flake_config" -> "//pkg/oras:flake.json\n//pkg/oras:flake.nix\n//pkg/oras:flake.lock"
-  "//pkg/oras:flake.json\n//pkg/oras:flake.nix\n//pkg/oras:flake.lock"
-}
