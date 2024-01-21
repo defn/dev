@@ -19,7 +19,7 @@ function main {
 	cd defn/dev/cue-gen
 	export GOMODCACHE="${HOME}/.cache/go-mod"
 
-	"${flake_go}" build istio.io/tools/cmd/cue-gen
+	go build istio.io/tools/cmd/cue-gen
 	chmod 755 cue-gen
 	mv cue-gen "${out}"
 }
