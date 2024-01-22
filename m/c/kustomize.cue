@@ -1630,7 +1630,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "2.7.0"
+		version:   "2.7.1"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {
@@ -2054,7 +2054,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "4.1.1"
+		version:     "4.2.0"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
