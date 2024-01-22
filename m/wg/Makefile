@@ -1,5 +1,6 @@
 wiredialer:
-	go run main.go wg1.conf https://kubernetes.default.svc.cluster.local:443
+	b build
+	$(shell git rev-parse --show-toplevel)/m/bazel-bin/wg/wg_/wg wg1.conf https://kubernetes.default.svc.cluster.local:443
 
 proxy:
 	(sleep 2; $(MAKE) client) &
