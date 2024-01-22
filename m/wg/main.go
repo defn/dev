@@ -1,12 +1,11 @@
 package main
 
 import (
+	"crypto/tls"
 	"fmt"
 	"io"
 	"net/http"
 	"os"
-	"crypto/tls"
-	"time"
 
 	"github.com/botanica-consulting/wiredialer"
 )
@@ -20,7 +19,7 @@ func main() {
 
 	client := &http.Client{
 		Transport: &http.Transport{
-			DialContext: d.DialContext,
+			DialContext:     d.DialContext,
 			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 		},
 	}
@@ -33,6 +32,4 @@ func main() {
 	defer resp.Body.Close()
 
 	io.Copy(os.Stdout, resp.Body)
-
-	time.Sleep(2 * time.Second)
 }
