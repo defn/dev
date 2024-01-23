@@ -1,0 +1,8 @@
+- name: Install base packages
+  become: true
+  apt:
+    name:
+      - direnv
+      - make
+      - net-tools
+    state: present

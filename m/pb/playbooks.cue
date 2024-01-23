@@ -11,10 +11,16 @@ inventory: {
 playbook: demo: [{
 	name:  "Playbook with one role"
 	hosts: "all"
-	roles: ["demo"]
+	roles: ["base_packages"]
 }]
 
-role: demo: tasks: [{
-	name: "Example task in the role"
-	debug: msg: "Hello from example_role!"
+role: base_packages: tasks: [{
+	name: "Install base packages"
+	become: true
+	apt: {
+		name: [
+			"direnv", "make", "net-tools"
+		]
+		state: "present"
+	}
 }]
