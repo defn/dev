@@ -3,7 +3,7 @@ playbook ?= playbooks/demo.yaml
 
 build:
 	@rm -rf playbooks
-	@cue export --out json -e fs | jq -r 'to_entries[] | .key as $$fname | "\($$fname) \(.value | @base64)"' | ../c/decode_base64.py 
+	@cue export --out json -e fs | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | ../c/decode_base64.py 
 
 play:
 	@ansible-playbook -i ./inventory.sh -l "$(host)" "$(playbook)"
