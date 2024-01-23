@@ -1,4 +1,3 @@
----
 - name: Example task in the role
   debug:
-    msg: "Hello from example_role!"
+    msg: Hello from example_role!
