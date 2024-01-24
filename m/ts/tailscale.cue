@@ -14,8 +14,14 @@ tagOwners: {
 	"tag:k8s-operator": []
 	"tag:k8s": ["tag:k8s-operator"]
 }
-groups: "group:admins": ["amanibhavam@github", "dgwyn@github"]
+
+groups: "group:admins": [
+	"amanibhavam@github",
+	"dgwyn@github",
+]
+
 hosts: {}
+
 grants: [{
 	src: ["group:admins", "tag:amanibhavam"]
 	dst: ["tag:k8s-operator"]
@@ -23,6 +29,7 @@ grants: [{
 		impersonate: groups: ["tailscale-admins"]
 	}]
 }]
+
 acls: [{
 	action: "accept"
 	src: ["autogroup:member"]
@@ -44,6 +51,7 @@ acls: [{
 	src: ["group:admins"]
 	dst: ["tag:k8s-operator:443"]
 }]
+
 ssh: [{
 	action: "check"
 	src: ["autogroup:member"]
@@ -65,8 +73,11 @@ ssh: [{
 	dst: ["tag:oracle"]
 	users: ["ubuntu"]
 }]
+
 nodeAttrs: [{
 	target: ["autogroup:member"]
 	attr: ["funnel"]
-},
-	{target: ["*"], attr: ["funnel"]}]
+}, {
+	target: ["*"]
+	attr: ["funnel"]
+}]
