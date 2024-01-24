@@ -2,5 +2,5 @@
   "slug": "pkg-tailscale",
   "ghrepo": "tailscale/tailscale",
   "vendor": "1.58.2",
-  "revision": "0"
+  "revision": "1"
 }
