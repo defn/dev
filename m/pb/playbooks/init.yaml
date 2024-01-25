@@ -5,6 +5,6 @@
   tasks:
     - name: Add NOPASSWD to sudoers.d for Ubuntu user
       copy:
-        content: "ubuntu ALL=(ALL:ALL) NOPASSWD: ALL"
-        dest: "/etc/sudoers.d/ubuntu"
+        content: 'ubuntu ALL=(ALL:ALL) NOPASSWD: ALL'
+        dest: /etc/sudoers.d/ubuntu
         mode: "0440"
