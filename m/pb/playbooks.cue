@@ -28,6 +28,10 @@ inventory: {
 		"zm2",
 		"zm3",
 	]
+
+	tp: hosts: [
+		"thinkpad"
+	]
 }
 
 playbook: demo: [{
