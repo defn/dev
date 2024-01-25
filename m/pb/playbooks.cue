@@ -1,10 +1,32 @@
 package ansible
 
 inventory: {
-	all: hosts: [
+	[string]: vars: {
+		ansible_user: "ubuntu"
+	}
+
+	coder: hosts: [
 		"coder-amanibhavam-district",
-		"coder-amanibhavam-school",
-		"coder-amanibhavam-class",
+		//"coder-amanibhavam-school",
+		//"coder-amanibhavam-class",
+	]
+
+	oci: hosts: [
+		"oci1",
+		"oci2",
+	]
+
+	mac: hosts: [
+		//"mba",
+		//"mbb",
+		"mbair",
+		"macmini",
+	]
+
+	zimaboard: hosts: [
+		"zm1",
+		"zm2",
+		"zm3",
 	]
 }
 
