@@ -489,17 +489,17 @@
       },
       "locked": {
         "dir": "m/pkg/kn",
-        "lastModified": 1703442811,
-        "narHash": "sha256-bQ3F1i8hJexdxpsAD8nzAcuKiwEC+MVX/8LvYH07lSA=",
+        "lastModified": 1706141395,
+        "narHash": "sha256-izjGuASK4cO9BDcwMxMggJ7ymrAe1F3BWzfMwoYF0xQ=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "09a8c2ef46f989da66a316b63df1434a494e064d",
+        "rev": "3b7759c9cd9022f3e7acd73d30c8419a1b38b66a",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kn",
         "owner": "defn",
-        "ref": "pkg-kn-1.12.0-4",
+        "ref": "pkg-kn-1.13.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -594,17 +594,17 @@
       },
       "locked": {
         "dir": "m/pkg/mirrord",
-        "lastModified": 1705682685,
-        "narHash": "sha256-l1plg/ZW3wH2Mr8twUykr5RBeDZhkBfqUhB5c/LgT+8=",
+        "lastModified": 1706141415,
+        "narHash": "sha256-fnMiyCTtMQ+QvTLEpQly9oID4eIatITqXw7I9cSXsmo=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "a1b778d451cd87bae2faca0613dc545f75d06f51",
+        "rev": "bad156712a6c71c8ae9c67092a22b50d5134db49",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/mirrord",
         "owner": "defn",
-        "ref": "pkg-mirrord-3.84.1-1",
+        "ref": "pkg-mirrord-3.85.0-1",
         "repo": "dev",
         "type": "github"
       }
