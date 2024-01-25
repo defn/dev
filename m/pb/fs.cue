@@ -12,6 +12,6 @@ fs: {
 	}
 
 	for name, rl in role {
-		"playbooks/roles/\(name)/tasks/main.yaml": yaml.MarshalStream([rl.tasks])
+		"roles/\(name)/tasks/main.yaml": yaml.MarshalStream([rl.tasks])
 	}
 }

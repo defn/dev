@@ -3,7 +3,9 @@ pb ?= demo
 playbook ?= playbooks/$(pb).yaml
 
 build:
-	rm -rf playbooks
+	cue fmt ./...
+	rm -f playbooks/*.yaml
+	rm -rf roles
 	cue export --out json -e fs | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | ../c/decode_base64.py 
 
 %:
