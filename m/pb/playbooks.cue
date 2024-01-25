@@ -38,6 +38,20 @@ playbook: demo: [{
 	]
 }]
 
+playbook: init: [{
+	name:  "Playbook to set up root access"
+	hosts: "all"
+	vars: ansible_user: "root"
+	tasks: [{
+		name: "Add NOPASSWD to sudoers.d for Ubuntu user"
+		copy: {
+			content: "ubuntu ALL=(ALL:ALL) NOPASSWD: ALL"
+			dest:    "/etc/sudoers.d/ubuntu"
+			mode:    "0440"
+		}
+	}]
+}]
+
 role: base_packages: tasks: [{
 	name:   "Install base packages"
 	become: true
@@ -48,5 +62,14 @@ role: base_packages: tasks: [{
 			"net-tools",
 		]
 		state: "present"
+	}
+}, {
+	name:   "Remove packages"
+	become: true
+	apt: {
+		name: [
+			"nano",
+		]
+		state: "absent"
 	}
 }]
