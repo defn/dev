@@ -70,7 +70,7 @@ playbook: debug: [{
 		name:        "Convert inventory to CUE"
 		delegate_to: "localhost"
 		command: """
-			cue import -p pb -l '"host"' -l '"{{ inventory_hostname }}"' ../dump/{{ inventory_hostname }}.json 
+			cue import -p dump -l '"host"' -l '"{{ inventory_hostname }}"' ../dump/{{ inventory_hostname }}.json
 			"""
 	}]
 }]
