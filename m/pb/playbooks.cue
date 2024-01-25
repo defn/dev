@@ -1,4 +1,4 @@
-package ansible
+package pb
 
 inventory: {
 	[string]: vars: {
@@ -30,7 +30,7 @@ inventory: {
 	]
 
 	tp: hosts: [
-		"thinkpad"
+		"thinkpad",
 	]
 }
 
@@ -60,17 +60,17 @@ playbook: debug: [{
 	name:  "Save host inventory"
 	hosts: "all"
 	tasks: [{
-		name: "Save inventory as json"
+		name:        "Save inventory as json"
 		delegate_to: "localhost"
 		template: {
 			src:  "debug_output.j2"
 			dest: "../dump/{{ inventory_hostname }}.json"
 		}
 	}, {
-		name: "Convert inventory to CUE"
+		name:        "Convert inventory to CUE"
 		delegate_to: "localhost"
 		command: """
-			cue import -p ansible -l '"host"' -l '"{{ inventory_hostname }}"' ../dump/{{ inventory_hostname }}.json 
+			cue import -p pb -l '"host"' -l '"{{ inventory_hostname }}"' ../dump/{{ inventory_hostname }}.json 
 			"""
 	}]
 }]

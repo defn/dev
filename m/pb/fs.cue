@@ -1,4 +1,4 @@
-package ansible
+package pb
 
 import (
 	"encoding/yaml"
