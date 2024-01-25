@@ -1630,7 +1630,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "2.7.1"
+		version:   "2.7.2"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {
@@ -2015,7 +2015,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.40.7"
+		version:   "0.40.8"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [
