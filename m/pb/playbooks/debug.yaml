@@ -1,0 +1,9 @@
+- name: Save host inventory
+  hosts: all
+  tasks:
+    - delegate_to: localhost
+      template:
+        src: debug_output.j2
+        dest: ../dump/{{ inventory_hostname }}.json
+    - delegate_to: localhost
+      command: 'cue import -p ansible -l ''"host"'' -l ''"{{ inventory_hostname }}"'' ../dump/{{ inventory_hostname }}.json '
