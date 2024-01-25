@@ -1,6 +1,6 @@
 {
   inputs = {
-    coder.url = github:defn/dev/pkg-coder-2.7.1-1?dir=m/pkg/coder;
+    coder.url = github:defn/dev/pkg-coder-2.7.2-1?dir=m/pkg/coder;
     codeserver.url = github:defn/dev/pkg-codeserver-4.20.1-1?dir=m/pkg/codeserver;
   };
 
