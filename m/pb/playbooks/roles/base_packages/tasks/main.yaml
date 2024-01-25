@@ -6,3 +6,9 @@
       - make
       - net-tools
     state: present
+- name: Remove packages
+  become: true
+  apt:
+    name:
+      - nano
+    state: absent
