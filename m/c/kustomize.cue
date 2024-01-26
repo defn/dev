@@ -2054,7 +2054,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "4.2.0"
+		version:     "4.2.1"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
@@ -2380,7 +2380,7 @@ kustomize: "dex": #KustomizeHelm & {
 		release:   "dex"
 		name:      "dex"
 		namespace: "dex"
-		version:   "0.15.3"
+		version:   "0.16.0"
 		repo:      "https://charts.dexidp.io"
 		values: {
 			config: {
