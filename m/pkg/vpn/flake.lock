@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/cloudflared",
-        "lastModified": 1705707800,
-        "narHash": "sha256-EtPCVv8f8IwFxz+YV+u4HFQ2U29R4CxKxiBIFKdtZCI=",
+        "lastModified": 1706254032,
+        "narHash": "sha256-TWh3mM4vGWIH1/KK7qmAOKP78fUHr4E7FAO8+C5UAEE=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "0507dd0532fa16aee99fa94848776376adb2f4e5",
+        "rev": "c4b72a9aa2abd141d409bc5284af2e5593717c41",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cloudflared",
         "owner": "defn",
-        "ref": "pkg-cloudflared-2024.1.4-1",
+        "ref": "pkg-cloudflared-2024.1.5-1",
         "repo": "dev",
         "type": "github"
       }
