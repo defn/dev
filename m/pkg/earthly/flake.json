@@ -1,6 +1,6 @@
 {
   "slug": "pkg-earthly",
   "ghrepo": "earthly/earthly",
-  "vendor": "0.8.1",
-  "revision": "1"
+  "vendor": "0.8.2",
+  "revision": "0"
 }
