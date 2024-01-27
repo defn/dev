@@ -13,7 +13,7 @@ bazel_dep(name = "rules_proto_grpc", version = "5.0.0-alpha2")
 bazel_dep(name = "rules_proto_grpc_go", version = "5.0.0-alpha2")
 
 go_sdk = use_extension("@io_bazel_rules_go//go:extensions.bzl", "go_sdk")
-go_sdk.download(version = "1.21.6")
+go_sdk.download(version = "1.21.4")
 go_sdk.host()
 
 go_deps = use_extension("@bazel_gazelle//:extensions.bzl", "go_deps")
