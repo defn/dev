@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+// $schema: defn.dev.legumes.v1.Pea
+// $title: Cool pea
+// $description: So many cool peas
+// $location: https://defn.dev/legumes/pea/v1
+
+// cool
+package defn.dev.legumes.v1;
+
+option go_package="github.com/defn/dev/m/defn/dev/legumes/v1";
+
+// <!-- crd generation tags
+// +cue-gen:Pea:groupName:legumes.defn.dev
+// +cue-gen:Pea:version:v1
+// +cue-gen:Pea:storageVersion
+// +cue-gen:Pea:subresource:status
+// +cue-gen:Pea:scope:Namespaced
+// +cue-gen:Pea:preserveUnknownFields:pluginConfig
+// -->
+//
+// <!-- go code generation tags
+// +kubetype-gen
+// +kubetype-gen:groupVersion=legumes.defn.dev/v1
+// +genclient
+// +k8s:deepcopy-gen=true
+// -->
+// cool
+message Pea {
+  // cool
+  string url = 1;
+
+  // cool
+  string sha256 = 2;
+}
+
+message GetPeaRequest {
+  Pea req = 1;
+}
+
+message GetPeaResponse {
+  Pea req = 1;
+}
+
+message PutPeaRequest {
+  Pea req = 1;
+}
+
+message PutPeaResponse {
+  Pea req = 1;
+}
+
+message DeletePeaRequest {
+  Pea req = 1;
+}
+
+message DeletePeaResponse {
+  Pea req = 1;
+}
+
+// cool bean service
+service PeaStoreService {
+  // get the peas
+  rpc GetPea(GetPeaRequest) returns (GetPeaResponse) {}
+
+  // put the peas
+  rpc PutPea(PutPeaRequest) returns (PutPeaResponse) {}
+
+  // del the peas
+  rpc DeletePea(DeletePeaRequest) returns (DeletePeaResponse) {}
+ }

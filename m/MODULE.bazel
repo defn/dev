@@ -7,7 +7,8 @@ module(
 )
 
 # https://registry.bazel.build/modules/rules_pkg
-bazel_dep(name = "rules_pkg", version = "0.10.0")
+# protobuf doesn't work with this dep defined
+# bazel_dep(name = "rules_pkg", version = "0.10.0")
 
 # https://registry.bazel.build/modules/protobuf
 bazel_dep(name = "protobuf", version = "23.1")
