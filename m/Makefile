@@ -6,8 +6,7 @@ domain ?= defn.run
 all:
 	rm -f MODULES.bazel.lock
 	$(MAKE) bazel-ignore
-# $(MAKE) regen build upgrade regen build update
-	$(MAKE) regen build regen build
+	$(MAKE) regen build upgrade regen build
 
 build:
 	b build
