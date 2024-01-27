@@ -24,7 +24,7 @@
         "bucket": "dfn-defn-terraform-state",
         "dynamodb_table": "dfn-defn-terraform-state-lock",
         "encrypt": true,
-        "key": "chamber-3/bootstrap/account-chamber-3/terraform.tfstate",
+        "key": "stacks/acc-chamber-3/terraform.tfstate",
         "profile": "defn-org-sso",
         "region": "us-east-1"
       }

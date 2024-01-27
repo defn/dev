@@ -32,7 +32,7 @@ func AwsOrganizationStack(scope constructs.Construct, backend *infra.AwsBackend,
 	stack := cdktf.NewTerraformStack(scope, infra.Js(fmt.Sprintf("org-%s", org.Name)))
 
 	cdktf.NewS3Backend(stack, &cdktf.S3BackendConfig{
-		Key:           infra.Js(fmt.Sprintf("stacks/%s/terraform.tfstate", org.Name)),
+		Key:           infra.Js(fmt.Sprintf("stacks/org-%s/terraform.tfstate", org.Name)),
 		Encrypt:       infra.Jstrue(),
 		Bucket:        &backend.Bucket,
 		Region:        &backend.Region,
@@ -176,7 +176,7 @@ func AwsAccountStack(scope constructs.Construct, backend *infra.AwsBackend, acc 
 	stack := cdktf.NewTerraformStack(scope, infra.Js(fmt.Sprintf("acc-%s", acc.Name)))
 
 	cdktf.NewS3Backend(stack, &cdktf.S3BackendConfig{
-		Key:           infra.Js(fmt.Sprintf("%s/bootstrap/account-%s/terraform.tfstate", acc.Name, acc.Name)),
+		Key:           infra.Js(fmt.Sprintf("stacks/acc-%s/terraform.tfstate", acc.Name)),
 		Encrypt:       infra.Jstrue(),
 		Bucket:        &backend.Bucket,
 		Region:        &backend.Region,

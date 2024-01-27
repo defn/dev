@@ -9,7 +9,7 @@ terraform {
     bucket         = "dfn-defn-terraform-state"
     dynamodb_table = "dfn-defn-terraform-state-lock"
     encrypt        = true
-    key            = "immanent-changer/bootstrap/account-immanent-changer/terraform.tfstate"
+    key            = "stacks/acc-immanent-changer/terraform.tfstate"
     profile        = "defn-org-sso"
     region         = "us-east-1"
   }

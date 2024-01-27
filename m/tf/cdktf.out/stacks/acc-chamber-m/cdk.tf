@@ -9,7 +9,7 @@ terraform {
     bucket         = "dfn-defn-terraform-state"
     dynamodb_table = "dfn-defn-terraform-state-lock"
     encrypt        = true
-    key            = "chamber-m/bootstrap/account-chamber-m/terraform.tfstate"
+    key            = "stacks/acc-chamber-m/terraform.tfstate"
     profile        = "defn-org-sso"
     region         = "us-east-1"
   }
