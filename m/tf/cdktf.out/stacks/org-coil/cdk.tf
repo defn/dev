@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.33.0"
+      version = "5.34.0"
       source  = "aws"
     }
   }
@@ -15,6 +15,11 @@ terraform {
   }
 
 
+}
+
+locals {
+  sso_instance_arn  = "${data.aws_ssoadmin_instances.sso_instance.arns}"
+  sso_instance_isid = "${data.aws_ssoadmin_instances.sso_instance.identity_store_ids}"
 }
 
 provider "aws" {
@@ -38,10 +43,6 @@ resource "aws_organizations_organization" "organization" {
 }
 data "aws_ssoadmin_instances" "sso_instance" {
 }
-
-locals {
-  sso_instance_arn = "${data.aws_ssoadmin_instances.sso_instance.arns}"
-}
 resource "aws_ssoadmin_permission_set" "admin_sso_permission_set" {
   instance_arn     = "${element(local.sso_instance_arn, 0)}"
   name             = "Administrator"
@@ -54,10 +55,6 @@ resource "aws_ssoadmin_managed_policy_attachment" "admin_sso_managed_policy_atta
   instance_arn       = "${aws_ssoadmin_permission_set.admin_sso_permission_set.instance_arn}"
   managed_policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
   permission_set_arn = "${aws_ssoadmin_permission_set.admin_sso_permission_set.arn}"
-}
-
-locals {
-  sso_instance_isid = "${data.aws_ssoadmin_instances.sso_instance.identity_store_ids}"
 }
 resource "aws_identitystore_group" "administrators_sso_group" {
   display_name      = "Administrators"
