@@ -7,7 +7,7 @@ all:
 	rm -f MODULES.bazel.lock
 	$(MAKE) bazel-ignore
 # $(MAKE) regen build upgrade regen build update
-	$(MAKE) regen build regen build update
+	$(MAKE) regen build regen build
 
 build:
 	b build
