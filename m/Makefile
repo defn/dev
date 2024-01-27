@@ -4,8 +4,9 @@ env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
 domain ?= defn.run
 
 all:
+	rm -f MODULES.bazel.lock
 	$(MAKE) bazel-ignore
-	$(MAKE) build update upgrade regen build
+	$(MAKE) regen build upgrade regen build update
 
 build:
 	b build
@@ -60,7 +61,7 @@ cdktf:
 
 upgrade:
 	rm -rf node_modules
-	set -x; go get $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1')
+	set -x; go get -u $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1')
 	go mod tidy
 	npm install
 	npm upgrade

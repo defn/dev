@@ -78,6 +78,7 @@ pkg/utils/.direnv
 pkg/vcluster/.direnv
 pkg/vhs/.direnv
 pkg/vpn/.direnv
+pkg/wireproxy/.direnv
 pkg/zellij/.direnv
 pkg/acme/result
 pkg/argocd/result
@@ -152,6 +153,7 @@ pkg/utils/result
 pkg/vcluster/result
 pkg/vhs/result
 pkg/vpn/result
+pkg/wireproxy/result
 pkg/zellij/result
 cutout/app/{{cookiecutter.path}}
 cutout/command/{{cookiecutter.path}}
