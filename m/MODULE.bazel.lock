@@ -1592,7 +1592,7 @@
       "general": {
         "bzlTransitiveDigest": "zP01muRk4s4xWGK3gNPXOyDMQkOPsIhu99akeKWFFQ0=",
         "accumulatedFileDigests": {
-          "@@//:go.mod": "942cdbc6d7fd6389d3471be32cf0c934c246c23c8fec65b5f6d879c31877f3da",
+          "@@//:go.mod": "15b055a90b544b503b8f66db4e2ad2fb5b46be9a8cb1e08a06c1a10886498fff",
           "@@//:go.sum": "ab72889444074bfb0b822a7db09b886e52340c8f42dca945106ff12e7daab5f5",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",

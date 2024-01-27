@@ -17,11 +17,10 @@ require (
 	github.com/spf13/viper v1.18.2
 )
 
-// this makes bazel/gazelle happy
-// last version to work
-require gvisor.dev/gvisor v0.0.0-20230927004350-cbd86285d259 // indirect
-
 replace github.com/botanica-consulting/wiredialer => github.com/amanibhavam/wiredialer v0.0.2
+
+// last version to work, matches what is pinned in amanibhavam/wiredialer
+require gvisor.dev/gvisor v0.0.0-20230927004350-cbd86285d259 // indirect
 
 require (
 	cuelabs.dev/go/oci/ociregistry v0.0.0-20240122120755-14751940d5b2 // indirect
