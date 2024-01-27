@@ -18,7 +18,7 @@ require (
 )
 
 // this makes bazel/gazelle happy
-// require gvisor.dev/gvisor v0.0.0-20230504175454-7b0a1988a28f // indirect
+// last version to work
 require gvisor.dev/gvisor v0.0.0-20230927004350-cbd86285d259 // indirect
 
 replace github.com/botanica-consulting/wiredialer => github.com/amanibhavam/wiredialer v0.0.2

@@ -60,9 +60,6 @@ cdktf:
 	$(MAKE) regen
 
 upgrade:
-	rm -rf node_modules
-	set -x; go get -u $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1')
-	go mod tidy
 	npm install
 	npm upgrade
 	npm outdated
@@ -74,6 +71,9 @@ update:
 
 regen:
 	@mark gazelle
+	rm -rf node_modules
+	set -x; go get $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1')
+	go mod tidy
 	b pass run //:gazelle
 
 watch:
