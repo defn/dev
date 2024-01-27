@@ -1592,8 +1592,8 @@
       "general": {
         "bzlTransitiveDigest": "zP01muRk4s4xWGK3gNPXOyDMQkOPsIhu99akeKWFFQ0=",
         "accumulatedFileDigests": {
-          "@@//:go.mod": "0fee46c4d24b4d133faf131f155e015c40513b8ea1678cf68da7c4d4cbee8c75",
-          "@@//:go.sum": "249c3fca8193e4c2be83805b12270eb53d22b5f597454182af1edc8e9f5f975b",
+          "@@//:go.mod": "4f35472f319e1b9feab9507c36d6ba19266f5b5aa8d22bb6a03461ef5a568a23",
+          "@@//:go.sum": "741ae7119ebe1ca99cab68899412f30d80bfabe612566d314defd0d286ac9fe2",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
           "@@rules_go~0.45.1//:go.mod": "de22304b720f7f61350ec1c9739de6c0a1b1103fd22bfeb6e92c6c843ddc6d6e",
@@ -1676,9 +1676,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:hNQpMuAJe5CtcUqCXaWga3FHu+kQvCqcsoVaQgSV60o=",
+              "sum": "h1:Q8/wZp0KX97QFTc2ywcOE0YRjZPVIx+MXInMzdvQqcA=",
               "replace": "",
-              "version": "v0.0.0-20240112132812-db7319d0e0e3"
+              "version": "v0.0.0-20240119083558-1b970713d09a"
             }
           },
           "com_github_cockroachdb_apd_v3": {
@@ -1772,9 +1772,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:cY2KkHVnSyWTKAu0EHn69hAPi3xiiWY0o7oy3NHmNDA=",
+              "sum": "h1:AxaPEZm/UnA+uQUuLPZDbd0FVUrxbTezdBS99GghMRY=",
               "replace": "",
-              "version": "v19.2.0"
+              "version": "v19.3.0"
             }
           },
           "com_github_opencontainers_image_spec": {
@@ -1788,9 +1788,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:Ygwkfw9bpDvs+c9E34SdgGOj41dX/cbdlwvlWt0pnFI=",
+              "sum": "h1:XDqvyKsJEbRtATzkgItUqBA7QHk58yxX1Ov9HERHNqU=",
               "replace": "",
-              "version": "v1.1.0-rc5"
+              "version": "v1.1.0-rc6"
             }
           },
           "com_github_modern_go_concurrent": {
@@ -2028,9 +2028,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:XlAE/cm/ms7TE/VMVoduSpNBoyc2dOxHs5MZSwAN63Q=",
+              "sum": "h1:jX8FDLfW4ThVXctBNZ+3cIWnCSnrACDV73r76dy0aQQ=",
               "replace": "",
-              "version": "v1.2.4"
+              "version": "v1.3.0"
             }
           },
           "org_golang_x_tools": {
@@ -2190,9 +2190,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:1p67kYwdtXjb0gL0BPiP1Av9wiZPo5A8z2cWkTZ+eyU=",
+              "sum": "h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=",
               "replace": "",
-              "version": "v1.5.0"
+              "version": "v1.6.0"
             }
           },
           "dev_gvisor_gvisor": {
@@ -2286,9 +2286,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:YtC/om6EdkJ0me1JPw4h2g10k+ELITjYFb7tpzm8i8k=",
+              "sum": "h1:z/etSFO3uyXeuEsVPzfl56WNgzcvIr42aQazXaQmFZY=",
               "replace": "",
-              "version": "v1.13.0"
+              "version": "v1.13.2"
             }
           },
           "com_github_spf13_cobra": {
@@ -2446,9 +2446,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:FzWGaw2Opqyu+794ZQ9SYifWv2EIXpwP4q8dY1kDAwI=",
+              "sum": "h1:MvTmaQdww/z0Q4wrYjDSCcZ78NoftLQyHBSLW/Cx79Y=",
               "replace": "",
-              "version": "v0.1.0"
+              "version": "v0.1.1-0.20230530133925-c48e322e2a8f"
             }
           },
           "org_golang_x_term": {
@@ -2478,9 +2478,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:g0LDEJHgrBl9N9r17Ru3sqWhkIx2NB67okBHPwC7hs8=",
+              "sum": "h1:pPC6BG5ex8PDFnkbrGU3EixyhKcQ2aDuBS36lqK/C7I=",
               "replace": "",
-              "version": "v1.31.0"
+              "version": "v1.32.0"
             }
           },
           "com_github_fatih_color": {
@@ -2510,9 +2510,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:6uzpAAaT9ZqKssntbvZMlksWHruQLNxg49H5WdeuYSY=",
+              "sum": "h1:0SIyjOnkrsfDo88YvPgAWvZMwXe26TP6drRvmkjyUu4=",
               "replace": "",
-              "version": "v0.16.1"
+              "version": "v0.17.1"
             }
           },
           "com_github_goccy_go_json": {
@@ -2622,9 +2622,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:X2H+7Jw/dJ5omjq/92asjuszALGZWuGx6LwyBKXF+48=",
+              "sum": "h1:njLQycP/DFmSGOiqN8HYgoF6lTo1PtRti1izQDEzfII=",
               "replace": "",
-              "version": "v0.0.0-20231217163254-6feb86eb6e06"
+              "version": "v0.0.0-20240122120755-14751940d5b2"
             }
           },
           "com_github_mpvl_unique": {
@@ -2670,9 +2670,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:8TfxU8dW6PdqD27gjM8MVNuicgxIjxpm4K7x4jp8sis=",
+              "sum": "h1:I1LlsYBcfG4ggKsNaL6bi8pL7Z8SizVPVBrh3Y8F/BA=",
               "replace": "",
-              "version": "v0.4.4"
+              "version": "v0.4.5"
             }
           },
           "org_golang_google_grpc_cmd_protoc_gen_go_grpc": {
@@ -2814,9 +2814,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:uaQIKx9Ai6Gdh5zpTbGiWpytMU+CfsPp06RaW2cx/SY=",
+              "sum": "h1:bAfwk7jRz7FKFl9RzlIULPkStffg5k6pNt5dywy4TcM=",
               "replace": "",
-              "version": "v0.24.2"
+              "version": "v0.25.0"
             }
           },
           "com_github_mattn_go_localereader": {
@@ -3056,9 +3056,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:8AUFajWAaSJCoPeD8/5cvx7von66x90/sVQYkjmSOB4=",
+              "sum": "h1:LgeFtdAGVpfBHEr5XKBtTmUT8e05AGvydmreCU+kTe8=",
               "replace": "",
-              "version": "v0.20.1"
+              "version": "v0.20.3"
             }
           },
           "org_golang_x_arch": {
@@ -3072,9 +3072,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:S0JTfE48HbRj80+4tbvZDYsJ3tGv6BUU3XxyZ7CirAc=",
+              "sum": "h1:pskyeJh/3AmoQ8CPE95vxHLqp1G1GfGNXTmcl9NEKTc=",
               "replace": "",
-              "version": "v0.6.0"
+              "version": "v0.7.0"
             }
           },
           "in_gopkg_ini_v1": {
@@ -3104,9 +3104,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:x+plE831WK4vaKHO/jpgUGsvLKIqRRkz6M78GuJAfGE=",
+              "sum": "h1:SmVVlfAOtlZncTxRuinDPomC2DkXJ4E5T9gDA0AIH74=",
               "replace": "",
-              "version": "v10.16.0"
+              "version": "v10.17.0"
             }
           },
           "com_github_sagikazarmark_locafero": {
@@ -3143,6 +3143,7 @@
                 "com_github_hashicorp_terraform_cdk_go_cdktf": "github.com/hashicorp/terraform-cdk-go/cdktf",
                 "com_github_spf13_cobra": "github.com/spf13/cobra",
                 "com_github_spf13_viper": "github.com/spf13/viper",
+                "dev_gvisor_gvisor": "gvisor.dev/gvisor",
                 "dev_cuelabs_go_oci_ociregistry": "cuelabs.dev/go/oci/ociregistry",
                 "com_github_masterminds_semver_v3": "github.com/Masterminds/semver/v3",
                 "com_github_atotto_clipboard": "github.com/atotto/clipboard",
@@ -3219,7 +3220,6 @@
                 "in_gopkg_check_v1": "gopkg.in/check.v1",
                 "in_gopkg_ini_v1": "gopkg.in/ini.v1",
                 "in_gopkg_yaml_v3": "gopkg.in/yaml.v3",
-                "dev_gvisor_gvisor": "gvisor.dev/gvisor",
                 "org_golang_google_grpc": "google.golang.org/grpc",
                 "org_golang_google_grpc_cmd_protoc_gen_go_grpc": "google.golang.org/grpc/cmd/protoc-gen-go-grpc",
                 "org_golang_google_genproto_googleapis_rpc": "google.golang.org/genproto/googleapis/rpc",
