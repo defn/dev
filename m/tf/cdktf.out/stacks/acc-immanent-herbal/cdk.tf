@@ -9,7 +9,7 @@ terraform {
     bucket         = "dfn-defn-terraform-state"
     dynamodb_table = "dfn-defn-terraform-state-lock"
     encrypt        = true
-    key            = "immanent-herbal/bootstrap/account-immanent-herbal/terraform.tfstate"
+    key            = "stacks/acc-immanent-herbal/terraform.tfstate"
     profile        = "defn-org-sso"
     region         = "us-east-1"
   }
