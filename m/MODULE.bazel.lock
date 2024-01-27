@@ -1592,8 +1592,8 @@
       "general": {
         "bzlTransitiveDigest": "zP01muRk4s4xWGK3gNPXOyDMQkOPsIhu99akeKWFFQ0=",
         "accumulatedFileDigests": {
-          "@@//:go.mod": "4f35472f319e1b9feab9507c36d6ba19266f5b5aa8d22bb6a03461ef5a568a23",
-          "@@//:go.sum": "741ae7119ebe1ca99cab68899412f30d80bfabe612566d314defd0d286ac9fe2",
+          "@@//:go.mod": "d7c5b9ed488d3ee1b19b0864de52153368d2e147f4a183655df3d8fe3b8c2565",
+          "@@//:go.sum": "ab72889444074bfb0b822a7db09b886e52340c8f42dca945106ff12e7daab5f5",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
           "@@rules_go~0.45.1//:go.mod": "de22304b720f7f61350ec1c9739de6c0a1b1103fd22bfeb6e92c6c843ddc6d6e",
@@ -2206,9 +2206,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:8GE2MRjGiFmfpon8dekPI08jEuNMQzSffVHgdupcO4E=",
+              "sum": "h1:TbRPT0HtzFP3Cno1zZo7yPzEEnfu8EjLfl6IU9VfqkQ=",
               "replace": "",
-              "version": "v0.0.0-20230504175454-7b0a1988a28f"
+              "version": "v0.0.0-20230927004350-cbd86285d259"
             }
           },
           "com_github_klauspost_cpuid_v2": {
@@ -2430,9 +2430,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:J1CaxgLerRR5lgx3wnr6L04cJFbWoceSK9JWBdglINo=",
+              "sum": "h1:/jFs0duh4rdb8uIfPMv78iAJGcPKDeqAFnaLBropIC4=",
               "replace": "",
-              "version": "v0.0.0-20230325221338-052af4a8072b"
+              "version": "v0.0.0-20231211153847-12269c276173"
             }
           },
           "com_github_sahilm_fuzzy": {
@@ -3024,9 +3024,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:BIk/Sf+lAg2EnnB/xfU1OEzuubu5MkUgt2l7PPfBU78=",
-              "replace": "",
-              "version": "v0.0.0-20230710124424-ca42731e9a5c"
+              "sum": "h1:n2Tr6LCe7egzDumGlf3TVALyct/kVfBINtMvcS+iDw0=",
+              "replace": "github.com/amanibhavam/wiredialer",
+              "version": "v0.0.2"
             }
           },
           "com_github_chenzhuoyu_base64x": {
