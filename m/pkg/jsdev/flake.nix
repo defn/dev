@@ -12,7 +12,8 @@
     defaultPackage = ctx: ctx.wrap.nullBuilder {
       propagatedBuildInputs =
         with (import inputs.latest { system = ctx.system; }); [
-          nodejs_20
+          # ghost doesn't support 20
+          nodejs_18
         ];
     };
   };
