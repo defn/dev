@@ -1,8 +1,6 @@
 module github.com/defn/dev/m
 
-go 1.21.1
-
-toolchain go1.21.4
+go 1.21.4
 
 require (
 	cuelang.org/go v0.7.0
@@ -19,8 +17,11 @@ require (
 	github.com/spf13/viper v1.18.2
 )
 
-// this makes bazel/gazelle unhappy
-require gvisor.dev/gvisor v0.0.0-20230504175454-7b0a1988a28f // indirect
+// this makes bazel/gazelle happy
+// require gvisor.dev/gvisor v0.0.0-20230504175454-7b0a1988a28f // indirect
+require gvisor.dev/gvisor v0.0.0-20230927004350-cbd86285d259 // indirect
+
+replace github.com/botanica-consulting/wiredialer => github.com/amanibhavam/wiredialer v0.0.2
 
 require (
 	cuelabs.dev/go/oci/ociregistry v0.0.0-20240122120755-14751940d5b2 // indirect
@@ -94,7 +95,7 @@ require (
 	golang.org/x/time v0.5.0 // indirect
 	golang.org/x/tools v0.17.0 // indirect
 	golang.zx2c4.com/wintun v0.0.0-20230126152724-0fa3db229ce2 // indirect
-	golang.zx2c4.com/wireguard v0.0.0-20230325221338-052af4a8072b // indirect
+	golang.zx2c4.com/wireguard v0.0.0-20231211153847-12269c276173 // indirect
 	google.golang.org/protobuf v1.32.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
