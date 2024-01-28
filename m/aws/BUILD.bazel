@@ -1,11 +1,6 @@
 load("//b/cue:cue.bzl", "cue_export")
 
 filegroup(
-    name = "template_org",
-    srcs = ["template_org.txt"],
-)
-
-filegroup(
     name = "template_account",
     srcs = ["template_account.txt"],
 )
@@ -21,10 +16,9 @@ genrule(
     srcs = [
         "config",
         "template_account",
-        "template_org",
     ],
     outs = ["aws_config.txt"],
-    cmd = "$(location aws_config_script) config=$(location config) template_org=$(location template_org) template_account=$(location template_account) $@",
+    cmd = "$(location aws_config_script) config=$(location config) template_account=$(location template_account) $@",
     tools = [
         "aws_config_script",
         "//b/lib:lib_sh",
