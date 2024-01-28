@@ -88,19 +88,19 @@
           }
         }
       },
-      "defb-b": {
-        "//": {
-          "metadata": {
-            "path": "org-chamber/defb-b",
-            "uniqueId": "defb-b"
-          }
-        }
-      },
       "defn-a": {
         "//": {
           "metadata": {
             "path": "org-chamber/defn-a",
             "uniqueId": "defn-a"
+          }
+        }
+      },
+      "defn-b": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-b",
+            "uniqueId": "defn-b"
           }
         }
       },
@@ -380,19 +380,19 @@
           }
         }
       },
-      "defb-b_admin_sso_account_assignment": {
-        "//": {
-          "metadata": {
-            "path": "org-chamber/defb-b_admin_sso_account_assignment",
-            "uniqueId": "defb-b_admin_sso_account_assignment"
-          }
-        }
-      },
       "defn-a_admin_sso_account_assignment": {
         "//": {
           "metadata": {
             "path": "org-chamber/defn-a_admin_sso_account_assignment",
             "uniqueId": "defn-a_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-b_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-b_admin_sso_account_assignment",
+            "uniqueId": "defn-b_admin_sso_account_assignment"
           }
         }
       },

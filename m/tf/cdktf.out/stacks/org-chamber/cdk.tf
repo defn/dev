@@ -225,19 +225,19 @@ resource "aws_ssoadmin_account_assignment" "defn-a_admin_sso_account_assignment"
   target_id          = "${aws_organizations_account.defn-a.id}"
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "defb-b" {
+resource "aws_organizations_account" "defn-b" {
   email = "imma-admin1@imma.io"
-  name  = "defb-b"
+  name  = "defn-b"
   tags = {
     ManagedBy = "Terraform"
   }
 }
-resource "aws_ssoadmin_account_assignment" "defb-b_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn-b_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
   principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
   principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.defb-b.id}"
+  target_id          = "${aws_organizations_account.defn-b.id}"
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "defn-c" {
