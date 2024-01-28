@@ -4,13 +4,15 @@ import (
 	"github.com/defn/dev/m/tf"
 )
 
+org: [ORG=string]: {
+	region:   tf.input.organization[ORG].region
+}
 org: [ORG=string]: account: [ACCOUNT=string]: {
 	org:      ORG
 	account:  ACCOUNT
 	id:       string | *"TODO"
 	email:    string | *"TODO"
 	sso_role: string | *"Administrator"
-	region:   tf.input.organization[ORG].region
 }
 
 org: {

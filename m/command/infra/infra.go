@@ -32,16 +32,17 @@ type AwsOrganization struct {
 }
 
 type AwsAccount struct {
-	Name   string `json:"name"`
-	Email  string `json:"email"`
-	Profile string `json:"profile"`
-	Prefix string `json:"prefix"`
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Profile  string `json:"profile"`
+	Prefix   string `json:"prefix"`
 	Imported string `json:"imported"`
 }
 
 type AwsProps struct {
 	Backend      AwsBackend                 `json:"backend"`
 	Organization map[string]AwsOrganization `json:"organization"`
+	Accounts     []string                   `json:"accounts"`
 }
 
 // alias

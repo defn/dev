@@ -8,6 +8,9 @@ build: ../node_modules/.bin/cdktf
 	runmany 'perl -pe "s{undefined}{true} if m{encrypt\s+=\s+undefined}" -i $$1' cdktf.out/stacks/*/cdk.tf
 # remove quotes from providers
 	runmany 'perl -pe "s{\"}{}g if m{^\s*aws\s*=}" -i $$1' cdktf.out/stacks/*/cdk.tf
+# restore locks
+	git status -sb | grep lock.hcl | awk '{print $$2}' | xargs git reset --
+	git status -sb | grep lock.hcl | awk '{print $$2}' | xargs git checkout --
 
 ../node_modules/.bin/cdktf:
 	cd .. && npm install
