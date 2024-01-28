@@ -32,6 +32,7 @@ package infra
 	organization: [N=string]: #AwsOrganization & {
 		name: N
 	}
+	accounts: [...string]
 }
 
 input: #AwsProps
