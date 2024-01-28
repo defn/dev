@@ -200,14 +200,6 @@
           }
         }
       },
-      "defn-k": {
-        "//": {
-          "metadata": {
-            "path": "org-chamber/defn-k",
-            "uniqueId": "defn-k"
-          }
-        }
-      },
       "defn-l": {
         "//": {
           "metadata": {
@@ -497,14 +489,6 @@
           "metadata": {
             "path": "org-chamber/defn-j_admin_sso_account_assignment",
             "uniqueId": "defn-j_admin_sso_account_assignment"
-          }
-        }
-      },
-      "defn-k_admin_sso_account_assignment": {
-        "//": {
-          "metadata": {
-            "path": "org-chamber/defn-k_admin_sso_account_assignment",
-            "uniqueId": "defn-k_admin_sso_account_assignment"
           }
         }
       },
