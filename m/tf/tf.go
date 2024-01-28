@@ -232,7 +232,7 @@ func init() {
 				"chamber-4", "chamber-5", "chamber-6", "chamber-7", "chamber-8",
 				"chamber-9", "chamber-a", "chamber-b", "chamber-c", "chamber-d",
 				"chamber-e", "chamber-f", "chamber-g", "chamber-h", "chamber-i",
-				"chamber-j", "chamber-k", "chamber-l", "chamber-m", "chamber-n",
+				"chamber-j", "chamber-l", "chamber-m", "chamber-n",
 				"chamber-o", "chamber-org", "chamber-p", "chamber-q", "chamber-r",
 				"chamber-s", "chamber-t", "chamber-u", "chamber-v", "chamber-w",
 				"chamber-x", "chamber-y", "chamber-z", "circus-audit", "circus-ops",
