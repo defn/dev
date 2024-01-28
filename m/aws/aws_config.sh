@@ -2,11 +2,9 @@
 
 function main {
 	local config="${in[config]}"
-	local template_org="${in[template_org]}"
 	local template_account="${in[template_account]}"
 
 	while read -r org url region; do
-		perl -pe "s{ORG}{${org}}g; s{REGION}{${region}}g" <"${template_org}"
 		while read -r org2 member account_id sso_role; do
 			if [[ ${org2} == "${org}" ]]; then
 				echo "aws config: ${org} ${member} ${account_id}" 1>&2
