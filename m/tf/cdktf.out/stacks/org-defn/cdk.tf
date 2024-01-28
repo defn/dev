@@ -61,7 +61,7 @@ resource "aws_identitystore_group" "administrators_sso_group" {
   identity_store_id = "${element(local.sso_instance_isid, 0)}"
 }
 resource "aws_organizations_account" "defn" {
-  email = "aws-defn@defn.us"
+  email = "iam+bootstrap@defn.sh"
   name  = "defn"
   tags = {
     ManagedBy = "Terraform"

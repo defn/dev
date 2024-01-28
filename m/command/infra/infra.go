@@ -25,16 +25,17 @@ type AwsBackend struct {
 }
 
 type AwsOrganization struct {
-	Name     string     `json:"name"`
-	Region   string     `json:"region"`
-	Prefix   string     `json:"prefix"`
-	Domain   string     `json:"domain"`
-	Accounts []string   `json:"accounts"`
-	Admins   []AwsAdmin `json:"admins"`
+	Name     string       `json:"name"`
+	Region   string       `json:"region"`
+	Accounts []AwsAccount `json:"accounts"`
+	Admins   []AwsAdmin   `json:"admins"`
 }
 
 type AwsAccount struct {
-	Name string `json:"name"`
+	Name   string `json:"name"`
+	Email  string `json:"email"`
+	Prefix string `json:"prefix"`
+	Imported string `json:"imported"`
 }
 
 type AwsProps struct {

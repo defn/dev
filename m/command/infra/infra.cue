@@ -5,6 +5,13 @@ package infra
 	email: string
 }
 
+#AwsAccount: {
+	name: string
+	email: string
+	prefix: string | *""
+	imported: string | *null
+}
+
 #AwsBackend: {
 	lock: string
 	bucket: string
@@ -15,9 +22,7 @@ package infra
 #AwsOrganization: {
 	name:   string
 	region: string
-	prefix: string
-	domain: string
-	accounts: [...string]
+	accounts: [...#AwsAccount]
 	admins: [...#AwsAdmin]
 }
 

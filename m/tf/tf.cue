@@ -25,28 +25,76 @@ input: {
 	organization: {
 		defn: {
 			region: "us-east-2"
+			accounts: [{
+				name:  "defn"
+				email: "iam+bootstrap@defn.sh"
+			}]
 		}
 
 		gyre: {
-			region:   "us-east-2"
-			accounts: ops_accounts
+			region: "us-east-2"
+			#types: ops_accounts
+			accounts: [{
+				name:  "gyre"
+				email: "aws-gyre@defn.us"
+			}] + [
+				for t in #types {
+					name:  t
+					email: "aws-gyre+\(t)@defn.us"
+				},
+			]
 		}
 		curl: {
-			region:   "us-west-2"
-			accounts: env_accounts
+			region:    "us-west-2"
+			#types: env_accounts
+			accounts: [{
+				name:  "curl"
+				email: "aws-curl@defn.us"
+			}] + [
+				for t in #types {
+					name:  t
+					email: "aws-curl+\(t)@defn.us"
+				},
+			]
 		}
 		coil: {
-			region:   "us-east-1"
-			accounts: env_accounts
+			region:    "us-east-1"
+			#types: env_accounts
+			accounts: [{
+				name:  "coil"
+				email: "aws-coil@defn.us"
+			}] + [
+				for t in #types {
+					name:  t
+					email: "aws-coil+\(t)@defn.us"
+				},
+			]
 		}
 		helix: {
 			region:   "us-east-2"
-			accounts: full_accounts
-			domain:   "defn.sh"
+			#types: full_accounts
+			accounts: [{
+				name:  "helix"
+				email: "aws-helix@defn.sh"
+			}] + [
+				for t in #types {
+					name:  t
+					email: "aws-helix+\(t)@defn.sh"
+				},
+			]
 		}
 		spiral: {
-			region:   "us-west-2"
-			accounts: full_accounts
+			region:    "us-west-2"
+			#types: full_accounts
+			accounts: [{
+				name:  "spiral"
+				email: "aws-spiral@defn.us"
+			}] + [
+				for t in #types {
+					name:  t
+					email: "aws-spiral+\(t)@defn.us"
+				},
+			]
 		}
 
 		vault: {
@@ -72,6 +120,19 @@ input: {
 		}
 		fogg: {
 			region: "us-west-2"
+			#types: ["gateway", "security", "hub", "postx", "asset", "data", "sandbox", "circus", "home"]
+			accounts: [{
+				name:  "fogg"
+				email: "spiral@defn.sh"
+				imported: "yes"
+			}] + [
+				for t in #types {
+					prefix: "fogg-"
+					name:  t
+					email: "fogg-\(t)@defn.sh"
+					imported: "yes"
+				},
+			]
 		}
 	}
 }
