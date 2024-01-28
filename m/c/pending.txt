@@ -1,7 +1,7 @@
 https://artifacthub.io/packages/helm/argo/argo-events/2.4.2
-https://artifacthub.io/packages/helm/argo/argo-workflows/0.40.8
+https://artifacthub.io/packages/helm/argo/argo-workflows/0.40.9
 https://artifacthub.io/packages/helm/aws/aws-node-termination-handler/0.21.0
-https://artifacthub.io/packages/helm/bitnami/external-dns/6.31.0
+https://artifacthub.io/packages/helm/bitnami/external-dns/6.31.2
 https://artifacthub.io/packages/helm/bitnami/mastodon/4.2.1
 https://artifacthub.io/packages/helm/cert-manager/cert-manager/1.13.3
 https://artifacthub.io/packages/helm/cert-manager/trust-manager/0.8.0
