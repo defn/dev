@@ -132,6 +132,8 @@ input: {
 		chamber: {
 			region: "us-west-2"
 
+			accounts: [...{imported: "yes", ...}]	
+
 			accounts: [{
 				name: "chamber", email: "aws-chamber@defn.us"
 			}, {
@@ -168,8 +170,6 @@ input: {
 				name: "defn-i", email: "aws-admin1@defn.us"
 			}, {
 				name: "defn-j", email: "aws-development1@defn.us"
-			}, {
-				name: "defn-k", email: "aws-production1@defn.us"
 			}, {
 				name: "defn-l", email: "aws-staging1@defn.us"
 			}, {
