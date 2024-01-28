@@ -31,12 +31,176 @@
         }
       }
     },
+    "aws_organizations_account": {
+      "audit": {
+        "//": {
+          "metadata": {
+            "path": "org-vault/audit",
+            "uniqueId": "audit"
+          }
+        }
+      },
+      "dev": {
+        "//": {
+          "metadata": {
+            "path": "org-vault/dev",
+            "uniqueId": "dev"
+          }
+        }
+      },
+      "hub": {
+        "//": {
+          "metadata": {
+            "path": "org-vault/hub",
+            "uniqueId": "hub"
+          }
+        }
+      },
+      "library": {
+        "//": {
+          "metadata": {
+            "path": "org-vault/library",
+            "uniqueId": "library"
+          }
+        }
+      },
+      "ops": {
+        "//": {
+          "metadata": {
+            "path": "org-vault/ops",
+            "uniqueId": "ops"
+          }
+        }
+      },
+      "pub": {
+        "//": {
+          "metadata": {
+            "path": "org-vault/pub",
+            "uniqueId": "pub"
+          }
+        }
+      },
+      "transit": {
+        "//": {
+          "metadata": {
+            "path": "org-vault/transit",
+            "uniqueId": "transit"
+          }
+        }
+      },
+      "vault": {
+        "//": {
+          "metadata": {
+            "path": "org-vault/vault",
+            "uniqueId": "vault"
+          }
+        }
+      },
+      "vault0": {
+        "//": {
+          "metadata": {
+            "path": "org-vault/vault0",
+            "uniqueId": "vault0"
+          }
+        }
+      },
+      "vault1": {
+        "//": {
+          "metadata": {
+            "path": "org-vault/vault1",
+            "uniqueId": "vault1"
+          }
+        }
+      }
+    },
     "aws_organizations_organization": {
       "organization": {
         "//": {
           "metadata": {
             "path": "org-vault/organization",
             "uniqueId": "organization"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_account_assignment": {
+      "audit_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-vault/audit_admin_sso_account_assignment",
+            "uniqueId": "audit_admin_sso_account_assignment"
+          }
+        }
+      },
+      "dev_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-vault/dev_admin_sso_account_assignment",
+            "uniqueId": "dev_admin_sso_account_assignment"
+          }
+        }
+      },
+      "hub_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-vault/hub_admin_sso_account_assignment",
+            "uniqueId": "hub_admin_sso_account_assignment"
+          }
+        }
+      },
+      "library_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-vault/library_admin_sso_account_assignment",
+            "uniqueId": "library_admin_sso_account_assignment"
+          }
+        }
+      },
+      "ops_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-vault/ops_admin_sso_account_assignment",
+            "uniqueId": "ops_admin_sso_account_assignment"
+          }
+        }
+      },
+      "pub_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-vault/pub_admin_sso_account_assignment",
+            "uniqueId": "pub_admin_sso_account_assignment"
+          }
+        }
+      },
+      "transit_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-vault/transit_admin_sso_account_assignment",
+            "uniqueId": "transit_admin_sso_account_assignment"
+          }
+        }
+      },
+      "vault0_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-vault/vault0_admin_sso_account_assignment",
+            "uniqueId": "vault0_admin_sso_account_assignment"
+          }
+        }
+      },
+      "vault1_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-vault/vault1_admin_sso_account_assignment",
+            "uniqueId": "vault1_admin_sso_account_assignment"
+          }
+        }
+      },
+      "vault_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-vault/vault_admin_sso_account_assignment",
+            "uniqueId": "vault_admin_sso_account_assignment"
           }
         }
       }

@@ -31,12 +31,96 @@
         }
       }
     },
+    "aws_organizations_account": {
+      "audit": {
+        "//": {
+          "metadata": {
+            "path": "org-circus/audit",
+            "uniqueId": "audit"
+          }
+        }
+      },
+      "circus": {
+        "//": {
+          "metadata": {
+            "path": "org-circus/circus",
+            "uniqueId": "circus"
+          }
+        }
+      },
+      "govcloud": {
+        "//": {
+          "metadata": {
+            "path": "org-circus/govcloud",
+            "uniqueId": "govcloud"
+          }
+        }
+      },
+      "ops": {
+        "//": {
+          "metadata": {
+            "path": "org-circus/ops",
+            "uniqueId": "ops"
+          }
+        }
+      },
+      "transit": {
+        "//": {
+          "metadata": {
+            "path": "org-circus/transit",
+            "uniqueId": "transit"
+          }
+        }
+      }
+    },
     "aws_organizations_organization": {
       "organization": {
         "//": {
           "metadata": {
             "path": "org-circus/organization",
             "uniqueId": "organization"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_account_assignment": {
+      "audit_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-circus/audit_admin_sso_account_assignment",
+            "uniqueId": "audit_admin_sso_account_assignment"
+          }
+        }
+      },
+      "circus_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-circus/circus_admin_sso_account_assignment",
+            "uniqueId": "circus_admin_sso_account_assignment"
+          }
+        }
+      },
+      "govcloud_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-circus/govcloud_admin_sso_account_assignment",
+            "uniqueId": "govcloud_admin_sso_account_assignment"
+          }
+        }
+      },
+      "ops_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-circus/ops_admin_sso_account_assignment",
+            "uniqueId": "ops_admin_sso_account_assignment"
+          }
+        }
+      },
+      "transit_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-circus/transit_admin_sso_account_assignment",
+            "uniqueId": "transit_admin_sso_account_assignment"
           }
         }
       }

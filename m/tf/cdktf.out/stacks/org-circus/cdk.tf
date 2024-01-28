@@ -60,3 +60,78 @@ resource "aws_identitystore_group" "administrators_sso_group" {
   display_name      = "Administrators"
   identity_store_id = "${element(local.sso_instance_isid, 0)}"
 }
+resource "aws_organizations_account" "circus" {
+  email = "aws-circus@defn.us"
+  name  = "circus"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+resource "aws_ssoadmin_account_assignment" "circus_admin_sso_account_assignment" {
+  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
+  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
+  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  principal_type     = "GROUP"
+  target_id          = "${aws_organizations_account.circus.id}"
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "audit" {
+  email = "aws-circus-audit@defn.sh"
+  name  = "audit"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+resource "aws_ssoadmin_account_assignment" "audit_admin_sso_account_assignment" {
+  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
+  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
+  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  principal_type     = "GROUP"
+  target_id          = "${aws_organizations_account.audit.id}"
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "govcloud" {
+  email = "aws-circus-govcloud@defn.sh"
+  name  = "govcloud"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+resource "aws_ssoadmin_account_assignment" "govcloud_admin_sso_account_assignment" {
+  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
+  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
+  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  principal_type     = "GROUP"
+  target_id          = "${aws_organizations_account.govcloud.id}"
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "ops" {
+  email = "aws-circus-ops@defn.sh"
+  name  = "ops"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+resource "aws_ssoadmin_account_assignment" "ops_admin_sso_account_assignment" {
+  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
+  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
+  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  principal_type     = "GROUP"
+  target_id          = "${aws_organizations_account.ops.id}"
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "transit" {
+  email = "aws-circus-transit@defn.sh"
+  name  = "transit"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+resource "aws_ssoadmin_account_assignment" "transit_admin_sso_account_assignment" {
+  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
+  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
+  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  principal_type     = "GROUP"
+  target_id          = "${aws_organizations_account.transit.id}"
+  target_type        = "AWS_ACCOUNT"
+}

@@ -31,12 +31,96 @@
         }
       }
     },
+    "aws_organizations_account": {
+      "dev": {
+        "//": {
+          "metadata": {
+            "path": "org-whoa/dev",
+            "uniqueId": "dev"
+          }
+        }
+      },
+      "hub": {
+        "//": {
+          "metadata": {
+            "path": "org-whoa/hub",
+            "uniqueId": "hub"
+          }
+        }
+      },
+      "prod": {
+        "//": {
+          "metadata": {
+            "path": "org-whoa/prod",
+            "uniqueId": "prod"
+          }
+        }
+      },
+      "secrets": {
+        "//": {
+          "metadata": {
+            "path": "org-whoa/secrets",
+            "uniqueId": "secrets"
+          }
+        }
+      },
+      "whoa": {
+        "//": {
+          "metadata": {
+            "path": "org-whoa/whoa",
+            "uniqueId": "whoa"
+          }
+        }
+      }
+    },
     "aws_organizations_organization": {
       "organization": {
         "//": {
           "metadata": {
             "path": "org-whoa/organization",
             "uniqueId": "organization"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_account_assignment": {
+      "dev_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-whoa/dev_admin_sso_account_assignment",
+            "uniqueId": "dev_admin_sso_account_assignment"
+          }
+        }
+      },
+      "hub_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-whoa/hub_admin_sso_account_assignment",
+            "uniqueId": "hub_admin_sso_account_assignment"
+          }
+        }
+      },
+      "prod_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-whoa/prod_admin_sso_account_assignment",
+            "uniqueId": "prod_admin_sso_account_assignment"
+          }
+        }
+      },
+      "secrets_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-whoa/secrets_admin_sso_account_assignment",
+            "uniqueId": "secrets_admin_sso_account_assignment"
+          }
+        }
+      },
+      "whoa_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-whoa/whoa_admin_sso_account_assignment",
+            "uniqueId": "whoa_admin_sso_account_assignment"
           }
         }
       }
