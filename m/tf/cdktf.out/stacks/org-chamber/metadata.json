@@ -31,12 +31,592 @@
         }
       }
     },
+    "aws_organizations_account": {
+      "chamber": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber",
+            "uniqueId": "chamber"
+          }
+        }
+      },
+      "chamber-4": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-4",
+            "uniqueId": "chamber-4"
+          }
+        }
+      },
+      "chamber-5": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-5",
+            "uniqueId": "chamber-5"
+          }
+        }
+      },
+      "chamber-6": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-6",
+            "uniqueId": "chamber-6"
+          }
+        }
+      },
+      "chamber-7": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-7",
+            "uniqueId": "chamber-7"
+          }
+        }
+      },
+      "chamber-8": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-8",
+            "uniqueId": "chamber-8"
+          }
+        }
+      },
+      "chamber-9": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-9",
+            "uniqueId": "chamber-9"
+          }
+        }
+      },
+      "defn-a": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-a",
+            "uniqueId": "defn-a"
+          }
+        }
+      },
+      "defn-b": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-b",
+            "uniqueId": "defn-b"
+          }
+        }
+      },
+      "defn-c": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-c",
+            "uniqueId": "defn-c"
+          }
+        }
+      },
+      "defn-cd": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-cd",
+            "uniqueId": "defn-cd"
+          }
+        }
+      },
+      "defn-ci": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-ci",
+            "uniqueId": "defn-ci"
+          }
+        }
+      },
+      "defn-d": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-d",
+            "uniqueId": "defn-d"
+          }
+        }
+      },
+      "defn-dev": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-dev",
+            "uniqueId": "defn-dev"
+          }
+        }
+      },
+      "defn-e": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-e",
+            "uniqueId": "defn-e"
+          }
+        }
+      },
+      "defn-f": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-f",
+            "uniqueId": "defn-f"
+          }
+        }
+      },
+      "defn-g": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-g",
+            "uniqueId": "defn-g"
+          }
+        }
+      },
+      "defn-h": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-h",
+            "uniqueId": "defn-h"
+          }
+        }
+      },
+      "defn-hub": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-hub",
+            "uniqueId": "defn-hub"
+          }
+        }
+      },
+      "defn-i": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-i",
+            "uniqueId": "defn-i"
+          }
+        }
+      },
+      "defn-j": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-j",
+            "uniqueId": "defn-j"
+          }
+        }
+      },
+      "defn-k": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-k",
+            "uniqueId": "defn-k"
+          }
+        }
+      },
+      "defn-l": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-l",
+            "uniqueId": "defn-l"
+          }
+        }
+      },
+      "defn-m": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-m",
+            "uniqueId": "defn-m"
+          }
+        }
+      },
+      "defn-n": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-n",
+            "uniqueId": "defn-n"
+          }
+        }
+      },
+      "defn-o": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-o",
+            "uniqueId": "defn-o"
+          }
+        }
+      },
+      "defn-p": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-p",
+            "uniqueId": "defn-p"
+          }
+        }
+      },
+      "defn-prod": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-prod",
+            "uniqueId": "defn-prod"
+          }
+        }
+      },
+      "defn-qa": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-qa",
+            "uniqueId": "defn-qa"
+          }
+        }
+      },
+      "defn-r": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-r",
+            "uniqueId": "defn-r"
+          }
+        }
+      },
+      "defn-s": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-s",
+            "uniqueId": "defn-s"
+          }
+        }
+      },
+      "defn-security": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-security",
+            "uniqueId": "defn-security"
+          }
+        }
+      },
+      "defn-stage": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-stage",
+            "uniqueId": "defn-stage"
+          }
+        }
+      },
+      "defn-t": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-t",
+            "uniqueId": "defn-t"
+          }
+        }
+      },
+      "defn-v": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-v",
+            "uniqueId": "defn-v"
+          }
+        }
+      },
+      "defn-w": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-w",
+            "uniqueId": "defn-w"
+          }
+        }
+      }
+    },
     "aws_organizations_organization": {
       "organization": {
         "//": {
           "metadata": {
             "path": "org-chamber/organization",
             "uniqueId": "organization"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_account_assignment": {
+      "chamber-4_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-4_admin_sso_account_assignment",
+            "uniqueId": "chamber-4_admin_sso_account_assignment"
+          }
+        }
+      },
+      "chamber-5_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-5_admin_sso_account_assignment",
+            "uniqueId": "chamber-5_admin_sso_account_assignment"
+          }
+        }
+      },
+      "chamber-6_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-6_admin_sso_account_assignment",
+            "uniqueId": "chamber-6_admin_sso_account_assignment"
+          }
+        }
+      },
+      "chamber-7_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-7_admin_sso_account_assignment",
+            "uniqueId": "chamber-7_admin_sso_account_assignment"
+          }
+        }
+      },
+      "chamber-8_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-8_admin_sso_account_assignment",
+            "uniqueId": "chamber-8_admin_sso_account_assignment"
+          }
+        }
+      },
+      "chamber-9_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-9_admin_sso_account_assignment",
+            "uniqueId": "chamber-9_admin_sso_account_assignment"
+          }
+        }
+      },
+      "chamber_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber_admin_sso_account_assignment",
+            "uniqueId": "chamber_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-a_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-a_admin_sso_account_assignment",
+            "uniqueId": "defn-a_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-b_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-b_admin_sso_account_assignment",
+            "uniqueId": "defn-b_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-c_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-c_admin_sso_account_assignment",
+            "uniqueId": "defn-c_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-cd_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-cd_admin_sso_account_assignment",
+            "uniqueId": "defn-cd_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-ci_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-ci_admin_sso_account_assignment",
+            "uniqueId": "defn-ci_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-d_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-d_admin_sso_account_assignment",
+            "uniqueId": "defn-d_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-dev_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-dev_admin_sso_account_assignment",
+            "uniqueId": "defn-dev_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-e_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-e_admin_sso_account_assignment",
+            "uniqueId": "defn-e_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-f_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-f_admin_sso_account_assignment",
+            "uniqueId": "defn-f_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-g_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-g_admin_sso_account_assignment",
+            "uniqueId": "defn-g_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-h_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-h_admin_sso_account_assignment",
+            "uniqueId": "defn-h_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-hub_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-hub_admin_sso_account_assignment",
+            "uniqueId": "defn-hub_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-i_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-i_admin_sso_account_assignment",
+            "uniqueId": "defn-i_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-j_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-j_admin_sso_account_assignment",
+            "uniqueId": "defn-j_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-k_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-k_admin_sso_account_assignment",
+            "uniqueId": "defn-k_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-l_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-l_admin_sso_account_assignment",
+            "uniqueId": "defn-l_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-m_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-m_admin_sso_account_assignment",
+            "uniqueId": "defn-m_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-n_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-n_admin_sso_account_assignment",
+            "uniqueId": "defn-n_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-o_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-o_admin_sso_account_assignment",
+            "uniqueId": "defn-o_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-p_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-p_admin_sso_account_assignment",
+            "uniqueId": "defn-p_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-prod_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-prod_admin_sso_account_assignment",
+            "uniqueId": "defn-prod_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-qa_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-qa_admin_sso_account_assignment",
+            "uniqueId": "defn-qa_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-r_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-r_admin_sso_account_assignment",
+            "uniqueId": "defn-r_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-s_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-s_admin_sso_account_assignment",
+            "uniqueId": "defn-s_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-security_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-security_admin_sso_account_assignment",
+            "uniqueId": "defn-security_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-stage_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-stage_admin_sso_account_assignment",
+            "uniqueId": "defn-stage_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-t_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-t_admin_sso_account_assignment",
+            "uniqueId": "defn-t_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-v_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-v_admin_sso_account_assignment",
+            "uniqueId": "defn-v_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-w_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-w_admin_sso_account_assignment",
+            "uniqueId": "defn-w_admin_sso_account_assignment"
           }
         }
       }

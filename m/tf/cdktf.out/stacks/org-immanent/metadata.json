@@ -31,12 +31,208 @@
         }
       }
     },
+    "aws_organizations_account": {
+      "immanent": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent",
+            "uniqueId": "immanent"
+          }
+        }
+      },
+      "immanent-changer": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-changer",
+            "uniqueId": "immanent-changer"
+          }
+        }
+      },
+      "immanent-chanter": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-chanter",
+            "uniqueId": "immanent-chanter"
+          }
+        }
+      },
+      "immanent-doorkeeper": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-doorkeeper",
+            "uniqueId": "immanent-doorkeeper"
+          }
+        }
+      },
+      "immanent-ged": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-ged",
+            "uniqueId": "immanent-ged"
+          }
+        }
+      },
+      "immanent-hand": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-hand",
+            "uniqueId": "immanent-hand"
+          }
+        }
+      },
+      "immanent-herbal": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-herbal",
+            "uniqueId": "immanent-herbal"
+          }
+        }
+      },
+      "immanent-namer": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-namer",
+            "uniqueId": "immanent-namer"
+          }
+        }
+      },
+      "immanent-patterner": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-patterner",
+            "uniqueId": "immanent-patterner"
+          }
+        }
+      },
+      "immanent-roke": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-roke",
+            "uniqueId": "immanent-roke"
+          }
+        }
+      },
+      "immanent-summoner": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-summoner",
+            "uniqueId": "immanent-summoner"
+          }
+        }
+      },
+      "immanent-windkey": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-windkey",
+            "uniqueId": "immanent-windkey"
+          }
+        }
+      }
+    },
     "aws_organizations_organization": {
       "organization": {
         "//": {
           "metadata": {
             "path": "org-immanent/organization",
             "uniqueId": "organization"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_account_assignment": {
+      "immanent-changer_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-changer_admin_sso_account_assignment",
+            "uniqueId": "immanent-changer_admin_sso_account_assignment"
+          }
+        }
+      },
+      "immanent-chanter_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-chanter_admin_sso_account_assignment",
+            "uniqueId": "immanent-chanter_admin_sso_account_assignment"
+          }
+        }
+      },
+      "immanent-doorkeeper_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-doorkeeper_admin_sso_account_assignment",
+            "uniqueId": "immanent-doorkeeper_admin_sso_account_assignment"
+          }
+        }
+      },
+      "immanent-ged_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-ged_admin_sso_account_assignment",
+            "uniqueId": "immanent-ged_admin_sso_account_assignment"
+          }
+        }
+      },
+      "immanent-hand_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-hand_admin_sso_account_assignment",
+            "uniqueId": "immanent-hand_admin_sso_account_assignment"
+          }
+        }
+      },
+      "immanent-herbal_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-herbal_admin_sso_account_assignment",
+            "uniqueId": "immanent-herbal_admin_sso_account_assignment"
+          }
+        }
+      },
+      "immanent-namer_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-namer_admin_sso_account_assignment",
+            "uniqueId": "immanent-namer_admin_sso_account_assignment"
+          }
+        }
+      },
+      "immanent-patterner_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-patterner_admin_sso_account_assignment",
+            "uniqueId": "immanent-patterner_admin_sso_account_assignment"
+          }
+        }
+      },
+      "immanent-roke_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-roke_admin_sso_account_assignment",
+            "uniqueId": "immanent-roke_admin_sso_account_assignment"
+          }
+        }
+      },
+      "immanent-summoner_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-summoner_admin_sso_account_assignment",
+            "uniqueId": "immanent-summoner_admin_sso_account_assignment"
+          }
+        }
+      },
+      "immanent-windkey_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent-windkey_admin_sso_account_assignment",
+            "uniqueId": "immanent-windkey_admin_sso_account_assignment"
+          }
+        }
+      },
+      "immanent_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-immanent/immanent_admin_sso_account_assignment",
+            "uniqueId": "immanent_admin_sso_account_assignment"
           }
         }
       }

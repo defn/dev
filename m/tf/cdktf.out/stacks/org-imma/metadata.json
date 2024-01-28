@@ -31,12 +31,112 @@
         }
       }
     },
+    "aws_organizations_account": {
+      "imma": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma",
+            "uniqueId": "imma"
+          }
+        }
+      },
+      "imma-defn": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-defn",
+            "uniqueId": "imma-defn"
+          }
+        }
+      },
+      "imma-dev": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-dev",
+            "uniqueId": "imma-dev"
+          }
+        }
+      },
+      "imma-dgwyn": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-dgwyn",
+            "uniqueId": "imma-dgwyn"
+          }
+        }
+      },
+      "imma-prod": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-prod",
+            "uniqueId": "imma-prod"
+          }
+        }
+      },
+      "imma-tolan": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-tolan",
+            "uniqueId": "imma-tolan"
+          }
+        }
+      }
+    },
     "aws_organizations_organization": {
       "organization": {
         "//": {
           "metadata": {
             "path": "org-imma/organization",
             "uniqueId": "organization"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_account_assignment": {
+      "imma-defn_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-defn_admin_sso_account_assignment",
+            "uniqueId": "imma-defn_admin_sso_account_assignment"
+          }
+        }
+      },
+      "imma-dev_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-dev_admin_sso_account_assignment",
+            "uniqueId": "imma-dev_admin_sso_account_assignment"
+          }
+        }
+      },
+      "imma-dgwyn_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-dgwyn_admin_sso_account_assignment",
+            "uniqueId": "imma-dgwyn_admin_sso_account_assignment"
+          }
+        }
+      },
+      "imma-prod_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-prod_admin_sso_account_assignment",
+            "uniqueId": "imma-prod_admin_sso_account_assignment"
+          }
+        }
+      },
+      "imma-tolan_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-tolan_admin_sso_account_assignment",
+            "uniqueId": "imma-tolan_admin_sso_account_assignment"
+          }
+        }
+      },
+      "imma_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma_admin_sso_account_assignment",
+            "uniqueId": "imma_admin_sso_account_assignment"
           }
         }
       }

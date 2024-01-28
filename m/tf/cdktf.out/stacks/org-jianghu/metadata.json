@@ -31,12 +31,64 @@
         }
       }
     },
+    "aws_organizations_account": {
+      "jianghu": {
+        "//": {
+          "metadata": {
+            "path": "org-jianghu/jianghu",
+            "uniqueId": "jianghu"
+          }
+        }
+      },
+      "klamath": {
+        "//": {
+          "metadata": {
+            "path": "org-jianghu/klamath",
+            "uniqueId": "klamath"
+          }
+        }
+      },
+      "tahoe": {
+        "//": {
+          "metadata": {
+            "path": "org-jianghu/tahoe",
+            "uniqueId": "tahoe"
+          }
+        }
+      }
+    },
     "aws_organizations_organization": {
       "organization": {
         "//": {
           "metadata": {
             "path": "org-jianghu/organization",
             "uniqueId": "organization"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_account_assignment": {
+      "jianghu_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-jianghu/jianghu_admin_sso_account_assignment",
+            "uniqueId": "jianghu_admin_sso_account_assignment"
+          }
+        }
+      },
+      "klamath_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-jianghu/klamath_admin_sso_account_assignment",
+            "uniqueId": "klamath_admin_sso_account_assignment"
+          }
+        }
+      },
+      "tahoe_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-jianghu/tahoe_admin_sso_account_assignment",
+            "uniqueId": "tahoe_admin_sso_account_assignment"
           }
         }
       }
