@@ -1,9 +1,28 @@
 package aws
 
+import (
+	"github.com/defn/dev/m/tf"
+)
+
 org: [ORG=string]: account: [ACCOUNT=string]: {
 	org:      ORG
 	account:  ACCOUNT
+	id:       string | *"TODO"
+	email:    string | *"TODO"
 	sso_role: string | *"Administrator"
+}
+
+org: {
+	for name, org in tf.input.organization {
+		(name): account: {
+			for acc in org.accounts {
+				(acc.profile): {
+					email: acc.email
+				}
+			}
+		}
+	}
+
 }
 
 org: {
@@ -27,14 +46,14 @@ org: {
 		}
 	}
 	curl: account: {
+		org: {
+			id: "424535767618"
+		}
 		net: {
 			id: "101142583332"
 		}
 		lib: {
 			id: "298406631539"
-		}
-		org: {
-			id: "424535767618"
 		}
 		hub: {
 			id: "804430872255"
@@ -49,6 +68,9 @@ org: {
 		}
 	}
 	helix: account: {
+		org: {
+			id: "816178966829"
+		}
 		sec: {
 			id: "018520313738"
 		}
@@ -72,9 +94,6 @@ org: {
 		}
 		dmz: {
 			id: "724643698007"
-		}
-		org: {
-			id: "816178966829"
 		}
 		dev: {
 			id: "843784871878"
@@ -134,7 +153,7 @@ org: {
 		hub: {
 			id: "337248635000"
 		}
-		post: {
+		postx: {
 			id: "565963418226"
 		}
 		sandbox: {
@@ -148,7 +167,7 @@ org: {
 		org: {
 			id: "548373030883"
 		}
-		amanibhavam: {
+		defn: {
 			id: "246197522468"
 		}
 		dgwyn: {
@@ -215,6 +234,9 @@ org: {
 		secrets: {
 			id: "464075062390"
 		}
+		hub: {
+			id: "462478722501"
+		}
 	}
 	chamber: account: {
 		org: {
@@ -277,9 +299,6 @@ org: {
 		j: {
 			id: "738433022197"
 		}
-		k: {
-			id: "580612865853"
-		}
 		l: {
 			id: "991300382347"
 		}
@@ -337,8 +356,37 @@ org: {
 			id: "298431841138"
 		}
 	}
-	vault: account: org: {
-		id: "475528707847"
+	vault: account: {
+		org: {
+			id: "475528707847"
+		}
+		transit: {
+			id: "915207860232"
+		}
+		audit: {
+			id: "749185891195"
+		}
+		vault0: {
+			id: "313228123503"
+		}
+		vault1: {
+			id: "040769490632"
+		}
+		ops: {
+			id: "188066400611"
+		}
+		library: {
+			id: "066356637485"
+		}
+		hub: {
+			id: "539099112425"
+		}
+		pub: {
+			id: "851162413429"
+		}
+		dev: {
+			id: "497393606242"
+		}
 	}
 	circus: account: {
 		org: {
@@ -352,6 +400,9 @@ org: {
 		}
 		transit: {
 			id: "002516226222"
+		}
+		govcloud: {
+			id: "497790518354"
 		}
 	}
 }

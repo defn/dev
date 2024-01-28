@@ -31,3 +31,13 @@ go_binary(
     embed = [":tf_lib"],
     visibility = ["//visibility:public"],
 )
+
+filegroup(
+    name = "cue",
+    srcs = [
+        "schema.cue",
+        "tf.cue",
+        "//command/infra:cue",
+    ],
+    visibility = ["//visibility:public"],
+)

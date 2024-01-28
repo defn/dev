@@ -34,6 +34,10 @@ genrule(
 # app configuration
 cue_export(
     name = "config",
+    srcs = [
+        "//cue.mod:cue_mod",
+        "//tf:cue",
+    ],
     cues = glob(["*.cue"]),
 )
 

@@ -12,3 +12,11 @@ go_library(
         "@org_cuelang_go//cue/load",
     ],
 )
+
+filegroup(
+    name = "cue",
+    srcs = [
+        "infra.cue",
+    ],
+    visibility = ["//visibility:public"],
+)
