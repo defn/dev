@@ -8,6 +8,7 @@ package infra
 #AwsAccount: {
 	name: string
 	email: string
+	profile: string | *name
 	prefix: string | *""
 	imported: string | *null
 }

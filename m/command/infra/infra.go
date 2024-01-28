@@ -34,6 +34,7 @@ type AwsOrganization struct {
 type AwsAccount struct {
 	Name   string `json:"name"`
 	Email  string `json:"email"`
+	Profile string `json:"profile"`
 	Prefix string `json:"prefix"`
 	Imported string `json:"imported"`
 }
