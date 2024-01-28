@@ -1,4 +1,4 @@
-locals {
+ocals {
   lifecycle_configuration_rules = [{
     enabled = true
     id      = "v2rule"

@@ -1,0 +1,39 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "s3",
+      "stackName": "acc-vault-transit",
+      "version": "0.20.3"
+    },
+    "outputs": {
+    }
+  },
+  "module": {
+    "vault-transit": {
+      "//": {
+        "metadata": {
+          "path": "acc-vault-transit/vault-transit",
+          "uniqueId": "vault-transit"
+        }
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "s3": {
+        "bucket": "dfn-defn-terraform-state",
+        "dynamodb_table": "dfn-defn-terraform-state-lock",
+        "encrypt": true,
+        "key": "stacks/acc-vault-transit/terraform.tfstate",
+        "profile": "defn-org-sso",
+        "region": "us-east-1"
+      }
+    },
+    "required_providers": {
+      "aws": {
+        "source": "aws",
+        "version": "5.34.0"
+      }
+    }
+  }
+}

@@ -75,6 +75,51 @@ resource "aws_ssoadmin_account_assignment" "chamber_admin_sso_account_assignment
   target_id          = "${aws_organizations_account.chamber.id}"
   target_type        = "AWS_ACCOUNT"
 }
+resource "aws_organizations_account" "defn-cd" {
+  email = "aws-cd@defn.us"
+  name  = "defn-cd"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+resource "aws_ssoadmin_account_assignment" "defn-cd_admin_sso_account_assignment" {
+  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
+  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
+  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  principal_type     = "GROUP"
+  target_id          = "${aws_organizations_account.defn-cd.id}"
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "defn-ci" {
+  email = "aws-ci@defn.us"
+  name  = "defn-ci"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+resource "aws_ssoadmin_account_assignment" "defn-ci_admin_sso_account_assignment" {
+  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
+  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
+  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  principal_type     = "GROUP"
+  target_id          = "${aws_organizations_account.defn-ci.id}"
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "defn-security" {
+  email = "aws-users@defn.us"
+  name  = "defn-security"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+resource "aws_ssoadmin_account_assignment" "defn-security_admin_sso_account_assignment" {
+  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
+  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
+  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  principal_type     = "GROUP"
+  target_id          = "${aws_organizations_account.defn-security.id}"
+  target_type        = "AWS_ACCOUNT"
+}
 resource "aws_organizations_account" "chamber-4" {
   email = "chamber-4@defn.us"
   name  = "chamber-4"
@@ -165,186 +210,6 @@ resource "aws_ssoadmin_account_assignment" "chamber-9_admin_sso_account_assignme
   target_id          = "${aws_organizations_account.chamber-9.id}"
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "defn-m" {
-  email = "defn-m@defn.us"
-  name  = "defn-m"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-resource "aws_ssoadmin_account_assignment" "defn-m_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
-  principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.defn-m.id}"
-  target_type        = "AWS_ACCOUNT"
-}
-resource "aws_organizations_account" "defn-n" {
-  email = "defn-n@defn.us"
-  name  = "defn-n"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-resource "aws_ssoadmin_account_assignment" "defn-n_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
-  principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.defn-n.id}"
-  target_type        = "AWS_ACCOUNT"
-}
-resource "aws_organizations_account" "defn-o" {
-  email = "defn-o@defn.us"
-  name  = "defn-o"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-resource "aws_ssoadmin_account_assignment" "defn-o_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
-  principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.defn-o.id}"
-  target_type        = "AWS_ACCOUNT"
-}
-resource "aws_organizations_account" "defn-p" {
-  email = "defn-p@defn.us"
-  name  = "defn-p"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-resource "aws_ssoadmin_account_assignment" "defn-p_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
-  principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.defn-p.id}"
-  target_type        = "AWS_ACCOUNT"
-}
-resource "aws_organizations_account" "defn-r" {
-  email = "defn-r@imma.io"
-  name  = "defn-r"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-resource "aws_ssoadmin_account_assignment" "defn-r_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
-  principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.defn-r.id}"
-  target_type        = "AWS_ACCOUNT"
-}
-resource "aws_organizations_account" "defn-s" {
-  email = "defn-s@imma.io"
-  name  = "defn-s"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-resource "aws_ssoadmin_account_assignment" "defn-s_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
-  principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.defn-s.id}"
-  target_type        = "AWS_ACCOUNT"
-}
-resource "aws_organizations_account" "defn-t" {
-  email = "defn-t@imma.io"
-  name  = "defn-t"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-resource "aws_ssoadmin_account_assignment" "defn-t_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
-  principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.defn-t.id}"
-  target_type        = "AWS_ACCOUNT"
-}
-resource "aws_organizations_account" "defn-v" {
-  email = "defn-v@imma.io"
-  name  = "defn-v"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-resource "aws_ssoadmin_account_assignment" "defn-v_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
-  principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.defn-v.id}"
-  target_type        = "AWS_ACCOUNT"
-}
-resource "aws_organizations_account" "defn-w" {
-  email = "defn-w@imma.io"
-  name  = "defn-w"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-resource "aws_ssoadmin_account_assignment" "defn-w_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
-  principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.defn-w.id}"
-  target_type        = "AWS_ACCOUNT"
-}
-resource "aws_organizations_account" "defn-i" {
-  email = "aws-admin1@defn.us"
-  name  = "defn-i"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-resource "aws_ssoadmin_account_assignment" "defn-i_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
-  principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.defn-i.id}"
-  target_type        = "AWS_ACCOUNT"
-}
-resource "aws_organizations_account" "defn-j" {
-  email = "aws-development1@defn.us"
-  name  = "defn-j"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-resource "aws_ssoadmin_account_assignment" "defn-j_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
-  principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.defn-j.id}"
-  target_type        = "AWS_ACCOUNT"
-}
-resource "aws_organizations_account" "defn-l" {
-  email = "aws-staging1@defn.us"
-  name  = "defn-l"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-resource "aws_ssoadmin_account_assignment" "defn-l_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
-  principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.defn-l.id}"
-  target_type        = "AWS_ACCOUNT"
-}
 resource "aws_organizations_account" "defn-a" {
   email = "defn-a@imma.io"
   name  = "defn-a"
@@ -360,19 +225,19 @@ resource "aws_ssoadmin_account_assignment" "defn-a_admin_sso_account_assignment"
   target_id          = "${aws_organizations_account.defn-a.id}"
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "defn-b" {
+resource "aws_organizations_account" "defb-b" {
   email = "imma-admin1@imma.io"
-  name  = "defn-b"
+  name  = "defb-b"
   tags = {
     ManagedBy = "Terraform"
   }
 }
-resource "aws_ssoadmin_account_assignment" "defn-b_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defb-b_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
   principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
   principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.defn-b.id}"
+  target_id          = "${aws_organizations_account.defb-b.id}"
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "defn-c" {
@@ -465,34 +330,169 @@ resource "aws_ssoadmin_account_assignment" "defn-h_admin_sso_account_assignment"
   target_id          = "${aws_organizations_account.defn-h.id}"
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "defn-hub" {
-  email = "aws-hub@defn.us"
-  name  = "defn-hub"
+resource "aws_organizations_account" "defn-i" {
+  email = "aws-admin1@defn.us"
+  name  = "defn-i"
   tags = {
     ManagedBy = "Terraform"
   }
 }
-resource "aws_ssoadmin_account_assignment" "defn-hub_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn-i_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
   principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
   principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.defn-hub.id}"
+  target_id          = "${aws_organizations_account.defn-i.id}"
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "defn-prod" {
-  email = "aws-prod@defn.us"
-  name  = "defn-prod"
+resource "aws_organizations_account" "defn-j" {
+  email = "aws-development1@defn.us"
+  name  = "defn-j"
   tags = {
     ManagedBy = "Terraform"
   }
 }
-resource "aws_ssoadmin_account_assignment" "defn-prod_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn-j_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
   principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
   principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.defn-prod.id}"
+  target_id          = "${aws_organizations_account.defn-j.id}"
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "defn-l" {
+  email = "aws-staging1@defn.us"
+  name  = "defn-l"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+resource "aws_ssoadmin_account_assignment" "defn-l_admin_sso_account_assignment" {
+  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
+  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
+  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  principal_type     = "GROUP"
+  target_id          = "${aws_organizations_account.defn-l.id}"
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "defn-m" {
+  email = "defn-m@defn.us"
+  name  = "defn-m"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+resource "aws_ssoadmin_account_assignment" "defn-m_admin_sso_account_assignment" {
+  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
+  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
+  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  principal_type     = "GROUP"
+  target_id          = "${aws_organizations_account.defn-m.id}"
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "defn-n" {
+  email = "defn-n@defn.us"
+  name  = "defn-n"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+resource "aws_ssoadmin_account_assignment" "defn-n_admin_sso_account_assignment" {
+  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
+  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
+  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  principal_type     = "GROUP"
+  target_id          = "${aws_organizations_account.defn-n.id}"
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "defn-o" {
+  email = "defn-o@defn.us"
+  name  = "defn-o"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+resource "aws_ssoadmin_account_assignment" "defn-o_admin_sso_account_assignment" {
+  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
+  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
+  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  principal_type     = "GROUP"
+  target_id          = "${aws_organizations_account.defn-o.id}"
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "defn-p" {
+  email = "defn-p@defn.us"
+  name  = "defn-p"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+resource "aws_ssoadmin_account_assignment" "defn-p_admin_sso_account_assignment" {
+  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
+  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
+  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  principal_type     = "GROUP"
+  target_id          = "${aws_organizations_account.defn-p.id}"
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "defn-dev" {
+  email = "aws-dev@defn.us"
+  name  = "defn-dev"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+resource "aws_ssoadmin_account_assignment" "defn-dev_admin_sso_account_assignment" {
+  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
+  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
+  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  principal_type     = "GROUP"
+  target_id          = "${aws_organizations_account.defn-dev.id}"
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "defn-r" {
+  email = "defn-r@imma.io"
+  name  = "defn-r"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+resource "aws_ssoadmin_account_assignment" "defn-r_admin_sso_account_assignment" {
+  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
+  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
+  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  principal_type     = "GROUP"
+  target_id          = "${aws_organizations_account.defn-r.id}"
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "defn-s" {
+  email = "defn-s@imma.io"
+  name  = "defn-s"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+resource "aws_ssoadmin_account_assignment" "defn-s_admin_sso_account_assignment" {
+  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
+  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
+  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  principal_type     = "GROUP"
+  target_id          = "${aws_organizations_account.defn-s.id}"
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "defn-t" {
+  email = "defn-t@imma.io"
+  name  = "defn-t"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+resource "aws_ssoadmin_account_assignment" "defn-t_admin_sso_account_assignment" {
+  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
+  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
+  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  principal_type     = "GROUP"
+  target_id          = "${aws_organizations_account.defn-t.id}"
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "defn-qa" {
@@ -510,19 +510,34 @@ resource "aws_ssoadmin_account_assignment" "defn-qa_admin_sso_account_assignment
   target_id          = "${aws_organizations_account.defn-qa.id}"
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "defn-security" {
-  email = "aws-users@defn.us"
-  name  = "defn-security"
+resource "aws_organizations_account" "defn-v" {
+  email = "defn-v@imma.io"
+  name  = "defn-v"
   tags = {
     ManagedBy = "Terraform"
   }
 }
-resource "aws_ssoadmin_account_assignment" "defn-security_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn-v_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
   principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
   principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.defn-security.id}"
+  target_id          = "${aws_organizations_account.defn-v.id}"
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "defn-w" {
+  email = "defn-w@imma.io"
+  name  = "defn-w"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+resource "aws_ssoadmin_account_assignment" "defn-w_admin_sso_account_assignment" {
+  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
+  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
+  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  principal_type     = "GROUP"
+  target_id          = "${aws_organizations_account.defn-w.id}"
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "defn-stage" {
@@ -540,48 +555,33 @@ resource "aws_ssoadmin_account_assignment" "defn-stage_admin_sso_account_assignm
   target_id          = "${aws_organizations_account.defn-stage.id}"
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "defn-cd" {
-  email = "aws-cd@defn.us"
-  name  = "defn-cd"
+resource "aws_organizations_account" "defn-prod" {
+  email = "aws-prod@defn.us"
+  name  = "defn-prod"
   tags = {
     ManagedBy = "Terraform"
   }
 }
-resource "aws_ssoadmin_account_assignment" "defn-cd_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn-prod_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
   principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
   principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.defn-cd.id}"
+  target_id          = "${aws_organizations_account.defn-prod.id}"
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "defn-ci" {
-  email = "aws-ci@defn.us"
-  name  = "defn-ci"
+resource "aws_organizations_account" "defn-hub" {
+  email = "aws-hub@defn.us"
+  name  = "defn-hub"
   tags = {
     ManagedBy = "Terraform"
   }
 }
-resource "aws_ssoadmin_account_assignment" "defn-ci_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn-hub_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
   principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
   principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.defn-ci.id}"
-  target_type        = "AWS_ACCOUNT"
-}
-resource "aws_organizations_account" "defn-dev" {
-  email = "aws-dev@defn.us"
-  name  = "defn-dev"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-resource "aws_ssoadmin_account_assignment" "defn-dev_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
-  principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.defn-dev.id}"
+  target_id          = "${aws_organizations_account.defn-hub.id}"
   target_type        = "AWS_ACCOUNT"
 }
