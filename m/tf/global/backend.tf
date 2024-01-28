@@ -7,6 +7,6 @@ terraform {
     key            = "defn-org/global/terraform.tfstate"
     dynamodb_table = "dfn-defn-terraform-state-lock"
     encrypt        = "true"
-    profile = "defn-org-sso"
+    profile        = "defn-org-sso"
   }
 }

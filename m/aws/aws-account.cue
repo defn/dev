@@ -9,8 +9,7 @@ org: [ORG=string]: account: [ACCOUNT=string]: {
 org: {
 	defn: account: {
 		org: {
-			id:       "510430971399"
-			sso_role: "AdministratorAccess"
+			id: "510430971399"
 		}
 	}
 	coil: account: {
