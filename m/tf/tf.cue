@@ -198,7 +198,7 @@ input: {
 				email:   "defn-a@imma.io"
 				profile: "a"
 			}, {
-				name:    "defb-b"
+				name:    "defn-b"
 				email:   "imma-admin1@imma.io"
 				profile: "b"
 			}, {
