@@ -46,6 +46,7 @@ input: {
 				},
 			]
 		}
+
 		curl: {
 			region: "us-west-2"
 			#types: env_accounts
@@ -60,6 +61,7 @@ input: {
 				},
 			]
 		}
+
 		coil: {
 			region: "us-east-1"
 			#types: env_accounts
@@ -74,6 +76,7 @@ input: {
 				},
 			]
 		}
+
 		helix: {
 			region: "us-east-2"
 			#types: full_accounts
@@ -88,6 +91,7 @@ input: {
 				},
 			]
 		}
+
 		spiral: {
 			region: "us-west-2"
 			#types: full_accounts
@@ -136,6 +140,7 @@ input: {
 				},
 			]
 		}
+
 		chamber: {
 			region: "us-west-2"
 
@@ -283,6 +288,7 @@ input: {
 				profile: "z"
 			}]
 		}
+
 		whoa: {
 			region: "us-west-2"
 			#types: ["prod", "secrets", "dev", "hub"]
@@ -300,6 +306,7 @@ input: {
 				},
 			]
 		}
+
 		imma: {
 			region: "us-west-2"
 			#types1: ["prod", "dev"]
@@ -360,6 +367,7 @@ input: {
 				},
 			]
 		}
+
 		fogg: {
 			region: "us-west-2"
 			#types: ["gateway", "security", "hub", "postx", "asset", "data", "sandbox", "circus", "home"]
