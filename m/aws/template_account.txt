@@ -1,10 +1,4 @@
 ########################################################################3
-# member iam role admin
-[profile ORG-MEMBER]
-source_profile=ORG
-role_arn=arn:aws:iam::ACCOUNT_ID:role/OrganizationAccountAccessRole
-region=REGION
-
 # sso login
 [profile ORG-MEMBER-sso]
 credential_process=aws-vault exec ORG-MEMBER-sso-source --json
