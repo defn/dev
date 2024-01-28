@@ -69,7 +69,7 @@ function make_up {
 	(cd c/${cluster_name} && make secrets)
 
 	(cd k && b build)
-  	b out //k:deploy_crd_${cluster_name} | kubectl --context ${cluster_name} apply --server-side -f -
+	b out //k:deploy_crd_${cluster_name} | kubectl --context ${cluster_name} apply --server-side -f -
 	kubectl --context ${cluster_name} create ns argocd || true
 	kubectl --context ${cluster_name} create ns kyverno || true
 	(cd k && b out deploy_yaml_${cluster_name}-cluster-cilium) | kubectl --context ${cluster_name} apply -f -
