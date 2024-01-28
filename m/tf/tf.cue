@@ -22,6 +22,13 @@ input: {
 		profile: "defn-org-sso"
 	}
 
+	accounts: [
+		for oname, org in input.organization
+		for aname, acc in org.accounts {
+			"\(oname)-\(acc.profile)"
+		},
+	]
+
 	organization: {
 		defn: {
 			region: "us-east-2"
