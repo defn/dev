@@ -26,8 +26,8 @@ input: {
 		defn: {
 			region: "us-east-2"
 			accounts: [{
-				name:  "defn"
-				email: "iam+bootstrap@defn.sh"
+				name:    "defn"
+				email:   "iam+bootstrap@defn.sh"
 				profile: "org"
 			}]
 		}
@@ -36,8 +36,8 @@ input: {
 			region: "us-east-2"
 			#types: ops_accounts
 			accounts: [{
-				name:  "gyre"
-				email: "aws-gyre@defn.us"
+				name:    "gyre"
+				email:   "aws-gyre@defn.us"
 				profile: "org"
 			}] + [
 				for t in #types {
@@ -50,8 +50,8 @@ input: {
 			region: "us-west-2"
 			#types: env_accounts
 			accounts: [{
-				name:  "curl"
-				email: "aws-curl@defn.us"
+				name:    "curl"
+				email:   "aws-curl@defn.us"
 				profile: "org"
 			}] + [
 				for t in #types {
@@ -64,8 +64,8 @@ input: {
 			region: "us-east-1"
 			#types: env_accounts
 			accounts: [{
-				name:  "coil"
-				email: "aws-coil@defn.us"
+				name:    "coil"
+				email:   "aws-coil@defn.us"
 				profile: "org"
 			}] + [
 				for t in #types {
@@ -78,8 +78,8 @@ input: {
 			region: "us-east-2"
 			#types: full_accounts
 			accounts: [{
-				name:  "helix"
-				email: "aws-helix@defn.sh"
+				name:    "helix"
+				email:   "aws-helix@defn.sh"
 				profile: "org"
 			}] + [
 				for t in #types {
@@ -92,8 +92,8 @@ input: {
 			region: "us-west-2"
 			#types: full_accounts
 			accounts: [{
-				name:  "spiral"
-				email: "aws-spiral@defn.us"
+				name:    "spiral"
+				email:   "aws-spiral@defn.us"
 				profile: "org"
 			}] + [
 				for t in #types {
@@ -110,7 +110,7 @@ input: {
 				name:     "vault"
 				email:    "aws-vault@defn.us"
 				imported: "yes"
-				profile: "org"
+				profile:  "org"
 			}] + [
 				for t in #types {
 					name:     t
@@ -127,7 +127,7 @@ input: {
 				name:     "circus"
 				email:    "aws-circus@defn.us"
 				imported: "yes"
-				profile: "org"
+				profile:  "org"
 			}] + [
 				for t in #types {
 					name:     t
@@ -139,112 +139,147 @@ input: {
 		chamber: {
 			region: "us-west-2"
 
-			accounts: [...{imported: "yes", ...}]	
+			accounts: [...{imported: "yes", ...}]
 
 			accounts: [{
-				name: "chamber", email: "aws-chamber@defn.us"
+				name:    "chamber"
+				email:   "aws-chamber@defn.us"
 				profile: "org"
 			}, {
-				name: "defn-cd", email: "aws-cd@defn.us"
+				name:    "defn-cd"
+				email:   "aws-cd@defn.us"
 				profile: "1"
 			}, {
-				name: "defn-ci", email: "aws-ci@defn.us"
+				name:    "defn-ci"
+				email:   "aws-ci@defn.us"
 				profile: "2"
 			}, {
-				name: "defn-security", email: "aws-users@defn.us"
+				name:    "defn-security"
+				email:   "aws-users@defn.us"
 				profile: "3"
 			}, {
-				name: "chamber-4", email: "chamber-4@defn.us"
+				name:    "chamber-4"
+				email:   "chamber-4@defn.us"
 				profile: "4"
 			}, {
-				name: "chamber-5", email: "chamber-5@defn.us"
+				name:    "chamber-5"
+				email:   "chamber-5@defn.us"
 				profile: "5"
 			}, {
-				name: "chamber-6", email: "chamber-6@defn.us"
+				name:    "chamber-6"
+				email:   "chamber-6@defn.us"
 				profile: "6"
 			}, {
-				name: "chamber-7", email: "chamber-7@defn.us"
+				name:    "chamber-7"
+				email:   "chamber-7@defn.us"
 				profile: "7"
 			}, {
-				name: "chamber-8", email: "chamber-8@defn.us"
+				name:    "chamber-8"
+				email:   "chamber-8@defn.us"
 				profile: "8"
 			}, {
-				name: "chamber-9", email: "chamber-9@defn.us"
+				name:    "chamber-9"
+				email:   "chamber-9@defn.us"
 				profile: "9"
 			}, {
-				name: "defn-a", email: "defn-a@imma.io"
+				name:    "defn-a"
+				email:   "defn-a@imma.io"
 				profile: "a"
 			}, {
-				name: "defb-b", email: "imma-admin1@imma.io"
+				name:    "defb-b"
+				email:   "imma-admin1@imma.io"
 				profile: "b"
 			}, {
-				name: "defn-c", email: "dev-eng1@imma.io"
+				name:    "defn-c"
+				email:   "dev-eng1@imma.io"
 				profile: "c"
 			}, {
-				name: "defn-d", email: "box-adm1@imma.io"
+				name:    "defn-d"
+				email:   "box-adm1@imma.io"
 				profile: "d"
 			}, {
-				name: "defn-e", email: "stg-eng1@imma.io"
+				name:    "defn-e"
+				email:   "stg-eng1@imma.io"
 				profile: "e"
 			}, {
-				name: "defn-f", email: "usr-admin1@imma.io"
+				name:    "defn-f"
+				email:   "usr-admin1@imma.io"
 				profile: "f"
 			}, {
-				name: "defn-g", email: "usr-adm1@imma.io"
+				name:    "defn-g"
+				email:   "usr-adm1@imma.io"
 				profile: "g"
 			}, {
-				name: "defn-h", email: "usr-eng1@imma.io"
+				name:    "defn-h"
+				email:   "usr-eng1@imma.io"
 				profile: "h"
 			}, {
-				name: "defn-i", email: "aws-admin1@defn.us"
+				name:    "defn-i"
+				email:   "aws-admin1@defn.us"
 				profile: "i"
 			}, {
-				name: "defn-j", email: "aws-development1@defn.us"
+				name:    "defn-j"
+				email:   "aws-development1@defn.us"
 				profile: "j"
 			}, {
-				name: "defn-l", email: "aws-staging1@defn.us"
+				name:    "defn-l"
+				email:   "aws-staging1@defn.us"
 				profile: "l"
 			}, {
-				name: "defn-m", email: "defn-m@defn.us"
+				name:    "defn-m"
+				email:   "defn-m@defn.us"
 				profile: "m"
 			}, {
-				name: "defn-n", email: "defn-n@defn.us"
+				name:    "defn-n"
+				email:   "defn-n@defn.us"
 				profile: "n"
 			}, {
-				name: "defn-o", email: "defn-o@defn.us"
+				name:    "defn-o"
+				email:   "defn-o@defn.us"
 				profile: "o"
 			}, {
-				name: "defn-p", email: "defn-p@defn.us"
+				name:    "defn-p"
+				email:   "defn-p@defn.us"
 				profile: "p"
 			}, {
-				name: "defn-dev", email: "aws-dev@defn.us"
+				name:    "defn-dev"
+				email:   "aws-dev@defn.us"
 				profile: "q"
 			}, {
-				name: "defn-r", email: "defn-r@imma.io"
+				name:    "defn-r"
+				email:   "defn-r@imma.io"
 				profile: "r"
 			}, {
-				name: "defn-s", email: "defn-s@imma.io"
+				name:    "defn-s"
+				email:   "defn-s@imma.io"
 				profile: "s"
 			}, {
-				name: "defn-t", email: "defn-t@imma.io"
+				name:    "defn-t"
+				email:   "defn-t@imma.io"
 				profile: "t"
 			}, {
-				name: "defn-qa", email: "aws-qa@defn.us"
+				name:    "defn-qa"
+				email:   "aws-qa@defn.us"
 				profile: "u"
 			}, {
-				name: "defn-v", email: "defn-v@imma.io"
+				name:    "defn-v"
+				email:   "defn-v@imma.io"
 				profile: "v"
 			}, {
-				name: "defn-w", email: "defn-w@imma.io"
+				name:    "defn-w"
+				email:   "defn-w@imma.io"
 				profile: "w"
 			}, {
-				name: "defn-stage", email: "aws-stage@defn.us"
+				name:    "defn-stage"
+				email:   "aws-stage@defn.us"
 				profile: "x"
 			}, {
-				name: "defn-prod", email: "aws-prod@defn.us"
+				name:    "defn-prod"
+				email:   "aws-prod@defn.us"
 				profile: "y"
 			}, {
-				name: "defn-hub", email: "aws-hub@defn.us"
+				name:    "defn-hub"
+				email:   "aws-hub@defn.us"
 				profile: "z"
 			}]
 		}
@@ -255,7 +290,7 @@ input: {
 				name:     "whoa"
 				email:    "aws-whoa@defn.us"
 				imported: "yes"
-				profile: "org"
+				profile:  "org"
 			}] + [
 				for t in #types {
 					prefix:   "whoa-"
@@ -273,20 +308,20 @@ input: {
 				name:     "imma"
 				email:    "aws-imma@defn.us"
 				imported: "yes"
-				profile: "org"
+				profile:  "org"
 			}] + [
 				for t in #types1 {
 					name:     "imma-\(t)"
 					email:    "imma-\(t)@imma.io"
 					imported: "yes"
-					profile: t
+					profile:  t
 				},
 			] + [
 				for t in #types2 {
 					name:     "imma-\(t)"
 					email:    "imma-\(t)@defn.us"
 					imported: "yes"
-					profile: t
+					profile:  t
 				},
 			]
 		}
@@ -298,13 +333,13 @@ input: {
 				name:     "immanent"
 				email:    "aws-immanent@defn.us"
 				imported: "yes"
-				profile: "org"
+				profile:  "org"
 			}] + [
 				for t in #types0 {
 					name:     "immanent-\(t)"
 					email:    "immanent-\(t)@defn.us"
 					imported: "yes"
-					profile: t
+					profile:  t
 				},
 			]
 		}
@@ -316,7 +351,7 @@ input: {
 				name:     "jianghu"
 				email:    "aws-jianghu@defn.us"
 				imported: "yes"
-				profile: "org"
+				profile:  "org"
 			}] + [
 				for t in #types {
 					name:     t
@@ -332,7 +367,7 @@ input: {
 				name:     "fogg"
 				email:    "spiral@defn.sh"
 				imported: "yes"
-				profile: "org"
+				profile:  "org"
 			}] + [
 				for t in #types {
 					prefix:   "fogg-"
