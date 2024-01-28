@@ -31,32 +31,12 @@
         }
       }
     },
-    "aws_organizations_account": {
-      "immanent": {
-        "//": {
-          "metadata": {
-            "path": "org-immanent/immanent",
-            "uniqueId": "immanent"
-          }
-        }
-      }
-    },
     "aws_organizations_organization": {
       "organization": {
         "//": {
           "metadata": {
             "path": "org-immanent/organization",
             "uniqueId": "organization"
-          }
-        }
-      }
-    },
-    "aws_ssoadmin_account_assignment": {
-      "immanent_admin_sso_account_assignment": {
-        "//": {
-          "metadata": {
-            "path": "org-immanent/immanent_admin_sso_account_assignment",
-            "uniqueId": "immanent_admin_sso_account_assignment"
           }
         }
       }

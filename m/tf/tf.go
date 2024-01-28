@@ -32,7 +32,8 @@ func AwsOrganizationStack(scope constructs.Construct, backend *infra.AwsBackend,
 	stack := cdktf.NewTerraformStack(scope, infra.Js(fmt.Sprintf("org-%s", org.Name)))
 
 	cdktf.NewS3Backend(stack, &cdktf.S3BackendConfig{
-		Key:           infra.Js(fmt.Sprintf("stacks/org-%s/terraform.tfstate", org.Name)),
+		// Key:           infra.Js(fmt.Sprintf("stacks/org-%s/terraform.tfstate", org.Name)),
+		Key:           infra.Js(fmt.Sprintf("stacks/%s/terraform.tfstate", org.Name)),
 		Encrypt:       infra.Jstrue(),
 		Bucket:        &backend.Bucket,
 		Region:        &backend.Region,
@@ -129,36 +130,44 @@ func AwsOrganizationStack(scope constructs.Construct, backend *infra.AwsBackend,
 	}
 
 	// The master account (named "org") must be imported.
-	for _, acct := range append(org.Accounts, []string{org.Name}...) {
+	for _, acct := range org.Accounts {
 		// Create the organization account
 		var organizations_account_config organizationsaccount.OrganizationsAccountConfig
 
-		if acct == org.Name {
+		if acct.Name == org.Name {
 			// The master organization account can't set
 			// iam_user_access_to_billing, role_name
 			organizations_account_config = organizationsaccount.OrganizationsAccountConfig{
-				Name:  infra.Js(acct),
-				Email: infra.Jsf("%s%s@%s", org.Prefix, org.Name, org.Domain),
+				Name:  infra.Js(fmt.Sprintf("%s%s", acct.Prefix, acct.Name)),
+				Email: infra.Jsf(acct.Email),
 				Tags:  &map[string]*string{"ManagedBy": infra.Js("Terraform")},
 			}
 		} else {
 			// Organization account
-			organizations_account_config = organizationsaccount.OrganizationsAccountConfig{
-				Name:                   infra.Js(acct),
-				Email:                  infra.Jsf("%s%s+%s@%s", org.Prefix, org.Name, acct, org.Domain),
-				Tags:                   &map[string]*string{"ManagedBy": infra.Js("Terraform")},
-				IamUserAccessToBilling: infra.Js("ALLOW"),
-				RoleName:               infra.Js("OrganizationAccountAccessRole"),
+			if acct.Imported == "yes" {
+				organizations_account_config = organizationsaccount.OrganizationsAccountConfig{
+					Name:  infra.Js(fmt.Sprintf("%s%s", acct.Prefix, acct.Name)),
+					Email: infra.Jsf(acct.Email),
+					Tags:  &map[string]*string{"ManagedBy": infra.Js("Terraform")},
+				}
+			} else {
+				organizations_account_config = organizationsaccount.OrganizationsAccountConfig{
+					Name:                   infra.Js(fmt.Sprintf("%s%s", acct.Prefix, acct.Name)),
+					Email:                  infra.Jsf(acct.Email),
+					Tags:                   &map[string]*string{"ManagedBy": infra.Js("Terraform")},
+					IamUserAccessToBilling: infra.Js("ALLOW"),
+					RoleName:               infra.Js("OrganizationAccountAccessRole"),
+				}
 			}
 		}
 
 		organizations_account := organizationsaccount.NewOrganizationsAccount(stack,
-			infra.Js(acct),
+			infra.Js(acct.Name),
 			&organizations_account_config)
 
 		// Organization accounts grant Administrator permission set to the Administrators group
 		ssoadminaccountassignment.NewSsoadminAccountAssignment(stack,
-			infra.Jsf("%s_admin_sso_account_assignment", acct),
+			infra.Jsf("%s_admin_sso_account_assignment", acct.Name),
 			&ssoadminaccountassignment.SsoadminAccountAssignmentConfig{
 				InstanceArn:      sso_permission_set_admin.InstanceArn(),
 				PermissionSetArn: sso_permission_set_admin.PermissionSetArn(),

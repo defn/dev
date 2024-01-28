@@ -32,11 +32,83 @@
       }
     },
     "aws_organizations_account": {
+      "asset": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/asset",
+            "uniqueId": "asset"
+          }
+        }
+      },
+      "circus": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/circus",
+            "uniqueId": "circus"
+          }
+        }
+      },
+      "data": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/data",
+            "uniqueId": "data"
+          }
+        }
+      },
       "fogg": {
         "//": {
           "metadata": {
             "path": "org-fogg/fogg",
             "uniqueId": "fogg"
+          }
+        }
+      },
+      "gateway": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/gateway",
+            "uniqueId": "gateway"
+          }
+        }
+      },
+      "home": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/home",
+            "uniqueId": "home"
+          }
+        }
+      },
+      "hub": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/hub",
+            "uniqueId": "hub"
+          }
+        }
+      },
+      "postx": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/postx",
+            "uniqueId": "postx"
+          }
+        }
+      },
+      "sandbox": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/sandbox",
+            "uniqueId": "sandbox"
+          }
+        }
+      },
+      "security": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/security",
+            "uniqueId": "security"
           }
         }
       }
@@ -52,11 +124,83 @@
       }
     },
     "aws_ssoadmin_account_assignment": {
+      "asset_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/asset_admin_sso_account_assignment",
+            "uniqueId": "asset_admin_sso_account_assignment"
+          }
+        }
+      },
+      "circus_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/circus_admin_sso_account_assignment",
+            "uniqueId": "circus_admin_sso_account_assignment"
+          }
+        }
+      },
+      "data_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/data_admin_sso_account_assignment",
+            "uniqueId": "data_admin_sso_account_assignment"
+          }
+        }
+      },
       "fogg_admin_sso_account_assignment": {
         "//": {
           "metadata": {
             "path": "org-fogg/fogg_admin_sso_account_assignment",
             "uniqueId": "fogg_admin_sso_account_assignment"
+          }
+        }
+      },
+      "gateway_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/gateway_admin_sso_account_assignment",
+            "uniqueId": "gateway_admin_sso_account_assignment"
+          }
+        }
+      },
+      "home_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/home_admin_sso_account_assignment",
+            "uniqueId": "home_admin_sso_account_assignment"
+          }
+        }
+      },
+      "hub_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/hub_admin_sso_account_assignment",
+            "uniqueId": "hub_admin_sso_account_assignment"
+          }
+        }
+      },
+      "postx_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/postx_admin_sso_account_assignment",
+            "uniqueId": "postx_admin_sso_account_assignment"
+          }
+        }
+      },
+      "sandbox_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/sandbox_admin_sso_account_assignment",
+            "uniqueId": "sandbox_admin_sso_account_assignment"
+          }
+        }
+      },
+      "security_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/security_admin_sso_account_assignment",
+            "uniqueId": "security_admin_sso_account_assignment"
           }
         }
       }
