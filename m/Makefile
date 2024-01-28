@@ -176,3 +176,6 @@ hello:
 
 token:
 	@kubectl create token headlamp-admin -n headlamp
+
+trunk:
+	cd && curl https://get.trunk.io -fsSL | bash -s -- -y
