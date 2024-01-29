@@ -2,11 +2,11 @@ terraform {
   required_version = ">= 1.0.0"
 
   backend "s3" {
-    region         = "us-east-1"
     bucket         = "dfn-defn-terraform-state"
-    key            = "defn-org/global/terraform.tfstate"
     dynamodb_table = "dfn-defn-terraform-state-lock"
     encrypt        = "true"
+    key            = "defn-org/global/terraform.tfstate"
     profile        = "defn-org-sso"
+    region         = "us-east-1"
   }
 }

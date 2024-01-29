@@ -26,6 +26,7 @@ import (
 	root "github.com/defn/dev/m/command/root"
 
 	"github.com/defn/dev/m/tf/gen/terraform_aws_defn_account"
+	"github.com/defn/dev/m/tf/gen/terraform_aws_s3_bucket"
 )
 
 func AwsOrganizationStack(scope constructs.Construct, backend *infra.AwsBackend, org *infra.AwsOrganization) cdktf.TerraformStack {
@@ -211,6 +212,55 @@ func AwsAccountStack(scope constructs.Construct, backend *infra.AwsBackend, acc 
 	return stack
 }
 
+func GlobalStack(scope constructs.Construct, backend *infra.AwsBackend, accounts []string) cdktf.TerraformStack {
+	stack := cdktf.NewTerraformStack(scope, infra.Js("global"))
+
+	cdktf.NewS3Backend(stack, &cdktf.S3BackendConfig{
+		//Key:           infra.Js("stacks/global/terraform.tfstate"),
+		Key:           infra.Js("defn-org/global/terraform.tfstate"),
+		Encrypt:       infra.Jstrue(),
+		Bucket:        &backend.Bucket,
+		Region:        &backend.Region,
+		Profile:       &backend.Profile,
+		DynamodbTable: &backend.Lock,
+	})
+
+	for i := 0; i < len(accounts); i++ {
+		assumerole := []interface{}{
+			aws.AwsProviderAssumeRole{
+				RoleArn: infra.Js("arn:aws:iam::730917619329:role/dfn-defn-terraform"), // need account specific role
+			},
+		}
+
+		provider := []interface{}{
+			aws.NewAwsProvider(stack,
+				infra.Js(fmt.Sprintf("aws-global-%s", accounts[i])), &aws.AwsProviderConfig{
+					Alias:      infra.Js(accounts[i]),
+					Profile:    infra.Js(fmt.Sprintf("%s-sso", "defn-org")),
+					Region:     infra.Js("us-east-1"), // need account specific region
+					AssumeRole: assumerole,
+				},
+			),
+		}
+
+		terraform_aws_s3_bucket.NewTerraformAwsS3Bucket(stack,
+			infra.Js(fmt.Sprintf("s3-%s", accounts[i])), &terraform_aws_s3_bucket.TerraformAwsS3BucketConfig{
+				Providers:  &provider,
+				Namespace:  infra.Js("dfn"),
+				Stage:      infra.Js("defn"),
+				Name:       infra.Js("global"),
+				Attributes: &[]*string{infra.Js(accounts[i])},
+
+				Acl:                         infra.Js("private"),
+				UserEnabled:                 infra.Jsfalse(),
+				VersioningEnabled:           infra.Jsfalse(),
+				LifecycleConfigurationRules: nil,
+			})
+	}
+
+	return stack
+}
+
 //go:embed tf.cue
 var infra_schema string
 
@@ -233,6 +283,8 @@ func init() {
 					Name: site.Accounts[i],
 				})
 			}
+
+			GlobalStack(app, &site.Backend, site.Accounts)
 
 			app.Synth()
 		},

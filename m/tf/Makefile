@@ -6,8 +6,12 @@ build: ../node_modules/.bin/cdktf
 	runmany 'if test -d $$1; then rm -rf $$1/terraform-*; for a in mod/terraform-*; do ln -nfs ../../../../../../$$a $$1/; done; fi' cdktf.out/stacks/*/assets/*/*
 # cdktf synth --hcl has a bug with Encrypt bool undefined
 	runmany 'perl -pe "s{undefined}{true} if m{encrypt\s+=\s+undefined}" -i $$1' cdktf.out/stacks/*/cdk.tf
+	runmany 'perl -pe "s{=}{= false} if m{user_enabled\s+=\s+$$}" -i $$1' cdktf.out/stacks/*/cdk.tf
+	runmany 'perl -pe "s{=}{= false} if m{versioning_enabled\s+=\s+$$}" -i $$1' cdktf.out/stacks/*/cdk.tf
 # remove quotes from providers
 	runmany 'perl -pe "s{\"}{}g if m{^\s*aws\s*=}" -i $$1' cdktf.out/stacks/*/cdk.tf
+# fmt
+	runmany 'terraform fmt $$1' cdktf.out/stacks/*/cdk.tf
 # restore locks
 	git status -sb | grep lock.hcl | awk '{print $$2}' | xargs git reset --
 	git status -sb | grep lock.hcl | awk '{print $$2}' | xargs git checkout --

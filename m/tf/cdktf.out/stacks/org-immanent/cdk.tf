@@ -18,8 +18,8 @@ terraform {
 }
 
 locals {
-  sso_instance_arn  = "${data.aws_ssoadmin_instances.sso_instance.arns}"
-  sso_instance_isid = "${data.aws_ssoadmin_instances.sso_instance.identity_store_ids}"
+  sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
+  sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids
 }
 
 provider "aws" {
@@ -44,7 +44,7 @@ resource "aws_organizations_organization" "organization" {
 data "aws_ssoadmin_instances" "sso_instance" {
 }
 resource "aws_ssoadmin_permission_set" "admin_sso_permission_set" {
-  instance_arn     = "${element(local.sso_instance_arn, 0)}"
+  instance_arn     = element(local.sso_instance_arn, 0)
   name             = "Administrator"
   session_duration = "PT2H"
   tags = {
@@ -52,13 +52,13 @@ resource "aws_ssoadmin_permission_set" "admin_sso_permission_set" {
   }
 }
 resource "aws_ssoadmin_managed_policy_attachment" "admin_sso_managed_policy_attachment" {
-  instance_arn       = "${aws_ssoadmin_permission_set.admin_sso_permission_set.instance_arn}"
+  instance_arn       = aws_ssoadmin_permission_set.admin_sso_permission_set.instance_arn
   managed_policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
-  permission_set_arn = "${aws_ssoadmin_permission_set.admin_sso_permission_set.arn}"
+  permission_set_arn = aws_ssoadmin_permission_set.admin_sso_permission_set.arn
 }
 resource "aws_identitystore_group" "administrators_sso_group" {
   display_name      = "Administrators"
-  identity_store_id = "${element(local.sso_instance_isid, 0)}"
+  identity_store_id = element(local.sso_instance_isid, 0)
 }
 resource "aws_organizations_account" "immanent" {
   email = "aws-immanent@defn.us"
@@ -68,11 +68,11 @@ resource "aws_organizations_account" "immanent" {
   }
 }
 resource "aws_ssoadmin_account_assignment" "immanent_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.immanent.id}"
+  target_id          = aws_organizations_account.immanent.id
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "immanent-patterner" {
@@ -83,11 +83,11 @@ resource "aws_organizations_account" "immanent-patterner" {
   }
 }
 resource "aws_ssoadmin_account_assignment" "immanent-patterner_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.immanent-patterner.id}"
+  target_id          = aws_organizations_account.immanent-patterner.id
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "immanent-windkey" {
@@ -98,11 +98,11 @@ resource "aws_organizations_account" "immanent-windkey" {
   }
 }
 resource "aws_ssoadmin_account_assignment" "immanent-windkey_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.immanent-windkey.id}"
+  target_id          = aws_organizations_account.immanent-windkey.id
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "immanent-summoner" {
@@ -113,11 +113,11 @@ resource "aws_organizations_account" "immanent-summoner" {
   }
 }
 resource "aws_ssoadmin_account_assignment" "immanent-summoner_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.immanent-summoner.id}"
+  target_id          = aws_organizations_account.immanent-summoner.id
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "immanent-herbal" {
@@ -128,11 +128,11 @@ resource "aws_organizations_account" "immanent-herbal" {
   }
 }
 resource "aws_ssoadmin_account_assignment" "immanent-herbal_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.immanent-herbal.id}"
+  target_id          = aws_organizations_account.immanent-herbal.id
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "immanent-namer" {
@@ -143,11 +143,11 @@ resource "aws_organizations_account" "immanent-namer" {
   }
 }
 resource "aws_ssoadmin_account_assignment" "immanent-namer_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.immanent-namer.id}"
+  target_id          = aws_organizations_account.immanent-namer.id
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "immanent-ged" {
@@ -158,11 +158,11 @@ resource "aws_organizations_account" "immanent-ged" {
   }
 }
 resource "aws_ssoadmin_account_assignment" "immanent-ged_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.immanent-ged.id}"
+  target_id          = aws_organizations_account.immanent-ged.id
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "immanent-roke" {
@@ -173,11 +173,11 @@ resource "aws_organizations_account" "immanent-roke" {
   }
 }
 resource "aws_ssoadmin_account_assignment" "immanent-roke_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.immanent-roke.id}"
+  target_id          = aws_organizations_account.immanent-roke.id
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "immanent-chanter" {
@@ -188,11 +188,11 @@ resource "aws_organizations_account" "immanent-chanter" {
   }
 }
 resource "aws_ssoadmin_account_assignment" "immanent-chanter_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.immanent-chanter.id}"
+  target_id          = aws_organizations_account.immanent-chanter.id
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "immanent-changer" {
@@ -203,11 +203,11 @@ resource "aws_organizations_account" "immanent-changer" {
   }
 }
 resource "aws_ssoadmin_account_assignment" "immanent-changer_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.immanent-changer.id}"
+  target_id          = aws_organizations_account.immanent-changer.id
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "immanent-hand" {
@@ -218,11 +218,11 @@ resource "aws_organizations_account" "immanent-hand" {
   }
 }
 resource "aws_ssoadmin_account_assignment" "immanent-hand_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.immanent-hand.id}"
+  target_id          = aws_organizations_account.immanent-hand.id
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "immanent-doorkeeper" {
@@ -233,10 +233,10 @@ resource "aws_organizations_account" "immanent-doorkeeper" {
   }
 }
 resource "aws_ssoadmin_account_assignment" "immanent-doorkeeper_admin_sso_account_assignment" {
-  instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
-  permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
-  principal_id       = "${aws_identitystore_group.administrators_sso_group.group_id}"
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = "${aws_organizations_account.immanent-doorkeeper.id}"
+  target_id          = aws_organizations_account.immanent-doorkeeper.id
   target_type        = "AWS_ACCOUNT"
 }
