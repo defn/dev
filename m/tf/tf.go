@@ -2,6 +2,7 @@ package main
 
 import (
 	_ "embed"
+	"sort"
 
 	"fmt"
 
@@ -230,6 +231,7 @@ func GlobalStack(scope constructs.Construct, site *infra.AwsProps) cdktf.Terrafo
 	for key := range site.Organization {
 		keys = append(keys, key)
 	}
+	sort.Strings(keys)
 
 	for _, org_name := range keys {
 		org := site.Organization[org_name]
