@@ -29,17 +29,17 @@ import (
 	"github.com/defn/dev/m/tf/gen/terraform_aws_s3_bucket"
 )
 
-func AwsOrganizationStack(scope constructs.Construct, backend *infra.AwsBackend, org *infra.AwsOrganization) cdktf.TerraformStack {
+func AwsOrganizationStack(scope constructs.Construct, site *infra.AwsProps, org *infra.AwsOrganization) cdktf.TerraformStack {
 	stack := cdktf.NewTerraformStack(scope, infra.Js(fmt.Sprintf("org-%s", org.Name)))
 
 	cdktf.NewS3Backend(stack, &cdktf.S3BackendConfig{
 		// Key:           infra.Js(fmt.Sprintf("stacks/org-%s/terraform.tfstate", org.Name)),
 		Key:           infra.Js(fmt.Sprintf("stacks/%s/terraform.tfstate", org.Name)),
 		Encrypt:       infra.Jstrue(),
-		Bucket:        &backend.Bucket,
-		Region:        &backend.Region,
-		Profile:       &backend.Profile,
-		DynamodbTable: &backend.Lock,
+		Bucket:        &site.Backend.Bucket,
+		Region:        &site.Backend.Region,
+		Profile:       &site.Backend.Profile,
+		DynamodbTable: &site.Backend.Lock,
 	})
 
 	aws.NewAwsProvider(stack,
@@ -182,16 +182,16 @@ func AwsOrganizationStack(scope constructs.Construct, backend *infra.AwsBackend,
 	return stack
 }
 
-func AwsAccountStack(scope constructs.Construct, backend *infra.AwsBackend, acc *infra.AwsAccount) cdktf.TerraformStack {
+func AwsAccountStack(scope constructs.Construct, site *infra.AwsProps, acc *infra.AwsAccount) cdktf.TerraformStack {
 	stack := cdktf.NewTerraformStack(scope, infra.Js(fmt.Sprintf("acc-%s", acc.Name)))
 
 	cdktf.NewS3Backend(stack, &cdktf.S3BackendConfig{
 		Key:           infra.Js(fmt.Sprintf("stacks/acc-%s/terraform.tfstate", acc.Name)),
 		Encrypt:       infra.Jstrue(),
-		Bucket:        &backend.Bucket,
-		Region:        &backend.Region,
-		Profile:       &backend.Profile,
-		DynamodbTable: &backend.Lock,
+		Bucket:        &site.Backend.Bucket,
+		Region:        &site.Backend.Region,
+		Profile:       &site.Backend.Profile,
+		DynamodbTable: &site.Backend.Lock,
 	})
 
 	provider := []interface{}{
@@ -213,20 +213,20 @@ func AwsAccountStack(scope constructs.Construct, backend *infra.AwsBackend, acc 
 	return stack
 }
 
-func GlobalStack(scope constructs.Construct, backend *infra.AwsBackend, organization map[string]infra.AwsOrganization, info map[string]infra.AwsInfo) cdktf.TerraformStack {
+func GlobalStack(scope constructs.Construct, site *infra.AwsProps) cdktf.TerraformStack {
 	stack := cdktf.NewTerraformStack(scope, infra.Js("global"))
 
 	cdktf.NewS3Backend(stack, &cdktf.S3BackendConfig{
 		//Key:           infra.Js("stacks/global/terraform.tfstate"),
 		Key:           infra.Js("defn-org/global/terraform.tfstate"),
 		Encrypt:       infra.Jstrue(),
-		Bucket:        &backend.Bucket,
-		Region:        &backend.Region,
-		Profile:       &backend.Profile,
-		DynamodbTable: &backend.Lock,
+		Bucket:        &site.Backend.Bucket,
+		Region:        &site.Backend.Region,
+		Profile:       &site.Backend.Profile,
+		DynamodbTable: &site.Backend.Lock,
 	})
 
-	for org_name, org := range organization {
+	for org_name, org := range site.Organization {
 		for _, acc := range org.Accounts {
 			provider := []interface{}{
 				aws.NewAwsProvider(stack,
@@ -236,7 +236,7 @@ func GlobalStack(scope constructs.Construct, backend *infra.AwsBackend, organiza
 						Region:  infra.Js(acc.Region), // need account specific region
 						AssumeRole: []interface{}{
 							aws.AwsProviderAssumeRole{
-								RoleArn: infra.Js(fmt.Sprintf("arn:aws:iam::%s:role/dfn-defn-terraform", info[org_name].Account[acc.Profile].Id)), // need account specific role
+								RoleArn: infra.Js(fmt.Sprintf("arn:aws:iam::%s:role/dfn-defn-terraform", site.Info[org_name].Account[acc.Profile].Id)), // need account specific role
 							},
 						},
 					},
@@ -276,16 +276,16 @@ func init() {
 			app := cdktf.NewApp(&cdktf.AppConfig{})
 
 			for _, org := range site.Organization {
-				AwsOrganizationStack(app, &site.Backend, &org)
+				AwsOrganizationStack(app, &site, &org)
 			}
 
-			for i := 0; i < len(site.Accounts); i++ {
-				AwsAccountStack(app, &site.Backend, &infra.AwsAccount{
-					Name: site.Accounts[i],
+			for _, acc := range site.Accounts {
+				AwsAccountStack(app, &site, &infra.AwsAccount{
+					Name: acc,
 				})
 			}
 
-			GlobalStack(app, &site.Backend, site.Organization, site.Info)
+			GlobalStack(app, &site)
 
 			app.Synth()
 		},
