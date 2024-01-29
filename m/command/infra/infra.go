@@ -66,6 +66,11 @@ func Jstrue() *bool {
 }
 
 //lint:ignore U1000 utility
+func Jsfalse() *bool {
+	return jsii.Bool(false)
+}
+
+//lint:ignore U1000 utility
 func Jsbool(b bool) *bool {
 	return jsii.Bool(b)
 }
