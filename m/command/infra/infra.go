@@ -17,6 +17,15 @@ type AwsAdmin struct {
 	Email string `json:"email"`
 }
 
+type AwsAccount struct {
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Profile  string `json:"profile"`
+	Prefix   string `json:"prefix"`
+	Imported string `json:"imported"`
+	Region   string `json:"region"`
+}
+
 type AwsBackend struct {
 	Lock    string `json:"lock"`
 	Bucket  string `json:"bucket"`
@@ -31,18 +40,20 @@ type AwsOrganization struct {
 	Admins   []AwsAdmin   `json:"admins"`
 }
 
-type AwsAccount struct {
-	Name     string `json:"name"`
-	Email    string `json:"email"`
-	Profile  string `json:"profile"`
-	Prefix   string `json:"prefix"`
-	Imported string `json:"imported"`
+type AwsAccountInfo struct {
+	Id string `json:"id"`
+}
+
+type AwsInfo struct {
+	Url     string                    `json:"url"`
+	Account map[string]AwsAccountInfo `json:"account"`
 }
 
 type AwsProps struct {
 	Backend      AwsBackend                 `json:"backend"`
 	Organization map[string]AwsOrganization `json:"organization"`
 	Accounts     []string                   `json:"accounts"`
+	Info         map[string]AwsInfo         `json:"info"`
 }
 
 // alias
