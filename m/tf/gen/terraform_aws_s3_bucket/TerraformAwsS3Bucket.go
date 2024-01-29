@@ -1076,7 +1076,6 @@ func (j *jsiiProxy_TerraformAwsS3Bucket) WebsiteRedirectAllRequestsTo() interfac
 	return returns
 }
 
-
 func NewTerraformAwsS3Bucket(scope constructs.Construct, id *string, config *TerraformAwsS3BucketConfig) TerraformAwsS3Bucket {
 	_init_.Initialize()
 
@@ -1104,7 +1103,7 @@ func NewTerraformAwsS3Bucket_Override(t TerraformAwsS3Bucket, scope constructs.C
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetAccessKeyEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetAccessKeyEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"accessKeyEnabled",
@@ -1112,7 +1111,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetAccessKeyEnabled(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetAcl(val *string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetAcl(val *string) {
 	_jsii_.Set(
 		j,
 		"acl",
@@ -1120,7 +1119,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetAcl(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetAdditionalTagMap(val *map[string]*string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetAdditionalTagMap(val *map[string]*string) {
 	_jsii_.Set(
 		j,
 		"additionalTagMap",
@@ -1128,7 +1127,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetAdditionalTagMap(val *map[string]*str
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetAllowedBucketActions(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetAllowedBucketActions(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"allowedBucketActions",
@@ -1136,7 +1135,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetAllowedBucketActions(val *[]*string) 
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetAllowEncryptedUploadsOnly(val *bool) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetAllowEncryptedUploadsOnly(val *bool) {
 	_jsii_.Set(
 		j,
 		"allowEncryptedUploadsOnly",
@@ -1144,7 +1143,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetAllowEncryptedUploadsOnly(val *bool) 
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetAllowSslRequestsOnly(val *bool) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetAllowSslRequestsOnly(val *bool) {
 	_jsii_.Set(
 		j,
 		"allowSslRequestsOnly",
@@ -1152,7 +1151,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetAllowSslRequestsOnly(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetAttributes(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetAttributes(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"attributes",
@@ -1160,7 +1159,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetAttributes(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetBlockPublicAcls(val *bool) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetBlockPublicAcls(val *bool) {
 	_jsii_.Set(
 		j,
 		"blockPublicAcls",
@@ -1168,7 +1167,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetBlockPublicAcls(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetBlockPublicPolicy(val *bool) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetBlockPublicPolicy(val *bool) {
 	_jsii_.Set(
 		j,
 		"blockPublicPolicy",
@@ -1176,7 +1175,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetBlockPublicPolicy(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetBucketKeyEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetBucketKeyEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"bucketKeyEnabled",
@@ -1184,7 +1183,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetBucketKeyEnabled(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetBucketName(val *string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetBucketName(val *string) {
 	_jsii_.Set(
 		j,
 		"bucketName",
@@ -1192,7 +1191,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetBucketName(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetContext(val interface{}) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetContext(val interface{}) {
 	if err := j.validateSetContextParameters(val); err != nil {
 		panic(err)
 	}
@@ -1203,7 +1202,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetContext(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetCorsConfiguration(val interface{}) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetCorsConfiguration(val interface{}) {
 	if err := j.validateSetCorsConfigurationParameters(val); err != nil {
 		panic(err)
 	}
@@ -1214,7 +1213,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetCorsConfiguration(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetDelimiter(val *string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetDelimiter(val *string) {
 	_jsii_.Set(
 		j,
 		"delimiter",
@@ -1222,7 +1221,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetDelimiter(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetDependsOn(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetDependsOn(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"dependsOn",
@@ -1230,7 +1229,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetDependsOn(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetDescriptorFormats(val interface{}) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetDescriptorFormats(val interface{}) {
 	if err := j.validateSetDescriptorFormatsParameters(val); err != nil {
 		panic(err)
 	}
@@ -1241,7 +1240,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetDescriptorFormats(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"enabled",
@@ -1249,7 +1248,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetEnabled(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetEnvironment(val *string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetEnvironment(val *string) {
 	_jsii_.Set(
 		j,
 		"environment",
@@ -1257,7 +1256,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetEnvironment(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetForceDestroy(val *bool) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetForceDestroy(val *bool) {
 	_jsii_.Set(
 		j,
 		"forceDestroy",
@@ -1265,7 +1264,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetForceDestroy(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetForEach(val cdktf.ITerraformIterator) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetForEach(val cdktf.ITerraformIterator) {
 	_jsii_.Set(
 		j,
 		"forEach",
@@ -1273,7 +1272,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetForEach(val cdktf.ITerraformIterator)
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetGrants(val interface{}) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetGrants(val interface{}) {
 	if err := j.validateSetGrantsParameters(val); err != nil {
 		panic(err)
 	}
@@ -1284,7 +1283,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetGrants(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetIdLengthLimit(val *float64) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetIdLengthLimit(val *float64) {
 	_jsii_.Set(
 		j,
 		"idLengthLimit",
@@ -1292,7 +1291,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetIdLengthLimit(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetIgnorePublicAcls(val *bool) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetIgnorePublicAcls(val *bool) {
 	_jsii_.Set(
 		j,
 		"ignorePublicAcls",
@@ -1300,7 +1299,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetIgnorePublicAcls(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetKmsMasterKeyArn(val *string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetKmsMasterKeyArn(val *string) {
 	_jsii_.Set(
 		j,
 		"kmsMasterKeyArn",
@@ -1308,7 +1307,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetKmsMasterKeyArn(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetLabelKeyCase(val *string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetLabelKeyCase(val *string) {
 	_jsii_.Set(
 		j,
 		"labelKeyCase",
@@ -1316,7 +1315,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetLabelKeyCase(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetLabelOrder(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetLabelOrder(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"labelOrder",
@@ -1324,7 +1323,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetLabelOrder(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetLabelsAsTags(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetLabelsAsTags(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"labelsAsTags",
@@ -1332,7 +1331,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetLabelsAsTags(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetLabelValueCase(val *string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetLabelValueCase(val *string) {
 	_jsii_.Set(
 		j,
 		"labelValueCase",
@@ -1340,7 +1339,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetLabelValueCase(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetLifecycleConfigurationRules(val interface{}) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetLifecycleConfigurationRules(val interface{}) {
 	if err := j.validateSetLifecycleConfigurationRulesParameters(val); err != nil {
 		panic(err)
 	}
@@ -1351,7 +1350,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetLifecycleConfigurationRules(val inter
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetLifecycleRuleIds(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetLifecycleRuleIds(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"lifecycleRuleIds",
@@ -1359,7 +1358,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetLifecycleRuleIds(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetLifecycleRules(val interface{}) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetLifecycleRules(val interface{}) {
 	if err := j.validateSetLifecycleRulesParameters(val); err != nil {
 		panic(err)
 	}
@@ -1370,7 +1369,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetLifecycleRules(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetLogging(val interface{}) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetLogging(val interface{}) {
 	if err := j.validateSetLoggingParameters(val); err != nil {
 		panic(err)
 	}
@@ -1381,7 +1380,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetLogging(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetName(val *string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetName(val *string) {
 	_jsii_.Set(
 		j,
 		"name",
@@ -1389,7 +1388,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetName(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetNamespace(val *string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetNamespace(val *string) {
 	_jsii_.Set(
 		j,
 		"namespace",
@@ -1397,7 +1396,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetNamespace(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetObjectLockConfiguration(val interface{}) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetObjectLockConfiguration(val interface{}) {
 	if err := j.validateSetObjectLockConfigurationParameters(val); err != nil {
 		panic(err)
 	}
@@ -1408,7 +1407,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetObjectLockConfiguration(val interface
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetPolicy(val *string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetPolicy(val *string) {
 	_jsii_.Set(
 		j,
 		"policy",
@@ -1416,7 +1415,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetPolicy(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetPrivilegedPrincipalActions(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetPrivilegedPrincipalActions(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"privilegedPrincipalActions",
@@ -1424,7 +1423,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetPrivilegedPrincipalActions(val *[]*st
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetPrivilegedPrincipalArns(val *[]*map[string]*[]*string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetPrivilegedPrincipalArns(val *[]*map[string]*[]*string) {
 	_jsii_.Set(
 		j,
 		"privilegedPrincipalArns",
@@ -1432,7 +1431,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetPrivilegedPrincipalArns(val *[]*map[s
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetRegexReplaceChars(val *string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetRegexReplaceChars(val *string) {
 	_jsii_.Set(
 		j,
 		"regexReplaceChars",
@@ -1440,7 +1439,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetRegexReplaceChars(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetReplicationRules(val *[]interface{}) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetReplicationRules(val *[]interface{}) {
 	_jsii_.Set(
 		j,
 		"replicationRules",
@@ -1448,7 +1447,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetReplicationRules(val *[]interface{}) 
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetRestrictPublicBuckets(val *bool) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetRestrictPublicBuckets(val *bool) {
 	_jsii_.Set(
 		j,
 		"restrictPublicBuckets",
@@ -1456,7 +1455,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetRestrictPublicBuckets(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetS3ObjectOwnership(val *string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetS3ObjectOwnership(val *string) {
 	_jsii_.Set(
 		j,
 		"s3ObjectOwnership",
@@ -1464,7 +1463,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetS3ObjectOwnership(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetS3ReplicaBucketArn(val *string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetS3ReplicaBucketArn(val *string) {
 	_jsii_.Set(
 		j,
 		"s3ReplicaBucketArn",
@@ -1472,7 +1471,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetS3ReplicaBucketArn(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetS3ReplicationEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetS3ReplicationEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"s3ReplicationEnabled",
@@ -1480,7 +1479,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetS3ReplicationEnabled(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetS3ReplicationPermissionsBoundaryArn(val *string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetS3ReplicationPermissionsBoundaryArn(val *string) {
 	_jsii_.Set(
 		j,
 		"s3ReplicationPermissionsBoundaryArn",
@@ -1488,7 +1487,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetS3ReplicationPermissionsBoundaryArn(v
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetS3ReplicationRules(val *[]interface{}) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetS3ReplicationRules(val *[]interface{}) {
 	_jsii_.Set(
 		j,
 		"s3ReplicationRules",
@@ -1496,7 +1495,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetS3ReplicationRules(val *[]interface{}
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetS3ReplicationSourceRoles(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetS3ReplicationSourceRoles(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"s3ReplicationSourceRoles",
@@ -1504,7 +1503,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetS3ReplicationSourceRoles(val *[]*stri
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetSourcePolicyDocuments(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetSourcePolicyDocuments(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"sourcePolicyDocuments",
@@ -1512,7 +1511,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetSourcePolicyDocuments(val *[]*string)
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetSseAlgorithm(val *string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetSseAlgorithm(val *string) {
 	_jsii_.Set(
 		j,
 		"sseAlgorithm",
@@ -1520,7 +1519,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetSseAlgorithm(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetSsmBasePath(val *string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetSsmBasePath(val *string) {
 	_jsii_.Set(
 		j,
 		"ssmBasePath",
@@ -1528,7 +1527,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetSsmBasePath(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetStage(val *string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetStage(val *string) {
 	_jsii_.Set(
 		j,
 		"stage",
@@ -1536,7 +1535,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetStage(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetStoreAccessKeyInSsm(val *bool) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetStoreAccessKeyInSsm(val *bool) {
 	_jsii_.Set(
 		j,
 		"storeAccessKeyInSsm",
@@ -1544,7 +1543,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetStoreAccessKeyInSsm(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetTags(val *map[string]*string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetTags(val *map[string]*string) {
 	_jsii_.Set(
 		j,
 		"tags",
@@ -1552,7 +1551,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetTags(val *map[string]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetTenant(val *string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetTenant(val *string) {
 	_jsii_.Set(
 		j,
 		"tenant",
@@ -1560,7 +1559,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetTenant(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetTransferAccelerationEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetTransferAccelerationEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"transferAccelerationEnabled",
@@ -1568,7 +1567,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetTransferAccelerationEnabled(val *bool
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetUserEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetUserEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"userEnabled",
@@ -1576,7 +1575,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetUserEnabled(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetUserPermissionsBoundaryArn(val *string) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetUserPermissionsBoundaryArn(val *string) {
 	_jsii_.Set(
 		j,
 		"userPermissionsBoundaryArn",
@@ -1584,7 +1583,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetUserPermissionsBoundaryArn(val *strin
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetVersioningEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetVersioningEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"versioningEnabled",
@@ -1592,7 +1591,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetVersioningEnabled(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetWebsiteConfiguration(val interface{}) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetWebsiteConfiguration(val interface{}) {
 	if err := j.validateSetWebsiteConfigurationParameters(val); err != nil {
 		panic(err)
 	}
@@ -1603,7 +1602,7 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetWebsiteConfiguration(val interface{})
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetWebsiteRedirectAllRequestsTo(val interface{}) {
+func (j *jsiiProxy_TerraformAwsS3Bucket) SetWebsiteRedirectAllRequestsTo(val interface{}) {
 	if err := j.validateSetWebsiteRedirectAllRequestsToParameters(val); err != nil {
 		panic(err)
 	}
@@ -1818,4 +1817,3 @@ func (t *jsiiProxy_TerraformAwsS3Bucket) ToTerraform() interface{} {
 
 	return returns
 }
-

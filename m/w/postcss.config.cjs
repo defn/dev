@@ -1,6 +1,6 @@
-const tailwindcss_nesting = require('tailwindcss/nesting');
-const tailwindcss = require('tailwindcss');
-const autoprefixer = require('autoprefixer');
+const tailwindcss_nesting = require("tailwindcss/nesting");
+const tailwindcss = require("tailwindcss");
+const autoprefixer = require("autoprefixer");
 
 const config = {
   plugins: [
@@ -8,8 +8,8 @@ const config = {
     tailwindcss_nesting(),
     tailwindcss(),
     //But others, like autoprefixer, need to run after,
-    autoprefixer
-  ]
+    autoprefixer,
+  ],
 };
 
 module.exports = config;

@@ -1,6 +1,6 @@
 {
-    "project_name": "dev",
-    "common": "../../common",
-    "path": "command/dev",
-    "go": "go"
+  "project_name": "dev",
+  "common": "../../common",
+  "path": "command/dev",
+  "go": "go"
 }

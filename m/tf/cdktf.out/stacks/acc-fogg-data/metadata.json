@@ -5,8 +5,7 @@
       "stackName": "acc-fogg-data",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "fogg-data": {

@@ -236,4 +236,3 @@ func validateNewTerraformAwsEc2AutoscaleGroupParameters(scope constructs.Constru
 
 	return nil
 }
-

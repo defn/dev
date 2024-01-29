@@ -7,9 +7,8 @@ lineNumbers: false
 transition: slide-left
 mdc: true
 fonts:
-  sans: 'valkyrie_a'
-  mono: 'Fira Code'
-
+  sans: "valkyrie_a"
+  mono: "Fira Code"
 ---
 
 # Welcome to Slidev
@@ -27,8 +26,8 @@ The last comment block of each slide will be treated as slide notes. It will be 
 -->
 
 ---
-transition: fade-out
----
+
+## transition: fade-out
 
 # What is Slidev?
 
@@ -64,16 +63,18 @@ Here is another comment.
 -->
 
 ---
-layout: default
----
+
+## layout: default
 
 # Table of contents
 
 <Toc maxDepth="1"></Toc>
 
 ---
+
 layout: image-right
 image: https://source.unsplash.com/collection/94734566/1920x1080
+
 ---
 
 # Code
@@ -82,16 +83,16 @@ Use code snippets and get the highlighting directly!
 
 ```ts {all|2|1-6|9|all}
 interface User {
-  id: number
-  firstName: string
-  lastName: string
-  role: string
+  id: number;
+  firstName: string;
+  lastName: string;
+  role: string;
 }
 
 function updateUser(id: number, update: User) {
-  const user = getUser(id)
-  const newUser = { ...user, ...update }
-  saveUser(id, newUser)
+  const user = getUser(id);
+  const newUser = { ...user, ...update };
+  saveUser(id, newUser);
 }
 ```
 
@@ -119,8 +120,8 @@ C -->|Two| E[Result 2]
 </div>
 
 ---
-class: text-center
----
+
+## class: text-center
 
 # Learn More
 

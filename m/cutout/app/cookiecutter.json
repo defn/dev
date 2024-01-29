@@ -1,7 +1,7 @@
 {
-    "common": "../../common",
-    "project_name": "src--dev",
-    "path": "src/dev",
-    "package": "dev",
-    "go": "go"
+  "common": "../../common",
+  "project_name": "src--dev",
+  "path": "src/dev",
+  "package": "dev",
+  "go": "go"
 }

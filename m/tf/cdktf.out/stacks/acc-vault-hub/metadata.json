@@ -5,8 +5,7 @@
       "stackName": "acc-vault-hub",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "vault-hub": {

@@ -1,8 +1,8 @@
 package c
 
 #BootstrapConfig: {
-	app_wave:      int | *100
-	app_namespace: string | *""
+	app_wave:         int | *100
+	app_namespace:    string | *""
 	app_sync_options: [...] | *[]
 	...
 }
@@ -45,7 +45,7 @@ package c
 	app_type:    string
 	app_def:     string
 
-	app_wave: int
+	app_wave:         int
 	app_sync_options: [...string] | *[]
 
 	application: {

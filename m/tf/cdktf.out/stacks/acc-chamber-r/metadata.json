@@ -5,8 +5,7 @@
       "stackName": "acc-chamber-r",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "chamber-r": {

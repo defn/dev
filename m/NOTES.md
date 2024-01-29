@@ -1,4 +1,3 @@
-
 ```
 cd etc/openvn
 easyrsa init-pki

@@ -5,8 +5,7 @@
       "stackName": "acc-immanent-namer",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "immanent-namer": {

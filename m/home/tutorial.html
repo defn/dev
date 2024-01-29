@@ -1,104 +1,213 @@
 <!doctype html>
 <html>
-<head>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-<link rel="stylesheet" type="text/css" href="https://defn.github.io/webfonts/concourse_2_caps.css" />
-<link rel="stylesheet" type="text/css" href="https://defn.github.io/webfonts/concourse_3.css" />
-<link rel="stylesheet" type="text/css" href="https://defn.github.io/webfonts/valkyrie_a.css" />
-<link rel="stylesheet" type="text/css" href="https://defn.github.io/webfonts/hermes_maia_4.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://defn.github.io/webfonts/concourse_2_caps.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://defn.github.io/webfonts/concourse_3.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://defn.github.io/webfonts/valkyrie_a.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://defn.github.io/webfonts/hermes_maia_4.css"
+    />
 
-<style>
-	body {
-		font-family: valkyrie_a;
-	}
-	iframe {
-		width: 100%;
-		border: none;
-	}
-</style>
-</head>
-<body class="bg-white px-6 lg:px-8">
-<div class="mt-10 max-w-2xl">
-	<h2 class="text-2xl font-bold tracking-tight text-gray-900">Tutorial : <a href="/?folder=/home/ubuntu">TOC</a></h2>
-	<div class="mx-auto max-w-3xl text-base text-gray-700">
-<ul role="list" class="mt-8 max-w-xl space-y-8 text-gray-600"><li class="flex gap-x-3">
-	<svg class="mt-1 h-5 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-		<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
-	</svg>
-	<span>
-		<strong class="font-semibold text-gray-900">Run CI</strong>
-		<br>
-		make ci
-	</span>
-</li><li class="flex gap-x-3">
-	<svg class="mt-1 h-5 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-		<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
-	</svg>
-	<span>
-		<strong class="font-semibold text-gray-900">Run Za Warudo</strong>
-		<br>
-		make za
-	</span>
-</li><li class="flex gap-x-3">
-	<svg class="mt-1 h-5 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-		<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
-	</svg>
-	<span>
-		<strong class="font-semibold text-gray-900">Run Teacher Coder</strong>
-		<br>
-		make teacher
-	</span>
-</li><li class="flex gap-x-3">
-	<svg class="mt-1 h-5 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-		<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
-	</svg>
-	<span>
-		<strong class="font-semibold text-gray-900">Initialize Class Coder</strong>
-		<br>
-		make class-init
-	</span>
-</li><li class="flex gap-x-3">
-	<svg class="mt-1 h-5 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-		<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
-	</svg>
-	<span>
-		<strong class="font-semibold text-gray-900">Push Class Template</strong>
-		<br>
-		(cd coder/class && make push)
-	</span>
-</li><li class="flex gap-x-3">
-	<svg class="mt-1 h-5 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-		<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
-	</svg>
-	<span>
-		<strong class="font-semibold text-gray-900">Update $HOME, then install everything</strong>
-		<br>
-		(cd && git pull && make install)
-	</span>
-</li><li class="flex gap-x-3">
-	<svg class="mt-1 h-5 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-		<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
-	</svg>
-	<span>
-		<strong class="font-semibold text-gray-900">Setup GPG</strong>
-		<br>
-		(cd && make gpg)
-	</span>
-</li><li class="flex gap-x-3">
-	<svg class="mt-1 h-5 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-		<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
-	</svg>
-	<span>
-		<strong class="font-semibold text-gray-900">Auto-bump flakes</strong>
-		<br>
-		(cd && make update)
-	</span>
-</li></ul>
-<br>
-<br>
-</div>
-</div>
-</body >
+    <style>
+      body {
+        font-family: valkyrie_a;
+      }
+      iframe {
+        width: 100%;
+        border: none;
+      }
+    </style>
+  </head>
+  <body class="bg-white px-6 lg:px-8">
+    <div class="mt-10 max-w-2xl">
+      <h2 class="text-2xl font-bold tracking-tight text-gray-900">
+        Tutorial : <a href="/?folder=/home/ubuntu">TOC</a>
+      </h2>
+      <div class="mx-auto max-w-3xl text-base text-gray-700">
+        <ul role="list" class="mt-8 max-w-xl space-y-8 text-gray-600">
+          <li class="flex gap-x-3">
+            <svg
+              class="mt-1 h-5 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span>
+              <strong class="font-semibold text-gray-900">Run CI</strong>
+              <br />
+              make ci
+            </span>
+          </li>
+          <li class="flex gap-x-3">
+            <svg
+              class="mt-1 h-5 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span>
+              <strong class="font-semibold text-gray-900">Run Za Warudo</strong>
+              <br />
+              make za
+            </span>
+          </li>
+          <li class="flex gap-x-3">
+            <svg
+              class="mt-1 h-5 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span>
+              <strong class="font-semibold text-gray-900"
+                >Run Teacher Coder</strong
+              >
+              <br />
+              make teacher
+            </span>
+          </li>
+          <li class="flex gap-x-3">
+            <svg
+              class="mt-1 h-5 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span>
+              <strong class="font-semibold text-gray-900"
+                >Initialize Class Coder</strong
+              >
+              <br />
+              make class-init
+            </span>
+          </li>
+          <li class="flex gap-x-3">
+            <svg
+              class="mt-1 h-5 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span>
+              <strong class="font-semibold text-gray-900"
+                >Push Class Template</strong
+              >
+              <br />
+              (cd coder/class && make push)
+            </span>
+          </li>
+          <li class="flex gap-x-3">
+            <svg
+              class="mt-1 h-5 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span>
+              <strong class="font-semibold text-gray-900"
+                >Update $HOME, then install everything</strong
+              >
+              <br />
+              (cd && git pull && make install)
+            </span>
+          </li>
+          <li class="flex gap-x-3">
+            <svg
+              class="mt-1 h-5 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span>
+              <strong class="font-semibold text-gray-900">Setup GPG</strong>
+              <br />
+              (cd && make gpg)
+            </span>
+          </li>
+          <li class="flex gap-x-3">
+            <svg
+              class="mt-1 h-5 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span>
+              <strong class="font-semibold text-gray-900"
+                >Auto-bump flakes</strong
+              >
+              <br />
+              (cd && make update)
+            </span>
+          </li>
+        </ul>
+        <br />
+        <br />
+      </div>
+    </div>
+  </body>
 </html>

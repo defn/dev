@@ -5,8 +5,7 @@
       "stackName": "acc-curl-net",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "curl-net": {

@@ -5,8 +5,7 @@
       "stackName": "acc-vault-vault1",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "vault-vault1": {

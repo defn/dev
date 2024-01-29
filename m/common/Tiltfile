@@ -2,7 +2,18 @@
 
 load("ext://restart_process", "custom_build_with_restart")
 
-def main(app_build, app_release, app_entrypoint, host, context=os.getenv("DFD_CONTEXT"), registry=os.getenv("DFD_REGISTRY"), parent=os.getenv("DFD_PARENT"), env=os.getenv("DFD_NAME"), app_service="app"):
+
+def main(
+    app_build,
+    app_release,
+    app_entrypoint,
+    host,
+    context=os.getenv("DFD_CONTEXT"),
+    registry=os.getenv("DFD_REGISTRY"),
+    parent=os.getenv("DFD_PARENT"),
+    env=os.getenv("DFD_NAME"),
+    app_service="app",
+):
     # local kubernetes
     allow_k8s_contexts(context)
 
@@ -10,10 +21,7 @@ def main(app_build, app_release, app_entrypoint, host, context=os.getenv("DFD_CO
     default_registry(registry)
 
     # deploy argocd app
-    local_resource(
-        name="deploy ",
-        cmd="make deploy"
-    )
+    local_resource(name="deploy ", cmd="make deploy")
 
     # deploy this app
     k8s_yaml(local("cat gen/deploy.yaml"))
@@ -31,13 +39,19 @@ def main(app_build, app_release, app_entrypoint, host, context=os.getenv("DFD_CO
     )
 
     # app service
-    k8s_resource(app_service, links = [
-        link("https://coder.{}/@amanibhavam/{}".format(parent, env), "coder"),
-        link("https://buildkite.com/defn/dev/builds?branch=main", "buildkite"),
-        link("https://argocd-{}.{}/applications/argocd/{}".format(env, parent, host), "argocd"),
-        link("{}.{}".format(host, parent), "app"),
-        link("{}.{}/api".format(host, parent), "/api")
-    ])
+    k8s_resource(
+        app_service,
+        links=[
+            link("https://coder.{}/@amanibhavam/{}".format(parent, env), "coder"),
+            link("https://buildkite.com/defn/dev/builds?branch=main", "buildkite"),
+            link(
+                "https://argocd-{}.{}/applications/argocd/{}".format(env, parent, host),
+                "argocd",
+            ),
+            link("{}.{}".format(host, parent), "app"),
+            link("{}.{}/api".format(host, parent), "/api"),
+        ],
+    )
 
     # reload app service when workarea synced
     custom_build_with_restart(

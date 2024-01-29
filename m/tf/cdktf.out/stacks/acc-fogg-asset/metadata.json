@@ -5,8 +5,7 @@
       "stackName": "acc-fogg-asset",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "fogg-asset": {
