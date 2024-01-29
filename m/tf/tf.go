@@ -182,11 +182,11 @@ func AwsOrganizationStack(scope constructs.Construct, site *infra.AwsProps, org 
 	return stack
 }
 
-func AwsAccountStack(scope constructs.Construct, site *infra.AwsProps, acc *infra.AwsAccount) cdktf.TerraformStack {
-	stack := cdktf.NewTerraformStack(scope, infra.Js(fmt.Sprintf("acc-%s", acc.Name)))
+func AwsAccountStack(scope constructs.Construct, site *infra.AwsProps, org *infra.AwsOrganization, acc *infra.AwsAccount) cdktf.TerraformStack {
+	stack := cdktf.NewTerraformStack(scope, infra.Js(fmt.Sprintf("acc-%s-%s", org.Name, acc.Profile)))
 
 	cdktf.NewS3Backend(stack, &cdktf.S3BackendConfig{
-		Key:           infra.Js(fmt.Sprintf("stacks/acc-%s/terraform.tfstate", acc.Name)),
+		Key:           infra.Js(fmt.Sprintf("stacks/acc-%s-%s/terraform.tfstate", org.Name, acc.Profile)),
 		Encrypt:       infra.Jstrue(),
 		Bucket:        &site.Backend.Bucket,
 		Region:        &site.Backend.Region,
@@ -197,13 +197,13 @@ func AwsAccountStack(scope constructs.Construct, site *infra.AwsProps, acc *infr
 	provider := []interface{}{
 		aws.NewAwsProvider(stack,
 			infra.Js("aws"), &aws.AwsProviderConfig{
-				Alias:   infra.Js(acc.Name),
-				Profile: infra.Js(fmt.Sprintf("%s-sso", acc.Name)),
+				Alias:   infra.Js(fmt.Sprintf("%s-%s", org.Name, acc.Profile)),
+				Profile: infra.Js(fmt.Sprintf("%s-%s-sso", org.Name, acc.Profile)),
 			}),
 	}
 
 	terraform_aws_defn_account.NewTerraformAwsDefnAccount(stack,
-		infra.Js(acc.Name), &terraform_aws_defn_account.TerraformAwsDefnAccountConfig{
+		infra.Js(fmt.Sprintf("%s-%s", org.Name, acc.Profile)), &terraform_aws_defn_account.TerraformAwsDefnAccountConfig{
 			Providers: &provider,
 			Namespace: infra.Js("dfn"),
 			Stage:     infra.Js("defn"),
@@ -226,7 +226,13 @@ func GlobalStack(scope constructs.Construct, site *infra.AwsProps) cdktf.Terrafo
 		DynamodbTable: &site.Backend.Lock,
 	})
 
-	for org_name, org := range site.Organization {
+	var keys []string
+	for key := range site.Organization {
+		keys = append(keys, key)
+	}
+
+	for _, org_name := range keys {
+		org := site.Organization[org_name]
 		for _, acc := range org.Accounts {
 			provider := []interface{}{
 				aws.NewAwsProvider(stack,
@@ -277,12 +283,10 @@ func init() {
 
 			for _, org := range site.Organization {
 				AwsOrganizationStack(app, &site, &org)
-			}
 
-			for _, acc := range site.Accounts {
-				AwsAccountStack(app, &site, &infra.AwsAccount{
-					Name: acc,
-				})
+				for _, acc := range org.Accounts {
+					AwsAccountStack(app, &site, &org, &acc)
+				}
 			}
 
 			GlobalStack(app, &site)

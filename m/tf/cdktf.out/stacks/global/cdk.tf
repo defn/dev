@@ -20,6 +20,30 @@ terraform {
 provider "aws" {
   profile = "defn-org-sso"
   region  = "us-east-2"
+  alias   = "defn-org"
+  assume_role {
+    role_arn = "arn:aws:iam::510430971399:role/dfn-defn-terraform"
+  }
+}
+module "s3-defn-org" {
+  acl = "private"
+  attributes = [
+    "defn-org",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.defn-org
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-2"
   alias   = "gyre-org"
   assume_role {
     role_arn = "arn:aws:iam::065163301604:role/dfn-defn-terraform"
@@ -62,1038 +86,6 @@ module "s3-gyre-ops" {
   source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
   providers = {
     aws = aws.gyre-ops
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-1"
-  alias   = "coil-org"
-  assume_role {
-    role_arn = "arn:aws:iam::138291560003:role/dfn-defn-terraform"
-  }
-}
-module "s3-coil-org" {
-  acl = "private"
-  attributes = [
-    "coil-org",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.coil-org
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-1"
-  alias   = "coil-net"
-  assume_role {
-    role_arn = "arn:aws:iam::278790191486:role/dfn-defn-terraform"
-  }
-}
-module "s3-coil-net" {
-  acl = "private"
-  attributes = [
-    "coil-net",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.coil-net
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-1"
-  alias   = "coil-lib"
-  assume_role {
-    role_arn = "arn:aws:iam::160764896647:role/dfn-defn-terraform"
-  }
-}
-module "s3-coil-lib" {
-  acl = "private"
-  attributes = [
-    "coil-lib",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.coil-lib
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-1"
-  alias   = "coil-hub"
-  assume_role {
-    role_arn = "arn:aws:iam::453991412409:role/dfn-defn-terraform"
-  }
-}
-module "s3-coil-hub" {
-  acl = "private"
-  attributes = [
-    "coil-hub",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.coil-hub
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-2"
-  alias   = "vault-org"
-  assume_role {
-    role_arn = "arn:aws:iam::475528707847:role/dfn-defn-terraform"
-  }
-}
-module "s3-vault-org" {
-  acl = "private"
-  attributes = [
-    "vault-org",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.vault-org
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-2"
-  alias   = "vault-transit"
-  assume_role {
-    role_arn = "arn:aws:iam::915207860232:role/dfn-defn-terraform"
-  }
-}
-module "s3-vault-transit" {
-  acl = "private"
-  attributes = [
-    "vault-transit",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.vault-transit
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-2"
-  alias   = "vault-audit"
-  assume_role {
-    role_arn = "arn:aws:iam::749185891195:role/dfn-defn-terraform"
-  }
-}
-module "s3-vault-audit" {
-  acl = "private"
-  attributes = [
-    "vault-audit",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.vault-audit
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-2"
-  alias   = "vault-vault0"
-  assume_role {
-    role_arn = "arn:aws:iam::313228123503:role/dfn-defn-terraform"
-  }
-}
-module "s3-vault-vault0" {
-  acl = "private"
-  attributes = [
-    "vault-vault0",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.vault-vault0
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-2"
-  alias   = "vault-vault1"
-  assume_role {
-    role_arn = "arn:aws:iam::040769490632:role/dfn-defn-terraform"
-  }
-}
-module "s3-vault-vault1" {
-  acl = "private"
-  attributes = [
-    "vault-vault1",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.vault-vault1
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-2"
-  alias   = "vault-ops"
-  assume_role {
-    role_arn = "arn:aws:iam::188066400611:role/dfn-defn-terraform"
-  }
-}
-module "s3-vault-ops" {
-  acl = "private"
-  attributes = [
-    "vault-ops",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.vault-ops
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-2"
-  alias   = "vault-library"
-  assume_role {
-    role_arn = "arn:aws:iam::066356637485:role/dfn-defn-terraform"
-  }
-}
-module "s3-vault-library" {
-  acl = "private"
-  attributes = [
-    "vault-library",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.vault-library
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-2"
-  alias   = "vault-hub"
-  assume_role {
-    role_arn = "arn:aws:iam::539099112425:role/dfn-defn-terraform"
-  }
-}
-module "s3-vault-hub" {
-  acl = "private"
-  attributes = [
-    "vault-hub",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.vault-hub
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-2"
-  alias   = "vault-pub"
-  assume_role {
-    role_arn = "arn:aws:iam::851162413429:role/dfn-defn-terraform"
-  }
-}
-module "s3-vault-pub" {
-  acl = "private"
-  attributes = [
-    "vault-pub",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.vault-pub
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-2"
-  alias   = "vault-dev"
-  assume_role {
-    role_arn = "arn:aws:iam::497393606242:role/dfn-defn-terraform"
-  }
-}
-module "s3-vault-dev" {
-  acl = "private"
-  attributes = [
-    "vault-dev",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.vault-dev
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "whoa-org"
-  assume_role {
-    role_arn = "arn:aws:iam::389772512117:role/dfn-defn-terraform"
-  }
-}
-module "s3-whoa-org" {
-  acl = "private"
-  attributes = [
-    "whoa-org",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.whoa-org
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "whoa-prod"
-  assume_role {
-    role_arn = "arn:aws:iam::204827926367:role/dfn-defn-terraform"
-  }
-}
-module "s3-whoa-prod" {
-  acl = "private"
-  attributes = [
-    "whoa-prod",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.whoa-prod
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "whoa-secrets"
-  assume_role {
-    role_arn = "arn:aws:iam::464075062390:role/dfn-defn-terraform"
-  }
-}
-module "s3-whoa-secrets" {
-  acl = "private"
-  attributes = [
-    "whoa-secrets",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.whoa-secrets
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "whoa-dev"
-  assume_role {
-    role_arn = "arn:aws:iam::439761234835:role/dfn-defn-terraform"
-  }
-}
-module "s3-whoa-dev" {
-  acl = "private"
-  attributes = [
-    "whoa-dev",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.whoa-dev
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "whoa-hub"
-  assume_role {
-    role_arn = "arn:aws:iam::462478722501:role/dfn-defn-terraform"
-  }
-}
-module "s3-whoa-hub" {
-  acl = "private"
-  attributes = [
-    "whoa-hub",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.whoa-hub
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "fogg-org"
-  assume_role {
-    role_arn = "arn:aws:iam::328216504962:role/dfn-defn-terraform"
-  }
-}
-module "s3-fogg-org" {
-  acl = "private"
-  attributes = [
-    "fogg-org",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.fogg-org
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "fogg-gateway"
-  assume_role {
-    role_arn = "arn:aws:iam::318746665903:role/dfn-defn-terraform"
-  }
-}
-module "s3-fogg-gateway" {
-  acl = "private"
-  attributes = [
-    "fogg-gateway",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.fogg-gateway
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "fogg-security"
-  assume_role {
-    role_arn = "arn:aws:iam::372333168887:role/dfn-defn-terraform"
-  }
-}
-module "s3-fogg-security" {
-  acl = "private"
-  attributes = [
-    "fogg-security",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.fogg-security
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "fogg-hub"
-  assume_role {
-    role_arn = "arn:aws:iam::337248635000:role/dfn-defn-terraform"
-  }
-}
-module "s3-fogg-hub" {
-  acl = "private"
-  attributes = [
-    "fogg-hub",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.fogg-hub
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "fogg-postx"
-  assume_role {
-    role_arn = "arn:aws:iam::565963418226:role/dfn-defn-terraform"
-  }
-}
-module "s3-fogg-postx" {
-  acl = "private"
-  attributes = [
-    "fogg-postx",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.fogg-postx
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "fogg-asset"
-  assume_role {
-    role_arn = "arn:aws:iam::060659916753:role/dfn-defn-terraform"
-  }
-}
-module "s3-fogg-asset" {
-  acl = "private"
-  attributes = [
-    "fogg-asset",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.fogg-asset
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "fogg-data"
-  assume_role {
-    role_arn = "arn:aws:iam::624713464251:role/dfn-defn-terraform"
-  }
-}
-module "s3-fogg-data" {
-  acl = "private"
-  attributes = [
-    "fogg-data",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.fogg-data
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "fogg-sandbox"
-  assume_role {
-    role_arn = "arn:aws:iam::442766271046:role/dfn-defn-terraform"
-  }
-}
-module "s3-fogg-sandbox" {
-  acl = "private"
-  attributes = [
-    "fogg-sandbox",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.fogg-sandbox
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "fogg-circus"
-  assume_role {
-    role_arn = "arn:aws:iam::844609041254:role/dfn-defn-terraform"
-  }
-}
-module "s3-fogg-circus" {
-  acl = "private"
-  attributes = [
-    "fogg-circus",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.fogg-circus
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "fogg-home"
-  assume_role {
-    role_arn = "arn:aws:iam::812459563189:role/dfn-defn-terraform"
-  }
-}
-module "s3-fogg-home" {
-  acl = "private"
-  attributes = [
-    "fogg-home",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.fogg-home
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "curl-org"
-  assume_role {
-    role_arn = "arn:aws:iam::424535767618:role/dfn-defn-terraform"
-  }
-}
-module "s3-curl-org" {
-  acl = "private"
-  attributes = [
-    "curl-org",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.curl-org
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "curl-net"
-  assume_role {
-    role_arn = "arn:aws:iam::101142583332:role/dfn-defn-terraform"
-  }
-}
-module "s3-curl-net" {
-  acl = "private"
-  attributes = [
-    "curl-net",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.curl-net
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "curl-lib"
-  assume_role {
-    role_arn = "arn:aws:iam::298406631539:role/dfn-defn-terraform"
-  }
-}
-module "s3-curl-lib" {
-  acl = "private"
-  attributes = [
-    "curl-lib",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.curl-lib
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "curl-hub"
-  assume_role {
-    role_arn = "arn:aws:iam::804430872255:role/dfn-defn-terraform"
-  }
-}
-module "s3-curl-hub" {
-  acl = "private"
-  attributes = [
-    "curl-hub",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.curl-hub
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "spiral-org"
-  assume_role {
-    role_arn = "arn:aws:iam::232091571197:role/dfn-defn-terraform"
-  }
-}
-module "s3-spiral-org" {
-  acl = "private"
-  attributes = [
-    "spiral-org",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.spiral-org
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "spiral-ops"
-  assume_role {
-    role_arn = "arn:aws:iam::601164058091:role/dfn-defn-terraform"
-  }
-}
-module "s3-spiral-ops" {
-  acl = "private"
-  attributes = [
-    "spiral-ops",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.spiral-ops
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "spiral-sec"
-  assume_role {
-    role_arn = "arn:aws:iam::398258703387:role/dfn-defn-terraform"
-  }
-}
-module "s3-spiral-sec" {
-  acl = "private"
-  attributes = [
-    "spiral-sec",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.spiral-sec
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "spiral-net"
-  assume_role {
-    role_arn = "arn:aws:iam::057533398557:role/dfn-defn-terraform"
-  }
-}
-module "s3-spiral-net" {
-  acl = "private"
-  attributes = [
-    "spiral-net",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.spiral-net
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "spiral-log"
-  assume_role {
-    role_arn = "arn:aws:iam::442333715734:role/dfn-defn-terraform"
-  }
-}
-module "s3-spiral-log" {
-  acl = "private"
-  attributes = [
-    "spiral-log",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.spiral-log
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "spiral-lib"
-  assume_role {
-    role_arn = "arn:aws:iam::073874947996:role/dfn-defn-terraform"
-  }
-}
-module "s3-spiral-lib" {
-  acl = "private"
-  attributes = [
-    "spiral-lib",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.spiral-lib
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "spiral-pub"
-  assume_role {
-    role_arn = "arn:aws:iam::371657257885:role/dfn-defn-terraform"
-  }
-}
-module "s3-spiral-pub" {
-  acl = "private"
-  attributes = [
-    "spiral-pub",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.spiral-pub
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "spiral-dmz"
-  assume_role {
-    role_arn = "arn:aws:iam::130046154300:role/dfn-defn-terraform"
-  }
-}
-module "s3-spiral-dmz" {
-  acl = "private"
-  attributes = [
-    "spiral-dmz",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.spiral-dmz
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "spiral-hub"
-  assume_role {
-    role_arn = "arn:aws:iam::216704421225:role/dfn-defn-terraform"
-  }
-}
-module "s3-spiral-hub" {
-  acl = "private"
-  attributes = [
-    "spiral-hub",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.spiral-hub
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-west-2"
-  alias   = "spiral-dev"
-  assume_role {
-    role_arn = "arn:aws:iam::308726031860:role/dfn-defn-terraform"
-  }
-}
-module "s3-spiral-dev" {
-  acl = "private"
-  attributes = [
-    "spiral-dev",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.spiral-dev
   }
 }
 
@@ -1220,15 +212,15 @@ module "s3-circus-transit" {
 provider "aws" {
   profile = "defn-org-sso"
   region  = "us-west-2"
-  alias   = "imma-org"
+  alias   = "whoa-org"
   assume_role {
-    role_arn = "arn:aws:iam::548373030883:role/dfn-defn-terraform"
+    role_arn = "arn:aws:iam::389772512117:role/dfn-defn-terraform"
   }
 }
-module "s3-imma-org" {
+module "s3-whoa-org" {
   acl = "private"
   attributes = [
-    "imma-org",
+    "whoa-org",
   ]
   name               = "global"
   namespace          = "dfn"
@@ -1237,22 +229,22 @@ module "s3-imma-org" {
   versioning_enabled = false
   source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.imma-org
+    aws = aws.whoa-org
   }
 }
 
 provider "aws" {
   profile = "defn-org-sso"
   region  = "us-west-2"
-  alias   = "imma-prod"
+  alias   = "whoa-prod"
   assume_role {
-    role_arn = "arn:aws:iam::766142996227:role/dfn-defn-terraform"
+    role_arn = "arn:aws:iam::204827926367:role/dfn-defn-terraform"
   }
 }
-module "s3-imma-prod" {
+module "s3-whoa-prod" {
   acl = "private"
   attributes = [
-    "imma-prod",
+    "whoa-prod",
   ]
   name               = "global"
   namespace          = "dfn"
@@ -1261,22 +253,22 @@ module "s3-imma-prod" {
   versioning_enabled = false
   source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.imma-prod
+    aws = aws.whoa-prod
   }
 }
 
 provider "aws" {
   profile = "defn-org-sso"
   region  = "us-west-2"
-  alias   = "imma-dev"
+  alias   = "whoa-secrets"
   assume_role {
-    role_arn = "arn:aws:iam::445584037541:role/dfn-defn-terraform"
+    role_arn = "arn:aws:iam::464075062390:role/dfn-defn-terraform"
   }
 }
-module "s3-imma-dev" {
+module "s3-whoa-secrets" {
   acl = "private"
   attributes = [
-    "imma-dev",
+    "whoa-secrets",
   ]
   name               = "global"
   namespace          = "dfn"
@@ -1285,22 +277,22 @@ module "s3-imma-dev" {
   versioning_enabled = false
   source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.imma-dev
+    aws = aws.whoa-secrets
   }
 }
 
 provider "aws" {
   profile = "defn-org-sso"
   region  = "us-west-2"
-  alias   = "imma-tolan"
+  alias   = "whoa-dev"
   assume_role {
-    role_arn = "arn:aws:iam::516851121506:role/dfn-defn-terraform"
+    role_arn = "arn:aws:iam::439761234835:role/dfn-defn-terraform"
   }
 }
-module "s3-imma-tolan" {
+module "s3-whoa-dev" {
   acl = "private"
   attributes = [
-    "imma-tolan",
+    "whoa-dev",
   ]
   name               = "global"
   namespace          = "dfn"
@@ -1309,22 +301,22 @@ module "s3-imma-tolan" {
   versioning_enabled = false
   source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.imma-tolan
+    aws = aws.whoa-dev
   }
 }
 
 provider "aws" {
   profile = "defn-org-sso"
   region  = "us-west-2"
-  alias   = "imma-dgwyn"
+  alias   = "whoa-hub"
   assume_role {
-    role_arn = "arn:aws:iam::289716781198:role/dfn-defn-terraform"
+    role_arn = "arn:aws:iam::462478722501:role/dfn-defn-terraform"
   }
 }
-module "s3-imma-dgwyn" {
+module "s3-whoa-hub" {
   acl = "private"
   attributes = [
-    "imma-dgwyn",
+    "whoa-hub",
   ]
   name               = "global"
   namespace          = "dfn"
@@ -1333,22 +325,22 @@ module "s3-imma-dgwyn" {
   versioning_enabled = false
   source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.imma-dgwyn
+    aws = aws.whoa-hub
   }
 }
 
 provider "aws" {
   profile = "defn-org-sso"
   region  = "us-west-2"
-  alias   = "imma-defn"
+  alias   = "jianghu-org"
   assume_role {
-    role_arn = "arn:aws:iam::246197522468:role/dfn-defn-terraform"
+    role_arn = "arn:aws:iam::657613322961:role/dfn-defn-terraform"
   }
 }
-module "s3-imma-defn" {
+module "s3-jianghu-org" {
   acl = "private"
   attributes = [
-    "imma-defn",
+    "jianghu-org",
   ]
   name               = "global"
   namespace          = "dfn"
@@ -1357,22 +349,22 @@ module "s3-imma-defn" {
   versioning_enabled = false
   source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.imma-defn
+    aws = aws.jianghu-org
   }
 }
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
-  alias   = "helix-org"
+  region  = "us-west-2"
+  alias   = "jianghu-tahoe"
   assume_role {
-    role_arn = "arn:aws:iam::816178966829:role/dfn-defn-terraform"
+    role_arn = "arn:aws:iam::025636091251:role/dfn-defn-terraform"
   }
 }
-module "s3-helix-org" {
+module "s3-jianghu-tahoe" {
   acl = "private"
   attributes = [
-    "helix-org",
+    "jianghu-tahoe",
   ]
   name               = "global"
   namespace          = "dfn"
@@ -1381,22 +373,22 @@ module "s3-helix-org" {
   versioning_enabled = false
   source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.helix-org
+    aws = aws.jianghu-tahoe
   }
 }
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
-  alias   = "helix-ops"
+  region  = "us-west-2"
+  alias   = "jianghu-klamath"
   assume_role {
-    role_arn = "arn:aws:iam::368812692254:role/dfn-defn-terraform"
+    role_arn = "arn:aws:iam::298431841138:role/dfn-defn-terraform"
   }
 }
-module "s3-helix-ops" {
+module "s3-jianghu-klamath" {
   acl = "private"
   attributes = [
-    "helix-ops",
+    "jianghu-klamath",
   ]
   name               = "global"
   namespace          = "dfn"
@@ -1405,199 +397,7 @@ module "s3-helix-ops" {
   versioning_enabled = false
   source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.helix-ops
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-2"
-  alias   = "helix-sec"
-  assume_role {
-    role_arn = "arn:aws:iam::018520313738:role/dfn-defn-terraform"
-  }
-}
-module "s3-helix-sec" {
-  acl = "private"
-  attributes = [
-    "helix-sec",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.helix-sec
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-2"
-  alias   = "helix-net"
-  assume_role {
-    role_arn = "arn:aws:iam::504722108514:role/dfn-defn-terraform"
-  }
-}
-module "s3-helix-net" {
-  acl = "private"
-  attributes = [
-    "helix-net",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.helix-net
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-2"
-  alias   = "helix-log"
-  assume_role {
-    role_arn = "arn:aws:iam::664427926343:role/dfn-defn-terraform"
-  }
-}
-module "s3-helix-log" {
-  acl = "private"
-  attributes = [
-    "helix-log",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.helix-log
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-2"
-  alias   = "helix-lib"
-  assume_role {
-    role_arn = "arn:aws:iam::377857698578:role/dfn-defn-terraform"
-  }
-}
-module "s3-helix-lib" {
-  acl = "private"
-  attributes = [
-    "helix-lib",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.helix-lib
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-2"
-  alias   = "helix-pub"
-  assume_role {
-    role_arn = "arn:aws:iam::536806623881:role/dfn-defn-terraform"
-  }
-}
-module "s3-helix-pub" {
-  acl = "private"
-  attributes = [
-    "helix-pub",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.helix-pub
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-2"
-  alias   = "helix-dmz"
-  assume_role {
-    role_arn = "arn:aws:iam::724643698007:role/dfn-defn-terraform"
-  }
-}
-module "s3-helix-dmz" {
-  acl = "private"
-  attributes = [
-    "helix-dmz",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.helix-dmz
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-2"
-  alias   = "helix-hub"
-  assume_role {
-    role_arn = "arn:aws:iam::436043820387:role/dfn-defn-terraform"
-  }
-}
-module "s3-helix-hub" {
-  acl = "private"
-  attributes = [
-    "helix-hub",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.helix-hub
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso"
-  region  = "us-east-2"
-  alias   = "helix-dev"
-  assume_role {
-    role_arn = "arn:aws:iam::843784871878:role/dfn-defn-terraform"
-  }
-}
-module "s3-helix-dev" {
-  acl = "private"
-  attributes = [
-    "helix-dev",
-  ]
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.helix-dev
+    aws = aws.jianghu-klamath
   }
 }
 
@@ -2443,16 +1243,16 @@ module "s3-chamber-z" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
-  alias   = "defn-org"
+  region  = "us-west-2"
+  alias   = "imma-org"
   assume_role {
-    role_arn = "arn:aws:iam::510430971399:role/dfn-defn-terraform"
+    role_arn = "arn:aws:iam::548373030883:role/dfn-defn-terraform"
   }
 }
-module "s3-defn-org" {
+module "s3-imma-org" {
   acl = "private"
   attributes = [
-    "defn-org",
+    "imma-org",
   ]
   name               = "global"
   namespace          = "dfn"
@@ -2461,7 +1261,559 @@ module "s3-defn-org" {
   versioning_enabled = false
   source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.defn-org
+    aws = aws.imma-org
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "imma-prod"
+  assume_role {
+    role_arn = "arn:aws:iam::766142996227:role/dfn-defn-terraform"
+  }
+}
+module "s3-imma-prod" {
+  acl = "private"
+  attributes = [
+    "imma-prod",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.imma-prod
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "imma-dev"
+  assume_role {
+    role_arn = "arn:aws:iam::445584037541:role/dfn-defn-terraform"
+  }
+}
+module "s3-imma-dev" {
+  acl = "private"
+  attributes = [
+    "imma-dev",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.imma-dev
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "imma-tolan"
+  assume_role {
+    role_arn = "arn:aws:iam::516851121506:role/dfn-defn-terraform"
+  }
+}
+module "s3-imma-tolan" {
+  acl = "private"
+  attributes = [
+    "imma-tolan",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.imma-tolan
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "imma-dgwyn"
+  assume_role {
+    role_arn = "arn:aws:iam::289716781198:role/dfn-defn-terraform"
+  }
+}
+module "s3-imma-dgwyn" {
+  acl = "private"
+  attributes = [
+    "imma-dgwyn",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.imma-dgwyn
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "imma-defn"
+  assume_role {
+    role_arn = "arn:aws:iam::246197522468:role/dfn-defn-terraform"
+  }
+}
+module "s3-imma-defn" {
+  acl = "private"
+  attributes = [
+    "imma-defn",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.imma-defn
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "curl-org"
+  assume_role {
+    role_arn = "arn:aws:iam::424535767618:role/dfn-defn-terraform"
+  }
+}
+module "s3-curl-org" {
+  acl = "private"
+  attributes = [
+    "curl-org",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.curl-org
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "curl-net"
+  assume_role {
+    role_arn = "arn:aws:iam::101142583332:role/dfn-defn-terraform"
+  }
+}
+module "s3-curl-net" {
+  acl = "private"
+  attributes = [
+    "curl-net",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.curl-net
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "curl-lib"
+  assume_role {
+    role_arn = "arn:aws:iam::298406631539:role/dfn-defn-terraform"
+  }
+}
+module "s3-curl-lib" {
+  acl = "private"
+  attributes = [
+    "curl-lib",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.curl-lib
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "curl-hub"
+  assume_role {
+    role_arn = "arn:aws:iam::804430872255:role/dfn-defn-terraform"
+  }
+}
+module "s3-curl-hub" {
+  acl = "private"
+  attributes = [
+    "curl-hub",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.curl-hub
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-1"
+  alias   = "coil-org"
+  assume_role {
+    role_arn = "arn:aws:iam::138291560003:role/dfn-defn-terraform"
+  }
+}
+module "s3-coil-org" {
+  acl = "private"
+  attributes = [
+    "coil-org",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.coil-org
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-1"
+  alias   = "coil-net"
+  assume_role {
+    role_arn = "arn:aws:iam::278790191486:role/dfn-defn-terraform"
+  }
+}
+module "s3-coil-net" {
+  acl = "private"
+  attributes = [
+    "coil-net",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.coil-net
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-1"
+  alias   = "coil-lib"
+  assume_role {
+    role_arn = "arn:aws:iam::160764896647:role/dfn-defn-terraform"
+  }
+}
+module "s3-coil-lib" {
+  acl = "private"
+  attributes = [
+    "coil-lib",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.coil-lib
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-1"
+  alias   = "coil-hub"
+  assume_role {
+    role_arn = "arn:aws:iam::453991412409:role/dfn-defn-terraform"
+  }
+}
+module "s3-coil-hub" {
+  acl = "private"
+  attributes = [
+    "coil-hub",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.coil-hub
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-2"
+  alias   = "helix-org"
+  assume_role {
+    role_arn = "arn:aws:iam::816178966829:role/dfn-defn-terraform"
+  }
+}
+module "s3-helix-org" {
+  acl = "private"
+  attributes = [
+    "helix-org",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.helix-org
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-2"
+  alias   = "helix-ops"
+  assume_role {
+    role_arn = "arn:aws:iam::368812692254:role/dfn-defn-terraform"
+  }
+}
+module "s3-helix-ops" {
+  acl = "private"
+  attributes = [
+    "helix-ops",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.helix-ops
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-2"
+  alias   = "helix-sec"
+  assume_role {
+    role_arn = "arn:aws:iam::018520313738:role/dfn-defn-terraform"
+  }
+}
+module "s3-helix-sec" {
+  acl = "private"
+  attributes = [
+    "helix-sec",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.helix-sec
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-2"
+  alias   = "helix-net"
+  assume_role {
+    role_arn = "arn:aws:iam::504722108514:role/dfn-defn-terraform"
+  }
+}
+module "s3-helix-net" {
+  acl = "private"
+  attributes = [
+    "helix-net",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.helix-net
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-2"
+  alias   = "helix-log"
+  assume_role {
+    role_arn = "arn:aws:iam::664427926343:role/dfn-defn-terraform"
+  }
+}
+module "s3-helix-log" {
+  acl = "private"
+  attributes = [
+    "helix-log",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.helix-log
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-2"
+  alias   = "helix-lib"
+  assume_role {
+    role_arn = "arn:aws:iam::377857698578:role/dfn-defn-terraform"
+  }
+}
+module "s3-helix-lib" {
+  acl = "private"
+  attributes = [
+    "helix-lib",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.helix-lib
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-2"
+  alias   = "helix-pub"
+  assume_role {
+    role_arn = "arn:aws:iam::536806623881:role/dfn-defn-terraform"
+  }
+}
+module "s3-helix-pub" {
+  acl = "private"
+  attributes = [
+    "helix-pub",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.helix-pub
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-2"
+  alias   = "helix-dmz"
+  assume_role {
+    role_arn = "arn:aws:iam::724643698007:role/dfn-defn-terraform"
+  }
+}
+module "s3-helix-dmz" {
+  acl = "private"
+  attributes = [
+    "helix-dmz",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.helix-dmz
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-2"
+  alias   = "helix-hub"
+  assume_role {
+    role_arn = "arn:aws:iam::436043820387:role/dfn-defn-terraform"
+  }
+}
+module "s3-helix-hub" {
+  acl = "private"
+  attributes = [
+    "helix-hub",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.helix-hub
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-2"
+  alias   = "helix-dev"
+  assume_role {
+    role_arn = "arn:aws:iam::843784871878:role/dfn-defn-terraform"
+  }
+}
+module "s3-helix-dev" {
+  acl = "private"
+  attributes = [
+    "helix-dev",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.helix-dev
   }
 }
 
@@ -2756,15 +2108,15 @@ module "s3-immanent-doorkeeper" {
 provider "aws" {
   profile = "defn-org-sso"
   region  = "us-west-2"
-  alias   = "jianghu-org"
+  alias   = "fogg-org"
   assume_role {
-    role_arn = "arn:aws:iam::657613322961:role/dfn-defn-terraform"
+    role_arn = "arn:aws:iam::328216504962:role/dfn-defn-terraform"
   }
 }
-module "s3-jianghu-org" {
+module "s3-fogg-org" {
   acl = "private"
   attributes = [
-    "jianghu-org",
+    "fogg-org",
   ]
   name               = "global"
   namespace          = "dfn"
@@ -2773,22 +2125,22 @@ module "s3-jianghu-org" {
   versioning_enabled = false
   source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.jianghu-org
+    aws = aws.fogg-org
   }
 }
 
 provider "aws" {
   profile = "defn-org-sso"
   region  = "us-west-2"
-  alias   = "jianghu-tahoe"
+  alias   = "fogg-gateway"
   assume_role {
-    role_arn = "arn:aws:iam::025636091251:role/dfn-defn-terraform"
+    role_arn = "arn:aws:iam::318746665903:role/dfn-defn-terraform"
   }
 }
-module "s3-jianghu-tahoe" {
+module "s3-fogg-gateway" {
   acl = "private"
   attributes = [
-    "jianghu-tahoe",
+    "fogg-gateway",
   ]
   name               = "global"
   namespace          = "dfn"
@@ -2797,22 +2149,22 @@ module "s3-jianghu-tahoe" {
   versioning_enabled = false
   source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.jianghu-tahoe
+    aws = aws.fogg-gateway
   }
 }
 
 provider "aws" {
   profile = "defn-org-sso"
   region  = "us-west-2"
-  alias   = "jianghu-klamath"
+  alias   = "fogg-security"
   assume_role {
-    role_arn = "arn:aws:iam::298431841138:role/dfn-defn-terraform"
+    role_arn = "arn:aws:iam::372333168887:role/dfn-defn-terraform"
   }
 }
-module "s3-jianghu-klamath" {
+module "s3-fogg-security" {
   acl = "private"
   attributes = [
-    "jianghu-klamath",
+    "fogg-security",
   ]
   name               = "global"
   namespace          = "dfn"
@@ -2821,6 +2173,654 @@ module "s3-jianghu-klamath" {
   versioning_enabled = false
   source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.jianghu-klamath
+    aws = aws.fogg-security
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "fogg-hub"
+  assume_role {
+    role_arn = "arn:aws:iam::337248635000:role/dfn-defn-terraform"
+  }
+}
+module "s3-fogg-hub" {
+  acl = "private"
+  attributes = [
+    "fogg-hub",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.fogg-hub
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "fogg-postx"
+  assume_role {
+    role_arn = "arn:aws:iam::565963418226:role/dfn-defn-terraform"
+  }
+}
+module "s3-fogg-postx" {
+  acl = "private"
+  attributes = [
+    "fogg-postx",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.fogg-postx
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "fogg-asset"
+  assume_role {
+    role_arn = "arn:aws:iam::060659916753:role/dfn-defn-terraform"
+  }
+}
+module "s3-fogg-asset" {
+  acl = "private"
+  attributes = [
+    "fogg-asset",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.fogg-asset
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "fogg-data"
+  assume_role {
+    role_arn = "arn:aws:iam::624713464251:role/dfn-defn-terraform"
+  }
+}
+module "s3-fogg-data" {
+  acl = "private"
+  attributes = [
+    "fogg-data",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.fogg-data
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "fogg-sandbox"
+  assume_role {
+    role_arn = "arn:aws:iam::442766271046:role/dfn-defn-terraform"
+  }
+}
+module "s3-fogg-sandbox" {
+  acl = "private"
+  attributes = [
+    "fogg-sandbox",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.fogg-sandbox
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "fogg-circus"
+  assume_role {
+    role_arn = "arn:aws:iam::844609041254:role/dfn-defn-terraform"
+  }
+}
+module "s3-fogg-circus" {
+  acl = "private"
+  attributes = [
+    "fogg-circus",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.fogg-circus
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "fogg-home"
+  assume_role {
+    role_arn = "arn:aws:iam::812459563189:role/dfn-defn-terraform"
+  }
+}
+module "s3-fogg-home" {
+  acl = "private"
+  attributes = [
+    "fogg-home",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.fogg-home
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "spiral-org"
+  assume_role {
+    role_arn = "arn:aws:iam::232091571197:role/dfn-defn-terraform"
+  }
+}
+module "s3-spiral-org" {
+  acl = "private"
+  attributes = [
+    "spiral-org",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.spiral-org
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "spiral-ops"
+  assume_role {
+    role_arn = "arn:aws:iam::601164058091:role/dfn-defn-terraform"
+  }
+}
+module "s3-spiral-ops" {
+  acl = "private"
+  attributes = [
+    "spiral-ops",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.spiral-ops
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "spiral-sec"
+  assume_role {
+    role_arn = "arn:aws:iam::398258703387:role/dfn-defn-terraform"
+  }
+}
+module "s3-spiral-sec" {
+  acl = "private"
+  attributes = [
+    "spiral-sec",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.spiral-sec
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "spiral-net"
+  assume_role {
+    role_arn = "arn:aws:iam::057533398557:role/dfn-defn-terraform"
+  }
+}
+module "s3-spiral-net" {
+  acl = "private"
+  attributes = [
+    "spiral-net",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.spiral-net
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "spiral-log"
+  assume_role {
+    role_arn = "arn:aws:iam::442333715734:role/dfn-defn-terraform"
+  }
+}
+module "s3-spiral-log" {
+  acl = "private"
+  attributes = [
+    "spiral-log",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.spiral-log
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "spiral-lib"
+  assume_role {
+    role_arn = "arn:aws:iam::073874947996:role/dfn-defn-terraform"
+  }
+}
+module "s3-spiral-lib" {
+  acl = "private"
+  attributes = [
+    "spiral-lib",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.spiral-lib
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "spiral-pub"
+  assume_role {
+    role_arn = "arn:aws:iam::371657257885:role/dfn-defn-terraform"
+  }
+}
+module "s3-spiral-pub" {
+  acl = "private"
+  attributes = [
+    "spiral-pub",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.spiral-pub
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "spiral-dmz"
+  assume_role {
+    role_arn = "arn:aws:iam::130046154300:role/dfn-defn-terraform"
+  }
+}
+module "s3-spiral-dmz" {
+  acl = "private"
+  attributes = [
+    "spiral-dmz",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.spiral-dmz
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "spiral-hub"
+  assume_role {
+    role_arn = "arn:aws:iam::216704421225:role/dfn-defn-terraform"
+  }
+}
+module "s3-spiral-hub" {
+  acl = "private"
+  attributes = [
+    "spiral-hub",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.spiral-hub
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-west-2"
+  alias   = "spiral-dev"
+  assume_role {
+    role_arn = "arn:aws:iam::308726031860:role/dfn-defn-terraform"
+  }
+}
+module "s3-spiral-dev" {
+  acl = "private"
+  attributes = [
+    "spiral-dev",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.spiral-dev
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-2"
+  alias   = "vault-org"
+  assume_role {
+    role_arn = "arn:aws:iam::475528707847:role/dfn-defn-terraform"
+  }
+}
+module "s3-vault-org" {
+  acl = "private"
+  attributes = [
+    "vault-org",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.vault-org
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-2"
+  alias   = "vault-transit"
+  assume_role {
+    role_arn = "arn:aws:iam::915207860232:role/dfn-defn-terraform"
+  }
+}
+module "s3-vault-transit" {
+  acl = "private"
+  attributes = [
+    "vault-transit",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.vault-transit
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-2"
+  alias   = "vault-audit"
+  assume_role {
+    role_arn = "arn:aws:iam::749185891195:role/dfn-defn-terraform"
+  }
+}
+module "s3-vault-audit" {
+  acl = "private"
+  attributes = [
+    "vault-audit",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.vault-audit
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-2"
+  alias   = "vault-vault0"
+  assume_role {
+    role_arn = "arn:aws:iam::313228123503:role/dfn-defn-terraform"
+  }
+}
+module "s3-vault-vault0" {
+  acl = "private"
+  attributes = [
+    "vault-vault0",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.vault-vault0
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-2"
+  alias   = "vault-vault1"
+  assume_role {
+    role_arn = "arn:aws:iam::040769490632:role/dfn-defn-terraform"
+  }
+}
+module "s3-vault-vault1" {
+  acl = "private"
+  attributes = [
+    "vault-vault1",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.vault-vault1
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-2"
+  alias   = "vault-ops"
+  assume_role {
+    role_arn = "arn:aws:iam::188066400611:role/dfn-defn-terraform"
+  }
+}
+module "s3-vault-ops" {
+  acl = "private"
+  attributes = [
+    "vault-ops",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.vault-ops
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-2"
+  alias   = "vault-library"
+  assume_role {
+    role_arn = "arn:aws:iam::066356637485:role/dfn-defn-terraform"
+  }
+}
+module "s3-vault-library" {
+  acl = "private"
+  attributes = [
+    "vault-library",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.vault-library
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-2"
+  alias   = "vault-hub"
+  assume_role {
+    role_arn = "arn:aws:iam::539099112425:role/dfn-defn-terraform"
+  }
+}
+module "s3-vault-hub" {
+  acl = "private"
+  attributes = [
+    "vault-hub",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.vault-hub
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-2"
+  alias   = "vault-pub"
+  assume_role {
+    role_arn = "arn:aws:iam::851162413429:role/dfn-defn-terraform"
+  }
+}
+module "s3-vault-pub" {
+  acl = "private"
+  attributes = [
+    "vault-pub",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.vault-pub
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso"
+  region  = "us-east-2"
+  alias   = "vault-dev"
+  assume_role {
+    role_arn = "arn:aws:iam::497393606242:role/dfn-defn-terraform"
+  }
+}
+module "s3-vault-dev" {
+  acl = "private"
+  attributes = [
+    "vault-dev",
+  ]
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.vault-dev
   }
 }
