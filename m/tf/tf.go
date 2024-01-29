@@ -194,16 +194,17 @@ func AwsAccountStack(scope constructs.Construct, backend *infra.AwsBackend, acc 
 		DynamodbTable: &backend.Lock,
 	})
 
-	provider := aws.NewAwsProvider(stack,
-		infra.Js("aws"), &aws.AwsProviderConfig{
-			Alias:   infra.Js(acc.Name),
-			Profile: infra.Js(fmt.Sprintf("%s-sso", acc.Name)),
-		})
-	providers := append(make([]interface{}, 0), provider)
+	provider := []interface{}{
+		aws.NewAwsProvider(stack,
+			infra.Js("aws"), &aws.AwsProviderConfig{
+				Alias:   infra.Js(acc.Name),
+				Profile: infra.Js(fmt.Sprintf("%s-sso", acc.Name)),
+			}),
+	}
 
 	terraform_aws_defn_account.NewTerraformAwsDefnAccount(stack,
 		infra.Js(acc.Name), &terraform_aws_defn_account.TerraformAwsDefnAccountConfig{
-			Providers: &providers,
+			Providers: &provider,
 			Namespace: infra.Js("dfn"),
 			Stage:     infra.Js("defn"),
 			Name:      infra.Js("terraform"),
@@ -212,7 +213,7 @@ func AwsAccountStack(scope constructs.Construct, backend *infra.AwsBackend, acc 
 	return stack
 }
 
-func GlobalStack(scope constructs.Construct, backend *infra.AwsBackend, accounts []string) cdktf.TerraformStack {
+func GlobalStack(scope constructs.Construct, backend *infra.AwsBackend, organization map[string]infra.AwsOrganization, info map[string]infra.AwsInfo) cdktf.TerraformStack {
 	stack := cdktf.NewTerraformStack(scope, infra.Js("global"))
 
 	cdktf.NewS3Backend(stack, &cdktf.S3BackendConfig{
@@ -225,37 +226,37 @@ func GlobalStack(scope constructs.Construct, backend *infra.AwsBackend, accounts
 		DynamodbTable: &backend.Lock,
 	})
 
-	for i := 0; i < len(accounts); i++ {
-		assumerole := []interface{}{
-			aws.AwsProviderAssumeRole{
-				RoleArn: infra.Js("arn:aws:iam::730917619329:role/dfn-defn-terraform"), // need account specific role
-			},
+	for org_name, org := range organization {
+		for _, acc := range org.Accounts {
+			provider := []interface{}{
+				aws.NewAwsProvider(stack,
+					infra.Js(fmt.Sprintf("aws-global-%s-%s", org_name, acc.Profile)), &aws.AwsProviderConfig{
+						Alias:   infra.Js(fmt.Sprintf("%s-%s", org_name, acc.Profile)),
+						Profile: infra.Js(fmt.Sprintf("%s-sso", "defn-org")),
+						Region:  infra.Js(acc.Region), // need account specific region
+						AssumeRole: []interface{}{
+							aws.AwsProviderAssumeRole{
+								RoleArn: infra.Js(fmt.Sprintf("arn:aws:iam::%s:role/dfn-defn-terraform", info[org_name].Account[acc.Profile].Id)), // need account specific role
+							},
+						},
+					},
+				),
+			}
+
+			terraform_aws_s3_bucket.NewTerraformAwsS3Bucket(stack,
+				infra.Js(fmt.Sprintf("s3-%s-%s", org_name, acc.Name)), &terraform_aws_s3_bucket.TerraformAwsS3BucketConfig{
+					Providers:  &provider,
+					Namespace:  infra.Js("dfn"),
+					Stage:      infra.Js("defn"),
+					Name:       infra.Js("global"),
+					Attributes: &[]*string{infra.Js(fmt.Sprintf("%s-%s", org_name, acc.Name))},
+
+					Acl:                         infra.Js("private"),
+					UserEnabled:                 infra.Jsfalse(),
+					VersioningEnabled:           infra.Jsfalse(),
+					LifecycleConfigurationRules: nil,
+				})
 		}
-
-		provider := []interface{}{
-			aws.NewAwsProvider(stack,
-				infra.Js(fmt.Sprintf("aws-global-%s", accounts[i])), &aws.AwsProviderConfig{
-					Alias:      infra.Js(accounts[i]),
-					Profile:    infra.Js(fmt.Sprintf("%s-sso", "defn-org")),
-					Region:     infra.Js("us-east-1"), // need account specific region
-					AssumeRole: assumerole,
-				},
-			),
-		}
-
-		terraform_aws_s3_bucket.NewTerraformAwsS3Bucket(stack,
-			infra.Js(fmt.Sprintf("s3-%s", accounts[i])), &terraform_aws_s3_bucket.TerraformAwsS3BucketConfig{
-				Providers:  &provider,
-				Namespace:  infra.Js("dfn"),
-				Stage:      infra.Js("defn"),
-				Name:       infra.Js("global"),
-				Attributes: &[]*string{infra.Js(accounts[i])},
-
-				Acl:                         infra.Js("private"),
-				UserEnabled:                 infra.Jsfalse(),
-				VersioningEnabled:           infra.Jsfalse(),
-				LifecycleConfigurationRules: nil,
-			})
 	}
 
 	return stack
@@ -284,7 +285,7 @@ func init() {
 				})
 			}
 
-			GlobalStack(app, &site.Backend, site.Accounts)
+			GlobalStack(app, &site.Backend, site.Organization, site.Info)
 
 			app.Synth()
 		},

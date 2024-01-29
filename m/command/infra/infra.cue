@@ -11,6 +11,7 @@ package infra
 	profile: string | *name
 	prefix: string | *""
 	imported: string | *null
+	region: string
 }
 
 #AwsBackend: {
@@ -27,12 +28,22 @@ package infra
 	admins: [...#AwsAdmin]
 }
 
+#AwsAccountInfo: {
+	id: string
+}
+
+#AwsInfo: {
+	url: string
+	account: [string]: #AwsAccountInfo
+}
+
 #AwsProps: {
 	backend: #AwsBackend
 	organization: [N=string]: #AwsOrganization & {
 		name: N
 	}
 	accounts: [...string]
+	info: [string]: #AwsInfo
 }
 
 input: #AwsProps
