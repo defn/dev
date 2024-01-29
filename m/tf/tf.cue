@@ -15,19 +15,6 @@ env_accounts: ["net", "lib", "hub"]
 ops_accounts: ["ops"]
 
 input: {
-	meh: {
-		attributes: ["meh-bleh"]
-
-		enabled:   true
-		namespace: "dfn"
-		stage:     "defn"
-		name:      "global"
-
-		acl:                "private"
-		user_enabled:       false
-		versioning_enabled: false
-	}
-
 	backend: {
 		lock:    "dfn-defn-terraform-state-lock"
 		bucket:  "dfn-defn-terraform-state"
@@ -467,8 +454,20 @@ input: {
 	}
 
 	organization: {
-		THIS=[string]: accounts: [...{
-			region: string | *THIS.region
+		THIS=[ORG=string]: accounts: [...{
+			region:  string | *THIS.region
+			profile: string
+			cfg: {
+				enabled:   true
+				namespace: "dfn"
+				stage:     "defn"
+				name:      "global"
+				attributes: ["\(ORG)-\(profile)"]
+
+				acl:                "private"
+				user_enabled:       false
+				versioning_enabled: false
+			}
 		}]
 
 		defn: {
@@ -481,8 +480,8 @@ input: {
 		}
 
 		gyre: {
-			region: "us-east-2"
-			#types: ops_accounts
+			region:   "us-east-2"
+			#types:   ops_accounts
 			accounts: [{
 				name:    "gyre"
 				email:   "aws-gyre@defn.us"
@@ -496,8 +495,8 @@ input: {
 		}
 
 		curl: {
-			region: "us-west-2"
-			#types: env_accounts
+			region:   "us-west-2"
+			#types:   env_accounts
 			accounts: [{
 				name:    "curl"
 				email:   "aws-curl@defn.us"
@@ -511,8 +510,8 @@ input: {
 		}
 
 		coil: {
-			region: "us-east-1"
-			#types: env_accounts
+			region:   "us-east-1"
+			#types:   env_accounts
 			accounts: [{
 				name:    "coil"
 				email:   "aws-coil@defn.us"
@@ -526,8 +525,8 @@ input: {
 		}
 
 		helix: {
-			region: "us-east-2"
-			#types: full_accounts
+			region:   "us-east-2"
+			#types:   full_accounts
 			accounts: [{
 				name:    "helix"
 				email:   "aws-helix@defn.sh"
@@ -541,8 +540,8 @@ input: {
 		}
 
 		spiral: {
-			region: "us-west-2"
-			#types: full_accounts
+			region:   "us-west-2"
+			#types:   full_accounts
 			accounts: [{
 				name:    "spiral"
 				email:   "aws-spiral@defn.us"
