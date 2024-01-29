@@ -241,10 +241,10 @@ func GlobalStack(scope constructs.Construct, site *infra.AwsProps) cdktf.Terrafo
 					infra.Js(fmt.Sprintf("aws-global-%s-%s", org_name, acc.Profile)), &aws.AwsProviderConfig{
 						Alias:   infra.Js(fmt.Sprintf("%s-%s", org_name, acc.Profile)),
 						Profile: infra.Js(fmt.Sprintf("%s-sso", "defn-org")),
-						Region:  infra.Js(acc.Region), // need account specific region
+						Region:  infra.Js("us-east-1"),
 						AssumeRole: []interface{}{
 							aws.AwsProviderAssumeRole{
-								RoleArn: infra.Js(fmt.Sprintf("arn:aws:iam::%s:role/dfn-defn-terraform", site.Info[org_name].Account[acc.Profile].Id)), // need account specific role
+								RoleArn: infra.Js(fmt.Sprintf("arn:aws:iam::%s:role/dfn-defn-terraform", site.Info[org_name].Account[acc.Profile].Id)),
 							},
 						},
 					},

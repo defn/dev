@@ -19,7 +19,7 @@ terraform {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-org"
   assume_role {
     role_arn = "arn:aws:iam::730917619329:role/dfn-defn-terraform"
@@ -43,7 +43,7 @@ module "s3-chamber-org" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-1"
   assume_role {
     role_arn = "arn:aws:iam::741346472057:role/dfn-defn-terraform"
@@ -67,7 +67,7 @@ module "s3-chamber-1" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-2"
   assume_role {
     role_arn = "arn:aws:iam::447993872368:role/dfn-defn-terraform"
@@ -91,7 +91,7 @@ module "s3-chamber-2" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-3"
   assume_role {
     role_arn = "arn:aws:iam::463050069968:role/dfn-defn-terraform"
@@ -115,7 +115,7 @@ module "s3-chamber-3" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-4"
   assume_role {
     role_arn = "arn:aws:iam::368890376620:role/dfn-defn-terraform"
@@ -139,7 +139,7 @@ module "s3-chamber-4" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-5"
   assume_role {
     role_arn = "arn:aws:iam::200733412967:role/dfn-defn-terraform"
@@ -163,7 +163,7 @@ module "s3-chamber-5" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-6"
   assume_role {
     role_arn = "arn:aws:iam::493089153027:role/dfn-defn-terraform"
@@ -187,7 +187,7 @@ module "s3-chamber-6" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-7"
   assume_role {
     role_arn = "arn:aws:iam::837425503386:role/dfn-defn-terraform"
@@ -211,7 +211,7 @@ module "s3-chamber-7" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-8"
   assume_role {
     role_arn = "arn:aws:iam::773314335856:role/dfn-defn-terraform"
@@ -235,7 +235,7 @@ module "s3-chamber-8" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-9"
   assume_role {
     role_arn = "arn:aws:iam::950940975070:role/dfn-defn-terraform"
@@ -259,7 +259,7 @@ module "s3-chamber-9" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-a"
   assume_role {
     role_arn = "arn:aws:iam::503577294851:role/dfn-defn-terraform"
@@ -283,7 +283,7 @@ module "s3-chamber-a" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-b"
   assume_role {
     role_arn = "arn:aws:iam::310940910494:role/dfn-defn-terraform"
@@ -307,7 +307,7 @@ module "s3-chamber-b" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-c"
   assume_role {
     role_arn = "arn:aws:iam::047633732615:role/dfn-defn-terraform"
@@ -331,7 +331,7 @@ module "s3-chamber-c" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-d"
   assume_role {
     role_arn = "arn:aws:iam::699441347021:role/dfn-defn-terraform"
@@ -355,7 +355,7 @@ module "s3-chamber-d" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-e"
   assume_role {
     role_arn = "arn:aws:iam::171831323337:role/dfn-defn-terraform"
@@ -379,7 +379,7 @@ module "s3-chamber-e" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-f"
   assume_role {
     role_arn = "arn:aws:iam::842022523232:role/dfn-defn-terraform"
@@ -403,7 +403,7 @@ module "s3-chamber-f" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-g"
   assume_role {
     role_arn = "arn:aws:iam::023867963778:role/dfn-defn-terraform"
@@ -427,7 +427,7 @@ module "s3-chamber-g" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-h"
   assume_role {
     role_arn = "arn:aws:iam::371020107387:role/dfn-defn-terraform"
@@ -451,7 +451,7 @@ module "s3-chamber-h" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-i"
   assume_role {
     role_arn = "arn:aws:iam::290132238209:role/dfn-defn-terraform"
@@ -475,7 +475,7 @@ module "s3-chamber-i" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-j"
   assume_role {
     role_arn = "arn:aws:iam::738433022197:role/dfn-defn-terraform"
@@ -499,7 +499,7 @@ module "s3-chamber-j" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-l"
   assume_role {
     role_arn = "arn:aws:iam::991300382347:role/dfn-defn-terraform"
@@ -523,7 +523,7 @@ module "s3-chamber-l" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-m"
   assume_role {
     role_arn = "arn:aws:iam::684895750259:role/dfn-defn-terraform"
@@ -547,7 +547,7 @@ module "s3-chamber-m" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-n"
   assume_role {
     role_arn = "arn:aws:iam::705881812506:role/dfn-defn-terraform"
@@ -571,7 +571,7 @@ module "s3-chamber-n" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-o"
   assume_role {
     role_arn = "arn:aws:iam::307136835824:role/dfn-defn-terraform"
@@ -595,7 +595,7 @@ module "s3-chamber-o" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-p"
   assume_role {
     role_arn = "arn:aws:iam::706168331526:role/dfn-defn-terraform"
@@ -619,7 +619,7 @@ module "s3-chamber-p" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-q"
   assume_role {
     role_arn = "arn:aws:iam::217047480856:role/dfn-defn-terraform"
@@ -643,7 +643,7 @@ module "s3-chamber-q" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-r"
   assume_role {
     role_arn = "arn:aws:iam::416221726155:role/dfn-defn-terraform"
@@ -667,7 +667,7 @@ module "s3-chamber-r" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-s"
   assume_role {
     role_arn = "arn:aws:iam::840650118369:role/dfn-defn-terraform"
@@ -691,7 +691,7 @@ module "s3-chamber-s" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-t"
   assume_role {
     role_arn = "arn:aws:iam::490895200523:role/dfn-defn-terraform"
@@ -715,7 +715,7 @@ module "s3-chamber-t" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-u"
   assume_role {
     role_arn = "arn:aws:iam::467995590869:role/dfn-defn-terraform"
@@ -739,7 +739,7 @@ module "s3-chamber-u" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-v"
   assume_role {
     role_arn = "arn:aws:iam::979368042862:role/dfn-defn-terraform"
@@ -763,7 +763,7 @@ module "s3-chamber-v" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-w"
   assume_role {
     role_arn = "arn:aws:iam::313387692116:role/dfn-defn-terraform"
@@ -787,7 +787,7 @@ module "s3-chamber-w" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-x"
   assume_role {
     role_arn = "arn:aws:iam::834936839208:role/dfn-defn-terraform"
@@ -811,7 +811,7 @@ module "s3-chamber-x" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-y"
   assume_role {
     role_arn = "arn:aws:iam::153556747817:role/dfn-defn-terraform"
@@ -835,7 +835,7 @@ module "s3-chamber-y" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "chamber-z"
   assume_role {
     role_arn = "arn:aws:iam::037804009879:role/dfn-defn-terraform"
@@ -859,7 +859,7 @@ module "s3-chamber-z" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "circus-org"
   assume_role {
     role_arn = "arn:aws:iam::036139182623:role/dfn-defn-terraform"
@@ -883,7 +883,7 @@ module "s3-circus-org" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "circus-audit"
   assume_role {
     role_arn = "arn:aws:iam::707476523482:role/dfn-defn-terraform"
@@ -907,7 +907,7 @@ module "s3-circus-audit" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "circus-govcloud"
   assume_role {
     role_arn = "arn:aws:iam::497790518354:role/dfn-defn-terraform"
@@ -931,7 +931,7 @@ module "s3-circus-govcloud" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "circus-ops"
   assume_role {
     role_arn = "arn:aws:iam::415618116579:role/dfn-defn-terraform"
@@ -955,7 +955,7 @@ module "s3-circus-ops" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "circus-transit"
   assume_role {
     role_arn = "arn:aws:iam::002516226222:role/dfn-defn-terraform"
@@ -1075,7 +1075,7 @@ module "s3-coil-hub" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "curl-org"
   assume_role {
     role_arn = "arn:aws:iam::424535767618:role/dfn-defn-terraform"
@@ -1099,7 +1099,7 @@ module "s3-curl-org" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "curl-net"
   assume_role {
     role_arn = "arn:aws:iam::101142583332:role/dfn-defn-terraform"
@@ -1123,7 +1123,7 @@ module "s3-curl-net" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "curl-lib"
   assume_role {
     role_arn = "arn:aws:iam::298406631539:role/dfn-defn-terraform"
@@ -1147,7 +1147,7 @@ module "s3-curl-lib" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "curl-hub"
   assume_role {
     role_arn = "arn:aws:iam::804430872255:role/dfn-defn-terraform"
@@ -1171,7 +1171,7 @@ module "s3-curl-hub" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "defn-org"
   assume_role {
     role_arn = "arn:aws:iam::510430971399:role/dfn-defn-terraform"
@@ -1195,7 +1195,7 @@ module "s3-defn-org" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "fogg-org"
   assume_role {
     role_arn = "arn:aws:iam::328216504962:role/dfn-defn-terraform"
@@ -1219,7 +1219,7 @@ module "s3-fogg-org" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "fogg-gateway"
   assume_role {
     role_arn = "arn:aws:iam::318746665903:role/dfn-defn-terraform"
@@ -1243,7 +1243,7 @@ module "s3-fogg-gateway" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "fogg-security"
   assume_role {
     role_arn = "arn:aws:iam::372333168887:role/dfn-defn-terraform"
@@ -1267,7 +1267,7 @@ module "s3-fogg-security" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "fogg-hub"
   assume_role {
     role_arn = "arn:aws:iam::337248635000:role/dfn-defn-terraform"
@@ -1291,7 +1291,7 @@ module "s3-fogg-hub" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "fogg-postx"
   assume_role {
     role_arn = "arn:aws:iam::565963418226:role/dfn-defn-terraform"
@@ -1315,7 +1315,7 @@ module "s3-fogg-postx" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "fogg-asset"
   assume_role {
     role_arn = "arn:aws:iam::060659916753:role/dfn-defn-terraform"
@@ -1339,7 +1339,7 @@ module "s3-fogg-asset" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "fogg-data"
   assume_role {
     role_arn = "arn:aws:iam::624713464251:role/dfn-defn-terraform"
@@ -1363,7 +1363,7 @@ module "s3-fogg-data" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "fogg-sandbox"
   assume_role {
     role_arn = "arn:aws:iam::442766271046:role/dfn-defn-terraform"
@@ -1387,7 +1387,7 @@ module "s3-fogg-sandbox" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "fogg-circus"
   assume_role {
     role_arn = "arn:aws:iam::844609041254:role/dfn-defn-terraform"
@@ -1411,7 +1411,7 @@ module "s3-fogg-circus" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "fogg-home"
   assume_role {
     role_arn = "arn:aws:iam::812459563189:role/dfn-defn-terraform"
@@ -1435,7 +1435,7 @@ module "s3-fogg-home" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "gyre-org"
   assume_role {
     role_arn = "arn:aws:iam::065163301604:role/dfn-defn-terraform"
@@ -1459,7 +1459,7 @@ module "s3-gyre-org" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "gyre-ops"
   assume_role {
     role_arn = "arn:aws:iam::319951235442:role/dfn-defn-terraform"
@@ -1483,7 +1483,7 @@ module "s3-gyre-ops" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "helix-org"
   assume_role {
     role_arn = "arn:aws:iam::816178966829:role/dfn-defn-terraform"
@@ -1507,7 +1507,7 @@ module "s3-helix-org" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "helix-ops"
   assume_role {
     role_arn = "arn:aws:iam::368812692254:role/dfn-defn-terraform"
@@ -1531,7 +1531,7 @@ module "s3-helix-ops" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "helix-sec"
   assume_role {
     role_arn = "arn:aws:iam::018520313738:role/dfn-defn-terraform"
@@ -1555,7 +1555,7 @@ module "s3-helix-sec" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "helix-net"
   assume_role {
     role_arn = "arn:aws:iam::504722108514:role/dfn-defn-terraform"
@@ -1579,7 +1579,7 @@ module "s3-helix-net" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "helix-log"
   assume_role {
     role_arn = "arn:aws:iam::664427926343:role/dfn-defn-terraform"
@@ -1603,7 +1603,7 @@ module "s3-helix-log" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "helix-lib"
   assume_role {
     role_arn = "arn:aws:iam::377857698578:role/dfn-defn-terraform"
@@ -1627,7 +1627,7 @@ module "s3-helix-lib" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "helix-pub"
   assume_role {
     role_arn = "arn:aws:iam::536806623881:role/dfn-defn-terraform"
@@ -1651,7 +1651,7 @@ module "s3-helix-pub" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "helix-dmz"
   assume_role {
     role_arn = "arn:aws:iam::724643698007:role/dfn-defn-terraform"
@@ -1675,7 +1675,7 @@ module "s3-helix-dmz" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "helix-hub"
   assume_role {
     role_arn = "arn:aws:iam::436043820387:role/dfn-defn-terraform"
@@ -1699,7 +1699,7 @@ module "s3-helix-hub" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "helix-dev"
   assume_role {
     role_arn = "arn:aws:iam::843784871878:role/dfn-defn-terraform"
@@ -1723,7 +1723,7 @@ module "s3-helix-dev" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "imma-org"
   assume_role {
     role_arn = "arn:aws:iam::548373030883:role/dfn-defn-terraform"
@@ -1747,7 +1747,7 @@ module "s3-imma-org" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "imma-prod"
   assume_role {
     role_arn = "arn:aws:iam::766142996227:role/dfn-defn-terraform"
@@ -1771,7 +1771,7 @@ module "s3-imma-prod" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "imma-dev"
   assume_role {
     role_arn = "arn:aws:iam::445584037541:role/dfn-defn-terraform"
@@ -1795,7 +1795,7 @@ module "s3-imma-dev" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "imma-tolan"
   assume_role {
     role_arn = "arn:aws:iam::516851121506:role/dfn-defn-terraform"
@@ -1819,7 +1819,7 @@ module "s3-imma-tolan" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "imma-dgwyn"
   assume_role {
     role_arn = "arn:aws:iam::289716781198:role/dfn-defn-terraform"
@@ -1843,7 +1843,7 @@ module "s3-imma-dgwyn" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "imma-defn"
   assume_role {
     role_arn = "arn:aws:iam::246197522468:role/dfn-defn-terraform"
@@ -1867,7 +1867,7 @@ module "s3-imma-defn" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "immanent-org"
   assume_role {
     role_arn = "arn:aws:iam::545070380609:role/dfn-defn-terraform"
@@ -1891,7 +1891,7 @@ module "s3-immanent-org" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "immanent-patterner"
   assume_role {
     role_arn = "arn:aws:iam::143220204648:role/dfn-defn-terraform"
@@ -1915,7 +1915,7 @@ module "s3-immanent-patterner" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "immanent-windkey"
   assume_role {
     role_arn = "arn:aws:iam::095764861781:role/dfn-defn-terraform"
@@ -1939,7 +1939,7 @@ module "s3-immanent-windkey" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "immanent-summoner"
   assume_role {
     role_arn = "arn:aws:iam::397411277587:role/dfn-defn-terraform"
@@ -1963,7 +1963,7 @@ module "s3-immanent-summoner" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "immanent-herbal"
   assume_role {
     role_arn = "arn:aws:iam::165452499696:role/dfn-defn-terraform"
@@ -1987,7 +1987,7 @@ module "s3-immanent-herbal" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "immanent-namer"
   assume_role {
     role_arn = "arn:aws:iam::856549015893:role/dfn-defn-terraform"
@@ -2011,7 +2011,7 @@ module "s3-immanent-namer" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "immanent-ged"
   assume_role {
     role_arn = "arn:aws:iam::640792184178:role/dfn-defn-terraform"
@@ -2035,7 +2035,7 @@ module "s3-immanent-ged" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "immanent-roke"
   assume_role {
     role_arn = "arn:aws:iam::892560628624:role/dfn-defn-terraform"
@@ -2059,7 +2059,7 @@ module "s3-immanent-roke" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "immanent-chanter"
   assume_role {
     role_arn = "arn:aws:iam::071244154667:role/dfn-defn-terraform"
@@ -2083,7 +2083,7 @@ module "s3-immanent-chanter" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "immanent-changer"
   assume_role {
     role_arn = "arn:aws:iam::003884504807:role/dfn-defn-terraform"
@@ -2107,7 +2107,7 @@ module "s3-immanent-changer" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "immanent-hand"
   assume_role {
     role_arn = "arn:aws:iam::826250190242:role/dfn-defn-terraform"
@@ -2131,7 +2131,7 @@ module "s3-immanent-hand" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "immanent-doorkeeper"
   assume_role {
     role_arn = "arn:aws:iam::013267321144:role/dfn-defn-terraform"
@@ -2155,7 +2155,7 @@ module "s3-immanent-doorkeeper" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "jianghu-org"
   assume_role {
     role_arn = "arn:aws:iam::657613322961:role/dfn-defn-terraform"
@@ -2179,7 +2179,7 @@ module "s3-jianghu-org" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "jianghu-tahoe"
   assume_role {
     role_arn = "arn:aws:iam::025636091251:role/dfn-defn-terraform"
@@ -2203,7 +2203,7 @@ module "s3-jianghu-tahoe" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "jianghu-klamath"
   assume_role {
     role_arn = "arn:aws:iam::298431841138:role/dfn-defn-terraform"
@@ -2227,7 +2227,7 @@ module "s3-jianghu-klamath" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "spiral-org"
   assume_role {
     role_arn = "arn:aws:iam::232091571197:role/dfn-defn-terraform"
@@ -2251,7 +2251,7 @@ module "s3-spiral-org" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "spiral-ops"
   assume_role {
     role_arn = "arn:aws:iam::601164058091:role/dfn-defn-terraform"
@@ -2275,7 +2275,7 @@ module "s3-spiral-ops" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "spiral-sec"
   assume_role {
     role_arn = "arn:aws:iam::398258703387:role/dfn-defn-terraform"
@@ -2299,7 +2299,7 @@ module "s3-spiral-sec" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "spiral-net"
   assume_role {
     role_arn = "arn:aws:iam::057533398557:role/dfn-defn-terraform"
@@ -2323,7 +2323,7 @@ module "s3-spiral-net" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "spiral-log"
   assume_role {
     role_arn = "arn:aws:iam::442333715734:role/dfn-defn-terraform"
@@ -2347,7 +2347,7 @@ module "s3-spiral-log" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "spiral-lib"
   assume_role {
     role_arn = "arn:aws:iam::073874947996:role/dfn-defn-terraform"
@@ -2371,7 +2371,7 @@ module "s3-spiral-lib" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "spiral-pub"
   assume_role {
     role_arn = "arn:aws:iam::371657257885:role/dfn-defn-terraform"
@@ -2395,7 +2395,7 @@ module "s3-spiral-pub" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "spiral-dmz"
   assume_role {
     role_arn = "arn:aws:iam::130046154300:role/dfn-defn-terraform"
@@ -2419,7 +2419,7 @@ module "s3-spiral-dmz" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "spiral-hub"
   assume_role {
     role_arn = "arn:aws:iam::216704421225:role/dfn-defn-terraform"
@@ -2443,7 +2443,7 @@ module "s3-spiral-hub" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "spiral-dev"
   assume_role {
     role_arn = "arn:aws:iam::308726031860:role/dfn-defn-terraform"
@@ -2467,7 +2467,7 @@ module "s3-spiral-dev" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "vault-org"
   assume_role {
     role_arn = "arn:aws:iam::475528707847:role/dfn-defn-terraform"
@@ -2491,7 +2491,7 @@ module "s3-vault-org" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "vault-transit"
   assume_role {
     role_arn = "arn:aws:iam::915207860232:role/dfn-defn-terraform"
@@ -2515,7 +2515,7 @@ module "s3-vault-transit" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "vault-audit"
   assume_role {
     role_arn = "arn:aws:iam::749185891195:role/dfn-defn-terraform"
@@ -2539,7 +2539,7 @@ module "s3-vault-audit" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "vault-vault0"
   assume_role {
     role_arn = "arn:aws:iam::313228123503:role/dfn-defn-terraform"
@@ -2563,7 +2563,7 @@ module "s3-vault-vault0" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "vault-vault1"
   assume_role {
     role_arn = "arn:aws:iam::040769490632:role/dfn-defn-terraform"
@@ -2587,7 +2587,7 @@ module "s3-vault-vault1" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "vault-ops"
   assume_role {
     role_arn = "arn:aws:iam::188066400611:role/dfn-defn-terraform"
@@ -2611,7 +2611,7 @@ module "s3-vault-ops" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "vault-library"
   assume_role {
     role_arn = "arn:aws:iam::066356637485:role/dfn-defn-terraform"
@@ -2635,7 +2635,7 @@ module "s3-vault-library" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "vault-hub"
   assume_role {
     role_arn = "arn:aws:iam::539099112425:role/dfn-defn-terraform"
@@ -2659,7 +2659,7 @@ module "s3-vault-hub" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "vault-pub"
   assume_role {
     role_arn = "arn:aws:iam::851162413429:role/dfn-defn-terraform"
@@ -2683,7 +2683,7 @@ module "s3-vault-pub" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-east-2"
+  region  = "us-east-1"
   alias   = "vault-dev"
   assume_role {
     role_arn = "arn:aws:iam::497393606242:role/dfn-defn-terraform"
@@ -2707,7 +2707,7 @@ module "s3-vault-dev" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "whoa-org"
   assume_role {
     role_arn = "arn:aws:iam::389772512117:role/dfn-defn-terraform"
@@ -2731,7 +2731,7 @@ module "s3-whoa-org" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "whoa-prod"
   assume_role {
     role_arn = "arn:aws:iam::204827926367:role/dfn-defn-terraform"
@@ -2755,7 +2755,7 @@ module "s3-whoa-prod" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "whoa-secrets"
   assume_role {
     role_arn = "arn:aws:iam::464075062390:role/dfn-defn-terraform"
@@ -2779,7 +2779,7 @@ module "s3-whoa-secrets" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "whoa-dev"
   assume_role {
     role_arn = "arn:aws:iam::439761234835:role/dfn-defn-terraform"
@@ -2803,7 +2803,7 @@ module "s3-whoa-dev" {
 
 provider "aws" {
   profile = "defn-org-sso"
-  region  = "us-west-2"
+  region  = "us-east-1"
   alias   = "whoa-hub"
   assume_role {
     role_arn = "arn:aws:iam::462478722501:role/dfn-defn-terraform"
