@@ -211,6 +211,22 @@ func AwsAccountStack(scope constructs.Construct, site *infra.AwsProps, org *infr
 	return stack
 }
 
+func ToTerraformAwsS3BucketConfig(org *infra.AwsOrganization, acc *infra.AwsAccount, provider *aws.AwsProvider, cfg *infra.MehTerraformAwsS3BucketConfig) *terraform_aws_s3_bucket.TerraformAwsS3BucketConfig {
+	return &terraform_aws_s3_bucket.TerraformAwsS3BucketConfig{
+		Providers:  &[]interface{}{*provider},
+		Attributes: &[]*string{infra.Js(fmt.Sprintf("%s-%s", org.Name, acc.Profile))},
+
+		Enabled:   cfg.Enabled,
+		Namespace: cfg.Namespace,
+		Stage:     cfg.Stage,
+		Name:      cfg.Name,
+
+		Acl:               cfg.Acl,
+		UserEnabled:       cfg.UserEnabled,
+		VersioningEnabled: cfg.VersioningEnabled,
+	}
+}
+
 func GlobalStack(scope constructs.Construct, site *infra.AwsProps) cdktf.TerraformStack {
 	stack := cdktf.NewTerraformStack(scope, infra.Js("global"))
 
@@ -245,20 +261,8 @@ func GlobalStack(scope constructs.Construct, site *infra.AwsProps) cdktf.Terrafo
 				},
 			)
 
-			terraform_aws_s3_bucket.NewTerraformAwsS3Bucket(stack,
-				infra.Js(fmt.Sprintf("s3-%s-%s", org_name, acc.Profile)), &terraform_aws_s3_bucket.TerraformAwsS3BucketConfig{
-					Providers:  &[]interface{}{provider},
-					Attributes: &[]*string{infra.Js(fmt.Sprintf("%s-%s", org_name, acc.Profile))},
-
-					Enabled:   site.Meh.Enabled,
-					Namespace: site.Meh.Namespace,
-					Stage:     site.Meh.Stage,
-					Name:      site.Meh.Name,
-
-					Acl:               site.Meh.Acl,
-					UserEnabled:       site.Meh.UserEnabled,
-					VersioningEnabled: site.Meh.VersioningEnabled,
-				})
+			terraform_aws_s3_bucket.NewTerraformAwsS3Bucket(stack, infra.Js(fmt.Sprintf("s3-%s-%s", org_name, acc.Profile)),
+				ToTerraformAwsS3BucketConfig(&org, &acc, &provider, &site.Meh))
 		}
 	}
 
