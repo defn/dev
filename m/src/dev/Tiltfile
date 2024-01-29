@@ -6,5 +6,5 @@ main(
     app_entrypoint="/cli",
     app_release="gen/cli.bin",
     app_build="../../bazel-bin/src/dev/dev_/dev",
-    host="src--dev"
+    host="src--dev",
 )

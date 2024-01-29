@@ -1,31 +1,31 @@
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Principal": {
-				"Federated": "arn:aws:iam::${ACCOUNT_ID}:oidc-provider/${OPENID}"
-			},
-			"Action": "sts:AssumeRoleWithWebIdentity",
-			"Condition": {
-				"StringEquals": {
-					"${OPENID}:aud": "sts.amazonaws.com",
-					"${OPENID}:sub": "system:serviceaccount:external-secrets:external-secrets"
-				}
-			}
-		},
-		{
-			"Effect": "Allow",
-			"Principal": {
-				"Federated": "arn:aws:iam::${ACCOUNT_ID}:oidc-provider/${OPENID}"
-			},
-			"Action": "sts:AssumeRoleWithWebIdentity",
-			"Condition": {
-				"StringEquals": {
-					"${OPENID}:aud": "sts.amazonaws.com",
-					"${OPENID}:sub": "system:serviceaccount:karpenter:karpenter"
-				}
-			}
-		}
-	]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::${ACCOUNT_ID}:oidc-provider/${OPENID}"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "${OPENID}:aud": "sts.amazonaws.com",
+          "${OPENID}:sub": "system:serviceaccount:external-secrets:external-secrets"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::${ACCOUNT_ID}:oidc-provider/${OPENID}"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "${OPENID}:aud": "sts.amazonaws.com",
+          "${OPENID}:sub": "system:serviceaccount:karpenter:karpenter"
+        }
+      }
+    }
+  ]
 }

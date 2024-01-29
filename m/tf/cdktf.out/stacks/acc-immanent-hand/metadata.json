@@ -5,8 +5,7 @@
       "stackName": "acc-immanent-hand",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "immanent-hand": {

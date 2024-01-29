@@ -188,4 +188,3 @@ func validateNewTerraformAwsEksClusterParameters(scope constructs.Construct, id 
 
 	return nil
 }
-

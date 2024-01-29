@@ -5,8 +5,7 @@
       "stackName": "acc-helix-sec",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "helix-sec": {

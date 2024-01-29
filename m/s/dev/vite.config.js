@@ -1,5 +1,5 @@
-import svgLoader from 'vite-svg-loader'
+import svgLoader from "vite-svg-loader";
 
 export default {
   plugins: [svgLoader()],
-}
+};

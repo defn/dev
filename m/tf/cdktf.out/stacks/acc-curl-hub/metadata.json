@@ -5,8 +5,7 @@
       "stackName": "acc-curl-hub",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "curl-hub": {

@@ -5,8 +5,7 @@
       "stackName": "acc-coil-net",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "coil-net": {

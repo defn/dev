@@ -3,7 +3,7 @@
 load("ext://restart_process", "custom_build_with_restart")
 
 # local k8s
-allow_k8s_contexts('coder-amanibhavam-district0-cluster')
+allow_k8s_contexts("coder-amanibhavam-district0-cluster")
 
 # local registry
 default_registry("coder-amanibhavam-district.tail3884f.ts.net:5000")
@@ -21,11 +21,7 @@ local_resource(
 )
 
 # hook initial deploy
-k8s_yaml(
-    local(
-        'bash -c "cat deploy.yaml"'
-    )
-)
+k8s_yaml(local('bash -c "cat deploy.yaml"'))
 
 # hook build
 local_resource(name="hook-build", cmd="true", deps=["./hooks"])

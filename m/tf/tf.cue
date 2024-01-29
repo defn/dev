@@ -482,8 +482,8 @@ input: {
 		}
 
 		gyre: {
-			region: "us-east-2"
-			#types: ops_accounts
+			region:   "us-east-2"
+			#types:   ops_accounts
 			accounts: [{
 				name:    "gyre"
 				email:   "aws-gyre@defn.us"
@@ -497,8 +497,8 @@ input: {
 		}
 
 		curl: {
-			region: "us-west-2"
-			#types: env_accounts
+			region:   "us-west-2"
+			#types:   env_accounts
 			accounts: [{
 				name:    "curl"
 				email:   "aws-curl@defn.us"
@@ -512,8 +512,8 @@ input: {
 		}
 
 		coil: {
-			region: "us-east-1"
-			#types: env_accounts
+			region:   "us-east-1"
+			#types:   env_accounts
 			accounts: [{
 				name:    "coil"
 				email:   "aws-coil@defn.us"
@@ -527,8 +527,8 @@ input: {
 		}
 
 		helix: {
-			region: "us-east-2"
-			#types: full_accounts
+			region:   "us-east-2"
+			#types:   full_accounts
 			accounts: [{
 				name:    "helix"
 				email:   "aws-helix@defn.sh"
@@ -542,8 +542,8 @@ input: {
 		}
 
 		spiral: {
-			region: "us-west-2"
-			#types: full_accounts
+			region:   "us-west-2"
+			#types:   full_accounts
 			accounts: [{
 				name:    "spiral"
 				email:   "aws-spiral@defn.us"

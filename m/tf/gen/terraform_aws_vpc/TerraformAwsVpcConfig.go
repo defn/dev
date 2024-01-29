@@ -186,4 +186,3 @@ type TerraformAwsVpcConfig struct {
 	// A customer identifier, indicating who this instance of a resource is for.
 	Tenant *string `field:"optional" json:"tenant" yaml:"tenant"`
 }
-

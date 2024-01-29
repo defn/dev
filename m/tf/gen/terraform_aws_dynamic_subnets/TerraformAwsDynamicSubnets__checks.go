@@ -148,4 +148,3 @@ func validateNewTerraformAwsDynamicSubnetsParameters(scope constructs.Construct,
 
 	return nil
 }
-

@@ -291,4 +291,3 @@ type TerraformAwsEksWorkersConfig struct {
 	// If empty, a new security group will be created.
 	WorkersSecurityGroupId *string `field:"optional" json:"workersSecurityGroupId" yaml:"workersSecurityGroupId"`
 }
-

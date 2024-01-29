@@ -67,4 +67,3 @@ func (j *jsiiProxy_TerraformAwsVpc) validateSetIpv6PrimaryCidrBlockAssociationPa
 func validateNewTerraformAwsVpcParameters(scope constructs.Construct, id *string, config *TerraformAwsVpcConfig) error {
 	return nil
 }
-

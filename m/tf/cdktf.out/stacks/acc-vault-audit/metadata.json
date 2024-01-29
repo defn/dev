@@ -5,8 +5,7 @@
       "stackName": "acc-vault-audit",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "vault-audit": {

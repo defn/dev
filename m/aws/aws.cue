@@ -11,7 +11,7 @@ org: {
 		account: [ACCOUNT=string]: {
 			org:      ORG
 			account:  ACCOUNT
-			id:       string 
+			id:       string
 			email:    string
 			sso_role: string | *"Administrator"
 		}

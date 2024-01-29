@@ -5,8 +5,7 @@
       "stackName": "acc-coil-hub",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "coil-hub": {

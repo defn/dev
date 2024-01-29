@@ -5,8 +5,7 @@
       "stackName": "org-curl",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "data": {
     "aws_ssoadmin_instances": {

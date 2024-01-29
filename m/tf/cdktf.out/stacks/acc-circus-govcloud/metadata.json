@@ -5,8 +5,7 @@
       "stackName": "acc-circus-govcloud",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "circus-govcloud": {

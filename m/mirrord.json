@@ -1,16 +1,15 @@
 {
-    "feature": {
-      "env": true,
-      "fs": {
-        "mode": "read",
-        "read_write": [],
-        "read_only": ["^/etc/."],
-        "local": [],
-        "not_found": []
-      },
-      "network": true
+  "feature": {
+    "env": true,
+    "fs": {
+      "mode": "read",
+      "read_write": [],
+      "read_only": ["^/etc/."],
+      "local": [],
+      "not_found": []
     },
-    "operator": false,
-    "telemetry": false
-  }
-  
+    "network": true
+  },
+  "operator": false,
+  "telemetry": false
+}

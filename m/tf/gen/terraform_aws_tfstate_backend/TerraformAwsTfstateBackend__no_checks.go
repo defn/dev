@@ -47,4 +47,3 @@ func (j *jsiiProxy_TerraformAwsTfstateBackend) validateSetLoggingParameters(val 
 func validateNewTerraformAwsTfstateBackendParameters(scope constructs.Construct, id *string, config *TerraformAwsTfstateBackendConfig) error {
 	return nil
 }
-

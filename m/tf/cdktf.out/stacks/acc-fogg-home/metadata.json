@@ -5,8 +5,7 @@
       "stackName": "acc-fogg-home",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "fogg-home": {

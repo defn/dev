@@ -5,8 +5,7 @@
       "stackName": "acc-helix-log",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "helix-log": {

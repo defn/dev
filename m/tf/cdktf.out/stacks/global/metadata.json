@@ -5,8 +5,7 @@
       "stackName": "global",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "s3-chamber-1": {

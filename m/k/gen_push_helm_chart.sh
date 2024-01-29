@@ -16,7 +16,7 @@ function main {
 		local version
 		local bumped_version
 		version="$(helm show chart --insecure-skip-tls-verify "oci://${registry}/${name}" 2>/dev/null | grep ^version: | awk '{print $2}' || true)"
-		if [[ -z "${version}" ]]; then
+		if [[ -z ${version} ]]; then
 			version="0.0.0"
 		fi
 		bumped_version="${version%.*}.$((${version##*.} + 1))"

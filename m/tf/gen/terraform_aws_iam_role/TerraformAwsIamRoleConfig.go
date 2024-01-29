@@ -163,4 +163,3 @@ type TerraformAwsIamRoleConfig struct {
 	// true.
 	UseFullname *bool `field:"optional" json:"useFullname" yaml:"useFullname"`
 }
-

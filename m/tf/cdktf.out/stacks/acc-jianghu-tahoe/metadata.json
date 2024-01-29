@@ -5,8 +5,7 @@
       "stackName": "acc-jianghu-tahoe",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "jianghu-tahoe": {
