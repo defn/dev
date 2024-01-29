@@ -18,12 +18,13 @@ type AwsAdmin struct {
 }
 
 type AwsAccount struct {
-	Name     string `json:"name"`
-	Email    string `json:"email"`
-	Profile  string `json:"profile"`
-	Prefix   string `json:"prefix"`
-	Imported string `json:"imported"`
-	Region   string `json:"region"`
+	Name     string                        `json:"name"`
+	Email    string                        `json:"email"`
+	Profile  string                        `json:"profile"`
+	Prefix   string                        `json:"prefix"`
+	Imported string                        `json:"imported"`
+	Region   string                        `json:"region"`
+	Cfg      CfgTerraformAwsS3BucketConfig `json:"cfg"`
 }
 
 type AwsBackend struct {
@@ -49,7 +50,7 @@ type AwsInfo struct {
 	Account map[string]AwsAccountInfo `json:"account"`
 }
 
-type MehTerraformAwsS3BucketConfig struct {
+type CfgTerraformAwsS3BucketConfig struct {
 	Enabled           *bool      `json:"enabled"`
 	Namespace         *string    `json:"namespace"`
 	Stage             *string    `json:"stage"`
@@ -61,11 +62,10 @@ type MehTerraformAwsS3BucketConfig struct {
 }
 
 type AwsProps struct {
-	Backend      AwsBackend                    `json:"backend"`
-	Organization map[string]AwsOrganization    `json:"organization"`
-	Accounts     []string                      `json:"accounts"`
-	Info         map[string]AwsInfo            `json:"info"`
-	Meh          MehTerraformAwsS3BucketConfig `json:"meh"`
+	Backend      AwsBackend                 `json:"backend"`
+	Organization map[string]AwsOrganization `json:"organization"`
+	Accounts     []string                   `json:"accounts"`
+	Info         map[string]AwsInfo         `json:"info"`
 }
 
 // alias

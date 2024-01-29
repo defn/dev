@@ -12,6 +12,7 @@ package infra
 	prefix:   string | *""
 	imported: string | *null
 	region:   string
+	cfg:      #CfgTerraformAwsS3BucketConfig
 }
 
 #AwsBackend: {
@@ -44,12 +45,10 @@ package infra
 	}
 	accounts: [...string]
 	info: [string]: #AwsInfo
-
-	meh?: #TerraformAwsS3BucketConfig
 }
 
-#TerraformAwsS3BucketConfig: {
-	enabled:    bool
+#CfgTerraformAwsS3BucketConfig: {
+	enabled:   bool
 	namespace: string
 	stage:     string
 	name:      string
