@@ -6,18 +6,18 @@ package infra
 }
 
 #AwsAccount: {
-	name: string
-	email: string
-	profile: string | *name
-	prefix: string | *""
+	name:     string
+	email:    string
+	profile:  string | *name
+	prefix:   string | *""
 	imported: string | *null
-	region: string
+	region:   string
 }
 
 #AwsBackend: {
-	lock: string
-	bucket: string
-	region: string
+	lock:    string
+	bucket:  string
+	region:  string
 	profile: string
 }
 
@@ -45,11 +45,19 @@ package infra
 	accounts: [...string]
 	info: [string]: #AwsInfo
 
-	meh?: #Meh
+	meh?: #TerraformAwsS3BucketConfig
 }
 
-#Meh: {
-	name: string
+#TerraformAwsS3BucketConfig: {
+	enabled:    bool
+	namespace: string
+	stage:     string
+	name:      string
+	attributes: [...string]
+
+	acl:                string
+	user_enabled:       bool
+	versioning_enabled: bool
 }
 
 input: #AwsProps

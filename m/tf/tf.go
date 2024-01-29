@@ -248,16 +248,16 @@ func GlobalStack(scope constructs.Construct, site *infra.AwsProps) cdktf.Terrafo
 			terraform_aws_s3_bucket.NewTerraformAwsS3Bucket(stack,
 				infra.Js(fmt.Sprintf("s3-%s-%s", org_name, acc.Profile)), &terraform_aws_s3_bucket.TerraformAwsS3BucketConfig{
 					Providers:  &[]interface{}{provider},
-					Enabled:    infra.Jstrue(),
-					Namespace:  infra.Js("dfn"),
-					Stage:      infra.Js("defn"),
-					Name:       infra.Js("global"),
 					Attributes: &[]*string{infra.Js(fmt.Sprintf("%s-%s", org_name, acc.Profile))},
 
-					Acl:                         infra.Js("private"),
-					UserEnabled:                 infra.Jsfalse(),
-					VersioningEnabled:           infra.Jsfalse(),
-					LifecycleConfigurationRules: nil,
+					Enabled:   site.Meh.Enabled,
+					Namespace: site.Meh.Namespace,
+					Stage:     site.Meh.Stage,
+					Name:      site.Meh.Name,
+
+					Acl:               site.Meh.Acl,
+					UserEnabled:       site.Meh.UserEnabled,
+					VersioningEnabled: site.Meh.VersioningEnabled,
 				})
 		}
 	}
