@@ -34,8 +34,7 @@ func AwsOrganizationStack(scope constructs.Construct, site *infra.AwsProps, org 
 	stack := cdktf.NewTerraformStack(scope, infra.Js(fmt.Sprintf("org-%s", org.Name)))
 
 	cdktf.NewS3Backend(stack, &cdktf.S3BackendConfig{
-		// Key:           infra.Js(fmt.Sprintf("stacks/org-%s/terraform.tfstate", org.Name)),
-		Key:           infra.Js(fmt.Sprintf("stacks/%s/terraform.tfstate", org.Name)),
+		Key:           infra.Js(fmt.Sprintf("stacks/org-%s/terraform.tfstate", org.Name)),
 		Encrypt:       infra.Jstrue(),
 		Bucket:        &site.Backend.Bucket,
 		Region:        &site.Backend.Region,
@@ -218,8 +217,7 @@ func GlobalStack(scope constructs.Construct, site *infra.AwsProps) cdktf.Terrafo
 	stack := cdktf.NewTerraformStack(scope, infra.Js("global"))
 
 	cdktf.NewS3Backend(stack, &cdktf.S3BackendConfig{
-		//Key:           infra.Js("stacks/global/terraform.tfstate"),
-		Key:           infra.Js("defn-org/global/terraform.tfstate"),
+		Key:           infra.Js("stacks/global/terraform.tfstate"),
 		Encrypt:       infra.Jstrue(),
 		Bucket:        &site.Backend.Bucket,
 		Region:        &site.Backend.Region,
