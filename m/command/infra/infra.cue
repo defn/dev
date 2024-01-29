@@ -44,6 +44,12 @@ package infra
 	}
 	accounts: [...string]
 	info: [string]: #AwsInfo
+
+	meh?: #Meh
+}
+
+#Meh: {
+	name: string
 }
 
 input: #AwsProps
