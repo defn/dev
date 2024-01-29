@@ -51,6 +51,7 @@ type AwsInfo struct {
 }
 
 type CfgTerraformAwsS3BucketConfig struct {
+	Id                *string    `json:"id"`
 	Enabled           *bool      `json:"enabled"`
 	Namespace         *string    `json:"namespace"`
 	Stage             *string    `json:"stage"`

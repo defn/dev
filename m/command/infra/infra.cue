@@ -48,6 +48,8 @@ package infra
 }
 
 #CfgTerraformAwsS3BucketConfig: {
+	id: string
+
 	enabled:   bool
 	namespace: string
 	stage:     string

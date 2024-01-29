@@ -261,8 +261,7 @@ func GlobalStack(scope constructs.Construct, site *infra.AwsProps) cdktf.Terrafo
 				},
 			)
 
-			terraform_aws_s3_bucket.NewTerraformAwsS3Bucket(stack, infra.Js(fmt.Sprintf("s3-%s-%s", org_name, acc.Profile)),
-				ToTerraformAwsS3BucketConfig(&org, &acc, &provider))
+			terraform_aws_s3_bucket.NewTerraformAwsS3Bucket(stack, acc.Cfg.Id, ToTerraformAwsS3BucketConfig(&org, &acc, &provider))
 		}
 	}
 
