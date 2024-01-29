@@ -30,6 +30,7 @@ module "s3-chamber-org" {
   attributes = [
     "chamber-org",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -54,6 +55,7 @@ module "s3-chamber-1" {
   attributes = [
     "chamber-1",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -78,6 +80,7 @@ module "s3-chamber-2" {
   attributes = [
     "chamber-2",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -102,6 +105,7 @@ module "s3-chamber-3" {
   attributes = [
     "chamber-3",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -126,6 +130,7 @@ module "s3-chamber-4" {
   attributes = [
     "chamber-4",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -150,6 +155,7 @@ module "s3-chamber-5" {
   attributes = [
     "chamber-5",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -174,6 +180,7 @@ module "s3-chamber-6" {
   attributes = [
     "chamber-6",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -198,6 +205,7 @@ module "s3-chamber-7" {
   attributes = [
     "chamber-7",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -222,6 +230,7 @@ module "s3-chamber-8" {
   attributes = [
     "chamber-8",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -246,6 +255,7 @@ module "s3-chamber-9" {
   attributes = [
     "chamber-9",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -270,6 +280,7 @@ module "s3-chamber-a" {
   attributes = [
     "chamber-a",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -294,6 +305,7 @@ module "s3-chamber-b" {
   attributes = [
     "chamber-b",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -318,6 +330,7 @@ module "s3-chamber-c" {
   attributes = [
     "chamber-c",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -342,6 +355,7 @@ module "s3-chamber-d" {
   attributes = [
     "chamber-d",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -366,6 +380,7 @@ module "s3-chamber-e" {
   attributes = [
     "chamber-e",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -390,6 +405,7 @@ module "s3-chamber-f" {
   attributes = [
     "chamber-f",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -414,6 +430,7 @@ module "s3-chamber-g" {
   attributes = [
     "chamber-g",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -438,6 +455,7 @@ module "s3-chamber-h" {
   attributes = [
     "chamber-h",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -462,6 +480,7 @@ module "s3-chamber-i" {
   attributes = [
     "chamber-i",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -486,6 +505,7 @@ module "s3-chamber-j" {
   attributes = [
     "chamber-j",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -510,6 +530,7 @@ module "s3-chamber-l" {
   attributes = [
     "chamber-l",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -534,6 +555,7 @@ module "s3-chamber-m" {
   attributes = [
     "chamber-m",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -558,6 +580,7 @@ module "s3-chamber-n" {
   attributes = [
     "chamber-n",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -582,6 +605,7 @@ module "s3-chamber-o" {
   attributes = [
     "chamber-o",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -606,6 +630,7 @@ module "s3-chamber-p" {
   attributes = [
     "chamber-p",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -630,6 +655,7 @@ module "s3-chamber-q" {
   attributes = [
     "chamber-q",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -654,6 +680,7 @@ module "s3-chamber-r" {
   attributes = [
     "chamber-r",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -678,6 +705,7 @@ module "s3-chamber-s" {
   attributes = [
     "chamber-s",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -702,6 +730,7 @@ module "s3-chamber-t" {
   attributes = [
     "chamber-t",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -726,6 +755,7 @@ module "s3-chamber-u" {
   attributes = [
     "chamber-u",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -750,6 +780,7 @@ module "s3-chamber-v" {
   attributes = [
     "chamber-v",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -774,6 +805,7 @@ module "s3-chamber-w" {
   attributes = [
     "chamber-w",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -798,6 +830,7 @@ module "s3-chamber-x" {
   attributes = [
     "chamber-x",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -822,6 +855,7 @@ module "s3-chamber-y" {
   attributes = [
     "chamber-y",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -846,6 +880,7 @@ module "s3-chamber-z" {
   attributes = [
     "chamber-z",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -870,6 +905,7 @@ module "s3-circus-org" {
   attributes = [
     "circus-org",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -894,6 +930,7 @@ module "s3-circus-audit" {
   attributes = [
     "circus-audit",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -918,6 +955,7 @@ module "s3-circus-govcloud" {
   attributes = [
     "circus-govcloud",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -942,6 +980,7 @@ module "s3-circus-ops" {
   attributes = [
     "circus-ops",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -966,6 +1005,7 @@ module "s3-circus-transit" {
   attributes = [
     "circus-transit",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -990,6 +1030,7 @@ module "s3-coil-org" {
   attributes = [
     "coil-org",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1014,6 +1055,7 @@ module "s3-coil-net" {
   attributes = [
     "coil-net",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1038,6 +1080,7 @@ module "s3-coil-lib" {
   attributes = [
     "coil-lib",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1062,6 +1105,7 @@ module "s3-coil-hub" {
   attributes = [
     "coil-hub",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1086,6 +1130,7 @@ module "s3-curl-org" {
   attributes = [
     "curl-org",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1110,6 +1155,7 @@ module "s3-curl-net" {
   attributes = [
     "curl-net",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1134,6 +1180,7 @@ module "s3-curl-lib" {
   attributes = [
     "curl-lib",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1158,6 +1205,7 @@ module "s3-curl-hub" {
   attributes = [
     "curl-hub",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1182,6 +1230,7 @@ module "s3-defn-org" {
   attributes = [
     "defn-org",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1206,6 +1255,7 @@ module "s3-fogg-org" {
   attributes = [
     "fogg-org",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1230,6 +1280,7 @@ module "s3-fogg-gateway" {
   attributes = [
     "fogg-gateway",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1254,6 +1305,7 @@ module "s3-fogg-security" {
   attributes = [
     "fogg-security",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1278,6 +1330,7 @@ module "s3-fogg-hub" {
   attributes = [
     "fogg-hub",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1302,6 +1355,7 @@ module "s3-fogg-postx" {
   attributes = [
     "fogg-postx",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1326,6 +1380,7 @@ module "s3-fogg-asset" {
   attributes = [
     "fogg-asset",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1350,6 +1405,7 @@ module "s3-fogg-data" {
   attributes = [
     "fogg-data",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1374,6 +1430,7 @@ module "s3-fogg-sandbox" {
   attributes = [
     "fogg-sandbox",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1398,6 +1455,7 @@ module "s3-fogg-circus" {
   attributes = [
     "fogg-circus",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1422,6 +1480,7 @@ module "s3-fogg-home" {
   attributes = [
     "fogg-home",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1446,6 +1505,7 @@ module "s3-gyre-org" {
   attributes = [
     "gyre-org",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1470,6 +1530,7 @@ module "s3-gyre-ops" {
   attributes = [
     "gyre-ops",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1494,6 +1555,7 @@ module "s3-helix-org" {
   attributes = [
     "helix-org",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1518,6 +1580,7 @@ module "s3-helix-ops" {
   attributes = [
     "helix-ops",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1542,6 +1605,7 @@ module "s3-helix-sec" {
   attributes = [
     "helix-sec",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1566,6 +1630,7 @@ module "s3-helix-net" {
   attributes = [
     "helix-net",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1590,6 +1655,7 @@ module "s3-helix-log" {
   attributes = [
     "helix-log",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1614,6 +1680,7 @@ module "s3-helix-lib" {
   attributes = [
     "helix-lib",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1638,6 +1705,7 @@ module "s3-helix-pub" {
   attributes = [
     "helix-pub",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1662,6 +1730,7 @@ module "s3-helix-dmz" {
   attributes = [
     "helix-dmz",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1686,6 +1755,7 @@ module "s3-helix-hub" {
   attributes = [
     "helix-hub",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1710,6 +1780,7 @@ module "s3-helix-dev" {
   attributes = [
     "helix-dev",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1734,6 +1805,7 @@ module "s3-imma-org" {
   attributes = [
     "imma-org",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1758,6 +1830,7 @@ module "s3-imma-prod" {
   attributes = [
     "imma-prod",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1782,6 +1855,7 @@ module "s3-imma-dev" {
   attributes = [
     "imma-dev",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1806,6 +1880,7 @@ module "s3-imma-tolan" {
   attributes = [
     "imma-tolan",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1830,6 +1905,7 @@ module "s3-imma-dgwyn" {
   attributes = [
     "imma-dgwyn",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1854,6 +1930,7 @@ module "s3-imma-defn" {
   attributes = [
     "imma-defn",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1878,6 +1955,7 @@ module "s3-immanent-org" {
   attributes = [
     "immanent-org",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1902,6 +1980,7 @@ module "s3-immanent-patterner" {
   attributes = [
     "immanent-patterner",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1926,6 +2005,7 @@ module "s3-immanent-windkey" {
   attributes = [
     "immanent-windkey",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1950,6 +2030,7 @@ module "s3-immanent-summoner" {
   attributes = [
     "immanent-summoner",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1974,6 +2055,7 @@ module "s3-immanent-herbal" {
   attributes = [
     "immanent-herbal",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -1998,6 +2080,7 @@ module "s3-immanent-namer" {
   attributes = [
     "immanent-namer",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2022,6 +2105,7 @@ module "s3-immanent-ged" {
   attributes = [
     "immanent-ged",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2046,6 +2130,7 @@ module "s3-immanent-roke" {
   attributes = [
     "immanent-roke",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2070,6 +2155,7 @@ module "s3-immanent-chanter" {
   attributes = [
     "immanent-chanter",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2094,6 +2180,7 @@ module "s3-immanent-changer" {
   attributes = [
     "immanent-changer",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2118,6 +2205,7 @@ module "s3-immanent-hand" {
   attributes = [
     "immanent-hand",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2142,6 +2230,7 @@ module "s3-immanent-doorkeeper" {
   attributes = [
     "immanent-doorkeeper",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2166,6 +2255,7 @@ module "s3-jianghu-org" {
   attributes = [
     "jianghu-org",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2190,6 +2280,7 @@ module "s3-jianghu-tahoe" {
   attributes = [
     "jianghu-tahoe",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2214,6 +2305,7 @@ module "s3-jianghu-klamath" {
   attributes = [
     "jianghu-klamath",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2238,6 +2330,7 @@ module "s3-spiral-org" {
   attributes = [
     "spiral-org",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2262,6 +2355,7 @@ module "s3-spiral-ops" {
   attributes = [
     "spiral-ops",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2286,6 +2380,7 @@ module "s3-spiral-sec" {
   attributes = [
     "spiral-sec",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2310,6 +2405,7 @@ module "s3-spiral-net" {
   attributes = [
     "spiral-net",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2334,6 +2430,7 @@ module "s3-spiral-log" {
   attributes = [
     "spiral-log",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2358,6 +2455,7 @@ module "s3-spiral-lib" {
   attributes = [
     "spiral-lib",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2382,6 +2480,7 @@ module "s3-spiral-pub" {
   attributes = [
     "spiral-pub",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2406,6 +2505,7 @@ module "s3-spiral-dmz" {
   attributes = [
     "spiral-dmz",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2430,6 +2530,7 @@ module "s3-spiral-hub" {
   attributes = [
     "spiral-hub",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2454,6 +2555,7 @@ module "s3-spiral-dev" {
   attributes = [
     "spiral-dev",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2478,6 +2580,7 @@ module "s3-vault-org" {
   attributes = [
     "vault-org",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2502,6 +2605,7 @@ module "s3-vault-transit" {
   attributes = [
     "vault-transit",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2526,6 +2630,7 @@ module "s3-vault-audit" {
   attributes = [
     "vault-audit",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2550,6 +2655,7 @@ module "s3-vault-vault0" {
   attributes = [
     "vault-vault0",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2574,6 +2680,7 @@ module "s3-vault-vault1" {
   attributes = [
     "vault-vault1",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2598,6 +2705,7 @@ module "s3-vault-ops" {
   attributes = [
     "vault-ops",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2622,6 +2730,7 @@ module "s3-vault-library" {
   attributes = [
     "vault-library",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2646,6 +2755,7 @@ module "s3-vault-hub" {
   attributes = [
     "vault-hub",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2670,6 +2780,7 @@ module "s3-vault-pub" {
   attributes = [
     "vault-pub",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2694,6 +2805,7 @@ module "s3-vault-dev" {
   attributes = [
     "vault-dev",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2718,6 +2830,7 @@ module "s3-whoa-org" {
   attributes = [
     "whoa-org",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2742,6 +2855,7 @@ module "s3-whoa-prod" {
   attributes = [
     "whoa-prod",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2766,6 +2880,7 @@ module "s3-whoa-secrets" {
   attributes = [
     "whoa-secrets",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2790,6 +2905,7 @@ module "s3-whoa-dev" {
   attributes = [
     "whoa-dev",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
@@ -2814,6 +2930,7 @@ module "s3-whoa-hub" {
   attributes = [
     "whoa-hub",
   ]
+  enabled            = true
   name               = "global"
   namespace          = "dfn"
   stage              = "defn"
