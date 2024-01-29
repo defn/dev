@@ -7,6 +7,7 @@ all:
 	rm -f MODULES.bazel.lock
 	$(MAKE) bazel-ignore
 	$(MAKE) regen build
+	trunk fmt .
 
 build:
 	b build
