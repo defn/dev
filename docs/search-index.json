@@ -1,1 +1,20 @@
-[{"content":"[Privacy Policy]\n","date":"August 27, 2020","id":0,"permalink":"/privacy/","summary":"[Privacy Policy]","tags":"","title":"Privacy Policy"},{"content":"[Terms of Service]\n","date":"August 27, 2020","id":1,"permalink":"/terms/","summary":"[Terms of Service]","tags":"","title":"Terms of Service"}]
+[
+  {
+    "content": "[Privacy Policy]\n",
+    "date": "August 27, 2020",
+    "id": 0,
+    "permalink": "/privacy/",
+    "summary": "[Privacy Policy]",
+    "tags": "",
+    "title": "Privacy Policy"
+  },
+  {
+    "content": "[Terms of Service]\n",
+    "date": "August 27, 2020",
+    "id": 1,
+    "permalink": "/terms/",
+    "summary": "[Terms of Service]",
+    "tags": "",
+    "title": "Terms of Service"
+  }
+]
