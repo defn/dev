@@ -25,7 +25,7 @@ module "fogg-hub" {
   name      = "terraform"
   namespace = "dfn"
   stage     = "defn"
-  source    = "./assets/__cdktf_module_asset_26CE565C/3B662577168AEE3844EE70D2853CDA26/terraform-aws-defn-account"
+  source    = "./assets/__cdktf_module_asset_26CE565C/FCCCACB0261C3A645A0C39F64D95AE04/terraform-aws-defn-account"
   providers = {
     aws = aws.fogg-hub
   }
