@@ -15,7 +15,18 @@ env_accounts: ["net", "lib", "hub"]
 ops_accounts: ["ops"]
 
 input: {
-	meh: name: "defn"
+	meh: {
+		attributes: ["meh-bleh"]
+
+		enabled:   true
+		namespace: "dfn"
+		stage:     "defn"
+		name:      "global"
+
+		acl:                "private"
+		user_enabled:       false
+		versioning_enabled: false
+	}
 
 	backend: {
 		lock:    "dfn-defn-terraform-state-lock"

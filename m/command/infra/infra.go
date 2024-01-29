@@ -49,16 +49,23 @@ type AwsInfo struct {
 	Account map[string]AwsAccountInfo `json:"account"`
 }
 
-type Meh struct {
-	Name *string `json:"name"`
+type MehTerraformAwsS3BucketConfig struct {
+	Enabled           *bool      `json:"enabled"`
+	Namespace         *string    `json:"namespace"`
+	Stage             *string    `json:"stage"`
+	Name              *string    `json:"name"`
+	Attributes        *[]*string `json:"attributes"`
+	Acl               *string    `json:"acl"`
+	UserEnabled       *bool      `json:"user_enabled"`
+	VersioningEnabled *bool      `json:"versioning_enabled"`
 }
 
 type AwsProps struct {
-	Backend      AwsBackend                 `json:"backend"`
-	Organization map[string]AwsOrganization `json:"organization"`
-	Accounts     []string                   `json:"accounts"`
-	Info         map[string]AwsInfo         `json:"info"`
-	Meh          Meh                        `json:"meh"`
+	Backend      AwsBackend                    `json:"backend"`
+	Organization map[string]AwsOrganization    `json:"organization"`
+	Accounts     []string                      `json:"accounts"`
+	Info         map[string]AwsInfo            `json:"info"`
+	Meh          MehTerraformAwsS3BucketConfig `json:"meh"`
 }
 
 // alias
