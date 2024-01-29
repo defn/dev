@@ -194,17 +194,15 @@ func AwsAccountStack(scope constructs.Construct, site *infra.AwsProps, org *infr
 		DynamodbTable: &site.Backend.Lock,
 	})
 
-	provider := []interface{}{
-		aws.NewAwsProvider(stack,
-			infra.Js("aws"), &aws.AwsProviderConfig{
-				Alias:   infra.Js(fmt.Sprintf("%s-%s", org.Name, acc.Profile)),
-				Profile: infra.Js(fmt.Sprintf("%s-%s-sso", org.Name, acc.Profile)),
-			}),
-	}
+	provider := aws.NewAwsProvider(stack,
+		infra.Js("aws"), &aws.AwsProviderConfig{
+			Alias:   infra.Js(fmt.Sprintf("%s-%s", org.Name, acc.Profile)),
+			Profile: infra.Js(fmt.Sprintf("%s-%s-sso", org.Name, acc.Profile)),
+		})
 
 	terraform_aws_defn_account.NewTerraformAwsDefnAccount(stack,
 		infra.Js(fmt.Sprintf("%s-%s", org.Name, acc.Profile)), &terraform_aws_defn_account.TerraformAwsDefnAccountConfig{
-			Providers: &provider,
+			Providers: &[]interface{}{provider},
 			Namespace: infra.Js("dfn"),
 			Stage:     infra.Js("defn"),
 			Name:      infra.Js("terraform"),
@@ -234,24 +232,22 @@ func GlobalStack(scope constructs.Construct, site *infra.AwsProps) cdktf.Terrafo
 	for _, org_name := range keys {
 		org := site.Organization[org_name]
 		for _, acc := range org.Accounts {
-			provider := []interface{}{
-				aws.NewAwsProvider(stack,
-					infra.Js(fmt.Sprintf("aws-global-%s-%s", org_name, acc.Profile)), &aws.AwsProviderConfig{
-						Alias:   infra.Js(fmt.Sprintf("%s-%s", org_name, acc.Profile)),
-						Profile: infra.Js(fmt.Sprintf("%s-sso", "defn-org")),
-						Region:  infra.Js("us-east-1"),
-						AssumeRole: []interface{}{
-							aws.AwsProviderAssumeRole{
-								RoleArn: infra.Js(fmt.Sprintf("arn:aws:iam::%s:role/dfn-defn-terraform", site.Info[org_name].Account[acc.Profile].Id)),
-							},
+			provider := aws.NewAwsProvider(stack,
+				infra.Js(fmt.Sprintf("aws-global-%s-%s", org_name, acc.Profile)), &aws.AwsProviderConfig{
+					Alias:   infra.Js(fmt.Sprintf("%s-%s", org_name, acc.Profile)),
+					Profile: infra.Js(fmt.Sprintf("%s-sso", "defn-org")),
+					Region:  infra.Js("us-east-1"),
+					AssumeRole: []interface{}{
+						aws.AwsProviderAssumeRole{
+							RoleArn: infra.Js(fmt.Sprintf("arn:aws:iam::%s:role/dfn-defn-terraform", site.Info[org_name].Account[acc.Profile].Id)),
 						},
 					},
-				),
-			}
+				},
+			)
 
 			terraform_aws_s3_bucket.NewTerraformAwsS3Bucket(stack,
 				infra.Js(fmt.Sprintf("s3-%s-%s", org_name, acc.Profile)), &terraform_aws_s3_bucket.TerraformAwsS3BucketConfig{
-					Providers:  &provider,
+					Providers:  &[]interface{}{provider},
 					Enabled:    infra.Jstrue(),
 					Namespace:  infra.Js("dfn"),
 					Stage:      infra.Js("defn"),
