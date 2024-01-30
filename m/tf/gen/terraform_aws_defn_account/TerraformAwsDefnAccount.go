@@ -11,7 +11,7 @@ import (
 
 // Defines an TerraformAwsDefnAccount based on a Terraform module.
 //
-// Source at ./mod/terraform-aws-defn-account
+// Source at ../../mod/terraform-aws-defn-account
 type TerraformAwsDefnAccount interface {
 	cdktf.TerraformModule
 	AdditionalTagMap() *map[string]*string

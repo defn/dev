@@ -2,8 +2,6 @@ build: ../node_modules/.bin/cdktf
 	cue eval -c >/dev/null
 	b build
 	../node_modules/.bin/cdktf synth --hcl
-# symlink to modules to eliminate module copies in git
-	runmany 'ln -nfs ../../../mod $$1/' cdktf.out/stacks/*
 # cdktf synth --hcl has a bug with Encrypt bool undefined
 	runmany 'perl -pe "s{undefined}{true} if m{encrypt\s+=\s+undefined}" -i $$1' cdktf.out/stacks/*/cdk.tf
 	runmany 'perl -pe "s{=}{= false} if m{user_enabled\s+=\s+$$}" -i $$1' cdktf.out/stacks/*/cdk.tf

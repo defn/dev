@@ -11,7 +11,7 @@ import (
 
 // Defines an TerraformAwsTfstateBackend based on a Terraform module.
 //
-// Source at ./mod/terraform-aws-tfstate-backend
+// Source at ../../mod/terraform-aws-tfstate-backend
 type TerraformAwsTfstateBackend interface {
 	cdktf.TerraformModule
 	Acl() *string

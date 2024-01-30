@@ -11,7 +11,7 @@ import (
 
 // Defines an TerraformAwsIamRole based on a Terraform module.
 //
-// Source at ./mod/terraform-aws-iam-role
+// Source at ../../mod/terraform-aws-iam-role
 type TerraformAwsIamRole interface {
 	cdktf.TerraformModule
 	AdditionalTagMap() *map[string]*string

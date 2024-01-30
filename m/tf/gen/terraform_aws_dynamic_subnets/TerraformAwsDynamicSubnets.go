@@ -11,7 +11,7 @@ import (
 
 // Defines an TerraformAwsDynamicSubnets based on a Terraform module.
 //
-// Source at ./mod/terraform-aws-dynamic-subnets
+// Source at ../../mod/terraform-aws-dynamic-subnets
 type TerraformAwsDynamicSubnets interface {
 	cdktf.TerraformModule
 	AdditionalTagMap() *map[string]*string

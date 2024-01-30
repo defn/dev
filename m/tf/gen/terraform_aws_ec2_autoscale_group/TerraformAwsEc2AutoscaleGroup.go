@@ -11,7 +11,7 @@ import (
 
 // Defines an TerraformAwsEc2AutoscaleGroup based on a Terraform module.
 //
-// Source at ./mod/terraform-aws-ec2-autoscale-group
+// Source at ../../mod/terraform-aws-ec2-autoscale-group
 type TerraformAwsEc2AutoscaleGroup interface {
 	cdktf.TerraformModule
 	AdditionalTagMap() *map[string]*string
