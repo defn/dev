@@ -49,4 +49,5 @@ use_repo(
     "com_github_spf13_cobra",
     "com_github_spf13_viper",
     "org_cuelang_go",
+    "com_github_bitfield_script",
 )
