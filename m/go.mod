@@ -6,6 +6,7 @@ require (
 	cuelang.org/go v0.7.0
 	github.com/aws/constructs-go/constructs/v10 v10.3.0
 	github.com/aws/jsii-runtime-go v1.94.0
+	github.com/bitfield/script v0.22.0
 	github.com/botanica-consulting/wiredialer v0.0.0-20230710124424-ca42731e9a5c
 	github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.3.0
 	github.com/charmbracelet/bubbles v0.17.1
@@ -46,6 +47,8 @@ require (
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
+	github.com/itchyny/gojq v0.12.12 // indirect
+	github.com/itchyny/timefmt-go v0.1.5 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.6 // indirect
 	github.com/leodido/go-urn v1.3.0 // indirect
@@ -99,4 +102,5 @@ require (
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
+	mvdan.cc/sh/v3 v3.6.0 // indirect
 )
