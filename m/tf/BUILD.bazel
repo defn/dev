@@ -12,6 +12,7 @@ go_library(
         "//tf/gen/terraform_aws_defn_account",
         "//tf/gen/terraform_aws_s3_bucket",
         "@com_github_aws_constructs_go_constructs_v10//:constructs",
+        "@com_github_bitfield_script//:script",
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//dataawsssoadmininstances",
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//identitystoregroup",
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//identitystoregroupmembership",

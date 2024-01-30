@@ -26,6 +26,8 @@ import (
 	infra "github.com/defn/dev/m/command/infra"
 	root "github.com/defn/dev/m/command/root"
 
+	"github.com/bitfield/script"
+
 	"github.com/defn/dev/m/tf/gen/terraform_aws_defn_account"
 	"github.com/defn/dev/m/tf/gen/terraform_aws_s3_bucket"
 )
@@ -202,10 +204,11 @@ func AwsAccountStack(scope constructs.Construct, site *infra.AwsProps, org *infr
 
 	terraform_aws_defn_account.NewTerraformAwsDefnAccount(stack,
 		infra.Js(fmt.Sprintf("%s-%s", org.Name, acc.Profile)), &terraform_aws_defn_account.TerraformAwsDefnAccountConfig{
-			Providers: &[]interface{}{provider},
-			Namespace: infra.Js("dfn"),
-			Stage:     infra.Js("defn"),
-			Name:      infra.Js("terraform"),
+			Providers:                         &[]interface{}{provider},
+			Namespace:                         infra.Js("dfn"),
+			Stage:                             infra.Js("defn"),
+			Name:                              infra.Js("terraform"),
+			SkipAssetCreationFromLocalModules: infra.Jstrue(),
 		})
 
 	return stack
@@ -224,6 +227,8 @@ func ToTerraformAwsS3BucketConfig(org *infra.AwsOrganization, acc *infra.AwsAcco
 		Acl:               acc.Cfg.Acl,
 		UserEnabled:       acc.Cfg.UserEnabled,
 		VersioningEnabled: acc.Cfg.VersioningEnabled,
+
+		SkipAssetCreationFromLocalModules: infra.Jstrue(),
 	}
 }
 
@@ -297,5 +302,6 @@ func init() {
 }
 
 func main() {
+	script.ListFiles("*.cue").Stdout()
 	root.Execute()
 }
