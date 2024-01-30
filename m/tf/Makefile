@@ -3,7 +3,7 @@ build: ../node_modules/.bin/cdktf
 	b build
 	../node_modules/.bin/cdktf synth --hcl
 # symlink to modules to eliminate module copies in git
-	runmany 'if test -d $$1; then rm -rf $$1/terraform-*; for a in mod/terraform-*; do ln -nfs ../../../../../../$$a $$1/; done; fi' cdktf.out/stacks/*/assets/*/*
+	runmany 'ln -nfs ../../../mod $$1/' cdktf.out/stacks/*
 # cdktf synth --hcl has a bug with Encrypt bool undefined
 	runmany 'perl -pe "s{undefined}{true} if m{encrypt\s+=\s+undefined}" -i $$1' cdktf.out/stacks/*/cdk.tf
 	runmany 'perl -pe "s{=}{= false} if m{user_enabled\s+=\s+$$}" -i $$1' cdktf.out/stacks/*/cdk.tf
@@ -16,7 +16,7 @@ build: ../node_modules/.bin/cdktf
 # fmt
 	git add cdktf.out
 	git add -u cdktf.out
-	trunk fmt .
+	trunk fmt $(git ls-files .)
 	git add -u .
 
 ../node_modules/.bin/cdktf:
