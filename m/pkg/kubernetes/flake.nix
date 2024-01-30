@@ -15,7 +15,7 @@
     cilium.url = github:defn/dev/pkg-cilium-0.15.20-1?dir=m/pkg/cilium;
     hubble.url = github:defn/dev/pkg-hubble-0.13.0-1?dir=m/pkg/hubble;
     tfo.url = github:defn/dev/pkg-tfo-2.2.0-4?dir=m/pkg/tfo;
-    mirrord.url = github:defn/dev/pkg-mirrord-3.85.0-1?dir=m/pkg/mirrord;
+    mirrord.url = github:defn/dev/pkg-mirrord-3.86.0-1?dir=m/pkg/mirrord;
   };
 
   outputs = inputs: inputs.kubectl.inputs.pkg.main rec {
