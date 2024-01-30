@@ -25,7 +25,7 @@ module "gyre-ops" {
   name      = "terraform"
   namespace = "dfn"
   stage     = "defn"
-  source    = "./mod/terraform-aws-defn-account"
+  source    = "../../mod/terraform-aws-defn-account"
   providers = {
     aws = aws.gyre-ops
   }

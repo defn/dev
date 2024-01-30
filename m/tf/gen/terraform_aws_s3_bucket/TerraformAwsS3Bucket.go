@@ -11,7 +11,7 @@ import (
 
 // Defines an TerraformAwsS3Bucket based on a Terraform module.
 //
-// Source at ./mod/terraform-aws-s3-bucket
+// Source at ../../mod/terraform-aws-s3-bucket
 type TerraformAwsS3Bucket interface {
 	cdktf.TerraformModule
 	AccessKeyEnabled() *bool

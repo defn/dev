@@ -11,7 +11,7 @@ import (
 
 // Defines an TerraformAwsEksCluster based on a Terraform module.
 //
-// Source at ./mod/terraform-aws-eks-cluster
+// Source at ../../mod/terraform-aws-eks-cluster
 type TerraformAwsEksCluster interface {
 	cdktf.TerraformModule
 	AdditionalTagMap() *map[string]*string

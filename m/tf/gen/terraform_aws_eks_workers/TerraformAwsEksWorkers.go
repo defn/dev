@@ -11,7 +11,7 @@ import (
 
 // Defines an TerraformAwsEksWorkers based on a Terraform module.
 //
-// Source at ./mod/terraform-aws-eks-workers
+// Source at ../../mod/terraform-aws-eks-workers
 type TerraformAwsEksWorkers interface {
 	cdktf.TerraformModule
 	AdditionalSecurityGroupIds() *[]*string
