@@ -391,7 +391,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.31.2"
+		version: "6.31.3"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "info"
@@ -2054,7 +2054,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "4.2.1"
+		version:     "4.2.3"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
@@ -2279,7 +2279,7 @@ kustomize: "headlamp": #KustomizeHelm & {
 		release:   "headlamp"
 		name:      "headlamp"
 		namespace: "headlamp"
-		version:   "0.18.0"
+		version:   "0.18.1"
 		repo:      "https://headlamp-k8s.github.io/headlamp"
 		values: {
 		}
