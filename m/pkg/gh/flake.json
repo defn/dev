@@ -1,6 +1,6 @@
 {
   "slug": "pkg-gh",
   "ghrepo": "cli/cli",
-  "vendor": "2.42.1",
-  "revision": "1"
+  "vendor": "2.43.1",
+  "revision": "0"
 }
