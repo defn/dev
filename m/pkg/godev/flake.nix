@@ -1,7 +1,7 @@
 {
   inputs = {
     buf.url = github:defn/dev/pkg-buf-1.29.0-1?dir=m/pkg/buf;
-    cosign.url = github:defn/dev/pkg-cosign-2.2.2-4?dir=m/pkg/cosign;
+    cosign.url = github:defn/dev/pkg-cosign-2.2.3-1?dir=m/pkg/cosign;
     goreleaser.url = github:defn/dev/pkg-goreleaser-1.23.0-1?dir=m/pkg/goreleaser;
     yaegi.url = github:defn/dev/pkg-yaegi-0.15.1-2?dir=m/pkg/yaegi;
     # https://github.com/NixOS/nixpkgs/tree/24.05-pre/pkgs/development/compilers/go
