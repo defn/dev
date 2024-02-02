@@ -2,5 +2,5 @@
   "slug": "pkg-argocd",
   "ghrepo": "argoproj/argo-cd",
   "vendor": "2.10.0-rc1",
-  "revision": "5"
+  "revision": "6"
 }
