@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/coder",
-        "lastModified": 1706141382,
-        "narHash": "sha256-ajGwDRNhjrIYQxmG2eoQv6QhZtwI6ZfheX3StFPJ/BI=",
+        "lastModified": 1706897755,
+        "narHash": "sha256-3nKzx8J41CMJwLNtDvcOqJCNeN0Tjmy1cuIqGzjMmE0=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "26976050ebbcae9a21579ab7232ffa14d06af764",
+        "rev": "cdb745f21ff9d6e23a69b97f6664b8eb241c8b43",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/coder",
         "owner": "defn",
-        "ref": "pkg-coder-2.7.2-1",
+        "ref": "pkg-coder-2.7.2-2",
         "repo": "dev",
         "type": "github"
       }
@@ -27,17 +27,17 @@
       },
       "locked": {
         "dir": "m/pkg/codeserver",
-        "lastModified": 1705948044,
-        "narHash": "sha256-j5xVEHZDc6CDWCaIHQlDY8QHAsmwrlL5Dsew0Gz49+4=",
+        "lastModified": 1706897773,
+        "narHash": "sha256-xmu5T/qf1gE4+L/W4KlSqLDCdjytd0eLmUo3kwXMMZE=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "fae5ce8ac4f777069fa1dfa8f545567f4bb436b7",
+        "rev": "c32d569512db2760b95bb0e7372eb8206faeafdb",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/codeserver",
         "owner": "defn",
-        "ref": "pkg-codeserver-4.20.1-1",
+        "ref": "pkg-codeserver-4.20.1-2",
         "repo": "dev",
         "type": "github"
       }
@@ -48,17 +48,17 @@
       },
       "locked": {
         "dir": "m/pkg/dev",
-        "lastModified": 1703440183,
-        "narHash": "sha256-XRdrsSlAF4fzKEXGfcpJiF9763BCKozaA2RbjfXWqDg=",
+        "lastModified": 1706897346,
+        "narHash": "sha256-i+VwVH4Uu9zsySEOgZ4tqUxOysFfmJalU6tcWACQu5U=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "931956c3d299656c773c90d26ad412c4c3b290c3",
+        "rev": "aa68c18a500d0a0558712dad8a8c26eb018fa69b",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/dev",
         "owner": "defn",
-        "ref": "pkg-dev-0.0.12",
+        "ref": "pkg-dev-0.0.13",
         "repo": "dev",
         "type": "github"
       }
@@ -69,17 +69,17 @@
       },
       "locked": {
         "dir": "m/pkg/dev",
-        "lastModified": 1703440183,
-        "narHash": "sha256-XRdrsSlAF4fzKEXGfcpJiF9763BCKozaA2RbjfXWqDg=",
+        "lastModified": 1706897346,
+        "narHash": "sha256-i+VwVH4Uu9zsySEOgZ4tqUxOysFfmJalU6tcWACQu5U=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "931956c3d299656c773c90d26ad412c4c3b290c3",
+        "rev": "aa68c18a500d0a0558712dad8a8c26eb018fa69b",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/dev",
         "owner": "defn",
-        "ref": "pkg-dev-0.0.12",
+        "ref": "pkg-dev-0.0.13",
         "repo": "dev",
         "type": "github"
       }
@@ -122,17 +122,17 @@
       },
       "locked": {
         "dir": "m/pkg/pkg",
-        "lastModified": 1703441814,
-        "narHash": "sha256-COTwiD7CDp1CUeRbkKO1L+ZpDO/OqeijDKFa5tZqLHY=",
+        "lastModified": 1706897415,
+        "narHash": "sha256-saMstGOsxMiR6kG+v5pr7vPKIf/BTl/60z8VPicizPs=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "0cc1dd088a3ff4d0c6077f6d325be3032061c656",
+        "rev": "e067b8a8a3f8d8c277bfde347b91eaec9e547f0d",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/pkg",
         "owner": "defn",
-        "ref": "pkg-pkg-0.0.15",
+        "ref": "pkg-pkg-0.0.16",
         "repo": "dev",
         "type": "github"
       }
@@ -143,17 +143,17 @@
       },
       "locked": {
         "dir": "m/pkg/pkg",
-        "lastModified": 1703441814,
-        "narHash": "sha256-COTwiD7CDp1CUeRbkKO1L+ZpDO/OqeijDKFa5tZqLHY=",
+        "lastModified": 1706897415,
+        "narHash": "sha256-saMstGOsxMiR6kG+v5pr7vPKIf/BTl/60z8VPicizPs=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "0cc1dd088a3ff4d0c6077f6d325be3032061c656",
+        "rev": "e067b8a8a3f8d8c277bfde347b91eaec9e547f0d",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/pkg",
         "owner": "defn",
-        "ref": "pkg-pkg-0.0.15",
+        "ref": "pkg-pkg-0.0.16",
         "repo": "dev",
         "type": "github"
       }
