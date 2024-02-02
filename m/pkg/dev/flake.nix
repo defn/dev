@@ -128,18 +128,14 @@
 
         pkgs = dev-inputs.nixpkgs;
 
-        defaultConfig = { src, config ? { } }: {
-          slug = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).slug;
-        } // (
+        defaultConfig = { src, config ? { } }: (
           if pkgs.lib.hasAttr "vendor" (builtins.fromJSON (builtins.readFile (src + "/flake.json"))) then rec {
             vendor = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).vendor;
             revision = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).revision;
             version = "${vendor}-${revision}";
           }
-          else rec {
-            version = (builtins.fromJSON (builtins.readFile (src + "/flake.json"))).version;
-          }
-        ) // config;
+          else rec { }
+        ) // config // (builtins.fromJSON (builtins.readFile (src + "/flake.json")));
 
         main =
           { src
