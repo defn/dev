@@ -2,5 +2,5 @@
   "slug": "pkg-dapr",
   "ghrepo": "dapr/cli",
   "vendor": "1.12.0",
-  "revision": "5"
+  "revision": "6"
 }
