@@ -2,5 +2,5 @@
   "slug": "pkg-cilium",
   "ghrepo": "cilium/cilium-cli",
   "vendor": "0.15.22",
-  "revision": "1"
+  "revision": "2"
 }
