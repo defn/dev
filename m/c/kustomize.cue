@@ -70,7 +70,7 @@ kustomize: "argo-cd": #Kustomize & {
 	}
 
 	resource: "argo-cd": {
-		url: "https://raw.githubusercontent.com/argoproj/argo-cd/v2.10.0-rc1/manifests/install.yaml"
+		url: "https://raw.githubusercontent.com/argoproj/argo-cd/v2.10.0-rc4/manifests/install.yaml"
 	}
 
 	resource: "ingress-argo-cd": {
