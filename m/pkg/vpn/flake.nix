@@ -1,8 +1,8 @@
 {
   inputs = {
-    tailscale.url = github:defn/dev/pkg-tailscale-1.58.2-1?dir=m/pkg/tailscale;
-    cloudflared.url = github:defn/dev/pkg-cloudflared-2024.1.5-1?dir=m/pkg/cloudflared;
-    wireproxy.url = github:defn/dev/pkg-wireproxy-1.0.6-2?dir=m/pkg/wireproxy;
+    tailscale.url = github:defn/dev/pkg-tailscale-1.58.2-2?dir=m/pkg/tailscale;
+    cloudflared.url = github:defn/dev/pkg-cloudflared-2024.1.5-2?dir=m/pkg/cloudflared;
+    wireproxy.url = github:defn/dev/pkg-wireproxy-1.0.6-3?dir=m/pkg/wireproxy;
   };
 
   outputs = inputs: inputs.tailscale.inputs.pkg.main rec {
