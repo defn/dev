@@ -38,9 +38,13 @@
 | [coder_app.code-server](https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/app) | resource |
 | [coder_metadata.main_20](https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/metadata) | resource |
 | [aws_ami.ubuntu](https://registry.terraform.io/providers/aws/5.34.0/docs/data-sources/ami) | data source |
+| [coder_parameter.az](https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/parameter) | data source |
 | [coder_parameter.instance_type](https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/parameter) | data source |
 | [coder_parameter.nix_volume_size](https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/parameter) | data source |
 | [coder_parameter.provider](https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/parameter) | data source |
+| [coder_parameter.region](https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/parameter) | data source |
+| [coder_parameter.tsauthkey](https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/parameter) | data source |
+| [coder_parameter.username](https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/parameter) | data source |
 | [coder_workspace.me](https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/workspace) | data source |
 
 ## Inputs
