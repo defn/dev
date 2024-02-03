@@ -13,22 +13,24 @@ import (
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/iamrole"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/iamrolepolicyattachment"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/instance"
-	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/provider"
+	aws_provider "github.com/cdktf/cdktf-provider-aws-go/aws/v19/provider"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/secretsmanagersecret"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/secretsmanagersecretversion"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/securitygroup"
+
 	"github.com/defn/dev/m/tf/gen/coder/coder/agent"
 	"github.com/defn/dev/m/tf/gen/coder/coder/app"
 	"github.com/defn/dev/m/tf/gen/coder/coder/datacoderparameter"
 	"github.com/defn/dev/m/tf/gen/coder/coder/datacoderworkspace"
 	"github.com/defn/dev/m/tf/gen/coder/coder/metadata"
+	coder_provider "github.com/defn/dev/m/tf/gen/coder/coder/provider"
 	"github.com/defn/dev/m/tf/gen/coderlogin"
 
 	infra "github.com/defn/dev/m/command/infra"
 )
 
-func CoderDefnEc2Stack(scope constructs.Construct, name *string) cdktf.TerraformStack {
-	this := cdktf.NewTerraformStack(scope, infra.Js(fmt.Sprintf("coder-defn-ec2-%s", *name)))
+func CoderDefnEc2Stack(scope constructs.Construct, name string) cdktf.TerraformStack {
+	this := cdktf.NewTerraformStack(scope, infra.Js(fmt.Sprintf("coder-defn-ec2-%s", name)))
 
 	amiFilter := []*string{
 		infra.Js("coder-*"),
@@ -101,7 +103,7 @@ func CoderDefnEc2Stack(scope constructs.Construct, name *string) cdktf.Terraform
 		},
 	})
 
-	coderprovider := datacoderparameter.NewDataCoderParameter(this, infra.Js("provider"), &datacoderparameter.DataCoderParameterConfig{
+	service_provider := datacoderparameter.NewDataCoderParameter(this, infra.Js("provider"), &datacoderparameter.DataCoderParameterConfig{
 		Default:     infra.Js("aws-ec2"),
 		Description: infra.Js("The service provider to deploy the workspace in"),
 		DisplayName: infra.Js("Provider"),
@@ -120,12 +122,12 @@ func CoderDefnEc2Stack(scope constructs.Construct, name *string) cdktf.Terraform
 
 	aws := map[string]interface{}{
 		"availability_zone": infra.Js("us-west-2a"),
-		"instance_type":     instanceType.Value,
+		"instance_type":     instanceType.Value(),
 		"region":            infra.Js("us-west-2"),
-		"root_volume_size":  nixVolumeSize.Value,
+		"root_volume_size":  nixVolumeSize.Value(),
 	}
 
-	awsEc2Count := cdktf.Fn_Conditional(cdktf.Op_Eq(coderprovider.Value, infra.Js("aws-ec2")), infra.Jsn(1), infra.Jsn(0))
+	awsEc2Count := cdktf.Fn_Conditional(cdktf.Op_Eq(service_provider.Value(), infra.Js("aws-ec2")), infra.Jsn(1), infra.Jsn(0))
 	coderName := infra.Js("coder-${" + *me.Owner() + "}-${" + *me.Name() + "}")
 	userData := "Content-type: multipart/mixed; boundary=\"//\"\nMIME-Version: 1.0\n\n--//\nContent-type: text/cloud-config; charset=\"us-ascii\"\nMIME-Version: 1.0\nContent-Transfer-Encoding: 7bit\nContent-Disposition: attachment; filename=\"cloud-config.txt\"\n\n#cloud-config\nhostname: ${" + *coderName + "}\ncloud_final_modules:\n- [scripts-user, always]\n\n--//\nContent-type: text/x-shellscript; charset=\"us-ascii\"\nMIME-Version: 1.0\nContent-Transfer-Encoding: 7bit\nContent-Disposition: attachment; filename=\"userdata.txt\"\n\n#!/bin/bash\n\nset -x\n\necho 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf\necho 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf\necho 'fs.inotify.max_user_instances = 10000' | sudo tee -a /etc/sysctl.d/99-dfd.conf\necho 'fs.inotify.max_user_watches = 524288' | sudo tee -a /etc/sysctl.d/99-dfd.conf\nsudo sysctl -p /etc/sysctl.d/99-dfd.conf\n\nwhile true; do\n  if test -n \"$(dig +short \"cache.nixos.org\" || true)\"; then\n    break\n  fi\n  sleep 5\ndone\n\nif ! tailscale ip -4 | grep ^100; then\n  sudo tailscale up --accept-dns --accept-routes --authkey=\"${" + *tsauthkey.StringValue() + "}\" --operator=ubuntu --ssh --timeout 60s # missing --advertise-routes= on reboot\nfi\n\nnohup sudo -H -E -u ${" + username + "} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${" + *me.AccessUrl() + "} ${" + *coderName + "}' >/tmp/cloud-init.log 2>&1 &\ndisown\n--//--\n\n"
 
@@ -216,10 +218,10 @@ func CoderDefnEc2Stack(scope constructs.Construct, name *string) cdktf.Terraform
 			VscodeInsiders: infra.Jsbool(false),
 		},
 		Env: &map[string]*string{
-			"GIT_AUTHOR_EMAIL":    cdktf.Token_AsString(me.OwnerEmail, &cdktf.EncodingOptions{}),
-			"GIT_AUTHOR_NAME":     cdktf.Token_AsString(me.Owner, &cdktf.EncodingOptions{}),
-			"GIT_COMMITTER_EMAIL": cdktf.Token_AsString(me.OwnerEmail, &cdktf.EncodingOptions{}),
-			"GIT_COMMITTER_NAME":  cdktf.Token_AsString(me.Owner, &cdktf.EncodingOptions{}),
+			"GIT_AUTHOR_EMAIL":    cdktf.Token_AsString(me.OwnerEmail(), &cdktf.EncodingOptions{}),
+			"GIT_AUTHOR_NAME":     cdktf.Token_AsString(me.Owner(), &cdktf.EncodingOptions{}),
+			"GIT_COMMITTER_EMAIL": cdktf.Token_AsString(me.OwnerEmail(), &cdktf.EncodingOptions{}),
+			"GIT_COMMITTER_NAME":  cdktf.Token_AsString(me.Owner(), &cdktf.EncodingOptions{}),
 			"LC_ALL":              infra.Js("C.UTF-8"),
 			"LOCAL_ARCHIVE":       infra.Js("/usr/lib/locale/locale-archive"),
 		},
@@ -243,11 +245,13 @@ func CoderDefnEc2Stack(scope constructs.Construct, name *string) cdktf.Terraform
 		Url:       infra.Js("http://localhost:13337/?folder=/home/${" + username + "}/m"),
 	})
 
-	provider.NewAwsProvider(this, infra.Js("aws"), &provider.AwsProviderConfig{
+	aws_provider.NewAwsProvider(this, infra.Js("aws"), &aws_provider.AwsProviderConfig{
 		Region: cdktf.Token_AsString(cdktf.Fn_LookupNested(aws, &[]interface{}{
 			infra.Js("region"),
 		}), &cdktf.EncodingOptions{}),
 	})
+
+	coder_provider.NewCoderProvider(this, infra.Js("coder"), &coder_provider.CoderProviderConfig{})
 
 	coderlogin.NewCoderlogin(this, infra.Js("coder-login"), &coderlogin.CoderloginConfig{
 		AgentId: main.Id(),
@@ -323,7 +327,7 @@ func CoderDefnEc2Stack(scope constructs.Construct, name *string) cdktf.Terraform
 
 	ec2instancestate.NewEc2InstanceState(this, infra.Js("dev_21"), &ec2instancestate.Ec2InstanceStateConfig{
 		InstanceId: cdktf.Token_AsString(awsInstanceDev.Id(), &cdktf.EncodingOptions{}),
-		State:      cdktf.Token_AsString(cdktf.Fn_Conditional(cdktf.Op_Eq(me.Transition, infra.Js("start")), infra.Js("running"), infra.Js("stopped")), &cdktf.EncodingOptions{}),
+		State:      cdktf.Token_AsString(cdktf.Fn_Conditional(cdktf.Op_Eq(me.Transition(), infra.Js("start")), infra.Js("running"), infra.Js("stopped")), &cdktf.EncodingOptions{}),
 	})
 
 	return this
