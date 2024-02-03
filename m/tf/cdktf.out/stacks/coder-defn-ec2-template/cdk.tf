@@ -212,7 +212,7 @@ resource "coder_app" "code-server" {
   share        = "owner"
   slug         = "code-server"
   subdomain    = false
-  url          = "http://localhost:13337/?folder=/home/&{%!s(*cdktf.jsiiProxy_TerraformDataSource=&{{0xc000dfe6f8} {0} {{0}} {0}})}/m"
+  url          = "http://localhost:13337/?folder=/home/${data.coder_parameter.username.value}/m"
   healthcheck {
     interval  = 5
     threshold = 6
@@ -246,14 +246,14 @@ resource "aws_instance" "dev_17" {
     Name              = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
   }
   user_data = <<EOF
-Content-type: multipart/mixed; boundary=\"//\"
+Content-type: multipart/mixed; boundary="//"
 MIME-Version: 1.0
 
 --//
-Content-type: text/cloud-config; charset=\"us-ascii\"
+Content-type: text/cloud-config; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename=\"cloud-config.txt\"
+Content-Disposition: attachment; filename="cloud-config.txt"
 
 #cloud-config
 hostname: coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}
@@ -261,10 +261,10 @@ cloud_final_modules:
 - [scripts-user, always]
 
 --//
-Content-type: text/x-shellscript; charset=\"us-ascii\"
+Content-type: text/x-shellscript; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename=\"userdata.txt\"
+Content-Disposition: attachment; filename="userdata.txt"
 
 #!/bin/bash
 
@@ -277,7 +277,7 @@ echo 'fs.inotify.max_user_watches = 524288' | sudo tee -a /etc/sysctl.d/99-dfd.c
 sudo sysctl -p /etc/sysctl.d/99-dfd.conf
 
 while true; do
-  if test -n \"$(dig +short \"cache.nixos.org\" || true)\"; then
+  if test -n "$(dig +short "cache.nixos.org" || true)"; then
     break
   fi
   sleep 5

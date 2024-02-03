@@ -312,7 +312,7 @@ disown
 		Share:     infra.Js("owner"),
 		Slug:      infra.Js("code-server"),
 		Subdomain: infra.Jsbool(false),
-		Url:       infra.Js(fmt.Sprintf("http://localhost:13337/?folder=/home/%s/m", paramUsername)),
+		Url:       infra.Js(fmt.Sprintf("http://localhost:13337/?folder=/home/%s/m", *paramUsername.Value())),
 	})
 
 	aws_provider.NewAwsProvider(stack, infra.Js("aws"), &aws_provider.AwsProviderConfig{
@@ -353,7 +353,7 @@ disown
 			"Coder_Provisioned": infra.Js("true"),
 			"Name":              devWorkspaceName,
 		},
-		UserData: &devUserData,
+		UserData: infra.Js(devUserData),
 		VpcSecurityGroupIds: &[]*string{
 			cdktf.Token_AsString(devSecurityGroup.Id(), &cdktf.EncodingOptions{}),
 		},
