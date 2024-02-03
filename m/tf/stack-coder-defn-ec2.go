@@ -14,8 +14,6 @@ import (
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/iamrolepolicyattachment"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/instance"
 	aws_provider "github.com/cdktf/cdktf-provider-aws-go/aws/v19/provider"
-	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/secretsmanagersecret"
-	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/secretsmanagersecretversion"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/securitygroup"
 
 	"github.com/defn/dev/m/tf/gen/coder/coder/agent"
@@ -128,6 +126,27 @@ func CoderDefnEc2Stack(scope constructs.Construct, site *infra.AwsProps, name st
 
 	devCoderWorkspace := datacoderworkspace.NewDataCoderWorkspace(stack, infra.Js("me"), &datacoderworkspace.DataCoderWorkspaceConfig{})
 
+	devCoderAgent := agent.NewAgent(stack, infra.Js("main"), &agent.AgentConfig{
+		Arch: infra.Js("amd64"),
+		Auth: infra.Js("token"),
+		DisplayApps: &agent.AgentDisplayApps{
+			SshHelper:      infra.Jsbool(false),
+			Vscode:         infra.Jsbool(false),
+			VscodeInsiders: infra.Jsbool(false),
+		},
+		Env: &map[string]*string{
+			"GIT_AUTHOR_EMAIL":    devCoderWorkspace.OwnerEmail(),
+			"GIT_AUTHOR_NAME":     devCoderWorkspace.Owner(),
+			"GIT_COMMITTER_EMAIL": devCoderWorkspace.OwnerEmail(),
+			"GIT_COMMITTER_NAME":  devCoderWorkspace.Owner(),
+			"LC_ALL":              infra.Js("C.UTF-8"),
+			"LOCAL_ARCHIVE":       infra.Js("/usr/lib/locale/locale-archive"),
+		},
+		Os:                   infra.Js("linux"),
+		StartupScript:        infra.Js(`cd ~/m && bin/startup.sh`),
+		StartupScriptTimeout: infra.Jsn(180),
+	})
+
 	devWorkspaceName := infra.Js("coder-${" + *devCoderWorkspace.Owner() + "}-${" + *devCoderWorkspace.Name() + "}")
 
 	devUserData := fmt.Sprintf(`Content-type: multipart/mixed; boundary="//"
@@ -171,12 +190,12 @@ if ! tailscale ip -4 | grep ^100; then
   sudo tailscale up --accept-dns --accept-routes --authkey="%s" --operator=ubuntu --ssh --timeout 60s # missing --advertise-routes= on reboot
 fi
 
-nohup sudo -H -E -u %s bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${%s} coder-${%s}-${%s}' >/tmp/user-data.log 2>&1 &
+nohup sudo -H -E -u %s bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${%s} coder-${%s}-${%s} ${%s}' >/tmp/user-data.log 2>&1 &
 disown
 --//--`,
 		*devCoderWorkspace.Owner(), *devCoderWorkspace.Name(),
 		*paramTailscaleAuthKey.Value(), *paramUsername.Value(),
-		*devCoderWorkspace.AccessUrl(), *devCoderWorkspace.Owner(), *devCoderWorkspace.Name())
+		*devCoderWorkspace.AccessUrl(), *devCoderWorkspace.Owner(), *devCoderWorkspace.Name(), *devCoderAgent.Token())
 
 	devVpc := defaultvpc.NewDefaultVpc(stack, infra.Js("default"), &defaultvpc.DefaultVpcConfig{})
 
@@ -279,27 +298,6 @@ disown
 		VpcId: devVpc.Id(),
 	})
 
-	devCoderAgent := agent.NewAgent(stack, infra.Js("main"), &agent.AgentConfig{
-		Arch: infra.Js("amd64"),
-		Auth: infra.Js("token"),
-		DisplayApps: &agent.AgentDisplayApps{
-			SshHelper:      infra.Jsbool(false),
-			Vscode:         infra.Jsbool(false),
-			VscodeInsiders: infra.Jsbool(false),
-		},
-		Env: &map[string]*string{
-			"GIT_AUTHOR_EMAIL":    devCoderWorkspace.OwnerEmail(),
-			"GIT_AUTHOR_NAME":     devCoderWorkspace.Owner(),
-			"GIT_COMMITTER_EMAIL": devCoderWorkspace.OwnerEmail(),
-			"GIT_COMMITTER_NAME":  devCoderWorkspace.Owner(),
-			"LC_ALL":              infra.Js("C.UTF-8"),
-			"LOCAL_ARCHIVE":       infra.Js("/usr/lib/locale/locale-archive"),
-		},
-		Os:                   infra.Js("linux"),
-		StartupScript:        infra.Js(`cd ~/m && bin/startup.sh`),
-		StartupScriptTimeout: infra.Jsn(180),
-	})
-
 	app.NewApp(stack, infra.Js("code-server"), &app.AppConfig{
 		AgentId:     devCoderAgent.Id(),
 		DisplayName: infra.Js("code-server"),
@@ -359,14 +357,16 @@ disown
 		},
 	})
 
-	devSecretsManagerSecret := secretsmanagersecret.NewSecretsmanagerSecret(stack, infra.Js("dev_18"), &secretsmanagersecret.SecretsmanagerSecretConfig{
-		Name: infra.Js(*devWorkspaceName + "-${" + *devEc2Instance.Id() + "}"),
-	})
+	/*
+		devSecretsManagerSecret := secretsmanagersecret.NewSecretsmanagerSecret(stack, infra.Js("dev_18"), &secretsmanagersecret.SecretsmanagerSecretConfig{
+			Name: infra.Js(*devWorkspaceName + "-${" + *devEc2Instance.Id() + "}"),
+		})
 
-	secretsmanagersecretversion.NewSecretsmanagerSecretVersion(stack, infra.Js("dev_19"), &secretsmanagersecretversion.SecretsmanagerSecretVersionConfig{
-		SecretId:     devSecretsManagerSecret.Id(),
-		SecretString: devCoderAgent.Token(),
-	})
+		secretsmanagersecretversion.NewSecretsmanagerSecretVersion(stack, infra.Js("dev_19"), &secretsmanagersecretversion.SecretsmanagerSecretVersionConfig{
+			SecretId:     devSecretsManagerSecret.Id(),
+			SecretString: devCoderAgent.Token(),
+		})
+	*/
 
 	devEc2Count := cdktf.TerraformCount_Of(cdktf.Token_AsNumber(cdktf.Fn_Conditional(cdktf.Op_Eq(paramServiceProvider.Value(), infra.Js("aws-ec2")), infra.Jsn(1), infra.Jsn(0))))
 	metadata.NewMetadata(stack, infra.Js("main_20"), &metadata.MetadataConfig{

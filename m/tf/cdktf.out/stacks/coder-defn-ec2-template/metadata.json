@@ -174,26 +174,6 @@
         }
       }
     },
-    "aws_secretsmanager_secret": {
-      "dev_18": {
-        "//": {
-          "metadata": {
-            "path": "coder-defn-ec2-template/dev_18",
-            "uniqueId": "dev_18"
-          }
-        }
-      }
-    },
-    "aws_secretsmanager_secret_version": {
-      "dev_19": {
-        "//": {
-          "metadata": {
-            "path": "coder-defn-ec2-template/dev_19",
-            "uniqueId": "dev_19"
-          }
-        }
-      }
-    },
     "aws_security_group": {
       "dev_11": {
         "//": {
