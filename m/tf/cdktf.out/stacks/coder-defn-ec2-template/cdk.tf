@@ -287,7 +287,7 @@ if ! tailscale ip -4 | grep ^100; then
   sudo tailscale up --accept-dns --accept-routes --authkey="${data.coder_parameter.tsauthkey.value}" --operator=ubuntu --ssh --timeout 60s # missing --advertise-routes= on reboot
 fi
 
-nohup sudo -H -E -u ${data.coder_parameter.username.value} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${data.coder_workspace.me.access_url} coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}' >/tmp/cloud-init.log 2>&1 &
+nohup sudo -H -E -u ${data.coder_parameter.username.value} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${data.coder_workspace.me.access_url} coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}' >/tmp/user-data.log 2>&1 &
 disown
 --//--
 EOF
@@ -312,7 +312,7 @@ resource "aws_secretsmanager_secret" "dev_18" {
 }
 resource "aws_secretsmanager_secret_version" "dev_19" {
   secret_id     = "${aws_secretsmanager_secret.dev_18.id}"
-  secret_string = "{coder_agent_token:${coder_agent.main.token}}"
+  secret_string = "${coder_agent.main.token}"
 }
 resource "coder_metadata" "main_20" {
   resource_id = "${aws_instance.dev_17.id}"
