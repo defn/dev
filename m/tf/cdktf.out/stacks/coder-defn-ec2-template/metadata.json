@@ -1,7 +1,7 @@
 {
   "//": {
     "metadata": {
-      "backend": "local",
+      "backend": "s3",
       "stackName": "coder-defn-ec2-template",
       "version": "0.20.3"
     },
@@ -19,6 +19,14 @@
       }
     },
     "coder_parameter": {
+      "az": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-template/az",
+            "uniqueId": "az"
+          }
+        }
+      },
       "instance_type": {
         "//": {
           "metadata": {
@@ -40,6 +48,30 @@
           "metadata": {
             "path": "coder-defn-ec2-template/provider",
             "uniqueId": "provider"
+          }
+        }
+      },
+      "region": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-template/region",
+            "uniqueId": "region"
+          }
+        }
+      },
+      "tsauthkey": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-template/tsauthkey",
+            "uniqueId": "tsauthkey"
+          }
+        }
+      },
+      "username": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-template/username",
+            "uniqueId": "username"
           }
         }
       }
@@ -205,8 +237,13 @@
   },
   "terraform": {
     "backend": {
-      "local": {
-        "path": "/home/ubuntu/m/tf/terraform.coder-defn-ec2-template.tfstate"
+      "s3": {
+        "bucket": "dfn-defn-terraform-state",
+        "dynamodb_table": "dfn-defn-terraform-state-lock",
+        "encrypt": true,
+        "key": "stacks/coder-defn-ec2-template/terraform.tfstate",
+        "profile": "defn-org-sso",
+        "region": "us-east-1"
       }
     },
     "required_providers": {

@@ -29,39 +29,46 @@ import (
 	infra "github.com/defn/dev/m/command/infra"
 )
 
-func CoderDefnEc2Stack(scope constructs.Construct, name string) cdktf.TerraformStack {
-	this := cdktf.NewTerraformStack(scope, infra.Js(fmt.Sprintf("coder-defn-ec2-%s", name)))
+func CoderDefnEc2Stack(scope constructs.Construct, site *infra.AwsProps, name string) cdktf.TerraformStack {
+	stack := cdktf.NewTerraformStack(scope, infra.Js(fmt.Sprintf("coder-defn-ec2-%s", name)))
 
-	amiFilter := []*string{
-		infra.Js("coder-*"),
-	}
-	owners := []*string{
-		infra.Js("self"),
-	}
-	username := "ubuntu"
-
-	defaultVar := defaultvpc.NewDefaultVpc(this, infra.Js("default"), &defaultvpc.DefaultVpcConfig{})
-
-	tsauthkey := "super-secret"
-
-	ubuntu := dataawsami.NewDataAwsAmi(this, infra.Js("ubuntu"), &dataawsami.DataAwsAmiConfig{
-		Filter: []map[string]interface{}{
-			{
-				"name":   infra.Js("name"),
-				"values": cdktf.Token_AsList(amiFilter, &cdktf.EncodingOptions{}),
-			},
-			{
-				"name": infra.Js("architecture"),
-				"values": []*string{
-					infra.Js("x86_64"),
-				},
-			},
-		},
-		MostRecent: infra.Jsbool(true),
-		Owners:     cdktf.Token_AsList(owners, &cdktf.EncodingOptions{}),
+	cdktf.NewS3Backend(stack, &cdktf.S3BackendConfig{
+		Key:           infra.Js(fmt.Sprintf("stacks/coder-defn-ec2-%s/terraform.tfstate", name)),
+		Encrypt:       infra.Jstrue(),
+		Bucket:        &site.Backend.Bucket,
+		Region:        &site.Backend.Region,
+		Profile:       &site.Backend.Profile,
+		DynamodbTable: &site.Backend.Lock,
 	})
 
-	instanceType := datacoderparameter.NewDataCoderParameter(this, infra.Js("instance_type"), &datacoderparameter.DataCoderParameterConfig{
+	paramUsername := datacoderparameter.NewDataCoderParameter(stack, infra.Js("username"), &datacoderparameter.DataCoderParameterConfig{
+		Default:     infra.Js("ubuntu"),
+		Description: infra.Js("Linux accoount name"),
+		DisplayName: infra.Js("Username"),
+		Icon:        infra.Js("https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"),
+		Name:        infra.Js("username"),
+		Type:        infra.Js("string"),
+	})
+
+	paramRegion := datacoderparameter.NewDataCoderParameter(stack, infra.Js("region"), &datacoderparameter.DataCoderParameterConfig{
+		Default:     infra.Js("us-west-2"),
+		Description: infra.Js("Cloud region"),
+		DisplayName: infra.Js("Cloud region"),
+		Icon:        infra.Js("https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"),
+		Name:        infra.Js("region"),
+		Type:        infra.Js("string"),
+	})
+
+	paramAvailablityZone := datacoderparameter.NewDataCoderParameter(stack, infra.Js("az"), &datacoderparameter.DataCoderParameterConfig{
+		Default:     infra.Js("a"),
+		Description: infra.Js("Cloud availability zone"),
+		DisplayName: infra.Js("Cloud availability zone"),
+		Icon:        infra.Js("https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"),
+		Name:        infra.Js("az"),
+		Type:        infra.Js("string"),
+	})
+
+	paramInstanceType := datacoderparameter.NewDataCoderParameter(stack, infra.Js("instance_type"), &datacoderparameter.DataCoderParameterConfig{
 		Default:     infra.Js("m6id.large"),
 		Description: infra.Js("The number of CPUs to allocate to the workspace"),
 		DisplayName: infra.Js("CPU"),
@@ -89,7 +96,7 @@ func CoderDefnEc2Stack(scope constructs.Construct, name string) cdktf.TerraformS
 		Type: infra.Js("string"),
 	})
 
-	nixVolumeSize := datacoderparameter.NewDataCoderParameter(this, infra.Js("nix_volume_size"), &datacoderparameter.DataCoderParameterConfig{
+	paramNixVolumeSize := datacoderparameter.NewDataCoderParameter(stack, infra.Js("nix_volume_size"), &datacoderparameter.DataCoderParameterConfig{
 		Default:     infra.Js("100"),
 		Description: infra.Js("The size of the nix volume to create for the workspace in GB"),
 		DisplayName: infra.Js("nix volume size"),
@@ -103,7 +110,7 @@ func CoderDefnEc2Stack(scope constructs.Construct, name string) cdktf.TerraformS
 		},
 	})
 
-	service_provider := datacoderparameter.NewDataCoderParameter(this, infra.Js("provider"), &datacoderparameter.DataCoderParameterConfig{
+	paramServiceProvider := datacoderparameter.NewDataCoderParameter(stack, infra.Js("provider"), &datacoderparameter.DataCoderParameterConfig{
 		Default:     infra.Js("aws-ec2"),
 		Description: infra.Js("The service provider to deploy the workspace in"),
 		DisplayName: infra.Js("Provider"),
@@ -118,17 +125,21 @@ func CoderDefnEc2Stack(scope constructs.Construct, name string) cdktf.TerraformS
 		},
 	})
 
-	me := datacoderworkspace.NewDataCoderWorkspace(this, infra.Js("me"), &datacoderworkspace.DataCoderWorkspaceConfig{})
+	paramTailscaleAuthKey := datacoderparameter.NewDataCoderParameter(stack, infra.Js("tsauthkey"), &datacoderparameter.DataCoderParameterConfig{
+		Default:     infra.Js("TODO"),
+		Description: infra.Js("Tailscale node authorization key"),
+		DisplayName: infra.Js("Tailscale auth key"),
+		Icon:        infra.Js("https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"),
+		Mutable:     infra.Jsbool(true),
+		Name:        infra.Js("tsauthkey"),
+		Type:        infra.Js("string"),
+	})
 
-	aws := map[string]interface{}{
-		"availability_zone": infra.Js("us-west-2a"),
-		"instance_type":     instanceType.Value(),
-		"region":            infra.Js("us-west-2"),
-		"root_volume_size":  nixVolumeSize.Value(),
-	}
+	devCoderWorkspace := datacoderworkspace.NewDataCoderWorkspace(stack, infra.Js("me"), &datacoderworkspace.DataCoderWorkspaceConfig{})
 
-	awsEc2Count := cdktf.Fn_Conditional(cdktf.Op_Eq(service_provider.Value(), infra.Js("aws-ec2")), infra.Jsn(1), infra.Jsn(0))
-	userData := fmt.Sprintf(`Content-type: multipart/mixed; boundary="//"
+	devWorkspaceName := infra.Js("coder-${" + *devCoderWorkspace.Owner() + "}-${" + *devCoderWorkspace.Name() + "}")
+
+	devUserData := fmt.Sprintf(`Content-type: multipart/mixed; boundary="//"
 MIME-Version: 1.0
 
 --//
@@ -172,13 +183,34 @@ fi
 nohup sudo -H -E -u %s bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${%s} coder-${%s}-${%s}' >/tmp/cloud-init.log 2>&1 &
 disown
 --//--`,
-		*me.Owner(), *me.Name(),
-		tsauthkey, username,
-		*me.AccessUrl(), *me.Owner(), *me.Name())
+		*devCoderWorkspace.Owner(), *devCoderWorkspace.Name(),
+		*paramTailscaleAuthKey.Value(), *paramUsername.Value(),
+		*devCoderWorkspace.AccessUrl(), *devCoderWorkspace.Owner(), *devCoderWorkspace.Name())
 
-	coderName := infra.Js("coder-${" + *me.Owner() + "}-${" + *me.Name() + "}")
+	devVpc := defaultvpc.NewDefaultVpc(stack, infra.Js("default"), &defaultvpc.DefaultVpcConfig{})
 
-	dev := iamrole.NewIamRole(this, infra.Js("dev"), &iamrole.IamRoleConfig{
+	devAmi := dataawsami.NewDataAwsAmi(stack, infra.Js("ubuntu"), &dataawsami.DataAwsAmiConfig{
+		Filter: []map[string]interface{}{
+			{
+				"name": infra.Js("name"),
+				"values": []*string{
+					infra.Js("coder-*"),
+				},
+			},
+			{
+				"name": infra.Js("architecture"),
+				"values": []*string{
+					infra.Js("x86_64"),
+				},
+			},
+		},
+		MostRecent: infra.Jsbool(true),
+		Owners: &[]*string{
+			infra.Js("self"),
+		},
+	})
+
+	devIamRole := iamrole.NewIamRole(stack, infra.Js("dev"), &iamrole.IamRoleConfig{
 		AssumeRolePolicy: cdktf.Token_AsString(cdktf.FnGenerated_Jsonencode(map[string]interface{}{
 			"Statement": []map[string]interface{}{
 				{
@@ -192,26 +224,26 @@ disown
 			},
 			"Version": infra.Js("2012-10-17"),
 		}), &cdktf.EncodingOptions{}),
-		Name: coderName,
+		Name: devWorkspaceName,
 	})
 
-	iamrolepolicyattachment.NewIamRolePolicyAttachment(this, infra.Js("admin"), &iamrolepolicyattachment.IamRolePolicyAttachmentConfig{
+	iamrolepolicyattachment.NewIamRolePolicyAttachment(stack, infra.Js("admin"), &iamrolepolicyattachment.IamRolePolicyAttachmentConfig{
 		PolicyArn: infra.Js("arn:aws:iam::aws:policy/AdministratorAccess"),
-		Role:      dev.Name(),
+		Role:      devIamRole.Name(),
 	})
 
-	iamrolepolicyattachment.NewIamRolePolicyAttachment(this, infra.Js("secretsmanager"), &iamrolepolicyattachment.IamRolePolicyAttachmentConfig{
+	iamrolepolicyattachment.NewIamRolePolicyAttachment(stack, infra.Js("secretsmanager"), &iamrolepolicyattachment.IamRolePolicyAttachmentConfig{
 		PolicyArn: infra.Js("arn:aws:iam::aws:policy/SecretsManagerReadWrite"),
-		Role:      dev.Name(),
+		Role:      devIamRole.Name(),
 	})
 
-	iamrolepolicyattachment.NewIamRolePolicyAttachment(this, infra.Js("ssm"), &iamrolepolicyattachment.IamRolePolicyAttachmentConfig{
+	iamrolepolicyattachment.NewIamRolePolicyAttachment(stack, infra.Js("ssm"), &iamrolepolicyattachment.IamRolePolicyAttachmentConfig{
 		PolicyArn: infra.Js("arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"),
-		Role:      dev.Name(),
+		Role:      devIamRole.Name(),
 	})
 
-	awsSecurityGroupDev := securitygroup.NewSecurityGroup(this, infra.Js("dev_11"), &securitygroup.SecurityGroupConfig{
-		Description: coderName,
+	devSecurityGroup := securitygroup.NewSecurityGroup(stack, infra.Js("dev_11"), &securitygroup.SecurityGroupConfig{
+		Description: devWorkspaceName,
 		Egress: []map[string]interface{}{
 			{
 				"cidrBlocks": []*string{
@@ -249,14 +281,14 @@ disown
 				"toPort":   infra.Jsn(41641),
 			},
 		},
-		Name: coderName,
+		Name: devWorkspaceName,
 		Tags: &map[string]*string{
 			"karpenter.sh/discovery": infra.Js("k3d-dfd"),
 		},
-		VpcId: defaultVar.Id(),
+		VpcId: devVpc.Id(),
 	})
 
-	main := agent.NewAgent(this, infra.Js("main"), &agent.AgentConfig{
+	devCoderAgent := agent.NewAgent(stack, infra.Js("main"), &agent.AgentConfig{
 		Arch: infra.Js("amd64"),
 		Auth: infra.Js("token"),
 		DisplayApps: &agent.AgentDisplayApps{
@@ -265,10 +297,10 @@ disown
 			VscodeInsiders: infra.Jsbool(false),
 		},
 		Env: &map[string]*string{
-			"GIT_AUTHOR_EMAIL":    cdktf.Token_AsString(me.OwnerEmail(), &cdktf.EncodingOptions{}),
-			"GIT_AUTHOR_NAME":     cdktf.Token_AsString(me.Owner(), &cdktf.EncodingOptions{}),
-			"GIT_COMMITTER_EMAIL": cdktf.Token_AsString(me.OwnerEmail(), &cdktf.EncodingOptions{}),
-			"GIT_COMMITTER_NAME":  cdktf.Token_AsString(me.Owner(), &cdktf.EncodingOptions{}),
+			"GIT_AUTHOR_EMAIL":    cdktf.Token_AsString(devCoderWorkspace.OwnerEmail(), &cdktf.EncodingOptions{}),
+			"GIT_AUTHOR_NAME":     cdktf.Token_AsString(devCoderWorkspace.Owner(), &cdktf.EncodingOptions{}),
+			"GIT_COMMITTER_EMAIL": cdktf.Token_AsString(devCoderWorkspace.OwnerEmail(), &cdktf.EncodingOptions{}),
+			"GIT_COMMITTER_NAME":  cdktf.Token_AsString(devCoderWorkspace.Owner(), &cdktf.EncodingOptions{}),
 			"LC_ALL":              infra.Js("C.UTF-8"),
 			"LOCAL_ARCHIVE":       infra.Js("/usr/lib/locale/locale-archive"),
 		},
@@ -277,8 +309,8 @@ disown
 		StartupScriptTimeout: infra.Jsn(180),
 	})
 
-	app.NewApp(this, infra.Js("code-server"), &app.AppConfig{
-		AgentId:     main.Id(),
+	app.NewApp(stack, infra.Js("code-server"), &app.AppConfig{
+		AgentId:     devCoderAgent.Id(),
 		DisplayName: infra.Js("code-server"),
 		Healthcheck: &app.AppHealthcheck{
 			Interval:  infra.Jsn(5),
@@ -289,36 +321,30 @@ disown
 		Share:     infra.Js("owner"),
 		Slug:      infra.Js("code-server"),
 		Subdomain: infra.Jsbool(false),
-		Url:       infra.Js(fmt.Sprintf("http://localhost:13337/?folder=/home/%s/m", username)),
+		Url:       infra.Js(fmt.Sprintf("http://localhost:13337/?folder=/home/%s/m", paramUsername)),
 	})
 
-	aws_provider.NewAwsProvider(this, infra.Js("aws"), &aws_provider.AwsProviderConfig{
-		Region: cdktf.Token_AsString(cdktf.Fn_LookupNested(aws, &[]interface{}{
-			infra.Js("region"),
-		}), &cdktf.EncodingOptions{}),
+	aws_provider.NewAwsProvider(stack, infra.Js("aws"), &aws_provider.AwsProviderConfig{
+		Region: paramRegion.Value(),
 	})
 
-	coder_provider.NewCoderProvider(this, infra.Js("coder"), &coder_provider.CoderProviderConfig{})
+	coder_provider.NewCoderProvider(stack, infra.Js("coder"), &coder_provider.CoderProviderConfig{})
 
-	coderlogin.NewCoderlogin(this, infra.Js("coder-login"), &coderlogin.CoderloginConfig{
-		AgentId: main.Id(),
+	coderlogin.NewCoderlogin(stack, infra.Js("coder-login"), &coderlogin.CoderloginConfig{
+		AgentId: devCoderAgent.Id(),
 	})
 
-	awsIamInstanceProfileDev := iaminstanceprofile.NewIamInstanceProfile(this, infra.Js("dev_16"), &iaminstanceprofile.IamInstanceProfileConfig{
-		Name: coderName,
-		Role: dev.Name(),
+	devInstanceProfle := iaminstanceprofile.NewIamInstanceProfile(stack, infra.Js("dev_16"), &iaminstanceprofile.IamInstanceProfileConfig{
+		Name: devWorkspaceName,
+		Role: devIamRole.Name(),
 	})
 
-	awsInstanceDev := instance.NewInstance(this, infra.Js("dev_17"), &instance.InstanceConfig{
-		Ami: cdktf.Token_AsString(ubuntu.Id(), &cdktf.EncodingOptions{}),
-		AvailabilityZone: cdktf.Token_AsString(cdktf.Fn_LookupNested(aws, &[]interface{}{
-			infra.Js("availability_zone"),
-		}), &cdktf.EncodingOptions{}),
+	devEc2Instance := instance.NewInstance(stack, infra.Js("dev_17"), &instance.InstanceConfig{
+		Ami:                cdktf.Token_AsString(devAmi.Id(), &cdktf.EncodingOptions{}),
+		AvailabilityZone:   infra.Js(fmt.Sprintf("%s%s", *paramRegion.Value(), *paramAvailablityZone.Value())),
 		EbsOptimized:       infra.Jsbool(true),
-		IamInstanceProfile: cdktf.Token_AsString(awsIamInstanceProfileDev.Name(), &cdktf.EncodingOptions{}),
-		InstanceType: cdktf.Token_AsString(cdktf.Fn_LookupNested(aws, &[]interface{}{
-			infra.Js("instance_type"),
-		}), &cdktf.EncodingOptions{}),
+		IamInstanceProfile: cdktf.Token_AsString(devInstanceProfle.Name(), &cdktf.EncodingOptions{}),
+		InstanceType:       paramInstanceType.Value(),
 		MetadataOptions: &instance.InstanceMetadataOptions{
 			HttpEndpoint:            infra.Js("enabled"),
 			HttpPutResponseHopLimit: infra.Jsn(1),
@@ -329,52 +355,50 @@ disown
 		RootBlockDevice: &instance.InstanceRootBlockDevice{
 			DeleteOnTermination: infra.Jsbool(true),
 			Encrypted:           infra.Jsbool(true),
-			VolumeSize: cdktf.Token_AsNumber(cdktf.Fn_LookupNested(aws, &[]interface{}{
-				infra.Js("root_volume_size"),
-			})),
-			VolumeType: infra.Js("gp3"),
+			VolumeSize:          cdktf.Token_AsNumber(paramNixVolumeSize.Value()),
+			VolumeType:          infra.Js("gp3"),
 		},
 		Tags: &map[string]*string{
 			"Coder_Provisioned": infra.Js("true"),
-			"Name":              coderName,
+			"Name":              devWorkspaceName,
 		},
-		UserData: &userData,
+		UserData: &devUserData,
 		VpcSecurityGroupIds: &[]*string{
-			cdktf.Token_AsString(awsSecurityGroupDev.Id(), &cdktf.EncodingOptions{}),
+			cdktf.Token_AsString(devSecurityGroup.Id(), &cdktf.EncodingOptions{}),
 		},
 	})
 
-	awsSecretsmanagerSecretDev := secretsmanagersecret.NewSecretsmanagerSecret(this, infra.Js("dev_18"), &secretsmanagersecret.SecretsmanagerSecretConfig{
-		Name: infra.Js(*coderName + "-${" + *awsInstanceDev.Id() + "}"),
+	devSecretsManagerSecret := secretsmanagersecret.NewSecretsmanagerSecret(stack, infra.Js("dev_18"), &secretsmanagersecret.SecretsmanagerSecretConfig{
+		Name: infra.Js(*devWorkspaceName + "-${" + *devEc2Instance.Id() + "}"),
 	})
 
-	secretsmanagersecretversion.NewSecretsmanagerSecretVersion(this, infra.Js("dev_19"), &secretsmanagersecretversion.SecretsmanagerSecretVersionConfig{
-		SecretId:     cdktf.Token_AsString(awsSecretsmanagerSecretDev.Id(), &cdktf.EncodingOptions{}),
-		SecretString: infra.Js("{coder_agent_token:${" + *main.Token() + "}}"),
+	secretsmanagersecretversion.NewSecretsmanagerSecretVersion(stack, infra.Js("dev_19"), &secretsmanagersecretversion.SecretsmanagerSecretVersionConfig{
+		SecretId:     cdktf.Token_AsString(devSecretsManagerSecret.Id(), &cdktf.EncodingOptions{}),
+		SecretString: infra.Js("{coder_agent_token:${" + *devCoderAgent.Token() + "}}"),
 	})
 
-	mainCount := cdktf.TerraformCount_Of(cdktf.Token_AsNumber(awsEc2Count))
-	metadata.NewMetadata(this, infra.Js("main_20"), &metadata.MetadataConfig{
+	devEc2Count := cdktf.TerraformCount_Of(cdktf.Token_AsNumber(cdktf.Fn_Conditional(cdktf.Op_Eq(paramServiceProvider.Value(), infra.Js("aws-ec2")), infra.Jsn(1), infra.Jsn(0))))
+	metadata.NewMetadata(stack, infra.Js("main_20"), &metadata.MetadataConfig{
 		Item: []*metadata.MetadataItem{
 			{
 				Key:   infra.Js("instance type"),
-				Value: cdktf.Token_AsString(awsInstanceDev.InstanceType(), &cdktf.EncodingOptions{}),
+				Value: cdktf.Token_AsString(devEc2Instance.InstanceType(), &cdktf.EncodingOptions{}),
 			},
 			{
 				Key: infra.Js("disk"),
-				Value: infra.Js(*cdktf.Token_AsString(cdktf.Fn_LookupNested(awsInstanceDev.RootBlockDevice(), &[]interface{}{
+				Value: infra.Js(*cdktf.Token_AsString(cdktf.Fn_LookupNested(devEc2Instance.RootBlockDevice(), &[]interface{}{
 					infra.Js("volume_size"),
 				}), &cdktf.EncodingOptions{}) + " GiB"),
 			},
 		},
-		ResourceId: cdktf.Token_AsString(awsInstanceDev.Id(), &cdktf.EncodingOptions{}),
-		Count:      mainCount,
+		ResourceId: cdktf.Token_AsString(devEc2Instance.Id(), &cdktf.EncodingOptions{}),
+		Count:      devEc2Count,
 	})
 
-	ec2instancestate.NewEc2InstanceState(this, infra.Js("dev_21"), &ec2instancestate.Ec2InstanceStateConfig{
-		InstanceId: cdktf.Token_AsString(awsInstanceDev.Id(), &cdktf.EncodingOptions{}),
-		State:      cdktf.Token_AsString(cdktf.Fn_Conditional(cdktf.Op_Eq(me.Transition(), infra.Js("start")), infra.Js("running"), infra.Js("stopped")), &cdktf.EncodingOptions{}),
+	ec2instancestate.NewEc2InstanceState(stack, infra.Js("dev_21"), &ec2instancestate.Ec2InstanceStateConfig{
+		InstanceId: cdktf.Token_AsString(devEc2Instance.Id(), &cdktf.EncodingOptions{}),
+		State:      cdktf.Token_AsString(cdktf.Fn_Conditional(cdktf.Op_Eq(devCoderWorkspace.Transition(), infra.Js("start")), infra.Js("running"), infra.Js("stopped")), &cdktf.EncodingOptions{}),
 	})
 
-	return this
+	return stack
 }
