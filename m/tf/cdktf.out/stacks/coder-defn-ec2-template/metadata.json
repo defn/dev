@@ -1,7 +1,7 @@
 {
   "//": {
     "metadata": {
-      "backend": "s3",
+      "backend": "local",
       "stackName": "coder-defn-ec2-template",
       "version": "0.20.3"
     },
@@ -237,13 +237,8 @@
   },
   "terraform": {
     "backend": {
-      "s3": {
-        "bucket": "dfn-defn-terraform-state",
-        "dynamodb_table": "dfn-defn-terraform-state-lock",
-        "encrypt": true,
-        "key": "stacks/coder-defn-ec2-template/terraform.tfstate",
-        "profile": "defn-org-sso",
-        "region": "us-east-1"
+      "local": {
+        "path": "/home/ubuntu/m/tf/terraform.coder-defn-ec2-template.tfstate"
       }
     },
     "required_providers": {

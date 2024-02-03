@@ -32,14 +32,7 @@ import (
 func CoderDefnEc2Stack(scope constructs.Construct, site *infra.AwsProps, name string) cdktf.TerraformStack {
 	stack := cdktf.NewTerraformStack(scope, infra.Js(fmt.Sprintf("coder-defn-ec2-%s", name)))
 
-	cdktf.NewS3Backend(stack, &cdktf.S3BackendConfig{
-		Key:           infra.Js(fmt.Sprintf("stacks/coder-defn-ec2-%s/terraform.tfstate", name)),
-		Encrypt:       infra.Jstrue(),
-		Bucket:        &site.Backend.Bucket,
-		Region:        &site.Backend.Region,
-		Profile:       &site.Backend.Profile,
-		DynamodbTable: &site.Backend.Lock,
-	})
+	cdktf.NewLocalBackend(stack, &cdktf.LocalBackendConfig{})
 
 	paramUsername := datacoderparameter.NewDataCoderParameter(stack, infra.Js("username"), &datacoderparameter.DataCoderParameterConfig{
 		Default:     infra.Js("ubuntu"),
