@@ -32,5 +32,6 @@ set -x
 #aws secretsmanager get-secret-value --secret-id "${DFD_WORKSPACE_NAME}-${instance_id}" | jq -r '.SecretString' >/tmp/.coder-token
 #CODER_AGENT_TOKEN="$(cat /tmp/.coder-token)"
 
+sudo chown ubuntu:ubuntu /tmp/user-data.log
 coder agent >/tmp/user-data.log 2>&1 &
 disown
