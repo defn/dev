@@ -171,7 +171,7 @@ if ! tailscale ip -4 | grep ^100; then
   sudo tailscale up --accept-dns --accept-routes --authkey="%s" --operator=ubuntu --ssh --timeout 60s # missing --advertise-routes= on reboot
 fi
 
-nohup sudo -H -E -u %s bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${%s} coder-${%s}-${%s}' >/tmp/cloud-init.log 2>&1 &
+nohup sudo -H -E -u %s bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${%s} coder-${%s}-${%s}' >/tmp/user-data.log 2>&1 &
 disown
 --//--`,
 		*devCoderWorkspace.Owner(), *devCoderWorkspace.Name(),
@@ -288,10 +288,10 @@ disown
 			VscodeInsiders: infra.Jsbool(false),
 		},
 		Env: &map[string]*string{
-			"GIT_AUTHOR_EMAIL":    cdktf.Token_AsString(devCoderWorkspace.OwnerEmail(), &cdktf.EncodingOptions{}),
-			"GIT_AUTHOR_NAME":     cdktf.Token_AsString(devCoderWorkspace.Owner(), &cdktf.EncodingOptions{}),
-			"GIT_COMMITTER_EMAIL": cdktf.Token_AsString(devCoderWorkspace.OwnerEmail(), &cdktf.EncodingOptions{}),
-			"GIT_COMMITTER_NAME":  cdktf.Token_AsString(devCoderWorkspace.Owner(), &cdktf.EncodingOptions{}),
+			"GIT_AUTHOR_EMAIL":    devCoderWorkspace.OwnerEmail(),
+			"GIT_AUTHOR_NAME":     devCoderWorkspace.Owner(),
+			"GIT_COMMITTER_EMAIL": devCoderWorkspace.OwnerEmail(),
+			"GIT_COMMITTER_NAME":  devCoderWorkspace.Owner(),
 			"LC_ALL":              infra.Js("C.UTF-8"),
 			"LOCAL_ARCHIVE":       infra.Js("/usr/lib/locale/locale-archive"),
 		},
@@ -331,10 +331,10 @@ disown
 	})
 
 	devEc2Instance := instance.NewInstance(stack, infra.Js("dev_17"), &instance.InstanceConfig{
-		Ami:                cdktf.Token_AsString(devAmi.Id(), &cdktf.EncodingOptions{}),
+		Ami:                devAmi.Id(),
 		AvailabilityZone:   infra.Js(fmt.Sprintf("%s%s", *paramRegion.Value(), *paramAvailablityZone.Value())),
 		EbsOptimized:       infra.Jsbool(true),
-		IamInstanceProfile: cdktf.Token_AsString(devInstanceProfle.Name(), &cdktf.EncodingOptions{}),
+		IamInstanceProfile: devInstanceProfle.Name(),
 		InstanceType:       paramInstanceType.Value(),
 		MetadataOptions: &instance.InstanceMetadataOptions{
 			HttpEndpoint:            infra.Js("enabled"),
@@ -355,7 +355,7 @@ disown
 		},
 		UserData: infra.Js(devUserData),
 		VpcSecurityGroupIds: &[]*string{
-			cdktf.Token_AsString(devSecurityGroup.Id(), &cdktf.EncodingOptions{}),
+			devSecurityGroup.Id(),
 		},
 	})
 
@@ -364,8 +364,8 @@ disown
 	})
 
 	secretsmanagersecretversion.NewSecretsmanagerSecretVersion(stack, infra.Js("dev_19"), &secretsmanagersecretversion.SecretsmanagerSecretVersionConfig{
-		SecretId:     cdktf.Token_AsString(devSecretsManagerSecret.Id(), &cdktf.EncodingOptions{}),
-		SecretString: infra.Js("{coder_agent_token:${" + *devCoderAgent.Token() + "}}"),
+		SecretId:     devSecretsManagerSecret.Id(),
+		SecretString: devCoderAgent.Token(),
 	})
 
 	devEc2Count := cdktf.TerraformCount_Of(cdktf.Token_AsNumber(cdktf.Fn_Conditional(cdktf.Op_Eq(paramServiceProvider.Value(), infra.Js("aws-ec2")), infra.Jsn(1), infra.Jsn(0))))
@@ -373,7 +373,7 @@ disown
 		Item: []*metadata.MetadataItem{
 			{
 				Key:   infra.Js("instance type"),
-				Value: cdktf.Token_AsString(devEc2Instance.InstanceType(), &cdktf.EncodingOptions{}),
+				Value: devEc2Instance.InstanceType(),
 			},
 			{
 				Key: infra.Js("disk"),
@@ -382,12 +382,12 @@ disown
 				}), &cdktf.EncodingOptions{}) + " GiB"),
 			},
 		},
-		ResourceId: cdktf.Token_AsString(devEc2Instance.Id(), &cdktf.EncodingOptions{}),
+		ResourceId: devEc2Instance.Id(),
 		Count:      devEc2Count,
 	})
 
 	ec2instancestate.NewEc2InstanceState(stack, infra.Js("dev_21"), &ec2instancestate.Ec2InstanceStateConfig{
-		InstanceId: cdktf.Token_AsString(devEc2Instance.Id(), &cdktf.EncodingOptions{}),
+		InstanceId: devEc2Instance.Id(),
 		State:      cdktf.Token_AsString(cdktf.Fn_Conditional(cdktf.Op_Eq(devCoderWorkspace.Transition(), infra.Js("start")), infra.Js("running"), infra.Js("stopped")), &cdktf.EncodingOptions{}),
 	})
 
