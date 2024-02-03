@@ -9,31 +9,40 @@ terraform {
       source  = "coder/coder"
     }
   }
-  backend "local" {
-    path = "/home/ubuntu/m/tf/terraform.coder-defn-ec2-template.tfstate"
+  backend "s3" {
+    bucket         = "dfn-defn-terraform-state"
+    dynamodb_table = "dfn-defn-terraform-state-lock"
+    encrypt        = true
+    key            = "stacks/coder-defn-ec2-template/terraform.tfstate"
+    profile        = "defn-org-sso"
+    region         = "us-east-1"
   }
 
 
 }
-resource "aws_default_vpc" "default" {
+data "coder_parameter" "username" {
+  default      = "ubuntu"
+  description  = "Linux accoount name"
+  display_name = "Username"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  name         = "username"
+  type         = "string"
 }
-data "aws_ami" "ubuntu" {
-  most_recent = true
-  owners = [
-    "self"
-  ]
-  filter {
-    name = "name"
-    values = [
-      "coder-*"
-    ]
-  }
-  filter {
-    name = "architecture"
-    values = [
-      "x86_64"
-    ]
-  }
+data "coder_parameter" "region" {
+  default      = "us-west-2"
+  description  = "Cloud region"
+  display_name = "Cloud region"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  name         = "region"
+  type         = "string"
+}
+data "coder_parameter" "az" {
+  default      = "a"
+  description  = "Cloud availability zone"
+  display_name = "Cloud availability zone"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  name         = "az"
+  type         = "string"
 }
 data "coder_parameter" "instance_type" {
   default      = "m6id.large"
@@ -85,23 +94,52 @@ data "coder_parameter" "provider" {
     value = "aws-ec2"
   }
 }
+data "coder_parameter" "tsauthkey" {
+  default      = "TODO"
+  description  = "Tailscale node authorization key"
+  display_name = "Tailscale auth key"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  mutable      = true
+  name         = "tsauthkey"
+  type         = "string"
+}
 data "coder_workspace" "me" {
 }
+resource "aws_default_vpc" "default" {
+}
+data "aws_ami" "ubuntu" {
+  most_recent = true
+  owners = [
+    "self"
+  ]
+  filter {
+    name = "name"
+    values = [
+      "coder-*"
+    ]
+  }
+  filter {
+    name = "architecture"
+    values = [
+      "x86_64"
+    ]
+  }
+}
 resource "aws_iam_role" "dev" {
-  assume_role_policy = jsonencode({ "Statement" = [{ "Action" = "sts:AssumeRole", "Effect" = "Allow", "Principal" = { "Service" = "ec2.amazonaws.com" }, "Sid" = "" }], "Version" = "2012-10-17" })
+  assume_role_policy = "${jsonencode({ "Statement" = [{ "Action" = "sts:AssumeRole", "Effect" = "Allow", "Principal" = { "Service" = "ec2.amazonaws.com" }, "Sid" = "" }], "Version" = "2012-10-17" })}"
   name               = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
 }
 resource "aws_iam_role_policy_attachment" "admin" {
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
-  role       = aws_iam_role.dev.name
+  role       = "${aws_iam_role.dev.name}"
 }
 resource "aws_iam_role_policy_attachment" "secretsmanager" {
   policy_arn = "arn:aws:iam::aws:policy/SecretsManagerReadWrite"
-  role       = aws_iam_role.dev.name
+  role       = "${aws_iam_role.dev.name}"
 }
 resource "aws_iam_role_policy_attachment" "ssm" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
-  role       = aws_iam_role.dev.name
+  role       = "${aws_iam_role.dev.name}"
 }
 resource "aws_security_group" "dev_11" {
   description = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
@@ -152,7 +190,7 @@ resource "aws_security_group" "dev_11" {
   tags = {
     "karpenter.sh/discovery" = "k3d-dfd"
   }
-  vpc_id = aws_default_vpc.default.id
+  vpc_id = "${aws_default_vpc.default.id}"
 }
 resource "coder_agent" "main" {
   arch = "amd64"
@@ -175,13 +213,13 @@ resource "coder_agent" "main" {
   }
 }
 resource "coder_app" "code-server" {
-  agent_id     = coder_agent.main.id
+  agent_id     = "${coder_agent.main.id}"
   display_name = "code-server"
   icon         = "/icon/code.svg"
   share        = "owner"
   slug         = "code-server"
   subdomain    = false
-  url          = "http://localhost:13337/?folder=/home/ubuntu/m"
+  url          = "http://localhost:13337/?folder=/home/&{%!s(*cdktf.jsiiProxy_TerraformDataSource=&{{0xc000655488} {0} {{0}} {0}})}/m"
   healthcheck {
     interval  = 5
     threshold = 6
@@ -190,25 +228,25 @@ resource "coder_app" "code-server" {
 }
 
 provider "aws" {
-  region = { "availability_zone" = "us-west-2a", "instance_type" = data.coder_parameter.instance_type.value, "region" = "us-west-2", "root_volume_size" = data.coder_parameter.nix_volume_size.value }.region
+  region = "${data.coder_parameter.region.value}"
 }
 
 provider "coder" {
 }
 module "coder-login" {
-  agent_id = coder_agent.main.id
+  agent_id = "${coder_agent.main.id}"
   source   = "https://registry.coder.com/modules/coder-login"
 }
 resource "aws_iam_instance_profile" "dev_16" {
   name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
-  role = aws_iam_role.dev.name
+  role = "${aws_iam_role.dev.name}"
 }
 resource "aws_instance" "dev_17" {
-  ami                  = data.aws_ami.ubuntu.id
-  availability_zone    = { "availability_zone" = "us-west-2a", "instance_type" = data.coder_parameter.instance_type.value, "region" = "us-west-2", "root_volume_size" = data.coder_parameter.nix_volume_size.value }.availability_zone
+  ami                  = "${data.aws_ami.ubuntu.id}"
+  availability_zone    = "${data.coder_parameter.region.value}${data.coder_parameter.az.value}"
   ebs_optimized        = true
-  iam_instance_profile = aws_iam_instance_profile.dev_16.name
-  instance_type        = { "availability_zone" = "us-west-2a", "instance_type" = data.coder_parameter.instance_type.value, "region" = "us-west-2", "root_volume_size" = data.coder_parameter.nix_volume_size.value }.instance_type
+  iam_instance_profile = "${aws_iam_instance_profile.dev_16.name}"
+  instance_type        = "${data.coder_parameter.instance_type.value}"
   monitoring           = false
   tags = {
     Coder_Provisioned = "true"
@@ -253,10 +291,10 @@ while true; do
 done
 
 if ! tailscale ip -4 | grep ^100; then
-  sudo tailscale up --accept-dns --accept-routes --authkey=\"super-secret\" --operator=ubuntu --ssh --timeout 60s # missing --advertise-routes= on reboot
+  sudo tailscale up --accept-dns --accept-routes --authkey="${data.coder_parameter.tsauthkey.value}" --operator=ubuntu --ssh --timeout 60s # missing --advertise-routes= on reboot
 fi
 
-nohup sudo -H -E -u ubuntu bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${data.coder_workspace.me.access_url} coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}' >/tmp/cloud-init.log 2>&1 &
+nohup sudo -H -E -u ${data.coder_parameter.username.value} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${data.coder_workspace.me.access_url} coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}' >/tmp/cloud-init.log 2>&1 &
 disown
 --//--
 EOF
@@ -272,7 +310,7 @@ EOF
   root_block_device {
     delete_on_termination = true
     encrypted             = true
-    volume_size           = { "availability_zone" = "us-west-2a", "instance_type" = data.coder_parameter.instance_type.value, "region" = "us-west-2", "root_volume_size" = data.coder_parameter.nix_volume_size.value }.root_volume_size
+    volume_size           = "${data.coder_parameter.nix_volume_size.value}"
     volume_type           = "gp3"
   }
 }
@@ -280,22 +318,22 @@ resource "aws_secretsmanager_secret" "dev_18" {
   name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}-${aws_instance.dev_17.id}"
 }
 resource "aws_secretsmanager_secret_version" "dev_19" {
-  secret_id     = aws_secretsmanager_secret.dev_18.id
+  secret_id     = "${aws_secretsmanager_secret.dev_18.id}"
   secret_string = "{coder_agent_token:${coder_agent.main.token}}"
 }
 resource "coder_metadata" "main_20" {
-  resource_id = aws_instance.dev_17.id
+  resource_id = "${aws_instance.dev_17.id}"
   item {
     key   = "instance type"
-    value = aws_instance.dev_17.instance_type
+    value = "${aws_instance.dev_17.instance_type}"
   }
   item {
     key   = "disk"
     value = "${aws_instance.dev_17.root_block_device[0].volume_size} GiB"
   }
-  count = (data.coder_parameter.provider.value == "aws-ec2") ? 1 : 0
+  count = "${(data.coder_parameter.provider.value == "aws-ec2") ? 1 : 0}"
 }
 resource "aws_ec2_instance_state" "dev_21" {
-  instance_id = aws_instance.dev_17.id
-  state       = (data.coder_workspace.me.transition == "start") ? "running" : "stopped"
+  instance_id = "${aws_instance.dev_17.id}"
+  state       = "${(data.coder_workspace.me.transition == "start") ? "running" : "stopped"}"
 }
