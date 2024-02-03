@@ -46,7 +46,7 @@ class-init:
 teacher: 
 	$(MAKE) hello
 	tailscale serve --bg http://127.0.0.1:3000
-	b server defn-org $(MAKE) dev_inner 
+	env AWS_DEFAULT_REGION=us-west-1 b server defn-org $(MAKE) dev_inner 
 
 dev_inner:
 	coder server --oauth2-github-allow-signups \
