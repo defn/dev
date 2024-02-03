@@ -46,7 +46,7 @@ while true; do
 done
 
 if ! tailscale ip -4 | grep ^100; then
-  sudo tailscale up --accept-dns --accept-routes --authkey="${var.tsauthkey}" --operator=ubuntu --ssh --timeout 60s # missing --advertse-routes= on reboot
+  sudo tailscale up --accept-dns --accept-routes --authkey="${var.tsauthkey}" --operator=ubuntu --ssh --timeout 60s # missing --advertise-routes= on reboot
 fi
 
 nohup sudo -H -E -u ${local.username} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${data.coder_workspace.me.access_url} ${local.coder_name}' >/tmp/cloud-init.log 2>&1 &
@@ -105,6 +105,6 @@ data "coder_parameter" "nix_volume_size" {
   mutable      = true
   validation {
     min = 100
-    max = 200
+    max = 300
   }
 }

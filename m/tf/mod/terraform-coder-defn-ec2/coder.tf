@@ -1,8 +1,5 @@
 data "coder_workspace" "me" {}
 
-locals {
-}
-
 resource "coder_agent" "main" {
   #auth = "aws-instance-identity"
   auth = "token"
