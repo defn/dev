@@ -84,5 +84,8 @@
     "diffEditor.ignoreTrimWhitespace": false
   },
   "remote.autoForwardPortsSource": "hybrid",
-  "bazel.buildifierFixOnFormat": true
+  "bazel.buildifierFixOnFormat": true,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
