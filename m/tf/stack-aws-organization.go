@@ -1,8 +1,6 @@
 package main
 
 import (
-	_ "embed"
-
 	"fmt"
 
 	"github.com/aws/constructs-go/constructs/v10"
