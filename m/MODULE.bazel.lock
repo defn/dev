@@ -1593,8 +1593,8 @@
       "general": {
         "bzlTransitiveDigest": "zP01muRk4s4xWGK3gNPXOyDMQkOPsIhu99akeKWFFQ0=",
         "accumulatedFileDigests": {
-          "@@//:go.mod": "bf567b8d72c399cbaea5939ee63bbf6aca9dfcd1fdde0be8d992915adb7f606e",
-          "@@//:go.sum": "174ee93f0c8579f8e7009b8a5f6e3f0d798a327b6f6e76b10be2dae527a049b0",
+          "@@//:go.mod": "763ad79845f9576d5853e83405b42dc2c016d8294d05188fae94ea38dbf412f1",
+          "@@//:go.sum": "3693ab2646a3e37826a5401ac8e9311651f10a31f8d081d8c2fbd81919a7f5bc",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
           "@@rules_go~0.45.1//:go.mod": "de22304b720f7f61350ec1c9739de6c0a1b1103fd22bfeb6e92c6c843ddc6d6e",
@@ -1773,9 +1773,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:AxaPEZm/UnA+uQUuLPZDbd0FVUrxbTezdBS99GghMRY=",
+              "sum": "h1:iToJnK9xnb2K2In+nooo9v/UaIl2RhxOejn/QmhjigE=",
               "replace": "",
-              "version": "v19.3.0"
+              "version": "v19.4.0"
             }
           },
           "com_github_opencontainers_image_spec": {
