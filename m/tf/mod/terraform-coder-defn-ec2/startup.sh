@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
 
-id -a
-cd
-cd m
-pwd
+cd ~/m
 bin/startup.sh
