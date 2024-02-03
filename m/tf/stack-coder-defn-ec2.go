@@ -273,7 +273,7 @@ disown
 			"LOCAL_ARCHIVE":       infra.Js("/usr/lib/locale/locale-archive"),
 		},
 		Os:                   infra.Js("linux"),
-		StartupScript:        cdktf.Fn_File(infra.Js("startup.sh")),
+		StartupScript:        infra.Js(`cd ~/m && bin/startup.sh`),
 		StartupScriptTimeout: infra.Jsn(180),
 	})
 

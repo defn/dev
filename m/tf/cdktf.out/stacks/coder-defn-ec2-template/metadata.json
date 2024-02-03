@@ -2,7 +2,7 @@
   "//": {
     "metadata": {
       "backend": "local",
-      "stackName": "coder-defn-ec2-meh",
+      "stackName": "coder-defn-ec2-template",
       "version": "0.20.3"
     },
     "outputs": {}
@@ -12,7 +12,7 @@
       "ubuntu": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-meh/ubuntu",
+            "path": "coder-defn-ec2-template/ubuntu",
             "uniqueId": "ubuntu"
           }
         }
@@ -22,7 +22,7 @@
       "instance_type": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-meh/instance_type",
+            "path": "coder-defn-ec2-template/instance_type",
             "uniqueId": "instance_type"
           }
         }
@@ -30,7 +30,7 @@
       "nix_volume_size": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-meh/nix_volume_size",
+            "path": "coder-defn-ec2-template/nix_volume_size",
             "uniqueId": "nix_volume_size"
           }
         }
@@ -38,7 +38,7 @@
       "provider": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-meh/provider",
+            "path": "coder-defn-ec2-template/provider",
             "uniqueId": "provider"
           }
         }
@@ -48,7 +48,7 @@
       "me": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-meh/me",
+            "path": "coder-defn-ec2-template/me",
             "uniqueId": "me"
           }
         }
@@ -59,7 +59,7 @@
     "coder-login": {
       "//": {
         "metadata": {
-          "path": "coder-defn-ec2-meh/coder-login",
+          "path": "coder-defn-ec2-template/coder-login",
           "uniqueId": "coder-login"
         }
       }
@@ -70,7 +70,7 @@
       "default": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-meh/default",
+            "path": "coder-defn-ec2-template/default",
             "uniqueId": "default"
           }
         }
@@ -80,7 +80,7 @@
       "dev_21": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-meh/dev_21",
+            "path": "coder-defn-ec2-template/dev_21",
             "uniqueId": "dev_21"
           }
         }
@@ -90,7 +90,7 @@
       "dev_16": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-meh/dev_16",
+            "path": "coder-defn-ec2-template/dev_16",
             "uniqueId": "dev_16"
           }
         }
@@ -100,7 +100,7 @@
       "dev": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-meh/dev",
+            "path": "coder-defn-ec2-template/dev",
             "uniqueId": "dev"
           }
         }
@@ -110,7 +110,7 @@
       "admin": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-meh/admin",
+            "path": "coder-defn-ec2-template/admin",
             "uniqueId": "admin"
           }
         }
@@ -118,7 +118,7 @@
       "secretsmanager": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-meh/secretsmanager",
+            "path": "coder-defn-ec2-template/secretsmanager",
             "uniqueId": "secretsmanager"
           }
         }
@@ -126,7 +126,7 @@
       "ssm": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-meh/ssm",
+            "path": "coder-defn-ec2-template/ssm",
             "uniqueId": "ssm"
           }
         }
@@ -136,7 +136,7 @@
       "dev_17": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-meh/dev_17",
+            "path": "coder-defn-ec2-template/dev_17",
             "uniqueId": "dev_17"
           }
         }
@@ -146,7 +146,7 @@
       "dev_18": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-meh/dev_18",
+            "path": "coder-defn-ec2-template/dev_18",
             "uniqueId": "dev_18"
           }
         }
@@ -156,7 +156,7 @@
       "dev_19": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-meh/dev_19",
+            "path": "coder-defn-ec2-template/dev_19",
             "uniqueId": "dev_19"
           }
         }
@@ -166,7 +166,7 @@
       "dev_11": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-meh/dev_11",
+            "path": "coder-defn-ec2-template/dev_11",
             "uniqueId": "dev_11"
           }
         }
@@ -176,7 +176,7 @@
       "main": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-meh/main",
+            "path": "coder-defn-ec2-template/main",
             "uniqueId": "main"
           }
         }
@@ -186,7 +186,7 @@
       "code-server": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-meh/code-server",
+            "path": "coder-defn-ec2-template/code-server",
             "uniqueId": "code-server"
           }
         }
@@ -196,7 +196,7 @@
       "main_20": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-meh/main_20",
+            "path": "coder-defn-ec2-template/main_20",
             "uniqueId": "main_20"
           }
         }
@@ -206,7 +206,7 @@
   "terraform": {
     "backend": {
       "local": {
-        "path": "/home/ubuntu/m/tf/terraform.coder-defn-ec2-meh.tfstate"
+        "path": "/home/ubuntu/m/tf/terraform.coder-defn-ec2-template.tfstate"
       }
     },
     "required_providers": {

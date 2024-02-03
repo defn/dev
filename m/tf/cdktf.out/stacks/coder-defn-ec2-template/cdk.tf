@@ -10,7 +10,7 @@ terraform {
     }
   }
   backend "local" {
-    path = "/home/ubuntu/m/tf/terraform.coder-defn-ec2-meh.tfstate"
+    path = "/home/ubuntu/m/tf/terraform.coder-defn-ec2-template.tfstate"
   }
 
 
@@ -166,7 +166,7 @@ resource "coder_agent" "main" {
     LOCAL_ARCHIVE       = "/usr/lib/locale/locale-archive"
   }
   os                     = "linux"
-  startup_script         = file("startup.sh")
+  startup_script         = "cd ~/m && bin/startup.sh"
   startup_script_timeout = 180
   display_apps {
     ssh_helper      = false
