@@ -73,7 +73,7 @@ resource "aws_secretsmanager_secret" "dev" {
 
 resource "aws_secretsmanager_secret_version" "dev" {
   secret_id     = aws_secretsmanager_secret.dev.id
-  secret_string = "{\"coder_agent_token\":\"${coder_agent.main.token}\"}"
+  secret_string = "{coder_agent_token:${coder_agent.main.token}}"
 }
 
 # trunk-ignore(checkov/CKV_AWS_148)
