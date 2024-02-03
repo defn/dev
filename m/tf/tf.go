@@ -36,7 +36,7 @@ func init() {
 
 			GlobalStack(app, &site)
 
-			CoderDefnEc2Stack(app, "meh")
+			CoderDefnEc2Stack(app, "template")
 
 			app.Synth()
 		},
