@@ -98,6 +98,26 @@ data "coder_parameter" "tsauthkey" {
 }
 data "coder_workspace" "me" {
 }
+resource "coder_agent" "main" {
+  arch = "amd64"
+  auth = "token"
+  env = {
+    GIT_AUTHOR_EMAIL    = "${data.coder_workspace.me.owner_email}"
+    GIT_AUTHOR_NAME     = "${data.coder_workspace.me.owner}"
+    GIT_COMMITTER_EMAIL = "${data.coder_workspace.me.owner_email}"
+    GIT_COMMITTER_NAME  = "${data.coder_workspace.me.owner}"
+    LC_ALL              = "C.UTF-8"
+    LOCAL_ARCHIVE       = "/usr/lib/locale/locale-archive"
+  }
+  os                     = "linux"
+  startup_script         = "cd ~/m && bin/startup.sh"
+  startup_script_timeout = 180
+  display_apps {
+    ssh_helper      = false
+    vscode          = false
+    vscode_insiders = false
+  }
+}
 resource "aws_default_vpc" "default" {
 }
 data "aws_ami" "ubuntu" {
@@ -185,26 +205,6 @@ resource "aws_security_group" "dev_11" {
   }
   vpc_id = "${aws_default_vpc.default.id}"
 }
-resource "coder_agent" "main" {
-  arch = "amd64"
-  auth = "token"
-  env = {
-    GIT_AUTHOR_EMAIL    = "${data.coder_workspace.me.owner_email}"
-    GIT_AUTHOR_NAME     = "${data.coder_workspace.me.owner}"
-    GIT_COMMITTER_EMAIL = "${data.coder_workspace.me.owner_email}"
-    GIT_COMMITTER_NAME  = "${data.coder_workspace.me.owner}"
-    LC_ALL              = "C.UTF-8"
-    LOCAL_ARCHIVE       = "/usr/lib/locale/locale-archive"
-  }
-  os                     = "linux"
-  startup_script         = "cd ~/m && bin/startup.sh"
-  startup_script_timeout = 180
-  display_apps {
-    ssh_helper      = false
-    vscode          = false
-    vscode_insiders = false
-  }
-}
 resource "coder_app" "code-server" {
   agent_id     = "${coder_agent.main.id}"
   display_name = "code-server"
@@ -287,7 +287,7 @@ if ! tailscale ip -4 | grep ^100; then
   sudo tailscale up --accept-dns --accept-routes --authkey="${data.coder_parameter.tsauthkey.value}" --operator=ubuntu --ssh --timeout 60s # missing --advertise-routes= on reboot
 fi
 
-nohup sudo -H -E -u ${data.coder_parameter.username.value} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${data.coder_workspace.me.access_url} coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}' >/tmp/user-data.log 2>&1 &
+nohup sudo -H -E -u ${data.coder_parameter.username.value} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${data.coder_workspace.me.access_url} coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name} ${coder_agent.main.token}' >/tmp/user-data.log 2>&1 &
 disown
 --//--
 EOF
@@ -306,13 +306,6 @@ EOF
     volume_size           = "${data.coder_parameter.nix_volume_size.value}"
     volume_type           = "gp3"
   }
-}
-resource "aws_secretsmanager_secret" "dev_18" {
-  name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}-${aws_instance.dev_17.id}"
-}
-resource "aws_secretsmanager_secret_version" "dev_19" {
-  secret_id     = "${aws_secretsmanager_secret.dev_18.id}"
-  secret_string = "${coder_agent.main.token}"
 }
 resource "coder_metadata" "main_20" {
   resource_id = "${aws_instance.dev_17.id}"
