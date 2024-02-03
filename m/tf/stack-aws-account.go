@@ -10,9 +10,9 @@ import (
 
 	aws "github.com/cdktf/cdktf-provider-aws-go/aws/v19/provider"
 
-	infra "github.com/defn/dev/m/command/infra"
-
 	"github.com/defn/dev/m/tf/gen/terraform_aws_defn_account"
+
+	infra "github.com/defn/dev/m/command/infra"
 )
 
 func AwsAccountStack(scope constructs.Construct, site *infra.AwsProps, org *infra.AwsOrganization, acc *infra.AwsAccount) cdktf.TerraformStack {

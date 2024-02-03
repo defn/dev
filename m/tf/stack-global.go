@@ -11,9 +11,9 @@ import (
 
 	aws "github.com/cdktf/cdktf-provider-aws-go/aws/v19/provider"
 
-	infra "github.com/defn/dev/m/command/infra"
-
 	"github.com/defn/dev/m/tf/gen/terraform_aws_s3_bucket"
+
+	infra "github.com/defn/dev/m/command/infra"
 )
 
 func ToTerraformAwsS3BucketConfig(org *infra.AwsOrganization, acc *infra.AwsAccount, provider *aws.AwsProvider) *terraform_aws_s3_bucket.TerraformAwsS3BucketConfig {
