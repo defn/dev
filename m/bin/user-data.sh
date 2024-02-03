@@ -34,6 +34,5 @@ set -x
 #aws secretsmanager get-secret-value --secret-id "${DFD_WORKSPACE_NAME}-${instance_id}" | jq -r '.SecretString' >/tmp/.coder-token
 #CODER_AGENT_TOKEN="$(cat /tmp/.coder-token)"
 
-touch /tmp/coder-agent.log
 coder agent >>/tmp/coder-agent.log 2>&1 &
 disown
