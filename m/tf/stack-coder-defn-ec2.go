@@ -108,7 +108,6 @@ func CoderDefnEc2Stack(scope constructs.Construct, site *infra.AwsProps, name st
 		Description: infra.Js("The service provider to deploy the workspace in"),
 		DisplayName: infra.Js("Provider"),
 		Icon:        infra.Js("/emojis/1f30e.png"),
-		Mutable:     infra.Jsbool(true),
 		Name:        infra.Js("provider"),
 		Option: []*datacoderparameter.DataCoderParameterOption{
 			{
@@ -123,7 +122,6 @@ func CoderDefnEc2Stack(scope constructs.Construct, site *infra.AwsProps, name st
 		Description: infra.Js("Tailscale node authorization key"),
 		DisplayName: infra.Js("Tailscale auth key"),
 		Icon:        infra.Js("https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"),
-		Mutable:     infra.Jsbool(true),
 		Name:        infra.Js("tsauthkey"),
 		Type:        infra.Js("string"),
 	})
