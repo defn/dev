@@ -11,7 +11,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_workspace"></a> [workspace](#module\_workspace) | ./mod/terraform-coder-defn-dev | n/a |
+| <a name="module_workspace"></a> [workspace](#module\_workspace) | ./mod/terraform-coder-defn-ec2 | n/a |
 
 ## Resources
 

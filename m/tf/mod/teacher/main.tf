@@ -3,7 +3,7 @@ variable "tsauthkey" {
 }
 
 module "workspace" {
-  source = "./mod/terraform-coder-defn-dev"
+  source = "./mod/terraform-coder-defn-ec2"
 
   tsauthkey = var.tsauthkey
 }
