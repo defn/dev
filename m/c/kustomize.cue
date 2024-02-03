@@ -393,7 +393,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.31.3"
+		version: "6.31.5"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "info"
@@ -886,7 +886,7 @@ kustomize: "knative": #Kustomize & {
 	}
 }
 
-cert_manager_version: "1.13.3"
+cert_manager_version: "1.14.1"
 
 // https://artifacthub.io/packages/helm/cert-manager/cert-manager
 kustomize: "cert-manager": #KustomizeHelm & {
@@ -949,7 +949,7 @@ cilium_common: {
 		release:   "cilium"
 		name:      "cilium"
 		namespace: "kube-system"
-		version:   "1.14.5"
+		version:   "1.14.6"
 		repo:      "https://helm.cilium.io"
 		values: {
 			operator: replicas:       1
@@ -2017,7 +2017,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.40.9"
+		version:   "0.40.10"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [
@@ -2056,7 +2056,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "4.2.3"
+		version:     "4.2.4"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
@@ -2960,7 +2960,7 @@ kustomize: "reloader": #KustomizeHelm & {
 		release:   "reloader"
 		name:      "reloader"
 		namespace: "reloader"
-		version:   "1.0.63"
+		version:   "1.0.65"
 		repo:      "https://stakater.github.io/stakater-charts"
 		values: {
 		}
