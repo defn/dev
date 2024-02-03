@@ -1,0 +1,223 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "local",
+      "stackName": "coder-defn-ec2-meh",
+      "version": "0.20.3"
+    },
+    "outputs": {}
+  },
+  "data": {
+    "aws_ami": {
+      "ubuntu": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-meh/ubuntu",
+            "uniqueId": "ubuntu"
+          }
+        }
+      }
+    },
+    "coder_parameter": {
+      "instance_type": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-meh/instance_type",
+            "uniqueId": "instance_type"
+          }
+        }
+      },
+      "nix_volume_size": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-meh/nix_volume_size",
+            "uniqueId": "nix_volume_size"
+          }
+        }
+      },
+      "provider": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-meh/provider",
+            "uniqueId": "provider"
+          }
+        }
+      }
+    },
+    "coder_workspace": {
+      "me": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-meh/me",
+            "uniqueId": "me"
+          }
+        }
+      }
+    }
+  },
+  "module": {
+    "coder-login": {
+      "//": {
+        "metadata": {
+          "path": "coder-defn-ec2-meh/coder-login",
+          "uniqueId": "coder-login"
+        }
+      }
+    }
+  },
+  "resource": {
+    "aws_default_vpc": {
+      "default": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-meh/default",
+            "uniqueId": "default"
+          }
+        }
+      }
+    },
+    "aws_ec2_instance_state": {
+      "dev_21": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-meh/dev_21",
+            "uniqueId": "dev_21"
+          }
+        }
+      }
+    },
+    "aws_iam_instance_profile": {
+      "dev_16": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-meh/dev_16",
+            "uniqueId": "dev_16"
+          }
+        }
+      }
+    },
+    "aws_iam_role": {
+      "dev": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-meh/dev",
+            "uniqueId": "dev"
+          }
+        }
+      }
+    },
+    "aws_iam_role_policy_attachment": {
+      "admin": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-meh/admin",
+            "uniqueId": "admin"
+          }
+        }
+      },
+      "secretsmanager": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-meh/secretsmanager",
+            "uniqueId": "secretsmanager"
+          }
+        }
+      },
+      "ssm": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-meh/ssm",
+            "uniqueId": "ssm"
+          }
+        }
+      }
+    },
+    "aws_instance": {
+      "dev_17": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-meh/dev_17",
+            "uniqueId": "dev_17"
+          }
+        }
+      }
+    },
+    "aws_secretsmanager_secret": {
+      "dev_18": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-meh/dev_18",
+            "uniqueId": "dev_18"
+          }
+        }
+      }
+    },
+    "aws_secretsmanager_secret_version": {
+      "dev_19": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-meh/dev_19",
+            "uniqueId": "dev_19"
+          }
+        }
+      }
+    },
+    "aws_security_group": {
+      "dev_11": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-meh/dev_11",
+            "uniqueId": "dev_11"
+          }
+        }
+      }
+    },
+    "coder_agent": {
+      "main": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-meh/main",
+            "uniqueId": "main"
+          }
+        }
+      }
+    },
+    "coder_app": {
+      "code-server": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-meh/code-server",
+            "uniqueId": "code-server"
+          }
+        }
+      }
+    },
+    "coder_metadata": {
+      "main_20": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ec2-meh/main_20",
+            "uniqueId": "main_20"
+          }
+        }
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "local": {
+        "path": "/home/ubuntu/m/tf/terraform.coder-defn-ec2-meh.tfstate"
+      }
+    },
+    "required_providers": {
+      "aws": {
+        "source": "aws",
+        "version": "5.34.0"
+      },
+      "coder": {
+        "source": "coder/coder",
+        "version": "0.13.0"
+      }
+    }
+  }
+}

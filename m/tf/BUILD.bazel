@@ -20,6 +20,7 @@ go_library(
         "//tf/gen/coder/coder/datacoderparameter",
         "//tf/gen/coder/coder/datacoderworkspace",
         "//tf/gen/coder/coder/metadata",
+        "//tf/gen/coder/coder/provider",
         "//tf/gen/coderlogin",
         "//tf/gen/terraform_aws_defn_account",
         "//tf/gen/terraform_aws_s3_bucket",
