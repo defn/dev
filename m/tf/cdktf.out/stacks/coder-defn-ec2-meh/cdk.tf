@@ -17,10 +17,6 @@ terraform {
 }
 resource "aws_default_vpc" "default" {
 }
-
-variable "tsauthkey" {
-
-}
 data "aws_ami" "ubuntu" {
   most_recent = true
   owners = [
@@ -93,7 +89,7 @@ data "coder_workspace" "me" {
 }
 resource "aws_iam_role" "dev" {
   assume_role_policy = "${jsonencode({ "Statement" = [{ "Action" = "sts:AssumeRole", "Effect" = "Allow", "Principal" = { "Service" = "ec2.amazonaws.com" }, "Sid" = "" }], "Version" = "2012-10-17" })}"
-  name               = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+  name               = "${coderdata.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
 }
 resource "aws_iam_role_policy_attachment" "admin" {
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
@@ -108,7 +104,7 @@ resource "aws_iam_role_policy_attachment" "ssm" {
   role       = "${aws_iam_role.dev.name}"
 }
 resource "aws_security_group" "dev_11" {
-  description = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+  description = "${coderdata.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
   egress {
     cidr_blocks = [
       "0.0.0.0/0"
@@ -152,7 +148,7 @@ resource "aws_security_group" "dev_11" {
     self            = null
     to_port         = 41641
   }
-  name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+  name = "${coderdata.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
   tags = {
     "karpenter.sh/discovery" = "k3d-dfd"
   }
@@ -204,7 +200,7 @@ module "coder-login" {
   source   = "https://registry.coder.com/modules/coder-login"
 }
 resource "aws_iam_instance_profile" "dev_16" {
-  name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+  name = "${coderdata.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
   role = "${aws_iam_role.dev.name}"
 }
 resource "aws_instance" "dev_17" {
@@ -216,7 +212,7 @@ resource "aws_instance" "dev_17" {
   monitoring           = false
   tags = {
     Coder_Provisioned = "true"
-    Name              = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+    Name              = "${coderdata.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
   }
   user_data = <<EOF
 Content-type: multipart/mixed; boundary=\"//\"
@@ -229,7 +225,7 @@ Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment; filename=\"cloud-config.txt\"
 
 #cloud-config
-hostname: ${coder- $ { data.coder_workspace.me.owner } - $ { data.coder_workspace.me.name } }
+hostname: ${coderdata.coder_workspace.me.owner}-${data.coder_workspace.me.name}
 cloud_final_modules:
 - [scripts-user, always]
 
@@ -257,10 +253,10 @@ while true; do
 done
 
 if ! tailscale ip -4 | grep ^100; then
-  sudo tailscale up --accept-dns --accept-routes --authkey="${var.tsauthkey}" --operator=ubuntu --ssh --timeout 60s # missing --advertise-routes= on reboot
+  sudo tailscale up --accept-dns --accept-routes --authkey="${super-secret}" --operator=ubuntu --ssh --timeout 60s # missing --advertise-routes= on reboot
 fi
 
-nohup sudo -H -E -u ${ubuntu} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${data.coder_workspace.me.access_url} ${coder- $ { data.coder_workspace.me.owner } - $ { data.coder_workspace.me.name } }' >/tmp/cloud-init.log 2>&1 &
+nohup sudo -H -E -u ${ubuntu} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${data.coder_workspace.me.access_url} ${coderdata.coder_workspace.me.owner}-${data.coder_workspace.me.name}' >/tmp/cloud-init.log 2>&1 &
 disown
 --//--
 
@@ -283,7 +279,7 @@ EOF
   }
 }
 resource "aws_secretsmanager_secret" "dev_18" {
-  name = "${coder- $ { data.coder_workspace.me.owner } - $ { data.coder_workspace.me.name } }-${aws_instance.dev_17.id}"
+  name = "${coderdata.coder_workspace.me.owner}-${data.coder_workspace.me.name}-${aws_instance.dev_17.id}"
 }
 resource "aws_secretsmanager_secret_version" "dev_19" {
   secret_id     = "${aws_secretsmanager_secret.dev_18.id}"

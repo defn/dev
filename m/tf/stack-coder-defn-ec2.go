@@ -42,7 +42,7 @@ func CoderDefnEc2Stack(scope constructs.Construct, name string) cdktf.TerraformS
 
 	defaultVar := defaultvpc.NewDefaultVpc(this, infra.Js("default"), &defaultvpc.DefaultVpcConfig{})
 
-	tsauthkey := cdktf.NewTerraformVariable(this, infra.Js("tsauthkey"), &cdktf.TerraformVariableConfig{})
+	tsauthkey := "super-secret"
 
 	ubuntu := dataawsami.NewDataAwsAmi(this, infra.Js("ubuntu"), &dataawsami.DataAwsAmiConfig{
 		Filter: []map[string]interface{}{
@@ -128,8 +128,7 @@ func CoderDefnEc2Stack(scope constructs.Construct, name string) cdktf.TerraformS
 	}
 
 	awsEc2Count := cdktf.Fn_Conditional(cdktf.Op_Eq(service_provider.Value(), infra.Js("aws-ec2")), infra.Jsn(1), infra.Jsn(0))
-	coderName := infra.Js("coder-${" + *me.Owner() + "}-${" + *me.Name() + "}")
-	userData := "Content-type: multipart/mixed; boundary=\"//\"\nMIME-Version: 1.0\n\n--//\nContent-type: text/cloud-config; charset=\"us-ascii\"\nMIME-Version: 1.0\nContent-Transfer-Encoding: 7bit\nContent-Disposition: attachment; filename=\"cloud-config.txt\"\n\n#cloud-config\nhostname: ${" + *coderName + "}\ncloud_final_modules:\n- [scripts-user, always]\n\n--//\nContent-type: text/x-shellscript; charset=\"us-ascii\"\nMIME-Version: 1.0\nContent-Transfer-Encoding: 7bit\nContent-Disposition: attachment; filename=\"userdata.txt\"\n\n#!/bin/bash\n\nset -x\n\necho 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf\necho 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf\necho 'fs.inotify.max_user_instances = 10000' | sudo tee -a /etc/sysctl.d/99-dfd.conf\necho 'fs.inotify.max_user_watches = 524288' | sudo tee -a /etc/sysctl.d/99-dfd.conf\nsudo sysctl -p /etc/sysctl.d/99-dfd.conf\n\nwhile true; do\n  if test -n \"$(dig +short \"cache.nixos.org\" || true)\"; then\n    break\n  fi\n  sleep 5\ndone\n\nif ! tailscale ip -4 | grep ^100; then\n  sudo tailscale up --accept-dns --accept-routes --authkey=\"${" + *tsauthkey.StringValue() + "}\" --operator=ubuntu --ssh --timeout 60s # missing --advertise-routes= on reboot\nfi\n\nnohup sudo -H -E -u ${" + username + "} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${" + *me.AccessUrl() + "} ${" + *coderName + "}' >/tmp/cloud-init.log 2>&1 &\ndisown\n--//--\n\n"
+	userData := "Content-type: multipart/mixed; boundary=\"//\"\nMIME-Version: 1.0\n\n--//\nContent-type: text/cloud-config; charset=\"us-ascii\"\nMIME-Version: 1.0\nContent-Transfer-Encoding: 7bit\nContent-Disposition: attachment; filename=\"cloud-config.txt\"\n\n#cloud-config\nhostname: ${coder" + *me.Owner() + "}-${" + *me.Name() + "}\ncloud_final_modules:\n- [scripts-user, always]\n\n--//\nContent-type: text/x-shellscript; charset=\"us-ascii\"\nMIME-Version: 1.0\nContent-Transfer-Encoding: 7bit\nContent-Disposition: attachment; filename=\"userdata.txt\"\n\n#!/bin/bash\n\nset -x\n\necho 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf\necho 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf\necho 'fs.inotify.max_user_instances = 10000' | sudo tee -a /etc/sysctl.d/99-dfd.conf\necho 'fs.inotify.max_user_watches = 524288' | sudo tee -a /etc/sysctl.d/99-dfd.conf\nsudo sysctl -p /etc/sysctl.d/99-dfd.conf\n\nwhile true; do\n  if test -n \"$(dig +short \"cache.nixos.org\" || true)\"; then\n    break\n  fi\n  sleep 5\ndone\n\nif ! tailscale ip -4 | grep ^100; then\n  sudo tailscale up --accept-dns --accept-routes --authkey=\"${" + tsauthkey + "}\" --operator=ubuntu --ssh --timeout 60s # missing --advertise-routes= on reboot\nfi\n\nnohup sudo -H -E -u ${" + username + "} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${" + *me.AccessUrl() + "} ${coder" + *me.Owner() + "}-${" + *me.Name() + "}' >/tmp/cloud-init.log 2>&1 &\ndisown\n--//--\n\n"
 
 	dev := iamrole.NewIamRole(this, infra.Js("dev"), &iamrole.IamRoleConfig{
 		AssumeRolePolicy: cdktf.Token_AsString(cdktf.FnGenerated_Jsonencode(map[string]interface{}{
@@ -145,7 +144,7 @@ func CoderDefnEc2Stack(scope constructs.Construct, name string) cdktf.TerraformS
 			},
 			"Version": infra.Js("2012-10-17"),
 		}), &cdktf.EncodingOptions{}),
-		Name: coderName,
+		Name: infra.Js("${coder" + *me.Owner() + "}-${" + *me.Name() + "}"),
 	})
 
 	iamrolepolicyattachment.NewIamRolePolicyAttachment(this, infra.Js("admin"), &iamrolepolicyattachment.IamRolePolicyAttachmentConfig{
@@ -164,7 +163,7 @@ func CoderDefnEc2Stack(scope constructs.Construct, name string) cdktf.TerraformS
 	})
 
 	awsSecurityGroupDev := securitygroup.NewSecurityGroup(this, infra.Js("dev_11"), &securitygroup.SecurityGroupConfig{
-		Description: coderName,
+		Description: infra.Js("${coder" + *me.Owner() + "}-${" + *me.Name() + "}"),
 		Egress: []map[string]interface{}{
 			{
 				"cidrBlocks": []*string{
@@ -202,7 +201,7 @@ func CoderDefnEc2Stack(scope constructs.Construct, name string) cdktf.TerraformS
 				"toPort":   infra.Jsn(41641),
 			},
 		},
-		Name: coderName,
+		Name: infra.Js("${coder" + *me.Owner() + "}-${" + *me.Name() + "}"),
 		Tags: &map[string]*string{
 			"karpenter.sh/discovery": infra.Js("k3d-dfd"),
 		},
@@ -258,7 +257,7 @@ func CoderDefnEc2Stack(scope constructs.Construct, name string) cdktf.TerraformS
 	})
 
 	awsIamInstanceProfileDev := iaminstanceprofile.NewIamInstanceProfile(this, infra.Js("dev_16"), &iaminstanceprofile.IamInstanceProfileConfig{
-		Name: coderName,
+		Name: infra.Js("${coder" + *me.Owner() + "}-${" + *me.Name() + "}"),
 		Role: dev.Name(),
 	})
 
@@ -289,7 +288,7 @@ func CoderDefnEc2Stack(scope constructs.Construct, name string) cdktf.TerraformS
 		},
 		Tags: &map[string]*string{
 			"Coder_Provisioned": infra.Js("true"),
-			"Name":              coderName,
+			"Name":              infra.Js("${coder" + *me.Owner() + "}-${" + *me.Name() + "}"),
 		},
 		UserData: &userData,
 		VpcSecurityGroupIds: &[]*string{
@@ -298,7 +297,7 @@ func CoderDefnEc2Stack(scope constructs.Construct, name string) cdktf.TerraformS
 	})
 
 	awsSecretsmanagerSecretDev := secretsmanagersecret.NewSecretsmanagerSecret(this, infra.Js("dev_18"), &secretsmanagersecret.SecretsmanagerSecretConfig{
-		Name: infra.Js("${" + *coderName + "}-${" + *awsInstanceDev.Id() + "}"),
+		Name: infra.Js("${coder" + *me.Owner() + "}-${" + *me.Name() + "}-${" + *awsInstanceDev.Id() + "}"),
 	})
 
 	secretsmanagersecretversion.NewSecretsmanagerSecretVersion(this, infra.Js("dev_19"), &secretsmanagersecretversion.SecretsmanagerSecretVersionConfig{
