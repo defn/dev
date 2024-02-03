@@ -3,7 +3,12 @@
   "app": "../bazel-bin/tf/tf_/tf infra",
   "codeMakerOutput": "gen",
   "projectId": "cff35a27-fbee-4c22-8a14-35f6c6d14031",
+  "terraformProviders": ["coder/coder@~> 0.13.0"],
   "terraformModules": [
+    {
+      "name": "coderlogin",
+      "source": "https://registry.coder.com/modules/coder-login"
+    },
     {
       "name": "terraform_aws_defn_account",
       "source": "../../mod/terraform-aws-defn-account"
