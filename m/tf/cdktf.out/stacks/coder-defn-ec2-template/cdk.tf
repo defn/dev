@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.34.0"
+      version = "5.35.0"
       source  = "aws"
     }
     coder = {
@@ -212,7 +212,7 @@ resource "coder_app" "code-server" {
   share        = "owner"
   slug         = "code-server"
   subdomain    = false
-  url          = "http://localhost:13337/?folder=/home/&{%!s(*cdktf.jsiiProxy_TerraformDataSource=&{{0xc000c7cfe8} {0} {{0}} {0}})}/m"
+  url          = "http://localhost:13337/?folder=/home/&{%!s(*cdktf.jsiiProxy_TerraformDataSource=&{{0xc000dfe6f8} {0} {{0}} {0}})}/m"
   healthcheck {
     interval  = 5
     threshold = 6
