@@ -2,7 +2,12 @@ load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 
 go_library(
     name = "tf_lib",
-    srcs = ["tf.go"],
+    srcs = [
+        "stack-aws-account.go",
+        "stack-aws-organization.go",
+        "stack-global.go",
+        "tf.go",
+    ],
     embedsrcs = ["tf.cue"],
     importpath = "github.com/defn/dev/m/tf",
     visibility = ["//visibility:public"],
