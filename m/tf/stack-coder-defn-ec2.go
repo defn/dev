@@ -252,7 +252,7 @@ disown
 		Role:      devIamRole.Name(),
 	})
 
-	devSecurityGroup := securitygroup.NewSecurityGroup(stack, infra.Js("dev_11"), &securitygroup.SecurityGroupConfig{
+	devSecurityGroup := securitygroup.NewSecurityGroup(stack, infra.Js("dev_security_group"), &securitygroup.SecurityGroupConfig{
 		Description: devWorkspaceName,
 		Egress: []map[string]interface{}{
 			{
@@ -323,12 +323,12 @@ disown
 		AgentId: devCoderAgent.Id(),
 	})
 
-	devInstanceProfle := iaminstanceprofile.NewIamInstanceProfile(stack, infra.Js("dev_16"), &iaminstanceprofile.IamInstanceProfileConfig{
+	devInstanceProfle := iaminstanceprofile.NewIamInstanceProfile(stack, infra.Js("dev_instance_profile"), &iaminstanceprofile.IamInstanceProfileConfig{
 		Name: devWorkspaceName,
 		Role: devIamRole.Name(),
 	})
 
-	devEc2Instance := instance.NewInstance(stack, infra.Js("dev_17"), &instance.InstanceConfig{
+	devEc2Instance := instance.NewInstance(stack, infra.Js("dev_ec2_instance"), &instance.InstanceConfig{
 		Ami:                devAmi.Id(),
 		AvailabilityZone:   infra.Js(fmt.Sprintf("%s%s", *paramRegion.Value(), *paramAvailablityZone.Value())),
 		EbsOptimized:       infra.Jsbool(true),
@@ -357,17 +357,6 @@ disown
 		},
 	})
 
-	/*
-		devSecretsManagerSecret := secretsmanagersecret.NewSecretsmanagerSecret(stack, infra.Js("dev_18"), &secretsmanagersecret.SecretsmanagerSecretConfig{
-			Name: infra.Js(*devWorkspaceName + "-${" + *devEc2Instance.Id() + "}"),
-		})
-
-		secretsmanagersecretversion.NewSecretsmanagerSecretVersion(stack, infra.Js("dev_19"), &secretsmanagersecretversion.SecretsmanagerSecretVersionConfig{
-			SecretId:     devSecretsManagerSecret.Id(),
-			SecretString: devCoderAgent.Token(),
-		})
-	*/
-
 	devEc2Count := cdktf.TerraformCount_Of(cdktf.Token_AsNumber(cdktf.Fn_Conditional(cdktf.Op_Eq(paramServiceProvider.Value(), infra.Js("aws-ec2")), infra.Jsn(1), infra.Jsn(0))))
 	metadata.NewMetadata(stack, infra.Js("main_20"), &metadata.MetadataConfig{
 		Item: []*metadata.MetadataItem{
@@ -386,7 +375,7 @@ disown
 		Count:      devEc2Count,
 	})
 
-	ec2instancestate.NewEc2InstanceState(stack, infra.Js("dev_21"), &ec2instancestate.Ec2InstanceStateConfig{
+	ec2instancestate.NewEc2InstanceState(stack, infra.Js("dev_instance_state"), &ec2instancestate.Ec2InstanceStateConfig{
 		InstanceId: devEc2Instance.Id(),
 		State:      cdktf.Token_AsString(cdktf.Fn_Conditional(cdktf.Op_Eq(devCoderWorkspace.Transition(), infra.Js("start")), infra.Js("running"), infra.Js("stopped")), &cdktf.EncodingOptions{}),
 	})

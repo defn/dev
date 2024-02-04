@@ -154,7 +154,7 @@ resource "aws_iam_role_policy_attachment" "ssm" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
   role       = "${aws_iam_role.dev.name}"
 }
-resource "aws_security_group" "dev_11" {
+resource "aws_security_group" "dev_security_group" {
   description = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
   egress {
     cidr_blocks = [
@@ -230,15 +230,15 @@ module "coder-login" {
   agent_id = "${coder_agent.main.id}"
   source   = "https://registry.coder.com/modules/coder-login"
 }
-resource "aws_iam_instance_profile" "dev_16" {
+resource "aws_iam_instance_profile" "dev_instance_profile" {
   name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
   role = "${aws_iam_role.dev.name}"
 }
-resource "aws_instance" "dev_17" {
+resource "aws_instance" "dev_ec2_instance" {
   ami                  = "${data.aws_ami.ubuntu.id}"
   availability_zone    = "${data.coder_parameter.region.value}${data.coder_parameter.az.value}"
   ebs_optimized        = true
-  iam_instance_profile = "${aws_iam_instance_profile.dev_16.name}"
+  iam_instance_profile = "${aws_iam_instance_profile.dev_instance_profile.name}"
   instance_type        = "${data.coder_parameter.instance_type.value}"
   monitoring           = false
   tags = {
@@ -292,7 +292,7 @@ disown
 --//--
 EOF
   vpc_security_group_ids = [
-    "${aws_security_group.dev_11.id}"
+    "${aws_security_group.dev_security_group.id}"
   ]
   metadata_options {
     http_endpoint               = "enabled"
@@ -308,18 +308,18 @@ EOF
   }
 }
 resource "coder_metadata" "main_20" {
-  resource_id = "${aws_instance.dev_17.id}"
+  resource_id = "${aws_instance.dev_ec2_instance.id}"
   item {
     key   = "instance type"
-    value = "${aws_instance.dev_17.instance_type}"
+    value = "${aws_instance.dev_ec2_instance.instance_type}"
   }
   item {
     key   = "disk"
-    value = "${aws_instance.dev_17.root_block_device[0].volume_size} GiB"
+    value = "${aws_instance.dev_ec2_instance.root_block_device[0].volume_size} GiB"
   }
   count = "${(data.coder_parameter.provider.value == "aws-ec2") ? 1 : 0}"
 }
-resource "aws_ec2_instance_state" "dev_21" {
-  instance_id = "${aws_instance.dev_17.id}"
+resource "aws_ec2_instance_state" "dev_instance_state" {
+  instance_id = "${aws_instance.dev_ec2_instance.id}"
   state       = "${(data.coder_workspace.me.transition == "start") ? "running" : "stopped"}"
 }
