@@ -73,6 +73,15 @@ playbook: dump: [{
 }]
 
 role: base_packages: tasks: [{
+	name:   "Install hwe kernel"
+	become: true
+	apt: {
+		name: [
+			"linux-generic-hwe-22.04",
+		]
+		state: "present"
+	}
+}, {
 	name:   "Install base packages"
 	become: true
 	apt: {
