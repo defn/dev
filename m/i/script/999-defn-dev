@@ -15,7 +15,7 @@ function main {
 		make install
 
 		cd m/pb
-		make demo opt="-e ansible_connection=local -l localhost"
+		make init_local demo opt="-e ansible_connection=local -l packer"
 
 		exit $?
 	fi
