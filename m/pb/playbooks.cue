@@ -29,6 +29,10 @@ inventory: {
 	tp: hosts: [
 		"thinkpad",
 	]
+
+	packer: hosts: [
+		"localhost",
+	]
 }
 
 playbook: demo: [{
