@@ -109,21 +109,21 @@
       }
     },
     "aws_ec2_instance_state": {
-      "dev_21": {
+      "dev_instance_state": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-template/dev_21",
-            "uniqueId": "dev_21"
+            "path": "coder-defn-ec2-template/dev_instance_state",
+            "uniqueId": "dev_instance_state"
           }
         }
       }
     },
     "aws_iam_instance_profile": {
-      "dev_16": {
+      "dev_instance_profile": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-template/dev_16",
-            "uniqueId": "dev_16"
+            "path": "coder-defn-ec2-template/dev_instance_profile",
+            "uniqueId": "dev_instance_profile"
           }
         }
       }
@@ -165,21 +165,21 @@
       }
     },
     "aws_instance": {
-      "dev_17": {
+      "dev_ec2_instance": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-template/dev_17",
-            "uniqueId": "dev_17"
+            "path": "coder-defn-ec2-template/dev_ec2_instance",
+            "uniqueId": "dev_ec2_instance"
           }
         }
       }
     },
     "aws_security_group": {
-      "dev_11": {
+      "dev_security_group": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-template/dev_11",
-            "uniqueId": "dev_11"
+            "path": "coder-defn-ec2-template/dev_security_group",
+            "uniqueId": "dev_security_group"
           }
         }
       }
