@@ -1,7 +1,6 @@
-- name: Playbook to set up root access over ssh
+- name: Playbook to set up root access locally
   hosts: all
-  vars:
-    ansible_user: root
+  become: "yes"
   tasks:
     - name: Add NOPASSWD to sudoers.d for Ubuntu user
       copy:
