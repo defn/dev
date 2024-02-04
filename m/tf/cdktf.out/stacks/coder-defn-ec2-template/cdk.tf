@@ -173,7 +173,7 @@ resource "aws_security_group" "dev_security_group" {
   }
   ingress {
     cidr_blocks = [
-      "172.31.32.0/16"
+      "172.31.0.0/16"
     ]
     description      = "allow vpc ingress"
     from_port        = 0
