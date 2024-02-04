@@ -370,10 +370,8 @@ disown
 				Value: devEc2Instance.InstanceType(),
 			},
 			{
-				Key: infra.Js("disk"),
-				Value: infra.Js(*cdktf.Token_AsString(cdktf.Fn_LookupNested(devEc2Instance.RootBlockDevice(), &[]interface{}{
-					infra.Js("volume_size"),
-				}), &cdktf.EncodingOptions{}) + " GiB"),
+				Key:   infra.Js("disk"),
+				Value: cdktf.Token_AsString(devEc2Instance.RootBlockDevice().VolumeSize(), &cdktf.EncodingOptions{}),
 			},
 		},
 		ResourceId: devEc2Instance.Id(),
