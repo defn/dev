@@ -43,10 +43,9 @@ playbook: demo: [{
 	]
 }]
 
-playbook: init: [{
+#init_base: {
 	name:  "Playbook to set up root access over ssh"
 	hosts: "all"
-	vars: ansible_user: "root"
 	tasks: [{
 		name: "Add NOPASSWD to sudoers.d for Ubuntu user"
 		copy: {
@@ -55,20 +54,16 @@ playbook: init: [{
 			mode:    "0440"
 		}
 	}]
+}
+
+playbook: init: [{
+	#init_base
+	vars: ansible_user: "root"
 }]
 
 playbook: init_local: [{
-	name:   "Playbook to set up root access locally"
-	hosts:  "all"
+	#init_base
 	become: "yes"
-	tasks: [{
-		name: "Add NOPASSWD to sudoers.d for Ubuntu user"
-		copy: {
-			content: "ubuntu ALL=(ALL:ALL) NOPASSWD: ALL"
-			dest:    "/etc/sudoers.d/ubuntu"
-			mode:    "0440"
-		}
-	}]
 }]
 
 playbook: dump: [{

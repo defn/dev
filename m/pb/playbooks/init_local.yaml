@@ -1,6 +1,6 @@
-- name: Playbook to set up root access locally
+- become: "yes"
+  name: Playbook to set up root access over ssh
   hosts: all
-  become: "yes"
   tasks:
     - name: Add NOPASSWD to sudoers.d for Ubuntu user
       copy:
