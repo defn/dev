@@ -7,8 +7,7 @@ inventory: {
 
 	coder: hosts: [
 		"coder-amanibhavam-district",
-		//"coder-amanibhavam-school",
-		//"coder-amanibhavam-class",
+		"coder-amanibhavam-school",
 	]
 
 	oci: hosts: [
@@ -17,8 +16,6 @@ inventory: {
 	]
 
 	mac: hosts: [
-		//"mba",
-		//"mbb",
 		"mbair",
 		"macmini",
 	]
@@ -56,7 +53,7 @@ playbook: init: [{
 	}]
 }]
 
-playbook: debug: [{
+playbook: dump: [{
 	name:  "Save host inventory"
 	hosts: "all"
 	tasks: [{
