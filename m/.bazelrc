@@ -34,5 +34,5 @@ build --noslim_profile --experimental_profile_include_target_label --experimenta
 
 #try-import /home/ubuntu/.bazelrc-buildbuddy
 #build --bes_results_url=https://buildbuddy.district.amanibhavam.defn.run/invocation
-#build --bes_backend=grpc://100.78.177.55:1985
-build --remote_cache=grpc://100.78.177.55:9092
+#build --bes_backend=grpc://100.113.64.80:1985
+build --remote_cache=grpc://100.113.64.80:9092
