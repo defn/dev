@@ -66,24 +66,19 @@ func CoderDefnEc2Stack(scope constructs.Construct, site *infra.AwsProps, name st
 		Icon:        infra.Js("https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"),
 		Mutable:     infra.Jsbool(true),
 		Name:        infra.Js("instance_type"),
-		Option: []*datacoderparameter.DataCoderParameterOption{
-			{
-				Name:  infra.Js("2"),
-				Value: infra.Js("m6id.large"),
-			},
-			{
-				Name:  infra.Js("4"),
-				Value: infra.Js("m6id.xlarge"),
-			},
-			{
-				Name:  infra.Js("8"),
-				Value: infra.Js("m6id.2xlarge"),
-			},
-			{
-				Name:  infra.Js("16"),
-				Value: infra.Js("m6id.4xlarge"),
-			},
-		},
+		Option: []*datacoderparameter.DataCoderParameterOption{{
+			Name:  infra.Js("2"),
+			Value: infra.Js("m6id.large"),
+		}, {
+			Name:  infra.Js("4"),
+			Value: infra.Js("m6id.xlarge"),
+		}, {
+			Name:  infra.Js("8"),
+			Value: infra.Js("m6id.2xlarge"),
+		}, {
+			Name:  infra.Js("16"),
+			Value: infra.Js("m6id.4xlarge"),
+		}},
 		Type: infra.Js("string"),
 	})
 
@@ -107,12 +102,10 @@ func CoderDefnEc2Stack(scope constructs.Construct, site *infra.AwsProps, name st
 		DisplayName: infra.Js("Provider"),
 		Icon:        infra.Js("/emojis/1f30e.png"),
 		Name:        infra.Js("provider"),
-		Option: []*datacoderparameter.DataCoderParameterOption{
-			{
-				Name:  infra.Js("Amazon Web Services VM"),
-				Value: infra.Js("aws-ec2"),
-			},
-		},
+		Option: []*datacoderparameter.DataCoderParameterOption{{
+			Name:  infra.Js("Amazon Web Services VM"),
+			Value: infra.Js("aws-ec2"),
+		}},
 	})
 
 	paramTailscaleAuthKey := datacoderparameter.NewDataCoderParameter(stack, infra.Js("tsauthkey"), &datacoderparameter.DataCoderParameterConfig{
@@ -200,20 +193,17 @@ disown
 	devVpc := defaultvpc.NewDefaultVpc(stack, infra.Js("default"), &defaultvpc.DefaultVpcConfig{})
 
 	devAmi := dataawsami.NewDataAwsAmi(stack, infra.Js("ubuntu"), &dataawsami.DataAwsAmiConfig{
-		Filter: []map[string]interface{}{
-			{
-				"name": infra.Js("name"),
-				"values": []*string{
-					infra.Js("coder-*"),
-				},
+		Filter: []map[string]interface{}{{
+			"name": infra.Js("name"),
+			"values": []*string{
+				infra.Js("coder-*"),
 			},
-			{
-				"name": infra.Js("architecture"),
-				"values": []*string{
-					infra.Js("x86_64"),
-				},
+		}, {
+			"name": infra.Js("architecture"),
+			"values": []*string{
+				infra.Js("x86_64"),
 			},
-		},
+		}},
 		MostRecent: infra.Jsbool(true),
 		Owners: &[]*string{
 			infra.Js("self"),
@@ -222,16 +212,14 @@ disown
 
 	devIamRole := iamrole.NewIamRole(stack, infra.Js("dev"), &iamrole.IamRoleConfig{
 		AssumeRolePolicy: cdktf.Token_AsString(cdktf.FnGenerated_Jsonencode(map[string]interface{}{
-			"Statement": []map[string]interface{}{
-				{
-					"Action": infra.Js("sts:AssumeRole"),
-					"Effect": infra.Js("Allow"),
-					"Principal": map[string]*string{
-						"Service": infra.Js("ec2.amazonaws.com"),
-					},
-					"Sid": infra.Js(""),
+			"Statement": []map[string]interface{}{{
+				"Action": infra.Js("sts:AssumeRole"),
+				"Effect": infra.Js("Allow"),
+				"Principal": map[string]*string{
+					"Service": infra.Js("ec2.amazonaws.com"),
 				},
-			},
+				"Sid": infra.Js(""),
+			}},
 			"Version": infra.Js("2012-10-17"),
 		}), &cdktf.EncodingOptions{}),
 		Name: devWorkspaceName,
@@ -254,43 +242,38 @@ disown
 
 	devSecurityGroup := securitygroup.NewSecurityGroup(stack, infra.Js("dev_security_group"), &securitygroup.SecurityGroupConfig{
 		Description: devWorkspaceName,
-		Egress: []map[string]interface{}{
-			{
-				"cidrBlocks": []*string{
-					infra.Js("0.0.0.0/0"),
-				},
-				"description": infra.Js("allow all egress"),
-				"fromPort":    infra.Jsn(0),
-				"ipv6CidrBlocks": []*string{
-					infra.Js("::/0"),
-				},
-				"protocol": infra.Js("-1"),
-				"toPort":   infra.Jsn(0),
+		Egress: []map[string]interface{}{{
+			"cidrBlocks": []*string{
+				infra.Js("0.0.0.0/0"),
 			},
-		},
-		Ingress: []map[string]interface{}{
-			{
-				"cidrBlocks": []*string{
-					infra.Js("172.31.0.0/16"),
-				},
-				"description": infra.Js("allow vpc ingress"),
-				"fromPort":    infra.Jsn(0),
-				"protocol":    infra.Js("-1"),
-				"toPort":      infra.Jsn(0),
+			"description": infra.Js("allow all egress"),
+			"fromPort":    infra.Jsn(0),
+			"ipv6CidrBlocks": []*string{
+				infra.Js("::/0"),
 			},
-			{
-				"cidrBlocks": []*string{
-					infra.Js("0.0.0.0/0"),
-				},
-				"description": infra.Js("allow wireguard udp"),
-				"fromPort":    infra.Jsn(41641),
-				"ipv6CidrBlocks": []*string{
-					infra.Js("::/0"),
-				},
-				"protocol": infra.Js("udp"),
-				"toPort":   infra.Jsn(41641),
+			"protocol": infra.Js("-1"),
+			"toPort":   infra.Jsn(0),
+		}},
+		Ingress: []map[string]interface{}{{
+			"cidrBlocks": []*string{
+				infra.Js("172.31.0.0/16"),
 			},
-		},
+			"description": infra.Js("allow vpc ingress"),
+			"fromPort":    infra.Jsn(0),
+			"protocol":    infra.Js("-1"),
+			"toPort":      infra.Jsn(0),
+		}, {
+			"cidrBlocks": []*string{
+				infra.Js("0.0.0.0/0"),
+			},
+			"description": infra.Js("allow wireguard udp"),
+			"fromPort":    infra.Jsn(41641),
+			"ipv6CidrBlocks": []*string{
+				infra.Js("::/0"),
+			},
+			"protocol": infra.Js("udp"),
+			"toPort":   infra.Jsn(41641),
+		}},
 		Name: devWorkspaceName,
 		Tags: &map[string]*string{
 			"karpenter.sh/discovery": infra.Js("k3d-dfd"),
@@ -363,20 +346,17 @@ disown
 	devEc2Instance.MoveFromId(infra.Js("aws_instance.dev_17"))
 
 	devEc2Count := cdktf.TerraformCount_Of(cdktf.Token_AsNumber(cdktf.Fn_Conditional(cdktf.Op_Eq(paramServiceProvider.Value(), infra.Js("aws-ec2")), infra.Jsn(1), infra.Jsn(0))))
-	metadata.NewMetadata(stack, infra.Js("main_20"), &metadata.MetadataConfig{
-		Item: []*metadata.MetadataItem{
-			{
-				Key:   infra.Js("instance type"),
-				Value: devEc2Instance.InstanceType(),
-			},
-			{
-				Key:   infra.Js("disk"),
-				Value: cdktf.Token_AsString(devEc2Instance.RootBlockDevice().VolumeSize(), &cdktf.EncodingOptions{}),
-			},
-		},
+	metadata.NewMetadata(stack, infra.Js("dev_metadata"), &metadata.MetadataConfig{
+		Item: []*metadata.MetadataItem{{
+			Key:   infra.Js("instance type"),
+			Value: devEc2Instance.InstanceType(),
+		}, {
+			Key:   infra.Js("disk"),
+			Value: cdktf.Token_AsString(devEc2Instance.RootBlockDevice().VolumeSize(), &cdktf.EncodingOptions{}),
+		}},
 		ResourceId: devEc2Instance.Id(),
 		Count:      devEc2Count,
-	})
+	}).MoveFromId(infra.Js("coder_metadata.main_20"))
 
 	ec2instancestate.NewEc2InstanceState(stack, infra.Js("dev_instance_state"), &ec2instancestate.Ec2InstanceStateConfig{
 		InstanceId: devEc2Instance.Id(),

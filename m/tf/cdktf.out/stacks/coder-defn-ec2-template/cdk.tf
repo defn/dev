@@ -322,7 +322,7 @@ moved {
   to   = aws_instance.dev_ec2_instance
   from = aws_instance.dev_17
 }
-resource "coder_metadata" "main_20" {
+resource "coder_metadata" "dev_metadata" {
   resource_id = "${aws_instance.dev_ec2_instance.id}"
   item {
     key   = "instance type"
@@ -333,6 +333,11 @@ resource "coder_metadata" "main_20" {
     value = "${aws_instance.dev_ec2_instance.root_block_device[0].volume_size}"
   }
   count = "${(data.coder_parameter.provider.value == "aws-ec2") ? 1 : 0}"
+}
+
+moved {
+  to   = coder_metadata.dev_metadata
+  from = coder_metadata.main_20
 }
 resource "aws_ec2_instance_state" "dev_instance_state" {
   instance_id = "${aws_instance.dev_ec2_instance.id}"

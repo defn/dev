@@ -6,7 +6,8 @@
         "aws_ec2_instance_state": ["dev_instance_state"],
         "aws_iam_instance_profile": ["dev_instance_profile"],
         "aws_instance": ["dev_ec2_instance"],
-        "aws_security_group": ["dev_security_group"]
+        "aws_security_group": ["dev_security_group"],
+        "coder_metadata": ["dev_metadata"]
       },
       "stackName": "coder-defn-ec2-template",
       "version": "0.20.3"
@@ -211,11 +212,11 @@
       }
     },
     "coder_metadata": {
-      "main_20": {
+      "dev_metadata": {
         "//": {
           "metadata": {
-            "path": "coder-defn-ec2-template/main_20",
-            "uniqueId": "main_20"
+            "path": "coder-defn-ec2-template/dev_metadata",
+            "uniqueId": "dev_metadata"
           }
         }
       }
