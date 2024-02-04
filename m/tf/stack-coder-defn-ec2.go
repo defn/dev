@@ -113,6 +113,7 @@ func CoderDefnEc2Stack(scope constructs.Construct, site *infra.AwsProps, name st
 		Description: infra.Js("Tailscale node authorization key"),
 		DisplayName: infra.Js("Tailscale auth key"),
 		Icon:        infra.Js("https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"),
+		Mutable:     infra.Jsbool(true),
 		Name:        infra.Js("tsauthkey"),
 		Type:        infra.Js("string"),
 	})

@@ -47,11 +47,6 @@ function main {
 		if sudo systemctl start docker; then break; fi
 		sleep 10
 	done
-
-	cd
-	git fetch
-	git branch --set-upstream-to=origin/main main
-	git pull
 }
 
 time main "$@"
