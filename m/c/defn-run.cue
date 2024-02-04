@@ -5,21 +5,18 @@ import (
 )
 
 k3s_bootstrap: {
-	// node management
-	"reloader": {}
-	"descheduler": {}
-	//"aws-node-term": {}
-	"karpenter": {}
-
 	// secrets
 	"cert-manager": {}
 	"trust-manager": {}
 	"pod-identity": {}
 	"external-secrets": {}
+
+	// config
 	"secrets": {}
 	"issuer": {}
 
 	// management
+	"karpenter": {}
 	"cilium": {}
 	"tetragon": {}
 	"kyverno": {
@@ -27,18 +24,11 @@ k3s_bootstrap: {
 	}
 
 	// traffic
-	"external-dns": {}
-	"tailscale": {}
-	"traefik": {}
 	"l5d-crds": {}
 	//"l5d-control": {}
 
 	// deploy
 	"argo-cd": {}
-
-	// development
-	"postgres-operator": {}
-	"coder": {}
 }
 
 teacher: {
