@@ -205,6 +205,11 @@ resource "aws_security_group" "dev_security_group" {
   }
   vpc_id = "${aws_default_vpc.default.id}"
 }
+
+moved {
+  to   = aws_security_group.dev_security_group
+  from = aws_security_group.dev_11
+}
 resource "coder_app" "code-server" {
   agent_id     = "${coder_agent.main.id}"
   display_name = "code-server"
@@ -233,6 +238,11 @@ module "coder-login" {
 resource "aws_iam_instance_profile" "dev_instance_profile" {
   name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
   role = "${aws_iam_role.dev.name}"
+}
+
+moved {
+  to   = aws_iam_instance_profile.dev_instance_profile
+  from = aws_iam_instance_profile.dev_16
 }
 resource "aws_instance" "dev_ec2_instance" {
   ami                  = "${data.aws_ami.ubuntu.id}"
@@ -307,6 +317,11 @@ EOF
     volume_type           = "gp3"
   }
 }
+
+moved {
+  to   = aws_instance.dev_ec2_instance
+  from = aws_instance.dev_17
+}
 resource "coder_metadata" "main_20" {
   resource_id = "${aws_instance.dev_ec2_instance.id}"
   item {
@@ -322,4 +337,9 @@ resource "coder_metadata" "main_20" {
 resource "aws_ec2_instance_state" "dev_instance_state" {
   instance_id = "${aws_instance.dev_ec2_instance.id}"
   state       = "${(data.coder_workspace.me.transition == "start") ? "running" : "stopped"}"
+}
+
+moved {
+  to   = aws_ec2_instance_state.dev_instance_state
+  from = aws_ec2_instance_state.dev_21
 }
