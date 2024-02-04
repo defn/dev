@@ -2,6 +2,12 @@
   "//": {
     "metadata": {
       "backend": "local",
+      "moved": {
+        "aws_ec2_instance_state": ["dev_instance_state"],
+        "aws_iam_instance_profile": ["dev_instance_profile"],
+        "aws_instance": ["dev_ec2_instance"],
+        "aws_security_group": ["dev_security_group"]
+      },
       "stackName": "coder-defn-ec2-template",
       "version": "0.20.3"
     },
