@@ -93,6 +93,7 @@ data "coder_parameter" "tsauthkey" {
   description  = "Tailscale node authorization key"
   display_name = "Tailscale auth key"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  mutable      = true
   name         = "tsauthkey"
   type         = "string"
 }
