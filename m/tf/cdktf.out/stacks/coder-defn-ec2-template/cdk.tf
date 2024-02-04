@@ -330,7 +330,7 @@ resource "coder_metadata" "main_20" {
   }
   item {
     key   = "disk"
-    value = "${aws_instance.dev_ec2_instance.root_block_device[0].volume_size} GiB"
+    value = "${aws_instance.dev_ec2_instance.root_block_device[0].volume_size}"
   }
   count = "${(data.coder_parameter.provider.value == "aws-ec2") ? 1 : 0}"
 }
