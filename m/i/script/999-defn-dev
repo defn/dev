@@ -7,11 +7,15 @@ function main {
 	if [[ "$(whoami || true)" == "ubuntu" ]]; then
 		cd
 		git pull
+
 		set +exfu
 		source .bash_profile
 		set -exfu
 
 		make install
+
+		cd m/pb
+		make init demo opt="-e ansible_connection=local"
 
 		exit $?
 	fi

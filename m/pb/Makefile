@@ -1,6 +1,5 @@
 limit ?= $(shell uname -n)
-pb ?= demo
-playbook ?= playbooks/$(pb).yaml
+opt ?=
 
 build:
 	cue fmt ./...
@@ -18,4 +17,4 @@ playbooks/*.yaml: playbooks.cue
 	$(MAKE) build
 
 %: $(HOME)/.local/bin/ansible-playbook playbooks/%.yaml
-	@ansible-playbook -l "$(limit)" "playbooks/$@.yaml"
+	@ansible-playbook -l "$(limit)" $(opt) "playbooks/$@.yaml"
