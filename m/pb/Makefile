@@ -14,5 +14,8 @@ report:
 $(HOME)/.local/bin/ansible-playbook:
 	pipx install --include-deps ansible
 
-%: $(HOME)/.local/bin/ansible-playbook
+playbooks/*.yaml: playbooks.cue
+	$(MAKE) build
+
+%: $(HOME)/.local/bin/ansible-playbook playbooks/%.yaml
 	@ansible-playbook -l "$(limit)" "playbooks/$@.yaml"
