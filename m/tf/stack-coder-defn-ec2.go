@@ -271,7 +271,7 @@ disown
 		Ingress: []map[string]interface{}{
 			{
 				"cidrBlocks": []*string{
-					infra.Js("172.31.32.0/16"),
+					infra.Js("172.31.0.0/16"),
 				},
 				"description": infra.Js("allow vpc ingress"),
 				"fromPort":    infra.Jsn(0),
