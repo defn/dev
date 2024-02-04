@@ -342,6 +342,9 @@ disown
 		VpcSecurityGroupIds: &[]*string{
 			devSecurityGroup.Id(),
 		},
+		Lifecycle: &cdktf.TerraformResourceLifecycle{
+			IgnoreChanges: []string{"ami"},
+		},
 	})
 
 	devEc2Instance.MoveFromId(infra.Js("aws_instance.dev_17"))

@@ -317,6 +317,11 @@ EOF
     volume_size           = "${data.coder_parameter.nix_volume_size.value}"
     volume_type           = "gp3"
   }
+  lifecycle {
+    ignore_changes = [
+      "ami",
+    ]
+  }
 }
 
 moved {
