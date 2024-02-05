@@ -34,7 +34,7 @@
       - tzdata
       - locales
       - sudo
-      - xz
+      - xz-utils
     state: present
 - name: Remove packages
   become: true

@@ -112,7 +112,7 @@ role: base_packages: tasks: [{
 			"ca-certificates", "iproute2", "sudo", "curl", "build-essential",
 			"openssh-client", "rsync", "git", "git-lfs", "fzf", "jq", "gettext",
 			"direnv", "ncdu", "apache2-utils", "fontconfig", "docker.io",
-			"tzdata", "locales", "sudo", "xz",
+			"tzdata", "locales", "sudo", "xz-utils",
 		]
 		state: "present"
 	}
