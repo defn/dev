@@ -13,9 +13,7 @@ function main {
 		set -exfu
 
 		make install
-
-		cd m/pb
-		make init_local demo opt="-e ansible_connection=local -l packer"
+		make play
 
 		exit $?
 	fi

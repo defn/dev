@@ -18,16 +18,12 @@ function main {
 		make install
 		git checkout .
 
+		make play
+
 		exit $?
 	fi
 
 	export DEBIAN_FRONTEND=noninteractive
-
-	apt-get update
-	apt-get install -y build-essential fzf jq gettext direnv net-tools curl
-
-	apt-get install -y docker.io
-	usermod -aG docker ubuntu
 
 	curl -fsSL https://tailscale.com/install.sh | sh
 	rm -rf /var/lib/tailscale
