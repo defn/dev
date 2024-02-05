@@ -30,6 +30,8 @@ function main {
 
 		make play
 
+		make upgrade
+
 		exit $?
 	fi
 

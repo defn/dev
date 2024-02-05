@@ -155,6 +155,9 @@ perms:
 play:
 	cd m/pb && $(MAKE) init_local demo opt="-e ansible_connection=local -l packer"
 
+upgrade:
+	cd m/pb && $(MAKE) upgrade opt="-e ansible_connection=local -l packer"
+
 install:
 	sudo true
 	$(MAKE) nix
