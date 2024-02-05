@@ -10,8 +10,7 @@ packer {
 variable "scripts" {
   type = list(string)
   default = [
-    "script/999-defn-dev",
-    "script/999-update"
+    "script/999-defn-dev"
   ]
 }
 

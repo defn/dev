@@ -2,6 +2,7 @@
 
 function main {
 	set -exfu
+	STARSHIP_PREEXEC_READY=
 
 	if [[ "$(whoami || true)" == "ubuntu" ]]; then
 		cd
@@ -17,20 +18,6 @@ function main {
 
 		# make dependencies
 		make deps
-
-		set +x
-		source .bash_profile
-		set -x
-
-
-		git config --global user.email "you@example.com"
-		git config --global user.name "Your Name"
-		make install
-		git checkout .
-
-		make play
-
-		make upgrade
 
 		exit $?
 	fi
