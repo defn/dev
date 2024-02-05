@@ -13,16 +13,14 @@ function main {
 	export LC_ALL=en_US.UTF-8
 	export DEBIAN_FRONTEND=noninteractive
 
-	rm -f /usr/bin/gs
+	ln -sf /usr/share/zoneinfo/UTC /etc/localtime
+	dpkg-reconfigure -f noninteractive tzdata
+	locale-gen en_US.UTF-8
+	localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
-	ln -sf /usr/share/zoneinfo/UTC /etc/localtime &&
-		dpkg-reconfigure -f noninteractive tzdata &&
-		locale-gen en_US.UTF-8 &&
-		localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-
-	groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu &&
-		echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' >/etc/sudoers.d/ubuntu &&
-		install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
+	groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
+	echo '%ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' >/etc/sudoers.d/ubuntu
+	install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
 
 	chown -R ubuntu:ubuntu /home/ubuntu && chmod u+s /usr/bin/sudo
 
