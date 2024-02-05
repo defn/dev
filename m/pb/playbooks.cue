@@ -56,7 +56,17 @@ playbook: demo: [{
 	}]
 }
 
-playbook: upgrade: {
+playbook: init: [{
+	#init_base
+	vars: ansible_user: "root"
+}]
+
+playbook: init_local: [{
+	#init_base
+	become: "yes"
+}]
+
+playbook: upgrade: [{
 	name:   "Upgrade all packages"
 	hosts:  "all"
 	become: "yes"
@@ -67,16 +77,6 @@ playbook: upgrade: {
 			update_cache: "yes"
 		}
 	}]
-}
-
-playbook: init: [{
-	#init_base
-	vars: ansible_user: "root"
-}]
-
-playbook: init_local: [{
-	#init_base
-	become: "yes"
 }]
 
 playbook: dump: [{
