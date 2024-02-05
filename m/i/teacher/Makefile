@@ -10,7 +10,6 @@ hello:
 	test "$$(pass hello)" == world
 
 all:
-	$(MAKE) base
 	$(MAKE) buildkite
 	$(MAKE) class
 	$(MAKE) class-buildkite-latest
