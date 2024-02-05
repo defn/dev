@@ -200,3 +200,4 @@ bin/nix*
 .bazel*-*
 .ghost/
 .yarn/
+.rpm*
