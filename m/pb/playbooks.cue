@@ -56,6 +56,19 @@ playbook: demo: [{
 	}]
 }
 
+playbook: upgrade: {
+	name:   "Upgrade all packages"
+	hosts:  "all"
+	become: "yes"
+	tasks: [{
+		name: "Update apt packages"
+		apt: {
+			upgrade:      "yes"
+			update_cache: "yes"
+		}
+	}]
+}
+
 playbook: init: [{
 	#init_base
 	vars: ansible_user: "root"
