@@ -25,7 +25,7 @@ function main {
 	export DEBIAN_FRONTEND=noninteractive
 
 	apt update
-	apt install -y git make
+	apt install -y git make curl
 
 	curl -fsSL https://tailscale.com/install.sh | sh
 	rm -rf /var/lib/tailscale
