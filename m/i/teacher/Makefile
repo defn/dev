@@ -10,9 +10,9 @@ hello:
 	test "$$(pass hello)" == world
 
 all:
-	$(MAKE) buildkite
 	$(MAKE) class
 	$(MAKE) class-buildkite-latest
+	$(MAKE) buildkite
 
 latest:
 	$(MAKE) class-buildkite-latest
@@ -23,8 +23,8 @@ reset:
 	cd ../../cache && docker compose down && $(MAKE) up
 	this-prune
 
-base:
-	earthly --ci --no-cache --no-output --push +build
+root:
+	earthly --ci --no-cache --no-output --push +root
 
 buildkite:
 	@echo --- earthly

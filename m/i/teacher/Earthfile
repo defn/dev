@@ -1,11 +1,7 @@
 VERSION 0.8
 
-build:
-    ARG image=cache.defn.run:5000/dfd:base
-    BUILD --platform=linux/amd64 +root --image=${image}
-
 root:
-    ARG image
+    ARG image=cache.defn.run:5000/dfd:root
 
     FROM ubuntu:22.04
 
@@ -21,6 +17,13 @@ root:
 
     COPY --dir script script
     RUN script/001-install-base
+    RUN rm -rf script
+
+    USER ubuntu
+    ENV USER=ubuntu
+    ENV HOME=/home/ubuntu
+    WORKDIR /home/ubuntu
+    COPY --dir script script
     RUN script/800-defn-dev
     RUN script/999-defn-dev
     RUN rm -rf script
@@ -28,27 +31,11 @@ root:
     ENTRYPOINT []
     CMD []
 
-    USER ubuntu
-    ENV USER=ubuntu
-    ENV HOME=/home/ubuntu
-    WORKDIR /home/ubuntu
-
-    SAVE IMAGE --push ${image}
-
-buildkite:
-    ARG image=cache.defn.run:5000/dfd:buildkite
-    FROM ghcr.io/buildkite/agent-stack-k8s/agent:0.7.0
-
-    ENV BUILDKITE_GIT_MIRRORS_PATH=/cache/git
-    ENV BUILDKITE_GIT_MIRRORS_SKIP_UPDATE=1
-
-    RUN git clone --mirror -v -- https://github.com/defn/dev.git ${BUILDKITE_GIT_MIRRORS_PATH}/https---github-com-defn-dev-git
-    RUN --no-cache cd ${BUILDKITE_GIT_MIRRORS_PATH}/https---github-com-defn-dev-git && git fetch origin
     SAVE IMAGE --push ${image}
 
 class:
     ARG image=cache.defn.run:5000/dfd:class
-    FROM cache.defn.run:5000/dfd:base
+    FROM cache.defn.run:5000/dfd:root
 
     CACHE /home/ubuntu/work
 
@@ -57,11 +44,11 @@ class:
 
     RUN sudo chown ubuntu:ubuntu /home/ubuntu/work && chmod 755 /home/ubuntu/work
 
-    RUN git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git pull
-
     COPY --dir script script
     RUN script/999-defn-dev
     RUN rm -rf script
+
+    RUN git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git pull
 
     SAVE IMAGE --push ${image}-latest
     SAVE IMAGE --push ${image}-buildkite-latest
@@ -82,4 +69,15 @@ class-buildkite-latest:
     RUN script/999-defn-dev
     RUN rm -rf script
 
+    SAVE IMAGE --push ${image}
+
+buildkite:
+    ARG image=cache.defn.run:5000/dfd:buildkite
+    FROM ghcr.io/buildkite/agent-stack-k8s/agent:0.7.0
+
+    ENV BUILDKITE_GIT_MIRRORS_PATH=/cache/git
+    ENV BUILDKITE_GIT_MIRRORS_SKIP_UPDATE=1
+
+    RUN git clone --mirror -v -- https://github.com/defn/dev.git ${BUILDKITE_GIT_MIRRORS_PATH}/https---github-com-defn-dev-git
+    RUN --no-cache cd ${BUILDKITE_GIT_MIRRORS_PATH}/https---github-com-defn-dev-git && git fetch origin
     SAVE IMAGE --push ${image}
