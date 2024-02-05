@@ -2,7 +2,6 @@
 
 function main {
 	set -exfu
-	STARSHIP_PREEXEC_READY=
 
 	if [[ "$(whoami || true)" == "ubuntu" ]]; then
 		cd
