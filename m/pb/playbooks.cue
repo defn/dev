@@ -129,8 +129,8 @@ role: base_packages: tasks: [{
 	name:   "Allow ubuntu to run Docker"
 	become: true
 	user: {
-		name:   ubuntu
-		groups: docker
-		append: yes
+		name:   "ubuntu"
+		groups: "docker"
+		append: "yes"
 	}
 }]
