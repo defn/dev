@@ -153,10 +153,10 @@ perms:
 	-chmod 0600 ~/.kube/config
 
 play:
-	cd m/pb && $(MAKE) init_local demo opt="-e ansible_connection=local -l packer"
+	cd m/pb && $(MAKE) init_local demo opt="-i inventory/packer.ini"
 
 upgrade:
-	cd m/pb && $(MAKE) upgrade opt="-e ansible_connection=local -l packer"
+	cd m/pb && $(MAKE) upgrade opt="-i inventory/packer.ini"
 
 install:
 	sudo true
