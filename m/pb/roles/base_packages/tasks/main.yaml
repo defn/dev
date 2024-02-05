@@ -33,6 +33,7 @@
       - docker.io
       - tzdata
       - locales
+      - sudo
     state: present
 - name: Remove packages
   become: true

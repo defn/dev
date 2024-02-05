@@ -12,13 +12,14 @@ function main {
     unset LANGUAGE
     unset LC_ALL
 
+	export DEBIAN_FRONTEND=noninteractive
+
 	apt update
-	apt install -y tzdata locales
+	apt install -y tzdata locales sudo
 
 	export LANG=en_US.UTF-8
 	export LANGUAGE=en_US:en
 	export LC_ALL=en_US.UTF-8
-	export DEBIAN_FRONTEND=noninteractive
 
 	ln -sf /usr/share/zoneinfo/UTC /etc/localtime
 	dpkg-reconfigure -f noninteractive tzdata
