@@ -2,14 +2,15 @@
 
 function main {
 	set -exfu
+	STARSHIP_PREEXEC_READY=
 
 	if [[ "$(whoami || true)" == "ubuntu" ]]; then
 		cd
 		git pull
 
-		set +x
+		set +xu
 		source .bash_profile
-		set -x
+		set -xu
 
 		git config --global user.email "you@example.com"
 		git config --global user.name "Your Name"
