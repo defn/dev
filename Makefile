@@ -137,7 +137,7 @@ symlinks:
 	bin/persist-cache
 
 deps:
-	$(MAKE)-$(shell uname -s)
+	$(MAKE) deps-$(shell uname -s)
 
 deps-Linux:
 	sudo apt install -y direnv
