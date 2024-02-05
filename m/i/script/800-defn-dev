@@ -11,7 +11,11 @@ function main {
 		mv dev/.git .
 		rm -rf dev
 		git reset --hard
+		set +x
 		source .bash_profile
+		set -x
+
+		make deps
 
 		git config --global user.email "you@example.com"
 		git config --global user.name "Your Name"
