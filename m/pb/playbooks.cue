@@ -99,9 +99,10 @@ role: base_packages: tasks: [{
 	become: true
 	apt: {
 		name: [
-			"direnv",
-			"make",
-			"net-tools",
+			"direnv", "make", "net-tools", "lsb-release", "tzdata", "locales",
+			"ca-certificates", "iproute2", "sudo", "curl", "build-essential",
+			"openssh-client", "rsync", "git", "git-lfs", "fzf", "jq", "gettext",
+			"direnv", "ncdu", "apache2-utils", "fontconfig", "docker.io",
 		]
 		state: "present"
 	}
@@ -111,7 +112,25 @@ role: base_packages: tasks: [{
 	apt: {
 		name: [
 			"nano",
+			"unattended-upgrades",
 		]
 		state: "absent"
+	}
+}, {
+	name:   "Remove files"
+	become: true
+	file: {
+		path: [
+			"/usr/bin/gs",
+		]
+		state: "absent"
+	}
+}, {
+	name:   "Allow ubuntu to run Docker"
+	become: true
+	user: {
+		name:   ubuntu
+		groups: docker
+		append: yes
 	}
 }]

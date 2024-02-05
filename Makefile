@@ -144,6 +144,9 @@ perms:
 	-if ! test -f ~/.kube/config; then mkdir -p ~/.kube; touch ~/.kube/config; fi
 	-chmod 0600 ~/.kube/config
 
+play:
+	cd m/pb && $(MAKE) init_local demo opt="-e ansible_connection=local -l packer"
+
 install:
 	sudo true
 	$(MAKE) nix

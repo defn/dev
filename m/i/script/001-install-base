@@ -13,12 +13,7 @@ function main {
 	export LC_ALL=en_US.UTF-8
 	export DEBIAN_FRONTEND=noninteractive
 
-	apt-get update && apt-get upgrade -y &&
-		apt-get install -y --no-install-recommends lsb-release tzdata locales ca-certificates iproute2 sudo curl build-essential openssh-client rsync git git-lfs fzf jq gettext direnv ncdu apache2-utils fontconfig docker.io &&
-		apt-get clean && apt purge -y nano &&
-		rm -f /usr/bin/gs
-
-	apt update && apt upgrade -y
+	rm -f /usr/bin/gs
 
 	ln -sf /usr/share/zoneinfo/UTC /etc/localtime &&
 		dpkg-reconfigure -f noninteractive tzdata &&
@@ -31,7 +26,6 @@ function main {
 
 	chown -R ubuntu:ubuntu /home/ubuntu && chmod u+s /usr/bin/sudo
 
-	usermod -aG docker ubuntu
 }
 
 main "$@"
