@@ -24,6 +24,7 @@ function main {
 
 	export DEBIAN_FRONTEND=noninteractive
 
+	apt update || true
 	apt update
 	apt install -y git make curl
 
