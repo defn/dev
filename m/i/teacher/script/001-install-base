@@ -15,7 +15,7 @@ function main {
 	export DEBIAN_FRONTEND=noninteractive
 
 	apt update
-	apt install -y tzdata locales sudo xz-utils
+	apt install -y tzdata locales sudo xz-utils rsync
 
 	export LANG=en_US.UTF-8
 	export LANGUAGE=en_US:en
