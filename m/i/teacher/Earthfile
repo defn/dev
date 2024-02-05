@@ -47,7 +47,6 @@ buildkite:
 
 class:
     ARG image=cache.defn.run:5000/dfd:class
-    ARG vsextensions="vscodevim.vim jnoortheen.nix-ide hashicorp.terraform golang.go esbenp.prettier-vscode bazelbuild.vscode-bazel cuelang.cue pbkit.vscode-pbkit marp-team.marp-vscode tailscale.vscode-tailscale geequlim.godot-tools alfish.godot-files ms-python.python"
     FROM cache.defn.run:5000/dfd:base
 
     CACHE /home/ubuntu/work
@@ -65,6 +64,7 @@ class:
 
 class-buildkite-latest:
     ARG image=cache.defn.run:5000/dfd:class-buildkite-latest
+    ARG vsextensions="vscodevim.vim jnoortheen.nix-ide hashicorp.terraform golang.go esbenp.prettier-vscode bazelbuild.vscode-bazel cuelang.cue pbkit.vscode-pbkit marp-team.marp-vscode tailscale.vscode-tailscale geequlim.godot-tools alfish.godot-files ms-python.python"
     FROM ${image}
 
     RUN bash -c 'source .bash_profile && for e in ${vsextensions}; do bin/nix/code-server serve-local --force --install-extension $e; done'

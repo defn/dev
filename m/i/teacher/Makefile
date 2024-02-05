@@ -3,18 +3,17 @@ SHELL := /bin/bash
 build:
 	$(MAKE) coder
 
-build-aws:
-	earthly --ci --no-cache --no-output --push +buildall:
-	cd ../base && $(MAKE)
-	$(MAKE) buildkite
-	$(MAKE) class
-	$(MAKE) latest
-
 fmt: # Format packer configs
 	packer fmt -write=true .
 
 hello:
 	test "$$(pass hello)" == world
+
+all:
+	$(MAKE) base
+	$(MAKE) buildkite
+	$(MAKE) class
+	$(MAKE) class-buildkite-latest
 
 latest:
 	$(MAKE) class-buildkite-latest
@@ -25,6 +24,15 @@ reset:
 	cd ../../cache && docker compose down && $(MAKE) up
 	this-prune
 
+base:
+	earthly --ci --no-cache --no-output --push +build
+
+buildkite:
+	@echo --- earthly
+	sudo chown ubuntu:ubuntu /var/run/docker.sock
+	docker ps || sudo docker ps
+	earthly --ci --push --no-output +buildkite
+
 class:
 	@echo --- earthly 
 	sudo chown ubuntu:ubuntu /var/run/docker.sock
@@ -34,12 +42,6 @@ class-buildkite-latest:
 	@echo --- earthly
 	sudo chown ubuntu:ubuntu /var/run/docker.sock
 	earthly --ci --push --no-output +class-buildkite-latest
-
-buildkite:
-	@echo --- earthly
-	sudo chown ubuntu:ubuntu /var/run/docker.sock
-	docker ps || sudo docker ps
-	earthly --ci --push --no-output +buildkite
 
 %:
 	$(MAKE) hello
