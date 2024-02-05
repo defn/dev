@@ -1,8 +1,8 @@
-name: Upgrade all packages
-hosts: all
-become: "yes"
-tasks:
-  - name: Update apt packages
-    apt:
-      upgrade: "yes"
-      update_cache: "yes"
+- name: Upgrade all packages
+  hosts: all
+  become: "yes"
+  tasks:
+    - name: Update apt packages
+      apt:
+        upgrade: "yes"
+        update_cache: "yes"
