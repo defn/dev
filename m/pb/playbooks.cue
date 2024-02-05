@@ -60,13 +60,13 @@ playbook: init: [{
 
 playbook: init_local: [{
 	#init_base
-	become: "yes"
+	become: true
 }]
 
 playbook: upgrade: [{
 	name:   "Upgrade all packages"
 	hosts:  "all"
-	become: "yes"
+	become: true
 	tasks: [{
 		name: "Update apt packages"
 		apt: {
@@ -160,5 +160,22 @@ role: base_packages: tasks: [{
 		name:   "ubuntu"
 		groups: "docker"
 		append: "yes"
+	}
+}, {
+	name:   "Create /etc/apt/apt.conf.d directory"
+	become: true
+	file: {
+		path:  "/etc/apt/apt.conf.d"
+		state: "directory"
+		owner: "root"
+		group: "root"
+		mode:  "0755"
+	}
+}, {
+	name:   "Delete old apt config"
+	become: true
+	file: {
+		path:  "/etc/apt/apt.conf.d/99-Phased-Updates"
+		state: "absent"
 	}
 }]

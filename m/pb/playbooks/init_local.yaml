@@ -1,4 +1,4 @@
-- become: "yes"
+- become: true
   name: Playbook to set up root access over ssh
   hosts: all
   tasks:
