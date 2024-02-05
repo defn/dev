@@ -20,9 +20,9 @@ root:
     ENV DEBIAN_FRONTEND=noninteractive
 
     COPY --dir script script
-    RUN script/000-install-bare
     RUN script/001-install-base
-    RUN script/999-update
+    RUN script/800-defn-dev
+    RUN script/999-defn-dev
 
     ENTRYPOINT []
     CMD []

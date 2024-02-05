@@ -31,6 +31,8 @@
       - apache2-utils
       - fontconfig
       - docker.io
+      - tzdata
+      - locales
     state: present
 - name: Remove packages
   become: true

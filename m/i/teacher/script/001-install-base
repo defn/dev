@@ -8,6 +8,13 @@ function main {
 		return $?
 	fi
 
+    unset LANG
+    unset LANGUAGE
+    unset LC_ALL
+
+	apt update
+	apt install -y tzdata locales
+
 	export LANG=en_US.UTF-8
 	export LANGUAGE=en_US:en
 	export LC_ALL=en_US.UTF-8
