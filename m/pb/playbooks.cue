@@ -26,8 +26,9 @@ inventory: {
 		"zm3",
 	]
 
-	tp: hosts: [
+	heavy: hosts: [
 		"thinkpad",
+		"thelio",
 	]
 }
 
