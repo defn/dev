@@ -23,6 +23,7 @@ root:
     RUN script/001-install-base
     RUN script/800-defn-dev
     RUN script/999-defn-dev
+    RUN rm -rf script
 
     ENTRYPOINT []
     CMD []
@@ -55,9 +56,12 @@ class:
     ENV BUILDKITE_GIT_MIRRORS_SKIP_UPDATE=1
 
     RUN sudo chown ubuntu:ubuntu /home/ubuntu/work && chmod 755 /home/ubuntu/work
-    COPY script/800-defn-dev .
-    RUN bash -c "./800-defn-dev && rm -f ./800-defn-dev"
+
     RUN git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git pull
+
+    COPY --dir script script
+    RUN script/999-defn-dev
+    RUN rm -rf script
 
     SAVE IMAGE --push ${image}-latest
     SAVE IMAGE --push ${image}-buildkite-latest
@@ -73,5 +77,9 @@ class-buildkite-latest:
     RUN --no-cache bash -c 'git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git pull'
     RUN bash -c 'source .bash_profile && make home && cd m && b build'
     RUN git checkout .
+
+    COPY --dir script script
+    RUN script/999-defn-dev
+    RUN rm -rf script
 
     SAVE IMAGE --push ${image}
