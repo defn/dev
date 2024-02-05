@@ -4,18 +4,24 @@ function main {
 	set -exfu
 
 	if [[ "$(whoami || true)" == "ubuntu" ]]; then
+		cd
+
+		# root stuff	
 		sudo "$0" "$@"
 
-		cd
+		# clone defn/dev to $HOME
 		git clone https://github.com/defn/dev
 		mv dev/.git .
 		rm -rf dev
 		git reset --hard
+
+		# make dependencies
+		make deps
+
 		set +x
 		source .bash_profile
 		set -x
 
-		make deps
 
 		git config --global user.email "you@example.com"
 		git config --global user.name "Your Name"
@@ -28,6 +34,9 @@ function main {
 	fi
 
 	export DEBIAN_FRONTEND=noninteractive
+
+	apt update
+	apt install -y git make
 
 	curl -fsSL https://tailscale.com/install.sh | sh
 	rm -rf /var/lib/tailscale
