@@ -15,7 +15,7 @@ function main {
 	export DEBIAN_FRONTEND=noninteractive
 
 	apt update
-	apt install -y tzdata locales sudo
+	apt install -y tzdata locales sudo xz
 
 	export LANG=en_US.UTF-8
 	export LANGUAGE=en_US:en
