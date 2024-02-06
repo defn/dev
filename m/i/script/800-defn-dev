@@ -7,7 +7,7 @@ function main {
 	if [[ "$(whoami || true)" == "ubuntu" ]]; then
 		cd
 
-		# root stuff	
+		# root stuff
 		sudo "$0" "$@"
 
 		# clone defn/dev to $HOME

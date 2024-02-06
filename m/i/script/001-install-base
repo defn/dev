@@ -8,9 +8,9 @@ function main {
 		return $?
 	fi
 
-    unset LANG
-    unset LANGUAGE
-    unset LC_ALL
+	unset LANG
+	unset LANGUAGE
+	unset LC_ALL
 
 	export DEBIAN_FRONTEND=noninteractive
 

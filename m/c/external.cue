@@ -4,10 +4,10 @@ package c
 	secret_name:      string
 	secret_namespace: string
 	secret_key:       string
-	secret_template: {...} | *null
-	secret_refresh: string
-	secret_store:   string
-	secret_type:    string | *"Opaque"
+	secret_template:  {...} | *null
+	secret_refresh:   string
+	secret_store:     string
+	secret_type:      string | *"Opaque"
 
 	out: {
 		apiVersion: "external-secrets.io/v1beta1"

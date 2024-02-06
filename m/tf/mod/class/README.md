@@ -1,4 +1,5 @@
 <!-- BEGIN_TF_DOCS -->
+
 ## Requirements
 
 No requirements.
@@ -9,9 +10,9 @@ No providers.
 
 ## Modules
 
-| Name | Source | Version |
-|------|--------|---------|
-| <a name="module_workspace"></a> [workspace](#module\_workspace) | ./mod/terraform-coder-defn-pod | n/a |
+| Name                                                           | Source                         | Version |
+| -------------------------------------------------------------- | ------------------------------ | ------- |
+| <a name="module_workspace"></a> [workspace](#module_workspace) | ./mod/terraform-coder-defn-pod | n/a     |
 
 ## Resources
 
@@ -24,4 +25,5 @@ No inputs.
 ## Outputs
 
 No outputs.
+
 <!-- END_TF_DOCS -->
