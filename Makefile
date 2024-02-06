@@ -153,10 +153,10 @@ perms:
 	-chmod 0600 ~/.kube/config
 
 play:
-	cd m/pb && $(MAKE) init_local demo opt="-i inventory/packer.ini"
+	cd m/pb && $(MAKE) local-demo
 
 upgrade:
-	cd m/pb && $(MAKE) upgrade opt="-i inventory/packer.ini"
+	cd m/pb && $(MAKE) local-upgrade
 
 install:
 	sudo true

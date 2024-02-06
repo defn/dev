@@ -3836,7 +3836,7 @@
         ]
       },
       "os:osx,arch:x86_64": {
-        "bzlTransitiveDigest": "8MGjFckv5DIq1eGuGuoKZIOzVtTCdGC1W6zXyq24w9g=",
+        "bzlTransitiveDigest": "L/cPIUW4/FOkbv0dYG0SLtG2DITT4s3n5k8ebIjZ8VI=",
         "accumulatedFileDigests": {},
         "envVariables": {},
         "generatedRepoSpecs": {
