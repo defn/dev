@@ -153,7 +153,7 @@ perms:
 	-chmod 0600 ~/.kube/config
 
 play:
-	cd m/pb && $(MAKE) init_local local-demo
+	cd m/pb && $(MAKE) local-demo
 
 upgrade:
 	cd m/pb && $(MAKE) local-upgrade
