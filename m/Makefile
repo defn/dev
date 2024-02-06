@@ -180,3 +180,7 @@ token:
 
 trunk:
 	cd && curl https://get.trunk.io -fsSL | bash -s -- -y
+	cd && $(MAKE) trunk
+
+ssh-config:
+	coder config-ssh --yes -o "RemoteForward /home/ubuntu/.gnupg/S.gpg-agent $${HOME}/.gnupg/S.gpg-agent.extra"
