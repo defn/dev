@@ -8,6 +8,7 @@ inventory: {
 	coder: hosts: [
 		"coder-amanibhavam-district",
 		"coder-amanibhavam-school",
+		"coder-dgwyn-spiral",
 	]
 
 	oci: hosts: [
