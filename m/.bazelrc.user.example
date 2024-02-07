@@ -1,3 +1,3 @@
-build --bes_results_url=https://buildbuddy.district.amanibhavam.defn.run/invocation
-build --bes_backend=grpc://172.31.32.164:1985
-build --remote_cache=grpc://172.31.32.164:9092
+#build --bes_results_url=https://buildbuddy.district.amanibhavam.defn.run/invocation
+#build --bes_backend=grpc://172.31.32.164:1985
+build --remote_cache=grpc://127.0.0.1:9092
