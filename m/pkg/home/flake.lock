@@ -10,17 +10,17 @@
       },
       "locked": {
         "dir": "m/pkg/az",
-        "lastModified": 1706898251,
-        "narHash": "sha256-bxQ4slYckJ838eU5M30E0DDGCmNAPRXq4uvSTZJK5MY=",
+        "lastModified": 1707270267,
+        "narHash": "sha256-2DbUqQ/2oS3xeyo5f6yKXhtyTjC9dOd970EZMFqQ994=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "1bedd90746efbe55e17f7d2ce3ee315001408cf3",
+        "rev": "efb27f81bcf4782886ed653447c03fea16f9a7f5",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/az",
         "owner": "defn",
-        "ref": "pkg-az-0.0.164",
+        "ref": "pkg-az-0.0.165",
         "repo": "dev",
         "type": "github"
       }
@@ -157,17 +157,17 @@
       },
       "locked": {
         "dir": "m/pkg/dyff",
-        "lastModified": 1706897839,
-        "narHash": "sha256-jxf3CqC7GslXmXG17CAn15qpFmseNzhM9lfy7mSdlRw=",
+        "lastModified": 1707270235,
+        "narHash": "sha256-p6Mjd9OPAsL61eL2Yl+cK+by4/7URGXbUVacyBwL6/4=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "52517252fe92379d8da44a97dbe4cd062700abc9",
+        "rev": "914dd06415c7ab966bf2c086608cce80f78f4650",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/dyff",
         "owner": "defn",
-        "ref": "pkg-dyff-1.6.0-6",
+        "ref": "pkg-dyff-1.7.0-1",
         "repo": "dev",
         "type": "github"
       }
