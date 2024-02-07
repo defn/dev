@@ -19,7 +19,7 @@ playbooks/*.yaml: playbooks.cue
 	$(MAKE) build
 
 local-%:
-	@ansible-playbook -i inventory/packer.ini -e ansible_connection=local "playbooks/$(second).yaml"
+	@$(HOME)/.local/bin/ansible-playbook -i inventory/packer.ini -e ansible_connection=local "playbooks/$(second).yaml"
 
 %: $(HOME)/.local/bin/ansible-playbook playbooks/%.yaml
-	@ansible-playbook $(opt) "playbooks/$@.yaml"
+	@$(HOME)/.local/bin/ansible-playbook $(opt) "playbooks/$@.yaml"
