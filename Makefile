@@ -158,11 +158,14 @@ play:
 upgrade:
 	cd m/pb && $(MAKE) local-upgrade
 
-install:
+install: m/.bazelrc.user
 	sudo true
 	$(MAKE) nix
 	$(MAKE) install-inner
 	@mark finished
+
+m/.bazelrc.user:
+	cp m/.bazelrc.user.example m/.bazelrc.user
 
 install-inner:
 	$(MAKE) symlinks perms
