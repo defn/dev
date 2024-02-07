@@ -165,7 +165,7 @@ install: m/.bazelrc.user
 	@mark finished
 
 m/.bazelrc.user:
-	cp m/.bazelrc.user.example m/.bazelrc.user
+	cp m/.example.bazelrc.user m/.bazelrc.user
 
 install-inner:
 	$(MAKE) symlinks perms
