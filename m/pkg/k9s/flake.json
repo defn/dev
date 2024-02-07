@@ -1,6 +1,6 @@
 {
   "slug": "pkg-k9s",
   "ghrepo": "derailed/k9s",
-  "vendor": "0.31.7",
-  "revision": "2"
+  "vendor": "0.31.8",
+  "revision": "0"
 }
