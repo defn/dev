@@ -13,12 +13,12 @@ report:
 	@echo; (cd dump && cue export --out json) | jq -r '.host | to_entries[] | .key as $$host | .value as $$facts | $$facts.ansible_processor | "\($$host) \($$facts.ansible_processor_nproc) \(.[2])"' | talign 2
 
 $(HOME)/.local/bin/ansible-playbook:
-	pipx install --include-deps ansible
+	pipx install --force --include-deps ansible
 
 playbooks/*.yaml: playbooks.cue
 	$(MAKE) build
 
-local-%:
+local-%: $(HOME)/.local/bin/ansible-playbook playbooks/%.yaml
 	@$(HOME)/.local/bin/ansible-playbook -i inventory/packer.ini -e ansible_connection=local "playbooks/$(second).yaml"
 
 %: $(HOME)/.local/bin/ansible-playbook playbooks/%.yaml
