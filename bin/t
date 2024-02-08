@@ -9,22 +9,16 @@ function main {
 	echo "t $@"
 	case "${1:-}" in
 		start)
+			export BUILDEVENT_APIKEY="$(pass BUILDEVENT_APIKEY || true)" 
 			STARTED="$(date +%s)"
 			shift
 			name="$1"; shift
-			TRACE_ID="${name}-$(date +%s)"
+			export TRACE_ID="${name}-$(date +%s)"
 			if buildevents cmd "${TRACE_ID}" "${TRACE_ID}" "${name}" -- "$@"; then
 				t build "${TRACE_ID}" success "${STARTED}"
 			else
 				t build "${TRACE_ID}" failure "${STARTED}"
 			fi
-			;;
-		span)
-			STARTED="$(date +%s)"
-			shift
-			name="$1"; shift
-			SPAN_ID="${name}-$$"
-			t step "${name}" "${STARTED}"
 			;;
 		cmd)
 			shift
