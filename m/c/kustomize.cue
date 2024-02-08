@@ -393,7 +393,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.31.5"
+		version: "6.31.6"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "info"
@@ -1632,7 +1632,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "2.8.0"
+		version:   "2.8.1"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {
@@ -2056,7 +2056,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "4.2.5"
+		version:     "4.3.0"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
@@ -2960,7 +2960,7 @@ kustomize: "reloader": #KustomizeHelm & {
 		release:   "reloader"
 		name:      "reloader"
 		namespace: "reloader"
-		version:   "1.0.65"
+		version:   "1.0.67"
 		repo:      "https://stakater.github.io/stakater-charts"
 		values: {
 		}
