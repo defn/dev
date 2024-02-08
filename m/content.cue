@@ -1,4 +1,4 @@
-package app
+package l
 
 import (
 	"strings"
@@ -77,8 +77,8 @@ import (
 
 // TutorialContent decores a Tutorial Section
 #TutorialContent: #Content & {
-	title: string
-	steps: #ListContent.items
+	title:   string
+	steps:   #ListContent.items
 	content: #SectionContent & {
 		"title": title
 		content: (#ListContent & {items: steps})
