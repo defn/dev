@@ -1,28 +1,44 @@
 #!/usr/bin/env bash
 
-source ~/.bash_profile
+set -efu
 
 function main {
 	export TRACE_ID="$(echo "${HONEYCOMB_TRACE:-}" | cut -d, -f1 | cut -d= -f2)"
 	export PARENT_ID="$(echo "${HONEYCOMB_TRACE:-}" | cut -d, -f2 | cut -d= -f2)"
 
+	echo "t $@"
 	case "${1:-}" in
+		start)
+			shift
+			name="$1"; shift
+			TRACE_ID="${name}-$(date +%s)"
+			STARTED="$(date +%s)"
+			if buildevents cmd "${TRACE_ID}" "${TRACE_ID}" "${name}" -- "$@"; then
+				t build "${TRACE_ID}" success "${STARTED}"
+			else
+				t build "${TRACE_ID}" failure "${STARTED}"
+			fi
+			;;
 		cmd)
 			shift
 			name="$1"; shift
-			buildevents cmd "${TRACE_ID}" "${PARENT_ID}" "${name}" -- "$@"
+			set -x
+			buildevents cmd "${TRACE_ID}" "${PARENT_ID}" "${name}" -- "$@" >/dev/null
 			;;
 		step)
 			shift
 			name="$1"; shift
 			start="$1"; shift
+			set -x
 			buildevents step "${TRACE_ID}" "${PARENT_ID}" "${start}" "${name}"
 			;;
 		build)
 			shift
+			TRACE_ID="$1"; shift
 			status="$1"; shift
 			start="$1"; shift
-			buildevents build "${TRACE_ID}" "${PARENT_ID}" "${start}" "${status}"
+			set -x
+			buildevents build "${TRACE_ID}" "${start}" "${status}"
 			;;
 	esac
 }
