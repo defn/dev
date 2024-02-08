@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+source ~/.bash_profile
+
+function main {
+	export TRACE_ID="$(echo "${HONEYCOMB_TRACE:-}" | cut -d, -f1 | cut -d= -f2)"
+	export PARENT_ID="$(echo "${HONEYCOMB_TRACE:-}" | cut -d, -f2 | cut -d= -f2)"
+
+	case "${1:-}" in
+		cmd)
+			shift
+			name="$1"; shift
+			buildevents cmd "${TRACE_ID}" "${PARENT_ID}" "${name}" -- "$@"
+			;;
+		step)
+			shift
+			name="$1"; shift
+			start="$1"; shift
+			buildevents step "${TRACE_ID}" "${PARENT_ID}" "${start}" "${name}"
+			;;
+		build)
+			shift
+			status="$1"; shift
+			start="$1"; shift
+			buildevents build "${TRACE_ID}" "${PARENT_ID}" "${start}" "${status}"
+			;;
+	esac
+}
+
+main "$@"
