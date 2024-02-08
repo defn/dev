@@ -956,9 +956,10 @@ cilium_common: {
 			loadBalancer: algorithm:  "maglev"
 			bpf: lbExternalClusterIP: true
 			bpf: masquerade:          true
+			socketLB: enabled:        true
 			envoy: enabled:           true
 			kubeProxyReplacement: false
-			nodePort: enabled:          false
+			nodePort: enabled:          true
 			hostPort: enabled:          false
 			hostFirewall: enabled:      false
 			ingressController: enabled: false
