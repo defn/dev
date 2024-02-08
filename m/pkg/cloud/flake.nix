@@ -1,6 +1,6 @@
 {
   inputs = {
-    terraform.url = github:defn/dev/pkg-terraform-1.7.2-2?dir=m/pkg/terraform;
+    terraform.url = github:defn/dev/pkg-terraform-1.7.3-1?dir=m/pkg/terraform;
     terraformdocs.url = github:defn/dev/pkg-terraformdocs-0.17.0-4?dir=m/pkg/terraformdocs;
     packer.url = github:defn/dev/pkg-packer-1.10.1-2?dir=m/pkg/packer;
     step.url = github:defn/dev/pkg-step-0.25.2-2?dir=m/pkg/step;
