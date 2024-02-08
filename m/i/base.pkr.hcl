@@ -18,7 +18,7 @@ variable "scripts" {
 
 locals {
   timestamp = regex_replace(timestamp(), "[- TZ:]", "")
-  name      = "base"
+  name      = "coder"
   owner     = "099720109477"
   ami       = "ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"
 }
@@ -67,7 +67,7 @@ source "amazon-ebs" "this" {
   }
 
   snapshot_tags = {
-    Name      = "Packer base ${local.timestamp}"
+    Name      = "Packer coder base ${local.timestamp}"
     ManagedBy = "Packer"
   }
 }

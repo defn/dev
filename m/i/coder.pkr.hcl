@@ -18,7 +18,7 @@ locals {
   timestamp = regex_replace(timestamp(), "[- TZ:]", "")
   name      = "coder"
   owner     = "self"
-  ami       = "base-*"
+  ami       = "coder-*"
 }
 
 source "amazon-ebs" "this" {
@@ -56,7 +56,7 @@ source "amazon-ebs" "this" {
   }
 
   snapshot_tags = {
-    Name      = "Packer coder ${local.timestamp}"
+    Name      = "Packer coder latest ${local.timestamp}"
     ManagedBy = "Packer"
   }
 }
