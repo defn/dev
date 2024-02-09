@@ -15,9 +15,13 @@ function main {
 			name="$1"; shift
 			export TRACE_ID="${name}-$(date +%s)"
 			if buildevents cmd "${TRACE_ID}" "${TRACE_ID}" "${name}" -- "$@"; then
-				t build "${TRACE_ID}" success "${STARTED}"
+				if [[ -n "${BUILDEVENT_APIKEY}" ]]; then
+					t build "${TRACE_ID}" success "${STARTED}"
+				fi
 			else
-				t build "${TRACE_ID}" failure "${STARTED}"
+				if [[ -n "${BUILDEVENT_APIKEY}" ]]; then
+					t build "${TRACE_ID}" failure "${STARTED}"
+				fi
 			fi
 			;;
 		step)
