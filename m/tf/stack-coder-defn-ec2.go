@@ -317,6 +317,11 @@ disown
 		Enabled:           infra.Jstrue(),
 		UserEnabled:       infra.Jsfalse(),
 		VersioningEnabled: infra.Jsfalse(),
+		WebsiteConfiguration: map[string]*string{
+			"error_document": infra.Js("index.html"),
+			"index_document": infra.Js("404.html"),
+			"routing_rules":  infra.Js(""),
+		},
 	})
 
 	devInstanceProfile := iaminstanceprofile.NewIamInstanceProfile(stack, infra.Js("dev_instance_profile"), &iaminstanceprofile.IamInstanceProfileConfig{

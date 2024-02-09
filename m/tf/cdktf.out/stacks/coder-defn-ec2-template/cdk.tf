@@ -237,7 +237,12 @@ module "dev_bucket" {
   s3_object_ownership = "BucketOwnerEnforced"
   user_enabled        = false
   versioning_enabled  = false
-  source              = "./assets/__cdktf_module_asset_26CE565C/67538898726A5B4F1C43D0098A97926C/terraform-aws-s3-bucket"
+  website_configuration = {
+    error_document = "index.html"
+    index_document = "404.html"
+    routing_rules  =
+  }
+  source = "./assets/__cdktf_module_asset_26CE565C/67538898726A5B4F1C43D0098A97926C/terraform-aws-s3-bucket"
 }
 resource "aws_iam_instance_profile" "dev_instance_profile" {
   name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
