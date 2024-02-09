@@ -317,23 +317,6 @@ disown
 		Enabled:           infra.Jstrue(),
 		UserEnabled:       infra.Jsfalse(),
 		VersioningEnabled: infra.Jsfalse(),
-		WebsiteConfiguration: []map[string]interface{}{{
-			"index_document": infra.Js("index.html"),
-			"error_document": infra.Js("404.html"),
-			"routing_rules": cdktf.Token_AsList([]interface{}{map[string]map[string]*string{
-				"condition": {
-					"key_prefix_equals":               infra.Js("documents/"),
-					"http_error_code_returned_equals": infra.Js("404"),
-				},
-				"redirect": {
-					"host_name":               infra.Js("defn.dev"),
-					"http_redirect_code":      infra.Js("404"),
-					"protocol":                infra.Js("https"),
-					"replace_key_prefix_with": infra.Js("docs/"),
-					"replace_key_with":        infra.Js("docs/"),
-				},
-			}}, &cdktf.EncodingOptions{}),
-		}},
 	})
 
 	devInstanceProfile := iaminstanceprofile.NewIamInstanceProfile(stack, infra.Js("dev_instance_profile"), &iaminstanceprofile.IamInstanceProfileConfig{
