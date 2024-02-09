@@ -20,17 +20,10 @@ function main {
 				t build "${TRACE_ID}" failure "${STARTED}"
 			fi
 			;;
-		cmd)
-			shift
-			name="$1"; shift
-			set -x
-			buildevents cmd "${TRACE_ID}" "${PARENT_ID}" "${name}" -- "$@" >/dev/null
-			;;
 		step)
 			shift
 			name="$1"; shift
 			start="$1"; shift
-			set -x
 			buildevents step "${TRACE_ID}" "${PARENT_ID}" "${start}" "${name}"
 			;;
 		build)
@@ -38,8 +31,15 @@ function main {
 			TRACE_ID="$1"; shift
 			status="$1"; shift
 			start="$1"; shift
-			set -x
 			buildevents build "${TRACE_ID}" "${start}" "${status}"
+			;;
+		*)
+			name="$1"; shift
+			if [[ -n "${PARENT_ID}" ]]; then
+				buildevents cmd "${TRACE_ID}" "${PARENT_ID}" "${name}" -- "$@" >/dev/null
+			else
+				t start "${name}" "$@"
+			fi
 			;;
 	esac
 }
