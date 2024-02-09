@@ -93,7 +93,7 @@ dotfiles:
 		ln -nfs ~/work/dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
 		ln -nfs ~/work/dotfiles ~/.config/coderv2/dotfiles; \
 		ln -nfs ~/work/dotfiles ~/.dotfiles; \
-		t dofiles_bootstrap (./.dotfiles/bootstrap); \
+		t dofiles_bootstrap ./.dotfiles/bootstrap; \
 	fi
 
 password-store:
