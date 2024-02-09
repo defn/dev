@@ -281,7 +281,6 @@ disown
 		},
 		VpcId: devVpc.Id(),
 	})
-	devSecurityGroup.MoveFromId(infra.Js("aws_security_group.dev_11"))
 
 	app.NewApp(stack, infra.Js("code-server"), &app.AppConfig{
 		AgentId:     devCoderAgent.Id(),
@@ -312,8 +311,6 @@ disown
 		Name: devWorkspaceName,
 		Role: devIamRole.Name(),
 	})
-
-	devInstanceProfile.MoveFromId(infra.Js("aws_iam_instance_profile.dev_16"))
 
 	devEc2Instance := instance.NewInstance(stack, infra.Js("dev_ec2_instance"), &instance.InstanceConfig{
 		Ami:                devAmi.Id(),
@@ -347,8 +344,6 @@ disown
 		},
 	})
 
-	devEc2Instance.MoveFromId(infra.Js("aws_instance.dev_17"))
-
 	devEc2Count := cdktf.TerraformCount_Of(cdktf.Token_AsNumber(cdktf.Fn_Conditional(cdktf.Op_Eq(paramServiceProvider.Value(), infra.Js("aws-ec2")), infra.Jsn(1), infra.Jsn(0))))
 	metadata.NewMetadata(stack, infra.Js("dev_metadata"), &metadata.MetadataConfig{
 		Item: []*metadata.MetadataItem{{
@@ -360,12 +355,12 @@ disown
 		}},
 		ResourceId: devEc2Instance.Id(),
 		Count:      devEc2Count,
-	}).MoveFromId(infra.Js("coder_metadata.main_20"))
+	})
 
 	ec2instancestate.NewEc2InstanceState(stack, infra.Js("dev_instance_state"), &ec2instancestate.Ec2InstanceStateConfig{
 		InstanceId: devEc2Instance.Id(),
 		State:      cdktf.Token_AsString(cdktf.Fn_Conditional(cdktf.Op_Eq(devCoderWorkspace.Transition(), infra.Js("start")), infra.Js("running"), infra.Js("stopped")), &cdktf.EncodingOptions{}),
-	}).MoveFromId(infra.Js("aws_ec2_instance_state.dev_21"))
+	})
 
 	return stack
 }
