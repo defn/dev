@@ -312,12 +312,11 @@ disown
 	})
 
 	terraform_aws_s3_bucket.NewTerraformAwsS3Bucket(stack, infra.Js("dev_bucket"), &terraform_aws_s3_bucket.TerraformAwsS3BucketConfig{
-		Name:                              devWorkspaceName,
-		S3ObjectOwnership:                 infra.Js("BucketOwnerEnforced"),
-		Enabled:                           infra.Jstrue(),
-		UserEnabled:                       infra.Jsfalse(),
-		VersioningEnabled:                 infra.Jsfalse(),
-		SkipAssetCreationFromLocalModules: infra.Jstrue(),
+		Name:              devWorkspaceName,
+		S3ObjectOwnership: infra.Js("BucketOwnerEnforced"),
+		Enabled:           infra.Jstrue(),
+		UserEnabled:       infra.Jsfalse(),
+		VersioningEnabled: infra.Jsfalse(),
 	})
 
 	devInstanceProfile := iaminstanceprofile.NewIamInstanceProfile(stack, infra.Js("dev_instance_profile"), &iaminstanceprofile.IamInstanceProfileConfig{
