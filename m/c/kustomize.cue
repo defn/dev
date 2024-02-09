@@ -393,7 +393,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.31.6"
+		version: "6.32.0"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "info"
@@ -456,7 +456,7 @@ kustomize: "kourier": #Kustomize & {
 	cluster: #Cluster
 
 	resource: "kourier": {
-		url: "https://github.com/knative-extensions/net-kourier/releases/download/knative-v1.12.2/kourier.yaml"
+		url: "https://github.com/knative-extensions/net-kourier/releases/download/knative-v1.13.0/kourier.yaml"
 	}
 
 	psm: "service-kourier-set-cluster-ip": {
@@ -792,7 +792,7 @@ kustomize: "knative": #Kustomize & {
 	cluster: #Cluster
 
 	resource: "knative-serving": {
-		url: "https://github.com/knative/serving/releases/download/knative-v1.11.5/serving-core.yaml"
+		url: "https://github.com/knative/serving/releases/download/knative-v1.13.1/serving-core.yaml"
 	}
 
 	psm: "namespace-knative-serving": {
@@ -886,7 +886,7 @@ kustomize: "knative": #Kustomize & {
 	}
 }
 
-cert_manager_version: "1.14.1"
+cert_manager_version: "1.14.2"
 
 // https://artifacthub.io/packages/helm/cert-manager/cert-manager
 kustomize: "cert-manager": #KustomizeHelm & {
