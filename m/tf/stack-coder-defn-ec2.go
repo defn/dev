@@ -6,6 +6,8 @@ import (
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 
+	aws_provider "github.com/cdktf/cdktf-provider-aws-go/aws/v19/provider"
+
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/dataawsami"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/defaultvpc"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/ec2instancestate"
@@ -13,16 +15,18 @@ import (
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/iamrole"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/iamrolepolicyattachment"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/instance"
-	aws_provider "github.com/cdktf/cdktf-provider-aws-go/aws/v19/provider"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/securitygroup"
+
+	coder_provider "github.com/defn/dev/m/tf/gen/coder/coder/provider"
 
 	"github.com/defn/dev/m/tf/gen/coder/coder/agent"
 	"github.com/defn/dev/m/tf/gen/coder/coder/app"
 	"github.com/defn/dev/m/tf/gen/coder/coder/datacoderparameter"
 	"github.com/defn/dev/m/tf/gen/coder/coder/datacoderworkspace"
 	"github.com/defn/dev/m/tf/gen/coder/coder/metadata"
-	coder_provider "github.com/defn/dev/m/tf/gen/coder/coder/provider"
+
 	"github.com/defn/dev/m/tf/gen/coderlogin"
+	"github.com/defn/dev/m/tf/gen/terraform_aws_s3_bucket"
 
 	infra "github.com/defn/dev/m/command/infra"
 )
@@ -303,8 +307,17 @@ disown
 
 	coder_provider.NewCoderProvider(stack, infra.Js("coder"), &coder_provider.CoderProviderConfig{})
 
-	coderlogin.NewCoderlogin(stack, infra.Js("coder-login"), &coderlogin.CoderloginConfig{
+	coderlogin.NewCoderlogin(stack, infra.Js("coder_login"), &coderlogin.CoderloginConfig{
 		AgentId: devCoderAgent.Id(),
+	})
+
+	terraform_aws_s3_bucket.NewTerraformAwsS3Bucket(stack, infra.Js("dev_bucket"), &terraform_aws_s3_bucket.TerraformAwsS3BucketConfig{
+		Name:                              devWorkspaceName,
+		S3ObjectOwnership:                 infra.Js("BucketOwnerEnforced"),
+		Enabled:                           infra.Jstrue(),
+		UserEnabled:                       infra.Jsfalse(),
+		VersioningEnabled:                 infra.Jsfalse(),
+		SkipAssetCreationFromLocalModules: infra.Jstrue(),
 	})
 
 	devInstanceProfile := iaminstanceprofile.NewIamInstanceProfile(stack, infra.Js("dev_instance_profile"), &iaminstanceprofile.IamInstanceProfileConfig{

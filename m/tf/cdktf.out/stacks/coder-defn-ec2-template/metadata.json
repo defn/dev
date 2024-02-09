@@ -88,11 +88,19 @@
     }
   },
   "module": {
-    "coder-login": {
+    "coder_login": {
       "//": {
         "metadata": {
-          "path": "coder-defn-ec2-template/coder-login",
-          "uniqueId": "coder-login"
+          "path": "coder-defn-ec2-template/coder_login",
+          "uniqueId": "coder_login"
+        }
+      }
+    },
+    "dev_bucket": {
+      "//": {
+        "metadata": {
+          "path": "coder-defn-ec2-template/dev_bucket",
+          "uniqueId": "dev_bucket"
         }
       }
     }
