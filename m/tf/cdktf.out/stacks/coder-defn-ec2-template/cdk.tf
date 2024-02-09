@@ -237,11 +237,27 @@ module "dev_bucket" {
   s3_object_ownership = "BucketOwnerEnforced"
   user_enabled        = false
   versioning_enabled  = false
-  website_configuration = {
-    error_document = "index.html"
-    index_document = "404.html"
-    routing_rules  =
-  }
+  website_configuration = [
+    {
+      error_document = "404.html"
+      index_document = "index.html"
+      routing_rules = [
+        {
+          condition = {
+            http_error_code_returned_equals = 404
+            key_prefix_equals               = "documents/"
+          }
+          redirect = {
+            host_name               = "defn.dev"
+            http_redirect_code      = 404
+            protocol                = "https"
+            replace_key_prefix_with = "docs/"
+            replace_key_with        = "docs/"
+          }
+        },
+      ]
+    },
+  ]
   source = "./assets/__cdktf_module_asset_26CE565C/67538898726A5B4F1C43D0098A97926C/terraform-aws-s3-bucket"
 }
 resource "aws_iam_instance_profile" "dev_instance_profile" {
@@ -322,7 +338,7 @@ EOF
   }
   lifecycle {
     ignore_changes = [
-      "ami",
+      ami,
     ]
   }
 }

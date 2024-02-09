@@ -8,6 +8,8 @@ build: ../node_modules/.bin/cdktf
 	runmany 'perl -pe "s{=}{= false} if m{versioning_enabled\s+=\s+$$}" -i $$1' cdktf.out/stacks/*/cdk.tf
 # remove quotes from providers
 	runmany 'perl -pe "s{\"}{}g if m{^\s*aws\s*=}" -i $$1' cdktf.out/stacks/*/cdk.tf
+# remove quotes from lifecycle stuff
+	runmany 'perl -pe "s{\"ami\",}{ami,}g" -i $$1' cdktf.out/stacks/*/cdk.tf
 # remove quotes from strings
 	runmany 'perl -pe "s{\\\\\"}{\"}g" -i $$1' cdktf.out/stacks/*/cdk.tf
 # remove local backend path
