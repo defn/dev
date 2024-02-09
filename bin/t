@@ -6,7 +6,6 @@ function main {
 	export TRACE_ID="$(echo "${HONEYCOMB_TRACE:-}" | cut -d, -f1 | cut -d= -f2)"
 	export PARENT_ID="$(echo "${HONEYCOMB_TRACE:-}" | cut -d, -f2 | cut -d= -f2)"
 
-	echo "t $@"
 	case "${1:-}" in
 		start)
 			export BUILDEVENT_APIKEY="$(pass BUILDEVENT_APIKEY || true)" 
@@ -16,9 +15,11 @@ function main {
 			export TRACE_ID="${name}-$(date +%s)"
 			if buildevents cmd "${TRACE_ID}" "${TRACE_ID}" "${name}" -- "$@"; then
 				if [[ -n "${BUILDEVENT_APIKEY}" ]]; then
+					echo
 					t build "${TRACE_ID}" success "${STARTED}"
 				fi
 			else
+				echo
 				if [[ -n "${BUILDEVENT_APIKEY}" ]]; then
 					t build "${TRACE_ID}" failure "${STARTED}"
 				fi
