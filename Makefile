@@ -159,29 +159,29 @@ upgrade:
 	cd m/pb && $(MAKE) local-upgrade
 
 install: install_t
-	t start make_install $(MAKE) install_t
+	t make_install $(MAKE) install_t
 
 install_t: m/.bazelrc.user
-	t cmd sudo_true sudo true
-	t cmd make_nix $(MAKE) nix
-	t cmd install_inner $(MAKE) install-inner
+	t sudo_true sudo true
+	t make_nix $(MAKE) nix
+	t install_inner $(MAKE) install-inner
 	@mark finished
 
 m/.bazelrc.user:
-	t cmd default_bazelrc_user cp m/.example.bazelrc.user m/.bazelrc.user
+	t default_bazelrc_user cp m/.example.bazelrc.user m/.bazelrc.user
 
 install-inner:
-	t cmd make_symlinks $(MAKE) symlinks
-	t cmd make_perms $(MAKE) perms
-	t cmd make_install_innermost bash -c '. ~/.bash_profile && $(MAKE) install-innermost'
-	t cmd make_home $(MAKE) home
+	t make_symlinks $(MAKE) symlinks
+	t make_perms $(MAKE) perms
+	t make_install_innermost bash -c '. ~/.bash_profile && $(MAKE) install-innermost'
+	t make_home $(MAKE) home
 
 install-innermost:
-	t cmd git_config_lfs_locks git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
-	t cmd git_config_lfs_cat git config diff.lfs.textconv cat
-	t cmd make_dotfiles $(MAKE) dotfiles
-	t cmd make_password_store $(MAKE) password-store
-	t cmd make_gpg $(MAKE) gpg
+	t git_config_lfs_locks git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
+	t git_config_lfs_cat git config diff.lfs.textconv cat
+	t make_dotfiles $(MAKE) dotfiles
+	t make_password_store $(MAKE) password-store
+	t make_gpg $(MAKE) gpg
 
 nix:
 # TODO macOS nix profile install nixpkgs#nix
