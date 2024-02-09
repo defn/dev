@@ -83,7 +83,7 @@ dotfiles:
 	mkdir -p ~/work/dotfiles
 	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
 		if ! test -d ~/work/dotfiles/.git/.; then \
-			git clone git@github.com:$${GIT_AUTHOR_NAME}/dotfiles ~/work/dotfiles; \
+			t git_clone_dotfiles git clone git@github.com:$${GIT_AUTHOR_NAME}/dotfiles ~/work/dotfiles; \
 		fi; \
 		mkdir -p ~//work/.codespaces/.persistedshare; \
 		mkdir -p ~/.config/coderv2; \
@@ -93,7 +93,7 @@ dotfiles:
 		ln -nfs ~/work/dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
 		ln -nfs ~/work/dotfiles ~/.config/coderv2/dotfiles; \
 		ln -nfs ~/work/dotfiles ~/.dotfiles; \
-		(./.dotfiles/bootstrap); \
+		t dofiles_bootstrap (./.dotfiles/bootstrap); \
 	fi
 
 password-store:
@@ -102,22 +102,22 @@ password-store:
 		if ! test -d ~/work/password-store/.git/.; then \
 			rm -rf ~/work/pssword-store; \
 			mkdir -p ~/work/password-store; \
-			git clone git@github.com:$${GIT_AUTHOR_NAME}/password-store ~/work/password-store; \
+			t git_clone_password_store git clone git@github.com:$${GIT_AUTHOR_NAME}/password-store ~/work/password-store; \
 		fi; \
 	fi
 
 gpg:
 	$(MARK) configure gpg
-	if test -d ~/.password-store/config/gnupg-config/.; then rsync -ia ~/.password-store/config/gnupg-config/. ~/.gnupg/.; fi
-	$(MAKE) perms
-	if [[ "$(shell uname -s)" == "Darwin" ]]; then $(MAKE) macos; fi
+	if test -d ~/.password-store/config/gnupg-config/.; then t rsync_gnugpg_config rsync -ia ~/.password-store/config/gnupg-config/. ~/.gnupg/.; fi
+	t make_perms $(MAKE) perms
+	if [[ "$(shell uname -s)" == "Darwin" ]]; then t make_macos $(MAKE) macos; fi
 	if test -d /run/user; then \
 		sudo rm -rf /run/user/1000/gnupg; \
 		sudo install -d -m 0700 -o $$(id -un) -g $$(id -gn) /run/user/1000; \
 		ln -nfs ~/.gnupg /run/user/1000/gnupg; \
 		fi
 	pkill dirmngr 2>/dev/null || true
-	dirmngr --daemon || true
+	t dirmngr_daemon dirmngr --daemon || true
 
 docker:
 	$(MARK) docker
@@ -136,13 +136,7 @@ login:
 
 symlinks:
 	$(MARK) configure symlinks
-	bin/persist-cache
-
-deps:
-	$(MAKE) deps-$(shell uname -s)
-
-deps-Linux:
-	sudo apt install -y direnv
+	t persist_cache bin/persist-cache
 
 perms:
 	$(MARK) configure permissions
@@ -162,7 +156,7 @@ install: install_t
 	t make_install $(MAKE) install_t
 
 install_t: m/.bazelrc.user
-	t sudo_true sudo true
+	sudo true
 	t make_nix $(MAKE) nix
 	t install_inner $(MAKE) install-inner
 	@mark finished
@@ -177,20 +171,20 @@ install-inner:
 	t make_home $(MAKE) home
 
 install-innermost:
-	t git_config_lfs_locks git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
-	t git_config_lfs_cat git config diff.lfs.textconv cat
+	git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
+	git config diff.lfs.textconv cat
 	t make_dotfiles $(MAKE) dotfiles
 	t make_password_store $(MAKE) password-store
 	t make_gpg $(MAKE) gpg
 
 nix:
 # TODO macOS nix profile install nixpkgs#nix
-	(. ~/.nix-profile/etc/profile.d/nix.sh && which nix) || $(MAKE) nix-$(shell uname -s)
-	. ~/.nix-profile/etc/profile.d/nix.sh && (test -f "$$HOME/.nix-profile/share/nix-direnv/direnvrc" || nix profile install nixpkgs#nix-direnv)
+	(. ~/.nix-profile/etc/profile.d/nix.sh && which nix) || t make_nix_platform $(MAKE) nix-$(shell uname -s)
+	. ~/.nix-profile/etc/profile.d/nix.sh && (test -f "$$HOME/.nix-profile/share/nix-direnv/direnvrc" || t nix_profile_direnv nix profile install nixpkgs#nix-direnv)
 
 nix-reinstall:
 	rm -rf .nix-* .local/state/nix
-	$(MAKE) nix
+	t make_nix $(MAKE) nix
 
 nix-uninstall:
 	-sudo mv /etc/zshrc.backup-before-nix /etc/zshrc
@@ -210,7 +204,7 @@ nix-clean:
 	rm -rf .nix-profile .local/state/nix/profiles/profile
 
 nix-Linux:
-	export LC_ALL=C.UTF-8 && if ! type -P nix; then $(MAKE) nix-Linux-bootstrap; fi
+	export LC_ALL=C.UTF-8 && if ! type -P nix; then t make_nix_linux_bootstrap $(MAKE) nix-Linux-bootstrap; fi
 
 nix-Darwin:
 	true
@@ -218,7 +212,7 @@ nix-Darwin:
 # https://github.com/NixOS/nixpkgs/blob/9f0d9ad45c4bd998c46ba1cbe0eb0dd28c6288a5/pkgs/tools/package-management/nix/default.nix
 # look for the stable version
 nix-Linux-bootstrap:
-	sh <(curl -L https://releases.nixos.org/nix/nix-$(NIX_VERSION)/install) --no-daemon
+	t curl_bash_nix_install sh <(curl -L https://releases.nixos.org/nix/nix-$(NIX_VERSION)/install) --no-daemon
 	git checkout .bash_profile
 
 nix-Darwin-bootstrap:
