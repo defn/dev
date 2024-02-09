@@ -227,9 +227,17 @@ provider "aws" {
 
 provider "coder" {
 }
-module "coder-login" {
+module "coder_login" {
   agent_id = "${coder_agent.main.id}"
   source   = "https://registry.coder.com/modules/coder-login"
+}
+module "dev_bucket" {
+  enabled             = true
+  name                = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+  s3_object_ownership = "BucketOwnerEnforced"
+  user_enabled        = false
+  versioning_enabled  = false
+  source              = "../../mod/terraform-aws-s3-bucket"
 }
 resource "aws_iam_instance_profile" "dev_instance_profile" {
   name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
