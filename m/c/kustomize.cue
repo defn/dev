@@ -365,7 +365,7 @@ kustomize: "l5d-control": #KustomizeHelm & {
 	helm: {
 		release: "l5d-control"
 		name:    "linkerd-control-plane"
-		version: "1.18.7-edge"
+		version: "1.18.8-edge"
 		repo:    "https://helm.linkerd.io/edge"
 		values: {
 			heartbeatSchedule: "0 0 * * *"
@@ -393,7 +393,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.32.0"
+		version: "6.32.1"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "info"
@@ -477,7 +477,7 @@ kustomize: "external-secrets": #KustomizeHelm & {
 	helm: {
 		release: "external-secrets"
 		name:    "external-secrets"
-		version: "0.9.11"
+		version: "0.9.12"
 		repo:    "https://charts.external-secrets.io"
 		values: {
 			webhook: create:        false
