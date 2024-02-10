@@ -59,9 +59,5 @@ cd m
 
 (cd cache && make init up)
 
-nohup ~/bin/nix/tilt up >/tmp/startup.out 2>&1 &
-disown
+screen -S code-server -d -m tilt up
 
-if kubectl get ns; then
-	echo make ready
-fi
