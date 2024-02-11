@@ -9,11 +9,11 @@ INFRA_NAME := $(shell cue export --out json -e class.cluster_name | jq -r .)
 k3s_url := $(shell cat ~/.kube/config | grep server: | awk '{print $$NF}')
 
 secrets:
-	aws cloudfront create-invalidation --distribution-id $$(env AWS_DEFAULT_REGION=us-west-2 aws resourcegroupstaggingapi get-resources --tag-filters Key=Name,Values=${INFRA_NAME}-oidc --region=us-east-1 | jq -r '.ResourceTagMappingList[].ResourceARN' | cut -d/ -f2) --paths '/*' || true
 	$(MAKE) clean
 	$(MAKE) irsa
 	$(MAKE) k3s-secrets
 	aws s3 sync openid s3://$(shell uname -n)-oidc-origin/openid
+	aws cloudfront create-invalidation --distribution-id $$(env AWS_DEFAULT_REGION=us-west-2 aws resourcegroupstaggingapi get-resources --tag-filters Key=Name,Values=${INFRA_NAME}-oidc --region=us-east-1 | jq -r '.ResourceTagMappingList[].ResourceARN' | cut -d/ -f2) --paths '/*' || true
 
 clean:
 	rm -f system.admin.key system.admin.pem system.ca.pem
