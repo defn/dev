@@ -75,3 +75,4 @@ func (j *jsiiProxy_TerraformAwsS3Bucket) validateSetWebsiteRedirectAllRequestsTo
 func validateNewTerraformAwsS3BucketParameters(scope constructs.Construct, id *string, config *TerraformAwsS3BucketConfig) error {
 	return nil
 }
+

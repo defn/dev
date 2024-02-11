@@ -83,7 +83,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
 }
 
 resource "aws_s3_bucket_website_configuration" "default" {
-  count  = local.enabled && (try(length(var.website_configuration), 0) > 0) ? 1 : 0
+  count  = local.enabled && (try(length(var.website_configuration), 0) > 0) && var.allow_public_website == true ? 1 : 0
   bucket = join("", aws_s3_bucket.default[*].id)
 
   dynamic "index_document" {
@@ -332,6 +332,22 @@ module "s3_user" {
 
 data "aws_iam_policy_document" "bucket_policy" {
   count = local.enabled ? 1 : 0
+
+  dynamic "statement" {
+    for_each = var.allow_public_website ? [1] : []
+
+    content {
+      sid       = "PublicWebsite"
+      effect    = "Allow"
+      actions   = ["s3:GetObject"]
+      resources = ["${local.bucket_arn}/*"]
+
+      principals {
+        identifiers = ["*"]
+        type        = "*"
+      }
+    }
+  }
 
   dynamic "statement" {
     for_each = var.allow_encrypted_uploads_only ? [1] : []

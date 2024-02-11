@@ -345,3 +345,4 @@ type TerraformAwsEc2AutoscaleGroupConfig struct {
 	// See [warm_pool](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/autoscaling_group#warm_pool).
 	WarmPool interface{} `field:"optional" json:"warmPool" yaml:"warmPool"`
 }
+

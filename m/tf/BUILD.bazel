@@ -40,8 +40,6 @@ go_library(
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//organizationsaccount",
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//organizationsorganization",
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//provider",
-        "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//secretsmanagersecret",
-        "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//secretsmanagersecretversion",
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//securitygroup",
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//ssoadminaccountassignment",
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//ssoadminmanagedpolicyattachment",

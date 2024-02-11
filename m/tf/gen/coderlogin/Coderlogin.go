@@ -205,6 +205,7 @@ func (j *jsiiProxy_Coderlogin) Version() *string {
 	return returns
 }
 
+
 func NewCoderlogin(scope constructs.Construct, id *string, config *CoderloginConfig) Coderlogin {
 	_init_.Initialize()
 
@@ -232,7 +233,7 @@ func NewCoderlogin_Override(c Coderlogin, scope constructs.Construct, id *string
 	)
 }
 
-func (j *jsiiProxy_Coderlogin) SetAgentId(val *string) {
+func (j *jsiiProxy_Coderlogin)SetAgentId(val *string) {
 	if err := j.validateSetAgentIdParameters(val); err != nil {
 		panic(err)
 	}
@@ -243,7 +244,7 @@ func (j *jsiiProxy_Coderlogin) SetAgentId(val *string) {
 	)
 }
 
-func (j *jsiiProxy_Coderlogin) SetDependsOn(val *[]*string) {
+func (j *jsiiProxy_Coderlogin)SetDependsOn(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"dependsOn",
@@ -251,7 +252,7 @@ func (j *jsiiProxy_Coderlogin) SetDependsOn(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_Coderlogin) SetForEach(val cdktf.ITerraformIterator) {
+func (j *jsiiProxy_Coderlogin)SetForEach(val cdktf.ITerraformIterator) {
 	_jsii_.Set(
 		j,
 		"forEach",
@@ -463,3 +464,4 @@ func (c *jsiiProxy_Coderlogin) ToTerraform() interface{} {
 
 	return returns
 }
+
