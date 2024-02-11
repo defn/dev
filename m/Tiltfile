@@ -20,6 +20,20 @@ local_resource(
     ],
 )
 
+# tailscale serve
+local_resource(
+    "tailscale-erver",
+    serve_cmd=[
+        "bash",
+        "-c",
+        """
+            cd
+            source .bash_profile
+            exec socat TCP-LISTEN:8443,fork TCP:$(kubectl get -n traefik svc traefik -o json | jq -r .spec.clusterIP):443
+        """,
+    ],
+)
+
 # swap
 local_resource(
     "swap",
