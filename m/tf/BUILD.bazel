@@ -22,6 +22,7 @@ go_library(
         "//tf/gen/coder/coder/metadata",
         "//tf/gen/coder/coder/provider",
         "//tf/gen/coderlogin",
+        "//tf/gen/terraform_aws_cloudfront_s3_cdn",
         "//tf/gen/terraform_aws_defn_account",
         "//tf/gen/terraform_aws_s3_bucket",
         "@com_github_aws_constructs_go_constructs_v10//:constructs",

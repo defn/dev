@@ -46,6 +46,10 @@
       "source": "../../mod/terraform-aws-vpc"
     },
     {
+      "name": "terraform_aws_cloudfront_s3_cdn",
+      "source": "../../mod/terraform-aws-cloudfront-s3-cdn"
+    },
+    {
       "name": "terraform_null_label",
       "source": "../../mod/terraform-null-label"
     }
