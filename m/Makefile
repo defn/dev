@@ -140,6 +140,7 @@ init:
 up:
 	bin/make-k3s up
 #	cd c && $(MAKE) iam
+	cd k && $(MAKE) update
 	$(MAKE) ready
 
 down:
