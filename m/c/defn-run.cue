@@ -24,7 +24,7 @@ k3s_bootstrap: {
 	}
 
 	// traffic
-	"l5d-crds": {}
+	//"l5d-crds": {}
 	//"l5d-control": {}
 
 	// deploy
