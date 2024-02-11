@@ -695,7 +695,7 @@ kustomize: "karpenter": #KustomizeHelm & {
 		}]
 	}
 
-	resource: "provisioner-default": {
+	#resource: "provisioner-default": {
 		apiVersion: "karpenter.sh/v1alpha5"
 		kind:       "Provisioner"
 		metadata: name: "default"
@@ -732,7 +732,7 @@ kustomize: "karpenter": #KustomizeHelm & {
 		}
 	}
 
-	resource: "awsnodetemplate-default": {
+	#resource: "awsnodetemplate-default": {
 		apiVersion: "karpenter.k8s.aws/v1alpha1"
 		kind:       "AWSNodeTemplate"
 		metadata: name: "default"
@@ -1090,11 +1090,11 @@ kustomize: "tailscale": #Kustomize & {
 		}
 		patches: [{
 			op:    "replace"
-			path:  "/spec/template/spec/containers/0/env/0/value"
+			path:  "/spec/template/spec/containers/0/env/1/value"
 			value: "\(cluster.cluster_name)-proxy"
 		}, {
 			op:    "replace"
-			path:  "/spec/template/spec/containers/0/env/2/value"
+			path:  "/spec/template/spec/containers/0/env/3/value"
 			value: "dev"
 		}, {
 			op:    "replace"
