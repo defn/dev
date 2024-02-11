@@ -16,6 +16,27 @@ lookup: {
 	}
 }
 
+#FSKustomize: {
+	ekname: string
+	ekmize: #KustomizeHelm | #Kustomize
+
+	output: {
+		for rname, r in ekmize.resource {
+			if r.kind != "" {
+				"\(ekname)/resource-\(rname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(r)
+			}
+		}
+
+		for pname, p in ekmize.psm {
+			"\(ekname)/patch-\(pname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(p)
+		}
+
+		for jname, j in ekmize.jsp {
+			"\(ekname)/jsonp-\(jname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(j.patches)
+		}
+	}
+}
+
 #ConcreteKustomize: {
 	input: {
 		ename: string
@@ -53,19 +74,10 @@ gen: "k": {
 
 		"\(ekname)/kustomization.yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(ekmize.out)
 
-		for rname, r in ekmize.resource {
-			if r.kind != "" {
-				"\(ekname)/resource-\(rname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(r)
-			}
-		}
-
-		for pname, p in ekmize.psm {
-			"\(ekname)/patch-\(pname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(p)
-		}
-
-		for jname, j in ekmize.jsp {
-			"\(ekname)/jsonp-\(jname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(j.patches)
-		}
+		(#FSKustomize & {
+			"ekname": ekname,
+			"ekmize": ekmize
+		}).output
 
 		(#ConcreteKustomize & {input: {
 			"ename":   ename
