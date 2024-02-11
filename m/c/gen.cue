@@ -23,16 +23,16 @@ lookup: {
 	output: {
 		for rname, r in ekmize.resource {
 			if r.kind != "" {
-				"\(ekname)/resource-\(rname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(r)
+				"\(ekname)/resource-\(rname).yaml": yaml.Marshal(r)
 			}
 		}
 
 		for pname, p in ekmize.psm {
-			"\(ekname)/patch-\(pname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(p)
+			"\(ekname)/patch-\(pname).yaml": yaml.Marshal(p)
 		}
 
 		for jname, j in ekmize.jsp {
-			"\(ekname)/jsonp-\(jname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(j.patches)
+			"\(ekname)/jsonp-\(jname).yaml": yaml.Marshal(j.patches)
 		}
 	}
 }
@@ -47,7 +47,7 @@ lookup: {
 	output: {
 		for kname, _ in input.bootstrap
 		if kname !~ "env$" {
-			"\(lookup[input.ename][kname])/kustomization.yaml": "#ManagedBy: cue\n\n" + yaml.Marshal((kustomize[kname] & {cluster: input.cluster}).out)
+			"\(lookup[input.ename][kname])/kustomization.yaml": yaml.Marshal((kustomize[kname] & {cluster: input.cluster}).out)
 
 			(#FSKustomize & {
 				ekname: lookup[input.ename][kname]
@@ -63,7 +63,7 @@ gen: "k": {
 		let ekname = "\(ename)-env"
 		let ekmize = kustomize[ekname]
 
-		"\(ekname)/kustomization.yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(ekmize.out)
+		"\(ekname)/kustomization.yaml": yaml.Marshal(ekmize.out)
 
 		(#FSKustomize & {
 			"ekname": ekname
@@ -80,6 +80,6 @@ gen: "k": {
 
 gen: "e": {
 	for ename, e in env {
-		"\(e.env.metadata.name).yaml": "# ManagedBy: cue\n\n" + yaml.Marshal(e.env)
+		"\(e.env.metadata.name).yaml": yaml.Marshal(e.env)
 	}
 }
