@@ -12,7 +12,7 @@ secrets:
 	$(MAKE) clean
 	$(MAKE) irsa
 	$(MAKE) k3s-secrets
-	aws s3 sync openid s3://$(shell uname -n)/openid
+	aws s3 sync openid s3://$(shell uname -n)-oidc-origin/openid
 
 clean:
 	rm -f system.admin.key system.admin.pem system.ca.pem
