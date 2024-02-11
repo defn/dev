@@ -142,6 +142,9 @@ up:
 #	cd c && $(MAKE) iam
 	$(MAKE) ready
 
+down:
+	bin/make-k3s down
+
 ready:
 	$(MAKE) k3s-restart-irsa
 	$(MAKE) k3s-advertise-traefik

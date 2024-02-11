@@ -35,8 +35,8 @@ function make_down {
 
 	/usr/local/bin/k3s-uninstall.sh || true
 
-	sudo iptables-save | grep -iv cilium | sudo iptables-restore
-	sudo ip6tables-save | grep -iv cilium | sudo ip6tables-restore
+	#sudo iptables-save | grep -iv cilium | sudo iptables-restore
+	#sudo ip6tables-save | grep -iv cilium | sudo ip6tables-restore
 }
 
 function make_argocd {
