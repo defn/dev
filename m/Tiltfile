@@ -29,6 +29,8 @@ local_resource(
         """
             cd
             source .bash_profile
+            tailscale serve --tcp 443 --bg --yes 8443
+            tailscale serve --https 10350 --bg --yes 10350 
             exec socat TCP-LISTEN:8443,fork TCP:$(kubectl get -n traefik svc traefik -o json | jq -r .spec.clusterIP):443
         """,
     ],
