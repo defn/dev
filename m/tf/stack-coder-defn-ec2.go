@@ -312,11 +312,15 @@ disown
 	})
 
 	terraform_aws_s3_bucket.NewTerraformAwsS3Bucket(stack, infra.Js("dev_bucket"), &terraform_aws_s3_bucket.TerraformAwsS3BucketConfig{
-		Name:              devWorkspaceName,
-		S3ObjectOwnership: infra.Js("BucketOwnerEnforced"),
-		Enabled:           infra.Jstrue(),
-		UserEnabled:       infra.Jsfalse(),
-		VersioningEnabled: infra.Jsfalse(),
+		Name:                       devWorkspaceName,
+		S3ObjectOwnership:          infra.Js("BucketOwnerEnforced"),
+		Enabled:                    infra.Jstrue(),
+		UserEnabled:                infra.Jsfalse(),
+		VersioningEnabled:          infra.Jsfalse(),
+		PrivilegedPrincipalActions: &[]*string{infra.Js("s3:*")},
+		PrivilegedPrincipalArns: &[]*map[string]*[]*string{
+			{"arn:aws:iam::510430971399:role/coder-amanibhavam-district": &[]*string{infra.Js("/openid")}},
+		},
 	})
 
 	devInstanceProfile := iaminstanceprofile.NewIamInstanceProfile(stack, infra.Js("dev_instance_profile"), &iaminstanceprofile.IamInstanceProfileConfig{

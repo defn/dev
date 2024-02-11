@@ -232,8 +232,18 @@ module "coder_login" {
   source   = "https://registry.coder.com/modules/coder-login"
 }
 module "dev_bucket" {
-  enabled             = true
-  name                = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+  enabled = true
+  name    = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+  privileged_principal_actions = [
+    "s3:*",
+  ]
+  privileged_principal_arns = [
+    {
+      "arn:aws:iam::510430971399:role/coder-amanibhavam-district" = [
+        "/openid",
+      ]
+    },
+  ]
   s3_object_ownership = "BucketOwnerEnforced"
   user_enabled        = false
   versioning_enabled  = false
