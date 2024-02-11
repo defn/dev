@@ -317,6 +317,11 @@ disown
 		Enabled:                    infra.Jstrue(),
 		UserEnabled:                infra.Jsfalse(),
 		VersioningEnabled:          infra.Jsfalse(),
+		BlockPublicAcls:            infra.Jsfalse(),
+		BlockPublicPolicy:          infra.Jsfalse(),
+		RestrictPublicBuckets:      infra.Jsfalse(),
+		AllowedBucketActions:       &[]*string{infra.Js("s3:GetObject")},
+		IgnorePublicAcls:           infra.Jsfalse(),
 		PrivilegedPrincipalActions: &[]*string{infra.Js("s3:*")},
 		PrivilegedPrincipalArns: &[]*map[string]*[]*string{
 			{"arn:aws:iam::510430971399:role/coder-amanibhavam-district": &[]*string{infra.Js("/openid")}},
