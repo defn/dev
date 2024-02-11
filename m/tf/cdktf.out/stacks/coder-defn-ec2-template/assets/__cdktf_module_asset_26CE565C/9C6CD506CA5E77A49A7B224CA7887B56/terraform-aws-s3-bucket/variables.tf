@@ -326,7 +326,7 @@ variable "website_redirect_all_requests_to" {
   }
 }
 
-variable "allowed_public_website" {
+variable "allow_public_website" {
   type        = bool
   default     = false
   description = "Add public GetObject permissions to bucket policy"

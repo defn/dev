@@ -29,8 +29,8 @@ build: ../node_modules/.bin/cdktf
 upgrade:
 	runmany 'cd $$1 && tf upgrade && tf locks' cdktf.out/stacks/*/
 
-get:
-	cdktf get
+get: ../node_modules/.bin/cdktf
+	../node_modules/.bin/cdktf get
 	cd .. && $(MAKE) regen
 
 update:
