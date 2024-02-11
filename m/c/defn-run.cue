@@ -58,7 +58,7 @@ class: {
 	issuer:           "letsencrypt-production"
 	cloudflare_email: "cloudflare@defn.us"
 
-	discovery_url: "https://\(cluster_name).\(infra_tailscale_domain)"
+	discovery_url: "http://\(cluster_name).s3-website-\(secrets_region).amazonaws.com"
 	discovery: {
 		issuer:                 discovery_url
 		jwks_uri:               "\(discovery_url)/openid/.well-known/jwks.json"
