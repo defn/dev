@@ -33,10 +33,10 @@ function make_down {
 	sudo ip link delete cilium_net || true
 	sudo ip link delete cilium_vxlan || true
 
+	/usr/local/bin/k3s-uninstall.sh || true
+
 	sudo iptables-save | grep -iv cilium | sudo iptables-restore
 	sudo ip6tables-save | grep -iv cilium | sudo ip6tables-restore
-
-	/usr/local/bin/k3s-uninstall.sh || true
 }
 
 function make_argocd {
