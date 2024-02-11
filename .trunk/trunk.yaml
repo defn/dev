@@ -19,7 +19,7 @@ lint:
     - dotenv-linter@3.3.0
     - black@24.1.1
     - buildifier@6.4.0
-    - cue-fmt@0.5.0
+    - cue-fmt@0.7.0
     - git-diff-check
     - gofmt@1.20.4
     - isort@5.13.2

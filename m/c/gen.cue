@@ -49,19 +49,10 @@ lookup: {
 		if kname !~ "env$" {
 			"\(lookup[input.ename][kname])/kustomization.yaml": "#ManagedBy: cue\n\n" + yaml.Marshal((kustomize[kname] & {cluster: input.cluster}).out)
 
-			for rname, r in (kustomize[kname] & {cluster: input.cluster}).resource {
-				if r.kind != "" {
-					"\(lookup[input.ename][kname])/resource-\(rname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(r)
-				}
-			}
-
-			for pname, p in (kustomize[kname] & {cluster: input.cluster}).psm {
-				"\(lookup[input.ename][kname])/patch-\(pname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(p)
-			}
-
-			for jname, j in (kustomize[kname] & {cluster: input.cluster}).jsp {
-				"\(lookup[input.ename][kname])/jsonp-\(jname).yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(j.patches)
-			}
+			(#FSKustomize & {
+				ekname: lookup[input.ename][kname]
+				ekmize: (kustomize[kname] & {cluster: input.cluster})
+			}).output
 		}
 	}
 }
@@ -75,7 +66,7 @@ gen: "k": {
 		"\(ekname)/kustomization.yaml": "#ManagedBy: cue\n\n" + yaml.Marshal(ekmize.out)
 
 		(#FSKustomize & {
-			"ekname": ekname,
+			"ekname": ekname
 			"ekmize": ekmize
 		}).output
 

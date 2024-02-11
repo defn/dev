@@ -43,4 +43,3 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) validateSetDescriptorFormatsParamete
 func validateNewTerraformAwsDefnAccountParameters(scope constructs.Construct, id *string, config *TerraformAwsDefnAccountConfig) error {
 	return nil
 }
-

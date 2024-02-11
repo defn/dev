@@ -199,4 +199,3 @@ type TerraformAwsTfstateBackendConfig struct {
 	// DynamoDB write capacity units when using provisioned mode 5.
 	WriteCapacity *float64 `field:"optional" json:"writeCapacity" yaml:"writeCapacity"`
 }
-
