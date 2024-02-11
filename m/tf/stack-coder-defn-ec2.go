@@ -26,7 +26,7 @@ import (
 	"github.com/defn/dev/m/tf/gen/coder/coder/metadata"
 
 	"github.com/defn/dev/m/tf/gen/coderlogin"
-	"github.com/defn/dev/m/tf/gen/terraform_aws_s3_bucket"
+	"github.com/defn/dev/m/tf/gen/terraform_aws_cloudfront_s3_cdn"
 
 	infra "github.com/defn/dev/m/command/infra"
 )
@@ -311,20 +311,11 @@ disown
 		AgentId: devCoderAgent.Id(),
 	})
 
-	terraform_aws_s3_bucket.NewTerraformAwsS3Bucket(stack, infra.Js("dev_bucket"), &terraform_aws_s3_bucket.TerraformAwsS3BucketConfig{
-		Name:                       devWorkspaceName,
-		S3ObjectOwnership:          infra.Js("BucketOwnerEnforced"),
-		Enabled:                    infra.Jstrue(),
-		UserEnabled:                infra.Jsfalse(),
-		VersioningEnabled:          infra.Jsfalse(),
-		BlockPublicAcls:            infra.Jsfalse(),
-		BlockPublicPolicy:          infra.Jsfalse(),
-		RestrictPublicBuckets:      infra.Jsfalse(),
-		IgnorePublicAcls:           infra.Jsfalse(),
-		AllowPublicWebsite:       infra.Jstrue(),
-		PrivilegedPrincipalActions: &[]*string{infra.Js("s3:*")},
-		PrivilegedPrincipalArns: &[]*map[string]*[]*string{
-			{"arn:aws:iam::510430971399:role/coder-amanibhavam-district": &[]*string{infra.Js("/openid")}},
+	terraform_aws_cloudfront_s3_cdn.NewTerraformAwsCloudfrontS3Cdn(stack, infra.Js("dev_oidc_cdn"), &terraform_aws_cloudfront_s3_cdn.TerraformAwsCloudfrontS3CdnConfig{
+		Name:       devWorkspaceName,
+		Attributes: &[]*string{infra.Js("oidc")},
+		DeploymentPrincipalArns: &map[string]*[]*string{
+			"arn:aws:iam::510430971399:role/coder-amanibhavam-district": {infra.Js("/openid")},
 		},
 	})
 

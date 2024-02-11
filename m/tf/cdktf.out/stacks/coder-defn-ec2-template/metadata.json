@@ -96,11 +96,11 @@
         }
       }
     },
-    "dev_bucket": {
+    "dev_oidc_cdn": {
       "//": {
         "metadata": {
-          "path": "coder-defn-ec2-template/dev_bucket",
-          "uniqueId": "dev_bucket"
+          "path": "coder-defn-ec2-template/dev_oidc_cdn",
+          "uniqueId": "dev_oidc_cdn"
         }
       }
     }

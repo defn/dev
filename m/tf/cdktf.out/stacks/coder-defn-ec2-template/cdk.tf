@@ -231,28 +231,17 @@ module "coder_login" {
   agent_id = "${coder_agent.main.id}"
   source   = "https://registry.coder.com/modules/coder-login"
 }
-module "dev_bucket" {
-  allow_public_website = true
-  block_public_acls    = false
-  block_public_policy  = false
-  enabled              = true
-  ignore_public_acls   = false
-  name                 = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
-  privileged_principal_actions = [
-    "s3:*",
+module "dev_oidc_cdn" {
+  attributes = [
+    "oidc",
   ]
-  privileged_principal_arns = [
-    {
-      "arn:aws:iam::510430971399:role/coder-amanibhavam-district" = [
-        "/openid",
-      ]
-    },
-  ]
-  restrict_public_buckets = false
-  s3_object_ownership     = "BucketOwnerEnforced"
-  user_enabled            = false
-  versioning_enabled      = false
-  source                  = "./assets/__cdktf_module_asset_26CE565C/9C6CD506CA5E77A49A7B224CA7887B56/terraform-aws-s3-bucket"
+  deployment_principal_arns = {
+    "arn:aws:iam::510430971399:role/coder-amanibhavam-district" = [
+      "/openid",
+    ]
+  }
+  name   = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+  source = "./assets/__cdktf_module_asset_26CE565C/B6CEE38650274FCAE387C71CAFB63F92/terraform-aws-cloudfront-s3-cdn"
 }
 resource "aws_iam_instance_profile" "dev_instance_profile" {
   name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"

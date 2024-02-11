@@ -7,3 +7,4 @@ terraform-aws-ec2-autoscale-group:0.39.0
 terraform-aws-iam-role:0.19.0
 terraform-aws-tfstate-backend:1.4.0
 terraform-aws-s3-bucket:4.0.1
+terraform-aws-cloudfront-s3-cdn:0.92.0
