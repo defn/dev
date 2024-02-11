@@ -232,8 +232,14 @@ module "coder_login" {
   source   = "https://registry.coder.com/modules/coder-login"
 }
 module "dev_bucket" {
-  enabled = true
-  name    = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+  allowed_bucket_actions = [
+    "s3:GetObject",
+  ]
+  block_public_acls   = false
+  block_public_policy = false
+  enabled             = true
+  ignore_public_acls  = false
+  name                = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
   privileged_principal_actions = [
     "s3:*",
   ]
@@ -244,10 +250,11 @@ module "dev_bucket" {
       ]
     },
   ]
-  s3_object_ownership = "BucketOwnerEnforced"
-  user_enabled        = false
-  versioning_enabled  = false
-  source              = "./assets/__cdktf_module_asset_26CE565C/67538898726A5B4F1C43D0098A97926C/terraform-aws-s3-bucket"
+  restrict_public_buckets = false
+  s3_object_ownership     = "BucketOwnerEnforced"
+  user_enabled            = false
+  versioning_enabled      = false
+  source                  = "./assets/__cdktf_module_asset_26CE565C/67538898726A5B4F1C43D0098A97926C/terraform-aws-s3-bucket"
 }
 resource "aws_iam_instance_profile" "dev_instance_profile" {
   name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
