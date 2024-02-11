@@ -101,6 +101,8 @@ function make_up {
 	# deploy the cluster app-of-apps
 	app repo add coder-amanibhavam-district.tail3884f.ts.net:5000 --type helm --name cache --enable-oci --insecure-skip-server-verification
 	(cd c/${cluster_name} && cue export --out json -e 'gen.e' | jq -r '.[]' | k apply -f -)
+	# needs coredns to tailscale
+	make update
 }
 
 function main {
