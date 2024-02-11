@@ -326,6 +326,13 @@ variable "website_redirect_all_requests_to" {
   }
 }
 
+variable "allow_public_website" {
+  type        = bool
+  default     = false
+  description = "Add public GetObject permissions to bucket policy"
+  nullable    = false
+}
+
 variable "website_configuration" {
   type = list(object({
     index_document = string
@@ -345,7 +352,11 @@ variable "website_configuration" {
     }))
   }))
   description = "Specifies the static website hosting configuration object"
-  default     = []
+  default     = [{
+    index_document = "index.html"
+    error_document = "error.html"
+    routing_rules = []
+  }]
 
   validation {
     condition     = length(var.website_configuration) < 2

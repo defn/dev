@@ -39,3 +39,4 @@ func (j *jsiiProxy_Coderlogin) validateSetAgentIdParameters(val *string) error {
 func validateNewCoderloginParameters(scope constructs.Construct, id *string, config *CoderloginConfig) error {
 	return nil
 }
+

@@ -140,3 +140,4 @@ func validateNewTerraformAwsIamRoleParameters(scope constructs.Construct, id *st
 
 	return nil
 }
+

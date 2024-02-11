@@ -21,6 +21,7 @@ func init() {
 			_jsii_.MemberMethod{JsiiMethod: "addProvider", GoMethod: "AddProvider"},
 			_jsii_.MemberProperty{JsiiProperty: "allowedBucketActions", GoGetter: "AllowedBucketActions"},
 			_jsii_.MemberProperty{JsiiProperty: "allowEncryptedUploadsOnly", GoGetter: "AllowEncryptedUploadsOnly"},
+			_jsii_.MemberProperty{JsiiProperty: "allowPublicWebsite", GoGetter: "AllowPublicWebsite"},
 			_jsii_.MemberProperty{JsiiProperty: "allowSslRequestsOnly", GoGetter: "AllowSslRequestsOnly"},
 			_jsii_.MemberProperty{JsiiProperty: "attributes", GoGetter: "Attributes"},
 			_jsii_.MemberProperty{JsiiProperty: "blockPublicAcls", GoGetter: "BlockPublicAcls"},

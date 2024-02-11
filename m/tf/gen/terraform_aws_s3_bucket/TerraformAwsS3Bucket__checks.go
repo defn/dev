@@ -185,3 +185,4 @@ func validateNewTerraformAwsS3BucketParameters(scope constructs.Construct, id *s
 
 	return nil
 }
+

@@ -31,6 +31,8 @@ type TerraformAwsS3BucketConfig struct {
 	AllowedBucketActions *[]*string `field:"optional" json:"allowedBucketActions" yaml:"allowedBucketActions"`
 	// Set to `true` to prevent uploads of unencrypted objects to S3 bucket.
 	AllowEncryptedUploadsOnly *bool `field:"optional" json:"allowEncryptedUploadsOnly" yaml:"allowEncryptedUploadsOnly"`
+	// Add public GetObject permissions to bucket policy.
+	AllowPublicWebsite *bool `field:"optional" json:"allowPublicWebsite" yaml:"allowPublicWebsite"`
 	// Set to `true` to require requests to use Secure Socket Layer (HTTPS/SSL).
 	//
 	// This will explicitly deny access to HTTP requests.
@@ -256,8 +258,9 @@ type TerraformAwsS3BucketConfig struct {
 	// Versioning is a means of keeping multiple variants of an object in the same bucket
 	// true.
 	VersioningEnabled *bool `field:"optional" json:"versioningEnabled" yaml:"versioningEnabled"`
-	// Specifies the static website hosting configuration object.
+	// Specifies the static website hosting configuration object [object Object].
 	WebsiteConfiguration interface{} `field:"optional" json:"websiteConfiguration" yaml:"websiteConfiguration"`
 	// If provided, all website requests will be redirected to the specified host name and protocol.
 	WebsiteRedirectAllRequestsTo interface{} `field:"optional" json:"websiteRedirectAllRequestsTo" yaml:"websiteRedirectAllRequestsTo"`
 }
+

@@ -99,3 +99,4 @@ func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetVpcIdParameters(val *strin
 func validateNewTerraformAwsEksWorkersParameters(scope constructs.Construct, id *string, config *TerraformAwsEksWorkersConfig) error {
 	return nil
 }
+

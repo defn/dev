@@ -5,6 +5,7 @@ build: ../node_modules/.bin/cdktf
 # cdktf synth --hcl has a bug with Encrypt bool undefined
 	runmany 'perl -pe "s{undefined}{true} if m{encrypt\s+=\s+undefined}" -i $$1' cdktf.out/stacks/*/cdk.tf
 	runmany 'perl -pe "s{=}{= false} if m{(user_enabled|versioning_enabled|block_public_acls|block_public_policy|ignore_public_acls|restrict_public_buckets)\s+=\s+$$}" -i $$1' cdktf.out/stacks/*/cdk.tf
+	runmany 'perl -pe "s{=}{= true} if m{(allow_public_website)\s+=\s+$$}" -i $$1' cdktf.out/stacks/*/cdk.tf
 # remove quotes from providers
 	runmany 'perl -pe "s{\"}{}g if m{^\s*aws\s*=}" -i $$1' cdktf.out/stacks/*/cdk.tf
 # remove quotes from lifecycle stuff
@@ -27,6 +28,10 @@ build: ../node_modules/.bin/cdktf
 
 upgrade:
 	runmany 'cd $$1 && tf upgrade && tf locks' cdktf.out/stacks/*/
+
+get:
+	cdktf get
+	cd .. && $(MAKE) regen
 
 update:
 # sync upstream, reduce surface area of maintenance, keep readme, license for attribution
