@@ -129,4 +129,3 @@ func validateNewTerraformAwsTfstateBackendParameters(scope constructs.Construct,
 
 	return nil
 }
-

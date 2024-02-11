@@ -92,7 +92,7 @@ kustomize: [NAME=string]: _name: NAME
 		}
 
 		patches: [
-				for _psm_name, _psm in psm {
+			for _psm_name, _psm in psm {
 				path: "patch-\(_psm_name).yaml"
 			},
 		] + [

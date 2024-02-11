@@ -236,4 +236,3 @@ func validateNewTerraformAwsEksWorkersParameters(scope constructs.Construct, id 
 
 	return nil
 }
-

@@ -286,4 +286,3 @@ type TerraformAwsEksClusterConfig struct {
 	// Historical default: `[]`.
 	WorkersSecurityGroupIds *[]*string `field:"optional" json:"workersSecurityGroupIds" yaml:"workersSecurityGroupIds"`
 }
-

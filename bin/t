@@ -3,49 +3,56 @@
 set -efu
 
 function main {
-	export TRACE_ID="$(echo "${HONEYCOMB_TRACE:-}" | cut -d, -f1 | cut -d= -f2)"
-	export PARENT_ID="$(echo "${HONEYCOMB_TRACE:-}" | cut -d, -f2 | cut -d= -f2)"
+	export TRACE_ID="$(echo "${HONEYCOMB_TRACE-}" | cut -d, -f1 | cut -d= -f2)"
+	export PARENT_ID="$(echo "${HONEYCOMB_TRACE-}" | cut -d, -f2 | cut -d= -f2)"
 
-	case "${1:-}" in
-		start)
-			export BUILDEVENT_APIKEY="$(pass BUILDEVENT_APIKEY || true)" 
-			STARTED="$(date +%s)"
-			shift
-			name="$1"; shift
-			export TRACE_ID="${name}-$(date +%s)"
-			if buildevents cmd "${TRACE_ID}" "${TRACE_ID}" "${name}" -- "$@"; then
-				if [[ -n "${BUILDEVENT_APIKEY}" ]]; then
-					echo
-					t build "${TRACE_ID}" success "${STARTED}"
-				fi
-			else
+	case "${1-}" in
+	start)
+		export BUILDEVENT_APIKEY="$(pass BUILDEVENT_APIKEY || true)"
+		STARTED="$(date +%s)"
+		shift
+		name="$1"
+		shift
+		export TRACE_ID="${name}-$(date +%s)"
+		if buildevents cmd "${TRACE_ID}" "${TRACE_ID}" "${name}" -- "$@"; then
+			if [[ -n ${BUILDEVENT_APIKEY} ]]; then
 				echo
-				if [[ -n "${BUILDEVENT_APIKEY}" ]]; then
-					t build "${TRACE_ID}" failure "${STARTED}"
-				fi
+				t build "${TRACE_ID}" success "${STARTED}"
 			fi
-			;;
-		step)
-			shift
-			name="$1"; shift
-			start="$1"; shift
-			buildevents step "${TRACE_ID}" "${PARENT_ID}" "${start}" "${name}"
-			;;
-		build)
-			shift
-			TRACE_ID="$1"; shift
-			status="$1"; shift
-			start="$1"; shift
-			buildevents build "${TRACE_ID}" "${start}" "${status}"
-			;;
-		*)
-			name="$1"; shift
-			if [[ -n "${PARENT_ID}" ]]; then
-				buildevents cmd "${TRACE_ID}" "${PARENT_ID}" "${name}" -- "$@" >/dev/null
-			else
-				t start "${name}" "$@"
+		else
+			echo
+			if [[ -n ${BUILDEVENT_APIKEY} ]]; then
+				t build "${TRACE_ID}" failure "${STARTED}"
 			fi
-			;;
+		fi
+		;;
+	step)
+		shift
+		name="$1"
+		shift
+		start="$1"
+		shift
+		buildevents step "${TRACE_ID}" "${PARENT_ID}" "${start}" "${name}"
+		;;
+	build)
+		shift
+		TRACE_ID="$1"
+		shift
+		status="$1"
+		shift
+		start="$1"
+		shift
+		buildevents build "${TRACE_ID}" "${start}" "${status}"
+		;;
+	*)
+		name="$1"
+		shift
+		if [[ -n ${PARENT_ID} ]]; then
+			buildevents cmd "${TRACE_ID}" "${PARENT_ID}" "${name}" -- "$@" >/dev/null
+		else
+			t start "${name}" "$@"
+		fi
+		;;
 	esac
 }
 

@@ -99,4 +99,3 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) validateSetWarmPoolParameters(
 func validateNewTerraformAwsEc2AutoscaleGroupParameters(scope constructs.Construct, id *string, config *TerraformAwsEc2AutoscaleGroupConfig) error {
 	return nil
 }
-

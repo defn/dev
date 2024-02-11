@@ -16,4 +16,3 @@ type CoderloginConfig struct {
 	// The ID of a Coder agent.
 	AgentId *string `field:"required" json:"agentId" yaml:"agentId"`
 }
-

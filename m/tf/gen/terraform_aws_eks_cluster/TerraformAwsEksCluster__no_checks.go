@@ -75,4 +75,3 @@ func (j *jsiiProxy_TerraformAwsEksCluster) validateSetVpcIdParameters(val *strin
 func validateNewTerraformAwsEksClusterParameters(scope constructs.Construct, id *string, config *TerraformAwsEksClusterConfig) error {
 	return nil
 }
-

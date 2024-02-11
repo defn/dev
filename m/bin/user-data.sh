@@ -38,5 +38,13 @@ esac
 git merge pub/main
 git branch -u origin/main
 
-(set +x; while true; do cd; source .bash_profile; coder agent || true; sleep 5; done >>/tmp/coder-agent.log 2>&1) &
+(
+	set +x
+	while true; do
+		cd
+		source .bash_profile
+		coder agent || true
+		sleep 5
+	done >>/tmp/coder-agent.log 2>&1
+) &
 disown
