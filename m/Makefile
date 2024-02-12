@@ -148,7 +148,7 @@ down:
 
 ready:
 	$(MAKE) k3s-restart-irsa
-	$(MAKE) k3s-advertise-traefik
+#	$(MAKE) k3s-advertise-traefik
 
 .PHONY: cache
 cache:
