@@ -22,7 +22,7 @@ local_resource(
 
 # tailscale serve
 local_resource(
-    "tailscale-erver",
+    "tailscale-server",
     serve_cmd=[
         "bash",
         "-c",
