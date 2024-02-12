@@ -229,17 +229,17 @@
       },
       "locked": {
         "dir": "m/pkg/wireproxy",
-        "lastModified": 1706898202,
-        "narHash": "sha256-Kux4HnR1Za1sWHiEk/4gt/0ycxfqPIrh+rXF07+Xgg8=",
+        "lastModified": 1707720124,
+        "narHash": "sha256-A0nKl3epUZznpbeF9W/u6yhTxhF2J0gGFfZGCgagTdo=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "587ef4a32d6b794e5c27822831fbca3ffb768057",
+        "rev": "d2b91cceefb8170bba55f3ed695909ae8256818b",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/wireproxy",
         "owner": "defn",
-        "ref": "pkg-wireproxy-1.0.6-3",
+        "ref": "pkg-wireproxy-1.0.7-1",
         "repo": "dev",
         "type": "github"
       }
