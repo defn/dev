@@ -1593,8 +1593,8 @@
       "general": {
         "bzlTransitiveDigest": "zP01muRk4s4xWGK3gNPXOyDMQkOPsIhu99akeKWFFQ0=",
         "accumulatedFileDigests": {
-          "@@//:go.mod": "763ad79845f9576d5853e83405b42dc2c016d8294d05188fae94ea38dbf412f1",
-          "@@//:go.sum": "3693ab2646a3e37826a5401ac8e9311651f10a31f8d081d8c2fbd81919a7f5bc",
+          "@@//:go.mod": "c2644c8bd8f4cd3b3dbec03f73b1c1f588ee7f98e684d835f3b12255ef875c2a",
+          "@@//:go.sum": "74ca72dfef6be3b0e99481f1ed61a9647ef6d4804bc3068e9695834a512b8e9d",
           "@@gazelle~0.35.0//:go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473",
           "@@gazelle~0.35.0//:go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
           "@@rules_go~0.45.1//:go.mod": "de22304b720f7f61350ec1c9739de6c0a1b1103fd22bfeb6e92c6c843ddc6d6e",
@@ -2719,9 +2719,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:gMztinxuKfJwMIxtboFsNc6s8AxwJGgsJV+3CuLffHI=",
+              "sum": "h1:wSuUSIKR9M1yrph57l8EJATWVRWHaq/Zd0dFUL10PC8=",
               "replace": "",
-              "version": "v0.7.0"
+              "version": "v0.7.1"
             }
           },
           "com_github_rivo_uniseg": {

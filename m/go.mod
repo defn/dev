@@ -3,7 +3,7 @@ module github.com/defn/dev/m
 go 1.21.4
 
 require (
-	cuelang.org/go v0.7.0
+	cuelang.org/go v0.7.1
 	github.com/aws/constructs-go/constructs/v10 v10.3.0
 	github.com/aws/jsii-runtime-go v1.94.0
 	github.com/bitfield/script v0.22.0
