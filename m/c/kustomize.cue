@@ -67,8 +67,10 @@ kustomize: "coredns": #Kustomize & {
 			namespace: "kube-system"
 		}
 		data: {
-			"tailscale-dns.override": """
-				forward ts.net 100.100.100.100
+			"tailscale-dns.server": """
+				ts.net:53 {
+					forward . 100.100.100.100
+				}
 				"""
 		}
 	}
