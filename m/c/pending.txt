@@ -7,7 +7,7 @@ https://artifacthub.io/packages/helm/cert-manager/cert-manager/1.14.2
 https://artifacthub.io/packages/helm/cert-manager/trust-manager/0.8.0
 https://artifacthub.io/packages/helm/cilium/cilium/1.15.0
 https://artifacthub.io/packages/helm/cilium/tetragon/1.0.2
-https://artifacthub.io/packages/helm/coder-v2/coder/2.8.1
+https://artifacthub.io/packages/helm/coder-v2/coder/2.8.2
 https://artifacthub.io/packages/helm/descheduler/descheduler/0.29.0
 https://artifacthub.io/packages/helm/dex/dex/0.16.0
 https://artifacthub.io/packages/helm/external-secrets-operator/external-secrets/0.9.12
