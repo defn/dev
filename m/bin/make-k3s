@@ -74,6 +74,7 @@ function make_up {
 	kubectl --context ${cluster_name} create ns kyverno || true
 	(
 		cd k
+		b out deploy_yaml_${cluster_name}-cluster-coredns
 		b out deploy_yaml_${cluster_name}-cluster-cilium
 		b out deploy_yaml_${cluster_name}-cluster-argo-cd
 	) | kubectl --context ${cluster_name} apply -f -
@@ -82,6 +83,7 @@ function make_up {
 
 	# switch back to the default config
 	kubectl config use-context ${cluster_name}
+	kubectl rollout -n kube-system restart deployment coredns
 
 	env KUBECONFIG=$HOME/.kube/config.argocd kubectl -n argocd rollout status deployment/argocd-server
 	env KUBECONFIG=$HOME/.kube/config.argocd kubectl -n argocd rollout status deployment/argocd-repo-server
