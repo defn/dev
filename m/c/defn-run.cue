@@ -12,6 +12,7 @@ k3s_bootstrap: {
 	"external-secrets": {}
 
 	// config
+	"coredns": {}
 	"secrets": {}
 	"issuer": {}
 
