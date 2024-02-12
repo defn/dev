@@ -68,9 +68,7 @@ kustomize: "coredns": #Kustomize & {
 		}
 		data: {
 			"tailscale-dns.override": """
-				.:53 {
-					forward ts.net 100.100.100.100
-				}
+				forward ts.net 100.100.100.100
 				"""
 		}
 	}
