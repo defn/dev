@@ -2,7 +2,7 @@
   inputs = {
     pkg.url = github:defn/dev/pkg-pkg-0.0.16?dir=m/pkg/pkg;
     acme.url = github:defn/dev/pkg-acme-3.0.7-5?dir=m/pkg/acme;
-    vpn.url = github:defn/dev/pkg-vpn-0.0.85?dir=m/pkg/vpn;
+    vpn.url = github:defn/dev/pkg-vpn-0.0.86?dir=m/pkg/vpn;
   };
 
   outputs = inputs: inputs.pkg.main rec {
