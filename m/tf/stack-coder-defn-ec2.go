@@ -185,7 +185,7 @@ while true; do
 done
 
 if ! tailscale ip -4 | grep ^100; then
-  sudo tailscale up --accept-dns --accept-routes --authkey="%s" --operator=ubuntu --ssh --timeout 60s # missing --advertise-routes= on reboot
+  sudo tailscale up --accept-dns --accept-routes --authkey="%s" --operator=ubuntu --ssh --timeout 60s
 fi
 
 nohup sudo -H -E -u %s bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${%s} coder-${%s}-${%s} ${%s}' >>/tmp/user-data.log 2>&1 &
