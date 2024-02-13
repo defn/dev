@@ -625,7 +625,7 @@ kustomize: "karpenter": #KustomizeHelm & {
 		release:   "karpenter"
 		name:      "karpenter"
 		namespace: "karpenter"
-		version:   "v0.33.1"
+		version:   "v0.34.0"
 		repo:      "oci://public.ecr.aws/karpenter"
 		values: {
 			settings: {
