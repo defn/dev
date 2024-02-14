@@ -3296,3 +3296,28 @@ kustomize: "buildbuddy": #KustomizeHelm & {
 		}
 	}
 }
+
+// https://artifacthub.io/packages/helm/crossplane/crossplane
+kustomize: "crossplane": #KustomizeHelm & {
+	cluster: #Cluster
+
+	namespace: "crossplane"
+
+	helm: {
+		release:   "crossplane"
+		name:      "crossplane"
+		namespace: "crossplane"
+		version:   "1.14.5"
+		repo:      "https://charts.crossplane.io/stable"
+		values: {
+		}
+	}
+
+	resource: "namespace-crossplane": {
+		apiVersion: "v1"
+		kind:       "Namespace"
+		metadata: {
+			name: "crossplane"
+		}
+	}
+}

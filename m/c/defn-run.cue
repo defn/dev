@@ -17,6 +17,7 @@ k3s_bootstrap: {
 	"issuer": {}
 
 	// management
+	"crossplane": {}
 	"karpenter": {}
 	"cilium": {}
 	"tetragon": {}
