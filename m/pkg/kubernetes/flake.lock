@@ -63,6 +63,27 @@
         "type": "github"
       }
     },
+    "crossplane": {
+      "inputs": {
+        "pkg": "pkg_4"
+      },
+      "locked": {
+        "dir": "m/pkg/crossplane",
+        "lastModified": 1707884942,
+        "narHash": "sha256-IR0DPE6wGuxsk2bn4gVPLTAC9gQn6qrI8HAAB9jLsl0=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "e2535fe49e9a22d1d2d48678b834558c33784887",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/crossplane",
+        "owner": "defn",
+        "ref": "pkg-crossplane-1.14.5-1",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
     "dev": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -213,6 +234,27 @@
     "dev_16": {
       "inputs": {
         "nixpkgs": "nixpkgs_16"
+      },
+      "locked": {
+        "dir": "m/pkg/dev",
+        "lastModified": 1706897346,
+        "narHash": "sha256-i+VwVH4Uu9zsySEOgZ4tqUxOysFfmJalU6tcWACQu5U=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "aa68c18a500d0a0558712dad8a8c26eb018fa69b",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/dev",
+        "owner": "defn",
+        "ref": "pkg-dev-0.0.13",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
+    "dev_17": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_17"
       },
       "locked": {
         "dir": "m/pkg/dev",
@@ -401,7 +443,7 @@
     },
     "helm": {
       "inputs": {
-        "pkg": "pkg_4"
+        "pkg": "pkg_5"
       },
       "locked": {
         "dir": "m/pkg/helm",
@@ -422,7 +464,7 @@
     },
     "hubble": {
       "inputs": {
-        "pkg": "pkg_5"
+        "pkg": "pkg_6"
       },
       "locked": {
         "dir": "m/pkg/hubble",
@@ -443,7 +485,7 @@
     },
     "k3sup": {
       "inputs": {
-        "pkg": "pkg_6"
+        "pkg": "pkg_7"
       },
       "locked": {
         "dir": "m/pkg/k3sup",
@@ -464,7 +506,7 @@
     },
     "k9s": {
       "inputs": {
-        "pkg": "pkg_7"
+        "pkg": "pkg_8"
       },
       "locked": {
         "dir": "m/pkg/k9s",
@@ -485,7 +527,7 @@
     },
     "kn": {
       "inputs": {
-        "pkg": "pkg_8"
+        "pkg": "pkg_9"
       },
       "locked": {
         "dir": "m/pkg/kn",
@@ -506,7 +548,7 @@
     },
     "kubectl": {
       "inputs": {
-        "pkg": "pkg_9"
+        "pkg": "pkg_10"
       },
       "locked": {
         "dir": "m/pkg/kubectl",
@@ -527,7 +569,7 @@
     },
     "kubevirt": {
       "inputs": {
-        "pkg": "pkg_10"
+        "pkg": "pkg_11"
       },
       "locked": {
         "dir": "m/pkg/kubevirt",
@@ -548,7 +590,7 @@
     },
     "kustomize": {
       "inputs": {
-        "pkg": "pkg_11"
+        "pkg": "pkg_12"
       },
       "locked": {
         "dir": "m/pkg/kustomize",
@@ -569,7 +611,7 @@
     },
     "linkerd": {
       "inputs": {
-        "pkg": "pkg_12"
+        "pkg": "pkg_13"
       },
       "locked": {
         "dir": "m/pkg/linkerd",
@@ -590,7 +632,7 @@
     },
     "mirrord": {
       "inputs": {
-        "pkg": "pkg_13"
+        "pkg": "pkg_14"
       },
       "locked": {
         "dir": "m/pkg/mirrord",
@@ -722,6 +764,22 @@
       }
     },
     "nixpkgs_16": {
+      "locked": {
+        "lastModified": 1700284104,
+        "narHash": "sha256-oNsJfAyAuBCTkusesiK0LWuO59F6vEGcP4wwa7kc1ZA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "005617587ee2b7c003388b4539b9120ebcc90e44",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "005617587ee2b7c003388b4539b9120ebcc90e44",
+        "type": "github"
+      }
+    },
+    "nixpkgs_17": {
       "locked": {
         "lastModified": 1700284104,
         "narHash": "sha256-oNsJfAyAuBCTkusesiK0LWuO59F6vEGcP4wwa7kc1ZA=",
@@ -1033,6 +1091,27 @@
         "type": "github"
       }
     },
+    "pkg_17": {
+      "inputs": {
+        "dev": "dev_17"
+      },
+      "locked": {
+        "dir": "m/pkg/pkg",
+        "lastModified": 1706897415,
+        "narHash": "sha256-saMstGOsxMiR6kG+v5pr7vPKIf/BTl/60z8VPicizPs=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "e067b8a8a3f8d8c277bfde347b91eaec9e547f0d",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/pkg",
+        "owner": "defn",
+        "ref": "pkg-pkg-0.0.16",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
     "pkg_2": {
       "inputs": {
         "dev": "dev_2"
@@ -1206,6 +1285,7 @@
         "argocd": "argocd",
         "argoworkflows": "argoworkflows",
         "cilium": "cilium",
+        "crossplane": "crossplane",
         "helm": "helm",
         "hubble": "hubble",
         "k3sup": "k3sup",
@@ -1223,7 +1303,7 @@
     },
     "stern": {
       "inputs": {
-        "pkg": "pkg_14"
+        "pkg": "pkg_15"
       },
       "locked": {
         "dir": "m/pkg/stern",
@@ -1244,7 +1324,7 @@
     },
     "tfo": {
       "inputs": {
-        "pkg": "pkg_15"
+        "pkg": "pkg_16"
       },
       "locked": {
         "dir": "m/pkg/tfo",
@@ -1265,7 +1345,7 @@
     },
     "vcluster": {
       "inputs": {
-        "pkg": "pkg_16"
+        "pkg": "pkg_17"
       },
       "locked": {
         "dir": "m/pkg/vcluster",
