@@ -16,6 +16,7 @@
     hubble.url = github:defn/dev/pkg-hubble-0.13.0-2?dir=m/pkg/hubble;
     tfo.url = github:defn/dev/pkg-tfo-2.2.0-5?dir=m/pkg/tfo;
     mirrord.url = github:defn/dev/pkg-mirrord-3.86.1-1?dir=m/pkg/mirrord;
+    crossplane.url = github:defn/dev/pkg-crossplane-1.14.5-1?dir=m/pkg/crossplane;
   };
 
   outputs = inputs: inputs.kubectl.inputs.pkg.main rec {
@@ -41,6 +42,7 @@
             inputs.hubble.defaultPackage.${ctx.system}
             inputs.tfo.defaultPackage.${ctx.system}
             inputs.mirrord.defaultPackage.${ctx.system}
+            inputs.crossplane.defaultPackage.${ctx.system}
           ];
         in
         flakeInputs;
