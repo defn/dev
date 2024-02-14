@@ -201,3 +201,4 @@ bin/nix*
 .ghost/
 .yarn/
 .rpm*
+.crossplane/
