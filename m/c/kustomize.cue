@@ -2020,7 +2020,7 @@ kustomize: "argo-events": #KustomizeHelm & {
 	helm: {
 		release: "argo-events"
 		name:    "argo-events"
-		version: "2.4.1"
+		version: "2.4.3"
 		repo:    "https://argoproj.github.io/argo-helm"
 	}
 
