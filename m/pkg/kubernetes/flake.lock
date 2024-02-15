@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/argocd",
-        "lastModified": 1706982379,
-        "narHash": "sha256-MiMznpll5mBBKrUHPYdD6wtq4jCcP6YcJCAjhiMmPIE=",
+        "lastModified": 1707958456,
+        "narHash": "sha256-fjrQWMfACcIxUK/61u2InGQAbHa9BOrORBtsy7nUVOg=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "e7d41486daee76568bbd3e3b7d982864ba95ffe2",
+        "rev": "d6ffa5269c69e2372e252467f2f8c76c017cd99c",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/argocd",
         "owner": "defn",
-        "ref": "pkg-argocd-2.10.0-rc4-8",
+        "ref": "pkg-argocd-2.10.1-1",
         "repo": "dev",
         "type": "github"
       }
@@ -447,17 +447,17 @@
       },
       "locked": {
         "dir": "m/pkg/helm",
-        "lastModified": 1706897900,
-        "narHash": "sha256-5TuY//78ncHMXZbs7U5vYvg7K/2lj0lEEWLkTnpKuwA=",
+        "lastModified": 1707958498,
+        "narHash": "sha256-i8QjV55u3tqErE9hm3URh9hVn71sknijeklzpKNKcno=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "8df49ed1980a8318338a686a6cfc6f55394cff1a",
+        "rev": "bc0c6f72e1c66e2d5cb9af0db927b5b8730f6b22",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/helm",
         "owner": "defn",
-        "ref": "pkg-helm-3.14.0-2",
+        "ref": "pkg-helm-3.14.1-1",
         "repo": "dev",
         "type": "github"
       }
