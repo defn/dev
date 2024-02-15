@@ -3399,7 +3399,10 @@ kustomize: "crossdemo": #Kustomize & {
 				apiVersion: "v1"
 				kind:       "ConfigMap"
 				data: "sample-key-foo": "foo"
-				"metadata": annotations: "argocd.argoproj.io/tracking-idix": "\(cluster.cluster_name)-cluster-crossdemo:/ConfigMap:\(namespace)/\(metadata.name)"
+				"metadata": annotations: {
+					"argocd.argoproj.io/tracking-id": "\(cluster.cluster_name)-cluster-crossdemo:/ConfigMap:\(namespace)/\(metadata.name)"
+					"argocd.argoproj.io/sync-options": "Prune=false"
+				}
 			}
 			providerConfigRef: name: "provider-kubernetes"
 		}
