@@ -1,5 +1,9 @@
 package k
 
+import (
+	"encoding/yaml"
+)
+
 crossplane: provider: cluster: "provider-kubernetes": {
 	apiVersion: "pkg.crossplane.io/v1"
 	kind:       "Provider"
@@ -57,13 +61,13 @@ crossplane: object: cluster: foo: {
 				namespace:  "default"
 				fieldPath:  "data.sample-key"
 			}
-			toFieldPath: "data.sample-key-from-bar"
+			toFieldPath: "data.sample-key"
 		}]
 		forProvider: manifest: {
 			apiVersion: "v1"
 			kind:       "ConfigMap"
 			metadata: namespace: "default"
-			data: "sample-key":  "foo"
+			data: "sample-key-foo":  "foo"
 		}
 		providerConfigRef: name: "provider-kubernetes"
 	}
@@ -78,3 +82,11 @@ crossplane: configmap: default: bar: {
 	}
 	data: "sample-key": "bar"
 }
+
+crossgen: yaml.MarshalStream([
+	for _, _ns in crossplane 
+	for ns, _res in _ns 
+	for name, res in _res {
+		res
+	}
+])
