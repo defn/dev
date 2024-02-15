@@ -3389,7 +3389,9 @@ kustomize: "crossdemo": #Kustomize & {
 			forProvider: manifest: {
 				apiVersion: "v1"
 				kind:       "ConfigMap"
-				metadata: "namespace":  namespace
+				metadata: {
+					"namespace": namespace
+				}
 				data: "sample-key-foo": "foo"
 			}
 			providerConfigRef: name: "provider-kubernetes"
