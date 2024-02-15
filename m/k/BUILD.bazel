@@ -20,6 +20,7 @@ cluster_apps = [
     "coder-amanibhavam-district-cluster-traefik",
     "coder-amanibhavam-district-cluster-external-dns",
     "coder-amanibhavam-district-cluster-crossplane",
+    "coder-amanibhavam-district-cluster-crossdemo",
     #
     "coder-amanibhavam-district0-cluster-env",
     "coder-amanibhavam-district0-cluster-argo-cd",

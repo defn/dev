@@ -17,7 +17,7 @@ except: {
 	exclude: {[string]: bool}
 
 	output: {
-		for n in [ for n, _ in input {n}] {
+		for n in [for n, _ in input {n}] {
 			if exclude[n] == _|_ && input[n] != _|_ {
 				(n): *input[n] | _|_
 			}
@@ -50,7 +50,7 @@ cache: [string]: string
 
 cached_yaml: {
 	for fname, f in cached_resources {
-		"\(fname)/main.yaml": yaml.MarshalStream([ for s in list.SortStrings([ for rname, r in f {rname}]) {f[s]}])
+		"\(fname)/main.yaml": yaml.MarshalStream([for s in list.SortStrings([for rname, r in f {rname}]) {f[s]}])
 	}
 }
 

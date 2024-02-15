@@ -16,8 +16,8 @@ crds_domain: {
 crds: {
 	for domain, resources in crds_domain {
 		"\(domain)": yaml.MarshalStream([
-				for _, cr in resources
-				for _, custom_resource in cr {
+			for _, cr in resources
+			for _, custom_resource in cr {
 				custom_resource
 			},
 		])
