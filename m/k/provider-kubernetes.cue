@@ -13,6 +13,7 @@ crossplane: provider: cluster: "provider-kubernetes": {
 		}
 	}
 }
+
 crossplane: deploymentruntimeconfig: cluster: "provider-kubernetes": {
 	apiVersion: "pkg.crossplane.io/v1beta1"
 	kind:       "DeploymentRuntimeConfig"
