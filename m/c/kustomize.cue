@@ -1306,6 +1306,10 @@ kustomize: "issuer": #Kustomize & {
 					apiVersion:  "cert-manager.io/v1"
 					kind:        "ClusterIssuer"
 					name:        #clusterissuer_name
+					data: metadata: annotations: {
+						"argocd.argoproj.io/tracking-id":  "\(cluster.cluster_name)-cluster-issuer:kyverno.io/ClusterPolicy:/\(#clusterissuer_name)-clusterissuer"
+						"argocd.argoproj.io/sync-options": "Prune=false"
+					}
 					data: spec: acme: {
 						server: "https://acme.zerossl.com/v2/DV90"
 						email:  "{{request.object.data.zerossl_email | base64_decode(@)}}"
@@ -1363,6 +1367,10 @@ kustomize: "issuer": #Kustomize & {
 					apiVersion:  "cert-manager.io/v1"
 					kind:        "ClusterIssuer"
 					name:        #clusterissuer_name
+					data: metadata: annotations: {
+						"argocd.argoproj.io/tracking-id":  "\(cluster.cluster_name)-cluster-issuer:kyverno.io/ClusterPolicy:/\(#clusterissuer_name)-clusterissuer"
+						"argocd.argoproj.io/sync-options": "Prune=false"
+					}
 					data: spec: acme: {
 						server: "https://acme-staging-v02.api.letsencrypt.org/directory"
 						email:  "{{request.object.data.zerossl_email | base64_decode(@)}}"
@@ -1412,6 +1420,10 @@ kustomize: "issuer": #Kustomize & {
 					apiVersion:  "cert-manager.io/v1"
 					kind:        "ClusterIssuer"
 					name:        #clusterissuer_name
+					data: metadata: annotations: {
+						"argocd.argoproj.io/tracking-id":  "\(cluster.cluster_name)-cluster-issuer:kyverno.io/ClusterPolicy:/\(#clusterissuer_name)-clusterissuer"
+						"argocd.argoproj.io/sync-options": "Prune=false"
+					}
 					data: spec: acme: {
 						server: "https://acme-v02.api.letsencrypt.org/directory"
 						email:  "{{request.object.data.zerossl_email | base64_decode(@)}}"
@@ -3400,7 +3412,7 @@ kustomize: "crossdemo": #Kustomize & {
 				kind:       "ConfigMap"
 				data: "sample-key-foo": "foo"
 				"metadata": annotations: {
-					"argocd.argoproj.io/tracking-id":  "\(cluster.cluster_name)-cluster-crossdemo:/ConfigMap:\(namespace)-dont-track/\(metadata.name)"
+					"argocd.argoproj.io/tracking-id":  "\(cluster.cluster_name)-cluster-crossdemo:/ConfigMap:dont-track/\(metadata.name)"
 					"argocd.argoproj.io/sync-options": "Prune=false"
 				}
 			}
