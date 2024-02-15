@@ -3385,14 +3385,21 @@ kustomize: "crossdemo": #Kustomize & {
 					fieldPath:  "data.sample-key"
 				}
 				toFieldPath: "data.sample-key"
+			}, {
+				patchesFrom: {
+					apiVersion: "v1"
+					kind:       "ConfigMap"
+					name:       "bar"
+					namespace:  "default"
+					fieldPath:  "metadata.namespace"
+				}
+				toFieldPath: "metadata.namespace"
 			}]
 			forProvider: manifest: {
 				apiVersion: "v1"
 				kind:       "ConfigMap"
-				metadata: {
-					"namespace": namespace
-				}
 				data: "sample-key-foo": "foo"
+				"metadata": annotations: "argocd.argoproj.io/tracking-idix": "\(cluster.cluster_name)-cluster-crossdemo:/ConfigMap:\(namespace)/\(metadata.name)"
 			}
 			providerConfigRef: name: "provider-kubernetes"
 		}
