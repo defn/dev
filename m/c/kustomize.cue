@@ -3400,7 +3400,7 @@ kustomize: "crossdemo": #Kustomize & {
 				kind:       "ConfigMap"
 				data: "sample-key-foo": "foo"
 				"metadata": annotations: {
-					"argocd.argoproj.io/tracking-id": "\(cluster.cluster_name)-cluster-crossdemo:/ConfigMap:\(namespace)/\(metadata.name)"
+					"argocd.argoproj.io/tracking-id":  "\(cluster.cluster_name)-cluster-crossdemo:/ConfigMap:\(namespace)-dont-track/\(metadata.name)"
 					"argocd.argoproj.io/sync-options": "Prune=false"
 				}
 			}
