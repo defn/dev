@@ -5,7 +5,7 @@ https://artifacthub.io/packages/helm/bitnami/external-dns/6.32.1
 https://artifacthub.io/packages/helm/bitnami/mastodon/4.3.0
 https://artifacthub.io/packages/helm/cert-manager/cert-manager/1.14.2
 https://artifacthub.io/packages/helm/cert-manager/trust-manager/0.8.0
-https://artifacthub.io/packages/helm/cilium/cilium/1.15.0
+https://artifacthub.io/packages/helm/cilium/cilium/1.15.1
 https://artifacthub.io/packages/helm/cilium/tetragon/1.0.2
 https://artifacthub.io/packages/helm/coder-v2/coder/2.8.2
 https://artifacthub.io/packages/helm/crossplane/crossplane/1.16.0-rc.0.32.g489ccab6
