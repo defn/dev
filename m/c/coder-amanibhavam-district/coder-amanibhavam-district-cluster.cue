@@ -8,6 +8,7 @@ teacher: bootstrap: k3s_bootstrap & {
 	"tailscale": {}
 	"traefik": {}
 	"external-dns": {}
+	"crossdemo": {}
 }
 
 class: {
