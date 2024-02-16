@@ -16,4 +16,13 @@ server:
 	./bin/spire-server run
 
 agent:
-	./bin/spire-agent run -joinToken "$$(./bin/spire-server token generate -spiffeID spiffe://root.linkerd.cluster.local/agent -output json | jq -r .value)"
+	./bin/spire-agent run \
+		-joinToken "$$(./bin/spire-server token generate \
+		-spiffeID spiffe://root.linkerd.cluster.local/agent \
+		-output json | jq -r .value)"
+
+entry:
+	./bin/spire-server entry create \
+		-parentID spiffe://root.linkerd.cluster.local/agent \
+		-spiffeID spiffe://root.linkerd.cluster.local/meh \
+		-selector unix:uid:$$(id -u)
