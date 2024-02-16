@@ -17,6 +17,7 @@
     tfo.url = github:defn/dev/pkg-tfo-2.2.0-5?dir=m/pkg/tfo;
     mirrord.url = github:defn/dev/pkg-mirrord-3.87.0-1?dir=m/pkg/mirrord;
     crossplane.url = github:defn/dev/pkg-crossplane-1.15.0-1?dir=m/pkg/crossplane;
+    spire.url = github:defn/dev/pkg-spire-1.8.7-1?dir=m/pkg/spire;
   };
 
   outputs = inputs: inputs.kubectl.inputs.pkg.main rec {
@@ -43,6 +44,7 @@
             inputs.tfo.defaultPackage.${ctx.system}
             inputs.mirrord.defaultPackage.${ctx.system}
             inputs.crossplane.defaultPackage.${ctx.system}
+            inputs.spire.defaultPackage.${ctx.system}
           ];
         in
         flakeInputs;
