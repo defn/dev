@@ -48,17 +48,17 @@
       },
       "locked": {
         "dir": "m/pkg/cilium",
-        "lastModified": 1706897724,
-        "narHash": "sha256-nRQ4moWce8tatactrZSpUxSBzzvx5pteEt0UWe3Hp+8=",
+        "lastModified": 1708046687,
+        "narHash": "sha256-SCsYLIpYDtlcXs/g8dE8K121A/7yQ1XyRP3NDlQ68+4=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "1a8b28dface8af365abf85dad83b08739a497626",
+        "rev": "9afe285cc14d701d25008be4e0ea8c99023b471f",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cilium",
         "owner": "defn",
-        "ref": "pkg-cilium-0.15.22-2",
+        "ref": "pkg-cilium-0.15.23-1",
         "repo": "dev",
         "type": "github"
       }
@@ -69,17 +69,17 @@
       },
       "locked": {
         "dir": "m/pkg/crossplane",
-        "lastModified": 1707884942,
-        "narHash": "sha256-IR0DPE6wGuxsk2bn4gVPLTAC9gQn6qrI8HAAB9jLsl0=",
+        "lastModified": 1708046705,
+        "narHash": "sha256-VW/BKp3vizCALGgxVuZxNyOTyTwLXbMw+aJ2sWLwAZQ=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "e2535fe49e9a22d1d2d48678b834558c33784887",
+        "rev": "d99efb58d048aa92ab6ad26f1fb276ad7e73ba47",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/crossplane",
         "owner": "defn",
-        "ref": "pkg-crossplane-1.14.5-1",
+        "ref": "pkg-crossplane-1.15.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -510,17 +510,17 @@
       },
       "locked": {
         "dir": "m/pkg/k9s",
-        "lastModified": 1707281175,
-        "narHash": "sha256-597SyxnCjsXFJn1gxRRS1UDkAshVzdZ7RQUiQ9jcQZE=",
+        "lastModified": 1708046740,
+        "narHash": "sha256-uIC4NC7hmFplt2769EHz/Zt4NzxRBE//9v1IrClohl8=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "dc5865cd612071f18839d1640ca8b2ca456a64a2",
+        "rev": "2e8c16737888cc0ea21e9e5e4811da282ed906bd",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/k9s",
         "owner": "defn",
-        "ref": "pkg-k9s-0.31.8-1",
+        "ref": "pkg-k9s-0.31.9-1",
         "repo": "dev",
         "type": "github"
       }
@@ -636,17 +636,17 @@
       },
       "locked": {
         "dir": "m/pkg/mirrord",
-        "lastModified": 1707163265,
-        "narHash": "sha256-dPEvmRE2f1rJ7IchrwwULRlD6c3SI2tYOq/t2HfFD4Y=",
+        "lastModified": 1708046762,
+        "narHash": "sha256-soohTCDlgRsY4zfZvd8wFT0rrI+JKnZbtxNVgKuCqDI=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "949b33b1f8b32c7553224b0e99f7668cf9ecc258",
+        "rev": "ce49f7f0ea64aaed193a7e506011929c871d0b13",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/mirrord",
         "owner": "defn",
-        "ref": "pkg-mirrord-3.86.1-1",
+        "ref": "pkg-mirrord-3.87.0-1",
         "repo": "dev",
         "type": "github"
       }
