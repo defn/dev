@@ -31,3 +31,6 @@ shell:
 	docker run --rm -ti -v /nix:/nix -v ~/bin/nix:/usr/local/bin \
 		--entrypoint $$(readlink ~/bin/nix/bash) \
 		ghcr.io/linkerd/proxy:$$(linkerd version --proxy --client --short)
+
+image:
+	earthly --push +demo --image=ghcr.io/linkerd/proxy:$$(linkerd version --proxy --client --short)
