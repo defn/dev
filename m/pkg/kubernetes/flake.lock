@@ -273,6 +273,27 @@
         "type": "github"
       }
     },
+    "dev_18": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_18"
+      },
+      "locked": {
+        "dir": "m/pkg/dev",
+        "lastModified": 1706897346,
+        "narHash": "sha256-i+VwVH4Uu9zsySEOgZ4tqUxOysFfmJalU6tcWACQu5U=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "aa68c18a500d0a0558712dad8a8c26eb018fa69b",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/dev",
+        "owner": "defn",
+        "ref": "pkg-dev-0.0.13",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
     "dev_2": {
       "inputs": {
         "nixpkgs": "nixpkgs_2"
@@ -795,6 +816,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_18": {
+      "locked": {
+        "lastModified": 1700284104,
+        "narHash": "sha256-oNsJfAyAuBCTkusesiK0LWuO59F6vEGcP4wwa7kc1ZA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "005617587ee2b7c003388b4539b9120ebcc90e44",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "005617587ee2b7c003388b4539b9120ebcc90e44",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1700284104,
@@ -1112,6 +1149,27 @@
         "type": "github"
       }
     },
+    "pkg_18": {
+      "inputs": {
+        "dev": "dev_18"
+      },
+      "locked": {
+        "dir": "m/pkg/pkg",
+        "lastModified": 1706897415,
+        "narHash": "sha256-saMstGOsxMiR6kG+v5pr7vPKIf/BTl/60z8VPicizPs=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "e067b8a8a3f8d8c277bfde347b91eaec9e547f0d",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/pkg",
+        "owner": "defn",
+        "ref": "pkg-pkg-0.0.16",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
     "pkg_2": {
       "inputs": {
         "dev": "dev_2"
@@ -1296,14 +1354,36 @@
         "kustomize": "kustomize",
         "linkerd": "linkerd",
         "mirrord": "mirrord",
+        "spire": "spire",
         "stern": "stern",
         "tfo": "tfo",
         "vcluster": "vcluster"
       }
     },
-    "stern": {
+    "spire": {
       "inputs": {
         "pkg": "pkg_15"
+      },
+      "locked": {
+        "dir": "m/pkg/spire",
+        "lastModified": 1708062225,
+        "narHash": "sha256-byjrHIW+LP2r5zPrWAuCFKlAWMHkYqoBzBCfVq6qph4=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "c5e3db624a637d8404e46b0ee9040d0dfbf06a01",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/spire",
+        "owner": "defn",
+        "ref": "pkg-spire-1.8.7-1",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
+    "stern": {
+      "inputs": {
+        "pkg": "pkg_16"
       },
       "locked": {
         "dir": "m/pkg/stern",
@@ -1324,7 +1404,7 @@
     },
     "tfo": {
       "inputs": {
-        "pkg": "pkg_16"
+        "pkg": "pkg_17"
       },
       "locked": {
         "dir": "m/pkg/tfo",
@@ -1345,7 +1425,7 @@
     },
     "vcluster": {
       "inputs": {
-        "pkg": "pkg_17"
+        "pkg": "pkg_18"
       },
       "locked": {
         "dir": "m/pkg/vcluster",
