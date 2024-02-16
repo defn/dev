@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/coder",
-        "lastModified": 1707720088,
-        "narHash": "sha256-eBXF4FvBAw+TOaiRxLueawNTpWw+DdtgkGrf9Pf5IMw=",
+        "lastModified": 1708100123,
+        "narHash": "sha256-XQh5s7CNFzbVesjGUiIKj7Lfmds7J7nZn7SUhI5JbIM=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "bd3be423823dc6f92a613b55f1026e24459b2fdc",
+        "rev": "a92f155eef77dacc24bb4d852cc0d414870edc7c",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/coder",
         "owner": "defn",
-        "ref": "pkg-coder-2.8.2-1",
+        "ref": "pkg-coder-2.8.3-1",
         "repo": "dev",
         "type": "github"
       }
