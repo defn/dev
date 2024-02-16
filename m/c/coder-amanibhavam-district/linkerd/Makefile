@@ -1,4 +1,6 @@
-all: ca.crt ca.key cluster.crt cluster.key bin/spire-agent bin/spire-server
+save = cache.defn.run:5000/demo
+
+all: ca.crt ca.key cluster.crt cluster.key
 
 ca.crt ca.key:
 	step certificate create root.linkerd.cluster.local ca.crt ca.key --profile root-ca --no-password --insecure
@@ -23,7 +25,7 @@ entry: ca.key
 
 shell:
 	docker run --rm -ti -v /nix:/nix -v ~/bin/nix:/usr/local/bin \
-		--entrypoint $$(readlink ~/bin/nix/bash) cache.defn.run:5000/demo
+		--entrypoint $$(readlink ~/bin/nix/bash) $(save)
 
 image:
-	earthly --push +demo --image=ghcr.io/linkerd/proxy:$$(linkerd version --proxy --client --short) --save cache.defn.run:5000/demo
+	earthly --push +demo --image=ghcr.io/linkerd/proxy:$$(linkerd version --proxy --client --short) --save $(save)
