@@ -26,3 +26,12 @@ entry: bin/spire-server ca.key
 		-parentID spiffe://root.linkerd.cluster.local/agent \
 		-spiffeID spiffe://root.linkerd.cluster.local/meh \
 		-selector unix:uid:$$(id -u)
+
+pull:
+	docker pull ghcr.io/linkerd/proxy:$$(linkerd version --proxy --client --short)
+
+shell:
+	docker pull ghcr.io/linkerd/proxy:$$(linkerd version --proxy --client --short)
+
+	docker run --rm -ti -v /nix:/nix --entrypoint $$(readlink ~/bin/nix/bash) \
+		ghcr.io/linkerd/proxy:$$(linkerd version --proxy --client --short)
