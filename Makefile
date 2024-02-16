@@ -152,7 +152,7 @@ play:
 upgrade:
 	cd m/pb && $(MAKE) local-upgrade
 
-install: install_t
+install:
 	t make_install $(MAKE) install_t
 
 install_t: m/.bazelrc.user
