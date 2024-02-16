@@ -1094,12 +1094,14 @@ kustomize: "tetragon": #KustomizeHelm & {
 kustomize: "tailscale": #Kustomize & {
 	cluster: #Cluster
 
+	#version: "5bd19fd"
+
 	resource: "tailscale-operator": {
-		url: "https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/deploy/manifests/operator.yaml"
+		url: "https://raw.githubusercontent.com/tailscale/tailscale/\(#version)/cmd/k8s-operator/deploy/manifests/operator.yaml"
 	}
 
 	resource: "tailscale-rbac": {
-		url: "https://raw.githubusercontent.com/tailscale/tailscale/main/cmd/k8s-operator/deploy/manifests/authproxy-rbac.yaml"
+		url: "https://raw.githubusercontent.com/tailscale/tailscale/\(#version)/cmd/k8s-operator/deploy/manifests/authproxy-rbac.yaml"
 	}
 
 	jsp: "deployment-operator-increase-logging": {
