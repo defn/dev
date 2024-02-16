@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+spire-server --version
+spire-agent --version
