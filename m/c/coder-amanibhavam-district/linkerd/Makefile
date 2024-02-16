@@ -12,16 +12,16 @@ bin/spire-agent bin/spire-server:
 	mv spire-1.8.7/bin/* bin/
 	rm -rf spire.tar.gz spire-1.8.7
 
-server:
+server: bin/spire-server ca.key
 	./bin/spire-server run
 
-agent:
+agent: bin/spire-agent bin/spire-server ca.crt
 	./bin/spire-agent run \
 		-joinToken "$$(./bin/spire-server token generate \
 		-spiffeID spiffe://root.linkerd.cluster.local/agent \
 		-output json | jq -r .value)"
 
-entry:
+entry: bin/spire-server ca.key
 	./bin/spire-server entry create \
 		-parentID spiffe://root.linkerd.cluster.local/agent \
 		-spiffeID spiffe://root.linkerd.cluster.local/meh \
