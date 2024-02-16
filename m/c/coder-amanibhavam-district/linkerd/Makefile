@@ -29,8 +29,7 @@ entry: bin/spire-server ca.key
 
 shell:
 	docker run --rm -ti -v /nix:/nix -v ~/bin/nix:/usr/local/bin \
-		--entrypoint $$(readlink ~/bin/nix/bash) \
-		ghcr.io/linkerd/proxy:$$(linkerd version --proxy --client --short)
+		--entrypoint $$(readlink ~/bin/nix/bash) cache.defn.run:5000/demo
 
 image:
-	earthly --push +demo --image=ghcr.io/linkerd/proxy:$$(linkerd version --proxy --client --short)
+	earthly --push +demo --image=ghcr.io/linkerd/proxy:$$(linkerd version --proxy --client --short) --save cache.defn.run:5000/demo
