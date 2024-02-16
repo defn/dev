@@ -25,8 +25,8 @@
       };
       "x86_64-darwin" = {
         os = "linux";
-        arch = "amd65";
-        sha256 = "sha256-aaaaau9Sg1EK1UEU0xHwv8Cwn80ddAhUdJBWIm6/ZX0="; # x86_64-darwin
+        arch = "amd64";
+        sha256 = "sha256-4OuJtIlafl+9oq5h1ZJpaBctNvT5UQZs4nIvq7GEz4w="; # x86_64-linux
       };
       "aarch64-darwin" = {
         os = "linux";
