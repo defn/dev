@@ -1366,17 +1366,17 @@
       },
       "locked": {
         "dir": "m/pkg/spire",
-        "lastModified": 1708062225,
-        "narHash": "sha256-byjrHIW+LP2r5zPrWAuCFKlAWMHkYqoBzBCfVq6qph4=",
+        "lastModified": 1708100818,
+        "narHash": "sha256-3lcrnhnua/4b91Od+NoOpGhzA9hB9UOL2E9VXffI7XA=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "c5e3db624a637d8404e46b0ee9040d0dfbf06a01",
+        "rev": "b7e0ca7784e564725e646a6c2821a2fb16062a76",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/spire",
         "owner": "defn",
-        "ref": "pkg-spire-1.8.7-1",
+        "ref": "pkg-spire-1.8.7-2",
         "repo": "dev",
         "type": "github"
       }
