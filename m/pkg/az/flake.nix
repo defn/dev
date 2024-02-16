@@ -29,6 +29,7 @@
         ncdu
         nload
         cookiecutter
+        bat
         bashInteractive
       ];
 
