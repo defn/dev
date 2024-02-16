@@ -10,14 +10,11 @@ linkerd install --identity-trust-anchors-file ca.crt --identity-issuer-certifica
 linkerd check
 
 # install viz cluster
-linkerd --context k3d-dfd viz install --set dashboard.enforcedHostRegexp=^ | k apply -f -
+linkerd viz install --set dashboard.enforcedHostRegexp=^ | k apply -f -
 
 # install mc cluster
 linkerd multicluster install --gateway=false | k apply -f -
 linkerd multicluster check
-  
-
-
 
 # signing vc
 for a in 0 1; do step certificate create identity.linkerd.cluster.local vc$a.crt vc$a.key --profile intermediate-ca --not-after 8760h --no-password --insecure --ca ca.crt --ca-key ca.key; done
