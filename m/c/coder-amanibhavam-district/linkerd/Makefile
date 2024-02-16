@@ -11,3 +11,9 @@ bin/spire-agent bin/spire-server:
 	tar xvfz spire.tar.gz
 	mv spire-1.8.7/bin/* bin/
 	rm -rf spire.tar.gz spire-1.8.7
+
+server:
+	./bin/spire-server run
+
+agent:
+	./bin/spire-agent run -joinToken "$$(./bin/spire-server token generate -spiffeID spiffe://root.linkerd.cluster.local/agent -output json | jq -r .value)"
