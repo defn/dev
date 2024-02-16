@@ -27,17 +27,17 @@
       },
       "locked": {
         "dir": "m/pkg/buildkite",
-        "lastModified": 1706897709,
-        "narHash": "sha256-/ZGdxieckkLOGhLK3am8+haGDmjUDrknLoVcjoz/mes=",
+        "lastModified": 1708046663,
+        "narHash": "sha256-J+lkDYo0ofed7sNr1H73ZXKg+czyqd+eoZA38pSyzwg=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "f708d1a047f029f2c1a120ff346bfb2af1527128",
+        "rev": "a13e6d23f4232a92644e8b6e711098ebd7b74ec2",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buildkite",
         "owner": "defn",
-        "ref": "pkg-buildkite-3.62.0-2",
+        "ref": "pkg-buildkite-3.63.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -279,17 +279,17 @@
       },
       "locked": {
         "dir": "m/pkg/gh",
-        "lastModified": 1706897854,
-        "narHash": "sha256-msBRJfV/piF2+7J1cIM7rApHCxswiZC/K3EEHvIQxJU=",
+        "lastModified": 1708046724,
+        "narHash": "sha256-F34UKNCdVEhEDdrrY/Q8ld8uDXadHCqBst7I08O5I0I=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "57ab711254a94c912a915df6f8decfaba6a434e3",
+        "rev": "c865fb8c7b56f3f3e2d4ce6d2286c851a64acf83",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/gh",
         "owner": "defn",
-        "ref": "pkg-gh-2.43.1-2",
+        "ref": "pkg-gh-2.44.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -789,17 +789,17 @@
       },
       "locked": {
         "dir": "m/pkg/tilt",
-        "lastModified": 1706898171,
-        "narHash": "sha256-50pj/3CCtx1HbRNSonScUg9WBLmIinH1KEblclCWJYw=",
+        "lastModified": 1708046801,
+        "narHash": "sha256-rxmo/Bw2G8h9ufkQIwQsKdJpTROz8APBVcjCEdZAM9Y=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "0118061aea35bca35c895ff58ee5e1780096f049",
+        "rev": "a74646a00f8a3b37f2812596f04c36aa762fec8d",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/tilt",
         "owner": "defn",
-        "ref": "pkg-tilt-0.33.10-5",
+        "ref": "pkg-tilt-0.33.11-1",
         "repo": "dev",
         "type": "github"
       }
