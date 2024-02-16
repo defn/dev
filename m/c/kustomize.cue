@@ -413,7 +413,7 @@ kustomize: "external-dns": #KustomizeHelm & {
 	helm: {
 		release: "external-dns"
 		name:    "external-dns"
-		version: "6.32.1"
+		version: "6.33.0"
 		repo:    "https://charts.bitnami.com/bitnami"
 		values: {
 			logLevel: "info"
@@ -2090,7 +2090,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "4.3.0"
+		version:     "4.4.0"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
@@ -3319,7 +3319,7 @@ kustomize: "crossplane": #KustomizeHelm & {
 		release:   "crossplane"
 		name:      "crossplane"
 		namespace: "crossplane"
-		version:   "1.14.5"
+		version:   "1.15.0"
 		repo:      "https://charts.crossplane.io/stable"
 		values: {
 		}
