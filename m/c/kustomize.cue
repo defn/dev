@@ -1668,7 +1668,7 @@ kustomize: "coder": #KustomizeHelm & {
 		release:   "coder"
 		name:      "coder"
 		namespace: "coder"
-		version:   "2.8.2"
+		version:   "2.8.3"
 		repo:      "https://helm.coder.com/v2"
 		values: {
 			coder: {
@@ -1968,7 +1968,7 @@ kustomize: "pihole": #KustomizeHelm & {
 		release:   "pihole"
 		name:      "pihole"
 		namespace: "pihole"
-		version:   "2.21.0"
+		version:   "2.22.0"
 		repo:      "https://mojo2600.github.io/pihole-kubernetes"
 		values: {
 			podDnsConfig: enabled:          false

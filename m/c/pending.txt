@@ -7,7 +7,7 @@ https://artifacthub.io/packages/helm/cert-manager/cert-manager/1.14.2
 https://artifacthub.io/packages/helm/cert-manager/trust-manager/0.8.0
 https://artifacthub.io/packages/helm/cilium/cilium/1.15.1
 https://artifacthub.io/packages/helm/cilium/tetragon/1.0.2
-https://artifacthub.io/packages/helm/coder-v2/coder/2.8.2
+https://artifacthub.io/packages/helm/coder-v2/coder/2.8.3
 https://artifacthub.io/packages/helm/crossplane/crossplane/1.16.0-rc.0.36.g5369ee36
 https://artifacthub.io/packages/helm/descheduler/descheduler/0.29.0
 https://artifacthub.io/packages/helm/dex/dex/0.16.0
@@ -20,6 +20,6 @@ https://artifacthub.io/packages/helm/linkerd2-edge/linkerd-control-plane/1.18.8-
 https://artifacthub.io/packages/helm/linkerd2-edge/linkerd-crds/1.9.3-edge
 https://artifacthub.io/packages/helm/linkerd2/linkerd-control-plane/1.16.10
 https://artifacthub.io/packages/helm/linkerd2/linkerd-crds/1.8.0
-https://artifacthub.io/packages/helm/mojo2600/pihole/2.21.0
+https://artifacthub.io/packages/helm/mojo2600/pihole/2.22.0
 https://artifacthub.io/packages/helm/stakater/reloader/1.0.67
 https://artifacthub.io/packages/helm/traefik/traefik/26.0.0
