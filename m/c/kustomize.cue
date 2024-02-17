@@ -3367,21 +3367,29 @@ kustomize: "crosskubernetes": #Kustomize & {
 	cluster: #Cluster
 
 	namespace: "crossplane"
+}
 
-	resource: "provider-config-kubernetes": {
+kustomize: "crossdemo": #Kustomize & {
+	cluster: #Cluster
+
+	namespace: "default"
+
+	#name: "crossdemo"
+
+	resource: "provider-config-crossdemo": {
 		apiVersion: "kubernetes.crossplane.io/v1alpha1"
 		kind:       "ProviderConfig"
-		metadata: name: "provider-kubernetes"
+		metadata: name: "provider-\(#name)"
 		spec: credentials: source: "InjectedIdentity"
 	}
 
-	resource: "cluster-role-binding-kubernetes-cluster-admin": {
+	resource: "cluster-role-binding-crossdemo": {
 		apiVersion: "rbac.authorization.k8s.io/v1"
 		kind:       "ClusterRoleBinding"
-		metadata: name: "provider-kubernetes-cluster-admin"
+		metadata: name: "provider-\(#name)"
 		subjects: [{
 			kind:        "ServiceAccount"
-			name:        "provider-kubernetes"
+			name:        "provider-\(#name)"
 			"namespace": "crossplane-system"
 		}]
 		roleRef: {
@@ -3390,13 +3398,6 @@ kustomize: "crosskubernetes": #Kustomize & {
 			apiGroup: "rbac.authorization.k8s.io"
 		}
 	}
-}
-
-kustomize: "crossdemo": #Kustomize & {
-	cluster: #Cluster
-
-	namespace: "default"
-
 	resource: foo: {
 		apiVersion: "kubernetes.crossplane.io/v1alpha2"
 		kind:       "Object"
@@ -3430,7 +3431,7 @@ kustomize: "crossdemo": #Kustomize & {
 					"argocd.argoproj.io/sync-options": "Prune=false"
 				}
 			}
-			providerConfigRef: name: "provider-kubernetes"
+			providerConfigRef: name: "provider-\(#name)"
 		}
 	}
 
