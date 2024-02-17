@@ -6,10 +6,6 @@ list:
 	@(cd .. && git grep artifacthub) | awk '{print $$2}' | runmany 'curl -sSL https://artifacthub.io/api/v1/$${1#https://artifacthub.io/}/feed/rss 2>/dev/null | grep 'artifacthub.io/packages/helm/' | grep -v -E "beta|snapshot" | head -1 | cut -d">" -f2 | cut -d"<" -f1' | sort -u > pending.txt
 	git diff pending.txt
 
-helm_add:
-	(cd .. && git grep repo: kustomize.cue) | cut -d'"' -f2 | sort -u | while read -r repo; do helm repo add $$(echo $$repo | cut -d/ -f3- | perl -pe 's{\s+$$}{}; s{\W+}{-}g') $$repo; done
-	helm repo update
-
 test:
 # make test
 	kubectl --context $(env) delete ns cilium-test || true
@@ -27,36 +23,26 @@ test-mesh:
 start-school:
 	coder start --yes school
 
-start-class:
-	coder start --yes class
-
 start-all:
-	$(MAKE) -j 2 start-school start-class
+	$(MAKE) -j 2 start-school
 	coder config-ssh --yes
-	for a in school class; do ssh coder.$$a bash -c "'cd m && make ready'"; done
+	for a in school; do ssh coder.$$a bash -c "'cd m && make ready'"; done
 	cilium clustermesh status --wait
 
 stop-school:
 	coder stop --yes school || true
 
-stop-class:
-	coder stop --yes class || true
-
 stop-all:
-	$(MAKE) -j 2 stop-school stop-class
+	$(MAKE) -j 2 stop-school
 
 test-all:
 	$(MAKE) test-mesh from=coder-amanibhavam-district to=coder-amanibhavam-school
-	$(MAKE) test-mesh from=coder-amanibhavam-district to=coder-amanibhavam-class
-	$(MAKE) test-mesh from=coder-amanibhavam-class    to=coder-amanibhavam-district
-	$(MAKE) test-mesh from=coder-amanibhavam-class    to=coder-amanibhavam-school
 	$(MAKE) test-mesh from=coder-amanibhavam-school   to=coder-amanibhavam-district
-	$(MAKE) test-mesh from=coder-amanibhavam-school   to=coder-amanibhavam-class
 
 connect:
 # k get services -n kube-system clustermesh-apiserver
 # use external-IP
-# make connect from=coder-amanibhavam-class to=coder-amanibhavam-district endpoint=172.31.33.178:2379
+# make connect from=coder-amanibhavam-school to=coder-amanibhavam-district endpoint=172.31.33.178:2379
 	cilium clustermesh connect --context $(from) --destination-context $(to) --destination-endpoint $(endpoint)
 
 status:
@@ -79,10 +65,10 @@ restart-cilium:
 	kubectl -n kube-system rollout restart deploy clustermesh-apiserver
 
 xwing-attack:
-	kubectl exec --context coder-amanibhavam-class -ti deploy/xwing -- curl -XPUT -H 'X-Has-Force: True' deathstar.default.svc.cluster.local/v1/exhaust-port
+	kubectl exec --context coder-amanibhavam-school -ti deploy/xwing -- curl -XPUT -H 'X-Has-Force: True' deathstar.default.svc.cluster.local/v1/exhaust-port
 
 xwing-visit:
-	kubectl exec --context coder-amanibhavam-class -ti deploy/xwing -- curl -XGET deathstar.default.svc.cluster.local/v1/
+	kubectl exec --context coder-amanibhavam-school -ti deploy/xwing -- curl -XGET deathstar.default.svc.cluster.local/v1/
 
 spaceship-attack:
 	kubectl exec --context coder-amanibhavam-school -ti deploy/spaceship -- curl -XPUT -H 'X-Has-Force: True' deathstar.default.svc.cluster.local/v1/exhaust-port

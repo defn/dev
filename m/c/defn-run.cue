@@ -21,6 +21,7 @@ k3s_bootstrap: {
 	"crossprovider": {}
 	"karpenter": {}
 	"cilium": {}
+	"tailscale": {}
 	"tetragon": {}
 	"kyverno": {
 		app_sync_options: ["ServerSideApply=true"]
