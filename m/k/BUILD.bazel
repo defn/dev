@@ -20,6 +20,7 @@ cluster_apps = [
     "coder-amanibhavam-district-cluster-traefik",
     "coder-amanibhavam-district-cluster-external-dns",
     "coder-amanibhavam-district-cluster-crossplane",
+    "coder-amanibhavam-district-cluster-crosskubernetes",
     "coder-amanibhavam-district-cluster-crossdemo",
     #
     "coder-amanibhavam-district0-cluster-env",
@@ -46,6 +47,7 @@ cluster_apps = [
     "coder-amanibhavam-school-cluster-tetragon",
     "coder-amanibhavam-school-cluster-trust-manager",
     "coder-amanibhavam-school-cluster-crossplane",
+    "coder-amanibhavam-school-cluster-crosskubernetes",
     "coder-amanibhavam-school-cluster-crossdemo",
 ]
 
