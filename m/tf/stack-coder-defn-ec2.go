@@ -318,7 +318,7 @@ disown
 			"arn:aws:iam::510430971399:role/coder-amanibhavam-district": {infra.Js("/openid")},
 		},
 		OriginForceDestroy: infra.Jstrue(),
-		VersioningEnabled: infra.Jsfalse(),
+		VersioningEnabled:  infra.Jsfalse(),
 	})
 
 	devInstanceProfile := iaminstanceprofile.NewIamInstanceProfile(stack, infra.Js("dev_instance_profile"), &iaminstanceprofile.IamInstanceProfileConfig{
