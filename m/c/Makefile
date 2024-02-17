@@ -20,6 +20,9 @@ test-mesh:
 	kubectl --context $(from) delete ns cilium-test || true
 	kubectl --context $(to) delete ns cilium-test
 
+config-district:
+	cd .. && $(MAKE) tailscale-kubeconfig env=coder-amanibhavam-district
+
 config-school:
 	cd .. && $(MAKE) tailscale-kubeconfig env=coder-amanibhavam-school
 
