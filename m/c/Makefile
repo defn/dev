@@ -2,6 +2,8 @@ SHELL := /bin/bash
 
 env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
 
+from ?= $(env)
+
 list:
 	@(cd .. && git grep artifacthub) | awk '{print $$2}' | runmany 'curl -sSL https://artifacthub.io/api/v1/$${1#https://artifacthub.io/}/feed/rss 2>/dev/null | grep 'artifacthub.io/packages/helm/' | grep -v -E "beta|snapshot" | head -1 | cut -d">" -f2 | cut -d"<" -f1' | sort -u > pending.txt
 	git diff pending.txt
@@ -11,6 +13,20 @@ test:
 	kubectl --context $(env) delete ns cilium-test || true
 	cilium connectivity test --context $(env)
 	kubectl --context $(env) delete ns cilium-test || true
+
+disconnect:
+# make disconnect from=coder-amanibhavam-district to=coder-amanibhavam-school
+	cilium clustermesh disconnect --context $(from) --destination-context=$(to)
+
+connect:
+# make connect from=coder-amanibhavam-district to=coder-amanibhavam-school
+	$(MAKE) connect_inner from=$(from) to=$(to) endpoint=$$(kubectl --context $(to) get services -n kube-system -o json clustermesh-apiserver | jq -r '.status.loadBalancer.ingress[].ip'):2379
+	$(MAKE) connect_inner from=$(to) to=$(from) endpoint=$$(kubectl --context $(from) get services -n kube-system -o json clustermesh-apiserver | jq -r '.status.loadBalancer.ingress[].ip'):2379
+	cilium clustermesh status --context $(from) --wait
+	cilium clustermesh status --context $(to) --wait
+
+connect_inner:
+	cilium clustermesh connect --context $(from) --destination-context $(to) --destination-endpoint $(endpoint)
 
 test-mesh:
 # make test-mesh from=coder-amanibhavam-school to=coder-amanibhavam-district
@@ -30,7 +46,6 @@ start-all:
 	$(MAKE) -j 2 start-school
 	coder config-ssh --yes
 	for a in school; do ssh coder.$$a bash -c "'cd m && make ready'"; done
-	cilium clustermesh status --wait
 
 stop-school:
 	coder stop --yes school || true
@@ -42,22 +57,16 @@ test-all:
 	$(MAKE) test-mesh from=coder-amanibhavam-district to=coder-amanibhavam-school
 	$(MAKE) test-mesh from=coder-amanibhavam-school   to=coder-amanibhavam-district
 
-connect:
-# k get services -n kube-system clustermesh-apiserver
-# use external-IP
-# make connect from=coder-amanibhavam-school to=coder-amanibhavam-district endpoint=172.31.33.178:2379
-	cilium clustermesh connect --context $(from) --destination-context $(to) --destination-endpoint $(endpoint)
-
 status:
 	@mark cilium
-	k exec -n kube-system -ti ds/cilium -- cilium status
+	k --context=$(env) exec -n kube-system -ti ds/cilium -- cilium status
 	@mark clustermesh
-	k exec -n kube-system -ti ds/cilium -- cilium-health status
+	k --context=$(env) exec -n kube-system -ti ds/cilium -- cilium-health status
 	@mark hubble
-	k exec -n kube-system ds/cilium -- hubble status
+	k --context=$(env) exec -n kube-system ds/cilium -- hubble status
 	@mark cli
-	cilium status
-	cilium clustermesh status
+	cilium status --context=$(env)
+	cilium clustermesh status --context=$(env)
 
 # https://github.com/cilium/cilium/issues/13766
 restart-cilium:
