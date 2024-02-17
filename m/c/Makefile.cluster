@@ -10,25 +10,23 @@ k3s_url := $(shell cat ~/.kube/config | grep server: | awk '{print $$NF}')
 
 secrets:
 	$(MAKE) clean
-	(echo package c; echo "class: discovery_url: \"https://$$(aws cloudfront get-distribution --id $$(env AWS_DEFAULT_REGION=us-west-2 aws resourcegroupstaggingapi get-resources --tag-filters Key=Name,Values=$(INFRA_NAME)-oidc --region=us-east-1 | jq -r '.ResourceTagMappingList[].ResourceARN' | cut -d/ -f2) | jq -r '.Distribution.DomainName')\"") > distribution.cue
 	$(MAKE) irsa
 	$(MAKE) k3s-secrets
-	cue fmt .
-	aws s3 sync openid s3://$(INFRA_NAME)-oidc-origin/openid
-	aws cloudfront create-invalidation --distribution-id $$(env AWS_DEFAULT_REGION=us-west-2 aws resourcegroupstaggingapi get-resources --tag-filters Key=Name,Values=${INFRA_NAME}-oidc --region=us-east-1 | jq -r '.ResourceTagMappingList[].ResourceARN' | cut -d/ -f2) --paths '/*' || true
 
 clean:
 	rm -f system.admin.key system.admin.pem system.ca.pem
-	rm -f openid/.well-known/openid-configuration
+	rm -f openid
 
 irsa:
+	mkdir -p openid/.well-known
 	sudo cat /etc/rancher/k3s/k3s.yaml | awk -F': ' '/client-certificate-data/ {print $$2}' | base64 -d > system.admin.pem && chmod 600 system.admin.pem
 	sudo cat /etc/rancher/k3s/k3s.yaml | awk -F': ' '/client-key-data/ {print $$2}' | base64 -d > system.admin.key && chmod 600 system.admin.key
 	sudo cat /etc/rancher/k3s/k3s.yaml | awk -F': ' '/certificate-authority-data/ {print $$2}' | base64 -d > system.ca.pem && chmod 600 system.ca.pem
-	mkdir -p openid/.well-known
 	curl -sSL --cert system.admin.pem --key system.admin.key --cacert system.ca.pem ${k3s_url}/openid/v1/jwks | jq . > openid/.well-known/jwks.json
 	cue export -e class.discovery --out=json | jq . > openid/.well-known/openid-configuration
-	rm -vf system.*
+	aws s3 sync openid s3://$(INFRA_NAME)-oidc-origin/openid
+	aws cloudfront create-invalidation --distribution-id $$(env AWS_DEFAULT_REGION=us-west-2 aws resourcegroupstaggingapi get-resources --tag-filters Key=Name,Values=${INFRA_NAME}-oidc --region=us-east-1 | jq -r '.ResourceTagMappingList[].ResourceARN' | cut -d/ -f2) --paths '/*' || true
+	rm -vf system.* openid
 
 k3s-secrets: ../ca.key ../ca.crt
 	-kubectl --context $(INFRA_NAME) create namespace cert-manager
@@ -42,6 +40,8 @@ label:
 	kubectl get nodes -o json | jq -r '.items[].metadata.name' | runmany 'kubectl label --overwrite node $$1 node.kubernetes.io/instance-type=t3.medium'
 
 iam:
+	(echo package c; echo "class: discovery_url: \"https://$$(aws cloudfront get-distribution --id $$(env AWS_DEFAULT_REGION=us-west-2 aws resourcegroupstaggingapi get-resources --tag-filters Key=Name,Values=$(INFRA_NAME)-oidc --region=us-east-1 | jq -r '.ResourceTagMappingList[].ResourceARN' | cut -d/ -f2) | jq -r '.Distribution.DomainName')\"") > distribution.cue
+	cue fmt .
 	export AWS_PAGER= OPENID="$$(cue export --out json -e class.discovery_url | jq -r . | cut -d/ -f3)" HOST=$(INFRA_NAME) \
 		&& export THUMB="$$(echo \
 			| openssl s_client -servername $${OPENID} -showcerts -connect $${OPENID}:443 2> /dev/null \
