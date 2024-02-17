@@ -172,6 +172,7 @@ k3s-advertise-traefik:
 	tailscale up --advertise-routes=$$(kubectl get -n traefik svc traefik -o json | jq -r '.spec.clusterIP')/32,$$(kubectl get -n traefik svc traefik -o json | jq -r '.spec.clusterIP' | cut -d. -f1-2).128.53/32  --accept-routes=true --ssh
 
 tailscale-kubeconfig:
+	-kubectl config delete-context $(env)-proxy
 	tailscale configure kubeconfig $(env)-proxy
 	-kubectl config delete-context $(env)
 	kubectl config rename-context $(env)-proxy.$(shell tailscale cert 2>&1 | grep 'use ' | cut -d'"' -f2 | cut -d. -f2-) $(env)
