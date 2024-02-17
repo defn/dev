@@ -1,3 +1,3 @@
 package c
 
-class: discovery_url: "https://d2jcmxt36rf56i.cloudfront.net"
+class: discovery_url: "https://d1alduueh15t4a.cloudfront.net"
