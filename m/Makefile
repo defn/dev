@@ -139,7 +139,7 @@ init:
 
 up:
 	bin/make-k3s up
-#	cd c && $(MAKE) iam
+	cd c/$(shell basename $(shell pwd)) && $(MAKE) iam
 	cd k && $(MAKE) update
 	$(MAKE) ready
 
