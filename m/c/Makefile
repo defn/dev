@@ -10,34 +10,6 @@ helm_add:
 	(cd .. && git grep repo: kustomize.cue) | cut -d'"' -f2 | sort -u | while read -r repo; do helm repo add $$(echo $$repo | cut -d/ -f3- | perl -pe 's{\s+$$}{}; s{\W+}{-}g') $$repo; done
 	helm repo update
 
-iam:
-	export AWS_PAGER= OPENID="$$(cd c/$$(uname -n) && cue export --out json -e class.discovery_url | jq -r . | cut -d/ -f3)" HOST=$$(uname -n) \
-		&& export THUMB="$$(echo \
-			| openssl s_client -servername $${OPENID#https://} -showcerts -connect $${OPENID#https://}:443 2> /dev/null \
-			| sed -n -e '/BEGIN/h' -e '/BEGIN/,/END/H' -e '$$x' -e '$$p' \
-			| tail +2 \
-			| openssl x509 -fingerprint -noout \
-			| sed -e "s/.*=//" -e "s/://g" \
-			| tr "A-F" "a-f")" \
-		&& set -x \
-		&& aws iam create-open-id-connect-provider \
-			--url "$$OPENID/openid" \
-			--client-id-list "sts.amazonaws.com" \
-			--thumbprint-list "$${THUMB}" \
-		&& (aws iam create-role \
-				--role-name $${HOST}-cluster \
-				--assume-role-policy-document \
-				file://<(env ACCOUNT_ID=$(shell  aws sts get-caller-identity | jq -r '.Account') OPENID=$${OPENID}/openid envsubst <trust-policy.json) \
-			|| \
-			aws iam update-assume-role-policy \
-				--role-name $${HOST}-cluster \
-				--policy-document \
-				file://<(env ACCOUNT_ID=$(shell  aws sts get-caller-identity | jq -r '.Account') OPENID=$${OPENID}/openid envsubst <trust-policy.json) \
-			) \
-		&& (aws iam attach-role-policy \
-			--role-name $${HOST}-cluster \
-			--policy-arn arn:aws:iam::aws:policy/AdministratorAccess || true)
-
 test:
 # make test
 	kubectl --context $(env) delete ns cilium-test || true
