@@ -3348,6 +3348,14 @@ kustomize: "crossplane": #KustomizeHelm & {
 			}
 		}
 	}
+
+	resource: "deployment-runtime-config-kubernetes": {
+		apiVersion: "pkg.crossplane.io/v1beta1"
+		kind:       "DeploymentRuntimeConfig"
+		metadata: name: "provider-kubernetes"
+		spec: serviceAccountTemplate: metadata: name: "provider-kubernetes"
+	}
+
 }
 
 kustomize: "crosskubernetes": #Kustomize & {
@@ -3355,11 +3363,11 @@ kustomize: "crosskubernetes": #Kustomize & {
 
 	namespace: "crossplane"
 
-	resource: "deployment-runtime-config-kubernetes": {
-		apiVersion: "pkg.crossplane.io/v1beta1"
-		kind:       "DeploymentRuntimeConfig"
+	resource: "provider-config-kubernetes": {
+		apiVersion: "kubernetes.crossplane.io/v1alpha1"
+		kind:       "ProviderConfig"
 		metadata: name: "provider-kubernetes"
-		spec: serviceAccountTemplate: metadata: name: "provider-kubernetes"
+		spec: credentials: source: "InjectedIdentity"
 	}
 
 	resource: "cluster-role-binding-kubernetes-cluster-admin": {
@@ -3376,13 +3384,6 @@ kustomize: "crosskubernetes": #Kustomize & {
 			name:     "cluster-admin"
 			apiGroup: "rbac.authorization.k8s.io"
 		}
-	}
-
-	resource: "provider-config-kubernetes": {
-		apiVersion: "kubernetes.crossplane.io/v1alpha1"
-		kind:       "ProviderConfig"
-		metadata: name: "provider-kubernetes"
-		spec: credentials: source: "InjectedIdentity"
 	}
 }
 
