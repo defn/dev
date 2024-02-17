@@ -7,7 +7,7 @@ global:
   buildkit_additional_config: |
     [registry."coder-amanibhavam-district.tail3884f.ts.net:5000"]
       http = false
-      insecure = true
-    [registry."cache.defn.run:5000"]
+      insecure = false
+    [registry."cache.defn.run:4999"]
       http = false
       insecure = true
