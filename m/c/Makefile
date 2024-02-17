@@ -85,11 +85,11 @@ status:
 
 # https://github.com/cilium/cilium/issues/13766
 restart-cilium:
-	kubectl -n kube-system rollout restart deploy cilium-operator
-	kubectl -n kube-system rollout restart ds cilium 
-	kubectl -n kube-system rollout restart deploy hubble-relay
-	kubectl -n kube-system rollout restart deploy hubble-ui
-	kubectl -n kube-system rollout restart deploy clustermesh-apiserver
+	kubectl --context=$(env) -n kube-system rollout restart deploy cilium-operator
+	kubectl --context=$(env) -n kube-system rollout restart ds cilium 
+	kubectl --context=$(env) -n kube-system rollout restart deploy hubble-relay
+	kubectl --context=$(env) -n kube-system rollout restart deploy hubble-ui
+	kubectl --context=$(env) -n kube-system rollout restart deploy clustermesh-apiserver
 
 xwing-attack:
 	kubectl exec --context coder-amanibhavam-school -ti deploy/xwing -- curl -XPUT -H 'X-Has-Force: True' deathstar.default.svc.cluster.local/v1/exhaust-port
