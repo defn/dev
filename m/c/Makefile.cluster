@@ -13,9 +13,13 @@ secrets:
 	$(MAKE) irsa
 	$(MAKE) k3s-secrets
 
+delete-secrets:
+	-kubectl --context $(INFRA_NAME) delete secret -n kube-system cilium-ca
+	-kubectl --context $(INFRA_NAME) delete secret -n cert-manager cilium-ca
+
 clean:
 	rm -f system.admin.key system.admin.pem system.ca.pem
-	rm -f openid
+	rm -rf openid
 
 irsa:
 	mkdir -p openid/.well-known
@@ -30,8 +34,8 @@ irsa:
 
 k3s-secrets: ../ca.key ../ca.crt
 	-kubectl --context $(INFRA_NAME) create namespace cert-manager
-	-kubectl --context $(INFRA_NAME) create secret generic -n kube-system cilium-ca --from-file=ca.key --from-file=../ca.crt
-	-kubectl --context $(INFRA_NAME) create secret generic -n cert-manager cilium-ca --from-file=tls.key=ca.key --from-file=tls.crt=../ca.crt
+	-kubectl --context $(INFRA_NAME) create secret generic -n kube-system cilium-ca --from-file=../ca.key --from-file=../ca.crt
+	-kubectl --context $(INFRA_NAME) create secret generic -n cert-manager cilium-ca --from-file=tls.key=../ca.key --from-file=tls.crt=../ca.crt
 
 ../ca.key ../ca.crt:
 	step certificate create cilium-ca ../ca.crt ../ca.key --profile root-ca --not-after 8760h --no-password --insecure --kty RSA --size 4096 --force
