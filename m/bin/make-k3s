@@ -68,19 +68,25 @@ function make_up {
 	# oidc
 	(cd c/${cluster_name} && make secrets)
 
+	# cache
+	(cd cache && make init up)
 	(cd k && b build)
+
+	# kubernetes bootstrap
 	b out //k:deploy_crd_${cluster_name} | kubectl --context ${cluster_name} apply --server-side -f -
 	kubectl --context ${cluster_name} create ns argocd || true
 	kubectl --context ${cluster_name} create ns kyverno || true
 	export cluster_name
 	runmany 'cd k && b out deploy_yaml_${cluster_name}-cluster-$1 | kubectl --context ${cluster_name} apply -f -' coredns cilium argo-cd
 
+	# configure argocd context
 	make_argocd
 
 	# switch back to the default config
 	kubectl config use-context ${cluster_name}
 	kubectl rollout -n kube-system restart deployment coredns
 
+	# wait for argocd to deploy
 	env KUBECONFIG=$HOME/.kube/config.argocd kubectl -n argocd rollout status deployment/argocd-server
 	env KUBECONFIG=$HOME/.kube/config.argocd kubectl -n argocd rollout status deployment/argocd-repo-server
 
