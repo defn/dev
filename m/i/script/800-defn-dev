@@ -42,7 +42,7 @@ function main {
 	sudo ln -nfs bazelisk /usr/local/bin/bazel
 
 	sudo install -d -m 0755 /etc/docker
-	echo '{ "insecure-registries" : ["169.254.32.1:5000", "cache.defn.run:5000", "coder-amanibhavam-district.tail3884f.ts.net:5000"] }' | sudo tee /etc/docker/daemon.json
+	echo '{ "insecure-registries" : ["169.254.32.1:4999", "cache.defn.run:4999", "coder-amanibhavam-district.tail3884f.ts.net:5000"] }' | sudo tee /etc/docker/daemon.json
 
 	(
 		echo net.ipv4.ip_forward=1
