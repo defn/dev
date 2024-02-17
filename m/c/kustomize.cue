@@ -3334,12 +3334,6 @@ kustomize: "crossplane": #KustomizeHelm & {
 			name: "crossplane"
 		}
 	}
-}
-
-kustomize: "crosskubernetes": #Kustomize & {
-	cluster: #Cluster
-
-	namespace: "crossplane"
 
 	resource: "provider-kubernetes": {
 		apiVersion: "pkg.crossplane.io/v1"
@@ -3354,6 +3348,12 @@ kustomize: "crosskubernetes": #Kustomize & {
 			}
 		}
 	}
+}
+
+kustomize: "crosskubernetes": #Kustomize & {
+	cluster: #Cluster
+
+	namespace: "crossplane"
 
 	resource: "deployment-runtime-config-kubernetes": {
 		apiVersion: "pkg.crossplane.io/v1beta1"
