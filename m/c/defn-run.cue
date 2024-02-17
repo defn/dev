@@ -19,7 +19,6 @@ k3s_bootstrap: {
 	// management
 	"crossplane": {}
 	"crossprovider": {}
-	"crosskubernetes": {}
 	"karpenter": {}
 	"cilium": {}
 	"tetragon": {}
