@@ -15,23 +15,20 @@ tailscale:
 	sudo tailscale funnel --bg --https=443 --set-path /openid $(shell pwd)/$(env)/openid
 
 iam:
-	AWS_PAGER= HOST="$$(cd $$(uname -n) && cue export --out json -e class.discovery_url | jq -r . | cut -d/ -f3)" \
+	AWS_PAGER= OPENID="$$(cd $$(uname -n) && cue export --out json -e class.discovery_url | jq -r . | cut -d/ -f3)" HOST=$$(uname -n) \
 		&& export AWS_PAGER HOST \
 		&& set -x \
-		&& (echo \
-			| openssl s_client -servername $$HOST -showcerts -connect $$HOST:443 2> /dev/null \
-			| sed -n -e '/BEGIN/h' -e '/BEGIN/,/END/H' -e '$$x' -e '$$p' \
-			| tail +2 \
-			| openssl x509 -fingerprint -noout \
-			| sed -e "s/.*=//" -e "s/://g" \
-			| tr "A-F" "a-f") \
-		&& OPENID_HOST=$${HOST%%.*} \
 		&& (aws iam create-role \
-			--role-name $${OPENID_HOST}-cluster \
+			--role-name $${HOST}-cluster \
 			--assume-role-policy-document \
-			file://<(env ACCOUNT_ID=$(shell  aws sts get-caller-identity | jq -r '.Account') OPENID=$${HOST}/openid envsubst <trust-policy.json) || true) \
+			file://<(env ACCOUNT_ID=$(shell  aws sts get-caller-identity | jq -r '.Account') OPENID=$${OPENID}/openid envsubst <trust-policy.json) \
+			|| aws iam update-assume-role-policy \
+			--role-name $${HOST}-cluster \
+			--policy-document \
+			file://<(env ACCOUNT_ID=$(shell  aws sts get-caller-identity | jq -r '.Account') OPENID=$${OPENID}/openid envsubst <trust-policy.json) \
+			) \
 		&& (aws iam attach-role-policy \
-			--role-name $${OPENID_HOST}-cluster \
+			--role-name $${HOST}-cluster \
 			--policy-arn arn:aws:iam::aws:policy/AdministratorAccess || true)
 
 test:
