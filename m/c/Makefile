@@ -15,7 +15,7 @@ tailscale:
 	sudo tailscale funnel --bg --https=443 --set-path /openid $(shell pwd)/$(env)/openid
 
 iam:
-	AWS_PAGER= HOST="$$(tailscale funnel status | grep ^#  | grep https:// | head -1 | cut -d/ -f3-)" \
+	AWS_PAGER= HOST="$$(cd $$(uname -n) && cue export --out json -e class.discovery_url | jq -r . | cut -d/ -f3)" \
 		&& export AWS_PAGER HOST \
 		&& set -x \
 		&& (echo \
