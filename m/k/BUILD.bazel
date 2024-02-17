@@ -44,6 +44,7 @@ cluster_apps = [
     "coder-amanibhavam-school-cluster-kyverno",
     "coder-amanibhavam-school-cluster-pod-identity",
     "coder-amanibhavam-school-cluster-secrets",
+    "coder-amanibhavam-school-cluster-tailscale",
     "coder-amanibhavam-school-cluster-tetragon",
     "coder-amanibhavam-school-cluster-trust-manager",
     "coder-amanibhavam-school-cluster-crossplane",
