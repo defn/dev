@@ -1,6 +1,7 @@
 package c
 
 teacher: bootstrap: k3s_bootstrap & {
+	"crossdemo": {}
 }
 
 class: {
