@@ -10,8 +10,10 @@ k3s_url := $(shell cat ~/.kube/config | grep server: | awk '{print $$NF}')
 
 secrets:
 	$(MAKE) clean
+	(echo package c; echo "class: discovery_url: \"https://$$(aws cloudfront get-distribution --id $$(env AWS_DEFAULT_REGION=us-west-2 aws resourcegroupstaggingapi get-resources --tag-filters Key=Name,Values=$$(basename $$(pwd))-oidc --region=us-east-1 | jq -r '.ResourceTagMappingList[].ResourceARN' | cut -d/ -f2) | jq -r '.Distribution.DomainName')\"") > distribution.cue
 	$(MAKE) irsa
 	$(MAKE) k3s-secrets
+	cue fmt .
 	aws s3 sync openid s3://$(shell uname -n)-oidc-origin/openid
 	aws cloudfront create-invalidation --distribution-id $$(env AWS_DEFAULT_REGION=us-west-2 aws resourcegroupstaggingapi get-resources --tag-filters Key=Name,Values=${INFRA_NAME}-oidc --region=us-east-1 | jq -r '.ResourceTagMappingList[].ResourceARN' | cut -d/ -f2) --paths '/*' || true
 
