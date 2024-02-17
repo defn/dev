@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
 
-from ?= $(env)
+to ?= $(env)
 
 list:
 	@(cd .. && git grep artifacthub) | awk '{print $$2}' | runmany 'curl -sSL https://artifacthub.io/api/v1/$${1#https://artifacthub.io/}/feed/rss 2>/dev/null | grep 'artifacthub.io/packages/helm/' | grep -v -E "beta|snapshot" | head -1 | cut -d">" -f2 | cut -d"<" -f1' | sort -u > pending.txt
@@ -18,23 +18,35 @@ disconnect:
 # make disconnect from=coder-amanibhavam-district to=coder-amanibhavam-school
 	cilium clustermesh disconnect --context $(from) --destination-context=$(to)
 
+disconnect-all:
+	$(MAKE) disconnect from=coder-amanibhavam-district to=coder-amanibhavam-district
+	$(MAKE) disconnect from=coder-amanibhavam-district to=coder-amanibhavam-school
+	$(MAKE) disconnect from=coder-amanibhavam-school to=coder-amanibhavam-school
+	$(MAKE) disconnect from=coder-amanibhavam-school to=coder-amanibhavam-district
+	echo; cilium clustermesh status --context=coder-amanibhavam-district --wait
+	echo; cilium clustermesh status --context=coder-amanibhavam-school --wait
+
 connect:
 # make connect from=coder-amanibhavam-district to=coder-amanibhavam-school
-	$(MAKE) connect_inner from=$(from) to=$(to) endpoint=$$(kubectl --context $(to) get services -n kube-system -o json clustermesh-apiserver | jq -r '.status.loadBalancer.ingress[].ip'):2379
-	$(MAKE) connect_inner from=$(to) to=$(from) endpoint=$$(kubectl --context $(from) get services -n kube-system -o json clustermesh-apiserver | jq -r '.status.loadBalancer.ingress[].ip'):2379
-	cilium clustermesh status --context $(from) --wait
+	$(MAKE) connect_inner from=$(from) to=$(to) \
+		sourcepoint=$$(kubectl --context $(from) get services -n kube-system -o json clustermesh-apiserver | jq -r '.status.loadBalancer.ingress[].ip'):2379 \
+		endpoint=$$(kubectl --context $(to) get services -n kube-system -o json clustermesh-apiserver | jq -r '.status.loadBalancer.ingress[].ip'):2379
 	cilium clustermesh status --context $(to) --wait
 
 connect_inner:
-	cilium clustermesh connect --context $(from) --destination-context $(to) --destination-endpoint $(endpoint)
+	cilium clustermesh connect --context $(from) --source-endpoint=$(sourcepoint) --destination-context $(to) --destination-endpoint $(endpoint)
 
 test-mesh:
 # make test-mesh from=coder-amanibhavam-school to=coder-amanibhavam-district
 	kubectl --context $(from) delete ns cilium-test || true
 	kubectl --context $(to) delete ns cilium-test || true
-	cilium connectivity test --context $(from) --multi-cluster $(to) --test '!/node-to-node-encryption' --test '!/no-unexpected-packet-drops'
-	kubectl --context $(from) delete ns cilium-test || true
-	kubectl --context $(to) delete ns cilium-test
+	if !cilium connectivity test --context $(from) --multi-cluster $(to) --test '!/node-to-node-encryption' --test '!/no-unexpected-packet-drops'; then \
+		kubectl --context $(from) delete ns cilium-test || true; \
+		kubectl --context $(from) delete ns cilium-test || true; \
+	else; \
+		kubectl --context $(to) delete ns cilium-test; \
+		kubectl --context $(to) delete ns cilium-test; \
+	fi
 
 config-district:
 	cd .. && $(MAKE) tailscale-kubeconfig env=coder-amanibhavam-district
