@@ -10,27 +10,6 @@ helm_add:
 	(cd .. && git grep repo: kustomize.cue) | cut -d'"' -f2 | sort -u | while read -r repo; do helm repo add $$(echo $$repo | cut -d/ -f3- | perl -pe 's{\s+$$}{}; s{\W+}{-}g') $$repo; done
 	helm repo update
 
-tailscale:
-	mkdir -p ./$(env)/openid
-	sudo tailscale funnel --bg --https=443 --set-path /openid $(shell pwd)/$(env)/openid
-
-iam:
-	AWS_PAGER= OPENID="$$(cd $$(uname -n) && cue export --out json -e class.discovery_url | jq -r . | cut -d/ -f3)" HOST=$$(uname -n) \
-		&& export AWS_PAGER HOST \
-		&& set -x \
-		&& (aws iam create-role \
-			--role-name $${HOST}-cluster \
-			--assume-role-policy-document \
-			file://<(env ACCOUNT_ID=$(shell  aws sts get-caller-identity | jq -r '.Account') OPENID=$${OPENID}/openid envsubst <trust-policy.json) \
-			|| aws iam update-assume-role-policy \
-			--role-name $${HOST}-cluster \
-			--policy-document \
-			file://<(env ACCOUNT_ID=$(shell  aws sts get-caller-identity | jq -r '.Account') OPENID=$${OPENID}/openid envsubst <trust-policy.json) \
-			) \
-		&& (aws iam attach-role-policy \
-			--role-name $${HOST}-cluster \
-			--policy-arn arn:aws:iam::aws:policy/AdministratorAccess || true)
-
 test:
 # make test
 	kubectl --context $(env) delete ns cilium-test || true

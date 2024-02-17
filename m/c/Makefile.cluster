@@ -10,11 +10,11 @@ k3s_url := $(shell cat ~/.kube/config | grep server: | awk '{print $$NF}')
 
 secrets:
 	$(MAKE) clean
-	(echo package c; echo "class: discovery_url: \"https://$$(aws cloudfront get-distribution --id $$(env AWS_DEFAULT_REGION=us-west-2 aws resourcegroupstaggingapi get-resources --tag-filters Key=Name,Values=$$(basename $$(pwd))-oidc --region=us-east-1 | jq -r '.ResourceTagMappingList[].ResourceARN' | cut -d/ -f2) | jq -r '.Distribution.DomainName')\"") > distribution.cue
+	(echo package c; echo "class: discovery_url: \"https://$$(aws cloudfront get-distribution --id $$(env AWS_DEFAULT_REGION=us-west-2 aws resourcegroupstaggingapi get-resources --tag-filters Key=Name,Values=$(INFRA_NAME)-oidc --region=us-east-1 | jq -r '.ResourceTagMappingList[].ResourceARN' | cut -d/ -f2) | jq -r '.Distribution.DomainName')\"") > distribution.cue
 	$(MAKE) irsa
 	$(MAKE) k3s-secrets
 	cue fmt .
-	aws s3 sync openid s3://$(shell uname -n)-oidc-origin/openid
+	aws s3 sync openid s3://$(INFRA_NAME)-oidc-origin/openid
 	aws cloudfront create-invalidation --distribution-id $$(env AWS_DEFAULT_REGION=us-west-2 aws resourcegroupstaggingapi get-resources --tag-filters Key=Name,Values=${INFRA_NAME}-oidc --region=us-east-1 | jq -r '.ResourceTagMappingList[].ResourceARN' | cut -d/ -f2) --paths '/*' || true
 
 clean:
@@ -31,12 +31,40 @@ irsa:
 	rm -vf system.*
 
 k3s-secrets: ca.key ca.crt
-	-kubectl --context $(shell uname -n) create namespace cert-manager
-	-kubectl --context $(shell uname -n) create secret generic -n kube-system cilium-ca --from-file=ca.key --from-file=ca.crt
-	-kubectl --context $(shell uname -n) create secret generic -n cert-manager cilium-ca --from-file=tls.key=ca.key --from-file=tls.crt=ca.crt
+	-kubectl --context $(INFRA_NAME) create namespace cert-manager
+	-kubectl --context $(INFRA_NAME) create secret generic -n kube-system cilium-ca --from-file=ca.key --from-file=ca.crt
+	-kubectl --context $(INFRA_NAME) create secret generic -n cert-manager cilium-ca --from-file=tls.key=ca.key --from-file=tls.crt=ca.crt
 
 ca.key ca.crt:
 	step certificate create cilium-ca ca.crt ca.key --profile root-ca --not-after 8760h --no-password --insecure --kty RSA --size 4096 --force
 
 label:
 	kubectl get nodes -o json | jq -r '.items[].metadata.name' | runmany 'kubectl label --overwrite node $$1 node.kubernetes.io/instance-type=t3.medium'
+
+iam:
+	export AWS_PAGER= OPENID="$$(cue export --out json -e class.discovery_url | jq -r . | cut -d/ -f3)" HOST=$(INFRA_NAME) \
+		&& export THUMB="$$(echo \
+			| openssl s_client -servername $${OPENID} -showcerts -connect $${OPENID}:443 2> /dev/null \
+			| sed -n -e '/BEGIN/h' -e '/BEGIN/,/END/H' -e '$$x' -e '$$p' \
+			| tail +2 \
+			| openssl x509 -fingerprint -noout \
+			| sed -e "s/.*=//" -e "s/://g" \
+			| tr "A-F" "a-f")" \
+		&& set -x \
+		&& (aws iam create-open-id-connect-provider \
+			--url "https://$$OPENID/openid" \
+			--client-id-list "sts.amazonaws.com" \
+			--thumbprint-list "$${THUMB}") || true \
+		&& (aws iam create-role \
+				--role-name $${HOST}-cluster \
+				--assume-role-policy-document \
+				file://<(env ACCOUNT_ID=$(shell  aws sts get-caller-identity | jq -r '.Account') OPENID=$${OPENID}/openid envsubst <../trust-policy.json) \
+			|| \
+			aws iam update-assume-role-policy \
+				--role-name $${HOST}-cluster \
+				--policy-document \
+				file://<(env ACCOUNT_ID=$(shell  aws sts get-caller-identity | jq -r '.Account') OPENID=$${OPENID}/openid envsubst <../trust-policy.json) \
+			) \
+		&& (aws iam attach-role-policy \
+			--role-name $${HOST}-cluster \
+			--policy-arn arn:aws:iam::aws:policy/AdministratorAccess || true)
