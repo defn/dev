@@ -72,6 +72,7 @@ function make_up {
 	b out //k:deploy_crd_${cluster_name} | kubectl --context ${cluster_name} apply --server-side -f -
 	kubectl --context ${cluster_name} create ns argocd || true
 	kubectl --context ${cluster_name} create ns kyverno || true
+	export cluster_name
 	runmany 'cd k && b out deploy_yaml_${cluster_name}-cluster-$1 | kubectl --context ${cluster_name} apply -f -' coredns cilium argo-cd
 
 	make_argocd
