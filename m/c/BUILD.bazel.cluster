@@ -1,0 +1,8 @@
+load("//b/cue:cue.bzl", "cue_export")
+
+cue_export(
+    name = "config",
+    srcs = ["//c:common"],
+    cues = glob(["*.cue"]) + ["//c:common"],
+    visibility = ["//visibility:public"],
+)

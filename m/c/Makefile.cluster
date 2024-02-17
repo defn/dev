@@ -30,13 +30,13 @@ irsa:
 	cue export -e class.discovery --out=json | jq . > openid/.well-known/openid-configuration
 	rm -vf system.*
 
-k3s-secrets: ca.key ca.crt
+k3s-secrets: ../ca.key ../ca.crt
 	-kubectl --context $(INFRA_NAME) create namespace cert-manager
-	-kubectl --context $(INFRA_NAME) create secret generic -n kube-system cilium-ca --from-file=ca.key --from-file=ca.crt
-	-kubectl --context $(INFRA_NAME) create secret generic -n cert-manager cilium-ca --from-file=tls.key=ca.key --from-file=tls.crt=ca.crt
+	-kubectl --context $(INFRA_NAME) create secret generic -n kube-system cilium-ca --from-file=ca.key --from-file=../ca.crt
+	-kubectl --context $(INFRA_NAME) create secret generic -n cert-manager cilium-ca --from-file=tls.key=ca.key --from-file=tls.crt=../ca.crt
 
-ca.key ca.crt:
-	step certificate create cilium-ca ca.crt ca.key --profile root-ca --not-after 8760h --no-password --insecure --kty RSA --size 4096 --force
+../ca.key ../ca.crt:
+	step certificate create cilium-ca ../ca.crt ../ca.key --profile root-ca --not-after 8760h --no-password --insecure --kty RSA --size 4096 --force
 
 label:
 	kubectl get nodes -o json | jq -r '.items[].metadata.name' | runmany 'kubectl label --overwrite node $$1 node.kubernetes.io/instance-type=t3.medium'
