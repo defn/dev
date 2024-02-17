@@ -108,7 +108,6 @@ password-store:
 
 gpg:
 	$(MARK) configure gpg
-	if test -d ~/.password-store/config/gnupg-config/.; then t rsync_gnugpg_config rsync -ia ~/.password-store/config/gnupg-config/. ~/.gnupg/.; fi
 	t make_perms $(MAKE) perms
 	if [[ "$(shell uname -s)" == "Darwin" ]]; then t make_macos $(MAKE) macos; fi
 	if test -d /run/user; then \
