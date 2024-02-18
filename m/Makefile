@@ -146,10 +146,8 @@ up:
 down:
 	bin/make-k3s down
 
-cluster-ready:
-# look for the cluster app to become Healthy
-# argocd             0s          Normal    ResourceUpdated                  application/coder-amanibhavam-school-cluster                         Updated health status: Progressing -> Healthy
-	true
+healthy:
+	app wait argocd/$(env) --health
 
 ready:
 	$(MAKE) k3s-restart-irsa
