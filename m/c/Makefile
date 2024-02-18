@@ -11,7 +11,10 @@ list:
 test:
 # make test
 	kubectl --context $(env) delete ns cilium-test || true
+	pkill -f cilium.hubble.port-forwar[d] || true
+	cilium hubble port-forward &
 	cilium connectivity test --context $(env)
+	pkill -f cilium.hubble.port-forwar[d] || true
 	kubectl --context $(env) delete ns cilium-test || true
 
 disconnect:

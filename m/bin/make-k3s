@@ -63,7 +63,7 @@ function make_up {
 	sudo cp registries.yaml /etc/rancher/k3s/
 	k3sup install --local --context ${cluster_name} --local-path ~/.kube/config --merge \
 		--k3s-version "$(cd c/${cluster_name} && cue export --out json -e class.infra_k3s_version | jq -r . | cut -d: -f2 | sed 's#-#+#')" \
-		--k3s-extra-args "--node-ip "${container_ip}" --disable-network-policy --disable=traefik --flannel-backend=none --kube-apiserver-arg=--service-account-issuer=$(cd c/${cluster_name} && cue export --out json -e class.discovery_url | jq -r .)/openid --kube-apiserver-arg=--api-audiences=https://kubernetes.default.svc.cluster.local,sts.amazonaws.com --tls-san=${cluster_name} --cluster-cidr=${infra_pod_cidr} --service-cidr=${infra_service_cidr} --kubelet-arg=eviction-hard=memory.available<500Mi -kubelet-arg=eviction-hard=nodefs.available<5%"
+		--k3s-extra-args "--node-ip "${container_ip}" --disable-network-policy --disable=traefik --disable=servicelb --flannel-backend=none --kube-apiserver-arg=--service-account-issuer=$(cd c/${cluster_name} && cue export --out json -e class.discovery_url | jq -r .)/openid --kube-apiserver-arg=--api-audiences=https://kubernetes.default.svc.cluster.local,sts.amazonaws.com --tls-san=${cluster_name} --cluster-cidr=${infra_pod_cidr} --service-cidr=${infra_service_cidr} --kubelet-arg=eviction-hard=memory.available<500Mi -kubelet-arg=eviction-hard=nodefs.available<5%"
 
 	# oidc
 	(cd c/${cluster_name} && make secrets)
