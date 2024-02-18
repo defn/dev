@@ -8,6 +8,7 @@ teacher: bootstrap: k3s_bootstrap & {
 	"traefik": {}
 	"external-dns": {}
 	"crossdemo": {}
+	"deathstar": {}
 }
 
 class: {
