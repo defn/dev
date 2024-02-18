@@ -31,8 +31,8 @@ connect:
 # make connect from=coder-amanibhavam-district to=coder-amanibhavam-school
 	cd .. && $(MAKE) tailscale-kubeconfig env=$(from)
 	$(MAKE) connect_inner from=$(from) to=$(to) \
-		sourcepoint=$$(kubectl --context $(to) get services -n kube-system -o json clustermesh-apiserver | jq -r '.spec.clusterIP'):2379 \
-		endpoint=$$(kubectl --context $(from) get services -n kube-system -o json clustermesh-apiserver | jq -r '.spec.clusterIP'):2379
+		sourcepoint=$$(kubectl --context $(from) get services -n kube-system -o json clustermesh-apiserver | jq -r '.spec.clusterIP'):2379 \
+		endpoint=$$(kubectl --context $(to) get services -n kube-system -o json clustermesh-apiserver | jq -r '.spec.clusterIP'):2379
 	cilium clustermesh status --context $(to) --wait
 
 connect_inner:
