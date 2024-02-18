@@ -192,4 +192,4 @@ ssh-config:
 
 reboot:
 	sync
-	($(MAKE) down & sleep 30; sudo reboot) &
+	($(MAKE) down & sleep 60; sudo reboot) &
