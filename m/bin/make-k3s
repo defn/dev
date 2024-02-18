@@ -126,6 +126,7 @@ function main {
 		else
 			cluster_name="$(cd ~/m/c/$(uname -n) && cue eval -e class.cluster_name | jq -r .)"
 		fi
+		infra_cidr_16="$(cd ~/m/c/${cluster_name} && cue eval -e class.infra_cidr_16 | jq -r .)"
 		infra_pod_cidr="$(cd ~/m/c/${cluster_name} && cue eval -e class.infra_pod_cidr | jq -r .)"
 		infra_service_cidr="$(cd ~/m/c/${cluster_name} && cue eval -e class.infra_service_cidr | jq -r .)"
 		;;
