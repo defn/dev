@@ -992,7 +992,7 @@ cilium_common: {
 			clustermesh: {
 				useAPIServer: true
 				apiserver: {
-					service: type: "LoadBalancer"
+					service: type: "ClusterIP"
 					tls: auto: {
 						method: "certmanager"
 						certManagerIssuerRef: {
