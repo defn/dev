@@ -22,6 +22,7 @@ cluster_apps = [
     "coder-amanibhavam-district-cluster-crossplane",
     "coder-amanibhavam-district-cluster-crossprovider",
     "coder-amanibhavam-district-cluster-crossdemo",
+    "coder-amanibhavam-district-cluster-deathstar",
     #
     "coder-amanibhavam-district0-cluster-env",
     "coder-amanibhavam-district0-cluster-argo-cd",
@@ -50,6 +51,7 @@ cluster_apps = [
     "coder-amanibhavam-school-cluster-crossplane",
     "coder-amanibhavam-school-cluster-crossprovider",
     "coder-amanibhavam-school-cluster-crossdemo",
+    "coder-amanibhavam-school-cluster-xwing",
 ]
 
 cluster = {
