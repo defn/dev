@@ -3113,6 +3113,32 @@ kustomize: "deathstar": #Kustomize & {
 		}
 	}
 
+	resource: "deployment-spaceship": {
+		apiVersion: "apps/v1"
+		kind:       "Deployment"
+		metadata: name: "spaceship"
+		spec: {
+			selector: matchLabels: {
+				name:  "spaceship"
+				org:   "empire"
+				class: "spaceship"
+			}
+			replicas: 4
+			template: {
+				metadata: labels: {
+					name:  "spaceship"
+					org:   "empire"
+					class: "spaceship"
+				}
+				spec: containers: [{
+					name:            "spaceship"
+					image:           "docker.io/tgraf/netperf:v1.0"
+					imagePullPolicy: "IfNotPresent"
+				}]
+			}
+		}
+	}
+
 	resource: "ciliumnetworkpolicy-deathstar-blueprints": {
 		apiVersion: "cilium.io/v2"
 		kind:       "CiliumNetworkPolicy"
@@ -3167,40 +3193,6 @@ kustomize: "deathstar": #Kustomize & {
 					}]
 				}]
 			}]
-		}
-	}
-}
-
-kustomize: "spaceship": #Kustomize & {
-	cluster: #Cluster
-
-	namespace: "default"
-
-	resource: "service-deathstar": #resource["service-deathstar"]
-
-	resource: "deployment-spaceship": {
-		apiVersion: "apps/v1"
-		kind:       "Deployment"
-		metadata: name: "spaceship"
-		spec: {
-			selector: matchLabels: {
-				name:  "spaceship"
-				org:   "empire"
-				class: "spaceship"
-			}
-			replicas: 4
-			template: {
-				metadata: labels: {
-					name:  "spaceship"
-					org:   "empire"
-					class: "spaceship"
-				}
-				spec: containers: [{
-					name:            "spaceship"
-					image:           "docker.io/tgraf/netperf:v1.0"
-					imagePullPolicy: "IfNotPresent"
-				}]
-			}
 		}
 	}
 }

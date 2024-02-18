@@ -99,10 +99,10 @@ xwing-visit:
 	kubectl exec --context coder-amanibhavam-school -ti deploy/xwing -- curl -XGET deathstar.default.svc.cluster.local/v1/
 
 spaceship-attack:
-	kubectl exec --context coder-amanibhavam-school -ti deploy/spaceship -- curl -XPUT -H 'X-Has-Force: True' deathstar.default.svc.cluster.local/v1/exhaust-port
+	kubectl exec --context coder-amanibhavam-district -ti deploy/spaceship -- curl -XPUT -H 'X-Has-Force: True' deathstar.default.svc.cluster.local/v1/exhaust-port
 
 spaceship-visit:
-	kubectl exec --context coder-amanibhavam-school -ti deploy/spaceship -- curl -XGET deathstar.default.svc.cluster.local/v1/
+	kubectl exec --context coder-amanibhavam-district -ti deploy/spaceship -- curl -XGET deathstar.default.svc.cluster.local/v1/
 
 mirrord-attack:
 	mirrord exec -f ~/m/mirrord.json --context coder-amanibhavam-district -- curl -XPUT -H 'X-Has-Mirrord: True' deathstar.default.svc.cluster.local/v1/exhaust-port
