@@ -30,7 +30,7 @@ irsa:
 	cue export -e class.discovery --out=json | jq . > openid/.well-known/openid-configuration
 	aws s3 sync openid s3://$(INFRA_NAME)-oidc-origin/openid
 	aws cloudfront create-invalidation --distribution-id $$(env AWS_DEFAULT_REGION=us-west-2 aws resourcegroupstaggingapi get-resources --tag-filters Key=Name,Values=${INFRA_NAME}-oidc --region=us-east-1 | jq -r '.ResourceTagMappingList[].ResourceARN' | cut -d/ -f2) --paths '/*' || true
-	rm -vf system.* openid
+	rm -rf system.* openid
 
 k3s-secrets: ../ca.key ../ca.crt
 	-kubectl --context $(INFRA_NAME) create namespace cert-manager
