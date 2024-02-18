@@ -497,7 +497,7 @@ kustomize: "external-secrets": #KustomizeHelm & {
 	helm: {
 		release: "external-secrets"
 		name:    "external-secrets"
-		version: "0.9.12"
+		version: "0.9.13"
 		repo:    "https://charts.external-secrets.io"
 		values: {
 			webhook: create:        false
@@ -2053,7 +2053,7 @@ kustomize: "argo-workflows": #KustomizeHelm & {
 		release:   "argo-workflows"
 		name:      "argo-workflows"
 		namespace: "argo-workflows"
-		version:   "0.40.10"
+		version:   "0.40.11"
 		repo:      "https://argoproj.github.io/argo-helm"
 		values: {
 			controller: workflowNamespaces: [
