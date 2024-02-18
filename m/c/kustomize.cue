@@ -1010,7 +1010,7 @@ cilium_common: {
 				}
 			}
 			encryption: {
-				enabled:        true
+				enabled:        false
 				type:           "wireguard"
 				nodeEncryption: true
 			}
