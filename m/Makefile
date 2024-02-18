@@ -147,7 +147,7 @@ down:
 	bin/make-k3s down
 
 healthy:
-	app wait argocd/$(env)-cluster --health
+	while ! app wait argocd/$(env)-cluster --health; do sleep 5; done
 
 ready:
 	$(MAKE) k3s-restart-irsa
