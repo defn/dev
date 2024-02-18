@@ -192,4 +192,4 @@ ssh-config:
 
 reboot:
 	sync
-	($(MAKE) down & sleep 60; sudo reboot) &
+	($(MAKE) down & sleep 60; sudo rm -rf /var/lib/rancher; sudo reboot) &
