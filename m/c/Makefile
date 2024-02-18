@@ -75,15 +75,15 @@ test-all:
 	$(MAKE) test-mesh from=coder-amanibhavam-school   to=coder-amanibhavam-district
 
 status:
-	@mark cilium
-	k --context=$(env) exec -n kube-system -ti ds/cilium -- cilium status
-	@mark clustermesh
-	k --context=$(env) exec -n kube-system -ti ds/cilium -- cilium-health status
 	@mark hubble
 	k --context=$(env) exec -n kube-system ds/cilium -- hubble status
+	@mark cilium
+	k --context=$(env) exec -n kube-system -ti ds/cilium -- cilium status
 	@mark cli
 	cilium status --context=$(env)
 	cilium clustermesh status --context=$(env)
+	@mark clustermesh
+	k --context=$(env) exec -n kube-system -ti ds/cilium -- cilium-health status
 
 # https://github.com/cilium/cilium/issues/13766
 restart-cilium:
