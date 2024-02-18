@@ -42,13 +42,12 @@ test-mesh:
 # make test-mesh from=coder-amanibhavam-school to=coder-amanibhavam-district
 	kubectl --context $(from) delete ns cilium-test || true
 	kubectl --context $(to) delete ns cilium-test || true
-	if !cilium connectivity test --context $(from) --multi-cluster $(to) --test '!/node-to-node-encryption' --test '!/no-unexpected-packet-drops'; then \
-		kubectl --context $(from) delete ns cilium-test || true; \
-		kubectl --context $(from) delete ns cilium-test || true; \
-	else; \
-		kubectl --context $(to) delete ns cilium-test; \
-		kubectl --context $(to) delete ns cilium-test; \
-	fi
+	pkill -f cilium.hubble.port-forwar[d] || true
+	cilium hubble port-forward &
+	cilium connectivity test --context $(from) --multi-cluster $(to) || true
+	pkill -f cilium.hubble.port-forwar[d] || true
+	kubectl --context $(to) delete ns cilium-test || true; \
+	kubectl --context $(to) delete ns cilium-test || true; \
 
 config-district:
 	cd .. && $(MAKE) tailscale-kubeconfig env=coder-amanibhavam-district
