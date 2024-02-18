@@ -22,12 +22,10 @@ disconnect:
 	cilium clustermesh disconnect --context $(from) --destination-context=$(to)
 
 disconnect-all:
-	$(MAKE) disconnect from=coder-amanibhavam-district to=coder-amanibhavam-district
-	$(MAKE) disconnect from=coder-amanibhavam-district to=coder-amanibhavam-school
-	$(MAKE) disconnect from=coder-amanibhavam-school to=coder-amanibhavam-school
-	$(MAKE) disconnect from=coder-amanibhavam-school to=coder-amanibhavam-district
-	echo; cilium clustermesh status --context=coder-amanibhavam-district --wait
-	echo; cilium clustermesh status --context=coder-amanibhavam-school --wait
+	$(MAKE) disconnect from=coder-amanibhavam-district to=coder-amanibhavam-district || true
+	$(MAKE) disconnect from=coder-amanibhavam-district to=coder-amanibhavam-school || true
+	$(MAKE) disconnect from=coder-amanibhavam-school to=coder-amanibhavam-school || true
+	$(MAKE) disconnect from=coder-amanibhavam-school to=coder-amanibhavam-district || true
 
 connect:
 # make connect from=coder-amanibhavam-district to=coder-amanibhavam-school
