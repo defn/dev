@@ -99,27 +99,27 @@ restart-cilium:
 	#kubectl --context=$(env) -n kube-system rollout restart deploy clustermesh-apiserveapiserverr
 
 xwing-attack:
-	kubectl exec --context coder-amanibhavam-school -ti deploy/xwing -- curl -XPUT -H 'X-Has-Force: True' deathstar.default.svc.cluster.local/v1/exhaust-port
+	kubectl exec --context coder-amanibhavam-school -ti deploy/xwing -- curl -XPUT -H 'X-Has-Force: True' deathstar.default.svc.cluster.local/v1/exhaust-port | bat
 
 xwing-visit:
-	kubectl exec --context coder-amanibhavam-school -ti deploy/xwing -- curl -XGET deathstar.default.svc.cluster.local/v1/
+	kubectl exec --context coder-amanibhavam-school -ti deploy/xwing -- curl -XGET deathstar.default.svc.cluster.local/v1/ | bat
 
 spaceship-attack:
-	kubectl exec --context coder-amanibhavam-district -ti deploy/spaceship -- curl -XPUT -H 'X-Has-Force: True' deathstar.default.svc.cluster.local/v1/exhaust-port
+	kubectl exec --context coder-amanibhavam-district -ti deploy/spaceship -- curl -XPUT -H 'X-Has-Force: True' deathstar.default.svc.cluster.local/v1/exhaust-port | bat
 
 spaceship-visit:
-	kubectl exec --context coder-amanibhavam-district -ti deploy/spaceship -- curl -XGET deathstar.default.svc.cluster.local/v1/
+	kubectl exec --context coder-amanibhavam-district -ti deploy/spaceship -- curl -XGET deathstar.default.svc.cluster.local/v1/ | bat
 
 mirrord-attack:
-	mirrord exec -f ~/m/mirrord.json --context coder-amanibhavam-district -- curl -XPUT -H 'X-Has-Mirrord: True' deathstar.default.svc.cluster.local/v1/exhaust-port
+	mirrord exec -f ~/m/mirrord.json --context coder-amanibhavam-district -- curl -XPUT -H 'X-Has-Mirrord: True' deathstar.default.svc.cluster.local/v1/exhaust-port | bat
 
 mirrord-visit:
-	mirrord exec -f ~/m/mirrord.json --context coder-amanibhavam-district -- curl -XGET deathstar.default.svc.cluster.local/v1/
+	mirrord exec -f ~/m/mirrord.json --context coder-amanibhavam-district -- curl -XGET deathstar.default.svc.cluster.local/v1/ | bat
 
 deathstar:
-	$(MAKE) mirrord-visit; echo; echo
-	$(MAKE) xwing-visit; echo; echo
-	$(MAKE) spaceship-attack; echo; echo
-	$(MAKE) spaceship-visit; echo; echo
-	$(MAKE) xwing-attack; echo; echo
-	$(MAKE) mirrord-attack; echo; echo
+#	$(MAKE) mirrord-visit; echo; echo
+	$(MAKE) xwing-visit
+	$(MAKE) spaceship-attack
+	$(MAKE) spaceship-visit
+	$(MAKE) xwing-attack
+#	$(MAKE) mirrord-attack; echo; echo
