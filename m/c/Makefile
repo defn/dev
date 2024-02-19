@@ -30,7 +30,7 @@ disconnect-all:
 connect:
 # make connect from=coder-amanibhavam-district to=coder-amanibhavam-school
 	cd .. && $(MAKE) tailscale-kubeconfig env=$(from)
-	kubectl config use-context $(env)
+	cd .. && $(MAKE) tailscale-kubeconfig env=$(to)
 	$(MAKE) connect_inner from=$(from) to=$(to) \
 		sourcepoint=$$(kubectl --context $(from) get services -n kube-system -o json clustermesh-apiserver | jq -r '.spec.clusterIP'):2379 \
 		endpoint=$$(kubectl --context $(to) get services -n kube-system -o json clustermesh-apiserver | jq -r '.spec.clusterIP'):2379
