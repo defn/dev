@@ -1109,7 +1109,7 @@ kustomize: "tetragon": #KustomizeHelm & {
 kustomize: "tailscale": #Kustomize & {
 	cluster: #Cluster
 
-	#version: "5bd19fd"
+	#version: "v1.60.0"
 
 	resource: "tailscale-operator": {
 		url: "https://raw.githubusercontent.com/tailscale/tailscale/\(#version)/cmd/k8s-operator/deploy/manifests/operator.yaml"
