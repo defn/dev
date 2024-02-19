@@ -90,7 +90,7 @@ restart-cilium:
 	kubectl --context=$(env) -n kube-system rollout restart ds cilium 
 	kubectl --context=$(env) -n kube-system rollout restart deploy hubble-relay
 	kubectl --context=$(env) -n kube-system rollout restart deploy hubble-ui
-	kubectl --context=$(env) -n kube-system rollout restart deploy clustermesh-apiserver
+	kubectl --context=$(env) -n kube-system rollout restart deploy clustermesh-apiserveapiserverr
 
 xwing-attack:
 	kubectl exec --context coder-amanibhavam-school -ti deploy/xwing -- curl -XPUT -H 'X-Has-Force: True' deathstar.default.svc.cluster.local/v1/exhaust-port
