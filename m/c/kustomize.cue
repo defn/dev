@@ -976,7 +976,7 @@ cilium_common: {
 
 			ipam: operator: clusterPoolIPv4PodCIDRList: class.infra_pod_cidr
 
-			routingMode: "tunnel"
+			// routingMode: "tunnel"
 			loadBalancer: algorithm: "maglev"
 			socketLB: enabled:       true
 
