@@ -25,6 +25,8 @@ disconnect:
 	cilium clustermesh disconnect --context $(from) --destination-context=$(to)
 
 disconnect-all:
+	cd .. && $(MAKE) tailscale-kubeconfig env=coder-amanibhavam-district
+	cd .. && $(MAKE) tailscale-kubeconfig env=coder-amanibhavam-school
 	$(MAKE) disconnect from=coder-amanibhavam-district to=coder-amanibhavam-district || true
 	$(MAKE) disconnect from=coder-amanibhavam-district to=coder-amanibhavam-school || true
 	$(MAKE) disconnect from=coder-amanibhavam-school to=coder-amanibhavam-school || true
