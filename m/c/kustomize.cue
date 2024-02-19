@@ -985,14 +985,14 @@ cilium_common: {
 				masquerade:          true
 			}
 
-			nodePort: enabled:          true
-			hostPort: enabled:          true
-			hostFirewall: enabled:      true
-			externalWorkloads: enabled: true
-			externalIPs: enabled:       true
+			nodePort: enabled:     true
+			hostPort: enabled:     true
+			hostFirewall: enabled: true
+			externalIPs: enabled:  true
 
 			envoy: enabled: true
 
+			externalWorkloads: enabled: false
 			kubeProxyReplacement: false
 			ingressController: enabled: false
 
