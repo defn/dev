@@ -1113,7 +1113,7 @@ kustomize: "tailscale": #Kustomize & {
 		patches: [{
 			op:    "replace"
 			path:  "/spec/template/spec/containers/0/env/1/value"
-			value: "\(cluster.cluster_name)-proxy"
+			value: "\(cluster.cluster_name)-proxy1"
 		}, {
 			op:    "replace"
 			path:  "/spec/template/spec/containers/0/env/3/value"
