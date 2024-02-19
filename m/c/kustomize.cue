@@ -1004,10 +1004,7 @@ cilium_common: {
 			clustermesh: {
 				useAPIServer: true
 				apiserver: {
-					service: {
-						type:                  "ClusterIP"
-						externalTrafficPolicy: "ClusterIP"
-					}
+					service: type: "ClusterIP"
 					tls: auto: {
 						method: "certmanager"
 						certManagerIssuerRef: {
