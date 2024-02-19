@@ -40,6 +40,8 @@ connect:
 # make connect from=coder-amanibhavam-district to=coder-amanibhavam-school
 	cd .. && $(MAKE) tailscale-kubeconfig env=$(from)
 	cd .. && $(MAKE) tailscale-kubeconfig env=$(to)
+	while test -z "$$(kubectl --context $(from) get services -n kube-system -o json clustermesh-apiserver | jq -r '.spec.clusterIP' || true)"; do sleep 5; done
+	while test -z "$$(kubectl --context $(to) get services -n kube-system -o json clustermesh-apiserver | jq -r '.spec.clusterIP' || true)"; do sleep 5; done
 	$(MAKE) connect_inner from=$(from) to=$(to) \
 		sourcepoint=$$(kubectl --context $(from) get services -n kube-system -o json clustermesh-apiserver | jq -r '.spec.clusterIP'):2379 \
 		endpoint=$$(kubectl --context $(to) get services -n kube-system -o json clustermesh-apiserver | jq -r '.spec.clusterIP'):2379
