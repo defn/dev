@@ -990,9 +990,10 @@ cilium_common: {
 			nodePort: enabled:          true
 			hostPort: enabled:          true
 			hostFirewall: enabled:      true
-			ingressController: enabled: true
 			externalWorkloads: enabled: true
 			externalIPs: enabled:       true
+
+			ingressController: enabled: false
 
 			rollOutCiliumPods: true
 
