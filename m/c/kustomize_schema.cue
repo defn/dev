@@ -40,6 +40,7 @@ kustomize: [NAME=string]: _name: NAME
 	infra_cilium_id:   >=0
 	infra_cilium_id:   <=255
 
+	cluster_ip: string
 	cluster_name: string
 	name_suffix:  string
 
