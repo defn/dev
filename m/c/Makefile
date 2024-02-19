@@ -81,14 +81,14 @@ test-all:
 
 status:
 	@mark hubble
-	k --context=$(env) exec -n kube-system ds/cilium -- hubble status
+	k --context=$(env) exec -n kube-system ds/cilium -- hubble status | bat
 	@mark cilium
-	k --context=$(env) exec -n kube-system -ti ds/cilium -- cilium status
+	k --context=$(env) exec -n kube-system -ti ds/cilium -- cilium status | bat
 	@mark cli
 	cilium status --context=$(env)
-	cilium clustermesh status --context=$(env)
+	cilium clustermesh status --context=$(env) | bat
 	@mark clustermesh
-	k --context=$(env) exec -n kube-system -ti ds/cilium -- cilium-health status
+	k --context=$(env) exec -n kube-system -ti ds/cilium -- cilium-health status | bat
 
 # https://github.com/cilium/cilium/issues/13766
 restart-cilium:
