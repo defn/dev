@@ -26,6 +26,7 @@ pkg/coder/.direnv
 pkg/codeserver/.direnv
 pkg/coredns/.direnv
 pkg/cosign/.direnv
+pkg/crossplane/.direnv
 pkg/cue/.direnv
 pkg/dapr/.direnv
 pkg/dev/.direnv
@@ -65,8 +66,10 @@ pkg/packer/.direnv
 pkg/pkg/.direnv
 pkg/pydev/.direnv
 pkg/remotedev/.direnv
+pkg/rustdev/.direnv
 pkg/secrets/.direnv
 pkg/shell/.direnv
+pkg/spire/.direnv
 pkg/step/.direnv
 pkg/stern/.direnv
 pkg/tailscale/.direnv
@@ -102,6 +105,7 @@ pkg/coder/result
 pkg/codeserver/result
 pkg/coredns/result
 pkg/cosign/result
+pkg/crossplane/result
 pkg/cue/result
 pkg/dapr/result
 pkg/dev/result
@@ -141,8 +145,10 @@ pkg/packer/result
 pkg/pkg/result
 pkg/pydev/result
 pkg/remotedev/result
+pkg/rustdev/result
 pkg/secrets/result
 pkg/shell/result
+pkg/spire/result
 pkg/step/result
 pkg/stern/result
 pkg/tailscale/result
