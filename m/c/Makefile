@@ -105,22 +105,22 @@ restart-cilium:
 	#kubectl --context=$(env) -n kube-system rollout restart deploy clustermesh-apiserveapiserverr
 
 xwing-attack:
-	kubectl exec --context coder-amanibhavam-school -ti deploy/xwing -- curl -XPUT -H 'X-Has-Force: True' deathstar.default.svc.cluster.local/v1/exhaust-port | bat
+	kubectl exec --context coder-amanibhavam-school -ti deploy/xwing -- curl -sSL -XPUT -H 'X-Has-Force: True' deathstar.default.svc.cluster.local/v1/exhaust-port | bat
 
 xwing-visit:
-	kubectl exec --context coder-amanibhavam-school -ti deploy/xwing -- curl -XGET deathstar.default.svc.cluster.local/v1/ | bat
+	kubectl exec --context coder-amanibhavam-school -ti deploy/xwing -- curl -sSL -XGET deathstar.default.svc.cluster.local/v1/ | bat
 
 spaceship-attack:
-	kubectl exec --context coder-amanibhavam-district -ti deploy/spaceship -- curl -XPUT -H 'X-Has-Force: True' deathstar.default.svc.cluster.local/v1/exhaust-port | bat
+	kubectl exec --context coder-amanibhavam-district -ti deploy/spaceship -- curl -sSL -XPUT -H 'X-Has-Force: True' deathstar.default.svc.cluster.local/v1/exhaust-port | bat
 
 spaceship-visit:
-	kubectl exec --context coder-amanibhavam-district -ti deploy/spaceship -- curl -XGET deathstar.default.svc.cluster.local/v1/ | bat
+	kubectl exec --context coder-amanibhavam-district -ti deploy/spaceship -- curl -sSL -XGET deathstar.default.svc.cluster.local/v1/ | bat
 
 mirrord-attack:
-	mirrord exec -f ~/m/mirrord.json --context coder-amanibhavam-district -- curl -XPUT -H 'X-Has-Mirrord: True' deathstar.default.svc.cluster.local/v1/exhaust-port | bat
+	mirrord exec -f ~/m/mirrord.json --context coder-amanibhavam-district -- curl -sSL -XPUT -H 'X-Has-Mirrord: True' deathstar.default.svc.cluster.local/v1/exhaust-port | bat
 
 mirrord-visit:
-	mirrord exec -f ~/m/mirrord.json --context coder-amanibhavam-district -- curl -XGET deathstar.default.svc.cluster.local/v1/ | bat
+	mirrord exec -f ~/m/mirrord.json --context coder-amanibhavam-district -- curl -sSL -XGET deathstar.default.svc.cluster.local/v1/ | bat
 
 deathstar:
 #	$(MAKE) mirrord-visit; echo; echo
