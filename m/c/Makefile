@@ -109,3 +109,11 @@ mirrord-attack:
 
 mirrord-visit:
 	mirrord exec -f ~/m/mirrord.json --context coder-amanibhavam-district -- curl -XGET deathstar.default.svc.cluster.local/v1/
+
+deathstar:
+	$(MAKE) mirrord-visit; echo; echo
+	$(MAKE) xwing-visit; echo; echo
+	$(MAKE) spaceship-attack; echo; echo
+	$(MAKE) spaceship-visit; echo; echo
+	$(MAKE) xwing-attack; echo; echo
+	$(MAKE) mirrord-attack; echo; echo
