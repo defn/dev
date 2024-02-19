@@ -978,18 +978,18 @@ cilium_common: {
 
 			routingMode: "tunnel"
 			loadBalancer: algorithm: "maglev"
-			socketLB: enabled: true
+			socketLB: enabled:       true
 
 			bpf: {
 				lbExternalClusterIP: true
 				masquerade:          true
 			}
 
-			nodePort: enabled:     true
-			hostPort: enabled:     true
-			hostFirewall: enabled: true
+			nodePort: enabled:          true
+			hostPort: enabled:          true
+			hostFirewall: enabled:      true
 			externalWorkloads: enabled: true
-			externalIPs: enabled: true
+			externalIPs: enabled:       true
 
 			envoy: enabled: true
 
@@ -1003,12 +1003,9 @@ cilium_common: {
 
 			clustermesh: {
 				useAPIServer: true
-			apiserver.
-
-
 				apiserver: {
 					service: {
-						type: "ClusterIP"
+						type:                  "ClusterIP"
 						externalTrafficPolicy: "ClusterIP"
 					}
 					tls: auto: {
