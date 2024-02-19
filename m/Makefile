@@ -176,9 +176,10 @@ k3s-advertise-traefik:
 
 tailscale-kubeconfig:
 	-kubectl config delete-context $(env)-proxy
-	tailscale configure kubeconfig $(env)-proxy
+	-kubectl config delete-context $(env)-proxy1
 	-kubectl config delete-context $(env)
-	kubectl config rename-context $(env)-proxy.$(shell tailscale cert 2>&1 | grep 'use ' | cut -d'"' -f2 | cut -d. -f2-) $(env)
+	tailscale configure kubeconfig $(env)-proxy1
+	kubectl config rename-context $(env)-proxy1.$(shell tailscale cert 2>&1 | grep 'use ' | cut -d'"' -f2 | cut -d. -f2-) $(env)
 
 hello:
 	test "$$(pass hello)" == world
