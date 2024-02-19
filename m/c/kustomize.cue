@@ -979,9 +979,12 @@ cilium_common: {
 
 			ipam: operator: clusterPoolIPv4PodCIDRList: class.infra_pod_cidr
 
+			kubeProxyReplacement: true
+			k8sServiceHost:       cluster.cluster_ip
+			k8sServicePort:       "6443"
+
 			loadBalancer: algorithm: "maglev"
 			socketLB: enabled:       true
-			kubeProxyReplacement: false
 			bpf: {
 				lbExternalClusterIP: true
 				masquerade:          true
