@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# count: 9
+# count: 11
 
 function main {
 	local app="${in[app]}"
