@@ -972,35 +972,23 @@ cilium_common: {
 		version:   "1.15.1"
 		repo:      "https://helm.cilium.io"
 		values: {
-			operator: replicas: 1
-
-			ipam: operator: clusterPoolIPv4PodCIDRList: class.infra_pod_cidr
-
-			// routingMode: "tunnel"
-			loadBalancer: algorithm: "maglev"
-			socketLB: enabled:       true
-
-			bpf: {
-				lbExternalClusterIP: true
-				masquerade:          true
-			}
-
-			nodePort: enabled:     true
-			hostPort: enabled:     false
-			hostFirewall: enabled: false
-			externalIPs: enabled:  false
-
-			envoy: enabled: true
-
-			externalWorkloads: enabled: false
+			operator: replicas:       1
+			loadBalancer: algorithm:  "maglev"
+			bpf: lbExternalClusterIP: true
+			bpf: masquerade:          true
+			socketLB: enabled:        true
+			envoy: enabled:           true
 			kubeProxyReplacement: false
+			nodePort: enabled:          true
+			hostPort: enabled:          false
+			hostFirewall: enabled:      false
 			ingressController: enabled: false
-
+			externalWorkloads: enabled: false
 			cluster: {
 				name: class.infra_cilium_name
 				id:   class.infra_cilium_id
 			}
-
+			ipam: operator: clusterPoolIPv4PodCIDRList: class.infra_pod_cidr
 			clustermesh: {
 				useAPIServer: true
 				apiserver: {
@@ -1015,20 +1003,17 @@ cilium_common: {
 					}
 				}
 			}
-
 			authentication: {
 				mutual: spire: {
 					enabled: false
 					install: enabled: false
 				}
 			}
-
 			encryption: {
 				enabled:        true
 				type:           "wireguard"
 				nodeEncryption: true
 			}
-
 			hubble: {
 				ui: enabled:    bool | *false
 				relay: enabled: true
