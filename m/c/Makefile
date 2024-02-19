@@ -10,6 +10,7 @@ list:
 
 update:
 	cd ../k && $(MAKE)
+	cd .. && $(MAKE) healthy
 
 reboot:
 	cd .. && $(MAKE) reboot
