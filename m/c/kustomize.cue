@@ -972,16 +972,20 @@ cilium_common: {
 		version:   "1.15.1"
 		repo:      "https://helm.cilium.io"
 		values: {
-			operator: replicas: 1
+			operator: {
+				replicas:    1
+				rollOutPods: true
+			}
 
 			ipam: operator: clusterPoolIPv4PodCIDRList: class.infra_pod_cidr
 
-			loadBalancer: algorithm:  "maglev"
-			bpf: lbExternalClusterIP: true
-			bpf: masquerade:          true
-			socketLB: enabled:        true
-			envoy: enabled:           true
+			loadBalancer: algorithm: "maglev"
+			socketLB: enabled:       true
 			kubeProxyReplacement: false
+			bpf: {
+				lbExternalClusterIP: true
+				masquerade:          true
+			}
 
 			nodePort: enabled:          true
 			hostPort: enabled:          true
@@ -989,6 +993,8 @@ cilium_common: {
 			ingressController: enabled: true
 			externalWorkloads: enabled: true
 			externalIPs: enabled:       true
+
+			rollOutCiliumPods: true
 
 			cluster: {
 				name: class.infra_cilium_name
@@ -1019,9 +1025,19 @@ cilium_common: {
 				enabled:        false
 				nodeEncryption: false
 			}
+			envoy: {
+				enabled:     true
+				rollOutPods: true
+			}
 			hubble: {
-				ui: enabled:    bool | *false
-				relay: enabled: true
+				ui: {
+					enabled:     bool | *false
+					rollOutPods: true
+				}
+				relay: {
+					enabled:     true
+					rollOutPods: true
+				}
 				tls: auto: {
 					enabled: true
 					method:  "certmanager"
