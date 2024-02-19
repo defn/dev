@@ -11,6 +11,9 @@ list:
 update:
 	cd ../k && $(MAKE)
 
+reboot:
+	cd .. && $(MAKE) reboot
+
 test:
 # make test
 	kubectl --context $(env) delete ns cilium-test || true
