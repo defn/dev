@@ -986,9 +986,9 @@ cilium_common: {
 			}
 
 			nodePort: enabled:     true
-			hostPort: enabled:     true
-			hostFirewall: enabled: true
-			externalIPs: enabled:  true
+			hostPort: enabled:     false
+			hostFirewall: enabled: false
+			externalIPs: enabled:  false
 
 			envoy: enabled: true
 
