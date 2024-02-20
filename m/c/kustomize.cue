@@ -1691,7 +1691,7 @@ kustomize: "coder-global": #Kustomize & {
 			type: "ClusterIP"
 			ports: [{
 				name:       "http"
-				port:       "80"
+				port:       80
 				protocol:   "TCP"
 				targetPort: "http"
 			}]
