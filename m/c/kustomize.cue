@@ -113,8 +113,8 @@ kustomize: "argocd-district": #Kustomize & {
 			name:      "argocd-district"
 			namespace: "argocd"
 			annotations: {
-				"io.cilium/global-service":                               "true"
-				"traefik.ingress.kubernetes.io/service.nativelb":         "true"
+				"io.cilium/global-service":                       "true"
+				"traefik.ingress.kubernetes.io/service.nativelb": "true"
 				// "traefik.ingress.kubernetes.io/service.serverstransport": "traefik-insecure@kubernetescrd"
 			}
 		}
@@ -143,8 +143,8 @@ kustomize: "argocd-school": #Kustomize & {
 			name:      "argocd-school"
 			namespace: "argocd"
 			annotations: {
-				"io.cilium/global-service":                               "true"
-				"traefik.ingress.kubernetes.io/service.nativelb":         "true"
+				"io.cilium/global-service":                       "true"
+				"traefik.ingress.kubernetes.io/service.nativelb": "true"
 				// "traefik.ingress.kubernetes.io/service.serverstransport": "traefik-insecure@kubernetescrd"
 			}
 		}
@@ -1588,17 +1588,21 @@ kustomize: "traefik": #KustomizeHelm & {
 			namespace: "traefik"
 		}
 		spec: entryPoints: ["web"]
-		spec: routes: [{
-			match: "HostRegexp(`{subdomain:[a-z0-9-]+}.\(cluster.domain_name)`)"
-			kind:  "Rule"
-			services: [{
-				name: "noop@internal"
-				kind: "TraefikService"
-			}]
-			middlewares: [{
-				name: "http-to-https"
-			}]
-		}]
+		spec: routes: [
+			for n in ["district", "school"] {
+				{
+					match: "HostRegexp(`{subdomain:[a-z0-9-]+}.\(n).\(cluster.handle).\(cluster.domain_zone)`)"
+					kind:  "Rule"
+					services: [{
+						name: "noop@internal"
+						kind: "TraefikService"
+					}]
+					middlewares: [{
+						name: "http-to-https"
+					}]
+				}
+			},
+		]
 	}
 
 	psm: "ingressroute-traefik-dashboard": {
@@ -1782,6 +1786,7 @@ kustomize: "coder-ingress": #Kustomize & {
 					kind:      "Service"
 					port:      80
 					scheme:    "http"
+					nativeLB:  true
 				}]
 			}]
 		}
