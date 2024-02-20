@@ -9,6 +9,7 @@ teacher: bootstrap: k3s_bootstrap & {
 	"external-dns": {}
 	"crossdemo": {}
 	"deathstar": {}
+	"coder-global": {}
 }
 
 class: {
