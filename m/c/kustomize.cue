@@ -4,16 +4,6 @@ import (
 	"encoding/yaml"
 )
 
-class: #Cluster
-
-infra: {
-	[NAME=string]: class
-
-	"\(class.cluster_name)-cluster": {}
-}
-
-kustomize: [string]: cluster: class
-
 env: (#Transform & {
 	transformer: #TransformK3S
 
@@ -25,6 +15,8 @@ env: (#Transform & {
 		app_def:     "library/helm/coder-\(class.handle)-\(class.env)-cluster-env"
 	}
 }).outputs
+
+kustomize: [string]: cluster: class
 
 kustomize: "coder-\(class.handle)-\(class.env)-cluster-env": #KustomizeHelm & {
 	helm: {
@@ -1801,6 +1793,15 @@ kustomize: "coder": #KustomizeHelm & {
 		}
 	}
 
+	psm: "service-coder": {
+		apiVersion: "v1"
+		kind:       "Service"
+		metadata: {
+			name: "coder"
+			annotations: "io.cilium/global-service": "true"
+		}
+	}
+
 	resource: "postgresql": {
 		apiVersion: "acid.zalan.do/v1"
 		kind:       "postgresql"
@@ -1885,25 +1886,27 @@ kustomize: "coder": #KustomizeHelm & {
 		}
 	}
 
-	resource: "ingressroute-coder-wildcard": {
-		apiVersion: "traefik.containo.us/v1alpha1"
-		kind:       "IngressRoute"
-		metadata: {
-			name:      "coder-wildcard"
-			namespace: "coder"
-		}
-		spec: entryPoints: ["websecure"]
-		spec: routes: [{
-			match: "HostRegexp(`{subdomain:[a-z0-9-]+}.coder.\(cluster.domain_name)`)"
-			kind:  "Rule"
-			services: [{
-				name:      "coder"
+	if teacher.bootstrap.traefik != _|_ {
+		resource: "ingressroute-coder-wildcard": {
+			apiVersion: "traefik.containo.us/v1alpha1"
+			kind:       "IngressRoute"
+			metadata: {
+				name:      "coder-wildcard"
 				namespace: "coder"
-				kind:      "Service"
-				port:      80
-				scheme:    "http"
+			}
+			spec: entryPoints: ["websecure"]
+			spec: routes: [{
+				match: "HostRegexp(`{subdomain:[a-z0-9-]+}.coder.\(cluster.domain_name)`)"
+				kind:  "Rule"
+				services: [{
+					name:      "coder"
+					namespace: "coder"
+					kind:      "Service"
+					port:      80
+					scheme:    "http"
+				}]
 			}]
-		}]
+		}
 	}
 
 	resource: "externalsecret-coder": {
@@ -3482,5 +3485,61 @@ kustomize: "crossdemo": #Kustomize & {
 			"namespace": namespace
 		}
 		data: "sample-key": "bar"
+	}
+}
+
+kustomize: "hello": #Kustomize & {
+	#app_ns: "default"
+	#funcs: ["hello", "bye"]
+
+	cluster: #Cluster
+
+	resource: "ingressroute-\(cluster.domain_name)": {
+		apiVersion: "traefik.containo.us/v1alpha1"
+		kind:       "IngressRoute"
+		metadata: {
+			name:      cluster.domain_name
+			namespace: #app_ns
+		}
+		spec: entryPoints: ["websecure"]
+		spec: routes: [{
+			match: "HostRegexp(`{subdomain:[a-z0-9-]+}.default.\(cluster.domain_name)`)"
+			kind:  "Rule"
+			services: [{
+				name:      "kourier-internal"
+				namespace: "kourier-system"
+				kind:      "Service"
+				port:      80
+				scheme:    "http"
+			}]
+		}]
+	}
+
+	for f in #funcs {
+		resource: "kservice-\(f)": {
+			apiVersion: "serving.knative.dev/v1"
+			kind:       "Service"
+			metadata: {
+				//labels: "networking.knative.dev/visibility": "cluster-local"
+				name:      f
+				namespace: #app_ns
+			}
+			spec: {
+				template: spec: {
+					containerConcurrency: 0
+					containers: [{
+						name:  "whoami"
+						image: "containous/whoami:latest"
+						ports: [{
+							containerPort: 80
+						}]
+					}]
+				}
+				traffic: [{
+					latestRevision: true
+					percent:        100
+				}]
+			}
+		}
 	}
 }

@@ -35,6 +35,12 @@ k3s_bootstrap: {
 	"argo-cd": {}
 }
 
+infra: {
+	[NAME=string]: class
+
+	"\(class.cluster_name)-cluster": {}
+}
+
 teacher: {
 	bootstrap: {
 		[NAME=string]: {
@@ -45,7 +51,7 @@ teacher: {
 	}
 }
 
-class: {
+class: #Cluster & {
 	handle:     string
 	env:        string
 	parent_env: string
@@ -89,60 +95,4 @@ class: {
 	infra_cilium_name: cluster_name
 
 	bootstrap: teacher.bootstrap
-}
-
-kustomize: "hello": #Kustomize & {
-	#app_ns: "default"
-	#funcs: ["hello", "bye"]
-
-	cluster: #Cluster
-
-	resource: "ingressroute-\(cluster.domain_name)": {
-		apiVersion: "traefik.containo.us/v1alpha1"
-		kind:       "IngressRoute"
-		metadata: {
-			name:      cluster.domain_name
-			namespace: #app_ns
-		}
-		spec: entryPoints: ["websecure"]
-		spec: routes: [{
-			match: "HostRegexp(`{subdomain:[a-z0-9-]+}.default.\(cluster.domain_name)`)"
-			kind:  "Rule"
-			services: [{
-				name:      "kourier-internal"
-				namespace: "kourier-system"
-				kind:      "Service"
-				port:      80
-				scheme:    "http"
-			}]
-		}]
-	}
-
-	for f in #funcs {
-		resource: "kservice-\(f)": {
-			apiVersion: "serving.knative.dev/v1"
-			kind:       "Service"
-			metadata: {
-				//labels: "networking.knative.dev/visibility": "cluster-local"
-				name:      f
-				namespace: #app_ns
-			}
-			spec: {
-				template: spec: {
-					containerConcurrency: 0
-					containers: [{
-						name:  "whoami"
-						image: "containous/whoami:latest"
-						ports: [{
-							containerPort: 80
-						}]
-					}]
-				}
-				traffic: [{
-					latestRevision: true
-					percent:        100
-				}]
-			}
-		}
-	}
 }
