@@ -39,19 +39,19 @@ local_resource(
 )
 
 # kubernetes tunnel
-local_resource(
-    "kubernetes-tunnel",
-    serve_cmd=[
-        "bash",
-        "-c",
-        """
-            cd
-            source .bash_profile
-	        tailscale serve --bg --https 6556 https+insecure://127.0.0.1:6555
-            exec socat TCP-LISTEN:6555,bind=127.0.0.1,fork TCP:$(ifconfig -a ens5 | grep ' inet ' | awk '{print $2}'):6443
-        """,
-    ],
-)
+#local_resource(
+#    "kubernetes-tunnel",
+#    serve_cmd=[
+#        "bash",
+#        "-c",
+#        """
+#            cd
+#            source .bash_profile
+#	        tailscale serve --bg --https 6556 https+insecure://127.0.0.1:6555
+#            exec socat TCP-LISTEN:6555,bind=127.0.0.1,fork TCP:$(ifconfig -a ens5 | grep ' inet ' | awk '{print $2}'):6443
+#        """,
+#    ],
+#)
 
 # swap
 local_resource(

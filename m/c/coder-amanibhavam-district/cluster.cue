@@ -14,6 +14,5 @@ teacher: bootstrap: k3s_bootstrap & {
 class: {
 	handle:          "amanibhavam"
 	env:             "district"
-	cluster_ip:      "172.31.44.38"
 	infra_cilium_id: 250
 }
