@@ -1,6 +1,8 @@
 package c
 
 teacher: bootstrap: k3s_bootstrap & {
+	"postgres-operator": {}
+	"coder": {}
 	"crossdemo": {}
 	"xwing": {}
 }
