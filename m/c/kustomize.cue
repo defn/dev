@@ -1739,7 +1739,10 @@ kustomize: "coder-global": #Kustomize & {
 		metadata: {
 			name:      "coder-global"
 			namespace: "coder"
-			annotations: "io.cilium/global-service": "true"
+			annotations: {
+				"io.cilium/global-service": "true"
+				"traefik.ingress.kubernetes.io/service.nativelb": "true"
+			}
 		}
 		spec: {
 			type: "ClusterIP"
