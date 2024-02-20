@@ -3214,6 +3214,20 @@ kustomize: "deathstar": #Kustomize & {
 					}]
 				}]
 			}, {
+				fromEntities: [
+					"world",
+				]
+				toPorts: [{
+					ports: [{
+						port:     "80"
+						protocol: "TCP"
+					}]
+					rules: http: [{
+						method: "GET"
+						path:   "/v1/"
+					}]
+				}]
+			}, {
 				fromEndpoints: [{
 					matchLabels: org: "empire"
 				}]
