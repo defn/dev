@@ -1855,25 +1855,27 @@ kustomize: "coder": #KustomizeHelm & {
 		}
 	}
 
-	resource: "ingressroute-coder-wildcard": {
-		apiVersion: "traefik.containo.us/v1alpha1"
-		kind:       "IngressRoute"
-		metadata: {
-			name:      "coder-wildcard"
-			namespace: "coder"
-		}
-		spec: entryPoints: ["websecure"]
-		spec: routes: [{
-			match: "HostRegexp(`{subdomain:[a-z0-9-]+}.coder.\(cluster.domain_name)`)"
-			kind:  "Rule"
-			services: [{
-				name:      "coder"
+	if teacher.bootstrap.traefik != _|_ {
+		resource: "ingressroute-coder-wildcard": {
+			apiVersion: "traefik.containo.us/v1alpha1"
+			kind:       "IngressRoute"
+			metadata: {
+				name:      "coder-wildcard"
 				namespace: "coder"
-				kind:      "Service"
-				port:      80
-				scheme:    "http"
+			}
+			spec: entryPoints: ["websecure"]
+			spec: routes: [{
+				match: "HostRegexp(`{subdomain:[a-z0-9-]+}.coder.\(cluster.domain_name)`)"
+				kind:  "Rule"
+				services: [{
+					name:      "coder"
+					namespace: "coder"
+					kind:      "Service"
+					port:      80
+					scheme:    "http"
+				}]
 			}]
-		}]
+		}
 	}
 
 	resource: "externalsecret-coder": {
