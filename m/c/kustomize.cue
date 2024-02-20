@@ -3131,83 +3131,83 @@ kustomize: "aws-node-term": #KustomizeHelm & {
 }
 
 #resource: "ciliumnetworkpolicy-deathstar-blueprints": {
-	apiVersion: "cilium.io/v2"
-	kind:       "CiliumNetworkPolicy"
-	metadata: name: "deathstar-blueprints"
-	spec: {
-		endpointSelector: matchLabels: {
-			class: "deathstar"
-			org:   "empire"
+		apiVersion: "cilium.io/v2"
+		kind:       "CiliumNetworkPolicy"
+		metadata: name: "deathstar-blueprints"
+		spec: {
+			endpointSelector: matchLabels: {
+				class: "deathstar"
+				org:   "empire"
+			}
+			ingress: [{
+				fromEndpoints: [{
+					matchLabels: org: "alliance"
+				}]
+				toPorts: [{
+					ports: [{
+						port:     "80"
+						protocol: "TCP"
+					}]
+					rules: http: [{
+						method: "PUT"
+						path:   "/v1/exhaust-port$"
+						headers: ["X-Has-Force: True"]
+					}]
+				}]
+			}, {
+				fromEntities: [
+					"world",
+				]
+				toPorts: [{
+					ports: [{
+						port:     "80"
+						protocol: "TCP"
+					}]
+					rules: http: [{
+						method: "GET"
+						path:   "/v1/"
+					}]
+				}]
+			}, {
+				fromEndpoints: [{
+					matchLabels: org: "empire"
+				}]
+				toPorts: [{
+					ports: [{
+						port:     "80"
+						protocol: "TCP"
+					}]
+					rules: http: [{
+						method: "GET"
+						path:   "/v1/"
+					}]
+				}]
+			}, {
+				fromEndpoints: [{
+					matchLabels: app: "mirrord"
+				}]
+				toPorts: [{
+					ports: [{
+						port:     "80"
+						protocol: "TCP"
+					}]
+					rules: http: [{
+						method: "PUT"
+						path:   "/v1/exhaust-port$"
+						headers: ["X-Has-Mirrord: True"]
+					}]
+				}]
+			}]
 		}
-		ingress: [{
-			fromEndpoints: [{
-				matchLabels: org: "alliance"
-			}]
-			toPorts: [{
-				ports: [{
-					port:     "80"
-					protocol: "TCP"
-				}]
-				rules: http: [{
-					method: "PUT"
-					path:   "/v1/exhaust-port$"
-					headers: ["X-Has-Force: True"]
-				}]
-			}]
-		}, {
-			fromEntities: [
-				"world",
-			]
-			toPorts: [{
-				ports: [{
-					port:     "80"
-					protocol: "TCP"
-				}]
-				rules: http: [{
-					method: "GET"
-					path:   "/v1/"
-				}]
-			}]
-		}, {
-			fromEndpoints: [{
-				matchLabels: org: "empire"
-			}]
-			toPorts: [{
-				ports: [{
-					port:     "80"
-					protocol: "TCP"
-				}]
-				rules: http: [{
-					method: "GET"
-					path:   "/v1/"
-				}]
-			}]
-		}, {
-			fromEndpoints: [{
-				matchLabels: app: "mirrord"
-			}]
-			toPorts: [{
-				ports: [{
-					port:     "80"
-					protocol: "TCP"
-				}]
-				rules: http: [{
-					method: "PUT"
-					path:   "/v1/exhaust-port$"
-					headers: ["X-Has-Mirrord: True"]
-				}]
-			}]
-		}]
 	}
-}
 
 kustomize: "deathstar": #Kustomize & {
 	cluster: #Cluster
 
 	namespace: "default"
 
-	resource: "service-deathstar":                        #resource["service-deathstar"]
-	resource: "ciliumnetworkpolicy-deathstar-blueprints": #resource["ciliumnetworkpolicy-deathstar-blueprints"]
+	resource: "service-deathstar": #resource["service-deathstar"]
+	resource: "ciliumnetworkpolicy-deathstar-blueprints":#resource["ciliumnetworkpolicy-deathstar-blueprints"]
 
 	resource: "deployment-deathstar": {
 		apiVersion: "apps/v1"
@@ -3295,8 +3295,8 @@ kustomize: "xwing": #Kustomize & {
 
 	namespace: "default"
 
-	resource: "service-deathstar":                        #resource["service-deathstar"]
-	resource: "ciliumnetworkpolicy-deathstar-blueprints": #resource["ciliumnetworkpolicy-deathstar-blueprints"]
+	resource: "service-deathstar": #resource["service-deathstar"]
+	resource: "ciliumnetworkpolicy-deathstar-blueprints":#resource["ciliumnetworkpolicy-deathstar-blueprints"]
 
 	resource: "deployment-xwing": {
 		apiVersion: "apps/v1"
