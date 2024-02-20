@@ -3173,39 +3173,11 @@ kustomize: "aws-node-term": #KustomizeHelm & {
 				}]
 			}]
 		}, {
-			fromEntities: [
-				"world",
-				"any",
-			]
-			toPorts: [{
-				ports: [{
-					port:     "80"
-					protocol: "TCP"
-				}]
-				rules: http: [{
-					method: "GET"
-					path:   "/v1/"
-				}]
-			}]
-		}, {
 			fromEndpoints: [{
 				matchLabels: org: "empire"
-			}]
-			toPorts: [{
-				ports: [{
-					port:     "80"
-					protocol: "TCP"
-				}]
-				rules: http: [{
-					method: "GET"
-					path:   "/v1/"
-				}]
-			}]
-		}, {
-			fromEndpoints: [{
-				matchLabels: {
-					"io.cilium.k8s.policy.cluster": "coder-amanibhavam-district"
-				}
+			}, {
+				matchLabels: "io.kubernetes.pod.namespace":  "traefik"
+				matchLabels: "io.cilium.k8s.policy.cluster": "coder-amanibhavam-district"
 			}]
 			toPorts: [{
 				ports: [{
