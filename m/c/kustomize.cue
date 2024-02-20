@@ -1771,6 +1771,15 @@ kustomize: "coder": #KustomizeHelm & {
 		}
 	}
 
+	psm: "service-coder": {
+		apiVersion: "v1"
+		kind:       "Service"
+		metadata: {
+			name: "coder"
+			annotations: "io.cilium/global-service": "true"
+		}
+	}
+
 	resource: "postgresql": {
 		apiVersion: "acid.zalan.do/v1"
 		kind:       "postgresql"
