@@ -24,15 +24,15 @@ cluster_apps = [
     "coder-amanibhavam-district-cluster-crossdemo",
     "coder-amanibhavam-district-cluster-deathstar",
     #
-    "coder-amanibhavam-district0-cluster-env",
-    "coder-amanibhavam-district0-cluster-argo-cd",
-    "coder-amanibhavam-district0-cluster-external-secrets",
-    "coder-amanibhavam-district0-cluster-kyverno",
-    "coder-amanibhavam-district0-cluster-postgres-operator",
-    "coder-amanibhavam-district0-cluster-secrets",
+#    "coder-amanibhavam-district0-cluster-env",
+#    "coder-amanibhavam-district0-cluster-argo-cd",
+#    "coder-amanibhavam-district0-cluster-external-secrets",
+#    "coder-amanibhavam-district0-cluster-kyverno",
+#    "coder-amanibhavam-district0-cluster-postgres-operator",
+#    "coder-amanibhavam-district0-cluster-secrets",
     #
-    "coder-amanibhavam-district1-cluster-env",
-    "coder-amanibhavam-district1-cluster-kyverno",
+#    "coder-amanibhavam-district1-cluster-env",
+#    "coder-amanibhavam-district1-cluster-kyverno",
     #
     "coder-amanibhavam-school-cluster-env",
     "coder-amanibhavam-school-cluster-argo-cd",
@@ -52,6 +52,8 @@ cluster_apps = [
     "coder-amanibhavam-school-cluster-crossprovider",
     "coder-amanibhavam-school-cluster-crossdemo",
     "coder-amanibhavam-school-cluster-xwing",
+    "coder-amanibhavam-school-cluster-postgres-operator",
+    "coder-amanibhavam-school-cluster-coder",
 ]
 
 cluster = {
