@@ -33,7 +33,6 @@ k3s_bootstrap: {
 
 	// deploy
 	"argo-cd": {}
-	"argocd-global": {}
 }
 
 infra: {
