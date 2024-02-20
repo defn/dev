@@ -115,7 +115,6 @@ kustomize: "argocd-district": #Kustomize & {
 			annotations: {
 				"io.cilium/global-service":                               "true"
 				"traefik.ingress.kubernetes.io/service.nativelb":         "true"
-				"io.cilium/service-affinity": "local"
 				// "traefik.ingress.kubernetes.io/service.serverstransport": "traefik-insecure@kubernetescrd"
 			}
 		}
@@ -145,7 +144,6 @@ kustomize: "argocd-school": #Kustomize & {
 			namespace: "argocd"
 			annotations: {
 				"io.cilium/global-service":                               "true"
-				"io.cilium/service-affinity": "remote"
 				"traefik.ingress.kubernetes.io/service.nativelb":         "true"
 				// "traefik.ingress.kubernetes.io/service.serverstransport": "traefik-insecure@kubernetescrd"
 			}
@@ -159,7 +157,12 @@ kustomize: "argocd-school": #Kustomize & {
 				targetPort: 8080
 			}]
 			selector: {
-				"app.kubernetes.io/name": "argocd-server"
+				if cluster.env == "district" {
+					"app.kubernetes.io/name": "argocd-server-nomatch"
+				}
+				if cluster.env != "district" {
+					"app.kubernetes.io/name": "argocd-server"
+				}
 			}
 		}
 	}
