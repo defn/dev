@@ -94,7 +94,7 @@ kustomize: "argocd-ingress": #Kustomize & {
 						pathType: "Prefix"
 						backend: service: {
 							name: "argocd-\(n)"
-							port: number: 80
+							port: number: 443
 						}
 					}]
 				}]
@@ -115,14 +115,15 @@ kustomize: "argocd-district": #Kustomize & {
 			annotations: {
 				"io.cilium/global-service":                               "true"
 				"traefik.ingress.kubernetes.io/service.nativelb":         "true"
-			// 	"traefik.ingress.kubernetes.io/service.serverstransport": "traefik-insecure@kubernetescrd"
+				"io.cilium/service-affinity": "local"
+				// "traefik.ingress.kubernetes.io/service.serverstransport": "traefik-insecure@kubernetescrd"
 			}
 		}
 		spec: {
 			type: "ClusterIP"
 			ports: [{
-				name:       "http"
-				port:       80
+				name:       "https"
+				port:       443
 				protocol:   "TCP"
 				targetPort: 8080
 			}]
@@ -144,15 +145,16 @@ kustomize: "argocd-school": #Kustomize & {
 			namespace: "argocd"
 			annotations: {
 				"io.cilium/global-service":                               "true"
+				"io.cilium/service-affinity": "remote"
 				"traefik.ingress.kubernetes.io/service.nativelb":         "true"
-				"traefik.ingress.kubernetes.io/service.serverstransport": "traefik-insecure@kubernetescrd"
+				// "traefik.ingress.kubernetes.io/service.serverstransport": "traefik-insecure@kubernetescrd"
 			}
 		}
 		spec: {
 			type: "ClusterIP"
 			ports: [{
-				name:       "http"
-				port:       80
+				name:       "https"
+				port:       443
 				protocol:   "TCP"
 				targetPort: 8080
 			}]
