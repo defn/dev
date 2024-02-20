@@ -24,6 +24,7 @@ cluster_apps = [
     "coder-amanibhavam-district-cluster-crossdemo",
     "coder-amanibhavam-district-cluster-deathstar",
     "coder-amanibhavam-district-cluster-coder-global",
+    "coder-amanibhavam-district-cluster-coder-ingress",
     #
     #    "coder-amanibhavam-district0-cluster-env",
     #    "coder-amanibhavam-district0-cluster-argo-cd",
