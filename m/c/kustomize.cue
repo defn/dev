@@ -68,6 +68,72 @@ kustomize: "coredns": #Kustomize & {
 	}
 }
 
+// https://github.com/argoproj/argo-cd/releases
+kustomize: "argocd-ingress": #Kustomize & {
+	cluster: #Cluster
+
+	for n in ["district", "school"] {
+		resource: "ingress-argocd-\(n)": {
+			apiVersion: "networking.k8s.io/v1"
+			kind:       "Ingress"
+			metadata: {
+				name:      "argocd-\(n)"
+				namespace: "argocd"
+				annotations: {
+					"traefik.ingress.kubernetes.io/router.tls":         "true"
+					"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
+				}
+			}
+
+			spec: {
+				ingressClassName: "traefik"
+				rules: [{
+					host: "argocd.\(n).\(cluster.handle).\(cluster.domain_zone)"
+					http: paths: [{
+						path:     "/"
+						pathType: "Prefix"
+						backend: service: {
+							name: "argocd-global"
+							port: number: 80
+						}
+					}]
+				}]
+			}
+		}
+	}
+}
+
+kustomize: "argocd-global": #Kustomize & {
+	cluster: #Cluster
+
+	resource: "argocd-global": {
+		apiVersion: "v1"
+		kind:       "Service"
+		metadata: {
+			name:      "argocd-global"
+			namespace: "argocd"
+			annotations: {
+				"io.cilium/global-service":                       "true"
+				"traefik.ingress.kubernetes.io/service.nativelb": "true"
+				"traefik.ingress.kubernetes.io/service.serverstransport": "traefik-insecure@kubernetescrd"
+			}
+		}
+		spec: {
+			type: "ClusterIP"
+			ports: [{
+				name:       "http"
+				port:       80
+				protocol:   "TCP"
+				targetPort: "http"
+			}]
+			selector: {
+				"app.kubernetes.io/instance": "coder"
+				"app.kubernetes.io/name":     "coder"
+			}
+		}
+	}
+}
+
 kustomize: "argo-cd": #Kustomize & {
 	cluster: #Cluster
 
@@ -82,50 +148,7 @@ kustomize: "argo-cd": #Kustomize & {
 	}
 
 	resource: "argo-cd": {
-		url: "https://raw.githubusercontent.com/argoproj/argo-cd/v2.10.0-rc4/manifests/install.yaml"
-	}
-
-	resource: "ingress-argo-cd": {
-		apiVersion: "networking.k8s.io/v1"
-		kind:       "Ingress"
-		metadata: {
-			name: "argo-cd"
-			annotations: {
-				"traefik.ingress.kubernetes.io/router.tls":         "true"
-				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
-			}
-		}
-
-		spec: {
-			ingressClassName: "traefik"
-			rules: [{
-				if cluster.parent_env == cluster.env {
-					host: "argocd.\(cluster.domain_name)"
-				}
-				if cluster.parent_env != cluster.env {
-					host: "argocd-\(cluster.env).\(cluster.domain_name)"
-				}
-				http: paths: [{
-					path:     "/"
-					pathType: "Prefix"
-					backend: service: {
-						name: "argocd-server"
-						port: number: 80
-					}
-				}]
-			}]
-		}
-	}
-
-	psm: "service-argocd-server": {
-		apiVersion: "v1"
-		kind:       "Service"
-		metadata: {
-			name: "argocd-server"
-			annotations: {
-				"traefik.ingress.kubernetes.io/service.serverstransport": "traefik-insecure@kubernetescrd"
-			}
-		}
+		url: "https://raw.githubusercontent.com/argoproj/argo-cd/v2.10.1/manifests/install.yaml"
 	}
 
 	psm: "configmap-argocd-cmd-params-cm": {

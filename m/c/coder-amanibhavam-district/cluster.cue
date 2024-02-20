@@ -5,12 +5,14 @@ teacher: bootstrap: k3s_bootstrap & {
 	"buildkite": {}
 	"harbor": {}
 	"headlamp": {}
-	"traefik": {}
 	"external-dns": {}
 	"crossdemo": {}
 	"deathstar": {}
+
+	"traefik": {}
 	"coder-global": {}
 	"coder-ingress": {}
+	"argocd-ingress": {}
 }
 
 class: {
