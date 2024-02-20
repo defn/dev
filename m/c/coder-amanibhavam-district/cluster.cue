@@ -10,6 +10,7 @@ teacher: bootstrap: k3s_bootstrap & {
 	"crossdemo": {}
 	"deathstar": {}
 	"coder-global": {}
+	"coder-ingress": {}
 }
 
 class: {

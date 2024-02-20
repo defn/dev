@@ -1676,6 +1676,60 @@ kustomize: "ubuntu": #Kustomize & {
 }
 
 // https://artifacthub.io/packages/helm/coder-v2/coder
+kustomize: "coder-ingress": #Kustomize & {
+	cluster: #Cluster
+
+	for n in ["school"] {
+		resource: "ingress-coder-\(n)": {
+			apiVersion: "networking.k8s.io/v1"
+			kind:       "Ingress"
+			metadata: {
+				name: "coder-\(n)"
+				annotations: {
+					"traefik.ingress.kubernetes.io/router.tls":         "true"
+					"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
+				}
+			}
+
+			spec: {
+				ingressClassName: "traefik"
+				rules: [{
+					host: "coder.\(n).\(cluster.handle).\(cluster.domain_zone)"
+					http: paths: [{
+						path:     "/"
+						pathType: "Prefix"
+						backend: service: {
+							name: "coder-global"
+							port: number: 80
+						}
+					}]
+				}]
+			}
+		}
+
+		resource: "ingressroute-coder-wildcard-\(n)": {
+			apiVersion: "traefik.containo.us/v1alpha1"
+			kind:       "IngressRoute"
+			metadata: {
+				name:      "coder-wildcard-\(n)"
+				namespace: "coder"
+			}
+			spec: entryPoints: ["websecure"]
+			spec: routes: [{
+				match: "HostRegexp(`{subdomain:[a-z0-9-]+}.coder.\(n).\(cluster.handle).\(cluster.domain_zone)`)"
+				kind:  "Rule"
+				services: [{
+					name:      "coder-global"
+					namespace: "coder"
+					kind:      "Service"
+					port:      80
+					scheme:    "http"
+				}]
+			}]
+		}
+	}
+}
+
 kustomize: "coder-global": #Kustomize & {
 	cluster: #Cluster
 
@@ -1851,56 +1905,6 @@ kustomize: "coder": #KustomizeHelm & {
 						}
 					}
 				}
-			}]
-		}
-	}
-
-	resource: "ingress-coder": {
-		apiVersion: "networking.k8s.io/v1"
-		kind:       "Ingress"
-		metadata: {
-			name: "coder"
-			annotations: {
-				"traefik.ingress.kubernetes.io/router.tls":         "true"
-				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
-			}
-		}
-
-		spec: {
-			ingressClassName: "traefik"
-			rules: [{
-				host: "coder.\(cluster.domain_name)"
-				http: paths: [{
-					path:     "/"
-					pathType: "Prefix"
-					backend: service: {
-						name: "coder"
-						port: number: 80
-					}
-				}]
-			}]
-		}
-	}
-
-	if teacher.bootstrap.traefik != _|_ {
-		resource: "ingressroute-coder-wildcard": {
-			apiVersion: "traefik.containo.us/v1alpha1"
-			kind:       "IngressRoute"
-			metadata: {
-				name:      "coder-wildcard"
-				namespace: "coder"
-			}
-			spec: entryPoints: ["websecure"]
-			spec: routes: [{
-				match: "HostRegexp(`{subdomain:[a-z0-9-]+}.coder.\(cluster.domain_name)`)"
-				kind:  "Rule"
-				services: [{
-					name:      "coder"
-					namespace: "coder"
-					kind:      "Service"
-					port:      80
-					scheme:    "http"
-				}]
 			}]
 		}
 	}
