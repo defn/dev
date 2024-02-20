@@ -1684,6 +1684,28 @@ kustomize: "ubuntu": #Kustomize & {
 }
 
 // https://artifacthub.io/packages/helm/coder-v2/coder
+resource: "coder-global": {
+	apiVersion: "v1"
+	kind:       "Service"
+	metadata: {
+		name: "coder-global"
+		annotations: "io.cilium/global-service": "true"
+	}
+	spec: {
+		type: "ClusterIP"
+		ports: [{
+			name:       "http"
+			port:       "80"
+			protocol:   "TCP"
+			targetPort: "http"
+		}]
+		selector: {
+			"app.kubernetes.io/instance": "coder"
+			"app.kubernetes.io/name":     "coder"
+		}
+	}
+}
+
 kustomize: "coder": #KustomizeHelm & {
 	cluster: #Cluster
 
