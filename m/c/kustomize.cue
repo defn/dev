@@ -3116,7 +3116,10 @@ kustomize: "aws-node-term": #KustomizeHelm & {
 	kind:       "Service"
 	metadata: {
 		name: "deathstar"
-		annotations: "io.cilium/global-service": "true"
+		annotations: {
+			"io.cilium/global-service":                       "true"
+			"traefik.ingress.kubernetes.io/service.nativelb": "true"
+		}
 	}
 	spec: {
 		type: "ClusterIP"
