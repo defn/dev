@@ -133,6 +133,36 @@ kustomize: "argocd-global-district": #Kustomize & {
 	}
 }
 
+kustomize: "argocd-global-school": #Kustomize & {
+	cluster: #Cluster
+
+	resource: "argocd-global": {
+		apiVersion: "v1"
+		kind:       "Service"
+		metadata: {
+			name:      "argocd-global-school"
+			namespace: "argocd"
+			annotations: {
+				"io.cilium/global-service":                               "true"
+				"traefik.ingress.kubernetes.io/service.nativelb":         "true"
+				"traefik.ingress.kubernetes.io/service.serverstransport": "traefik-insecure@kubernetescrd"
+			}
+		}
+		spec: {
+			type: "ClusterIP"
+			ports: [{
+				name:       "https"
+				port:       443
+				protocol:   "TCP"
+				targetPort: 8080
+			}]
+			selector: {
+				"app.kubernetes.io/name": "argocd-server"
+			}
+		}
+	}
+}
+
 kustomize: "argo-cd": #Kustomize & {
 	cluster: #Cluster
 
