@@ -93,7 +93,7 @@ kustomize: "argocd-ingress": #Kustomize & {
 						path:     "/"
 						pathType: "Prefix"
 						backend: service: {
-							name: "argocd-global"
+							name: "argocd-\(n)"
 							port: number: 443
 						}
 					}]
@@ -103,14 +103,14 @@ kustomize: "argocd-ingress": #Kustomize & {
 	}
 }
 
-kustomize: "argocd-global-district": #Kustomize & {
+kustomize: "argocd-district": #Kustomize & {
 	cluster: #Cluster
 
 	resource: "argocd-global": {
 		apiVersion: "v1"
 		kind:       "Service"
 		metadata: {
-			name:      "argocd-global-district"
+			name:      "argocd-district"
 			namespace: "argocd"
 			annotations: {
 				"io.cilium/global-service":                               "true"
@@ -133,14 +133,14 @@ kustomize: "argocd-global-district": #Kustomize & {
 	}
 }
 
-kustomize: "argocd-global-school": #Kustomize & {
+kustomize: "argocd-school": #Kustomize & {
 	cluster: #Cluster
 
 	resource: "argocd-global": {
 		apiVersion: "v1"
 		kind:       "Service"
 		metadata: {
-			name:      "argocd-global-school"
+			name:      "argocd-school"
 			namespace: "argocd"
 			annotations: {
 				"io.cilium/global-service":                               "true"
@@ -1752,7 +1752,7 @@ kustomize: "coder-ingress": #Kustomize & {
 						path:     "/"
 						pathType: "Prefix"
 						backend: service: {
-							name: "coder-global"
+							name: "coder-\(n)"
 							port: number: 80
 						}
 					}]
@@ -1772,7 +1772,7 @@ kustomize: "coder-ingress": #Kustomize & {
 				match: "HostRegexp(`{subdomain:[a-z0-9-]+}.coder.\(n).\(cluster.handle).\(cluster.domain_zone)`)"
 				kind:  "Rule"
 				services: [{
-					name:      "coder-global-\(n)"
+					name:      "coder-\(n)"
 					namespace: "coder"
 					kind:      "Service"
 					port:      80
@@ -1783,14 +1783,14 @@ kustomize: "coder-ingress": #Kustomize & {
 	}
 }
 
-kustomize: "coder-global-school": #Kustomize & {
+kustomize: "coder-school": #Kustomize & {
 	cluster: #Cluster
 
 	resource: "coder-global": {
 		apiVersion: "v1"
 		kind:       "Service"
 		metadata: {
-			name:      "coder-global-school"
+			name:      "coder-school"
 			namespace: "coder"
 			annotations: {
 				"io.cilium/global-service":                       "true"
