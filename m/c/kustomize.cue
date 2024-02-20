@@ -1676,7 +1676,7 @@ kustomize: "ubuntu": #Kustomize & {
 }
 
 // https://artifacthub.io/packages/helm/coder-v2/coder
-kustomize: "coder-global": #KustomizeHelm & {
+kustomize: "coder-global": #Kustomize & {
 	cluster: #Cluster
 
 	resource: "coder-global": {
