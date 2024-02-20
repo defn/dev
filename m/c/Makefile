@@ -4,13 +4,13 @@ env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
 
 to ?= $(env)
 
-list:
-	@(cd .. && git grep artifacthub) | awk '{print $$2}' | runmany 'curl -sSL https://artifacthub.io/api/v1/$${1#https://artifacthub.io/}/feed/rss 2>/dev/null | grep 'artifacthub.io/packages/helm/' | grep -v -E "beta|snapshot" | head -1 | cut -d">" -f2 | cut -d"<" -f1' | sort -u > pending.txt
-	git diff pending.txt
-
 update:
 	cd ../k && $(MAKE)
 	cd .. && $(MAKE) healthy
+
+list:
+	@(cd .. && git grep artifacthub) | awk '{print $$2}' | runmany 'curl -sSL https://artifacthub.io/api/v1/$${1#https://artifacthub.io/}/feed/rss 2>/dev/null | grep 'artifacthub.io/packages/helm/' | grep -v -E "beta|snapshot" | head -1 | cut -d">" -f2 | cut -d"<" -f1' | sort -u > pending.txt
+	git diff pending.txt
 
 reboot:
 	cd .. && $(MAKE) reboot
