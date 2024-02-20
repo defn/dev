@@ -1628,8 +1628,7 @@ kustomize: "traefik": #KustomizeHelm & {
 			secretName: "\(cluster.domain_slug)-wildcard"
 			dnsNames: [
 				"*.\(cluster.domain_name)",
-				"*.default.\(cluster.domain_name)",
-				"*.coder.\(cluster.domain_name)",
+				"*.coder.school.\(cluster.handle).\(cluster.domain_zone)",
 			]
 			issuerRef: {
 				name:  cluster.issuer
