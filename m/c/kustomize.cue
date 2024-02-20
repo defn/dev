@@ -1683,7 +1683,7 @@ kustomize: "coder-ingress": #Kustomize & {
 			apiVersion: "networking.k8s.io/v1"
 			kind:       "Ingress"
 			metadata: {
-				name: "coder-\(n)"
+				name:      "coder-\(n)"
 				namespace: "coder"
 				annotations: {
 					"traefik.ingress.kubernetes.io/router.tls":         "true"
@@ -3160,6 +3160,33 @@ kustomize: "deathstar": #Kustomize & {
 					imagePullPolicy: "IfNotPresent"
 				}]
 			}
+		}
+	}
+
+	resource: "ingress-deathstar": {
+		apiVersion: "networking.k8s.io/v1"
+		kind:       "Ingress"
+		metadata: {
+			name: "deathstar"
+			annotations: {
+				"traefik.ingress.kubernetes.io/router.tls":         "true"
+				"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
+			}
+		}
+
+		spec: {
+			ingressClassName: "traefik"
+			rules: [{
+				host: "deathstar.\(cluster.domain_name)"
+				http: paths: [{
+					path:     "/"
+					pathType: "Prefix"
+					backend: service: {
+						name: "deathstar"
+						port: number: 80
+					}
+				}]
+			}]
 		}
 	}
 
