@@ -3175,6 +3175,7 @@ kustomize: "aws-node-term": #KustomizeHelm & {
 		}, {
 			fromEntities: [
 				"world",
+				"any",
 			]
 			toPorts: [{
 				ports: [{
@@ -3203,7 +3204,6 @@ kustomize: "aws-node-term": #KustomizeHelm & {
 		}, {
 			fromEndpoints: [{
 				matchLabels: {
-					namespace:                      "traefik"
 					"io.cilium.k8s.policy.cluster": "coder-amanibhavam-district"
 				}
 			}]
