@@ -103,18 +103,47 @@ kustomize: "argocd-ingress": #Kustomize & {
 	}
 }
 
-kustomize: "argocd-global": #Kustomize & {
+kustomize: "argocd-global-district": #Kustomize & {
 	cluster: #Cluster
 
 	resource: "argocd-global": {
 		apiVersion: "v1"
 		kind:       "Service"
 		metadata: {
-			name:      "argocd-global"
+			name:      "argocd-global-district"
 			namespace: "argocd"
 			annotations: {
-				"io.cilium/global-service":                               "true"
-				"traefik.ingress.kubernetes.io/service.nativelb":         "true"
+				"io.cilium/global-service":                       "true"
+				"traefik.ingress.kubernetes.io/service.nativelb": "true"
+			}
+		}
+		spec: {
+			type: "ClusterIP"
+			ports: [{
+				name:       "http"
+				port:       80
+				protocol:   "TCP"
+				targetPort: 8080
+			}]
+			selector: {
+				"app.kubernetes.io/name": "argocd-server"
+			}
+		}
+	}
+}
+
+kustomize: "argocd-global-school": #Kustomize & {
+	cluster: #Cluster
+
+	resource: "argocd-global": {
+		apiVersion: "v1"
+		kind:       "Service"
+		metadata: {
+			name:      "argocd-global-school"
+			namespace: "argocd"
+			annotations: {
+				"io.cilium/global-service":                       "true"
+				"traefik.ingress.kubernetes.io/service.nativelb": "true"
 			}
 		}
 		spec: {
@@ -1741,7 +1770,7 @@ kustomize: "coder-ingress": #Kustomize & {
 				match: "HostRegexp(`{subdomain:[a-z0-9-]+}.coder.\(n).\(cluster.handle).\(cluster.domain_zone)`)"
 				kind:  "Rule"
 				services: [{
-					name:      "coder-global"
+					name:      "coder-global-\(n)"
 					namespace: "coder"
 					kind:      "Service"
 					port:      80
@@ -1752,14 +1781,14 @@ kustomize: "coder-ingress": #Kustomize & {
 	}
 }
 
-kustomize: "coder-global": #Kustomize & {
+kustomize: "coder-global-school": #Kustomize & {
 	cluster: #Cluster
 
 	resource: "coder-global": {
 		apiVersion: "v1"
 		kind:       "Service"
 		metadata: {
-			name:      "coder-global"
+			name:      "coder-global-school"
 			namespace: "coder"
 			annotations: {
 				"io.cilium/global-service":                       "true"

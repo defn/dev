@@ -5,7 +5,8 @@ teacher: bootstrap: k3s_bootstrap & {
 	"crossdemo": {}
 	"xwing": {}
 	"coder": {}
-	"coder-global": {}
+	"coder-global-school": {}
+	"argocd-global-school": {}
 }
 
 class: {
