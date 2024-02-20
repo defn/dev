@@ -1485,7 +1485,7 @@ kustomize: "traefik": #KustomizeHelm & {
 		release:   "traefik"
 		name:      "traefik"
 		namespace: "traefik"
-		version:   "26.0.0"
+		version:   "26.1.0"
 		repo:      "https://traefik.github.io/charts"
 		values: {
 			logs: general: level:  "DEBUG"
@@ -2342,7 +2342,7 @@ kustomize: "headlamp": #KustomizeHelm & {
 		release:   "headlamp"
 		name:      "headlamp"
 		namespace: "headlamp"
-		version:   "0.18.1"
+		version:   "0.18.2"
 		repo:      "https://headlamp-k8s.github.io/headlamp"
 		values: {
 		}
