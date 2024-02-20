@@ -152,8 +152,9 @@ healthy:
 	while ! app wait argocd/$(env)-cluster --health; do sleep 5; done
 
 ready:
-	$(MAKE) k3s-restart-irsa
-#	$(MAKE) k3s-advertise-traefik
+	while ! kubectl --context $(env) rollout -n kube-system status deployment pod-identity-amazon-eks-pod-identity-webhook | bat; do sleep 10; done
+	-kubectl --context $(env) rollout -n external-secrets restart deployment | bat
+	-kubectl --context $(env) rollout -n karpenter restart deployment | bat
 
 .PHONY: cache
 cache:
@@ -165,22 +166,11 @@ recreate:
 	-bin/make-k3s down
 	$(MAKE) up
 
-k3s-restart-irsa:
-	while ! kubectl rollout -n kube-system status deployment pod-identity-amazon-eks-pod-identity-webhook; do sleep 10; done
-	-kubectl rollout -n external-secrets restart deployment
-	-kubectl rollout -n karpenter restart deployment
-
-k3s-advertise-traefik:
-	while ! kubectl rollout -n traefik status deployment traefik; do sleep 10; done
-	sudo ethtool -K "$$(ip route show 0/0 | cut -f5 -d' ')" rx-udp-gro-forwarding on rx-gro-list off
-	while true; do if test -n "$$(kubectl get -n traefik svc traefik -o json | jq -r '.spec.clusterIP')"; then break; fi; sleep 5; done
-	tailscale up --advertise-routes=$$(kubectl get -n traefik svc traefik -o json | jq -r '.spec.clusterIP')/32,$$(kubectl get -n traefik svc traefik -o json | jq -r '.spec.clusterIP' | cut -d. -f1-2).128.53/32  --accept-routes=true --ssh
-
 tailscale-kubeconfig:
 	-kubectl config delete-context $(env)
 	-kubectl config delete-context $(env)-$(proxy)
-	tailscale configure kubeconfig $(env)-$(proxy)
-	kubectl config rename-context $(env)-$(proxy).$(shell tailscale cert 2>&1 | grep 'use ' | cut -d'"' -f2 | cut -d. -f2-) $(env)
+	tailscale configure kubeconfig $(env)-$(proxy) | bat
+	kubectl config rename-context $(env)-$(proxy).$(shell tailscale cert 2>&1 | grep 'use ' | cut -d'"' -f2 | cut -d. -f2-) $(env) | bat
 
 hello:
 	test "$$(pass hello)" == world
