@@ -40,7 +40,7 @@ local_resource(
 
 # kubernetes tunnel
 local_resource(
-    "kubrnetes-tunnel",
+    "kubernetes-tunnel",
     serve_cmd=[
         "bash",
         "-c",
