@@ -13,7 +13,7 @@ https://artifacthub.io/packages/helm/descheduler/descheduler/0.29.0
 https://artifacthub.io/packages/helm/dex/dex/0.16.0
 https://artifacthub.io/packages/helm/external-secrets-operator/external-secrets/0.9.13
 https://artifacthub.io/packages/helm/harbor/harbor/1.14.0
-https://artifacthub.io/packages/helm/headlamp/headlamp/0.18.1
+https://artifacthub.io/packages/helm/headlamp/headlamp/0.18.2
 https://artifacthub.io/packages/helm/jkroepke/amazon-eks-pod-identity-webhook/1.2.0
 https://artifacthub.io/packages/helm/kyverno/kyverno/3.2.0-alpha.1
 https://artifacthub.io/packages/helm/linkerd2-edge/linkerd-control-plane/1.18.9-edge
@@ -22,4 +22,4 @@ https://artifacthub.io/packages/helm/linkerd2/linkerd-control-plane/1.16.10
 https://artifacthub.io/packages/helm/linkerd2/linkerd-crds/1.8.0
 https://artifacthub.io/packages/helm/mojo2600/pihole/2.22.0
 https://artifacthub.io/packages/helm/stakater/reloader/1.0.67
-https://artifacthub.io/packages/helm/traefik/traefik/26.0.0
+https://artifacthub.io/packages/helm/traefik/traefik/26.1.0
