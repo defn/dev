@@ -1685,6 +1685,7 @@ kustomize: "coder-ingress": #Kustomize & {
 			kind:       "Ingress"
 			metadata: {
 				name: "coder-\(n)"
+				namespace: "coder"
 				annotations: {
 					"traefik.ingress.kubernetes.io/router.tls":         "true"
 					"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
