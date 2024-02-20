@@ -3186,8 +3186,23 @@ kustomize: "aws-node-term": #KustomizeHelm & {
 		}, {
 			fromEndpoints: [{
 				matchLabels: org: "empire"
-			}, {
-				matchLabels: namespace: "traefik"
+			}]
+			toPorts: [{
+				ports: [{
+					port:     "80"
+					protocol: "TCP"
+				}]
+				rules: http: [{
+					method: "GET"
+					path:   "/v1/"
+				}]
+			}]
+		}, {
+			fromEndpoints: [{
+				matchLabels: {
+					namespace:                      "traefik"
+					"io.cilium.k8s.policy.cluster": "coder-amanibhavam-district"
+				}
 			}]
 			toPorts: [{
 				ports: [{
