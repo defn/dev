@@ -10,10 +10,10 @@ teacher: bootstrap: k3s_bootstrap & {
 	"deathstar": {}
 
 	"traefik": {}
-	"coder-global-school": {}
+	"coder-school": {}
 	"coder-ingress": {}
-	"argocd-global-district": {}
-	"argocd-global-school": {}
+	"argocd-district": {}
+	"argocd-school": {}
 	"argocd-ingress": {}
 }
 
