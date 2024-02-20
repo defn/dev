@@ -5,6 +5,7 @@ teacher: bootstrap: k3s_bootstrap & {
 	"coder": {}
 	"crossdemo": {}
 	"xwing": {}
+	"coder-global": {}
 }
 
 class: {

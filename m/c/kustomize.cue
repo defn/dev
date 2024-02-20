@@ -1680,7 +1680,8 @@ resource: "coder-global": {
 	apiVersion: "v1"
 	kind:       "Service"
 	metadata: {
-		name: "coder-global"
+		name:      "coder-global"
+		namespace: "coder"
 		annotations: "io.cilium/global-service": "true"
 	}
 	spec: {
