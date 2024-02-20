@@ -94,7 +94,7 @@ kustomize: "argocd-ingress": #Kustomize & {
 						pathType: "Prefix"
 						backend: service: {
 							name: "argocd-\(n)"
-							port: number: 443
+							port: number: 80
 						}
 					}]
 				}]
@@ -121,8 +121,8 @@ kustomize: "argocd-district": #Kustomize & {
 		spec: {
 			type: "ClusterIP"
 			ports: [{
-				name:       "https"
-				port:       443
+				name:       "http"
+				port:       80
 				protocol:   "TCP"
 				targetPort: 8080
 			}]
@@ -151,8 +151,8 @@ kustomize: "argocd-school": #Kustomize & {
 		spec: {
 			type: "ClusterIP"
 			ports: [{
-				name:       "https"
-				port:       443
+				name:       "http"
+				port:       80
 				protocol:   "TCP"
 				targetPort: 8080
 			}]
