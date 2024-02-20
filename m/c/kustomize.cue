@@ -113,9 +113,8 @@ kustomize: "argocd-global": #Kustomize & {
 			name:      "argocd-global"
 			namespace: "argocd"
 			annotations: {
-				"io.cilium/global-service":                       "true"
-				"traefik.ingress.kubernetes.io/service.nativelb": "true"
-				"traefik.ingress.kubernetes.io/service.serverstransport": "traefik-insecure@kubernetescrd"
+				"io.cilium/global-service":                               "true"
+				"traefik.ingress.kubernetes.io/service.nativelb":         "true"
 			}
 		}
 		spec: {
@@ -124,11 +123,10 @@ kustomize: "argocd-global": #Kustomize & {
 				name:       "http"
 				port:       80
 				protocol:   "TCP"
-				targetPort: "http"
+				targetPort: 8080
 			}]
 			selector: {
-				"app.kubernetes.io/instance": "coder"
-				"app.kubernetes.io/name":     "coder"
+				"app.kubernetes.io/name": "argocd-server"
 			}
 		}
 	}
