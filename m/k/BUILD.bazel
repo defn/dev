@@ -15,8 +15,6 @@ cluster_apps = [
     "coder-amanibhavam-district-cluster-argocd-district",
     "coder-amanibhavam-district-cluster-argocd-school",
     "coder-amanibhavam-district-cluster-argocd-ingress",
-    "coder-amanibhavam-district-cluster-tfo",
-    "coder-amanibhavam-district-cluster-buildkite",
     "coder-amanibhavam-district-cluster-harbor",
     "coder-amanibhavam-district-cluster-headlamp",
     "coder-amanibhavam-district-cluster-tailscale",
@@ -24,7 +22,6 @@ cluster_apps = [
     "coder-amanibhavam-district-cluster-external-dns",
     "coder-amanibhavam-district-cluster-crossplane",
     "coder-amanibhavam-district-cluster-crossprovider",
-    "coder-amanibhavam-district-cluster-crossdemo",
     "coder-amanibhavam-district-cluster-deathstar",
     "coder-amanibhavam-district-cluster-coder-school",
     "coder-amanibhavam-district-cluster-coder-ingress",
@@ -61,6 +58,7 @@ cluster_apps = [
     "coder-amanibhavam-school-cluster-postgres-operator",
     "coder-amanibhavam-school-cluster-coder",
     "coder-amanibhavam-school-cluster-coder-school",
+    "coder-amanibhavam-school-cluster-buildkite",
 ]
 
 cluster = {
