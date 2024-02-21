@@ -401,7 +401,7 @@ kustomize: "l5d-crds": #KustomizeHelm & {
 	helm: {
 		release: "l5d-crds"
 		name:    "linkerd-crds"
-		version: "1.9.3-edge"
+		version: "1.9.4-edge"
 		repo:    "https://helm.linkerd.io/edge"
 		values: {}
 	}
@@ -434,7 +434,7 @@ kustomize: "l5d-control": #KustomizeHelm & {
 	helm: {
 		release: "l5d-control"
 		name:    "linkerd-control-plane"
-		version: "1.18.9-edge"
+		version: "1.18.10-edge"
 		repo:    "https://helm.linkerd.io/edge"
 		values: {
 			heartbeatSchedule: "0 0 * * *"
