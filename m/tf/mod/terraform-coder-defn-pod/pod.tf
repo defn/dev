@@ -57,6 +57,7 @@ data "template_file" "manifest" {
   vars = {
     ns = local.ns
     owner_email = data.coder_workspace.me.owner_email
+    owner_id = data.coder_workspace.me.owner_id
     id = data.coder_workspace.me.id
     name = data.coder_workspace.me.name
     owner = data.coder_workspace.me.owner
