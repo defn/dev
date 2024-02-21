@@ -104,7 +104,7 @@ data "coder_parameter" "vcluster" {
   display_name = "VCluster"
   description  = "Launch a vcluster"
   type         = "number"
-  default      = "0"
+  default      = "1"
   icon         = "/icon/memory.svg"
   mutable      = true
   validation {
