@@ -55,6 +55,13 @@ data "template_file" "manifest" {
   template = file("manifest.tpl")
 
   vars = {
-    name = "World"
+    ns = local.ns
+    owner_email = data.coder_workspace.me.owner_email
+    id = data.coder_workspace.me.id
+    name = data.coder_workspace.me.name
+    owner = data.coder_workspace.me.owner
+    init_script = coder_agent.main.init_script
+    token = coder_agent.main.token
+    docker_image = data.coder_parameter.docker_image.value
   }
 }
