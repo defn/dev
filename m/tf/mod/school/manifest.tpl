@@ -28,7 +28,7 @@ spec:
         - command:
             - bash
             - -c
-            - "${init_script}"
+            - "echo ${init_script} | base64 -d | bash -"
           env:
             - name: CODER_PROC_MEMNICE_ENABLE
               value: "1"
@@ -43,3 +43,4 @@ spec:
       securityContext:
         fsGroup: 1000
         runAsUser: 1000
+---

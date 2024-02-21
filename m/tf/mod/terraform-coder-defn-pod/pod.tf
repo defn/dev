@@ -47,7 +47,7 @@ resource "helm_release" "main" {
 
   set {
     name  = "init.manifests"
-    value = data.template_file.manifest.rendered
+    value = "${data.template_file.manifest.rendered}"
   }
 }
 
@@ -61,7 +61,7 @@ data "template_file" "manifest" {
     id = data.coder_workspace.me.id
     name = data.coder_workspace.me.name
     owner = data.coder_workspace.me.owner
-    init_script = coder_agent.main.init_script
+    init_script = base64encode(coder_agent.main.init_script)
     token = coder_agent.main.token
     docker_image = data.coder_parameter.docker_image.value
   }
