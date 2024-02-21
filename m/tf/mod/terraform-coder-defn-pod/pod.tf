@@ -47,12 +47,7 @@ resource "helm_release" "main" {
 
   set {
     name  = "init.manifests"
-    value = data.kubectl_manifest.main.manifest_yaml
-  }
-}
-
-data "kubectl_manifest" "main" {
-  yaml_body = <<-EOT
+    value = <<-EOT
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -99,4 +94,5 @@ spec:
         fsGroup: 1000
         runAsUser: 1000
 EOT
+  }
 }
