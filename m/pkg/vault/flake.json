@@ -1,0 +1,6 @@
+{
+  "slug": "pkg-vault",
+  "ghrepo": "hashicorp/vault",
+  "vendor": "1.15.5",
+  "revision": "1"
+}
