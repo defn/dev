@@ -18,8 +18,8 @@ steps: [
 			git fetch
 			git reset --hard $BUILDKITE_COMMIT
 			source .bash_profile
-			cd m/i/class
-			make class-buildkite-latest
+			cd m/i
+			make latest-dockerfile
 			'
 			"""]
 	}, #DockerStep & {
@@ -32,7 +32,7 @@ steps: [
 			git fetch
 			git reset --hard $BUILDKITE_COMMIT
 			source .bash_profile
-			cd m/i/class
+			cd m/i
 			make buildkite
 			'
 			"""]
