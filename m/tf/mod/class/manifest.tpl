@@ -24,6 +24,7 @@ spec:
       labels:
         app.kubernetes.io/name: "${ns}"
     spec:
+      serviceAccountName: "${ns}"
       containers:
         - command:
             - bash
@@ -44,3 +45,21 @@ spec:
         fsGroup: 1000
         runAsUser: 1000
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: "${ns}"
+  namespace: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: "${ns}"
+subjects:
+- kind: ServiceAccount
+  name: "${ns}"
+  namespace: default
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
