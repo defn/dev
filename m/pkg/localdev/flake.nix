@@ -10,6 +10,7 @@
     honeymarker.url = github:defn/dev/pkg-honeymarker-0.2.11-5?dir=m/pkg/honeymarker;
     honeytail.url = github:defn/dev/pkg-honeytail-1.8.3-13?dir=m/pkg/honeytail;
     hugo.url = github:defn/dev/pkg-hugo-0.0.10?dir=m/pkg/hugo;
+    vault.url = github:defn/dev/pkg-vault-1.15.5-2?dir=m/pkg/vault;
   };
 
   outputs = inputs: inputs.tilt.inputs.pkg.main rec {
@@ -29,6 +30,7 @@
             inputs.honeymarker.defaultPackage.${ctx.system}
             inputs.honeytail.defaultPackage.${ctx.system}
             inputs.hugo.defaultPackage.${ctx.system}
+            inputs.vault.defaultPackage.${ctx.system}
             redis
             postgresql
           ];
