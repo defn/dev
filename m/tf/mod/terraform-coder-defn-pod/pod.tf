@@ -45,9 +45,11 @@ resource "helm_release" "main" {
     value = "true"
   }
 
+/*
   set {
     name  = "init.manifests"
-    value = <<-EOT
+    value = <<EOT
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -95,4 +97,5 @@ spec:
         runAsUser: 1000
 EOT
   }
+*/
 }
