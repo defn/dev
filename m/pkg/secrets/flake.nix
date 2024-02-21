@@ -3,7 +3,7 @@
     pkg.url = github:defn/dev/pkg-pkg-0.0.16?dir=m/pkg/pkg;
     acme.url = github:defn/dev/pkg-acme-3.0.7-5?dir=m/pkg/acme;
     vpn.url = github:defn/dev/pkg-vpn-0.0.87?dir=m/pkg/vpn;
-    openfga.url = github:defn/dev/pkg-openfga-0.0.87?dir=m/pkg/openfga;
+    openfga.url = github:defn/dev/pkg-openfga-0.2.5-1?dir=m/pkg/openfga;
   };
 
   outputs = inputs: inputs.pkg.main rec {
