@@ -19,7 +19,7 @@ steps: [
 			git reset --hard $BUILDKITE_COMMIT
 			source .bash_profile
 			cd m/i
-			make latest-dockerfile
+			make latest-docker
 			'
 			"""]
 	}, #DockerStep & {
