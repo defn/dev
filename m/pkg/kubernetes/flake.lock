@@ -468,17 +468,17 @@
       },
       "locked": {
         "dir": "m/pkg/helm",
-        "lastModified": 1707958498,
-        "narHash": "sha256-i8QjV55u3tqErE9hm3URh9hVn71sknijeklzpKNKcno=",
+        "lastModified": 1708566618,
+        "narHash": "sha256-9E2RlGD1qO496x9ALx5b5ursSXM/2LunVWBFr7YNHPE=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "bc0c6f72e1c66e2d5cb9af0db927b5b8730f6b22",
+        "rev": "e4a70c7a3127ad68101fb88671c6f7fef6fd06ee",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/helm",
         "owner": "defn",
-        "ref": "pkg-helm-3.14.1-1",
+        "ref": "pkg-helm-3.14.2-1",
         "repo": "dev",
         "type": "github"
       }
@@ -636,17 +636,17 @@
       },
       "locked": {
         "dir": "m/pkg/linkerd",
-        "lastModified": 1708119538,
-        "narHash": "sha256-c4FD4RrgLtQDGdar0RJbRHyBXU81A4Dj9HIbhQAZBl0=",
+        "lastModified": 1708566632,
+        "narHash": "sha256-C0Deu22U8kn/vsCNvASjcPgSAtZSV8Z9+kdmu1rVePQ=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "5788c0b7c5e478c65f30b5b1ac1acda649109981",
+        "rev": "5236caef507d0d0fd822fa74c65bcf025e0f37e6",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/linkerd",
         "owner": "defn",
-        "ref": "pkg-linkerd-24.2.3-1",
+        "ref": "pkg-linkerd-24.2.4-1",
         "repo": "dev",
         "type": "github"
       }
