@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/awscli",
-        "lastModified": 1708119504,
-        "narHash": "sha256-iWWXtbvjv1e28UqyJ/M7SkOj4bhSRGM8qtIhBroVMEo=",
+        "lastModified": 1708566568,
+        "narHash": "sha256-d+Atc0zFY6wrWfATNtu+Dv1OJrmBBo3hgPavefq2PaQ=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "45cca8d4affe4f88f1ca94bd529d19ba7c85547d",
+        "rev": "def3c2e6a07b066e75b83f1a03e47f02d708202c",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/awscli",
         "owner": "defn",
-        "ref": "pkg-awscli-2.15.21-1",
+        "ref": "pkg-awscli-2.15.22-1",
         "repo": "dev",
         "type": "github"
       }
@@ -448,17 +448,17 @@
       },
       "locked": {
         "dir": "m/pkg/terraform",
-        "lastModified": 1707425979,
-        "narHash": "sha256-Br5h3JxeH/yFNwXOawPfEUn5LunoZBrjH7h+Jmy5vCk=",
+        "lastModified": 1708566647,
+        "narHash": "sha256-dSTd+I5trUoQ4fDdMVHb3Zj69HEqWQbThWqiCVMpe6o=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "bb11e12e360fed9028afd2c5e6cf51a8f073dccf",
+        "rev": "c6e3db779aff69928acb98fb1fb56df150929226",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/terraform",
         "owner": "defn",
-        "ref": "pkg-terraform-1.7.3-1",
+        "ref": "pkg-terraform-1.7.4-1",
         "repo": "dev",
         "type": "github"
       }
