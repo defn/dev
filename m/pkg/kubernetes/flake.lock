@@ -657,17 +657,17 @@
       },
       "locked": {
         "dir": "m/pkg/mirrord",
-        "lastModified": 1708281428,
-        "narHash": "sha256-ZMUPzdX9CgeOatGwB7/nTMCekeosVs6mCTh1DmYf+6o=",
+        "lastModified": 1708645037,
+        "narHash": "sha256-U5Ks8vY9Cf0UyClv830rtwY/6+wLfbr6TgeskjE5bpk=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "6c118e40cd6b98601a861fa325244931491be106",
+        "rev": "d7fa1c17ff175d8904187c5f0c04d0d07db1a26f",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/mirrord",
         "owner": "defn",
-        "ref": "pkg-mirrord-3.88.0-1",
+        "ref": "pkg-mirrord-3.89.1-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1366,17 +1366,17 @@
       },
       "locked": {
         "dir": "m/pkg/spire",
-        "lastModified": 1708100818,
-        "narHash": "sha256-3lcrnhnua/4b91Od+NoOpGhzA9hB9UOL2E9VXffI7XA=",
+        "lastModified": 1708645088,
+        "narHash": "sha256-rNJaH/qz6tVM9+AJ6Lql4Z8mPruBL1u97HluyFGfFbU=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "b7e0ca7784e564725e646a6c2821a2fb16062a76",
+        "rev": "c58969ccd36742bb4b04d4d162eb2e060b3b7d58",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/spire",
         "owner": "defn",
-        "ref": "pkg-spire-1.8.7-2",
+        "ref": "pkg-spire-1.9.0-1",
         "repo": "dev",
         "type": "github"
       }
