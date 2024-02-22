@@ -1,7 +1,6 @@
 package c
 
 teacher: bootstrap: k3s_bootstrap & {
-	"buildkite": {}
 	"postgres-operator": {}
 	"crossdemo": {}
 	"xwing": {}
