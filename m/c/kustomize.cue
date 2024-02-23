@@ -1116,12 +1116,6 @@ kustomize: "cilium": #KustomizeHelm & {
 
 	cilium_common
 
-	helm: {
-		values: {
-			hubble: ui: enabled: true
-		}
-	}
-
 	resource: "ingress-hubble-ui": {
 		apiVersion: "networking.k8s.io/v1"
 		kind:       "Ingress"
