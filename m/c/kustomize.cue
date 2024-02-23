@@ -423,7 +423,6 @@ kustomize: "l5d-crds": #KustomizeHelm & {
 	}
 }
 
-// https://artifacthub.io/packages/helm/linkerd2/linkerd-control-plane
 // https://artifacthub.io/packages/helm/linkerd2-edge/linkerd-control-plane
 kustomize: "l5d-control": #KustomizeHelm & {
 	cluster: #Cluster
