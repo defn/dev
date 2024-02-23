@@ -1,5 +1,11 @@
 package c
 
+class: {
+	handle:          "amanibhavam"
+	env:             "district"
+	infra_cilium_id: 250
+}
+
 teacher: bootstrap: k3s_bootstrap & {
 	"buildkite": {}
 	"harbor": {}
@@ -16,9 +22,3 @@ teacher: bootstrap: k3s_bootstrap & {
 }
 
 kustomize: "cilium": helm: values: hubble: ui: enabled: true
-
-class: {
-	handle:          "amanibhavam"
-	env:             "district"
-	infra_cilium_id: 250
-}
