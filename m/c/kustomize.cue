@@ -391,7 +391,6 @@ kustomize: "kyverno": #KustomizeHelm & {
 	}
 }
 
-// https://artifacthub.io/packages/helm/linkerd2/linkerd-crds
 // https://artifacthub.io/packages/helm/linkerd2-edge/linkerd-crds
 kustomize: "l5d-crds": #KustomizeHelm & {
 	cluster: #Cluster
@@ -401,7 +400,7 @@ kustomize: "l5d-crds": #KustomizeHelm & {
 	helm: {
 		release: "l5d-crds"
 		name:    "linkerd-crds"
-		version: "1.9.4-edge"
+		version: "1.9.5-edge"
 		repo:    "https://helm.linkerd.io/edge"
 		values: {}
 	}
@@ -434,7 +433,7 @@ kustomize: "l5d-control": #KustomizeHelm & {
 	helm: {
 		release: "l5d-control"
 		name:    "linkerd-control-plane"
-		version: "1.18.10-edge"
+		version: "1.18.11-edge"
 		repo:    "https://helm.linkerd.io/edge"
 		values: {
 			heartbeatSchedule: "0 0 * * *"
@@ -2202,7 +2201,7 @@ kustomize: "famfan": #Pattern["mastodon"] & {
 		release:     "mastodon"
 		name:        "mastodon"
 		"namespace": namespace
-		version:     "4.5.1"
+		version:     "4.5.2"
 		repo:        "https://charts.bitnami.com/bitnami"
 		values: {
 			initJob: createAdmin: true
