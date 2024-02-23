@@ -15,6 +15,8 @@ teacher: bootstrap: k3s_bootstrap & {
 	"argocd-ingress": {}
 }
 
+kustomize: "cilium": helm: values: hubble: ui: enabled: true
+
 class: {
 	handle:          "amanibhavam"
 	env:             "district"
