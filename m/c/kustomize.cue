@@ -1039,9 +1039,11 @@ cilium_common: {
 
 			nodePort: enabled:          true
 			hostPort: enabled:          true
-			hostFirewall: enabled:      false
 			externalWorkloads: enabled: true
 			externalIPs: enabled:       true
+
+			// hostFirewall, when enabled, blocks hubble relay
+			hostFirewall: enabled:      false
 
 			ingressController: enabled: false
 
