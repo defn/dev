@@ -2,7 +2,7 @@ https://artifacthub.io/packages/helm/argo/argo-events/2.4.3
 https://artifacthub.io/packages/helm/argo/argo-workflows/0.40.11
 https://artifacthub.io/packages/helm/aws/aws-node-termination-handler/0.21.0
 https://artifacthub.io/packages/helm/bitnami/external-dns/6.34.2
-https://artifacthub.io/packages/helm/bitnami/mastodon/4.5.1
+https://artifacthub.io/packages/helm/bitnami/mastodon/4.5.2
 https://artifacthub.io/packages/helm/cert-manager/cert-manager/1.14.2
 https://artifacthub.io/packages/helm/cert-manager/trust-manager/0.8.0
 https://artifacthub.io/packages/helm/cilium/cilium/1.15.1
@@ -16,8 +16,8 @@ https://artifacthub.io/packages/helm/harbor/harbor/1.14.0
 https://artifacthub.io/packages/helm/headlamp/headlamp/0.18.2
 https://artifacthub.io/packages/helm/jkroepke/amazon-eks-pod-identity-webhook/1.2.0
 https://artifacthub.io/packages/helm/kyverno/kyverno/3.2.0-alpha.1
-https://artifacthub.io/packages/helm/linkerd2-edge/linkerd-control-plane/1.18.10-edge
-https://artifacthub.io/packages/helm/linkerd2-edge/linkerd-crds/1.9.4-edge
+https://artifacthub.io/packages/helm/linkerd2-edge/linkerd-control-plane/1.18.11-edge
+https://artifacthub.io/packages/helm/linkerd2-edge/linkerd-crds/1.9.5-edge
 https://artifacthub.io/packages/helm/linkerd2/linkerd-control-plane/1.16.11
 https://artifacthub.io/packages/helm/linkerd2/linkerd-crds/1.8.0
 https://artifacthub.io/packages/helm/mojo2600/pihole/2.22.0
