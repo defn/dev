@@ -1,7 +1,7 @@
 VERSION 0.8
 
 root:
-    ARG image=cache.defn.run:4999/dfd:root
+    ARG image=coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:root
 
     FROM ubuntu:22.04
 
@@ -34,9 +34,9 @@ root:
     SAVE IMAGE --push ${image}
 
 class:
-    ARG image=cache.defn.run:4999/dfd:class
+    ARG image=coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:class
     ARG vsextensions="vscodevim.vim jnoortheen.nix-ide hashicorp.terraform golang.go esbenp.prettier-vscode bazelbuild.vscode-bazel cuelang.cue pbkit.vscode-pbkit marp-team.marp-vscode tailscale.vscode-tailscale geequlim.godot-tools alfish.godot-files ms-python.python"
-    FROM cache.defn.run:4999/dfd:root
+    FROM coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:root
 
     CACHE /home/ubuntu/work
 
@@ -58,7 +58,7 @@ class:
     SAVE IMAGE --push ${image}-buildkite-latest
 
 class-buildkite-latest:
-    ARG image=cache.defn.run:4999/dfd:class-buildkite-latest
+    ARG image=coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:class-buildkite-latest
     FROM ${image}
 
     RUN --no-cache bash -c 'git config --global user.email "you@example.com" && git config --global user.name "Your Name" && git pull'
@@ -72,7 +72,7 @@ class-buildkite-latest:
     SAVE IMAGE --push ${image}
 
 buildkite:
-    ARG image=cache.defn.run:4999/dfd:buildkite
+    ARG image=coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:buildkite
     FROM ghcr.io/buildkite/agent-stack-k8s/agent:0.7.0
 
     ENV BUILDKITE_GIT_MIRRORS_PATH=/cache/git
