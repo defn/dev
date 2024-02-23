@@ -23,7 +23,7 @@ clean-snapshot:
 reset:
 	@echo --- pruning
 	sudo chown ubuntu:ubuntu /var/run/docker.sock
-	cd ../../cache && docker compose down && $(MAKE) up
+	cd ../cache && docker compose down && $(MAKE) up
 	this-prune
 
 # all
