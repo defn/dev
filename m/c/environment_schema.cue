@@ -140,7 +140,7 @@ package c
 	to: #K3S
 }
 
-#K3S: ctx={
+#K3S: {
 	_in: #TransformK3S.from
 
 	#Machine
@@ -151,7 +151,7 @@ package c
 	destination: _in.app_cluster
 
 	env: {
-		metadata: name: ctx.name
+		metadata: "name": name
 		spec: source: {
 			(_in.app_type): _in.app_def
 			repoURL:        _in.app_repo

@@ -132,8 +132,9 @@ kustomize: [NAME=string]: _name: NAME
 	}
 }
 
-#KustomizeHelm: ctx={
+#KustomizeHelm: {
 	#Kustomize
+	namespace: string
 
 	helm: #Helm
 
@@ -141,12 +142,12 @@ kustomize: [NAME=string]: _name: NAME
 		helmCharts: [{
 			releaseName: helm.release
 			name:        helm.name
-			if ctx.namespace != "" {
-				namespace: ctx.namespace
+			if namespace != "" {
+				"namespace": namespace
 			}
-			if ctx.namespace == "" {
+			if namespace == "" {
 				if helm.namespace != "" {
-					namespace: helm.namespace
+					"namespace": helm.namespace
 				}
 			}
 			version:     helm.version
