@@ -1,7 +1,6 @@
 cluster_apps = [
     "coder-amanibhavam-district-cluster-env",
     "coder-amanibhavam-district-cluster-cert-manager",
-    "coder-amanibhavam-district-cluster-trust-manager",
     "coder-amanibhavam-district-cluster-pod-identity",
     "coder-amanibhavam-district-cluster-external-secrets",
     "coder-amanibhavam-district-cluster-secrets",
@@ -24,6 +23,7 @@ cluster_apps = [
     "coder-amanibhavam-district-cluster-crossplane",
     "coder-amanibhavam-district-cluster-crossprovider",
     "coder-amanibhavam-district-cluster-deathstar",
+    "coder-amanibhavam-district-cluster-postgres-operator",
     "coder-amanibhavam-district-cluster-coder",
     "coder-amanibhavam-district-cluster-coder-ingress",
     "coder-amanibhavam-district-cluster-coder-district",
@@ -53,7 +53,6 @@ cluster_apps = [
     "coder-amanibhavam-school-cluster-secrets",
     "coder-amanibhavam-school-cluster-tailscale",
     "coder-amanibhavam-school-cluster-tetragon",
-    "coder-amanibhavam-school-cluster-trust-manager",
     "coder-amanibhavam-school-cluster-crossplane",
     "coder-amanibhavam-school-cluster-crossprovider",
     "coder-amanibhavam-school-cluster-crossdemo",
