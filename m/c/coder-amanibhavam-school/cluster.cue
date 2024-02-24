@@ -7,13 +7,13 @@ class: {
 }
 
 teacher: bootstrap: k3s_bootstrap & {
-	"crossdemo": {}
-	"xwing": {}
-
 	"postgres-operator": {}
 	"coder": {}
 	"argocd-school": {}
 	"coder-school": {}
+
+	"crossdemo": {}
+	"xwing": {}
 }
 
 kustomize: coder: helm: namespace: "coder-\(class.env)"
