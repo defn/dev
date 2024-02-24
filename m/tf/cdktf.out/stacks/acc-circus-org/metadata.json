@@ -5,7 +5,8 @@
       "stackName": "acc-circus-org",
       "version": "0.20.3"
     },
-    "outputs": {}
+    "outputs": {
+    }
   },
   "module": {
     "circus-org": {
@@ -31,7 +32,7 @@
     "required_providers": {
       "aws": {
         "source": "aws",
-        "version": "5.36.0"
+        "version": "5.38.0"
       }
     }
   }

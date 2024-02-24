@@ -6,7 +6,7 @@
     "lint": "turbo run lint"
   },
   "devDependencies": {
-    "eslint": "^8.55.0",
+    "eslint": "^8.57.0",
     "eslint-config-custom": "workspace:*",
     "turbo": "latest"
   },

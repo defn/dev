@@ -5,7 +5,8 @@
       "stackName": "coder-defn-ec2-template",
       "version": "0.20.3"
     },
-    "outputs": {}
+    "outputs": {
+    }
   },
   "data": {
     "aws_ami": {
@@ -232,7 +233,7 @@
     "required_providers": {
       "aws": {
         "source": "aws",
-        "version": "5.36.0"
+        "version": "5.38.0"
       },
       "coder": {
         "source": "coder/coder",

@@ -54,12 +54,14 @@ pkg/kn/.direnv
 pkg/kubectl/.direnv
 pkg/kubernetes/.direnv
 pkg/kubevirt/.direnv
+pkg/kuma/.direnv
 pkg/kustomize/.direnv
 pkg/linkerd/.direnv
 pkg/localdev/.direnv
 pkg/mirrord/.direnv
 pkg/nix/.direnv
 pkg/oci/.direnv
+pkg/openfga/.direnv
 pkg/opentofu/.direnv
 pkg/oras/.direnv
 pkg/packer/.direnv
@@ -78,6 +80,7 @@ pkg/terraformdocs/.direnv
 pkg/tfo/.direnv
 pkg/tilt/.direnv
 pkg/utils/.direnv
+pkg/vault/.direnv
 pkg/vcluster/.direnv
 pkg/vhs/.direnv
 pkg/vpn/.direnv
@@ -133,12 +136,14 @@ pkg/kn/result
 pkg/kubectl/result
 pkg/kubernetes/result
 pkg/kubevirt/result
+pkg/kuma/result
 pkg/kustomize/result
 pkg/linkerd/result
 pkg/localdev/result
 pkg/mirrord/result
 pkg/nix/result
 pkg/oci/result
+pkg/openfga/result
 pkg/opentofu/result
 pkg/oras/result
 pkg/packer/result
@@ -157,6 +162,7 @@ pkg/terraformdocs/result
 pkg/tfo/result
 pkg/tilt/result
 pkg/utils/result
+pkg/vault/result
 pkg/vcluster/result
 pkg/vhs/result
 pkg/vpn/result

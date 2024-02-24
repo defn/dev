@@ -5,7 +5,8 @@
       "stackName": "acc-imma-dgwyn",
       "version": "0.20.3"
     },
-    "outputs": {}
+    "outputs": {
+    }
   },
   "module": {
     "imma-dgwyn": {
@@ -31,7 +32,7 @@
     "required_providers": {
       "aws": {
         "source": "aws",
-        "version": "5.36.0"
+        "version": "5.38.0"
       }
     }
   }

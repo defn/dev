@@ -9,6 +9,7 @@ all:
 	rm -f MODULES.bazel.lock
 	$(MAKE) bazel-ignore
 	$(MAKE) regen build
+	$(MAKE) trunk
 	trunk fmt
 
 build:
@@ -67,6 +68,9 @@ upgrade:
 	npm upgrade
 	npm outdated
 
+go-upgrade:
+	set -x; go get -u $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1')
+
 update:
 # cd tf && env SYNTH_HCL_OUTPUT=true cli infra && terraform fmt cdktf.out/stacks/*
 	$(MAKE) cdktf
@@ -74,8 +78,8 @@ update:
 
 regen:
 	@mark gazelle
-	rm -rf node_modules
 	set -x; go get $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1')
+	touch node_modules/go.mod || true
 	go mod tidy
 	b pass run //:gazelle
 
