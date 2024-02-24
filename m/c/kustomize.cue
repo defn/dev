@@ -1755,7 +1755,7 @@ kustomize: "coder-ingress": #Kustomize & {
 						path:     "/"
 						pathType: "Prefix"
 						backend: service: {
-							name: "coder"
+							name: "coder-\(n)"
 							port: number: 80
 						}
 					}]
@@ -1775,8 +1775,8 @@ kustomize: "coder-ingress": #Kustomize & {
 				match: "HostRegexp(`{subdomain:[a-z0-9-]+}.coder.\(n).\(cluster.handle).\(cluster.domain_zone)`)"
 				kind:  "Rule"
 				services: [{
-					name:      "coder"
-					namespace: "coder"
+					name:      "coder-\(n)"
+					namespace: kustomize.coder.helm.namespace
 					kind:      "Service"
 					port:      80
 					scheme:    "http"
@@ -1794,7 +1794,7 @@ kustomize: "coder-district": #Kustomize & {
 		apiVersion: "v1"
 		kind:       "Service"
 		metadata: {
-			name:      "coder"
+			name:      "coder-district"
 			namespace: kustomize.coder.helm.namespace
 			annotations: {
 				"io.cilium/global-service":                       "true"
@@ -1824,8 +1824,8 @@ kustomize: "coder-school": #Kustomize & {
 		apiVersion: "v1"
 		kind:       "Service"
 		metadata: {
-			name:      "coder"
-			namespace: "coder"
+			name:      "coder-school"
+			namespace: kustomize.coder.helm.namespace
 			annotations: {
 				"io.cilium/global-service":                       "true"
 				"traefik.ingress.kubernetes.io/service.nativelb": "true"
