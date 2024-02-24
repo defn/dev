@@ -16,7 +16,6 @@ cluster_apps = [
     "coder-amanibhavam-district-cluster-argocd-school",
     "coder-amanibhavam-district-cluster-buildkite",
     "coder-amanibhavam-district-cluster-harbor",
-    "coder-amanibhavam-district-cluster-headlamp",
     "coder-amanibhavam-district-cluster-tailscale",
     "coder-amanibhavam-district-cluster-traefik",
     "coder-amanibhavam-district-cluster-external-dns",

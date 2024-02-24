@@ -389,6 +389,25 @@ kustomize: "kyverno": #KustomizeHelm & {
 			verbs: ["update", "patch"]
 		}]
 	}
+
+	for d in ["kyverno-reports-controller", "kverno-background-controller", "kyverno-cleanup-controller", "kyverno-admission-controller"] {
+		jsp: "\(d)-resources": {
+			target: {
+				kind:      "Deployment"
+				name:      d
+				namespace: "kyverno"
+			}
+			patches: [{
+				op:    "replace"
+				path:  "/spec/template/spec/containers/0/resources/requests/cpu"
+				value: "10m"
+			}, {
+				op:    "replace"
+				path:  "/spec/template/spec/containers/0/resources/requests/memory"
+				value: "10Mi"
+			}]
+		}
+	}
 }
 
 // https://artifacthub.io/packages/helm/linkerd2-edge/linkerd-crds
@@ -657,6 +676,25 @@ kustomize: "buildkite": #KustomizeHelm & {
 				secretKey: "BUILDKITE_AGENT_TOKEN"
 				remoteRef: key:      "\(cluster.cluster_name)-cluster"
 				remoteRef: property: secretKey
+			}]
+		}
+	}
+
+	for d in ["buildkite"] {
+		jsp: "deployment-\(d)-resources": {
+			target: {
+				kind:      "Deployment"
+				name:      d
+				namespace: "buildkite"
+			}
+			patches: [{
+				op:    "replace"
+				path:  "/spec/template/spec/containers/0/resources/requests/cpu"
+				value: "10m"
+			}, {
+				op:    "replace"
+				path:  "/spec/template/spec/containers/0/resources/requests/memory"
+				value: "10Mi"
 			}]
 		}
 	}
@@ -1155,6 +1193,23 @@ kustomize: "tetragon": #KustomizeHelm & {
 		repo:      "https://helm.cilium.io"
 		values: {
 		}
+	}
+
+	jsp: "deployment-tetragon-operator-resources": {
+		target: {
+			kind:      "Deployment"
+			name:      "tetragon-operator"
+			namespace: "kube-system"
+		}
+		patches: [{
+			op:    "replace"
+			path:  "/spec/template/spec/containers/0/resources/requests/cpu"
+			value: "10m"
+		}, {
+			op:    "replace"
+			path:  "/spec/template/spec/containers/0/resources/requests/memory"
+			value: "10Mi"
+		}]
 	}
 }
 
@@ -2647,6 +2702,25 @@ kustomize: "postgres-operator": #KustomizeHelm & {
 			name: "postgres-operator"
 		}
 	}
+
+	for d in ["postgres-operator"] {
+		jsp: "deployment-\(d)-resources": {
+			target: {
+				kind:      "Deployment"
+				name:      d
+				namespace: "postgres-operator"
+			}
+			patches: [{
+				op:    "replace"
+				path:  "/spec/template/spec/containers/0/resources/requests/cpu"
+				value: "10m"
+			}, {
+				op:    "replace"
+				path:  "/spec/template/spec/containers/0/resources/requests/memory"
+				value: "10Mi"
+			}]
+		}
+	}
 }
 
 // https://artifacthub.io/packages/helm/harbor/harbor
@@ -2764,15 +2838,15 @@ kustomize: "harbor": #KustomizeHelm & {
 		}]
 	}
 
-	jsp: "deployment-harbor-port": {
+	jsp: "deployment-harbor-portal": {
 		target: {
 			kind: "Deployment"
-			name: "harbor-port"
+			name: "harbor-portal"
 		}
 		patches: [{
 			op:    "replace"
 			path:  "/spec/template/metadata/labels/name"
-			value: "harbor-port"
+			value: "harbor-portal"
 		}]
 	}
 
@@ -3499,6 +3573,25 @@ kustomize: "crossplane": #KustomizeHelm & {
 		kind:       "Namespace"
 		metadata: {
 			name: "crossplane"
+		}
+	}
+
+	for d in ["crossplane", "crossplane-rbac", "crossplane-rbac-manager"] {
+		jsp: "deployment-\(d)-resources": {
+			target: {
+				kind:      "Deployment"
+				name:      d
+				namespace: "crossplan"
+			}
+			patches: [{
+				op:    "replace"
+				path:  "/spec/template/spec/containers/0/resources/requests/cpu"
+				value: "10m"
+			}, {
+				op:    "replace"
+				path:  "/spec/template/spec/containers/0/resources/requests/memory"
+				value: "10Mi"
+			}]
 		}
 	}
 }
