@@ -1795,7 +1795,7 @@ kustomize: "coder-district": #Kustomize & {
 		kind:       "Service"
 		metadata: {
 			name:      "coder-district"
-			namespace: kustomize.coder.helm.namespace
+			namespace: "coder-district"
 			annotations: {
 				"io.cilium/global-service":                       "true"
 				"traefik.ingress.kubernetes.io/service.nativelb": "true"
@@ -1825,7 +1825,7 @@ kustomize: "coder-school": #Kustomize & {
 		kind:       "Service"
 		metadata: {
 			name:      "coder-school"
-			namespace: kustomize.coder.helm.namespace
+			namespace: "coder-school"
 			annotations: {
 				"io.cilium/global-service":                       "true"
 				"traefik.ingress.kubernetes.io/service.nativelb": "true"
