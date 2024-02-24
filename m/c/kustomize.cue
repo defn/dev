@@ -1684,6 +1684,7 @@ kustomize: "traefik": #KustomizeHelm & {
 			dnsNames: [
 				"*.district.\(cluster.handle).\(cluster.domain_zone)",
 				"*.school.\(cluster.handle).\(cluster.domain_zone)",
+				"*.coder.district.\(cluster.handle).\(cluster.domain_zone)",
 				"*.coder.school.\(cluster.handle).\(cluster.domain_zone)",
 			]
 			issuerRef: {
