@@ -1735,11 +1735,11 @@ kustomize: "coder-ingress": #Kustomize & {
 	cluster: #Cluster
 
 	for n in ["district", "school"] {
-		resource: "ingress-coder": {
+		resource: "ingress-coder-\(n)": {
 			apiVersion: "networking.k8s.io/v1"
 			kind:       "Ingress"
 			metadata: {
-				name:      "coder"
+				name:      "coder-\(n)"
 				namespace: kustomize.coder.helm.namespace
 				annotations: {
 					"traefik.ingress.kubernetes.io/router.tls":         "true"
@@ -1763,11 +1763,11 @@ kustomize: "coder-ingress": #Kustomize & {
 			}
 		}
 
-		resource: "ingressroute-coder-wildcard": {
+		resource: "ingressroute-coder-wildcard-\(n)": {
 			apiVersion: "traefik.containo.us/v1alpha1"
 			kind:       "IngressRoute"
 			metadata: {
-				name:      "coder-wildcard"
+				name:      "coder-wildcard-\(n)"
 				namespace: kustomize.coder.helm.namespace
 			}
 			spec: entryPoints: ["websecure"]
