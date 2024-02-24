@@ -1638,7 +1638,7 @@ kustomize: "traefik": #KustomizeHelm & {
 			name:      "traefik"
 			namespace: "traefik"
 			annotations: {
-				"external-dns.alpha.kubernetes.io/internal-hostname": "*.district.\(cluster.handle).\(cluster.domain_zone), *.school.\(cluster.handle).\(cluster.domain_zone), *.coder.school.\(cluster.handle).\(cluster.domain_zone)"
+				"external-dns.alpha.kubernetes.io/internal-hostname": "*.district.\(cluster.handle).\(cluster.domain_zone), *.school.\(cluster.handle).\(cluster.domain_zone)"
 				"external-dns.alpha.kubernetes.io/target":            "100.113.64.80"
 			}
 		}
@@ -1684,7 +1684,6 @@ kustomize: "traefik": #KustomizeHelm & {
 			dnsNames: [
 				"*.district.\(cluster.handle).\(cluster.domain_zone)",
 				"*.school.\(cluster.handle).\(cluster.domain_zone)",
-				"*.coder.school.\(cluster.handle).\(cluster.domain_zone)",
 			]
 			issuerRef: {
 				name:  cluster.issuer
@@ -1772,7 +1771,7 @@ kustomize: "coder-ingress": #Kustomize & {
 			}
 			spec: entryPoints: ["websecure"]
 			spec: routes: [{
-				match: "HostRegexp(`{subdomain:[a-z0-9-]+}.coder.\(n).\(cluster.handle).\(cluster.domain_zone)`)"
+				match: "HostRegexp(`cs-{subdomain:[a-z0-9-]+}.\(n).\(cluster.handle).\(cluster.domain_zone)`)"
 				kind:  "Rule"
 				services: [{
 					name:      "coder-\(n)"
@@ -1867,7 +1866,7 @@ kustomize: "coder": #KustomizeHelm & {
 					value: "https://coder.\(cluster.domain_name)"
 				}, {
 					name:  "CODER_WILDCARD_ACCESS_URL"
-					value: "*.coder.\(cluster.domain_name)"
+					value: "*.\(cluster.domain_name)"
 				}, {
 					name:  "CODER_REDIRECT_TO_ACCESS_URL"
 					value: "false"
