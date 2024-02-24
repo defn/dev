@@ -53,7 +53,13 @@ export HOF_TELEMETRY_DISABLED=1
 #export DISPLAY=1
 
 # kubectl
-if [[ -z ${KUBECONFIG-} ]]; then export KUBECONFIG="$HOME/.kube/config"; fi
+if ! test -e "${KUBECONFIG:-}"; then 
+	if test -e "$HOME/.kube/config"; then
+		export KUBECONFIG="$HOME/.kube/config"
+	else
+		export KUBECONFIG="$HOME/.kube/config-in-cluster"
+	fi
+fi
 
 # cilium
 export CILIUM_CLI_MODE=classic
