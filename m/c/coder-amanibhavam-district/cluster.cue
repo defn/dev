@@ -26,4 +26,5 @@ teacher: bootstrap: k3s_bootstrap & {
 	"coder-school": {}
 }
 
-kustomize: "cilium": helm: values: hubble: ui: enabled: true
+kustomize: cilium: helm: values: hubble: ui: enabled: true
+kustomize: coder: helm: namespace: "coder-\(class.env)"

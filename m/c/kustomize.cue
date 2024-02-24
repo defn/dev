@@ -1735,12 +1735,12 @@ kustomize: "coder-ingress": #Kustomize & {
 	cluster: #Cluster
 
 	for n in ["district", "school"] {
-		resource: "ingress-coder-\(n)": {
+		resource: "ingress-coder": {
 			apiVersion: "networking.k8s.io/v1"
 			kind:       "Ingress"
 			metadata: {
-				name:      "coder-\(n)"
-				namespace: "coder"
+				name:      "coder"
+				namespace: kustomize.coder.helm.namespace
 				annotations: {
 					"traefik.ingress.kubernetes.io/router.tls":         "true"
 					"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
@@ -1755,7 +1755,7 @@ kustomize: "coder-ingress": #Kustomize & {
 						path:     "/"
 						pathType: "Prefix"
 						backend: service: {
-							name: "coder-\(n)"
+							name: "coder"
 							port: number: 80
 						}
 					}]
@@ -1763,19 +1763,19 @@ kustomize: "coder-ingress": #Kustomize & {
 			}
 		}
 
-		resource: "ingressroute-coder-wildcard-\(n)": {
+		resource: "ingressroute-coder-wildcard": {
 			apiVersion: "traefik.containo.us/v1alpha1"
 			kind:       "IngressRoute"
 			metadata: {
-				name:      "coder-wildcard-\(n)"
-				namespace: "coder"
+				name:      "coder-wildcard"
+				namespace: kustomize.coder.helm.namespace
 			}
 			spec: entryPoints: ["websecure"]
 			spec: routes: [{
 				match: "HostRegexp(`{subdomain:[a-z0-9-]+}.coder.\(n).\(cluster.handle).\(cluster.domain_zone)`)"
 				kind:  "Rule"
 				services: [{
-					name:      "coder-\(n)"
+					name:      "coder"
 					namespace: "coder"
 					kind:      "Service"
 					port:      80
@@ -1794,8 +1794,8 @@ kustomize: "coder-district": #Kustomize & {
 		apiVersion: "v1"
 		kind:       "Service"
 		metadata: {
-			name:      "coder-district"
-			namespace: "coder"
+			name:      "coder"
+			namespace: kustomize.coder.helm.namespace
 			annotations: {
 				"io.cilium/global-service":                       "true"
 				"traefik.ingress.kubernetes.io/service.nativelb": "true"
@@ -1824,7 +1824,7 @@ kustomize: "coder-school": #Kustomize & {
 		apiVersion: "v1"
 		kind:       "Service"
 		metadata: {
-			name:      "coder-school"
+			name:      "coder"
 			namespace: "coder"
 			annotations: {
 				"io.cilium/global-service":                       "true"
@@ -1855,7 +1855,7 @@ kustomize: "coder": #KustomizeHelm & {
 	helm: {
 		release:   "coder"
 		name:      "coder"
-		namespace: "coder"
+		namespace: string
 		version:   "2.8.3"
 		repo:      "https://helm.coder.com/v2"
 		values: {
