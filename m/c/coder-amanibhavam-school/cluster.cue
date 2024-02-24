@@ -12,4 +12,5 @@ teacher: bootstrap: k3s_bootstrap & {
 	"xwing": {}
 	"argocd-school": {}
 	"coder-school": {}
+	"coder": {}
 }
