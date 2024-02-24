@@ -14,7 +14,6 @@ teacher: bootstrap: k3s_bootstrap & {
 	"deathstar": {}
 
 	"postgres-operator": {}
-	"coder": {}
 
 	"traefik": {}
 	"argocd-ingress": {}

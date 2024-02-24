@@ -24,7 +24,6 @@ cluster_apps = [
     "coder-amanibhavam-district-cluster-crossprovider",
     "coder-amanibhavam-district-cluster-deathstar",
     "coder-amanibhavam-district-cluster-postgres-operator",
-    "coder-amanibhavam-district-cluster-coder",
     "coder-amanibhavam-district-cluster-coder-ingress",
     "coder-amanibhavam-district-cluster-coder-district",
     "coder-amanibhavam-district-cluster-coder-school",
