@@ -7,7 +7,6 @@ import (
 k3s_bootstrap: {
 	// secrets
 	"cert-manager": {}
-	"trust-manager": {}
 	"pod-identity": {}
 	"external-secrets": {}
 
@@ -17,6 +16,7 @@ k3s_bootstrap: {
 	"issuer": {}
 
 	// management
+	"argo-cd": {}
 	"crossplane": {}
 	"crossprovider": {}
 	"karpenter": {}
@@ -26,13 +26,6 @@ k3s_bootstrap: {
 	"kyverno": {
 		app_sync_options: ["ServerSideApply=true"]
 	}
-
-	// traffic
-	//"l5d-crds": {}
-	//"l5d-control": {}
-
-	// deploy
-	"argo-cd": {}
 }
 
 infra: {

@@ -13,13 +13,15 @@ teacher: bootstrap: k3s_bootstrap & {
 	"external-dns": {}
 	"deathstar": {}
 
+	"postgres-operator": {}
+	"coder": {}
+
 	"traefik": {}
 	"argocd-ingress": {}
 	"coder-ingress": {}
 
 	"argocd-district": {}
 	"coder-district": {}
-	"coder": {}
 
 	"argocd-school": {}
 	"coder-school": {}
