@@ -12,6 +12,7 @@
     vcluster.url = github:defn/dev/pkg-vcluster-0.19.1-1?dir=m/pkg/vcluster;
     kubevirt.url = github:defn/dev/pkg-kubevirt-1.1.1-2?dir=m/pkg/kubevirt;
     linkerd.url = github:defn/dev/pkg-linkerd-24.2.5-1?dir=m/pkg/linkerd;
+    kuma.url = github:defn/dev/pkg-kuma-24.2.5-1?dir=m/pkg/kuma;
     cilium.url = github:defn/dev/pkg-cilium-0.15.23-1?dir=m/pkg/cilium;
     hubble.url = github:defn/dev/pkg-hubble-0.13.0-2?dir=m/pkg/hubble;
     tfo.url = github:defn/dev/pkg-tfo-2.2.0-5?dir=m/pkg/tfo;
@@ -38,6 +39,7 @@
             inputs.kn.defaultPackage.${ctx.system}
             inputs.vcluster.defaultPackage.${ctx.system}
             inputs.kubevirt.defaultPackage.${ctx.system}
+            inputs.kuma.defaultPackage.${ctx.system}
             inputs.linkerd.defaultPackage.${ctx.system}
             inputs.cilium.defaultPackage.${ctx.system}
             inputs.hubble.defaultPackage.${ctx.system}
