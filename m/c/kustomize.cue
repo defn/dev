@@ -1638,7 +1638,7 @@ kustomize: "traefik": #KustomizeHelm & {
 			name:      "traefik"
 			namespace: "traefik"
 			annotations: {
-				"external-dns.alpha.kubernetes.io/internal-hostname": "*.district.\(cluster.handle).\(cluster.domain_zone), *.school.\(cluster.handle).\(cluster.domain_zone), *.coder.school.\(cluster.handle).\(cluster.domain_zone)"
+				"external-dns.alpha.kubernetes.io/internal-hostname": "*.district.\(cluster.handle).\(cluster.domain_zone), *.school.\(cluster.handle).\(cluster.domain_zone), *.coder.district.\(cluster.handle).\(cluster.domain_zone), *.coder.school.\(cluster.handle).\(cluster.domain_zone)"
 				"external-dns.alpha.kubernetes.io/target":            "100.113.64.80"
 			}
 		}
