@@ -16,6 +16,7 @@ function main {
 		rm -rf dev
 		git reset --hard
 
+		sudo apt install -y pipx
 		make play
 
 		exit $?
