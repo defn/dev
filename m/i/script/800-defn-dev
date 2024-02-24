@@ -16,9 +16,6 @@ function main {
 		rm -rf dev
 		git reset --hard
 
-		# make dependencies
-		make deps
-
 		exit $?
 	fi
 
