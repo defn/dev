@@ -16,6 +16,8 @@ function main {
 		rm -rf dev
 		git reset --hard
 
+		make play
+
 		exit $?
 	fi
 
