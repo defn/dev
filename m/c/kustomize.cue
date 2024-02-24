@@ -2034,7 +2034,7 @@ kustomize: "coder": #KustomizeHelm & {
 		subjects: [{
 			kind:      "ServiceAccount"
 			name:      "coder"
-			namespace: "coder"
+			namespace: helm.namespace
 		}]
 	}
 }
