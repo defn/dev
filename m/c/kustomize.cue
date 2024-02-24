@@ -1043,7 +1043,7 @@ cilium_common: {
 			externalIPs: enabled:       true
 
 			// hostFirewall, when enabled, blocks hubble relay
-			hostFirewall: enabled:      false
+			hostFirewall: enabled: false
 
 			ingressController: enabled: false
 
@@ -1734,7 +1734,7 @@ kustomize: "ubuntu": #Kustomize & {
 kustomize: "coder-ingress": #Kustomize & {
 	cluster: #Cluster
 
-	for n in ["school"] {
+	for n in ["district", "school"] {
 		resource: "ingress-coder-\(n)": {
 			apiVersion: "networking.k8s.io/v1"
 			kind:       "Ingress"

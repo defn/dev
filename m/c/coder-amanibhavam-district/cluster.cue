@@ -19,6 +19,7 @@ teacher: bootstrap: k3s_bootstrap & {
 
 	"argocd-district": {}
 	"coder-district": {}
+	"coder": {}
 
 	"argocd-school": {}
 	"coder-school": {}
