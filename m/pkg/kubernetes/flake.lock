@@ -294,6 +294,27 @@
         "type": "github"
       }
     },
+    "dev_19": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_19"
+      },
+      "locked": {
+        "dir": "m/pkg/dev",
+        "lastModified": 1706897346,
+        "narHash": "sha256-i+VwVH4Uu9zsySEOgZ4tqUxOysFfmJalU6tcWACQu5U=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "aa68c18a500d0a0558712dad8a8c26eb018fa69b",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/dev",
+        "owner": "defn",
+        "ref": "pkg-dev-0.0.13",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
     "dev_2": {
       "inputs": {
         "nixpkgs": "nixpkgs_2"
@@ -609,9 +630,30 @@
         "type": "github"
       }
     },
-    "kustomize": {
+    "kuma": {
       "inputs": {
         "pkg": "pkg_12"
+      },
+      "locked": {
+        "dir": "m/pkg/kuma",
+        "lastModified": 1708741458,
+        "narHash": "sha256-fATXUNa9/isLWlM046P2ut8ycYVxu14wOt0jULv7MpY=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "55a3da6211571ea9f2f57bf054dd0980933964d7",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/kuma",
+        "owner": "defn",
+        "ref": "pkg-kuma-2.6.1-2",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
+    "kustomize": {
+      "inputs": {
+        "pkg": "pkg_13"
       },
       "locked": {
         "dir": "m/pkg/kustomize",
@@ -632,7 +674,7 @@
     },
     "linkerd": {
       "inputs": {
-        "pkg": "pkg_13"
+        "pkg": "pkg_14"
       },
       "locked": {
         "dir": "m/pkg/linkerd",
@@ -653,7 +695,7 @@
     },
     "mirrord": {
       "inputs": {
-        "pkg": "pkg_14"
+        "pkg": "pkg_15"
       },
       "locked": {
         "dir": "m/pkg/mirrord",
@@ -817,6 +859,22 @@
       }
     },
     "nixpkgs_18": {
+      "locked": {
+        "lastModified": 1700284104,
+        "narHash": "sha256-oNsJfAyAuBCTkusesiK0LWuO59F6vEGcP4wwa7kc1ZA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "005617587ee2b7c003388b4539b9120ebcc90e44",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "005617587ee2b7c003388b4539b9120ebcc90e44",
+        "type": "github"
+      }
+    },
+    "nixpkgs_19": {
       "locked": {
         "lastModified": 1700284104,
         "narHash": "sha256-oNsJfAyAuBCTkusesiK0LWuO59F6vEGcP4wwa7kc1ZA=",
@@ -1170,6 +1228,27 @@
         "type": "github"
       }
     },
+    "pkg_19": {
+      "inputs": {
+        "dev": "dev_19"
+      },
+      "locked": {
+        "dir": "m/pkg/pkg",
+        "lastModified": 1706897415,
+        "narHash": "sha256-saMstGOsxMiR6kG+v5pr7vPKIf/BTl/60z8VPicizPs=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "e067b8a8a3f8d8c277bfde347b91eaec9e547f0d",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/pkg",
+        "owner": "defn",
+        "ref": "pkg-pkg-0.0.16",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
     "pkg_2": {
       "inputs": {
         "dev": "dev_2"
@@ -1351,6 +1430,7 @@
         "kn": "kn",
         "kubectl": "kubectl",
         "kubevirt": "kubevirt",
+        "kuma": "kuma",
         "kustomize": "kustomize",
         "linkerd": "linkerd",
         "mirrord": "mirrord",
@@ -1362,7 +1442,7 @@
     },
     "spire": {
       "inputs": {
-        "pkg": "pkg_15"
+        "pkg": "pkg_16"
       },
       "locked": {
         "dir": "m/pkg/spire",
@@ -1383,7 +1463,7 @@
     },
     "stern": {
       "inputs": {
-        "pkg": "pkg_16"
+        "pkg": "pkg_17"
       },
       "locked": {
         "dir": "m/pkg/stern",
@@ -1404,7 +1484,7 @@
     },
     "tfo": {
       "inputs": {
-        "pkg": "pkg_17"
+        "pkg": "pkg_18"
       },
       "locked": {
         "dir": "m/pkg/tfo",
@@ -1425,7 +1505,7 @@
     },
     "vcluster": {
       "inputs": {
-        "pkg": "pkg_18"
+        "pkg": "pkg_19"
       },
       "locked": {
         "dir": "m/pkg/vcluster",
