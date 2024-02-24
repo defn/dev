@@ -1850,7 +1850,7 @@ kustomize: "coder-school": #Kustomize & {
 kustomize: "coder": #KustomizeHelm & {
 	cluster: #Cluster
 
-	namespace: "coder"
+	namespace: helm.namespace
 
 	helm: {
 		release:   "coder"
