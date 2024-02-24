@@ -1938,7 +1938,7 @@ kustomize: "coder": #KustomizeHelm & {
 		apiVersion: "v1"
 		kind:       "Namespace"
 		metadata: {
-			name: "coder"
+			name: helm.namespace
 		}
 	}
 
@@ -1978,7 +1978,7 @@ kustomize: "coder": #KustomizeHelm & {
 							"Secret",
 						]
 						namespaces: [
-							"coder",
+							helm.namespace,
 						]
 					}
 				}]
@@ -1987,7 +1987,7 @@ kustomize: "coder": #KustomizeHelm & {
 					apiVersion:  "v1"
 					kind:        "Secret"
 					name:        "coder.coder-db.connection-url"
-					namespace:   "coder"
+					namespace:   helm.namespace
 					data: {
 						type: "Opaque"
 						stringData: {
@@ -2004,7 +2004,7 @@ kustomize: "coder": #KustomizeHelm & {
 		kind:       "ExternalSecret"
 		metadata: {
 			name:      "coder"
-			namespace: "coder"
+			namespace: helm.namespace
 		}
 		spec: {
 			refreshInterval: "1h"
