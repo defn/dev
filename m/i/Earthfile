@@ -1,7 +1,8 @@
 VERSION 0.8
 
 root:
-    ARG image=coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:root
+    ARG image=coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:class
+    ARG vsextensions="vscodevim.vim jnoortheen.nix-ide hashicorp.terraform golang.go esbenp.prettier-vscode bazelbuild.vscode-bazel cuelang.cue pbkit.vscode-pbkit marp-team.marp-vscode tailscale.vscode-tailscale geequlim.godot-tools alfish.godot-files ms-python.python"
 
     FROM ubuntu:22.04
 
@@ -28,16 +29,6 @@ root:
     RUN script/999-defn-dev
     RUN rm -rf script
 
-    ENTRYPOINT []
-    CMD []
-
-    SAVE IMAGE --push ${image}
-
-class:
-    ARG image=coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:class
-    ARG vsextensions="vscodevim.vim jnoortheen.nix-ide hashicorp.terraform golang.go esbenp.prettier-vscode bazelbuild.vscode-bazel cuelang.cue pbkit.vscode-pbkit marp-team.marp-vscode tailscale.vscode-tailscale geequlim.godot-tools alfish.godot-files ms-python.python"
-    FROM coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:root
-
     CACHE /home/ubuntu/work
 
     ENV BUILDKITE_GIT_MIRRORS_PATH=/cache/git
@@ -54,10 +45,12 @@ class:
     RUN bash -c 'source .bash_profile && for e in ${vsextensions}; do bin/nix/code-server serve-local --force --install-extension $e; done'
     RUN bash -c 'source .bash_profile && mkdir -p work && bin/persist-cache && cd m && go install golang.org/x/tools/gopls@latest && go install honnef.co/go/tools/cmd/staticcheck@latest'
 
-    SAVE IMAGE --push ${image}-latest
+    ENTRYPOINT []
+    CMD []
+
     SAVE IMAGE --push ${image}-buildkite-latest
 
-class-buildkite-latest:
+class:
     ARG image=coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:class-buildkite-latest
     FROM ${image}
 
