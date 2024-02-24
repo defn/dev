@@ -1740,7 +1740,7 @@ kustomize: "coder-ingress": #Kustomize & {
 			kind:       "Ingress"
 			metadata: {
 				name:      "coder-\(n)"
-				namespace: kustomize.coder.helm.namespace
+				namespace: "coder-\(n)"
 				annotations: {
 					"traefik.ingress.kubernetes.io/router.tls":         "true"
 					"traefik.ingress.kubernetes.io/router.entrypoints": "websecure"
@@ -1768,7 +1768,7 @@ kustomize: "coder-ingress": #Kustomize & {
 			kind:       "IngressRoute"
 			metadata: {
 				name:      "coder-wildcard-\(n)"
-				namespace: kustomize.coder.helm.namespace
+				namespace: "coder-\(n)"
 			}
 			spec: entryPoints: ["websecure"]
 			spec: routes: [{
@@ -1776,7 +1776,7 @@ kustomize: "coder-ingress": #Kustomize & {
 				kind:  "Rule"
 				services: [{
 					name:      "coder-\(n)"
-					namespace: kustomize.coder.helm.namespace
+					namespace: "coder-\(n)"
 					kind:      "Service"
 					port:      80
 					scheme:    "http"
