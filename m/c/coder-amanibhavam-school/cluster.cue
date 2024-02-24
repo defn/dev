@@ -15,3 +15,5 @@ teacher: bootstrap: k3s_bootstrap & {
 	"argocd-school": {}
 	"coder-school": {}
 }
+
+kustomize: coder: helm: namespace: "coder-\(class.env)"
