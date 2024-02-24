@@ -11,9 +11,9 @@ teacher: bootstrap: k3s_bootstrap & {
 	"harbor": {}
 	"headlamp": {}
 	"external-dns": {}
-	"deathstar": {}
 
 	"postgres-operator": {}
+	"coder": {}
 
 	"traefik": {}
 	"argocd-ingress": {}
@@ -24,6 +24,9 @@ teacher: bootstrap: k3s_bootstrap & {
 
 	"argocd-school": {}
 	"coder-school": {}
+
+	"deathstar": {}
+
 }
 
 kustomize: cilium: helm: values: hubble: ui: enabled: true
