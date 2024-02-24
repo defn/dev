@@ -14,11 +14,14 @@ teacher: bootstrap: k3s_bootstrap & {
 	"deathstar": {}
 
 	"traefik": {}
-	"coder-school": {}
-	"coder-ingress": {}
-	"argocd-district": {}
-	"argocd-school": {}
 	"argocd-ingress": {}
+	"coder-ingress": {}
+
+	"argocd-district": {}
+	"coder-district": {}
+
+	"argocd-school": {}
+	"coder-school": {}
 }
 
 kustomize: "cilium": helm: values: hubble: ui: enabled: true

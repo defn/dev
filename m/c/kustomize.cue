@@ -1787,6 +1787,36 @@ kustomize: "coder-ingress": #Kustomize & {
 	}
 }
 
+kustomize: "coder-district": #Kustomize & {
+	cluster: #Cluster
+
+	resource: "coder-global": {
+		apiVersion: "v1"
+		kind:       "Service"
+		metadata: {
+			name:      "coder-district"
+			namespace: "coder"
+			annotations: {
+				"io.cilium/global-service":                       "true"
+				"traefik.ingress.kubernetes.io/service.nativelb": "true"
+			}
+		}
+		spec: {
+			type: "ClusterIP"
+			ports: [{
+				name:       "http"
+				port:       80
+				protocol:   "TCP"
+				targetPort: "http"
+			}]
+			selector: {
+				"app.kubernetes.io/instance": "coder"
+				"app.kubernetes.io/name":     "coder"
+			}
+		}
+	}
+}
+
 kustomize: "coder-school": #Kustomize & {
 	cluster: #Cluster
 

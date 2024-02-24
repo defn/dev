@@ -10,7 +10,6 @@ teacher: bootstrap: k3s_bootstrap & {
 	"postgres-operator": {}
 	"crossdemo": {}
 	"xwing": {}
-	"coder": {}
-	"coder-school": {}
 	"argocd-school": {}
+	"coder-school": {}
 }
