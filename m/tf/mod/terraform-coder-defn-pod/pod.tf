@@ -26,18 +26,13 @@ resource "helm_release" "main" {
   }
 
   set {
-    name  = "sync.ingresses.enabled"
-    value = "true"
-  }
-
-  set {
-    name  = "sync.nodes.enabled"
-    value = "true"
-  }
-
-  set {
     name  = "sync.serviceaccounts.enabled"
     value = "true"
+  }
+
+  set {
+    name  = "sync.ingresses.enabled"
+    value = "false"
   }
 
   set {
