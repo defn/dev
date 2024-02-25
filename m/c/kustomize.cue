@@ -410,66 +410,6 @@ kustomize: "kyverno": #KustomizeHelm & {
 	}
 }
 
-// https://artifacthub.io/packages/helm/linkerd2-edge/linkerd-crds
-kustomize: "l5d-crds": #KustomizeHelm & {
-	cluster: #Cluster
-
-	namespace: "linkerd"
-
-	helm: {
-		release: "l5d-crds"
-		name:    "linkerd-crds"
-		version: "1.9.5-edge"
-		repo:    "https://helm.linkerd.io/edge"
-		values: {}
-	}
-
-	resource: "namespace-linkerd": {
-		apiVersion: "v1"
-		kind:       "Namespace"
-		metadata: {
-			name: "linkerd"
-			labels: {
-				"linkerd.io/is-control-plane":          "true"
-				"linkerd.io/control-plane-ns":          "linkerd"
-				"config.linkerd.io/admission-webhooks": "disabled"
-			}
-
-			annotations: {
-				"linkerd.io/inject": "disabled"
-			}
-		}
-	}
-}
-
-// https://artifacthub.io/packages/helm/linkerd2-edge/linkerd-control-plane
-kustomize: "l5d-control": #KustomizeHelm & {
-	cluster: #Cluster
-
-	namespace: "linkerd"
-
-	helm: {
-		release: "l5d-control"
-		name:    "linkerd-control-plane"
-		version: "1.18.11-edge"
-		repo:    "https://helm.linkerd.io/edge"
-		values: {
-			heartbeatSchedule: "0 0 * * *"
-
-			identity: externalCA: true
-			identity: issuer: scheme: "kubernetes.io/tls"
-
-			proxyInjector: externalSecret:    true
-			profileValidator: externalSecret: true
-			policyValidator: externalSecret:  true
-
-			proxyInjector: injectCaFrom:    "linkerd/proxy_injector"
-			profileValidator: injectCaFrom: "linkerd/profile_validator"
-			policyValidator: injectCaFrom:  "linkerd/policy_validator"
-		}
-	}
-}
-
 // https://artifacthub.io/packages/helm/bitnami/external-dns
 kustomize: "external-dns": #KustomizeHelm & {
 	cluster: #Cluster
@@ -991,7 +931,7 @@ kustomize: "knative": #Kustomize & {
 	}
 }
 
-cert_manager_version: "1.14.2"
+cert_manager_version: "1.14.3"
 
 // https://artifacthub.io/packages/helm/cert-manager/cert-manager
 kustomize: "cert-manager": #KustomizeHelm & {
