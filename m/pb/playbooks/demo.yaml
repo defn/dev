@@ -1,4 +1,0 @@
-- name: Playbook with one role
-  hosts: all
-  roles:
-    - base_packages

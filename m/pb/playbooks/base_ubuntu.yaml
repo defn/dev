@@ -1,0 +1,4 @@
+- name: Ubuntu base playbook for all servers
+  hosts: all
+  roles:
+    - base_packages

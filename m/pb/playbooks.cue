@@ -31,10 +31,14 @@ inventory: {
 		"thinkpad",
 		"thelio",
 	]
+
+	district_defn_net: hosts: [
+		"district",
+	]
 }
 
-playbook: demo: [{
-	name:  "Playbook with one role"
+playbook: base_ubuntu: [{
+	name:  "Ubuntu base playbook for all servers"
 	hosts: "all"
 	roles: [
 		"base_packages",
