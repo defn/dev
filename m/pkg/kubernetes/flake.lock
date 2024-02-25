@@ -294,27 +294,6 @@
         "type": "github"
       }
     },
-    "dev_19": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_19"
-      },
-      "locked": {
-        "dir": "m/pkg/dev",
-        "lastModified": 1706897346,
-        "narHash": "sha256-i+VwVH4Uu9zsySEOgZ4tqUxOysFfmJalU6tcWACQu5U=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "aa68c18a500d0a0558712dad8a8c26eb018fa69b",
-        "type": "github"
-      },
-      "original": {
-        "dir": "m/pkg/dev",
-        "owner": "defn",
-        "ref": "pkg-dev-0.0.13",
-        "repo": "dev",
-        "type": "github"
-      }
-    },
     "dev_2": {
       "inputs": {
         "nixpkgs": "nixpkgs_2"
@@ -672,30 +651,9 @@
         "type": "github"
       }
     },
-    "linkerd": {
-      "inputs": {
-        "pkg": "pkg_14"
-      },
-      "locked": {
-        "dir": "m/pkg/linkerd",
-        "lastModified": 1708651857,
-        "narHash": "sha256-0HCQwSbAmIxjsTphPeS33Pn39fHsYr2EAXt8T8yC3Ng=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "5ac351b5ebfd126faa3d6fc03872a66aae1f7d4a",
-        "type": "github"
-      },
-      "original": {
-        "dir": "m/pkg/linkerd",
-        "owner": "defn",
-        "ref": "pkg-linkerd-24.2.5-1",
-        "repo": "dev",
-        "type": "github"
-      }
-    },
     "mirrord": {
       "inputs": {
-        "pkg": "pkg_15"
+        "pkg": "pkg_14"
       },
       "locked": {
         "dir": "m/pkg/mirrord",
@@ -859,22 +817,6 @@
       }
     },
     "nixpkgs_18": {
-      "locked": {
-        "lastModified": 1700284104,
-        "narHash": "sha256-oNsJfAyAuBCTkusesiK0LWuO59F6vEGcP4wwa7kc1ZA=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "005617587ee2b7c003388b4539b9120ebcc90e44",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "005617587ee2b7c003388b4539b9120ebcc90e44",
-        "type": "github"
-      }
-    },
-    "nixpkgs_19": {
       "locked": {
         "lastModified": 1700284104,
         "narHash": "sha256-oNsJfAyAuBCTkusesiK0LWuO59F6vEGcP4wwa7kc1ZA=",
@@ -1228,27 +1170,6 @@
         "type": "github"
       }
     },
-    "pkg_19": {
-      "inputs": {
-        "dev": "dev_19"
-      },
-      "locked": {
-        "dir": "m/pkg/pkg",
-        "lastModified": 1706897415,
-        "narHash": "sha256-saMstGOsxMiR6kG+v5pr7vPKIf/BTl/60z8VPicizPs=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "e067b8a8a3f8d8c277bfde347b91eaec9e547f0d",
-        "type": "github"
-      },
-      "original": {
-        "dir": "m/pkg/pkg",
-        "owner": "defn",
-        "ref": "pkg-pkg-0.0.16",
-        "repo": "dev",
-        "type": "github"
-      }
-    },
     "pkg_2": {
       "inputs": {
         "dev": "dev_2"
@@ -1432,7 +1353,6 @@
         "kubevirt": "kubevirt",
         "kuma": "kuma",
         "kustomize": "kustomize",
-        "linkerd": "linkerd",
         "mirrord": "mirrord",
         "spire": "spire",
         "stern": "stern",
@@ -1442,7 +1362,7 @@
     },
     "spire": {
       "inputs": {
-        "pkg": "pkg_16"
+        "pkg": "pkg_15"
       },
       "locked": {
         "dir": "m/pkg/spire",
@@ -1463,7 +1383,7 @@
     },
     "stern": {
       "inputs": {
-        "pkg": "pkg_17"
+        "pkg": "pkg_16"
       },
       "locked": {
         "dir": "m/pkg/stern",
@@ -1484,7 +1404,7 @@
     },
     "tfo": {
       "inputs": {
-        "pkg": "pkg_18"
+        "pkg": "pkg_17"
       },
       "locked": {
         "dir": "m/pkg/tfo",
@@ -1505,7 +1425,7 @@
     },
     "vcluster": {
       "inputs": {
-        "pkg": "pkg_19"
+        "pkg": "pkg_18"
       },
       "locked": {
         "dir": "m/pkg/vcluster",
