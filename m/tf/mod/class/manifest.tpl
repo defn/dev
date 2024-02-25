@@ -26,11 +26,10 @@ spec:
         kuma.io/sidecar-injection: enabled
       annotations:
         kuma.io/transparent-proxying-experimental-engine: enabled
+        kuma.io/transparent-proxying-ebpf: enabled
     spec:
       serviceAccountName: "${ns}"
       dnsConfig:
-        nameservers:
-          - 127.0.0.1
         searches:
           - mesh 
         options:
