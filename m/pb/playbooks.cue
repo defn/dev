@@ -2,7 +2,7 @@ package pb
 
 inventory: {
 	[string]: vars: {
-		ansible_user: "ubuntu"
+		ansible_user: string | *"ubuntu"
 	}
 
 	coder: hosts: [
