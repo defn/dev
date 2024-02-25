@@ -64,6 +64,11 @@ kustomize: "coredns": #Kustomize & {
 					forward . 100.100.100.100
 				}
 				"""
+			"kuma-dns.server": """
+				mesh:53 {
+					forward . 10.200.0.102:15053
+				}
+				"""
 		}
 	}
 }
