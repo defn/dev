@@ -134,6 +134,7 @@ global-control-plane:
 	kumactl install control-plane \
 	--set "controlPlane.mode=global" \
 	| sed 's#^  type: LoadBalancer#  type: ClusterIP#' \
+	| perl -pe 'print "  annotations:\n   service.cilium.io/global: \"true\"\n" if m{^  name: kuma-global-zone-sync}' \
 	| kubectl apply -f -
 
 kuma-control-plane:
