@@ -130,6 +130,11 @@ deathstar:
 	$(MAKE) xwing-attack
 #	$(MAKE) mirrord-attack; echo; echo
 
+global-control-plane:
+	kumactl install control-plane \
+	--set "controlPlane.mode=global" \
+	| sed 's#^  type: LoadBalancer#  type: ClusterIP#' \
+	| kubectl apply -f -
 
 kuma-control-plane:
 	kumactl install control-plane \
