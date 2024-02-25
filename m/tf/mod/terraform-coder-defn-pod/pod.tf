@@ -42,12 +42,17 @@ resource "helm_release" "main" {
 
   set {
     name  = "fallbackHostDns"
+    value = "false"
+  }
+
+  set {
+    name  = "sync.nodes.enabled"
     value = "true"
   }
 
   set {
     name  = "init.manifests"
-    value = "${data.template_file.manifest.rendered}"
+    value = data.template_file.manifest.rendered
   }
 }
 
@@ -55,14 +60,14 @@ data "template_file" "manifest" {
   template = file("manifest.tpl")
 
   vars = {
-    ns = local.ns
-    owner_email = data.coder_workspace.me.owner_email
-    owner_id = data.coder_workspace.me.owner_id
-    id = data.coder_workspace.me.id
-    name = data.coder_workspace.me.name
-    owner = data.coder_workspace.me.owner
-    init_script = base64encode(coder_agent.main.init_script)
-    token = coder_agent.main.token
+    ns           = local.ns
+    owner_email  = data.coder_workspace.me.owner_email
+    owner_id     = data.coder_workspace.me.owner_id
+    id           = data.coder_workspace.me.id
+    name         = data.coder_workspace.me.name
+    owner        = data.coder_workspace.me.owner
+    init_script  = base64encode(coder_agent.main.init_script)
+    token        = coder_agent.main.token
     docker_image = data.coder_parameter.docker_image.value
   }
 }
