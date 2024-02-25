@@ -29,6 +29,8 @@ spec:
     spec:
       serviceAccountName: "${ns}"
       dnsConfig:
+        nameservers:
+          - 127.0.0.1
         searches:
           - mesh 
         options:
