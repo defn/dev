@@ -1826,7 +1826,7 @@ kustomize: "coder-ingress": #Kustomize & {
 			}
 			spec: entryPoints: ["websecure"]
 			spec: routes: [{
-				match: "HostRegexp(`cs-{subdomain:[a-z0-9-]+}.\(n).\(cluster.handle).\(cluster.domain_zone)`)"
+				match: "HostRegexp(`{prefix:cs|[0-9]+}-{subdomain:[a-z0-9-]+}.\(n).\(cluster.handle).\(cluster.domain_zone)`)"
 				kind:  "Rule"
 				services: [{
 					name:      "coder-\(n)"
