@@ -28,6 +28,13 @@ spec:
         kuma.io/transparent-proxying-experimental-engine: enabled
     spec:
       serviceAccountName: "${ns}"
+      dnsConfig:
+        searches:
+          - mesh
+        options:
+          - name: ndots
+            value: "2"
+          - name: edns0
       containers:
         - command:
             - bash
