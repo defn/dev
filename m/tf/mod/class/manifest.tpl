@@ -26,12 +26,11 @@ spec:
         kuma.io/sidecar-injection: enabled
       annotations:
         kuma.io/transparent-proxying-experimental-engine: enabled
-        kuma.io/transparent-proxying-ebpf: enabled
     spec:
       serviceAccountName: "${ns}"
       dnsConfig:
         searches:
-          - mesh 
+          - mesh
         options:
           - name: ndots
             value: "2"
