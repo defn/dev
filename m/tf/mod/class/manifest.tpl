@@ -28,10 +28,7 @@ spec:
         kuma.io/transparent-proxying-experimental-engine: enabled
     spec:
       serviceAccountName: "${ns}"
-      dnsPolicy: "None"
       dnsConfig:
-        nameservers:
-          - 127.0.0.1
         searches:
           - mesh 
         options:
