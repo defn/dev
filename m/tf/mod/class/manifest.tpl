@@ -23,6 +23,9 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: "${ns}"
+        kuma.io/sidecar-injection: enabled
+      annotations:
+        kuma.io/transparent-proxying-experimental-engine: enabled
     spec:
       serviceAccountName: "${ns}"
       containers:
