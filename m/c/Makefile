@@ -129,3 +129,14 @@ deathstar:
 	$(MAKE) spaceship-visit
 	$(MAKE) xwing-attack
 #	$(MAKE) mirrord-attack; echo; echo
+
+
+kuma-control-plane:
+	kumactl install control-plane \
+	--use-node-port --ingress-use-node-port \
+	--set "controlPlane.mode=zone" \
+	--set "controlPlane.zone=$(env)" \
+	--set "ingress.enabled=true" \
+	--set "controlPlane.kdsGlobalAddress=grpcs://$(kds):5685" \
+	--set "controlPlane.tls.kdsZoneClient.skipVerify=true" \
+	| kubectl apply -f -
