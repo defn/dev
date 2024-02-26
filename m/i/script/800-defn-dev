@@ -28,7 +28,7 @@ function main {
 	apt update
 	apt install -y git make curl
 
-	curl -fsSL https://tailscale.com/install.sh | sh
+	curl -fsSL https://tailscale.com/install.sh | bash -x
 	rm -rf /var/lib/tailscale
 
 	if [[ ! -x "/usr/local/bin/bazel" ]]; then
