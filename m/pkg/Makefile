@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
 all:
-	$(MAKE) update upgrade	
+	env NIX_CONFIG="access-tokens = github.com=$$(cat ~/.config/gh/hosts.yml | yq -r '.["github.com"].oauth_token')" $(MAKE) update upgrade	
 
 list:
 	$(MAKE) list_vendor_updates
