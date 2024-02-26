@@ -45,7 +45,7 @@ function main {
 		shift
 		if [[ -n ${PARENT_ID} ]]; then
 			if type -P buildevents >/dev/null; then
-				buildevents cmd "${TRACE_ID}" "${PARENT_ID}" "${name}" -- "$@" >/dev/null
+				buildevents cmd "${TRACE_ID}" "${PARENT_ID}" "${name}" -- "$@"
 			else
 				"$@"
 			fi
