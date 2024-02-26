@@ -41,7 +41,7 @@ latest-docker:
 	$(MAKE) class-buildkite-latest
 
 latest-ami:
-	$(MAKE) coder
+	env PACKER_GITHUB_API_TOKEN="$$(cat ~/.config/gh/hosts.yml | yq -r '.["github.com"].oauth_token')" $(MAKE) coder
 
 root:
 	earthly --ci --no-cache --no-output --push +root
