@@ -13,5 +13,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 
-[includeIf "gitdir:/home/ubuntu/**"]
-    path = /home/ubuntu/.dotfiles/.gitconfig
+[includeIf "gitdir:~/"]
+    path = ~/.dotfiles/.gitconfig
