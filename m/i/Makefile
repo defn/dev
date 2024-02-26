@@ -41,7 +41,7 @@ latest-docker:
 	$(MAKE) class-buildkite-latest
 
 latest-ami:
-	env PACKER_GITHUB_API_TOKEN="$$(cat ~/.config/gh/hosts.yml | yq -r '.["github.com"].oauth_token')" $(MAKE) coder
+	$(MAKE) coder
 
 root:
 	unset SSH_AUTH_SOCK && earthly --ci --no-cache --no-output --push --secret NIX_CONFIG="access-tokens = github.com=$$(cat ~/.config/gh/hosts.yml | yq -r '.["github.com"].oauth_token')" +root
@@ -61,5 +61,5 @@ class:
 # ami
 %:
 	$(MAKE) hello
-	packer init $@.pkr.hcl
+	env PACKER_GITHUB_API_TOKEN="$$(cat ~/.config/gh/hosts.yml | yq -r '.["github.com"].oauth_token')" packer init $@.pkr.hcl
 	b exec defn-org env AWS_REGION=us-west-2 packer build -color=true -timestamp-ui=true $@.pkr.hcl
