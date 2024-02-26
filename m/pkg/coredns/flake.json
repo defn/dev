@@ -1,6 +1,6 @@
 {
   "slug": "pkg-coredns",
   "ghrepo": "coredns/coredns",
-  "vendor": "1.11.1",
-  "revision": "5"
+  "vendor": "1.11.2",
+  "revision": "0"
 }
