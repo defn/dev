@@ -2,7 +2,7 @@
   name: Playbook to set up root access over ssh
   hosts: all
   tasks:
-    - name: Add NOPASSWD to sudoers.d for Ubuntu user
+    - name: Add NOPASSWD to sudoers.d for user
       copy:
         content: 'ubuntu ALL=(ALL:ALL) NOPASSWD: ALL'
         dest: /etc/sudoers.d/ubuntu
