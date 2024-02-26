@@ -6,7 +6,7 @@ inventory: {
 	[string]: vars: {
 		// provide defaults for inventory/packer.ini
 		ansible_user:       string | *#username
-		bazel_remote_cache: string | *"127.0.0.1"
+		bazel_remote_cache: string | *"cache.defn.run"
 	}
 
 	coder: hosts: [
