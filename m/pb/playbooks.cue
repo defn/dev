@@ -1,9 +1,11 @@
 package pb
 
+#username: "ubuntu"
+
 inventory: {
 	[string]: vars: {
 		// provide defaults for inventory/packer.ini
-		ansible_user:       string | *"ubuntu"
+		ansible_user:       string | *#username
 		bazel_remote_cache: string | *"127.0.0.1"
 	}
 
@@ -54,10 +56,10 @@ playbook: base_ubuntu: [{
 	name:  "Playbook to set up root access over ssh"
 	hosts: "all"
 	tasks: [{
-		name: "Add NOPASSWD to sudoers.d for Ubuntu user"
+		name: "Add NOPASSWD to sudoers.d for user"
 		copy: {
-			content: "ubuntu ALL=(ALL:ALL) NOPASSWD: ALL"
-			dest:    "/etc/sudoers.d/ubuntu"
+			content: "\(#username) ALL=(ALL:ALL) NOPASSWD: ALL"
+			dest:    "/etc/sudoers.d/\(#username)"
 			mode:    "0440"
 		}
 	}]
@@ -164,10 +166,10 @@ role: base_packages: tasks: [{
 		state: "link"
 	}
 }, {
-	name:   "Allow ubuntu to run Docker"
+	name:   "Allow user to run Docker"
 	become: true
 	user: {
-		name:   "ubuntu"
+		name:   #username
 		groups: "docker"
 		append: "yes"
 	}
@@ -194,7 +196,10 @@ role: base_bazel: tasks: [{
 	name:   "Configure bazel cache"
 	become: true
 	template: {
-		src:  "{{ role_path }}/templates/home/ubuntu/m/.bazelrc.user.j2"
-		dest: "/home/ubuntu/m/.bazelrc.user"
+		src:   "{{ role_path }}/templates/home/\(#username)/m/.bazelrc.user.j2"
+		dest:  "/home/\(#username)/m/.bazelrc.user"
+		owner: #username
+		group: #username
+		mode:  "0600"
 	}
 }]
