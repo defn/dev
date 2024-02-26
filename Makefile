@@ -58,6 +58,9 @@ rehome:
 	$(MAKE) home
 
 home:
+	env NIX_CONFIG="access-tokens = github.com=$$(cat ~/.config/gh/hosts.yml | yq -r '.["github.com"].oauth_token')" $(MAKE) home_inner
+
+home_inner:
 	$(MARK) home
 	for n in $(flakes); do \
 		if [[ "$$(git log -1 --format=%H -- m/pkg/$$n)" != "$$(cat ~/bin/nix/.head-$$n 2>/dev/null || true)" ]]; then \
