@@ -2,6 +2,7 @@ package pb
 
 inventory: {
 	[string]: vars: {
+		// provide defaults for inventory/packer.ini
 		ansible_user:       string | *"ubuntu"
 		bazel_remote_cache: string | *"127.0.0.1"
 	}
