@@ -7,8 +7,6 @@ class: {
 }
 
 teacher: bootstrap: k3s_bootstrap & {
-	"buildkite": {}
-	"harbor": {}
 	"external-dns": {}
 
 	"postgres-operator": {}
