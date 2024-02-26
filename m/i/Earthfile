@@ -26,7 +26,7 @@ root:
     WORKDIR /home/ubuntu
     COPY --dir script script
     RUN script/800-defn-dev
-    RUN script/999-defn-dev
+    RUN --secret NIX_CONFIG script/999-defn-dev
     RUN rm -rf script
 
     CACHE /home/ubuntu/work
