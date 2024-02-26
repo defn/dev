@@ -44,7 +44,7 @@ latest-ami:
 	env PACKER_GITHUB_API_TOKEN="$$(cat ~/.config/gh/hosts.yml | yq -r '.["github.com"].oauth_token')" $(MAKE) coder
 
 root:
-	earthly --ci --no-cache --no-output --push --secret NIX_CONFIG="access-tokens = github.com=$$(cat ~/.config/gh/hosts.yml | yq -r '.["github.com"].oauth_token')" +root
+	unset SSH_AUTH_SOCK && earthly --ci --no-cache --no-output --push --secret NIX_CONFIG="access-tokens = github.com=$$(cat ~/.config/gh/hosts.yml | yq -r '.["github.com"].oauth_token')" +root
 
 # docker
 buildkite:
