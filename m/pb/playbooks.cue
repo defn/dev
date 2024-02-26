@@ -9,7 +9,6 @@ inventory: {
 	coder: hosts: [
 		"coder-amanibhavam-district",
 		"coder-amanibhavam-school",
-		"coder-dgwyn-spiral",
 	]
 
 	oci: hosts: [
@@ -18,7 +17,6 @@ inventory: {
 	]
 
 	mac: hosts: [
-		"mbair",
 		"macmini",
 	]
 
@@ -30,7 +28,6 @@ inventory: {
 
 	heavy: hosts: [
 		"thinkpad",
-		"thelio",
 	]
 
 	district_defn_net: {
