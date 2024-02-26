@@ -146,10 +146,10 @@ perms:
 	-chmod 0600 ~/.kube/config
 
 play:
-	cd m/pb && $(MAKE) local-demo
+	cd m/pb && $(MAKE) base_ubuntu opt="-i inventory/packer.ini -e ansible_connection=local"
 
 upgrade:
-	cd m/pb && $(MAKE) local-upgrade
+	cd m/pb && $(MAKE) upgrade opt="-i inventory/packer.ini -e ansible_connection=local"
 
 install:
 	t make_install $(MAKE) install_t
