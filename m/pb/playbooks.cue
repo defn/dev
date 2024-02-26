@@ -2,7 +2,8 @@ package pb
 
 inventory: {
 	[string]: vars: {
-		ansible_user: string | *"ubuntu"
+		ansible_user:       string | *"ubuntu"
+		bazel_remote_cache: string | *"127.0.0.1"
 	}
 
 	coder: hosts: [
@@ -32,9 +33,14 @@ inventory: {
 		"thelio",
 	]
 
-	district_defn_net: hosts: [
-		"district",
-	]
+	district_defn_net: {
+		hosts: [
+			"district",
+		]
+		vars: {
+			bazel_remote_cache: "coder-amanibhavam-district"
+		}
+	}
 }
 
 playbook: base_ubuntu: [{
@@ -42,6 +48,7 @@ playbook: base_ubuntu: [{
 	hosts: "all"
 	roles: [
 		"base_packages",
+		"base_bazel",
 	]
 }]
 
@@ -182,5 +189,14 @@ role: base_packages: tasks: [{
 	file: {
 		path:  "/etc/apt/apt.conf.d/99-Phased-Updates"
 		state: "absent"
+	}
+}]
+
+role: base_bazel: tasks: [{
+	name:   "Configure bazel cache"
+	become: true
+	template: {
+		src:  "{{ role_path }}/templates/home/ubuntu/m/.bazelrc.user.j2"
+		dest: "/home/ubuntu/m/.bazelrc.user"
 	}
 }]

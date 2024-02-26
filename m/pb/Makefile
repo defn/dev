@@ -6,7 +6,7 @@ second = $(word 2, $(subst -, ,$@))
 build:
 	cue fmt ./...
 	rm -f playbooks/*.yaml
-	rm -rf roles
+	rm -rf roles/*/tasks
 	cue export --out json -e fs | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | ../c/decode_base64.py 
 
 report:

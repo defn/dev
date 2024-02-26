@@ -1,0 +1,5 @@
+- name: Configure bazel cache
+  become: true
+  template:
+    src: '{{ role_path }}/templates/home/ubuntu/m/.bazelrc.user.j2'
+    dest: /home/ubuntu/m/.bazelrc.user
