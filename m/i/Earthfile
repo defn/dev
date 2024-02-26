@@ -25,6 +25,7 @@ root:
     ENV HOME=/home/ubuntu
     WORKDIR /home/ubuntu
     COPY --dir script script
+    COPY script/tailscale-install.sh /tmp/tailscale-install.sh
     RUN --secret NIX_CONFIG script/800-defn-dev
     RUN --secret NIX_CONFIG script/999-defn-dev
     RUN rm -rf script
