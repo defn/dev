@@ -9,13 +9,13 @@
     argoworkflows.url = github:defn/dev/pkg-argoworkflows-3.5.4-2?dir=m/pkg/argoworkflows;
     argocd.url = github:defn/dev/pkg-argocd-2.10.1-1?dir=m/pkg/argocd;
     kn.url = github:defn/dev/pkg-kn-1.13.0-2?dir=m/pkg/kn;
-    vcluster.url = github:defn/dev/pkg-vcluster-0.19.1-1?dir=m/pkg/vcluster;
+    vcluster.url = github:defn/dev/pkg-vcluster-0.19.2-1?dir=m/pkg/vcluster;
     kubevirt.url = github:defn/dev/pkg-kubevirt-1.1.1-2?dir=m/pkg/kubevirt;
     kuma.url = github:defn/dev/pkg-kuma-2.6.1-2?dir=m/pkg/kuma;
     cilium.url = github:defn/dev/pkg-cilium-0.15.23-1?dir=m/pkg/cilium;
     hubble.url = github:defn/dev/pkg-hubble-0.13.0-2?dir=m/pkg/hubble;
     tfo.url = github:defn/dev/pkg-tfo-2.2.0-5?dir=m/pkg/tfo;
-    mirrord.url = github:defn/dev/pkg-mirrord-3.89.1-1?dir=m/pkg/mirrord;
+    mirrord.url = github:defn/dev/pkg-mirrord-3.90.0-1?dir=m/pkg/mirrord;
     crossplane.url = github:defn/dev/pkg-crossplane-1.15.0-1?dir=m/pkg/crossplane;
     spire.url = github:defn/dev/pkg-spire-1.9.0-1?dir=m/pkg/spire;
   };

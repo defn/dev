@@ -657,17 +657,17 @@
       },
       "locked": {
         "dir": "m/pkg/mirrord",
-        "lastModified": 1708645037,
-        "narHash": "sha256-U5Ks8vY9Cf0UyClv830rtwY/6+wLfbr6TgeskjE5bpk=",
+        "lastModified": 1709048698,
+        "narHash": "sha256-X1ZHB/hyHp7MGcmEafiTE89iLT9Fg4/B+4qVGVVorQ4=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "d7fa1c17ff175d8904187c5f0c04d0d07db1a26f",
+        "rev": "2d5fdc73e955bcd9c956cf8548bd6705fb36ab87",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/mirrord",
         "owner": "defn",
-        "ref": "pkg-mirrord-3.89.1-1",
+        "ref": "pkg-mirrord-3.90.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1429,17 +1429,17 @@
       },
       "locked": {
         "dir": "m/pkg/vcluster",
-        "lastModified": 1708392722,
-        "narHash": "sha256-fotwzb+u+b/yW+rT8/RwpKKQU5RCF7BdGpo3HBxpJTE=",
+        "lastModified": 1709048710,
+        "narHash": "sha256-t6Dlq1F9MLHfZGTJHCWet6EhxBUEwn8mem3FbLZzqn0=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "3629687e26c536cc60c5918ecabbc5b55c13e80e",
+        "rev": "75197742222a3fc2b843685a6b2d12b148c56e9a",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/vcluster",
         "owner": "defn",
-        "ref": "pkg-vcluster-0.19.1-1",
+        "ref": "pkg-vcluster-0.19.2-1",
         "repo": "dev",
         "type": "github"
       }
