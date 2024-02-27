@@ -38,25 +38,26 @@ all-ami:
 
 # latest
 latest-docker:
-	$(MAKE) class-buildkite-latest
+	$(MAKE) class
 
 latest-ami:
 	$(MAKE) coder
 
-root:
-	unset SSH_AUTH_SOCK && earthly --ci --no-cache --no-output --push --secret NIX_CONFIG="access-tokens = github.com=$$(cat ~/.config/gh/hosts.yml | yq -r '.["github.com"].oauth_token')" +root
-
 # docker
 buildkite:
-	@echo --- earthly
+	@echo --- earthly buildkite
 	sudo chown ubuntu:ubuntu /var/run/docker.sock
-	docker ps || sudo docker ps
-	earthly --ci --push --no-output +buildkite
+	unset SSH_AUTH_SOCK && earthly --ci --push --no-output +buildkite
+
+root:
+	@echo --- earthly root
+	sudo chown ubuntu:ubuntu /var/run/docker.sock
+	unset SSH_AUTH_SOCK && earthly --ci --no-cache --no-output --push --secret NIX_CONFIG="access-tokens = github.com=$$(cat ~/.config/gh/hosts.yml | yq -r '.["github.com"].oauth_token')" +root
 
 class:
-	@echo --- earthly
+	@echo --- earthly class
 	sudo chown ubuntu:ubuntu /var/run/docker.sock
-	earthly --ci --push --no-output +class
+	unset SSH_AUTH_SOCK && earthly --ci --push --no-output +class
 
 # ami
 %:
