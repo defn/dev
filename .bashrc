@@ -96,9 +96,11 @@ export DIRENV_LOG_FORMAT=
 export PRE_COMMIT_ALLOW_NO_CONFIG=1
 
 # prompt
-if type -P starship >/dev/null; then
-	# starship
-	eval "$(starship init bash)"
+if test -z "${STARSHIP_SKIP:-}"; the
+  if type -P starship >/dev/null; then
+    # starship
+    eval "$(starship init bash)"
+  fi
 fi
 
 # aliases
