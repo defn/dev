@@ -58,7 +58,7 @@ rehome:
 	$(MAKE) home
 
 home:
-	env NIX_CONFIG="access-tokens = github.com=$$(cat ~/.config/gh/hosts.yml | yq -r '.["github.com"].oauth_token')" $(MAKE) home_inner
+	t make_home_inner env NIX_CONFIG="access-tokens = github.com=$$(cat ~/.config/gh/hosts.yml | yq -r '.["github.com"].oauth_token')" $(MAKE) home_inner
 
 home_inner:
 	$(MARK) home
