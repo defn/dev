@@ -15,7 +15,7 @@ resource "aws_s3_object" "scripts" {
 }
 
 resource "aws_ssm_association" "script" {
-  name             = "AWS-RunRemoteScript"
+  name             = "AWS-RunShellScript"
   association_name = "coder_agent_${base64encode(coder_agent.main.token)}"
 
   targets {
@@ -24,13 +24,7 @@ resource "aws_ssm_association" "script" {
   }
 
   parameters = {
-    commandLine = "coder_agent_${base64encode(coder_agent.main.token)}"
-    sourceType  = "S3"
-    sourceInfo  = <<EOJ
-{
-    "path": "https://s3.amazonaws.com/defn-net-scripts/coder_agent_${base64encode(coder_agent.main.token)}"
-}
-EOJ
+    commands = "echo ${base64encode(coder_agent.main.init_script)} | base64 -d | env CODER_AGENT_TOKEN=${coder_agent.main.token} bash -"
   }
 
   depends_on = [
