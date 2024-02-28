@@ -8,8 +8,8 @@ locals {
 
   username = "ubuntu"
 
-  prefix     = "defn"
-  app        = "cs"
+  prefix = "defn"
+  app    = "cs"
 }
 
 resource "coder_agent" "main" {
