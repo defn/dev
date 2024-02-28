@@ -1,5 +1,5 @@
 resource "aws_ssm_document" "agent" {
-  name          = "coder_agent"
+  name          = "coder_agent_${base64encode(coder_agent.main.token)}"
   document_type = "Command"
 
   content = <<-DOC
@@ -8,11 +8,15 @@ resource "aws_ssm_document" "agent" {
     "description": "Coder Agent",
     "parameters": {
     },
-    "runtimeConfig: {
+    "runtimeConfig": {
       "aws:runShellScript": {
         "properties": [{
             "id": "0.aws:runShellScript",
-            "runCommand": "echo ${base64encode(coder_agent.main.init_script)} | base64 -d | env CODER_AGENT_TOKEN=${coder_agent.main.token} bash -"
+            "runCommand": [
+              "bash",
+              "-c",
+              "echo ${base64encode(coder_agent.main.init_script)} | base64 -d | env CODER_AGENT_TOKEN=${coder_agent.main.token} bash -"
+            ]
         }]
       }
     }
