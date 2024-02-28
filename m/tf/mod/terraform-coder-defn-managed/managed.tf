@@ -17,6 +17,6 @@ resource "aws_ssm_association" "script" {
   }
 
   parameters = {
-    commands = "cd ~ubuntu && echo ${base64encode(coder_agent.main.init_script)} | base64 -d | sudo -H -u ubuntu env CODER_AGENT_TOKEN=${coder_agent.main.token} bash - &"
+    commands = "( (echo cd ~ubuntu; echo source .bash_profile; echo ${base64encode(coder_agent.main.init_script)} | base64 -d; echo) > meh.sh; exec setsid sudo -H -u ubuntu env CODER_AGENT_TOKEN=${coder_agent.main.token} bash /tmp/meh.sh & ) & "
   }
 }
