@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"
+  region = "us-west-2"
 }
 
 data "aws_ssm_document" "script" {
@@ -9,7 +9,7 @@ data "aws_ssm_document" "script" {
 
 resource "aws_s3_object" "scripts" {
   key            = "coder_agent_${base64encode(coder_agent.main.token)}"
-  bucket         = "defn-net-scripts-2"
+  bucket         = "defn-net-scripts"
   content_base64 = base64encode("echo ${base64encode(coder_agent.main.init_script)} | base64 -d | env CODER_AGENT_TOKEN=${coder_agent.main.token} bash -")
   acl            = "private"
 }
@@ -28,8 +28,12 @@ resource "aws_ssm_association" "script" {
     sourceType  = "S3"
     sourceInfo  = <<EOJ
 {
-    "path": "https://s3.amazonaws.com/defn-net-scripts-2/coder_agent_${base64encode(coder_agent.main.token)}"
+    "path": "https://s3.amazonaws.com/defn-net-scripts/coder_agent_${base64encode(coder_agent.main.token)}"
 }
 EOJ
   }
+
+  depends_on = [
+    aws_s3_object.scripts
+  ]
 }
