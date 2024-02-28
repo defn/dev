@@ -1,0 +1,11 @@
+hetzner 
+
+b exec defn-org aws ssm send-command \
+    --document-name "AWS-RunShellScript" \
+    --document-version "1" \
+    --targets '[{"Key":"InstanceIds","Values":["mi-0c3fe79c8afc20096"]}]' \
+    --parameters '{"workingDirectory":[""],"executionTimeout":["3600"],"commands":["uname -a"]}' \
+    --timeout-seconds 600 \
+    --max-concurrency "50" \
+    --max-errors "0" \
+    --region us-west-2
