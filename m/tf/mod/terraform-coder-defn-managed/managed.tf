@@ -17,6 +17,6 @@ resource "aws_ssm_association" "script" {
   }
 
   parameters = {
-    commands = "( (echo cd ~ubuntu; echo source .bash_profile; export STARSHIP_NO=1; echo ${base64encode(coder_agent.main.init_script)} | base64 -d; echo) > /tmp/meh.sh; exec setsid sudo -H -u ubuntu env CODER_AGENT_TOKEN=${coder_agent.main.token} bash /tmp/meh.sh &) &"
+    commands = "( (echo cd ~ubuntu; export STARSHIP_NO=1; echo source .bash_profile; echo ${base64encode(coder_agent.main.init_script)} | base64 -d; echo) > /tmp/meh.sh; exec setsid sudo -H -u ubuntu env CODER_AGENT_TOKEN=${coder_agent.main.token} bash /tmp/meh.sh &) &"
   }
 }
