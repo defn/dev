@@ -49,7 +49,7 @@ resource "coder_app" "code-server" {
   agent_id     = coder_agent.main.id
   slug         = local.app
   display_name = "code-server"
-  url          = "http://localhost:13337/"
+  url          = "http://127.0.0.1:13337/"
   icon         = "/icon/code.svg"
   share        = "owner"
   subdomain    = true
