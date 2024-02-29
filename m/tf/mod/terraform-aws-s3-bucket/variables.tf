@@ -352,10 +352,10 @@ variable "website_configuration" {
     }))
   }))
   description = "Specifies the static website hosting configuration object"
-  default     = [{
+  default = [{
     index_document = "index.html"
     error_document = "error.html"
-    routing_rules = []
+    routing_rules  = []
   }]
 
   validation {

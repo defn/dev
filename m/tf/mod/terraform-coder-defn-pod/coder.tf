@@ -7,11 +7,12 @@ locals {
   parent = "district"
 
   username = "ubuntu"
-  ns       = "${local.prefix}-${local.owner}-${local.name}"
 
-  prefix     = data.coder_parameter.prefix.value
+  prefix = data.coder_parameter.prefix.value
+  app    = "cs"
+
+  ns         = "${local.prefix}-${local.owner}-${local.name}"
   coder_name = "${local.prefix}-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
-  app        = "cs"
 }
 
 resource "coder_agent" "main" {
