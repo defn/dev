@@ -1,6 +1,6 @@
 {
   inputs = {
-    tailscale.url = github:defn/dev/pkg-tailscale-1.60.0-1?dir=m/pkg/tailscale;
+    tailscale.url = github:defn/dev/pkg-tailscale-1.60.1-1?dir=m/pkg/tailscale;
     cloudflared.url = github:defn/dev/pkg-cloudflared-2024.2.1-1?dir=m/pkg/cloudflared;
     wireproxy.url = github:defn/dev/pkg-wireproxy-1.0.7-1?dir=m/pkg/wireproxy;
   };
