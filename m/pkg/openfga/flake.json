@@ -2,5 +2,5 @@
   "slug": "pkg-openfga",
   "ghrepo": "openfga/cli",
   "vendor": "0.2.6",
-  "revision": "0"
+  "revision": "1"
 }
