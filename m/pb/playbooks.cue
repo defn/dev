@@ -35,10 +35,10 @@ inventory: {
 
 	district_defn_net: {
 		hosts: [
-			"district",
+			"defn-net-district",
 		]
 		vars: {
-			bazel_remote_cache: "coder-amanibhavam-district"
+			bazel_remote_cache: "cache.defn.run"
 		}
 	}
 }
