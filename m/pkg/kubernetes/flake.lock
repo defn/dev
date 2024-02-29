@@ -1429,17 +1429,17 @@
       },
       "locked": {
         "dir": "m/pkg/vcluster",
-        "lastModified": 1709048710,
-        "narHash": "sha256-t6Dlq1F9MLHfZGTJHCWet6EhxBUEwn8mem3FbLZzqn0=",
+        "lastModified": 1709184684,
+        "narHash": "sha256-Lze61+5oP5SJU/vmaawifHjuUpicI0itI3JX1iRRkew=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "75197742222a3fc2b843685a6b2d12b148c56e9a",
+        "rev": "b7b1cea9b15f0587b67a5970eac57611059319f7",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/vcluster",
         "owner": "defn",
-        "ref": "pkg-vcluster-0.19.2-1",
+        "ref": "pkg-vcluster-0.19.3-1",
         "repo": "dev",
         "type": "github"
       }
