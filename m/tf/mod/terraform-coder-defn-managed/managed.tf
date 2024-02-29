@@ -1,3 +1,7 @@
+locals {
+  slug = base64encode(coder_agent.main.token)
+}
+
 provider "aws" {
   region = "us-west-2"
 }
@@ -9,7 +13,7 @@ data "aws_ssm_document" "script" {
 
 resource "aws_ssm_association" "script" {
   name             = "AWS-RunShellScript"
-  association_name = "coder_agent_${base64encode(coder_agent.main.token)}"
+  association_name = "coder_agent_${local.slug}"
 
   targets {
     key    = "InstanceIds"
@@ -17,6 +21,6 @@ resource "aws_ssm_association" "script" {
   }
 
   parameters = {
-    commands = "( (echo cd ~ubuntu; echo export STARSHIP_NO=1; echo source .bash_profile; echo ${base64encode(coder_agent.main.init_script)} | base64 -d; echo) > /tmp/meh.sh; exec setsid sudo -H -u ubuntu env CODER_AGENT_TOKEN=${coder_agent.main.token} bash /tmp/meh.sh &) &"
+    commands = "( (echo sudo pkill -f -9 coder.agent '||' true; echo pkill -f -9 coder-server '||' true; echo sudo pkill -9 -f ssm-document-worker '||' true; echo sudo pkill -9 -f awsrunShellScript '||' true; echo cd ~ubuntu; echo export STARSHIP_NO=1 CODER_AGENT_TOKEN=${coder_agent.main.token}; echo source .bash_profile; echo ${base64encode(coder_agent.main.init_script)} | base64 -d; echo) > /tmp/meh_${local.slug}.sh; exec setsid sudo -H -u ubuntu bash /tmp/meh_${local.slug}.sh &) &"
   }
 }
