@@ -31,6 +31,7 @@ inventory: {
 
 	heavy: hosts: [
 		"thinkpad",
+		"thelio",
 	]
 
 	district_defn_net: {
