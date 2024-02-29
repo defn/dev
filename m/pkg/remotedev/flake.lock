@@ -27,17 +27,17 @@
       },
       "locked": {
         "dir": "m/pkg/codeserver",
-        "lastModified": 1707524273,
-        "narHash": "sha256-Ob8Ek/8u5CM5MtNd75LCrchm/sGns1KcU5vkSt/lAm4=",
+        "lastModified": 1709184657,
+        "narHash": "sha256-QarfLXaAXBD2x2aP3FfG85F9+49DqRalp4cJVyFhqKA=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "5edf1d4d869f0a23df21fe691d2c889ad245c5c3",
+        "rev": "4d0798574a615ef1a1e6dfd36d0541aaf166be28",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/codeserver",
         "owner": "defn",
-        "ref": "pkg-codeserver-4.21.1-1",
+        "ref": "pkg-codeserver-4.21.2-1",
         "repo": "dev",
         "type": "github"
       }
