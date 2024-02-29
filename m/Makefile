@@ -192,3 +192,15 @@ ssh-config:
 reboot:
 	sync
 	($(MAKE) down & sleep 60; sudo rm -rf /var/lib/rancher; sudo reboot) &
+
+activate:
+	sudo rm -rf /tmp/ssm
+	mkdir -p /tmp/ssm
+	curl https://amazon-ssm-$(region).s3.$(region).amazonaws.com/latest/debian_amd64/ssm-setup-cli -o /tmp/ssm/ssm-setup-cli
+	sudo chmod +x /tmp/ssm/ssm-setup-cli
+	sudo /tmp/ssm/ssm-setup-cli -register -activation-code "$(actcode)" -activation-id "$(actid)" -region "$(region)"
+	sudo rm -rf /tmp/ssm
+
+create:
+	@b exec defn-org aws ssm create-activation --default-instance-name $$(uname -n) --iam-role service-role/AmazonEC2RunCommandRoleForManagedInstances --registration-limit 1 --region $(region)  --expiration-date "$$(date -d "+1 day" +"%Y-%m-%dT00:00:00")"
+
