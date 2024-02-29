@@ -53,12 +53,6 @@ resource "coder_app" "code-server" {
   icon         = "/icon/code.svg"
   share        = "owner"
   subdomain    = true
-
-  healthcheck {
-    url       = "http://localhost:13337/healthz"
-    interval  = 5
-    threshold = 6
-  }
 }
 
 module "coder-login" {
