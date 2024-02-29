@@ -198,7 +198,7 @@ activate:
 	mkdir -p /tmp/ssm
 	curl https://amazon-ssm-$(region).s3.$(region).amazonaws.com/latest/debian_amd64/ssm-setup-cli -o /tmp/ssm/ssm-setup-cli
 	sudo chmod +x /tmp/ssm/ssm-setup-cli
-	sudo /tmp/ssm/ssm-setup-cli -register -activation-code "$(actcode)" -activation-id "$(actid)" -region "$(region)"
+	sudo /tmp/ssm/ssm-setup-cli -override -register -activation-code "$(actcode)" -activation-id "$(actid)" -region "$(region)"
 	sudo rm -rf /tmp/ssm
 
 create:
