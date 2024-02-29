@@ -52,7 +52,13 @@ resource "coder_app" "code-server" {
   url          = "http://127.0.0.1:13337/"
   icon         = "/icon/code.svg"
   share        = "owner"
-  subdomain    = true
+  subdomain    = false
+
+  healthcheck {
+    url       = "http://localhost:13337/healthz"
+    interval  = 5
+    threshold = 6
+  }
 }
 
 module "coder-login" {
