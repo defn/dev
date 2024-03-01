@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/buildevents",
-        "lastModified": 1706897694,
-        "narHash": "sha256-MwTsEJhVXWvum1H7N0yvlRwPHoaVEkUVodtsSfLyI0g=",
+        "lastModified": 1709255351,
+        "narHash": "sha256-g6Zled33ZPYoM69og85re+h2/wBJukuLkXLEkoiGm1s=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "2f6907b722c2f6832a0de2a1265b88abecca32ba",
+        "rev": "20b42e5945a8595ad58c9afd94ce5f4b0b923b9c",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buildevents",
         "owner": "defn",
-        "ref": "pkg-buildevents-0.15.0-6",
+        "ref": "pkg-buildevents-0.16.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -869,17 +869,17 @@
       },
       "locked": {
         "dir": "m/pkg/vault",
-        "lastModified": 1708477238,
-        "narHash": "sha256-XUVIZg/+yCDZ4iduoFXiCIBmf4pUrVFGun3E0p9WHPI=",
+        "lastModified": 1709255367,
+        "narHash": "sha256-m89zIc0iYD0hRnL9tKrEnwapwF4ncartcVo4C/MsI2Y=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "af95d379afda0ae329d90e55b1df8a56f3a5c69e",
+        "rev": "d3340e8c1cb869aa28520fe657b0fc335b16e329",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/vault",
         "owner": "defn",
-        "ref": "pkg-vault-1.15.5-3",
+        "ref": "pkg-vault-1.15.6-1",
         "repo": "dev",
         "type": "github"
       }
