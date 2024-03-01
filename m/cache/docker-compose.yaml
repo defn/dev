@@ -5,7 +5,7 @@ services:
     image: registry:2
     container_name: registry
     ports:
-      - "4999:5000"
+      - "127.0.0.1:4999:5000"
     environment:
       - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/registry.crt
       - REGISTRY_HTTP_TLS_KEY=/certs/registry.key
@@ -13,19 +13,13 @@ services:
       - ${HOME}/work/registry/certs:/certs
       - ${HOME}/work/registry/images:/var/lib/registry
     restart: unless-stopped
-  bes-tunnel:
-    image: alpine/socat
-    container_name: bes-tunnel
-    command: TCP-LISTEN:1985,fork,reuseaddr TCP:10.250.217.203:1985
-    ports:
-      - "1985:1985"
   bazel-remote:
     image: quay.io/bazel-remote/bazel-remote:v2.4.3
     container_name: bazel-remote
     user: "1000:1000"
     ports:
-      - "9090:8080"
-      - "9092:9092"
+      - "127.0.0.1:9089:8080"
+      - "127.0.0.1:9091:9092"
     volumes:
       - ${HOME}/work/bazel-cache:/data
     command: --max_size 50
@@ -34,24 +28,11 @@ services:
     image: redis:latest
     container_name: redis
     ports:
-      - "6379:6379"
+      - "127.0.0.1:6378:6379"
     restart: unless-stopped
   soft-serve:
     image: charmcli/soft-serve:latest
     container_name: soft-serve
-    ports:
-      - 23231:23231
-      - 23232:23232
-      - 23233:23233
-      - 9418:9418
     volumes:
       - ${HOME}/work/soft-serve:/soft-serve
     restart: unless-stopped
-  squid:
-    image: sameersbn/squid:latest
-    container_name: squid
-    ports:
-      - "3128:3128"
-    volumes:
-      - ./squid.conf:/etc/squid/squid.conf
-      - ${HOME}/work/squid:/var/spool/squid
