@@ -10,8 +10,6 @@ inventory: {
 	}
 
 	coder: hosts: [
-		"coder-amanibhavam-district",
-		"coder-amanibhavam-school",
 	]
 
 	oci: hosts: [
