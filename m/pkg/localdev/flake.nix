@@ -5,12 +5,12 @@
     earthly.url = github:defn/dev/pkg-earthly-0.8.4-1?dir=m/pkg/earthly;
     oras.url = github:defn/dev/pkg-oras-1.1.0-5?dir=m/pkg/oras;
     buildkite.url = github:defn/dev/pkg-buildkite-3.64.0-1?dir=m/pkg/buildkite;
-    buildevents.url = github:defn/dev/pkg-buildevents-0.15.0-6?dir=m/pkg/buildevents;
+    buildevents.url = github:defn/dev/pkg-buildevents-0.16.0-1?dir=m/pkg/buildevents;
     honeyvent.url = github:defn/dev/pkg-honeyvent-1.1.3-15?dir=m/pkg/honeyvent;
     honeymarker.url = github:defn/dev/pkg-honeymarker-0.2.11-5?dir=m/pkg/honeymarker;
     honeytail.url = github:defn/dev/pkg-honeytail-1.8.3-13?dir=m/pkg/honeytail;
     hugo.url = github:defn/dev/pkg-hugo-0.0.10?dir=m/pkg/hugo;
-    vault.url = github:defn/dev/pkg-vault-1.15.5-3?dir=m/pkg/vault;
+    vault.url = github:defn/dev/pkg-vault-1.15.6-1?dir=m/pkg/vault;
   };
 
   outputs = inputs: inputs.tilt.inputs.pkg.main rec {
