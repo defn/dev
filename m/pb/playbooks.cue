@@ -32,9 +32,9 @@ inventory: {
 		"thelio",
 	]
 
-	defn_net: {
+	district: {
 		hosts: [
-			"district",
+			"defn-net-district",
 		]
 		vars: {
 			bazel_remote_cache: "cache.defn.run"
