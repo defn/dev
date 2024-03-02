@@ -3,3 +3,4 @@ ansible:
 dummy1 169.254.32.1
 configure .ssh/config
 dns resolver, search domain
+ssh host key management
