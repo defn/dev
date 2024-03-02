@@ -73,6 +73,8 @@ function main {
 			set -- home
 		fi
 		rm -f /home/ubuntu/.gnupg/S.gpg-agent
+		chmod 0700 ~/.gnupg
+		(set +f; if test -d ~/.dotfiles/.gnupg; then rsync -ia ~/.dotfiles/.gnupg/* ~/.gnupg/; fi)
 		coder gitssh -- "$@"
 		;;
 	forward)
