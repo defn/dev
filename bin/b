@@ -72,10 +72,10 @@ function main {
 		if [ -z "${1:-}"]; then
 			set -- home
 		fi
-		rm -f ~/.gnupg/S.
 		chmod 0700 ~/.gnupg ~/.ssh
 		chmod 0600 ~/.ssh/config
 		(set +f; if test -d ~/.dotfiles/.gnupg; then rsync -ia ~/.dotfiles/.gnupg/* ~/.gnupg/; fi)
+		(set +f; rm -fv ~/.gnupg/S.*)
 		coder gitssh -- "$@"
 		;;
 	forward)
