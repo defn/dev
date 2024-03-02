@@ -74,7 +74,6 @@ function main {
 		remote="$1"
 		shift
 		a=$(date +%s)
-		coder config-ssh --yes
 		ssh "${remote}" ln -nfs "/tmp/S.gpg-agent.${a}" /home/ubuntu/.gnupg/S.gpg-agent
 		ssh -v "${remote}" -N -o ServerAliveInterval=30 -o RemoteForward="/tmp/S.gpg-agent.${a} ${HOME}/.gnupg/S.gpg-agent.extra" "$@"
 		;;
