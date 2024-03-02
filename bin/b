@@ -67,6 +67,14 @@ function main {
 		shift
 		open "${CODER_AGENT_URL/\/\//\/\/${DFD_APP}--${DFD_AGENT:-main}--${DFD_NAME}--${DFD_OWNER}.}?folder=$folder"
 		;;
+	agent)
+		shift
+		if [ -z "${1:-}"]; then
+			set -- home
+		fi
+		rm -f /home/ubuntu/.gnupg/S.gpg-agent
+		coder gitssh -- "$@"
+		;;
 	forward)
 		shift
 		local remote
