@@ -67,10 +67,13 @@ function main {
 		shift
 		open "${CODER_AGENT_URL/\/\//\/\/${DFD_APP}--${DFD_AGENT:-main}--${DFD_NAME}--${DFD_OWNER}.}?folder=$folder"
 		;;
+	lock)
+		gpg-connect-agent reloadagent /bye
+		;;
 	agent)
 		shift
 		if [ -z "${1:-}"]; then
-			set -- home
+			set -- home -o LocalForward="$HOME/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra"
 		fi
 		chmod 0700 ~/.gnupg ~/.ssh
 		chmod 0600 ~/.ssh/config
