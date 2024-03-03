@@ -52,7 +52,7 @@ buildkite:
 root:
 	@echo --- earthly root
 	sudo chown ubuntu:ubuntu /var/run/docker.sock
-	unset SSH_AUTH_SOCK && earthly --ci --no-cache --no-output --push --secret NIX_CONFIG="access-tokens = github.com=$$(cat ~/.config/gh/hosts.yml | yq -r '.["github.com"].oauth_token')" +root
+	unset SSH_AUTH_SOCK && earthly --ci --no-cache --no-output --push --secret NIX_CONFIG="access-tokens = github.com=$$(b github)" +root
 
 class:
 	@echo --- earthly class
@@ -62,5 +62,5 @@ class:
 # ami
 %:
 	$(MAKE) hello
-	env PACKER_GITHUB_API_TOKEN="$$(cat ~/.config/gh/hosts.yml | yq -r '.["github.com"].oauth_token')" packer init $@.pkr.hcl
+	env PACKER_GITHUB_API_TOKEN="$$(b github)" packer init $@.pkr.hcl
 	b exec defn-org env AWS_REGION=us-west-2 packer build -color=true -timestamp-ui=true $@.pkr.hcl
