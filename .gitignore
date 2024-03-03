@@ -203,3 +203,4 @@ bin/nix*
 .rpm*
 .crossplane/
 .*vnc*
+.phasereditor2d/

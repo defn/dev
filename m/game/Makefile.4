@@ -1,0 +1,28 @@
+build:
+	rm -rf gen
+	mkdir gen
+	./bin/godot -v project.godot --export HTML5 gen/index.html
+
+serve:
+	cd gen && python -m http.server
+
+install:
+	$(MAKE) install-godot install-templates
+
+install-godot:
+	mkdir -p bin
+	curl -sSL -O https://github.com/godotengine/godot/releases/download/4.2.1-stable/Godot_v4.2.1-stable_linux.x86_64.zip
+	unzip -o Godot_v4.2.1-stable_linux.x86_64.zip
+	rm -f Godot_v4.2.1-stable_linux.x86_64.zip
+	mkdir -p bin
+	mv -f Godot_v4.2.1-stable_linux.x86_64 bin/godot
+
+install-templates:
+	curl -sSL -O https://github.com/godotengine/godot/releases/download/4.2.1-stable/Godot_v4.2.1-stable_export_templates.tpz
+	unzip -o Godot_v4.2.1-stable_export_templates.tpz
+	rm -f Godot_v4.2.1-stable_export_templates.tpz
+	mkdir -p ~/.local/share/godot/export_templates/4.2.1.stable
+	mv templates/* ~/.local/share/godot/export_templates/4.2.1.stable/
+
+all:
+	$(MAKE) build serve
