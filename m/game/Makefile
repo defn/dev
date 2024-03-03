@@ -1,4 +1,4 @@
-port ?= 1959
+port ?= 1963
 game ?= ~/work/sunny
 
 default:
