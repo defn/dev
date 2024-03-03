@@ -1,11 +1,11 @@
 default:
-	$(MAKE) -j 3 backend game=$(game) frontend open
+	$(MAKE) -j 3 backend game=$(game) port=$(port) frontend open
 
 backend:
-	cd source/editor && npx phasereditor2d-launcher --editor . --dev --disable-plugins phasereditor2d.code --public --disable-open-browser --project $(game)
+	cd source/editor && npx phasereditor2d-launcher --editor . --dev --disable-plugins phasereditor2d.code --public --disable-open-browser --port $(port) --project $(game)
 
 frontend:
-	tailscale serve --https 1960 1959
+	tailscale serve --https 1960 $(port)
 
 open:
 	sleep 1
