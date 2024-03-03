@@ -6,6 +6,7 @@ services:
     container_name: registry
     ports:
       - "127.0.0.1:4999:5000"
+      - "169.254.32.1:4999:5000"
     environment:
       - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/registry.crt
       - REGISTRY_HTTP_TLS_KEY=/certs/registry.key
