@@ -77,7 +77,7 @@ function main {
 		fi
 		if test -d /run/user; then
 			sudo rm -rf /run/user/1000/gnupg
-			sudo install -d -m 0700 -o $$(id -un) -g $$(id -gn) /run/user/1000
+			sudo install -d -m 0700 -o $(id -un) -g $(id -gn) /run/user/1000
 			ln -nfs ~/.gnupg /run/user/1000/gnupg
 		fi
 		chmod 0700 ~/.gnupg/. ~/.gnupg2/. ~/.ssh
