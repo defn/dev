@@ -75,9 +75,6 @@ function main {
 		;;
 	agent)
 		shift
-		if [ -z "${1:-}"]; then
-			set -- home -o LocalForward="$HOME/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra"
-		fi
 		if test -d /run/user; then
 			sudo rm -rf /run/user/1000/gnupg
 			sudo install -d -m 0700 -o $(id -un) -g $(id -gn) /run/user/1000
@@ -85,10 +82,20 @@ function main {
 		fi
 		chmod 0700 ~/.gnupg/. ~/.gnupg2/. ~/.ssh
 		chmod 0600 ~/.ssh/config
-		(set +f; if test -d ~/.dotfiles/.gnupg; then rsync -ia ~/.dotfiles/.gnupg/* ~/.gnupg/; fi)
-		(set +f; rm -fv ~/.gnupg/S.*agent*)
-		if ! pgrep dirmngr; then dirmngr --daemon || true; fi
-		coder gitssh -- "$@"
+		(
+			set +f
+			if test -d ~/.dotfiles/.gnupg; then
+				rsync -ia ~/.dotfiles/.gnupg/* ~/.gnupg/
+			fi
+		)
+		(set +f; rm -f ~/.gnupg/S.*agent*)
+		if ! pgrep dirmngr >/dev/null; then dirmngr --daemon || true; fi
+		set +u
+		setsid coder gitssh -- home -o LocalForward="$HOME/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra" 1>/dev/null 2>&1 &
+		bg_pid=$!
+		trap 'kill -SIGTERM -${bg_pid}' EXIT
+		while [[ "$(pass hello 2>/dev/null || true)" != "world" ]]; do sleep 1; done
+		"$@"
 		;;
 	forward)
 		shift
