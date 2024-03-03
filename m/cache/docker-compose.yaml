@@ -21,6 +21,7 @@ services:
     ports:
       - "127.0.0.1:9089:8080"
       - "127.0.0.1:9093:9092"
+      - "169.254.32.1:9093:9092"
     volumes:
       - ${HOME}/work/bazel-cache:/data
     command: --max_size 50
