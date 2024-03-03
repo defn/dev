@@ -67,15 +67,27 @@ function main {
 		shift
 		open "${CODER_AGENT_URL/\/\//\/\/${DFD_APP}--${DFD_AGENT:-main}--${DFD_NAME}--${DFD_OWNER}.}?folder=$folder"
 		;;
+	github)
+		(echo protocol=https; echo host=github.com) | git credential fill | grep ^password= | cut -d= -f2-
+		;;
+	lock)
+		gpg-connect-agent reloadagent /bye
+		;;
 	agent)
 		shift
 		if [ -z "${1:-}"]; then
-			set -- home
+			set -- home -o LocalForward="$HOME/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra"
 		fi
-		rm -f /home/ubuntu/.gnupg/S.gpg-agent
-		chmod 0700 ~/.gnupg ~/.ssh
+		if test -d /run/user; then
+			sudo rm -rf /run/user/1000/gnupg
+			sudo install -d -m 0700 -o $(id -un) -g $(id -gn) /run/user/1000
+			ln -nfs ~/.gnupg /run/user/1000/gnupg
+		fi
+		chmod 0700 ~/.gnupg/. ~/.gnupg2/. ~/.ssh
 		chmod 0600 ~/.ssh/config
 		(set +f; if test -d ~/.dotfiles/.gnupg; then rsync -ia ~/.dotfiles/.gnupg/* ~/.gnupg/; fi)
+		(set +f; rm -fv ~/.gnupg/S.*agent*)
+		if ! pgrep dirmngr; then dirmngr --daemon || true; fi
 		coder gitssh -- "$@"
 		;;
 	forward)

@@ -58,7 +58,7 @@ rehome:
 	$(MAKE) home
 
 home:
-	t make_home_inner env NIX_CONFIG="access-tokens = github.com=$$(cat ~/.config/gh/hosts.yml | yq -r '.["github.com"].oauth_token')" $(MAKE) home_inner
+	t make_home_inner env NIX_CONFIG="access-tokens = github.com=$$(b github)" $(MAKE) home_inner
 
 home_inner:
 	$(MARK) home
@@ -117,13 +117,6 @@ gpg:
 	$(MARK) configure gpg
 	t make_perms $(MAKE) perms
 	if [[ "$(shell uname -s)" == "Darwin" ]]; then t make_macos $(MAKE) macos; fi
-	if test -d /run/user; then \
-		sudo rm -rf /run/user/1000/gnupg; \
-		sudo install -d -m 0700 -o $$(id -un) -g $$(id -gn) /run/user/1000; \
-		ln -nfs ~/.gnupg /run/user/1000/gnupg; \
-		fi
-	pkill dirmngr 2>/dev/null || true
-	t dirmngr_daemon dirmngr --daemon || true
 
 docker:
 	$(MARK) docker
@@ -148,7 +141,6 @@ perms:
 	$(MARK) configure permissions
 	if [[ "Linux" == "$(shell uname -s)" ]]; then if test -S /var/run/docker.sock; then sudo chgrp ubuntu /var/run/docker.sock; sudo chmod 770 /var/run/docker.sock; fi; fi
 	if test -S /run/containerd/containerd.sock; then sudo chgrp ubuntu /run/containerd/containerd.sock; sudo chmod 770 /run/containerd/containerd.sock; fi
-	-chmod 0700 ~/.gnupg/. ~/.gnupg2/.
 	-if ! test -f ~/.kube/config; then mkdir -p ~/.kube; touch ~/.kube/config; fi
 	-chmod 0600 ~/.kube/config
 
