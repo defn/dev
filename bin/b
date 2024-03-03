@@ -67,6 +67,9 @@ function main {
 		shift
 		open "${CODER_AGENT_URL/\/\//\/\/${DFD_APP}--${DFD_AGENT:-main}--${DFD_NAME}--${DFD_OWNER}.}?folder=$folder"
 		;;
+	github)
+		(echo protocol=https; echo host=github.com) | git credential fill | grep ^password= | cut -d= -f2-
+		;;
 	lock)
 		gpg-connect-agent reloadagent /bye
 		;;
