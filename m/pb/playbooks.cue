@@ -5,8 +5,9 @@ package pb
 inventory: {
 	[string]: vars: {
 		// provide defaults for inventory/packer.ini
-		ansible_user:       string | *#username
-		bazel_remote_cache: string | *"100.116.216.28" // defn-net-district, because some machines can't have decent DNS
+		ansible_user:           string | *#username
+		bazel_remote_cache:     string | *"100.116.216.28" // defn-net-district, because some machines can't have decent DNS
+		bazel_remote_cache_pot: string | *"9092"
 	}
 
 	coder: hosts: [
