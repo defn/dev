@@ -1,0 +1,77 @@
+{
+  "name": "piskel",
+  "version": "0.15.2-SNAPSHOT",
+  "description": "Pixel art editor",
+  "author": "Julian Descottes <julian.descottes@gmail.com>",
+  "contributors": [
+    "Vincent Renaudin"
+  ],
+  "homepage": "http://github.com/piskelapp/piskel",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/piskelapp/piskel.git"
+  },
+  "files": [
+    "dest/prod",
+    "misc/scripts/piskel-root"
+  ],
+  "bin": {
+    "piskel-root": "./misc/scripts/piskel-root",
+    "piskel-cli": "./cli/index.js"
+  },
+  "main": "./dest/prod/index.html",
+  "scripts": {
+    "test": "grunt test",
+    "dev": "grunt play",
+    "start": "grunt build && nw",
+    "preversion": "grunt test build",
+    "postversion": "git push && git push --tags && npm publish",
+    "release": "grunt && node ./bin/copy-to-piskel-website",
+    "build": "grunt desktop",
+    "build:mac": "grunt desktop-mac",
+    "format": "grunt eslint --fix"
+  },
+  "devDependencies": {
+    "dateformat": "4.5.1",
+    "fs-extra": "10.0.0",
+    "grunt": "1.4.1",
+    "grunt-casperjs": "^2.2.1",
+    "grunt-cli": "^1.4.3",
+    "grunt-contrib-clean": "2.0.0",
+    "grunt-contrib-concat": "1.0.1",
+    "grunt-contrib-connect": "3.0.0",
+    "grunt-contrib-copy": "1.0.0",
+    "grunt-contrib-jshint": "3.0.0",
+    "grunt-contrib-uglify": "5.0.1",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-eslint": "23.0.0",
+    "grunt-include-replace": "5.0.0",
+    "grunt-jscs": "3.0.1",
+    "grunt-karma": "4.0.2",
+    "grunt-leading-indent": "0.2.0",
+    "grunt-nw-builder": "3.1.0",
+    "grunt-replace": "2.0.2",
+    "grunt-spritesmith": "^6.9.0",
+    "jasmine-core": "3.8.0",
+    "karma": "6.3.4",
+    "karma-jasmine": "4.0.1",
+    "karma-phantomjs-launcher": "1.0.4",
+    "load-grunt-tasks": "5.1.0",
+    "nw": "0.54.0",
+    "phantomjs": "2.1.7",
+    "phantomjs-polyfill-object-assign": "0.0.2",
+    "promise-polyfill": "8.2.0",
+    "rmdir": "1.2.0"
+  },
+  "window": {
+    "title": "Piskel",
+    "icon": "dest/prod/logo.png",
+    "toolbar": false,
+    "width": 1000,
+    "height": 700
+  },
+  "dependencies": {
+    "minimist": "^1.2.5"
+  }
+}
