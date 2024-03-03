@@ -78,7 +78,7 @@ function main {
 		chmod 0700 ~/.gnupg ~/.ssh
 		chmod 0600 ~/.ssh/config
 		(set +f; if test -d ~/.dotfiles/.gnupg; then rsync -ia ~/.dotfiles/.gnupg/* ~/.gnupg/; fi)
-		(set +f; rm -fv ~/.gnupg/S.*)
+		(set +f; rm -fv ~/.gnupg/S.*agent*)
 		coder gitssh -- "$@"
 		;;
 	forward)
