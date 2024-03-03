@@ -98,7 +98,7 @@ module.exports = function(grunt) {
      */
 
     connect: {
-      prod: getConnectConfig('dest/prod', PORT.PROD, hostname, false),
+      prod: getConnectConfig('dest/prod', PORT.PROD, hostname, true),
       test: getConnectConfig(['dest/dev', 'test'], PORT.TEST, hostname, false),
       dev: getConnectConfig(['dest/dev', 'test'], PORT.DEV, hostname, 'http://' + hostname + ':' + PORT.DEV + '/?debug')
     },
