@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "lib": [
+            "DOM",
+            "ESNext"
+        ],
+        "target": "ESNext",
+        "composite": true,
+        "declaration": true,
+        "declarationMap": true,
+        "disableSourceOfProjectReferenceRedirect": true
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "id": "phasereditor2d.phaser",
+    "priority": -100,
+    "scripts": [
+        "_out/phasereditor2d.phaser.js",
+        "scripts/phaser.min.js"
+    ],
+    "scripts-dev": [
+        "scripts/phaser.js"
+    ]
+}
