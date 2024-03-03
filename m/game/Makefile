@@ -1,3 +1,6 @@
+port ?= 1959
+game ?= ~/work/sunny
+
 default:
 	$(MAKE) -j 3 sound pixel level game=$(game) port=$(port)
 
