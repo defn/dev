@@ -1,7 +1,9 @@
 build:
-	rm -rf gen
-	mkdir gen
-	./bin/godot -v project.godot --export HTML5 gen/index.html
+	rm -rf build/web
+	mkdir -p build/web
+	./bin/godot --headless -v --export-release Web ./build/web/index.html
+	curl -fsSL https://github.com/gzuidhof/coi-serviceworker/raw/master/coi-serviceworker.js > build/web/coi-serviceworker.js
+	sed -i 's#\(             <script src="index.js"></script>\)#             <script src="coi-serviceworker.js"></script>\n\1#g' build/web/index.html
 
 serve:
 	cd gen && python -m http.server
