@@ -24,6 +24,7 @@
         git
         netcat-gnu
         socat
+        nmap
         bashInteractive
       ];
     };
