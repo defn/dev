@@ -243,7 +243,7 @@ module "dev_oidc_cdn" {
   name                 = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
   origin_force_destroy = true
   versioning_enabled   = false
-  source               = "./assets/__cdktf_module_asset_26CE565C/B1BC5C5037A46E1263C80A1C97D9C99A/terraform-aws-cloudfront-s3-cdn"
+  source               = "./assets/__cdktf_module_asset_26CE565C/8B8804DEDBAFAB7F90963998BCA50CAA/terraform-aws-cloudfront-s3-cdn"
 }
 resource "aws_iam_instance_profile" "dev_instance_profile" {
   name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
