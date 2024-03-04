@@ -35,7 +35,7 @@ http*)
 	;;
 esac
 
-git merge pub/main
+git reset --hard pub/main
 git branch -u origin/main
 
 (
