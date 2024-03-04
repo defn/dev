@@ -1,5 +1,6 @@
 limit ?= $(shell uname -n)
 opt ?= -l "$(limit)"
+pb ?= base_ubuntu
 
 second = $(word 2, $(subst -, ,$@))
 
@@ -20,3 +21,6 @@ playbooks/*.yaml: playbooks.cue
 
 %: $(HOME)/.local/bin/ansible-playbook playbooks/%.yaml
 	@$(HOME)/.local/bin/ansible-playbook $(opt) "playbooks/$@.yaml"
+
+local:
+	$(MAKE) $(pb) opt="-c local -l $(limit)"
