@@ -144,6 +144,11 @@ perms:
 	-if ! test -f ~/.kube/config; then mkdir -p ~/.kube; touch ~/.kube/config; fi
 	-chmod 0600 ~/.kube/config
 
+init:
+	cp .ssh/config.example .ssh/config
+	cd m/pb && $(MAKE) local
+	b agent make install
+
 play:
 	cd m/pb && $(MAKE) base_ubuntu opt="-i inventory/packer.ini -e ansible_connection=local"
 
