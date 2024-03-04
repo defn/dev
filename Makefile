@@ -145,6 +145,7 @@ perms:
 	-chmod 0600 ~/.kube/config
 
 init:
+	bin/persist-cache
 	cp .ssh/config.example .ssh/config
 	cd m/pb && $(MAKE) local
 	b agent make install
