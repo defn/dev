@@ -150,8 +150,18 @@ init:
 	git reset --hard origin/main
 	bin/persist-cache
 	cp .ssh/config.example .ssh/config
-	cd m/pb && $(MAKE) local
+	ssh -o BatchMode=yes -o StrictHostKeyChecking=no home true || true
+	cd m/pb && $(MAKE) local || true
 	b agent make install
+
+deck-init:
+	git branch --set-upstream-to origin/main main
+	git fetch origin
+	git reset --hard origin/main
+	bin/persist-cache
+	cp .ssh/config.example .ssh/config
+	ssh -o BatchMode=yes -o StrictHostKeyChecking=no home true || true
+	make install
 
 play:
 	cd m/pb && $(MAKE) base_ubuntu opt="-i inventory/packer.ini -e ansible_connection=local"
