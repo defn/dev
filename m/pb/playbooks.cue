@@ -11,6 +11,8 @@ inventory: {
 	}
 
 	coder: hosts: [
+		"coder-amanibhavam-kowloon",
+		"coder-amanibhavam-threesix",
 	]
 
 	oci: hosts: [
