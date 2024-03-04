@@ -15,9 +15,9 @@ inventory: {
 		"coder-amanibhavam-threesix",
 	]
 
-  deck: hosts: {
-    "steamdeck"
-  }
+	deck: hosts: [
+		"steamdeck"
+	]
 
 	oci: hosts: [
 		"oci1",
