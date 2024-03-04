@@ -93,8 +93,13 @@ function main {
 		(set +f; rm -f ~/.gnupg/S.*agent*)
 		if ! pgrep dirmngr >/dev/null; then dirmngr --daemon >/dev/null || true; fi
 		set +u
-		setsid coder gitssh -- home -o LocalForward="$HOME/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra" 1>/dev/null 2>&1 &
-		bg_pid=$!
+    if [[ -n "${VSCODE_GIT_ASKPASS_NODE:-}" ]]; then
+		  setsid coder gitssh -- home -o LocalForward="$HOME/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra" 1>/dev/null 2>&1 &
+		  bg_pid=$!
+    else
+		  setsid ssh home -o LocalForward="$HOME/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra" 1>/dev/null 2>&1 &
+		  bg_pid=$!
+    fi
 		trap 'kill -SIGTERM -${bg_pid}' EXIT
 		while [[ "$(pass hello 2>/dev/null || true)" != "world" ]]; do sleep 1; done
 		"$@"
