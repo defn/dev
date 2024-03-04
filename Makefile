@@ -150,6 +150,7 @@ init:
 	git reset --hard origin/main
 	bin/persist-cache
 	cp .ssh/config.example .ssh/config
+	ssh -o BatchMode=yes -o StrictHostKeyChecking=no home true || true
 	cd m/pb && $(MAKE) local
 	b agent make install
 
