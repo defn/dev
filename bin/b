@@ -75,6 +75,8 @@ function main {
 		;;
 	agent)
 		shift
+		if ! test -d .password-store/.; then make password-store; fi
+		if ! test -d .dotfiles/.; then make dotfiles; fi
 		if test -d /run/user; then
 			sudo rm -rf /run/user/1000/gnupg
 			sudo install -d -m 0700 -o $(id -un) -g $(id -gn) /run/user/1000
@@ -95,7 +97,6 @@ function main {
 		setsid coder gitssh -- home -o LocalForward="$HOME/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra" 1>/dev/null 2>&1 &
 		bg_pid=$!
 		trap 'kill -SIGTERM -${bg_pid}' EXIT
-		if ! test -d .password-store/.; then make password-store; fi
 		while [[ "$(pass hello 2>/dev/null || true)" != "world" ]]; do sleep 1; done
 		"$@"
 		;;
