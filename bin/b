@@ -90,7 +90,6 @@ function main {
 				rsync -ia ~/.dotfiles/.gnupg/* ~/.gnupg/
 			fi
 		)
-		set -x
 		(set +f; rm -f ~/.gnupg/S.*agent*)
 		if ! pgrep dirmngr >/dev/null; then dirmngr --daemon >/dev/null || true; fi
 		set +u
