@@ -5,3 +5,12 @@ configure .ssh/config
 dns resolver, search domain
 ssh host key management
 trunk install
+
+nix profile install nixpkgs#gnumake
+nix profile install nixpkgs#direnv
+nix profile install nixpkgs#screen
+nix profile install nixpkgs#pipx
+nix profile install nixpkgs#gnupg
+nix profile install nixpkgs#vim
+nix profile install nixpkgs#cue
+
