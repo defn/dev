@@ -311,11 +311,13 @@ disown
 		AgentId: devCoderAgent.Id(),
 	})
 
+	roleArn := fmt.Sprintf("arn:aws:iam::510430971399:role/coder-%s-%s", *devCoderWorkspace.Owner(), *devCoderWorkspace.Name())
+
 	terraform_aws_cloudfront_s3_cdn.NewTerraformAwsCloudfrontS3Cdn(stack, infra.Js("dev_oidc_cdn"), &terraform_aws_cloudfront_s3_cdn.TerraformAwsCloudfrontS3CdnConfig{
 		Name:       devWorkspaceName,
 		Attributes: &[]*string{infra.Js("oidc")},
 		DeploymentPrincipalArns: &map[string]*[]*string{
-			"arn:aws:iam::510430971399:role/coder-amanibhavam-district": {infra.Js("/openid")},
+			roleArn: {infra.Js("/openid")},
 		},
 		OriginForceDestroy: infra.Jstrue(),
 		VersioningEnabled:  infra.Jsfalse(),

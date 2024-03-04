@@ -236,7 +236,7 @@ module "dev_oidc_cdn" {
     "oidc",
   ]
   deployment_principal_arns = {
-    "arn:aws:iam::510430971399:role/coder-amanibhavam-district" = [
+    "arn:aws:iam::510430971399:role/coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}" = [
       "/openid",
     ]
   }
