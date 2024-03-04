@@ -144,6 +144,11 @@ perms:
 	-if ! test -f ~/.kube/config; then mkdir -p ~/.kube; touch ~/.kube/config; fi
 	-chmod 0600 ~/.kube/config
 
+update:
+	git pull
+	cd .dotfiles && git pull
+	cd .password-store && git pull
+
 init:
 	git branch --set-upstream-to origin/main main
 	git fetch origin
