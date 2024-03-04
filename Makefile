@@ -145,6 +145,9 @@ perms:
 	-chmod 0600 ~/.kube/config
 
 init:
+	git branch --set-upstream-to origin/main main
+	git fetch origin
+	git merge --hard origin/main
 	bin/persist-cache
 	cp .ssh/config.example .ssh/config
 	cd m/pb && $(MAKE) local
