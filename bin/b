@@ -75,8 +75,8 @@ function main {
 		;;
 	agent)
 		shift
-		if ! test -d .password-store/.; then make password-store; fi
-		if ! test -d .dotfiles/.; then make dotfiles; fi
+		if ! test -d ~/.password-store/.; then (cd && make password-store); fi
+		if ! test -d ~/.dotfiles/.; then (cd && make dotfiles); fi
 		if test -d /run/user; then
 			sudo rm -rf /run/user/1000/gnupg
 			sudo install -d -m 0700 -o $(id -un) -g $(id -gn) /run/user/1000
