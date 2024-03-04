@@ -137,12 +137,6 @@ dev:
 	env KUBECONFIG=$$HOME/.kube/config.argocd k config set-context --current --namespace argocd
 	app repo add cache.$(domain):5000 --type helm --name cache --enable-oci --insecure-skip-server-verification
 
-init:
-	cd && $(MAKE) install
-	cd && ./.dotfiles/bootstrap
-	cd c && $(MAKE) tailscale
-	$(MAKE) cache
-
 up:
 	bin/make-k3s up
 	cd c/$(shell uname -n) && $(MAKE) iam
