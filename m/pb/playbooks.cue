@@ -16,7 +16,7 @@ inventory: {
 	]
 
 	deck: hosts: [
-		"steamdeck"
+		"steamdeck",
 	]
 
 	oci: hosts: [

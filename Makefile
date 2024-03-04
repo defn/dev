@@ -151,7 +151,7 @@ init:
 	bin/persist-cache
 	cp .ssh/config.example .ssh/config
 	ssh -o BatchMode=yes -o StrictHostKeyChecking=no home true || true
-	cd m/pb && $(MAKE) local
+	cd m/pb && $(MAKE) local || true
 	b agent make install
 
 play:
