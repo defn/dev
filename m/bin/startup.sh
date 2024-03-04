@@ -55,6 +55,6 @@ uptime
 cd
 source .bash_profile
 bin/persist-cache
-cd m
 
+cd m
 screen -S code-server -d -m tilt up

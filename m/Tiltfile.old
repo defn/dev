@@ -2,6 +2,10 @@
 
 load("ext://restart_process", "custom_build_with_restart")
 
+# local registry
+# TODO non-portable
+default_registry("coder-amanibhavam-district.tail3884f.ts.net:5000")
+
 # code-server
 local_resource(
     "code-server",
@@ -19,19 +23,37 @@ local_resource(
 
 # tailscale serve
 local_resource(
-    "tailscale-serve",
+    "tailscale-server",
     serve_cmd=[
         "bash",
         "-c",
         """
             cd
             source .bash_profile
+            tailscale serve --tcp 443 --bg --yes 8443
             tailscale serve --https 5000 --bg --yes https+insecure://localhost:4999/
             tailscale serve --https 10350 --bg --yes 10350 
-            sleep infinity
+            while [[ -z "$(kubectl --context $(uname -n) get -n traefik svc traefik -o json | jq -r .spec.clusterIP || true)" ]]; do sleep 1; done
+            set -x
+            exec socat TCP-LISTEN:8443,fork TCP:$(kubectl --context $(uname -n) get -n traefik svc traefik -o json | jq -r .spec.clusterIP):443
         """,
     ],
 )
+
+# kubernetes tunnel
+#local_resource(
+#    "kubernetes-tunnel",
+#    serve_cmd=[
+#        "bash",
+#        "-c",
+#        """
+#            cd
+#            source .bash_profile
+#	        tailscale serve --bg --https 6556 https+insecure://127.0.0.1:6555
+#            exec socat TCP-LISTEN:6555,bind=127.0.0.1,fork TCP:$(ifconfig -a ens5 | grep ' inet ' | awk '{print $2}'):6443
+#        """,
+#    ],
+#)
 
 # swap
 local_resource(
