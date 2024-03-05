@@ -4,7 +4,6 @@ set -eufo pipefail
 
 function main {
 	set +f
-	this-github-login 1>&2
 	for a in */; do
 		if grep ghrepo "${a}/flake.json" >/dev/null 2>/dev/null; then
 			(

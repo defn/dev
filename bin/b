@@ -68,7 +68,7 @@ function main {
 		open "${CODER_AGENT_URL/\/\//\/\/${DFD_APP}--${DFD_AGENT:-main}--${DFD_NAME}--${DFD_OWNER}.}?folder=$folder"
 		;;
 	github)
-		if [[ -n "${VSCODE_GIT_ASKPASS_NODE:-}" ]]; then (echo protocol=https; echo host=github.com) | git credential fill | grep ^password= | cut -d= -f2-; else true; fi
+		if [[ -n "${CODER:-}" ]]; then (echo protocol=https; echo host=github.com) | git credential fill | grep ^password= | cut -d= -f2-; else true; fi
 		;;
 	lock)
 		gpg-connect-agent reloadagent /bye
@@ -93,7 +93,7 @@ function main {
 		(set +f; rm -f ~/.gnupg/S.*agent*)
 		if ! pgrep dirmngr >/dev/null; then dirmngr --daemon >/dev/null || true; fi
 		set +u
-    if [[ -n "${VSCODE_GIT_ASKPASS_NODE:-}" ]]; then
+    if [[ -n "${CODER:-}" ]]; then
 		  setsid coder gitssh -- home -o LocalForward="$HOME/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra" 1>/dev/null 2>&1 &
 		  bg_pid=$!
     else
