@@ -57,7 +57,7 @@ resource "coder_app" "code-server" {
   display_name = "code-server"
   icon         = "/icon/code.svg"
   share        = "owner"
-  slug         = "code-server"
+  slug         = "cs"
   subdomain    = false
   url          = "http://localhost:8080/?folder=${data.coder_parameter.homedir.value}"
   healthcheck {
