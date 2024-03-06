@@ -48,17 +48,17 @@
       },
       "locked": {
         "dir": "m/pkg/cilium",
-        "lastModified": 1708046687,
-        "narHash": "sha256-SCsYLIpYDtlcXs/g8dE8K121A/7yQ1XyRP3NDlQ68+4=",
+        "lastModified": 1709684290,
+        "narHash": "sha256-otukqGj+1AMYRNz0Ti1+ZbH2wYKaxZu3u0gAC9bx9AM=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "9afe285cc14d701d25008be4e0ea8c99023b471f",
+        "rev": "2436c3589550d8f7ba778b07cbf1e9e7ecf9743a",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cilium",
         "owner": "defn",
-        "ref": "pkg-cilium-0.15.23-1",
+        "ref": "pkg-cilium-0.16.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1366,17 +1366,17 @@
       },
       "locked": {
         "dir": "m/pkg/spire",
-        "lastModified": 1708645088,
-        "narHash": "sha256-rNJaH/qz6tVM9+AJ6Lql4Z8mPruBL1u97HluyFGfFbU=",
+        "lastModified": 1709684307,
+        "narHash": "sha256-TzMJyGFznNrqX97YyPQCSGLw9/bBR3GorqG51s+lYL8=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "c58969ccd36742bb4b04d4d162eb2e060b3b7d58",
+        "rev": "a9364e8d37c07aa517819a5a32fc7ca7832b640f",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/spire",
         "owner": "defn",
-        "ref": "pkg-spire-1.9.0-1",
+        "ref": "pkg-spire-1.9.1-1",
         "repo": "dev",
         "type": "github"
       }
