@@ -531,17 +531,17 @@
       },
       "locked": {
         "dir": "m/pkg/k9s",
-        "lastModified": 1709616976,
-        "narHash": "sha256-k7GEWsCIbr5APQEB8IKaKhGw/TlPHiRqDhd5P2f4fEc=",
+        "lastModified": 1709746582,
+        "narHash": "sha256-qUjcXHx9afB18mKLhZpZlAupHkEf6ripNUxlrmRjxYc=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "bcd211bcc688708d2a3c755487e48c986cfc9429",
+        "rev": "93ff7f5610c70e092bc37b7d39b649ebf420ebe5",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/k9s",
         "owner": "defn",
-        "ref": "pkg-k9s-0.32.1-1",
+        "ref": "pkg-k9s-0.32.3-1",
         "repo": "dev",
         "type": "github"
       }
@@ -594,17 +594,17 @@
       },
       "locked": {
         "dir": "m/pkg/kubevirt",
-        "lastModified": 1706898027,
-        "narHash": "sha256-U+QiciwUQNXTH961LPL85vTveQGhqiEdo2c8GlmiHw0=",
+        "lastModified": 1709746610,
+        "narHash": "sha256-FNTq2LEPQqrqWTuJhLCWm43b9daL3qg564WVgGYxcUI=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "6e77963dd542425dfcadbb5932eb82e3bc71e584",
+        "rev": "d657ae7d22977ac1f142dc0a8159e1a0e45c7730",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/kubevirt",
         "owner": "defn",
-        "ref": "pkg-kubevirt-1.1.1-2",
+        "ref": "pkg-kubevirt-1.2.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -1429,17 +1429,17 @@
       },
       "locked": {
         "dir": "m/pkg/vcluster",
-        "lastModified": 1709184684,
-        "narHash": "sha256-Lze61+5oP5SJU/vmaawifHjuUpicI0itI3JX1iRRkew=",
+        "lastModified": 1709746636,
+        "narHash": "sha256-dbqk9efhqH6+r09pAWiFHiGjJ2HZqM0U5BX0efDXRCc=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "b7b1cea9b15f0587b67a5970eac57611059319f7",
+        "rev": "9434d5263ef81f833548a7238b071f5702e02bbb",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/vcluster",
         "owner": "defn",
-        "ref": "pkg-vcluster-0.19.3-1",
+        "ref": "pkg-vcluster-0.19.4-1",
         "repo": "dev",
         "type": "github"
       }
