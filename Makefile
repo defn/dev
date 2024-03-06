@@ -72,6 +72,7 @@ home_inner:
 				export n; \
 				t install_flake_$$n $(MAKE) install_flake; \
 				done; \
+			ln -nfs bazelisk ~/bin/nix.tmp/bazel; \
 			rsync -ia --delete ~/bin/nix.tmp/. ~/bin/nix/.; \
 			rm -rf ~/bin/nix.tmp; \
 			break; \
