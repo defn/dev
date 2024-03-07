@@ -19,11 +19,6 @@ inventory: {
 		"steamdeck",
 	]
 
-	oci: hosts: [
-		"oci1",
-		"oci2",
-	]
-
 	mac: hosts: [
 		"macmini",
 	]
