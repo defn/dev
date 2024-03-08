@@ -1,6 +1,6 @@
 {
   inputs = {
-    buf.url = github:defn/dev/pkg-buf-1.29.0-2?dir=m/pkg/buf;
+    buf.url = github:defn/dev/pkg-buf-1.30.0-1?dir=m/pkg/buf;
     cosign.url = github:defn/dev/pkg-cosign-2.2.3-2?dir=m/pkg/cosign;
     goreleaser.url = github:defn/dev/pkg-goreleaser-1.24.0-1?dir=m/pkg/goreleaser;
     yaegi.url = github:defn/dev/pkg-yaegi-0.16.0-1?dir=m/pkg/yaegi;
