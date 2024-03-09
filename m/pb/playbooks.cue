@@ -183,6 +183,28 @@ role: base_packages: tasks: [{
 	}
 }]
 
+role: network_dummy: tasks [{
+	name: "Confgure network dummy netdev"
+	become: true
+	template {
+		src:   "{{ role_path }}/templates/etc/systemd/network/dummy1.netdev.j2"
+		dest:  "/etc/systemd/network/dumm1.netdev"
+		owner: "root"
+		group: "root"
+		mode:  "0600"
+	}
+}, {
+	name: "Confgure network dummy network"
+	become: true
+	template {
+		src:   "{{ role_path }}/templates/etc/systemd/network/dummy1.network.j2"
+		dest:  "/etc/systemd/network/dumm1.network"
+		owner: "root"
+		group: "root"
+		mode:  "0600"
+	}
+}]
+
 role: base_bazel: tasks: [{
 	name:   "Configure bazel cache"
 	become: true
