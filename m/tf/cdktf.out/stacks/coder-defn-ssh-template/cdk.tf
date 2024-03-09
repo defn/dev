@@ -27,6 +27,14 @@ data "coder_parameter" "remote" {
   name         = "remote"
   type         = "string"
 }
+data "coder_parameter" "arch" {
+  default      = "amd64"
+  description  = "CPU arch"
+  display_name = "CPU arch"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  name         = "arch"
+  type         = "string"
+}
 data "coder_workspace" "me" {
 }
 
@@ -43,7 +51,7 @@ resource "null_resource" "main" {
 }
 
 resource "coder_agent" "main" {
-  arch = "amd64"
+  arch = data.coder_parameter.arch.value
   auth = "token"
   env = {
     GIT_AUTHOR_EMAIL    = "${data.coder_workspace.me.owner_email}"
