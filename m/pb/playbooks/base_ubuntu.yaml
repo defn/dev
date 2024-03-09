@@ -1,5 +1,5 @@
-- name: Ubuntu base playbook for all servers
-  hosts: all
+- name: Ubuntu base playbook
+  hosts: coder:rpi:mac:zimaboard:heavy:district
   roles:
     - base_packages
     - base_bazel

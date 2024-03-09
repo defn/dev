@@ -64,12 +64,20 @@ inventory: {
 }
 
 playbook: base_ubuntu: [{
-	name:  "Ubuntu base playbook for all servers"
-	hosts: "all"
+	name:  "Ubuntu base playbook"
+	hosts: "coder:rpi:mac:zimaboard:heavy:district"
 	roles: [
 		"base_packages",
 		"base_bazel",
 		"network_dummy",
+	]
+}]
+
+playbook: base_deck: [{
+	name:  "Steamdeck base playbook"
+	hosts: "deck"
+	roles: [
+		"base_bazel",
 	]
 }]
 
@@ -200,6 +208,7 @@ role: base_packages: tasks: [{
 role: network_dummy: tasks: [{
 	name:   "Configure network dummy netdev"
 	become: true
+	when:   "ansible_architecture != 'aarch64'"
 	template: {
 		src:   "{{ role_path }}/templates/etc/systemd/network/dummy1.netdev.j2"
 		dest:  "/etc/systemd/network/dummy1.netdev"
@@ -210,6 +219,7 @@ role: network_dummy: tasks: [{
 }, {
 	name:   "Configure network dummy network"
 	become: true
+	when:   "ansible_architecture != 'aarch64'"
 	template: {
 		src:   "{{ role_path }}/templates/etc/systemd/network/dummy1.network.j2"
 		dest:  "/etc/systemd/network/dummy1.network"
