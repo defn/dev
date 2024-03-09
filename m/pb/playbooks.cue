@@ -15,6 +15,11 @@ inventory: {
 		"coder-amanibhavam-threesix",
 	]
 
+	rpi: hosts: [
+		"rpi4b",
+		"rpi4c",
+	]
+
 	deck: hosts: [
 		"steamdeck",
 	]
