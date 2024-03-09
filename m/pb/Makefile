@@ -5,7 +5,7 @@ pb ?= base_ubuntu
 second = $(word 2, $(subst -, ,$@))
 
 build:
-	cue fmt ./...
+	cue fmt $$(git ls-files | grep 'cue$$')
 	rm -f playbooks/*.yaml
 	rm -rf roles/*/tasks
 	cue export --out json -e fs | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | ../c/decode_base64.py 

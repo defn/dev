@@ -56,6 +56,7 @@ playbook: base_ubuntu: [{
 	roles: [
 		"base_packages",
 		"base_bazel",
+		"network_dummy",
 	]
 }]
 
@@ -188,7 +189,7 @@ role: network_dummy: tasks: [{
 	become: true
 	template: {
 		src:   "{{ role_path }}/templates/etc/systemd/network/dummy1.netdev.j2"
-		dest:  "/etc/systemd/network/dumm1.netdev"
+		dest:  "/etc/systemd/network/dummy1.netdev"
 		owner: "root"
 		group: "root"
 		mode:  "0600"
@@ -198,7 +199,7 @@ role: network_dummy: tasks: [{
 	become: true
 	template: {
 		src:   "{{ role_path }}/templates/etc/systemd/network/dummy1.network.j2"
-		dest:  "/etc/systemd/network/dumm1.network"
+		dest:  "/etc/systemd/network/dummy1.network"
 		owner: "root"
 		group: "root"
 		mode:  "0600"

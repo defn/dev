@@ -3,3 +3,4 @@
   roles:
     - base_packages
     - base_bazel
+    - network_dummy
