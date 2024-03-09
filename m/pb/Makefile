@@ -2,11 +2,10 @@ second = $(word 2, $(subst -, ,$@))
 
 pb ?= 
 limit ?= 
-
-ifeq ($(limit),)
-opt ?= -l "$(limit)"
-else
 opt ?=
+
+ifdef limit
+opt = -l "$(limit)"
 endif
 
 build:

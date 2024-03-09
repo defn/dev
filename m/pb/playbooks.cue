@@ -27,9 +27,14 @@ inventory: {
 		"rpi4c",
 	]
 
-	deck: hosts: [
-		"steamdeck",
-	]
+	deck: {
+		hosts: [
+			"steamdeck",
+		]
+		vars: {
+			ansible_user: "deck"
+		}
+	}
 
 	mac: district: {
 		hosts: [
