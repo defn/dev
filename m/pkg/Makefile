@@ -4,6 +4,7 @@ all:
 	env NIX_CONFIG="access-tokens = github.com=$$(b github)" $(MAKE) update upgrade	
 
 list:
+	@mkdir -p ~/.config/gh
 	@yq --yaml-output -n --arg token "$$(b github)" --arg handle "$${GIT_COMMITTER_NAME}" '{"github.com": { users: { "\($$handle)": { oauth_token: $$token}}, git_protocol: "https", user: $$handle, oauth_token: $$token}}' > ~/.config/gh/hosts.yml
 	@./make_list_vendor_updates.sh
 
