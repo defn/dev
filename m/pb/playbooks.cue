@@ -16,6 +16,7 @@ inventory: {
 	]
 
 	rpi: hosts: [
+		"rpi4a",
 		"rpi4b",
 		"rpi4c",
 	]
@@ -154,23 +155,6 @@ role: base_packages: tasks: [{
 			"/usr/bin/gs",
 		]
 		state: "absent"
-	}
-}, {
-	name:   "Install bazelisk"
-	become: true
-	get_url: {
-		url:      "https://github.com/bazelbuild/bazelisk/releases/download/v1.19.0/bazelisk-linux-amd64"
-		dest:     "/usr/local/bin/bazelisk"
-		mode:     "0755"
-		checksum: "sha256:d28b588ac0916abd6bf02defb5433f6eddf7cba35ffa808eabb65a44aab226f7"
-	}
-}, {
-	name:   "Create symlink for bazel"
-	become: true
-	file: {
-		src:   "bazelisk"
-		dest:  "/usr/local/bin/bazel"
-		state: "link"
 	}
 }, {
 	name:   "Allow user to run Docker"
