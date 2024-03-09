@@ -5,9 +5,9 @@ package pb
 inventory: {
 	[string]: vars: {
 		// provide defaults for inventory/packer.ini
-		ansible_user:            string | *#username
-		bazel_remote_cache:      string | *"100.116.216.28" // defn-net-district, because some machines can't have decent DNS
-		bazel_remote_cache_port: string | *"9092"
+		ansible_user:              string | *#username
+		bazel_remote_cache_server: string | *"100.116.216.28" // defn-net-district, because some machines can't have decent DNS
+		bazel_remote_cache_port:   string | *"9092"
 	}
 
 	coder: hosts: [
@@ -25,9 +25,15 @@ inventory: {
 		"steamdeck",
 	]
 
-	mac: hosts: [
-		"macmini",
-	]
+	mac: district: {
+		hosts: [
+			"macmini",
+		]
+		vars: {
+			bazel_remote_cache_server: "cache.defn.run"
+			bazel_remote_cache_port:   "9093"
+		}
+	}
 
 	zimaboard: hosts: [
 		"zm1",
@@ -45,7 +51,8 @@ inventory: {
 			"defn-net-district",
 		]
 		vars: {
-			bazel_remote_cache: "cache.defn.run"
+			bazel_remote_cache_server: "cache.defn.run"
+			bazel_remote_cache_port:   "9093"
 		}
 	}
 }
