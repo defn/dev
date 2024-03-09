@@ -127,7 +127,8 @@ docker:
 
 trunk:
 	$(MARK) trunk
-	if ! test -e /usr/local/bin/trunk; then trunk install; fi
+	if ! test -e /usr/local/bin/trunk; then curl https://get.trunk.io -fsSL | bash; fi
+	trunk version
 	git checkout .local/share/code-server/User/settings.json
 
 login:
