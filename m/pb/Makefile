@@ -1,8 +1,13 @@
-limit ?= $(shell uname -n)
-opt ?= -l "$(limit)"
-pb ?= base_ubuntu
-
 second = $(word 2, $(subst -, ,$@))
+
+pb ?= 
+limit ?= 
+
+ifeq ($(limit),)
+opt ?= -l "$(limit)"
+else
+opt ?=
+endif
 
 build:
 	cue fmt $$(git ls-files | grep 'cue$$')
