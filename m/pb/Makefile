@@ -24,7 +24,7 @@ playbooks/*.yaml: playbooks.cue
 	$(MAKE) build
 
 %: $(HOME)/.local/bin/ansible-playbook playbooks/%.yaml
-	@$(HOME)/.local/bin/ansible-playbook $(opt) "playbooks/$@.yaml"
+	$(HOME)/.local/bin/ansible-playbook $(opt) "playbooks/$@.yaml"
 
 local:
-	$(MAKE) $(pb) opt="-c local -l $(limit)"
+	$(MAKE) $(pb) opt="-c local -l $(shell uname -n | cut -d. -f1)"
