@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 
 # https://nixos.org/download
-NIX_VERSION := 2.20.3
+NIX_VERSION := 2.20.5
 
 flakes ?= az home nix secrets utils development cloud kubernetes remotedev localdev godev jsdev pydev rustdev shell
 
