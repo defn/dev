@@ -32,9 +32,3 @@ services:
     ports:
       - "127.0.0.1:6378:6379"
     restart: unless-stopped
-  soft-serve:
-    image: charmcli/soft-serve:latest
-    container_name: soft-serve
-    volumes:
-      - ${HOME}/work/soft-serve:/soft-serve
-    restart: unless-stopped
