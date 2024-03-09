@@ -192,7 +192,7 @@ role: network_dummy: tasks: [{
 		dest:  "/etc/systemd/network/dummy1.netdev"
 		owner: "root"
 		group: "root"
-		mode:  "0600"
+		mode:  "0644"
 	}
 }, {
 	name:   "Configure network dummy network"
@@ -202,7 +202,7 @@ role: network_dummy: tasks: [{
 		dest:  "/etc/systemd/network/dummy1.network"
 		owner: "root"
 		group: "root"
-		mode:  "0600"
+		mode:  "0644"
 	}
 }]
 
