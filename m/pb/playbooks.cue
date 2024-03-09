@@ -183,10 +183,10 @@ role: base_packages: tasks: [{
 	}
 }]
 
-role: network_dummy: tasks [{
-	name: "Confgure network dummy netdev"
+role: network_dummy: tasks: [{
+	name:   "Configure network dummy netdev"
 	become: true
-	template {
+	template: {
 		src:   "{{ role_path }}/templates/etc/systemd/network/dummy1.netdev.j2"
 		dest:  "/etc/systemd/network/dumm1.netdev"
 		owner: "root"
@@ -194,9 +194,9 @@ role: network_dummy: tasks [{
 		mode:  "0600"
 	}
 }, {
-	name: "Confgure network dummy network"
+	name:   "Configure network dummy network"
 	become: true
-	template {
+	template: {
 		src:   "{{ role_path }}/templates/etc/systemd/network/dummy1.network.j2"
 		dest:  "/etc/systemd/network/dumm1.network"
 		owner: "root"
