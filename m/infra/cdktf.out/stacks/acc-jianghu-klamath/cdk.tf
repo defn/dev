@@ -22,7 +22,7 @@ provider "aws" {
 }
 
 module "jianghu-klamath" {
-  account   = 767397818037
+  account   = 510430971399
   name      = "terraform"
   namespace = "jianghu"
   stage     = "ops"

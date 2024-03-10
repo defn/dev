@@ -22,7 +22,7 @@ provider "aws" {
 }
 
 module "fogg-home" {
-  account   = 767397818037
+  account   = 510430971399
   name      = "terraform"
   namespace = "fogg"
   stage     = "ops"

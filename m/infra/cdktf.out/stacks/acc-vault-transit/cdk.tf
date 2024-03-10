@@ -22,7 +22,7 @@ provider "aws" {
 }
 
 module "vault-transit" {
-  account   = 767397818037
+  account   = 510430971399
   name      = "terraform"
   namespace = "vault"
   stage     = "ops"

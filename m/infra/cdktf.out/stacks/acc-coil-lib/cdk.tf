@@ -22,7 +22,7 @@ provider "aws" {
 }
 
 module "coil-lib" {
-  account   = 767397818037
+  account   = 510430971399
   name      = "terraform"
   namespace = "coil"
   stage     = "ops"

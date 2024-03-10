@@ -22,7 +22,7 @@ provider "aws" {
 }
 
 module "circus-ops" {
-  account   = 767397818037
+  account   = 510430971399
   name      = "terraform"
   namespace = "circus"
   stage     = "ops"
