@@ -199,5 +199,4 @@ variable "label_value_case" {
     error_message = "Allowed values: `lower`, `title`, `upper`, `none`."
   }
 }
-
 #### End of copy of cloudposse/terraform-null-label/variables.tf

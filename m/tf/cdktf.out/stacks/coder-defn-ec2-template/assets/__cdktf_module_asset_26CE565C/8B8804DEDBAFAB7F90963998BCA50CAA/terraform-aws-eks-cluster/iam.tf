@@ -86,4 +86,3 @@ resource "aws_iam_role_policy_attachment" "cluster_elb_service_role" {
   policy_arn = one(aws_iam_policy.cluster_elb_service_role[*].arn)
   role       = one(aws_iam_role.default[*].name)
 }
-

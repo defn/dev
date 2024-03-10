@@ -70,4 +70,3 @@ resource "aws_route" "public_nat64" {
     delete = local.route_delete_timeout
   }
 }
-

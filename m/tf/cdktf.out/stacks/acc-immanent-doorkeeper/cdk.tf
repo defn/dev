@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
+
 }
 
 provider "aws" {
   profile = "immanent-doorkeeper-sso"
   alias   = "immanent-doorkeeper"
 }
-
 module "immanent-doorkeeper" {
   name      = "terraform"
   namespace = "dfn"

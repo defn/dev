@@ -282,6 +282,7 @@ variable "kube_exec_auth_enabled" {
   default     = false
 }
 
+
 variable "kube_exec_auth_role_arn" {
   type        = string
   description = "The role ARN for `aws eks get-token` to use"
@@ -335,4 +336,3 @@ variable "managed_security_group_rules_enabled" {
   description = "Flag to enable/disable the ingress and egress rules for the EKS managed Security Group"
   default     = true
 }
-

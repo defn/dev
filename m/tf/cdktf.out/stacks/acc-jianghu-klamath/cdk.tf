@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
+
 }
 
 provider "aws" {
   profile = "jianghu-klamath-sso"
   alias   = "jianghu-klamath"
 }
-
 module "jianghu-klamath" {
   name      = "terraform"
   namespace = "dfn"

@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
+
 }
 
 provider "aws" {
   profile = "immanent-changer-sso"
   alias   = "immanent-changer"
 }
-
 module "immanent-changer" {
   name      = "terraform"
   namespace = "dfn"

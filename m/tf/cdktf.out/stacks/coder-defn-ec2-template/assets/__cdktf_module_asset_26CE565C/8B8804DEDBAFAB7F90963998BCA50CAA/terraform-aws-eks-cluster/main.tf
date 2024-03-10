@@ -165,4 +165,3 @@ resource "aws_eks_addon" "cluster" {
     delete = each.value.delete_timeout
   }
 }
-

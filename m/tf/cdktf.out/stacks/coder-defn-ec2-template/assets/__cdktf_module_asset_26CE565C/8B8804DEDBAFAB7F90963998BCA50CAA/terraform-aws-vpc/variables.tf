@@ -155,4 +155,3 @@ variable "ipv6_egress_only_internet_gateway_enabled" {
   description = "Set `true` to create an IPv6 Egress-Only Internet Gateway for the VPC"
   default     = false
 }
-

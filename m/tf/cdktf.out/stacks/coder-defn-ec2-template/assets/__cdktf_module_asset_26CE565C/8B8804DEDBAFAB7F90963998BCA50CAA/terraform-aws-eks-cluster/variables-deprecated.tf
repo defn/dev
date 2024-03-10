@@ -17,4 +17,3 @@ variable "workers_security_group_ids" {
   Historical default: `[]`
   EOT
 }
-

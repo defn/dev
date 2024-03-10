@@ -121,4 +121,3 @@ resource "aws_s3_bucket_replication_configuration" "replication" {
   # Must have bucket versioning enabled first
   depends_on = [aws_s3_bucket_versioning.default]
 }
-

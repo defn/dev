@@ -34,6 +34,7 @@ resource "aws_subnet" "public" {
 
   private_dns_hostname_type_on_launch = local.public4_enabled ? var.ipv4_public_instance_hostname_type : null
 
+
   tags = merge(
     module.public_label.tags,
     {
@@ -157,4 +158,3 @@ resource "aws_network_acl_rule" "public6_egress" {
   to_port         = 0
   protocol        = "-1" #tfsec:ignore:aws-ec2-no-excessive-port-access
 }
-

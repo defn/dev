@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
+
 }
 
 provider "aws" {
   profile = "spiral-log-sso"
   alias   = "spiral-log"
 }
-
 module "spiral-log" {
   name      = "terraform"
   namespace = "dfn"

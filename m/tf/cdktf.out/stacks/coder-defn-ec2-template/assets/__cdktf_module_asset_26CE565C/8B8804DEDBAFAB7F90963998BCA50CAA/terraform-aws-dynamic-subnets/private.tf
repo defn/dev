@@ -147,4 +147,3 @@ resource "aws_network_acl_rule" "private6_egress" {
   to_port         = 0
   protocol        = "-1" #tfsec:ignore:aws-ec2-no-excessive-port-access
 }
-

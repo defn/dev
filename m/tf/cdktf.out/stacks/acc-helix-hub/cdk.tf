@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
+
 }
 
 provider "aws" {
   profile = "helix-hub-sso"
   alias   = "helix-hub"
 }
-
 module "helix-hub" {
   name      = "terraform"
   namespace = "dfn"

@@ -82,4 +82,3 @@ output "workers_role_name" {
   description = "Name of the worker nodes IAM role"
   value       = local.workers_role_name
 }
-

@@ -45,4 +45,3 @@ output "interface_vpc_endpoints_map" {
   value       = data.aws_vpc_endpoint.interface
   description = "Map of Interface VPC Endpoints deployed to this VPC, using keys supplied in `var.interface_vpc_endpoints`."
 }
-

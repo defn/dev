@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
+
 }
 
 provider "aws" {
   profile = "vault-dev-sso"
   alias   = "vault-dev"
 }
-
 module "vault-dev" {
   name      = "terraform"
   namespace = "dfn"

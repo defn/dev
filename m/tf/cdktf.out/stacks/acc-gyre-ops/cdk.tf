@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
+
 }
 
 provider "aws" {
   profile = "gyre-ops-sso"
   alias   = "gyre-ops"
 }
-
 module "gyre-ops" {
   name      = "terraform"
   namespace = "dfn"

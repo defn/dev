@@ -14,6 +14,7 @@ terraform {
     region         = "us-east-1"
   }
 
+
 }
 
 locals {
@@ -25,7 +26,6 @@ provider "aws" {
   profile = "vault-org-sso"
   region  = "us-east-2"
 }
-
 resource "aws_organizations_organization" "organization" {
   aws_service_access_principals = [
     "cloudtrail.amazonaws.com",
@@ -41,10 +41,8 @@ resource "aws_organizations_organization" "organization" {
   ]
   feature_set = "ALL"
 }
-
 data "aws_ssoadmin_instances" "sso_instance" {
 }
-
 resource "aws_ssoadmin_permission_set" "admin_sso_permission_set" {
   instance_arn     = "${element(local.sso_instance_arn, 0)}"
   name             = "Administrator"
@@ -53,18 +51,15 @@ resource "aws_ssoadmin_permission_set" "admin_sso_permission_set" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_managed_policy_attachment" "admin_sso_managed_policy_attachment" {
   instance_arn       = "${aws_ssoadmin_permission_set.admin_sso_permission_set.instance_arn}"
   managed_policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
   permission_set_arn = "${aws_ssoadmin_permission_set.admin_sso_permission_set.arn}"
 }
-
 resource "aws_identitystore_group" "administrators_sso_group" {
   display_name      = "Administrators"
   identity_store_id = "${element(local.sso_instance_isid, 0)}"
 }
-
 resource "aws_organizations_account" "vault" {
   email = "aws-vault@defn.us"
   name  = "vault"
@@ -72,7 +67,6 @@ resource "aws_organizations_account" "vault" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "vault_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -81,7 +75,6 @@ resource "aws_ssoadmin_account_assignment" "vault_admin_sso_account_assignment" 
   target_id          = "${aws_organizations_account.vault.id}"
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "transit" {
   email = "aws-vault-transit@defn.sh"
   name  = "transit"
@@ -89,7 +82,6 @@ resource "aws_organizations_account" "transit" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "transit_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -98,7 +90,6 @@ resource "aws_ssoadmin_account_assignment" "transit_admin_sso_account_assignment
   target_id          = "${aws_organizations_account.transit.id}"
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "audit" {
   email = "aws-vault-audit@defn.sh"
   name  = "audit"
@@ -106,7 +97,6 @@ resource "aws_organizations_account" "audit" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "audit_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -115,7 +105,6 @@ resource "aws_ssoadmin_account_assignment" "audit_admin_sso_account_assignment" 
   target_id          = "${aws_organizations_account.audit.id}"
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "vault0" {
   email = "aws-vault-vault0@defn.sh"
   name  = "vault0"
@@ -123,7 +112,6 @@ resource "aws_organizations_account" "vault0" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "vault0_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -132,7 +120,6 @@ resource "aws_ssoadmin_account_assignment" "vault0_admin_sso_account_assignment"
   target_id          = "${aws_organizations_account.vault0.id}"
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "vault1" {
   email = "aws-vault-vault1@defn.sh"
   name  = "vault1"
@@ -140,7 +127,6 @@ resource "aws_organizations_account" "vault1" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "vault1_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -149,7 +135,6 @@ resource "aws_ssoadmin_account_assignment" "vault1_admin_sso_account_assignment"
   target_id          = "${aws_organizations_account.vault1.id}"
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "ops" {
   email = "aws-vault-ops@defn.sh"
   name  = "ops"
@@ -157,7 +142,6 @@ resource "aws_organizations_account" "ops" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "ops_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -166,7 +150,6 @@ resource "aws_ssoadmin_account_assignment" "ops_admin_sso_account_assignment" {
   target_id          = "${aws_organizations_account.ops.id}"
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "library" {
   email = "aws-vault-library@defn.sh"
   name  = "library"
@@ -174,7 +157,6 @@ resource "aws_organizations_account" "library" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "library_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -183,7 +165,6 @@ resource "aws_ssoadmin_account_assignment" "library_admin_sso_account_assignment
   target_id          = "${aws_organizations_account.library.id}"
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "hub" {
   email = "aws-vault-hub@defn.sh"
   name  = "hub"
@@ -191,7 +172,6 @@ resource "aws_organizations_account" "hub" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "hub_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -200,7 +180,6 @@ resource "aws_ssoadmin_account_assignment" "hub_admin_sso_account_assignment" {
   target_id          = "${aws_organizations_account.hub.id}"
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "pub" {
   email = "aws-vault-pub@defn.sh"
   name  = "pub"
@@ -208,7 +187,6 @@ resource "aws_organizations_account" "pub" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "pub_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -217,7 +195,6 @@ resource "aws_ssoadmin_account_assignment" "pub_admin_sso_account_assignment" {
   target_id          = "${aws_organizations_account.pub.id}"
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "dev" {
   email = "aws-vault-dev@defn.sh"
   name  = "dev"
@@ -225,7 +202,6 @@ resource "aws_organizations_account" "dev" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "dev_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"

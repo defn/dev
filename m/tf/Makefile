@@ -17,13 +17,9 @@ build: ../node_modules/.bin/cdktf
 # restore locks
 	git status -sb | grep lock.hcl | awk '{print $$2}' | xargs git reset --
 	git status -sb | grep lock.hcl | awk '{print $$2}' | xargs git checkout --
-# add files to staging area for enumeration
+# fmt
 	git add cdktf.out
 	git add -u cdktf.out
-	trunk fmt $(git ls-files .)
-# add whitespace between blocks
-	git ls-files cdktf.out | grep 'tf$$' | while read -r a; do perl -pe 's#^}$$#}\n#' $$a | awk 'NF {print; blank=0} !NF && !blank++ {print}' > $$a.tmp && mv $$a.tmp $$a; done
-# fmt
 	trunk fmt $(git ls-files .)
 	git add -u .
 

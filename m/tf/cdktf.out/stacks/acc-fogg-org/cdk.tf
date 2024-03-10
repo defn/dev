@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
+
 }
 
 provider "aws" {
   profile = "fogg-org-sso"
   alias   = "fogg-org"
 }
-
 module "fogg-org" {
   name      = "terraform"
   namespace = "dfn"

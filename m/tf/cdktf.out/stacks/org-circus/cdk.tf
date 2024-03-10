@@ -14,6 +14,7 @@ terraform {
     region         = "us-east-1"
   }
 
+
 }
 
 locals {
@@ -25,7 +26,6 @@ provider "aws" {
   profile = "circus-org-sso"
   region  = "us-west-2"
 }
-
 resource "aws_organizations_organization" "organization" {
   aws_service_access_principals = [
     "cloudtrail.amazonaws.com",
@@ -41,10 +41,8 @@ resource "aws_organizations_organization" "organization" {
   ]
   feature_set = "ALL"
 }
-
 data "aws_ssoadmin_instances" "sso_instance" {
 }
-
 resource "aws_ssoadmin_permission_set" "admin_sso_permission_set" {
   instance_arn     = "${element(local.sso_instance_arn, 0)}"
   name             = "Administrator"
@@ -53,18 +51,15 @@ resource "aws_ssoadmin_permission_set" "admin_sso_permission_set" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_managed_policy_attachment" "admin_sso_managed_policy_attachment" {
   instance_arn       = "${aws_ssoadmin_permission_set.admin_sso_permission_set.instance_arn}"
   managed_policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
   permission_set_arn = "${aws_ssoadmin_permission_set.admin_sso_permission_set.arn}"
 }
-
 resource "aws_identitystore_group" "administrators_sso_group" {
   display_name      = "Administrators"
   identity_store_id = "${element(local.sso_instance_isid, 0)}"
 }
-
 resource "aws_organizations_account" "circus" {
   email = "aws-circus@defn.us"
   name  = "circus"
@@ -72,7 +67,6 @@ resource "aws_organizations_account" "circus" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "circus_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -81,7 +75,6 @@ resource "aws_ssoadmin_account_assignment" "circus_admin_sso_account_assignment"
   target_id          = "${aws_organizations_account.circus.id}"
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "audit" {
   email = "aws-circus-audit@defn.sh"
   name  = "audit"
@@ -89,7 +82,6 @@ resource "aws_organizations_account" "audit" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "audit_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -98,7 +90,6 @@ resource "aws_ssoadmin_account_assignment" "audit_admin_sso_account_assignment" 
   target_id          = "${aws_organizations_account.audit.id}"
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "govcloud" {
   email = "aws-circus-govcloud@defn.sh"
   name  = "govcloud"
@@ -106,7 +97,6 @@ resource "aws_organizations_account" "govcloud" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "govcloud_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -115,7 +105,6 @@ resource "aws_ssoadmin_account_assignment" "govcloud_admin_sso_account_assignmen
   target_id          = "${aws_organizations_account.govcloud.id}"
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "ops" {
   email = "aws-circus-ops@defn.sh"
   name  = "ops"
@@ -123,7 +112,6 @@ resource "aws_organizations_account" "ops" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "ops_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -132,7 +120,6 @@ resource "aws_ssoadmin_account_assignment" "ops_admin_sso_account_assignment" {
   target_id          = "${aws_organizations_account.ops.id}"
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "transit" {
   email = "aws-circus-transit@defn.sh"
   name  = "transit"
@@ -140,7 +127,6 @@ resource "aws_organizations_account" "transit" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "transit_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"

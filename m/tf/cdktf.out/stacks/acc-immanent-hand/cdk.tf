@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
+
 }
 
 provider "aws" {
   profile = "immanent-hand-sso"
   alias   = "immanent-hand"
 }
-
 module "immanent-hand" {
   name      = "terraform"
   namespace = "dfn"

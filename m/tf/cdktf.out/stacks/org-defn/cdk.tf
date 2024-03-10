@@ -14,6 +14,7 @@ terraform {
     region         = "us-east-1"
   }
 
+
 }
 
 locals {
@@ -25,7 +26,6 @@ provider "aws" {
   profile = "defn-org-sso"
   region  = "us-east-2"
 }
-
 resource "aws_organizations_organization" "organization" {
   aws_service_access_principals = [
     "cloudtrail.amazonaws.com",
@@ -41,10 +41,8 @@ resource "aws_organizations_organization" "organization" {
   ]
   feature_set = "ALL"
 }
-
 data "aws_ssoadmin_instances" "sso_instance" {
 }
-
 resource "aws_ssoadmin_permission_set" "admin_sso_permission_set" {
   instance_arn     = "${element(local.sso_instance_arn, 0)}"
   name             = "Administrator"
@@ -53,18 +51,15 @@ resource "aws_ssoadmin_permission_set" "admin_sso_permission_set" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_managed_policy_attachment" "admin_sso_managed_policy_attachment" {
   instance_arn       = "${aws_ssoadmin_permission_set.admin_sso_permission_set.instance_arn}"
   managed_policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
   permission_set_arn = "${aws_ssoadmin_permission_set.admin_sso_permission_set.arn}"
 }
-
 resource "aws_identitystore_group" "administrators_sso_group" {
   display_name      = "Administrators"
   identity_store_id = "${element(local.sso_instance_isid, 0)}"
 }
-
 resource "aws_organizations_account" "defn" {
   email = "iam+bootstrap@defn.sh"
   name  = "defn"
@@ -72,7 +67,6 @@ resource "aws_organizations_account" "defn" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "defn_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"

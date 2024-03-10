@@ -68,6 +68,7 @@ locals {
     labels_as_tags     = local.context_labels_as_tags_is_unset ? var.labels_as_tags : var.context.labels_as_tags
   }
 
+
   enabled             = local.input.enabled
   regex_replace_chars = coalesce(local.input.regex_replace_chars, local.defaults.regex_replace_chars)
 
@@ -164,6 +165,7 @@ locals {
   id_short = substr("${local.id_truncated}${local.id_hash}", 0, local.id_length_limit)
   id       = local.id_length_limit != 0 && length(local.id_full) > local.id_length_limit ? local.id_short : local.id_full
 
+
   # Context of this label to pass to other label modules
   output_context = {
     enabled             = local.enabled
@@ -186,4 +188,3 @@ locals {
   }
 
 }
-

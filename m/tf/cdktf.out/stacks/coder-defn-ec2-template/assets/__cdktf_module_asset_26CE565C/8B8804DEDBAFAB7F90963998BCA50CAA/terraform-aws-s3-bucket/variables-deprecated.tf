@@ -41,4 +41,3 @@ variable "replication_rules" {
   default     = null
   description = "DEPRECATED (use `s3_replication_rules`): Specifies the replication rules for S3 bucket replication if enabled. You must also set s3_replication_enabled to true."
 }
-

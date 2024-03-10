@@ -139,4 +139,3 @@ resource "aws_route" "nat_instance" {
     delete = local.route_delete_timeout
   }
 }
-

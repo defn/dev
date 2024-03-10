@@ -75,4 +75,3 @@ resource "aws_iam_instance_profile" "default" {
   name  = module.this.id
   role  = join("", aws_iam_role.default.*.name)
 }
-

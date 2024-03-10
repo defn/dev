@@ -147,4 +147,3 @@ output "named_public_subnets_stats_map" {
   description = "Map of subnet names (specified in `subnets_per_az_names` variable) to lists of objects with each object having three items: AZ, public subnet ID, public route table ID"
   value       = local.named_public_subnets_stats_map
 }
-

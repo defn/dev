@@ -14,6 +14,7 @@ terraform {
     region         = "us-east-1"
   }
 
+
 }
 
 locals {
@@ -25,7 +26,6 @@ provider "aws" {
   profile = "imma-org-sso"
   region  = "us-west-2"
 }
-
 resource "aws_organizations_organization" "organization" {
   aws_service_access_principals = [
     "cloudtrail.amazonaws.com",
@@ -41,10 +41,8 @@ resource "aws_organizations_organization" "organization" {
   ]
   feature_set = "ALL"
 }
-
 data "aws_ssoadmin_instances" "sso_instance" {
 }
-
 resource "aws_ssoadmin_permission_set" "admin_sso_permission_set" {
   instance_arn     = "${element(local.sso_instance_arn, 0)}"
   name             = "Administrator"
@@ -53,18 +51,15 @@ resource "aws_ssoadmin_permission_set" "admin_sso_permission_set" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_managed_policy_attachment" "admin_sso_managed_policy_attachment" {
   instance_arn       = "${aws_ssoadmin_permission_set.admin_sso_permission_set.instance_arn}"
   managed_policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
   permission_set_arn = "${aws_ssoadmin_permission_set.admin_sso_permission_set.arn}"
 }
-
 resource "aws_identitystore_group" "administrators_sso_group" {
   display_name      = "Administrators"
   identity_store_id = "${element(local.sso_instance_isid, 0)}"
 }
-
 resource "aws_organizations_account" "imma" {
   email = "aws-imma@defn.us"
   name  = "imma"
@@ -72,7 +67,6 @@ resource "aws_organizations_account" "imma" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "imma_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -81,7 +75,6 @@ resource "aws_ssoadmin_account_assignment" "imma_admin_sso_account_assignment" {
   target_id          = "${aws_organizations_account.imma.id}"
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "imma-prod" {
   email = "imma-prod@imma.io"
   name  = "imma-prod"
@@ -89,7 +82,6 @@ resource "aws_organizations_account" "imma-prod" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "imma-prod_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -98,7 +90,6 @@ resource "aws_ssoadmin_account_assignment" "imma-prod_admin_sso_account_assignme
   target_id          = "${aws_organizations_account.imma-prod.id}"
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "imma-dev" {
   email = "imma-dev@imma.io"
   name  = "imma-dev"
@@ -106,7 +97,6 @@ resource "aws_organizations_account" "imma-dev" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "imma-dev_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -115,7 +105,6 @@ resource "aws_ssoadmin_account_assignment" "imma-dev_admin_sso_account_assignmen
   target_id          = "${aws_organizations_account.imma-dev.id}"
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "imma-tolan" {
   email = "imma-tolan@defn.us"
   name  = "imma-tolan"
@@ -123,7 +112,6 @@ resource "aws_organizations_account" "imma-tolan" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "imma-tolan_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -132,7 +120,6 @@ resource "aws_ssoadmin_account_assignment" "imma-tolan_admin_sso_account_assignm
   target_id          = "${aws_organizations_account.imma-tolan.id}"
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "imma-dgwyn" {
   email = "imma-dgwyn@defn.us"
   name  = "imma-dgwyn"
@@ -140,7 +127,6 @@ resource "aws_organizations_account" "imma-dgwyn" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "imma-dgwyn_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -149,7 +135,6 @@ resource "aws_ssoadmin_account_assignment" "imma-dgwyn_admin_sso_account_assignm
   target_id          = "${aws_organizations_account.imma-dgwyn.id}"
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "imma-defn" {
   email = "imma-defn@defn.us"
   name  = "imma-defn"
@@ -157,7 +142,6 @@ resource "aws_organizations_account" "imma-defn" {
     ManagedBy = "Terraform"
   }
 }
-
 resource "aws_ssoadmin_account_assignment" "imma-defn_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"

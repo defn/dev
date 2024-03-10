@@ -25,6 +25,7 @@
 # https://docs.aws.amazon.com/cli/latest/userguide/install-bundle.html
 # https://docs.aws.amazon.com/cli/latest/userguide/install-cliv1.html
 
+
 locals {
   yaml_quote = var.aws_auth_yaml_strip_quotes ? "" : "\""
 
@@ -77,6 +78,7 @@ resource "null_resource" "wait_for_cluster" {
   }
 }
 
+
 # Get an authentication token to communicate with the EKS cluster.
 # By default (before other roles are added to the Auth ConfigMap), you can authenticate to EKS cluster only by assuming the role that created the cluster.
 # `aws_eks_cluster_auth` uses IAM credentials from the AWS provider to generate a temporary token.
@@ -89,6 +91,7 @@ data "aws_eks_cluster_auth" "eks" {
   count = local.kube_data_auth_enabled ? 1 : 0
   name  = one(aws_eks_cluster.default[*].id)
 }
+
 
 provider "kubernetes" {
   # Without a dummy API server configured, the provider will throw an error and prevent a "plan" from succeeding
@@ -152,4 +155,3 @@ resource "kubernetes_config_map" "aws_auth" {
     mapAccounts = replace(yamlencode(var.map_additional_aws_accounts), "\"", local.yaml_quote)
   }
 }
-

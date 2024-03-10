@@ -135,6 +135,7 @@ resource "aws_s3_bucket_website_configuration" "redirect" {
   }
 }
 
+
 resource "aws_s3_bucket_cors_configuration" "default" {
   count = local.enabled && try(length(var.cors_configuration), 0) > 0 ? 1 : 0
 
@@ -511,4 +512,3 @@ resource "time_sleep" "wait_for_aws_s3_bucket_settings" {
   create_duration  = "30s"
   destroy_duration = "30s"
 }
-
