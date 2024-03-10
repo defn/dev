@@ -25,6 +25,9 @@ type AwsAccount struct {
 	Imported string                        `json:"imported"`
 	Region   string                        `json:"region"`
 	Cfg      CfgTerraformAwsS3BucketConfig `json:"cfg"`
+
+	Url     string                    `json:"url"`
+	Id string `json:"id"`
 }
 
 type AwsBackend struct {
@@ -45,15 +48,6 @@ type AwsOrganization struct {
 	OpsAccountID   string `json:"ops_account_id"`
 }
 
-type AwsAccountInfo struct {
-	Id string `json:"id"`
-}
-
-type AwsInfo struct {
-	Url     string                    `json:"url"`
-	Account map[string]AwsAccountInfo `json:"account"`
-}
-
 type CfgTerraformAwsS3BucketConfig struct {
 	Id                *string    `json:"id"`
 	Enabled           *bool      `json:"enabled"`
@@ -70,7 +64,6 @@ type AwsProps struct {
 	Backend      AwsBackend                 `json:"backend"`
 	Organization map[string]AwsOrganization `json:"organization"`
 	Accounts     []string                   `json:"accounts"`
-	Info         map[string]AwsInfo         `json:"info"`
 }
 
 // alias

@@ -1,8 +1,13 @@
 package infra
 
-#AwsAdmin: {
-	name:  string
-	email: string
+#AwsOrganization: {
+	name:   string
+	region: string
+	accounts: [...#AwsAccount]
+	admins: [...#AwsAdmin]
+	ops_org_name:     string
+	ops_account_name: string
+	ops_account_id:   string
 }
 
 #AwsAccount: {
@@ -15,30 +20,16 @@ package infra
 	cfg:      #CfgTerraformAwsS3BucketConfig
 }
 
+#AwsAdmin: {
+	name:  string
+	email: string
+}
+
 #AwsBackend: {
 	lock:    string
 	bucket:  string
 	region:  string
 	profile: string
-}
-
-#AwsOrganization: {
-	name:   string
-	region: string
-	accounts: [...#AwsAccount]
-	admins: [...#AwsAdmin]
-	ops_org_name: string
-	ops_account_name: string
-	ops_account_id: string
-}
-
-#AwsAccountInfo: {
-	id: string
-}
-
-#AwsInfo: {
-	url: string
-	account: [string]: #AwsAccountInfo
 }
 
 #AwsProps: {

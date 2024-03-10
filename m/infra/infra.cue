@@ -415,14 +415,7 @@ input: {
 		}
 	}
 
-	accounts: [
-		for oname, org in input.organization
-		for aname, acc in org.accounts {
-			"\(oname)-\(acc.profile)"
-		},
-	]
-
-	info: {
+	organization: {
 		defn: {
 			url: "https://defn.awsapps.com/start"
 			account: {
@@ -845,4 +838,11 @@ input: {
 			}
 		}
 	}
+
+	accounts: [
+		for oname, org in input.organization
+		for aname, acc in org.accounts {
+			"\(oname)-\(acc.profile)"
+		},
+	]
 }

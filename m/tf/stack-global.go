@@ -61,7 +61,7 @@ func GlobalStack(scope constructs.Construct, site *infra.AwsProps) cdktf.Terrafo
 					Region:  infra.Js("us-east-1"),
 					AssumeRole: []interface{}{
 						aws.AwsProviderAssumeRole{
-							RoleArn: infra.Js(fmt.Sprintf("arn:aws:iam::%s:role/%s-%s-terraform", site.Info[org_name].Account[acc.Profile].Id, org_name, org.OpsAccountName)),
+							RoleArn: infra.Js(fmt.Sprintf("arn:aws:iam::%s:role/%s-%s-terraform", acc.Id, org_name, org.OpsAccountName)),
 						},
 					},
 				},
