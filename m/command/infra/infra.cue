@@ -20,11 +20,6 @@ package infra
 	cfg:      #CfgTerraformAwsS3BucketConfig
 }
 
-#AwsAdmin: {
-	name:  string
-	email: string
-}
-
 #AwsBackend: {
 	lock:    string
 	bucket:  string
@@ -34,11 +29,17 @@ package infra
 
 #AwsProps: {
 	backend: #AwsBackend
+
 	organization: [N=string]: #AwsOrganization & {
 		name: N
 	}
+
 	accounts: [...string]
-	info: [string]: #AwsInfo
+}
+
+#AwsAdmin: {
+	name:  string
+	email: string
 }
 
 #CfgTerraformAwsS3BucketConfig: {
