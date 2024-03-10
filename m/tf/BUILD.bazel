@@ -48,7 +48,7 @@ go_library(
 filegroup(
     name = "cue",
     srcs = [
-        "schema.cue",
+        "schema_input.cue",
         "tf.cue",
         "//command/infra:cue",
     ],
