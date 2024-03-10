@@ -5,8 +5,7 @@
       "stackName": "acc-immanent-ged",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "immanent-ged": {

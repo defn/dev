@@ -5,8 +5,7 @@
       "stackName": "acc-spiral-dmz",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "spiral-dmz": {

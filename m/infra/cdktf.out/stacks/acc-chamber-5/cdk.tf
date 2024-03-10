@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
-
 }
 
 provider "aws" {
   profile = "chamber-5-sso"
   alias   = "chamber-5"
 }
+
 module "chamber-5" {
   account   = 767397818037
   name      = "terraform"

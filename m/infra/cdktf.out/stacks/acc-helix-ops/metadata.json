@@ -5,8 +5,7 @@
       "stackName": "acc-helix-ops",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "helix-ops": {

@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
-
 }
 
 provider "aws" {
   profile = "curl-hub-sso"
   alias   = "curl-hub"
 }
+
 module "curl-hub" {
   account   = 767397818037
   name      = "terraform"

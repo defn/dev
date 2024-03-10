@@ -5,8 +5,7 @@
       "stackName": "acc-jianghu-klamath",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "jianghu-klamath": {

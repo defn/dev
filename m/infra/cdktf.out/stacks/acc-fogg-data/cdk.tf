@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
-
 }
 
 provider "aws" {
   profile = "fogg-data-sso"
   alias   = "fogg-data"
 }
+
 module "fogg-data" {
   account   = 767397818037
   name      = "terraform"

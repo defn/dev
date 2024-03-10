@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
-
 }
 
 provider "aws" {
   profile = "spiral-ops-sso"
   alias   = "spiral-ops"
 }
+
 module "spiral-ops" {
   account   = 767397818037
   name      = "terraform"

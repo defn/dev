@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
-
 }
 
 provider "aws" {
   profile = "fogg-circus-sso"
   alias   = "fogg-circus"
 }
+
 module "fogg-circus" {
   account   = 767397818037
   name      = "terraform"

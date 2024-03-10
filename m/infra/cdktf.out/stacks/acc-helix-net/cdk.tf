@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
-
 }
 
 provider "aws" {
   profile = "helix-net-sso"
   alias   = "helix-net"
 }
+
 module "helix-net" {
   account   = 767397818037
   name      = "terraform"

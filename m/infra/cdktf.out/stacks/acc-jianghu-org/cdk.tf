@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
-
 }
 
 provider "aws" {
   profile = "jianghu-org-sso"
   alias   = "jianghu-org"
 }
+
 module "jianghu-org" {
   account   = 767397818037
   name      = "terraform"

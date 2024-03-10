@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
-
 }
 
 provider "aws" {
   profile = "immanent-changer-sso"
   alias   = "immanent-changer"
 }
+
 module "immanent-changer" {
   account   = 767397818037
   name      = "terraform"

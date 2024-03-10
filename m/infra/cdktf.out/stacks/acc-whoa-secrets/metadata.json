@@ -5,8 +5,7 @@
       "stackName": "acc-whoa-secrets",
       "version": "0.20.3"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "whoa-secrets": {

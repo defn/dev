@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
-
 }
 
 provider "aws" {
   profile = "vault-org-sso"
   alias   = "vault-org"
 }
+
 module "vault-org" {
   account   = 767397818037
   name      = "terraform"

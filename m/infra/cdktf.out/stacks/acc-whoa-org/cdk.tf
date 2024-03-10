@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
-
 }
 
 provider "aws" {
   profile = "whoa-org-sso"
   alias   = "whoa-org"
 }
+
 module "whoa-org" {
   account   = 767397818037
   name      = "terraform"
