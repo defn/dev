@@ -215,3 +215,4 @@ bin/nix*
 .steampath
 .steampid
 .var/
+bin/*/trunk
