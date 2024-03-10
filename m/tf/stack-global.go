@@ -57,11 +57,11 @@ func GlobalStack(scope constructs.Construct, site *infra.AwsProps) cdktf.Terrafo
 			provider := aws.NewAwsProvider(stack,
 				infra.Js(fmt.Sprintf("aws-global-%s-%s", org_name, acc.Profile)), &aws.AwsProviderConfig{
 					Alias:   infra.Js(fmt.Sprintf("%s-%s", org_name, acc.Profile)),
-					Profile: infra.Js(fmt.Sprintf("%s-sso", "defn-org")),
+					Profile: infra.Js(fmt.Sprintf("%s-%s-sso", org.OpsOrgName, org.OpsAccountName)),
 					Region:  infra.Js("us-east-1"),
 					AssumeRole: []interface{}{
 						aws.AwsProviderAssumeRole{
-							RoleArn: infra.Js(fmt.Sprintf("arn:aws:iam::%s:role/dfn-defn-terraform", site.Info[org_name].Account[acc.Profile].Id)),
+							RoleArn: infra.Js(fmt.Sprintf("arn:aws:iam::%s:role/%s-%s-terraform", site.Info[org_name].Account[acc.Profile].Id, org_name, org.OpsAccountName)),
 						},
 					},
 				},

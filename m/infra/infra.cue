@@ -27,26 +27,29 @@ input: {
 	}
 
 	organization: {
-		THIS=[ORG=string]: accounts: [...{
-			region:  string | *THIS.region
-			profile: string
-			cfg: {
-				id: "s3-\(ORG)-\(profile)"
+		THIS=[ORG=string]: {
+			accounts: [...{
+				region:  string | *THIS.region
+				profile: string
+				cfg: {
+					id: "s3-\(ORG)-\(profile)"
 
-				enabled:   true
-				namespace: "dfn"
-				stage:     "defn"
-				name:      "global"
-				attributes: ["\(ORG)-\(profile)"]
+					enabled:   true
+					namespace: "dfn"
+					stage:     "defn"
+					name:      "global"
+					attributes: ["\(ORG)-\(profile)"]
 
-				acl:                "private"
-				user_enabled:       false
-				versioning_enabled: false
-			}
+					acl:                "private"
+					user_enabled:       false
+					versioning_enabled: false
+				}
+			}]
 
+			ops_org_name:     "defn"
 			ops_account_name: "ops"
 			ops_account_id:   "510430971399"
-		}]
+		}
 
 		defn: {
 			region: "us-east-2"

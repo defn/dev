@@ -35,9 +35,9 @@ func AwsAccountStack(scope constructs.Construct, site *infra.AwsProps, org *infr
 		infra.Js(fmt.Sprintf("%s-%s", org.Name, acc.Profile)), &terraform_aws_defn_account.TerraformAwsDefnAccountConfig{
 			Providers:                         &[]interface{}{provider},
 			Namespace:                         infra.Js(org.Name),
-			Stage:                             infra.Js(acc.OpsAccountName),
+			Stage:                             infra.Js(org.OpsAccountName),
 			Name:                              infra.Js("terraform"),
-			Account:                           infra.Js(acc.OpsAccountID),
+			Account:                           infra.Js(org.OpsAccountID),
 			SkipAssetCreationFromLocalModules: infra.Jstrue(),
 		})
 

@@ -18,15 +18,13 @@ type AwsAdmin struct {
 }
 
 type AwsAccount struct {
-	Name           string                        `json:"name"`
-	Email          string                        `json:"email"`
-	Profile        string                        `json:"profile"`
-	Prefix         string                        `json:"prefix"`
-	Imported       string                        `json:"imported"`
-	Region         string                        `json:"region"`
-	Cfg            CfgTerraformAwsS3BucketConfig `json:"cfg"`
-	OpsAccountName string                        `json:"ops_account_name"`
-	OpsAccountID   string                        `json:"ops_account_id"`
+	Name     string                        `json:"name"`
+	Email    string                        `json:"email"`
+	Profile  string                        `json:"profile"`
+	Prefix   string                        `json:"prefix"`
+	Imported string                        `json:"imported"`
+	Region   string                        `json:"region"`
+	Cfg      CfgTerraformAwsS3BucketConfig `json:"cfg"`
 }
 
 type AwsBackend struct {
@@ -41,6 +39,10 @@ type AwsOrganization struct {
 	Region   string       `json:"region"`
 	Accounts []AwsAccount `json:"accounts"`
 	Admins   []AwsAdmin   `json:"admins"`
+
+	OpsOrgName     string `json:"ops_org_name"`
+	OpsAccountName string `json:"ops_account_name"`
+	OpsAccountID   string `json:"ops_account_id"`
 }
 
 type AwsAccountInfo struct {

@@ -13,8 +13,6 @@ package infra
 	imported: string | *null
 	region:   string
 	cfg:      #CfgTerraformAwsS3BucketConfig
-	ops_account_name: string
-	ops_account_id: string
 }
 
 #AwsBackend: {
@@ -29,6 +27,9 @@ package infra
 	region: string
 	accounts: [...#AwsAccount]
 	admins: [...#AwsAdmin]
+	ops_org_name: string
+	ops_account_name: string
+	ops_account_id: string
 }
 
 #AwsAccountInfo: {
