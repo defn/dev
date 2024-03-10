@@ -90,3 +90,4 @@ output "secret_access_key_ssm_path" {
   value       = module.s3_user.secret_access_key_ssm_path
   description = "The SSM Path under which the S3 User's secret access key is stored"
 }
+

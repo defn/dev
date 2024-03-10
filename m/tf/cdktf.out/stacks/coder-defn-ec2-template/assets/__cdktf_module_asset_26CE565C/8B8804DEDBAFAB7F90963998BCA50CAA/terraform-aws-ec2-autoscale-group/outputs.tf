@@ -67,3 +67,4 @@ output "autoscaling_policy_scale_up_arn" {
   description = "ARN of the AutoScaling policy scale up"
   value       = one(aws_autoscaling_policy.scale_up[*].arn)
 }
+

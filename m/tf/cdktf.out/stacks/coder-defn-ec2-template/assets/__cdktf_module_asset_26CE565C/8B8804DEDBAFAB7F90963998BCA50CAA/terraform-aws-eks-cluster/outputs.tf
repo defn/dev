@@ -95,3 +95,4 @@ output "cloudwatch_log_group_kms_key_id" {
   description = "KMS Key ID to encrypt AWS CloudWatch logs"
   value       = var.cloudwatch_log_group_kms_key_id
 }
+

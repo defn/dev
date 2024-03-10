@@ -121,3 +121,4 @@ resource "aws_vpc_ipv6_cidr_block_association" "default" {
     }
   }
 }
+

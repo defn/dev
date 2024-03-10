@@ -82,3 +82,4 @@ output "aliases" {
   value       = var.aliases
   description = "Aliases of the CloudFront distribution."
 }
+

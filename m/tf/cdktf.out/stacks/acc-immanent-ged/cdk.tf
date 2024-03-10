@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
-
 }
 
 provider "aws" {
   profile = "immanent-ged-sso"
   alias   = "immanent-ged"
 }
+
 module "immanent-ged" {
   name      = "terraform"
   namespace = "dfn"

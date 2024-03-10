@@ -14,7 +14,6 @@ terraform {
     region         = "us-east-1"
   }
 
-
 }
 
 locals {
@@ -26,6 +25,7 @@ provider "aws" {
   profile = "whoa-org-sso"
   region  = "us-west-2"
 }
+
 resource "aws_organizations_organization" "organization" {
   aws_service_access_principals = [
     "cloudtrail.amazonaws.com",
@@ -41,8 +41,10 @@ resource "aws_organizations_organization" "organization" {
   ]
   feature_set = "ALL"
 }
+
 data "aws_ssoadmin_instances" "sso_instance" {
 }
+
 resource "aws_ssoadmin_permission_set" "admin_sso_permission_set" {
   instance_arn     = "${element(local.sso_instance_arn, 0)}"
   name             = "Administrator"
@@ -51,15 +53,18 @@ resource "aws_ssoadmin_permission_set" "admin_sso_permission_set" {
     ManagedBy = "Terraform"
   }
 }
+
 resource "aws_ssoadmin_managed_policy_attachment" "admin_sso_managed_policy_attachment" {
   instance_arn       = "${aws_ssoadmin_permission_set.admin_sso_permission_set.instance_arn}"
   managed_policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
   permission_set_arn = "${aws_ssoadmin_permission_set.admin_sso_permission_set.arn}"
 }
+
 resource "aws_identitystore_group" "administrators_sso_group" {
   display_name      = "Administrators"
   identity_store_id = "${element(local.sso_instance_isid, 0)}"
 }
+
 resource "aws_organizations_account" "whoa" {
   email = "aws-whoa@defn.us"
   name  = "whoa"
@@ -67,6 +72,7 @@ resource "aws_organizations_account" "whoa" {
     ManagedBy = "Terraform"
   }
 }
+
 resource "aws_ssoadmin_account_assignment" "whoa_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -75,6 +81,7 @@ resource "aws_ssoadmin_account_assignment" "whoa_admin_sso_account_assignment" {
   target_id          = "${aws_organizations_account.whoa.id}"
   target_type        = "AWS_ACCOUNT"
 }
+
 resource "aws_organizations_account" "prod" {
   email = "whoa-prod@imma.io"
   name  = "whoa-prod"
@@ -82,6 +89,7 @@ resource "aws_organizations_account" "prod" {
     ManagedBy = "Terraform"
   }
 }
+
 resource "aws_ssoadmin_account_assignment" "prod_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -90,6 +98,7 @@ resource "aws_ssoadmin_account_assignment" "prod_admin_sso_account_assignment" {
   target_id          = "${aws_organizations_account.prod.id}"
   target_type        = "AWS_ACCOUNT"
 }
+
 resource "aws_organizations_account" "secrets" {
   email = "whoa-secrets@imma.io"
   name  = "whoa-secrets"
@@ -97,6 +106,7 @@ resource "aws_organizations_account" "secrets" {
     ManagedBy = "Terraform"
   }
 }
+
 resource "aws_ssoadmin_account_assignment" "secrets_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -105,6 +115,7 @@ resource "aws_ssoadmin_account_assignment" "secrets_admin_sso_account_assignment
   target_id          = "${aws_organizations_account.secrets.id}"
   target_type        = "AWS_ACCOUNT"
 }
+
 resource "aws_organizations_account" "dev" {
   email = "whoa-dev@imma.io"
   name  = "whoa-dev"
@@ -112,6 +123,7 @@ resource "aws_organizations_account" "dev" {
     ManagedBy = "Terraform"
   }
 }
+
 resource "aws_ssoadmin_account_assignment" "dev_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -120,6 +132,7 @@ resource "aws_ssoadmin_account_assignment" "dev_admin_sso_account_assignment" {
   target_id          = "${aws_organizations_account.dev.id}"
   target_type        = "AWS_ACCOUNT"
 }
+
 resource "aws_organizations_account" "hub" {
   email = "whoa-hub@imma.io"
   name  = "whoa-hub"
@@ -127,6 +140,7 @@ resource "aws_organizations_account" "hub" {
     ManagedBy = "Terraform"
   }
 }
+
 resource "aws_ssoadmin_account_assignment" "hub_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"

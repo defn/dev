@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
-
 }
 
 provider "aws" {
   profile = "circus-govcloud-sso"
   alias   = "circus-govcloud"
 }
+
 module "circus-govcloud" {
   name      = "terraform"
   namespace = "dfn"

@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
-
 }
 
 provider "aws" {
   profile = "curl-net-sso"
   alias   = "curl-net"
 }
+
 module "curl-net" {
   name      = "terraform"
   namespace = "dfn"

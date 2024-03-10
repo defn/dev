@@ -132,3 +132,4 @@ resource "aws_vpc_endpoint_security_group_association" "interface" {
 
   depends_on = [aws_vpc_endpoint_subnet_association.interface]
 }
+

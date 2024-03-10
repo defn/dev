@@ -409,6 +409,7 @@ variable "route_create_timeout" {
   description = "Time to wait for a network routing table entry to be created, specified as a Go Duration, e.g. `2m`. Use `null` for proivder default."
   default     = null
 }
+
 locals { route_create_timeout = var.aws_route_create_timeout == null ? var.route_create_timeout : var.aws_route_create_timeout }
 
 variable "route_delete_timeout" {
@@ -416,6 +417,7 @@ variable "route_delete_timeout" {
   description = "Time to wait for a network routing table entry to be deleted, specified as a Go Duration, e.g. `2m`. Use `null` for proivder default."
   default     = null
 }
+
 locals { route_delete_timeout = var.aws_route_delete_timeout == null ? var.route_delete_timeout : var.aws_route_delete_timeout }
 
 variable "subnet_create_timeout" {
@@ -542,6 +544,7 @@ variable "nat_instance_root_block_device_encrypted" {
   default     = true
   nullable    = false
 }
+
 locals { nat_instance_root_block_device_encrypted = var.root_block_device_encrypted == null ? var.nat_instance_root_block_device_encrypted : var.root_block_device_encrypted }
 
 ############## END of NAT instance configuration ########################

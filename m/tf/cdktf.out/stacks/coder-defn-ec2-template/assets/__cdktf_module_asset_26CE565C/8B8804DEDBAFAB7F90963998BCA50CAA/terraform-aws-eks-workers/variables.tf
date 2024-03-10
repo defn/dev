@@ -368,7 +368,6 @@ variable "kubelet_extra_args" {
   description = "Extra arguments to pass to kubelet, like \"--register-with-taints=dedicated=ci-cd:NoSchedule --node-labels=purpose=ci-worker\""
 }
 
-
 variable "before_cluster_joining_userdata" {
   type        = string
   default     = ""
@@ -514,3 +513,4 @@ variable "elastic_gpu_specifications" {
 
   default = null
 }
+
