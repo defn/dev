@@ -5,12 +5,15 @@ package infra
 	region: string
 	accounts: [...#AwsAccount]
 	admins: [...#AwsAdmin]
+
+	url:              string
 	ops_org_name:     string
 	ops_account_name: string
 	ops_account_id:   string
 }
 
 #AwsAccount: {
+	id:       string
 	name:     string
 	email:    string
 	profile:  string | *name

@@ -33,9 +33,9 @@ func init() {
 				}
 			}
 
-			//tf.GlobalStack(app, &site)
+			tf.GlobalStack(app, &site)
 
-			tf.CoderDefnEc2Stack(app, &site, "template")
+			//tf.CoderDefnEc2Stack(app, &site, "template")
 
 			app.Synth()
 		},
