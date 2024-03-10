@@ -1,6 +1,6 @@
 {
   "language": "go",
-  "app": "../bazel-bin/tf/tf_/tf infra",
+  "app": "false",
   "codeMakerOutput": "gen",
   "projectId": "cff35a27-fbee-4c22-8a14-35f6c6d14031",
   "terraformProviders": ["coder/coder@~> 0.13.0"],

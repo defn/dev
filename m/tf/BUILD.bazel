@@ -44,13 +44,3 @@ go_library(
         "@com_github_hashicorp_terraform_cdk_go_cdktf//:cdktf",
     ],
 )
-
-filegroup(
-    name = "cue",
-    srcs = [
-        "schema_input.cue",
-        "tf.cue",
-        "//command/infra:cue",
-    ],
-    visibility = ["//visibility:public"],
-)
