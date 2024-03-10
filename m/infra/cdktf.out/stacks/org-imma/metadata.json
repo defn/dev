@@ -1,0 +1,183 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "s3",
+      "stackName": "org-imma",
+      "version": "0.20.3"
+    },
+    "outputs": {
+    }
+  },
+  "data": {
+    "aws_ssoadmin_instances": {
+      "sso_instance": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/sso_instance",
+            "uniqueId": "sso_instance"
+          }
+        }
+      }
+    }
+  },
+  "resource": {
+    "aws_identitystore_group": {
+      "administrators_sso_group": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/administrators_sso_group",
+            "uniqueId": "administrators_sso_group"
+          }
+        }
+      }
+    },
+    "aws_organizations_account": {
+      "imma": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma",
+            "uniqueId": "imma"
+          }
+        }
+      },
+      "imma-defn": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-defn",
+            "uniqueId": "imma-defn"
+          }
+        }
+      },
+      "imma-dev": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-dev",
+            "uniqueId": "imma-dev"
+          }
+        }
+      },
+      "imma-dgwyn": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-dgwyn",
+            "uniqueId": "imma-dgwyn"
+          }
+        }
+      },
+      "imma-prod": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-prod",
+            "uniqueId": "imma-prod"
+          }
+        }
+      },
+      "imma-tolan": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-tolan",
+            "uniqueId": "imma-tolan"
+          }
+        }
+      }
+    },
+    "aws_organizations_organization": {
+      "organization": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/organization",
+            "uniqueId": "organization"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_account_assignment": {
+      "imma-defn_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-defn_admin_sso_account_assignment",
+            "uniqueId": "imma-defn_admin_sso_account_assignment"
+          }
+        }
+      },
+      "imma-dev_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-dev_admin_sso_account_assignment",
+            "uniqueId": "imma-dev_admin_sso_account_assignment"
+          }
+        }
+      },
+      "imma-dgwyn_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-dgwyn_admin_sso_account_assignment",
+            "uniqueId": "imma-dgwyn_admin_sso_account_assignment"
+          }
+        }
+      },
+      "imma-prod_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-prod_admin_sso_account_assignment",
+            "uniqueId": "imma-prod_admin_sso_account_assignment"
+          }
+        }
+      },
+      "imma-tolan_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-tolan_admin_sso_account_assignment",
+            "uniqueId": "imma-tolan_admin_sso_account_assignment"
+          }
+        }
+      },
+      "imma_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma_admin_sso_account_assignment",
+            "uniqueId": "imma_admin_sso_account_assignment"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_managed_policy_attachment": {
+      "admin_sso_managed_policy_attachment": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/admin_sso_managed_policy_attachment",
+            "uniqueId": "admin_sso_managed_policy_attachment"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_permission_set": {
+      "admin_sso_permission_set": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/admin_sso_permission_set",
+            "uniqueId": "admin_sso_permission_set"
+          }
+        }
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "s3": {
+        "bucket": "dfn-defn-terraform-state",
+        "dynamodb_table": "dfn-defn-terraform-state-lock",
+        "encrypt": true,
+        "key": "stacks/org-imma/terraform.tfstate",
+        "profile": "defn-org-sso",
+        "region": "us-east-1"
+      }
+    },
+    "required_providers": {
+      "aws": {
+        "source": "aws",
+        "version": "5.38.0"
+      }
+    }
+  }
+}

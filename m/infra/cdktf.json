@@ -1,0 +1,6 @@
+{
+  "language": "go",
+  "app": "../bazel-bin/infra/infra_/infra build",
+  "codeMakerOutput": "gen",
+  "projectId": "33b4db05-f4bc-402a-b9ee-17a8c976d035"
+}

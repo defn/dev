@@ -1,0 +1,247 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "s3",
+      "stackName": "org-fogg",
+      "version": "0.20.3"
+    },
+    "outputs": {
+    }
+  },
+  "data": {
+    "aws_ssoadmin_instances": {
+      "sso_instance": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/sso_instance",
+            "uniqueId": "sso_instance"
+          }
+        }
+      }
+    }
+  },
+  "resource": {
+    "aws_identitystore_group": {
+      "administrators_sso_group": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/administrators_sso_group",
+            "uniqueId": "administrators_sso_group"
+          }
+        }
+      }
+    },
+    "aws_organizations_account": {
+      "asset": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/asset",
+            "uniqueId": "asset"
+          }
+        }
+      },
+      "circus": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/circus",
+            "uniqueId": "circus"
+          }
+        }
+      },
+      "data": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/data",
+            "uniqueId": "data"
+          }
+        }
+      },
+      "fogg": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/fogg",
+            "uniqueId": "fogg"
+          }
+        }
+      },
+      "gateway": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/gateway",
+            "uniqueId": "gateway"
+          }
+        }
+      },
+      "home": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/home",
+            "uniqueId": "home"
+          }
+        }
+      },
+      "hub": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/hub",
+            "uniqueId": "hub"
+          }
+        }
+      },
+      "postx": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/postx",
+            "uniqueId": "postx"
+          }
+        }
+      },
+      "sandbox": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/sandbox",
+            "uniqueId": "sandbox"
+          }
+        }
+      },
+      "security": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/security",
+            "uniqueId": "security"
+          }
+        }
+      }
+    },
+    "aws_organizations_organization": {
+      "organization": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/organization",
+            "uniqueId": "organization"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_account_assignment": {
+      "asset_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/asset_admin_sso_account_assignment",
+            "uniqueId": "asset_admin_sso_account_assignment"
+          }
+        }
+      },
+      "circus_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/circus_admin_sso_account_assignment",
+            "uniqueId": "circus_admin_sso_account_assignment"
+          }
+        }
+      },
+      "data_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/data_admin_sso_account_assignment",
+            "uniqueId": "data_admin_sso_account_assignment"
+          }
+        }
+      },
+      "fogg_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/fogg_admin_sso_account_assignment",
+            "uniqueId": "fogg_admin_sso_account_assignment"
+          }
+        }
+      },
+      "gateway_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/gateway_admin_sso_account_assignment",
+            "uniqueId": "gateway_admin_sso_account_assignment"
+          }
+        }
+      },
+      "home_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/home_admin_sso_account_assignment",
+            "uniqueId": "home_admin_sso_account_assignment"
+          }
+        }
+      },
+      "hub_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/hub_admin_sso_account_assignment",
+            "uniqueId": "hub_admin_sso_account_assignment"
+          }
+        }
+      },
+      "postx_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/postx_admin_sso_account_assignment",
+            "uniqueId": "postx_admin_sso_account_assignment"
+          }
+        }
+      },
+      "sandbox_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/sandbox_admin_sso_account_assignment",
+            "uniqueId": "sandbox_admin_sso_account_assignment"
+          }
+        }
+      },
+      "security_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/security_admin_sso_account_assignment",
+            "uniqueId": "security_admin_sso_account_assignment"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_managed_policy_attachment": {
+      "admin_sso_managed_policy_attachment": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/admin_sso_managed_policy_attachment",
+            "uniqueId": "admin_sso_managed_policy_attachment"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_permission_set": {
+      "admin_sso_permission_set": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/admin_sso_permission_set",
+            "uniqueId": "admin_sso_permission_set"
+          }
+        }
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "s3": {
+        "bucket": "dfn-defn-terraform-state",
+        "dynamodb_table": "dfn-defn-terraform-state-lock",
+        "encrypt": true,
+        "key": "stacks/org-fogg/terraform.tfstate",
+        "profile": "defn-org-sso",
+        "region": "us-east-1"
+      }
+    },
+    "required_providers": {
+      "aws": {
+        "source": "aws",
+        "version": "5.38.0"
+      }
+    }
+  }
+}

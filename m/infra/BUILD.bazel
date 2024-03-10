@@ -1,0 +1,32 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+filegroup(
+    name = "cue",
+    srcs = [
+        "infra.cue",
+        "schema.cue",
+        "//command/infra:cue",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+go_binary(
+    name = "infra",
+    embed = [":infra_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "infra_lib",
+    srcs = ["infra.go"],
+    embedsrcs = ["schema.cue"],
+    importpath = "github.com/defn/dev/m/infra",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//command/infra",
+        "//command/root",
+        "//tf:tf_lib",
+        "@com_github_hashicorp_terraform_cdk_go_cdktf//:cdktf",
+        "@com_github_spf13_cobra//:cobra",
+    ],
+)
