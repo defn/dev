@@ -17,7 +17,7 @@ terraform {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-org"
   assume_role {
@@ -43,7 +43,7 @@ module "s3-chamber-org" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-1"
   assume_role {
@@ -69,7 +69,7 @@ module "s3-chamber-1" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-2"
   assume_role {
@@ -95,7 +95,7 @@ module "s3-chamber-2" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-3"
   assume_role {
@@ -121,7 +121,7 @@ module "s3-chamber-3" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-4"
   assume_role {
@@ -147,7 +147,7 @@ module "s3-chamber-4" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-5"
   assume_role {
@@ -173,7 +173,7 @@ module "s3-chamber-5" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-6"
   assume_role {
@@ -199,7 +199,7 @@ module "s3-chamber-6" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-7"
   assume_role {
@@ -225,7 +225,7 @@ module "s3-chamber-7" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-8"
   assume_role {
@@ -251,7 +251,7 @@ module "s3-chamber-8" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-9"
   assume_role {
@@ -277,7 +277,7 @@ module "s3-chamber-9" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-a"
   assume_role {
@@ -303,7 +303,7 @@ module "s3-chamber-a" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-b"
   assume_role {
@@ -329,7 +329,7 @@ module "s3-chamber-b" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-c"
   assume_role {
@@ -355,7 +355,7 @@ module "s3-chamber-c" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-d"
   assume_role {
@@ -381,7 +381,7 @@ module "s3-chamber-d" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-e"
   assume_role {
@@ -407,7 +407,7 @@ module "s3-chamber-e" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-f"
   assume_role {
@@ -433,7 +433,7 @@ module "s3-chamber-f" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-g"
   assume_role {
@@ -459,7 +459,7 @@ module "s3-chamber-g" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-h"
   assume_role {
@@ -485,7 +485,7 @@ module "s3-chamber-h" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-i"
   assume_role {
@@ -511,7 +511,7 @@ module "s3-chamber-i" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-j"
   assume_role {
@@ -537,7 +537,7 @@ module "s3-chamber-j" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-l"
   assume_role {
@@ -563,7 +563,7 @@ module "s3-chamber-l" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-m"
   assume_role {
@@ -589,7 +589,7 @@ module "s3-chamber-m" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-n"
   assume_role {
@@ -615,7 +615,7 @@ module "s3-chamber-n" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-o"
   assume_role {
@@ -641,7 +641,7 @@ module "s3-chamber-o" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-p"
   assume_role {
@@ -667,7 +667,7 @@ module "s3-chamber-p" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-q"
   assume_role {
@@ -693,7 +693,7 @@ module "s3-chamber-q" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-r"
   assume_role {
@@ -719,7 +719,7 @@ module "s3-chamber-r" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-s"
   assume_role {
@@ -745,7 +745,7 @@ module "s3-chamber-s" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-t"
   assume_role {
@@ -771,7 +771,7 @@ module "s3-chamber-t" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-u"
   assume_role {
@@ -797,7 +797,7 @@ module "s3-chamber-u" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-v"
   assume_role {
@@ -823,7 +823,7 @@ module "s3-chamber-v" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-w"
   assume_role {
@@ -849,7 +849,7 @@ module "s3-chamber-w" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-x"
   assume_role {
@@ -875,7 +875,7 @@ module "s3-chamber-x" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-y"
   assume_role {
@@ -901,7 +901,7 @@ module "s3-chamber-y" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "chamber-z"
   assume_role {
@@ -927,7 +927,7 @@ module "s3-chamber-z" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "circus-org"
   assume_role {
@@ -953,7 +953,7 @@ module "s3-circus-org" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "circus-audit"
   assume_role {
@@ -979,7 +979,7 @@ module "s3-circus-audit" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "circus-govcloud"
   assume_role {
@@ -1005,7 +1005,7 @@ module "s3-circus-govcloud" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "circus-ops"
   assume_role {
@@ -1031,7 +1031,7 @@ module "s3-circus-ops" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "circus-transit"
   assume_role {
@@ -1057,7 +1057,7 @@ module "s3-circus-transit" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "coil-org"
   assume_role {
@@ -1083,7 +1083,7 @@ module "s3-coil-org" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "coil-net"
   assume_role {
@@ -1109,7 +1109,7 @@ module "s3-coil-net" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "coil-lib"
   assume_role {
@@ -1135,7 +1135,7 @@ module "s3-coil-lib" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "coil-hub"
   assume_role {
@@ -1161,7 +1161,7 @@ module "s3-coil-hub" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "curl-org"
   assume_role {
@@ -1187,7 +1187,7 @@ module "s3-curl-org" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "curl-net"
   assume_role {
@@ -1213,7 +1213,7 @@ module "s3-curl-net" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "curl-lib"
   assume_role {
@@ -1239,7 +1239,7 @@ module "s3-curl-lib" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "curl-hub"
   assume_role {
@@ -1265,7 +1265,7 @@ module "s3-curl-hub" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "defn-org"
   assume_role {
@@ -1291,7 +1291,7 @@ module "s3-defn-org" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "fogg-org"
   assume_role {
@@ -1317,7 +1317,7 @@ module "s3-fogg-org" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "fogg-gateway"
   assume_role {
@@ -1343,7 +1343,7 @@ module "s3-fogg-gateway" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "fogg-security"
   assume_role {
@@ -1369,7 +1369,7 @@ module "s3-fogg-security" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "fogg-hub"
   assume_role {
@@ -1395,7 +1395,7 @@ module "s3-fogg-hub" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "fogg-postx"
   assume_role {
@@ -1421,7 +1421,7 @@ module "s3-fogg-postx" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "fogg-asset"
   assume_role {
@@ -1447,7 +1447,7 @@ module "s3-fogg-asset" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "fogg-data"
   assume_role {
@@ -1473,7 +1473,7 @@ module "s3-fogg-data" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "fogg-sandbox"
   assume_role {
@@ -1499,7 +1499,7 @@ module "s3-fogg-sandbox" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "fogg-circus"
   assume_role {
@@ -1525,7 +1525,7 @@ module "s3-fogg-circus" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "fogg-home"
   assume_role {
@@ -1551,7 +1551,7 @@ module "s3-fogg-home" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "gyre-org"
   assume_role {
@@ -1577,7 +1577,7 @@ module "s3-gyre-org" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "gyre-ops"
   assume_role {
@@ -1603,7 +1603,7 @@ module "s3-gyre-ops" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "helix-org"
   assume_role {
@@ -1629,7 +1629,7 @@ module "s3-helix-org" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "helix-ops"
   assume_role {
@@ -1655,7 +1655,7 @@ module "s3-helix-ops" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "helix-sec"
   assume_role {
@@ -1681,7 +1681,7 @@ module "s3-helix-sec" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "helix-net"
   assume_role {
@@ -1707,7 +1707,7 @@ module "s3-helix-net" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "helix-log"
   assume_role {
@@ -1733,7 +1733,7 @@ module "s3-helix-log" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "helix-lib"
   assume_role {
@@ -1759,7 +1759,7 @@ module "s3-helix-lib" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "helix-pub"
   assume_role {
@@ -1785,7 +1785,7 @@ module "s3-helix-pub" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "helix-dmz"
   assume_role {
@@ -1811,7 +1811,7 @@ module "s3-helix-dmz" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "helix-hub"
   assume_role {
@@ -1837,7 +1837,7 @@ module "s3-helix-hub" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "helix-dev"
   assume_role {
@@ -1863,7 +1863,7 @@ module "s3-helix-dev" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "imma-org"
   assume_role {
@@ -1889,7 +1889,7 @@ module "s3-imma-org" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "imma-prod"
   assume_role {
@@ -1915,7 +1915,7 @@ module "s3-imma-prod" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "imma-dev"
   assume_role {
@@ -1941,7 +1941,7 @@ module "s3-imma-dev" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "imma-tolan"
   assume_role {
@@ -1967,7 +1967,7 @@ module "s3-imma-tolan" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "imma-dgwyn"
   assume_role {
@@ -1993,7 +1993,7 @@ module "s3-imma-dgwyn" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "imma-defn"
   assume_role {
@@ -2019,7 +2019,7 @@ module "s3-imma-defn" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "immanent-org"
   assume_role {
@@ -2045,7 +2045,7 @@ module "s3-immanent-org" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "immanent-patterner"
   assume_role {
@@ -2071,7 +2071,7 @@ module "s3-immanent-patterner" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "immanent-windkey"
   assume_role {
@@ -2097,7 +2097,7 @@ module "s3-immanent-windkey" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "immanent-summoner"
   assume_role {
@@ -2123,7 +2123,7 @@ module "s3-immanent-summoner" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "immanent-herbal"
   assume_role {
@@ -2149,7 +2149,7 @@ module "s3-immanent-herbal" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "immanent-namer"
   assume_role {
@@ -2175,7 +2175,7 @@ module "s3-immanent-namer" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "immanent-ged"
   assume_role {
@@ -2201,7 +2201,7 @@ module "s3-immanent-ged" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "immanent-roke"
   assume_role {
@@ -2227,7 +2227,7 @@ module "s3-immanent-roke" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "immanent-chanter"
   assume_role {
@@ -2253,7 +2253,7 @@ module "s3-immanent-chanter" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "immanent-changer"
   assume_role {
@@ -2279,7 +2279,7 @@ module "s3-immanent-changer" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "immanent-hand"
   assume_role {
@@ -2305,7 +2305,7 @@ module "s3-immanent-hand" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "immanent-doorkeeper"
   assume_role {
@@ -2331,7 +2331,7 @@ module "s3-immanent-doorkeeper" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "jianghu-org"
   assume_role {
@@ -2357,7 +2357,7 @@ module "s3-jianghu-org" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "jianghu-tahoe"
   assume_role {
@@ -2383,7 +2383,7 @@ module "s3-jianghu-tahoe" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "jianghu-klamath"
   assume_role {
@@ -2409,7 +2409,7 @@ module "s3-jianghu-klamath" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "spiral-org"
   assume_role {
@@ -2435,7 +2435,7 @@ module "s3-spiral-org" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "spiral-ops"
   assume_role {
@@ -2461,7 +2461,7 @@ module "s3-spiral-ops" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "spiral-sec"
   assume_role {
@@ -2487,7 +2487,7 @@ module "s3-spiral-sec" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "spiral-net"
   assume_role {
@@ -2513,7 +2513,7 @@ module "s3-spiral-net" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "spiral-log"
   assume_role {
@@ -2539,7 +2539,7 @@ module "s3-spiral-log" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "spiral-lib"
   assume_role {
@@ -2565,7 +2565,7 @@ module "s3-spiral-lib" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "spiral-pub"
   assume_role {
@@ -2591,7 +2591,7 @@ module "s3-spiral-pub" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "spiral-dmz"
   assume_role {
@@ -2617,7 +2617,7 @@ module "s3-spiral-dmz" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "spiral-hub"
   assume_role {
@@ -2643,7 +2643,7 @@ module "s3-spiral-hub" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "spiral-dev"
   assume_role {
@@ -2669,7 +2669,7 @@ module "s3-spiral-dev" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "vault-org"
   assume_role {
@@ -2695,7 +2695,7 @@ module "s3-vault-org" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "vault-transit"
   assume_role {
@@ -2721,7 +2721,7 @@ module "s3-vault-transit" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "vault-audit"
   assume_role {
@@ -2747,7 +2747,7 @@ module "s3-vault-audit" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "vault-vault0"
   assume_role {
@@ -2773,7 +2773,7 @@ module "s3-vault-vault0" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "vault-vault1"
   assume_role {
@@ -2799,7 +2799,7 @@ module "s3-vault-vault1" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "vault-ops"
   assume_role {
@@ -2825,7 +2825,7 @@ module "s3-vault-ops" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "vault-library"
   assume_role {
@@ -2851,7 +2851,7 @@ module "s3-vault-library" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "vault-hub"
   assume_role {
@@ -2877,7 +2877,7 @@ module "s3-vault-hub" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "vault-pub"
   assume_role {
@@ -2903,7 +2903,7 @@ module "s3-vault-pub" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "vault-dev"
   assume_role {
@@ -2929,7 +2929,7 @@ module "s3-vault-dev" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "whoa-org"
   assume_role {
@@ -2955,7 +2955,7 @@ module "s3-whoa-org" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "whoa-prod"
   assume_role {
@@ -2981,7 +2981,7 @@ module "s3-whoa-prod" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "whoa-secrets"
   assume_role {
@@ -3007,7 +3007,7 @@ module "s3-whoa-secrets" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "whoa-dev"
   assume_role {
@@ -3033,7 +3033,7 @@ module "s3-whoa-dev" {
 }
 
 provider "aws" {
-  profile = "defn-ops-sso"
+  profile = "defn-org-sso"
   region  = "us-east-1"
   alias   = "whoa-hub"
   assume_role {
