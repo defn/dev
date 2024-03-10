@@ -5,3 +5,7 @@ init:
 
 up:
 	docker compose up -d --remove-orphans
+
+serve:
+	tailscale serve --tcp 9002 --bg --yes tcp://localhost:9093
+	tailscale serve --https 5000 --bg --yes https+insecure://localhost:4999/
