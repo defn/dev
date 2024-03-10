@@ -13,8 +13,8 @@ terraform {
 
   }
 
-
 }
+
 data "coder_parameter" "username" {
   default      = "ubuntu"
   description  = "Linux accoount name"
@@ -23,6 +23,7 @@ data "coder_parameter" "username" {
   name         = "username"
   type         = "string"
 }
+
 data "coder_parameter" "region" {
   default      = "us-west-2"
   description  = "Cloud region"
@@ -31,6 +32,7 @@ data "coder_parameter" "region" {
   name         = "region"
   type         = "string"
 }
+
 data "coder_parameter" "az" {
   default      = "a"
   description  = "Cloud availability zone"
@@ -39,6 +41,7 @@ data "coder_parameter" "az" {
   name         = "az"
   type         = "string"
 }
+
 data "coder_parameter" "instance_type" {
   default      = "m6id.large"
   description  = "The number of CPUs to allocate to the workspace"
@@ -64,6 +67,7 @@ data "coder_parameter" "instance_type" {
     value = "m6id.4xlarge"
   }
 }
+
 data "coder_parameter" "nix_volume_size" {
   default      = "100"
   description  = "The size of the nix volume to create for the workspace in GB"
@@ -77,6 +81,7 @@ data "coder_parameter" "nix_volume_size" {
     min = 100
   }
 }
+
 data "coder_parameter" "provider" {
   default      = "aws-ec2"
   description  = "The service provider to deploy the workspace in"
@@ -88,6 +93,7 @@ data "coder_parameter" "provider" {
     value = "aws-ec2"
   }
 }
+
 data "coder_parameter" "tsauthkey" {
   default      = "TODO"
   description  = "Tailscale node authorization key"
@@ -97,8 +103,10 @@ data "coder_parameter" "tsauthkey" {
   name         = "tsauthkey"
   type         = "string"
 }
+
 data "coder_workspace" "me" {
 }
+
 resource "coder_agent" "main" {
   arch = "amd64"
   auth = "token"
@@ -119,8 +127,10 @@ resource "coder_agent" "main" {
     vscode_insiders = false
   }
 }
+
 resource "aws_default_vpc" "default" {
 }
+
 data "aws_ami" "ubuntu" {
   most_recent = true
   owners = [
@@ -139,22 +149,27 @@ data "aws_ami" "ubuntu" {
     ]
   }
 }
+
 resource "aws_iam_role" "dev" {
   assume_role_policy = "${jsonencode({ "Statement" = [{ "Action" = "sts:AssumeRole", "Effect" = "Allow", "Principal" = { "Service" = "ec2.amazonaws.com" }, "Sid" = "" }], "Version" = "2012-10-17" })}"
   name               = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
 }
+
 resource "aws_iam_role_policy_attachment" "admin" {
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
   role       = "${aws_iam_role.dev.name}"
 }
+
 resource "aws_iam_role_policy_attachment" "secretsmanager" {
   policy_arn = "arn:aws:iam::aws:policy/SecretsManagerReadWrite"
   role       = "${aws_iam_role.dev.name}"
 }
+
 resource "aws_iam_role_policy_attachment" "ssm" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
   role       = "${aws_iam_role.dev.name}"
 }
+
 resource "aws_security_group" "dev_security_group" {
   description = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
   egress {
@@ -206,6 +221,7 @@ resource "aws_security_group" "dev_security_group" {
   }
   vpc_id = "${aws_default_vpc.default.id}"
 }
+
 resource "coder_app" "code-server" {
   agent_id     = "${coder_agent.main.id}"
   display_name = "code-server"
@@ -227,10 +243,12 @@ provider "aws" {
 
 provider "coder" {
 }
+
 module "coder_login" {
   agent_id = "${coder_agent.main.id}"
   source   = "https://registry.coder.com/modules/coder-login"
 }
+
 module "dev_oidc_cdn" {
   attributes = [
     "oidc",
@@ -245,10 +263,12 @@ module "dev_oidc_cdn" {
   versioning_enabled   = false
   source               = "./assets/__cdktf_module_asset_26CE565C/8B8804DEDBAFAB7F90963998BCA50CAA/terraform-aws-cloudfront-s3-cdn"
 }
+
 resource "aws_iam_instance_profile" "dev_instance_profile" {
   name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
   role = "${aws_iam_role.dev.name}"
 }
+
 resource "aws_instance" "dev_ec2_instance" {
   ami                  = "${data.aws_ami.ubuntu.id}"
   availability_zone    = "${data.coder_parameter.region.value}${data.coder_parameter.az.value}"
@@ -327,6 +347,7 @@ EOF
     ]
   }
 }
+
 resource "coder_metadata" "dev_metadata" {
   resource_id = "${aws_instance.dev_ec2_instance.id}"
   item {
@@ -339,6 +360,7 @@ resource "coder_metadata" "dev_metadata" {
   }
   count = "${(data.coder_parameter.provider.value == "aws-ec2") ? 1 : 0}"
 }
+
 resource "aws_ec2_instance_state" "dev_instance_state" {
   instance_id = "${aws_instance.dev_ec2_instance.id}"
   state       = "${(data.coder_workspace.me.transition == "start") ? "running" : "stopped"}"

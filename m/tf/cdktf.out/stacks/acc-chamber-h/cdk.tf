@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
-
 }
 
 provider "aws" {
   profile = "chamber-h-sso"
   alias   = "chamber-h"
 }
+
 module "chamber-h" {
   name      = "terraform"
   namespace = "dfn"

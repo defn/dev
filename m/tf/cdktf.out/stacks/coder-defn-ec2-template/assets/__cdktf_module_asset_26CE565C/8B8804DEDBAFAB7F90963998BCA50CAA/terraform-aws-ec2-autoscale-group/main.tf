@@ -268,3 +268,4 @@ resource "aws_autoscaling_group" "default" {
     ignore_changes        = [desired_capacity]
   }
 }
+

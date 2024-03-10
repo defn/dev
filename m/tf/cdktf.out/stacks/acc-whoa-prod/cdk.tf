@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
-
 }
 
 provider "aws" {
   profile = "whoa-prod-sso"
   alias   = "whoa-prod"
 }
+
 module "whoa-prod" {
   name      = "terraform"
   namespace = "dfn"

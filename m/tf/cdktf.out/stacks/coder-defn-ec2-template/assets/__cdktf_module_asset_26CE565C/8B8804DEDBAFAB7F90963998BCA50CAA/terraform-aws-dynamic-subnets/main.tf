@@ -53,7 +53,6 @@ locals {
     local.subnet_possible_availability_zones
   ) : slice(local.subnet_possible_availability_zones, 0, var.max_subnet_count)
 
-
   # Copy the AZs taking into account the `subnets_per_az` var
   subnet_availability_zones = flatten([for z in local.vpc_availability_zones : [for net in range(0, var.subnets_per_az_count) : z]])
 
@@ -82,7 +81,6 @@ locals {
   private_cidr_reservations = (local.private_enabled ? 1 : 0) * local.base_cidr_reservations
   public_cidr_reservations  = (local.public_enabled ? 1 : 0) * local.base_cidr_reservations
   cidr_reservations         = local.private_cidr_reservations + local.public_cidr_reservations
-
 
   # Calculate how many bits are required to designate a subnet,
   # but also prevent errors like log(0) when things are disabled.
@@ -308,3 +306,4 @@ module "utils" {
   source  = "cloudposse/utils/aws"
   version = "1.3.0"
 }
+

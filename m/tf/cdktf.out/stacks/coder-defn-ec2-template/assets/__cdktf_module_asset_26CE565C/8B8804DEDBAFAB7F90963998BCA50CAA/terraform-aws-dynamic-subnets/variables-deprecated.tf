@@ -43,3 +43,4 @@ variable "root_block_device_encrypted" {
     Whether to encrypt the root block device on the created NAT instances
     EOT
 }
+

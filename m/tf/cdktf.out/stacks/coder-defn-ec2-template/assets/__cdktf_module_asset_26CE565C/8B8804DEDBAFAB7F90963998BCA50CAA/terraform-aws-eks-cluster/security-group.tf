@@ -108,3 +108,4 @@ resource "aws_security_group_rule" "ingress_cidr_blocks" {
   security_group_id = local.security_group_id
   type              = "ingress"
 }
+

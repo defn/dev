@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
-
 }
 
 provider "aws" {
   profile = "spiral-dev-sso"
   alias   = "spiral-dev"
 }
+
 module "spiral-dev" {
   name      = "terraform"
   namespace = "dfn"

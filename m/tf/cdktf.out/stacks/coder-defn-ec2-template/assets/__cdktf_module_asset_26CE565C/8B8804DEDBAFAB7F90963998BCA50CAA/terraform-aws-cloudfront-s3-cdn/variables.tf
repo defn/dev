@@ -577,7 +577,6 @@ variable "extra_logs_attributes" {
     EOT
 }
 
-
 variable "cloudfront_access_log_bucket_name" {
   type        = string # diff hint
   default     = ""     # diff hint

@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
-
 }
 
 provider "aws" {
   profile = "helix-lib-sso"
   alias   = "helix-lib"
 }
+
 module "helix-lib" {
   name      = "terraform"
   namespace = "dfn"

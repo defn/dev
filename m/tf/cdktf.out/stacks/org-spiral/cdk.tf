@@ -14,7 +14,6 @@ terraform {
     region         = "us-east-1"
   }
 
-
 }
 
 locals {
@@ -26,6 +25,7 @@ provider "aws" {
   profile = "spiral-org-sso"
   region  = "us-west-2"
 }
+
 resource "aws_organizations_organization" "organization" {
   aws_service_access_principals = [
     "cloudtrail.amazonaws.com",
@@ -41,8 +41,10 @@ resource "aws_organizations_organization" "organization" {
   ]
   feature_set = "ALL"
 }
+
 data "aws_ssoadmin_instances" "sso_instance" {
 }
+
 resource "aws_ssoadmin_permission_set" "admin_sso_permission_set" {
   instance_arn     = "${element(local.sso_instance_arn, 0)}"
   name             = "Administrator"
@@ -51,15 +53,18 @@ resource "aws_ssoadmin_permission_set" "admin_sso_permission_set" {
     ManagedBy = "Terraform"
   }
 }
+
 resource "aws_ssoadmin_managed_policy_attachment" "admin_sso_managed_policy_attachment" {
   instance_arn       = "${aws_ssoadmin_permission_set.admin_sso_permission_set.instance_arn}"
   managed_policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
   permission_set_arn = "${aws_ssoadmin_permission_set.admin_sso_permission_set.arn}"
 }
+
 resource "aws_identitystore_group" "administrators_sso_group" {
   display_name      = "Administrators"
   identity_store_id = "${element(local.sso_instance_isid, 0)}"
 }
+
 resource "aws_organizations_account" "spiral" {
   email = "aws-spiral@defn.us"
   name  = "spiral"
@@ -67,6 +72,7 @@ resource "aws_organizations_account" "spiral" {
     ManagedBy = "Terraform"
   }
 }
+
 resource "aws_ssoadmin_account_assignment" "spiral_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -75,6 +81,7 @@ resource "aws_ssoadmin_account_assignment" "spiral_admin_sso_account_assignment"
   target_id          = "${aws_organizations_account.spiral.id}"
   target_type        = "AWS_ACCOUNT"
 }
+
 resource "aws_organizations_account" "ops" {
   email                      = "aws-spiral+ops@defn.us"
   iam_user_access_to_billing = "ALLOW"
@@ -84,6 +91,7 @@ resource "aws_organizations_account" "ops" {
     ManagedBy = "Terraform"
   }
 }
+
 resource "aws_ssoadmin_account_assignment" "ops_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -92,6 +100,7 @@ resource "aws_ssoadmin_account_assignment" "ops_admin_sso_account_assignment" {
   target_id          = "${aws_organizations_account.ops.id}"
   target_type        = "AWS_ACCOUNT"
 }
+
 resource "aws_organizations_account" "sec" {
   email                      = "aws-spiral+sec@defn.us"
   iam_user_access_to_billing = "ALLOW"
@@ -101,6 +110,7 @@ resource "aws_organizations_account" "sec" {
     ManagedBy = "Terraform"
   }
 }
+
 resource "aws_ssoadmin_account_assignment" "sec_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -109,6 +119,7 @@ resource "aws_ssoadmin_account_assignment" "sec_admin_sso_account_assignment" {
   target_id          = "${aws_organizations_account.sec.id}"
   target_type        = "AWS_ACCOUNT"
 }
+
 resource "aws_organizations_account" "net" {
   email                      = "aws-spiral+net@defn.us"
   iam_user_access_to_billing = "ALLOW"
@@ -118,6 +129,7 @@ resource "aws_organizations_account" "net" {
     ManagedBy = "Terraform"
   }
 }
+
 resource "aws_ssoadmin_account_assignment" "net_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -126,6 +138,7 @@ resource "aws_ssoadmin_account_assignment" "net_admin_sso_account_assignment" {
   target_id          = "${aws_organizations_account.net.id}"
   target_type        = "AWS_ACCOUNT"
 }
+
 resource "aws_organizations_account" "log" {
   email                      = "aws-spiral+log@defn.us"
   iam_user_access_to_billing = "ALLOW"
@@ -135,6 +148,7 @@ resource "aws_organizations_account" "log" {
     ManagedBy = "Terraform"
   }
 }
+
 resource "aws_ssoadmin_account_assignment" "log_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -143,6 +157,7 @@ resource "aws_ssoadmin_account_assignment" "log_admin_sso_account_assignment" {
   target_id          = "${aws_organizations_account.log.id}"
   target_type        = "AWS_ACCOUNT"
 }
+
 resource "aws_organizations_account" "lib" {
   email                      = "aws-spiral+lib@defn.us"
   iam_user_access_to_billing = "ALLOW"
@@ -152,6 +167,7 @@ resource "aws_organizations_account" "lib" {
     ManagedBy = "Terraform"
   }
 }
+
 resource "aws_ssoadmin_account_assignment" "lib_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -160,6 +176,7 @@ resource "aws_ssoadmin_account_assignment" "lib_admin_sso_account_assignment" {
   target_id          = "${aws_organizations_account.lib.id}"
   target_type        = "AWS_ACCOUNT"
 }
+
 resource "aws_organizations_account" "pub" {
   email                      = "aws-spiral+pub@defn.us"
   iam_user_access_to_billing = "ALLOW"
@@ -169,6 +186,7 @@ resource "aws_organizations_account" "pub" {
     ManagedBy = "Terraform"
   }
 }
+
 resource "aws_ssoadmin_account_assignment" "pub_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -177,6 +195,7 @@ resource "aws_ssoadmin_account_assignment" "pub_admin_sso_account_assignment" {
   target_id          = "${aws_organizations_account.pub.id}"
   target_type        = "AWS_ACCOUNT"
 }
+
 resource "aws_organizations_account" "dmz" {
   email                      = "aws-spiral+dmz@defn.us"
   iam_user_access_to_billing = "ALLOW"
@@ -186,6 +205,7 @@ resource "aws_organizations_account" "dmz" {
     ManagedBy = "Terraform"
   }
 }
+
 resource "aws_ssoadmin_account_assignment" "dmz_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -194,6 +214,7 @@ resource "aws_ssoadmin_account_assignment" "dmz_admin_sso_account_assignment" {
   target_id          = "${aws_organizations_account.dmz.id}"
   target_type        = "AWS_ACCOUNT"
 }
+
 resource "aws_organizations_account" "hub" {
   email                      = "aws-spiral+hub@defn.us"
   iam_user_access_to_billing = "ALLOW"
@@ -203,6 +224,7 @@ resource "aws_organizations_account" "hub" {
     ManagedBy = "Terraform"
   }
 }
+
 resource "aws_ssoadmin_account_assignment" "hub_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"
@@ -211,6 +233,7 @@ resource "aws_ssoadmin_account_assignment" "hub_admin_sso_account_assignment" {
   target_id          = "${aws_organizations_account.hub.id}"
   target_type        = "AWS_ACCOUNT"
 }
+
 resource "aws_organizations_account" "dev" {
   email                      = "aws-spiral+dev@defn.us"
   iam_user_access_to_billing = "ALLOW"
@@ -220,6 +243,7 @@ resource "aws_organizations_account" "dev" {
     ManagedBy = "Terraform"
   }
 }
+
 resource "aws_ssoadmin_account_assignment" "dev_admin_sso_account_assignment" {
   instance_arn       = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn}"
   permission_set_arn = "${aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn}"

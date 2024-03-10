@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
-
 }
 
 provider "aws" {
   profile = "coil-lib-sso"
   alias   = "coil-lib"
 }
+
 module "coil-lib" {
   name      = "terraform"
   namespace = "dfn"

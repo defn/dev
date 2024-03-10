@@ -14,13 +14,13 @@ terraform {
     region         = "us-east-1"
   }
 
-
 }
 
 provider "aws" {
   profile = "imma-org-sso"
   alias   = "imma-org"
 }
+
 module "imma-org" {
   name      = "terraform"
   namespace = "dfn"
