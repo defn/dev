@@ -126,10 +126,11 @@ docker:
 		&& docker context use host
 
 trunk:
-	$(MARK) trunk
-	if ! test -e /usr/local/bin/trunk; then curl https://get.trunk.io -fsSL | sed 's#/usr/local/bin#$$HOME/bin/$$(uname -s)#' | bash; fi
-	trunk version
-	git checkout .local/share/code-server/User/settings.json
+	@$(MARK) trunk
+	@if ! type -P trunk >/dev/null; then curl https://get.trunk.io -fsSL | sed 's#/usr/local/bin#$$HOME/bin/$$(uname -s)#' | bash; fi
+	@trunk version
+	@sudo rm -f /usr/local/bin/trunk
+	@git checkout .local/share/code-server/User/settings.json
 
 login:
 	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then mark kubernetes; this-kubeconfig; this-argocd-login || true; fi
