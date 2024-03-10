@@ -204,7 +204,7 @@ install-innermost:
 
 nix:
 	(. ~/.nix-profile/etc/profile.d/nix.sh && which nix) || t make_nix_platform $(MAKE) nix-$(shell uname -s)
-	if [[ "$$(id -un)" == "deck" ]]; then $(MAKE) t make_nix_deck nix-deck; fi
+	if [[ "$$(id -un)" == "deck" ]]; then t make_nix_deck $(MAKE) nix-deck; fi
 	. ~/.nix-profile/etc/profile.d/nix.sh && (test -f "$$HOME/.nix-profile/share/nix-direnv/direnvrc" || t nix_profile_direnv nix profile install nixpkgs#nix-direnv)
 	. ~/.nix-profile/etc/profile.d/nix.sh && (test -f "$$HOME/.nix-profile/bin/bazelisk" || t nix_profile_bazelisk nix profile install nixpkgs#bazelisk)
 	ln -nfs $$(which bazelisk) $$HOME/bin/$$(uname -s)/bazel
