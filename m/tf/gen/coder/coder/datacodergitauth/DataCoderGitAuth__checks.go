@@ -242,3 +242,4 @@ func validateNewDataCoderGitAuthParameters(scope constructs.Construct, id *strin
 
 	return nil
 }
+

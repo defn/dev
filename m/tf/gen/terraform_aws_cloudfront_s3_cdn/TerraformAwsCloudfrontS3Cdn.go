@@ -1652,6 +1652,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) WebsiteEnabled() *bool {
 	return returns
 }
 
+
 func NewTerraformAwsCloudfrontS3Cdn(scope constructs.Construct, id *string, config *TerraformAwsCloudfrontS3CdnConfig) TerraformAwsCloudfrontS3Cdn {
 	_init_.Initialize()
 
@@ -1679,7 +1680,7 @@ func NewTerraformAwsCloudfrontS3Cdn_Override(t TerraformAwsCloudfrontS3Cdn, scop
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetAccessLogBucketName(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetAccessLogBucketName(val *string) {
 	_jsii_.Set(
 		j,
 		"accessLogBucketName",
@@ -1687,7 +1688,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetAccessLogBucketName(val *stri
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetAcmCertificateArn(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetAcmCertificateArn(val *string) {
 	_jsii_.Set(
 		j,
 		"acmCertificateArn",
@@ -1695,7 +1696,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetAcmCertificateArn(val *string
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetAdditionalBucketPolicy(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetAdditionalBucketPolicy(val *string) {
 	_jsii_.Set(
 		j,
 		"additionalBucketPolicy",
@@ -1703,7 +1704,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetAdditionalBucketPolicy(val *s
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetAdditionalTagMap(val *map[string]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetAdditionalTagMap(val *map[string]*string) {
 	_jsii_.Set(
 		j,
 		"additionalTagMap",
@@ -1711,7 +1712,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetAdditionalTagMap(val *map[str
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetAliases(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetAliases(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"aliases",
@@ -1719,7 +1720,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetAliases(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetAllowedMethods(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetAllowedMethods(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"allowedMethods",
@@ -1727,7 +1728,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetAllowedMethods(val *[]*string
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetAllowSslRequestsOnly(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetAllowSslRequestsOnly(val *bool) {
 	_jsii_.Set(
 		j,
 		"allowSslRequestsOnly",
@@ -1735,7 +1736,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetAllowSslRequestsOnly(val *boo
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetAttributes(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetAttributes(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"attributes",
@@ -1743,7 +1744,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetAttributes(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetBlockOriginPublicAccessEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetBlockOriginPublicAccessEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"blockOriginPublicAccessEnabled",
@@ -1751,7 +1752,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetBlockOriginPublicAccessEnable
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCachedMethods(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetCachedMethods(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"cachedMethods",
@@ -1759,7 +1760,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCachedMethods(val *[]*string)
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCachePolicyId(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetCachePolicyId(val *string) {
 	_jsii_.Set(
 		j,
 		"cachePolicyId",
@@ -1767,7 +1768,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCachePolicyId(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCloudfrontAccessLogBucketName(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetCloudfrontAccessLogBucketName(val *string) {
 	_jsii_.Set(
 		j,
 		"cloudfrontAccessLogBucketName",
@@ -1775,7 +1776,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCloudfrontAccessLogBucketName
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCloudfrontAccessLogCreateBucket(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetCloudfrontAccessLogCreateBucket(val *bool) {
 	_jsii_.Set(
 		j,
 		"cloudfrontAccessLogCreateBucket",
@@ -1783,7 +1784,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCloudfrontAccessLogCreateBuck
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCloudfrontAccessLoggingEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetCloudfrontAccessLoggingEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"cloudfrontAccessLoggingEnabled",
@@ -1791,7 +1792,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCloudfrontAccessLoggingEnable
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCloudfrontAccessLogIncludeCookies(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetCloudfrontAccessLogIncludeCookies(val *bool) {
 	_jsii_.Set(
 		j,
 		"cloudfrontAccessLogIncludeCookies",
@@ -1799,7 +1800,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCloudfrontAccessLogIncludeCoo
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCloudfrontAccessLogPrefix(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetCloudfrontAccessLogPrefix(val *string) {
 	_jsii_.Set(
 		j,
 		"cloudfrontAccessLogPrefix",
@@ -1807,7 +1808,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCloudfrontAccessLogPrefix(val
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCloudfrontOriginAccessIdentityIamArn(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetCloudfrontOriginAccessIdentityIamArn(val *string) {
 	_jsii_.Set(
 		j,
 		"cloudfrontOriginAccessIdentityIamArn",
@@ -1815,7 +1816,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCloudfrontOriginAccessIdentit
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCloudfrontOriginAccessIdentityPath(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetCloudfrontOriginAccessIdentityPath(val *string) {
 	_jsii_.Set(
 		j,
 		"cloudfrontOriginAccessIdentityPath",
@@ -1823,7 +1824,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCloudfrontOriginAccessIdentit
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetComment(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetComment(val *string) {
 	_jsii_.Set(
 		j,
 		"comment",
@@ -1831,7 +1832,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetComment(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCompress(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetCompress(val *bool) {
 	_jsii_.Set(
 		j,
 		"compress",
@@ -1839,7 +1840,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCompress(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetContext(val interface{}) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetContext(val interface{}) {
 	if err := j.validateSetContextParameters(val); err != nil {
 		panic(err)
 	}
@@ -1850,7 +1851,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetContext(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCorsAllowedHeaders(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetCorsAllowedHeaders(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"corsAllowedHeaders",
@@ -1858,7 +1859,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCorsAllowedHeaders(val *[]*st
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCorsAllowedMethods(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetCorsAllowedMethods(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"corsAllowedMethods",
@@ -1866,7 +1867,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCorsAllowedMethods(val *[]*st
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCorsAllowedOrigins(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetCorsAllowedOrigins(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"corsAllowedOrigins",
@@ -1874,7 +1875,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCorsAllowedOrigins(val *[]*st
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCorsExposeHeaders(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetCorsExposeHeaders(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"corsExposeHeaders",
@@ -1882,7 +1883,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCorsExposeHeaders(val *[]*str
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCorsMaxAgeSeconds(val *float64) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetCorsMaxAgeSeconds(val *float64) {
 	_jsii_.Set(
 		j,
 		"corsMaxAgeSeconds",
@@ -1890,7 +1891,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCorsMaxAgeSeconds(val *float6
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCustomErrorResponse(val interface{}) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetCustomErrorResponse(val interface{}) {
 	if err := j.validateSetCustomErrorResponseParameters(val); err != nil {
 		panic(err)
 	}
@@ -1901,7 +1902,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCustomErrorResponse(val inter
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCustomOriginHeaders(val *[]interface{}) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetCustomOriginHeaders(val *[]interface{}) {
 	_jsii_.Set(
 		j,
 		"customOriginHeaders",
@@ -1909,7 +1910,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCustomOriginHeaders(val *[]in
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCustomOrigins(val interface{}) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetCustomOrigins(val interface{}) {
 	if err := j.validateSetCustomOriginsParameters(val); err != nil {
 		panic(err)
 	}
@@ -1920,7 +1921,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetCustomOrigins(val interface{}
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetDefaultRootObject(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetDefaultRootObject(val *string) {
 	_jsii_.Set(
 		j,
 		"defaultRootObject",
@@ -1928,7 +1929,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetDefaultRootObject(val *string
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetDefaultTtl(val *float64) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetDefaultTtl(val *float64) {
 	_jsii_.Set(
 		j,
 		"defaultTtl",
@@ -1936,7 +1937,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetDefaultTtl(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetDelimiter(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetDelimiter(val *string) {
 	_jsii_.Set(
 		j,
 		"delimiter",
@@ -1944,7 +1945,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetDelimiter(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetDependsOn(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetDependsOn(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"dependsOn",
@@ -1952,7 +1953,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetDependsOn(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetDeploymentActions(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetDeploymentActions(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"deploymentActions",
@@ -1960,7 +1961,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetDeploymentActions(val *[]*str
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetDeploymentPrincipalArns(val *map[string]*[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetDeploymentPrincipalArns(val *map[string]*[]*string) {
 	_jsii_.Set(
 		j,
 		"deploymentPrincipalArns",
@@ -1968,7 +1969,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetDeploymentPrincipalArns(val *
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetDescriptorFormats(val interface{}) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetDescriptorFormats(val interface{}) {
 	if err := j.validateSetDescriptorFormatsParameters(val); err != nil {
 		panic(err)
 	}
@@ -1979,7 +1980,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetDescriptorFormats(val interfa
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetDistributionEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetDistributionEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"distributionEnabled",
@@ -1987,7 +1988,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetDistributionEnabled(val *bool
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetDnsAliasEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetDnsAliasEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"dnsAliasEnabled",
@@ -1995,7 +1996,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetDnsAliasEnabled(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetDnsAllowOverwrite(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetDnsAllowOverwrite(val *bool) {
 	_jsii_.Set(
 		j,
 		"dnsAllowOverwrite",
@@ -2003,7 +2004,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetDnsAllowOverwrite(val *bool) 
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"enabled",
@@ -2011,7 +2012,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetEnabled(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetEncryptionEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetEncryptionEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"encryptionEnabled",
@@ -2019,7 +2020,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetEncryptionEnabled(val *bool) 
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetEnvironment(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetEnvironment(val *string) {
 	_jsii_.Set(
 		j,
 		"environment",
@@ -2027,7 +2028,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetEnvironment(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetErrorDocument(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetErrorDocument(val *string) {
 	_jsii_.Set(
 		j,
 		"errorDocument",
@@ -2035,7 +2036,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetErrorDocument(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetExternalAliases(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetExternalAliases(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"externalAliases",
@@ -2043,7 +2044,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetExternalAliases(val *[]*strin
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetExtraLogsAttributes(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetExtraLogsAttributes(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"extraLogsAttributes",
@@ -2051,7 +2052,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetExtraLogsAttributes(val *[]*s
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetExtraOriginAttributes(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetExtraOriginAttributes(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"extraOriginAttributes",
@@ -2059,7 +2060,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetExtraOriginAttributes(val *[]
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetForEach(val cdktf.ITerraformIterator) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetForEach(val cdktf.ITerraformIterator) {
 	_jsii_.Set(
 		j,
 		"forEach",
@@ -2067,7 +2068,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetForEach(val cdktf.ITerraformI
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetForwardCookies(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetForwardCookies(val *string) {
 	_jsii_.Set(
 		j,
 		"forwardCookies",
@@ -2075,7 +2076,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetForwardCookies(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetForwardHeaderValues(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetForwardHeaderValues(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"forwardHeaderValues",
@@ -2083,7 +2084,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetForwardHeaderValues(val *[]*s
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetForwardQueryString(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetForwardQueryString(val *bool) {
 	_jsii_.Set(
 		j,
 		"forwardQueryString",
@@ -2091,7 +2092,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetForwardQueryString(val *bool)
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetFunctionAssociation(val interface{}) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetFunctionAssociation(val interface{}) {
 	if err := j.validateSetFunctionAssociationParameters(val); err != nil {
 		panic(err)
 	}
@@ -2102,7 +2103,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetFunctionAssociation(val inter
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetGeoRestrictionLocations(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetGeoRestrictionLocations(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"geoRestrictionLocations",
@@ -2110,7 +2111,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetGeoRestrictionLocations(val *
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetGeoRestrictionType(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetGeoRestrictionType(val *string) {
 	_jsii_.Set(
 		j,
 		"geoRestrictionType",
@@ -2118,7 +2119,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetGeoRestrictionType(val *strin
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetHttpVersion(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetHttpVersion(val *string) {
 	_jsii_.Set(
 		j,
 		"httpVersion",
@@ -2126,7 +2127,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetHttpVersion(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetIdLengthLimit(val *float64) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetIdLengthLimit(val *float64) {
 	_jsii_.Set(
 		j,
 		"idLengthLimit",
@@ -2134,7 +2135,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetIdLengthLimit(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetIndexDocument(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetIndexDocument(val *string) {
 	_jsii_.Set(
 		j,
 		"indexDocument",
@@ -2142,7 +2143,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetIndexDocument(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetIpv6Enabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetIpv6Enabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"ipv6Enabled",
@@ -2150,7 +2151,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetIpv6Enabled(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLabelKeyCase(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetLabelKeyCase(val *string) {
 	_jsii_.Set(
 		j,
 		"labelKeyCase",
@@ -2158,7 +2159,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLabelKeyCase(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLabelOrder(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetLabelOrder(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"labelOrder",
@@ -2166,7 +2167,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLabelOrder(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLabelsAsTags(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetLabelsAsTags(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"labelsAsTags",
@@ -2174,7 +2175,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLabelsAsTags(val *[]*string) 
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLabelValueCase(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetLabelValueCase(val *string) {
 	_jsii_.Set(
 		j,
 		"labelValueCase",
@@ -2182,7 +2183,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLabelValueCase(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLambdaFunctionAssociation(val interface{}) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetLambdaFunctionAssociation(val interface{}) {
 	if err := j.validateSetLambdaFunctionAssociationParameters(val); err != nil {
 		panic(err)
 	}
@@ -2193,7 +2194,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLambdaFunctionAssociation(val
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLogExpirationDays(val *float64) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetLogExpirationDays(val *float64) {
 	_jsii_.Set(
 		j,
 		"logExpirationDays",
@@ -2201,7 +2202,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLogExpirationDays(val *float6
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLoggingEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetLoggingEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"loggingEnabled",
@@ -2209,7 +2210,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLoggingEnabled(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLogGlacierTransitionDays(val *float64) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetLogGlacierTransitionDays(val *float64) {
 	_jsii_.Set(
 		j,
 		"logGlacierTransitionDays",
@@ -2217,7 +2218,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLogGlacierTransitionDays(val 
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLogIncludeCookies(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetLogIncludeCookies(val *bool) {
 	_jsii_.Set(
 		j,
 		"logIncludeCookies",
@@ -2225,7 +2226,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLogIncludeCookies(val *bool) 
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLogPrefix(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetLogPrefix(val *string) {
 	_jsii_.Set(
 		j,
 		"logPrefix",
@@ -2233,7 +2234,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLogPrefix(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLogStandardTransitionDays(val *float64) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetLogStandardTransitionDays(val *float64) {
 	_jsii_.Set(
 		j,
 		"logStandardTransitionDays",
@@ -2241,7 +2242,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLogStandardTransitionDays(val
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLogVersioningEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetLogVersioningEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"logVersioningEnabled",
@@ -2249,7 +2250,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetLogVersioningEnabled(val *boo
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetMaxTtl(val *float64) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetMaxTtl(val *float64) {
 	_jsii_.Set(
 		j,
 		"maxTtl",
@@ -2257,7 +2258,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetMaxTtl(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetMinimumProtocolVersion(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetMinimumProtocolVersion(val *string) {
 	_jsii_.Set(
 		j,
 		"minimumProtocolVersion",
@@ -2265,7 +2266,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetMinimumProtocolVersion(val *s
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetMinTtl(val *float64) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetMinTtl(val *float64) {
 	_jsii_.Set(
 		j,
 		"minTtl",
@@ -2273,7 +2274,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetMinTtl(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetName(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetName(val *string) {
 	_jsii_.Set(
 		j,
 		"name",
@@ -2281,7 +2282,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetName(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetNamespace(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetNamespace(val *string) {
 	_jsii_.Set(
 		j,
 		"namespace",
@@ -2289,7 +2290,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetNamespace(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetOrderedCache(val interface{}) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetOrderedCache(val interface{}) {
 	if err := j.validateSetOrderedCacheParameters(val); err != nil {
 		panic(err)
 	}
@@ -2300,7 +2301,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetOrderedCache(val interface{})
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetOriginBucket(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetOriginBucket(val *string) {
 	_jsii_.Set(
 		j,
 		"originBucket",
@@ -2308,7 +2309,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetOriginBucket(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetOriginForceDestroy(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetOriginForceDestroy(val *bool) {
 	_jsii_.Set(
 		j,
 		"originForceDestroy",
@@ -2316,7 +2317,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetOriginForceDestroy(val *bool)
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetOriginGroups(val interface{}) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetOriginGroups(val interface{}) {
 	if err := j.validateSetOriginGroupsParameters(val); err != nil {
 		panic(err)
 	}
@@ -2327,7 +2328,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetOriginGroups(val interface{})
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetOriginPath(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetOriginPath(val *string) {
 	_jsii_.Set(
 		j,
 		"originPath",
@@ -2335,7 +2336,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetOriginPath(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetOriginRequestPolicyId(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetOriginRequestPolicyId(val *string) {
 	_jsii_.Set(
 		j,
 		"originRequestPolicyId",
@@ -2343,7 +2344,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetOriginRequestPolicyId(val *st
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetOriginShieldEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetOriginShieldEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"originShieldEnabled",
@@ -2351,7 +2352,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetOriginShieldEnabled(val *bool
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetOriginSslProtocols(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetOriginSslProtocols(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"originSslProtocols",
@@ -2359,7 +2360,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetOriginSslProtocols(val *[]*st
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetOverrideOriginBucketPolicy(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetOverrideOriginBucketPolicy(val *bool) {
 	_jsii_.Set(
 		j,
 		"overrideOriginBucketPolicy",
@@ -2367,7 +2368,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetOverrideOriginBucketPolicy(va
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetParentZoneId(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetParentZoneId(val *string) {
 	_jsii_.Set(
 		j,
 		"parentZoneId",
@@ -2375,7 +2376,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetParentZoneId(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetParentZoneName(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetParentZoneName(val *string) {
 	_jsii_.Set(
 		j,
 		"parentZoneName",
@@ -2383,7 +2384,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetParentZoneName(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetPriceClass(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetPriceClass(val *string) {
 	_jsii_.Set(
 		j,
 		"priceClass",
@@ -2391,7 +2392,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetPriceClass(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetQueryStringCacheKeys(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetQueryStringCacheKeys(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"queryStringCacheKeys",
@@ -2399,7 +2400,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetQueryStringCacheKeys(val *[]*
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetRealtimeLogConfigArn(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetRealtimeLogConfigArn(val *string) {
 	_jsii_.Set(
 		j,
 		"realtimeLogConfigArn",
@@ -2407,7 +2408,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetRealtimeLogConfigArn(val *str
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetRedirectAllRequestsTo(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetRedirectAllRequestsTo(val *string) {
 	_jsii_.Set(
 		j,
 		"redirectAllRequestsTo",
@@ -2415,7 +2416,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetRedirectAllRequestsTo(val *st
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetRegexReplaceChars(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetRegexReplaceChars(val *string) {
 	_jsii_.Set(
 		j,
 		"regexReplaceChars",
@@ -2423,7 +2424,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetRegexReplaceChars(val *string
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetResponseHeadersPolicyId(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetResponseHeadersPolicyId(val *string) {
 	_jsii_.Set(
 		j,
 		"responseHeadersPolicyId",
@@ -2431,7 +2432,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetResponseHeadersPolicyId(val *
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetRoutingRules(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetRoutingRules(val *string) {
 	_jsii_.Set(
 		j,
 		"routingRules",
@@ -2439,7 +2440,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetRoutingRules(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetS3AccessLogBucketName(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetS3AccessLogBucketName(val *string) {
 	_jsii_.Set(
 		j,
 		"s3AccessLogBucketName",
@@ -2447,7 +2448,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetS3AccessLogBucketName(val *st
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetS3AccessLoggingEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetS3AccessLoggingEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"s3AccessLoggingEnabled",
@@ -2455,7 +2456,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetS3AccessLoggingEnabled(val *b
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetS3AccessLogPrefix(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetS3AccessLogPrefix(val *string) {
 	_jsii_.Set(
 		j,
 		"s3AccessLogPrefix",
@@ -2463,7 +2464,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetS3AccessLogPrefix(val *string
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetS3ObjectOwnership(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetS3ObjectOwnership(val *string) {
 	_jsii_.Set(
 		j,
 		"s3ObjectOwnership",
@@ -2471,7 +2472,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetS3ObjectOwnership(val *string
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetS3Origins(val interface{}) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetS3Origins(val interface{}) {
 	if err := j.validateSetS3OriginsParameters(val); err != nil {
 		panic(err)
 	}
@@ -2482,7 +2483,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetS3Origins(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetS3WebsitePasswordEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetS3WebsitePasswordEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"s3WebsitePasswordEnabled",
@@ -2490,7 +2491,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetS3WebsitePasswordEnabled(val 
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetStage(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetStage(val *string) {
 	_jsii_.Set(
 		j,
 		"stage",
@@ -2498,7 +2499,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetStage(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetTags(val *map[string]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetTags(val *map[string]*string) {
 	_jsii_.Set(
 		j,
 		"tags",
@@ -2506,7 +2507,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetTags(val *map[string]*string)
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetTenant(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetTenant(val *string) {
 	_jsii_.Set(
 		j,
 		"tenant",
@@ -2514,7 +2515,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetTenant(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetTrustedKeyGroups(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetTrustedKeyGroups(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"trustedKeyGroups",
@@ -2522,7 +2523,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetTrustedKeyGroups(val *[]*stri
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetTrustedSigners(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetTrustedSigners(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"trustedSigners",
@@ -2530,7 +2531,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetTrustedSigners(val *[]*string
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetVersioningEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetVersioningEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"versioningEnabled",
@@ -2538,7 +2539,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetVersioningEnabled(val *bool) 
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetViewerProtocolPolicy(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetViewerProtocolPolicy(val *string) {
 	_jsii_.Set(
 		j,
 		"viewerProtocolPolicy",
@@ -2546,7 +2547,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetViewerProtocolPolicy(val *str
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetWaitForDeployment(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetWaitForDeployment(val *bool) {
 	_jsii_.Set(
 		j,
 		"waitForDeployment",
@@ -2554,7 +2555,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetWaitForDeployment(val *bool) 
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetWebAclId(val *string) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetWebAclId(val *string) {
 	_jsii_.Set(
 		j,
 		"webAclId",
@@ -2562,7 +2563,7 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetWebAclId(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) SetWebsiteEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetWebsiteEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"websiteEnabled",
@@ -2774,3 +2775,4 @@ func (t *jsiiProxy_TerraformAwsCloudfrontS3Cdn) ToTerraform() interface{} {
 
 	return returns
 }
+

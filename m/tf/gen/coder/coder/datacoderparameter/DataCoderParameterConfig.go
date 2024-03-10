@@ -75,3 +75,4 @@ type DataCoderParameterConfig struct {
 	// Docs at Terraform Registry: {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/parameter#validation DataCoderParameter#validation}
 	Validation *DataCoderParameterValidation `field:"optional" json:"validation" yaml:"validation"`
 }
+

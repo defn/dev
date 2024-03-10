@@ -111,6 +111,7 @@ func (j *jsiiProxy_DataCoderParameterOptionList) WrapsSet() *bool {
 	return returns
 }
 
+
 func NewDataCoderParameterOptionList(terraformResource cdktf.IInterpolatingParent, terraformAttribute *string, wrapsSet *bool) DataCoderParameterOptionList {
 	_init_.Initialize()
 
@@ -138,7 +139,7 @@ func NewDataCoderParameterOptionList_Override(d DataCoderParameterOptionList, te
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterOptionList) SetInternalValue(val interface{}) {
+func (j *jsiiProxy_DataCoderParameterOptionList)SetInternalValue(val interface{}) {
 	if err := j.validateSetInternalValueParameters(val); err != nil {
 		panic(err)
 	}
@@ -149,7 +150,7 @@ func (j *jsiiProxy_DataCoderParameterOptionList) SetInternalValue(val interface{
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterOptionList) SetTerraformAttribute(val *string) {
+func (j *jsiiProxy_DataCoderParameterOptionList)SetTerraformAttribute(val *string) {
 	if err := j.validateSetTerraformAttributeParameters(val); err != nil {
 		panic(err)
 	}
@@ -160,7 +161,7 @@ func (j *jsiiProxy_DataCoderParameterOptionList) SetTerraformAttribute(val *stri
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterOptionList) SetTerraformResource(val cdktf.IInterpolatingParent) {
+func (j *jsiiProxy_DataCoderParameterOptionList)SetTerraformResource(val cdktf.IInterpolatingParent) {
 	if err := j.validateSetTerraformResourceParameters(val); err != nil {
 		panic(err)
 	}
@@ -171,7 +172,7 @@ func (j *jsiiProxy_DataCoderParameterOptionList) SetTerraformResource(val cdktf.
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterOptionList) SetWrapsSet(val *bool) {
+func (j *jsiiProxy_DataCoderParameterOptionList)SetWrapsSet(val *bool) {
 	if err := j.validateSetWrapsSetParameters(val); err != nil {
 		panic(err)
 	}
@@ -255,3 +256,4 @@ func (d *jsiiProxy_DataCoderParameterOptionList) ToString() *string {
 
 	return returns
 }
+

@@ -111,6 +111,7 @@ func (j *jsiiProxy_MetadataItemList) WrapsSet() *bool {
 	return returns
 }
 
+
 func NewMetadataItemList(terraformResource cdktf.IInterpolatingParent, terraformAttribute *string, wrapsSet *bool) MetadataItemList {
 	_init_.Initialize()
 
@@ -138,7 +139,7 @@ func NewMetadataItemList_Override(m MetadataItemList, terraformResource cdktf.II
 	)
 }
 
-func (j *jsiiProxy_MetadataItemList) SetInternalValue(val interface{}) {
+func (j *jsiiProxy_MetadataItemList)SetInternalValue(val interface{}) {
 	if err := j.validateSetInternalValueParameters(val); err != nil {
 		panic(err)
 	}
@@ -149,7 +150,7 @@ func (j *jsiiProxy_MetadataItemList) SetInternalValue(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_MetadataItemList) SetTerraformAttribute(val *string) {
+func (j *jsiiProxy_MetadataItemList)SetTerraformAttribute(val *string) {
 	if err := j.validateSetTerraformAttributeParameters(val); err != nil {
 		panic(err)
 	}
@@ -160,7 +161,7 @@ func (j *jsiiProxy_MetadataItemList) SetTerraformAttribute(val *string) {
 	)
 }
 
-func (j *jsiiProxy_MetadataItemList) SetTerraformResource(val cdktf.IInterpolatingParent) {
+func (j *jsiiProxy_MetadataItemList)SetTerraformResource(val cdktf.IInterpolatingParent) {
 	if err := j.validateSetTerraformResourceParameters(val); err != nil {
 		panic(err)
 	}
@@ -171,7 +172,7 @@ func (j *jsiiProxy_MetadataItemList) SetTerraformResource(val cdktf.IInterpolati
 	)
 }
 
-func (j *jsiiProxy_MetadataItemList) SetWrapsSet(val *bool) {
+func (j *jsiiProxy_MetadataItemList)SetWrapsSet(val *bool) {
 	if err := j.validateSetWrapsSetParameters(val); err != nil {
 		panic(err)
 	}
@@ -255,3 +256,4 @@ func (m *jsiiProxy_MetadataItemList) ToString() *string {
 
 	return returns
 }
+

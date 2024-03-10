@@ -83,3 +83,4 @@ func (j *jsiiProxy_MetadataItemOutputReference) validateSetValueParameters(val *
 func validateNewMetadataItemOutputReferenceParameters(terraformResource cdktf.IInterpolatingParent, terraformAttribute *string, complexObjectIndex *float64, complexObjectIsFromSet *bool) error {
 	return nil
 }
+

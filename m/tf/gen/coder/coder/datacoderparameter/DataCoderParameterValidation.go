@@ -1,5 +1,6 @@
 package datacoderparameter
 
+
 type DataCoderParameterValidation struct {
 	// An error message to display if the value doesn't match the provided regex.
 	//
@@ -22,3 +23,4 @@ type DataCoderParameterValidation struct {
 	// Docs at Terraform Registry: {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/parameter#regex DataCoderParameter#regex}
 	Regex *string `field:"optional" json:"regex" yaml:"regex"`
 }
+

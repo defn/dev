@@ -298,3 +298,4 @@ func validateNewAgentDisplayAppsOutputReferenceParameters(terraformResource cdkt
 
 	return nil
 }
+

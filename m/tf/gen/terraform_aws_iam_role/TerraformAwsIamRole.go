@@ -644,6 +644,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) Version() *string {
 	return returns
 }
 
+
 func NewTerraformAwsIamRole(scope constructs.Construct, id *string, config *TerraformAwsIamRoleConfig) TerraformAwsIamRole {
 	_init_.Initialize()
 
@@ -671,7 +672,7 @@ func NewTerraformAwsIamRole_Override(t TerraformAwsIamRole, scope constructs.Con
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetAdditionalTagMap(val *map[string]*string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetAdditionalTagMap(val *map[string]*string) {
 	_jsii_.Set(
 		j,
 		"additionalTagMap",
@@ -679,7 +680,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetAdditionalTagMap(val *map[string]*str
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetAssumeRoleActions(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetAssumeRoleActions(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"assumeRoleActions",
@@ -687,7 +688,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetAssumeRoleActions(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetAssumeRoleConditions(val interface{}) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetAssumeRoleConditions(val interface{}) {
 	if err := j.validateSetAssumeRoleConditionsParameters(val); err != nil {
 		panic(err)
 	}
@@ -698,7 +699,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetAssumeRoleConditions(val interface{})
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetAttributes(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetAttributes(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"attributes",
@@ -706,7 +707,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetAttributes(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetContext(val interface{}) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetContext(val interface{}) {
 	if err := j.validateSetContextParameters(val); err != nil {
 		panic(err)
 	}
@@ -717,7 +718,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetContext(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetDelimiter(val *string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetDelimiter(val *string) {
 	_jsii_.Set(
 		j,
 		"delimiter",
@@ -725,7 +726,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetDelimiter(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetDependsOn(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetDependsOn(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"dependsOn",
@@ -733,7 +734,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetDependsOn(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetDescriptorFormats(val interface{}) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetDescriptorFormats(val interface{}) {
 	if err := j.validateSetDescriptorFormatsParameters(val); err != nil {
 		panic(err)
 	}
@@ -744,7 +745,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetDescriptorFormats(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"enabled",
@@ -752,7 +753,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetEnabled(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetEnvironment(val *string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetEnvironment(val *string) {
 	_jsii_.Set(
 		j,
 		"environment",
@@ -760,7 +761,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetEnvironment(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetForEach(val cdktf.ITerraformIterator) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetForEach(val cdktf.ITerraformIterator) {
 	_jsii_.Set(
 		j,
 		"forEach",
@@ -768,7 +769,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetForEach(val cdktf.ITerraformIterator)
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetIdLengthLimit(val *float64) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetIdLengthLimit(val *float64) {
 	_jsii_.Set(
 		j,
 		"idLengthLimit",
@@ -776,7 +777,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetIdLengthLimit(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetInstanceProfileEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetInstanceProfileEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"instanceProfileEnabled",
@@ -784,7 +785,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetInstanceProfileEnabled(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetLabelKeyCase(val *string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetLabelKeyCase(val *string) {
 	_jsii_.Set(
 		j,
 		"labelKeyCase",
@@ -792,7 +793,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetLabelKeyCase(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetLabelOrder(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetLabelOrder(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"labelOrder",
@@ -800,7 +801,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetLabelOrder(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetLabelsAsTags(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetLabelsAsTags(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"labelsAsTags",
@@ -808,7 +809,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetLabelsAsTags(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetLabelValueCase(val *string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetLabelValueCase(val *string) {
 	_jsii_.Set(
 		j,
 		"labelValueCase",
@@ -816,7 +817,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetLabelValueCase(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetManagedPolicyArns(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetManagedPolicyArns(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"managedPolicyArns",
@@ -824,7 +825,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetManagedPolicyArns(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetMaxSessionDuration(val *float64) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetMaxSessionDuration(val *float64) {
 	_jsii_.Set(
 		j,
 		"maxSessionDuration",
@@ -832,7 +833,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetMaxSessionDuration(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetName(val *string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetName(val *string) {
 	_jsii_.Set(
 		j,
 		"name",
@@ -840,7 +841,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetName(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetNamespace(val *string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetNamespace(val *string) {
 	_jsii_.Set(
 		j,
 		"namespace",
@@ -848,7 +849,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetNamespace(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetPath(val *string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetPath(val *string) {
 	_jsii_.Set(
 		j,
 		"path",
@@ -856,7 +857,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetPath(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetPermissionsBoundary(val *string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetPermissionsBoundary(val *string) {
 	_jsii_.Set(
 		j,
 		"permissionsBoundary",
@@ -864,7 +865,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetPermissionsBoundary(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetPolicyDescription(val *string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetPolicyDescription(val *string) {
 	_jsii_.Set(
 		j,
 		"policyDescription",
@@ -872,7 +873,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetPolicyDescription(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetPolicyDocumentCount(val *float64) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetPolicyDocumentCount(val *float64) {
 	_jsii_.Set(
 		j,
 		"policyDocumentCount",
@@ -880,7 +881,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetPolicyDocumentCount(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetPolicyDocuments(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetPolicyDocuments(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"policyDocuments",
@@ -888,7 +889,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetPolicyDocuments(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetPolicyName(val *string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetPolicyName(val *string) {
 	_jsii_.Set(
 		j,
 		"policyName",
@@ -896,7 +897,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetPolicyName(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetPrincipals(val *map[string]*[]*string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetPrincipals(val *map[string]*[]*string) {
 	_jsii_.Set(
 		j,
 		"principals",
@@ -904,7 +905,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetPrincipals(val *map[string]*[]*string
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetRegexReplaceChars(val *string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetRegexReplaceChars(val *string) {
 	_jsii_.Set(
 		j,
 		"regexReplaceChars",
@@ -912,7 +913,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetRegexReplaceChars(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetRoleDescription(val *string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetRoleDescription(val *string) {
 	if err := j.validateSetRoleDescriptionParameters(val); err != nil {
 		panic(err)
 	}
@@ -923,7 +924,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetRoleDescription(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetStage(val *string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetStage(val *string) {
 	_jsii_.Set(
 		j,
 		"stage",
@@ -931,7 +932,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetStage(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetTags(val *map[string]*string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetTags(val *map[string]*string) {
 	_jsii_.Set(
 		j,
 		"tags",
@@ -939,7 +940,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetTags(val *map[string]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetTagsEnabled(val *string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetTagsEnabled(val *string) {
 	_jsii_.Set(
 		j,
 		"tagsEnabled",
@@ -947,7 +948,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetTagsEnabled(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetTenant(val *string) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetTenant(val *string) {
 	_jsii_.Set(
 		j,
 		"tenant",
@@ -955,7 +956,7 @@ func (j *jsiiProxy_TerraformAwsIamRole) SetTenant(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsIamRole) SetUseFullname(val *bool) {
+func (j *jsiiProxy_TerraformAwsIamRole)SetUseFullname(val *bool) {
 	_jsii_.Set(
 		j,
 		"useFullname",
@@ -1167,3 +1168,4 @@ func (t *jsiiProxy_TerraformAwsIamRole) ToTerraform() interface{} {
 
 	return returns
 }
+

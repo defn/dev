@@ -1,5 +1,6 @@
 package app
 
+
 type AppHealthcheck struct {
 	// Duration in seconds to wait between healthcheck requests.
 	//
@@ -16,3 +17,4 @@ type AppHealthcheck struct {
 	// Docs at Terraform Registry: {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/app#url App#url}
 	Url *string `field:"required" json:"url" yaml:"url"`
 }
+

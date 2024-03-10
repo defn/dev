@@ -69,3 +69,4 @@ type ScriptConfig struct {
 	// Docs at Terraform Registry: {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/script#timeout Script#timeout}
 	Timeout *float64 `field:"optional" json:"timeout" yaml:"timeout"`
 }
+

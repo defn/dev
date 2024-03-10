@@ -546,6 +546,7 @@ func (j *jsiiProxy_DataCoderParameter) Value() *string {
 	return returns
 }
 
+
 // Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/parameter coder_parameter} Data Source.
 func NewDataCoderParameter(scope constructs.Construct, id *string, config *DataCoderParameterConfig) DataCoderParameter {
 	_init_.Initialize()
@@ -575,7 +576,7 @@ func NewDataCoderParameter_Override(d DataCoderParameter, scope constructs.Const
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameter) SetCount(val interface{}) {
+func (j *jsiiProxy_DataCoderParameter)SetCount(val interface{}) {
 	if err := j.validateSetCountParameters(val); err != nil {
 		panic(err)
 	}
@@ -586,7 +587,7 @@ func (j *jsiiProxy_DataCoderParameter) SetCount(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameter) SetDefault(val *string) {
+func (j *jsiiProxy_DataCoderParameter)SetDefault(val *string) {
 	if err := j.validateSetDefaultParameters(val); err != nil {
 		panic(err)
 	}
@@ -597,7 +598,7 @@ func (j *jsiiProxy_DataCoderParameter) SetDefault(val *string) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameter) SetDependsOn(val *[]*string) {
+func (j *jsiiProxy_DataCoderParameter)SetDependsOn(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"dependsOn",
@@ -605,7 +606,7 @@ func (j *jsiiProxy_DataCoderParameter) SetDependsOn(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameter) SetDescription(val *string) {
+func (j *jsiiProxy_DataCoderParameter)SetDescription(val *string) {
 	if err := j.validateSetDescriptionParameters(val); err != nil {
 		panic(err)
 	}
@@ -616,7 +617,7 @@ func (j *jsiiProxy_DataCoderParameter) SetDescription(val *string) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameter) SetDisplayName(val *string) {
+func (j *jsiiProxy_DataCoderParameter)SetDisplayName(val *string) {
 	if err := j.validateSetDisplayNameParameters(val); err != nil {
 		panic(err)
 	}
@@ -627,7 +628,7 @@ func (j *jsiiProxy_DataCoderParameter) SetDisplayName(val *string) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameter) SetEphemeral(val interface{}) {
+func (j *jsiiProxy_DataCoderParameter)SetEphemeral(val interface{}) {
 	if err := j.validateSetEphemeralParameters(val); err != nil {
 		panic(err)
 	}
@@ -638,7 +639,7 @@ func (j *jsiiProxy_DataCoderParameter) SetEphemeral(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameter) SetForEach(val cdktf.ITerraformIterator) {
+func (j *jsiiProxy_DataCoderParameter)SetForEach(val cdktf.ITerraformIterator) {
 	_jsii_.Set(
 		j,
 		"forEach",
@@ -646,7 +647,7 @@ func (j *jsiiProxy_DataCoderParameter) SetForEach(val cdktf.ITerraformIterator) 
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameter) SetIcon(val *string) {
+func (j *jsiiProxy_DataCoderParameter)SetIcon(val *string) {
 	if err := j.validateSetIconParameters(val); err != nil {
 		panic(err)
 	}
@@ -657,7 +658,7 @@ func (j *jsiiProxy_DataCoderParameter) SetIcon(val *string) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameter) SetId(val *string) {
+func (j *jsiiProxy_DataCoderParameter)SetId(val *string) {
 	if err := j.validateSetIdParameters(val); err != nil {
 		panic(err)
 	}
@@ -668,7 +669,7 @@ func (j *jsiiProxy_DataCoderParameter) SetId(val *string) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameter) SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
+func (j *jsiiProxy_DataCoderParameter)SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
 	if err := j.validateSetLifecycleParameters(val); err != nil {
 		panic(err)
 	}
@@ -679,7 +680,7 @@ func (j *jsiiProxy_DataCoderParameter) SetLifecycle(val *cdktf.TerraformResource
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameter) SetMutable(val interface{}) {
+func (j *jsiiProxy_DataCoderParameter)SetMutable(val interface{}) {
 	if err := j.validateSetMutableParameters(val); err != nil {
 		panic(err)
 	}
@@ -690,7 +691,7 @@ func (j *jsiiProxy_DataCoderParameter) SetMutable(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameter) SetName(val *string) {
+func (j *jsiiProxy_DataCoderParameter)SetName(val *string) {
 	if err := j.validateSetNameParameters(val); err != nil {
 		panic(err)
 	}
@@ -701,7 +702,7 @@ func (j *jsiiProxy_DataCoderParameter) SetName(val *string) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameter) SetOrder(val *float64) {
+func (j *jsiiProxy_DataCoderParameter)SetOrder(val *float64) {
 	if err := j.validateSetOrderParameters(val); err != nil {
 		panic(err)
 	}
@@ -712,7 +713,7 @@ func (j *jsiiProxy_DataCoderParameter) SetOrder(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameter) SetProvider(val cdktf.TerraformProvider) {
+func (j *jsiiProxy_DataCoderParameter)SetProvider(val cdktf.TerraformProvider) {
 	_jsii_.Set(
 		j,
 		"provider",
@@ -720,7 +721,7 @@ func (j *jsiiProxy_DataCoderParameter) SetProvider(val cdktf.TerraformProvider) 
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameter) SetType(val *string) {
+func (j *jsiiProxy_DataCoderParameter)SetType(val *string) {
 	if err := j.validateSetTypeParameters(val); err != nil {
 		panic(err)
 	}
@@ -1211,3 +1212,4 @@ func (d *jsiiProxy_DataCoderParameter) ToTerraform() interface{} {
 
 	return returns
 }
+

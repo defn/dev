@@ -1,5 +1,6 @@
 package provider
 
+
 type CoderProviderConfig struct {
 	// Alias name.
 	//
@@ -16,3 +17,4 @@ type CoderProviderConfig struct {
 	// Docs at Terraform Registry: {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs#url CoderProvider#url}
 	Url *string `field:"optional" json:"url" yaml:"url"`
 }
+

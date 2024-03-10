@@ -1,5 +1,6 @@
 package metadata
 
+
 type MetadataItem struct {
 	// The key of this metadata item.
 	//
@@ -16,3 +17,4 @@ type MetadataItem struct {
 	// Docs at Terraform Registry: {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/metadata#value Metadata#value}
 	Value *string `field:"optional" json:"value" yaml:"value"`
 }
+

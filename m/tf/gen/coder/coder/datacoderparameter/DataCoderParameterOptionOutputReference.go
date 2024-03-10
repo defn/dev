@@ -240,6 +240,7 @@ func (j *jsiiProxy_DataCoderParameterOptionOutputReference) ValueInput() *string
 	return returns
 }
 
+
 func NewDataCoderParameterOptionOutputReference(terraformResource cdktf.IInterpolatingParent, terraformAttribute *string, complexObjectIndex *float64, complexObjectIsFromSet *bool) DataCoderParameterOptionOutputReference {
 	_init_.Initialize()
 
@@ -267,7 +268,7 @@ func NewDataCoderParameterOptionOutputReference_Override(d DataCoderParameterOpt
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterOptionOutputReference) SetComplexObjectIndex(val interface{}) {
+func (j *jsiiProxy_DataCoderParameterOptionOutputReference)SetComplexObjectIndex(val interface{}) {
 	if err := j.validateSetComplexObjectIndexParameters(val); err != nil {
 		panic(err)
 	}
@@ -278,7 +279,7 @@ func (j *jsiiProxy_DataCoderParameterOptionOutputReference) SetComplexObjectInde
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterOptionOutputReference) SetComplexObjectIsFromSet(val *bool) {
+func (j *jsiiProxy_DataCoderParameterOptionOutputReference)SetComplexObjectIsFromSet(val *bool) {
 	if err := j.validateSetComplexObjectIsFromSetParameters(val); err != nil {
 		panic(err)
 	}
@@ -289,7 +290,7 @@ func (j *jsiiProxy_DataCoderParameterOptionOutputReference) SetComplexObjectIsFr
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterOptionOutputReference) SetDescription(val *string) {
+func (j *jsiiProxy_DataCoderParameterOptionOutputReference)SetDescription(val *string) {
 	if err := j.validateSetDescriptionParameters(val); err != nil {
 		panic(err)
 	}
@@ -300,7 +301,7 @@ func (j *jsiiProxy_DataCoderParameterOptionOutputReference) SetDescription(val *
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterOptionOutputReference) SetIcon(val *string) {
+func (j *jsiiProxy_DataCoderParameterOptionOutputReference)SetIcon(val *string) {
 	if err := j.validateSetIconParameters(val); err != nil {
 		panic(err)
 	}
@@ -311,7 +312,7 @@ func (j *jsiiProxy_DataCoderParameterOptionOutputReference) SetIcon(val *string)
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterOptionOutputReference) SetInternalValue(val interface{}) {
+func (j *jsiiProxy_DataCoderParameterOptionOutputReference)SetInternalValue(val interface{}) {
 	if err := j.validateSetInternalValueParameters(val); err != nil {
 		panic(err)
 	}
@@ -322,7 +323,7 @@ func (j *jsiiProxy_DataCoderParameterOptionOutputReference) SetInternalValue(val
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterOptionOutputReference) SetName(val *string) {
+func (j *jsiiProxy_DataCoderParameterOptionOutputReference)SetName(val *string) {
 	if err := j.validateSetNameParameters(val); err != nil {
 		panic(err)
 	}
@@ -333,7 +334,7 @@ func (j *jsiiProxy_DataCoderParameterOptionOutputReference) SetName(val *string)
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterOptionOutputReference) SetTerraformAttribute(val *string) {
+func (j *jsiiProxy_DataCoderParameterOptionOutputReference)SetTerraformAttribute(val *string) {
 	if err := j.validateSetTerraformAttributeParameters(val); err != nil {
 		panic(err)
 	}
@@ -344,7 +345,7 @@ func (j *jsiiProxy_DataCoderParameterOptionOutputReference) SetTerraformAttribut
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterOptionOutputReference) SetTerraformResource(val cdktf.IInterpolatingParent) {
+func (j *jsiiProxy_DataCoderParameterOptionOutputReference)SetTerraformResource(val cdktf.IInterpolatingParent) {
 	if err := j.validateSetTerraformResourceParameters(val); err != nil {
 		panic(err)
 	}
@@ -355,7 +356,7 @@ func (j *jsiiProxy_DataCoderParameterOptionOutputReference) SetTerraformResource
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterOptionOutputReference) SetValue(val *string) {
+func (j *jsiiProxy_DataCoderParameterOptionOutputReference)SetValue(val *string) {
 	if err := j.validateSetValueParameters(val); err != nil {
 		panic(err)
 	}
@@ -596,3 +597,4 @@ func (d *jsiiProxy_DataCoderParameterOptionOutputReference) ToString() *string {
 
 	return returns
 }
+

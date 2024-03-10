@@ -402,6 +402,7 @@ func (j *jsiiProxy_DataCoderWorkspace) Transition() *string {
 	return returns
 }
 
+
 // Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/workspace coder_workspace} Data Source.
 func NewDataCoderWorkspace(scope constructs.Construct, id *string, config *DataCoderWorkspaceConfig) DataCoderWorkspace {
 	_init_.Initialize()
@@ -431,7 +432,7 @@ func NewDataCoderWorkspace_Override(d DataCoderWorkspace, scope constructs.Const
 	)
 }
 
-func (j *jsiiProxy_DataCoderWorkspace) SetCount(val interface{}) {
+func (j *jsiiProxy_DataCoderWorkspace)SetCount(val interface{}) {
 	if err := j.validateSetCountParameters(val); err != nil {
 		panic(err)
 	}
@@ -442,7 +443,7 @@ func (j *jsiiProxy_DataCoderWorkspace) SetCount(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderWorkspace) SetDependsOn(val *[]*string) {
+func (j *jsiiProxy_DataCoderWorkspace)SetDependsOn(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"dependsOn",
@@ -450,7 +451,7 @@ func (j *jsiiProxy_DataCoderWorkspace) SetDependsOn(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderWorkspace) SetForEach(val cdktf.ITerraformIterator) {
+func (j *jsiiProxy_DataCoderWorkspace)SetForEach(val cdktf.ITerraformIterator) {
 	_jsii_.Set(
 		j,
 		"forEach",
@@ -458,7 +459,7 @@ func (j *jsiiProxy_DataCoderWorkspace) SetForEach(val cdktf.ITerraformIterator) 
 	)
 }
 
-func (j *jsiiProxy_DataCoderWorkspace) SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
+func (j *jsiiProxy_DataCoderWorkspace)SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
 	if err := j.validateSetLifecycleParameters(val); err != nil {
 		panic(err)
 	}
@@ -469,7 +470,7 @@ func (j *jsiiProxy_DataCoderWorkspace) SetLifecycle(val *cdktf.TerraformResource
 	)
 }
 
-func (j *jsiiProxy_DataCoderWorkspace) SetProvider(val cdktf.TerraformProvider) {
+func (j *jsiiProxy_DataCoderWorkspace)SetProvider(val cdktf.TerraformProvider) {
 	_jsii_.Set(
 		j,
 		"provider",
@@ -847,3 +848,4 @@ func (d *jsiiProxy_DataCoderWorkspace) ToTerraform() interface{} {
 
 	return returns
 }
+

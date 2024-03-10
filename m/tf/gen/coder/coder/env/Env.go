@@ -376,6 +376,7 @@ func (j *jsiiProxy_Env) ValueInput() *string {
 	return returns
 }
 
+
 // Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/env coder_env} Resource.
 func NewEnv(scope constructs.Construct, id *string, config *EnvConfig) Env {
 	_init_.Initialize()
@@ -405,7 +406,7 @@ func NewEnv_Override(e Env, scope constructs.Construct, id *string, config *EnvC
 	)
 }
 
-func (j *jsiiProxy_Env) SetAgentId(val *string) {
+func (j *jsiiProxy_Env)SetAgentId(val *string) {
 	if err := j.validateSetAgentIdParameters(val); err != nil {
 		panic(err)
 	}
@@ -416,7 +417,7 @@ func (j *jsiiProxy_Env) SetAgentId(val *string) {
 	)
 }
 
-func (j *jsiiProxy_Env) SetConnection(val interface{}) {
+func (j *jsiiProxy_Env)SetConnection(val interface{}) {
 	if err := j.validateSetConnectionParameters(val); err != nil {
 		panic(err)
 	}
@@ -427,7 +428,7 @@ func (j *jsiiProxy_Env) SetConnection(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_Env) SetCount(val interface{}) {
+func (j *jsiiProxy_Env)SetCount(val interface{}) {
 	if err := j.validateSetCountParameters(val); err != nil {
 		panic(err)
 	}
@@ -438,7 +439,7 @@ func (j *jsiiProxy_Env) SetCount(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_Env) SetDependsOn(val *[]*string) {
+func (j *jsiiProxy_Env)SetDependsOn(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"dependsOn",
@@ -446,7 +447,7 @@ func (j *jsiiProxy_Env) SetDependsOn(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_Env) SetForEach(val cdktf.ITerraformIterator) {
+func (j *jsiiProxy_Env)SetForEach(val cdktf.ITerraformIterator) {
 	_jsii_.Set(
 		j,
 		"forEach",
@@ -454,7 +455,7 @@ func (j *jsiiProxy_Env) SetForEach(val cdktf.ITerraformIterator) {
 	)
 }
 
-func (j *jsiiProxy_Env) SetId(val *string) {
+func (j *jsiiProxy_Env)SetId(val *string) {
 	if err := j.validateSetIdParameters(val); err != nil {
 		panic(err)
 	}
@@ -465,7 +466,7 @@ func (j *jsiiProxy_Env) SetId(val *string) {
 	)
 }
 
-func (j *jsiiProxy_Env) SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
+func (j *jsiiProxy_Env)SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
 	if err := j.validateSetLifecycleParameters(val); err != nil {
 		panic(err)
 	}
@@ -476,7 +477,7 @@ func (j *jsiiProxy_Env) SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
 	)
 }
 
-func (j *jsiiProxy_Env) SetName(val *string) {
+func (j *jsiiProxy_Env)SetName(val *string) {
 	if err := j.validateSetNameParameters(val); err != nil {
 		panic(err)
 	}
@@ -487,7 +488,7 @@ func (j *jsiiProxy_Env) SetName(val *string) {
 	)
 }
 
-func (j *jsiiProxy_Env) SetProvider(val cdktf.TerraformProvider) {
+func (j *jsiiProxy_Env)SetProvider(val cdktf.TerraformProvider) {
 	_jsii_.Set(
 		j,
 		"provider",
@@ -495,7 +496,7 @@ func (j *jsiiProxy_Env) SetProvider(val cdktf.TerraformProvider) {
 	)
 }
 
-func (j *jsiiProxy_Env) SetProvisioners(val *[]interface{}) {
+func (j *jsiiProxy_Env)SetProvisioners(val *[]interface{}) {
 	if err := j.validateSetProvisionersParameters(val); err != nil {
 		panic(err)
 	}
@@ -506,7 +507,7 @@ func (j *jsiiProxy_Env) SetProvisioners(val *[]interface{}) {
 	)
 }
 
-func (j *jsiiProxy_Env) SetValue(val *string) {
+func (j *jsiiProxy_Env)SetValue(val *string) {
 	if err := j.validateSetValueParameters(val); err != nil {
 		panic(err)
 	}
@@ -971,3 +972,4 @@ func (e *jsiiProxy_Env) ToTerraform() interface{} {
 
 	return returns
 }
+

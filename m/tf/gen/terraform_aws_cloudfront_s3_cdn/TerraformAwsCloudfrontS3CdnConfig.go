@@ -402,3 +402,4 @@ type TerraformAwsCloudfrontS3CdnConfig struct {
 	// See the README for details and caveats. See also `s3_website_password_enabled`.
 	WebsiteEnabled *bool `field:"optional" json:"websiteEnabled" yaml:"websiteEnabled"`
 }
+

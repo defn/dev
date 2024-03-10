@@ -175,3 +175,4 @@ func (j *jsiiProxy_Agent) validateSetTroubleshootingUrlParameters(val *string) e
 func validateNewAgentParameters(scope constructs.Construct, id *string, config *AgentConfig) error {
 	return nil
 }
+

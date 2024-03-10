@@ -266,6 +266,7 @@ func (j *jsiiProxy_AgentDisplayAppsOutputReference) WebTerminalInput() interface
 	return returns
 }
 
+
 func NewAgentDisplayAppsOutputReference(terraformResource cdktf.IInterpolatingParent, terraformAttribute *string) AgentDisplayAppsOutputReference {
 	_init_.Initialize()
 
@@ -293,7 +294,7 @@ func NewAgentDisplayAppsOutputReference_Override(a AgentDisplayAppsOutputReferen
 	)
 }
 
-func (j *jsiiProxy_AgentDisplayAppsOutputReference) SetComplexObjectIndex(val interface{}) {
+func (j *jsiiProxy_AgentDisplayAppsOutputReference)SetComplexObjectIndex(val interface{}) {
 	if err := j.validateSetComplexObjectIndexParameters(val); err != nil {
 		panic(err)
 	}
@@ -304,7 +305,7 @@ func (j *jsiiProxy_AgentDisplayAppsOutputReference) SetComplexObjectIndex(val in
 	)
 }
 
-func (j *jsiiProxy_AgentDisplayAppsOutputReference) SetComplexObjectIsFromSet(val *bool) {
+func (j *jsiiProxy_AgentDisplayAppsOutputReference)SetComplexObjectIsFromSet(val *bool) {
 	if err := j.validateSetComplexObjectIsFromSetParameters(val); err != nil {
 		panic(err)
 	}
@@ -315,7 +316,7 @@ func (j *jsiiProxy_AgentDisplayAppsOutputReference) SetComplexObjectIsFromSet(va
 	)
 }
 
-func (j *jsiiProxy_AgentDisplayAppsOutputReference) SetInternalValue(val *AgentDisplayApps) {
+func (j *jsiiProxy_AgentDisplayAppsOutputReference)SetInternalValue(val *AgentDisplayApps) {
 	if err := j.validateSetInternalValueParameters(val); err != nil {
 		panic(err)
 	}
@@ -326,7 +327,7 @@ func (j *jsiiProxy_AgentDisplayAppsOutputReference) SetInternalValue(val *AgentD
 	)
 }
 
-func (j *jsiiProxy_AgentDisplayAppsOutputReference) SetPortForwardingHelper(val interface{}) {
+func (j *jsiiProxy_AgentDisplayAppsOutputReference)SetPortForwardingHelper(val interface{}) {
 	if err := j.validateSetPortForwardingHelperParameters(val); err != nil {
 		panic(err)
 	}
@@ -337,7 +338,7 @@ func (j *jsiiProxy_AgentDisplayAppsOutputReference) SetPortForwardingHelper(val 
 	)
 }
 
-func (j *jsiiProxy_AgentDisplayAppsOutputReference) SetSshHelper(val interface{}) {
+func (j *jsiiProxy_AgentDisplayAppsOutputReference)SetSshHelper(val interface{}) {
 	if err := j.validateSetSshHelperParameters(val); err != nil {
 		panic(err)
 	}
@@ -348,7 +349,7 @@ func (j *jsiiProxy_AgentDisplayAppsOutputReference) SetSshHelper(val interface{}
 	)
 }
 
-func (j *jsiiProxy_AgentDisplayAppsOutputReference) SetTerraformAttribute(val *string) {
+func (j *jsiiProxy_AgentDisplayAppsOutputReference)SetTerraformAttribute(val *string) {
 	if err := j.validateSetTerraformAttributeParameters(val); err != nil {
 		panic(err)
 	}
@@ -359,7 +360,7 @@ func (j *jsiiProxy_AgentDisplayAppsOutputReference) SetTerraformAttribute(val *s
 	)
 }
 
-func (j *jsiiProxy_AgentDisplayAppsOutputReference) SetTerraformResource(val cdktf.IInterpolatingParent) {
+func (j *jsiiProxy_AgentDisplayAppsOutputReference)SetTerraformResource(val cdktf.IInterpolatingParent) {
 	if err := j.validateSetTerraformResourceParameters(val); err != nil {
 		panic(err)
 	}
@@ -370,7 +371,7 @@ func (j *jsiiProxy_AgentDisplayAppsOutputReference) SetTerraformResource(val cdk
 	)
 }
 
-func (j *jsiiProxy_AgentDisplayAppsOutputReference) SetVscode(val interface{}) {
+func (j *jsiiProxy_AgentDisplayAppsOutputReference)SetVscode(val interface{}) {
 	if err := j.validateSetVscodeParameters(val); err != nil {
 		panic(err)
 	}
@@ -381,7 +382,7 @@ func (j *jsiiProxy_AgentDisplayAppsOutputReference) SetVscode(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_AgentDisplayAppsOutputReference) SetVscodeInsiders(val interface{}) {
+func (j *jsiiProxy_AgentDisplayAppsOutputReference)SetVscodeInsiders(val interface{}) {
 	if err := j.validateSetVscodeInsidersParameters(val); err != nil {
 		panic(err)
 	}
@@ -392,7 +393,7 @@ func (j *jsiiProxy_AgentDisplayAppsOutputReference) SetVscodeInsiders(val interf
 	)
 }
 
-func (j *jsiiProxy_AgentDisplayAppsOutputReference) SetWebTerminal(val interface{}) {
+func (j *jsiiProxy_AgentDisplayAppsOutputReference)SetWebTerminal(val interface{}) {
 	if err := j.validateSetWebTerminalParameters(val); err != nil {
 		panic(err)
 	}
@@ -657,3 +658,4 @@ func (a *jsiiProxy_AgentDisplayAppsOutputReference) ToString() *string {
 
 	return returns
 }
+

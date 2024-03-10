@@ -37,3 +37,4 @@ type EnvConfig struct {
 	// Docs at Terraform Registry: {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/env#value Env#value}
 	Value *string `field:"optional" json:"value" yaml:"value"`
 }
+

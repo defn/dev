@@ -1,4 +1,4 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
 go_library(
     name = "tf_lib",
@@ -7,14 +7,11 @@ go_library(
         "stack-aws-organization.go",
         "stack-coder-defn-ec2.go",
         "stack-global.go",
-        "tf.go",
     ],
-    embedsrcs = ["tf.cue"],
     importpath = "github.com/defn/dev/m/tf",
     visibility = ["//visibility:public"],
     deps = [
         "//command/infra",
-        "//command/root",
         "//tf/gen/coder/coder/agent",
         "//tf/gen/coder/coder/app",
         "//tf/gen/coder/coder/datacoderparameter",
@@ -26,7 +23,6 @@ go_library(
         "//tf/gen/terraform_aws_defn_account",
         "//tf/gen/terraform_aws_s3_bucket",
         "@com_github_aws_constructs_go_constructs_v10//:constructs",
-        "@com_github_bitfield_script//:script",
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//dataawsami",
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//dataawsssoadmininstances",
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//defaultvpc",
@@ -46,14 +42,7 @@ go_library(
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//ssoadminmanagedpolicyattachment",
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//ssoadminpermissionset",
         "@com_github_hashicorp_terraform_cdk_go_cdktf//:cdktf",
-        "@com_github_spf13_cobra//:cobra",
     ],
-)
-
-go_binary(
-    name = "tf",
-    embed = [":tf_lib"],
-    visibility = ["//visibility:public"],
 )
 
 filegroup(

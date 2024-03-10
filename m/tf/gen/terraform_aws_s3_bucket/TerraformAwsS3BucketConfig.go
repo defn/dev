@@ -263,3 +263,4 @@ type TerraformAwsS3BucketConfig struct {
 	// If provided, all website requests will be redirected to the specified host name and protocol.
 	WebsiteRedirectAllRequestsTo interface{} `field:"optional" json:"websiteRedirectAllRequestsTo" yaml:"websiteRedirectAllRequestsTo"`
 }
+

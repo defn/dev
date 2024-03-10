@@ -592,6 +592,7 @@ func (j *jsiiProxy_App) UrlInput() *string {
 	return returns
 }
 
+
 // Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/app coder_app} Resource.
 func NewApp(scope constructs.Construct, id *string, config *AppConfig) App {
 	_init_.Initialize()
@@ -621,7 +622,7 @@ func NewApp_Override(a App, scope constructs.Construct, id *string, config *AppC
 	)
 }
 
-func (j *jsiiProxy_App) SetAgentId(val *string) {
+func (j *jsiiProxy_App)SetAgentId(val *string) {
 	if err := j.validateSetAgentIdParameters(val); err != nil {
 		panic(err)
 	}
@@ -632,7 +633,7 @@ func (j *jsiiProxy_App) SetAgentId(val *string) {
 	)
 }
 
-func (j *jsiiProxy_App) SetCommand(val *string) {
+func (j *jsiiProxy_App)SetCommand(val *string) {
 	if err := j.validateSetCommandParameters(val); err != nil {
 		panic(err)
 	}
@@ -643,7 +644,7 @@ func (j *jsiiProxy_App) SetCommand(val *string) {
 	)
 }
 
-func (j *jsiiProxy_App) SetConnection(val interface{}) {
+func (j *jsiiProxy_App)SetConnection(val interface{}) {
 	if err := j.validateSetConnectionParameters(val); err != nil {
 		panic(err)
 	}
@@ -654,7 +655,7 @@ func (j *jsiiProxy_App) SetConnection(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_App) SetCount(val interface{}) {
+func (j *jsiiProxy_App)SetCount(val interface{}) {
 	if err := j.validateSetCountParameters(val); err != nil {
 		panic(err)
 	}
@@ -665,7 +666,7 @@ func (j *jsiiProxy_App) SetCount(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_App) SetDependsOn(val *[]*string) {
+func (j *jsiiProxy_App)SetDependsOn(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"dependsOn",
@@ -673,7 +674,7 @@ func (j *jsiiProxy_App) SetDependsOn(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_App) SetDisplayName(val *string) {
+func (j *jsiiProxy_App)SetDisplayName(val *string) {
 	if err := j.validateSetDisplayNameParameters(val); err != nil {
 		panic(err)
 	}
@@ -684,7 +685,7 @@ func (j *jsiiProxy_App) SetDisplayName(val *string) {
 	)
 }
 
-func (j *jsiiProxy_App) SetExternal(val interface{}) {
+func (j *jsiiProxy_App)SetExternal(val interface{}) {
 	if err := j.validateSetExternalParameters(val); err != nil {
 		panic(err)
 	}
@@ -695,7 +696,7 @@ func (j *jsiiProxy_App) SetExternal(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_App) SetForEach(val cdktf.ITerraformIterator) {
+func (j *jsiiProxy_App)SetForEach(val cdktf.ITerraformIterator) {
 	_jsii_.Set(
 		j,
 		"forEach",
@@ -703,7 +704,7 @@ func (j *jsiiProxy_App) SetForEach(val cdktf.ITerraformIterator) {
 	)
 }
 
-func (j *jsiiProxy_App) SetIcon(val *string) {
+func (j *jsiiProxy_App)SetIcon(val *string) {
 	if err := j.validateSetIconParameters(val); err != nil {
 		panic(err)
 	}
@@ -714,7 +715,7 @@ func (j *jsiiProxy_App) SetIcon(val *string) {
 	)
 }
 
-func (j *jsiiProxy_App) SetId(val *string) {
+func (j *jsiiProxy_App)SetId(val *string) {
 	if err := j.validateSetIdParameters(val); err != nil {
 		panic(err)
 	}
@@ -725,7 +726,7 @@ func (j *jsiiProxy_App) SetId(val *string) {
 	)
 }
 
-func (j *jsiiProxy_App) SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
+func (j *jsiiProxy_App)SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
 	if err := j.validateSetLifecycleParameters(val); err != nil {
 		panic(err)
 	}
@@ -736,7 +737,7 @@ func (j *jsiiProxy_App) SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
 	)
 }
 
-func (j *jsiiProxy_App) SetName(val *string) {
+func (j *jsiiProxy_App)SetName(val *string) {
 	if err := j.validateSetNameParameters(val); err != nil {
 		panic(err)
 	}
@@ -747,7 +748,7 @@ func (j *jsiiProxy_App) SetName(val *string) {
 	)
 }
 
-func (j *jsiiProxy_App) SetProvider(val cdktf.TerraformProvider) {
+func (j *jsiiProxy_App)SetProvider(val cdktf.TerraformProvider) {
 	_jsii_.Set(
 		j,
 		"provider",
@@ -755,7 +756,7 @@ func (j *jsiiProxy_App) SetProvider(val cdktf.TerraformProvider) {
 	)
 }
 
-func (j *jsiiProxy_App) SetProvisioners(val *[]interface{}) {
+func (j *jsiiProxy_App)SetProvisioners(val *[]interface{}) {
 	if err := j.validateSetProvisionersParameters(val); err != nil {
 		panic(err)
 	}
@@ -766,7 +767,7 @@ func (j *jsiiProxy_App) SetProvisioners(val *[]interface{}) {
 	)
 }
 
-func (j *jsiiProxy_App) SetRelativePath(val interface{}) {
+func (j *jsiiProxy_App)SetRelativePath(val interface{}) {
 	if err := j.validateSetRelativePathParameters(val); err != nil {
 		panic(err)
 	}
@@ -777,7 +778,7 @@ func (j *jsiiProxy_App) SetRelativePath(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_App) SetShare(val *string) {
+func (j *jsiiProxy_App)SetShare(val *string) {
 	if err := j.validateSetShareParameters(val); err != nil {
 		panic(err)
 	}
@@ -788,7 +789,7 @@ func (j *jsiiProxy_App) SetShare(val *string) {
 	)
 }
 
-func (j *jsiiProxy_App) SetSlug(val *string) {
+func (j *jsiiProxy_App)SetSlug(val *string) {
 	if err := j.validateSetSlugParameters(val); err != nil {
 		panic(err)
 	}
@@ -799,7 +800,7 @@ func (j *jsiiProxy_App) SetSlug(val *string) {
 	)
 }
 
-func (j *jsiiProxy_App) SetSubdomain(val interface{}) {
+func (j *jsiiProxy_App)SetSubdomain(val interface{}) {
 	if err := j.validateSetSubdomainParameters(val); err != nil {
 		panic(err)
 	}
@@ -810,7 +811,7 @@ func (j *jsiiProxy_App) SetSubdomain(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_App) SetUrl(val *string) {
+func (j *jsiiProxy_App)SetUrl(val *string) {
 	if err := j.validateSetUrlParameters(val); err != nil {
 		panic(err)
 	}
@@ -1358,3 +1359,4 @@ func (a *jsiiProxy_App) ToTerraform() interface{} {
 
 	return returns
 }
+

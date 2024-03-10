@@ -127,3 +127,4 @@ func (j *jsiiProxy_DataCoderParameter) validateSetTypeParameters(val *string) er
 func validateNewDataCoderParameterParameters(scope constructs.Construct, id *string, config *DataCoderParameterConfig) error {
 	return nil
 }
+

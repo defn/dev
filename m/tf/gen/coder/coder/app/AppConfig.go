@@ -87,3 +87,4 @@ type AppConfig struct {
 	// Docs at Terraform Registry: {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/app#url App#url}
 	Url *string `field:"optional" json:"url" yaml:"url"`
 }
+

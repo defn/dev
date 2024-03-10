@@ -101,3 +101,4 @@ type AgentConfig struct {
 	// Docs at Terraform Registry: {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/agent#troubleshooting_url Agent#troubleshooting_url}
 	TroubleshootingUrl *string `field:"optional" json:"troubleshootingUrl" yaml:"troubleshootingUrl"`
 }
+

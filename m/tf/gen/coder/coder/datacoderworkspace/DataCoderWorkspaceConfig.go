@@ -20,3 +20,4 @@ type DataCoderWorkspaceConfig struct {
 	// Experimental.
 	Provisioners *[]interface{} `field:"optional" json:"provisioners" yaml:"provisioners"`
 }
+

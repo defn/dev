@@ -159,3 +159,4 @@ func (j *jsiiProxy_App) validateSetUrlParameters(val *string) error {
 func validateNewAppParameters(scope constructs.Construct, id *string, config *AppConfig) error {
 	return nil
 }
+

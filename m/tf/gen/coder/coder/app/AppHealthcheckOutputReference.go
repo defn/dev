@@ -215,6 +215,7 @@ func (j *jsiiProxy_AppHealthcheckOutputReference) UrlInput() *string {
 	return returns
 }
 
+
 func NewAppHealthcheckOutputReference(terraformResource cdktf.IInterpolatingParent, terraformAttribute *string) AppHealthcheckOutputReference {
 	_init_.Initialize()
 
@@ -242,7 +243,7 @@ func NewAppHealthcheckOutputReference_Override(a AppHealthcheckOutputReference, 
 	)
 }
 
-func (j *jsiiProxy_AppHealthcheckOutputReference) SetComplexObjectIndex(val interface{}) {
+func (j *jsiiProxy_AppHealthcheckOutputReference)SetComplexObjectIndex(val interface{}) {
 	if err := j.validateSetComplexObjectIndexParameters(val); err != nil {
 		panic(err)
 	}
@@ -253,7 +254,7 @@ func (j *jsiiProxy_AppHealthcheckOutputReference) SetComplexObjectIndex(val inte
 	)
 }
 
-func (j *jsiiProxy_AppHealthcheckOutputReference) SetComplexObjectIsFromSet(val *bool) {
+func (j *jsiiProxy_AppHealthcheckOutputReference)SetComplexObjectIsFromSet(val *bool) {
 	if err := j.validateSetComplexObjectIsFromSetParameters(val); err != nil {
 		panic(err)
 	}
@@ -264,7 +265,7 @@ func (j *jsiiProxy_AppHealthcheckOutputReference) SetComplexObjectIsFromSet(val 
 	)
 }
 
-func (j *jsiiProxy_AppHealthcheckOutputReference) SetInternalValue(val *AppHealthcheck) {
+func (j *jsiiProxy_AppHealthcheckOutputReference)SetInternalValue(val *AppHealthcheck) {
 	if err := j.validateSetInternalValueParameters(val); err != nil {
 		panic(err)
 	}
@@ -275,7 +276,7 @@ func (j *jsiiProxy_AppHealthcheckOutputReference) SetInternalValue(val *AppHealt
 	)
 }
 
-func (j *jsiiProxy_AppHealthcheckOutputReference) SetInterval(val *float64) {
+func (j *jsiiProxy_AppHealthcheckOutputReference)SetInterval(val *float64) {
 	if err := j.validateSetIntervalParameters(val); err != nil {
 		panic(err)
 	}
@@ -286,7 +287,7 @@ func (j *jsiiProxy_AppHealthcheckOutputReference) SetInterval(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_AppHealthcheckOutputReference) SetTerraformAttribute(val *string) {
+func (j *jsiiProxy_AppHealthcheckOutputReference)SetTerraformAttribute(val *string) {
 	if err := j.validateSetTerraformAttributeParameters(val); err != nil {
 		panic(err)
 	}
@@ -297,7 +298,7 @@ func (j *jsiiProxy_AppHealthcheckOutputReference) SetTerraformAttribute(val *str
 	)
 }
 
-func (j *jsiiProxy_AppHealthcheckOutputReference) SetTerraformResource(val cdktf.IInterpolatingParent) {
+func (j *jsiiProxy_AppHealthcheckOutputReference)SetTerraformResource(val cdktf.IInterpolatingParent) {
 	if err := j.validateSetTerraformResourceParameters(val); err != nil {
 		panic(err)
 	}
@@ -308,7 +309,7 @@ func (j *jsiiProxy_AppHealthcheckOutputReference) SetTerraformResource(val cdktf
 	)
 }
 
-func (j *jsiiProxy_AppHealthcheckOutputReference) SetThreshold(val *float64) {
+func (j *jsiiProxy_AppHealthcheckOutputReference)SetThreshold(val *float64) {
 	if err := j.validateSetThresholdParameters(val); err != nil {
 		panic(err)
 	}
@@ -319,7 +320,7 @@ func (j *jsiiProxy_AppHealthcheckOutputReference) SetThreshold(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_AppHealthcheckOutputReference) SetUrl(val *string) {
+func (j *jsiiProxy_AppHealthcheckOutputReference)SetUrl(val *string) {
 	if err := j.validateSetUrlParameters(val); err != nil {
 		panic(err)
 	}
@@ -544,3 +545,4 @@ func (a *jsiiProxy_AppHealthcheckOutputReference) ToString() *string {
 
 	return returns
 }
+

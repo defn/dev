@@ -288,6 +288,7 @@ func (j *jsiiProxy_DataCoderParameterValidationOutputReference) TerraformResourc
 	return returns
 }
 
+
 func NewDataCoderParameterValidationOutputReference(terraformResource cdktf.IInterpolatingParent, terraformAttribute *string) DataCoderParameterValidationOutputReference {
 	_init_.Initialize()
 
@@ -315,7 +316,7 @@ func NewDataCoderParameterValidationOutputReference_Override(d DataCoderParamete
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterValidationOutputReference) SetComplexObjectIndex(val interface{}) {
+func (j *jsiiProxy_DataCoderParameterValidationOutputReference)SetComplexObjectIndex(val interface{}) {
 	if err := j.validateSetComplexObjectIndexParameters(val); err != nil {
 		panic(err)
 	}
@@ -326,7 +327,7 @@ func (j *jsiiProxy_DataCoderParameterValidationOutputReference) SetComplexObject
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterValidationOutputReference) SetComplexObjectIsFromSet(val *bool) {
+func (j *jsiiProxy_DataCoderParameterValidationOutputReference)SetComplexObjectIsFromSet(val *bool) {
 	if err := j.validateSetComplexObjectIsFromSetParameters(val); err != nil {
 		panic(err)
 	}
@@ -337,7 +338,7 @@ func (j *jsiiProxy_DataCoderParameterValidationOutputReference) SetComplexObject
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterValidationOutputReference) SetError(val *string) {
+func (j *jsiiProxy_DataCoderParameterValidationOutputReference)SetError(val *string) {
 	if err := j.validateSetErrorParameters(val); err != nil {
 		panic(err)
 	}
@@ -348,7 +349,7 @@ func (j *jsiiProxy_DataCoderParameterValidationOutputReference) SetError(val *st
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterValidationOutputReference) SetInternalValue(val *DataCoderParameterValidation) {
+func (j *jsiiProxy_DataCoderParameterValidationOutputReference)SetInternalValue(val *DataCoderParameterValidation) {
 	if err := j.validateSetInternalValueParameters(val); err != nil {
 		panic(err)
 	}
@@ -359,7 +360,7 @@ func (j *jsiiProxy_DataCoderParameterValidationOutputReference) SetInternalValue
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterValidationOutputReference) SetMax(val *float64) {
+func (j *jsiiProxy_DataCoderParameterValidationOutputReference)SetMax(val *float64) {
 	if err := j.validateSetMaxParameters(val); err != nil {
 		panic(err)
 	}
@@ -370,7 +371,7 @@ func (j *jsiiProxy_DataCoderParameterValidationOutputReference) SetMax(val *floa
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterValidationOutputReference) SetMin(val *float64) {
+func (j *jsiiProxy_DataCoderParameterValidationOutputReference)SetMin(val *float64) {
 	if err := j.validateSetMinParameters(val); err != nil {
 		panic(err)
 	}
@@ -381,7 +382,7 @@ func (j *jsiiProxy_DataCoderParameterValidationOutputReference) SetMin(val *floa
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterValidationOutputReference) SetMonotonic(val *string) {
+func (j *jsiiProxy_DataCoderParameterValidationOutputReference)SetMonotonic(val *string) {
 	if err := j.validateSetMonotonicParameters(val); err != nil {
 		panic(err)
 	}
@@ -392,7 +393,7 @@ func (j *jsiiProxy_DataCoderParameterValidationOutputReference) SetMonotonic(val
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterValidationOutputReference) SetRegex(val *string) {
+func (j *jsiiProxy_DataCoderParameterValidationOutputReference)SetRegex(val *string) {
 	if err := j.validateSetRegexParameters(val); err != nil {
 		panic(err)
 	}
@@ -403,7 +404,7 @@ func (j *jsiiProxy_DataCoderParameterValidationOutputReference) SetRegex(val *st
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterValidationOutputReference) SetTerraformAttribute(val *string) {
+func (j *jsiiProxy_DataCoderParameterValidationOutputReference)SetTerraformAttribute(val *string) {
 	if err := j.validateSetTerraformAttributeParameters(val); err != nil {
 		panic(err)
 	}
@@ -414,7 +415,7 @@ func (j *jsiiProxy_DataCoderParameterValidationOutputReference) SetTerraformAttr
 	)
 }
 
-func (j *jsiiProxy_DataCoderParameterValidationOutputReference) SetTerraformResource(val cdktf.IInterpolatingParent) {
+func (j *jsiiProxy_DataCoderParameterValidationOutputReference)SetTerraformResource(val cdktf.IInterpolatingParent) {
 	if err := j.validateSetTerraformResourceParameters(val); err != nil {
 		panic(err)
 	}
@@ -679,3 +680,4 @@ func (d *jsiiProxy_DataCoderParameterValidationOutputReference) ToString() *stri
 
 	return returns
 }
+

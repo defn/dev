@@ -71,3 +71,4 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) validateSetS3OriginsParameters(v
 func validateNewTerraformAwsCloudfrontS3CdnParameters(scope constructs.Construct, id *string, config *TerraformAwsCloudfrontS3CdnConfig) error {
 	return nil
 }
+

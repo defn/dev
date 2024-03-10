@@ -258,3 +258,4 @@ func validateNewMetadataItemOutputReferenceParameters(terraformResource cdktf.II
 
 	return nil
 }
+

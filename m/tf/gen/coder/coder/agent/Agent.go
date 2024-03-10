@@ -710,6 +710,7 @@ func (j *jsiiProxy_Agent) TroubleshootingUrlInput() *string {
 	return returns
 }
 
+
 // Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/agent coder_agent} Resource.
 func NewAgent(scope constructs.Construct, id *string, config *AgentConfig) Agent {
 	_init_.Initialize()
@@ -739,7 +740,7 @@ func NewAgent_Override(a Agent, scope constructs.Construct, id *string, config *
 	)
 }
 
-func (j *jsiiProxy_Agent) SetArch(val *string) {
+func (j *jsiiProxy_Agent)SetArch(val *string) {
 	if err := j.validateSetArchParameters(val); err != nil {
 		panic(err)
 	}
@@ -750,7 +751,7 @@ func (j *jsiiProxy_Agent) SetArch(val *string) {
 	)
 }
 
-func (j *jsiiProxy_Agent) SetAuth(val *string) {
+func (j *jsiiProxy_Agent)SetAuth(val *string) {
 	if err := j.validateSetAuthParameters(val); err != nil {
 		panic(err)
 	}
@@ -761,7 +762,7 @@ func (j *jsiiProxy_Agent) SetAuth(val *string) {
 	)
 }
 
-func (j *jsiiProxy_Agent) SetConnection(val interface{}) {
+func (j *jsiiProxy_Agent)SetConnection(val interface{}) {
 	if err := j.validateSetConnectionParameters(val); err != nil {
 		panic(err)
 	}
@@ -772,7 +773,7 @@ func (j *jsiiProxy_Agent) SetConnection(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_Agent) SetConnectionTimeout(val *float64) {
+func (j *jsiiProxy_Agent)SetConnectionTimeout(val *float64) {
 	if err := j.validateSetConnectionTimeoutParameters(val); err != nil {
 		panic(err)
 	}
@@ -783,7 +784,7 @@ func (j *jsiiProxy_Agent) SetConnectionTimeout(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_Agent) SetCount(val interface{}) {
+func (j *jsiiProxy_Agent)SetCount(val interface{}) {
 	if err := j.validateSetCountParameters(val); err != nil {
 		panic(err)
 	}
@@ -794,7 +795,7 @@ func (j *jsiiProxy_Agent) SetCount(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_Agent) SetDependsOn(val *[]*string) {
+func (j *jsiiProxy_Agent)SetDependsOn(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"dependsOn",
@@ -802,7 +803,7 @@ func (j *jsiiProxy_Agent) SetDependsOn(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_Agent) SetDir(val *string) {
+func (j *jsiiProxy_Agent)SetDir(val *string) {
 	if err := j.validateSetDirParameters(val); err != nil {
 		panic(err)
 	}
@@ -813,7 +814,7 @@ func (j *jsiiProxy_Agent) SetDir(val *string) {
 	)
 }
 
-func (j *jsiiProxy_Agent) SetEnv(val *map[string]*string) {
+func (j *jsiiProxy_Agent)SetEnv(val *map[string]*string) {
 	if err := j.validateSetEnvParameters(val); err != nil {
 		panic(err)
 	}
@@ -824,7 +825,7 @@ func (j *jsiiProxy_Agent) SetEnv(val *map[string]*string) {
 	)
 }
 
-func (j *jsiiProxy_Agent) SetForEach(val cdktf.ITerraformIterator) {
+func (j *jsiiProxy_Agent)SetForEach(val cdktf.ITerraformIterator) {
 	_jsii_.Set(
 		j,
 		"forEach",
@@ -832,7 +833,7 @@ func (j *jsiiProxy_Agent) SetForEach(val cdktf.ITerraformIterator) {
 	)
 }
 
-func (j *jsiiProxy_Agent) SetId(val *string) {
+func (j *jsiiProxy_Agent)SetId(val *string) {
 	if err := j.validateSetIdParameters(val); err != nil {
 		panic(err)
 	}
@@ -843,7 +844,7 @@ func (j *jsiiProxy_Agent) SetId(val *string) {
 	)
 }
 
-func (j *jsiiProxy_Agent) SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
+func (j *jsiiProxy_Agent)SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
 	if err := j.validateSetLifecycleParameters(val); err != nil {
 		panic(err)
 	}
@@ -854,7 +855,7 @@ func (j *jsiiProxy_Agent) SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
 	)
 }
 
-func (j *jsiiProxy_Agent) SetLoginBeforeReady(val interface{}) {
+func (j *jsiiProxy_Agent)SetLoginBeforeReady(val interface{}) {
 	if err := j.validateSetLoginBeforeReadyParameters(val); err != nil {
 		panic(err)
 	}
@@ -865,7 +866,7 @@ func (j *jsiiProxy_Agent) SetLoginBeforeReady(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_Agent) SetMotdFile(val *string) {
+func (j *jsiiProxy_Agent)SetMotdFile(val *string) {
 	if err := j.validateSetMotdFileParameters(val); err != nil {
 		panic(err)
 	}
@@ -876,7 +877,7 @@ func (j *jsiiProxy_Agent) SetMotdFile(val *string) {
 	)
 }
 
-func (j *jsiiProxy_Agent) SetOs(val *string) {
+func (j *jsiiProxy_Agent)SetOs(val *string) {
 	if err := j.validateSetOsParameters(val); err != nil {
 		panic(err)
 	}
@@ -887,7 +888,7 @@ func (j *jsiiProxy_Agent) SetOs(val *string) {
 	)
 }
 
-func (j *jsiiProxy_Agent) SetProvider(val cdktf.TerraformProvider) {
+func (j *jsiiProxy_Agent)SetProvider(val cdktf.TerraformProvider) {
 	_jsii_.Set(
 		j,
 		"provider",
@@ -895,7 +896,7 @@ func (j *jsiiProxy_Agent) SetProvider(val cdktf.TerraformProvider) {
 	)
 }
 
-func (j *jsiiProxy_Agent) SetProvisioners(val *[]interface{}) {
+func (j *jsiiProxy_Agent)SetProvisioners(val *[]interface{}) {
 	if err := j.validateSetProvisionersParameters(val); err != nil {
 		panic(err)
 	}
@@ -906,7 +907,7 @@ func (j *jsiiProxy_Agent) SetProvisioners(val *[]interface{}) {
 	)
 }
 
-func (j *jsiiProxy_Agent) SetShutdownScript(val *string) {
+func (j *jsiiProxy_Agent)SetShutdownScript(val *string) {
 	if err := j.validateSetShutdownScriptParameters(val); err != nil {
 		panic(err)
 	}
@@ -917,7 +918,7 @@ func (j *jsiiProxy_Agent) SetShutdownScript(val *string) {
 	)
 }
 
-func (j *jsiiProxy_Agent) SetShutdownScriptTimeout(val *float64) {
+func (j *jsiiProxy_Agent)SetShutdownScriptTimeout(val *float64) {
 	if err := j.validateSetShutdownScriptTimeoutParameters(val); err != nil {
 		panic(err)
 	}
@@ -928,7 +929,7 @@ func (j *jsiiProxy_Agent) SetShutdownScriptTimeout(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_Agent) SetStartupScript(val *string) {
+func (j *jsiiProxy_Agent)SetStartupScript(val *string) {
 	if err := j.validateSetStartupScriptParameters(val); err != nil {
 		panic(err)
 	}
@@ -939,7 +940,7 @@ func (j *jsiiProxy_Agent) SetStartupScript(val *string) {
 	)
 }
 
-func (j *jsiiProxy_Agent) SetStartupScriptBehavior(val *string) {
+func (j *jsiiProxy_Agent)SetStartupScriptBehavior(val *string) {
 	if err := j.validateSetStartupScriptBehaviorParameters(val); err != nil {
 		panic(err)
 	}
@@ -950,7 +951,7 @@ func (j *jsiiProxy_Agent) SetStartupScriptBehavior(val *string) {
 	)
 }
 
-func (j *jsiiProxy_Agent) SetStartupScriptTimeout(val *float64) {
+func (j *jsiiProxy_Agent)SetStartupScriptTimeout(val *float64) {
 	if err := j.validateSetStartupScriptTimeoutParameters(val); err != nil {
 		panic(err)
 	}
@@ -961,7 +962,7 @@ func (j *jsiiProxy_Agent) SetStartupScriptTimeout(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_Agent) SetTroubleshootingUrl(val *string) {
+func (j *jsiiProxy_Agent)SetTroubleshootingUrl(val *string) {
 	if err := j.validateSetTroubleshootingUrlParameters(val); err != nil {
 		panic(err)
 	}
@@ -1552,3 +1553,4 @@ func (a *jsiiProxy_Agent) ToTerraform() interface{} {
 
 	return returns
 }
+

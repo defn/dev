@@ -83,3 +83,4 @@ func (j *jsiiProxy_DataCoderGitAuth) validateSetLifecycleParameters(val *cdktf.T
 func validateNewDataCoderGitAuthParameters(scope constructs.Construct, id *string, config *DataCoderGitAuthConfig) error {
 	return nil
 }
+

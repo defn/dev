@@ -13,6 +13,7 @@ type TerraformAwsDefnAccountConfig struct {
 	Providers *[]interface{} `field:"optional" json:"providers" yaml:"providers"`
 	// Experimental.
 	SkipAssetCreationFromLocalModules *bool `field:"optional" json:"skipAssetCreationFromLocalModules" yaml:"skipAssetCreationFromLocalModules"`
+	Account interface{} `field:"required" json:"account" yaml:"account"`
 	// Additional key-value pairs to add to each map in `tags_as_list_of_maps`.
 	//
 	// Not added to `tags` or `id`.
@@ -123,3 +124,4 @@ type TerraformAwsDefnAccountConfig struct {
 	// A customer identifier, indicating who this instance of a resource is for.
 	Tenant *string `field:"optional" json:"tenant" yaml:"tenant"`
 }
+

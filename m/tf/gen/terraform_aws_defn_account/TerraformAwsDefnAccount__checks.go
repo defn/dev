@@ -90,6 +90,14 @@ func validateTerraformAwsDefnAccount_IsTerraformElementParameters(x interface{})
 	return nil
 }
 
+func (j *jsiiProxy_TerraformAwsDefnAccount) validateSetAccountParameters(val interface{}) error {
+	if val == nil {
+		return fmt.Errorf("parameter val is required, but nil was provided")
+	}
+
+	return nil
+}
+
 func (j *jsiiProxy_TerraformAwsDefnAccount) validateSetContextParameters(val interface{}) error {
 	if val == nil {
 		return fmt.Errorf("parameter val is required, but nil was provided")
@@ -115,9 +123,13 @@ func validateNewTerraformAwsDefnAccountParameters(scope constructs.Construct, id
 		return fmt.Errorf("parameter id is required, but nil was provided")
 	}
 
+	if config == nil {
+		return fmt.Errorf("parameter config is required, but nil was provided")
+	}
 	if err := _jsii_.ValidateStruct(config, func() string { return "parameter config" }); err != nil {
 		return err
 	}
 
 	return nil
 }
+
