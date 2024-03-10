@@ -22,7 +22,7 @@ module "terraform_role" {
   role_description   = "Account Terraform Role"
 
   principals = {
-    AWS = ["arn:aws:iam::510430971399:root"]
+    AWS = ["arn:aws:iam::${var.account}:root"]
   }
 
   policy_documents = [
