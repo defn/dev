@@ -6,7 +6,7 @@ inventory: {
 	[string]: vars: {
 		// provide defaults for inventory/packer.ini
 		ansible_user:              string | *#username
-		bazel_remote_cache_server: string | *"100.101.80.89" // macmini, because some machines can't have decent DNS
+		bazel_remote_cache_server: string | *"macmini.tail3884f.ts.net" // must use dns, IPs dont work with tailscale serve
 		bazel_remote_cache_port:   string | *"9092"
 	}
 
@@ -16,7 +16,7 @@ inventory: {
 			"coder-amanibhavam-threesix",
 		]
 		vars: {
-			bazel_remote_cache_server: "100.101.80.89" // replace with something on aws
+			bazel_remote_cache_server: "macmini.tail3884f.ts.net" // replace with something on aws
 			bazel_remote_cache_port:   "9092"
 		}
 	}
