@@ -2,7 +2,7 @@ module github.com/defn/dev/m/demo
 
 go 1.21.4
 
-require github.com/defn/dev/m v0.0.276
+require github.com/defn/dev/m v0.0.277
 
 require (
 	cuelabs.dev/go/oci/ociregistry v0.0.0-20240212100803-8cd71b4d542c // indirect

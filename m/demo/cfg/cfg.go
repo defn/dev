@@ -3,7 +3,6 @@ package main
 import (
 	_ "embed"
 
-	root "github.com/defn/dev/m/command/root"
 	tf "github.com/defn/dev/m/tf"
 )
 
@@ -15,5 +14,5 @@ func init() {
 }
 
 func main() {
-	root.Execute()
+	tf.Execute()
 }
