@@ -36,12 +36,11 @@ disabled = true
 
 disabled = true
 
-[custom.lockdown]
-command = 'if test "$(defaults read .GlobalPreferences.plist LDMGlobalEnabled)" != "1"; then echo not-locked-down; fi'
-when = ''' test "$(uname -s)" == "Darwin" '''
-format = '[$output]($style) '
+[git_branch]
 
-[custom.sip]
-command = 'if ! csrutil status | grep -i ": enabled" >/dev/null; then echo sip-disabled; fi'
-when = ''' test "$(uname -s)" == "Darwin" '''
-format = '[$output]($style) '
+disabled = false
+
+[git_status]
+
+disabled = true
+
