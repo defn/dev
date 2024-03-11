@@ -216,3 +216,4 @@ bin/nix*
 .steampid
 .var/
 bin/*/trunk
+bin/devcontainer
