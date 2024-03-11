@@ -27,11 +27,11 @@ make install
 make whoami
 
 # terraform plan something
-cd ../bootstrap/remote-state
+cd cfg/remote-state
 terraform init
 terraform plan
 
-cd ../../org-demo
+cd ../../stacks/org-demo
 terraform init
 terraform plan
 
@@ -71,10 +71,10 @@ terraform plan
 1. Get a shell: `direnv allow && nix develop`
 2. Install stuff: `make install`
 3. `cd cfg && make build`
-4. Make bootstrap
+4. Make remote-state
 
 ```
-cd bootstrap/remote-state
+cd cfg/remote-state
 rm -f backend.tf
 vi remote-state.tf
 tf init
