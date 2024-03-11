@@ -14,7 +14,6 @@ input: infra.#AwsProps & {
 
 	organization: {
 		demo: {
-			name:   "demo"
 			region: "us-west-2"
 
 			url: "https://demonstrate.awsapps.com/start"
@@ -32,23 +31,20 @@ input: infra.#AwsProps & {
 				id:       "992382597334"
 			}, {
 				name:     "ops"
-				profile:  "ops"
 				email:    "iam+demo-ops@defn.sh"
 				imported: "yes"
 				region:   "us-west-2"
 				id:       "339712953662"
 			}, {
-				name:    "net"
-				profile: "net"
-				email:   "iam+demo-net@defn.sh"
-				region:  "us-west-2"
-				id:      "851725656107"
+				name:   "net"
+				email:  "iam+demo-net@defn.sh"
+				region: "us-west-2"
+				id:     "851725656107"
 			}, {
-				name:    "dev"
-				profile: "dev"
-				email:   "iam+demo-dev@defn.sh"
-				region:  "us-west-2"
-				id:      "730335323345"
+				name:   "dev"
+				email:  "iam+demo-dev@defn.sh"
+				region: "us-west-2"
+				id:     "730335323345"
 			}]
 		}
 	}
