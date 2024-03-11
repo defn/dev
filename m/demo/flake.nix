@@ -16,6 +16,7 @@
           git
           gnumake
           aws-vault
+          bat
 
           perl
           go
