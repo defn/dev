@@ -14,9 +14,12 @@ WORKDIR /home/ubuntu
 RUN mkdir -p ~/.config/nix
 RUN echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
 RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon'
-RUN echo 'PATH=$PATH:$HOME/.local/bin' >> ~/.bashrc
-RUN echo ". /home/ubuntu/.nix-profile/etc/profile.d/nix.sh" > ~/.bashrc
-RUN echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
-RUN echo 'eval "$(starship init bash)"' >> ~/.bashrc
+RUN echo 'PATH=$PATH:$HOME/.local/bin' >> ~/.bash_profile
+RUN echo ". /home/ubuntu/.nix-profile/etc/profile.d/nix.sh" >> ~/.bash_profile
+RUN echo 'eval "$(direnv hook bash)"' >> ~/.bash_profile
+RUN echo 'eval "$(starship init bash)"' >> ~/.bash_profile
 COPY flake.json flake.nix /home/ubuntu/
-RUN bash -c 'cd ~ && source ~/.bashrc && nix develop --command true'
+RUN bash -c 'cd ~ && source ~/.bash_profile && nix develop --command true'
+RUN bash -c 'cd ~ && source ~/.bash_profile && nix profile install nixpkgs#starship'
+RUN bash -c 'cd ~ && source ~/.bash_profile && nix profile install nixpkgs#nix-direnv'
+RUN bash -c 'cd ~ && rm -f flake.nix flake.json'

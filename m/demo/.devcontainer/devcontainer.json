@@ -1,5 +1,6 @@
 {
   "name": "defn.dev demo",
   "dockerFile": "../Dockerfile",
-  "runArgs": ["-u", "ubuntu"]
+  "runArgs": ["-u", "ubuntu"],
+  "terminal.integrated.shellArgs.linux": ["-l"]
 }
