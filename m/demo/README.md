@@ -16,9 +16,16 @@ Any defn.dev admin must be able to run the following:
 # single-user nix install, don't run this on a shared shell host
 sh <(curl -L https://nixos.org/nix/install) --no-daemon
 
+# TODO: automate nix shell and direnv
 # get a nix shell
-direnv allow
+mkdir -p ~/.config/nix
+echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
+export USER=ubuntu
+sudo chown ubuntu:ubuntu /workspaces/defn
+. /home/ubuntu/.nix-profile/etc/profile.d/nix.sh
 nix develop
+eval "$(direnv hook bash)"
+direnv allow
 
 # install language tools
 make install
