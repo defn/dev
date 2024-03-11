@@ -18,6 +18,7 @@ RUN echo 'PATH=$PATH:$HOME/.local/bin' >> ~/.bash_profile
 RUN echo ". /home/ubuntu/.nix-profile/etc/profile.d/nix.sh" >> ~/.bash_profile
 RUN echo 'eval "$(direnv hook bash)"' >> ~/.bash_profile
 RUN echo 'eval "$(starship init bash)"' >> ~/.bash_profile
+RUN echo 'export DIRENV_LOG_FORMAT="' >> ~/.bash_profile
 COPY flake.json flake.nix /home/ubuntu/
 RUN bash -c 'cd ~ && source ~/.bash_profile && nix develop --command true'
 RUN bash -c 'cd ~ && source ~/.bash_profile && nix profile install nixpkgs#starship'
