@@ -1,5 +1,9 @@
 package infra
 
+import (
+	inf "github.com/defn/dev/m/command/infra"
+)
+
 full_accounts: [
 	"ops", // operation teams, coder, argocd
 	"sec", // security teams
@@ -18,7 +22,7 @@ ops_accounts: [
 	"ops",
 ]
 
-input: {
+input: inf.#AwsProps & {
 	backend: {
 		lock:    "dfn-defn-terraform-state-lock"
 		bucket:  "dfn-defn-terraform-state"
@@ -46,10 +50,10 @@ input: {
 					versioning_enabled: false
 				}
 
-				id: info[ORG].accounts[profile].id
+				id: lookup[ORG].accounts[profile].id
 			}]
 
-			url: info[ORG].url
+			url: lookup[ORG].url
 
 			ops_org_name:     "defn"
 			ops_account_name: "org"
@@ -419,16 +423,9 @@ input: {
 			]
 		}
 	}
-
-	accounts: [
-		for oname, org in input.organization
-		for aname, acc in org.accounts {
-			"\(oname)-\(acc.profile)"
-		},
-	]
 }
 
-info: {
+lookup: {
 	defn: {
 		url: "https://defn.awsapps.com/start"
 		accounts: {
