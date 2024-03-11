@@ -14,9 +14,11 @@
         with (import inputs.latest { system = ctx.system; }); [
           direnv
           git
+          git-lfs
           gnumake
           aws-vault
           bat
+          jq
 
           perl
           go
@@ -25,6 +27,7 @@
           inputs.cue.defaultPackage.${ctx.system}
           inputs.cloud.defaultPackage.${ctx.system}
 
+          starship
           bashInteractive
         ];
     };

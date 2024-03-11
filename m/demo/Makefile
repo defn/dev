@@ -9,7 +9,7 @@ test:
 	$(MAKE) plan
 
 whoami:
-	@runmany 'aws --profile $$1-sso sts get-caller-identity | bat' $$(cd cfg && cue eval -e input.accounts | jq -r '.[]')
+	@PATH=$$PATH:../../bin runmany 'aws --profile $$1-sso sts get-caller-identity | bat' $$(cd cfg && cue eval -e input.accounts | jq -r '.[]')
 
 plan:
-	@runmany 'cd $$1 && tf plan | bat' stacks/*/
+	@PATH=$$PATH:../../bin runmany 'cd $$1 && tf plan | bat' stacks/*/
