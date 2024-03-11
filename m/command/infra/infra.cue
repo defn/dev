@@ -37,7 +37,14 @@ package infra
 		name: N
 	}
 
-	accounts: [...string]
+	accounts: [...string] | *#acc_list
+
+	#acc_list: [
+		for oname, org in organization
+		for aname, acc in org.accounts {
+			"\(oname)-\(acc.profile)"
+		},
+	]
 }
 
 #AwsAdmin: {

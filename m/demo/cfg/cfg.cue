@@ -1,6 +1,10 @@
 package cfg
 
-input: {
+import (
+	"github.com/defn/dev/m/command/infra"
+)
+
+input: infra.#AwsProps & {
 	backend: {
 		lock:    "demonstrate-terraform-remote-state-lock"
 		bucket:  "demonstrate-terraform-remote-state"
@@ -44,12 +48,4 @@ input: {
 			}]
 		}
 	}
-
-	// generate list of accounts from organization
-	accounts: [
-		for oname, org in input.organization
-		for aname, acc in org.accounts {
-			"\(oname)-\(acc.profile)"
-		},
-	]
 }
