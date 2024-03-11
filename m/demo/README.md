@@ -1,3 +1,17 @@
+# Demonstration of defn.dev
+
+This is a Terraform configuration of AWS Organizations with four accounts: org master, ops, net, and dev.
+
+Tools installed with Nix.
+
+Terraform generated with CDKTF Golang.
+
+Configurations managed with CUE.
+
+# Onboarding
+
+Any defn.dev admin must be able to run the following:
+
 ```
 # single-user nix install, don't run this on a shared shell host
 sh <(curl -L https://nixos.org/nix/install) --no-daemon
