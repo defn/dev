@@ -33,3 +33,7 @@ func Init(schema string) {
 		},
 	})
 }
+
+func Execute() {
+	root.Execute()
+}
