@@ -1,3 +1,15 @@
+workdir ?= /home/ubuntu/m
+
+shell:
+	@if test -n "$${REMOTE_CONTAINERS_IPC:-}"; then \
+		direnv allow; \
+		bash .direnv/bin/nix-direnv-reload; \
+		bash -l; \
+	else \
+		docker ps -q -a --filter label=devcontainer.config_file=$$(pwd)/.devcontainer/devcontainer.json | runmany 'docker rm -f $$1 2>/dev/null'; \
+		code --folder-uri "vscode-remote://dev-container+$$(pwd | perl -pe 's{\s+$$}{}' | xxd -p)$(workdir)" 2>/dev/null; \
+	fi
+
 install:
 	@if ! type -P trunk >/dev/null; then curl https://get.trunk.io -fsSL | sed 's#/usr/local/bin#$$HOME/bin/$$(uname -s)#' | bash | bat; fi
 	trunk install | bat

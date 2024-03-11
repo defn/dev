@@ -14,9 +14,7 @@ Any defn.dev admin must be able to run the following:
 
 ```
 # get a nix shell
-sudo chown ubuntu:ubuntu /workspaces/defn
-direnv allow
-nix develop
+make
 
 # install language tools
 make install
