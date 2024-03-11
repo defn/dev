@@ -20,7 +20,8 @@ package infra
 	prefix:   string | *""
 	imported: string | *null
 	region:   string
-	cfg:      #CfgTerraformAwsS3BucketConfig
+
+	cfg: #CfgTerraformAwsS3BucketConfig | *null
 }
 
 #AwsBackend: {

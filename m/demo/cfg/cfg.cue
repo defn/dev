@@ -28,22 +28,26 @@ input: infra.#AwsProps & {
 				profile:  "org"
 				email:    "iam+demo-org@defn.sh"
 				imported: "yes"
+				region:   "us-west-2"
 				id:       "992382597334"
 			}, {
 				name:     "ops"
 				profile:  "ops"
 				email:    "iam+demo-ops@defn.sh"
 				imported: "yes"
+				region:   "us-west-2"
 				id:       "339712953662"
 			}, {
 				name:    "net"
 				profile: "net"
 				email:   "iam+demo-net@defn.sh"
+				region:  "us-west-2"
 				id:      "851725656107"
 			}, {
 				name:    "dev"
 				profile: "dev"
 				email:   "iam+demo-dev@defn.sh"
+				region:  "us-west-2"
 				id:      "730335323345"
 			}]
 		}

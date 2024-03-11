@@ -2,11 +2,7 @@ module github.com/defn/dev/m/demo
 
 go 1.21.4
 
-require (
-	github.com/defn/dev/m v0.0.274
-	github.com/hashicorp/terraform-cdk-go/cdktf v0.20.4
-	github.com/spf13/cobra v1.8.0
-)
+require github.com/defn/dev/m v0.0.276
 
 require (
 	cuelabs.dev/go/oci/ociregistry v0.0.0-20240212100803-8cd71b4d542c // indirect
@@ -21,6 +17,7 @@ require (
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
+	github.com/hashicorp/terraform-cdk-go/cdktf v0.20.4 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
@@ -37,6 +34,7 @@ require (
 	github.com/sourcegraph/conc v0.3.0 // indirect
 	github.com/spf13/afero v1.11.0 // indirect
 	github.com/spf13/cast v1.6.0 // indirect
+	github.com/spf13/cobra v1.8.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.18.2 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
