@@ -7,4 +7,14 @@ RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 RUN groupadd -r ubuntu && useradd -m -s /bin/bash -g ubuntu ubuntu
 
 USER ubuntu
+ENV USER=ubuntu
+ENV HOME=/home/ubuntu
+WORKDIR /home/ubuntu
 
+RUN mkdir -p ~/.config/nix
+RUN echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
+RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon'
+RUN echo ". /home/ubuntu/.nix-profile/etc/profile.d/nix.sh" > ~/.bashrc
+RUN echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
+COPY flake.json flake.nix /home/ubuntu/
+RUN bash -c 'cd ~ && source ~/.bashrc && nix develop --command true'
