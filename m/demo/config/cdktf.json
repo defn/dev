@@ -1,0 +1,5 @@
+{
+  "language": "go",
+  "app": "go run config.go build",
+  "projectId": "3fa02e03-ace2-40e8-a17d-59eed19b54f8"
+}

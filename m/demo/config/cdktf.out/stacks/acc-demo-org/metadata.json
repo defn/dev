@@ -1,0 +1,38 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "s3",
+      "stackName": "acc-demo-org",
+      "version": "0.20.4"
+    },
+    "outputs": {}
+  },
+  "module": {
+    "demo-org": {
+      "//": {
+        "metadata": {
+          "path": "acc-demo-org/demo-org",
+          "uniqueId": "demo-org"
+        }
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "s3": {
+        "bucket": "demonstrate-terraform-remote-state",
+        "dynamodb_table": "demonstrate-terraform-remote-state-lock",
+        "encrypt": true,
+        "key": "stacks/acc-demo-org/terraform.tfstate",
+        "profile": "demo-ops-sso",
+        "region": "us-west-2"
+      }
+    },
+    "required_providers": {
+      "aws": {
+        "source": "aws",
+        "version": "5.40.0"
+      }
+    }
+  }
+}
