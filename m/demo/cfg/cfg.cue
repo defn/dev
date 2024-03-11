@@ -1,7 +1,7 @@
 package cfg
 
 import (
-	"github.com/defn/dev/m/command/infra"
+	"github.com/defn/dev/m/demo/third_party/defn-dev/m/command/infra"
 )
 
 input: infra.#AwsProps & {
