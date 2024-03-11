@@ -62,15 +62,15 @@ terraform plan
 ### Customize AWS Config
 
 1. Edit .envrc, change region
-2. Edit .aws/config, change region, names, IDs, Administrator to AdministratorAccess temporarily
-3. Edit config/demo.cue, change region, names, IDs
+2. Edit cfg/.aws/config, change region, names, IDs, Administrator to AdministratorAccess temporarily
+3. Edit cfg/cfg.cue, change region, names, IDs
 4. Test access with `make whoami`, only org, ops accounts will work at this point
 
 ### Initialize GitOps
 
 1. Get a shell: `direnv allow && nix develop`
 2. Install stuff: `make install`
-3. `cd config && make build`
+3. `cd cfg && make build`
 4. Make bootstrap
 
 ```
@@ -91,7 +91,7 @@ tf locks
 7. Import aws organization master account: `terraform import aws_organizations_account.org 992382597334`
 8. Import aws organization ops account: `terraform import aws_organizations_account.ops 339712953662`
 9. Depoy the org config: `tf plan; tf apply`
-10. Fill out rest of `.aws/config` and `config/config.cue`, remove `Access` role suffix
+10. Fill out rest of `cfg/.aws/config` and `cfg/cfg.cue`, remove `Access` role suffix
 11. Verify aws credentials: `aws-vault clear; make whoami`
 12. For each `cdktf.out/stacks/acc-*/`, `tf init && tf locks && tf plan && tf apply`
 13. Clean up AdminstratorAccess PermissonSet
