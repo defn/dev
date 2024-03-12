@@ -34,6 +34,8 @@ function cache {
 		sudo chmod 755 ~/work/.
 		sudo chown $(id -un):$(id -gn) ~/work
 		sudo chown $(id -un):$(id -gn) ~/work/.
+
+		sudo chmod 700 ~/.gnupg
 	fi
 
 	#persist ~/work/config-coderv2 ~/.config/coderv2
