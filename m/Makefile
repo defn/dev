@@ -5,6 +5,20 @@ domain ?= defn.run
 
 proxy ?= proxy3
 
+work ?= 
+
+dev:
+	@if test -n "$${REMOTE_CONTAINERS_IPC:-}"; then \
+		direnv allow; \
+		bash .direnv/bin/nix-direnv-reload 2>/dev/null || true; \
+		bash; \
+	else \
+		code --folder-uri "vscode-remote://dev-container+$$(pwd | perl -pe 's{\s+$$}{}' | xxd -p)/home/ubuntu/m/$(work)" 2>/dev/null; \
+	fi
+
+clean:
+		docker ps -q -a --filter label=devcontainer.config_file=$$(pwd)/.devcontainer/devcontainer.json | runmany 'docker rm -f $$1 2>/dev/null'
+
 all:
 	rm -f MODULES.bazel.lock
 	$(MAKE) bazel-ignore
@@ -132,7 +146,7 @@ vc:
 	cp $$HOME/.kube/config-in-cluster $$HOME/.kube/config.argocd
 	if env KUBECONFIG=$$HOME/.kube/config-in-cluster kubectl apply -f e/$(env)-cluster.yaml; then cd k && env KUBECONFIG=$$HOME/.kube/config-in-cluster $(MAKE) update env=$(env); fi
 
-dev:
+devx:
 	cp /home/ubuntu/.kube/config /home/ubuntu/.kube/config.argocd
 	env KUBECONFIG=$$HOME/.kube/config.argocd k config set-context --current --namespace argocd
 	app repo add cache.$(domain):5000 --type helm --name cache --enable-oci --insecure-skip-server-verification
@@ -196,4 +210,5 @@ activate:
 	sudo rm -rf /tmp/ssm
 
 create:
-	@b agent b exec defn-org aws ssm create-activation --default-instance-name $(name) --iam-role service-role/AmazonEC2RunCommandRoleForManagedInstances --registration-limit 1 --region $(region)  --expiration-date "$$(date -d "+1 day" +"%Y-%m-%dT00:00:00")" | jq -r '"make activate region=$(region) actid=\(.ActivationId) actcode=\(.ActivationCode)"'
+	@b agent b exec defn-org aws ssm create-activation --default-instance-name $(name) --iam-role service-role/AmazonEC2RunCommandRoleForManagedInstances --registration-limit 1 --region $(region)  --expiration-date "$$(date -d "+1 day" +"%Y-%m-%dT00:00:00")" | jq -r '"make activate region=$(region) actid=\(.ActivationId) actcode=\(.ActivationCode)"'work ?= /home/ubuntu/m/demo
+
