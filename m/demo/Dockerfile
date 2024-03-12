@@ -15,9 +15,7 @@ RUN bash -c 'cd ~ && git clone https://github.com/defn/dev dev && mv dev/.git . 
 RUN bash -c 'cd ~ && source ~/.bash_profile && ~/bin/persist-cache'
 RUn bash -c 'cd ~ && source ~/.bash_profile && cd m/pb && make base_ubuntu opt="-i inventory/packer.ini -e ansible_connection=local"'
 
-RUN bash -c 'cd ~ && source ~/.bash_profile && make nix'
-RUN bash -c 'cd ~ && source ~/.bash_profile && nix profile install nixpkgs#starship'
-RUN bash -c 'cd ~ && source ~/.bash_profile && nix profile install nixpkgs#nix-direnv'
+RUN bash -c 'cd ~ && source ~/.bash_profile && make install'
 RUN bash -c 'cd ~ && source ~/.bash_profile && cd m/demo/nix && nix develop --command true'
 
 COPY --chown=ubuntu:ubuntu . /home/ubuntu/m/demo
