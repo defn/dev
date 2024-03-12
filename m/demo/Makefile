@@ -1,3 +1,6 @@
+build:
+	cd cfg && $(MAKE)
+
 install:
 	@if ! type -P trunk >/dev/null; then curl https://get.trunk.io -fsSL | sed 's#/usr/local/bin#$$HOME/bin/$$(uname -s)#' | bash; fi
 	trunk install

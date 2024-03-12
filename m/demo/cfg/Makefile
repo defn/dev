@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 build: ../node_modules/.bin/cdktf
-=======
-build: ../node_modules/.bin/cdktf 
->>>>>>> 067d933afdff542e302020fef92e32674800e4ac
 # check cue is concrete
 	cue eval -c >/dev/null
 # generate Terraform configs
