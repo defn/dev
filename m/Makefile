@@ -200,7 +200,7 @@ activate:
 create:
 	@b agent b exec defn-org aws ssm create-activation --default-instance-name $(name) --iam-role service-role/AmazonEC2RunCommandRoleForManagedInstances --registration-limit 1 --region $(region)  --expiration-date "$$(date -d "+1 day" +"%Y-%m-%dT00:00:00")" | jq -r '"make activate region=$(region) actid=\(.ActivationId) actcode=\(.ActivationCode)"'work ?= /home/ubuntu/m/demo
 
-shell:
+dev:
 	@if test -n "$${REMOTE_CONTAINERS_IPC:-}"; then \
 		direnv allow; \
 		bash .direnv/bin/nix-direnv-reload 2>/dev/null || true; \
