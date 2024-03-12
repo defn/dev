@@ -11,26 +11,17 @@ ENV HOME=/home/ubuntu
 ENV LANG=C
 WORKDIR /home/ubuntu
 
-RUN mkdir -p ~/.config/nix
-RUN echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
-
-RUN bash -c 'sh <(curl -L https://nixos.org/nix/install) --no-daemon'
-
-RUN echo 'source ~/.bashrc' >> ~/.bash_profile
-RUN echo 'PATH=$PATH:$HOME/.local/bin' >> ~/.bash_profile
-RUN echo ". /home/ubuntu/.nix-profile/etc/profile.d/nix.sh" >> ~/.bash_profile
-RUN echo 'export DIRENV_LOG_FORMAT=' >> ~/.bash_profile
-RUN echo 'alias gs="git status -sb"' >> ~/.bash_profile
-
-RUN bash -c 'cd ~ && source ~/.bash_profile && nix profile install nixpkgs#starship'
-RUN echo 'eval "$(starship init bash)"' >> ~/.bash_profile
-
-RUN bash -c 'cd ~ && source ~/.bash_profile && nix profile install nixpkgs#nix-direnv'
-RUN echo 'eval "$(direnv hook bash)"' >> ~/.bash_profile
-
 RUN bash -c 'cd ~ && git clone https://github.com/defn/dev dev && mv dev/.git . && rm -rf dev && git reset --hard'
+RUN bash -c 'cd ~ && source ~/.bash_profile && ~/bin/persist-cache'
+RUN rm -rf ~/local/state/nix
+
+RUN bash -c 'cd ~ && source ~/.bash_profile && make nix'
+RUN bash -c 'cd ~ && source ~/.bash_profile && nix profile install nixpkgs#starship'
+RUN bash -c 'cd ~ && source ~/.bash_profile && nix profile install nixpkgs#nix-direnv'
 RUN bash -c 'cd ~ && source ~/.bash_profile && cd m/demo/nix && nix develop --command true'
 
 COPY --chown=ubuntu:ubuntu . /home/ubuntu/m/demo
-RUN bash -c 'cd ~ && git pull && source ~/.bash_profile && cd m/demo && direnv allow && git add . && cd nix && nix develop --command true'
+RUN bash -c 'cd ~ && source ~/.bash_profile && git fetch && git reset --hard origin/main'
+COPY --chown=ubuntu:ubuntu . /home/ubuntu/m/demo
+RUN bash -c 'cd ~ && source ~/.bash_profile && cd m/demo && direnv allow && git add . && cd nix && nix develop --command true'
 
