@@ -13,9 +13,11 @@ dev:
 		bash .direnv/bin/nix-direnv-reload 2>/dev/null || true; \
 		bash; \
 	else \
-		docker ps -q -a --filter label=devcontainer.config_file=$$(pwd)/.devcontainer/devcontainer.json | runmany 'docker rm -f $$1 2>/dev/null'; \
 		code --folder-uri "vscode-remote://dev-container+$$(pwd | perl -pe 's{\s+$$}{}' | xxd -p)/home/ubuntu/m/$(work)" 2>/dev/null; \
 	fi
+
+clean:
+		docker ps -q -a --filter label=devcontainer.config_file=$$(pwd)/.devcontainer/devcontainer.json | runmany 'docker rm -f $$1 2>/dev/null'
 
 all:
 	rm -f MODULES.bazel.lock
