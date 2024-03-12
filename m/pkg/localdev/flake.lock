@@ -27,17 +27,17 @@
       },
       "locked": {
         "dir": "m/pkg/buildkite",
-        "lastModified": 1708645007,
-        "narHash": "sha256-yUSxHFfufH3sw9CcKD+KVPxrdkZCk7vWB5FSrT9CLno=",
+        "lastModified": 1710268862,
+        "narHash": "sha256-t5QBzI1KskG8kgi3FUzV+XAzo2gcRewzlPmcY9c0Mqo=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "5b807d67f30667984f9430d99257f5264b10060e",
+        "rev": "d1d6ec8eaf77ee2da2c8f742053c5073fc6db523",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buildkite",
         "owner": "defn",
-        "ref": "pkg-buildkite-3.64.0-1",
+        "ref": "pkg-buildkite-3.66.0-1",
         "repo": "dev",
         "type": "github"
       }
@@ -279,17 +279,17 @@
       },
       "locked": {
         "dir": "m/pkg/earthly",
-        "lastModified": 1708566604,
-        "narHash": "sha256-rHPJBg+2rY2AjA1wplDavoKUYXO/yuZuuPpc8J3MZkw=",
+        "lastModified": 1710268912,
+        "narHash": "sha256-HU6WOu5Rfs7XV13x2AYhu89jgZw0WuxkbPnwZ7SXQck=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "17388bfd55b16a1e7aac458eae50f75c648d50b9",
+        "rev": "9d2d0c9712bcca48a68efa6997222b1dde99dc52",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/earthly",
         "owner": "defn",
-        "ref": "pkg-earthly-0.8.4-1",
+        "ref": "pkg-earthly-0.8.5-1",
         "repo": "dev",
         "type": "github"
       }
