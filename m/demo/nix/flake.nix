@@ -23,6 +23,7 @@
           perl
           go
           nodejs_20
+          (python3.withPackages (ps: with ps; [ pipx ]))
 
           inputs.cue.defaultPackage.${ctx.system}
           inputs.cloud.defaultPackage.${ctx.system}

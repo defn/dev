@@ -1,4 +1,4 @@
-build:
+build: ../node_modules/.bin/cdktf 
 # check cue is concrete
 	cue eval -c >/dev/null
 # generate Terraform configs
@@ -19,3 +19,6 @@ build:
 # fmt
 	trunk fmt || true
 	git add -u cdktf.out
+
+../node_modules/.bin/cdktf:
+	cd .. && $(MAKE) install
