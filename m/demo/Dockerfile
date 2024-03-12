@@ -22,4 +22,4 @@ COPY --chown=ubuntu:ubuntu . /home/ubuntu/m/demo
 RUN bash -c 'cd ~ && source ~/.bash_profile && git fetch && git reset --hard origin/main'
 COPY --chown=ubuntu:ubuntu . /home/ubuntu/m/demo
 RUN bash -c 'cd ~ && source ~/.bash_profile && cd m/demo && direnv allow && git add . && cd nix && nix develop --command true'
-
+RUN git remote rm origin && git remote add origin git@github.com:defn/dev && git branch --set-upstream-to=origin/main main
