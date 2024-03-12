@@ -11,10 +11,10 @@ shell:
 	fi
 
 install:
-	@if ! type -P trunk >/dev/null; then curl https://get.trunk.io -fsSL | sed 's#/usr/local/bin#$$HOME/bin/$$(uname -s)#' | bash | bat; fi
-	trunk install | bat
-	npm install | bat
-	cd cfg && (go get | bat) && (go mod tidy | bat)
+	@if ! type -P trunk >/dev/null; then curl https://get.trunk.io -fsSL | sed 's#/usr/local/bin#$$HOME/bin/$$(uname -s)#' | bash; fi
+	trunk install
+	npm install
+	cd cfg && go get && go mod tidy
 
 test:
 	$(MAKE) whoami
