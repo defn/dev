@@ -1,16 +1,16 @@
 {
-  "image": "quay.io/defn/dev:class-buildkite-latest",
-  "mounts": [
-    "source=work,target=/workspaces",
-    "source=nix,target=/nix",
-    "source=home,target=/home/ubuntu",
-    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
-  ],
+  "name": "defn.dev demo",
+  "dockerFile": "../Dockerfile",
   "runArgs": [
     "--init",
     "--privileged",
     "--device=/dev/net/tun",
-    "--network=dev",
-    "--env-file=${localWorkspaceFolder}/../.dotfiles/.env"
+    "-u",
+    "ubuntu"
+  ],
+  "workspaceMount": "source=${localWorkspaceFolder},target=/w,type=bind,consistency=cached",
+  "workspaceFolder": "/w",
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
   ]
 }
