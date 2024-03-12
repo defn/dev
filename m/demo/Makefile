@@ -1,4 +1,4 @@
-workdir ?= /home/ubuntu/m/demo
+work ?= /home/ubuntu/m/demo
 
 shell:
 	@if test -n "$${REMOTE_CONTAINERS_IPC:-}"; then \
@@ -7,7 +7,7 @@ shell:
 		bash; \
 	else \
 		docker ps -q -a --filter label=devcontainer.config_file=$$(pwd)/.devcontainer/devcontainer.json | runmany 'docker rm -f $$1 2>/dev/null'; \
-		code --folder-uri "vscode-remote://dev-container+$$(pwd | perl -pe 's{\s+$$}{}' | xxd -p)$(workdir)" 2>/dev/null; \
+		echo code --folder-uri "vscode-remote://dev-container+$$(pwd | perl -pe 's{\s+$$}{}' | xxd -p)$(work)" 2>/dev/null; \
 	fi
 
 install:
