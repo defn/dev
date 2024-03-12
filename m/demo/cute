@@ -1,0 +1,18 @@
+docker run --rm \
+    -v envbuilder-image-cache:/image-cache \
+    gcr.io/kaniko-project/warmer:latest \
+        --cache-dir=/image-cache \
+        --image=ghcr.io/coder/envbuilder
+
+git clone https://github.com/coder/envbuilder-starter-devcontainer \
+    /tmp/workspaces/envbuilder-starter-devcontainer
+
+docker run -it --rm \
+    -v /tmp/workspaces:/workspaces \
+    -v envbuilder-image-cache:/image-cache:ro \
+    -v envbuilder-layercache:/layer-cache \
+    -e LAYER_CACHE_DIR=/layer-cache \
+    -e BASE_IMAGE_CACHE_DIR=/image-cache \
+    -e GIT_URL=https://localhost/envbuilder-starter-devcontainer \
+    -e INIT_SCRIPT"id -a" \
+    ghcr.io/coder/envbuilder
