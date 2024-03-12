@@ -531,17 +531,17 @@
       },
       "locked": {
         "dir": "m/pkg/hubble",
-        "lastModified": 1706897929,
-        "narHash": "sha256-q4Dtwd+NAFY10kUIqtZ2xGqEeF89OKGmP12bLpx40xE=",
+        "lastModified": 1710268941,
+        "narHash": "sha256-GRds4wyJzydg4HjfmQ/ec0/fl2PVVt0dAonAZQFzhdQ=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "18622e7a3b98bd9112209e0a6088147a720d53fc",
+        "rev": "ec3c04472fbe212035d14b18e4a338caee0b74f1",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/hubble",
         "owner": "defn",
-        "ref": "pkg-hubble-0.13.0-2",
+        "ref": "pkg-hubble-0.13.2-1",
         "repo": "dev",
         "type": "github"
       }
