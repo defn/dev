@@ -144,7 +144,7 @@ vc:
 	cp $$HOME/.kube/config-in-cluster $$HOME/.kube/config.argocd
 	if env KUBECONFIG=$$HOME/.kube/config-in-cluster kubectl apply -f e/$(env)-cluster.yaml; then cd k && env KUBECONFIG=$$HOME/.kube/config-in-cluster $(MAKE) update env=$(env); fi
 
-dev:
+devx:
 	cp /home/ubuntu/.kube/config /home/ubuntu/.kube/config.argocd
 	env KUBECONFIG=$$HOME/.kube/config.argocd k config set-context --current --namespace argocd
 	app repo add cache.$(domain):5000 --type helm --name cache --enable-oci --insecure-skip-server-verification
