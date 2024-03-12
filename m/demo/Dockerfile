@@ -29,8 +29,8 @@ RUN bash -c 'cd ~ && source ~/.bash_profile && nix profile install nixpkgs#nix-d
 RUN echo 'eval "$(direnv hook bash)"' >> ~/.bash_profile
 
 RUN bash -c 'cd ~ && git clone https://github.com/defn/dev dev && mv dev/.git . && rm -rf dev && git reset --hard'
+RUN bash -c 'cd ~ && source ~/.bash_profile && cd m/demo/nix && nix develop --command true'
 
-COPY . /home/ubuntu/m/demo
-RUN sudo chown -R ubuntu:ubuntu /home/ubuntu/m/demo
+COPY --chown=ubuntu:ubuntu . /home/ubuntu/m/demo
 RUN bash -c 'cd ~ && git pull && source ~/.bash_profile && cd m/demo && direnv allow && git add . && cd nix && nix develop --command true'
 
