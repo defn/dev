@@ -73,6 +73,12 @@ function cache {
 	mkdir -p ~/.cache/helm
 	mkdir -p ~/work/bazel-cache
 	mkdir -p ~/work/squid
+
+	if test -r .dotfiles/.gitconfig; then
+		ln -nfs .dotfiles/.gitconfig .gitconfig
+	else
+		ln -nfs .gitconfig.default .gitconfig
+	fi
 }
 
 cache "$@"
