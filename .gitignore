@@ -219,3 +219,4 @@ bin/nix*
 bin/*/trunk
 bin/devcontainer
 .gitconfig
+.devcontainer
