@@ -89,13 +89,13 @@ install_flake:
 .PHONY: dotfiles
 dotfiles:
 	$(MARK) configure dotfiles
+	rm -rf ~/.dotfiles
 	mkdir -p ~/dotfiles
 	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
 		if ! test -d ~/dotfiles/.git/.; then \
+			rm -rf ~/dotfiles; \
 			t git_clone_dotfiles git clone git@github.com:$${GIT_AUTHOR_NAME}/dotfiles ~/dotfiles; \
 		fi; \
-		rm -rf ~/.dotfiles; \
-		rm -rf ~/dotfiles; \
 		t dotfiles_bootstrap ./dotfiles/bootstrap; \
 	fi
 
