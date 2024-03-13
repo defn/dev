@@ -5,12 +5,14 @@ domain ?= defn.run
 
 proxy ?= proxy3
 
-work ?= 
+work ?=
+
+cmd ?= uname -a; id -a; ps axuf;
 
 dev:
 	devcontainer build --workspace-folder .
 	devcontainer up --workspace-folder . --dotfiles-repository=https://github.com/amanibhavam/dotfiles
-	(echo uname -a; echo id -a; echo ps axuf) | base64 -w 0 | devcontainer exec --workspace-folder . bash -c 'cat | base64 -d | bash -'	
+	echo "$(cmd)" | base64 -w 0 | devcontainer exec --workspace-folder . bash -c 'cat | base64 -d | bash -x -'	
 
 dev-macos:
 	@if test -n "$${REMOTE_CONTAINERS_IPC:-}"; then \
