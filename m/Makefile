@@ -8,6 +8,10 @@ proxy ?= proxy3
 work ?= 
 
 dev:
+	devcontainer build --workspace-folder .
+	devcontainer up --workspace-folder . --dotfiles-repository=https://github.com/amanibhavam/dotfiles
+
+dev-macos:
 	@if test -n "$${REMOTE_CONTAINERS_IPC:-}"; then \
 		direnv allow; \
 		bash .direnv/bin/nix-direnv-reload 2>/dev/null || true; \
