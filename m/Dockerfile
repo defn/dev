@@ -3,7 +3,7 @@ FROM ubuntu:22.04
 RUN export DEBIAN_FRONTEND=noninteractive && apt update && apt install -y direnv curl xz-utils sudo locales git build-essential rsync pipx
 RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-RUN groupadd -r ubuntu && useradd -m -s /bin/bash -g ubuntu ubuntu
+RUN groupadd -r --gid 1000 ubuntu && useradd -m -s /bin/bash -g ubuntu --uid 1000 ubuntu
 
 USER ubuntu
 ENV USER=ubuntu
