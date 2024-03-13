@@ -14,7 +14,7 @@ fi
 
 . ~/.bashrc_path
 source ~/.bashrc
-if [[ -f ~/.dotfiles/dot/bashrc ]]; then source ~/.dotfiles/dot/bashrc; fi
+if [[ -f ~/dotfiles/dot/bashrc ]]; then source ~/dotfiles/dot/bashrc; fi
 
 eval "$(direnv hook bash)"
 _direnv_hook

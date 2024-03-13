@@ -14,4 +14,4 @@
 	process = git-lfs filter-process
 
 [includeIf "gitdir:~/"]
-    path = ~/.dotfiles/.gitconfig
+    path = ~/dotfiles/.gitconfig

@@ -86,22 +86,17 @@ install_flake:
 	for a in ~/bin/nix.tmp/*; do if ! test -e $$a; then mark not found $$a; (set -x; cd m/pkg/$$n && ~/bin/b build flake_store && (~/bin/b out flake_store | (cd / && sudo tar xfz - --skip-old-files))); break; fi; done
 	git log -1 --format=%H -- m/pkg/$$n > ~/bin/nix.tmp/.head-$$n
 
+.PHONY: dotfiles
 dotfiles:
 	$(MARK) configure dotfiles
-	mkdir -p ~/work/dotfiles
+	mkdir -p ~/dotfiles
 	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
-		if ! test -d ~/work/dotfiles/.git/.; then \
-			t git_clone_dotfiles git clone git@github.com:$${GIT_AUTHOR_NAME}/dotfiles ~/work/dotfiles; \
+		if ! test -d ~/dotfiles/.git/.; then \
+			t git_clone_dotfiles git clone git@github.com:$${GIT_AUTHOR_NAME}/dotfiles ~/dotfiles; \
 		fi; \
-		mkdir -p ~//work/.codespaces/.persistedshare; \
-		mkdir -p ~/.config/coderv2; \
-		rm -rf ~/work/.codespaces/.persistedshare/dotfiles; \
-		rm -rf ~/.config/coderv2/dotfiles; \
 		rm -rf ~/.dotfiles; \
-		ln -nfs ~/work/dotfiles ~/work/.codespaces/.persistedshare/dotfiles; \
-		ln -nfs ~/work/dotfiles ~/.config/coderv2/dotfiles; \
-		ln -nfs ~/work/dotfiles ~/.dotfiles; \
-		t dofiles_bootstrap ./.dotfiles/bootstrap; \
+		rm -rf ~/dotfiles; \
+		t dotfiles_bootstrap ./dotfiles/bootstrap; \
 	fi
 
 password-store:

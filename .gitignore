@@ -180,6 +180,7 @@ go
 .serverauth*
 .cmake
 .dotfiles
+dotfiles
 .cargo
 graph.in
 graph.png
