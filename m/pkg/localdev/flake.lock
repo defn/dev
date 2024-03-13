@@ -105,6 +105,27 @@
         "type": "github"
       }
     },
+    "dev_12": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_12"
+      },
+      "locked": {
+        "dir": "m/pkg/dev",
+        "lastModified": 1706897346,
+        "narHash": "sha256-i+VwVH4Uu9zsySEOgZ4tqUxOysFfmJalU6tcWACQu5U=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "aa68c18a500d0a0558712dad8a8c26eb018fa69b",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/dev",
+        "owner": "defn",
+        "ref": "pkg-dev-0.0.13",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
     "dev_2": {
       "inputs": {
         "nixpkgs": "nixpkgs_2"
@@ -315,9 +336,30 @@
         "type": "github"
       }
     },
-    "honeymarker": {
+    "ghapps": {
       "inputs": {
         "pkg": "pkg_5"
+      },
+      "locked": {
+        "dir": "m/pkg/ghapps",
+        "lastModified": 1710295950,
+        "narHash": "sha256-R91VJq/T/8soKoB5J2W1WLU5UMou3Ss6kVEY5e+IiGU=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "2ec387f704b3a0f2781a59ab36902e7dc0e3d6b9",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/ghapps",
+        "owner": "defn",
+        "ref": "pkg-ghapps-0.1.12-2",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
+    "honeymarker": {
+      "inputs": {
+        "pkg": "pkg_6"
       },
       "locked": {
         "dir": "m/pkg/honeymarker",
@@ -338,7 +380,7 @@
     },
     "honeytail": {
       "inputs": {
-        "pkg": "pkg_6"
+        "pkg": "pkg_7"
       },
       "locked": {
         "dir": "m/pkg/honeytail",
@@ -359,7 +401,7 @@
     },
     "honeyvent": {
       "inputs": {
-        "pkg": "pkg_7"
+        "pkg": "pkg_8"
       },
       "locked": {
         "dir": "m/pkg/honeyvent",
@@ -380,7 +422,7 @@
     },
     "hugo": {
       "inputs": {
-        "pkg": "pkg_8"
+        "pkg": "pkg_9"
       },
       "locked": {
         "dir": "m/pkg/hugo",
@@ -432,6 +474,22 @@
       }
     },
     "nixpkgs_11": {
+      "locked": {
+        "lastModified": 1700284104,
+        "narHash": "sha256-oNsJfAyAuBCTkusesiK0LWuO59F6vEGcP4wwa7kc1ZA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "005617587ee2b7c003388b4539b9120ebcc90e44",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "005617587ee2b7c003388b4539b9120ebcc90e44",
+        "type": "github"
+      }
+    },
+    "nixpkgs_12": {
       "locked": {
         "lastModified": 1700284104,
         "narHash": "sha256-oNsJfAyAuBCTkusesiK0LWuO59F6vEGcP4wwa7kc1ZA=",
@@ -577,7 +635,7 @@
     },
     "oras": {
       "inputs": {
-        "pkg": "pkg_9"
+        "pkg": "pkg_10"
       },
       "locked": {
         "dir": "m/pkg/oras",
@@ -641,6 +699,27 @@
     "pkg_11": {
       "inputs": {
         "dev": "dev_11"
+      },
+      "locked": {
+        "dir": "m/pkg/pkg",
+        "lastModified": 1706897415,
+        "narHash": "sha256-saMstGOsxMiR6kG+v5pr7vPKIf/BTl/60z8VPicizPs=",
+        "owner": "defn",
+        "repo": "dev",
+        "rev": "e067b8a8a3f8d8c277bfde347b91eaec9e547f0d",
+        "type": "github"
+      },
+      "original": {
+        "dir": "m/pkg/pkg",
+        "owner": "defn",
+        "ref": "pkg-pkg-0.0.16",
+        "repo": "dev",
+        "type": "github"
+      }
+    },
+    "pkg_12": {
+      "inputs": {
+        "dev": "dev_12"
       },
       "locked": {
         "dir": "m/pkg/pkg",
@@ -833,6 +912,7 @@
         "buildkite": "buildkite",
         "earthly": "earthly",
         "gh": "gh",
+        "ghapps": "ghapps",
         "honeymarker": "honeymarker",
         "honeytail": "honeytail",
         "honeyvent": "honeyvent",
@@ -844,7 +924,7 @@
     },
     "tilt": {
       "inputs": {
-        "pkg": "pkg_10"
+        "pkg": "pkg_11"
       },
       "locked": {
         "dir": "m/pkg/tilt",
@@ -865,7 +945,7 @@
     },
     "vault": {
       "inputs": {
-        "pkg": "pkg_11"
+        "pkg": "pkg_12"
       },
       "locked": {
         "dir": "m/pkg/vault",
