@@ -14,6 +14,12 @@ dev:
 	devcontainer up --workspace-folder . --dotfiles-repository=https://github.com/amanibhavam/dotfiles
 	echo "$(cmd)" | base64 -w 0 | devcontainer exec --workspace-folder . bash -c 'cat | base64 -d | bash -x -'	
 
+open:
+	open $${CODER_AGENT_URL}@$${GIT_AUTHOR_NAME}/$(work).main/apps/cs/?folder=/home/ubuntu/m
+
+create:
+	coder create $(work) --template coder-defn-devcontainer-template
+
 dev-macos:
 	@if test -n "$${REMOTE_CONTAINERS_IPC:-}"; then \
 		direnv allow; \
