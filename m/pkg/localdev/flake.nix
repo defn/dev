@@ -2,6 +2,7 @@
   inputs = {
     tilt.url = github:defn/dev/pkg-tilt-0.33.11-1?dir=m/pkg/tilt;
     gh.url = github:defn/dev/pkg-gh-2.45.0-1?dir=m/pkg/gh;
+    ghapps.url = github:defn/dev/pkg-ghapps-2.45.0-1?dir=m/pkg/ghapps;
     earthly.url = github:defn/dev/pkg-earthly-0.8.5-1?dir=m/pkg/earthly;
     oras.url = github:defn/dev/pkg-oras-1.1.0-5?dir=m/pkg/oras;
     buildkite.url = github:defn/dev/pkg-buildkite-3.66.0-1?dir=m/pkg/buildkite;
@@ -22,6 +23,7 @@
           flakeInputs = with ctx.pkgs; [
             inputs.tilt.defaultPackage.${ctx.system}
             inputs.gh.defaultPackage.${ctx.system}
+            inputs.ghapps.defaultPackage.${ctx.system}
             inputs.earthly.defaultPackage.${ctx.system}
             inputs.oras.defaultPackage.${ctx.system}
             inputs.buildkite.defaultPackage.${ctx.system}
