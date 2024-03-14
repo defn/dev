@@ -17,7 +17,7 @@ cmd ?= uname -a; id -a; ps axuf;
 
 dev:
 	devcontainer build --workspace-folder .
-	devcontainer up --workspace-folder . --dotfiles-repository=https://github.com/amanibhavam/dotfiles
+	devcontainer up --workspace-folder .
 	echo "$(cmd)" | base64 -w 0 | devcontainer exec --workspace-folder . bash -c 'cat | base64 -d | bash -x -'	
 
 open:
@@ -25,8 +25,13 @@ open:
 	@open "$$(curl -sSL $$(cat $$HOME/.config/coderv2/url)/api/v2/debug/health -H "Coder-Session-Token: $$(cat $$HOME/.config/coderv2/session)" | jq -r '.access_url.access_url')/@$$(coder list | tail -1 | awk '{print $$1}' | cut -d/ -f1)/$(name).main/apps/cs/?folder=$(shell echo $(workdir) | sed 's#$(HOME)#/home/ubuntu#')"
 #	@echo open "$$(curl -sSL $$(cat $$HOME/.config/coderv2/url)/api/v2/debug/health -H "Coder-Session-Token: $$(cat $$HOME/.config/coderv2/session)" | jq -r '.access_url.access_url' | sed "s#//#//cs--main--$(name)--$$(coder list |tail -1 | awk '{print $$1}' | cut -d/ -f1).#")?folder=$(shell echo $(workdir) | sed 's#$(HOME)#/home/ubuntu#')"
 
+recreate:
+	$(MAKE) clean dev create name=$(name)
+
 create:
-	coder create $(name) --template $(template) --parameter arch=$(arch),homedir=$(workdir),remote=$(remote)
+	coder delete $(name) --yes || true
+	coder create $(name) --template $(template) --parameter arch=$(arch),homedir=$(workdir),remote=$(remote) --yes
+	$(MAKE) open name=$(name)
 
 dev-macos:
 	@if test -n "$${REMOTE_CONTAINERS_IPC:-}"; then \
@@ -195,7 +200,7 @@ cache:
 	cd k && $(MAKE) cache
 	cd c && $(MAKE) cache
 
-recreate:
+k3s-recreate:
 	-bin/make-k3s down
 	$(MAKE) up
 
