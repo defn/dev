@@ -148,7 +148,7 @@ playbook: dump: [{
 role: base_packages: tasks: [{
 	name:   "Install hwe kernel"
 	become: true
-	when:   "ansible_architecture != 'aarch64'"
+	when:   "ansible_architecture != 'aarch64' and ansible_architecture != 'armv7l'"
 	apt: {
 		name: [
 			"linux-generic-hwe-22.04",
