@@ -22,6 +22,10 @@ inventory: {
 	}
 
 	rpi: hosts: [
+		"rpi2a",
+		"rpi3a",
+		"rpi3b",
+		"rpi3c",
 		"rpi4a",
 		"rpi4b",
 		"rpi4c",
@@ -207,6 +211,14 @@ role: base_packages: tasks: [{
 	file: {
 		path:  "/etc/apt/apt.conf.d/99-Phased-Updates"
 		state: "absent"
+	}
+}, {
+	name:   "Disable and stop unattended-upgrades service"
+	become: true
+	systemd: {
+		name:    "unattended-upgrades"
+		enabled: "no"
+		state:   "stopped"
 	}
 }]
 
