@@ -22,6 +22,7 @@ inventory: {
 	}
 
 	rpi: hosts: [
+		"rpi3a",
 		"rpi4a",
 		"rpi4b",
 		"rpi4c",
