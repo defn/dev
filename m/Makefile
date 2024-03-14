@@ -7,6 +7,12 @@ proxy ?= proxy3
 
 work ?=
 
+name ?=
+remote ?= ubuntu@macmini
+workdir ?= /home/ubuntu/m
+arch ?= amd64
+template ?= coder-defn-devcontainer-template
+
 cmd ?= uname -a; id -a; ps axuf;
 
 dev:
@@ -15,10 +21,10 @@ dev:
 	echo "$(cmd)" | base64 -w 0 | devcontainer exec --workspace-folder . bash -c 'cat | base64 -d | bash -x -'	
 
 open:
-	open $${CODER_AGENT_URL}@$${GIT_AUTHOR_NAME}/$(work).main/apps/cs/?folder=/home/ubuntu/m
+	open $${CODER_AGENT_URL}@$${GIT_AUTHOR_NAME}/$(name).main/apps/cs/?folder=$(workdir)
 
 create:
-	coder create $(work) --template coder-defn-devcontainer-template
+	coder create $(name) --template $(template) --parameter arch=$(arch),homedir=$(workdir),remote=$(remote)
 
 dev-macos:
 	@if test -n "$${REMOTE_CONTAINERS_IPC:-}"; then \
@@ -222,6 +228,6 @@ activate:
 	sudo /tmp/ssm/ssm-setup-cli -override -register -activation-code "$(actcode)" -activation-id "$(actid)" -region "$(region)"
 	sudo rm -rf /tmp/ssm
 
-create:
+create-activation:
 	@b agent b exec defn-org aws ssm create-activation --default-instance-name $(name) --iam-role service-role/AmazonEC2RunCommandRoleForManagedInstances --registration-limit 1 --region $(region)  --expiration-date "$$(date -d "+1 day" +"%Y-%m-%dT00:00:00")" | jq -r '"make activate region=$(region) actid=\(.ActivationId) actcode=\(.ActivationCode)"'work ?= /home/ubuntu/m/demo
 
