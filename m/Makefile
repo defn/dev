@@ -21,7 +21,9 @@ dev:
 	echo "$(cmd)" | base64 -w 0 | devcontainer exec --workspace-folder . bash -c 'cat | base64 -d | bash -x -'	
 
 open:
-	open $${CODER_AGENT_URL}@$${GIT_AUTHOR_NAME}/$(name).main/apps/cs/?folder=$(workdir)
+	@while true; do if curl -sSL $$(cat $$HOME/.config/coderv2/url)/api/v2/users/$$(coder list | tail -1 | awk '{print $$1}' | cut -d/ -f1)/workspace/$(name) -H "Coder-Session-Token: $$(cat $$HOME/.config/coderv2/session)" | jq -r '(.latest_build.resources[].agents//[])[].apps[] | select(.display_name == "code-server") | .health' | grep -q ^healthy; then break; fi; date; sleep 5; done
+	@open "$$(curl -sSL $$(cat $$HOME/.config/coderv2/url)/api/v2/debug/health -H "Coder-Session-Token: $$(cat $$HOME/.config/coderv2/session)" | jq -r '.access_url.access_url')/@$$(coder list | tail -1 | awk '{print $$1}' | cut -d/ -f1)/$(name).main/apps/cs/?folder=$(shell echo $(workdir) | sed 's#$(HOME)#/home/ubuntu#')"
+#	@echo open "$$(curl -sSL $$(cat $$HOME/.config/coderv2/url)/api/v2/debug/health -H "Coder-Session-Token: $$(cat $$HOME/.config/coderv2/session)" | jq -r '.access_url.access_url' | sed "s#//#//cs--main--$(name)--$$(coder list |tail -1 | awk '{print $$1}' | cut -d/ -f1).#")?folder=$(shell echo $(workdir) | sed 's#$(HOME)#/home/ubuntu#')"
 
 create:
 	coder create $(name) --template $(template) --parameter arch=$(arch),homedir=$(workdir),remote=$(remote)
