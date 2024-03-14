@@ -38,7 +38,7 @@ dev-macos:
 	fi
 
 clean:
-		docker ps -q -a --filter label=devcontainer.config_file=$$(pwd)/.devcontainer/devcontainer.json | runmany 'docker rm -f $$1 2>/dev/null'
+	docker ps -q -a --filter label=devcontainer.config_file=$$(pwd)/.devcontainer/devcontainer.json | runmany 'docker rm -f $$1 2>/dev/null'
 
 all:
 	rm -f MODULES.bazel.lock
