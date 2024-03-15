@@ -87,5 +87,7 @@
   "bazel.buildifierFixOnFormat": true,
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "genieai.enableConversationHistory": true,
+  "genieai.openai.model": "gpt-3.5-turbo-1106"
 }
