@@ -1,11 +1,56 @@
 [
-    {
-        "key": "ctrl+w",
-        "command": "workbench.action.closeActiveEditor"
-    },
-    {
-        "key": "shift-ctrl+z",
-        "command": "joyride.runWorkspaceScript",
-        "args": "dfd.cljs"
-    }
+  {
+    "key": "ctrl+w",
+    "command": "workbench.action.closeActiveEditor"
+  },
+  {
+    "key": "shift-ctrl+z",
+    "command": "joyride.runWorkspaceScript",
+    "args": "dfd.cljs"
+  },
+  {
+    "key": "cmd+k cmd+1",
+    "command": "-chatgpt-vscode.addTests",
+    "when": "editorHasSelection"
+  },
+  {
+    "key": "cmd+k cmd+2",
+    "command": "-chatgpt-vscode.findProblems",
+    "when": "editorHasSelection"
+  },
+  {
+    "key": "cmd+k cmd+3",
+    "command": "-chatgpt-vscode.optimize",
+    "when": "editorHasSelection"
+  },
+  {
+    "key": "cmd+k cmd+4",
+    "command": "-chatgpt-vscode.explain",
+    "when": "editorHasSelection"
+  },
+  {
+    "key": "cmd+k cmd+5",
+    "command": "-chatgpt-vscode.addComments",
+    "when": "editorHasSelection"
+  },
+  {
+    "key": "cmd+k cmd+6",
+    "command": "-chatgpt-vscode.completeCode",
+    "when": "editorHasSelection"
+  },
+  {
+    "key": "cmd+k cmd+7",
+    "command": "-chatgpt-vscode.adhoc",
+    "when": "editorHasSelection"
+  },
+  {
+    "key": "cmd+k cmd+8",
+    "command": "-chatgpt-vscode.customPrompt1",
+    "when": "editorHasSelection"
+  },
+  {
+    "key": "cmd+k cmd+9",
+    "command": "-chatgpt-vscode.customPrompt2",
+    "when": "editorHasSelection"
+  }
 ]
