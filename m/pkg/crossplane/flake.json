@@ -1,6 +1,6 @@
 {
   "slug": "pkg-crossplane",
   "ghrepo": "crossplane/crossplane",
-  "vendor": "1.15.0",
-  "revision": "1"
+  "vendor": "1.15.1",
+  "revision": "0"
 }
