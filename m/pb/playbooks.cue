@@ -143,11 +143,14 @@ role: base_packages: tasks: [{
 	become: true
 	apt: {
 		name: [
-			"direnv", "make", "net-tools", "lsb-release", "tzdata", "locales",
-			"ca-certificates", "iproute2", "sudo", "curl", "build-essential",
-			"openssh-client", "rsync", "git", "git-lfs", "fzf", "jq", "gettext",
+			// basics for container images
+			"direnv", "curl", "xz-utils", "sudo", "locales", "git",
+			"build-essential", "rsync", "pipx",
+			// forthe rest of the build
+			"make", "net-tools", "lsb-release", "tzdata", "ca-certificates",
+			"iproute2", "openssh-client", "git-lfs", "fzf", "jq", "gettext",
 			"direnv", "ncdu", "apache2-utils", "fontconfig", "docker.io",
-			"tzdata", "locales", "sudo", "xz-utils",
+			"tzdata",
 		]
 		state: "present"
 	}

@@ -13,6 +13,4 @@ WORKDIR /home/ubuntu
 
 RUN bash -c 'cd ~ && git clone https://github.com/defn/dev dev && mv dev/.git . && rm -rf dev && git reset --hard'
 RUN bash -c 'cd ~ && source ~/.bash_profile && ~/bin/persist-cache'
-RUn bash -c 'cd ~ && source ~/.bash_profile && cd m/pb && make base_ubuntu opt="-i inventory/packer.ini -e ansible_connection=local"'
-RUN bash -c 'cd ~ && source ~/.bash_profile && make install'
-RUN git remote rm origin && git remote add origin git@github.com:defn/dev
+RUN bash -c 'cd ~ && source ~/.bash_profile && cd m/pb && make base_ubuntu opt="-i inventory/packer.ini -e ansible_connection=local"'

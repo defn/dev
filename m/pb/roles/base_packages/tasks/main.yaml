@@ -10,19 +10,21 @@
   apt:
     name:
       - direnv
+      - curl
+      - xz-utils
+      - sudo
+      - locales
+      - git
+      - build-essential
+      - rsync
+      - pipx
       - make
       - net-tools
       - lsb-release
       - tzdata
-      - locales
       - ca-certificates
       - iproute2
-      - sudo
-      - curl
-      - build-essential
       - openssh-client
-      - rsync
-      - git
       - git-lfs
       - fzf
       - jq
@@ -33,9 +35,6 @@
       - fontconfig
       - docker.io
       - tzdata
-      - locales
-      - sudo
-      - xz-utils
     state: present
 - name: Remove packages
   become: true
