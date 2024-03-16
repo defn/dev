@@ -48,17 +48,17 @@
       },
       "locked": {
         "dir": "m/pkg/cilium",
-        "lastModified": 1710449427,
-        "narHash": "sha256-sWCifia0R5vUO5m5q4y1mQpuJFoXFNFUCRkDlSQHnlo=",
+        "lastModified": 1710547725,
+        "narHash": "sha256-0XCNaAD8DzNLh/4ox+IoW0DVsws4Pbqm4e6bS4oNjlM=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "965c12e4eba99d661e7c7f46897dfb7be0dd3998",
+        "rev": "cfea6b6fdd62a20644d229d253d3308e186a4b95",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cilium",
         "owner": "defn",
-        "ref": "pkg-cilium-0.16.1-1",
+        "ref": "pkg-cilium-0.16.2-1",
         "repo": "dev",
         "type": "github"
       }
@@ -69,17 +69,17 @@
       },
       "locked": {
         "dir": "m/pkg/crossplane",
-        "lastModified": 1708046705,
-        "narHash": "sha256-VW/BKp3vizCALGgxVuZxNyOTyTwLXbMw+aJ2sWLwAZQ=",
+        "lastModified": 1710547744,
+        "narHash": "sha256-Z4MuH8Tbo6r0BkvBDZetjsN7M6YAgeYecFV6er7sXz4=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "d99efb58d048aa92ab6ad26f1fb276ad7e73ba47",
+        "rev": "0adc2f4ba8f92f0010090afff542f2cdbd55ef4d",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/crossplane",
         "owner": "defn",
-        "ref": "pkg-crossplane-1.15.0-1",
+        "ref": "pkg-crossplane-1.15.1-1",
         "repo": "dev",
         "type": "github"
       }
