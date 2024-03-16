@@ -30,7 +30,7 @@ cue_export(
     name = "config",
     srcs = [
         "//cue.mod:cue_mod",
-        "//infra:cue"
+        "//infra:cue",
     ],
     cues = glob(["*.cue"]),
 )

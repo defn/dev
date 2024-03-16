@@ -7,11 +7,13 @@ go_library(
         "stack-aws-organization.go",
         "stack-coder-defn-ec2.go",
         "stack-global.go",
+        "tf.go",
     ],
     importpath = "github.com/defn/dev/m/tf",
     visibility = ["//visibility:public"],
     deps = [
         "//command/infra",
+        "//command/root",
         "//tf/gen/coder/coder/agent",
         "//tf/gen/coder/coder/app",
         "//tf/gen/coder/coder/datacoderparameter",
@@ -42,5 +44,6 @@ go_library(
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//ssoadminmanagedpolicyattachment",
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//ssoadminpermissionset",
         "@com_github_hashicorp_terraform_cdk_go_cdktf//:cdktf",
+        "@com_github_spf13_cobra//:cobra",
     ],
 )

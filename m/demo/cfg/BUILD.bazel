@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "cfg_lib",
+    srcs = ["cfg.go"],
+    embedsrcs = ["schema.cue"],
+    importpath = "github.com/defn/dev/m/demo/cfg",
+    visibility = ["//visibility:private"],
+    deps = ["//tf:tf_lib"],
+)
+
+go_binary(
+    name = "cfg",
+    embed = [":cfg_lib"],
+    visibility = ["//visibility:public"],
+)

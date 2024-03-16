@@ -35,6 +35,7 @@ pkg/development/.direnv
 pkg/dyff/.direnv
 pkg/earthly/.direnv
 pkg/gh/.direnv
+pkg/ghapps/.direnv
 pkg/glow/.direnv
 pkg/godev/.direnv
 pkg/goreleaser/.direnv
@@ -118,6 +119,7 @@ pkg/development/result
 pkg/dyff/result
 pkg/earthly/result
 pkg/gh/result
+pkg/ghapps/result
 pkg/glow/result
 pkg/godev/result
 pkg/goreleaser/result
