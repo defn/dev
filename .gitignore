@@ -220,3 +220,4 @@ bin/*/trunk
 bin/devcontainer
 .gitconfig
 .devcontainer
+.timestamp
