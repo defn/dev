@@ -93,8 +93,6 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 			"GIT_AUTHOR_NAME":     devCoderWorkspace.Owner(),
 			"GIT_COMMITTER_EMAIL": devCoderWorkspace.OwnerEmail(),
 			"GIT_COMMITTER_NAME":  devCoderWorkspace.Owner(),
-			"LC_ALL":              infra.Js("C.UTF-8"),
-			"LOCAL_ARCHIVE":       infra.Js("/usr/lib/locale/locale-archive"),
 		},
 		Os:                   paramOs.Value(),
 		StartupScript:        infra.Js(`export STARSHIP_NO= && source .bash_profile && code-server --auth none`),

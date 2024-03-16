@@ -76,8 +76,6 @@ resource "coder_agent" "main" {
     GIT_AUTHOR_NAME     = "${data.coder_workspace.me.owner}"
     GIT_COMMITTER_EMAIL = "${data.coder_workspace.me.owner_email}"
     GIT_COMMITTER_NAME  = "${data.coder_workspace.me.owner}"
-    LC_ALL              = "C.UTF-8"
-    LOCAL_ARCHIVE       = "/usr/lib/locale/locale-archive"
   }
   os                     = data.coder_parameter.os.value
   startup_script         = "export STARSHIP_NO= && source .bash_profile && code-server --auth none"
