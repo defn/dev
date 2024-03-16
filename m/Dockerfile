@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM 127.0.0.1:4999/ubuntu:22.04
 
 RUN export DEBIAN_FRONTEND=noninteractive && apt update && apt install -y direnv curl xz-utils sudo locales git build-essential rsync pipx
 RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
