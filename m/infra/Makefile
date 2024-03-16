@@ -15,8 +15,8 @@ build: ../node_modules/.bin/cdktf
 # remove local backend path
 	runmany 'perl -pe "s{^\s*path\s*=.*}{}g if m{tfstate}" -i $$1' cdktf.out/stacks/*/cdk.tf
 # restore locks
-	git status -sb | grep lock.hcl | awk '{print $$2}' | xargs git reset --
-	git status -sb | grep lock.hcl | awk '{print $$2}' | xargs git checkout --
+	-git status -sb | grep lock.hcl | awk '{print $$2}' | xargs git reset --
+	-git status -sb | grep lock.hcl | awk '{print $$2}' | xargs git checkout --
 # add files to staging area for enumeration
 	git add cdktf.out
 	git add -u cdktf.out

@@ -1,7 +1,7 @@
 template := $(shell basename $(shell pwd))
 
 push:
-	tar -cvh --exclude .terraform . | coder templates push -y -d - "$(template)"
+	(cd .. && tar -cvh --exclude .terraform mod $(template)) | coder templates push -y -d - $(template)
 
 workspace ?= $(shell basename $(shell pwd))
 dir ?= $(shell pwd)

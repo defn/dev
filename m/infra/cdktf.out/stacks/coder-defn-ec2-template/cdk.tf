@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.38.0"
+      version = "5.41.0"
       source  = "aws"
     }
     coder = {
@@ -325,6 +325,7 @@ fi
 nohup sudo -H -E -u ${data.coder_parameter.username.value} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${data.coder_workspace.me.access_url} coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name} ${coder_agent.main.token}' >>/tmp/user-data.log 2>&1 &
 disown
 --//--
+
 EOF
   vpc_security_group_ids = [
     "${aws_security_group.dev_security_group.id}"

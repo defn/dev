@@ -26,7 +26,7 @@ module "immanent-changer" {
   name      = "terraform"
   namespace = "immanent"
   stage     = "ops"
-  source    = "../../mod/terraform-aws-defn-account"
+  source    = "../mod/terraform-aws-defn-account"
   providers = {
     aws = aws.immanent-changer
   }

@@ -26,7 +26,7 @@ module "imma-prod" {
   name      = "terraform"
   namespace = "imma"
   stage     = "ops"
-  source    = "../../mod/terraform-aws-defn-account"
+  source    = "../mod/terraform-aws-defn-account"
   providers = {
     aws = aws.imma-prod
   }

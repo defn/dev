@@ -26,7 +26,7 @@ module "curl-org" {
   name      = "terraform"
   namespace = "curl"
   stage     = "ops"
-  source    = "../../mod/terraform-aws-defn-account"
+  source    = "../mod/terraform-aws-defn-account"
   providers = {
     aws = aws.curl-org
   }

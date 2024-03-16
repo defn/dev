@@ -26,7 +26,7 @@ module "chamber-m" {
   name      = "terraform"
   namespace = "chamber"
   stage     = "ops"
-  source    = "../../mod/terraform-aws-defn-account"
+  source    = "../mod/terraform-aws-defn-account"
   providers = {
     aws = aws.chamber-m
   }

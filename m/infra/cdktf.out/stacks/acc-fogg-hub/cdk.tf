@@ -26,7 +26,7 @@ module "fogg-hub" {
   name      = "terraform"
   namespace = "fogg"
   stage     = "ops"
-  source    = "../../mod/terraform-aws-defn-account"
+  source    = "../mod/terraform-aws-defn-account"
   providers = {
     aws = aws.fogg-hub
   }

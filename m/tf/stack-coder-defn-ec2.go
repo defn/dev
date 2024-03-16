@@ -309,8 +309,9 @@ func CoderDefnEc2Stack(scope constructs.Construct, site *infra.AwsProps, name st
 		DeploymentPrincipalArns: &map[string]*[]*string{
 			roleArn: {infra.Js("/openid")},
 		},
-		OriginForceDestroy: infra.Jstrue(),
-		VersioningEnabled:  infra.Jsfalse(),
+		OriginForceDestroy:                infra.Jstrue(),
+		VersioningEnabled:                 infra.Jsfalse(),
+		SkipAssetCreationFromLocalModules: infra.Jstrue(),
 	})
 
 	devInstanceProfile := iaminstanceprofile.NewIamInstanceProfile(stack, infra.Js("dev_instance_profile"), &iaminstanceprofile.IamInstanceProfileConfig{

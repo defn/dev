@@ -26,7 +26,7 @@ module "spiral-net" {
   name      = "terraform"
   namespace = "spiral"
   stage     = "ops"
-  source    = "../../mod/terraform-aws-defn-account"
+  source    = "../mod/terraform-aws-defn-account"
   providers = {
     aws = aws.spiral-net
   }

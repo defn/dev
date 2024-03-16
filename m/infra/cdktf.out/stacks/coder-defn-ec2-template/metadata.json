@@ -3,10 +3,9 @@
     "metadata": {
       "backend": "local",
       "stackName": "coder-defn-ec2-template",
-      "version": "0.20.3"
+      "version": "0.20.4"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "data": {
     "aws_ami": {
@@ -227,13 +226,13 @@
   "terraform": {
     "backend": {
       "local": {
-        "path": "/home/ubuntu/m/tf/terraform.coder-defn-ec2-template.tfstate"
+        "path": "/home/ubuntu/m/infra/terraform.coder-defn-ec2-template.tfstate"
       }
     },
     "required_providers": {
       "aws": {
         "source": "aws",
-        "version": "5.38.0"
+        "version": "5.41.0"
       },
       "coder": {
         "source": "coder/coder",
