@@ -24,6 +24,15 @@ data "coder_parameter" "homedir" {
   type         = "string"
 }
 
+data "coder_parameter" "command" {
+  default      = "make coder-ssh-linux"
+  description  = "Remote command"
+  display_name = "Remote command"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  name         = "command"
+  type         = "string"
+}
+
 data "coder_parameter" "remote" {
   default      = ""
   description  = "Remote ssh"
@@ -74,7 +83,7 @@ resource "null_resource" "deploy" {
     always_run = "${coder_agent.main.token}"
   }
   provisioner "local-exec" {
-    command = "( (echo pkill -9 -f coder.agent '||' true; echo pkill -9 -f code-server '||' true; echo cd; echo export STARSHIP_NO=1 CODER_AGENT_TOKEN=${coder_agent.main.token}; echo source .bash_profile; echo ${base64encode(coder_agent.main.init_script)} | base64 -d) | ssh ${data.coder_parameter.remote.value} bash -x - >>/tmp/startup2.log 2>&1 &) &"
+    command = "( (echo cd; echo env CODER_AGENT_TOKEN=${coder_agent.main.token} CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} ${data.coder_parameter.command.value} | base64 -d) | ssh ${data.coder_parameter.remote.value} bash -x - >>/tmp/startup2.log 2>&1 &) &"
     when    = create
   }
 }

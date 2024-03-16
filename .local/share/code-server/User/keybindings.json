@@ -33,7 +33,7 @@
     "command": "chatgpt-vscode.optimize",
     "when": "editorHasSelection"
   },
-   {
+  {
     "key": "cmd+k cmd+3",
     "command": "-chatgpt-vscode.optimize",
     "when": "editorHasSelection"
@@ -43,7 +43,7 @@
     "command": "chatgpt-vscode.explain",
     "when": "editorHasSelection"
   },
-   {
+  {
     "key": "cmd+k cmd+4",
     "command": "-chatgpt-vscode.explain",
     "when": "editorHasSelection"
@@ -53,7 +53,7 @@
     "command": "chatgpt-vscode.addComments",
     "when": "editorHasSelection"
   },
-   {
+  {
     "key": "cmd+k cmd+5",
     "command": "-chatgpt-vscode.addComments",
     "when": "editorHasSelection"
