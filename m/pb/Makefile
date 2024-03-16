@@ -2,11 +2,17 @@ second = $(word 2, $(subst -, ,$@))
 
 pb ?= 
 limit ?= 
-opt ?=
+check ?=
 
 ifdef limit
-opt = -l "$(limit)"
+opt_limit = -l "$(limit)"
 endif
+
+ifdef check
+opt_check = --check --diff
+endif
+
+opt ?= $(opt_limit) $(opt_check)
 
 build:
 	cue fmt $$(git ls-files | grep 'cue$$')
