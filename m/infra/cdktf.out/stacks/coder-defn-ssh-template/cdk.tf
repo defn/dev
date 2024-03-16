@@ -87,7 +87,7 @@ resource "null_resource" "deploy" {
     always_run = "${coder_agent.main.token}"
   }
   provisioner "local-exec" {
-    command = "( (echo cd; echo env CODER_AGENT_TOKEN=${coder_agent.main.token} CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} ${data.coder_parameter.command.value} | base64 -d) | ssh ${data.coder_parameter.remote.value} bash -x - >>/tmp/startup2.log 2>&1 &) &"
+    command = "( (echo cd; echo env CODER_AGENT_TOKEN=${coder_agent.main.token} CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} ${data.coder_parameter.command.value}) | ssh ${data.coder_parameter.remote.value} bash -x - >>/tmp/startup-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}.log 2>&1 &) &"
     when    = create
   }
 }
