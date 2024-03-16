@@ -1,6 +1,6 @@
 {
   "name": "defn.dev demo",
-  "dockerFile": "../../Dockerfile",
+  "dockerFile": "Dockerfile",
   "runArgs": [
     "--init",
     "--privileged",
