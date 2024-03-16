@@ -246,7 +246,7 @@ nix-Darwin-bootstrap:
 	ln -nfs  /nix/var/nix/profiles/default ~/.nix-profile
 
 coder-ssh-linux:
-	@kill -9 -$$(ps -o pgid= -p $$(pgrep -f coder.agen[t].$(CODER_NAME) | head -1))
+	@-kill -9 -$$(ps -o pgid= -p $$(pgrep -f coder.agen[t].$$(uname -n) | head -1))
 	@export STARSHIP_NO=1 LC_ALL=C.UTF-8 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive && source ~/.bash_profile && cd $(CODER_HOMEDIR) \
 		&& echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | sed 's#agent$$#agent $(CODER_NAME)#' | exec bash -x -
 
