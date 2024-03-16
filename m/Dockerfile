@@ -18,4 +18,7 @@ RUn bash -c 'cd ~ && source ~/.bash_profile && cd m/pb && make base_ubuntu opt="
 RUN bash -c 'cd ~ && source ~/.bash_profile && make install'
 
 RUN bash -c 'cd ~ && source ~/.bash_profile && ~/bin/persist-cache'
+
+COPY . /tmp/bleh
+RUN bash -c 'cd ~ && source ~/.bash_profile && git pull'
 RUN git remote rm origin && git remote add origin git@github.com:defn/dev
