@@ -1,8 +1,6 @@
 package command
 
 import (
-	_ "embed"
-
 	"fmt"
 
 	"cuelang.org/go/cue"
@@ -26,8 +24,8 @@ type AwsAccount struct {
 	Region   string                        `json:"region"`
 	Cfg      CfgTerraformAwsS3BucketConfig `json:"cfg"`
 
-	Url     string                    `json:"url"`
-	Id string `json:"id"`
+	Url string `json:"url"`
+	Id  string `json:"id"`
 }
 
 type AwsBackend struct {

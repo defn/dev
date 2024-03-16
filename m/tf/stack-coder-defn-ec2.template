@@ -40,5 +40,5 @@ if ! tailscale ip -4 | grep ^100; then
 fi
 
 nohup sudo -H -E -u {{.ParamUserName}} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh {{.DevCoderWorkspaceAccessUrl}} coder-{{.DevCoderWorkspaceOwner}}-{{.DevCoderWorkspaceName}} {{.DevCoderAgentToken}}' >>/tmp/user-data.log 2>&1 &
-disown
+disownx
 --//--

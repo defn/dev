@@ -1,6 +1,8 @@
 package tf
 
 import (
+	_ "embed"
+
 	"bytes"
 	"fmt"
 	"html/template"
@@ -32,6 +34,9 @@ import (
 
 	infra "github.com/defn/dev/m/command/infra"
 )
+
+//go:embed stack-coder-defn-ec2.template
+var cloud_init string
 
 type ConfigData struct {
 	DevCoderWorkspaceOwner     string
@@ -167,7 +172,7 @@ func CoderDefnEc2Stack(scope constructs.Construct, site *infra.AwsProps, name st
 		DevCoderWorkspaceToken:     *devCoderAgent.Token(),
 	}
 
-	tmpl, err := template.ParseFiles("stack-coder-den-ec2.template")
+	tmpl, err := template.New("cloud_init").Parse(cloud_init)
 	if err != nil {
 		panic(err)
 	}

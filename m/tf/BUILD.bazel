@@ -9,6 +9,7 @@ go_library(
         "stack-global.go",
         "tf.go",
     ],
+    embedsrcs = ["stack-coder-defn-ec2.template"],
     importpath = "github.com/defn/dev/m/tf",
     visibility = ["//visibility:public"],
     deps = [
