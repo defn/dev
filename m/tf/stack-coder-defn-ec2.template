@@ -1,0 +1,44 @@
+Content-type: multipart/mixed; boundary="//"
+MIME-Version: 1.0
+
+--//
+Content-type: text/cloud-config; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="cloud-config.txt"
+
+#cloud-config
+hostname: coder-{{.DevCoderWorkspaceOwner}}-{{.DevCoderWorkspaceName}}
+cloud_final_modules:
+- [scripts-user, always]
+
+--//
+Content-type: text/x-shellscript; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="userdata.txt"
+
+#!/bin/bash
+
+set -x
+
+echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf
+echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf
+echo 'fs.inotify.max_user_instances = 10000' | sudo tee -a /etc/sysctl.d/99-dfd.conf
+echo 'fs.inotify.max_user_watches = 524288' | sudo tee -a /etc/sysctl.d/99-dfd.conf
+sudo sysctl -p /etc/sysctl.d/99-dfd.conf
+
+while true; do
+  if test -n "$(dig +short "cache.nixos.org" || true)"; then
+    break
+  fi
+  sleep 5
+done
+
+if ! tailscale ip -4 | grep ^100; then
+  sudo tailscale up --accept-dns --accept-routes --authkey="{{.ParamTailscaleAuthKey}}" --operator=ubuntu --ssh --timeout 60s
+fi
+
+nohup sudo -H -E -u {{.ParamUserName}} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh {{.DevCoderWorkspaceAccessUrl}} coder-{{.DevCoderWorkspaceOwner}}-{{.DevCoderWorkspaceName}} {{.DevCoderAgentToken}}' >>/tmp/user-data.log 2>&1 &
+disown
+--//--

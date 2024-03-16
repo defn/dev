@@ -1,7 +1,9 @@
 package tf
 
 import (
+	"bytes"
 	"fmt"
+	"html/template"
 
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
@@ -30,6 +32,15 @@ import (
 
 	infra "github.com/defn/dev/m/command/infra"
 )
+
+type ConfigData struct {
+	DevCoderWorkspaceOwner     string
+	DevCoderWorkspaceName      string
+	ParamTailscaleAuthKey      string
+	ParamUsername              string
+	DevCoderWorkspaceAccessUrl string
+	DevCoderWorkspaceToken     string
+}
 
 func CoderDefnEc2Stack(scope constructs.Construct, site *infra.AwsProps, name string) cdktf.TerraformStack {
 	stack := cdktf.NewTerraformStack(scope, infra.Js(fmt.Sprintf("coder-defn-ec2-%s", name)))
@@ -147,53 +158,27 @@ func CoderDefnEc2Stack(scope constructs.Construct, site *infra.AwsProps, name st
 
 	devWorkspaceName := infra.Js("coder-${" + *devCoderWorkspace.Owner() + "}-${" + *devCoderWorkspace.Name() + "}")
 
-	devUserData := fmt.Sprintf(`Content-type: multipart/mixed; boundary="//"
-MIME-Version: 1.0
+	data := ConfigData{
+		DevCoderWorkspaceOwner:     *devCoderWorkspace.Owner(),
+		DevCoderWorkspaceName:      *devCoderWorkspace.Name(),
+		ParamTailscaleAuthKey:      *paramTailscaleAuthKey.Value(),
+		ParamUsername:              *paramUsername.Value(),
+		DevCoderWorkspaceAccessUrl: *devCoderWorkspace.AccessUrl(),
+		DevCoderWorkspaceToken:     *devCoderAgent.Token(),
+	}
 
---//
-Content-type: text/cloud-config; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="cloud-config.txt"
+	tmpl, err := template.ParseFiles("stack-coder-den-ec2.template")
+	if err != nil {
+		panic(err)
+	}
 
-#cloud-config
-hostname: coder-${%s}-${%s}
-cloud_final_modules:
-- [scripts-user, always]
+	var tpl bytes.Buffer
+	err = tmpl.Execute(&tpl, data)
+	if err != nil {
+		panic(err)
+	}
 
---//
-Content-type: text/x-shellscript; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="userdata.txt"
-
-#!/bin/bash
-
-set -x
-
-echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf
-echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf
-echo 'fs.inotify.max_user_instances = 10000' | sudo tee -a /etc/sysctl.d/99-dfd.conf
-echo 'fs.inotify.max_user_watches = 524288' | sudo tee -a /etc/sysctl.d/99-dfd.conf
-sudo sysctl -p /etc/sysctl.d/99-dfd.conf
-
-while true; do
-  if test -n "$(dig +short "cache.nixos.org" || true)"; then
-    break
-  fi
-  sleep 5
-done
-
-if ! tailscale ip -4 | grep ^100; then
-  sudo tailscale up --accept-dns --accept-routes --authkey="%s" --operator=ubuntu --ssh --timeout 60s
-fi
-
-nohup sudo -H -E -u %s bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${%s} coder-${%s}-${%s} ${%s}' >>/tmp/user-data.log 2>&1 &
-disown
---//--`,
-		*devCoderWorkspace.Owner(), *devCoderWorkspace.Name(),
-		*paramTailscaleAuthKey.Value(), *paramUsername.Value(),
-		*devCoderWorkspace.AccessUrl(), *devCoderWorkspace.Owner(), *devCoderWorkspace.Name(), *devCoderAgent.Token())
+	devUserData := tpl.String()
 
 	devVpc := defaultvpc.NewDefaultVpc(stack, infra.Js("default"), &defaultvpc.DefaultVpcConfig{})
 
