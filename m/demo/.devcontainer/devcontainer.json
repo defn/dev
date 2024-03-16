@@ -8,9 +8,10 @@
     "-u",
     "ubuntu"
   ],
-  "workspaceMount": "source=/home/ubuntu,target=/home/ubuntu,type=bind,consistency=cached",
+  "workspaceMount": "source=/home/ubuntu,target=/home/ubuntu,type=bind",
   "workspaceFolder": "/home/ubuntu",
   "mounts": [
-    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
+    "source=/nix,target=/nix,type=bind"
   ]
 }
