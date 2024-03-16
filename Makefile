@@ -248,7 +248,7 @@ nix-Darwin-bootstrap:
 coder-ssh-linux:
 	@-kill -9 -$$(ps -o pgid= -p $$(pgrep -f coder.agen[t].$$(uname -n) | head -1))
 	@export STARSHIP_NO=1 LC_ALL=C.UTF-8 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive && source ~/.bash_profile && cd $(CODER_HOMEDIR) \
-		&& echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | sed 's#agent$$#agent $(CODER_NAME)#' | exec bash -x -
+		&& echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | sed 's#agent$$#agent $$(uname -n)#' | exec bash -x -
 
 coder-ssh-devcontainer:
 	-source .bash_profile && cd $(CODER_HOMEDIR) && docker ps -q -a --filter label=devcontainer.config_file=$$(pwd)/.devcontainer/devcontainer.json | runmany 'docker rm -f $$1 2>/dev/null'
