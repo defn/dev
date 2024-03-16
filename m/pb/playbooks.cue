@@ -40,7 +40,7 @@ inventory: {
 		}
 	}
 
-	mac: district: {
+	mac: {
 		hosts: [
 			"macmini",
 		]
