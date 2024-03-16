@@ -8,6 +8,7 @@ require (
 	github.com/aws/jsii-runtime-go v1.95.0
 	github.com/botanica-consulting/wiredialer v0.0.0-20230710124424-ca42731e9a5c
 	github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.10.0
+	github.com/cdktf/cdktf-provider-null-go/null/v10 v10.0.0
 	github.com/charmbracelet/bubbles v0.18.0
 	github.com/charmbracelet/bubbletea v0.25.0
 	github.com/charmbracelet/lipgloss v0.10.0

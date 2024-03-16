@@ -12,6 +12,8 @@ build: ../node_modules/.bin/cdktf
 	runmany 'perl -pe "s{\"ami\",}{ami,}g" -i $$1' cdktf.out/stacks/*/cdk.tf
 # remove quotes from strings
 	runmany 'perl -pe "s{\\\\\"}{\"}g" -i $$1' cdktf.out/stacks/*/cdk.tf
+# rewrite missing empty string
+	runmany 'perl -pe "s{default\s*=\s*$$}{default = \"\"\n}g" -i $$1' cdktf.out/stacks/*/cdk.tf
 # remove local backend path
 	runmany 'perl -pe "s{^\s*path\s*=.*}{}g if m{tfstate}" -i $$1' cdktf.out/stacks/*/cdk.tf
 # restore locks
@@ -20,11 +22,13 @@ build: ../node_modules/.bin/cdktf
 # add files to staging area for enumeration
 	git add cdktf.out
 	git add -u cdktf.out
-	trunk fmt $(git ls-files .)
+	trunk fmt $$(git ls-files .)
+	terraform fmt $$(git ls-files . | grep 'tf$$')
 # add whitespace between blocks
 	git ls-files cdktf.out | grep 'tf$$' | while read -r a; do perl -pe 's#^}$$#}\n#' $$a | awk 'NF {print; blank=0} !NF && !blank++ {print}' > $$a.tmp && mv $$a.tmp $$a; done
 # fmt
-	trunk fmt $(git ls-files .)
+	trunk fmt $$(git ls-files .)
+	terraform fmt $$(git ls-files . | grep 'tf$$')
 # add mod symlinks
 	runmany 'ln -nfs ../../../../tf/mod $$1/' cdktf.out/stacks/*/
 # final add

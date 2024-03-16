@@ -47,6 +47,8 @@ go_library(
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//ssoadminaccountassignment",
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//ssoadminmanagedpolicyattachment",
         "@com_github_cdktf_cdktf_provider_aws_go_aws_v19//ssoadminpermissionset",
+        "@com_github_cdktf_cdktf_provider_null_go_null_v10//provider",
+        "@com_github_cdktf_cdktf_provider_null_go_null_v10//resource",
         "@com_github_hashicorp_terraform_cdk_go_cdktf//:cdktf",
         "@com_github_spf13_cobra//:cobra",
     ],

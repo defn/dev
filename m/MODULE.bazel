@@ -39,6 +39,7 @@ use_repo(
     go_deps,
     "com_github_botanica_consulting_wiredialer",
     "com_github_cdktf_cdktf_provider_aws_go_aws_v19",
+    "com_github_cdktf_cdktf_provider_null_go_null_v10",
     "com_github_aws_constructs_go_constructs_v10",
     "com_github_aws_jsii_runtime_go",
     "com_github_charmbracelet_bubbles",

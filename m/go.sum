@@ -20,6 +20,8 @@ github.com/bytedance/sonic v1.11.3 h1:jRN+yEjakWh8aK5FzrciUHG8OFXK+4/KrAX/ysEtHA
 github.com/bytedance/sonic v1.11.3/go.mod h1:iZcSUejdk5aukTND/Eu/ivjQuEL0Cu9/rf50Hi0u/g4=
 github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.10.0 h1:P2ApvtvV91fZoTCjc+0fnHT1+ABSKAUHPPxP2ANDnkM=
 github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.10.0/go.mod h1:AWzE3QzMVs7sKub+jZ7IEyTmVEUwHI2cZ7STGexDXG4=
+github.com/cdktf/cdktf-provider-null-go/null/v10 v10.0.0 h1:OyuTnRm3hFMN/r8jDMM4Lndr1ZyNzAjbGVF2DdX9p5Q=
+github.com/cdktf/cdktf-provider-null-go/null/v10 v10.0.0/go.mod h1:XKD0P0kMxOefMgcyrGOWRz6DNLFaIU5GhnL8P9kwmxM=
 github.com/charmbracelet/bubbles v0.18.0 h1:PYv1A036luoBGroX6VWjQIE9Syf2Wby2oOl/39KLfy0=
 github.com/charmbracelet/bubbles v0.18.0/go.mod h1:08qhZhtIwzgrtBjAcJnij1t1H0ZRjwHyGsy6AL11PSw=
 github.com/charmbracelet/bubbletea v0.25.0 h1:bAfwk7jRz7FKFl9RzlIULPkStffg5k6pNt5dywy4TcM=
