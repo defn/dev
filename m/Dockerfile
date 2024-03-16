@@ -19,5 +19,6 @@ RUN bash -c 'cd ~ && source ~/.bash_profile && make install'
 RUN mkdir -p /tmp/bleh
 COPY .timestamp /tmp/bleh/
 RUN bash -c 'cd ~ && source ~/.bash_profile && git pull'
+RUN bash -c 'cd ~ && source ~/.bash_profile && ~/bin/persist-cache'
 RUN bash -c 'cd ~ && source ~/.bash_profile && make home'
 RUN git remote rm origin && git remote add origin git@github.com:defn/dev
