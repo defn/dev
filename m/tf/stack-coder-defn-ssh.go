@@ -58,6 +58,16 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 		Mutable:     infra.Jstrue(),
 	})
 
+	paramOs := datacoderparameter.NewDataCoderParameter(stack, infra.Js("os"), &datacoderparameter.DataCoderParameterConfig{
+		Default:     infra.Js("linux"),
+		Description: infra.Js("Operating system"),
+		DisplayName: infra.Js("Operation system"),
+		Icon:        infra.Js("https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"),
+		Name:        infra.Js("os"),
+		Type:        infra.Js("string"),
+		Mutable:     infra.Jstrue(),
+	})
+
 	paramArch := datacoderparameter.NewDataCoderParameter(stack, infra.Js("arch"), &datacoderparameter.DataCoderParameterConfig{
 		Default:     infra.Js("amd64"),
 		Description: infra.Js("CPU arch"),
@@ -86,7 +96,7 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 			"LC_ALL":              infra.Js("C.UTF-8"),
 			"LOCAL_ARCHIVE":       infra.Js("/usr/lib/locale/locale-archive"),
 		},
-		Os:                   infra.Js("linux"),
+		Os:                   paramOs.Value(),
 		StartupScript:        infra.Js(`export STARSHIP_NO= && source .bash_profile && code-server --auth none`),
 		StartupScriptTimeout: infra.Jsn(180),
 	})

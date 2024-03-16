@@ -45,6 +45,16 @@ data "coder_parameter" "remote" {
   type         = "string"
 }
 
+data "coder_parameter" "os" {
+  default      = "linux"
+  description  = "Operating system"
+  display_name = "Operation system"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  mutable      = true
+  name         = "os"
+  type         = "string"
+}
+
 data "coder_parameter" "arch" {
   default      = "amd64"
   description  = "CPU arch"
@@ -69,7 +79,7 @@ resource "coder_agent" "main" {
     LC_ALL              = "C.UTF-8"
     LOCAL_ARCHIVE       = "/usr/lib/locale/locale-archive"
   }
-  os                     = "linux"
+  os                     = data.coder_parameter.os.value
   startup_script         = "export STARSHIP_NO= && source .bash_profile && code-server --auth none"
   startup_script_timeout = 180
   display_apps {

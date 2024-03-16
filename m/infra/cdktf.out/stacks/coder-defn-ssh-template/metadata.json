@@ -36,6 +36,14 @@
           }
         }
       },
+      "os": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ssh-template/os",
+            "uniqueId": "os"
+          }
+        }
+      },
       "remote": {
         "//": {
           "metadata": {
