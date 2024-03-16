@@ -5,7 +5,8 @@
       "stackName": "acc-chamber-t",
       "version": "0.20.4"
     },
-    "outputs": {}
+    "outputs": {
+    }
   },
   "module": {
     "chamber-t": {

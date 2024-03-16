@@ -5,7 +5,8 @@
       "stackName": "acc-whoa-dev",
       "version": "0.20.4"
     },
-    "outputs": {}
+    "outputs": {
+    }
   },
   "module": {
     "whoa-dev": {

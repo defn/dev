@@ -5,7 +5,8 @@
       "stackName": "acc-imma-defn",
       "version": "0.20.4"
     },
-    "outputs": {}
+    "outputs": {
+    }
   },
   "module": {
     "imma-defn": {

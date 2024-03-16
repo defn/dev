@@ -5,7 +5,8 @@
       "stackName": "acc-gyre-ops",
       "version": "0.20.4"
     },
-    "outputs": {}
+    "outputs": {
+    }
   },
   "module": {
     "gyre-ops": {

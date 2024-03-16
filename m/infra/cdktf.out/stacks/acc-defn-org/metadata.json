@@ -5,7 +5,8 @@
       "stackName": "acc-defn-org",
       "version": "0.20.4"
     },
-    "outputs": {}
+    "outputs": {
+    }
   },
   "module": {
     "defn-org": {

@@ -5,7 +5,8 @@
       "stackName": "acc-helix-dev",
       "version": "0.20.4"
     },
-    "outputs": {}
+    "outputs": {
+    }
   },
   "module": {
     "helix-dev": {

@@ -5,7 +5,8 @@
       "stackName": "acc-fogg-hub",
       "version": "0.20.4"
     },
-    "outputs": {}
+    "outputs": {
+    }
   },
   "module": {
     "fogg-hub": {

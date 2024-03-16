@@ -111,8 +111,9 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 		{"local-exec": {
 			"when": "create",
 			"command": fmt.Sprintf(
-				"( (echo cd; echo env CODER_AGENT_TOKEN=%s CODER_HOMEDIR=%s CODER_INIT_SCRIPT_BASE64=%s %s) | ssh %s bash -x - >>/tmp/startup-%s-%s.log 2>&1 &) &",
+				"( (echo cd; echo env CODER_AGENT_TOKEN=%s CODER_NAME=%s CODER_HOMEDIR=%s CODER_INIT_SCRIPT_BASE64=%s %s) | ssh %s bash -x - >>/tmp/startup-%s-%s.log 2>&1 &) &",
 				*devCoderAgent.Token(),
+				*devCoderWorkspace.Name(),
 				*paramHomedir.Value(),
 				*cdktf.Fn_Base64encode(devCoderAgent.InitScript()),
 				*paramCommand.Value(),

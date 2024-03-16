@@ -5,7 +5,8 @@
       "stackName": "acc-spiral-org",
       "version": "0.20.4"
     },
-    "outputs": {}
+    "outputs": {
+    }
   },
   "module": {
     "spiral-org": {

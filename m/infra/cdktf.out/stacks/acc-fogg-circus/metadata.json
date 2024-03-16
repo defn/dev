@@ -5,7 +5,8 @@
       "stackName": "acc-fogg-circus",
       "version": "0.20.4"
     },
-    "outputs": {}
+    "outputs": {
+    }
   },
   "module": {
     "fogg-circus": {

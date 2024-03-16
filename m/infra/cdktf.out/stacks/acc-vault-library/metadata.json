@@ -5,7 +5,8 @@
       "stackName": "acc-vault-library",
       "version": "0.20.4"
     },
-    "outputs": {}
+    "outputs": {
+    }
   },
   "module": {
     "vault-library": {

@@ -5,7 +5,8 @@
       "stackName": "coder-defn-ec2-template",
       "version": "0.20.4"
     },
-    "outputs": {}
+    "outputs": {
+    }
   },
   "data": {
     "aws_ami": {
