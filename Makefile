@@ -249,19 +249,19 @@ coder-ssh-linux:
 	@pkill -9 -f coder.agen[t] || true
 	@pkill -9 -f code-serve[r] || true
 	@export STARSHIP_NO=1 LC_ALL=C.UTF-8 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive && source ~/.bash_profile && cd $(CODER_HOMEDIR) \
-		&& echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | bash -x -
+		&& echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | exec bash -x -
 
 coder-ssh-devcontainer:
 	-source .bash_profile && cd $(CODER_HOMEDIR) && docker ps -q -a --filter label=devcontainer.config_file=$$(pwd)/.devcontainer/devcontainer.json | runmany 'docker rm -f $$1 2>/dev/null'
 	source .bash_profile && cd $(CODER_HOMEDIR) && date > .devcontainer/.timestamp
 	source .bash_profile && cd $(CODER_HOMEDIR) && devcontainer build --workspace-folder .
 	source .bash_profile && cd $(CODER_HOMEDIR) && devcontainer up --workspace-folder .
-	source .bash_profile && cd $(CODER_HOMEDIR) && devcontainer exec --workspace-folder . env CODER_HOMEDIR=$(CODER_HOMEDIR) CODER_AGENT_TOKEN=$(CODER_AGENT_TOKEN) CODER_INIT_SCRIPT_BASE64=$(CODER_INIT_SCRIPT_BASE64) bash -c "cd && make coder-ssh-linux"
+	source .bash_profile && cd $(CODER_HOMEDIR) && devcontainer exec --workspace-folder . env CODER_HOMEDIR=$(CODER_HOMEDIR) CODER_AGENT_TOKEN=$(CODER_AGENT_TOKEN) CODER_INIT_SCRIPT_BASE64=$(CODER_INIT_SCRIPT_BASE64) bash -c "cd && exec make coder-ssh-linux"
 
 coder-ssh-darwin:
 	@pkill -9 -f coder.agen[t] || true
 	@pkill -9 -f code-serve[r] || true
-	@export STARSHIP_NO=1 && source .bash_profile && echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | bash -x -
+	@export STARSHIP_NO=1 && source .bash_profile && echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | exec bash -x -
 
 build-site-default:
 
