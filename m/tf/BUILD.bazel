@@ -5,9 +5,7 @@ go_library(
     srcs = [
         "stack-aws-account.go",
         "stack-aws-organization.go",
-        "stack-coder-defn-devcontainer.go",
         "stack-coder-defn-ec2.go",
-        "stack-coder-defn-macos.go",
         "stack-coder-defn-ssh.go",
         "stack-global.go",
         "tf.go",

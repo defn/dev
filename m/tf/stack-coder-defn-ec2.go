@@ -48,7 +48,7 @@ type ConfigData struct {
 }
 
 func CoderDefnEc2Stack(scope constructs.Construct, site *infra.AwsProps, name string) cdktf.TerraformStack {
-	stack := cdktf.NewTerraformStack(scope, infra.Js(fmt.Sprintf("coder-defn-ec2-%s", name)))
+	stack := cdktf.NewTerraformStack(scope, infra.Js(name))
 
 	cdktf.NewLocalBackend(stack, &cdktf.LocalBackendConfig{})
 

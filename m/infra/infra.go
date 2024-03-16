@@ -35,10 +35,8 @@ func init() {
 
 			tf.GlobalStack(app, &site)
 
-			tf.CoderDefnEc2Stack(app, &site, "template")
+			tf.CoderDefnEc2Stack(app, &site, "coder-defn-ec2-template")
 			tf.CoderDefnSshStack(app, &site, "coder-defn-ssh-template")
-			tf.CoderDefnMacOsStack(app, &site, "template")
-			tf.CoderDefnDevContainerStack(app, &site, "template")
 
 			app.Synth()
 		},
