@@ -24,7 +24,7 @@ import (
 )
 
 func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name string) cdktf.TerraformStack {
-	stack := cdktf.NewTerraformStack(scope, infra.Js(fmt.Sprintf("coder-defn-ssh-%s", name)))
+	stack := cdktf.NewTerraformStack(scope, infra.Js(name))
 
 	cdktf.NewLocalBackend(stack, &cdktf.LocalBackendConfig{})
 
@@ -98,6 +98,12 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 		}},
 	})
 
+	coder_provider.NewCoderProvider(stack, infra.Js("coder"), &coder_provider.CoderProviderConfig{})
+
+	coderlogin.NewCoderlogin(stack, infra.Js("coder_login"), &coderlogin.CoderloginConfig{
+		AgentId: devCoderAgent.Id(),
+	})
+
 	app.NewApp(stack, infra.Js("code-server"), &app.AppConfig{
 		AgentId:     devCoderAgent.Id(),
 		DisplayName: infra.Js("code-server"),
@@ -111,12 +117,6 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 		Slug:      infra.Js("cs"),
 		Subdomain: infra.Jsbool(false),
 		Url:       infra.Js(fmt.Sprintf("http://localhost:8080/?folder=%s", *paramHomedir.Value())),
-	})
-
-	coder_provider.NewCoderProvider(stack, infra.Js("coder"), &coder_provider.CoderProviderConfig{})
-
-	coderlogin.NewCoderlogin(stack, infra.Js("coder_login"), &coderlogin.CoderloginConfig{
-		AgentId: devCoderAgent.Id(),
 	})
 
 	return stack
