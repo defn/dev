@@ -26,7 +26,7 @@ module "coil-hub" {
   name      = "terraform"
   namespace = "coil"
   stage     = "ops"
-  source    = "../mod/terraform-aws-defn-account"
+  source    = "./mod/terraform-aws-defn-account"
   providers = {
     aws = aws.coil-hub
   }

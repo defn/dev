@@ -23,6 +23,8 @@ build: ../node_modules/.bin/cdktf
 	trunk fmt $(git ls-files .)
 # add whitespace between blocks
 	git ls-files cdktf.out | grep 'tf$$' | while read -r a; do perl -pe 's#^}$$#}\n#' $$a | awk 'NF {print; blank=0} !NF && !blank++ {print}' > $$a.tmp && mv $$a.tmp $$a; done
+# add mod symlinks
+	runmany 'ln -nfs ../../../../tf/mod $$1/' cdktf.out/stacks/*/
 # fmt
 	trunk fmt $(git ls-files .)
 	git add -u .

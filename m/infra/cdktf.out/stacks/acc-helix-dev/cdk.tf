@@ -26,7 +26,7 @@ module "helix-dev" {
   name      = "terraform"
   namespace = "helix"
   stage     = "ops"
-  source    = "../mod/terraform-aws-defn-account"
+  source    = "./mod/terraform-aws-defn-account"
   providers = {
     aws = aws.helix-dev
   }

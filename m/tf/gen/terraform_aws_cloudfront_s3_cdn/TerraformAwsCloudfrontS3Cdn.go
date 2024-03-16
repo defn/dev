@@ -11,7 +11,7 @@ import (
 
 // Defines an TerraformAwsCloudfrontS3Cdn based on a Terraform module.
 //
-// Source at ../mod/terraform-aws-cloudfront-s3-cdn
+// Source at ./mod/terraform-aws-cloudfront-s3-cdn
 type TerraformAwsCloudfrontS3Cdn interface {
 	cdktf.TerraformModule
 	AccessLogBucketName() *string

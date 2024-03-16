@@ -261,7 +261,7 @@ module "dev_oidc_cdn" {
   name                 = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
   origin_force_destroy = true
   versioning_enabled   = false
-  source               = "../mod/terraform-aws-cloudfront-s3-cdn"
+  source               = "./mod/terraform-aws-cloudfront-s3-cdn"
 }
 
 resource "aws_iam_instance_profile" "dev_instance_profile" {
