@@ -35,6 +35,7 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 		Icon:        infra.Js("https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"),
 		Name:        infra.Js("homedir"),
 		Type:        infra.Js("string"),
+		Mutable:     infra.Jstrue(),
 	})
 
 	paramCommand := datacoderparameter.NewDataCoderParameter(stack, infra.Js("command"), &datacoderparameter.DataCoderParameterConfig{
@@ -44,6 +45,7 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 		Icon:        infra.Js("https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"),
 		Name:        infra.Js("command"),
 		Type:        infra.Js("string"),
+		Mutable:     infra.Jstrue(),
 	})
 
 	paramRemote := datacoderparameter.NewDataCoderParameter(stack, infra.Js("remote"), &datacoderparameter.DataCoderParameterConfig{
@@ -53,6 +55,7 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 		Icon:        infra.Js("https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"),
 		Name:        infra.Js("remote"),
 		Type:        infra.Js("string"),
+		Mutable:     infra.Jstrue(),
 	})
 
 	paramArch := datacoderparameter.NewDataCoderParameter(stack, infra.Js("arch"), &datacoderparameter.DataCoderParameterConfig{
@@ -62,6 +65,7 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 		Icon:        infra.Js("https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"),
 		Name:        infra.Js("arch"),
 		Type:        infra.Js("string"),
+		Mutable:     infra.Jstrue(),
 	})
 
 	devCoderWorkspace := datacoderworkspace.NewDataCoderWorkspace(stack, infra.Js("me"), &datacoderworkspace.DataCoderWorkspaceConfig{})

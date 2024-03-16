@@ -20,6 +20,7 @@ data "coder_parameter" "homedir" {
   description  = "home directory"
   display_name = "HOME dir"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  mutable      = true
   name         = "homedir"
   type         = "string"
 }
@@ -29,6 +30,7 @@ data "coder_parameter" "command" {
   description  = "Remote command"
   display_name = "Remote command"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  mutable      = true
   name         = "command"
   type         = "string"
 }
@@ -38,6 +40,7 @@ data "coder_parameter" "remote" {
   description  = "Remote ssh"
   display_name = "Remote ssh"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  mutable      = true
   name         = "remote"
   type         = "string"
 }
@@ -47,6 +50,7 @@ data "coder_parameter" "arch" {
   description  = "CPU arch"
   display_name = "CPU arch"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  mutable      = true
   name         = "arch"
   type         = "string"
 }
