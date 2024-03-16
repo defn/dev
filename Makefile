@@ -246,8 +246,8 @@ nix-Darwin-bootstrap:
 	ln -nfs  /nix/var/nix/profiles/default ~/.nix-profile
 
 coder-ssh-linux:
-	@pkill -9 -f coder.agent '||' true
-	@pkill -9 -f code-server '||' true
+	@pkill -9 -f coder.agent || true
+	@pkill -9 -f code-server || true
 	@export STARSHIP_NO=1 && source .bash_profile && echo $(CODER_INIT_SCRIPT_BASE65) | base64 -d | base -x -
 
 build-site-default:
