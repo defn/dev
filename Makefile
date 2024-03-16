@@ -248,7 +248,7 @@ nix-Darwin-bootstrap:
 coder-ssh-linux:
 	@pkill -9 -f coder.agen[t] || true
 	@pkill -9 -f code-serve[r] || true
-	@export STARSHIP_NO=1 && source .bash_profile && echo $(CODER_INIT_SCRIPT_BASE65) | base64 -d | base -x -
+	@export STARSHIP_NO=1 && source .bash_profile && echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | bash -x -
 
 build-site-default:
 
