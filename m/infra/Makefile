@@ -8,6 +8,8 @@ build: ../node_modules/.bin/cdktf
 	runmany 'perl -pe "s{=}{= true} if m{(allow_public_website)\s+=\s+$$}" -i $$1' cdktf.out/stacks/*/cdk.tf
 # remove quotes from providers
 	runmany 'perl -pe "s{\"}{}g if m{^\s*aws\s*=}" -i $$1' cdktf.out/stacks/*/cdk.tf
+# remove quotes from when
+	runmany 'perl -pe "s{when\s*=\s*\"create\"}{when = create}g" -i $$1' cdktf.out/stacks/*/cdk.tf
 # remove quotes from lifecycle stuff
 	runmany 'perl -pe "s{\"ami\",}{ami,}g" -i $$1' cdktf.out/stacks/*/cdk.tf
 # remove quotes from strings

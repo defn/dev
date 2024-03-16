@@ -37,7 +37,7 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 		Type:        infra.Js("string"),
 	})
 
-	datacoderparameter.NewDataCoderParameter(stack, infra.Js("remote"), &datacoderparameter.DataCoderParameterConfig{
+	paramRemote :=	 datacoderparameter.NewDataCoderParameter(stack, infra.Js("remote"), &datacoderparameter.DataCoderParameterConfig{
 		Default:     infra.Js(""),
 		Description: infra.Js("Remote ssh"),
 		DisplayName: infra.Js("Remote ssh"),
@@ -80,10 +80,22 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 
 	null_provider.NewNullProvider(stack, infra.Js("null"), &null_provider.NullProviderConfig{})
 
-	null_resource.NewResource(stack, infra.Js("deploy"), &null_resource.ResourceConfig{
+	deploy := null_resource.NewResource(stack, infra.Js("deploy"), &null_resource.ResourceConfig{
 		Triggers: &map[string]*string{
 			"always_run": devCoderAgent.Token(),
 		},
+	})
+
+	deploy.AddOverride(infra.Js("provisioner"), []map[string]map[string]string{
+		{"local-exec": {
+			"when": "create",
+			"command": fmt.Sprintf(
+				"( (echo pkill -9 -f coder.agent '||' true; echo pkill -9 -f code-server '||' true; echo cd; echo export STARSHIP_NO=1 CODER_AGENT_TOKEN=%s; echo source .bash_profile; echo %s | base64 -d) | ssh %s bash -x - >>/tmp/startup2.log 2>&1 &) &",
+				*devCoderAgent.Token(),
+				*cdktf.Fn_Base64encode(devCoderAgent.InitScript()),
+				*paramRemote.Value(),
+			),
+		}},
 	})
 
 	app.NewApp(stack, infra.Js("code-server"), &app.AppConfig{
