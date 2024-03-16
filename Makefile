@@ -251,10 +251,12 @@ coder-ssh-linux:
 	@export STARSHIP_NO=1 LC_ALL=C.UTF-8 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive && source .bash_profile && echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | bash -x -
 
 coder-ssh-devcontainer:
-	@export STARSHIP_NO=1 LC_ALL=C.UTF-8 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive && source .bash_profile && devcontainer up --workspace-folder
-	@export STARSHIP_NO=1 LC_ALL=C.UTF-8 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive && source .bash_profile && devcontainer exec --workspace-folder $(CODER_WORKSPACE) pkill -9 -f coder.agen[t] || true
-	@export STARSHIP_NO=1 LC_ALL=C.UTF-8 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive && source .bash_profile && devcontainer exec --workspace-folder $(CODER_WORKSPACE) pkill -9 -f code-serve[r] || true
-	@export STARSHIP_NO=1 LC_ALL=C.UTF-8 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive && source .bash_profile && echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | devcontainer exec --workspace-folder $(CODER_WORKSPACE) bash -x -
+	export STARSHIP_NO=1 LC_ALL=C.UTF-8 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive && source .bash_profile \
+		&& devcontainer build --workspace-folder $(CODER_HOMEDIR)
+	export STARSHIP_NO=1 LC_ALL=C.UTF-8 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive && source .bash_profile \
+		&& devcontainer up --workspace-folder $(CODER_HOMEDIR)
+	export STARSHIP_NO=1 LC_ALL=C.UTF-8 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive && source .bash_profile \
+		&& devcontainer exec --workspace-folder $(CODER_HOMEDIR) env CODER_AGENT_TOKEN=$(CODER_AGENT_TOKEN) CODER_INIT_SCRIPT_BASE64=$(CODER_INIT_SCRIPT_BASE64) bash -c "cd && make coder-ssh-linux"
 
 coder-ssh-darwin:
 	@pkill -9 -f coder.agen[t] || true
