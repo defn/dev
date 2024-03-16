@@ -6,17 +6,37 @@ inventory: {
 	[string]: vars: {
 		// provide defaults for inventory/packer.ini
 		ansible_user:              string | *#username
-		bazel_remote_cache_server: string | *"macmini.tail3884f.ts.net" // must use dns, IPs dont work with tailscale serve
+		bazel_remote_cache_server: string | *"macmini.tail3884f.ts.net"
 		bazel_remote_cache_port:   string | *"9092"
+	}
+
+	mac: {
+		hosts: [
+			"macmini",
+		]
+		vars: {
+			bazel_remote_cache_server: "cache.defn.run"
+			bazel_remote_cache_port:   "9093"
+		}
+	}
+
+	district: {
+		hosts: [
+			"district",
+		]
+		vars: {
+			bazel_remote_cache_server: "cache.defn.run"
+			bazel_remote_cache_port:   "9093"
+		}
 	}
 
 	coder: {
 		hosts: [
-			"coder-amanibhavam-kowloon",
-			"coder-amanibhavam-threesix",
+			"kowloon",
+			"threesix",
 		]
 		vars: {
-			bazel_remote_cache_server: "macmini.tail3884f.ts.net" // replace with something on aws
+			bazel_remote_cache_server: "district.tail3884f.ts.net"
 			bazel_remote_cache_port:   "9092"
 		}
 	}
@@ -31,25 +51,6 @@ inventory: {
 		"rpi4c",
 	]
 
-	deck: {
-		hosts: [
-			"steamdeck",
-		]
-		vars: {
-			ansible_user: "deck"
-		}
-	}
-
-	mac: {
-		hosts: [
-			"macmini",
-		]
-		vars: {
-			bazel_remote_cache_server: "cache.defn.run"
-			bazel_remote_cache_port:   "9093"
-		}
-	}
-
 	zimaboard: hosts: [
 		"zm1",
 		"zm2",
@@ -60,16 +61,6 @@ inventory: {
 		"thinkpad",
 		"thelio",
 	]
-
-	district: {
-		hosts: [
-			"defn-net-district",
-		]
-		vars: {
-			bazel_remote_cache_server: "cache.defn.run"
-			bazel_remote_cache_port:   "9093"
-		}
-	}
 }
 
 playbook: base_ubuntu: [{
@@ -79,14 +70,6 @@ playbook: base_ubuntu: [{
 		"base_packages",
 		"base_bazel",
 		"network_dummy",
-	]
-}]
-
-playbook: base_deck: [{
-	name:  "Steamdeck base playbook"
-	hosts: "deck"
-	roles: [
-		"base_bazel",
 	]
 }]
 

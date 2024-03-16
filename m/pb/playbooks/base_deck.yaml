@@ -1,4 +1,0 @@
-- name: Steamdeck base playbook
-  hosts: deck
-  roles:
-    - base_bazel
