@@ -4,7 +4,7 @@ SHELL := /bin/bash
 # https://nixos.org/download
 NIX_VERSION := 2.20.5
 
-flakes ?= az home nix secrets utils development cloud kubernetes remotedev localdev godev jsdev pydev rustdev shell
+flakes ?= home nix secrets acme vpn openfga utils buildifier bazelisk ibazel oci development terraform terraformdocs packer step awscli chamber cloud kubectl k3sup k9s helm kustomize stern argoworkflows argocd kn dapr vcluster kubevirt kuma cilium hubble tfo mirrord crossplane spire kubernetes remotedev localdev godev jsdev pydev rustdev shell
 
 build:
 	$(MAKE) home
