@@ -6,10 +6,6 @@ domain ?= defn.run
 proxy ?= proxy3
 
 work ?=
-
-clean:
-	docker ps -q -a --filter label=devcontainer.config_file=$$(pwd)/.devcontainer/devcontainer.json | runmany 'docker rm -f $$1 2>/dev/null'
-
 dev-macos:
 # keep this for the folder-uri opening technique
 	@if test -n "$${REMOTE_CONTAINERS_IPC:-}"; then \
