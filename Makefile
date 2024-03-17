@@ -4,7 +4,7 @@ SHELL := /bin/bash
 # https://nixos.org/download
 NIX_VERSION := 2.20.5
 
-flakes ?= cue gum vhs glow dyff home nix secrets acme tailscale cloudflared wireproxy vpn openfga utils buildifier bazelisk ibazel oci development terraform terraformdocs packer step awscli chamber cloud kubectl k3sup k9s helm kustomize stern argoworkflows argocd kn dapr vcluster kubevirt kuma cilium hubble tfo mirrord crossplane spire coder codeserve tilt gh ghapps earthy oras buildkite buildevents honeyvent honeymarker honeytail hugo vault godev jsdev pydev rustdev shell
+flakes ?= cue gum vhs glow dyff home nix secrets acme tailscale cloudflared wireproxy vpn openfga utils buildifier bazelisk ibazel oci development terraform terraformdocs packer step awscli chamber cloud kubectl k3sup k9s helm kustomize stern argoworkflows argocd kn dapr vcluster kubevirt kuma cilium hubble tfo mirrord crossplane spire coder codeserver tilt gh ghapps earthly oras buildkite buildevents honeyvent honeymarker honeytail hugo vault godev jsdev pydev rustdev shell
 
 build:
 	$(MAKE) home
@@ -61,30 +61,45 @@ home:
 	t make_home_inner env NIX_CONFIG="access-tokens = github.com=$$(b github)" $(MAKE) home_inner
 
 home_inner:
-	$(MARK) home
 	for n in $(flakes); do \
 		if [[ "$$(git log -1 --format=%H -- m/pkg/$$n)" != "$$(cat ~/bin/nix/.head-$$n 2>/dev/null || true)" ]]; then \
 			git log -1 --format=%H -- m/pkg/$$n; \
 			cat ~/bin/nix/.head-$$n || true; \
-			rm -rf ~/bin/nix.tmp; \
-			mkdir -p ~/bin/nix.tmp ~/bin/nix; \
-			set -eo pipefail; for n in $(flakes); do \
-				export n; \
-				t install_flake_$$n $(MAKE) install_flake; \
-				done; \
-			ln -nfs bazelisk ~/bin/nix.tmp/bazel; \
-			rsync -ia --delete ~/bin/nix.tmp/. ~/bin/nix/.; \
-			rm -rf ~/bin/nix.tmp; \
+			set +f; \
+			rm -rf ~/bin/nix.tmp*; \
+			set -f; \
+			mkdir -p ~/bin/nix; \
+			set -eo pipefail; \
+			for n in $(flakes); do \
+				echo $$n-install_flake; \
+			done | xargs make -j$(shell nproc); \
+			$(MAKE) flake_sync; \
+			set +f; \
+			rm -rf ~/bin/nix.tmp*; \
+			set -f; \
 			break; \
 		fi; \
-		done
+	done
 
-install_flake:
-	mark $$n
-	(cd m/pkg/$$n && ~/bin/b build flake_path)
-	(cd m/pkg/$$n && ~/bin/b out flake_path) | (cd ~/bin/nix.tmp && tar xfz -)
-	for a in ~/bin/nix.tmp/*; do if ! test -e $$a; then mark not found $$a; (set -x; cd m/pkg/$$n && ~/bin/b build flake_store && (~/bin/b out flake_store | (cd / && sudo tar xfz - --skip-old-files))); break; fi; done
-	git log -1 --format=%H -- m/pkg/$$n > ~/bin/nix.tmp/.head-$$n
+flake_sync:
+	rm -rf ~/bin/nix.tmp
+	mkdir -p ~/bin/nix.tmp
+	for n in $(flakes); do \
+		hash -r; \
+		rsync -ia ~/bin/nix.tmp.$$n/. ~/bin/nix.tmp/.; \
+	done
+	rsync -ia ~/bin/nix.tmp/. ~/bin/nix/.; \
+	ln -nfs bazelisk ~/bin/nix/bazel
+
+%-install_flake:
+	mark $(first)
+	mkdir -p ~/bin/nix.tmp.$(first)
+	touch ~/bin/nix.tmp.$(first)/.wip
+	(cd m/pkg/$(first) && ~/bin/b build flake_path)
+	(cd m/pkg/$(first) && ~/bin/b out flake_path) | (cd ~/bin/nix.tmp.$(first) && tar xfz -)
+	for a in ~/bin/nix.tmp.$(first)/*; do if ! test -e $$a; then mark not found $$a; (set -x; cd m/pkg/$(first) && ~/bin/b build flake_store && (~/bin/b out flake_store | (cd / && sudo tar xfz - --skip-old-files))); break; fi; done
+	git log -1 --format=%H -- m/pkg/$(first) > ~/bin/nix.tmp.$(first)/.head-$(first)
+	rm -f ~/bin/nix.tmp.$(first)/.wip
 
 .PHONY: dotfiles
 dotfiles:
