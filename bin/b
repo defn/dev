@@ -65,7 +65,7 @@ function main {
 		shift
 
 		local homedir=$(pwd)
-		docker ps -q -a --filter label=devcontainer.config_file=${homedir}/.devcontainer/devcontainer.json | runmany 'docker rm -f $1 2>/dev/null' || true
+		docker ps -q -a --filter label=devcontainer.local_folder=${homedir} | runmany 'docker rm -f $1 2>/dev/null' || true
 		;;
 	up)
 		shift
