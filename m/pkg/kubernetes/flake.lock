@@ -699,17 +699,17 @@
       },
       "locked": {
         "dir": "m/pkg/mirrord",
-        "lastModified": 1710354175,
-        "narHash": "sha256-kbxShTIUot9dbfo5p0DQflflr0aFBGBqgq0HowYyZx8=",
+        "lastModified": 1710701361,
+        "narHash": "sha256-NfwGv+hL2+FoRERF1gwpuVgIqif5UAFmbcIvYbnN0dc=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "0afc8905ab7ad62fa2a6a06f8bb5d234cc4f07ab",
+        "rev": "3e25ac9a62d0e93b65e5cfc7c8e15346af45b3fc",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/mirrord",
         "owner": "defn",
-        "ref": "pkg-mirrord-3.92.0-1",
+        "ref": "pkg-mirrord-3.92.1-1",
         "repo": "dev",
         "type": "github"
       }
