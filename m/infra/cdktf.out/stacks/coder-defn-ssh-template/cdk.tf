@@ -78,7 +78,7 @@ resource "coder_agent" "main" {
     GIT_COMMITTER_NAME  = "${data.coder_workspace.me.owner}"
   }
   os                     = data.coder_parameter.os.value
-  startup_script         = "export STARSHIP_NO= && while true; do source .bash_profile; code-server --auth none; sleep 1; done"
+  startup_script         = "export STARSHIP_NO= && while true; do source .bash_profile; code-server --auth none; ps axuf | grep -C 3 code-server; sleep 5; done"
   startup_script_timeout = 180
   display_apps {
     ssh_helper      = false
