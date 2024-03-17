@@ -1,12 +1,9 @@
 {
   inputs = {
-    buildifier.url = github:defn/dev/pkg-buildifier-6.4.0-5?dir=m/pkg/buildifier;
-    bazelisk.url = github:defn/dev/pkg-bazelisk-1.19.0-5?dir=m/pkg/bazelisk;
-    ibazel.url = github:defn/dev/pkg-ibazel-0.24.0-5?dir=m/pkg/ibazel;
-    oci.url = github:defn/dev/pkg-oci-0.0.56?dir=m/pkg/oci;
+    pkg.url = github:defn/dev/pkg-pkg-0.0.16?dir=m/pkg/pkg;
   };
 
-  outputs = inputs: inputs.buildifier.inputs.pkg.main rec {
+  outputs = inputs: inputs.pkg.main rec {
     src = builtins.path { path = ./.; name = "pkg-development"; };
 
     defaultPackage = ctx: ctx.wrap.nullBuilder {
@@ -16,10 +13,6 @@
           git
           git-lfs
           graphviz
-          inputs.bazelisk.defaultPackage.${ctx.system}
-          inputs.buildifier.defaultPackage.${ctx.system}
-          inputs.ibazel.defaultPackage.${ctx.system}
-          inputs.oci.defaultPackage.${ctx.system}
         ];
     };
   };
