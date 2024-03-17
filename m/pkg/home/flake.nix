@@ -1,28 +1,28 @@
 {
   inputs = {
-    az.url = github:defn/dev/pkg-az-0.0.170?dir=m/pkg/az;
+    pkg.url = github:defn/dev/pkg-pkg-0.0.16?dir=m/pkg/pkg;
   };
 
-  outputs = inputs: inputs.az.inputs.cue.inputs.pkg.main rec {
+  outputs = inputs: inputs.pkg.main rec {
     src = builtins.path { path = ./.; name = "pkg-home"; };
 
-    apps = ctx: {
-      tailscale = {
-        type = "app";
-        program = "${inputs.tailscale.defaultPackage.${ctx.system}}/bin/tailscale";
-      };
-
-      tailscaled = {
-        type = "app";
-        program = "${inputs.tailscale.defaultPackage.${ctx.system}}/bin/tailscaled";
-      };
-    };
+#    apps = ctx: {
+#      tailscale = {
+#        type = "app";
+#        program = "${inputs.tailscale.defaultPackage.${ctx.system}}/bin/tailscale";
+#      };
+#
+#      tailscaled = {
+#        type = "app";
+#        program = "${inputs.tailscale.defaultPackage.${ctx.system}}/bin/tailscaled";
+#      };
+#    };
 
     defaultPackage = ctx: ctx.wrap.nullBuilder {
       propagatedBuildInputs = with ctx.pkgs; [
         ctx.pkgs.irssi
 
-        inputs.az.defaultPackage.${ctx.system}
+#        inputs.az.defaultPackage.${ctx.system}
       ]
       ++ ctx.commands;
     };
