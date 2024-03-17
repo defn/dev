@@ -61,33 +61,46 @@ function main {
 			;;
 		esac
 		;;
-	dev)
+	down)
 		shift
 
+		local homedir=$(pwd)
+		docker ps -q -a --filter label=devcontainer.config_file=${homedir}/.devcontainer/devcontainer.json | runmany 'docker rm -f $1 2>/dev/null' || true
+		;;
+	up)
+		shift
+
+		local name
 		if [[ -n "${1:-}" ]]; then
 			name=$1; shift
 		else
 			name="$(basename $(pwd))"
 		fi
 
-		homedir=$(pwd)
-		remote=ubuntu@macmini
-		command="make coder-ssh-devcontainer"
-		arch=amd64
-		os=linux
-		template=coder-defn-ssh-template
+		local homedir=$(pwd)
+		local remote=ubuntu@macmini
+		local command="make coder-ssh-devcontainer"
+		local arch=amd64
+		local os=linux
+		local template=coder-defn-ssh-template
 
-		docker ps -q -a --filter label=devcontainer.config_file=${homedir}/.devcontainer/devcontainer.json | runmany 'docker rm -f $1 2>/dev/null' || true
+		b down
 		coder delete ${name} --yes 2>/dev/null || true
 		coder create ${name} --template ${template} --parameter arch=${arch},os=${os},homedir=${homedir},remote=${remote},command="${command}" --yes
 		while true; do if curl -sSL $(cat $HOME/.config/coderv2/url)/api/v2/users/$(coder list | tail -1 | awk '{print $1}' | cut -d/ -f1)/workspace/${name} -H "Coder-Session-Token: $(cat $HOME/.config/coderv2/session)" | jq -r '(.latest_build.resources[].agents//[])[].apps[] | select(.display_name == "code-server") | .health' | grep -q ^healthy; then break; fi; date; sleep 5; done
-		open "$(curl -sSL $(cat $HOME/.config/coderv2/url)/api/v2/debug/health -H "Coder-Session-Token: $(cat $HOME/.config/coderv2/session)" | jq -r '.access_url.access_url')/@$(coder list | tail -1 | awk '{print $1}' | cut -d/ -f1)/${name}.main/apps/cs/?folder=$(echo ${homedir} | sed "s#${HOME}#/home/ubuntu#")"
+		b open ${name}
 		;;
 	open)
 		shift
-		folder="$(cd "$1" && pwd -P)"
-		shift
-		open "${CODER_AGENT_URL/\/\//\/\/${DFD_APP}--${DFD_AGENT:-main}--${DFD_NAME}--${DFD_OWNER}.}?folder=$folder"
+
+		local name
+		if [[ -n "${1:-}" ]]; then
+			name=$1; shift
+		else
+			name="$(basename $(pwd))"
+		fi
+		
+		open "$(curl -sSL $(cat $HOME/.config/coderv2/url)/api/v2/debug/health -H "Coder-Session-Token: $(cat $HOME/.config/coderv2/session)" | jq -r '.access_url.access_url')/@$(coder list | tail -1 | awk '{print $1}' | cut -d/ -f1)/${name}.main/apps/cs/?folder=$(echo ${homedir} | sed "s#${HOME}#/home/ubuntu#")"
 		;;
 	github)
 		if [[ -n "${CODER:-}" ]]; then (echo protocol=https; echo host=github.com) | git credential fill | grep ^password= | cut -d= -f2-; else true; fi
