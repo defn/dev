@@ -28,7 +28,6 @@
           inputs.cue.defaultPackage.${ctx.system}
           inputs.cloud.defaultPackage.${ctx.system}
 
-          starship
           bashInteractive
         ];
     };
