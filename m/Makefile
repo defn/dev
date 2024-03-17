@@ -7,33 +7,11 @@ proxy ?= proxy3
 
 work ?=
 
-name ?=
-remote ?= ubuntu@macmini
-workdir ?= /home/ubuntu/m
-arch ?= amd64
-template ?= coder-defn-devcontainer-template
-
-cmd ?= uname -a; id -a; ps axuf;
-
-dev:
-	devcontainer build --workspace-folder .
-	devcontainer up --workspace-folder .
-	echo "$(cmd)" | base64 -w 0 | devcontainer exec --workspace-folder . bash -c 'cat | base64 -d | bash -x -'	
-
-open:
-	@while true; do if curl -sSL $$(cat $$HOME/.config/coderv2/url)/api/v2/users/$$(coder list | tail -1 | awk '{print $$1}' | cut -d/ -f1)/workspace/$(name) -H "Coder-Session-Token: $$(cat $$HOME/.config/coderv2/session)" | jq -r '(.latest_build.resources[].agents//[])[].apps[] | select(.display_name == "code-server") | .health' | grep -q ^healthy; then break; fi; date; sleep 5; done
-	@open "$$(curl -sSL $$(cat $$HOME/.config/coderv2/url)/api/v2/debug/health -H "Coder-Session-Token: $$(cat $$HOME/.config/coderv2/session)" | jq -r '.access_url.access_url')/@$$(coder list | tail -1 | awk '{print $$1}' | cut -d/ -f1)/$(name).main/apps/cs/?folder=$(shell echo $(workdir) | sed 's#$(HOME)#/home/ubuntu#')"
-#	@echo open "$$(curl -sSL $$(cat $$HOME/.config/coderv2/url)/api/v2/debug/health -H "Coder-Session-Token: $$(cat $$HOME/.config/coderv2/session)" | jq -r '.access_url.access_url' | sed "s#//#//cs--main--$(name)--$$(coder list |tail -1 | awk '{print $$1}' | cut -d/ -f1).#")?folder=$(shell echo $(workdir) | sed 's#$(HOME)#/home/ubuntu#')"
-
-recreate:
-	$(MAKE) clean dev create name=$(name)
-
-create:
-	coder delete $(name) --yes || true
-	coder create $(name) --template $(template) --parameter arch=$(arch),homedir=$(workdir),remote=$(remote) --yes
-	$(MAKE) open name=$(name)
+clean:
+	docker ps -q -a --filter label=devcontainer.config_file=$$(pwd)/.devcontainer/devcontainer.json | runmany 'docker rm -f $$1 2>/dev/null'
 
 dev-macos:
+# keep this for the folder-uri opening technique
 	@if test -n "$${REMOTE_CONTAINERS_IPC:-}"; then \
 		direnv allow; \
 		bash .direnv/bin/nix-direnv-reload 2>/dev/null || true; \
@@ -41,9 +19,6 @@ dev-macos:
 	else \
 		code --folder-uri "vscode-remote://dev-container+$$(pwd | perl -pe 's{\s+$$}{}' | xxd -p)/home/ubuntu/m/$(work)" 2>/dev/null; \
 	fi
-
-clean:
-	docker ps -q -a --filter label=devcontainer.config_file=$$(pwd)/.devcontainer/devcontainer.json | runmany 'docker rm -f $$1 2>/dev/null'
 
 all:
 	rm -f MODULES.bazel.lock
