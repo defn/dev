@@ -253,10 +253,9 @@ coder-ssh-linux:
 
 coder-ssh-devcontainer:
 	-source .bash_profile && cd $(CODER_HOMEDIR) && docker ps -q -a --filter label=devcontainer.config_file=$$(pwd)/.devcontainer/devcontainer.json | runmany 'docker rm -f $$1 2>/dev/null'
-	source .bash_profile && cd $(CODER_HOMEDIR) && date > .devcontainer/.timestamp
-	source .bash_profile && cd $(CODER_HOMEDIR) && devcontainer build --workspace-folder .
-	source .bash_profile && cd $(CODER_HOMEDIR) && devcontainer up --workspace-folder .
-	source .bash_profile && cd $(CODER_HOMEDIR) && devcontainer exec --workspace-folder . \
+	source .bash_profile && cd $(CODER_HOMEDIR) && devcontainer build --workspace-folder . --config ~/m/.devcontainer/devcontainer.json
+	source .bash_profile && cd $(CODER_HOMEDIR) && devcontainer up --workspace-folder . --config ~/m/.devcontainer/devcontainer.json
+	source .bash_profile && cd $(CODER_HOMEDIR) && devcontainer exec --workspace-folder . --config ~/m/.devcontainer/devcontainer.json \
 		env \
 			CODER_NAME=$(CODER_NAME) \
 			CODER_HOMEDIR=$(CODER_HOMEDIR) \
