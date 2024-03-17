@@ -4,7 +4,7 @@ SHELL := /bin/bash
 # https://nixos.org/download
 NIX_VERSION := 2.20.5
 
-flakes ?= cue gum vhs glow dyff home nix secrets acme tailscale cloudflared wireproxy vpn openfga utils buildifier bazelisk ibazel oci development terraform terraformdocs packer step awscli chamber cloud kubectl k3sup k9s helm kustomize stern argoworkflows argocd kn dapr vcluster kubevirt kuma cilium hubble tfo mirrord crossplane spire coder codeserver tilt gh ghapps earthly oras buildkite buildevents honeyvent honeymarker honeytail hugo vault godev jsdev pydev rustdev shell
+flakes ?= cue gum vhs glow dyff az home nix secrets acme tailscale cloudflared wireproxy vpn openfga utils buildifier bazelisk ibazel oci development terraform terraformdocs packer step awscli chamber cloud kubectl k3sup k9s helm kustomize stern argoworkflows argocd kn dapr vcluster kubevirt kuma cilium hubble tfo mirrord crossplane spire coder codeserver tilt gh ghapps earthly oras buildkite buildevents honeyvent honeymarker honeytail hugo vault godev jsdev pydev rustdev shell
 
 build:
 	$(MAKE) home
@@ -54,7 +54,7 @@ cache:
 
 rehome:
 	this-nix-gc
-	rm -f bin/nix/.head-*
+	rm -f bin/nix/.head-* bin/nix.tmp*
 	$(MAKE) home
 
 home:
