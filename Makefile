@@ -246,10 +246,9 @@ nix-Darwin-bootstrap:
 	ln -nfs  /nix/var/nix/profiles/default ~/.nix-profile
 
 coder-ssh-linux:
-	@-kill -9 -$$(ps -o pgid= -p $$(pgrep -f coder.agen[t].$$(uname -n) | head -1))
-	@-kill -9 $$(ps -o pgid= -p $$(pgrep -f coder.agen[t].$$(uname -n) | head -1))
+	@-for p in $$(pgrep -f coder.agen[t].$$(uname -n)); do kill -9 -$$p || true; kill -9 $$p || true; done
 	@export STARSHIP_NO=1 LC_ALL=C.UTF-8 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive && source ~/.bash_profile && cd $(CODER_HOMEDIR) \
-		&& echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | sed 's#agent$$#agent $$(uname -n)#' | exec bash -x -
+		&& echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | sed 's#agent$$#agent $$(uname -n)#' > /tmp/coder-agent-$(CODER_NAME) &&  exec bash -x /tmp/coder-agent-$(CODER_NAME)
 
 coder-ssh-devcontainer:
 	-source .bash_profile && cd $(CODER_HOMEDIR) && docker ps -q -a --filter label=devcontainer.config_file=$$(pwd)/.devcontainer/devcontainer.json | runmany 'docker rm -f $$1 2>/dev/null'
