@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/cue",
-        "lastModified": 1710301505,
-        "narHash": "sha256-m5VsjgiL/1JjyV1UHZ/OYBhJPYmaKB5tcTVqutcnd00=",
+        "lastModified": 1710547769,
+        "narHash": "sha256-fVqTDDbnmiOIBE+RoJ2AP1oi5YINjbkYDZA1HutrPtc=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "d8526082731db1779c68b6ba35703d62bb67291d",
+        "rev": "ada0d6312236e3e0058b96fe3d36109bf8a25426",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/cue",
         "owner": "defn",
-        "ref": "pkg-cue-0.8.0-alpha.5-2",
+        "ref": "pkg-cue-0.8.0-1",
         "repo": "dev",
         "type": "github"
       }
