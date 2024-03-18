@@ -65,7 +65,15 @@ function main {
 		shift
 
 		local homedir=$(pwd)
+		local name
+		if [[ -n "${1:-}" ]]; then
+			name=$1; shift
+		else
+			name="$(uname -n)-$(basename $(pwd))"
+		fi
+
 		docker ps -q -a --filter label=devcontainer.local_folder=${homedir} | runmany 'docker rm -f $1 2>/dev/null' || true
+		coder delete --yes "${name}"
 		;;
 	up)
 		shift
@@ -75,7 +83,7 @@ function main {
 		if [[ -n "${1:-}" ]]; then
 			name=$1; shift
 		else
-			name="$(basename $(pwd))"
+			name="$(uname -n)-$(basename $(pwd))"
 		fi
 
 		local remote=ubuntu@$(uname -n)
@@ -84,7 +92,7 @@ function main {
 		local os=linux
 		local template=coder-defn-ssh-template
 
-		b down
+		b down || true
 		coder delete ${name} --yes 2>/dev/null || true
 		coder create ${name} --template ${template} --parameter arch=${arch},os=${os},homedir=${homedir},remote=${remote},command="${command}" --yes
 		while true; do if curl -sSL $(cat $HOME/.config/coderv2/url)/api/v2/users/$(coder list | tail -1 | awk '{print $1}' | cut -d/ -f1)/workspace/${name} -H "Coder-Session-Token: $(cat $HOME/.config/coderv2/session)" | jq -r '(.latest_build.resources[].agents//[])[].apps[] | select(.display_name == "code-server") | .health' | grep -q ^healthy; then break; fi; date; sleep 5; done
