@@ -69,7 +69,7 @@ function main {
 		if [[ -n "${1:-}" ]]; then
 			name=$1; shift
 		else
-			name="$(uname -n)-$(basename $(pwd))"
+			name="$(uname -n | perl -pe 's{^.*?-([a-zA-Z0-9]+$)}{\1}')-$(basename $(pwd))"
 		fi
 
 		docker ps -q -a --filter label=devcontainer.local_folder=${homedir} | runmany 'docker rm -f $1 2>/dev/null' || true
@@ -83,7 +83,7 @@ function main {
 		if [[ -n "${1:-}" ]]; then
 			name=$1; shift
 		else
-			name="$(uname -n)-$(basename $(pwd))"
+			name="$(uname -n | perl -pe 's{^.*?-([a-zA-Z0-9]+$)}{\1}')-$(basename $(pwd))"
 		fi
 
 		local remote=ubuntu@$(uname -n)
