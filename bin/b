@@ -69,7 +69,7 @@ function main {
 		if [[ -n "${1:-}" ]]; then
 			name=$1; shift
 		else
-			name="$(uname -n | perl -pe 's{^.*?-([a-zA-Z0-9]+$)}{\1}')-$(basename $(pwd))"
+			name="$(basename $(pwd))"
 		fi
 
 		docker ps -q -a --filter label=devcontainer.local_folder=${homedir} | runmany 'docker rm -f $1 2>/dev/null' || true
@@ -83,7 +83,7 @@ function main {
 		if [[ -n "${1:-}" ]]; then
 			name=$1; shift
 		else
-			name="$(uname -n | perl -pe 's{^.*?-([a-zA-Z0-9]+$)}{\1}')-$(basename $(pwd))"
+			name="$(uname -n | cut -d- -f1)-$(basename $(pwd))"
 		fi
 
 		local remote=ubuntu@$(uname -n)
@@ -106,7 +106,7 @@ function main {
 		if [[ -n "${1:-}" ]]; then
 			name=$1; shift
 		else
-			name="$(basename $(pwd))"
+			name="$(uname -n | cut -d- -f1)-$(basename $(pwd))"
 		fi
 
 		open "$(curl -sSL $(cat $HOME/.config/coderv2/url)/api/v2/debug/health -H "Coder-Session-Token: $(cat $HOME/.config/coderv2/session)" | jq -r '.access_url.access_url')/@$(coder list | tail -1 | awk '{print $1}' | cut -d/ -f1)/${name}.main/apps/cs/?folder=$(echo ${homedir} | sed "s#${HOME}#/home/ubuntu#")"
