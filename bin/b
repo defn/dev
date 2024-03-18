@@ -78,7 +78,7 @@ function main {
 			name="$(basename $(pwd))"
 		fi
 
-		local remote=ubuntu@macmini
+		local remote=ubuntu@$(uname -n)
 		local command="make coder-ssh-devcontainer"
 		local arch=amd64
 		local os=linux
