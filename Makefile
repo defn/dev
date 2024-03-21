@@ -190,15 +190,12 @@ upgrade:
 install:
 	t make_install $(MAKE) install_t
 
-install_t: m/.bazelrc.user
+install_t:
 	sudo true
 	t make_nix $(MAKE) nix
 	t make_trunk $(MAKE) trunk
 	t install_inner $(MAKE) install-inner
 	@mark finished
-
-m/.bazelrc.user:
-	t default_bazelrc_user cp m/.example.bazelrc.user m/.bazelrc.user
 
 install-inner:
 	t make_symlinks $(MAKE) symlinks
