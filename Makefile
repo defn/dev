@@ -12,6 +12,7 @@ latest:
 	$(MAKE) install
 
 build:
+	bazel --version
 	$(MAKE) home
 
 ci:
