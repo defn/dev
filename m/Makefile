@@ -60,6 +60,7 @@ class-init:
 teacher: 
 	$(MAKE) hello
 	tailscale serve --bg http://127.0.0.1:3000
+	pkill postgres || true
 	env AWS_DEFAULT_REGION=us-west-1 b server defn-org $(MAKE) dev_inner 
 
 dev_inner:
