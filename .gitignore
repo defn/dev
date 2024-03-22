@@ -221,3 +221,4 @@ bin/devcontainer
 .gitconfig
 .devcontainer
 .timestamp
+.sommelierrc

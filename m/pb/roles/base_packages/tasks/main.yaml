@@ -1,6 +1,6 @@
 - name: Install hwe kernel
   become: true
-  when: ansible_architecture != 'aarch64' and ansible_architecture != 'armv7l'
+  when: ansible_architecture != 'aarch64' and ansible_architecture != 'armv7l' and ansible_bios_vendor != 'crosvm'
   apt:
     name:
       - linux-generic-hwe-22.04

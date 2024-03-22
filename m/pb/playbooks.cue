@@ -20,7 +20,7 @@ inventory: {
 		}
 	}
 
-	district: {
+	hetzner: {
 		hosts: [
 			"district",
 		]
@@ -40,6 +40,10 @@ inventory: {
 			bazel_remote_cache_port:   "9092"
 		}
 	}
+
+	chrome: hosts: [
+		"penguin",
+	]
 
 	rpi: hosts: [
 		"rpi2a",
@@ -65,7 +69,7 @@ inventory: {
 
 playbook: base_ubuntu: [{
 	name:  "Ubuntu base playbook"
-	hosts: "coder:rpi:mac:zimaboard:heavy:district"
+	hosts: "coder:rpi:mac:zimaboard:heavy:district:chrome"
 	roles: [
 		"base_packages",
 		"base_bazel",
@@ -131,7 +135,7 @@ playbook: dump: [{
 role: base_packages: tasks: [{
 	name:   "Install hwe kernel"
 	become: true
-	when:   "ansible_architecture != 'aarch64' and ansible_architecture != 'armv7l'"
+	when:   "ansible_architecture != 'aarch64' and ansible_architecture != 'armv7l' and ansible_bios_vendor != 'crosvm'"
 	apt: {
 		name: [
 			"linux-generic-hwe-22.04",
