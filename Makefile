@@ -13,7 +13,7 @@ latest:
 
 chrome:
 	sudo apt update
-	sudo apt install -y direnv make rsync pcscd
+	sudo apt install -y direnv make rsync pcscd wireguard-tools
 
 build:
 	bazel --version
