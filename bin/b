@@ -117,7 +117,7 @@ function main {
 		open "$(curl -sSL $(cat $HOME/.config/coderv2/url)/api/v2/debug/health -H "Coder-Session-Token: $(cat $HOME/.config/coderv2/session)" | jq -r '.access_url.access_url')/@$(coder list | tail -1 | awk '{print $1}' | cut -d/ -f1)/${name}.main/apps/cs/?folder=$(echo ${homedir} | sed "s#${HOME}#/home/ubuntu#")"
 		;;
 	github)
-		if [[ -n "${CODER:-}" ]]; then (echo protocol=https; echo host=github.com) | git credential fill | grep ^password= | cut -d= -f2-; else true; fi
+		(echo protocol=https; echo host=github.com) | git credential fill 2>/dev/null | grep ^password= | cut -d= -f2-
 		;;
 	lock)
 		gpg-connect-agent reloadagent /bye
