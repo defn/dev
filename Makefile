@@ -16,7 +16,7 @@ chrome-install:
 	sudo apt install -y direnv make rsync pcscd wireguard-tools
 
 chrome-dev:
-	$(MAKE) -j 2 chrome-dev-socat chrome-dev-coder
+	$(MAKE) -j 3 chrome-dev-socat chrome-dev-coder chrome-dev-gpg
 
 chrome-dev-gpg:
 	pkill -9 gpg-agent || true
