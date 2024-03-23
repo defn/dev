@@ -202,14 +202,6 @@ role: base_packages: tasks: [{
 		path:  "/etc/apt/apt.conf.d/99-Phased-Updates"
 		state: "absent"
 	}
-}, {
-	name:   "Disable and stop unattended-upgrades service"
-	become: true
-	systemd: {
-		name:    "unattended-upgrades"
-		enabled: "no"
-		state:   "stopped"
-	}
 }]
 
 role: network_dummy: tasks: [{
