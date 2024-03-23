@@ -11,6 +11,10 @@ latest:
 	$(MAKE) update
 	$(MAKE) install
 
+chrome:
+	sudo apt update
+	sudo apt install -y direnv make rsync
+
 build:
 	bazel --version
 	$(MAKE) home
