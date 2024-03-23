@@ -18,6 +18,10 @@ chrome-install:
 chrome-dev:
 	$(MAKE) -j 2 chrome-dev-socat chrome-dev-coder
 
+chrome-dev-gpg:
+	pkill -9 gpg-agent || true
+	gpg-agent --daemon --pinentry-program $$(which pinentry)
+
 chrome-dev-socat:
 	sudo socat TCP-LISTEN:80,fork TCP:localhost:8080
 
