@@ -13,7 +13,7 @@ latest:
 
 chrome:
 	sudo apt update
-	sudo apt install -y direnv make rsync
+	sudo apt install -y direnv make rsync pcscd
 
 build:
 	bazel --version
