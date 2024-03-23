@@ -11,9 +11,18 @@ latest:
 	$(MAKE) update
 	$(MAKE) install
 
-chrome:
+chrome-install:
 	sudo apt update
 	sudo apt install -y direnv make rsync pcscd wireguard-tools
+
+chrome-dev:
+	$(MAKE) -j 2 chrome-dev-socat chrome-dev-coder
+
+chrome-dev-socat:
+	sudo socat TCP-LISTEN:80,fork TCP:localhost:8080
+
+chrome-dev-coder:
+	env PORT=8080 code-server --auth none --bind-addr 0.0.0.0
 
 build:
 	bazel --version
