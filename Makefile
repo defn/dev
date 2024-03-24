@@ -312,6 +312,11 @@ coder-ssh-darwin:
 	@pkill -9 -f code-serve[r] || true
 	@export STARSHIP_NO=1 && source .bash_profile && echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | exec bash -x -
 
+coder-ssh-chromebook:
+	@pkill -9 -f coder.agen[t] || true
+	@pkill -9 -f code-serve[r] || true
+	@export STARSHIP_NO=1 && source .bash_profile && echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | exec bash -x -
+
 build-site-default:
 
 install-site-default:
