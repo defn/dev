@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+docker-machine-driver-kvm2 version
