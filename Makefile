@@ -13,7 +13,7 @@ latest:
 
 chrome-install:
 	sudo apt update
-	sudo apt install -y direnv make rsync pcscd wireguard-tools
+	sudo apt install -y direnv make rsync pcscd wireguard-tools qemu-system libvirt-clients libvirt-daemon-system
 
 chrome-dev:
 	$(MAKE) -j 3 chrome-dev-socat chrome-dev-coder chrome-dev-gpg
