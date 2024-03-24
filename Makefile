@@ -16,7 +16,7 @@ chrome-install:
 	sudo apt install -y direnv make rsync pcscd wireguard-tools qemu-system libvirt-clients libvirt-daemon-system
 
 chrome-dev:
-	$(MAKE) -j 4 chrome-dev-socat chrome-dev-coder chrome-dev-gpg chrome-dev-up
+	$(MAKE) -j 4 chrome-dev-socat chrome-dev-gpg chrome-up
 
 chrome-up:
 	minikube start
@@ -29,10 +29,12 @@ chrome-dev-gpg:
 	gpg-agent --daemon --pinentry-program $$(which pinentry)
 
 chrome-dev-socat:
-	sudo socat TCP-LISTEN:80,fork TCP:localhost:8080
+	sudo pkill -9 socat || true
+	sudo socat TCP-LISTEN:80,fork TCP:localhost:3000
 
 chrome-dev-coder:
-	env PORT=8080 code-server --auth none --bind-addr 0.0.0.0
+#	env PORT=8080 code-server --auth none --bind-addr 0.0.0.0
+	cd m && $(MAKE) teacher site=http://cb.defn.run name=-cb
 
 build:
 	bazel --version
