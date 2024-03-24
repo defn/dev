@@ -16,15 +16,17 @@ chrome-install:
 	sudo apt install -y direnv make rsync pcscd wireguard-tools qemu-system libvirt-clients libvirt-daemon-system
 
 chrome-dev:
-	$(MAKE) -j 4 chrome-dev-socat chrome-dev-coder chrome-dev-gpg chrome-dev-minikube
+	$(MAKE) -j 4 chrome-dev-socat chrome-dev-coder chrome-dev-gpg chrome-dev-up
+
+chrome-up:
+	minikube start
+
+chrome-down:
+	minikube stop
 
 chrome-dev-gpg:
 	pkill -9 gpg-agent || true
 	gpg-agent --daemon --pinentry-program $$(which pinentry)
-
-chrome-dev-minikube:
-	minikube stop || true
-	minikube start
 
 chrome-dev-socat:
 	sudo socat TCP-LISTEN:80,fork TCP:localhost:8080
