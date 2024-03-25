@@ -30,6 +30,12 @@ chrome-dev-coder:
 #	env PORT=8080 code-server --auth none --bind-addr 0.0.0.0
 	cd m && $(MAKE) teacher site=https://coder.cb.defn.run domain=cb.defn.run name=-cb
 
+chrome-dev-cert-issue:
+	this-acme-issue '*.cb.defn.run'
+
+chrome-dev-cert-renew:
+	this-acme-renew '*.cb.defn.run'
+
 chrome-dev-dns:
 	touch ~/.config/cloudflare-ddns.toml 
 	cloudflare-ddns --domain defn.run --record '*.cb.defn.run' --ip "$$(ip addr show eth0 | grep 'inet ' | awk '{print $$2}' | cut -d/ -f1)" --token "$$(pass cloudflare_defn.run)" --config ~/.config/cloudflare-ddns.toml 
