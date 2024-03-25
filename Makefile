@@ -4,7 +4,7 @@ SHELL := /bin/bash
 # https://nixos.org/download
 NIX_VERSION := 2.20.5
 
-flakes ?= cue gum vhs glow dyff az home nix secrets acme tailscale cloudflared cloudflare-ddns wireproxy vpn openfga utils buildifier bazelisk ibazel oci development terraform terraformdocs packer step awscli chamber cloud kubectl minikube minikubekvm2 k3sup k9s helm kustomize stern argoworkflows argocd kn dapr vcluster kubevirt kuma cilium hubble tfo mirrord crossplane spire coder codeserver tilt gh ghapps earthly oras buildkite buildevents honeyvent honeymarker honeytail hugo vault godev jsdev pydev rustdev shell
+flakes ?= cue gum vhs glow dyff az home nix secrets acme tailscale cloudflared cloudflareddns wireproxy vpn openfga utils buildifier bazelisk ibazel oci development terraform terraformdocs packer step awscli chamber cloud kubectl minikube minikubekvm2 k3sup k9s helm kustomize stern argoworkflows argocd kn dapr vcluster kubevirt kuma cilium hubble tfo mirrord crossplane spire coder codeserver tilt gh ghapps earthly oras buildkite buildevents honeyvent honeymarker honeytail hugo vault godev jsdev pydev rustdev shell
 
 latest:
 	git pull
@@ -29,6 +29,10 @@ chrome-dev-socat:
 chrome-dev-coder:
 #	env PORT=8080 code-server --auth none --bind-addr 0.0.0.0
 	cd m && $(MAKE) teacher site=https://coder.cb.defn.run domain=cb.defn.run name=-cb
+
+chrome-dev-dns:
+	touch ~/.config/cloudflare-ddns.toml 
+	cloudflare-ddns --domain defn.run --record '*.cb.defn.run' --ip "$$(ip addr show eth0 | grep 'inet ' | awk '{print $$2}' | cut -d/ -f1)" --token "$$(pass cloudflare_defn.run)" --config ~/.config/cloudflare-ddns.toml 
 
 chrome-dev-minikube:
 	minikube start --driver=kvm2 --auto-update-drivers=false --cni=cilium
