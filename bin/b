@@ -90,7 +90,7 @@ function main {
 		if [[ -n "${1:-}" ]]; then
 			remote=$1; shift
 		else
-			remote=ubuntu@$(uname -n)
+			remote=""
 		fi
 		local command="make coder-ssh-devcontainer"
 		local arch=amd64
