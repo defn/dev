@@ -1,15 +1,11 @@
-port ?= 1959
-web ?= 1960
+port ?= 1963
 
 default:
-	$(MAKE) -j 3 backend game=$(game) port=$(port) frontend open
+	$(MAKE) -j 3 backend game=$(game) port=$(port) open
 
 backend:
-	cd source/editor && npx phasereditor2d-launcher --editor . --dev --disable-plugins phasereditor2d.code --disable-open-browser --port $(port) --project $(game) --public
-
-frontend:
-	tailscale serve --https $(web) $(port)
+	cd source/editor && npx phasereditor2d-launcher --editor . --dev --disable-plugins phasereditor2d.code --port $(port) --project $(game) --public
 
 open:
-	sleep 1
-	open https://$$(tailscale cert 2>&1 | grep 'For domain'  | cut -d '"' -f2):$(web)/editor/
+	while true; do if curl -s -o /dev/null 127.0.0.1:$(port); then break; fi; sleep 1; done
+	browser http://127.0.0.1:$(port)/editor/
