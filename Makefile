@@ -24,11 +24,11 @@ chrome-dev-gpg:
 
 chrome-dev-socat:
 	sudo pkill -9 socat || true
-	sudo socat TCP-LISTEN:80,fork TCP:localhost:3000
+	sudo socat TCP-LISTEN:443,fork TCP:localhost:3443
 
 chrome-dev-coder:
 #	env PORT=8080 code-server --auth none --bind-addr 0.0.0.0
-	cd m && $(MAKE) teacher site=http://cb.defn.run name=-cb
+	cd m && $(MAKE) teacher site=http://coder.cb.defn.run domain=cb.defn.run name=-cb
 
 chrome-dev-minikube:
 	minikube start --driver=kvm2 --auto-update-drivers=false --cni=cilium

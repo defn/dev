@@ -59,7 +59,6 @@ class-init:
 
 teacher: 
 	$(MAKE) hello
-	tailscale serve --bg http://127.0.0.1:3000
 	pkill postgres || true
 	env AWS_DEFAULT_REGION=us-west-1 b server defn-org $(MAKE) dev_inner 
 
@@ -69,7 +68,9 @@ dev_inner:
 		--enable-terraform-debug-mode \
 		--oauth2-github-allowed-orgs $$(pass coder_oauth2-github-allowed-orgs) --oauth2-github-allowed-teams $$(pass coder_oauth2-github-allowed-teams) \
 		--oauth2-github-client-id $$(pass coder_oauth2-github-client-id$(name)) --oauth2-github-client-secret $$(pass coder_oauth2-github-client-secret$(name)) \
-		--access-url $(site)
+		--access-url $(site) --wildcard-access-url "*.$(domain)" \
+		--tls-enable \
+		--tls-cert-file ~/.acme.sh/\*.cb.defn.run_ecc/fullchain.cer --tls-key-file ~/.acme.sh/\*.cb.defn.run_ecc/\*.cb.defn.run.key
 
 cdktf:
 	npm install
