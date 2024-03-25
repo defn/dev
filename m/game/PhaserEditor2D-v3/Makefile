@@ -8,4 +8,4 @@ backend:
 
 open:
 	while true; do if curl -s -o /dev/null 127.0.0.1:$(port); then break; fi; sleep 1; done
-	browser http://127.0.0.1:$(port)/editor/
+	open http://127.0.0.1:$(port)/editor/
