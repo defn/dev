@@ -28,7 +28,7 @@ chrome-dev-socat:
 
 chrome-dev-coder:
 #	env PORT=8080 code-server --auth none --bind-addr 0.0.0.0
-	cd m && $(MAKE) teacher site=http://coder.cb.defn.run domain=cb.defn.run name=-cb
+	cd m && $(MAKE) teacher site=https://coder.cb.defn.run domain=cb.defn.run name=-cb
 
 chrome-dev-minikube:
 	minikube start --driver=kvm2 --auto-update-drivers=false --cni=cilium
