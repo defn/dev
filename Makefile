@@ -11,6 +11,12 @@ latest:
 	$(MAKE) update
 	$(MAKE) install
 
+rpi:
+	sudo apt install -y git direnv make rsync pipx
+	$(MAKE) nix
+	cd m && bazel --version
+	cd m/pkg/cue && nix develop --command "cd && cd m/pb && $(MAKE) local pb=base_ubuntu:wq
+
 chrome-install:
 	sudo apt update
 	sudo apt install -y direnv make rsync pcscd wireguard-tools qemu-system libvirt-clients libvirt-daemon-system
@@ -96,6 +102,7 @@ rehome:
 	$(MAKE) home
 
 home:
+	cd m && bazel version
 	t make_home_inner env NIX_CONFIG="access-tokens = github.com=$$(b github)" $(MAKE) home_inner
 
 home_inner:
@@ -176,7 +183,7 @@ docker:
 trunk:
 	@$(MARK) trunk
 	@if ! type -P trunk >/dev/null; then curl https://get.trunk.io -fsSL | sed 's#/usr/local/bin#$$HOME/bin/$$(uname -s)#' | bash; fi
-	@trunk version
+	@trunk version || true
 	@sudo rm -f /usr/local/bin/trunk
 	@git checkout .local/share/code-server/User/settings.json
 
@@ -293,7 +300,7 @@ nix-Linux-bootstrap:
 	git checkout .bash_profile
 
 nix-Darwin-bootstrap:
-	ln -nfs  /nix/var/nix/profiles/default ~/.nix-profile
+	ln -nfs /nix/var/nix/profiles/default ~/.nix-profile
 
 coder-ssh-linux:
 	@-for p in $$(pgrep -f coder.agen[t].$$(uname -n)); do ps xf -o ppid,pgid,pid,cmd | grep '^\s*'"$$p" | awk '{print $$2}' | while read -r g; do kill -15 -$$g; done; kill -15 -$$p; done
