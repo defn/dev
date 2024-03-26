@@ -2,11 +2,11 @@
 # To learn more about the format of this file, see https://docs.trunk.io/reference/trunk-yaml
 version: 0.1
 cli:
-  version: 1.20.1
+  version: 1.21.0
 plugins:
   sources:
     - id: trunk
-      ref: v1.4.4
+      ref: v1.4.5
       uri: https://github.com/trunk-io/plugins
 runtimes:
   enabled:
@@ -17,7 +17,7 @@ runtimes:
 lint:
   enabled:
     - dotenv-linter@3.3.0
-    - black@24.2.0
+    - black@24.3.0
     - buildifier@6.4.0
     - cue-fmt@0.7.0
     - git-diff-check
