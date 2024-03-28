@@ -17,7 +17,7 @@ function main {
 		if [[ ${current} != "${latest}" ]]; then
 			echo "${slug} ${current} ${latest} ${real_tag}"
 		fi
-	done | (grep -E -v 'cue/ 0.8.0.* 0.7|argocd/ 2.10.[0-9]+ 2.[89]|coder-compat/|argoworkflows/ 3.5.[0-9]+ 3.4|crossplane/ 1.15.[0-9]+ 1.1[34]|coredns/ 1.11.2 1.11.1' || true)
+	done | (grep -E -v 'ibazel/ 0.25.0 V0.25.1|argocd/ 2.10.[0-9]+ 2.[89]|coder-compat/|argoworkflows/ 3.5.[0-9]+ 3.4|crossplane/ 1.15.[0-9]+ 1.1[34]|coredns/ 1.11.2 1.11.1' || true)
 }
 
 main "$@"
