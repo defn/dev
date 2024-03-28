@@ -206,6 +206,7 @@ update:
 	git pull
 	cd dotfiles && git pull
 	cd .password-store && git pull
+	$(MAKE) install
 
 init:
 	git branch --set-upstream-to origin/main main
