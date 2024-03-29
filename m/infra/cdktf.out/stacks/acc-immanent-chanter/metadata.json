@@ -3,7 +3,7 @@
     "metadata": {
       "backend": "s3",
       "stackName": "acc-immanent-chanter",
-      "version": "0.20.4"
+      "version": "0.20.5"
     },
     "outputs": {
     }
@@ -32,7 +32,7 @@
     "required_providers": {
       "aws": {
         "source": "aws",
-        "version": "5.41.0"
+        "version": "5.43.0"
       }
     }
   }
