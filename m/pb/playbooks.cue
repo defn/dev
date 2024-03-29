@@ -149,7 +149,7 @@ role: base_packages: tasks: [{
 		name: [
 			// basics for container images
 			"direnv", "curl", "xz-utils", "sudo", "locales", "git",
-			"build-essential", "rsync", "python-venv",
+			"build-essential", "rsync", "python3-venv",
 			// forthe rest of the build
 			"make", "net-tools", "lsb-release", "tzdata", "ca-certificates",
 			"iproute2", "openssh-client", "git-lfs", "fzf", "jq", "gettext",
