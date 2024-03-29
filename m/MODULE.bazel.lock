@@ -1699,10 +1699,10 @@
       "general": {
         "bzlTransitiveDigest": "D1+rhhbwX4ufoTmeUVxDpPg+Sknv3QzVXZnyK2zOjj4=",
         "recordedFileInputs": {
-          "@@//go.mod": "1bca1bdaaf6e8300673c0a030a220137e180bf344cc3c0d54dc5740e7c9d96c4",
+          "@@//go.mod": "529527531ea044c19f67252abe8d7c1046e55924b50805cd01e9e53890c6f1b3",
           "@@rules_go~//go.mod": "de22304b720f7f61350ec1c9739de6c0a1b1103fd22bfeb6e92c6c843ddc6d6e",
           "@@gazelle~//go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
-          "@@//go.sum": "bbb6d4793f78f39ce1a67ef123430926ac102f4ee72c0461f6a8024f7c7d066c",
+          "@@//go.sum": "b34d6bc6817203f5f4703dd5a7012ecf24d466871f35eacca0e2cc370df01601",
           "@@rules_go~//go.sum": "d56fdb19b21a5f12bcf625c49432371ac39c2def0f564098fbda107f7c080f40",
           "@@gazelle~//go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473"
         },
@@ -1779,9 +1779,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:3CW0unweImhOzd5FmYuRsD4Y4oQFKZIjAnKbjV4WIrw=",
+              "sum": "h1:aAcj0Da7eBAtrTp03QXWvm88pSyOt+UgdZw2BFZ+lEw=",
               "replace": "",
-              "version": "v0.0.0-20240314144324-c7f7c6466f7f"
+              "version": "v0.0.0-20240325151524-a685a6edb6d8"
             }
           },
           "com_github_cockroachdb_apd_v3": {
@@ -1854,9 +1854,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:LWAJwfNvjQZCFIDKWYQaM62NcYeYViCmWIwmOStowAI=",
+              "sum": "h1:QLgLl2yMN7N+ruc31VynXs1vhMZa7CeHHejIeBAsoHo=",
               "replace": "",
-              "version": "v2.1.1"
+              "version": "v2.2.0"
             }
           },
           "com_github_cdktf_cdktf_provider_aws_go_aws_v19": {
@@ -1869,9 +1869,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:P2ApvtvV91fZoTCjc+0fnHT1+ABSKAUHPPxP2ANDnkM=",
+              "sum": "h1:r9DSiESgA+geiozR6KeNzepa0bQApfbRDXUar3dk8xs=",
               "replace": "",
-              "version": "v19.10.0"
+              "version": "v19.12.0"
             }
           },
           "com_github_opencontainers_image_spec": {
@@ -2726,9 +2726,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:GwCVItFUPxwdsEYnlUcJ6PJxOjTeFFCKOh6QWg4oAzQ=",
+              "sum": "h1:zH0OUCrYjN/fNsKacQfUbzW/2C4wBBRh/VNFlVJSmQ4=",
               "replace": "",
-              "version": "v0.0.0-20240314152124-224736b49f2e"
+              "version": "v0.0.0-20240328172057-7eb5fc60a0e0"
             }
           },
           "org_cuelang_go": {
@@ -3013,9 +3013,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:I43Ye2AI8YNul6aWgtsvE76Vq6K6OzDEnZa/3g+sNtM=",
+              "sum": "h1:ma4ee4CgkNT/OnEsnXVQQPUCwvx+3p4SYaJ9qmnZpWg=",
               "replace": "",
-              "version": "v1.95.0"
+              "version": "v1.96.0"
             }
           },
           "com_github_mitchellh_mapstructure": {
@@ -3118,9 +3118,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:DmIovaptvRJiRXPYPWPCfBI7A/CnJm9Japy064Vc4CA=",
+              "sum": "h1:K9hKJsZU81T8gyU3RsdUyvd+jq6cjnhbTwe9P+CU604=",
               "replace": "",
-              "version": "v0.20.4"
+              "version": "v0.20.5"
             }
           },
           "org_golang_x_arch": {
