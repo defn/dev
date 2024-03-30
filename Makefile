@@ -108,32 +108,22 @@ home:
 home_inner:
 	for n in $(flakes); do \
 		if [[ "$$(git log -1 --format=%H -- m/pkg/$$n)" != "$$(cat ~/bin/nix/.head-$$n 2>/dev/null || true)" ]]; then \
-			git log -1 --format=%H -- m/pkg/$$n; \
-			cat ~/bin/nix/.head-$$n || true; \
-			set +f; \
-			rm -rf ~/bin/nix.tmp*; \
-			set -f; \
-			mkdir -p ~/bin/nix; \
-			set -eo pipefail; \
-			for n in $(flakes); do \
-				echo $$n-install_flake; \
-			done | xargs make -j$(shell nproc); \
-			$(MAKE) flake_sync; \
-			set +f; \
-			rm -rf ~/bin/nix.tmp*; \
-			set -f; \
-			break; \
+			make $$n-install_flake; \
+		else \
+			echo "skipping $$n"; \
 		fi; \
 	done
+	$(MAKE) flake_sync
 
 flake_sync:
 	rm -rf ~/bin/nix.tmp
 	mkdir -p ~/bin/nix.tmp
 	for n in $(flakes); do \
 		hash -r; \
-		rsync -ia ~/bin/nix.tmp.$$n/. ~/bin/nix.tmp/.; \
+		rsync -ia ~/bin/nix.tmp.$$n/. ~/bin/nix.tmp/. >/dev/null; \
 	done
-	rsync -ia ~/bin/nix.tmp/. ~/bin/nix/.; \
+	rsync -ia ~/bin/nix.tmp/. ~/bin/nix/.
+	rm -rf ~/bin/nix.tmp 
 	ln -nfs bazelisk ~/bin/nix/bazel
 
 %-install_flake:
