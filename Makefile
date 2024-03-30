@@ -193,8 +193,8 @@ perms:
 
 update:
 	git pull
-	cd dotfiles && git pull
 	cd .password-store && git pull
+	cd dotfiles && git pull && make dotfiles
 	$(MAKE) install
 
 init:
