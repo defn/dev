@@ -1,4 +1,4 @@
-SHELL := /bin/bash
+ELL := /bin/bash
 
 
 # https://nixos.org/download
@@ -21,20 +21,24 @@ chrome-install:
 	sudo apt update
 	sudo apt install -y direnv make rsync pcscd wireguard-tools qemu-system libvirt-clients libvirt-daemon-system
 
-chrome-dev:
-	$(MAKE) -j 4 chrome-dev-socat chrome-dev-gpg
+chrome:
+	$(MAKE) -j 4 chrome-dev-gpg
+	while ! pass hello; do sleep 1; done
+	$(MAKE) chrome-coder
+
+chrome-coder:
+	$(MAKE) -j 4 chrome-dev-socat chrome-dev-coder
 
 chrome-dev-gpg:
 	pkill -9 gpg-agent || true
 	gpg-agent --daemon --pinentry-program $$(which pinentry)
 
 chrome-dev-socat:
-	sudo pkill -9 socat || true
-	sudo socat TCP-LISTEN:443,fork TCP:localhost:3443
+	while true; do sudo pkill -9 socat || true; sudo socat TCP-LISTEN:443,fork TCP:localhost:3443; done
 
 chrome-dev-coder:
 #	env PORT=8080 code-server --auth none --bind-addr 0.0.0.0
-	cd m && $(MAKE) teacher site=https://coder.cb.defn.run domain=cb.defn.run name=-cb
+	while true; do (cd m && $(MAKE) teacher site=https://coder.cb.defn.run domain=cb.defn.run name=-cb); done
 
 chrome-dev-cert-issue:
 	this-acme-issue '*.cb.defn.run'
@@ -107,7 +111,7 @@ home:
 
 home_inner:
 	for n in $(flakes); do \
-		if [[ "$$(git log -1 --format=%H -- m/pkg/$$n)" != "$$(cat ~/bin/nix/.head-$$n 2>/dev/null || true)" ]]; then \
+		if [[ "$$(git log -1 --format=% -- m/pkg/$$n)" != "$$(cat ~/bin/nix/.head-$$n 2>/dev/null || true)" ]]; then \
 			make $$n-install_flake; \
 		else \
 			echo "skipping $$n"; \
@@ -320,7 +324,7 @@ coder-ssh-darwin:
 coder-ssh-chromebook:
 	@pkill -9 -f coder.agen[t] || true
 	@pkill -9 -f code-serve[r] || true
-	@export STARSHIP_NO=1 && source .bash_profile && echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | exec bash -x -
+	@export STARSHIP_NO=1 && source ~/.bash_profile && echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | exec bash -x -
 
 build-site-default:
 
