@@ -9,13 +9,13 @@
     src = builtins.path { path = ./.; name = "pkg-nix"; };
 
     defaultPackage = ctx: ctx.wrap.nullBuilder {
-      propagatedBuildInputs = 
+      propagatedBuildInputs =
         with (import inputs.latest { system = ctx.system; }); [
-        direnv
-        nix
-        nix-direnv
-        nixpkgs-fmt
-      ];
+          direnv
+          nixUnstable
+          nix-direnv
+          nixpkgs-fmt
+        ];
     };
   };
 }
