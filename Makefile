@@ -110,19 +110,14 @@ home:
 	t make_home_inner env NIX_CONFIG="access-tokens = github.com=$$(b github)" $(MAKE) home_inner
 
 home_inner:
+	rm -rf ~/bin/nix.tmp
+	mkdir -p ~/bin/nix.tmp
 	for n in $(flakes); do \
 		if [[ "$$(git log -1 --format=% -- m/pkg/$$n)" != "$$(cat ~/bin/nix/.head-$$n 2>/dev/null || true)" ]]; then \
 			make $$n-install_flake; \
 		else \
-			echo "skipping $$n"; \
+			echo "skip building $$n"; \
 		fi; \
-	done
-	$(MAKE) flake_sync
-
-flake_sync:
-	rm -rf ~/bin/nix.tmp
-	mkdir -p ~/bin/nix.tmp
-	for n in $(flakes); do \
 		hash -r; \
 		rsync -ia ~/bin/nix.tmp.$$n/. ~/bin/nix.tmp/. >/dev/null; \
 	done
