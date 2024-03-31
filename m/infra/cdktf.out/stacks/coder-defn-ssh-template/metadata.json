@@ -3,15 +3,12 @@
     "metadata": {
       "backend": "local",
       "overrides": {
-        "null_resource": [
-          "provisioner"
-        ]
+        "null_resource": ["provisioner"]
       },
       "stackName": "coder-defn-ssh-template",
       "version": "0.20.5"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "data": {
     "coder_parameter": {
@@ -94,6 +91,14 @@
           "metadata": {
             "path": "coder-defn-ssh-template/code-server",
             "uniqueId": "code-server"
+          }
+        }
+      },
+      "tilt": {
+        "//": {
+          "metadata": {
+            "path": "coder-defn-ssh-template/tilt",
+            "uniqueId": "tilt"
           }
         }
       }

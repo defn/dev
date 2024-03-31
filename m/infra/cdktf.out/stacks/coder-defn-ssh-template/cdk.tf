@@ -78,7 +78,7 @@ resource "coder_agent" "main" {
     GIT_COMMITTER_NAME  = "${data.coder_workspace.me.owner}"
   }
   os                     = data.coder_parameter.os.value
-  startup_script         = "export STARSHIP_NO= && while true; do source .bash_profile; code-server --auth none; ps axuf | grep -C 3 code-server; sleep 5; done"
+  startup_script         = "export STARSHIP_NO= && while true; do source .bash_profile; code-server --auth none; sleep 5; done"
   startup_script_timeout = 180
   display_apps {
     ssh_helper      = false
@@ -95,7 +95,7 @@ resource "null_resource" "deploy" {
     always_run = "${coder_agent.main.token}"
   }
   provisioner "local-exec" {
-    command = "( (echo cd; echo exec env CODER_AGENT_TOKEN=${coder_agent.main.token} CODER_NAME=${data.coder_workspace.me.name} CODER_HOMEDIR=${data.coder_parameter.homedir.value} CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} ${data.coder_parameter.command.value}) | ssh ${data.coder_parameter.remote.value} bash -x - >>/tmp/startup-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}.log 2>&1 &) &"
+    command = "( (echo cd; echo exec env CODER_AGENT_TOKEN=${coder_agent.main.token} CODER_NAME=${data.coder_workspace.me.name} CODER_HOMEDIR=${data.coder_parameter.homedir.value} CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} ${data.coder_parameter.command.value}) | ${data.coder_parameter.remote.value} bash -x - >>/tmp/startup-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}.log 2>&1 &) &"
     when    = create
   }
 }
@@ -120,5 +120,20 @@ resource "coder_app" "code-server" {
     interval  = 5
     threshold = 6
     url       = "http://localhost:8080/healthz"
+  }
+}
+
+resource "coder_app" "tilt" {
+  agent_id     = coder_agent.main.id
+  display_name = "tilt"
+  icon         = "/icon/code.svg"
+  share        = "owner"
+  slug         = "tilt"
+  subdomain    = true
+  url          = "http://localhost:10350"
+  healthcheck {
+    interval  = 5
+    threshold = 6
+    url       = "http://localhost:10350"
   }
 }

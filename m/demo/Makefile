@@ -1,3 +1,6 @@
+up:
+	tilt up
+
 build:
 	cd cfg && $(MAKE)
 

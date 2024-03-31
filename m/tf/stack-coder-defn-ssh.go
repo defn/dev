@@ -95,7 +95,7 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 			"GIT_COMMITTER_NAME":  devCoderWorkspace.Owner(),
 		},
 		Os:                   paramOs.Value(),
-		StartupScript:        infra.Js(`export STARSHIP_NO= && while true; do source .bash_profile; code-server --auth none; ps axuf | grep -C 3 code-server; sleep 5; done`),
+		StartupScript:        infra.Js(`export STARSHIP_NO= && while true; do source .bash_profile; code-server --auth none; sleep 5; done`),
 		StartupScriptTimeout: infra.Jsn(180),
 	})
 
@@ -111,7 +111,7 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 		{"local-exec": {
 			"when": "create",
 			"command": fmt.Sprintf(
-				"( (echo cd; echo exec env CODER_AGENT_TOKEN=%s CODER_NAME=%s CODER_HOMEDIR=%s CODER_INIT_SCRIPT_BASE64=%s %s) | ssh %s bash -x - >>/tmp/startup-%s-%s.log 2>&1 &) &",
+				"( (echo cd; echo exec env CODER_AGENT_TOKEN=%s CODER_NAME=%s CODER_HOMEDIR=%s CODER_INIT_SCRIPT_BASE64=%s %s) | %s bash -x - >>/tmp/startup-%s-%s.log 2>&1 &) &",
 				*devCoderAgent.Token(),
 				*devCoderWorkspace.Name(),
 				*paramHomedir.Value(),
@@ -143,6 +143,21 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 		Slug:      infra.Js("cs"),
 		Subdomain: infra.Jsbool(false),
 		Url:       infra.Js(fmt.Sprintf("http://localhost:8080/?folder=%s", *paramHomedir.Value())),
+	})
+
+	app.NewApp(stack, infra.Js("tilt"), &app.AppConfig{
+		AgentId:     devCoderAgent.Id(),
+		DisplayName: infra.Js("tilt"),
+		Healthcheck: &app.AppHealthcheck{
+			Interval:  infra.Jsn(5),
+			Threshold: infra.Jsn(6),
+			Url:       infra.Js("http://localhost:10350"),
+		},
+		Icon:      infra.Js("/icon/code.svg"),
+		Share:     infra.Js("owner"),
+		Slug:      infra.Js("tilt"),
+		Subdomain: infra.Jsbool(true),
+		Url:       infra.Js("http://localhost:10350"),
 	})
 
 	return stack
