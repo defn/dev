@@ -50,7 +50,7 @@ chrome-dev-dns:
 	touch ~/.config/cloudflare-ddns.toml 
 	cloudflare-ddns --domain defn.run --record '*.cb.defn.run' --ip "$$(ip addr show eth0 | grep 'inet ' | awk '{print $$2}' | cut -d/ -f1)" --token "$$(pass cloudflare_defn.run)" --config ~/.config/cloudflare-ddns.toml 
 
-chrome-dev-minikube:
+chrome-minikube:
 	minikube start --driver=kvm2 --auto-update-drivers=false --cni=cilium
 
 build:
@@ -296,7 +296,7 @@ coder-ssh-linux:
 	@-for p in $$(pgrep -f coder.agen[t].$$(uname -n)); do ps xf -o ppid,pgid,pid,cmd | grep '^\s*'"$$p" | awk '{print $$2}' | while read -r g; do kill -15 -$$g; done; kill -15 -$$p; done
 	@-for p in $$(pgrep -f coder.agen[t].$$(uname -n)); do ps xf -o ppid,pgid,pid,cmd | grep '^\s*'"$$p" | awk '{print $$2}' | while read -r g; do kill -9 -$$g; done; kill -9 -$$p; done
 	@export STARSHIP_NO=1 LC_ALL=C.UTF-8 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive && source ~/.bash_profile && cd $(CODER_HOMEDIR) \
-		&& echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | sed 's#agent$$#agent $$(uname -n)#' > /tmp/coder-agent-$(CODER_NAME) && (setsid bash -x /tmp/coder-agent-$(CODER_NAME) >>/tmp/coder-agent-startup.log 2>&1 &)
+		&& (echo set -x; echo "exec 1>>/tmp/coder-agent-stdout.log 2>>/tmp/coder-agent-stderr.log"; echo $(CODER_INIT_SCRIPT_BASE64) ) | base64 -d | sed 's#agent$$#agent $$(uname -n)#' > /tmp/coder-agent-$(CODER_NAME) && (setsid bash -x /tmp/coder-agent-$(CODER_NAME) >>/tmp/coder-agent-startup.log 2>&1 &)
 
 coder-ssh-devcontainer:
 	source ~/.bash_profile && cd m && npm install
