@@ -16,7 +16,10 @@ install:
 	cd cfg && go get && go mod tidy
 
 whoami:
-	@PATH=$$PATH:../../bin runmany 'aws --profile $$1-sso sts get-caller-identity | bat' $$(cd cfg && cue eval -e input.accounts | jq -r '.[]')
+	@unset AWS_VAULT && PATH=$$PATH:../../bin runmany 'aws --profile $$1-sso sts get-caller-identity | bat' $$(cd cfg && cue eval -e input.accounts | jq -r '.[]')
+
+init:
+	@unset AWS_VAULT && PATH=$$PATH:../../bin runmany 'cd $$1 && tf init | bat' stacks/*/
 
 plan:
-	@PATH=$$PATH:../../bin runmany 'cd $$1 && tf plan | bat' stacks/*/
+	@unset AWS_VAULT && PATH=$$PATH:../../bin runmany 'cd $$1 && tf plan | bat' stacks/*/
