@@ -1,9 +1,8 @@
 {
   inputs = {
     pkg.url = github:defn/dev/pkg-pkg-0.0.16?dir=m/pkg/pkg;
-    # https://github.com/NixOS/nixpkgs/tree/24.05-pre/pkgs/development/web/nodejs
-    # https://github.com/NixOS/nixpkgs/blob/24.05-pre/pkgs/top-level/aliases.nix
-    latest.url = github:NixOS/nixpkgs?rev=87cc06983c14876bb56a6a84935d1a3968f35999;
+    # https://github.com/NixOS/nixpkgs/tree/master/pkgs/development/web/nodejs
+    latest.url = github:NixOS/nixpkgs?rev=b5e930a583294d194f3ba807283552b25f8a2888;
   };
 
   outputs = inputs: inputs.pkg.main rec {
