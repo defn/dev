@@ -15,3 +15,9 @@
 
 [includeIf "gitdir:~/"]
     path = ~/dotfiles/.gitconfig
+[credential "https://github.com"]
+	helper = 
+	helper = !/home/ubuntu/bin/nix/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/home/ubuntu/bin/nix/gh auth git-credential
