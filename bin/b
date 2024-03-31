@@ -66,8 +66,9 @@ function main {
 
 		local homedir=$(pwd)
 		local name
-		if [[ -n "${1:-}" ]]; then
-			name=$1; shift
+		if [[ -n ${1-} ]]; then
+			name=$1
+			shift
 		else
 			name="$(basename $(pwd))"
 		fi
@@ -80,15 +81,17 @@ function main {
 
 		local homedir=$(pwd)
 		local name
-		if [[ -n "${1:-}" ]]; then
-			name=$1; shift
+		if [[ -n ${1-} ]]; then
+			name=$1
+			shift
 		else
-			name="$(echo "${CODER_NAME:-}" | cut -d- -f1)-$(basename $(pwd))"
+			name="$(echo "${CODER_NAME-}" | cut -d- -f1)-$(basename $(pwd))"
 		fi
 
 		local remote
-		if [[ -n "${1:-}" ]]; then
-			remote=$1; shift
+		if [[ -n ${1-} ]]; then
+			remote=$1
+			shift
 		else
 			remote=""
 		fi
@@ -100,7 +103,11 @@ function main {
 		b down || true
 		coder delete ${name} --yes || true 1>/dev/null 2>/dev/null
 		coder create ${name} --template ${template} --parameter arch=${arch},os=${os},homedir=${homedir},remote=${remote},command="${command}" --yes
-		while true; do if curl -sSL $(cat $HOME/.config/coderv2/url)/api/v2/users/$(coder list | tail -1 | awk '{print $1}' | cut -d/ -f1)/workspace/${name} -H "Coder-Session-Token: $(cat $HOME/.config/coderv2/session)" | jq -r '(.latest_build.resources[].agents//[])[].apps[] | select(.display_name == "code-server") | .health' | grep -q ^healthy; then break; fi; date; sleep 5; done
+		while true; do
+			if curl -sSL $(cat $HOME/.config/coderv2/url)/api/v2/users/$(coder list | tail -1 | awk '{print $1}' | cut -d/ -f1)/workspace/${name} -H "Coder-Session-Token: $(cat $HOME/.config/coderv2/session)" | jq -r '(.latest_build.resources[].agents//[])[].apps[] | select(.display_name == "code-server") | .health' | grep -q ^healthy; then break; fi
+			date
+			sleep 5
+		done
 		b open ${name}
 		;;
 	open)
@@ -108,8 +115,9 @@ function main {
 
 		local homedir=$(pwd)
 		local name
-		if [[ -n "${1:-}" ]]; then
-			name=$1; shift
+		if [[ -n ${1-} ]]; then
+			name=$1
+			shift
 		else
 			name="$(uname -n | cut -d- -f1)-$(basename $(pwd))"
 		fi
@@ -117,7 +125,10 @@ function main {
 		open "$(curl -sSL $(cat $HOME/.config/coderv2/url)/api/v2/debug/health -H "Coder-Session-Token: $(cat $HOME/.config/coderv2/session)" | jq -r '.access_url.access_url')/@$(coder list | tail -1 | awk '{print $1}' | cut -d/ -f1)/${name}.main/apps/cs/?folder=$(echo ${homedir} | sed "s#${HOME}#/home/ubuntu#")"
 		;;
 	github)
-		(echo protocol=https; echo host=github.com) | git credential fill 2>/dev/null | grep ^password= | cut -d= -f2-
+		(
+			echo protocol=https
+			echo host=github.com
+		) | git credential fill 2>/dev/null | grep ^password= | cut -d= -f2-
 		;;
 	lock)
 		gpg-connect-agent reloadagent /bye
@@ -139,16 +150,19 @@ function main {
 				rsync -ia ~/dotfiles/.gnupg/* ~/.gnupg/
 			fi
 		)
-		(set +f; rm -f ~/.gnupg/S.*agent*)
+		(
+			set +f
+			rm -f ~/.gnupg/S.*agent*
+		)
 		if ! pgrep dirmngr >/dev/null; then dirmngr --daemon >/dev/null || true; fi
 		set +u
-    if [[ -n "${CODER:-}" ]]; then
-		  setsid coder gitssh -- home -o LocalForward="$HOME/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra" 1>/dev/null 2>&1 &
-		  bg_pid=$!
-    else
-		  setsid ssh home -o LocalForward="$HOME/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra" 1>/dev/null 2>&1 &
-		  bg_pid=$!
-    fi
+		if [[ -n ${CODER-} ]]; then
+			setsid coder gitssh -- home -o LocalForward="$HOME/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra" 1>/dev/null 2>&1 &
+			bg_pid=$!
+		else
+			setsid ssh home -o LocalForward="$HOME/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra" 1>/dev/null 2>&1 &
+			bg_pid=$!
+		fi
 		trap 'kill -SIGTERM -${bg_pid}' EXIT
 		while [[ "$(pass hello 2>/dev/null || true)" != "world" ]]; do sleep 1; done
 		"$@"
