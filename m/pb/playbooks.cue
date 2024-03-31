@@ -207,7 +207,7 @@ role: base_packages: tasks: [{
 role: network_dummy: tasks: [{
 	name:   "Configure network dummy netdev"
 	become: true
-	when:   "ansible_architecture != 'aarch64'"
+	when:   "ansible_architecture != 'aarch64' and false"
 	template: {
 		src:   "{{ role_path }}/templates/etc/systemd/network/dummy1.netdev.j2"
 		dest:  "/etc/systemd/network/dummy1.netdev"
