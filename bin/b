@@ -70,11 +70,11 @@ function main {
 			name=$1
 			shift
 		else
-			name="$(basename $(pwd))"
+			name="$(echo "${CODER_NAME-}" | cut -d- -f1)-$(basename $(pwd))"
 		fi
 
 		docker ps -q -a --filter label=devcontainer.local_folder=${homedir} | runmany 'docker rm -f $1 2>/dev/null' || true
-		coder delete --yes "${name}"
+		coder delete ${name} --yes 1>/dev/null 2>/dev/null || true
 		;;
 	up)
 		shift
@@ -101,8 +101,8 @@ function main {
 		local template=coder-defn-ssh-template
 
 		b down || true
-		coder delete ${name} --yes || true 1>/dev/null 2>/dev/null
-		coder create ${name} --template ${template} --parameter arch=${arch},os=${os},homedir=${homedir},remote=${remote},command="${command}" --yes
+		coder delete ${name} --yes 1>/dev/null 2>/dev/null || true
+		coder create ${name} --template ${template} --parameter arch=${arch},os=${os},homedir=${homedir},remote=${remote},command="${command}" --yes 
 		while true; do
 			if curl -sSL $(cat $HOME/.config/coderv2/url)/api/v2/users/$(coder list | tail -1 | awk '{print $1}' | cut -d/ -f1)/workspace/${name} -H "Coder-Session-Token: $(cat $HOME/.config/coderv2/session)" | jq -r '(.latest_build.resources[].agents//[])[].apps[] | select(.display_name == "code-server") | .health' | grep -q ^healthy; then break; fi
 			date
@@ -119,7 +119,7 @@ function main {
 			name=$1
 			shift
 		else
-			name="$(uname -n | cut -d- -f1)-$(basename $(pwd))"
+			name="$(echo "${CODER_NAME-}" | cut -d- -f1)-$(basename $(pwd))"
 		fi
 
 		open "$(curl -sSL $(cat $HOME/.config/coderv2/url)/api/v2/debug/health -H "Coder-Session-Token: $(cat $HOME/.config/coderv2/session)" | jq -r '.access_url.access_url')/@$(coder list | tail -1 | awk '{print $1}' | cut -d/ -f1)/${name}.main/apps/cs/?folder=$(echo ${homedir} | sed "s#${HOME}#/home/ubuntu#")"
