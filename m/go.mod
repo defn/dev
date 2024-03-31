@@ -1,6 +1,6 @@
 module github.com/defn/dev/m
 
-go 1.21.4
+go 1.22.1
 
 require (
 	cuelang.org/go v0.8.0

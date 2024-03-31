@@ -14,7 +14,7 @@ module(
 bazel_dep(name = "protobuf", version = "23.1")
 
 # https://registry.bazel.build/modules/rules_proto
-bazel_dep(name = "rules_proto", version = "6.0.0-rc1")
+bazel_dep(name = "rules_proto", version = "6.0.0-rc2")
 
 # https://registry.bazel.build/modules/rules_proto_grpc
 bazel_dep(name = "rules_proto_grpc", version = "5.0.0-alpha2")
@@ -23,10 +23,10 @@ bazel_dep(name = "rules_proto_grpc", version = "5.0.0-alpha2")
 bazel_dep(name = "rules_proto_grpc_go", version = "5.0.0-alpha2")
 
 # https://registry.bazel.build/modules/rules_go
-bazel_dep(name = "rules_go", version = "0.45.1", repo_name = "io_bazel_rules_go")
+bazel_dep(name = "rules_go", version = "0.46.0", repo_name = "io_bazel_rules_go")
 
 go_sdk = use_extension("@io_bazel_rules_go//go:extensions.bzl", "go_sdk")
-go_sdk.download(version = "1.21.4")
+go_sdk.download(version = "1.22.1")
 go_sdk.host()
 
 # https://registry.bazel.build/modules/gazelle
