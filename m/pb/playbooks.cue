@@ -69,7 +69,7 @@ inventory: {
 
 playbook: base_ubuntu: [{
 	name:  "Ubuntu base playbook"
-	hosts: "coder:rpi:mac:zimaboard:heavy:district:chrome"
+	hosts: "all"
 	roles: [
 		"base_packages",
 		"base_bazel",
