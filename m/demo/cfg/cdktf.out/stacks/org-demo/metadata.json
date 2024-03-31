@@ -3,7 +3,7 @@
     "metadata": {
       "backend": "s3",
       "stackName": "org-demo",
-      "version": "0.20.4"
+      "version": "0.20.5"
     },
     "outputs": {}
   },
@@ -143,7 +143,7 @@
     "required_providers": {
       "aws": {
         "source": "aws",
-        "version": "5.40.0"
+        "version": "5.43.0"
       }
     }
   }

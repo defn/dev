@@ -16,6 +16,8 @@ build: ../node_modules/.bin/cdktf
 	trunk fmt || true
 # add whitespace between blocks
 	git ls-files cdktf.out | grep 'tf$$' | while read -r a; do perl -pe 's#^}$$#}\n#' $$a | awk 'NF {print; blank=0} !NF && !blank++ {print}' > $$a.tmp && mv $$a.tmp $$a; done
+# add mod symlink
+	runmany 'ln -nfs ../../../../mod $$1/' cdktf.out/stacks/*/
 # fmt
 	trunk fmt || true
 	git add -u cdktf.out

@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.40.0"
+      version = "5.43.0"
       source  = "aws"
     }
   }
@@ -26,7 +26,7 @@ module "demo-org" {
   name      = "terraform"
   namespace = "demo"
   stage     = "ops"
-  source    = "../../mod/terraform-aws-defn-account"
+  source    = "./mod/terraform-aws-defn-account"
   providers = {
     aws = aws.demo-org
   }
