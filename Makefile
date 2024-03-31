@@ -299,11 +299,11 @@ coder-ssh-linux:
 		&& echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | sed 's#agent$$#agent $$(uname -n)#' > /tmp/coder-agent-$(CODER_NAME) && (setsid bash -x /tmp/coder-agent-$(CODER_NAME) >>/tmp/coder-agent-startup.log 2>&1 &)
 
 coder-ssh-devcontainer:
-	source .bash_profile && cd m && npm install
-	-source .bash_profile && cd $(CODER_HOMEDIR) && docker ps -q -a --filter label=devcontainer.local_folder=$$(pwd) | runmany 'docker rm -f $$1 2>/dev/null'
-	source .bash_profile && cd $(CODER_HOMEDIR) && devcontainer build --workspace-folder . --config ~/m/.devcontainer/devcontainer.json
-	source .bash_profile && cd $(CODER_HOMEDIR) && devcontainer up --workspace-folder . --config ~/m/.devcontainer/devcontainer.json
-	source .bash_profile && cd $(CODER_HOMEDIR) && devcontainer exec --workspace-folder . --config ~/m/.devcontainer/devcontainer.json \
+	source ~/.bash_profile && cd m && npm install
+	-source ~/.bash_profile && cd $(CODER_HOMEDIR) && docker ps -q -a --filter label=devcontainer.local_folder=$$(pwd) | runmany 'docker rm -f $$1 2>/dev/null'
+	source ~/.bash_profile && cd $(CODER_HOMEDIR) && devcontainer build --workspace-folder . --config ~/m/.devcontainer/devcontainer.json
+	source ~/.bash_profile && cd $(CODER_HOMEDIR) && devcontainer up --workspace-folder . --config ~/m/.devcontainer/devcontainer.json
+	source ~/.bash_profile && cd $(CODER_HOMEDIR) && devcontainer exec --workspace-folder . --config ~/m/.devcontainer/devcontainer.json \
 		env \
 			CODER_NAME=$(CODER_NAME) \
 			CODER_HOMEDIR=$(CODER_HOMEDIR) \
@@ -314,7 +314,7 @@ coder-ssh-devcontainer:
 coder-ssh-darwin:
 	@pkill -9 -f coder.agen[t] || true
 	@pkill -9 -f code-serve[r] || true
-	@export STARSHIP_NO=1 && source .bash_profile && echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | exec bash -x -
+	@export STARSHIP_NO=1 && source ~/.bash_profile && echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | exec bash -x -
 
 coder-ssh-chromebook:
 	@pkill -9 -f coder.agen[t] || true
