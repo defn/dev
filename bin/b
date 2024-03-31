@@ -83,7 +83,7 @@ function main {
 		if [[ -n "${1:-}" ]]; then
 			name=$1; shift
 		else
-			name="$(uname -n | cut -d- -f1)-$(basename $(pwd))"
+			name="$(echo "${CODER_NAME:-}" | cut -d- -f1)-$(basename $(pwd))"
 		fi
 
 		local remote
