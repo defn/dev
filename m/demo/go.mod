@@ -1,6 +1,6 @@
 module github.com/defn/dev/m/demo
 
-go 1.21.4
+go 1.22.1
 
 require github.com/defn/dev/m v0.0.277
 
