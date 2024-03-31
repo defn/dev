@@ -95,7 +95,7 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 			"GIT_COMMITTER_NAME":  devCoderWorkspace.Owner(),
 		},
 		Os:                   paramOs.Value(),
-		StartupScript:        infra.Js(`export STARSHIP_NO= && while true; do source .bash_profile; code-server --auth none; sleep 5; done`),
+		StartupScript:        infra.Js(fmt.Sprintf("cd %s && make coder", *paramHomedir.Value())),
 		StartupScriptTimeout: infra.Jsn(180),
 	})
 

@@ -1,5 +1,12 @@
-up:
-	tilt up
+coder:
+	pkill trunk || true
+	$(MAKE) -j 2 tilt code-server
+
+tilt:
+	export STARSHIP_NO= && while true; do source ~/.bash_profile; tilt up; sleep 5; done
+
+code-server:
+	export STARSHIP_NO= && while true; do source ~/.bash_profile; code-server --auth none; sleep 5; done
 
 build:
 	cd cfg && $(MAKE)
