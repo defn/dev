@@ -15,3 +15,5 @@ WORKDIR /home/ubuntu
 RUN bash -c 'cd ~ && git clone https://github.com/defn/dev dev && mv dev/.git . && rm -rf dev && git reset --hard'
 RUN bash -c 'cd ~ && source ~/.bash_profile && ~/bin/persist-cache'
 RUN bash -c 'cd ~ && source ~/.bash_profile && cd m/pb && make base_ubuntu opt="-i inventory/packer.ini -e ansible_connection=local"'
+
+RUN sudo apt install -y irssi
