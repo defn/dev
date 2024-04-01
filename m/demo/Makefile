@@ -28,5 +28,11 @@ whoami:
 init:
 	@unset AWS_VAULT && PATH=$$PATH:../../bin runmany 'cd $$1 && tf init | bat' stacks/*/
 
+init-upgrade:
+	@unset AWS_VAULT && PATH=$$PATH:../../bin runmany 'cd $$1 && tf upgrade | bat' stacks/*/
+
+locks:
+	@unset AWS_VAULT && PATH=$$PATH:../../bin runmany 'cd $$1 && tf locks| bat' stacks/*/
+
 plan:
 	@unset AWS_VAULT && PATH=$$PATH:../../bin runmany 'cd $$1 && tf plan | bat' stacks/*/
