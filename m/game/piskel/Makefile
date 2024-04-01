@@ -1,10 +1,11 @@
  port ?= 1959
 
 default: dest/prod/index.html
-	$(MAKE) -j 2 backend
+	$(MAKE) -j 2 backend open
 
 backend:
-	cd dest/prod && python -m http.server $(port)
+	echo http://127.0.0.1:$(port)
+	cd dest/prod && python -m http.server --bind 127.0.0.1 $(port)
 
 open:
 	while true; do if curl -s -o /dev/null 127.0.0.1:$(port); then break; fi; sleep 1; done
