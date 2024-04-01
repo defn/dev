@@ -1,3 +1,5 @@
+profile ?= demo-org
+
 coder:
 	pkill trunk || true
 	$(MAKE) -j 2 tilt code-server
@@ -36,3 +38,6 @@ locks:
 
 plan:
 	@unset AWS_VAULT && PATH=$$PATH:../../bin runmany 'cd $$1 && tf plan | bat' stacks/*/
+
+login:
+	@open "https://signin.aws.amazon.com/oauth?Action=logout&redirect_uri=$$(aws-vault login $(profile)-sso-source -s | sed 's#://#://us-east-1.#' | python -c 'import sys; from urllib.parse import quote_plus; print(quote_plus(sys.stdin.read().strip()))')"
