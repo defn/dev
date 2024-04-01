@@ -13,11 +13,13 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 
-[includeIf "gitdir:~/"]
-    path = ~/dotfiles/.gitconfig
 [credential "https://github.com"]
 	helper = 
 	helper = !/home/ubuntu/bin/nix/gh auth git-credential
+
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/home/ubuntu/bin/nix/gh auth git-credential
+
+[includeIf "gitdir:~/"]
+    path = ~/dotfiles/.gitconfig
