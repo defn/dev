@@ -22,9 +22,12 @@
         findutils
         gnumake
         git
+        git-lfs
         netcat-gnu
         socat
         nmap
+        perl
+        bat
         bashInteractive
       ];
     };
