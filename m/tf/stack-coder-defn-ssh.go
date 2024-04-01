@@ -95,7 +95,7 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 			"GIT_COMMITTER_NAME":  devCoderWorkspace.Owner(),
 		},
 		Os:                   paramOs.Value(),
-		StartupScript:        infra.Js(fmt.Sprintf("cd %s && make coder", *paramHomedir.Value())),
+		StartupScript:        infra.Js(fmt.Sprintf("exec 1>>/tmp/coder-agent-stdout.log 2>>/tmp/coder-agent-stderr.log; cd %s && (setsid make coder & ) &", *paramHomedir.Value())),
 		StartupScriptTimeout: infra.Jsn(180),
 	})
 

@@ -5,6 +5,12 @@ domain ?= defn.run
 
 proxy ?= proxy3
 
+coder:
+	$(MAKE) -j 2 code-server
+
+code-server:
+	export STARSHIP_NO= && while true; do source ~/.bash_profile; code-server --auth none; sleep 5; done
+
 work ?=
 dev-macos:
 # keep this for the folder-uri opening technique
