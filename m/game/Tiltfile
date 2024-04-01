@@ -1,0 +1,34 @@
+#!/usr/bin/env python
+
+local_resource(
+    "sound",
+    serve_cmd=[
+        "bash",
+        "-c",
+        """
+            exec make sound
+        """,
+    ],
+)
+
+local_resource(
+    "pixel",
+    serve_cmd=[
+        "bash",
+        "-c",
+        """
+            exec make pixel
+        """,
+    ],
+)
+
+local_resource(
+    "level",
+    serve_cmd=[
+        "bash",
+        "-c",
+        """
+            exec make level
+        """,
+    ],
+)

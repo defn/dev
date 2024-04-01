@@ -1,7 +1,7 @@
 port ?= 1963
 
 default:
-	$(MAKE) -j 3 backend game=$(game) port=$(port) open
+	$(MAKE) -j 3 backend game=$(game) port=$(port)
 
 backend:
 	cd source/editor && npx phasereditor2d-launcher --editor . --dev --disable-plugins phasereditor2d.code --port $(port) --project $(game) --public

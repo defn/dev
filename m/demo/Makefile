@@ -1,14 +1,7 @@
 profile ?= demo-org
 
-coder:
-	pkill trunk || true
-	$(MAKE) -j 2 tilt code-server
-
-tilt:
-	export STARSHIP_NO= && while true; do source ~/.bash_profile; tilt up; sleep 5; done
-
-code-server:
-	export STARSHIP_NO= && while true; do source ~/.bash_profile; code-server --auth none; sleep 5; done
+default:
+	$(MAKE) build
 
 build:
 	cd cfg && $(MAKE)
@@ -42,3 +35,12 @@ plan:
 login:
 	@open "https://signin.aws.amazon.com/oauth?Action=logout&redirect_uri=$$(aws-vault login $(profile)-sso-source -s | sed 's#://#://us-east-1.#' | python -c 'import sys; from urllib.parse import quote_plus; print(quote_plus(sys.stdin.read().strip()))')"
 	
+coder:
+	pkill trunk || true
+	$(MAKE) -j 2 tilt code-server
+
+tilt:
+	export STARSHIP_NO= && while true; do source ~/.bash_profile; tilt up; sleep 5; done
+
+code-server:
+	export STARSHIP_NO= && while true; do source ~/.bash_profile; code-server --auth none; sleep 5; done
