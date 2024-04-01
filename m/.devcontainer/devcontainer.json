@@ -11,6 +11,7 @@
   "workspaceFolder": "/home/ubuntu",
   "mounts": [
     "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
+    "source=/home/ubuntu/.gnupg/S.gpg-agent.extra,target=/home/ubuntu/.gnupg/S.gpg-agent,type=bind",
     "source=/nix,target=/nix,type=bind"
   ]
 }
