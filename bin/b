@@ -74,6 +74,7 @@ function main {
 		fi
 
 		docker ps -q -a --filter label=devcontainer.local_folder=${homedir} | runmany 'docker rm -f $1 2>/dev/null' || true
+		docker rm -f "${name}" 2>/dev/null || true
 		coder delete ${name} --yes 1>/dev/null 2>/dev/null || true
 		;;
 	up)
