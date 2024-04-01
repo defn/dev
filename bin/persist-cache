@@ -20,23 +20,12 @@ function persist {
 function cache {
 	if ! type -P sudo >/dev/null; then return 0; fi
 
-	if [[ "Linux" == "$(uname -s || true)" ]]; then
-		if test -d /workspaces; then
-			sudo install -d -m 0755 -o $(id -un) -g $(id -gn) /workspaces
-			ln -nfs /workspaces ~/work
-		elif test -d /work; then
-			sudo install -d -m 0755 -o $(id -un) -g $(id -gn) /work
-			ln -nfs /work ~/work
-		else
-			mkdir -p work
-		fi
-		sudo chmod 755 ~/work
-		sudo chmod 755 ~/work/.
-		sudo chown $(id -un):$(id -gn) ~/work
-		sudo chown $(id -un):$(id -gn) ~/work/.
-
-		sudo chmod 700 ~/.gnupg
-	fi
+	mkdir -p ~/work
+	sudo chmod 755 ~/work
+	sudo chmod 755 ~/work/.
+	sudo chown $(id -un):$(id -gn) ~/work
+	sudo chown $(id -un):$(id -gn) ~/work/.
+	sudo chmod 700 ~/.gnupg
 
 	#persist ~/work/config-coderv2 ~/.config/coderv2
 
@@ -74,8 +63,8 @@ function cache {
 	mkdir -p ~/work/bazel-cache
 	mkdir -p ~/work/squid
 
-	if test -r .dotfiles/.gitconfig; then
-		ln -nfs .dotfiles/.gitconfig .gitconfig
+	if test -r dotfiles/.gitconfig; then
+		ln -nfs dotfiles/.gitconfig .gitconfig
 	else
 		ln -nfs .gitconfig.default .gitconfig
 	fi
