@@ -95,7 +95,7 @@ function main {
 		else
 			remote=""
 		fi
-		local command="make coder-ssh-devcontainer"
+		local command="make coder-ssh-envbuilder"
 		local arch=amd64
 		local os=linux
 		local template=coder-defn-ssh-template
