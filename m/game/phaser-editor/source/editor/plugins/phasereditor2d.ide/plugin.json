@@ -1,0 +1,12 @@
+{
+    "id": "phasereditor2d.ide",
+    "styles": [
+        "styles/controls.css",
+        "styles/lightBlue.css",
+        "styles/lightGray.css"
+    ],
+    "scripts": [
+        "scripts/showdown.min.js",        
+        "_out/phasereditor2d.ide.js"        
+    ]
+}

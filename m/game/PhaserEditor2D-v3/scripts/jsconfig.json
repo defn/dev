@@ -1,6 +1,0 @@
-{
-    "compilerOptions": {
-        "lib": ["esnext"],
-        "module": "commonJS"
-    }
-}

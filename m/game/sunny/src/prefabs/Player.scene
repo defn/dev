@@ -1,0 +1,51 @@
+{
+    "id": "2bdd30b0-e379-4943-9d6b-ed6cb2ba5b0a",
+    "sceneType": "PREFAB",
+    "settings": {
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 288,
+        "borderHeight": 192
+    },
+    "displayList": [
+        {
+            "type": "Sprite",
+            "id": "7510685d-e1b6-4e60-9ac0-d57acec2b000",
+            "label": "player_climb_player_climb_1",
+            "components": [],
+            "texture": {
+                "key": "atlas",
+                "frame": "player/idle/player-idle-2"
+            },
+            "x": 78,
+            "y": 37,
+            "ArcadeComponent.active": true,
+            "body.width": 8,
+            "body.height": 16,
+            "body.offset.x": 12,
+            "body.offset.y": 16,
+            "list": [
+                {
+                    "prefabId": "61dde64d-6c82-4109-a4a2-c88cb5eb249d",
+                    "id": "f010a3cd-dfcb-4040-b302-b92327caf30e",
+                    "unlock": [
+                        "animationKey"
+                    ],
+                    "label": "startAnimationScript",
+                    "animationKey": "player/idle/player-idle",
+                    "components": [],
+                    "nestedPrefabs": [],
+                    "list": []
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    }
+}

@@ -1,0 +1,51 @@
+{
+    "id": "ac95e9be-57fc-4891-8771-239709abcf83",
+    "sceneType": "PREFAB",
+    "settings": {
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 288,
+        "borderHeight": 192
+    },
+    "displayList": [
+        {
+            "type": "Sprite",
+            "id": "dd7391b8-579a-4607-ad40-ad1093df5287",
+            "label": "frog_idle_frog_idle_1",
+            "components": [],
+            "texture": {
+                "key": "atlas",
+                "frame": "frog/idle/frog-idle-1"
+            },
+            "x": 91,
+            "y": 51,
+            "ArcadeComponent.active": true,
+            "body.width": 21,
+            "body.height": 19,
+            "body.offset.x": 6,
+            "body.offset.y": 8,
+            "list": [
+                {
+                    "prefabId": "61dde64d-6c82-4109-a4a2-c88cb5eb249d",
+                    "id": "9df254b3-f14d-41dd-ad95-10126821e4f3",
+                    "unlock": [
+                        "animationKey"
+                    ],
+                    "label": "startAnimationScript",
+                    "animationKey": "frog/idle/frog-idle",
+                    "components": [],
+                    "nestedPrefabs": [],
+                    "list": []
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    }
+}

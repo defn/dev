@@ -1,0 +1,52 @@
+{
+    "id": "8a59bab4-8eb8-4fde-b4c7-2b77253af9f7",
+    "sceneType": "PREFAB",
+    "settings": {
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 288,
+        "borderHeight": 192
+    },
+    "displayList": [
+        {
+            "type": "Sprite",
+            "id": "ac395a3b-f800-42c4-8bbb-2b45d140aa01",
+            "label": "eagle_eagle_attack_1",
+            "components": [],
+            "texture": {
+                "key": "atlas",
+                "frame": "eagle/eagle-attack-1"
+            },
+            "x": 95,
+            "y": 75,
+            "ArcadeComponent.active": true,
+            "allowGravity": false,
+            "body.width": 32,
+            "body.height": 30,
+            "body.offset.x": 3,
+            "body.offset.y": 9,
+            "list": [
+                {
+                    "prefabId": "61dde64d-6c82-4109-a4a2-c88cb5eb249d",
+                    "id": "a58be27c-9759-4902-8cdd-c30011a39217",
+                    "unlock": [
+                        "animationKey"
+                    ],
+                    "label": "startAnimationScript",
+                    "animationKey": "eagle/eagle-attack",
+                    "components": [],
+                    "nestedPrefabs": [],
+                    "list": []
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    }
+}

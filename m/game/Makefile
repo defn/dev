@@ -1,14 +1,12 @@
 SHELL := /bin/bash
 
-port ?= 1963
-game ?= ~/work/sunny
-web ?= 443
+game ?= sunny
 
 default:
 	$(MAKE) build
 
 level:
-	cd PhaserEditor2D-v3 && $(MAKE) game=$(game) port=$(port)
+	cd phaser-editor && $(MAKE) game="$(shell pwd)/$(game)"
 
 sound:
 	cd jsfxr && $(MAKE)
