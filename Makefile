@@ -298,6 +298,26 @@ coder-ssh-linux:
 	@export STARSHIP_NO=1 LC_ALL=C.UTF-8 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive && source ~/.bash_profile && cd $(CODER_HOMEDIR) \
 		&& (echo set -x; echo "exec 1>>/tmp/coder-agent-stdout.log 2>>/tmp/coder-agent-stderr.log"; echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d) | (sed 's#agent$$#agent $$(uname -n)#; s#^while.*#while ! test -x $${BINARY_NAME}; do#; s#^BINARY_NAME.*#BINARY_NAME=$$HOME/bin/nix/coder#; s#exec ./#exec #' ) > /tmp/coder-agent-$(CODER_NAME) && (setsid bash -x /tmp/coder-agent-$(CODER_NAME) >>/tmp/coder-agent-startup.log 2>&1 &)
 
+coder-ssh-envbuilder:
+	docker run -it --rm \
+		-v envbuilder-image:/image-cache:ro \
+		-v envbuilder-layer:/layer-cache \
+		-v /nix:/nix \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		-v /home/ubuntu/.gnupg/S.gpg-agent.extra:/home/ubuntu/.gnupg/S.gpg-agent \
+		-v /home:/workspaces \
+		-v /home:/home \
+		-e LAYER_CACHE_DIR=/layer-cache \
+		-e BASE_IMAGE_CACHE_DIR=/image-cache \
+		-e INIT_SCRIPT=bash \
+		-e GIT_URL=https://not-real.defn.run/defn/dev \
+		-e DOCKERFILE_PATH=$(CODER_HOMEDIR)/Dockerfile \
+		-e CODER_NAME=$(CODER_NAME) \
+		-e CODER_HOMEDIR=$(CODER_HOMEDIR) \
+		-e CODER_AGENT_TOKEN=$(CODER_AGENT_TOKEN) \
+		-e CODER_INIT_SCRIPT_BASE64=$(CODER_INIT_SCRIPT_BASE64) \
+		ghcr.io/coder/envbuilder
+
 coder-ssh-devcontainer:
 	source ~/.bash_profile && cd m && npm install
 	-source ~/.bash_profile && cd $(CODER_HOMEDIR) && docker ps -q -a --filter label=devcontainer.local_folder=$$(pwd) | runmany 'docker rm -f $$1 2>/dev/null'
@@ -335,3 +355,4 @@ manage-site-default:
 	@true
 
 -include ~/.password-store/Makefile
+	
