@@ -1,6 +1,4 @@
 envbuilder:
-	mkdir -p ~/work/workspaces
-	sudo ln -nfs ubuntu /home/dev
 	docker run -it --rm \
 		-v /home:/workspaces \
 		-v envbuilder-image:/image-cache:ro \
