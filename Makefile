@@ -298,7 +298,9 @@ coder-ssh-linux:
 		&& (echo set -x; echo "exec 1>>/tmp/coder-agent-stdout.log 2>>/tmp/coder-agent-stderr.log"; echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d) | (sed 's#agent$$#agent $$(uname -n)#; s#^while.*#while ! test -x $${BINARY_NAME}; do#; s#^BINARY_NAME.*#BINARY_NAME=$$HOME/bin/nix/coder#; s#exec ./#exec #' ) > /tmp/coder-agent-$(CODER_NAME) && (bash -x /tmp/coder-agent-$(CODER_NAME) >>/tmp/coder-agent-startup.log 2>&1)
 
 coder-ssh-envbuilder:
+	docker rm -f "$(CODER_NAME)" || true
 	docker run --rm \
+		--name "$(CODER_NAME)" \
 		-v envbuilder-image:/image-cache:ro \
 		-v envbuilder-layer:/layer-cache \
 		-v /nix:/nix \

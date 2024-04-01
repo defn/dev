@@ -36,11 +36,22 @@ login:
 	@open "https://signin.aws.amazon.com/oauth?Action=logout&redirect_uri=$$(aws-vault login $(profile)-sso-source -s | sed 's#://#://us-east-1.#' | python -c 'import sys; from urllib.parse import quote_plus; print(quote_plus(sys.stdin.read().strip()))')"
 	
 coder:
+	while true; do $(MAKE) coder-inner; sleep 5; done
+	
+coder-inner:
 	pkill trunk || true
-	$(MAKE) -j 2 tilt code-server
+	$(MAKE) -j 2 code-server
 
 tilt:
-	export STARSHIP_NO= && while true; do source ~/.bash_profile; tilt up; sleep 5; done
+	pkill trunk || true
+	$(MAKE) -j 2 tilt-run tilt-open
+
+tilt-run:
+	tilt up --stream
+
+tilt-open:
+	while true; do if curl -s -o /dev/null 127.0.0.1:10350; then break; fi; sleep 1; done
+	open http://127.0.0.1:10350
 
 code-server:
 	export STARSHIP_NO= && while true; do source ~/.bash_profile; code-server --auth none; sleep 5; done
