@@ -41,3 +41,19 @@ plan:
 
 login:
 	@open "https://signin.aws.amazon.com/oauth?Action=logout&redirect_uri=$$(aws-vault login $(profile)-sso-source -s | sed 's#://#://us-east-1.#' | python -c 'import sys; from urllib.parse import quote_plus; print(quote_plus(sys.stdin.read().strip()))')"
+	
+envbuilder:
+	docker run -it --rm \
+		-v /home:/workspaces \
+		-v envbuilder-image:/image-cache:ro \
+		-v envbuilder-layer:/layer-cache \
+		-v /nix:/nix \
+		-v /home:/home \
+		-v /home/ubuntu/.gnupg/S.gpg-agent.extra:/home/ubuntu/.gnupg/S.gpg-agent \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		-e LAYER_CACHE_DIR=/layer-cache \
+		-e BASE_IMAGE_CACHE_DIR=/image-cache \
+		-e GIT_URL=https://github.com/defn/dev \
+		-e INIT_SCRIPT=bash \
+		-e DOCKERFILE_PATH=m/demo/Dockerfile \
+		ghcr.io/coder/envbuilder
