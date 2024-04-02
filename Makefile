@@ -29,8 +29,10 @@ chrome-coder:
 	$(MAKE) -j 4 chrome-dev-socat chrome-dev-coder
 
 chrome-dev-gpg:
+	sudo systemctl restart pcscd
 	pkill -9 gpg-agent || true
 	gpg-agent --daemon --pinentry-program $$(which pinentry)
+	pass hello
 
 chrome-dev-socat:
 	while true; do sudo pkill -9 socat || true; sudo socat TCP-LISTEN:443,fork TCP:localhost:3443; done
