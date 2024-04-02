@@ -6,8 +6,8 @@ inventory: {
 	[string]: vars: {
 		// provide defaults for inventory/packer.ini
 		ansible_user:              string | *#username
-		bazel_remote_cache_server: string | *"macmini.tail3884f.ts.net"
-		bazel_remote_cache_port:   string | *"9092"
+		bazel_remote_cache_server: string | *"100.101.80.89" // macmini
+		bazel_remote_cache_port:   string | *"9092"          // public port
 	}
 
 	mac: {
@@ -16,7 +16,7 @@ inventory: {
 		]
 		vars: {
 			bazel_remote_cache_server: "cache.defn.run"
-			bazel_remote_cache_port:   "9093"
+			bazel_remote_cache_port:   "9092"
 		}
 	}
 
@@ -26,7 +26,7 @@ inventory: {
 		]
 		vars: {
 			bazel_remote_cache_server: "cache.defn.run"
-			bazel_remote_cache_port:   "9093"
+			bazel_remote_cache_port:   "9092"
 		}
 	}
 

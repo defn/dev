@@ -32,5 +32,8 @@ playbooks/*.yaml: playbooks.cue
 %: $(HOME)/.local/bin/ansible-playbook playbooks/%.yaml
 	$(HOME)/.local/bin/ansible-playbook $(opt) "playbooks/$@.yaml"
 
-local:
-	$(MAKE) $(pb) opt="-c local -l $(shell uname -n | cut -d. -f1)"
+local: playbooks/*.yaml
+	$(MAKE) $(pb) opt="-i inventory/packer.ini -c local $(opt)"
+
+check: playbooks/*.yaml
+	$(MAKE) $(pb) opt="-i inventory/packer.ini -c local $(opt) --check --diff"
