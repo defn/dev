@@ -31,7 +31,7 @@ function main {
 		cp */*.tgz chart.tgz
 	)
 
-	helm push --insecure-skip-tls-verify chart.tgz "oci://${registry}"
+	echo helm push --insecure-skip-tls-verify chart.tgz "oci://${registry}"
 
 	cp chart.tgz "${out}"
 }
