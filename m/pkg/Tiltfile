@@ -1,0 +1,14 @@
+#!/usr/bin/env python
+
+load("../common/Tiltfile", "main")
+
+local_resource(
+    "build",
+    cmd=[
+        "bash",
+        "-c",
+        """
+            exec b build
+        """,
+    ],
+)

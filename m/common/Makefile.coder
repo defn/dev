@@ -1,5 +1,7 @@
 SHELL ?= bash
 
+.PHONY: coder tilt code-server
+
 coder:
 	while true; do $(MAKE) coder-inner; sleep 5; done
 

@@ -1,4 +1,7 @@
-SHELL := /bin/bash
+default:
+	$(MAKE) all
+
+-include ../common/Makefile.coder
 
 all:
 	env NIX_CONFIG="access-tokens = github.com=$$(b github)" $(MAKE) update upgrade	
