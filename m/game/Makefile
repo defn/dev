@@ -5,7 +5,6 @@ default:
 
 game ?= sunny
 
-
 level:
 	cd phaser-editor && $(MAKE) game="$(shell pwd)/$(game)"
 
