@@ -42,7 +42,7 @@ chrome-dev-socat:
 
 chrome-dev-coder:
 #	env PORT=8080 code-server --auth none --bind-addr 0.0.0.0
-	while true; do (cd m && $(MAKE) teacher site=https://coder.cb.defn.run domain=cb.defn.run name=-cb); done
+	while true; do (cd m && $(MAKE) teacher site=https://coder.$(name).defn.run domain=$(name).defn.run name=$(name)); done
 
 chrome-dev-cert-issue:
 	this-acme-issue '*.$(name).defn.run'
@@ -52,7 +52,7 @@ chrome-dev-cert-renew:
 
 chrome-dev-dns:
 	touch ~/.config/cloudflare-ddns.toml 
-	cloudflare-ddns --domain defn.run --record '*.cb.defn.run' --ip "$$(ip addr show eth0 | grep 'inet ' | awk '{print $$2}' | cut -d/ -f1)" --token "$$(pass cloudflare_defn.run)" --config ~/.config/cloudflare-ddns.toml 
+	cloudflare-ddns --domain defn.run --record '*.$(name).defn.run' --ip "$$(ip addr show eth0 | grep 'inet ' | awk '{print $$2}' | cut -d/ -f1)" --token "$$(pass cloudflare_defn.run)" --config ~/.config/cloudflare-ddns.toml 
 
 chrome-minikube:
 	minikube start --driver=kvm2 --auto-update-drivers=false --cni=cilium
