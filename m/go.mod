@@ -3,7 +3,7 @@ module github.com/defn/dev/m
 go 1.22.1
 
 require (
-	cuelang.org/go v0.8.0
+	cuelang.org/go v0.8.1
 	github.com/aws/constructs-go/constructs/v10 v10.3.0
 	github.com/aws/jsii-runtime-go v1.96.0
 	github.com/botanica-consulting/wiredialer v0.0.0-20230710124424-ca42731e9a5c
@@ -13,7 +13,7 @@ require (
 	github.com/charmbracelet/bubbletea v0.25.0
 	github.com/charmbracelet/lipgloss v0.10.0
 	github.com/gin-gonic/gin v1.9.1
-	github.com/hashicorp/terraform-cdk-go/cdktf v0.20.5
+	github.com/hashicorp/terraform-cdk-go/cdktf v0.20.6
 	github.com/spf13/cobra v1.8.0
 	github.com/spf13/viper v1.18.2
 )
@@ -22,10 +22,10 @@ replace github.com/botanica-consulting/wiredialer => github.com/amanibhavam/wire
 
 // last version to work, matches what is pinned in amanibhavam/wiredialer
 // require gvisor.dev/gvisor v0.0.0-20230927004350-cbd86285d259 // indirect
-require gvisor.dev/gvisor v0.0.0-20230927004350-cbd86285d259 // indirect
+require gvisor.dev/gvisor v0.0.0-20240403191048-cd0e13cfe16f // indirect
 
 require (
-	cuelabs.dev/go/oci/ociregistry v0.0.0-20240328172057-7eb5fc60a0e0 // indirect
+	cuelabs.dev/go/oci/ociregistry v0.0.0-20240403121559-7953b50d2488 // indirect
 	github.com/Masterminds/semver/v3 v3.2.1 // indirect
 	github.com/atotto/clipboard v0.1.4 // indirect
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
@@ -81,14 +81,14 @@ require (
 	github.com/subosito/gotenv v1.6.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.12 // indirect
-	github.com/yuin/goldmark v1.7.0 // indirect
+	github.com/yuin/goldmark v1.7.1 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/arch v0.7.0 // indirect
 	golang.org/x/crypto v0.21.0 // indirect
 	golang.org/x/exp v0.0.0-20240325151524-a685a6edb6d8 // indirect
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
 	golang.org/x/mod v0.16.0 // indirect
-	golang.org/x/net v0.22.0 // indirect
+	golang.org/x/net v0.23.0 // indirect
 	golang.org/x/oauth2 v0.18.0 // indirect
 	golang.org/x/sync v0.6.0 // indirect
 	golang.org/x/sys v0.18.0 // indirect

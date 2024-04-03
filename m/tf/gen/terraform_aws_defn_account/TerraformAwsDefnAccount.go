@@ -421,6 +421,7 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) Version() *string {
 	return returns
 }
 
+
 func NewTerraformAwsDefnAccount(scope constructs.Construct, id *string, config *TerraformAwsDefnAccountConfig) TerraformAwsDefnAccount {
 	_init_.Initialize()
 
@@ -448,7 +449,7 @@ func NewTerraformAwsDefnAccount_Override(t TerraformAwsDefnAccount, scope constr
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsDefnAccount) SetAccount(val interface{}) {
+func (j *jsiiProxy_TerraformAwsDefnAccount)SetAccount(val interface{}) {
 	if err := j.validateSetAccountParameters(val); err != nil {
 		panic(err)
 	}
@@ -459,7 +460,7 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) SetAccount(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsDefnAccount) SetAdditionalTagMap(val *map[string]*string) {
+func (j *jsiiProxy_TerraformAwsDefnAccount)SetAdditionalTagMap(val *map[string]*string) {
 	_jsii_.Set(
 		j,
 		"additionalTagMap",
@@ -467,7 +468,7 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) SetAdditionalTagMap(val *map[string]
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsDefnAccount) SetAttributes(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsDefnAccount)SetAttributes(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"attributes",
@@ -475,7 +476,7 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) SetAttributes(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsDefnAccount) SetContext(val interface{}) {
+func (j *jsiiProxy_TerraformAwsDefnAccount)SetContext(val interface{}) {
 	if err := j.validateSetContextParameters(val); err != nil {
 		panic(err)
 	}
@@ -486,7 +487,7 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) SetContext(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsDefnAccount) SetDelimiter(val *string) {
+func (j *jsiiProxy_TerraformAwsDefnAccount)SetDelimiter(val *string) {
 	_jsii_.Set(
 		j,
 		"delimiter",
@@ -494,7 +495,7 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) SetDelimiter(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsDefnAccount) SetDependsOn(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsDefnAccount)SetDependsOn(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"dependsOn",
@@ -502,7 +503,7 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) SetDependsOn(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsDefnAccount) SetDescriptorFormats(val interface{}) {
+func (j *jsiiProxy_TerraformAwsDefnAccount)SetDescriptorFormats(val interface{}) {
 	if err := j.validateSetDescriptorFormatsParameters(val); err != nil {
 		panic(err)
 	}
@@ -513,7 +514,7 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) SetDescriptorFormats(val interface{}
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsDefnAccount) SetEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsDefnAccount)SetEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"enabled",
@@ -521,7 +522,7 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) SetEnabled(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsDefnAccount) SetEnvironment(val *string) {
+func (j *jsiiProxy_TerraformAwsDefnAccount)SetEnvironment(val *string) {
 	_jsii_.Set(
 		j,
 		"environment",
@@ -529,7 +530,7 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) SetEnvironment(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsDefnAccount) SetForEach(val cdktf.ITerraformIterator) {
+func (j *jsiiProxy_TerraformAwsDefnAccount)SetForEach(val cdktf.ITerraformIterator) {
 	_jsii_.Set(
 		j,
 		"forEach",
@@ -537,7 +538,7 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) SetForEach(val cdktf.ITerraformItera
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsDefnAccount) SetIdLengthLimit(val *float64) {
+func (j *jsiiProxy_TerraformAwsDefnAccount)SetIdLengthLimit(val *float64) {
 	_jsii_.Set(
 		j,
 		"idLengthLimit",
@@ -545,7 +546,7 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) SetIdLengthLimit(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsDefnAccount) SetLabelKeyCase(val *string) {
+func (j *jsiiProxy_TerraformAwsDefnAccount)SetLabelKeyCase(val *string) {
 	_jsii_.Set(
 		j,
 		"labelKeyCase",
@@ -553,7 +554,7 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) SetLabelKeyCase(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsDefnAccount) SetLabelOrder(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsDefnAccount)SetLabelOrder(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"labelOrder",
@@ -561,7 +562,7 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) SetLabelOrder(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsDefnAccount) SetLabelsAsTags(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsDefnAccount)SetLabelsAsTags(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"labelsAsTags",
@@ -569,7 +570,7 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) SetLabelsAsTags(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsDefnAccount) SetLabelValueCase(val *string) {
+func (j *jsiiProxy_TerraformAwsDefnAccount)SetLabelValueCase(val *string) {
 	_jsii_.Set(
 		j,
 		"labelValueCase",
@@ -577,7 +578,7 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) SetLabelValueCase(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsDefnAccount) SetName(val *string) {
+func (j *jsiiProxy_TerraformAwsDefnAccount)SetName(val *string) {
 	_jsii_.Set(
 		j,
 		"name",
@@ -585,7 +586,7 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) SetName(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsDefnAccount) SetNamespace(val *string) {
+func (j *jsiiProxy_TerraformAwsDefnAccount)SetNamespace(val *string) {
 	_jsii_.Set(
 		j,
 		"namespace",
@@ -593,7 +594,7 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) SetNamespace(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsDefnAccount) SetRegexReplaceChars(val *string) {
+func (j *jsiiProxy_TerraformAwsDefnAccount)SetRegexReplaceChars(val *string) {
 	_jsii_.Set(
 		j,
 		"regexReplaceChars",
@@ -601,7 +602,7 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) SetRegexReplaceChars(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsDefnAccount) SetStage(val *string) {
+func (j *jsiiProxy_TerraformAwsDefnAccount)SetStage(val *string) {
 	_jsii_.Set(
 		j,
 		"stage",
@@ -609,7 +610,7 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) SetStage(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsDefnAccount) SetTags(val *map[string]*string) {
+func (j *jsiiProxy_TerraformAwsDefnAccount)SetTags(val *map[string]*string) {
 	_jsii_.Set(
 		j,
 		"tags",
@@ -617,7 +618,7 @@ func (j *jsiiProxy_TerraformAwsDefnAccount) SetTags(val *map[string]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsDefnAccount) SetTenant(val *string) {
+func (j *jsiiProxy_TerraformAwsDefnAccount)SetTenant(val *string) {
 	_jsii_.Set(
 		j,
 		"tenant",
@@ -829,3 +830,4 @@ func (t *jsiiProxy_TerraformAwsDefnAccount) ToTerraform() interface{} {
 
 	return returns
 }
+

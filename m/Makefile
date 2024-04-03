@@ -101,8 +101,11 @@ update:
 regen:
 	@mark gazelle
 	set -x; go get $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1' | grep -v /demo/)
-	mkdir -p node_modules
-	touch node_modules/go.mod || true
+	mkdir -p node_modules demo/node_modules
+	for a in node_modules demo/node_modules infra/stacks/*/.terraform demo/stacks/*/.terraform; do \
+		touch $$a/go.mod || true; \
+		touch $$a/WORKSPACE || true; \
+	done
 	go mod tidy
 	b pass run //:gazelle
 
