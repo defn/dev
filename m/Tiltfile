@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-load("common/Tiltfile", "main")
+load("../common/Tiltfile", "main")
 
 local_resource(
     "build",
@@ -8,7 +8,7 @@ local_resource(
         "bash",
         "-c",
         """
-            exec make install
+            exec make build
         """,
     ],
 )
