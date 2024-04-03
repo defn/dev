@@ -1,3 +1,8 @@
+default:
+	$(MAKE) install
+
+-include ../common/Makefile.coder
+
 timeout ?= 5
 
 env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
@@ -5,11 +10,8 @@ domain ?= defn.run
 
 proxy ?= proxy3
 
-coder:
-	$(MAKE) -j 2 code-server
-
-code-server:
-	export STARSHIP_NO= && while true; do source ~/.bash_profile; code-server --auth none; sleep 5; done
+install:
+	npm install
 
 work ?=
 dev-macos:
