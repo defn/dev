@@ -1,6 +1,5 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 
-# gazelle:exclude **/runtime_exectracer1.go
 go_library(
     name = "wg_lib",
     srcs = ["main.go"],
