@@ -1,0 +1,37 @@
+#!/usr/bin/env expect
+
+set timeout 600
+
+spawn ovpn_initpki
+
+expect {
+  "Confirm removal:" {
+    send "yes\r"
+    exp_continue
+  }
+  "Enter New CA Key Passphrase:" {
+    send "this-is-password\r"
+    exp_continue
+  }
+  "Confirm New CA Key Passphrase:" {
+    send "this-is-password\r"
+    exp_continue
+  }
+  "Common Name" {
+    expect "]:"
+    send "penguin\r"
+    exp_continue
+  }
+  "Confirm request details:" {
+    send "yes\r"
+    exp_continue
+  }
+  "pass phrase" {
+    send "this-is-password\r"
+    exp_continue
+  }
+  "updated CRL has been created" {
+  }
+}
+
+expect eof

@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+function main {
+  set -x
+
+  #sudo sysctl net.ipv6.conf.default.forwarding=1
+  #sudo sysctl net.ipv6.conf.all.forwarding=1
+
+  export PATH=${PATH}:$(pwd)
+  export OPENVPN=$(pwd)
+  export EASYRSA_PKI=$(pwd)/easy-rsa 
+
+  case "${1:-}" in
+    init)
+      ./service-init-pki
+      rm -f openvpn.conf
+      rm -f ovpn_env.sh
+      ovpn_genconfig -u udp://penguin.linux.test -n 1.1.1.1 -p "route 100.101.80.89 255.255.255.255"
+      rm -f penguin.ovpn
+      service-init-client
+      #ovpn_getclient client combined > penguin.ovpn
+      openssl pkcs12 -export -in ./easy-rsa/issued/client.crt -inkey ./easy-rsa/private/client.key -certfile ./easy-rsa/ca.crt -out /mnt/chromeos/MyFiles/Downloads/client.p12 -password pass:
+      cp ./easy-rsa/ca.crt /mnt/chromeos/MyFiles/Downloads/
+      ;;
+    server)
+      sudo -E ./ovpn_run
+      ;;
+    *) 
+      exec "$@"
+      ;;
+  esac
+}
+
+main "$@"
