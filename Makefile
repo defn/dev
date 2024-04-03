@@ -28,6 +28,9 @@ chrome:
 chrome-coder:
 	$(MAKE) -j 4 chrome-dev-socat chrome-dev-coder
 
+chrome-vpn:
+	cd m/openvpn && ./service server
+
 chrome-dev-gpg:
 	sudo systemctl restart pcscd
 	pkill -9 gpg-agent || true
