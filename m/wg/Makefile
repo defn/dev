@@ -1,9 +1,9 @@
-wiredialer:
+wgclient:
 	chmod 0600 wg1.conf
 	b build
 	$(shell git rev-parse --show-toplevel)/m/bazel-bin/wg/wg_/wg wg1.conf https://kubernetes.default.svc.cluster.local:443
 
-proxy:
+wgproxy:
 	chmod 0600 wg2.conf
 	(sleep 2; $(MAKE) client) &
 	wireproxy --config wg2.conf
