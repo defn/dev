@@ -6,12 +6,21 @@ if [[ ${WORKDIR} == '${workspaceFolder}' ]]; then
 	WORKDIR="${HOME-}"
 fi
 
+export workdir="${WORKDIR}"
+export TMOUT=3600
+
 if test -f ~/.bash_profile; then
-	cd >/dev/null
-	source .bash_profile
-	cd - >/dev/null
+	source ~/.bash_profile
 fi
 
-export workdir="${WORKDIR}"
+lockfile="${HOME}/.bash_entrypoint.lock"
 
-export TMOUT=3600
+# Attempt to acquire the lock without blocking
+if flock -n 200; then
+	if ! test -r /tmp/.bash_entrypoint.done; then
+		touch /tmp/.bash_entrypoint.done
+		make tilt
+	fi
+fi 200>$lockfile
+
+unset lockfile
