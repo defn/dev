@@ -22,7 +22,7 @@ replace github.com/botanica-consulting/wiredialer => github.com/amanibhavam/wire
 
 // last version to work, matches what is pinned in amanibhavam/wiredialer
 // require gvisor.dev/gvisor v0.0.0-20230927004350-cbd86285d259 // indirect
-require gvisor.dev/gvisor v0.0.0-20230927004350-cbd86285d259 // indirect
+require gvisor.dev/gvisor v0.0.0-20240403191048-cd0e13cfe16f // indirect
 
 require (
 	cuelabs.dev/go/oci/ociregistry v0.0.0-20240403121559-7953b50d2488 // indirect
