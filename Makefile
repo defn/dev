@@ -45,10 +45,10 @@ chrome-dev-coder:
 	while true; do (cd m && $(MAKE) teacher site=https://coder.cb.defn.run domain=cb.defn.run name=-cb); done
 
 chrome-dev-cert-issue:
-	this-acme-issue '*.cb.defn.run'
+	this-acme-issue '*.$(name).defn.run'
 
 chrome-dev-cert-renew:
-	this-acme-renew '*.cb.defn.run'
+	this-acme-renew '*.$(name).defn.run'
 
 chrome-dev-dns:
 	touch ~/.config/cloudflare-ddns.toml 

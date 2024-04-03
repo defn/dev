@@ -66,17 +66,17 @@ class-init:
 teacher: 
 	$(MAKE) hello
 	pkill postgres || true
-	env AWS_DEFAULT_REGION=us-west-1 b server defn-org $(MAKE) dev_inner 
+	env AWS_DEFAULT_REGION=us-west-1 b server defn-org $(MAKE) dev_inner name=$(name)
 
 site ?= http://$(shell tailscale cert 2>&1 | grep 'For domain'  | cut -d'"' -f2)
 dev_inner:
 	coder server --oauth2-github-allow-signups \
 		--enable-terraform-debug-mode \
 		--oauth2-github-allowed-orgs $$(pass coder_oauth2-github-allowed-orgs) --oauth2-github-allowed-teams $$(pass coder_oauth2-github-allowed-teams) \
-		--oauth2-github-client-id $$(pass coder_oauth2-github-client-id$(name)) --oauth2-github-client-secret $$(pass coder_oauth2-github-client-secret$(name)) \
-		--access-url $(site) --wildcard-access-url "*.$(domain)" \
+		--oauth2-github-client-id $$(pass coder_oauth2-github-client-id-$(name)) --oauth2-github-client-secret $$(pass coder_oauth2-github-client-secret-$(name)) \
+		--access-url $(site) --wildcard-access-url "*.$(name).defn.run" \
 		--tls-enable \
-		--tls-cert-file ~/.acme.sh/\*.cb.defn.run_ecc/fullchain.cer --tls-key-file ~/.acme.sh/\*.cb.defn.run_ecc/\*.cb.defn.run.key
+		--tls-cert-file ~/.acme.sh/\*.$(name).defn.run_ecc/fullchain.cer --tls-key-file ~/.acme.sh/\*.$(name).defn.run_ecc/\*.$(name).defn.run.key
 
 cdktf:
 	npm install
