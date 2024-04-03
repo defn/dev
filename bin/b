@@ -82,12 +82,7 @@ function main {
 
 		local homedir=$(pwd)
 		local name
-		if [[ -n ${1-} ]]; then
-			name=$1
-			shift
-		else
-			name="$(echo "${CODER_NAME-}" | cut -d- -f1)-$(basename $(pwd))"
-		fi
+		name="$(echo "${CODER_NAME-}" | cut -d- -f1)-$(basename $(pwd))"
 
 		local remote
 		if [[ -n ${1-} ]]; then

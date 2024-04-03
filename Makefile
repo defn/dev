@@ -335,6 +335,7 @@ coder-ssh-devcontainer:
 		env \
 			CODER_NAME=$(CODER_NAME) \
 			CODER_HOMEDIR=$(CODER_HOMEDIR) \
+			CODER_AGENT_URL=$(CODER_AGENT_URL) \
 			CODER_AGENT_TOKEN=$(CODER_AGENT_TOKEN) \
 			CODER_INIT_SCRIPT_BASE64=$(CODER_INIT_SCRIPT_BASE64) \
 			bash -c "cd && exec make coder-ssh-linux"
