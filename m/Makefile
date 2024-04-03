@@ -1,7 +1,7 @@
 default:
 	$(MAKE) install
 
--include ../common/Makefile.coder
+-include common/Makefile.coder
 
 timeout ?= 5
 

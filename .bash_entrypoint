@@ -13,7 +13,7 @@ if test -f ~/.bash_profile; then
 	source ~/.bash_profile
 fi
 
-lockfile="${HOME}/.bash_entrypoint.lock"
+lockfile="/tmp/.bash_entrypoint.lock"
 
 # Attempt to acquire the lock without blocking
 if flock -n 200; then
