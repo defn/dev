@@ -3,7 +3,7 @@
     "metadata": {
       "backend": "s3",
       "stackName": "acc-chamber-x",
-      "version": "0.20.5"
+      "version": "0.20.6"
     },
     "outputs": {
     }
