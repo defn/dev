@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 6,
-  "moduleFileHash": "14f10ed32876114825d2c830e85e74bb5dd7725ed49803d5fa9109abe44c6e7d",
+  "moduleFileHash": "d52f61bd5d1494b6fe7084cb6edc99102fd76803a33f0c5794d50ee33187947f",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -72,8 +72,6 @@
             "column": 24
           },
           "imports": {
-            "dev_gvisor_gvisor": "dev_gvisor_gvisor",
-            "org_golang_google_grpc": "org_golang_google_grpc",
             "com_github_noisysockets_noisysockets": "com_github_noisysockets_noisysockets",
             "com_github_urfave_cli_v2": "com_github_urfave_cli_v2",
             "org_golang_x_sys": "org_golang_x_sys",
@@ -1704,10 +1702,10 @@
       "general": {
         "bzlTransitiveDigest": "D1+rhhbwX4ufoTmeUVxDpPg+Sknv3QzVXZnyK2zOjj4=",
         "recordedFileInputs": {
-          "@@//go.mod": "f25da6b80f64979e529fd85044c92aaa81737cadaafe2d68f2c028b30f7cb858",
+          "@@//go.mod": "7a07570e71cb7a759868146a48f992d4e901894719a6730c97b63a4f5f88fc37",
           "@@rules_go~//go.mod": "de22304b720f7f61350ec1c9739de6c0a1b1103fd22bfeb6e92c6c843ddc6d6e",
           "@@gazelle~//go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
-          "@@//go.sum": "89de5b93163ec4687d57d760962678d23d8dd59faf7428cc4c541e0185e1c594",
+          "@@//go.sum": "a2cd983a843e3449f6ff98a0b6401897dc0f7313c428499434febc35f62744ec",
           "@@rules_go~//go.sum": "d56fdb19b21a5f12bcf625c49432371ac39c2def0f564098fbda107f7c080f40",
           "@@gazelle~//go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473"
         },
@@ -2266,9 +2264,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:LI5DOvAxUPMv/50agcLLoo+AdWc1irS9Rzz4vPuD1V4=",
+              "sum": "h1:Jyp0Hsi0bmHXG6k9eATXoYtjd6e2UzZ1SCn/wIupY14=",
               "replace": "",
-              "version": "v0.0.0-20240401170217-c3f982113cda"
+              "version": "v0.0.0-20231106174013-bbf56f31fb17"
             }
           },
           "com_github_atotto_clipboard": {
@@ -3036,6 +3034,21 @@
               "version": "v0.0.0-20230316100256-276c6243b2f6"
             }
           },
+          "com_github_bytedance_sonic": {
+            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "importpath": "github.com/bytedance/sonic",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:jRN+yEjakWh8aK5FzrciUHG8OFXK+4/KrAX/ysEtHAA=",
+              "replace": "",
+              "version": "v1.11.3"
+            }
+          },
           "org_golang_google_grpc": {
             "bzlFile": "@@gazelle~//internal:go_repository.bzl",
             "ruleClassName": "go_repository",
@@ -3051,21 +3064,6 @@
               "sum": "h1:WjKe+dnvABXyPJMD7KDNLxtoGk5tgk+YFWN6cBWjZE8=",
               "replace": "",
               "version": "v1.63.0"
-            }
-          },
-          "com_github_bytedance_sonic": {
-            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
-            "ruleClassName": "go_repository",
-            "attributes": {
-              "importpath": "github.com/bytedance/sonic",
-              "build_directives": [],
-              "build_file_generation": "auto",
-              "build_extra_args": [],
-              "patches": [],
-              "patch_args": [],
-              "sum": "h1:jRN+yEjakWh8aK5FzrciUHG8OFXK+4/KrAX/ysEtHAA=",
-              "replace": "",
-              "version": "v1.11.3"
             }
           },
           "com_github_opencontainers_go_digest": {
@@ -3284,7 +3282,6 @@
                 "com_github_spf13_viper": "github.com/spf13/viper",
                 "com_github_urfave_cli_v2": "github.com/urfave/cli/v2",
                 "org_golang_x_sys": "golang.org/x/sys",
-                "org_golang_google_grpc": "google.golang.org/grpc",
                 "dev_cuelabs_go_oci_ociregistry": "cuelabs.dev/go/oci/ociregistry",
                 "com_github_masterminds_semver_v3": "github.com/Masterminds/semver/v3",
                 "com_github_atotto_clipboard": "github.com/atotto/clipboard",
@@ -3362,12 +3359,13 @@
                 "org_golang_x_time": "golang.org/x/time",
                 "org_golang_x_tools": "golang.org/x/tools",
                 "org_golang_google_appengine": "google.golang.org/appengine",
-                "org_golang_google_genproto_googleapis_rpc": "google.golang.org/genproto/googleapis/rpc",
+                "org_golang_google_grpc": "google.golang.org/grpc",
                 "org_golang_google_protobuf": "google.golang.org/protobuf",
                 "in_gopkg_check_v1": "gopkg.in/check.v1",
                 "in_gopkg_ini_v1": "gopkg.in/ini.v1",
                 "in_gopkg_yaml_v3": "gopkg.in/yaml.v3",
                 "org_golang_google_grpc_cmd_protoc_gen_go_grpc": "google.golang.org/grpc/cmd/protoc-gen-go-grpc",
+                "org_golang_google_genproto_googleapis_rpc": "google.golang.org/genproto/googleapis/rpc",
                 "com_github_gogo_protobuf": "github.com/gogo/protobuf",
                 "com_github_golang_mock": "github.com/golang/mock",
                 "org_golang_google_genproto": "google.golang.org/genproto",
@@ -3464,7 +3462,6 @@
         },
         "moduleExtensionMetadata": {
           "explicitRootModuleDirectDeps": [
-            "dev_gvisor_gvisor",
             "org_cuelang_go",
             "com_github_aws_constructs_go_constructs_v10",
             "com_github_aws_jsii_runtime_go",
@@ -3479,8 +3476,7 @@
             "com_github_spf13_cobra",
             "com_github_spf13_viper",
             "com_github_urfave_cli_v2",
-            "org_golang_x_sys",
-            "org_golang_google_grpc"
+            "org_golang_x_sys"
           ],
           "explicitRootModuleDirectDevDeps": [],
           "useAllRepos": "NO",

@@ -9,8 +9,6 @@ go_library(
         "@com_github_noisysockets_noisysockets//:noisysockets",
         "@com_github_noisysockets_noisysockets//config",
         "@com_github_urfave_cli_v2//:cli",
-        "@dev_gvisor_gvisor//pkg/sync",
-        "@org_golang_google_grpc//:go_default_library",
         "@org_golang_x_sys//unix",
     ],
 )
