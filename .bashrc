@@ -131,6 +131,10 @@ function gs {
 	git status -sb "$@"
 }
 
+function w {
+	cd "${workdir}"
+}
+
 # vscode browser
 export BROWSER="$(type -P browser || true)"
 

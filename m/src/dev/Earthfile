@@ -1,7 +1,7 @@
-VERSION 0.7
+VERSION 0.8
 
 build:
-    ARG image=quay.io/defn/dev:latest-hook-example
+    ARG image
     BUILD +build-operator --image=${image}
 
 build-operator:

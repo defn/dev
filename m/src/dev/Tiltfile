@@ -7,4 +7,6 @@ main(
     app_release="gen/cli.bin",
     app_build="../../bazel-bin/src/dev/dev_/dev",
     host="src--dev",
+    context="meh",
+    registry="127.0.0.1:4999"
 )
