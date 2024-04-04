@@ -1,0 +1,23 @@
+# managed by Cue
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: src--dev
+  labels:
+    app: app
+  name: app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+        - name: app
+          image: app
+          ports:
+            - containerPort: 80

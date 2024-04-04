@@ -25,4 +25,4 @@ chart:
 	cue eval >/dev/null
 	cue export --out json -e app.output | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | while read -r f b; do base64 -d <<<"$$b" >"$$f"; done
 	rm -f *.tgz gen/*.tgz
-	helm template --namespace "$$(cue export --out text -e app.chart.name)" chart | kubectl apply -f -
+	helm template chart | kubectl apply -n "$$(cue export --out text -e app.chart.name)" -f -

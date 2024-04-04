@@ -8,7 +8,6 @@ def main(
     app_release,
     app_entrypoint,
     host,
-    dockerfile="Dockerfile.app",
     context="minikube",
     registry=os.getenv("DFD_REGISTRY"),
     parent=os.getenv("DFD_PARENT"),
@@ -25,7 +24,7 @@ def main(
     local_resource(name="deploy ", cmd="make deploy")
 
     # deploy this app
-    k8s_yaml(local("cat gen/deploy.yaml"))
+    k8s_yaml(local("helm template chart"))
 
     # build this app
     local_resource("build", serve_cmd="make watch")
@@ -42,16 +41,6 @@ def main(
     # app service
     k8s_resource(
         app_service,
-        links=[
-            link("https://coder.{}/@amanibhavam/{}".format(parent, env), "coder"),
-            link("https://buildkite.com/defn/dev/builds?branch=main", "buildkite"),
-            link(
-                "https://argocd-{}.{}/applications/argocd/{}".format(env, parent, host),
-                "argocd",
-            ),
-            link("{}.{}".format(host, parent), "app"),
-            link("{}.{}/api".format(host, parent), "/api"),
-        ],
     )
 
     # reload app service when workarea synced
@@ -60,8 +49,8 @@ def main(
         command="make image",
         deps=[app_release],
         trigger=[app_release],
-        entrypoint=[app_entrypoint],
+        entrypoint=app_entrypoint,
         live_update=[
-            sync(app_release, app_entrypoint),
+            sync(app_release, app_entrypoint[0]),
         ],
     )
