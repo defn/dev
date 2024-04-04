@@ -4,10 +4,10 @@ default:
 -include ../common/Makefile.coder
 
 build:
-	go build
+	b build
 
-server:
-	go run main.go server
+server: build
+	../bazel-bin/wg/wg_/wg server
 
-client:
-	go run main.go client
+client: build
+	../bazel-bin/wg/wg_/wg client

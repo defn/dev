@@ -23,7 +23,7 @@ chrome-install:
 chrome:
 	$(MAKE) -j 4 chrome-dev-gpg
 	while ! pass hello; do sleep 1; done
-	$(MAKE) chrome-coder
+	$(MAKE) -j 2 chrome-coder chrome-vpn
 
 chrome-coder:
 	$(MAKE) -j 4 chrome-dev-socat chrome-dev-coder

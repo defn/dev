@@ -7,6 +7,8 @@ go 1.22.1
 // require gvisor.dev/gvisor v0.0.0-20240223225628-6c0239f8ece0
 require gvisor.dev/gvisor v0.0.0-20240223225628-6c0239f8ece0
 
+replace gvisor.dev/gvisor => github.com/defn/gvisor v1.0.2
+
 require (
 	cuelang.org/go v0.8.1
 	github.com/aws/constructs-go/constructs/v10 v10.3.0

@@ -1704,10 +1704,10 @@
       "general": {
         "bzlTransitiveDigest": "D1+rhhbwX4ufoTmeUVxDpPg+Sknv3QzVXZnyK2zOjj4=",
         "recordedFileInputs": {
-          "@@//go.mod": "ae1d8deb28fd9c13b462f7008c3741eadc88864270d63bf6a80390b54079e530",
+          "@@//go.mod": "25e23e3d349e197d233b1373a6222a8a5027a11348c31e40e5e0907049fd73b1",
           "@@rules_go~//go.mod": "de22304b720f7f61350ec1c9739de6c0a1b1103fd22bfeb6e92c6c843ddc6d6e",
           "@@gazelle~//go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
-          "@@//go.sum": "195a6f9cc3d0b96ff383540a4ad381ecbc5ed403579a40027d8425e74b2ee9f5",
+          "@@//go.sum": "89de5b93163ec4687d57d760962678d23d8dd59faf7428cc4c541e0185e1c594",
           "@@rules_go~//go.sum": "d56fdb19b21a5f12bcf625c49432371ac39c2def0f564098fbda107f7c080f40",
           "@@gazelle~//go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473"
         },
@@ -2341,9 +2341,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:TqHzCJU/Js8csJji6d6PhLPa5PNfdkY7XaYJcYFv6JI=",
-              "replace": "",
-              "version": "v0.0.0-20240223225628-6c0239f8ece0"
+              "sum": "h1:NNUk591wBr15WwhPEqWcctTgxH7SzHK9iU8qOysiw6Y=",
+              "replace": "github.com/defn/gvisor",
+              "version": "v1.0.2"
             }
           },
           "com_github_russross_blackfriday_v2": {
