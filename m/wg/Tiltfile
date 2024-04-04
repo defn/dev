@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+
+load("../common/Tiltfile", "main")
+
+local_resource(
+    "build",
+    cmd=[
+        "bash",
+        "-c",
+        """
+            exec make build
+        """,
+    ],
+)
+
+local_resource(
+    "server",
+    serve_cmd=[
+        "bash",
+        "-c",
+        """
+            exec make server
+        """,
+    ],
+)
+
+local_resource(
+    "client",
+    serve_cmd=[
+        "bash",
+        "-c",
+        """
+            while true; do
+                make client
+                sleep 60
+            done
+        """,
+    ],
+)
