@@ -1,19 +1,21 @@
 package common
 
-template: "deployment.yaml": {
+template: "deployment-app.yaml": {
 	apiVersion: "apps/v1"
 	kind:       "Deployment"
 	metadata: {
-		name: "www"
+		namespace: chart.name
+		labels: app: name
+		name: "app"
 	}
 	spec: {
 		replicas: 3
-		selector: matchLabels: app: "www"
+		selector: matchLabels: app: metadata.name
 		template: {
-			metadata: labels: app: "www"
+			"metadata": labels: app: metadata.name
 			spec: containers: [{
-				name:  "www"
-				image: "nginx:latest"
+				name:  metadata.name
+				image: "app"
 				ports: [{
 					containerPort: 80
 				}]

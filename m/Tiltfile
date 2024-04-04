@@ -1,54 +1,14 @@
 #!/usr/bin/env python
 
-load("ext://restart_process", "custom_build_with_restart")
+load("../common/Tiltfile", "main")
 
-# code-server
 local_resource(
-    "code-server",
-    serve_cmd=[
+    "build",
+    cmd=[
         "bash",
         "-c",
         """
-            cd
-            source .bash_profile
-            cd ~/m/pkg/codeserver
-            exec nix develop --command code-server --auth none --port 13337
-        """,
-    ],
-)
-
-# tailscale serve
-local_resource(
-    "tailscale-serve",
-    serve_cmd=[
-        "bash",
-        "-c",
-        """
-            cd
-            source .bash_profile
-            tailscale serve --https 5000 --bg --yes https+insecure://localhost:4999/
-            tailscale serve --https 10350 --bg --yes 10350 
-            sleep infinity
-        """,
-    ],
-)
-
-# swap
-local_resource(
-    "swap",
-    serve_cmd=[
-        "bash",
-        "-c",
-        """
-            if [[ "$(df -klh /mnt | tail -1 | awk '{print $NF}')" == "/mnt" ]]; then
-                if ! test -f /mnt/swap; then
-                    sudo dd if=/dev/zero of=/mnt/swap bs=1M count=8192
-                fi
-                sudo chmod 0600 /mnt/swap
-                sudo mkswap /mnt/swap || true
-                sudo swapon /mnt/swap || true
-            fi
-            sleep infinity
+            exec make build
         """,
     ],
 )

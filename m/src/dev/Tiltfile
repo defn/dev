@@ -2,9 +2,31 @@
 
 load("../../common/Tiltfile", "main")
 
+load('ext://uibutton', 'cmd_button', 'location')
+
 main(
-    app_entrypoint="/cli",
+    app_entrypoint=["/cli", "api"],
     app_release="gen/cli.bin",
     app_build="../../bazel-bin/src/dev/dev_/dev",
     host="src--dev",
+    context="meh",
+    registry="quay.io/defn"
+)
+
+cmd_button(name='app',
+           argv=["open", "http://127.0.0.1:20000"],
+           location=location.NAV,
+           text='application',
+           icon_name='support_agent')
+
+local_resource(
+    "forward-app",
+    serve_cmd=[
+        "bash",
+        "-c",
+        """
+            echo http://127.0.0.1:20000
+            kubectl port-forward service/app -n src--dev 20000:80
+        """,
+    ]
 )

@@ -2,11 +2,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app
   namespace: src--dev
   labels:
     app: app
+  name: app
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: app
@@ -16,11 +17,7 @@ spec:
         app: app
     spec:
       containers:
-        - image: app
-          name: cli
-          command:
-            - /api
-          args:
-            - api
+        - name: app
+          image: app
           ports:
-            - containerPort: 8080
+            - containerPort: 80

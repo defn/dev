@@ -96,6 +96,7 @@ function main {
 		local os=linux
 		local template=coder-defn-ssh-template
 
+		sudo chown $(id -un) /var/run/docker.sock
 		b down || true
 		coder delete ${name} --yes 1>/dev/null 2>/dev/null || true
 		coder create ${name} --template ${template} --parameter "arch=${arch},os=${os},homedir=${homedir},remote=${remote},command=${command}" --yes

@@ -37,7 +37,11 @@ go_deps.from_file(go_mod = "//:go.mod")
 
 use_repo(
     go_deps,
-    "com_github_botanica_consulting_wiredialer",
+    "dev_gvisor_gvisor",
+    "org_golang_google_grpc",
+    "com_github_noisysockets_noisysockets", 
+    "com_github_urfave_cli_v2",
+    "org_golang_x_sys",
     "com_github_cdktf_cdktf_provider_aws_go_aws_v19",
     "com_github_cdktf_cdktf_provider_null_go_null_v10",
     "com_github_aws_constructs_go_constructs_v10",

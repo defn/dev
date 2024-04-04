@@ -1,8 +1,10 @@
-.PHONY: lesson
-lesson:
-	cd lesson && cue eval --out json -e html tutorial.cue | jq -r . > tutorial.html
-	for h in hook; do cue export -p l --out json -e hooks.$$h.config > hooks/$$h.json; done
+default:
+	$(MAKE) build
 
-build-operator:
-	env -u SSH_AUTH_SOCK earthly --push --no-output +build --image=$(image)
-	docker pull $(image)
+-include ../../common/Makefile.coder
+-include ../../common/Makefile.build
+
+image ?= quay.io/defn/dev:latest-hook-example
+
+deploy:
+	$(MAKE) chart

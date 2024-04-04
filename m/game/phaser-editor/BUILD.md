@@ -8,11 +8,10 @@ The client is the bigger part and contains all the graphical user interface.
 
 This repository contains all the client code. This means that you can modify it and build it.
 
-The main two reasons you may find to build the client code are: 
+The main two reasons you may find to build the client code are:
 
-* You are contributing to the code.
-* You want to try the in-development version.
-
+- You are contributing to the code.
+- You want to try the in-development version.
 
 ## 1) Download the source code
 
@@ -52,7 +51,7 @@ If you want to build the project each time you modify a file, you can run the `w
 ```
 $ npm start
 ```
- 
+
 ## 4) Run the server with the new client
 
 Phaser Editor 2D Core allows running the server with a different client. It is what you need to do here, to run the latest stable server but loading this client:
@@ -65,7 +64,7 @@ The [phasereditor2d-launcher](https://www.npmjs.com/package/phasereditor2d-launc
 
 The `-editor` option configures a new location of the client code.
 
-The `-dev` option disables the browser cache, so it always fetches a fresh version of the files.  **Note:** You will also need to manually disable your browser cache in your browser's Developer Tools.
+The `-dev` option disables the browser cache, so it always fetches a fresh version of the files. **Note:** You will also need to manually disable your browser cache in your browser's Developer Tools.
 
 The `-disable-plugins` option disables the [Advanced Javascript Editor](https://help.phasereditor2d.com/v3/code-editor/index.html), which is used in Phaser Editor 2D All-in-One but not in Core.
 
@@ -83,4 +82,4 @@ Please, use a modern and updated browser.
 
 If you used a previous version of the editor, be sure to clear your browser cache in your browser's Developer Tools before loading the new code.
 
-If you have any issues, please, open an issue in this repository or contact us at `developers@phasereditor2d.com`. 
+If you have any issues, please, open an issue in this repository or contact us at `developers@phasereditor2d.com`.

@@ -1,6 +1,6 @@
 {
   "slug": "pkg-yaegi",
   "ghrepo": "traefik/yaegi",
-  "vendor": "0.16.0",
+  "vendor": "0.16.1",
   "revision": "1"
 }

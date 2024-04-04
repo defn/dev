@@ -15,7 +15,7 @@ function main {
       ./service-init-pki
       rm -f openvpn.conf
       rm -f ovpn_env.sh
-      ovpn_genconfig -u udp://penguin.linux.test -n 1.1.1.1 -p "route 100.101.80.89 255.255.255.255"
+      ovpn_genconfig -u udp://penguin.linux.test -n 1.1.1.1 -p "route 100.101.80.89 255.255.255.255" -p "route 100.79.169.78 255.255.255.255"
       rm -f penguin.ovpn
       service-init-client
       #ovpn_getclient client combined > penguin.ovpn

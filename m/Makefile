@@ -1,3 +1,8 @@
+default:
+	$(MAKE) install
+
+-include common/Makefile.coder
+
 timeout ?= 5
 
 env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
@@ -5,11 +10,8 @@ domain ?= defn.run
 
 proxy ?= proxy3
 
-coder:
-	$(MAKE) -j 2 code-server
-
-code-server:
-	export STARSHIP_NO= && while true; do source ~/.bash_profile; code-server --auth none; sleep 5; done
+install:
+	npm install
 
 work ?=
 dev-macos:
@@ -99,8 +101,10 @@ update:
 regen:
 	@mark gazelle
 	set -x; go get $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1' | grep -v /demo/)
-	mkdir -p node_modules
-	touch node_modules/go.mod || true
+	mkdir -p node_modules demo/node_modules
+	for a in node_modules demo/node_modules infra/stacks/*/.terraform demo/stacks/*/.terraform; do \
+		touch $$a/go.mod 2>/dev/null || true; \
+	done
 	go mod tidy
 	b pass run //:gazelle
 
@@ -115,11 +119,13 @@ bazel-ignore:
 	echo tf/global >> .bazelignore
 	echo tf/cdktf.out >> .bazelignore
 	echo node_modules >> .bazelignore
+	echo demo/node_modules >> .bazelignore
 	echo cutout >> .bazelignore
 	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1.direnv}' | sort >> .bazelignore
 	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1result}' | sort >> .bazelignore
 	git ls-files | grep '{{cookiecutter' | perl -pe 's{\}\}/.*}{\}\}}' | sort -u >> .bazelignore
 	git ls-files | grep '{{cookiecutter' | perl -pe 's{/\{\{.*}{}' | sort -u >> .bazelignore
+	for a in infra/stacks/*/ demo/stacks/*/; do echo "$${a}.terraform"; done | sort >> .bazelignore
 
 coder-login:
 	coder login https://coder.$(env).$(GIT_AUTHOR_NAME).$(domain)
