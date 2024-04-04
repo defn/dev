@@ -55,7 +55,7 @@ chrome-dev-dns:
 	cloudflare-ddns --domain defn.run --record '*.$(name).defn.run' --ip "$$(ip addr show eth0 | grep 'inet ' | awk '{print $$2}' | cut -d/ -f1)" --token "$$(pass cloudflare_defn.run)" --config ~/.config/cloudflare-ddns.toml 
 
 chrome-minikube:
-	minikube start --driver=kvm2 --auto-update-drivers=false
+	minikube start --driver=kvm2 --auto-update-drivers=false --insecure-registry=cache.defn.run:4999
 
 build:
 	bazel --version

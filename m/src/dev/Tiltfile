@@ -8,8 +8,9 @@ main(
     app_entrypoint=["/cli", "api"],
     app_release="gen/cli.bin",
     app_build="../../bazel-bin/src/dev/dev_/dev",
+    context="minikube",
     host="src--dev",
-    context="minikube"
+    registry="cache.defn.run:4999"
 )
 
 cmd_button(name='app',

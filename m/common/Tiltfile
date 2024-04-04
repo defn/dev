@@ -8,6 +8,7 @@ def main(
     app_release,
     app_entrypoint,
     host,
+    registry,
     context="minikube",
     parent=os.getenv("DFD_PARENT"),
     env=os.getenv("DFD_NAME"),
@@ -15,6 +16,9 @@ def main(
 ):
     # local kubernetes
     allow_k8s_contexts(context)
+
+    # local registry
+    default_registry(registry)
 
     # deploy this app
     k8s_yaml(local("helm template chart"))
