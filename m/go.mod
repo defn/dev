@@ -5,7 +5,8 @@ go 1.22.1
 // sync with noisysockets
 // go get -u gvisor.dev/gvisor@go
 // require gvisor.dev/gvisor v0.0.0-20240223225628-6c0239f8ece0
-require gvisor.dev/gvisor v0.0.0-20240223225628-6c0239f8ece0
+// the version of gvisor doesn't matter due to the replacement
+require gvisor.dev/gvisor v0.0.0-20240403204613-5b30c4a27543
 
 replace gvisor.dev/gvisor => github.com/defn/gvisor v1.0.2
 

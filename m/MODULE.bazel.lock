@@ -1704,7 +1704,7 @@
       "general": {
         "bzlTransitiveDigest": "D1+rhhbwX4ufoTmeUVxDpPg+Sknv3QzVXZnyK2zOjj4=",
         "recordedFileInputs": {
-          "@@//go.mod": "25e23e3d349e197d233b1373a6222a8a5027a11348c31e40e5e0907049fd73b1",
+          "@@//go.mod": "f25da6b80f64979e529fd85044c92aaa81737cadaafe2d68f2c028b30f7cb858",
           "@@rules_go~//go.mod": "de22304b720f7f61350ec1c9739de6c0a1b1103fd22bfeb6e92c6c843ddc6d6e",
           "@@gazelle~//go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
           "@@//go.sum": "89de5b93163ec4687d57d760962678d23d8dd59faf7428cc4c541e0185e1c594",
