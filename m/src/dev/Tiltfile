@@ -9,8 +9,7 @@ main(
     app_release="gen/cli.bin",
     app_build="../../bazel-bin/src/dev/dev_/dev",
     host="src--dev",
-    context="meh",
-    registry="cache.defn.run:4999"
+    context="minikube"
 )
 
 cmd_button(name='app',
