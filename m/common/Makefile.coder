@@ -13,7 +13,7 @@ tilt:
 	$(MAKE) -j 2 tilt-run tilt-open
 
 tilt-run:
-	tilt up --stream
+	unset DOCKER_HOST && tilt up --stream
 
 tilt-open:
 	while true; do if curl -s -o /dev/null 127.0.0.1:10350; then break; fi; sleep 1; done

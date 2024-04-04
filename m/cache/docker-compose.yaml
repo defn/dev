@@ -5,8 +5,7 @@ services:
     image: registry:2
     container_name: registry
     ports:
-      - "127.0.0.1:4999:5000"
-      #- "169.254.32.1:4999:5000"
+      - "0.0.0.0:4999:5000"
     environment:
       - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/registry.crt
       - REGISTRY_HTTP_TLS_KEY=/certs/registry.key
@@ -19,16 +18,8 @@ services:
     container_name: bazel-remote
     user: "1000:1000"
     ports:
-      - "127.0.0.1:9089:8080"
-      - "127.0.0.1:9093:9092"
-      #- "169.254.32.1:9093:9092"
+      - "0.0.0.0:9093:9092"
     volumes:
       - ${HOME}/work/bazel-cache:/data
     command: --max_size 50
-    restart: unless-stopped
-  redis:
-    image: redis:latest
-    container_name: redis
-    ports:
-      - "127.0.0.1:6378:6379"
     restart: unless-stopped

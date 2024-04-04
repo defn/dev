@@ -10,7 +10,7 @@ main(
     app_build="../../bazel-bin/src/dev/dev_/dev",
     host="src--dev",
     context="meh",
-    registry="quay.io/defn"
+    registry="cache.defn.run:4999"
 )
 
 cmd_button(name='app',
