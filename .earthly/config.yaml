@@ -1,15 +1,15 @@
 global:
-    disable_analytics: true
-    disable_log_sharing: true
-    cache_size_pct: 50
-    local_registry_host: "tcp://127.0.0.1:8371"
-    buildkit_additional_args:
-        - "--dns=100.100.100.100"
-    buildkit_additional_config: |
-        [registry."coder-amanibhavam-district.tail3884f.ts.net:5000"]
-          http = false
-          insecure = false
-        [registry."cache.defn.run:4999"]
-          http = false
-          insecure = true
-    container_frontend: docker-shell
+  disable_analytics: true
+  disable_log_sharing: true
+  cache_size_pct: 50
+  local_registry_host: "tcp://127.0.0.1:8371"
+  buildkit_additional_args:
+    - "--dns=1.1.1.1"
+  buildkit_additional_config: |
+    [registry."coder-amanibhavam-district.tail3884f.ts.net:5000"]
+      http = false
+      insecure = false
+    [registry."cache.defn.run:4999"]
+      http = false
+      insecure = true
+  container_frontend: docker-shell
