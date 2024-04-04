@@ -297,8 +297,8 @@ nix-Darwin-bootstrap:
 	ln -nfs /nix/var/nix/profiles/default ~/.nix-profile
 
 coder-ssh-linux:
-	-for p in $$(pgrep -f coder.agen[t].$$(uname -n)); do ps xf -o ppid,pgid,pid,cmd | grep '^\s*'"$$p" | awk '{print $$2}' | while read -r g; do kill -15 -$$g; done; kill -15 -$$p; done
-	-for p in $$(pgrep -f coder.agen[t].$$(uname -n)); do ps xf -o ppid,pgid,pid,cmd | grep '^\s*'"$$p" | awk '{print $$2}' | while read -r g; do kill -9 -$$g; done; kill -9 -$$p; done
+	-true || for p in $$(pgrep -f coder.agen[t].$$(uname -n)); do ps xf -o ppid,pgid,pid,cmd | grep '^\s*'"$$p" | awk '{print $$2}' | while read -r g; do kill -15 -$$g; done; kill -15 -$$p; done
+	-true || for p in $$(pgrep -f coder.agen[t].$$(uname -n)); do ps xf -o ppid,pgid,pid,cmd | grep '^\s*'"$$p" | awk '{print $$2}' | while read -r g; do kill -9 -$$g; done; kill -9 -$$p; done
 	export STARSHIP_NO=1 LC_ALL=C.UTF-8 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive && source ~/.bash_profile && cd $(CODER_HOMEDIR) \
 		&& (echo set -x; echo "exec 1>>/tmp/coder-agent-stdout.log 2>>/tmp/coder-agent-stderr.log"; echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d) | (sed 's#agent$$#agent $$(uname -n)#; s#^while.*#while ! test -x $${BINARY_NAME}; do#; s#^BINARY_NAME.*#BINARY_NAME=$$HOME/bin/nix/coder#; s#exec ./#exec #' ) > /tmp/coder-agent-$(CODER_NAME) && (bash -x /tmp/coder-agent-$(CODER_NAME) >>/tmp/coder-agent-startup.log 2>&1)
 

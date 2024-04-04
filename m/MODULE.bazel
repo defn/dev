@@ -37,8 +37,6 @@ go_deps.from_file(go_mod = "//:go.mod")
 
 use_repo(
     go_deps,
-    "dev_gvisor_gvisor",
-    "org_golang_google_grpc",
     "com_github_noisysockets_noisysockets", 
     "com_github_urfave_cli_v2",
     "org_golang_x_sys",

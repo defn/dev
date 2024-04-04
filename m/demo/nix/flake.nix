@@ -1,9 +1,9 @@
 {
   inputs = {
     pkg.url = github:defn/dev/pkg-pkg-0.0.16?dir=m/pkg/pkg;
-    cue.url = github:defn/dev/pkg-cue-0.8.0-1?dir=m/pkg/cue;
+    cue.url = github:defn/dev/pkg-cue-0.8.1-1?dir=m/pkg/cue;
     cloud.url = github:defn/dev/pkg-cloud-0.0.248?dir=m/pkg/cloud;
-    godev.url = github:defn/dev/pkg-godev-0.0.136?dir=m/pkg/godev;
+    godev.url = github:defn/dev/pkg-godev-0.0.138?dir=m/pkg/godev;
     jsdev.url = github:defn/dev/pkg-jsdev-0.0.68?dir=m/pkg/jsdev;
     pydev.url = github:defn/dev/pkg-pydev-0.0.128?dir=m/pkg/pydev;
     secrets.url = github:defn/dev/pkg-secrets-0.0.81?dir=m/pkg/secrets;

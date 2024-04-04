@@ -6,7 +6,7 @@ go 1.22.1
 // go get -u gvisor.dev/gvisor@go
 // require gvisor.dev/gvisor v0.0.0-20240223225628-6c0239f8ece0
 // the version of gvisor doesn't matter due to the replacement
-require gvisor.dev/gvisor v0.0.0-20240403204613-5b30c4a27543
+require gvisor.dev/gvisor v0.0.0-20240403204613-5b30c4a27543 // indirect
 
 replace gvisor.dev/gvisor => github.com/defn/gvisor v1.0.2
 
@@ -26,7 +26,6 @@ require (
 	github.com/spf13/viper v1.18.2
 	github.com/urfave/cli/v2 v2.27.1
 	golang.org/x/sys v0.18.0
-	google.golang.org/grpc v1.63.0
 )
 
 require (
@@ -107,7 +106,7 @@ require (
 	golang.org/x/time v0.5.0 // indirect
 	golang.org/x/tools v0.19.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20240401170217-c3f982113cda // indirect
+	google.golang.org/grpc v1.63.0 // indirect
 	google.golang.org/protobuf v1.33.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
