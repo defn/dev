@@ -52,6 +52,7 @@ pkg/hugo/.direnv
 pkg/ibazel/.direnv
 pkg/iso/.direnv
 pkg/jsdev/.direnv
+pkg/just/.direnv
 pkg/k3sup/.direnv
 pkg/k9s/.direnv
 pkg/kn/.direnv
@@ -136,6 +137,7 @@ pkg/hugo/result
 pkg/ibazel/result
 pkg/iso/result
 pkg/jsdev/result
+pkg/just/result
 pkg/k3sup/result
 pkg/k9s/result
 pkg/kn/result
@@ -319,3 +321,19 @@ infra/stacks/org-jianghu/.terraform
 infra/stacks/org-spiral/.terraform
 infra/stacks/org-vault/.terraform
 infra/stacks/org-whoa/.terraform
+demo
+infra/cdktf.out/stacks/org-chamber
+infra/cdktf.out/stacks/org-circus
+infra/cdktf.out/stacks/org-coil
+infra/cdktf.out/stacks/org-curl
+infra/cdktf.out/stacks/org-defn
+infra/cdktf.out/stacks/org-fogg
+infra/cdktf.out/stacks/org-gyre
+infra/cdktf.out/stacks/org-helix
+infra/cdktf.out/stacks/org-imma
+infra/cdktf.out/stacks/org-immanent
+infra/cdktf.out/stacks/org-jianghu
+infra/cdktf.out/stacks/org-spiral
+infra/cdktf.out/stacks/org-vault
+infra/cdktf.out/stacks/org-whoa
+openvpn
