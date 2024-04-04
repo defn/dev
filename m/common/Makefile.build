@@ -20,6 +20,7 @@ image:
 
 .PHONY: chart
 chart:
+	mkdir -p chart/templates
 	rm -f chart/templates/*.yaml	
 	cue eval >/dev/null
 	cue export --out json -e app.output | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | while read -r f b; do base64 -d <<<"$$b" >"$$f"; done
