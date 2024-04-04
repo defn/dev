@@ -2,19 +2,20 @@ VERSION 0.8
 
 build:
     ARG image
-    BUILD +build-operator --image=${image}
-
-build-operator:
-    ARG image
     BUILD +image-operator --image=${image}
 
-image-operator:
-    ARG image
-
+build-operator:
     FROM quay.io/defn/dev:latest-shell-operator
 
     RUN apt update && apt install -y jq
 
+image-operator:
+    FROM +build-operator
+
+    ARG image
+
     COPY hooks /hooks
 
+    COPY store /nix/store
+    COPY gen/cli.bin /cli
     SAVE IMAGE --push ${image}
