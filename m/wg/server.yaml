@@ -1,5 +1,7 @@
 apiVersion: noisysockets.github.com/v1alpha1
 kind: Config
+metadata:
+  name: server
 privateKey: 2FM36K8gizo0pdl/Ap4OBcF2E4RazQGvZqLmD4B4xUU=
 ips:
   - 10.7.0.1

@@ -24,6 +24,15 @@ import (
 	"golang.org/x/sys/unix"
 )
 
+func readFileContents(fileName string) (io.Reader, error) {
+	file, err := os.Open(fileName)
+	if err != nil {
+		return nil, err // Return nil and the error if there's a problem opening the file
+	}
+
+	return file, nil
+}
+
 func main() {
 	logger := slog.New(slog.NewTextHandler(os.Stderr, nil))
 
@@ -61,7 +70,12 @@ func main() {
 				}, sharedFlags...),
 				Before: before,
 				Action: func(c *cli.Context) error {
-					conf, err := config.FromYAML(c.String("config"))
+					reader, err := readFileContents(c.String("config"))
+					if err != nil {
+						return fmt.Errorf("error opening file: %w", err)
+					}
+					defer reader.(*os.File).Close()
+					conf, err := config.FromYAML(reader)
 					if err != nil {
 						return fmt.Errorf("failed to read config: %w", err)
 					}
@@ -130,7 +144,12 @@ func main() {
 				}, sharedFlags...),
 				Before: before,
 				Action: func(c *cli.Context) error {
-					conf, err := config.FromYAML(c.String("config"))
+					reader, err := readFileContents(c.String("config"))
+					if err != nil {
+						return fmt.Errorf("error opening file: %w", err)
+					}
+					defer reader.(*os.File).Close()
+					conf, err := config.FromYAML(reader)
 					if err != nil {
 						return fmt.Errorf("failed to read config: %w", err)
 					}
