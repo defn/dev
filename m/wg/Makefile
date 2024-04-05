@@ -4,10 +4,10 @@ default:
 -include ../common/Makefile.coder
 
 build:
-	b build
+	b watch
 
-server: build
+server: ../bazel-bin/wg/wg_/wg
 	../bazel-bin/wg/wg_/wg server
 
-client: build
+client: ../bazel-bin/wg/wg_/wg
 	../bazel-bin/wg/wg_/wg client
