@@ -6,8 +6,11 @@ default:
 build:
 	b watch
 
-server: ../bazel-bin/wg/wg_/wg
+../bazel-bin/wg/wg_/wg: build
+	@true
+
+server:
 	../bazel-bin/wg/wg_/wg server
 
-client: ../bazel-bin/wg/wg_/wg
+client:
 	../bazel-bin/wg/wg_/wg client

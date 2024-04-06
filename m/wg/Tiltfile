@@ -22,6 +22,9 @@ local_resource(
             exec make server
         """,
     ],
+    deps=[
+        "../bazel-bin/wg/wg_/wg"
+    ]
 )
 
 local_resource(
@@ -36,4 +39,7 @@ local_resource(
             done
         """,
     ],
+    deps=[
+        "../bazel-bin/wg/wg_/wg"
+    ]
 )
