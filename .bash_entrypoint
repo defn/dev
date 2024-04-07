@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+if [[ -z "${WORKDIR:-}" ]]; then
+  first_workdir=1
+else
+  first_workdir=
+fi
+
+
 export WORKDIR="${1:-${HOME-}}"
 
 if [[ ${WORKDIR} == '${workspaceFolder}' ]]; then
@@ -13,14 +20,21 @@ if test -f ~/.bash_profile; then
 	source ~/.bash_profile
 fi
 
-lockfile="/tmp/.bash_entrypoint.lock"
+if [[ -n "${first_workdir}" ]]; then
+  lockfile="/tmp/.bash_entrypoint.lock"
 
-# Attempt to acquire the lock without blocking
-if flock -n 200; then
-	if ! test -r /tmp/.bash_entrypoint.done; then
-		touch /tmp/.bash_entrypoint.done
-		make tilt
-	fi
-fi 200>$lockfile
+  # Attempt to acquire the lock without blocking
+  if flock -n 200; then
+    if ! test -r /tmp/.bash_entrypoint.done; then
+      touch /tmp/.bash_entrypoint.done
+      if [[ "$(uname -n)" == "penguin" ]]; then
+        make penguin
+      else
+        make tilt
+      fi
+    fi
+  fi 200>$lockfile
 
-unset lockfile
+  unset lockfile
+fi
+

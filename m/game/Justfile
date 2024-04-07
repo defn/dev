@@ -1,0 +1,3 @@
+mod game 'game.Justfile'
+
+import '../Justfile'

@@ -1,0 +1,2 @@
+infra:
+    @uname -a

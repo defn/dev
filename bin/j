@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+export JUST_UNSTABLE=1
+
+if [[ "$#" == 0 ]]; then
+	just -l
+else
+	export JUST_WORKDIR="$(pwd)"
+	exec just "$@"
+fi

@@ -70,7 +70,11 @@ function main {
 			name=$1
 			shift
 		else
-			name="$(echo "${CODER_NAME-}" | cut -d- -f1)-$(basename $(pwd))"
+      if [[ -n "${CODER_NAME:-}" ]]; then
+        name="$(echo "${CODER_NAME-}" | cut -d- -f1)-$(basename $(pwd))"
+      else
+        name="$(uname -n)"
+      fi
 		fi
 
 		docker ps -q -a --filter label=devcontainer.local_folder=${homedir} | runmany 'docker rm -f $1 2>/dev/null' || true
@@ -82,7 +86,11 @@ function main {
 
 		local homedir=$(pwd)
 		local name
-		name="$(echo "${CODER_NAME-}" | cut -d- -f1)-$(basename $(pwd))"
+		if [[ -n "${CODER_NAME:-}" ]]; then
+  		name="$(echo "${CODER_NAME-}" | cut -d- -f1)-$(basename $(pwd))"
+    else
+      name="$(uname -n)"
+    fi
 
 		local remote
 		if [[ -n ${1-} ]]; then
@@ -98,8 +106,11 @@ function main {
 
 		sudo chown $(id -un) /var/run/docker.sock
 		b down || true
-		coder delete ${name} --yes 1>/dev/null 2>/dev/null || true
-		coder create ${name} --template ${template} --parameter "arch=${arch},os=${os},homedir=${homedir},remote=${remote},command=${command}" --yes
+		while true; do \
+		  coder delete ${name} --yes 1>/dev/null 2>/dev/null || true; \
+      if coder create ${name} --template ${template} --parameter "arch=${arch},os=${os},homedir=${homedir},remote=${remote},command=${command}" --yes; then break; fi; \
+      sleep 5; \
+    done
 		while true; do
 			if curl -sSL $(cat $HOME/.config/coderv2/url)/api/v2/users/$(coder list | tail -1 | awk '{print $1}' | cut -d/ -f1)/workspace/${name} -H "Coder-Session-Token: $(cat $HOME/.config/coderv2/session)" | jq -r '(.latest_build.resources[].agents//[])[].apps[] | select(.display_name == "code-server") | .health' | grep -q ^healthy; then break; fi
 			date

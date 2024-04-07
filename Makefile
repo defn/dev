@@ -20,13 +20,14 @@ chrome-install:
 	sudo apt update
 	sudo apt install -y direnv make rsync pcscd wireguard-tools qemu-system libvirt-clients libvirt-daemon-system
 
-chrome:
-	$(MAKE) -j 4 chrome-dev-gpg
-	while ! pass hello; do sleep 1; done
-	$(MAKE) -j 2 chrome-coder chrome-vpn
+penguin:
+	$(MAKE) chrome-dev-gpg
+	while [[ "$$(pass hello)" != "world" ]]; do $(MAKE) chrome-dev-gpg; sleep 1; done
+	(cd ~/m && b up) &
+	$(MAKE) -j 2 chrome-coder chrome-vpn name=cb
 
 chrome-coder:
-	$(MAKE) -j 4 chrome-dev-socat chrome-dev-coder
+	$(MAKE) -j 2 chrome-dev-socat chrome-dev-coder
 
 chrome-vpn:
 	cd m/openvpn && ./service server
