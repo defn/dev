@@ -70,7 +70,11 @@ function main {
 			name=$1
 			shift
 		else
-			name="$(echo "${CODER_NAME-}" | cut -d- -f1)-$(basename $(pwd))"
+      if [[ -n "${CODER_NAME:-}" ]]; then
+        name="$(echo "${CODER_NAME-}" | cut -d- -f1)-$(basename $(pwd))"
+      else
+        name="$(uname -n)"
+      fi
 		fi
 
 		docker ps -q -a --filter label=devcontainer.local_folder=${homedir} | runmany 'docker rm -f $1 2>/dev/null' || true
