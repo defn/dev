@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [[ "$#" == 0 ]]; then
+	just -l
+else
+	exec just "$@"
+fi
