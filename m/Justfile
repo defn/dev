@@ -1,1 +1,2 @@
-mod lib 'common/lib.Justfile'
+mod coder 'common/coder.Justfile'
+mod tilt 'common/tilt.Justfile'

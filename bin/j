@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
+export JUST_UNSTABLE=1
+
 if [[ "$#" == 0 ]]; then
 	just -l
 else
-	exec just "$@"
+	export JUST_WORKDIR="$(pwd)"
+	exec just --working-directory "$(pwd)" --justfile "$(pwd)/Justfile" "$@"
 fi
