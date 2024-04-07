@@ -20,9 +20,10 @@ chrome-install:
 	sudo apt update
 	sudo apt install -y direnv make rsync pcscd wireguard-tools qemu-system libvirt-clients libvirt-daemon-system
 
-chrome:
+penguin:
 	$(MAKE) chrome-dev-gpg
 	while [[ "$$(pass hello)" != "world" ]]; do $(MAKE) chrome-dev-gpg; sleep 1; done
+	open https://coder.cb.defn.run/@amanibhavam/penguin.main/apps/cs/?folder=/home/ubuntu/m
 	$(MAKE) -j 2 chrome-coder chrome-vpn name=cb
 
 chrome-coder:
