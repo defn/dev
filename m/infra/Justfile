@@ -1,0 +1,4 @@
+import '../Justfile'
+
+b:
+    @uname -a
