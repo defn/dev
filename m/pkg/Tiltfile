@@ -4,11 +4,5 @@ load("../common/Tiltfile", "main")
 
 local_resource(
     "build",
-    cmd=[
-        "bash",
-        "-c",
-        """
-            exec b build
-        """,
-    ],
+    cmd=[ "j", "bazel::build" ],
 )
