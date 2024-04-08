@@ -6,5 +6,13 @@ if [[ "$#" == 0 ]]; then
 	just -l
 else
 	export JUST_WORKDIR="$(pwd)"
-	exec just "$@"
+	case "${1}" in
+		/)
+			shift
+			exec just --choose "$@"
+			;;
+		*)
+			exec just "$@"
+			;;
+	esac
 fi
