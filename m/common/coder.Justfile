@@ -33,6 +33,12 @@ up *name:
 		remote=""
 	fi
 
+	if [[ "$(uname -n)" == "penguin" ]]; then
+		remote=
+	else
+		remote="ssh $(id -un)@$(uname -n)"
+	fi
+
 	command="make coder-ssh-envbuilder"
 	arch=amd64
 	os=linux
@@ -56,6 +62,7 @@ up *name:
 		date
 		sleep 5
 	done
+
 	just coder::open "${name}"
 
 [no-cd]
