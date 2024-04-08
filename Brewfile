@@ -11,6 +11,7 @@ brew "fzf"
 brew "bazelisk"
 brew "util-linux"
 brew "starship"
+brew "flock"
 
 tap "homebrew/cask-fonts"
 cask "font-fira-code"
