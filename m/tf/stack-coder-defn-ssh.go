@@ -95,7 +95,7 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 			"GIT_COMMITTER_NAME":  devCoderWorkspace.Owner(),
 		},
 		Os:                   paramOs.Value(),
-		StartupScript:        infra.Js(fmt.Sprintf("exec 1>>/tmp/coder-agent-stdout.log 2>>/tmp/coder-agent-stderr.log; cd %s && (setsid make coder & ) &", *paramHomedir.Value())),
+		StartupScript:        infra.Js(fmt.Sprintf("exec 1>>/tmp/coder-agent-stdout.log 2>>/tmp/coder-agent-stderr.log; cd %s && (setsid j coder & ) &", *paramHomedir.Value())),
 		StartupScriptTimeout: infra.Jsn(180),
 	})
 
@@ -111,7 +111,8 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 		{"local-exec": {
 			"when": "create",
 			"command": fmt.Sprintf(
-				"( (echo cd; echo exec env CODER_AGENT_TOKEN=%s CODER_NAME=%s CODER_HOMEDIR=%s CODER_INIT_SCRIPT_BASE64=%s %s) | %s bash -x - >>/tmp/startup-%s-%s.log 2>&1 &) &",
+				"( (echo cd; echo exec env CODER_AGENT_URL=%s CODER_AGENT_TOKEN=%s CODER_NAME=%s CODER_HOMEDIR=%s CODER_INIT_SCRIPT_BASE64=%s %s) | %s bash -x - >>/tmp/startup-%s-%s.log 2>&1 &) &",
+				*devCoderWorkspace.AccessUrl(),
 				*devCoderAgent.Token(),
 				*devCoderWorkspace.Name(),
 				*paramHomedir.Value(),
