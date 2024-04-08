@@ -1,7 +1,7 @@
 set shell := ["/usr/bin/env", "bash", "-c"]
 
 # Run code-server in a loop
-[no-cd]
+[no-cd, private]
 code-server:
 	@pkill -9 trunk || true
 	@export STARSHIP_NO= && while true; do source ~/.bash_profile; code-server --auth none; sleep 5; done
