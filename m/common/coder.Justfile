@@ -1,3 +1,5 @@
+set shell := ["bash", "-c"]
+
 [no-cd]
 default:
 	@while true; do just coder::code-server; sleep 5; done
