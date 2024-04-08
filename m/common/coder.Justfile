@@ -1,14 +1,12 @@
 set shell := ["/usr/bin/env", "bash", "-c"]
 
-[no-cd]
-default:
-	@while true; do just coder::code-server; sleep 5; done
-
+# Run code-server in a loop
 [no-cd]
 code-server:
 	@pkill -9 trunk || true
 	@export STARSHIP_NO= && while true; do source ~/.bash_profile; code-server --auth none; sleep 5; done
 
+# Re-creates an envbuilder Coder workspace
 [no-cd]
 up *name:
 	#!/usr/bin/env bash
@@ -66,6 +64,7 @@ up *name:
 
 	just coder::open "${name}"
 
+# Deletes Coder workspace
 [no-cd]
 down *name:
 	#!/usr/bin/env bash
@@ -87,6 +86,7 @@ down *name:
 	docker rm -f "${name}" 2>/dev/null || true
 	coder delete ${name} --yes 1>/dev/null 2>/dev/null || true
 
+# Opens Coder workspace in browser
 [no-cd]
 open *name:
 	#!/usr/bin/env bash
