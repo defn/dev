@@ -28,5 +28,5 @@ source rule:
 
 # Compare files in bazel and git
 [no-cd]
-ls-files dir:
-	@diff <(git ls-files {{dir}} | sort) <(j bazel::source {{dir}}/... | awk '{print $NF}' | sort) | egrep '^[<>]' | sort | grep "^. {{dir}}/" | grep -v -E '(WORKSPACE|MODULE.bazel|BUILD.bazel)$'
+ls-files dir rule:
+	@diff <(git ls-files {{dir}} | sort) <(j bazel::source {{rule}} | awk '{print $NF}' | sort) | egrep '^[<>]' | sort | grep -v -E '(WORKSPACE|MODULE.bazel|BUILD.bazel)$'
