@@ -21,4 +21,7 @@ source rule:
 
 	just bazel::json {{rule}} | gron | grep -v rule.attribute | gron -u \
 		| jq -r '.[] | .type as $type | (.rule//.sourceFile) | "\($type) \(.name) \(.ruleClass//"") \(if .ruleInput == null then "" else .ruleInput end)"' \
-		| grep SOURCE_FILE | grep -v ' @'
+		| grep SOURCE_FILE | grep -v ' @' \
+		| while read -r type name rest; do
+			echo "${type} ${name} $(echo "${name}" | perl -pe 's{^//}{}; s{:}{/}')"
+		done
