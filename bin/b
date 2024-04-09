@@ -33,77 +33,9 @@ function main {
 	set -efu -o pipefail
 
 	case "${1-}" in
-	diff)
-		shift
-		env GIT_EXTERNAL_DIFF="b dyff" git diff "$@"
-		;;
-	dyff)
-		shift
-		shift # path
-		old="$1"
-		shift
-		shift # hex
-		shift # mode
-		new="$1"
-		shift
-		shift # hex
-		shift # mode
-		case "${old}" in
-		*.yaml | *.yml | *.json)
-			dyff --color=yes between "${old}" "${new}" || true
-			;;
-		*)
-			true
-			;;
-		meh)
-			echo diff "${old}" "${new}"
-			diff "${old}" "${new}" || true
-			;;
-		esac
-		;;
 
 	github)
-		(
-			echo protocol=https
-			echo host=github.com
-		) | git credential fill 2>/dev/null | grep ^password= | cut -d= -f2-
-		;;
-	lock)
-		gpg-connect-agent reloadagent /bye
-		;;
-	agent)
-		shift
-		if ! test -d ~/.password-store/.; then (cd && make password-store); fi
-		if ! test -d ~/dotfiles/.; then (cd && make dotfiles); fi
-		if test -d /run/user; then
-			sudo rm -rf /run/user/1000/gnupg
-			sudo install -d -m 0700 -o $(id -un) -g $(id -gn) /run/user/1000
-			ln -nfs ~/.gnupg /run/user/1000/gnupg
-		fi
-		chmod 0700 ~/.gnupg/. ~/.gnupg2/. ~/.ssh
-		chmod 0600 ~/.ssh/config
-		(
-			set +f
-			if test -d ~/dotfiles/.gnupg; then
-				rsync -ia ~/dotfiles/.gnupg/* ~/.gnupg/
-			fi
-		)
-		(
-			set +f
-			rm -f ~/.gnupg/S.*agent*
-		)
-		if ! pgrep dirmngr >/dev/null; then dirmngr --daemon >/dev/null || true; fi
-		set +u
-		if [[ -n ${CODER-} ]]; then
-			setsid coder gitssh -- home -o LocalForward="$HOME/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra" 1>/dev/null 2>&1 &
-			bg_pid=$!
-		else
-			setsid ssh home -o LocalForward="$HOME/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra" 1>/dev/null 2>&1 &
-			bg_pid=$!
-		fi
-		trap 'kill -SIGTERM -${bg_pid}' EXIT
-		while [[ "$(pass hello 2>/dev/null || true)" != "world" ]]; do sleep 1; done
-		"$@"
+		j github::token
 		;;
 	forward)
 		shift
@@ -114,82 +46,6 @@ function main {
 		a=$(date +%s)
 		ssh "${remote}" ln -nfs "/tmp/S.gpg-agent.${a}" /home/ubuntu/.gnupg/S.gpg-agent
 		ssh -v "${remote}" -N -o ServerAliveInterval=30 -o RemoteForward="/tmp/S.gpg-agent.${a} ${HOME}/.gnupg/S.gpg-agent.extra" "$@"
-		;;
-	logout)
-		open https://signin.aws.amazon.com/oauth?Action=logout &
-		;;
-	login)
-		shift
-		local account
-		case "${1-}" in
-		"" | /*)
-			account="${1-}"
-			account="$("$0" pass run //aws:aws__list_accounts | fzf --query="${account#/}" --select-1)"
-			;;
-		*)
-			account="$1"
-			;;
-		esac
-		account="${account}-sso-source"
-		shift
-		local region="${1:-${AWS_REGION:-${AWS_DEFAULT_REGION:-us-east-1}}}"
-		url=$("$0" pass run //aws:aws__cli "${account}" aws-vault login "${account}" -- --region=${region} -s | sed 's#://#://us-east-1.#')
-		encoded_url=$(printf "%s" "$url" | python -c 'import sys; from urllib.parse import quote_plus; print(quote_plus(sys.stdin.read().strip()))')
-		open "https://signin.aws.amazon.com/oauth?Action=logout&redirect_uri=${encoded_url}"
-		;;
-	server)
-		shift
-		local account
-		case "${1-}" in
-		"" | /*)
-			account="${1-}"
-			account="$("$0" pass run //aws:aws__list_accounts | fzf --query="${account#/}" --select-1)"
-			;;
-		*)
-			account="$1"
-			;;
-		esac
-		account="${account}-sso-source"
-		shift
-		"$0" pass run //aws:aws__cli "${account}" -- aws-vault exec --prompt=osascript --lazy --ecs-server "${account}" -- "$@"
-		;;
-	exec)
-		shift
-		local account
-		case "${1-}" in
-		"" | /*)
-			account="${1-}"
-			account="$("$0" pass run //aws:aws__list_accounts | fzf --query="${account#/}" --select-1)"
-			;;
-		*)
-			account="$1"
-			;;
-		esac
-		account="${account}-sso-source"
-		shift
-		"$0" pass run //aws:aws__cli "${account}" -- aws-vault exec "${account}" -- "$@"
-		;;
-	aws)
-		shift
-
-		if [[ $# == 0 ]]; then
-			"$0" pass run //aws:aws__list_accounts
-			return $?
-		fi
-
-		local account
-		case "${1-}" in
-		"" | /*)
-			account="${1-}"
-			account="$("$0" pass run //aws:aws__list_accounts | fzf --query="${account#/}" --select-1)"
-			;;
-		*)
-			account="$1"
-			;;
-		esac
-		account="${account}-sso-source"
-		shift
-		"$0" pass run //aws:aws__cli "${account}" aws "$@"
 		;;
 	graph)
 		shift

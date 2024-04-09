@@ -1,3 +1,6 @@
 mod bazel 'common/bazel.Justfile'
 mod coder 'common/coder.Justfile'
 mod tilt 'common/tilt.Justfile'
+mod github 'common/github.Justfile'
+mod gpg 'common/gpg.Justfile'
+mod aws 'common/aws.Justfile'
