@@ -42,3 +42,12 @@ agent +args:
 	while [[ "$(pass hello 2>/dev/null || true)" != "world" ]]; do sleep 1; done
 
 	{{args}}
+
+# Forward gpg-agent socket to remote host
+forward remote *args:
+	#!/usr/bin/env bash
+	set -exfuo pipefail
+
+	a=$(date +%s)
+	ssh "{{remote}}" ln -nfs "/tmp/S.gpg-agent.${a}" /home/ubuntu/.gnupg/S.gpg-agent
+	ssh -v "{{remote}}" -N -o ServerAliveInterval=30 -o RemoteForward="/tmp/S.gpg-agent.${a} ${HOME}/.gnupg/S.gpg-agent.extra" {{args}}
