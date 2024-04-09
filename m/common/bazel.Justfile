@@ -13,7 +13,7 @@ watch:
 json rule:
 	@bazel query --noimplicit_deps 'deps({{rule}})' --output streamed_jsonproto | jq -s .
 
-# list source nodes
+# List source nodes
 [no-cd]
 source rule:
 	#!/usr/bin/env bash
@@ -25,3 +25,8 @@ source rule:
 		| while read -r type name rest; do
 			echo "${type} ${name} $(echo "${name}" | perl -pe 's{^//}{}; s{:}{/}')"
 		done
+
+# Compare files in bazel and git
+[no-cd]
+ls-files dir:
+	@diff <(git ls-files {{dir}} | sort) <(j bazel::source {{dir}}/... | awk '{print $NF}' | sort) | egrep '^[<>]' | sort | grep "^. {{dir}}/" | grep -v -E '(WORKSPACE|MODULE.bazel|BUILD.bazel)$'
