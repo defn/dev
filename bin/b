@@ -32,46 +32,9 @@ function bazel {
 function main {
 	set -efu -o pipefail
 
-	case "${1-}" in
-
-	github)
-		j github::token
-		;;
-	forward)
-		shift
-		local remote
-		local a
-		remote="$1"
-		shift
-		a=$(date +%s)
-		ssh "${remote}" ln -nfs "/tmp/S.gpg-agent.${a}" /home/ubuntu/.gnupg/S.gpg-agent
-		ssh -v "${remote}" -N -o ServerAliveInterval=30 -o RemoteForward="/tmp/S.gpg-agent.${a} ${HOME}/.gnupg/S.gpg-agent.extra" "$@"
-		;;
-	graph)
-		shift
-
-		local rule
-		case "${1-}" in
-		"")
-			rule="$("$0" | fzf --select-1)"
-			;;
-		/*)
-			rule="$("$0" | fzf --query="${1#/}" --select-1)"
-			shift
-			;;
-		*)
-			rule="$1"
-			;;
-		esac
-
-		local tmp_dot
-		tmp_dot="$(mktemp -d -t graphiz-XXXXXX || true)"
-		"$0"query --noimplicit_deps "deps(${rule})" --output graph >"${tmp_dot}/graph.in" && dot -Tpng <"${tmp_dot}/graph.in" >"${tmp_dot}/graph.png" && code "${tmp_dot}/graph.png"
-		;;
-	*)
-		if [[ $# == 0 ]]; then
-			local bazel_prefix
-			bazel_prefix="$(git rev-parse --show-prefix | sed 's#/$##; s#^m/##')"
+	if [[ $# == 0 ]]; then
+		local bazel_prefix
+		bazel_prefix="$(git rev-parse --show-prefix | sed 's#/$##; s#^m/##')"
 
 		bazel query "..." | sed "s#^//${bazel_prefix}:##" | grep -v ^_
 	else
