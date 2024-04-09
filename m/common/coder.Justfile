@@ -39,7 +39,7 @@ up *name:
 	template=coder-defn-ssh-template
 
 	sudo chown $(id -un) /var/run/docker.sock
-	just coder::down || true
+	just coder::down ${name} || true
 
 	while true; do
 		coder delete ${name} --yes 1>/dev/null 2>/dev/null || true
