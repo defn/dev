@@ -6,7 +6,7 @@ list:
 	set -efuo pipefail
 
 	mkdir -p ~/.config/gh
-	yq --yaml-output -n --arg token "$(b github)" --arg handle "${GIT_COMMITTER_NAME}" '{"github.com": { users: { "\($handle)": { oauth_token: $token}}, git_protocol: "https", user: $handle, oauth_token: $token}}' > ~/.config/gh/hosts.yml
+	yq --yaml-output -n --arg token "$(j github::token)" --arg handle "${GIT_COMMITTER_NAME}" '{"github.com": { users: { "\($handle)": { oauth_token: $token}}, git_protocol: "https", user: $handle, oauth_token: $token}}' > ~/.config/gh/hosts.yml
 
 	set +f
 	for a in */; do
@@ -26,7 +26,7 @@ list:
 
 # Upgrade to the latest GitHub releases
 latest:
-	@env NIX_CONFIG="access-tokens = github.com=$(b github)" just update upgrade	
+	@env NIX_CONFIG="access-tokens = github.com=$(j github::token)" just update upgrade
 	@git commit --allow-empty -m "finished upgrade"
 
 # Update flakes to the latest GitHub release

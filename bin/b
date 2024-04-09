@@ -34,19 +34,6 @@ function main {
 
 	case "${1-}" in
 
-	github)
-		j github::token
-		;;
-	forward)
-		shift
-		local remote
-		local a
-		remote="$1"
-		shift
-		a=$(date +%s)
-		ssh "${remote}" ln -nfs "/tmp/S.gpg-agent.${a}" /home/ubuntu/.gnupg/S.gpg-agent
-		ssh -v "${remote}" -N -o ServerAliveInterval=30 -o RemoteForward="/tmp/S.gpg-agent.${a} ${HOME}/.gnupg/S.gpg-agent.extra" "$@"
-		;;
 	graph)
 		shift
 
