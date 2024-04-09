@@ -34,6 +34,19 @@ function main {
 
 	case "${1-}" in
 
+	github)
+		j github::token
+		;;
+	forward)
+		shift
+		local remote
+		local a
+		remote="$1"
+		shift
+		a=$(date +%s)
+		ssh "${remote}" ln -nfs "/tmp/S.gpg-agent.${a}" /home/ubuntu/.gnupg/S.gpg-agent
+		ssh -v "${remote}" -N -o ServerAliveInterval=30 -o RemoteForward="/tmp/S.gpg-agent.${a} ${HOME}/.gnupg/S.gpg-agent.extra" "$@"
+		;;
 	graph)
 		shift
 
@@ -60,164 +73,162 @@ function main {
 			local bazel_prefix
 			bazel_prefix="$(git rev-parse --show-prefix | sed 's#/$##; s#^m/##')"
 
-			bazel query "..." | sed "s#^//${bazel_prefix}:##" | grep -v ^_
-		else
-			local rule
+		bazel query "..." | sed "s#^//${bazel_prefix}:##" | grep -v ^_
+	else
+		local rule
 
-			case "$1" in
-			build)
-				shift
+		case "$1" in
+		build)
+			shift
 
-				case "${1-}" in
-				"")
-					rule="/..."
-					;;
-				//*)
-					rule="$1"
-					shift
-					;;
-				/*)
-					rule="$("$0" | fzf --query="${1#/}" --select-1)"
-					;;
-				*)
-					rule="$1"
-					shift
-					;;
-				esac
-
-				# shellcheck disable=SC2086
-				bazel build ${bopts} "${rule}"
+			case "${1-}" in
+			"")
+				rule="/..."
 				;;
-			test)
+			//*)
+				rule="$1"
 				shift
-
-				if [[ $# == 0 ]]; then
-					rule="/..."
-				else
-					rule="$("$0" | fzf --query="$1" --select-1)"
-					shift
-				fi
-
-				# shellcheck disable=SC2086
-				bazel test --color=yes ${bopts} "${rule}" | grep -v 'There were tests whose specified size is too big'
-
 				;;
-			outputs)
-				shift
-
-				if [[ $# == 0 ]]; then
-					rule="/..."
-				else
-					rule=":$("$0" | fzf --query="$1" --select-1)"
-					shift
-				fi
-
-				local w
-				w="$(command bazel info workspace)"
-
-				command bazel cquery $bopts "${rule}" --output=files | grep bazel-out/
-				;;
-			in)
-				shift
-
-				rule=":$("$0" | fzf --query="${1-}" --select-1 || true)"
-
-				local w
-				w="$(bazel info workspace)"
-
-				local out
-				# shellcheck disable=SC2310
-				out="$(bazel cquery "${rule}" --output=files | grep -v bazel-out/ | sed "s#^#${w}/#" || true)"
-
-				cat "${out}"
-				;;
-			out)
-				shift
-
-				case "${1-}" in
-				"")
-					rule="/..."
-					;;
-				//*)
-					rule="$1"
-					shift
-					;;
-				/*)
-					rule="$("$0" | fzf --query="${1#/}" --select-1)"
-					;;
-				*)
-					rule="$1"
-					shift
-					;;
-				esac
-
-				local w
-				w="$(command bazel info workspace)"
-
-				local out
-				# shellcheck disable=SC2310
-				out="$(command bazel cquery $bopts "${rule}" --output=files | grep bazel-out/ | sed "s#^#${w}/#" || true)"
-
-				cat "${out}"
-				;;
-			cat)
-				shift
-
-				rule=":$("$0" | fzf --query="${1-}" --select-1)"
-
-				local w
-				w="$(bazel info workspace)"
-
-				local out
-				# shellcheck disable=SC2310
-				out="$(bazel cquery "${rule}" --output=files | grep bazel-out/ | sed "s#^#${w}/#" || true)"
-
-				if [[ -z ${out} ]]; then
-					# shellcheck disable=SC2310
-					out="$(bazel cquery "${rule}" --output=files | grep -v bazel-out/ | sed "s#^#${w}/#" || true)"
-				fi
-
-				cat "${out}"
-				;;
-			run)
-				shift
-
-				case "${1-}" in
-				"")
-					rule="$("$0" | grep _ | fzf --select-1)"
-					;;
-				//*)
-					rule="$1"
-					shift
-					;;
-				/*)
-					rule="$("$0" | fzf --query="${1#/}" --select-1)"
-					;;
-				*)
-					rule="$1"
-					shift
-					;;
-				esac
-
-				if [[ $# -gt 0 ]]; then shift; fi
-
-				# shellcheck disable=SC2086
-				bazel run ${bopts} "${rule}" -- "$@"
-				;;
-			pass)
-				shift
-				cmd="$1"
-				shift
-				# shellcheck disable=SC2086
-				bazel "${cmd}" ${bopts} "$@"
+			/*)
+				rule="$("$0" | fzf --query="${1#/}" --select-1)"
 				;;
 			*)
-				bazel "$@"
+				rule="$1"
+				shift
 				;;
 			esac
-		fi
-		;;
-	esac
+
+			# shellcheck disable=SC2086
+			bazel build ${bopts} "${rule}"
+			;;
+		test)
+			shift
+
+			if [[ $# == 0 ]]; then
+				rule="/..."
+			else
+				rule="$("$0" | fzf --query="$1" --select-1)"
+				shift
+			fi
+
+			# shellcheck disable=SC2086
+			bazel test --color=yes ${bopts} "${rule}" | grep -v 'There were tests whose specified size is too big'
+
+			;;
+		outputs)
+			shift
+
+			if [[ $# == 0 ]]; then
+				rule="/..."
+			else
+				rule=":$("$0" | fzf --query="$1" --select-1)"
+				shift
+			fi
+
+			local w
+			w="$(command bazel info workspace)"
+
+			command bazel cquery $bopts "${rule}" --output=files | grep bazel-out/
+			;;
+		in)
+			shift
+
+			rule=":$("$0" | fzf --query="${1-}" --select-1 || true)"
+
+			local w
+			w="$(bazel info workspace)"
+
+			local out
+			# shellcheck disable=SC2310
+			out="$(bazel cquery "${rule}" --output=files | grep -v bazel-out/ | sed "s#^#${w}/#" || true)"
+
+			cat "${out}"
+			;;
+		out)
+			shift
+
+			case "${1-}" in
+			"")
+				rule="/..."
+				;;
+			//*)
+				rule="$1"
+				shift
+				;;
+			/*)
+				rule="$("$0" | fzf --query="${1#/}" --select-1)"
+				;;
+			*)
+				rule="$1"
+				shift
+				;;
+			esac
+
+			local w
+			w="$(command bazel info workspace)"
+
+			local out
+			# shellcheck disable=SC2310
+			out="$(command bazel cquery $bopts "${rule}" --output=files | grep bazel-out/ | sed "s#^#${w}/#" || true)"
+
+			cat "${out}"
+			;;
+		cat)
+			shift
+
+			rule=":$("$0" | fzf --query="${1-}" --select-1)"
+
+			local w
+			w="$(bazel info workspace)"
+
+			local out
+			# shellcheck disable=SC2310
+			out="$(bazel cquery "${rule}" --output=files | grep bazel-out/ | sed "s#^#${w}/#" || true)"
+
+			if [[ -z ${out} ]]; then
+				# shellcheck disable=SC2310
+				out="$(bazel cquery "${rule}" --output=files | grep -v bazel-out/ | sed "s#^#${w}/#" || true)"
+			fi
+
+			cat "${out}"
+			;;
+		run)
+			shift
+
+			case "${1-}" in
+			"")
+				rule="$("$0" | grep _ | fzf --select-1)"
+				;;
+			//*)
+				rule="$1"
+				shift
+				;;
+			/*)
+				rule="$("$0" | fzf --query="${1#/}" --select-1)"
+				;;
+			*)
+				rule="$1"
+				shift
+				;;
+			esac
+
+			if [[ $# -gt 0 ]]; then shift; fi
+
+			# shellcheck disable=SC2086
+			bazel run ${bopts} "${rule}" -- "$@"
+			;;
+		pass)
+			shift
+			cmd="$1"
+			shift
+			# shellcheck disable=SC2086
+			bazel "${cmd}" ${bopts} "$@"
+			;;
+		*)
+			bazel "$@"
+			;;
+		esac
+	fi
 }
 
 main "$@"

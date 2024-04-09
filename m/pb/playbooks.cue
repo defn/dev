@@ -223,7 +223,7 @@ role: base_packages: tasks: [{
 	}
 }]
 
-role: base_bazel: tasks: [{
+#role: base_bazel: tasks: [{
 	name:   "Configure bazel cache"
 	become: true
 	template: {
