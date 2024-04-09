@@ -7,3 +7,8 @@ build:
 [no-cd]
 watch:
 	@b watch
+
+# json build graph
+[no-cd]
+json rule:
+	@bazel query --noimplicit_deps 'deps({{rule}})' --output streamed_jsonproto | jq .

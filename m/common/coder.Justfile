@@ -18,28 +18,24 @@ up *name:
 		if [[ -n "${CODER_NAME:-}" ]]; then
 			name="$(echo "${CODER_NAME-}" | cut -d- -f1)-$(basename $(pwd))"
 		else
-			name="$(uname -n)"
+			name="$(uname -n)-$(basename $(pwd))"
 		fi
 	fi
 
 	homedir=$(pwd)
 
-	if [[ -n ${1-} ]]; then
-		remote=$1
-		shift
-	else
-		remote=""
-	fi
+	case "${name}" in
+		penguin*)
+			remote=
+			;;
+		*)
+			remote="ssh $(id -un)@${echo $name | cut -d- -f1}"
+			;;
+	esac
 
-	if [[ "$(uname -n)" == "penguin" ]]; then
-		remote=
-	else
-		remote="ssh $(id -un)@$(uname -n)"
-	fi
-
-	command="make coder-ssh-envbuilder"
-	arch=amd64
 	os=linux
+	arch=amd64
+	command="make coder-ssh-envbuilder"
 	template=coder-defn-ssh-template
 
 	sudo chown $(id -un) /var/run/docker.sock
