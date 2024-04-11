@@ -1,6 +1,6 @@
 {
   "slug": "pkg-cosign",
   "ghrepo": "sigstore/cosign",
-  "vendor": "2.2.3",
-  "revision": "2"
+  "vendor": "2.2.4",
+  "revision": "0"
 }
