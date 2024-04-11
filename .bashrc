@@ -73,6 +73,9 @@ case "$(uname -s)" in
 Darwin)
 	export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
 	;;
+Linux)
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+  ;; 
 esac
 
 # aws-vault

@@ -34,6 +34,11 @@ chrome-vpn:
 
 chrome-dev-gpg:
 	sudo systemctl restart pcscd
+	systemctl --user disable gpg-agent-browser.socket --now
+	systemctl --user disable gpg-agent-extra.socket --now
+	systemctl --user disable gpg-agent-ssh.socket --now
+	systemctl --user disable gpg-agent.socket --now
+	systemctl --user disable gpg-agent --now
 	pkill -9 gpg-agent || true
 	gpg-agent --daemon --pinentry-program $$(which pinentry)
 	while [[ "$$(pass hello)" != "world" ]]; do sleep 1; done
@@ -126,6 +131,7 @@ home_inner:
 		hash -r; \
 		rsync -ia ~/bin/nix.tmp.$$n/. ~/bin/nix.tmp/. >/dev/null; \
 	done
+	mkdir -p ~/bin/nix
 	rsync -ia ~/bin/nix.tmp/. ~/bin/nix/.
 	rm -rf ~/bin/nix.tmp 
 	ln -nfs bazelisk ~/bin/nix/bazel
