@@ -21,6 +21,8 @@ chrome-install:
 	sudo apt install -y direnv make rsync socat pcscd wireguard-tools qemu-system libvirt-clients libvirt-daemon-system openvpn easy-rsa
 
 penguin:
+#acme.sh --register-account -m iam@defn.sh
+#this-acme-issue '*.cb.defn.run'
 	$(MAKE) chrome-install
 	$(MAKE) chrome-dev-gpg
 	while [[ "$$(pass hello)" != "world" ]]; do $(MAKE) chrome-dev-gpg; sleep 1; done
