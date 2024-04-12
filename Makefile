@@ -14,16 +14,17 @@ rpi:
 	sudo apt install -y git direnv make rsync pipx
 	$(MAKE) nix
 	cd m && bazel --version
-	cd m/pkg/cue && nix develop --command "cd && cd m/pb && $(MAKE) local pb=base_ubuntu:wq
+	cd m/pkg/cue && nix develop --command "cd && cd m/pb && $(MAKE) local pb=base_ubuntu
 
 chrome-install:
 	sudo apt update
-	sudo apt install -y direnv make rsync pcscd wireguard-tools qemu-system libvirt-clients libvirt-daemon-system
+	sudo apt install -y direnv make rsync socat pcscd wireguard-tools qemu-system libvirt-clients libvirt-daemon-system openvpn easy-rsa
 
 penguin:
+	$(MAKE) chrome-install
 	$(MAKE) chrome-dev-gpg
 	while [[ "$$(pass hello)" != "world" ]]; do $(MAKE) chrome-dev-gpg; sleep 1; done
-	(cd ~/m && b up) &
+	(cd ~/m && j up) &
 	$(MAKE) -j 2 chrome-coder chrome-vpn name=cb
 
 chrome-coder:

@@ -68,7 +68,7 @@ class-init:
 teacher: 
 	$(MAKE) hello
 	pkill postgres || true
-	env AWS_DEFAULT_REGION=us-west-1 b server defn-org $(MAKE) dev_inner name=$(name)
+	env AWS_DEFAULT_REGION=us-west-1 j aws::server defn-org $(MAKE) dev_inner name=$(name)
 
 site ?= http://$(shell tailscale cert 2>&1 | grep 'For domain'  | cut -d'"' -f2)
 dev_inner:
