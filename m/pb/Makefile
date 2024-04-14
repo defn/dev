@@ -1,7 +1,7 @@
 second = $(word 2, $(subst -, ,$@))
 
 pb ?= 
-limit ?= all:!penguin:!rpi4b:!rpi4c
+limit ?= all:!penguin
 check ?=
 
 ifdef limit
