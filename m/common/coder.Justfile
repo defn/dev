@@ -7,13 +7,16 @@ coder-agent:
 	set -exfuo pipefail
 
 	cd
-	@export STARSHIP_NO= && while true; do source ~/.bash_profile; make coder-ssh-linux; sleep 5; done
+	export STARSHIP_NO=1 && while true; do source ~/.bash_profile; make coder-ssh-linux; sleep 5; done
 
 # Run code-server in a loop
 [no-cd, private]
 code-server:
-	@pkill -9 trunk || true
-	@export STARSHIP_NO= && while true; do source ~/.bash_profile; code-server --auth none; sleep 5; done
+	#!/usr/bin/env bash
+	set -exfuo pipefail
+
+	pkill -9 trunk || true
+	export STARSHIP_NO= && while true; do source ~/.bash_profile; code-server --auth none; sleep 5; done
 
 # Re-creates an envbuilder Coder workspace
 [no-cd]
@@ -110,3 +113,4 @@ open *name:
 	homedir=$(pwd)
 
 	open "$(curl -sSL $(cat $HOME/.config/coderv2/url)/api/v2/debug/health -H "Coder-Session-Token: $(cat $HOME/.config/coderv2/session)" | jq -r '.access_url.access_url')/@$(coder list | tail -1 | awk '{print $1}' | cut -d/ -f1)/${name}.main/apps/cs/?folder=$(echo ${homedir} | sed "s#${HOME}#/home/ubuntu#")"
+
