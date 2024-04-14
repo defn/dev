@@ -35,14 +35,17 @@ chrome-coder:
 chrome-vpn:
 	cd m/openvpn && ./service server
 
-chrome-dev-gpg:
-	sudo systemctl restart pcscd
+no-gpg:
 	systemctl --user disable gpg-agent-browser.socket --now
 	systemctl --user disable gpg-agent-extra.socket --now
 	systemctl --user disable gpg-agent-ssh.socket --now
 	systemctl --user disable gpg-agent.socket --now
 	systemctl --user disable gpg-agent --now
 	pkill -9 gpg-agent || true
+
+chrome-dev-gpg:
+	sudo systemctl restart pcscd
+	$(MAKE) no-gpg
 	gpg-agent --daemon --pinentry-program $$(which pinentry)
 	while [[ "$$(pass hello)" != "world" ]]; do sleep 1; done
 
