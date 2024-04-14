@@ -145,3 +145,5 @@ export BROWSER="$(type -P browser || true)"
 export DFD_PREFIX="${DFD_PREFIX:-${DFD_WORKSPACE_NAME%%-*}}"
 export DFD_OWNER="${DFD_OWNER:-${DFD_WORKSPACE_NAME#*-}}"
 export DFD_NAME="${DFD_NAME:-${DFD_WORKSPACE_NAME#*-*-}}"
+
+unset MAKEFLAGS
