@@ -1,5 +1,14 @@
 set shell := ["/usr/bin/env", "bash", "-c"]
 
+# Run coder agent
+[private]
+coder-agent:
+	#!/usr/bin/env bash
+	set -exfuo pipefail
+
+	cd
+	@export STARSHIP_NO= && while true; do source ~/.bash_profile; make coder-ssh-linux; sleep 5; done
+
 # Run code-server in a loop
 [no-cd, private]
 code-server:

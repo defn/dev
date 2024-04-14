@@ -320,6 +320,7 @@ coder-ssh-envbuilder:
 	docker rm -f "$(CODER_NAME)" || true
 	docker run --rm \
 		--name "$(CODER_NAME)" \
+		-d \
 		-v envbuilder-image:/image-cache:ro \
 		-v envbuilder-layer:/layer-cache \
 		-v /nix:/nix \
@@ -337,7 +338,7 @@ coder-ssh-envbuilder:
 		-e CODER_AGENT_TOKEN=$(CODER_AGENT_TOKEN) \
 		-e CODER_INIT_SCRIPT_BASE64=$(CODER_INIT_SCRIPT_BASE64) \
 		-e INIT_COMMAND="/bin/bash" \
-		-e INIT_SCRIPT="cd && pwd && exec make coder-ssh-linux" \
+		-e INIT_SCRIPT="cd ~/m && exec j coder::coder-agent" \
 		ghcr.io/coder/envbuilder
 
 coder-ssh-devcontainer:
@@ -352,7 +353,7 @@ coder-ssh-devcontainer:
 			CODER_AGENT_URL=$(CODER_AGENT_URL) \
 			CODER_AGENT_TOKEN=$(CODER_AGENT_TOKEN) \
 			CODER_INIT_SCRIPT_BASE64=$(CODER_INIT_SCRIPT_BASE64) \
-			bash -c "cd && exec make coder-ssh-linux"
+			bash -c "cd ~/m && exec j coder::coder-agent" &
 
 coder-ssh-darwin:
 	@pkill -9 -f coder.agen[t] || true
