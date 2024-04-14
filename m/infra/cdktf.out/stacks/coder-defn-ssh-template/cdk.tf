@@ -78,7 +78,7 @@ resource "coder_agent" "main" {
     GIT_COMMITTER_NAME  = "${data.coder_workspace.me.owner}"
   }
   os                     = data.coder_parameter.os.value
-  startup_script         = "exec 1>>/tmp/coder-agent-stdout.log 2>>/tmp/coder-agent-stderr.log; cd ${data.coder_parameter.homedir.value} && (setsid j coder::coder-server & ) &"
+  startup_script         = "exec 1>>/tmp/code-server-stdout-$$.log 2>>/tmp/code-server-stderr-$$.log; cd ${data.coder_parameter.homedir.value} && exec j coder::code-server $(uname -n) &"
   startup_script_timeout = 180
   display_apps {
     ssh_helper      = false

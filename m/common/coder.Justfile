@@ -2,21 +2,25 @@ set shell := ["/usr/bin/env", "bash", "-c"]
 
 # Run coder agent
 [private]
-coder-agent:
+coder-agent *host:
 	#!/usr/bin/env bash
-	set -exfuo pipefail
+	set -exfo pipefail
 
 	cd
-	export STARSHIP_NO=1 && while true; do source ~/.bash_profile; make coder-ssh-linux; sleep 5; done
+	export STARSHIP_NO=
+	source ~/.bash_profile
+	exec make coder-ssh-linux
 
 # Run code-server in a loop
 [no-cd, private]
-code-server:
+code-server *host:
 	#!/usr/bin/env bash
-	set -exfuo pipefail
+	set -exfo pipefail
 
 	pkill -9 trunk || true
-	export STARSHIP_NO= && while true; do source ~/.bash_profile; code-server --auth none; sleep 5; done
+	export STARSHIP_NO=
+	source ~/.bash_profile
+	exec code-server --auth none
 
 # Re-creates an envbuilder Coder workspace
 [no-cd]

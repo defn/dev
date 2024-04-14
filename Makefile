@@ -311,10 +311,12 @@ nix-Darwin-bootstrap:
 	ln -nfs /nix/var/nix/profiles/default ~/.nix-profile
 
 coder-ssh-linux:
-	-true || for p in $$(pgrep -f coder.agen[t].$$(uname -n)); do ps xf -o ppid,pgid,pid,cmd | grep '^\s*'"$$p" | awk '{print $$2}' | while read -r g; do kill -15 -$$g; done; kill -15 -$$p; done
-	-true || for p in $$(pgrep -f coder.agen[t].$$(uname -n)); do ps xf -o ppid,pgid,pid,cmd | grep '^\s*'"$$p" | awk '{print $$2}' | while read -r g; do kill -9 -$$g; done; kill -9 -$$p; done
+	-for p in $$(pgrep -f code.serve[r].$$(uname -n)); do ps xf -o ppid,pgid,pid,cmd | grep '^\s*'"$$p" | awk '{print $$2}' | while read -r g; do kill -15 -$$g; done; kill -15 -$$p; done
+	-for p in $$(pgrep -f code.serve[r].$$(uname -n)); do ps xf -o ppid,pgid,pid,cmd | grep '^\s*'"$$p" | awk '{print $$2}' | while read -r g; do kill -9 -$$g; done; kill -9 -$$p; done
+	-set -x; for p in $$(pgrep -f coder.agen[t].$$(uname -n) | head -n -1); do ps xf -o ppid,pgid,pid,cmd | grep '^\s*'"$$p" | awk '{print $$2}' | while read -r g; do kill -s SIGTERM -$$g; done; kill -s SIGTERM $$p; done
+	-for p in $$(pgrep -f coder.agen[t].$$(uname -n) | head -n -1); do ps xf -o ppid,pgid,pid,cmd | grep '^\s*'"$$p" | awk '{print $$2}' | while read -r g; do kill -9 -$$g; done; kill -9 -$$p; done
 	export STARSHIP_NO=1 LC_ALL=C.UTF-8 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive && source ~/.bash_profile && cd $(CODER_HOMEDIR) \
-		&& (echo set -x; echo "exec 1>>/tmp/coder-agent-stdout.log 2>>/tmp/coder-agent-stderr.log"; echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d) | (sed 's#agent$$#agent $$(uname -n)#; s#^while.*#while ! test -x $${BINARY_NAME}; do#; s#^BINARY_NAME.*#BINARY_NAME=$$HOME/bin/nix/coder#; s#exec ./#exec #' ) > /tmp/coder-agent-$(CODER_NAME) && (bash -x /tmp/coder-agent-$(CODER_NAME) >>/tmp/coder-agent-startup.log 2>&1)
+		&& (echo set -x; echo "exec 1>>/tmp/coder-agent-stdout.log 2>>/tmp/coder-agent-stderr.log"; echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d) | (sed 's#agent$$#agent $$(uname -n)#; s#^while.*#while ! test -x $${BINARY_NAME}; do#; s#^BINARY_NAME.*#BINARY_NAME=$$HOME/bin/nix/coder#; s#exec ./#exec #' ) > /tmp/coder-agent-$(CODER_NAME)-$$$$ && exec bash -x /tmp/coder-agent-$(CODER_NAME)-$$$$ >>/tmp/coder-agent-startup-$$$$.log 2>&1
 
 coder-ssh-envbuilder:
 	docker rm -f "$(CODER_NAME)" || true
@@ -338,7 +340,7 @@ coder-ssh-envbuilder:
 		-e CODER_AGENT_TOKEN=$(CODER_AGENT_TOKEN) \
 		-e CODER_INIT_SCRIPT_BASE64=$(CODER_INIT_SCRIPT_BASE64) \
 		-e INIT_COMMAND="/bin/bash" \
-		-e INIT_SCRIPT="cd ~/m && exec j coder::coder-agent" \
+		-e INIT_SCRIPT="cd ~/m && exec j coder::coder-agent $(shell uname -n)" \
 		ghcr.io/coder/envbuilder
 
 coder-ssh-devcontainer:
@@ -353,7 +355,7 @@ coder-ssh-devcontainer:
 			CODER_AGENT_URL=$(CODER_AGENT_URL) \
 			CODER_AGENT_TOKEN=$(CODER_AGENT_TOKEN) \
 			CODER_INIT_SCRIPT_BASE64=$(CODER_INIT_SCRIPT_BASE64) \
-			bash -c "cd ~/m && exec j coder::coder-agent" &
+			bash -c "cd ~/m && exec j coder::coder-agent $(shell uname -n)" &
 
 coder-ssh-darwin:
 	@pkill -9 -f coder.agen[t] || true
