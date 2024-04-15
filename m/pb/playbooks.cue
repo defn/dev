@@ -128,6 +128,16 @@ playbook: dump: [{
 }]
 
 role: base_packages: tasks: [{
+	name:   "Remove packages"
+	become: true
+	apt: {
+		name: [
+			"nano",
+			"unattended-upgrades",
+		]
+		state: "absent"
+	}
+}, {
 	name:   "Install hwe kernel"
 	become: true
 	when:   "ansible_architecture != 'aarch64' and ansible_architecture != 'armv7l' and ansible_bios_vendor != 'crosvm'"
@@ -152,16 +162,6 @@ role: base_packages: tasks: [{
 			"tzdata", "avahi-daemon",
 		]
 		state: "present"
-	}
-}, {
-	name:   "Remove packages"
-	become: true
-	apt: {
-		name: [
-			"nano",
-			"unattended-upgrades",
-		]
-		state: "absent"
 	}
 }, {
 	name:   "Remove files"
