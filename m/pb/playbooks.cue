@@ -62,8 +62,8 @@ inventory: {
 	]
 }
 
-playbook: base_ubuntu: [{
-	name:  "Ubuntu base playbook"
+playbook: ubuntu: [{
+	name:  "Ubuntu playbook"
 	hosts: "all"
 	roles: [
 		"base_packages",

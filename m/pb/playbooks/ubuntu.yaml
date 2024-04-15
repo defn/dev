@@ -1,4 +1,4 @@
-- name: Ubuntu base playbook
+- name: Ubuntu playbook
   hosts: all
   roles:
     - base_packages
