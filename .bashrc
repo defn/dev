@@ -3,6 +3,7 @@
 case "$(uname -s)" in
   Darwin)
     export LC_ALL=C
+    export LANG=C
     ;;
 esac
 

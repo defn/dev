@@ -6,7 +6,7 @@ coder-agent *host:
 	#!/usr/bin/env bash
 
 	case "$(uname -s)" in
-	  Darwin) export LC_ALL=C ;;
+	  Darwin) export LC_ALL=C LANG=C ;;
 	esac
 
 	cd
@@ -20,7 +20,7 @@ code-server *host:
 	#!/usr/bin/env bash
 
 	case "$(uname -s)" in
-	  Darwin) export LC_ALL=C ;;
+	  Darwin) export LC_ALL=C LANG=C ;;
 	esac
 
 	pkill -9 trunk || true
