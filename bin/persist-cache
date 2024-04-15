@@ -60,6 +60,7 @@ function cache {
 	persist ~/work/direnv-home ~/.direnv
 
 	mkdir -p ~/.cache/helm
+	mkdir -p ~/.cache/nix
 	mkdir -p ~/work/bazel-cache
 	mkdir -p ~/work/squid
 
