@@ -145,11 +145,11 @@ role: base_packages: tasks: [{
 			// basics for container images
 			"direnv", "curl", "xz-utils", "sudo", "locales", "git",
 			"build-essential", "rsync", "python3-venv",
-			// forthe rest of the build
+			// for the rest of the build
 			"make", "net-tools", "lsb-release", "tzdata", "ca-certificates",
 			"iproute2", "openssh-client", "git-lfs", "fzf", "jq", "gettext",
 			"direnv", "ncdu", "apache2-utils", "fontconfig", "docker.io",
-			"tzdata",
+			"tzdata", "avahi-daemon",
 		]
 		state: "present"
 	}

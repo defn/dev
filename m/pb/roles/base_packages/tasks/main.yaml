@@ -35,6 +35,7 @@
       - fontconfig
       - docker.io
       - tzdata
+      - avahi-daemon
     state: present
 - name: Remove packages
   become: true
