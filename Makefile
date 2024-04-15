@@ -124,7 +124,8 @@ rehome:
 home:
 	cd m && bazel version
 	rm -f m/.bazelrc.user
-	t make_home_inner env NIX_CONFIG="access-tokens = github.com=$$(cd m && j github::token)" $(MAKE) home_inner
+	#t make_home_inner env NIX_CONFIG="access-tokens = github.com=$$(cd m && j github::token)" $(MAKE) home_inner
+	t make_home_inner $(MAKE) home_inner
 
 home_inner:
 	rm -rf ~/bin/nix.tmp
