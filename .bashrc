@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+case "$(uname -s)" in
+  Darwin)
+    export LC_ALL=C
+    ;;
+esac
+
 if [[ -n ${VSCODE_RESOLVING_ENVIRONMENT-} ]]; then
 	return
 fi

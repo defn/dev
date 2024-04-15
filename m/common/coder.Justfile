@@ -4,7 +4,10 @@ set shell := ["/usr/bin/env", "bash", "-c"]
 [private]
 coder-agent *host:
 	#!/usr/bin/env bash
-	set -exfo pipefail
+
+	case "$(uname -s)" in
+	  Darwin) export LC_ALL=C ;;
+	esac
 
 	cd
 	export STARSHIP_NO=
@@ -15,7 +18,10 @@ coder-agent *host:
 [no-cd, private]
 code-server *host:
 	#!/usr/bin/env bash
-	set -exfo pipefail
+
+	case "$(uname -s)" in
+	  Darwin) export LC_ALL=C ;;
+	esac
 
 	pkill -9 trunk || true
 	export STARSHIP_NO=

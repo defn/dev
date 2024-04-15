@@ -1,3 +1,5 @@
 coder-agent *host:
-  cd m && exec setsid just coder::coder-agent {{host}} &
+	#!/usr/bin/env bash
+  
+	cd m && exec just coder::coder-agent {{host}} &
 
