@@ -78,7 +78,7 @@ resource "coder_agent" "main" {
     GIT_COMMITTER_NAME  = "${data.coder_workspace.me.owner}"
   }
   os                     = data.coder_parameter.os.value
-  startup_script         = "cd ~/m && exec j coder::code-server $(uname -n) &"
+  startup_script         = "cd ~ && j destroy-coder-agent && cd ~/m && exec j coder::code-server $(uname -n)"
   startup_script_timeout = 180
   display_apps {
     ssh_helper      = false
