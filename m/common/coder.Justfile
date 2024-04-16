@@ -5,14 +5,18 @@ set shell := ["/usr/bin/env", "bash", "-c"]
 coder-agent *host:
 	#!/usr/bin/env bash
 
+	set -x
 	case "$(uname -s)" in
 	  Darwin) export LC_ALL=C LANG=C ;;
 	esac
 
-	cd
-	export STARSHIP_NO=
+	export STARSHIP_NO=1 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
 	source ~/.bash_profile
-	exec make coder-ssh-linux
+	cd ${CODER_HOMEDIR}
+	echo ${CODER_INIT_SCRIPT_BASE64} | base64 -d \
+	  | sed 's#agent$#agent '"$(uname -n)"'#; s#^while.*#while ! test -x '"${BINARY_NAME}"'; do#; s#^BINARY_NAME.*#BINARY_NAME='"$HOME"'/bin/nix/coder#; s#exec ./#exec #; s#exit 1#echo exit 1#' \
+	  > /tmp/coder-agent-${CODER_NAME}-$$
+	exec bash -x /tmp/coder-agent-${CODER_NAME}-$$
 
 # Run code-server in a loop
 [no-cd, private]
