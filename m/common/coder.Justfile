@@ -1,37 +1,5 @@
 set shell := ["/usr/bin/env", "bash", "-c"]
 
-# Run coder agent
-[private]
-coder-agent *host:
-	#!/usr/bin/env bash
-
-	set -x
-	case "$(uname -s)" in
-	  Darwin) export LC_ALL=C LANG=C ;;
-	esac
-
-	export STARSHIP_NO=1 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
-	source ~/.bash_profile
-	cd ${CODER_HOMEDIR}
-	echo ${CODER_INIT_SCRIPT_BASE64} | base64 -d \
-	  | sed 's#agent$#agent '"$(uname -n)"'#; s#^while.*#while ! test -x '"${BINARY_NAME}"'; do#; s#^BINARY_NAME.*#BINARY_NAME='"$HOME"'/bin/nix/coder#; s#exec ./#exec #; s#exit 1#echo exit 1#' \
-	  > /tmp/coder-agent-${CODER_NAME}-$$
-	exec bash -x /tmp/coder-agent-${CODER_NAME}-$$
-
-# Run code-server in a loop
-[no-cd, private]
-code-server *host:
-	#!/usr/bin/env bash
-
-	case "$(uname -s)" in
-	  Darwin) export LC_ALL=C LANG=C ;;
-	esac
-
-	pkill -9 trunk || true
-	export STARSHIP_NO=
-	source ~/.bash_profile
-	exec code-server --auth none
-
 # Re-creates an envbuilder Coder workspace
 [no-cd]
 up *name:
@@ -55,7 +23,7 @@ up *name:
 			remote=
 			;;
 		*)
-			remote="ssh $(id -un)@${echo $name | cut -d- -f1}"
+			remote="ssh $(id -un)@$(echo $name | cut -d- -f1)"
 			;;
 	esac
 
@@ -65,6 +33,7 @@ up *name:
 	template=coder-defn-ssh-template
 
 	sudo chown $(id -un) /var/run/docker.sock
+	sudo touch ~/.gnupg/S.gpg-agent.extra
 	just coder::down ${name} || true
 
 	while true; do
@@ -128,3 +97,34 @@ open *name:
 
 	open "$(curl -sSL $(cat $HOME/.config/coderv2/url)/api/v2/debug/health -H "Coder-Session-Token: $(cat $HOME/.config/coderv2/session)" | jq -r '.access_url.access_url')/@$(coder list | tail -1 | awk '{print $1}' | cut -d/ -f1)/${name}.main/apps/cs/?folder=$(echo ${homedir} | sed "s#${HOME}#/home/ubuntu#")"
 
+# Run coder agent
+[private]
+coder-agent *host:
+	#!/usr/bin/env bash
+
+	set -x
+	case "$(uname -s)" in
+	  Darwin) export LC_ALL=C LANG=C ;;
+	esac
+
+	export STARSHIP_NO=1 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
+	source ~/.bash_profile
+	cd ${CODER_HOMEDIR}
+	echo ${CODER_INIT_SCRIPT_BASE64} | base64 -d \
+	  | sed 's#agent$#agent '"$(uname -n)"'#; s#^while.*#while ! test -x '"${BINARY_NAME}"'; do#; s#^BINARY_NAME.*#BINARY_NAME='"$HOME"'/bin/nix/coder#; s#exec ./#exec #; s#exit 1#echo exit 1#' \
+	  > /tmp/coder-agent-${CODER_NAME}-$$
+	exec bash -x /tmp/coder-agent-${CODER_NAME}-$$
+
+# Run code-server in a loop
+[no-cd, private]
+code-server *host:
+	#!/usr/bin/env bash
+
+	case "$(uname -s)" in
+	  Darwin) export LC_ALL=C LANG=C ;;
+	esac
+
+	pkill -9 trunk || true
+	export STARSHIP_NO=
+	source ~/.bash_profile
+	exec code-server --auth none

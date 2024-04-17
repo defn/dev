@@ -14,7 +14,7 @@ rpi:
 	sudo apt install -y git direnv make rsync pipx
 	$(MAKE) nix
 	cd m && bazel --version
-	cd m/pkg/cue && nix develop --command "cd && cd m/pb && $(MAKE) local pb=base_ubuntu
+	cd m/pkg/cue && nix develop --command "cd && cd m/pb && $(MAKE) local pb=ubuntu
 
 chrome-install:
 	sudo apt update
@@ -236,7 +236,7 @@ deck-init:
 	make install
 
 play:
-	cd m/pb && $(MAKE) base_ubuntu opt="-i inventory/packer.ini -e ansible_connection=local"
+	cd m/pb && $(MAKE) ubuntu opt="-i inventory/packer.ini -e ansible_connection=local"
 
 upgrade:
 	cd m/pb && $(MAKE) upgrade opt="-i inventory/packer.ini -e ansible_connection=local"
@@ -337,7 +337,7 @@ coder-ssh-envbuilder:
 		-e CODER_AGENT_TOKEN=$(CODER_AGENT_TOKEN) \
 		-e CODER_INIT_SCRIPT_BASE64=$(CODER_INIT_SCRIPT_BASE64) \
 		-e INIT_COMMAND="/bin/bash" \
-		-e INIT_SCRIPT="cd ~/m && exec j coder::coder-agent $(shell uname -n)" \
+		-e INIT_SCRIPT="source ~/.bash_profile && cd ~/m && exec j coder::coder-agent $(shell uname -n)" \
 		ghcr.io/coder/envbuilder
 
 coder-ssh-devcontainer:

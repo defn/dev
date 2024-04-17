@@ -12,6 +12,6 @@ ENV HOME=/home/ubuntu
 ENV LANG=C
 WORKDIR /home/ubuntu
 
-RUN bash -c 'cd ~ && source ~/.bash_profile && cd m/pb && make base_ubuntu opt="-i inventory/packer.ini -e ansible_connection=local"'
+RUN bash -c 'cd ~ && source ~/.bash_profile && cd m/pb && make ubuntu opt="-i inventory/packer.ini -e ansible_connection=local"'
 RUN rm -f /tmp/.bash*
-
+RUN echo DONE
