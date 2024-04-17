@@ -95,7 +95,7 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 			"GIT_COMMITTER_NAME":  devCoderWorkspace.Owner(),
 		},
 		Os:                   paramOs.Value(),
-		StartupScript:        infra.Js(fmt.Sprintf("exec 1>>/tmp/j-coder-code-server.log 2>>/tmp/j-coder-code-servert-stderr.log; cd %s && exec j coder::code-server $(uname -n) & ", *paramHomedir.Value())),
+		StartupScript:        infra.Js("cd ~ && j destroy-coder-agent && cd ~/m && exec j coder::code-server $(uname -n)"),
 		StartupScriptTimeout: infra.Jsn(180),
 	})
 
@@ -110,8 +110,7 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 	deploy.AddOverride(infra.Js("provisioner"), []map[string]map[string]string{
 		{"local-exec": {
 			"when": "create",
-			"command": fmt.Sprintf(
-				"( (echo cd; echo exec env CODER_AGENT_URL=%s CODER_AGENT_TOKEN=%s CODER_NAME=%s CODER_HOMEDIR=%s CODER_INIT_SCRIPT_BASE64=%s %s) | %s bash -x - >>/tmp/startup-%s-%s.log 2>&1 &) &",
+			"command": fmt.Sprintf("(echo cd; echo exec env CODER_AGENT_URL=%s CODER_AGENT_TOKEN=%s CODER_NAME=%s CODER_HOMEDIR=%s CODER_INIT_SCRIPT_BASE64=%s %s) | %s bash -x -",
 				*devCoderWorkspace.AccessUrl(),
 				*devCoderAgent.Token(),
 				*devCoderWorkspace.Name(),
@@ -119,8 +118,6 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 				*cdktf.Fn_Base64encode(devCoderAgent.InitScript()),
 				*paramCommand.Value(),
 				*paramRemote.Value(),
-				*devCoderWorkspace.Owner(),
-				*devCoderWorkspace.Name(),
 			),
 		}},
 	})
@@ -144,21 +141,6 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 		Slug:      infra.Js("cs"),
 		Subdomain: infra.Jsbool(false),
 		Url:       infra.Js(fmt.Sprintf("http://localhost:8080/?folder=%s", *paramHomedir.Value())),
-	})
-
-	app.NewApp(stack, infra.Js("tilt"), &app.AppConfig{
-		AgentId:     devCoderAgent.Id(),
-		DisplayName: infra.Js("tilt"),
-		Healthcheck: &app.AppHealthcheck{
-			Interval:  infra.Jsn(5),
-			Threshold: infra.Jsn(6),
-			Url:       infra.Js("http://localhost:10350"),
-		},
-		Icon:      infra.Js("/icon/code.svg"),
-		Share:     infra.Js("owner"),
-		Slug:      infra.Js("tilt"),
-		Subdomain: infra.Jsbool(true),
-		Url:       infra.Js("http://localhost:10350"),
 	})
 
 	return stack

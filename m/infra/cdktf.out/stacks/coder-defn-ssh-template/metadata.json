@@ -96,14 +96,6 @@
             "uniqueId": "code-server"
           }
         }
-      },
-      "tilt": {
-        "//": {
-          "metadata": {
-            "path": "coder-defn-ssh-template/tilt",
-            "uniqueId": "tilt"
-          }
-        }
       }
     },
     "null_resource": {
