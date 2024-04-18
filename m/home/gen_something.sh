@@ -2,16 +2,19 @@
 
 function main {
 	mkdir tmp
+	cd tmp
 
 	for f in "$@"; do
-		mkdir tmp/$f
-		echo xxxxxxxxxxxx $f
-		ls -ltrhd "${in[${f}_path]}"
-		tar -C tmp/$f -xvf "${in[${f}_path]}"
-		echo "${in[${f}_store]}" > tmp/$f/.bazel-nix-store
+		mkdir $f
+		pushd $f >/dev/null
+		tar -xf ../../"${in[${f}_path]}"
+		echo "${in[${f}_store]}" > .bazel-nix-store
+		popd >/dev/null
 	done
 
-	find tmp > $out
+	tar cfz ../something.tar.gz .
+	cd ..
+	mv something.tar.gz $out
 }
 
 source b/lib/lib.sh

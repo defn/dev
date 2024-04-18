@@ -123,9 +123,15 @@ rehome:
 
 home:
 	cd m && bazel version
+	cd m/home && b build
+	rm -rf /tmp/nix-tmp /tmp/nix-bin
+	mkdir -p /tmp/nix-tmp /tmp/nix-bin
+	(cd m/home && b out something) | (cd /tmp/nix-tmp && tar xfz -)
+	cd /tmp/nix-tmp && for a in */; do (cd $$a && if ! stat -L * 2>/dev/null >/dev/null; then echo $$a; sudo tar -C / -xf ~/m/$$(cat .bazel-nix-store); fi; rsync -ia . /tmp/nix-bin/. >/dev/null); done
+	rsync -ia --delete /tmp/nix-bin/. bin/nix/.
 	rm -f m/.bazelrc.user
 	#t make_home_inner env NIX_CONFIG="access-tokens = github.com=$$(cd m && j github::token)" $(MAKE) home_inner
-	t make_home_inner $(MAKE) home_inner
+	#t make_home_inner $(MAKE) home_inner
 
 home_inner:
 	rm -rf ~/bin/nix.tmp
