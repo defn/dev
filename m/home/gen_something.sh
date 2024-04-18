@@ -9,24 +9,17 @@
 function main {
 	# tmp accumulates flake paths
 	mkdir tmp
-	cd tmp
 
 	# for each flake, create a directory with nix and bazel paths
 	for f in "$@"; do
-		mkdir $f
-		pushd $f >/dev/null
-		tar -xf ../../"${in[${f}_path]}"
+		mkdir tmp/$f
+		tar -xf "${in[${f}_path]}" -C tmp/$f
 		# save the bazel artifact path because the artifact itself is huge
-		echo "${in[${f}_store]}" > .bazel-nix-store
-		popd >/dev/null
+		echo "${in[${f}_store]}" > tmp/$f/.bazel-nix-store
 	done
 
 	# create an archive of tmp
-	tar cfz ../something.tar.gz .
-
-	# then move archive into output from the sandbox root
-	cd ..
-	mv something.tar.gz $out
+	tar cfz $out -C tmp .
 }
 
 source b/lib/lib.sh
