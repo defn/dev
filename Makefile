@@ -128,37 +128,11 @@ home:
 	mkdir -p /tmp/nix-tmp /tmp/nix-bin
 	(cd m/home && b out something) | (cd /tmp/nix-tmp && tar xfz -)
 	cd /tmp/nix-tmp && for a in */; do (cd $$a && if ! stat -L * 2>/dev/null >/dev/null; then echo $$a; sudo tar -C / -xf ~/m/$$(cat .bazel-nix-store); fi; rsync -ia . /tmp/nix-bin/. >/dev/null); done
+	rm -f /tmp/nix-bin/.nix-bazel-store
 	rsync -ia --delete /tmp/nix-bin/. bin/nix/.
 	rm -f m/.bazelrc.user
 	#t make_home_inner env NIX_CONFIG="access-tokens = github.com=$$(cd m && j github::token)" $(MAKE) home_inner
 	#t make_home_inner $(MAKE) home_inner
-
-home_inner:
-	rm -rf ~/bin/nix.tmp
-	mkdir -p ~/bin/nix.tmp
-	for n in $(flakes); do \
-		if [[ "$$(git log -1 --format=% -- m/pkg/$$n)" != "$$(cat ~/bin/nix/.head-$$n 2>/dev/null || true)" ]]; then \
-			make $$n-install_flake; \
-		else \
-			echo "skip building $$n"; \
-		fi; \
-		hash -r; \
-		rsync -ia ~/bin/nix.tmp.$$n/. ~/bin/nix.tmp/. >/dev/null; \
-	done
-	mkdir -p ~/bin/nix
-	rsync -ia ~/bin/nix.tmp/. ~/bin/nix/.
-	rm -rf ~/bin/nix.tmp 
-	ln -nfs bazelisk ~/bin/nix/bazel
-
-%-install_flake:
-	mark $(first)
-	mkdir -p ~/bin/nix.tmp.$(first)
-	touch ~/bin/nix.tmp.$(first)/.wip
-	(cd m/pkg/$(first) && ~/bin/b build flake_path)
-	(cd m/pkg/$(first) && ~/bin/b out flake_path) | (cd ~/bin/nix.tmp.$(first) && tar xfz -)
-	for a in ~/bin/nix.tmp.$(first)/*; do if ! test -e $$a; then mark not found $$a; (set -x; cd m/pkg/$(first) && ~/bin/b build flake_store && (~/bin/b out flake_store | (cd / && sudo tar xfz - --skip-old-files))); break; fi; done
-	git log -1 --format=%H -- m/pkg/$(first) > ~/bin/nix.tmp.$(first)/.head-$(first)
-	rm -f ~/bin/nix.tmp.$(first)/.wip
 
 .PHONY: dotfiles
 dotfiles:
