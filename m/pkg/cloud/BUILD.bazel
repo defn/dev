@@ -9,4 +9,5 @@ filegroup(
 nix_flake(
     name = "flake",
     srcs = ["scripts"],
+    visibility = ["//visibility:public"],
 )
