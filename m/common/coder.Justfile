@@ -28,7 +28,14 @@ up *name:
 	esac
 
 	os=linux
-	arch=amd64
+	case "$(uname -m)" in
+		aarch64)
+			arch=arm64
+			;;
+		*)
+			arch=amd64
+			;;
+	esac
 	command="make coder-ssh-envbuilder"
 	template=coder-defn-ssh-template
 
