@@ -1,6 +1,6 @@
 {
   "slug": "pkg-minikubekvm2",
   "ghrepo": "kubernetes/minikube",
-  "vendor": "1.32.0",
-  "revision": "2"
+  "vendor": "1.33.0",
+  "revision": "0"
 }
