@@ -21,7 +21,7 @@
     "autoprefixer": "^10.4.19",
     "eslint-config-custom": "workspace:*",
     "flowbite": "^2.3.0",
-    "flowbite-svelte": "^0.44.24",
+    "flowbite-svelte": "^0.45.0",
     "postcss": "^8.4.38",
     "postcss-load-config": "^5.0.3",
     "react": "^18.2.0",
