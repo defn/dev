@@ -36,11 +36,11 @@ chrome-vpn:
 	cd m/openvpn && ./service server
 
 no-gpg:
-	systemctl --user disable gpg-agent-browser.socket --now
-	systemctl --user disable gpg-agent-extra.socket --now
-	systemctl --user disable gpg-agent-ssh.socket --now
-	systemctl --user disable gpg-agent.socket --now
-	systemctl --user disable gpg-agent --now
+	systemctl --user disable gpg-agent-browser.socket --now || true
+	systemctl --user disable gpg-agent-extra.socket --now || true
+	systemctl --user disable gpg-agent-ssh.socket --now || true
+	systemctl --user disable gpg-agent.socket --now || true
+	systemctl --user disable gpg-agent --now || true
 	pkill -9 gpg-agent || true
 
 chrome-dev-gpg:
