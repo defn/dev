@@ -14,15 +14,15 @@ rpi:
 	$(MAKE) no-gpg
 	$(MAKE) rpi-install
 
-chrome:
+cb:
 	$(MAKE) no-gpg
-	$(MAKE) chrome-install
+	$(MAKE) cb-install
 
 rpi-install:
 	sudo apt update
 	sudo apt install -y git direnv make rsync pipx
 
-chrome-install:
+cb-install:
 	sudo apt update
 	sudo apt install -y git direnv make rsync pipx
 	sudo apt install -y socat pcscd wireguard-tools qemu-system libvirt-clients libvirt-daemon-system openvpn easy-rsa
@@ -30,7 +30,7 @@ chrome-install:
 penguin:
 #acme.sh --register-account -m iam@defn.sh
 #this-acme-issue '*.cb.defn.run'
-	$(MAKE) chrome-install
+	$(MAKE) cb-install
 	$(MAKE) chrome-dev-gpg
 	while [[ "$$(pass hello)" != "world" ]]; do $(MAKE) chrome-dev-gpg; sleep 1; done
 	(cd ~/m && j up) &
