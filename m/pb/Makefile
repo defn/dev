@@ -1,7 +1,7 @@
 second = $(word 2, $(subst -, ,$@))
 
 pb ?= 
-limit ?=
+limit ?= all:!penguin
 check ?=
 
 ifdef limit
@@ -37,3 +37,6 @@ local: playbooks/*.yaml
 
 check: playbooks/*.yaml
 	$(MAKE) $(pb) opt="-i inventory/packer.ini -c local $(opt) --check --diff"
+
+command: playbooks/*.yaml
+	ansible $(limit) -m command -a '$(command)'
