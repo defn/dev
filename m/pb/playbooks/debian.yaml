@@ -3,4 +3,5 @@
   roles:
     - base_packages
     - base_bazel
+    - debian_packages
     - network_ethernet

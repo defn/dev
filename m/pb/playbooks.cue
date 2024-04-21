@@ -80,6 +80,7 @@ playbook: debian: [{
 	roles: [
 		"base_packages",
 		"base_bazel",
+		"debian_packages",
 		"network_ethernet",
 	]
 }]
@@ -145,6 +146,17 @@ role: hwe_packages: tasks: [{
 	apt: {
 		name: [
 			"linux-generic-hwe-22.04",
+		]
+		state: "present"
+	}
+}]
+
+role: debian_packages: tasks: [{
+	name:   "Install Debian-specific packages"
+	become: true
+	apt: {
+		name: [
+			"network-manager-config-connectivity-debian",
 		]
 		state: "present"
 	}
@@ -246,7 +258,7 @@ role: network_dummy: tasks: [{
 	}
 }]
 
-#role: base_bazel: tasks: [{
+role: base_bazel: tasks: [{
 	name:   "Configure bazel cache"
 	become: true
 	template: {
