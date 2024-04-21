@@ -1,0 +1,53 @@
+# Generate Ansible playbooks from CUE
+build:
+	#!/usr/bin/env bash
+
+	cue fmt $(git ls-files | grep 'cue$')
+	rm -f playbooks/*.yaml
+	rm -rf roles/*/tasks
+	cue export --out json -e fs | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | ../c/decode_base64.py 
+
+# CPU report from facts
+report:
+	#!/usr/bin/env bash
+
+	echo
+	(cd dump && cue export --out json) \
+		| jq -r '.host | to_entries[] | .key as $host | .value as $facts | $facts.ansible_processor | "\($host) \($facts.ansible_processor_nproc) \(.[2])"' \
+		| talign 2
+
+# Run a playbook
+playbook pb *lim:
+	#!/usr/bin/env bash
+
+	if [[ -z "{{lim}}" ]]; then
+		limit="$(uname -n)"
+	else
+		limit="{{lim}}"
+	fi
+
+	~/.local/bin/ansible-playbook -l "${limit}" "playbooks/{{pb}}.yaml"
+
+# Run a playbook on localhost
+local pb:
+	#!/usr/bin/env bash
+
+	~/.local/bin/ansible-playbook -i inventory/packer.ini -c local "playbooks/{{pb}}.yaml"
+
+# Run a command
+command limit *command:
+	#!/usr/bin/env bash
+
+	ansible {{limit}} -m command -a '{{command}}'
+
+# Check a playbook
+check pb *lim:
+	#!/usr/bin/env bash
+
+	if [[ -z "{{lim}}" ]]; then
+		limit="$(uname -n)"
+	else
+		limit="{{lim}}"
+	fi
+
+	~/.local/bin/ansible-playbook -c local --limit="${limit}" --check --diff "playbooks/{{pb}}.yaml"
