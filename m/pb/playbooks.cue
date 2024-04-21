@@ -49,6 +49,7 @@ inventory: {
 		"rpi4a",
 		"rpi4b",
 		"rpi4c",
+		"rpi5a",
 	]
 
 	zimaboard: hosts: [
@@ -159,7 +160,7 @@ role: base_packages: tasks: [{
 			"make", "net-tools", "lsb-release", "tzdata", "ca-certificates",
 			"iproute2", "openssh-client", "git-lfs", "fzf", "jq", "gettext",
 			"direnv", "ncdu", "apache2-utils", "fontconfig", "docker.io",
-			"tzdata", "avahi-daemon",
+			"tzdata", "avahi-daemon", "cloud-guest-utils",
 		]
 		state: "present"
 	}

@@ -43,6 +43,7 @@
       - docker.io
       - tzdata
       - avahi-daemon
+      - cloud-guest-utils
     state: present
 - name: Remove files
   become: true

@@ -30,7 +30,7 @@ if [[ -n "${first_workdir}" ]]; then
       if [[ "$(uname -n)" == "penguin" ]]; then
         make penguin
       else
-        echo make tilt
+        true
       fi
     fi
   fi 200>$lockfile
