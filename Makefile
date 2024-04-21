@@ -129,6 +129,7 @@ home:
 	(cd m/home && b out something) | (cd /tmp/nix-tmp && tar xfz -)
 	cd /tmp/nix-tmp && for a in $(flakes); do (cd $$a && if ! stat -L * 2>/dev/null >/dev/null; then echo $$a; sudo tar -C / -xf ~/m/$$(cat .bazel-nix-store); fi; rsync -ia . /tmp/nix-bin/. >/dev/null); done
 	rm -f /tmp/nix-bin/.bazel-nix-store
+	mkdir -p bin/nix
 	rsync -ia --delete /tmp/nix-bin/. bin/nix/.
 
 .PHONY: dotfiles
