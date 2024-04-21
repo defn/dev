@@ -7,15 +7,6 @@ build:
 	rm -rf roles/*/tasks
 	cue export --out json -e fs | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | ../c/decode_base64.py 
 
-# CPU report from facts
-report:
-	#!/usr/bin/env bash
-
-	echo
-	(cd dump && cue export --out json) \
-		| jq -r '.host | to_entries[] | .key as $host | .value as $facts | $facts.ansible_processor | "\($host) \($facts.ansible_processor_nproc) \(.[2])"' \
-		| talign 2
-
 # Run a playbook
 playbook pb *lim:
 	#!/usr/bin/env bash
@@ -51,3 +42,13 @@ check pb *lim:
 	fi
 
 	~/.local/bin/ansible-playbook -c local --limit="${limit}" --check --diff "playbooks/{{pb}}.yaml"
+
+# CPU report from facts
+report:
+	#!/usr/bin/env bash
+
+	echo
+	(cd inventory/dump && cue export --out json) \
+		| jq -r '.host | to_entries[] | .key as $host | .value as $facts | $facts.ansible_processor | "\($host) \($facts.ansible_processor_nproc) \(.[2])"' \
+		| sort -k3 \
+		| talign 2
