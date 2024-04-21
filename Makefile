@@ -11,14 +11,21 @@ latest:
 	$(MAKE) install
 
 rpi:
+	$(MAKE) no-gpg
+	$(MAKE) rpi-install
+
+chrome:
+	$(MAKE) no-gpg
+	$(MAKE) chrome-install
+
+rpi-install:
+	sudo apt update
 	sudo apt install -y git direnv make rsync pipx
-	$(MAKE) nix
-	cd m && bazel --version
-	cd m/pkg/cue && nix develop --command "cd && cd m/pb && $(MAKE) local pb=ubuntu
 
 chrome-install:
 	sudo apt update
-	sudo apt install -y direnv make rsync socat pcscd wireguard-tools qemu-system libvirt-clients libvirt-daemon-system openvpn easy-rsa
+	sudo apt install -y git direnv make rsync pipx
+	sudo apt install -y socat pcscd wireguard-tools qemu-system libvirt-clients libvirt-daemon-system openvpn easy-rsa
 
 penguin:
 #acme.sh --register-account -m iam@defn.sh
