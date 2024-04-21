@@ -1,0 +1,6 @@
+- name: Debian playbook
+  hosts: rpi
+  roles:
+    - base_packages
+    - base_bazel
+    - network_ethernet

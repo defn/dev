@@ -5,13 +5,6 @@
       - nano
       - unattended-upgrades
     state: absent
-- name: Install hwe kernel
-  become: true
-  when: ansible_architecture != 'aarch64' and ansible_architecture != 'armv7l' and ansible_bios_vendor != 'crosvm'
-  apt:
-    name:
-      - linux-generic-hwe-22.04
-    state: present
 - name: Install base packages
   become: true
   apt:
@@ -44,6 +37,7 @@
       - tzdata
       - avahi-daemon
       - cloud-guest-utils
+      - ifupdown
     state: present
 - name: Remove files
   become: true

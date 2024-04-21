@@ -65,11 +65,22 @@ inventory: {
 
 playbook: ubuntu: [{
 	name:  "Ubuntu playbook"
-	hosts: "all"
+	hosts: "zimaboard:heavy:coder:hetzner:mac"
+	roles: [
+		"base_packages",
+		"hwe_packages",
+		"base_bazel",
+		"network_dummy",
+	]
+}]
+
+playbook: debian: [{
+	name:  "Debian playbook"
+	hosts: "rpi"
 	roles: [
 		"base_packages",
 		"base_bazel",
-		"network_dummy",
+		"network_ethernet",
 	]
 }]
 
@@ -128,6 +139,17 @@ playbook: dump: [{
 	}]
 }]
 
+role: hwe_packages: tasks: [{
+	name:   "Install hwe kernel"
+	become: true
+	apt: {
+		name: [
+			"linux-generic-hwe-22.04",
+		]
+		state: "present"
+	}
+}]
+
 role: base_packages: tasks: [{
 	name:   "Remove packages"
 	become: true
@@ -137,16 +159,6 @@ role: base_packages: tasks: [{
 			"unattended-upgrades",
 		]
 		state: "absent"
-	}
-}, {
-	name:   "Install hwe kernel"
-	become: true
-	when:   "ansible_architecture != 'aarch64' and ansible_architecture != 'armv7l' and ansible_bios_vendor != 'crosvm'"
-	apt: {
-		name: [
-			"linux-generic-hwe-22.04",
-		]
-		state: "present"
 	}
 }, {
 	name:   "Install base packages"
@@ -160,7 +172,7 @@ role: base_packages: tasks: [{
 			"make", "net-tools", "lsb-release", "tzdata", "ca-certificates",
 			"iproute2", "openssh-client", "git-lfs", "fzf", "jq", "gettext",
 			"direnv", "ncdu", "apache2-utils", "fontconfig", "docker.io",
-			"tzdata", "avahi-daemon", "cloud-guest-utils",
+			"tzdata", "avahi-daemon", "cloud-guest-utils", "ifupdown",
 		]
 		state: "present"
 	}
@@ -200,10 +212,21 @@ role: base_packages: tasks: [{
 	}
 }]
 
-#role: network_dummy: tasks: [{
+role: network_ethernet: tasks: [{
+	name:   "Configure ethernet network"
+	become: true
+	template: {
+		src:   "{{ role_path }}/templates/etc/network/interfaces.j2"
+		dest:  "/etc/network/interfaces"
+		owner: "root"
+		group: "root"
+		mode:  "0644"
+	}
+}]
+
+role: network_dummy: tasks: [{
 	name:   "Configure network dummy netdev"
 	become: true
-	when:   "ansible_architecture != 'aarch64'"
 	template: {
 		src:   "{{ role_path }}/templates/etc/systemd/network/dummy1.netdev.j2"
 		dest:  "/etc/systemd/network/dummy1.netdev"
@@ -214,7 +237,6 @@ role: base_packages: tasks: [{
 }, {
 	name:   "Configure network dummy network"
 	become: true
-	when:   "ansible_architecture != 'aarch64'"
 	template: {
 		src:   "{{ role_path }}/templates/etc/systemd/network/dummy1.network.j2"
 		dest:  "/etc/systemd/network/dummy1.network"
