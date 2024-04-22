@@ -135,4 +135,16 @@ code-server *host:
 	pkill -9 trunk || true
 	export STARSHIP_NO=
 	source ~/.bash_profile
-	exec code-server --auth none
+
+	set -x
+
+	while true; do 
+		case "$(uname -s)" in
+			Linux)
+				exec code-server --auth none
+				;;
+			*)
+				code-server --auth none || true
+				;;
+		esac
+	done
