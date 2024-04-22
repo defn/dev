@@ -118,7 +118,7 @@ coder-agent *host:
 	source ~/.bash_profile
 	cd ${CODER_HOMEDIR}
 	echo ${CODER_INIT_SCRIPT_BASE64} | base64 -d \
-	  | sed 's#agent$#agent '"$(uname -n)"'#; s#^while.*#while ! test -x '"${BINARY_NAME}"'; do#; s#^BINARY_NAME.*#BINARY_NAME='"$HOME"'/bin/nix/coder#; s#exec ./#exec #; s#exit 1#echo exit 1#' \
+	  | sed 's#agent$#agent '"${CODER_NAME}"'#; s#^while.*#while ! test -x '"${BINARY_NAME}"'; do#; s#^BINARY_NAME.*#BINARY_NAME='"$HOME"'/bin/nix/coder#; s#exec ./#exec #; s#exit 1#echo exit 1#' \
 	  > /tmp/coder-agent-${CODER_NAME}-$$
 	exec bash -x /tmp/coder-agent-${CODER_NAME}-$$
 

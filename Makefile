@@ -298,7 +298,7 @@ nix-Darwin-bootstrap:
 
 coder-ssh-linux:
 	export STARSHIP_NO=1 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive && source ~/.bash_profile && cd $(CODER_HOMEDIR) \
-		&& (echo set -x; echo "exec 1>>/tmp/coder-agent-stdout.log 2>>/tmp/coder-agent-stderr.log"; echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d) | (sed 's#agent$$#agent $$(uname -n)#; s#^while.*#while ! test -x $${BINARY_NAME}; do#; s#^BINARY_NAME.*#BINARY_NAME=$$HOME/bin/nix/coder#; s#exec ./#exec #; s#exit 1#echo exit 1#' ) > /tmp/coder-agent-$(CODER_NAME)-$$$$ && exec bash -x /tmp/coder-agent-$(CODER_NAME)-$$$$ >>/tmp/coder-agent-startup-$$$$.log 2>&1
+		&& (echo set -x; echo "exec 1>>/tmp/coder-agent-stdout.log 2>>/tmp/coder-agent-stderr.log"; echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d) | (sed 's#agent$$#agent $${CODER_NAME}#; s#^while.*#while ! test -x $${BINARY_NAME}; do#; s#^BINARY_NAME.*#BINARY_NAME=$$HOME/bin/nix/coder#; s#exec ./#exec #; s#exit 1#echo exit 1#' ) > /tmp/coder-agent-$(CODER_NAME)-$$$$ && exec bash -x /tmp/coder-agent-$(CODER_NAME)-$$$$ >>/tmp/coder-agent-startup-$$$$.log 2>&1
 
 coder-ssh-envbuilder:
 	docker rm -f "$(CODER_NAME)" || true
@@ -322,7 +322,7 @@ coder-ssh-envbuilder:
 		-e CODER_AGENT_TOKEN=$(CODER_AGENT_TOKEN) \
 		-e CODER_INIT_SCRIPT_BASE64=$(CODER_INIT_SCRIPT_BASE64) \
 		-e INIT_COMMAND="/bin/bash" \
-		-e INIT_SCRIPT="source ~/.bash_profile && cd ~/m && exec j coder::coder-agent $(shell uname -n)" \
+		-e INIT_SCRIPT="source ~/.bash_profile && cd ~/m && exec j coder::coder-agent $(CODER_NAME)" \
 		ghcr.io/coder/envbuilder
 
 coder-ssh-devcontainer:
@@ -337,7 +337,7 @@ coder-ssh-devcontainer:
 			CODER_AGENT_URL=$(CODER_AGENT_URL) \
 			CODER_AGENT_TOKEN=$(CODER_AGENT_TOKEN) \
 			CODER_INIT_SCRIPT_BASE64=$(CODER_INIT_SCRIPT_BASE64) \
-			bash -c "cd ~/m && exec j coder::coder-agent $(shell uname -n)" &
+			bash -c "cd ~/m && exec j coder::coder-agent $(CODER_NAME)" &
 
 coder-ssh-darwin:
 	@pkill -9 -f coder.agen[t] || true
