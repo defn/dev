@@ -4,19 +4,31 @@ locals {
     "kubernetes.io/cluster/${var.cluster_name}" = "owned"
   }
 
-  workers_role_arn  = var.use_existing_aws_iam_instance_profile ? join("", data.aws_iam_instance_profile.default.*.role_arn) : join("", aws_iam_role.default.*.arn)
-  workers_role_name = var.use_existing_aws_iam_instance_profile ? join("", data.aws_iam_instance_profile.default.*.role_name) : join("", aws_iam_role.default.*.name)
+  workers_role_arn  = var.use_existing_aws_iam_instance_profile ? join("", data.aws_iam_instance_profile.default[*].role_arn) : join("", aws_iam_role.default[*].arn)
+  workers_role_name = var.use_existing_aws_iam_instance_profile ? join("", data.aws_iam_instance_profile.default[*].role_name) : join("", aws_iam_role.default[*].name)
+
+  userdata = templatefile("${path.module}/userdata.tpl", {
+    cluster_endpoint                = var.cluster_endpoint
+    certificate_authority_data      = var.cluster_certificate_authority_data
+    cluster_name                    = var.cluster_name
+    bootstrap_extra_args            = var.bootstrap_extra_args
+    kubelet_extra_args              = var.kubelet_extra_args
+    before_cluster_joining_userdata = var.before_cluster_joining_userdata
+    after_cluster_joining_userdata  = var.after_cluster_joining_userdata
+  })
 }
 
 module "label" {
   source  = "cloudposse/label/null"
-  version = "0.24.1"
+  version = "0.25.0"
 
   attributes = ["workers"]
   tags       = local.tags
 
   context = module.this.context
 }
+
+data "aws_partition" "current" {}
 
 data "aws_iam_policy_document" "assume_role" {
   count = local.enabled && var.use_existing_aws_iam_instance_profile == false ? 1 : 0
@@ -35,38 +47,38 @@ data "aws_iam_policy_document" "assume_role" {
 resource "aws_iam_role" "default" {
   count              = local.enabled && var.use_existing_aws_iam_instance_profile == false ? 1 : 0
   name               = module.label.id
-  assume_role_policy = join("", data.aws_iam_policy_document.assume_role.*.json)
+  assume_role_policy = join("", data.aws_iam_policy_document.assume_role[*].json)
   tags               = module.label.tags
 }
 
 resource "aws_iam_role_policy_attachment" "amazon_eks_worker_node_policy" {
   count      = local.enabled && var.use_existing_aws_iam_instance_profile == false ? 1 : 0
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
-  role       = join("", aws_iam_role.default.*.name)
+  policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+  role       = join("", aws_iam_role.default[*].name)
 }
 
 resource "aws_iam_role_policy_attachment" "amazon_eks_cni_policy" {
   count      = local.enabled && var.use_existing_aws_iam_instance_profile == false ? 1 : 0
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-  role       = join("", aws_iam_role.default.*.name)
+  policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/AmazonEKS_CNI_Policy"
+  role       = join("", aws_iam_role.default[*].name)
 }
 
 resource "aws_iam_role_policy_attachment" "amazon_ec2_container_registry_read_only" {
   count      = local.enabled && var.use_existing_aws_iam_instance_profile == false ? 1 : 0
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-  role       = join("", aws_iam_role.default.*.name)
+  policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+  role       = join("", aws_iam_role.default[*].name)
 }
 
 resource "aws_iam_role_policy_attachment" "existing_policies_attach_to_eks_workers_role" {
   count      = local.enabled && var.use_existing_aws_iam_instance_profile == false ? var.workers_role_policy_arns_count : 0
   policy_arn = var.workers_role_policy_arns[count.index]
-  role       = join("", aws_iam_role.default.*.name)
+  role       = join("", aws_iam_role.default[*].name)
 }
 
 resource "aws_iam_instance_profile" "default" {
   count = local.enabled && var.use_existing_aws_iam_instance_profile == false ? 1 : 0
   name  = module.label.id
-  role  = join("", aws_iam_role.default.*.name)
+  role  = join("", aws_iam_role.default[*].name)
 }
 
 resource "aws_security_group" "default" {
@@ -84,7 +96,7 @@ resource "aws_security_group_rule" "egress" {
   to_port           = 0
   protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = join("", aws_security_group.default.*.id)
+  security_group_id = join("", aws_security_group.default[*].id)
   type              = "egress"
 }
 
@@ -94,8 +106,8 @@ resource "aws_security_group_rule" "ingress_self" {
   from_port                = 0
   to_port                  = 65535
   protocol                 = "-1"
-  security_group_id        = join("", aws_security_group.default.*.id)
-  source_security_group_id = join("", aws_security_group.default.*.id)
+  security_group_id        = join("", aws_security_group.default[*].id)
+  source_security_group_id = join("", aws_security_group.default[*].id)
   type                     = "ingress"
 }
 
@@ -105,7 +117,7 @@ resource "aws_security_group_rule" "ingress_cluster" {
   from_port                = 0
   to_port                  = 65535
   protocol                 = "-1"
-  security_group_id        = join("", aws_security_group.default.*.id)
+  security_group_id        = join("", aws_security_group.default[*].id)
   source_security_group_id = var.cluster_security_group_id
   type                     = "ingress"
 }
@@ -117,7 +129,7 @@ resource "aws_security_group_rule" "ingress_security_groups" {
   to_port                  = 65535
   protocol                 = "-1"
   source_security_group_id = var.allowed_security_groups[count.index]
-  security_group_id        = join("", aws_security_group.default.*.id)
+  security_group_id        = join("", aws_security_group.default[*].id)
   type                     = "ingress"
 }
 
@@ -128,7 +140,7 @@ resource "aws_security_group_rule" "ingress_cidr_blocks" {
   to_port           = 0
   protocol          = "-1"
   cidr_blocks       = var.allowed_cidr_blocks
-  security_group_id = join("", aws_security_group.default.*.id)
+  security_group_id = join("", aws_security_group.default[*].id)
   type              = "ingress"
 }
 
@@ -146,45 +158,31 @@ data "aws_ami" "eks_worker" {
   owners = ["602401143452"] # Amazon
 }
 
-data "template_file" "userdata" {
-  count    = local.enabled ? 1 : 0
-  template = file("${path.module}/userdata.tpl")
-
-  vars = {
-    cluster_endpoint                = var.cluster_endpoint
-    certificate_authority_data      = var.cluster_certificate_authority_data
-    cluster_name                    = var.cluster_name
-    bootstrap_extra_args            = var.bootstrap_extra_args
-    kubelet_extra_args              = var.kubelet_extra_args
-    before_cluster_joining_userdata = var.before_cluster_joining_userdata
-    after_cluster_joining_userdata  = var.after_cluster_joining_userdata
-  }
-}
-
 data "aws_iam_instance_profile" "default" {
   count = local.enabled && var.use_existing_aws_iam_instance_profile ? 1 : 0
   name  = var.aws_iam_instance_profile_name
 }
 
 module "autoscale_group" {
-  source = "../terraform-aws-ec2-autoscale-group"
+  source  = "cloudposse/ec2-autoscale-group/aws"
+  version = "0.39.0"
 
   enabled = local.enabled
   tags    = merge(local.tags, var.autoscaling_group_tags)
 
-  image_id                  = var.use_custom_image_id ? var.image_id : join("", data.aws_ami.eks_worker.*.id)
-  iam_instance_profile_name = var.use_existing_aws_iam_instance_profile == false ? join("", aws_iam_instance_profile.default.*.name) : var.aws_iam_instance_profile_name
+  image_id                  = var.use_custom_image_id ? var.image_id : join("", data.aws_ami.eks_worker[*].id)
+  iam_instance_profile_name = var.use_existing_aws_iam_instance_profile == false ? join("", aws_iam_instance_profile.default[*].name) : var.aws_iam_instance_profile_name
 
   security_group_ids = compact(
     concat(
       [
-        var.use_existing_security_group == false ? join("", aws_security_group.default.*.id) : var.workers_security_group_id
+        var.use_existing_security_group == false ? join("", aws_security_group.default[*].id) : var.workers_security_group_id
       ],
       var.additional_security_group_ids
     )
   )
 
-  user_data_base64 = base64encode(join("", data.template_file.userdata.*.rendered))
+  user_data_base64 = base64encode(local.userdata)
 
   instance_type                           = var.instance_type
   subnet_ids                              = var.subnet_ids
@@ -238,6 +236,7 @@ module "autoscale_group" {
   metadata_http_endpoint_enabled          = var.metadata_http_endpoint_enabled
   metadata_http_put_response_hop_limit    = var.metadata_http_put_response_hop_limit
   metadata_http_tokens_required           = var.metadata_http_tokens_required
+  max_instance_lifetime                   = var.max_instance_lifetime
 
   context = module.this.context
 }

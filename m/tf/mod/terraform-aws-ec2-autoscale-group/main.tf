@@ -1,3 +1,8 @@
+data "aws_subnet" "this" {
+  for_each = length(var.subnet_ids) > 0 ? { for idx, subnet in var.subnet_ids : idx => subnet } : {}
+  id       = each.value
+}
+
 resource "aws_launch_template" "default" {
   count = module.this.enabled ? 1 : 0
 
@@ -16,6 +21,7 @@ resource "aws_launch_template" "default" {
           delete_on_termination = lookup(block_device_mappings.value.ebs, "delete_on_termination", null)
           encrypted             = lookup(block_device_mappings.value.ebs, "encrypted", null)
           iops                  = lookup(block_device_mappings.value.ebs, "iops", null)
+          throughput            = lookup(block_device_mappings.value.ebs, "throughput", null)
           kms_key_id            = lookup(block_device_mappings.value.ebs, "kms_key_id", null)
           snapshot_id           = lookup(block_device_mappings.value.ebs, "snapshot_id", null)
           volume_size           = lookup(block_device_mappings.value.ebs, "volume_size", null)
@@ -94,11 +100,12 @@ resource "aws_launch_template" "default" {
 
   # https://github.com/terraform-providers/terraform-provider-aws/issues/4570
   network_interfaces {
-    description                 = module.this.id
+    description                 = var.network_interface_id == null ? module.this.id : null
     device_index                = 0
-    associate_public_ip_address = var.associate_public_ip_address
-    delete_on_termination       = true
-    security_groups             = var.security_group_ids
+    associate_public_ip_address = var.network_interface_id == null ? var.associate_public_ip_address : null
+    delete_on_termination       = var.network_interface_id == null ? true : false
+    security_groups             = var.network_interface_id == null ? var.security_group_ids : null
+    network_interface_id        = var.network_interface_id
   }
 
   metadata_options {
@@ -139,6 +146,7 @@ locals {
       launch_template        = local.launch_template_block
       override               = var.mixed_instances_policy.override
   })
+  availability_zones = [for subnet in data.aws_subnet.this : subnet.availability_zone]
   tags = {
     for key, value in module.this.tags :
     key => value if value != "" && value != null
@@ -149,7 +157,8 @@ resource "aws_autoscaling_group" "default" {
   count = module.this.enabled ? 1 : 0
 
   name_prefix               = format("%s%s", module.this.id, module.this.delimiter)
-  vpc_zone_identifier       = var.subnet_ids
+  vpc_zone_identifier       = var.network_interface_id == null ? var.subnet_ids : null
+  availability_zones        = var.network_interface_id != null ? local.availability_zones : null
   max_size                  = var.max_size
   min_size                  = var.min_size
   load_balancers            = var.load_balancers
@@ -180,10 +189,12 @@ resource "aws_autoscaling_group" "default" {
       dynamic "preferences" {
         for_each = instance_refresh.value.preferences != null ? [instance_refresh.value.preferences] : []
         content {
-          instance_warmup        = lookup(preferences.value, "instance_warmup", null)
-          min_healthy_percentage = lookup(preferences.value, "min_healthy_percentage", null)
-          skip_matching          = lookup(preferences.value, "skip_matching", null)
-          auto_rollback          = lookup(preferences.value, "auto_rollback", null)
+          instance_warmup              = lookup(preferences.value, "instance_warmup", null)
+          min_healthy_percentage       = lookup(preferences.value, "min_healthy_percentage", null)
+          skip_matching                = lookup(preferences.value, "skip_matching", null)
+          auto_rollback                = lookup(preferences.value, "auto_rollback", null)
+          scale_in_protected_instances = lookup(preferences.value, "scale_in_protected_instances", null)
+          standby_instances            = lookup(preferences.value, "standby_instances", null)
         }
       }
       triggers = instance_refresh.value.triggers

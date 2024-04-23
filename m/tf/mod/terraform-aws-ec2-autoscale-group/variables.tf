@@ -41,8 +41,14 @@ variable "launch_template_version" {
 
 variable "associate_public_ip_address" {
   type        = bool
-  description = "Associate a public IP address with an instance in a VPC"
+  description = "Associate a public IP address with an instance in a VPC. If `network_interface_id` is specified, this can only be `false` (see here for more info: https://stackoverflow.com/a/76808361)."
   default     = false
+}
+
+variable "network_interface_id" {
+  type        = string
+  description = "The ID of the network interface to attach. If specified, all the other network_interface block arguments are ignored."
+  default     = null
 }
 
 variable "user_data_base64" {
@@ -73,17 +79,18 @@ variable "block_device_mappings" {
   description = "Specify volumes to attach to the instance besides the volumes specified by the AMI"
 
   type = list(object({
-    device_name  = string
-    no_device    = bool
-    virtual_name = string
+    device_name  = optional(string)
+    no_device    = optional(bool)
+    virtual_name = optional(string)
     ebs = object({
-      delete_on_termination = bool
-      encrypted             = bool
-      iops                  = number
-      kms_key_id            = string
-      snapshot_id           = string
-      volume_size           = number
-      volume_type           = string
+      delete_on_termination = optional(bool)
+      encrypted             = optional(bool)
+      iops                  = optional(number)
+      throughput            = optional(number)
+      kms_key_id            = optional(string)
+      snapshot_id           = optional(string)
+      volume_size           = optional(number)
+      volume_type           = optional(string)
     })
   }))
 
@@ -112,10 +119,12 @@ variable "instance_refresh" {
   type = object({
     strategy = string
     preferences = optional(object({
-      instance_warmup        = optional(number, null)
-      min_healthy_percentage = optional(number, null)
-      skip_matching          = optional(bool, null)
-      auto_rollback          = optional(bool, null)
+      instance_warmup              = optional(number, null)
+      min_healthy_percentage       = optional(number, null)
+      skip_matching                = optional(bool, null)
+      auto_rollback                = optional(bool, null)
+      scale_in_protected_instances = optional(string, null)
+      standby_instances            = optional(string, null)
     }), null)
     triggers = optional(list(string), [])
   })
@@ -127,18 +136,18 @@ variable "mixed_instances_policy" {
   description = "policy to used mixed group of on demand/spot of differing types. Launch template is automatically generated. https://www.terraform.io/docs/providers/aws/r/autoscaling_group.html#mixed_instances_policy-1"
 
   type = object({
-    instances_distribution = object({
+    instances_distribution = optional(object({
       on_demand_allocation_strategy            = string
       on_demand_base_capacity                  = number
       on_demand_percentage_above_base_capacity = number
       spot_allocation_strategy                 = string
       spot_instance_pools                      = number
       spot_max_price                           = string
-    })
-    override = list(object({
+    }))
+    override = optional(list(object({
       instance_type     = string
       weighted_capacity = number
-    }))
+    })))
   })
   default = null
 }
@@ -194,8 +203,8 @@ variable "min_size" {
 }
 
 variable "subnet_ids" {
-  description = "A list of subnet IDs to launch resources in"
   type        = list(string)
+  description = "A list of subnet IDs to launch resources in"
 }
 
 variable "default_cooldown" {
