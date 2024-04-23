@@ -322,7 +322,7 @@ coder-ssh-envbuilder:
 		-e CODER_AGENT_TOKEN=$(CODER_AGENT_TOKEN) \
 		-e CODER_INIT_SCRIPT_BASE64=$(CODER_INIT_SCRIPT_BASE64) \
 		-e INIT_COMMAND="/bin/bash" \
-		-e INIT_SCRIPT="source ~/.bash_profile && cd ~/m && exec j coder::coder-agent" \
+		-e INIT_SCRIPT="source ~/.bash_profile && cd ~/m && exec tini j coder::coder-agent" \
 		ghcr.io/coder/envbuilder
 
 coder-ssh-devcontainer:
