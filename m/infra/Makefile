@@ -10,7 +10,6 @@ build: ../node_modules/.bin/cdktf
 	runmany 'perl -pe "\
 		s{undefined}{true} if m{encrypt\s+=\s+undefined}; \
 		s{=}{= false} if m{(user_enabled|versioning_enabled|block_public_acls|block_public_policy|ignore_public_acls|restrict_public_buckets)\s+=\s+$$}; \
-		s{=}{= true} if m{(allow_public_website)\s+=\s+$$}; \
 		s{\"}{}g if m{^\s*aws\s*=}; \
 		s{when\s*=\s*\"create\"}{when = create}g; \
 		s{\"ami\",}{ami,}g; \

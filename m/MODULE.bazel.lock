@@ -1702,10 +1702,10 @@
       "general": {
         "bzlTransitiveDigest": "D1+rhhbwX4ufoTmeUVxDpPg+Sknv3QzVXZnyK2zOjj4=",
         "recordedFileInputs": {
-          "@@//go.mod": "f4c982ab0302783178f714708e3a5bef4af47c6430bc2da0e48e5a734fdbbf9d",
+          "@@//go.mod": "e263b478ebb4c88ad2837d0cf6fb074d9b6fdd2b96e214d240e8fb836b964565",
           "@@rules_go~//go.mod": "de22304b720f7f61350ec1c9739de6c0a1b1103fd22bfeb6e92c6c843ddc6d6e",
           "@@gazelle~//go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
-          "@@//go.sum": "0984ab6d4e51dfbf5c51af20a230958714a2e59c40883c4ab42a225219bca52c",
+          "@@//go.sum": "f00250c78dd3fec7e8ce9794375fe891a9eed6f8d29447da1971306e9dcb2477",
           "@@rules_go~//go.sum": "d56fdb19b21a5f12bcf625c49432371ac39c2def0f564098fbda107f7c080f40",
           "@@gazelle~//go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473"
         },
@@ -1782,9 +1782,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:985EYyeCOxTpcgOTJpflJUwOeEz0CQOdPt73OzpE9F8=",
+              "sum": "h1:99ci1mjWVBWwJiEKYY6jWa4d2nTQVIEhZIptnrVb1XY=",
               "replace": "",
-              "version": "v0.0.0-20240404231335-c0f41cb1a7a0"
+              "version": "v0.0.0-20240416160154-fe59bbe5cc7f"
             }
           },
           "com_github_cockroachdb_apd_v3": {
@@ -1857,9 +1857,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:QLgLl2yMN7N+ruc31VynXs1vhMZa7CeHHejIeBAsoHo=",
+              "sum": "h1:9TA9+T8+8CUCO2+WYnDLCgrYi9+omqKXyjDtosvtEhg=",
               "replace": "",
-              "version": "v2.2.0"
+              "version": "v2.2.1"
             }
           },
           "com_github_cdktf_cdktf_provider_aws_go_aws_v19": {
@@ -1965,6 +1965,21 @@
               "sum": "h1:PV8peI4a0ysnczrg+LtxykD8LfKY9ML6u2jnxaEnrnM=",
               "replace": "",
               "version": "v1.1.12"
+            }
+          },
+          "com_github_cloudwego_iasm": {
+            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "importpath": "github.com/cloudwego/iasm",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:1KNIy1I1H9hNNFEEH3DVnI4UujN+1zjpuk6gwHLTssg=",
+              "replace": "",
+              "version": "v0.2.0"
             }
           },
           "com_github_masterminds_semver_v3": {
@@ -2374,6 +2389,36 @@
               "version": "v2.2.7"
             }
           },
+          "com_github_cloudwego_base64x": {
+            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "importpath": "github.com/cloudwego/base64x",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:b5J/l8xolB7dyDTTmhJP2oTs5LdrjyrUFuNxdfq5hAg=",
+              "replace": "",
+              "version": "v0.1.3"
+            }
+          },
+          "com_github_bytedance_sonic_loader": {
+            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "importpath": "github.com/bytedance/sonic/loader",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:c+e5Pt1k/cy5wMveRDyk2X4B9hF4g7an8N3zCYjJFNM=",
+              "replace": "",
+              "version": "v0.1.1"
+            }
+          },
           "com_github_sourcegraph_conc": {
             "bzlFile": "@@gazelle~//internal:go_repository.bzl",
             "ruleClassName": "go_repository",
@@ -2552,21 +2597,6 @@
               "sum": "h1:YsImfSBoP9QPYL0xyKJPq0gcaJdG3rInoqxTWbfQu9M=",
               "replace": "",
               "version": "v0.7.0"
-            }
-          },
-          "com_github_chenzhuoyu_iasm": {
-            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
-            "ruleClassName": "go_repository",
-            "attributes": {
-              "importpath": "github.com/chenzhuoyu/iasm",
-              "build_directives": [],
-              "build_file_generation": "auto",
-              "build_extra_args": [],
-              "patches": [],
-              "patch_args": [],
-              "sum": "h1:tUHQJXo3NhBqw6s33wkGn9SP3bvrWLdlVIJ3hQBL7P0=",
-              "replace": "",
-              "version": "v0.9.1"
             }
           },
           "com_github_rogpeppe_go_internal": {
@@ -3029,9 +3059,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:jRN+yEjakWh8aK5FzrciUHG8OFXK+4/KrAX/ysEtHAA=",
+              "sum": "h1:G00FYjjqll5iQ1PYXynbg/hyzqBqavH8Mo9/oTopd9k=",
               "replace": "",
-              "version": "v1.11.3"
+              "version": "v1.11.5"
             }
           },
           "org_golang_google_grpc": {
@@ -3156,21 +3186,6 @@
               "version": "v0.3.0"
             }
           },
-          "com_github_chenzhuoyu_base64x": {
-            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
-            "ruleClassName": "go_repository",
-            "attributes": {
-              "importpath": "github.com/chenzhuoyu/base64x",
-              "build_directives": [],
-              "build_file_generation": "auto",
-              "build_extra_args": [],
-              "patches": [],
-              "patch_args": [],
-              "sum": "h1:77cEq6EriyTZ0g/qfRdp61a3Uu/AWrgIq2s0ClJV1g0=",
-              "replace": "",
-              "version": "v0.0.0-20230717121745-296ad89f973d"
-            }
-          },
           "com_github_hashicorp_terraform_cdk_go_cdktf": {
             "bzlFile": "@@gazelle~//internal:go_repository.bzl",
             "ruleClassName": "go_repository",
@@ -3272,8 +3287,9 @@
                 "com_github_atotto_clipboard": "github.com/atotto/clipboard",
                 "com_github_aymanbagabas_go_osc52_v2": "github.com/aymanbagabas/go-osc52/v2",
                 "com_github_bytedance_sonic": "github.com/bytedance/sonic",
-                "com_github_chenzhuoyu_base64x": "github.com/chenzhuoyu/base64x",
-                "com_github_chenzhuoyu_iasm": "github.com/chenzhuoyu/iasm",
+                "com_github_bytedance_sonic_loader": "github.com/bytedance/sonic/loader",
+                "com_github_cloudwego_base64x": "github.com/cloudwego/base64x",
+                "com_github_cloudwego_iasm": "github.com/cloudwego/iasm",
                 "com_github_cockroachdb_apd_v3": "github.com/cockroachdb/apd/v3",
                 "com_github_containerd_console": "github.com/containerd/console",
                 "com_github_cpuguy83_go_md2man_v2": "github.com/cpuguy83/go-md2man/v2",
