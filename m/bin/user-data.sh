@@ -5,6 +5,7 @@ export CODER_AGENT_AUTH="token"
 export CODER_AGENT_URL="$1"
 shift
 export DFD_WORKSPACE_NAME="$1"
+export CODER_NAME="$1"
 shift
 export CODER_AGENT_TOKEN="$1"
 shift
@@ -43,7 +44,7 @@ git branch -u origin/main
 	while true; do
 		cd
 		source .bash_profile
-		coder agent || true
+		j create-coder-agent || true
 		sleep 5
 	done >>/tmp/coder-agent.log 2>&1
 ) &
