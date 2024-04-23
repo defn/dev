@@ -1,7 +1,7 @@
 # Wrapper for git diff that runs dyff
 [no-cd]
 diff *args:
-	env GIT_EXTERNAL_DIFF="j github::dyff" git diff {{args}}
+	env GIT_EXTERNAL_DIFF="pwd 1>&2; just dyff" git diff {{args}}
 
 # Internal dyff, called by git diff
 [no-cd, private]
@@ -26,7 +26,7 @@ dyff +args:
 			true
 			;;
 	esac
-	;;
+
 # Get GitHub token from git credential helper
 [no-cd]
 token:

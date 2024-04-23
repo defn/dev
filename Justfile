@@ -1,3 +1,5 @@
+mod github 'm/common/github.Justfile'
+
 create-coder-agent:
 	#!/usr/bin/env bash
 
@@ -13,3 +15,5 @@ destroy-coder-agent:
 	  done
 	done
 
+dyff *args:
+	@just github::dyff {{args}}
