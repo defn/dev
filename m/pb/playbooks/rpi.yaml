@@ -1,7 +1,7 @@
-- name: Debian playbook
+- name: rpi playbook
   hosts: rpi
   roles:
     - base_packages
     - base_bazel
-    - debian_packages
+    - rpi_packages
     - network_ethernet

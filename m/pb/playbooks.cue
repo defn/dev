@@ -74,13 +74,13 @@ playbook: ubuntu: [{
 	]
 }]
 
-playbook: debian: [{
-	name:  "Debian playbook"
+playbook: rpi: [{
+	name:  "rpi playbook"
 	hosts: "rpi"
 	roles: [
 		"base_packages",
 		"base_bazel",
-		"debian_packages",
+		"rpi_packages",
 		"network_ethernet",
 	]
 }]
@@ -151,12 +151,12 @@ role: hwe_packages: tasks: [{
 	}
 }]
 
-role: debian_packages: tasks: [{
-	name:   "Install Debian-specific packages"
+role: rpi_packages: tasks: [{
+	name:   "Install rpi-specific packages"
 	become: true
 	apt: {
 		name: [
-			"network-manager-config-connectivity-debian",
+			"network-manager-config-connectivity-rpi",
 		]
 		state: "present"
 	}
@@ -184,7 +184,7 @@ role: base_packages: tasks: [{
 			"make", "net-tools", "lsb-release", "tzdata", "ca-certificates",
 			"iproute2", "openssh-client", "git-lfs", "fzf", "jq", "gettext",
 			"direnv", "ncdu", "apache2-utils", "fontconfig", "docker.io",
-			"tzdata", "avahi-daemon", "cloud-guest-utils", "ifupdown",
+			"tzdata", "avahi-daemon", "cloud-guest-utils", "ifupdown", "tini",
 		]
 		state: "present"
 	}

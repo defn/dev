@@ -38,6 +38,7 @@
       - avahi-daemon
       - cloud-guest-utils
       - ifupdown
+      - tini
     state: present
 - name: Remove files
   become: true

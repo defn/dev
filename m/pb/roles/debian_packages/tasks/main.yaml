@@ -1,6 +1,0 @@
-- name: Install Debian-specific packages
-  become: true
-  apt:
-    name:
-      - network-manager-config-connectivity-debian
-    state: present
