@@ -300,7 +300,8 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "origin" {
 }
 
 resource "aws_s3_bucket_cors_configuration" "origin" {
-  count = local.create_s3_origin_bucket ? 1 : 0
+  count = 0
+  #count = local.create_s3_origin_bucket ? 1 : 0
 
   bucket = one(aws_s3_bucket.origin).id
 
