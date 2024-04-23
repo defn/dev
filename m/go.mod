@@ -13,14 +13,14 @@ replace gvisor.dev/gvisor => github.com/defn/gvisor v1.0.2
 require (
 	cuelang.org/go v0.8.1
 	github.com/aws/constructs-go/constructs/v10 v10.3.0
-	github.com/aws/jsii-runtime-go v1.96.0
+	github.com/aws/jsii-runtime-go v1.97.0
 	github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.13.0
 	github.com/cdktf/cdktf-provider-null-go/null/v10 v10.0.0
 	github.com/charmbracelet/bubbles v0.18.0
 	github.com/charmbracelet/bubbletea v0.25.0
 	github.com/charmbracelet/lipgloss v0.10.0
 	github.com/gin-gonic/gin v1.9.1
-	github.com/hashicorp/terraform-cdk-go/cdktf v0.20.6
+	github.com/hashicorp/terraform-cdk-go/cdktf v0.20.7
 	github.com/noisysockets/noisysockets v0.12.2
 	github.com/spf13/cobra v1.8.0
 	github.com/spf13/viper v1.18.2

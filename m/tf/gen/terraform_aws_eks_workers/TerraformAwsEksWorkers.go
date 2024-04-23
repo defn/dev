@@ -92,6 +92,8 @@ type TerraformAwsEksWorkers interface {
 	DependsOn() *[]*string
 	// Experimental.
 	SetDependsOn(val *[]*string)
+	DescriptorFormats() interface{}
+	SetDescriptorFormats(val interface{})
 	DisableApiTermination() *bool
 	SetDisableApiTermination(val *bool)
 	EbsOptimized() *bool
@@ -142,12 +144,16 @@ type TerraformAwsEksWorkers interface {
 	SetLabelKeyCase(val *string)
 	LabelOrder() *[]*string
 	SetLabelOrder(val *[]*string)
+	LabelsAsTags() *[]*string
+	SetLabelsAsTags(val *[]*string)
 	LabelValueCase() *string
 	SetLabelValueCase(val *string)
 	LaunchTemplateArnOutput() *string
 	LaunchTemplateIdOutput() *string
 	LoadBalancers() *[]*string
 	SetLoadBalancers(val *[]*string)
+	MaxInstanceLifetime() *float64
+	SetMaxInstanceLifetime(val *float64)
 	MaxSize() *float64
 	SetMaxSize(val *float64)
 	MetadataHttpEndpointEnabled() *bool
@@ -217,6 +223,8 @@ type TerraformAwsEksWorkers interface {
 	SetTags(val *map[string]*string)
 	TargetGroupArns() *[]*string
 	SetTargetGroupArns(val *[]*string)
+	Tenant() *string
+	SetTenant(val *string)
 	TerminationPolicies() *[]*string
 	SetTerminationPolicies(val *[]*string)
 	UseCustomImageId() *bool
@@ -702,6 +710,16 @@ func (j *jsiiProxy_TerraformAwsEksWorkers) DependsOn() *[]*string {
 	return returns
 }
 
+func (j *jsiiProxy_TerraformAwsEksWorkers) DescriptorFormats() interface{} {
+	var returns interface{}
+	_jsii_.Get(
+		j,
+		"descriptorFormats",
+		&returns,
+	)
+	return returns
+}
+
 func (j *jsiiProxy_TerraformAwsEksWorkers) DisableApiTermination() *bool {
 	var returns *bool
 	_jsii_.Get(
@@ -942,6 +960,16 @@ func (j *jsiiProxy_TerraformAwsEksWorkers) LabelOrder() *[]*string {
 	return returns
 }
 
+func (j *jsiiProxy_TerraformAwsEksWorkers) LabelsAsTags() *[]*string {
+	var returns *[]*string
+	_jsii_.Get(
+		j,
+		"labelsAsTags",
+		&returns,
+	)
+	return returns
+}
+
 func (j *jsiiProxy_TerraformAwsEksWorkers) LabelValueCase() *string {
 	var returns *string
 	_jsii_.Get(
@@ -977,6 +1005,16 @@ func (j *jsiiProxy_TerraformAwsEksWorkers) LoadBalancers() *[]*string {
 	_jsii_.Get(
 		j,
 		"loadBalancers",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_TerraformAwsEksWorkers) MaxInstanceLifetime() *float64 {
+	var returns *float64
+	_jsii_.Get(
+		j,
+		"maxInstanceLifetime",
 		&returns,
 	)
 	return returns
@@ -1337,6 +1375,16 @@ func (j *jsiiProxy_TerraformAwsEksWorkers) TargetGroupArns() *[]*string {
 	_jsii_.Get(
 		j,
 		"targetGroupArns",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_TerraformAwsEksWorkers) Tenant() *string {
+	var returns *string
+	_jsii_.Get(
+		j,
+		"tenant",
 		&returns,
 	)
 	return returns
@@ -1769,6 +1817,17 @@ func (j *jsiiProxy_TerraformAwsEksWorkers)SetDependsOn(val *[]*string) {
 	)
 }
 
+func (j *jsiiProxy_TerraformAwsEksWorkers)SetDescriptorFormats(val interface{}) {
+	if err := j.validateSetDescriptorFormatsParameters(val); err != nil {
+		panic(err)
+	}
+	_jsii_.Set(
+		j,
+		"descriptorFormats",
+		val,
+	)
+}
+
 func (j *jsiiProxy_TerraformAwsEksWorkers)SetDisableApiTermination(val *bool) {
 	_jsii_.Set(
 		j,
@@ -1954,6 +2013,14 @@ func (j *jsiiProxy_TerraformAwsEksWorkers)SetLabelOrder(val *[]*string) {
 	)
 }
 
+func (j *jsiiProxy_TerraformAwsEksWorkers)SetLabelsAsTags(val *[]*string) {
+	_jsii_.Set(
+		j,
+		"labelsAsTags",
+		val,
+	)
+}
+
 func (j *jsiiProxy_TerraformAwsEksWorkers)SetLabelValueCase(val *string) {
 	_jsii_.Set(
 		j,
@@ -1966,6 +2033,14 @@ func (j *jsiiProxy_TerraformAwsEksWorkers)SetLoadBalancers(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"loadBalancers",
+		val,
+	)
+}
+
+func (j *jsiiProxy_TerraformAwsEksWorkers)SetMaxInstanceLifetime(val *float64) {
+	_jsii_.Set(
+		j,
+		"maxInstanceLifetime",
 		val,
 	)
 }
@@ -2205,6 +2280,14 @@ func (j *jsiiProxy_TerraformAwsEksWorkers)SetTargetGroupArns(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"targetGroupArns",
+		val,
+	)
+}
+
+func (j *jsiiProxy_TerraformAwsEksWorkers)SetTenant(val *string) {
+	_jsii_.Set(
+		j,
+		"tenant",
 		val,
 	)
 }

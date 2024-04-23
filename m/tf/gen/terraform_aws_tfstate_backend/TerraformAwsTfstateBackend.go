@@ -38,6 +38,8 @@ type TerraformAwsTfstateBackend interface {
 	ConstructNodeMetadata() *map[string]interface{}
 	Context() interface{}
 	SetContext(val interface{})
+	DeletionProtectionEnabled() *bool
+	SetDeletionProtectionEnabled(val *bool)
 	Delimiter() *string
 	SetDelimiter(val *string)
 	// Experimental.
@@ -125,6 +127,8 @@ type TerraformAwsTfstateBackend interface {
 	SkipAssetCreationFromLocalModules() *bool
 	// Experimental.
 	Source() *string
+	SourcePolicyDocuments() *[]*string
+	SetSourcePolicyDocuments(val *[]*string)
 	Stage() *string
 	SetStage(val *string)
 	Tags() *map[string]*string
@@ -292,6 +296,16 @@ func (j *jsiiProxy_TerraformAwsTfstateBackend) Context() interface{} {
 	_jsii_.Get(
 		j,
 		"context",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_TerraformAwsTfstateBackend) DeletionProtectionEnabled() *bool {
+	var returns *bool
+	_jsii_.Get(
+		j,
+		"deletionProtectionEnabled",
 		&returns,
 	)
 	return returns
@@ -747,6 +761,16 @@ func (j *jsiiProxy_TerraformAwsTfstateBackend) Source() *string {
 	return returns
 }
 
+func (j *jsiiProxy_TerraformAwsTfstateBackend) SourcePolicyDocuments() *[]*string {
+	var returns *[]*string
+	_jsii_.Get(
+		j,
+		"sourcePolicyDocuments",
+		&returns,
+	)
+	return returns
+}
+
 func (j *jsiiProxy_TerraformAwsTfstateBackend) Stage() *string {
 	var returns *string
 	_jsii_.Get(
@@ -964,6 +988,14 @@ func (j *jsiiProxy_TerraformAwsTfstateBackend)SetContext(val interface{}) {
 	_jsii_.Set(
 		j,
 		"context",
+		val,
+	)
+}
+
+func (j *jsiiProxy_TerraformAwsTfstateBackend)SetDeletionProtectionEnabled(val *bool) {
+	_jsii_.Set(
+		j,
+		"deletionProtectionEnabled",
 		val,
 	)
 }
@@ -1218,6 +1250,14 @@ func (j *jsiiProxy_TerraformAwsTfstateBackend)SetS3ReplicationEnabled(val *bool)
 	_jsii_.Set(
 		j,
 		"s3ReplicationEnabled",
+		val,
+	)
+}
+
+func (j *jsiiProxy_TerraformAwsTfstateBackend)SetSourcePolicyDocuments(val *[]*string) {
+	_jsii_.Set(
+		j,
+		"sourcePolicyDocuments",
 		val,
 	)
 }

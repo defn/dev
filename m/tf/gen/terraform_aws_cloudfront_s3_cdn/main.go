@@ -24,6 +24,7 @@ func init() {
 			_jsii_.MemberProperty{JsiiProperty: "allowSslRequestsOnly", GoGetter: "AllowSslRequestsOnly"},
 			_jsii_.MemberProperty{JsiiProperty: "attributes", GoGetter: "Attributes"},
 			_jsii_.MemberProperty{JsiiProperty: "blockOriginPublicAccessEnabled", GoGetter: "BlockOriginPublicAccessEnabled"},
+			_jsii_.MemberProperty{JsiiProperty: "bucketVersioning", GoGetter: "BucketVersioning"},
 			_jsii_.MemberProperty{JsiiProperty: "cachedMethods", GoGetter: "CachedMethods"},
 			_jsii_.MemberProperty{JsiiProperty: "cachePolicyId", GoGetter: "CachePolicyId"},
 			_jsii_.MemberProperty{JsiiProperty: "cdktfStack", GoGetter: "CdktfStack"},

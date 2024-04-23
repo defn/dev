@@ -146,6 +146,14 @@ func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetCreditSpecificationParamet
 	return nil
 }
 
+func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetDescriptorFormatsParameters(val interface{}) error {
+	if val == nil {
+		return fmt.Errorf("parameter val is required, but nil was provided")
+	}
+
+	return nil
+}
+
 func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetElasticGpuSpecificationsParameters(val interface{}) error {
 	if val == nil {
 		return fmt.Errorf("parameter val is required, but nil was provided")

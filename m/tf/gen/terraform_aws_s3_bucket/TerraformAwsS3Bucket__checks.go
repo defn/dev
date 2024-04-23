@@ -154,6 +154,14 @@ func (j *jsiiProxy_TerraformAwsS3Bucket) validateSetObjectLockConfigurationParam
 	return nil
 }
 
+func (j *jsiiProxy_TerraformAwsS3Bucket) validateSetS3ReplicationRulesParameters(val interface{}) error {
+	if val == nil {
+		return fmt.Errorf("parameter val is required, but nil was provided")
+	}
+
+	return nil
+}
+
 func (j *jsiiProxy_TerraformAwsS3Bucket) validateSetWebsiteConfigurationParameters(val interface{}) error {
 	if val == nil {
 		return fmt.Errorf("parameter val is required, but nil was provided")

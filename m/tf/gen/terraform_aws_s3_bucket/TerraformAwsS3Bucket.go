@@ -26,8 +26,6 @@ type TerraformAwsS3Bucket interface {
 	SetAllowedBucketActions(val *[]*string)
 	AllowEncryptedUploadsOnly() *bool
 	SetAllowEncryptedUploadsOnly(val *bool)
-	AllowPublicWebsite() *bool
-	SetAllowPublicWebsite(val *bool)
 	AllowSslRequestsOnly() *bool
 	SetAllowSslRequestsOnly(val *bool)
 	Attributes() *[]*string
@@ -110,8 +108,6 @@ type TerraformAwsS3Bucket interface {
 	Node() constructs.Node
 	ObjectLockConfiguration() interface{}
 	SetObjectLockConfiguration(val interface{})
-	Policy() *string
-	SetPolicy(val *string)
 	PrivilegedPrincipalActions() *[]*string
 	SetPrivilegedPrincipalActions(val *[]*string)
 	PrivilegedPrincipalArns() *[]*map[string]*[]*string
@@ -135,8 +131,8 @@ type TerraformAwsS3Bucket interface {
 	SetS3ReplicationEnabled(val *bool)
 	S3ReplicationPermissionsBoundaryArn() *string
 	SetS3ReplicationPermissionsBoundaryArn(val *string)
-	S3ReplicationRules() *[]interface{}
-	SetS3ReplicationRules(val *[]interface{})
+	S3ReplicationRules() interface{}
+	SetS3ReplicationRules(val interface{})
 	S3ReplicationSourceRoles() *[]*string
 	SetS3ReplicationSourceRoles(val *[]*string)
 	SecretAccessKeyOutput() *string
@@ -145,6 +141,8 @@ type TerraformAwsS3Bucket interface {
 	SkipAssetCreationFromLocalModules() *bool
 	// Experimental.
 	Source() *string
+	SourceIpAllowList() *[]*string
+	SetSourceIpAllowList(val *[]*string)
 	SourcePolicyDocuments() *[]*string
 	SetSourcePolicyDocuments(val *[]*string)
 	SseAlgorithm() *string
@@ -273,16 +271,6 @@ func (j *jsiiProxy_TerraformAwsS3Bucket) AllowEncryptedUploadsOnly() *bool {
 	_jsii_.Get(
 		j,
 		"allowEncryptedUploadsOnly",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_TerraformAwsS3Bucket) AllowPublicWebsite() *bool {
-	var returns *bool
-	_jsii_.Get(
-		j,
-		"allowPublicWebsite",
 		&returns,
 	)
 	return returns
@@ -718,16 +706,6 @@ func (j *jsiiProxy_TerraformAwsS3Bucket) ObjectLockConfiguration() interface{} {
 	return returns
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket) Policy() *string {
-	var returns *string
-	_jsii_.Get(
-		j,
-		"policy",
-		&returns,
-	)
-	return returns
-}
-
 func (j *jsiiProxy_TerraformAwsS3Bucket) PrivilegedPrincipalActions() *[]*string {
 	var returns *[]*string
 	_jsii_.Get(
@@ -848,8 +826,8 @@ func (j *jsiiProxy_TerraformAwsS3Bucket) S3ReplicationPermissionsBoundaryArn() *
 	return returns
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket) S3ReplicationRules() *[]interface{} {
-	var returns *[]interface{}
+func (j *jsiiProxy_TerraformAwsS3Bucket) S3ReplicationRules() interface{} {
+	var returns interface{}
 	_jsii_.Get(
 		j,
 		"s3ReplicationRules",
@@ -903,6 +881,16 @@ func (j *jsiiProxy_TerraformAwsS3Bucket) Source() *string {
 	_jsii_.Get(
 		j,
 		"source",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_TerraformAwsS3Bucket) SourceIpAllowList() *[]*string {
+	var returns *[]*string
+	_jsii_.Get(
+		j,
+		"sourceIpAllowList",
 		&returns,
 	)
 	return returns
@@ -1152,14 +1140,6 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetAllowEncryptedUploadsOnly(val *bool) 
 	_jsii_.Set(
 		j,
 		"allowEncryptedUploadsOnly",
-		val,
-	)
-}
-
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetAllowPublicWebsite(val *bool) {
-	_jsii_.Set(
-		j,
-		"allowPublicWebsite",
 		val,
 	)
 }
@@ -1428,14 +1408,6 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetObjectLockConfiguration(val interface
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetPolicy(val *string) {
-	_jsii_.Set(
-		j,
-		"policy",
-		val,
-	)
-}
-
 func (j *jsiiProxy_TerraformAwsS3Bucket)SetPrivilegedPrincipalActions(val *[]*string) {
 	_jsii_.Set(
 		j,
@@ -1508,7 +1480,10 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetS3ReplicationPermissionsBoundaryArn(v
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsS3Bucket)SetS3ReplicationRules(val *[]interface{}) {
+func (j *jsiiProxy_TerraformAwsS3Bucket)SetS3ReplicationRules(val interface{}) {
+	if err := j.validateSetS3ReplicationRulesParameters(val); err != nil {
+		panic(err)
+	}
 	_jsii_.Set(
 		j,
 		"s3ReplicationRules",
@@ -1520,6 +1495,14 @@ func (j *jsiiProxy_TerraformAwsS3Bucket)SetS3ReplicationSourceRoles(val *[]*stri
 	_jsii_.Set(
 		j,
 		"s3ReplicationSourceRoles",
+		val,
+	)
+}
+
+func (j *jsiiProxy_TerraformAwsS3Bucket)SetSourceIpAllowList(val *[]*string) {
+	_jsii_.Set(
+		j,
+		"sourceIpAllowList",
 		val,
 	)
 }

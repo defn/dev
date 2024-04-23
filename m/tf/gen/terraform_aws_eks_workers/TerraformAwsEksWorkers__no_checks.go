@@ -60,6 +60,10 @@ func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetCreditSpecificationParamet
 	return nil
 }
 
+func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetDescriptorFormatsParameters(val interface{}) error {
+	return nil
+}
+
 func (j *jsiiProxy_TerraformAwsEksWorkers) validateSetElasticGpuSpecificationsParameters(val interface{}) error {
 	return nil
 }

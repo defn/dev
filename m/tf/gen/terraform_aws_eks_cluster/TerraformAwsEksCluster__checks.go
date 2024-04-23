@@ -90,6 +90,38 @@ func validateTerraformAwsEksCluster_IsTerraformElementParameters(x interface{}) 
 	return nil
 }
 
+func (j *jsiiProxy_TerraformAwsEksCluster) validateSetAccessConfigParameters(val interface{}) error {
+	if val == nil {
+		return fmt.Errorf("parameter val is required, but nil was provided")
+	}
+
+	return nil
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster) validateSetAccessEntriesParameters(val interface{}) error {
+	if val == nil {
+		return fmt.Errorf("parameter val is required, but nil was provided")
+	}
+
+	return nil
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster) validateSetAccessEntryMapParameters(val interface{}) error {
+	if val == nil {
+		return fmt.Errorf("parameter val is required, but nil was provided")
+	}
+
+	return nil
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster) validateSetAccessPolicyAssociationsParameters(val interface{}) error {
+	if val == nil {
+		return fmt.Errorf("parameter val is required, but nil was provided")
+	}
+
+	return nil
+}
+
 func (j *jsiiProxy_TerraformAwsEksCluster) validateSetAddonsParameters(val interface{}) error {
 	if val == nil {
 		return fmt.Errorf("parameter val is required, but nil was provided")
@@ -138,31 +170,7 @@ func (j *jsiiProxy_TerraformAwsEksCluster) validateSetDescriptorFormatsParameter
 	return nil
 }
 
-func (j *jsiiProxy_TerraformAwsEksCluster) validateSetMapAdditionalIamRolesParameters(val interface{}) error {
-	if val == nil {
-		return fmt.Errorf("parameter val is required, but nil was provided")
-	}
-
-	return nil
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) validateSetMapAdditionalIamUsersParameters(val interface{}) error {
-	if val == nil {
-		return fmt.Errorf("parameter val is required, but nil was provided")
-	}
-
-	return nil
-}
-
 func (j *jsiiProxy_TerraformAwsEksCluster) validateSetSubnetIdsParameters(val *[]*string) error {
-	if val == nil {
-		return fmt.Errorf("parameter val is required, but nil was provided")
-	}
-
-	return nil
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) validateSetVpcIdParameters(val *string) error {
 	if val == nil {
 		return fmt.Errorf("parameter val is required, but nil was provided")
 	}

@@ -15,8 +15,43 @@ type TerraformAwsEksClusterConfig struct {
 	SkipAssetCreationFromLocalModules *bool `field:"optional" json:"skipAssetCreationFromLocalModules" yaml:"skipAssetCreationFromLocalModules"`
 	// A list of subnet IDs to launch the cluster in.
 	SubnetIds *[]*string `field:"required" json:"subnetIds" yaml:"subnetIds"`
-	// VPC ID for the EKS cluster.
-	VpcId *string `field:"required" json:"vpcId" yaml:"vpcId"`
+	// Access configuration for the EKS cluster.
+	AccessConfig interface{} `field:"optional" json:"accessConfig" yaml:"accessConfig"`
+	// List of IAM principles to allow to access the EKS cluster.
+	//
+	// It is recommended to use the default `user_name` because the default includes
+	// the IAM role or user name and the session name for assumed roles.
+	// Use when Principal ARN is not known at plan time.
+	AccessEntries interface{} `field:"optional" json:"accessEntries" yaml:"accessEntries"`
+	// Map of list of IAM roles for the EKS non-managed worker nodes.
+	//
+	// The map key is the node type, either `EC2_LINUX` or `EC2_WINDOWS`,
+	// and the list contains the IAM roles of the nodes of that type.
+	// There is no need for or utility in creating Fargate access entries, as those
+	// are always created automatically by AWS, just as with managed nodes.
+	// Use when Principal ARN is not known at plan time.
+	//
+	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
+	AccessEntriesForNodes *map[string]*[]*string `field:"optional" json:"accessEntriesForNodes" yaml:"accessEntriesForNodes"`
+	// Map of IAM Principal ARNs to access configuration.
+	//
+	// Preferred over other inputs as this configuration remains stable
+	// when elements are added or removed, but it requires that the Principal ARNs
+	// and Policy ARNs are known at plan time.
+	// Can be used along with other `access_*` inputs, but do not duplicate entries.
+	// Map `access_policy_associations` keys are policy ARNs, policy
+	// full name (AmazonEKSViewPolicy), or short name (View).
+	// It is recommended to use the default `user_name` because the default includes
+	// IAM role or user name and the session name for assumed roles.
+	// As a special case in support of backwards compatibility, membership in the
+	// `system:masters` group is is translated to an association with the ClusterAdmin policy.
+	// In all other cases, including any `system:*` group in `kubernetes_groups` is prohibited.
+	AccessEntryMap interface{} `field:"optional" json:"accessEntryMap" yaml:"accessEntryMap"`
+	// List of AWS managed EKS access policies to associate with IAM principles.
+	//
+	// Use when Principal ARN or Policy ARN is not known at plan time.
+	// `policy_arn` can be the full ARN, the full name (AmazonEKSViewPolicy) or short name (View).
+	AccessPolicyAssociations interface{} `field:"optional" json:"accessPolicyAssociations" yaml:"accessPolicyAssociations"`
 	// Additional key-value pairs to add to each map in `tags_as_list_of_maps`.
 	//
 	// Not added to `tags` or `id`.
@@ -25,7 +60,7 @@ type TerraformAwsEksClusterConfig struct {
 	//
 	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	AdditionalTagMap *map[string]*string `field:"optional" json:"additionalTagMap" yaml:"additionalTagMap"`
-	// Manages [`aws_eks_addon`](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_addon) resources.
+	// Manages [`aws_eks_addon`](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_addon) resources. Note: `resolve_conflicts` is deprecated. If `resolve_conflicts` is set and `resolve_conflicts_on_create` or `resolve_conflicts_on_update` is not set, `resolve_conflicts` will be used instead. If `resolve_conflicts_on_create` is not set and `resolve_conflicts` is `PRESERVE`, `resolve_conflicts_on_create` will be set to `NONE`.
 	Addons interface{} `field:"optional" json:"addons" yaml:"addons"`
 	// If provided, all addons will depend on this object, and therefore not be installed until this object is finalized.
 	//
@@ -38,13 +73,6 @@ type TerraformAwsEksClusterConfig struct {
 	AllowedCidrBlocks *[]*string `field:"optional" json:"allowedCidrBlocks" yaml:"allowedCidrBlocks"`
 	// A list of IDs of Security Groups to allow access to the cluster.
 	AllowedSecurityGroupIds *[]*string `field:"optional" json:"allowedSecurityGroupIds" yaml:"allowedSecurityGroupIds"`
-	// DEPRECATED: Use `allowed_security_group_ids` instead.
-	//
-	// Historical description: List of Security Group IDs to be allowed to connect to the EKS cluster.
-	// Historical default: `[]`.
-	AllowedSecurityGroups *[]*string `field:"optional" json:"allowedSecurityGroups" yaml:"allowedSecurityGroups"`
-	// Whether to apply the ConfigMap to allow worker nodes to join the EKS cluster and allow additional users, accounts and roles to acces the cluster true.
-	ApplyConfigMapAwsAuth *bool `field:"optional" json:"applyConfigMapAwsAuth" yaml:"applyConfigMapAwsAuth"`
 	// A list of IDs of Security Groups to associate the cluster with.
 	//
 	// These security groups will not be modified.
@@ -56,8 +84,6 @@ type TerraformAwsEksClusterConfig struct {
 	// end of the list. The elements of the list are joined by the `delimiter`
 	// and treated as a single ID element.
 	Attributes *[]*string `field:"optional" json:"attributes" yaml:"attributes"`
-	// If true, remove double quotes from the generated aws-auth ConfigMap YAML to reduce spurious diffs in plans true.
-	AwsAuthYamlStripQuotes *bool `field:"optional" json:"awsAuthYamlStripQuotes" yaml:"awsAuthYamlStripQuotes"`
 	// If provided, the KMS Key ID to use to encrypt AWS CloudWatch logs.
 	CloudwatchLogGroupKmsKeyId *string `field:"optional" json:"cloudwatchLogGroupKmsKeyId" yaml:"cloudwatchLogGroupKmsKeyId"`
 	// Override label module default cluster attributes cluster.
@@ -91,14 +117,6 @@ type TerraformAwsEksClusterConfig struct {
 	Context interface{} `field:"optional" json:"context" yaml:"context"`
 	// Set `false` to use existing `eks_cluster_service_role_arn` instead of creating one true.
 	CreateEksServiceRole *bool `field:"optional" json:"createEksServiceRole" yaml:"createEksServiceRole"`
-	// Set to `true` to create and configure an additional Security Group for the cluster.
-	//
-	// Only for backwards compatibility, if you are updating this module to the latest version on existing clusters, not recommended for new clusters.
-	// EKS creates a managed Security Group for the cluster automatically, places the control plane and managed nodes into the Security Group,
-	// and you can also allow unmanaged nodes to communicate with the cluster by using the `allowed_security_group_ids` variable.
-	// The additional Security Group is kept in the module for backwards compatibility and will be removed in future releases along with this variable.
-	// See https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html for more details.
-	CreateSecurityGroup *bool `field:"optional" json:"createSecurityGroup" yaml:"createSecurityGroup"`
 	// A List of Objects, which are custom security group rules that.
 	CustomIngressRules interface{} `field:"optional" json:"customIngressRules" yaml:"customIngressRules"`
 	// Delimiter to be used between ID elements.
@@ -119,15 +137,6 @@ type TerraformAwsEksClusterConfig struct {
 	// identical to how they appear in `id`.
 	// Default is `{}` (`descriptors` output will be empty).
 	DescriptorFormats interface{} `field:"optional" json:"descriptorFormats" yaml:"descriptorFormats"`
-	// URL of a dummy API server for the Kubernetes server to use when the real one is unknown.
-	//
-	// This is a workaround to ignore connection failures that break Terraform even though the results do not matter.
-	// You can disable it by setting it to `null`; however, as of Kubernetes provider v2.3.2, doing so _will_
-	// cause Terraform to fail in several situations unless you provide a valid `kubeconfig` file
-	// via `kubeconfig_path` and set `kubeconfig_path_enabled` to `true`.
-	//
-	// https://jsonplaceholder.typicode.com
-	DummyKubeapiServer *string `field:"optional" json:"dummyKubeapiServer" yaml:"dummyKubeapiServer"`
 	// The ARN of an IAM role for the EKS cluster to use that provides permissions for the Kubernetes control plane to perform needed AWS API operations.
 	//
 	// Required if `create_eks_service_role` is `false`, ignored otherwise.
@@ -157,30 +166,6 @@ type TerraformAwsEksClusterConfig struct {
 	// Set to `null` for keep the existing setting, which defaults to `0`.
 	// Does not affect `id_full`.
 	IdLengthLimit *float64 `field:"optional" json:"idLengthLimit" yaml:"idLengthLimit"`
-	// Context to choose from the Kubernetes kube config file.
-	KubeconfigContext *string `field:"optional" json:"kubeconfigContext" yaml:"kubeconfigContext"`
-	// The Kubernetes provider `config_path` setting to use when `kubeconfig_path_enabled` is `true`.
-	KubeconfigPath *string `field:"optional" json:"kubeconfigPath" yaml:"kubeconfigPath"`
-	// If `true`, configure the Kubernetes provider with `kubeconfig_path` and use it for authenticating to the EKS cluster.
-	KubeconfigPathEnabled *bool `field:"optional" json:"kubeconfigPathEnabled" yaml:"kubeconfigPathEnabled"`
-	// If `true`, use an `aws_eks_cluster_auth` data source to authenticate to the EKS cluster. Disabled by `kubeconfig_path_enabled` or `kube_exec_auth_enabled`.
-	//
-	// true.
-	KubeDataAuthEnabled *bool `field:"optional" json:"kubeDataAuthEnabled" yaml:"kubeDataAuthEnabled"`
-	// The AWS config profile for `aws eks get-token` to use.
-	KubeExecAuthAwsProfile *string `field:"optional" json:"kubeExecAuthAwsProfile" yaml:"kubeExecAuthAwsProfile"`
-	// If `true`, pass `kube_exec_auth_aws_profile` as the `profile` to `aws eks get-token`.
-	KubeExecAuthAwsProfileEnabled *bool `field:"optional" json:"kubeExecAuthAwsProfileEnabled" yaml:"kubeExecAuthAwsProfileEnabled"`
-	// If `true`, use the Kubernetes provider `exec` feature to execute `aws eks get-token` to authenticate to the EKS cluster.
-	//
-	// Disabled by `kubeconfig_path_enabled`, overrides `kube_data_auth_enabled`.
-	KubeExecAuthEnabled *bool `field:"optional" json:"kubeExecAuthEnabled" yaml:"kubeExecAuthEnabled"`
-	// The role ARN for `aws eks get-token` to use.
-	KubeExecAuthRoleArn *string `field:"optional" json:"kubeExecAuthRoleArn" yaml:"kubeExecAuthRoleArn"`
-	// If `true`, pass `kube_exec_auth_role_arn` as the role ARN to `aws eks get-token`.
-	KubeExecAuthRoleArnEnabled *bool `field:"optional" json:"kubeExecAuthRoleArnEnabled" yaml:"kubeExecAuthRoleArnEnabled"`
-	// Set to `true` to ignore IAM role changes in the Kubernetes Auth ConfigMap true.
-	KubernetesConfigMapIgnoreRoleChanges *bool `field:"optional" json:"kubernetesConfigMapIgnoreRoleChanges" yaml:"kubernetesConfigMapIgnoreRoleChanges"`
 	// Set true to use IPv6 addresses for Kubernetes pods and services.
 	KubernetesNetworkIpv6Enabled *bool `field:"optional" json:"kubernetesNetworkIpv6Enabled" yaml:"kubernetesNetworkIpv6Enabled"`
 	// Desired Kubernetes master version.
@@ -218,16 +203,8 @@ type TerraformAwsEksClusterConfig struct {
 	// Set this to `title` and set `delimiter` to `""` to yield Pascal Case IDs.
 	// Default value: `lower`.
 	LabelValueCase *string `field:"optional" json:"labelValueCase" yaml:"labelValueCase"`
-	// shell to use for local_exec /bin/sh -c.
-	LocalExecInterpreter *[]*string `field:"optional" json:"localExecInterpreter" yaml:"localExecInterpreter"`
 	// Flag to enable/disable the ingress and egress rules for the EKS managed Security Group true.
 	ManagedSecurityGroupRulesEnabled *bool `field:"optional" json:"managedSecurityGroupRulesEnabled" yaml:"managedSecurityGroupRulesEnabled"`
-	// Additional AWS account numbers to add to `config-map-aws-auth` ConfigMap.
-	MapAdditionalAwsAccounts *[]*string `field:"optional" json:"mapAdditionalAwsAccounts" yaml:"mapAdditionalAwsAccounts"`
-	// Additional IAM roles to add to `config-map-aws-auth` ConfigMap.
-	MapAdditionalIamRoles interface{} `field:"optional" json:"mapAdditionalIamRoles" yaml:"mapAdditionalIamRoles"`
-	// Additional IAM users to add to `config-map-aws-auth` ConfigMap.
-	MapAdditionalIamUsers interface{} `field:"optional" json:"mapAdditionalIamUsers" yaml:"mapAdditionalIamUsers"`
 	// ID element.
 	//
 	// Usually the component or solution name, e.g. 'app' or 'jenkins'.
@@ -273,17 +250,5 @@ type TerraformAwsEksClusterConfig struct {
 	//
 	// A customer identifier, indicating who this instance of a resource is for.
 	Tenant *string `field:"optional" json:"tenant" yaml:"tenant"`
-	// `local-exec` command to execute to determine if the EKS cluster is healthy.
-	//
-	// Cluster endpoint URL is available as environment variable `ENDPOINT`
-	// if test -n "$ENDPOINT"; then curl --silent --fail --retry 30 --retry-delay 10 --retry-connrefused --max-time 11 --insecure --output /dev/null $ENDPOINT/healthz; fi.
-	WaitForClusterCommand *string `field:"optional" json:"waitForClusterCommand" yaml:"waitForClusterCommand"`
-	// List of Role ARNs of the worker nodes.
-	WorkersRoleArns *[]*string `field:"optional" json:"workersRoleArns" yaml:"workersRoleArns"`
-	// DEPRECATED: Use `allowed_security_group_ids` instead.
-	//
-	// Historical description: Security Group IDs of the worker nodes.
-	// Historical default: `[]`.
-	WorkersSecurityGroupIds *[]*string `field:"optional" json:"workersSecurityGroupIds" yaml:"workersSecurityGroupIds"`
 }
 

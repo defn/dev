@@ -96,7 +96,6 @@ go-upgrade:
 update:
 # cd tf && env SYNTH_HCL_OUTPUT=true cli infra && terraform fmt cdktf.out/stacks/*
 	$(MAKE) cdktf
-	cd tf && $(MAKE) build upgrade
 
 regen:
 	@mark gazelle

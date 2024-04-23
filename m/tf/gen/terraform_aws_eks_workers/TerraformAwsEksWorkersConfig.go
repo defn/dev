@@ -33,9 +33,12 @@ type TerraformAwsEksWorkersConfig struct {
 	VpcId *string `field:"required" json:"vpcId" yaml:"vpcId"`
 	// Additional list of security groups that will be attached to the autoscaling group.
 	AdditionalSecurityGroupIds *[]*string `field:"optional" json:"additionalSecurityGroupIds" yaml:"additionalSecurityGroupIds"`
-	// Additional tags for appending to tags_as_list_of_maps.
+	// Additional key-value pairs to add to each map in `tags_as_list_of_maps`.
 	//
-	// Not added to `tags`.
+	// Not added to `tags` or `id`.
+	// This is for some rare cases where resources want additional configuration of tags
+	// and therefore take a list of maps with tag key, value, and additional configuration.
+	//
 	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	AdditionalTagMap *map[string]*string `field:"optional" json:"additionalTagMap" yaml:"additionalTagMap"`
 	// Additional commands to execute on each worker node after joining the EKS cluster (after executing the `bootstrap.sh` script). For mot info, see https://kubedex.com/90-days-of-aws-eks-in-production.
@@ -46,7 +49,12 @@ type TerraformAwsEksWorkersConfig struct {
 	AllowedSecurityGroups *[]*string `field:"optional" json:"allowedSecurityGroups" yaml:"allowedSecurityGroups"`
 	// Associate a public IP address with an instance in a VPC.
 	AssociatePublicIpAddress *bool `field:"optional" json:"associatePublicIpAddress" yaml:"associatePublicIpAddress"`
-	// Additional attributes (e.g. `1`).
+	// ID element.
+	//
+	// Additional attributes (e.g. `workers` or `cluster`) to add to `id`,
+	// in the order they appear in the list. New attributes are appended to the
+	// end of the list. The elements of the list are joined by the `delimiter`
+	// and treated as a single ID element.
 	Attributes *[]*string `field:"optional" json:"attributes" yaml:"attributes"`
 	// Additional tags only for the autoscaling group, e.g. "k8s.io/cluster-autoscaler/node-template/taint/dedicated" = "ci-cd:NoSchedule". The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}.
 	AutoscalingGroupTags *map[string]*string `field:"optional" json:"autoscalingGroupTags" yaml:"autoscalingGroupTags"`
@@ -97,17 +105,31 @@ type TerraformAwsEksWorkersConfig struct {
 	CreditSpecification interface{} `field:"optional" json:"creditSpecification" yaml:"creditSpecification"`
 	// The amount of time, in seconds, after a scaling activity completes before another scaling activity can start 300.
 	DefaultCooldown *float64 `field:"optional" json:"defaultCooldown" yaml:"defaultCooldown"`
-	// Delimiter to be used between `namespace`, `environment`, `stage`, `name` and `attributes`.
+	// Delimiter to be used between ID elements.
 	//
 	// Defaults to `-` (hyphen). Set to `""` to use no delimiter at all.
 	Delimiter *string `field:"optional" json:"delimiter" yaml:"delimiter"`
+	// Describe additional descriptors to be output in the `descriptors` output map.
+	//
+	// Map of maps. Keys are names of descriptors. Values are maps of the form
+	// `{
+	//    format = string
+	//    labels = list(string)
+	// }`
+	// (Type is `any` so the map values can later be enhanced to provide additional options.)
+	// `format` is a Terraform format string to be passed to the `format()` function.
+	// `labels` is a list of labels, in order, to pass to `format()` function.
+	// Label values will be normalized before being passed to `format()` so they will be
+	// identical to how they appear in `id`.
+	// Default is `{}` (`descriptors` output will be empty).
+	DescriptorFormats interface{} `field:"optional" json:"descriptorFormats" yaml:"descriptorFormats"`
 	// If `true`, enables EC2 Instance Termination Protection.
 	DisableApiTermination *bool `field:"optional" json:"disableApiTermination" yaml:"disableApiTermination"`
 	// If true, the launched EC2 instance will be EBS-optimized.
 	EbsOptimized *bool `field:"optional" json:"ebsOptimized" yaml:"ebsOptimized"`
 	// AMI name filter to lookup the most recent EKS AMI if `image_id` is not provided amazon-eks-node-*.
 	EksWorkerAmiNameFilter *string `field:"optional" json:"eksWorkerAmiNameFilter" yaml:"eksWorkerAmiNameFilter"`
-	// A regex string to apply to the AMI list returned by AWS ^amazon-eks-node-[1-9,.]+-v[0-9]{8}$.
+	// A regex string to apply to the AMI list returned by AWS ^amazon-eks-node-[0-9,.]+-v[0-9]{8}$.
 	EksWorkerAmiNameRegex *string `field:"optional" json:"eksWorkerAmiNameRegex" yaml:"eksWorkerAmiNameRegex"`
 	// Specifications of Elastic GPU to attach to the instances.
 	ElasticGpuSpecifications interface{} `field:"optional" json:"elasticGpuSpecifications" yaml:"elasticGpuSpecifications"`
@@ -127,7 +149,9 @@ type TerraformAwsEksWorkersConfig struct {
 	EnabledMetrics *[]*string `field:"optional" json:"enabledMetrics" yaml:"enabledMetrics"`
 	// Enable/disable detailed monitoring true.
 	EnableMonitoring *bool `field:"optional" json:"enableMonitoring" yaml:"enableMonitoring"`
-	// Environment, e.g. 'uw2', 'us-west-2', OR 'prod', 'staging', 'dev', 'UAT'.
+	// ID element.
+	//
+	// Usually used for region e.g. 'uw2', 'us-west-2', OR role 'prod', 'staging', 'dev', 'UAT'
 	Environment *string `field:"optional" json:"environment" yaml:"environment"`
 	// Allows deleting the autoscaling group without waiting for all instances in the pool to terminate.
 	//
@@ -143,7 +167,7 @@ type TerraformAwsEksWorkersConfig struct {
 	// Limit `id` to this many characters (minimum 6).
 	//
 	// Set to `0` for unlimited length.
-	// Set to `null` for default, which is `0`.
+	// Set to `null` for keep the existing setting, which defaults to `0`.
 	// Does not affect `id_full`.
 	IdLengthLimit *float64 `field:"optional" json:"idLengthLimit" yaml:"idLengthLimit"`
 	// EC2 image ID to launch.
@@ -161,22 +185,42 @@ type TerraformAwsEksWorkersConfig struct {
 	KeyName *string `field:"optional" json:"keyName" yaml:"keyName"`
 	// Extra arguments to pass to kubelet, like "--register-with-taints=dedicated=ci-cd:NoSchedule --node-labels=purpose=ci-worker".
 	KubeletExtraArgs *string `field:"optional" json:"kubeletExtraArgs" yaml:"kubeletExtraArgs"`
-	// The letter case of label keys (`tag` names) (i.e. `name`, `namespace`, `environment`, `stage`, `attributes`) to use in `tags`. Possible values: `lower`, `title`, `upper`. Default value: `title`.
+	// Controls the letter case of the `tags` keys (label names) for tags generated by this module.
+	//
+	// Does not affect keys of tags passed in via the `tags` input.
+	// Possible values: `lower`, `title`, `upper`.
+	// Default value: `title`.
 	LabelKeyCase *string `field:"optional" json:"labelKeyCase" yaml:"labelKeyCase"`
-	// The naming order of the id output and Name tag.
+	// The order in which the labels (ID elements) appear in the `id`.
 	//
 	// Defaults to ["namespace", "environment", "stage", "name", "attributes"].
-	// You can omit any of the 5 elements, but at least one must be present.
+	// You can omit any of the 6 labels ("tenant" is the 6th), but at least one must be present.
 	LabelOrder *[]*string `field:"optional" json:"labelOrder" yaml:"labelOrder"`
-	// The letter case of output label values (also used in `tags` and `id`).
+	// Set of labels (ID elements) to include as tags in the `tags` output.
 	//
+	// Default is to include all labels.
+	// Tags with empty values will not be included in the `tags` output.
+	// Set to `[]` to suppress all generated tags.
+	// **Notes:**
+	//   The value of the `name` tag, if included, will be the `id`, not the `name`.
+	//   Unlike other `null-label` inputs, the initial setting of `labels_as_tags` cannot be
+	//   changed in later chained modules. Attempts to change it will be silently ignored.
+	//
+	// default.
+	LabelsAsTags *[]*string `field:"optional" json:"labelsAsTags" yaml:"labelsAsTags"`
+	// Controls the letter case of ID elements (labels) as included in `id`, set as tag values, and output by this module individually.
+	//
+	// Does not affect values of tags passed in via the `tags` input.
 	// Possible values: `lower`, `title`, `upper` and `none` (no transformation).
+	// Set this to `title` and set `delimiter` to `""` to yield Pascal Case IDs.
 	// Default value: `lower`.
 	LabelValueCase *string `field:"optional" json:"labelValueCase" yaml:"labelValueCase"`
 	// A list of elastic load balancer names to add to the autoscaling group.
 	//
 	// Only valid for classic load balancers. For ALBs, use `target_group_arns` instead
 	LoadBalancers *[]*string `field:"optional" json:"loadBalancers" yaml:"loadBalancers"`
+	// The maximum amount of time, in seconds, that an instance can be in service, values must be either equal to 0 or between 604800 and 31536000 seconds.
+	MaxInstanceLifetime *float64 `field:"optional" json:"maxInstanceLifetime" yaml:"maxInstanceLifetime"`
 	// Set false to disable the Instance Metadata Service.
 	//
 	// true.
@@ -204,9 +248,15 @@ type TerraformAwsEksWorkersConfig struct {
 	//
 	// Launch template is automatically generated. https://www.terraform.io/docs/providers/aws/r/autoscaling_group.html#mixed_instances_policy-1
 	MixedInstancesPolicy interface{} `field:"optional" json:"mixedInstancesPolicy" yaml:"mixedInstancesPolicy"`
-	// Solution name, e.g. 'app' or 'jenkins'.
+	// ID element.
+	//
+	// Usually the component or solution name, e.g. 'app' or 'jenkins'.
+	// This is the only ID element not also included as a `tag`.
+	// The "name" tag is set to the full `id` string. There is no tag with the value of the `name` input.
 	Name *string `field:"optional" json:"name" yaml:"name"`
-	// Namespace, which could be your organization name or abbreviation, e.g. 'eg' or 'cp'.
+	// ID element.
+	//
+	// Usually an abbreviation of your organization name, e.g. 'eg' or 'cp', to help ensure generated IDs are globally unique
 	Namespace *string `field:"optional" json:"namespace" yaml:"namespace"`
 	// The placement specifications of the instances.
 	Placement interface{} `field:"optional" json:"placement" yaml:"placement"`
@@ -216,8 +266,9 @@ type TerraformAwsEksWorkersConfig struct {
 	//
 	// The autoscaling group will not select instances with this setting for terminination during scale in events.
 	ProtectFromScaleIn *bool `field:"optional" json:"protectFromScaleIn" yaml:"protectFromScaleIn"`
-	// Regex to replace chars with empty string in `namespace`, `environment`, `stage` and `name`.
+	// Terraform regular expression (regex) string.
 	//
+	// Characters matching the regex will be removed from the ID elements.
 	// If not set, `"/[^a-zA-Z0-9-]/"` is used to remove all characters other than hyphens, letters and digits.
 	RegexReplaceChars *string `field:"optional" json:"regexReplaceChars" yaml:"regexReplaceChars"`
 	// Specifies whether the adjustment is an absolute number or a percentage of the current capacity.
@@ -250,16 +301,24 @@ type TerraformAwsEksWorkersConfig struct {
 	ScaleUpScalingAdjustment *float64 `field:"optional" json:"scaleUpScalingAdjustment" yaml:"scaleUpScalingAdjustment"`
 	// The ARN of the service-linked role that the ASG will use to call other AWS services.
 	ServiceLinkedRoleArn *string `field:"optional" json:"serviceLinkedRoleArn" yaml:"serviceLinkedRoleArn"`
-	// Stage, e.g. 'prod', 'staging', 'dev', OR 'source', 'build', 'test', 'deploy', 'release'.
+	// ID element.
+	//
+	// Usually used to indicate role, e.g. 'prod', 'staging', 'source', 'build', 'test', 'deploy', 'release'
 	Stage *string `field:"optional" json:"stage" yaml:"stage"`
 	// A list of processes to suspend for the AutoScaling Group.
 	//
 	// The allowed values are `Launch`, `Terminate`, `HealthCheck`, `ReplaceUnhealthy`, `AZRebalance`, `AlarmNotification`, `ScheduledActions`, `AddToLoadBalancer`. Note that if you suspend either the `Launch` or `Terminate` process types, it can prevent your autoscaling group from functioning properly.
 	SuspendedProcesses *[]*string `field:"optional" json:"suspendedProcesses" yaml:"suspendedProcesses"`
-	// Additional tags (e.g. `map('BusinessUnit','XYZ')` The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}.
+	// Additional tags (e.g. `{'BusinessUnit': 'XYZ'}`). Neither the tag keys nor the tag values will be modified by this module.
+	//
+	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	Tags *map[string]*string `field:"optional" json:"tags" yaml:"tags"`
 	// A list of aws_alb_target_group ARNs, for use with Application Load Balancing.
 	TargetGroupArns *[]*string `field:"optional" json:"targetGroupArns" yaml:"targetGroupArns"`
+	// ID element _(Rarely used, not included by default)_.
+	//
+	// A customer identifier, indicating who this instance of a resource is for.
+	Tenant *string `field:"optional" json:"tenant" yaml:"tenant"`
 	// A list of policies to decide how the instances in the auto scale group should be terminated.
 	//
 	// The allowed values are `OldestInstance`, `NewestInstance`, `OldestLaunchConfiguration`, `ClosestToNextInstanceHour`, `Default`

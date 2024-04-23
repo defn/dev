@@ -14,6 +14,16 @@ import (
 // Source at ./mod/terraform-aws-eks-cluster
 type TerraformAwsEksCluster interface {
 	cdktf.TerraformModule
+	AccessConfig() interface{}
+	SetAccessConfig(val interface{})
+	AccessEntries() interface{}
+	SetAccessEntries(val interface{})
+	AccessEntriesForNodes() *map[string]*[]*string
+	SetAccessEntriesForNodes(val *map[string]*[]*string)
+	AccessEntryMap() interface{}
+	SetAccessEntryMap(val interface{})
+	AccessPolicyAssociations() interface{}
+	SetAccessPolicyAssociations(val interface{})
 	AdditionalTagMap() *map[string]*string
 	SetAdditionalTagMap(val *map[string]*string)
 	Addons() interface{}
@@ -24,16 +34,10 @@ type TerraformAwsEksCluster interface {
 	SetAllowedCidrBlocks(val *[]*string)
 	AllowedSecurityGroupIds() *[]*string
 	SetAllowedSecurityGroupIds(val *[]*string)
-	AllowedSecurityGroups() *[]*string
-	SetAllowedSecurityGroups(val *[]*string)
-	ApplyConfigMapAwsAuth() *bool
-	SetApplyConfigMapAwsAuth(val *bool)
 	AssociatedSecurityGroupIds() *[]*string
 	SetAssociatedSecurityGroupIds(val *[]*string)
 	Attributes() *[]*string
 	SetAttributes(val *[]*string)
-	AwsAuthYamlStripQuotes() *bool
-	SetAwsAuthYamlStripQuotes(val *bool)
 	// Experimental.
 	CdktfStack() cdktf.TerraformStack
 	CloudwatchLogGroupKmsKeyId() *string
@@ -68,8 +72,6 @@ type TerraformAwsEksCluster interface {
 	SetContext(val interface{})
 	CreateEksServiceRole() *bool
 	SetCreateEksServiceRole(val *bool)
-	CreateSecurityGroup() *bool
-	SetCreateSecurityGroup(val *bool)
 	CustomIngressRules() interface{}
 	SetCustomIngressRules(val interface{})
 	Delimiter() *string
@@ -80,14 +82,14 @@ type TerraformAwsEksCluster interface {
 	SetDependsOn(val *[]*string)
 	DescriptorFormats() interface{}
 	SetDescriptorFormats(val interface{})
-	DummyKubeapiServer() *string
-	SetDummyKubeapiServer(val *string)
+	EksAddonsVersionsOutput() *string
 	EksClusterArnOutput() *string
 	EksClusterCertificateAuthorityDataOutput() *string
 	EksClusterEndpointOutput() *string
 	EksClusterIdentityOidcIssuerArnOutput() *string
 	EksClusterIdentityOidcIssuerOutput() *string
 	EksClusterIdOutput() *string
+	EksClusterIpv6ServiceCidrOutput() *string
 	EksClusterManagedSecurityGroupIdOutput() *string
 	EksClusterRoleArnOutput() *string
 	EksClusterServiceRoleArn() *string
@@ -113,27 +115,6 @@ type TerraformAwsEksCluster interface {
 	FriendlyUniqueId() *string
 	IdLengthLimit() *float64
 	SetIdLengthLimit(val *float64)
-	KubeconfigContext() *string
-	SetKubeconfigContext(val *string)
-	KubeconfigPath() *string
-	SetKubeconfigPath(val *string)
-	KubeconfigPathEnabled() *bool
-	SetKubeconfigPathEnabled(val *bool)
-	KubeDataAuthEnabled() *bool
-	SetKubeDataAuthEnabled(val *bool)
-	KubeExecAuthAwsProfile() *string
-	SetKubeExecAuthAwsProfile(val *string)
-	KubeExecAuthAwsProfileEnabled() *bool
-	SetKubeExecAuthAwsProfileEnabled(val *bool)
-	KubeExecAuthEnabled() *bool
-	SetKubeExecAuthEnabled(val *bool)
-	KubeExecAuthRoleArn() *string
-	SetKubeExecAuthRoleArn(val *string)
-	KubeExecAuthRoleArnEnabled() *bool
-	SetKubeExecAuthRoleArnEnabled(val *bool)
-	KubernetesConfigMapIdOutput() *string
-	KubernetesConfigMapIgnoreRoleChanges() *bool
-	SetKubernetesConfigMapIgnoreRoleChanges(val *bool)
 	KubernetesNetworkIpv6Enabled() *bool
 	SetKubernetesNetworkIpv6Enabled(val *bool)
 	KubernetesVersion() *string
@@ -146,16 +127,8 @@ type TerraformAwsEksCluster interface {
 	SetLabelsAsTags(val *[]*string)
 	LabelValueCase() *string
 	SetLabelValueCase(val *string)
-	LocalExecInterpreter() *[]*string
-	SetLocalExecInterpreter(val *[]*string)
 	ManagedSecurityGroupRulesEnabled() *bool
 	SetManagedSecurityGroupRulesEnabled(val *bool)
-	MapAdditionalAwsAccounts() *[]*string
-	SetMapAdditionalAwsAccounts(val *[]*string)
-	MapAdditionalIamRoles() interface{}
-	SetMapAdditionalIamRoles(val interface{})
-	MapAdditionalIamUsers() interface{}
-	SetMapAdditionalIamUsers(val interface{})
 	Name() *string
 	SetName(val *string)
 	Namespace() *string
@@ -176,9 +149,6 @@ type TerraformAwsEksCluster interface {
 	SetRegexReplaceChars(val *string)
 	Region() *string
 	SetRegion(val *string)
-	SecurityGroupArnOutput() *string
-	SecurityGroupIdOutput() *string
-	SecurityGroupNameOutput() *string
 	ServiceIpv4Cidr() *string
 	SetServiceIpv4Cidr(val *string)
 	// Experimental.
@@ -195,14 +165,6 @@ type TerraformAwsEksCluster interface {
 	SetTenant(val *string)
 	// Experimental.
 	Version() *string
-	VpcId() *string
-	SetVpcId(val *string)
-	WaitForClusterCommand() *string
-	SetWaitForClusterCommand(val *string)
-	WorkersRoleArns() *[]*string
-	SetWorkersRoleArns(val *[]*string)
-	WorkersSecurityGroupIds() *[]*string
-	SetWorkersSecurityGroupIds(val *[]*string)
 	// Experimental.
 	AddOverride(path *string, value interface{})
 	// Experimental.
@@ -232,6 +194,56 @@ type TerraformAwsEksCluster interface {
 // The jsii proxy struct for TerraformAwsEksCluster
 type jsiiProxy_TerraformAwsEksCluster struct {
 	internal.Type__cdktfTerraformModule
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster) AccessConfig() interface{} {
+	var returns interface{}
+	_jsii_.Get(
+		j,
+		"accessConfig",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster) AccessEntries() interface{} {
+	var returns interface{}
+	_jsii_.Get(
+		j,
+		"accessEntries",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster) AccessEntriesForNodes() *map[string]*[]*string {
+	var returns *map[string]*[]*string
+	_jsii_.Get(
+		j,
+		"accessEntriesForNodes",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster) AccessEntryMap() interface{} {
+	var returns interface{}
+	_jsii_.Get(
+		j,
+		"accessEntryMap",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster) AccessPolicyAssociations() interface{} {
+	var returns interface{}
+	_jsii_.Get(
+		j,
+		"accessPolicyAssociations",
+		&returns,
+	)
+	return returns
 }
 
 func (j *jsiiProxy_TerraformAwsEksCluster) AdditionalTagMap() *map[string]*string {
@@ -284,26 +296,6 @@ func (j *jsiiProxy_TerraformAwsEksCluster) AllowedSecurityGroupIds() *[]*string 
 	return returns
 }
 
-func (j *jsiiProxy_TerraformAwsEksCluster) AllowedSecurityGroups() *[]*string {
-	var returns *[]*string
-	_jsii_.Get(
-		j,
-		"allowedSecurityGroups",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) ApplyConfigMapAwsAuth() *bool {
-	var returns *bool
-	_jsii_.Get(
-		j,
-		"applyConfigMapAwsAuth",
-		&returns,
-	)
-	return returns
-}
-
 func (j *jsiiProxy_TerraformAwsEksCluster) AssociatedSecurityGroupIds() *[]*string {
 	var returns *[]*string
 	_jsii_.Get(
@@ -319,16 +311,6 @@ func (j *jsiiProxy_TerraformAwsEksCluster) Attributes() *[]*string {
 	_jsii_.Get(
 		j,
 		"attributes",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) AwsAuthYamlStripQuotes() *bool {
-	var returns *bool
-	_jsii_.Get(
-		j,
-		"awsAuthYamlStripQuotes",
 		&returns,
 	)
 	return returns
@@ -534,16 +516,6 @@ func (j *jsiiProxy_TerraformAwsEksCluster) CreateEksServiceRole() *bool {
 	return returns
 }
 
-func (j *jsiiProxy_TerraformAwsEksCluster) CreateSecurityGroup() *bool {
-	var returns *bool
-	_jsii_.Get(
-		j,
-		"createSecurityGroup",
-		&returns,
-	)
-	return returns
-}
-
 func (j *jsiiProxy_TerraformAwsEksCluster) CustomIngressRules() interface{} {
 	var returns interface{}
 	_jsii_.Get(
@@ -584,11 +556,11 @@ func (j *jsiiProxy_TerraformAwsEksCluster) DescriptorFormats() interface{} {
 	return returns
 }
 
-func (j *jsiiProxy_TerraformAwsEksCluster) DummyKubeapiServer() *string {
+func (j *jsiiProxy_TerraformAwsEksCluster) EksAddonsVersionsOutput() *string {
 	var returns *string
 	_jsii_.Get(
 		j,
-		"dummyKubeapiServer",
+		"eksAddonsVersionsOutput",
 		&returns,
 	)
 	return returns
@@ -649,6 +621,16 @@ func (j *jsiiProxy_TerraformAwsEksCluster) EksClusterIdOutput() *string {
 	_jsii_.Get(
 		j,
 		"eksClusterIdOutput",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster) EksClusterIpv6ServiceCidrOutput() *string {
+	var returns *string
+	_jsii_.Get(
+		j,
+		"eksClusterIpv6ServiceCidrOutput",
 		&returns,
 	)
 	return returns
@@ -784,116 +766,6 @@ func (j *jsiiProxy_TerraformAwsEksCluster) IdLengthLimit() *float64 {
 	return returns
 }
 
-func (j *jsiiProxy_TerraformAwsEksCluster) KubeconfigContext() *string {
-	var returns *string
-	_jsii_.Get(
-		j,
-		"kubeconfigContext",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) KubeconfigPath() *string {
-	var returns *string
-	_jsii_.Get(
-		j,
-		"kubeconfigPath",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) KubeconfigPathEnabled() *bool {
-	var returns *bool
-	_jsii_.Get(
-		j,
-		"kubeconfigPathEnabled",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) KubeDataAuthEnabled() *bool {
-	var returns *bool
-	_jsii_.Get(
-		j,
-		"kubeDataAuthEnabled",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) KubeExecAuthAwsProfile() *string {
-	var returns *string
-	_jsii_.Get(
-		j,
-		"kubeExecAuthAwsProfile",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) KubeExecAuthAwsProfileEnabled() *bool {
-	var returns *bool
-	_jsii_.Get(
-		j,
-		"kubeExecAuthAwsProfileEnabled",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) KubeExecAuthEnabled() *bool {
-	var returns *bool
-	_jsii_.Get(
-		j,
-		"kubeExecAuthEnabled",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) KubeExecAuthRoleArn() *string {
-	var returns *string
-	_jsii_.Get(
-		j,
-		"kubeExecAuthRoleArn",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) KubeExecAuthRoleArnEnabled() *bool {
-	var returns *bool
-	_jsii_.Get(
-		j,
-		"kubeExecAuthRoleArnEnabled",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) KubernetesConfigMapIdOutput() *string {
-	var returns *string
-	_jsii_.Get(
-		j,
-		"kubernetesConfigMapIdOutput",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) KubernetesConfigMapIgnoreRoleChanges() *bool {
-	var returns *bool
-	_jsii_.Get(
-		j,
-		"kubernetesConfigMapIgnoreRoleChanges",
-		&returns,
-	)
-	return returns
-}
-
 func (j *jsiiProxy_TerraformAwsEksCluster) KubernetesNetworkIpv6Enabled() *bool {
 	var returns *bool
 	_jsii_.Get(
@@ -954,51 +826,11 @@ func (j *jsiiProxy_TerraformAwsEksCluster) LabelValueCase() *string {
 	return returns
 }
 
-func (j *jsiiProxy_TerraformAwsEksCluster) LocalExecInterpreter() *[]*string {
-	var returns *[]*string
-	_jsii_.Get(
-		j,
-		"localExecInterpreter",
-		&returns,
-	)
-	return returns
-}
-
 func (j *jsiiProxy_TerraformAwsEksCluster) ManagedSecurityGroupRulesEnabled() *bool {
 	var returns *bool
 	_jsii_.Get(
 		j,
 		"managedSecurityGroupRulesEnabled",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) MapAdditionalAwsAccounts() *[]*string {
-	var returns *[]*string
-	_jsii_.Get(
-		j,
-		"mapAdditionalAwsAccounts",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) MapAdditionalIamRoles() interface{} {
-	var returns interface{}
-	_jsii_.Get(
-		j,
-		"mapAdditionalIamRoles",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) MapAdditionalIamUsers() interface{} {
-	var returns interface{}
-	_jsii_.Get(
-		j,
-		"mapAdditionalIamUsers",
 		&returns,
 	)
 	return returns
@@ -1104,36 +936,6 @@ func (j *jsiiProxy_TerraformAwsEksCluster) Region() *string {
 	return returns
 }
 
-func (j *jsiiProxy_TerraformAwsEksCluster) SecurityGroupArnOutput() *string {
-	var returns *string
-	_jsii_.Get(
-		j,
-		"securityGroupArnOutput",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) SecurityGroupIdOutput() *string {
-	var returns *string
-	_jsii_.Get(
-		j,
-		"securityGroupIdOutput",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) SecurityGroupNameOutput() *string {
-	var returns *string
-	_jsii_.Get(
-		j,
-		"securityGroupNameOutput",
-		&returns,
-	)
-	return returns
-}
-
 func (j *jsiiProxy_TerraformAwsEksCluster) ServiceIpv4Cidr() *string {
 	var returns *string
 	_jsii_.Get(
@@ -1214,46 +1016,6 @@ func (j *jsiiProxy_TerraformAwsEksCluster) Version() *string {
 	return returns
 }
 
-func (j *jsiiProxy_TerraformAwsEksCluster) VpcId() *string {
-	var returns *string
-	_jsii_.Get(
-		j,
-		"vpcId",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) WaitForClusterCommand() *string {
-	var returns *string
-	_jsii_.Get(
-		j,
-		"waitForClusterCommand",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) WorkersRoleArns() *[]*string {
-	var returns *[]*string
-	_jsii_.Get(
-		j,
-		"workersRoleArns",
-		&returns,
-	)
-	return returns
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) WorkersSecurityGroupIds() *[]*string {
-	var returns *[]*string
-	_jsii_.Get(
-		j,
-		"workersSecurityGroupIds",
-		&returns,
-	)
-	return returns
-}
-
 
 func NewTerraformAwsEksCluster(scope constructs.Construct, id *string, config *TerraformAwsEksClusterConfig) TerraformAwsEksCluster {
 	_init_.Initialize()
@@ -1279,6 +1041,58 @@ func NewTerraformAwsEksCluster_Override(t TerraformAwsEksCluster, scope construc
 		"terraform_aws_eks_cluster.TerraformAwsEksCluster",
 		[]interface{}{scope, id, config},
 		t,
+	)
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster)SetAccessConfig(val interface{}) {
+	if err := j.validateSetAccessConfigParameters(val); err != nil {
+		panic(err)
+	}
+	_jsii_.Set(
+		j,
+		"accessConfig",
+		val,
+	)
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster)SetAccessEntries(val interface{}) {
+	if err := j.validateSetAccessEntriesParameters(val); err != nil {
+		panic(err)
+	}
+	_jsii_.Set(
+		j,
+		"accessEntries",
+		val,
+	)
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster)SetAccessEntriesForNodes(val *map[string]*[]*string) {
+	_jsii_.Set(
+		j,
+		"accessEntriesForNodes",
+		val,
+	)
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster)SetAccessEntryMap(val interface{}) {
+	if err := j.validateSetAccessEntryMapParameters(val); err != nil {
+		panic(err)
+	}
+	_jsii_.Set(
+		j,
+		"accessEntryMap",
+		val,
+	)
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster)SetAccessPolicyAssociations(val interface{}) {
+	if err := j.validateSetAccessPolicyAssociationsParameters(val); err != nil {
+		panic(err)
+	}
+	_jsii_.Set(
+		j,
+		"accessPolicyAssociations",
+		val,
 	)
 }
 
@@ -1328,22 +1142,6 @@ func (j *jsiiProxy_TerraformAwsEksCluster)SetAllowedSecurityGroupIds(val *[]*str
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEksCluster)SetAllowedSecurityGroups(val *[]*string) {
-	_jsii_.Set(
-		j,
-		"allowedSecurityGroups",
-		val,
-	)
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster)SetApplyConfigMapAwsAuth(val *bool) {
-	_jsii_.Set(
-		j,
-		"applyConfigMapAwsAuth",
-		val,
-	)
-}
-
 func (j *jsiiProxy_TerraformAwsEksCluster)SetAssociatedSecurityGroupIds(val *[]*string) {
 	_jsii_.Set(
 		j,
@@ -1356,14 +1154,6 @@ func (j *jsiiProxy_TerraformAwsEksCluster)SetAttributes(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"attributes",
-		val,
-	)
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster)SetAwsAuthYamlStripQuotes(val *bool) {
-	_jsii_.Set(
-		j,
-		"awsAuthYamlStripQuotes",
 		val,
 	)
 }
@@ -1470,14 +1260,6 @@ func (j *jsiiProxy_TerraformAwsEksCluster)SetCreateEksServiceRole(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEksCluster)SetCreateSecurityGroup(val *bool) {
-	_jsii_.Set(
-		j,
-		"createSecurityGroup",
-		val,
-	)
-}
-
 func (j *jsiiProxy_TerraformAwsEksCluster)SetCustomIngressRules(val interface{}) {
 	if err := j.validateSetCustomIngressRulesParameters(val); err != nil {
 		panic(err)
@@ -1512,14 +1294,6 @@ func (j *jsiiProxy_TerraformAwsEksCluster)SetDescriptorFormats(val interface{}) 
 	_jsii_.Set(
 		j,
 		"descriptorFormats",
-		val,
-	)
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster)SetDummyKubeapiServer(val *string) {
-	_jsii_.Set(
-		j,
-		"dummyKubeapiServer",
 		val,
 	)
 }
@@ -1588,86 +1362,6 @@ func (j *jsiiProxy_TerraformAwsEksCluster)SetIdLengthLimit(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEksCluster)SetKubeconfigContext(val *string) {
-	_jsii_.Set(
-		j,
-		"kubeconfigContext",
-		val,
-	)
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster)SetKubeconfigPath(val *string) {
-	_jsii_.Set(
-		j,
-		"kubeconfigPath",
-		val,
-	)
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster)SetKubeconfigPathEnabled(val *bool) {
-	_jsii_.Set(
-		j,
-		"kubeconfigPathEnabled",
-		val,
-	)
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster)SetKubeDataAuthEnabled(val *bool) {
-	_jsii_.Set(
-		j,
-		"kubeDataAuthEnabled",
-		val,
-	)
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster)SetKubeExecAuthAwsProfile(val *string) {
-	_jsii_.Set(
-		j,
-		"kubeExecAuthAwsProfile",
-		val,
-	)
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster)SetKubeExecAuthAwsProfileEnabled(val *bool) {
-	_jsii_.Set(
-		j,
-		"kubeExecAuthAwsProfileEnabled",
-		val,
-	)
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster)SetKubeExecAuthEnabled(val *bool) {
-	_jsii_.Set(
-		j,
-		"kubeExecAuthEnabled",
-		val,
-	)
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster)SetKubeExecAuthRoleArn(val *string) {
-	_jsii_.Set(
-		j,
-		"kubeExecAuthRoleArn",
-		val,
-	)
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster)SetKubeExecAuthRoleArnEnabled(val *bool) {
-	_jsii_.Set(
-		j,
-		"kubeExecAuthRoleArnEnabled",
-		val,
-	)
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster)SetKubernetesConfigMapIgnoreRoleChanges(val *bool) {
-	_jsii_.Set(
-		j,
-		"kubernetesConfigMapIgnoreRoleChanges",
-		val,
-	)
-}
-
 func (j *jsiiProxy_TerraformAwsEksCluster)SetKubernetesNetworkIpv6Enabled(val *bool) {
 	_jsii_.Set(
 		j,
@@ -1716,48 +1410,10 @@ func (j *jsiiProxy_TerraformAwsEksCluster)SetLabelValueCase(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEksCluster)SetLocalExecInterpreter(val *[]*string) {
-	_jsii_.Set(
-		j,
-		"localExecInterpreter",
-		val,
-	)
-}
-
 func (j *jsiiProxy_TerraformAwsEksCluster)SetManagedSecurityGroupRulesEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"managedSecurityGroupRulesEnabled",
-		val,
-	)
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster)SetMapAdditionalAwsAccounts(val *[]*string) {
-	_jsii_.Set(
-		j,
-		"mapAdditionalAwsAccounts",
-		val,
-	)
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster)SetMapAdditionalIamRoles(val interface{}) {
-	if err := j.validateSetMapAdditionalIamRolesParameters(val); err != nil {
-		panic(err)
-	}
-	_jsii_.Set(
-		j,
-		"mapAdditionalIamRoles",
-		val,
-	)
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster)SetMapAdditionalIamUsers(val interface{}) {
-	if err := j.validateSetMapAdditionalIamUsersParameters(val); err != nil {
-		panic(err)
-	}
-	_jsii_.Set(
-		j,
-		"mapAdditionalIamUsers",
 		val,
 	)
 }
@@ -1857,41 +1513,6 @@ func (j *jsiiProxy_TerraformAwsEksCluster)SetTenant(val *string) {
 	_jsii_.Set(
 		j,
 		"tenant",
-		val,
-	)
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster)SetVpcId(val *string) {
-	if err := j.validateSetVpcIdParameters(val); err != nil {
-		panic(err)
-	}
-	_jsii_.Set(
-		j,
-		"vpcId",
-		val,
-	)
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster)SetWaitForClusterCommand(val *string) {
-	_jsii_.Set(
-		j,
-		"waitForClusterCommand",
-		val,
-	)
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster)SetWorkersRoleArns(val *[]*string) {
-	_jsii_.Set(
-		j,
-		"workersRoleArns",
-		val,
-	)
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster)SetWorkersSecurityGroupIds(val *[]*string) {
-	_jsii_.Set(
-		j,
-		"workersSecurityGroupIds",
 		val,
 	)
 }

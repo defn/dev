@@ -30,6 +30,8 @@ type TerraformAwsEc2AutoscaleGroupConfig struct {
 	// The property type contains a map, they have special handling, please see {@link cdk.tf /module-map-inputs the docs}
 	AdditionalTagMap *map[string]*string `field:"optional" json:"additionalTagMap" yaml:"additionalTagMap"`
 	// Associate a public IP address with an instance in a VPC.
+	//
+	// If `network_interface_id` is specified, this can only be `false` (see here for more info: https://stackoverflow.com/a/76808361).
 	AssociatePublicIpAddress *bool `field:"optional" json:"associatePublicIpAddress" yaml:"associatePublicIpAddress"`
 	// ID element.
 	//
@@ -247,6 +249,10 @@ type TerraformAwsEc2AutoscaleGroupConfig struct {
 	//
 	// Usually an abbreviation of your organization name, e.g. 'eg' or 'cp', to help ensure generated IDs are globally unique
 	Namespace *string `field:"optional" json:"namespace" yaml:"namespace"`
+	// The ID of the network interface to attach.
+	//
+	// If specified, all the other network_interface block arguments are ignored.
+	NetworkInterfaceId *string `field:"optional" json:"networkInterfaceId" yaml:"networkInterfaceId"`
 	// The placement specifications of the instances.
 	Placement interface{} `field:"optional" json:"placement" yaml:"placement"`
 	// The name of the placement group into which you'll launch your instances, if any.

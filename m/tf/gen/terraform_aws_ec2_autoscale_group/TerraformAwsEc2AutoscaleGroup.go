@@ -164,6 +164,8 @@ type TerraformAwsEc2AutoscaleGroup interface {
 	SetName(val *string)
 	Namespace() *string
 	SetNamespace(val *string)
+	NetworkInterfaceId() *string
+	SetNetworkInterfaceId(val *string)
 	// The tree node.
 	Node() constructs.Node
 	Placement() interface{}
@@ -1061,6 +1063,16 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) Namespace() *string {
 	return returns
 }
 
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) NetworkInterfaceId() *string {
+	var returns *string
+	_jsii_.Get(
+		j,
+		"networkInterfaceId",
+		&returns,
+	)
+	return returns
+}
+
 func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) Node() constructs.Node {
 	var returns constructs.Node
 	_jsii_.Get(
@@ -1950,6 +1962,14 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetNamespace(val *string) {
 	_jsii_.Set(
 		j,
 		"namespace",
+		val,
+	)
+}
+
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetNetworkInterfaceId(val *string) {
+	_jsii_.Set(
+		j,
+		"networkInterfaceId",
 		val,
 	)
 }

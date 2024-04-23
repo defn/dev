@@ -52,6 +52,8 @@ type TerraformAwsCloudfrontS3CdnConfig struct {
 	Attributes *[]*string `field:"optional" json:"attributes" yaml:"attributes"`
 	// When set to 'true' the s3 origin bucket will have public access block enabled.
 	BlockOriginPublicAccessEnabled *bool `field:"optional" json:"blockOriginPublicAccessEnabled" yaml:"blockOriginPublicAccessEnabled"`
+	// State of bucket versioning option Disabled.
+	BucketVersioning *string `field:"optional" json:"bucketVersioning" yaml:"bucketVersioning"`
 	// List of cached methods (e.g. GET, PUT, POST, DELETE, HEAD) GET HEAD.
 	CachedMethods *[]*string `field:"optional" json:"cachedMethods" yaml:"cachedMethods"`
 	// The unique identifier of the existing cache policy to attach to the default cache behavior.

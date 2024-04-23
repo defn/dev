@@ -32,6 +32,22 @@ func validateTerraformAwsEksCluster_IsTerraformElementParameters(x interface{}) 
 	return nil
 }
 
+func (j *jsiiProxy_TerraformAwsEksCluster) validateSetAccessConfigParameters(val interface{}) error {
+	return nil
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster) validateSetAccessEntriesParameters(val interface{}) error {
+	return nil
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster) validateSetAccessEntryMapParameters(val interface{}) error {
+	return nil
+}
+
+func (j *jsiiProxy_TerraformAwsEksCluster) validateSetAccessPolicyAssociationsParameters(val interface{}) error {
+	return nil
+}
+
 func (j *jsiiProxy_TerraformAwsEksCluster) validateSetAddonsParameters(val interface{}) error {
 	return nil
 }
@@ -56,19 +72,7 @@ func (j *jsiiProxy_TerraformAwsEksCluster) validateSetDescriptorFormatsParameter
 	return nil
 }
 
-func (j *jsiiProxy_TerraformAwsEksCluster) validateSetMapAdditionalIamRolesParameters(val interface{}) error {
-	return nil
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) validateSetMapAdditionalIamUsersParameters(val interface{}) error {
-	return nil
-}
-
 func (j *jsiiProxy_TerraformAwsEksCluster) validateSetSubnetIdsParameters(val *[]*string) error {
-	return nil
-}
-
-func (j *jsiiProxy_TerraformAwsEksCluster) validateSetVpcIdParameters(val *string) error {
 	return nil
 }
 

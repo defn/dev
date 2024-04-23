@@ -99,6 +99,8 @@ type TerraformAwsVpc interface {
 	SetName(val *string)
 	Namespace() *string
 	SetNamespace(val *string)
+	NetworkAddressUsageMetricsEnabled() *bool
+	SetNetworkAddressUsageMetricsEnabled(val *bool)
 	// The tree node.
 	Node() constructs.Node
 	// Experimental.
@@ -594,6 +596,16 @@ func (j *jsiiProxy_TerraformAwsVpc) Namespace() *string {
 	_jsii_.Get(
 		j,
 		"namespace",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_TerraformAwsVpc) NetworkAddressUsageMetricsEnabled() *bool {
+	var returns *bool
+	_jsii_.Get(
+		j,
+		"networkAddressUsageMetricsEnabled",
 		&returns,
 	)
 	return returns
@@ -1101,6 +1113,14 @@ func (j *jsiiProxy_TerraformAwsVpc)SetNamespace(val *string) {
 	_jsii_.Set(
 		j,
 		"namespace",
+		val,
+	)
+}
+
+func (j *jsiiProxy_TerraformAwsVpc)SetNetworkAddressUsageMetricsEnabled(val *bool) {
+	_jsii_.Set(
+		j,
+		"networkAddressUsageMetricsEnabled",
 		val,
 	)
 }

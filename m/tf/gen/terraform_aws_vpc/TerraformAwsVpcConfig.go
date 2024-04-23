@@ -168,6 +168,8 @@ type TerraformAwsVpcConfig struct {
 	//
 	// Usually an abbreviation of your organization name, e.g. 'eg' or 'cp', to help ensure generated IDs are globally unique
 	Namespace *string `field:"optional" json:"namespace" yaml:"namespace"`
+	// Set `true` to enable Network Address Usage Metrics for the VPC.
+	NetworkAddressUsageMetricsEnabled *bool `field:"optional" json:"networkAddressUsageMetricsEnabled" yaml:"networkAddressUsageMetricsEnabled"`
 	// Terraform regular expression (regex) string.
 	//
 	// Characters matching the regex will be removed from the ID elements.

@@ -64,6 +64,10 @@ func (j *jsiiProxy_TerraformAwsS3Bucket) validateSetObjectLockConfigurationParam
 	return nil
 }
 
+func (j *jsiiProxy_TerraformAwsS3Bucket) validateSetS3ReplicationRulesParameters(val interface{}) error {
+	return nil
+}
+
 func (j *jsiiProxy_TerraformAwsS3Bucket) validateSetWebsiteConfigurationParameters(val interface{}) error {
 	return nil
 }

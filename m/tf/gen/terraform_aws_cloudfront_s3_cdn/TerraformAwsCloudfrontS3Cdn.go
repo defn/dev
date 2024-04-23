@@ -33,6 +33,8 @@ type TerraformAwsCloudfrontS3Cdn interface {
 	SetAttributes(val *[]*string)
 	BlockOriginPublicAccessEnabled() *bool
 	SetBlockOriginPublicAccessEnabled(val *bool)
+	BucketVersioning() *string
+	SetBucketVersioning(val *string)
 	CachedMethods() *[]*string
 	SetCachedMethods(val *[]*string)
 	CachePolicyId() *string
@@ -397,6 +399,16 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) BlockOriginPublicAccessEnabled()
 	_jsii_.Get(
 		j,
 		"blockOriginPublicAccessEnabled",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn) BucketVersioning() *string {
+	var returns *string
+	_jsii_.Get(
+		j,
+		"bucketVersioning",
 		&returns,
 	)
 	return returns
@@ -1748,6 +1760,14 @@ func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetBlockOriginPublicAccessEnabled
 	_jsii_.Set(
 		j,
 		"blockOriginPublicAccessEnabled",
+		val,
+	)
+}
+
+func (j *jsiiProxy_TerraformAwsCloudfrontS3Cdn)SetBucketVersioning(val *string) {
+	_jsii_.Set(
+		j,
+		"bucketVersioning",
 		val,
 	)
 }

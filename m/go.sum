@@ -16,8 +16,8 @@ github.com/atotto/clipboard v0.1.4 h1:EH0zSVneZPSuFR11BlR9YppQTVDbh5+16AmcJi4g1z
 github.com/atotto/clipboard v0.1.4/go.mod h1:ZY9tmq7sm5xIbd9bOK4onWV4S6X0u6GY7Vn0Yu86PYI=
 github.com/aws/constructs-go/constructs/v10 v10.3.0 h1:LsjBIMiaDX/vqrXWhzTquBJ9pPdi02/H+z1DCwg0PEM=
 github.com/aws/constructs-go/constructs/v10 v10.3.0/go.mod h1:GgzwIwoRJ2UYsr3SU+JhAl+gq5j39bEMYf8ev3J+s9s=
-github.com/aws/jsii-runtime-go v1.96.0 h1:ma4ee4CgkNT/OnEsnXVQQPUCwvx+3p4SYaJ9qmnZpWg=
-github.com/aws/jsii-runtime-go v1.96.0/go.mod h1:ISVfzRvqqxXAYyPKhucPCFeUjIjnqtj9QzE/77yk9pQ=
+github.com/aws/jsii-runtime-go v1.97.0 h1:z3g6aLUQUyjZfHFI4z6Q47zvwUjyGYPamOWcVwGmU9w=
+github.com/aws/jsii-runtime-go v1.97.0/go.mod h1:30XYoqvHizeedL8KNra3DBZ9w+NtJDQpbU4o1bN9lVc=
 github.com/aymanbagabas/go-osc52/v2 v2.0.1 h1:HwpRHbFMcZLEVr42D4p7XBqjyuxQH5SMiErDT4WkJ2k=
 github.com/aymanbagabas/go-osc52/v2 v2.0.1/go.mod h1:uYgXzlJ7ZpABp8OJ+exZzJJhRNQ2ASbcXHWsFqH8hp8=
 github.com/bytedance/sonic v1.5.0/go.mod h1:ED5hyg4y6t3/9Ku1R6dU/4KyJ48DZ4jPhfY1O2AihPM=
@@ -121,8 +121,8 @@ github.com/hashicorp/go-multierror v1.1.1 h1:H5DkEtf6CXdFp0N0Em5UCwQpXMWke8IA0+l
 github.com/hashicorp/go-multierror v1.1.1/go.mod h1:iw975J/qwKPdAO1clOe2L8331t/9/fmwbPZ6JB6eMoM=
 github.com/hashicorp/hcl v1.0.0 h1:0Anlzjpi4vEasTeNFn2mLJgTSwt0+6sfsiTG8qcWGx4=
 github.com/hashicorp/hcl v1.0.0/go.mod h1:E5yfLk+7swimpb2L/Alb/PJmXilQ/rhwaUYs4T20WEQ=
-github.com/hashicorp/terraform-cdk-go/cdktf v0.20.6 h1:C4OaT3EhNbR6evtp4sgVruIhJ02p6+7GZwaJx8KtCJ8=
-github.com/hashicorp/terraform-cdk-go/cdktf v0.20.6/go.mod h1:wAVKV4pDFnayGSCerTah8NQTIcNvi6HGI5fhRoCX3Zw=
+github.com/hashicorp/terraform-cdk-go/cdktf v0.20.7 h1:2qYAJMPlFg4zU8TfZWDa3nyaMIHX6GHQuZnliCosXCs=
+github.com/hashicorp/terraform-cdk-go/cdktf v0.20.7/go.mod h1:wAVKV4pDFnayGSCerTah8NQTIcNvi6HGI5fhRoCX3Zw=
 github.com/inconshreveable/mousetrap v1.1.0 h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2s0bqwp9tc8=
 github.com/inconshreveable/mousetrap v1.1.0/go.mod h1:vpF70FUmC8bwa3OWnCshd2FqLfsEA9PFc4w1p2J65bw=
 github.com/json-iterator/go v1.1.12 h1:PV8peI4a0ysnczrg+LtxykD8LfKY9ML6u2jnxaEnrnM=
