@@ -44,7 +44,10 @@ function main {
 	sudo ln -nfs /mnt/docker /var/lib/docker
 
 	while true; do
-		if sudo systemctl start docker; then break; fi
+		if sudo systemctl start docker; then 
+			echo Docker running
+			break
+		fi
 		sleep 10
 	done
 }
@@ -55,6 +58,3 @@ uptime
 cd
 source .bash_profile
 bin/persist-cache
-
-cd m
-screen -S code-server -d -m tilt up
