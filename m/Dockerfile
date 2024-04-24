@@ -12,5 +12,5 @@ ENV HOME=/home/ubuntu
 ENV LANG=C
 WORKDIR /home/ubuntu
 
-RUN bash -c 'cd ~ && source ~/.bash_profile && cd m/pb && make ubuntu opt="-i inventory/packer.ini -e ansible_connection=local"' && rm -f /tmp/.bash*
+RUN bash -c 'cd ~ && source ~/.bash_profile && cd m/pb && pipx install --force --include-deps ansible && j local ubuntu' && rm -f /tmp/.bash*
 RUN echo DONE
