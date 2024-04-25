@@ -302,9 +302,8 @@ coder-ssh-linux:
 
 coder-ssh-envbuilder:
 	docker rm -f "$(CODER_NAME)" || true
-	docker run --rm \
+	docker run --rm -d --sysctl net.ipv6.conf.all.disable_ipv6=1 \
 		--name "$(CODER_NAME)" \
-		-d \
 		-v envbuilder-image:/image-cache:ro \
 		-v envbuilder-layer:/layer-cache \
 		-v /nix:/nix \
