@@ -3,9 +3,10 @@
 function main {
 	local app="${in[app]}"
 	local bundle="${in[bundle]}"
+	local kustomize="${in[kustomize]}"
 
 	tar xfz "${bundle}"
-	kustomize build --load-restrictor LoadRestrictionsNone --enable-helm "k/${app}" >"${out}"
+	"${kustomize}" build --load-restrictor LoadRestrictionsNone --enable-helm "k/${app}" >"${out}"
 }
 
 source b/lib/lib.sh

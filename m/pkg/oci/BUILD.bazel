@@ -3,5 +3,6 @@ load("//b/nix:nix.bzl", "nix_flake")
 # nix flake
 nix_flake(
     name = "flake",
+    cmds = ["skopeo"],
     visibility = ["//visibility:public"],
 )

@@ -158,13 +158,14 @@ filegroup(
                 ":kustomize_bundle_tgz_{}".format(k),
             ],
             outs = ["{}-kustomized-build.yaml".format(k)],
-            cmd = "$(location :gen_kustomize_build_sh) app={} bundle=$(location :kustomize_bundle_tgz_{}) $@".format(
+            cmd = "$(location :gen_kustomize_build_sh) app={} bundle=$(location :kustomize_bundle_tgz_{}) kustomize=$(location //pkg/kustomize:flake_kustomize) $@".format(
                 k,
                 k,
             ),
             tools = [
                 ":gen_kustomize_build_sh",
                 "//b/lib:lib_sh",
+                "//pkg/kustomize:flake_kustomize",
             ],
         ),
         genrule(
@@ -184,11 +185,12 @@ filegroup(
                 ":deploy_cue",
             ],
             outs = ["image_digest_{}.cue".format(k)],
-            cmd = "$(location :gen_image_digest_sh) app=$(location :cue_import_{}) cue=$(location //pkg/cue:flake_cue) $@".format(k),
+            cmd = "$(location :gen_image_digest_sh) app=$(location :cue_import_{}) cue=$(location //pkg/cue:flake_cue) skopeo=$(location //pkg/oci:flake_skopeo) $@".format(k),
             tools = [
                 ":gen_image_digest_sh",
                 "//b/lib:lib_sh",
                 "//pkg/cue:flake_cue",
+                "//pkg/oci:flake_skopeo",
             ],
         ),
         genrule(
@@ -225,11 +227,12 @@ filegroup(
                 ":deploy_cue",
             ],
             outs = ["{}.yaml".format(k)],
-            cmd = "$(location :gen_deploy_yaml_sh) cue=$(location //pkg/cue:flake_cue) registry=cache.defn.run:4999 _ $(location :cue_import_{}) $(location :image_digest_{}) $@".format(k, k),
+            cmd = "$(location :gen_deploy_yaml_sh) cue=$(location //pkg/cue:flake_cue) skopeo=$(location //pkg/oci:flake_skopeo) registry=cache.defn.run:4999 _ $(location :cue_import_{}) $(location :image_digest_{}) $@".format(k, k),
             tools = [
                 ":gen_deploy_yaml_sh",
                 "//b/lib:lib_sh",
                 "//pkg/cue:flake_cue",
+                "//pkg/oci:flake_skopeo",
             ],
         ),
         genrule(
