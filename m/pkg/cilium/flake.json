@@ -1,6 +1,6 @@
 {
   "slug": "pkg-cilium",
   "ghrepo": "cilium/cilium-cli",
-  "vendor": "0.16.4",
-  "revision": "1"
+  "vendor": "0.16.5",
+  "revision": "0"
 }
