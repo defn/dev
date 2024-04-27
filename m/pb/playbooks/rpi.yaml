@@ -2,6 +2,6 @@
   hosts: rpi
   roles:
     - base_packages
-    - base_bazel
     - rpi_packages
     - network_ethernet
+    - base_bazel

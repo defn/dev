@@ -1,6 +1,5 @@
 - name: Install rpi-specific packages
   become: true
   apt:
-    name:
-      - network-manager-config-connectivity-rpi
+    name: []
     state: present

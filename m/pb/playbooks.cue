@@ -46,10 +46,13 @@ inventory: {
 	]
 
 	rpi: hosts: [
+		"rpi3a",
+		"rpi3b",
+		"rpi3c",
 		"rpi4a",
 		"rpi4b",
 		"rpi4c",
-		"rpi5a",
+		//"rpi5a",
 	]
 
 	zimaboard: hosts: [
@@ -79,9 +82,9 @@ playbook: rpi: [{
 	hosts: "rpi"
 	roles: [
 		"base_packages",
-		"base_bazel",
 		"rpi_packages",
 		"network_ethernet",
+		"base_bazel",
 	]
 }]
 
@@ -156,7 +159,6 @@ role: rpi_packages: tasks: [{
 	become: true
 	apt: {
 		name: [
-			"network-manager-config-connectivity-rpi",
 		]
 		state: "present"
 	}
