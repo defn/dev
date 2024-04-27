@@ -45,14 +45,16 @@ inventory: {
 		"penguin",
 	]
 
-	rpi: hosts: [
+	rpi3: hosts: [
 		"rpi3a",
 		"rpi3b",
 		"rpi3c",
+	]
+
+	rpi4: hosts: [
 		"rpi4a",
 		"rpi4b",
 		"rpi4c",
-		//"rpi5a",
 	]
 
 	zimaboard: hosts: [
