@@ -39,6 +39,7 @@ up *name:
 	command="make coder-ssh-envbuilder"
 	template=coder-defn-ssh-template
 
+	sudo ln -nfs ubuntu /home/dev
 	sudo chown $(id -un) /var/run/docker.sock
 	sudo touch ~/.gnupg/S.gpg-agent.extra
 	just coder::down ${name} || true
