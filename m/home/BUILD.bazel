@@ -6,7 +6,6 @@ flake_names = [
     "dyff",
     "az",
     "home",
-    "nix",
     "secrets",
     "acme",
     "tailscale",
