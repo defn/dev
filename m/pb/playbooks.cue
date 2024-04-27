@@ -68,9 +68,9 @@ playbook: ubuntu: [{
 	hosts: "zimaboard:heavy:coder:hetzner:mac"
 	roles: [
 		"base_packages",
-		"hwe_packages",
 		"base_bazel",
 		"network_dummy",
+		//"hwe_packages",
 	]
 }]
 
