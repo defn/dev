@@ -18,7 +18,7 @@ services:
     container_name: bazel-remote
     user: "1000:1000"
     ports:
-      - "0.0.0.0:9093:9092"
+      - "0.0.0.0:9092:9092"
     volumes:
       - ${HOME}/work/bazel-cache:/data
     command: --max_size 50
