@@ -14,10 +14,6 @@ inventory: {
 		hosts: [
 			"macmini",
 		]
-		vars: {
-			bazel_remote_cache_server: "cache.defn.run"
-			bazel_remote_cache_port:   "9092"
-		}
 	}
 
 	hetzner: {
@@ -81,7 +77,7 @@ playbook: ubuntu: [{
 
 playbook: rpi: [{
 	name:  "rpi playbook"
-	hosts: "rpi"
+	hosts: "rpi3:rpi4:rpi5"
 	roles: [
 		"base_packages",
 		"rpi_packages",

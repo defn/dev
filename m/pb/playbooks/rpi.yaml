@@ -1,5 +1,5 @@
 - name: rpi playbook
-  hosts: rpi
+  hosts: rpi3:rpi4:rpi5
   roles:
     - base_packages
     - rpi_packages

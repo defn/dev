@@ -12,7 +12,7 @@ playbook pb *lim:
 	#!/usr/bin/env bash
 
 	if [[ -z "{{lim}}" ]]; then
-		limit="$(uname -n)"
+		limit="all"
 	else
 		limit="{{lim}}"
 	fi
@@ -40,7 +40,7 @@ check pb *lim:
 	#!/usr/bin/env bash
 
 	if [[ -z "{{lim}}" ]]; then
-		limit="$(uname -n)"
+		limit="all"
 	else
 		limit="{{lim}}"
 	fi
