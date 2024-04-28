@@ -1,4 +1,4 @@
 - name: Install home nix flakes
-  shell: cd && source .bash_profile && make home
+  shell: cd && source .bash_profile && git pull && make home
   args:
     executable: /bin/bash

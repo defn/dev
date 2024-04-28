@@ -1,74 +1,5 @@
 package pb
 
-#username: "ubuntu"
-
-inventory: {
-	[string]: vars: {
-		// provide defaults for inventory/packer.ini
-		ansible_user:              string | *#username
-		bazel_remote_cache_server: string | *"100.101.80.89" // macmini
-		bazel_remote_cache_port:   string | *"9092"          // public port
-	}
-
-	mac: {
-		hosts: [
-			"macmini",
-		]
-	}
-
-	hetzner: {
-		hosts: [
-			"district",
-		]
-		vars: {
-			bazel_remote_cache_server: "cache.defn.run"
-			bazel_remote_cache_port:   "9092"
-		}
-	}
-
-	aws: {
-		hosts: [
-			"kowloon",
-			"threesix",
-		]
-		vars: {
-			bazel_remote_cache_server: "district.tail3884f.ts.net"
-			bazel_remote_cache_port:   "9092"
-		}
-	}
-
-	chrome: hosts: [
-		"penguin",
-	]
-
-	rpi: children: [
-		"rpi3",
-		"rpi4",
-	]
-
-	rpi3: hosts: [
-		"rpi3a",
-		"rpi3b",
-		"rpi3c",
-	]
-
-	rpi4: hosts: [
-		"rpi4a",
-		"rpi4b",
-		"rpi4c",
-	]
-
-	zimaboard: hosts: [
-		"zm1",
-		"zm2",
-		"zm3",
-	]
-
-	heavy: hosts: [
-		"thinkpad",
-	]
-}
-
 playbook: ubuntu: [{
 	name:  "Ubuntu playbook"
 	hosts: "zimaboard:heavy:aws:hetzner:mac"
@@ -112,46 +43,6 @@ playbook: init: [{
 playbook: init_local: [{
 	#init_base
 	become: true
-}]
-
-playbook: upgrade: [{
-	name:   "Upgrade all packages"
-	hosts:  "all"
-	become: true
-	tasks: [{
-		name: "Update apt packages"
-		apt: {
-			upgrade:      "yes"
-			update_cache: "yes"
-		}
-	}]
-}]
-
-playbook: home: [{
-	name:  "install new flakes"
-	hosts: "all:!penguin:!rpi3"
-	roles: [
-		"home_flakes",
-	]
-}]
-
-playbook: dump: [{
-	name:  "Save host inventory"
-	hosts: "all"
-	tasks: [{
-		name:        "Save inventory as json"
-		delegate_to: "localhost"
-		template: {
-			src:  "debug_output.j2"
-			dest: "../inventory/dump/{{ inventory_hostname }}.json"
-		}
-	}, {
-		name:        "Convert inventory to CUE"
-		delegate_to: "localhost"
-		command: """
-			cue import -p dump -l '"host"' -l '"{{ inventory_hostname }}"' ../inventory/dump/{{ inventory_hostname }}.json
-			"""
-	}]
 }]
 
 role: hwe_packages: tasks: [{
@@ -281,10 +172,4 @@ role: base_bazel: tasks: [{
 		group: #username
 		mode:  "0600"
 	}
-}]
-
-role: home_flakes: tasks: [{
-	name:  "Install home nix flakes"
-	shell: "cd && source .bash_profile && make home"
-	args: executable: "/bin/bash"
 }]
