@@ -1,0 +1,4 @@
+- name: git origin is https
+  shell: cd && (git remote rm origin || true) && git remote add origin https://github.com/defn/dev && git fetch origin && git branch --set-upstream-to origin/main main
+  args:
+    executable: /bin/bash

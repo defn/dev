@@ -1,0 +1,4 @@
+- name: fix git repo
+  hosts: all:!penguin
+  roles:
+    - fix_origin
