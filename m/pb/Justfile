@@ -17,6 +17,7 @@ playbook pb *lim:
 		limit="{{lim}}"
 	fi
 
+	just build
 	~/.local/bin/ansible-playbook -l "${limit}" "playbooks/{{pb}}.yaml"
 
 # Run a playbook on localhost
@@ -40,7 +41,7 @@ check pb *lim:
 	#!/usr/bin/env bash
 
 	if [[ -z "{{lim}}" ]]; then
-		limit="all"
+		limit="$(uname -n)"
 	else
 		limit="{{lim}}"
 	fi

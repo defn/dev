@@ -1,0 +1,4 @@
+- name: install new flakes
+  hosts: all:!penguin:!rpi3
+  roles:
+    - home_flakes

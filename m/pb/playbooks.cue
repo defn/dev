@@ -26,7 +26,7 @@ inventory: {
 		}
 	}
 
-	coder: {
+	aws: {
 		hosts: [
 			"kowloon",
 			"threesix",
@@ -39,6 +39,11 @@ inventory: {
 
 	chrome: hosts: [
 		"penguin",
+	]
+
+	rpi: children: [
+		"rpi3",
+		"rpi4",
 	]
 
 	rpi3: hosts: [
@@ -66,7 +71,7 @@ inventory: {
 
 playbook: ubuntu: [{
 	name:  "Ubuntu playbook"
-	hosts: "zimaboard:heavy:coder:hetzner:mac"
+	hosts: "zimaboard:heavy:aws:hetzner:mac"
 	roles: [
 		"base_packages",
 		"base_bazel",
@@ -120,6 +125,14 @@ playbook: upgrade: [{
 			update_cache: "yes"
 		}
 	}]
+}]
+
+playbook: home: [{
+	name:  "install new flakes"
+	hosts: "all:!penguin:!rpi3"
+	roles: [
+		"home_flakes",
+	]
 }]
 
 playbook: dump: [{
@@ -268,4 +281,10 @@ role: base_bazel: tasks: [{
 		group: #username
 		mode:  "0600"
 	}
+}]
+
+role: home_flakes: tasks: [{
+	name:  "Install home nix flakes"
+	shell: "cd && source .bash_profile && make home"
+	args: executable: "/bin/bash"
 }]
