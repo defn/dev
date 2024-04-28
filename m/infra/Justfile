@@ -1,3 +1,7 @@
-mod infra 'infra.Justfile'
+# Push workspace template to Coder
+[no-cd]
+push:
+	#!/usr/bin/env bash
 
-import '../Justfile'
+	template=$(basename $(pwd))
+	tar -cvh --exclude .terraform . | coder templates push -y -d - ${template}
