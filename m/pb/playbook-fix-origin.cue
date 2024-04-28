@@ -4,7 +4,7 @@ playbook: fix_git: [{
 	name:  "fix git repo"
 	hosts: "all:!penguin"
 	roles: [
-		"fix_origin"
+		"fix_origin",
 	]
 }]
 

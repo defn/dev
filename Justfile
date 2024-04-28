@@ -1,4 +1,5 @@
 mod github 'm/common/github.Justfile'
+mod playbook 'm/common/playbook.Justfile'
 
 create-coder-agent:
 	#!/usr/bin/env bash
@@ -17,3 +18,6 @@ destroy-coder-agent:
 
 dyff *args:
 	@just github::dyff {{args}}
+
+play pb *lim:
+	just playbook::playbook {{pb}} {{lim}}
