@@ -39,7 +39,7 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 	})
 
 	paramCommand := datacoderparameter.NewDataCoderParameter(stack, infra.Js("command"), &datacoderparameter.DataCoderParameterConfig{
-		Default:     infra.Js("make coder-ssh-linux"),
+		Default:     infra.Js("j create-coder-agent"),
 		Description: infra.Js("Remote command"),
 		DisplayName: infra.Js("Remote command"),
 		Icon:        infra.Js("https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"),

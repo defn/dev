@@ -26,7 +26,7 @@ data "coder_parameter" "homedir" {
 }
 
 data "coder_parameter" "command" {
-  default      = "make coder-ssh-linux"
+  default      = "j create-coder-agent"
   description  = "Remote command"
   display_name = "Remote command"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
