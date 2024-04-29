@@ -61,7 +61,7 @@ up *name:
 		sleep 5
 	done
 
-	just coder::open "${name}"
+	just coder::open-inner "${name}"
 
 # Deletes Coder workspace
 [no-cd]
@@ -85,9 +85,31 @@ down *name:
 	docker rm -f "${name}" 2>/dev/null || true
 	coder delete ${name} --yes 1>/dev/null 2>/dev/null || true
 
-# Opens Coder workspace in browser
+# Opens Coder workspace in browser.  Creates workspace if necessary
 [no-cd]
 open *name:
+	#!/usr/bin/env bash
+	set -exfuo pipefail
+
+	name={{name}}
+
+	if [[ -z "${name}" ]]; then
+		if [[ -n "${CODER_NAME:-}" ]]; then
+			name="$(echo "${CODER_NAME-}" | cut -d- -f1)-$(basename $(pwd))"
+		else
+			name="$(uname -n)"
+		fi
+	fi
+
+	if curl -sSL $(cat $HOME/.config/coderv2/url)/api/v2/users/$(coder list | tail -1 | awk '{print $1}' | cut -d/ -f1)/workspace/${name} -H "Coder-Session-Token: $(cat $HOME/.config/coderv2/session)" | jq -r '(.latest_build.resources[].agents//[])[].apps[] | select(.display_name == "code-server") | .health' | grep -q ^healthy; then 
+		just coder::open-inner "${name}"
+	else
+		just coder::up "${name}"
+	fi
+
+# Internal: Opens Coder workspace in browser
+[no-cd, private]
+open-inner *name:
 	#!/usr/bin/env bash
 	set -exfuo pipefail
 
