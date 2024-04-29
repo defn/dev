@@ -61,7 +61,7 @@ up *name:
 		sleep 5
 	done
 
-	just coder::open-inner "${name}"
+	just coder::open "${name}"
 
 # Deletes Coder workspace
 [no-cd]
@@ -87,7 +87,7 @@ down *name:
 
 # Opens Coder workspace in browser.  Creates workspace if necessary
 [no-cd]
-open *name:
+use *name:
 	#!/usr/bin/env bash
 	set -exfuo pipefail
 
@@ -102,14 +102,14 @@ open *name:
 	fi
 
 	if curl -sSL $(cat $HOME/.config/coderv2/url)/api/v2/users/$(coder list | tail -1 | awk '{print $1}' | cut -d/ -f1)/workspace/${name} -H "Coder-Session-Token: $(cat $HOME/.config/coderv2/session)" | jq -r '(.latest_build.resources[].agents//[])[].apps[] | select(.display_name == "code-server") | .health' | grep -q ^healthy; then 
-		just coder::open-inner "${name}"
+		just coder::open "${name}"
 	else
 		just coder::up "${name}"
 	fi
 
-# Internal: Opens Coder workspace in browser
-[no-cd, private]
-open-inner *name:
+# Opens Coder workspace in browser
+[no-cd]
+open*name:
 	#!/usr/bin/env bash
 	set -exfuo pipefail
 

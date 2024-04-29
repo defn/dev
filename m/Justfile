@@ -6,5 +6,11 @@ mod gpg 'common/gpg.Justfile'
 mod aws 'common/aws.Justfile'
 mod playbook 'common/playbook.Justfile'
 
+# Run a playbook
 play pb *lim:
 	just playbook::playbook {{pb}} {{lim}}
+
+# Use this workspace
+[no-cd]
+use:
+	just coder::use
