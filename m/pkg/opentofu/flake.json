@@ -1,6 +1,6 @@
 {
   "slug": "pkg-opentofu",
   "ghrepo": "opentofu/opentofu",
-  "vendor": "1.6.2",
-  "revision": "1"
+  "vendor": "1.7.0",
+  "revision": "0"
 }
