@@ -91,5 +91,6 @@
   "genieai.enableConversationHistory": true,
   "genieai.openai.model": "gpt-4",
   "editor.stickyScroll.enabled": false,
-  "markdown.marp.exportType": "html"
+  "markdown.marp.exportType": "html",
+  "markdown.marp.enableHtml": true
 }

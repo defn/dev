@@ -13,7 +13,10 @@ backgroundColor: "#fff"
 
 ## butts and raisins
 
-<h4><i class="fa fa-flag"></i> One Font, 675 Icons, and add other texts here</h4>
+<h4>
+    <i class="fa-duotone fa-glass" style="--fa-primary-color: #22592d; --fa-secondary-color: #0b93c1;"></i>
+    One Font, and add other texts here
+</h4>
 
 [Next: More Beans](#2)
 
