@@ -90,5 +90,6 @@
   },
   "genieai.enableConversationHistory": true,
   "genieai.openai.model": "gpt-4",
-  "editor.stickyScroll.enabled": false
+  "editor.stickyScroll.enabled": false,
+  "markdown.marp.exportType": "html"
 }
