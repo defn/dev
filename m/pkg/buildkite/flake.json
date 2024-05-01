@@ -1,6 +1,6 @@
 {
   "slug": "pkg-buildkite",
   "ghrepo": "buildkite/agent",
-  "vendor": "3.70.0",
-  "revision": "1"
+  "vendor": "3.71.0",
+  "revision": "0"
 }
