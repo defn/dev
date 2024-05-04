@@ -1,8 +1,16 @@
 package pb
 
 playbook: home: [{
-	name:  "install new flakes"
+	name:  "Install new flakes"
 	hosts: "all:!penguin:!rpi3"
+	roles: [
+		"home_flakes",
+	]
+}]
+
+playbook: cache: [{
+	name:  "Cache new flakes"
+	hosts: "cache"
 	roles: [
 		"home_flakes",
 	]
