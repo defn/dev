@@ -1,3 +1,5 @@
+import "../Justfile"
+
 # Generate Ansible playbooks from CUE
 build:
 	#!/usr/bin/env bash
@@ -8,7 +10,8 @@ build:
 	cue export --out json -e fs | jq -r 'to_entries[] | "\(.key) \(.value | @base64)"' | ../c/decode_base64.py 
 
 # Run a playbook
-playbook pb *lim:
+[private]
+pb pb *lim:
 	#!/usr/bin/env bash
 
 	if [[ -z "{{lim}}" ]]; then
