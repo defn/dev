@@ -6,5 +6,10 @@ common:
 run *args:
     cd repo && ../common/bin/python main.py {{args}}
 
-checkpoints:
+sd15:
     wget -P repo/models/checkpoints https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt
+
+cascade:
+    wget -P repo/models/checkpoints https://huggingface.co/stabilityai/stable-cascade/tree/main/comfyui_checkpoints
+    wget -P repo/models/checkpoints https://huggingface.co/stabilityai/stable-cascade/resolve/main/comfyui_checkpoints/stable_cascade_stage_b.safetensors
+    wget -P repo/models/checkpoints https://huggingface.co/stabilityai/stable-cascade/resolve/main/comfyui_checkpoints/stable_cascade_stage_c.safetensors
