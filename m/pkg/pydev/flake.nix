@@ -12,7 +12,7 @@
     defaultPackage = ctx: ctx.wrap.nullBuilder {
       propagatedBuildInputs =
         with (import inputs.latest { system = ctx.system; }); [
-          (python3.withPackages (ps: with ps; [ pipx ]))
+          (python3.withPackages (ps: with ps; [ pip pipx ]))
         ];
     };
   };

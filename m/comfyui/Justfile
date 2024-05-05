@@ -1,0 +1,7 @@
+common:
+    sudo apt install libstdc++-10-dev
+    /usr/bin/python3 -m venv common
+    common/bin/pip install -r repo/requirements.txt
+
+run *args:
+    common/bin/python repo/main.py {{args}}
