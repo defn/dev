@@ -4,4 +4,7 @@ common:
     common/bin/pip install -r repo/requirements.txt
 
 run *args:
-    common/bin/python repo/main.py {{args}}
+    cd repo && ../common/bin/python main.py {{args}}
+
+checkpoints:
+    wget -P repo/models/checkpoints https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt
