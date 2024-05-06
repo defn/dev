@@ -129,6 +129,7 @@ rehome:
 	$(MAKE) home
 
 home:
+	bin/persist-cache
 	cd m && bazel version
 	cd m/home && b build
 	rm -rf /tmp/nix-tmp /tmp/nix-bin
