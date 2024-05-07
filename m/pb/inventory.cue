@@ -45,7 +45,7 @@ inventory: {
 	}
 
 	chrome: hosts: [
-		"penguin",
+		//"penguin",
 	]
 
 	rpi: children: [
@@ -72,6 +72,6 @@ inventory: {
 	]
 
 	heavy: hosts: [
-		"thinkpad",
+		//"thinkpad",
 	]
 }

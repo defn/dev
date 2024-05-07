@@ -2,7 +2,7 @@ package pb
 
 playbook: fix_git: [{
 	name:  "fix git repo"
-	hosts: "all:!penguin"
+	hosts: "all"
 	roles: [
 		"fix_origin",
 	]
