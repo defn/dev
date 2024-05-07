@@ -21,3 +21,8 @@ dyff *args:
 
 play pb *lim:
 	just playbook::playbook {{pb}} {{lim}}
+
+all:
+	just play cache
+	just play home
+	just play upgrade
