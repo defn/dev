@@ -3,7 +3,7 @@
   outputs = inputs: inputs.pkg.downloadMain rec {
     src = ./.;
 
-    url_template = input: "https://download.konghq.com/kuma-binaries-release/kuma-${input.vendor}-${input.os}-${input.arch}.tar.gz";
+    url_template = input: "https://packages.konghq.com/public/kuma-binaries-release/raw/names/kuma-${input.os}-${input.arch}/versions/${input.vendor}/kuma-${input.vendor}-${input.os}-${input.arch}.tar.gz";
 
     installPhase = pkg: ''
       install -m 0755 -d $out $out/bin
@@ -17,22 +17,22 @@
       "x86_64-linux" = {
         os = "linux";
         arch = "amd64";
-        sha256 = "sha256-q+b+rzAFX1bH77uXMZLja2LweOl91DujfFmiQF05u2Q="; # x86_64-linux
+        sha256 = "sha256-/sP8sB8gETxaBFiXMOpg1UDJsU6u/r9ip2ZIXDDMqfU="; # x86_64-linux
       };
       "aarch64-linux" = {
         os = "linux";
         arch = "arm64";
-        sha256 = "sha256-3eZF/CoqmN4insUyQv4j+h3UdZRu0m923z+9rnDWsZ0="; # aarch64-linux
+        sha256 = "sha256-A/o1Q8PiY5Q9tk1Hb1deqerdGFlOfHDnCPQtfXzxkQo="; # aarch64-linux
       };
       "x86_64-darwin" = {
         os = "darwin";
         arch = "amd64";
-        sha256 = "sha256-NqfKB83Vsm1SZyHhPihI4UGTtHVIhBfdoxgJ4RzDpaM="; # x86_64-darwin
+        sha256 = "sha256-YHDymg8nz/Aemi/IkiCsY9xFCAX+h9GGwILN3wyEffk="; # x86_64-darwin
       };
       "aarch64-darwin" = {
         os = "darwin";
         arch = "arm64";
-        sha256 = "sha256-NrCHZwlfOjbeEa7QCISPL1ZhJ5VEtIyNc6oYWLd7eow="; # aarch64-darwin
+        sha256 = "sha256-gEYctYsz717Rh868XhBYDkIC825QEd4ouXsurNAEwN0="; # aarch64-darwin
       };
     };
   };
