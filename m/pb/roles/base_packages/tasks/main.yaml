@@ -1,4 +1,5 @@
 - name: Disable unattended-upgrades service
+  become: true
   service:
     name: unattended-upgrades
     enabled: "no"
