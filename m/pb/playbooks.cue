@@ -67,6 +67,13 @@ role: rpi_packages: tasks: [{
 }]
 
 role: base_packages: tasks: [{
+	name: "Disable unattended-upgrades service"
+	service: {
+		name:    "unattended-upgrades"
+		enabled: "no"
+		state:   "stopped"
+	}
+}, {
 	name:   "Remove packages"
 	become: true
 	apt: {

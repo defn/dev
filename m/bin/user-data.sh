@@ -37,7 +37,6 @@ http*)
 esac
 
 git reset --hard pub/main
-git branch -u origin/main
 
 (
 	set +x
