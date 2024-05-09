@@ -6,6 +6,7 @@ tf/cdktf.out
 node_modules
 demo/node_modules
 cutout
+comfyui
 demo/nix/.direnv
 pkg/acme/.direnv
 pkg/argocd/.direnv
@@ -24,10 +25,8 @@ pkg/cloud/.direnv
 pkg/cloudflared/.direnv
 pkg/cloudflareddns/.direnv
 pkg/cloudnuke/.direnv
-pkg/coder-compat/.direnv
 pkg/coder/.direnv
 pkg/codeserver/.direnv
-pkg/coredns/.direnv
 pkg/cosign/.direnv
 pkg/crossplane/.direnv
 pkg/cue/.direnv
@@ -109,10 +108,8 @@ pkg/cloud/result
 pkg/cloudflared/result
 pkg/cloudflareddns/result
 pkg/cloudnuke/result
-pkg/coder-compat/result
 pkg/coder/result
 pkg/codeserver/result
-pkg/coredns/result
 pkg/cosign/result
 pkg/crossplane/result
 pkg/cue/result

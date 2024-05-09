@@ -120,6 +120,7 @@ bazel-ignore:
 	echo node_modules >> .bazelignore
 	echo demo/node_modules >> .bazelignore
 	echo cutout >> .bazelignore
+	echo comfyui >> .bazelignore
 	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1.direnv}' | sort >> .bazelignore
 	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1result}' | sort >> .bazelignore
 	git ls-files | grep '{{cookiecutter' | perl -pe 's{\}\}/.*}{\}\}}' | sort -u >> .bazelignore
