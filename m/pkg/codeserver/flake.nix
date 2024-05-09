@@ -39,12 +39,12 @@
       };
       "x86_64-darwin" = {
         os = "macos";
-        arch = "amd64";
+        arch = "arm64"; # amd64 version no loner available
         sha256 = "sha256-FS47wofOxhh6gyw5cOF90gFnFQHKJra0g1Wg4Q4SdrY="; # x86_64-darwin
       };
       "aarch64-darwin" = {
         os = "macos";
-        arch = "amd64"; # code-server not avaialble for darwin arm64
+        arch = "arm64";
         sha256 = "sha256-FS47wofOxhh6gyw5cOF90gFnFQHKJra0g1Wg4Q4SdrY="; # aarch64-darwin
       };
     };
