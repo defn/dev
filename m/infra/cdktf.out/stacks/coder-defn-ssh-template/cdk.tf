@@ -5,7 +5,7 @@ terraform {
       source  = "null"
     }
     coder = {
-      version = "0.13.0"
+      version = "0.21.0"
       source  = "coder/coder"
     }
   }
@@ -112,9 +112,9 @@ resource "coder_app" "code-server" {
   agent_id     = coder_agent.main.id
   display_name = "code-server"
   icon         = "/icon/code.svg"
-  share        = "authenticated"
   slug         = "cs"
   subdomain    = false
+  share        = "public"
   url          = "http://localhost:8080/?folder=${data.coder_parameter.homedir.value}"
   healthcheck {
     interval  = 5
