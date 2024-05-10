@@ -1702,10 +1702,10 @@
       "general": {
         "bzlTransitiveDigest": "D1+rhhbwX4ufoTmeUVxDpPg+Sknv3QzVXZnyK2zOjj4=",
         "recordedFileInputs": {
-          "@@//go.mod": "e4bb47b16cba8dab274c3cf7efb32d302e8b279d32579a2ed9d2757843ed9e5b",
+          "@@//go.mod": "2a4d8fa6a01cd1bbf47533d4ba21b71e0ffffc574aca5d1b885ad19808fb0c44",
           "@@rules_go~//go.mod": "de22304b720f7f61350ec1c9739de6c0a1b1103fd22bfeb6e92c6c843ddc6d6e",
           "@@gazelle~//go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
-          "@@//go.sum": "24d59b2f4d047c98731e33ca859f9a85ce8422130fdd4421ad1fd9a4e7674f04",
+          "@@//go.sum": "98a247918e163e1d02995ca9a3a947698275011c7e06f9a4984aed739d10be3d",
           "@@rules_go~//go.sum": "d56fdb19b21a5f12bcf625c49432371ac39c2def0f564098fbda107f7c080f40",
           "@@gazelle~//go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473"
         },
@@ -1872,9 +1872,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:Ir5PV2yGjh5x2kIxrTB2267bRyHzuREpeJFEKVGwyS8=",
+              "sum": "h1:3s1wS3IVnTfnRE2syUwUYok8iiByWETr6fWuwNIyzb0=",
               "replace": "",
-              "version": "v19.17.0"
+              "version": "v19.18.0"
             }
           },
           "com_github_opencontainers_image_spec": {
@@ -2127,9 +2127,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:MAzmm+JtFxQwTPb1cVMLkemw2OxLy5AB/d/rxtAwGQQ=",
+              "sum": "h1:sadMIsgmHpEOGbUs6VtHBXRR1OHevnj7hLx9ZcdNGW4=",
               "replace": "",
-              "version": "v0.0.0-20240116145035-ef3ab179eed6"
+              "version": "v0.0.0-20230328191034-3462fbc510c0"
             }
           },
           "com_github_pmezard_go_difflib": {
@@ -2789,9 +2789,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:nZLLbEy/pTxb88UcqmA/z/0tuayG0lnk2zTLS6C5VO0=",
+              "sum": "h1:yYaodhLbLzFGlUbQq7uyYToKm54puAqXyIXD3fhaPIs=",
               "replace": "",
-              "version": "v0.17.0"
+              "version": "v0.17.4"
             }
           },
           "com_github_sagikazarmark_slog_shim": {

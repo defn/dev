@@ -3,21 +3,22 @@ module github.com/defn/dev/m
 go 1.22.1
 
 // pin, otherwise something protobuf breaks
-// require github.com/protocolbuffers/txtpbfmt v0.0.0-20240116145035-ef3ab179eed6 // indirect
-require github.com/protocolbuffers/txtpbfmt v0.0.0-20240116145035-ef3ab179eed6 // indirect
+/// https://github.com/cue-lang/cue/blob/master/go.mod
+// require github.com/protocolbuffers/txtpbfmt v0.0.0-20230328191034-3462fbc510c0 // indirect
+require github.com/protocolbuffers/txtpbfmt v0.0.0-20230328191034-3462fbc510c0 // indirect
 
 require (
 	cuelang.org/go v0.8.2
 	github.com/aws/constructs-go/constructs/v10 v10.3.0
 	github.com/aws/jsii-runtime-go v1.98.0
-	github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.17.0
+	github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.18.0
 	github.com/cdktf/cdktf-provider-null-go/null/v10 v10.0.0
 	github.com/charmbracelet/bubbles v0.18.0
 	github.com/charmbracelet/bubbletea v0.26.2
 	github.com/charmbracelet/lipgloss v0.10.0
 	github.com/gin-gonic/gin v1.10.0
 	github.com/hashicorp/terraform-cdk-go/cdktf v0.20.7
-	github.com/noisysockets/noisysockets v0.17.0
+	github.com/noisysockets/noisysockets v0.17.4
 	github.com/spf13/cobra v1.8.0
 	github.com/spf13/viper v1.18.2
 	github.com/urfave/cli/v2 v2.27.2
