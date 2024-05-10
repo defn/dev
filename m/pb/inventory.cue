@@ -10,15 +10,10 @@ inventory: {
 		bazel_remote_cache_port:   string | *"9092"          // public port
 	}
 
-	cache1: {
+	cache: {
 		children: [
 			"hetzner",
-		]
-	}
-
-	cache2: {
-		children: [
-			"macmini",
+			"mac"
 		]
 	}
 
@@ -47,10 +42,6 @@ inventory: {
 		hosts: [
 			"macmini",
 		]
-		vars: {
-			bazel_remote_cache_server: "district.tail3884f.ts.net"
-			bazel_remote_cache_port:   "9092"
-		}
 	}
 
 	chrome: hosts: [
