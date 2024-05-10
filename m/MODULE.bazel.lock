@@ -1702,10 +1702,10 @@
       "general": {
         "bzlTransitiveDigest": "D1+rhhbwX4ufoTmeUVxDpPg+Sknv3QzVXZnyK2zOjj4=",
         "recordedFileInputs": {
-          "@@//go.mod": "9af773ad3e0aeb72ec7d5d90eb84de433bb1ffe1a3d7a3f4f2e80d308d97d89d",
+          "@@//go.mod": "e4bb47b16cba8dab274c3cf7efb32d302e8b279d32579a2ed9d2757843ed9e5b",
           "@@rules_go~//go.mod": "de22304b720f7f61350ec1c9739de6c0a1b1103fd22bfeb6e92c6c843ddc6d6e",
           "@@gazelle~//go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
-          "@@//go.sum": "ca546815a02d9d14f048971a29bf2133be7646e67cafe76533a4f67bf18a2eaa",
+          "@@//go.sum": "24d59b2f4d047c98731e33ca859f9a85ce8422130fdd4421ad1fd9a4e7674f04",
           "@@rules_go~//go.sum": "d56fdb19b21a5f12bcf625c49432371ac39c2def0f564098fbda107f7c080f40",
           "@@gazelle~//go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473"
         },
@@ -2127,9 +2127,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:DRZwH75/E4a2SOr7+gKZ99OEhmjzBzAhgyTnzo1TepY=",
+              "sum": "h1:MAzmm+JtFxQwTPb1cVMLkemw2OxLy5AB/d/rxtAwGQQ=",
               "replace": "",
-              "version": "v0.0.0-20240416193709-1e18ef0a7fdc"
+              "version": "v0.0.0-20240116145035-ef3ab179eed6"
             }
           },
           "com_github_pmezard_go_difflib": {
@@ -3251,6 +3251,7 @@
             "ruleClassName": "_go_repository_config",
             "attributes": {
               "importpaths": {
+                "com_github_protocolbuffers_txtpbfmt": "github.com/protocolbuffers/txtpbfmt",
                 "org_cuelang_go": "cuelang.org/go",
                 "com_github_aws_constructs_go_constructs_v10": "github.com/aws/constructs-go/constructs/v10",
                 "com_github_aws_jsii_runtime_go": "github.com/aws/jsii-runtime-go",
@@ -3314,7 +3315,6 @@
                 "com_github_opencontainers_go_digest": "github.com/opencontainers/go-digest",
                 "com_github_opencontainers_image_spec": "github.com/opencontainers/image-spec",
                 "com_github_pelletier_go_toml_v2": "github.com/pelletier/go-toml/v2",
-                "com_github_protocolbuffers_txtpbfmt": "github.com/protocolbuffers/txtpbfmt",
                 "com_github_rivo_uniseg": "github.com/rivo/uniseg",
                 "com_github_rogpeppe_go_internal": "github.com/rogpeppe/go-internal",
                 "com_github_russross_blackfriday_v2": "github.com/russross/blackfriday/v2",
