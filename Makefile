@@ -126,7 +126,7 @@ cache:
 rehome:
 	this-nix-gc
 	rm -f bin/nix/.head-* bin/nix.tmp*
-	$(MAKE) home
+	$(MAKE) install
 
 home:
 	bin/persist-cache
