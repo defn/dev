@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 
-// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/script coder_script}.
+// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/script coder_script}.
 type Script interface {
 	cdktf.TerraformResource
 	AgentId() *string
@@ -544,7 +544,7 @@ func (j *jsiiProxy_Script) TimeoutInput() *float64 {
 }
 
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/script coder_script} Resource.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/script coder_script} Resource.
 func NewScript(scope constructs.Construct, id *string, config *ScriptConfig) Script {
 	_init_.Initialize()
 
@@ -562,7 +562,7 @@ func NewScript(scope constructs.Construct, id *string, config *ScriptConfig) Scr
 	return &j
 }
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/script coder_script} Resource.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/script coder_script} Resource.
 func NewScript_Override(s Script, scope constructs.Construct, id *string, config *ScriptConfig) {
 	_init_.Initialize()
 

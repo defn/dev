@@ -140,6 +140,10 @@ func (j *jsiiProxy_Agent) validateSetMotdFileParameters(val *string) error {
 	return nil
 }
 
+func (j *jsiiProxy_Agent) validateSetOrderParameters(val *float64) error {
+	return nil
+}
+
 func (j *jsiiProxy_Agent) validateSetOsParameters(val *string) error {
 	return nil
 }

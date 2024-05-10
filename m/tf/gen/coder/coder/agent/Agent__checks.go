@@ -460,6 +460,14 @@ func (j *jsiiProxy_Agent) validateSetMotdFileParameters(val *string) error {
 	return nil
 }
 
+func (j *jsiiProxy_Agent) validateSetOrderParameters(val *float64) error {
+	if val == nil {
+		return fmt.Errorf("parameter val is required, but nil was provided")
+	}
+
+	return nil
+}
+
 func (j *jsiiProxy_Agent) validateSetOsParameters(val *string) error {
 	if val == nil {
 		return fmt.Errorf("parameter val is required, but nil was provided")

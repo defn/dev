@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 
-// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/metadata coder_metadata}.
+// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/metadata coder_metadata}.
 type Metadata interface {
 	cdktf.TerraformResource
 	// Experimental.
@@ -426,7 +426,7 @@ func (j *jsiiProxy_Metadata) TerraformResourceType() *string {
 }
 
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/metadata coder_metadata} Resource.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/metadata coder_metadata} Resource.
 func NewMetadata(scope constructs.Construct, id *string, config *MetadataConfig) Metadata {
 	_init_.Initialize()
 
@@ -444,7 +444,7 @@ func NewMetadata(scope constructs.Construct, id *string, config *MetadataConfig)
 	return &j
 }
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/metadata coder_metadata} Resource.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/metadata coder_metadata} Resource.
 func NewMetadata_Override(m Metadata, scope constructs.Construct, id *string, config *MetadataConfig) {
 	_init_.Initialize()
 

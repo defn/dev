@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 
-// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/workspace coder_workspace}.
+// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/workspace coder_workspace}.
 type DataCoderWorkspace interface {
 	cdktf.TerraformDataSource
 	AccessPort() *float64
@@ -44,6 +44,7 @@ type DataCoderWorkspace interface {
 	Node() constructs.Node
 	Owner() *string
 	OwnerEmail() *string
+	OwnerGroups() *[]*string
 	OwnerId() *string
 	OwnerName() *string
 	OwnerOidcAccessToken() *string
@@ -262,6 +263,16 @@ func (j *jsiiProxy_DataCoderWorkspace) OwnerEmail() *string {
 	return returns
 }
 
+func (j *jsiiProxy_DataCoderWorkspace) OwnerGroups() *[]*string {
+	var returns *[]*string
+	_jsii_.Get(
+		j,
+		"ownerGroups",
+		&returns,
+	)
+	return returns
+}
+
 func (j *jsiiProxy_DataCoderWorkspace) OwnerId() *string {
 	var returns *string
 	_jsii_.Get(
@@ -403,7 +414,7 @@ func (j *jsiiProxy_DataCoderWorkspace) Transition() *string {
 }
 
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/workspace coder_workspace} Data Source.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/workspace coder_workspace} Data Source.
 func NewDataCoderWorkspace(scope constructs.Construct, id *string, config *DataCoderWorkspaceConfig) DataCoderWorkspace {
 	_init_.Initialize()
 
@@ -421,7 +432,7 @@ func NewDataCoderWorkspace(scope constructs.Construct, id *string, config *DataC
 	return &j
 }
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/workspace coder_workspace} Data Source.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/workspace coder_workspace} Data Source.
 func NewDataCoderWorkspace_Override(d DataCoderWorkspace, scope constructs.Construct, id *string, config *DataCoderWorkspaceConfig) {
 	_init_.Initialize()
 

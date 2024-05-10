@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 
-// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/agent coder_agent}.
+// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/agent coder_agent}.
 type Agent interface {
 	cdktf.TerraformResource
 	Arch() *string
@@ -71,6 +71,9 @@ type Agent interface {
 	MotdFileInput() *string
 	// The tree node.
 	Node() constructs.Node
+	Order() *float64
+	SetOrder(val *float64)
+	OrderInput() *float64
 	Os() *string
 	SetOs(val *string)
 	OsInput() *string
@@ -163,6 +166,7 @@ type Agent interface {
 	ResetLoginBeforeReady()
 	ResetMetadata()
 	ResetMotdFile()
+	ResetOrder()
 	// Resets a previously passed logical Id to use the auto-generated logical id again.
 	// Experimental.
 	ResetOverrideLogicalId()
@@ -500,6 +504,26 @@ func (j *jsiiProxy_Agent) Node() constructs.Node {
 	return returns
 }
 
+func (j *jsiiProxy_Agent) Order() *float64 {
+	var returns *float64
+	_jsii_.Get(
+		j,
+		"order",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_Agent) OrderInput() *float64 {
+	var returns *float64
+	_jsii_.Get(
+		j,
+		"orderInput",
+		&returns,
+	)
+	return returns
+}
+
 func (j *jsiiProxy_Agent) Os() *string {
 	var returns *string
 	_jsii_.Get(
@@ -711,7 +735,7 @@ func (j *jsiiProxy_Agent) TroubleshootingUrlInput() *string {
 }
 
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/agent coder_agent} Resource.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/agent coder_agent} Resource.
 func NewAgent(scope constructs.Construct, id *string, config *AgentConfig) Agent {
 	_init_.Initialize()
 
@@ -729,7 +753,7 @@ func NewAgent(scope constructs.Construct, id *string, config *AgentConfig) Agent
 	return &j
 }
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/agent coder_agent} Resource.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/agent coder_agent} Resource.
 func NewAgent_Override(a Agent, scope constructs.Construct, id *string, config *AgentConfig) {
 	_init_.Initialize()
 
@@ -873,6 +897,17 @@ func (j *jsiiProxy_Agent)SetMotdFile(val *string) {
 	_jsii_.Set(
 		j,
 		"motdFile",
+		val,
+	)
+}
+
+func (j *jsiiProxy_Agent)SetOrder(val *float64) {
+	if err := j.validateSetOrderParameters(val); err != nil {
+		panic(err)
+	}
+	_jsii_.Set(
+		j,
+		"order",
 		val,
 	)
 }
@@ -1416,6 +1451,14 @@ func (a *jsiiProxy_Agent) ResetMotdFile() {
 	_jsii_.InvokeVoid(
 		a,
 		"resetMotdFile",
+		nil, // no parameters
+	)
+}
+
+func (a *jsiiProxy_Agent) ResetOrder() {
+	_jsii_.InvokeVoid(
+		a,
+		"resetOrder",
 		nil, // no parameters
 	)
 }

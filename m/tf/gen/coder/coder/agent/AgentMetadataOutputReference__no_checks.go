@@ -72,6 +72,10 @@ func (j *jsiiProxy_AgentMetadataOutputReference) validateSetKeyParameters(val *s
 	return nil
 }
 
+func (j *jsiiProxy_AgentMetadataOutputReference) validateSetOrderParameters(val *float64) error {
+	return nil
+}
+
 func (j *jsiiProxy_AgentMetadataOutputReference) validateSetScriptParameters(val *string) error {
 	return nil
 }

@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 
-// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/app coder_app}.
+// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/app coder_app}.
 type App interface {
 	cdktf.TerraformResource
 	AgentId() *string
@@ -65,6 +65,9 @@ type App interface {
 	NameInput() *string
 	// The tree node.
 	Node() constructs.Node
+	Order() *float64
+	SetOrder(val *float64)
+	OrderInput() *float64
 	// Experimental.
 	Provider() cdktf.TerraformProvider
 	// Experimental.
@@ -147,6 +150,7 @@ type App interface {
 	ResetIcon()
 	ResetId()
 	ResetName()
+	ResetOrder()
 	// Resets a previously passed logical Id to use the auto-generated logical id again.
 	// Experimental.
 	ResetOverrideLogicalId()
@@ -432,6 +436,26 @@ func (j *jsiiProxy_App) Node() constructs.Node {
 	return returns
 }
 
+func (j *jsiiProxy_App) Order() *float64 {
+	var returns *float64
+	_jsii_.Get(
+		j,
+		"order",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_App) OrderInput() *float64 {
+	var returns *float64
+	_jsii_.Get(
+		j,
+		"orderInput",
+		&returns,
+	)
+	return returns
+}
+
 func (j *jsiiProxy_App) Provider() cdktf.TerraformProvider {
 	var returns cdktf.TerraformProvider
 	_jsii_.Get(
@@ -593,7 +617,7 @@ func (j *jsiiProxy_App) UrlInput() *string {
 }
 
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/app coder_app} Resource.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/app coder_app} Resource.
 func NewApp(scope constructs.Construct, id *string, config *AppConfig) App {
 	_init_.Initialize()
 
@@ -611,7 +635,7 @@ func NewApp(scope constructs.Construct, id *string, config *AppConfig) App {
 	return &j
 }
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/app coder_app} Resource.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/app coder_app} Resource.
 func NewApp_Override(a App, scope constructs.Construct, id *string, config *AppConfig) {
 	_init_.Initialize()
 
@@ -744,6 +768,17 @@ func (j *jsiiProxy_App)SetName(val *string) {
 	_jsii_.Set(
 		j,
 		"name",
+		val,
+	)
+}
+
+func (j *jsiiProxy_App)SetOrder(val *float64) {
+	if err := j.validateSetOrderParameters(val); err != nil {
+		panic(err)
+	}
+	_jsii_.Set(
+		j,
+		"order",
 		val,
 	)
 }
@@ -1238,6 +1273,14 @@ func (a *jsiiProxy_App) ResetName() {
 	_jsii_.InvokeVoid(
 		a,
 		"resetName",
+		nil, // no parameters
+	)
+}
+
+func (a *jsiiProxy_App) ResetOrder() {
+	_jsii_.InvokeVoid(
+		a,
+		"resetOrder",
 		nil, // no parameters
 	)
 }

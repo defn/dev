@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 
-// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/parameter coder_parameter}.
+// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/parameter coder_parameter}.
 type DataCoderParameter interface {
 	cdktf.TerraformDataSource
 	// Experimental.
@@ -547,7 +547,7 @@ func (j *jsiiProxy_DataCoderParameter) Value() *string {
 }
 
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/parameter coder_parameter} Data Source.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/parameter coder_parameter} Data Source.
 func NewDataCoderParameter(scope constructs.Construct, id *string, config *DataCoderParameterConfig) DataCoderParameter {
 	_init_.Initialize()
 
@@ -565,7 +565,7 @@ func NewDataCoderParameter(scope constructs.Construct, id *string, config *DataC
 	return &j
 }
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/parameter coder_parameter} Data Source.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/parameter coder_parameter} Data Source.
 func NewDataCoderParameter_Override(d DataCoderParameter, scope constructs.Construct, id *string, config *DataCoderParameterConfig) {
 	_init_.Initialize()
 

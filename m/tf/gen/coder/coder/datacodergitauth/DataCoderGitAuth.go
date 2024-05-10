@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 
-// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/git_auth coder_git_auth}.
+// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/git_auth coder_git_auth}.
 type DataCoderGitAuth interface {
 	cdktf.TerraformDataSource
 	AccessToken() *string
@@ -272,7 +272,7 @@ func (j *jsiiProxy_DataCoderGitAuth) TerraformResourceType() *string {
 }
 
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/git_auth coder_git_auth} Data Source.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/git_auth coder_git_auth} Data Source.
 func NewDataCoderGitAuth(scope constructs.Construct, id *string, config *DataCoderGitAuthConfig) DataCoderGitAuth {
 	_init_.Initialize()
 
@@ -290,7 +290,7 @@ func NewDataCoderGitAuth(scope constructs.Construct, id *string, config *DataCod
 	return &j
 }
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/git_auth coder_git_auth} Data Source.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/git_auth coder_git_auth} Data Source.
 func NewDataCoderGitAuth_Override(d DataCoderGitAuth, scope constructs.Construct, id *string, config *DataCoderGitAuthConfig) {
 	_init_.Initialize()
 

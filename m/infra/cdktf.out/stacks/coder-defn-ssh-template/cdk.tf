@@ -112,9 +112,9 @@ resource "coder_app" "code-server" {
   agent_id     = coder_agent.main.id
   display_name = "code-server"
   icon         = "/icon/code.svg"
+  share        = "owner"
   slug         = "cs"
   subdomain    = false
-  share        = "public"
   url          = "http://localhost:8080/?folder=${data.coder_parameter.homedir.value}"
   healthcheck {
     interval  = 5

@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 
-// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/provisioner coder_provisioner}.
+// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/provisioner coder_provisioner}.
 type DataCoderProvisioner interface {
 	cdktf.TerraformDataSource
 	Arch() *string
@@ -284,7 +284,7 @@ func (j *jsiiProxy_DataCoderProvisioner) TerraformResourceType() *string {
 }
 
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/provisioner coder_provisioner} Data Source.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/provisioner coder_provisioner} Data Source.
 func NewDataCoderProvisioner(scope constructs.Construct, id *string, config *DataCoderProvisionerConfig) DataCoderProvisioner {
 	_init_.Initialize()
 
@@ -302,7 +302,7 @@ func NewDataCoderProvisioner(scope constructs.Construct, id *string, config *Dat
 	return &j
 }
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/provisioner coder_provisioner} Data Source.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/provisioner coder_provisioner} Data Source.
 func NewDataCoderProvisioner_Override(d DataCoderProvisioner, scope constructs.Construct, id *string, config *DataCoderProvisionerConfig) {
 	_init_.Initialize()
 

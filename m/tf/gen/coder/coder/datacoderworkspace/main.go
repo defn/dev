@@ -38,6 +38,7 @@ func init() {
 			_jsii_.MemberMethod{JsiiMethod: "overrideLogicalId", GoMethod: "OverrideLogicalId"},
 			_jsii_.MemberProperty{JsiiProperty: "owner", GoGetter: "Owner"},
 			_jsii_.MemberProperty{JsiiProperty: "ownerEmail", GoGetter: "OwnerEmail"},
+			_jsii_.MemberProperty{JsiiProperty: "ownerGroups", GoGetter: "OwnerGroups"},
 			_jsii_.MemberProperty{JsiiProperty: "ownerId", GoGetter: "OwnerId"},
 			_jsii_.MemberProperty{JsiiProperty: "ownerName", GoGetter: "OwnerName"},
 			_jsii_.MemberProperty{JsiiProperty: "ownerOidcAccessToken", GoGetter: "OwnerOidcAccessToken"},

@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 
-// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/env coder_env}.
+// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/env coder_env}.
 type Env interface {
 	cdktf.TerraformResource
 	AgentId() *string
@@ -377,7 +377,7 @@ func (j *jsiiProxy_Env) ValueInput() *string {
 }
 
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/env coder_env} Resource.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/env coder_env} Resource.
 func NewEnv(scope constructs.Construct, id *string, config *EnvConfig) Env {
 	_init_.Initialize()
 
@@ -395,7 +395,7 @@ func NewEnv(scope constructs.Construct, id *string, config *EnvConfig) Env {
 	return &j
 }
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/env coder_env} Resource.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/env coder_env} Resource.
 func NewEnv_Override(e Env, scope constructs.Construct, id *string, config *EnvConfig) {
 	_init_.Initialize()
 

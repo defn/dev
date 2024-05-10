@@ -233,11 +233,11 @@
     "required_providers": {
       "aws": {
         "source": "aws",
-        "version": "5.44.0"
+        "version": "5.49.0"
       },
       "coder": {
         "source": "coder/coder",
-        "version": "0.13.0"
+        "version": "0.21.0"
       }
     }
   }

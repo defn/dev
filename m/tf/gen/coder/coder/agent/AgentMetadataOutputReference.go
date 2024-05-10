@@ -38,6 +38,9 @@ type AgentMetadataOutputReference interface {
 	Key() *string
 	SetKey(val *string)
 	KeyInput() *string
+	Order() *float64
+	SetOrder(val *float64)
+	OrderInput() *float64
 	Script() *string
 	SetScript(val *string)
 	ScriptInput() *string
@@ -77,6 +80,7 @@ type AgentMetadataOutputReference interface {
 	// Experimental.
 	InterpolationForAttribute(property *string) cdktf.IResolvable
 	ResetDisplayName()
+	ResetOrder()
 	ResetTimeout()
 	// Produce the Token's value at resolution time.
 	// Experimental.
@@ -198,6 +202,26 @@ func (j *jsiiProxy_AgentMetadataOutputReference) KeyInput() *string {
 	_jsii_.Get(
 		j,
 		"keyInput",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_AgentMetadataOutputReference) Order() *float64 {
+	var returns *float64
+	_jsii_.Get(
+		j,
+		"order",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_AgentMetadataOutputReference) OrderInput() *float64 {
+	var returns *float64
+	_jsii_.Get(
+		j,
+		"orderInput",
 		&returns,
 	)
 	return returns
@@ -353,6 +377,17 @@ func (j *jsiiProxy_AgentMetadataOutputReference)SetKey(val *string) {
 	_jsii_.Set(
 		j,
 		"key",
+		val,
+	)
+}
+
+func (j *jsiiProxy_AgentMetadataOutputReference)SetOrder(val *float64) {
+	if err := j.validateSetOrderParameters(val); err != nil {
+		panic(err)
+	}
+	_jsii_.Set(
+		j,
+		"order",
 		val,
 	)
 }
@@ -591,6 +626,14 @@ func (a *jsiiProxy_AgentMetadataOutputReference) ResetDisplayName() {
 	_jsii_.InvokeVoid(
 		a,
 		"resetDisplayName",
+		nil, // no parameters
+	)
+}
+
+func (a *jsiiProxy_AgentMetadataOutputReference) ResetOrder() {
+	_jsii_.InvokeVoid(
+		a,
+		"resetOrder",
 		nil, // no parameters
 	)
 }

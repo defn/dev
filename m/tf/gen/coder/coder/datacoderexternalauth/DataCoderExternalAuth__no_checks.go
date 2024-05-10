@@ -80,6 +80,10 @@ func (j *jsiiProxy_DataCoderExternalAuth) validateSetLifecycleParameters(val *cd
 	return nil
 }
 
+func (j *jsiiProxy_DataCoderExternalAuth) validateSetOptionalParameters(val interface{}) error {
+	return nil
+}
+
 func validateNewDataCoderExternalAuthParameters(scope constructs.Construct, id *string, config *DataCoderExternalAuthConfig) error {
 	return nil
 }

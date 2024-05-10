@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 
-// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/agent_instance coder_agent_instance}.
+// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/agent_instance coder_agent_instance}.
 type AgentInstance interface {
 	cdktf.TerraformResource
 	AgentId() *string
@@ -353,7 +353,7 @@ func (j *jsiiProxy_AgentInstance) TerraformResourceType() *string {
 }
 
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/agent_instance coder_agent_instance} Resource.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/agent_instance coder_agent_instance} Resource.
 func NewAgentInstance(scope constructs.Construct, id *string, config *AgentInstanceConfig) AgentInstance {
 	_init_.Initialize()
 
@@ -371,7 +371,7 @@ func NewAgentInstance(scope constructs.Construct, id *string, config *AgentInsta
 	return &j
 }
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/resources/agent_instance coder_agent_instance} Resource.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/agent_instance coder_agent_instance} Resource.
 func NewAgentInstance_Override(a AgentInstance, scope constructs.Construct, id *string, config *AgentInstanceConfig) {
 	_init_.Initialize()
 

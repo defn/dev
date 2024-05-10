@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 
-// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs coder}.
+// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs coder}.
 type CoderProvider interface {
 	cdktf.TerraformProvider
 	Alias() *string
@@ -231,7 +231,7 @@ func (j *jsiiProxy_CoderProvider) UrlInput() *string {
 }
 
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs coder} Resource.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs coder} Resource.
 func NewCoderProvider(scope constructs.Construct, id *string, config *CoderProviderConfig) CoderProvider {
 	_init_.Initialize()
 
@@ -249,7 +249,7 @@ func NewCoderProvider(scope constructs.Construct, id *string, config *CoderProvi
 	return &j
 }
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs coder} Resource.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs coder} Resource.
 func NewCoderProvider_Override(c CoderProvider, scope constructs.Construct, id *string, config *CoderProviderConfig) {
 	_init_.Initialize()
 

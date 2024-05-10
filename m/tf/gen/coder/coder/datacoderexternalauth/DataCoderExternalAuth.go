@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
 
-// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/external_auth coder_external_auth}.
+// Represents a {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/external_auth coder_external_auth}.
 type DataCoderExternalAuth interface {
 	cdktf.TerraformDataSource
 	AccessToken() *string
@@ -42,6 +42,9 @@ type DataCoderExternalAuth interface {
 	SetLifecycle(val *cdktf.TerraformResourceLifecycle)
 	// The tree node.
 	Node() constructs.Node
+	Optional() interface{}
+	SetOptional(val interface{})
+	OptionalInput() interface{}
 	// Experimental.
 	Provider() cdktf.TerraformProvider
 	// Experimental.
@@ -79,6 +82,7 @@ type DataCoderExternalAuth interface {
 	// Overrides the auto-generated logical ID with a specific ID.
 	// Experimental.
 	OverrideLogicalId(newLogicalId *string)
+	ResetOptional()
 	// Resets a previously passed logical Id to use the auto-generated logical id again.
 	// Experimental.
 	ResetOverrideLogicalId()
@@ -221,6 +225,26 @@ func (j *jsiiProxy_DataCoderExternalAuth) Node() constructs.Node {
 	return returns
 }
 
+func (j *jsiiProxy_DataCoderExternalAuth) Optional() interface{} {
+	var returns interface{}
+	_jsii_.Get(
+		j,
+		"optional",
+		&returns,
+	)
+	return returns
+}
+
+func (j *jsiiProxy_DataCoderExternalAuth) OptionalInput() interface{} {
+	var returns interface{}
+	_jsii_.Get(
+		j,
+		"optionalInput",
+		&returns,
+	)
+	return returns
+}
+
 func (j *jsiiProxy_DataCoderExternalAuth) Provider() cdktf.TerraformProvider {
 	var returns cdktf.TerraformProvider
 	_jsii_.Get(
@@ -272,7 +296,7 @@ func (j *jsiiProxy_DataCoderExternalAuth) TerraformResourceType() *string {
 }
 
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/external_auth coder_external_auth} Data Source.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/external_auth coder_external_auth} Data Source.
 func NewDataCoderExternalAuth(scope constructs.Construct, id *string, config *DataCoderExternalAuthConfig) DataCoderExternalAuth {
 	_init_.Initialize()
 
@@ -290,7 +314,7 @@ func NewDataCoderExternalAuth(scope constructs.Construct, id *string, config *Da
 	return &j
 }
 
-// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/external_auth coder_external_auth} Data Source.
+// Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/external_auth coder_external_auth} Data Source.
 func NewDataCoderExternalAuth_Override(d DataCoderExternalAuth, scope constructs.Construct, id *string, config *DataCoderExternalAuthConfig) {
 	_init_.Initialize()
 
@@ -346,6 +370,17 @@ func (j *jsiiProxy_DataCoderExternalAuth)SetLifecycle(val *cdktf.TerraformResour
 	_jsii_.Set(
 		j,
 		"lifecycle",
+		val,
+	)
+}
+
+func (j *jsiiProxy_DataCoderExternalAuth)SetOptional(val interface{}) {
+	if err := j.validateSetOptionalParameters(val); err != nil {
+		panic(err)
+	}
+	_jsii_.Set(
+		j,
+		"optional",
 		val,
 	)
 }
@@ -640,6 +675,14 @@ func (d *jsiiProxy_DataCoderExternalAuth) OverrideLogicalId(newLogicalId *string
 		d,
 		"overrideLogicalId",
 		[]interface{}{newLogicalId},
+	)
+}
+
+func (d *jsiiProxy_DataCoderExternalAuth) ResetOptional() {
+	_jsii_.InvokeVoid(
+		d,
+		"resetOptional",
+		nil, // no parameters
 	)
 }
 

@@ -132,6 +132,10 @@ func (j *jsiiProxy_App) validateSetNameParameters(val *string) error {
 	return nil
 }
 
+func (j *jsiiProxy_App) validateSetOrderParameters(val *float64) error {
+	return nil
+}
+
 func (j *jsiiProxy_App) validateSetProvisionersParameters(val *[]interface{}) error {
 	return nil
 }

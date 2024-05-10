@@ -21,10 +21,14 @@ type DataCoderExternalAuthConfig struct {
 	Provisioners *[]interface{} `field:"optional" json:"provisioners" yaml:"provisioners"`
 	// The ID of a configured external auth provider set up in your Coder deployment.
 	//
-	// Docs at Terraform Registry: {@link https://registry.terraform.io/providers/coder/coder/0.13.0/docs/data-sources/external_auth#id DataCoderExternalAuth#id}
+	// Docs at Terraform Registry: {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/external_auth#id DataCoderExternalAuth#id}
 	//
 	// Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
 	// If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
 	Id *string `field:"required" json:"id" yaml:"id"`
+	// Authenticating with the external auth provider is not required, and can be skipped by users when creating or updating workspaces.
+	//
+	// Docs at Terraform Registry: {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/external_auth#optional DataCoderExternalAuth#optional}
+	Optional interface{} `field:"optional" json:"optional" yaml:"optional"`
 }
 
