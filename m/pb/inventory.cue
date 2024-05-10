@@ -13,7 +13,7 @@ inventory: {
 	cache: {
 		children: [
 			"hetzner",
-			"mac"
+			"mac",
 		]
 	}
 
