@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function main {
-    cat /tmp/ts-auth-key
+    pass tailscale-auth-key-coder-sp
 }
 
 main "@"
