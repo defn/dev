@@ -22,7 +22,7 @@ list:
 		if [[ ${current} != "${latest}" ]]; then
 			echo "${slug} ${current} ${latest} ${real_tag}"
 		fi
-	done | (grep -E -v 'kustomize/ 5.3.0 5.4.1|coder/ 2.11.0 2.10.2|tailscale/ ' || true)
+	done | (grep -E -v 'kustomize/ 5.3.0 5.4.1|coder/ 2.11.0 2.10.2' || true)
 
 # Upgrade to the latest GitHub releases
 latest:
