@@ -337,6 +337,8 @@ coder-ssh-devcontainer:
 			CODER_AGENT_URL=$(CODER_AGENT_URL) \
 			CODER_AGENT_TOKEN=$(CODER_AGENT_TOKEN) \
 			CODER_INIT_SCRIPT_BASE64=$(CODER_INIT_SCRIPT_BASE64) \
+			http_proxy=http://169.254.32.1:3128 \
+			https_proxy=http://169.254.32.1:3128 \
 			bash -c "cd ~/m && exec j coder::coder-agent $(CODER_NAME)" &
 
 coder-ssh-darwin:
