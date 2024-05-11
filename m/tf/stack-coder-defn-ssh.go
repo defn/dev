@@ -112,7 +112,7 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 	deploy.AddOverride(infra.Js("provisioner"), []map[string]map[string]string{
 		{"local-exec": {
 			"when": "create",
-			"command": fmt.Sprintf("(echo cd; echo exec env CODER_AGENT_URL=%s CODER_AGENT_TOKEN=%s CODER_NAME=%s CODER_HOMEDIR=%s CODER_INIT_SCRIPT_BASE64=%s %s) | %s bash -x -",
+			"command": fmt.Sprintf("(echo cd; echo exec env CODER_AGENT_URL=%s CODER_AGENT_TOKEN=%s CODER_NAME=%s CODER_HOMEDIR=%s CODER_INIT_SCRIPT_BASE64=%s TS_AUTH_KEY=$(bin/ts-auth-key) %s) | %s bash -x -",
 				*devCoderWorkspace.AccessUrl(),
 				*devCoderAgent.Token(),
 				*devCoderWorkspace.Name(),
