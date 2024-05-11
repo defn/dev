@@ -1,18 +1,21 @@
 terraform {
   required_providers {
-    null = {
-      version = "3.2.2"
-      source  = "null"
-    }
     coder = {
       version = "0.21.0"
       source  = "coder/coder"
+    }
+    null = {
+      version = "3.2.2"
+      source  = "null"
     }
   }
   backend "local" {
 
   }
 
+}
+
+provider "coder" {
 }
 
 data "coder_parameter" "homedir" {
@@ -77,9 +80,8 @@ resource "coder_agent" "main" {
     GIT_COMMITTER_EMAIL = "${data.coder_workspace.me.owner_email}"
     GIT_COMMITTER_NAME  = "${data.coder_workspace.me.owner}"
   }
-  os                     = data.coder_parameter.os.value
-  startup_script         = "cd ~ && j destroy-coder-agent && cd ~/m && exec j coder::code-server $${CODER_NAME}"
-  startup_script_timeout = 180
+  os             = data.coder_parameter.os.value
+  startup_script = "cd ~ && j destroy-coder-agent && cd ~/m && exec j coder::code-server $${CODER_NAME}"
   display_apps {
     ssh_helper      = false
     vscode          = false
@@ -94,13 +96,11 @@ resource "null_resource" "deploy" {
   triggers = {
     always_run = "${coder_agent.main.token}"
   }
+  count = data.coder_workspace.me.start_count
   provisioner "local-exec" {
     command = "(echo cd; echo exec env CODER_AGENT_URL=${data.coder_workspace.me.access_url} CODER_AGENT_TOKEN=${coder_agent.main.token} CODER_NAME=${data.coder_workspace.me.name} CODER_HOMEDIR=${data.coder_parameter.homedir.value} CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} ${data.coder_parameter.command.value}) | ${data.coder_parameter.remote.value} bash -x -"
     when    = create
   }
-}
-
-provider "coder" {
 }
 
 module "coder_login" {

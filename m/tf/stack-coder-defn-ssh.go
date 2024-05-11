@@ -28,6 +28,8 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 
 	cdktf.NewLocalBackend(stack, &cdktf.LocalBackendConfig{})
 
+	coder_provider.NewCoderProvider(stack, infra.Js("coder"), &coder_provider.CoderProviderConfig{})
+
 	paramHomedir := datacoderparameter.NewDataCoderParameter(stack, infra.Js("homedir"), &datacoderparameter.DataCoderParameterConfig{
 		Default:     infra.Js("/home/ubuntu/m"),
 		Description: infra.Js("home directory"),
@@ -94,14 +96,14 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 			"GIT_COMMITTER_EMAIL": devCoderWorkspace.OwnerEmail(),
 			"GIT_COMMITTER_NAME":  devCoderWorkspace.Owner(),
 		},
-		Os:                   paramOs.Value(),
-		StartupScript:        infra.Js("cd ~ && j destroy-coder-agent && cd ~/m && exec j coder::code-server $${CODER_NAME}"),
-		StartupScriptTimeout: infra.Jsn(180),
+		Os:            paramOs.Value(),
+		StartupScript: infra.Js("cd ~ && j destroy-coder-agent && cd ~/m && exec j coder::code-server $${CODER_NAME}"),
 	})
 
 	null_provider.NewNullProvider(stack, infra.Js("null"), &null_provider.NullProviderConfig{})
 
 	deploy := null_resource.NewResource(stack, infra.Js("deploy"), &null_resource.ResourceConfig{
+		Count: devCoderWorkspace.StartCount(),
 		Triggers: &map[string]*string{
 			"always_run": devCoderAgent.Token(),
 		},
@@ -121,8 +123,6 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 			),
 		}},
 	})
-
-	coder_provider.NewCoderProvider(stack, infra.Js("coder"), &coder_provider.CoderProviderConfig{})
 
 	coderlogin.NewCoderlogin(stack, infra.Js("coder_login"), &coderlogin.CoderloginConfig{
 		AgentId: devCoderAgent.Id(),
