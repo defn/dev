@@ -8,9 +8,6 @@ import (
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 
-	null_provider "github.com/cdktf/cdktf-provider-null-go/null/v10/provider"
-	null_resource "github.com/cdktf/cdktf-provider-null-go/null/v10/resource"
-
 	coder_provider "github.com/defn/dev/m/tf/gen/coder/coder/provider"
 
 	"github.com/defn/dev/m/tf/gen/coder/coder/agent"
@@ -96,18 +93,9 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 		},
 		Os:                   paramOs.Value(),
 		StartupScript:        infra.Js("cd ~ && j destroy-coder-agent && cd ~/m && exec j coder::code-server $${CODER_NAME}"),
-		StartupScriptTimeout: infra.Jsn(180),
 	})
 
-	null_provider.NewNullProvider(stack, infra.Js("null"), &null_provider.NullProviderConfig{})
-
-	deploy := null_resource.NewResource(stack, infra.Js("deploy"), &null_resource.ResourceConfig{
-		Triggers: &map[string]*string{
-			"always_run": devCoderAgent.Token(),
-		},
-	})
-
-	deploy.AddOverride(infra.Js("provisioner"), []map[string]map[string]string{
+	devCoderAgent.AddOverride(infra.Js("provisioner"), []map[string]map[string]string{
 		{"local-exec": {
 			"when": "create",
 			"command": fmt.Sprintf("(echo cd; echo exec env CODER_AGENT_URL=%s CODER_AGENT_TOKEN=%s CODER_NAME=%s CODER_HOMEDIR=%s CODER_INIT_SCRIPT_BASE64=%s %s) | %s bash -x -",
