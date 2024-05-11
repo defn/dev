@@ -3,7 +3,7 @@
     "metadata": {
       "backend": "local",
       "overrides": {
-        "null_resource": [
+        "coder_agent": [
           "provisioner"
         ]
       },
@@ -97,16 +97,6 @@
           }
         }
       }
-    },
-    "null_resource": {
-      "deploy": {
-        "//": {
-          "metadata": {
-            "path": "coder-defn-ssh-template/deploy",
-            "uniqueId": "deploy"
-          }
-        }
-      }
     }
   },
   "terraform": {
@@ -119,10 +109,6 @@
       "coder": {
         "source": "coder/coder",
         "version": "0.21.0"
-      },
-      "null": {
-        "source": "null",
-        "version": "3.2.2"
       }
     }
   }
