@@ -98,7 +98,19 @@ resource "null_resource" "deploy" {
   }
   count = data.coder_workspace.me.start_count
   provisioner "local-exec" {
-    command = "(echo cd; echo exec env CODER_AGENT_URL=${data.coder_workspace.me.access_url} CODER_AGENT_TOKEN=${coder_agent.main.token} CODER_NAME=${data.coder_workspace.me.name} CODER_HOMEDIR=${data.coder_parameter.homedir.value} CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} ${data.coder_parameter.command.value}) | ${data.coder_parameter.remote.value} bash -x -"
+    command = <<-EOT
+      (
+        echo cd
+        echo exec env \
+          CODER_AGENT_URL=${data.coder_workspace.me.access_url} \
+          CODER_AGENT_TOKEN=${coder_agent.main.token} \
+          CODER_NAME=${data.coder_workspace.me.name} \
+          CODER_HOMEDIR=${data.coder_parameter.homedir.value} \
+          CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} \
+          TS_AUTH_KEY=im-inside \
+          ${data.coder_parameter.command.value} \
+      ) | ${data.coder_parameter.remote.value} bash -x -
+EOT
     when    = create
   }
 }
