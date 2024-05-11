@@ -125,7 +125,7 @@ cache:
 
 rehome:
 	this-nix-gc
-	rm -f bin/nix/.head-* bin/nix.tmp*
+	rm -rf bin/nix/.head-* bin/nix.tmp*
 	$(MAKE) install
 
 home:
