@@ -87,7 +87,6 @@ resource "coder_agent" "main" {
     vscode          = false
     vscode_insiders = false
   }
-<<<<<<< HEAD
 }
 
 provider "null" {
@@ -98,8 +97,6 @@ resource "null_resource" "deploy" {
     always_run = "${coder_agent.main.token}"
   }
   count = data.coder_workspace.me.start_count
-=======
->>>>>>> origin/main
   provisioner "local-exec" {
     command = "(echo cd; echo exec env CODER_AGENT_URL=${data.coder_workspace.me.access_url} CODER_AGENT_TOKEN=${coder_agent.main.token} CODER_NAME=${data.coder_workspace.me.name} CODER_HOMEDIR=${data.coder_parameter.homedir.value} CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} ${data.coder_parameter.command.value}) | ${data.coder_parameter.remote.value} bash -x -"
     when    = create
