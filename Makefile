@@ -322,7 +322,7 @@ coder-ssh-envbuilder:
 		-e CODER_AGENT_URL=$(CODER_AGENT_URL) \
 		-e CODER_AGENT_TOKEN=$(CODER_AGENT_TOKEN) \
 		-e CODER_INIT_SCRIPT_BASE64=$(CODER_INIT_SCRIPT_BASE64) \
-		-e TS_AUTH_KEY=$(shell bin/ts-auth-key $(CODER_NAME)) \
+		-e TS_AUTH_KEY=$(TS_AUTH_KEY) \
 		-e INIT_COMMAND="/bin/bash" \
 		-e INIT_SCRIPT="source ~/.bash_profile && cd ~/m && exec tini j coder::coder-agent" \
 		ghcr.io/coder/envbuilder
