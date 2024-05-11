@@ -29,6 +29,12 @@ local pb:
 
 	~/.local/bin/ansible-playbook -i inventory/packer.ini -c local "playbooks/{{pb}}.yaml"
 
+# Run a playbook on penguin
+pg pb:
+	#!/usr/bin/env bash
+
+	~/.local/bin/ansible-playbook -i inventory/packer.ini -c local "playbooks/{{pb}}.yaml"
+
 # Run a command
 command limit *command:
 	just module command {{limit}} {{command}}

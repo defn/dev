@@ -22,6 +22,9 @@ dyff *args:
 play pb *lim:
 	just playbook::playbook {{pb}} {{lim}}
 
+penguin pb:
+	just playbook::penguin {{pb}}
+
 all:
 	-just play upgrade
 	just play cache

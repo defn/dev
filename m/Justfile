@@ -10,6 +10,10 @@ mod playbook 'common/playbook.Justfile'
 play pb *lim:
 	just playbook::playbook {{pb}} {{lim}}
 
+# Run a playbook on penguin
+penguin pb:
+	just playbook::penguin {{pb}}
+
 # Use this workspace
 [no-cd]
 use:

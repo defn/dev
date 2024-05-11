@@ -4,3 +4,10 @@ playbook pb *lim:
 
 	cd ~/m/pb
 	just pb {{pb}} {{lim}}
+
+# Run a playbook on penguin
+penguin pb:
+	#!/usr/bin/env bash
+
+	cd ~/m/pb
+	just pg {{pb}}
