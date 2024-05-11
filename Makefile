@@ -306,6 +306,7 @@ coder-ssh-envbuilder:
 	docker run --rm -d --sysctl net.ipv6.conf.all.disable_ipv6=1 \
 		--name "$(CODER_NAME)" \
 		--privileged \
+		--dns 1.1.1.1 \
 		-v envbuilder-image:/image-cache:ro \
 		-v envbuilder-layer:/layer-cache \
 		-v /nix:/nix \
@@ -324,7 +325,7 @@ coder-ssh-envbuilder:
 		-e CODER_INIT_SCRIPT_BASE64=$(CODER_INIT_SCRIPT_BASE64) \
 		-e TS_AUTH_KEY=$(TS_AUTH_KEY) \
 		-e INIT_COMMAND="/bin/bash" \
-		-e INIT_SCRIPT="source ~/.bash_profile && screen -dmS tailscale sudo $$(which tailscaled) && sudo $$(which tailscale) up --auth-key $${TS_AUTH_KEY} --hostname $${CODER_NAME} --reset --ssh --advertise-tags tag:junkernetes && cd ~/m && source ~/.bash_profile && exec tini ~/bin/j coder::coder-agent" \
+		-e INIT_SCRIPT="source ~/.bash_profile && screen -dmS tailscale sudo $$(which tailscaled) && while true; do if sudo $$(which tailscale) up --auth-key $${TS_AUTH_KEY} --hostname $${CODER_NAME} --reset --ssh --advertise-tags tag:junkernetes; then break; fi; sleep 1; done && cd ~/m && source ~/.bash_profile && exec tini ~/bin/j coder::coder-agent" \
 		ghcr.io/coder/envbuilder
 
 coder-ssh-devcontainer:
