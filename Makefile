@@ -324,7 +324,7 @@ coder-ssh-envbuilder:
 		-e CODER_INIT_SCRIPT_BASE64=$(CODER_INIT_SCRIPT_BASE64) \
 		-e TS_AUTH_KEY=$(TS_AUTH_KEY) \
 		-e INIT_COMMAND="/bin/bash" \
-		-e INIT_SCRIPT="source ~/.bash_profile && cd ~/m && exec tini j coder::coder-agent" \
+		-e INIT_SCRIPT="source ~/.bash_profile && sudo $$(which tailscaled) & sudo $$(which tailscale) up --auth-key $${TS_AUTH_KEY} --hostname $${CODER_NAME} --reset --ssh --advertise-tags tag:junkernetes && cd ~/m && source ~/.bash_profile && exec tini ~/bin/j coder::coder-agent" \
 		ghcr.io/coder/envbuilder
 
 coder-ssh-devcontainer:
