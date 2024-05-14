@@ -33,6 +33,7 @@ penguin:
 	$(MAKE) cb-install
 	$(MAKE) chrome-dev-gpg
 	while [[ "$$(pass hello)" != "world" ]]; do $(MAKE) chrome-dev-gpg; sleep 1; done
+	sudo tailscale set --stateful-filtering=false
 	(cd ~/m && j up) &
 	$(MAKE) -j 2 chrome-coder chrome-vpn name=cb
 
