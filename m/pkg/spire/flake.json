@@ -1,6 +1,6 @@
 {
   "slug": "pkg-spire",
   "ghrepo": "spiffe/spire",
-  "vendor": "1.9.5",
-  "revision": "1"
+  "vendor": "1.9.6",
+  "revision": "0"
 }
