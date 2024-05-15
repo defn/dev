@@ -1702,10 +1702,10 @@
       "general": {
         "bzlTransitiveDigest": "D1+rhhbwX4ufoTmeUVxDpPg+Sknv3QzVXZnyK2zOjj4=",
         "recordedFileInputs": {
-          "@@//go.mod": "2a4d8fa6a01cd1bbf47533d4ba21b71e0ffffc574aca5d1b885ad19808fb0c44",
+          "@@//go.mod": "c8abed3418104005a6364c9b6eede5f74b2e8404074faef0a080e78c4221d6f9",
           "@@rules_go~//go.mod": "de22304b720f7f61350ec1c9739de6c0a1b1103fd22bfeb6e92c6c843ddc6d6e",
           "@@gazelle~//go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
-          "@@//go.sum": "98a247918e163e1d02995ca9a3a947698275011c7e06f9a4984aed739d10be3d",
+          "@@//go.sum": "149c680ebbfe29f9f5e2e38455d5894cf7b5e3a3ed2f5ac2bfe32fa3be0e0730",
           "@@rules_go~//go.sum": "d56fdb19b21a5f12bcf625c49432371ac39c2def0f564098fbda107f7c080f40",
           "@@gazelle~//go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473"
         },
@@ -2684,9 +2684,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:zmkK9Ngbjj+K0yRhTVONQh1p/HknKYSlNT+vZCzyokM=",
+              "sum": "h1:GlRw1BRJxkpqUCBKzKOw098ed57fEsKeNjpTe3cSjK4=",
               "replace": "",
-              "version": "v1.16.0"
+              "version": "v1.17.0"
             }
           },
           "com_github_charmbracelet_bubbles": {
@@ -2789,9 +2789,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:yYaodhLbLzFGlUbQq7uyYToKm54puAqXyIXD3fhaPIs=",
+              "sum": "h1:qIvpFr60L+zPWifYmiZFCY7DdahePpzUw0oIru/4A6Y=",
               "replace": "",
-              "version": "v0.17.4"
+              "version": "v0.21.1"
             }
           },
           "com_github_sagikazarmark_slog_shim": {
@@ -3096,6 +3096,21 @@
               "version": "v1.2.12"
             }
           },
+          "com_lukechampine_uint128": {
+            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "importpath": "lukechampine.com/uint128",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:cDdUVfRwDUDovz610ABgFD17nXD4/uDgVHl2sC3+sbo=",
+              "replace": "",
+              "version": "v1.3.0"
+            }
+          },
           "com_github_aws_jsii_runtime_go": {
             "bzlFile": "@@gazelle~//internal:go_repository.bzl",
             "ruleClassName": "go_repository",
@@ -3154,6 +3169,21 @@
               "sum": "h1:LUXCnvUvSM6FXAsj6nnfc8Q2tp1dIgUfY9Kc8GsSOiQ=",
               "replace": "",
               "version": "v1.18.2"
+            }
+          },
+          "com_github_rdleal_intervalst": {
+            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "importpath": "github.com/rdleal/intervalst",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:DWrcNJ9kxPOYnXxExrQkta1xsKFRN0rTOVXkBDJzVYg=",
+              "replace": "",
+              "version": "v1.4.0"
             }
           },
           "com_github_muesli_reflow": {
@@ -3315,6 +3345,7 @@
                 "com_github_opencontainers_go_digest": "github.com/opencontainers/go-digest",
                 "com_github_opencontainers_image_spec": "github.com/opencontainers/image-spec",
                 "com_github_pelletier_go_toml_v2": "github.com/pelletier/go-toml/v2",
+                "com_github_rdleal_intervalst": "github.com/rdleal/intervalst",
                 "com_github_rivo_uniseg": "github.com/rivo/uniseg",
                 "com_github_rogpeppe_go_internal": "github.com/rogpeppe/go-internal",
                 "com_github_russross_blackfriday_v2": "github.com/russross/blackfriday/v2",
@@ -3346,6 +3377,7 @@
                 "org_golang_google_protobuf": "google.golang.org/protobuf",
                 "in_gopkg_ini_v1": "gopkg.in/ini.v1",
                 "in_gopkg_yaml_v3": "gopkg.in/yaml.v3",
+                "com_lukechampine_uint128": "lukechampine.com/uint128",
                 "org_golang_google_grpc": "google.golang.org/grpc",
                 "org_golang_google_grpc_cmd_protoc_gen_go_grpc": "google.golang.org/grpc/cmd/protoc-gen-go-grpc",
                 "org_golang_google_genproto_googleapis_rpc": "google.golang.org/genproto/googleapis/rpc",
