@@ -18,6 +18,6 @@ playbook: cache: [{
 
 role: home_flakes: tasks: [{
 	name:  "Install home nix flakes"
-	shell: "pkill bazel && cd && source .bash_profile && git pull && make home"
+	shell: "(pkill bazel || true) && cd && source .bash_profile && git pull && make home"
 	args: executable: "/bin/bash"
 }]
