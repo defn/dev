@@ -1,5 +1,7 @@
 package tailscale
 
+// https://tailscale.com/kb/1324/acl-grants
+
 tagOwners: {
 	"tag:amanibhavam": []
 	"tag:zimaboard": []
