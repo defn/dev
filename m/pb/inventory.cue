@@ -21,10 +21,6 @@ inventory: {
 		hosts: [
 			"district",
 		]
-		vars: {
-			bazel_remote_cache_server: "cache.defn.run"
-			bazel_remote_cache_port:   "9092"
-		}
 	}
 
 	aws: {
@@ -32,10 +28,6 @@ inventory: {
 			"kowloon",
 			"threesix",
 		]
-		vars: {
-			bazel_remote_cache_server: "district.tail3884f.ts.net"
-			bazel_remote_cache_port:   "9092"
-		}
 	}
 
 	mac: {

@@ -105,7 +105,7 @@ resource "null_resource" "deploy" {
 
 module "coder_login" {
   agent_id = coder_agent.main.id
-  source   = "https://registry.coder.com/modules/coder-login"
+  source   = "./mod/coder-login"
 }
 
 resource "coder_app" "code-server" {
