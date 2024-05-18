@@ -8,7 +8,6 @@ local-gh/
 m/
 terraform-d/
 work/
-me.sh/
 .acme.sh/
 .ansible/
 .aws/
