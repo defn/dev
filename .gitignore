@@ -224,3 +224,4 @@ bin/devcontainer
 .sommelierrc
 .minikube
 *.lock
+/bazel*
