@@ -18,55 +18,54 @@ full_accounts: [
 ]
 
 input: inf.#AwsProps & {
+	#org: "defn"
+	#namespace: "dfn"
+
 	backend: {
-		lock:    "dfn-defn-terraform-state-lock"
-		bucket:  "dfn-defn-terraform-state"
+		lock:    "\(#namespace)-\(#org)-terraform-state-lock"
+		bucket:  "\(#namespace)-\(#org)-terraform-state"
 		region:  "us-east-1"
 		profile: "defn-org-sso"
 	}
 
 	organization: {
 		THIS=[ORG=string]: {
-			accounts: [...{
-				name: string
+			ops_org_name:     "defn"
+			ops_account_name: "org"
+			ops_account_id:   lookup[ops_org_name].accounts[ops_account_name].id
 
-				id:    lookup[ORG].accounts[name].id
-				email: lookup[ORG].accounts[name].email
-
-				prefix:   lookup[ORG].accounts[name].prefix
-				imported: lookup[ORG].accounts[name].imported
-
-				region: string | *THIS.region
-
-				cfg: {
-					id: "s3-\(ORG)-\(name)"
-
-					enabled:   true
-					namespace: "dfn"
-					stage:     "defn"
-					name:      "global"
-					attributes: ["\(ORG)-\(name)"]
-
-					acl:                "private"
-					user_enabled:       false
-					versioning_enabled: false
-				}
-			}]
+			url: lookup[ORG].url
 
 			#types: [...string]
 			accounts: [
 				for t in #types {
 					{
-						name: t
+						name:  t
+						id:    lookup[ORG].accounts[name].id
+						email: lookup[ORG].accounts[name].email
+
+						prefix:   lookup[ORG].accounts[name].prefix
+						imported: lookup[ORG].accounts[name].imported
+
+						region: string | *THIS.region
+
+						cfg: {
+							id: "s3-\(ORG)-\(name)"
+
+							enabled:   true
+							namespace: #namespace
+							stage:     #org
+
+							name:      "global"
+							attributes: ["\(ORG)-\(name)"]
+
+							acl:                "private"
+							user_enabled:       false
+							versioning_enabled: false
+						}
 					}
 				},
 			]
-
-			url: lookup[ORG].url
-
-			ops_org_name:     "defn"
-			ops_account_name: "org"
-			ops_account_id:   lookup[ops_org_name].accounts[ops_account_name].id
 		}
 
 		defn: {
