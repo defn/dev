@@ -18,7 +18,7 @@ full_accounts: [
 ]
 
 input: inf.#AwsProps & {
-	#org: "defn"
+	#org:       "defn"
 	#namespace: "dfn"
 
 	backend: {
@@ -40,24 +40,24 @@ input: inf.#AwsProps & {
 			accounts: [
 				for t in #types {
 					{
-						name:  t
-						id:    lookup[ORG].accounts[name].id
-						email: lookup[ORG].accounts[name].email
+						profile: t
+						name:    lookup[ORG].accounts[t].name
+						id:      lookup[ORG].accounts[t].id
+						email:   lookup[ORG].accounts[t].email
 
-						prefix:   lookup[ORG].accounts[name].prefix
-						imported: lookup[ORG].accounts[name].imported
+						prefix:   lookup[ORG].accounts[t].prefix
+						imported: lookup[ORG].accounts[t].imported
 
 						region: string | *THIS.region
 
 						cfg: {
-							id: "s3-\(ORG)-\(name)"
+							id: "s3-\(ORG)-\(t)"
 
 							enabled:   true
 							namespace: #namespace
 							stage:     #org
-
 							name:      "global"
-							attributes: ["\(ORG)-\(name)"]
+							attributes: ["\(ORG)-\(t)"]
 
 							acl:                "private"
 							user_enabled:       false
@@ -130,7 +130,8 @@ input: inf.#AwsProps & {
 
 		chamber: {
 			region: "us-west-2"
-			#types: ["org"] + ["1", "2", "3", "4", "5", "6", "7", "8", "9"] + ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+			// missing k
+			#types: ["org"] + ["1", "2", "3", "4", "5", "6", "7", "8", "9"] + ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 		}
 
 		immanent: {
@@ -143,10 +144,10 @@ input: inf.#AwsProps & {
 lookup: {
 	[ORG=string]: {
 		accounts: [ACC=string]: {
+			name:     string | *ACC
 			prefix:   string | *""
 			imported: string | *"no"
-
-			email: string
+			email:    string
 		}
 	}
 
@@ -166,7 +167,7 @@ lookup: {
 		accounts: {
 			[ACC=string]: {
 				t:     string | *ACC
-				email: string | *"aws-coil+\(t)@defn.sh"
+				email: string | *"aws-coil+\(t)@defn.us"
 			}
 			org: {
 				id:    "138291560003"
@@ -190,7 +191,7 @@ lookup: {
 		accounts: {
 			[ACC=string]: {
 				t:     string | *ACC
-				email: string | *"aws-curl+\(t)@defn.sh"
+				email: string | *"aws-curl+\(t)@defn.us"
 			}
 			org: {
 				id:    "424535767618"
@@ -214,7 +215,7 @@ lookup: {
 		accounts: {
 			[ACC=string]: {
 				t:     string | *ACC
-				email: string | *"aws-gyre+\(t)@defn.sh"
+				email: string | *"aws-gyre+\(t)@defn.us"
 			}
 			org: {
 				id:    "065163301604"
@@ -322,51 +323,59 @@ lookup: {
 		accounts: {
 			[ACC=string]: {
 				t:        string | *ACC
-				prefix:   "fogg-"
 				email:    string | *"fogg-\(t)@defn.sh"
 				imported: "yes"
 			}
 
 			org: {
-
-				id:    "328216504962"
-				name:  "fogg"
-				email: "spiral@defn.sh"
+				id:     "328216504962"
+				prefix: ""
+				name:   "fogg"
+				email:  "spiral@defn.sh"
 			}
 			net: {
-				t:  "asset"
-				id: "060659916753"
+				t:      "asset"
+				id:     "060659916753"
+				prefix: "fogg-"
 			}
 			log: {
-				t:  "circus"
-				id: "844609041254"
+				t:      "circus"
+				id:     "844609041254"
+				prefix: "fogg-"
 			}
 			lib: {
-				t:  "data"
-				id: "624713464251"
+				t:      "data"
+				id:     "624713464251"
+				prefix: "fogg-"
 			}
 			ops: {
-				t:  "gateway"
-				id: "318746665903"
+				t:      "gateway"
+				id:     "318746665903"
+				prefix: "fogg-"
 			}
 			ci: {
-				t:  "home"
-				id: "812459563189"
+				t:      "home"
+				id:     "812459563189"
+				prefix: "fogg-"
 			}
 			hub: {
-				id: "337248635000"
+				id:     "337248635000"
+				prefix: "fogg-"
 			}
 			cde: {
-				t:  "postx"
-				id: "565963418226"
+				t:      "postx"
+				id:     "565963418226"
+				prefix: "fogg-"
 			}
 			dev: {
-				t:  "sandbox"
-				id: "442766271046"
+				t:      "sandbox"
+				id:     "442766271046"
+				prefix: "fogg-"
 			}
 			prod: {
-				t:  "security"
-				id: "372333168887"
+				t:      "security"
+				id:     "372333168887"
+				prefix: "fogg-"
 			}
 		}
 	}
@@ -423,7 +432,6 @@ lookup: {
 		accounts: {
 			[ACC=string]: {
 				t:        string | *ACC
-				name:     string | *"immanent-\(t)"
 				email:    string | *"immanent-\(t)@defn.us"
 				imported: "yes"
 			}
@@ -433,37 +441,48 @@ lookup: {
 				email: "aws-immanent@defn.us"
 			}
 			changer: {
-				id: "003884504807"
+				id:   "003884504807"
+				name: "immanent-changer"
 			}
 			chanter: {
-				id: "071244154667"
+				id:   "071244154667"
+				name: "immanent-chanter"
 			}
 			doorkeeper: {
-				id: "013267321144"
+				id:   "013267321144"
+				name: "immanent-doorkeeper"
 			}
 			ged: {
-				id: "640792184178"
+				id:   "640792184178"
+				name: "immanent-ged"
 			}
 			hand: {
-				id: "826250190242"
+				id:   "826250190242"
+				name: "immanent-hand"
 			}
 			herbal: {
-				id: "165452499696"
+				id:   "165452499696"
+				name: "immanent-herbal"
 			}
 			namer: {
-				id: "856549015893"
+				id:   "856549015893"
+				name: "immanent-namer"
 			}
 			patterner: {
-				id: "143220204648"
+				id:   "143220204648"
+				name: "immanent-patterner"
 			}
 			roke: {
-				id: "892560628624"
+				id:   "892560628624"
+				name: "immanent-roke"
 			}
 			summoner: {
-				id: "397411277587"
+				id:   "397411277587"
+				name: "immanent-summoner"
 			}
 			windkey: {
-				id: "095764861781"
+				id:   "095764861781"
+				name: "immanent-windkey"
 			}
 		}
 	}
@@ -511,6 +530,7 @@ lookup: {
 	chamber: {
 		url: "https://chamber-0.awsapps.com/start"
 		accounts: {
+			[string]: imported: "yes"
 			org: {
 				id:    "730917619329"
 				name:  "chamber"
@@ -537,10 +557,9 @@ lookup: {
 				email: "chamber-4@defn.us"
 			}
 			"5": {
-				id:      "200733412967"
-				name:    "chamber-5"
-				email:   "chamber-5@defn.us"
-				profile: "5"
+				id:    "200733412967"
+				name:  "chamber-5"
+				email: "chamber-5@defn.us"
 			}
 			"6": {
 				id:    "493089153027"
@@ -611,11 +630,6 @@ lookup: {
 				id:    "738433022197"
 				name:  "defn-j"
 				email: "aws-development1@defn.us"
-			}
-			k: {
-				id:    "TODO"
-				name:  "TODO"
-				email: "TODO"
 			}
 			l: {
 				id:    "991300382347"
