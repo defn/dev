@@ -41,7 +41,13 @@ agent *args:
 
 	while [[ "$(pass hello 2>/dev/null || true)" != "world" ]]; do sleep 5; done
 
-	{{args}}
+	if test -n "{{args}}"; then
+		true
+		{{args}}
+	else
+		pass hello	
+		sleep infinity
+	fi
 
 # Forward gpg-agent socket to remote host
 forward remote *args:
