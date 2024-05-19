@@ -27,8 +27,13 @@ input: inf.#AwsProps & {
 	organization: {
 		THIS=[ORG=string]: {
 			accounts: [...{
-				region:  string | *THIS.region
-				profile: string
+				id:       lookup[ORG].accounts[profile].id
+				name:     string
+				profile:  string | *name
+				email:    string | *lookup[ORG].accounts[profile].email
+				imported: string | *"no"
+
+				region: string | *THIS.region
 
 				cfg: {
 					id: "s3-\(ORG)-\(profile)"
@@ -43,10 +48,6 @@ input: inf.#AwsProps & {
 					user_enabled:       false
 					versioning_enabled: false
 				}
-
-				id: lookup[ORG].accounts[profile].id
-				// name: string | *lookup[ORG].accounts[profile].name
-				// email: string | *lookup[ORG].accounts[profile].email
 			}]
 
 			url: lookup[ORG].url
@@ -159,17 +160,12 @@ input: inf.#AwsProps & {
 
 		circus: {
 			region: "us-west-2"
-			#types: ["audit", "govcloud", "ops", "transit"]
-			accounts: [{
-				name:     "circus"
-				email:    "aws-circus@defn.us"
-				imported: "yes"
-				profile:  "org"
-			}] + [
+			#types: ["org", "net", "log", "lib", "ops"]
+			accounts: [
 				for t in #types {
-					name:     t
-					email:    "aws-circus-\(t)@defn.sh"
-					imported: "yes"
+					{
+						name: t
+					}
 				},
 			]
 		}
@@ -324,18 +320,12 @@ input: inf.#AwsProps & {
 
 		whoa: {
 			region: "us-west-2"
-			#types: ["prod", "secrets", "dev", "hub"]
-			accounts: [{
-				name:     "whoa"
-				email:    "aws-whoa@defn.us"
-				imported: "yes"
-				profile:  "org"
-			}] + [
+			#types: ["org", "net", "hub", "dev", "prod"]
+			accounts: [
 				for t in #types {
-					prefix:   "whoa-"
-					name:     t
-					email:    "whoa-\(t)@imma.io"
-					imported: "yes"
+					{
+						name: t
+					}
 				},
 			]
 		}
@@ -386,17 +376,12 @@ input: inf.#AwsProps & {
 
 		jianghu: {
 			region: "us-west-2"
-			#types: ["tahoe", "klamath"]
-			accounts: [{
-				name:     "jianghu"
-				email:    "aws-jianghu@defn.us"
-				imported: "yes"
-				profile:  "org"
-			}] + [
+			#types: ["org", "net", "log"]
+			accounts: [
 				for t in #types {
-					name:     t
-					email:    "\(t)@defn.us"
-					imported: "yes"
+					{
+						name: t
+					}
 				},
 			]
 		}
@@ -422,6 +407,13 @@ input: inf.#AwsProps & {
 }
 
 lookup: {
+	[ORG=string]: {
+		accounts: [ACC=string]: {
+			name:   string | *ACC
+			prefix: string | *""
+		}
+	}
+
 	defn: {
 		url: "https://defn.awsapps.com/start"
 		accounts: {
@@ -676,20 +668,38 @@ lookup: {
 		url: "https://whoa-0.awsapps.com/start"
 		accounts: {
 			org: {
-				id: "389772512117"
+				id:       "389772512117"
+				name:     "whoa"
+				email:    "aws-whoa@defn.us"
+				imported: "yes"
 			}
 			net: {
-				t:  "secrets"
-				id: "464075062390"
+				t:        "secrets"
+				id:       "464075062390"
+				email:    "whoa-\(t)@imma.io"
+				prefix:   "whoa-"
+				imported: "yes"
 			}
 			hub: {
-				id: "462478722501"
+				t:        "hub"
+				id:       "462478722501"
+				email:    "whoa-\(t)@imma.io"
+				prefix:   "whoa-"
+				imported: "yes"
 			}
 			dev: {
-				id: "439761234835"
+				t:        "dev"
+				id:       "439761234835"
+				email:    "whoa-\(t)@imma.io"
+				prefix:   "whoa-"
+				imported: "yes"
 			}
 			prod: {
-				id: "204827926367"
+				t:        "prod"
+				id:       "204827926367"
+				email:    "whoa-\(t)@imma.io"
+				prefix:   "whoa-"
+				imported: "yes"
 			}
 		}
 	}
@@ -809,15 +819,22 @@ lookup: {
 		url: "https://jianghu-0.awsapps.com/start"
 		accounts: {
 			org: {
-				id: "657613322961"
+				id:       "657613322961"
+				name:     "jianghu"
+				email:    "aws-jianghu@defn.us"
+				imported: "yes"
 			}
 			net: {
-				t:  "tahoe"
-				id: "025636091251"
+				t:        "tahoe"
+				id:       "025636091251"
+				email:    "\(t)@defn.us"
+				imported: "yes"
 			}
 			log: {
-				t:  "klamath"
-				id: "298431841138"
+				t:        "klamath"
+				id:       "298431841138"
+				email:    "\(t)@defn.us"
+				imported: "yes"
 			}
 		}
 	}
@@ -868,22 +885,34 @@ lookup: {
 		url: "https://d-92670c4790.awsapps.com/start"
 		accounts: {
 			org: {
-				id: "036139182623"
+				id:       "036139182623"
+				name:     "circus"
+				email:    "aws-circus@defn.us"
+				imported: "yes"
 			}
 			net: {
-				t:  "transit"
-				id: "002516226222"
+				t:        "transit"
+				id:       "002516226222"
+				email:    "aws-circus-\(t)@defn.sh"
+				imported: "yes"
 			}
 			log: {
-				t:  "audit"
-				id: "707476523482"
+				t:        "audit"
+				id:       "707476523482"
+				email:    "aws-circus-\(t)@defn.sh"
+				imported: "yes"
 			}
 			lib: {
-				t:  "govcloud"
-				id: "497790518354"
+				t:        "govcloud"
+				id:       "497790518354"
+				email:    "aws-circus-\(t)@defn.sh"
+				imported: "yes"
 			}
 			ops: {
-				id: "415618116579"
+				t:        "ops"
+				id:       "415618116579"
+				email:    "aws-circus-\(t)@defn.sh"
+				imported: "yes"
 			}
 		}
 	}
