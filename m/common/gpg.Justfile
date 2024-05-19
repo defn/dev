@@ -5,9 +5,9 @@ lock:
 
 # Reverse-proxy gpg-agent from home
 [no-cd]
-agent +args:
+agent *args:
 	#!/usr/bin/env bash
-	set -exfuo pipefail
+	set -efuo pipefail
 
 	if ! test -d ~/.password-store/.; then (cd && make password-store); fi
 	if ! test -d ~/dotfiles/.; then (cd && make dotfiles); fi
@@ -31,15 +31,15 @@ agent +args:
 	if ! pgrep dirmngr >/dev/null; then dirmngr --daemon >/dev/null || true; fi
 	set +u
 	if [[ -n ${CODER-} ]]; then
-		setsid coder gitssh -- home -o LocalForward="$HOME/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra" 1>/dev/null 2>&1 &
+		setsid coder gitssh -- home -o LocalForward="$HOME/.gnupg/S.gpg-agent /Users/defn/.gnupg/S.gpg-agent.extra" sleep infinity 1>/dev/null 2>&1 &
 		bg_pid=$!
 	else
-		setsid ssh home -o LocalForward="$HOME/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra" 1>/dev/null 2>&1 &
+		setsid ssh home -o LocalForward="$HOME/.gnupg/S.gpg-agent /Users/defn/.gnupg/S.gpg-agent.extra" sleep infinity 1>/dev/null 2>&1 &
 		bg_pid=$!
 	fi
 	trap 'kill -SIGTERM -${bg_pid}' EXIT
 
-	while [[ "$(pass hello 2>/dev/null || true)" != "world" ]]; do sleep 1; done
+	while [[ "$(pass hello 2>/dev/null || true)" != "world" ]]; do sleep 5; done
 
 	{{args}}
 
