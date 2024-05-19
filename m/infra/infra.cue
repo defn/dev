@@ -151,19 +151,7 @@ input: inf.#AwsProps & {
 
 		vault: {
 			region: "us-east-2"
-			#types: ["transit", "audit", "vault0", "vault1", "ops", "library", "hub", "pub", "dev"]
-			accounts: [{
-				name:     "vault"
-				email:    "aws-vault@defn.us"
-				imported: "yes"
-				profile:  "org"
-			}] + [
-				for t in #types {
-					name:     t
-					email:    "aws-vault-\(t)@defn.sh"
-					imported: "yes"
-				},
-			]
+			#types: full_accounts
 		}
 
 		circus: {
@@ -832,40 +820,64 @@ lookup: {
 		url: "https://d-9a672a0e52.awsapps.com/start"
 		accounts: {
 			org: {
-				id: "475528707847"
+				id:       "475528707847"
+				name:     "vault"
+				email:    "aws-vault@defn.us"
+				imported: "yes"
 			}
 			net: {
-				t:  "transit"
-				id: "915207860232"
+				t:        "transit"
+				id:       "915207860232"
+				email:    "aws-vault-\(t)@defn.sh"
+				imported: "yes"
 			}
 			log: {
-				t:  "audit"
-				id: "749185891195"
+				t:        "audit"
+				id:       "749185891195"
+				email:    "aws-vault-\(t)@defn.sh"
+				imported: "yes"
 			}
 			lib: {
-				t:  "library"
-				id: "066356637485"
+				t:        "library"
+				id:       "066356637485"
+				email:    "aws-vault-\(t)@defn.sh"
+				imported: "yes"
 			}
 			ops: {
-				id: "188066400611"
+				t:        "ops"
+				id:       "188066400611"
+				email:    "aws-vault-\(t)@defn.sh"
+				imported: "yes"
 			}
 			ci: {
-				t:  "vault0"
-				id: "313228123503"
+				t:        "vault0"
+				id:       "313228123503"
+				email:    "aws-vault-\(t)@defn.sh"
+				imported: "yes"
 			}
 			hub: {
-				id: "539099112425"
+				t:        "hub"
+				id:       "539099112425"
+				email:    "aws-vault-\(t)@defn.sh"
+				imported: "yes"
 			}
 			cde: {
-				t:  "vault1"
-				id: "040769490632"
+				t:        "vault1"
+				id:       "040769490632"
+				email:    "aws-vault-\(t)@defn.sh"
+				imported: "yes"
 			}
 			dev: {
-				id: "497393606242"
+				t:        "dev"
+				id:       "497393606242"
+				email:    "aws-vault-\(t)@defn.sh"
+				imported: "yes"
 			}
 			prod: {
-				t:  "pub:"
-				id: "851162413429"
+				t:        "pub"
+				id:       "851162413429"
+				email:    "aws-vault-\(t)@defn.sh"
+				imported: "yes"
 			}
 		}
 	}
