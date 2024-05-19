@@ -421,6 +421,12 @@ input: inf.#AwsProps & {
 }
 
 lookup: {
+	[string]: accounts: {
+		for e in full_accounts {
+			(e): id: string | *"TODO"
+		}
+	}
+
 	defn: {
 		url: "https://defn.awsapps.com/start"
 		accounts: {
@@ -429,6 +435,7 @@ lookup: {
 			}
 		}
 	}
+
 	coil: {
 		url: "https://d-90674c3cfd.awsapps.com/start"
 		accounts: {
@@ -446,6 +453,7 @@ lookup: {
 			}
 		}
 	}
+
 	curl: {
 		url: "https://d-926760a859.awsapps.com/start"
 		accounts: {
@@ -463,6 +471,7 @@ lookup: {
 			}
 		}
 	}
+
 	gyre: {
 		url: "https://d-9a6716e54a.awsapps.com/start"
 		accounts: {
@@ -474,6 +483,7 @@ lookup: {
 			}
 		}
 	}
+
 	helix: {
 		url: "https://d-9a6716ffd1.awsapps.com/start"
 		accounts: {
@@ -509,6 +519,7 @@ lookup: {
 			}
 		}
 	}
+
 	spiral: {
 		url: "https://d-926760b322.awsapps.com/start"
 		accounts: {
@@ -544,6 +555,7 @@ lookup: {
 			}
 		}
 	}
+
 	fogg: {
 		url: "https://fogg-0.awsapps.com/start"
 		accounts: {
@@ -579,6 +591,7 @@ lookup: {
 			}
 		}
 	}
+
 	imma: {
 		url: "https://imma-0.awsapps.com/start"
 		accounts: {
@@ -602,6 +615,7 @@ lookup: {
 			}
 		}
 	}
+
 	immanent: {
 		url: "https://immanent-0.awsapps.com/start"
 		accounts: {
@@ -643,6 +657,7 @@ lookup: {
 			}
 		}
 	}
+
 	whoa: {
 		url: "https://whoa-0.awsapps.com/start"
 		accounts: {
@@ -663,6 +678,7 @@ lookup: {
 			}
 		}
 	}
+
 	chamber: {
 		url: "https://chamber-0.awsapps.com/start"
 		accounts: {
@@ -773,6 +789,7 @@ lookup: {
 			}
 		}
 	}
+
 	jianghu: {
 		url: "https://jianghu-0.awsapps.com/start"
 		accounts: {
@@ -787,6 +804,7 @@ lookup: {
 			}
 		}
 	}
+
 	vault: {
 		url: "https://d-9a672a0e52.awsapps.com/start"
 		accounts: {
@@ -822,6 +840,7 @@ lookup: {
 			}
 		}
 	}
+
 	circus: {
 		url: "https://d-92670c4790.awsapps.com/start"
 		accounts: {
