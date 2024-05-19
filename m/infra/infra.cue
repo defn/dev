@@ -34,7 +34,7 @@ input: inf.#AwsProps & {
 				email: lookup[ORG].accounts[name].email
 
 				prefix:   lookup[ORG].accounts[name].prefix
-				imported: lookup[ORG].accounts[name].imported | *"no"
+				imported: lookup[ORG].accounts[name].imported
 
 				region: string | *THIS.region
 
@@ -66,7 +66,7 @@ input: inf.#AwsProps & {
 
 			ops_org_name:     "defn"
 			ops_account_name: "org"
-			ops_account_id:   "510430971399"
+			ops_account_id:   lookup[ops_org_name].accounts[ops_account_name].id
 		}
 
 		defn: {
@@ -76,62 +76,22 @@ input: inf.#AwsProps & {
 
 		gyre: {
 			region: "us-east-2"
-			#types: full_accounts
-			accounts: [{
-				name:    "gyre"
-				email:   "aws-gyre@defn.us"
-				profile: "org"
-			}] + [
-				for t in #types {
-					name:  t
-					email: "aws-gyre+\(t)@defn.us"
-				},
-			]
+			#types: ["org", "ops"]
 		}
 
 		curl: {
 			region: "us-west-2"
-			#types: full_accounts
-			accounts: [{
-				name:    "curl"
-				email:   "aws-curl@defn.us"
-				profile: "org"
-			}] + [
-				for t in #types {
-					name:  t
-					email: "aws-curl+\(t)@defn.us"
-				},
-			]
+			#types: ["org", "net", "lib", "hub"]
 		}
 
 		coil: {
 			region: "us-east-1"
-			#types: full_accounts
-			accounts: [{
-				name:    "coil"
-				email:   "aws-coil@defn.us"
-				profile: "org"
-			}] + [
-				for t in #types {
-					name:  t
-					email: "aws-coil+\(t)@defn.us"
-				},
-			]
+			#types: ["org", "net", "lib", "hub"]
 		}
 
 		helix: {
 			region: "us-east-2"
 			#types: full_accounts
-			accounts: [{
-				name:    "helix"
-				email:   "aws-helix@defn.sh"
-				profile: "org"
-			}] + [
-				for t in #types {
-					name:  t
-					email: "aws-helix+\(t)@defn.sh"
-				},
-			]
 		}
 
 		spiral: {
@@ -149,11 +109,6 @@ input: inf.#AwsProps & {
 			#types: ["org", "net", "log", "lib", "ops"]
 		}
 
-		chamber: {
-			region: "us-west-2"
-			#types: ["org"] + ["1", "2", "3", "4", "5", "6", "7", "8", "9"] + ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-		}
-
 		whoa: {
 			region: "us-west-2"
 			#types: ["org", "net", "hub", "dev", "prod"]
@@ -164,11 +119,6 @@ input: inf.#AwsProps & {
 			#types: ["org", "net", "log", "lib", "dev", "prod"]
 		}
 
-		immanent: {
-			region: "us-west-2"
-			#types0: ["patterner", "windkey", "summoner", "herbal", "namer", "ged", "roke", "chanter", "changer", "hand", "doorkeeper"]
-		}
-
 		jianghu: {
 			region: "us-west-2"
 			#types: ["org", "net", "log"]
@@ -176,20 +126,17 @@ input: inf.#AwsProps & {
 
 		fogg: {
 			region: "us-west-2"
-			#types: ["gateway", "security", "hub", "postx", "asset", "data", "sandbox", "circus", "home"]
-			accounts: [{
-				name:     "fogg"
-				email:    "spiral@defn.sh"
-				imported: "yes"
-				profile:  "org"
-			}] + [
-				for t in #types {
-					prefix:   "fogg-"
-					name:     t
-					email:    "fogg-\(t)@defn.sh"
-					imported: "yes"
-				},
-			]
+			#types: ["org", "net", "log", "lib", "ops", "ci", "hub", "cde", "dev", "prod"]
+		}
+
+		chamber: {
+			region: "us-west-2"
+			#types: ["org"] + ["1", "2", "3", "4", "5", "6", "7", "8", "9"] + ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+		}
+
+		immanent: {
+			region: "us-west-2"
+			#types0: ["patterner", "windkey", "summoner", "herbal", "namer", "ged", "roke", "chanter", "changer", "hand", "doorkeeper"]
 		}
 	}
 }
@@ -197,8 +144,8 @@ input: inf.#AwsProps & {
 lookup: {
 	[ORG=string]: {
 		accounts: [ACC=string]: {
-			prefix:   string
-			imported: string
+			prefix:   string | *""
+			imported: string | *"no"
 
 			email: string
 		}
@@ -218,8 +165,14 @@ lookup: {
 	coil: {
 		url: "https://d-90674c3cfd.awsapps.com/start"
 		accounts: {
+			[ACC=string]: {
+				t:     string | *ACC
+				email: string | *"aws-coil+\(t)@defn.sh"
+			}
 			org: {
-				id: "138291560003"
+				id:    "138291560003"
+				name:  "coil"
+				email: "aws-coil@defn.us"
 			}
 			net: {
 				id: "278790191486"
@@ -236,8 +189,14 @@ lookup: {
 	curl: {
 		url: "https://d-926760a859.awsapps.com/start"
 		accounts: {
+			[ACC=string]: {
+				t:     string | *ACC
+				email: string | *"aws-curl+\(t)@defn.sh"
+			}
 			org: {
-				id: "424535767618"
+				id:    "424535767618"
+				name:  "curl"
+				email: "aws-curl@defn.us"
 			}
 			net: {
 				id: "101142583332"
@@ -254,8 +213,14 @@ lookup: {
 	gyre: {
 		url: "https://d-9a6716e54a.awsapps.com/start"
 		accounts: {
+			[ACC=string]: {
+				t:     string | *ACC
+				email: string | *"aws-gyre+\(t)@defn.sh"
+			}
 			org: {
-				id: "065163301604"
+				id:    "065163301604"
+				name:  "gyre"
+				email: "aws-gyre@defn.us"
 			}
 			ops: {
 				id: "319951235442"
@@ -266,8 +231,14 @@ lookup: {
 	helix: {
 		url: "https://d-9a6716ffd1.awsapps.com/start"
 		accounts: {
+			[ACC=string]: {
+				t:     string | *ACC
+				email: string | *"aws-helix+\(t)@defn.sh"
+			}
 			org: {
-				id: "816178966829"
+				id:    "816178966829"
+				name:  "helix"
+				email: "aws-helix@defn.sh"
 			}
 			net: {
 				id: "504722108514"
@@ -350,8 +321,18 @@ lookup: {
 	fogg: {
 		url: "https://fogg-0.awsapps.com/start"
 		accounts: {
+			[ACC=string]: {
+				t:        string | *ACC
+				prefix:   "fogg-"
+				email:    string | *"fogg-\(t)@defn.sh"
+				imported: "yes"
+			}
+
 			org: {
-				id: "328216504962"
+
+				id:    "328216504962"
+				name:  "fogg"
+				email: "spiral@defn.sh"
 			}
 			net: {
 				t:  "asset"
@@ -631,6 +612,11 @@ lookup: {
 				id:    "738433022197"
 				name:  "defn-j"
 				email: "aws-development1@defn.us"
+			}
+			k: {
+				id:    "TODO"
+				name:  "TODO"
+				email: "TODO"
 			}
 			l: {
 				id:    "991300382347"
