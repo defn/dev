@@ -5,21 +5,16 @@ import (
 )
 
 full_accounts: [
-	"ops", // operation teams, coder, argocd
-	"sec", // security teams
-	"net", // network, vpc
-	"log", // logging, s3
-	"lib", // artifacts, s3, harbor
-	"pub", // public resources, elb, s3
-	"dmz", // ci/cd, webhooks, buildkite, atlantism bazel-cache
-	"hub", // shared services
-	"dev", // development environment, frontend, backend, database
-]
-env_accounts: [
-	"net", "lib", "hub",
-]
-ops_accounts: [
-	"ops",
+	"org",  // organization mastrr
+	"net",  // network
+	"log",  // logging
+	"lib",  // artifacts
+	"ops",  // operation teams
+	"ci",   // ci/cd
+	"hub",  // shared services
+	"cde",  // engineeering teams
+	"dev",  // development environments
+	"prod", // production environments
 ]
 
 input: inf.#AwsProps & {
@@ -71,7 +66,7 @@ input: inf.#AwsProps & {
 
 		gyre: {
 			region: "us-east-2"
-			#types: ops_accounts
+			#types: full_accounts
 			accounts: [{
 				name:    "gyre"
 				email:   "aws-gyre@defn.us"
@@ -86,7 +81,7 @@ input: inf.#AwsProps & {
 
 		curl: {
 			region: "us-west-2"
-			#types: env_accounts
+			#types: full_accounts
 			accounts: [{
 				name:    "curl"
 				email:   "aws-curl@defn.us"
@@ -101,7 +96,7 @@ input: inf.#AwsProps & {
 
 		coil: {
 			region: "us-east-1"
-			#types: env_accounts
+			#types: full_accounts
 			accounts: [{
 				name:    "coil"
 				email:   "aws-coil@defn.us"
