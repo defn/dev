@@ -5,7 +5,6 @@ import (
 )
 
 full_accounts: [
-	"org",  // organization mastrr
 	"net",  // network
 	"log",  // logging
 	"lib",  // artifacts
@@ -46,6 +45,8 @@ input: inf.#AwsProps & {
 				}
 
 				id: lookup[ORG].accounts[profile].id
+				// name: string | *lookup[ORG].accounts[profile].name
+				// email: string | *lookup[ORG].accounts[profile].email
 			}]
 
 			url: lookup[ORG].url
@@ -421,17 +422,13 @@ input: inf.#AwsProps & {
 }
 
 lookup: {
-	[string]: accounts: {
-		for e in full_accounts {
-			(e): id: string | *"TODO"
-		}
-	}
-
 	defn: {
 		url: "https://defn.awsapps.com/start"
 		accounts: {
 			org: {
-				id: "510430971399"
+				id:    "510430971399"
+				name:  "defn"
+				email: "iam+bootstrap@defn.sh"
 			}
 		}
 	}
@@ -442,11 +439,11 @@ lookup: {
 			org: {
 				id: "138291560003"
 			}
-			lib: {
-				id: "160764896647"
-			}
 			net: {
 				id: "278790191486"
+			}
+			lib: {
+				id: "160764896647"
 			}
 			hub: {
 				id: "453991412409"
@@ -490,32 +487,35 @@ lookup: {
 			org: {
 				id: "816178966829"
 			}
-			sec: {
-				id: "018520313738"
-			}
-			ops: {
-				id: "368812692254"
-			}
-			lib: {
-				id: "377857698578"
-			}
-			hub: {
-				id: "436043820387"
-			}
 			net: {
 				id: "504722108514"
-			}
-			pub: {
-				id: "536806623881"
 			}
 			log: {
 				id: "664427926343"
 			}
-			dmz: {
+			lib: {
+				id: "377857698578"
+			}
+			ops: {
+				id: "368812692254"
+			}
+			ci: {
+				t:  "sec"
+				id: "018520313738"
+			}
+			hub: {
+				id: "436043820387"
+			}
+			cde: {
+				t:  "dmz"
 				id: "724643698007"
 			}
 			dev: {
 				id: "843784871878"
+			}
+			prod: {
+				t:  "pub"
+				id: "536806623881"
 			}
 		}
 	}
@@ -529,29 +529,32 @@ lookup: {
 			net: {
 				id: "057533398557"
 			}
+			log: {
+				id: "442333715734"
+			}
 			lib: {
 				id: "073874947996"
 			}
-			dmz: {
-				id: "130046154300"
+			ops: {
+				id: "601164058091"
+			}
+			ci: {
+				t:  "pub"
+				id: "371657257885"
 			}
 			hub: {
 				id: "216704421225"
 			}
+			cde: {
+				t:  "sec"
+				id: "398258703387"
+			}
 			dev: {
 				id: "308726031860"
 			}
-			pub: {
-				id: "371657257885"
-			}
-			sec: {
-				id: "398258703387"
-			}
-			log: {
-				id: "442333715734"
-			}
-			ops: {
-				id: "601164058091"
+			prod: {
+				t:  "dmz"
+				id: "130046154300"
 			}
 		}
 	}
@@ -562,31 +565,39 @@ lookup: {
 			org: {
 				id: "328216504962"
 			}
-			asset: {
+			net: {
+				t:  "asset"
 				id: "060659916753"
 			}
-			circus: {
+			log: {
+				t:  "circus"
 				id: "844609041254"
 			}
-			data: {
+			lib: {
+				t:  "data"
 				id: "624713464251"
 			}
-			gateway: {
+			ops: {
+				t:  "gateway"
 				id: "318746665903"
 			}
-			home: {
+			ci: {
+				t:  "home"
 				id: "812459563189"
 			}
 			hub: {
 				id: "337248635000"
 			}
-			postx: {
+			cde: {
+				t:  "postx"
 				id: "565963418226"
 			}
-			sandbox: {
+			dev: {
+				t:  "sandbox"
 				id: "442766271046"
 			}
-			security: {
+			prod: {
+				t:  "security"
 				id: "372333168887"
 			}
 		}
@@ -598,20 +609,23 @@ lookup: {
 			org: {
 				id: "548373030883"
 			}
-			defn: {
+			net: {
+				t:  "defn"
 				id: "246197522468"
 			}
-			dgwyn: {
+			log: {
+				t:  "dgwyn"
 				id: "289716781198"
+			}
+			lib: {
+				t:  "tolan"
+				id: "516851121506"
 			}
 			dev: {
 				id: "445584037541"
 			}
 			prod: {
 				id: "766142996227"
-			}
-			tolan: {
-				id: "516851121506"
 			}
 		}
 	}
@@ -664,17 +678,18 @@ lookup: {
 			org: {
 				id: "389772512117"
 			}
+			net: {
+				t:  "secrets"
+				id: "464075062390"
+			}
+			hub: {
+				id: "462478722501"
+			}
 			dev: {
 				id: "439761234835"
 			}
 			prod: {
 				id: "204827926367"
-			}
-			secrets: {
-				id: "464075062390"
-			}
-			hub: {
-				id: "462478722501"
 			}
 		}
 	}
@@ -796,10 +811,12 @@ lookup: {
 			org: {
 				id: "657613322961"
 			}
-			tahoe: {
+			net: {
+				t:  "tahoe"
 				id: "025636091251"
 			}
-			klamath: {
+			log: {
+				t:  "klamath"
 				id: "298431841138"
 			}
 		}
@@ -811,32 +828,38 @@ lookup: {
 			org: {
 				id: "475528707847"
 			}
-			transit: {
+			net: {
+				t:  "transit"
 				id: "915207860232"
 			}
-			audit: {
+			log: {
+				t:  "audit"
 				id: "749185891195"
 			}
-			vault0: {
-				id: "313228123503"
-			}
-			vault1: {
-				id: "040769490632"
+			lib: {
+				t:  "library"
+				id: "066356637485"
 			}
 			ops: {
 				id: "188066400611"
 			}
-			library: {
-				id: "066356637485"
+			ci: {
+				t:  "vault0"
+				id: "313228123503"
 			}
 			hub: {
 				id: "539099112425"
 			}
-			pub: {
-				id: "851162413429"
+			cde: {
+				t:  "vault1"
+				id: "040769490632"
 			}
 			dev: {
 				id: "497393606242"
+			}
+			prod: {
+				t:  "pub:"
+				id: "851162413429"
 			}
 		}
 	}
@@ -847,17 +870,20 @@ lookup: {
 			org: {
 				id: "036139182623"
 			}
-			audit: {
+			net: {
+				t:  "transit"
+				id: "002516226222"
+			}
+			log: {
+				t:  "audit"
 				id: "707476523482"
+			}
+			lib: {
+				t:  "govcloud"
+				id: "497790518354"
 			}
 			ops: {
 				id: "415618116579"
-			}
-			transit: {
-				id: "002516226222"
-			}
-			govcloud: {
-				id: "497790518354"
 			}
 		}
 	}
