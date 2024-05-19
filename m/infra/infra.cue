@@ -5,6 +5,7 @@ import (
 )
 
 full_accounts: [
+	"org",  // organization master
 	"net",  // network
 	"log",  // logging
 	"lib",  // artifacts
@@ -27,28 +28,39 @@ input: inf.#AwsProps & {
 	organization: {
 		THIS=[ORG=string]: {
 			accounts: [...{
-				id:       lookup[ORG].accounts[profile].id
-				name:     string
-				profile:  string | *name
-				email:    string | *lookup[ORG].accounts[profile].email
-				imported: string | *"no"
+				name: string
+
+				id:    lookup[ORG].accounts[name].id
+				email: lookup[ORG].accounts[name].email
+
+				prefix:   lookup[ORG].accounts[name].prefix
+				imported: lookup[ORG].accounts[name].imported | *"no"
 
 				region: string | *THIS.region
 
 				cfg: {
-					id: "s3-\(ORG)-\(profile)"
+					id: "s3-\(ORG)-\(name)"
 
 					enabled:   true
 					namespace: "dfn"
 					stage:     "defn"
 					name:      "global"
-					attributes: ["\(ORG)-\(profile)"]
+					attributes: ["\(ORG)-\(name)"]
 
 					acl:                "private"
 					user_enabled:       false
 					versioning_enabled: false
 				}
 			}]
+
+			#types: [...string]
+			accounts: [
+				for t in #types {
+					{
+						name: t
+					}
+				},
+			]
 
 			url: lookup[ORG].url
 
@@ -59,11 +71,7 @@ input: inf.#AwsProps & {
 
 		defn: {
 			region: "us-east-2"
-			accounts: [{
-				name:    "defn"
-				email:   "iam+bootstrap@defn.sh"
-				profile: "org"
-			}]
+			#types: ["org"]
 		}
 
 		gyre: {
@@ -161,13 +169,6 @@ input: inf.#AwsProps & {
 		circus: {
 			region: "us-west-2"
 			#types: ["org", "net", "log", "lib", "ops"]
-			accounts: [
-				for t in #types {
-					{
-						name: t
-					}
-				},
-			]
 		}
 
 		chamber: {
@@ -321,13 +322,6 @@ input: inf.#AwsProps & {
 		whoa: {
 			region: "us-west-2"
 			#types: ["org", "net", "hub", "dev", "prod"]
-			accounts: [
-				for t in #types {
-					{
-						name: t
-					}
-				},
-			]
 		}
 
 		imma: {
@@ -377,13 +371,6 @@ input: inf.#AwsProps & {
 		jianghu: {
 			region: "us-west-2"
 			#types: ["org", "net", "log"]
-			accounts: [
-				for t in #types {
-					{
-						name: t
-					}
-				},
-			]
 		}
 
 		fogg: {
@@ -409,8 +396,10 @@ input: inf.#AwsProps & {
 lookup: {
 	[ORG=string]: {
 		accounts: [ACC=string]: {
-			name:   string | *ACC
-			prefix: string | *""
+			prefix:   string
+			imported: string
+
+			email: string
 		}
 	}
 
