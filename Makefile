@@ -312,7 +312,6 @@ coder-ssh-envbuilder:
 		-v envbuilder-layer:/layer-cache \
 		-v /nix:/nix \
 		-v /var/run/docker.sock:/var/run/docker.sock \
-		-v /home/ubuntu/.gnupg/S.gpg-agent.extra:/home/ubuntu/.gnupg/S.gpg-agent \
 		-v /home:/workspaces \
 		-v /home:/home \
 		-e LAYER_CACHE_DIR=/layer-cache \
