@@ -1,5 +1,6 @@
 mod github 'm/common/github.Justfile'
 mod playbook 'm/common/playbook.Justfile'
+mod gpg 'm/common/gpg.Justfile'
 
 create-coder-agent:
 	#!/usr/bin/env bash
