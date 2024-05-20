@@ -26,7 +26,7 @@ agent *args:
 	)
 	(
 		set +f
-		rm -f ~/.gnupg/S.*agent*
+		rm -rf ~/.gnupg/S.*agent*
 	)
 	if ! pgrep dirmngr >/dev/null; then dirmngr --daemon >/dev/null || true; fi
 	set +u
