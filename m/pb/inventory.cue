@@ -73,6 +73,6 @@ inventory: {
 
 	heavy: hosts: [
 		"thinkpad",
-		"gw"
+		"gw",
 	]
 }
