@@ -43,6 +43,7 @@ inventory: {
 	rpi: children: [
 		"rpi3",
 		"rpi4",
+		"rpi5",
 	]
 
 	rpi3: hosts: [
@@ -55,6 +56,13 @@ inventory: {
 		"rpi4a",
 		"rpi4b",
 		"rpi4c",
+	]
+
+	rpi5: hosts: [
+		"rpi5a",
+		"rpi5b",
+		"rpi5c",
+		"rpi5d",
 	]
 
 	zimaboard: hosts: [
