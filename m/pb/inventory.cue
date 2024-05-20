@@ -5,9 +5,11 @@ package pb
 inventory: {
 	[string]: vars: {
 		// provide defaults for inventory/packer.ini
-		ansible_user:              string | *#username
+		ansible_user: string | *#username
+
 		bazel_remote_cache_server: string | *"100.101.80.89" // macmini
 		bazel_remote_cache_port:   string | *"9092"          // public port
+		bazel_jobs:                string | *"1"
 	}
 
 	cache: {
