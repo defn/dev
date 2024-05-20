@@ -67,8 +67,9 @@ role: rpi_packages: tasks: [{
 }]
 
 role: base_packages: tasks: [{
-	name:   "Disable unattended-upgrades service"
-	become: true
+	name:          "Disable unattended-upgrades service"
+	become:        true
+	ignore_errors: true
 	service: {
 		name:    "unattended-upgrades"
 		enabled: "no"
