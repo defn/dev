@@ -199,8 +199,8 @@ perms:
 
 update:
 	git pull
-	cd .password-store && git pull
-	cd dotfiles && git pull && ./bootstrap
+	-cd .password-store && git pull
+	-cd dotfiles && git pull && ./bootstrap
 	$(MAKE) install
 
 init:
