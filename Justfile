@@ -34,7 +34,7 @@ cache:
 
 home *args:
 	#!/usr/bin/env bash
-	if test -n "{[ args ]}"; then
+	if test -z "{[ args ]}"; then
 		just cache
 	fi
 	just play home {{ args }}
