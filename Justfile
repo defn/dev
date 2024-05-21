@@ -26,7 +26,12 @@ play pb *lim:
 penguin pb:
 	just playbook::penguin {{pb}}
 
-all:
-	-just play upgrade
+upgrade:
+	just play upgrade
+
+cache:
 	just play cache
+
+home:
+	just cache
 	just play home
