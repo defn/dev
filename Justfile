@@ -32,6 +32,9 @@ upgrade:
 cache:
 	just play cache
 
-home:
-	just cache
-	just play home
+home *args:
+	#!/usr/bin/env bash
+	if test -n "{[ args ]}"; then
+		just cache
+	fi
+	just play home {{ args }}
