@@ -38,3 +38,7 @@ home *args:
 		just cache
 	fi
 	just play home {{ args }}
+
+all:
+	just upgrade
+	just home
