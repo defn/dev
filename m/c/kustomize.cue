@@ -1007,7 +1007,7 @@ cilium_common: {
 				rollOutPods: true
 			}
 
-			ipam: operator: clusterPoolIPv4PodCIDRList: class.infra_pod_cidr
+			ipam: operator: clusterPoolIPv4PodCIDRList: [class.infra_pod_cidr]
 
 			kubeProxyReplacement: false
 			//k8sServiceHost:       class.cluster_ip
