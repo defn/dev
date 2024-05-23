@@ -23,9 +23,6 @@ role: install_pihole: tasks: [{
 			DNSMASQ_LISTENING: "all"
 			FTLCONF_MAXDBDAYS: "180"
 		}
-		dns_servers: [
-			"1.1.1.1",
-		]
 		network_mode: "host"
 		volumes: [
 			"/home/ubuntu/pihole/pihole/:/etc/pihole/",
