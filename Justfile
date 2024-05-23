@@ -30,8 +30,8 @@ penguin pb:
 upgrade:
 	just play upgrade
 
-cache:
-	just play cache
+cache *args:
+	just play cache {{ args }}
 
 home *args:
 	just play home {{ args }}
