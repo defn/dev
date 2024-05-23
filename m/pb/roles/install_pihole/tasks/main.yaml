@@ -8,10 +8,10 @@
       TZ: PST
       WEBPASSWORD: admin
       PIHOLE_DNS_: 1.1.1.1
-      DNSMASQ_LISTENING: local
+      DNSMASQ_USER: root
+      DNSMASQ_LISTENING: all
       FTLCONF_MAXDBDAYS: "180"
     dns_servers:
-      - 127.0.0.1
       - 1.1.1.1
     network_mode: host
     volumes:
