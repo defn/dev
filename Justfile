@@ -27,8 +27,8 @@ play pb *lim:
 penguin pb:
 	just playbook::penguin {{pb}}
 
-upgrade:
-	just play upgrade
+upgrade *args:
+	just play upgrade {{ args }}
 
 cache *args:
 	just play cache {{ args }}
