@@ -5,6 +5,7 @@ mod github 'common/github.Justfile'
 mod gpg 'common/gpg.Justfile'
 mod aws 'common/aws.Justfile'
 mod playbook 'common/playbook.Justfile'
+mod lib 'common/lib.Justfile'
 
 # Run a playbook
 play pb *lim:

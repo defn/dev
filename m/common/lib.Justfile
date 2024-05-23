@@ -1,2 +1,2 @@
-a:
-    @uname -a
+http-server *port:
+    python -m http.server {{ port }}
