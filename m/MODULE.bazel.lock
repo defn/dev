@@ -1702,16 +1702,31 @@
       "general": {
         "bzlTransitiveDigest": "D1+rhhbwX4ufoTmeUVxDpPg+Sknv3QzVXZnyK2zOjj4=",
         "recordedFileInputs": {
-          "@@//go.mod": "c8abed3418104005a6364c9b6eede5f74b2e8404074faef0a080e78c4221d6f9",
+          "@@//go.mod": "7ee0a12dafe457e9e6fbabbb678f629e159e3a7ba6766de6796dd67003b80ab6",
           "@@rules_go~//go.mod": "de22304b720f7f61350ec1c9739de6c0a1b1103fd22bfeb6e92c6c843ddc6d6e",
           "@@gazelle~//go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
-          "@@//go.sum": "149c680ebbfe29f9f5e2e38455d5894cf7b5e3a3ed2f5ac2bfe32fa3be0e0730",
+          "@@//go.sum": "e08a78cfeeadfd1e4e5e17c5bd3caa6788f1908c84f436e68f8c0bccb1c15ca7",
           "@@rules_go~//go.sum": "d56fdb19b21a5f12bcf625c49432371ac39c2def0f564098fbda107f7c080f40",
           "@@gazelle~//go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473"
         },
         "recordedDirentsInputs": {},
         "envVariables": {},
         "generatedRepoSpecs": {
+          "com_github_charmbracelet_x_ansi": {
+            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "importpath": "github.com/charmbracelet/x/ansi",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:CGAduulr6egay/YVbGc8Hsu8deMg1xZ/bkaXTPi1JDk=",
+              "replace": "",
+              "version": "v0.1.1"
+            }
+          },
           "com_github_fsnotify_fsnotify": {
             "bzlFile": "@@gazelle~//internal:go_repository.bzl",
             "ruleClassName": "go_repository",
@@ -1772,6 +1787,21 @@
               "version": "v0.1.13"
             }
           },
+          "com_github_kevinburke_hostsfile": {
+            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "importpath": "github.com/kevinburke/hostsfile",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:zfI6ImDFFLxvWztL5C7pigHTGyjfI3EtS/UDaDKk7dg=",
+              "replace": "",
+              "version": "v0.0.0-20220522040509-e5e984885321"
+            }
+          },
           "org_golang_x_exp": {
             "bzlFile": "@@gazelle~//internal:go_repository.bzl",
             "ruleClassName": "go_repository",
@@ -1800,6 +1830,21 @@
               "sum": "h1:U+8j7t0axsIgvQUqthuNm82HIrYXodOV2iWLWtEaIwg=",
               "replace": "",
               "version": "v3.2.1"
+            }
+          },
+          "com_github_noisysockets_go_fqdn": {
+            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "importpath": "github.com/noisysockets/go-fqdn",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:UcBIA0ul3hod8036gExMipIjLhWuvE7Fk3PVct4CBWY=",
+              "replace": "",
+              "version": "v1.1.0"
             }
           },
           "com_github_magiconair_properties": {
@@ -1872,9 +1917,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:3s1wS3IVnTfnRE2syUwUYok8iiByWETr6fWuwNIyzb0=",
+              "sum": "h1:FHdUpJFXfd6LFlixuv4LD1DO0U1pgnmtvB3KC5+88wo=",
               "replace": "",
-              "version": "v19.18.0"
+              "version": "v19.19.0"
             }
           },
           "com_github_opencontainers_image_spec": {
@@ -1932,9 +1977,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:+qGGcbkzsfDQNPPe9UDgpxAWQrhbbBXOYJFQDq/dtJw=",
+              "sum": "h1:gEOO8jv9F4OT7lGCjxCBTO/36wtF6j2nSip77qHd4x4=",
               "replace": "",
-              "version": "v0.0.0-20240312152122-5f08fbb34913"
+              "version": "v0.0.0-20240521201337-686a1a2994c1"
             }
           },
           "org_golang_x_mod": {
@@ -1965,6 +2010,21 @@
               "sum": "h1:PV8peI4a0ysnczrg+LtxykD8LfKY9ML6u2jnxaEnrnM=",
               "replace": "",
               "version": "v1.1.12"
+            }
+          },
+          "com_github_charmbracelet_x_input": {
+            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "importpath": "github.com/charmbracelet/x/input",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:YDOJaTUKCqtGnq9PHzx3pkkl4pXDOANUHmhH3DqMtM4=",
+              "replace": "",
+              "version": "v0.1.1"
             }
           },
           "com_github_cloudwego_iasm": {
@@ -2055,21 +2115,6 @@
               "sum": "h1:OyuTnRm3hFMN/r8jDMM4Lndr1ZyNzAjbGVF2DdX9p5Q=",
               "replace": "",
               "version": "v10.0.0"
-            }
-          },
-          "com_github_hashicorp_go_multierror": {
-            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
-            "ruleClassName": "go_repository",
-            "attributes": {
-              "importpath": "github.com/hashicorp/go-multierror",
-              "build_directives": [],
-              "build_file_generation": "auto",
-              "build_extra_args": [],
-              "patches": [],
-              "patch_args": [],
-              "sum": "h1:H5DkEtf6CXdFp0N0Em5UCwQpXMWke8IA0+lD48awMYo=",
-              "replace": "",
-              "version": "v1.1.1"
             }
           },
           "com_github_subosito_gotenv": {
@@ -2175,6 +2220,21 @@
               "sum": "h1:xfD0iDuEKnDkl03q4limB+vH+GxLEtL/jb4xVJSWWEY=",
               "replace": "",
               "version": "v0.0.20"
+            }
+          },
+          "com_github_noisysockets_network": {
+            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "importpath": "github.com/noisysockets/network",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:/gjOMiShb11mjCT1NWFvUEy2cLurdBw3uKGbV+EqyKI=",
+              "replace": "",
+              "version": "v0.8.2"
             }
           },
           "com_github_leodido_go_urn": {
@@ -2314,6 +2374,21 @@
               "version": "v0.6.0"
             }
           },
+          "com_github_charmbracelet_x_term": {
+            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "importpath": "github.com/charmbracelet/x/term",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:3cosVAiPOig+EV4X9U+3LDgtwwAoEzJjNdwbXDjF6yI=",
+              "replace": "",
+              "version": "v0.1.1"
+            }
+          },
           "com_github_cpuguy83_go_md2man_v2": {
             "bzlFile": "@@gazelle~//internal:go_repository.bzl",
             "ruleClassName": "go_repository",
@@ -2342,6 +2417,21 @@
               "sum": "h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=",
               "replace": "",
               "version": "v1.6.0"
+            }
+          },
+          "com_github_avast_retry_go_v4": {
+            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "importpath": "github.com/avast/retry-go/v4",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:K9xNA+KeB8HHc2aWFuLb25Offp+0iVRXEvFx8IinRJA=",
+              "replace": "",
+              "version": "v4.6.0"
             }
           },
           "com_github_russross_blackfriday_v2": {
@@ -2644,21 +2734,6 @@
               "version": "v2.27.2"
             }
           },
-          "org_golang_x_term": {
-            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
-            "ruleClassName": "go_repository",
-            "attributes": {
-              "importpath": "golang.org/x/term",
-              "build_directives": [],
-              "build_file_generation": "auto",
-              "build_extra_args": [],
-              "patches": [],
-              "patch_args": [],
-              "sum": "h1:VnkxpohqXaOBYJtBmEppKUG6mXpi+4O6purfc2+sMhw=",
-              "replace": "",
-              "version": "v0.20.0"
-            }
-          },
           "org_golang_google_protobuf": {
             "bzlFile": "@@gazelle~//internal:go_repository.bzl",
             "ruleClassName": "go_repository",
@@ -2714,9 +2789,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:CrxCmQqYDkv1z7lO7Wbh2HN93uovUHgrECaO5ZrCXAU=",
+              "sum": "h1:KZ5WoDbxAIgm2HNbYckL0se1fHD6rz5j4ywS6ebzDqA=",
               "replace": "",
-              "version": "v0.10.2"
+              "version": "v0.10.3"
             }
           },
           "in_gopkg_yaml_v3": {
@@ -2789,9 +2864,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:qIvpFr60L+zPWifYmiZFCY7DdahePpzUw0oIru/4A6Y=",
+              "sum": "h1:jtPPYcLB37Nsw9KRyqHCzGJgIR/FSA7tq602RzyBAQE=",
               "replace": "",
-              "version": "v0.21.1"
+              "version": "v0.23.4"
             }
           },
           "com_github_sagikazarmark_slog_shim": {
@@ -2824,19 +2899,34 @@
               "version": "v0.0.0-20240412105620-eedc705cef15"
             }
           },
-          "com_github_hashicorp_errwrap": {
+          "com_github_noisysockets_resolver": {
             "bzlFile": "@@gazelle~//internal:go_repository.bzl",
             "ruleClassName": "go_repository",
             "attributes": {
-              "importpath": "github.com/hashicorp/errwrap",
+              "importpath": "github.com/noisysockets/resolver",
               "build_directives": [],
               "build_file_generation": "auto",
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:OxrOeh75EUXMY8TBjag2fzXGZ40LB6IKw45YeGUDY2I=",
+              "sum": "h1:w8o1VA/ieM0MnUAENLDi3FHosmdOtBKmciGsfbww7dQ=",
               "replace": "",
-              "version": "v1.1.0"
+              "version": "v0.4.1"
+            }
+          },
+          "com_github_xo_terminfo": {
+            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "importpath": "github.com/xo/terminfo",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:JVG44RsyaB9T2KIHavMF/ppJZNG9ZpyihvCd0w101no=",
+              "replace": "",
+              "version": "v0.0.0-20220910002029-abceb7e1c41e"
             }
           },
           "org_cuelang_go": {
@@ -2984,9 +3074,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:Eeb+n75Om9gQ+I6YpbCXQRKHt5Pn4vMwusQpwLiEgJQ=",
+              "sum": "h1:iXyGvI+FfOWqkB2V07m1DF3xxQijxjY2j8PqiXYqasg=",
               "replace": "",
-              "version": "v0.26.2"
+              "version": "v0.26.3"
             }
           },
           "com_github_mattn_go_localereader": {
@@ -3014,9 +3104,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:KWeXFSexGcfahHX+54URiZGkBFazf70JNMtwg/AFW3s=",
+              "sum": "h1:UoAcbQ6Qml8hDwSWs0Y1cB5TEQuZkDPH/ZqwWWYTG4g=",
               "replace": "",
-              "version": "v0.10.0"
+              "version": "v0.11.0"
             }
           },
           "com_github_muesli_ansi": {
@@ -3034,6 +3124,21 @@
               "version": "v0.0.0-20230316100256-276c6243b2f6"
             }
           },
+          "cat_dario_mergo": {
+            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "importpath": "dario.cat/mergo",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:AGCNq9Evsj31mOgNPcLyXc+4PNABt905YmuqPYYpBWk=",
+              "replace": "",
+              "version": "v1.0.0"
+            }
+          },
           "com_github_bytedance_sonic": {
             "bzlFile": "@@gazelle~//internal:go_repository.bzl",
             "ruleClassName": "go_repository",
@@ -3044,9 +3149,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:oUp34TzMlL+OY1OUWxHqsdkgC/Zfc85zGqw9siXjrc0=",
+              "sum": "h1:k/l9p1hZpNIMJSk37wL9ltkcpqLfIho1vYthi4xT2t4=",
               "replace": "",
-              "version": "v1.11.6"
+              "version": "v1.11.7"
             }
           },
           "org_golang_google_grpc": {
@@ -3094,21 +3199,6 @@
               "sum": "h1:9LC83zGrHhuUA9l16C9AHXAqEV/2wBQ4nkvumAE65EE=",
               "replace": "",
               "version": "v1.2.12"
-            }
-          },
-          "com_lukechampine_uint128": {
-            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
-            "ruleClassName": "go_repository",
-            "attributes": {
-              "importpath": "lukechampine.com/uint128",
-              "build_directives": [],
-              "build_file_generation": "auto",
-              "build_extra_args": [],
-              "patches": [],
-              "patch_args": [],
-              "sum": "h1:cDdUVfRwDUDovz610ABgFD17nXD4/uDgVHl2sC3+sbo=",
-              "replace": "",
-              "version": "v1.3.0"
             }
           },
           "com_github_aws_jsii_runtime_go": {
@@ -3171,21 +3261,6 @@
               "version": "v1.18.2"
             }
           },
-          "com_github_rdleal_intervalst": {
-            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
-            "ruleClassName": "go_repository",
-            "attributes": {
-              "importpath": "github.com/rdleal/intervalst",
-              "build_directives": [],
-              "build_file_generation": "auto",
-              "build_extra_args": [],
-              "patches": [],
-              "patch_args": [],
-              "sum": "h1:DWrcNJ9kxPOYnXxExrQkta1xsKFRN0rTOVXkBDJzVYg=",
-              "replace": "",
-              "version": "v1.4.0"
-            }
-          },
           "com_github_muesli_reflow": {
             "bzlFile": "@@gazelle~//internal:go_repository.bzl",
             "ruleClassName": "go_repository",
@@ -3199,6 +3274,21 @@
               "sum": "h1:IFsN6K9NfGtjeggFP+68I4chLZV2yIKsXJFNZ+eWh6s=",
               "replace": "",
               "version": "v0.3.0"
+            }
+          },
+          "com_github_charmbracelet_x_windows": {
+            "bzlFile": "@@gazelle~//internal:go_repository.bzl",
+            "ruleClassName": "go_repository",
+            "attributes": {
+              "importpath": "github.com/charmbracelet/x/windows",
+              "build_directives": [],
+              "build_file_generation": "auto",
+              "build_extra_args": [],
+              "patches": [],
+              "patch_args": [],
+              "sum": "h1:Iumiwq2G+BRmgoayww/qfcvof7W/3uLoelhxojXlRWg=",
+              "replace": "",
+              "version": "v0.1.2"
             }
           },
           "com_github_hashicorp_terraform_cdk_go_cdktf": {
@@ -3298,11 +3388,17 @@
                 "com_github_urfave_cli_v2": "github.com/urfave/cli/v2",
                 "org_golang_x_sys": "golang.org/x/sys",
                 "dev_cuelabs_go_oci_ociregistry": "cuelabs.dev/go/oci/ociregistry",
+                "cat_dario_mergo": "dario.cat/mergo",
                 "com_github_masterminds_semver_v3": "github.com/Masterminds/semver/v3",
                 "com_github_atotto_clipboard": "github.com/atotto/clipboard",
+                "com_github_avast_retry_go_v4": "github.com/avast/retry-go/v4",
                 "com_github_aymanbagabas_go_osc52_v2": "github.com/aymanbagabas/go-osc52/v2",
                 "com_github_bytedance_sonic": "github.com/bytedance/sonic",
                 "com_github_bytedance_sonic_loader": "github.com/bytedance/sonic/loader",
+                "com_github_charmbracelet_x_ansi": "github.com/charmbracelet/x/ansi",
+                "com_github_charmbracelet_x_input": "github.com/charmbracelet/x/input",
+                "com_github_charmbracelet_x_term": "github.com/charmbracelet/x/term",
+                "com_github_charmbracelet_x_windows": "github.com/charmbracelet/x/windows",
                 "com_github_cloudwego_base64x": "github.com/cloudwego/base64x",
                 "com_github_cloudwego_iasm": "github.com/cloudwego/iasm",
                 "com_github_cockroachdb_apd_v3": "github.com/cockroachdb/apd/v3",
@@ -3319,11 +3415,10 @@
                 "com_github_goccy_go_json": "github.com/goccy/go-json",
                 "com_github_google_btree": "github.com/google/btree",
                 "com_github_google_uuid": "github.com/google/uuid",
-                "com_github_hashicorp_errwrap": "github.com/hashicorp/errwrap",
-                "com_github_hashicorp_go_multierror": "github.com/hashicorp/go-multierror",
                 "com_github_hashicorp_hcl": "github.com/hashicorp/hcl",
                 "com_github_inconshreveable_mousetrap": "github.com/inconshreveable/mousetrap",
                 "com_github_json_iterator_go": "github.com/json-iterator/go",
+                "com_github_kevinburke_hostsfile": "github.com/kevinburke/hostsfile",
                 "com_github_klauspost_cpuid_v2": "github.com/klauspost/cpuid/v2",
                 "com_github_leodido_go_urn": "github.com/leodido/go-urn",
                 "com_github_lucasb_eyer_go_colorful": "github.com/lucasb-eyer/go-colorful",
@@ -3341,11 +3436,13 @@
                 "com_github_muesli_cancelreader": "github.com/muesli/cancelreader",
                 "com_github_muesli_reflow": "github.com/muesli/reflow",
                 "com_github_muesli_termenv": "github.com/muesli/termenv",
+                "com_github_noisysockets_go_fqdn": "github.com/noisysockets/go-fqdn",
                 "com_github_noisysockets_netstack": "github.com/noisysockets/netstack",
+                "com_github_noisysockets_network": "github.com/noisysockets/network",
+                "com_github_noisysockets_resolver": "github.com/noisysockets/resolver",
                 "com_github_opencontainers_go_digest": "github.com/opencontainers/go-digest",
                 "com_github_opencontainers_image_spec": "github.com/opencontainers/image-spec",
                 "com_github_pelletier_go_toml_v2": "github.com/pelletier/go-toml/v2",
-                "com_github_rdleal_intervalst": "github.com/rdleal/intervalst",
                 "com_github_rivo_uniseg": "github.com/rivo/uniseg",
                 "com_github_rogpeppe_go_internal": "github.com/rogpeppe/go-internal",
                 "com_github_russross_blackfriday_v2": "github.com/russross/blackfriday/v2",
@@ -3359,6 +3456,7 @@
                 "com_github_subosito_gotenv": "github.com/subosito/gotenv",
                 "com_github_twitchyliquid64_golang_asm": "github.com/twitchyliquid64/golang-asm",
                 "com_github_ugorji_go_codec": "github.com/ugorji/go/codec",
+                "com_github_xo_terminfo": "github.com/xo/terminfo",
                 "com_github_xrash_smetrics": "github.com/xrash/smetrics",
                 "com_github_yuin_goldmark": "github.com/yuin/goldmark",
                 "org_uber_go_multierr": "go.uber.org/multierr",
@@ -3370,14 +3468,12 @@
                 "org_golang_x_net": "golang.org/x/net",
                 "org_golang_x_oauth2": "golang.org/x/oauth2",
                 "org_golang_x_sync": "golang.org/x/sync",
-                "org_golang_x_term": "golang.org/x/term",
                 "org_golang_x_text": "golang.org/x/text",
                 "org_golang_x_time": "golang.org/x/time",
                 "org_golang_x_tools": "golang.org/x/tools",
                 "org_golang_google_protobuf": "google.golang.org/protobuf",
                 "in_gopkg_ini_v1": "gopkg.in/ini.v1",
                 "in_gopkg_yaml_v3": "gopkg.in/yaml.v3",
-                "com_lukechampine_uint128": "lukechampine.com/uint128",
                 "org_golang_google_grpc": "google.golang.org/grpc",
                 "org_golang_google_grpc_cmd_protoc_gen_go_grpc": "google.golang.org/grpc/cmd/protoc-gen-go-grpc",
                 "org_golang_google_genproto_googleapis_rpc": "google.golang.org/genproto/googleapis/rpc",
