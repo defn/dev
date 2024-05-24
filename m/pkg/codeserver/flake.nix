@@ -17,7 +17,7 @@
         "https://github.com/coder/code-server/releases/download/v${input.vendor}/code-server-${input.vendor}-${input.os}-${input.arch}.tar.gz";
 
     installPhase = pkg:
-      if input.os == "macos" && input.arch == "amd64" then
+      if pkg.config.os == "macos" && pkg.config.arch == "amd64" then
         ''
           install -m 0755 -d $out $out/bin $out/lib
           rsync -ia . $out/lib/.
