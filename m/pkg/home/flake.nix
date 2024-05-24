@@ -6,23 +6,23 @@
   outputs = inputs: inputs.pkg.main rec {
     src = builtins.path { path = ./.; name = "pkg-home"; };
 
-#    apps = ctx: {
-#      tailscale = {
-#        type = "app";
-#        program = "${inputs.tailscale.defaultPackage.${ctx.system}}/bin/tailscale";
-#      };
-#
-#      tailscaled = {
-#        type = "app";
-#        program = "${inputs.tailscale.defaultPackage.${ctx.system}}/bin/tailscaled";
-#      };
-#    };
+    #    apps = ctx: {
+    #      tailscale = {
+    #        type = "app";
+    #        program = "${inputs.tailscale.defaultPackage.${ctx.system}}/bin/tailscale";
+    #      };
+    #
+    #      tailscaled = {
+    #        type = "app";
+    #        program = "${inputs.tailscale.defaultPackage.${ctx.system}}/bin/tailscaled";
+    #      };
+    #    };
 
     defaultPackage = ctx: ctx.wrap.nullBuilder {
       propagatedBuildInputs = with ctx.pkgs; [
         ctx.pkgs.irssi
 
-#        inputs.az.defaultPackage.${ctx.system}
+        #        inputs.az.defaultPackage.${ctx.system}
       ]
       ++ ctx.commands;
     };

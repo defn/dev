@@ -4,5 +4,5 @@ load("../common/Tiltfile", "main")
 
 local_resource(
     "build",
-    cmd=[ "j", "bazel::build" ],
+    cmd=["j", "bazel::build"],
 )
