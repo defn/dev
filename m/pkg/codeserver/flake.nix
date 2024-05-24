@@ -10,7 +10,11 @@
       };
     };
 
-    url_template = input: "https://github.com/coder/code-server/releases/download/v${input.vendor}/code-server-${input.vendor}-${input.os}-${input.arch}.tar.gz";
+    url_template = input:
+      if input.os == "macos" && input.arch == "amd64" then
+        "https://github.com/coder/code-server/releases/download/v${input.vendor2}/code-server-${input.vendor2}-${input.os}-${input.arch}.tar.gz"
+      else
+        "https://github.com/coder/code-server/releases/download/v${input.vendor}/code-server-${input.vendor}-${input.os}-${input.arch}.tar.gz";
 
     installPhase = pkg:
       ''
@@ -39,8 +43,8 @@
       };
       "x86_64-darwin" = {
         os = "macos";
-        arch = "arm64"; # amd64 version no loner available
-        sha256 = "sha256-ZW/iYUxQlmBvUo7Fs99r4VbSyCdLES+9ZZW7TXtXfuo="; # x86_64-darwin
+        arch = "amd64";
+        sha256 = "sha256-FS47wofOxhh6gyw5cOF90gFnFQHKJra0g1Wg4Q4SdrY="; # x86_64-darwin
       };
       "aarch64-darwin" = {
         os = "macos";
