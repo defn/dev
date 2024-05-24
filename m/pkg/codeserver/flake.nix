@@ -17,13 +17,22 @@
         "https://github.com/coder/code-server/releases/download/v${input.vendor}/code-server-${input.vendor}-${input.os}-${input.arch}.tar.gz";
 
     installPhase = pkg:
-      ''
-        install -m 0755 -d $out $out/bin $out/lib
-        rsync -ia . $out/lib/.
-        mv -f $out/lib/code-server-${pkg.config.vendor}-*  $out/lib/code-server-${pkg.config.vendor}
-        ln -fs $out/lib/code-server-${pkg.config.vendor}/bin/code-server $out/bin/code-server
-        ln -fs $out/lib/code-server-${pkg.config.vendor}/lib/vscode/bin/helpers/browser.sh $out/bin/browser.sh
-      '';
+      if input.os == "macos" && input.arch == "amd64" then
+        ''
+          install -m 0755 -d $out $out/bin $out/lib
+          rsync -ia . $out/lib/.
+          mv -f $out/lib/code-server-${pkg.config.vendor2}-*  $out/lib/code-server-${pkg.config.vendor2}
+          ln -fs $out/lib/code-server-${pkg.config.vendor2}/bin/code-server $out/bin/code-server
+          ln -fs $out/lib/code-server-${pkg.config.vendor2}/lib/vscode/bin/helpers/browser.sh $out/bin/browser.sh
+        ''
+      else
+        ''
+          install -m 0755 -d $out $out/bin $out/lib
+          rsync -ia . $out/lib/.
+          mv -f $out/lib/code-server-${pkg.config.vendor}-*  $out/lib/code-server-${pkg.config.vendor}
+          ln -fs $out/lib/code-server-${pkg.config.vendor}/bin/code-server $out/bin/code-server
+          ln -fs $out/lib/code-server-${pkg.config.vendor}/lib/vscode/bin/helpers/browser.sh $out/bin/browser.sh
+        '';
 
     downloads = {
       options = pkg: {
