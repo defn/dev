@@ -46,9 +46,19 @@ up *name:
 	command="make coder-ssh-envbuilder"
 	template=coder-defn-ssh-template
 
-	sudo ln -nfs ubuntu /home/dev
-	sudo chown $(id -un) /var/run/docker.sock 2>/dev/null || true
-	sudo touch ~/.gnupg/S.gpg-agent.extra
+	case "$(uname -s)" in
+		Darwin)
+			export SUDO_ASKPASS=$HOME/bin/askpass
+			sudo="sudo -A"
+			;;
+		*)
+			sudo=sudo
+			;;
+	esac
+
+	$sudo ln -nfs ubuntu /home/dev
+	$sudo chown $(id -un) /var/run/docker.sock 2>/dev/null || true
+	$sudo touch ~/.gnupg/S.gpg-agent.extra
 	just coder::down ${name} || true
 
 	coder delete ${name} --yes 1>/dev/null 2>/dev/null || true
@@ -93,7 +103,7 @@ down *name:
 	docker rm -f "${name}" 2>/dev/null || true
 	coder delete ${name} --yes 1>/dev/null 2>/dev/null || true
 
-# Opens Coder workspace in browser.  Creates workspace if necessary
+# Opens Coder workspace in browser. Creates workspace if necessary
 [no-cd]
 use *name:
 	#!/usr/bin/env bash
@@ -156,15 +166,15 @@ coder-agent *host:
 
 
 	case "$(uname -s)" in
-	  Darwin) export LC_ALL=C LANG=C ;;
+		Darwin) export LC_ALL=C LANG=C ;;
 	esac
 
 	export STARSHIP_NO=1 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
 	source ~/.bash_profile
 	cd ${CODER_HOMEDIR}
 	echo ${CODER_INIT_SCRIPT_BASE64} | base64 -d \
-	  | sed 's#agent$#agent '"${CODER_NAME}"'#; s#^while.*#while ! test -x '"${BINARY_NAME}"'; do#; s#^BINARY_NAME.*#BINARY_NAME='"$HOME"'/bin/nix/coder#; s#exec ./#exec #; s#exit 1#echo exit 1#' \
-	  > /tmp/coder-agent-${CODER_NAME}-$$
+		| sed 's#agent$#agent '"${CODER_NAME}"'#; s#^while.*#while ! test -x '"${BINARY_NAME}"'; do#; s#^BINARY_NAME.*#BINARY_NAME='"$HOME"'/bin/nix/coder#; s#exec ./#exec #; s#exit 1#echo exit 1#' \
+		> /tmp/coder-agent-${CODER_NAME}-$$
 	exec bash -x /tmp/coder-agent-${CODER_NAME}-$$
 
 # Run code-server in a loop
@@ -173,7 +183,7 @@ code-server *host:
 	#!/usr/bin/env bash
 
 	case "$(uname -s)" in
-	  Darwin) export LC_ALL=C LANG=C ;;
+		Darwin) export LC_ALL=C LANG=C ;;
 	esac
 
 	pkill -9 trunk || true
