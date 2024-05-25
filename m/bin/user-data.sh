@@ -30,9 +30,9 @@ git reset --hard origin/main
 (
 	set +x
 	while true; do
-		cd
+		cd ~/m
 		source .bash_profile
-		j create-coder-agent || true
+		coder::coder-agent "${CODER_NAME}" || true
 		sleep 5
 	done >>/tmp/coder-agent.log 2>&1
 ) &
