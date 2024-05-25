@@ -27,6 +27,7 @@ function cache {
 	sudo chown $(id -un):$(id -gn) ~/work/.
 	sudo chmod 700 ~/.gnupg
 
+  # macos: ~/Library/Application\ Support/coderv2
 	#persist ~/work/config-coderv2 ~/.config/coderv2
 
 	#persist ~/work/config-gh ~/.config/gh
