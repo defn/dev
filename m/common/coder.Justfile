@@ -29,6 +29,9 @@ up *name:
 		penguin*)
 			remote=
 			;;
+		immanent*)
+			remote="ssh $(id -un)@$(echo $name | cut -d- -f1)"
+			;;
 		*)
 			remote="ssh $(id -un)@$(echo $name | cut -d- -f1)"
 			;;
