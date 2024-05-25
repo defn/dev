@@ -19,24 +19,13 @@ git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
 case "$(git remote get-url origin)" in
 http*)
 	git remote rm origin
-	git remote add origin git@github.com:defn/dev
+	git remote add origin https://github.com/defn/dev
 	git fetch origin
 	git branch --set-upstream-to=origin/main main
 	;;
 esac
 
-case "$(git remote get-url pub || true)" in
-http*)
-	true
-	;;
-*)
-	git remote rm pub
-	git remote add pub https://github.com/defn/dev
-	git fetch pub
-	;;
-esac
-
-git reset --hard pub/main
+git reset --hard origin/main
 
 (
 	set +x
