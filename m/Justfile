@@ -17,5 +17,5 @@ penguin pb:
 
 # Use this workspace
 [no-cd]
-use:
-	just coder::use
+use *name:
+	just coder::use {{name}}

@@ -10,7 +10,14 @@ up *name:
 
 	if [[ -z "${name}" ]]; then
 		if [[ -n "${CODER_NAME:-}" ]]; then
-			name="$(echo "${CODER_NAME-}" | cut -d- -f1)-$(basename $(pwd))"
+			case "${CODER_NAME}" in
+				coder-*)
+					name="$(echo "${CODER_NAME-}" | cut -d- -f3)-$(basename $(pwd))"
+					;;
+				*)
+					name="$(echo "${CODER_NAME-}" | cut -d- -f1)-$(basename $(pwd))"
+					;;
+			esac
 		else
 			name="$(uname -n)-$(basename $(pwd))"
 		fi
@@ -44,13 +51,11 @@ up *name:
 	sudo touch ~/.gnupg/S.gpg-agent.extra
 	just coder::down ${name} || true
 
-	while true; do
-		coder delete ${name} --yes 1>/dev/null 2>/dev/null || true
-		if coder create ${name} --template ${template} --parameter "arch=${arch},os=${os},homedir=${homedir},remote=${remote},command=${command}" --yes; then 
-			break
-		fi
-		sleep 5
-	done
+	coder delete ${name} --yes 1>/dev/null 2>/dev/null || true
+	if coder create ${name} --template ${template} --parameter "arch=${arch},os=${os},homedir=${homedir},remote=${remote},command=${command}" --yes; then 
+		break
+	fi
+	sleep 5
 
 	set +x
 	while true; do
@@ -73,7 +78,14 @@ down *name:
 
 	if [[ -z "${name}" ]]; then
 		if [[ -n "${CODER_NAME:-}" ]]; then
-			name="$(echo "${CODER_NAME-}" | cut -d- -f1)-$(basename $(pwd))"
+			case "${CODER_NAME}" in
+				coder-*)
+					name="$(echo "${CODER_NAME-}" | cut -d- -f3)-$(basename $(pwd))"
+					;;
+				*)
+					name="$(echo "${CODER_NAME-}" | cut -d- -f1)-$(basename $(pwd))"
+					;;
+			esac
 		else
 			name="$(uname -n)"
 		fi
@@ -95,7 +107,14 @@ use *name:
 
 	if [[ -z "${name}" ]]; then
 		if [[ -n "${CODER_NAME:-}" ]]; then
-			name="$(echo "${CODER_NAME-}" | cut -d- -f1)-$(basename $(pwd))"
+			case "${CODER_NAME}" in
+				coder-*)
+					name="$(echo "${CODER_NAME-}" | cut -d- -f3)-$(basename $(pwd))"
+					;;
+				*)
+					name="$(echo "${CODER_NAME-}" | cut -d- -f1)-$(basename $(pwd))"
+					;;
+			esac
 		else
 			name="$(uname -n)"
 		fi
@@ -117,7 +136,14 @@ open*name:
 
 	if [[ -z "${name}" ]]; then
 		if [[ -n "${CODER_NAME:-}" ]]; then
-			name="$(echo "${CODER_NAME-}" | cut -d- -f1)-$(basename $(pwd))"
+			case "${CODER_NAME}" in
+				coder-*)
+					name="$(echo "${CODER_NAME-}" | cut -d- -f3)-$(basename $(pwd))"
+					;;
+				*)
+					name="$(echo "${CODER_NAME-}" | cut -d- -f1)-$(basename $(pwd))"
+					;;
+			esac
 		else
 			name="$(uname -n)"
 		fi
