@@ -4,7 +4,7 @@ set shell := ["/usr/bin/env", "bash", "-c"]
 [no-cd]
 up *name:
 	#!/usr/bin/env bash
-	set -exfuo pipefail
+	set -efuo pipefail
 
 	name={{name}}
 
@@ -52,12 +52,8 @@ up *name:
 	just coder::down ${name} || true
 
 	coder delete ${name} --yes 1>/dev/null 2>/dev/null || true
-	if coder create ${name} --template ${template} --parameter "arch=${arch},os=${os},homedir=${homedir},remote=${remote},command=${command}" --yes; then 
-		break
-	fi
-	sleep 5
+	coder create ${name} --template ${template} --parameter "arch=${arch},os=${os},homedir=${homedir},remote=${remote},command=${command}" --yes
 
-	set +x
 	while true; do
 		if curl -sSL $(cat $HOME/.config/coderv2/url)/api/v2/users/$(coder list | tail -1 | awk '{print $1}' | cut -d/ -f1)/workspace/${name} -H "Coder-Session-Token: $(cat $HOME/.config/coderv2/session)" | jq -r '(.latest_build.resources[].agents//[])[].apps[] | select(.display_name == "code-server") | .health' | grep -q ^healthy; then 
 			break
@@ -72,7 +68,7 @@ up *name:
 [no-cd]
 down *name:
 	#!/usr/bin/env bash
-	set -exfuo pipefail
+	set -efuo pipefail
 
 	name={{name}}
 
@@ -101,7 +97,7 @@ down *name:
 [no-cd]
 use *name:
 	#!/usr/bin/env bash
-	set -exfuo pipefail
+	set -efuo pipefail
 
 	name={{name}}
 
@@ -130,7 +126,7 @@ use *name:
 [no-cd]
 open*name:
 	#!/usr/bin/env bash
-	set -exfuo pipefail
+	set -efuo pipefail
 
 	name={{name}}
 
@@ -158,9 +154,8 @@ open*name:
 coder-agent *host:
 	#!/usr/bin/env bash
 
-	set -x
 
-	case "$(uname -s)" in
+	cae "$(uname -s)" in
 	  Darwin) export LC_ALL=C LANG=C ;;
 	esac
 
@@ -184,8 +179,6 @@ code-server *host:
 	pkill -9 trunk || true
 	export STARSHIP_NO=
 	source ~/.bash_profile
-
-	set -x
 
 	while true; do 
 		case "$(uname -s)" in
