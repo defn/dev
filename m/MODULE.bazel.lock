@@ -3654,7 +3654,7 @@
     },
     "@@rules_go~//go:extensions.bzl%go_sdk": {
       "os:linux,arch:amd64": {
-        "bzlTransitiveDigest": "moKNJhvzEEWvpwQZ6leBGJTdY6Wbawba5S3xfG2fHwU=",
+        "bzlTransitiveDigest": "uBoygpjkCobS/l588s64e4CBh5FNL4nz5Hr2D1+TIqU=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
