@@ -47,7 +47,7 @@ up *name:
 	template=coder-defn-ssh-template
 
 	sudo ln -nfs ubuntu /home/dev
-	sudo chown $(id -un) /var/run/docker.sock
+	sudo chown $(id -un) /var/run/docker.sock 2>/dev/null || true
 	sudo touch ~/.gnupg/S.gpg-agent.extra
 	just coder::down ${name} || true
 
