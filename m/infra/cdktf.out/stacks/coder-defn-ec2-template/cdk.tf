@@ -228,11 +228,11 @@ resource "coder_app" "code-server" {
   share        = "owner"
   slug         = "code-server"
   subdomain    = false
-  url          = "http://localhost:13337/?folder=/home/${data.coder_parameter.username.value}/m"
+  url          = "http://localhost:8080/?folder=/home/${data.coder_parameter.username.value}/m"
   healthcheck {
     interval  = 5
     threshold = 6
-    url       = "http://localhost:13337/healthz"
+    url       = "http://localhost:8080/healthz"
   }
 }
 
