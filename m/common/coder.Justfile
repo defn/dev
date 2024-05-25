@@ -155,7 +155,7 @@ coder-agent *host:
 	#!/usr/bin/env bash
 
 
-	cae "$(uname -s)" in
+	case "$(uname -s)" in
 	  Darwin) export LC_ALL=C LANG=C ;;
 	esac
 
