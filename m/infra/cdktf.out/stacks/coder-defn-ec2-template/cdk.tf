@@ -120,7 +120,6 @@ resource "coder_agent" "main" {
   }
   os                     = "linux"
   startup_script         = "cd ~/m && bin/startup.sh"
-  startup_script_timeout = 180
   display_apps {
     ssh_helper      = false
     vscode          = false
@@ -321,6 +320,8 @@ done
 if ! tailscale ip -4 | grep ^100; then
   sudo tailscale up --accept-dns --accept-routes --authkey="${data.coder_parameter.tsauthkey.value}" --operator=ubuntu --ssh --timeout 60s
 fi
+
+export CODER_AGENT_URL=${data.coder_workspace.me.access_url} CODER_AGENT_TOKEN=${coder_agent.main.token} CODER_NAME=${data.coder_workspace.me.name} CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)}
 
 nohup sudo -H -E -u ${data.coder_parameter.username.value} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${data.coder_workspace.me.access_url} coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name} ${coder_agent.main.token}' >>/tmp/user-data.log 2>&1 &
 disown
