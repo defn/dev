@@ -311,9 +311,9 @@ coder-ssh-envbuilder:
 		-v envbuilder-image:/image-cache:ro \
 		-v envbuilder-layer:/layer-cache \
 		-v /nix:/nix \
-		-v /var/run/docker.sock:/var/run/docker.sock \
-		-v /home:/workspaces \
-		-v /home:/home \
+		-v $(shell if test $$(uname -s) == Darwin; then echo $$HOME/.docker/run/docker.sock; else echo /var/run/docker.sock; fi):/var/run/docker.sock \
+		-v $(shell ls -d ~ | cut -d/ -f1-2):/workspaces \
+		-v $(shell ls -d ~ | cut -d/ -f1-2):/home \
 		-e LAYER_CACHE_DIR=/layer-cache \
 		-e BASE_IMAGE_CACHE_DIR=/image-cache \
 		-e GIT_URL=https://defn.run/defn/dev \

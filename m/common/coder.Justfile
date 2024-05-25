@@ -24,6 +24,12 @@ up *name:
 	fi
 
 	homedir=$(pwd)
+	# rewrite macOS to /home/ubuntu
+	case "${homedir}" in 
+		/Users/*)
+			homedir="/home/ubuntu/$(echo ${homedir} | cut -d/ -f4-)"
+			;;
+	esac
 
 	case "${name}" in
 		penguin*)
