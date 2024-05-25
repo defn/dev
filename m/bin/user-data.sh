@@ -33,6 +33,7 @@ git reset --hard origin/main
 		cd
 		source .bash_profile
 		cd ~/m
+		j coder::code-server "${CODER_NAME}" || true &
 		j coder::coder-agent "${CODER_NAME}" || true
 		sleep 5
 	done >>/tmp/coder-agent.log 2>&1
