@@ -133,7 +133,7 @@ function vi {
 			"$code" "$@"
 		fi
 	else
-		command vi "$@"
+		command code "$@"
 	fi
 }
 
