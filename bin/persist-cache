@@ -39,6 +39,7 @@ function cache {
 	$sudo chmod 700 ~/.gnupg
 
   # macos: ~/Library/Application\ Support/coderv2
+  # macos: ~/work/code-server-cache/extensions
 	#persist ~/work/config-coderv2 ~/.config/coderv2
 
 	#persist ~/work/config-gh ~/.config/gh

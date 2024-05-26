@@ -2,11 +2,6 @@
 
 function main {
 	case "${VSCODE_GIT_ASKPASS_MAIN-}" in
-	/Application* | "")
-		if test -x "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"; then
-			exec "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" "$@"
-		fi
-		;;
 	*/.vscode-server/bin/*)
 		exec "${VSCODE_GIT_ASKPASS_MAIN%%extensions/*}"/bin/remote-cli/code "$@"
 		;;
