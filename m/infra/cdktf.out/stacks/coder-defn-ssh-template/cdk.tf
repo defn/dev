@@ -13,11 +13,11 @@ terraform {
 
   }
 
-
 }
 
 provider "coder" {
 }
+
 data "coder_parameter" "homedir" {
   default      = "/home/ubuntu/m"
   description  = "home directory"
@@ -27,6 +27,7 @@ data "coder_parameter" "homedir" {
   name         = "homedir"
   type         = "string"
 }
+
 data "coder_parameter" "command" {
   default      = "j create-coder-agent"
   description  = "Remote command"
@@ -36,6 +37,7 @@ data "coder_parameter" "command" {
   name         = "command"
   type         = "string"
 }
+
 data "coder_parameter" "remote" {
   default      = ""
   description  = "Remote ssh"
@@ -45,6 +47,7 @@ data "coder_parameter" "remote" {
   name         = "remote"
   type         = "string"
 }
+
 data "coder_parameter" "os" {
   default      = "linux"
   description  = "Operating system"
@@ -54,6 +57,7 @@ data "coder_parameter" "os" {
   name         = "os"
   type         = "string"
 }
+
 data "coder_parameter" "arch" {
   default      = "amd64"
   description  = "CPU arch"
@@ -63,8 +67,10 @@ data "coder_parameter" "arch" {
   name         = "arch"
   type         = "string"
 }
+
 data "coder_workspace" "me" {
 }
+
 resource "coder_agent" "main" {
   arch = data.coder_parameter.arch.value
   auth = "token"
@@ -85,6 +91,7 @@ resource "coder_agent" "main" {
 
 provider "null" {
 }
+
 resource "null_resource" "deploy" {
   triggers = {
     always_run = "${coder_agent.main.token}"
@@ -95,10 +102,12 @@ resource "null_resource" "deploy" {
     when    = create
   }
 }
+
 module "coder_login" {
   agent_id = coder_agent.main.id
   source   = "https://registry.coder.com/modules/coder-login"
 }
+
 resource "coder_app" "code-server" {
   agent_id     = coder_agent.main.id
   display_name = "code-server"

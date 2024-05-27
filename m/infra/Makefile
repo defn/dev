@@ -20,11 +20,11 @@ build: ../node_modules/.bin/cdktf
 # add files to staging area for enumeration
 	git add cdktf.out
 	git add -u cdktf.out
-	terraform fmt $$(git ls-files . | grep 'tf$$')
+	terraform fmt $$(git ls-files . | grep 'tf$$') || true
 # add whitespace between blocks
 	git ls-files cdktf.out | grep 'tf$$' | while read -r a; do perl -pe 's#^}$$#}\n#' $$a | awk 'NF {print; blank=0} !NF && !blank++ {print}' > $$a.tmp && mv $$a.tmp $$a; done
 # fmt
-	terraform fmt $$(git ls-files . | grep 'tf$$')
+	terraform fmt $$(git ls-files . | grep 'tf$$') || true
 # add mod symlinks
 	runmany 'ln -nfs ../../../../tf/mod $$1/' cdktf.out/stacks/*/
 # restore locks
