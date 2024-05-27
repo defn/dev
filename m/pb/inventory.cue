@@ -12,8 +12,8 @@ inventory: {
 		bazel_jobs:                string | *"1"
 	}
 
-	cache: children: [
-		"hetzner", "mac",
+	cache: hosts: [
+		"district", "macmini",
 	]
 
 	hetzner: hosts: [
@@ -31,6 +31,7 @@ inventory: {
 
 	mac: hosts: [
 		"macmini",
+		"mbair",
 	]
 
 	chrome: hosts: [
