@@ -1527,16 +1527,16 @@ module "s3-fogg-dev" {
 provider "aws" {
   profile = "defn-org-sso"
   region  = "us-east-1"
-  alias   = "fogg-prod"
+  alias   = "fogg-pub"
   assume_role {
     role_arn = "arn:aws:iam::372333168887:role/fogg-ops-terraform"
   }
 }
 
-module "s3-fogg-prod" {
+module "s3-fogg-pub" {
   acl = "private"
   attributes = [
-    "fogg-prod",
+    "fogg-pub",
   ]
   enabled            = true
   name               = "global"
@@ -1546,7 +1546,7 @@ module "s3-fogg-prod" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.fogg-prod
+    aws = aws.fogg-pub
   }
 }
 
@@ -1839,16 +1839,16 @@ module "s3-helix-dev" {
 provider "aws" {
   profile = "defn-org-sso"
   region  = "us-east-1"
-  alias   = "helix-prod"
+  alias   = "helix-pub"
   assume_role {
     role_arn = "arn:aws:iam::536806623881:role/helix-ops-terraform"
   }
 }
 
-module "s3-helix-prod" {
+module "s3-helix-pub" {
   acl = "private"
   attributes = [
-    "helix-prod",
+    "helix-pub",
   ]
   enabled            = true
   name               = "global"
@@ -1858,7 +1858,7 @@ module "s3-helix-prod" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.helix-prod
+    aws = aws.helix-pub
   }
 }
 
@@ -1995,16 +1995,16 @@ module "s3-imma-dev" {
 provider "aws" {
   profile = "defn-org-sso"
   region  = "us-east-1"
-  alias   = "imma-prod"
+  alias   = "imma-pub"
   assume_role {
     role_arn = "arn:aws:iam::766142996227:role/imma-ops-terraform"
   }
 }
 
-module "s3-imma-prod" {
+module "s3-imma-pub" {
   acl = "private"
   attributes = [
-    "imma-prod",
+    "imma-pub",
   ]
   enabled            = true
   name               = "global"
@@ -2014,7 +2014,7 @@ module "s3-imma-prod" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.imma-prod
+    aws = aws.imma-pub
   }
 }
 
@@ -2333,16 +2333,16 @@ module "s3-spiral-dev" {
 provider "aws" {
   profile = "defn-org-sso"
   region  = "us-east-1"
-  alias   = "spiral-prod"
+  alias   = "spiral-pub"
   assume_role {
     role_arn = "arn:aws:iam::130046154300:role/spiral-ops-terraform"
   }
 }
 
-module "s3-spiral-prod" {
+module "s3-spiral-pub" {
   acl = "private"
   attributes = [
-    "spiral-prod",
+    "spiral-pub",
   ]
   enabled            = true
   name               = "global"
@@ -2352,7 +2352,7 @@ module "s3-spiral-prod" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.spiral-prod
+    aws = aws.spiral-pub
   }
 }
 
@@ -2593,16 +2593,16 @@ module "s3-vault-dev" {
 provider "aws" {
   profile = "defn-org-sso"
   region  = "us-east-1"
-  alias   = "vault-prod"
+  alias   = "vault-pub"
   assume_role {
     role_arn = "arn:aws:iam::851162413429:role/vault-ops-terraform"
   }
 }
 
-module "s3-vault-prod" {
+module "s3-vault-pub" {
   acl = "private"
   attributes = [
-    "vault-prod",
+    "vault-pub",
   ]
   enabled            = true
   name               = "global"
@@ -2612,7 +2612,7 @@ module "s3-vault-prod" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.vault-prod
+    aws = aws.vault-pub
   }
 }
 
@@ -2723,16 +2723,16 @@ module "s3-whoa-dev" {
 provider "aws" {
   profile = "defn-org-sso"
   region  = "us-east-1"
-  alias   = "whoa-prod"
+  alias   = "whoa-pub"
   assume_role {
     role_arn = "arn:aws:iam::204827926367:role/whoa-ops-terraform"
   }
 }
 
-module "s3-whoa-prod" {
+module "s3-whoa-pub" {
   acl = "private"
   attributes = [
-    "whoa-prod",
+    "whoa-pub",
   ]
   enabled            = true
   name               = "global"
@@ -2742,6 +2742,6 @@ module "s3-whoa-prod" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.whoa-prod
+    aws = aws.whoa-pub
   }
 }

@@ -473,11 +473,11 @@
         }
       }
     },
-    "s3-fogg-prod": {
+    "s3-fogg-pub": {
       "//": {
         "metadata": {
-          "path": "global/s3-fogg-prod",
-          "uniqueId": "s3-fogg-prod"
+          "path": "global/s3-fogg-pub",
+          "uniqueId": "s3-fogg-pub"
         }
       }
     },
@@ -569,11 +569,11 @@
         }
       }
     },
-    "s3-helix-prod": {
+    "s3-helix-pub": {
       "//": {
         "metadata": {
-          "path": "global/s3-helix-prod",
-          "uniqueId": "s3-helix-prod"
+          "path": "global/s3-helix-pub",
+          "uniqueId": "s3-helix-pub"
         }
       }
     },
@@ -617,11 +617,11 @@
         }
       }
     },
-    "s3-imma-prod": {
+    "s3-imma-pub": {
       "//": {
         "metadata": {
-          "path": "global/s3-imma-prod",
-          "uniqueId": "s3-imma-prod"
+          "path": "global/s3-imma-pub",
+          "uniqueId": "s3-imma-pub"
         }
       }
     },
@@ -721,11 +721,11 @@
         }
       }
     },
-    "s3-spiral-prod": {
+    "s3-spiral-pub": {
       "//": {
         "metadata": {
-          "path": "global/s3-spiral-prod",
-          "uniqueId": "s3-spiral-prod"
+          "path": "global/s3-spiral-pub",
+          "uniqueId": "s3-spiral-pub"
         }
       }
     },
@@ -801,11 +801,11 @@
         }
       }
     },
-    "s3-vault-prod": {
+    "s3-vault-pub": {
       "//": {
         "metadata": {
-          "path": "global/s3-vault-prod",
-          "uniqueId": "s3-vault-prod"
+          "path": "global/s3-vault-pub",
+          "uniqueId": "s3-vault-pub"
         }
       }
     },
@@ -841,11 +841,11 @@
         }
       }
     },
-    "s3-whoa-prod": {
+    "s3-whoa-pub": {
       "//": {
         "metadata": {
-          "path": "global/s3-whoa-prod",
-          "uniqueId": "s3-whoa-prod"
+          "path": "global/s3-whoa-pub",
+          "uniqueId": "s3-whoa-pub"
         }
       }
     }

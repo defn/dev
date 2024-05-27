@@ -96,11 +96,11 @@
           }
         }
       },
-      "prod": {
+      "pub": {
         "//": {
           "metadata": {
-            "path": "org-spiral/prod",
-            "uniqueId": "prod"
+            "path": "org-spiral/pub",
+            "uniqueId": "pub"
           }
         }
       },
@@ -188,11 +188,11 @@
           }
         }
       },
-      "prod_admin_sso_account_assignment": {
+      "pub_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "org-spiral/prod_admin_sso_account_assignment",
-            "uniqueId": "prod_admin_sso_account_assignment"
+            "path": "org-spiral/pub_admin_sso_account_assignment",
+            "uniqueId": "pub_admin_sso_account_assignment"
           }
         }
       },

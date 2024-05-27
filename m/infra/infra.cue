@@ -5,16 +5,16 @@ import (
 )
 
 full_accounts: [
-	"org",  // organization master
-	"net",  // network
-	"log",  // logging
-	"lib",  // artifacts
-	"ops",  // operation teams
-	"ci",   // ci/cd
-	"hub",  // shared services
-	"cde",  // engineeering teams
-	"dev",  // development environments
-	"prod", // production environments
+	"org", // organization master
+	"net", // network
+	"log", // logging
+	"lib", // artifacts
+	"ops", // operation teams
+	"ci",  // ci/cd
+	"hub", // shared services
+	"cde", // engineeering teams
+	"dev", // development environments
+	"pub", // public facing infra
 ]
 
 input: inf.#AwsProps & {
@@ -110,12 +110,12 @@ input: inf.#AwsProps & {
 
 		whoa: {
 			region: "us-west-2"
-			#types: ["org", "net", "hub", "dev", "prod"]
+			#types: ["org", "net", "hub", "dev", "pub"]
 		}
 
 		imma: {
 			region: "us-west-2"
-			#types: ["org", "net", "log", "lib", "dev", "prod"]
+			#types: ["org", "net", "log", "lib", "dev", "pub"]
 		}
 
 		jianghu: {
@@ -125,7 +125,7 @@ input: inf.#AwsProps & {
 
 		fogg: {
 			region: "us-west-2"
-			#types: ["org", "net", "log", "lib", "ops", "ci", "hub", "cde", "dev", "prod"]
+			#types: ["org", "net", "log", "lib", "ops", "ci", "hub", "cde", "dev", "pub"]
 		}
 
 		chamber: {
@@ -266,8 +266,7 @@ lookup: {
 			dev: {
 				id: "843784871878"
 			}
-			prod: {
-				t:  "pub"
+			pub: {
 				id: "536806623881"
 			}
 		}
@@ -311,7 +310,7 @@ lookup: {
 			dev: {
 				id: "308726031860"
 			}
-			prod: {
+			pub: {
 				t:  "dmz"
 				id: "130046154300"
 			}
@@ -372,7 +371,7 @@ lookup: {
 				id:     "442766271046"
 				prefix: "fogg-"
 			}
-			prod: {
+			pub: {
 				t:      "security"
 				id:     "372333168887"
 				prefix: "fogg-"
@@ -417,7 +416,7 @@ lookup: {
 				email:    "imma-\(t)@imma.io"
 				imported: "yes"
 			}
-			prod: {
+			pub: {
 				id:       "766142996227"
 				t:        "prod"
 				name:     "imma-\(t)"
@@ -517,7 +516,7 @@ lookup: {
 				prefix:   "whoa-"
 				imported: "yes"
 			}
-			prod: {
+			pub: {
 				t:        "prod"
 				id:       "204827926367"
 				email:    "whoa-\(t)@imma.io"
@@ -790,7 +789,7 @@ lookup: {
 				email:    "aws-vault-\(t)@defn.sh"
 				imported: "yes"
 			}
-			prod: {
+			pub: {
 				t:        "pub"
 				id:       "851162413429"
 				email:    "aws-vault-\(t)@defn.sh"

@@ -218,19 +218,19 @@ resource "aws_ssoadmin_account_assignment" "dev_admin_sso_account_assignment" {
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "prod" {
+resource "aws_organizations_account" "pub" {
   email = "aws-vault-pub@defn.sh"
-  name  = "prod"
+  name  = "pub"
   tags = {
     ManagedBy = "Terraform"
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "prod_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "pub_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.prod.id
+  target_id          = aws_organizations_account.pub.id
   target_type        = "AWS_ACCOUNT"
 }
