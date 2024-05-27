@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.49.0"
+      version = "5.51.1"
       source  = "aws"
     }
     coder = {
@@ -13,8 +13,8 @@ terraform {
 
   }
 
-}
 
+}
 data "coder_parameter" "username" {
   default      = "ubuntu"
   description  = "Linux accoount name"
@@ -23,7 +23,6 @@ data "coder_parameter" "username" {
   name         = "username"
   type         = "string"
 }
-
 data "coder_parameter" "region" {
   default      = "us-west-2"
   description  = "Cloud region"
@@ -32,7 +31,6 @@ data "coder_parameter" "region" {
   name         = "region"
   type         = "string"
 }
-
 data "coder_parameter" "az" {
   default      = "a"
   description  = "Cloud availability zone"
@@ -41,7 +39,6 @@ data "coder_parameter" "az" {
   name         = "az"
   type         = "string"
 }
-
 data "coder_parameter" "instance_type" {
   default      = "m6id.large"
   description  = "The number of CPUs to allocate to the workspace"
@@ -67,7 +64,6 @@ data "coder_parameter" "instance_type" {
     value = "m6id.4xlarge"
   }
 }
-
 data "coder_parameter" "nix_volume_size" {
   default      = "100"
   description  = "The size of the nix volume to create for the workspace in GB"
@@ -81,7 +77,6 @@ data "coder_parameter" "nix_volume_size" {
     min = 100
   }
 }
-
 data "coder_parameter" "provider" {
   default      = "aws-ec2"
   description  = "The service provider to deploy the workspace in"
@@ -93,7 +88,6 @@ data "coder_parameter" "provider" {
     value = "aws-ec2"
   }
 }
-
 data "coder_parameter" "tsauthkey" {
   default      = "TODO"
   description  = "Tailscale node authorization key"
@@ -103,10 +97,8 @@ data "coder_parameter" "tsauthkey" {
   name         = "tsauthkey"
   type         = "string"
 }
-
 data "coder_workspace" "me" {
 }
-
 resource "coder_agent" "main" {
   arch = "amd64"
   auth = "token"
@@ -120,16 +112,15 @@ resource "coder_agent" "main" {
   }
   os                     = "linux"
   startup_script         = "cd ~/m && bin/startup.sh"
+  startup_script_timeout = 180
   display_apps {
     ssh_helper      = false
     vscode          = false
     vscode_insiders = false
   }
 }
-
 resource "aws_default_vpc" "default" {
 }
-
 data "aws_ami" "ubuntu" {
   most_recent = true
   owners = [
@@ -148,27 +139,22 @@ data "aws_ami" "ubuntu" {
     ]
   }
 }
-
 resource "aws_iam_role" "dev" {
-  assume_role_policy = jsonencode({ "Statement" = [{ "Action" = "sts:AssumeRole", "Effect" = "Allow", "Principal" = { "Service" = "ec2.amazonaws.com" }, "Sid" = "" }], "Version" = "2012-10-17" })
+  assume_role_policy = "${jsonencode({ "Statement" = [{ "Action" = "sts:AssumeRole", "Effect" = "Allow", "Principal" = { "Service" = "ec2.amazonaws.com" }, "Sid" = "" }], "Version" = "2012-10-17" })}"
   name               = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
 }
-
 resource "aws_iam_role_policy_attachment" "admin" {
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
-  role       = aws_iam_role.dev.name
+  role       = "${aws_iam_role.dev.name}"
 }
-
 resource "aws_iam_role_policy_attachment" "secretsmanager" {
   policy_arn = "arn:aws:iam::aws:policy/SecretsManagerReadWrite"
-  role       = aws_iam_role.dev.name
+  role       = "${aws_iam_role.dev.name}"
 }
-
 resource "aws_iam_role_policy_attachment" "ssm" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
-  role       = aws_iam_role.dev.name
+  role       = "${aws_iam_role.dev.name}"
 }
-
 resource "aws_security_group" "dev_security_group" {
   description = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
   egress {
@@ -218,36 +204,33 @@ resource "aws_security_group" "dev_security_group" {
   tags = {
     "karpenter.sh/discovery" = "k3d-dfd"
   }
-  vpc_id = aws_default_vpc.default.id
+  vpc_id = "${aws_default_vpc.default.id}"
 }
-
 resource "coder_app" "code-server" {
-  agent_id     = coder_agent.main.id
+  agent_id     = "${coder_agent.main.id}"
   display_name = "code-server"
   icon         = "/icon/code.svg"
   share        = "owner"
   slug         = "code-server"
   subdomain    = false
-  url          = "http://localhost:8080/?folder=/home/${data.coder_parameter.username.value}/m"
+  url          = "http://localhost:13337/?folder=/home/${data.coder_parameter.username.value}/m"
   healthcheck {
     interval  = 5
     threshold = 6
-    url       = "http://localhost:8080/healthz"
+    url       = "http://localhost:13337/healthz"
   }
 }
 
 provider "aws" {
-  region = data.coder_parameter.region.value
+  region = "${data.coder_parameter.region.value}"
 }
 
 provider "coder" {
 }
-
 module "coder_login" {
-  agent_id = coder_agent.main.id
+  agent_id = "${coder_agent.main.id}"
   source   = "https://registry.coder.com/modules/coder-login"
 }
-
 module "dev_oidc_cdn" {
   attributes = [
     "oidc",
@@ -262,18 +245,16 @@ module "dev_oidc_cdn" {
   versioning_enabled   = false
   source               = "./mod/terraform-aws-cloudfront-s3-cdn"
 }
-
 resource "aws_iam_instance_profile" "dev_instance_profile" {
   name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
-  role = aws_iam_role.dev.name
+  role = "${aws_iam_role.dev.name}"
 }
-
 resource "aws_instance" "dev_ec2_instance" {
-  ami                  = data.aws_ami.ubuntu.id
+  ami                  = "${data.aws_ami.ubuntu.id}"
   availability_zone    = "${data.coder_parameter.region.value}${data.coder_parameter.az.value}"
   ebs_optimized        = true
-  iam_instance_profile = aws_iam_instance_profile.dev_instance_profile.name
-  instance_type        = data.coder_parameter.instance_type.value
+  iam_instance_profile = "${aws_iam_instance_profile.dev_instance_profile.name}"
+  instance_type        = "${data.coder_parameter.instance_type.value}"
   monitoring           = false
   tags = {
     Coder_Provisioned = "true"
@@ -321,8 +302,6 @@ if ! tailscale ip -4 | grep ^100; then
   sudo tailscale up --accept-dns --accept-routes --authkey="${data.coder_parameter.tsauthkey.value}" --operator=ubuntu --ssh --timeout 60s
 fi
 
-export CODER_AGENT_URL=${data.coder_workspace.me.access_url} CODER_AGENT_TOKEN=${coder_agent.main.token} CODER_NAME=${data.coder_workspace.me.name} CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)}
-
 nohup sudo -H -E -u ${data.coder_parameter.username.value} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${data.coder_workspace.me.access_url} coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name} ${coder_agent.main.token}' >>/tmp/user-data.log 2>&1 &
 disown
 --//--
@@ -340,7 +319,7 @@ EOF
   root_block_device {
     delete_on_termination = true
     encrypted             = true
-    volume_size           = data.coder_parameter.nix_volume_size.value
+    volume_size           = "${data.coder_parameter.nix_volume_size.value}"
     volume_type           = "gp3"
   }
   lifecycle {
@@ -349,21 +328,19 @@ EOF
     ]
   }
 }
-
 resource "coder_metadata" "dev_metadata" {
-  resource_id = aws_instance.dev_ec2_instance.id
+  resource_id = "${aws_instance.dev_ec2_instance.id}"
   item {
     key   = "instance type"
-    value = aws_instance.dev_ec2_instance.instance_type
+    value = "${aws_instance.dev_ec2_instance.instance_type}"
   }
   item {
     key   = "disk"
-    value = aws_instance.dev_ec2_instance.root_block_device[0].volume_size
+    value = "${aws_instance.dev_ec2_instance.root_block_device[0].volume_size}"
   }
-  count = (data.coder_parameter.provider.value == "aws-ec2") ? 1 : 0
+  count = "${(data.coder_parameter.provider.value == "aws-ec2") ? 1 : 0}"
 }
-
 resource "aws_ec2_instance_state" "dev_instance_state" {
-  instance_id = aws_instance.dev_ec2_instance.id
-  state       = (data.coder_workspace.me.transition == "start") ? "running" : "stopped"
+  instance_id = "${aws_instance.dev_ec2_instance.id}"
+  state       = "${(data.coder_workspace.me.transition == "start") ? "running" : "stopped"}"
 }

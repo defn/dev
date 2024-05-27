@@ -1702,10 +1702,10 @@
       "general": {
         "bzlTransitiveDigest": "sH0ZfrlZyTTSTIpGNBfQJlEWK7fgxR4W5O3QYxF2pqQ=",
         "recordedFileInputs": {
-          "@@//go.mod": "77df9f7e21ce0d3c0574f07736a787a01285ef3a2ab85c95319d0f5644a8b6ea",
+          "@@//go.mod": "ac6a3e082cb1a9d919613907e3cc82ed14115594ac0615a15c96387a3880b1f1",
           "@@rules_go~//go.mod": "de22304b720f7f61350ec1c9739de6c0a1b1103fd22bfeb6e92c6c843ddc6d6e",
           "@@gazelle~//go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
-          "@@//go.sum": "cbeb33b24651b8cf5de4037044d544805751b66bc0cdc097f4ad0045097d57a0",
+          "@@//go.sum": "c648e55275f58f03439e6c3b36c8409b74b716f52a2207b9e1215eada2d45294",
           "@@rules_go~//go.sum": "d56fdb19b21a5f12bcf625c49432371ac39c2def0f564098fbda107f7c080f40",
           "@@gazelle~//go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473"
         },
@@ -2939,9 +2939,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:vWfHI1kQlBvwkna7ktAqXjV5LUEAgU6vyMlJjvZZaDw=",
+              "sum": "h1:FO+WuUlYZoEtW2axkOHgOxmVUCTE9SMYtgjT4wHlPgA=",
               "replace": "",
-              "version": "v0.8.2"
+              "version": "v0.9.0-alpha.5"
             }
           },
           "com_github_rivo_uniseg": {

@@ -8,7 +8,7 @@ go 1.22.1
 require github.com/protocolbuffers/txtpbfmt v0.0.0-20230328191034-3462fbc510c0 // indirect
 
 require (
-	cuelang.org/go v0.8.2
+	cuelang.org/go v0.9.0-alpha.5
 	github.com/aws/constructs-go/constructs/v10 v10.3.0
 	github.com/aws/jsii-runtime-go v1.98.0
 	github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.20.1

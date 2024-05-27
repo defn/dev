@@ -13,11 +13,11 @@ terraform {
 
   }
 
+
 }
 
 provider "coder" {
 }
-
 data "coder_parameter" "homedir" {
   default      = "/home/ubuntu/m"
   description  = "home directory"
@@ -27,7 +27,6 @@ data "coder_parameter" "homedir" {
   name         = "homedir"
   type         = "string"
 }
-
 data "coder_parameter" "command" {
   default      = "j create-coder-agent"
   description  = "Remote command"
@@ -37,9 +36,8 @@ data "coder_parameter" "command" {
   name         = "command"
   type         = "string"
 }
-
 data "coder_parameter" "remote" {
-  default      = ""
+  default = ""
   description  = "Remote ssh"
   display_name = "Remote ssh"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
@@ -47,7 +45,6 @@ data "coder_parameter" "remote" {
   name         = "remote"
   type         = "string"
 }
-
 data "coder_parameter" "os" {
   default      = "linux"
   description  = "Operating system"
@@ -57,7 +54,6 @@ data "coder_parameter" "os" {
   name         = "os"
   type         = "string"
 }
-
 data "coder_parameter" "arch" {
   default      = "amd64"
   description  = "CPU arch"
@@ -67,12 +63,10 @@ data "coder_parameter" "arch" {
   name         = "arch"
   type         = "string"
 }
-
 data "coder_workspace" "me" {
 }
-
 resource "coder_agent" "main" {
-  arch = data.coder_parameter.arch.value
+  arch = "${data.coder_parameter.arch.value}"
   auth = "token"
   env = {
     GIT_AUTHOR_EMAIL    = "${data.coder_workspace.me.owner_email}"
@@ -80,7 +74,7 @@ resource "coder_agent" "main" {
     GIT_COMMITTER_EMAIL = "${data.coder_workspace.me.owner_email}"
     GIT_COMMITTER_NAME  = "${data.coder_workspace.me.owner}"
   }
-  os             = data.coder_parameter.os.value
+  os             = "${data.coder_parameter.os.value}"
   startup_script = "cd ~ && j destroy-coder-agent && cd ~/m && exec j coder::code-server $${CODER_NAME}"
   display_apps {
     ssh_helper      = false
@@ -91,25 +85,22 @@ resource "coder_agent" "main" {
 
 provider "null" {
 }
-
 resource "null_resource" "deploy" {
   triggers = {
     always_run = "${coder_agent.main.token}"
   }
-  count = data.coder_workspace.me.start_count
+  count = "${data.coder_workspace.me.start_count}"
   provisioner "local-exec" {
     command = "(echo cd; echo exec env CODER_AGENT_URL=${data.coder_workspace.me.access_url} CODER_AGENT_TOKEN=${coder_agent.main.token} CODER_NAME=${data.coder_workspace.me.name} CODER_HOMEDIR=${data.coder_parameter.homedir.value} CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} TS_AUTH_KEY=$(~/bin/ts-auth-key 2>&1) ${data.coder_parameter.command.value}) | ${data.coder_parameter.remote.value} bash -x -"
-    when    = create
+    when = create
   }
 }
-
 module "coder_login" {
-  agent_id = coder_agent.main.id
-  source   = "./mod/coder-login"
+  agent_id = "${coder_agent.main.id}"
+  source   = "https://registry.coder.com/modules/coder-login"
 }
-
 resource "coder_app" "code-server" {
-  agent_id     = coder_agent.main.id
+  agent_id     = "${coder_agent.main.id}"
   display_name = "code-server"
   icon         = "/icon/code.svg"
   share        = "owner"
