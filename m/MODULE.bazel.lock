@@ -1702,10 +1702,10 @@
       "general": {
         "bzlTransitiveDigest": "sH0ZfrlZyTTSTIpGNBfQJlEWK7fgxR4W5O3QYxF2pqQ=",
         "recordedFileInputs": {
-          "@@//go.mod": "7ee0a12dafe457e9e6fbabbb678f629e159e3a7ba6766de6796dd67003b80ab6",
+          "@@//go.mod": "77df9f7e21ce0d3c0574f07736a787a01285ef3a2ab85c95319d0f5644a8b6ea",
           "@@rules_go~//go.mod": "de22304b720f7f61350ec1c9739de6c0a1b1103fd22bfeb6e92c6c843ddc6d6e",
           "@@gazelle~//go.sum": "7c4460e8ecb5dd8691a51d4fa2e9e4751108b933636497ce46db499fc2e7a88d",
-          "@@//go.sum": "e08a78cfeeadfd1e4e5e17c5bd3caa6788f1908c84f436e68f8c0bccb1c15ca7",
+          "@@//go.sum": "cbeb33b24651b8cf5de4037044d544805751b66bc0cdc097f4ad0045097d57a0",
           "@@rules_go~//go.sum": "d56fdb19b21a5f12bcf625c49432371ac39c2def0f564098fbda107f7c080f40",
           "@@gazelle~//go.mod": "48dc6e771c3028ee1c18b9ffc81e596fd5f6d7e0016c5ef280e30f2821f60473"
         },
@@ -1752,9 +1752,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:in2uUcidCuFcDKtdcBxlR0rJ1+fsokWf+uqxgUFjbI0=",
+              "sum": "h1:QjV6pZ7/XZ7ryI2KuyeEDE8wnh7fHP9YnQy+R0LnH8I=",
               "replace": "",
-              "version": "v1.4.3"
+              "version": "v1.4.4"
             }
           },
           "com_github_aymanbagabas_go_osc52_v2": {
@@ -1812,9 +1812,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:vr/HnozRka3pE4EsMEg1lgkXJkTFJCVUX+S/ZT6wYzM=",
+              "sum": "h1:N0hmiNbwsSNwHBAvR3QB5w25pUwH4tK0Y/RltD1j1h4=",
               "replace": "",
-              "version": "v0.0.0-20240506185415-9bf2ced13842"
+              "version": "v0.0.0-20240525044651-4c93da0ed11d"
             }
           },
           "com_github_cockroachdb_apd_v3": {
@@ -1917,9 +1917,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:FHdUpJFXfd6LFlixuv4LD1DO0U1pgnmtvB3KC5+88wo=",
+              "sum": "h1:W6hu3Zn3AEmEmUF1wmL9qcci/yktAgu6AxvdfJM2N2Y=",
               "replace": "",
-              "version": "v19.19.0"
+              "version": "v19.20.1"
             }
           },
           "com_github_opencontainers_image_spec": {
@@ -2909,9 +2909,9 @@
               "build_extra_args": [],
               "patches": [],
               "patch_args": [],
-              "sum": "h1:w8o1VA/ieM0MnUAENLDi3FHosmdOtBKmciGsfbww7dQ=",
+              "sum": "h1:3RHKDkswdItMkHBA5dXFHb4IlUb+0f/yfWWun4wo0mQ=",
               "replace": "",
-              "version": "v0.4.1"
+              "version": "v0.5.0"
             }
           },
           "com_github_xo_terminfo": {
