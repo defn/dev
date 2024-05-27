@@ -1,0 +1,39 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "s3",
+      "stackName": "acc-spiral-cde",
+      "version": "0.20.7"
+    },
+    "outputs": {
+    }
+  },
+  "module": {
+    "spiral-cde": {
+      "//": {
+        "metadata": {
+          "path": "acc-spiral-cde/spiral-cde",
+          "uniqueId": "spiral-cde"
+        }
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "s3": {
+        "bucket": "dfn-defn-terraform-state",
+        "dynamodb_table": "dfn-defn-terraform-state-lock",
+        "encrypt": true,
+        "key": "stacks/acc-spiral-cde/terraform.tfstate",
+        "profile": "defn-org-sso",
+        "region": "us-east-1"
+      }
+    },
+    "required_providers": {
+      "aws": {
+        "source": "aws",
+        "version": "5.51.1"
+      }
+    }
+  }
+}

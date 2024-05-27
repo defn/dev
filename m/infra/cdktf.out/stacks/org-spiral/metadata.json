@@ -1,0 +1,247 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "s3",
+      "stackName": "org-spiral",
+      "version": "0.20.7"
+    },
+    "outputs": {
+    }
+  },
+  "data": {
+    "aws_ssoadmin_instances": {
+      "sso_instance": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/sso_instance",
+            "uniqueId": "sso_instance"
+          }
+        }
+      }
+    }
+  },
+  "resource": {
+    "aws_identitystore_group": {
+      "administrators_sso_group": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/administrators_sso_group",
+            "uniqueId": "administrators_sso_group"
+          }
+        }
+      }
+    },
+    "aws_organizations_account": {
+      "cde": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/cde",
+            "uniqueId": "cde"
+          }
+        }
+      },
+      "ci": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/ci",
+            "uniqueId": "ci"
+          }
+        }
+      },
+      "dev": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/dev",
+            "uniqueId": "dev"
+          }
+        }
+      },
+      "hub": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/hub",
+            "uniqueId": "hub"
+          }
+        }
+      },
+      "lib": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/lib",
+            "uniqueId": "lib"
+          }
+        }
+      },
+      "log": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/log",
+            "uniqueId": "log"
+          }
+        }
+      },
+      "net": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/net",
+            "uniqueId": "net"
+          }
+        }
+      },
+      "ops": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/ops",
+            "uniqueId": "ops"
+          }
+        }
+      },
+      "prod": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/prod",
+            "uniqueId": "prod"
+          }
+        }
+      },
+      "spiral": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/spiral",
+            "uniqueId": "spiral"
+          }
+        }
+      }
+    },
+    "aws_organizations_organization": {
+      "organization": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/organization",
+            "uniqueId": "organization"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_account_assignment": {
+      "cde_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/cde_admin_sso_account_assignment",
+            "uniqueId": "cde_admin_sso_account_assignment"
+          }
+        }
+      },
+      "ci_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/ci_admin_sso_account_assignment",
+            "uniqueId": "ci_admin_sso_account_assignment"
+          }
+        }
+      },
+      "dev_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/dev_admin_sso_account_assignment",
+            "uniqueId": "dev_admin_sso_account_assignment"
+          }
+        }
+      },
+      "hub_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/hub_admin_sso_account_assignment",
+            "uniqueId": "hub_admin_sso_account_assignment"
+          }
+        }
+      },
+      "lib_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/lib_admin_sso_account_assignment",
+            "uniqueId": "lib_admin_sso_account_assignment"
+          }
+        }
+      },
+      "log_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/log_admin_sso_account_assignment",
+            "uniqueId": "log_admin_sso_account_assignment"
+          }
+        }
+      },
+      "net_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/net_admin_sso_account_assignment",
+            "uniqueId": "net_admin_sso_account_assignment"
+          }
+        }
+      },
+      "ops_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/ops_admin_sso_account_assignment",
+            "uniqueId": "ops_admin_sso_account_assignment"
+          }
+        }
+      },
+      "prod_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/prod_admin_sso_account_assignment",
+            "uniqueId": "prod_admin_sso_account_assignment"
+          }
+        }
+      },
+      "spiral_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/spiral_admin_sso_account_assignment",
+            "uniqueId": "spiral_admin_sso_account_assignment"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_managed_policy_attachment": {
+      "admin_sso_managed_policy_attachment": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/admin_sso_managed_policy_attachment",
+            "uniqueId": "admin_sso_managed_policy_attachment"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_permission_set": {
+      "admin_sso_permission_set": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/admin_sso_permission_set",
+            "uniqueId": "admin_sso_permission_set"
+          }
+        }
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "s3": {
+        "bucket": "dfn-defn-terraform-state",
+        "dynamodb_table": "dfn-defn-terraform-state-lock",
+        "encrypt": true,
+        "key": "stacks/org-spiral/terraform.tfstate",
+        "profile": "defn-org-sso",
+        "region": "us-east-1"
+      }
+    },
+    "required_providers": {
+      "aws": {
+        "source": "aws",
+        "version": "5.51.1"
+      }
+    }
+  }
+}

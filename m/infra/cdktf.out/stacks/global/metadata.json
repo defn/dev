@@ -8,15 +8,863 @@
     "outputs": {
     }
   },
+  "module": {
+    "s3-chamber-1": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-1",
+          "uniqueId": "s3-chamber-1"
+        }
+      }
+    },
+    "s3-chamber-2": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-2",
+          "uniqueId": "s3-chamber-2"
+        }
+      }
+    },
+    "s3-chamber-3": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-3",
+          "uniqueId": "s3-chamber-3"
+        }
+      }
+    },
+    "s3-chamber-4": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-4",
+          "uniqueId": "s3-chamber-4"
+        }
+      }
+    },
+    "s3-chamber-5": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-5",
+          "uniqueId": "s3-chamber-5"
+        }
+      }
+    },
+    "s3-chamber-6": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-6",
+          "uniqueId": "s3-chamber-6"
+        }
+      }
+    },
+    "s3-chamber-7": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-7",
+          "uniqueId": "s3-chamber-7"
+        }
+      }
+    },
+    "s3-chamber-8": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-8",
+          "uniqueId": "s3-chamber-8"
+        }
+      }
+    },
+    "s3-chamber-9": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-9",
+          "uniqueId": "s3-chamber-9"
+        }
+      }
+    },
+    "s3-chamber-a": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-a",
+          "uniqueId": "s3-chamber-a"
+        }
+      }
+    },
+    "s3-chamber-b": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-b",
+          "uniqueId": "s3-chamber-b"
+        }
+      }
+    },
+    "s3-chamber-c": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-c",
+          "uniqueId": "s3-chamber-c"
+        }
+      }
+    },
+    "s3-chamber-d": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-d",
+          "uniqueId": "s3-chamber-d"
+        }
+      }
+    },
+    "s3-chamber-e": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-e",
+          "uniqueId": "s3-chamber-e"
+        }
+      }
+    },
+    "s3-chamber-f": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-f",
+          "uniqueId": "s3-chamber-f"
+        }
+      }
+    },
+    "s3-chamber-g": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-g",
+          "uniqueId": "s3-chamber-g"
+        }
+      }
+    },
+    "s3-chamber-h": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-h",
+          "uniqueId": "s3-chamber-h"
+        }
+      }
+    },
+    "s3-chamber-i": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-i",
+          "uniqueId": "s3-chamber-i"
+        }
+      }
+    },
+    "s3-chamber-j": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-j",
+          "uniqueId": "s3-chamber-j"
+        }
+      }
+    },
+    "s3-chamber-l": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-l",
+          "uniqueId": "s3-chamber-l"
+        }
+      }
+    },
+    "s3-chamber-m": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-m",
+          "uniqueId": "s3-chamber-m"
+        }
+      }
+    },
+    "s3-chamber-n": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-n",
+          "uniqueId": "s3-chamber-n"
+        }
+      }
+    },
+    "s3-chamber-o": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-o",
+          "uniqueId": "s3-chamber-o"
+        }
+      }
+    },
+    "s3-chamber-org": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-org",
+          "uniqueId": "s3-chamber-org"
+        }
+      }
+    },
+    "s3-chamber-p": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-p",
+          "uniqueId": "s3-chamber-p"
+        }
+      }
+    },
+    "s3-chamber-q": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-q",
+          "uniqueId": "s3-chamber-q"
+        }
+      }
+    },
+    "s3-chamber-r": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-r",
+          "uniqueId": "s3-chamber-r"
+        }
+      }
+    },
+    "s3-chamber-s": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-s",
+          "uniqueId": "s3-chamber-s"
+        }
+      }
+    },
+    "s3-chamber-t": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-t",
+          "uniqueId": "s3-chamber-t"
+        }
+      }
+    },
+    "s3-chamber-u": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-u",
+          "uniqueId": "s3-chamber-u"
+        }
+      }
+    },
+    "s3-chamber-v": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-v",
+          "uniqueId": "s3-chamber-v"
+        }
+      }
+    },
+    "s3-chamber-w": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-w",
+          "uniqueId": "s3-chamber-w"
+        }
+      }
+    },
+    "s3-chamber-x": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-x",
+          "uniqueId": "s3-chamber-x"
+        }
+      }
+    },
+    "s3-chamber-y": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-y",
+          "uniqueId": "s3-chamber-y"
+        }
+      }
+    },
+    "s3-chamber-z": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-chamber-z",
+          "uniqueId": "s3-chamber-z"
+        }
+      }
+    },
+    "s3-circus-lib": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-circus-lib",
+          "uniqueId": "s3-circus-lib"
+        }
+      }
+    },
+    "s3-circus-log": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-circus-log",
+          "uniqueId": "s3-circus-log"
+        }
+      }
+    },
+    "s3-circus-net": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-circus-net",
+          "uniqueId": "s3-circus-net"
+        }
+      }
+    },
+    "s3-circus-ops": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-circus-ops",
+          "uniqueId": "s3-circus-ops"
+        }
+      }
+    },
+    "s3-circus-org": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-circus-org",
+          "uniqueId": "s3-circus-org"
+        }
+      }
+    },
+    "s3-coil-hub": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-coil-hub",
+          "uniqueId": "s3-coil-hub"
+        }
+      }
+    },
+    "s3-coil-lib": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-coil-lib",
+          "uniqueId": "s3-coil-lib"
+        }
+      }
+    },
+    "s3-coil-net": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-coil-net",
+          "uniqueId": "s3-coil-net"
+        }
+      }
+    },
+    "s3-coil-org": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-coil-org",
+          "uniqueId": "s3-coil-org"
+        }
+      }
+    },
+    "s3-curl-hub": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-curl-hub",
+          "uniqueId": "s3-curl-hub"
+        }
+      }
+    },
+    "s3-curl-lib": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-curl-lib",
+          "uniqueId": "s3-curl-lib"
+        }
+      }
+    },
+    "s3-curl-net": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-curl-net",
+          "uniqueId": "s3-curl-net"
+        }
+      }
+    },
+    "s3-curl-org": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-curl-org",
+          "uniqueId": "s3-curl-org"
+        }
+      }
+    },
+    "s3-defn-org": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-defn-org",
+          "uniqueId": "s3-defn-org"
+        }
+      }
+    },
+    "s3-fogg-cde": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-fogg-cde",
+          "uniqueId": "s3-fogg-cde"
+        }
+      }
+    },
+    "s3-fogg-ci": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-fogg-ci",
+          "uniqueId": "s3-fogg-ci"
+        }
+      }
+    },
+    "s3-fogg-dev": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-fogg-dev",
+          "uniqueId": "s3-fogg-dev"
+        }
+      }
+    },
+    "s3-fogg-hub": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-fogg-hub",
+          "uniqueId": "s3-fogg-hub"
+        }
+      }
+    },
+    "s3-fogg-lib": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-fogg-lib",
+          "uniqueId": "s3-fogg-lib"
+        }
+      }
+    },
+    "s3-fogg-log": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-fogg-log",
+          "uniqueId": "s3-fogg-log"
+        }
+      }
+    },
+    "s3-fogg-net": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-fogg-net",
+          "uniqueId": "s3-fogg-net"
+        }
+      }
+    },
+    "s3-fogg-ops": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-fogg-ops",
+          "uniqueId": "s3-fogg-ops"
+        }
+      }
+    },
+    "s3-fogg-org": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-fogg-org",
+          "uniqueId": "s3-fogg-org"
+        }
+      }
+    },
+    "s3-fogg-prod": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-fogg-prod",
+          "uniqueId": "s3-fogg-prod"
+        }
+      }
+    },
+    "s3-gyre-ops": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-gyre-ops",
+          "uniqueId": "s3-gyre-ops"
+        }
+      }
+    },
+    "s3-gyre-org": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-gyre-org",
+          "uniqueId": "s3-gyre-org"
+        }
+      }
+    },
+    "s3-helix-cde": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-helix-cde",
+          "uniqueId": "s3-helix-cde"
+        }
+      }
+    },
+    "s3-helix-ci": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-helix-ci",
+          "uniqueId": "s3-helix-ci"
+        }
+      }
+    },
+    "s3-helix-dev": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-helix-dev",
+          "uniqueId": "s3-helix-dev"
+        }
+      }
+    },
+    "s3-helix-hub": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-helix-hub",
+          "uniqueId": "s3-helix-hub"
+        }
+      }
+    },
+    "s3-helix-lib": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-helix-lib",
+          "uniqueId": "s3-helix-lib"
+        }
+      }
+    },
+    "s3-helix-log": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-helix-log",
+          "uniqueId": "s3-helix-log"
+        }
+      }
+    },
+    "s3-helix-net": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-helix-net",
+          "uniqueId": "s3-helix-net"
+        }
+      }
+    },
+    "s3-helix-ops": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-helix-ops",
+          "uniqueId": "s3-helix-ops"
+        }
+      }
+    },
+    "s3-helix-org": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-helix-org",
+          "uniqueId": "s3-helix-org"
+        }
+      }
+    },
+    "s3-helix-prod": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-helix-prod",
+          "uniqueId": "s3-helix-prod"
+        }
+      }
+    },
+    "s3-imma-dev": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-imma-dev",
+          "uniqueId": "s3-imma-dev"
+        }
+      }
+    },
+    "s3-imma-lib": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-imma-lib",
+          "uniqueId": "s3-imma-lib"
+        }
+      }
+    },
+    "s3-imma-log": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-imma-log",
+          "uniqueId": "s3-imma-log"
+        }
+      }
+    },
+    "s3-imma-net": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-imma-net",
+          "uniqueId": "s3-imma-net"
+        }
+      }
+    },
+    "s3-imma-org": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-imma-org",
+          "uniqueId": "s3-imma-org"
+        }
+      }
+    },
+    "s3-imma-prod": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-imma-prod",
+          "uniqueId": "s3-imma-prod"
+        }
+      }
+    },
+    "s3-jianghu-log": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-jianghu-log",
+          "uniqueId": "s3-jianghu-log"
+        }
+      }
+    },
+    "s3-jianghu-net": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-jianghu-net",
+          "uniqueId": "s3-jianghu-net"
+        }
+      }
+    },
+    "s3-jianghu-org": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-jianghu-org",
+          "uniqueId": "s3-jianghu-org"
+        }
+      }
+    },
+    "s3-spiral-cde": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-spiral-cde",
+          "uniqueId": "s3-spiral-cde"
+        }
+      }
+    },
+    "s3-spiral-ci": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-spiral-ci",
+          "uniqueId": "s3-spiral-ci"
+        }
+      }
+    },
+    "s3-spiral-dev": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-spiral-dev",
+          "uniqueId": "s3-spiral-dev"
+        }
+      }
+    },
+    "s3-spiral-hub": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-spiral-hub",
+          "uniqueId": "s3-spiral-hub"
+        }
+      }
+    },
+    "s3-spiral-lib": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-spiral-lib",
+          "uniqueId": "s3-spiral-lib"
+        }
+      }
+    },
+    "s3-spiral-log": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-spiral-log",
+          "uniqueId": "s3-spiral-log"
+        }
+      }
+    },
+    "s3-spiral-net": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-spiral-net",
+          "uniqueId": "s3-spiral-net"
+        }
+      }
+    },
+    "s3-spiral-ops": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-spiral-ops",
+          "uniqueId": "s3-spiral-ops"
+        }
+      }
+    },
+    "s3-spiral-org": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-spiral-org",
+          "uniqueId": "s3-spiral-org"
+        }
+      }
+    },
+    "s3-spiral-prod": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-spiral-prod",
+          "uniqueId": "s3-spiral-prod"
+        }
+      }
+    },
+    "s3-vault-cde": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-vault-cde",
+          "uniqueId": "s3-vault-cde"
+        }
+      }
+    },
+    "s3-vault-ci": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-vault-ci",
+          "uniqueId": "s3-vault-ci"
+        }
+      }
+    },
+    "s3-vault-dev": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-vault-dev",
+          "uniqueId": "s3-vault-dev"
+        }
+      }
+    },
+    "s3-vault-hub": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-vault-hub",
+          "uniqueId": "s3-vault-hub"
+        }
+      }
+    },
+    "s3-vault-lib": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-vault-lib",
+          "uniqueId": "s3-vault-lib"
+        }
+      }
+    },
+    "s3-vault-log": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-vault-log",
+          "uniqueId": "s3-vault-log"
+        }
+      }
+    },
+    "s3-vault-net": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-vault-net",
+          "uniqueId": "s3-vault-net"
+        }
+      }
+    },
+    "s3-vault-ops": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-vault-ops",
+          "uniqueId": "s3-vault-ops"
+        }
+      }
+    },
+    "s3-vault-org": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-vault-org",
+          "uniqueId": "s3-vault-org"
+        }
+      }
+    },
+    "s3-vault-prod": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-vault-prod",
+          "uniqueId": "s3-vault-prod"
+        }
+      }
+    },
+    "s3-whoa-dev": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-whoa-dev",
+          "uniqueId": "s3-whoa-dev"
+        }
+      }
+    },
+    "s3-whoa-hub": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-whoa-hub",
+          "uniqueId": "s3-whoa-hub"
+        }
+      }
+    },
+    "s3-whoa-net": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-whoa-net",
+          "uniqueId": "s3-whoa-net"
+        }
+      }
+    },
+    "s3-whoa-org": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-whoa-org",
+          "uniqueId": "s3-whoa-org"
+        }
+      }
+    },
+    "s3-whoa-prod": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-whoa-prod",
+          "uniqueId": "s3-whoa-prod"
+        }
+      }
+    }
+  },
   "terraform": {
     "backend": {
       "s3": {
-        "bucket": "",
-        "dynamodb_table": "",
+        "bucket": "dfn-defn-terraform-state",
+        "dynamodb_table": "dfn-defn-terraform-state-lock",
         "encrypt": true,
         "key": "stacks/global/terraform.tfstate",
-        "profile": "",
-        "region": ""
+        "profile": "defn-org-sso",
+        "region": "us-east-1"
+      }
+    },
+    "required_providers": {
+      "aws": {
+        "source": "aws",
+        "version": "5.51.1"
       }
     }
   }

@@ -1,0 +1,151 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "s3",
+      "stackName": "org-coil",
+      "version": "0.20.7"
+    },
+    "outputs": {
+    }
+  },
+  "data": {
+    "aws_ssoadmin_instances": {
+      "sso_instance": {
+        "//": {
+          "metadata": {
+            "path": "org-coil/sso_instance",
+            "uniqueId": "sso_instance"
+          }
+        }
+      }
+    }
+  },
+  "resource": {
+    "aws_identitystore_group": {
+      "administrators_sso_group": {
+        "//": {
+          "metadata": {
+            "path": "org-coil/administrators_sso_group",
+            "uniqueId": "administrators_sso_group"
+          }
+        }
+      }
+    },
+    "aws_organizations_account": {
+      "coil": {
+        "//": {
+          "metadata": {
+            "path": "org-coil/coil",
+            "uniqueId": "coil"
+          }
+        }
+      },
+      "hub": {
+        "//": {
+          "metadata": {
+            "path": "org-coil/hub",
+            "uniqueId": "hub"
+          }
+        }
+      },
+      "lib": {
+        "//": {
+          "metadata": {
+            "path": "org-coil/lib",
+            "uniqueId": "lib"
+          }
+        }
+      },
+      "net": {
+        "//": {
+          "metadata": {
+            "path": "org-coil/net",
+            "uniqueId": "net"
+          }
+        }
+      }
+    },
+    "aws_organizations_organization": {
+      "organization": {
+        "//": {
+          "metadata": {
+            "path": "org-coil/organization",
+            "uniqueId": "organization"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_account_assignment": {
+      "coil_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-coil/coil_admin_sso_account_assignment",
+            "uniqueId": "coil_admin_sso_account_assignment"
+          }
+        }
+      },
+      "hub_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-coil/hub_admin_sso_account_assignment",
+            "uniqueId": "hub_admin_sso_account_assignment"
+          }
+        }
+      },
+      "lib_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-coil/lib_admin_sso_account_assignment",
+            "uniqueId": "lib_admin_sso_account_assignment"
+          }
+        }
+      },
+      "net_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-coil/net_admin_sso_account_assignment",
+            "uniqueId": "net_admin_sso_account_assignment"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_managed_policy_attachment": {
+      "admin_sso_managed_policy_attachment": {
+        "//": {
+          "metadata": {
+            "path": "org-coil/admin_sso_managed_policy_attachment",
+            "uniqueId": "admin_sso_managed_policy_attachment"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_permission_set": {
+      "admin_sso_permission_set": {
+        "//": {
+          "metadata": {
+            "path": "org-coil/admin_sso_permission_set",
+            "uniqueId": "admin_sso_permission_set"
+          }
+        }
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "s3": {
+        "bucket": "dfn-defn-terraform-state",
+        "dynamodb_table": "dfn-defn-terraform-state-lock",
+        "encrypt": true,
+        "key": "stacks/org-coil/terraform.tfstate",
+        "profile": "defn-org-sso",
+        "region": "us-east-1"
+      }
+    },
+    "required_providers": {
+      "aws": {
+        "source": "aws",
+        "version": "5.51.1"
+      }
+    }
+  }
+}
