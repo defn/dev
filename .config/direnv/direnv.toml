@@ -10,15 +10,7 @@ warn_timeout = "60s"
 
 [whitelist]
 prefix = [
-    "/home/ubuntu/work/pkg",
-    "/home/ubuntu/work/lib",
-    "/home/ubuntu/pkg",
-    "/home/ubuntu/lib",
-    "/nix/work/pkg",
-    "/nix/work/lib",
-    "/nix/work/app",
-    "/work/pkg",
-    "/work/lib",
+    "/home/ubuntu/m/pkg",
 ]
 
 exact = ["/home/ubuntu"]
