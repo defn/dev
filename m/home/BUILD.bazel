@@ -42,6 +42,7 @@ flake_names = [
     "dapr",
     "vcluster",
     "kubevirt",
+    "linkerd",
     "kuma",
     "cilium",
     "hubble",
