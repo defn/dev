@@ -11,6 +11,10 @@ mod lib 'common/lib.Justfile'
 play pb *lim:
 	just playbook::playbook {{pb}} {{lim}}
 
+# Run a command
+command pattern *args:
+	just playbook::command {{pattern}} {{args}}
+
 # Run a playbook on penguin
 penguin pb:
 	just playbook::penguin {{pb}}

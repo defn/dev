@@ -11,3 +11,9 @@ penguin pb:
 
 	cd ~/m/pb
 	just pg {{pb}}
+
+command pattern *args:
+	#!/usr/bin/env bash
+
+	cd ~/m/pb
+	ansible {{pattern}} -a "{{args}}"

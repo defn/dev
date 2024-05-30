@@ -24,6 +24,9 @@ dyff *args:
 play pb *lim:
 	just playbook::playbook {{pb}} {{lim}}
 
+command pattern *args:
+	just playbook::command {{pattern}} {{args}}
+
 penguin pb:
 	just playbook::penguin {{pb}}
 
