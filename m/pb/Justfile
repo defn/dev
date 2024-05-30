@@ -35,16 +35,6 @@ pg pb:
 
 	~/.local/bin/ansible-playbook -i inventory/packer.ini -c local "playbooks/{{pb}}.yaml"
 
-# Run a command
-command limit *command:
-	just module command {{limit}} {{command}}
-
-# Run a module
-module module limit *args:
-	#!/usr/bin/env bash
-
-	ansible {{limit}} -m {{module}} -a '{{args}}'
-
 # Check a playbook
 check pb *lim:
 	#!/usr/bin/env bash
