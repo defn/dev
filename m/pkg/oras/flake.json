@@ -1,6 +1,6 @@
 {
   "slug": "pkg-oras",
   "ghrepo": "oras-project/oras",
-  "vendor": "1.1.0",
-  "revision": "5"
+  "vendor": "1.2.0",
+  "revision": "0"
 }
