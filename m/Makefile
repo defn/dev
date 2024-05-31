@@ -98,6 +98,7 @@ update:
 	$(MAKE) cdktf
 
 regen:
+	$(MAKE) bazel-ignore
 	@mark gazelle
 	set -x; go get $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1' | grep -v /demo/)
 	mkdir -p node_modules demo/node_modules
