@@ -209,3 +209,18 @@ code-server *host:
 				;;
 		esac
 	done
+
+# update all Coder workspace templates
+[no-cd, private]
+update-all:
+	coder list | grep 'true *$'  | awk '{print $1}' | runmany 'echo coder update $1'
+
+# restart all Coder workspaces
+[no-cd, private]
+restart-all:
+	coder list | grep 'Started *false' | awk '{print $1}' | runmany 'coder restart --yes $1'
+
+# watch Coder workspace status
+[no-cd, private]
+status:
+	watch -n 5 -d 'coder list | sort -k3,4'
