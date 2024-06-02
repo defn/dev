@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 function main {
-    pass tailscale-auth-key-coder-sp
+	pass tailscale-auth-key-coder-sp
 }
 
 main "@"
-

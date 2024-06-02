@@ -44,7 +44,7 @@ function main {
 	sudo ln -nfs /mnt/docker /var/lib/docker
 
 	while true; do
-		if sudo systemctl start docker; then 
+		if sudo systemctl start docker; then
 			echo Docker running
 			break
 		fi

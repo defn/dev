@@ -70,6 +70,9 @@ pkg/oras/.direnv
 pkg/packer/.direnv
 pkg/pkg/.direnv
 pkg/pydev/.direnv
+pkg/regbot/.direnv
+pkg/regctl/.direnv
+pkg/regsync/.direnv
 pkg/rustdev/.direnv
 pkg/secrets/.direnv
 pkg/shell/.direnv
@@ -152,6 +155,9 @@ pkg/oras/result
 pkg/packer/result
 pkg/pkg/result
 pkg/pydev/result
+pkg/regbot/result
+pkg/regctl/result
+pkg/regsync/result
 pkg/rustdev/result
 pkg/secrets/result
 pkg/shell/result

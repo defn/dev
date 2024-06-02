@@ -3,15 +3,14 @@
 set -efu -o pipefail
 
 case "$(uname -s)" in
-  Darwin)
-    export SUDO_ASKPASS="$HOME/bin/askpass"
-    sudo="sudo -A"
-    ;;
-  *)
-    sudo="sudo"
-    ;;
+Darwin)
+	export SUDO_ASKPASS="$HOME/bin/askpass"
+	sudo="sudo -A"
+	;;
+*)
+	sudo="sudo"
+	;;
 esac
-
 
 function persist {
 	local s="$1"
@@ -38,8 +37,8 @@ function cache {
 	$sudo chown $(id -un):$(id -gn) ~/work/.
 	$sudo chmod 700 ~/.gnupg
 
-  # macos: ~/Library/Application\ Support/coderv2
-  # macos: ~/work/code-server-cache/extensions
+	# macos: ~/Library/Application\ Support/coderv2
+	# macos: ~/work/code-server-cache/extensions
 	#persist ~/work/config-coderv2 ~/.config/coderv2
 
 	#persist ~/work/config-gh ~/.config/gh

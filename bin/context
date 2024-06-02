@@ -5,14 +5,14 @@ function main {
 
 	local context="${DFD_PREFIX}-${DFD_OWNER}-$(basename "${BASH_SOURCE}")"
 
-	case "${1:-}" in
-		"")
-			cd ~/m && make tailscale-kubeconfig env="${context}"
-			kubectl --context "${context}" get nodes
-			;;
-		*)
-			kubectl --context "${context}" "$@"
-			;;
+	case "${1-}" in
+	"")
+		cd ~/m && make tailscale-kubeconfig env="${context}"
+		kubectl --context "${context}" get nodes
+		;;
+	*)
+		kubectl --context "${context}" "$@"
+		;;
 	esac
 }
 

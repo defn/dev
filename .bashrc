@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 case "$(uname -s)" in
-  Darwin)
-    export LC_ALL=C
-    export LANG=C
-    ;;
+Darwin)
+	export LC_ALL=C
+	export LANG=C
+	;;
 esac
 
 if [[ -n ${VSCODE_RESOLVING_ENVIRONMENT-} ]]; then
@@ -60,7 +60,7 @@ export HOF_TELEMETRY_DISABLED=1
 #export DISPLAY=1
 
 # kubectl
-if ! test -e "${KUBECONFIG:-}"; then 
+if ! test -e "${KUBECONFIG-}"; then
 	if test -e "$HOME/.kube/config"; then
 		export KUBECONFIG="$HOME/.kube/config"
 	else
@@ -81,8 +81,8 @@ Darwin)
 	export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
 	;;
 Linux)
-  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-  ;; 
+	export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+	;;
 esac
 
 # aws-vault
@@ -106,11 +106,11 @@ export DIRENV_LOG_FORMAT=
 export PRE_COMMIT_ALLOW_NO_CONFIG=1
 
 # prompt
-if test -z "${STARSHIP_NO:-}"; then
-  if type -P starship >/dev/null; then
-    # starship
-    eval "$(starship init bash)"
-  fi
+if test -z "${STARSHIP_NO-}"; then
+	if type -P starship >/dev/null; then
+		# starship
+		eval "$(starship init bash)"
+	fi
 fi
 
 # aliases

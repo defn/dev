@@ -2,17 +2,17 @@
 
 export JUST_UNSTABLE=1
 
-if [[ "$#" == 0 ]]; then
+if [[ $# == 0 ]]; then
 	just -l
 else
 	export JUST_WORKDIR="$(pwd)"
 	case "${1}" in
-		/)
-			shift
-			exec just --choose "$@"
-			;;
-		*)
-			exec just "$@"
-			;;
+	/)
+		shift
+		exec just --choose "$@"
+		;;
+	*)
+		exec just "$@"
+		;;
 	esac
 fi
