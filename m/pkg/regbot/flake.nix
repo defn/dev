@@ -34,7 +34,7 @@
 
     installPhase = pkg: ''
       install -m 0755 -d $out $out/bin
-      install -m 0755 $src $out/bin/rebotg
+      install -m 0755 $src $out/bin/regbot
     '';
   };
 }
