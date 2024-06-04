@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-v1alpha1.extension_repo(name="custom", load_host="defn", url="file:///home/ubuntu/m")
+v1alpha1.extension_repo(name="custom", load_host="defn", url="file://{}/m".format(os.environ["HOME"]))
 
 load("ext://defn/common", "main")
 
