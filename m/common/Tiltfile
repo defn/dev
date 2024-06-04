@@ -2,7 +2,6 @@
 
 load("ext://restart_process", "custom_build_with_restart")
 
-
 def main(
     app_build,
     app_release,

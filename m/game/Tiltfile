@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
-load("../common/Tiltfile", "main")
+v1alpha1.extension_repo(name="custom", load_host="defn", url="file:///home/ubuntu/m")
+
+load("ext://defn/common", "main")
 
 local_resource(
     "sound",
