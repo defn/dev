@@ -60,8 +60,7 @@ role: rpi_packages: tasks: [{
 	name:   "Install rpi-specific packages"
 	become: true
 	apt: {
-		name: [
-		]
+		name: []
 		state: "present"
 	}
 }]
