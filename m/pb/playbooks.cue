@@ -60,8 +60,7 @@ role: rpi_packages: tasks: [{
 	name:   "Install rpi-specific packages"
 	become: true
 	apt: {
-		name: [
-		]
+		name: []
 		state: "present"
 	}
 }]
@@ -172,6 +171,12 @@ role: network_dummy: tasks: [{
 }]
 
 role: base_bazel: tasks: [{
+	name: "Creates m directory"
+	file: {
+		path:  "/home/\(#username)/m"
+		state: "directory"
+	}
+}, {
 	name:   "Configure bazel cache"
 	become: true
 	template: {

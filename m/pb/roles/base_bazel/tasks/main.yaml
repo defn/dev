@@ -1,3 +1,7 @@
+- name: Creates m directory
+  file:
+    path: /home/ubuntu/m
+    state: directory
 - name: Configure bazel cache
   become: true
   template:
