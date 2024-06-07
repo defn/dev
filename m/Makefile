@@ -128,6 +128,7 @@ bazel-ignore:
 	git ls-files | grep '{{cookiecutter' | perl -pe 's{/\{\{.*}{}' | sort -u >> .bazelignore
 	for a in infra/stacks/*/ infra/cdktf.out/stacks/*/ demo/stacks/*/ demo/cfg/cdktf.out/stacks/*/; do echo "$${a}.terraform"; done | sort >> .bazelignore
 	git ls-files | grep /.env | perl -pe 's{/[^/]+$$}{\n}' | while read -r a; do echo "$$a/.direnv"; done | sort >> .bazelignore
+	(cat ~/.gitignore && echo && echo m && echo work && echo bin) > ~/.bazelignore
 
 coder-login:
 	coder login https://coder.$(env).$(GIT_AUTHOR_NAME).$(domain)
