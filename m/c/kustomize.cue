@@ -1136,8 +1136,7 @@ kustomize: "tetragon": #KustomizeHelm & {
 		namespace: "kube-system"
 		version:   "1.0.2"
 		repo:      "https://helm.cilium.io"
-		values: {
-		}
+		values: {}
 	}
 
 	jsp: "deployment-tetragon-operator-resources": {
@@ -2458,8 +2457,7 @@ kustomize: "headlamp": #KustomizeHelm & {
 		namespace: "headlamp"
 		version:   "0.18.2"
 		repo:      "https://headlamp-k8s.github.io/headlamp"
-		values: {
-		}
+		values: {}
 	}
 
 	resource: "namespace-headlamp": {
@@ -3156,8 +3154,7 @@ kustomize: "reloader": #KustomizeHelm & {
 		namespace: "reloader"
 		version:   "1.0.69"
 		repo:      "https://stakater.github.io/stakater-charts"
-		values: {
-		}
+		values: {}
 	}
 
 	resource: "namespace-reloader": {
@@ -3181,8 +3178,7 @@ kustomize: "descheduler": #KustomizeHelm & {
 		namespace: "descheduler"
 		version:   "0.29.0"
 		repo:      "https://kubernetes-sigs.github.io/descheduler"
-		values: {
-		}
+		values: {}
 	}
 
 	resource: "namespace-descheduler": {
@@ -3206,8 +3202,7 @@ kustomize: "aws-node-term": #KustomizeHelm & {
 		namespace: "aws-node-termination-handler"
 		version:   "0.21.0"
 		repo:      "https://aws.github.io/eks-charts"
-		values: {
-		}
+		values: {}
 	}
 
 	resource: "namespace-aws-node-termination-handler": {
@@ -3509,8 +3504,7 @@ kustomize: "crossplane": #KustomizeHelm & {
 		namespace: "crossplane"
 		version:   "1.15.0"
 		repo:      "https://charts.crossplane.io/stable"
-		values: {
-		}
+		values: {}
 	}
 
 	resource: "namespace-crossplane": {
