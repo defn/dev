@@ -70,7 +70,6 @@ flake_names = [
     "godev",
     "jsdev",
     "pydev",
-    "rustdev",
     "shell",
 ]
 
