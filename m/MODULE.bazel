@@ -8,13 +8,13 @@ module(
 
 # https://registry.bazel.build/modules/rules_pkg
 # protobuf doesn't work with this dep defined
-# bazel_dep(name = "rules_pkg", version = "0.10.0")
+# bazel_dep(name = "rules_pkg", version = "0.10.1")
 
 # https://registry.bazel.build/modules/protobuf
-bazel_dep(name = "protobuf", version = "23.1")
+bazel_dep(name = "protobuf", version = "27.0")
 
 # https://registry.bazel.build/modules/rules_proto
-bazel_dep(name = "rules_proto", version = "6.0.0-rc2")
+bazel_dep(name = "rules_proto", version = "6.0.0")
 
 # https://registry.bazel.build/modules/rules_proto_grpc
 bazel_dep(name = "rules_proto_grpc", version = "5.0.0-alpha2")
@@ -23,14 +23,14 @@ bazel_dep(name = "rules_proto_grpc", version = "5.0.0-alpha2")
 bazel_dep(name = "rules_proto_grpc_go", version = "5.0.0-alpha2")
 
 # https://registry.bazel.build/modules/rules_go
-bazel_dep(name = "rules_go", version = "0.46.0", repo_name = "io_bazel_rules_go")
+bazel_dep(name = "rules_go", version = "0.48.0", repo_name = "io_bazel_rules_go")
 
 go_sdk = use_extension("@io_bazel_rules_go//go:extensions.bzl", "go_sdk")
-go_sdk.download(version = "1.22.3)
+go_sdk.download(version = "1.22.3")
 go_sdk.host()
 
 # https://registry.bazel.build/modules/gazelle
-bazel_dep(name = "gazelle", version = "0.35.0", repo_name = "bazel_gazelle")
+bazel_dep(name = "gazelle", version = "0.37.0", repo_name = "bazel_gazelle")
 
 go_deps = use_extension("@bazel_gazelle//:extensions.bzl", "go_deps")
 go_deps.from_file(go_mod = "//:go.mod")
