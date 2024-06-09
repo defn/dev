@@ -142,7 +142,7 @@ func CoderDefnEc2Stack(scope constructs.Construct, site *infra.AwsProps, name st
 
 	devCoderAgent := agent.NewAgent(stack, infra.Js("main"), &agent.AgentConfig{
 		Arch: infra.Js("amd64"),
-		Auth: infra.Js("token"),
+		Auth: infra.Js("aws-instance-identity"),
 		DisplayApps: &agent.AgentDisplayApps{
 			SshHelper:      infra.Jsbool(false),
 			Vscode:         infra.Jsbool(false),
@@ -158,7 +158,6 @@ func CoderDefnEc2Stack(scope constructs.Construct, site *infra.AwsProps, name st
 		},
 		Os:                   infra.Js("linux"),
 		StartupScript:        infra.Js(`cd ~/m && bin/startup.sh`),
-		StartupScriptTimeout: infra.Jsn(180),
 	})
 
 	devWorkspaceName := infra.Js("coder-${" + *devCoderWorkspace.Owner() + "}-${" + *devCoderWorkspace.Name() + "}")
