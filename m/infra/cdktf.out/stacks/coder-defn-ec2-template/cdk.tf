@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.51.1"
+      version = "5.52.0"
       source  = "aws"
     }
     coder = {
@@ -322,7 +322,7 @@ if ! tailscale ip -4 | grep ^100; then
   sudo tailscale up --accept-dns --accept-routes --authkey="${data.coder_parameter.tsauthkey.value}" --operator=ubuntu --ssh --timeout 60s
 fi
 
-nohup sudo -H -E -u ${data.coder_parameter.username.value} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${data.coder_workspace.me.access_url} coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name} ${coder_agent.main.token}' >>/tmp/user-data.log 2>&1 &
+nohup sudo -H -E -u ${data.coder_parameter.username.value} bash -c 'cd && (git pull || true) && cd m && export CODR_AGENT_TOKEN=${coder_agent.main.token}; exec bin/user-data.sh ${data.coder_workspace.me.access_url} coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}' >>/tmp/user-data.log 2>&1 &
 disown
 --//--
 

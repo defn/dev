@@ -4,11 +4,16 @@ export CODER_AGENT_AUTH="token"
 
 export CODER_AGENT_URL="$1"
 shift
+
 export DFD_WORKSPACE_NAME="$1"
+
 export CODER_NAME="$1"
 shift
-export CODER_AGENT_TOKEN="$1"
-shift
+
+if [[ -n "${1L-}" ]]; then
+	export CODER_AGENT_TOKEN="$1"
+	shift
+fi
 
 cd
 
