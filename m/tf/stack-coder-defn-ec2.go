@@ -283,13 +283,13 @@ func CoderDefnEc2Stack(scope constructs.Construct, site *infra.AwsProps, name st
 		Healthcheck: &app.AppHealthcheck{
 			Interval:  infra.Jsn(5),
 			Threshold: infra.Jsn(6),
-			Url:       infra.Js("http://localhost:13337/healthz"),
+			Url:       infra.Js("http://localhost:8080/healthz"),
 		},
 		Icon:      infra.Js("/icon/code.svg"),
 		Share:     infra.Js("owner"),
 		Slug:      infra.Js("code-server"),
 		Subdomain: infra.Jsbool(false),
-		Url:       infra.Js(fmt.Sprintf("http://localhost:13337/?folder=/home/%s/m", *paramUsername.Value())),
+		Url:       infra.Js(fmt.Sprintf("http://localhost:8080/?folder=/home/%s/m", *paramUsername.Value())),
 	})
 
 	aws_provider.NewAwsProvider(stack, infra.Js("aws"), &aws_provider.AwsProviderConfig{
