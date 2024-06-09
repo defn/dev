@@ -173,6 +173,7 @@ open*name:
 coder-agent *host:
 	#!/usr/bin/env bash
 
+	set -x
 
 	case "$(uname -s)" in
 		Darwin) export LC_ALL=C LANG=C ;;

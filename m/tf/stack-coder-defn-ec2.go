@@ -45,6 +45,7 @@ type ConfigData struct {
 	ParamUsername              string
 	DevCoderWorkspaceAccessUrl string
 	DevCoderWorkspaceToken     string
+  DevCoderInitScript         string
 }
 
 func CoderDefnEc2Stack(scope constructs.Construct, site *infra.AwsProps, name string) cdktf.TerraformStack {
@@ -156,8 +157,8 @@ func CoderDefnEc2Stack(scope constructs.Construct, site *infra.AwsProps, name st
 			"LC_ALL":              infra.Js("C.UTF-8"),
 			"LOCAL_ARCHIVE":       infra.Js("/usr/lib/locale/locale-archive"),
 		},
-		Os:                   infra.Js("linux"),
-		StartupScript:        infra.Js(`cd ~/m && bin/startup.sh`),
+		Os:            infra.Js("linux"),
+		StartupScript: infra.Js(`cd ~/m && bin/startup.sh`),
 	})
 
 	devWorkspaceName := infra.Js("coder-${" + *devCoderWorkspace.Owner() + "}-${" + *devCoderWorkspace.Name() + "}")
@@ -169,6 +170,7 @@ func CoderDefnEc2Stack(scope constructs.Construct, site *infra.AwsProps, name st
 		ParamUsername:              *paramUsername.Value(),
 		DevCoderWorkspaceAccessUrl: *devCoderWorkspace.AccessUrl(),
 		DevCoderWorkspaceToken:     *devCoderAgent.Token(),
+		DevCoderInitScript:         *cdktf.Fn_Base64encode(devCoderAgent.InitScript()),
 	}
 
 	tmpl, err := template.New("cloud_init").Parse(cloud_init)
