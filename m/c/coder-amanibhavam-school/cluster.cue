@@ -2,7 +2,7 @@ package c
 
 class: {
 	handle:          "amanibhavam"
-	env:             "kowloon"
+	env:             "school"
 	infra_cilium_id: 200
 }
 

@@ -17,6 +17,11 @@ function main {
 
 	set +f
 
+	mkdir gen
+	rsync -iaL cue.mod/gen/. gen/.
+	rm -rf cue.mod/gen
+	mv gen cue.mod/
+
 	if false; then
 		"${cue}" export --out json -e image_digests "${cue_import}" "${image_digest}" k/*.cue |
 			jq -r '.[]' |
