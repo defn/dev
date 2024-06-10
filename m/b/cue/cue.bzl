@@ -9,7 +9,7 @@ def _cue_export_impl(ctx):
     cue_bin = ctx.files.cue_bin[0].path
 
     ctx.actions.run(
-        arguments = ["-c", "{} export --out={} {} {} > {}".format(
+        arguments = ["-c", "export XDG_CACHE_HOME=/tmp; {} export --out={} {} {} > {}".format(
             cue_bin,
             ctx.attr.format,
             ctx.attr.expr,
