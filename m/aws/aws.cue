@@ -22,7 +22,7 @@ org: {
 			for acc in org.accounts {
 				(acc.profile): {
 					email: acc.email
-          id: tf.lookup[name].accounts[acc.profile].id
+					id:    tf.lookup[name].accounts[acc.profile].id
 				}
 			}
 		}
