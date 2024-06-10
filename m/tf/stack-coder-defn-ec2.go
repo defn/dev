@@ -45,7 +45,7 @@ type ConfigData struct {
 	ParamUsername              string
 	DevCoderWorkspaceAccessUrl string
 	DevCoderWorkspaceToken     string
-  DevCoderInitScript         string
+	DevCoderInitScript         string
 }
 
 func CoderDefnEc2Stack(scope constructs.Construct, site *infra.AwsProps, name string) cdktf.TerraformStack {

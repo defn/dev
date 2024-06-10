@@ -5,16 +5,16 @@
 set -e
 
 if [ -z "$OPENVPN" ]; then
-    export OPENVPN="$PWD"
+	export OPENVPN="$PWD"
 fi
 if ! source "$OPENVPN/ovpn_env.sh"; then
-    echo "Could not source $OPENVPN/ovpn_env.sh."
-    exit 1
+	echo "Could not source $OPENVPN/ovpn_env.sh."
+	exit 1
 fi
 
 TARGET="$OPENVPN/server"
 if [ -n "$1" ]; then
-    TARGET="$1"
+	TARGET="$1"
 fi
 mkdir -p "${TARGET}"
 
@@ -22,18 +22,18 @@ mkdir -p "${TARGET}"
 rm -rf "$TARGET/pki/private" "$TARGET/pki/issued"
 
 FILES=(
-    "openvpn.conf"
-    "ovpn_env.sh"
-    "pki/private/${OVPN_CN}.key"
-    "pki/issued/${OVPN_CN}.crt"
-    "pki/dh.pem"
-    "pki/ta.key"
-    "pki/ca.crt"
-    "ccd"
+	"openvpn.conf"
+	"ovpn_env.sh"
+	"pki/private/${OVPN_CN}.key"
+	"pki/issued/${OVPN_CN}.crt"
+	"pki/dh.pem"
+	"pki/ta.key"
+	"pki/ca.crt"
+	"ccd"
 )
 
 if [ -f "${OPENVPN}/pki/crl.pem" ]; then
-    FILES+=("pki/crl.pem")
+	FILES+=("pki/crl.pem")
 fi
 
 # Ensure the ccd directory exists, even if empty

@@ -1,7 +1,7 @@
 - name: Configure network dummy netdev
   become: true
   template:
-    src: '{{ role_path }}/templates/etc/systemd/network/dummy1.netdev.j2'
+    src: "{{ role_path }}/templates/etc/systemd/network/dummy1.netdev.j2"
     dest: /etc/systemd/network/dummy1.netdev
     owner: root
     group: root
@@ -9,7 +9,7 @@
 - name: Configure network dummy network
   become: true
   template:
-    src: '{{ role_path }}/templates/etc/systemd/network/dummy1.network.j2'
+    src: "{{ role_path }}/templates/etc/systemd/network/dummy1.network.j2"
     dest: /etc/systemd/network/dummy1.network
     owner: root
     group: root

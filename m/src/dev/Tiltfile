@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 
-v1alpha1.extension_repo(name="custom", load_host="defn", url="file://{}/m".format(os.environ["HOME"]))
+v1alpha1.extension_repo(
+    name="custom", load_host="defn", url="file://{}/m".format(os.environ["HOME"])
+)
 
 load("ext://defn/common", "main")
 
-load('ext://uibutton', 'cmd_button', 'location')
+load("ext://uibutton", "cmd_button", "location")
 
 main(
     app_entrypoint=["/cli", "api"],
@@ -12,14 +14,16 @@ main(
     app_build="../../bazel-bin/src/dev/dev_/dev",
     context="minikube",
     host="src--dev",
-    registry="cache.defn.run:4999"
+    registry="cache.defn.run:4999",
 )
 
-cmd_button(name='app',
-           argv=["open", "http://127.0.0.1:20000"],
-           location=location.NAV,
-           text='application',
-           icon_name='support_agent')
+cmd_button(
+    name="app",
+    argv=["open", "http://127.0.0.1:20000"],
+    location=location.NAV,
+    text="application",
+    icon_name="support_agent",
+)
 
 local_resource(
     "forward-app",
@@ -30,5 +34,5 @@ local_resource(
             echo http://127.0.0.1:20000
             kubectl port-forward service/app -n src--dev 20000:80
         """,
-    ]
+    ],
 )

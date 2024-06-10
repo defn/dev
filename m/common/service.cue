@@ -5,7 +5,7 @@ template: "service-app.yaml": {
 	kind:       "Service"
 	metadata: {
 		namespace: chart.name
-		name: "app"
+		name:      "app"
 	}
 	spec: {
 		selector: app: metadata.name

@@ -15,8 +15,8 @@ function main {
 		mkdir tmp/$f
 		tar xfz "${in[${f}_path]}" -C tmp/$f
 		# save the bazel artifact path because the artifact itself is huge
-		echo "${f}" > tmp/$f/.nix-flake
-		echo "${in[${f}_store]}" > tmp/$f/.bazel-nix-store
+		echo "${f}" >tmp/$f/.nix-flake
+		echo "${in[${f}_store]}" >tmp/$f/.bazel-nix-store
 	done
 
 	# create an archive of tmp

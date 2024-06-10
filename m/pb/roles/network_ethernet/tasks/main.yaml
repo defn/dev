@@ -1,7 +1,7 @@
 - name: Configure ethernet network
   become: true
   template:
-    src: '{{ role_path }}/templates/etc/network/interfaces.j2'
+    src: "{{ role_path }}/templates/etc/network/interfaces.j2"
     dest: /etc/network/interfaces
     owner: root
     group: root

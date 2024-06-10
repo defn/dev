@@ -10,7 +10,7 @@ export DFD_WORKSPACE_NAME="$1"
 export CODER_NAME="$1"
 shift
 
-if [[ -n "${1:-}" ]]; then
+if [[ -n ${1-} ]]; then
 	export CODER_AGENT_TOKEN="$1"
 	shift
 fi

@@ -1,4 +1,5 @@
 #!/usr/bin/env python
 
+
 def hello():
     local_resource("hello", cmd="echo world")
