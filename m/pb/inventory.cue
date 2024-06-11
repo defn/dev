@@ -22,7 +22,6 @@ inventory: {
 
 	aws: hosts: [
 		"kowloon",
-		"threesix",
 	]
 
 	cloud: children: [
