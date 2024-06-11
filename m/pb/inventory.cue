@@ -7,8 +7,8 @@ inventory: {
 		// provide defaults for inventory/packer.ini
 		ansible_user: string | *#username
 
-		bazel_remote_cache_server: string | *"100.101.80.89" // macmini
-		bazel_remote_cache_port:   string | *"9092"          // public port
+		bazel_remote_cache_server: string | *"100.116.216.28" // district
+		bazel_remote_cache_port:   string | *"9092"           // public port
 		bazel_jobs:                string | *"1"
 	}
 
