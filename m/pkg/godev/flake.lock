@@ -132,17 +132,17 @@
       },
       "locked": {
         "dir": "m/pkg/goreleaser",
-        "lastModified": 1717626113,
-        "narHash": "sha256-u4F+nFc4L7VXdq3e2DOTqP0Z3XviaLxmOi1p8d1L9gM=",
+        "lastModified": 1718080804,
+        "narHash": "sha256-G7lARln7TPmgBBAZrSxlwEUlNZWalmRA0xTPW82dYqY=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "3ad1240145c41a056184f5ec8a101c2d39294dd5",
+        "rev": "35a2feab8d7f80200a3d85c573dd55ef25a3fc08",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/goreleaser",
         "owner": "defn",
-        "ref": "pkg-goreleaser-2.0.0-1",
+        "ref": "pkg-goreleaser-2.0.1-1",
         "repo": "dev",
         "type": "github"
       }
