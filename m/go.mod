@@ -11,14 +11,14 @@ require (
 	cuelang.org/go v0.9.0
 	github.com/aws/constructs-go/constructs/v10 v10.3.0
 	github.com/aws/jsii-runtime-go v1.99.0
-	github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.21.0
+	github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.22.0
 	github.com/cdktf/cdktf-provider-null-go/null/v10 v10.0.0
 	github.com/charmbracelet/bubbles v0.18.0
 	github.com/charmbracelet/bubbletea v0.26.4
 	github.com/charmbracelet/lipgloss v0.11.0
 	github.com/gin-gonic/gin v1.10.0
 	github.com/hashicorp/terraform-cdk-go/cdktf v0.20.7
-	github.com/noisysockets/noisysockets v0.24.10
+	github.com/noisysockets/noisysockets v0.26.0
 	github.com/spf13/cobra v1.8.0
 	github.com/spf13/viper v1.19.0
 	github.com/urfave/cli/v2 v2.27.2
@@ -58,7 +58,7 @@ require (
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jinzhu/copier v0.4.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
-	github.com/klauspost/cpuid/v2 v2.2.7 // indirect
+	github.com/klauspost/cpuid/v2 v2.2.8 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
@@ -75,11 +75,11 @@ require (
 	github.com/muesli/cancelreader v0.2.2 // indirect
 	github.com/muesli/reflow v0.3.0 // indirect
 	github.com/muesli/termenv v0.15.2 // indirect
-	github.com/noisysockets/netstack v0.7.0 // indirect
+	github.com/noisysockets/netstack v0.8.0 // indirect
 	github.com/noisysockets/netutil v0.7.0 // indirect
-	github.com/noisysockets/network v0.16.0 // indirect
+	github.com/noisysockets/network v0.18.2 // indirect
 	github.com/noisysockets/pinger v0.4.2 // indirect
-	github.com/noisysockets/resolver v0.11.0 // indirect
+	github.com/noisysockets/resolver v0.12.0 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.1.0 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.2 // indirect
@@ -111,7 +111,7 @@ require (
 	golang.org/x/text v0.16.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
 	golang.org/x/tools v0.22.0 // indirect
-	google.golang.org/protobuf v1.34.1 // indirect
+	google.golang.org/protobuf v1.34.2 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
