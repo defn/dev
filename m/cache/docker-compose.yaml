@@ -5,7 +5,7 @@ services:
     image: registry:2
     container_name: registry
     ports:
-      - "0.0.0.0:4999:5000"
+      - "0.0.0.0:5000:5000"
     environment:
       - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/registry.crt
       - REGISTRY_HTTP_TLS_KEY=/certs/registry.key
@@ -21,5 +21,5 @@ services:
       - "0.0.0.0:9092:9092"
     volumes:
       - ${HOME}/work/bazel-cache:/data
-    command: --max_size 50
+    command: --max_size 500
     restart: unless-stopped
