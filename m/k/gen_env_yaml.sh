@@ -11,6 +11,11 @@ function main {
 	local out="$1"
 	shift
 
+	mkdir gen
+	rsync -iaL cue.mod/gen/. gen/.
+	rm -rf cue.mod/gen
+	mv gen cue.mod/
+
 	cat "${cue_import}" | grep -v 'targetRevision: "app-version-not-found"' >cue_import.cue
 	echo package k >cue_versions.cue
 
