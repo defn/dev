@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.52.0"
+      version = "5.53.0"
       source  = "aws"
     }
     coder = {
@@ -226,7 +226,7 @@ resource "coder_app" "code-server" {
   display_name = "code-server"
   icon         = "/icon/code.svg"
   share        = "owner"
-  slug         = "code-server"
+  slug         = "cs"
   subdomain    = false
   url          = "http://localhost:8080/?folder=/home/${data.coder_parameter.username.value}/m"
   healthcheck {
