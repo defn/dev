@@ -13,7 +13,11 @@ inventory: {
 	}
 
 	cache: hosts: [
-		"district", "macmini",
+		"district",
+	]
+
+	main: hosts: [
+		"macmini", "kowloon",
 	]
 
 	hetzner: hosts: [
