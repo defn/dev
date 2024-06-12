@@ -20,6 +20,7 @@ flake_names = [
     "bazelisk",
     "ibazel",
     "oci",
+    "attic",
     "development",
     "terraform",
     "terraformdocs",
