@@ -24,6 +24,7 @@
           mv -f $out/lib/code-server-${pkg.config.vendor2}-*  $out/lib/code-server-${pkg.config.vendor2}
           ln -fs $out/lib/code-server-${pkg.config.vendor2}/bin/code-server $out/bin/code-server
           ln -fs $out/lib/code-server-${pkg.config.vendor2}/lib/vscode/bin/helpers/browser.sh $out/bin/browser.sh
+          ln -fs $out/lib/code-server-${pkg.config.vendor2}/lib/vscode/bin/remote-cli/code-server $out/bin/remote-code-server
         ''
       else
         ''
