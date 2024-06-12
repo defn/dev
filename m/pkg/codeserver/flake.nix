@@ -33,6 +33,7 @@
           mv -f $out/lib/code-server-${pkg.config.vendor}-*  $out/lib/code-server-${pkg.config.vendor}
           ln -fs $out/lib/code-server-${pkg.config.vendor}/bin/code-server $out/bin/code-server
           ln -fs $out/lib/code-server-${pkg.config.vendor}/lib/vscode/bin/helpers/browser.sh $out/bin/browser.sh
+          ln -fs $out/lib/code-server-${pkg.config.vendor}/lib/vscode/bin/remote-cli/code-server $out/bin/remote-code-server
         '';
 
     downloads = {
