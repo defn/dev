@@ -42,7 +42,7 @@ update:
 			../az/bin/n-bump "${latest}"
 			../az/bin/n-release "${slug} ${current} -> ${latest}"
 			nix build
-			attic push hello result
+			n cache remote result
 		)
 	done
 
