@@ -39,6 +39,7 @@ cache *args:
 home *args:
 	just play home {{ args }}
 
-all:
-	just upgrade
-	just home
+all *args:
+	just upgrade {{ args }}:cache
+	just home cache
+	just home "{{ args }}:!cache"
