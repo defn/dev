@@ -1,16 +1,15 @@
+env:
+  BUILDKITE_GIT_MIRRORS_PATH: /cache/git
+  BUILDKITE_GIT_MIRRORS_SKIP_UPDATE: "1"
 branches: main
 steps:
   - label: nix build
-    command:
-      - bash
-      - -c
-      - |-
-        '
-        set -e
-        cd
-        git fetch
-        git reset --hard $BUILDKITE_COMMIT
-        source .bash_profile
-        cd m/pkg
-        runmany 10 'cd $1 && nix build && attic push hello result' */
-        '
+    command: |-
+      bash -c '
+      set -e
+      cd
+      git fetch
+      git reset --hard $BUILDKITE_COMMIT
+      source .bash_profile
+      for a in m/pkg/*/; do (cd $a && nix build && attic push hello result); done
+      '
