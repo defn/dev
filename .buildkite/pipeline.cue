@@ -7,7 +7,7 @@ steps: [{
 		set -e
 		cd
 		git fetch
-		git reset --hard $BUILDKITE_COMMIT
+		git reset --hard $$BUILDKITE_COMMIT
 		source .bash_profile
 		for a in m/pkg/*/; do (cd $$a && nix build && attic push hello result); done
 		'
@@ -18,7 +18,7 @@ steps: [{
 		bash -c '
 		set -e
 		cd
-		git reset --hard $BUILDKITE_COMMIT
+		git reset --hard $$BUILDKITE_COMMIT
 		source .bash_profile
 		cd m
 		b build
