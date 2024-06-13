@@ -3,7 +3,7 @@ default:
 
 -include common/Makefile.coder
 
-timeout ?= 600
+timeout ?= 2592000
 
 env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
 domain ?= defn.run
