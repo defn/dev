@@ -117,13 +117,6 @@ macos:
 #	-docker network create dev
 #	docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock ubuntu chown 1000:1000 /var/run/docker.sock
 
-cache:
-	$(MARK) cache
-	set -eo pipefail; for n in $(flakes); do \
-		mark $$n; \
-		(cd m/pkg/$$n && nix build && n cache && b build); \
-		done
-
 rehome:
 	this-nix-gc
 	rm -rf bin/nix/.head-* bin/nix.tmp*
