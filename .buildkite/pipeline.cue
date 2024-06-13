@@ -8,6 +8,23 @@ env: {
 branches: "main"
 
 steps: [
+	{
+		label: "nix build"
+		command: ["bash", "-c", """
+			'
+			set -e
+			cd
+			git fetch
+			git reset --hard $BUILDKITE_COMMIT
+			source .bash_profile
+			cd m/pkg
+			runmany 10 'cd $1 && nix build && attic push hello result' */
+			'
+			"""]
+	},
+]
+
+#steps2: [
 	#DockerStep & {
 		#label: "build-class-buildkite-latest"
 		#image: "coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:class-buildkite-latest"

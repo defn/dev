@@ -1,5 +1,5 @@
 all: pipeline.yml
-	@env GIT_PAGER=cat b diff
+	@env GIT_PAGER=cat j github::diff
 
 pipeline.yml: pipeline.cue
 	cue fmt .
