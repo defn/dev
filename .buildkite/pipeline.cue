@@ -1,12 +1,5 @@
 package bk
 
-env: {
-	BUILDKITE_GIT_MIRRORS_PATH:        "/cache/git"
-	BUILDKITE_GIT_MIRRORS_SKIP_UPDATE: "1"
-}
-
-branches: "main"
-
 steps: [
 	{
 		label: "nix build"
@@ -17,7 +10,7 @@ steps: [
 			git fetch
 			git reset --hard $BUILDKITE_COMMIT
 			source .bash_profile
-			for a in m/pkg/*/; do (cd $a && nix build && attic push hello result); done
+			for a in m/pkg/*/; do (cd $$a && nix build && attic push hello result); done
 			'
 			"""
 	},
