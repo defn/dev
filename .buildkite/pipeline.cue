@@ -1,20 +1,30 @@
 package bk
 
-steps: [
-	{
-		label: "nix build"
-		command: """
-			bash -c '
-			set -e
-			cd
-			git fetch
-			git reset --hard $BUILDKITE_COMMIT
-			source .bash_profile
-			for a in m/pkg/*/; do (cd $$a && nix build && attic push hello result); done
-			'
-			"""
-	},
-]
+steps: [{
+	label: "nix build"
+	command: """
+		bash -c '
+		set -e
+		cd
+		git fetch
+		git reset --hard $BUILDKITE_COMMIT
+		source .bash_profile
+		for a in m/pkg/*/; do (cd $$a && nix build && attic push hello result); done
+		'
+		"""
+}, #WaitStep, {
+	label: "bazel build"
+	command: """
+		bash -c '
+		set -e
+		cd
+		git reset --hard $BUILDKITE_COMMIT
+		source .bash_profile
+		cd m
+		b build
+		'
+		"""
+}]
 
 #steps2: [
 	#DockerStep & {
