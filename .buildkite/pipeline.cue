@@ -8,9 +8,7 @@ steps: [{
 		cd
 		git fetch
 		git reset --hard $$BUILDKITE_COMMIT
-		source .bash_profile
-		set -x
-		runmany '"'"'set -x; (cd ${1} && nix build && attic push hello result);'"'"' m/pkg/*/
+		./.buildkite/bin/nix-build.sh
 		'
 		"""
 }, #WaitStep, {
