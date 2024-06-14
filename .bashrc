@@ -25,6 +25,9 @@ export TEMPDIR="${TEMPDIR:-/tmp}"
 export PYTHONPATH
 export PIP_DISABLE_PIP_VERSION_CHECK=1
 
+# nodejs
+export NO_UPDATE_NOTIFIER=1
+
 # bash
 export BASH_SILENCE_DEPRECATION_WARNING=1
 

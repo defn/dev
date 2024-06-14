@@ -11,7 +11,7 @@ domain ?= defn.run
 proxy ?= proxy3
 
 install:
-	npm install
+	npm -q --no-update-notifier --no-audit install
 
 work ?=
 dev-macos:
@@ -79,14 +79,14 @@ dev_inner:
 		--tls-cert-file ~/.acme.sh/\*.$(name).defn.run_ecc/fullchain.cer --tls-key-file ~/.acme.sh/\*.$(name).defn.run_ecc/\*.$(name).defn.run.key
 
 cdktf:
-	npm install
+	npm -q --no-update-notifier --no-audit install
 	cd tf && npx cdktf get
 	$(MAKE) regen
 
 upgrade:
-	npm install
-	npm upgrade
-	npm outdated
+	npm -q --no-update-notifier --no-audit install
+	npm -q --no-update-notifier --no-audit upgrade
+	npm -q --no-update-notifier --no-audit outdated
 
 go-upgrade:
 	set -x; go get -u $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1' | grep -v /demo/)
