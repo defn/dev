@@ -9,7 +9,7 @@ steps: [{
 		git fetch
 		git reset --hard $$BUILDKITE_COMMIT
 		source .bash_profile
-		runmany "(cd \\$$1 && nix build && attic push hello result);" m/pkg/*/
+		runmany "(cd \\\\$$1 && nix build && attic push hello result);" m/pkg/*/
 		'
 		"""
 }, #WaitStep, {
