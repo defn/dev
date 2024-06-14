@@ -8,7 +8,7 @@ steps: [{
 		cd
 		git fetch
 		git reset --hard $$BUILDKITE_COMMIT
-		./.buildkite/bin/nix-build.sh 8
+		./.buildkite/bin/nix-build.sh "$(echo "$(nproc) / 4" | bc)""
 		'
 		"""
 }, #WaitStep, {
