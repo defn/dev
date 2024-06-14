@@ -1,16 +1,6 @@
 steps:
   - label: nix build
-    command: |-
-      bash -c '
-      set -e
-      ./.buildkite/bin/nix-build.sh "$(echo "$(nproc) / 4" | bc)"
-      '
+    command: ./.buildkite/bin/nix-build.sh
   - wait
   - label: bazel build
-    command: |-
-      bash -c '
-      set -e
-      source .bash_profile
-      cd m
-      b build
-      '
+    command: ./.buildkite/bin/bazel-build.sh

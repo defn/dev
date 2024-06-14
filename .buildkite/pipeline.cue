@@ -1,23 +1,14 @@
 package bk
 
 steps: [{
-	label: "nix build"
-	command: """
-		bash -c '
-		set -e
-		./.buildkite/bin/nix-build.sh "$(echo "$(nproc) / 4" | bc)"
-		'
-		"""
+	label:   "trunk check"
+	command: "./.buildkite/bin/trunk-check.sh"
+}, {
+	label:   "nix build"
+	command: "./.buildkite/bin/nix-build.sh"
 }, #WaitStep, {
-	label: "bazel build"
-	command: """
-		bash -c '
-		set -e
-		source .bash_profile
-		cd m
-		b build
-		'
-		"""
+	label:   "bazel build"
+	command: "./.buildkite/bin/bazel-build.sh"
 }]
 
 #steps2: [
