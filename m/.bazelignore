@@ -12,6 +12,7 @@ pkg/acme/.direnv
 pkg/argocd/.direnv
 pkg/argorollouts/.direnv
 pkg/argoworkflows/.direnv
+pkg/attic/.direnv
 pkg/awscli/.direnv
 pkg/az/.direnv
 pkg/bazelisk/.direnv
@@ -97,6 +98,7 @@ pkg/acme/result
 pkg/argocd/result
 pkg/argorollouts/result
 pkg/argoworkflows/result
+pkg/attic/result
 pkg/awscli/result
 pkg/az/result
 pkg/bazelisk/result

@@ -8,9 +8,9 @@ go 1.22.3
 require github.com/protocolbuffers/txtpbfmt v0.0.0-20230328191034-3462fbc510c0 // indirect
 
 require (
-	cuelang.org/go v0.9.0
+	cuelang.org/go v0.9.1
 	github.com/aws/constructs-go/constructs/v10 v10.3.0
-	github.com/aws/jsii-runtime-go v1.99.0
+	github.com/aws/jsii-runtime-go v1.100.0
 	github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.22.0
 	github.com/cdktf/cdktf-provider-null-go/null/v10 v10.0.0
 	github.com/charmbracelet/bubbles v0.18.0
@@ -18,7 +18,7 @@ require (
 	github.com/charmbracelet/lipgloss v0.11.0
 	github.com/gin-gonic/gin v1.10.0
 	github.com/hashicorp/terraform-cdk-go/cdktf v0.20.7
-	github.com/noisysockets/noisysockets v0.26.0
+	github.com/noisysockets/noisysockets v0.26.1
 	github.com/spf13/cobra v1.8.0
 	github.com/spf13/viper v1.19.0
 	github.com/urfave/cli/v2 v2.27.2
@@ -50,7 +50,7 @@ require (
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-playground/validator/v10 v10.21.0 // indirect
+	github.com/go-playground/validator/v10 v10.22.0 // indirect
 	github.com/goccy/go-json v0.10.3 // indirect
 	github.com/google/btree v1.1.2 // indirect
 	github.com/google/uuid v1.6.0 // indirect
@@ -66,7 +66,7 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-localereader v0.0.1 // indirect
 	github.com/mattn/go-runewidth v0.0.15 // indirect
-	github.com/miekg/dns v1.1.59 // indirect
+	github.com/miekg/dns v1.1.61 // indirect
 	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
@@ -76,8 +76,8 @@ require (
 	github.com/muesli/reflow v0.3.0 // indirect
 	github.com/muesli/termenv v0.15.2 // indirect
 	github.com/noisysockets/netstack v0.8.0 // indirect
-	github.com/noisysockets/netutil v0.7.0 // indirect
-	github.com/noisysockets/network v0.18.2 // indirect
+	github.com/noisysockets/netutil v0.8.1 // indirect
+	github.com/noisysockets/network v0.19.0 // indirect
 	github.com/noisysockets/pinger v0.4.2 // indirect
 	github.com/noisysockets/resolver v0.12.0 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
@@ -102,7 +102,7 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/arch v0.8.0 // indirect
 	golang.org/x/crypto v0.24.0 // indirect
-	golang.org/x/exp v0.0.0-20240604190554-fc45aab8b7f8 // indirect
+	golang.org/x/exp v0.0.0-20240613232115-7f521ea00fb8 // indirect
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
 	golang.org/x/mod v0.18.0 // indirect
 	golang.org/x/net v0.26.0 // indirect
