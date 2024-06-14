@@ -7,7 +7,7 @@ steps:
       git fetch
       git reset --hard $$BUILDKITE_COMMIT
       source .bash_profile
-      for a in m/pkg/*/; do (cd $$a && nix build && attic push hello result); done
+      runmany "(cd $$1 && nix build && attic push hello result);" m/pkg/*/
       '
   - wait
   - label: bazel build
