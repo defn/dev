@@ -10,7 +10,7 @@ steps: [{
 		git reset --hard $$BUILDKITE_COMMIT
 		source .bash_profile
 		set -x
-		runmany "set -x; (cd \\\\${1} && nix build && attic push hello result);" m/pkg/*/
+		runmany '"'"'set -x; (cd ${1} && nix build && attic push hello result);'"'"' m/pkg/*/
 		'
 		"""
 }, #WaitStep, {
