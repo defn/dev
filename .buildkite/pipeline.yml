@@ -1,4 +1,6 @@
 steps:
+  - label: trunk check
+    command: ./.buildkite/bin/trunk-check.sh
   - label: nix build
     command: ./.buildkite/bin/nix-build.sh
   - wait

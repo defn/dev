@@ -2,7 +2,7 @@
 
 set -e
 
-if -z "${1-}" ]; then
+if [[ -z ${1-} ]]; then
 	p="$(echo "$(nproc) / 4" | bc)"
 else
 	p="$1"
