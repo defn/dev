@@ -16,7 +16,6 @@ steps: [{
 	command: """
 		bash -c '
 		set -e
-		cd
 		git reset --hard $$BUILDKITE_COMMIT
 		source .bash_profile
 		cd m
