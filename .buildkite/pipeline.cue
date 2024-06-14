@@ -5,9 +5,6 @@ steps: [{
 	command: """
 		bash -c '
 		set -e
-		cd
-		git fetch
-		git reset --hard $$BUILDKITE_COMMIT
 		./.buildkite/bin/nix-build.sh "$(echo "$(nproc) / 4" | bc)"
 		'
 		"""
@@ -16,7 +13,6 @@ steps: [{
 	command: """
 		bash -c '
 		set -e
-		git reset --hard $$BUILDKITE_COMMIT
 		source .bash_profile
 		cd m
 		b build
