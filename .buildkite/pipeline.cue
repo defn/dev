@@ -4,12 +4,13 @@ steps: [{
 	label: "nix build"
 	command: """
 		bash -c '
-		set -ex
+		set -e
 		cd
 		git fetch
 		git reset --hard $$BUILDKITE_COMMIT
 		source .bash_profile
-		runmany "set -x; (cd \\${1} && nix build && attic push hello result);" m/pkg/*/
+		set -x
+		runmany "set -x; (cd \\\\${1} && nix build && attic push hello result);" m/pkg/*/
 		'
 		"""
 }, #WaitStep, {
