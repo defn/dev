@@ -1,6 +1,6 @@
 {
   inputs = {
-    pkg.url = github:defn/dev/pkg-pkg-0.0.16?dir=m/pkg/pkg;
+    pkg.url = github:defn/dev/pkg-pkg-0.0.17?dir=m/pkg/pkg;
     # https://github.com/NixOS/nixpkgs/tree/master/pkgs/development/web/nodejs
     latest.url = github:NixOS/nixpkgs?rev=d2cac0ee1bdb55879af0f98023e478d6fc7f5e41;
   };
