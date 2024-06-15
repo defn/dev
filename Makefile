@@ -249,6 +249,7 @@ nix:
 	if [[ "$$(id -un)" == "deck" ]]; then t make_nix_deck $(MAKE) nix-deck; fi
 	. ~/.nix-profile/etc/profile.d/nix.sh && (test -f "$$HOME/.nix-profile/share/nix-direnv/direnvrc" || t nix_profile_direnv nix profile install nixpkgs#nix-direnv)
 	. ~/.nix-profile/etc/profile.d/nix.sh && (test -f "$$HOME/.nix-profile/bin/bazelisk" || t nix_profile_bazelisk nix profile install nixpkgs#bazelisk)
+	. ~/.nix-profile/etc/profile.d/nix.sh && (test -f "$$HOME/.nix-profile/bin/nixpkgs-fmt" || t nix_profile_bazelisk nix profile install nixpkgs#nixpkgs-fmt)
 	ln -nfs $$(which bazelisk) $$HOME/bin/$$(uname -s)/bazel
 	sudo rm -f /usr/local/bin/bazel /usr/local/bin/bazelisk
 
