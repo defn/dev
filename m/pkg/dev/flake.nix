@@ -38,6 +38,17 @@
                   buildInputs =
                     [ other.self.defaultPackage.${system} ]
                     ++ devInputs;
+
+                  venvDir = "./.venv";
+
+                  postVenvCreation = ''
+                    unset SOURCE_DATE_EPOCH
+                    pip install -r requirements.txt
+                  '';
+
+                  postShellHook = ''
+                    export MEH_LD_LIBRARY_PATH="${lib.makeLibraryPath [glibc zlib gcc.cc]}"
+                  '';
                 };
 
               genDownloadBuilders = commonBuild: {
@@ -90,6 +101,25 @@
 
                   inherit propagatedBuildInputs;
                   inherit buildInputs;
+
+                  src = builtins.path { path = ./.; name = slug; };
+
+                  installPhase = "mkdir -p $out";
+                };
+
+              venvBuilder = input@{ propagatedBuildInputs ? [ ], buildInputs ? [ ], dontUnpack ? false, dontFixup ? false, slug ? "null-builder" }:
+                bashBuilder rec {
+                  inherit dontUnpack;
+                  inherit dontFixup;
+
+                  inherit propagatedBuildInputs;
+                  inherit buildInputs;
+
+                  devInputs = with ctx.pkgs; [
+                    python3Packages.python
+                    python3Packages.venvShellHook
+                    python3Packages.numpy
+                  ];
 
                   src = builtins.path { path = ./.; name = slug; };
 
