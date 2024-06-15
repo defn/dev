@@ -1,27 +1,10 @@
 {
   inputs = {
-    pkg.url = github:defn/dev/pkg-pkg-0.0.16?dir=m/pkg/pkg;
+    pkg.url = github:defn/dev/pkg-pkg-0.0.17?dir=m/pkg/pkg;
   };
 
-  outputs = inputs: inputs.pkg.main rec {
+  outputs = inputs: inputs.pkg.venvMain rec {
     src = builtins.path { path = ./.; name = "wut"; };
-
-    devShell = ctx: with ctx.pkgs; mkShell {
-      name = "wut-venv";
-      venvDir = "./.venv";
-
-      buildInputs = with python3Packages; [
-        python
-        venvShellHook
-        numpy
-        (defaultPackage ctx)
-      ];
-
-      postVenvCreation = ''
-        unset SOURCE_DATE_EPOCH
-        pip install -r requirements.txt
-      '';
-    };
 
     packages = ctx: {
       wut = with ctx.pkgs; writeShellScriptBin "wut" ''
