@@ -91,10 +91,74 @@
             in
             this // extend;
         };
+
+      venvMain = clr:
+        let
+          caller = inputs.dev.defaultConfig {
+            src = clr.src;
+            config = clr;
+          };
+
+          json = builtins.fromJSON (builtins.readFile "${caller.src}/flake.json");
+
+          src = builtins.path { path = caller.src; name = json.slug; };
+
+          config = caller // json // { inherit src; };
+        in
+        inputs.dev.main rec {
+          inherit inputs;
+          inherit src;
+          inherit config;
+
+          scripts =
+            if builtins.hasAttr "scripts" caller
+            then caller.scripts
+            else (ctx: { });
+
+          handler = ctx:
+            let
+              defaultpackage = caller.defaultPackage ctx;
+              devshell = ctx.pkgs.mkShell {
+                name = "${json.slug}-venv";
+                venvDir = "./.venv";
+
+                buildInputs = with ctx.pkgs.python3Packages; [
+                  python
+                  venvShellHook
+                  defaultpackage
+                ];
+
+                postVenvCreation = ''
+                  unset SOURCE_DATE_EPOCH
+                  pip install -r requirements.txt
+                '';
+              };
+              apps =
+                if builtins.hasAttr "apps" caller
+                then caller.apps ctx
+                else { };
+              packages =
+                if builtins.hasAttr "packages " caller
+                then caller.packages ctx
+                else { };
+              this = {
+                inherit apps;
+                inherit packages;
+                defaultPackage = defaultpackage;
+                devShell = devshell;
+              };
+              extend =
+                if builtins.hasAttr "extend" caller
+                then caller.extend (ctx // { inherit this; })
+                else { };
+            in
+            this // extend;
+        };
     in
     {
       inherit main;
       inherit downloadMain;
+      inherit venvMain;
     } // main rec {
       src = builtins.path { path = ./.; name = "pkg-pkg"; };
       defaultPackage = ctx: ctx.wrap.nullBuilder { };
