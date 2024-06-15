@@ -1,6 +1,6 @@
 {
   inputs = {
-    pkg.url = github:defn/dev/pkg-pkg-0.0.16?dir=m/pkg/pkg;
+    pkg.url = github:defn/dev/pkg-pkg-0.0.17?dir=m/pkg/pkg;
     latest.url = github:NixOS/nixpkgs?rev=63dacb46bf939521bdc93981b4cbb7ecb58427a0;
   };
 
