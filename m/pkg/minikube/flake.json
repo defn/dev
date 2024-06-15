@@ -2,5 +2,5 @@
   "slug": "pkg-minikube",
   "ghrepo": "kubernetes/minikube",
   "vendor": "1.33.1",
-  "revision": "1"
+  "revision": "2"
 }
