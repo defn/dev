@@ -2,5 +2,5 @@
   "slug": "pkg-ghapps",
   "ghrepo": "nabeken/go-github-apps",
   "vendor": "0.1.15",
-  "revision": "1"
+  "revision": "2"
 }
