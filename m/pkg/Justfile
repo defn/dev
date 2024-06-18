@@ -51,3 +51,8 @@ update:
 upgrade:
 	@n upgrade && n all update pkg deps
 	@n upgrade && n all update pkg deps || true
+
+# Rebuild and cache all flakes
+[private]
+cache:
+	@runmany $(echo "$(nproc)/4" | bc) 'cd $1 && nix build && n cache result' */
