@@ -1,7 +1,11 @@
 {
   "name": "ui",
   "module": "src/index.ts",
-  "svelte": "src/index.ts",
+  "exports": {
+    ".": {
+      "svelte": "./src/index.ts"
+    }
+  },
   "version": "0.0.0",
   "scripts": {
     "check": "svelte-check --tsconfig ./tsconfig.json",

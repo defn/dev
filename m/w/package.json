@@ -1,4 +1,5 @@
 {
+  "name": "defn",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -6,9 +7,9 @@
     "lint": "turbo run lint"
   },
   "devDependencies": {
-    "eslint": "^8.57.0",
+    "eslint": "^9.5.0",
     "eslint-config-custom": "workspace:*",
-    "turbo": "latest"
+    "turbo": "^2.0.4"
   },
   "packageManager": "pnpm@9.0.5"
 }
