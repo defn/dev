@@ -1,0 +1,20 @@
+import "../Justfile"
+
+upgrade: 
+    #!/usr/bin/env bash
+
+    pushd stacks/acc-chamber-1
+    tf upgrade
+    popd
+
+    pushd stacks/org-chamber
+    tf upgrade
+    popd
+
+    runmany 'cd $1 && tf upgrade' stacks/coder*/ stacks/global
+
+sync:
+    #!/usr/bin/env bash
+
+    runmany 'cp -v stacks/acc-chamber-1/.terraform.lock.hcl $1 || true' stacks/acc-*/
+    runmany 'cp -v stacks/org-chamber/.terraform.lock.hcl $1 || true' stacks/org-*/
