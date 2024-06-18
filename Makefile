@@ -108,7 +108,7 @@ macos-reinstall:
 macos:
 	$(MARK) macos
 	-$(shell which gpg-agent) --daemon --pinentry-program $$(which pinentry-mac)
-	for ip in $(dummy_ip); do if ! ifconfig lo0 | grep "inet $$ip"; then sudo -A ifconfig lo0 alias "$$ip" netmask 255.255.255.255; fi; done;
+	for ip in $(dummy_ip); do if ! ifconfig lo0 | grep "inet $$ip"; then sudo ifconfig lo0 alias "$$ip" netmask 255.255.255.255; fi; done;
 	ifconfig lo0
 	defaults write -g ApplePressAndHoldEnabled -bool false
 #	sudo -A ln -nfs ~/.docker/run/docker.sock /var/run/docker.sock
@@ -225,7 +225,7 @@ install:
 	t make_install $(MAKE) install_t
 
 install_t:
-	sudo -A true
+	sudo true
 	t make_nix $(MAKE) nix
 	t make_trunk $(MAKE) trunk
 	t install_inner $(MAKE) install-inner
