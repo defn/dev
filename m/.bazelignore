@@ -93,6 +93,7 @@ pkg/vpn/.direnv
 pkg/wireproxy/.direnv
 pkg/yaegi/.direnv
 pkg/zellij/.direnv
+wut/.direnv
 demo/nix/result
 pkg/acme/result
 pkg/argocd/result
@@ -179,6 +180,7 @@ pkg/vpn/result
 pkg/wireproxy/result
 pkg/yaegi/result
 pkg/zellij/result
+wut/result
 cutout/app/{{cookiecutter.path}}
 cutout/command/{{cookiecutter.path}}
 cutout/vcluster/{{cookiecutter.path}}
@@ -456,3 +458,4 @@ infra/cdktf.out/stacks/org-vault/.direnv
 infra/cdktf.out/stacks/org-whoa/.direnv
 openvpn/.direnv
 pkg/zellij/.direnv
+wut/.direnv
