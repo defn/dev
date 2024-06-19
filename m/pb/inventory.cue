@@ -32,6 +32,10 @@ inventory: {
 		"aws", "hetzner",
 	]
 
+	spiral: children: [
+		"mac", "rpi", "zimaboard", "heavy",
+	]
+
 	mac: hosts: [
 		"macmini",
 		"mbair",
