@@ -57,4 +57,3 @@ upgrade:
 cache:
 	@runmany "$(echo "$(nproc)/4" | bc)" 'cd $1 && nix build && n cache result' */
 	@runmany "$(nproc)" 'attic push hello $1' /nix/store/*
-	@nix-store --gc
