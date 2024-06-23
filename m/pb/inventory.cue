@@ -42,10 +42,6 @@ inventory: {
 		"mba",
 	]
 
-	chrome: hosts: [
-		"penguin",
-	]
-
 	rpi: children: [
 		"rpi3",
 		//"rpi4",

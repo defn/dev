@@ -22,26 +22,16 @@ rpi-install:
 	sudo apt update
 	sudo apt install -y git direnv make rsync pipx
 
-cb-install:
-	sudo apt update
-	sudo apt install -y git direnv make rsync pipx
-	sudo apt install -y socat pcscd wireguard-tools qemu-system libvirt-clients libvirt-daemon-system openvpn easy-rsa
-
-penguin:
-#acme.sh --register-account -m iam@defn.sh
-#this-acme-issue '*.cb.defn.run'
-	$(MAKE) cb-install
-	$(MAKE) chrome-dev-gpg
-	while [[ "$$(pass hello)" != "world" ]]; do $(MAKE) chrome-dev-gpg; sleep 1; done
-	sudo tailscale set --stateful-filtering=false
-	(cd ~/m && j up) &
-	$(MAKE) -j 2 chrome-coder chrome-vpn name=cb
-
 chrome-coder:
 	$(MAKE) -j 2 chrome-dev-socat chrome-dev-coder
 
-chrome-vpn:
+vpn:
 	cd m/openvpn && ./service server
+
+vpn-install:
+	sudo apt update
+	sudo apt install -y git direnv make rsync pipx
+	sudo apt install -y socat pcscd wireguard-tools qemu-system libvirt-clients libvirt-daemon-system openvpn easy-rsa
 
 no-gpg:
 	systemctl --user disable gpg-agent-browser.socket --now || true

@@ -27,9 +27,6 @@ play pb *lim:
 command pattern *args:
 	just playbook::command {{pattern}} {{args}}
 
-penguin pb:
-	just playbook::penguin {{pb}}
-
 upgrade *args:
 	just play upgrade {{ args }}
 

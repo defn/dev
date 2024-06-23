@@ -15,10 +15,6 @@ play pb *lim:
 command pattern *args:
 	just playbook::command {{pattern}} {{args}}
 
-# Run a playbook on penguin
-penguin pb:
-	just playbook::penguin {{pb}}
-
 # Use this workspace
 [no-cd]
 use *name:

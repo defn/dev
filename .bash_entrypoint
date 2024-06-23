@@ -26,11 +26,6 @@ if [[ -n ${first_workdir} ]]; then
 	if flock -n 200; then
 		if ! test -r /tmp/.bash_entrypoint.done; then
 			touch /tmp/.bash_entrypoint.done
-			if [[ "$(uname -n)" == "penguin" ]]; then
-				make penguin
-			else
-				true
-			fi
 		fi
 	fi 200>$lockfile
 

@@ -31,17 +31,7 @@ up *name:
 			;;
 	esac
 
-	case "${name}" in
-		penguin*)
-			remote=
-			;;
-		immanent*)
-			remote="ssh $(id -un)@$(echo $name | cut -d- -f1)"
-			;;
-		*)
-			remote="ssh $(id -un)@$(echo $name | cut -d- -f1)"
-			;;
-	esac
+	remote="ssh $(id -un)@$(echo $name | cut -d- -f1)"
 
 	os=linux
 	case "$(uname -m)" in
