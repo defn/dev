@@ -14,15 +14,17 @@ function main {
 	init)
 		./service-init-pki
 
-		rm -f openvpn.conf
-		rm -f ovpn_env.sh
+		rm -f openvpn.conf ovpn_env.sh easy-rsa
 		openvpn --genkey secret easy-rsa/ta.key
 		ovpn_genconfig -u udp://192.168.1.26 -n 1.1.1.1 -p "route 100.79.169.78 255.255.255.255"
+		;;
+	client)
+		rm -f client.ovpn client.p12 clients
+		rm -f easy-rsa/*/client.*
+		./service-init-client	
 
-		./service-init-client
-
-		ovpn_getclient client separated > clients/client/client.ovpn
-		openssl pkcs12 -export -in ./easy-rsa/issued/client.crt -inkey ./easy-rsa/private/client.key -certfile ./easy-rsa/ca.crt -out ./easy-rsa/issued/client.p12 -password pass:
+		openssl pkcs12 -export -in ./easy-rsa/issued/client.crt -inkey ./easy-rsa/private/client.key -certfile ./easy-rsa/ca.crt -out ./clients/client/client.p12 -password pass:
+		ovpn_getclient client separated > ./clients/client/client.ovpn
 		;;
 	server)
 		sudo -E ./ovpn_run
