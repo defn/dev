@@ -13,11 +13,15 @@ function main {
 	case "${1-}" in
 	init)
 		./service-init-pki
+
 		rm -f openvpn.conf
 		rm -f ovpn_env.sh
+		openvpn --genkey secret easy-rsa/ta.key
 		ovpn_genconfig -u udp://192.168.1.26 -n 1.1.1.1 -p "route 100.79.169.78 255.255.255.255"
-		service-init-client
-		ovpn_getclient client combined > clients/client/client.ovpn
+
+		./service-init-client
+
+		ovpn_getclient client separated > clients/client/client.ovpn
 		openssl pkcs12 -export -in ./easy-rsa/issued/client.crt -inkey ./easy-rsa/private/client.key -certfile ./easy-rsa/ca.crt -out ./easy-rsa/issued/client.p12 -password pass:
 		;;
 	server)
