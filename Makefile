@@ -31,7 +31,7 @@ vpn:
 vpn-install:
 	sudo apt update
 	sudo apt install -y git direnv make rsync pipx
-	sudo apt install -y socat pcscd wireguard-tools qemu-system libvirt-clients libvirt-daemon-system openvpn easy-rsa
+	sudo apt install -y socat pcscd wireguard-tools qemu-system libvirt-clients libvirt-daemon-system openvpn easy-rsa expect
 
 no-gpg:
 	systemctl --user disable gpg-agent-browser.socket --now || true
