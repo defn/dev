@@ -15,12 +15,10 @@ function main {
 		./service-init-pki
 		rm -f openvpn.conf
 		rm -f ovpn_env.sh
-		ovpn_genconfig -u udp://penguin.linux.test -n 1.1.1.1 -p "route 100.101.80.89 255.255.255.255" -p "route 100.79.169.78 255.255.255.255"
-		rm -f penguin.ovpn
+		ovpn_genconfig -u udp://192.168.1.26 -n 1.1.1.1 -p "route 100.79.169.78 255.255.255.255"
 		service-init-client
-		#ovpn_getclient client combined > penguin.ovpn
-		openssl pkcs12 -export -in ./easy-rsa/issued/client.crt -inkey ./easy-rsa/private/client.key -certfile ./easy-rsa/ca.crt -out /mnt/chromeos/MyFiles/Downloads/client.p12 -password pass:
-		cp ./easy-rsa/ca.crt /mnt/chromeos/MyFiles/Downloads/
+		ovpn_getclient client combined > clients/client/client.ovpn
+		openssl pkcs12 -export -in ./easy-rsa/issued/client.crt -inkey ./easy-rsa/private/client.key -certfile ./easy-rsa/ca.crt -out ./easy-rsa/issued/client.p12 -password pass:
 		;;
 	server)
 		sudo -E ./ovpn_run

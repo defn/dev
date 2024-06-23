@@ -1,0 +1,147 @@
+# Easy-RSA Type: server
+# Name: 192.168.1.26
+
+<cert>
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            2a:a2:63:59:d4:94:74:bb:3d:76:43:66:5e:4f:66:6b
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: CN=penguin
+        Validity
+            Not Before: Jun 23 21:30:16 2024 GMT
+            Not After : Sep 26 21:30:16 2026 GMT
+        Subject: CN=192.168.1.26
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:cb:26:06:f6:a2:8f:b5:b9:54:95:c3:51:a9:32:
+                    f5:4f:28:9b:aa:39:96:f4:af:09:0d:83:e3:86:94:
+                    49:e8:2c:8f:71:82:28:25:e5:2c:2d:3a:d8:e5:42:
+                    86:9f:d4:21:6a:03:ae:69:ed:85:b1:6f:97:df:c2:
+                    b4:0c:09:d0:b5:c3:ce:2b:c0:18:0b:d0:2f:36:d0:
+                    f4:1b:f2:a5:f5:0d:80:d8:91:7c:cb:9e:40:0a:a7:
+                    67:67:96:cc:63:17:7b:0b:95:e1:f9:ff:b7:f1:4f:
+                    7c:4d:f2:bc:96:59:e9:b8:2c:94:b4:23:86:fe:6b:
+                    31:92:12:fc:6d:6a:f4:52:82:88:0d:c4:8d:28:bf:
+                    6e:10:bb:78:2e:bf:68:d1:4a:59:85:18:7f:67:c3:
+                    79:b1:34:12:33:e1:f4:b2:3d:e0:1a:f9:51:bc:c8:
+                    9f:44:6b:49:23:d8:10:c4:43:98:64:92:7a:ef:93:
+                    62:a1:97:47:b7:05:12:a3:85:a1:03:cc:a9:66:84:
+                    f9:89:0f:23:d5:02:c3:c7:30:7e:c4:ad:e8:13:85:
+                    c3:e1:62:8a:17:5c:55:75:63:ad:b4:4e:da:b9:7e:
+                    df:7a:56:3e:43:65:47:c2:6a:03:ef:4c:1b:79:09:
+                    02:6a:6f:dc:42:85:3d:3a:77:5b:1b:e0:dd:73:e5:
+                    63:49
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Subject Key Identifier: 
+                6C:0C:73:57:8F:6B:24:EB:D5:CB:2F:83:D1:BB:15:8D:2D:36:0D:BA
+            X509v3 Authority Key Identifier: 
+                keyid:E6:55:57:1F:00:3C:AB:F8:5F:C4:F2:41:E6:56:41:EE:72:59:FC:FB
+                DirName:/CN=penguin
+                serial:29:11:FB:08:F3:EE:9D:5D:00:32:63:64:18:35:BE:A4:F9:FE:FF:04
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication
+            X509v3 Key Usage: 
+                Digital Signature, Key Encipherment
+            X509v3 Subject Alternative Name: 
+                IP Address:192.168.1.26
+    Signature Algorithm: sha256WithRSAEncryption
+    Signature Value:
+        9b:18:fa:85:b3:f6:96:ae:bc:d0:33:ff:1d:e2:1d:fb:6f:ba:
+        87:7d:b4:7a:7a:7c:a8:d0:8b:d1:48:d5:c0:df:97:bc:39:c0:
+        9c:f6:a3:3d:16:cf:fd:75:87:b0:19:73:ff:d5:35:ae:d2:6e:
+        06:78:9c:74:70:53:9a:24:60:28:61:52:fa:bb:9e:28:ac:76:
+        35:05:48:98:d9:b4:64:20:10:62:77:0e:7e:c3:9c:b7:58:af:
+        34:7b:be:7b:43:d9:d4:d0:8f:8d:7a:0a:15:fb:02:54:22:c2:
+        ce:de:7f:7d:bc:c9:fc:58:7d:3d:4b:c8:47:03:e3:b4:a7:bc:
+        ff:dc:13:00:75:11:5f:72:2c:68:a8:38:b8:3d:23:e4:82:62:
+        20:cd:29:65:1a:1d:c7:c3:b7:cc:dc:0f:15:67:a7:3f:e6:95:
+        f9:5d:90:bb:99:5e:b0:5d:aa:ba:0d:ce:0b:c7:c7:98:cb:af:
+        c9:85:b9:14:aa:de:38:39:2c:43:24:0d:e2:a7:aa:af:bc:16:
+        12:3b:8f:cd:44:2c:77:03:22:56:12:ff:ea:9a:03:c6:e4:bd:
+        ce:85:42:db:d4:f9:bc:fb:04:e3:fe:c3:a7:3d:0b:25:9c:3d:
+        be:70:9b:cd:36:b8:20:ed:2b:c3:7a:28:af:30:1f:fe:f2:bd:
+        23:f4:07:4d
+-----BEGIN CERTIFICATE-----
+MIIDYzCCAkugAwIBAgIQKqJjWdSUdLs9dkNmXk9mazANBgkqhkiG9w0BAQsFADAS
+MRAwDgYDVQQDDAdwZW5ndWluMB4XDTI0MDYyMzIxMzAxNloXDTI2MDkyNjIxMzAx
+NlowFzEVMBMGA1UEAwwMMTkyLjE2OC4xLjI2MIIBIjANBgkqhkiG9w0BAQEFAAOC
+AQ8AMIIBCgKCAQEAyyYG9qKPtblUlcNRqTL1TyibqjmW9K8JDYPjhpRJ6CyPcYIo
+JeUsLTrY5UKGn9QhagOuae2FsW+X38K0DAnQtcPOK8AYC9AvNtD0G/Kl9Q2A2JF8
+y55ACqdnZ5bMYxd7C5Xh+f+38U98TfK8llnpuCyUtCOG/msxkhL8bWr0UoKIDcSN
+KL9uELt4Lr9o0UpZhRh/Z8N5sTQSM+H0sj3gGvlRvMifRGtJI9gQxEOYZJJ675Ni
+oZdHtwUSo4WhA8ypZoT5iQ8j1QLDxzB+xK3oE4XD4WKKF1xVdWOttE7auX7felY+
+Q2VHwmoD70wbeQkCam/cQoU9OndbG+Ddc+VjSQIDAQABo4GvMIGsMAkGA1UdEwQC
+MAAwHQYDVR0OBBYEFGwMc1ePayTr1csvg9G7FY0tNg26ME0GA1UdIwRGMESAFOZV
+Vx8APKv4X8TyQeZWQe5yWfz7oRakFDASMRAwDgYDVQQDDAdwZW5ndWlughQpEfsI
+8+6dXQAyY2QYNb6k+f7/BDATBgNVHSUEDDAKBggrBgEFBQcDATALBgNVHQ8EBAMC
+BaAwDwYDVR0RBAgwBocEwKgBGjANBgkqhkiG9w0BAQsFAAOCAQEAmxj6hbP2lq68
+0DP/HeId+2+6h320enp8qNCL0UjVwN+XvDnAnPajPRbP/XWHsBlz/9U1rtJuBnic
+dHBTmiRgKGFS+rueKKx2NQVImNm0ZCAQYncOfsOct1ivNHu+e0PZ1NCPjXoKFfsC
+VCLCzt5/fbzJ/Fh9PUvIRwPjtKe8/9wTAHURX3IsaKg4uD0j5IJiIM0pZRodx8O3
+zNwPFWenP+aV+V2Qu5lesF2qug3OC8fHmMuvyYW5FKreODksQyQN4qeqr7wWEjuP
+zUQsdwMiVhL/6poDxuS9zoVC29T5vPsE4/7Dpz0LJZw9vnCbzTa4IO0rw3oorzAf
+/vK9I/QHTQ==
+-----END CERTIFICATE-----
+</cert>
+
+<key>
+-----BEGIN PRIVATE KEY-----
+MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDLJgb2oo+1uVSV
+w1GpMvVPKJuqOZb0rwkNg+OGlEnoLI9xgigl5SwtOtjlQoaf1CFqA65p7YWxb5ff
+wrQMCdC1w84rwBgL0C820PQb8qX1DYDYkXzLnkAKp2dnlsxjF3sLleH5/7fxT3xN
+8ryWWem4LJS0I4b+azGSEvxtavRSgogNxI0ov24Qu3guv2jRSlmFGH9nw3mxNBIz
+4fSyPeAa+VG8yJ9Ea0kj2BDEQ5hkknrvk2Khl0e3BRKjhaEDzKlmhPmJDyPVAsPH
+MH7EregThcPhYooXXFV1Y620Ttq5ft96Vj5DZUfCagPvTBt5CQJqb9xChT06d1sb
+4N1z5WNJAgMBAAECggEAAPlFEAZSMkSpxECAChOzk44uJdQaFkDnBhSvYOAh1Q4u
+n1SIgPr+2dYl/z5RAx/bC6UqHzmbWhD+/TxzjLm40YA3YyQL8XWNXmHEw8QHWdv3
+VcJnwtmWtL5d62QQhXqRtUniAAbi4LIY9k4vK3jRmxeCnHTtoxdMMOcspNEeC+2w
+Tdmeq+/VURQJJSTpnb0tirB5Rpcv4qmaNdyFLyRpk7PLM+sqWoNNsoR02tSk5vZr
+QhKi/RLf7i/7X8E5SlLmYl14yQW7GyeWqpr7Ab+QQ/WdAI5nEvHUgU+dN1fdba9G
+iqXyqV2pFtLEQ3d2+BqO8fnocuJs/sXiTv+M4Q6zgQKBgQDkuRm0B1JGSUOjnSOj
+GxMU2WUvcZgH6/HKC870jND6hVTfgvOB+5NyGpuRRElOtVmEfa2BkSmmOSxnPmvs
+FsLRYP/kQCLBUZzCTnkkLJwxFi9vkz7MZOl/lGKL/jXzNastTxcZdp0/VRZP1H4d
+5GRmBNBO09CuTH+iN5/ZIKGXgQKBgQDjYCOL9/YQ7jJ6eIBcWzW3E8yayKn8o/UQ
+3thjVlimVNs6VG0WNkbPIl/zf/qBbCJE/lxn+QHzWDnNvGzl4wCBhXv++uCquxCU
+ni/GY9qxkl7Q2zSlraMPoFJM1lLz5xYIac22oE6j5PA1FgjSbwfK7GpV4Ob69C2l
+odkBYpTvyQKBgCdTO/wcFiVHi32iEvKEQS+ggSk7GqyiAJyAk0CwxW2NZx5W4Y9D
+tgI0WPMNDp2dyJpjEWXpk4Ok6OGHdf7Nmwls6BJShKdAZPdzjpiNov09l0JTysRR
+xWPOG3N+bcA3RgswQgR6xGaTNpbbLiPtlOWFhltHR+Xv+THm5nDqj14BAoGBAMka
+5jXNSgFtfI4f+IA3WAomY+hfJSJELeQPBdrOqzfqg8BSne1wci6QW8d14S4JY0Ic
+q8R2VEhUN0QFrVei8Haehq5eXMoFDEQ2qVDSTsKSEHSv/R+wtTGD/mbhhZseP7mP
+QxiNLyD8w4xggcsF0yGi+uYcNo+t2pXN0a7M76gpAoGBAIEEIhUgbAY4MkcFv8OX
+2R1+Vh1oHOC+7f2nDwOukXTsJbIka2YhFjSm1TvDZQT45Cx5Mr7f81LIt4y0Mq/b
+/c7/8gRfr0T3Hjl+W7onB6R0ZA6aQUZiQuhOZluMlVsbsVpT42i5v9jt8QY/sbSo
+HfSKFEPi6QDJ3ZSanF7ZoS6f
+-----END PRIVATE KEY-----
+</key>
+
+<ca>
+-----BEGIN CERTIFICATE-----
+MIIDPzCCAiegAwIBAgIUKRH7CPPunV0AMmNkGDW+pPn+/wQwDQYJKoZIhvcNAQEL
+BQAwEjEQMA4GA1UEAwwHcGVuZ3VpbjAeFw0yNDA2MjMyMTI5NTBaFw0zNDA2MjEy
+MTI5NTBaMBIxEDAOBgNVBAMMB3Blbmd1aW4wggEiMA0GCSqGSIb3DQEBAQUAA4IB
+DwAwggEKAoIBAQCiqlU8R02prw3uxEEzoBF8IwiHKwjDeaw/XreczyHcWrf0XxBO
+1aJjkXad2IazBozwH5b1/99mKz+p9s4HWBubaY4jw2S7kAFRGcJumLDTYzNZoUCg
+qOuz4fL1BS2XVrL9TygAEZqRX1ewiUNKHwCRaUDfXZk4hQXTMsoExdn2SvrJaeel
+4w0qeS0RvU011oXvELsWkzaLMC6inUUcMFwT5g1vPDsb3ACKSEZCmGge3RszjgWO
+IRkTaAeJ9krrp5ufAmoz8u047O3k0ZFM3wOdsGuLrMybExA4xIhi7ZRsdK+uHMBU
+wiTnLOmmWwImzFD73No12KFK2QYXeTwtSbpzAgMBAAGjgYwwgYkwDAYDVR0TBAUw
+AwEB/zAdBgNVHQ4EFgQU5lVXHwA8q/hfxPJB5lZB7nJZ/PswTQYDVR0jBEYwRIAU
+5lVXHwA8q/hfxPJB5lZB7nJZ/PuhFqQUMBIxEDAOBgNVBAMMB3Blbmd1aW6CFCkR
++wjz7p1dADJjZBg1vqT5/v8EMAsGA1UdDwQEAwIBBjANBgkqhkiG9w0BAQsFAAOC
+AQEAiAgwB92S4TC+uGSdjwc0Hce5vP8kQ15gu7BzdoQ1jhCy3GsnVS1lr1TglGd2
+IFVegd0AZOIokhqRxZI7v12YN+YTyRsKsIRTq/AG0W5++z5g2Z2NsNOVqegwYqNx
+XTMktHLdke3PJhW5LvNDNg7GuGRtSOGSleS1963FiPW8Sblxep4mjDqbBnnNM0H2
+7ZKOIO9k8uaIdJrmSFbRkkfgkmrM/7T8/J+THyLglaEYrIE9cM9aSPgzvxqfmYAi
+NkSXKGMXBTSuu+yNhvLlf+3y/bsqMY5SY78IZzVc3QDVqp80FfTOXZiNTX7Nalyi
+4aCQBclWXURrlt2ziv3/KzNUXA==
+-----END CERTIFICATE-----
+</ca>
+
