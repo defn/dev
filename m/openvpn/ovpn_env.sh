@@ -18,7 +18,7 @@ declare -x OVPN_MTU=
 declare -x OVPN_NAT=0
 declare -x OVPN_PORT=1194
 declare -x OVPN_PROTO=udp
-declare -x OVPN_PUSH=([0]="route 100.101.80.89 255.255.255.255" [1]="route 100.101.80.89 255.255.255.255" [2]="route 100.79.169.78 255.255.255.255")
+declare -x OVPN_PUSH=([0]="route 100.79.169.78 255.255.255.255")
 declare -x OVPN_ROUTES=([0]="192.168.254.0/24")
 declare -x OVPN_SERVER=192.168.255.0/24
 declare -x OVPN_SERVER_URL=udp://penguin.linux.test
