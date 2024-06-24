@@ -27,7 +27,7 @@ function main {
 		ovpn_getclient client separated > ./clients/client/client.ovpn
 		;;
 	server)
-		sudo -E ./ovpn_run
+		exec sudo -E ./ovpn_run
 		;;
 	*)
 		exec "$@"
