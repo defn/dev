@@ -20,7 +20,7 @@ cb:
 
 rpi-install:
 	sudo apt update
-	sudo apt install -y git direnv make rsync pipx
+	sudo apt install -y git direnv make rsync bc pipx
 
 chrome-coder:
 	$(MAKE) -j 2 chrome-dev-socat chrome-dev-coder
@@ -30,7 +30,7 @@ vpn:
 
 vpn-install:
 	sudo apt update
-	sudo apt install -y git direnv make rsync pipx
+	sudo apt install -y git direnv make rsync bc pipx
 	sudo apt install -y socat pcscd wireguard-tools qemu-system libvirt-clients libvirt-daemon-system openvpn easy-rsa expect
 
 no-gpg:
