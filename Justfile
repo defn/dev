@@ -44,4 +44,4 @@ home *args:
 all *args:
 	just upgrade {{ args }}:cache
 	just home cache
-	just home "{{ args }}:!cache"
+	just home "{{ args }}:!cache:!rpi"
