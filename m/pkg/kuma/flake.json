@@ -1,6 +1,6 @@
 {
   "slug": "pkg-kuma",
   "ghrepo": "kumahq/kuma",
-  "vendor": "2.7.4",
-  "revision": "1"
+  "vendor": "2.8.0",
+  "revision": "0"
 }
