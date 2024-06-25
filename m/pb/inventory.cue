@@ -43,7 +43,8 @@ inventory: {
 	]
 
 	chrome: hosts: [
-		"penguin",
+		"pengu",
+		"kinko",
 	]
 
 	rpi: children: [
