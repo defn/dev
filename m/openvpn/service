@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 
 function main {
-	set -x
-
-	#sudo sysctl net.ipv6.conf.default.forwarding=1
-	#sudo sysctl net.ipv6.conf.all.forwarding=1
-
 	export PATH=${PATH}:$(pwd)
 	export OPENVPN=$(pwd)
 	export EASYRSA_PKI=$(pwd)/easy-rsa
@@ -29,6 +24,20 @@ function main {
 	server)
 		exec sudo -E ./ovpn_run
 		;;
+  start)
+    sudo sysctl net.ipv6.conf.default.forwarding=1
+    sudo sysctl net.ipv6.conf.all.forwarding=1
+    sudo sysctl net.ipv4.ip_forward=1
+    sudo iptables -A FORWARD -j ACCEPT
+    sudo iptables -t nat -A POSTROUTING -o tailscale0 -j MASQUERADE
+    ;;
+  stop)
+    sudo sysctl net.ipv6.conf.default.forwarding=0
+    sudo sysctl net.ipv6.conf.all.forwarding=0
+    sudo sysctl net.ipv4.ip_forward=0
+    sudo iptables -A FORWARD -j DROP || true
+    sudo iptables -t nat -D POSTROUTING -o tailscale0 -j MASQUERADE || true
+    ;;
 	*)
 		exec "$@"
 		;;
