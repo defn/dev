@@ -2,7 +2,7 @@ package pb
 
 playbook: ubuntu: [{
 	name:  "Ubuntu playbook"
-	hosts: "zimaboard:heavy:aws:hetzner:mac"
+	hosts: "all:!rpi"
 	roles: [
 		"base_packages",
 		"base_bazel",
@@ -13,7 +13,7 @@ playbook: ubuntu: [{
 
 playbook: rpi: [{
 	name:  "rpi playbook"
-	hosts: "rpi3:rpi4:rpi5"
+	hosts: "rpi"
 	roles: [
 		"base_packages",
 		"rpi_packages",

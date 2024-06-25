@@ -1,5 +1,5 @@
 - name: Ubuntu playbook
-  hosts: zimaboard:heavy:aws:hetzner:mac
+  hosts: all:!rpi
   roles:
     - base_packages
     - base_bazel
