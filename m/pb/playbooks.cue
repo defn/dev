@@ -149,8 +149,9 @@ role: network_ethernet: tasks: [{
 }]
 
 role: network_dummy: tasks: [{
-	name:   "Configure network dummy netdev"
-	become: true
+	name:          "Configure network dummy netdev"
+	become:        true
+	ignore_errors: true
 	template: {
 		src:   "{{ role_path }}/templates/etc/systemd/network/dummy1.netdev.j2"
 		dest:  "/etc/systemd/network/dummy1.netdev"
@@ -159,8 +160,9 @@ role: network_dummy: tasks: [{
 		mode:  "0644"
 	}
 }, {
-	name:   "Configure network dummy network"
-	become: true
+	name:          "Configure network dummy network"
+	become:        true
+	ignore_errors: true
 	template: {
 		src:   "{{ role_path }}/templates/etc/systemd/network/dummy1.network.j2"
 		dest:  "/etc/systemd/network/dummy1.network"
