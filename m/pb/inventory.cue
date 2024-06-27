@@ -40,6 +40,7 @@ inventory: {
 		"macmini",
 		"mbair",
 		"mba",
+		"mbb",
 	]
 
 	chrome: hosts: [
