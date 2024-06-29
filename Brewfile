@@ -16,7 +16,6 @@ brew "flock"
 tap "homebrew/cask-fonts"
 cask "font-fira-code"
 
-cask "rancher"
 cask "divvy"
 cask "google-chrome"
 cask "balenaetcher"

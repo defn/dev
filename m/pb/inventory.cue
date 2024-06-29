@@ -40,6 +40,8 @@ inventory: {
 		"macmini",
 		"mbair",
 		"mba",
+		// mbb is too noisy: fans stay on, load is always 2
+		//"mbb",
 	]
 
 	chrome: hosts: [
