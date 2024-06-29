@@ -5,6 +5,9 @@ NIX_VERSION := 2.21.1
 
 flakes ?= cue gum vhs glow dyff az home secrets acme tailscale cloudflared cloudflareddns wireproxy vpn openfga utils just buildifier bazelisk ibazel oci attic development terraform terraformdocs packer step awscli chamber cloud kubectl minikube minikubekvm2 k3sup k9s helm kustomize stern argoworkflows argocd kn dapr vcluster kubevirt linkerd kuma cilium hubble tfo mirrord crossplane spire coder codeserver tilt gh ghapps earthly oras regctl regbot regsync buildkite buildevents honeyvent honeymarker honeytail hugo vault godev jsdev pydev shell
 
+name ?= local
+domain ?= defn.run
+
 latest:
 	git pull
 	$(MAKE) update
@@ -52,20 +55,20 @@ chrome-dev-socat:
 
 chrome-dev-coder:
 #	env PORT=8080 code-server --auth none --bind-addr 0.0.0.0
-	while true; do (cd m && $(MAKE) teacher site=https://coder.$(name).defn.run domain=$(name).defn.run name=$(name)); done
+	while true; do (cd m && $(MAKE) teacher site=https://coder.$(name).$(domain) domain=$(name).$(domain) name=$(name)); done
 
 chrome-dev-cert-issue:
-	this-acme-issue '*.$(name).defn.run'
+	this-acme-issue '*.$(name).$(domain)'
 
 chrome-dev-cert-renew:
-	this-acme-renew '*.$(name).defn.run'
+	this-acme-renew '*.$(name).$(domain)'
 
 chrome-dev-dns:
 	touch ~/.config/cloudflare-ddns.toml 
-	cloudflare-ddns --domain defn.run --record '*.$(name).defn.run' --ip "$$(ip addr show eth0 | grep 'inet ' | awk '{print $$2}' | cut -d/ -f1)" --token "$$(pass cloudflare_defn.run)" --config ~/.config/cloudflare-ddns.toml 
+	cloudflare-ddns --domain $(domain) --record '*.$(name).$(domain)' --ip "$$(ip addr show eth0 | grep 'inet ' | awk '{print $$2}' | cut -d/ -f1)" --token "$$(pass cloudflare_$(domain))" --config ~/.config/cloudflare-ddns.toml 
 
 chrome-minikube:
-	minikube start --driver=kvm2 --auto-update-drivers=false --insecure-registry=cache.defn.run:4999
+	minikube start --driver=kvm2 --auto-update-drivers=false --insecure-registry=cache.$(domain):4999
 
 build:
 	bazel --version
@@ -301,7 +304,7 @@ coder-ssh-envbuilder:
 		-v $(shell ls -d ~ | cut -d/ -f1-2):/home \
 		-e LAYER_CACHE_DIR=/layer-cache \
 		-e BASE_IMAGE_CACHE_DIR=/image-cache \
-		-e GIT_URL=https://defn.run/defn/dev \
+		-e GIT_URL=https://$(domain)/defn/dev \
 		-e DOCKERFILE_PATH=$(shell echo "$(CODER_HOMEDIR)" | sed 's#/home/ubuntu/##')/Dockerfile \
 		-e CODER_NAME=$(CODER_NAME) \
 		-e CODER_HOMEDIR=$(CODER_HOMEDIR) \

@@ -6,6 +6,7 @@ default:
 timeout ?= 2592000
 
 env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
+
 domain ?= defn.run
 
 proxy ?= proxy3
@@ -74,9 +75,9 @@ dev_inner:
 		--enable-terraform-debug-mode \
 		--oauth2-github-allowed-orgs $$(pass coder_oauth2-github-allowed-orgs) --oauth2-github-allowed-teams $$(pass coder_oauth2-github-allowed-teams) \
 		--oauth2-github-client-id $$(pass coder_oauth2-github-client-id-$(name)) --oauth2-github-client-secret $$(pass coder_oauth2-github-client-secret-$(name)) \
-		--access-url $(site) --wildcard-access-url "*.$(name).defn.run" \
+		--access-url $(site) --wildcard-access-url "*.$(name).$(domain)" \
 		--tls-enable \
-		--tls-cert-file ~/.acme.sh/\*.$(name).defn.run_ecc/fullchain.cer --tls-key-file ~/.acme.sh/\*.$(name).defn.run_ecc/\*.$(name).defn.run.key
+		--tls-cert-file ~/.acme.sh/\*.$(name).$(domain)_ecc/fullchain.cer --tls-key-file ~/.acme.sh/\*.$(name).$(domain)_ecc/\*.$(name).$(domain).key
 
 cdktf:
 	npm -q --no-update-notifier --no-audit install
