@@ -313,7 +313,7 @@ coder-ssh-envbuilder:
 		-e TS_AUTH_KEY=$(TS_AUTH_KEY) \
 		-e INIT_COMMAND="/bin/bash" \
 		-e INIT_SCRIPT="source ~/.bash_profile && screen -dmS tailscale sudo $$(which tailscaled) && while true; do if sudo $$(which tailscale) up --auth-key $${TS_AUTH_KEY} --hostname $${CODER_NAME} --reset --ssh --advertise-tags tag:junkernetes --accept-routes; then break; fi; sleep 1; done && cd ~/m && source ~/.bash_profile && exec tini ~/bin/j coder::coder-agent" \
-		ghcr.io/coder/envbuilder
+		ghcr.io/coder/envbuilder:0.2.9
 
 coder-ssh-devcontainer:
 	source ~/.bash_profile && cd m && npm install
