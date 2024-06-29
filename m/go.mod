@@ -7,18 +7,18 @@ go 1.22.3
 replace github.com/protocolbuffers/txtpbfmt => github.com/protocolbuffers/txtpbfmt v0.0.0-20230328191034-3462fbc510c0
 
 require (
-	cuelang.org/go v0.9.1
+	cuelang.org/go v0.9.2
 	github.com/aws/constructs-go/constructs/v10 v10.3.0
-	github.com/aws/jsii-runtime-go v1.100.0
-	github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.23.0
+	github.com/aws/jsii-runtime-go v1.101.0
+	github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.24.0
 	github.com/cdktf/cdktf-provider-null-go/null/v10 v10.0.0
 	github.com/charmbracelet/bubbles v0.18.0
-	github.com/charmbracelet/bubbletea v0.26.4
+	github.com/charmbracelet/bubbletea v0.26.6
 	github.com/charmbracelet/lipgloss v0.11.0
 	github.com/gin-gonic/gin v1.10.0
 	github.com/hashicorp/terraform-cdk-go/cdktf v0.20.7
 	github.com/noisysockets/noisysockets v0.26.1
-	github.com/spf13/cobra v1.8.0
+	github.com/spf13/cobra v1.8.1
 	github.com/spf13/viper v1.19.0
 	github.com/urfave/cli/v2 v2.27.2
 	golang.org/x/sys v0.21.0
@@ -31,7 +31,7 @@ require (
 	github.com/atotto/clipboard v0.1.4 // indirect
 	github.com/avast/retry-go/v4 v4.6.0 // indirect
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
-	github.com/bytedance/sonic v1.11.8 // indirect
+	github.com/bytedance/sonic v1.11.9 // indirect
 	github.com/bytedance/sonic/loader v0.1.1 // indirect
 	github.com/charmbracelet/x/ansi v0.1.2 // indirect
 	github.com/charmbracelet/x/input v0.1.2 // indirect
@@ -98,7 +98,7 @@ require (
 	github.com/ugorji/go/codec v1.2.12 // indirect
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
 	github.com/xrash/smetrics v0.0.0-20240521201337-686a1a2994c1 // indirect
-	github.com/yuin/goldmark v1.7.2 // indirect
+	github.com/yuin/goldmark v1.7.4 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/arch v0.8.0 // indirect
 	golang.org/x/crypto v0.24.0 // indirect
