@@ -72,6 +72,9 @@ teacher:
 	env AWS_DEFAULT_REGION=us-west-1 j aws::server defn-org $(MAKE) dev_inner name=$(name)
 
 dev_inner:
+	#sudo iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 3443 || true
+	sudo iptables -t nat -A PREROUTING -p tcp --dport 443 -j DNAT --to-destination 127.0.0.1:3443 || true
+	sudo iptables -t nat -A POSTROUTING -p tcp -d 127.0.0.1 --dport 3443 -j SNAT --to-source "$(tailscale ip -4 2>/dev/null)" || true
 	coder server --oauth2-github-allow-signups \
 		--enable-terraform-debug-mode \
 		--oauth2-github-allowed-orgs $$(pass coder_oauth2-github-allowed-orgs) --oauth2-github-allowed-teams $$(pass coder_oauth2-github-allowed-teams) \
