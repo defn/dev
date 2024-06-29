@@ -295,6 +295,7 @@ coder-ssh-envbuilder:
 		-v envbuilder-image:/image-cache:ro \
 		-v envbuilder-layer:/layer-cache \
 		-v /nix:/nix \
+		-v /dev/net/tun:/dev/net/tun \
 		-v $(shell if test $$(uname -s) == Darwin; then echo $$HOME/.docker/run/docker.sock; else echo /var/run/docker.sock; fi):/var/run/docker.sock \
 		-v $(shell ls -d ~ | cut -d/ -f1-2):/workspaces \
 		-v $(shell ls -d ~ | cut -d/ -f1-2):/home \
