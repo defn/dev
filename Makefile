@@ -54,8 +54,7 @@ chrome-dev-socat:
 	while true; do sudo pkill -9 socat || true; sudo socat TCP-LISTEN:443,fork TCP:localhost:3443; done
 
 chrome-dev-coder:
-#	env PORT=8080 code-server --auth none --bind-addr 0.0.0.0
-	while true; do (cd m && $(MAKE) teacher site=https://coder.$(name).$(domain) domain=$(name).$(domain) name=$(name)); done
+	while true; do (cd m && $(MAKE) teacher domain=$(domain) name=$(name)); done
 
 chrome-dev-cert-issue:
 	this-acme-issue '*.$(name).$(domain)'
