@@ -7,6 +7,7 @@ timeout ?= 2592000
 
 env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
 
+name ?= local
 domain ?= defn.run
 
 proxy ?= proxy3
