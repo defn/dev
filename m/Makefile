@@ -9,7 +9,7 @@ env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
 
 name ?= local
 domain ?= defn.run
-listen ?= 0.0.0.0:3443
+listen ?= 127.0.0.1:3443
 
 proxy ?= proxy3
 
@@ -71,10 +71,12 @@ teacher:
 	pkill postgres || true
 	env AWS_DEFAULT_REGION=us-west-1 j aws::server defn-org $(MAKE) dev_inner name=$(name)
 
+teacher_setup:
+	#sudo iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 3443
+	sudo iptables -t nat -A PREROUTING -p tcp --dport 443 -j DNAT --to-destination 127.0.0.1:3443
+	sudo iptables -t nat -A POSTROUTING -p tcp -d 127.0.0.1 --dport 3443 -j SNAT --to-source "$(shell tailscale ip -4 2>/dev/null)"
+
 dev_inner:
-	#sudo iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 3443 || true
-	sudo iptables -t nat -A PREROUTING -p tcp --dport 443 -j DNAT --to-destination 127.0.0.1:3443 || true
-	sudo iptables -t nat -A POSTROUTING -p tcp -d 127.0.0.1 --dport 3443 -j SNAT --to-source "$(tailscale ip -4 2>/dev/null)" || true
 	coder server --oauth2-github-allow-signups \
 		--enable-terraform-debug-mode \
 		--oauth2-github-allowed-orgs $$(pass coder_oauth2-github-allowed-orgs) --oauth2-github-allowed-teams $$(pass coder_oauth2-github-allowed-teams) \
