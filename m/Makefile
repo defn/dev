@@ -9,6 +9,7 @@ env ?= $(DFD_PREFIX)-$(DFD_OWNER)-$(DFD_NAME)
 
 name ?= local
 domain ?= defn.run
+listen ?= 0.0.0.0:3443
 
 proxy ?= proxy3
 
@@ -70,15 +71,15 @@ teacher:
 	pkill postgres || true
 	env AWS_DEFAULT_REGION=us-west-1 j aws::server defn-org $(MAKE) dev_inner name=$(name)
 
-site ?= http://$(shell tailscale cert 2>&1 | grep 'For domain'  | cut -d'"' -f2)
 dev_inner:
 	coder server --oauth2-github-allow-signups \
 		--enable-terraform-debug-mode \
 		--oauth2-github-allowed-orgs $$(pass coder_oauth2-github-allowed-orgs) --oauth2-github-allowed-teams $$(pass coder_oauth2-github-allowed-teams) \
 		--oauth2-github-client-id $$(pass coder_oauth2-github-client-id-$(name)) --oauth2-github-client-secret $$(pass coder_oauth2-github-client-secret-$(name)) \
-		--access-url $(site) --wildcard-access-url "*.$(name).$(domain)" \
+		--access-url "https://coder.$(name).$(domain)" --wildcard-access-url "*.$(name).$(domain)" \
 		--tls-enable \
-		--tls-cert-file ~/.acme.sh/\*.$(name).$(domain)_ecc/fullchain.cer --tls-key-file ~/.acme.sh/\*.$(name).$(domain)_ecc/\*.$(name).$(domain).key
+		--tls-cert-file ~/.acme.sh/\*.$(name).$(domain)_ecc/fullchain.cer --tls-key-file ~/.acme.sh/\*.$(name).$(domain)_ecc/\*.$(name).$(domain).key \
+		--tls-address $(listen)
 
 cdktf:
 	npm -q --no-update-notifier --no-audit install
