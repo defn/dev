@@ -69,6 +69,7 @@ class-init:
 teacher: 
 	$(MAKE) hello
 	pkill postgres || true
+	$(MAKE) teacher_setup
 	env AWS_DEFAULT_REGION=us-west-1 j aws::server defn-org $(MAKE) dev_inner name=$(name)
 
 teacher_setup:
