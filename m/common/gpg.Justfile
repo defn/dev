@@ -31,10 +31,10 @@ agent *args:
 	if ! pgrep dirmngr >/dev/null; then dirmngr --daemon >/dev/null || true; fi
 	set +u
 	if [[ -n ${CODER-} ]]; then
-		setsid coder gitssh -- home -o LocalForward="$HOME/.gnupg/S.gpg-agent /Users/defn/.gnupg/S.gpg-agent.extra" sleep infinity 1>/dev/null 2>&1 &
+		setsid coder gitssh -- home -o LocalForward="$HOME/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra" sleep infinity 1>/dev/null 2>&1 &
 		bg_pid=$!
 	else
-		setsid ssh home -o LocalForward="$HOME/.gnupg/S.gpg-agent /Users/defn/.gnupg/S.gpg-agent.extra" sleep infinity 1>/dev/null 2>&1 &
+		setsid ssh home -o LocalForward="$HOME/.gnupg/S.gpg-agent /home/ubuntu/.gnupg/S.gpg-agent.extra" sleep infinity 1>/dev/null 2>&1 &
 		bg_pid=$!
 	fi
 	trap 'kill -SIGTERM -${bg_pid}' EXIT
