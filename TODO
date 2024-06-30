@@ -1,2 +1,17 @@
-make chrome-dev-coder name=sp
+make chrome-dev-coder
 make chrome-dev-socat
+
+echo something | gpg --batch --yes --passphrase-fd 0 --pinentry-mode loopback -d ~/.password-store/hello.gpg 2>/dev/null
+
+root@thinkpad:/home/ubuntu# cat /etc/polkit-1/rules.d/99-pcscd.rules
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.debian.pcsc-lite.access_card") {
+        return polkit.Result.YES;
+    }
+});
+
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.debian.pcsc-lite.access_pcsc") {
+        return polkit.Result.YES;
+    }
+});
