@@ -151,6 +151,8 @@ password-store:
 
 gpg:
 	$(MARK) configure gpg
+	dirmngr --shutdown || true
+	dirmngr --daemon
 	t make_perms $(MAKE) perms
 	if [[ "$(shell uname -s)" == "Darwin" ]]; then t make_macos $(MAKE) macos; fi
 
