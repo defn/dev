@@ -5,6 +5,9 @@ NIX_VERSION := 2.21.1
 
 flakes ?= cue gum vhs glow dyff az home secrets acme tailscale cloudflared cloudflareddns wireproxy vpn openfga utils just buildifier bazelisk ibazel oci attic development terraform terraformdocs packer step awscli chamber cloud kubectl minikube minikubekvm2 k3sup k9s helm kustomize stern argoworkflows argocd kn dapr vcluster kubevirt linkerd kuma cilium hubble tfo mirrord crossplane spire coder codeserver tilt gh ghapps earthly oras regctl regbot regsync buildkite buildevents honeyvent honeymarker honeytail hugo vault godev jsdev pydev shell
 
+name ?= local
+domain ?= defn.run
+
 latest:
 	git pull
 	$(MAKE) update
@@ -51,21 +54,20 @@ chrome-dev-socat:
 	while true; do sudo pkill -9 socat || true; sudo socat TCP-LISTEN:443,fork TCP:localhost:3443; done
 
 chrome-dev-coder:
-#	env PORT=8080 code-server --auth none --bind-addr 0.0.0.0
-	while true; do (cd m && $(MAKE) teacher site=https://coder.$(name).defn.run domain=$(name).defn.run name=$(name)); done
+	while true; do (cd m && $(MAKE) teacher domain=$(domain) name=$(name)); done
 
 chrome-dev-cert-issue:
-	this-acme-issue '*.$(name).defn.run'
+	this-acme-issue '*.$(name).$(domain)'
 
 chrome-dev-cert-renew:
-	this-acme-renew '*.$(name).defn.run'
+	this-acme-renew '*.$(name).$(domain)'
 
 chrome-dev-dns:
 	touch ~/.config/cloudflare-ddns.toml 
-	cloudflare-ddns --domain defn.run --record '*.$(name).defn.run' --ip "$$(ip addr show eth0 | grep 'inet ' | awk '{print $$2}' | cut -d/ -f1)" --token "$$(pass cloudflare_defn.run)" --config ~/.config/cloudflare-ddns.toml 
+	cloudflare-ddns --domain $(domain) --record '*.$(name).$(domain)' --ip "$$(ip addr show eth0 | grep 'inet ' | awk '{print $$2}' | cut -d/ -f1)" --token "$$(pass cloudflare_$(domain))" --config ~/.config/cloudflare-ddns.toml 
 
 chrome-minikube:
-	minikube start --driver=kvm2 --auto-update-drivers=false --insecure-registry=cache.defn.run:4999
+	minikube start --driver=kvm2 --auto-update-drivers=false --insecure-registry=cache.$(domain):4999
 
 build:
 	bazel --version
@@ -149,6 +151,8 @@ password-store:
 
 gpg:
 	$(MARK) configure gpg
+	dirmngr --shutdown || true
+	dirmngr --daemon
 	t make_perms $(MAKE) perms
 	if [[ "$(shell uname -s)" == "Darwin" ]]; then t make_macos $(MAKE) macos; fi
 
@@ -295,22 +299,24 @@ coder-ssh-envbuilder:
 		-v envbuilder-image:/image-cache:ro \
 		-v envbuilder-layer:/layer-cache \
 		-v /nix:/nix \
+		-v /dev/net/tun:/dev/net/tun \
 		-v $(shell if test $$(uname -s) == Darwin; then echo $$HOME/.docker/run/docker.sock; else echo /var/run/docker.sock; fi):/var/run/docker.sock \
 		-v $(shell ls -d ~ | cut -d/ -f1-2):/workspaces \
 		-v $(shell ls -d ~ | cut -d/ -f1-2):/home \
 		-e LAYER_CACHE_DIR=/layer-cache \
 		-e BASE_IMAGE_CACHE_DIR=/image-cache \
-		-e GIT_URL=https://defn.run/defn/dev \
+		-e GIT_URL=https://$(domain)/defn/dev \
 		-e DOCKERFILE_PATH=$(shell echo "$(CODER_HOMEDIR)" | sed 's#/home/ubuntu/##')/Dockerfile \
 		-e CODER_NAME=$(CODER_NAME) \
 		-e CODER_HOMEDIR=$(CODER_HOMEDIR) \
+		-e ALT_CODER_AGENT_URL=$(ALT_CODER_AGENT_URL) \
 		-e CODER_AGENT_URL=$(CODER_AGENT_URL) \
 		-e CODER_AGENT_TOKEN=$(CODER_AGENT_TOKEN) \
 		-e CODER_INIT_SCRIPT_BASE64=$(CODER_INIT_SCRIPT_BASE64) \
 		-e TS_AUTH_KEY=$(TS_AUTH_KEY) \
 		-e INIT_COMMAND="/bin/bash" \
 		-e INIT_SCRIPT="source ~/.bash_profile && screen -dmS tailscale sudo $$(which tailscaled) && while true; do if sudo $$(which tailscale) up --auth-key $${TS_AUTH_KEY} --hostname $${CODER_NAME} --reset --ssh --advertise-tags tag:junkernetes --accept-routes; then break; fi; sleep 1; done && cd ~/m && source ~/.bash_profile && exec tini ~/bin/j coder::coder-agent" \
-		ghcr.io/coder/envbuilder
+		ghcr.io/coder/envbuilder:0.2.9
 
 coder-ssh-devcontainer:
 	source ~/.bash_profile && cd m && npm install

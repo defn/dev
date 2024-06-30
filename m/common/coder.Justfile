@@ -173,7 +173,7 @@ coder-agent *host:
 	source ~/.bash_profile
 	cd ${CODER_HOMEDIR}
 	echo ${CODER_INIT_SCRIPT_BASE64} | base64 -d \
-		| sed 's#agent$#agent '"${CODER_NAME}"'#; s#^while.*#while ! test -x '"${BINARY_NAME}"'; do#; s#^BINARY_NAME.*#BINARY_NAME='"$HOME"'/bin/nix/coder#; s#exec ./#exec #; s#exit 1#echo exit 1#; s#output=$(./#output=$(#' \
+		| sed 's#agent$#agent '"${CODER_NAME}"'#; s#^while.*#while ! test -x ${BINARY_NAME}; do#; s#^BINARY_NAME.*#BINARY_NAME='"$HOME"'/bin/nix/coder#; s#exec ./#exec #; s#^exec #exec env CODER_AGENT_URL=${ALT_CODER_AGENT_URL:-${CODER_AGENT_URL}} #; s#exit 1#echo exit 1#; s#output=$(./#output=$(#' \
 		> /tmp/coder-init-script-${CODER_NAME}-$$
 	exec bash -x /tmp/coder-init-script-${CODER_NAME}-$$
 
