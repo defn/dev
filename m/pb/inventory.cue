@@ -65,7 +65,7 @@ inventory: {
 		//"rpi4a",
 		//"rpi4b",
 		//"rpi4c",
-		//"rpi4d",
+		"rpi4d",
 	]
 
 	rpi5: hosts: [
