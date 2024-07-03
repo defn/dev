@@ -1,6 +1,6 @@
 {
   "slug": "pkg-ibazel",
   "ghrepo": "bazelbuild/bazel-watcher",
-  "vendor": "0.25.2",
-  "revision": "2"
+  "vendor": "0.25.3",
+  "revision": "0"
 }
