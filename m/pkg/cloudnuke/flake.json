@@ -1,6 +1,6 @@
 {
   "slug": "pkg-cloudnuke",
   "ghrepo": "gruntwork-io/cloud-nuke",
-  "vendor": "0.35.0",
-  "revision": "2"
+  "vendor": "0.37.1",
+  "revision": "0"
 }
