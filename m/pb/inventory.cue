@@ -40,7 +40,7 @@ inventory: {
 	mac: hosts: [
 		"macmini",
 		"mbair",
-		"mba",
+		//"mba",
 		// mbb is too noisy: fans stay on, load is always 2
 		//"mbb",
 	]
@@ -84,6 +84,7 @@ inventory: {
 
 	heavy: hosts: [
 		"thinkpad",
+		"mbpro",
 		"gw",
 	]
 }
