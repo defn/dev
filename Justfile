@@ -41,7 +41,7 @@ cache *args:
 home *args:
 	just play home {{ args }}
 
-all *args:
+all *args="all":
 	just cache cache
 	just home cache
 	just home "{{ args }}:!cache:!rpi3"
