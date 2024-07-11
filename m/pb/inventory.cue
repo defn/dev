@@ -57,7 +57,7 @@ inventory: {
 	rpi: children: [
 		"rpi3",
 		"rpi4",
-		//"rpi5",
+		"rpi5",
 	]
 
 	rpi3: hosts: [

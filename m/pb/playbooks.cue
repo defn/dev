@@ -2,7 +2,7 @@ package pb
 
 playbook: ubuntu: [{
 	name:  "Ubuntu playbook"
-	hosts: "all:!rpi"
+	hosts: "all:!fedora"
 	roles: [
 		"base_packages",
 		"base_bazel",
