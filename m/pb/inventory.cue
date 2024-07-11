@@ -14,7 +14,7 @@ inventory: {
 
 	cache: hosts: [
 		"district",
-		"fedora",
+		"rpi4d",
 	]
 
 	cache2: hosts: [
