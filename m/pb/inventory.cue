@@ -14,6 +14,10 @@ inventory: {
 
 	cache: hosts: [
 		"district",
+		"fedora",
+	]
+
+	cache2: hosts: [
 		"rpi4d",
 	]
 
@@ -52,7 +56,7 @@ inventory: {
 
 	rpi: children: [
 		"rpi3",
-		//"rpi4",
+		"rpi4",
 		//"rpi5",
 	]
 
