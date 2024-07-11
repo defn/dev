@@ -87,5 +87,6 @@ inventory: {
 		"mbpro",
 		"fedora",
 		"gw",
+		"pc",
 	]
 }
