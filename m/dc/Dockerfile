@@ -8,7 +8,7 @@ WORKDIR /home/ubuntu
 USER ubuntu
 
 COPY install.sh /tmp/
-COPY .env .
+COPY .env /tmp/
 
 ENTRYPOINT ["/bin/tini"]
 

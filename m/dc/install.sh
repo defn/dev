@@ -1,10 +1,15 @@
 #!/use/bin/env bash
 
 function main {
+    cd
+
     git clone https://github.com/defn/dev .
     mv dev/.git .
     rm -rf dev
     git reset --hard
+
+    mv /tmp/.env .
+    direnv allow
 
     sudo chown ubuntu:ubuntu /nix
     make nix

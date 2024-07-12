@@ -226,3 +226,4 @@ bin/devcontainer
 *.lock
 !flake.lock
 /bazel*
+.env*
