@@ -89,7 +89,7 @@ inventory: {
 	heavy: hosts: [
 		"thinkpad",
 		"mbpro",
-		"fedora",
+		//"fedora",
 		"gw",
 		"pc",
 	]
