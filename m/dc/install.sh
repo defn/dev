@@ -1,5 +1,7 @@
 #!/use/bin/env bash
 
+set -exfu
+
 function main {
     cd
 
