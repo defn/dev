@@ -3,13 +3,16 @@
 function main {
     cd
 
+    # rm -rf dev .git
     git clone https://github.com/defn/dev .
     mv dev/.git .
     rm -rf dev
     git reset --hard
 
-    mv /tmp/.env .
+    cp /tmp/.env .
     direnv allow
+
+    source .bash_profile
 
     sudo chown ubuntu:ubuntu /nix
     make nix
