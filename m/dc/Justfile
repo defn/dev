@@ -1,0 +1,11 @@
+# get a shell in container
+shell:
+    docker compose exec home bash
+
+# run container
+up:
+    docker compose up --remove-orphans
+
+# build containe
+build:
+    docker compose build
