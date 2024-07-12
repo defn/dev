@@ -11,9 +11,6 @@ function main {
     rm -rf dev
     git reset --hard
 
-    cp /tmp/.env .
-    direnv allow
-
     source .bash_profile
 
     sudo chown ubuntu:ubuntu /nix
