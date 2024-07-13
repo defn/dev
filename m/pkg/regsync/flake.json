@@ -1,6 +1,6 @@
 {
   "slug": "pkg-regsync",
   "ghrepo": "regclient/regclient",
-  "vendor": "0.6.1",
-  "revision": "4"
+  "vendor": "0.7.0",
+  "revision": "0"
 }
