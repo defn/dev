@@ -9,22 +9,22 @@
       "x86_64-linux" = {
         os = "unknown-linux-musl";
         arch = "x86_64";
-        sha256 = "sha256-c5VQmtjAtIE8H12MM5BuQZdxsOnqZ4WJIrLPLmN5zLw="; # x86_64-linux
+        sha256 = "sha256-HQmiB8rY0XPI8x4RXNewKwf9/iSPPY0o5wXaRuTKDjA="; # x86_64-linux
       };
       "aarch64-linux" = {
         os = "unknown-linux-musl";
         arch = "aarch64";
-        sha256 = "sha256-9FhJ7r4RFCOPvrU2Pb16vOOLclI84LYjLLiplgcPQgE="; # aarch64-linux
+        sha256 = "sha256-aGUQnXQrDt1fJS+9c4WgT1pzteJmZayTG+XnPBTtgw8="; # aarch64-linux
       };
       "x86_64-darwin" = {
         os = "apple-darwin";
         arch = "x86_64";
-        sha256 = "sha256-doCI2ta5vifkt8Zbibxp5LsvOLfdvI9+bKrpHYPFr/o="; # x86_64-darwin
+        sha256 = "sha256-6xPlIyIE739ekmLDGDnpbom5RNTiLjZu/bQ0E1SIhNI="; # x86_64-darwin
       };
       "aarch64-darwin" = {
         os = "apple-darwin";
         arch = "aarch64";
-        sha256 = "sha256-jEJpWVV0PYroxdy8oaKo6A3KHdfdvxNT6d5jUL9tcW8="; # aarch64-darwin
+        sha256 = "sha256-YcK+VAxkgAtpEDitIEEF8ZlG76uwxCuhth2p6t4vAEw="; # aarch64-darwin
       };
     };
 
