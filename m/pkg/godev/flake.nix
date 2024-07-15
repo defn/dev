@@ -2,7 +2,7 @@
   inputs = {
     buf.url = github:defn/dev/pkg-buf-1.34.0-1?dir=m/pkg/buf;
     cosign.url = github:defn/dev/pkg-cosign-2.2.4-2?dir=m/pkg/cosign;
-    goreleaser.url = github:defn/dev/pkg-goreleaser-2.0.1-2?dir=m/pkg/goreleaser;
+    goreleaser.url = github:defn/dev/pkg-goreleaser-2.1.0-1?dir=m/pkg/goreleaser;
     yaegi.url = github:defn/dev/pkg-yaegi-0.16.1-2?dir=m/pkg/yaegi;
     # https://github.com/NixOS/nixpkgs/tree/master/pkgs/development/compilers/go
     latest.url = github:NixOS/nixpkgs?rev=c06c5c6f919b02f176e91574a5bc41c504911037;
