@@ -1,6 +1,6 @@
 {
   "slug": "pkg-goreleaser",
   "ghrepo": "goreleaser/goreleaser",
-  "vendor": "2.0.1",
-  "revision": "2"
+  "vendor": "2.1.0",
+  "revision": "0"
 }
