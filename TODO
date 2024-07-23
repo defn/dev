@@ -18,3 +18,9 @@ polkit.addRule(function(action, subject) {
 
 systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
+container coder on macos:
+home/ubuntu/bin/with-env j create-coder-agent
+ssh defn@immanent docker exec -i dev-home-1
+
+connect code-server coder workspace to localhost:80:
+socat TCP-LISTEN:8080,bind=172.18.0.2,fork TCP:127.0.0.1:8080
