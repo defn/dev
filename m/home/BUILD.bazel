@@ -57,6 +57,7 @@ flake_names = [
     "gh",
     "ghapps",
     "earthly",
+    "flyctl",
     "oras",
     "regctl",
     "regbot",
