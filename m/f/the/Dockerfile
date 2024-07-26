@@ -4,8 +4,10 @@ WORKDIR /usr/src/app
 
 RUN apt update && apt install -y python3
 
-COPY index.html ./
+COPY meh meh
+
+COPY main.py ./
 
 EXPOSE 8080
-ENTRYPOINT [ "bash", "-c"]
-CMD [ "set -x; python3 -m http.server 8080" ]
+ENTRYPOINT [ "python3" ]
+CMD [ "main.py" ]
