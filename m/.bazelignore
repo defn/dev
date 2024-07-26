@@ -36,6 +36,7 @@ pkg/dev/.direnv
 pkg/development/.direnv
 pkg/dyff/.direnv
 pkg/earthly/.direnv
+pkg/flyctl/.direnv
 pkg/gh/.direnv
 pkg/ghapps/.direnv
 pkg/glow/.direnv
@@ -123,6 +124,7 @@ pkg/dev/result
 pkg/development/result
 pkg/dyff/result
 pkg/earthly/result
+pkg/flyctl/result
 pkg/gh/result
 pkg/ghapps/result
 pkg/glow/result
