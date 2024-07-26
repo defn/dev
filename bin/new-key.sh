@@ -32,6 +32,8 @@
 set -efu -o pipefail
 
 function main {
+  local identity="$1"; shift
+
 	GNUPGHOME="$(mktemp -d -t "gnupg_$(date +%Y%m%d%H%M || true)_XXX")"
 	GNUPASS="$(mktemp -t "gnupg_$(date +%Y%m%d%H%M || true)_XXX)")"
 
@@ -39,14 +41,14 @@ function main {
 
 	gpg --gen-random --armor 0 24 >"${GNUPASS}"
 
-	gpg --batch --passphrase-file "${GNUPASS}" --quick-generate-key "defn Nghiem <iam@defn.sh>" rsa4096 cert 1y
+	gpg --batch --passphrase-file "${GNUPASS}" --quick-generate-key "${identity}" rsa4096 cert 10y
 
 	local FPR
 	FPR="$(gpg --list-options show-only-fpr-mbox --list-secret-keys | awk '{print $1}')"
 
-	gpg --batch --passphrase-file "${GNUPASS}" --pinentry-mode loopback --quick-add-key "${FPR}" rsa4096 sign 1y
-	gpg --batch --passphrase-file "${GNUPASS}" --pinentry-mode loopback --quick-add-key "${FPR}" rsa4096 encrypt 1y
-	gpg --batch --passphrase-file "${GNUPASS}" --pinentry-mode loopback --quick-add-key "${FPR}" rsa4096 auth 1y
+	gpg --batch --passphrase-file "${GNUPASS}" --pinentry-mode loopback --quick-add-key "${FPR}" rsa4096 sign 10y
+	gpg --batch --passphrase-file "${GNUPASS}" --pinentry-mode loopback --quick-add-key "${FPR}" rsa4096 encrypt 10y
+	gpg --batch --passphrase-file "${GNUPASS}" --pinentry-mode loopback --quick-add-key "${FPR}" rsa4096 auth 10y
 
 	gpg --list-keys
 	gpg -K
@@ -56,3 +58,4 @@ function main {
 }
 
 main "$@"
+
