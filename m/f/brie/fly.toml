@@ -5,13 +5,6 @@ primary_region = 'sjc'
   auto_rollback = true
 
 [build]
-  image = "ghcr.io/coder/coder:latest"
-
-[env]
-  CODER_ACCESS_URL = "https://brie.fly.dev"
-  CODER_HTTP_ADDRESS = "0.0.0.0:3000"
-  CODER_TELEMETRY_INSTALL_SOURCE = "fly.io"
-  PRIMARY_REGION = "sjc"
 
 [http_service]
   internal_port = 3000
