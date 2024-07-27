@@ -21,7 +21,7 @@ RUN bash -c 'source .bash_profile && bin/persist-cache && cd m/pkg/attic && nix 
 RUN bash -c 'source .bash_profile && make install'
 
 RUN rm -rf .git work
-RUN bash -c 'source .bash_profile && cd m && b clean'
+RUN bash -c 'source .bash_profile && bin/persist-cache && cd m && b clean'
 
 FROM ghcr.io/coder/coder:latest
 
