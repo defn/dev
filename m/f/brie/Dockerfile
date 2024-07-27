@@ -13,9 +13,11 @@ ENV LANG=C
 WORKDIR /home/ubuntu
 
 RUN git clone https://github.com/defn/dev /home/ubuntu
+RUN git pull && echo 20240727
 RUN mkdir -p .config/nix
 COPY nix.conf .config/nix/nix.conf
-RUN bash -c 'source .bash_profile && make nix'
+
+RUN bash -c 'source .bash_profile && bin/persist-cache && make nix'
 
 RUN bash -c 'source .bash_profile && cd m/pkg/cue && b build'
 RUN bash -c 'source .bash_profile && cd m/pkg/gum && b build'
@@ -93,7 +95,7 @@ RUN bash -c 'source .bash_profile && cd m/pkg/shell && b build'
 
 RUN bash -c 'source .bash_profile && make install'
 
-RUN rm -rf .git work
+RUN rm -rf .git .cache work
 RUN bash -c 'source .bash_profile && bin/persist-cache && cd m && b clean'
 
 FROM ghcr.io/coder/coder:latest
