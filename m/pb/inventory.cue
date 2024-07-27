@@ -14,11 +14,7 @@ inventory: {
 
 	cache: hosts: [
 		"district",
-		"rpi4d",
-	]
-
-	cache2: hosts: [
-		"rpi4d",
+		"rpi4c",
 	]
 
 	main: hosts: [
