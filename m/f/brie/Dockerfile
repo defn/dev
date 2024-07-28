@@ -27,7 +27,7 @@ RUN bash -c 'source .bash_profile && for a in just; do (cd m/pkg/$a && b build);
 RUN mkdir bin/nix
 RUN for a in coder codeserver terraform just; do ln -nfs /nix/store/*${a}*/bin/* bin/nix/; done
 
-RUN rm -rf .git .cache work
+RUN rm -rf .cache work
 RUN bash -c 'source .bash_profile && bin/persist-cache && cd m && b clean'
 
 FROM ubuntu:24.04
@@ -48,6 +48,8 @@ ENV LANG=C
 WORKDIR /home/ubuntu
 ENTRYPOINT [ "bash", "-c" ]
 CMD [ "source .bash_profile; bin/persist-cach; exec /home/ubuntu//bin/nix/coder server" ]
+
+RUN git pull && echo 20240727
 
 #RUN bash -c 'source .bash_profile && cd m/pkg/cue && b build'
 #RUN bash -c 'source .bash_profile && cd m/pkg/gum && b build'
