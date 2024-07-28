@@ -81,7 +81,7 @@ resource "coder_agent" "main" {
     GIT_COMMITTER_NAME  = "${data.coder_workspace.me.owner}"
   }
   os             = data.coder_parameter.os.value
-  startup_script = "set -x; exec >>/tmp/meh.log; exec 2>&1; cd ~ && source .bash_profile && j destroy-coder-agent && cd ~/m && exec j coder::code-server $${CODER_NAME}"
+  startup_script = "set -x; exec >>/tmp/meh.log; exec 2>&1; cd ~ && source .bash_profile && j destroy-coder-agent && cd ~/m && j coder::code-server $${CODER_NAME} &"
   display_apps {
     ssh_helper      = false
     vscode          = false
