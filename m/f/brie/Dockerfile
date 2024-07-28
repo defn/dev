@@ -22,19 +22,24 @@ RUN bash -c 'source .bash_profile && bin/persist-cache && make nix'
 RUN bash -c 'source .bash_profile && cd m/pkg/codeserver && b build'
 RUN bash -c 'source .bash_profile && cd m/pkg/coder && b build'
 RUN bash -c 'source .bash_profile && cd m/pkg/terraform && b build'
+RUN bash -c 'source .bash_profile && for a in just; do (cd m/pkg/$a && b build); done'
 
 RUN mkdir bin/nix
-RUN for a in coder codeserver terraform; do ln -nfs /nix/store/*${a}*/bin/* bin/nix/; done
+RUN for a in coder codeserver terraform just; do ln -nfs /nix/store/*${a}*/bin/* bin/nix/; done
 
 RUN rm -rf .git .cache work
 RUN bash -c 'source .bash_profile && bin/persist-cache && cd m && b clean'
 
 FROM ubuntu:24.04
 
+RUN apt-get update && apt-get install -y xz-utils curl sudo git make direnv gpg rsync ca-certificates
+
 COPY --from=nix /home/ubuntu /home/ubuntu
 COPY --from=nix /nix /nix
 
-RUN apt-get update && apt-get install -y xz-utils curl sudo git make direnv gpg rsync ca-certificates
+RUN apt-get update && apt-get install -y vim-nox
+
+RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER ubuntu
 ENV USER=ubuntu
