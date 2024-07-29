@@ -18,7 +18,7 @@ RUN mkdir -p .config/nix
 COPY nix.conf .config/nix/nix.conf
 
 RUN bash -c 'source .bash_profile && bin/persist-cache && make nix'
-RUN bash -c 'source .bash_profile && make home home=f/home flakes="cue gum dyff az home secrets utils just buildifier bazelisk ibazel development terraform awscli cloud coder codeserver tilt gh ghapps earthly flyctl shell"'
+RUN bash -c 'source .bash_profile && git pull && make home home=f/home flakes="cue gum dyff az home secrets utils just buildifier bazelisk ibazel development terraform awscli cloud coder codeserver tilt gh ghapps earthly flyctl shell"'
 
 RUN rm -rf .cache work
 RUN bash -c 'source .bash_profile && bin/persist-cache && cd m && b clean'
