@@ -30,8 +30,6 @@ RUN apt-get update && apt-get install -y xz-utils curl sudo git make direnv gpg 
 COPY --from=nix /home/ubuntu /home/ubuntu
 COPY --from=nix /nix /nix
 
-RUN apt-get update && apt-get install -y vim-nox
-
 RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER ubuntu
@@ -40,6 +38,4 @@ ENV HOME=/home/ubuntu
 ENV LANG=C
 WORKDIR /home/ubuntu
 ENTRYPOINT [ "bash", "-c" ]
-CMD [ "source .bash_profile; bin/persist-cach; exec /home/ubuntu//bin/nix/coder server" ]
-
-RUN git checkout && git pull && echo 20240728
+CMD [ "git reset --hard; git pull; source .bash_profile; bin/persist-cache; exec /home/ubuntu//bin/nix/coder server" ]
