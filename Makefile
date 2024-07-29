@@ -1,9 +1,10 @@
 SHELL := /bin/bash
 
 # https://nixos.org/download
-NIX_VERSION := 2.21.1
+NIX_VERSION := 2.23.3
 
-flakes ?= cue gum vhs glow dyff az home secrets acme tailscale cloudflared cloudflareddns wireproxy vpn openfga utils just buildifier bazelisk ibazel oci development terraform terraformdocs packer step awscli chamber cloud kubectl minikube minikubekvm2 k3sup k9s helm kustomize stern argoworkflows argocd kn dapr vcluster kubevirt linkerd kuma cilium hubble tfo mirrord crossplane spire coder codeserver tilt gh ghapps earthly flyctl oras regctl regbot regsync buildkite buildevents honeyvent honeymarker honeytail hugo vault godev jsdev pydev shell
+flakes ?= attic cue gum vhs glow dyff az home secrets acme tailscale cloudflared cloudflareddns wireproxy vpn openfga utils just buildifier bazelisk ibazel oci development terraform terraformdocs packer step awscli chamber cloud kubectl minikube minikubekvm2 k3sup k9s helm kustomize stern argoworkflows argocd kn dapr vcluster kubevirt linkerd kuma cilium hubble tfo mirrord crossplane spire coder codeserver tilt gh ghapps earthly flyctl oras regctl regbot regsync buildkite buildevents honeyvent honeymarker honeytail hugo vault godev jsdev pydev shell
+home ?= home
 
 name ?= local
 domain ?= defn.run
@@ -117,10 +118,10 @@ rehome:
 home:
 	bin/persist-cache
 	cd m && bazel version
-	cd m/home && b build
+	cd m/${home} && b build
 	rm -rf /tmp/nix-tmp /tmp/nix-bin
 	mkdir -p /tmp/nix-tmp /tmp/nix-bin
-	(cd m/home && b out something) | (cd /tmp/nix-tmp && tar xfz -)
+	(cd m/${home} && b out something) | (cd /tmp/nix-tmp && tar xfz -)
 	cd /tmp/nix-tmp && for a in $(flakes); do (cd $$a && if ! stat -L * 2>/dev/null >/dev/null; then echo $$a; (cd ~/m/pkg/$$a && b build); sudo tar -C / -xf ~/m/$$(cat .bazel-nix-store) || true; fi; rsync -ia . /tmp/nix-bin/. >/dev/null); done
 	rm -f /tmp/nix-bin/.bazel-nix-store /tmp/nix-bin/.nix-flake
 	mkdir -p bin/nix
