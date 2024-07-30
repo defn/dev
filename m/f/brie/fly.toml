@@ -17,3 +17,7 @@ primary_region = 'sjc'
   memory = '8gb'
   cpu_kind = 'shared'
   cpus = 4
+
+[mounts]
+  source = "brie_data"
+  destination = "/data"

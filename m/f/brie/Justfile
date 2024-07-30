@@ -1,4 +1,4 @@
-default:
+status:
     fly machine list
 
 deploy:
@@ -9,3 +9,6 @@ stop:
 
 start:
     fly machine start $(fly machine list --json | jq -r '.[].id')
+
+restart:
+    fly machine restart $(fly machine list --json | jq -r '.[].id')
