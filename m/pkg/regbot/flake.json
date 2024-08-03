@@ -1,6 +1,6 @@
 {
   "slug": "pkg-regbot",
   "ghrepo": "regclient/regclient",
-  "vendor": "0.7.0",
-  "revision": "1"
+  "vendor": "0.7.1",
+  "revision": "0"
 }
