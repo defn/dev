@@ -13,6 +13,7 @@
       propagatedBuildInputs =
         with (import inputs.latest { system = ctx.system; }); [
           rustc
+          cargo
         ];
     };
   };
