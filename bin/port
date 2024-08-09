@@ -3,9 +3,7 @@
 function main {
 	set -efu
 
-	local port="$1"; shift
-
-	open "$(echo $VSCODE_PROXY_URI | sed "s#{{port}}#${port}#")$*"
+	open "$(sport "$@")"
 }
 
 main "$@"
