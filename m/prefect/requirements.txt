@@ -16,6 +16,10 @@ anyio==4.4.0
     #   prefect
 apprise==1.8.1
     # via prefect
+argon2-cffi==23.1.0
+    # via minio
+argon2-cffi-bindings==21.2.0
+    # via argon2-cffi
 asgi-lifespan==2.1.0
     # via prefect
 asyncpg==0.29.0
@@ -36,9 +40,12 @@ certifi==2024.7.4
     #   httpcore
     #   httpx
     #   kubernetes
+    #   minio
     #   requests
 cffi==1.17.0
-    # via cryptography
+    # via
+    #   argon2-cffi-bindings
+    #   cryptography
 charset-normalizer==3.3.2
     # via requests
 click==8.1.7
@@ -136,6 +143,8 @@ markupsafe==2.1.5
     #   mako
 mdurl==0.1.2
     # via markdown-it-py
+minio==7.2.7
+    # via -r requirements.in
 oauthlib==3.2.2
     # via
     #   kubernetes
@@ -162,6 +171,8 @@ pyasn1-modules==0.4.0
     # via google-auth
 pycparser==2.22
     # via cffi
+pycryptodome==3.20.0
+    # via minio
 pydantic[email]==2.8.2
     # via prefect
 pydantic-core==2.20.1
@@ -259,6 +270,7 @@ typing-extensions==4.12.2
     # via
     #   aiosqlite
     #   alembic
+    #   minio
     #   prefect
     #   pydantic
     #   pydantic-core
@@ -274,6 +286,7 @@ urllib3==2.2.2
     # via
     #   docker
     #   kubernetes
+    #   minio
     #   requests
 uvicorn==0.30.5
     # via prefect

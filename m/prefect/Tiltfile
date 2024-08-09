@@ -1,8 +1,13 @@
 #!/usr/bin/env python
 
 local_resource(
-    "serve",
-    serve_cmd=["just", "serve"],
+    "prefect",
+    serve_cmd=["just", "prefect"],
+)
+
+local_resource(
+    "minio",
+    serve_cmd=["just", "minio"],
 )
 
 local_resource(

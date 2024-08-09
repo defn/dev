@@ -1,8 +1,26 @@
-serve:
+prefect:
+    #!/usr/bin/env bash
+    source .venv/bin/activate
     source .venv/bin/activate && prefect server start
 
+minio:
+    #!/usr/bin/env bash
+    wget -nc https://dl.min.io/server/minio/release/linux-amd64/minio
+    chmod +x minio
+    ./minio server data
+
 flow:
+    #!/usr/bin/env bash
+    source .venv/bin/activate
     source .venv/bin/activate && prefect deployment run 'prefect/stars'
 
 run:
+    #!/usr/bin/env bash
+    source .venv/bin/activate
     source .venv/bin/activate && python main.py
+
+lock:
+    #!/usr/bin/env bash
+    source .venv/bin/activate
+    pip-compile > requirements.txt
+    pip install -r requirements.txt
