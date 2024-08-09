@@ -1,11 +1,19 @@
 import io
+import pprint
 import random
 import time
 
 import httpx
+from dynaconf import Dynaconf
 from minio import Minio
 from minio.error import S3Error
 from prefect import flow, task
+
+# Load configuration
+settings = Dynaconf(
+    envvar_prefix="cv",
+    settings_files=["settings.yaml", ".secrets.yaml"],
+)
 
 # Connect to Minio
 client = Minio(
@@ -18,8 +26,6 @@ found = client.bucket_exists(bucket_name)
 if not found:
     client.make_bucket(bucket_name)
     print(f"Bucket '{bucket_name}' created.")
-else:
-    print(f"Bucket '{bucket_name}' already exists.")
 
 
 @task(log_prints=True)
