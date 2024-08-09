@@ -1,0 +1,8 @@
+serve:
+    source .venv/bin/activate && prefect server start
+
+flow:
+    source .venv/bin/activate && prefect deployment run 'prefect/stars'
+
+run:
+    source .venv/bin/activate && python main.py

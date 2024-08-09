@@ -1,7 +1,7 @@
 {
   inputs = {
     pkg.url = github:defn/dev/pkg-pkg-0.0.17?dir=m/pkg/pkg;
-    rustdev.url = github:defn/dev/pkg-rustdev-0.0.3?dir=m/rustdev/rustdev;
+    rustdev.url = github:defn/dev/pkg-rustdev-0.0.4?dir=m/pkg/rustdev;
   };
 
   outputs = inputs: inputs.pkg.venvMain rec {
