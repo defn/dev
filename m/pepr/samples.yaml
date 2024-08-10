@@ -45,8 +45,8 @@ metadata:
   name: example-evil-cm
   namespace: pepr-demo
   annotations:
-    evil: 'true'
-data:
+    evil: 'false"
+'ata:
   key: ex-evil-cm-val
 ---
 apiVersion: v1
