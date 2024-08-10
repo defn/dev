@@ -1,5 +1,6 @@
 import { PeprModule } from "pepr";
-import cfg from "./package.json";
 import { HelloPepr } from "./capabilities/hello";
+
+import cfg from "./package.json";
 
 new PeprModule(cfg, [HelloPepr]);
