@@ -227,6 +227,7 @@ bin/devcontainer
 !flake.lock
 /bazel*
 .env*
+.prefect
 m
 work
 bin

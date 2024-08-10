@@ -8,6 +8,7 @@ demo/node_modules
 cutout
 comfyui
 demo/nix/.direnv
+pepr/.direnv
 pkg/acme/.direnv
 pkg/argocd/.direnv
 pkg/argorollouts/.direnv
@@ -94,8 +95,10 @@ pkg/vpn/.direnv
 pkg/wireproxy/.direnv
 pkg/yaegi/.direnv
 pkg/zellij/.direnv
+prefect/.direnv
 wut/.direnv
 demo/nix/result
+pepr/result
 pkg/acme/result
 pkg/argocd/result
 pkg/argorollouts/result
@@ -182,6 +185,7 @@ pkg/vpn/result
 pkg/wireproxy/result
 pkg/yaegi/result
 pkg/zellij/result
+prefect/result
 wut/result
 cutout/app/{{cookiecutter.path}}
 cutout/command/{{cookiecutter.path}}

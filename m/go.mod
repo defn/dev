@@ -9,7 +9,7 @@ toolchain go1.22.5
 replace github.com/protocolbuffers/txtpbfmt => github.com/protocolbuffers/txtpbfmt v0.0.0-20230328191034-3462fbc510c0
 
 require (
-	cuelang.org/go v0.9.2
+	cuelang.org/go v0.10.0-rc.1
 	github.com/aws/constructs-go/constructs/v10 v10.3.0
 	github.com/aws/jsii-runtime-go v1.102.0
 	github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.29.0
@@ -87,7 +87,7 @@ require (
 	github.com/pelletier/go-toml/v2 v2.2.2 // indirect
 	github.com/protocolbuffers/txtpbfmt v0.0.0-20240611101534-dedd929c1c22 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
-	github.com/rogpeppe/go-internal v1.12.0 // indirect
+	github.com/rogpeppe/go-internal v1.12.1-0.20240709150035-ccf4b4329d21 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/sagikazarmark/locafero v0.6.0 // indirect
 	github.com/sagikazarmark/slog-shim v0.1.0 // indirect
