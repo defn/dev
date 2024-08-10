@@ -1,6 +1,6 @@
+.direnv
 .venv
 __pycache__
 data
 minio
-# Ignore dynaconf secret files
 .secrets.*

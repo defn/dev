@@ -1,0 +1,6 @@
+#!/usr/bin/env python
+
+local_resource(
+    "pepr",
+    serve_cmd=["just", "pepr"],
+)
