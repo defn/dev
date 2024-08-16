@@ -1,5 +1,5 @@
 common:
-    sudo apt install libstdc++-10-dev
+    sudo apt install -y libstdc++-10-dev
     /usr/bin/python3 -m venv common
     common/bin/pip install -r repo/requirements.txt
 
