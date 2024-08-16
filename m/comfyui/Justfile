@@ -1,7 +1,12 @@
-common:
+install:
     sudo apt install -y libstdc++-10-dev
     /usr/bin/python3 -m venv common
+    git submodule update --init
     common/bin/pip install -r repo/requirements.txt
+
+reinstall:
+    rm -rf common
+    just install
 
 run *args:
     cd repo && ../common/bin/python main.py {{args}}
