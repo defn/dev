@@ -1,6 +1,6 @@
 {
   "slug": "pkg-vcluster",
   "ghrepo": "loft-sh/vcluster",
-  "vendor": "0.19.7",
-  "revision": "4"
+  "vendor": "0.20.0",
+  "revision": "0"
 }
