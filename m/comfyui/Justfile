@@ -2,14 +2,15 @@ install:
     sudo apt install -y libstdc++-10-dev
     /usr/bin/python3 -m venv common
     git submodule update --init
-    common/bin/pip install -r repo/requirements.txt
+    source common/bin/activate && pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm6.0
+    source common/bin/activate && pip install -r repo/requirements.txt
 
 reinstall:
     rm -rf common
     just install
 
 run *args:
-    cd repo && ../common/bin/python main.py {{args}}
+    source common/bin/activate && cd repo && python main.py {{args}}
 
 sd15:
     wget -P repo/models/checkpoints https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt
