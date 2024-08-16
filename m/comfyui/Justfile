@@ -1,3 +1,4 @@
+# https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/native-install/ubuntu.html
 install-common:
     sudo mkdir --parents --mode=0755 /etc/apt/keyrings
     wget https://repo.radeon.com/rocm/rocm.gpg.key -O - | gpg --dearmor | sudo tee /etc/apt/keyrings/rocm.gpg > /dev/null
