@@ -24,7 +24,8 @@ reinstall:
     rm -rf common
     just install
 
-run *args="--cpu":
+# --cpu
+run *args:
     source common/bin/activate && cd repo && python main.py {{args}}
 
 sd15:
