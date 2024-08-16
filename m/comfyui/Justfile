@@ -1,5 +1,19 @@
+install-common:
+    sudo mkdir --parents --mode=0755 /etc/apt/keyrings
+    wget https://repo.radeon.com/rocm/rocm.gpg.key -O - | gpg --dearmor | sudo tee /etc/apt/keyrings/rocm.gpg > /dev/null
+    echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/rocm.gpg] https://repo.radeon.com/amdgpu/6.2/ubuntu noble main" | sudo tee /etc/apt/sources.list.d/amdgpu.list
+    echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/rocm.gpg] https://repo.radeon.com/rocm/apt/6.2 noble main" | sudo tee --append /etc/apt/sources.list.d/rocm.list
+    echo -e 'Package: *\nPin: release o=repo.radeon.com\nPin-Priority: 600' | sudo tee /etc/apt/preferences.d/rocm-pin-600
+    sudo apt update
+
+install-reboot:
+    just install-common
+    sudo apt install -y amdgpu-dkms
+
 install:
+    just install-common
     sudo apt install -y libstdc++-10-dev
+    sudo apt install -y rocm
     /usr/bin/python3 -m venv common
     git submodule update --init
     source common/bin/activate && pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm6.0
@@ -9,7 +23,7 @@ reinstall:
     rm -rf common
     just install
 
-run *args:
+run *args="--cpu":
     source common/bin/activate && cd repo && python main.py {{args}}
 
 sd15:
