@@ -1,22 +1,12 @@
-import {
-  Capability,
-  K8s,
-  Log,
-  PeprMutateRequest,
-  RegisterKind,
-  a,
-  fetch,
-  fetchStatus,
-  kind,
-} from "pepr";
+import { Capability, Log, RegisterKind, a } from "pepr";
 
-export const HelloPepr = new Capability({
-  name: "hello",
-  description: "A simple example capability to show how things work.",
+export const UnicornPepr = new Capability({
+  name: "unicorn",
+  description: "A simple example capability to show how custom resources work.",
   namespaces: ["defn"],
 });
 
-const { When, Store } = HelloPepr;
+const { When } = UnicornPepr;
 
 class UnicornKind extends a.GenericKind {
   spec: {
@@ -40,4 +30,7 @@ When(UnicornKind)
         counter: Math.random(),
       },
     });
+  })
+  .Watch(async uni => {
+    Log.info("Unicorn mutated: " + uni.metadata.name);
   });

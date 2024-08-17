@@ -18,5 +18,5 @@ metadata:
   name: example-2
   namespace: defn
 spec:
-  message: replace-me
+  message: bleh
   counter: 0
