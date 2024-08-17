@@ -20,3 +20,11 @@ metadata:
 spec:
   message: bleh
   counter: 0
+---
+apiVersion: defn.dev/v1
+kind: Script
+metadata:
+  name: hello
+  namespace: defn
+spec:
+  script: uname -a && pwd

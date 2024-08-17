@@ -1,4 +1,5 @@
-import { Capability, K8s, Log, a, kind } from "pepr";
+import { exec } from "child_process";
+import { Capability, K8s, Log, RegisterKind, a, kind } from "pepr";
 
 export const DefnPepr = new Capability({
   name: "defn",
@@ -7,6 +8,37 @@ export const DefnPepr = new Capability({
 });
 
 const { When, Store } = DefnPepr;
+
+class ScriptKind extends a.GenericKind {
+  spec: {
+    script: string;
+  };
+}
+
+RegisterKind(ScriptKind, {
+  group: "defn.dev",
+  version: "v1",
+  kind: "Script",
+});
+
+When(ScriptKind)
+  .IsCreatedOrUpdated()
+  .Watch(async scr => {
+    Log.info("Script created: " + scr.spec.script);
+    exec(scr.spec.script, (error, stdout, stderr) => {
+      if (error) {
+        Log.error(`Error executing script: ${error}`);
+        return;
+      }
+
+      if (stderr) {
+        Log.error(`Script error output: ${stderr}`);
+        return;
+      }
+
+      Log.info(`Script output: ${stdout}`);
+    });
+  });
 
 When(a.Namespace)
   .IsCreated()
