@@ -2,13 +2,7 @@
   "name": "meh",
   "version": "0.0.1",
   "description": "",
-  "keywords": [
-    "pepr",
-    "k8s",
-    "policy-engine",
-    "pepr-module",
-    "security"
-  ],
+  "keywords": [ ],
   "engines": {
     "node": ">=18.0.0"
   },
