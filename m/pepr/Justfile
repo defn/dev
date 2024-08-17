@@ -1,5 +1,6 @@
 up *args:
     npm run k3d-setup
+    kubectl apply -f crd.yaml
     tilt up {{ args }}
 
 down: 
