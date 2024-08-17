@@ -97,7 +97,7 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 			"GIT_COMMITTER_NAME":  devCoderWorkspace.Owner(),
 		},
 		Os:            paramOs.Value(),
-		StartupScript: infra.Js("cd ~ && j destroy-coder-agent && cd ~/m && exec j coder::code-server $${CODER_NAME}"),
+		StartupScript: infra.Js("set -x; exec >>/tmp/meh.log; exec 2>&1; cd ~ && source .bash_profile && j destroy-coder-agent && cd ~/m && j coder::code-server $${CODER_NAME} &"),
 	})
 
 	null_provider.NewNullProvider(stack, infra.Js("null"), &null_provider.NullProviderConfig{})

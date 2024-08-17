@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.56.0"
+      version = "5.62.0"
       source  = "aws"
     }
   }
@@ -38,7 +38,7 @@ module "s3-chamber-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-org
+    aws = "aws.chamber-org"
   }
 }
 
@@ -64,7 +64,7 @@ module "s3-chamber-1" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-1
+    aws = "aws.chamber-1"
   }
 }
 
@@ -90,7 +90,7 @@ module "s3-chamber-2" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-2
+    aws = "aws.chamber-2"
   }
 }
 
@@ -116,7 +116,7 @@ module "s3-chamber-3" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-3
+    aws = "aws.chamber-3"
   }
 }
 
@@ -142,7 +142,7 @@ module "s3-chamber-4" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-4
+    aws = "aws.chamber-4"
   }
 }
 
@@ -168,7 +168,7 @@ module "s3-chamber-5" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-5
+    aws = "aws.chamber-5"
   }
 }
 
@@ -194,7 +194,7 @@ module "s3-chamber-6" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-6
+    aws = "aws.chamber-6"
   }
 }
 
@@ -220,7 +220,7 @@ module "s3-chamber-7" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-7
+    aws = "aws.chamber-7"
   }
 }
 
@@ -246,7 +246,7 @@ module "s3-chamber-8" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-8
+    aws = "aws.chamber-8"
   }
 }
 
@@ -272,7 +272,7 @@ module "s3-chamber-9" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-9
+    aws = "aws.chamber-9"
   }
 }
 
@@ -298,7 +298,7 @@ module "s3-chamber-a" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-a
+    aws = "aws.chamber-a"
   }
 }
 
@@ -324,7 +324,7 @@ module "s3-chamber-b" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-b
+    aws = "aws.chamber-b"
   }
 }
 
@@ -350,7 +350,7 @@ module "s3-chamber-c" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-c
+    aws = "aws.chamber-c"
   }
 }
 
@@ -376,7 +376,7 @@ module "s3-chamber-d" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-d
+    aws = "aws.chamber-d"
   }
 }
 
@@ -402,7 +402,7 @@ module "s3-chamber-e" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-e
+    aws = "aws.chamber-e"
   }
 }
 
@@ -428,7 +428,7 @@ module "s3-chamber-f" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-f
+    aws = "aws.chamber-f"
   }
 }
 
@@ -454,7 +454,7 @@ module "s3-chamber-g" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-g
+    aws = "aws.chamber-g"
   }
 }
 
@@ -480,7 +480,7 @@ module "s3-chamber-h" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-h
+    aws = "aws.chamber-h"
   }
 }
 
@@ -506,7 +506,7 @@ module "s3-chamber-i" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-i
+    aws = "aws.chamber-i"
   }
 }
 
@@ -532,7 +532,7 @@ module "s3-chamber-j" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-j
+    aws = "aws.chamber-j"
   }
 }
 
@@ -558,7 +558,7 @@ module "s3-chamber-l" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-l
+    aws = "aws.chamber-l"
   }
 }
 
@@ -584,7 +584,7 @@ module "s3-chamber-m" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-m
+    aws = "aws.chamber-m"
   }
 }
 
@@ -610,7 +610,7 @@ module "s3-chamber-n" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-n
+    aws = "aws.chamber-n"
   }
 }
 
@@ -636,7 +636,7 @@ module "s3-chamber-o" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-o
+    aws = "aws.chamber-o"
   }
 }
 
@@ -662,7 +662,7 @@ module "s3-chamber-p" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-p
+    aws = "aws.chamber-p"
   }
 }
 
@@ -688,7 +688,7 @@ module "s3-chamber-q" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-q
+    aws = "aws.chamber-q"
   }
 }
 
@@ -714,7 +714,7 @@ module "s3-chamber-r" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-r
+    aws = "aws.chamber-r"
   }
 }
 
@@ -740,7 +740,7 @@ module "s3-chamber-s" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-s
+    aws = "aws.chamber-s"
   }
 }
 
@@ -766,7 +766,7 @@ module "s3-chamber-t" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-t
+    aws = "aws.chamber-t"
   }
 }
 
@@ -792,7 +792,7 @@ module "s3-chamber-u" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-u
+    aws = "aws.chamber-u"
   }
 }
 
@@ -818,7 +818,7 @@ module "s3-chamber-v" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-v
+    aws = "aws.chamber-v"
   }
 }
 
@@ -844,7 +844,7 @@ module "s3-chamber-w" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-w
+    aws = "aws.chamber-w"
   }
 }
 
@@ -870,7 +870,7 @@ module "s3-chamber-x" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-x
+    aws = "aws.chamber-x"
   }
 }
 
@@ -896,7 +896,7 @@ module "s3-chamber-y" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-y
+    aws = "aws.chamber-y"
   }
 }
 
@@ -922,7 +922,7 @@ module "s3-chamber-z" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.chamber-z
+    aws = "aws.chamber-z"
   }
 }
 
@@ -948,7 +948,7 @@ module "s3-circus-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.circus-org
+    aws = "aws.circus-org"
   }
 }
 
@@ -974,7 +974,7 @@ module "s3-circus-net" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.circus-net
+    aws = "aws.circus-net"
   }
 }
 
@@ -1000,7 +1000,7 @@ module "s3-circus-log" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.circus-log
+    aws = "aws.circus-log"
   }
 }
 
@@ -1026,7 +1026,7 @@ module "s3-circus-lib" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.circus-lib
+    aws = "aws.circus-lib"
   }
 }
 
@@ -1052,7 +1052,7 @@ module "s3-circus-ops" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.circus-ops
+    aws = "aws.circus-ops"
   }
 }
 
@@ -1078,7 +1078,7 @@ module "s3-coil-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.coil-org
+    aws = "aws.coil-org"
   }
 }
 
@@ -1104,7 +1104,7 @@ module "s3-coil-net" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.coil-net
+    aws = "aws.coil-net"
   }
 }
 
@@ -1130,7 +1130,7 @@ module "s3-coil-lib" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.coil-lib
+    aws = "aws.coil-lib"
   }
 }
 
@@ -1156,7 +1156,7 @@ module "s3-coil-hub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.coil-hub
+    aws = "aws.coil-hub"
   }
 }
 
@@ -1182,7 +1182,7 @@ module "s3-curl-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.curl-org
+    aws = "aws.curl-org"
   }
 }
 
@@ -1208,7 +1208,7 @@ module "s3-curl-net" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.curl-net
+    aws = "aws.curl-net"
   }
 }
 
@@ -1234,7 +1234,7 @@ module "s3-curl-lib" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.curl-lib
+    aws = "aws.curl-lib"
   }
 }
 
@@ -1260,7 +1260,7 @@ module "s3-curl-hub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.curl-hub
+    aws = "aws.curl-hub"
   }
 }
 
@@ -1286,7 +1286,7 @@ module "s3-defn-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.defn-org
+    aws = "aws.defn-org"
   }
 }
 
@@ -1312,7 +1312,7 @@ module "s3-fogg-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.fogg-org
+    aws = "aws.fogg-org"
   }
 }
 
@@ -1338,7 +1338,7 @@ module "s3-fogg-net" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.fogg-net
+    aws = "aws.fogg-net"
   }
 }
 
@@ -1364,7 +1364,7 @@ module "s3-fogg-log" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.fogg-log
+    aws = "aws.fogg-log"
   }
 }
 
@@ -1390,7 +1390,7 @@ module "s3-fogg-lib" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.fogg-lib
+    aws = "aws.fogg-lib"
   }
 }
 
@@ -1416,7 +1416,7 @@ module "s3-fogg-ops" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.fogg-ops
+    aws = "aws.fogg-ops"
   }
 }
 
@@ -1442,7 +1442,7 @@ module "s3-fogg-ci" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.fogg-ci
+    aws = "aws.fogg-ci"
   }
 }
 
@@ -1468,7 +1468,7 @@ module "s3-fogg-hub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.fogg-hub
+    aws = "aws.fogg-hub"
   }
 }
 
@@ -1494,7 +1494,7 @@ module "s3-fogg-cde" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.fogg-cde
+    aws = "aws.fogg-cde"
   }
 }
 
@@ -1520,7 +1520,7 @@ module "s3-fogg-dev" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.fogg-dev
+    aws = "aws.fogg-dev"
   }
 }
 
@@ -1546,7 +1546,7 @@ module "s3-fogg-pub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.fogg-pub
+    aws = "aws.fogg-pub"
   }
 }
 
@@ -1572,7 +1572,7 @@ module "s3-gyre-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.gyre-org
+    aws = "aws.gyre-org"
   }
 }
 
@@ -1598,7 +1598,7 @@ module "s3-gyre-ops" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.gyre-ops
+    aws = "aws.gyre-ops"
   }
 }
 
@@ -1624,7 +1624,7 @@ module "s3-helix-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.helix-org
+    aws = "aws.helix-org"
   }
 }
 
@@ -1650,7 +1650,7 @@ module "s3-helix-net" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.helix-net
+    aws = "aws.helix-net"
   }
 }
 
@@ -1676,7 +1676,7 @@ module "s3-helix-log" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.helix-log
+    aws = "aws.helix-log"
   }
 }
 
@@ -1702,7 +1702,7 @@ module "s3-helix-lib" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.helix-lib
+    aws = "aws.helix-lib"
   }
 }
 
@@ -1728,7 +1728,7 @@ module "s3-helix-ops" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.helix-ops
+    aws = "aws.helix-ops"
   }
 }
 
@@ -1754,7 +1754,7 @@ module "s3-helix-ci" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.helix-ci
+    aws = "aws.helix-ci"
   }
 }
 
@@ -1780,7 +1780,7 @@ module "s3-helix-hub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.helix-hub
+    aws = "aws.helix-hub"
   }
 }
 
@@ -1806,7 +1806,7 @@ module "s3-helix-cde" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.helix-cde
+    aws = "aws.helix-cde"
   }
 }
 
@@ -1832,7 +1832,7 @@ module "s3-helix-dev" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.helix-dev
+    aws = "aws.helix-dev"
   }
 }
 
@@ -1858,7 +1858,7 @@ module "s3-helix-pub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.helix-pub
+    aws = "aws.helix-pub"
   }
 }
 
@@ -1884,7 +1884,7 @@ module "s3-imma-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.imma-org
+    aws = "aws.imma-org"
   }
 }
 
@@ -1910,7 +1910,7 @@ module "s3-imma-net" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.imma-net
+    aws = "aws.imma-net"
   }
 }
 
@@ -1936,7 +1936,7 @@ module "s3-imma-log" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.imma-log
+    aws = "aws.imma-log"
   }
 }
 
@@ -1962,7 +1962,7 @@ module "s3-imma-lib" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.imma-lib
+    aws = "aws.imma-lib"
   }
 }
 
@@ -1988,7 +1988,7 @@ module "s3-imma-dev" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.imma-dev
+    aws = "aws.imma-dev"
   }
 }
 
@@ -2014,7 +2014,7 @@ module "s3-imma-pub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.imma-pub
+    aws = "aws.imma-pub"
   }
 }
 
@@ -2040,7 +2040,7 @@ module "s3-jianghu-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.jianghu-org
+    aws = "aws.jianghu-org"
   }
 }
 
@@ -2066,7 +2066,7 @@ module "s3-jianghu-net" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.jianghu-net
+    aws = "aws.jianghu-net"
   }
 }
 
@@ -2092,7 +2092,7 @@ module "s3-jianghu-log" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.jianghu-log
+    aws = "aws.jianghu-log"
   }
 }
 
@@ -2118,7 +2118,7 @@ module "s3-spiral-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.spiral-org
+    aws = "aws.spiral-org"
   }
 }
 
@@ -2144,7 +2144,7 @@ module "s3-spiral-net" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.spiral-net
+    aws = "aws.spiral-net"
   }
 }
 
@@ -2170,7 +2170,7 @@ module "s3-spiral-log" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.spiral-log
+    aws = "aws.spiral-log"
   }
 }
 
@@ -2196,7 +2196,7 @@ module "s3-spiral-lib" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.spiral-lib
+    aws = "aws.spiral-lib"
   }
 }
 
@@ -2222,7 +2222,7 @@ module "s3-spiral-ops" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.spiral-ops
+    aws = "aws.spiral-ops"
   }
 }
 
@@ -2248,7 +2248,7 @@ module "s3-spiral-ci" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.spiral-ci
+    aws = "aws.spiral-ci"
   }
 }
 
@@ -2274,7 +2274,7 @@ module "s3-spiral-hub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.spiral-hub
+    aws = "aws.spiral-hub"
   }
 }
 
@@ -2300,7 +2300,7 @@ module "s3-spiral-cde" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.spiral-cde
+    aws = "aws.spiral-cde"
   }
 }
 
@@ -2326,7 +2326,7 @@ module "s3-spiral-dev" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.spiral-dev
+    aws = "aws.spiral-dev"
   }
 }
 
@@ -2352,7 +2352,7 @@ module "s3-spiral-pub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.spiral-pub
+    aws = "aws.spiral-pub"
   }
 }
 
@@ -2378,7 +2378,7 @@ module "s3-vault-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.vault-org
+    aws = "aws.vault-org"
   }
 }
 
@@ -2404,7 +2404,7 @@ module "s3-vault-net" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.vault-net
+    aws = "aws.vault-net"
   }
 }
 
@@ -2430,7 +2430,7 @@ module "s3-vault-log" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.vault-log
+    aws = "aws.vault-log"
   }
 }
 
@@ -2456,7 +2456,7 @@ module "s3-vault-lib" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.vault-lib
+    aws = "aws.vault-lib"
   }
 }
 
@@ -2482,7 +2482,7 @@ module "s3-vault-ops" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.vault-ops
+    aws = "aws.vault-ops"
   }
 }
 
@@ -2508,7 +2508,7 @@ module "s3-vault-ci" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.vault-ci
+    aws = "aws.vault-ci"
   }
 }
 
@@ -2534,7 +2534,7 @@ module "s3-vault-hub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.vault-hub
+    aws = "aws.vault-hub"
   }
 }
 
@@ -2560,7 +2560,7 @@ module "s3-vault-cde" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.vault-cde
+    aws = "aws.vault-cde"
   }
 }
 
@@ -2586,7 +2586,7 @@ module "s3-vault-dev" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.vault-dev
+    aws = "aws.vault-dev"
   }
 }
 
@@ -2612,7 +2612,7 @@ module "s3-vault-pub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.vault-pub
+    aws = "aws.vault-pub"
   }
 }
 
@@ -2638,7 +2638,7 @@ module "s3-whoa-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.whoa-org
+    aws = "aws.whoa-org"
   }
 }
 
@@ -2664,7 +2664,7 @@ module "s3-whoa-net" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.whoa-net
+    aws = "aws.whoa-net"
   }
 }
 
@@ -2690,7 +2690,7 @@ module "s3-whoa-hub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.whoa-hub
+    aws = "aws.whoa-hub"
   }
 }
 
@@ -2716,7 +2716,7 @@ module "s3-whoa-dev" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.whoa-dev
+    aws = "aws.whoa-dev"
   }
 }
 
@@ -2742,6 +2742,6 @@ module "s3-whoa-pub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.whoa-pub
+    aws = "aws.whoa-pub"
   }
 }

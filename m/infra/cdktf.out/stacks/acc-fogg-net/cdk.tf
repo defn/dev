@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.56.0"
+      version = "5.62.0"
       source  = "aws"
     }
   }
@@ -28,6 +28,6 @@ module "fogg-net" {
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = aws.fogg-net
+    aws = "aws.fogg-net"
   }
 }

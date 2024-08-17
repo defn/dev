@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.56.0"
+      version = "5.62.0"
       source  = "aws"
     }
   }
@@ -28,6 +28,6 @@ module "chamber-a" {
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = aws.chamber-a
+    aws = "aws.chamber-a"
   }
 }
