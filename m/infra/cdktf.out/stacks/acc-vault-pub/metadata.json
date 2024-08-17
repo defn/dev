@@ -3,7 +3,7 @@
     "metadata": {
       "backend": "s3",
       "stackName": "acc-vault-pub",
-      "version": "0.20.7"
+      "version": "0.20.8"
     },
     "outputs": {
     }
@@ -32,7 +32,7 @@
     "required_providers": {
       "aws": {
         "source": "aws",
-        "version": "5.56.0"
+        "version": "5.62.0"
       }
     }
   }
