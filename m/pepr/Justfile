@@ -1,6 +1,12 @@
+up *args:
+    npm run k3d-setup
+    tilt up {{ args }}
+
+down: 
+    k3d cluster delete pepr-dev
+
 k3d:
     #!/usr/bin/env bash
-    npm run k3d-setup
 
 pepr:
     #!/usr/bin/env bash

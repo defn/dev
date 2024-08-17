@@ -29,5 +29,5 @@ When(a.Namespace)
       Log.error(error, "Failed to apply ConfigMap using server-side apply.");
     }
 
-    Store.setItem("hello2", "world");
+    Store.setItem("hello", "world");
   });
