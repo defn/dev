@@ -2,7 +2,7 @@ package pb
 
 playbook: upgrade: [{
 	name:   "Upgrade all packages"
-	hosts:  "all:!fedora"
+	hosts:  "all"
 	become: true
 	tasks: [{
 		name:  "Fix dpkg"
