@@ -44,4 +44,4 @@ home *args:
 all *args="all":
 	just cache cache
 	just home cache
-	just home "{{ args }}:!cache:!fedora:!rpi3"
+	just home "{{ args }}:!cache:!rpi3"
