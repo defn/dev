@@ -1,6 +1,6 @@
 {
   "slug": "pkg-dapr",
   "ghrepo": "dapr/cli",
-  "vendor": "1.14.0",
-  "revision": "1"
+  "vendor": "1.14.1",
+  "revision": "0"
 }
