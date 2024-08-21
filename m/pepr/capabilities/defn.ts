@@ -25,7 +25,7 @@ When(ScriptKind)
   .IsCreatedOrUpdated()
   .Watch(async scr => {
     Log.info("Script workdir: " + scr.spec.workdir);
-    Log.info("Script created: " + scr.spec.script);
+    Log.info("Script script: " + scr.spec.script);
     exec(scr.spec.script, (error, stdout, stderr) => {
       if (error) {
         Log.error(`Error executing script: ${error}`);

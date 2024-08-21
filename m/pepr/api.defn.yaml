@@ -19,3 +19,5 @@ components:
           type: string
         group:
           type: string
+        umask:
+          type: string

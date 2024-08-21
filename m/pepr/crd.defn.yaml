@@ -21,11 +21,13 @@ spec:
               properties:
                 script:
                   type: string
+                workdir:
+                  type: string
                 user:
                   type: string
                 group:
                   type: string
-                workdir:
+                umask:
                   type: string
   scope: Namespaced
   names:

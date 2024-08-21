@@ -6,19 +6,20 @@
 export type paths = Record<string, never>;
 export type webhooks = Record<string, never>;
 export interface components {
-    schemas: {
-        Script: {
-            script: string;
-            workdir: string;
-            user?: string;
-            group?: string;
-        };
+  schemas: {
+    Script: {
+      script: string;
+      workdir: string;
+      user?: string;
+      group?: string;
+      umask?: string;
     };
-    responses: never;
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
+  };
+  responses: never;
+  parameters: never;
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
 }
 export type $defs = Record<string, never>;
 export type operations = Record<string, never>;

@@ -11,5 +11,6 @@ info: {
 	workdir!: string
 	user?:    string
 	group?:   string
+	umask?:   string
 	...
 }
