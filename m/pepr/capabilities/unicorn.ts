@@ -1,5 +1,17 @@
 import { Capability, Log, RegisterKind, a } from "pepr";
 
+import { components } from "../unicorns";
+
+class UnicornKind extends a.GenericKind {
+  spec: components["schemas"]["Unicorn"];
+}
+
+RegisterKind(UnicornKind, {
+  group: "pepr.dev",
+  version: "v1",
+  kind: "Unicorn",
+});
+
 export const UnicornPepr = new Capability({
   name: "unicorn",
   description: "A simple example capability to show how custom resources work.",
@@ -7,13 +19,6 @@ export const UnicornPepr = new Capability({
 });
 
 const { When } = UnicornPepr;
-
-class UnicornKind extends a.GenericKind {
-  spec: {
-    message: string;
-    counter: number;
-  };
-}
 
 RegisterKind(UnicornKind, {
   group: "pepr.dev",

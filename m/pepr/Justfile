@@ -15,8 +15,31 @@ pepr:
     npx pepr dev --confirm
 
 test:
-    # TODO manage unicorn
-    # TODO generate crd.defn.yaml
-    cue def api.defn.cue --force -o api.defn.yaml --out openapi+yaml
-    cue vet api.defn.yaml defn.yaml -d '#Script'
-    npx openapi-typescript api.defn.yaml -o defn.d.ts
+    #!/usr/bin/env bash
+    set -efu
+
+    cue def api.scripts.cue --force -o api.scripts.yaml --out openapi+yaml
+    cue vet api.scripts.yaml scripts.yaml -d '#Script'
+    npx openapi-typescript api.scripts.yaml -o scripts.d.ts
+
+    cue def api.unicorns.cue --force -o api.unicorns.yaml --out openapi+yaml
+    cue vet api.unicorns.yaml unicorns.yaml -d '#Unicorn'
+    npx openapi-typescript api.unicorns.yaml -o unicorns.d.ts
+
+    read_file() {
+        f="$1"; shift
+        k="$1"; shift
+        while IFS= read -r line; do
+            if [[ "$line" == *"openAPIV3Schema"* ]]; then
+                echo "        openAPIV3Schema:"
+                cat "$f" | yq -y ".components.schemas.${k}" | sed 's#^#             #'
+            else
+                echo "$line"
+            fi
+        done
+    }
+
+    cue export --out yaml -e crd.scripts | read_file api.scripts.yaml Script > crd.scripts.yaml 
+    cue export --out yaml -e crd.unicorns | read_file api.unicorns.yaml Unicorn > crd.unicorns.yaml 
+
+    trunk fmt
