@@ -1,7 +1,17 @@
 import { exec } from "child_process";
 import { Capability, K8s, Log, RegisterKind, a, kind } from "pepr";
 
-import { components } from '../defn';
+import { components } from "../defn";
+
+class ScriptKind extends a.GenericKind {
+  spec: components["schemas"]["Script"];
+}
+
+RegisterKind(ScriptKind, {
+  group: "defn.dev",
+  version: "v1",
+  kind: "Script",
+});
 
 export const DefnPepr = new Capability({
   name: "defn",
@@ -10,18 +20,6 @@ export const DefnPepr = new Capability({
 });
 
 const { When, Store } = DefnPepr;
-
-class ScriptKind extends a.GenericKind {
-  spec: components['schemas']['Script'];
-}
-
-
-
-RegisterKind(ScriptKind, {
-  group: "defn.dev",
-  version: "v1",
-  kind: "Script",
-});
 
 When(ScriptKind)
   .IsCreatedOrUpdated()
