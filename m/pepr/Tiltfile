@@ -2,6 +2,7 @@
 
 allow_k8s_contexts("k3d-pepr-dev")
 
+k8s_yaml(local('cat crd.*.yaml'))
 k8s_yaml(local('cat deploy.yaml'))
 
 local_resource(

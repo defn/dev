@@ -1,6 +1,6 @@
 up *args:
     npm run k3d-setup
-    kubectl apply -f crd.yaml
+    kubectl apply -f crd.*.yaml
     tilt up {{ args }}
 
 down: 
@@ -13,3 +13,10 @@ pepr:
     #!/usr/bin/env bash
     while ! kubectl get nodes; do date; sleep 5; done
     npx pepr dev --confirm
+
+test:
+    # TODO manage unicorn
+    # TODO generate crd.defn.yaml
+    npx openapi-typescript api.defn.yaml -o defn.d.ts
+    cue def api.defn.cue --force -o api.defn.yaml --out openapi+yaml
+    cue vet api.defn.yaml defn.yaml -d '#Script'

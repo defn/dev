@@ -28,3 +28,4 @@ metadata:
   namespace: defn
 spec:
   script: uname -a && pwd
+  workdir: /tmp

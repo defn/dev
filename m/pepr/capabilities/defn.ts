@@ -1,6 +1,8 @@
 import { exec } from "child_process";
 import { Capability, K8s, Log, RegisterKind, a, kind } from "pepr";
 
+import { components } from '../defn';
+
 export const DefnPepr = new Capability({
   name: "defn",
   description: "Sandbox Operator",
@@ -10,10 +12,10 @@ export const DefnPepr = new Capability({
 const { When, Store } = DefnPepr;
 
 class ScriptKind extends a.GenericKind {
-  spec: {
-    script: string;
-  };
+  spec: components['schemas']['Script'];
 }
+
+
 
 RegisterKind(ScriptKind, {
   group: "defn.dev",
@@ -24,6 +26,7 @@ RegisterKind(ScriptKind, {
 When(ScriptKind)
   .IsCreatedOrUpdated()
   .Watch(async scr => {
+    Log.info("Script workdir: " + scr.spec.workdir);
     Log.info("Script created: " + scr.spec.script);
     exec(scr.spec.script, (error, stdout, stderr) => {
       if (error) {
