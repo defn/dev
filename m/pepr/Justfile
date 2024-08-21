@@ -18,14 +18,6 @@ test:
     #!/usr/bin/env bash
     set -efu
 
-    cue def api.scripts.cue --force -o api.scripts.yaml --out openapi+yaml
-    cue vet api.scripts.yaml scripts.yaml -d '#Script'
-    npx openapi-typescript api.scripts.yaml -o scripts.d.ts
-
-    cue def api.unicorns.cue --force -o api.unicorns.yaml --out openapi+yaml
-    cue vet api.unicorns.yaml unicorns.yaml -d '#Unicorn'
-    npx openapi-typescript api.unicorns.yaml -o unicorns.d.ts
-
     read_file() {
         f="$1"; shift
         k="$1"; shift
@@ -39,7 +31,11 @@ test:
         done
     }
 
-    cue export --out yaml -e crd.scripts | read_file api.scripts.yaml Script > crd.scripts.yaml 
-    cue export --out yaml -e crd.unicorns | read_file api.unicorns.yaml Unicorn > crd.unicorns.yaml 
+    for a in Script Unicorn; do 
+        cue def api.$a.cue --force -o api.$a.yaml --out openapi+yaml
+        cue vet api.$a.yaml $a.yaml -d "#$a"
+        npx openapi-typescript api.$a.yaml -o $a.d.ts
+        cue export --out yaml -e crd.$a | read_file api.$a.yaml $a > crd.$a.yaml 
+    done
 
     trunk fmt

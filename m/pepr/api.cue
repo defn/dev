@@ -1,10 +1,10 @@
 package api
 
-crd: [crd_name=string]: {
-	#plural:   crd_name
-	#singular: string
-	#kind:     string
+crd: [kind_name=string]: {
+	#kind:     kind_name
 	#domain:   string
+	#plural:   string
+	#singular: string
 
 	apiVersion: "apiextensions.k8s.io/v1"
 	kind:       "CustomResourceDefinition"
@@ -26,14 +26,14 @@ crd: [crd_name=string]: {
 	}
 }
 
-crd: scripts: {
+crd: Script: {
 	#domain:   "defn.dev"
 	#singular: "script"
-	#kind:     "Script"
+	#plural:   "scripts"
 }
 
-crd: unicorns: {
+crd: Unicorn: {
 	#domain:   "pepr.dev"
 	#singular: "unicorn"
-	#kind:     "Unicorn"
+	#plural:   "unicorns"
 }
