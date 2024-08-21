@@ -24,7 +24,14 @@ test:
         while IFS= read -r line; do
             if [[ "$line" == *"openAPIV3Schema"* ]]; then
                 echo "        openAPIV3Schema:"
-                cat "$f" | yq -y ".components.schemas.${k}" | sed 's#^#             #'
+                echo "          type: object"
+                echo "          properties:"
+                echo "            spec:"
+                echo "              type: object"
+                echo "              required:"
+                cat "$f" | yq -y ".components.schemas.${k}.required" | sed 's#^#                 #'
+                echo "              properties:"
+                cat "$f" | yq -y ".components.schemas.${k}.properties" | sed 's#^#                 #'
             else
                 echo "$line"
             fi

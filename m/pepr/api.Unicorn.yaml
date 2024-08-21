@@ -14,4 +14,4 @@ components:
         message:
           type: string
         counter:
-          type: integer
+          type: number

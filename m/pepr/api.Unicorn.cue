@@ -7,6 +7,6 @@ info: {
 
 #Unicorn: {
 	message!: string
-	counter!: int
+	counter!: number
 	...
 }
