@@ -1,6 +1,6 @@
 import { Capability, Log, RegisterKind, a } from "pepr";
 
-import { components } from "../unicorns";
+import { components } from "../Unicorn";
 
 class UnicornKind extends a.GenericKind {
   spec: components["schemas"]["Unicorn"];

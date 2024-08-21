@@ -1,7 +1,7 @@
 import { exec } from "child_process";
 import { Capability, K8s, Log, RegisterKind, a, kind } from "pepr";
 
-import { components } from "../scripts";
+import { components } from "../Script";
 
 class ScriptKind extends a.GenericKind {
   spec: components["schemas"]["Script"];

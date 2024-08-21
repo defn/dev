@@ -29,11 +29,11 @@ crd: [kind_name=string]: {
 crd: Script: {
 	#domain:   "defn.dev"
 	#singular: "script"
-	#plural:   "scripts"
+	#plural:     "scripts"
 }
 
 crd: Unicorn: {
 	#domain:   "pepr.dev"
 	#singular: "unicorn"
-	#plural:   "unicorns"
+	#plural:     "unicorns"
 }
