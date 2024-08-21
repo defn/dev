@@ -20,14 +20,8 @@ export const UnicornPepr = new Capability({
 
 const { When } = UnicornPepr;
 
-RegisterKind(UnicornKind, {
-  group: "pepr.dev",
-  version: "v1",
-  kind: "Unicorn",
-});
-
 When(UnicornKind)
-  .IsCreated()
+  .IsCreatedOrUpdated()
   .Mutate(request => {
     request.Merge({
       spec: {
@@ -35,7 +29,8 @@ When(UnicornKind)
         counter: Math.random(),
       },
     });
+    Log.info("Unicorn mutated: " + request.Request.name);
   })
   .Watch(async uni => {
-    Log.info("Unicorn mutated: " + uni.metadata.name);
+    Log.info("Unicorn seen: " + uni.metadata.name);
   });
