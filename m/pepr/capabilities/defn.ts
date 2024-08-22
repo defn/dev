@@ -19,7 +19,7 @@ export const DefnPepr = new Capability({
   namespaces: ["defn"],
 });
 
-const { When, Store } = DefnPepr;
+const { When } = DefnPepr;
 
 When(ScriptKind)
   .IsCreatedOrUpdated()
@@ -61,6 +61,4 @@ When(a.Namespace)
     } catch (error) {
       Log.error(error, "Failed to apply ConfigMap using server-side apply.");
     }
-
-    Store.setItem("hello", "world");
   });
