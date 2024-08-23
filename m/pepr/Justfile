@@ -13,7 +13,7 @@ k3d:
 pepr:
     #!/usr/bin/env bash
     while ! kubectl get nodes; do date; sleep 5; done
-    npx pepr dev --confirm | egrep --line-buffered ' (INFO|DEBUG) '
+    npx pepr dev --confirm | egrep --line-buffered '^[^ ]'
 
 test:
     #!/usr/bin/env bash
