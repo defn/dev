@@ -6,17 +6,17 @@
       },
       "locked": {
         "dir": "m/pkg/buf",
-        "lastModified": 1723852302,
-        "narHash": "sha256-lnyUcTAk2GRWtqtAsywXrlyIxHz7GBXfa5RoEje5a1o=",
+        "lastModified": 1724376789,
+        "narHash": "sha256-QPqcV1VTH3jPH4T6S4nIKZnoR27Fobr7DrJlciIjJH0=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "e57a1ebe965688018d1aea2e31946a101d55ac64",
+        "rev": "7dffd6e14085925f481518f927e27059d57c863b",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/buf",
         "owner": "defn",
-        "ref": "pkg-buf-1.37.0-1",
+        "ref": "pkg-buf-1.38.0-1",
         "repo": "dev",
         "type": "github"
       }
