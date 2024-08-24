@@ -3,6 +3,11 @@ mod playbook 'm/common/playbook.Justfile'
 mod gpg 'm/common/gpg.Justfile'
 mod lib 'm/common/lib.Justfile'
 
+chromebook-coder:
+  make chrome-dev-gpg
+  screen -dmS coder make chrome-dev-coder 
+  screen -dmS socat make chrome-dev-socat
+
 create-coder-agent:
 	#!/usr/bin/env bash
 
