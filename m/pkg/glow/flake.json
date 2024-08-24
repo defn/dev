@@ -1,6 +1,6 @@
 {
   "slug": "pkg-glow",
   "ghrepo": "charmbracelet/glow",
-  "vendor": "1.5.1",
-  "revision": "10"
+  "vendor": "2.0.0",
+  "revision": "0"
 }
