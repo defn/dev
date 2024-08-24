@@ -8,6 +8,9 @@ chromebook-coder:
   screen -dmS coder make chrome-dev-coder 
   screen -dmS socat make chrome-dev-socat
 
+chromebook-openvpn:
+  screen -dmS openvpn make vpn
+
 create-coder-agent:
 	#!/usr/bin/env bash
 
