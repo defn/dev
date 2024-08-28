@@ -1,6 +1,6 @@
 {
   "slug": "pkg-honeytail",
   "ghrepo": "honeycombio/honeytail",
-  "vendor": "1.9.0",
-  "revision": "2"
+  "vendor": "1.10.0",
+  "revision": "0"
 }
