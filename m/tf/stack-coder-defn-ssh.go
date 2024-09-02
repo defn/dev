@@ -87,7 +87,7 @@ func CoderDefnSshStack(scope constructs.Construct, site *infra.AwsProps, name st
 		Auth: infra.Js("token"),
 		DisplayApps: &agent.AgentDisplayApps{
 			SshHelper:      infra.Jsbool(false),
-			Vscode:         infra.Jsbool(false),
+			Vscode:         infra.Jsbool(true),
 			VscodeInsiders: infra.Jsbool(false),
 		},
 		Env: &map[string]*string{

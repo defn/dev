@@ -84,7 +84,7 @@ resource "coder_agent" "main" {
   startup_script = "set -x; exec >>/tmp/meh.log; exec 2>&1; cd ~ && source .bash_profile && j destroy-coder-agent && cd ~/m && j coder::code-server $${CODER_NAME} &"
   display_apps {
     ssh_helper      = false
-    vscode          = false
+    vscode          = true
     vscode_insiders = false
   }
 }
