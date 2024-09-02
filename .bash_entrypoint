@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+unset STARSHIP_NO
+
 if [[ -z ${WORKDIR-} ]]; then
 	first_workdir=1
 else
