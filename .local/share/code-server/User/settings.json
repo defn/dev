@@ -89,8 +89,9 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "genieai.enableConversationHistory": true,
-  "genieai.openai.model": "gpt-4",
   "editor.stickyScroll.enabled": false,
   "markdown.marp.exportType": "html",
-  "markdown.marp.enableHtml": true
+  "markdown.marp.enableHtml": true,
+  "genieai.openai.model": "gpt-4",
+  "genieai.openai.apiBaseUrl": "http://localhost:4096"
 }
