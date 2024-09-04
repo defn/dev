@@ -8,7 +8,7 @@
 
     packages = ctx: {
       wut = with ctx.pkgs; writeShellScriptBin "wut" ''
-        exec env LD_LIBRARY_PATH="${lib.makeLibraryPath [glibc zlib gcc.cc]}" python wut.py
+        exec env LD_LIBRARY_PATH="${lib.makeLibraryPath [glibc zlib gcc.cc]}" "$@"
       '';
     };
 
