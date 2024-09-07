@@ -7,7 +7,7 @@
       "locked": {
         "dir": "m/pkg/buf",
         "lastModified": 1725677815,
-        "narHash": "sha256-1Tr0nfAQu6+BRj3oLvzniSZybRwkWgrW3g2+ondcG6Q=",
+        "narHash": "sha256-pczcuspxL5+hhi1aPl0bl7pZB0nsZIkC6Thkc+nMjmw=",
         "owner": "defn",
         "repo": "dev",
         "rev": "3fa4c06dd3f6c4706e44d5f88236fd57144af958",
