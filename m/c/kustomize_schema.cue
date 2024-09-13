@@ -1,5 +1,7 @@
 package c
 
+import "list"
+
 kustomize: [string]: #KustomizeHelm | #Kustomize
 kustomize: [NAME=string]: _name: NAME
 
@@ -92,16 +94,16 @@ kustomize: [NAME=string]: _name: NAME
 			namespace: kns
 		}
 
-		patches: [
+		patches: list.Concat([[
 			for _psm_name, _psm in psm {
 				path: "patch-\(_psm_name).yaml"
 			},
-		] + [
+		], [
 			for _jsp_name, _jsp in jsp {
 				path:   "jsonp-\(_jsp_name).yaml"
 				target: _jsp.target
 			},
-		]
+		]])
 
 		resources: [
 			for _rname, _r in resource {
