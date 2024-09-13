@@ -1,13 +1,13 @@
 module github.com/defn/dev/m
 
-go 1.22.5
+go 1.23.1
 
 // pin, otherwise something protobuf breaks
 /// https://github.com/cue-lang/cue/blob/master/go.mod
 replace github.com/protocolbuffers/txtpbfmt => github.com/protocolbuffers/txtpbfmt v0.0.0-20230328191034-3462fbc510c0
 
 require (
-	cuelang.org/go v0.10.0
+	cuelang.org/go v0.11.0-alpha.1
 	github.com/aws/constructs-go/constructs/v10 v10.3.0
 	github.com/aws/jsii-runtime-go v1.103.1
 	github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.33.0
