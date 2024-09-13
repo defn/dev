@@ -3,6 +3,7 @@
   outputs = inputs: inputs.pkg.downloadMain rec {
     src = builtins.path { path = ./.; name = "pkg-mirrord"; };
 
+
     url_template = input:
       if input.os == "mac" then
         "https://github.com/metalbear-co/mirrord/releases/download/${input.vendor}/mirrord_${input.os}_${input.arch}"
