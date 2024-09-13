@@ -1,6 +1,7 @@
 package infra
 
 import (
+	"list"
 	inf "github.com/defn/dev/m/command/infra"
 )
 
@@ -131,7 +132,7 @@ input: inf.#AwsProps & {
 		chamber: {
 			region: "us-west-2"
 			// missing k
-			#types: ["org"] + ["1", "2", "3", "4", "5", "6", "7", "8", "9"] + ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+			#types: list.Concat([["org"], list.Concat([["1", "2", "3", "4", "5", "6", "7", "8", "9"], ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]])])
 		}
 
 		immanent: {
