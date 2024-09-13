@@ -5,7 +5,7 @@
     goreleaser.url = github:defn/dev/pkg-goreleaser-2.2.0-1?dir=m/pkg/goreleaser;
     yaegi.url = github:defn/dev/pkg-yaegi-0.16.1-2?dir=m/pkg/yaegi;
     # https://github.com/NixOS/nixpkgs/tree/master/pkgs/development/compilers/go
-    latest.url = github:NixOS/nixpkgs?rev=63d05d989e73c5a59bb1c4fd3b32e5e40136528d;
+    latest.url = github:NixOS/nixpkgs?rev=6802206bcc36c1be1ad0a3ff3a503d6d9502d4ac;
   };
 
   outputs = inputs: inputs.goreleaser.inputs.pkg.main rec {
