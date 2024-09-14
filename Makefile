@@ -248,6 +248,17 @@ nix:
 	ln -nfs $$(which bazelisk) $$HOME/bin/$$(uname -s)/bazel
 	sudo rm -f /usr/local/bin/bazel /usr/local/bin/bazelisk
 
+nix-reset:
+	docker run --rm -ti -v /home/ubuntu:/home/ubuntu -v /nix/new:/nix --workdir /home/ubuntu --user ubuntu ubuntu make nix-reset
+
+nix-reset:
+	sudo apt update
+	sudo apt install -y sudo make direnv gpg curl xz-utils git git-lfs rsync make
+	echo 'ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' | sudo tee /etc/sudoers.d/ubuntu
+	sudo chown ubuntu:ubuntu /nix
+	$(MAKE) nix-reinstall
+	$(MAKE) install
+
 nix-reinstall:
 	rm -rf .nix-* .local/state/nix
 	t make_nix $(MAKE) nix

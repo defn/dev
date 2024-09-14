@@ -24,14 +24,3 @@ ssh defn@immanent docker exec -i dev-home-1
 
 connect code-server coder workspace to localhost:80:
 socat TCP-LISTEN:8080,bind=172.18.0.2,fork TCP:127.0.0.1:8080
-
-docker run --rm -ti -v /home/ubuntu:/home/ubuntu -v /nix/new:/nix --workdir /home/ubuntu ubuntu
-
-apt update
-apt install -y sudo make direnv gpg curl xz-utils git git-lfs rsync
-echo 'ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ubuntu
-chown ubuntu:ubuntu /nix
-sudo su - ubuntu
-make nix
-make install
-
