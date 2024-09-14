@@ -249,7 +249,13 @@ nix:
 	sudo rm -f /usr/local/bin/bazel /usr/local/bin/bazelisk
 
 nix-reset:
+	sudo rm -rf /nix/new /nix/old
 	docker run --rm -ti -v /home/ubuntu:/home/ubuntu -v /nix/new:/nix --workdir /home/ubuntu --user root ubuntu:24.04 ./bin/reset-nix
+	sudo rm -rf /nix/old
+	mkdir -p /nix/old
+	mv -v /nix/var /nix/store /nix/old/
+	sudo /bin/mv -v /nix/new/var /nix/new/store /nix/
+	sudo rm -rf /nix/new
 
 nix-reset-inner:
 	. .bash_profile && $(MAKE) nix-reset-inner-inner

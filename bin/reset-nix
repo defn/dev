@@ -6,11 +6,5 @@ set -exfu
 apt update
 apt install -y make sudo direnv gpg
 echo 'ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' | tee /etc/sudoers.d/ubuntu
-sudo rm -rf /nix/new /nix/old
 sudo -u ubuntu -H make nix-reset-inner
-cd /nix
-rm -rf old
-mkdir -p old
-mv -v var store old/
-sudo /bin/mv -v new/var new/store .
 
