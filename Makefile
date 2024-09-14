@@ -256,7 +256,7 @@ nix-reset-inner:
 
 nix-reset-inner-inner:
 	sudo apt update
-	sudo apt install -y sudo make direnv gpg curl xz-utils git git-lfs rsync gpg
+	sudo apt install -y curl xz-utils git git-lfs rsync
 	sudo chown ubuntu:ubuntu /nix
 	$(MAKE) nix-reinstall
 	$(MAKE) install
