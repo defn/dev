@@ -62,7 +62,7 @@ inventory: {
 		"rpi4a",
 		"rpi4b",
 		"rpi4c",
-		"rpi4d",
+		//"rpi4d",
 	]
 
 	rpi5: hosts: [
@@ -73,9 +73,9 @@ inventory: {
 	]
 
 	zimaboard: hosts: [
-		"zm1",
-		"zm2",
-		"zm3",
+		//"zm1",
+		//"zm2",
+		//"zm3",
 	]
 
 	heavy: hosts: [
