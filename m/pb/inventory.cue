@@ -17,10 +17,6 @@ inventory: {
 		"rpi4c",
 	]
 
-	main: hosts: [
-		"macmini", "kowloon",
-	]
-
 	hetzner: hosts: [
 		"district",
 	]
@@ -70,10 +66,10 @@ inventory: {
 	]
 
 	rpi5: hosts: [
-		//"rpi5a",
-		//"rpi5b",
-		//"rpi5c",
-		//"rpi5d",
+		"rpi5a",
+		"rpi5b",
+		"rpi5c",
+		"rpi5d",
 	]
 
 	zimaboard: hosts: [
