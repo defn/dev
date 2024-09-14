@@ -42,7 +42,7 @@ inventory: {
 	]
 
 	chrome: hosts: [
-		// "pengu",
+		"pengu",
 		"kinko",
 	]
 
