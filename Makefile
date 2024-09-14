@@ -249,7 +249,7 @@ nix:
 	sudo rm -f /usr/local/bin/bazel /usr/local/bin/bazelisk
 
 nix-reset:
-	docker run --rm -ti -v /home/ubuntu:/home/ubuntu -v /nix/new:/nix --workdir /home/ubuntu --user ubuntu ubuntu make nix-reset-inner
+	docker run --rm -ti -v /home/ubuntu:/home/ubuntu -v /nix/new:/nix --workdir /home/ubuntu --user ubuntu ubuntu ./bin/reset-nix
 
 nix-reset-inner:
 	sudo apt update
