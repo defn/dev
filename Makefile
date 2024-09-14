@@ -249,9 +249,9 @@ nix:
 	sudo rm -f /usr/local/bin/bazel /usr/local/bin/bazelisk
 
 nix-reset:
-	docker run --rm -ti -v /home/ubuntu:/home/ubuntu -v /nix/new:/nix --workdir /home/ubuntu --user ubuntu ubuntu make nix-reset
+	docker run --rm -ti -v /home/ubuntu:/home/ubuntu -v /nix/new:/nix --workdir /home/ubuntu --user ubuntu ubuntu make nix-reset-inner
 
-nix-reset:
+nix-reset-inner:
 	sudo apt update
 	sudo apt install -y sudo make direnv gpg curl xz-utils git git-lfs rsync make
 	echo 'ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' | sudo tee /etc/sudoers.d/ubuntu
