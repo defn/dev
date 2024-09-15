@@ -5,6 +5,8 @@
 # intalling flake nix bin paths, stat paths for existence, then look up the bazel
 # artifact for the flake.
 #
+# bump: 1
+#
 
 function main {
 	# tmp accumulates flake paths
