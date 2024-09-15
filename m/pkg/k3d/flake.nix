@@ -21,7 +21,7 @@
       "aarch64-linux" = {
         os = "linux";
         arch = "arm64";
-        sha256 = "sha256-aaaaavUVRe9GD9mDdzzQU/PU+50tLJFoJOeoGbRnkac="; # aarch64-linux
+        sha256 = "sha256-vFgODKkHFWrNSV1Cl17RaHqzqawDkq85Ga/GKoqLZnA="; # aarch64-linux
       };
       "x86_64-darwin" = {
         os = "darwin";
