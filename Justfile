@@ -43,7 +43,7 @@ command pattern *args:
 upgrade *args:
 	just play upgrade {{ args }}
 
-cache *args:
+cache *args="cache:!rpi5":
 	just play cache {{ args }}
 
 home *args:
