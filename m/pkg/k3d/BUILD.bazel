@@ -3,4 +3,5 @@ load("//b/nix:nix.bzl", "nix_flake")
 # nix flake
 nix_flake(
     name = "flake",
+    visibility = ["//visibility:public"],
 )
