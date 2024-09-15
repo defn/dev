@@ -1,6 +1,6 @@
 {
-  "slug": "pkg-kubedseal",
+  "slug": "pkg-kubeseal",
   "ghrepo": "bitnami-labs/sealed-secrets",
   "vendor": "0.27.1",
-  "revision": "2"
+  "revision": "3"
 }
