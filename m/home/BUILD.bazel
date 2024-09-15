@@ -8,7 +8,6 @@ flake_names = [
     "az",
     "home",
     "secrets",
-    "acme",
     "tailscale",
     "cloudflared",
     "cloudflareddns",
