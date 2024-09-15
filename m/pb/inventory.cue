@@ -3,22 +3,17 @@ package pb
 #username: "ubuntu"
 
 inventory: {
-	[string]: vars: {
-		// provide defaults for inventory/packer.ini
-		ansible_user: string | *#username
-
-		bazel_remote_cache_server: string | *"100.116.216.28" // district
-		bazel_remote_cache_port:   string | *"9092"           // public port
+	all: vars: {
+		ansible_user:              string | *#username
 		bazel_jobs:                string | *"1"
+		bazel_remote_cache_port:   string | *"9092"           // public port
+		bazel_remote_cache_server: string | *"100.116.216.28" // district
 	}
 
-	local_cache: {
-		vars: bazel_remote_cache_server: "100.101.80.89" // macmini
-		hosts: [
-			"rpi3a",
-			"rpi3b",
-			"rpi5b",
-		]
+	"_meta": hostvars: {
+		rpi3a: bazel_remote_cache_server: "100.101.80.89" // macmini
+		rpi3b: bazel_remote_cache_server: "100.101.80.89" // macmini
+		rpi5b: bazel_remote_cache_server: "100.101.80.89" // macmini
 	}
 
 	cache: hosts: [
@@ -93,5 +88,11 @@ inventory: {
 		"mbpro",
 		"gw",
 		"pc",
+	]
+
+	local_cache: hosts: [
+		"rpi3a",
+		"rpi3b",
+		"rpi5b",
 	]
 }
