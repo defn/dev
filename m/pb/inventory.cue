@@ -12,6 +12,15 @@ inventory: {
 		bazel_jobs:                string | *"1"
 	}
 
+	local_cache: {
+		vars: bazel_remote_cache_server: "100.101.80.89" // macmini
+		hosts: [
+			"rpi3a",
+			"rpi3b",
+			"rpi5b",
+		]
+	}
+
 	cache: hosts: [
 		"district",
 		"rpi4c",
