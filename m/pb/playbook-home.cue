@@ -2,7 +2,7 @@ package pb
 
 playbook: home: [{
 	name:  "Install new flakes"
-	hosts: "all:!rpi3"
+	hosts: "all"
 	roles: [
 		"home_flakes",
 	]

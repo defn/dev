@@ -3,7 +3,7 @@ SHELL := /bin/bash
 # https://nixos.org/download
 NIX_VERSION := 2.24.5
 
-flakes ?= attic cue gum vhs glow dyff az home secrets acme tailscale cloudflared cloudflareddns wireproxy vpn openfga utils just buildifier bazelisk ibazel oci development terraform terraformdocs packer step awscli chamber cloud kubectl minikube minikubekvm2 k3sup k9s helm kustomize stern argoworkflows argocd kn dapr vcluster kubevirt linkerd kuma cilium hubble tfo mirrord crossplane spire coder codeserver tilt gh ghapps earthly flyctl oras regctl regbot regsync buildkite buildevents honeyvent honeymarker honeytail hugo vault godev jsdev pydev shell
+flakes ?= attic cue gum vhs glow dyff az home secrets acme tailscale cloudflared cloudflareddns wireproxy vpn openfga utils just buildifier bazelisk ibazel oci development terraform terraformdocs packer step awscli chamber cloud kubectl minikube minikubekvm2 k3d k3sup k9s helm kustomize stern kubeseal argoworkflows argocd kn dapr vcluster kubevirt linkerd kuma cilium hubble tfo mirrord crossplane spire coder codeserver tilt gh ghapps earthly flyctl oras regctl regbot regsync buildkite buildevents honeyvent honeymarker honeytail hugo vault godev jsdev pydev shell
 home ?= home
 
 name ?= local
