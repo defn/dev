@@ -49,34 +49,34 @@
       },
       "locked": {
         "dir": "m/pkg/jsdev",
-        "lastModified": 1718435775,
-        "narHash": "sha256-EtmYzgT4YLiksDdE9z4bhyoBLjIgQNW/n4acCOx6p0g=",
+        "lastModified": 1725414092,
+        "narHash": "sha256-d520g/g0r97T5nXcr/TutiYgmx83BMCSd94ZmAUCL6g=",
         "owner": "defn",
         "repo": "dev",
-        "rev": "6f7e8601cab685f5e1d94a5a37a7914f34968f77",
+        "rev": "b55e58532b42a608bff92e786468832a2d4ffb54",
         "type": "github"
       },
       "original": {
         "dir": "m/pkg/jsdev",
         "owner": "defn",
-        "ref": "pkg-jsdev-0.0.70",
+        "ref": "pkg-jsdev-0.0.71",
         "repo": "dev",
         "type": "github"
       }
     },
     "latest": {
       "locked": {
-        "lastModified": 1716991742,
-        "narHash": "sha256-+WTfbnobUdXOGoojoEPb5lIlvUDYJakaLD/9Y1Dsgn0=",
+        "lastModified": 1724652003,
+        "narHash": "sha256-nTwnwwhOCD3vGDtrJ3gFA46NI4Hf4+f7fgvOh18fipo=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "d2cac0ee1bdb55879af0f98023e478d6fc7f5e41",
+        "rev": "24536bf02cd9b199fdca550ba7e4f53b9a94119a",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "d2cac0ee1bdb55879af0f98023e478d6fc7f5e41",
+        "rev": "24536bf02cd9b199fdca550ba7e4f53b9a94119a",
         "type": "github"
       }
     },

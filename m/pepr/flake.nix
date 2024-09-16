@@ -1,7 +1,7 @@
 {
   inputs = {
     pkg.url = github:defn/dev/pkg-pkg-0.0.17?dir=m/pkg/pkg;
-    jsdev.url = github:defn/dev/pkg-jsdev-0.0.70?dir=m/pkg/jsdev;
+    jsdev.url = github:defn/dev/pkg-jsdev-0.0.71?dir=m/pkg/jsdev;
   };
 
   outputs = inputs: inputs.pkg.venvMain rec {

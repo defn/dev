@@ -7,9 +7,6 @@ up *args:
 down: 
     k3d cluster delete pepr-dev
 
-k3d:
-    #!/usr/bin/env bash
-
 pepr:
     #!/usr/bin/env bash
     while ! kubectl get nodes; do date; sleep 5; done
