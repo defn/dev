@@ -40,7 +40,7 @@ play pb *lim:
 command pattern *args:
 	just playbook::command {{pattern}} {{args}}
 
-upgrade *args:
+upgrade *args="all:!pc":
 	just play upgrade {{ args }}
 
 cache *args="cache:!rpi5":
