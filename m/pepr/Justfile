@@ -1,6 +1,7 @@
 up *args:
     npm run k3d-setup
-    kubectl apply -f crd.*.yaml
+    just test
+    for a in crd.*.yaml; do kubectl apply -f $a; done
     kubectl create ns defn
     tilt up {{ args }}
 
