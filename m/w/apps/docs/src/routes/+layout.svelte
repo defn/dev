@@ -1,5 +1,5 @@
 <script>
-  import { Page } from 'ui';
+  import { Page } from "ui";
 </script>
 
 <Page>
