@@ -17,7 +17,11 @@
       };
     };
 
-    url_template = input: "https://pkgs.tailscale.com/stable/tailscale_${input.vendor}_${input.arch}.tgz";
+    url_template = input:
+      if input.os == "linux" then
+        "https://pkgs.tailscale.com/stable/tailscale_${input.vendor}_${input.arch}.tgz"
+      else
+        "https://pkgs.tailscale.com/stable/tailscale_${input.vendor2}_${input.arch}.tgz";
 
     installPhase = pkg: ''
       install -m 0755 -d $out $out/bin
@@ -37,22 +41,22 @@
       "x86_64-linux" = {
         os = "linux";
         arch = "amd64";
-        sha256 = "sha256-NiX1p4OWI9Zkbk04sb5LQzTc8F83H3NtLv8w9/QEzTE="; # x86_64-linux
+        sha256 = "sha256-aaaaayiV3IyxN6P6Mb6JFTJuMtw0Aykrwv032NA3KYg="; # x86_64-linux
       };
       "aarch64-linux" = {
         os = "linux";
         arch = "arm64";
-        sha256 = "sha256-SWcakqLc3zIb6aIe3VcHhXOJF8OBhAt9bbddgrFN7Bc="; # aarch64-linux
+        sha256 = "sha256-aaaaaauOS9qX6YSw+cJmCAPaeXCrLcUA79Okih43PiE="; # aarch64-linux
       };
       "x86_64-darwin" = {
         os = "darwin";
         arch = "amd64";
-        sha256 = "sha256-NiX1p4OWI9Zkbk04sb5LQzTc8F83H3NtLv8w9/QEzTE="; # x86_64-darwin
+        sha256 = "sha256-aaaaa4OWI9Zkbk04sb5LQzTc8F83H3NtLv8w9/QEzTE="; # x86_64-darwin
       };
       "aarch64-darwin" = {
         os = "darwin";
         arch = "arm64";
-        sha256 = "sha256-SWcakqLc3zIb6aIe3VcHhXOJF8OBhAt9bbddgrFN7Bc="; # aarch64-darwin
+        sha256 = "sha256-aaaaaqLc3zIb6aIe3VcHhXOJF8OBhAt9bbddgrFN7Bc="; # aarch64-darwin
       };
     };
   };
