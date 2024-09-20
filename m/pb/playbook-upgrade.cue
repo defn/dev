@@ -10,7 +10,7 @@ playbook: upgrade: [{
 		args: executable: "/bin/bash"
 	}, {
 		name:  "Autoremove packages"
-		shell: "sudo apt autoremove -y || true"
+		shell: "sudo apt -o DPkg::Lock::Timeout=-1 autoremove -y || true"
 		args: executable: "/bin/bash"
 	}, {
 		name: "Update apt packages"
@@ -18,9 +18,13 @@ playbook: upgrade: [{
 			upgrade:      "yes"
 			update_cache: "yes"
 		}
+		register: "apt_update"
+		until:    "apt_update is success"
+		retries:  5
+		delay:    30
 	}, {
 		name:  "Autoremove packages"
-		shell: "sudo apt autoremove -y || true"
+		shell: "sudo apt -o DPkg::Lock::Timeout=-1 autoremove -y || true"
 		args: executable: "/bin/bash"
 	}]
 }]
