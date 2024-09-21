@@ -11,9 +11,9 @@ inventory: {
 	}
 
 	"_meta": hostvars: {
-		rpi3a: bazel_remote_cache_server: "192.168.1.26" // macmini
-		rpi3b: bazel_remote_cache_server: "192.168.1.26" // macmini
-		rpi5b: bazel_remote_cache_server: "192.168.1.26" // macmini
+		// rpi3a: bazel_remote_cache_server: "192.168.1.26" // macmini
+		// rpi3b: bazel_remote_cache_server: "192.168.1.26" // macmini
+		// rpi5b: bazel_remote_cache_server: "192.168.1.26" // macmini
 	}
 
 	cache: hosts: [
