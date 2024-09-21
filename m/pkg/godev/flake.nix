@@ -1,6 +1,5 @@
 {
   inputs = {
-    buf.url = github:defn/dev/pkg-buf-1.42.0-1?dir=m/pkg/buf;
     cosign.url = github:defn/dev/pkg-cosign-2.4.0-1?dir=m/pkg/cosign;
     goreleaser.url = github:defn/dev/pkg-goreleaser-2.3.2-1?dir=m/pkg/goreleaser;
     yaegi.url = github:defn/dev/pkg-yaegi-0.16.1-2?dir=m/pkg/yaegi;
@@ -23,7 +22,6 @@
           delve
           gopls
           go_1_23
-          inputs.buf.defaultPackage.${ctx.system}
           inputs.cosign.defaultPackage.${ctx.system}
           inputs.goreleaser.defaultPackage.${ctx.system}
           inputs.yaegi.defaultPackage.${ctx.system}
