@@ -2,3 +2,4 @@
   hosts: cache
   roles:
     - home_flakes
+    - home_cache
