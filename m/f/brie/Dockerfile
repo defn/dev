@@ -29,7 +29,7 @@ FROM ubuntu:24.04
 RUN apt-get update && apt-get install -y xz-utils curl sudo git make direnv gpg rsync ca-certificates
 
 COPY --from=nix /home/ubuntu /home/ubuntu
-COPY --from=nix /nix /nix
+COPY --from=nix /nix /nix.dist
 
 RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
@@ -41,4 +41,4 @@ ENV HOME=/home/ubuntu
 ENV LANG=C
 WORKDIR /home/ubuntu
 ENTRYPOINT [ "bash", "-c" ]
-CMD [ "set -x; git reset --hard && git pull && source .bash_profile && bin/persist-cache && rsync -ia work /nix/ && rm -rf work && ln -nfs /nix/work ~/; exec /home/ubuntu/bin/nix/coder server" ]
+CMD [ "set -x; git reset --hard && git pull && source .bash_profile && rm -rf work && mkdir -p /nix/work && ln -nfs /nix/work ~/ && bin/persist-cache; if ! test -x /home/ubuntu/bin/nix/coder; then rsync -ia /nix.dist/. /nix/.; fi; exec /home/ubuntu/bin/nix/coder server" ]
