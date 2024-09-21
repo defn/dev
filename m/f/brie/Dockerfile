@@ -19,7 +19,7 @@ RUN bash -c 'source .bash_profile && bin/persist-cache && make nix'
 RUN bash -c 'source .bash_profile && git reset --hard && git pull'
 RUN mkdir -p .config/nix
 COPY nix.conf .config/nix/nix.conf
-RUN bash -c 'source .bash_profile && make home home=f/home flakes="cue gum dyff az home secrets utils just buildifier bazelisk ibazel development awscli cloud coder codeserver tilt gh earthly flyctl shell"'
+RUN bash -c 'source .bash_profile && make home home=f/home flakes="coder codeserver shell"'
 
 RUN rm -rf .cache work
 RUN bash -c 'source .bash_profile && bin/persist-cache && cd m && b clean'
@@ -33,10 +33,12 @@ COPY --from=nix /nix /nix
 
 RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
+RUN curl -fsSL https://tailscale.com/install.sh | sh
+
 USER ubuntu
 ENV USER=ubuntu
 ENV HOME=/home/ubuntu
 ENV LANG=C
 WORKDIR /home/ubuntu
 ENTRYPOINT [ "bash", "-c" ]
-CMD [ "set -x; git reset --hard && git pull && source .bash_profile && bin/persist-cache; exec /home/ubuntu//bin/nix/coder server" ]
+CMD [ "set -x; git reset --hard && git pull && source .bash_profile && bin/persist-cache && rsync -ia work /nix/ && rm -rf work && ln -nfs /nix/work ~/; exec /home/ubuntu/bin/nix/coder server" ]
