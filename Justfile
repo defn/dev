@@ -43,7 +43,7 @@ command pattern *args:
 upgrade *args:
 	just play upgrade {{ args }}
 
-cache *args="cache:!rpi5":
+cache *args="cache":
 	just play cache {{ args }}
 
 home *args:
@@ -52,4 +52,4 @@ home *args:
 all *args="all":
 	just cache cache
 	just home cache
-	just home "{{ args }}:!cache:!rpi3"
+	just home "{{ args }}:!cache"
