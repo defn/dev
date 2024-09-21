@@ -21,6 +21,9 @@ RUN mkdir -p .config/nix
 COPY nix.conf .config/nix/nix.conf
 RUN bash -c 'source .bash_profile && make home home=f/home flakes="coder codeserver shell"'
 
+RUN rm -rf .cache work
+RUN bash -c 'source .bash_profile && bin/persist-cache && cd m && b clean'
+
 FROM ubuntu:24.04
 
 RUN apt-get update && apt-get install -y xz-utils curl sudo git make direnv gpg rsync ca-certificates
