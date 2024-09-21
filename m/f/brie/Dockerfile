@@ -13,12 +13,13 @@ ENV LANG=C
 WORKDIR /home/ubuntu
 
 RUN git clone https://github.com/defn/dev /home/ubuntu
-RUN git pull && echo 20240728
-RUN mkdir -p .config/nix
-COPY nix.conf .config/nix/nix.conf
+RUN git pull && echo 20240921
 
 RUN bash -c 'source .bash_profile && bin/persist-cache && make nix'
-RUN bash -c 'source .bash_profile && git pull && make home home=f/home flakes="cue gum dyff az home secrets utils just buildifier bazelisk ibazel development awscli cloud coder codeserver tilt gh earthly flyctl shell"'
+RUN bash -c 'source .bash_profile && git reset --hard && git pull'
+RUN mkdir -p .config/nix
+COPY nix.conf .config/nix/nix.conf
+RUN bash -c 'source .bash_profile && make home home=f/home flakes="cue gum dyff az home secrets utils just buildifier bazelisk ibazel development awscli cloud coder codeserver tilt gh earthly flyctl shell"'
 
 RUN rm -rf .cache work
 RUN bash -c 'source .bash_profile && bin/persist-cache && cd m && b clean'
@@ -38,4 +39,4 @@ ENV HOME=/home/ubuntu
 ENV LANG=C
 WORKDIR /home/ubuntu
 ENTRYPOINT [ "bash", "-c" ]
-CMD [ "set -x; git reset --hard; git pull; source .bash_profile; bin/persist-cache; exec /home/ubuntu//bin/nix/coder server" ]
+CMD [ "set -x; git reset --hard && git pull && source .bash_profile && bin/persist-cache; exec /home/ubuntu//bin/nix/coder server" ]
