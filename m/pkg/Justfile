@@ -56,5 +56,5 @@ upgrade:
 [private]
 cache:
 	@runmany "$(echo "$(nproc)/4" | bc)" 'cd $1 && nix build && n cache result' */
-	@cd m/pkg && b build
+	@b build
 	@cd /nix/store && runmany "$(nproc)" 'attic push hello $1 || true' */
