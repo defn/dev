@@ -2,6 +2,7 @@ flake_names = [
     "coder",
     "codeserver",
     "terraform",
+    "just",
     "shell",
 ]
 

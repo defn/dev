@@ -19,7 +19,7 @@ RUN bash -c 'source .bash_profile && bin/persist-cache && make nix'
 RUN bash -c 'source .bash_profile && git reset --hard && git pull'
 RUN mkdir -p .config/nix
 COPY nix.conf .config/nix/nix.conf
-RUN bash -c 'source .bash_profile && bin/persist-cache && make home home=f/home flakes="coder codeserver terraform shell" && rm -rf .cache work && cd m && b clean'
+RUN bash -c 'source .bash_profile && bin/persist-cache && make home home=f/home flakes="coder codeserver terraform just shell" && rm -rf .cache work && cd m && b clean'
 RUN tar -cvf /nix.tar /nix
 
 FROM ubuntu:24.04
@@ -39,4 +39,4 @@ ENV HOME=/home/ubuntu
 ENV LANG=C
 WORKDIR /home/ubuntu
 ENTRYPOINT [ "bash", "-c" ]
-CMD [ "git reset --hard && git pull && source .bash_profile && rm -rf work /var/lib/tailscale && mkdir -p /nix/work /nix/tailscale && ln -nfs /nix/work ~/ && ln -nfs /nix/tailscale /var/lib/tailscale && bin/persist-cache; if ! test -x /home/ubuntu/bin/nix/coder; then tar -xf /nix.tar -C /nix; fi; sudo /usr/sbin/tailscaled & exec /home/ubuntu/bin/nix/coder server" ]
+CMD [ "git reset --hard && git pull && source .bash_profile && rm -rf work /var/lib/tailscale && mkdir -p /nix/work /nix/tailscale && ln -nfs /nix/work ~/ && ln -nfs /nix/tailscale /var/lib/tailscale && bin/persist-cache; if ! test -x /home/ubuntu/bin/nix/just; then tar -xf /nix.tar -C /nix; fi; sudo /usr/sbin/tailscaled & exec /home/ubuntu/bin/nix/coder server" ]
