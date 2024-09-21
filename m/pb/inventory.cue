@@ -57,6 +57,10 @@ inventory: {
 		"rpi5",
 	]
 
+	rpi: vars: {
+		bazel_remote_cache_server: "192.168.1.26" // macmini
+	}
+
 	rpi3: hosts: [
 		"rpi3a",
 		"rpi3b",
