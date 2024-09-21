@@ -1,26 +1,5 @@
 {
   "nodes": {
-    "cosign": {
-      "inputs": {
-        "pkg": "pkg"
-      },
-      "locked": {
-        "dir": "m/pkg/cosign",
-        "lastModified": 1722998724,
-        "narHash": "sha256-cuGXsE6F0nPVkupqFgPSzbKuqcfvT1o7Goi0DkOrwvg=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "e9d2f86494e9c07891e0b5c3c6d87a90197b6341",
-        "type": "github"
-      },
-      "original": {
-        "dir": "m/pkg/cosign",
-        "owner": "defn",
-        "ref": "pkg-cosign-2.4.0-1",
-        "repo": "dev",
-        "type": "github"
-      }
-    },
     "dev": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -38,69 +17,6 @@
         "dir": "m/pkg/dev",
         "owner": "defn",
         "ref": "pkg-dev-0.0.13",
-        "repo": "dev",
-        "type": "github"
-      }
-    },
-    "dev_2": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_2"
-      },
-      "locked": {
-        "dir": "m/pkg/dev",
-        "lastModified": 1706897346,
-        "narHash": "sha256-i+VwVH4Uu9zsySEOgZ4tqUxOysFfmJalU6tcWACQu5U=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "aa68c18a500d0a0558712dad8a8c26eb018fa69b",
-        "type": "github"
-      },
-      "original": {
-        "dir": "m/pkg/dev",
-        "owner": "defn",
-        "ref": "pkg-dev-0.0.13",
-        "repo": "dev",
-        "type": "github"
-      }
-    },
-    "dev_3": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_3"
-      },
-      "locked": {
-        "dir": "m/pkg/dev",
-        "lastModified": 1706897346,
-        "narHash": "sha256-i+VwVH4Uu9zsySEOgZ4tqUxOysFfmJalU6tcWACQu5U=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "aa68c18a500d0a0558712dad8a8c26eb018fa69b",
-        "type": "github"
-      },
-      "original": {
-        "dir": "m/pkg/dev",
-        "owner": "defn",
-        "ref": "pkg-dev-0.0.13",
-        "repo": "dev",
-        "type": "github"
-      }
-    },
-    "goreleaser": {
-      "inputs": {
-        "pkg": "pkg_2"
-      },
-      "locked": {
-        "dir": "m/pkg/goreleaser",
-        "lastModified": 1726894951,
-        "narHash": "sha256-e5NFSw/oP7EGKqbJLQ6yVDFrlFv0Ojq1r9ueZc8EQQQ=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "14d657479463f9f4c3fc7906dba7721ab897faf4",
-        "type": "github"
-      },
-      "original": {
-        "dir": "m/pkg/goreleaser",
-        "owner": "defn",
-        "ref": "pkg-goreleaser-2.3.2-1",
         "repo": "dev",
         "type": "github"
       }
@@ -137,38 +53,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1700284104,
-        "narHash": "sha256-oNsJfAyAuBCTkusesiK0LWuO59F6vEGcP4wwa7kc1ZA=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "005617587ee2b7c003388b4539b9120ebcc90e44",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "005617587ee2b7c003388b4539b9120ebcc90e44",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
-        "lastModified": 1700284104,
-        "narHash": "sha256-oNsJfAyAuBCTkusesiK0LWuO59F6vEGcP4wwa7kc1ZA=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "005617587ee2b7c003388b4539b9120ebcc90e44",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "005617587ee2b7c003388b4539b9120ebcc90e44",
-        "type": "github"
-      }
-    },
     "pkg": {
       "inputs": {
         "dev": "dev"
@@ -190,75 +74,10 @@
         "type": "github"
       }
     },
-    "pkg_2": {
-      "inputs": {
-        "dev": "dev_2"
-      },
-      "locked": {
-        "dir": "m/pkg/pkg",
-        "lastModified": 1718433336,
-        "narHash": "sha256-YF2gddAtcRargmwr7mgJBPV1t/x92LpLEBKx00SkGts=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "2e177e8b89ed32831e9da274621d33c8d05dc5ff",
-        "type": "github"
-      },
-      "original": {
-        "dir": "m/pkg/pkg",
-        "owner": "defn",
-        "ref": "pkg-pkg-0.0.17",
-        "repo": "dev",
-        "type": "github"
-      }
-    },
-    "pkg_3": {
-      "inputs": {
-        "dev": "dev_3"
-      },
-      "locked": {
-        "dir": "m/pkg/pkg",
-        "lastModified": 1718433336,
-        "narHash": "sha256-YF2gddAtcRargmwr7mgJBPV1t/x92LpLEBKx00SkGts=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "2e177e8b89ed32831e9da274621d33c8d05dc5ff",
-        "type": "github"
-      },
-      "original": {
-        "dir": "m/pkg/pkg",
-        "owner": "defn",
-        "ref": "pkg-pkg-0.0.17",
-        "repo": "dev",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
-        "cosign": "cosign",
-        "goreleaser": "goreleaser",
         "latest": "latest",
-        "yaegi": "yaegi"
-      }
-    },
-    "yaegi": {
-      "inputs": {
-        "pkg": "pkg_3"
-      },
-      "locked": {
-        "dir": "m/pkg/yaegi",
-        "lastModified": 1718436305,
-        "narHash": "sha256-L95wns7/zgEWT6WpldTroydYNzdVTqcVlIsAbyT7dp8=",
-        "owner": "defn",
-        "repo": "dev",
-        "rev": "77d73e60264b35c43dc38b76b8fc90d0cff595a3",
-        "type": "github"
-      },
-      "original": {
-        "dir": "m/pkg/yaegi",
-        "owner": "defn",
-        "ref": "pkg-yaegi-0.16.1-2",
-        "repo": "dev",
-        "type": "github"
+        "pkg": "pkg"
       }
     }
   },
