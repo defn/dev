@@ -19,10 +19,7 @@ RUN bash -c 'source .bash_profile && bin/persist-cache && make nix'
 RUN bash -c 'source .bash_profile && git reset --hard && git pull'
 RUN mkdir -p .config/nix
 COPY nix.conf .config/nix/nix.conf
-RUN bash -c 'source .bash_profile && make home home=f/home flakes="coder codeserver shell"'
-
-RUN rm -rf .cache work
-RUN bash -c 'source .bash_profile && bin/persist-cache && cd m && b clean'
+RUN bash -c 'source .bash_profile && bin/persist-cache && make home home=f/home flakes="coder codeserver shell" && rm -rf .cache work && cd m && b clean'
 
 FROM ubuntu:24.04
 
@@ -41,4 +38,4 @@ ENV HOME=/home/ubuntu
 ENV LANG=C
 WORKDIR /home/ubuntu
 ENTRYPOINT [ "bash", "-c" ]
-CMD [ "set -x; git reset --hard && git pull && source .bash_profile && rm -rf work && mkdir -p /nix/work && ln -nfs /nix/work ~/ && bin/persist-cache; if ! test -x /home/ubuntu/bin/nix/coder; then rsync -ia /nix.dist/. /nix/.; fi; exec /home/ubuntu/bin/nix/coder server" ]
+CMD [ "set -x; git reset --hard && git pull && source .bash_profile && rm -rf work /var/lib/tailscale && mkdir -p /nix/work /nix/tailscale && ln -nfs /nix/work ~/ && ln -nfs /nix/tailscale /var/lib/tailscale && bin/persist-cache; if ! test -x /home/ubuntu/bin/nix/coder; then rsync -ia /nix.dist/. /nix/.; fi; sudo /usr/sbin/tailscaled & exec /home/ubuntu/bin/nix/coder server" ]
