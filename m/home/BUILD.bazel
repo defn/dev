@@ -22,6 +22,7 @@ flake_names = [
     "awscli",
     "chamber",
     "cloud",
+    "terraform",
     "kubectl",
     "k3d",
     "k9s",
