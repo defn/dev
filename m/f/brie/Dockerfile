@@ -39,6 +39,6 @@ ENV HOME=/home/ubuntu
 ENV LANG=C
 WORKDIR /home/ubuntu
 ENTRYPOINT [ "bash", "-c" ]
-CMD [ "git reset --hard && git pull && source .bash_profile && rm -rf work && sudo rm -rf /var/lib/tailscale && mkdir -p /nix/work /nix/tailscale && ln -nfs /nix/work ~/ && sudo ln -nfs /nix/tailscale /var/lib/tailscale && bin/persist-cache; if ! test -x /home/ubuntu/bin/nix/just; then tar -xfz /nix.tar -C /nix; fi; sudo /usr/sbin/tailscaled & rm -f z; exec /home/ubuntu/bin/nix/coder server" ]
+CMD [ "git reset --hard && git pull && source .bash_profile && rm -rf work && sudo rm -rf /var/lib/tailscale && mkdir -p /nix/work /nix/tailscale && ln -nfs /nix/work ~/ && sudo ln -nfs /nix/tailscale /var/lib/tailscale && bin/persist-cache; if ! test -x /home/ubuntu/bin/nix/just; then tar -xfz /nix.tar -C /nix; fi;  rm -f z; exec /home/ubuntu/bin/nix/coder server" ]
 
 COPY --chown=ubuntu:ubuntu bazelrc.user m/.bazelrc.user
