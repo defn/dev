@@ -1,0 +1,8 @@
+build:
+    cargo install worker-build
+    PATH=$PATH:$HOME/.cargo/bin worker-build --release 
+    workerd compile config.capnp > hello
+    chmod 755 hello
+
+serve:
+    ./hello
