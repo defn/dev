@@ -12,6 +12,7 @@
       propagatedBuildInputs =
         with (import inputs.latest { system = ctx.system; }); [
           rustc
+          rustfmt
           cargo
           lld
         ];
