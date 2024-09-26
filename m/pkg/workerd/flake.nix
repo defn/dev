@@ -11,6 +11,10 @@
     installPhase = pkg: ''
       install -m 0755 -d $out $out/bin
       fname="$(echo $src | sed 's#.gz$##')"
+      if ! test -f $fname; then
+        zcat $src > workerd
+        fname=workerd
+      fi
       install -m 0755 $fname $out/bin/workerd
     '';
 
