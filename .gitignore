@@ -232,3 +232,4 @@ bin/devcontainer
 Bookshelf/
 .aaa*
 .ssh-agent*
+.continue 

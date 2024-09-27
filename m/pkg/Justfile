@@ -42,7 +42,6 @@ update:
 			../az/bin/n-bump "${latest}"
 			../az/bin/n-release "${slug} ${current} -> ${latest}"
 			nix build
-			n cache remote result
 		)
 	done
 
