@@ -228,6 +228,11 @@ bin/devcontainer
 /bazel*
 .env*
 .prefect
+.xsession-errors*
+Bookshelf/
+.aaa*
+.ssh-agent*
+.continue 
 m
 work
 bin
