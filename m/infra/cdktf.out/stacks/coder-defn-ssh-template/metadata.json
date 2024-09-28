@@ -8,7 +8,7 @@
         ]
       },
       "stackName": "coder-defn-ssh-template",
-      "version": "0.20.8"
+      "version": "0.20.9"
     },
     "outputs": {
     }
@@ -122,7 +122,7 @@
       },
       "null": {
         "source": "null",
-        "version": "3.2.2"
+        "version": "3.2.3"
       }
     }
   }
