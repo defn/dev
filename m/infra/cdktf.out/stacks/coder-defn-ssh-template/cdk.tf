@@ -5,7 +5,7 @@ terraform {
       source  = "coder/coder"
     }
     null = {
-      version = "3.2.2"
+      version = "3.2.3"
       source  = "null"
     }
   }

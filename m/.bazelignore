@@ -32,6 +32,7 @@ pkg/codeserver/.direnv
 pkg/cosign/.direnv
 pkg/crossplane/.direnv
 pkg/cue/.direnv
+pkg/cuetsy/.direnv
 pkg/dapr/.direnv
 pkg/dev/.direnv
 pkg/development/.direnv
@@ -55,10 +56,12 @@ pkg/ibazel/.direnv
 pkg/iso/.direnv
 pkg/jsdev/.direnv
 pkg/just/.direnv
+pkg/k3d/.direnv
 pkg/k3sup/.direnv
 pkg/k9s/.direnv
 pkg/kn/.direnv
 pkg/kubectl/.direnv
+pkg/kubeseal/.direnv
 pkg/kubevirt/.direnv
 pkg/kuma/.direnv
 pkg/kustomize/.direnv
@@ -93,6 +96,7 @@ pkg/vcluster/.direnv
 pkg/vhs/.direnv
 pkg/vpn/.direnv
 pkg/wireproxy/.direnv
+pkg/workerd/.direnv
 pkg/yaegi/.direnv
 pkg/zellij/.direnv
 prefect/.direnv
@@ -122,6 +126,7 @@ pkg/codeserver/result
 pkg/cosign/result
 pkg/crossplane/result
 pkg/cue/result
+pkg/cuetsy/result
 pkg/dapr/result
 pkg/dev/result
 pkg/development/result
@@ -145,10 +150,12 @@ pkg/ibazel/result
 pkg/iso/result
 pkg/jsdev/result
 pkg/just/result
+pkg/k3d/result
 pkg/k3sup/result
 pkg/k9s/result
 pkg/kn/result
 pkg/kubectl/result
+pkg/kubeseal/result
 pkg/kubevirt/result
 pkg/kuma/result
 pkg/kustomize/result
@@ -183,6 +190,7 @@ pkg/vcluster/result
 pkg/vhs/result
 pkg/vpn/result
 pkg/wireproxy/result
+pkg/workerd/result
 pkg/yaegi/result
 pkg/zellij/result
 prefect/result
