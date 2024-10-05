@@ -236,3 +236,7 @@ Bookshelf/
 .continue 
 .boto
 .gsutil
+
+.kafkarc
+/_*
+
