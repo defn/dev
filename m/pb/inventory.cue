@@ -41,15 +41,14 @@ inventory: {
 
 	mac: hosts: [
 		"macmini",
-		"mbair",
+		//"mbair",
 		//"mba",
-		// mbb is too noisy: fans stay on, load is always 2
 		//"mbb",
 	]
 
 	chrome: hosts: [
-		"pengu",
 		"kinko",
+		//"pengu",
 	]
 
 	tablet: vars: {
@@ -98,9 +97,9 @@ inventory: {
 
 	heavy: hosts: [
 		"thinkpad",
-		"mbpro",
 		"gw",
 		"pc",
+		//"mbpro",
 	]
 
 	local_cache: hosts: [
