@@ -20,7 +20,6 @@ inventory: {
 		"district",
 		"rpi4c",
 		"rpi5c",
-		//"defn",
 	]
 
 	hetzner: hosts: [
@@ -54,10 +53,6 @@ inventory: {
 	tablet: vars: {
 		bazel_remote_cache_server: "192.168.1.26" // macmini
 	}
-
-	tablet: hosts: [
-		"defn",
-	]
 
 	rpi: children: [
 		"rpi3",
