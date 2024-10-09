@@ -20,7 +20,7 @@ inventory: {
 		"district",
 		"rpi4c",
 		"rpi5c",
-		"defn",
+		//"defn",
 	]
 
 	hetzner: hosts: [
