@@ -7,14 +7,15 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "80:8080"
-      - "443:8443"
+      #- "80:8080"
+      #- "443:8443"
       - "8000:8000"
       - "8085:808"
     volumes:
       - home:/home
       - nix:/nix
       - tailscale:/var/lib/tailscale
+      - ./site:/site
     privileged: true
     user: ubuntu
     working_dir: /home/ubuntu
