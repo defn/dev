@@ -46,7 +46,7 @@ upgrade *args:
 cache *args="cache":
 	just play cache {{ args }}
 
-home *args:
+home *args="all:!kinko":
 	just play home {{ args }}
 
 all *args="all":
