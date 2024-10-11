@@ -41,12 +41,12 @@
       "x86_64-linux" = {
         os = "linux";
         arch = "amd64";
-        sha256 = "sha256-BZ8vuyiV3IyxN6P6Mb6JFTJuMtw0Aykrwv032NA3KYg="; # x86_64-linux
+        sha256 = "sha256-EHzNq1MUoKeq3hbMxkplDQ8stwz5fb3e0OT947pT6Vw="; # x86_64-linux
       };
       "aarch64-linux" = {
         os = "linux";
         arch = "arm64";
-        sha256 = "sha256-p6MWtauOS9qX6YSw+cJmCAPaeXCrLcUA79Okih43PiE="; # aarch64-linux
+        sha256 = "sha256-P+I59W/pIs0XPc6SLN2DtkZPzQiB1mcxUrJcNMrCAhU="; # aarch64-linux
       };
       "x86_64-darwin" = {
         os = "darwin";
