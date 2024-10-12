@@ -455,6 +455,7 @@ infra/stacks/org-jianghu/.terraform
 infra/stacks/org-spiral/.terraform
 infra/stacks/org-vault/.terraform
 infra/stacks/org-whoa/.terraform
+dc/site/.direnv
 demo/.direnv
 infra/cdktf.out/stacks/org-chamber/.direnv
 infra/cdktf.out/stacks/org-circus/.direnv

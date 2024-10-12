@@ -6,7 +6,8 @@ cue.mod/pkg
 snap
 
 # working files
-/.trunk
+.trunk/*
+!.trunk/trunk.yaml
 node_modules
 .profile
 .bash_history*
@@ -233,6 +234,13 @@ Bookshelf/
 .aaa*
 .ssh-agent*
 .continue 
+.boto
+.gsutil
+
+.kafkarc
+/_*
+
+
 m
 work
 bin
