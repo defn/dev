@@ -1,7 +1,7 @@
 {
   "slug": "pkg-tailscale",
   "ghrepo": "tailscale/tailscale",
-  "vendor": "1.76.0",
+  "vendor": "1.76.1",
   "vendor2": "1.74.0",
-  "revision": "1"
+  "revision": "0"
 }
