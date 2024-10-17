@@ -39,7 +39,7 @@ inventory: {
 	]
 
 	mac: hosts: [
-		"macmini",
+		//"macmini",
 		//"mbair",
 		//"mba",
 		//"mbb",
