@@ -1,6 +1,6 @@
 {
   "slug": "pkg-flyctl",
   "ghrepo": "superfly/flyctl",
-  "vendor": "0.3.23",
-  "revision": "1"
+  "vendor": "0.3.24",
+  "revision": "0"
 }
