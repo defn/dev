@@ -3,7 +3,7 @@
     pkg.url = github:defn/dev/pkg-pkg-0.0.17?dir=m/pkg/pkg;
     # https://github.com/NixOS/nixpkgs/tree/master/pkgs/development/interpreters/python
     # https://github.com/NixOS/nixpkgs/blob/master/pkgs/top-level/aliases.nix
-    latest.url = github:NixOS/nixpkgs?rev=222c70de4ecdb178198b01d8d108ec24b1b1543b;
+    latest.url = github:NixOS/nixpkgs?rev=e4d95f4100b799edad3fcb6038b3d1a6b1be7458;
   };
 
   outputs = inputs: inputs.pkg.main rec {
