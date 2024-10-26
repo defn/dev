@@ -15,7 +15,7 @@ bazel_dep(name = "rules_go", version = "0.50.1", repo_name = "io_bazel_rules_go"
 
 # https://registry.bazel.build/modules/protobuf
 # weird python warnings when enabled
-bazel_dep(name = "protobuf", version = "29.0-rc2")
+# bazel_dep(name = "protobuf", version = "29.0-rc2")
 
 # https://registry.bazel.build/modules/rules_proto
 bazel_dep(name = "rules_proto", version = "6.0.2")
