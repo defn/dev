@@ -27,7 +27,7 @@ bazel_dep(name = "rules_proto_grpc", version = "5.0.0")
 bazel_dep(name = "rules_proto_grpc_go", version = "5.0.0")
 
 go_sdk = use_extension("@io_bazel_rules_go//go:extensions.bzl", "go_sdk")
-go_sdk.download(version = "1.23.1")
+go_sdk.download(version = "1.23.2")
 go_sdk.host()
 
 # https://registry.bazel.build/modules/gazelle
