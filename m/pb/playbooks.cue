@@ -66,6 +66,24 @@ role: rpi_packages: tasks: [{
 }]
 
 role: base_packages: tasks: [{
+	name:          "Disable apt-daily.timer"
+	become:        true
+	ignore_errors: true
+	service: {
+		name:    "apt-daily.timer"
+		enabled: "no"
+		state:   "stopped"
+	}
+}, {
+	name:          "Disable apt-daily-upgrade.timer"
+	become:        true
+	ignore_errors: true
+	service: {
+		name:    "apt-daily-upgrade.timer"
+		enabled: "no"
+		state:   "stopped"
+	}
+}, {
 	name:          "Disable unattended-upgrades service"
 	become:        true
 	ignore_errors: true

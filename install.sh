@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 
 function once {
-	sudo apt update
-	sudo apt install -y direnv make
-	mv dev/.git .
-	git reset --hard
+  sudo apt update
+  sudo apt install -y direnv make
+  mv dev/.git .
+  rm -rf dev
+  git reset --hard
   curl -fsSL https://tailscale.com/install.sh | sh
   sudo tailscale up --ssh
 }
 
 function main {
-	source .bashrc
+  source .bashrc
   make vpn-install
   make no-gpg
   make nix
