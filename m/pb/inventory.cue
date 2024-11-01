@@ -19,7 +19,7 @@ inventory: {
 	cache: hosts: [
 		"district",
 		"rpi4c",
-		"rpi5a",
+		"rpi5c",
 	]
 
 	hetzner: hosts: [
