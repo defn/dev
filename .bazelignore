@@ -239,8 +239,8 @@ Bookshelf/
 
 .kafkarc
 /_*
-
-
+.landscape*
+.motd*
 m
 work
 bin
