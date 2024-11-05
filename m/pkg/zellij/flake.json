@@ -1,6 +1,6 @@
 {
   "slug": "pkg-zellij",
   "ghrepo": "zellij-org/zellij",
-  "vendor": "0.40.1",
-  "revision": "2"
+  "vendor": "0.41.1",
+  "revision": "0"
 }
