@@ -38,8 +38,12 @@ inventory: {
 		"mac", "rpi", "zimaboard", "heavy",
 	]
 
+	intel: children: [
+		"mac", "zimaboard", "heavy", "cloud",
+	]
+
 	mac: hosts: [
-		//"macmini",
+		"macmini",
 		//"mbair",
 		//"mba",
 		//"mbb",
@@ -47,7 +51,6 @@ inventory: {
 
 	chrome: hosts: [
 		"kinko",
-		//"pengu",
 	]
 
 	tablet: vars: {
