@@ -44,6 +44,7 @@ inventory: {
 
 	mac: hosts: [
 		"macmini",
+		//"mbpro",
 		//"mbair",
 		//"mba",
 		//"mbb",
@@ -97,6 +98,5 @@ inventory: {
 		"thinkpad",
 		"gw",
 		"pc",
-		//"mbpro",
 	]
 }
