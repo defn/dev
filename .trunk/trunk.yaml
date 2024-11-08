@@ -2,7 +2,7 @@
 # To learn more about the format of this file, see https://docs.trunk.io/reference/trunk-yaml
 version: 0.1
 cli:
-  version: 1.22.6
+  version: 1.22.8
 plugins:
   sources:
     - id: trunk
@@ -10,11 +10,20 @@ plugins:
       uri: https://github.com/trunk-io/plugins
 runtimes:
   enabled:
-    - rust@1.73.0
-    - go@1.22.5
-    - node@18.20.2
+    - rust@1.80.1
+    - go@1.23.2
+    - node@22.9.0
+    # no downloads for anything later than this
     - python@3.12.2
 lint:
+  ignore:
+    - linters: [ALL]
+      paths:
+        - work/**
+        - m/bazel-*/**
+        - .local/**
+        - .cache/**
+        - .npm/**
   enabled:
     - clippy@1.65.0
     - rustfmt@1.65.0
