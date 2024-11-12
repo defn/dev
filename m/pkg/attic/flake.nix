@@ -1,7 +1,7 @@
 {
   inputs = {
     pkg.url = github:defn/dev/pkg-pkg-0.0.17?dir=m/pkg/pkg;
-    attic.url = github:zhaofengli/attic?rev=717cc95983cdc357bc347d70be20ced21f935843;
+    attic.url = github:zhaofengli/attic?rev=47752427561f1c34debb16728a210d378f0ece36;
   };
 
   outputs = inputs: inputs.pkg.main rec {
