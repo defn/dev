@@ -44,28 +44,26 @@ inventory: {
 
 	mac: hosts: [
 		"macmini",
-		//"mbpro",
-		//"mbair",
-		//"mba",
-		//"mbb",
+		// nots "mbpro",
+		// off "mbair",
+		// off "mba",
+		// off "mbb",
 	]
 
 	chrome: hosts: [
 		"kinko",
 	]
 
-	tablet: vars: {
-		bazel_remote_cache_server: "192.168.1.26" // macmini
-	}
+	rpi: {
+		children: [
+			"rpi3",
+			"rpi4",
+			"rpi5",
+		]
 
-	rpi: children: [
-		"rpi3",
-		"rpi4",
-		"rpi5",
-	]
-
-	rpi: vars: {
-		bazel_remote_cache_server: "192.168.1.26" // macmini
+		vars: {
+			bazel_remote_cache_server: "192.168.1.26" // macmini
+		}
 	}
 
 	rpi3: hosts: [
@@ -91,7 +89,7 @@ inventory: {
 	zimaboard: hosts: [
 		"zm1",
 		"zm2",
-		"zm3",
+		// dead "zm3",
 	]
 
 	heavy: hosts: [
