@@ -1,6 +1,6 @@
 {
   "slug": "pkg-cue",
   "ghrepo": "cue-lang/cue",
-  "vendor": "0.11.0-alpha.2",
+  "vendor": "0.10.1",
   "revision": "3"
 }
