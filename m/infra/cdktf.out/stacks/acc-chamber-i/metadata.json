@@ -3,7 +3,7 @@
     "metadata": {
       "backend": "s3",
       "stackName": "acc-chamber-i",
-      "version": "0.20.9"
+      "version": "0.20.10"
     },
     "outputs": {
     }
@@ -32,7 +32,7 @@
     "required_providers": {
       "aws": {
         "source": "aws",
-        "version": "5.74.0"
+        "version": "5.75.1"
       }
     }
   }

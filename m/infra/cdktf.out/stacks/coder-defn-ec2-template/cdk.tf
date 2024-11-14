@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.74.0"
+      version = "5.75.1"
       source  = "aws"
     }
     coder = {
