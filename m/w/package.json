@@ -7,9 +7,9 @@
     "lint": "turbo run lint"
   },
   "devDependencies": {
-    "eslint": "^9.10.0",
+    "eslint": "^9.14.0",
     "eslint-config-custom": "workspace:*",
-    "turbo": "^2.1.2"
+    "turbo": "^2.2.3"
   },
   "packageManager": "pnpm@9.0.5"
 }
