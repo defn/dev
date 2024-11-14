@@ -2,6 +2,10 @@ module github.com/defn/dev/m
 
 go 1.23.2
 
+// pin, otherwise something cue + protobuf breaks
+/// https://github.com/cue-lang/cue/blob/master/go.mod
+replace github.com/protocolbuffers/txtpbfmt => github.com/protocolbuffers/txtpbfmt v0.0.0-20230328191034-3462fbc510c0
+
 require (
 	cuelang.org/go v0.10.1
 	github.com/aws/constructs-go/constructs/v10 v10.4.2
