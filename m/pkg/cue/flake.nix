@@ -11,8 +11,6 @@
     '';
 
     downloads = {
-
-
       "x86_64-linux" = {
         os = "linux";
         arch = "amd64";
