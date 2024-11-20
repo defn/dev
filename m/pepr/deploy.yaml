@@ -24,3 +24,12 @@ metadata:
 spec:
   script: uname -a && pwd
   workdir: /tmp
+---
+apiVersion: defn.dev/v1
+kind: Script
+metadata:
+  name: bye
+  namespace: defn
+spec:
+  script: echo poweroff
+  workdir: /tmp
