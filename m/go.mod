@@ -4,16 +4,16 @@ go 1.23.2
 
 // pin, otherwise something cue + protobuf breaks
 /// https://github.com/cue-lang/cue/blob/master/go.mod
-replace github.com/protocolbuffers/txtpbfmt => github.com/protocolbuffers/txtpbfmt v0.0.0-20230328191034-3462fbc510c0
+replace github.com/protocolbuffers/txtpbfmt => github.com/protocolbuffers/txtpbfmt v0.0.0-20240823084532-8e6b51fa9bef
 
 require (
-	cuelang.org/go v0.10.1
+	cuelang.org/go v0.11.0
 	github.com/aws/constructs-go/constructs/v10 v10.4.2
-	github.com/aws/jsii-runtime-go v1.104.0
-	github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.41.1
+	github.com/aws/jsii-runtime-go v1.105.0
+	github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.42.0
 	github.com/cdktf/cdktf-provider-null-go/null/v10 v10.0.1
 	github.com/charmbracelet/bubbles v0.20.0
-	github.com/charmbracelet/bubbletea v1.2.2
+	github.com/charmbracelet/bubbletea v1.2.3
 	github.com/charmbracelet/lipgloss v1.0.0
 	github.com/gin-gonic/gin v1.10.0
 	github.com/hashicorp/terraform-cdk-go/cdktf v0.20.10
@@ -27,7 +27,7 @@ require (
 require (
 	cuelabs.dev/go/oci/ociregistry v0.0.0-20240906074133-82eb438dd565 // indirect
 	dario.cat/mergo v1.0.1 // indirect
-	github.com/Masterminds/semver/v3 v3.3.0 // indirect
+	github.com/Masterminds/semver/v3 v3.3.1 // indirect
 	github.com/atotto/clipboard v0.1.4 // indirect
 	github.com/avast/retry-go/v4 v4.6.0 // indirect
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
@@ -47,7 +47,7 @@ require (
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-playground/validator/v10 v10.22.1 // indirect
+	github.com/go-playground/validator/v10 v10.23.0 // indirect
 	github.com/goccy/go-json v0.10.3 // indirect
 	github.com/google/btree v1.1.3 // indirect
 	github.com/google/uuid v1.6.0 // indirect
@@ -108,7 +108,7 @@ require (
 	golang.org/x/text v0.20.0 // indirect
 	golang.org/x/time v0.8.0 // indirect
 	golang.org/x/tools v0.27.0 // indirect
-	google.golang.org/protobuf v1.35.1 // indirect
+	google.golang.org/protobuf v1.35.2 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
