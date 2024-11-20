@@ -22,7 +22,7 @@ metadata:
   name: hello
   namespace: defn
 spec:
-  script: uname -a && pwd
+  script: lspci
   workdir: /tmp
 ---
 apiVersion: defn.dev/v1
@@ -31,5 +31,5 @@ metadata:
   name: bye
   namespace: defn
 spec:
-  script: echo poweroff
+  script: lsblk
   workdir: /tmp
