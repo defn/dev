@@ -26,13 +26,16 @@
   },
   "dependencies": {
     "openapi-typescript": "^7.3.0",
-    "pepr": "0.34.0",
+    "pepr": "0.39.1",
     "@temporalio/activity": "^1.11.3",
     "@temporalio/client": "^1.11.3",
     "@temporalio/worker": "^1.11.3",
     "@temporalio/workflow": "^1.11.3"
   },
   "devDependencies": {
-    "typescript": "5.3.3"
+    "ts-node": "^10.2.1",
+    "typescript": "5.3.3",
+    "@tsconfig/node22": "^22.0.0",
+    "@types/node": "^22.9.0"
   }
 }

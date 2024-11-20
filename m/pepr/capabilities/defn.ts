@@ -36,6 +36,8 @@ When(ScriptKind)
   .Watch(async scr => {
     Log.info("Script workdir: " + scr.spec.workdir);
     Log.info("Script script: " + scr.spec.script);
+
+    let output = "";
     exec(scr.spec.script, (error, stdout, stderr) => {
       if (error) {
         Log.error(`Error executing script: ${error}`);
@@ -49,6 +51,7 @@ When(ScriptKind)
 
       Log.info(`Script output: ${stdout}`);
 
+      output = stdout;
     });
 
     const client = new Client();
@@ -59,19 +62,22 @@ When(ScriptKind)
     });
 
     try {
-      await K8s(kind.ConfigMap).Apply({
+      await K8s(ScriptKind).Apply({
         metadata: {
-          name: `${scr.metadata.name}-results`,
+          name: scr.metadata.name,
           namespace: scr.metadata.namespace,
-        },
-        data: {
-          script: scr.spec.script
+          annotations: {
+            results: `From Temporal: ${result}, From Output: ${output}`,
+          },
         },
       });
     } catch (error) {
-      Log.error(error, "Failed to apply ConfigMap using server-side apply.");
+      Log.error(
+        error,
+        `Failed to apply ConfigMap using server-side apply: ${error}`,
+      );
     }
-  })
+  });
 
 When(a.Namespace)
   .IsCreated()
