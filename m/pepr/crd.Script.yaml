@@ -28,6 +28,8 @@ spec:
                   type: string
                 umask:
                   type: string
+                result:
+                  type: string
   scope: Namespaced
   names:
     plural: scripts

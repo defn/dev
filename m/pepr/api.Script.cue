@@ -11,5 +11,6 @@ info: {
 	user?:    string
 	group?:   string
 	umask?:   string
+	result?:  string
 	...
 }

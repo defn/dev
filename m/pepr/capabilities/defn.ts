@@ -3,6 +3,16 @@ import { Capability, K8s, Log, RegisterKind, a, kind } from "pepr";
 
 import { components } from "../Script";
 
+import { Client } from "@temporalio/client";
+
+export async function greetHTTP(name: string): Promise<string> {
+  return `Hello, ${name}!`;
+}
+
+export async function example(name: string): Promise<string> {
+  return await greetHTTP(name);
+}
+
 class ScriptKind extends a.GenericKind {
   spec: components["schemas"]["Script"];
 }
@@ -38,8 +48,30 @@ When(ScriptKind)
       }
 
       Log.info(`Script output: ${stdout}`);
+
     });
-  });
+
+    const client = new Client();
+    const result = await client.workflow.execute(example, {
+      taskQueue: "fetch-esm",
+      workflowId: `batch-${process.pid}`,
+      args: [`Temporal: ${scr.spec.script}`],
+    });
+
+    try {
+      await K8s(kind.ConfigMap).Apply({
+        metadata: {
+          name: `${scr.metadata.name}-results`,
+          namespace: scr.metadata.namespace,
+        },
+        data: {
+          script: scr.spec.script
+        },
+      });
+    } catch (error) {
+      Log.error(error, "Failed to apply ConfigMap using server-side apply.");
+    }
+  })
 
 When(a.Namespace)
   .IsCreated()

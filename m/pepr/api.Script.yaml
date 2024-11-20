@@ -21,3 +21,5 @@ components:
           type: string
         umask:
           type: string
+        result:
+          type: string

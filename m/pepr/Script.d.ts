@@ -13,6 +13,7 @@ export interface components {
       user?: string;
       group?: string;
       umask?: string;
+      result?: string;
     };
   };
   responses: never;
