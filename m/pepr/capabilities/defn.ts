@@ -5,8 +5,8 @@ import { components } from "../Script";
 
 import { Client } from "@temporalio/client";
 
-export async function example(name: string): Promise<string> {
-  return name;
+export async function example(name: string, debug: string): Promise<string> {
+  return `${name}, ${debug}`;
 }
 
 class ScriptKind extends a.GenericKind {
@@ -30,12 +30,16 @@ const { When } = DefnPepr;
 When(ScriptKind)
   .IsDeleted()
   .Watch(async scr => {
-    await K8s(kind.ConfigMap).Delete({
-      metadata: {
-        name: scr.metadata.name,
-        namespace: scr.metadata.namespace,
-      },
-    });
+    await K8s(kind.ConfigMap)
+      .Delete({
+        metadata: {
+          name: scr.metadata.name,
+          namespace: scr.metadata.namespace,
+        },
+      })
+      .then(() => {
+        Log.info("Matching CM deleted");
+      });
   });
 
 When(ScriptKind)
@@ -57,11 +61,15 @@ When(ScriptKind)
 
       Log.info(`Script output: ${stdout}`);
 
+      const spec = Object.entries(scr.spec)
+        .map(([key, value]) => `${key}: ${value}`)
+        .join(", ");
+
       const client = new Client();
       const result = await client.workflow.execute(example, {
         taskQueue: "fetch-esm",
         workflowId: `batch-${process.pid}-${Math.random()}`,
-        args: [scr.spec.script],
+        args: [scr.spec.script, spec],
       });
 
       await K8s(kind.ConfigMap)
@@ -74,7 +82,7 @@ When(ScriptKind)
             result: `From Temporal: ${result}, From Exec: ${stdout}`,
           },
         })
-        .then(() => Log.info("WebApp CRD registered"))
+        .then(() => Log.info("Matching CM created"))
         .catch(err => {
           Log.error(err);
         });

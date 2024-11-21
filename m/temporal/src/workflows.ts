@@ -7,7 +7,7 @@ const { greetHTTP } = proxyActivities<typeof activities>({
   startToCloseTimeout: '1 minute',
 });
 
-export async function example(name: string): Promise<string> {
-  return await greetHTTP(name);
+export async function example(name: string, debug: string): Promise<string> {
+  return await greetHTTP(name, debug);
 }
 // @@@SNIPEND
