@@ -45,3 +45,9 @@ test:
     done
 
     trunk fmt
+
+demo:
+    -k delete -n defn script demo
+    cue eval -e ex.demo.res --out yaml | k apply -f -
+    sleep 1
+    k get -n defn cm demo -o json | jq -r .data.result
