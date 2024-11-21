@@ -31,5 +31,5 @@ metadata:
   name: bye
   namespace: defn
 spec:
-  script: lsblk
+  script: uname -a
   workdir: /tmp
