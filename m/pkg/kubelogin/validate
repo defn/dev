@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-vault version
+kubectl-oidc_login version
