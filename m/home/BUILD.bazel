@@ -24,6 +24,7 @@ flake_names = [
     "cloud",
     "terraform",
     "kubectl",
+    "kubelogin",
     "k3d",
     "k9s",
     "helm",
