@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
 # https://nixos.org/download
-NIX_VERSION := 2.24.5
+NIX_VERSION := 2.25.2
 
 flakes ?= attic cue cuetsy gum vhs glow dyff az home secrets tailscale vpn utils just buildifier bazelisk ibazel oci development step awscli chamber cloud terraform kubectl kubelogin k3d k9s helm kustomize stern kubeseal argocd vcluster coder codeserver tilt gh earthly flyctl oras regctl regbot regsync buildkite buildevents honeyvent honeymarker honeytail godev jsdev pydev rustdev workerd temporal shell
 home ?= home
@@ -104,11 +104,6 @@ macos:
 	for ip in $(dummy_ip); do if ! ifconfig lo0 | grep "inet $$ip"; then sudo ifconfig lo0 alias "$$ip" netmask 255.255.255.255; fi; done;
 	ifconfig lo0
 	defaults write -g ApplePressAndHoldEnabled -bool false
-#	sudo -A ln -nfs ~/.docker/run/docker.sock /var/run/docker.sock
-#	while true; do if docker ps; then break; fi; sleep 5; done
-#	-docker context create host --docker host=unix:///var/run/docker.sock
-#	-docker network create dev
-#	docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock ubuntu chown 1000:1000 /var/run/docker.sock
 
 rehome:
 	this-nix-gc
@@ -292,10 +287,7 @@ nix-Linux:
 	export LC_ALL=C.UTF-8 && if ! type -P nix; then t make_nix_linux_bootstrap $(MAKE) nix-Linux-bootstrap; fi
 
 nix-Darwin:
-	runmany 'nix profile install nixpkgs#$$1' nix
-
-nix-deck:
-	runmany 'nix profile install nixpkgs#$$1' gnumake screen pipx gnupg vim cue
+	true
 
 # https://github.com/NixOS/nixpkgs/blob/9f0d9ad45c4bd998c46ba1cbe0eb0dd28c6288a5/pkgs/tools/package-management/nix/default.nix
 # look for the stable version
@@ -304,7 +296,7 @@ nix-Linux-bootstrap:
 	git checkout .bash_profile
 
 nix-Darwin-bootstrap:
-	ln -nfs /nix/var/nix/profiles/default ~/.nix-profile
+	true
 
 coder-ssh-linux:
 	export STARSHIP_NO=1 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive && source ~/.bash_profile && cd $(CODER_HOMEDIR) \
