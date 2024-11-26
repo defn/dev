@@ -3,7 +3,7 @@ package l
 page: content: html: """
 	\(tutorial.html)
 	<br>
-	<iframe height="500px" src="https://3030--main--dev--amanibhavam.coder.dev.amanibhavam.defn.run"/>
+	<iframe height="500px" src="https://3030--main--pc--admin.local.defn.run/"/>
 	"""
 
 tutorial: #TutorialContent & {

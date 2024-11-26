@@ -1,6 +1,6 @@
 {
   "slug": "pkg-bazelisk",
   "ghrepo": "bazelbuild/bazelisk",
-  "vendor": "1.24.0",
+  "vendor": "1.24.1",
   "revision": "1"
 }
