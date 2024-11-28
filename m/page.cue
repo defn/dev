@@ -49,7 +49,8 @@ page: #PageContent
 	"""
 
 #Body: """
-	<body class="bg-white px-6 lg:px-8">
+	<body class="bg-white">
 	\(page.html)
+	\(page.iframe)
 	</body >
 	"""
