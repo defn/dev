@@ -82,7 +82,7 @@ import (
 // TutorialContent decores a Tutorial Section
 #TutorialContent: #Content & {
 	title: string
-	iframe: string
+	iframe: string | *""
 	steps: #ListContent.items
 	content: #SectionContent & {
 		"title": title
