@@ -22,12 +22,27 @@ page: #PageContent
 	<link rel="stylesheet" type="text/css" href="https://defn.github.io/webfonts/hermes_maia_4.css" />
 	
 	<style>
-		body {
-			font-family: valkyrie_a;
+		html, body {
+		margin: 0;
+		padding: 0;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		font-family: valkyrie_a;
 		}
+
+		.content {
+		padding: 20px;
+		}
+
+		.iframe-container {
+		flex: 1;
+		}
+
 		iframe {
-			width: 100%;
-			border: none;
+		width: 100%;
+		height: 100%;
+		border: none;
 		}
 	</style>
 	</head>

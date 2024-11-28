@@ -2,8 +2,9 @@ package l
 
 page: content: html: """
 	\(tutorial.html)
-	<br>
-	<iframe height="500px" src="https://3030--main--pc--admin.local.defn.run/"/>
+	<div class="iframe-container">
+	<iframe src="https://3030--main--pc--admin.local.defn.run/"/>
+	</div>
 	"""
 
 tutorial: #TutorialContent & {

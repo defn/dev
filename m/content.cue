@@ -35,7 +35,7 @@ import (
 	title: string
 	content: html: string
 	html: """
-		<div class="mt-10 max-w-2xl">
+		<div class="content mt-10 max-w-2xl">
 			<h2 class="text-2xl font-bold tracking-tight text-gray-900">\(title)</h2>
 			\(content.html)
 		</div>
