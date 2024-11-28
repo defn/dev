@@ -9,18 +9,18 @@ import (
 	...
 	content: {
 		...
-		html: string
+		html:   string
 		iframe: string | *""
 	}
-	html: string | *content.html
+	html:   string | *content.html
 	iframe: string | *content.iframe
 }
 
 // PageContent decorates a page
 #PageContent: #Content & {
-	content: html: string
+	content: html:   string
 	content: iframe: string
-	html: content.html
+	html:   content.html
 	iframe: content.iframe
 }
 
@@ -81,9 +81,9 @@ import (
 
 // TutorialContent decores a Tutorial Section
 #TutorialContent: #Content & {
-	title: string
+	title:  string
 	iframe: string | *""
-	steps: #ListContent.items
+	steps:  #ListContent.items
 	content: #SectionContent & {
 		"title": title
 		content: (#ListContent & {items: steps})

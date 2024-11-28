@@ -62,7 +62,7 @@ inventory: {
 		]
 
 		vars: {
-			bazel_remote_cache_server: "192.168.1.26" // macmini
+			// bazel_remote_cache_server: "192.168.1.26" // macmini
 		}
 	}
 
@@ -94,7 +94,7 @@ inventory: {
 
 	heavy: hosts: [
 		"thinkpad",
-		"gw",
+		// dead "gw",
 		"pc",
 	]
 }

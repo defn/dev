@@ -11,7 +11,7 @@ fonts:
   mono: "Fira Code"
 ---
 
-# Welcome to Slidev...
+# Welcome to defn.dev
 
 Presentation slides for developers
 

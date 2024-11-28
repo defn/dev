@@ -3,7 +3,7 @@ package l
 page: content: html: tutorial.html
 
 tutorial: #TutorialContent & {
-	title: "Tutorial : <a href=\"/?folder=/home/ubuntu\">TOC</a>"
+	title:  "Tutorial : <a href=\"/?folder=/home/ubuntu\">TOC</a>"
 	iframe: "https://3030--main--pc--admin.local.defn.run"
 	steps: [{
 		title: "Run the slide-show with Tilt"
