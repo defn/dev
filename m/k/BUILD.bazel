@@ -1,291 +1,35 @@
-cluster_apps = [
-    "coder-amanibhavam-district-cluster-env",
-    "coder-amanibhavam-district-cluster-cert-manager",
-    "coder-amanibhavam-district-cluster-pod-identity",
-    "coder-amanibhavam-district-cluster-external-secrets",
-    "coder-amanibhavam-district-cluster-secrets",
-    "coder-amanibhavam-district-cluster-issuer",
-    "coder-amanibhavam-district-cluster-coredns",
-    "coder-amanibhavam-district-cluster-karpenter",
-    "coder-amanibhavam-district-cluster-cilium",
-    "coder-amanibhavam-district-cluster-tetragon",
-    "coder-amanibhavam-district-cluster-kyverno",
-    "coder-amanibhavam-district-cluster-argo-cd",
-    "coder-amanibhavam-district-cluster-argocd-ingress",
-    "coder-amanibhavam-district-cluster-argocd-district",
-    "coder-amanibhavam-district-cluster-argocd-school",
-    "coder-amanibhavam-district-cluster-tailscale",
-    "coder-amanibhavam-district-cluster-traefik",
-    "coder-amanibhavam-district-cluster-external-dns",
-    "coder-amanibhavam-district-cluster-crossplane",
-    "coder-amanibhavam-district-cluster-crossprovider",
-    "coder-amanibhavam-district-cluster-deathstar",
-    "coder-amanibhavam-district-cluster-postgres-operator",
-    "coder-amanibhavam-district-cluster-coder",
-    "coder-amanibhavam-district-cluster-coder-ingress",
-    "coder-amanibhavam-district-cluster-coder-district",
-    "coder-amanibhavam-district-cluster-coder-school",
-    "coder-amanibhavam-school-cluster-env",
-    "coder-amanibhavam-school-cluster-argo-cd",
-    "coder-amanibhavam-school-cluster-argocd-school",
-    "coder-amanibhavam-school-cluster-cert-manager",
-    "coder-amanibhavam-school-cluster-cilium",
-    "coder-amanibhavam-school-cluster-external-secrets",
-    "coder-amanibhavam-school-cluster-issuer",
-    "coder-amanibhavam-school-cluster-coredns",
-    "coder-amanibhavam-school-cluster-karpenter",
-    "coder-amanibhavam-school-cluster-kyverno",
-    "coder-amanibhavam-school-cluster-pod-identity",
-    "coder-amanibhavam-school-cluster-secrets",
-    "coder-amanibhavam-school-cluster-tailscale",
-    "coder-amanibhavam-school-cluster-tetragon",
-    "coder-amanibhavam-school-cluster-crossplane",
-    "coder-amanibhavam-school-cluster-crossprovider",
-    "coder-amanibhavam-school-cluster-crossdemo",
-    "coder-amanibhavam-school-cluster-xwing",
-    "coder-amanibhavam-school-cluster-postgres-operator",
-    "coder-amanibhavam-school-cluster-coder",
-    "coder-amanibhavam-school-cluster-coder-school",
+load("//c/k:meh.bzl", "meh")
+load(":main.bzl", "apps")
+
+cluster_bundles = [
+    (
+        k,
+        glob(
+            ["{}/*.yaml".format(k)],
+            exclude = [],
+            exclude_directories = 1,
+        ),
+    )
+    for k in apps
 ]
 
-cluster = {
-    c: [k for k in cluster_apps if k.startswith("{}-".format(c))]
-    for c_ in cluster_apps
+by_cluster = {
+    c: [k for k, _ in cluster_bundles if k.startswith("{}-".format(c))]
+    for c_, _ in cluster_bundles
     for c in ["-".join(c_.split("-")[:3])]
 }
 
 filegroup(
-    name = "gen_kustomize_build_sh",
-    srcs = ["gen_kustomize_build.sh"],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "gen_cue_import_sh",
-    srcs = ["gen_cue_import.sh"],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "gen_deploy_yaml_sh",
-    srcs = ["gen_deploy_yaml.sh"],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "gen_env_yaml_sh",
-    srcs = ["gen_env_yaml.sh"],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "gen_helm_chart_sh",
-    srcs = ["gen_helm_chart.sh"],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "gen_push_helm_chart_sh",
-    srcs = ["gen_push_helm_chart.sh"],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "gen_deploy_crd_sh",
-    srcs = ["gen_deploy_crd.sh"],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "gen_image_digest_sh",
-    srcs = ["gen_image_digest.sh"],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
     name = "deploy_cue",
-    srcs = glob(["*.cue"]) + [
+    srcs = [
         "//cue.mod:cue_mod",
         "//cue.mod/gen/k8s.io:k8s_io",
-    ],
+    ] + glob(["*.cue"]),
     visibility = ["//visibility:public"],
 )
 
-[
-    [
-        genrule(
-            name = "kustomize_bundle_tgz_{}".format(k),
-            srcs = [
-                "//c/{}:config".format(c),
-            ],
-            outs = ["kustomize_bundle.tgz_{}".format(k)],
-            cmd = "$(location //c:gen_kustomize_bundle_sh) config=$(location //c/{}:config) decode=$(location //c:decode_base64_py) prefix={}/ $@".format(
-                c,
-                k,
-            ),
-            tools = [
-                "//b/lib:lib_sh",
-                "//c:decode_base64_py",
-                "//c:gen_kustomize_bundle_sh",
-            ],
-            visibility = ["//visibility:public"],
-        ),
-    ]
-    for k in cluster_apps
-    for c in ["-".join(k.split("-")[:3])]
-]
-
-[
-    [
-        genrule(
-            name = "kustomize_build_{}".format(k),
-            srcs = glob(
-                ["{}/*.yaml".format(k)],
-                exclude = [],
-                exclude_directories = 1,
-            ) + [
-                ":kustomize_bundle_tgz_{}".format(k),
-            ],
-            outs = ["{}-kustomized-build.yaml".format(k)],
-            cmd = "$(location :gen_kustomize_build_sh) app={} bundle=$(location :kustomize_bundle_tgz_{}) kustomize=$(location //pkg/kustomize:flake_kustomize) $@".format(
-                k,
-                k,
-            ),
-            tools = [
-                ":gen_kustomize_build_sh",
-                "//b/lib:lib_sh",
-                "//pkg/kustomize:flake_kustomize",
-            ],
-        ),
-        genrule(
-            name = "cue_import_{}".format(k),
-            srcs = [":kustomize_build_{}".format(k)],
-            outs = ["{}.cue".format(k)],
-            cmd = "$(location :gen_cue_import_sh) app=$(location :kustomize_build_{}) $@".format(k),
-            tools = [
-                ":gen_cue_import_sh",
-                "//b/lib:lib_sh",
-            ],
-        ),
-        genrule(
-            name = "image_digest_{}".format(k),
-            srcs = [
-                ":cue_import_{}".format(k),
-                ":deploy_cue",
-            ],
-            outs = ["image_digest_{}.cue".format(k)],
-            cmd = "$(location :gen_image_digest_sh) app=$(location :cue_import_{}) cue=$(location //pkg/cue:flake_cue) skopeo=$(location //pkg/oci:flake_skopeo) $@".format(k),
-            tools = [
-                ":gen_image_digest_sh",
-                "//b/lib:lib_sh",
-                "//pkg/cue:flake_cue",
-                "//pkg/oci:flake_skopeo",
-            ],
-        ),
-        genrule(
-            name = "deploy_yaml_{}".format(k),
-            srcs = [
-                ":cue_import_{}".format(k),
-                ":image_digest_{}".format(k),
-                ":deploy_cue",
-            ] + [
-                "push_helm_chart_{}".format(k)
-                for k in cluster[c]
-                if not k.endswith("-env")
-            ],
-            outs = ["{}.yaml".format(k)],
-            cmd = "$(location :gen_env_yaml_sh) cue=$(location //pkg/cue:flake_cue) _ $(location :cue_import_{}) $(location :image_digest_{}) $@ {}".format(
-                k,
-                k,
-                " ".join([
-                    "$(location push_helm_chart_{})".format(k)
-                    for k in cluster[c]
-                    if not k.endswith("-env")
-                ]),
-            ),
-            tools = [
-                ":gen_env_yaml_sh",
-                "//b/lib:lib_sh",
-                "//pkg/cue:flake_cue",
-            ],
-        ) if k.endswith("-env") else genrule(
-            name = "deploy_yaml_{}".format(k),
-            srcs = [
-                ":cue_import_{}".format(k),
-                ":image_digest_{}".format(k),
-                ":deploy_cue",
-            ],
-            outs = ["{}.yaml".format(k)],
-            cmd = "$(location :gen_deploy_yaml_sh) cue=$(location //pkg/cue:flake_cue) skopeo=$(location //pkg/oci:flake_skopeo) registry=cache.defn.run:4999 _ $(location :cue_import_{}) $(location :image_digest_{}) $@".format(k, k),
-            tools = [
-                ":gen_deploy_yaml_sh",
-                "//b/lib:lib_sh",
-                "//pkg/cue:flake_cue",
-                "//pkg/oci:flake_skopeo",
-            ],
-        ),
-        genrule(
-            name = "helm_chart_{}".format(k),
-            srcs = [
-                ":deploy_yaml_{}".format(k),
-            ],
-            outs = ["{}-chart.tgz".format(k)],
-            cmd = "$(location :gen_helm_chart_sh) app=$(location :deploy_yaml_{}) $@".format(k),
-            tools = [
-                ":gen_helm_chart_sh",
-                "//b/lib:lib_sh",
-            ],
-        ),
-        genrule(
-            name = "push_helm_chart_{}".format(k),
-            srcs = [
-                ":helm_chart_{}".format(k),
-            ],
-            outs = ["{}-deploy-chart.tgz".format(k)],
-            cmd = "$(location :gen_push_helm_chart_sh) app=$(location :helm_chart_{}) registry=cache.defn.run:4999/library/helm name={} $@".format(k, k),
-            tools = [
-                ":gen_push_helm_chart_sh",
-                "//b/lib:lib_sh",
-            ],
-        ),
-    ]
-    for k in cluster_apps
-    for c in ["-".join(k.split("-")[:3])]
-]
-
-[
-    [
-        genrule(
-            name = "deploy_crd_{}".format(c),
-            srcs = [
-                "deploy_cue",
-            ] + [
-                "cue_import_{}".format(k)
-                for k in cluster_apps
-                if k.startswith("{}-".format(c))
-            ],
-            outs = ["{}-crd.yaml".format(c)],
-            cmd = "$(location gen_deploy_crd_sh) $@ {}".format(
-                " ".join([
-                    "$(location cue_import_{})".format(k)
-                    for k in cluster_apps
-                    if k.startswith("{}-".format(c))
-                ]),
-            ),
-            tools = [
-                "gen_deploy_crd_sh",
-                "//b/lib:lib_sh",
-            ],
-        ),
-        filegroup(
-            name = c,
-            srcs = [
-                "push_helm_chart_{}".format(k)
-                for k in cluster_apps
-                if k.startswith("{}-".format(c))
-            ],
-            visibility = ["//visibility:public"],
-        ),
-    ]
-    for c in list(cluster.keys())
-]
+meh(
+    name = "meh",
+    by_cluster = by_cluster,
+    cluster_bundles = cluster_bundles,
+)

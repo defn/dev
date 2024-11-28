@@ -29,7 +29,6 @@ dev-macos:
 
 all:
 	rm -f MODULES.bazel.lock
-	$(MAKE) bazel-ignore
 	$(MAKE) regen build
 	$(MAKE) trunk
 	trunk fmt
@@ -99,7 +98,6 @@ update:
 	$(MAKE) cdktf
 
 regen:
-	$(MAKE) bazel-ignore
 	@mark gazelle
 	set -x; go get $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1' | grep -v /demo/)
 	mkdir -p node_modules demo/node_modules
@@ -112,24 +110,6 @@ regen:
 watch:
 	$(MAKE) build
 	ibazel build //...
-
-bazel-ignore:
-	echo > .bazelignore
-	echo tf/mod >> .bazelignore
-	echo tf/bootstrap>> .bazelignore
-	echo tf/global >> .bazelignore
-	echo tf/cdktf.out >> .bazelignore
-	echo node_modules >> .bazelignore
-	echo demo/node_modules >> .bazelignore
-	echo cutout >> .bazelignore
-	echo comfyui >> .bazelignore
-	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1.direnv}' | sort >> .bazelignore
-	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1result}' | sort >> .bazelignore
-	git ls-files | grep '{{cookiecutter' | perl -pe 's{\}\}/.*}{\}\}}' | sort -u >> .bazelignore
-	git ls-files | grep '{{cookiecutter' | perl -pe 's{/\{\{.*}{}' | sort -u >> .bazelignore
-	for a in infra/stacks/*/ infra/cdktf.out/stacks/*/ demo/stacks/*/ demo/cfg/cdktf.out/stacks/*/; do echo "$${a}.terraform"; done | sort >> .bazelignore
-	git ls-files | grep /.env | perl -pe 's{/[^/]+$$}{\n}' | while read -r a; do echo "$$a/.direnv"; done | sort >> .bazelignore
-	(cat ~/.gitignore && echo && echo m && echo work && echo bin) > ~/.bazelignore
 
 coder-login:
 	coder login https://coder.$(env).$(GIT_AUTHOR_NAME).$(domain)

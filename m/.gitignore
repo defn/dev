@@ -16,3 +16,5 @@ cutout/{{cookiecutter.path}}/BUILD.bazel
 h/*.tgz
 .bazelrc.user
 deps.edn
+
+MODULE.bazel.lock

@@ -5,14 +5,17 @@ run --noshow_loading_progress
 query --ui_event_filters=-info
 query --noshow_progress
 query --noshow_loading_progress
+query --incompatible_disallow_empty_glob=false
 
 cquery --ui_event_filters=-info
 cquery --noshow_progress
 cquery --noshow_loading_progress
+cquery --incompatible_disallow_empty_glob=false
 
 info --ui_event_filters=-info
 info --noshow_progress
 info --noshow_loading_progress
+info --incompatible_disallow_empty_glob=false
 
 build --verbose_failures
 build --noincompatible_sandbox_hermetic_tmp
@@ -28,6 +31,7 @@ build --sandbox_writable_path=/home/ubuntu/m/cue.mod/gen
 build --sandbox_writable_path=/home/ubuntu/m/k
 build --sandbox_writable_path=/home/ubuntu/work
 
+build --incompatible_disallow_empty_glob=false
 build --legacy_important_outputs
 build --noslim_profile --experimental_profile_include_target_label --experimental_profile_include_primary_output 
 

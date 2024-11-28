@@ -242,3 +242,4 @@ Bookshelf/
 .landscape*
 .motd*
 .sqlite*
+deps.edn

@@ -1,0 +1,3 @@
+"""
+"""
+ignore_directories(["**/node_modules", "**/cdktf.out*", "**/.direnv", "**/.terraform", "**/result", "**/{{cookiecutter.path}}"])
