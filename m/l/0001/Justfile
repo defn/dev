@@ -14,3 +14,4 @@ build:
 
 check:
     df -klh | grep /dev/mapper
+    sudo lvdisplay
