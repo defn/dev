@@ -17,7 +17,13 @@ tutorial: html: string
 #Head: """
 	<head>
 	<script src="https://cdn.tailwindcss.com"></script>
+
 	<script src="https://kit.fontawesome.com/012eb3e5a5.js" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/default.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+
+	<script>hljs.highlightAll();</script>
 	
 	<link rel="stylesheet" type="text/css" href="https://defn.github.io/webfonts/concourse_2_caps.css" />
 	<link rel="stylesheet" type="text/css" href="https://defn.github.io/webfonts/concourse_3.css" />
