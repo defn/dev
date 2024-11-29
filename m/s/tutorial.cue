@@ -1,7 +1,7 @@
 package l
 
 tutorial: #TutorialContent & {
-	title:  "Tutorial : <a href=\"/?folder=/home/ubuntu\">TOC</a>"
+	title:  "Update a Slideshow"
 	iframe: "https://3030--main--pc--admin.local.defn.run"
 	steps: [{
 		title: "Run the slide-show with Tilt"

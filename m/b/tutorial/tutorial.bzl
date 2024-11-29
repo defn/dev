@@ -9,7 +9,7 @@ def _tutorial_impl(ctx):
     cue_bin = ctx.files.cue_bin[0].path
 
     ctx.actions.run(
-        arguments = ["-c", "export XDG_CACHE_HOME=/tmp HOME=/home/ubuntu; find . -name '*.cue' | while read -r a; do rsync -iaL $a $a.tmp; rm -f $a; mv $a.tmp $a; done; {} eval --out json -e html {} | jq -r . > {}".format(
+        arguments = ["-c", "export XDG_CACHE_HOME=/tmp HOME=/home/ubuntu; find . -name '*.cue' | while read -r a; do rsync -iaL $a $a.tmp; rm -f $a; mv $a.tmp $a; done; {} eval --out json -e html {} | jq -r . > {}; date".format(
             cue_bin,
             " ".join(cue_inputs),
             out.path,
