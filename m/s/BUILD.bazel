@@ -1,0 +1,6 @@
+load("//b/tutorial:tutorial.bzl", "tutorial")
+
+tutorial(
+    name = "tutorial.html",
+    srcs = ["tutorial.cue"],
+)

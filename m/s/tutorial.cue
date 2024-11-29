@@ -5,7 +5,7 @@ tutorial: #TutorialContent & {
 	iframe: "https://3030--main--pc--admin.local.defn.run"
 	steps: [{
 		title: "Run the slide-show with Tilt"
-		desc:  "just server"
+		desc:  "j up"
 	}, {
 		title: "Load the slide-show"
 		desc:  "Once the slide-show is running, cick on retry below to load the slide-show"

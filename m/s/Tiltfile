@@ -1,14 +1,8 @@
 #!/usr/bin/env python
 
-# slidev
 local_resource(
     "slidev",
-    serve_cmd=[
-        "bash",
-        "-c",
-        """
-            npm install
-            npm run dev -- --remote --open=false
-            """,
-    ],
+    serve_cmd=["just", "server"],
 )
+
+local_resource("tutorial", cmd=["just", "build"], deps=["tutorial.cue"])

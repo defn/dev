@@ -1,2 +1,12 @@
+up:
+    tilt up
+
 server:
-    tilt up --port 10351
+    npm install
+    npm run dev -- --remote --open=false
+
+build:
+    b build
+    rsync -ia ./$(git rev-parse --show-cdup)/m/bazel-bin/s/tutorial.html .
+    chmod 0640 tutorial.html
+    trunk fmt tutorial.html
