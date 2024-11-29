@@ -7,6 +7,6 @@ server:
 
 build:
     b build
-    rsync -ia ./$(git rev-parse --show-cdup)/m/bazel-bin/s/tutorial.html .
+    b run tutorial.html__copy
     chmod 0640 tutorial.html
     trunk fmt tutorial.html
