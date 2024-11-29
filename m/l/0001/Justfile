@@ -13,5 +13,11 @@ build:
     trunk fmt tutorial.html
 
 check:
+    echo File-systems using LVM:
+    echo
+    df -klh | head -1
     df -klh | grep /dev/mapper
-    sudo lvdisplay
+    echo
+    echo Free volume group disk:
+    echo
+    sudo vgdisplay | grep Free

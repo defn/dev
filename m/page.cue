@@ -24,6 +24,13 @@ tutorial: html: string
 	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
 
 	<script>hljs.highlightAll();</script>
+	<script>
+		function refreshIframe() {
+			const iframe = document.getElementById('server');
+			iframe.src = iframe.src;
+		}
+		setInterval(refreshIframe, 5000);
+	</script>
 	
 	<link rel="stylesheet" type="text/css" href="https://defn.github.io/webfonts/concourse_2_caps.css" />
 	<link rel="stylesheet" type="text/css" href="https://defn.github.io/webfonts/concourse_3.css" />

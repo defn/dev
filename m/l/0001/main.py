@@ -5,7 +5,7 @@ from flask import Flask, Response
 app = Flask(__name__)
 
 
-@app.route("/", methods=["GET"])
+@app.route("/check", methods=["GET"])
 def run_check():
     try:
         process = subprocess.run(["just", "check"], text=True, capture_output=True)

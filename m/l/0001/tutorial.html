@@ -17,6 +17,13 @@
     <script>
       hljs.highlightAll();
     </script>
+    <script>
+      function refreshIframe() {
+        const iframe = document.getElementById("server");
+        iframe.src = iframe.src;
+      }
+      setInterval(refreshIframe, 5000);
+    </script>
 
     <link
       rel="stylesheet"
@@ -179,7 +186,10 @@ The filesystem on /dev/mapper/ubuntu--vg-ubuntu--lv is now 236191744 (4k) blocks
       </div>
     </div>
     <div class="iframe-container">
-      <iframe src="https://5000--main--pc--admin.local.defn.run/"></iframe>
+      <iframe
+        id="server"
+        src="https://5000--main--pc--admin.local.defn.run/check"
+      ></iframe>
     </div>
   </body>
 </html>

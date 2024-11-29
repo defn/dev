@@ -91,7 +91,7 @@ import (
 	html: """
 	\(content.html)
 	<div class="iframe-container">
-	<iframe src="\(iframe)"></iframe>
+	<iframe id="server" src="\(iframe)"></iframe>
 	</div>
 	"""
 }

@@ -1,8 +1,10 @@
 package l
 
+// 1
+
 tutorial: #TutorialContent & {
 	title:  "Expand LVM Volumes"
-	iframe: "https://5000--main--pc--admin.local.defn.run/"
+	iframe: "https://5000--main--pc--admin.local.defn.run/check"
 	steps: [{
 		title: "Run the tutorial with Tilt"
 		desc:  "<b>j up</b>"
