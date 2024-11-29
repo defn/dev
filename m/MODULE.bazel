@@ -9,6 +9,9 @@ module(
 # https://registry.bazel.build/modules/bazel_skylib
 bazel_dep(name = "bazel_skylib", version = "1.7.1")
 
+# https://github.com/zaucy/bzlws
+bazel_dep(name = "bzlws", version = "0.2.0")
+
 # https://registry.bazel.build/modules/rules_pkg
 # protobuf doesn't work with this dep defined
 bazel_dep(name = "rules_pkg", version = "1.0.1")
