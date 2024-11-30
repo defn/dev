@@ -15,5 +15,7 @@ build:
 check:
     true
 
-cutout:
-    cookiecutter -f 0002
+cutout name:
+    cookiecutter -f 0002 --no-input project_name={{ name }} path={{ name }} \
+        server_port="$( (git grep port=5 */main.py | perl -pe 's{.*?port=}{}; s{\)}{}'; seq 5000 5999) | sort | uniq -c | grep -v ' 2 ' | awk '{print $2}' | head -1)" \
+        tilt_port="$( (git grep TILT_PORT */.env | perl -pe 's{.*TILT_PORT=}{}' | grep ^2; seq 20000 20999 ) | sort | uniq -c | grep -v ' 2 ' | awk '{print $2}' | head -1)"
