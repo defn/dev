@@ -1,16 +1,20 @@
+# Run tilt to start servers and builds
 up:
     tilt up
 
-server:
-    python -m venv venv
-    venv/bin/pip install -r requirements.txt
-    venv/bin/python main.py
-
+# Build the software
 build:
     b build
     b run tutorial_html__copy
     chmod 0640 tutorial.html
     trunk fmt tutorial.html
 
+# Run a python web service
+server:
+    python -m venv venv
+    venv/bin/pip install -r requirements.txt
+    venv/bin/python main.py
+
+# Run a check script
 check:
     git grep -r TOD[O] . || true
