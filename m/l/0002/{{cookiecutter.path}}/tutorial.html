@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script
+      src="https://kit.fontawesome.com/012eb3e5a5.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/default.min.css"
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script>
+      function refreshIframe() {
+        const iframe = document.getElementById("server");
+        iframe.src = iframe.src;
+      }
+      setInterval(refreshIframe, 5000);
+    </script>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://defn.github.io/webfonts/concourse_2_caps.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://defn.github.io/webfonts/concourse_3.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://defn.github.io/webfonts/valkyrie_a.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://defn.github.io/webfonts/hermes_maia_4.css"
+    />
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        font-family: valkyrie_a;
+      }
+
+      .content {
+        padding: 20px;
+      }
+
+      .iframe-container {
+        flex: 1;
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+    </style>
+  </head>
+  <body class="bg-white">
+    <div class="content mt-10 max-w-2xl">
+      <h2 class="text-2xl font-bold tracking-tight text-gray-900">
+        Expand LVM Volumes
+      </h2>
+      <div class="mx-auto max-w-3xl text-base text-gray-700">
+        <ul role="list" class="mt-8 max-w-xl space-y-8 text-gray-600">
+          <li class="flex gap-x-3">
+            <svg
+              class="mt-1 h-5 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span>
+              <strong class="font-semibold text-gray-900"
+                >Run the tutorial with Tilt</strong
+              >
+              <br />
+              <b>j up</b>
+            </span>
+          </li>
+          <li class="flex gap-x-3">
+            <svg
+              class="mt-1 h-5 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span>
+              <strong class="font-semibold text-gray-900"
+                >Find the LVM volume of the file-system you are
+                expanding</strong
+              >
+              <br />
+              <pre><code language="class-shell">
+df -klh | grep /dev/mapper
+
+/dev/mapper/ubuntu--vg-ubuntu--lv  886G  311G  538G  37% /
+</code></pre>
+            </span>
+          </li>
+          <li class="flex gap-x-3">
+            <svg
+              class="mt-1 h-5 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span>
+              <strong class="font-semibold text-gray-900"
+                >Extend the LVM volume by 100Gb</strong
+              >
+              <br />
+              <pre><code language="class-shell">
+sudo lvextend -L +1G /dev/mapper/ubuntu--vg-ubuntu--lv
+
+Size of logical volume ubuntu-vg/ubuntu-lv changed from 900.00 GiB (230400 extents) to 901.00 GiB (230656 extents).
+Logical volume ubuntu-vg/ubuntu-lv successfully resized.
+</code></pre>
+            </span>
+          </li>
+          <li class="flex gap-x-3">
+            <svg
+              class="mt-1 h-5 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span>
+              <strong class="font-semibold text-gray-900"
+                >Extend the file-system to match the LVM volume</strong
+              >
+              <br />
+              <pre><code language="class-shell">
+sudo resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
+
+resize2fs 1.47.0 (5-Feb-2023)
+Filesystem at /dev/mapper/ubuntu--vg-ubuntu--lv is mounted on /; on-line resizing required
+old_desc_blocks = 113, new_desc_blocks = 113
+The filesystem on /dev/mapper/ubuntu--vg-ubuntu--lv is now 236191744 (4k) blocks long.
+</code></pre>
+            </span>
+          </li>
+        </ul>
+        <br />
+        <br />
+      </div>
+    </div>
+    <div class="iframe-container">
+      <iframe
+        id="server"
+        src="https://5000--main--pc--admin.local.defn.run/check"
+      ></iframe>
+    </div>
+  </body>
+</html>
