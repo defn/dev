@@ -13,6 +13,9 @@ tutorial: #TutorialContent & {
 		title: "Bump versions in nix flakes to match GitHub releases"
 		desc:  "j latest"
 	}, {
+		title: "Populate the Bazel cache"
+		desc:  "(cd && j cache)"
+	}, {
 		title: "Build everything with Bazel"
 		desc:  "j build"
 	}]
