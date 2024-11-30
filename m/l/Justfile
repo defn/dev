@@ -22,5 +22,5 @@ check:
 # Make a lesson cutout from 0002 template 
 cutout name:
     cookiecutter -f 0002 --no-input project_name={{ name }} path={{ name }} \
-        server_port="$( (git grep port=5 */main.py | perl -pe 's{.*?port=}{}; s{\)}{}'; seq 5000 5999) | sort | uniq -c | grep -v ' 2 ' | awk '{print $2}' | head -1)" \
-        tilt_port="$( (git grep TILT_PORT */.env | perl -pe 's{.*TILT_PORT=}{}' | grep ^2; seq 20000 20999 ) | sort | uniq -c | grep -v ' 2 ' | awk '{print $2}' | head -1)"
+        server_port="$( cd ./$(git rev-parse --show-cdup)/m; (git ls-files | grep /main.py | xargs git grep port=5     -- | perl -pe 's{.*?port=}{}; s{\)}{}';      seq 5000 5999)   | sort | uniq -c | grep ' 1 ' | awk '{print $2}' | head -1)" \
+        tilt_port="$(   cd ./$(git rev-parse --show-cdup)/m; (git ls-files | grep /.env    | xargs git grep TILT_PORT= -- | perl -pe 's{.*TILT_PORT=}{}' | grep ^2; seq 20000 20999) | sort | uniq -c | grep ' 1 ' | awk '{print $2}' | head -1)"
