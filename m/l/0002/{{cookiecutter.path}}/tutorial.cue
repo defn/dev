@@ -1,11 +1,8 @@
 package l
 
-// 1
-
 tutorial: #TutorialContent & {
-	title: "TODO: change title"
-	// TODO: change port to match main.py
-	iframe: "https://5000--main--pc--admin.local.defn.run/check"
+	title:  "TODO: change title"
+	iframe: "https://{{cookiecutter.server_port}}--main--pc--admin.local.defn.run/check"
 	steps: [{
 		title: "Run the tutorial with Tilt"
 		desc:  "<b>j up</b>"

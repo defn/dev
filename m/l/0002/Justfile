@@ -12,5 +12,6 @@ build:
     chmod 0640 tutorial.html
     trunk fmt tutorial.html
 
+# TODO: write an implementation of just check
 check:
-    uname -a
+    git grep -r TOD[O] . || true
