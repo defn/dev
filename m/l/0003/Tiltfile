@@ -1,0 +1,7 @@
+#!/usr/bin/env python
+
+local_resource(
+    "server", serve_cmd=["just", "server"], deps=["main.py", "requirements.txt"]
+)
+
+local_resource("tutorial", cmd=["just", "build"], deps=["tutorial.cue"])
