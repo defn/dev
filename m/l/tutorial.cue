@@ -12,7 +12,7 @@ tutorial: #TutorialContent & {
 			> j cutout
 			
 			[1/4] project_name (): 0003
-			[2/4] path (): ../0003
+			[2/4] path (): 0003
 			[3/4] server_port (): 5003
 			[4/4] tilt_port (): 20003
 			</code></pre>

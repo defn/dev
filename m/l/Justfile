@@ -16,4 +16,4 @@ check:
     true
 
 cutout:
-    cookiecutter -f .
+    cookiecutter -f 0002
