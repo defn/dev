@@ -1,3 +1,7 @@
 [submodule "m/comfyui/repo"]
 	path = m/comfyui/repo
 	url = https://github.com/comfyanonymous/ComfyUI
+[submodule "m/www/defn.dev"]
+	path = m/www/defn.dev
+	url = git@github.com:defn/defn.dev
+	branch = main
