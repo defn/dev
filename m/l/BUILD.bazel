@@ -1,0 +1,16 @@
+load("//b/out:out.bzl", "copy_files")
+load("//b/tutorial:tutorial.bzl", "tutorial")
+
+tutorial(
+    name = "tutorial.html",
+    srcs = ["tutorial.cue"],
+    visibility = ["//visibility:public"],
+)
+
+copy_files(
+    name = "tutorial_html",
+    dir = ".",
+    gen = {
+        "tutorial.html": "tutorial.html",
+    },
+)

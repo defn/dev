@@ -43,7 +43,7 @@
     ;; (vscode/commands.executeCommand "simpleBrowser.show" "https://8000--main--dev--amanibhavam.coder.dev.amanibhavam.defn.run/")
 
   ;; run command in terminal TODO bug opens a new terminal every time
-  (comment p/let [terminal (vscode/window.createTerminal #js {:name "Tutorial"})]
+  (comment p/let [terminal (vscode/window.createTerminal #js {:name "tilt"})]
 
     ;; open tutorial.html
     (p/let [panel (vscode/window.createWebviewPanel "Tutorial" "Tutorial" vscode/ViewColumn.Two #js {:enableScripts true})
@@ -53,10 +53,10 @@
       (set! (.. panel -webview -html) (str html))))
 
   ;; run command in terminal TODO bug opens a new terminal every time
-  (comment p/let [terminal (vscode/window.createTerminal #js {:name "Tutorial"})]
+  (p/let [terminal (vscode/window.createTerminal #js {:name "tilt"})]
     (doto terminal
       (.show true)
-      (.sendText "make tutorial"))))
+      (.sendText "j up"))))
 
 (defn- main []
   (open-tutorial)

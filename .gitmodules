@@ -28,4 +28,15 @@
 [submodule "m/www/devopsfor.us"]
 	path = m/www/devopsfor.us
 	url = https://github.com/defn/devopsfor.us
+[submodule "m/www/defn.dev"]
+	path = m/www/defn.dev
+	url = git@github.com:defn/defn.dev
+	branch = main
+[submodule "m/www/hana.studio"]
+	path = m/www/hana.studio
+	url = git@github.com:defn/hana.studio
+	branch = main
+[submodule "m/www/gorillama.com"]
+	path = m/www/gorillama.com
+	url = git@github.com:defn/gorillama.com
 	branch = main

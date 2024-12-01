@@ -1,0 +1,27 @@
+# Run tilt to start servers and builds
+up:
+    tilt up
+
+# Build the software
+build:
+    b build
+    b run tutorial_html__copy
+    chmod 0640 tutorial.html
+    trunk fmt tutorial.html
+
+# Run a python web service
+server:
+    python -m venv venv
+    venv/bin/pip install -r requirements.txt
+    venv/bin/python main.py
+
+# Run a check script
+check:
+    echo File-systems using LVM:
+    echo
+    df -klh | head -1
+    df -klh | grep /dev/mapper
+    echo
+    echo Free volume group disk:
+    echo
+    sudo vgdisplay | grep Free

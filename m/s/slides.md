@@ -11,7 +11,7 @@ fonts:
   mono: "Fira Code"
 ---
 
-# Welcome to Slidev
+# Welcome to Spinal Tap
 
 Presentation slides for developers
 

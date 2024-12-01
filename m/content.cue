@@ -9,15 +9,19 @@ import (
 	...
 	content: {
 		...
-		html: string
+		html:   string
+		iframe: string | *""
 	}
-	html: string | *content.html
+	html:   string | *content.html
+	iframe: string | *content.iframe
 }
 
 // PageContent decorates a page
 #PageContent: #Content & {
-	content: html: string
-	html: content.html
+	content: html:   string
+	content: iframe: string
+	html:   content.html
+	iframe: content.iframe
 }
 
 // TitleContent decorates a title
@@ -35,7 +39,7 @@ import (
 	title: string
 	content: html: string
 	html: """
-		<div class="mt-10 max-w-2xl">
+		<div class="content mt-10 max-w-2xl">
 			<h2 class="text-2xl font-bold tracking-tight text-gray-900">\(title)</h2>
 			\(content.html)
 		</div>
@@ -77,10 +81,17 @@ import (
 
 // TutorialContent decores a Tutorial Section
 #TutorialContent: #Content & {
-	title: string
-	steps: #ListContent.items
+	title:  string
+	iframe: string | *""
+	steps:  #ListContent.items
 	content: #SectionContent & {
 		"title": title
 		content: (#ListContent & {items: steps})
 	}
+	html: """
+	\(content.html)
+	<div class="iframe-container">
+	<iframe id="server" src="\(iframe)"></iframe>
+	</div>
+	"""
 }

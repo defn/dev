@@ -21,6 +21,11 @@ build --verbose_failures
 build --noincompatible_sandbox_hermetic_tmp
 build --action_env=HOME=/home/ubuntu
 build --test_env=HOME=/home/ubuntu
+build --enable_runfiles
+build --incompatible_disallow_empty_glob=false
+build --legacy_important_outputs
+build --noslim_profile --experimental_profile_include_target_label --experimental_profile_include_primary_output 
+
 build --sandbox_writable_path=/nix
 build --sandbox_writable_path=/home/ubuntu/.cache/nix
 build --sandbox_writable_path=/home/ubuntu/.cache/helm
@@ -30,9 +35,5 @@ build --sandbox_writable_path=/home/ubuntu/.earthly
 build --sandbox_writable_path=/home/ubuntu/m/cue.mod/gen
 build --sandbox_writable_path=/home/ubuntu/m/k
 build --sandbox_writable_path=/home/ubuntu/work
-
-build --incompatible_disallow_empty_glob=false
-build --legacy_important_outputs
-build --noslim_profile --experimental_profile_include_target_label --experimental_profile_include_primary_output 
 
 try-import %workspace%/.bazelrc.user

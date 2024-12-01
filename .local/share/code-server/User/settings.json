@@ -93,5 +93,6 @@
   "markdown.marp.exportType": "html",
   "markdown.marp.enableHtml": true,
   "genieai.openai.model": "gpt-4",
-  "genieai.openai.apiBaseUrl": "http://localhost:4096"
+  "genieai.openai.apiBaseUrl": "http://localhost:4096",
+  "terminal.integrated.fontFamily": "monospace"
 }
