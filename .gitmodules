@@ -9,3 +9,7 @@
 	path = m/www/hana.studio
 	url = git@github.com:defn/hana.studio
 	branch = main
+[submodule "m/www/gorillama.com"]
+	path = m/www/gorillama.com
+	url = git@github.com:defn/gorillama.com
+	branch = main
