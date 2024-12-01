@@ -1,3 +1,31 @@
 [submodule "m/comfyui/repo"]
 	path = m/comfyui/repo
 	url = https://github.com/comfyanonymous/ComfyUI
+[submodule "m/www/defn.cloud"]
+	path = m/www/defn.cloud
+	url = https://github.com/defn/defn.cloud
+	branch = main
+[submodule "m/www/defn.co.in"]
+	path = m/www/defn.co.in
+	url = https://github.com/defn/defn.co.in
+	branch = main
+[submodule "m/www/defn.net"]
+	path = m/www/defn.net
+	url = https://github.com/defn/defn.net
+	branch = main
+[submodule "m/www/defn.org"]
+	path = m/www/defn.org
+	url = https://github.com/defn/defn.org
+	branch = main
+[submodule "m/www/defn.sh"]
+	path = m/www/defn.sh
+	url = https://github.com/defn/defn.sh
+	branch = main
+[submodule "m/www/destructuring.org"]
+	path = m/www/destructuring.org
+	url = https://github.com/defn/destructuring.org
+	branch = main
+[submodule "m/www/devopsfor.us"]
+	path = m/www/devopsfor.us
+	url = https://github.com/defn/devopsfor.us
+	branch = main
