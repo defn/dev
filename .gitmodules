@@ -5,3 +5,7 @@
 	path = m/www/defn.dev
 	url = git@github.com:defn/defn.dev
 	branch = main
+[submodule "m/www/hana.studio"]
+	path = m/www/hana.studio
+	url = git@github.com:defn/hana.studio
+	branch = main
