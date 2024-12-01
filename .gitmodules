@@ -40,3 +40,7 @@
 	path = m/www/gorillama.com
 	url = git@github.com:defn/gorillama.com
 	branch = main
+[submodule "m/www/fam.fan"]
+	path = m/www/fam.fan
+	url = https://github.com/defn/fam.fan
+	branch = main
