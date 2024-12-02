@@ -8,8 +8,6 @@ tagOwners: {
 	"tag:thinkpad": []
 	"tag:macmini": []
 	"tag:mbair": []
-	"tag:oracle": []
-	"tag:steamdeck": []
 	"tag:spiral": []
 	"tag:aws": []
 	"tag:k8s-admin": []
@@ -63,17 +61,7 @@ ssh: [{
 	action: "check"
 	src: ["group:admins"]
 	dst: ["tag:amanibhavam"]
-	users: ["ubuntu", "deck", "root"]
-}, {
-	action: "accept"
-	src: ["tag:amanibhavam"]
-	dst: ["tag:amanibhavam"]
-	users: ["deck"]
-}, {
-	action: "check"
-	src: ["group:admins"]
-	dst: ["tag:oracle"]
-	users: ["ubuntu"]
+	users: ["ubuntu", "root"]
 }]
 
 nodeAttrs: [{
