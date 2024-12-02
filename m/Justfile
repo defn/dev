@@ -19,3 +19,7 @@ command pattern *args:
 [no-cd]
 use *name:
 	just coder::use {{name}}
+
+# Do nothing for Joyride
+up:
+	@true
