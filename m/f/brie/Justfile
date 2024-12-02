@@ -2,7 +2,7 @@ status:
     fly machine list
 
 deploy:
-    fly deploy
+    fly deploy --local-only
     
 stop:
     fly machine stop $(fly machine list --json | jq -r '.[].id')
