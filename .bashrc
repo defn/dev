@@ -154,4 +154,4 @@ export BROWSER="$(type -P browser || true)"
 
 unset MAKEFLAGS
 
-if test -r ~/.ssh-agent-rc; then source ~/.ssh-agent-rc; fi
+if test -r ~/.ssh-agent-rc; then source ~/.ssh-agent-rc >/dev/null; fi
