@@ -87,8 +87,8 @@ inventory: {
 	]
 
 	zimaboard: hosts: [
-		"zm1",
-		"zm2",
+		// "zm1",
+		// "zm2",
 		// dead "zm3",
 	]
 
