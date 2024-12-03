@@ -1,9 +1,5 @@
 import '../Justfile'
 
-# Run tilt to start servers and builds
-up:
-    tilt up
-
 # Build the software
 build:
     b build
