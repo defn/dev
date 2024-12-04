@@ -2,5 +2,5 @@
   "slug": "pkg-workerd",
   "ghrepo": "cloudflare/workerd",
   "vendor": "1.20241106.2",
-  "revision": "0"
+  "revision": "1"
 }
