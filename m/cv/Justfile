@@ -3,7 +3,7 @@ eod file="js.json" stage1="yes" stage2="no":
     just json {{ file }}
     ls -d js-*.js.json | runmany 'just posts $1 $1.txt'
     just index {{ file }} {{ stage1 }} {{ stage2 }}
-    git add no yes posts etc/cv.db
+    git add no yes posts cv.db
     git add -u *.input urls.txt
     git commit -m 'eod' || true
 
@@ -133,23 +133,23 @@ ersgan-inner:
     sudo tailscale serve status
     just db-img
     just db-size
-    echo 'select count(*) from img' | sqlite3 etc/cv.db 
+    echo 'select count(*) from img' | sqlite3 cv.db 
     for a in yes replicate/*/; do echo "$a $(find $a -type f | wc -l)"; done
 
 users:
     find posts -name '*.json' | xargs cat | jq -r '.username' | sort | uniq -c | sort -n > users.txt
 
 db-img *args:
-    diff <(echo 'select id from img order by id' | sqlite3 etc/cv.db) <(find yes -type f | cut -d/ -f2 | cut -d. -f1 | sort) | grep '^>' | awk '{print $NF}' | xargs -n 100 just db-img-inner
+    diff <(echo 'select id from img order by id' | sqlite3 cv.db) <(find yes -type f | cut -d/ -f2 | cut -d. -f1 | sort) | grep '^>' | awk '{print $NF}' | xargs -n 100 just db-img-inner
 
 db-img-inner *args:
-    time echo {{ args }} | runmany 1 100 'echo $*; echo; j db-upsert-img $* | sqlite3 etc/cv.db'
+    time echo {{ args }} | runmany 1 100 'echo $*; echo; j db-upsert-img $* | sqlite3 cv.db'
 
 db-size:
-    echo 'select id from img where thumb_height is null' | sqlite3 etc/cv.db | xargs -n 100 just db-size-inner
+    echo 'select id from img where thumb_height is null' | sqlite3 cv.db | xargs -n 100 just db-size-inner
 
 db-size-inner *args:
-    time echo {{ args }} | runmany 1 100 'echo $*; echo; j db-upsert-size $* | sqlite3 etc/cv.db'
+    time echo {{ args }} | runmany 1 100 'echo $*; echo; j db-upsert-size $* | sqlite3 cv.db'
 
 db-upsert-img *args:
     #!/usr/bin/env bash
