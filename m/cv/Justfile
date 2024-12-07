@@ -92,6 +92,10 @@ backup-inner:
     rclone sync -L --progress --transfers=60 . district-enc:cv
 
 proxy:
+    screen -dmS proxy j proxy-inner
+    screen -DRR proxy
+
+proxy-inner:
     nginx -g "daemon off;" -c $(pwd)/proxy.conf
 
 server:
