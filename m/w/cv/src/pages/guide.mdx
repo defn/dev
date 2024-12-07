@@ -2,7 +2,7 @@
 layout: ../layouts/Layout.astro
 hello: world
 title: meh
-meh: ../src/assets/meh.png
+meh: ../src/assets/meh.jpeg
 ---
 
 import Welcome from "../components/Welcome.astro";
@@ -11,10 +11,10 @@ import Image from "../components/Image.astro";
 <table>
   <tr>
     <td>
-      <Image src={frontmatter.meh} />
+      <Welcome />
     </td>
     <td>
-      <Welcome />
+      <Image src={frontmatter.meh} />
     </td>
   </tr>
 </table>
