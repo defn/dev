@@ -10,6 +10,9 @@ export default defineConfig({
     mdx(),
     //starlight({ title: 'My delightful docs site' }),
   ],
+  build: {
+    assets: "a",
+  },
   legacy: {
     collections: true,
   },

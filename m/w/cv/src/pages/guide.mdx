@@ -3,9 +3,10 @@ layout: ../layouts/Layout.astro
 title: guide
 ---
 
-import Welcome from "../components/Welcome.astro";
-import Image from "../components/Image.astro";
+import { Image } from "astro:assets";
 import Meh from "../assets/meh.jpeg";
+
+import Welcome from "../components/Welcome.astro";
 
 <table>
   <tr>
@@ -13,7 +14,7 @@ import Meh from "../assets/meh.jpeg";
       <Welcome />
     </td>
     <td>
-      <Image src={Meh.src} />
+      <Image src={Meh} alt="" />
     </td>
   </tr>
 </table>
