@@ -6,5 +6,11 @@
     "path": "src/assets",
     "relative": true
   },
-  "frontMatter.extends": []
+  "frontMatter.extends": [],
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "pages",
+      "path": "[[workspace]]/src/pages"
+    }
+  ]
 }
