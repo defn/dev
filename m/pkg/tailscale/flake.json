@@ -3,5 +3,5 @@
   "ghrepo": "tailscale/tailscale",
   "vendor": "1.78.1",
   "vendor2": "1.74.0",
-  "revision": "0"
+  "revision": "1"
 }
