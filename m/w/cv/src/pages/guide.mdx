@@ -6,11 +6,12 @@ meh: ../src/assets/meh.png
 ---
 
 import Welcome from "../components/Welcome.astro";
+import Image from "../components/Image.astro";
 
 <table>
   <tr>
     <td>
-      <img src={frontmatter.meh} />
+      <Image src={frontmatter.meh} />
     </td>
     <td>
       <Welcome />
