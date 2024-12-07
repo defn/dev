@@ -6,9 +6,5 @@
     "path": "src/assets",
     "relative": true
   },
-  "frontMatter.extends": [
-    ".frontmatter/starlight/contenttypes.json",
-    ".frontmatter/starlight/pagefolders.json",
-    ".frontmatter/starlight/aside.json"
-  ]
+  "frontMatter.extends": []
 }
