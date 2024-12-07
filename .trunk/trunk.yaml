@@ -25,6 +25,7 @@ lint:
         - .cache/**
         - .npm/**
   enabled:
+    - isort@5.13.2
     - clippy@1.65.0
     - rustfmt@1.65.0
     - dotenv-linter@3.3.0
@@ -33,10 +34,10 @@ lint:
     - cue-fmt@0.9.0
     - git-diff-check
     - gofmt@1.22.5
-    - isort@5.13.2
+    #- isort@5.13.2
     - markdownlint@0.43.0
     - nixpkgs-fmt@1.3.0
-    - prettier@3.4.1
+    - prettier@3.4.2
     - shellcheck@0.10.0
     - shfmt@3.6.0
     - taplo@0.9.3

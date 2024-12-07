@@ -1,0 +1,45 @@
+body {
+  overflow-y: scroll; /* Ensure the body is scrollable */
+}
+/* Hide scrollbar for Webkit browsers (Chrome, Safari) */
+body::-webkit-scrollbar {
+  width: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+td {
+  border: 1px solid #000;
+  vertical-align: top;
+  padding: 0;
+}
+.image-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.image-container img {
+  max-width: 100%;
+}
+
+.blurhash-canvas {
+  width: 100px; /* Adjust as needed */
+  height: 100px; /* Adjust as needed */
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  background: black;
+  opacity: 0.95;
+  z-index: 1000;
+  display: block;
+}

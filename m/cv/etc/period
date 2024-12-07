@@ -1,0 +1,45 @@
+period=$1; shift
+aa=$1; shift
+limit=$1; shift
+
+prefix="$period-$(date +%Y-%m-%d)"
+#search="period=$period"
+
+if [[ -z "${1:-}" ]]; then 
+    set -- true false
+fi
+
+for nsfw in "$@"; do
+    a=$aa
+    if ! test -f js/$prefix-$nfw-0.json; then
+        curl -v -sSL "${url}/api/v1/images?nsfw=${nsfw}&${search}&sort=Most%20Reactions" | tee js/$prefix-$nsfw-0.json
+    fi
+
+    while true; do 
+        mark downloading $a
+        next="$(cat js/$prefix-$nsfw-$(echo $a -1 | bc).json | jq -r '.metadata.nextPage')"
+        mark "$next"
+        if [[ "$next" == null ]]; then
+            break
+        fi
+        if [[ -z "$next" ]]; then
+            break
+        fi
+
+        curl -sSL -v "$next" | tee js/$prefix-$nsfw-$a.json | tail | cut -b1-240
+        
+        if cat js/$prefix-$nsfw-$a.json | jq -r '.metadata.nextPage' | grep ^https; then 
+            a=$(echo $a + 1 | bc)
+            mark next is $a
+        else
+            break
+        fi
+
+        if [[ "$a" == "$limit" ]]; then break; fi
+    done
+done
+
+
+for a in js/$prefix-*.json; do
+    cat $a | jq -r '(.items//[])[]'
+done | jq -s 'reduce .[] as $e ({}; .["\($e.id)"] = $e)' | tee js-$prefix.json | wc -l

@@ -1,0 +1,172 @@
+
+eod file="js.json" stage1="yes" stage2="no":
+    just json {{ file }}
+    ls -d js-*.js.json | runmany 'just posts $1 $1.txt'
+    just index {{ file }} {{ stage1 }} {{ stage2 }}
+    git add no yes posts etc/cv.db
+    git add -u *.input urls.txt
+    git commit -m 'eod' || true
+
+json file:
+    find posts -name '*.json' | while read -r js; do echo; cat $js; echo; done > {{ file }}
+    for a in js-*js.json; do echo; cat $a; echo; done >> {{ file }}
+    cat {{ file }} | jq -r '.url' | sort -u >> urls.txt
+    cat urls.txt | sort -u > urls.txt.2
+    mv urls.txt.2 urls.txt
+
+posts input file:
+    #!/usr/bin/env bash
+    for i in {{ input }}; do
+        cat "$i" | jq -r '"\(.id) \(.url) \(@base64)"' > {{ file }}.txt
+        cat {{ file }}.txt | awk '{print $1, $2}' | while read -r post url; do img="${url##*/}"; echo $img; done | sort | while read -r img; do if test -f yes/$img; then if ! test -f posts/${img%.jpeg}.json; then echo posts/$img; grep "/$img " {{ file }}.txt | awk '{print $3}' | base64 -d > posts/${img%.jpeg}.json; fi; fi; done
+    done
+    rm {{ file }}.txt
+    
+user uname stage1="yes" stage2="no":
+    etc/user {{uname}} 1 100
+    cat js-username-{{ uname }}.json | jq '.[]' > js-username-{{ uname}}.json.js.json
+    just download js-username-{{ uname }}.json.js.json
+    reset
+
+process file stage1="yes" stage2="no" fast="":
+    just index {{ file }} {{ stage1 }} {{ stage2 }}
+    cat {{ file }}.input | bash etc/cols.sh yes thumbs 6 /thumbs > {{ file }}.html.2
+    mv {{ file }}.html.2 {{ file }}.$$.big.html
+    cat {{ file }}.input | wc -l
+
+index file stage1 stage2:
+    cat {{ file }} | jq -r '.url' | cut -d/ -f7 | cut -d. -f1 | sort > {{ file }}.all
+    cat {{ file }}.all | while read -r a; do if ! test -f "{{ stage1 }}/$a.jpeg"; then if ! test -f "{{ stage2 }}/$a.jpeg"; then echo "$a"; fi; fi; done | sort > {{ file }}.input
+
+download file:
+    cat {{ file }} | jq -r '.url' | sort -u | runmany 8 20 'cd img && wget -nc --no-verbose $@'
+
+thumbs:
+    cat <(find thumbs -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find img -name '*.jpeg' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $2}' | while read -r a; do if ! test -f "thumbs/$a.png"; then echo "$a"; fi; done | sort | runmany 4 'if ! test -f thumbs/${1}.png; then if [[ "$(identify -format "%n" img/$1.jpeg)" == 1 ]]; then echo thumbs/$1.png; mogrify -path thumbs -resize 200x -format png img/$1.jpeg || true; fi; fi'
+    cat <(find thumbs -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find img -name '*.jpeg' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $2}' | while read -r a; do if ! test -f "thumbs/$a.png"; then echo "img/$a.jpeg"; fi; done | xargs file | grep "image data" | grep GIF | cut -d: -f1 | cut -d/ -f2 | while read -r a; do echo "GIF img/$a"; touch no/$a thumbs/${a%%.jpeg}.png; done
+    cat <(find thumbs -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find img -name '*.jpeg' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $2}' | while read -r a; do if ! test -f "thumbs/$a.png"; then echo "img/$a.jpeg"; fi; done | xargs file | grep -v "image data" | cut -d: -f1 | cut -d/ -f2 | while read -r a; do echo "not image img/$a"; touch no/$a thumbs/${a%%.jpeg}.png; done
+
+t2:
+    cat <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 2 ' | awk '{print $NF}' | sort | runmany 4 1 'echo "img/$1.jpeg -> t2/$1.png"; mogrify -path t2 -resize 400x -format png img/$1.jpeg'
+
+gallery dir="thumbs" num="12" output="thumbs":
+    time etc/proc-thumbs {{dir}} {{num}} {{output}}
+    
+big prefix="replicate/":
+    #!/usr/bin/env bash
+    just gallery {{ prefix }}img 1 one &
+    just gallery {{ prefix }}t2  2 two &
+    wait
+
+finish file:
+    cat {{ file }}.all | while read -r a; do if ! test -f "yes/$a.jpeg"; then echo "no/$a.jpeg"; fi; done | xargs touch || true
+    find img -type f -size -100c | sed 's#img/#thumbs/#; s#.jpeg$#.png#' | sort | while read -r a; do if ! test -f $a; then echo $a; touch $a; fi; done
+    git add no yes urls.txt
+    git commit -m 'finish' || true
+
+following:
+    ls -ltrhd js*.html | awk '{print $NF}' | while read -r a; do if grep filename: "$a" >/dev/null; then echo "<a href=\"$a\">$a</a><br>"; fi; done > following.html.1
+    mv -f following.html.1 following.html
+
+daily file="followers.txt" n="4":
+    screen -dmS daily j daily-inner {{ file }} {{ n }}
+    screen -DRR daily
+
+daily-inner file n="4":
+    just download-user {{ file }} {{ n }} || true
+    just thumbs
+    just html {{ file }}
+    just following
+
+download-user file n="4":
+    cat {{ file }} | runmany {{ n }} 'just user $1'
+
+html file="followers.txt" n="20":
+    cat {{ file }} | runmany {{ n }} 'just process js-username-$1.json.js.json'
+
+backup:
+    screen -dmS backup j backup-inner
+    screen -DRR backup
+
+backup-inner:
+    rclone sync -L --progress --transfers=60 . district-enc:cv
+
+proxy:
+    nginx -g "daemon off;" -c $(pwd)/proxy.conf
+
+server:
+    screen -dmS server j server-inner
+    screen -DRR server
+
+server-inner:
+    while true; do etc/static; date; sleep 10; done
+
+reset:
+    screen -dmS reset j reset-inner
+    screen -DRR reset
+
+reset-inner:
+    just eod
+    just finish js.json
+    rm -f js-* js.json.* js.json || true
+    git status -sb
+
+ersgan:
+    just t2
+    rm -f .something
+    cat <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find replicate/img/ -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep -v ' 2 ' | awk '{print $NF}' | sort | runmany 'touch .something'
+    cat <(find replicate/img -name '*.png' | cut -d/ -f3 | cut -d. -f1) <(find replicate/t2 -name '*.png' | cut -d/ -f3 | cut -d. -f1) <(find replicate/t2 -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $NF}' | runmany 'touch .something'
+    if [[ -f .something ]]; then just ersgan-inner; fi
+
+ersgan-inner:
+    sudo tailscale serve --https=443 off || true
+    sudo tailscale funnel reset
+    sudo tailscale funnel --bg --set-path /pub http://localhost:8111/pub
+    # t2 -> replicate/img
+    while true; do if curl -sSL https://pc.tail3884f.ts.net/pub/index.html | grep hello; then sleep 5; break; fi; sleep 1; done
+    cat <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find replicate/img/ -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep -v ' 2 ' | awk '{print $NF}' | sort | runmany 32 './ersgan.mjs $1'
+    cat <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find replicate/img/ -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep -v ' 2 ' | awk '{print $NF}' | sort | runmany 32 './ersgan.mjs $1'
+    # replicate/img -> replicate/t2
+    cat <(find replicate/img -name '*.png' | cut -d/ -f3 | cut -d. -f1) <(find replicate/t2 -name '*.png' | cut -d/ -f3 | cut -d. -f1) <(find replicate/t2 -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $NF}' | runmany 32 'mogrify -path replicate/t2 -resize 400x -format png replicate/img/$1.png'
+    sudo tailscale funnel reset
+    sudo tailscale serve --bg 8111
+    sudo tailscale serve status
+    just db-img
+    just db-size
+    echo 'select count(*) from img' | sqlite3 etc/cv.db 
+    for a in yes replicate/*/; do echo "$a $(find $a -type f | wc -l)"; done
+
+users:
+    find posts -name '*.json' | xargs cat | jq -r '.username' | sort | uniq -c | sort -n > users.txt
+
+db-img *args:
+    diff <(echo 'select id from img order by id' | sqlite3 etc/cv.db) <(find yes -type f | cut -d/ -f2 | cut -d. -f1 | sort) | grep '^>' | awk '{print $NF}' | xargs -n 100 just db-img-inner
+
+db-img-inner *args:
+    time echo {{ args }} | runmany 1 100 'echo $*; echo; j db-upsert-img $* | sqlite3 etc/cv.db'
+
+db-size:
+    echo 'select id from img where thumb_height is null' | sqlite3 etc/cv.db | xargs -n 100 just db-size-inner
+
+db-size-inner *args:
+    time echo {{ args }} | runmany 1 100 'echo $*; echo; j db-upsert-size $* | sqlite3 etc/cv.db'
+
+db-upsert-img *args:
+    #!/usr/bin/env bash
+    echo "begin transaction;"
+    runmany 16 'echo "INSERT OR IGNORE INTO img (id, good) values ('"'"'$1'"'"', true);"' {{ args }}
+    echo "commit;"
+
+db-upsert-size*args:
+    #!/usr/bin/env bash
+    echo "begin transaction;"
+    runmany 16 'img=$1; set -- $(identify -format "%w %h" replicate/t2/$1.png); if [[ -n "$1" ]]; then echo "UPDATE OR IGNORE img SET good = true, thumb_height=$1, thumb_width = $2 WHERE ID = '"'"'$img'"'"';"; fi' {{ args }}
+    echo "commit;"
+
+month:
+    etc/period Month 1 100
+    cat js-Month-*.json | jq '.[]' > js-period-Month.json.js.json
+    just download js-period-Month.json.js.json
+    just thumbs
+    just process js-period-Month.json.js.json
+    just following
