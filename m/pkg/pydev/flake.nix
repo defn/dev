@@ -3,7 +3,7 @@
     pkg.url = github:defn/dev/pkg-pkg-0.0.17?dir=m/pkg/pkg;
     # https://github.com/NixOS/nixpkgs/tree/master/pkgs/development/interpreters/python
     # https://github.com/NixOS/nixpkgs/blob/master/pkgs/top-level/aliases.nix
-    latest.url = github:NixOS/nixpkgs?rev=e4d95f4100b799edad3fcb6038b3d1a6b1be7458;
+    latest.url = github:NixOS/nixpkgs?rev=868be2c9df2ffdb40b6aee3d156f1df603555539;
   };
 
   outputs = inputs: inputs.pkg.main rec {
@@ -18,7 +18,7 @@
     defaultPackage = ctx: ctx.wrap.nullBuilder {
       propagatedBuildInputs =
         with (import inputs.latest { system = ctx.system; }); [
-          (python3.withPackages (ps: with ps; [ pip pipx ]))
+          (python312.withPackages (ps: with ps; [ pip pipx ]))
           (packages ctx).wut
         ];
     };
