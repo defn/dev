@@ -32,6 +32,10 @@ disabled = true
 
 disabled = true
 
+[kubernetes ]
+
+disabled = false
+
 [cmake]
 
 disabled = true
