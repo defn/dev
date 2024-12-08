@@ -1,5 +1,6 @@
 import sys
 
+import cowsay
 from py.goodbye.goodbye import goodbye
 from py.hello.hello import hello
 
@@ -13,8 +14,8 @@ def main():
         print(f)
 
     name = sys.argv[1]
-    print(hello(name))
-    print(goodbye(name))
+    cowsay.cow(hello(name))
+    cowsay.cow(goodbye(name))
 
 
 if __name__ == "__main__":
