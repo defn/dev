@@ -68,7 +68,8 @@ if ! test -e "${KUBECONFIG-}"; then
 	if test -e "$HOME/.kube/config"; then
 		export KUBECONFIG="$HOME/.kube/config"
 	else
-		export KUBECONFIG="$HOME/.kube/config-in-cluster"
+		true
+		# export KUBECONFIG="$HOME/.kube/config-in-cluster"
 	fi
 fi
 
