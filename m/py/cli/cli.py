@@ -1,5 +1,6 @@
 import sys
 
+from goodbye import goodbye
 from hello import hello
 
 
@@ -10,6 +11,7 @@ def main():
 
     name = sys.argv[1]
     print(hello(name))
+    print(goodbye(name))
 
 
 if __name__ == "__main__":
