@@ -1,7 +1,7 @@
 import sys
 
-from goodbye import goodbye
-from hello import hello
+from py.goodbye.goodbye import goodbye
+from py.hello.hello import hello
 
 
 def main():
