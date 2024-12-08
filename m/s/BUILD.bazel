@@ -8,7 +8,7 @@ tutorial(
 )
 
 copy_files(
-    name = "tutorial.html",
+    name = "tutorial_html",
     dir = ".",
     gen = {
         "tutorial.html": "tutorial.html",
