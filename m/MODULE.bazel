@@ -53,7 +53,7 @@ pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
 pip.parse(
     hub_name = "cowsay",
     python_version = "3.12.7",
-    requirements_lock = "//py/cli:requirements.txt",
+    requirements_lock = "//py/cowsay:requirements.txt",
 )
 use_repo(pip, "cowsay")
 

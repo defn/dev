@@ -1,0 +1,2 @@
+update:
+    bazel run :generate_requirements_txt

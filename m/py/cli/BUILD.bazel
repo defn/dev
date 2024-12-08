@@ -1,5 +1,4 @@
 load("@aspect_rules_py//py:defs.bzl", "py_binary")
-load("@rules_uv//uv:pip.bzl", "pip_compile")
 
 py_binary(
     name = "cli",
@@ -10,11 +9,4 @@ py_binary(
         "//py/hello",
         "@cowsay//cowsay",
     ],
-)
-
-pip_compile(
-    name = "generate_requirements_txt",
-    requirements_in = ":requirements.in",
-    requirements_txt = ":requirements.txt",
-    visibility = ["//visibility:public"],
 )
