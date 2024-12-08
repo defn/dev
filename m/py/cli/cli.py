@@ -1,17 +1,29 @@
-import sys
 from datetime import datetime
 
-import cowsay
 from py.goodbye.goodbye import goodbye
 from py.hello.hello import hello
-from rich import print
+from textual.app import App, ComposeResult
+from textual.widgets import Digits
 
 
-def main():
-    name = sys.argv[1]
-    print("Hello, [bold magenta]World[/bold magenta]!", ":vampire:", hello(name))
-    print("Good-bye, [bold magenta]World[/bold magenta]!", ":vampire:", goodbye(name))
+class ClockApp(App):
+    CSS = """
+    Screen { align: center middle; }
+    Digits { width: auto; }
+    """
+
+    def compose(self) -> ComposeResult:
+        yield Digits("")
+
+    def on_ready(self) -> None:
+        self.update_clock()
+        self.set_interval(1, self.update_clock)
+
+    def update_clock(self) -> None:
+        clock = datetime.now().time()
+        self.query_one(Digits).update(f"{clock:%T}")
 
 
 if __name__ == "__main__":
-    main()
+    app = ClockApp()
+    app.run()

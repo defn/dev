@@ -2,4 +2,5 @@ run +args="Nobody":
     @b pass run :cli -- {{ args }}
 
 update:
-    bazel run :cli.venv
+    b build
+    b pass run :cli.venv

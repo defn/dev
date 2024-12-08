@@ -7,7 +7,6 @@ py_binary(
     deps = [
         "//py/goodbye",
         "//py/hello",
-        "@lib//cowsay",
-        "@lib//rich",
+        "@lib//textual",
     ],
 )
