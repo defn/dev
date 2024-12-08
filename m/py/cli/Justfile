@@ -2,4 +2,4 @@ run +args="Nobody":
     @b pass run :cli -- {{ args }}
 
 update:
-    bazel run :generate_requirements_txt
+    bazel run :cli.venv

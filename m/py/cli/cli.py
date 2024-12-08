@@ -1,21 +1,16 @@
 import sys
+from datetime import datetime
 
 import cowsay
 from py.goodbye.goodbye import goodbye
 from py.hello.hello import hello
+from rich import print
 
 
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: python cli.py <name>")
-        sys.exit(1)
-
-    for f in sys.path:
-        print(f)
-
     name = sys.argv[1]
-    cowsay.cow(hello(name))
-    cowsay.cow(goodbye(name))
+    print("Hello, [bold magenta]World[/bold magenta]!", ":vampire:", hello(name))
+    print("Good-bye, [bold magenta]World[/bold magenta]!", ":vampire:", goodbye(name))
 
 
 if __name__ == "__main__":

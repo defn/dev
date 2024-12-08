@@ -51,11 +51,11 @@ use_repo(python, "python_3_12_7")
 
 pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
 pip.parse(
-    hub_name = "cowsay",
+    hub_name = "lib",
     python_version = "3.12.7",
-    requirements_lock = "//py/cowsay:requirements.txt",
+    requirements_lock = "//py/lib:requirements.txt",
 )
-use_repo(pip, "cowsay")
+use_repo(pip, "lib")
 
 # https://registry.bazel.build/modules/gazelle
 bazel_dep(name = "gazelle", version = "0.40.0", repo_name = "bazel_gazelle")
