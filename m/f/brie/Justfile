@@ -1,6 +1,9 @@
 status:
     fly machine list
 
+build:
+    fly deploy --local-only --build-only
+
 deploy:
     fly deploy --local-only
     

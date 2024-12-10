@@ -13,7 +13,7 @@ ENV LANG=C
 WORKDIR /home/ubuntu
 
 RUN git clone https://github.com/defn/dev /home/ubuntu
-RUN git pull && echo 20240921
+RUN git pull && echo 20241209
 
 RUN bash -c 'source .bash_profile && bin/persist-cache && make nix'
 RUN bash -c 'source .bash_profile && git reset --hard && git pull'
@@ -24,7 +24,7 @@ RUN bash -c 'sudo touch /nix.tar && sudo chown ubuntu:ubuntu /nix.tar && tar -cf
 
 FROM ubuntu:24.04
 
-RUN apt-get update && apt-get install -y xz-utils curl sudo git make direnv gpg rsync ca-certificates
+RUN apt-get update && apt-get install -y xz-utils curl sudo git make direnv gpg rsync ca-certificates bc pipx
 
 COPY --from=nix /home/ubuntu /home/ubuntu
 COPY --from=nix /nix.tar /nix.tar
