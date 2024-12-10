@@ -8,6 +8,7 @@ demo/node_modules
 cutout
 comfyui
 demo/nix/.direnv
+f/.direnv
 pepr/.direnv
 pkg/acme/.direnv
 pkg/argocd/.direnv
@@ -61,6 +62,7 @@ pkg/k3sup/.direnv
 pkg/k9s/.direnv
 pkg/kn/.direnv
 pkg/kubectl/.direnv
+pkg/kubelogin/.direnv
 pkg/kubeseal/.direnv
 pkg/kubevirt/.direnv
 pkg/kuma/.direnv
@@ -69,6 +71,7 @@ pkg/linkerd/.direnv
 pkg/minikube/.direnv
 pkg/minikubekvm2/.direnv
 pkg/mirrord/.direnv
+pkg/mise/.direnv
 pkg/oci/.direnv
 pkg/openfga/.direnv
 pkg/opentofu/.direnv
@@ -86,6 +89,7 @@ pkg/spire/.direnv
 pkg/step/.direnv
 pkg/stern/.direnv
 pkg/tailscale/.direnv
+pkg/temporal/.direnv
 pkg/terraform/.direnv
 pkg/terraformdocs/.direnv
 pkg/tfo/.direnv
@@ -102,6 +106,7 @@ pkg/zellij/.direnv
 prefect/.direnv
 wut/.direnv
 demo/nix/result
+f/result
 pepr/result
 pkg/acme/result
 pkg/argocd/result
@@ -155,6 +160,7 @@ pkg/k3sup/result
 pkg/k9s/result
 pkg/kn/result
 pkg/kubectl/result
+pkg/kubelogin/result
 pkg/kubeseal/result
 pkg/kubevirt/result
 pkg/kuma/result
@@ -163,6 +169,7 @@ pkg/linkerd/result
 pkg/minikube/result
 pkg/minikubekvm2/result
 pkg/mirrord/result
+pkg/mise/result
 pkg/oci/result
 pkg/openfga/result
 pkg/opentofu/result
@@ -180,6 +187,7 @@ pkg/spire/result
 pkg/step/result
 pkg/stern/result
 pkg/tailscale/result
+pkg/temporal/result
 pkg/terraform/result
 pkg/terraformdocs/result
 pkg/tfo/result
@@ -198,9 +206,11 @@ wut/result
 cutout/app/{{cookiecutter.path}}
 cutout/command/{{cookiecutter.path}}
 cutout/vcluster/{{cookiecutter.path}}
+l/0002/{{cookiecutter.path}}
 cutout/app
 cutout/command
 cutout/vcluster
+l/0002
 demo/cfg/cdktf.out/stacks/acc-demo-dev/.terraform
 demo/cfg/cdktf.out/stacks/acc-demo-net/.terraform
 demo/cfg/cdktf.out/stacks/acc-demo-ops/.terraform
@@ -457,6 +467,7 @@ infra/stacks/org-vault/.terraform
 infra/stacks/org-whoa/.terraform
 dc/site/.direnv
 demo/.direnv
+infra/.direnv
 infra/cdktf.out/stacks/org-chamber/.direnv
 infra/cdktf.out/stacks/org-circus/.direnv
 infra/cdktf.out/stacks/org-coil/.direnv
@@ -471,17 +482,11 @@ infra/cdktf.out/stacks/org-jianghu/.direnv
 infra/cdktf.out/stacks/org-spiral/.direnv
 infra/cdktf.out/stacks/org-vault/.direnv
 infra/cdktf.out/stacks/org-whoa/.direnv
+l/0001/.direnv
 openvpn/.direnv
+pepr/.direnv
+pkg/.direnv
 pkg/zellij/.direnv
+s/.direnv
+temporal/.direnv
 wut/.direnv
-./cv/node_modules
-./demo/node_modules
-./node_modules
-./s/node_modules
-./w/apps/docs/node_modules
-./w/apps/story/node_modules
-./w/apps/web/node_modules
-./w/cv/node_modules
-./w/node_modules
-./w/packages/eslint-config-custom/node_modules
-./w/packages/ui/node_modules

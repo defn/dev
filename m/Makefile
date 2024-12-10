@@ -99,6 +99,7 @@ update:
 
 regen:
 	@mark gazelle
+	$(MAKE) bazel-ignore
 	set -x; go get $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1' | grep -v /demo/)
 	mkdir -p node_modules demo/node_modules
 	for a in node_modules demo/node_modules infra/stacks/*/.terraform demo/stacks/*/.terraform; do \
@@ -209,3 +210,20 @@ activate:
 create-activation:
 	@b agent b exec defn-org aws ssm create-activation --default-instance-name $(name) --iam-role service-role/AmazonEC2RunCommandRoleForManagedInstances --registration-limit 1 --region $(region)  --expiration-date "$$(date -d "+1 day" +"%Y-%m-%dT00:00:00")" | jq -r '"make activate region=$(region) actid=\(.ActivationId) actcode=\(.ActivationCode)"'work ?= /home/ubuntu/m/demo
 
+bazel-ignore:
+	echo > .bazelignore
+	echo tf/mod >> .bazelignore
+	echo tf/bootstrap>> .bazelignore
+	echo tf/global >> .bazelignore
+	echo tf/cdktf.out >> .bazelignore
+	echo node_modules >> .bazelignore
+	echo demo/node_modules >> .bazelignore
+	echo cutout >> .bazelignore
+	echo comfyui >> .bazelignore
+	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1.direnv}' | sort >> .bazelignore
+	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1result}' | sort >> .bazelignore
+	git ls-files | grep '{{cookiecutter' | perl -pe 's{\}\}/.*}{\}\}}' | sort -u >> .bazelignore
+	git ls-files | grep '{{cookiecutter' | perl -pe 's{/\{\{.*}{}' | sort -u >> .bazelignore
+	for a in infra/stacks/*/ infra/cdktf.out/stacks/*/ demo/stacks/*/ demo/cfg/cdktf.out/stacks/*/; do echo "$${a}.terraform"; done | sort >> .bazelignore
+	git ls-files | grep /.env | perl -pe 's{/[^/]+$$}{\n}' | while read -r a; do echo "$$a/.direnv"; done | sort >> .bazelignore
+	(cat ~/.gitignore && echo && echo m && echo work && echo bin) > ~/.bazelignore
