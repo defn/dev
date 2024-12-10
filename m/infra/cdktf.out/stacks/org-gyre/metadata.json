@@ -5,8 +5,7 @@
       "stackName": "org-gyre",
       "version": "0.20.10"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "data": {
     "aws_ssoadmin_instances": {
@@ -112,7 +111,7 @@
     "required_providers": {
       "aws": {
         "source": "aws",
-        "version": "5.76.0"
+        "version": "5.80.0"
       }
     }
   }

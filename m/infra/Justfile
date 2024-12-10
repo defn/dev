@@ -18,3 +18,6 @@ sync:
 
     runmany 'cp -v stacks/acc-chamber-1/.terraform.lock.hcl $1 || true' stacks/acc-*/
     runmany 'cp -v stacks/org-chamber/.terraform.lock.hcl $1 || true' stacks/org-*/
+
+diff:
+    @git diff --cached . | egrep '^[+-]' | egrep -v '^[+-]{,3} [ab]/' | sort | uniq -c

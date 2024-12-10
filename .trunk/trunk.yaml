@@ -10,7 +10,7 @@ plugins:
       uri: https://github.com/trunk-io/plugins
 runtimes:
   enabled:
-    - rust@1.80.1
+    - rust@1.83.0
     - go@1.23.2
     - node@22.9.0
     # no downloads for anything later than this

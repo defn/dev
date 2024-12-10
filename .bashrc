@@ -47,7 +47,7 @@ export NEXT_TELEMETRY_DISABLED=1
 # go
 export GOCACHE="$HOME/.cache/go-build"
 export GOMODCACHE="$HOME/.cache/go-mod"
-export GOTOOLCHAIN=local 
+export GOTOOLCHAIN=local
 
 # earthly
 #export EARTHLY_BUILDKIT_HOST="${EARTHLY_BUILDKIT_HOST:-tcp://$(uname -n):8372}"
@@ -156,3 +156,8 @@ export BROWSER="$(type -P browser || true)"
 unset MAKEFLAGS
 
 if test -r ~/.ssh-agent-rc; then source ~/.ssh-agent-rc >/dev/null; fi
+
+# mise
+if type -P mise >/dev/null; then
+	eval "$(mise activate bash)"
+fi

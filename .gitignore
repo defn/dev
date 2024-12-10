@@ -243,3 +243,4 @@ Bookshelf/
 .motd*
 .sqlite*
 deps.edn
+.rustup

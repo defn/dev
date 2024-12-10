@@ -43,7 +43,7 @@ command pattern *args:
 upgrade *args:
 	just play upgrade {{ args }}
 
-cache *args="cache":
+cache *args="cache:!pc":
 	just play cache {{ args }}
 
 home *args="all:!kinko":

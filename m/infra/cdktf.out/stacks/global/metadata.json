@@ -5,8 +5,7 @@
       "stackName": "global",
       "version": "0.20.10"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "s3-chamber-1": {
@@ -864,7 +863,7 @@
     "required_providers": {
       "aws": {
         "source": "aws",
-        "version": "5.76.0"
+        "version": "5.80.0"
       }
     }
   }

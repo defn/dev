@@ -5,8 +5,7 @@
       "stackName": "acc-fogg-org",
       "version": "0.20.10"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "module": {
     "fogg-org": {
@@ -32,7 +31,7 @@
     "required_providers": {
       "aws": {
         "source": "aws",
-        "version": "5.76.0"
+        "version": "5.80.0"
       }
     }
   }

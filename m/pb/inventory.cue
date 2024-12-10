@@ -17,6 +17,7 @@ inventory: {
 	}
 
 	cache: hosts: [
+		"pc",
 		"district",
 		"rpi4c",
 		"rpi5c",
