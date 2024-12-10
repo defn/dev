@@ -19,13 +19,13 @@ playbook: cache: [{
 
 role: home_flakes: tasks: [{
 	name:  "Install home nix flakes"
-	shell: "(pkill -f -9 baze[l] || true) && cd && source .bash_profile && git pull && mise trust && make nix home"
+	shell: "(pkill -f -9 baze[l] || true) && cd && source .bash_profile && git pull && mise trust && mise install && make nix home"
 	args: executable: "/bin/bash"
 }]
 
 role: home_cache: tasks: [{
 	name:  "Cache all nix flakes"
-	shell: "(pkill -f -9 baze[l] || true) && cd && source .bash_profile && git pull && cd m/pkg && mise trust && j cache"
+	shell: "(pkill -f -9 baze[l] || true) && cd && source .bash_profile && git pull && cd m/pkg && mise trust && mise install && j cache"
 	args: executable: "/bin/bash"
 	register: "home_cache"
 	until:    "home_cache is success"
