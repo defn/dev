@@ -1,3 +1,5 @@
+load("@rules_shell//shell:sh_binary.bzl", "sh_binary")
+
 """
 """
 
@@ -16,7 +18,7 @@ def skopeo_copy(name, image, remote_tags, repository, visibility = None):
     """
     skopeo_copy_script = Label(":skopeo_copy_script")
 
-    native.sh_binary(
+    sh_binary(
         name = "{}__skopeo_copy".format(name),
         srcs = [skopeo_copy_script],
         args = [

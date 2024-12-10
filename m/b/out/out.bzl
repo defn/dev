@@ -2,6 +2,7 @@
 """
 
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
+load("@rules_shell//shell:sh_binary.bzl", "sh_binary")
 
 def copy_files(name, gen, dir = None, prefix = None, visibility = None):
     """Something
@@ -42,7 +43,7 @@ def copy_files(name, gen, dir = None, prefix = None, visibility = None):
         visibility = visibility,
     )
 
-    native.sh_binary(
+    sh_binary(
         name = "{}__copy".format(name),
         srcs = ["{}_copy.sh".format(name)],
         data = _GENERATED.values(),

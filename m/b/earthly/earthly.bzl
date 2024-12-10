@@ -1,6 +1,8 @@
 """
 """
 
+load("@rules_shell//shell:sh_binary.bzl", "sh_binary")
+
 def earthly_build(name, image, data, earthly_bin, build_args = [], visibility = None):
     """Something
 
@@ -41,7 +43,7 @@ def earthly_build(name, image, data, earthly_bin, build_args = [], visibility = 
 
     docker_load_script = Label(":docker_load_script")
 
-    native.sh_binary(
+    sh_binary(
         name = "{}_docker_load".format(name),
         srcs = [docker_load_script],
         args = [

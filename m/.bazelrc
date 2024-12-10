@@ -25,6 +25,7 @@ build --enable_runfiles
 build --incompatible_disallow_empty_glob=false
 build --legacy_important_outputs
 build --noslim_profile --experimental_profile_include_target_label --experimental_profile_include_primary_output 
+build --incompatible_autoload_externally=+@rules_android
 
 build --sandbox_writable_path=/nix
 build --sandbox_writable_path=/home/ubuntu/.cache/nix
