@@ -216,10 +216,9 @@ bazel-ignore:
 	echo tf/bootstrap>> .bazelignore
 	echo tf/global >> .bazelignore
 	echo tf/cdktf.out >> .bazelignore
-	echo node_modules >> .bazelignore
-	echo demo/node_modules >> .bazelignore
 	echo cutout >> .bazelignore
 	echo comfyui >> .bazelignore
+	find . -name 'node_modules'| perl -pe 's{/node_modules/.*}{/node_modules}'  >> .bazelignore
 	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1.direnv}' | sort >> .bazelignore
 	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1result}' | sort >> .bazelignore
 	git ls-files | grep '{{cookiecutter' | perl -pe 's{\}\}/.*}{\}\}}' | sort -u >> .bazelignore
