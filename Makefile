@@ -1,9 +1,9 @@
 SHELL := /bin/bash
 
 # https://nixos.org/download
-NIX_VERSION := 2.25.2
+NIX_VERSION := 2.25.3
 
-flakes ?= attic cue cuetsy gum dyff az home secrets tailscale vpn utils just buildifier bazelisk ibazel oci development step awscli chamber cloud terraform kubectl kubelogin k3d k9s helm kustomize stern kubeseal argocd vcluster coder codeserver tilt gh oras regctl regbot regsync buildkite buildevents honeyvent honeymarker honeytail workerd temporal mise shell
+flakes ?= attic cue gum dyff az home secrets tailscale utils just buildifier bazelisk ibazel oci development step awscli chamber cloud kubectl kubelogin k3d k9s stern coder codeserver tilt gh buildkite buildevents mise shell
 home ?= home
 
 name ?= local
