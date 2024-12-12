@@ -7,7 +7,7 @@ pipelines:
       run_dependencies --all       # 1. Deploy any projects this project needs (see "dependencies")
       ensure_pull_secrets --all    # 2. Ensure pull secrets
       create_deployments --all     # 3. Deploy Helm charts and manifests specfied as "deployments"
-      start_dev app                # 4. Start dev mode "app" (see "dev" section)
+      start_dev demo              # 4. Start dev mode "app" (see "dev" section)
   deploy:
     run: |-
       run_dependencies --all                            # 1. Deploy any projects this project needs (see "dependencies")
@@ -15,21 +15,20 @@ pipelines:
       build_images --all -t $(git describe --always)    # 3. Build, tag (git commit hash) and push all images (see "images")
       create_deployments --all                          # 4. Deploy Helm charts and manifests specfied as "deployments"
 
-# We recommend to skip image building during development (devspace dev) as much as possible
 images:
-  app:
-    image: nginx
+  demo:
+    image: demo
     dockerfile: ./Dockerfile
 
 deployments:
-  app:
+  demo:
     kubectl:
       manifests:
-        - deploy.yaml
+        - demo.yaml
 
 dev:
-  app:
-    imageSelector: nginx
+  demo:
+    imageSelector: demo
     sync:
       - path: ./
         uploadExcludePaths:
