@@ -29,14 +29,19 @@ deployments:
 dev:
   demo:
     imageSelector: demo
+    command: ["python3"]
+    args: ["-m", "http.server", "2345"]
+    restartHelper:
+      inject: true
     sync:
       - path: ./
         uploadExcludePaths:
           - node_modules
           - .direnv
+          - .devspace
+        onUpload:
+          restartContainer: true
     ssh:
       enabled: true
-    proxyCommands:
-      - gitCredentials: true
     ports:
       - port: "2345"
