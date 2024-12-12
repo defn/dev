@@ -41,3 +41,5 @@ dev:
       enabled: true
     ports:
       - port: "2345"
+    proxyCommands:
+      - gitCredentials: true
