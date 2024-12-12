@@ -38,7 +38,6 @@ dev:
     ssh:
       enabled: true
     proxyCommands:
-      - command: devspace
       - gitCredentials: true
     ports:
       - port: "2345"
