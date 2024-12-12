@@ -1,5 +1,4 @@
 flake_names = [
-    "attic",
     "cue",
     "gum",
     "dyff",
