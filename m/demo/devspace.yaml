@@ -1,0 +1,44 @@
+version: v2beta1
+name: dev
+
+pipelines:
+  dev:
+    run: |-
+      run_dependencies --all       # 1. Deploy any projects this project needs (see "dependencies")
+      ensure_pull_secrets --all    # 2. Ensure pull secrets
+      create_deployments --all     # 3. Deploy Helm charts and manifests specfied as "deployments"
+      start_dev app                # 4. Start dev mode "app" (see "dev" section)
+  deploy:
+    run: |-
+      run_dependencies --all                            # 1. Deploy any projects this project needs (see "dependencies")
+      ensure_pull_secrets --all                         # 2. Ensure pull secrets
+      build_images --all -t $(git describe --always)    # 3. Build, tag (git commit hash) and push all images (see "images")
+      create_deployments --all                          # 4. Deploy Helm charts and manifests specfied as "deployments"
+
+# We recommend to skip image building during development (devspace dev) as much as possible
+images:
+  app:
+    image: nginx
+    dockerfile: ./Dockerfile
+
+deployments:
+  app:
+    kubectl:
+      manifests:
+        - deploy.yaml
+
+dev:
+  app:
+    imageSelector: nginx
+    sync:
+      - path: ./
+        uploadExcludePaths:
+          - node_modules
+          - .direnv
+    ssh:
+      enabled: true
+    proxyCommands:
+      - command: devspace
+      - gitCredentials: true
+    ports:
+      - port: "2345"

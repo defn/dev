@@ -10,6 +10,3 @@ ENV USER=ubuntu
 ENV HOME=/home/ubuntu
 ENV LANG=C
 WORKDIR /home/ubuntu
-
-RUN bash -c 'cd ~ && source ~/.bash_profile && cd m/pb && pipx install --force --include-deps ansible && j local ubuntu' && rm -f /tmp/.bash*
-RUN echo DONE
