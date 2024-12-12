@@ -119,6 +119,10 @@ if test -z "${STARSHIP_NO-}"; then
 fi
 
 # aliases
+function m {
+	mise run "$@"
+}
+
 function vi {
 	if [[ -n ${VSCODE_GIT_ASKPASS_MAIN-} ]]; then
 		local code
