@@ -84,12 +84,12 @@ download-user file n="4":
 html file="followers.txt" n="20":
     cat {{ file }} | runmany {{ n }} 'just process js-username-$1.json.js.json'
 
-backup:
-    screen -dmS backup j backup-inner
+backup transfers="60":
+    screen -dmS backup j backup-inner {{ transfers }}
     screen -DRR backup
 
-backup-inner:
-    rclone sync -L --progress --transfers=60 . district-enc:cv
+backup-inner transfers:
+    rclone sync -L --progress --ignore-checksum --transfers={{ transfers }} . district-enc:cv
 
 proxy:
     screen -dmS proxy j proxy-inner
@@ -128,6 +128,7 @@ ersgan-inner:
     sudo tailscale funnel --bg --set-path /pub http://localhost:8111/pub
     # t2 -> replicate/img
     while true; do if curl -sSL https://pc.tail3884f.ts.net/pub/index.html | grep hello; then sleep 5; break; fi; sleep 1; done
+    mkdir -p replicate/js
     cat <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find replicate/img/ -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep -v ' 2 ' | awk '{print $NF}' | sort | runmany 32 './ersgan.mjs $1'
     cat <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find replicate/img/ -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep -v ' 2 ' | awk '{print $NF}' | sort | runmany 32 './ersgan.mjs $1'
     # replicate/img -> replicate/t2
