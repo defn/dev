@@ -1,5 +1,4 @@
 flake_names = [
-    "attic",
     "cue",
     "gum",
     "dyff",
@@ -26,6 +25,7 @@ flake_names = [
     "coder",
     "codeserver",
     "tilt",
+    "devspace",
     "gh",
     "buildkite",
     "buildevents",
