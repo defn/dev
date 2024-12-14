@@ -89,7 +89,7 @@ backup transfers="60":
     screen -DRR backup
 
 backup-inner transfers:
-    rclone sync -L --progress --ignore-checksum --transfers={{ transfers }} . district-enc:cv
+    rclone sync -L --progress --ignore-checksum --transfers={{ transfers }} replicate district-enc:cv/replicate
 
 proxy:
     screen -dmS proxy j proxy-inner
