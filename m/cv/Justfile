@@ -89,6 +89,8 @@ backup transfers="60":
     screen -DRR backup
 
 backup-inner transfers:
+    rm -rf replicate/js
+    mkdir -p replicate/js
     rclone sync -L --progress --ignore-checksum --transfers={{ transfers }} replicate district-enc:cv/replicate
 
 proxy:
