@@ -1,19 +1,31 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-
-//import starlight from '@astrojs/starlight';
-import mdx from "@astrojs/mdx";
+import starlight from "@astrojs/starlight";
+import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [
-    mdx(),
-    //starlight({ title: 'My delightful docs site' }),
-  ],
   build: {
     assets: "a",
   },
-  legacy: {
-    collections: true,
-  },
+  integrations: [
+    starlight({
+      title: "Docs with Tailwind",
+      social: {
+        github: "https://github.com/withastro/starlight",
+      },
+      sidebar: [
+        {
+          label: "Guides",
+          items: [{ label: "Example Guide", slug: "guides/example" }],
+        },
+        {
+          label: "Reference",
+          autogenerate: { directory: "reference" },
+        },
+      ],
+      customCss: ["./src/tailwind.css"],
+    }),
+    tailwind({ applyBaseStyles: false }),
+  ],
 });
