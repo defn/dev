@@ -1,5 +1,5 @@
 {
-  "name": "cv",
+  "name": "gorillama.com",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -14,6 +14,7 @@
     "@astrojs/starlight-tailwind": "^3.0.0",
     "@astrojs/tailwind": "^5.1.3",
     "astro": "^5.0.2",
+    "gorillama.com": "link:",
     "sharp": "^0.32.5",
     "tailwindcss": "^3.4.4"
   }

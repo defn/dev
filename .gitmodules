@@ -5,6 +5,10 @@
 	path = m/www/defn.cloud
 	url = https://github.com/defn/defn.cloud
 	branch = main
+[submodule "m/www/defn.app"]
+	path = m/www/defn.app
+	url = https://github.com/defn/defn.app
+	branch = main
 [submodule "m/www/defn.co.in"]
 	path = m/www/defn.co.in
 	url = https://github.com/defn/defn.co.in
