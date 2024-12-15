@@ -12,7 +12,7 @@ export default defineConfig({
     starlight({
       title: "Docs with Tailwind",
       social: {
-        github: "https://github.com/withastro/starlight",
+        github: "https://github.com/defn/gorillama.com",
       },
       sidebar: [
         {
