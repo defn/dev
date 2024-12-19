@@ -120,7 +120,11 @@ fi
 
 # aliases
 function m {
-	mise run "$@"
+	if [[ "$#" -gt 0 ]]; then
+		mise run "$@"
+	else
+		mise task ls
+	fi
 }
 
 function vi {
