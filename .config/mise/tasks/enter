@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
+#MISE description="Enter a devspace"
+
 exec ssh "$(basename "$(pwd)")".dev.devspace

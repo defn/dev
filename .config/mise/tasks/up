@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
+#MISE description="Bring up a devspace"
+
 exec devspace dev --namespace "$(basename "$(pwd)")"
