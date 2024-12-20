@@ -12,6 +12,7 @@ brew "bazelisk"
 brew "util-linux"
 brew "starship"
 brew "flock"
+brew "mise"
 
 cask "font-fira-code"
 

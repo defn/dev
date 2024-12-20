@@ -245,3 +245,4 @@ Bookshelf/
 deps.edn
 .rustup
 .devspace
+.gradle

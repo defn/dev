@@ -132,6 +132,7 @@ ersgan-inner:
     while true; do if curl -sSL https://pc.tail3884f.ts.net/pub/index.html | grep hello; then sleep 5; break; fi; sleep 1; done
     mkdir -p replicate/js
     cat <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find replicate/img/ -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep -v ' 2 ' | awk '{print $NF}' | sort | runmany 32 './ersgan.mjs $1'
+    sleep 10
     cat <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find replicate/img/ -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep -v ' 2 ' | awk '{print $NF}' | sort | runmany 32 './ersgan.mjs $1'
     # replicate/img -> replicate/t2
     cat <(find replicate/img -name '*.png' | cut -d/ -f3 | cut -d. -f1) <(find replicate/t2 -name '*.png' | cut -d/ -f3 | cut -d. -f1) <(find replicate/t2 -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $NF}' | runmany 32 'mogrify -path replicate/t2 -resize 400x -format png replicate/img/$1.png'
