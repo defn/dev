@@ -244,6 +244,8 @@ Bookshelf/
 .sqlite*
 deps.edn
 .rustup
+.devspace
+.gradle
 m
 work
 bin
