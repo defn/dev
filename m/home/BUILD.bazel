@@ -18,6 +18,8 @@ flake_names = [
     "chamber",
     "cloud",
     "kubectl",
+    "helm",
+    "kustomize",
     "kubelogin",
     "k3d",
     "k9s",

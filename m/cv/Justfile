@@ -3,9 +3,6 @@ eod file="js.json" stage1="yes" stage2="no":
     just json {{ file }}
     ls -d js-*.js.json | runmany 'just posts $1 $1.txt'
     just index {{ file }} {{ stage1 }} {{ stage2 }}
-    git add no yes posts cv.db
-    git add -u *.input urls.txt
-    git commit -m 'eod' || true
 
 json file:
     find posts -name '*.json' | while read -r js; do echo; cat $js; echo; done > {{ file }}
@@ -61,8 +58,6 @@ big prefix="replicate/":
 finish file:
     cat {{ file }}.all | while read -r a; do if ! test -f "yes/$a.jpeg"; then echo "no/$a.jpeg"; fi; done | xargs touch || true
     find img -type f -size -100c | sed 's#img/#thumbs/#; s#.jpeg$#.png#' | sort | while read -r a; do if ! test -f $a; then echo $a; touch $a; fi; done
-    git add no yes urls.txt
-    git commit -m 'finish' || true
 
 following:
     ls -ltrhd js*.html | awk '{print $NF}' | while read -r a; do if grep filename: "$a" >/dev/null; then echo "<a href=\"$a\">$a</a><br>"; fi; done > following.html.1
@@ -115,7 +110,6 @@ reset-inner:
     just eod
     just finish js.json
     rm -f js-* js.json.* js.json || true
-    git status -sb
 
 ersgan:
     just t2
