@@ -50,9 +50,6 @@ echo "const images = ["
 # Read filenames from stdin
 while read -r imgid; do
 	if [[ ${kind} == yes ]]; then
-		if test -r yes/${imgid}.png; then
-			continue
-		fi
 		if test -r yes/${imgid}.jpeg; then
 			continue
 		fi

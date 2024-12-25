@@ -172,3 +172,7 @@ month:
     just thumbs
     just process js-period-Month.json.js.json
     just following
+
+qa:
+    @echo Finding overlap between yes and no
+    @for a in yes yes no; do find $a -type f; done | cut -d/ -f2- | sort | uniq -c | grep ' 3 '
