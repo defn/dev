@@ -175,4 +175,13 @@ month:
 
 qa:
     @echo Finding overlap between yes and no
-    @for a in yes yes no; do find $a -type f; done | cut -d/ -f2- | sort | uniq -c | grep ' 3 '
+    @for a in yes yes no; do find $a -type f; done | cut -d/ -f2- | cut -d. -f1 | sort | uniq -c | grep ' 3 ' || true
+    @echo Finding unique between replicate/t2 and replicate/img
+    @for a in replicate/t2 replicate/img; do find $a -type f; done | perl -pe 's{.*/}{}' | cut -d. -f1 | sort | uniq -c | grep ' 1 ' || true
+
+qa2:
+    @echo Finding overlap between yes and replicate/t2
+    @for a in yes yes replicate/t2; do find $a -type f; done | perl -pe 's{.*/}{}' | cut -d. -f1 | sort | uniq -c | grep ' 1 ' || true
+
+qa3:
+    @(for a in yes yes; do find $a -type f; done; find thumbs -type f -size -10c) | cut -d/ -f2- | cut -d. -f1 | sort | uniq -c | grep ' 2 ' | awk '{print $2}' || true
