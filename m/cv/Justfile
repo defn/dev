@@ -1,7 +1,7 @@
 
 eod file="js.json" stage1="yes" stage2="no":
     just json {{ file }}
-    ls -d js-*.js.json | runmany 'just posts $1 $1.txt'
+    ls -d js-*.js.json | runmany 8 'echo $1; just posts $1 $1.txt'
     just index {{ file }} {{ stage1 }} {{ stage2 }}
 
 json file:
@@ -39,12 +39,12 @@ download file:
     cat {{ file }} | jq -r '.url' | sort -u | runmany 8 20 'cd img && wget -nc --no-verbose $@'
 
 thumbs:
-    cat <(find thumbs -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find img -name '*.jpeg' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $2}' | while read -r a; do if ! test -f "thumbs/$a.png"; then echo "$a"; fi; done | sort | runmany 4 'if ! test -f thumbs/${1}.png; then if [[ "$(identify -format "%n" img/$1.jpeg)" == 1 ]]; then echo thumbs/$1.png; mogrify -path thumbs -resize 200x -format png img/$1.jpeg || true; fi; fi'
+    cat <(find thumbs -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find img -name '*.jpeg' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $2}' | while read -r a; do if ! test -f "thumbs/$a.png"; then echo "$a"; fi; done | sort | runmany 32 'if ! test -f thumbs/${1}.png; then if [[ "$(identify -format "%n" img/$1.jpeg)" == 1 ]]; then echo thumbs/$1.png; mogrify -path thumbs -resize 200x -format png img/$1.jpeg || true; fi; fi'
     cat <(find thumbs -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find img -name '*.jpeg' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $2}' | while read -r a; do if ! test -f "thumbs/$a.png"; then echo "img/$a.jpeg"; fi; done | xargs file | grep "image data" | grep GIF | cut -d: -f1 | cut -d/ -f2 | while read -r a; do echo "GIF img/$a"; touch no/$a thumbs/${a%%.jpeg}.png; done
     cat <(find thumbs -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find img -name '*.jpeg' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $2}' | while read -r a; do if ! test -f "thumbs/$a.png"; then echo "img/$a.jpeg"; fi; done | xargs file | grep -v "image data" | cut -d: -f1 | cut -d/ -f2 | while read -r a; do echo "not image img/$a"; touch no/$a thumbs/${a%%.jpeg}.png; done
 
 t2:
-    cat <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 2 ' | awk '{print $NF}' | sort | runmany 4 1 'echo "img/$1.jpeg -> t2/$1.png"; mogrify -path t2 -resize 400x -format png img/$1.jpeg'
+    cat <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 2 ' | awk '{print $NF}' | sort | runmany 32 1 'echo "img/$1.jpeg -> t2/$1.png"; mogrify -path t2 -resize 400x -format png img/$1.jpeg'
 
 gallery dir="thumbs" num="12" output="thumbs":
     time etc/proc-thumbs {{dir}} {{num}} {{output}}
@@ -70,7 +70,7 @@ daily file="followers.txt" n="4":
 daily-inner file n="4":
     just download-user {{ file }} {{ n }} || true
     just thumbs
-    just html {{ file }}
+    just html {{ file }} || true
     just following
 
 download-user file n="4":
@@ -108,7 +108,7 @@ reset:
 
 reset-inner:
     just eod
-    just finish js.json
+    #just finish js.json
     rm -f js-* js.json.* js.json || true
 
 ersgan:
@@ -180,8 +180,10 @@ qa:
     @for a in replicate/t2 replicate/img; do find $a -type f; done | perl -pe 's{.*/}{}' | cut -d. -f1 | sort | uniq -c | grep ' 1 ' || true
 
 qa2:
-    @echo Finding overlap between yes and replicate/t2
+    @echo Finding replicate/t2 but not in yes
     @for a in yes yes replicate/t2; do find $a -type f; done | perl -pe 's{.*/}{}' | cut -d. -f1 | sort | uniq -c | grep ' 1 ' || true
+    @echo Finding yes but not in replicate/t2
+    @for a in yes yes replicate/t2; do find $a -type f; done | perl -pe 's{.*/}{}' | cut -d. -f1 | sort | uniq -c | grep ' 2 ' || true
 
-qa3:
-    @(for a in yes yes; do find $a -type f; done; find thumbs -type f -size -10c) | cut -d/ -f2- | cut -d. -f1 | sort | uniq -c | grep ' 2 ' | awk '{print $2}' || true
+send snap disk:
+    sudo zfs send -i fast/cv@$(zfs list -t snapshot -o name -s creation -r {{disk}}/cv | tail -n 1 | cut -d@ -f2) fast/cv@{{snap}} | pv | sudo zfs receive {{disk}}/cv
