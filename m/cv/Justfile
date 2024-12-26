@@ -134,8 +134,8 @@ ersgan-inner:
     sudo tailscale serve status
     just db-img
     just db-size
-    echo 'select count(*) from img' | sqlite3 cv.db 
     for a in yes replicate/*/; do echo "$a $(find $a -type f | wc -l)"; done
+    echo "sqlite $(echo 'select count(*) from img' | sqlite3 cv.db)"
 
 users:
     find posts -name '*.json' | xargs cat | jq -r '.username' | sort | uniq -c | sort -n > users.txt
