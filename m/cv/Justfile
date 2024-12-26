@@ -57,7 +57,6 @@ big prefix="replicate/":
 
 finish file:
     cat {{ file }}.all | while read -r a; do if ! test -f "yes/$a.jpeg"; then echo "no/$a.jpeg"; fi; done | xargs touch || true
-    find img -type f -size -100c | sed 's#img/#thumbs/#; s#.jpeg$#.png#' | sort | while read -r a; do if ! test -f $a; then echo $a; touch $a; fi; done
 
 following:
     ls -ltrhd js*.html | awk '{print $NF}' | while read -r a; do if grep filename: "$a" >/dev/null; then echo "<a href=\"$a\">$a</a><br>"; fi; done > following.html.1
