@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+#MISE description="Enter a devspace shell"
+
+cd "${MISE_ORIGINAL_CWD}"
+exec ssh "$(basename "$(pwd)")".dev.devspace
