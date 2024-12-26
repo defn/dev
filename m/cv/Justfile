@@ -178,8 +178,6 @@ qa:
     @for a in yes yes no; do find $a -type f; done | cut -d/ -f2- | cut -d. -f1 | sort | uniq -c | grep ' 3 ' || true
     @echo Finding unique between replicate/t2 and replicate/img
     @for a in replicate/t2 replicate/img; do find $a -type f; done | perl -pe 's{.*/}{}' | cut -d. -f1 | sort | uniq -c | grep ' 1 ' || true
-
-qa2:
     @echo Finding replicate/t2 but not in yes
     @for a in yes yes replicate/t2; do find $a -type f; done | perl -pe 's{.*/}{}' | cut -d. -f1 | sort | uniq -c | grep ' 1 ' || true
     @echo Finding yes but not in replicate/t2
