@@ -29,6 +29,9 @@
         nmap
         perl
         bat
+        pv
+        fd
+        ripgrep
         bashInteractive
       ];
     };
