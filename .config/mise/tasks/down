@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-#MISE description="Bring up a devspace"
+#MISE description="Bring down everything"
 
 cd "${MISE_ORIGINAL_CWD}"
-mise install
-exec devspace dev --namespace "$(basename "$(pwd)")"
+mise k3d:down
