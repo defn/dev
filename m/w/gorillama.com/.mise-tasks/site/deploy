@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+#MISE description="Deploy Astro artifacts to GitHub pages"
+
+set -efu -o pipefail
+
+cd "${MISE_ORIGINAL_CWD}"
+rsync -ia --exclude CNAME dist/. ghpages/.
+pushd ghpages
+git add .
+git commit -m 'astro build'
+git push
+popd
