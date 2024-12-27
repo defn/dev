@@ -3,4 +3,5 @@
 #MISE description="Bring up a devspace"
 
 cd "${MISE_ORIGINAL_CWD}"
+mise install
 exec devspace dev --namespace "$(basename "$(pwd)")"
