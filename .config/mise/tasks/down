@@ -4,5 +4,4 @@
 
 cd "${MISE_ORIGINAL_CWD}"
 mise install
-mise k3d:up || true
 exec devspace dev --namespace "$(basename "$(pwd)")"

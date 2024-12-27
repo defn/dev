@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#MISE description="Bring up a k3d cluster       "
+#MISE description="Bring up a k3d cluster"
 
 cd "${MISE_ORIGINAL_CWD}"
 exec k3d cluster create "$@"

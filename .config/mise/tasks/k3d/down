@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+#MISE description="Bring down a k3d cluster"
+
+cd "${MISE_ORIGINAL_CWD}"
+exec k3d cluster delete "$@"
