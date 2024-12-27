@@ -120,6 +120,7 @@ work
 .docker
 .tilt-dev
 .config
+!.config/mise/tasks
 .kube
 .lesshst
 .cups

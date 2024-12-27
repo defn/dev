@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+#MISE description="Installs dependencies"
+
+cd "${MISE_ORIGINAL_CWD}"
+mise trust
+mise install
+direnv allow .envrc
+touch .envrc
