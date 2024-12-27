@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+#MISE description="Bring up Astro dev server"
+
+cd "${MISE_ORIGINAL_CWD}"
+exec npm run dev
