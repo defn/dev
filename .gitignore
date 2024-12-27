@@ -6,6 +6,7 @@ cue.mod/pkg
 snap
 
 # working files
+.config/*
 .trunk/*
 !.trunk/trunk.yaml
 node_modules
@@ -119,8 +120,6 @@ work
 .npm
 .docker
 .tilt-dev
-.config
-!.config/mise/tasks
 .kube
 .lesshst
 .cups
@@ -247,3 +246,6 @@ deps.edn
 .rustup
 .devspace
 .gradle
+!.config/mise
+!.config/mise/tasks
+!.config/mise/tasks/*
