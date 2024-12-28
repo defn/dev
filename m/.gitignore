@@ -18,3 +18,5 @@ h/*.tgz
 deps.edn
 
 MODULE.bazel.lock
+
+.frontmatter
