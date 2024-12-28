@@ -3,4 +3,4 @@
 #MISE description="Build artifacts"
 
 cd "${MISE_ORIGINAL_CWD}"
-exec mise run site:build
+exec mise run site:package

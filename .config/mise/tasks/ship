@@ -3,4 +3,4 @@
 #MISE description="Deploy application"
 
 cd "${MISE_ORIGINAL_CWD}"
-exec mise run site:deploy
+exec mise run site:ship

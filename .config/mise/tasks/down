@@ -3,4 +3,4 @@
 #MISE description="Bring down everything"
 
 cd "${MISE_ORIGINAL_CWD}"
-mise k3d:down
+mise _:k3d:down

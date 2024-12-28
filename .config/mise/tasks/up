@@ -4,5 +4,5 @@
 
 cd "${MISE_ORIGINAL_CWD}"
 mise install
-mise k3d:up || true
+mise _:k3d:up || true
 exec mise run site:up
