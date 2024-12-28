@@ -4,4 +4,6 @@
 #MISE hide=true
 
 cd "${MISE_ORIGINAL_CWD}"
-exec k3d cluster create "$@"
+if ! k3d cluster list; then
+    k3d cluster create "$@"
+fi
