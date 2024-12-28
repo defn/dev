@@ -3,4 +3,5 @@
 #MISE description="Bring up Astro dev server"
 
 cd "${MISE_ORIGINAL_CWD}"
+pnpm install .
 exec npm run astro dev
