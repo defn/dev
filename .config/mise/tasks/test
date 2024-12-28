@@ -3,4 +3,4 @@
 #MISE description="Test application"
 
 cd "${MISE_ORIGINAL_CWD}"
-exec mise run site:test
+exec mise run __:test

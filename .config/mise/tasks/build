@@ -3,4 +3,4 @@
 #MISE description="Build application"
 
 cd "${MISE_ORIGINAL_CWD}"
-exec mise run site:build
+exec mise run __:build
