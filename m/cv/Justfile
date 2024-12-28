@@ -1,15 +1,17 @@
 
-eod file="js.json" stage1="yes" stage2="no":
-    just json {{ file }}
+eod:
+    just json
     ls -d js-*.js.json | runmany 8 'echo $1; just posts $1 $1.txt'
-    just index {{ file }} {{ stage1 }} {{ stage2 }}
+    rm -rf no
+    mkdir -p no
 
-json file:
+json file="js.json":
     find posts -name '*.json' | while read -r js; do echo; cat $js; echo; done > {{ file }}
     for a in js-*js.json; do echo; cat $a; echo; done >> {{ file }}
     cat {{ file }} | jq -r '.url' | sort -u >> urls.txt
     cat urls.txt | sort -u > urls.txt.2
     mv urls.txt.2 urls.txt
+    rm -f {{ file }}
 
 posts input file:
     #!/usr/bin/env bash
@@ -30,10 +32,6 @@ process file stage1="yes" stage2="no" fast="":
     cat {{ file }}.input | bash etc/cols.sh yes thumbs 6 /thumbs > {{ file }}.html.2
     mv {{ file }}.html.2 {{ file }}.$$.big.html
     cat {{ file }}.input | wc -l
-
-index file stage1 stage2:
-    cat {{ file }} | jq -r '.url' | cut -d/ -f7 | cut -d. -f1 | sort > {{ file }}.all
-    cat {{ file }}.all | while read -r a; do if ! test -f "{{ stage1 }}/$a.jpeg"; then if ! test -f "{{ stage2 }}/$a.jpeg"; then echo "$a"; fi; fi; done | sort > {{ file }}.input
 
 download file:
     cat {{ file }} | jq -r '.url' | sort -u | runmany 8 20 'cd img && wget -nc --no-verbose $@'
@@ -107,7 +105,7 @@ reset:
 
 reset-inner:
     just eod
-    #just finish js.json
+    just finish js.json
     rm -f js-* js.json.* js.json || true
 
 ersgan:
