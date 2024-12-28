@@ -5,7 +5,15 @@
 set -efu -o pipefail
 
 cd "${MISE_ORIGINAL_CWD}"
+
+pushd ghpages
+git checkout main
+git fetch origin
+git reset --hard origin/main
+popd
+
 rsync -ia --exclude CNAME dist/. ghpages/.
+
 pushd ghpages
 git add .
 git commit -m 'astro build'
