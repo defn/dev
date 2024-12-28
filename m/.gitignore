@@ -12,7 +12,7 @@ ca.key
 cluster.crt
 cluster.key
 
-cutout/{{cookiecutter.path}}/BUILD.bazel
+cutout/*cookiecutter.path*/BUILD.bazel
 h/*.tgz
 .bazelrc.user
 deps.edn
