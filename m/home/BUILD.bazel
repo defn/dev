@@ -14,6 +14,7 @@ flake_names = [
     "oci",
     "development",
     "step",
+    "acme",
     "awscli",
     "chamber",
     "cloud",
