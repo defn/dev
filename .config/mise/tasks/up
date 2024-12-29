@@ -5,4 +5,5 @@
 cd "${MISE_ORIGINAL_CWD}"
 mise install
 mise _:k3d:up || true
+mise run __:install
 exec mise run __:up

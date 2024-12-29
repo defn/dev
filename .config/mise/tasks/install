@@ -7,3 +7,4 @@ mise trust
 mise install
 direnv allow .envrc
 touch .envrc
+exec mise run __:install
