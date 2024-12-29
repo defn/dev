@@ -12,10 +12,11 @@ git fetch origin
 git reset --hard origin/main
 popd
 
-rsync -ia --exclude CNAME dist/. ghpages/.
+rsync -ia --checksum --no-times --exclude CNAME dist/. ghpages/.
 
 pushd ghpages
 git add .
-git commit -m 'astro build'
-git push
+if git commit -m 'astro build'; then
+	git push
+fi
 popd

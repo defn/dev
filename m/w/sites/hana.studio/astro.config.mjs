@@ -2,13 +2,16 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import tailwind from "@astrojs/tailwind";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://hana.studio",
   build: {
     assets: "a",
   },
   integrations: [
+    sitemap(),
     starlight({
       title: "Docs with Tailwind",
       social: {

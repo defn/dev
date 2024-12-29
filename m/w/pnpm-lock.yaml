@@ -339,6 +339,9 @@ importers:
 
   sites/defn.app:
     dependencies:
+      '@astrojs/sitemap':
+        specifier: ^3.2.1
+        version: 3.2.1
       '@astrojs/starlight':
         specifier: ^0.30.3
         version: 0.30.3(astro@5.1.1(jiti@1.21.7)(rollup@4.29.1)(typescript@5.7.2)(yaml@2.6.1))
@@ -363,6 +366,9 @@ importers:
 
   sites/defn.cloud:
     dependencies:
+      '@astrojs/sitemap':
+        specifier: ^3.2.1
+        version: 3.2.1
       '@astrojs/starlight':
         specifier: ^0.30.3
         version: 0.30.3(astro@5.1.1(jiti@1.21.7)(rollup@4.29.1)(typescript@5.7.2)(yaml@2.6.1))
@@ -387,6 +393,9 @@ importers:
 
   sites/defn.co.in:
     dependencies:
+      '@astrojs/sitemap':
+        specifier: ^3.2.1
+        version: 3.2.1
       '@astrojs/starlight':
         specifier: ^0.30.3
         version: 0.30.3(astro@5.1.1(jiti@1.21.7)(rollup@4.29.1)(typescript@5.7.2)(yaml@2.6.1))
@@ -411,6 +420,9 @@ importers:
 
   sites/defn.dev:
     dependencies:
+      '@astrojs/sitemap':
+        specifier: ^3.2.1
+        version: 3.2.1
       '@astrojs/starlight':
         specifier: ^0.30.3
         version: 0.30.3(astro@5.1.1(jiti@1.21.7)(rollup@4.29.1)(typescript@5.7.2)(yaml@2.6.1))
@@ -435,6 +447,9 @@ importers:
 
   sites/defn.net:
     dependencies:
+      '@astrojs/sitemap':
+        specifier: ^3.2.1
+        version: 3.2.1
       '@astrojs/starlight':
         specifier: ^0.30.3
         version: 0.30.3(astro@5.1.1(jiti@1.21.7)(rollup@4.29.1)(typescript@5.7.2)(yaml@2.6.1))
@@ -459,6 +474,9 @@ importers:
 
   sites/defn.org:
     dependencies:
+      '@astrojs/sitemap':
+        specifier: ^3.2.1
+        version: 3.2.1
       '@astrojs/starlight':
         specifier: ^0.30.3
         version: 0.30.3(astro@5.1.1(jiti@1.21.7)(rollup@4.29.1)(typescript@5.7.2)(yaml@2.6.1))
@@ -483,6 +501,9 @@ importers:
 
   sites/defn.sh:
     dependencies:
+      '@astrojs/sitemap':
+        specifier: ^3.2.1
+        version: 3.2.1
       '@astrojs/starlight':
         specifier: ^0.30.3
         version: 0.30.3(astro@5.1.1(jiti@1.21.7)(rollup@4.29.1)(typescript@5.7.2)(yaml@2.6.1))
@@ -507,6 +528,9 @@ importers:
 
   sites/destructuring.org:
     dependencies:
+      '@astrojs/sitemap':
+        specifier: ^3.2.1
+        version: 3.2.1
       '@astrojs/starlight':
         specifier: ^0.30.3
         version: 0.30.3(astro@5.1.1(jiti@1.21.7)(rollup@4.29.1)(typescript@5.7.2)(yaml@2.6.1))
@@ -531,6 +555,9 @@ importers:
 
   sites/devopsfor.us:
     dependencies:
+      '@astrojs/sitemap':
+        specifier: ^3.2.1
+        version: 3.2.1
       '@astrojs/starlight':
         specifier: ^0.30.3
         version: 0.30.3(astro@5.1.1(jiti@1.21.7)(rollup@4.29.1)(typescript@5.7.2)(yaml@2.6.1))
@@ -555,6 +582,9 @@ importers:
 
   sites/fam.fan:
     dependencies:
+      '@astrojs/sitemap':
+        specifier: ^3.2.1
+        version: 3.2.1
       '@astrojs/starlight':
         specifier: ^0.30.3
         version: 0.30.3(astro@5.1.1(jiti@1.21.7)(rollup@4.29.1)(typescript@5.7.2)(yaml@2.6.1))
@@ -579,6 +609,9 @@ importers:
 
   sites/gorillama.com:
     dependencies:
+      '@astrojs/sitemap':
+        specifier: ^3.2.1
+        version: 3.2.1
       '@astrojs/starlight':
         specifier: ^0.30.3
         version: 0.30.3(astro@5.1.1(jiti@1.21.7)(rollup@4.29.1)(typescript@5.7.2)(yaml@2.6.1))
@@ -603,6 +636,9 @@ importers:
 
   sites/hana.studio:
     dependencies:
+      '@astrojs/sitemap':
+        specifier: ^3.2.1
+        version: 3.2.1
       '@astrojs/starlight':
         specifier: ^0.30.3
         version: 0.30.3(astro@5.1.1(jiti@1.21.7)(rollup@4.29.1)(typescript@5.7.2)(yaml@2.6.1))
