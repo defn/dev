@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+#MISE description="Deploy Astro artifacts to Cloudflare workers"
+
+set -efu -o pipefail
+
+cd "${MISE_ORIGINAL_CWD}"
+exec pnpm run deploy

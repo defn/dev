@@ -96,6 +96,9 @@ importers:
       astro:
         specifier: ^5.1.1
         version: 5.1.1(@types/node@22.10.2)(jiti@1.21.7)(rollup@4.29.1)(typescript@5.7.2)(yaml@2.6.1)
+      fn1:
+        specifier: 'link:'
+        version: 'link:'
     devDependencies:
       '@cloudflare/workers-types':
         specifier: ^4.20241224.0

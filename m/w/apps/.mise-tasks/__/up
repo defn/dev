@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+#MISE description="Bring up Wrangler dev server"
+
+cd "${MISE_ORIGINAL_CWD}"
+exec pnpm run preview
