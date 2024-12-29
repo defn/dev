@@ -17,5 +17,4 @@ domains: [
 	"fam.fan",
 	"gorillama.com",
 	"hana.studio",
-	"whothis.net",
 ]
