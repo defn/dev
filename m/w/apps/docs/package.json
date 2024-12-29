@@ -33,6 +33,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "@sveltejs/vite-plugin-svelte": "^5.0.1",
-    "classnames": "^2.5.1"
+    "classnames": "^2.5.1",
+    "docs": "link:"
   }
 }
