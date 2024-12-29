@@ -135,6 +135,23 @@ ersgan-inner:
     for a in yes replicate/*/; do echo "$a $(find $a -type f | wc -l)"; done
     echo "sqlite $(echo 'select count(*) from img' | sqlite3 cv.db)"
 
+fm-start:
+    sudo tailscale serve --https=443 off || true
+    sudo tailscale funnel reset
+    sudo tailscale funnel --bg --set-path /pub http://localhost:8111/pub
+    while true; do if curl -sSL https://pc.tail3884f.ts.net/pub/index.html | grep hello; then sleep 5; break; fi; sleep 1; done
+
+fm from to:
+    mkdir -p fm/js
+    mkdir -p fm/img
+    cat <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find replicate/img/ -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep -v ' 2 ' | awk '{print $NF}' | sort | runmany 32 './ersgan.mjs $1'
+    ./facemerge.mjs {{to}} {{from}}
+
+fm-stop:
+    sudo tailscale funnel reset
+    sudo tailscale serve --bg 8111
+    sudo tailscale serve status
+
 users:
     find posts -name '*.json' | xargs cat | jq -r '.username' | sort | uniq -c | sort -n > users.txt
 
