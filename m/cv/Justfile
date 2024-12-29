@@ -180,5 +180,5 @@ qa:
     @echo Finding yes but not in replicate/t2
     @for a in yes yes replicate/t2; do find $a -type f; done | perl -pe 's{.*/}{}' | cut -d. -f1 | sort | uniq -c | grep ' 2 ' || true
 
-send snap disk:
-    sudo zfs send -i fast/cv@$(zfs list -t snapshot -o name -s creation -r {{disk}}/cv | tail -n 1 | cut -d@ -f2) fast/cv@{{snap}} | pv | sudo zfs receive {{disk}}/cv
+send from snap disk:
+    sudo zfs send -i {{from}}@$(zfs list -t snapshot -o name -s creation -r {{disk}}/cv | tail -n 1 | cut -d@ -f2) {{from}}@{{snap}} | pv | sudo zfs receive {{disk}}/cv
