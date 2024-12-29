@@ -1,6 +1,10 @@
 package infra
 
-fancy: other: stuff: domains: [
+#DomainName: string
+
+domains: [...#DomainName]
+
+domains: [
 	"defn.app",
 	"defn.cloud",
 	"defn.co.in",
@@ -13,4 +17,5 @@ fancy: other: stuff: domains: [
 	"fam.fan",
 	"gorillama.com",
 	"hana.studio",
+	"whothis.net",
 ]
