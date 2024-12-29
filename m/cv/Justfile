@@ -4,6 +4,10 @@ eod:
     ls -d js-*.js.json | runmany 8 'echo $1; just posts $1 $1.txt'
     rm -rf no
     mkdir -p no
+    rm -rf replicate/js
+    mkdir -p replicate/js
+    find thumbs t2 img -type f -size +100c | runmany 64 'echo $1; truncate $1 --size 0'
+
 
 json file="js.json":
     find posts -name '*.json' | while read -r js; do echo; cat $js; echo; done > {{ file }}
@@ -53,8 +57,10 @@ big prefix="replicate/":
     just gallery {{ prefix }}t2  2 two &
     wait
 
-finish file:
-    cat {{ file }}.all | while read -r a; do if ! test -f "yes/$a.jpeg"; then echo "no/$a.jpeg"; fi; done | xargs touch || true
+index file stage1 stage2:
+    cat {{ file }} | jq -r '.url' | cut -d/ -f7 | cut -d. -f1 | sort > {{ file }}.all
+    cat {{ file }}.all | while read -r a; do if ! test -f "{{ stage1 }}/$a.jpeg"; then if ! test -f "{{ stage2 }}/$a.jpeg"; then echo "$a"; fi; fi; done | sort > {{ file }}.input
+
 
 following:
     ls -ltrhd js*.html | awk '{print $NF}' | while read -r a; do if grep filename: "$a" >/dev/null; then echo "<a href=\"$a\">$a</a><br>"; fi; done > following.html.1
@@ -105,7 +111,6 @@ reset:
 
 reset-inner:
     just eod
-    just finish js.json
     rm -f js-* js.json.* js.json || true
 
 ersgan:
@@ -199,3 +204,17 @@ qa:
 
 send from snap disk:
     sudo zfs send -i {{from}}@$(zfs list -t snapshot -o name -s creation -r {{disk}}/cv | tail -n 1 | cut -d@ -f2) {{from}}@{{snap}} | pv | sudo zfs receive {{disk}}/cv
+
+split dataset from to where="~/work/backup/zfs/cv-":
+    sudo zfs send -i {{dataset}}@{{from}} {{dataset}}@{{to}} | pv | split -b 5G --numeric-suffixes=1 --suffix-length=2 - {{where}}{{to}}.zfs.
+    for a in {{where}}{{to}}.zfs.??; do echo "$a"; cat "$a" | sha256sum > "$a.sha256"; done
+
+open site n="1" chunk="20" file="following.html":
+    #!/usr/bin/env bash
+    lines=$(wc -l < "{{file}}")
+    chunk_size={{chunk}}
+
+    for ((i={{n}}; i<=lines; i+=chunk_size)); do
+        for u in $(sed -n "${i},$((i + chunk_size - 1))p" "{{file}}" | cut -d'"' -f2); do open "{{site}}/$u"; sleep 0.1; done
+        read -p "Press Enter to continue at $((i + chunk_size))..."
+    done
