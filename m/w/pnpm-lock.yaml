@@ -107,6 +107,25 @@ importers:
         specifier: ^3.99.0
         version: 3.99.0(@cloudflare/workers-types@4.20241224.0)
 
+  apps/fn2:
+    dependencies:
+      '@astrojs/cloudflare':
+        specifier: ^12.1.0
+        version: 12.1.0(@types/node@22.10.2)(astro@5.1.1(@types/node@22.10.2)(jiti@1.21.7)(rollup@4.29.1)(typescript@5.7.2)(yaml@2.6.1))(jiti@1.21.7)(yaml@2.6.1)
+      astro:
+        specifier: ^5.1.1
+        version: 5.1.1(@types/node@22.10.2)(jiti@1.21.7)(rollup@4.29.1)(typescript@5.7.2)(yaml@2.6.1)
+      fn2:
+        specifier: 'link:'
+        version: 'link:'
+    devDependencies:
+      '@cloudflare/workers-types':
+        specifier: ^4.20241224.0
+        version: 4.20241224.0
+      wrangler:
+        specifier: ^3.99.0
+        version: 3.99.0(@cloudflare/workers-types@4.20241224.0)
+
   apps/story:
     dependencies:
       '@popperjs/core':

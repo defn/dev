@@ -1,0 +1,15 @@
+#:schema node_modules/wrangler/config-schema.json
+
+name = "fn2"
+
+compatibility_date = "2024-12-24"
+compatibility_flags = ["nodejs_compat"]
+
+main = "./dist/_worker.js/index.js"
+
+assets = { directory = "./dist", binding = "ASSETS" }
+
+routes = [{ pattern = "fn2.w.defn.run", custom_domain = true }]
+
+[observability]
+enabled = true
