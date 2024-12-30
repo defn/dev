@@ -13,3 +13,16 @@ routes = [{ pattern = "fn1.w.defn.run", custom_domain = true }]
 
 [observability]
 enabled = true
+
+[[kv_namespaces]]
+binding = "kv"
+id = "65ace1471c11400aab9d1bf9ad6dc154"
+
+[[r2_buckets]]
+binding = "bucket"
+bucket_name = "defn"
+
+[[d1_databases]]
+binding = "db"
+database_name = "dev"
+database_id = "d05fc530-93cf-4a46-94c9-338201d23dc7"
