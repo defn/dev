@@ -2,10 +2,14 @@
 import astroLogo from "../assets/astro.svg";
 import background from "../assets/background.svg";
 
-import { GET } from '../pages/hello.ts';
+import { GET as hello_get } from '../pages/hello.ts';
 
-let response = await GET()
-const data = await response.json()
+interface HelloResponse {
+    hello: string;
+}
+
+let response = await hello_get()
+const data: HelloResponse = await response.json()
 ---
 
 <div id="container">
