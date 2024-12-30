@@ -12,6 +12,7 @@ demo/.direnv
 ./node_modules
 ./s/node_modules
 ./w/apps/docs/node_modules
+./w/apps/fn1/node_modules
 ./w/apps/story/node_modules
 ./w/apps/web/node_modules
 ./w/node_modules
@@ -518,6 +519,7 @@ pkg/.direnv
 pkg/zellij/.direnv
 s/.direnv
 temporal/.direnv
+w/apps/fn1/.direnv
 w/sites/defn.app/.direnv
 w/sites/defn.cloud/.direnv
 w/sites/defn.co.in/.direnv
