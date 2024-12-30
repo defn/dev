@@ -7,9 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Your preferred accent color. Indigo is closest to Starlight’s defaults.
         accent: colors.indigo,
-        // Your preferred gray scale. Zinc is closest to Starlight’s defaults.
         gray: colors.zinc,
       },
     },

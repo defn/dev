@@ -1,5 +1,4 @@
 import colors from "tailwindcss/colors";
-import starlightPlugin from "@astrojs/starlight-tailwind";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -12,5 +11,5 @@ export default {
       },
     },
   },
-  plugins: [starlightPlugin()],
+  plugins: [],
 };
