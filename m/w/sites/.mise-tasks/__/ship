@@ -20,3 +20,5 @@ if git commit -m 'astro build'; then
 	git push
 fi
 popd
+
+pnpm wrangler pages deploy --commit-dirty
