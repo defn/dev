@@ -3,4 +3,4 @@
 #MISE description="Bring up Wrangler dev server"
 
 cd "${MISE_ORIGINAL_CWD}"
-exec pnpm run preview
+exec pnpm run astro dev
