@@ -6,19 +6,21 @@ set -efu -o pipefail
 
 cd "${MISE_ORIGINAL_CWD}"
 
-pushd ghpages
-git checkout main
-git fetch origin
-git reset --hard origin/main
-popd
-
-rsync -ia --checksum --no-times --exclude CNAME dist/. ghpages/.
-
-pushd ghpages
-git add .
-if git commit -m 'astro build'; then
-	git push
-fi
-popd
-
 pnpm wrangler pages deploy --commit-dirty
+
+function gh {
+	pushd ghpages
+	git checkout main
+	git fetch origin
+	git reset --hard origin/main
+	popd
+
+	rsync -ia --checksum --no-times --exclude CNAME dist/. ghpages/.
+
+	pushd ghpages
+	git add .
+	if git commit -m 'astro build'; then
+		git push
+	fi
+	popd
+}
