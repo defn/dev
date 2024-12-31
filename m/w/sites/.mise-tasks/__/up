@@ -3,4 +3,4 @@
 #MISE description="Bring up Astro dev server"
 
 cd "${MISE_ORIGINAL_CWD}"
-exec npm run astro dev
+exec npm run astro dev -- --port "${APP_PORT}"
