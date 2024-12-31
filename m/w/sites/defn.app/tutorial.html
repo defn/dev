@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script
+      src="https://kit.fontawesome.com/012eb3e5a5.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/default.min.css"
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+
+    <script>
+      hljs.highlightAll();
+    </script>
+    <script>
+      function refreshIframe() {
+        const iframe = document.getElementById("server");
+        iframe.src = iframe.src;
+      }
+      // setInterval(refreshIframe, 5000);
+    </script>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://defn.github.io/webfonts/concourse_2_caps.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://defn.github.io/webfonts/concourse_3.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://defn.github.io/webfonts/valkyrie_a.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://defn.github.io/webfonts/hermes_maia_4.css"
+    />
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        font-family: valkyrie_a;
+      }
+
+      .content {
+        padding: 20px;
+      }
+
+      .iframe-container {
+        flex: 1;
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+    </style>
+  </head>
+  <body class="bg-white">
+    <div class="content mt-10 max-w-2xl">
+      <h2 class="text-2xl font-bold tracking-tight text-gray-900">
+        Managing defn.app website with Astro
+      </h2>
+      <div class="mx-auto max-w-3xl text-base text-gray-700">
+        <ul role="list" class="mt-8 max-w-xl space-y-8 text-gray-600">
+          <li class="flex gap-x-3">
+            <svg
+              class="mt-1 h-5 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span>
+              <strong class="font-semibold text-gray-900"
+                >Run the Astro dev server</strong
+              >
+              <br />
+              m up
+            </span>
+          </li>
+          <li class="flex gap-x-3">
+            <svg
+              class="mt-1 h-5 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span>
+              <strong class="font-semibold text-gray-900"
+                >Visit the preview website</strong
+              >
+              <br />
+              m open
+            </span>
+          </li>
+          <li class="flex gap-x-3">
+            <svg
+              class="mt-1 h-5 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span>
+              <strong class="font-semibold text-gray-900"
+                >Build static website</strong
+              >
+              <br />
+              m package
+            </span>
+          </li>
+          <li class="flex gap-x-3">
+            <svg
+              class="mt-1 h-5 w-5 flex-none text-indigo-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span>
+              <strong class="font-semibold text-gray-900"
+                >Deploy website to Cloudflare Pages</strong
+              >
+              <br />
+              m ship
+            </span>
+          </li>
+        </ul>
+        <br />
+        <br />
+      </div>
+    </div>
+  </body>
+</html>
