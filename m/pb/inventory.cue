@@ -28,7 +28,6 @@ inventory: {
 	]
 
 	aws: hosts: [
-		"kowloon",
 	]
 
 	cloud: children: [
