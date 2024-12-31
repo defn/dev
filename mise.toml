@@ -1,5 +1,2 @@
 [tools]
 python = "3.12.7"
-
-[env]
-APP_PORT = "4339"
