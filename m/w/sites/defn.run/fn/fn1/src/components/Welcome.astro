@@ -2,14 +2,14 @@
 import astroLogo from "../assets/astro.svg";
 import background from "../assets/background.svg";
 
-import { GET as hello_get } from '../pages/hello.ts';
+import { GET as hello_get } from "../pages/index.ts";
 
 interface HelloResponse {
-    hello: string;
+  hello: string;
 }
 
-let response = await hello_get()
-const data: HelloResponse = await response.json()
+let response = await hello_get();
+const data: HelloResponse = await response.json();
 ---
 
 <div id="container">
@@ -25,8 +25,9 @@ const data: HelloResponse = await response.json()
         /></a
       >
       <h1>
-        Hello {data.hello}!  To get started, open the <code><pre>src/pages</pre></code> directory
-        in your project.
+        Hello {data.hello}! To get started, open the <code
+          ><pre>src/pages</pre></code
+        > directory in your project.
       </h1>
       <section id="links">
         <a class="button" href="https://docs.astro.build">Read our docs</a>
