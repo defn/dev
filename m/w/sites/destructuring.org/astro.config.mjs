@@ -14,9 +14,6 @@ export default defineConfig({
     sitemap(),
     starlight({
       title: "Docs with Tailwind",
-      social: {
-        github: "https://github.com/defn/destructuring.org",
-      },
       sidebar: [
         {
           label: "Guides",
