@@ -2,9 +2,7 @@
 
 interface Env {
   kv: KVNamespace;
-  mydo: DurableObjectNamespace<
-    import("./dist/_worker.js/index").MyDurableObject
-  >;
+  mydo: DurableObjectNamespace /* MyDurableObject from my-do */;
   bucket: R2Bucket;
   db: D1Database;
   ASSETS: Fetcher;

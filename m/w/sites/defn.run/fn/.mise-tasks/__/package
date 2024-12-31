@@ -9,6 +9,6 @@ pnpm run astro build "$@"
 
 for d in MyDurableObject; do
 	echo
-	#echo "export { M as ${d} } from './$(egrep -r ^class.${d} dist | cut -d: -f1 | cut -d/ -f3-)';"
+	echo "export { M as ${d} } from './$(egrep -r ^class.${d} dist | cut -d: -f1 | cut -d/ -f3-)';"
 	echo
 done >>dist/_worker.js/index.js
