@@ -1,7 +1,9 @@
 import { DurableObject } from "cloudflare:workers";
 
+import type { Env } from "./env.ts";
+
 export class MyDurableObject extends DurableObject {
-  constructor(ctx: DurableObjectState, env: any) {
+  constructor(ctx: DurableObjectState, env: Env<MyDurableObject>) {
     super(ctx, env);
   }
 
