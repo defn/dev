@@ -1,6 +1,7 @@
 ---
-import Counter from "../components/Counter.svelte";
 import Layout from "../layouts/Layout.astro";
+import Counter from "../components/Counter.svelte";
+import Button from "../components/Button.astro";
 
 const kv = Astro.locals.runtime.env.kv;
 var kv_value = parseFloat(await kv.get("key"));
@@ -20,7 +21,9 @@ await bucket.put("key", `${kv_value}:${Math.floor(Date.now() / 1000)}`);
 
 <Layout>
   <Counter client:visible>
-    <div>kv_value: {kv_value}</div>
-    <div>r2_value: {r2_value}</div>
+    <Button>
+      <div>kv_value: {kv_value}</div>
+      <div>r2_value: {r2_value}</div>
+    </Button>
   </Counter>
 </Layout>

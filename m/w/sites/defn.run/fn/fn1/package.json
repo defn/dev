@@ -13,9 +13,12 @@
   "dependencies": {
     "@astrojs/cloudflare": "^12.1.0",
     "@astrojs/svelte": "^7.0.2",
+    "@astrojs/tailwind": "^5.1.4",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "astro": "^5.1.1",
-    "fn1": "link:"
+    "canvas-confetti": "^1.9.3",
+    "fn1": "link:",
+    "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20241224.0",
