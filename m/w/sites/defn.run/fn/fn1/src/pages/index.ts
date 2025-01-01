@@ -1,7 +1,10 @@
 import type { APIContext } from "astro";
-import type { MyDurableObject } from "./mydo.ts";
 
+import type { MyDurableObject } from "./mydo.ts";
 export { MyDurableObject } from "./mydo.ts";
+
+import type { MyRPC } from "./myrpc.ts";
+export { MyRPC } from "./myrpc.ts";
 
 export async function GET(context: APIContext) {
   const url = new URL(context.request.url);
@@ -11,11 +14,11 @@ export async function GET(context: APIContext) {
   const id = env.fndo.idFromName("foo");
   const stub: MyDurableObject = env.fndo.get(id);
 
-  //const sum = await env.do1.add(1, 2);
+  const sum = await env.fnrpc.add(88, 1000);
 
-  var response = await stub.sayHello(`${params.get("thing")}`);
+  var response = await stub.sayHello(params.get("thing"));
 
-  return new Response(JSON.stringify([env.GREETING, response]), {
+  return new Response(JSON.stringify([env.GREETING, response, sum]), {
     status: 200,
     headers: {
       "Content-Type": "application/json",

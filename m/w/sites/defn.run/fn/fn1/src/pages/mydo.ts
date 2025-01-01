@@ -7,7 +7,7 @@ export class MyDurableObject extends DurableObject {
   }
 
   async sayHello(thing: string | null): Promise<string> {
-    if (thing == "null") {
+    if (thing == null) {
       return "world!";
     } else {
       return `Hello, ${thing}! (fn1)`;
