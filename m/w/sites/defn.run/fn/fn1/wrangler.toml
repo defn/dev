@@ -11,6 +11,9 @@ assets = { directory = "./dist", binding = "ASSETS" }
 
 routes = [{ pattern = "fn1.w.defn.run", custom_domain = true }]
 
+[vars]
+GREETING = "world"
+
 [observability]
 enabled = true
 
@@ -26,3 +29,12 @@ bucket_name = "defn"
 binding = "db"
 database_name = "dev"
 database_id = "d05fc530-93cf-4a46-94c9-338201d23dc7"
+
+[[durable_objects.bindings]]
+name = "mydo"
+class_name = "MyDurableObject"
+script_name = "my-do"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["MyDurableObject"]

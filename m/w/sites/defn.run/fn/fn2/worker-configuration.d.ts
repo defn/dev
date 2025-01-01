@@ -2,6 +2,7 @@
 
 interface Env {
   kv: KVNamespace;
+  GREETING: "world";
   mydo: DurableObjectNamespace /* MyDurableObject from my-do */;
   bucket: R2Bucket;
   db: D1Database;

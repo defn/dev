@@ -1,12 +1,13 @@
+import { MyDurableObject } from "./mydo.ts";
 export { MyDurableObject } from "./mydo.ts";
 
-export async function GET(context) {
-  const env = context.locals.runtime;
+export async function GET(context: any) {
+  const env = context.locals.runtime.env;
   const id = env.mydo.idFromName("foo");
-  const stub = env.mydo.get(id);
-  const response = await stub.fetch(request);
+  const stub: MyDurableObject = env.mydo.get(id);
+  const response = await stub.sayHello();
 
-  return new Response(JSON.stringify({ hello: response }), {
+  return new Response(JSON.stringify([env.GREETING, response]), {
     status: 200,
     headers: {
       "Content-Type": "application/json",
