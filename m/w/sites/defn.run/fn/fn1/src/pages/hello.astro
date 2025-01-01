@@ -5,11 +5,13 @@ import Counter from "../components/Counter.svelte";
 import Button from "../components/Button.astro";
 
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
-import { faEnvelope, faGamepad } from "@fortawesome/free-solid-svg-icons";
+import * as fa from "@fortawesome/free-solid-svg-icons";
 
-library.add(faEnvelope, faGamepad);
-const gamepadIcon = icon({ prefix: "fas", iconName: faGamepad.iconName });
-const envelopeIcon = icon({ prefix: "fas", iconName: faEnvelope.iconName });
+const ic = new Map();
+for (let f of [fa.faEnvelope, fa.faGamepad]) {
+  library.add(f);
+  ic.set(f.iconName, icon({ prefix: "fas", iconName: f.iconName }).html);
+}
 
 const kv = Astro.locals.runtime.env.kv;
 var kv_value = parseFloat(await kv.get("key"));
@@ -29,8 +31,15 @@ await bucket.put("key", `${kv_value}:${Math.floor(Date.now() / 1000)}`);
 
 <Layout>
   <UI>
-    <Fragment set:html={gamepadIcon.html} />
-    <Fragment set:html={envelopeIcon.html} />
+    <div>
+      {
+        Array.from(ic.entries()).map(([key, value]) => (
+          <span class="m-5">
+            <Fragment set:html={value} />
+          </span>
+        ))
+      }
+    </div>
 
     <Button>
       <div>kv_value: {kv_value}</div>
