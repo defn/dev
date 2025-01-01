@@ -7,7 +7,7 @@ if (isNaN(kv_value)) {
 await kv.put("key", kv_value + 1);
 
 const bucket = Astro.locals.runtime.env.bucket;
-var r2_value = await (await bucket.get("key")).text();
+var r2_value = (await (await bucket.get("key")).text()) ?? "new";
 await bucket.put("key", `${kv_value}:${Math.floor(Date.now() / 1000)}`);
 ---
 
