@@ -3,7 +3,7 @@
 interface Env {
   kv: KVNamespace;
   GREETING: "world";
-  do1: DurableObjectNamespace /* MyDurableObject from do1 */;
+  fndo: DurableObjectNamespace /* MyDurableObject from do1 */;
   bucket: R2Bucket;
   db: D1Database;
   ASSETS: Fetcher;

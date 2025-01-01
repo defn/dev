@@ -6,6 +6,6 @@ export class MyDurableObject extends DurableObject {
   }
 
   async sayHello(): Promise<string> {
-    return "Hello, World!";
+    return "Hello, World! (fn1)";
   }
 }
