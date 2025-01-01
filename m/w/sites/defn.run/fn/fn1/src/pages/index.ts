@@ -1,5 +1,6 @@
 import type { APIContext } from "astro";
-import { MyDurableObject } from "./mydo.ts";
+import type { MyDurableObject } from "./mydo.ts";
+
 export { MyDurableObject } from "./mydo.ts";
 
 export async function GET(context: APIContext) {
@@ -10,7 +11,9 @@ export async function GET(context: APIContext) {
   const id = env.fndo.idFromName("foo");
   const stub: MyDurableObject = env.fndo.get(id);
 
-  var response = await stub.sayHello(params.get("thing"));
+  //const sum = await env.do1.add(1, 2);
+
+  var response = await stub.sayHello(`${params.get("thing")}`);
 
   return new Response(JSON.stringify([env.GREETING, response]), {
     status: 200,

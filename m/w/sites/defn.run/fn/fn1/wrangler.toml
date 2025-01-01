@@ -7,20 +7,28 @@ compatibility_flags = ["nodejs_compat"]
 
 main = "./dist/_worker.js/index.js"
 
-assets = { directory = "./dist", binding = "ASSETS" }
-
-routes = [{ pattern = "fn1.w.defn.run", custom_domain = true }]
-
-[[durable_objects.bindings]]
-name = "fndo"
-class_name = "MyDurableObject"
-script_name = "do1"
+[assets]
+directory = "./dist"
+binding = "ASSETS"
 
 [vars]
 GREETING = "world"
 
 [observability]
 enabled = true
+
+[[routes]]
+pattern = "fn1.w.defn.run"
+custom_domain = true
+
+[[services]]
+binding = "do1"
+service = "do1"
+
+[[durable_objects.bindings]]
+name = "fndo"
+class_name = "MyDurableObject"
+script_name = "do1"
 
 [[kv_namespaces]]
 binding = "kv"
