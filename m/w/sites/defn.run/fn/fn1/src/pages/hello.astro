@@ -29,23 +29,14 @@ await bucket.put("key", `${kv_value}:${Math.floor(Date.now() / 1000)}`);
 
 <Layout>
   <UI>
-    <Counter client:visible>
-      <Button>
-        <Fragment set:html={gamepadIcon.html} />
-        <Fragment set:html={envelopeIcon.html} />
-        <div>kv_value: {kv_value}</div>
-        <div>r2_value: {r2_value}</div>
-      </Button>
-    </Counter>
+    <Fragment set:html={gamepadIcon.html} />
+    <Fragment set:html={envelopeIcon.html} />
+
+    <Button>
+      <div>kv_value: {kv_value}</div>
+      <div>r2_value: {r2_value}</div>
+    </Button>
+
+    <Counter client:visible />
   </UI>
 </Layout>
-
-<style is:global>
-  .svg-inline--fa {
-    overflow: visible;
-    box-sizing: content-box;
-    display: inline-block;
-    height: 1em;
-    vertical-align: -0.125em;
-  }
-</style>
