@@ -48,13 +48,13 @@ thumbs:
 t2:
     cat <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 2 ' | awk '{print $NF}' | sort | runmany 32 1 'echo "img/$1.jpeg -> t2/$1.png"; mogrify -path t2 -resize 400x -format png img/$1.jpeg'
 
-gallery dir="thumbs" num="12" output="thumbs":
-    time etc/proc-thumbs {{dir}} {{num}} {{output}}
+gallery dir="thumbs" output="thumbs":
+    time etc/proc-thumbs {{dir}} {{output}}
     
 big prefix="replicate/":
     #!/usr/bin/env bash
-    just gallery {{ prefix }}img 1 one &
-    just gallery {{ prefix }}t2  2 two &
+    just gallery {{ prefix }}img one &
+    just gallery {{ prefix }}t2  two &
     wait
 
 index file stage1 stage2:
