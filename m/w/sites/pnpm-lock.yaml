@@ -269,9 +269,15 @@ importers:
       fn1:
         specifier: 'link:'
         version: 'link:'
+      hono:
+        specifier: ^4.6.15
+        version: 4.6.15
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.17
+      workers-qb:
+        specifier: ^1.8.0
+        version: 1.8.0
     devDependencies:
       '@cloudflare/workers-types':
         specifier: ^4.20241224.0
@@ -2195,6 +2201,10 @@ packages:
   hastscript@9.0.0:
     resolution: {integrity: sha512-jzaLBGavEDKHrc5EfFImKN7nZKKBdSLIdGvCwDZ9TfzbF2ffXiov8CKE445L2Z1Ek2t/m4SKQ2j6Ipv7NyUolw==}
 
+  hono@4.6.15:
+    resolution: {integrity: sha512-OiQwvAOAaI2JrABBH69z5rsctHDzFzIKJge0nYXgtzGJ0KftwLWcBXm1upJC23/omNRtnqM0gjRMbtXshPdqhQ==}
+    engines: {node: '>=16.9.0'}
+
   html-escaper@3.0.3:
     resolution: {integrity: sha512-RuMffC89BOWQoY0WKGpIhn5gX3iI54O6nRA0yC124NYVtzjmFWBIiFd8M0x+ZdX0P9R4lADg1mgP8C7PxGOWuQ==}
 
@@ -3303,6 +3313,9 @@ packages:
     resolution: {integrity: sha512-7Z3D4vOVChMz9mWDffE299oQxUWm/pbkeAWx1btVamPcAK/2IuoNBhwflWo3jyuKuxvYuFAdIucgYxc8ICqXiA==}
     engines: {node: '>=16'}
     hasBin: true
+
+  workers-qb@1.8.0:
+    resolution: {integrity: sha512-dgnBcZIfoIaY3wLS2mg5abyTcAqkORwSqjUjQ0awtb9g6si+PSFx4U2YxKcopPl0zcBX94wZ2RFGGf5ctfx79g==}
 
   wrangler@3.99.0:
     resolution: {integrity: sha512-k0x4rT3G/QCbxcoZY7CHRVlAIS8WMmKdga6lf4d2c3gXFqssh44vwlTDuARA9QANBxKJTcA7JPTJRfUDhd9QBA==}
@@ -5026,6 +5039,8 @@ snapshots:
       property-information: 6.5.0
       space-separated-tokens: 2.0.2
 
+  hono@4.6.15: {}
+
   html-escaper@3.0.3: {}
 
   html-void-elements@3.0.0: {}
@@ -6500,6 +6515,8 @@ snapshots:
       '@cloudflare/workerd-linux-64': 1.20241218.0
       '@cloudflare/workerd-linux-arm64': 1.20241218.0
       '@cloudflare/workerd-windows-64': 1.20241218.0
+
+  workers-qb@1.8.0: {}
 
   wrangler@3.99.0(@cloudflare/workers-types@4.20241224.0):
     dependencies:
