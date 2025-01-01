@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import UI from "../components/UI.svelte";
 import Counter from "../components/Counter.svelte";
 import Button from "../components/Button.astro";
 
@@ -27,14 +28,16 @@ await bucket.put("key", `${kv_value}:${Math.floor(Date.now() / 1000)}`);
 ---
 
 <Layout>
-  <Counter client:visible>
-    <Button>
-      <Fragment set:html={gamepadIcon.html} />
-      <Fragment set:html={envelopeIcon.html} />
-      <div>kv_value: {kv_value}</div>
-      <div>r2_value: {r2_value}</div>
-    </Button>
-  </Counter>
+  <UI>
+    <Counter client:visible>
+      <Button>
+        <Fragment set:html={gamepadIcon.html} />
+        <Fragment set:html={envelopeIcon.html} />
+        <div>kv_value: {kv_value}</div>
+        <div>r2_value: {r2_value}</div>
+      </Button>
+    </Counter>
+  </UI>
 </Layout>
 
 <style is:global>
