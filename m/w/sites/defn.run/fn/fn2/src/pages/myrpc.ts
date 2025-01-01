@@ -5,7 +5,7 @@ export class MyRPC extends WorkerEntrypoint {
     return new Response(null, { status: 404 });
   }
 
-  async add(a, b) {
+  async add(a: number, b: number) {
     return a + b;
   }
 }
