@@ -12,12 +12,12 @@ export const GET: APIRoute = async function (context: APIContext) {
   const params = new URLSearchParams(url.search);
 
   const env = context.locals.runtime.env;
-  const id = env.fndo.idFromName("foo");
+  const id = env.fndo.idFromName(params.get("thing") ?? "null");
   const stub: MyDurableObject = env.fndo.get(id);
 
   const sum = await env.fnrpc.add(88, 1000);
 
-  var response = await stub.sayHello(params.get("thing"));
+  var response = await stub.sayHello(params.get("thing") ?? "null");
 
   return new Response(JSON.stringify([env.GREETING, response, sum]), {
     status: 200,
