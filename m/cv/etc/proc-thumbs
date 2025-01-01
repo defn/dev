@@ -19,7 +19,7 @@ fi
 ) | cut -d/ -f2 | cut -d. -f1 | sort | uniq -c | grep ' 1 ' | awk '{print $2}' >${output}.input.1
 mv ${output}.input.1 ${output}.input
 
-cat ${output}.input | shuf | head -${max} | bash etc/cols.sh no "${dir}" "/replicate/t2 >${output}.html.1
+cat ${output}.input | shuf | head -${max} | bash etc/cols.sh no "${dir}" /replicate/t2 >${output}.html.1
 mv ${output}.html.1 ${output}.html
 
 echo "$(date) $(cat ${output}.input | wc -l)"
