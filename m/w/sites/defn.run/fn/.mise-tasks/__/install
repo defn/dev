@@ -4,5 +4,4 @@
 
 cd "${MISE_ORIGINAL_CWD}"
 pnpm install .
-pnpm wrangler types
 trunk fmt
