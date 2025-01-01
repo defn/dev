@@ -1,4 +1,5 @@
 import type { APIContext } from "astro";
+import type { APIRoute } from "astro";
 
 import type { MyDurableObject } from "./mydo.ts";
 export { MyDurableObject } from "./mydo.ts";
@@ -6,7 +7,7 @@ export { MyDurableObject } from "./mydo.ts";
 import type { MyRPC } from "./myrpc.ts";
 export { MyRPC } from "./myrpc.ts";
 
-export async function GET(context: APIContext) {
+export const GET: APIRoute = async function (context: APIContext) {
   const url = new URL(context.request.url);
   const params = new URLSearchParams(url.search);
 
@@ -24,4 +25,4 @@ export async function GET(context: APIContext) {
       "Content-Type": "application/json",
     },
   });
-}
+};
