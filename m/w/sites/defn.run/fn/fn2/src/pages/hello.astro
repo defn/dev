@@ -1,10 +1,8 @@
 ---
-const kv = Astro.locals.runtime.env.kv;
-var value = parseFloat(await kv.get("key"));
-if (isNaN(value)) {
-  value = 1;
-}
-await kv.put("key", value + 1);
+import Welcome from "../components/Welcome.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
-<div>value: {value}</div>
+<Layout>
+  <Welcome />
+</Layout>
