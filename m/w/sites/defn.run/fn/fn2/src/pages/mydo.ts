@@ -5,7 +5,11 @@ export class MyDurableObject extends DurableObject {
     super(ctx, env);
   }
 
-  async sayHello(): Promise<string> {
-    return "Hello, World! (fn2)";
+  async sayHello(thing: string): Promise<string> {
+    if (thing === null) {
+      return "world!";
+    } else {
+      return `Hello, ${thing}! (fn2)`;
+    }
   }
 }

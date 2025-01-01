@@ -11,6 +11,9 @@ assets = { directory = "./dist", binding = "ASSETS" }
 
 routes = [{ pattern = "do2.w.defn.run", custom_domain = true }]
 
+[observability]
+enabled = true
+
 [[durable_objects.bindings]]
 name = "fndo"
 class_name = "MyDurableObject"

@@ -11,6 +11,9 @@ assets = { directory = "./dist", binding = "ASSETS" }
 
 routes = [{ pattern = "fn2.w.defn.run", custom_domain = true }]
 
+[observability]
+enabled = true
+
 [[durable_objects.bindings]]
 name = "fndo"
 class_name = "MyDurableObject"
@@ -18,9 +21,6 @@ script_name = "do2"
 
 [vars]
 GREETING = "world"
-
-[observability]
-enabled = true
 
 [[kv_namespaces]]
 binding = "kv"
