@@ -1,10 +1,15 @@
 ---
 const kv = Astro.locals.runtime.env.kv;
-var value = parseFloat(await kv.get("key"));
-if (isNaN(value)) {
-  value = 1;
+var kv_value = parseFloat(await kv.get("key"));
+if (isNaN(kv_value)) {
+  kv_value = 1;
 }
-await kv.put("key", value + 1);
+await kv.put("key", kv_value + 1);
+
+const bucket = Astro.locals.runtime.env.bucket;
+var r2_value = await (await bucket.get("key")).text();
+await bucket.put("key", `${kv_value}:${Math.floor(Date.now() / 1000)}`);
 ---
 
-<div>value: {value}</div>
+<div>kv_value: {kv_value}</div>
+<div>r2_value: {r2_value}</div>
