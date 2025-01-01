@@ -1,16 +1,18 @@
 #:schema node_modules/wrangler/config-schema.json
 
-name = "my-do"
+name = "do1"
 
 compatibility_date = "2024-12-24"
 compatibility_flags = ["nodejs_compat"]
 
-main = "./dist-mydo/_worker.js/index.js"
+main = "./dist/_worker.js/index.js"
 
-assets = { directory = "./dist-mydo", binding = "ASSETS" }
+assets = { directory = "./dist", binding = "ASSETS" }
+
+routes = [{ pattern = "do1.w.defn.run", custom_domain = true }]
 
 [[durable_objects.bindings]]
-name = "mydo"
+name = "do1"
 class_name = "MyDurableObject"
 
 [[migrations]]
