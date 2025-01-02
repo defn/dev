@@ -2021,6 +2021,318 @@ module "s3-imma-pub" {
 provider "aws" {
   profile = "defn-org-sso-source"
   region  = "us-east-1"
+  alias   = "immanent-org"
+  assume_role {
+    role_arn = "arn:aws:iam::545070380609:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-org" {
+  acl = "private"
+  attributes = [
+    "immanent-org",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-org
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-patterner"
+  assume_role {
+    role_arn = "arn:aws:iam::143220204648:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-patterner" {
+  acl = "private"
+  attributes = [
+    "immanent-patterner",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-patterner
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-windkey"
+  assume_role {
+    role_arn = "arn:aws:iam::095764861781:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-windkey" {
+  acl = "private"
+  attributes = [
+    "immanent-windkey",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-windkey
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-summoner"
+  assume_role {
+    role_arn = "arn:aws:iam::397411277587:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-summoner" {
+  acl = "private"
+  attributes = [
+    "immanent-summoner",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-summoner
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-herbal"
+  assume_role {
+    role_arn = "arn:aws:iam::165452499696:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-herbal" {
+  acl = "private"
+  attributes = [
+    "immanent-herbal",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-herbal
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-namer"
+  assume_role {
+    role_arn = "arn:aws:iam::856549015893:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-namer" {
+  acl = "private"
+  attributes = [
+    "immanent-namer",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-namer
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-ged"
+  assume_role {
+    role_arn = "arn:aws:iam::640792184178:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-ged" {
+  acl = "private"
+  attributes = [
+    "immanent-ged",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-ged
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-roke"
+  assume_role {
+    role_arn = "arn:aws:iam::892560628624:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-roke" {
+  acl = "private"
+  attributes = [
+    "immanent-roke",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-roke
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-chanter"
+  assume_role {
+    role_arn = "arn:aws:iam::071244154667:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-chanter" {
+  acl = "private"
+  attributes = [
+    "immanent-chanter",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-chanter
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-changer"
+  assume_role {
+    role_arn = "arn:aws:iam::003884504807:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-changer" {
+  acl = "private"
+  attributes = [
+    "immanent-changer",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-changer
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-hand"
+  assume_role {
+    role_arn = "arn:aws:iam::826250190242:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-hand" {
+  acl = "private"
+  attributes = [
+    "immanent-hand",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-hand
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-doorkeeper"
+  assume_role {
+    role_arn = "arn:aws:iam::013267321144:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-doorkeeper" {
+  acl = "private"
+  attributes = [
+    "immanent-doorkeeper",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-doorkeeper
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
   alias   = "jianghu-org"
   assume_role {
     role_arn = "arn:aws:iam::657613322961:role/jianghu-ops-terraform"

@@ -137,7 +137,7 @@ input: inf.#AwsProps & {
 
 		immanent: {
 			region: "us-west-2"
-			#types0: ["patterner", "windkey", "summoner", "herbal", "namer", "ged", "roke", "chanter", "changer", "hand", "doorkeeper"]
+			#types: ["org", "patterner", "windkey", "summoner", "herbal", "namer", "ged", "roke", "chanter", "changer", "hand", "doorkeeper"]
 		}
 	}
 }

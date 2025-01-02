@@ -624,6 +624,102 @@
         }
       }
     },
+    "s3-immanent-changer": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-immanent-changer",
+          "uniqueId": "s3-immanent-changer"
+        }
+      }
+    },
+    "s3-immanent-chanter": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-immanent-chanter",
+          "uniqueId": "s3-immanent-chanter"
+        }
+      }
+    },
+    "s3-immanent-doorkeeper": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-immanent-doorkeeper",
+          "uniqueId": "s3-immanent-doorkeeper"
+        }
+      }
+    },
+    "s3-immanent-ged": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-immanent-ged",
+          "uniqueId": "s3-immanent-ged"
+        }
+      }
+    },
+    "s3-immanent-hand": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-immanent-hand",
+          "uniqueId": "s3-immanent-hand"
+        }
+      }
+    },
+    "s3-immanent-herbal": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-immanent-herbal",
+          "uniqueId": "s3-immanent-herbal"
+        }
+      }
+    },
+    "s3-immanent-namer": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-immanent-namer",
+          "uniqueId": "s3-immanent-namer"
+        }
+      }
+    },
+    "s3-immanent-org": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-immanent-org",
+          "uniqueId": "s3-immanent-org"
+        }
+      }
+    },
+    "s3-immanent-patterner": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-immanent-patterner",
+          "uniqueId": "s3-immanent-patterner"
+        }
+      }
+    },
+    "s3-immanent-roke": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-immanent-roke",
+          "uniqueId": "s3-immanent-roke"
+        }
+      }
+    },
+    "s3-immanent-summoner": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-immanent-summoner",
+          "uniqueId": "s3-immanent-summoner"
+        }
+      }
+    },
+    "s3-immanent-windkey": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-immanent-windkey",
+          "uniqueId": "s3-immanent-windkey"
+        }
+      }
+    },
     "s3-jianghu-log": {
       "//": {
         "metadata": {
