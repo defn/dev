@@ -27,7 +27,9 @@ inventory: {
 		"district",
 	]
 
-	aws: hosts: []
+	aws: hosts: [
+		"kowloon",
+	]
 
 	cloud: children: [
 		"aws", "hetzner",
