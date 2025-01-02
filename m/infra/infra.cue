@@ -26,7 +26,7 @@ input: inf.#AwsProps & {
 		lock:    "\(#namespace)-\(#org)-terraform-state-lock"
 		bucket:  "\(#namespace)-\(#org)-terraform-state"
 		region:  "us-east-1"
-		profile: "defn-org-sso"
+		profile: "defn-org-sso-source"
 	}
 
 	organization: {
