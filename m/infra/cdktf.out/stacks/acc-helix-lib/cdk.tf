@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.80.0"
+      version = "5.82.2"
       source  = "aws"
     }
   }
@@ -17,7 +17,7 @@ terraform {
 }
 
 provider "aws" {
-  profile = "helix-lib-sso"
+  profile = "helix-lib-sso-source"
   alias   = "helix-lib"
 }
 
@@ -28,6 +28,6 @@ module "helix-lib" {
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = "aws.helix-lib"
+    aws = aws.helix-lib
   }
 }

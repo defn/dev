@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.80.0"
+      version = "5.82.2"
       source  = "aws"
     }
   }
@@ -17,7 +17,7 @@ terraform {
 }
 
 provider "aws" {
-  profile = "circus-net-sso"
+  profile = "circus-net-sso-source"
   alias   = "circus-net"
 }
 
@@ -28,6 +28,6 @@ module "circus-net" {
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = "aws.circus-net"
+    aws = aws.circus-net
   }
 }

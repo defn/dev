@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.80.0"
+      version = "5.82.2"
       source  = "aws"
     }
   }
@@ -17,7 +17,7 @@ terraform {
 }
 
 provider "aws" {
-  profile = "circus-log-sso"
+  profile = "circus-log-sso-source"
   alias   = "circus-log"
 }
 
@@ -28,6 +28,6 @@ module "circus-log" {
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = "aws.circus-log"
+    aws = aws.circus-log
   }
 }

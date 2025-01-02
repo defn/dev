@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.80.0"
+      version = "5.82.2"
       source  = "aws"
     }
   }
@@ -17,7 +17,7 @@ terraform {
 }
 
 provider "aws" {
-  profile = "spiral-log-sso"
+  profile = "spiral-log-sso-source"
   alias   = "spiral-log"
 }
 
@@ -28,6 +28,6 @@ module "spiral-log" {
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = "aws.spiral-log"
+    aws = aws.spiral-log
   }
 }

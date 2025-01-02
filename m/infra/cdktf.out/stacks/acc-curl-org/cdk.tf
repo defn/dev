@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.80.0"
+      version = "5.82.2"
       source  = "aws"
     }
   }
@@ -17,7 +17,7 @@ terraform {
 }
 
 provider "aws" {
-  profile = "curl-org-sso"
+  profile = "curl-org-sso-source"
   alias   = "curl-org"
 }
 
@@ -28,6 +28,6 @@ module "curl-org" {
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = "aws.curl-org"
+    aws = aws.curl-org
   }
 }

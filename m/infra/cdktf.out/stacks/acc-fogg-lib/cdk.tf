@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.80.0"
+      version = "5.82.2"
       source  = "aws"
     }
   }
@@ -17,7 +17,7 @@ terraform {
 }
 
 provider "aws" {
-  profile = "fogg-lib-sso"
+  profile = "fogg-lib-sso-source"
   alias   = "fogg-lib"
 }
 
@@ -28,6 +28,6 @@ module "fogg-lib" {
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = "aws.fogg-lib"
+    aws = aws.fogg-lib
   }
 }

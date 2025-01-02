@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.80.0"
+      version = "5.82.2"
       source  = "aws"
     }
   }
@@ -17,7 +17,7 @@ terraform {
 }
 
 provider "aws" {
-  profile = "gyre-ops-sso"
+  profile = "gyre-ops-sso-source"
   alias   = "gyre-ops"
 }
 
@@ -28,6 +28,6 @@ module "gyre-ops" {
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = "aws.gyre-ops"
+    aws = aws.gyre-ops
   }
 }

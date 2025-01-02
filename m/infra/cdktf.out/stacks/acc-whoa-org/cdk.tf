@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.80.0"
+      version = "5.82.2"
       source  = "aws"
     }
   }
@@ -17,7 +17,7 @@ terraform {
 }
 
 provider "aws" {
-  profile = "whoa-org-sso"
+  profile = "whoa-org-sso-source"
   alias   = "whoa-org"
 }
 
@@ -28,6 +28,6 @@ module "whoa-org" {
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = "aws.whoa-org"
+    aws = aws.whoa-org
   }
 }

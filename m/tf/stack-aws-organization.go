@@ -36,7 +36,7 @@ func AwsOrganizationStack(scope constructs.Construct, site *infra.AwsProps, org 
 	aws.NewAwsProvider(stack,
 		infra.Js("aws"), &aws.AwsProviderConfig{
 			Region:  infra.Js(org.Region),
-			Profile: infra.Js(fmt.Sprintf("%s-org-sso", org.Name)),
+			Profile: infra.Js(fmt.Sprintf("%s-org-sso-source", org.Name)),
 		})
 
 	organizationsorganization.NewOrganizationsOrganization(stack,

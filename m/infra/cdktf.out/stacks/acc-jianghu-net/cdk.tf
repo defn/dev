@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.80.0"
+      version = "5.82.2"
       source  = "aws"
     }
   }
@@ -17,7 +17,7 @@ terraform {
 }
 
 provider "aws" {
-  profile = "jianghu-net-sso"
+  profile = "jianghu-net-sso-source"
   alias   = "jianghu-net"
 }
 
@@ -28,6 +28,6 @@ module "jianghu-net" {
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = "aws.jianghu-net"
+    aws = aws.jianghu-net
   }
 }

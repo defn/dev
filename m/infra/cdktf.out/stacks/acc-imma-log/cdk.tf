@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.80.0"
+      version = "5.82.2"
       source  = "aws"
     }
   }
@@ -17,7 +17,7 @@ terraform {
 }
 
 provider "aws" {
-  profile = "imma-log-sso"
+  profile = "imma-log-sso-source"
   alias   = "imma-log"
 }
 
@@ -28,6 +28,6 @@ module "imma-log" {
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = "aws.imma-log"
+    aws = aws.imma-log
   }
 }

@@ -28,7 +28,7 @@ func AwsAccountStack(scope constructs.Construct, site *infra.AwsProps, org *infr
 	provider := aws.NewAwsProvider(stack,
 		infra.Js("aws"), &aws.AwsProviderConfig{
 			Alias:   infra.Js(fmt.Sprintf("%s-%s", org.Name, acc.Profile)),
-			Profile: infra.Js(fmt.Sprintf("%s-%s-sso", org.Name, acc.Profile)),
+			Profile: infra.Js(fmt.Sprintf("%s-%s-sso-source", org.Name, acc.Profile)),
 		})
 
 	terraform_aws_defn_account.NewTerraformAwsDefnAccount(stack,

@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.80.0"
+      version = "5.82.2"
       source  = "aws"
     }
   }
@@ -17,7 +17,7 @@ terraform {
 }
 
 provider "aws" {
-  profile = "chamber-y-sso"
+  profile = "chamber-y-sso-source"
   alias   = "chamber-y"
 }
 
@@ -28,6 +28,6 @@ module "chamber-y" {
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = "aws.chamber-y"
+    aws = aws.chamber-y
   }
 }

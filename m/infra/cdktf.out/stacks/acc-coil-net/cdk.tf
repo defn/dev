@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.80.0"
+      version = "5.82.2"
       source  = "aws"
     }
   }
@@ -17,7 +17,7 @@ terraform {
 }
 
 provider "aws" {
-  profile = "coil-net-sso"
+  profile = "coil-net-sso-source"
   alias   = "coil-net"
 }
 
@@ -28,6 +28,6 @@ module "coil-net" {
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = "aws.coil-net"
+    aws = aws.coil-net
   }
 }

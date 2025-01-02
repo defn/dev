@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.80.0"
+      version = "5.82.2"
       source  = "aws"
     }
   }
@@ -17,7 +17,7 @@ terraform {
 }
 
 provider "aws" {
-  profile = "fogg-cde-sso"
+  profile = "fogg-cde-sso-source"
   alias   = "fogg-cde"
 }
 
@@ -28,6 +28,6 @@ module "fogg-cde" {
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = "aws.fogg-cde"
+    aws = aws.fogg-cde
   }
 }

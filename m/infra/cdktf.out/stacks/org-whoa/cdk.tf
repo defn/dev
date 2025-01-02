@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.80.0"
+      version = "5.82.2"
       source  = "aws"
     }
   }
@@ -22,7 +22,7 @@ locals {
 }
 
 provider "aws" {
-  profile = "whoa-org-sso"
+  profile = "whoa-org-sso-source"
   region  = "us-west-2"
 }
 

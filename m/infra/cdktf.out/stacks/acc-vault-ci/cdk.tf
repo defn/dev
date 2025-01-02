@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.80.0"
+      version = "5.82.2"
       source  = "aws"
     }
   }
@@ -17,7 +17,7 @@ terraform {
 }
 
 provider "aws" {
-  profile = "vault-ci-sso"
+  profile = "vault-ci-sso-source"
   alias   = "vault-ci"
 }
 
@@ -28,6 +28,6 @@ module "vault-ci" {
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = "aws.vault-ci"
+    aws = aws.vault-ci
   }
 }
