@@ -32,21 +32,26 @@ chrome-coder:
 vpn:
 	cd m/openvpn && ./service server
 
+gpg-setup:
+	$(MAKE) vpn-install
+	$(MAKE) gpg
+	$(MAKE) chrome-dev-gpg
+
 vpn-install:
 	sudo apt update
 	sudo apt install -y git direnv make rsync bc pipx
-	sudo apt install -y socat pcscd wireguard-tools qemu-system libvirt-clients libvirt-daemon-system openvpn easy-rsa expect tpm2-tools
+	sudo apt install -y socat pcscd scdaemon gpg gpg-agent wireguard-tools qemu-system libvirt-clients libvirt-daemon-system openvpn easy-rsa expect tpm2-tools
 
 no-gpg:
-	systemctl --user disable gpg-agent-browser.socket --now || true
-	systemctl --user disable gpg-agent-extra.socket --now || true
-	systemctl --user disable gpg-agent-ssh.socket --now || true
-	systemctl --user disable gpg-agent.socket --now || true
-	systemctl --user disable gpg-agent --now || true
+	systemctl --user enable gpg-agent-browser.socket --now || true
+	systemctl --user enable gpg-agent-extra.socket --now || true
+	systemctl --user enable gpg-agent-ssh.socket --now || true
+	systemctl --user enable gpg-agent.socket --now || true
+	systemctl --user enable gpg-agent --now || true
 	pkill -9 gpg-agent || true
 
 chrome-dev-gpg:
-	sudo systemctl restart pcscd
+	sudo systemctl restart pcscd.service pcscd.socket polkit.service
 	$(MAKE) no-gpg
 	gpg-agent --daemon --pinentry-program $$(which pinentry)
 	while [[ "$$(pass hello)" != "world" ]]; do sleep 1; done
