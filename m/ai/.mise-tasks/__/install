@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+#MISE description="Install ..."
+
+cd "${MISE_ORIGINAL_CWD}"

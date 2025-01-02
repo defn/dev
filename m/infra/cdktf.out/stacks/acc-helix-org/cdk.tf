@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.80.0"
+      version = "5.82.2"
       source  = "aws"
     }
   }
@@ -10,14 +10,14 @@ terraform {
     dynamodb_table = "dfn-defn-terraform-state-lock"
     encrypt        = true
     key            = "stacks/acc-helix-org/terraform.tfstate"
-    profile        = "defn-org-sso"
+    profile        = "defn-org-sso-source"
     region         = "us-east-1"
   }
 
 }
 
 provider "aws" {
-  profile = "helix-org-sso"
+  profile = "helix-org-sso-source"
   alias   = "helix-org"
 }
 
@@ -28,6 +28,6 @@ module "helix-org" {
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = "aws.helix-org"
+    aws = aws.helix-org
   }
 }

@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.80.0"
+      version = "5.82.2"
       source  = "aws"
     }
   }
@@ -10,14 +10,14 @@ terraform {
     dynamodb_table = "dfn-defn-terraform-state-lock"
     encrypt        = true
     key            = "stacks/acc-imma-org/terraform.tfstate"
-    profile        = "defn-org-sso"
+    profile        = "defn-org-sso-source"
     region         = "us-east-1"
   }
 
 }
 
 provider "aws" {
-  profile = "imma-org-sso"
+  profile = "imma-org-sso-source"
   alias   = "imma-org"
 }
 
@@ -28,6 +28,6 @@ module "imma-org" {
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = "aws.imma-org"
+    aws = aws.imma-org
   }
 }

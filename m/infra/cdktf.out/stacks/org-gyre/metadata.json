@@ -31,19 +31,19 @@
       }
     },
     "aws_organizations_account": {
-      "gyre": {
+      "gyre-ops": {
         "//": {
           "metadata": {
-            "path": "org-gyre/gyre",
-            "uniqueId": "gyre"
+            "path": "org-gyre/gyre-ops",
+            "uniqueId": "gyre-ops"
           }
         }
       },
-      "ops": {
+      "gyre-org": {
         "//": {
           "metadata": {
-            "path": "org-gyre/ops",
-            "uniqueId": "ops"
+            "path": "org-gyre/gyre-org",
+            "uniqueId": "gyre-org"
           }
         }
       }
@@ -104,14 +104,14 @@
         "dynamodb_table": "dfn-defn-terraform-state-lock",
         "encrypt": true,
         "key": "stacks/org-gyre/terraform.tfstate",
-        "profile": "defn-org-sso",
+        "profile": "defn-org-sso-source",
         "region": "us-east-1"
       }
     },
     "required_providers": {
       "aws": {
         "source": "aws",
-        "version": "5.80.0"
+        "version": "5.82.2"
       }
     }
   }

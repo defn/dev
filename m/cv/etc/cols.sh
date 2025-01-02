@@ -4,32 +4,10 @@ kind=$1
 shift
 dir=$1
 shift
-num=$1
-shift
 base=$1
 shift
 
 newline=$'\n'
-
-# Initialize an array with 12 zeros
-for ((i = 0; i < num; i++)); do
-	values[i]=0
-done
-
-# Function to find the index of the minimum value in the array
-find_min_index() {
-	local min_index=0
-	local min_value=${values[0]}
-
-	for ((i = 0; i < num; i++)); do
-		if ((values[i] < min_value)); then
-			min_value=${values[i]}
-			min_index=$i
-		fi
-	done
-
-	echo $min_index
-}
 
 echo '<!DOCTYPE html><head>'
 echo '<link rel="stylesheet" href="/gallery.css">'
@@ -43,7 +21,6 @@ echo '<table><tbody id="table-body"><tr>'
 
 echo "<script>"
 echo "const basePath = '$dir';"
-echo "var numColumns = $num;"
 echo "const selectMode = '$kind';"
 
 echo "const images = ["

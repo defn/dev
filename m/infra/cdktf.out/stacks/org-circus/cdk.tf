@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.80.0"
+      version = "5.82.2"
       source  = "aws"
     }
   }
@@ -10,7 +10,7 @@ terraform {
     dynamodb_table = "dfn-defn-terraform-state-lock"
     encrypt        = true
     key            = "stacks/org-circus/terraform.tfstate"
-    profile        = "defn-org-sso"
+    profile        = "defn-org-sso-source"
     region         = "us-east-1"
   }
 
@@ -22,7 +22,7 @@ locals {
 }
 
 provider "aws" {
-  profile = "circus-org-sso"
+  profile = "circus-org-sso-source"
   region  = "us-west-2"
 }
 
@@ -65,7 +65,7 @@ resource "aws_identitystore_group" "administrators_sso_group" {
   identity_store_id = element(local.sso_instance_isid, 0)
 }
 
-resource "aws_organizations_account" "circus" {
+resource "aws_organizations_account" "circus-org" {
   email = "aws-circus@defn.us"
   name  = "circus"
   tags = {
@@ -78,62 +78,62 @@ resource "aws_ssoadmin_account_assignment" "circus_admin_sso_account_assignment"
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.circus.id
+  target_id          = aws_organizations_account.circus-org.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "net" {
+resource "aws_organizations_account" "circus-net" {
   email = "aws-circus-transit@defn.sh"
-  name  = "net"
+  name  = "transit"
   tags = {
     ManagedBy = "Terraform"
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "net_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "transit_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.net.id
+  target_id          = aws_organizations_account.circus-net.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "log" {
+resource "aws_organizations_account" "circus-log" {
   email = "aws-circus-audit@defn.sh"
-  name  = "log"
+  name  = "audit"
   tags = {
     ManagedBy = "Terraform"
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "log_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "audit_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.log.id
+  target_id          = aws_organizations_account.circus-log.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "lib" {
+resource "aws_organizations_account" "circus-lib" {
   email = "aws-circus-govcloud@defn.sh"
-  name  = "lib"
+  name  = "govcloud"
   tags = {
     ManagedBy = "Terraform"
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "lib_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "govcloud_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.lib.id
+  target_id          = aws_organizations_account.circus-lib.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "ops" {
+resource "aws_organizations_account" "circus-ops" {
   email = "aws-circus-ops@defn.sh"
   name  = "ops"
   tags = {
@@ -146,6 +146,6 @@ resource "aws_ssoadmin_account_assignment" "ops_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.ops.id
+  target_id          = aws_organizations_account.circus-ops.id
   target_type        = "AWS_ACCOUNT"
 }

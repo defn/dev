@@ -146,8 +146,25 @@ function vi {
 			"$code" "$@"
 		fi
 	else
-		command code "$@"
+		command vi "$@"
 	fi
+}
+
+function aprofile {
+	unset AWS_DEFAULT_REGION
+	unset AWS_REGION
+
+	export AWS_PROFILE="${1}"
+	shift
+
+	if [[ -n "${1:-}" ]]; then
+		aregion="$1"
+	fi
+}
+
+function aregion {
+	export AWS_DEFAULT_REGION="${1}"
+	export AWS_REGION="${1}"
 }
 
 function gs {

@@ -3,4 +3,9 @@
 #MISE description="Bring up Wrangler dev server"
 
 cd "${MISE_ORIGINAL_CWD}"
-exec pnpm run astro dev
+#exec npm run astro dev -- --port "${APP_PORT}"j
+mise run package
+exec pnpm wrangler dev --port "${APP_PORT}" --live-reload \
+	-c wrangler.toml \
+	-c wrangler-rpc.toml \
+	-c wrangler-do.toml

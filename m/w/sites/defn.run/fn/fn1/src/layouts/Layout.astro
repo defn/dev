@@ -1,22 +1,54 @@
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+<html lang="en" class="h-full bg-white">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+    <title>Astro Basics</title>
+
+    <script
+      src="https://kit.fontawesome.com/012eb3e5a5.js"
+      crossorigin="anonymous"
+      data-auto-replace-svg="nest"
+      data-auto-add-css
+      data-show-missing-icons></script>
+
+    <style is:global>
+      body {
+        font-family: valkyrie_a;
+      }
+
+      .svg-inline--fa {
+        overflow: visible;
+        box-sizing: content-box;
+        display: inline-block;
+        height: 1em;
+        vertical-align: -0.125em;
+      }
+    </style>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://defn.github.io/webfonts/concourse_2_caps.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://defn.github.io/webfonts/concourse_3.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://defn.github.io/webfonts/valkyrie_a.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://defn.github.io/webfonts/hermes_maia_4.css"
+    />
+  </head>
+  <body class="h-full"></body><slot />
+</html>

@@ -86,6 +86,8 @@ cdktf:
 	$(MAKE) regen
 
 upgrade:
+	$(MAKE) go-upgrade
+	$(MAKE) regen
 	npm -q --no-update-notifier --no-audit install
 	npm -q --no-update-notifier --no-audit upgrade
 	npm -q --no-update-notifier --no-audit outdated

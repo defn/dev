@@ -19,7 +19,6 @@ inventory: {
 	cache: hosts: [
 		"pc",
 		"district",
-		"rpi3c",
 		"rpi4c",
 		"rpi5c",
 	]
@@ -28,9 +27,7 @@ inventory: {
 		"district",
 	]
 
-	aws: hosts: [
-		"kowloon",
-	]
+	aws: hosts: []
 
 	cloud: children: [
 		"aws", "hetzner",

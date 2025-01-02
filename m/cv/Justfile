@@ -48,13 +48,13 @@ thumbs:
 t2:
     cat <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 2 ' | awk '{print $NF}' | sort | runmany 32 1 'echo "img/$1.jpeg -> t2/$1.png"; mogrify -path t2 -resize 400x -format png img/$1.jpeg'
 
-gallery dir="thumbs" num="12" output="thumbs":
-    time etc/proc-thumbs {{dir}} {{num}} {{output}}
+gallery dir="thumbs" output="thumbs":
+    time etc/proc-thumbs {{dir}} {{output}}
     
 big prefix="replicate/":
     #!/usr/bin/env bash
-    just gallery {{ prefix }}img 1 one &
-    just gallery {{ prefix }}t2  2 two &
+    just gallery {{ prefix }}img one &
+    just gallery {{ prefix }}t2  two &
     wait
 
 index file stage1 stage2:
@@ -66,11 +66,11 @@ following:
     ls -ltrhd js*.html | awk '{print $NF}' | while read -r a; do if grep filename: "$a" >/dev/null; then echo "<a href=\"$a\">$a</a><br>"; fi; done > following.html.1
     mv -f following.html.1 following.html
 
-daily file="followers.txt" n="4":
+daily file="following.txt" n="6":
     screen -dmS daily j daily-inner {{ file }} {{ n }}
     screen -DRR daily
 
-daily-inner file n="4":
+daily-inner file n:
     just download-user {{ file }} {{ n }} || true
     just thumbs
     just html {{ file }} || true
@@ -79,7 +79,7 @@ daily-inner file n="4":
 download-user file n="4":
     cat {{ file }} | runmany {{ n }} 'just user $1'
 
-html file="followers.txt" n="20":
+html file="following.txt" n="20":
     cat {{ file }} | runmany {{ n }} 'just process js-username-$1.json.js.json'
 
 backup transfers="60":
@@ -96,7 +96,8 @@ proxy:
     screen -DRR proxy
 
 proxy-inner:
-    nginx -g "daemon off;" -c $(pwd)/proxy.conf
+    cat "$(pwd)/proxy.conf" | perl -pe "s{.*}{root $(pwd);} if m{^\s*root }" > /tmp/nginx.conf
+    nginx -g "daemon off;" -c /tmp/nginx.conf
 
 server:
     screen -dmS server j server-inner
@@ -113,23 +114,23 @@ reset-inner:
     just eod
     rm -f js-* js.json.* js.json || true
 
-ersgan:
+ersgan n="32":
     just t2
     rm -f .something
     cat <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find replicate/img/ -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep -v ' 2 ' | awk '{print $NF}' | sort | runmany 'touch .something'
     cat <(find replicate/img -name '*.png' | cut -d/ -f3 | cut -d. -f1) <(find replicate/t2 -name '*.png' | cut -d/ -f3 | cut -d. -f1) <(find replicate/t2 -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $NF}' | runmany 'touch .something'
-    if [[ -f .something ]]; then just ersgan-inner; fi
+    if [[ -f .something ]]; then just ersgan-inner {{n}}; fi
 
-ersgan-inner:
+ersgan-inner n:
     sudo tailscale serve --https=443 off || true
     sudo tailscale funnel reset
     sudo tailscale funnel --bg --set-path /pub http://localhost:8111/pub
     # t2 -> replicate/img
     while true; do if curl -sSL https://pc.tail3884f.ts.net/pub/index.html | grep hello; then sleep 5; break; fi; sleep 1; done
     mkdir -p replicate/js
-    cat <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find replicate/img/ -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep -v ' 2 ' | awk '{print $NF}' | sort | runmany 32 './ersgan.mjs $1'
+    cat <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find replicate/img/ -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep -v ' 2 ' | awk '{print $NF}' | sort | runmany {{n}} './ersgan.mjs $1'
     sleep 10
-    cat <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find replicate/img/ -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep -v ' 2 ' | awk '{print $NF}' | sort | runmany 32 './ersgan.mjs $1'
+    cat <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find replicate/img/ -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep -v ' 2 ' | awk '{print $NF}' | sort | runmany {{n}} './ersgan.mjs $1'
     # replicate/img -> replicate/t2
     cat <(find replicate/img -name '*.png' | cut -d/ -f3 | cut -d. -f1) <(find replicate/t2 -name '*.png' | cut -d/ -f3 | cut -d. -f1) <(find replicate/t2 -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $NF}' | runmany 32 'mogrify -path replicate/t2 -resize 400x -format png replicate/img/$1.png'
     sudo tailscale funnel reset

@@ -31,35 +31,35 @@
       }
     },
     "aws_organizations_account": {
-      "curl": {
+      "curl-hub": {
         "//": {
           "metadata": {
-            "path": "org-curl/curl",
-            "uniqueId": "curl"
+            "path": "org-curl/curl-hub",
+            "uniqueId": "curl-hub"
           }
         }
       },
-      "hub": {
+      "curl-lib": {
         "//": {
           "metadata": {
-            "path": "org-curl/hub",
-            "uniqueId": "hub"
+            "path": "org-curl/curl-lib",
+            "uniqueId": "curl-lib"
           }
         }
       },
-      "lib": {
+      "curl-net": {
         "//": {
           "metadata": {
-            "path": "org-curl/lib",
-            "uniqueId": "lib"
+            "path": "org-curl/curl-net",
+            "uniqueId": "curl-net"
           }
         }
       },
-      "net": {
+      "curl-org": {
         "//": {
           "metadata": {
-            "path": "org-curl/net",
-            "uniqueId": "net"
+            "path": "org-curl/curl-org",
+            "uniqueId": "curl-org"
           }
         }
       }
@@ -136,14 +136,14 @@
         "dynamodb_table": "dfn-defn-terraform-state-lock",
         "encrypt": true,
         "key": "stacks/org-curl/terraform.tfstate",
-        "profile": "defn-org-sso",
+        "profile": "defn-org-sso-source",
         "region": "us-east-1"
       }
     },
     "required_providers": {
       "aws": {
         "source": "aws",
-        "version": "5.80.0"
+        "version": "5.82.2"
       }
     }
   }

@@ -2,14 +2,14 @@
 import astroLogo from "../assets/astro.svg";
 import background from "../assets/background.svg";
 
-import { GET as hello_get } from '../pages/hello.ts';
+const kv = Astro.locals.runtime.env.kv;
 
-interface HelloResponse {
-    hello: string;
+var value = parseFloat(await kv.get("key"));
+if (isNaN(value)) {
+  value = 1;
 }
 
-let response = await hello_get()
-const data: HelloResponse = await response.json()
+await kv.put("key", value + 1);
 ---
 
 <div id="container">
@@ -25,8 +25,9 @@ const data: HelloResponse = await response.json()
         /></a
       >
       <h1>
-        Hello {data.hello}!  To get started, open the <code><pre>src/pages</pre></code> directory
-        in your project.
+        Hello ({value})! To get started, open the <code
+          ><pre>src/pages</pre></code
+        > directory in your project.
       </h1>
       <section id="links">
         <a class="button" href="https://docs.astro.build">Read our docs</a>

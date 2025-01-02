@@ -6,3 +6,9 @@ set -efu -o pipefail
 
 cd "${MISE_ORIGINAL_CWD}"
 pnpm run astro build "$@"
+
+for d in MyDurableObject MyRPC; do
+	echo
+	echo "export { M as ${d} } from './$(egrep -r ^class.${d} dist | cut -d: -f1 | cut -d/ -f3-)';"
+	echo
+done >>dist/_worker.js/index.js

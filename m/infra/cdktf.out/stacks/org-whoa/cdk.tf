@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.80.0"
+      version = "5.82.2"
       source  = "aws"
     }
   }
@@ -10,7 +10,7 @@ terraform {
     dynamodb_table = "dfn-defn-terraform-state-lock"
     encrypt        = true
     key            = "stacks/org-whoa/terraform.tfstate"
-    profile        = "defn-org-sso"
+    profile        = "defn-org-sso-source"
     region         = "us-east-1"
   }
 
@@ -22,7 +22,7 @@ locals {
 }
 
 provider "aws" {
-  profile = "whoa-org-sso"
+  profile = "whoa-org-sso-source"
   region  = "us-west-2"
 }
 
@@ -65,7 +65,7 @@ resource "aws_identitystore_group" "administrators_sso_group" {
   identity_store_id = element(local.sso_instance_isid, 0)
 }
 
-resource "aws_organizations_account" "whoa" {
+resource "aws_organizations_account" "whoa-org" {
   email = "aws-whoa@defn.us"
   name  = "whoa"
   tags = {
@@ -78,28 +78,28 @@ resource "aws_ssoadmin_account_assignment" "whoa_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.whoa.id
+  target_id          = aws_organizations_account.whoa-org.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "net" {
+resource "aws_organizations_account" "whoa-net" {
   email = "whoa-secrets@imma.io"
-  name  = "whoa-net"
+  name  = "whoa-secrets"
   tags = {
     ManagedBy = "Terraform"
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "net_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "secrets_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.net.id
+  target_id          = aws_organizations_account.whoa-net.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "hub" {
+resource "aws_organizations_account" "whoa-hub" {
   email = "whoa-hub@imma.io"
   name  = "whoa-hub"
   tags = {
@@ -112,11 +112,11 @@ resource "aws_ssoadmin_account_assignment" "hub_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.hub.id
+  target_id          = aws_organizations_account.whoa-hub.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "dev" {
+resource "aws_organizations_account" "whoa-dev" {
   email = "whoa-dev@imma.io"
   name  = "whoa-dev"
   tags = {
@@ -129,23 +129,23 @@ resource "aws_ssoadmin_account_assignment" "dev_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.dev.id
+  target_id          = aws_organizations_account.whoa-dev.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "pub" {
+resource "aws_organizations_account" "whoa-pub" {
   email = "whoa-prod@imma.io"
-  name  = "whoa-pub"
+  name  = "whoa-prod"
   tags = {
     ManagedBy = "Terraform"
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "pub_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "prod_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.pub.id
+  target_id          = aws_organizations_account.whoa-pub.id
   target_type        = "AWS_ACCOUNT"
 }

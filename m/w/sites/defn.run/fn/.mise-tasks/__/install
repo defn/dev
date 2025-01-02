@@ -4,3 +4,4 @@
 
 cd "${MISE_ORIGINAL_CWD}"
 pnpm install .
+trunk fmt

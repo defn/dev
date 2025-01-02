@@ -31,43 +31,43 @@
       }
     },
     "aws_organizations_account": {
-      "circus": {
+      "circus-lib": {
         "//": {
           "metadata": {
-            "path": "org-circus/circus",
-            "uniqueId": "circus"
+            "path": "org-circus/circus-lib",
+            "uniqueId": "circus-lib"
           }
         }
       },
-      "lib": {
+      "circus-log": {
         "//": {
           "metadata": {
-            "path": "org-circus/lib",
-            "uniqueId": "lib"
+            "path": "org-circus/circus-log",
+            "uniqueId": "circus-log"
           }
         }
       },
-      "log": {
+      "circus-net": {
         "//": {
           "metadata": {
-            "path": "org-circus/log",
-            "uniqueId": "log"
+            "path": "org-circus/circus-net",
+            "uniqueId": "circus-net"
           }
         }
       },
-      "net": {
+      "circus-ops": {
         "//": {
           "metadata": {
-            "path": "org-circus/net",
-            "uniqueId": "net"
+            "path": "org-circus/circus-ops",
+            "uniqueId": "circus-ops"
           }
         }
       },
-      "ops": {
+      "circus-org": {
         "//": {
           "metadata": {
-            "path": "org-circus/ops",
-            "uniqueId": "ops"
+            "path": "org-circus/circus-org",
+            "uniqueId": "circus-org"
           }
         }
       }
@@ -83,6 +83,14 @@
       }
     },
     "aws_ssoadmin_account_assignment": {
+      "audit_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-circus/audit_admin_sso_account_assignment",
+            "uniqueId": "audit_admin_sso_account_assignment"
+          }
+        }
+      },
       "circus_admin_sso_account_assignment": {
         "//": {
           "metadata": {
@@ -91,27 +99,11 @@
           }
         }
       },
-      "lib_admin_sso_account_assignment": {
+      "govcloud_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "org-circus/lib_admin_sso_account_assignment",
-            "uniqueId": "lib_admin_sso_account_assignment"
-          }
-        }
-      },
-      "log_admin_sso_account_assignment": {
-        "//": {
-          "metadata": {
-            "path": "org-circus/log_admin_sso_account_assignment",
-            "uniqueId": "log_admin_sso_account_assignment"
-          }
-        }
-      },
-      "net_admin_sso_account_assignment": {
-        "//": {
-          "metadata": {
-            "path": "org-circus/net_admin_sso_account_assignment",
-            "uniqueId": "net_admin_sso_account_assignment"
+            "path": "org-circus/govcloud_admin_sso_account_assignment",
+            "uniqueId": "govcloud_admin_sso_account_assignment"
           }
         }
       },
@@ -120,6 +112,14 @@
           "metadata": {
             "path": "org-circus/ops_admin_sso_account_assignment",
             "uniqueId": "ops_admin_sso_account_assignment"
+          }
+        }
+      },
+      "transit_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-circus/transit_admin_sso_account_assignment",
+            "uniqueId": "transit_admin_sso_account_assignment"
           }
         }
       }
@@ -152,14 +152,14 @@
         "dynamodb_table": "dfn-defn-terraform-state-lock",
         "encrypt": true,
         "key": "stacks/org-circus/terraform.tfstate",
-        "profile": "defn-org-sso",
+        "profile": "defn-org-sso-source",
         "region": "us-east-1"
       }
     },
     "required_providers": {
       "aws": {
         "source": "aws",
-        "version": "5.80.0"
+        "version": "5.82.2"
       }
     }
   }

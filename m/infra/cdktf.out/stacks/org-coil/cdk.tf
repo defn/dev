@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.80.0"
+      version = "5.82.2"
       source  = "aws"
     }
   }
@@ -10,7 +10,7 @@ terraform {
     dynamodb_table = "dfn-defn-terraform-state-lock"
     encrypt        = true
     key            = "stacks/org-coil/terraform.tfstate"
-    profile        = "defn-org-sso"
+    profile        = "defn-org-sso-source"
     region         = "us-east-1"
   }
 
@@ -22,7 +22,7 @@ locals {
 }
 
 provider "aws" {
-  profile = "coil-org-sso"
+  profile = "coil-org-sso-source"
   region  = "us-east-1"
 }
 
@@ -65,7 +65,7 @@ resource "aws_identitystore_group" "administrators_sso_group" {
   identity_store_id = element(local.sso_instance_isid, 0)
 }
 
-resource "aws_organizations_account" "coil" {
+resource "aws_organizations_account" "coil-org" {
   email = "aws-coil@defn.us"
   name  = "coil"
   tags = {
@@ -78,11 +78,11 @@ resource "aws_ssoadmin_account_assignment" "coil_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.coil.id
+  target_id          = aws_organizations_account.coil-org.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "net" {
+resource "aws_organizations_account" "coil-net" {
   email                      = "aws-coil+net@defn.us"
   iam_user_access_to_billing = "ALLOW"
   name                       = "net"
@@ -97,11 +97,11 @@ resource "aws_ssoadmin_account_assignment" "net_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.net.id
+  target_id          = aws_organizations_account.coil-net.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "lib" {
+resource "aws_organizations_account" "coil-lib" {
   email                      = "aws-coil+lib@defn.us"
   iam_user_access_to_billing = "ALLOW"
   name                       = "lib"
@@ -116,11 +116,11 @@ resource "aws_ssoadmin_account_assignment" "lib_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.lib.id
+  target_id          = aws_organizations_account.coil-lib.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "hub" {
+resource "aws_organizations_account" "coil-hub" {
   email                      = "aws-coil+hub@defn.us"
   iam_user_access_to_billing = "ALLOW"
   name                       = "hub"
@@ -135,6 +135,6 @@ resource "aws_ssoadmin_account_assignment" "hub_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.hub.id
+  target_id          = aws_organizations_account.coil-hub.id
   target_type        = "AWS_ACCOUNT"
 }

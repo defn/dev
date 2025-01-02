@@ -31,43 +31,43 @@
       }
     },
     "aws_organizations_account": {
-      "dev": {
+      "whoa-dev": {
         "//": {
           "metadata": {
-            "path": "org-whoa/dev",
-            "uniqueId": "dev"
+            "path": "org-whoa/whoa-dev",
+            "uniqueId": "whoa-dev"
           }
         }
       },
-      "hub": {
+      "whoa-hub": {
         "//": {
           "metadata": {
-            "path": "org-whoa/hub",
-            "uniqueId": "hub"
+            "path": "org-whoa/whoa-hub",
+            "uniqueId": "whoa-hub"
           }
         }
       },
-      "net": {
+      "whoa-net": {
         "//": {
           "metadata": {
-            "path": "org-whoa/net",
-            "uniqueId": "net"
+            "path": "org-whoa/whoa-net",
+            "uniqueId": "whoa-net"
           }
         }
       },
-      "pub": {
+      "whoa-org": {
         "//": {
           "metadata": {
-            "path": "org-whoa/pub",
-            "uniqueId": "pub"
+            "path": "org-whoa/whoa-org",
+            "uniqueId": "whoa-org"
           }
         }
       },
-      "whoa": {
+      "whoa-pub": {
         "//": {
           "metadata": {
-            "path": "org-whoa/whoa",
-            "uniqueId": "whoa"
+            "path": "org-whoa/whoa-pub",
+            "uniqueId": "whoa-pub"
           }
         }
       }
@@ -99,19 +99,19 @@
           }
         }
       },
-      "net_admin_sso_account_assignment": {
+      "prod_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "org-whoa/net_admin_sso_account_assignment",
-            "uniqueId": "net_admin_sso_account_assignment"
+            "path": "org-whoa/prod_admin_sso_account_assignment",
+            "uniqueId": "prod_admin_sso_account_assignment"
           }
         }
       },
-      "pub_admin_sso_account_assignment": {
+      "secrets_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "org-whoa/pub_admin_sso_account_assignment",
-            "uniqueId": "pub_admin_sso_account_assignment"
+            "path": "org-whoa/secrets_admin_sso_account_assignment",
+            "uniqueId": "secrets_admin_sso_account_assignment"
           }
         }
       },
@@ -152,14 +152,14 @@
         "dynamodb_table": "dfn-defn-terraform-state-lock",
         "encrypt": true,
         "key": "stacks/org-whoa/terraform.tfstate",
-        "profile": "defn-org-sso",
+        "profile": "defn-org-sso-source",
         "region": "us-east-1"
       }
     },
     "required_providers": {
       "aws": {
         "source": "aws",
-        "version": "5.80.0"
+        "version": "5.82.2"
       }
     }
   }

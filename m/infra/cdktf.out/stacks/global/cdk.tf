@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      version = "5.80.0"
+      version = "5.82.2"
       source  = "aws"
     }
   }
@@ -10,14 +10,14 @@ terraform {
     dynamodb_table = "dfn-defn-terraform-state-lock"
     encrypt        = true
     key            = "stacks/global/terraform.tfstate"
-    profile        = "defn-org-sso"
+    profile        = "defn-org-sso-source"
     region         = "us-east-1"
   }
 
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-org"
   assume_role {
@@ -38,12 +38,12 @@ module "s3-chamber-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-org"
+    aws = aws.chamber-org
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-1"
   assume_role {
@@ -64,12 +64,12 @@ module "s3-chamber-1" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-1"
+    aws = aws.chamber-1
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-2"
   assume_role {
@@ -90,12 +90,12 @@ module "s3-chamber-2" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-2"
+    aws = aws.chamber-2
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-3"
   assume_role {
@@ -116,12 +116,12 @@ module "s3-chamber-3" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-3"
+    aws = aws.chamber-3
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-4"
   assume_role {
@@ -142,12 +142,12 @@ module "s3-chamber-4" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-4"
+    aws = aws.chamber-4
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-5"
   assume_role {
@@ -168,12 +168,12 @@ module "s3-chamber-5" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-5"
+    aws = aws.chamber-5
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-6"
   assume_role {
@@ -194,12 +194,12 @@ module "s3-chamber-6" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-6"
+    aws = aws.chamber-6
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-7"
   assume_role {
@@ -220,12 +220,12 @@ module "s3-chamber-7" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-7"
+    aws = aws.chamber-7
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-8"
   assume_role {
@@ -246,12 +246,12 @@ module "s3-chamber-8" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-8"
+    aws = aws.chamber-8
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-9"
   assume_role {
@@ -272,12 +272,12 @@ module "s3-chamber-9" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-9"
+    aws = aws.chamber-9
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-a"
   assume_role {
@@ -298,12 +298,12 @@ module "s3-chamber-a" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-a"
+    aws = aws.chamber-a
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-b"
   assume_role {
@@ -324,12 +324,12 @@ module "s3-chamber-b" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-b"
+    aws = aws.chamber-b
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-c"
   assume_role {
@@ -350,12 +350,12 @@ module "s3-chamber-c" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-c"
+    aws = aws.chamber-c
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-d"
   assume_role {
@@ -376,12 +376,12 @@ module "s3-chamber-d" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-d"
+    aws = aws.chamber-d
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-e"
   assume_role {
@@ -402,12 +402,12 @@ module "s3-chamber-e" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-e"
+    aws = aws.chamber-e
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-f"
   assume_role {
@@ -428,12 +428,12 @@ module "s3-chamber-f" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-f"
+    aws = aws.chamber-f
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-g"
   assume_role {
@@ -454,12 +454,12 @@ module "s3-chamber-g" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-g"
+    aws = aws.chamber-g
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-h"
   assume_role {
@@ -480,12 +480,12 @@ module "s3-chamber-h" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-h"
+    aws = aws.chamber-h
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-i"
   assume_role {
@@ -506,12 +506,12 @@ module "s3-chamber-i" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-i"
+    aws = aws.chamber-i
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-j"
   assume_role {
@@ -532,12 +532,12 @@ module "s3-chamber-j" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-j"
+    aws = aws.chamber-j
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-l"
   assume_role {
@@ -558,12 +558,12 @@ module "s3-chamber-l" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-l"
+    aws = aws.chamber-l
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-m"
   assume_role {
@@ -584,12 +584,12 @@ module "s3-chamber-m" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-m"
+    aws = aws.chamber-m
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-n"
   assume_role {
@@ -610,12 +610,12 @@ module "s3-chamber-n" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-n"
+    aws = aws.chamber-n
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-o"
   assume_role {
@@ -636,12 +636,12 @@ module "s3-chamber-o" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-o"
+    aws = aws.chamber-o
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-p"
   assume_role {
@@ -662,12 +662,12 @@ module "s3-chamber-p" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-p"
+    aws = aws.chamber-p
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-q"
   assume_role {
@@ -688,12 +688,12 @@ module "s3-chamber-q" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-q"
+    aws = aws.chamber-q
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-r"
   assume_role {
@@ -714,12 +714,12 @@ module "s3-chamber-r" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-r"
+    aws = aws.chamber-r
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-s"
   assume_role {
@@ -740,12 +740,12 @@ module "s3-chamber-s" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-s"
+    aws = aws.chamber-s
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-t"
   assume_role {
@@ -766,12 +766,12 @@ module "s3-chamber-t" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-t"
+    aws = aws.chamber-t
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-u"
   assume_role {
@@ -792,12 +792,12 @@ module "s3-chamber-u" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-u"
+    aws = aws.chamber-u
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-v"
   assume_role {
@@ -818,12 +818,12 @@ module "s3-chamber-v" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-v"
+    aws = aws.chamber-v
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-w"
   assume_role {
@@ -844,12 +844,12 @@ module "s3-chamber-w" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-w"
+    aws = aws.chamber-w
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-x"
   assume_role {
@@ -870,12 +870,12 @@ module "s3-chamber-x" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-x"
+    aws = aws.chamber-x
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-y"
   assume_role {
@@ -896,12 +896,12 @@ module "s3-chamber-y" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-y"
+    aws = aws.chamber-y
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "chamber-z"
   assume_role {
@@ -922,12 +922,12 @@ module "s3-chamber-z" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.chamber-z"
+    aws = aws.chamber-z
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "circus-org"
   assume_role {
@@ -948,12 +948,12 @@ module "s3-circus-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.circus-org"
+    aws = aws.circus-org
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "circus-net"
   assume_role {
@@ -974,12 +974,12 @@ module "s3-circus-net" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.circus-net"
+    aws = aws.circus-net
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "circus-log"
   assume_role {
@@ -1000,12 +1000,12 @@ module "s3-circus-log" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.circus-log"
+    aws = aws.circus-log
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "circus-lib"
   assume_role {
@@ -1026,12 +1026,12 @@ module "s3-circus-lib" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.circus-lib"
+    aws = aws.circus-lib
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "circus-ops"
   assume_role {
@@ -1052,12 +1052,12 @@ module "s3-circus-ops" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.circus-ops"
+    aws = aws.circus-ops
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "coil-org"
   assume_role {
@@ -1078,12 +1078,12 @@ module "s3-coil-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.coil-org"
+    aws = aws.coil-org
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "coil-net"
   assume_role {
@@ -1104,12 +1104,12 @@ module "s3-coil-net" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.coil-net"
+    aws = aws.coil-net
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "coil-lib"
   assume_role {
@@ -1130,12 +1130,12 @@ module "s3-coil-lib" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.coil-lib"
+    aws = aws.coil-lib
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "coil-hub"
   assume_role {
@@ -1156,12 +1156,12 @@ module "s3-coil-hub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.coil-hub"
+    aws = aws.coil-hub
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "curl-org"
   assume_role {
@@ -1182,12 +1182,12 @@ module "s3-curl-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.curl-org"
+    aws = aws.curl-org
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "curl-net"
   assume_role {
@@ -1208,12 +1208,12 @@ module "s3-curl-net" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.curl-net"
+    aws = aws.curl-net
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "curl-lib"
   assume_role {
@@ -1234,12 +1234,12 @@ module "s3-curl-lib" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.curl-lib"
+    aws = aws.curl-lib
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "curl-hub"
   assume_role {
@@ -1260,12 +1260,12 @@ module "s3-curl-hub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.curl-hub"
+    aws = aws.curl-hub
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "defn-org"
   assume_role {
@@ -1286,12 +1286,12 @@ module "s3-defn-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.defn-org"
+    aws = aws.defn-org
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "fogg-org"
   assume_role {
@@ -1312,12 +1312,12 @@ module "s3-fogg-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.fogg-org"
+    aws = aws.fogg-org
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "fogg-net"
   assume_role {
@@ -1338,12 +1338,12 @@ module "s3-fogg-net" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.fogg-net"
+    aws = aws.fogg-net
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "fogg-log"
   assume_role {
@@ -1364,12 +1364,12 @@ module "s3-fogg-log" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.fogg-log"
+    aws = aws.fogg-log
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "fogg-lib"
   assume_role {
@@ -1390,12 +1390,12 @@ module "s3-fogg-lib" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.fogg-lib"
+    aws = aws.fogg-lib
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "fogg-ops"
   assume_role {
@@ -1416,12 +1416,12 @@ module "s3-fogg-ops" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.fogg-ops"
+    aws = aws.fogg-ops
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "fogg-ci"
   assume_role {
@@ -1442,12 +1442,12 @@ module "s3-fogg-ci" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.fogg-ci"
+    aws = aws.fogg-ci
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "fogg-hub"
   assume_role {
@@ -1468,12 +1468,12 @@ module "s3-fogg-hub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.fogg-hub"
+    aws = aws.fogg-hub
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "fogg-cde"
   assume_role {
@@ -1494,12 +1494,12 @@ module "s3-fogg-cde" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.fogg-cde"
+    aws = aws.fogg-cde
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "fogg-dev"
   assume_role {
@@ -1520,12 +1520,12 @@ module "s3-fogg-dev" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.fogg-dev"
+    aws = aws.fogg-dev
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "fogg-pub"
   assume_role {
@@ -1546,12 +1546,12 @@ module "s3-fogg-pub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.fogg-pub"
+    aws = aws.fogg-pub
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "gyre-org"
   assume_role {
@@ -1572,12 +1572,12 @@ module "s3-gyre-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.gyre-org"
+    aws = aws.gyre-org
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "gyre-ops"
   assume_role {
@@ -1598,12 +1598,12 @@ module "s3-gyre-ops" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.gyre-ops"
+    aws = aws.gyre-ops
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "helix-org"
   assume_role {
@@ -1624,12 +1624,12 @@ module "s3-helix-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.helix-org"
+    aws = aws.helix-org
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "helix-net"
   assume_role {
@@ -1650,12 +1650,12 @@ module "s3-helix-net" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.helix-net"
+    aws = aws.helix-net
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "helix-log"
   assume_role {
@@ -1676,12 +1676,12 @@ module "s3-helix-log" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.helix-log"
+    aws = aws.helix-log
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "helix-lib"
   assume_role {
@@ -1702,12 +1702,12 @@ module "s3-helix-lib" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.helix-lib"
+    aws = aws.helix-lib
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "helix-ops"
   assume_role {
@@ -1728,12 +1728,12 @@ module "s3-helix-ops" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.helix-ops"
+    aws = aws.helix-ops
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "helix-ci"
   assume_role {
@@ -1754,12 +1754,12 @@ module "s3-helix-ci" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.helix-ci"
+    aws = aws.helix-ci
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "helix-hub"
   assume_role {
@@ -1780,12 +1780,12 @@ module "s3-helix-hub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.helix-hub"
+    aws = aws.helix-hub
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "helix-cde"
   assume_role {
@@ -1806,12 +1806,12 @@ module "s3-helix-cde" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.helix-cde"
+    aws = aws.helix-cde
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "helix-dev"
   assume_role {
@@ -1832,12 +1832,12 @@ module "s3-helix-dev" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.helix-dev"
+    aws = aws.helix-dev
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "helix-pub"
   assume_role {
@@ -1858,12 +1858,12 @@ module "s3-helix-pub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.helix-pub"
+    aws = aws.helix-pub
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "imma-org"
   assume_role {
@@ -1884,12 +1884,12 @@ module "s3-imma-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.imma-org"
+    aws = aws.imma-org
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "imma-net"
   assume_role {
@@ -1910,12 +1910,12 @@ module "s3-imma-net" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.imma-net"
+    aws = aws.imma-net
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "imma-log"
   assume_role {
@@ -1936,12 +1936,12 @@ module "s3-imma-log" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.imma-log"
+    aws = aws.imma-log
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "imma-lib"
   assume_role {
@@ -1962,12 +1962,12 @@ module "s3-imma-lib" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.imma-lib"
+    aws = aws.imma-lib
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "imma-dev"
   assume_role {
@@ -1988,12 +1988,12 @@ module "s3-imma-dev" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.imma-dev"
+    aws = aws.imma-dev
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "imma-pub"
   assume_role {
@@ -2014,12 +2014,324 @@ module "s3-imma-pub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.imma-pub"
+    aws = aws.imma-pub
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-org"
+  assume_role {
+    role_arn = "arn:aws:iam::545070380609:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-org" {
+  acl = "private"
+  attributes = [
+    "immanent-org",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-org
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-patterner"
+  assume_role {
+    role_arn = "arn:aws:iam::143220204648:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-patterner" {
+  acl = "private"
+  attributes = [
+    "immanent-patterner",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-patterner
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-windkey"
+  assume_role {
+    role_arn = "arn:aws:iam::095764861781:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-windkey" {
+  acl = "private"
+  attributes = [
+    "immanent-windkey",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-windkey
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-summoner"
+  assume_role {
+    role_arn = "arn:aws:iam::397411277587:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-summoner" {
+  acl = "private"
+  attributes = [
+    "immanent-summoner",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-summoner
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-herbal"
+  assume_role {
+    role_arn = "arn:aws:iam::165452499696:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-herbal" {
+  acl = "private"
+  attributes = [
+    "immanent-herbal",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-herbal
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-namer"
+  assume_role {
+    role_arn = "arn:aws:iam::856549015893:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-namer" {
+  acl = "private"
+  attributes = [
+    "immanent-namer",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-namer
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-ged"
+  assume_role {
+    role_arn = "arn:aws:iam::640792184178:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-ged" {
+  acl = "private"
+  attributes = [
+    "immanent-ged",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-ged
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-roke"
+  assume_role {
+    role_arn = "arn:aws:iam::892560628624:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-roke" {
+  acl = "private"
+  attributes = [
+    "immanent-roke",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-roke
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-chanter"
+  assume_role {
+    role_arn = "arn:aws:iam::071244154667:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-chanter" {
+  acl = "private"
+  attributes = [
+    "immanent-chanter",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-chanter
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-changer"
+  assume_role {
+    role_arn = "arn:aws:iam::003884504807:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-changer" {
+  acl = "private"
+  attributes = [
+    "immanent-changer",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-changer
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-hand"
+  assume_role {
+    role_arn = "arn:aws:iam::826250190242:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-hand" {
+  acl = "private"
+  attributes = [
+    "immanent-hand",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-hand
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "immanent-doorkeeper"
+  assume_role {
+    role_arn = "arn:aws:iam::013267321144:role/immanent-ops-terraform"
+  }
+}
+
+module "s3-immanent-doorkeeper" {
+  acl = "private"
+  attributes = [
+    "immanent-doorkeeper",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.immanent-doorkeeper
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "jianghu-org"
   assume_role {
@@ -2040,12 +2352,12 @@ module "s3-jianghu-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.jianghu-org"
+    aws = aws.jianghu-org
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "jianghu-net"
   assume_role {
@@ -2066,12 +2378,12 @@ module "s3-jianghu-net" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.jianghu-net"
+    aws = aws.jianghu-net
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "jianghu-log"
   assume_role {
@@ -2092,12 +2404,12 @@ module "s3-jianghu-log" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.jianghu-log"
+    aws = aws.jianghu-log
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "spiral-org"
   assume_role {
@@ -2118,12 +2430,12 @@ module "s3-spiral-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.spiral-org"
+    aws = aws.spiral-org
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "spiral-net"
   assume_role {
@@ -2144,12 +2456,12 @@ module "s3-spiral-net" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.spiral-net"
+    aws = aws.spiral-net
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "spiral-log"
   assume_role {
@@ -2170,12 +2482,12 @@ module "s3-spiral-log" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.spiral-log"
+    aws = aws.spiral-log
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "spiral-lib"
   assume_role {
@@ -2196,12 +2508,12 @@ module "s3-spiral-lib" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.spiral-lib"
+    aws = aws.spiral-lib
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "spiral-ops"
   assume_role {
@@ -2222,12 +2534,12 @@ module "s3-spiral-ops" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.spiral-ops"
+    aws = aws.spiral-ops
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "spiral-ci"
   assume_role {
@@ -2248,12 +2560,12 @@ module "s3-spiral-ci" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.spiral-ci"
+    aws = aws.spiral-ci
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "spiral-hub"
   assume_role {
@@ -2274,12 +2586,12 @@ module "s3-spiral-hub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.spiral-hub"
+    aws = aws.spiral-hub
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "spiral-cde"
   assume_role {
@@ -2300,12 +2612,12 @@ module "s3-spiral-cde" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.spiral-cde"
+    aws = aws.spiral-cde
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "spiral-dev"
   assume_role {
@@ -2326,12 +2638,12 @@ module "s3-spiral-dev" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.spiral-dev"
+    aws = aws.spiral-dev
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "spiral-pub"
   assume_role {
@@ -2352,12 +2664,12 @@ module "s3-spiral-pub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.spiral-pub"
+    aws = aws.spiral-pub
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "vault-org"
   assume_role {
@@ -2378,12 +2690,12 @@ module "s3-vault-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.vault-org"
+    aws = aws.vault-org
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "vault-net"
   assume_role {
@@ -2404,12 +2716,12 @@ module "s3-vault-net" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.vault-net"
+    aws = aws.vault-net
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "vault-log"
   assume_role {
@@ -2430,12 +2742,12 @@ module "s3-vault-log" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.vault-log"
+    aws = aws.vault-log
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "vault-lib"
   assume_role {
@@ -2456,12 +2768,12 @@ module "s3-vault-lib" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.vault-lib"
+    aws = aws.vault-lib
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "vault-ops"
   assume_role {
@@ -2482,12 +2794,12 @@ module "s3-vault-ops" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.vault-ops"
+    aws = aws.vault-ops
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "vault-ci"
   assume_role {
@@ -2508,12 +2820,12 @@ module "s3-vault-ci" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.vault-ci"
+    aws = aws.vault-ci
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "vault-hub"
   assume_role {
@@ -2534,12 +2846,12 @@ module "s3-vault-hub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.vault-hub"
+    aws = aws.vault-hub
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "vault-cde"
   assume_role {
@@ -2560,12 +2872,12 @@ module "s3-vault-cde" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.vault-cde"
+    aws = aws.vault-cde
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "vault-dev"
   assume_role {
@@ -2586,12 +2898,12 @@ module "s3-vault-dev" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.vault-dev"
+    aws = aws.vault-dev
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "vault-pub"
   assume_role {
@@ -2612,12 +2924,12 @@ module "s3-vault-pub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.vault-pub"
+    aws = aws.vault-pub
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "whoa-org"
   assume_role {
@@ -2638,12 +2950,12 @@ module "s3-whoa-org" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.whoa-org"
+    aws = aws.whoa-org
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "whoa-net"
   assume_role {
@@ -2664,12 +2976,12 @@ module "s3-whoa-net" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.whoa-net"
+    aws = aws.whoa-net
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "whoa-hub"
   assume_role {
@@ -2690,12 +3002,12 @@ module "s3-whoa-hub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.whoa-hub"
+    aws = aws.whoa-hub
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "whoa-dev"
   assume_role {
@@ -2716,12 +3028,12 @@ module "s3-whoa-dev" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.whoa-dev"
+    aws = aws.whoa-dev
   }
 }
 
 provider "aws" {
-  profile = "defn-org-sso"
+  profile = "defn-org-sso-source"
   region  = "us-east-1"
   alias   = "whoa-pub"
   assume_role {
@@ -2742,6 +3054,6 @@ module "s3-whoa-pub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = "aws.whoa-pub"
+    aws = aws.whoa-pub
   }
 }

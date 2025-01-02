@@ -53,10 +53,10 @@
       (set! (.. panel -webview -html) (str html))))
 
   ;; run command in terminal TODO bug opens a new terminal every time
-  (p/let [terminal (vscode/window.createTerminal #js {:name "tilt"})]
+  (comment p/let [terminal (vscode/window.createTerminal #js {:name "up"})]
     (doto terminal
       (.show true)
-      (.sendText "j up"))))
+      (.sendText "m up"))))
 
 (defn- main []
   (open-tutorial)

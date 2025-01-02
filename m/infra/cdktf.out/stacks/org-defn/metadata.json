@@ -31,11 +31,11 @@
       }
     },
     "aws_organizations_account": {
-      "defn": {
+      "defn-org": {
         "//": {
           "metadata": {
-            "path": "org-defn/defn",
-            "uniqueId": "defn"
+            "path": "org-defn/defn-org",
+            "uniqueId": "defn-org"
           }
         }
       }
@@ -88,14 +88,14 @@
         "dynamodb_table": "dfn-defn-terraform-state-lock",
         "encrypt": true,
         "key": "stacks/org-defn/terraform.tfstate",
-        "profile": "defn-org-sso",
+        "profile": "defn-org-sso-source",
         "region": "us-east-1"
       }
     },
     "required_providers": {
       "aws": {
         "source": "aws",
-        "version": "5.80.0"
+        "version": "5.82.2"
       }
     }
   }
