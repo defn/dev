@@ -96,7 +96,8 @@ proxy:
     screen -DRR proxy
 
 proxy-inner:
-    nginx -g "daemon off;" -c $(pwd)/proxy.conf
+    cat "$(pwd)/proxy.conf" | perl -pe "s{.*}{root $(pwd);} if m{^\s*root }" > /tmp/nginx.conf
+    nginx -g "daemon off;" -c /tmp/nginx.conf
 
 server:
     screen -dmS server j server-inner
