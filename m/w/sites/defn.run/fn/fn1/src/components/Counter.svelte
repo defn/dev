@@ -17,14 +17,13 @@
   }
 </script>
 
-<div class="counter">
-  <button onclick={subtract}>-</button>
-  <pre>{count}</pre>
-  <button onclick={add}>+</button>
+<div>
+  <span><i class="fas fa-kiwi-bird" onclick={subtract} /></span>
+  <span>
+    <pre>{count}</pre>
+    <div>
+      {@render children?.()}
+    </div>
+  </span>
+  <span><i class="fas fa-kiwi-bird" onclick={add} /></span>
 </div>
-<div class="message">
-  {@render children?.()}
-</div>
-
-<style>
-</style>

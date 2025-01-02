@@ -14,8 +14,6 @@
     "@astrojs/cloudflare": "^12.1.0",
     "@astrojs/svelte": "^7.0.2",
     "@astrojs/tailwind": "^5.1.4",
-    "@fortawesome/fontawesome-svg-core": "^6.7.2",
-    "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "astro": "^5.1.1",
     "fn1": "link:",
