@@ -31,11 +31,27 @@
       }
     },
     "aws_organizations_account": {
-      "chamber": {
+      "chamber-1": {
         "//": {
           "metadata": {
-            "path": "org-chamber/chamber",
-            "uniqueId": "chamber"
+            "path": "org-chamber/chamber-1",
+            "uniqueId": "chamber-1"
+          }
+        }
+      },
+      "chamber-2": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-2",
+            "uniqueId": "chamber-2"
+          }
+        }
+      },
+      "chamber-3": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-3",
+            "uniqueId": "chamber-3"
           }
         }
       },
@@ -87,227 +103,211 @@
           }
         }
       },
-      "defn-a": {
+      "chamber-a": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-a",
-            "uniqueId": "defn-a"
+            "path": "org-chamber/chamber-a",
+            "uniqueId": "chamber-a"
           }
         }
       },
-      "defn-b": {
+      "chamber-b": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-b",
-            "uniqueId": "defn-b"
+            "path": "org-chamber/chamber-b",
+            "uniqueId": "chamber-b"
           }
         }
       },
-      "defn-c": {
+      "chamber-c": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-c",
-            "uniqueId": "defn-c"
+            "path": "org-chamber/chamber-c",
+            "uniqueId": "chamber-c"
           }
         }
       },
-      "defn-cd": {
+      "chamber-d": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-cd",
-            "uniqueId": "defn-cd"
+            "path": "org-chamber/chamber-d",
+            "uniqueId": "chamber-d"
           }
         }
       },
-      "defn-ci": {
+      "chamber-e": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-ci",
-            "uniqueId": "defn-ci"
+            "path": "org-chamber/chamber-e",
+            "uniqueId": "chamber-e"
           }
         }
       },
-      "defn-d": {
+      "chamber-f": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-d",
-            "uniqueId": "defn-d"
+            "path": "org-chamber/chamber-f",
+            "uniqueId": "chamber-f"
           }
         }
       },
-      "defn-dev": {
+      "chamber-g": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-dev",
-            "uniqueId": "defn-dev"
+            "path": "org-chamber/chamber-g",
+            "uniqueId": "chamber-g"
           }
         }
       },
-      "defn-e": {
+      "chamber-h": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-e",
-            "uniqueId": "defn-e"
+            "path": "org-chamber/chamber-h",
+            "uniqueId": "chamber-h"
           }
         }
       },
-      "defn-f": {
+      "chamber-i": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-f",
-            "uniqueId": "defn-f"
+            "path": "org-chamber/chamber-i",
+            "uniqueId": "chamber-i"
           }
         }
       },
-      "defn-g": {
+      "chamber-j": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-g",
-            "uniqueId": "defn-g"
+            "path": "org-chamber/chamber-j",
+            "uniqueId": "chamber-j"
           }
         }
       },
-      "defn-h": {
+      "chamber-l": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-h",
-            "uniqueId": "defn-h"
+            "path": "org-chamber/chamber-l",
+            "uniqueId": "chamber-l"
           }
         }
       },
-      "defn-hub": {
+      "chamber-m": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-hub",
-            "uniqueId": "defn-hub"
+            "path": "org-chamber/chamber-m",
+            "uniqueId": "chamber-m"
           }
         }
       },
-      "defn-i": {
+      "chamber-n": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-i",
-            "uniqueId": "defn-i"
+            "path": "org-chamber/chamber-n",
+            "uniqueId": "chamber-n"
           }
         }
       },
-      "defn-j": {
+      "chamber-o": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-j",
-            "uniqueId": "defn-j"
+            "path": "org-chamber/chamber-o",
+            "uniqueId": "chamber-o"
           }
         }
       },
-      "defn-l": {
+      "chamber-org": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-l",
-            "uniqueId": "defn-l"
+            "path": "org-chamber/chamber-org",
+            "uniqueId": "chamber-org"
           }
         }
       },
-      "defn-m": {
+      "chamber-p": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-m",
-            "uniqueId": "defn-m"
+            "path": "org-chamber/chamber-p",
+            "uniqueId": "chamber-p"
           }
         }
       },
-      "defn-n": {
+      "chamber-q": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-n",
-            "uniqueId": "defn-n"
+            "path": "org-chamber/chamber-q",
+            "uniqueId": "chamber-q"
           }
         }
       },
-      "defn-o": {
+      "chamber-r": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-o",
-            "uniqueId": "defn-o"
+            "path": "org-chamber/chamber-r",
+            "uniqueId": "chamber-r"
           }
         }
       },
-      "defn-p": {
+      "chamber-s": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-p",
-            "uniqueId": "defn-p"
+            "path": "org-chamber/chamber-s",
+            "uniqueId": "chamber-s"
           }
         }
       },
-      "defn-prod": {
+      "chamber-t": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-prod",
-            "uniqueId": "defn-prod"
+            "path": "org-chamber/chamber-t",
+            "uniqueId": "chamber-t"
           }
         }
       },
-      "defn-qa": {
+      "chamber-u": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-qa",
-            "uniqueId": "defn-qa"
+            "path": "org-chamber/chamber-u",
+            "uniqueId": "chamber-u"
           }
         }
       },
-      "defn-r": {
+      "chamber-v": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-r",
-            "uniqueId": "defn-r"
+            "path": "org-chamber/chamber-v",
+            "uniqueId": "chamber-v"
           }
         }
       },
-      "defn-s": {
+      "chamber-w": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-s",
-            "uniqueId": "defn-s"
+            "path": "org-chamber/chamber-w",
+            "uniqueId": "chamber-w"
           }
         }
       },
-      "defn-security": {
+      "chamber-x": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-security",
-            "uniqueId": "defn-security"
+            "path": "org-chamber/chamber-x",
+            "uniqueId": "chamber-x"
           }
         }
       },
-      "defn-stage": {
+      "chamber-y": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-stage",
-            "uniqueId": "defn-stage"
+            "path": "org-chamber/chamber-y",
+            "uniqueId": "chamber-y"
           }
         }
       },
-      "defn-t": {
+      "chamber-z": {
         "//": {
           "metadata": {
-            "path": "org-chamber/defn-t",
-            "uniqueId": "defn-t"
-          }
-        }
-      },
-      "defn-v": {
-        "//": {
-          "metadata": {
-            "path": "org-chamber/defn-v",
-            "uniqueId": "defn-v"
-          }
-        }
-      },
-      "defn-w": {
-        "//": {
-          "metadata": {
-            "path": "org-chamber/defn-w",
-            "uniqueId": "defn-w"
+            "path": "org-chamber/chamber-z",
+            "uniqueId": "chamber-z"
           }
         }
       }

@@ -254,15 +254,17 @@ lookup: {
 				id: "368812692254"
 			}
 			ci: {
-				t:  "sec"
-				id: "018520313738"
+				t:    "sec"
+				name: t
+				id:   "018520313738"
 			}
 			hub: {
 				id: "436043820387"
 			}
 			cde: {
-				t:  "dmz"
-				id: "724643698007"
+				t:    "dmz"
+				name: t
+				id:   "724643698007"
 			}
 			dev: {
 				id: "843784871878"
@@ -298,22 +300,25 @@ lookup: {
 				id: "601164058091"
 			}
 			ci: {
-				t:  "pub"
-				id: "371657257885"
+				t:    "pub"
+				name: t
+				id:   "371657257885"
 			}
 			hub: {
 				id: "216704421225"
 			}
 			cde: {
-				t:  "sec"
-				id: "398258703387"
+				t:    "sec"
+				name: t
+				id:   "398258703387"
 			}
 			dev: {
 				id: "308726031860"
 			}
 			pub: {
-				t:  "dmz"
-				id: "130046154300"
+				t:    "dmz"
+				name: t
+				id:   "130046154300"
 			}
 		}
 	}
@@ -335,26 +340,31 @@ lookup: {
 			}
 			net: {
 				t:      "asset"
+				name:   t
 				id:     "060659916753"
 				prefix: "fogg-"
 			}
 			log: {
 				t:      "circus"
+				name:   t
 				id:     "844609041254"
 				prefix: "fogg-"
 			}
 			lib: {
 				t:      "data"
+				name:   t
 				id:     "624713464251"
 				prefix: "fogg-"
 			}
 			ops: {
 				t:      "gateway"
+				name:   t
 				id:     "318746665903"
 				prefix: "fogg-"
 			}
 			ci: {
 				t:      "home"
+				name:   t
 				id:     "812459563189"
 				prefix: "fogg-"
 			}
@@ -364,16 +374,19 @@ lookup: {
 			}
 			cde: {
 				t:      "postx"
+				name:   t
 				id:     "565963418226"
 				prefix: "fogg-"
 			}
 			dev: {
 				t:      "sandbox"
+				name:   t
 				id:     "442766271046"
 				prefix: "fogg-"
 			}
 			pub: {
 				t:      "security"
+				name:   t
 				id:     "372333168887"
 				prefix: "fogg-"
 			}
@@ -498,6 +511,7 @@ lookup: {
 			}
 			net: {
 				t:        "secrets"
+				name:     t
 				id:       "464075062390"
 				email:    "whoa-\(t)@imma.io"
 				prefix:   "whoa-"
@@ -519,6 +533,7 @@ lookup: {
 			}
 			pub: {
 				t:        "prod"
+				name:     t
 				id:       "204827926367"
 				email:    "whoa-\(t)@imma.io"
 				prefix:   "whoa-"
@@ -720,12 +735,14 @@ lookup: {
 			}
 			net: {
 				t:        "tahoe"
+				name:     t
 				id:       "025636091251"
 				email:    "\(t)@defn.us"
 				imported: "yes"
 			}
 			log: {
 				t:        "klamath"
+				name:     t
 				id:       "298431841138"
 				email:    "\(t)@defn.us"
 				imported: "yes"
@@ -744,54 +761,63 @@ lookup: {
 			}
 			net: {
 				t:        "transit"
+				name:     t
 				id:       "915207860232"
 				email:    "aws-vault-\(t)@defn.sh"
 				imported: "yes"
 			}
 			log: {
 				t:        "audit"
+				name:     t
 				id:       "749185891195"
 				email:    "aws-vault-\(t)@defn.sh"
 				imported: "yes"
 			}
 			lib: {
 				t:        "library"
+				name:     t
 				id:       "066356637485"
 				email:    "aws-vault-\(t)@defn.sh"
 				imported: "yes"
 			}
 			ops: {
 				t:        "ops"
+				name:     t
 				id:       "188066400611"
 				email:    "aws-vault-\(t)@defn.sh"
 				imported: "yes"
 			}
 			ci: {
 				t:        "vault0"
+				name:     t
 				id:       "313228123503"
 				email:    "aws-vault-\(t)@defn.sh"
 				imported: "yes"
 			}
 			hub: {
 				t:        "hub"
+				name:     t
 				id:       "539099112425"
 				email:    "aws-vault-\(t)@defn.sh"
 				imported: "yes"
 			}
 			cde: {
 				t:        "vault1"
+				name:     t
 				id:       "040769490632"
 				email:    "aws-vault-\(t)@defn.sh"
 				imported: "yes"
 			}
 			dev: {
 				t:        "dev"
+				name:     t
 				id:       "497393606242"
 				email:    "aws-vault-\(t)@defn.sh"
 				imported: "yes"
 			}
 			pub: {
 				t:        "pub"
+				name:     t
 				id:       "851162413429"
 				email:    "aws-vault-\(t)@defn.sh"
 				imported: "yes"
@@ -810,18 +836,21 @@ lookup: {
 			}
 			net: {
 				t:        "transit"
+				name:     t
 				id:       "002516226222"
 				email:    "aws-circus-\(t)@defn.sh"
 				imported: "yes"
 			}
 			log: {
 				t:        "audit"
+				name:     t
 				id:       "707476523482"
 				email:    "aws-circus-\(t)@defn.sh"
 				imported: "yes"
 			}
 			lib: {
 				t:        "govcloud"
+				name:     t
 				id:       "497790518354"
 				email:    "aws-circus-\(t)@defn.sh"
 				imported: "yes"

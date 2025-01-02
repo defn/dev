@@ -31,83 +31,83 @@
       }
     },
     "aws_organizations_account": {
-      "cde": {
+      "helix-cde": {
         "//": {
           "metadata": {
-            "path": "org-helix/cde",
-            "uniqueId": "cde"
+            "path": "org-helix/helix-cde",
+            "uniqueId": "helix-cde"
           }
         }
       },
-      "ci": {
+      "helix-ci": {
         "//": {
           "metadata": {
-            "path": "org-helix/ci",
-            "uniqueId": "ci"
+            "path": "org-helix/helix-ci",
+            "uniqueId": "helix-ci"
           }
         }
       },
-      "dev": {
+      "helix-dev": {
         "//": {
           "metadata": {
-            "path": "org-helix/dev",
-            "uniqueId": "dev"
+            "path": "org-helix/helix-dev",
+            "uniqueId": "helix-dev"
           }
         }
       },
-      "helix": {
+      "helix-hub": {
         "//": {
           "metadata": {
-            "path": "org-helix/helix",
-            "uniqueId": "helix"
+            "path": "org-helix/helix-hub",
+            "uniqueId": "helix-hub"
           }
         }
       },
-      "hub": {
+      "helix-lib": {
         "//": {
           "metadata": {
-            "path": "org-helix/hub",
-            "uniqueId": "hub"
+            "path": "org-helix/helix-lib",
+            "uniqueId": "helix-lib"
           }
         }
       },
-      "lib": {
+      "helix-log": {
         "//": {
           "metadata": {
-            "path": "org-helix/lib",
-            "uniqueId": "lib"
+            "path": "org-helix/helix-log",
+            "uniqueId": "helix-log"
           }
         }
       },
-      "log": {
+      "helix-net": {
         "//": {
           "metadata": {
-            "path": "org-helix/log",
-            "uniqueId": "log"
+            "path": "org-helix/helix-net",
+            "uniqueId": "helix-net"
           }
         }
       },
-      "net": {
+      "helix-ops": {
         "//": {
           "metadata": {
-            "path": "org-helix/net",
-            "uniqueId": "net"
+            "path": "org-helix/helix-ops",
+            "uniqueId": "helix-ops"
           }
         }
       },
-      "ops": {
+      "helix-org": {
         "//": {
           "metadata": {
-            "path": "org-helix/ops",
-            "uniqueId": "ops"
+            "path": "org-helix/helix-org",
+            "uniqueId": "helix-org"
           }
         }
       },
-      "pub": {
+      "helix-pub": {
         "//": {
           "metadata": {
-            "path": "org-helix/pub",
-            "uniqueId": "pub"
+            "path": "org-helix/helix-pub",
+            "uniqueId": "helix-pub"
           }
         }
       }
@@ -123,27 +123,19 @@
       }
     },
     "aws_ssoadmin_account_assignment": {
-      "cde_admin_sso_account_assignment": {
-        "//": {
-          "metadata": {
-            "path": "org-helix/cde_admin_sso_account_assignment",
-            "uniqueId": "cde_admin_sso_account_assignment"
-          }
-        }
-      },
-      "ci_admin_sso_account_assignment": {
-        "//": {
-          "metadata": {
-            "path": "org-helix/ci_admin_sso_account_assignment",
-            "uniqueId": "ci_admin_sso_account_assignment"
-          }
-        }
-      },
       "dev_admin_sso_account_assignment": {
         "//": {
           "metadata": {
             "path": "org-helix/dev_admin_sso_account_assignment",
             "uniqueId": "dev_admin_sso_account_assignment"
+          }
+        }
+      },
+      "dmz_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-helix/dmz_admin_sso_account_assignment",
+            "uniqueId": "dmz_admin_sso_account_assignment"
           }
         }
       },
@@ -200,6 +192,14 @@
           "metadata": {
             "path": "org-helix/pub_admin_sso_account_assignment",
             "uniqueId": "pub_admin_sso_account_assignment"
+          }
+        }
+      },
+      "sec_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-helix/sec_admin_sso_account_assignment",
+            "uniqueId": "sec_admin_sso_account_assignment"
           }
         }
       }

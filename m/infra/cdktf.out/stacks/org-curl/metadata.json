@@ -31,35 +31,35 @@
       }
     },
     "aws_organizations_account": {
-      "curl": {
+      "curl-hub": {
         "//": {
           "metadata": {
-            "path": "org-curl/curl",
-            "uniqueId": "curl"
+            "path": "org-curl/curl-hub",
+            "uniqueId": "curl-hub"
           }
         }
       },
-      "hub": {
+      "curl-lib": {
         "//": {
           "metadata": {
-            "path": "org-curl/hub",
-            "uniqueId": "hub"
+            "path": "org-curl/curl-lib",
+            "uniqueId": "curl-lib"
           }
         }
       },
-      "lib": {
+      "curl-net": {
         "//": {
           "metadata": {
-            "path": "org-curl/lib",
-            "uniqueId": "lib"
+            "path": "org-curl/curl-net",
+            "uniqueId": "curl-net"
           }
         }
       },
-      "net": {
+      "curl-org": {
         "//": {
           "metadata": {
-            "path": "org-curl/net",
-            "uniqueId": "net"
+            "path": "org-curl/curl-org",
+            "uniqueId": "curl-org"
           }
         }
       }

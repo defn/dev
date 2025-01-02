@@ -31,83 +31,83 @@
       }
     },
     "aws_organizations_account": {
-      "cde": {
+      "spiral-cde": {
         "//": {
           "metadata": {
-            "path": "org-spiral/cde",
-            "uniqueId": "cde"
+            "path": "org-spiral/spiral-cde",
+            "uniqueId": "spiral-cde"
           }
         }
       },
-      "ci": {
+      "spiral-ci": {
         "//": {
           "metadata": {
-            "path": "org-spiral/ci",
-            "uniqueId": "ci"
+            "path": "org-spiral/spiral-ci",
+            "uniqueId": "spiral-ci"
           }
         }
       },
-      "dev": {
+      "spiral-dev": {
         "//": {
           "metadata": {
-            "path": "org-spiral/dev",
-            "uniqueId": "dev"
+            "path": "org-spiral/spiral-dev",
+            "uniqueId": "spiral-dev"
           }
         }
       },
-      "hub": {
+      "spiral-hub": {
         "//": {
           "metadata": {
-            "path": "org-spiral/hub",
-            "uniqueId": "hub"
+            "path": "org-spiral/spiral-hub",
+            "uniqueId": "spiral-hub"
           }
         }
       },
-      "lib": {
+      "spiral-lib": {
         "//": {
           "metadata": {
-            "path": "org-spiral/lib",
-            "uniqueId": "lib"
+            "path": "org-spiral/spiral-lib",
+            "uniqueId": "spiral-lib"
           }
         }
       },
-      "log": {
+      "spiral-log": {
         "//": {
           "metadata": {
-            "path": "org-spiral/log",
-            "uniqueId": "log"
+            "path": "org-spiral/spiral-log",
+            "uniqueId": "spiral-log"
           }
         }
       },
-      "net": {
+      "spiral-net": {
         "//": {
           "metadata": {
-            "path": "org-spiral/net",
-            "uniqueId": "net"
+            "path": "org-spiral/spiral-net",
+            "uniqueId": "spiral-net"
           }
         }
       },
-      "ops": {
+      "spiral-ops": {
         "//": {
           "metadata": {
-            "path": "org-spiral/ops",
-            "uniqueId": "ops"
+            "path": "org-spiral/spiral-ops",
+            "uniqueId": "spiral-ops"
           }
         }
       },
-      "pub": {
+      "spiral-org": {
         "//": {
           "metadata": {
-            "path": "org-spiral/pub",
-            "uniqueId": "pub"
+            "path": "org-spiral/spiral-org",
+            "uniqueId": "spiral-org"
           }
         }
       },
-      "spiral": {
+      "spiral-pub": {
         "//": {
           "metadata": {
-            "path": "org-spiral/spiral",
-            "uniqueId": "spiral"
+            "path": "org-spiral/spiral-pub",
+            "uniqueId": "spiral-pub"
           }
         }
       }
@@ -123,27 +123,19 @@
       }
     },
     "aws_ssoadmin_account_assignment": {
-      "cde_admin_sso_account_assignment": {
-        "//": {
-          "metadata": {
-            "path": "org-spiral/cde_admin_sso_account_assignment",
-            "uniqueId": "cde_admin_sso_account_assignment"
-          }
-        }
-      },
-      "ci_admin_sso_account_assignment": {
-        "//": {
-          "metadata": {
-            "path": "org-spiral/ci_admin_sso_account_assignment",
-            "uniqueId": "ci_admin_sso_account_assignment"
-          }
-        }
-      },
       "dev_admin_sso_account_assignment": {
         "//": {
           "metadata": {
             "path": "org-spiral/dev_admin_sso_account_assignment",
             "uniqueId": "dev_admin_sso_account_assignment"
+          }
+        }
+      },
+      "dmz_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/dmz_admin_sso_account_assignment",
+            "uniqueId": "dmz_admin_sso_account_assignment"
           }
         }
       },
@@ -192,6 +184,14 @@
           "metadata": {
             "path": "org-spiral/pub_admin_sso_account_assignment",
             "uniqueId": "pub_admin_sso_account_assignment"
+          }
+        }
+      },
+      "sec_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/sec_admin_sso_account_assignment",
+            "uniqueId": "sec_admin_sso_account_assignment"
           }
         }
       },

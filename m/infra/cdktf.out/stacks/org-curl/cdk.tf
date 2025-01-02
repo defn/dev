@@ -65,7 +65,7 @@ resource "aws_identitystore_group" "administrators_sso_group" {
   identity_store_id = element(local.sso_instance_isid, 0)
 }
 
-resource "aws_organizations_account" "curl" {
+resource "aws_organizations_account" "curl-org" {
   email = "aws-curl@defn.us"
   name  = "curl"
   tags = {
@@ -78,11 +78,11 @@ resource "aws_ssoadmin_account_assignment" "curl_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.curl.id
+  target_id          = aws_organizations_account.curl-org.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "net" {
+resource "aws_organizations_account" "curl-net" {
   email                      = "aws-curl+net@defn.us"
   iam_user_access_to_billing = "ALLOW"
   name                       = "net"
@@ -97,11 +97,11 @@ resource "aws_ssoadmin_account_assignment" "net_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.net.id
+  target_id          = aws_organizations_account.curl-net.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "lib" {
+resource "aws_organizations_account" "curl-lib" {
   email                      = "aws-curl+lib@defn.us"
   iam_user_access_to_billing = "ALLOW"
   name                       = "lib"
@@ -116,11 +116,11 @@ resource "aws_ssoadmin_account_assignment" "lib_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.lib.id
+  target_id          = aws_organizations_account.curl-lib.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "hub" {
+resource "aws_organizations_account" "curl-hub" {
   email                      = "aws-curl+hub@defn.us"
   iam_user_access_to_billing = "ALLOW"
   name                       = "hub"
@@ -135,6 +135,6 @@ resource "aws_ssoadmin_account_assignment" "hub_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.hub.id
+  target_id          = aws_organizations_account.curl-hub.id
   target_type        = "AWS_ACCOUNT"
 }

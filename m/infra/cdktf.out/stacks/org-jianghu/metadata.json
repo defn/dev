@@ -31,27 +31,27 @@
       }
     },
     "aws_organizations_account": {
-      "jianghu": {
+      "jianghu-log": {
         "//": {
           "metadata": {
-            "path": "org-jianghu/jianghu",
-            "uniqueId": "jianghu"
+            "path": "org-jianghu/jianghu-log",
+            "uniqueId": "jianghu-log"
           }
         }
       },
-      "log": {
+      "jianghu-net": {
         "//": {
           "metadata": {
-            "path": "org-jianghu/log",
-            "uniqueId": "log"
+            "path": "org-jianghu/jianghu-net",
+            "uniqueId": "jianghu-net"
           }
         }
       },
-      "net": {
+      "jianghu-org": {
         "//": {
           "metadata": {
-            "path": "org-jianghu/net",
-            "uniqueId": "net"
+            "path": "org-jianghu/jianghu-org",
+            "uniqueId": "jianghu-org"
           }
         }
       }
@@ -75,19 +75,19 @@
           }
         }
       },
-      "log_admin_sso_account_assignment": {
+      "klamath_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "org-jianghu/log_admin_sso_account_assignment",
-            "uniqueId": "log_admin_sso_account_assignment"
+            "path": "org-jianghu/klamath_admin_sso_account_assignment",
+            "uniqueId": "klamath_admin_sso_account_assignment"
           }
         }
       },
-      "net_admin_sso_account_assignment": {
+      "tahoe_admin_sso_account_assignment": {
         "//": {
           "metadata": {
-            "path": "org-jianghu/net_admin_sso_account_assignment",
-            "uniqueId": "net_admin_sso_account_assignment"
+            "path": "org-jianghu/tahoe_admin_sso_account_assignment",
+            "uniqueId": "tahoe_admin_sso_account_assignment"
           }
         }
       }

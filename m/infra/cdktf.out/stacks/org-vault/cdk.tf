@@ -65,7 +65,7 @@ resource "aws_identitystore_group" "administrators_sso_group" {
   identity_store_id = element(local.sso_instance_isid, 0)
 }
 
-resource "aws_organizations_account" "vault" {
+resource "aws_organizations_account" "vault-org" {
   email = "aws-vault@defn.us"
   name  = "vault"
   tags = {
@@ -78,62 +78,62 @@ resource "aws_ssoadmin_account_assignment" "vault_admin_sso_account_assignment" 
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.vault.id
+  target_id          = aws_organizations_account.vault-org.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "net" {
+resource "aws_organizations_account" "vault-net" {
   email = "aws-vault-transit@defn.sh"
-  name  = "net"
+  name  = "transit"
   tags = {
     ManagedBy = "Terraform"
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "net_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "transit_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.net.id
+  target_id          = aws_organizations_account.vault-net.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "log" {
+resource "aws_organizations_account" "vault-log" {
   email = "aws-vault-audit@defn.sh"
-  name  = "log"
+  name  = "audit"
   tags = {
     ManagedBy = "Terraform"
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "log_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "audit_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.log.id
+  target_id          = aws_organizations_account.vault-log.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "lib" {
+resource "aws_organizations_account" "vault-lib" {
   email = "aws-vault-library@defn.sh"
-  name  = "lib"
+  name  = "library"
   tags = {
     ManagedBy = "Terraform"
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "lib_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "library_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.lib.id
+  target_id          = aws_organizations_account.vault-lib.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "ops" {
+resource "aws_organizations_account" "vault-ops" {
   email = "aws-vault-ops@defn.sh"
   name  = "ops"
   tags = {
@@ -146,28 +146,28 @@ resource "aws_ssoadmin_account_assignment" "ops_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.ops.id
+  target_id          = aws_organizations_account.vault-ops.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "ci" {
+resource "aws_organizations_account" "vault-ci" {
   email = "aws-vault-vault0@defn.sh"
-  name  = "ci"
+  name  = "vault0"
   tags = {
     ManagedBy = "Terraform"
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "ci_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "vault0_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.ci.id
+  target_id          = aws_organizations_account.vault-ci.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "hub" {
+resource "aws_organizations_account" "vault-hub" {
   email = "aws-vault-hub@defn.sh"
   name  = "hub"
   tags = {
@@ -180,28 +180,28 @@ resource "aws_ssoadmin_account_assignment" "hub_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.hub.id
+  target_id          = aws_organizations_account.vault-hub.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "cde" {
+resource "aws_organizations_account" "vault-cde" {
   email = "aws-vault-vault1@defn.sh"
-  name  = "cde"
+  name  = "vault1"
   tags = {
     ManagedBy = "Terraform"
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "cde_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "vault1_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.cde.id
+  target_id          = aws_organizations_account.vault-cde.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "dev" {
+resource "aws_organizations_account" "vault-dev" {
   email = "aws-vault-dev@defn.sh"
   name  = "dev"
   tags = {
@@ -214,11 +214,11 @@ resource "aws_ssoadmin_account_assignment" "dev_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.dev.id
+  target_id          = aws_organizations_account.vault-dev.id
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "pub" {
+resource "aws_organizations_account" "vault-pub" {
   email = "aws-vault-pub@defn.sh"
   name  = "pub"
   tags = {
@@ -231,6 +231,6 @@ resource "aws_ssoadmin_account_assignment" "pub_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.pub.id
+  target_id          = aws_organizations_account.vault-pub.id
   target_type        = "AWS_ACCOUNT"
 }

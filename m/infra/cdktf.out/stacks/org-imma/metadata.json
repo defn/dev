@@ -31,22 +31,6 @@
       }
     },
     "aws_organizations_account": {
-      "imma": {
-        "//": {
-          "metadata": {
-            "path": "org-imma/imma",
-            "uniqueId": "imma"
-          }
-        }
-      },
-      "imma-defn": {
-        "//": {
-          "metadata": {
-            "path": "org-imma/imma-defn",
-            "uniqueId": "imma-defn"
-          }
-        }
-      },
       "imma-dev": {
         "//": {
           "metadata": {
@@ -55,27 +39,43 @@
           }
         }
       },
-      "imma-dgwyn": {
+      "imma-lib": {
         "//": {
           "metadata": {
-            "path": "org-imma/imma-dgwyn",
-            "uniqueId": "imma-dgwyn"
+            "path": "org-imma/imma-lib",
+            "uniqueId": "imma-lib"
           }
         }
       },
-      "imma-prod": {
+      "imma-log": {
         "//": {
           "metadata": {
-            "path": "org-imma/imma-prod",
-            "uniqueId": "imma-prod"
+            "path": "org-imma/imma-log",
+            "uniqueId": "imma-log"
           }
         }
       },
-      "imma-tolan": {
+      "imma-net": {
         "//": {
           "metadata": {
-            "path": "org-imma/imma-tolan",
-            "uniqueId": "imma-tolan"
+            "path": "org-imma/imma-net",
+            "uniqueId": "imma-net"
+          }
+        }
+      },
+      "imma-org": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-org",
+            "uniqueId": "imma-org"
+          }
+        }
+      },
+      "imma-pub": {
+        "//": {
+          "metadata": {
+            "path": "org-imma/imma-pub",
+            "uniqueId": "imma-pub"
           }
         }
       }

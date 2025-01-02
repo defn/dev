@@ -31,19 +31,19 @@
       }
     },
     "aws_organizations_account": {
-      "gyre": {
+      "gyre-ops": {
         "//": {
           "metadata": {
-            "path": "org-gyre/gyre",
-            "uniqueId": "gyre"
+            "path": "org-gyre/gyre-ops",
+            "uniqueId": "gyre-ops"
           }
         }
       },
-      "ops": {
+      "gyre-org": {
         "//": {
           "metadata": {
-            "path": "org-gyre/ops",
-            "uniqueId": "ops"
+            "path": "org-gyre/gyre-org",
+            "uniqueId": "gyre-org"
           }
         }
       }

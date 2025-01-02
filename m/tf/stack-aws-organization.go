@@ -154,7 +154,7 @@ func AwsOrganizationStack(scope constructs.Construct, site *infra.AwsProps, org 
 		}
 
 		organizations_account := organizationsaccount.NewOrganizationsAccount(stack,
-			infra.Js(acct.Name),
+			infra.Js(fmt.Sprintf("%s-%s", org.Name, acct.Profile)),
 			&organizations_account_config)
 
 		// Organization accounts grant Administrator permission set to the Administrators group

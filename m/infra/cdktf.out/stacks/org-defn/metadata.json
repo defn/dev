@@ -31,11 +31,11 @@
       }
     },
     "aws_organizations_account": {
-      "defn": {
+      "defn-org": {
         "//": {
           "metadata": {
-            "path": "org-defn/defn",
-            "uniqueId": "defn"
+            "path": "org-defn/defn-org",
+            "uniqueId": "defn-org"
           }
         }
       }

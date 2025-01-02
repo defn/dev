@@ -31,35 +31,35 @@
       }
     },
     "aws_organizations_account": {
-      "coil": {
+      "coil-hub": {
         "//": {
           "metadata": {
-            "path": "org-coil/coil",
-            "uniqueId": "coil"
+            "path": "org-coil/coil-hub",
+            "uniqueId": "coil-hub"
           }
         }
       },
-      "hub": {
+      "coil-lib": {
         "//": {
           "metadata": {
-            "path": "org-coil/hub",
-            "uniqueId": "hub"
+            "path": "org-coil/coil-lib",
+            "uniqueId": "coil-lib"
           }
         }
       },
-      "lib": {
+      "coil-net": {
         "//": {
           "metadata": {
-            "path": "org-coil/lib",
-            "uniqueId": "lib"
+            "path": "org-coil/coil-net",
+            "uniqueId": "coil-net"
           }
         }
       },
-      "net": {
+      "coil-org": {
         "//": {
           "metadata": {
-            "path": "org-coil/net",
-            "uniqueId": "net"
+            "path": "org-coil/coil-org",
+            "uniqueId": "coil-org"
           }
         }
       }
