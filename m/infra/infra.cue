@@ -333,10 +333,9 @@ lookup: {
 			}
 
 			org: {
-				id:     "328216504962"
-				prefix: ""
-				name:   "fogg"
-				email:  "spiral@defn.sh"
+				id:    "328216504962"
+				name:  "fogg"
+				email: "spiral@defn.sh"
 			}
 			net: {
 				t:      "asset"
@@ -782,7 +781,6 @@ lookup: {
 			}
 			ops: {
 				t:        "ops"
-				name:     t
 				id:       "188066400611"
 				email:    "aws-vault-\(t)@defn.sh"
 				imported: "yes"
@@ -796,7 +794,6 @@ lookup: {
 			}
 			hub: {
 				t:        "hub"
-				name:     t
 				id:       "539099112425"
 				email:    "aws-vault-\(t)@defn.sh"
 				imported: "yes"
@@ -810,14 +807,12 @@ lookup: {
 			}
 			dev: {
 				t:        "dev"
-				name:     t
 				id:       "497393606242"
 				email:    "aws-vault-\(t)@defn.sh"
 				imported: "yes"
 			}
 			pub: {
 				t:        "pub"
-				name:     t
 				id:       "851162413429"
 				email:    "aws-vault-\(t)@defn.sh"
 				imported: "yes"
