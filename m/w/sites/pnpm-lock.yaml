@@ -12,6 +12,39 @@ importers:
         specifier: ^2.3.3
         version: 2.3.3
 
+  d3fn.com:
+    dependencies:
+      '@astrojs/cloudflare':
+        specifier: ^12.1.0
+        version: 12.1.0(astro@5.1.1)
+      '@astrojs/sitemap':
+        specifier: ^3.2.1
+        version: 3.2.1
+      '@astrojs/starlight':
+        specifier: ^0.30.3
+        version: 0.30.3(astro@5.1.1)
+      '@astrojs/starlight-tailwind':
+        specifier: ^3.0.0
+        version: 3.0.0(@astrojs/starlight@0.30.3)(@astrojs/tailwind@5.1.4)(tailwindcss@3.4.17)
+      '@astrojs/tailwind':
+        specifier: ^5.1.4
+        version: 5.1.4(astro@5.1.1)(tailwindcss@3.4.17)
+      astro:
+        specifier: ^5.1.1
+        version: 5.1.1(typescript@5.7.2)
+      d3fn.com:
+        specifier: 'link:'
+        version: 'link:'
+      sharp:
+        specifier: ^0.33.5
+        version: 0.33.5
+      tailwindcss:
+        specifier: ^3.4.17
+        version: 3.4.17
+      wrangler:
+        specifier: ^3.99.0
+        version: 3.99.0(@cloudflare/workers-types@4.20241224.0)
+
   defn.app:
     dependencies:
       '@astrojs/cloudflare':
@@ -45,6 +78,39 @@ importers:
         specifier: ^3.99.0
         version: 3.99.0(@cloudflare/workers-types@4.20241224.0)
 
+  defn.blue:
+    dependencies:
+      '@astrojs/cloudflare':
+        specifier: ^12.1.0
+        version: 12.1.0(astro@5.1.1)
+      '@astrojs/sitemap':
+        specifier: ^3.2.1
+        version: 3.2.1
+      '@astrojs/starlight':
+        specifier: ^0.30.3
+        version: 0.30.3(astro@5.1.1)
+      '@astrojs/starlight-tailwind':
+        specifier: ^3.0.0
+        version: 3.0.0(@astrojs/starlight@0.30.3)(@astrojs/tailwind@5.1.4)(tailwindcss@3.4.17)
+      '@astrojs/tailwind':
+        specifier: ^5.1.4
+        version: 5.1.4(astro@5.1.1)(tailwindcss@3.4.17)
+      astro:
+        specifier: ^5.1.1
+        version: 5.1.1(typescript@5.7.2)
+      defn.blue:
+        specifier: 'link:'
+        version: 'link:'
+      sharp:
+        specifier: ^0.33.5
+        version: 0.33.5
+      tailwindcss:
+        specifier: ^3.4.17
+        version: 3.4.17
+      wrangler:
+        specifier: ^3.99.0
+        version: 3.99.0(@cloudflare/workers-types@4.20241224.0)
+
   defn.cloud:
     dependencies:
       '@astrojs/cloudflare':
@@ -66,6 +132,39 @@ importers:
         specifier: ^5.1.1
         version: 5.1.1(typescript@5.7.2)
       defn.cloud:
+        specifier: 'link:'
+        version: 'link:'
+      sharp:
+        specifier: ^0.33.5
+        version: 0.33.5
+      tailwindcss:
+        specifier: ^3.4.17
+        version: 3.4.17
+      wrangler:
+        specifier: ^3.99.0
+        version: 3.99.0(@cloudflare/workers-types@4.20241224.0)
+
+  defn.co:
+    dependencies:
+      '@astrojs/cloudflare':
+        specifier: ^12.1.0
+        version: 12.1.0(astro@5.1.1)
+      '@astrojs/sitemap':
+        specifier: ^3.2.1
+        version: 3.2.1
+      '@astrojs/starlight':
+        specifier: ^0.30.3
+        version: 0.30.3(astro@5.1.1)
+      '@astrojs/starlight-tailwind':
+        specifier: ^3.0.0
+        version: 3.0.0(@astrojs/starlight@0.30.3)(@astrojs/tailwind@5.1.4)(tailwindcss@3.4.17)
+      '@astrojs/tailwind':
+        specifier: ^5.1.4
+        version: 5.1.4(astro@5.1.1)(tailwindcss@3.4.17)
+      astro:
+        specifier: ^5.1.1
+        version: 5.1.1(typescript@5.7.2)
+      defn.co:
         specifier: 'link:'
         version: 'link:'
       sharp:
@@ -198,6 +297,39 @@ importers:
         specifier: ^5.1.1
         version: 5.1.1(typescript@5.7.2)
       defn.org:
+        specifier: 'link:'
+        version: 'link:'
+      sharp:
+        specifier: ^0.33.5
+        version: 0.33.5
+      tailwindcss:
+        specifier: ^3.4.17
+        version: 3.4.17
+      wrangler:
+        specifier: ^3.99.0
+        version: 3.99.0(@cloudflare/workers-types@4.20241224.0)
+
+  defn.red:
+    dependencies:
+      '@astrojs/cloudflare':
+        specifier: ^12.1.0
+        version: 12.1.0(astro@5.1.1)
+      '@astrojs/sitemap':
+        specifier: ^3.2.1
+        version: 3.2.1
+      '@astrojs/starlight':
+        specifier: ^0.30.3
+        version: 0.30.3(astro@5.1.1)
+      '@astrojs/starlight-tailwind':
+        specifier: ^3.0.0
+        version: 3.0.0(@astrojs/starlight@0.30.3)(@astrojs/tailwind@5.1.4)(tailwindcss@3.4.17)
+      '@astrojs/tailwind':
+        specifier: ^5.1.4
+        version: 5.1.4(astro@5.1.1)(tailwindcss@3.4.17)
+      astro:
+        specifier: ^5.1.1
+        version: 5.1.1(typescript@5.7.2)
+      defn.red:
         specifier: 'link:'
         version: 'link:'
       sharp:
