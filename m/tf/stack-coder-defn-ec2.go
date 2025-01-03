@@ -288,7 +288,7 @@ func CoderDefnEc2Stack(scope constructs.Construct, site *infra.AwsProps, name st
 		Icon:      infra.Js("/icon/code.svg"),
 		Share:     infra.Js("owner"),
 		Slug:      infra.Js("cs"),
-		Subdomain: infra.Jsbool(false),
+		Subdomain: infra.Jsbool(true),
 		Url:       infra.Js(fmt.Sprintf("http://localhost:8080/?folder=/home/%s/m", *paramUsername.Value())),
 	})
 

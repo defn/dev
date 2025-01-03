@@ -227,7 +227,7 @@ resource "coder_app" "code-server" {
   icon         = "/icon/code.svg"
   share        = "owner"
   slug         = "cs"
-  subdomain    = false
+  subdomain    = true
   url          = "http://localhost:8080/?folder=/home/${data.coder_parameter.username.value}/m"
   healthcheck {
     interval  = 5
