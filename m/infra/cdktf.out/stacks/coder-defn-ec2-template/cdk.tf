@@ -5,7 +5,7 @@ terraform {
       source  = "aws"
     }
     coder = {
-      version = "0.21.0"
+      version = "2.1.0"
       source  = "coder/coder"
     }
   }
