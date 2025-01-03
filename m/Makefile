@@ -72,7 +72,7 @@ teacher:
 dev_inner:
 	coder server --oauth2-github-allow-signups \
 		--enable-terraform-debug-mode \
-		--oauth2-github-allowed-orgs $(coder_oauth2_github_allowed-orgs) --oauth2-github-allowed-teams $(coder_oauth2_github_allowed_teams) \
+		--oauth2-github-allowed-orgs $(coder_oauth2_github_allowed_orgs) --oauth2-github-allowed-teams $(coder_oauth2_github_allowed_teams) \
 		--oauth2-github-client-id $(coder_oauth2_github_client_id_$(name)) --oauth2-github-client-secret $(coder_oauth2_github_client_secret_$(name)) \
 		--access-url "https://coder.$(name).$(domain)" --wildcard-access-url "*.$(name).$(domain)" \
 		--tls-enable \
