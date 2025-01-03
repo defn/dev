@@ -1,7 +1,0 @@
-# Push workspace template to Coder
-[no-cd]
-push:
-	#!/usr/bin/env bash
-
-	template=$(basename $(pwd))
-	tar -cvh --exclude .terraform . | coder templates push -y -d - ${template}
