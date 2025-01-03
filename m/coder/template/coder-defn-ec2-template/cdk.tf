@@ -31,6 +31,22 @@ data "coder_parameter" "region" {
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
   name         = "region"
   type         = "string"
+  option {
+    name  = "us-west-1"
+    value = "us-west-1"
+  }
+  option {
+    name  = "us-west-2"
+    value = "us-west-2"
+  }
+  option {
+    name  = "us-east-1"
+    value = "us-east-1"
+  }
+  option {
+    name  = "us-east-2"
+    value = "us-east-2"
+  }
 }
 
 data "coder_parameter" "az" {
