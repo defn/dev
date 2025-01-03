@@ -5,7 +5,8 @@
       "stackName": "acc-imma-log",
       "version": "0.20.10"
     },
-    "outputs": {}
+    "outputs": {
+    }
   },
   "module": {
     "imma-log": {

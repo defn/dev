@@ -5,7 +5,8 @@
       "stackName": "acc-vault-net",
       "version": "0.20.10"
     },
-    "outputs": {}
+    "outputs": {
+    }
   },
   "module": {
     "vault-net": {

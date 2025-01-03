@@ -5,7 +5,8 @@
       "stackName": "acc-fogg-ci",
       "version": "0.20.10"
     },
-    "outputs": {}
+    "outputs": {
+    }
   },
   "module": {
     "fogg-ci": {
