@@ -107,14 +107,17 @@ data "coder_parameter" "tsauthkey" {
 data "coder_workspace" "me" {
 }
 
+data "coder_workspace_owner" "me" {
+}
+
 resource "coder_agent" "main" {
   arch = "amd64"
   auth = "aws-instance-identity"
   env = {
-    GIT_AUTHOR_EMAIL    = "${data.coder_workspace.me.owner_email}"
-    GIT_AUTHOR_NAME     = "${data.coder_workspace.me.owner}"
-    GIT_COMMITTER_EMAIL = "${data.coder_workspace.me.owner_email}"
-    GIT_COMMITTER_NAME  = "${data.coder_workspace.me.owner}"
+    GIT_AUTHOR_EMAIL    = "${data.coder_workspace_owner.me.email}"
+    GIT_AUTHOR_NAME     = "${data.coder_workspace_owner.me.name}"
+    GIT_COMMITTER_EMAIL = "${data.coder_workspace_owner.me.email}"
+    GIT_COMMITTER_NAME  = "${data.coder_workspace_owner.me.name}"
     LC_ALL              = "C.UTF-8"
     LOCAL_ARCHIVE       = "/usr/lib/locale/locale-archive"
   }
@@ -151,7 +154,7 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_iam_role" "dev" {
   assume_role_policy = jsonencode({ "Statement" = [{ "Action" = "sts:AssumeRole", "Effect" = "Allow", "Principal" = { "Service" = "ec2.amazonaws.com" }, "Sid" = "" }], "Version" = "2012-10-17" })
-  name               = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+  name               = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
 }
 
 resource "aws_iam_role_policy_attachment" "admin" {
@@ -170,7 +173,7 @@ resource "aws_iam_role_policy_attachment" "ssm" {
 }
 
 resource "aws_security_group" "dev_security_group" {
-  description = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+  description = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
   egress {
     cidr_blocks = [
       "0.0.0.0/0"
@@ -214,7 +217,7 @@ resource "aws_security_group" "dev_security_group" {
     self            = null
     to_port         = 41641
   }
-  name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+  name = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
   tags = {
     "karpenter.sh/discovery" = "k3d-dfd"
   }
@@ -243,28 +246,23 @@ provider "aws" {
 provider "coder" {
 }
 
-module "coder_login" {
-  agent_id = coder_agent.main.id
-  source   = "https://registry.coder.com/modules/coder-login"
-}
-
 module "dev_oidc_cdn" {
   attributes = [
     "oidc",
   ]
   deployment_principal_arns = {
-    "arn:aws:iam::510430971399:role/coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}" = [
+    "arn:aws:iam::510430971399:role/coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}" = [
       "/openid",
     ]
   }
-  name                 = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+  name                 = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
   origin_force_destroy = true
   versioning_enabled   = false
   source               = "./mod/terraform-aws-cloudfront-s3-cdn"
 }
 
 resource "aws_iam_instance_profile" "dev_instance_profile" {
-  name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+  name = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
   role = aws_iam_role.dev.name
 }
 
@@ -277,7 +275,7 @@ resource "aws_instance" "dev_ec2_instance" {
   monitoring           = false
   tags = {
     Coder_Provisioned = "true"
-    Name              = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+    Name              = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
   }
   user_data = <<EOF
 Content-type: multipart/mixed; boundary="//"
@@ -290,7 +288,7 @@ Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment; filename="cloud-config.txt"
 
 #cloud-config
-hostname: coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}
+hostname: coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}
 cloud_final_modules:
 - [scripts-user, always]
 
@@ -323,7 +321,7 @@ if ! tailscale ip -4 | grep ^100; then
   sudo tailscale up --accept-dns --accept-routes --authkey="${data.coder_parameter.tsauthkey.value}" --operator=ubuntu --ssh --timeout 60s
 fi
 
-nohup sudo -H -E -u ${data.coder_parameter.username.value} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${data.coder_workspace.me.access_url} coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}' >>/tmp/user-data.log 2>&1 &
+nohup sudo -H -E -u ${data.coder_parameter.username.value} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${data.coder_workspace.me.access_url} coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}' >>/tmp/user-data.log 2>&1 &
 disown
 --//--
 
