@@ -1,3 +1,5 @@
 python -mvenv venv
 source venv/bin/activate
 pip install certbot certbot-dns-cloudflare
+cp cloudflare.ini.example cloudflare.init
+certbot certonly --dns-cloudflare --dns-cloudflare-credentials cloudflare.ini -d '*.kowloon.defn.run' --config-dir . --work-dir . --logs-dir .

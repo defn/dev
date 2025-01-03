@@ -1,2 +1,7 @@
 cloudflare.ini
 venv
+accounts/
+archive/
+letsencrypt.log*
+live/
+renewal/
