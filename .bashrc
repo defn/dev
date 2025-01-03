@@ -154,6 +154,11 @@ function alogin {
 	(
 		if [[ -n "${1:-}" ]]; then
 			aprofile "$1"
+			shift
+		fi
+		if [[ -n "${1:-}" ]]; then
+			aregion "$1"
+			shift
 		fi
 
 		local aws_url="$(aws-vault login ${AWS_PROFILE}-sso-source -s | sed 's#://#://us-east-1.#')"
