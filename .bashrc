@@ -150,6 +150,18 @@ function vi {
 	fi
 }
 
+function alogin {
+	(
+		if [[ -n "${1:-}" ]]; then
+			aprofile "$1"
+		fi
+
+		local aws_url="$(aws-vault login ${AWS_PROFILE}-sso-source -s | sed 's#://#://us-east-1.#')"
+		local encoded_url=$(printf "%s" "$aws_url" | python -c 'import sys; from urllib.parse import quote_plus; print(quote_plus(sys.stdin.read().strip()))')
+		open "https://signin.aws.amazon.com/oauth?Action=logout&redirect_uri=${encoded_url}"
+	)
+}
+
 function aprofile {
 	unset AWS_DEFAULT_REGION
 	unset AWS_REGION
