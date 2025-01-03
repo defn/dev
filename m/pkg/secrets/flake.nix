@@ -15,7 +15,6 @@
     defaultPackage = ctx: ctx.wrap.nullBuilder {
       propagatedBuildInputs = with ctx.pkgs; [
         (packages ctx).pass
-        gnupg
         pinentry
         aws-vault
       ];
