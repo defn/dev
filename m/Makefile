@@ -76,7 +76,8 @@ dev_inner:
 		--oauth2-github-client-id $(coder_oauth2_github_client_id_$(name)) --oauth2-github-client-secret $(coder_oauth2_github_client_secret_$(name)) \
 		--access-url "https://coder.$(name).$(domain)" --wildcard-access-url "*.$(name).$(domain)" \
 		--tls-enable \
-		--tls-cert-file ~/.acme.sh/\*.$(name).$(domain)_ecc/fullchain.cer --tls-key-file ~/.acme.sh/\*.$(name).$(domain)_ecc/\*.$(name).$(domain).key \
+		--tls-cert-file ~/m/coder/live/$(name).$(domain)/fullchain.pem \
+		--tls-key-file ~/m/coder/live/$(name).$(domain)/privkey.pem \
 		--tls-address $(listen)
 
 cdktf:
