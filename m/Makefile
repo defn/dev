@@ -66,15 +66,14 @@ class-init:
 	coder login https://coder.$(env).$(GIT_AUTHOR_NAME).$(domain) --first-user-username="admin" --first-user-email="iam+admin@defn.sh" --first-user-password="Admin123456789,,," --first-user-trial=false
 
 teacher: 
-	$(MAKE) hello
 	pkill postgres || true
-	env AWS_DEFAULT_REGION=us-west-1 j aws::server defn-org $(MAKE) dev_inner name=$(name)
+	$(MAKE) dev_inner name=$(name)
 
 dev_inner:
 	coder server --oauth2-github-allow-signups \
 		--enable-terraform-debug-mode \
-		--oauth2-github-allowed-orgs $$(pass coder_oauth2-github-allowed-orgs) --oauth2-github-allowed-teams $$(pass coder_oauth2-github-allowed-teams) \
-		--oauth2-github-client-id $$(pass coder_oauth2-github-client-id-$(name)) --oauth2-github-client-secret $$(pass coder_oauth2-github-client-secret-$(name)) \
+		--oauth2-github-allowed-orgs $(coder_oauth2_github_allowed-orgs) --oauth2-github-allowed-teams $(coder_oauth2_github_allowed_teams) \
+		--oauth2-github-client-id $(coder_oauth2_github_client_id_$(name)) --oauth2-github-client-secret $(coder_oauth2_github_client_secret_$(name)) \
 		--access-url "https://coder.$(name).$(domain)" --wildcard-access-url "*.$(name).$(domain)" \
 		--tls-enable \
 		--tls-cert-file ~/.acme.sh/\*.$(name).$(domain)_ecc/fullchain.cer --tls-key-file ~/.acme.sh/\*.$(name).$(domain)_ecc/\*.$(name).$(domain).key \

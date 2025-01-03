@@ -1,0 +1,3 @@
+python -mvenv venv
+source venv/bin/activate
+pip install certbot certbot-dns-cloudflare
