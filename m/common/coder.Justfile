@@ -190,6 +190,8 @@ code-server *host:
 	export STARSHIP_NO=
 	source ~/.bash_profile
 
+	env | sort >> /tmp/env
+
 	while true; do 
 		case "$(uname -s)" in
 			Linux)
