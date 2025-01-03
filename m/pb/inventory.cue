@@ -29,6 +29,7 @@ inventory: {
 
 	aws: hosts: [
 		"kowloon",
+		"coder-amanibhavam-dev",
 	]
 
 	cloud: children: [
