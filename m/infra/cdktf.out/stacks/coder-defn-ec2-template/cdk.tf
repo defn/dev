@@ -125,6 +125,11 @@ resource "coder_agent" "main" {
     vscode          = false
     vscode_insiders = false
   }
+
+  env {
+    name  = "VSCODE_PROXY_URI"
+    value = "https://{{port}}--${data.coder_workspace.me.name}--${data.coder_workspace.me.owner}.${replace(data.coder_workspace.me.url, "https://coder.", "")}"
+  }
 }
 
 resource "aws_default_vpc" "default" {
