@@ -66,6 +66,14 @@ data "coder_parameter" "instance_type" {
     name  = "16"
     value = "m6id.4xlarge"
   }
+  option {
+    name  = "4gpu"
+    value = "g4dn.xlarge"
+  }
+  option {
+    name  = "8gpu"
+    value = "g4dn.2xlarge"
+  }
 }
 
 data "coder_parameter" "nix_volume_size" {
