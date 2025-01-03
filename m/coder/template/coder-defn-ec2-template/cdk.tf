@@ -25,7 +25,7 @@ data "coder_parameter" "username" {
 }
 
 data "coder_parameter" "region" {
-  default      = "us-east-2"
+  default      = "us-west-2"
   description  = "Cloud region"
   display_name = "Cloud region"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
