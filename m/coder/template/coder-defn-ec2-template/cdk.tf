@@ -17,7 +17,7 @@ terraform {
 
 data "coder_parameter" "username" {
   default      = "ubuntu"
-  description  = "Linux accoount name"
+  description  = "Linux account name"
   display_name = "Username"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
   name         = "username"
@@ -57,6 +57,16 @@ data "coder_parameter" "az" {
   name         = "az"
   type         = "string"
 }
+
+data "coder_parameter" "spot" {
+  default      = "true"
+  description  = "Spot instance"
+  display_name = "Spot instance"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  name         = "spot"
+  type         = "bool"
+}
+
 
 data "coder_parameter" "instance_type" {
   default      = "m6id.large"
@@ -297,12 +307,16 @@ resource "aws_instance" "dev_ec2_instance" {
   iam_instance_profile = aws_iam_instance_profile.dev_instance_profile.name
   instance_type        = data.coder_parameter.instance_type.value
   monitoring           = false
-  instance_market_options {
-    market_type = "spot"
 
-    spot_options {
-      spot_instance_type           = "persistent"
-      instance_interruption_behavior = "stop"
+  dynamic "instance_market_options" {
+    for_each = data.coder_parameter.spot.value ? [1] : []
+    content {
+      market_type = "spot"
+
+      spot_options {
+        spot_instance_type           = "persistent"
+        instance_interruption_behavior = "stop"
+      }
     }
   }
   tags = {
