@@ -12,7 +12,6 @@ variable "scripts" {
   default = [
     "script/001-install-base",
     "script/800-defn-dev",
-    "script/999-defn-dev",
   ]
 }
 
