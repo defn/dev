@@ -17,14 +17,12 @@ function main {
 		zfs_disk=nvme0n1
 	fi
 
-	sudo systemctl stop docker || true
-
 	sudo zpool create nix "/dev/${zfs_disk}"
 	sudo zfs set mountpoint=/nix nix
 	sudo zfs set atime=off nix
 	sudo zfs set compression=on nix
 
-	cat /zfs/nix.zfs | pigz -d | sudo zfd receive -F nix
+	cat /zfs/nix.zfs | pigz -d | sudo zfs receive -F nix
 
 	sudo zfs create nix/work
 	sudo zfs set mountpoint=/home/ubuntu/work nix/work
@@ -39,13 +37,7 @@ function main {
 	sudo zfs set atime=off nix/docker
 	sudo zfs set compression=on nix/docker
 
-	while true; do
-		if sudo systemctl start docker; then
-			echo Docker running
-			break
-		fi
-		sleep 10
-	done
+	sudo apt install docker.io
 
 	cd
 	source .bash_profile
