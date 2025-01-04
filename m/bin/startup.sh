@@ -8,40 +8,36 @@ function main {
 	sudo install -d -m 1777 -o ubuntu -g ubuntu /tmp/uscreens
 
 	local root_disk
-	local mnt_disk
+	local zfs_disk
 	if [[ "$(lsblk /dev/nvme0n1p1 | tail -1 | awk '{print $NF}')" == "/" ]]; then
 		root_disk=nvme0n1
-		mnt_disk=nvme1n1
+		zfs_disk=nvme1n1
 	else
 		root_disk=nvme1n1
-		mnt_disk=nvme0n1
-	fi
-
-	if sudo growpart /dev/${root_disk} 1; then
-		sudo resize2fs /dev/${root_disk}p1 || true
-	fi
-
-	# mount ephemeral storage
-	if [[ "$(lsblk /dev/${mnt_disk} -no fstype)" != "ext4" ]]; then
-		yes | sudo mkfs.ext4 /dev/${mnt_disk}
+		zfs_disk=nvme0n1
 	fi
 
 	sudo systemctl stop docker || true
 
-	sudo install -d -m 0700 -o ubuntu -g ubuntu /mnt
-	if [[ "$(df /mnt | tail -1 | awk '{print $NF}')" == / ]]; then
-		echo "/dev/${mnt_disk} /mnt ext4 defaults,nofail 0 2" | sudo tee -a /etc/fstab
-		sudo mount /mnt || true
-	fi
+	sudo zpool create nix "/dev/${zfs_disk}"
+	sudo zfs set mountpoint=/nix nix
+	sudo zfs set atime=off nix
+	sudo zfs set compression=on nix
 
-	(
-		set +f
-		sudo chown ubuntu:ubuntu /mnt/* || true
-	)
-	sudo install -d -m 0710 -o root -g root /mnt/docker
+	cat /zfs/nix.zfs | pigz -d | sudo zfd receive -F nix
+
+	sudo zfs create nix/work
+	sudo zfs set mountpoint=/home/ubuntu/work nix/work
+	sudo zfs set atime=off nix/work
+	sudo zfs set compression=on nix/work
+
+	cat /zfs/work.zfs | pigz -d | sudo zfd receive -F nix/work
+
 	sudo rm -rf /var/lib/docker
-	sudo mkdir -p /mnt/docker
-	sudo ln -nfs /mnt/docker /var/lib/docker
+	sudo zfs create nix/docker
+	sudo zfs set mountpoint=/var/lib/docker nix/docker
+	sudo zfs set atime=off nix/docker
+	sudo zfs set compression=on nix/docker
 
 	while true; do
 		if sudo systemctl start docker; then
@@ -50,11 +46,14 @@ function main {
 		fi
 		sleep 10
 	done
+
+	cd
+	source .bash_profile
+	bin/persist-cache
+
+	cd m
+	nohup bin/user-data.sh ${1} ${2} >>/tmp/user-data.log 2>&1 &
+	disown
 }
 
 time main "$@"
-uptime
-
-cd
-source .bash_profile
-bin/persist-cache

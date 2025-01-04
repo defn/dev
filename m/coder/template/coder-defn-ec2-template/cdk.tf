@@ -102,14 +102,10 @@ data "coder_parameter" "instance_type" {
     name  = "4gpu"
     value = "g4dn.xlarge"
   }
-  option {
-    name  = "8gpu"
-    value = "g4dn.2xlarge"
-  }
 }
 
 data "coder_parameter" "nix_volume_size" {
-  default      = "100"
+  default      = "25"
   description  = "The size of the nix volume to create for the workspace in GB"
   display_name = "nix volume size"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
@@ -118,7 +114,7 @@ data "coder_parameter" "nix_volume_size" {
   type         = "number"
   validation {
     max = 300
-    min = 100
+    min = 25
   }
 }
 
@@ -161,7 +157,7 @@ resource "coder_agent" "main" {
     LOCAL_ARCHIVE       = "/usr/lib/locale/locale-archive"
   }
   os             = "linux"
-  startup_script = "cd ~/m && bin/startup.sh"
+  startup_script = "cd ~/m && bin/startup.sh ${data.coder_workspace.me.access_url} coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
   display_apps {
     ssh_helper      = false
     vscode          = false
@@ -257,9 +253,6 @@ resource "aws_security_group" "dev_security_group" {
     to_port         = 41641
   }
   name = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
-  tags = {
-    "karpenter.sh/discovery" = "k3d-dfd"
-  }
   vpc_id = aws_default_vpc.default.id
 }
 
@@ -378,9 +371,6 @@ done
 if ! tailscale ip -4 | grep ^100; then
   sudo tailscale up --accept-dns --accept-routes --authkey="${data.coder_parameter.tsauthkey.value}" --operator=ubuntu --ssh --timeout 60s
 fi
-
-nohup sudo -H -E -u ${data.coder_parameter.username.value} bash -c 'cd && (git pull || true) && cd m && exec bin/user-data.sh ${data.coder_workspace.me.access_url} coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}' >>/tmp/user-data.log 2>&1 &
-disown
 --//--
 
 EOF

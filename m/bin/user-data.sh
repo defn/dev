@@ -6,7 +6,6 @@ export CODER_AGENT_URL="$1"
 shift
 
 export DFD_WORKSPACE_NAME="$1"
-
 export CODER_NAME="$1"
 shift
 

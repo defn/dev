@@ -190,7 +190,7 @@ code-server *host:
 	export STARSHIP_NO=
 	source ~/.bash_profile
 
-	export VSCODE_PROXY_URI="https://{{{{port}}--main--${CODER_NAME##*-}--$(echo $CODER_NAME | cut -d- -f2).${CODER_AGENT_URL#https://coder.}/"
+	#export VSCODE_PROXY_URI="https://{{{{port}}--main--${CODER_NAME##*-}--$(echo $CODER_NAME | cut -d- -f2).${CODER_AGENT_URL#https://coder.}/"
 
 	while true; do 
 		case "$(uname -s)" in
