@@ -17,8 +17,18 @@ function main {
 			df -klh / | grep /dev/ | awk '{print $1}' | sed 's#p1$##' | cut -d/ -f3
 			lsblk | grep ^nvme | awk '{print $1}'
 		) | sort | uniq -c | grep ' 1 ' | awk '{print $2}')"
-		sudo zpool create -m /nix -O compression=on nix "$ssd"
+
+		sudo zpool create nix "$ssd"
+		sudo zfs set mountpoint=/nix nix
 		sudo zfs set atime=off nix
+		sudo zfs set compression=on nix
+		sudo chown ubuntu:ubuntu /nix
+
+		sudo zfs create nix/work
+		sudo zfs set mountpoint=/home/ubuntu/work nix/work
+		sudo zfs set atime=off nix/work
+		sudo zfs set compression=off nix/work
+		sudo chown ubuntu:ubuntu /home/ubuntu/work
 
 		set +xu
 		source .bash_profile
@@ -30,7 +40,9 @@ function main {
 		make install
 
 		sudo zfs snapshot nix@install
+		sudo zfs snapshot nix/work@install
 		sudo zfs send nix@install | pv >/nix.zfs
+		sudo zfs send nix/work@install | pv >/work.zfs
 
 		exit $?
 	fi
