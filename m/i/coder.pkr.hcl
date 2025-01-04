@@ -46,13 +46,11 @@ source "amazon-ebs" "this" {
   run_tags = {
     Name                     = "Packer"
     ManagedBy                = "Packer"
-    "karpenter.sh/discovery" = "k3d-dfd"
   }
 
   run_volume_tags = {
     Name                     = "Packer"
     ManagedBy                = "Packer"
-    "karpenter.sh/discovery" = "k3d-dfd"
   }
 
   snapshot_tags = {

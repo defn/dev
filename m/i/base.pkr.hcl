@@ -20,7 +20,7 @@ locals {
   timestamp = regex_replace(timestamp(), "[- TZ:]", "")
   name      = "coder"
   owner     = "099720109477"
-  ami       = "ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"
+  ami       = "ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-*"
 }
 
 source "amazon-ebs" "this" {

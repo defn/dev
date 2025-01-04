@@ -6,7 +6,19 @@ function main {
 
 	if [[ "$(whoami || true)" == "ubuntu" ]]; then
 		cd
-		git pull
+		git fetch origin
+		git reset --hard origin/main
+
+		sudo apt update
+		sudo apt install -y make
+		make vpn-install
+
+		local ssd="/dev/$( (
+			df -klh / | grep /dev/ | awk '{print $1}' | sed 's#p1$##' | cut -d/ -f3
+			lsblk | grep ^nvme | awk '{print $1}'
+		) | sort | uniq -c | grep ' 1 ' | awk '{print $2}')"
+		sudo zpool create -m /nix -O compression=on nix "$ssd"
+		sudo zfs set atime=off nix
 
 		set +xu
 		source .bash_profile
@@ -16,10 +28,9 @@ function main {
 		git config --global user.name "Your Name"
 		touch m/.bazelrc.user
 		make install
-		git checkout .
 
-		make play
-		make upgrade
+		sudo zfs snapshot nix@install
+		sudo zfs send nix@install | pv >/nix.zfs
 
 		exit $?
 	fi

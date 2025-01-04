@@ -16,9 +16,6 @@ function main {
 		rm -rf dev
 		git reset --hard
 
-		sudo apt install -y pipx
-		make play
-
 		exit $?
 	fi
 
@@ -26,7 +23,6 @@ function main {
 
 	apt update || true
 	apt update
-	apt install -y git make curl
 
 	if test -f /tmp/tailscale-install.sh; then
 		bash -x /tmp/tailscale-install.sh
@@ -36,7 +32,7 @@ function main {
 	rm -rf /var/lib/tailscale
 
 	sudo install -d -m 0755 /etc/docker
-	echo '{ "insecure-registries" : ["169.254.32.1:4999", "cache.defn.run:4999", "coder-amanibhavam-district.tail3884f.ts.net:5000", "district.tail3884f.ts.net:5000"] }' | sudo tee /etc/docker/daemon.json
+	echo '{ "insecure-registries" : ["169.254.32.1:4999"] }' | sudo tee /etc/docker/daemon.json
 
 	(
 		echo net.ipv4.ip_forward=1
