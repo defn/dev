@@ -348,25 +348,11 @@ set -x
 
 export CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)}
 
-export GIT_AUTHOR_EMAIL    = "${data.coder_workspace_owner.me.email}"
-export GIT_AUTHOR_NAME     = "${data.coder_workspace_owner.me.name}"
-export GIT_COMMITTER_EMAIL = "${data.coder_workspace_owner.me.email}"
-export GIT_COMMITTER_NAME  = "${data.coder_workspace_owner.me.name}"
-export LC_ALL              = "C.UTF-8"
-export LOCAL_ARCHIVE       = "/usr/lib/locale/locale-archive"
-
 echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf
 echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf
 echo 'fs.inotify.max_user_instances = 10000' | sudo tee -a /etc/sysctl.d/99-dfd.conf
 echo 'fs.inotify.max_user_watches = 524288' | sudo tee -a /etc/sysctl.d/99-dfd.conf
 sudo sysctl -p /etc/sysctl.d/99-dfd.conf
-
-while true; do
-  if test -n "$(dig +short "cache.nixos.org" || true)"; then
-    break
-  fi
-  sleep 5
-done
 
 if ! tailscale ip -4 | grep ^100; then
   sudo tailscale up --accept-dns --accept-routes --authkey="${data.coder_parameter.tsauthkey.value}" --operator=ubuntu --ssh --timeout 60s
