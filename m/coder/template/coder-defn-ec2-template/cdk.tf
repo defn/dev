@@ -297,6 +297,14 @@ resource "aws_instance" "dev_ec2_instance" {
   iam_instance_profile = aws_iam_instance_profile.dev_instance_profile.name
   instance_type        = data.coder_parameter.instance_type.value
   monitoring           = false
+  instance_market_options {
+    market_type = "spot"
+
+    spot_options {
+      spot_instance_type           = "persistent"
+      instance_interruption_behavior = "stop"
+    }
+  }
   tags = {
     Coder_Provisioned = "true"
     Name              = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
