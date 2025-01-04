@@ -157,7 +157,7 @@ resource "coder_agent" "main" {
     LOCAL_ARCHIVE       = "/usr/lib/locale/locale-archive"
   }
   os             = "linux"
-  startup_script = "cd ~/m && bin/startup.sh ${data.coder_workspace.me.access_url} coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
+  startup_script = "cd && ssh -o StrictHostKeyChecking=no git@github.com true || true && git fetch origin && git reset --hard origin/main && cd ~/m && bin/startup.sh ${data.coder_workspace.me.access_url} coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
   display_apps {
     ssh_helper      = false
     vscode          = false
@@ -374,6 +374,7 @@ fi
 --//--
 
 EOF
+
   vpc_security_group_ids = [
     "${aws_security_group.dev_security_group.id}"
   ]
