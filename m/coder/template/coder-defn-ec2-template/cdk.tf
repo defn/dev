@@ -59,14 +59,20 @@ data "coder_parameter" "az" {
 }
 
 data "coder_parameter" "spot" {
-  default      = "true"
   description  = "Spot instance"
   display_name = "Spot instance"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
   name         = "spot"
-  type         = "bool"
+  type         = "string"
+  option {
+    name  = "yes"
+    value = "yes"
+  }
+  option {
+    name  = "no"
+    value = "no"
+  }
 }
-
 
 data "coder_parameter" "instance_type" {
   default      = "m6id.large"
@@ -129,7 +135,6 @@ data "coder_parameter" "provider" {
 }
 
 data "coder_parameter" "tsauthkey" {
-  default      = "TODO"
   description  = "Tailscale node authorization key"
   display_name = "Tailscale auth key"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
@@ -309,7 +314,7 @@ resource "aws_instance" "dev_ec2_instance" {
   monitoring           = false
 
   dynamic "instance_market_options" {
-    for_each = data.coder_parameter.spot.value ? [1] : []
+    for_each = data.coder_parameter.spot.value == "yes" ? [1] : []
     content {
       market_type = "spot"
 
