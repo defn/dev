@@ -413,8 +413,20 @@ resource "coder_metadata" "dev_metadata" {
     value = aws_instance.dev_ec2_instance.instance_type
   }
   item {
+    key   = "spot"
+    value = data.coder_parameter.spot.value
+  }
+  item {
     key   = "disk"
     value = aws_instance.dev_ec2_instance.root_block_device[0].volume_size
+  }
+  item {
+    key   = "region"
+    value = data.coder_parameter.region.value
+  }
+  item {
+    key   = "az"
+    value = data.coder_parameter.az.value
   }
   count = (data.coder_parameter.provider.value == "aws-ec2") ? 1 : 0
 }
