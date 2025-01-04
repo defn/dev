@@ -50,6 +50,8 @@ function main {
 		sudo install -d -o ubuntu -g ubuntu /zfs
 		sudo zfs send nix@install | pigz >/zfs/nix.zfs
 		sudo zfs send wnix/work@install | pigz >/zfs/work.zfs
+
+		find /zfs -ls
 	else
 		apt update || true
 		apt update
