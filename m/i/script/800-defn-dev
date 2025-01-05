@@ -23,7 +23,7 @@ function main {
 		git reset --hard
 
 		make vpn-install
-		sudo apt install docker.io
+		sudo apt install -y docker.io
 		sudo usermod -aG docker ubuntu
 
 		sudo zpool create nix "$ssd"
