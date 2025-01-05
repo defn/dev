@@ -157,7 +157,7 @@ resource "coder_agent" "main" {
     LOCAL_ARCHIVE       = "/usr/lib/locale/locale-archive"
   }
   os             = "linux"
-  startup_script = "cd && ssh -o StrictHostKeyChecking=no git@github.com true || true && git fetch origin && git reset --hard origin/main && cd ~/m && bin/startup.sh ${data.coder_workspace.me.access_url} coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
+  startup_script = "exec >>/tmp/coder-agent.log; exec 2>&1; cd && ssh -o StrictHostKeyChecking=no git@github.com true || true && git fetch origin && git reset --hard origin/main && cd ~/m && bin/startup.sh ${data.coder_workspace.me.access_url} coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
   display_apps {
     ssh_helper      = false
     vscode          = false
@@ -346,7 +346,10 @@ Content-Disposition: attachment; filename="userdata.txt"
 
 set -x
 
+nohup cat /zfs/nix.zfs >/dev/null &
+
 export CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)}
+echo $CODER_INIT_SCRIPT_BASE64 > /tmp/coder-agent.sh
 
 echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf
 echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf

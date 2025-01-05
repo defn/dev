@@ -34,7 +34,7 @@ function main {
 	sudo zfs set atime=off nix/docker
 	sudo zfs set compression=on nix/docker
 
-	sudo apt install docker.io
+	sudo apt install -y docker.io
 
 	cd
 	source .bash_profile
