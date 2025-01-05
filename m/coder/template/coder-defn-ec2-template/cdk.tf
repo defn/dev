@@ -362,7 +362,6 @@ fi
 export CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)}
 export CODER_AGENT_URL="${data.coder_workspace.me.access_url}"
 export CODER_NAME="coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
-export CODER_HOMEDIR=${data.coder_parameter.homedir.value}
 
 nohup sudo -H -E -u ${data.coder_parameter.username.value} bash -c 'cd && source .bash_profile && cd m && exec just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
 disown

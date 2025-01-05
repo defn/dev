@@ -170,8 +170,12 @@ coder-agent *host:
 	esac
 
 	export STARSHIP_NO=1 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
+
+	cd
+	set +x
 	source ~/.bash_profile
-	cd ${CODER_HOMEDIR}
+	set -x
+	cd ~/m
 	echo ${CODER_INIT_SCRIPT_BASE64} | base64 -d \
 		| sed 's#agent$#agent '"${CODER_NAME}"'#; s#^while.*#while ! test -x ${BINARY_NAME}; do#; s#^BINARY_NAME.*#BINARY_NAME='"$HOME"'/bin/nix/coder#; s#exec ./#exec #; s#exit 1#echo exit 1#; s#output=$(./#output=$(#' \
 		> /tmp/coder-init-script-${CODER_NAME}-$$
