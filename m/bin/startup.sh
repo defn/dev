@@ -29,9 +29,6 @@ function main {
 	sudo zfs set atime=off nix/work
 	sudo zfs set compression=on nix/work
 
-	cat /zfs/work.zfs | pigz -d | sudo zfd receive -F nix/work
-
-	sudo rm -rf /var/lib/docker
 	sudo zfs create nix/docker
 	sudo zfs set mountpoint=/var/lib/docker nix/docker
 	sudo zfs set atime=off nix/docker
