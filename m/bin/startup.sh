@@ -29,12 +29,12 @@ function main {
 	sudo zfs set atime=off nix/work
 	sudo zfs set compression=on nix/work
 
+	sudo systemctl stop docker || true
 	sudo zfs create nix/docker
 	sudo zfs set mountpoint=/var/lib/docker nix/docker
 	sudo zfs set atime=off nix/docker
 	sudo zfs set compression=on nix/docker
-
-	sudo apt install -y docker.io
+	sudo systemctl start docker || true
 
 	cd
 	source .bash_profile

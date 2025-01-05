@@ -347,6 +347,7 @@ Content-Disposition: attachment; filename="userdata.txt"
 set -x
 
 nohup cat /zfs/nix.zfs >/dev/null &
+nohup cat /zfs/work.zfs >/dev/null &
 
 export CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)}
 echo $CODER_INIT_SCRIPT_BASE64 > /tmp/coder-agent.sh

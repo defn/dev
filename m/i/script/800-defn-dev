@@ -23,6 +23,8 @@ function main {
 		git reset --hard
 
 		make vpn-install
+		sudo apt install docker.io
+		sudo usermod -aG docker ubuntu
 
 		sudo zpool create nix "$ssd"
 		sudo zfs set mountpoint=/nix nix
@@ -49,7 +51,7 @@ function main {
 		sudo zfs snapshot nix/work@install
 		sudo install -d -o ubuntu -g ubuntu /zfs
 		sudo zfs send nix@install | pigz >/zfs/nix.zfs
-		sudo zfs send wnix/work@install | pigz >/zfs/work.zfs
+		sudo zfs send nix/work@install | pigz >/zfs/work.zfs
 
 		find /zfs -ls
 	else
