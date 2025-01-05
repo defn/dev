@@ -17,6 +17,7 @@ export coder_oauth2_github_allowed_orgs=defn
 export coder_oauth2_github_allowed_teams=defn/dev
 export coder_oauth2_github_client_id_${name}=
 export coder_oauth2_github_client_secret_${name}=
+export CODER_SERVER=${name}
 
 create cloudflare tunnel to handle *.${name}.defn.run
 https://one.dash.cloudflare.com/b79aab534a3aa420f993ca0c14fe0523/networks/tunnels/new
