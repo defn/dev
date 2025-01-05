@@ -43,6 +43,7 @@ vpn-install:
 	sudo apt install -y socat pcscd scdaemon gpg gpg-agent wireguard-tools qemu-system libvirt-clients libvirt-daemon-system openvpn easy-rsa expect tpm2-tools
 	sudo apt install -y curl xz-utils git-lfs pv
 	sudo apt install -y zfsutils-linux ubuntu-drivers-common
+	sudo apt install -y build-essential
 
 no-gpg:
 	systemctl --user enable gpg-agent-browser.socket --now || true
