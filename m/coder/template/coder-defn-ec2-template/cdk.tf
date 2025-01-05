@@ -15,6 +15,16 @@ terraform {
 
 }
 
+data "coder_parameter" "homedir" {
+  default      = "/home/ubuntu/m"
+  description  = "home directory"
+  display_name = "HOME dir"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  mutable      = true
+  name         = "homedir"
+  type         = "string"
+}
+
 data "coder_parameter" "username" {
   default      = "ubuntu"
   description  = "Linux account name"
@@ -272,7 +282,7 @@ resource "coder_app" "code-server" {
   share        = "owner"
   slug         = "cs"
   subdomain    = true
-  url          = "http://localhost:8080/?folder=/home/${data.coder_parameter.username.value}/m"
+  url          = "http://localhost:8080/?folder=${data.coder_parameter.homedir.value}"
   healthcheck {
     interval  = 5
     threshold = 6

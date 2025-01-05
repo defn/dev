@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     coder = {
-      version = "0.21.0"
+      version = "2.1.0"
       source  = "coder/coder"
     }
     null = {
@@ -75,16 +75,18 @@ resource "coder_agent" "main" {
   arch = data.coder_parameter.arch.value
   auth = "token"
   env = {
-    GIT_AUTHOR_EMAIL    = "${data.coder_workspace.me.owner_email}"
-    GIT_AUTHOR_NAME     = "${data.coder_workspace.me.owner}"
-    GIT_COMMITTER_EMAIL = "${data.coder_workspace.me.owner_email}"
-    GIT_COMMITTER_NAME  = "${data.coder_workspace.me.owner}"
+    GIT_AUTHOR_EMAIL    = "${data.coder_workspace_owner.me.email}"
+    GIT_AUTHOR_NAME     = "${data.coder_workspace_owner.me.name}"
+    GIT_COMMITTER_EMAIL = "${data.coder_workspace_owner.me.email}"
+    GIT_COMMITTER_NAME  = "${data.coder_workspace_owner.me.name}"
+    LC_ALL              = "C.UTF-8"
+    LOCAL_ARCHIVE       = "/usr/lib/locale/locale-archive"
   }
   os             = data.coder_parameter.os.value
   startup_script = "set -x; exec >>/tmp/meh.log; exec 2>&1; cd ~ && source .bash_profile && j destroy-coder-agent && cd ~/m && j coder::code-server $${CODER_NAME} &"
   display_apps {
     ssh_helper      = false
-    vscode          = true
+    vscode          = false
     vscode_insiders = false
   }
 }
@@ -109,7 +111,7 @@ resource "coder_app" "code-server" {
   icon         = "/icon/code.svg"
   share        = "owner"
   slug         = "cs"
-  subdomain    = false
+  subdomain    = true
   url          = "http://localhost:8080/?folder=${data.coder_parameter.homedir.value}"
   healthcheck {
     interval  = 5
