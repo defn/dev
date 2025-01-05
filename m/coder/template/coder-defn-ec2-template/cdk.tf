@@ -387,6 +387,7 @@ zfs set mountpoint=/var/lib/docker nix/docker
 zfs set atime=off nix/docker
 zfs set compression=on nix/docker
 systemctl start docker || true
+usermod -G docker ubuntu
 
 install -d -m 0676 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
 install -d -m 0676 -o ubuntu -g ubuntu /nix /nix
@@ -396,7 +397,7 @@ nohup sudo -H -u ${data.coder_parameter.username.value} env \
   CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} \
   CODER_AGENT_URL="${data.coder_workspace.me.access_url}" \
   CODER_NAME="coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}" \
-    bash -c 'cd && source .bash_profile && cd m && mist trust && exec just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
+    bash -c 'cd && source .bash_profile && cd m && mise trust && exec just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
 disown
 
 --//--
