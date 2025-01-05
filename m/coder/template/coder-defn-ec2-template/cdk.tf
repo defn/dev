@@ -88,8 +88,20 @@ data "coder_parameter" "instance_type" {
     value = "m6id.large"
   }
   option {
+    name  = "2n"
+    value = "m6idn.large"
+  }
+  option {
     name  = "4"
     value = "m6id.xlarge"
+  }
+  option {
+    name  = "4n"
+    value = "m6idn.xlarge"
+  }
+  option {
+    name  = "4gpu"
+    value = "g4dn.xlarge"
   }
   option {
     name  = "8"
@@ -98,10 +110,6 @@ data "coder_parameter" "instance_type" {
   option {
     name  = "16"
     value = "m6id.4xlarge"
-  }
-  option {
-    name  = "4gpu"
-    value = "g4dn.xlarge"
   }
 }
 
