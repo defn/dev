@@ -103,11 +103,6 @@ resource "null_resource" "deploy" {
   }
 }
 
-module "coder_login" {
-  agent_id = coder_agent.main.id
-  source   = "https://registry.coder.com/modules/coder-login"
-}
-
 resource "coder_app" "code-server" {
   agent_id     = coder_agent.main.id
   display_name = "code-server"
@@ -122,3 +117,4 @@ resource "coder_app" "code-server" {
     url       = "http://localhost:8080/healthz"
   }
 }
+
