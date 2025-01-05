@@ -359,11 +359,44 @@ if ! tailscale ip -4 | grep ^100; then
   sudo tailscale up --accept-dns --accept-routes --authkey="${data.coder_parameter.tsauthkey.value}" --operator=ubuntu --ssh --timeout 60s
 fi
 
-export CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)}
-export CODER_AGENT_URL="${data.coder_workspace.me.access_url}"
-export CODER_NAME="coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
+local root_disk
+local zfs_disk
+if [[ "$(lsblk /dev/nvme0n1p1 | tail -1 | awk '{print $NF}')" == "/" ]]; then
+  root_disk=nvme0n1
+  zfs_disk=nvme1n1
+else
+  root_disk=nvme1n1
+  zfs_disk=nvme0n1
+fi
 
-nohup sudo -H -E -u ${data.coder_parameter.username.value} bash -c 'cd && source .bash_profile && cd m && exec just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
+zpool create nix "/dev/$zfs_disk"
+zfs set mountpoint=/nix nix
+zfs set atime=off nix
+zfs set compression=on nix
+
+cat /zfs/nix.zfs | pigz -d | zfs receive -F nix
+
+zfs create nix/work
+zfs set mountpoint=/home/ubuntu/work nix/work
+zfs set atime=off nix/work
+zfs set compression=on nix/work
+
+systemctl stop docker || true
+zfs create nix/docker
+zfs set mountpoint=/var/lib/docker nix/docker
+zfs set atime=off nix/docker
+zfs set compression=on nix/docker
+systemctl start docker || true
+
+install -d -m 0676 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
+install -d -m 0676 -o ubuntu -g ubuntu /nix /nix
+install -d -m 1775 -o ubuntu -g ubuntu /tmp/uscreens
+
+nohup sudo -H -u ${data.coder_parameter.username.value} env \
+  CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} \
+  CODER_AGENT_URL="${data.coder_workspace.me.access_url}" \
+  CODER_NAME="coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}" \
+    bash -c 'cd && source .bash_profile && cd m && mist trust && exec just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
 disown
 
 --//--
