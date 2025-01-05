@@ -224,7 +224,6 @@ freeze from snap where="~/work/backup/zfs/cv-":
     #!/usr/bin/env bash
     sudo zfs snapshot fast1/cv@{{snap}}
     just split fast1/cv {{from}} {{snap}} {{where}}
-    rsync -ia {{where}}* district:work/backup/zfs/ &
-    just send fast1/cv {{snap}} backup/cv
+    just send fast1/cv {{snap}} backup
     runmany 'just send backup/cv {{snap}} $1' disk{1,2,3} fast{2,3,4}
     wait
