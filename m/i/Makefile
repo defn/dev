@@ -19,5 +19,7 @@ clean-snapshot:
 
 # ami
 %:
+	mise trust
+	mise install
 	packer init $@.pkr.hcl
 	packer build -color=true -timestamp-ui=true $@.pkr.hcl
