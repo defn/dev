@@ -56,6 +56,7 @@ data "coder_parameter" "az" {
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
   name         = "az"
   type         = "string"
+  mutable      = true
 }
 
 data "coder_parameter" "spot" {
