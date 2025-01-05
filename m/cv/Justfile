@@ -219,3 +219,12 @@ open site n="1" chunk="20" file="following.html":
         for u in $(sed -n "${i},$((i + chunk_size - 1))p" "{{file}}" | cut -d'"' -f2); do open "{{site}}/$u"; sleep 0.1; done
         read -p "Press Enter to continue at $((i + chunk_size))..."
     done
+
+freeze from snap where="~/work/backup/zfs/cv-":
+    #!/usr/bin/env bash
+    sudo zfs snapshot fast1/cv@{{snap}}
+    just split fast1/cv {{from}} {{snap}} {{where}}
+    rsync -ia {{where}}* district:work/backup/zfs/ &
+    just send fast1/cv {{snap}} backup/cv
+    runmany 'just send backup/cv {{snap}} $1' disk{1,2,3} fast{2,3,4}
+    wait
